@@ -171,8 +171,6 @@ void AudioWidget::loadSkin()
 {
     loadDefaultSkin( guiInfo() );
 
-    setBackgroundPixmap( backgroundPixmap );
-
     songInfo.setFocusPolicy( QWidget::NoFocus );
 //    changeTextColor( &songInfo );
 //    songInfo.setBackgroundColor( QColor( 167, 212, 167 ));

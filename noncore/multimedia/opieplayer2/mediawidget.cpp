@@ -33,6 +33,8 @@ MediaWidget::MediaWidget( PlayListWidget &_playList, MediaPlayerState &_mediaPla
              this, SLOT( setLength( long ) ) );
     connect( &mediaPlayerState, SIGNAL( playingToggled( bool ) ),
              this, SLOT( setPlaying( bool ) ) );
+
+    setBackgroundMode( NoBackground );
 }
 
 MediaWidget::~MediaWidget()
@@ -91,21 +93,13 @@ void MediaWidget::paintEvent( QPaintEvent *pe )
         // Clear the background
         p.setBrush( QBrush( Qt::black ) );
         return;
-    } 
-
-    if ( !pe->erased() ) {
-        // Combine with background and double buffer
-        QPixmap pix( pe->rect().size() );
-        QPainter p( &pix );
-        p.translate( -pe->rect().topLeft().x(), -pe->rect().topLeft().y() );
-        p.drawTiledPixmap( pe->rect(), backgroundPixmap, pe->rect().topLeft() );
-        paintAllButtons( p );
-        QPainter p2( this );
-        p2.drawPixmap( pe->rect().topLeft(), pix );
-    } else {
-        QPainter p( this );
-        paintAllButtons( p );
     }
+
+    QPixmap buffer( size() );
+    QPainter bufferedPainter( &buffer );
+    bufferedPainter.drawTiledPixmap( rect(), backgroundPixmap, QPoint( 0, 0 ) );
+    paintAllButtons( bufferedPainter );
+    p.drawPixmap( 0, 0, buffer );
 }
 
 void MediaWidget::resizeEvent( QResizeEvent *e )

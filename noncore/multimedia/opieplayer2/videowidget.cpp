@@ -164,8 +164,6 @@ void VideoWidget::loadSkin()
 {
     loadDefaultSkin( guiInfo() );
 
-    setBackgroundPixmap( backgroundPixmap );
-
     delete slider;
     slider = new QSlider( Qt::Horizontal, this );
     slider->setMinValue( 0 );
@@ -209,7 +207,6 @@ void VideoWidget::backToNormal() {
 
 void VideoWidget::makeVisible() {
     if ( mediaPlayerState.isFullscreen() ) {
-        setBackgroundMode( QWidget::NoBackground );
         showFullScreen();
         resize( qApp->desktop()->size() );
         videoFrame-> setGeometry ( 0, 0, width ( ), height ( ));
@@ -223,7 +220,6 @@ void VideoWidget::makeVisible() {
     } else {
         showNormal();
         showMaximized();
-        setBackgroundPixmap( backgroundPixmap );
         QWidget *d = QApplication::desktop();
         int w = d->width();
         int h = d->height();
