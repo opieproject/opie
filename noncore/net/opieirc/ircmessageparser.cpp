@@ -44,7 +44,9 @@ IRCNumericalMessageParserStruct IRCMessageParser::numericalParserProcTable[] = {
     { 376, FUNC(parseNumericalStats) },         // RPL_ENDOFMOTD
     { 377, FUNC(parseNumericalStats) },         // RPL_MOTD2
     { 378, FUNC(parseNumericalStats) },         // RPL_MOTD3
-    { 412, FUNC(parseNumericalStats) },         // ERNOTEXTTOSEND
+    { 401, FUNC(parseNumericalNoSuchNick) },    // ERR_NOSUCHNICK
+    { 406, FUNC(parseNumericalNoSuchNick) },    // ERR_WASNOSUCHNICK
+    { 412, FUNC(parseNumericalStats) },         // ERR_NOTEXTTOSEND
     { 433, FUNC(parseNumericalNicknameInUse) }, // ERR_NICKNAMEINUSE
     { 0,   0 }
 };
@@ -172,7 +174,7 @@ void IRCMessageParser::parseLiteralPrivMsg(IRCMessage *message) {
             person = new IRCPerson(message->prefix());
             m_session->addPerson(person);
         }
-        IRCOutput output(OUTPUT_CHANPRIVMSG, message->param(1));
+        IRCOutput output(OUTPUT_QUERYPRIVMSG, message->param(1));
         output.addParam(person);
         emit outputReady(output);
     } else if (message->param(0).at(0) == '#') {
@@ -478,4 +480,8 @@ void IRCMessageParser::parseNumericalEndOfNames(IRCMessage *message) {
 void IRCMessageParser::parseNumericalNicknameInUse(IRCMessage *) {
     emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Nickname is in use, please reconnect with a different nickname")));
     m_session->endSession();
+}
+
+void IRCMessageParser::parseNumericalNoSuchNick(IRCMessage *) {
+    emit outputReady(IRCOutput(OUTPUT_ERROR, tr("No such nickname")));
 }

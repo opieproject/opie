@@ -25,6 +25,7 @@
 #include "ircsession.h"
 #include "mainwindow.h"
 #include "ircchanneltab.h"
+#include "ircquerytab.h"
 
 class IRCServerTab : public IRCTab {
     Q_OBJECT
@@ -38,13 +39,16 @@ public:
 
     /* Start the server session */
     void doConnect();
+    /* Remove tabs from the internal tab lists */
     void removeChannelTab(IRCChannelTab *tab);
+    void removeQueryTab(IRCQueryTab *tab);
 
     /* Execute a user command such as /join */
     void executeCommand(IRCTab *tab, QString line);
 protected:
     void appendText(QString text);
     IRCChannelTab *getTabForChannel(IRCChannel *channel);
+    IRCQueryTab *getTabForQuery(IRCPerson *person);
 public slots:
     void remove();
     void processCommand();
@@ -57,7 +61,10 @@ protected:
     MainWindow           *m_mainWindow;
     QTextView            *m_textview;
     QLineEdit            *m_field;
+    /* Channel tabs associated with this server tab */
     QList<IRCChannelTab>  m_channelTabs;
+    /* Query tabs associated with this server tab */
+    QList<IRCQueryTab>    m_queryTabs;
 };
 
 #endif /* __IRCSERVERTAB_H */

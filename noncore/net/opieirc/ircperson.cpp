@@ -7,6 +7,12 @@ IRCPerson::IRCPerson() {
     m_host = "";
 }
 
+IRCPerson::IRCPerson(const IRCPerson &person) {
+    m_nick = person.m_nick;
+    m_user = person.m_user;
+    m_host = person.m_host;
+}
+
 IRCPerson::IRCPerson(QString mask) {
     IRCPerson();
     fromMask(mask);

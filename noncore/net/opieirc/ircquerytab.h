@@ -21,4 +21,31 @@
 #ifndef __IRCQUERYTAB_H
 #define __IRCQUERYTAB_H
 
+#include "ircsession.h"
+#include "mainwindow.h"
+
+class IRCServerTab;
+class IRCQueryTab : public IRCTab {
+    Q_OBJECT
+public:
+    /* IRCTab implementation */
+    IRCQueryTab(IRCPerson *person, IRCServerTab *parentTab, MainWindow *mainWindow, QWidget *parent = 0, const char *name = 0, WFlags f = 0);
+    ~IRCQueryTab();
+    QString title();
+    IRCSession *session();
+    IRCPerson *person();
+    void appendText(QString text);
+public slots:
+    void remove();
+    void processCommand();
+    void display(IRCOutput output);
+protected:
+    bool                  m_close;
+    MainWindow           *m_mainWindow;
+    IRCServerTab         *m_parentTab;
+    IRCPerson            *m_person;
+    QTextView            *m_textview;
+    QLineEdit            *m_field;
+};
+
 #endif /* __IRCQUERYTAB_H */

@@ -81,6 +81,7 @@ private:
     void parseNumericalNames(IRCMessage *message);
     void parseNumericalEndOfNames(IRCMessage *message);
     void parseNumericalNicknameInUse(IRCMessage *message);
+    void parseNumericalNoSuchNick(IRCMessage *message);
     void parseCTCPPing(IRCMessage *message);
     void parseCTCPVersion(IRCMessage *message);
     void parseCTCPAction(IRCMessage *message);

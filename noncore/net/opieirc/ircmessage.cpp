@@ -77,7 +77,6 @@ IRCMessage::IRCMessage(QString line) {
     printf("CTCP Command : '%s'\n", m_ctcpCommand.latin1());
     printf("CTCP Destination : '%s'\n", m_ctcpDestination.latin1());
     printf("CTCP param  count is : '%i'\n", m_parameters.count());
-    
     */
 }
 

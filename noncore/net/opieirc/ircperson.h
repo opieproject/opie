@@ -31,7 +31,10 @@
 class IRCPerson {
 public:
     IRCPerson();
+    /* Create an IRCPerson from an IRC style description (nick!user@host) */
     IRCPerson(QString mask);
+    /* Copy constructor */
+    IRCPerson(const IRCPerson &person);
 
     void fromMask(QString mask);
     void setNick(QString name);

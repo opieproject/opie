@@ -14,6 +14,7 @@ IRCChannelTab::IRCChannelTab(IRCChannel *channel, IRCServerTab *parentTab, MainW
     m_listVisible = TRUE;
     m_listButton = new QPushButton(">", m_textview);
     m_textview->setCornerWidget(m_listButton);
+    m_textview->setTextFormat(RichText);
     connect(m_listButton, SIGNAL(clicked()), this, SLOT(toggleList()));
     m_list = new IRCChannelList(m_channel, hbox);
     m_list->update();
@@ -47,10 +48,8 @@ void IRCChannelTab::processCommand() {
             } else {
                 if (text.startsWith("//"))
                     text = text.right(text.length()-1);
-                if (session()->isSessionActive()) {
-                    session()->sendMessage(m_channel, m_field->text());
-                    appendText("&lt;<font color=\"#dd0000\">"+m_parentTab->server()->nick()+"</font>&gt; "+IRCOutput::toHTML(m_field->text())+"<br>");
-                }
+                session()->sendMessage(m_channel, m_field->text());
+                appendText("&lt;<font color=\"#dd0000\">"+m_parentTab->server()->nick()+"</font>&gt; "+IRCOutput::toHTML(m_field->text())+"<br>");
             }
         } else {
             appendText("<font color=\"#ff0000\">"+tr("Disconnected")+"</font><br>");
