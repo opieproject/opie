@@ -28,7 +28,6 @@
 #include "calibration.h"
 
 #include <qpainter.h>
-#include <qpalette.h>
 #include <qpixmap.h>
 
 #define BRD 3

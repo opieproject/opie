@@ -25,7 +25,6 @@
                              Boston, MA 02111-1307, USA.
 
 */
-#include <qframe.h>
 #include <qlayout.h>
 #include <qslider.h>
 #include <qspinbox.h>

@@ -29,7 +29,6 @@
 #include "light.h"
 
 #include <qpe/config.h>
-#include <qpe/qpeapplication.h>
 #include <qpe/power.h>
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)
 #include <qpe/qcopenvelope_qws.h>
@@ -38,7 +37,6 @@
 #include <qcheckbox.h>
 #include <qtabwidget.h>
 #include <qslider.h>
-#include <qtimer.h>
 #include <qspinbox.h>
 #include <qpushbutton.h>
 #include <qgroupbox.h>

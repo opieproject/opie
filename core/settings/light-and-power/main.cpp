@@ -20,9 +20,6 @@
 
 #include "light.h"
 
-#include <qpe/qpeapplication.h>
-#include <qpe/qcopenvelope_qws.h>
-#include <qpe/global.h>
 #include <opie/oapplicationfactory.h>
 
 
