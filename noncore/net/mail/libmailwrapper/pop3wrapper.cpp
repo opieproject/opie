@@ -227,3 +227,11 @@ void POP3wrapper::statusFolder(folderStat&target_stat,const QString&)
     int r = mailsession_status_folder(m_folder->fld_session,0,&target_stat.message_count,
         &target_stat.message_recent,&target_stat.message_unseen);
 }
+
+void POP3wrapper::fetchRawBody(const RecMail&mail,char**target,size_t*length)
+{
+    mailmessage * mailmsg = 0;
+    int err = mailsession_get_message(m_folder->fld_session, mail.getNumber(), &mailmsg);
+    err = mailmessage_fetch(mailmsg,target,length);
+    if (mailmsg) mailmessage_free(mailmsg);  
+}

@@ -9,9 +9,10 @@ HEADERS         = mailwrapper.h \
                smtpwrapper.h \
                genericwrapper.h \
                mboxwrapper.h \
-		settings.h \
-		logindialog.h \
-		sendmailprogress.h
+               settings.h \
+               logindialog.h \
+               sendmailprogress.h \
+               statusmail.h
                
 SOURCES         = imapwrapper.cpp \
                mailwrapper.cpp \
@@ -21,12 +22,13 @@ SOURCES         = imapwrapper.cpp \
                smtpwrapper.cpp \
                genericwrapper.cpp \
                mboxwrapper.cpp \
-		settings.cpp \
-		logindialog.cpp \
-		sendmailprogress.cpp
+               settings.cpp \
+               logindialog.cpp \
+               sendmailprogress.cpp \
+               statusmail.cpp
 
 INTERFACES 	= logindialogui.ui \
-		  sendmailprogressui.ui
+              sendmailprogressui.ui
                
 
 INCLUDEPATH += $(OPIEDIR)/include

@@ -29,17 +29,19 @@ public:
 
     virtual void deleteMail(const RecMail&mail)=0;
     virtual void answeredMail(const RecMail&mail)=0;
-    virtual void cleanMimeCache(){};
-    virtual int deleteAllMail(const Folder*){return 1;}
-    virtual int deleteMbox(const Folder*){return 1;}
-    
+    virtual int deleteAllMail(const Folder*)=0;
+    virtual int deleteMbox(const Folder*)=0;
+    virtual void storeMessage(const char*msg,size_t length, const QString&folder)=0;
+
+    virtual void cleanMimeCache(){};    
     /* mail box methods */
     /* parameter is the box to create.
      * if the implementing subclass has prefixes, 
      * them has to be appended automatic.
      */
     virtual int createMbox(const QString&,const Folder*parentfolder=0,const QString& delemiter="/",bool getsubfolder=false);
-
+    virtual void logout()=0;
+    
     static AbstractMail* getWrapper(IMAPaccount *a);
     static AbstractMail* getWrapper(POP3account *a);
     /* mbox only! */

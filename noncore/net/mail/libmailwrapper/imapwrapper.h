@@ -30,6 +30,7 @@ public:
     virtual void deleteMail(const RecMail&mail);
     virtual void answeredMail(const RecMail&mail);
     virtual int deleteAllMail(const Folder*folder);
+    virtual void storeMessage(const char*msg,size_t length, const QString&folder);
 
     virtual RecBody fetchBody(const RecMail&mail);
     virtual QString fetchTextPart(const RecMail&mail,const RecPart&part);
@@ -40,11 +41,11 @@ public:
     virtual int deleteMbox(const Folder*folder);
     
     static void imap_progress( size_t current, size_t maximum );
-
+    
+    virtual void logout();
 protected:
     RecMail*parse_list_result(mailimap_msg_att*);
     void login();
-    void logout();
 
     virtual QString fetchTextPart(const RecMail&mail,const QValueList<int>&path,bool internal_call=false,const QString&enc="");
     virtual encodedString*fetchRawPart(const RecMail&mail,const QValueList<int>&path,bool internal_call);

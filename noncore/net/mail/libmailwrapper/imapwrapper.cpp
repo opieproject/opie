@@ -47,8 +47,8 @@ void IMAPwrapper::login()
 	  login.show();
 	  if ( QDialog::Accepted == login.exec() ) {
 		// ok
-		user = strdup( login.getUser().latin1() );
-		pass = strdup( login.getPassword().latin1() );
+		user = login.getUser().latin1();
+		pass = login.getPassword().latin1();
 	  } else {
 		// cancel
 		qDebug( "IMAP: Login canceled" );
@@ -973,4 +973,15 @@ void IMAPwrapper::statusFolder(folderStat&target_stat,const QString & mailbox)
     }
     mailimap_mailbox_data_status_free(status);
     mailimap_status_att_list_free(att_list);
+}
+
+void IMAPwrapper::storeMessage(const char*msg,size_t length, const QString&folder)
+{
+    login();
+    if (!m_imap) return;
+    if (!msg) return;
+    int r = mailimap_append(m_imap,(char*)folder.latin1(),0,0,msg,length);
+    if (r != MAILIMAP_NO_ERROR) {
+        Global::statusMessage("Error storing mail!");
+    }
 }

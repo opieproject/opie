@@ -26,11 +26,13 @@ public:
     virtual int deleteAllMail(const Folder*);
 
     virtual RecBody fetchBody( const RecMail &mail );
+    virtual void fetchRawBody(const RecMail&mail,char**target,size_t*length);
+    virtual void logout();
+
     static void pop3_progress( size_t current, size_t maximum );
 
 protected:
     void login();
-    void logout();
     POP3account *account;
     mailstorage*m_pop3;
     mailfolder*m_folder;

@@ -35,6 +35,9 @@ public:
     virtual encodedString* fetchRawPart(const RecMail&mail,const RecPart&part);
     virtual QString fetchTextPart(const RecMail&mail,const RecPart&part);
     virtual void cleanMimeCache();
+    virtual int deleteMbox(const Folder*){return 1;}
+    virtual void logout(){};
+    virtual void storeMessage(const char*msg,size_t length, const QString&folder){};
 
 protected:
     RecMail *parseHeader( const char *header );
