@@ -8,7 +8,7 @@
     </message>
     <message>
         <source>Owned by </source>
-        <translation type="unfinished">Proprietà di</translation>
+        <translation>Proprietà di</translation>
     </message>
     <message>
         <source>Please fill out the business card</source>
@@ -125,63 +125,63 @@ resume?(new line)
     <name>TodayConfigMiscBase</name>
     <message>
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation>Form1</translation>
     </message>
     <message>
         <source>Check this if today should be autostarted on resume.</source>
-        <translation type="unfinished">Premi qui se l&apos;applicazione deve partire automaticamente al riavvio.</translation>
+        <translation>Premi qui se l&apos;applicazione deve partire automaticamente al riavvio.</translation>
     </message>
     <message>
         <source>autostart on resume?</source>
-        <translation type="unfinished"></translation>
+        <translation>autostart al riavvio?</translation>
     </message>
     <message>
         <source>tiny banner</source>
-        <translation type="unfinished"></translation>
+        <translation>banner piccolo</translation>
     </message>
     <message>
         <source>Have small banner </source>
-        <translation type="unfinished"></translation>
+        <translation>Imposta banner piccolo</translation>
     </message>
     <message>
         <source> min</source>
-        <translation type="unfinished"></translation>
+        <translation> min</translation>
     </message>
     <message>
         <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
-        <translation type="unfinished">Quanti minuti il PDA deve rimanere spento prima che entri in funzione l&apos;autostart</translation>
+        <translation>Quanti minuti il PDA deve rimanere spento prima che entri in funzione la funzione autostart al riavvio</translation>
     </message>
     <message>
         <source>minutes inactive</source>
-        <translation type="unfinished">minuti inattivi</translation>
+        <translation>minuti inattivi</translation>
     </message>
     <message>
         <source> pixel</source>
-        <translation type="unfinished"></translation>
+        <translation> pixel</translation>
     </message>
     <message>
         <source>Set the icon size in pixel</source>
-        <translation type="unfinished">Imposta la dimensione dell&apos;icona in pixel</translation>
+        <translation>Imposta la dimensione dell&apos;icona in pixel</translation>
     </message>
     <message>
         <source>icon size</source>
-        <translation type="unfinished"></translation>
+        <translation>dimensione icona</translation>
     </message>
     <message>
         <source> sec</source>
-        <translation type="unfinished"> sec</translation>
+        <translation> sec</translation>
     </message>
     <message>
         <source>never</source>
-        <translation type="unfinished">mai</translation>
+        <translation>mai</translation>
     </message>
     <message>
         <source>How often should Today refresh itself</source>
-        <translation type="unfinished">Quanto spesso Oggi deve aggiornarsi</translation>
+        <translation>Quanto spesso Oggi deve aggiornarsi</translation>
     </message>
     <message>
         <source>refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>aggiorna</translation>
     </message>
 </context>
 </TS>

@@ -98,7 +98,7 @@ Tipo sconosciuto</translation>
     </message>
     <message>
         <source>Trying to umount.</source>
-        <translation>Tento di smontate.</translation>
+        <translation>Tento di smontare.</translation>
     </message>
     <message>
         <source>umount failed!</source>
@@ -175,40 +175,48 @@ has been successfully mounted.</source>
 Changing parameters on this
 page may cause your system
 to stop functioning properly!</source>
-        <translation type="unfinished"></translation>
+        <translation>ATTENZIONE:
+Cambiare i parametri su questa 
+pagina può causare il non corretto 
+funzionamento del sistema!</translation>
     </message>
     <message>
         <source>Format?</source>
-        <translation type="unfinished"></translation>
+        <translation>Formatto?</translation>
     </message>
     <message>
         <source>
 with %1 filesystem?
 You will loose all data!!</source>
-        <translation type="unfinished"></translation>
+        <translation>
+con il filesystem %1?
+Perderai tutti i dati!!</translation>
     </message>
     <message>
         <source>Trying to umount %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tento di smontare %1.</translation>
     </message>
     <message>
         <source>Trying to mount %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tento di montare %1.</translation>
     </message>
     <message>
         <source>%1
 has been successfully mounted.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1
+è stato montato con successo.</translation>
     </message>
     <message>
         <source>Storage Type: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo Storage: %1</translation>
     </message>
     <message>
         <source>Type: %1
 Formatted with %2
 %3, %4, %5</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo: %1
+Formattato con %2
+%3, %4, %5</translation>
     </message>
 </context>
 </TS>

@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>KJezzball</name>
     <message>
@@ -105,7 +106,7 @@ Hai %2 vite questa volta!</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Informazioni</translation>
     </message>
     <message>
         <source>Written by: Stefan Schimanski
@@ -117,7 +118,15 @@ Try to reduce total space by 75%.
 
 This program is distributed under
 the terms of the GPL v2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Scritto da: Stefan Schimanski
+Modificato da: Martin Imobersteg
+
+Premi per creare i muri.
+Premi spazio per cambiare la direzione dei muri.
+Tenta di ridurre lo spazio totale del 75%.
+
+Questo programma è distribuito nei
+termini della GPL v2.</translation>
     </message>
 </context>
 </TS>

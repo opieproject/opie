@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>HelpBrowser</name>
     <message>
@@ -31,7 +32,7 @@
     </message>
     <message>
         <source>Go</source>
-        <translation type="unfinished"></translation>
+        <translation>Vai</translation>
     </message>
 </context>
 </TS>

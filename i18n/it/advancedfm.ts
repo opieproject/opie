@@ -148,11 +148,11 @@
     </message>
     <message>
         <source>Copy </source>
-        <translation type="unfinished">Copia</translation>
+        <translation>Copia </translation>
     </message>
     <message>
         <source> As</source>
-        <translation type="unfinished">Come</translation>
+        <translation> Come</translation>
     </message>
     <message>
         <source>Could not move
@@ -283,18 +283,21 @@ e tutto il suo contenuto ?</translation>
     </message>
     <message>
         <source>Process could not start</source>
-        <translation type="unfinished"></translation>
+        <translation>Il processo non può essere iniziato</translation>
     </message>
     <message>
         <source>Error
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Errore
+</translation>
     </message>
     <message>
         <source>
 Finished
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+Terminato
+</translation>
     </message>
 </context>
 <context>
@@ -341,23 +344,23 @@ Finished
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Attenzione</translation>
     </message>
     <message>
         <source>Error- no user</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore- nessun utente</translation>
     </message>
     <message>
         <source>Error- no  group</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore- nessun gruppo</translation>
     </message>
     <message>
         <source>Error setting ownership or group</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore impostazioni proprietà utente o gruppo</translation>
     </message>
     <message>
         <source>Error setting mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore impostazioni permessi</translation>
     </message>
 </context>
 </TS>

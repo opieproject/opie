@@ -4,7 +4,7 @@
     <name>QObject</name>
     <message>
         <source>TicTac</source>
-        <translation type="unfinished"></translation>
+        <translation>TicTac</translation>
     </message>
 </context>
 <context>
@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>Click Play to start</source>
-        <translation>Premi Gioca per iniziare</translation>
+        <translation>Premere Gioca per iniziare</translation>
     </message>
     <message>
         <source>Make your move</source>

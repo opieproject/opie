@@ -87,50 +87,50 @@
     </message>
     <message>
         <source>A list of network settings to be choosen from</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista di impostazioni di rete da cui scegliere</translation>
     </message>
     <message>
         <source>Add a new interface to the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiungi alla lista una nuova interfaccia.</translation>
     </message>
     <message>
         <source>&amp;Start/Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Start/Stop</translation>
     </message>
     <message>
         <source>Start and Stop the current interface, gives additional information about the interface.</source>
-        <translation type="unfinished"></translation>
+        <translation>Start e Stop dell&apos;interfaccia corrente, da ulteriori informazioni sull&apos;interfaccia.</translation>
     </message>
     <message>
         <source>Configure the current interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Configura l&apos;interfaccia corrente</translation>
     </message>
     <message>
         <source>Remove the current interface from the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Rimuovi dalla lista l&apos;interfaccia corrente.</translation>
     </message>
 </context>
 <context>
     <name>MainWindowImp</name>
     <message>
         <source>Disconnected</source>
-        <translation type="unfinished"></translation>
+        <translation>Disconnesso</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore</translation>
     </message>
     <message>
         <source>Unable to remove.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile da rimuovere.</translation>
     </message>
     <message>
         <source>Sorry</source>
-        <translation type="unfinished"></translation>
+        <translation>Spiacente</translation>
     </message>
     <message>
         <source>Please select an interface first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Selezionare un&apos;altra interfaccia.</translation>
     </message>
 </context>
 </TS>

@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>Clock</name>
     <message>
@@ -51,7 +52,7 @@
     </message>
     <message>
         <source>Alarm set: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Allarme impostato: %1</translation>
     </message>
 </context>
 <context>

@@ -105,15 +105,15 @@ Accesso negato</translation>
     </message>
     <message>
         <source>Passcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Password</translation>
     </message>
     <message>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Login</translation>
     </message>
     <message>
         <source>Login Automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Login Automatico</translation>
     </message>
 </context>
 </TS>

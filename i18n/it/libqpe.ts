@@ -402,11 +402,11 @@ modificando le categorie.</translation>
     <name>QMessageBox</name>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Sì</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>No</translation>
     </message>
 </context>
 <context>
@@ -812,55 +812,56 @@ riprovare.</translation>
     <message>
         <source>&lt;qt&gt;Are you sure you want to delete
  %1?&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Vuoi veramente eliminare
+ %1?&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Jan</source>
-        <translation type="unfinished"></translation>
+        <translation>Gen</translation>
     </message>
     <message>
         <source>Feb</source>
-        <translation type="unfinished"></translation>
+        <translation>Feb</translation>
     </message>
     <message>
         <source>Mar</source>
-        <translation type="unfinished"></translation>
+        <translation>Mar</translation>
     </message>
     <message>
         <source>Apr</source>
-        <translation type="unfinished"></translation>
+        <translation>Apr</translation>
     </message>
     <message>
         <source>May</source>
-        <translation type="unfinished"></translation>
+        <translation>Mag</translation>
     </message>
     <message>
         <source>Jun</source>
-        <translation type="unfinished"></translation>
+        <translation>Giu</translation>
     </message>
     <message>
         <source>Jul</source>
-        <translation type="unfinished"></translation>
+        <translation>Lug</translation>
     </message>
     <message>
         <source>Aug</source>
-        <translation type="unfinished"></translation>
+        <translation>Ago</translation>
     </message>
     <message>
         <source>Sep</source>
-        <translation type="unfinished"></translation>
+        <translation>Set</translation>
     </message>
     <message>
         <source>Oct</source>
-        <translation type="unfinished"></translation>
+        <translation>Ott</translation>
     </message>
     <message>
         <source>Nov</source>
-        <translation type="unfinished"></translation>
+        <translation>Nov</translation>
     </message>
     <message>
         <source>Dec</source>
-        <translation type="unfinished"></translation>
+        <translation>Dic</translation>
     </message>
 </context>
 <context>

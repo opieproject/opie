@@ -18,9 +18,9 @@
         <source>Use the arrow keys to guide the
 snake to eat the mouse. You must not
 crash into the walls, edges or its tail.</source>
-        <translation>Usa le frecce direzionali per guidare il
-serpente a mangiare il topolino. Non ti devi
-scontrare con i muri, gli angoli o la tua coda.</translation>
+        <translation>Usare le frecce direzionali per guidare il
+serpente a mangiare il topolino. Non bisogna
+scontrarsi con i muri, gli angoli o la propria coda.</translation>
     </message>
     <message>
         <source>Press Any Key To Start</source>
@@ -42,11 +42,11 @@ scontrare con i muri, gli angoli o la tua coda.</translation>
     </message>
     <message>
         <source>Press any key to start</source>
-        <translation type="unfinished"></translation>
+        <translation>Premere un tasto per iniziare</translation>
     </message>
     <message>
         <source>Press any key to begin a new game.</source>
-        <translation type="unfinished"></translation>
+        <translation>Premere un tasto per iniziare una nuova partita.</translation>
     </message>
 </context>
 </TS>

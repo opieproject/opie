@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>QPdfDlg</name>
     <message>
@@ -99,7 +100,7 @@
     </message>
     <message>
         <source>File does not exist!</source>
-        <translation type="unfinished"></translation>
+        <translation>Il file non esiste!</translation>
     </message>
 </context>
 </TS>

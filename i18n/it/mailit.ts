@@ -20,7 +20,7 @@
     </message>
     <message>
         <source>Adding attachments</source>
-        <translation type="unfinished"></translation>
+        <translation>Allega attachment</translation>
     </message>
 </context>
 <context>
@@ -176,33 +176,34 @@ associato a questo messaggio
     </message>
     <message>
         <source>&lt;qt&gt;Unknown response from server&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Risposta sconosciuta dal server&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;host not found&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;host non trovato&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;connection refused&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;connessione rifiutata&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;socket packet error&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;errore pacchetto socket&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Login failed
 Check user name and password&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Login fallito
+Controlla username e password&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Receiving error</source>
-        <translation type="unfinished"></translation>
+        <translation>Ricezione errore</translation>
     </message>
     <message>
         <source>OK
 </source>
-        <translation type="unfinished">OK
+        <translation>OK
 </translation>
     </message>
 </context>
@@ -259,11 +260,11 @@ non è ancora stato scaricato.
     </message>
     <message>
         <source>Mailit</source>
-        <translation type="unfinished"></translation>
+        <translation>Mailit</translation>
     </message>
     <message>
         <source>Read Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Leggi Posta</translation>
     </message>
 </context>
 <context>
@@ -298,7 +299,7 @@ non è ancora stato scaricato.
     </message>
     <message>
         <source>DNS lookup</source>
-        <translation type="unfinished">richiesta DNS</translation>
+        <translation>richiesta DNS</translation>
     </message>
 </context>
 <context>
@@ -359,7 +360,7 @@ essere controllati cliccandoci sopra 2 volte.</translation>
     </message>
     <message>
         <source>This button opens the address selector with all mail adresses from your Opie addressbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Questo pulsante apre il selettore di indirizzi con tutti gli indirizzi di posta della rubrica di Opie</translation>
     </message>
 </context>
 <context>
@@ -484,31 +485,31 @@ Tieni premuto per avere più opzioni.</translation>
     </message>
     <message>
         <source>Click here to install the attachment to your Documents</source>
-        <translation>Clicca qui per installare l&apos;allegato in Documenti</translation>
+        <translation>Premi qui per installare l&apos;allegato in Documenti</translation>
     </message>
     <message>
         <source>Exploring attatchments</source>
-        <translation type="unfinished"></translation>
+        <translation>Guarda attatchment</translation>
     </message>
     <message>
         <source>Attatchment</source>
-        <translation type="unfinished"></translation>
+        <translation>Attatchment</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo</translation>
     </message>
     <message>
         <source>Installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Installato</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>No</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Sì</translation>
     </message>
 </context>
 <context>
@@ -629,11 +630,11 @@ e devono avere indirizzi di posta validi</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome</translation>
     </message>
     <message>
         <source>EMail</source>
-        <translation type="unfinished"></translation>
+        <translation>EMail</translation>
     </message>
 </context>
 </TS>

@@ -51,95 +51,97 @@
     <name>MainWindow</name>
     <message>
         <source>SystemTime</source>
-        <translation type="unfinished"></translation>
+        <translation>Orario di Sistema</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Orario</translation>
     </message>
     <message>
         <source>Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Formato</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Impostazioni</translation>
     </message>
     <message>
         <source>Predict</source>
-        <translation type="unfinished"></translation>
+        <translation>Prevedi</translation>
     </message>
     <message>
         <source>Continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Continui?</translation>
     </message>
     <message>
         <source>Running:
 ntpdate </source>
-        <translation type="unfinished"></translation>
+        <translation>In esecuzione:
+ntpdate </translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore</translation>
     </message>
     <message>
         <source>Error while getting time from network.</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore nell&apos;ottenimento dell&apos;orario dalla rete.</translation>
     </message>
     <message>
         <source>Error while executing ntpdate</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore nell&apos;esecuzione di ntpdate</translation>
     </message>
     <message>
         <source>Time Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Time Server</translation>
     </message>
     <message>
         <source>Error while getting time from
  server: </source>
-        <translation type="unfinished"></translation>
+        <translation>Errore nell&apos;ottenimento dell&apos;orario dal
+ server: </translation>
     </message>
     <message>
         <source>Could not connect to server </source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile connetersi al server </translation>
     </message>
     <message>
         <source>You asked for a delay of %1 minutes, but only %2 minutes elapsed since last lookup.&lt;br&gt;Continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Hai impostato un ritardo di %1 minuti, ma sono passati solo %2 minutes dall&apos;ultima ricerca.&lt;br&gt;Continuare?</translation>
     </message>
     <message>
         <source>%1 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 secondi</translation>
     </message>
 </context>
 <context>
     <name>NTPTabWidget</name>
     <message>
         <source>Start time</source>
-        <translation type="unfinished"></translation>
+        <translation>Ora inizio</translation>
     </message>
     <message>
         <source>n/a</source>
-        <translation type="unfinished">n/d</translation>
+        <translation>n/d</translation>
     </message>
     <message>
         <source>Time shift</source>
-        <translation type="unfinished"></translation>
+        <translation>Spostamento Orario</translation>
     </message>
     <message>
         <source>New time</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuovo orario</translation>
     </message>
     <message>
         <source>Get time from the network</source>
-        <translation type="unfinished"></translation>
+        <translation>Ottieni l&apos;orario dalla rete</translation>
     </message>
 </context>
 <context>
     <name>PredictTabWidget</name>
     <message>
         <source>Predicted time drift</source>
-        <translation type="unfinished"></translation>
+        <translation>Drift orario previsto</translation>
     </message>
     <message>
         <source>n/a</source>
@@ -147,35 +149,35 @@ ntpdate </source>
     </message>
     <message>
         <source>Estimated shift</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift stimato</translation>
     </message>
     <message>
         <source>Predicted time</source>
-        <translation type="unfinished"></translation>
+        <translation>Orario previsto</translation>
     </message>
     <message>
         <source>Shift [s/h]</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift [s/h]</translation>
     </message>
     <message>
         <source>Last [h]</source>
-        <translation type="unfinished"></translation>
+        <translation>Ultimo [h]</translation>
     </message>
     <message>
         <source>Offset [s]</source>
-        <translation type="unfinished"></translation>
+        <translation>Offset [s]</translation>
     </message>
     <message>
         <source>Predict time</source>
-        <translation type="unfinished"></translation>
+        <translation>Prevedi orario</translation>
     </message>
     <message>
         <source>Set predicted time</source>
-        <translation type="unfinished"></translation>
+        <translation>Imposta orario previsto</translation>
     </message>
     <message>
         <source> s/h</source>
-        <translation type="unfinished"></translation>
+        <translation> s/h</translation>
     </message>
     <message>
         <source> seconds</source>
@@ -186,23 +188,23 @@ ntpdate </source>
     <name>SettingsTabWidget</name>
     <message>
         <source>Time server</source>
-        <translation type="unfinished"></translation>
+        <translation>Time server</translation>
     </message>
     <message>
         <source>minutes between time updates</source>
-        <translation type="unfinished"></translation>
+        <translation>minuti tra gli aggiornamenti dell&apos;orario</translation>
     </message>
     <message>
         <source>minutes between prediction updates</source>
-        <translation type="unfinished"></translation>
+        <translation>minuti tra gli aggiornamenti delle previsioni</translation>
     </message>
     <message>
         <source>Display time server information</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra informazioni time server</translation>
     </message>
     <message>
         <source>Display time prediction information</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra informazioni orario previsto</translation>
     </message>
 </context>
 <context>
@@ -229,15 +231,15 @@ ntpdate </source>
     </message>
     <message>
         <source>Time zone</source>
-        <translation type="unfinished"></translation>
+        <translation>Fuso orario</translation>
     </message>
     <message>
         <source>Get time from the network</source>
-        <translation type="unfinished"></translation>
+        <translation>Prendi orario da rete</translation>
     </message>
     <message>
         <source>Set predicted time</source>
-        <translation type="unfinished"></translation>
+        <translation>Imposta orario previsto</translation>
     </message>
 </context>
 </TS>

@@ -23,19 +23,19 @@
     <name>TodoPluginConfigBase</name>
     <message>
         <source>Set the maximum number of task that should be shown</source>
-        <translation type="unfinished">Imposta il numero massimo di impegni da mostrare</translation>
+        <translation>Imposta il numero massimo di impegni da mostrare</translation>
     </message>
     <message>
         <source>tasks shown</source>
-        <translation type="unfinished"></translation>
+        <translation>impegni mostrati</translation>
     </message>
     <message>
         <source>After how many chars should be the info about the task be cut off</source>
-        <translation type="unfinished">Dopo quanti caratteri le informazioni sull&apos;impegno devono essere tagliate</translation>
+        <translation>Dopo quanti caratteri devono essere tagliati i dettagli dell&apos;impegno</translation>
     </message>
     <message>
         <source>Clip line after X chars</source>
-        <translation type="unfinished">Taglia la riga dopo X caratteri</translation>
+        <translation>Taglia la riga dopo X caratteri</translation>
     </message>
 </context>
 <context>

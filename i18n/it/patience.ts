@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>CanvasCardWindow</name>
     <message>
@@ -71,27 +72,27 @@
     </message>
     <message>
         <source>&amp;Change card backs</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Cambia retro delle carte</translation>
     </message>
     <message>
         <source>&amp;Snap to position</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Metti in posizione</translation>
     </message>
     <message>
         <source>Change card backs</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambia retro delle carte</translation>
     </message>
     <message>
         <source>Snap to position</source>
-        <translation type="unfinished"></translation>
+        <translation>Metti in posizione</translation>
     </message>
     <message>
         <source>Turn one card</source>
-        <translation type="unfinished"></translation>
+        <translation>Gira una carta</translation>
     </message>
     <message>
         <source>Turn three cards</source>
-        <translation type="unfinished"></translation>
+        <translation>Gira tre carte</translation>
     </message>
 </context>
 </TS>

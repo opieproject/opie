@@ -98,7 +98,7 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>error box</source>
-        <translation type="unfinished"></translation>
+        <translation>box di errore</translation>
     </message>
 </context>
 <context>
@@ -199,7 +199,7 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>Beam this occurence</source>
-        <translation type="unfinished"></translation>
+        <translation>Trasmetti questa occorrenza</translation>
     </message>
 </context>
 <context>
@@ -370,7 +370,7 @@ Uscire comunque?</translation>
     <message>
         <source>MTWTFSSM</source>
         <comment>Week days</comment>
-        <translation type="unfinished"></translation>
+        <translation>LMMGVSDL</translation>
     </message>
 </context>
 <context>
@@ -567,7 +567,7 @@ Uscire comunque?</translation>
     <name>DatebookAlldayDisp</name>
     <message>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info</translation>
     </message>
 </context>
 <context>
@@ -733,7 +733,7 @@ e </translation>
     </message>
     <message>
         <source>on </source>
-        <translation type="unfinished"></translation>
+        <translation>su </translation>
     </message>
 </context>
 <context>

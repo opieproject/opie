@@ -519,7 +519,7 @@ Il valore inserito deve essere sempre positivo.</translation>
     </message>
     <message>
         <source>Electronics</source>
-        <translation type="unfinished"></translation>
+        <translation>Elettronica</translation>
     </message>
 </context>
 </TS>

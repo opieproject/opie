@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>BackupAndRestore</name>
     <message>
@@ -12,54 +13,55 @@
     <message>
         <source>Error from System:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Errore dal Sistema:
+</translation>
     </message>
     <message>
         <source>Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Messaggio</translation>
     </message>
     <message>
         <source>Backup Failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Backup Fallito!</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Dettagli</translation>
     </message>
     <message>
         <source>Backup and Restore.. Failed !!</source>
-        <translation type="unfinished"></translation>
+        <translation>Backup e Restore... Fallito !!</translation>
     </message>
     <message>
         <source>Backup Successfull.</source>
-        <translation type="unfinished"></translation>
+        <translation>Backup Eseguito.</translation>
     </message>
     <message>
         <source>Please select something to restore.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona qualcosa da restorare.</translation>
     </message>
     <message>
         <source>Restore Failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Restore Fallito.</translation>
     </message>
     <message>
         <source>Unable to open File: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile aprire File: %1</translation>
     </message>
     <message>
         <source>Restore Successfull.</source>
-        <translation type="unfinished"></translation>
+        <translation>Restore Eseguito.</translation>
     </message>
 </context>
 <context>
     <name>BackupAndRestoreBase</name>
     <message>
         <source>Backup And Restore</source>
-        <translation>Backup E Restore</translation>
+        <translation>Backup e Restore</translation>
     </message>
     <message>
         <source>Backup</source>
@@ -95,22 +97,22 @@
     </message>
     <message>
         <source>Update Filelist</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiorna Lista File</translation>
     </message>
 </context>
 <context>
     <name>ErrorDialog</name>
     <message>
         <source>Error Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info Errore</translation>
     </message>
     <message>
         <source>Error Message:</source>
-        <translation type="unfinished"></translation>
+        <translation>Messaggio di Errore:</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;OK</translation>
     </message>
 </context>
 </TS>

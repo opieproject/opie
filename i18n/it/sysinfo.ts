@@ -129,11 +129,11 @@ La memoria è divisa come segue:
 Click and hold on a module to see additional information about the module, or to unload it.</source>
         <translation>Questa è una lista di tutti i moduli del kernel attualmente caricati su questo dispositivo portatile.
 
-Premi premuto sul nome di un modulo per vedere ulteriori informazioni, o per scaricarlo.</translation>
+Tenere premuto sul nome di un modulo per vedere ulteriori informazioni, o per scaricarlo.</translation>
     </message>
     <message>
         <source>Select a command here and then click the Send button to the right to send the command to module selected above.</source>
-        <translation>Seleziona qui un comando e premi il pulsante Invia sulla destra per inviare il comando al modulo selezionato sopra.</translation>
+        <translation>Selezionare qui un comando e premere il pulsante Invia sulla destra per inviare il comando al modulo sopra evidenziato.</translation>
     </message>
     <message>
         <source>Send</source>
@@ -141,7 +141,7 @@ Premi premuto sul nome di un modulo per vedere ulteriori informazioni, o per sca
     </message>
     <message>
         <source>Click here to send the selected command to the module selected above.</source>
-        <translation>Premi qui per inviare il comando selezionato al modulo selezionato sopra.</translation>
+        <translation>Premere qui per inviare il comando selezionato al modulo sopra evidenziato.</translation>
     </message>
     <message>
         <source>This area shows detailed information about this module.</source>
@@ -155,11 +155,11 @@ Premi premuto sul nome di un modulo per vedere ulteriori informazioni, o per sca
     </message>
     <message>
         <source>Used by</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilizzato da</translation>
     </message>
     <message>
         <source>You really want to execute %1 for this module?</source>
-        <translation type="unfinished"></translation>
+        <translation>Eseguire veramente %1 per questo modulo?</translation>
     </message>
 </context>
 <context>
@@ -201,11 +201,11 @@ Premi premuto sul nome di un modulo per vedere ulteriori informazioni, o per sca
 Click and hold on a process to see additional information about the process, or to send a signal to it.</source>
         <translation>Questo è l&apos;elenco di tutti i processi su questo dispositivo portatile.
 
-Tieni premuto sul nome di un processo per vedere ulteriori informazioni, o per inviarli un segnale.</translation>
+Tenere premuto sul nome di un processo per vedere ulteriori informazioni, o per inviargli un segnale.</translation>
     </message>
     <message>
         <source>Select a signal here and then click the Send button to the right to send to this process.</source>
-        <translation>Seleziona qui un segnale e premi il pulsante Invia sulla destra per inviarlo al processo.</translation>
+        <translation>Selezionare qui un segnale e premere il pulsante Invia sulla destra per inviarlo al processo.</translation>
     </message>
     <message>
         <source>Send</source>
@@ -213,7 +213,7 @@ Tieni premuto sul nome di un processo per vedere ulteriori informazioni, o per i
     </message>
     <message>
         <source>Click here to send the selected signal to this process.</source>
-        <translation>Premi qui per inviare il segnale selezionato a questo processo.</translation>
+        <translation>Premere qui per inviare il segnale selezionato a questo processo.</translation>
     </message>
     <message>
         <source>This area shows detailed information about this process.</source>
@@ -227,7 +227,7 @@ Tieni premuto sul nome di un processo per vedere ulteriori informazioni, o per i
     </message>
     <message>
         <source>You really want to send %1 to this process?</source>
-        <translation type="unfinished"></translation>
+        <translation>Inviare veramente %1 a questo processo?</translation>
     </message>
 </context>
 <context>

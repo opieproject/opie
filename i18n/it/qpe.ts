@@ -67,12 +67,12 @@ Cambiarla subito.</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished">Informazione</translation>
+        <translation>Informazioni</translation>
     </message>
     <message>
         <source>&lt;p&gt;The system date doesn&apos;t seem to be valid.
 (%1)&lt;/p&gt;&lt;p&gt;Do you want to correct the clock ?&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;La data di sistema non sembra essere corretta.
+        <translation>&lt;p&gt;La data di sistema non sembra essere corretta.
 (%1)&lt;/p&gt;&lt;p&gt;Vuoi reimpostare l&apos;orologio ?&lt;/p&gt;</translation>
     </message>
 </context>

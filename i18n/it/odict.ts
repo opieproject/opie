@@ -27,7 +27,7 @@
     <name>ODict</name>
     <message>
         <source>OPIE-Dictionary</source>
-        <translation>Dizionario OPIE</translation>
+        <translation>Dizionario Opie</translation>
     </message>
     <message>
         <source>Query:</source>
@@ -71,7 +71,7 @@
     </message>
     <message>
         <source>Opie-Dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Dizionario Opie</translation>
     </message>
 </context>
 <context>

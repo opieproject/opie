@@ -35,7 +35,7 @@
     </message>
     <message>
         <source>Sample Rate</source>
-        <translation>Frq. Campionamento</translation>
+        <translation>Freq. Campionamento</translation>
     </message>
     <message>
         <source>44100</source>
@@ -183,31 +183,31 @@ il file selezionato?</translation>
     </message>
     <message>
         <source>Rec</source>
-        <translation type="unfinished"></translation>
+        <translation>Registra</translation>
     </message>
     <message>
         <source>Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Ubicazione</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Data</translation>
     </message>
     <message>
         <source>Wave Compression (smaller files)</source>
-        <translation type="unfinished"></translation>
+        <translation>Compressione (file più piccoli)</translation>
     </message>
     <message>
         <source>auto Mute</source>
-        <translation type="unfinished"></translation>
+        <translation>Mute automatico</translation>
     </message>
     <message>
         <source>mute</source>
-        <translation type="unfinished"></translation>
+        <translation>mute</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Stop</translation>
     </message>
 </context>
 </TS>

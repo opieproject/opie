@@ -124,7 +124,7 @@
     </message>
     <message>
         <source>Search Bar Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Apri Barra di Ricerca</translation>
     </message>
     <message>
         <source>Auto Save 5 min.</source>
@@ -132,7 +132,7 @@
     </message>
     <message>
         <source>Text Editor has detected&lt;BR&gt;you selected a &lt;B&gt;.desktop&lt;/B&gt;file.&lt;BR&gt;Open&lt;B&gt;.desktop&lt;/B&gt; file or &lt;B&gt;linked&lt;/B&gt; file?</source>
-        <translation>Text Editor ha rivelato&lt;BR&gt;che hai selezionato un file &lt;B&gt;.desktop&lt;/B&gt;.&lt;BR&gt;Apri il file &lt;B&gt;.desktop&lt;/B&gt; o il file &lt;B&gt;linkato&lt;/B&gt;?</translation>
+        <translation>Text Editor ha rivelato&lt;BR&gt;che hai selezionato un file &lt;B&gt;.desktop&lt;/B&gt;.&lt;BR&gt;Aprire il file &lt;B&gt;.desktop&lt;/B&gt; o il file &lt;B&gt;linkato&lt;/B&gt;?</translation>
     </message>
     <message>
         <source>Text Edit</source>
@@ -183,7 +183,7 @@ Go ahead and save?
 </source>
         <translation>Sono state rivelate
 modifiche non salvate
-Vuoi procedere e salvare?</translation>
+Procedere e salvare?</translation>
     </message>
     <message>
         <source>Don&apos;t Save</source>
@@ -199,12 +199,13 @@ Vuoi procedere e salvare?</translation>
     </message>
     <message>
         <source>%1 - Text Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - Text Editor</translation>
     </message>
     <message>
         <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
 from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Vuoi veramente&lt;BR&gt;&lt;B&gt;cancellare&lt;/B&gt; il file corrente
+dal disco?&lt;BR&gt;L&apos;operazione è &lt;B&gt;irreversibile!&lt;/B&gt;</translation>
     </message>
 </context>
 <context>

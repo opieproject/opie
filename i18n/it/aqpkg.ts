@@ -113,7 +113,7 @@
     </message>
     <message>
         <source>%1 Kb</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Kb</translation>
     </message>
 </context>
 <context>
@@ -573,20 +573,21 @@ Sei sicuro?
     <name>QObject</name>
     <message>
         <source>Installed packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Pacchetti installati</translation>
     </message>
     <message>
         <source>Local packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Pacchetti locali</translation>
     </message>
     <message>
         <source>N/A</source>
-        <translation type="unfinished"></translation>
+        <translation>N/D</translation>
     </message>
     <message>
         <source>Package - %1
               version - %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Pacchetto - %1
+              versione - %2</translation>
     </message>
     <message>
         <source>

@@ -393,7 +393,7 @@ e </translation>
     </message>
     <message>
         <source>on </source>
-        <translation type="unfinished"></translation>
+        <translation>su</translation>
     </message>
 </context>
 <context>
@@ -643,15 +643,15 @@ e </translation>
     </message>
     <message>
         <source>&lt;br&gt;&lt;br&gt;&lt;b&gt;Work Address:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;&lt;br&gt;&lt;b&gt;Indirizzo Ufficio:&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;br&gt;&lt;br&gt;&lt;b&gt;Home Address:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;&lt;br&gt;&lt;b&gt;Indirizzo Casa:&lt;/b&gt;</translation>
     </message>
     <message>
         <source>The %1 %2 of every</source>
-        <translation type="unfinished">Il %1 %2 di ogni</translation>
+        <translation>Il %1 %2 di ogni</translation>
     </message>
 </context>
 <context>
