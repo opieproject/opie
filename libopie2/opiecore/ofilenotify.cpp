@@ -200,10 +200,18 @@ bool OFileNotification::hasChanged()
 
     struct stat newstat;
     ::memset( &newstat, 0, sizeof newstat );
-    ::stat( _path, &newstat );
+    int result = ::stat( _path, &newstat ); // may fail if file has been renamed or deleted. that doesn't matter :)
 
+    qDebug( "result of newstat call is %d (%s=%d)", result, strerror( errno ), errno );
     qDebug( "stat.atime = %0lx, newstat.atime = %0lx", (long)_stat.st_atime, (long)newstat.st_atime );
     qDebug( "stat.mtime = %0lx, newstat.mtime = %0lx", (long)_stat.st_mtime, (long)newstat.st_mtime );
+    qDebug( "stat.ctime = %0lx, newstat.ctime = %0lx", (long)_stat.st_ctime, (long)newstat.st_ctime );
+
+    if ( !c && (_type & (Delete|Rename)) && (long)newstat.st_atime == 0 && (long)newstat.st_mtime == 0 && (long)newstat.st_ctime == 0)
+    {
+        qDebug( "OFileNotification::hasChanged(): file has been deleted or renamed" );
+        c = true;
+    }
     if ( !c && (_type & Access) && (long)_stat.st_atime < (long)newstat.st_atime )
     {
         qDebug( "OFileNotification::hasChanged(): atime changed" );
@@ -212,6 +220,11 @@ bool OFileNotification::hasChanged()
     if ( !c && (_type & Modify) && (long)_stat.st_mtime < (long)newstat.st_mtime )
     {
         qDebug( "OFileNotification::hasChanged(): mtime changed" );
+        c = true;
+    }
+    if ( !c && (_type & Attrib) && (long)_stat.st_ctime < (long)newstat.st_ctime )
+    {
+        qDebug( "OFileNotification::hasChanged(): ctime changed" );
         c = true;
     }
 
