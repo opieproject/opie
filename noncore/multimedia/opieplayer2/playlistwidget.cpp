@@ -100,7 +100,7 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
   setBackgroundMode( PaletteButton );
 
 //  setCaption( tr("OpiePlayer") );
-  setIcon( Resource::loadPixmap( "opieplayer2/MPEGPlayer" ) );
+//  setIcon( Resource::loadPixmap( "opieplayer2/MPEGPlayer" ) );
 
   setToolBarsMovable( FALSE );
 
@@ -458,7 +458,7 @@ void PlayListWidget::setDocument(const QString& fileref) {
 
 
 void PlayListWidget::setActiveWindow() {
-  qDebug("SETTING active window");
+//  qDebug("SETTING active window");
   // When we get raised we need to ensure that it switches views
   char origView = mediaPlayerState->view();
   mediaPlayerState->setView( 'l' ); // invalidate
@@ -476,7 +476,7 @@ const DocLnk *PlayListWidget::current() { // this is fugly
   switch (tabWidget->currentPageIndex()) {
   case 0: //playlist
     {
-      qDebug("playlist");
+//      qDebug("playlist");
       if ( mediaPlayerState->playlist() ) {
         return d->selectedFiles->current();
       } else if ( d->setDocumentUsed && d->current ) {
@@ -488,11 +488,10 @@ const DocLnk *PlayListWidget::current() { // this is fugly
     break;
   case 1://audio
     {
-      qDebug("audioView");
+//      qDebug("audioView");
       QListIterator<DocLnk> dit( files.children() );
       for ( ; dit.current(); ++dit ) {
         if( dit.current()->name() == audioView->currentItem()->text(0) && !insanityBool) {
-          qDebug("here");
           insanityBool=TRUE;
           return dit;
         }
@@ -501,7 +500,7 @@ const DocLnk *PlayListWidget::current() { // this is fugly
     break;
   case 2: // video
     {
-      qDebug("videoView");
+//      qDebug("videoView");
       QListIterator<DocLnk> Vdit( vFiles.children() );
       for ( ; Vdit.current(); ++Vdit ) {
         if( Vdit.current()->name() == videoView->currentItem()->text(0) && !insanityBool) {
@@ -865,7 +864,7 @@ void PlayListWidget::playlistViewPressed( int mouse, QListViewItem *, const QPoi
 
 
 void PlayListWidget::scanForAudio() {
-  qDebug("scan for audio");
+//  qDebug("scan for audio");
   files.detachChildren();
   QListIterator<DocLnk> sdit( files.children() );
   for ( ; sdit.current(); ++sdit ) {
@@ -876,7 +875,7 @@ void PlayListWidget::scanForAudio() {
 }
 
 void PlayListWidget::scanForVideo() {
-  qDebug("scan for video");
+//  qDebug("scan for video");
   vFiles.detachChildren();
   QListIterator<DocLnk> sdit( vFiles.children() );
   for ( ; sdit.current(); ++sdit ) {
@@ -996,7 +995,6 @@ void PlayListWidget::keyReleaseEvent( QKeyEvent *e)
     //           doUnblank();
     break;
   case Key_Q: //add to playlist
-    qDebug("Add");
     addSelected();
     break;
   case Key_R: //remove from playlist
@@ -1007,7 +1005,6 @@ void PlayListWidget::keyReleaseEvent( QKeyEvent *e)
     //           playSelected();
     //           break;
   case Key_Space:
-    qDebug("Play");
     //          playSelected(); puh
     break;
   case Key_1:
@@ -1197,7 +1194,7 @@ void PlayListWidget::readPls(const QString &filename) {
 }
 
 void PlayListWidget::pmViewActivated(int index) {
-  qDebug("%d", index);
+//  qDebug("%d", index);
   switch(index) {
   case -16:
     {
