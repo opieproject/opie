@@ -293,11 +293,12 @@ void AdvancedFm::switchToRemoteTab() {
 }
 
 void  AdvancedFm::currentPathComboChanged() {
-   if(QDir( currentPathCombo->lineEdit()->text()).exists()) {
-      CurrentDir()->setPath( currentPathCombo->lineEdit()->text() );
+		QString pDir = currentPathCombo->lineEdit()->text();
+   if(QDir(pDir).exists()) {
+      CurrentDir()->setPath(pDir );
       populateView();
    } else {
-      QMessageBox::message(tr("Note"),tr("<p>That directory does not exist</p>"));
+      QMessageBox::message(tr("Note"),tr("<p>%1 does not exist</p>").arg(pDir));
    }
 }
 
