@@ -19,12 +19,12 @@
 #ifndef ADDRESSBOOK_PLUGIN_CONFIG_H
 #define ADDRESSBOOK_PLUGIN_CONFIG_H
 
+#include <opie2/todayconfigwidget.h>
+#include <opie2/ocolorbutton.h>
+
 #include <qwidget.h>
 #include <qspinbox.h>
 #include <qradiobutton.h>
-
-#include <opie/todayconfigwidget.h>
-#include <opie/ocolorbutton.h>
 
 class AddressBookPluginConfig : public TodayConfigWidget {
     Q_OBJECT
@@ -46,9 +46,9 @@ private:
     QSpinBox* SpinBoxClip;
     QSpinBox* SpinDaysClip;
     QSpinBox* SpinUrgentClip;
-    OColorButton* entryColor;
-    OColorButton* headlineColor;
-    OColorButton* urgentColor;
+    Opie::OColorButton* entryColor;
+    Opie::OColorButton* headlineColor;
+    Opie::OColorButton* urgentColor;
     QRadioButton* m_showBirthdayButton;
     QRadioButton* m_showAnniversaryButton;
 

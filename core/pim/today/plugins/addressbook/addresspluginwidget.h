@@ -19,12 +19,12 @@
 #ifndef ADDRESSBOOK_PLUGIN_WIDGET_H
 #define ADDRESSBOOK_PLUGIN_WIDGET_H
 
+#include <opie2/ocontactaccess.h>
+#include <opie2/oclickablelabel.h>
+
 #include <qstring.h>
 #include <qwidget.h>
 #include <qlayout.h>
-
-#include <opie/ocontactaccess.h>
-#include <opie/oclickablelabel.h>
 
 
 class AddressBookPluginWidget : public QWidget {
@@ -37,18 +37,18 @@ public:
 
     void reinitialize();
 public slots:
-    void refresh( const OContactAccess* db ); 
+    void refresh( const Opie::OPimContactAccess* db );
 
 protected slots:
     void  startAddressBook();
 
 private:
-    OClickableLabel* addressLabel;
+    Opie::Ui::OClickableLabel* addressLabel;
     QVBoxLayout* layoutTodo;
-    OContactAccess * m_contactdb;
+    Opie::OPimContactAccess * m_contactdb;
 
-    OContactAccess::List m_list;
-    OContactAccess::List::Iterator m_it;
+    Opie::OPimContactAccess::List m_list;
+    Opie::OPimContactAccess::List::Iterator m_it;
 
     void readConfig();
     void getAddress();

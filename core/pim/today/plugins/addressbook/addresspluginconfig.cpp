@@ -86,14 +86,14 @@ AddressBookPluginConfig::AddressBookPluginConfig( QWidget *parent,  const char* 
     QHBox *box5 = new QHBox( this );
     QLabel* colorLabel2 = new QLabel( box5, "" );
     colorLabel2->setText( tr( "Set Headline Color: " ) );
-    headlineColor = new OColorButton( box5, black , "headlineColor" );
+    headlineColor = new Opie::OColorButton( box5, black , "headlineColor" );
     QWhatsThis::add( headlineColor , tr( "Colors for the headlines !" ) );
     QHBox *box6 = new QHBox( this );
 
     // Entry color settings
     QLabel* colorLabel3= new QLabel( box6, "" );
     colorLabel3->setText( tr( "Set Entry Color: " ) );
-    entryColor = new OColorButton( box6, black , "entryColor" );
+    entryColor = new Opie::OColorButton( box6, black , "entryColor" );
     QWhatsThis::add( entryColor , tr( "This color will be used for shown birthdays/anniversaries !" ) );
 
     // Urgent color settings
@@ -104,7 +104,7 @@ AddressBookPluginConfig::AddressBookPluginConfig( QWidget *parent,  const char* 
     SpinUrgentClip->setMaxValue( 200 );
     QLabel* colorLabel6 = new QLabel( box7, "" );
     colorLabel6->setText( tr( " days: " ) );
-    urgentColor = new OColorButton( box7, red , "urgentColor" );
+    urgentColor = new Opie::OColorButton( box7, red , "urgentColor" );
     QWhatsThis::add( urgentColor , tr( "This urgent color will be used if we are close to the event !" ) );
     QWhatsThis::add( SpinUrgentClip , tr( "The urgent color will be used if the birthday/anniversary is closer than given days !" ) );
 
@@ -142,7 +142,7 @@ void AddressBookPluginConfig::readConfig() {
 
     m_showBirthdayButton->setChecked( cfg.readBoolEntry( "showBirthdays", true ) );
     m_showAnniversaryButton->setChecked( cfg.readBoolEntry( "showAnniversaries", true ) );
-				  
+
 }
 
 
@@ -157,7 +157,7 @@ void AddressBookPluginConfig::writeConfig() {
     cfg.writeEntry( "dayslookahead",  m_daysLookAhead );
     m_urgentDays = SpinUrgentClip->value();
     if ( m_urgentDays > m_daysLookAhead )
-	    m_urgentDays = m_daysLookAhead;
+        m_urgentDays = m_daysLookAhead;
     cfg.writeEntry( "urgentdays", m_urgentDays );
 
     m_entryColor = entryColor->color().name();

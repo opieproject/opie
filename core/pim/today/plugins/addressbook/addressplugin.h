@@ -19,13 +19,13 @@
 #ifndef ADDRESSBOOK_PLUGIN_H
 #define ADDRESSBOOK_PLUGIN_H
 
+#include "addresspluginwidget.h"
+
+#include <opie2/oclickablelabel.h>
+#include <opie2/todayplugininterface.h>
+
 #include <qstring.h>
 #include <qwidget.h>
-
-#include <opie/oclickablelabel.h>
-#include <opie/todayplugininterface.h>
-
-#include "addresspluginwidget.h"
 
 class AddressBookPlugin : public TodayPluginObject {
 
@@ -45,7 +45,7 @@ public:
     void reinitialize();
 
  private:
-    AddressBookPluginWidget* m_abWidget; 
+    AddressBookPluginWidget* m_abWidget;
 };
 
 #endif
