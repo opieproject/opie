@@ -41,11 +41,13 @@ class Today : public TodayBase
     void startConfig();
     void startTodo();
     void startDatebook();
-  
+    void startMail();
+    void draw();
  private:
     void init();
     void getDates();
     void getTodo();
+    void getMail();
     QList<TodoItem> loadTodo(const char *filename);
  private:
     DateBookDB *db;

@@ -32,12 +32,14 @@ public:
     QPushButton* DatesButton;
     QLabel* DatesField;
     QLabel* Frame;
-    //QFrame* Frame;
+    QFrame* MailFrame;
     QLabel* TextLabel1;
     QFrame* Frame15;
     QLabel* TodoField;
+    QLabel* MailField;
     QPushButton* PushButton1;
     QPushButton* TodoButton;
+    QPushButton* MailButton;
     QPushButton* getridoffuckingstrippeldlinesbutton;
 
 protected:

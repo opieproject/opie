@@ -35,6 +35,7 @@
 #include <qspinbox.h>
 #include <qpushbutton.h>
 #include <qlabel.h>
+#include <qtimer.h>
 
 //#include <iostream.h>
 //#include <unistd.h>
@@ -57,17 +58,26 @@ Today::Today( QWidget* parent,  const char* name, WFlags fl )
   QObject::connect( (QObject*)PushButton1, SIGNAL( clicked() ), this, SLOT(startConfig() ) );
   QObject::connect( (QObject*)TodoButton, SIGNAL( clicked() ), this, SLOT(startTodo() ) );
   QObject::connect( (QObject*)DatesButton, SIGNAL( clicked() ), this, SLOT(startDatebook() ) );
+  QObject::connect( (QObject*)DatesButton, SIGNAL( clicked() ), this, SLOT(startMail() ) );
 
   QDate date = QDate::currentDate();
   QString time = (date.toString());
   TextLabel1->setText(time);
   db = new DateBookDB;
  
-  init();
-  getDates();
-  getTodo();
+  draw();
 }
 
+
+void Today::draw()
+{
+  init();
+  getDates();
+  getMail();
+  getTodo(); 
+  QTimer::singleShot( 60*1000, this, SLOT(draw()) );
+
+}
 
 void Today::init()
 {
@@ -126,10 +136,7 @@ void Today::startConfig()
   // sync it to "disk"
   cfg.write(); 
   
-  init();
-  getDates();
-  getTodo();
-  //cout << location << endl;
+  draw();
 }
 
 
@@ -262,6 +269,22 @@ QList<TodoItem> Today::loadTodo(const char *filename)
 }
 
 
+void Today::getMail()
+{
+  Config cfg("opiemail");
+  cfg.setGroup("today"); 
+  
+  // how many lines should be showed in the task section
+  int NEW_MAILS = cfg.readNumEntry("newmails",0);
+  int OUTGOING = cfg.readNumEntry("outgoing",0);
+  
+  QString output = tr("<b>%1</b> new mails, <b>%2</b> outgoing").arg(NEW_MAILS).arg(OUTGOING);
+  
+
+  MailField->setText(output);
+}
+
+
 /*
  * Get the todos
  *
@@ -308,7 +331,7 @@ void Today::getTodo()
 }
 
 /*
- * lanches datebook
+ * launches datebook
  */
 void Today::startDatebook()
 { 
@@ -317,12 +340,21 @@ void Today::startDatebook()
 }
 
 /*
- * lanches todolist
+ * launches todolist
  */ 
 void Today::startTodo()
 {
   QCopEnvelope e("QPE/System", "execute(QString)");
   e << QString("todolist");
+}
+
+/*
+ * launch opiemail
+ */
+void Today::startMail()
+{
+  QCopEnvelope e("QPE/System", "execute(QString)");
+  e << QString("opiemail");
 }
 
 /*  

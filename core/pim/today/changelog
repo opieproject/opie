@@ -1,3 +1,11 @@
+0.2.4
+
+* added support for email 
+* autoupdates after 1 min
+* QCopEnvelope instead of system()
+* starting to use qvbox in gui
+
+
 0.2.3
 
 * the 4 am release

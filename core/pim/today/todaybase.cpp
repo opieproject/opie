@@ -46,10 +46,13 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
   QPixmap todo = Resource::loadPixmap( "TodoList" );
   // config icon
   QPixmap config = Resource::loadPixmap( "today/config" );
+  // mail icon
+  QPixmap mail = Resource::loadPixmap( "today/mail" );
   
-  if ( !name )
-    setName( "TodayBase" );
-  resize( 223, 307 ); 
+  
+  //if ( !name )
+  //  setName( "TodayBase" );
+  //resize( 223, 307 ); 
 
   QVBoxLayout * layout = new QVBoxLayout(this);
   
@@ -63,13 +66,13 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
   getridoffuckingstrippeldlinesbutton->setGeometry( QRect( -5, 10, 0, 0 ) );
 
   DatesButton = new QPushButton (Frame4, "DatesButton" );
-  DatesButton->setGeometry( QRect( 2, 10, 36, 32 ) );
+  DatesButton->setGeometry( QRect( 2, 4, 36, 32 ) );
   DatesButton->setBackgroundOrigin( QPushButton::WidgetOrigin );
   DatesButton->setPixmap( datebook  );
   DatesButton->setFlat( TRUE );
 
   DatesField = new QLabel( Frame4, "DatesField" );
-  DatesField->setGeometry( QRect( 40, 10, 203, 120 ) ); 
+  DatesField->setGeometry( QRect( 40, 4, 203, 120 ) ); 
   DatesField->setText( tr( "No appointments today" ) );
   DatesField->setAlignment( int( QLabel::AlignTop | QLabel::AlignLeft ) );
 
@@ -109,7 +112,7 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
   TodoButton->setFlat( TRUE );
 
   TodoField = new QLabel( Frame15, "TodoField" );
-  TodoField->setGeometry( QRect( 40, 10, 196, 120 ) ); 
+  TodoField->setGeometry( QRect( 40, 4, 196, 120 ) ); 
   TodoField->setFrameShadow( QLabel::Plain );
   TodoField->setText( tr( "No current todos" ) );
   TodoField->setAlignment( int( QLabel::AlignTop | QLabel::AlignLeft ) );
@@ -121,12 +124,33 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
   PushButton1->setAutoDefault( TRUE );
   PushButton1->setFlat( TRUE );
 
+  // mail
+  MailFrame = new QFrame( this, "MailFrame" );
+  MailFrame->setFrameShape( QScrollView::StyledPanel );
+  MailFrame->setFrameShadow( QScrollView::Sunken );
+  MailFrame->setBackgroundOrigin( QScrollView::ParentOrigin );
+
+  MailButton = new QPushButton (MailFrame, "MailButton" );
+  MailButton->setGeometry( QRect( 2, 10, 36, 19 ) );
+  MailButton->setBackgroundOrigin( QPushButton::WidgetOrigin );
+  MailButton->setPixmap( mail  );
+  MailButton->setFlat( TRUE );
+
+  MailField = new QLabel( MailFrame, "DatesField" );
+  MailField->setGeometry( QRect( 40, 10, 203, 120 ) ); 
+  MailField->setText( tr( "Opiemail not installed" ) );
+  MailField->setAlignment( int( QLabel::AlignTop | QLabel::AlignLeft ) );
+  MailField->setMaximumHeight(15);
+  MailField->setMinimumHeight(10);
+
   layout->addWidget(Frame);
   layout->addWidget(Frame4);
+  layout->addWidget(MailFrame);
   layout->addWidget(Frame15);
   
-  layout->setStretchFactor(Frame4,3);
-  layout->setStretchFactor(Frame15,2);
+  layout->setStretchFactor(Frame4,4);
+  layout->setStretchFactor(MailFrame,1);
+  layout->setStretchFactor(Frame15,3);
 }
 
 /*  
