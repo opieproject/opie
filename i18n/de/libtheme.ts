@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>Styles</name>
     <message>
@@ -14,7 +15,7 @@
     <name>ThemeSettings</name>
     <message>
         <source>Theme Style</source>
-        <translation type="unfinished">Schema</translation>
+        <translation>Schema</translation>
     </message>
     <message>
         <source>Select the theme to be used</source>

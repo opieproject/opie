@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>WLAN</name>
     <message>
@@ -79,7 +80,7 @@
     </message>
     <message>
         <source>&amp;Accept</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Akpzeptieren</translation>
     </message>
     <message>
         <source>&amp;Reject</source>

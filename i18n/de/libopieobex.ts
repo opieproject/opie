@@ -4,74 +4,74 @@
     <name>OtherHandler</name>
     <message>
         <source>&lt;qt&gt;&lt;b&gt;Received:&lt;/b&gt;&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;&lt;b&gt;Bekommen:&lt;/b&gt;&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Accept</source>
-        <translation type="unfinished"></translation>
+        <translation>Akpezptieren</translation>
     </message>
     <message>
         <source>Deny</source>
-        <translation type="unfinished"></translation>
+        <translation>Ablehnen</translation>
     </message>
     <message>
         <source>&lt;p&gt;You received a file of type %1 (&lt;img src=&quot;%2&quot;&gt; )What do you want to do?</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Sie haben eine Datei vom Typ %1 ( &lt;img src=&quot;%2&quot;&gt; ) erhalten. Was möchten sie tun?</translation>
     </message>
 </context>
 <context>
     <name>SendWidget</name>
     <message>
         <source>&lt;qt&gt;&lt;h1&gt;Sending:&lt;/h1&gt;&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;&lt;h1&gt;Sende:&lt;/h1&gt;&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Done</source>
-        <translation type="unfinished"></translation>
+        <translation>Fertig</translation>
     </message>
     <message>
         <source>IrDa is not enabled!</source>
-        <translation type="unfinished"></translation>
+        <translation>Infrarot ist nicht verfügbar!</translation>
     </message>
     <message>
         <source>Searching for IrDa Devices.</source>
-        <translation type="unfinished"></translation>
+        <translation>Suche nach Infrarot-Geräten.</translation>
     </message>
     <message>
         <source>Bluetooth is not available</source>
-        <translation type="unfinished"></translation>
+        <translation>Bluetooth is nicht verfügbar</translation>
     </message>
     <message>
         <source>Searching for bluetooth Devices.</source>
-        <translation type="unfinished"></translation>
+        <translation>Suche nach Bluetooth-Geräten.</translation>
     </message>
     <message>
         <source>Scheduling for beam.</source>
-        <translation type="unfinished"></translation>
+        <translation>beginne zu beamen.</translation>
     </message>
     <message>
         <source>Click to beam</source>
-        <translation type="unfinished"></translation>
+        <translation>Clicke um zu senden</translation>
     </message>
     <message>
         <source>Sent</source>
-        <translation type="unfinished"></translation>
+        <translation>Gesendet</translation>
     </message>
     <message>
         <source>Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>Try %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Versuch %1</translation>
     </message>
     <message>
         <source>Search again for IrDa.</source>
-        <translation type="unfinished"></translation>
+        <translation>Suche nochmals für Infrarot-Geräte.</translation>
     </message>
     <message>
         <source>Start sending</source>
-        <translation type="unfinished"></translation>
+        <translation>Beginne zu senden</translation>
     </message>
 </context>
 </TS>

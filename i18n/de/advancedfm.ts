@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>AdvancedFm</name>
     <message>
@@ -254,11 +255,13 @@ unter der GPL</translation>
         <source>Cannot remove current directory
 from bookmarks.
 It is not bookmarked!</source>
-        <translation type="unfinished"></translation>
+        <translation>Kann das aktuelle Verzeichnis
+von den Lesezeichen nicht entfernen,
+da es nicht in den Lesezeichen ist!</translation>
     </message>
     <message>
         <source>File Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Dateisuche</translation>
     </message>
 </context>
 <context>

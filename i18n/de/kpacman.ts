@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>Keys</name>
     <message>
@@ -223,10 +224,6 @@ oder iist in einem unbekannten Format.</translation>
     <message>
         <source>@YY@/@MM@/@DD@</source>
         <translation>@DD@/@MM@/@YY@</translation>
-    </message>
-    <message>
-        <source>                          </source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
