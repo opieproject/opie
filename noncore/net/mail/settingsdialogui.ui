@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>320</width>
+            <width>316</width>
             <height>379</height>
         </rect>
     </property>
@@ -179,7 +179,7 @@
                         </property>
                         <property stdset="1">
                             <name>text</name>
-                            <string>Enable Taskbar Applet</string>
+                            <string>Disable Taskbar Applet</string>
                         </property>
                     </widget>
                     <widget>
