@@ -1,4 +1,4 @@
-Files: $PKG_DIR/bin/formatter $PKG_DIR/pics/formatter/* $PKG_DIR/apps/Applications/formatter.desktop
+Files: $PKG_DIR/bin/formatter $PKG_DIR/pics/formatter/devices.png $PKG_DIR/apps/Settings/formatter.desktop
 Priority: optional
 Package: formatter
 Section: opie/applications
@@ -8,3 +8,4 @@ Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
 Description: Formatter
  The filesystem formatting and mountpoint app for the Opie environment.
+ronment.
