@@ -20,9 +20,9 @@ SenderUI::SenderUI()
 
     /* we do that manually */
     Profile prof;
-    QString str = "/dev/ttyS0";
+    QString str = "/dev/bty0";
     prof.writeEntry("Device",str );
-    prof.writeEntry("Baud", 115200 );
+    prof.writeEntry("Baud", 19200 );
 
     qWarning("prof " + prof.readEntry("Device")  + " " + str);
     ser = new IOSerial(prof);
@@ -51,13 +51,15 @@ void SenderUI::slotSendFile() {
 void SenderUI::slotSend() {
     QCString str = MultiLineEdit1->text().utf8();
     qWarning("sending: %s", str.data() );
+    str = str.replace( QRegExp("\n"), "\r");
     ser->send( str );
 }
 void SenderUI::got(const QByteArray& ar) {
+    qWarning("got:");
     for ( uint i = 0; i < ar.count(); i++ ) {
         printf("%c", ar[i] );
     }
-    //printf("\n");
+    printf("\n");
 }
 
 void SenderUI::fileTransComplete() {

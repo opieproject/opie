@@ -60,7 +60,7 @@ Dialer::Dialer(const Profile& profile, int fd, QWidget *parent, const char *name
 	usercancel = 0;
 	cleanshutdown = 0;
 
-	fcntl(m_fd, F_SETFL, O_NONBLOCK);
+//	fcntl(m_fd, F_SETFL, O_NONBLOCK);
 
 	desc = new QLabel(QObject::tr("Dialing number: %1").arg(m_profile.readEntry("Number")), this);
 	progress = new QProgressBar(this);
@@ -103,6 +103,7 @@ void Dialer::slotCancel()
 
 void Dialer::reset()
 {
+    qWarning("reset");
 	switchState(state_cancel);
 }
 
@@ -134,9 +135,11 @@ void Dialer::dial(const QString& number)
 
 void Dialer::trydial(const QString& number)
 {
+    qWarning("TryDial:%s", number.latin1() );
 	if(state != state_cancel) switchState(state_preinit);
 	if(cleanshutdown)
 	{
+            qWarning("HangupString " + m_profile.readEntry("HangupString"));
 		send(m_profile.readEntry("HangupString"));
 		//send("+++ATH");
 		send("");
@@ -146,27 +149,31 @@ void Dialer::trydial(const QString& number)
 	{
 		switchState(state_init);
 		//send("ATZ");
-		send(m_profile.readEntry("InitString"));
+                qWarning("Init String " + m_profile.readEntry("InitString") );
+//		send(m_profile.readEntry("InitString", "AT"));
+                send("AT\r");
 		QString response2 = receive();
 		if(!response2.contains("\nOK\r"))
 			reset();
 	}
 
-	if(state != state_cancel)
+/*	if(state != state_cancel)
 	{
 		switchState(state_options);
 
-		send("ATM3L3");
+                qWarning("ATM3l3");
+		send("ATM3L3\r");
 		QString response3 = receive();
 		if(!response3.contains("\nOK\r"))
 			reset();
 	}
+*/
 
 	if(state != state_cancel)
 	{
 		switchState(state_dialtone);
 
-		send("ATX1");
+		send("ATX1\r");
 		QString response4 = receive();
 		if(!response4.contains("\nOK\r"))
 			reset();
@@ -174,10 +181,11 @@ void Dialer::trydial(const QString& number)
 
 	if(state != state_cancel)
 	{
+            qWarning("progress");
 		switchState(state_dialing);
 
-		//send(QString("ATDT %1").arg(number));
-		send(QString("%1 %2").arg(m_profile.readEntry("DialPrefix1")).arg(number));
+		send(QString("ATDT %1\r").arg(number));
+//		send(QString("%1 %2").arg(m_profile.readEntry("DialPrefix1")).arg(number));
 		QString response5 = receive();
 		if(!response5.contains("\n" + m_profile.readEntry("DefaultConnect")))
 		{
@@ -205,13 +213,15 @@ void Dialer::send(const QString& msg)
 	int bytes;
 	QString termination;
 
-	//qWarning("Sending: '%s'", m.latin1());
+	qWarning("Sending: %s", m.latin1());
 
-	termination = "\r";
+/*	termination = "\r";
 	//termination = m_profile.readEntry("Termination");
 	if(termination == "\n") m = m + "\n";
 	else if(termination == "\r") m = m + "\r";
 	else m = m + "\r\n";
+*/
+        m = m.replace(QRegExp("\n"), "\r");
 
 	bytes = ::write(m_fd, m.local8Bit(), strlen(m.local8Bit()));
 	if(bytes < 0)

@@ -50,6 +50,8 @@ public slots:
     void reload(const Profile &);
 protected:
     int baud(int baud) const;
+    void internDetach();
+    void internAttach();
 protected slots:
     void dataArrived();
     void errorOccured();

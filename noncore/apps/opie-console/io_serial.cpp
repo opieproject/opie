@@ -204,3 +204,25 @@ QBitArray IOSerial::supports()const {
 bool IOSerial::isConnected() {
     return m_connected;
 }
+
+/*
+ * this is used to give the
+ * class below IOSerial
+ * the possibility of
+ * exclusive usage
+ */
+void IOSerial::internDetach() {
+    if (m_read )
+        disconnect(m_read, SIGNAL(activated(int)), this, SLOT(dataArrived()));
+    if (m_error )
+        disconnect(m_error, SIGNAL(activated(int)), this, SLOT(errorOccured()));
+}
+/*
+ * give power back
+ */
+void IOSerial::internAttach() {
+    if (m_read )
+        connect(m_read, SIGNAL(activated(int)), this, SLOT(dataArrived()));
+    if (m_error )
+        connect(m_error, SIGNAL(activated(int)), this, SLOT(errorOccured()));
+}

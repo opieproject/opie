@@ -29,11 +29,13 @@ bool IOModem::open() {
     bool ret = IOSerial::open();
 	if(!ret) return false;
 
-	int fd = rawIO();
-	Dialer d(m_profile, fd);
+//	int fd = rawIO();
+        internDetach();
+	Dialer d(m_profile, m_fd);
 
 	int result = d.exec();
-	closeRawIO(fd);
+        internAttach();
+//	closeRawIO(fd);
 	if(result == QDialog::Accepted)
 	{
 		return true;
