@@ -500,8 +500,10 @@ QPEDecoration::QPEDecoration()
     helpFile = QString(qApp->argv()[0]) + ".html";
     QStringList helpPath = Global::helpPath();
     helpExists = FALSE;
-    for (QStringList::ConstIterator it=helpPath.begin(); it!=helpPath.end() && !helpExists; ++it)
+    for (QStringList::ConstIterator it=helpPath.begin(); it!=helpPath.end() && !helpExists; ++it) {
 	helpExists = QFile::exists( *it + "/" + helpFile );
+    	qDebug ( "Checking %s/%s for help: %d", (*it).latin1(), helpFile.latin1(),helpExists);
+   }
     qpeManager = new QPEManager( this );
 }
 
@@ -530,8 +532,9 @@ QPEDecoration::QPEDecoration( const QString &plugin )
     helpFile = QString(qApp->argv()[0]) + ".html";
     QStringList helpPath = Global::helpPath();
     helpExists = FALSE;
-    for (QStringList::ConstIterator it=helpPath.begin(); it!=helpPath.end() && !helpExists; ++it)
+    for (QStringList::ConstIterator it=helpPath.begin(); it!=helpPath.end() && !helpExists; ++it) {
 	helpExists = QFile::exists( *it + "/" + helpFile );
+    	qDebug ( "Checking %s/%s for help: %d", (*it).latin1(), helpFile.latin1(),helpExists); }
     qpeManager = new QPEManager( this );
 }
 

@@ -6,4 +6,4 @@ Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-batteryapplet, opie-clockapplet, opie-vmemo, opie-volumeapplet, opie-screenshotapplet, opie-netmonapplet, opie-pickboard, opie-keyboard, opie-jumpx, opie-handwriting, opie-dvorak, opie-unikeyboard
 Description: Opie taskbar applets
-  All applets for the taskbar
+ All applets for the taskbar
