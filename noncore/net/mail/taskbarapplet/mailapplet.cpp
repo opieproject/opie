@@ -25,7 +25,7 @@ MailApplet::MailApplet( QWidget *parent, const char *name, WFlags fl )
 	layout->addItem( new QSpacerItem( 0,0 ) );
 
 	QLabel *pixmap = new QLabel( this );
-	pixmap->setPixmap( Resource::loadPixmap( "opiemail/mailchecker" ) );
+	pixmap->setPixmap( Resource::loadPixmap( "mail/mailchecker" ) );
 	layout->addWidget( pixmap );
 
 	layout->addItem( new QSpacerItem( 0,0 ) );
