@@ -35,6 +35,7 @@ extern MediaPlayerState *mediaPlayerState;
 MediaPlayer::MediaPlayer( QObject *parent, const char *name )
     : QObject( parent, name ), volumeDirection( 0 ), currentFile( NULL ) {
 
+    fd=-1;fl=-1;
     playList->setCaption( tr( "OpiePlayer: Initializating" ) );
 
     qApp->processEvents();
@@ -298,14 +299,31 @@ void MediaPlayer::timerEvent( QTimerEvent * ) {
 
 void MediaPlayer::blank( bool b ) {
     fd=open("/dev/fb0",O_RDWR);
+#ifdef QT_QWS_EBX
+    fl= open( "/dev/fl", O_RDWR );
+#endif        
     if (fd != -1) {
         if ( b ) {
             qDebug("do blanking");
+#ifdef QT_QWS_EBX
+            ioctl( fd, FBIOBLANK, 1 );
+            if(fl !=-1) {
+                ioctl( fl, 2 );
+                ::close(fl);
+            }
+#else
             ioctl( fd, FBIOBLANK, 3 );
+#endif
             isBlanked = TRUE;
         } else {
             qDebug("do unblanking");
             ioctl( fd, FBIOBLANK, 0);
+#ifdef QT_QWS_EBX
+            if(fl != -1) {
+                ioctl( fl, 1);
+                ::close(fl);
+            }
+#endif
             isBlanked = FALSE;
         }
         close( fd );
