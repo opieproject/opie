@@ -1,7 +1,8 @@
 #include <qpe/qpeapplication.h>
 #include <qtabwidget.h>
 #include <qcheckbox.h>
-#include <qcombobox.h>
+#include <qlistbox.h>
+#include <qpushbutton.h>
 
 #ifndef CONFIGDLG_H
 #define CONFIGDLG_H
@@ -21,10 +22,14 @@ signals:
 private slots:
     void pickTog();
     void setMap(int index);
+    void addMap();
+    void removeMap(int index);
 
 private:
     QCheckBox *pick_button;
-    QComboBox *map_combo;
+    QListBox *keymaps;
+    QPushButton *add_button;
+    QPushButton *remove_button;
 
 };
 

@@ -33,7 +33,6 @@
 #include <ctype.h>
 #include <qfile.h>
 #include <qtextstream.h>
-#include <iostream.h>
 
 #include <sys/utsname.h>
 
@@ -75,6 +74,14 @@ Keyboard::Keyboard(QWidget* parent, const char* _name, WFlags f) :
 
     repeatTimer = new QTimer( this );
     connect( repeatTimer, SIGNAL(timeout()), this, SLOT(repeat()) );
+
+}
+Keyboard::~Keyboard() {
+
+    if ( configdlg ) { 
+        delete (ConfigDlg *) configdlg; 
+        configdlg = 0;
+    }
 
 }
 
@@ -959,7 +966,6 @@ void Keys::setKeysFromFile(const char * filename) {
 
                 } 
 
-                cout << name << " = " << value << "\n";
                 buf = t.readLine();
             }
             // comments
