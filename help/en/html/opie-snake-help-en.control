@@ -1,9 +1,0 @@
-Package: opie-snake-help-en
-Files: help/en/html/snake.html help/en/html/snake
-Priority: optional
-Section: opie/onlinedoc
-Maintainer: Team Opie <opie@handhelds.org>
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-snake
-License: GPL
-Description: snake help files (en)

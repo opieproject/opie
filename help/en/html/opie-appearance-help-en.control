@@ -1,9 +1,0 @@
-Package: opie-appearance-help-en
-Files: help/en/html/appearance.html help/en/html/appearance
-Priority: optional
-Section: opie/onlinedoc
-Maintainer: Team Opie <opie@handhelds.org>
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-appearance
-License: GPL
-Description: appearance help files (en)

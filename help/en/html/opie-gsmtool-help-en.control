@@ -1,9 +1,0 @@
-Package: opie-gsmtool-help-en
-Files: help/en/html/gsmtool.html help/en/html/gsmtool
-Priority: optional
-Section: opie/onlinedoc
-Maintainer: Team Opie <opie@handhelds.org>
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-gsmtool
-License: GPL
-Description: gsmtool help files (en)

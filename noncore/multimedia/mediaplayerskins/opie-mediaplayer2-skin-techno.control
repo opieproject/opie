@@ -1,8 +1,0 @@
-Package: opie-mediaplayer2-skin-techno
-Files: pics/mediaplayer/skins/techno
-Priority: optional
-Section: opie/applications
-Maintainer: ljp <llornkcor@handhelds.org>
-Version: $QPE_VERSION-$SUB_VERSION
-Description: Techno Opie Mediaplayer's skin. Adapted from Qtopia
-

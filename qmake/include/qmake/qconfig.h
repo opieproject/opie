@@ -1,1 +1,0 @@
-/* All features enabled while building qmake */

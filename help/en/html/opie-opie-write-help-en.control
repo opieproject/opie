@@ -1,9 +1,0 @@
-Package: opie-opie-write-help-en
-Files: help/en/html/opie-write.html help/en/html/opie-write
-Priority: optional
-Section: opie/onlinedoc
-Maintainer: Team Opie <opie@handhelds.org>
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-opie-write
-License: GPL
-Description: opie-write help files (en)

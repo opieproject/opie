@@ -1,9 +1,0 @@
-Package: opie-mediummount-help-en
-Files: help/en/html/mediummount.html help/en/html/mediummount
-Priority: optional
-Section: opie/onlinedoc
-Maintainer: Team Opie <opie@handhelds.org>
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-mediummount
-License: GPL
-Description: mediummount help files (en)

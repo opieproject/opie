@@ -1,7 +1,0 @@
-  config TODAY_STOCKTICKER
-    boolean "stockticker"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && TODAY
-
-  source noncore/todayplugins/stockticker/stockticker/config.in
-  source noncore/todayplugins/stockticker/stocktickerlib/config.in

@@ -1,7 +1,0 @@
-  config CAMERA
-    boolean "opie-camera"
-    default "n"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && LIBOPIE2CORE
-    comment "opie-camera needs a libqpe, libopie and libopie2core"
-    depends !(( LIBQPE || LIBQPE-X11 ) && LIBOPIE && LIBOPIE2CORE)
-

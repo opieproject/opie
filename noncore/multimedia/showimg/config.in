@@ -1,4 +1,0 @@
-  config SHOWIMG
-    boolean "showimg"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

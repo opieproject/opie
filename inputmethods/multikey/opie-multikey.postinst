@@ -1,6 +1,0 @@
-#!/bin/sh
-if pidof -s qpe >/dev/null; then
-  /opt/QtPalmtop/bin/qcop QPE/TaskBar "reloadInputMethods()"
-else
-  exit 0
-fi

@@ -1,9 +1,0 @@
-Package: opie-minesweep-help-en
-Files: help/en/html/minesweep.html help/en/html/minesweep
-Priority: optional
-Section: opie/onlinedoc
-Maintainer: Team Opie <opie@handhelds.org>
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-minesweep
-License: GPL
-Description: minesweep help files (en)

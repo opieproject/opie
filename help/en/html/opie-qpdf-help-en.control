@@ -1,9 +1,0 @@
-Package: opie-qpdf-help-en
-Files: help/en/html/qpdf.html help/en/html/qpdf
-Priority: optional
-Section: opie/onlinedoc
-Maintainer: Team Opie <opie@handhelds.org>
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-qpdf
-License: GPL
-Description: qpdf help files (en)

@@ -1,9 +1,0 @@
-Package: opie-opierec-help-en
-Files: help/en/html/opierec.html
-Priority: optional
-Section: opie/onlinedoc
-Maintainer: Team Opie <opie@handhelds.org>
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-opierec
-License: GPL
-Description: opierec help files (en)

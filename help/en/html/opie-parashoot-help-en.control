@@ -1,9 +1,0 @@
-Package: opie-parashoot-help-en
-Files: help/en/html/parashoot.html help/en/html/parashoot
-Priority: optional
-Section: opie/onlinedoc
-Maintainer: Team Opie <opie@handhelds.org>
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-parashoot
-License: GPL
-Description: parashoot help files (en)

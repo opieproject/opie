@@ -1,9 +1,0 @@
-Package: opie-systemtime-help-en
-Files: help/en/html/systemtime.html help/en/html/systemtime
-Priority: optional
-Section: opie/onlinedoc
-Maintainer: Team Opie <opie@handhelds.org>
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-systemtime
-License: GPL
-Description: systemtime help files (en)

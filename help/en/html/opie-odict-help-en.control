@@ -1,9 +1,0 @@
-Package: opie-odict-help-en
-Files: help/en/html/odict.html help/en/html/odict
-Priority: optional
-Section: opie/onlinedoc
-Maintainer: Team Opie <opie@handhelds.org>
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-odict
-License: GPL
-Description: odict help files (en)

@@ -1,9 +1,0 @@
-Package: opie-backup
-Files: bin/backup pics/backup apps/Settings/backup.desktop
-Priority: optional
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: task-opie-minimal
-Architecture: arm
-Maintainer: Stefan Eilers <Eilers.Stefan@epost.de>
-Section: opie/Settings
-Description: Backup and Restore utility.

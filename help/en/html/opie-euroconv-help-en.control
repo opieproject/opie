@@ -1,9 +1,0 @@
-Package: opie-euroconv-help-en
-Files: help/en/html/euroconv.html help/en/html/euroconv
-Priority: optional
-Section: opie/onlinedoc
-Maintainer: Team Opie <opie@handhelds.org>
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-euroconv
-License: GPL
-Description: euroconv help files (en)

@@ -1,4 +1,0 @@
-  config LIBOPIETOOTH
-    boolean "libopietooth"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && OPIETOOTH
