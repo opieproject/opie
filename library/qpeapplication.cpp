@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.24 2002-10-13 16:06:24 sandman Exp $
+** $Id: qpeapplication.cpp,v 1.25 2002-10-13 22:05:30 sandman Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -477,7 +477,7 @@ QPEApplication::QPEApplication( int & argc, char **argv, Type t )
 		AppLnk::setBigIconSize( 48 );
 	}
 	else if ( dw > 200 ) {
-		setFont( QFont( "helvetica", 12 ) );
+		setFont( QFont( "helvetica", 10 ) );
 		AppLnk::setSmallIconSize( 16 );
 		AppLnk::setBigIconSize( 32 );
 	}
