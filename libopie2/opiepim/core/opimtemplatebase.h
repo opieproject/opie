@@ -134,7 +134,7 @@ struct OPimBase {
      * @see OPimAccessTemplate<>::sorted()
      */
     enum SortFilterBase {
-	    /** Do not filter anything. */
+	/** Do not filter anything. */
 	FilterOff = 0,
 	/** Use given Categories for filter */
         FilterCategory = 1,

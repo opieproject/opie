@@ -120,7 +120,7 @@ class OPimContactAccess: public QObject, public OPimAccessTemplate<OPimContact>
 	 * Return all possible settings for queryByExample().
 	 *  @return All settings provided by the current backend
 	 * (i.e.: WildCards & IgnoreCase)
-	 * @see QuerySettings in OPimBase for details of the parameter
+	 * @see QuerySettings in OPimBase for details of the parameter, queryByExample()
 	 */
 	const uint querySettings();
 

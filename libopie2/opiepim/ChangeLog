@@ -1,3 +1,6 @@
+2004-12-28  Stefan Eilers <stefan@eilers-online.net>
+	* Make improved query by example accessable via frontend
+	* Some API improvement
 2004-11-23  Stefan Eilers <stefan@eilers-online.net>
 	* Implement fast and full featured version of sorted() for addressbook
 	* Implement generic queryByExample for all Addressboook backends. It allows incremental search.

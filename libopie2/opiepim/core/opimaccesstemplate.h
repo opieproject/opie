@@ -86,7 +86,47 @@ public:
     //@{
     virtual List allRecords()const;
     virtual List matchRegexp(  const QRegExp &r ) const;
-    virtual List queryByExample( const T& t, int querySettings, const QDateTime& d = QDateTime() );
+
+    /**
+     * Query by example search interface. 
+     * "Query by Example" provides a very powerful search engine. Use the query object 
+     * (this may be a contact, a todo or databook event) 
+     * as a search mask which is converted into a query regarding the querySettings. If a time period is needed 
+     * (as for OpimBase::DateDiff), you have to use the date/time in the query object and the endperiod (the last parameter).
+     * @see QuerySettings in class OPimBase 
+     * @param query The object which contains the query set
+     * @param querySettings This parameter defines what should be searched and how the query should be interpreted
+     * @param endperiod Defines the end of a period for some special queries.    
+     */
+    virtual List queryByExample( const T& query, int querySettings, const QDateTime& endperiod = QDateTime() );
+
+    /**
+     * Generic query by example search interface. This is a special version which handles generic OPimRecord types. They are converted 
+     * automatically into the right datatype.
+     * "Query by Example" provides a very powerful search engine. Use the query object (this may be a contact, a todo or databook event) 
+     * as a search mask which is converted into a query regarding the querySettings. If a time period is needed 
+     * (as for OpimBase::DateDiff), you have to use the date/time in the query object and the endperiod (the last parameter).
+     * @see QuerySettings in class OPimBase 
+     * @param query The object which contains the query set
+     * @param querySettings This parameter defines what should be searched and how the query should be interpreted
+     * @param endperiod Defines the end of a period for some special queries.    
+     */
+    virtual List queryByExample( const OPimRecord* query, int querySettings, const QDateTime& endperiod = QDateTime() );
+    /**
+     * Incremental query by example search interface. Providing incremental search, this one provides the feature 
+     * to search in a list of records which may be returned by an other search.
+     * "Query by Example" provides a very powerful search engine. Use the query object (this may be a contact, a todo or databook event) 
+     * as a search mask which is converted into a query regarding the querySettings. If a time period is needed 
+     * (as for OpimBase::DateDiff), you have to use the date/time in the query object and the endperiod (the last parameter).
+     * @see QuerySettings in class OPimBase 
+     * @param uidlist List of uid's which should be incorporated into the next search 
+     * @param query The object which contains the query set
+     * @param querySettings This parameter defines what should be searched and how the query should be interpreted
+     * @param endperiod Defines the end of a period for some special queries.    
+     */
+    virtual List queryByExample( const OPimAccessTemplate::List& uidlist, const T& query, int querySettings, 
+				 const QDateTime& endperiod = QDateTime() );
+
     virtual T find( UID uid )const;
     virtual T find( UID uid, const QArray<int>&,
 		    uint current, typename OTemplateBase<T>::CacheDirection dir = OTemplateBase<T>::Forward )const;
@@ -269,18 +309,40 @@ QArray<int> OPimAccessTemplate<T>::records()const {
 }
 
 
-/**
- * queryByExample.
- * @see otodoaccess, ocontactaccess
- */
 template <class T>
 typename OPimAccessTemplate<T>::List
 OPimAccessTemplate<T>::queryByExample( const T& t, int settings, const QDateTime& d ) {
     QArray<int> ints = m_backEnd->queryByExample( t, settings, d );
 
-    List lis(ints, this );
-    return lis;
+    List list(ints, this );
+    return list;
 }
+
+template <class T>
+typename OPimAccessTemplate<T>::List
+OPimAccessTemplate<T>::queryByExample( const OPimRecord* t, int settings, const QDateTime& d ) {
+    T tempInstance;
+
+    if ( t->rtti() == tempInstance.rtti() ) {
+	    QArray<int> ints = m_backEnd->queryByExample( t, settings, d );
+	    List list( ints, this );
+	    return list;
+    } else {
+	owarn << "Query not possible: Objecttype mismatch" << oendl;
+    } 
+
+    return List();
+}
+
+template <class T>
+typename OPimAccessTemplate<T>::List
+OPimAccessTemplate<T>::queryByExample( const OPimAccessTemplate::List& uidlist, const T& t, int settings, const QDateTime& d ) {
+    QArray<int> ints = m_backEnd->queryByExample( uidlist.uids(), t, settings, d );
+
+    List list( ints, this );
+    return list;
+}
+
 
 template <class T>
 T OPimAccessTemplate<T>::find( UID uid ) const{
