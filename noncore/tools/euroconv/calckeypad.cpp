@@ -9,7 +9,7 @@
  *
  * Requirements:    Qt
  *
- * $Id: calckeypad.cpp,v 1.3 2003-02-21 14:07:05 eric Exp $
+ * $Id: calckeypad.cpp,v 1.4 2003-02-25 13:39:10 eric Exp $
  *
  ***************************************************************************/
 
@@ -207,7 +207,7 @@ QMessageBox::about( this, "About Euroconv",
                          "Under GPL license\n\n"
                          "Written by Eric Santonacci for Opie\n"
                          "http://opie.handhelds.org\n\n"
-                         "Version 0.3\n\n"
+                         "Version 0.4\n\n"
                          "Any comment or feedback to:\n"
                          "Eric.Santonacci@talc.fr\n");
 
