@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>Categories</name>
     <message>
@@ -159,15 +160,15 @@ die Kategorien.</translation>
     </message>
     <message>
         <source>Click to select a document from the list</source>
-        <translation>Klicken um ein Dokument aus der Liste auszuwählen</translation>
+        <translation>Klicken, um ein Dokument aus der Liste auszuwählen</translation>
     </message>
     <message>
         <source>, or select &lt;b&gt;New Document&lt;/b&gt; to create a new document.</source>
-        <translation>, oder wählen Sie &lt;b&gt;Neues Dokument&quot;&lt;/b&gt;, um ein neues Dokument zu erstellen</translation>
+        <translation>, oder wählen Sie &lt;b&gt;Neues Dokument&lt;/b&gt;, um ein neues Dokument zu erstellen.</translation>
     </message>
     <message>
         <source>&lt;br&gt;&lt;br&gt;Click and hold for document properties.</source>
-        <translation>&lt;br&gt;&lt;br&gt;Klicken und Halten für die Dokumetneigenschaften</translation>
+        <translation>&lt;br&gt;&lt;br&gt;Klicken und Halten für die Dokumenteigenschaften.</translation>
     </message>
 </context>
 <context>
@@ -203,15 +204,15 @@ die Kategorien.</translation>
     </message>
     <message>
         <source>Find what:</source>
-        <translation>Suchen nach:</translation>
+        <translation>Suchen nach: </translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation>Kategorie:</translation>
+        <translation>Kategorie: </translation>
     </message>
     <message>
         <source>Start Search at:</source>
-        <translation>Suche starten bei:</translation>
+        <translation>Suche starten bei: </translation>
     </message>
     <message>
         <source>Dec 02 01</source>
@@ -277,19 +278,19 @@ die Kategorien.</translation>
     </message>
     <message>
         <source>Comment:</source>
-        <translation>Kommentar:</translation>
+        <translation>Kommentar: </translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation>Typ:</translation>
+        <translation>Typ: </translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation>Name:</translation>
+        <translation>Name: </translation>
     </message>
     <message>
         <source>Location:</source>
-        <translation>Ort:</translation>
+        <translation>Ort: </translation>
     </message>
     <message>
         <source>Fast load (consumes memory)</source>
@@ -317,7 +318,7 @@ die Kategorien.</translation>
     </message>
     <message>
         <source>Preload this application so that it is available instantly.</source>
-        <translation>Vorsorgliches Laden der Anwedung zur schnelleren Verfügbarkeit</translation>
+        <translation>Vorsorgliches Laden der Anwendung für schnellere Verfügbarkeit.</translation>
     </message>
     <message>
         <source>Delete this document.</source>
@@ -329,7 +330,7 @@ die Kategorien.</translation>
     </message>
     <message>
         <source>Beam this document to another device.</source>
-        <translation>Dokument beamen</translation>
+        <translation>Dokument auf ein anderes Gerät beamen.</translation>
     </message>
     <message>
         <source>Use custom rotation</source>
@@ -402,7 +403,7 @@ die Kategorien.</translation>
     <name>QObject</name>
     <message>
         <source>Out of Space</source>
-        <translation>Speicher erschpft</translation>
+        <translation>Speicher erschöpft</translation>
     </message>
     <message>
         <source>There was a problem creating
@@ -699,7 +700,7 @@ frei und versuchen Sie es noch einmal
     </message>
     <message>
         <source>Office</source>
-        <translation>Bro</translation>
+        <translation>Büro</translation>
     </message>
     <message>
         <source>Profession</source>
@@ -785,7 +786,7 @@ frei und versuchen Sie es noch einmal
     <name>QPEDecoration</name>
     <message>
         <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
-        <translation>Keine Hilfe vorhanden- bitte benutzen Sie die kontextsensitve Hilfe</translation>
+        <translation>&lt;Qt&gt;Keine allgemeine Hilfe vorhanden- bitte benutzen Sie die kontextsensitve Hilfe:&lt;p&gt;Um kontextsensitive Hilfe zu verwenden: &lt;p&gt;&lt;ol&gt;&lt;li&gt;Klicken und halten Sie den Stift auf dem Hilfebutton.&lt;li&gt;Wenn die Titelzeile &lt;b&gt;What&apos;s this...&lt;/b&gt; anzeigt können Sie auf ein beliebiges Objekt klicken um die zugehörige Hilfe zu erhalten.&lt;/ol&gt;&lt;/Qt&gt;</translation>
     </message>
     <message>
         <source>What&apos;s this...</source>
@@ -796,7 +797,7 @@ frei und versuchen Sie es noch einmal
     <name>QPEManager</name>
     <message>
         <source>Click to close this window, discarding changes.</source>
-        <translation>Klicken Sie hier, um das Fenster zu schliessen und alle Änderungen zu verwenrfen.</translation>
+        <translation>Klicken Sie hier, um das Fenster zu schliessen und alle Änderungen zu verwerfen.</translation>
     </message>
     <message>
         <source>Click to close this window.</source>
@@ -808,11 +809,11 @@ frei und versuchen Sie es noch einmal
     </message>
     <message>
         <source>Click to make this window moveable.</source>
-        <translation>Klicken Sie hier um das Fenster verschiebbar zu machen.</translation>
+        <translation>Klicken Sie hier, um das Fenster verschiebbar zu machen.</translation>
     </message>
     <message>
         <source>Click to make this window use all available screen area.</source>
-        <translation>Klicken sie hier um das Fenster zu maximieren.</translation>
+        <translation>Klicken sie hier, um das Fenster zu maximieren.</translation>
     </message>
 </context>
 <context>
@@ -870,7 +871,7 @@ zur Einstellung der Zeitzonen.</translation>
     <name>TimerReceiverObject</name>
     <message>
         <source>Out of Space</source>
-        <translation>Kein Speicher vorhande</translation>
+        <translation>Kein Speicher vorhanden</translation>
     </message>
     <message>
         <source>Unable to schedule alarm.

@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>ConfigDlg</name>
     <message>
@@ -7,7 +8,7 @@
     </message>
     <message>
         <source>General Settings</source>
-        <translation>Allgemeine Einstallungen</translation>
+        <translation>Allgemeine Einstellungen</translation>
     </message>
     <message>
         <source>Keymap File</source>
@@ -31,7 +32,7 @@
     </message>
     <message>
         <source>Key Repeat</source>
-        <translation>Taskenwiederholung</translation>
+        <translation>Tastenwiederholung</translation>
     </message>
     <message>
         <source>Colors</source>

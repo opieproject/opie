@@ -1,49 +1,51 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>ObexDlg</name>
     <message>
         <source>OBEX Sending</source>
-        <translation type="unfinished"></translation>
+        <translation>OBEX Übertragung</translation>
     </message>
     <message>
         <source>Sending:</source>
-        <translation type="unfinished"></translation>
+        <translation>Versende: </translation>
     </message>
     <message>
         <source>filename</source>
-        <translation type="unfinished"></translation>
+        <translation>Dateiname</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Abbrechen</translation>
     </message>
 </context>
 <context>
     <name>ObexInc</name>
     <message>
         <source>OBEX Receiving</source>
-        <translation type="unfinished"></translation>
+        <translation>OBEX Emfang</translation>
     </message>
     <message>
         <source>TextLabel1</source>
-        <translation type="unfinished"></translation>
+        <translation>Textlabel1</translation>
     </message>
     <message>
         <source>Filename</source>
-        <translation type="unfinished"></translation>
+        <translation>Dateiname</translation>
     </message>
     <message>
         <source>A file was beamed 
 to you.</source>
-        <translation type="unfinished"></translation>
+        <translation>Eine Datei wurde Ihnen 
+zugesendet.</translation>
     </message>
     <message>
         <source>Insert</source>
-        <translation type="unfinished"></translation>
+        <translation>Einfügen</translation>
     </message>
     <message>
         <source>Reject</source>
-        <translation type="unfinished"></translation>
+        <translation>Ablehnen</translation>
     </message>
 </context>
 </TS>

@@ -4,11 +4,11 @@
     <name>Styles</name>
     <message>
         <source>Themed style</source>
-        <translation type="unfinished">Schema</translation>
+        <translation>Schema</translation>
     </message>
     <message>
         <source>KDE2 theme compatible style engine</source>
-        <translation type="unfinished"></translation>
+        <translation>KDE2-Themes kompatible Stil-Engine</translation>
     </message>
 </context>
 <context>

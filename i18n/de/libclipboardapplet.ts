@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>ClipboardApplet</name>
     <message>
@@ -11,7 +12,7 @@
     </message>
     <message>
         <source>Paste</source>
-        <translation>Einf&uuml;gen</translation>
+        <translation>Einfügen</translation>
     </message>
 </context>
 </TS>

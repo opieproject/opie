@@ -1,150 +1,151 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>HandwritingHelp</name>
     <message>
         <source>Handwriting Help</source>
-        <translation type="unfinished"></translation>
+        <translation>HAndschrifthilfe</translation>
     </message>
     <message>
         <source>&lt;ul&gt;&lt;li&gt;When you start to use the handwriting recogniser write slowly, accurately and firmly.&lt;li&gt;Use the guide lines when drawing your characters.&lt;li&gt;When drawing a character with multiple strokes, each successive stroke must be drawn before the grayed strokes are erased.&lt;li&gt;Practice your handwriting using the handwriting trainer.&lt;li&gt;When adding your own character templates make sure they are sufficiently different from other characters&apos; templates.&lt;/ul&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;ul&gt;&lt;li&gt;Wenn Sie damit beginnen dis Handschrifterkennung zu verwenden schreiben Sie bitte langsam, schön und korrekt.&lt;li&gt;Benutzen Sie die Hinweise wenn Sie Ihre Buchstaben zeichnen.&lt;li&gt;Beim Zeichnen von Buchstaben mit mehreren Strichen  muss jeder folgende Strich gezeichnet werden, bevor die grau gestellten Striche gelöscht werden.&lt;li&gt;Üben Sie die Handschrifterkennung durch Benutzung des Handschriftentrainers.&lt;li&gt;Wenn Sie eigene Zeichen in das Erkennungssystem hinzufügen sollten Sie sich versichern dass sie sich von anderen Zeichen deutlich unterscheiden.&lt;li&gt; Haben Sie ein oder mehere neue Zeichen hinzugefügt, kann es unter Umständen mehrere Minuten dauern, bis die Handschrifterkennung alle Änderungen verarbeitet hat. OPIE erweckt in dieser ZEit den Eindruck, als ob es blockiert wäre. Dies ist normal.&lt;/ul&gt;</translation>
     </message>
     <message>
         <source>Tips</source>
-        <translation type="unfinished"></translation>
+        <translation>Hinweise</translation>
     </message>
     <message>
         <source>Trainer</source>
-        <translation type="unfinished"></translation>
+        <translation>Trainer</translation>
     </message>
 </context>
 <context>
     <name>HandwritingTrainer</name>
     <message>
         <source>Matched: </source>
-        <translation type="unfinished"></translation>
+        <translation>Passend: </translation>
     </message>
     <message>
         <source>Similar to: </source>
-        <translation type="unfinished"></translation>
+        <translation>Ähnlichkeit mit: </translation>
     </message>
     <message>
         <source>%1%</source>
-        <translation type="unfinished"></translation>
+        <translation>%1%</translation>
     </message>
     <message>
         <source>Select a reference character from the list.  Practice writing in the area on the right.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählen Sie ein Referenzzeichen aus der Liste. Üben Sie Schreiben im Bereich rechts davon.</translation>
     </message>
     <message>
         <source>No match</source>
-        <translation type="unfinished"></translation>
+        <translation>Nichts Passendes gefunden</translation>
     </message>
 </context>
 <context>
     <name>InputMethods</name>
     <message>
         <source>Handwriting</source>
-        <translation type="unfinished"></translation>
+        <translation>Handschrift</translation>
     </message>
 </context>
 <context>
     <name>QIMPenEdit</name>
     <message>
         <source>New...</source>
-        <translation type="unfinished"></translation>
+        <translation>Neu...</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Neu</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Entfernen</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Voreinstellugn</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Löschen</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Abbrechen</translation>
     </message>
 </context>
 <context>
     <name>QIMPenInput</name>
     <message>
         <source>Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Abkürzung</translation>
     </message>
 </context>
 <context>
     <name>QIMPenInputCharDlg</name>
     <message>
         <source>Enter new character</source>
-        <translation type="unfinished"></translation>
+        <translation>Geben Sie ein neues Zeichen ein</translation>
     </message>
     <message>
         <source>Character:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeichen: </translation>
     </message>
 </context>
 <context>
     <name>QIMPenPrefBase</name>
     <message>
         <source>Multi-stroke character timeout:</source>
-        <translation type="unfinished"></translation>
+        <translation>Mehrstrich-Zeichen Timeout: </translation>
     </message>
     <message>
         <source>ms</source>
-        <translation type="unfinished"></translation>
+        <translation>ms</translation>
     </message>
     <message>
         <source>Input areas displayed</source>
-        <translation type="unfinished"></translation>
+        <translation>Angezeigte Eingabebereiche</translation>
     </message>
     <message>
         <source>Upper and lower case areas</source>
-        <translation type="unfinished"></translation>
+        <translation>Groß- und Kleinschriftbereiche</translation>
     </message>
     <message>
         <source>Lower case (toggle Upper case)</source>
-        <translation type="unfinished"></translation>
+        <translation>Kleinschrift (wechselt mit Großschrift)</translation>
     </message>
 </context>
 <context>
     <name>QIMPenSetup</name>
     <message>
         <source>Setup Handwriting Input</source>
-        <translation type="unfinished"></translation>
+        <translation>Handschrifteingabe einstellen</translation>
     </message>
     <message>
         <source>Character Profile:</source>
-        <translation type="unfinished"></translation>
+        <translation>Buchstabenprofil: </translation>
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <source>Customize</source>
-        <translation type="unfinished"></translation>
+        <translation>Anpassen</translation>
     </message>
     <message>
         <source>%1 ms</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 ms </translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Speicher mehr</translation>
     </message>
     <message>
         <source>Unable to save information.
@@ -152,7 +153,11 @@ Free up some space
 and try again.
 
 Quit anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Informationen konnten 
+nicht gespeichert werden.
+Bitte räumen Sie Speicher frei
+und versuchen Sie es erneut.
+Trotzdem beenden?</translation>
     </message>
 </context>
 </TS>

@@ -1,36 +1,37 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>NetMonitor</name>
     <message>
         <source>Network Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Netzwork offline</translation>
     </message>
     <message>
         <source>Disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht verbunden</translation>
     </message>
     <message>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbinde</translation>
     </message>
 </context>
 <context>
     <name>NetPassword</name>
     <message>
         <source>Network Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort Netzwerk</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbinde</translation>
     </message>
     <message>
         <source>Enter password for %1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort für %1: </translation>
     </message>
 </context>
 </TS>

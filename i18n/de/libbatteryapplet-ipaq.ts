@@ -52,11 +52,11 @@
     </message>
     <message>
         <source>On backup power</source>
-        <translation type="unfinished"></translation>
+        <translation>Ersatzversorgung</translation>
     </message>
     <message>
         <source>Power on-line</source>
-        <translation type="unfinished"></translation>
+        <translation>Netzbetrieb</translation>
     </message>
     <message>
         <source>External power disconnected</source>

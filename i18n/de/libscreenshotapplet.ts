@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>ScreenshotControl</name>
     <message>
@@ -7,7 +8,7 @@
     </message>
     <message>
         <source>Delay</source>
-        <translation>Verz&oulm;gerung</translation>
+        <translation>Verzögerung</translation>
     </message>
     <message>
         <source>sec</source>
@@ -15,7 +16,7 @@
     </message>
     <message>
         <source>Save named</source>
-        <translation>Speichern</translation>
+        <translation>Speichern m. Namen</translation>
     </message>
     <message>
         <source>Save screenshot as...</source>
@@ -35,7 +36,7 @@
     </message>
     <message>
         <source>Screenshot was uploaded to %1</source>
-        <translation>Screeshot wurde nach %1 gesendet</translation>
+        <translation>Screenshot wurde nach %1 gesendet</translation>
     </message>
     <message>
         <source>Error</source>
