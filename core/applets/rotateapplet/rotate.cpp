@@ -138,9 +138,9 @@ void RotateApplet::rotateDefault ( )
     Config cfg( "qpe" );
     cfg.setGroup( "Appearance" );
 
-    bool rotateDisabled = cfg.readBoolEntry( "rotateEnabled",false );
+    bool rotateEnabled = cfg.readBoolEntry( "rotateEnabled",true );
 
-    if (rotateDisabled == true)
+    if (rotateEnabled == false)
 		return;
 
     // hide inputs methods before rotation
