@@ -111,8 +111,7 @@ public:
     // other
     void setNotes( const QString &v ) { replace( Qtopia::Notes, v); }
 
-    bool match( const QString &regexp ) const;
-    bool match( const QRegExp &regexp ) const;
+    virtual bool match( const QRegExp &regexp ) const;
 
 //     // custom
 //     void setCustomField( const QString &key, const QString &v )

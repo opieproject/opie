@@ -185,6 +185,10 @@ QArray<int> OTodoAccessVCal::allRecords()const {
     }
     return ar;
 }
+QArray<int> OTodoAccessVCal::matchRegexp(const QRegExp &r)const {
+    QArray<int> ar(0);
+    return ar;
+}
 QArray<int> OTodoAccessVCal::queryByExample( const OTodo&, int, const QDateTime& ) {
     QArray<int> ar(0);
     return ar;

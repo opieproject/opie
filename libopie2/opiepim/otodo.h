@@ -258,7 +258,7 @@ public:
     bool isOverdue();
 
 
-    bool match( const QRegExp &r )const;
+    virtual bool match( const QRegExp &r )const;
 
     bool operator<(const OTodo &toDoEvent )const;
     bool operator<=(const OTodo &toDoEvent )const;

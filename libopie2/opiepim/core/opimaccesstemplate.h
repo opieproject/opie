@@ -69,6 +69,12 @@ public:
      * you can iterate over them
      */
     virtual List allRecords()const;
+ 
+     /** 
+     * return a List of records
+     * that match the regex
+     */
+    virtual List matchRegexp(  const QRegExp &r ) const;   
 
     /**
      * queryByExample.
@@ -177,6 +183,12 @@ bool OPimAccessTemplate<T>::save() {
 template <class T>
 typename OPimAccessTemplate<T>::List OPimAccessTemplate<T>::allRecords()const {
     QArray<int> ints = m_backEnd->allRecords();
+    List lis(ints, this );
+    return lis;
+}
+template <class T>
+typename OPimAccessTemplate<T>::List OPimAccessTemplate<T>::matchRegexp( const QRegExp &r )const {
+    QArray<int> ints = m_backEnd->matchRegexp( r );
     List lis(ints, this );
     return lis;
 }

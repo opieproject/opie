@@ -13,11 +13,15 @@
  * =====================================================================
  * ToDo: Define enum for query settings
  * =====================================================================
- * Version: $Id: ocontactaccess.h,v 1.7 2003-04-13 18:07:10 zecke Exp $
+ * Version: $Id: ocontactaccess.h,v 1.8 2003-05-08 13:55:09 tille Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccess.h,v $
- * Revision 1.7  2003-04-13 18:07:10  zecke
+ * Revision 1.8  2003-05-08 13:55:09  tille
+ * search stuff
+ * and match, toRichText & toShortText in oevent
+ *
+ * Revision 1.7  2003/04/13 18:07:10  zecke
  * More API doc
  * QString -> const QString&
  * QString = 0l -> QString::null
@@ -109,8 +113,6 @@ class OContactAccess: public QObject, public OPimAccessTemplate<OContact>
 		DateDay    = 0x0100, // The day matches
 	};
 
-
-	ORecordList<OContact> matchRegexp(  const QRegExp &r )const;
 
 	/** Return all Contacts in a sorted manner.
 	 *  @param ascending true: Sorted in acending order.

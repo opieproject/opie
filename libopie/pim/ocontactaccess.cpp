@@ -17,11 +17,15 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccess.cpp,v 1.7 2002-11-13 14:14:51 eilers Exp $
+ * Version: $Id: ocontactaccess.cpp,v 1.8 2003-05-08 13:55:09 tille Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccess.cpp,v $
- * Revision 1.7  2002-11-13 14:14:51  eilers
+ * Revision 1.8  2003-05-08 13:55:09  tille
+ * search stuff
+ * and match, toRichText & toShortText in oevent
+ *
+ * Revision 1.7  2002/11/13 14:14:51  eilers
  * Added sorted for Contacts..
  *
  * Revision 1.6  2002/11/01 15:10:42  eilers
@@ -73,7 +77,7 @@ OContactAccess::OContactAccess ( const QString appname, const QString ,
 			 OContactAccessBackend* end, bool autosync ):
 	OPimAccessTemplate<OContact>( end )
 {
-        /* take care of the backend. If there is no one defined, we 
+        /* take care of the backend. If there is no one defined, we
 	 * will use the XML-Backend as default (until we have a cute SQL-Backend..).
 	 */
         if( end == 0 ) {
@@ -83,7 +87,7 @@ OContactAccess::OContactAccess ( const QString appname, const QString ,
 	// Set backend locally and in template
         m_backEnd = end;
 	OPimAccessTemplate<OContact>::setBackEnd (end);
-	
+
 
 	/* Connect signal of external db change to function */
 	QCopChannel *dbchannel = new QCopChannel( "QPE/PIM", this );
@@ -124,11 +128,6 @@ bool OContactAccess::save ()
 	QCopEnvelope e( "QPE/PIM", "addressbookUpdated()" );
 
 	return true;
-}
-
-ORecordList<OContact> OContactAccess::matchRegexp(  const QRegExp &r ) const{
-	QArray<int> matchingContacts = m_backEnd -> matchRegexp( r );
-	return ( ORecordList<OContact>(matchingContacts, this) );
 }
 
 const uint OContactAccess::querySettings()

@@ -113,7 +113,7 @@ public:
     QString timeZone()const;
 
 
-    bool match( const QRegExp& )const;
+    virtual bool match( const QRegExp& )const;
 
     /** For exception to recurrence here is a list of children...  */
     QArray<int> children()const;

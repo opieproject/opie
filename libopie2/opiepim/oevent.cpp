@@ -2,6 +2,7 @@
 
 #include <qpe/palmtopuidgen.h>
 #include <qpe/categories.h>
+#include <qpe/stringutil.h>
 
 #include "orecur.h"
 #include "opimresolver.h"
@@ -210,16 +211,46 @@ QString OEvent::timeZone()const {
     if (data->isAllDay ) return QString::fromLatin1("UTC");
     return data->timezone;
 }
-bool OEvent::match( const QRegExp& )const {
-    // FIXME
+bool OEvent::match( const QRegExp& re )const {
+    if (data->description.contains( re )  )
+        return true;
+    if ( data->note.contains( re )  )
+        return true;
+    if ( data->location.contains( re )  )
+        return true;
+    if ( data->start.toString().contains( re )  )
+        return true;
+    if ( data->end.toString().contains( re )  )
+        return true;
     return false;
 }
 QString OEvent::toRichText()const {
-    // FIXME
-    return "OEvent test";
+    QString text;
+    if ( !description().isEmpty() ) {
+        text += "<b>" + QObject::tr( "Description:") + "</b><br>";
+        text += Qtopia::escapeString(description() ).
+                replace(QRegExp( "[\n]"),  "<br>" ) + "<br>";
+    }
+    if ( startDateTime().isValid() ) {
+        text += "<b>" + QObject::tr( "Start:") + "</b> ";
+        text += Qtopia::escapeString(startDateTime().toString() ).
+                replace(QRegExp( "[\n]"),  "<br>" ) + "<br>";
+    }
+    if ( endDateTime().isValid() ) {
+        text += "<b>" + QObject::tr( "End:") + "</b> ";
+        text += Qtopia::escapeString(endDateTime().toString() ).
+                replace(QRegExp( "[\n]"),  "<br>" ) + "<br>";
+    }
+    if ( !note().isEmpty() ) {
+        text += "<b>" + QObject::tr( "Note:") + "</b><br>";
+        text += note();
+//         text += Qtopia::escapeString(note() ).
+//                 replace(QRegExp( "[\n]"),  "<br>" ) + "<br>";
+    }
+    return text;
 }
 QString OEvent::toShortText()const {
-    return "OEvent shotText";
+    return description();
 }
 QString OEvent::type()const {
     return QString::fromLatin1("OEvent");

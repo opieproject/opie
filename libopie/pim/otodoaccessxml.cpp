@@ -774,3 +774,19 @@ QBitArray OTodoAccessXML::sup() {
 
     return ar;
 }
+QArray<int> OTodoAccessXML::matchRegexp(  const QRegExp &r ) const
+{
+	QArray<int> m_currentQuery( m_events.count() );
+	uint arraycounter = 0;
+
+        QMap<int, OTodo>::ConstIterator it;
+        for (it = m_events.begin(); it != m_events.end(); ++it ) {
+		if ( it.data().match( r ) )
+			m_currentQuery[arraycounter++] = it.data().uid();
+
+	}
+	// Shrink to fit..
+	m_currentQuery.resize(arraycounter);
+
+	return m_currentQuery;
+}

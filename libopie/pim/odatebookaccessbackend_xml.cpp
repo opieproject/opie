@@ -586,3 +586,21 @@ void ODateBookAccessBackend_XML::setField( OEvent& e, int id, const QString& val
         break;
     }
 }
+QArray<int> ODateBookAccessBackend_XML::matchRegexp(  const QRegExp &r ) const
+{
+    QArray<int> m_currentQuery( m_raw.count()+ m_rep.count() );
+    uint arraycounter = 0;
+    QMap<int, OEvent>::ConstIterator it;
+
+    for ( it = m_raw.begin(); it != m_raw.end(); ++it )
+        if ( it.data().match( r ) )
+            m_currentQuery[arraycounter++] = it.data().uid();
+    for ( it = m_rep.begin(); it != m_rep.end(); ++it )
+        if ( it.data().match( r ) )
+            m_currentQuery[arraycounter++] = it.data().uid();
+
+    // Shrink to fit..
+    m_currentQuery.resize(arraycounter);
+
+    return m_currentQuery;
+}

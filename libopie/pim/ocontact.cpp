@@ -947,15 +947,6 @@ void OContact::setChildren( const QString &str )
 }
 
 /*!
-  Returns TRUE if the contact matches the regular expression \a regexp.
-  Otherwise returns FALSE.
-*/
-bool OContact::match( const QString &regexp ) const
-{
-    return match(QRegExp(regexp));
-}
-
-/*!
   \overload
   Returns TRUE if the contact matches the regular expression \a regexp.
   Otherwise returns FALSE.

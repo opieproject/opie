@@ -22,6 +22,7 @@ public:
     bool save();
 
     QArray<int> allRecords()const;
+    QArray<int> matchRegexp(const QRegExp &r) const;
     QArray<int> queryByExample( const OEvent&, int, const QDateTime& d = QDateTime() );
     OEvent find( int uid )const;
     void clear();

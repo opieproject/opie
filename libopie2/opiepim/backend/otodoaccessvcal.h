@@ -13,6 +13,7 @@ public:
     bool save();
 
     QArray<int> allRecords()const;
+    QArray<int> matchRegexp(const QRegExp &r) const;
     QArray<int> queryByExample( const OTodo& t, int sort, const QDateTime& d = QDateTime() );
     QArray<int> effectiveToDos( const QDate& start,
                                 const QDate& end,

@@ -46,6 +46,12 @@ public:
      */
     virtual QArray<int> allRecords()const = 0;
 
+     /** 
+     * return a List of records
+     * that match the regex
+     */
+     virtual QArray<int> matchRegexp(const QRegExp &r) const = 0;
+
     /**
      * queryByExample for T with the given Settings
      * 

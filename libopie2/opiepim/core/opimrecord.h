@@ -73,6 +73,12 @@ public:
     virtual QString type()const = 0;
 
     /**
+     * matches the Records the regular expression?
+     */
+    virtual bool match( const QString &regexp ) const {return match(QRegExp(regexp));};
+    virtual bool match( const QRegExp &regexp ) const = 0;
+
+    /**
      * converts the internal structure to a map
      */
     virtual QMap<int, QString> toMap()const = 0;

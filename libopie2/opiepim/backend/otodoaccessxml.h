@@ -24,6 +24,7 @@ public:
     bool save();
 
     QArray<int> allRecords()const;
+    QArray<int> matchRegexp(const QRegExp &r) const;
     QArray<int> queryByExample( const OTodo&, int querysettings, const QDateTime& d = QDateTime() );
     OTodo find( int uid )const;
     void clear();
