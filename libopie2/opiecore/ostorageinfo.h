@@ -37,13 +37,26 @@ class OStorageInfo : public StorageInfo
   Q_OBJECT
 
   public:
-public:
+
     OStorageInfo( QObject *parent=0 );
     ~OStorageInfo();
 
-    QString cfPath()const;
-    QString sdPath()const;
-    QString mmcPath()const;
+   /**
+    * @returns the mount path of the CF (Compact Flash) card
+    *
+    **/
+    QString cfPath() const;
+   /**
+    * @returns the mount path of the SD (Secure Digital) card
+    *
+    **/
+    QString sdPath() const;
+   /**
+    * @returns the mount path of the MMC (MultiMedia) card
+    *
+    **/
+    QString mmcPath() const;
 };
 
 #endif // OSTORAGE_H
+

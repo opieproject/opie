@@ -1,7 +1,7 @@
 /*
                              This file is part of the Opie Project
                              Copyright (C) 2004 Andreas 'ar' Richter <ar@oszine.de>
-              =.
+             =.
             .=l.
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
@@ -53,10 +53,6 @@ QString OStorageInfo::cfPath()const
     return r;
 }
 
-/*!
-* @brief returns the Mount-Path of Sd Card
-*
-*/
 QString OStorageInfo::sdPath()const
 {
     QString r = "";
@@ -72,10 +68,6 @@ QString OStorageInfo::sdPath()const
     return r;
 }
 
-/*!
-* @brief returns the Mount-Path of Mmc Card
-*
-*/
 QString OStorageInfo::mmcPath()const
 {
     QString r = "";
@@ -90,3 +82,4 @@ QString OStorageInfo::mmcPath()const
     }
     return r;
 }
+
