@@ -1,29 +1,57 @@
 #include "metal.h"
+#include "plugin.h"
 
 
-extern "C" {
-    QStyle* allocate ( );
-    int minor_version ( );
-    int major_version ( );
-    const char *description ( );
-}
-
-QStyle* allocate ( )
+MetalInterface::MetalInterface ( ) :  ref ( 0 )
 {
-    return new MetalStyle ( );
+}
+    
+MetalInterface::~MetalInterface ( )
+{
+}
+        
+QStyle *MetalInterface::create ( )
+{
+	return new MetalStyle ( );
 }
 
-int minor_version ( )
+QString MetalInterface::name ( )
 {
-    return 0;
+	return QObject::tr( "Metal", "name" );
 }
 
-int major_version ( )
+QString MetalInterface::description ( )
 {
-    return 1;
+	return QObject::tr( "Metal style", "description" );
 }
 
-const char *description ( )
+QCString MetalInterface::key ( )
 {
-    return "Metal style plugin";
+	return QCString ( "metal" );
 }
+
+unsigned int MetalInterface::version ( )
+{
+	return 100; // 1.0.0 (\d+.\d.\d)
+}
+
+QRESULT MetalInterface::queryInterface ( const QUuid &uuid, QUnknownInterface **iface )
+{
+	*iface = 0;
+	
+	if ( uuid == IID_QUnknown )
+		*iface = this;
+	else if ( uuid == IID_Style )
+		*iface = this;
+	
+	if ( *iface )
+		(*iface)-> addRef ( );
+		
+	return QS_OK;
+}
+
+Q_EXPORT_INTERFACE()
+{
+	Q_CREATE_INSTANCE( MetalInterface )
+}
+

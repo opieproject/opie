@@ -1,4 +1,4 @@
-Files: plugins/styles/libtheme.so* bin/theme-settings apps/Settings/Theme.desktop pics/theme/Theme.png
+Files: plugins/styles/libtheme.so*
 Priority: optional
 Section: opie/system
 Maintainer: Robert Griebl <sandman@handhelds.org>

@@ -21,7 +21,7 @@
 
 
 #include "liquidset.h"
-#include "../liquid.h"
+#include "liquid.h"
 
 #include <qpe/qpeapplication.h>
 #include <qpe/global.h>
@@ -57,8 +57,8 @@ static void changeButtonColor ( QWidget *btn, const QColor &col )
 }
 
 
-LiquidSet::LiquidSet ( QWidget* parent, const char *name, WFlags fl )
-		: QDialog ( parent, name, fl )
+LiquidSettings::LiquidSettings ( QWidget* parent, const char *name, WFlags fl )
+		: QWidget ( parent, name, fl )
 {
 	setCaption ( tr( "Liquid Style" ) );
 	
@@ -122,7 +122,7 @@ LiquidSet::LiquidSet ( QWidget* parent, const char *name, WFlags fl )
 
 	QPopupMenu *popup;
 
-	popup = new ColorPopupMenu ( m_menucol, this );
+	popup = new ColorPopupMenu ( m_menucol, 0 );
 	m_menubtn-> setPopup ( popup );
 	m_menubtn-> setPopupDelay ( 0 );
 	connect ( popup, SIGNAL( colorSelected ( const QColor & )), this, SLOT( changeMenuColor ( const QColor & )));
@@ -131,7 +131,7 @@ LiquidSet::LiquidSet ( QWidget* parent, const char *name, WFlags fl )
 	m_textbtn = new QToolButton ( this );
 	grid-> addWidget ( m_textbtn, 0, 5 );
 
-	popup = new ColorPopupMenu ( m_textcol, this );
+	popup = new ColorPopupMenu ( m_textcol, 0 );
 	m_textbtn-> setPopup ( popup );
 	m_textbtn-> setPopupDelay ( 0 );
 	connect ( popup, SIGNAL( colorSelected ( const QColor & )), this, SLOT( changeTextColor ( const QColor & )));
@@ -176,7 +176,7 @@ LiquidSet::LiquidSet ( QWidget* parent, const char *name, WFlags fl )
 	connect ( windeco, SIGNAL( toggled ( bool ) ), this, SLOT( changeDeco ( bool ) ) );
 }
 
-void LiquidSet::changeType ( int t )
+void LiquidSettings::changeType ( int t )
 {
 	bool custom = ( t == Custom );
 	
@@ -190,30 +190,30 @@ void LiquidSet::changeType ( int t )
 	m_type = t;
 }
 
-void LiquidSet::changeMenuColor ( const QColor &col )
+void LiquidSettings::changeMenuColor ( const QColor &col )
 {
 	changeButtonColor ( m_menubtn, col );
 	m_menucol = col;
 }
 
-void LiquidSet::changeTextColor ( const QColor &col )
+void LiquidSettings::changeTextColor ( const QColor &col )
 {
 	changeButtonColor ( m_textbtn, col );
 	m_textcol = col;
 }
 
-void LiquidSet::changeShadow ( bool b )
+void LiquidSettings::changeShadow ( bool b )
 {
 	m_shadow = b;
 }
 
-void LiquidSet::changeDeco ( bool b )
+void LiquidSettings::changeDeco ( bool b )
 {
 	m_deco = b;
 }
 
 
-void LiquidSet::accept ( )
+bool LiquidSettings::writeConfig ( )
 {
 	Config config ( "qpe" );
     config. setGroup ( "Liquid-Style" );
@@ -227,8 +227,6 @@ void LiquidSet::accept ( )
 	config. writeEntry ( "StippleContrast", m_contsld-> value ( ));
 	config. write ( );
 
-	Global::applyStyle ( );
-
-	QDialog::accept ( );
+	return true;
 }
 

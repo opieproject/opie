@@ -8,11 +8,11 @@ class QLabel;
 class QToolButton;
 class QSlider;
 
-class LiquidSet : public QDialog {
+class LiquidSettings : public QWidget {
 	Q_OBJECT
 	
 public:
-	LiquidSet ( QWidget *parent = 0, const char *name = 0, WFlags fl = 0 );
+	LiquidSettings ( QWidget *parent = 0, const char *name = 0, WFlags fl = 0 );
 
 public slots:
 	void changeType ( int t );
@@ -21,8 +21,7 @@ public slots:
 	void changeShadow ( bool b );
 	void changeDeco ( bool b );
 
-protected:
-	virtual void accept ( );
+	virtual bool writeConfig ( );
 	
 private:
 	QColor m_menucol;

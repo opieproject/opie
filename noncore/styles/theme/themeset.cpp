@@ -59,8 +59,8 @@ public:
 };
 
 
-ThemeSet::ThemeSet ( QWidget* parent, const char *name, WFlags fl )
-		: QDialog ( parent, name, fl )
+ThemeSettings::ThemeSettings ( QWidget* parent, const char *name, WFlags fl )
+		: QWidget ( parent, name, fl )
 {
 	setCaption ( tr( "Theme Style" ) );
 	
@@ -109,16 +109,15 @@ ThemeSet::ThemeSet ( QWidget* parent, const char *name, WFlags fl )
 	}
 }
 
-void ThemeSet::accept ( )
+bool ThemeSettings::writeConfig ( )
 {
 	Config config ( "qpe" );
     config. setGroup ( "Appearance" );
 
 	MyItem *it = (MyItem *) m_list-> selectedItem ( );
 	config. writeEntry ( "Theme", it ? it-> m_theme : QString ( "" ));
+	config. write ( );
 
-	Global::applyStyle ( );
-
-	QDialog::accept ( );
+	return true;
 }
 
