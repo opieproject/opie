@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000 Trolltech AS.  All rights reserved.
 **
-** This file is part of the Qtopia Environment.
+** This file is part of Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -60,7 +60,7 @@ static const int numButtons = (sizeof(audioButtons)/sizeof(MediaButton));
 AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
     QWidget( parent, name, f )
 {
-    setCaption( tr("MediaPlayer") );
+    setCaption( tr("OpiePlayer") );
     setBackgroundPixmap( Resource::loadPixmap( "mpegplayer/metalFinish" ) );
     pixmaps[0] = new QPixmap( Resource::loadPixmap( "mpegplayer/mediaButtonsAll" ) );
     pixmaps[1] = new QPixmap( Resource::loadPixmap( "mpegplayer/mediaButtonsBig" ) );
@@ -103,7 +103,7 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
 
 AudioWidget::~AudioWidget() {
     for ( int i = 0; i < 4; i++ )
-	delete pixmaps[i];
+  delete pixmaps[i];
 }
 
 
@@ -118,7 +118,7 @@ void AudioWidget::sliderPressed() {
 void AudioWidget::sliderReleased() {
     audioSliderBeingMoved = FALSE;
     if ( slider->width() == 0 )
-	return;
+  return;
     long val = long((double)slider->value() * mediaPlayerState->length() / slider->width());
     mediaPlayerState->setPosition( val );
 }
@@ -136,34 +136,34 @@ void AudioWidget::setLength( long max ) {
 
 void AudioWidget::setView( char view ) {
     if ( view == 'a' ) {
-	startTimer( 150 );
-	showMaximized();
+  startTimer( 150 );
+  showMaximized();
     } else {
-	killTimers();
-	hide();
+  killTimers();
+  hide();
     }
 }
 
 
 void AudioWidget::updateSlider( long i, long max ) {
     if ( max == 0 )
-	return;
+  return;
     // Will flicker too much if we don't do this
     // Scale to something reasonable 
     int width = slider->width();
     int val = int((double)i * width / max);
     if ( !audioSliderBeingMoved ) {
-	if ( slider->value() != val )
-	    slider->setValue( val );
-	if ( slider->maxValue() != width )
-	    slider->setMaxValue( width );
+  if ( slider->value() != val )
+      slider->setValue( val );
+  if ( slider->maxValue() != width )
+      slider->setMaxValue( width );
     }
 }
 
 
 void AudioWidget::setToggleButton( int i, bool down ) {
     if ( down != audioButtons[i].isDown )
-	toggleButton( i );
+  toggleButton( i );
 }
 
 
@@ -187,61 +187,61 @@ void AudioWidget::paintButton( QPainter *p, int i ) {
 void AudioWidget::timerEvent( QTimerEvent * ) {
     static int frame = 0;
     if ( !mediaPlayerState->paused() && audioButtons[ AudioPlay ].isDown ) {
-	frame = frame >= 7 ? 0 : frame + 1;
-	int x = audioButtons[AudioPlay].xPos;
-	int y = audioButtons[AudioPlay].yPos;
-	QPainter p( this );
-	// Optimize to only draw the little bit of the changing images which is different
-	p.drawPixmap( x + 14, y +  8, *pixmaps[3], 32 * frame, 0, 32, 32 );
-	p.drawPixmap( x + 37, y + 37, *pixmaps[2], 18 * AudioPlay, 0, 6, 3 );
+  frame = frame >= 7 ? 0 : frame + 1;
+  int x = audioButtons[AudioPlay].xPos;
+  int y = audioButtons[AudioPlay].yPos;
+  QPainter p( this );
+  // Optimize to only draw the little bit of the changing images which is different
+  p.drawPixmap( x + 14, y +  8, *pixmaps[3], 32 * frame, 0, 32, 32 );
+  p.drawPixmap( x + 37, y + 37, *pixmaps[2], 18 * AudioPlay, 0, 6, 3 );
     }
 }
 
 
 void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
     for ( int i = 0; i < numButtons; i++ ) {
-	int size = audioButtons[i].isBig;
-	int x = audioButtons[i].xPos;
-	int y = audioButtons[i].yPos;
-	if ( event->state() == QMouseEvent::LeftButton ) {
-	    // The test to see if the mouse click is inside the circular button or not
-	    // (compared with the radius squared to avoid a square-root of our distance)
-	    int radius = 32 + 13 * size;
-	    QPoint center = QPoint( x + radius, y + radius );
-	    QPoint dXY = center - event->pos();
-	    int dist = dXY.x() * dXY.x() + dXY.y() * dXY.y();
-	    bool isOnButton = dist <= (radius * radius);
-//	    QRect r( x, y, 64 + 22*size, 64 + 22*size );
-//	    bool isOnButton = r.contains( event->pos() ); // Rectangular Button code
-	    if ( isOnButton && !audioButtons[i].isHeld ) {
-		audioButtons[i].isHeld = TRUE;
-		toggleButton(i);
-		switch (i) {
+  int size = audioButtons[i].isBig;
+  int x = audioButtons[i].xPos;
+  int y = audioButtons[i].yPos;
+  if ( event->state() == QMouseEvent::LeftButton ) {
+      // The test to see if the mouse click is inside the circular button or not
+      // (compared with the radius squared to avoid a square-root of our distance)
+      int radius = 32 + 13 * size;
+      QPoint center = QPoint( x + radius, y + radius );
+      QPoint dXY = center - event->pos();
+      int dist = dXY.x() * dXY.x() + dXY.y() * dXY.y();
+      bool isOnButton = dist <= (radius * radius);
+//      QRect r( x, y, 64 + 22*size, 64 + 22*size );
+//      bool isOnButton = r.contains( event->pos() ); // Rectangular Button code
+      if ( isOnButton && !audioButtons[i].isHeld ) {
+    audioButtons[i].isHeld = TRUE;
+    toggleButton(i);
+    switch (i) {
                     case AudioVolumeUp:   emit moreClicked(); return;
                     case AudioVolumeDown: emit lessClicked(); return;
-		}
-	    } else if ( !isOnButton && audioButtons[i].isHeld ) {
-		audioButtons[i].isHeld = FALSE;
-		toggleButton(i);
-	    }
-	} else {
-	    if ( audioButtons[i].isHeld ) {
-		audioButtons[i].isHeld = FALSE;
-		if ( !audioButtons[i].isToggle )
-		    setToggleButton( i, FALSE );
-		switch (i) {
-		    case AudioPlay:       mediaPlayerState->setPlaying(audioButtons[i].isDown); return;
-		    case AudioStop:       mediaPlayerState->setPlaying(FALSE); return;
-		    case AudioPause:      mediaPlayerState->setPaused(audioButtons[i].isDown); return;
-		    case AudioNext:       mediaPlayerState->setNext(); return;
-		    case AudioPrevious:   mediaPlayerState->setPrev(); return;
-		    case AudioLoop:       mediaPlayerState->setLooping(audioButtons[i].isDown); return;
-		    case AudioVolumeUp:   emit moreReleased(); return;
-		    case AudioVolumeDown: emit lessReleased(); return;
-		    case AudioPlayList:   mediaPlayerState->setList();  return;
-		}
-	    }
-	}
+    }
+      } else if ( !isOnButton && audioButtons[i].isHeld ) {
+    audioButtons[i].isHeld = FALSE;
+    toggleButton(i);
+      }
+  } else {
+      if ( audioButtons[i].isHeld ) {
+    audioButtons[i].isHeld = FALSE;
+    if ( !audioButtons[i].isToggle )
+        setToggleButton( i, FALSE );
+    switch (i) {
+        case AudioPlay:       mediaPlayerState->setPlaying(audioButtons[i].isDown); return;
+        case AudioStop:       mediaPlayerState->setPlaying(FALSE); return;
+        case AudioPause:      mediaPlayerState->setPaused(audioButtons[i].isDown); return;
+        case AudioNext:       mediaPlayerState->setNext(); return;
+        case AudioPrevious:   mediaPlayerState->setPrev(); return;
+        case AudioLoop:       mediaPlayerState->setLooping(audioButtons[i].isDown); return;
+        case AudioVolumeUp:   emit moreReleased(); return;
+        case AudioVolumeDown: emit lessReleased(); return;
+        case AudioPlayList:   mediaPlayerState->setList();  return;
+    }
+      }
+  }
     }
 }
 
@@ -270,7 +270,7 @@ void AudioWidget::closeEvent( QCloseEvent* ) {
 void AudioWidget::paintEvent( QPaintEvent * ) {
     QPainter p( this );
     for ( int i = 0; i < numButtons; i++ )
-	paintButton( &p, i );
+  paintButton( &p, i );
 }
 
 

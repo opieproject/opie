@@ -100,10 +100,12 @@ REQUIRES=
 ####### Compile
 
 wavplugin.o: wavplugin.cpp \
-		wavplugin.h
+		wavplugin.h \
+		../mediaplayerplugininterface.h
 
 wavpluginimpl.o: wavpluginimpl.cpp \
 		wavplugin.h \
+		../mediaplayerplugininterface.h \
 		wavpluginimpl.h
 
 

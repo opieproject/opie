@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000 Trolltech AS.  All rights reserved.
 **
-** This file is part of the Qtopia Environment.
+** This file is part of Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -17,9 +17,8 @@
 ** not clear to you.
 **
 **********************************************************************/
-
 #include <qpe/resource.h>
-#include <qpe/mediaplayerplugininterface.h>
+#include "mediaplayerplugininterface.h"
 #include <qwidget.h>
 #include <qpainter.h>
 #include <qpixmap.h>
@@ -67,7 +66,7 @@ static const int numButtons = (sizeof(videoButtons)/sizeof(MediaButton));
 
 VideoWidget::VideoWidget(QWidget* parent, const char* name, WFlags f) :
     QWidget( parent, name, f ), scaledWidth( 0 ), scaledHeight( 0 ) {
-    setCaption( tr("MediaPlayer") );
+    setCaption( tr("OpiePlayer") );
     setBackgroundPixmap( Resource::loadPixmap( "mpegplayer/metalFinish" ) );
     pixmaps[0] = new QPixmap( Resource::loadPixmap( "mpegplayer/mediaButton0a" ) );
     pixmaps[1] = new QPixmap( Resource::loadPixmap( "mpegplayer/mediaButton0b" ) );
@@ -81,8 +80,8 @@ VideoWidget::VideoWidget(QWidget* parent, const char* name, WFlags f) :
     slider->setFocusPolicy( QWidget::NoFocus );
     slider->setGeometry( QRect( 7, 250, 220, 20 ) );
 
-    connect( slider,	       SIGNAL( sliderPressed() ),      this, SLOT( sliderPressed() ) );
-    connect( slider,	       SIGNAL( sliderReleased() ),     this, SLOT( sliderReleased() ) );
+    connect( slider,         SIGNAL( sliderPressed() ),      this, SLOT( sliderPressed() ) );
+    connect( slider,         SIGNAL( sliderReleased() ),     this, SLOT( sliderReleased() ) );
 
     connect( mediaPlayerState, SIGNAL( lengthChanged(long) ),  this, SLOT( setLength(long) ) );
     connect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
@@ -102,7 +101,7 @@ VideoWidget::VideoWidget(QWidget* parent, const char* name, WFlags f) :
 
 VideoWidget::~VideoWidget() {
     for ( int i = 0; i < 3; i++ )
-	delete pixmaps[i];
+  delete pixmaps[i];
     delete currentFrame;
 }
 
@@ -118,7 +117,7 @@ void VideoWidget::sliderPressed() {
 void VideoWidget::sliderReleased() {
     videoSliderBeingMoved = FALSE;
     if ( slider->width() == 0 )
-	return;
+  return;
     long val = long((double)slider->value() * mediaPlayerState->length() / slider->width());
     mediaPlayerState->setPosition( val );
 }
@@ -136,12 +135,12 @@ void VideoWidget::setLength( long max ) {
 
 void VideoWidget::setView( char view ) {
     if ( view == 'v' ) {
-	makeVisible();
+  makeVisible();
     } else {
-	// Effectively blank the view next time we show it so it looks nicer
-	scaledWidth = 0;
-	scaledHeight = 0;
-	hide();
+  // Effectively blank the view next time we show it so it looks nicer
+  scaledWidth = 0;
+  scaledHeight = 0;
+  hide();
     }
 }
 
@@ -149,21 +148,21 @@ void VideoWidget::setView( char view ) {
 void VideoWidget::updateSlider( long i, long max ) {
     // Will flicker too much if we don't do this
     if ( max == 0 )
-	return;
+  return;
     int width = slider->width();
     int val = int((double)i * width / max);
     if ( !mediaPlayerState->fullscreen() && !videoSliderBeingMoved ) {
-	if ( slider->value() != val )
-	    slider->setValue( val );
-	if ( slider->maxValue() != width )
-	    slider->setMaxValue( width );
+  if ( slider->value() != val )
+      slider->setValue( val );
+  if ( slider->maxValue() != width )
+      slider->setMaxValue( width );
     }
 }
 
 
 void VideoWidget::setToggleButton( int i, bool down ) {
     if ( down != videoButtons[i].isDown )
-	toggleButton( i );
+  toggleButton( i );
 }
 
 
@@ -185,36 +184,36 @@ void VideoWidget::paintButton( QPainter *p, int i ) {
 
 void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
     for ( int i = 0; i < numButtons; i++ ) {
-	int x = videoButtons[i].xPos;
-	int y = videoButtons[i].yPos;
-	if ( event->state() == QMouseEvent::LeftButton ) {
-	    // The test to see if the mouse click is inside the circular button or not
-	    // (compared with the radius squared to avoid a square-root of our distance)
-	    int radius = 16;
-	    QPoint center = QPoint( x + radius, y + radius );
-	    QPoint dXY = center - event->pos();
-	    int dist = dXY.x() * dXY.x() + dXY.y() * dXY.y();
-	    bool isOnButton = dist <= (radius * radius);
-	    if ( isOnButton != videoButtons[i].isHeld ) {
-		videoButtons[i].isHeld = isOnButton;
-		toggleButton(i);
-	    }
-	} else {
-	    if ( videoButtons[i].isHeld ) {
-		videoButtons[i].isHeld = FALSE;
-		if ( !videoButtons[i].isToggle ) 
-		    setToggleButton( i, FALSE );
-		switch (i) {
-		    case VideoPlay:       mediaPlayerState->setPlaying(videoButtons[i].isDown); return;
-		    case VideoStop:       mediaPlayerState->setPlaying(FALSE); return;
-		    case VideoPause:      mediaPlayerState->setPaused(videoButtons[i].isDown); return;
-		    case VideoNext:       mediaPlayerState->setNext(); return;
-		    case VideoPrevious:   mediaPlayerState->setPrev(); return;
-		    case VideoPlayList:   mediaPlayerState->setList(); return;
-		    case VideoFullscreen: mediaPlayerState->setFullscreen( TRUE ); makeVisible(); return;
-		}
-	    }
-	}
+  int x = videoButtons[i].xPos;
+  int y = videoButtons[i].yPos;
+  if ( event->state() == QMouseEvent::LeftButton ) {
+      // The test to see if the mouse click is inside the circular button or not
+      // (compared with the radius squared to avoid a square-root of our distance)
+      int radius = 16;
+      QPoint center = QPoint( x + radius, y + radius );
+      QPoint dXY = center - event->pos();
+      int dist = dXY.x() * dXY.x() + dXY.y() * dXY.y();
+      bool isOnButton = dist <= (radius * radius);
+      if ( isOnButton != videoButtons[i].isHeld ) {
+    videoButtons[i].isHeld = isOnButton;
+    toggleButton(i);
+      }
+  } else {
+      if ( videoButtons[i].isHeld ) {
+    videoButtons[i].isHeld = FALSE;
+    if ( !videoButtons[i].isToggle ) 
+        setToggleButton( i, FALSE );
+    switch (i) {
+        case VideoPlay:       mediaPlayerState->setPlaying(videoButtons[i].isDown); return;
+        case VideoStop:       mediaPlayerState->setPlaying(FALSE); return;
+        case VideoPause:      mediaPlayerState->setPaused(videoButtons[i].isDown); return;
+        case VideoNext:       mediaPlayerState->setNext(); return;
+        case VideoPrevious:   mediaPlayerState->setPrev(); return;
+        case VideoPlayList:   mediaPlayerState->setList(); return;
+        case VideoFullscreen: mediaPlayerState->setFullscreen( TRUE ); makeVisible(); return;
+    }
+      }
+  }
     }
 }
 
@@ -226,25 +225,25 @@ void VideoWidget::mousePressEvent( QMouseEvent *event ) {
 
 void VideoWidget::mouseReleaseEvent( QMouseEvent *event ) {
     if ( mediaPlayerState->fullscreen() ) {
-	mediaPlayerState->setFullscreen( FALSE );
-	makeVisible();
+  mediaPlayerState->setFullscreen( FALSE );
+  makeVisible();
     } else { 
-	mouseMoveEvent( event );
+  mouseMoveEvent( event );
     }
 }
 
 
 void VideoWidget::makeVisible() {
     if ( mediaPlayerState->fullscreen() ) {
-	setBackgroundMode( QWidget::NoBackground );
-	showFullScreen();
-	resize( qApp->desktop()->size() );
-	slider->hide();
+  setBackgroundMode( QWidget::NoBackground );
+  showFullScreen();
+  resize( qApp->desktop()->size() );
+  slider->hide();
     } else {
-	setBackgroundPixmap( Resource::loadPixmap( "mpegplayer/metalFinish" ) );
-	showNormal();
-	showMaximized();
-	slider->show();
+  setBackgroundPixmap( Resource::loadPixmap( "mpegplayer/metalFinish" ) );
+  showNormal();
+  showMaximized();
+  slider->show();
     }
 }
 
@@ -253,29 +252,29 @@ void VideoWidget::paintEvent( QPaintEvent * ) {
     QPainter p( this );
 
     if ( mediaPlayerState->fullscreen() ) {
-	// Clear the background 
-	p.setBrush( QBrush( Qt::black ) );
-	p.drawRect( rect() );
+  // Clear the background 
+  p.setBrush( QBrush( Qt::black ) );
+  p.drawRect( rect() );
 
-	// Draw the current frame
-	//p.drawImage( ); // If using directpainter we won't have a copy except whats on the screen
+  // Draw the current frame
+  //p.drawImage( ); // If using directpainter we won't have a copy except whats on the screen
     } else {
-	// draw border
-	qDrawShadePanel( &p, 4, 15, 230, 170, colorGroup(), TRUE, 5, NULL );
+  // draw border
+  qDrawShadePanel( &p, 4, 15, 230, 170, colorGroup(), TRUE, 5, NULL );
 
-	// Clear the movie screen first
-	p.setBrush( QBrush( Qt::black ) );
-	p.drawRect( 9, 20, 220, 160 );
+  // Clear the movie screen first
+  p.setBrush( QBrush( Qt::black ) );
+  p.drawRect( 9, 20, 220, 160 );
 
-	// draw current frame (centrally positioned from scaling to maintain aspect ratio)
-	p.drawImage( 9 + (220 - scaledWidth) / 2, 20 + (160 - scaledHeight) / 2, *currentFrame, 0, 0, scaledWidth, scaledHeight );
+  // draw current frame (centrally positioned from scaling to maintain aspect ratio)
+  p.drawImage( 9 + (220 - scaledWidth) / 2, 20 + (160 - scaledHeight) / 2, *currentFrame, 0, 0, scaledWidth, scaledHeight );
 
-	// draw the buttons
-	for ( int i = 0; i < numButtons; i++ )
-	    paintButton( &p, i );
+  // draw the buttons
+  for ( int i = 0; i < numButtons; i++ )
+      paintButton( &p, i );
 
-	// draw the slider
-	slider->repaint( TRUE );
+  // draw the slider
+  slider->repaint( TRUE );
     }
 }
 
@@ -300,121 +299,121 @@ bool VideoWidget::playVideo() {
 
     if ( mediaPlayerState->fullscreen() ) {
 #ifdef USE_DIRECT_PAINTER
-	QDirectPainter p(this);
+  QDirectPainter p(this);
 
-	if ( ( qt_screen->transformOrientation() == 3 ) &&
-	     ( ( dd == 16 ) || ( dd == 32 ) ) && ( p.numRects() == 1 ) ) {
+  if ( ( qt_screen->transformOrientation() == 3 ) &&
+       ( ( dd == 16 ) || ( dd == 32 ) ) && ( p.numRects() == 1 ) ) {
 
-	    w = 320;
-	    h = 240;
+      w = 320;
+      h = 240;
 
-	    if ( mediaPlayerState->scaled() ) {
-		// maintain aspect ratio
-		if ( w * sh > sw * h ) 
-		    w = sw * h / sh;
-		else
-		    h = sh * w / sw;
-	    } else  {
-		w = sw;
-		h = sh;	    
-	    }
+      if ( mediaPlayerState->scaled() ) {
+    // maintain aspect ratio
+    if ( w * sh > sw * h ) 
+        w = sw * h / sh;
+    else
+        h = sh * w / sw;
+      } else  {
+    w = sw;
+    h = sh;     
+      }
 
-	    w--; // we can't allow libmpeg to overwrite.
-	    QPoint roff = qt_screen->mapToDevice( p.offset(), QSize( qt_screen->width(), qt_screen->height() ) );
-	    
-	    int ox = roff.x() - height() + 2 + (height() - w) / 2;
-	    int oy = roff.y() + (width() - h) / 2;
-	    int sx = 0, sy = 0;
+      w--; // we can't allow libmpeg to overwrite.
+      QPoint roff = qt_screen->mapToDevice( p.offset(), QSize( qt_screen->width(), qt_screen->height() ) );
+      
+      int ox = roff.x() - height() + 2 + (height() - w) / 2;
+      int oy = roff.y() + (width() - h) / 2;
+      int sx = 0, sy = 0;
 
-	    uchar* fp = p.frameBuffer() + p.lineStep() * oy;
-	    fp += dd * ox / 8;
-	    uchar **jt = new uchar*[h];
-	    for ( int i = h; i; i-- ) {
-		jt[h - i] = fp;
-		fp += p.lineStep();
-	    }
+      uchar* fp = p.frameBuffer() + p.lineStep() * oy;
+      fp += dd * ox / 8;
+      uchar **jt = new uchar*[h];
+      for ( int i = h; i; i-- ) {
+    jt[h - i] = fp;
+    fp += p.lineStep();
+      }
 
-	    result = mediaPlayerState->curDecoder()->videoReadScaledFrame( jt, sx, sy, sw, sh, w, h, format, 0) == 0;
+      result = mediaPlayerState->curDecoder()->videoReadScaledFrame( jt, sx, sy, sw, sh, w, h, format, 0) == 0;
 
-	    delete [] jt;
-	} else {
+      delete [] jt;
+  } else {
 #endif
-	    QPainter p(this);
+      QPainter p(this);
 
-	    w = 320;
-	    h = 240;
+      w = 320;
+      h = 240;
 
-	    if ( mediaPlayerState->scaled() ) {
-		// maintain aspect ratio
-		if ( w * sh > sw * h ) 
-		    w = sw * h / sh;
-		else
-		    h = sh * w / sw;
-	    } else  {
-		w = sw;
-		h = sh;	    
-	    }
+      if ( mediaPlayerState->scaled() ) {
+    // maintain aspect ratio
+    if ( w * sh > sw * h ) 
+        w = sw * h / sh;
+    else
+        h = sh * w / sw;
+      } else  {
+    w = sw;
+    h = sh;     
+      }
 
-	    int bytes = ( dd == 16 ) ? 2 : 4;
-	    QImage tempFrame( w, h, bytes << 3 );
-	    result = mediaPlayerState->curDecoder()->videoReadScaledFrame( tempFrame.jumpTable(),
-							0, 0, sw, sh, w, h, format, 0) == 0;
-	    if ( result && mediaPlayerState->fullscreen() ) {
+      int bytes = ( dd == 16 ) ? 2 : 4;
+      QImage tempFrame( w, h, bytes << 3 );
+      result = mediaPlayerState->curDecoder()->videoReadScaledFrame( tempFrame.jumpTable(),
+              0, 0, sw, sh, w, h, format, 0) == 0;
+      if ( result && mediaPlayerState->fullscreen() ) {
 
-		int rw = h, rh = w;
-		QImage rotatedFrame( rw, rh, bytes << 3 );
+    int rw = h, rh = w;
+    QImage rotatedFrame( rw, rh, bytes << 3 );
 
-		ushort* in  = (ushort*)tempFrame.bits();
-		ushort* out = (ushort*)rotatedFrame.bits();
-		int spl = rotatedFrame.bytesPerLine() / bytes;
-		for (int x=0; x<h; x++) {
-		    if ( bytes == 2 ) {
-			ushort* lout = out++ + (w - 1)*spl;
-			for (int y=0; y<w; y++) {
-			    *lout=*in++;
-			    lout-=spl;
-			}
-		    } else {
-			ulong* lout = ((ulong *)out)++ + (w - 1)*spl;
-			for (int y=0; y<w; y++) {
-			    *lout=*((ulong*)in)++;
-			    lout-=spl;
-			}
-		    }
-		}
+    ushort* in  = (ushort*)tempFrame.bits();
+    ushort* out = (ushort*)rotatedFrame.bits();
+    int spl = rotatedFrame.bytesPerLine() / bytes;
+    for (int x=0; x<h; x++) {
+        if ( bytes == 2 ) {
+      ushort* lout = out++ + (w - 1)*spl;
+      for (int y=0; y<w; y++) {
+          *lout=*in++;
+          lout-=spl;
+      }
+        } else {
+      ulong* lout = ((ulong *)out)++ + (w - 1)*spl;
+      for (int y=0; y<w; y++) {
+          *lout=*((ulong*)in)++;
+          lout-=spl;
+      }
+        }
+    }
 
-		p.drawImage( (240 - rw) / 2, (320 - rh) / 2, rotatedFrame, 0, 0, rw, rh );
-	    }
+    p.drawImage( (240 - rw) / 2, (320 - rh) / 2, rotatedFrame, 0, 0, rw, rh );
+      }
 #ifdef USE_DIRECT_PAINTER
-	}
+  }
 #endif
     } else {
 
-	w = 220;
-	h = 160;
+  w = 220;
+  h = 160;
 
-	// maintain aspect ratio
-	if ( w * sh > sw * h ) 
-	    w = sw * h / sh;
-	else
-	    h = sh * w / sw;
+  // maintain aspect ratio
+  if ( w * sh > sw * h ) 
+      w = sw * h / sh;
+  else
+      h = sh * w / sw;
 
-	result = mediaPlayerState->curDecoder()->videoReadScaledFrame( currentFrame->jumpTable(), 0, 0, sw, sh, w, h, format, 0) == 0;
+  result = mediaPlayerState->curDecoder()->videoReadScaledFrame( currentFrame->jumpTable(), 0, 0, sw, sh, w, h, format, 0) == 0;
 
-	QPainter p( this );
+  QPainter p( this );
 
-	// Image changed size, therefore need to blank the possibly unpainted regions first
-	if ( scaledWidth != w || scaledHeight != h ) {
-	    p.setBrush( QBrush( Qt::black ) );
-	    p.drawRect( 9, 20, 220, 160 );
-	}
+  // Image changed size, therefore need to blank the possibly unpainted regions first
+  if ( scaledWidth != w || scaledHeight != h ) {
+      p.setBrush( QBrush( Qt::black ) );
+      p.drawRect( 9, 20, 220, 160 );
+  }
 
-	scaledWidth = w;
-	scaledHeight = h;
+  scaledWidth = w;
+  scaledHeight = h;
 
-	if ( result ) {
-	    p.drawImage( 9 + (220 - scaledWidth) / 2, 20 + (160 - scaledHeight) / 2, *currentFrame, 0, 0, scaledWidth, scaledHeight );
-	}
+  if ( result ) {
+      p.drawImage( 9 + (220 - scaledWidth) / 2, 20 + (160 - scaledHeight) / 2, *currentFrame, 0, 0, scaledWidth, scaledHeight );
+  }
 
     }
 

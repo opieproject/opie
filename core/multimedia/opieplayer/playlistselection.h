@@ -20,8 +20,6 @@
 #ifndef PLAY_LIST_SELECTION_H
 #define PLAY_LIST_SELECTION_H
 
-
-
 #include <qlist.h>
 #include <qlistview.h>
 #include <qpe/applnk.h>
@@ -47,10 +45,10 @@ public slots:
 
 protected:
     virtual void contentsMouseMoveEvent(QMouseEvent *);
-#ifdef USE_PLAYLIST_BACKGROUND
+/* #ifdef USE_PLAYLIST_BACKGROUND */
     virtual void drawBackground( QPainter *p, const QRect &r );
     virtual void paintEmptyArea( QPainter *p, const QRect &r ) { drawBackground( p, r ); };
-#endif
+/* #endif */
 
 private:
     QList<DocLnk>   selectedList;

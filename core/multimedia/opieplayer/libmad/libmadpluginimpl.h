@@ -20,7 +20,8 @@
 #ifndef LIBMAD_PLUGIN_IMPL_H 
 #define LIBMAD_PLUGIN_IMPL_H
 
-#include <qpe/mediaplayerplugininterface.h>
+//#include <qpe/mediaplayerplugininterface.h>
+#include "../mediaplayerplugininterface.h"
 
 
 class LibMadPlugin;
@@ -41,7 +42,6 @@ public:
 
     virtual MediaPlayerDecoder *decoder();
     virtual MediaPlayerEncoder *encoder();
-
 private:
     LibMadPlugin *libmadplugin;
     ulong ref;
