@@ -212,7 +212,6 @@ void FileTransfer::slotProgress( const QStringList& list ) {
 
     total = progi[1].toULong(&complete );
     if (!complete || total == 0) {
-        qWarning("returning!!");
         return;
     }
 
@@ -231,11 +230,9 @@ void FileTransfer::slotProgress( const QStringList& list ) {
     sec = progi[1].toInt();
 
 
-    qWarning("Prog!:%d", prog );
     if ( prog > m_prog ) {
         m_prog = prog;
         emit progress(m_file, m_prog, bps, -1, min , sec );
-        qWarning("Progress: %s, %d\%, %d, %d:%d", m_file.latin1(), m_prog, bps,  min, sec );
     }
 
 }

@@ -27,7 +27,7 @@ HEADERS      = io_layer.h io_serial.h io_irda.h \
 	       terminalwidget.h \
 	       iolayerbase.h \
 	       serialconfigwidget.h irdaconfigwidget.h btconfigwidget.h \
-	       emulation_widget.h
+	       emulation_widget.h procctl.h
 
 
 SOURCES      = io_layer.cpp io_serial.cpp io_irda.cpp \
@@ -54,7 +54,7 @@ SOURCES      = io_layer.cpp io_serial.cpp io_irda.cpp \
 	       terminalwidget.cpp \
 	       iolayerbase.cpp \
 	       serialconfigwidget.cpp irdaconfigwidget.cpp btconfigwidget.cpp \
-	       emulation_widget.cpp
+	       emulation_widget.cpp procctl.cpp
    
 INTERFACES   = configurebase.ui editbase.ui
 INCLUDEPATH += $(OPIEDIR)/include
