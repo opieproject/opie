@@ -298,6 +298,8 @@ int Ipkg :: executeIpkgLinkCommand( QStringList *cmd )
     {
         emit outputText( tr("Couldn't start ipkg-link process" ) );
     }
+
+    return 0;
 }
 
 void Ipkg::linkProcessFinished()
@@ -366,6 +368,8 @@ int Ipkg :: executeIpkgCommand( QStringList &cmd, const QString /*option*/ )
     {
         emit outputText( tr("Couldn't start ipkg process" ) );
     }
+
+    return 0;
 }
 
 void Ipkg::commandStdout(OProcess*, char *buffer, int buflen)
@@ -437,6 +441,7 @@ void Ipkg :: abort()
 
 void Ipkg :: linkPackage( const QString &packFileName, const QString &dest, const QString &destDir )
 {
+    Q_CONST_UNUSED( destDir )
     if ( dest == "root" || dest == "/" )
         return;
 
