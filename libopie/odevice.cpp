@@ -1,16 +1,16 @@
 /*  This file is part of the OPIE libraries
     Copyright (C) 2002 Robert Griebl (sandman@handhelds.org)
-            
+
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
     License as published by the Free Software Foundation; either
     version 2 of the License, or (at your option) any later version.
-                             
+
     This library is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
     Library General Public License for more details.
-                                          
+
     You should have received a copy of the GNU Library General Public License
     along with this library; see the file COPYING.LIB.  If not, write to
     the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
@@ -53,14 +53,14 @@ public:
 };
 
 class ODeviceZaurus : public ODevice {
-protected: 
+protected:
 	virtual void init ( );
 
 public:	
 	virtual void alarmSound ( );
 	virtual void keySound ( );
 	virtual void touchSound ( );	
-	
+
 	virtual uint hasLeds ( ) const;
 	virtual OLedState led ( uint which ) const;
 	virtual bool setLed ( uint which, OLedState st );	
@@ -92,13 +92,13 @@ ODevice *ODevice::inst ( )
 ODevice::ODevice ( )
 {
 	d = new ODeviceData;
-	
+
 	d-> m_modelstr = "Unknown";
 	d-> m_model = OMODEL_Unknown;
 	d-> m_vendorstr = "Unkown";
 	d-> m_vendor = OVENDOR_Unknown;
 	d-> m_systemstr = "Unkown";
-	d-> m_system = OSYSTEM_Unknown;	
+	d-> m_system = OSYSTEM_Unknown;
 }
 
 void ODevice::init ( )
@@ -142,31 +142,40 @@ OSystem ODevice::system ( )
 
 void ODevice::alarmSound ( )
 {
+#ifndef QT_QWS_EBX
 #ifndef QT_NO_SOUND
 	static Sound snd ( "alarm" );
 
 	if ( snd. isFinished ( ))
 		snd. play ( );
 #endif
+#endif
 }
 
 void ODevice::keySound ( )
 {
+#ifndef QT_QWS_EBX
 #ifndef QT_NO_SOUND
 	static Sound snd ( "keysound" );
 
 	if ( snd. isFinished ( ))
 		snd. play ( );
 #endif
+#endif
 }
 
 void ODevice::touchSound ( )
 {
+
+#ifndef QT_QWS_EBX
 #ifndef QT_NO_SOUND
 	static Sound snd ( "touchsound" );
-
-	if ( snd. isFinished ( ))
+qDebug("touchSound");
+	if ( snd. isFinished ( )) {
 		snd. play ( );
+		qDebug("sound should play");
+		}
+#endif
 #endif
 }
 
@@ -194,15 +203,15 @@ bool ODevice::setLed ( uint /*which*/, OLedState /*st*/ )
 void ODeviceIPAQ::init ( )
 {
 	d-> m_vendorstr = "HP";
-	d-> m_vendor = OVENDOR_HP;	
-	
+	d-> m_vendor = OVENDOR_HP;
+
 	QFile f ( "/proc/hal/model" );
-	
+
 	if ( f. open ( IO_ReadOnly )) {
 		QTextStream ts ( &f );
-		
+
 		d-> m_modelstr = "H" + ts. readLine ( );
-		
+
 		if ( d-> m_modelstr == "H3100" )
 			d-> m_model = OMODEL_iPAQ_H31xx;
 		else if ( d-> m_modelstr == "H3600" )
@@ -213,7 +222,7 @@ void ODeviceIPAQ::init ( )
 			d-> m_model = OMODEL_iPAQ_H38xx;
 		else
 			d-> m_model = OMODEL_Unknown;
-			
+
 		f. close ( );
 	}
 
@@ -221,7 +230,7 @@ void ODeviceIPAQ::init ( )
 		d-> m_systemstr = "Familiar";
 		d-> m_system = OSYSTEM_Familiar;
 	}
-	
+
 	d-> m_leds [0] = OLED_Off;
 }
 
@@ -232,7 +241,7 @@ void ODeviceIPAQ::init ( )
 #include <qapplication.h>
 #include <qpe/config.h>
 
-//#include <linux/h3600_ts.h>  // including kernel headers is evil ...  
+//#include <linux/h3600_ts.h>  // including kernel headers is evil ...
 
 typedef struct h3600_ts_led {
   unsigned char OffOnBlink;       /* 0=off 1=on 2=Blink */
@@ -242,13 +251,14 @@ typedef struct h3600_ts_led {
 } LED_IN;
 
 
-// #define IOC_H3600_TS_MAGIC  'f' 
+// #define IOC_H3600_TS_MAGIC  'f'
 // #define LED_ON                  _IOW(IOC_H3600_TS_MAGIC,  5, struct h3600_ts_led)
 #define LED_ON    (( 1<<30 ) | ( 'f'<<8 ) | ( 5 ) | ( sizeof(struct h3600_ts_led)<<16 )) // _IOW only defined in kernel headers :(
-                                
+
 
 void ODeviceIPAQ::alarmSound ( )
 {
+#if defined( QT_QWS_IPAQ ) // IPAQ
 #ifndef QT_NO_SOUND
 	static Sound snd ( "alarm" );
 	int fd;
@@ -266,9 +276,9 @@ void ODeviceIPAQ::alarmSound ( )
 			if ( volalarm < 0 )
 				volalarm = 0;
 			else if ( volalarm > 100 )
-				volalarm = 100;				
+				volalarm = 100;
 			volalarm |= ( volalarm << 8 );
-			
+
 			if (( volalarm & 0xff ) > ( vol & 0xff )) {
 				if ( ::ioctl ( fd, MIXER_WRITE( 0 ), &volalarm ) >= 0 )
 					vol_reset = true;
@@ -286,6 +296,7 @@ void ODeviceIPAQ::alarmSound ( )
 		::close ( fd );
 	}
 #endif
+#endif
 }
 
 uint ODeviceIPAQ::hasLeds ( ) const
@@ -298,29 +309,29 @@ OLedState ODeviceIPAQ::led ( uint which ) const
 	if ( which == 0 )
 		return d-> m_leds [0];
 	else
-		return OLED_Off; 
+		return OLED_Off;
 }
 
 bool ODeviceIPAQ::setLed ( uint which, OLedState st )
 {
-	static int fd = ::open ( "/dev/touchscreen/0", O_RDWR|O_NONBLOCK ); 
+	static int fd = ::open ( "/dev/touchscreen/0", O_RDWR|O_NONBLOCK );
 
 	if ( which == 0 ) {
-		if ( fd >= 0 ) {			
+		if ( fd >= 0 ) {
 			struct h3600_ts_led leds;
 			::memset ( &leds, 0, sizeof( leds ));
 			leds. TotalTime  = 0;
 			leds. OnTime     = 0;
 			leds. OffTime    = 1;
 			leds. OffOnBlink = 2;
-			                                        
+
 			switch ( st ) {
 				case OLED_Off      : leds. OffOnBlink = 0; break;
 				case OLED_On       : leds. OffOnBlink = 1; break;
 				case OLED_BlinkSlow: leds. OnTime = 10; leds. OffTime = 10; break;
 				case OLED_BlinkFast: leds. OnTime =  5; leds. OffTime =  5; break;
 			}
-		
+
 			if ( ::ioctl ( fd, LED_ON, &leds ) >= 0 ) {
 				d-> m_leds [0] = st;
 				return true;
@@ -337,23 +348,23 @@ bool ODeviceIPAQ::setLed ( uint which, OLedState st )
 
 
 
-//#if defined( QT_QWS_CUSTOM ) // Zaurus
+//#if defined( QT_QWS_EBX ) // Zaurus
 
 void ODeviceZaurus::init ( )
-{		
+{
 	d-> m_modelstr = "Zaurus SL5000";
 	d-> m_model = OMODEL_Zaurus_SL5000;
 	d-> m_vendorstr = "Sharp";
 	d-> m_vendor = OVENDOR_Sharp;
 
 	QFile f ( "/proc/filesystems" );
-		
+
 	if ( f. open ( IO_ReadOnly ) && ( QTextStream ( &f ). read ( ). find ( "\tjffs2\n" ) >= 0 )) {
 		d-> m_systemstr = "OpenZaurus";
 		d-> m_system = OSYSTEM_OpenZaurus;
-		
+
 		f. close ( );
-	}	
+	}
 	else {
 		d-> m_systemstr = "Zaurus";
 		d-> m_system = OSYSTEM_Zaurus;
@@ -372,11 +383,39 @@ void ODeviceZaurus::init ( )
 
 #define	SHARP_BUZZER_IOCTL_START (SHARP_DEV_IOCTL_COMMAND_START)
 #define SHARP_BUZZER_MAKESOUND   (SHARP_BUZZER_IOCTL_START)
-      
+
 #define SHARP_BUZ_TOUCHSOUND       1  /* touch panel sound */
 #define SHARP_BUZ_KEYSOUND         2  /* key sound */
 #define SHARP_BUZ_SCHEDULE_ALARM  11  /* schedule alarm */
-      
+
+/* --- for SHARP_BUZZER device --- */
+
+//#define	SHARP_BUZZER_IOCTL_START (SHARP_DEV_IOCTL_COMMAND_START)
+//#define SHARP_BUZZER_MAKESOUND   (SHARP_BUZZER_IOCTL_START)
+
+#define SHARP_BUZZER_SETVOLUME   (SHARP_BUZZER_IOCTL_START+1)
+#define SHARP_BUZZER_GETVOLUME   (SHARP_BUZZER_IOCTL_START+2)
+#define SHARP_BUZZER_ISSUPPORTED (SHARP_BUZZER_IOCTL_START+3)
+#define SHARP_BUZZER_SETMUTE     (SHARP_BUZZER_IOCTL_START+4)
+#define SHARP_BUZZER_STOPSOUND   (SHARP_BUZZER_IOCTL_START+5)
+
+//#define SHARP_BUZ_TOUCHSOUND       1  /* touch panel sound */
+//#define SHARP_BUZ_KEYSOUND         2  /* key sound */
+
+//#define SHARP_PDA_ILLCLICKSOUND    3  /* illegal click */
+//#define SHARP_PDA_WARNSOUND        4  /* warning occurred */
+//#define SHARP_PDA_ERRORSOUND       5  /* error occurred */
+//#define SHARP_PDA_CRITICALSOUND    6  /* critical error occurred */
+//#define SHARP_PDA_SYSSTARTSOUND    7  /* system start */
+//#define SHARP_PDA_SYSTEMENDSOUND   8  /* system shutdown */
+//#define SHARP_PDA_APPSTART         9  /* application start */
+//#define SHARP_PDA_APPQUIT         10  /* application ends */
+
+//#define SHARP_BUZ_SCHEDULE_ALARM  11  /* schedule alarm */
+//#define SHARP_BUZ_DAILY_ALARM     12  /* daily alarm */
+//#define SHARP_BUZ_GOT_PHONE_CALL  13  /* phone call sound */
+//#define SHARP_BUZ_GOT_MAIL        14  /* mail sound */
+//
 
 #define	SHARP_LED_IOCTL_START (SHARP_DEV_IOCTL_COMMAND_START)
 #define SHARP_LED_SETSTATUS   (SHARP_LED_IOCTL_START+1)
@@ -385,7 +424,7 @@ typedef struct sharp_led_status {
   int which;   /* select which LED status is wanted. */
   int status;  /* set new led status if you call SHARP_LED_SETSTATUS */
 } sharp_led_status;
-    
+
 #define SHARP_LED_MAIL_EXISTS  9       /* mail status (exists or not) */
 
 #define LED_MAIL_NO_UNREAD_MAIL  0   /* for SHARP_LED_MAIL_EXISTS */
