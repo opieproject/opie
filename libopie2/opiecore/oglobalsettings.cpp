@@ -34,6 +34,7 @@
 
 #include <opie2/oglobalsettings.h>
 #include <opie2/oconfig.h>
+#include <opie2/odebug.h>
 #include <opie2/oglobal.h>
 
 /* QT */
@@ -61,7 +62,7 @@ QFont *OGlobalSettings::_taskbarFont = 0;
 QColor *OGlobalSettings::OpieGray = 0;
 QColor *OGlobalSettings::OpieHighlight = 0;
 QColor *OGlobalSettings::OpieAlternate = 0;
-    
+
 OGlobalSettings::OMouseSettings *OGlobalSettings::s_mouseSettings = 0;
 
 //FIXME: Add manipulators to the accessors
@@ -159,7 +160,7 @@ OGlobalSettings::Debug OGlobalSettings::debugMode()
 {
     OConfig *c = OGlobal::config();
     OConfigGroupSaver cgs( c, "General" );
-    int debug = c->readNumEntry( "debugMode", -1 );
+    int debug = c->readNumEntry( "debugMode", ODEBUG_STDERR );
     if ( (debug < (int) DebugNone) || (debug > (int) DebugSocket) )
     {
         debug = (int) DebugStdErr; // Default
