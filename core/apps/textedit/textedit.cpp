@@ -1174,7 +1174,8 @@ if(featureAutoSave)
 }
 
 void TextEdit::gotoLine() {
-
+    if( editor->length() < 1)
+       return;
    QWidget *d = QApplication::desktop();
    gotoEdit = new QLineEdit( 0, "Goto line");
    
@@ -1187,6 +1188,7 @@ void TextEdit::gotoLine() {
 void TextEdit::doGoto() {
    QString number = gotoEdit->text();
    gotoEdit->hide();
+
    if(gotoEdit) {
       delete gotoEdit;
       gotoEdit = 0;
@@ -1194,7 +1196,7 @@ void TextEdit::doGoto() {
    
    bool ok;
    int lineNumber = number.toInt(&ok, 10);
-   if(editor->numLines() < lineNumber)
+   if( editor->numLines() < lineNumber)
       QMessageBox::message(tr("Text Edit"),tr("Not enough lines"));
    else
    {
