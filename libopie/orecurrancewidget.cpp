@@ -54,6 +54,21 @@ ORecurranceWidget::ORecurranceWidget( bool startOnMonday,
 {
     // do some stuff with the repeat pattern
     init();
+    setRecurrence( rp );
+}
+
+ORecurranceWidget::~ORecurranceWidget() {
+}
+void ORecurranceWidget::setStartDate( const QDate& date ) {
+    qWarning("ORecurranceWidget::setStartDate");
+    setRecurrence( recurrence(), date );
+}
+void ORecurranceWidget::setRecurrence( const ORecur& rp ) {
+    setRecurrence( rp, start );
+}
+void ORecurranceWidget::setRecurrence( const ORecur& rp, const QDate& date ) {
+    start = date;
+    end = rp.endDate();
     switch ( rp.type() ) {
     default:
     case ORecur::NoRepeat:
@@ -108,10 +123,7 @@ ORecurranceWidget::ORecurranceWidget( bool startOnMonday,
     } else
 	cmdEnd->setText( TimeString::shortDate( end ) );
 }
-ORecurranceWidget::~ORecurranceWidget() {
-
-}
-ORecur ORecurranceWidget::recurrance()const {
+ORecur ORecurranceWidget::recurrence()const {
     QListIterator<QToolButton> it( listRTypeButtons );
     QListIterator<QToolButton> itExtra( listExtra );
     ORecur rpTmp;

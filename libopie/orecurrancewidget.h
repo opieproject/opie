@@ -16,6 +16,7 @@
 #include "orecurrancebase.h"
 #include <opie/orecur.h>
 
+// FIXME spelling!!!! -zecke
 class ORecurranceWidget : public ORecurranceBase {
     Q_OBJECT
 public:
@@ -28,13 +29,16 @@ public:
                        QWidget* parent = 0, const char* name =0,
                        bool modal = TRUE, WFlags = 0 );
     ~ORecurranceWidget();
-    ORecur recurrance()const;
+    ORecur recurrence()const;
     QDate endDate()const;
 
 public slots:
     void slotSetRType( int );
     void endDateChanged( int, int, int );
     void slotNoEnd( bool unused );
+    void setStartDate( const QDate& );
+    void setRecurrence( const ORecur& recur, const QDate& start );
+    void setRecurrence( const ORecur& recur );
 
 private slots:
     void setupRepeatLabel( const QString& );
