@@ -13,6 +13,7 @@
 <!ENTITY today SYSTEM "today.sgm">
 <!ENTITY irda SYSTEM "irda.sgm">
 <!ENTITY keypebble SYSTEM "keypebble.sgm">
+<!ENTITY i18n SYSTEM "i18n.sgm">
 ]>
 <book><title>Opie User Manual</title>
 <bookinfo><authorgroup><collab>
@@ -38,5 +39,8 @@
 </part>
 <part><title>Applets</title>
 &irda;
+</part>
+<part><title>Technical Details</title>
+&i18n;
 </part>
 </book>
