@@ -1,8 +1,10 @@
 2004-??-??	The Opie Team <opie@handhelds.org>
 
+	* Enabled the possibility to pass command line arguments to applications (mickeyl)
+	* Added an about applet showing some credits and information about Opie (mickeyl)
 	* Added benchmarking functionality to sysinfo (mickeyl)
 	* Added applet and configuration application for switching hardware keyboard layouts (alwin)
-	* Ported applications from libopie1 to libopie2* (drw,ar,arlwin)
+	* Ported applications from libopie1 to libopie2* (drw,ar,alwin)
 	* Imported fullscreen and font improvements from the Qkonsole fork to embeddedkonsole (waspe)
 	* Clean-up of package information in control files (drw)
 	* Repaired mediummount which was broken since integrating the quicklauncher (alwin)
@@ -12,7 +14,7 @@
 	* Added new package manager - opie-packagemanager (drw)
 	* Improved light-n-power for C7x0 (mickeyl)
 	* Added automatic rotation support for C7x0 (treke)
-	* Split libopie1 up into a set of smaller - functionality grouped - libraries (mickeyl)
+	* Split libopie1 up into a set of smaller - functionally grouped - libraries (mickeyl)
 	* Added scanning the wireless network neighbourhood to networksettings (mickeyl)
 
 2003-11-29	The Opie Team <opie@handhelds.org>
