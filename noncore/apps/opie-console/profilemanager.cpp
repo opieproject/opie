@@ -15,6 +15,7 @@ ProfileManager::~ProfileManager() {
 }
 void ProfileManager::load() {
     m_list.clear();
+    qWarning("load");
     ProfileConfig conf("opie-console-profiles");
     QStringList groups = conf.groups();
     QStringList::Iterator it;
@@ -23,6 +24,7 @@ void ProfileManager::load() {
      * for each profile
      */
     for ( it = groups.begin(); it != groups.end(); ++it ) {
+        qWarning("group " + (*it) );
         conf.setGroup( (*it) );
         Profile prof;
         prof.setName( conf.readEntry("name") );

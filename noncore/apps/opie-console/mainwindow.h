@@ -16,6 +16,7 @@ class QMenuBar;
 class QAction;
 class MetaFactory;
 
+class ProfileManager;
 class MainWindow : public QMainWindow {
     Q_OBJECT
 public:
@@ -39,15 +40,23 @@ public:
      */
     QList<Session> sessions();
 
+    /**
+     *
+     */
+    ProfileManager* manager();
+
 private slots:
     void slotNew();
     void slotConnect();
     void slotDisconnect();
     void slotTerminate();
     void slotConfigure();
+    void slotClose();
+    void slotProfile(int);
 
 private:
     void initUI();
+    void populateProfiles();
     /**
      * the current session
      */
@@ -62,6 +71,7 @@ private:
      * the metafactory
      */
     MetaFactory* m_factory;
+    ProfileManager* m_manager;
 
     QToolBar* m_tool;
     QMenuBar* m_bar;

@@ -12,6 +12,7 @@ QStringList ProfileConfig::groups()const {
     QStringList list;
     QMap<QString, ConfigGroup>::ConstIterator it;
     it= Config::groups.begin();
+    qWarning("config %d", Config::groups.count() );
 
     for (; it != Config::groups.end(); ++it )
         list << it.key();

@@ -6,14 +6,17 @@
 #include <qtoolbar.h>
 
 #include "metafactory.h"
+#include "profilemanager.h"
 #include "mainwindow.h"
 
 MainWindow::MainWindow() {
     m_factory = new MetaFactory();
     m_sessions.setAutoDelete( TRUE );
     m_curSession = 0;
+    m_manager = new ProfileManager(m_factory);
 
     initUI();
+    populateProfiles();
 }
 void MainWindow::initUI() {
     setToolBarsMovable( FALSE  );
@@ -65,6 +68,12 @@ void MainWindow::initUI() {
     connect(m_disconnect, SIGNAL(activated() ),
             this, SLOT(slotTerminate() ) );
 
+    a = new QAction();
+    a->setText( tr("Close Window") );
+    a->addTo( m_console );
+    connect(a, SIGNAL(activated() ),
+            this, SLOT(slotClose() ) );
+
     /*
      * the settings action
      */
@@ -83,6 +92,24 @@ void MainWindow::initUI() {
 
     /* the settings menu */
     m_bar->insertItem( tr("Settings"), m_settings );
+
+    /*
+     * connect to the menu activation
+     */
+    connect( m_sessionsPop, SIGNAL(activated(int) ),
+             this, SLOT(slotProfile(int) ) );
+
+}
+ProfileManager* MainWindow::manager() {
+    return m_manager;
+}
+void MainWindow::populateProfiles() {
+    manager()->load();
+    Profile::ValueList list = manager()->all();
+    for (Profile::ValueList::Iterator it = list.begin(); it != list.end();
+         ++it ) {
+        m_sessionsPop->insertItem( (*it).name() );
+    }
 
 }
 MainWindow::~MainWindow() {
@@ -120,4 +147,10 @@ void MainWindow::slotTerminate() {
 }
 void MainWindow::slotConfigure() {
     qWarning("configure");
+}
+void MainWindow::slotClose() {
+
+}
+void MainWindow::slotProfile(int) {
+
 }
