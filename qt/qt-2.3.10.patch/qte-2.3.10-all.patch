@@ -35,7 +35,7 @@ Index: qt-2.3.10/src/iconview/qiconview.cpp
  #ifndef QT_NO_TOOLTIP
 @@ -2882,6 +2886,48 @@
  }
- 
+
  /*!
 +    This function grabs all paintevents that otherwise would have been
 +    processed by the QScrollView::viewportPaintEvent(). Here we use a
@@ -81,7 +81,7 @@ Index: qt-2.3.10/src/iconview/qiconview.cpp
 +
    \reimp
  */
- 
+
 @@ -4939,7 +4985,7 @@
  		if ( !d->rubber )
  		    drawDragShapes( d->oldDragPos );
@@ -93,7 +93,7 @@ Index: qt-2.3.10/src/iconview/qiconview.cpp
  		    drawDragShapes( d->oldDragPos );
 @@ -5377,11 +5423,19 @@
  	return;
- 
+
      if ( item->d->container1 && d->firstContainer ) {
 -	item->d->container1->items.removeRef( item );
 +       //Special-case checking of the last item, since this may be
@@ -112,7 +112,7 @@ Index: qt-2.3.10/src/iconview/qiconview.cpp
 +            item->d->container2->items.removeRef( item );
      }
      item->d->container2 = 0;
- 
+
 Index: qt-2.3.10/src/iconview/qiconview.h
 ===================================================================
 --- qt-2.3.10.orig/src/iconview/qiconview.h	2005-02-24 21:09:53.060675971 +0100
@@ -120,7 +120,7 @@ Index: qt-2.3.10/src/iconview/qiconview.h
 @@ -444,6 +444,7 @@
      virtual void contentsDropEvent( QDropEvent *e );
  #endif
- 
+
 +    void bufferedPaintEvent( QPaintEvent* );
      virtual void resizeEvent( QResizeEvent* e );
      virtual void keyPressEvent( QKeyEvent *e );
@@ -132,7 +132,7 @@ Index: qt-2.3.10/src/kernel/qgfxraster_qws.cpp
 @@ -4037,13 +4037,14 @@
  	for( loopc2=0;loopc2<frontadd;loopc2++ )
  	    *(alphaptr++)=get_value_32(16,(unsigned char **)&temppos);
- 
+
 -	PackType temp2;
 -	unsigned char * cp;
 +	volatile PackType temp2;
@@ -149,7 +149,7 @@ Index: qt-2.3.10/src/kernel/qgfxraster_qws.cpp
 +           *(alphaptr++)=qt_conv16ToRgb(*cp);
  	    temppos += 2;
  	}
- 
+
 Index: qt-2.3.10/src/kernel/qwindowsystem_qws.cpp
 ===================================================================
 --- qt-2.3.10.orig/src/kernel/qwindowsystem_qws.cpp	2005-02-24 21:09:53.891557664 +0100
@@ -157,7 +157,7 @@ Index: qt-2.3.10/src/kernel/qwindowsystem_qws.cpp
 @@ -918,6 +918,18 @@
  {
  }
- 
+
 +static void catchSegvSignal( int )
 +{
 +#ifndef QT_NO_QWS_KEYBOARD
@@ -175,7 +175,7 @@ Index: qt-2.3.10/src/kernel/qwindowsystem_qws.cpp
    \brief Server-specific functionality in Qt/Embedded
 @@ -1043,6 +1055,7 @@
      }
- 
+
      signal(SIGPIPE, ignoreSignal); //we get it when we read
 +    signal(SIGSEGV, catchSegvSignal); //recover the keyboard on crash
  #endif
@@ -191,7 +191,7 @@ Index: qt-2.3.10/src/kernel/qwsdecoration_qws.h
  		Close=11, Minimize=12, Maximize=13, Normalize=14,
 -		Menu=15, LastRegion=Menu };
 +		Menu=15, LastRegion=Menu, UserDefined = 100 };
- 
+
      virtual QRegion region(const QWidget *, const QRect &rect, Region r=All) = 0;
      virtual void close( QWidget * );
 Index: qt-2.3.10/src/tools/qcstring.h
@@ -201,10 +201,10 @@ Index: qt-2.3.10/src/tools/qcstring.h
 @@ -119,7 +119,7 @@
  //                   We want to keep source compatibility for 2.x
  // ### TODO for 4.0: completely remove these and the cstr* functions
- 
+
 -#if !defined(QT_GENUINE_STR)
 +#if 0
- 
+
  #undef	strlen
  #define strlen qstrlen
 Index: qt-2.3.10/src/tools/qstring.cpp
@@ -257,7 +257,7 @@ Index: qt-2.3.10/src/widgets/qlistview.cpp
 +++ qt-2.3.10/src/widgets/qlistview.cpp	2005-02-24 21:10:03.500179222 +0100
 @@ -5051,9 +5051,9 @@
  	l = l->childItem ? l->childItem : l->siblingItem;
- 
+
      if ( l && l->height() )
 -	s.setHeight( s.height() + 10 * l->height() );
 -    else
@@ -265,7 +265,7 @@ Index: qt-2.3.10/src/widgets/qlistview.cpp
 +	s.setHeight( s.height() + 4 /*10*/ * l->height() );
 +    else                      // ^v much too big for handhelds
 +	s.setHeight( s.height() + 30 /*140*/ );
- 
+
      if ( s.width() > s.height() * 3 )
  	s.setHeight( s.width() / 3 );
 Index: qt-2.3.10/src/widgets/qtoolbutton.cpp
@@ -290,3 +290,38 @@ Index: qt-2.3.10/src/widgets/qtoolbutton.cpp
  	QPixmap pm = iconSet(TRUE).pixmap(QIconSet::Small, QIconSet::Normal);
  	w = pm.width();
  	h = pm.height();
+Index: qt-2.3.10/src/widgets/qtabbar.cpp
+===================================================================
+--- qt-2.3.10.orig/src/widgets/qtabbar.cpp	2005-02-27 18:07:41.000000000 -0600
++++ qt-2.3.10/src/widgets/qtabbar.cpp	2005-02-28 11:16:56.444377440 -0600
+@@ -260,7 +260,6 @@
+ 	lstatic->insert( index, newTab );
+
+     layoutTabs();
+-    updateArrowButtons();
+     makeVisible( tab( currentTab() ) );
+
+ #ifndef QT_NO_ACCEL
+@@ -282,7 +281,6 @@
+     l->remove( t );
+     lstatic->remove( t );
+     layoutTabs();
+-    updateArrowButtons();
+     makeVisible( tab( currentTab() ) );
+     update();
+ }
+@@ -887,6 +885,7 @@
+     }
+     for ( t = lstatic->first(); t; t = lstatic->next() )
+ 	t->r.setHeight( r.height() );
++    updateArrowButtons();
+ }
+
+ /*!
+@@ -977,7 +976,6 @@
+     d->leftB->setGeometry( width() - 2*arrowWidth, 0, arrowWidth, height() );
+ #endif
+     layoutTabs();
+-    updateArrowButtons();
+     makeVisible( tab( currentTab() ));
+ }
