@@ -32,6 +32,7 @@
 */
 
 #include <qpe/resource.h>
+#include <qpe/mediaplayerplugininterface.h>
 #include <qpe/config.h>
 
 #include <qwidget.h>
@@ -58,61 +59,76 @@ static const int yo = 0; // movable y offset
 
 
 struct MediaButton {
-    int  xPos, yPos;
     bool isToggle, isHeld, isDown;
-    int  controlType;
 };
 
-
-// Layout information for the videoButtons (and if it is a toggle button or not)
 MediaButton videoButtons[] = {
-    { 5+0*32+xo, 200+yo, FALSE, FALSE, FALSE, 4 }, // previous
-    { 5+1*32+xo, 200+yo, FALSE, FALSE, FALSE, 1 }, // stop
-    { 5+2*32+xo, 200+yo,  TRUE, FALSE, FALSE, 0 }, // play
-    { 5+3*32+xo, 200+yo,  TRUE, FALSE, FALSE, 2 }, // pause
-    { 5+4*32+xo, 200+yo, FALSE, FALSE, FALSE, 3 }, // next
-    { 5+5*32+xo, 200+yo, FALSE, FALSE, FALSE, 8 }, // playlist
-    { 5+6*32+xo, 200+yo,  TRUE, FALSE, FALSE, 9 }  // fullscreen
+    { FALSE, FALSE, FALSE }, // previous
+    { FALSE, FALSE, FALSE }, // stop
+    { TRUE, FALSE, FALSE }, // play
+    { TRUE, FALSE, FALSE }, // pause
+    { FALSE, FALSE, FALSE }, // next
+    { FALSE, FALSE, FALSE }, // playlist
+    { TRUE, FALSE, FALSE }  // fullscreen
 };
 
+const char *skinV_mask_file_names[7] = {
+"stop","play","back","fwd","up","down","full"
+};
 
 static const int numButtons = (sizeof(videoButtons)/sizeof(MediaButton));
 
 
 VideoWidget::VideoWidget(QWidget* parent, const char* name, WFlags f) :
-    QWidget( parent, name, f ), scaledWidth( 0 ), scaledHeight( 0 ) {
+QWidget( parent, name, f ), scaledWidth( 0 ), scaledHeight( 0 ) {
     setCaption( tr("OpiePlayer - Video") );
+
+    videoFrame = new XineVideoWidget ( this, "Video frame" );
+    connect ( videoFrame, SIGNAL( videoResized ( const QSize & )), this, SIGNAL( videoResized ( const QSize & )));
+
     Config cfg("OpiePlayer");
     cfg.setGroup("VideoWidget");
+    skin = cfg.readEntry("Skin","default");
 
-    QString Button0aPix, Button0bPix, controlsPix;
-    Button0aPix=cfg.readEntry( "Button0aPix", "opieplayer/mediaButton0a");
-    Button0bPix=cfg.readEntry( "Button0bPix","opieplayer/mediaButton0b");
-    controlsPix=cfg.readEntry( "controlsPix","opieplayer/mediaControls0" );
+    QString skinPath = "opieplayer2/skins/" + skin;
+    pixBg = new QPixmap( Resource::loadPixmap( QString("%1/background").arg(skinPath) ) );
+    imgUp = new QImage( Resource::loadImage( QString("%1/skinV_up").arg(skinPath) ) );
+    imgDn = new QImage( Resource::loadImage( QString("%1/skinV_down").arg(skinPath) ) );
 
-    cfg.setGroup("AudioWidget");
-    QString skin = cfg.readEntry("Skin","default");
-    QString skinPath = "opieplayer/skins/" + skin;
-    backgroundPix =   QString("%1/background").arg(skinPath) ;
+    imgButtonMask = new QImage( imgUp->width(), imgUp->height(), 8, 255 );
+    imgButtonMask->fill( 0 );
 
-    setBackgroundPixmap( Resource::loadPixmap( backgroundPix) );
-    pixmaps[0] = new QPixmap( Resource::loadPixmap( Button0aPix ) );
-    pixmaps[1] = new QPixmap( Resource::loadPixmap( Button0bPix ) );
-    pixmaps[2] = new QPixmap( Resource::loadPixmap( controlsPix) );
-    currentFrame = new QImage( 220 + 2, 160, (QPixmap::defaultDepth() == 16) ? 16 : 32 );
+    for ( int i = 0; i < 7; i++ ) {
+        QString filename = QString(getenv("OPIEDIR")) + "/pics/" + skinPath + "/skinV_mask_" + skinV_mask_file_names[i] + ".png";
+        masks[i] = new QBitmap( filename );
+        qDebug(filename);
+        if ( !masks[i]->isNull() ) {
+            QImage imgMask = masks[i]->convertToImage();
+            uchar **dest = imgButtonMask->jumpTable();
+            for ( int y = 0; y < imgUp->height(); y++ ) {
+                uchar *line = dest[y];
+                for ( int x = 0; x < imgUp->width(); x++ ) {
+                    if ( !qRed( imgMask.pixel( x, y ) ) )
+                        line[x] = i + 1;
+                }
+            }
+        }
+
+    }
+
+    for ( int i = 0; i < 7; i++ ) {
+        buttonPixUp[i] = NULL;
+        buttonPixDown[i] = NULL;
+    }
+
+    setBackgroundPixmap( *pixBg );
 
     slider = new QSlider( Qt::Horizontal, this );
     slider->setMinValue( 0 );
     slider->setMaxValue( 1 );
-
-    slider->setBackgroundPixmap( *this->backgroundPixmap () ); //Resource::loadPixmap( backgroundPix ) );
-    slider->setBackgroundOrigin( QWidget::ParentOrigin);
+    slider->setBackgroundPixmap( Resource::loadPixmap( backgroundPix ) );
     slider->setFocusPolicy( QWidget::NoFocus );
     slider->setGeometry( QRect( 7, 250, 220, 20 ) );
-
-    videoFrame = new XineVideoWidget ( this, "Video frame" );
-
-    connect ( videoFrame, SIGNAL( videoResized ( const QSize & )), this, SIGNAL( videoResized ( const QSize & )));
 
     connect( slider, SIGNAL( sliderPressed() ), this, SLOT( sliderPressed() ) );
     connect( slider, SIGNAL( sliderReleased() ), this, SLOT( sliderReleased() ) );
@@ -124,31 +140,84 @@ VideoWidget::VideoWidget(QWidget* parent, const char* name, WFlags f) :
     connect( mediaPlayerState, SIGNAL( pausedToggled(bool) ),  this, SLOT( setPaused(bool) ) );
     connect( mediaPlayerState, SIGNAL( playingToggled(bool) ), this, SLOT( setPlaying(bool) ) );
 
-    // Intialise state
     setLength( mediaPlayerState->length() );
     setPosition( mediaPlayerState->position() );
-    setFullscreen( mediaPlayerState->fullscreen() );
+
+      ////////////////////////// FIXME
+//    setFullscreen( mediaPlayerState->fullscreen() );
     setPaused( mediaPlayerState->paused() );
     setPlaying( mediaPlayerState->playing() );
-
+    qDebug("finished videowidget");
 }
 
 
 VideoWidget::~VideoWidget() {
-    for ( int i = 0; i < 3; i++ ) {
-        delete pixmaps[i];
+    for ( int i = 0; i < 7; i++ ) {
+        delete buttonPixUp[i];
+        delete buttonPixDown[i];
     }
-    delete currentFrame;
+
+    delete pixBg;
+    delete imgUp;
+    delete imgDn;
+    delete imgButtonMask;
+    for ( int i = 0; i < 7; i++ ) {
+        delete masks[i];
+    }
 }
 
+QPixmap *combineVImageWithBackground( QImage img, QPixmap bg, QPoint offset ) {
+    QPixmap pix( img.width(), img.height() );
+    QPainter p( &pix );
+    p.drawTiledPixmap( pix.rect(), bg, offset );
+    p.drawImage( 0, 0, img );
+    return new QPixmap( pix );
+}
+
+QPixmap *maskVPixToMask( QPixmap pix, QBitmap mask ) {
+    QPixmap *pixmap = new QPixmap( pix );
+    pixmap->setMask( mask );
+    return pixmap;
+}
+
+void VideoWidget::resizeEvent( QResizeEvent * ) {
+    int h = height();
+    int w = width();
+    int Vh = 160;
+          //videoFrame->height();
+    int Vw = 220;
+      //videoFrame->width();
+//    songInfo.setGeometry( QRect( 2, 10, w - 4, 20 ) );
+
+    slider->setFixedWidth( w - 110 );
+    slider->setGeometry( QRect( 15, h - 30, w - 90, 20 ) );
+    slider->setBackgroundOrigin( QWidget::ParentOrigin );
+//    time.setGeometry( QRect( w - 85, h - 30, 70, 20 ) );
+    xoff = 0;// ( imgUp->width() ) / 2;
+    yoff = 180;//(( Vh  - imgUp->height() ) / 2) - 10;
+    QPoint p( xoff, yoff );
+
+    QPixmap *pixUp = combineVImageWithBackground( *imgUp, *pixBg, p );
+    QPixmap *pixDn = combineVImageWithBackground( *imgDn, *pixBg, p );
+
+    for ( int i = 0; i < 7; i++ ) {
+        if ( !masks[i]->isNull() ) {
+            delete buttonPixUp[i];
+            delete buttonPixDown[i];
+            buttonPixUp[i] = maskVPixToMask( *pixUp, *masks[i] );
+            buttonPixDown[i] = maskVPixToMask( *pixDn, *masks[i] );
+        }
+    }
+
+    delete pixUp;
+    delete pixDn;
+}
 
 static bool videoSliderBeingMoved = FALSE;
-
 
 void VideoWidget::sliderPressed() {
     videoSliderBeingMoved = TRUE;
 }
-
 
 void VideoWidget::sliderReleased() {
     videoSliderBeingMoved = FALSE;
@@ -159,7 +228,6 @@ void VideoWidget::sliderReleased() {
     mediaPlayerState->setPosition( val );
 }
 
-
 void VideoWidget::setPosition( long i ) {
     updateSlider( i, mediaPlayerState->length() );
 }
@@ -168,7 +236,6 @@ void VideoWidget::setPosition( long i ) {
 void VideoWidget::setLength( long max ) {
     updateSlider( mediaPlayerState->position(), max );
 }
-
 
 void VideoWidget::setView( char view ) {
     if ( view == 'v' ) {
@@ -180,7 +247,6 @@ void VideoWidget::setView( char view ) {
         hide();
     }
 }
-
 
 void VideoWidget::updateSlider( long i, long max ) {
     // Will flicker too much if we don't do this
@@ -199,13 +265,11 @@ void VideoWidget::updateSlider( long i, long max ) {
     }
 }
 
-
 void VideoWidget::setToggleButton( int i, bool down ) {
     if ( down != videoButtons[i].isDown ) {
         toggleButton( i );
     }
 }
-
 
 void VideoWidget::toggleButton( int i ) {
     videoButtons[i].isDown = !videoButtons[i].isDown;
@@ -213,28 +277,23 @@ void VideoWidget::toggleButton( int i ) {
     paintButton ( &p, i );
 }
 
-
 void VideoWidget::paintButton( QPainter *p, int i ) {
-    int x = videoButtons[i].xPos;
-    int y = videoButtons[i].yPos;
-    int offset = 10 + videoButtons[i].isDown;
-    p->drawPixmap( x, y, *pixmaps[videoButtons[i].isDown] );
-    p->drawPixmap( x + 1 + offset, y + offset, *pixmaps[2], 9 * videoButtons[i].controlType, 0, 9, 9 );
-}
 
+    if ( videoButtons[i].isDown )
+        p->drawPixmap( xoff, yoff, *buttonPixDown[i] );
+    else
+        p->drawPixmap( xoff, yoff, *buttonPixUp[i] );
+}
 
 void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
     for ( int i = 0; i < numButtons; i++ ) {
-        int x = videoButtons[i].xPos;
-        int y = videoButtons[i].yPos;
         if ( event->state() == QMouseEvent::LeftButton ) {
-              // The test to see if the mouse click is inside the circular button or not
-              // (compared with the radius squared to avoid a square-root of our distance)
-            int radius = 16;
-            QPoint center = QPoint( x + radius, y + radius );
-            QPoint dXY = center - event->pos();
-            int dist = dXY.x() * dXY.x() + dXY.y() * dXY.y();
-            bool isOnButton = dist <= (radius * radius);
+              // The test to see if the mouse click is inside the button or not
+            int x = event->pos().x() - xoff;
+            int y = event->pos().y() - yoff;
+
+            bool isOnButton = ( x > 0 && y > 0 && x < imgButtonMask->width()
+                         && y < imgButtonMask->height() && imgButtonMask->pixelIndex( x, y ) == i + 1 );
             if ( isOnButton != videoButtons[i].isHeld ) {
                 videoButtons[i].isHeld = isOnButton;
                 toggleButton(i);
@@ -244,9 +303,7 @@ void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
                 videoButtons[i].isHeld = FALSE;
                 if ( !videoButtons[i].isToggle )
                     setToggleButton( i, FALSE );
-                qDebug("button toggled3  %d",i);
             }
-
         }
         switch (i) {
           case VideoPlay:       mediaPlayerState->setPlaying(videoButtons[i].isDown); return;
@@ -261,11 +318,9 @@ void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
     }
 }
 
-
 void VideoWidget::mousePressEvent( QMouseEvent *event ) {
     mouseMoveEvent( event );
 }
-
 
 void VideoWidget::mouseReleaseEvent( QMouseEvent *event ) {
     if ( mediaPlayerState->fullscreen() ) {
@@ -283,7 +338,7 @@ void VideoWidget::makeVisible() {
     showFullScreen();
     resize( qApp->desktop()->size() );
     slider->hide();
-	videoFrame-> setGeometry ( 0, 0, width ( ), height ( ));
+  videoFrame-> setGeometry ( 0, 0, width ( ), height ( ));
   } else {
     setBackgroundPixmap( Resource::loadPixmap(  backgroundPix ) );
     showNormal();
@@ -294,25 +349,40 @@ void VideoWidget::makeVisible() {
 }
 
 
-void VideoWidget::paintEvent( QPaintEvent * ) {
+void VideoWidget::paintEvent( QPaintEvent * pe) {
     QPainter p( this );
 
     if ( mediaPlayerState->fullscreen() ) {
-        // Clear the background
-      p.setBrush( QBrush( Qt::black ) );
+          // Clear the background
+        p.setBrush( QBrush( Qt::black ) );
 //      videoFrame->setGeometry( QRect( 0, 0 , 240 ,320  ) );
 
     } else {
 
- //     videoFrame->setGeometry( QRect( 0, 15 , 240 ,170  ) );
-         // draw the buttons
+          //     videoFrame->setGeometry( QRect( 0, 15 , 240 ,170  ) );
+          // draw the buttons
 
-        for ( int i = 0; i < numButtons; i++ ) {
-            paintButton( &p, i );
+        if ( !pe->erased() ) {
+              // Combine with background and double buffer
+            QPixmap pix( pe->rect().size() );
+            QPainter p( &pix );
+            p.translate( -pe->rect().topLeft().x(), -pe->rect().topLeft().y() );
+            p.drawTiledPixmap( pe->rect(), *pixBg, pe->rect().topLeft() );
+            for ( int i = 0; i < numButtons; i++ )
+                paintButton( &p, i );
+            QPainter p2( this );
+            p2.drawPixmap( pe->rect().topLeft(), pix );
+        } else {
+            QPainter p( this );
+            for ( int i = 0; i < numButtons; i++ )
+                paintButton( &p, i );
         }
-        // draw the slider
-        slider->repaint( TRUE );
-    }
+//          for ( int i = 0; i < numButtons; i++ ) {
+//              paintButton( &p, i );
+//          }
+//          // draw the slider
+//          slider->repaint( TRUE );
+      }
 }
 
 
@@ -321,9 +391,21 @@ void VideoWidget::closeEvent( QCloseEvent* ) {
 }
 
 
+bool VideoWidget::playVideo() {
+    bool result = FALSE;
 
-void VideoWidget::keyReleaseEvent( QKeyEvent *e)
-{
+    int stream = 0;
+
+    int sw = 240;
+    int sh = 320;
+    int dd = QPixmap::defaultDepth();
+    int w = height();
+    int h = width();
+
+    return true;
+}
+
+void VideoWidget::keyReleaseEvent( QKeyEvent *e) {
     switch ( e->key() ) {
 ////////////////////////////// Zaurus keys
       case Key_Home:
@@ -370,12 +452,12 @@ void VideoWidget::keyReleaseEvent( QKeyEvent *e)
 
     };
 }
+
 XineVideoWidget* VideoWidget::vidWidget() {
     return videoFrame;
 }
 
 
-void VideoWidget::setFullscreen ( bool b )
-{
-	setToggleButton( VideoFullscreen, b );
+void VideoWidget::setFullscreen ( bool b ) { 
+  setToggleButton( VideoFullscreen, b );
 }

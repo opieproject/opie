@@ -7,6 +7,7 @@
 #include <qtabwidget.h>
 #include <qpe/fileselector.h>
 #include <qpushbutton.h>
+#include <qpopupmenu.h>
 
 /* #include <qtimer.h> */
 
@@ -25,11 +26,13 @@ public:
     PlayListWidget( QWidget* parent=0, const char* name=0, WFlags fl=0 );
     ~PlayListWidget();
     QTabWidget * tabWidget;
-    QAction *fullScreenButton, *scaleButton;
+//    MenuItem *fullScreenButton, *scaleButton;
+//    QAction *fullScreenButton, *scaleButton;
     DocLnkSet files;
     DocLnkSet vFiles;
     QListView *audioView, *videoView, *playlistView;
     QLabel *libString;
+    QPopupMenu *pmView ;
     bool fromSetDocument;
     bool insanityBool;
     QString setDocFileRef;
@@ -67,6 +70,7 @@ private:
     void populateAudioView();
     void populateVideoView();
 private slots:
+    void pmViewActivated(int);
     void writem3u();
     void scanForAudio();
     void scanForVideo();

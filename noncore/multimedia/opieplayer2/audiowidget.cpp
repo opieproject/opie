@@ -137,7 +137,7 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
       //skin = "scaleTest";
 // color of background, frame, degree of transparency
 
-    QString skinPath = "opieplayer/skins/" + skin;
+    QString skinPath = "opieplayer2/skins/" + skin;
     pixBg = new QPixmap( Resource::loadPixmap( QString("%1/background").arg(skinPath) ) );
     imgUp = new QImage( Resource::loadImage( QString("%1/skin_up").arg(skinPath) ) );
     imgDn = new QImage( Resource::loadImage( QString("%1/skin_down").arg(skinPath) ) );

@@ -10,6 +10,7 @@
 #include <qpe/storage.h>
 
 #include <qpe/applnk.h>
+#include <qpopupmenu.h>
 #include <qpe/config.h>
 #include <qpe/global.h>
 #include <qpe/resource.h>
@@ -158,13 +159,19 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     new MenuItem( pmPlayList, tr( "Rescan for Audio Files" ), this,SLOT( scanForAudio() ) );
     new MenuItem( pmPlayList, tr( "Rescan for Video Files" ), this,SLOT( scanForVideo() ) );
 
-    QPopupMenu *pmView = new QPopupMenu( this );
-    menu->insertItem( tr( "View" ), pmView );
 
-    fullScreenButton = new QAction(tr("Full Screen"), Resource::loadPixmap("fullscreen"), QString::null, 0, this, 0);
-    fullScreenButton->addTo(pmView);
-    scaleButton = new QAction(tr("Scale"), Resource::loadPixmap("opieplayer/scale"), QString::null, 0, this, 0);
-    //scaleButton->addTo(pmView);
+    pmView = new QPopupMenu( this );
+    menu->insertItem( tr( "View" ), pmView );
+    pmView->isCheckable();
+
+    pmView->insertItem(  Resource::loadPixmap("fullscreen") , tr( "Full Screen"), this, SLOT( toggleFull() ) );
+
+    Config cfg( "OpiePlayer" );
+    bool b= cfg.readBoolEntry("FullScreen", 0);
+    mediaPlayerState->setFullscreen(  b );
+    pmView->setItemChecked( -16, b );
+
+    pmView->insertItem(  Resource::loadPixmap("opieplayer/scale") , tr( "Scale"), this, SLOT(toggleScaled() ) );
 
     QVBox *vbox5 = new QVBox( this ); vbox5->setBackgroundMode( PaletteButton );
     QVBox *vbox4 = new QVBox( vbox5 ); vbox4->setBackgroundMode( PaletteButton );
@@ -242,8 +249,11 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     tabWidget->insertTab(LTab,tr("Lists"));
 
     connect(tbDeletePlaylist,(SIGNAL(released())),SLOT( deletePlaylist()));
-    connect( fullScreenButton, SIGNAL(activated()), mediaPlayerState, SLOT(toggleFullscreen()) );
-    connect( scaleButton, SIGNAL(activated()), mediaPlayerState, SLOT(toggleScaled()) );
+
+connect( pmView, SIGNAL( activated(int)), this, SLOT( pmViewActivated(int) ) );
+
+//    connect( scaleButton, SIGNAL(activated()), mediaPlayerState, SLOT(toggleScaled() ) );
+
     connect( d->selectedFiles, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
              this,SLOT( playlistViewPressed(int, QListViewItem *, const QPoint&, int)) );
     connect( audioView, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
@@ -266,7 +276,6 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
 
     setCentralWidget( vbox5 );
 
-    Config cfg( "OpiePlayer" );
     readConfig( cfg );
     QString currentPlaylist = cfg.readEntry("CurrentPlaylist","");
     loadList(DocLnk( currentPlaylist));
@@ -1209,3 +1218,19 @@ void PlayListWidget::readPls(const QString &filename) {
     }
 }
 
+void PlayListWidget::pmViewActivated(int index) {
+qDebug("%d", index);
+switch(index) {
+  case -16:
+  {
+     
+      mediaPlayerState->toggleFullscreen();
+      bool b=mediaPlayerState->fullscreen();
+      pmView->setItemChecked( index,b);
+      Config cfg( "OpiePlayer" );
+      cfg.writeEntry("FullScreen", b);
+        
+  }
+  break;
+};
+}

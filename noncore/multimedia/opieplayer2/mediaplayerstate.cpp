@@ -159,6 +159,9 @@ void MediaPlayerState::setPlaylist( bool b ) {
 }
 
 void MediaPlayerState::setPaused( bool b ) {
+if(b) qDebug("setPaused true");
+ else   qDebug("setPaused false");
+ 
     if ( isPaused  == b ) {
         return;
     }

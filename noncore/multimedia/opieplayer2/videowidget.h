@@ -56,6 +56,7 @@ public:
     VideoWidget( QWidget* parent=0, const char* name=0, WFlags f=0 );
     ~VideoWidget();
 
+    bool playVideo();
     XineVideoWidget* vidWidget();
 public slots:
     void updateSlider( long, long );
@@ -71,9 +72,11 @@ public slots:
 
 signals:
     void sliderMoved( long );
-	void videoResized ( const QSize &s );
+  void videoResized ( const QSize &s );
 
 protected:
+    QString skin;
+    void resizeEvent( QResizeEvent * );
     void paintEvent( QPaintEvent *pe );
     void mouseMoveEvent( QMouseEvent *event );
     void mousePressEvent( QMouseEvent *event );
@@ -82,6 +85,18 @@ protected:
     void keyReleaseEvent( QKeyEvent *e);
 
 private:
+//    Ticker songInfo;
+    QPixmap *pixBg;
+    QImage  *imgUp;
+    QImage  *imgDn;
+    QImage  *imgButtonMask;
+    QBitmap *masks[7];
+    QPixmap *buttonPixUp[7];
+    QPixmap *buttonPixDown[7];
+//    QPixmap *pixmaps[4];
+    int xoff, yoff;
+  
+
     void paintButton( QPainter *p, int i );
     void toggleButton( int );
     void setToggleButton( int, bool );
