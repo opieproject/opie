@@ -37,19 +37,25 @@ public:
     void performGrab();
 
 public:
-    QPushButton *grabItButton;
+    QPushButton *grabItButton, *scapButton;
     QPixmap snapshot;
     QTimer* grabTimer;
+    QCheckBox *saveNamedCheck;
+    QString FileNamePath;
+    bool setFileName;
     void slotSave();
     void slotCopy();
     void setTime(int newTime);
 
     QSpinBox  *delaySpin;
 private:
+    int buttonPushed;
 private slots:
     void slotGrab();
+    void slotScap(); 
     void savePixmap();
     void grabTimerDone();
+    void nameScreenshot(bool);
 };
 
 class ScreenshotApplet : public QWidget
