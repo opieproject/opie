@@ -75,6 +75,8 @@ CONFIG_LIBOPIE_PIM	libopie/pim	pim.pro
 CONFIG_LIBQPE	library	library.pro
 CONFIG_LIBQPE-X11	x11/libqpe-x11	libqpe-x11.pro
 CONFIG_LIBSQL	libsql	libsql.pro
+CONFIG_LIBTREMOR core/multimedia/opieplayer/vorbis/tremor tremor.pro
+CONFIG_LIBTREMORPLUGIN core/multimedia/opieplayer/vorbis libtremor.pro
 CONFIG_LIGHT-AND-POWER	core/settings/light-and-power	light-and-power.pro
 CONFIG_LIQUID	noncore/styles/liquid	liquid.pro
 CONFIG_LOGOUTAPPLET	core/applets/logoutapplet	logoutapplet.pro
@@ -87,9 +89,10 @@ CONFIG_MOBILEMSG	noncore/comm/mobilemsg	mobilemsg.pro
 CONFIG_MODPLUG	core/multimedia/opieplayer/modplug	modplug.pro
 CONFIG_MULTIKEY	inputmethods/multikey	multikey.pro
 CONFIG_NETSYSTEMTIME	noncore/settings/netsystemtime	netsystemtime.pro
-CONFIG_NETWORKSETUP	noncore/settings/networksettings	networksettings.pro
 CONFIG_NETWORKAPPLET	noncore/applets/networkapplet	networkapplet.pro
+CONFIG_NETWORKSETUP	noncore/settings/networksettings	networksettings.pro
 CONFIG_NOTESAPPLET	noncore/applets/notesapplet	notesapplet.pro
+CONFIG_OAPP	core/apps/oapp	oapp.pro
 CONFIG_OBEX	core/applets/obex2	obex.pro
 CONFIG_OCOPSERVER	x11/ipc/server	ocopserver.pro
 CONFIG_ODICT	noncore/apps/odict	odict.pro
@@ -157,8 +160,6 @@ CONFIG_TODAY_STOCKTICKERLIB	noncore/todayplugins/stockticker/stocktickerlib	stoc
 CONFIG_TODAY_TODOLIST	core/pim/today/plugins/todolist	todolist.pro
 CONFIG_TODAY_WEATHER	noncore/todayplugins/weather weather.pro
 CONFIG_TODO	core/pim/todo	todo.pro
-CONFIG_LIBTREMOR core/multimedia/opieplayer/vorbis/tremor tremor.pro
-CONFIG_LIBTREMORPLUGIN core/multimedia/opieplayer/vorbis libtremor.pro
 CONFIG_UBROWSER	noncore/net/ubrowser	ubrowser.pro
 CONFIG_UNIKEYBOARD	inputmethods/unikeyboard	unikeyboard.pro
 CONFIG_USERMANAGER	noncore/settings/usermanager	usermanager.pro
