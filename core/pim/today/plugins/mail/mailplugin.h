@@ -18,12 +18,8 @@
 #ifndef MAIL_PLUGIN_H
 #define MAIL_PLUGIN_H
 
-#include <qstring.h>
 #include <qwidget.h>
 #include <qguardedptr.h>
-
-#include <opie/tododb.h>
-#include <opie/oclickablelabel.h>
 
 #include <opie/todayplugininterface.h>
 #include <opie/todayconfigwidget.h>

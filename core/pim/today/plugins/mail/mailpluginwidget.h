@@ -1,7 +1,7 @@
 /*
  * mailpluginwidget.h
  *
- * copyright   : (c) 2002 by Maximilian Reiﬂ
+ * copyright   : (c) 2002,2003 by Maximilian Reiﬂ
  * email       : harlekin@handhelds.org
  *
  */
@@ -14,21 +14,16 @@
  *                                                                         *
  ***************************************************************************/
 
-
 #ifndef MAIL_PLUGIN_WIDGET_H
 #define MAIL_PLUGIN_WIDGET_H
 
-#include <qstring.h>
-#include <qwidget.h>
 #include <qlayout.h>
 
-#include <opie/tododb.h>
 #include <opie/oclickablelabel.h>
 
 class MailPluginWidget : public QWidget {
 
     Q_OBJECT
-
 
 public:
     MailPluginWidget( QWidget *parent,  const char *name );
