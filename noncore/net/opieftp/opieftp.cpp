@@ -99,9 +99,12 @@ OpieFtp::OpieFtp( )
     layout->addMultiCellWidget( menuBar, 0, 0, 0, 2 );
 
     menuBar->insertItem( tr( "Connection" ), connectionMenu);
-    menuBar->insertItem( tr( "Local" ), localMenu);
-    menuBar->insertItem( tr( "Remote" ), remoteMenu);
+//      menuBar->insertItem( tr( "Local" ), localMenu);
+//      menuBar->insertItem( tr( "Remote" ), remoteMenu);
     menuBar->insertItem( tr( "View" ), tabMenu);
+
+    tabMenu->insertItem( tr( "Local" ), localMenu);
+    tabMenu->insertItem( tr( "Remote" ), remoteMenu);
 
     connectionMenu->insertItem( tr( "New" ), this,  SLOT( newConnection() ));
     connectionMenu->insertItem( tr( "Connect" ), this,  SLOT( connector() ));
@@ -122,10 +125,11 @@ OpieFtp::OpieFtp( )
     remoteMenu->insertSeparator();
     remoteMenu->insertItem( tr( "Delete" ), this, SLOT( remoteDelete() ));
 
+    tabMenu->insertSeparator();
     tabMenu->insertItem( tr( "Switch to Local" ), this, SLOT( switchToLocalTab() ));
     tabMenu->insertItem( tr( "Switch to Remote" ), this, SLOT( switchToRemoteTab() ));
     tabMenu->insertItem( tr( "Switch to Config" ), this, SLOT( switchToConfigTab() ));
-//    tabMenu->insertSeparator();
+    tabMenu->insertSeparator();
 //    tabMenu->insertItem( tr( "About" ), this, SLOT( doAbout() ));
     tabMenu->setCheckable(TRUE);
 
