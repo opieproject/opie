@@ -9,6 +9,14 @@
 
 #include <qmessagebox.h>
 
+#include <opie/oprocess.h>
+
+#ifdef QWS
+#include <opie/owait.h>
+#include <qpe/global.h>
+#include <qapplication.h>
+#endif
+
 #define DNSSCRIPT "changedns"
 
 /**
@@ -34,9 +42,41 @@ InterfaceSetupImp::~InterfaceSetupImp(){
  * Save the current settings, then write out the interfaces file and close. 
  */
 bool InterfaceSetupImp::saveChanges(){
+  bool error;
+  QString iface = interfaces->getInterfaceName(error);
   if(!saveSettings())
     return false;
+
+  qWarning("restarting interface %s\n", iface.latin1());
   interfaces->write();
+
+  QString ifup;
+  ifup += "ifdown ";
+  ifup += iface;
+  ifup += "; ifup ";
+  ifup += iface;
+  ifup += ";";
+
+  OProcess restart;
+  restart << "sh";
+  restart << "-c";
+  restart << ifup;
+
+  OWait *owait = new OWait();
+  Global::statusMessage( tr( "Restarting interface" ) );
+
+  owait->show();
+  qApp->processEvents();
+
+  if (!restart.start(OProcess::Block, OProcess::NoCommunication) ) {
+    qWarning("unstable to spawn ifdown/ifup");
+  }
+
+  owait->hide();
+  delete owait;
+
+  interface->refresh();
+
   return true;
 }
 
@@ -60,12 +100,15 @@ bool InterfaceSetupImp::saveSettings(){
    QMessageBox::information(this, "Not Saved.", "Please fill in the IP address and\n subnet entries.", QMessageBox::Ok);
    return false;
   }	
-  //interfaces.removeAllInterfaceOptions();
-  
   // DHCP
-  if(dhcpCheckBox->isChecked())
+  if(dhcpCheckBox->isChecked()) {
     interfaces->setInterfaceMethod(INTERFACES_METHOD_DHCP);
-  else{
+    interfaces->removeInterfaceOption("address");
+    interfaces->removeInterfaceOption("netmask");
+    interfaces->removeInterfaceOption("gateway");
+    interfaces->removeInterfaceOption("up "DNSSCRIPT" -a ");
+    interfaces->removeInterfaceOption("down "DNSSCRIPT" -r ");
+  } else{
     interfaces->setInterfaceMethod("static");
     interfaces->setInterfaceOption("address", ipAddressEdit->text());
     interfaces->setInterfaceOption("netmask", subnetMaskEdit->text());
@@ -96,7 +139,7 @@ void InterfaceSetupImp::setProfile(const QString &profile){
     leaseHoursLabel->hide();
   }
   */
-  
+
   QString newInterfaceName = interface->getInterfaceName();
   if(profile.length() > 0)
     newInterfaceName += "_" + profile;
@@ -143,6 +186,10 @@ void InterfaceSetupImp::setProfile(const QString &profile){
   ipAddressEdit->setText(interfaces->getInterfaceOption("address", error));
   subnetMaskEdit->setText(interfaces->getInterfaceOption("netmask", error));
   gatewayEdit->setText(interfaces->getInterfaceOption("gateway", error)); 
+
+  qWarning("InterfaceSetupImp::setProfile(%s)\n", profile.latin1());
+  qWarning("InterfaceSetupImp::setProfile: iface is %s\n", interfaces->getInterfaceName(error).latin1());
+  
 }
   
 // interfacesetup.cpp
