@@ -172,12 +172,14 @@ void MWirelessNetworkInterface::updateStatistics()
     QString status;
     QString name;
     QFile wfile( PROCNETWIRELESS );
-    wfile.open( IO_ReadOnly );
+    bool hasFile = wfile.open( IO_ReadOnly );
     QTextStream wstream( &wfile );
-    wstream.readLine();  // skip the first two lines
-    wstream.readLine();  // because they only contain headers
-
-    if ( wstream.atEnd() )
+    if ( hasFile )
+    {
+        wstream.readLine();  // skip the first two lines
+        wstream.readLine();  // because they only contain headers
+    }
+    if ( ( !hasFile ) || ( wstream.atEnd() ) )
     {
         qDebug( "WIFIAPPLET: D'oh! Someone removed the card..." );
         quality = -1;
@@ -202,13 +204,13 @@ void MWirelessNetworkInterface::updateStatistics()
 
 MNetwork::MNetwork()
 {
-    qDebug( "MNetwork::MNetwork()" );
-    procfile = "/proc/net/dev";
+    //qDebug( "MNetwork::MNetwork()" );
+    procfile = PROCNETDEV;
 }
 
 MNetwork::~MNetwork()
 {
-    qDebug( "MNetwork::~MNetwork()" );
+    //qDebug( "MNetwork::~MNetwork()" );
 }
 
 //---------------------------------------------------------------------------
@@ -217,13 +219,13 @@ MNetwork::~MNetwork()
 
 MWirelessNetwork::MWirelessNetwork()
 {
-    qDebug( "MWirelessNetwork::MWirelessNetwork()" );
-    procfile = "/proc/net/wireless";
+    //qDebug( "MWirelessNetwork::MWirelessNetwork()" );
+    procfile = PROCNETWIRELESS;
 }
 
 MWirelessNetwork::~MWirelessNetwork()
 {
-    qDebug( "MWirelessNetwork::~MWirelessNetwork()" );
+    //qDebug( "MWirelessNetwork::~MWirelessNetwork()" );
 }
 
 MNetworkInterface* MWirelessNetwork::createInterface( const char* n ) const
@@ -247,7 +249,9 @@ void MNetwork::enumerateInterfaces()
     interfaces.clear();
     QString str;
     QFile f( procfile );
-    f.open( IO_ReadOnly );
+    bool hasFile = f.open( IO_ReadOnly );
+    if ( !hasFile )
+        return;
     QTextStream s( &f );
     s.readLine();
     s.readLine();
