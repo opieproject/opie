@@ -606,10 +606,8 @@ void Global::invoke(const QString &c)
     {
 	char *oldpre = ::getenv ( "LD_PRELOAD" );
     	
-	extern bool opie_block_style;
-    
 	QString newpre = QPEApplication::qpeDir ( ) + "/lib/libpreload.so";
-	if ( opie_block_style && QFile::exists ( newpre )) {
+	if ( QFile::exists ( newpre )) {
 	    if ( oldpre && oldpre [0] )
 		newpre = newpre + ":" + oldpre;
 	    ::setenv ( "LD_PRELOAD", newpre. latin1( ), 1 );
