@@ -110,16 +110,19 @@ namespace {
     inline void IconViewItem::check_pix()const
     {
         if (_dirPix && _dirPix->width()>m_iconsize) {
-            QPixmap*Pix = new QPixmap(*_dirPix);
-            Pix->resize(m_iconsize,m_iconsize);
-            delete _dirPix;
-            _dirPix = Pix;
+            QImage Pix = _dirPix->convertToImage();
+            *_dirPix = Pix.smoothScale(m_iconsize,m_iconsize);
         }
         if (!_cpyPix && _unkPix) {
             if (_unkPix->width()>=m_iconsize) {
-                _cpyPix = new QPixmap(*_unkPix);
-                if (_unkPix->width()>m_iconsize)
-                    _cpyPix->resize(m_iconsize,m_iconsize);
+                QImage Pix = _unkPix->convertToImage();
+                _cpyPix = new QPixmap();
+                if (_unkPix->width()>m_iconsize) {
+                    *_cpyPix = Pix.smoothScale(m_iconsize,m_iconsize);
+                } else {
+                    _cpyPix->convertFromImage(Pix);
+                }
+
             } else {
                 _cpyPix = new QPixmap(m_iconsize,m_iconsize);
                 _cpyPix->fill();
