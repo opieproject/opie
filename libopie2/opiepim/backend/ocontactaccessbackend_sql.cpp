@@ -39,6 +39,7 @@
 #include <qpe/global.h>
 #include <qpe/recordfields.h>
 
+#include <opie2/opimcontact.h>
 #include <opie2/opimcontactfields.h>
 #include <opie2/opimdateconversion.h>
 #include <opie2/osqldriver.h>
@@ -46,18 +47,18 @@
 #include <opie2/osqlmanager.h>
 #include <opie2/osqlquery.h>
 
+using namespace Opie;
 using namespace Opie::DB;
 
 
 /*
- * Implementation of used query types
- * CREATE query
+ * Implementation of used query types * CREATE query
  * LOAD query
  * INSERT
  * REMOVE
  * CLEAR
  */
-namespace Opie {
+namespace {
 	/**
 	 * CreateQuery for the Todolist Table
 	 */
@@ -150,7 +151,7 @@ namespace Opie {
 	
 
 
-	// We using three tables to store the information:
+	// We using two tables to store the information:
 	// 1. addressbook  : It contains General information about the contact (non custom)
 	// 2. custom_data  : Not official supported entries
 	// All tables are connected by the uid of the contact.
@@ -168,7 +169,7 @@ namespace Opie {
 		}
 		qu += " );";
 		
-		qu += "create table custom_data( uid INTEGER, id INTEGER, type VARCHAR, priority INTEGER, value VARCHAR, PRIMARY KEY /* identifier */ (uid, id) );";
+		qu += "create table custom_data( uid INTEGER, id INTEGER, type VARCHAR(10), priority INTEGER, value VARCHAR(10), PRIMARY KEY /* identifier */ (uid, id) );";
 
 		return qu;
 	}
@@ -221,35 +222,26 @@ namespace Opie {
 			// Hmmm.. Maybe not very cute solution..
 			int id = translate[*it];
 			switch ( id ){
-			case Qtopia::Birthday:{
-				// These entries should stored in a special format
-				// year-month-day
-				QDate day = m_contact.birthday();
-				if ( day.isValid() ){
-					qu += QString(",\"%1-%2-%3\"")
-						.arg( day.year() )
-						.arg( day.month() )
-						.arg( day.day() );
-				} else {
-					qu += ",\"\"";
-				}
-			}
-				break;
+			case Qtopia::Birthday:
 			case Qtopia::Anniversary:{
+				QDate day;
+				if ( id == Qtopia::Birthday ){
+					day = m_contact.birthday();
+				} else {
+					day = m_contact.anniversary();
+				}
 				// These entries should stored in a special format
 				// year-month-day
-				QDate day = m_contact.anniversary();
 				if ( day.isValid() ){
 					qu += QString(",\"%1-%2-%3\"")
-						.arg( day.year() )
-						.arg( day.month() )
-						.arg( day.day() );
+						.arg( QString::number( day.year() ).rightJustify( 4, '0' ) )
+						.arg( QString::number( day.month() ).rightJustify( 2, '0' ) )
+						.arg( QString::number( day.day() ).rightJustify( 2, '0' ) );
 				} else {
 					qu += ",\"\"";
 				}
 			}
 				break;
-
 			default:
 				qu += QString( ",\"%1\"" ).arg( contactMap[id] );
 			}
@@ -268,15 +260,15 @@ namespace Opie {
 				+ ","
 				+  QString::number( id++ ) 
 				+ ",'" 
-				+ it.key() //.latin1()
+				+ it.key()
 				+ "',"
 				+ "0" // Priority for future enhancements
 				+ ",'" 
-				+ it.data() //.latin1()
+				+ it.data()
 				+ "');";
 		}		
 		// qu  += "commit;";
-		qWarning("add %s", qu.latin1() );
+		qDebug("add %s", qu.latin1() );
 		return qu;
 	}
 	
@@ -358,7 +350,7 @@ OPimContactAccessBackend_SQL::OPimContactAccessBackend_SQL ( const QString& /* a
 						       const QString& filename ): 
 	OPimContactAccessBackend(), m_changed(false), m_driver( NULL )
 {
-	qWarning("C'tor OPimContactAccessBackend_SQL starts");
+	qDebug("C'tor OPimContactAccessBackend_SQL starts");
 	QTime t;
 	t.start();
 
@@ -375,7 +367,7 @@ OPimContactAccessBackend_SQL::OPimContactAccessBackend_SQL ( const QString& /* a
 
 	load();
 
-	qWarning("C'tor OPimContactAccessBackend_SQL ends: %d ms", t.elapsed() );
+	qDebug("C'tor OPimContactAccessBackend_SQL ends: %d ms", t.elapsed() );
 }
 
 OPimContactAccessBackend_SQL::~OPimContactAccessBackend_SQL ()
@@ -476,54 +468,123 @@ bool OPimContactAccessBackend_SQL::replace ( const OPimContact &contact )
 
 OPimContact OPimContactAccessBackend_SQL::find ( int uid ) const
 {
-	qWarning("OPimContactAccessBackend_SQL::find()");
+	qDebug("OPimContactAccessBackend_SQL::find()");
 	QTime t;
 	t.start();
 
 	OPimContact retContact( requestNonCustom( uid ) );
 	retContact.setExtraMap( requestCustom( uid ) );
 
-	qWarning("OPimContactAccessBackend_SQL::find() needed: %d ms", t.elapsed() );
+	qDebug("OPimContactAccessBackend_SQL::find() needed: %d ms", t.elapsed() );
 	return retContact;
 }
 
 
 
-QArray<int> OPimContactAccessBackend_SQL::queryByExample ( const OPimContact &query, int settings, const QDateTime& d = QDateTime() )
+QArray<int> OPimContactAccessBackend_SQL::queryByExample ( const OPimContact &query, int settings, const QDateTime& qd )
 {
 	QString qu = "SELECT uid FROM addressbook WHERE";
+	QString searchQuery ="";
+
+	QDate startDate;
+	
+	if ( qd.isValid() )
+		startDate = qd.date();
+	else
+		startDate = QDate::currentDate();
+	
 
 	QMap<int, QString> queryFields = query.toMap();
 	QStringList fieldList = OPimContactFields::untrfields( false );
 	QMap<QString, int> translate = OPimContactFields::untrFieldsToId();
 
 	// Convert every filled field to a SQL-Query
-	bool isAnyFieldSelected = false;
+// 	bool isAnyFieldSelected = false;
 	for ( QStringList::Iterator it = ++fieldList.begin(); it != fieldList.end(); ++it ){
+
 		int id = translate[*it];
 		QString queryStr = queryFields[id];
+		QDate* endDate = 0l;
+
 		if ( !queryStr.isEmpty() ){
-			isAnyFieldSelected = true;
+			// If something is alredy stored in the query, add an "AND"
+			// to the end of the string to prepare for the next ..
+			if ( !searchQuery.isEmpty() )
+				searchQuery += " AND";
+
+// 			isAnyFieldSelected = true;
 			switch( id ){
+			case Qtopia::Birthday:
+				endDate = new QDate( query.birthday() ); 
+				// Fall through !
+			case Qtopia::Anniversary:
+				if ( endDate == 0l )
+					endDate = new QDate( query.anniversary() );
+
+				if ( settings & OPimContactAccess::DateDiff ) {
+					searchQuery += QString( " (\"%1\" <= '%2-%3-%4\' AND \"%5\" >= '%6-%7-%8')" )
+						.arg( *it )
+						.arg( QString::number( endDate->year() ).rightJustify( 4, '0' ) )
+						.arg( QString::number( endDate->month() ).rightJustify( 2, '0' ) )
+						.arg( QString::number( endDate->day() ).rightJustify( 2, '0' ) )
+						.arg( *it )
+						.arg( QString::number( startDate.year() ).rightJustify( 4, '0' ) )
+						.arg( QString::number( startDate.month() ).rightJustify( 2, '0' ) ) 
+						.arg( QString::number( startDate.day() ).rightJustify( 2, '0' ) ) ;
+				}
+
+				if ( settings & OPimContactAccess::DateYear ){
+					if ( settings & OPimContactAccess::DateDiff )
+						searchQuery += " AND";
+
+					searchQuery += QString( " (\"%1\" LIKE '%2-%')" )
+						.arg( *it )
+						.arg( QString::number( endDate->year() ).rightJustify( 4, '0' ) );
+				}
+
+				if ( settings & OPimContactAccess::DateMonth ){
+					if ( ( settings & OPimContactAccess::DateDiff ) 
+					     || ( settings & OPimContactAccess::DateYear ) )
+						searchQuery += " AND";
+
+					searchQuery += QString( " (\"%1\" LIKE '%-%2-%')" )
+						.arg( *it )
+						.arg( QString::number( endDate->month() ).rightJustify( 2, '0' ) );
+				}
+
+				if ( settings & OPimContactAccess::DateDay ){
+					if ( ( settings & OPimContactAccess::DateDiff ) 
+					     || ( settings & OPimContactAccess::DateYear ) 
+					     || ( settings & OPimContactAccess::DateMonth ) )
+						searchQuery += " AND";
+
+					searchQuery += QString( " (\"%1\" LIKE '%-%-%2')" )
+						.arg( *it )
+						.arg( QString::number( endDate->day() ).rightJustify( 2, '0' ) );
+				}
+
+				break;
 			default:
 				// Switching between case sensitive and insensitive...
 				// LIKE is not case sensitive, GLOB is case sensitive
 				// Do exist a better solution to switch this ?
 				if ( settings & OPimContactAccess::IgnoreCase )
-					qu += "(\"" + *it + "\"" + " LIKE " + "'" 
-						+ queryStr.replace(QRegExp("\\*"),"%") + "'" + ") AND "; 
+					searchQuery += "(\"" + *it + "\"" + " LIKE " + "'" 
+						+ queryStr.replace(QRegExp("\\*"),"%") + "'" + ")"; 
 				else
-					qu += "(\"" + *it + "\"" + " GLOB " + "'" 
-						+ queryStr + "'" + ") AND "; 
+					searchQuery += "(\"" + *it + "\"" + " GLOB " + "'" 
+						+ queryStr + "'" + ")"; 
 					
 			}
 		}
 	}
 	// Skip trailing "AND"
-	if ( isAnyFieldSelected )
-		qu = qu.left( qu.length() - 4 );
+// 	if ( isAnyFieldSelected )
+// 		qu = qu.left( qu.length() - 4 );
 
-	qWarning( "queryByExample query: %s", qu.latin1() );
+	qu += searchQuery;
+
+	qDebug( "queryByExample query: %s", qu.latin1() );
 
 	// Execute query and return the received uid's
 	OSQLRawQuery raw( qu );
@@ -547,7 +608,12 @@ QArray<int> OPimContactAccessBackend_SQL::matchRegexp(  const QRegExp &r ) const
 const uint OPimContactAccessBackend_SQL::querySettings()
 {
 	return OPimContactAccess::IgnoreCase 
-		|| OPimContactAccess::WildCards;
+		|| OPimContactAccess::WildCards
+		|| OPimContactAccess::DateDiff
+		|| OPimContactAccess::DateYear
+		|| OPimContactAccess::DateMonth
+		|| OPimContactAccess::DateDay
+		;
 }
 
 bool OPimContactAccessBackend_SQL::hasQuerySettings (uint querySettings) const
@@ -561,10 +627,10 @@ bool OPimContactAccessBackend_SQL::hasQuerySettings (uint querySettings) const
 	if ( ( querySettings & ( 
 				OPimContactAccess::IgnoreCase
 				| OPimContactAccess::WildCards
-// 				| OPimContactAccess::DateDiff
-// 				| OPimContactAccess::DateYear
-// 				| OPimContactAccess::DateMonth
-// 				| OPimContactAccess::DateDay
+ 				| OPimContactAccess::DateDiff
+ 				| OPimContactAccess::DateYear
+ 				| OPimContactAccess::DateMonth
+ 				| OPimContactAccess::DateDay
 // 				| OPimContactAccess::RegExp
 // 				| OPimContactAccess::ExactMatch
 			       ) ) != querySettings )
@@ -609,7 +675,7 @@ QArray<int> OPimContactAccessBackend_SQL::sorted( bool asc,  int , int ,  int )
 	if ( !asc )
 		query += "DESC";
 
-	// qWarning("sorted query is: %s", query.latin1() ); 
+	// qDebug("sorted query is: %s", query.latin1() ); 
 
 	OSQLRawQuery raw( query );
 	OSQLResult res = m_driver->query( &raw );
@@ -620,14 +686,14 @@ QArray<int> OPimContactAccessBackend_SQL::sorted( bool asc,  int , int ,  int )
 
 	QArray<int> list = extractUids( res );
 
-	qWarning("sorted needed %d ms!", t.elapsed() );
+	qDebug("sorted needed %d ms!", t.elapsed() );
 	return list;
 }
 
 
 void OPimContactAccessBackend_SQL::update()
 {
-	qWarning("Update starts");
+	qDebug("Update starts");
 	QTime t;
 	t.start();
 
@@ -643,25 +709,25 @@ void OPimContactAccessBackend_SQL::update()
 
 	m_changed = false;
 
-	qWarning("Update ends %d ms", t.elapsed() );
+	qDebug("Update ends %d ms", t.elapsed() );
 }
 
 QArray<int> OPimContactAccessBackend_SQL::extractUids( OSQLResult& res ) const
 {
-	qWarning("extractUids");
+	qDebug("extractUids");
 	QTime t;
 	t.start();
 	OSQLResultItem::ValueList list = res.results();
 	OSQLResultItem::ValueList::Iterator it;
 	QArray<int> ints(list.count() );
-	qWarning(" count = %d", list.count() );
+	qDebug(" count = %d", list.count() );
 
 	int i = 0;
 	for (it = list.begin(); it != list.end(); ++it ) {
 		ints[i] =  (*it).data("uid").toInt();
 		i++;
 	}
-	qWarning("extractUids ready: count2 = %d needs %d ms", i, t.elapsed() );
+	qDebug("extractUids ready: count2 = %d needs %d ms", i, t.elapsed() );
 
 	return ints;
 
@@ -696,7 +762,7 @@ QMap<int, QString>  OPimContactAccessBackend_SQL::requestNonCustom( int uid ) co
 		int id =  translate[*it];
 		QString value = resItem.data( (*it) );
 		
-		// qWarning("Reading %s... found: %s", (*it).latin1(), value.latin1() );
+		// qDebug("Reading %s... found: %s", (*it).latin1(), value.latin1() );
 
 		switch( id ){
 		case Qtopia::Birthday:
@@ -714,7 +780,7 @@ QMap<int, QString>  OPimContactAccessBackend_SQL::requestNonCustom( int uid ) co
 		}
 			break;
 		case Qtopia::AddressCategory:
-			qWarning("Category is: %s", value.latin1() );
+			qDebug("Category is: %s", value.latin1() );
 		default:
 			nonCustomMap.insert( id, value );
 		}
@@ -724,8 +790,8 @@ QMap<int, QString>  OPimContactAccessBackend_SQL::requestNonCustom( int uid ) co
 	nonCustomMap.insert( Qtopia::AddressUid, resItem.data( "uid" ) ); 
 	t3needed = t3.elapsed();
 
-	// qWarning("Adding UID: %s", resItem.data( "uid" ).latin1() );
-	qWarning("RequestNonCustom needed: insg.:%d ms, query: %d ms, mapping: %d ms", 
+	// qDebug("Adding UID: %s", resItem.data( "uid" ).latin1() );
+	qDebug("RequestNonCustom needed: insg.:%d ms, query: %d ms, mapping: %d ms", 
 		 t.elapsed(), t2needed, t3needed  );
 
 	return nonCustomMap;
@@ -753,7 +819,7 @@ QMap<QString, QString>  OPimContactAccessBackend_SQL::requestCustom( int uid ) c
 		customMap.insert( (*it).data( "type" ), (*it).data( "value" ) );
 	}
 
-	qWarning("RequestCustom needed: %d ms", t.elapsed() );
+	qDebug("RequestCustom needed: %d ms", t.elapsed() );
 	return customMap;
 }
 

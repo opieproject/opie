@@ -29,7 +29,7 @@
 #ifndef OPIE_PIM_ACCESS_SQL_H
 #define OPIE_PIM_ACCESS_SQL_H
 
-#include <qasciidict.h>
+/* #include <qasciidict.h> */
 
 #include <opie2/otodoaccessbackend.h>
 
@@ -80,8 +80,9 @@ private:
     inline QArray<int> uids( const Opie::DB::OSQLResult& )const;
     OPimTodo todo( int uid )const;
     QBitArray sup() const;
+    QMap<QString, QString>  requestCustom( int uid ) const;
 
-    QAsciiDict<int> m_dict;
+    // QAsciiDict<int> m_dict;
     Opie::DB::OSQLDriver* m_driver;
     QArray<int> m_uids;
     bool m_dirty : 1;

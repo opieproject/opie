@@ -230,6 +230,7 @@ QArray<int> OPimContactAccessBackend_XML::queryByExample ( const OPimContact &qu
 			case Qtopia::Birthday:
 				queryDate = new QDate( query.birthday() );
 				checkDate = new QDate( (*it)->birthday() );
+				// fall through
 			case Qtopia::Anniversary:
 				if ( queryDate == 0l ){
 					queryDate = new QDate( query.anniversary() );

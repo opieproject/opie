@@ -88,7 +88,9 @@ private:
 
     void initFields();
     void update();
+
     QArray<int> extractUids( Opie::DB::OSQLResult& res ) const;
+    QMap<QString, QString> requestCustom( int uid ) const;
 
 };
 

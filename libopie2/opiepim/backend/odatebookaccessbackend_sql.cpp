@@ -48,6 +48,43 @@
 
 using namespace Opie::DB;
 
+namespace {
+	/**
+	 * a find query for custom elements
+	 */
+	class FindCustomQuery : public OSQLQuery {
+	public:
+		FindCustomQuery(int uid);
+		FindCustomQuery(const QArray<int>& );
+		~FindCustomQuery();
+		QString query()const;
+	private:
+		QString single()const;
+		QString multi()const;
+		QArray<int> m_uids;
+		int m_uid;
+	};
+
+	FindCustomQuery::FindCustomQuery(int uid)
+		: OSQLQuery(), m_uid( uid ) {
+	}
+	FindCustomQuery::FindCustomQuery(const QArray<int>& ints)
+		: OSQLQuery(), m_uids( ints ){
+	}
+	FindCustomQuery::~FindCustomQuery() {
+	}
+	QString FindCustomQuery::query()const{
+//		if ( m_uids.count() == 0 )
+			return single();
+	}
+	QString FindCustomQuery::single()const{
+		QString qu = "select uid, type, value from custom_data where uid = ";
+		qu += QString::number(m_uid);
+		return qu;
+	}
+}
+
+
 namespace Opie {
 
 
@@ -123,7 +160,7 @@ bool ODateBookAccessBackend_SQL::load()
 	}
 	qu += " );";
 		
-	qu += "create table custom_data( uid INTEGER, id INTEGER, type VARCHAR, priority INTEGER, value VARCHAR, PRIMARY KEY /* identifier */ (uid, id) );";
+	qu += "create table custom_data( uid INTEGER, id INTEGER, type VARCHAR(10), priority INTEGER, value VARCHAR(10), PRIMARY KEY /* identifier */ (uid, id) );";
 
 	qWarning( "command: %s", qu.latin1() );
 
@@ -202,9 +239,9 @@ OPimEvent ODateBookAccessBackend_SQL::find( int uid ) const{
 		dateEventMap.insert( m_reverseFieldMap[*it], resItem.data( *it ) );
 	}
 
-	// Last step: Put map into date event and return it
+	// Last step: Put map into date event, add custom map and return it
 	OPimEvent retDate( dateEventMap );
-
+	retDate.setExtraMap( requestCustom( uid ) );
 	return retDate;
 }
 
@@ -364,5 +401,32 @@ QArray<int> ODateBookAccessBackend_SQL::extractUids( OSQLResult& res ) const
 	return ints;
 
 }
+
+QMap<QString, QString> ODateBookAccessBackend_SQL::requestCustom( int uid ) const
+{
+	QTime t;
+	t.start();
+
+	QMap<QString, QString> customMap;
+	
+	FindCustomQuery query( uid );
+	OSQLResult res_custom = m_driver->query( &query );
+
+	if ( res_custom.state() == OSQLResult::Failure ) {
+		qWarning("OSQLResult::Failure in find query !!");
+		QMap<QString, QString> empty;
+		return empty;
+	}
+
+	OSQLResultItem::ValueList list = res_custom.results();
+	OSQLResultItem::ValueList::Iterator it = list.begin();
+	for ( ; it != list.end(); ++it ) {
+		customMap.insert( (*it).data( "type" ), (*it).data( "value" ) );
+	}
+
+	qDebug("RequestCustom needed: %d ms", t.elapsed() );
+	return customMap;
+}
+
 
 }

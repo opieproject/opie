@@ -1,6 +1,7 @@
 /*
                              This file is part of the Opie Project
                              Copyright (C) Stefan Eilers (Eilers.Stefan@epost.de)
+                             Copyright (C) Holger Freyther (zecke@handhelds.org)
               =.             Copyright (C) The Opie Team <opie-devel@handhelds.org>
             .=l.
            .>+-=
@@ -28,6 +29,8 @@
 */
 
 #include <qdatetime.h>
+#include <qmap.h>
+#include <qstring.h>
 
 #include <qpe/global.h>
 
@@ -148,6 +151,24 @@ namespace {
     };
 
 
+	/**
+	 * a find query for custom elements
+	 */
+	class FindCustomQuery : public OSQLQuery {
+	public:
+		FindCustomQuery(int uid);
+		FindCustomQuery(const QArray<int>& );
+		~FindCustomQuery();
+		QString query()const;
+	private:
+		QString single()const;
+		QString multi()const;
+		QArray<int> m_uids;
+		int m_uid;
+	};
+	
+
+
     CreateQuery::CreateQuery() : OSQLQuery() {}
     CreateQuery::~CreateQuery() {}
     QString CreateQuery::query()const {
@@ -157,7 +178,7 @@ namespace {
 	// This is the recurrance-stuff .. Exceptions are currently not supported (see OPimRecurrence.cpp) ! (eilers)
 	qu += "RType, RWeekdays, RPosition, RFreq, RHasEndDate, EndDate, Created, Exceptions, "; 
 	qu += "reminders, alarms, maintainer, startdate, completeddate);";
-	qu += "create table custom_data( uid INTEGER, id INTEGER, type VARCHAR(10), value VARCHAR(10), PRIMARY KEY /* identifier */ (uid, id) );";
+	qu += "create table custom_data( uid INTEGER, id INTEGER, type VARCHAR(10), priority INTEGER, value VARCHAR(10), PRIMARY KEY /* identifier */ (uid, id) );";
         return qu;
     }
 
@@ -179,7 +200,9 @@ namespace {
     }
     /*
      * converts from a OPimTodo to a query
-     * we leave out X-Ref + Alarms
+     * we leave out X-Ref + Maintainer
+     * FIXME: Implement/Finish toMap()/fromMap() into OpimTodo to move the encoding
+     *        decoding stuff there.. (eilers)
      */
     QString InsertQuery::query()const{
 
@@ -215,9 +238,9 @@ namespace {
 		+ "'" + m_todo.description()                      + "'" + ","
 		+ "'" + m_todo.summary()                          + "'" + "," 
 		+       QString::number(m_todo.priority() )             + ","
-		+ "'" + QString::number(year) + "-" 
-		+       QString::number(month)
-		+       "-" + QString::number( day )              + "'" + ","
+		+ "'" + QString::number(year).rightJustify( 4, '0' ) + "-" 
+		+       QString::number(month).rightJustify( 2, '0' )
+		+       "-" + QString::number( day ).rightJustify( 2, '0' )+ "'" + ","
 		+       QString::number( m_todo.progress() )            + ","
  		+       QString::number( m_todo.state().state() )       + ","
 		+ "'" + recMap[ OPimRecurrence::RType ]                   + "'" + ","
@@ -240,15 +263,35 @@ namespace {
 	}
 
 	qu +=   QString( "''" )                             + QString( "," ) // Maintainers (cur. not supported !)
-		+ "'" + QString::number(sYear) + "-" 
-		+ QString::number(sMonth)
-		+ "-" + QString::number(sDay)                     + "'" + ","
-		+ "'" + QString::number(eYear) + "-"
-		+       QString::number(eMonth)
-		+       "-"+QString::number(eDay)                 + "'"
+		+ "'" + QString::number(sYear).rightJustify( 4, '0' ) + "-" 
+		+ QString::number(sMonth).rightJustify( 2, '0' )
+		+ "-" + QString::number(sDay).rightJustify( 2, '0' )+ "'" + ","
+		+ "'" + QString::number(eYear).rightJustify( 4, '0' ) + "-"
+		+       QString::number(eMonth).rightJustify( 2, '0' )
+		+       "-"+QString::number(eDay).rightJustify( 2, '0' ) + "'"
 		+ ")";
 
-        qWarning("add %s", qu.latin1() );
+	// Save custom Entries:
+	int id = 0;
+	id = 0;
+	QMap<QString, QString> customMap = m_todo.toExtraMap();
+	for( QMap<QString, QString>::Iterator it = customMap.begin(); 
+	     it != customMap.end(); ++it ){
+		qu  += "insert into custom_data VALUES(" 
+			+  QString::number( m_todo.uid() )
+			+ ","
+			+  QString::number( id++ ) 
+			+ ",'" 
+			+ it.key()
+			+ "',"
+			+ "0" // Priority for future enhancements
+			+ ",'" 
+			+ it.data()
+			+ "');";
+	}		
+	
+
+        qDebug("add %s", qu.latin1() );
         return qu;
     }
 
@@ -300,7 +343,10 @@ namespace {
     QString OverDueQuery::query()const {
         QDate date = QDate::currentDate();
         QString str;
-        str = QString("select uid from todolist where DueDate ='%1-%2-%3'").arg(date.year() ).arg(date.month() ).arg(date.day() );
+        str = QString("select uid from todolist where DueDate ='%1-%2-%3'")
+		.arg( QString::number( date.year() ).rightJustify( 4, '0' ) )
+		.arg( QString::number( date.month() ).rightJustify( 2, '0' ) )
+		.arg( QString::number( date.day() ) .rightJustify( 2, '0' ) );
 
         return str;
     }
@@ -315,24 +361,50 @@ namespace {
     QString EffQuery::with()const {
         QString str;
         str = QString("select uid from todolist where ( DueDate >= '%1-%2-%3' AND DueDate <= '%4-%5-%6' ) OR DueDate = '0-0-0' ")
-            .arg( m_start.year() ).arg( m_start.month() ).arg( m_start.day() )
-            .arg( m_end  .year() ).arg( m_end  .month() ).arg( m_end  .day() );
+		.arg( QString::number( m_start.year() ).rightJustify( 4, '0' ) )
+		.arg( QString::number( m_start.month() ).rightJustify( 2, '0' ) )
+		.arg( QString::number( m_start.day() ).rightJustify( 2, '0' ) )
+		.arg( QString::number( m_end.year() ).rightJustify( 4, '0' ) )
+		.arg( QString::number( m_end.month() ).rightJustify( 2, '0' ) )
+		.arg( QString::number( m_end.day() ).rightJustify( 2, '0' ) );
         return str;
     }
     QString EffQuery::out()const {
         QString str;
         str = QString("select uid from todolist where DueDate >= '%1-%2-%3' AND  DueDate <= '%4-%5-%6'")
-            .arg(m_start.year() ).arg(m_start.month() ).arg( m_start.day() )
-            .arg(m_end.  year() ).arg(m_end.  month() ).arg(m_end.day() );
+		.arg( QString::number( m_start.year() ).rightJustify( 4, '0' ) )
+		.arg( QString::number( m_start.month() ).rightJustify( 2, '0' ) )
+		.arg( QString::number( m_start.day() ).rightJustify( 2, '0' ) )
+		.arg( QString::number( m_end.year() ).rightJustify( 4, '0' ) )
+		.arg( QString::number( m_end.month() ).rightJustify( 2, '0' ) )
+		.arg( QString::number( m_end.day() ).rightJustify( 2, '0' ) );
 
         return str;
     }
+
+	FindCustomQuery::FindCustomQuery(int uid)
+		: OSQLQuery(), m_uid( uid ) {
+	}
+	FindCustomQuery::FindCustomQuery(const QArray<int>& ints)
+		: OSQLQuery(), m_uids( ints ){
+	}
+	FindCustomQuery::~FindCustomQuery() {
+	}
+	QString FindCustomQuery::query()const{
+		return single(); // Multiple requests not supported !
+	}
+	QString FindCustomQuery::single()const{
+		QString qu = "select uid, type, value from custom_data where uid = ";
+		qu += QString::number(m_uid);
+		return qu;
+	}
+
 };
 
 
 namespace Opie {
 OPimTodoAccessBackendSQL::OPimTodoAccessBackendSQL( const QString& file )
-    : OPimTodoAccessBackend(), m_dict(15), m_driver(NULL), m_dirty(true)
+	: OPimTodoAccessBackend(),/* m_dict(15),*/ m_driver(NULL), m_dirty(true)
 {
     QString fi = file;
     if ( fi.isEmpty() )
@@ -383,7 +455,7 @@ OPimTodo OPimTodoAccessBackendSQL::find(int uid ) const{
 OPimTodo OPimTodoAccessBackendSQL::find( int uid, const QArray<int>& ints,
                                    uint cur, Frontend::CacheDirection dir ) const{
     uint CACHE = readAhead();
-    qWarning("searching for %d", uid );
+    qDebug("searching for %d", uid );
     QArray<int> search( CACHE );
     uint size =0;
     OPimTodo to;
@@ -393,7 +465,7 @@ OPimTodo OPimTodoAccessBackendSQL::find( int uid, const QArray<int>& ints,
         /* forward */
     case 0: // FIXME: Not a good style to use magic numbers here (eilers)
         for (uint i = cur; i < ints.count() && size < CACHE; i++ ) {
-            qWarning("size %d %d", size,  ints[i] );
+            qDebug("size %d %d", size,  ints[i] );
             search[size] = ints[i];
             size++;
         }
@@ -468,7 +540,7 @@ QArray<int> OPimTodoAccessBackendSQL::effectiveToDos( const QDate& s,
  */
 QArray<int> OPimTodoAccessBackendSQL::sorted( bool asc, int sortOrder,
                                            int sortFilter, int cat ) {
-    qWarning("sorted %d, %d", asc, sortOrder );
+    qDebug("sorted %d, %d", asc, sortOrder );
     QString query;
     query = "select uid from todolist WHERE ";
 
@@ -489,7 +561,10 @@ QArray<int> OPimTodoAccessBackendSQL::sorted( bool asc, int sortOrder,
         QDate date = QDate::currentDate();
         QString due;
         QString base;
-        base = QString("DueDate <= '%1-%2-%3' AND completed = 0").arg( date.year() ).arg( date.month() ).arg( date.day() );
+        base = QString("DueDate <= '%1-%2-%3' AND completed = 0")
+		.arg( QString::number( date.year() ).rightJustify( 4, '0' ) )
+		.arg( QString::number( date.month() ).rightJustify( 2, '0' ) )
+		.arg( QString::number( date.day() ).rightJustify( 2, '0' ) );
         query += " " + base + " AND";
     }
     /* not show completed */
@@ -498,7 +573,7 @@ QArray<int> OPimTodoAccessBackendSQL::sorted( bool asc, int sortOrder,
     }else{
        query += " ( completed = 1 OR  completed = 0) AND";
     }
-    /* srtip the end */
+    /* strip the end */
     query = query.remove( query.length()-3, 3 );
 
 
@@ -524,11 +599,11 @@ QArray<int> OPimTodoAccessBackendSQL::sorted( bool asc, int sortOrder,
     }
 
     if ( !asc ) {
-        qWarning("not ascending!");
+        qDebug("not ascending!");
         query += " DESC";
     }
 
-    qWarning( query );
+    qDebug( query );
     OSQLRawQuery raw(query );
     return uids( m_driver->query(&raw) );
 }
@@ -545,7 +620,7 @@ bool OPimTodoAccessBackendSQL::date( QDate& da, const QString& str ) const{
         return true;
     }
 }
-OPimTodo OPimTodoAccessBackendSQL::todo( const OSQLResult& res) const{
+OPimTodo OPimTodoAccessBackendSQL::todo( const OSQLResult& res ) const{
     if ( res.state() == OSQLResult::Failure ) {
         OPimTodo to;
         return to;
@@ -553,24 +628,27 @@ OPimTodo OPimTodoAccessBackendSQL::todo( const OSQLResult& res) const{
 
     OSQLResultItem::ValueList list = res.results();
     OSQLResultItem::ValueList::Iterator it = list.begin();
-    qWarning("todo1");
+    qDebug("todo1");
     OPimTodo to = todo( (*it) );
     cache( to );
     ++it;
 
     for ( ; it != list.end(); ++it ) {
-        qWarning("caching");
+        qDebug("caching");
         cache( todo( (*it) ) );
     }
     return to;
 }
 OPimTodo OPimTodoAccessBackendSQL::todo( OSQLResultItem& item )const {
-    qWarning("todo");
+    qDebug("todo(ResultItem)");
+
+    // Request information from addressbook table and create the OPimTodo-object.
+    
     bool hasDueDate = false; QDate dueDate = QDate::currentDate();
     hasDueDate = date( dueDate, item.data("DueDate") );
     QStringList cats = QStringList::split(";", item.data("categories") );
 
-    qWarning("Item is completed: %d", item.data("completed").toInt() );
+    qDebug("Item is completed: %d", item.data("completed").toInt() );
 
     OPimTodo to( (bool)item.data("completed").toInt(), item.data("priority").toInt(),
               cats, item.data("summary"), item.data("description"),
@@ -614,6 +692,9 @@ OPimTodo OPimTodoAccessBackendSQL::todo( OSQLResultItem& item )const {
     recur.fromMap( recMap );
     to.setRecurrence( recur );
 
+    // Finally load the custom-entries for this UID and put it into the created object
+    to.setExtraMap( requestCustom( to.uid() ) );
+
     return to;
 }
 OPimTodo OPimTodoAccessBackendSQL::todo( int uid )const {
@@ -624,6 +705,8 @@ OPimTodo OPimTodoAccessBackendSQL::todo( int uid )const {
  * update the dict
  */
 void OPimTodoAccessBackendSQL::fillDict() {
+
+#if 0
     /* initialize dict */
     /*
      * UPDATE dict if you change anything!!!
@@ -645,6 +728,8 @@ void OPimTodoAccessBackendSQL::fillDict() {
     m_dict.insert("CrossReference",  new int(OPimTodo::CrossReference)   );
 //    m_dict.insert("HasAlarmDateTime",new int(OPimTodo::HasAlarmDateTime) ); // old stuff (eilers)
 //    m_dict.insert("AlarmDateTime",   new int(OPimTodo::AlarmDateTime)    ); // old stuff (eilers)
+
+#endif
 }
 /*
  * need to be const so let's fool the
@@ -664,7 +749,7 @@ QArray<int> OPimTodoAccessBackendSQL::uids( const OSQLResult& res) const{
     OSQLResultItem::ValueList list = res.results();
     OSQLResultItem::ValueList::Iterator it;
     QArray<int> ints(list.count() );
-    qWarning(" count = %d", list.count() );
+    qDebug(" count = %d", list.count() );
 
     int i = 0;
     for (it = list.begin(); it != list.end(); ++it ) {
@@ -724,5 +809,31 @@ void OPimTodoAccessBackendSQL::removeAllCompleted(){
 #warning OPimTodoAccessBackendSQL::removeAllCompleted() not implemented !!
 
 }
+
+
+QMap<QString, QString>  OPimTodoAccessBackendSQL::requestCustom( int uid ) const
+{
+	QMap<QString, QString> customMap;
+	
+	FindCustomQuery query( uid );
+	OSQLResult res_custom = m_driver->query( &query );
+
+	if ( res_custom.state() == OSQLResult::Failure ) {
+		qWarning("OSQLResult::Failure in find query !!");
+		QMap<QString, QString> empty;
+		return empty;
+	}
+
+	OSQLResultItem::ValueList list = res_custom.results();
+	OSQLResultItem::ValueList::Iterator it = list.begin();
+	for ( ; it != list.end(); ++it ) {
+		customMap.insert( (*it).data( "type" ), (*it).data( "value" ) );
+	}
+
+	return customMap;
+}
+
+
+
 
 }
