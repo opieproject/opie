@@ -46,7 +46,7 @@ XineControl::XineControl( XineVideoWidget *xineWidget,
     : QObject( parent, name ), mediaPlayerState( _mediaPlayerState ), xineVideoWidget( xineWidget )
 {
 
-    libXine = new XINE::Lib( xineWidget );
+    libXine = new XINE::Lib( XINE::Lib::InitializeImmediately, xineWidget );
 
     init();
 }

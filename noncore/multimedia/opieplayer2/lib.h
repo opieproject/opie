@@ -55,18 +55,21 @@ namespace XINE {
      * stooping, seeking.
      */
     class Frame;
-    class Lib : public ThreadUtil::Channel
+    class Lib : public ThreadUtil::Channel, private ThreadUtil::Thread
     {
         Q_OBJECT
     public:
-        Lib(XineVideoWidget* = 0);
+        enum InitializationMode { InitializeImmediately, InitializeInThread };
+
+        Lib( InitializationMode initMode, XineVideoWidget* = 0);
+
         ~Lib();
         static int majorVersion();
         static int minorVersion();
         static int subVersion();
 
 
-		void resize ( const QSize &s );
+        void resize ( const QSize &s );
 
         int play( const QString& fileName,
                   int startPos = 0,
@@ -183,7 +186,11 @@ namespace XINE {
     protected:
         virtual void receiveMessage( ThreadUtil::ChannelMessage *msg, SendType sendType );
 
+        virtual void run();
+
     private:
+        void initialize();
+
         int m_bytes_per_pixel;
         bool m_video:1;
         XineVideoWidget *m_wid;

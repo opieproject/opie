@@ -70,7 +70,7 @@ extern "C" {
 
 using namespace XINE;
 
-Lib::Lib( XineVideoWidget* widget ) 
+Lib::Lib( InitializationMode initMode, XineVideoWidget* widget ) 
 {
     m_video = false;
     m_wid = widget;
@@ -87,8 +87,22 @@ Lib::Lib( XineVideoWidget* widget )
         f.close();
     }
 
+    if ( initMode == InitializeImmediately )
+        initialize();
+    else
+        assert( false );
+}
+
+void Lib::run()
+{
+    assert( false );
+}
+
+void Lib::initialize()
+{
     m_xine =  xine_new( );
 
+    QString configPath = QDir::homeDirPath() + "/Settings/opiexine.cf";
     xine_config_load( m_xine, QFile::encodeName( configPath ) );
 
     xine_init( m_xine );
