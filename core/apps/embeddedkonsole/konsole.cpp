@@ -617,20 +617,17 @@ void Konsole::init(const char* _pgm, QStrList & _args)
     a->addTo( toolBar );
 
 
-    /*
     a = new QAction( tr("Enter"), Resource::loadPixmap( "konsole/enter" ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( hitEnter() ) ); a->addTo( toolBar );
     a = new QAction( tr("Space"), Resource::loadPixmap( "konsole/space" ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( hitSpace() ) ); a->addTo( toolBar );
     a = new QAction( tr("Tab"), Resource::loadPixmap( "konsole/tab" ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( hitTab() ) ); a->addTo( toolBar );
-    */
-    /*
     a = new QAction( tr("Up"), Resource::loadPixmap( "konsole/up" ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( hitUp() ) ); a->addTo( toolBar );
     a = new QAction( tr("Down"), Resource::loadPixmap( "konsole/down" ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( hitDown() ) ); a->addTo( toolBar );
-    */
+
     a = new QAction( tr("Paste"), Resource::loadPixmap( "paste" ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( hitPaste() ) );
     a->addTo( toolBar );
