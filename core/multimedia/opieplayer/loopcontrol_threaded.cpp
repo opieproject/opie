@@ -39,7 +39,7 @@
 #include "mediaplayerstate.h"
 
 
-#if defined(QT_QWS_SL5XXX) || defined(QT_QWS_IPAQ)
+#if defined(QT_QWS_SL5XXX) || defined(QT_QWS_IPAQ) || defined(QT_QWS_RAMSES)
 #define USE_REALTIME_AUDIO_THREAD
 #endif
 
