@@ -5,8 +5,9 @@
 	* Added four themes courtesy Robert Griebl (http://www.softforge.de/zstyle)
 	* Added Conversion tool for pim-data (eilers)
 	* Modified the PIM API for providing generic use of OPimRecords (eilers)
+	* Clicking on the application symbol now iterates over the application's top level widgets if already raised (zecke)
     
-	BugFixes
+	Fixed Bugs
 	--------
 	* #1068 - Country Drop Down Box Off Screen
 	* #1294 - Opie does not know about British Summer Time
