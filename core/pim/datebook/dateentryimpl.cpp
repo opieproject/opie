@@ -18,6 +18,7 @@
 **
 **********************************************************************/
 
+#include "namespace_hack.h"
 #include "dateentryimpl.h"
 #include "repeatentry.h"
 

@@ -1,3 +1,4 @@
+#include "namespace_hack.h"
 #include "datebookweeklst.h"
 
 
