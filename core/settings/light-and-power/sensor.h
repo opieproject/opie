@@ -25,40 +25,23 @@
                              Boston, MA 02111-1307, USA.
 
 */
-#ifndef SETTINGS_H
-#define SETTINGS_H
+#ifndef __SENSOR_H__
+#define __SENSOR_H__
 
+#include "sensorbase.h"
 
-#include <qstrlist.h>
-#include <qasciidict.h>
-#include "lightsettingsbase.h"
+class Calibration;
+class QStringList;
 
-
-class LightSettings : public LightSettingsBase
-{
-    Q_OBJECT
-
+class Sensor : public SensorBase {
 public:
-    LightSettings( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
-    ~LightSettings();
-
-protected:
-    void accept();
-    void reject();
-
-    void done ( int r );
-
-protected slots:
-    void setBacklight ( int );
-    virtual void calibrateSensor ( );
-    virtual void calibrateSensorAC ( );
-
+	Sensor ( QStringList &params, QWidget *parent = 0, const char *name = 0 );
+	
+	virtual void accept ( );
+	
 private:
-    int m_res;
-    QStringList m_sensordata;
-    QStringList m_sensordata_ac;
+	QStringList &m_params;
+	Calibration *m_calib;
 };
 
-
-#endif // SETTINGS_H
-
+#endif

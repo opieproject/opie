@@ -1,9 +1,9 @@
 TEMPLATE	= app
 CONFIG		+= qt warn_on release
 DESTDIR		= $(OPIEDIR)/bin
-HEADERS		= settings.h
-SOURCES		= light.cpp main.cpp
-INTERFACES	= lightsettingsbase.ui
+HEADERS		= settings.h sensor.h calibration.h
+SOURCES		= light.cpp main.cpp sensor.cpp calibration.cpp
+INTERFACES	= lightsettingsbase.ui sensorbase.ui
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= ../$(OPIEDIR)/include
 LIBS            += -lqpe -lopie

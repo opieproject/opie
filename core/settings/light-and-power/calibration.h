@@ -25,40 +25,47 @@
                              Boston, MA 02111-1307, USA.
 
 */
-#ifndef SETTINGS_H
-#define SETTINGS_H
+#ifndef __CALIBRATION_H__
+#define __CALIBRATION_H__
 
+#include <qwidget.h>
 
-#include <qstrlist.h>
-#include <qasciidict.h>
-#include "lightsettingsbase.h"
-
-
-class LightSettings : public LightSettingsBase
-{
-    Q_OBJECT
-
+class Calibration : public QWidget {
+	Q_OBJECT
+	
 public:
-    LightSettings( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
-    ~LightSettings();
+	Calibration ( QWidget *parent = 0, const char *name = 0, WFlags fl = 0 );
+	virtual ~Calibration ( );
+	
+	QSize scale ( ) const;	
+	int lineSteps ( ) const;
+	int interval ( ) const;
+	QPoint startPoint ( ) const;
+	QPoint endPoint ( ) const;	
 
+public slots:
+	void setScale ( const QSize &s );
+	void setLineSteps ( int step );
+	void setInterval ( int iv );
+	void setStartPoint ( const QPoint &p );
+	void setEndPoint ( const QPoint &p );
+	
 protected:
-    void accept();
-    void reject();
+	virtual void paintEvent ( QPaintEvent * );
+	virtual void mousePressEvent ( QMouseEvent * );	
+	virtual void mouseMoveEvent ( QMouseEvent * );	
+	virtual void mouseReleaseEvent ( QMouseEvent * );	
 
-    void done ( int r );
-
-protected slots:
-    void setBacklight ( int );
-    virtual void calibrateSensor ( );
-    virtual void calibrateSensorAC ( );
-
+	void checkPoints ( );
+	
 private:
-    int m_res;
-    QStringList m_sensordata;
-    QStringList m_sensordata_ac;
+	QSize m_scale;
+	QPoint m_p [2];
+	int m_dragged;
+	int m_steps;
+	int m_interval;
 };
 
+#endif
 
-#endif // SETTINGS_H
 

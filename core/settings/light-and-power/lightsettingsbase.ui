@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>399</width>
+            <width>387</width>
             <height>532</height>
         </rect>
     </property>
@@ -70,7 +70,7 @@
                 <vbox>
                     <property stdset="1">
                         <name>margin</name>
-                        <number>3</number>
+                        <number>5</number>
                     </property>
                     <property stdset="1">
                         <name>spacing</name>
@@ -96,183 +96,181 @@
                         <property>
                             <name>layoutSpacing</name>
                         </property>
-                        <vbox>
+                        <grid>
                             <property stdset="1">
                                 <name>margin</name>
-                                <number>3</number>
+                                <number>5</number>
                             </property>
                             <property stdset="1">
                                 <name>spacing</name>
                                 <number>3</number>
                             </property>
-                            <widget>
-                                <class>QLayoutWidget</class>
+                            <widget row="1"  column="1" >
+                                <class>QSpinBox</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>Layout11</cstring>
+                                    <cstring>interval_lightoff</cstring>
                                 </property>
-                                <property>
-                                    <name>layoutMargin</name>
+                                <property stdset="1">
+                                    <name>suffix</name>
+                                    <string> sec</string>
                                 </property>
-                                <property>
-                                    <name>layoutSpacing</name>
+                                <property stdset="1">
+                                    <name>specialValueText</name>
+                                    <string>never</string>
                                 </property>
-                                <grid>
-                                    <property stdset="1">
-                                        <name>margin</name>
-                                        <number>3</number>
-                                    </property>
-                                    <property stdset="1">
-                                        <name>spacing</name>
-                                        <number>3</number>
-                                    </property>
-                                    <widget row="1"  column="1" >
-                                        <class>QSpinBox</class>
-                                        <property stdset="1">
-                                            <name>name</name>
-                                            <cstring>interval_lightoff</cstring>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>suffix</name>
-                                            <string> sec</string>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>specialValueText</name>
-                                            <string>never</string>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>buttonSymbols</name>
-                                            <enum>PlusMinus</enum>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>maxValue</name>
-                                            <number>3600</number>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>minValue</name>
-                                            <number>0</number>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>lineStep</name>
-                                            <number>10</number>
-                                        </property>
-                                    </widget>
-                                    <widget row="1"  column="0" >
-                                        <class>QLabel</class>
-                                        <property stdset="1">
-                                            <name>name</name>
-                                            <cstring>TextLabel2_2</cstring>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>text</name>
-                                            <string>Light off after</string>
-                                        </property>
-                                    </widget>
-                                    <widget row="0"  column="0" >
-                                        <class>QLabel</class>
-                                        <property stdset="1">
-                                            <name>name</name>
-                                            <cstring>TextLabel1_3</cstring>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>sizePolicy</name>
-                                            <sizepolicy>
-                                                <hsizetype>7</hsizetype>
-                                                <vsizetype>1</vsizetype>
-                                            </sizepolicy>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>text</name>
-                                            <string>Dim light after</string>
-                                        </property>
-                                    </widget>
-                                    <widget row="0"  column="1" >
-                                        <class>QSpinBox</class>
-                                        <property stdset="1">
-                                            <name>name</name>
-                                            <cstring>interval_dim</cstring>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>suffix</name>
-                                            <string> sec</string>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>specialValueText</name>
-                                            <string>never</string>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>buttonSymbols</name>
-                                            <enum>PlusMinus</enum>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>maxValue</name>
-                                            <number>3600</number>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>minValue</name>
-                                            <number>0</number>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>lineStep</name>
-                                            <number>10</number>
-                                        </property>
-                                    </widget>
-                                    <widget row="2"  column="1" >
-                                        <class>QSpinBox</class>
-                                        <property stdset="1">
-                                            <name>name</name>
-                                            <cstring>interval_suspend</cstring>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>suffix</name>
-                                            <string> sec</string>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>specialValueText</name>
-                                            <string>never</string>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>buttonSymbols</name>
-                                            <enum>PlusMinus</enum>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>maxValue</name>
-                                            <number>3600</number>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>minValue</name>
-                                            <number>0</number>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>lineStep</name>
-                                            <number>10</number>
-                                        </property>
-                                    </widget>
-                                    <widget row="2"  column="0" >
-                                        <class>QLabel</class>
-                                        <property stdset="1">
-                                            <name>name</name>
-                                            <cstring>TextLabel1_2</cstring>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>text</name>
-                                            <string>Suspend after</string>
-                                        </property>
-                                    </widget>
-                                </grid>
+                                <property stdset="1">
+                                    <name>buttonSymbols</name>
+                                    <enum>PlusMinus</enum>
+                                </property>
+                                <property stdset="1">
+                                    <name>maxValue</name>
+                                    <number>3600</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>minValue</name>
+                                    <number>0</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>lineStep</name>
+                                    <number>10</number>
+                                </property>
                             </widget>
-                            <widget>
+                            <widget row="1"  column="0" >
+                                <class>QLabel</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>TextLabel2_2</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>sizePolicy</name>
+                                    <sizepolicy>
+                                        <hsizetype>3</hsizetype>
+                                        <vsizetype>1</vsizetype>
+                                    </sizepolicy>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Light off after</string>
+                                </property>
+                            </widget>
+                            <widget row="0"  column="0" >
+                                <class>QLabel</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>TextLabel1_3</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>sizePolicy</name>
+                                    <sizepolicy>
+                                        <hsizetype>3</hsizetype>
+                                        <vsizetype>1</vsizetype>
+                                    </sizepolicy>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Dim light after</string>
+                                </property>
+                            </widget>
+                            <widget row="0"  column="1" >
+                                <class>QSpinBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>interval_dim</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>suffix</name>
+                                    <string> sec</string>
+                                </property>
+                                <property stdset="1">
+                                    <name>specialValueText</name>
+                                    <string>never</string>
+                                </property>
+                                <property stdset="1">
+                                    <name>buttonSymbols</name>
+                                    <enum>PlusMinus</enum>
+                                </property>
+                                <property stdset="1">
+                                    <name>maxValue</name>
+                                    <number>3600</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>minValue</name>
+                                    <number>0</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>lineStep</name>
+                                    <number>10</number>
+                                </property>
+                            </widget>
+                            <widget row="2"  column="1" >
+                                <class>QSpinBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>interval_suspend</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>suffix</name>
+                                    <string> sec</string>
+                                </property>
+                                <property stdset="1">
+                                    <name>specialValueText</name>
+                                    <string>never</string>
+                                </property>
+                                <property stdset="1">
+                                    <name>buttonSymbols</name>
+                                    <enum>PlusMinus</enum>
+                                </property>
+                                <property stdset="1">
+                                    <name>maxValue</name>
+                                    <number>3600</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>minValue</name>
+                                    <number>0</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>lineStep</name>
+                                    <number>10</number>
+                                </property>
+                            </widget>
+                            <widget row="2"  column="0" >
+                                <class>QLabel</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>TextLabel1_2</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>sizePolicy</name>
+                                    <sizepolicy>
+                                        <hsizetype>3</hsizetype>
+                                        <vsizetype>1</vsizetype>
+                                    </sizepolicy>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Suspend after</string>
+                                </property>
+                            </widget>
+                            <widget row="3"  column="0"  rowspan="1"  colspan="2" >
                                 <class>QCheckBox</class>
                                 <property stdset="1">
                                     <name>name</name>
                                     <cstring>LcdOffOnly</cstring>
                                 </property>
                                 <property stdset="1">
+                                    <name>sizePolicy</name>
+                                    <sizepolicy>
+                                        <hsizetype>7</hsizetype>
+                                        <vsizetype>0</vsizetype>
+                                    </sizepolicy>
+                                </property>
+                                <property stdset="1">
                                     <name>text</name>
                                     <string>Deactivate LCD only (does not suspend)</string>
                                 </property>
                             </widget>
-                        </vbox>
+                        </grid>
                     </widget>
                     <widget>
                         <class>QGroupBox</class>
@@ -293,7 +291,7 @@
                         <vbox>
                             <property stdset="1">
                                 <name>margin</name>
-                                <number>3</number>
+                                <number>5</number>
                             </property>
                             <property stdset="1">
                                 <name>spacing</name>
@@ -344,6 +342,9 @@
                                     <name>name</name>
                                     <cstring>Layout10</cstring>
                                 </property>
+                                <property>
+                                    <name>layoutSpacing</name>
+                                </property>
                                 <hbox>
                                     <property stdset="1">
                                         <name>margin</name>
@@ -351,7 +352,7 @@
                                     </property>
                                     <property stdset="1">
                                         <name>spacing</name>
-                                        <number>6</number>
+                                        <number>3</number>
                                     </property>
                                     <widget>
                                         <class>QLabel</class>
@@ -434,6 +435,9 @@
                                     <name>name</name>
                                     <cstring>Layout9</cstring>
                                 </property>
+                                <property>
+                                    <name>layoutSpacing</name>
+                                </property>
                                 <hbox>
                                     <property stdset="1">
                                         <name>margin</name>
@@ -441,7 +445,7 @@
                                     </property>
                                     <property stdset="1">
                                         <name>spacing</name>
-                                        <number>6</number>
+                                        <number>3</number>
                                     </property>
                                     <widget>
                                         <class>QCheckBox</class>
@@ -513,7 +517,7 @@
                 <vbox>
                     <property stdset="1">
                         <name>margin</name>
-                        <number>3</number>
+                        <number>5</number>
                     </property>
                     <property stdset="1">
                         <name>spacing</name>
@@ -539,183 +543,181 @@
                         <property>
                             <name>layoutSpacing</name>
                         </property>
-                        <vbox>
+                        <grid>
                             <property stdset="1">
                                 <name>margin</name>
-                                <number>3</number>
+                                <number>5</number>
                             </property>
                             <property stdset="1">
                                 <name>spacing</name>
                                 <number>3</number>
                             </property>
-                            <widget>
-                                <class>QLayoutWidget</class>
+                            <widget row="1"  column="1" >
+                                <class>QSpinBox</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>Layout14</cstring>
+                                    <cstring>interval_lightoff_ac_3</cstring>
                                 </property>
-                                <property>
-                                    <name>layoutMargin</name>
+                                <property stdset="1">
+                                    <name>suffix</name>
+                                    <string> sec</string>
                                 </property>
-                                <property>
-                                    <name>layoutSpacing</name>
+                                <property stdset="1">
+                                    <name>specialValueText</name>
+                                    <string>never</string>
                                 </property>
-                                <grid>
-                                    <property stdset="1">
-                                        <name>margin</name>
-                                        <number>3</number>
-                                    </property>
-                                    <property stdset="1">
-                                        <name>spacing</name>
-                                        <number>3</number>
-                                    </property>
-                                    <widget row="1"  column="1" >
-                                        <class>QSpinBox</class>
-                                        <property stdset="1">
-                                            <name>name</name>
-                                            <cstring>interval_lightoff_ac_3</cstring>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>suffix</name>
-                                            <string> sec</string>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>specialValueText</name>
-                                            <string>never</string>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>buttonSymbols</name>
-                                            <enum>PlusMinus</enum>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>maxValue</name>
-                                            <number>3600</number>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>minValue</name>
-                                            <number>0</number>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>lineStep</name>
-                                            <number>10</number>
-                                        </property>
-                                    </widget>
-                                    <widget row="0"  column="0" >
-                                        <class>QLabel</class>
-                                        <property stdset="1">
-                                            <name>name</name>
-                                            <cstring>TextLabel1_3_2</cstring>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>sizePolicy</name>
-                                            <sizepolicy>
-                                                <hsizetype>7</hsizetype>
-                                                <vsizetype>1</vsizetype>
-                                            </sizepolicy>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>text</name>
-                                            <string>Dim light after</string>
-                                        </property>
-                                    </widget>
-                                    <widget row="2"  column="1" >
-                                        <class>QSpinBox</class>
-                                        <property stdset="1">
-                                            <name>name</name>
-                                            <cstring>interval_suspend_ac_3</cstring>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>suffix</name>
-                                            <string> sec</string>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>specialValueText</name>
-                                            <string>never</string>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>buttonSymbols</name>
-                                            <enum>PlusMinus</enum>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>maxValue</name>
-                                            <number>3600</number>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>minValue</name>
-                                            <number>0</number>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>lineStep</name>
-                                            <number>10</number>
-                                        </property>
-                                    </widget>
-                                    <widget row="2"  column="0" >
-                                        <class>QLabel</class>
-                                        <property stdset="1">
-                                            <name>name</name>
-                                            <cstring>TextLabel1_2_2_3</cstring>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>text</name>
-                                            <string>Suspend after</string>
-                                        </property>
-                                    </widget>
-                                    <widget row="0"  column="1" >
-                                        <class>QSpinBox</class>
-                                        <property stdset="1">
-                                            <name>name</name>
-                                            <cstring>interval_dim_ac_3</cstring>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>suffix</name>
-                                            <string> sec</string>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>specialValueText</name>
-                                            <string>never</string>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>buttonSymbols</name>
-                                            <enum>PlusMinus</enum>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>maxValue</name>
-                                            <number>3600</number>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>minValue</name>
-                                            <number>0</number>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>lineStep</name>
-                                            <number>10</number>
-                                        </property>
-                                    </widget>
-                                    <widget row="1"  column="0" >
-                                        <class>QLabel</class>
-                                        <property stdset="1">
-                                            <name>name</name>
-                                            <cstring>TextLabel2_2_2</cstring>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>text</name>
-                                            <string>Light off after</string>
-                                        </property>
-                                    </widget>
-                                </grid>
+                                <property stdset="1">
+                                    <name>buttonSymbols</name>
+                                    <enum>PlusMinus</enum>
+                                </property>
+                                <property stdset="1">
+                                    <name>maxValue</name>
+                                    <number>3600</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>minValue</name>
+                                    <number>0</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>lineStep</name>
+                                    <number>10</number>
+                                </property>
                             </widget>
-                            <widget>
+                            <widget row="0"  column="0" >
+                                <class>QLabel</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>TextLabel1_3_2</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>sizePolicy</name>
+                                    <sizepolicy>
+                                        <hsizetype>3</hsizetype>
+                                        <vsizetype>1</vsizetype>
+                                    </sizepolicy>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Dim light after</string>
+                                </property>
+                            </widget>
+                            <widget row="2"  column="1" >
+                                <class>QSpinBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>interval_suspend_ac_3</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>suffix</name>
+                                    <string> sec</string>
+                                </property>
+                                <property stdset="1">
+                                    <name>specialValueText</name>
+                                    <string>never</string>
+                                </property>
+                                <property stdset="1">
+                                    <name>buttonSymbols</name>
+                                    <enum>PlusMinus</enum>
+                                </property>
+                                <property stdset="1">
+                                    <name>maxValue</name>
+                                    <number>3600</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>minValue</name>
+                                    <number>0</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>lineStep</name>
+                                    <number>10</number>
+                                </property>
+                            </widget>
+                            <widget row="2"  column="0" >
+                                <class>QLabel</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>TextLabel1_2_2_3</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>sizePolicy</name>
+                                    <sizepolicy>
+                                        <hsizetype>3</hsizetype>
+                                        <vsizetype>1</vsizetype>
+                                    </sizepolicy>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Suspend after</string>
+                                </property>
+                            </widget>
+                            <widget row="0"  column="1" >
+                                <class>QSpinBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>interval_dim_ac_3</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>suffix</name>
+                                    <string> sec</string>
+                                </property>
+                                <property stdset="1">
+                                    <name>specialValueText</name>
+                                    <string>never</string>
+                                </property>
+                                <property stdset="1">
+                                    <name>buttonSymbols</name>
+                                    <enum>PlusMinus</enum>
+                                </property>
+                                <property stdset="1">
+                                    <name>maxValue</name>
+                                    <number>3600</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>minValue</name>
+                                    <number>0</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>lineStep</name>
+                                    <number>10</number>
+                                </property>
+                            </widget>
+                            <widget row="1"  column="0" >
+                                <class>QLabel</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>TextLabel2_2_2</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>sizePolicy</name>
+                                    <sizepolicy>
+                                        <hsizetype>3</hsizetype>
+                                        <vsizetype>1</vsizetype>
+                                    </sizepolicy>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Light off after</string>
+                                </property>
+                            </widget>
+                            <widget row="3"  column="0"  rowspan="1"  colspan="2" >
                                 <class>QCheckBox</class>
                                 <property stdset="1">
                                     <name>name</name>
                                     <cstring>LcdOffOnly_2_3</cstring>
                                 </property>
                                 <property stdset="1">
+                                    <name>sizePolicy</name>
+                                    <sizepolicy>
+                                        <hsizetype>7</hsizetype>
+                                        <vsizetype>0</vsizetype>
+                                    </sizepolicy>
+                                </property>
+                                <property stdset="1">
                                     <name>text</name>
                                     <string>Deactivate LCD only (does not suspend)</string>
                                 </property>
                             </widget>
-                        </vbox>
+                        </grid>
                     </widget>
                     <widget>
                         <class>QGroupBox</class>
@@ -736,7 +738,7 @@
                         <vbox>
                             <property stdset="1">
                                 <name>margin</name>
-                                <number>3</number>
+                                <number>5</number>
                             </property>
                             <property stdset="1">
                                 <name>spacing</name>
@@ -791,6 +793,9 @@
                                     <name>name</name>
                                     <cstring>Layout20</cstring>
                                 </property>
+                                <property>
+                                    <name>layoutSpacing</name>
+                                </property>
                                 <hbox>
                                     <property stdset="1">
                                         <name>margin</name>
@@ -798,7 +803,7 @@
                                     </property>
                                     <property stdset="1">
                                         <name>spacing</name>
-                                        <number>6</number>
+                                        <number>3</number>
                                     </property>
                                     <widget>
                                         <class>QLabel</class>
@@ -881,6 +886,9 @@
                                     <name>name</name>
                                     <cstring>Layout10</cstring>
                                 </property>
+                                <property>
+                                    <name>layoutSpacing</name>
+                                </property>
                                 <hbox>
                                     <property stdset="1">
                                         <name>margin</name>
@@ -888,7 +896,7 @@
                                     </property>
                                     <property stdset="1">
                                         <name>spacing</name>
-                                        <number>6</number>
+                                        <number>3</number>
                                     </property>
                                     <widget>
                                         <class>QCheckBox</class>
@@ -960,7 +968,7 @@
                 <vbox>
                     <property stdset="1">
                         <name>margin</name>
-                        <number>3</number>
+                        <number>5</number>
                     </property>
                     <property stdset="1">
                         <name>spacing</name>
@@ -982,173 +990,162 @@
                         <property>
                             <name>layoutSpacing</name>
                         </property>
-                        <vbox>
+                        <grid>
                             <property stdset="1">
                                 <name>margin</name>
-                                <number>3</number>
+                                <number>5</number>
                             </property>
                             <property stdset="1">
                                 <name>spacing</name>
                                 <number>3</number>
                             </property>
-                            <widget>
-                                <class>QLayoutWidget</class>
+                            <widget row="0"  column="0" >
+                                <class>QLabel</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>Layout18</cstring>
+                                    <cstring>TextLabel1</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>sizePolicy</name>
+                                    <sizepolicy>
+                                        <hsizetype>3</hsizetype>
+                                        <vsizetype>5</vsizetype>
+                                    </sizepolicy>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Low power warning interval</string>
+                                </property>
+                                <property stdset="1">
+                                    <name>alignment</name>
+                                    <set>WordBreak|AlignVCenter|AlignLeft</set>
                                 </property>
                                 <property>
-                                    <name>layoutMargin</name>
+                                    <name>wordwrap</name>
                                 </property>
-                                <property>
-                                    <name>layoutSpacing</name>
-                                </property>
-                                <grid>
-                                    <property stdset="1">
-                                        <name>margin</name>
-                                        <number>3</number>
-                                    </property>
-                                    <property stdset="1">
-                                        <name>spacing</name>
-                                        <number>3</number>
-                                    </property>
-                                    <widget row="0"  column="0" >
-                                        <class>QLabel</class>
-                                        <property stdset="1">
-                                            <name>name</name>
-                                            <cstring>TextLabel1</cstring>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>sizePolicy</name>
-                                            <sizepolicy>
-                                                <hsizetype>7</hsizetype>
-                                                <vsizetype>5</vsizetype>
-                                            </sizepolicy>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>text</name>
-                                            <string>Low power warning interval</string>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>alignment</name>
-                                            <set>WordBreak|AlignVCenter|AlignLeft</set>
-                                        </property>
-                                        <property>
-                                            <name>wordwrap</name>
-                                        </property>
-                                    </widget>
-                                    <widget row="1"  column="1" >
-                                        <class>QSpinBox</class>
-                                        <property stdset="1">
-                                            <name>name</name>
-                                            <cstring>lowSpinBox</cstring>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>suffix</name>
-                                            <string> %</string>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>maxValue</name>
-                                            <number>80</number>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>minValue</name>
-                                            <number>2</number>
-                                        </property>
-                                        <property>
-                                            <name>whatsThis</name>
-                                            <string>At what battery level should the low power warning pop up</string>
-                                        </property>
-                                    </widget>
-                                    <widget row="0"  column="1" >
-                                        <class>QSpinBox</class>
-                                        <property stdset="1">
-                                            <name>name</name>
-                                            <cstring>warnintervalBox</cstring>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>suffix</name>
-                                            <string> sec</string>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>maxValue</name>
-                                            <number>60</number>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>minValue</name>
-                                            <number>5</number>
-                                        </property>
-                                        <property>
-                                            <name>whatsThis</name>
-                                            <string>how often should be checked for low power. This determines the rate popups occure in low power situations</string>
-                                        </property>
-                                    </widget>
-                                    <widget row="2"  column="1" >
-                                        <class>QSpinBox</class>
-                                        <property stdset="1">
-                                            <name>name</name>
-                                            <cstring>criticalSpinBox</cstring>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>prefix</name>
-                                            <string></string>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>suffix</name>
-                                            <string> %</string>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>maxValue</name>
-                                            <number>80</number>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>minValue</name>
-                                            <number>2</number>
-                                        </property>
-                                        <property>
-                                            <name>whatsThis</name>
-                                            <string>At what battery level should the critical power warning pop up</string>
-                                        </property>
-                                    </widget>
-                                    <widget row="1"  column="0" >
-                                        <class>QLabel</class>
-                                        <property stdset="1">
-                                            <name>name</name>
-                                            <cstring>TextLabel2</cstring>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>sizePolicy</name>
-                                            <sizepolicy>
-                                                <hsizetype>1</hsizetype>
-                                                <vsizetype>5</vsizetype>
-                                            </sizepolicy>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>text</name>
-                                            <string>very low battery warning at</string>
-                                        </property>
-                                    </widget>
-                                    <widget row="2"  column="0" >
-                                        <class>QLabel</class>
-                                        <property stdset="1">
-                                            <name>name</name>
-                                            <cstring>TextLabel3</cstring>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>sizePolicy</name>
-                                            <sizepolicy>
-                                                <hsizetype>1</hsizetype>
-                                                <vsizetype>5</vsizetype>
-                                            </sizepolicy>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>text</name>
-                                            <string>critical power warning at</string>
-                                        </property>
-                                    </widget>
-                                </grid>
                             </widget>
-                        </vbox>
+                            <widget row="1"  column="1" >
+                                <class>QSpinBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>lowSpinBox</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>suffix</name>
+                                    <string> %</string>
+                                </property>
+                                <property stdset="1">
+                                    <name>buttonSymbols</name>
+                                    <enum>PlusMinus</enum>
+                                </property>
+                                <property stdset="1">
+                                    <name>maxValue</name>
+                                    <number>80</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>minValue</name>
+                                    <number>2</number>
+                                </property>
+                                <property>
+                                    <name>whatsThis</name>
+                                    <string>At what battery level should the low power warning pop up</string>
+                                </property>
+                            </widget>
+                            <widget row="0"  column="1" >
+                                <class>QSpinBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>warnintervalBox</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>suffix</name>
+                                    <string> sec</string>
+                                </property>
+                                <property stdset="1">
+                                    <name>buttonSymbols</name>
+                                    <enum>PlusMinus</enum>
+                                </property>
+                                <property stdset="1">
+                                    <name>maxValue</name>
+                                    <number>60</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>minValue</name>
+                                    <number>5</number>
+                                </property>
+                                <property>
+                                    <name>whatsThis</name>
+                                    <string>how often should be checked for low power. This determines the rate popups occure in low power situations</string>
+                                </property>
+                            </widget>
+                            <widget row="2"  column="1" >
+                                <class>QSpinBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>criticalSpinBox</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>prefix</name>
+                                    <string></string>
+                                </property>
+                                <property stdset="1">
+                                    <name>suffix</name>
+                                    <string> %</string>
+                                </property>
+                                <property stdset="1">
+                                    <name>buttonSymbols</name>
+                                    <enum>PlusMinus</enum>
+                                </property>
+                                <property stdset="1">
+                                    <name>maxValue</name>
+                                    <number>80</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>minValue</name>
+                                    <number>2</number>
+                                </property>
+                                <property>
+                                    <name>whatsThis</name>
+                                    <string>At what battery level should the critical power warning pop up</string>
+                                </property>
+                            </widget>
+                            <widget row="1"  column="0" >
+                                <class>QLabel</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>TextLabel2</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>sizePolicy</name>
+                                    <sizepolicy>
+                                        <hsizetype>1</hsizetype>
+                                        <vsizetype>5</vsizetype>
+                                    </sizepolicy>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>very low battery warning at</string>
+                                </property>
+                            </widget>
+                            <widget row="2"  column="0" >
+                                <class>QLabel</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>TextLabel3</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>sizePolicy</name>
+                                    <sizepolicy>
+                                        <hsizetype>1</hsizetype>
+                                        <vsizetype>5</vsizetype>
+                                    </sizepolicy>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>critical power warning at</string>
+                                </property>
+                            </widget>
+                        </grid>
                     </widget>
                     <spacer>
                         <property>
@@ -1275,6 +1272,20 @@
         <receiver>PixmapLabel1_2_3</receiver>
         <slot>setDisabled(bool)</slot>
     </connection>
+    <connection>
+        <sender>CalibrateLightSensor</sender>
+        <signal>clicked()</signal>
+        <receiver>LightSettingsBase</receiver>
+        <slot>calibrateSensor()</slot>
+    </connection>
+    <connection>
+        <sender>CalibrateLightSensorAC</sender>
+        <signal>clicked()</signal>
+        <receiver>LightSettingsBase</receiver>
+        <slot>calibrateSensorAC()</slot>
+    </connection>
+    <slot access="public">calibrateSensor()</slot>
+    <slot access="public">calibrateSensorAC()</slot>
 </connections>
 <tabstops>
     <tabstop>interval_dim</tabstop>

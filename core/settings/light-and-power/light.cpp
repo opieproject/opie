@@ -1,24 +1,30 @@
-/**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
-**
-** This file is part of Qtopia Environment.
-**
-** This file may be distributed and/or modified under the terms of the
-** GNU General Public License version 2 as published by the Free Software
-** Foundation and appearing in the file LICENSE.GPL included in the
-** packaging of this file.
-**
-** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
-** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
-**
-** See http://www.trolltech.com/gpl/ for GPL licensing information.
-**
-** Contact info@trolltech.com if any conditions of this licensing are
-** not clear to you.
-**
-**********************************************************************/
+/*
+                             This file is part of the OPIE Project
+               =.            Copyright (c)  2002 Maximilian Reiss <harlekin@handhelds.org>
+             .=l.            Copyright (c)  2002 Robert Griebl <sandman@handhelds.org>
+           .>+-=
+ _;:,     .>    :=|.         This file is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This file is distributed in the hope that
+     +  .  -:.       =       it will be useful, but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU General
+..}^=.=       =       ;      Public License for more details.
+++=   -.     .`     .:       
+ :     =  ...= . :.=-        You should have received a copy of the GNU
+ -.   .:....=;==+<;          General Public License along with this file;
+  -_. . .   )=.  =           see the file COPYING. If not, write to the
+    --        :-=`           Free Software Foundation, Inc.,
+                             59 Temple Place - Suite 330,
+                             Boston, MA 02111-1307, USA.
 
-// redone by Maximilian Reiss <harlekin@handhelds.org>
+*/
 
 #include "settings.h"
 
@@ -53,159 +59,152 @@
 
 #include <opie/odevice.h>
 
+#include "sensor.h"
+
 using namespace Opie;
 
 LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
-    : LightSettingsBase( parent, name, TRUE, WStyle_ContextHelp )
+	: LightSettingsBase( parent, name, true, WStyle_ContextHelp )
 {
-    int res = ODevice::inst ( )-> displayBrightnessResolution ( );
+	m_res = ODevice::inst ( )-> displayBrightnessResolution ( );
 
-    if ( ODevice::inst()->hasLightSensor() ) {
-        // Not supported yet - hide until implemented
-        CalibrateLightSensor->setEnabled( false );
-        CalibrateLightSensorAC->setEnabled( false );
-    } else {
-        // if ipaq no need to show the sensor box
-        auto_brightness->hide();
-        CalibrateLightSensor->hide();
-        auto_brightness_ac_3->hide();
-        CalibrateLightSensorAC->hide();
-    }
+	if ( !ODevice::inst ( )-> hasLightSensor ( )) {
+		auto_brightness-> hide ( );
+		CalibrateLightSensor-> hide ( );
+		auto_brightness_ac_3-> hide ( );
+		CalibrateLightSensorAC-> hide ( );
+	}
 
-    Config config( "apm" );
-    config.setGroup( "Battery" );
+	Config config ( "apm" );
+	config. setGroup ( "Battery" );
 
-    // battery spinboxes
-    interval_dim->setValue( config.readNumEntry( "Dim", 20 ));
-    interval_lightoff->setValue( config.readNumEntry( "LightOff", 30 ));
-    interval_suspend->setValue( config.readNumEntry( "Suspend", 60 ));
+	// battery spinboxes
+	interval_dim->      setValue ( config. readNumEntry ( "Dim", 20 ));
+	interval_lightoff-> setValue ( config. readNumEntry ( "LightOff", 30 ));
+	interval_suspend->  setValue ( config. readNumEntry ( "Suspend", 60 ));
 
-    // battery check and slider
-    LcdOffOnly->setChecked( config.readBoolEntry("LcdOffOnly",false));
+	// battery check and slider
+	LcdOffOnly-> setChecked ( config. readBoolEntry ( "LcdOffOnly", false ));
 
-    initbright = config. readNumEntry ( "Brightness", 255 );
-    brightness-> setMaxValue ( res - 1 );
-    brightness-> setTickInterval ( QMAX( 1, res / 16 ));
-    brightness-> setLineStep ( QMAX( 1, res / 16 ));
-    brightness-> setPageStep ( QMAX( 1, res / 16 ));
-    brightness-> setValue (( initbright * ( res - 1 ) + 127 ) / 255 );
+	int bright = config. readNumEntry ( "Brightness", 255 );
+	brightness-> setMaxValue ( m_res - 1 );
+	brightness-> setTickInterval ( QMAX( 1, m_res / 16 ));
+	brightness-> setLineStep ( QMAX( 1, m_res / 16 ));
+	brightness-> setPageStep ( QMAX( 1, m_res / 16 ));
+	brightness-> setValue (( bright * ( m_res - 1 ) + 127 ) / 255 );
 
-    // light sensor
-    auto_brightness->setChecked( config.readNumEntry("LightSensor",0) != 0 );
+	// light sensor
+	auto_brightness-> setChecked ( config. readBoolEntry ( "LightSensor", false ));
+	m_sensordata = config. readListEntry ( "LightSensorData", ';' );
 
-    config.setGroup( "AC" );
-    // ac spinboxes
-    interval_dim_ac_3->setValue( config.readNumEntry( "Dim", 20 ));
-    interval_lightoff_ac_3->setValue( config.readNumEntry( "LightOff", 30 ));
-    interval_suspend_ac_3->setValue( config.readNumEntry( "Suspend", 60 ));
+	config. setGroup ( "AC" );
+	
+	// ac spinboxes
+	interval_dim_ac_3->      setValue ( config. readNumEntry ( "Dim", 20 ));
+	interval_lightoff_ac_3-> setValue ( config. readNumEntry ( "LightOff", 30 ));
+	interval_suspend_ac_3->  setValue ( config. readNumEntry ( "Suspend", 60 ));
 
-    // ac check and slider
-    LcdOffOnly_2_3->setChecked( config.readBoolEntry("LcdOffOnly",false));
+	// ac check and slider
+	LcdOffOnly_2_3-> setChecked ( config. readBoolEntry ( "LcdOffOnly", false ));
 
-    initbright_ac = config. readNumEntry ( "Brightness", 255 );
-    brightness_ac_3-> setMaxValue ( res - 1 );
-    brightness_ac_3-> setTickInterval ( QMAX( 1, res / 16 ));
-    brightness_ac_3-> setLineStep ( QMAX( 1, res / 16 ));
-    brightness_ac_3-> setPageStep ( QMAX( 1, res / 16 ));
-    brightness_ac_3-> setValue (( initbright_ac * ( res - 1 ) + 127 ) / 255 );
+	bright = config. readNumEntry ( "Brightness", 255 );
+	brightness_ac_3-> setMaxValue ( m_res - 1 );
+	brightness_ac_3-> setTickInterval ( QMAX( 1, m_res / 16 ));
+	brightness_ac_3-> setLineStep ( QMAX( 1, m_res / 16 ));
+	brightness_ac_3-> setPageStep ( QMAX( 1, m_res / 16 ));
+	brightness_ac_3-> setValue (( bright * ( m_res - 1 ) + 127 ) / 255 );
 
-    // light sensor
-    auto_brightness_ac_3->setChecked( config.readNumEntry("LightSensor",0) != 0 );
+	// light sensor
+	auto_brightness_ac_3-> setChecked ( config. readBoolEntry ( "LightSensor", false ));
+	m_sensordata_ac = config. readListEntry ( "LightSensorData", ';' );
+	
+	// advanced settings
+	config. setGroup ( "Warnings" );
+	warnintervalBox-> setValue ( config. readNumEntry ( "checkinterval", 10000 ) / 1000 );
+	lowSpinBox->      setValue ( config. readNumEntry ( "powerverylow", 10 ) );
+	criticalSpinBox-> setValue ( config. readNumEntry ( "powercritical", 5 ) );
 
-
-    //LightStepSpin->setValue( config.readNumEntry("Steps", 10 ) );
-    //LightMinValueSlider->setValue( config.readNumEntry("MinValue", 70 ) );
-    //connect( LightStepSpin, SIGNAL( valueChanged( int ) ), this, SLOT( slotSliderTicks( int ) ) ) ;
-    //LightShiftSpin->setValue( config.readNumEntry("Shift", 0 ) );
-
-    // advanced settings
-    config.setGroup( "Warnings" );
-    warnintervalBox->setValue( config.readNumEntry("checkinterval", 10000)/1000 );
-    lowSpinBox->setValue( config.readNumEntry("powerverylow", 10 ) );
-    criticalSpinBox->setValue( config.readNumEntry("powercritical", 5 ) );
-
-    connect( brightness, SIGNAL( valueChanged(int) ), this, SLOT( applyBrightness() ) );
-    connect( brightness_ac_3, SIGNAL( valueChanged(int) ), this, SLOT( applyBrightnessAC() ) );
+	if ( PowerStatusManager::readStatus ( ). acStatus ( ) != PowerStatus::Online ) 
+		connect ( brightness, SIGNAL( valueChanged ( int )), this, SLOT( setBacklight ( int )));
+	else
+		connect ( brightness_ac_3, SIGNAL( valueChanged ( int )), this, SLOT( setBacklight ( int )));
 }
 
-LightSettings::~LightSettings() {
-}
-
-void LightSettings::slotSliderTicks( int steps ) {
-//    LightMinValueSlider->setTickInterval( steps );
-}
-
-static void set_fl(int bright)
+LightSettings::~LightSettings ( ) 
 {
-    QCopEnvelope e("QPE/System", "setBacklight(int)" );
-    e << bright;
 }
 
-void LightSettings::reject()
+
+void LightSettings::calibrateSensor ( )
 {
-    set_fl(initbright);
-    QDialog::reject();
+	Sensor *s = new Sensor ( m_sensordata, this );
+	s-> showMaximized ( );
+	s-> exec ( );
+	delete s;
 }
 
-void LightSettings::accept()
+void LightSettings::calibrateSensorAC ( )
 {
-    if ( qApp->focusWidget() ) {
-        qApp->focusWidget()->clearFocus();
-    }
+	Sensor *s = new Sensor ( m_sensordata_ac, this );
+	s-> showMaximized ( );
+	s-> exec ( );
+	delete s;
+}
 
-    applyBrightness();
+void LightSettings::setBacklight ( int bright )
+{
+	bright = bright * 255 / ( m_res - 1 );
+	QCopEnvelope e ( "QPE/System", "setBacklight(int)" );
+	e << bright;
+}
 
-    // bat
-    int i_dim =      interval_dim->value();
-    int i_lightoff = interval_lightoff->value();
-    int i_suspend =  interval_suspend->value();
+void LightSettings::reject ( )
+{
+	{
+		QCopEnvelope e ( "QPE/System", "setBacklight(int)" );
+		e << -1;
+	}
+	QDialog::reject ( );
+}
 
-    // ac
-    int i_dim_ac =      interval_dim_ac_3->value();
-    int i_lightoff_ac = interval_lightoff_ac_3->value();
-    int i_suspend_ac =  interval_suspend_ac_3->value();
+void LightSettings::accept ( )
+{
+	Config config ( "apm" );
 
-    Config config( "apm" );
+	// bat
+	config. setGroup ( "Battery" );
+	config. writeEntry ( "LcdOffOnly", LcdOffOnly-> isChecked ( ));
+	config. writeEntry ( "Dim",        interval_dim-> value ( ));
+	config. writeEntry ( "LightOff",   interval_lightoff-> value ( ));
+	config. writeEntry ( "Suspend",    interval_suspend-> value ( ));
+	config. writeEntry ( "Brightness", brightness-> value ( ) * 255 / ( m_res - 1 ) );
 
-    config.setGroup( "Battery" );
+	// ac
+	config. setGroup ( "AC" );
+	config. writeEntry ( "LcdOffOnly", LcdOffOnly_2_3-> isChecked ( ));
+	config. writeEntry ( "Dim",        interval_dim_ac_3-> value ( ));
+	config. writeEntry ( "LightOff",   interval_lightoff_ac_3-> value ( ));
+	config. writeEntry ( "Suspend",    interval_suspend_ac_3-> value ( ));
+	config. writeEntry ( "Brightness", brightness_ac_3-> value ( ) * 255 / ( m_res - 1 ));
 
-    // bat
-    config.writeEntry( "LcdOffOnly", LcdOffOnly->isChecked() );
-    config.writeEntry( "Dim", i_dim );
-    config.writeEntry( "LightOff", i_lightoff );
-    config.writeEntry( "Suspend", i_suspend );
-    config.writeEntry( "Brightness",
-    ( brightness->value() ) * 255 / brightness->maxValue() );
+	// only make light sensor stuff appear if the unit has a sensor	
+	if ( ODevice::inst ( )-> hasLightSensor ( )) {
+		config. setGroup ( "Battery" );
+		config. writeEntry ( "LightSensor", auto_brightness->isChecked() );
+		config. writeEntry ( "LightSensorData", m_sensordata, ';' );
+		config. setGroup ( "AC" );
+		config. writeEntry ( "LightSensor", auto_brightness_ac_3->isChecked() );
+		config. writeEntry ( "LightSensorData", m_sensordata_ac, ';' );
+	}
 
-    // ac
-    config.setGroup( "AC" );
-    config.writeEntry( "LcdOffOnly", LcdOffOnly_2_3->isChecked() );
-    config.writeEntry( "Dim", i_dim_ac );
-    config.writeEntry( "LightOff", i_lightoff_ac );
-    config.writeEntry( "Suspend", i_suspend_ac );
-    config.writeEntry( "Brightness",
-    ( brightness_ac_3->value()) * 255 / brightness_ac_3->maxValue() );
+	// advanced
+	config. setGroup ( "Warnings" );
+	config. writeEntry ( "check_interval", warnintervalBox-> value ( ) * 1000 );
+	config. writeEntry ( "power_verylow",  lowSpinBox-> value ( ));
+	config. writeEntry ( "power_critical", criticalSpinBox-> value ( ));
+	config. write ( );
 
-
-    // only make light sensor stuff appear if the unit has a sensor
-    if ( ODevice::inst()->hasLightSensor() ) {
-        config.setGroup( "Battery" );
-        config.writeEntry( "LightSensor", auto_brightness->isChecked() );
-        config.setGroup( "AC" );
-        config.writeEntry( "LightSensor", auto_brightness_ac_3->isChecked() );
-        //config.writeEntry( "Steps", LightStepSpin->value() );
-        //onfig.writeEntry( "MinValue", LightMinValueSlider->value() );
-        //config.writeEntry( "Shift", LightShiftSpin->value() );
-    }
-
-
-    // advanced
-    config.setGroup( "Warnings" );
-    config.writeEntry( "check_interval", warnintervalBox->value()*1000 );
-    config.writeEntry( "power_verylow",  lowSpinBox->value() );
-    config.writeEntry( "power_critical", criticalSpinBox->value() );
-    config.write();
-
+	// notify the launcher
 	{
 		QCopEnvelope e ( "QPE/System", "reloadPowerWarnSettings()" );
 	}
@@ -217,29 +216,12 @@ void LightSettings::accept()
 		QCopEnvelope e ( "QPE/System", "setBacklight(int)" );
 		e << -1;
 	}
-    
-    QDialog::accept();
+	
+	QDialog::accept ( );
 }
 
-void LightSettings::applyBrightness()
+void LightSettings::done ( int r )
 {
-    if ( PowerStatusManager::readStatus().acStatus() != PowerStatus::Online ) {
-        int bright = ( brightness->value() ) * 255 / brightness->maxValue();
-        set_fl(bright);
-    }
-}
-
-void LightSettings::applyBrightnessAC()
-{
-    // if ac is attached, set directly that sliders setting, else the "on battery" sliders setting
-    if ( PowerStatusManager::readStatus().acStatus() ==  PowerStatus::Online ) {
-        int bright = ( brightness_ac_3->value() ) * 255  / brightness_ac_3->maxValue();
-        set_fl(bright);
-    }
-}
-
-void LightSettings::done(int r)
-{
-  QDialog::done(r);
-  close();
+	QDialog::done ( r );
+	close ( );
 }
