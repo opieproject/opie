@@ -77,4 +77,4 @@ protected:
      */
     void drawAttrString( QString& string, QPainter& painter, QRect rect, Character attr, bool pm, bool clear );
 
-} 
+}; 
