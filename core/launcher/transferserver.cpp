@@ -193,33 +193,43 @@ bool SyncAuthentication::checkPassword( const QString& password )
     static int lastdenial=0;
     static int denials=0;
     int now = time(0);
-
+ 
+    Config cfg("Security");
+    cfg.setGroup("Sync");    
+    QString syncapp = cfg.readEntry("syncapp","Qtopia");
+    
+    //No password needed if the user really wants it
+    if (syncapp == "IntelliSync") {
+    	return TRUE;
+    }	
+      
     // Detect old Qtopia Desktop (no password)
-    if ( password.isEmpty() ) {
-	if ( denials < 1 || now > lastdenial+600 ) {
-	    QMessageBox unauth(
-		tr("Sync Connection"),
-		tr("<p>An unauthorized system is requesting access to this device."
-		    "<p>If you are using a version of Qtopia Desktop older than 1.5.1, "
-		    "please upgrade."),
-		QMessageBox::Warning,
-		QMessageBox::Cancel, QMessageBox::NoButton, QMessageBox::NoButton,
-		0, QString::null, TRUE, WStyle_StaysOnTop);
-	    unauth.setButtonText(QMessageBox::Cancel, tr("Deny"));
-	    unauth.exec();
+    if ( password.isEmpty() ) {	
+		if ( denials < 3 || now > lastdenial+600 ) {
+		    QMessageBox unauth(
+			tr("Sync Connection"),
+			tr("<p>An unauthorized system is requesting access to this device."
+			    "<p>If you are using a version of Qtopia Desktop older than 1.5.1, "
+			    "please upgrade or change the security setting to use IntelliSync." ),
+			QMessageBox::Warning,
+			QMessageBox::Cancel, QMessageBox::NoButton, QMessageBox::NoButton,
+			0, QString::null, TRUE, WStyle_StaysOnTop);
+		    unauth.setButtonText(QMessageBox::Cancel, tr("Deny"));
+		    unauth.exec();
 
-	    denials++;
-	    lastdenial=now;
-	}
-	return FALSE;
-    }
+		    denials++;
+		    lastdenial=now;
+		 } 
+		return FALSE;
+	   
+    } 
 
     // Second, check sync password...
 
     static int lock=0;
     if ( lock ) return FALSE;
 
-    ++lock;
+    ++lock;    
 
     /*
      *  we need to support old Sync software and QtopiaDesktop

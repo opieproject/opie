@@ -46,6 +46,7 @@ private slots:
     void setSyncNet(const QString&);
     void changeLoginName(int);
     void toggleAutoLogin(bool);
+    void changeSyncApp();
 
 
 private:
