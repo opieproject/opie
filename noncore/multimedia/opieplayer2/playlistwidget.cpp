@@ -83,15 +83,13 @@ PlayListWidget::PlayListWidget( MediaPlayerState &mediaPlayerState, QWidget* par
     (void)new MenuItem( pmPlayList, tr( "Add all files" ),
                         this, SLOT( addAllToList() ) );
     pmPlayList->insertSeparator(-1);
-//     (void)new MenuItem( pmPlayList, tr( "Save PlayList" ),
-//                         this, SLOT( saveList() ) );
-    (void)new MenuItem( pmPlayList, tr( "Save Playlist" ),
-                        this, SLOT(writem3u() ) );
-    pmPlayList->insertSeparator(-1);
     (void)new MenuItem( pmPlayList, tr( "Add File" ),
                         this,SLOT( openFile() ) );
     (void)new MenuItem( pmPlayList, tr("Add URL"),
                         this,SLOT( openURL() ) );
+    pmPlayList->insertSeparator(-1);
+    (void)new MenuItem( pmPlayList, tr( "Save Playlist" ),
+                        this, SLOT(writem3u() ) );
     pmPlayList->insertSeparator(-1);
     (void)new MenuItem( pmPlayList, tr( "Rescan for Audio Files" ),
                         audioView, SLOT( scanFiles() ) );
@@ -780,14 +778,40 @@ void PlayListWidget::readListFromFile( const QString &filename ) {
   /*
  writes current playlist to m3u file */
 void PlayListWidget::writem3u() {
-    InputDialog *fileDlg;
-    fileDlg = new InputDialog( this, tr( "Save m3u Playlist " ), TRUE, 0);
-    fileDlg->exec();
+    //InputDilog *fileDlg;
+    //fileDlg = new InputDialog( this, tr( "Save m3u Playlist " ), TRUE, 0);
+    //fileDlg->exec();
+
+    Config cfg( "OpiePlayer" );
+    cfg.setGroup("Dialog");
+    MimeTypes types;
+    QStringList audio, video, all;
+    audio << "audio/*";
+    audio << "playlist/plain";
+    audio << "audio/x-mpegurl";
+
+    video << "video/*";
+    video << "playlist/plain";
+
+    all += audio;
+    all += video;
+    types.insert("All Media Files", all );
+    types.insert("Audio",  audio );
+    types.insert("Video", video );
+
+    QString str = OFileDialog::getOpenFileName( 1,
+                  cfg.readEntry("LastDirectory",QPEApplication::documentDir()),"",
+                  types, 0 );
+    if(str.left(2) == "//") str=str.right(str.length()-1);
+    cfg.writeEntry("LastDirectory" ,QFileInfo(str).dirPath());
+
+
     QString name, filename, list;
     Om3u *m3uList;
 
-    if( fileDlg->result() == 1 ) {
-        name = fileDlg->text();
+    if( !str.isEmpty() ) {
+        name = str;
+        //       name = fileDlg->text();
 //        qDebug( filename );
         if( name.find("/",0,true) != -1) {// assume they specify a file path
             filename = name;
@@ -811,7 +835,7 @@ void PlayListWidget::writem3u() {
           m3uList->close();
           delete m3uList;
 
-          delete fileDlg;
+          //delete fileDlg;
 
           DocLnk lnk;
           lnk.setFile( filename);
