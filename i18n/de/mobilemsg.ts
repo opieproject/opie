@@ -71,19 +71,19 @@
     </message>
     <message>
         <source>SMS</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Messages: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nachrichten: %1</translation>
     </message>
     <message>
         <source>Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Nachricht</translation>
     </message>
     <message>
         <source>Image:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bild:</translation>
     </message>
 </context>
 </TS>

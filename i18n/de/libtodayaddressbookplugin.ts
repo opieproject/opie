@@ -28,7 +28,7 @@
     </message>
     <message>
         <source>To activate settings: Restart application !</source>
-        <translation type="unfinished">Einstellungen aktivieren: Anwendung neu starten !</translation>
+        <translation>Einstellungen aktivieren: Anwendung neu starten !</translation>
     </message>
     <message>
         <source>Set Headline Color: </source>
@@ -66,23 +66,23 @@ fällige Termine</translation>
     </message>
     <message>
         <source>Enable/Disable Views</source>
-        <translation type="unfinished"></translation>
+        <translation>Ansichten Ein-/Ausschalten</translation>
     </message>
     <message>
         <source>Show &amp;Birthdays</source>
-        <translation type="unfinished"></translation>
+        <translation>Ge&amp;burtstage anzeigen</translation>
     </message>
     <message>
         <source>Show &amp;Anniveraries</source>
-        <translation type="unfinished"></translation>
+        <translation>J&amp;ahrestage anzeigen</translation>
     </message>
     <message>
         <source>The next birthdays will just be shown, if enabled!</source>
-        <translation type="unfinished"></translation>
+        <translation>Die nächsten Geburtstage werde angezeigt falls aktiviert!</translation>
     </message>
     <message>
         <source>The next anniversaries will just be shown, if enabled !</source>
-        <translation type="unfinished"></translation>
+        <translation>Die nächsten Jahrestage werden angezeigt falls aktiviert!</translation>
     </message>
 </context>
 <context>
