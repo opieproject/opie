@@ -12,13 +12,8 @@ public:
 	QRESULT queryInterface ( const QUuid &, QUnknownInterface ** );
 	Q_REFCOUNT
         	
-	virtual QStyle *create ( );
-	
-	virtual QString description ( );
-	virtual QString name ( );
-	virtual QCString key ( );
-	
-	virtual unsigned int version ( );
+	virtual QStyle *style ( );	
+	virtual QString name ( ) const;
 	
 private:
 	ulong ref;

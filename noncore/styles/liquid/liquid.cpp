@@ -10,7 +10,7 @@
 
 #include <qmenudata.h>
 #include "liquid.h"
-#include "liquiddeco.h"
+//#include "liquiddeco.h"
 #include <qapplication.h>
 #include <qpe/config.h>
 #include "effects.h"

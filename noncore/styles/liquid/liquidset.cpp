@@ -38,23 +38,6 @@
 #include <opie/ocolorbutton.h>
 
 
-static void changeButtonColor ( QWidget *btn, const QColor &col )
-{
-	QPalette pal = btn-> palette ( );
-
-	pal. setColor ( QPalette::Normal, QColorGroup::Button, col );
-	pal. setColor ( QPalette::Active, QColorGroup::Button, col );
-	pal. setColor ( QPalette::Disabled, QColorGroup::Button, col );
-	pal. setColor ( QPalette::Inactive, QColorGroup::Button, col );
-	pal. setColor ( QPalette::Normal, QColorGroup::Background, col );
-	pal. setColor ( QPalette::Active, QColorGroup::Background, col );
-	pal. setColor ( QPalette::Disabled, QColorGroup::Background, col );
-	pal. setColor ( QPalette::Inactive, QColorGroup::Background, col );
-
-	btn-> setPalette ( pal );
-}
-
-
 LiquidSettings::LiquidSettings ( QWidget* parent, const char *name, WFlags fl )
 		: QWidget ( parent, name, fl )
 {
@@ -68,7 +51,6 @@ LiquidSettings::LiquidSettings ( QWidget* parent, const char *name, WFlags fl )
 	QColor tcol  = QColor ( config. readEntry ( "TextColor", QApplication::palette ( ). active ( ). text ( ). name ( )));
 	int opacity  = config. readNumEntry ( "Opacity", 10 );
 	m_shadow     = config. readBoolEntry ( "ShadowText", true );
-	m_deco       = config. readBoolEntry ( "WinDecoration", true );
 	int contrast = config. readNumEntry ( "StippleContrast", 5 );
 	m_flat       = config. readBoolEntry ( "FlatToolButtons", false );
 
@@ -118,12 +100,6 @@ LiquidSettings::LiquidSettings ( QWidget* parent, const char *name, WFlags fl )
 	
 	vbox-> addSpacing ( 4 );
 	
-	QCheckBox *windeco = new QCheckBox ( tr( "Draw liquid window title bars" ), this );
-	windeco-> setChecked ( m_deco );
-	vbox-> addWidget ( windeco );
-
-	vbox-> addSpacing ( 4 );
-	
 	QCheckBox *flattb = new QCheckBox ( tr( "Make toolbar buttons appear flat" ), this );
 	flattb-> setChecked ( m_flat );
 	vbox-> addWidget ( flattb );
@@ -146,7 +122,6 @@ LiquidSettings::LiquidSettings ( QWidget* parent, const char *name, WFlags fl )
 	
 	connect ( cb, SIGNAL( highlighted ( int ) ), this, SLOT( changeType ( int ) ) );
 	connect ( shadow, SIGNAL( toggled ( bool ) ), this, SLOT( changeShadow ( bool ) ) );
-	connect ( windeco, SIGNAL( toggled ( bool ) ), this, SLOT( changeDeco ( bool ) ) );
 	connect ( flattb, SIGNAL( toggled ( bool ) ), this, SLOT( changeFlat ( bool ) ) );
 }
 
@@ -169,11 +144,6 @@ void LiquidSettings::changeShadow ( bool b )
 	m_shadow = b;
 }
 
-void LiquidSettings::changeDeco ( bool b )
-{
-	m_deco = b;
-}
-
 void LiquidSettings::changeFlat ( bool b )
 {
 	m_flat = b;
@@ -190,7 +160,6 @@ bool LiquidSettings::writeConfig ( )
 	config. writeEntry ( "TextColor", m_textbtn-> color ( ). name ( ));
 	config. writeEntry ( "Opacity", m_opacsld-> value ( ));
 	config. writeEntry ( "ShadowText", m_shadow );	
-	config. writeEntry ( "WinDecoration", m_deco );
 	config. writeEntry ( "StippleContrast", m_contsld-> value ( ));
 	config. writeEntry ( "FlatToolButtons", m_flat );
 	config. write ( );

@@ -5,7 +5,7 @@
 
 class LiquidSettings;
 
-class LiquidInterface : public StyleInterface {
+class LiquidInterface : public StyleExtendedInterface {
 public:
 	LiquidInterface ( );
 	virtual ~LiquidInterface ( );
@@ -13,31 +13,19 @@ public:
 	QRESULT queryInterface ( const QUuid &, QUnknownInterface ** );
 	Q_REFCOUNT
         	
-	virtual QStyle *create ( );
+	virtual QStyle *style ( );
 	
-	virtual QString description ( );
-	virtual QString name ( );
-	virtual QCString key ( );
-	
-	virtual unsigned int version ( );
-	
-private:
-	ulong ref;
-};
+	virtual QString name ( ) const;
 
-class LiquidSettingsInterface : public StyleSettingsInterface {
-public:
-	LiquidSettingsInterface ( );
-	virtual ~LiquidSettingsInterface ( );
+	virtual QString description ( ) const;
 
-	QRESULT queryInterface ( const QUuid &, QUnknownInterface ** );
-	Q_REFCOUNT
-       
+	virtual bool hasSettings ( ) const;
+
 	virtual QWidget *create ( QWidget *parent, const char *name = 0 );
     
 	virtual bool accept ( );            
 	virtual void reject ( );
-	
+
 private:
 	LiquidSettings *m_widget;
 	ulong ref;

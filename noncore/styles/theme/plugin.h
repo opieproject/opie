@@ -5,7 +5,7 @@
 
 class ThemeSettings;
 
-class ThemeInterface : public StyleInterface {
+class ThemeInterface : public StyleExtendedInterface {
 public:
 	ThemeInterface ( );
 	virtual ~ThemeInterface ( );
@@ -13,26 +13,13 @@ public:
 	QRESULT queryInterface ( const QUuid &, QUnknownInterface ** );
 	Q_REFCOUNT
         	
-	virtual QStyle *create ( );
+	virtual QStyle *style ( );
+	virtual QString name ( ) const;
 	
-	virtual QString description ( );
-	virtual QString name ( );
-	virtual QCString key ( );
+	virtual QString description ( ) const;
 	
-	virtual unsigned int version ( );
+	virtual bool hasSettings ( ) const;
 	
-private:
-	ulong ref;
-};
-
-class ThemeSettingsInterface : public StyleSettingsInterface {
-public:
-	ThemeSettingsInterface ( );
-	virtual ~ThemeSettingsInterface ( );
-
-	QRESULT queryInterface ( const QUuid &, QUnknownInterface ** );
-	Q_REFCOUNT
-       
 	virtual QWidget *create ( QWidget *parent, const char *name = 0 );
     
 	virtual bool accept ( );            

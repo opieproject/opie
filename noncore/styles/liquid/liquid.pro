@@ -1,13 +1,11 @@
 TEMPLATE    =  lib
 CONFIG       = qt embedded release warn_on
 SOURCES     =  liquid.cpp \
-               liquiddeco.cpp \
                effects.cpp \
                liquidset.cpp \
                plugin.cpp
                
 HEADERS     =  liquid.h \
-               liquiddeco.h \
                effects.h \
                liquidset.h \
                plugin.h

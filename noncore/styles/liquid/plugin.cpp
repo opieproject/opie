@@ -1,3 +1,5 @@
+#include <qapplication.h>
+
 #include "liquid.h"
 #include "liquidset.h"
 #include "plugin.h"
@@ -6,52 +8,63 @@
 
 LiquidInterface::LiquidInterface ( ) :  ref ( 0 )
 {
+	m_widget = 0;
 }
     
 LiquidInterface::~LiquidInterface ( )
 {
 }
         
-QStyle *LiquidInterface::create ( )
+QStyle *LiquidInterface::style ( )
 {
 	return new LiquidStyle ( );
 }
 
-QString LiquidInterface::name ( )
+QString LiquidInterface::name ( ) const
 {
-	return QObject::tr( "Liquid", "name" );
+	return qApp-> translate ( "Styles", "Liquid" );
 }
 
-QString LiquidInterface::description ( )
+QString LiquidInterface::description ( ) const
 {
-	return QObject::tr( "High Performance Liquid style by Mosfet", "description" );
+	return qApp-> translate ( "Styles", "High Performance Liquid style by Mosfet" );
 }
 
-QCString LiquidInterface::key ( )
+bool LiquidInterface::hasSettings ( ) const
 {
-	return QCString ( "liquid" );
+	return true;
 }
 
-unsigned int LiquidInterface::version ( )
+QWidget *LiquidInterface::create ( QWidget *parent, const char *name )
 {
-	return 100; // 1.0.0 (\d+.\d.\d)
+	m_widget = new LiquidSettings ( parent, name ? name : "LIQUID-SETTINGS" );
+		
+	return m_widget;
 }
+
+bool LiquidInterface::accept ( )
+{
+	if ( !m_widget )
+		return false;
+
+	return m_widget-> writeConfig ( );
+}
+
+void LiquidInterface::reject ( )
+{
+}
+
 
 QRESULT LiquidInterface::queryInterface ( const QUuid &uuid, QUnknownInterface **iface )
 {
-	static LiquidSettingsInterface *setiface = 0;
-
 	*iface = 0;
 	
 	if ( uuid == IID_QUnknown )
 		*iface = this;
 	else if ( uuid == IID_Style )
 		*iface = this;
-	else if ( uuid == IID_StyleSettings ) {
-		if ( !setiface )
-			setiface = new LiquidSettingsInterface ( );
-		*iface = setiface;
-	}
+	else if ( uuid == IID_StyleExtended ) 
+		*iface = this;
 	
 	if ( *iface )
 		(*iface)-> addRef ( );
@@ -65,49 +78,7 @@ Q_EXPORT_INTERFACE()
 }
 
 
-LiquidSettingsInterface::LiquidSettingsInterface ( ) :  ref ( 0 )
-{
-	m_widget = 0;
-}
-    
-LiquidSettingsInterface::~LiquidSettingsInterface ( )
-{
-}
         
-QWidget *LiquidSettingsInterface::create ( QWidget *parent, const char *name )
-{
-	m_widget = new LiquidSettings ( parent, name ? name : "LIQUID-SETTINGS" );
-		
-	return m_widget;
-}
-
-bool LiquidSettingsInterface::accept ( )
-{
-	if ( !m_widget )
-		return false;
-
-	return m_widget-> writeConfig ( );
-}
-
-void LiquidSettingsInterface::reject ( )
-{
-}
-
-QRESULT LiquidSettingsInterface::queryInterface ( const QUuid &uuid, QUnknownInterface **iface )
-{
-	*iface = 0;
-	
-	
-	if ( uuid == IID_QUnknown )
-		*iface = this;
-	else if ( uuid == IID_StyleSettings )
-		*iface = this;
-	
-	if ( *iface )
-		(*iface)-> addRef ( );
-		
-	return QS_OK;
-}
 
 // Hack for Retail Z experiments
 extern "C" { QStyle *allocate ( ) { return new LiquidStyle ( ); } }
