@@ -100,9 +100,11 @@ SettingsTabWidget::SettingsTabWidget( QWidget *parent )
 		ntpSrvs.setGroup( QString::number( i ) );
 		cbTimeServer->insertItem( ntpSrvs.readEntry( "name" ) );
 	}
-	if ( srvCount==0 )
+	if ( srvCount==0 ) {
 		cbTimeServer->insertItem( "time.fu-berlin.de" );
-
+    cbTimeServer->insertItem( "time-a.nist.gov" );
+    cbTimeServer->insertItem( "ntp.bri.connect.com.au" );
+  }
 	Config config( "ntp" );
 	config.setGroup( "settings" );
 	sbPredictDelay->setValue( config.readNumEntry( "minLookupDiff", 720 ) );
