@@ -52,6 +52,8 @@ class OContactFields{
 
     static QMap<int, QString> idToTrFields();
     static QMap<QString, int> trFieldsToId();
+    static QMap<int, QString> idToUntrFields();
+    static QMap<QString, int> untrFieldsToId();
 
 };
 

@@ -16,18 +16,19 @@
 QStringList OContactFields::untrdetailsfields( bool sorted )
 {
     QStringList list;
+    QMap<int, QString> mapIdToStr = idToUntrFields();
 
-    list.append( "Office" );
-    list.append( "Profession" );
-    list.append( "Assistant" );
-    list.append( "Manager" );
+    list.append( mapIdToStr[ Qtopia::Office ] );
+    list.append( mapIdToStr[ Qtopia::Profession ] );
+    list.append( mapIdToStr[ Qtopia::Assistant ] );
+    list.append( mapIdToStr[ Qtopia::Manager ] );
 
-    list.append( "Spouse" );
-    list.append( "Gender" );
-    list.append( "Birthday" );
-    list.append( "Anniversary" );
-    list.append( "Nickname" );
-    list.append( "Children" );
+    list.append( mapIdToStr[ Qtopia::Spouse ] );
+    list.append( mapIdToStr[ Qtopia::Gender ] );
+    list.append( mapIdToStr[ Qtopia::Birthday ] );
+    list.append( mapIdToStr[ Qtopia::Anniversary ] );
+    list.append( mapIdToStr[ Qtopia::Nickname ] );
+    list.append( mapIdToStr[ Qtopia::Children ] );
 
     if (sorted) list.sort();
     return list;
@@ -40,18 +41,19 @@ QStringList OContactFields::untrdetailsfields( bool sorted )
 QStringList OContactFields::trdetailsfields( bool sorted )
 {
     QStringList list;
+    QMap<int, QString> mapIdToStr = idToTrFields();
 
-    list.append( QObject::tr( "Office" ) );
-    list.append( QObject::tr( "Profession" ) );
-    list.append( QObject::tr( "Assistant" ) );
-    list.append( QObject::tr( "Manager" ) );
+    list.append( mapIdToStr[Qtopia::Office] );
+    list.append( mapIdToStr[Qtopia::Profession] );
+    list.append( mapIdToStr[Qtopia::Assistant] );
+    list.append( mapIdToStr[Qtopia::Manager] );
 
-    list.append( QObject::tr( "Spouse" ) );
-    list.append( QObject::tr( "Gender" ) );
-    list.append( QObject::tr( "Birthday" ) );
-    list.append( QObject::tr( "Anniversary" ) );
-    list.append( QObject::tr( "Nickname" ) );
-    list.append( QObject::tr( "Children" ) );
+    list.append( mapIdToStr[Qtopia::Spouse] );
+    list.append( mapIdToStr[Qtopia::Gender] );
+    list.append( mapIdToStr[Qtopia::Birthday] );
+    list.append( mapIdToStr[Qtopia::Anniversary] );
+    list.append( mapIdToStr[Qtopia::Nickname] );
+    list.append( mapIdToStr[Qtopia::Children] );
 
     if (sorted) list.sort();
     return list;
@@ -65,16 +67,18 @@ QStringList OContactFields::trdetailsfields( bool sorted )
 QStringList OContactFields::trphonefields( bool sorted )
 {
     QStringList list;
-    list.append( QObject::tr( "Business Phone" ) );
-    list.append( QObject::tr( "Business Fax" ) );
-    list.append( QObject::tr( "Business Mobile" ) );
+    QMap<int, QString> mapIdToStr = idToTrFields();
 
-    list.append( QObject::tr( "Default Email" ) );
-    list.append( QObject::tr( "Emails" ) );
+    list.append( mapIdToStr[Qtopia::BusinessPhone] );
+    list.append( mapIdToStr[Qtopia::BusinessFax] );
+    list.append( mapIdToStr[Qtopia::BusinessMobile] ); 
 
-    list.append( QObject::tr( "Home Phone" ) );
-    list.append( QObject::tr( "Home Fax" ) );
-    list.append( QObject::tr( "Home Mobile" ) );
+    list.append( mapIdToStr[Qtopia::DefaultEmail] );
+    list.append( mapIdToStr[Qtopia::Emails] );
+
+    list.append( mapIdToStr[Qtopia::HomePhone] );
+    list.append( mapIdToStr[Qtopia::HomeFax] );
+    list.append( mapIdToStr[Qtopia::HomeMobile] );
 
     if (sorted) list.sort();
 
@@ -89,17 +93,18 @@ QStringList OContactFields::trphonefields( bool sorted )
 QStringList OContactFields::untrphonefields( bool sorted )
 {
     QStringList list;
+    QMap<int, QString> mapIdToStr = idToUntrFields();
 
-    list.append( "Business Phone" );
-    list.append( "Business Fax" );
-    list.append( "Business Mobile" );
+    list.append( mapIdToStr[ Qtopia::BusinessPhone ] );
+    list.append( mapIdToStr[ Qtopia::BusinessFax ] );
+    list.append( mapIdToStr[ Qtopia::BusinessMobile ] );
 
-    list.append( "Default Email" );
-    list.append( "Emails" );
+    list.append( mapIdToStr[ Qtopia::DefaultEmail ] );
+    list.append( mapIdToStr[ Qtopia::Emails ] );
 
-    list.append( "Home Phone" );
-    list.append( "Home Fax" );
-    list.append( "Home Mobile" );
+    list.append( mapIdToStr[ Qtopia::HomePhone ] );
+    list.append( mapIdToStr[ Qtopia::HomeFax ] );
+    list.append( mapIdToStr[ Qtopia::HomeMobile ] );
 
     if (sorted) list.sort();
 
@@ -114,39 +119,40 @@ QStringList OContactFields::untrphonefields( bool sorted )
 QStringList OContactFields::trfields( bool sorted )
 {
     QStringList list;
+    QMap<int, QString> mapIdToStr = idToTrFields();
 
-    list.append( QObject::tr( "Name Title") );
-    list.append( QObject::tr( "First Name" ) );
-    list.append( QObject::tr( "Middle Name" ) );
-    list.append( QObject::tr( "Last Name" ) );
-    list.append( QObject::tr( "Suffix" ) );
-    list.append( QObject::tr( "File As" ) );
+    list.append( mapIdToStr[Qtopia::Title]);
+    list.append( mapIdToStr[Qtopia::FirstName] );
+    list.append( mapIdToStr[Qtopia::MiddleName] );
+    list.append( mapIdToStr[Qtopia::LastName] );
+    list.append( mapIdToStr[Qtopia::Suffix] );
+    list.append( mapIdToStr[Qtopia::FileAs] );
 
-    list.append( QObject::tr( "Job Title" ) );
-    list.append( QObject::tr( "Department" ) );
-    list.append( QObject::tr( "Company" ) );
+    list.append( mapIdToStr[Qtopia::JobTitle] );
+    list.append( mapIdToStr[Qtopia::Department] );
+    list.append( mapIdToStr[Qtopia::Company] );
 
     list += trphonefields( sorted );
 
-    list.append( QObject::tr( "Business Street" ) );
-    list.append( QObject::tr( "Business City" ) );
-    list.append( QObject::tr( "Business State" ) );
-    list.append( QObject::tr( "Business Zip" ) );
-    list.append( QObject::tr( "Business Country" ) );
-    list.append( QObject::tr( "Business Pager" ) );
-    list.append( QObject::tr( "Business WebPage" ) );
+    list.append( mapIdToStr[Qtopia::BusinessStreet] );
+    list.append( mapIdToStr[Qtopia::BusinessCity] );
+    list.append( mapIdToStr[Qtopia::BusinessState] );
+    list.append( mapIdToStr[Qtopia::BusinessZip] );
+    list.append( mapIdToStr[Qtopia::BusinessCountry] );
+    list.append( mapIdToStr[Qtopia::BusinessPager] );
+    list.append( mapIdToStr[Qtopia::BusinessWebPage] );
 
-    list.append( QObject::tr( "Home Street" ) );
-    list.append( QObject::tr( "Home City" ) );
-    list.append( QObject::tr( "Home State" ) );
-    list.append( QObject::tr( "Home Zip" ) );
-    list.append( QObject::tr( "Home Country" ) );
-    list.append( QObject::tr( "Home Web Page" ) );
+    list.append( mapIdToStr[Qtopia::HomeStreet] );
+    list.append( mapIdToStr[Qtopia::HomeCity] );
+    list.append( mapIdToStr[Qtopia::HomeState] );
+    list.append( mapIdToStr[Qtopia::HomeZip] );
+    list.append( mapIdToStr[Qtopia::HomeCountry] );
+    list.append( mapIdToStr[Qtopia::HomeWebPage] );
 
     list += trdetailsfields( sorted );
 
-    list.append( QObject::tr( "Notes" ) );
-    list.append( QObject::tr( "Groups" ) );
+    list.append( mapIdToStr[Qtopia::Notes] );
+    list.append( mapIdToStr[Qtopia::Groups] );
 
     if (sorted) list.sort();
 
@@ -160,39 +166,40 @@ QStringList OContactFields::trfields( bool sorted )
 QStringList OContactFields::untrfields( bool sorted )
 {
     QStringList list;
+    QMap<int, QString> mapIdToStr = idToUntrFields();
 
-    list.append( "Name Title" );
-    list.append( "First Name" );
-    list.append( "Middle Name" );
-    list.append( "Last Name" );
-    list.append( "Suffix" );
-    list.append( "File As" );
+    list.append( mapIdToStr[ Qtopia::Title ] );
+    list.append( mapIdToStr[ Qtopia::FirstName ] );
+    list.append( mapIdToStr[ Qtopia::MiddleName ] );
+    list.append( mapIdToStr[ Qtopia::LastName ] );
+    list.append( mapIdToStr[ Qtopia::Suffix ] );
+    list.append( mapIdToStr[ Qtopia::FileAs ] );
 
-    list.append( "Job Title" );
-    list.append( "Department" );
-    list.append( "Company" );
+    list.append( mapIdToStr[ Qtopia::JobTitle ] );
+    list.append( mapIdToStr[ Qtopia::Department ] );
+    list.append( mapIdToStr[ Qtopia::Company ] );
 
     list += untrphonefields( sorted );
 
-    list.append( "Business Street" );
-    list.append( "Business City" );
-    list.append( "Business State" );
-    list.append( "Business Zip" );
-    list.append( "Business Country" );
-    list.append( "Business Pager" );
-    list.append( "Business WebPage" );
+    list.append( mapIdToStr[ Qtopia::BusinessStreet ] );
+    list.append( mapIdToStr[ Qtopia::BusinessCity ] );
+    list.append( mapIdToStr[ Qtopia::BusinessState ] );
+    list.append( mapIdToStr[ Qtopia::BusinessZip ] );
+    list.append( mapIdToStr[ Qtopia::BusinessCountry ] );
+    list.append( mapIdToStr[ Qtopia::BusinessPager ] );
+    list.append( mapIdToStr[ Qtopia::BusinessWebPage ] );
 
-    list.append( "Home Street" );
-    list.append( "Home City" );
-    list.append( "Home State" );
-    list.append( "Home Zip" );
-    list.append( "Home Country" );
-    list.append( "Home Web Page" );
+    list.append( mapIdToStr[ Qtopia::HomeStreet ] );
+    list.append( mapIdToStr[ Qtopia::HomeCity ] );
+    list.append( mapIdToStr[ Qtopia::HomeState ] );
+    list.append( mapIdToStr[ Qtopia::HomeZip ] );
+    list.append( mapIdToStr[ Qtopia::HomeCountry ] );
+    list.append( mapIdToStr[ Qtopia::HomeWebPage] );
 
     list += untrdetailsfields( sorted );
 
-    list.append( "Notes" );
-    list.append( "Groups" );
+    list.append( mapIdToStr[ Qtopia::Notes ] );
+    list.append( mapIdToStr[ Qtopia::Groups ] );
 
     if (sorted) list.sort();
 
@@ -261,6 +268,69 @@ QMap<int, QString> OContactFields::idToTrFields()
 	return ret_map;
 }
 
+QMap<int, QString> OContactFields::idToUntrFields()
+{
+	QMap<int, QString> ret_map;
+
+	ret_map.insert( Qtopia::Title, "Name Title" );
+	ret_map.insert( Qtopia::FirstName, "First Name" );
+	ret_map.insert( Qtopia::MiddleName, "Middle Name" );
+	ret_map.insert( Qtopia::LastName, "Last Name" );
+	ret_map.insert( Qtopia::Suffix, "Suffix" );
+	ret_map.insert( Qtopia::FileAs, "File As" );
+
+	ret_map.insert( Qtopia::JobTitle, "Job Title" );
+	ret_map.insert( Qtopia::Department, "Department" );
+	ret_map.insert( Qtopia::Company, "Company" );
+	ret_map.insert( Qtopia::BusinessPhone, "Business Phone" );
+	ret_map.insert( Qtopia::BusinessFax, "Business Fax" );
+	ret_map.insert( Qtopia::BusinessMobile, "Business Mobile" );
+
+	// email
+	ret_map.insert( Qtopia::DefaultEmail, "Default Email" );
+	ret_map.insert( Qtopia::Emails, "Emails" );
+
+	ret_map.insert( Qtopia::HomePhone, "Home Phone" );
+	ret_map.insert( Qtopia::HomeFax, "Home Fax" );
+	ret_map.insert( Qtopia::HomeMobile, "Home Mobile" );
+
+	// business
+	ret_map.insert( Qtopia::BusinessStreet, "Business Street" );
+	ret_map.insert( Qtopia::BusinessCity, "Business City" );
+	ret_map.insert( Qtopia::BusinessState, "Business State" );
+	ret_map.insert( Qtopia::BusinessZip, "Business Zip" );
+	ret_map.insert( Qtopia::BusinessCountry, "Business Country" );
+	ret_map.insert( Qtopia::BusinessPager, "Business Pager" );
+	ret_map.insert( Qtopia::BusinessWebPage, "Business WebPage" );
+
+	ret_map.insert( Qtopia::Office, "Office" );
+	ret_map.insert( Qtopia::Profession, "Profession" );
+	ret_map.insert( Qtopia::Assistant, "Assistant" );
+	ret_map.insert( Qtopia::Manager, "Manager" );
+
+	// home
+	ret_map.insert( Qtopia::HomeStreet, "Home Street" );
+	ret_map.insert( Qtopia::HomeCity, "Home City" );
+	ret_map.insert( Qtopia::HomeState, "Home State" );
+	ret_map.insert( Qtopia::HomeZip, "Home Zip" );
+	ret_map.insert( Qtopia::HomeCountry, "Home Country" );
+	ret_map.insert( Qtopia::HomeWebPage, "Home Web Page" );
+
+	//personal
+	ret_map.insert( Qtopia::Spouse, "Spouse" );
+	ret_map.insert( Qtopia::Gender, "Gender" );
+	ret_map.insert( Qtopia::Birthday, "Birthday" );
+	ret_map.insert( Qtopia::Anniversary, "Anniversary" );
+	ret_map.insert( Qtopia::Nickname, "Nickname" );
+	ret_map.insert( Qtopia::Children, "Children" );
+
+	// other
+	ret_map.insert( Qtopia::Notes, "Notes" );
+
+
+	return ret_map;
+}
+
 QMap<QString, int> OContactFields::trFieldsToId()
 {
 	QMap<int, QString> idtostr = idToTrFields();
@@ -274,6 +344,21 @@ QMap<QString, int> OContactFields::trFieldsToId()
 
 	return ret_map;
 }
+
+QMap<QString, int> OContactFields::untrFieldsToId()
+{
+	QMap<int, QString> idtostr = idToUntrFields();
+	QMap<QString, int> ret_map;
+
+
+        QMap<int, QString>::Iterator it;
+        for( it = idtostr.begin(); it != idtostr.end(); ++it )
+		ret_map.insert( *it, it.key() );
+
+
+	return ret_map;
+}
+
 
 OContactFields::OContactFields():
 	fieldOrder( DEFAULT_FIELD_ORDER ),

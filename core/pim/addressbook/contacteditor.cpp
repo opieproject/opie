@@ -549,12 +549,14 @@ void ContactEditor::init() {
 	// Create Labels and lineedit fields for every dynamic entry
 	QStringList::ConstIterator it = slDynamicEntries.begin();
 	QStringList::ConstIterator trit = trlDynamicEntries.begin();
+	QMap<QString, int> mapStrToID = OContactFields::untrFieldsToId();
+	QMap<int, QString> mapIdToStr = OContactFields::idToTrFields();
 	for (i = counter; it != slDynamicEntries.end(); i++, ++it, ++trit) {
 	  
 	  if (((*it) == "Anniversary") || 
 	      ((*it) == "Birthday")|| ((*it) == "Gender")) continue;
 
-		l = new QLabel( (*it).utf8() , container );
+	  l = new QLabel( mapIdToStr[mapStrToID[*it]].utf8() , container );
 		listName.append( l );
 		gl->addWidget( l, i, 0 );
 		QLineEdit *e = new QLineEdit( container );
