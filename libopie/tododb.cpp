@@ -45,6 +45,7 @@ public:
     QFile file( name);
     if( file.open(IO_WriteOnly ) ){
       QTextStream stream(&file );
+      stream.setEncoding( QTextStream::UnicodeUTF8 );
       stream << "<!DOCTYPE Tasks>" << endl;
       tasks->save(stream );
       delete tasks;
