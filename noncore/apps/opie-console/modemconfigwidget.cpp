@@ -4,7 +4,7 @@
 #include <qlineedit.h>
 #include <qpushbutton.h>
 #include <qhbox.h>
-
+#include <qregexp.h>
 
 #include "modemconfigwidget.h"
 #include "dialdialog.h"
@@ -187,6 +187,9 @@ void ModemConfigWidget::slotAT() {
 
 void ModemConfigWidget::slotDial() {
     DialDialog dial( this, "DialConfig", true );
+    if(!m_telNumber->text().isEmpty()) {
+        dial.setNumber(m_telNumber->text().replace(QRegExp("[\\-\\/\\ ]"), "").toInt());
+    }
     dial.showMaximized();
     if ( dial.exec() == QDialog::Accepted ) {
         m_telNumber->setText( dial.number() );

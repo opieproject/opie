@@ -125,7 +125,8 @@ void Dialer::trydial(const QString& number)
 	if(state != state_cancel)
 	{
 		switchState(state_init);
-		send("ATZ");
+		//send("ATZ");
+		send(m_profile.readEntry("InitString"));
 		QString response2 = receive();
 	}
 
@@ -149,7 +150,7 @@ void Dialer::trydial(const QString& number)
 	{
 		switchState(state_dialing);
 
-		send(QString("ATDT %1").arg(number));
+		send(QString("%1 %2").arg(m_profile.readEntry("DialPrefix1")).arg(number));
 		QString response5 = receive();
 	}
 	

@@ -92,4 +92,12 @@ DialDialog::~DialDialog() {
 
 QString DialDialog::number() {
     return QString( "%1").arg( m_number );
+
 }
+
+void DialDialog::setNumber( int number )
+{
+    m_number = number;
+    LCD->display( m_number );
+}
+

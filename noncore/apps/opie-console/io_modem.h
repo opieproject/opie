@@ -61,7 +61,7 @@ private:
         m_dialSuf2, m_dialPref3, m_dialSuf3, m_connect, m_hangup, m_cancel;
     int  m_dialTime, m_delayRedial, m_numberTries, m_dtrDropTime,
         m_bpsDetect, m_dcdLines, m_multiLineUntag;
-	const Profile& m_profile;
+	Profile m_profile;
 
 private slots:
     void slotExited(OProcess* proc);

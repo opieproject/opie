@@ -17,6 +17,8 @@ public:
 
     QString number();
 
+    void setNumber( int );
+
 private:
     float m_number;
     QLCDNumber *LCD;

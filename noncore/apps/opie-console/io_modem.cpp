@@ -4,7 +4,8 @@
 #include "dialer.h"
 
 IOModem::IOModem( const Profile &profile )
-	: IOSerial( profile ),  m_profile( profile ) {
+	: IOSerial( profile ) {
+	m_profile = profile;
 }
 
 
@@ -14,19 +15,16 @@ IOModem::~IOModem() {
 
 
 void IOModem::close() {
+	// maybe do a hangup here just in case...?
 
     IOSerial::close();
-
 }
 
 bool IOModem::open() {
     bool ret = IOSerial::open();
 	if(!ret) return false;
 
-	qWarning("IOModem::open continues...");
-
 	Dialer d(m_profile);
-	qWarning("dialer created");
 
 	int result = d.exec();
 	if(result == QDialog::Accepted)
