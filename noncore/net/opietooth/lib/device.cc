@@ -13,6 +13,7 @@ namespace {
     QString string( par );
     QStringList list =  QStringList::split( '\n', string );
     for( QStringList::Iterator it = list.begin(); it != list.end(); ++it ){
+    qWarning("parsePID: %s", (*it).latin1() );
       if( !(*it).startsWith("CSR") ){
 	id = (*it).toInt();
 	break;
@@ -78,7 +79,9 @@ void Device::slotExited( OProcess* proc)
 {
   qWarning("prcess exited" );
   if(proc== m_process ){
+    qWarning("proc == m_process" );
     if( m_process->normalExit() ){ // normal exit
+      qWarning("normalExit" );
       int ret = m_process->exitStatus();
       if( ret == 0 ){ // attached
 	qWarning("attached" );
@@ -99,6 +102,7 @@ void Device::slotExited( OProcess* proc)
 	  emit device("hci0", false );
 	}
       }else{
+        qWarning("crass" );
 	m_attached = false;
 	emit device("hci0", false );
 
@@ -128,15 +132,18 @@ void Device::slotExited( OProcess* proc)
 void Device::slotStdOut(OProcess* proc, char* chars, int len)
 {
   qWarning("std out" );
-  if( len <1 )
+  if( len <1 ){
+    qWarning( "len < 1 " );
     return; 
+  }
   if(proc == m_process ){
     QCString string( chars, len+1 ); // \0 == +1
     qWarning("output: %s", string.data() );
     m_output.append( string.data() );
   }
 }
-void Device::slotStdErr(OProcess*, char*, int )
+void Device::slotStdErr(OProcess* proc, char* chars, int len)
 {
   qWarning("std err" );
+  slotStdOut( proc, chars, len );
 }

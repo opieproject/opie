@@ -5,5 +5,5 @@ SOURCES		= device.cc manager.cc remotedevice.cc services.cc
 TARGET		= opietooth
 INCLUDEPATH += $(OPIEDIR)/include
 DESTDIR         = $(QTDIR)/lib$(PROJMAK)
-LIBS = -lopie
+LIBS += -lopie
 #VERSION = 0.0.0

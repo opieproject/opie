@@ -76,7 +76,7 @@ namespace OpieTooth {
     int BluezApplet::setBluezStatus(int c) {
 
         if (c == 1) {
-            btDevice = new Device("/dev/ttySB0", "scr" );
+            btDevice = new Device("/dev/ttySB0", "csr" );
             // system("hciattach /dev/ttySB0 csr");
             //system("hcid");
         } else {
