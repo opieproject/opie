@@ -11,8 +11,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>282</width>
-            <height>243</height>
+            <width>278</width>
+            <height>298</height>
         </rect>
     </property>
     <property stdset="1">
@@ -63,65 +63,142 @@
                     </property>
                     <property stdset="1">
                         <name>spacing</name>
-                        <number>4</number>
+                        <number>2</number>
                     </property>
                     <widget row="0"  column="0" >
-                        <class>QLabel</class>
+                        <class>QLayoutWidget</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>TextLabel1</cstring>
+                            <cstring>Layout1</cstring>
                         </property>
-                        <property stdset="1">
-                            <name>text</name>
-                            <string>Save To</string>
-                        </property>
-                    </widget>
-                    <widget row="0"  column="1" >
-                        <class>QComboBox</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>storeToLocation</cstring>
-                        </property>
-                    </widget>
-                    <widget row="2"  column="0"  rowspan="1"  colspan="2" >
-                        <class>QPushButton</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>backupButton</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>text</name>
-                            <string>&amp;Backup</string>
-                        </property>
-                    </widget>
-                    <widget row="1"  column="0"  rowspan="1"  colspan="2" >
-                        <class>QListView</class>
-                        <column>
-                            <property>
-                                <name>text</name>
-                                <string>Applications</string>
+                        <grid>
+                            <property stdset="1">
+                                <name>margin</name>
+                                <number>0</number>
                             </property>
-                            <property>
-                                <name>clickable</name>
-                                <bool>true</bool>
+                            <property stdset="1">
+                                <name>spacing</name>
+                                <number>6</number>
                             </property>
-                            <property>
-                                <name>resizeable</name>
-                                <bool>true</bool>
-                            </property>
-                        </column>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>backupList</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>allColumnsShowFocus</name>
-                            <bool>true</bool>
-                        </property>
-                        <property stdset="1">
-                            <name>rootIsDecorated</name>
-                            <bool>true</bool>
-                        </property>
+                            <widget row="1"  column="1" >
+                                <class>QComboBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>storeToLocation</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>sizePolicy</name>
+                                    <sizepolicy>
+                                        <hsizetype>3</hsizetype>
+                                        <vsizetype>1</vsizetype>
+                                    </sizepolicy>
+                                </property>
+                            </widget>
+                            <widget row="1"  column="0" >
+                                <class>QLabel</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>TextLabel1</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Destination</string>
+                                </property>
+                            </widget>
+                            <widget row="3"  column="0"  rowspan="1"  colspan="2" >
+                                <class>QPushButton</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>backupButton</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>&amp;Backup</string>
+                                </property>
+                            </widget>
+                            <widget row="0"  column="0"  rowspan="1"  colspan="2" >
+                                <class>QButtonGroup</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>frame_type</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>title</name>
+                                    <string>Type</string>
+                                </property>
+                                <property>
+                                    <name>layoutMargin</name>
+                                </property>
+                                <property>
+                                    <name>layoutSpacing</name>
+                                </property>
+                                <vbox>
+                                    <property stdset="1">
+                                        <name>margin</name>
+                                        <number>4</number>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>spacing</name>
+                                        <number>2</number>
+                                    </property>
+                                    <widget>
+                                        <class>QRadioButton</class>
+                                        <property stdset="1">
+                                            <name>name</name>
+                                            <cstring>cb_type_userdata</cstring>
+                                        </property>
+                                        <property stdset="1">
+                                            <name>text</name>
+                                            <string>User Data (Configuration + PIM)</string>
+                                        </property>
+                                        <property stdset="1">
+                                            <name>checked</name>
+                                            <bool>true</bool>
+                                        </property>
+                                    </widget>
+                                    <widget>
+                                        <class>QRadioButton</class>
+                                        <property stdset="1">
+                                            <name>name</name>
+                                            <cstring>cb_type_fullbackup</cstring>
+                                        </property>
+                                        <property stdset="1">
+                                            <name>text</name>
+                                            <string>Full Backup (Root File System)</string>
+                                        </property>
+                                    </widget>
+                                </vbox>
+                            </widget>
+                            <widget row="2"  column="0"  rowspan="1"  colspan="2" >
+                                <class>QListView</class>
+                                <column>
+                                    <property>
+                                        <name>text</name>
+                                        <string>Applications</string>
+                                    </property>
+                                    <property>
+                                        <name>clickable</name>
+                                        <bool>true</bool>
+                                    </property>
+                                    <property>
+                                        <name>resizeable</name>
+                                        <bool>true</bool>
+                                    </property>
+                                </column>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>backupList</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>allColumnsShowFocus</name>
+                                    <bool>true</bool>
+                                </property>
+                                <property stdset="1">
+                                    <name>rootIsDecorated</name>
+                                    <bool>true</bool>
+                                </property>
+                            </widget>
+                        </grid>
                     </widget>
                 </grid>
             </widget>

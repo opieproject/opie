@@ -6,5 +6,5 @@ DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe -lopiecore2 -lopieui2
 INTERFACES	= backuprestorebase.ui errordialog.ui
 TARGET		= backup
-
+VERSION     = 0.8.1
 include ( $(OPIEDIR)/include.pro )
