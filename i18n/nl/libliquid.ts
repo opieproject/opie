@@ -3,7 +3,7 @@
     <name>LiquidSettings</name>
     <message>
         <source>Liquid Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Vloeibaare stijl</translation>
     </message>
     <message>
         <source>No translucency</source>
@@ -31,11 +31,11 @@
     </message>
     <message>
         <source>Menu color</source>
-        <translation type="unfinished"></translation>
+        <translation>Menukleur</translation>
     </message>
     <message>
         <source>Text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekstkleur</translation>
     </message>
     <message>
         <source>Opacity</source>
@@ -58,11 +58,11 @@
     <name>Styles</name>
     <message>
         <source>Liquid</source>
-        <translation type="unfinished"></translation>
+        <translation>Vloeibaar</translation>
     </message>
     <message>
         <source>High Performance Liquid style by Mosfet</source>
-        <translation type="unfinished"></translation>
+        <translation>High Performance Vloeibaar stijl door Mosfet</translation>
     </message>
 </context>
 </TS>

@@ -3,67 +3,67 @@
     <name>QObject</name>
     <message>
         <source>KeyList::addKey() Cannot make default value for type %1, Key not added.</source>
-        <translation type="unfinished"></translation>
+        <translation>KeyList::addKey() Kan standaardwaarde niet instellen bij type %1, Key niet toegevoegd.</translation>
     </message>
     <message>
         <source>DataElem::setField(%1, %2) No valid type found</source>
-        <translation type="unfinished"></translation>
+        <translation>DataElem::setField(%1, %2) Geen juist type gevonden</translation>
     </message>
 </context>
 <context>
     <name>TVBrowseKeyEntry</name>
     <message>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Reset</translation>
     </message>
     <message>
         <source>key</source>
-        <translation type="unfinished"></translation>
+        <translation>sleutel</translation>
     </message>
 </context>
 <context>
     <name>TVKeyEdit_gen</name>
     <message>
         <source>TableViewer - Edit Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>TabelViewer - Wijzig sleutels</translation>
     </message>
     <message>
         <source>Key Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Sleutelnaam</translation>
     </message>
     <message>
         <source>Key Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Sleuteltype</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder</translation>
     </message>
     <message>
         <source>Clear All</source>
-        <translation type="unfinished"></translation>
+        <translation>Schoon alles</translation>
     </message>
 </context>
 <context>
     <name>TVListView</name>
     <message>
         <source>List View</source>
-        <translation type="unfinished"></translation>
+        <translation>Lijstaanzicht</translation>
     </message>
 </context>
 <context>
     <name>TableViewerWindow</name>
     <message>
         <source>Table Viewer</source>
-        <translation type="unfinished"></translation>
+        <translation>TabelViewer</translation>
     </message>
     <message>
         <source>could not load Document</source>
-        <translation type="unfinished"></translation>
+        <translation>kan document niet laden</translation>
     </message>
 </context>
 </TS>
