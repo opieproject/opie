@@ -23,10 +23,12 @@ using namespace std;
 #include <qpe/resource.h>
 
 #include <qaction.h>
+#include <qlineedit.h>
 #include <qmenubar.h>
 #include <qmessagebox.h>
 #include <qpopupmenu.h>
 #include <qtimer.h>
+#include <qwhatsthis.h>
 #include <qwidgetstack.h>
 
 #include "mainwin.h"
@@ -56,6 +58,15 @@ MainWindow :: MainWindow()
     mb->setMargin( 0 );
     bar = new QPEToolBar( this );
 
+    // Find toolbar
+    findBar = new QPEToolBar( this );
+    addToolBar( findBar, QMainWindow::Top, true );
+    findBar->setHorizontalStretchable( true );
+    findEdit = new QLineEdit( findBar );
+    QWhatsThis::add( findEdit, tr( "Type the text to search for here." ) );
+    findBar->setStretchableWidget( findEdit );
+    connect( findEdit, SIGNAL( textChanged( const QString & ) ), this, SLOT( findPackage( const QString & ) ) );
+    
     // Packages menu
     QPopupMenu *popup = new QPopupMenu( this );
     
@@ -91,23 +102,26 @@ MainWindow :: MainWindow()
     popup = new QPopupMenu( this );
     
     a = new QAction( tr( "Find" ), Resource::loadPixmap( "find" ), QString::null, 0, this, 0 );
-    a->setWhatsThis( tr( "Click here to search for a specific package." ) );
-    connect( a, SIGNAL( activated() ), this, SLOT( searchForPackage() ) );
+    a->setWhatsThis( tr( "Click here to search for text in package names." ) );
+    connect( a, SIGNAL( activated() ), this, SLOT( displayFindBar() ) );
     a->addTo( popup );
 
-    a = new QAction( tr( "Find next" ), Resource::loadPixmap( "next" ), QString::null, 0, this, 0 );
-    a->setWhatsThis( tr( "Click here to search for the next package." ) );
-    connect( a, SIGNAL( activated() ), this, SLOT( repeatSearchForPackage() ) );
-    a->addTo( popup );
+    actionFindNext = new QAction( tr( "Find next" ), Resource::loadIconSet( "next" ), QString::null, 0, this, 0 );
+    actionFindNext->setEnabled( FALSE );
+    actionFindNext->setWhatsThis( tr( "Click here to search for the package name containing the text you are searching for." ) );
+    connect( actionFindNext, SIGNAL( activated() ), this, SLOT( repeatFind() ) );
+    actionFindNext->addTo( popup );
+    actionFindNext->addTo( findBar );
 
     // Show 'quick jump' keypad?
     
     popup->insertSeparator();
 
-    a = new QAction( tr( "Filter by category" ), Resource::loadPixmap( "aqpkg/filter" ),  QString::null, 0, this, 0 );
-    a->setWhatsThis( tr( "Click here to list packages belonging to one category." ) );
-    connect( a, SIGNAL( activated() ), this, SLOT( filterCategory() ) );
-    a->addTo( popup );
+    actionFilter = new QAction( tr( "Filter by category" ), Resource::loadPixmap( "aqpkg/filter" ),  QString::null, 0, this, 0 );
+    actionFilter->setToggleAction( TRUE );
+    actionFilter->setWhatsThis( tr( "Click here to list packages belonging to one category." ) );
+    connect( actionFilter, SIGNAL( activated() ), this, SLOT( filterCategory() ) );
+    actionFilter->addTo( popup );
 
     a = new QAction( tr( "Set filter category" ),  QString::null, 0, this, 0 );
     a->setWhatsThis( tr( "Click here to change package category to used filter." ) );
@@ -120,20 +134,23 @@ MainWindow :: MainWindow()
     // View menu
     popup = new QPopupMenu( this );
 
-    a = new QAction( tr( "Show packages not installed" ), QString::null, 0, this, 0 );
-    a->setWhatsThis( tr( "Click here to show packages available which have not been installed." ) );
-    connect( a, SIGNAL( activated() ), this, SLOT( filterUninstalledPackages() ) );
-    a->addTo( popup );
+    actionUninstalled = new QAction( tr( "Show packages not installed" ), QString::null, 0, this, 0 );
+    actionUninstalled->setToggleAction( TRUE );
+    actionUninstalled->setWhatsThis( tr( "Click here to show packages available which have not been installed." ) );
+    connect( actionUninstalled, SIGNAL( activated() ), this, SLOT( filterUninstalledPackages() ) );
+    actionUninstalled->addTo( popup );
 
-    a = new QAction( tr( "Show installed packages" ), QString::null, 0, this, 0 );
-    a->setWhatsThis( tr( "Click here to show packages currently installed on this device." ) );
-    connect( a, SIGNAL( activated() ), this, SLOT( filterInstalledPackages() ) );
-    a->addTo( popup );
+    actionInstalled = new QAction( tr( "Show installed packages" ), QString::null, 0, this, 0 );
+    actionInstalled->setToggleAction( TRUE );
+    actionInstalled->setWhatsThis( tr( "Click here to show packages currently installed on this device." ) );
+    connect( actionInstalled, SIGNAL( activated() ), this, SLOT( filterInstalledPackages() ) );
+    actionInstalled->addTo( popup );
 
-    a = new QAction( tr( "Show updated packages" ), QString::null, 0, this, 0 );
-    a->setWhatsThis( tr( "Click here to show packages currently installed on this device which have a newer version available." ) );
-    connect( a, SIGNAL( activated() ), this, SLOT( filterUpgradedPackages() ) );
-    a->addTo( popup );
+    actionUpdated = new QAction( tr( "Show updated packages" ), QString::null, 0, this, 0 );
+    actionUpdated->setToggleAction( TRUE );
+    actionUpdated->setWhatsThis( tr( "Click here to show packages currently installed on this device which have a newer version available." ) );
+    connect( actionUpdated, SIGNAL( activated() ), this, SLOT( filterUpgradedPackages() ) );
+    actionUpdated->addTo( popup );
 
     popup->insertSeparator();
 
@@ -155,7 +172,15 @@ MainWindow :: MainWindow()
     a->addTo( popup );
 
     mb->insertItem( tr( "View" ), popup );
+    
+    // Finish find toolbar creation
+    a = new QAction( QString::null, Resource::loadPixmap( "close" ), QString::null, 0, this, 0 );
+    a->setWhatsThis( tr( "Click here to hide the find toolbar." ) );
+    connect( a, SIGNAL( activated() ), this, SLOT( hideFindBar() ) );
+    a->addTo( findBar );
+    findBar->hide();
 
+    
     // Create widget stack and add UI widgets
     stack = new QWidgetStack( this );
     stack->addWidget( progressWindow, 2 );
@@ -219,15 +244,27 @@ void MainWindow :: displayHelp()
     dlg->exec();
     delete dlg;
 }
-
-void MainWindow :: searchForPackage()
+    
+void MainWindow :: displayFindBar()
 {
-    networkPkgWindow->searchForPackage( false );
+    findBar->show();
+    findEdit->setFocus();
 }
 
-void MainWindow :: repeatSearchForPackage()
+void MainWindow :: repeatFind()
 {
-    networkPkgWindow->searchForPackage( true );
+    networkPkgWindow->searchForPackage( findEdit->text() );
+}
+
+void MainWindow :: findPackage( const QString &text )
+{
+    actionFindNext->setEnabled( !text.isEmpty() );
+    networkPkgWindow->searchForPackage( text );
+}
+
+void MainWindow :: hideFindBar()
+{
+    findBar->hide();
 }
 
 void MainWindow :: displayAbout()
@@ -235,91 +272,42 @@ void MainWindow :: displayAbout()
     QMessageBox::about( this, tr( "About AQPkg" ), tr( VERSION_TEXT ) );
 }
 
-
 void MainWindow :: filterUninstalledPackages()
 {
-    bool val;
-    if ( filter->isItemChecked( mnuShowUninstalledPkgsId ) )
-    {
-        val = false;
-        filter->setItemChecked( mnuShowUninstalledPkgsId, false );
-    }
-    else
-    {
-        val = true;
-        filter->setItemChecked( mnuShowUninstalledPkgsId, true );
-    }
-
-    filter->setItemChecked( mnuShowInstalledPkgsId, false );
-    networkPkgWindow->showOnlyInstalledPackages( false );
-    filter->setItemChecked( mnuShowUpgradedPkgsId, false );
-    networkPkgWindow->showUpgradedPackages( false );
-
-    networkPkgWindow->showOnlyUninstalledPackages( val );
-
+    networkPkgWindow->showOnlyUninstalledPackages( actionUninstalled->isOn() );
+    actionInstalled->setOn( FALSE );
+    actionUpdated->setOn( FALSE );
 }
 
 void MainWindow :: filterInstalledPackages()
 {
-    bool val;
-    if ( filter->isItemChecked( mnuShowInstalledPkgsId ) )
-    {
-        val = false;
-        filter->setItemChecked( mnuShowInstalledPkgsId, false );
-    }
-    else
-    {
-        val = true;
-        filter->setItemChecked( mnuShowInstalledPkgsId, true );
-    }
-
-    filter->setItemChecked( mnuShowUninstalledPkgsId, false );
-    networkPkgWindow->showOnlyUninstalledPackages( false );
-    filter->setItemChecked( mnuShowUpgradedPkgsId, false );
-    networkPkgWindow->showUpgradedPackages( false );
-
-    networkPkgWindow->showOnlyInstalledPackages( val );
+    actionUninstalled->setOn( FALSE );
+    networkPkgWindow->showOnlyInstalledPackages( actionInstalled->isOn() );
+    actionUpdated->setOn( FALSE );
 }
 
 void MainWindow :: filterUpgradedPackages()
 {
-    bool val;
-    if ( filter->isItemChecked( mnuShowUpgradedPkgsId ) )
-    {
-        val = false;
-        filter->setItemChecked( mnuShowUpgradedPkgsId, false );
-    }
-    else
-    {
-        val = true;
-        filter->setItemChecked( mnuShowUpgradedPkgsId, true );
-    }
-
-    filter->setItemChecked( mnuShowUninstalledPkgsId, false );
-    networkPkgWindow->showOnlyUninstalledPackages( false );
-    filter->setItemChecked( mnuShowInstalledPkgsId, false );
-    networkPkgWindow->showOnlyInstalledPackages( false );
-
-    networkPkgWindow->showUpgradedPackages( val );
+    actionUninstalled->setOn( FALSE );
+    actionInstalled->setOn( FALSE );
+    networkPkgWindow->showUpgradedPackages( actionUpdated->isOn() );
 }
 
 void MainWindow :: setFilterCategory()
 {
-    if ( networkPkgWindow->setFilterCategory( ) )
-        filter->setItemChecked( mnuFilterByCategory, true );
+    if ( networkPkgWindow->setFilterCategory() )
+        actionFilter->setOn( TRUE );
 }
 
 void MainWindow :: filterCategory()
 {
-    if ( filter->isItemChecked( mnuFilterByCategory ) )
+    if ( !actionFilter->isOn() )
     {
-        networkPkgWindow->filterByCategory( false );
-        filter->setItemChecked( mnuFilterByCategory, false );
+        networkPkgWindow->filterByCategory( FALSE );
     }
     else
     {
-        if ( networkPkgWindow->filterByCategory( true ) )
-            filter->setItemChecked( mnuFilterByCategory, true );
+        actionFilter->setOn( networkPkgWindow->filterByCategory( TRUE ) );
     }
 }
 

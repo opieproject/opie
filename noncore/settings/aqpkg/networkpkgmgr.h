@@ -41,7 +41,7 @@ public:
     void setDataManager( DataManager *dm );
     void selectLocalPackage( const QString &pkg );
     void updateData();
-    void searchForPackage( bool findNext );
+    void searchForPackage( const QString & );
     void showOnlyUninstalledPackages( bool val );
     void showOnlyInstalledPackages( bool val );
     void showUpgradedPackages( bool val );
@@ -55,7 +55,6 @@ private:
     QListView *packagesList;
 
     QString currentlySelectedServer;
-    QString lastSearchText;
     QString categoryFilter;
 
     bool categoryFilterEnabled;

@@ -20,10 +20,10 @@
 
 #include <qmainwindow.h>
 #include <qpixmap.h>
-//#include <qwidgetstack.h>
 
 class QWidgetStack;
 class QPEToolBar;
+class QLineEdit;
 class QAction;
 class ProgressWidget;
 class NetworkPackageManager;
@@ -40,14 +40,18 @@ public:
 private:
     DataManager *mgr;
 
-    QMenuBar *menu;
-    QPopupMenu *help;
-    QPopupMenu *settings;
-    QPopupMenu *edit;
-    QPopupMenu *filter;
     QWidgetStack *stack;
-    QAction *actionUpgrade;
-    QAction *actionDownload;
+    
+    QPEToolBar *findBar;
+    QLineEdit  *findEdit;
+    QAction    *actionFindNext;
+    QAction    *actionFilter;
+    QAction    *actionUpgrade;
+    QAction    *actionDownload;
+    QAction    *actionUninstalled;
+    QAction    *actionInstalled;
+    QAction    *actionUpdated;
+    
     QPixmap iconDownload;
     QPixmap iconRemove;
     
@@ -63,8 +67,10 @@ private:
 public slots:
     void setDocument( const QString &doc );
     void displayHelp();
-    void searchForPackage();
-    void repeatSearchForPackage();
+    void displayFindBar();
+    void repeatFind();
+    void findPackage( const QString & );
+    void hideFindBar();
     void displayAbout();
     void displaySettings();
     void filterUninstalledPackages();

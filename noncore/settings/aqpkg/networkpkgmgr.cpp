@@ -260,17 +260,17 @@ void NetworkPackageManager :: serverSelected( int, bool raiseProgress )
             continue;
 
 
-        text += it->getPackageName();
+        text.append( it->getPackageName() );
         if ( it->isInstalled() )
         {
-            text += " (installed)";
+            text.append( " (installed)" );
 
             // If a different version of package is available, postfix it with an *
             if ( it->getVersion() != it->getInstalledVersion() )
             {
 
                 if ( compareVersions( it->getInstalledVersion(), it->getVersion() ) == 1 )
-                    text += "*";
+                    text.append( "*" );
             }
         }
 
@@ -290,29 +290,29 @@ void NetworkPackageManager :: serverSelected( int, bool raiseProgress )
                     destName = it->getInstalledTo()->getDestinationName();
             }
             if ( destName != "" )
-                new QCheckListItem( item, QString( tr( "Installed To - " ) ) + destName );
+                new QCheckListItem( item, QString( tr( "Installed To - %1" ).arg( destName ) ) );
         }
         
         if ( !it->isPackageStoredLocally() )
         {
-            new QCheckListItem( item, QString( tr( "Description - " ) ) + it->getDescription() );
-            new QCheckListItem( item, QString( tr( "Size - " ) ) + it->getPackageSize() );
-            new QCheckListItem( item, QString( tr( "Section - " ) ) + it->getSection() );
+            new QCheckListItem( item, QString( tr( "Description - %1" ).arg( it->getDescription() ) ) );
+            new QCheckListItem( item, QString( tr( "Size - %1" ).arg( it->getPackageSize() ) ) );
+            new QCheckListItem( item, QString( tr( "Section - %1" ).arg( it->getSection() ) ) );
         }
         else
-            new QCheckListItem( item, QString( tr( "Filename - " ) ) + it->getFilename() );
+            new QCheckListItem( item, QString( tr( "Filename - %1" ).arg( it->getFilename() ) ) );
         
 		if ( serverName == LOCAL_SERVER )
 		{
-        	new QCheckListItem( item, QString( tr( "V. Installed - " ) ) + it->getVersion() );
+        	new QCheckListItem( item, QString( tr( "V. Installed - %1" ).arg( it->getVersion() ) ) );
 		}
 		else
 		{
-        	new QCheckListItem( item, QString( tr( "V. Available - " ) ) + it->getVersion() );
+        	new QCheckListItem( item, QString( tr( "V. Available - %1" ).arg( it->getVersion() ) ) );
         	if ( it->getLocalPackage() )
         	{
 				if ( it->isInstalled() )
-	            	new QCheckListItem( item, QString( tr( "V. Installed - " ) ) + it->getInstalledVersion() );
+	            	new QCheckListItem( item, QString( tr( "V. Installed - %1" ).arg( it->getInstalledVersion() ) ) );
 			}
 		}
 
@@ -372,6 +372,7 @@ void NetworkPackageManager :: upgradePackages()
 {
     // We're gonna do an upgrade of all packages
     // First warn user that this isn't recommended
+    // TODO - ODevice????
     QString text = tr( "WARNING: Upgrading while\nOpie/Qtopia is running\nis NOT recommended!\n\nAre you sure?\n" );
     QMessageBox warn( tr( "Warning" ), text, QMessageBox::Warning,
                         QMessageBox::Yes,
@@ -773,17 +774,11 @@ void NetworkPackageManager :: letterPushed( QString t )
 }
 
 
-void NetworkPackageManager :: searchForPackage( bool findNext )
+void NetworkPackageManager :: searchForPackage( const QString &text )
 {
-    bool ok = false;
-    if ( !findNext || lastSearchText.isEmpty() )
-        lastSearchText = InputDialog::getText( tr( "Search for package" ), tr( "Enter package to search for" ), lastSearchText, &ok, this ).lower();
-    else
-        ok = true;
-        
-    if ( ok && !lastSearchText.isEmpty() )
+    if ( !text.isEmpty() )
     {
-        cout << "searching for " << lastSearchText << endl;
+        cout << "searching for " << text << endl;
         // look through package list for text startng at current position
         vector<InstallData> workingPackages;
         QCheckListItem *start = (QCheckListItem *)packagesList->currentItem();
@@ -797,7 +792,7 @@ void NetworkPackageManager :: searchForPackage( bool findNext )
               item = (QCheckListItem *)item->nextSibling() )
         {
             cout << "checking " << item->text().lower() << endl;
-            if ( item->text().lower().find( lastSearchText ) != -1 )
+            if ( item->text().lower().find( text ) != -1 )
             {
                 cout << "matched " << item->text() << endl;
                 packagesList->ensureItemVisible( item );
@@ -811,18 +806,33 @@ void NetworkPackageManager :: searchForPackage( bool findNext )
 void NetworkPackageManager :: showOnlyUninstalledPackages( bool val )
 {
     showUninstalledPkgs = val;
+    if ( val )
+    {
+        showInstalledPkgs = FALSE;
+        showUpgradedPkgs = FALSE;
+    }
     serverSelected( -1 );
 }
 
 void NetworkPackageManager :: showOnlyInstalledPackages( bool val )
 {
     showInstalledPkgs = val;
+    if ( val )
+    {
+        showUninstalledPkgs = FALSE;
+        showUpgradedPkgs = FALSE;
+    }
     serverSelected( -1 );
 }
 
 void NetworkPackageManager :: showUpgradedPackages( bool val )
 {
     showUpgradedPkgs = val;
+    if ( val )
+    {
+        showUninstalledPkgs = FALSE;
+        showInstalledPkgs = FALSE;
+    }
     serverSelected( -1 );
 }
 
