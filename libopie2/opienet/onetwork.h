@@ -32,15 +32,22 @@
 #define ONETWORK_H
 
 #if !defined( OPIE_WE_VERSION )
-#error Need to define a wireless extension version to build against!
-#endif
+    #warning No wireless extension specified; autodetecting...
+    #include <linux/version.h>
+    #if LINUX_VERSION_CODE < KERNEL_VERSION(2,4,23)
+        #define OPIE_WE_VERSION 15
+    #else
+        #define OPIE_WE_VERSION 16
+    #endif // LINUX_VERSION_CODE < KERNEL_VERSION(2.4.23)
+#endif // !defined( OPIE_WE_VERSION )
 
 #if OPIE_WE_VERSION == 15
 #include "wireless.15.h"
+#warning Using WE V15
 #endif
-
 #if OPIE_WE_VERSION == 16
 #include "wireless.16.h"
+#warning Using WE V16
 #endif
 
 /* OPIE */
@@ -555,7 +562,7 @@ class OHostAPMonitoringInterface : public OMonitoringInterface
   public:
     virtual void setEnabled( bool );
     virtual QString name() const;
-    
+
   private:
     class Private;
     Private *d;
