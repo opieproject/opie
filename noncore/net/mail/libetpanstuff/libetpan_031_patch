@@ -1,0 +1,308 @@
+Index: imap/mailimap_helper.c
+===================================================================
+RCS file: /cvsroot/libetpan/libetpan/imap/mailimap_helper.c,v
+retrieving revision 1.8
+retrieving revision 1.9
+diff -u -r1.8 -r1.9
+--- imap/mailimap_helper.c	1 Dec 2003 05:06:28 -0000	1.8
++++ imap/mailimap_helper.c	11 Dec 2003 00:50:47 -0000	1.9
+@@ -30,7 +30,7 @@
+  */
+ 
+ /*
+- * $Id: mailimap_helper.c,v 1.8 2003/12/01 05:06:28 hoa Exp $
++ * $Id: mailimap_helper.c,v 1.9 2003/12/11 00:50:47 hoa Exp $
+  */
+ 
+ #include "mailimap_helper.h"
+@@ -87,8 +87,8 @@
+     goto free;
+   }
+   
+-  * result = item->att_data.att_static->att_data.att_rfc822;
+-  item->att_data.att_static->att_data.att_rfc822 = NULL;
++  * result = item->att_data.att_static->att_data.att_rfc822.att_content;
++  item->att_data.att_static->att_data.att_rfc822.att_content = NULL;
+   mailimap_fetch_list_free(fetch_list);
+ 
+   return MAILIMAP_NO_ERROR;
+@@ -149,8 +149,8 @@
+     goto err;
+   }
+ 
+-  * result = item->att_data.att_static->att_data.att_rfc822_header;
+-  item->att_data.att_static->att_data.att_rfc822_header = NULL;
++  * result = item->att_data.att_static->att_data.att_rfc822_header.att_content;
++  item->att_data.att_static->att_data.att_rfc822_header.att_content = NULL;
+   mailimap_fetch_list_free(fetch_list);
+ 
+   return MAILIMAP_NO_ERROR;
+Index: imap/mailimap_parser.c
+===================================================================
+RCS file: /cvsroot/libetpan/libetpan/imap/mailimap_parser.c,v
+retrieving revision 1.21
+retrieving revision 1.22
+diff -u -r1.21 -r1.22
+--- imap/mailimap_parser.c	17 Nov 2003 01:03:25 -0000	1.21
++++ imap/mailimap_parser.c	11 Dec 2003 00:50:47 -0000	1.22
+@@ -30,7 +30,7 @@
+  */
+ 
+ /*
+- * $Id: mailimap_parser.c,v 1.21 2003/11/17 01:03:25 hoa Exp $
++ * $Id: mailimap_parser.c,v 1.22 2003/12/11 00:50:47 hoa Exp $
+  */
+ 
+ #include <string.h>
+@@ -5868,7 +5868,7 @@
+     goto err;
+   }
+ 
+-  sflag = 0;
++  sflag = MAILIMAP_MBX_LIST_SFLAG_ERROR;
+   oflags_2 = NULL;
+ 
+   r = mailimap_struct_spaced_list_parse(fd, buffer, &cur_token,
+Index: imap/mailimap_print.c
+===================================================================
+RCS file: /cvsroot/libetpan/libetpan/imap/mailimap_print.c,v
+retrieving revision 1.11
+retrieving revision 1.12
+diff -u -r1.11 -r1.12
+--- imap/mailimap_print.c	8 Dec 2003 15:36:38 -0000	1.11
++++ imap/mailimap_print.c	11 Dec 2003 00:50:47 -0000	1.12
+@@ -30,7 +30,7 @@
+  */
+ 
+ /*
+- * $Id: mailimap_print.c,v 1.11 2003/12/08 15:36:38 hoa Exp $
++ * $Id: mailimap_print.c,v 1.12 2003/12/11 00:50:47 hoa Exp $
+  */
+ #ifdef DEBUG
+ #include "mailimap_print.h"
+@@ -736,7 +736,7 @@
+   case MAILIMAP_MSG_ATT_RFC822:
+     print_indent();
+     printf("rfc822 {\n");
+-    printf("%s\n", msg_att_static->att_data.att_rfc822);
++    printf("%s\n", msg_att_static->att_data.att_rfc822.att_content);
+     print_indent();
+     printf("}\n");
+     break;
+@@ -744,7 +744,7 @@
+   case MAILIMAP_MSG_ATT_RFC822_HEADER:
+     print_indent();
+     printf("rfc822-header {\n");
+-    printf("%s\n", msg_att_static->att_data.att_rfc822_header);
++    printf("%s\n", msg_att_static->att_data.att_rfc822_header.att_content);
+     print_indent();
+     printf("}\n");
+     break;
+@@ -752,7 +752,7 @@
+   case MAILIMAP_MSG_ATT_RFC822_TEXT:
+     print_indent();
+     printf("rfc822-text {\n");
+-    printf("%s\n", msg_att_static->att_data.att_rfc822_text);
++    printf("%s\n", msg_att_static->att_data.att_rfc822_text.att_content);
+     print_indent();
+     printf("}\n");
+     break;
+@@ -1039,9 +1039,9 @@
+   indent();
+ 
+   if (mbx_list_flags->mbf_type == MAILIMAP_MBX_LIST_FLAGS_SFLAG)
+-    mailimap_mbx_list_sflag_print(mbx_list_flags->mbf_data.mbf_sflag);
++    mailimap_mbx_list_sflag_print(mbx_list_flags->mbf_sflag);
+ 
+-  for(cur = clist_begin(mbx_list_flags->mbf_data.mbf_oflags) ; cur != NULL ;
++  for(cur = clist_begin(mbx_list_flags->mbf_oflags) ; cur != NULL ;
+       cur = clist_next(cur)) {
+     struct mailimap_mbx_list_oflag * oflag;
+ 
+Index: imap/mailimap_sender.c
+===================================================================
+RCS file: /cvsroot/libetpan/libetpan/imap/mailimap_sender.c,v
+retrieving revision 1.16
+retrieving revision 1.17
+diff -u -r1.16 -r1.17
+--- imap/mailimap_sender.c	8 Dec 2003 15:36:38 -0000	1.16
++++ imap/mailimap_sender.c	11 Dec 2003 00:50:47 -0000	1.17
+@@ -30,7 +30,7 @@
+  */
+ 
+ /*
+- * $Id: mailimap_sender.c,v 1.16 2003/12/08 15:36:38 hoa Exp $
++ * $Id: mailimap_sender.c,v 1.17 2003/12/11 00:50:47 hoa Exp $
+  */
+ 
+ #include "mailstream.h"
+@@ -396,6 +396,9 @@
+ 
+ static int is_atom(const char * str)
+ {
++  if (* str == '\0')
++    return 0;
++  
+   while (* str != '\0') {
+     unsigned char uch = (unsigned char) * str;
+     
+Index: imap/mailimap_types.c
+===================================================================
+RCS file: /cvsroot/libetpan/libetpan/imap/mailimap_types.c,v
+retrieving revision 1.16
+retrieving revision 1.17
+diff -u -r1.16 -r1.17
+--- imap/mailimap_types.c	1 Dec 2003 05:06:28 -0000	1.16
++++ imap/mailimap_types.c	11 Dec 2003 00:50:47 -0000	1.17
+@@ -30,7 +30,7 @@
+  */
+ 
+ /*
+- * $Id: mailimap_types.c,v 1.16 2003/12/01 05:06:28 hoa Exp $
++ * $Id: mailimap_types.c,v 1.17 2003/12/11 00:50:47 hoa Exp $
+  */
+ 
+ #include "mailimap_types.h"
+@@ -1417,14 +1417,8 @@
+     return NULL;
+ 
+   mbx_list_flags->mbf_type = mbf_type;
+-  switch (mbf_type) {
+-  case MAILIMAP_MBX_LIST_FLAGS_SFLAG:
+-    mbx_list_flags->mbf_data.mbf_oflags = mbf_oflags;
+-    break;
+-  case MAILIMAP_MBX_LIST_FLAGS_NO_SFLAG:
+-    mbx_list_flags->mbf_data.mbf_sflag = mbf_sflag;
+-    break;
+-  }
++  mbx_list_flags->mbf_oflags = mbf_oflags;
++  mbx_list_flags->mbf_sflag = mbf_sflag;
+   
+   return mbx_list_flags;
+ }
+@@ -1432,14 +1426,10 @@
+ void
+ mailimap_mbx_list_flags_free(struct mailimap_mbx_list_flags * mbx_list_flags)
+ {
+-  switch (mbx_list_flags->mbf_type) {
+-  case MAILIMAP_MBX_LIST_FLAGS_NO_SFLAG:
+-    clist_foreach(mbx_list_flags->mbf_data.mbf_oflags,
+-		  (clist_func) mailimap_mbx_list_oflag_free,
+-		  NULL);
+-    clist_free(mbx_list_flags->mbf_data.mbf_oflags);
+-    break;
+-  }
++  clist_foreach(mbx_list_flags->mbf_oflags,
++      (clist_func) mailimap_mbx_list_oflag_free,
++      NULL);
++  clist_free(mbx_list_flags->mbf_oflags);
+   
+   free(mbx_list_flags);
+ }
+@@ -1765,14 +1755,16 @@
+     item->att_data.att_internal_date = att_internal_date;
+     break;
+   case MAILIMAP_MSG_ATT_RFC822:
+-    item->att_data.att_rfc822 = att_rfc822;
++    item->att_data.att_rfc822.att_content = att_rfc822;
++    item->att_data.att_rfc822.att_length = att_length;
+     break;
+   case MAILIMAP_MSG_ATT_RFC822_HEADER:
+-    item->att_data.att_rfc822_header = att_rfc822_header;
++    item->att_data.att_rfc822_header.att_content = att_rfc822_header;
++    item->att_data.att_rfc822_header.att_length = att_length;
+     break;
+   case MAILIMAP_MSG_ATT_RFC822_TEXT:
+-    item->att_data.att_rfc822_text = att_rfc822_text;
+-    item->att_data.att_length = att_length;
++    item->att_data.att_rfc822_text.att_content = att_rfc822_text;
++    item->att_data.att_rfc822_text.att_length = att_length;
+     break;
+   case MAILIMAP_MSG_ATT_RFC822_SIZE:
+     item->att_data.att_rfc822_size = att_rfc822_size;
+@@ -1807,16 +1799,16 @@
+       mailimap_msg_att_internaldate_free(item->att_data.att_internal_date);
+     break;
+   case MAILIMAP_MSG_ATT_RFC822:
+-    if (item->att_data.att_rfc822 != NULL)
+-      mailimap_msg_att_rfc822_free(item->att_data.att_rfc822);
++    if (item->att_data.att_rfc822.att_content != NULL)
++      mailimap_msg_att_rfc822_free(item->att_data.att_rfc822.att_content);
+     break;
+   case MAILIMAP_MSG_ATT_RFC822_HEADER:
+-    if (item->att_data.att_rfc822_header != NULL)
+-      mailimap_msg_att_rfc822_header_free(item->att_data.att_rfc822_header);
++    if (item->att_data.att_rfc822_header.att_content != NULL)
++      mailimap_msg_att_rfc822_header_free(item->att_data.att_rfc822_header.att_content);
+     break;
+   case MAILIMAP_MSG_ATT_RFC822_TEXT:
+-    if (item->att_data.att_rfc822_text != NULL)
+-      mailimap_msg_att_rfc822_text_free(item->att_data.att_rfc822_text);
++    if (item->att_data.att_rfc822_text.att_content != NULL)
++      mailimap_msg_att_rfc822_text_free(item->att_data.att_rfc822_text.att_content);
+     break;
+   case MAILIMAP_MSG_ATT_BODYSTRUCTURE:
+     if (item->att_data.att_bodystructure != NULL)
+Index: imap/mailimap_types.h
+===================================================================
+RCS file: /cvsroot/libetpan/libetpan/imap/mailimap_types.h,v
+retrieving revision 1.17
+retrieving revision 1.18
+diff -u -r1.17 -r1.18
+--- imap/mailimap_types.h	1 Dec 2003 05:06:28 -0000	1.17
++++ imap/mailimap_types.h	11 Dec 2003 00:50:47 -0000	1.18
+@@ -30,7 +30,7 @@
+  */
+ 
+ /*
+- * $Id: mailimap_types.h,v 1.17 2003/12/01 05:06:28 hoa Exp $
++ * $Id: mailimap_types.h,v 1.18 2003/12/11 00:50:47 hoa Exp $
+  */
+ 
+ 
+@@ -1642,6 +1642,7 @@
+ /* this is a single flag type */
+ 
+ enum {
++  MAILIMAP_MBX_LIST_SFLAG_ERROR,
+   MAILIMAP_MBX_LIST_SFLAG_MARKED,
+   MAILIMAP_MBX_LIST_SFLAG_NOSELECT,
+   MAILIMAP_MBX_LIST_SFLAG_UNMARKED
+@@ -1660,11 +1661,9 @@
+ 
+ struct mailimap_mbx_list_flags {
+   int mbf_type;
+-  union {
+-    clist * mbf_oflags; /* list of
+-                           (struct mailimap_mbx_list_oflag *), != NULL */
+-    int mbf_sflag;
+-  } mbf_data;
++  clist * mbf_oflags; /* list of
++                         (struct mailimap_mbx_list_oflag *), != NULL */
++  int mbf_sflag;
+ };
+ 
+ struct mailimap_mbx_list_flags *
+@@ -1984,10 +1983,18 @@
+   union {
+     struct mailimap_envelope * att_env;            /* can be NULL */
+     struct mailimap_date_time * att_internal_date; /* can be NULL */
+-    char * att_rfc822;        /* can be NULL */
+-    char * att_rfc822_header; /* can be NULL */
+-    char * att_rfc822_text;   /* can be NULL */
+-    size_t att_length;
++    struct {
++      char * att_content; /* can be NULL */
++      size_t att_length;
++    } att_rfc822;        
++    struct {
++      char * att_content; /* can be NULL */
++      size_t att_length;
++    } att_rfc822_header;
++    struct {
++      char * att_content; /* can be NULL */
++      size_t att_length;
++    } att_rfc822_text;
+     uint32_t att_rfc822_size;
+     struct mailimap_body * att_bodystructure; /* can be NULL */
+     struct mailimap_body * att_body;          /* can be NULL */
