@@ -287,7 +287,7 @@ bool CardMonitor::getStatusSd( int showPopUp ) {
             QString fs = QFile::decodeName( me->mnt_fsname );
             //odebug << fs << oendl;
             if ( fs.left( 14 ) == "/dev/mmc/part1" || fs.left( 7 ) == "/dev/sd"
-                    || fs.left( 9 ) == "/dev/mmcd" ) {
+                    || fs.left( 9 ) == "/dev/mmcd" || fs.left(11) == "/dev/mmcblk" ) {
                 cardInSd = TRUE;
                 cardSdName = fs;
                 show();
