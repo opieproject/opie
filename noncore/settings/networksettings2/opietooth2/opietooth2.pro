@@ -27,9 +27,9 @@ SOURCES		= OTDevice.cpp \
                   OTPeer.cpp \
                   OTGateway.cpp \
                   Opietooth.cpp
-INCLUDEPATH	+= $(OPIEDIR)/include
+INCLUDEPATH	+= $(OPIEDIR)/include ../networksettings2
 DEPENDPATH	+= $(OPIEDIR)/include
-LIBS            += -lqpe -lopiecore2 -lbluetooth
+LIBS            += -lqpe -lopiecore2 -lbluetooth -lnetworksettings2
 INTERFACES	= OTMainGUI.ui OTSniffGUI.ui OTScanGUI.ui OTManageGUI.ui OTPairingGUI.ui
 TARGET		= opietooth2
 VERSION		= 1.0.0

@@ -1,4 +1,4 @@
-Package: opie-networksettings2plugin-GPRS
+Package: opie-networksettings2plugin-gprs
 Files: plugins/networksettings2/libGPRS.so*
 Priority: optional
 Section: opie/settings

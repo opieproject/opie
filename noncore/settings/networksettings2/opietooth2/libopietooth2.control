@@ -5,5 +5,5 @@ Section: opie/system
 Maintainer: wim delvaux <wim.delvaux@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION$EXTRAVERSION
-Depends: task-opie-minimal, libbluetooth1, opie-bluepin | opie-multiauth-bluepingplugin, bluez-utils-nodbus 
+Depends: task-opie-minimal, opie-networksettings2, libbluetooth1, opie-bluepin | opie-multiauth-bluepingplugin, bluez-utils-nodbus 
 Description: Opie bluetooth support library version 2

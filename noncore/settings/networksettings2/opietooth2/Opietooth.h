@@ -3,7 +3,18 @@
 
 #include <OTIcons.h>
 
-namespace Opie { namespace Ui { class OLedBox; }; };
+class MyProcess;
+class System;
+
+namespace Opie { 
+
+  namespace Ui { 
+
+    class OLedBox;
+
+  };
+
+};
 
 #include <OTSniffGUI.h>
 namespace Opietooth2 {
@@ -25,8 +36,12 @@ public :
 
 private slots :
 
-      void SLOT_Trace( void );
+      void SLOT_Trace( bool );
       void SLOT_ClearLog( void );
+      void SLOT_Load( void );
+      void SLOT_Save( void );
+      void SLOT_ProcessExited( MyProcess * );
+      void SLOT_Show( const QString & );
 
 signals :
 
@@ -35,6 +50,8 @@ protected :
 private :
 
       OTGateway *       OT;
+      MyProcess *       HciDump;
+      System *          Sys;
 };
 };
 
@@ -217,7 +234,7 @@ private :
       // load scanned devices
       OTIcons *         Icons;
       OTGateway *       OT;
-      OTSniffing *      SnifWindow;
+      QDialog *         SnifWindow;
 };
 };
 #endif

@@ -1,23 +1,27 @@
 #include <opie2/odebug.h>
 #include <opie2/oledbox.h>
+#include <opie2/ofiledialog.h>
+
 using namespace Opie::Core;
 using namespace Opie::Ui;
 
 #include <qpe/resource.h>
-#include <qcheckbox.h>
-#include <qgroupbox.h>
-#include <qlabel.h>
-#include <qprogressbar.h>
-#include <qheader.h>
-#include <qmessagebox.h>
 #include <qapplication.h>
-#include <qlistbox.h>
-#include <qdialog.h>
-#include <qlayout.h>
+#include <qcheckbox.h>
 #include <qcombobox.h>
+#include <qdialog.h>
+#include <qdir.h>
+#include <qfile.h>
+#include <qgroupbox.h>
+#include <qheader.h>
 #include <qlabel.h>
+#include <qlayout.h>
+#include <qlistbox.h>
 #include <qlistview.h>
+#include <qmessagebox.h>
+#include <qprogressbar.h>
 #include <qpushbutton.h>
+#include <qtextstream.h>
 
 #include <Opietooth.h>
 #include <OTDriver.h>
@@ -26,6 +30,8 @@ using namespace Opie::Ui;
 #include <OTSDPAttribute.h>
 #include <OTSDPService.h>
 #include <OTInquiry.h>
+
+#include <system.h>
 
 using namespace Opietooth2;
 
@@ -113,16 +119,121 @@ private :
 OTSniffing::OTSniffing( QWidget * parent ) : OTSniffGUI( parent ) {
 
       OT = OTGateway::getOTGateway();
-
+      HciDump = 0;
+      Sys = new System();
 }
 
 OTSniffing::~OTSniffing() {
+      printf( "CLOSE \n" );
+      if ( HciDump ) {
+        HciDump->process().kill();
+        delete HciDump;
+      }
+      delete Sys;
 }
 
-void OTSniffing::SLOT_Trace( void ) {
+void OTSniffing::SLOT_Trace( bool ) {
+      HciDump = new MyProcess();
+      QStringList SL;
+
+      SL << "hcidump";
+      switch( DataFormat_CB->currentItem() ) {
+        case 0 : // Hex
+          SL << "-x";
+          break;
+        case 1 : // Ascii
+          SL << "-a";
+          break;
+        case 2 : // both
+          SL << "-X";
+          break;
+      }
+
+      SL << "-i";
+      SL << OT->scanWith()->devname();
+
+      connect( HciDump, 
+               SIGNAL( stdoutLine( const QString & ) ),
+               this, 
+               SLOT( SLOT_Show( const QString & ) ) );
+
+      connect( HciDump, 
+               SIGNAL(processExited(MyProcess*) ),
+               this, 
+               SLOT( SLOT_ProcessExited(MyProcess*) ) );
+
+      if( ! Sys->runAsRoot( SL, HciDump ) ) {
+        QMessageBox::warning(0,
+            tr("Run hcidump"),
+            tr("Cannot start %1").arg(SL.join(" "))
+        );
+        delete HciDump;
+        HciDump = 0;
+      }
+
+}
+
+void OTSniffing::SLOT_Show( const QString & S ) {
+      printf( "%s\n", S.latin1() );
+      Output_LB->insertItem( S );
+      Output_LB->setCurrentItem( Output_LB->count()-1 );
+      Output_LB->ensureCurrentVisible();
+}
+
+void OTSniffing::SLOT_ProcessExited( MyProcess * ) {
+      printf( "Exited\n" );
+      delete HciDump;
+      HciDump = 0;
+}
+
+void OTSniffing::SLOT_Save( void ) {
+      QString S = OFileDialog::getSaveFileName(
+              OFileSelector::Extended,
+              QDir::home().path(),
+              QString::null,
+              MimeTypes(),
+              this );
+
+      if( ! S.isEmpty() ) {
+        QFile F( S );
+        if( ! F.open( IO_WriteOnly ) ) {
+          QMessageBox::warning(0,
+              tr("Save log"),
+              tr("Cannot open %1").arg(S) 
+          );
+          return;
+        }
+        QTextStream TS( &F );
+        TS << S << endl;
+      }
+}
+
+void OTSniffing::SLOT_Load( void ) {
+      QString S = OFileDialog::getOpenFileName(
+              OFileSelector::Extended,
+              QDir::home().path(),
+              QString::null,
+              MimeTypes(),
+              this );
+
+      if( ! S.isEmpty() ) {
+        QFile F( S );
+        if( ! F.open( IO_ReadOnly ) ) {
+          QMessageBox::warning(0,
+              tr("Save log"),
+              tr("Cannot open %1").arg(S)
+          );
+          return;
+        }
+        QTextStream TS ( &F );
+        SLOT_ClearLog();
+        S = TS.read(); 
+        Output_LB->insertStringList( QStringList::split( "\n", S ) );
+      }
 }
 
 void OTSniffing::SLOT_ClearLog( void ) {
+      Output_LB->clear();
 }
 
 //
@@ -1029,7 +1140,10 @@ void OTMain::SLOT_Pairing( void ) {
 void OTMain::SLOT_Sniffing( void ) {
 
       if( SnifWindow == 0 ) {
-        SnifWindow = new OTSniffing( this );
+        SnifWindow = new QDialog( this, 0, FALSE );
+        QVBoxLayout * V = new QVBoxLayout( SnifWindow );
+        OTSniffing * SN = new OTSniffing( SnifWindow );
+        V->addWidget( SN );
       }
 
       SnifWindow->showMaximized();

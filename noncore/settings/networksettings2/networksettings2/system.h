@@ -96,13 +96,12 @@ public :
       System( void );
       ~System( void );
 
-      QDict<InterfaceInfo> & interfaces( void ) 
-        { return ProbedInterfaces; }
+      QDict<InterfaceInfo> & interfaces( void );
       InterfaceInfo * interface( const QString& N ) 
-        { return ProbedInterfaces[N]; }
+        { return interfaces()[N]; }
 
       // exec command as root
-      int runAsRoot( QStringList & S );
+      int runAsRoot( QStringList & S, MyProcess * Prc = 0 );
 
       // exec command as user
       int execAsUser( QStringList & Cmd );

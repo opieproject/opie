@@ -44,7 +44,6 @@ static char Dig2Hex[] = {
 #define LN(x)           Dig2Hex[((x)&0x0f)]
 
 System::System( void ) : QObject(), ProbedInterfaces() {
-    probeInterfaces();
 }
 
 System::~System( void ) {
@@ -52,7 +51,14 @@ System::~System( void ) {
       delete ProcDevNet;
 }
 
-int System::runAsRoot( QStringList & S ) {
+QDict<InterfaceInfo> & System::interfaces( void ) {
+    if( ProbedInterfaces.count() == 0 ) {
+      probeInterfaces();
+    }
+    return ProbedInterfaces;
+}
+
+int System::runAsRoot( QStringList & S, MyProcess * Prc ) {
     char * usr = getenv("USER");
 
     if( S.count() == 0 ) {
@@ -69,32 +75,39 @@ int System::runAsRoot( QStringList & S ) {
             << S.join( " ") 
             << oendl;
     } else {
-      MyProcess * P = new MyProcess();
-      emit processEvent( tr("Command : ") + S.join( " " ) );
+      MyProcess * P;
+
+      if( Prc ) {
+        P = Prc;
+      } else {
+        P = new MyProcess();
+        emit processEvent( tr("Command : ") + S.join( " " ) );
+
+        connect( P, 
+                 SIGNAL( stdoutLine( const QString & ) ),
+                 this, 
+                 SIGNAL( stdoutLine( const QString & ) ) );
+
+        connect( P, 
+                 SIGNAL( stderrLine( const QString & ) ),
+                 this, 
+                 SIGNAL( stderrLine( const QString & ) ) );
+
+        connect( P, 
+                 SIGNAL(processExited(MyProcess*) ),
+                 this, SLOT
+                 (SLOT_ProcessExited(MyProcess*) ) );
+      }
 
       P->process() << S;
-
-      connect( P, 
-               SIGNAL( stdoutLine( const QString & ) ),
-               this, 
-               SIGNAL( stdoutLine( const QString & ) ) );
-
-      connect( P, 
-               SIGNAL( stderrLine( const QString & ) ),
-               this, 
-               SIGNAL( stderrLine( const QString & ) ) );
-
-      connect( P, 
-               SIGNAL(processExited(MyProcess*) ),
-               this, SLOT
-               (SLOT_ProcessExited(MyProcess*) ) );
 
       Log(("Executing %s\n", S.join( " " ).latin1() ));
 
       if( ! P->process().start( OProcess::DontCare, 
                       OProcess::AllOutput ) ) {
         owarn << "Error starting " << S << oendl;
-        delete P;
+        if( ! Prc )
+          delete P;
         // error starting app
         return 1;
       }
