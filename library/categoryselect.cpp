@@ -1,5 +1,6 @@
 /**********************************************************************
 ** Copyright (C) 2001 Trolltech AS.  All rights reserved.
+** Copyright (C) 2003 zecke introduce a needed symbol
 **
 ** This file is part of Qtopia Environment.
 **
@@ -321,6 +322,20 @@ void CategoryCombo::slotValueChanged( int )
     emit sigCatChanged( currentCategory() );
 }
 
+/*!
+  Constructs a category selector with parent \a parent, name \a name.
+
+  This constructor is provided to make Opie compatible with Sharp ROM.
+*/
+CategorySelect::CategorySelect( QWidget* parent,  const char* name )
+    : QHBox( parent, name ),
+      cmbCat( 0 ),
+      cmdCat( 0 ),
+      d( 0 )
+{
+    d = new CategorySelectPrivate();
+    init(0); // default argument
+}
 /*!
   Constructs a category selector with parent \a parent, name \a name and
   fixed width \a width.
