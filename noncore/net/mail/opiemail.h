@@ -23,6 +23,14 @@ protected slots:
     virtual void slotSearchMails();
     virtual void slotEditSettings();
     virtual void slotEditAccounts();
+    virtual void displayMail();
+    virtual void slotDeleteMail();
+    virtual void mailHold(int, QListViewItem *,const QPoint&,int);
+    virtual void slotShowFolders( bool show );
+    virtual void refreshMailView(QList<RecMail>*);
+    virtual void mailLeftClicked( int, QListViewItem *,const QPoint&,int  );
+    virtual void slotMoveCopyMail();
+
 private:
     Settings *settings;
 

@@ -23,6 +23,7 @@ public:
 
 public slots:
     virtual void slotAdjustColumns();
+    virtual void appMessage(const QCString &msg, const QByteArray &data);
     
 protected slots:
     virtual void slotShowFolders( bool show );

@@ -4,17 +4,12 @@
 #include <qtimer.h>
 #include <qlayout.h>
 #include <qmessagebox.h>
-#include <qtextstream.h>
 
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
 
-
 #include "defines.h"
 #include "mainwindow.h"
-#include "viewmail.h"
-#include <libmailwrapper/mailtypes.h>
-#include "mailistviewitem.h"
 
 
 MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
@@ -127,12 +122,27 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     connect( mailView, SIGNAL( mouseButtonPressed(int, QListViewItem *,const QPoint&,int  ) ),this,
              SLOT( mailHold( int, QListViewItem *,const QPoint&,int  ) ) );
     connect(folderView, SIGNAL(refreshMailview(QList<RecMail>*)),this,SLOT(refreshMailView(QList<RecMail>*)));
+    connect( composeMail, SIGNAL( activated() ), SLOT( slotComposeMail() ) );
+    connect( sendQueued, SIGNAL( activated() ), SLOT( slotSendQueued() ) );
+//    connect( searchMails, SIGNAL( activated() ), SLOT( slotSearchMails() ) );
+    connect( editAccounts, SIGNAL( activated() ), SLOT( slotEditAccounts() ) );
+    // Added by Stefan Eilers to allow starting by addressbook..
+    // copied from old mail2
+#if !defined(QT_NO_COP)
+    connect( qApp, SIGNAL( appMessage( const QCString&, const QByteArray& ) ),
+             this, SLOT( appMessage( const QCString&, const QByteArray& ) ) );
+#endif
 
     QTimer::singleShot( 1000, this, SLOT( slotAdjustColumns() ) );
 }
 
 MainWindow::~MainWindow()
 {
+}
+
+void MainWindow::appMessage(const QCString &, const QByteArray &)
+{
+    qDebug("appMessage not reached");
 }
 
 void MainWindow::slotAdjustLayout() {
@@ -164,141 +174,32 @@ void MainWindow::slotEditSettings()
 {
 }
 
-void MainWindow::slotShowFolders( bool show )
+void MainWindow::slotShowFolders( bool )
 {
-   qDebug( "Show Folders" );
-    if ( show && folderView->isHidden() ) {
-        qDebug( "-> showing" );
-        folderView->show();
-    } else if ( !show && !folderView->isHidden() ) {
-        qDebug( "-> hiding" );
-        folderView->hide();
-    }
+   qDebug( "slotShowFolders not reached" );
 }
 
-void MainWindow::refreshMailView(QList<RecMail>*list)
+void MainWindow::refreshMailView(QList<RecMail>*)
 {
-    MailListViewItem*item = 0;
-    mailView->clear();
-    for (unsigned int i = 0; i < list->count();++i) {
-        item = new MailListViewItem(mailView,item);
-        item->storeData(*(list->at(i)));
-        item->showEntry();
-    }
+   qDebug( "refreshMailView not reached" );
 }
-void MainWindow::mailLeftClicked(int button, QListViewItem *item,const QPoint&,int )
+
+void MainWindow::mailLeftClicked(int, QListViewItem *,const QPoint&,int )
 {
-    /* just LEFT button - or tap with stylus on pda */
-    if (button!=1) return;
-    if (!item) return;
-    displayMail();
+    qDebug( "mailLeftClicked not reached" );
 }
 
 void MainWindow::displayMail()
 {
-    QListViewItem*item = mailView->currentItem();
-    if (!item) return;
-    RecMail mail = ((MailListViewItem*)item)->data();
-    RecBody body = folderView->fetchBody(mail);
-    ViewMail readMail( this );
-    readMail.setBody( body );
-    readMail.setMail( mail );
-    readMail.showMaximized();
-    readMail.exec();
-
-    if (  readMail.deleted ) {
-         folderView->refreshCurrent();
-    } else {
-        ( (MailListViewItem*)item )->setPixmap( 0, Resource::loadPixmap( "") );
-    }
+    qDebug("displayMail not reached");
 }
 
 void MainWindow::slotDeleteMail()
 {
-    if (!mailView->currentItem()) return;
-    RecMail mail = ((MailListViewItem*)mailView->currentItem() )->data();
-    if ( QMessageBox::warning(this, tr("Delete Mail"), QString( tr("<p>Do you really want to delete this mail? <br><br>" ) + mail.getFrom() + " - " + mail.getSubject() ) , QMessageBox::Yes, QMessageBox::No ) == QMessageBox::Yes ) {
-       mail.Wrapper()->deleteMail( mail );
-       folderView->refreshCurrent();
-    }
+    qDebug("deleteMail not reached");
 }
 
-void MainWindow::mailHold(int button, QListViewItem *item,const QPoint&,int  )
+void MainWindow::mailHold(int, QListViewItem *,const QPoint&,int  )
 {
-    /* just the RIGHT button - or hold on pda */
-    if (button!=2) {return;}
-    qDebug("Event right/hold");
-    if (!item) return;
-    QPopupMenu *m = new QPopupMenu(0);
-    if (m) {
-        m->insertItem(tr("Read this mail"),this,SLOT(displayMail()));
-        m->insertItem(tr("Delete this mail"),this,SLOT(slotDeleteMail()));
-        m->setFocus();
-        m->exec( QPoint( QCursor::pos().x(), QCursor::pos().y()) );
-        delete m;
-    }
+    qDebug("mailHold not reached");
 }
-
-MailListViewItem::MailListViewItem(QListView * parent, MailListViewItem * item )
-        :QListViewItem(parent,item),mail_data()
-{
-}
-
-void MailListViewItem::showEntry()
-{
-    if ( mail_data.getFlags().testBit( FLAG_ANSWERED ) == true) {
-        setPixmap( 0, Resource::loadPixmap( "mail/kmmsgreplied") );
-    } else if ( mail_data.getFlags().testBit( FLAG_SEEN ) == true )  {
-        /* I think it looks nicer if there are not such a log of icons but only on mails
-           replied or new - Alwin*/
-        //setPixmap( 0, Resource::loadPixmap( "mail/kmmsgunseen") );
-    } else  {
-        setPixmap( 0, Resource::loadPixmap( "mail/kmmsgnew") );
-    }
-    double s = mail_data.Msgsize();
-    int w;
-    w=0;
-
-    while (s>1024) {
-        s/=1024;
-        ++w;
-        if (w>=2) break;
-    }
-
-    QString q="";
-    QString fsize="";
-    switch(w) {
-    case 1:
-        q="k";
-        break;
-    case 2:
-        q="M";
-        break;
-    default:
-        break;
-    }
-
-    {
-        QTextOStream o(&fsize);
-        if (w>0) o.precision(2); else o.precision(0);
-        o.setf(QTextStream::fixed);
-        o << s << " " << q << "Byte";
-    }
-
-    setText(1,mail_data.getSubject());
-    setText(2,mail_data.getFrom());
-    setText(3,fsize);
-    setText(4,mail_data.getDate());
-}
-
-void MailListViewItem::storeData(const RecMail&data)
-{
-    mail_data = data;
-}
-
-const RecMail& MailListViewItem::data()const
-{
-    return mail_data;
-}
-
-

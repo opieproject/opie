@@ -4,7 +4,6 @@
 #include <qlistview.h>
 #include <libmailwrapper/mailtypes.h>
 
-
 class MailListViewItem:public QListViewItem
 {
 public:

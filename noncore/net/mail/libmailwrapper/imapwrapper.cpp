@@ -1056,3 +1056,33 @@ void IMAPwrapper::mvcpAllMails(Folder*fromFolder,const QString&targetFolder,Abst
         deleteAllMail(fromFolder);
     }
 }
+
+void IMAPwrapper::mvcpMail(const RecMail&mail,const QString&targetFolder,AbstractMail*targetWrapper,bool moveit)
+{
+    if (targetWrapper != this) {
+        qDebug("Using generic");
+        AbstractMail::mvcpMail(mail,targetFolder,targetWrapper,moveit);
+        return;
+    }
+    mailimap_set *set = 0;
+    login();
+    if (!m_imap) {
+        return;
+    }
+    int err = selectMbox(mail.getMbox());
+    if ( err != MAILIMAP_NO_ERROR ) {
+        return;
+    }
+    set = mailimap_set_new_single(mail.getNumber());
+    err = mailimap_copy(m_imap,set,targetFolder.latin1());
+    mailimap_set_free( set );
+    if ( err != MAILIMAP_NO_ERROR ) {
+        QString error_msg = tr("error copy mail: %1").arg(m_imap->imap_response);
+        Global::statusMessage(error_msg);
+        qDebug(error_msg);
+        return;
+    }
+    if (moveit) {
+        deleteMail(mail);
+    }
+}

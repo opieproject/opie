@@ -872,8 +872,16 @@ QPopupMenu * MBOXfolderItem::getContextMenu()
     if (m) {
         m->insertItem(QObject::tr("Delete all mails",contextName),0);
         m->insertItem(QObject::tr("Delete folder",contextName),1);
+        m->insertItem(QObject::tr("Move/Copie all mails",contextName),2);
     }
     return m;
+}
+
+void MBOXfolderItem::downloadMails()
+{
+    AccountView*bl = mbox->accountView();
+    if (!bl) return;
+    bl->downloadMails(folder,mbox->getWrapper());
 }
 
 void MBOXfolderItem::contextMenuSelected(int which)
@@ -884,6 +892,9 @@ void MBOXfolderItem::contextMenuSelected(int which)
         break;
     case 1:
         deleteFolder();
+        break;
+    case 2:
+        downloadMails();
         break;
     default:
         break;

@@ -5,8 +5,13 @@
 #include "composemail.h"
 #include <libmailwrapper/smtpwrapper.h>
 #include <qpe/qcopenvelope_qws.h>
+#include <qpe/resource.h>
 #include <qaction.h>
 #include <qapplication.h>
+#include <libmailwrapper/mailtypes.h>
+#include "mailistviewitem.h"
+#include "viewmail.h"
+#include "selectstore.h"
 
 OpieMail::OpieMail( QWidget *parent, const char *name, WFlags flags )
     : MainWindow( parent, name, flags )
@@ -14,20 +19,6 @@ OpieMail::OpieMail( QWidget *parent, const char *name, WFlags flags )
     settings = new Settings();
 
     folderView->populate( settings->getAccounts() );
-
-    connect( composeMail, SIGNAL( activated() ), SLOT( slotComposeMail() ) );
-    connect( sendQueued, SIGNAL( activated() ), SLOT( slotSendQueued() ) );
-//    connect( searchMails, SIGNAL( activated() ), SLOT( slotSearchMails() ) );
-    connect( editAccounts, SIGNAL( activated() ), SLOT( slotEditAccounts() ) );
-    // Added by Stefan Eilers to allow starting by addressbook..
-    // copied from old mail2
-#if !defined(QT_NO_COP)
-    connect( qApp, SIGNAL( appMessage( const QCString&, const QByteArray& ) ),
-             this, SLOT( appMessage( const QCString&, const QByteArray& ) ) );
-#endif
-
-
-
 }
 
 OpieMail::~OpieMail()
@@ -118,3 +109,103 @@ void OpieMail::slotEditAccounts()
     folderView->populate( settings->getAccounts() );
 }
 
+void OpieMail::displayMail()
+{
+    QListViewItem*item = mailView->currentItem();
+    if (!item) return;
+    RecMail mail = ((MailListViewItem*)item)->data();
+    RecBody body = folderView->fetchBody(mail);
+    ViewMail readMail( this );
+    readMail.setBody( body );
+    readMail.setMail( mail );
+    readMail.showMaximized();
+    readMail.exec();
+
+    if (  readMail.deleted ) {
+         folderView->refreshCurrent();
+    } else {
+        ( (MailListViewItem*)item )->setPixmap( 0, Resource::loadPixmap( "") );
+    }
+}
+
+void OpieMail::slotDeleteMail()
+{
+    if (!mailView->currentItem()) return;
+    RecMail mail = ((MailListViewItem*)mailView->currentItem() )->data();
+    if ( QMessageBox::warning(this, tr("Delete Mail"), QString( tr("<p>Do you really want to delete this mail? <br><br>" ) + mail.getFrom() + " - " + mail.getSubject() ) , QMessageBox::Yes, QMessageBox::No ) == QMessageBox::Yes ) {
+       mail.Wrapper()->deleteMail( mail );
+       folderView->refreshCurrent();
+    }
+}
+
+void OpieMail::mailHold(int button, QListViewItem *item,const QPoint&,int  )
+{
+    /* just the RIGHT button - or hold on pda */
+    if (button!=2) {return;}
+    qDebug("Event right/hold");
+    if (!item) return;
+    QPopupMenu *m = new QPopupMenu(0);
+    if (m) {
+        m->insertItem(tr("Read this mail"),this,SLOT(displayMail()));
+        m->insertItem(tr("Delete this mail"),this,SLOT(slotDeleteMail()));
+        m->insertItem(tr("Copy/Move this mail"),this,SLOT(slotMoveCopyMail()));
+        m->setFocus();
+        m->exec( QPoint( QCursor::pos().x(), QCursor::pos().y()) );
+        delete m;
+    }
+}
+
+void OpieMail::slotShowFolders( bool show )
+{
+   qDebug( "Show Folders" );
+    if ( show && folderView->isHidden() ) {
+        qDebug( "-> showing" );
+        folderView->show();
+    } else if ( !show && !folderView->isHidden() ) {
+        qDebug( "-> hiding" );
+        folderView->hide();
+    }
+}
+
+void OpieMail::refreshMailView(QList<RecMail>*list)
+{
+    MailListViewItem*item = 0;
+    mailView->clear();
+    for (unsigned int i = 0; i < list->count();++i) {
+        item = new MailListViewItem(mailView,item);
+        item->storeData(*(list->at(i)));
+        item->showEntry();
+    }
+}
+
+void OpieMail::mailLeftClicked(int button, QListViewItem *item,const QPoint&,int )
+{
+    /* just LEFT button - or tap with stylus on pda */
+    if (button!=1) return;
+    if (!item) return;
+    displayMail();
+}
+
+void OpieMail::slotMoveCopyMail()
+{
+    if (!mailView->currentItem()) return;
+    RecMail mail = ((MailListViewItem*)mailView->currentItem() )->data();
+    AbstractMail*targetMail = 0;
+    QString targetFolder = "";
+    Selectstore sels;
+    folderView->setupFolderselect(&sels);
+    if (!sels.exec()) return;
+    targetMail = sels.currentMail();
+    targetFolder = sels.currentFolder();
+    if ( (mail.Wrapper()==targetMail && mail.getMbox()==targetFolder) ||
+        targetFolder.isEmpty()) {
+        return;
+    }
+    if (sels.newFolder() && !targetMail->createMbox(targetFolder)) {
+        QMessageBox::critical(0,tr("Error creating new Folder"),
+            tr("<center>Error while creating<br>new folder - breaking.</center>"));
+        return;
+    }
+    mail.Wrapper()->mvcpMail(mail,targetFolder,targetMail,sels.moveMails());
+    folderView->refreshCurrent();
+}

@@ -23,6 +23,7 @@ SOURCES         = main.cpp \
                editaccounts.cpp \
                viewmail.cpp \
                viewmailbase.cpp \
+               mailistviewitem.cpp \
                settingsdialog.cpp \
                statuswidget.cpp \
                newmaildir.cpp \

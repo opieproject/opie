@@ -153,6 +153,7 @@ public:
     virtual Folder*getFolder();
 
 protected:
+    void downloadMails();
     virtual void deleteFolder();
     Folder *folder;
     MBOXviewItem *mbox;

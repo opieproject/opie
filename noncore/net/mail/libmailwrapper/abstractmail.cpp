@@ -123,3 +123,16 @@ void AbstractMail::mvcpAllMails(Folder*fromFolder,const QString&targetFolder,Abs
         deleteAllMail(fromFolder);
     }
 }
+
+void AbstractMail::mvcpMail(const RecMail&mail,const QString&targetFolder,AbstractMail*targetWrapper,bool moveit)
+{
+    encodedString*st = 0;
+    st = fetchRawBody(mail);
+    if (st) {
+        targetWrapper->storeMessage(st->Content(),st->Length(),targetFolder);
+        delete st;
+    }
+    if (moveit) {
+        deleteMail(mail);
+    }
+}
