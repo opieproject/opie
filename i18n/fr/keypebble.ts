@@ -139,6 +139,14 @@ sous ce compte, essayez plus tard.</translation>
         <source>Send Contrl-Alt-Delete</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Next Click is Double Click</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Next Click is Right Click</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>KVNCBookmarkDlgBase</name>

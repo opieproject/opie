@@ -13,6 +13,10 @@
         <source>Type: </source>
         <translation>Type: </translation>
     </message>
+    <message>
+        <source>This page shows how much this device&apos;s processor is being used.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MemoryInfo</name>
@@ -36,12 +40,34 @@
         <source>Total Memory: %1 kB</source>
         <translation>Skupen spomin: %1 kB</translation>
     </message>
+    <message>
+        <source>This page shows how memory (i.e. RAM) is being allocated on your handheld device.
+Memory is categorized as follows:
+
+1. Used - memory used to by Opie and any running applications.
+2. Buffers - temporary storage used to improve performance
+3. Cached - information that has recently been used, but has not been freed yet.
+4. Free - memory not currently used by Opie or any running applications.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ModulesDetail</name>
     <message>
         <source>Send</source>
         <translation>Pošlji</translation>
+    </message>
+    <message>
+        <source>Select a command here and then click the Send button to the right to send the command.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This area shows detailed information about this module.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to send the selected command to this module.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -61,6 +87,12 @@
     <message>
         <source>Used By</source>
         <translation>Uporablja ga</translation>
+    </message>
+    <message>
+        <source>This is a list of all the kernel modules currently loaded on this handheld device.
+
+Click and hold on a module to see additional information about the module, or to unload it.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -84,6 +116,18 @@
         <source>Send</source>
         <translation>Pošlji</translation>
     </message>
+    <message>
+        <source>Select a signal here and then click the Send button to the right to send to this process.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This area shows detailed information about this process.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to send the selected signal to this process.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ProcessInfo</name>
@@ -103,20 +147,94 @@
         <source>Time</source>
         <translation>Čas</translation>
     </message>
+    <message>
+        <source>This is a list of all the processes on this handheld device.
+
+Click and hold on a process to see additional information about the process, or to send a signal to it.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>StorageInfo</name>
     <message>
         <source>Hard Disk</source>
-        <translation>Trdi disk</translation>
+        <translation type="obsolete">Trdi disk</translation>
     </message>
     <message>
         <source>SCSI Hard Disk</source>
-        <translation>SCSI trdi disk</translation>
+        <translation type="obsolete">SCSI trdi disk</translation>
     </message>
     <message>
         <source>Int. Storage</source>
-        <translation>Notranji pomnilnik</translation>
+        <translation type="obsolete">Notranji pomnilnik</translation>
+    </message>
+    <message>
+        <source>CF Card: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hard Disk </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SD Card </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hard Disk /dev/hd </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SCSI Hard Disk /dev/sd </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Int. Storage </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Int. Storage /dev/mtdblock/ </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Int. Storage /dev/mtdblock </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used on this Compact Flash memory card.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ha</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This graph represents how much storage is currently used on this hard drive.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SD</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used on this Secure Digital memory card.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>In</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used of the built-in memory (i.e. Flash memory) on this handheld device.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -178,6 +296,10 @@
     </message>
     <message>
         <source>&lt;p&gt;Vendor: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This page shows the current versions of Opie, the Linux kernel and distribution running on this handheld device.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

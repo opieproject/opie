@@ -138,6 +138,14 @@ Por favor, inténtelo más tarde.</translation>
         <source>Send Contrl-Alt-Delete</source>
         <translation>Enviar Ctrl+Alt+Borrar</translation>
     </message>
+    <message>
+        <source>Next Click is Double Click</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Next Click is Right Click</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>KVNCBookmarkDlgBase</name>

@@ -94,12 +94,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>command failed!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;OK</source>
-        <translation>&amp;Ok</translation>
+        <translation type="obsolete">&amp;Ok</translation>
     </message>
     <message>
         <source>Advancedfm Beam out</source>
@@ -241,6 +237,10 @@ exists. Ok to overwrite?</source>
     <name>Output</name>
     <message>
         <source>Save output to file (name only)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Output</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

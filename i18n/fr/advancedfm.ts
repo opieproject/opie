@@ -101,11 +101,11 @@
     </message>
     <message>
         <source>command failed!</source>
-        <translation>la commande n&apos;a pas fonctionnée !</translation>
+        <translation type="obsolete">la commande n&apos;a pas fonctionnée !</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation>&amp;OK</translation>
+        <translation type="obsolete">&amp;OK</translation>
     </message>
     <message>
         <source>Advancedfm Beam out</source>
@@ -249,6 +249,10 @@ exists. Ok to overwrite?</source>
     <message>
         <source>Save output to file (name only)</source>
         <translation>Sauvegarder la sortie dans un fichier</translation>
+    </message>
+    <message>
+        <source>Output</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

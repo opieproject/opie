@@ -16,57 +16,57 @@
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>정리하지 않음</translation>
+        <translation type="obsolete">정리하지 않음</translation>
     </message>
 </context>
 <context>
     <name>AddressSettings</name>
     <message>
         <source>Name Title</source>
-        <translation>직위</translation>
+        <translation type="obsolete">직위</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation>이름</translation>
+        <translation type="obsolete">이름</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation>성</translation>
+        <translation type="obsolete">성</translation>
     </message>
     <message>
         <source>File As</source>
-        <translation>정렬할 이름</translation>
+        <translation type="obsolete">정렬할 이름</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation>기본 이메일 주소</translation>
+        <translation type="obsolete">기본 이메일 주소</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation>기타</translation>
+        <translation type="obsolete">기타</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation>성별</translation>
+        <translation type="obsolete">성별</translation>
     </message>
 </context>
 <context>
     <name>AddressSettingsBase</name>
     <message>
         <source>Arrange Edit Fields</source>
-        <translation type="unfinished">필드의 순서 정하기</translation>
+        <translation type="obsolete">필드의 순서 정하기</translation>
     </message>
     <message>
         <source>Select the field order:</source>
-        <translation type="unfinished">필드의 순서를 고르세요</translation>
+        <translation type="obsolete">필드의 순서를 고르세요</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished">위로</translation>
+        <translation type="obsolete">위로</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished">아래로</translation>
+        <translation type="obsolete">아래로</translation>
     </message>
 </context>
 <context>
@@ -205,27 +205,23 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Font</source>
-        <translation>글꼴</translation>
+        <translation type="obsolete">글꼴</translation>
     </message>
     <message>
         <source>Small</source>
-        <translation>작은</translation>
+        <translation type="obsolete">작은</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation>보통</translation>
+        <translation type="obsolete">보통</translation>
     </message>
     <message>
         <source>Large</source>
-        <translation>큰</translation>
+        <translation type="obsolete">큰</translation>
     </message>
     <message>
         <source>Import vCard</source>
         <translation>vCard 읽어 오기</translation>
-    </message>
-    <message>
-        <source>Find Next</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Close Find</source>
@@ -256,31 +252,43 @@ Quit anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>End of list</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>End of list. Wrap around now.. !</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Phone Book</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Company Book</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Email Book</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Cards</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Card</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Right file type ?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The selected File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>does not end with &quot;.vcf&quot; </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want to open it?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;No</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -288,10 +296,6 @@ Quit anyway?</source>
     <name>ConfigDlg_Base</name>
     <message>
         <source>MyDialog1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -308,10 +312,6 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Case Sensitive</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Signal Wrap Around</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -334,11 +334,51 @@ is provided free !</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;OK</source>
+        <source>Misc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Cancel</source>
+        <source>Search Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Font</source>
+        <translation type="unfinished">글꼴</translation>
+    </message>
+    <message>
+        <source>Small</source>
+        <translation type="unfinished">작은</translation>
+    </message>
+    <message>
+        <source>Normal</source>
+        <translation type="unfinished">보통</translation>
+    </message>
+    <message>
+        <source>Large</source>
+        <translation type="unfinished">큰</translation>
+    </message>
+    <message>
+        <source>Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select Contact Order:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Up</source>
+        <translation type="unfinished">위로</translation>
+    </message>
+    <message>
+        <source>Down</source>
+        <translation type="unfinished">아래로</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -346,11 +386,11 @@ is provided free !</source>
     <name>ContactEditor</name>
     <message>
         <source>Default Email</source>
-        <translation>기본 이메일 주소</translation>
+        <translation type="obsolete">기본 이메일 주소</translation>
     </message>
     <message>
         <source>Emails</source>
-        <translation>이메일 주소들</translation>
+        <translation type="obsolete">이메일 주소들</translation>
     </message>
     <message>
         <source>Name Title</source>
@@ -386,7 +426,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Company</source>
-        <translation>회사</translation>
+        <translation type="obsolete">회사</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -1302,39 +1342,39 @@ is provided free !</source>
     </message>
     <message>
         <source>Business Fax</source>
-        <translation>회사 팩스</translation>
+        <translation type="obsolete">회사 팩스</translation>
     </message>
     <message>
         <source>Home Fax</source>
-        <translation>집 팩스</translation>
+        <translation type="obsolete">집 팩스</translation>
     </message>
     <message>
         <source>Business Phone</source>
-        <translation>회사 전화</translation>
+        <translation type="obsolete">회사 전화</translation>
     </message>
     <message>
         <source>Home Phone</source>
-        <translation>집 전화</translation>
+        <translation type="obsolete">집 전화</translation>
     </message>
     <message>
         <source>Business Mobile</source>
-        <translation>회사 핸드폰</translation>
+        <translation type="obsolete">회사 핸드폰</translation>
     </message>
     <message>
         <source>Home Mobile</source>
-        <translation>집 핸드폰</translation>
+        <translation type="obsolete">집 핸드폰</translation>
     </message>
     <message>
         <source>Business WebPage</source>
-        <translation>회사 웹사이트</translation>
+        <translation type="obsolete">회사 웹사이트</translation>
     </message>
     <message>
         <source>Home Web Page</source>
-        <translation>집 웹사이트</translation>
+        <translation type="obsolete">집 웹사이트</translation>
     </message>
     <message>
         <source>Business Pager</source>
-        <translation>회사 삐삐</translation>
+        <translation type="obsolete">회사 삐삐</translation>
     </message>
     <message>
         <source>Business Street</source>
@@ -1378,27 +1418,27 @@ is provided free !</source>
     </message>
     <message>
         <source>Department</source>
-        <translation>부</translation>
+        <translation type="obsolete">부</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation>회사</translation>
+        <translation type="obsolete">회사</translation>
     </message>
     <message>
         <source>Profession</source>
-        <translation>직업</translation>
+        <translation type="obsolete">직업</translation>
     </message>
     <message>
         <source>Assistant</source>
-        <translation>비서</translation>
+        <translation type="obsolete">비서</translation>
     </message>
     <message>
         <source>Manager</source>
-        <translation>매니저</translation>
+        <translation type="obsolete">매니저</translation>
     </message>
     <message>
         <source>Spouse</source>
-        <translation>배우자</translation>
+        <translation type="obsolete">배우자</translation>
     </message>
     <message>
         <source>Birthday</source>
@@ -1410,11 +1450,11 @@ is provided free !</source>
     </message>
     <message>
         <source>Nickname</source>
-        <translation>별명</translation>
+        <translation type="obsolete">별명</translation>
     </message>
     <message>
         <source>Children</source>
-        <translation>자식들</translation>
+        <translation type="obsolete">자식들</translation>
     </message>
     <message>
         <source>Work Phone</source>
@@ -1451,6 +1491,181 @@ is provided free !</source>
     <message>
         <source>Unknown</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">지우기</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Business Phone</source>
+        <translation type="unfinished">회사 전화</translation>
+    </message>
+    <message>
+        <source>Business Fax</source>
+        <translation type="unfinished">회사 팩스</translation>
+    </message>
+    <message>
+        <source>Business Mobile</source>
+        <translation type="unfinished">회사 핸드폰</translation>
+    </message>
+    <message>
+        <source>Default Email</source>
+        <translation type="unfinished">기본 이메일 주소</translation>
+    </message>
+    <message>
+        <source>Emails</source>
+        <translation type="unfinished">이메일 주소들</translation>
+    </message>
+    <message>
+        <source>Home Phone</source>
+        <translation type="unfinished">집 전화</translation>
+    </message>
+    <message>
+        <source>Home Fax</source>
+        <translation type="unfinished">집 팩스</translation>
+    </message>
+    <message>
+        <source>Home Mobile</source>
+        <translation type="unfinished">집 핸드폰</translation>
+    </message>
+    <message>
+        <source>Office</source>
+        <translation type="unfinished">회사</translation>
+    </message>
+    <message>
+        <source>Profession</source>
+        <translation type="unfinished">직업</translation>
+    </message>
+    <message>
+        <source>Assistant</source>
+        <translation type="unfinished">비서</translation>
+    </message>
+    <message>
+        <source>Manager</source>
+        <translation type="unfinished">매니저</translation>
+    </message>
+    <message>
+        <source>Spouse</source>
+        <translation type="unfinished">배우자</translation>
+    </message>
+    <message>
+        <source>Gender</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Birthday</source>
+        <translation type="unfinished">생일</translation>
+    </message>
+    <message>
+        <source>Anniversary</source>
+        <translation type="unfinished">결혼 기념일</translation>
+    </message>
+    <message>
+        <source>Nickname</source>
+        <translation type="unfinished">별명</translation>
+    </message>
+    <message>
+        <source>Children</source>
+        <translation type="unfinished">자식들</translation>
+    </message>
+    <message>
+        <source>Name Title</source>
+        <translation type="unfinished">직위</translation>
+    </message>
+    <message>
+        <source>First Name</source>
+        <translation type="unfinished">이름</translation>
+    </message>
+    <message>
+        <source>Middle Name</source>
+        <translation type="unfinished">중간 이름</translation>
+    </message>
+    <message>
+        <source>Last Name</source>
+        <translation type="unfinished">성</translation>
+    </message>
+    <message>
+        <source>Suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File As</source>
+        <translation type="unfinished">정렬할 이름</translation>
+    </message>
+    <message>
+        <source>Job Title</source>
+        <translation type="unfinished">직업명</translation>
+    </message>
+    <message>
+        <source>Department</source>
+        <translation type="unfinished">부</translation>
+    </message>
+    <message>
+        <source>Company</source>
+        <translation type="unfinished">회사</translation>
+    </message>
+    <message>
+        <source>Business Street</source>
+        <translation type="unfinished">회사 주소</translation>
+    </message>
+    <message>
+        <source>Business City</source>
+        <translation type="unfinished">회사 도시</translation>
+    </message>
+    <message>
+        <source>Business State</source>
+        <translation type="unfinished">회사 주</translation>
+    </message>
+    <message>
+        <source>Business Zip</source>
+        <translation type="unfinished">회사 우편번호</translation>
+    </message>
+    <message>
+        <source>Business Country</source>
+        <translation type="unfinished">회사 국가</translation>
+    </message>
+    <message>
+        <source>Business Pager</source>
+        <translation type="unfinished">회사 삐삐</translation>
+    </message>
+    <message>
+        <source>Business WebPage</source>
+        <translation type="unfinished">회사 웹사이트</translation>
+    </message>
+    <message>
+        <source>Home Street</source>
+        <translation type="unfinished">집 주소</translation>
+    </message>
+    <message>
+        <source>Home City</source>
+        <translation type="unfinished">집 도시</translation>
+    </message>
+    <message>
+        <source>Home State</source>
+        <translation type="unfinished">집 주</translation>
+    </message>
+    <message>
+        <source>Home Zip</source>
+        <translation type="unfinished">집 우편번호</translation>
+    </message>
+    <message>
+        <source>Home Country</source>
+        <translation type="unfinished">집 국가</translation>
+    </message>
+    <message>
+        <source>Home Web Page</source>
+        <translation type="unfinished">집 웹사이트</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished">기타</translation>
+    </message>
+    <message>
+        <source>Groups</source>
+        <translation type="unfinished">분류들</translation>
     </message>
 </context>
 </TS>

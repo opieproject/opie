@@ -55,10 +55,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Predicted time:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Get time from network</source>
         <translation type="unfinished"></translation>
     </message>
@@ -80,10 +76,6 @@
     </message>
     <message>
         <source>Main</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Manual</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -267,6 +259,10 @@
     </message>
     <message>
         <source>M/D hh:mm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>System Time</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

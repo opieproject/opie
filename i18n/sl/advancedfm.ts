@@ -102,11 +102,11 @@
     </message>
     <message>
         <source>command failed!</source>
-        <translation>ukaz spodletel!</translation>
+        <translation type="obsolete">ukaz spodletel!</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation>&amp;Vredu</translation>
+        <translation type="obsolete">&amp;Vredu</translation>
     </message>
     <message>
         <source>Advancedfm Beam out</source>
@@ -255,6 +255,10 @@ exists. Ok to overwrite?</source>
     <message>
         <source>Save output to file (name only)</source>
         <translation>Shrani izhod v datoteko (samo ime)</translation>
+    </message>
+    <message>
+        <source>Output</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -16,57 +16,57 @@
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Não Preenchido</translation>
+        <translation type="obsolete">Não Preenchido</translation>
     </message>
 </context>
 <context>
     <name>AddressSettings</name>
     <message>
         <source>Notes</source>
-        <translation>Notas</translation>
+        <translation type="obsolete">Notas</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation>Sexo</translation>
+        <translation type="obsolete">Sexo</translation>
     </message>
     <message>
         <source>Name Title</source>
-        <translation>Título</translation>
+        <translation type="obsolete">Título</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation>Primeiro Nome</translation>
+        <translation type="obsolete">Primeiro Nome</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation>Sobrenome</translation>
+        <translation type="obsolete">Sobrenome</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation>E-mail Padrão</translation>
+        <translation type="obsolete">E-mail Padrão</translation>
     </message>
     <message>
         <source>File As</source>
-        <translation>Arquivar Como</translation>
+        <translation type="obsolete">Arquivar Como</translation>
     </message>
 </context>
 <context>
     <name>AddressSettingsBase</name>
     <message>
         <source>Up</source>
-        <translation type="unfinished">P/ Cima</translation>
+        <translation type="obsolete">P/ Cima</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished">P/ Baixo</translation>
+        <translation type="obsolete">P/ Baixo</translation>
     </message>
     <message>
         <source>Arrange Edit Fields</source>
-        <translation type="unfinished">Organizar Campos de Edição</translation>
+        <translation type="obsolete">Organizar Campos de Edição</translation>
     </message>
     <message>
         <source>Select the field order:</source>
-        <translation type="unfinished">Selecione a ordem dos campos:</translation>
+        <translation type="obsolete">Selecione a ordem dos campos:</translation>
     </message>
 </context>
 <context>
@@ -207,27 +207,7 @@ Sair assim mesmo?</translation>
         <translation>Contatos - Meus Detalhes Pessoais</translation>
     </message>
     <message>
-        <source>Font</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Small</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Normal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Large</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Import vCard</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Find Next</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -259,31 +239,43 @@ Sair assim mesmo?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>End of list</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>End of list. Wrap around now.. !</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Phone Book</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Company Book</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Email Book</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Cards</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Card</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Right file type ?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The selected File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>does not end with &quot;.vcf&quot; </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want to open it?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;No</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -291,10 +283,6 @@ Sair assim mesmo?</translation>
     <name>ConfigDlg_Base</name>
     <message>
         <source>MyDialog1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -311,10 +299,6 @@ Sair assim mesmo?</translation>
     </message>
     <message>
         <source>Case Sensitive</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Signal Wrap Around</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -337,11 +321,51 @@ is provided free !</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;OK</source>
+        <source>Misc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Cancel</source>
+        <source>Search Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Small</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Normal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Large</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select Contact Order:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Up</source>
+        <translation type="unfinished">P/ Cima</translation>
+    </message>
+    <message>
+        <source>Down</source>
+        <translation type="unfinished">P/ Baixo</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -349,11 +373,7 @@ is provided free !</source>
     <name>ContactEditor</name>
     <message>
         <source>Default Email</source>
-        <translation type="unfinished">E-mail Padrão</translation>
-    </message>
-    <message>
-        <source>Emails</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">E-mail Padrão</translation>
     </message>
     <message>
         <source>Name Title</source>
@@ -385,10 +405,6 @@ is provided free !</source>
     </message>
     <message>
         <source>Job Title</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Company</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1300,19 +1316,38 @@ is provided free !</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Business Fax</source>
+        <source>Birthday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Home Fax</source>
+        <source>Anniversary</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Kuwait</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kyrgystan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Apagar</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
     <message>
         <source>Business Phone</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Home Phone</source>
+        <source>Business Fax</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1320,23 +1355,23 @@ is provided free !</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Default Email</source>
+        <translation type="unfinished">E-mail Padrão</translation>
+    </message>
+    <message>
+        <source>Emails</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home Phone</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home Fax</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Home Mobile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Business WebPage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Home Web Page</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Business Pager</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Department</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1360,6 +1395,10 @@ is provided free !</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Gender</source>
+        <translation type="unfinished">Sexo</translation>
+    </message>
+    <message>
         <source>Birthday</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1376,15 +1415,99 @@ is provided free !</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Kuwait</source>
+        <source>Name Title</source>
+        <translation type="unfinished">Título</translation>
+    </message>
+    <message>
+        <source>First Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Kyrgystan</source>
+        <source>Middle Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unknown</source>
+        <source>Last Name</source>
+        <translation type="unfinished">Sobrenome</translation>
+    </message>
+    <message>
+        <source>Suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File As</source>
+        <translation type="unfinished">Arquivar Como</translation>
+    </message>
+    <message>
+        <source>Job Title</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Department</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Company</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Business Street</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Business City</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Business State</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Business Zip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Business Country</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Business Pager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Business WebPage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home Street</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home City</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home State</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home Zip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home Country</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home Web Page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished">Notas</translation>
+    </message>
+    <message>
+        <source>Groups</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

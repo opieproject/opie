@@ -15,57 +15,57 @@
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Brez</translation>
+        <translation type="obsolete">Brez</translation>
     </message>
 </context>
 <context>
     <name>AddressSettings</name>
     <message>
         <source>Name Title</source>
-        <translation>Naziv</translation>
+        <translation type="obsolete">Naziv</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation>Ime</translation>
+        <translation type="obsolete">Ime</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation>Priimek</translation>
+        <translation type="obsolete">Priimek</translation>
     </message>
     <message>
         <source>File As</source>
-        <translation>Datoteka kot</translation>
+        <translation type="obsolete">Datoteka kot</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation>Privzeta epošta</translation>
+        <translation type="obsolete">Privzeta epošta</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation>Opombe</translation>
+        <translation type="obsolete">Opombe</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation>Spol</translation>
+        <translation type="obsolete">Spol</translation>
     </message>
 </context>
 <context>
     <name>AddressSettingsBase</name>
     <message>
         <source>Arrange Edit Fields</source>
-        <translation>Uredi urejevalna polja</translation>
+        <translation type="obsolete">Uredi urejevalna polja</translation>
     </message>
     <message>
         <source>Select the field order:</source>
-        <translation>Izberi zaporedje polj:</translation>
+        <translation type="obsolete">Izberi zaporedje polj:</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation>Gor</translation>
+        <translation type="obsolete">Gor</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Dol</translation>
+        <translation type="obsolete">Dol</translation>
     </message>
 </context>
 <context>
@@ -208,27 +208,23 @@ Izhod?</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation>Pisava</translation>
+        <translation type="obsolete">Pisava</translation>
     </message>
     <message>
         <source>Small</source>
-        <translation>Mala</translation>
+        <translation type="obsolete">Mala</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation>Normalna</translation>
+        <translation type="obsolete">Normalna</translation>
     </message>
     <message>
         <source>Large</source>
-        <translation>Velika</translation>
+        <translation type="obsolete">Velika</translation>
     </message>
     <message>
         <source>Import vCard</source>
         <translation>Uvozi vCard</translation>
-    </message>
-    <message>
-        <source>Find Next</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Close Find</source>
@@ -259,31 +255,43 @@ Izhod?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>End of list</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>End of list. Wrap around now.. !</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Phone Book</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Company Book</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Email Book</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Cards</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Card</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Right file type ?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The selected File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>does not end with &quot;.vcf&quot; </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want to open it?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;No</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -291,10 +299,6 @@ Izhod?</translation>
     <name>ConfigDlg_Base</name>
     <message>
         <source>MyDialog1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -311,10 +315,6 @@ Izhod?</translation>
     </message>
     <message>
         <source>Case Sensitive</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Signal Wrap Around</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -337,11 +337,51 @@ is provided free !</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;OK</source>
+        <source>Misc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Cancel</source>
+        <source>Search Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Font</source>
+        <translation type="unfinished">Pisava</translation>
+    </message>
+    <message>
+        <source>Small</source>
+        <translation type="unfinished">Mala</translation>
+    </message>
+    <message>
+        <source>Normal</source>
+        <translation type="unfinished">Normalna</translation>
+    </message>
+    <message>
+        <source>Large</source>
+        <translation type="unfinished">Velika</translation>
+    </message>
+    <message>
+        <source>Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select Contact Order:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Up</source>
+        <translation type="unfinished">Gor</translation>
+    </message>
+    <message>
+        <source>Down</source>
+        <translation type="unfinished">Dol</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -349,11 +389,11 @@ is provided free !</source>
     <name>ContactEditor</name>
     <message>
         <source>Default Email</source>
-        <translation>Privzeta epošta</translation>
+        <translation type="obsolete">Privzeta epošta</translation>
     </message>
     <message>
         <source>Emails</source>
-        <translation>Epošta</translation>
+        <translation type="obsolete">Epošta</translation>
     </message>
     <message>
         <source>Name Title</source>
@@ -389,7 +429,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Company</source>
-        <translation>Podjetje</translation>
+        <translation type="obsolete">Podjetje</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -1305,39 +1345,39 @@ is provided free !</source>
     </message>
     <message>
         <source>Business Fax</source>
-        <translation>Službeni faks</translation>
+        <translation type="obsolete">Službeni faks</translation>
     </message>
     <message>
         <source>Home Fax</source>
-        <translation>Domači faks</translation>
+        <translation type="obsolete">Domači faks</translation>
     </message>
     <message>
         <source>Business Phone</source>
-        <translation>Službeni telefon</translation>
+        <translation type="obsolete">Službeni telefon</translation>
     </message>
     <message>
         <source>Home Phone</source>
-        <translation>Domači telefon</translation>
+        <translation type="obsolete">Domači telefon</translation>
     </message>
     <message>
         <source>Business Mobile</source>
-        <translation>Službeni mobitel</translation>
+        <translation type="obsolete">Službeni mobitel</translation>
     </message>
     <message>
         <source>Home Mobile</source>
-        <translation>Domači mobitel</translation>
+        <translation type="obsolete">Domači mobitel</translation>
     </message>
     <message>
         <source>Business WebPage</source>
-        <translation>Službena spletna stran</translation>
+        <translation type="obsolete">Službena spletna stran</translation>
     </message>
     <message>
         <source>Home Web Page</source>
-        <translation>Domača spletna stran</translation>
+        <translation type="obsolete">Domača spletna stran</translation>
     </message>
     <message>
         <source>Business Pager</source>
-        <translation>Službeni pozivnik</translation>
+        <translation type="obsolete">Službeni pozivnik</translation>
     </message>
     <message>
         <source>Business Street</source>
@@ -1381,27 +1421,27 @@ is provided free !</source>
     </message>
     <message>
         <source>Department</source>
-        <translation>Oddelek</translation>
+        <translation type="obsolete">Oddelek</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation>Pisarna</translation>
+        <translation type="obsolete">Pisarna</translation>
     </message>
     <message>
         <source>Profession</source>
-        <translation>Poklic</translation>
+        <translation type="obsolete">Poklic</translation>
     </message>
     <message>
         <source>Assistant</source>
-        <translation>Pomočnik</translation>
+        <translation type="obsolete">Pomočnik</translation>
     </message>
     <message>
         <source>Manager</source>
-        <translation>Upravnik</translation>
+        <translation type="obsolete">Upravnik</translation>
     </message>
     <message>
         <source>Spouse</source>
-        <translation>Zakonec</translation>
+        <translation type="obsolete">Zakonec</translation>
     </message>
     <message>
         <source>Birthday</source>
@@ -1413,11 +1453,11 @@ is provided free !</source>
     </message>
     <message>
         <source>Nickname</source>
-        <translation>Vzdevek</translation>
+        <translation type="obsolete">Vzdevek</translation>
     </message>
     <message>
         <source>Children</source>
-        <translation>Otroci</translation>
+        <translation type="obsolete">Otroci</translation>
     </message>
     <message>
         <source>Work Phone</source>
@@ -1454,6 +1494,181 @@ is provided free !</source>
     <message>
         <source>Unknown</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Izbriši</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Business Phone</source>
+        <translation type="unfinished">Službeni telefon</translation>
+    </message>
+    <message>
+        <source>Business Fax</source>
+        <translation type="unfinished">Službeni faks</translation>
+    </message>
+    <message>
+        <source>Business Mobile</source>
+        <translation type="unfinished">Službeni mobitel</translation>
+    </message>
+    <message>
+        <source>Default Email</source>
+        <translation type="unfinished">Privzeta epošta</translation>
+    </message>
+    <message>
+        <source>Emails</source>
+        <translation type="unfinished">Epošta</translation>
+    </message>
+    <message>
+        <source>Home Phone</source>
+        <translation type="unfinished">Domači telefon</translation>
+    </message>
+    <message>
+        <source>Home Fax</source>
+        <translation type="unfinished">Domači faks</translation>
+    </message>
+    <message>
+        <source>Home Mobile</source>
+        <translation type="unfinished">Domači mobitel</translation>
+    </message>
+    <message>
+        <source>Office</source>
+        <translation type="unfinished">Pisarna</translation>
+    </message>
+    <message>
+        <source>Profession</source>
+        <translation type="unfinished">Poklic</translation>
+    </message>
+    <message>
+        <source>Assistant</source>
+        <translation type="unfinished">Pomočnik</translation>
+    </message>
+    <message>
+        <source>Manager</source>
+        <translation type="unfinished">Upravnik</translation>
+    </message>
+    <message>
+        <source>Spouse</source>
+        <translation type="unfinished">Zakonec</translation>
+    </message>
+    <message>
+        <source>Gender</source>
+        <translation type="unfinished">Spol</translation>
+    </message>
+    <message>
+        <source>Birthday</source>
+        <translation type="unfinished">Rojstni dan</translation>
+    </message>
+    <message>
+        <source>Anniversary</source>
+        <translation type="unfinished">Obletnica</translation>
+    </message>
+    <message>
+        <source>Nickname</source>
+        <translation type="unfinished">Vzdevek</translation>
+    </message>
+    <message>
+        <source>Children</source>
+        <translation type="unfinished">Otroci</translation>
+    </message>
+    <message>
+        <source>Name Title</source>
+        <translation type="unfinished">Naziv</translation>
+    </message>
+    <message>
+        <source>First Name</source>
+        <translation type="unfinished">Ime</translation>
+    </message>
+    <message>
+        <source>Middle Name</source>
+        <translation type="unfinished">Medimek</translation>
+    </message>
+    <message>
+        <source>Last Name</source>
+        <translation type="unfinished">Priimek</translation>
+    </message>
+    <message>
+        <source>Suffix</source>
+        <translation type="unfinished">Pripona</translation>
+    </message>
+    <message>
+        <source>File As</source>
+        <translation type="unfinished">Datoteka kot</translation>
+    </message>
+    <message>
+        <source>Job Title</source>
+        <translation type="unfinished">Delovno mesto</translation>
+    </message>
+    <message>
+        <source>Department</source>
+        <translation type="unfinished">Oddelek</translation>
+    </message>
+    <message>
+        <source>Company</source>
+        <translation type="unfinished">Podjetje</translation>
+    </message>
+    <message>
+        <source>Business Street</source>
+        <translation type="unfinished">Ulica podjetja</translation>
+    </message>
+    <message>
+        <source>Business City</source>
+        <translation type="unfinished">Mesto podjetja</translation>
+    </message>
+    <message>
+        <source>Business State</source>
+        <translation type="unfinished">Okrožje podjetja</translation>
+    </message>
+    <message>
+        <source>Business Zip</source>
+        <translation type="unfinished">Poštna št. podjetja</translation>
+    </message>
+    <message>
+        <source>Business Country</source>
+        <translation type="unfinished">Država podjetja</translation>
+    </message>
+    <message>
+        <source>Business Pager</source>
+        <translation type="unfinished">Službeni pozivnik</translation>
+    </message>
+    <message>
+        <source>Business WebPage</source>
+        <translation type="unfinished">Službena spletna stran</translation>
+    </message>
+    <message>
+        <source>Home Street</source>
+        <translation type="unfinished">Domača ulica</translation>
+    </message>
+    <message>
+        <source>Home City</source>
+        <translation type="unfinished">Domače mesto</translation>
+    </message>
+    <message>
+        <source>Home State</source>
+        <translation type="unfinished">Domače okrožje</translation>
+    </message>
+    <message>
+        <source>Home Zip</source>
+        <translation type="unfinished">Domača poštna številka</translation>
+    </message>
+    <message>
+        <source>Home Country</source>
+        <translation type="unfinished">Domača država</translation>
+    </message>
+    <message>
+        <source>Home Web Page</source>
+        <translation type="unfinished">Domača spletna stran</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Groups</source>
+        <translation type="unfinished">Skupine</translation>
     </message>
 </context>
 </TS>
