@@ -252,7 +252,7 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     QPEMenuBar *mb = new QPEMenuBar( bar );
     QPopupMenu *file = new QPopupMenu( this );
     QPopupMenu *edit = new QPopupMenu( this );
-    QPopupMenu *font = new QPopupMenu( this );
+    font = new QPopupMenu( this );
 
     bar = new QPEToolBar( this );
     editBar = bar;
@@ -349,6 +349,12 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     font->insertSeparator();
     font->insertItem("Font", this, SLOT(changeFont()) );
 
+    font->insertSeparator();
+    nStart = new QAction( tr("Start with new file"), QString::null, 0, this, 0 );
+    connect( nStart, SIGNAL( toggled(bool) ), this, SLOT( changeStartConfig(bool) ) );
+    nStart->setToggleAction(TRUE);
+    nStart->addTo( font );
+
     mb->insertItem( tr( "File" ), file );
     mb->insertItem( tr( "Edit" ), edit );
     mb->insertItem( tr( "View" ), font );
@@ -414,7 +420,14 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     wa->setOn(wrap);
     updateCaption();
 
-    fileNew();    
+    cfg.setGroup("View");
+    if(cfg.readEntry("startNew","TRUE") == "TRUE") {
+        nStart->setOn(TRUE);
+        fileNew();
+    } else {
+        fileOpen();
+    }
+
 }
 
 TextEdit::~TextEdit()
@@ -697,26 +710,34 @@ void TextEdit::showEditTools()
 bool TextEdit::save()
 {
     QString file = doc->file();
+    qDebug(file);
     QString name= doc->name();
-
+    qDebug(name);
     QString rt = editor->text();
-    currentFileName= name ;
-    qDebug("saveFile "+currentFileName);
+    if( !rt.isEmpty() ) {
+        if(name.isEmpty()) {
+            saveAs();
+        } else {
+            currentFileName= name ;
+            qDebug("saveFile "+currentFileName);
 
-    struct stat buf;
-    mode_t mode;
-    stat(file.latin1(), &buf);
-    mode = buf.st_mode;
+            struct stat buf;
+            mode_t mode;
+            stat(file.latin1(), &buf);
+            mode = buf.st_mode;
 
-    doc->setName( name);
-    FileManager fm;
-    if ( !fm.saveFile( *doc, rt ) ) {
-        return false;
+            doc->setName( name);
+            FileManager fm;
+            if ( !fm.saveFile( *doc, rt ) ) {
+                return false;
+            }
+            editor->setEdited( false );
+
+            chmod( file.latin1(), mode);
+        }
+        return true;
     }
-    editor->setEdited( false );
-
-    chmod( file.latin1(), mode);
-    return true;
+    return false;
 }
 
 /*!
@@ -763,7 +784,7 @@ bool TextEdit::saveAs()
     }
 
     
-    fileSaveDlg=new fileSaver(this,"Save File",TRUE, 0, currentFileName);
+    fileSaveDlg=new fileSaver(this,"Save File As?",TRUE, 0, currentFileName);
     qDebug("wanna save filename "+currentFileName);
     fileSaveDlg->exec();
     if( fileSaveDlg->result() == 1 ) {
@@ -772,7 +793,6 @@ bool TextEdit::saveAs()
         QFileInfo fi(fileNm);
         currentFileName=fi.fileName();
         if(doc) {
-            qDebug("doclnk exists");
 //        QString file = doc->file();
 //        doc->removeFiles();
             delete doc;
@@ -781,7 +801,7 @@ bool TextEdit::saveAs()
             nf.setFile( fileNm);
             doc = new DocLnk(nf);
 //        editor->setText(rt);
-            qDebug("openFile doclnk "+currentFileName);
+//            qDebug("openFile doclnk "+currentFileName);
             doc->setName( currentFileName);
             updateCaption( currentFileName);
 
@@ -855,10 +875,15 @@ void TextEdit::closeEvent( QCloseEvent *e )
 }
 
 void TextEdit::accept()
-{
-    save();
-    close();
-//    fileOpen(); //godamn thats obnoxious! lemme out!!!
+ {
+    QString file = doc->file();
+      if (file.find("_.txt",0,TRUE) ==-1)
+         save();
+      else {
+          QFile(file).remove();
+      }
+    exit(0);
+
 }
 
 void TextEdit::changeFont() {
@@ -899,4 +924,17 @@ void TextEdit::editDelete()
             // exit
           break;
     };
+}
+
+void TextEdit::changeStartConfig( bool b ) {
+
+    Config cfg("TextEdit");
+    cfg.setGroup("View");
+    if(b) {
+        qDebug("bool");
+        cfg.writeEntry("startNew","TRUE");
+    } else {
+        cfg.writeEntry("startNew","FALSE");
+    }
+    update();
 }

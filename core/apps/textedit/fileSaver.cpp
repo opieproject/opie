@@ -75,7 +75,7 @@ fileSaver::fileSaver( QWidget* parent,  const char* name, bool modal, WFlags fl 
     currentDir.setPath( QDir::currentDirPath() );
     populateList();
     move(0,15);
-
+    fileEdit->setFocus();
 }
 
 fileSaver::~fileSaver()
