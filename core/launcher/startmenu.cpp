@@ -315,7 +315,7 @@ void StartMenu::loadApplets()
     QStringList exclude = cfg.readListEntry( "ExcludeApplets", ',' );
 
     QString lang = getenv( "LANG" );
-    QString path = QPEApplication::qpeDir() + "/plugins/applets";
+    QString path = QPEApplication::qpeDir() + "plugins/applets";
     QDir dir( path, "lib*.so" );
     QStringList list = dir.entryList();
     QStringList::Iterator it;
@@ -334,7 +334,7 @@ void StartMenu::loadApplets()
 
             QTranslator *trans = new QTranslator(qApp);
             QString type = (*it).left( (*it).find(".") );
-            QString tfn = QPEApplication::qpeDir()+"/i18n/"+lang+"/"+type+".qm";
+            QString tfn = QPEApplication::qpeDir()+"i18n/"+lang+"/"+type+".qm";
             if ( trans->load( tfn ))
                 qApp->installTranslator( trans );
             else

@@ -83,7 +83,7 @@ void Multikey::message(const QCString &message, const QByteArray &data)
 	QStringList sw = QStringList::split(QChar('|'), maps);
 	sw.append(current_map);
 
-	QDir map_dir(QPEApplication::qpeDir() + "/share/multikey/", "*.keymap");
+	QDir map_dir(QPEApplication::qpeDir() + "share/multikey/", "*.keymap");
 	lang = 0;
 	labels.clear();
 	sw_maps.clear();

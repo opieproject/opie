@@ -288,7 +288,7 @@ void MainWindowImp::loadModules(const QString &path)
             /* if loaded install translation */
             if( loadPlugin(path + "/" + fi->fileName()) != 0l ){
                 QTranslator *trans = new QTranslator(qApp);
-                QString fn = QPEApplication::qpeDir()+"/i18n/"+lang+"/"+ fi->fileName().left( fi->fileName().find(".") )+".qm";
+                QString fn = QPEApplication::qpeDir()+"i18n/"+lang+"/"+ fi->fileName().left( fi->fileName().find(".") )+".qm";
                 if( trans->load( fn ) )
                     qApp->installTranslator( trans );
                 else

@@ -60,7 +60,7 @@ LCD->setSegmentStyle(QLCDNumber::Filled);
   }
   pluginList.clear ();
 
-  QString path = QPEApplication::qpeDir() + "/plugins/calculator";
+  QString path = QPEApplication::qpeDir() + "plugins/calculator";
   QDir dir (path, "lib*.so");
   QStringList list = dir.entryList ();
 

@@ -70,7 +70,7 @@ OManufacturerDB::OManufacturerDB()
     odebug << "OManufacturerDB: trying to read " << filename << oendl;
     if ( !QFile::exists( filename ) )
     {
-        filename = QPEApplication::qpeDir()+"/etc/manufacturers";
+        filename = QPEApplication::qpeDir()+"etc/manufacturers";
         odebug << "OManufacturerDB: trying to read " << filename << oendl;
         if ( !QFile::exists( filename ) )
         {

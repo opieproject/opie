@@ -1382,7 +1382,7 @@ void PlayListWidget::populateSkinsMenu() {
    cfg.setGroup("Options" );
    QString skin = cfg.readEntry( "Skin", "default" );
 
-   QDir skinsDir( QPEApplication::qpeDir() + "/pics/opieplayer2/skins" );
+   QDir skinsDir( QPEApplication::qpeDir() + "pics/opieplayer2/skins" );
    skinsDir.setFilter( QDir::Dirs );
    skinsDir.setSorting(QDir::Name );
    const QFileInfoList *skinslist = skinsDir.entryInfoList();

@@ -68,7 +68,7 @@ CfgDlg::CfgDlg(QWidget* parent, CfgFile* cf, QApplication* app, bool mod):
 		m.insert(entry->getFile(), entry->getLabel());
 	}
 
-	QDir dir(QPEApplication::qpeDir()+"/share/zkb", "*.xml");
+	QDir dir(QPEApplication::qpeDir()+"share/zkb", "*.xml");
 	QStringList flist = dir.entryList();
 	QStringList::Iterator sit;
 	for(sit = flist.begin(); sit != flist.end(); ++sit) {
@@ -124,7 +124,7 @@ void CfgDlg::accept() {
 	cfile->setAutorepeatPeriod(ap->value());
 
 	CfgParser p;
-	p.save(QPEApplication::qpeDir()+"/share/zkb/zkb.xml", *cfile);
+	p.save(QPEApplication::qpeDir()+"share/zkb/zkb.xml", *cfile);
 	QCopEnvelope("QPE/zkb", "reload()");
 
 	QDialog::accept();

@@ -536,7 +536,7 @@ QPEDecoration::QPEDecoration( const QString &plugin )
     }
 
     WindowDecorationInterface *iface = 0;
-    QString path = QPEApplication::qpeDir() + "/plugins/decorations/";
+    QString path = QPEApplication::qpeDir() + "plugins/decorations/";
 
 #ifdef Q_OS_MACX
     if ( plugin.find( ".dylib" ) > 0 ) {

@@ -142,12 +142,12 @@ Gutenbrowser::Gutenbrowser(QWidget *,const char*, WFlags )
 		}
 
 			//    QString gutenIndex= local_library + "GUTINDEX.ALL";
-		QString gutenIndex = QPEApplication::qpeDir()+ "/etc/gutenbrowser/GUTINDEX.ALL";
+		QString gutenIndex = QPEApplication::qpeDir()+ "etc/gutenbrowser/GUTINDEX.ALL";
 		qDebug("gutenindex "+gutenIndex );
 		if( QFile( gutenIndex).exists() ) {
 				indexLib.setName( gutenIndex);
 		} else {
-				QString localLibIndexFile = QPEApplication::qpeDir()+ "/etc/gutenbrowser/PGWHOLE.TXT";
+				QString localLibIndexFile = QPEApplication::qpeDir()+ "etc/gutenbrowser/PGWHOLE.TXT";
 					//        QString localLibIndexFile= local_library + "PGWHOLE.TXT";
 				newindexLib.setName( localLibIndexFile);
 		}

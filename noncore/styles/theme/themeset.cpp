@@ -86,7 +86,7 @@ ThemeSettings::ThemeSettings ( QWidget* parent, const char *name, WFlags fl )
 	QListViewItem *item = new MyItem ( m_list, 0, tr( "[No theme]" ), "", "" );
 	m_list-> setSelected ( item, true );
 	
-	QString path = QPEApplication::qpeDir() + "/plugins/styles/themes";
+	QString path = QPEApplication::qpeDir() + "plugins/styles/themes";
 	QStringList list = QDir ( path, "*.themerc" ). entryList ( );
 	
 	for ( QStringList::Iterator it = list. begin(); it != list. end ( ); ++it ) {

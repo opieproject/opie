@@ -143,7 +143,7 @@ void ThemeDialog::setCurrent(const ImageNames& current)
 void ThemeDialog::fillBox(QString dirname,QComboBox* thebox)
 {
     thebox->clear();
-    QDir dir(QPEApplication::qpeDir()+"/pics/backgammon/"+dirname);
+    QDir dir(QPEApplication::qpeDir()+"pics/backgammon/"+dirname);
     dir.setFilter(QDir::Dirs | QDir::Files);
     QFileInfoListIterator it(*(dir.entryInfoList()));
     QFileInfo* fi;

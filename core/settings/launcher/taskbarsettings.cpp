@@ -77,7 +77,7 @@ void TaskbarSettings::init ( )
     cfg. setGroup ( "Applets" );
     QStringList exclude = cfg. readListEntry ( "ExcludeApplets", ',' );
 
-    QString path = QPEApplication::qpeDir ( ) + "/plugins/applets";
+    QString path = QPEApplication::qpeDir ( ) + "plugins/applets";
 #ifdef Q_OS_MACX
     QStringList list = QDir ( path, "lib*.dylib" ). entryList ( );
 #else
@@ -98,7 +98,7 @@ void TaskbarSettings::init ( )
             QString lang = getenv( "LANG" );
             QTranslator *trans = new QTranslator ( qApp );
             QString type = (*it). left ((*it). find ("."));
-            QString tfn = QPEApplication::qpeDir ( ) + "/i18n/" + lang + "/" + type + ".qm";
+            QString tfn = QPEApplication::qpeDir ( ) + "i18n/" + lang + "/" + type + ".qm";
             if ( trans-> load ( tfn ))
                 qApp-> installTranslator ( trans );
             else

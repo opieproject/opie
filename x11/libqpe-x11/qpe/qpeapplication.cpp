@@ -140,7 +140,7 @@ void QPEApplication::Private::show( QWidget* mw, bool nomax ) {
         show_mx( mw, nomax );
 }
 void QPEApplication::Private::loadTextCodecs() {
-    QString path = QPEApplication::qpeDir() + "/plugins/textcodecs";
+    QString path = QPEApplication::qpeDir() + "plugins/textcodecs";
     QDir dir( path, "lib*.so" );
     QStringList list = dir.entryList();
     QStringList::Iterator it;
@@ -161,7 +161,7 @@ void QPEApplication::Private::loadTextCodecs() {
     }
 }
 void QPEApplication::Private::loadImageCodecs() {
-    QString path = QPEApplication::qpeDir() + "/plugins/imagecodecs";
+    QString path = QPEApplication::qpeDir() + "plugins/imagecodecs";
     QDir dir( path, "lib*.so" );
     QStringList list = dir.entryList();
     QStringList::Iterator it;

@@ -306,7 +306,7 @@ void OThemeBase::readConfig( Qt::GUIStyle /*style*/ )
 OThemeBase::OThemeBase( const QString & configFile )
         : QWindowsStyle()
 {
-    configFilePath = QPEApplication::qpeDir ( ) + "/plugins/styles/";
+    configFilePath = QPEApplication::qpeDir ( ) + "plugins/styles/";
     configFileName = configFile;
 
     readConfig( Qt::WindowsStyle );

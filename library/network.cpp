@@ -419,9 +419,9 @@ NetworkInterface* Network::loadPlugin(const QString& type)
     NetworkInterface *iface = ifaces->find(type);
     if ( !iface ) {
 #ifdef Q_OS_MACX
-	QString libfile = QPEApplication::qpeDir() + "/plugins/network/lib" + type + ".dylib";
+	QString libfile = QPEApplication::qpeDir() + "plugins/network/lib" + type + ".dylib";
 #else
-	QString libfile = QPEApplication::qpeDir() + "/plugins/network/lib" + type + ".so";
+	QString libfile = QPEApplication::qpeDir() + "plugins/network/lib" + type + ".so";
 #endif
 	QLibrary lib(libfile);
 	if ( !lib.queryInterface( IID_Network, (QUnknownInterface**)&iface ) == QS_OK )
@@ -431,7 +431,7 @@ NetworkInterface* Network::loadPlugin(const QString& type)
 	for (QStringList::ConstIterator it = langs.begin(); it!=langs.end(); ++it) {
 	    QString lang = *it;
 	    QTranslator * trans = new QTranslator(qApp);
-	    QString tfn = QPEApplication::qpeDir()+"/i18n/"+lang+"/lib"+type+".qm";
+	    QString tfn = QPEApplication::qpeDir()+"i18n/"+lang+"/lib"+type+".qm";
 	    if ( trans->load( tfn ))
 		qApp->installTranslator( trans );
 	    else

@@ -17,7 +17,7 @@ int main( int argc, char **argv )
 
     OTabWidget *tabwidget = new OTabWidget(0, "tab widget");
 
-    QString path = QPEApplication::qpeDir() + "/plugins/app";
+    QString path = QPEApplication::qpeDir() + "plugins/app";
     QDir dir( path, "lib*.so" );
 
     QStringList list = dir.entryList();
@@ -44,7 +44,7 @@ int main( int argc, char **argv )
         if (type.left(3) == "lib")
          type = type.mid(3);
         type = type.right( type.find("lib") );
-        QString tfn = QPEApplication::qpeDir()+"/i18n/"+lang+"/"+type+".qm";
+        QString tfn = QPEApplication::qpeDir()+"i18n/"+lang+"/"+type+".qm";
         if ( trans->load( tfn ))
         qApp->installTranslator( trans );
         else

@@ -57,7 +57,7 @@ BackGammon::BackGammon(QWidget* parent, const char* name, WFlags fl)
     }
     conf.setGroup("general");
     theme_name=conf.readEntry("theme","default");
-    QString theme_file=QPEApplication::qpeDir()+"/backgammon/"+theme_name+".theme";
+    QString theme_file=QPEApplication::qpeDir()+"backgammon/"+theme_name+".theme";
 
     //the rules
     conf.setGroup("rules");
@@ -328,7 +328,7 @@ void BackGammon::loadgame()
         return;
 
     game_name=file->filename();
-    QString game_file=QPEApplication::qpeDir()+"/backgammon/"+game_name+".game";
+    QString game_file=QPEApplication::qpeDir()+"backgammon/"+game_name+".game";
 
     Config game(game_file,Config::File);
     game.setGroup("dice");
@@ -367,7 +367,7 @@ void BackGammon::loadgame()
 
 void BackGammon::savegame()
 {
-    QString game_file=QPEApplication::qpeDir()+"/backgammon/"+game_name+".game";
+    QString game_file=QPEApplication::qpeDir()+"backgammon/"+game_name+".game";
 
     Config game(game_file,Config::File);
     game.setGroup("dice");
@@ -406,7 +406,7 @@ void BackGammon::deletegame()
         return;
 
     game_name=file->filename();
-    QString game_file=QPEApplication::qpeDir()+"/backgammon/"+game_name+".game";
+    QString game_file=QPEApplication::qpeDir()+"backgammon/"+game_name+".game";
 
     if(!QMessageBox::warning(this,"Backgammon","deleted game\n"+game_name+" ?","OK","Cancel"))
     {
@@ -453,7 +453,7 @@ void BackGammon::loadtheme()
         return;
 
     theme_name=file->filename();
-    QString theme_file=QPEApplication::qpeDir()+"/backgammon/"+theme_name+".theme";
+    QString theme_file=QPEApplication::qpeDir()+"backgammon/"+theme_name+".theme";
 
     Config theme(theme_file,Config::File);
     theme.setGroup("theme");
@@ -476,7 +476,7 @@ void BackGammon::savetheme()
         QMessageBox::information(this,"Backgammon","Sorry\nCannot overwrite default.theme","OK");
         return;
     }
-    QString theme_file=QPEApplication::qpeDir()+"/backgammon/"+theme_name+".theme";
+    QString theme_file=QPEApplication::qpeDir()+"backgammon/"+theme_name+".theme";
     if(QMessageBox::information(this,"Backgammon","Save Theme\n"+theme_name,"Yes","No"))
       return;
       
@@ -509,7 +509,7 @@ void BackGammon::deletetheme()
         return;
 
     theme_name=file->filename();
-    QString theme_file=QPEApplication::qpeDir()+"/backgammon/"+theme_name+".theme";
+    QString theme_file=QPEApplication::qpeDir()+"backgammon/"+theme_name+".theme";
 
     if(!QMessageBox::warning(this,tr( "Backgammon" ),tr( "deleted theme %1?").arg(theme_name),tr( "OK" ),tr( "Cancel" )))
     {

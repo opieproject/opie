@@ -4,7 +4,7 @@
 **
 ** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: zsafe.cpp,v 1.25 2004-07-27 00:53:35 llornkcor Exp $
+** $Id: zsafe.cpp,v 1.26 2004-10-16 00:01:10 zecke Exp $
 **
 ** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 **
@@ -2776,7 +2776,7 @@ void ZSafe::addCategory()
 #ifdef DESKTOP
         QDir d(iconPath);
 #else
-        QDir d(QPEApplication::qpeDir() + "/pics/");
+        QDir d(QPEApplication::qpeDir() + "pics/");
 #endif
         d.setFilter( QDir::Files);
 
@@ -2960,7 +2960,7 @@ void ZSafe::setCategoryDialogFields(CategoryDialog *dialog)
 #ifdef DESKTOP
     QDir d(iconPath);
 #else
-    QDir d(QPEApplication::qpeDir() + "/pics/");
+    QDir d(QPEApplication::qpeDir() + "pics/");
 #endif
     d.setFilter( QDir::Files);
 
@@ -3017,7 +3017,7 @@ void ZSafe::setCategoryDialogFields(CategoryDialog *dialog, QString category)
 #ifdef DESKTOP
     QDir d(iconPath);
 #else
-    QDir d(QPEApplication::qpeDir() + "/pics/");
+    QDir d(QPEApplication::qpeDir() + "pics/");
 #endif
     d.setFilter( QDir::Files);
 
@@ -3196,7 +3196,7 @@ void ZSafe::editCategory()
 #ifdef DESKTOP
         QDir d(iconPath);
 #else
-        QDir d(QPEApplication::qpeDir() + "/pics/");
+        QDir d(QPEApplication::qpeDir() + "pics/");
 #endif
         d.setFilter( QDir::Files);
 
@@ -3239,7 +3239,7 @@ void ZSafe::editCategory()
         // QDir d(QDir::homeDirPath() + "/pics/");
         QDir d(iconPath);
 #else
-        QDir d(QPEApplication::qpeDir() + "/pics/");
+        QDir d(QPEApplication::qpeDir() + "pics/");
 #endif
         d.setFilter( QDir::Files);
 

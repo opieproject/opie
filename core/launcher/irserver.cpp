@@ -34,7 +34,7 @@ IrServer::IrServer( QObject *parent, const char *name )
 {
     lib = 0;
     obexIface = 0;
-    QString path = QPEApplication::qpeDir() + "/plugins/obex/";
+    QString path = QPEApplication::qpeDir() + "plugins/obex/";
 #ifdef Q_OS_MACX
     QDir dir( path, "lib*.dylib" );
 #else
@@ -51,7 +51,7 @@ IrServer::IrServer( QObject *parent, const char *name )
 	    QString lang = getenv( "LANG" );
 	    QTranslator * trans = new QTranslator(qApp);
 	    QString type = (*it).left( (*it).find(".") );
-	    QString tfn = QPEApplication::qpeDir()+"/i18n/"+lang+"/"+type+".qm";
+	    QString tfn = QPEApplication::qpeDir()+"i18n/"+lang+"/"+type+".qm";
         //odebug << "tr fpr obex: " << tfn << "" << oendl;
 	    if ( trans->load( tfn ))
 		qApp->installTranslator( trans );

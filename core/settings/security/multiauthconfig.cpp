@@ -154,7 +154,7 @@ static void test_and_start() {
     /* Checks (and memorizes) if any authentication plugins are
      * installed on the system
      */
-    QString path = QPEApplication::qpeDir() + "/plugins/security";
+    QString path = QPEApplication::qpeDir() + "plugins/security";
     QDir dir( path, "lib*.so" );
     QStringList list = dir.entryList();
     
@@ -374,7 +374,7 @@ void MultiauthConfig::readConfig()
 
 
 
-    QString configFile = QPEApplication::qpeDir() + "/etc/opie-login.conf";
+    QString configFile = QPEApplication::qpeDir() + "etc/opie-login.conf";
     Config loginCfg(configFile,Config::File);
 
     loginCfg.setGroup("General");
@@ -489,7 +489,7 @@ void MultiauthConfig::writeConfig()
     //release the Config handler
     delete pcfg;
 
-    QString configFile = QPEApplication::qpeDir() + "/etc/opie-login.conf";
+    QString configFile = QPEApplication::qpeDir() + "etc/opie-login.conf";
     Config loginCfg(configFile,Config::File);
     loginCfg.setGroup("General");
 
@@ -509,7 +509,7 @@ void MultiauthConfig::pluginsChanged() {
 /// loads each multiauth plugin
 void MultiauthConfig::loadPlugins() {
 
-    QString path = QPEApplication::qpeDir() + "/plugins/security";
+    QString path = QPEApplication::qpeDir() + "plugins/security";
     QDir dir( path, "lib*.so" );
 
     QStringList list = dir.entryList();

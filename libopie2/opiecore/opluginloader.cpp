@@ -473,7 +473,7 @@ void OGenericPluginLoader::setSafeMode(const QString& str, bool b) {
 /**
  * @internal
  *
- * Set the List of Plugin Dirs to lst. Currently only QPEApplication::qpeDir()+"/plugins/"+mytype
+ * Set the List of Plugin Dirs to lst. Currently only QPEApplication::qpeDir()+"plugins/"+mytype
  * is used as plugin dir
  */
 void OGenericPluginLoader::setPluginDirs( const QStringList& lst ) {
@@ -638,7 +638,7 @@ void OGenericPluginLoader::installTranslators(const QString& type) {
      */
     for ( QStringList::Iterator it = lst.begin(); it != lst.end(); ++it ) {
         QTranslator* trans = new QTranslator(  qApp );
-        QString tfn = QPEApplication::qpeDir()+"/i18n/" + *it + "/lib" + type + ".qm" ;
+        QString tfn = QPEApplication::qpeDir()+"i18n/" + *it + "/lib" + type + ".qm" ;
 
         /*
          * If loaded then install else clean up and don't leak

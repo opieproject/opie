@@ -37,7 +37,7 @@ void FileDialog::selectorclicked(QListViewItem* entry)
 void FileDialog::getCurrentDir()
 {
     dirselector->clear();
-    QDir dir(QPEApplication::qpeDir()+"/backgammon");
+    QDir dir(QPEApplication::qpeDir()+"backgammon");
     dir.setFilter(QDir::Files);
     QFileInfoListIterator it(*(dir.entryInfoList()));
     QFileInfo* fi;

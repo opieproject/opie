@@ -50,11 +50,11 @@ LibraryDialog::LibraryDialog( QWidget* parent,  const char* name , bool /*modal*
         local_index = local_library + index;
 
         QString iniFile ;
-        iniFile = QPEApplication::qpeDir()+"/etc/gutenbrowser/gutenbrowserrc";
+        iniFile = QPEApplication::qpeDir()+"etc/gutenbrowser/gutenbrowserrc";
 
-        new_index =QPEApplication::qpeDir()+"/etc/gutenbrowser/PGWHOLE.TXT";
+        new_index =QPEApplication::qpeDir()+"etc/gutenbrowser/PGWHOLE.TXT";
 
-        old_index = QPEApplication::qpeDir()+"/etc/gutenbrowser/GUTINDEX.ALL";
+        old_index = QPEApplication::qpeDir()+"etc/gutenbrowser/GUTINDEX.ALL";
             //    old_index = QPEApplication::qpeDir()+"etc/gutenbrowser/GUTINDEX.ALL";
 
             //     iniFile = local_library+"gutenbrowserrc";

@@ -139,7 +139,7 @@ void MediaPlayerState::loadPlugins() {
     }
     pluginList.clear();
 
-    QString path = QPEApplication::qpeDir() + "/plugins/codecs";
+    QString path = QPEApplication::qpeDir() + "plugins/codecs";
     QDir dir( path, "lib*.so" );
     QStringList list = dir.entryList();
     QStringList::Iterator it;

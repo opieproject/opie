@@ -26,7 +26,7 @@ typedef ulong SlResolutionScale;
 class SlMisc {
 public:
 	static bool isExecutable(const QString &c) {
-		QFileInfo exec(QPEApplication::qpeDir() + "/bin/" + c);
+		QFileInfo exec(QPEApplication::qpeDir() + "bin/" + c);
 		return exec.isExecutable();
 	};
 	static ulong availableMemory();

@@ -142,7 +142,7 @@ BenchmarkInfo::BenchmarkInfo( QWidget *parent, const char *name, int wFlags )
     QHBoxLayout* hb = new QHBoxLayout( vb );
     hb->addWidget( startButton, 2 );
 
-    QFile f( QPEApplication::qpeDir() + "/share/sysinfo/results" );
+    QFile f( QPEApplication::qpeDir() + "share/sysinfo/results" );
     if ( f.open( IO_ReadOnly ) )
     {
         machineCombo = new QComboBox( this );

@@ -113,7 +113,7 @@ Bartender::Bartender( QWidget* parent,  const char* name, WFlags fl )
     if(QDir("db").exists()) {
         dbFile.setName( "db/drinkdb.txt");
     } else
-        dbFile.setName( QPEApplication::qpeDir()+"/etc/bartender/drinkdb.txt");
+        dbFile.setName( QPEApplication::qpeDir()+"etc/bartender/drinkdb.txt");
     initDrinkDb();
 }
 

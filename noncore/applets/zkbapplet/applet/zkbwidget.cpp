@@ -41,7 +41,7 @@ int ZkbWidget::position()
 }
 
 bool ZkbWidget::loadKeymap() {
-    ZkbConfig c(QPEApplication::qpeDir()+"/share/zkb");
+    ZkbConfig c(QPEApplication::qpeDir()+"share/zkb");
     QFontMetrics fm(font());
 
     if (keymap != 0) {

@@ -217,7 +217,7 @@ void InputMethods::unloadMethod( QValueList<InputMethod>& list ) {
 
 
 QStringList InputMethods::plugins()const {
-   QString path = QPEApplication::qpeDir() + "/plugins/inputmethods";
+   QString path = QPEApplication::qpeDir() + "plugins/inputmethods";
 #ifdef Q_OS_MACX
    QDir dir( path, "lib*.dylib" );
 #else
@@ -233,7 +233,7 @@ void InputMethods::installTranslator( const QString& type ) {
         QString lang = *lit;
         QTranslator * trans = new QTranslator(qApp);
 
-        QString tfn = QPEApplication::qpeDir()+"/i18n/"+lang+"/"+type+".qm";
+        QString tfn = QPEApplication::qpeDir()+"i18n/"+lang+"/"+type+".qm";
 
         if ( trans->load( tfn ))
             qApp->installTranslator( trans );
@@ -276,7 +276,7 @@ void InputMethods::loadInputMethods()
 
     unloadInputMethods();
 
-    QString path = QPEApplication::qpeDir() + "/plugins/inputmethods";
+    QString path = QPEApplication::qpeDir() + "plugins/inputmethods";
     QStringList list = plugins();
     QStringList::Iterator it;
     for ( it = list.begin(); it != list.end(); ++it ) {

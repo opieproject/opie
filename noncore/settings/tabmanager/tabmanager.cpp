@@ -21,7 +21,7 @@
 #include <qpe/resource.h>
 
 
-#define HOME_APP_DIR QPEApplication::qpeDir()+"/apps"
+#define HOME_APP_DIR QPEApplication::qpeDir()+"apps"
 #define HOME_APP_INSTALL_DIR "/usr/lib/ipkg/info"
 #define NEW_FOLDER "EmptyTab"
 #define NEW_APPLICATION "NewApp"
@@ -258,7 +258,7 @@ void TabManager::editItem( QListViewItem * item){
     qApp->processEvents();
     application = new AppEdit(this, "Application edit", true);
 
-    QDir d(QPEApplication::qpeDir() + "/pics/");
+    QDir d(QPEApplication::qpeDir() + "pics/");
     d.setFilter( QDir::Files);
 
     const QFileInfoList *list = d.entryInfoList();

@@ -9,7 +9,7 @@ int main( int argc, char **argv ) {
 	QPEApplication app(argc, argv);
 	CfgFile cfile;
 	CfgParser cp;
-	cp.load(QPEApplication::qpeDir()+"/share/zkb/zkb.xml", cfile);
+	cp.load(QPEApplication::qpeDir()+"share/zkb/zkb.xml", cfile);
 
 
 	CfgDlg c(0, &cfile, &app, true);

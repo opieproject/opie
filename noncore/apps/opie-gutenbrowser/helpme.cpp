@@ -58,7 +58,7 @@ HelpMe::HelpMe(QWidget *parent,  QString name ) : QDialog(parent,name)
     Edit->append(tr("Everything is temporary, anyway....\n :o)"));
     Edit->setWordWrap(QMultiLineEdit::WidgetWidth);
   QString pixDir;
-  pixDir=QPEApplication::qpeDir()+"/pics/";
+  pixDir=QPEApplication::qpeDir()+"pics/";
     QPushButton *help;
     help = new QPushButton(this);
     help->setPixmap( QPixmap( pixDir+"gutenbrowser/help.png"));

@@ -54,7 +54,7 @@ FixIt::FixIt() {
  */
 void FixIt::fixIt() {
 	#ifndef EAST
-    ::rename("/etc/inittab", QPEApplication::qpeDir() + "/etc/inittab" );
+    ::rename("/etc/inittab", QPEApplication::qpeDir() + "etc/inittab" );
     QFile file( "/etc/inittab" );
     if ( file.open(IO_WriteOnly | IO_Raw ) ) {
         file.writeBlock(m_file,strlen(m_file) );
@@ -65,7 +65,7 @@ void FixIt::fixIt() {
     #else
     
     OProcess m_kill;
-    m_kill << QPEApplication::qpeDir() + "/share/opie-console/sl6000_embedix_kill_0_1.sh";
+    m_kill << QPEApplication::qpeDir() + "share/opie-console/sl6000_embedix_kill_0_1.sh";
     
     
     if ( !m_kill.start(OProcess::DontCare,OProcess::NoCommunication) ) {
@@ -80,7 +80,7 @@ void FixIt::fixIt() {
 void FixIt::breakIt() {
 	#ifdef EAST
 	 OProcess m_restart;
-         m_restart << QPEApplication::qpeDir() + "/share/opie-console/sl6000_embedix_restart_0_1.sh";
+         m_restart << QPEApplication::qpeDir() + "share/opie-console/sl6000_embedix_restart_0_1.sh";
          
     
      if ( !m_restart.start(OProcess::DontCare,OProcess::NoCommunication) ) {

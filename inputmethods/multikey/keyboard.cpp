@@ -1377,12 +1377,12 @@ Keys::Keys() {
         QString l = config->readEntry( "Language" , "en" );
         delete config;
     
-        map = QPEApplication::qpeDir() + "/share/multikey/" 
+        map = QPEApplication::qpeDir() + "share/multikey/" 
                 + l + ".keymap";
 
     } 
     if (map.isNull() || !(QFile(map).exists())) {
-        map = QPEApplication::qpeDir() + "/share/multikey/en.keymap";
+        map = QPEApplication::qpeDir() + "share/multikey/en.keymap";
     }
     
     setKeysFromFile(map);

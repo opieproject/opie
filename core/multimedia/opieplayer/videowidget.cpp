@@ -98,7 +98,7 @@ VideoWidget::VideoWidget(QWidget* parent, const char* name, WFlags f) :
 		imgButtonMask->fill( 0 );
 
 		for ( int i = 0; i < 7; i++ ) {
-				QString filename = QString( QPEApplication::qpeDir() + "/pics/" + skinPath +
+				QString filename = QString( QPEApplication::qpeDir() + "pics/" + skinPath +
 																		"/skinV_mask_" + skinV_mask_file_names[i] + ".png" );
 					//      odebug << "loading "+filename << oendl;
 				masks[i] = new QBitmap( filename );

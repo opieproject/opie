@@ -38,7 +38,7 @@ void optionsDialog::ftpSiteDlg( )
 //  initDialog();
     local_library = (QDir::homeDirPath ()) +"/Applications/gutenbrowser/";
 //    ListFile = local_library + "ftpList";
-    ListFile = QPEApplication::qpeDir() + "/etc/gutenbrowser";
+    ListFile = QPEApplication::qpeDir() + "etc/gutenbrowser";
     QDir dir(ListFile);
     if( !dir.exists())
         dir.mkdir(ListFile,true);

@@ -45,9 +45,9 @@ namespace QuickPrivate {
                 name = name.mid( 3 );
         }
 #ifdef Q_OS_MACX
-        QString path = QPEApplication::qpeDir() + "/plugins/application/lib"+name+".dylib";
+        QString path = QPEApplication::qpeDir() + "plugins/application/lib"+name+".dylib";
 #else
-        QString path = QPEApplication::qpeDir() + "/plugins/application/lib"+name+".so";
+        QString path = QPEApplication::qpeDir() + "plugins/application/lib"+name+".so";
 #endif
 
         QLibrary *lib = new QLibrary( path );

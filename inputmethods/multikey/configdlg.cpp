@@ -79,7 +79,7 @@ ConfigDlg::ConfigDlg () : QDialog ()
     keymaps->insertItem(cur);
     keymaps->setSelected(0, true);
     
-    QDir map_dir(QPEApplication::qpeDir() + "/share/multikey", "*.keymap");
+    QDir map_dir(QPEApplication::qpeDir() + "share/multikey", "*.keymap");
     default_maps = map_dir.entryList(); // so i can access it in other places
     custom_maps = config.readListEntry("maps", QChar('|'));
     sw_maps = ConfigDlg::loadSw();
@@ -248,7 +248,7 @@ QStringList ConfigDlg::loadSw()
 {
     Config *config = new Config("multikey");
     config->setGroup("keymaps");
-    QDir map_dir(QPEApplication::qpeDir() + "/share/multikey", "*.keymap");
+    QDir map_dir(QPEApplication::qpeDir() + "share/multikey", "*.keymap");
     QStringList d_maps = map_dir.entryList(); // so i can access it in other places
     QStringList c_maps = config->readListEntry("maps", QChar('|'));
     QStringList s_maps = config->readListEntry("sw", QChar('|'));

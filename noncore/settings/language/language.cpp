@@ -57,7 +57,7 @@ LanguageSettings::LanguageSettings( QWidget* parent, const char* name, WFlags fl
 		languages->setFont(FontManager::unicodeFont(FontManager::Proportional));
 
 
-	QString tfn = QPEApplication::qpeDir() + "/i18n/";
+	QString tfn = QPEApplication::qpeDir() + "i18n/";
 	QDir langDir = tfn;
 	QStringList list = langDir.entryList("*", QDir::Dirs );
 

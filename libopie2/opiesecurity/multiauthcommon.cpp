@@ -89,7 +89,7 @@ int runPlugins() {
     /* tries to launch successively each plugin in $OPIEDIR/plugins/security
      * directory which file name is in Security.conf / [Misc] / IncludePlugins
      */
-    QString path = QPEApplication::qpeDir() + "/plugins/security";
+    QString path = QPEApplication::qpeDir() + "plugins/security";
     QStringList::Iterator libIt;
 
     for ( libIt = plugins.begin(); libIt != plugins.end(); ++libIt ) {
