@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>239</width>
+            <width>235</width>
             <height>390</height>
         </rect>
     </property>
@@ -629,4 +629,22 @@
     <slot access="public">serverUrlChanged(const QString&amp;)</slot>
     <slot access="public">toggleJumpTo(bool)</slot>
 </connections>
+<tabstops>
+    <tabstop>servers</tabstop>
+    <tabstop>newserver</tabstop>
+    <tabstop>removeserver</tabstop>
+    <tabstop>servername</tabstop>
+    <tabstop>serverurl</tabstop>
+    <tabstop>active</tabstop>
+    <tabstop>btnChangeServer</tabstop>
+    <tabstop>TabWidget</tabstop>
+    <tabstop>destinations</tabstop>
+    <tabstop>newdestination</tabstop>
+    <tabstop>removedestination</tabstop>
+    <tabstop>destinationname</tabstop>
+    <tabstop>destinationurl</tabstop>
+    <tabstop>linkToRoot</tabstop>
+    <tabstop>btnChangeDest</tabstop>
+    <tabstop>jumpTo</tabstop>
+</tabstops>
 </UI>

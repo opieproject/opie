@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>215</width>
+            <width>211</width>
             <height>295</height>
         </rect>
     </property>
@@ -115,4 +115,9 @@
         <slot>accept()</slot>
     </connection>
 </connections>
+<tabstops>
+    <tabstop>lstCategories</tabstop>
+    <tabstop>btnCancel</tabstop>
+    <tabstop>btnOK</tabstop>
+</tabstops>
 </UI>
