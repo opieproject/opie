@@ -1,7 +1,7 @@
 /*
  * datebookplugin.h
  *
- * copyright   : (c) 2002 by Maximilian Reiﬂ
+ * copyright   : (c) 2002,2003 by Maximilian Reiﬂ
  * email       : harlekin@handhelds.org
  *
  */
@@ -17,9 +17,7 @@
 #ifndef DATEBOOK_PLUGIN_H
 #define DATEBOOK_PLUGIN_H
 
-#include <qstring.h>
 #include <qguardedptr.h>
-#include <qwidget.h>
 
 #include <opie/oclickablelabel.h>
 #include <opie/todayplugininterface.h>

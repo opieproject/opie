@@ -1,7 +1,7 @@
 /*
  * datebookpluginwidget.h
  *
- * copyright   : (c) 2002 by Maximilian Reiﬂ
+ * copyright   : (c) 2002,2003 by Maximilian Reiﬂ
  * email       : harlekin@handhelds.org
  *
  */
@@ -17,8 +17,6 @@
 #ifndef DATEBOOK_PLUGIN_WIDGET_H
 #define DATEBOOK_PLUGIN_WIDGET_H
 
-#include <qstring.h>
-#include <qwidget.h>
 #include <qlayout.h>
 #include <qguardedptr.h>
 #include <qlist.h>

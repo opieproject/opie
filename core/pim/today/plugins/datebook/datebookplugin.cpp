@@ -2,7 +2,7 @@
 /*
  * datebookplugin.cpp
  *
- * copyright   : (c) 2002 by Maximilian Reiﬂ
+ * copyright   : (c) 2002,2003 by Maximilian Reiﬂ
  * email       : harlekin@handhelds.org
  *
  */

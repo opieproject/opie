@@ -1,7 +1,7 @@
  /*
  * datebookpluginwidget.cpp
  *
- * copyright   : (c) 2002 by Maximilian Reiﬂ
+ * copyright   : (c) 2002,2003 by Maximilian Reiﬂ
  * email       : harlekin@handhelds.org
  *
  */
@@ -22,10 +22,7 @@
 
 #include <qdatetime.h>
 #include <qlabel.h>
-#include <qlayout.h>
 #include <qtl.h>
-#include <qscrollview.h>
-#include <qtimer.h>
 
 DatebookPluginWidget::DatebookPluginWidget( QWidget *parent, const char* name )
     : QWidget(parent, name ) {
