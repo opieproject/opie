@@ -81,7 +81,7 @@ void StartMenu::loadOptions()
 #else
     // Basically just #include the .qpe_menu.conf file settings
     useWidePopupMenu = FALSE;
-    popupMenuSidePixmap = "lauchner/sidebar";
+    popupMenuSidePixmap = "launcher/sidebar";
     startButtonIsFlat = TRUE;
     startButtonPixmap = "launcher/start_button";
 #endif
@@ -91,7 +91,7 @@ void StartMenu::loadOptions()
 void StartMenu::createMenu()
 {
     if ( useWidePopupMenu )
-	launchMenu = new PopupWithLaunchSideThing( this, &popupMenuSidePixmap );
+  launchMenu = new PopupWithLaunchSideThing( this, &popupMenuSidePixmap );
     else
         launchMenu = new StartPopupMenu( this );
 
@@ -103,7 +103,7 @@ void StartMenu::itemSelected( int id )
 {
     const AppLnk *app = apps->find( id );
     if ( app )
-	app->execute();
+  app->execute();
 }
 
 bool StartMenu::loadMenu( AppLnkSet *folder, QPopupMenu *menu )
@@ -113,31 +113,31 @@ bool StartMenu::loadMenu( AppLnkSet *folder, QPopupMenu *menu )
     QStringList typs = folder->types();
     QDict<QPopupMenu> typpop;
     for (QStringList::Iterator tit=typs.begin(); tit!=typs.end(); ++tit) {
-	if ( !(*tit).isEmpty() ) {
-	    QPopupMenu *new_menu = new StartPopupMenu( menu );
-	    typpop.insert(*tit, new_menu);
-	    connect( new_menu, SIGNAL(activated(int)), SLOT(itemSelected(int)) );
-	    menu->insertItem( folder->typePixmap(*tit), folder->typeName(*tit), new_menu );
-	}
+  if ( !(*tit).isEmpty() ) {
+      QPopupMenu *new_menu = new StartPopupMenu( menu );
+      typpop.insert(*tit, new_menu);
+      connect( new_menu, SIGNAL(activated(int)), SLOT(itemSelected(int)) );
+      menu->insertItem( folder->typePixmap(*tit), folder->typeName(*tit), new_menu );
+  }
     }
 
     QListIterator<AppLnk> it( folder->children() );
     for ( ; it.current(); ++it ) {
-	AppLnk *app = it.current();
-	if ( app->type() == "Separator" ) {
-	    menu->insertSeparator();
-	} else {
-	    QString t = app->type();
-	    QPopupMenu* pmenu = typpop.find(t);
-	    if ( !pmenu )
-		pmenu = menu;
-	    pmenu->insertItem( app->pixmap(), app->name(), app->id() );
-	    result=TRUE;
-	}
+  AppLnk *app = it.current();
+  if ( app->type() == "Separator" ) {
+      menu->insertSeparator();
+  } else {
+      QString t = app->type();
+      QPopupMenu* pmenu = typpop.find(t);
+      if ( !pmenu )
+    pmenu = menu;
+      pmenu->insertItem( app->pixmap(), app->name(), app->id() );
+      result=TRUE;
+  }
     }
 
     if ( result )
-	connect( menu, SIGNAL(activated(int)), SLOT(itemSelected(int)) );
+  connect( menu, SIGNAL(activated(int)), SLOT(itemSelected(int)) );
 
     return result;
 }
@@ -162,10 +162,10 @@ const AppLnk* StartMenu::execToLink(const QString& appname)
 void StartPopupMenu::keyPressEvent( QKeyEvent *e )
 {
     if ( e->key() == Key_F33 || e->key() == Key_Space ) {
-	// "OK" button, little hacky
-	QKeyEvent ke(QEvent::KeyPress, Key_Enter, 13, 0);
-	QPopupMenu::keyPressEvent( &ke );
+  // "OK" button, little hacky
+  QKeyEvent ke(QEvent::KeyPress, Key_Enter, 13, 0);
+  QPopupMenu::keyPressEvent( &ke );
     } else {
-	QPopupMenu::keyPressEvent( e );
+  QPopupMenu::keyPressEvent( e );
     }
 }
