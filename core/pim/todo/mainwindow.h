@@ -48,7 +48,6 @@ class Ir;
 using namespace Opie;
 
 namespace Todo {
-
     typedef TodoView<QWidget> View;
     class MainWindow : public QMainWindow {
         Q_OBJECT
@@ -59,6 +58,11 @@ namespace Todo {
 
         /** return a context menu for a ToDoEvent */
         QPopupMenu* contextMenu(int uid );
+        QPopupMenu* options();
+        QPopupMenu* edit();
+        QPopupMenu* view();
+        QToolBar*   toolbar();
+
 
         ToDoDB::Iterator begin();
         ToDoDB::Iterator end();
@@ -67,6 +71,7 @@ namespace Todo {
         bool isSyncing()const;
         bool showCompleted()const;
         bool showDeadline()const;
+        bool showOverDue()const;
         QString currentCategory()const;
         int currentCatId();
 private slots:
@@ -77,12 +82,15 @@ private slots:
         void closeEvent( QCloseEvent* e );
 
     private:
+        void connectBase( ViewBase* );
         void initUI();
         void initActions();
         void initConfig();
+        void initViews();
         void populateCategories();
         void raiseCurrentView();
-        View* currentView();
+        ViewBase* currentView();
+        ViewBase* m_curView;
 
         QMenuBar* m_bar;
         QToolBar* m_tool;
@@ -99,14 +107,17 @@ private slots:
         QWidgetStack *m_stack;
         QPopupMenu* m_catMenu,
             *m_edit,
-            *m_options;
+            *m_options,
+            *m_view;
 
         bool m_syncing:1;
         bool m_deadline:1;
         bool m_completed:1;
+        bool m_overdue:1;
         TodoManager m_todoMgr;
         QString m_curCat;
-        QList<View> m_views;
+        QList<ViewBase> m_views;
+        uint m_counter;
 
      private slots:
         void slotNew();
@@ -129,6 +140,7 @@ private slots:
         void slotBeam();
         void beamDone( Ir* );
         void slotShowDetails();
+        void slotShowDue( bool );
     };
 };
 

@@ -40,6 +40,8 @@
 
 
 #include "todoentryimpl.h"
+#include "tableview.h"
+
 #include "mainwindow.h"
 
 
@@ -49,9 +51,13 @@ MainWindow::MainWindow( QWidget* parent,
                         const char* name ) {
 
     m_syncing = false;
+    m_counter = 0;
     initUI();
-    initActions();
     initConfig();
+    initViews();
+    initActions();
+
+    raiseCurrentView();
 }
 void MainWindow::initActions() {
     QAction* a = new QAction( tr("New Task" ), Resource::loadPixmap( "new" ),
@@ -146,6 +152,17 @@ void MainWindow::initActions() {
     m_bar->insertItem( tr("Category"),  m_catMenu );
     m_bar->insertItem( tr("Options"), m_options );
 
+    /* initialize the view menu */
+    a = new QAction( QString::null, tr("Show over due"),
+                     0, this, 0, TRUE );
+    a->addTo( m_view );
+    a->setOn( showOverDue() );
+    connect(a, SIGNAL(toggled(bool)),
+            this, SLOT(slotShowDue(bool) ) );
+    m_view->insertSeparator();
+
+    m_bar->insertItem( tr("View"), m_view );
+
 
 }
 /* m_curCat from Config */
@@ -155,6 +172,7 @@ void MainWindow::initConfig() {
     m_completed =  config.readBoolEntry( "ShowComplete", TRUE );
     m_curCat = config.readEntry( "Category",    QString::null );
     m_deadline =  config.readBoolEntry( "ShowDeadLine", TRUE);
+    m_overdue = config.readBoolEntry("ShowOverDue", TRUE );
 }
 void MainWindow::initUI() {
     m_stack = new QWidgetStack(this,  "main stack");
@@ -170,14 +188,57 @@ void MainWindow::initUI() {
     /** QPopupMenu */
     m_edit = new QPopupMenu( this );
     m_options = new QPopupMenu( this );
+    m_view = new QPopupMenu( this );
     m_catMenu = new QPopupMenu( this );
     m_catMenu->setCheckable( TRUE );
+
+    connect(m_catMenu, SIGNAL(activated(int) ),
+            this, SLOT(setCategory(int) ) );
+}
+void MainWindow::initViews() {
+    TableView* tableView = new TableView( this, this );
+    m_stack->addWidget( tableView,  m_counter++ );
+    m_views.append( tableView );
+    m_curView = tableView;
+    connectBase( tableView );
+    tableView->setTodos( begin(), end() );
+
+    /* add QString type + QString configname to
+     * the View menu
+     * and subdirs for multiple views
+     */
 }
 MainWindow::~MainWindow() {
 
 }
+void MainWindow::connectBase( ViewBase* base) {
+    base->connectShow( this, SLOT(slotShow(int) ) );
+    base->connectEdit( this, SLOT(slotEdit(int) ) );
+    base->connectUpdateSmall( this, SLOT( slotUpdate(int, const SmallTodo&)  ));
+    base->connectUpdateBig( this, SLOT( slotUpdate(int, const ToDoEvent& ) ) );
+    base->connectUpdateView( this, SLOT(slotUpdate( QWidget* ) ) ) ;
+}
 QPopupMenu* MainWindow::contextMenu( int uid ) {
-    return 0l;
+    QPopupMenu* menu = new QPopupMenu();
+
+    m_editAction->addTo( menu );
+    m_deleteAction->addTo( menu );
+    m_duplicateAction->addTo( menu );
+    menu->insertSeparator();
+
+    return menu;
+}
+QPopupMenu* MainWindow::options() {
+    return m_options;
+}
+QPopupMenu* MainWindow::edit() {
+    return m_edit;
+}
+QPopupMenu* MainWindow::view() {
+    return m_view;
+}
+QToolBar* MainWindow::toolbar() {
+    return m_tool;
 }
 ToDoDB::Iterator MainWindow::begin() {
     return m_todoMgr.begin();
@@ -237,6 +298,7 @@ void MainWindow::closeEvent( QCloseEvent* e ) {
         config.writeEntry( "ShowComplete", showCompleted() );
         config.writeEntry( "Category", currentCategory() );
         config.writeEntry( "ShowDeadLine", showDeadline());
+        config.writeEntry( "ShowOverDue", showOverDue() );
     }
 }
 void MainWindow::slotNew() {
@@ -356,6 +418,8 @@ void MainWindow::slotEdit() {
  */
 void MainWindow::setCategory( int c) {
     if ( c <= 0 ) return;
+
+    qWarning("Iterating over cats %d", c );
     for ( unsigned int i = 1; i < m_catMenu->count(); i++ )
         m_catMenu->setItemChecked(i, c == (int)i );
 
@@ -371,6 +435,7 @@ void MainWindow::setCategory( int c) {
         m_curCat = m_todoMgr.categories()[c-2];
         setCaption( tr("Todo") + " - " + m_curCat );
     }
+    m_catMenu->setItemChecked( c, true );
     currentView()->setShowCategory( m_curCat );
     raiseCurrentView();
 }
@@ -381,6 +446,9 @@ void MainWindow::slotShowDeadLine( bool dead) {
 void MainWindow::slotShowCompleted( bool show) {
     m_completed = show;
     currentView()->setShowCompleted( m_completed );
+}
+bool MainWindow::showOverDue()const {
+    return m_overdue;
 }
 void MainWindow::setDocument( const QString& ) {
 
@@ -435,9 +503,14 @@ QString MainWindow::currentCategory()const {
 int MainWindow::currentCatId() {
     return m_todoMgr.catId( m_curCat );
 }
-View* MainWindow::currentView() {
-    return 0l;
+ViewBase* MainWindow::currentView() {
+    return m_curView;
 }
 void MainWindow::raiseCurrentView() {
-
+    m_stack->raiseWidget( m_curView->widget() );
+}
+void MainWindow::slotShowDue(bool ov) {
+    m_overdue = ov;
+    currentView()->showOverDue( ov );
+    raiseCurrentView();
 }

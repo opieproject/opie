@@ -60,6 +60,7 @@ namespace Todo {
         int uid()const;
         bool isCompleted()const;
         QDate date()const;
+
     private:
         struct SmallTodoPrivate;
         SmallTodoPrivate* d;

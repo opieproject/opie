@@ -65,15 +65,52 @@ namespace Todo {
         void emitRemove( int uid ) {
             emit remove( uid );
         }
+        void emitUpdate( QWidget* wid ) {
+            emit update( wid );
+        }
     signals:
         void show(int uid );
         void edit(int uid );
         void update( int uid, const SmallTodo& );
         void update( int uid, const ToDoEvent& );
+        /* sorry you need to cast */;
+        void update( QWidget* wid );
         void remove( int uid );
 
     };
     class MainWindow;
+
+    /**
+     * due to inheretince problems we need this base class
+     */
+    class ViewBase {
+    public:
+        virtual QWidget* widget() = 0;
+        virtual QString type()const = 0;
+        virtual int current() = 0;
+        virtual QString currentRepresentation() = 0;
+        virtual void showOverDue( bool ) = 0;
+        virtual void setTodos( ToDoDB::Iterator it,
+                               ToDoDB::Iterator end ) = 0;
+        virtual void setTodo(int uid,  const ToDoEvent& ) = 0;
+        virtual void addEvent( const ToDoEvent& ) = 0;
+        virtual void replaceEvent( const ToDoEvent& ) = 0;
+        virtual void removeEvent( int uid ) = 0;
+        virtual void setShowCompleted( bool ) = 0;
+        virtual void setShowDeadline( bool ) = 0;
+        virtual void setShowCategory( const QString& = QString::null ) = 0;
+        virtual void clear() = 0;
+        virtual QArray<int> completed() = 0;
+        virtual void newDay() = 0;
+
+        virtual void connectShow( QObject*, const char* ) = 0;
+        virtual void connectEdit( QObject*, const char* ) = 0;
+        virtual void connectUpdateSmall( QObject*, const char* ) = 0;
+        virtual void connectUpdateBig( QObject*, const char* ) = 0;
+        virtual void connectUpdateView( QObject*, const char*) = 0;
+
+    };
+
     /**
      * A base class for all TodoView which are showing
      * a list of todos.
@@ -81,48 +118,38 @@ namespace Todo {
      * derived class
      * Through the MainWindow( dispatcher ) one can access
      * the relevant informations
+     *
+     * It's not possible to have signal and slots from within
+     * templates this way you've to register for a signal
      */
     template <class T = QWidget>
-    class TodoView : public T{
+    class TodoView : public T, public ViewBase{
 
     public:
         /**
          * c'tor
          */
-        TodoView( MainWindow* parent )
-            : T(parent),  m_main( parent ) {
+        TodoView( MainWindow* win, QWidget* parent )
+            : T(parent),  m_main( win ) {
             hack = new InternQtHack;
         }
+        /**
+         *d'tor
+         */
         virtual ~TodoView() {
             delete hack;
         };
+        QWidget* widget() {
+            return this;
+        }
 
-        virtual QString type()const = 0;
-
-        /* return the current item */
-        virtual int current() = 0;
-        virtual QString currentRepresentation() = 0;
-        /**
-         * setTodos gets at least called once and on
-         * every update again.
-         */
-        virtual void setTodos( const ToDoDB::Iterator it,
-                               const ToDoDB::Iterator end) = 0;
-        virtual void setTodo( int uid, const ToDoEvent& ) = 0;
-        virtual void addEvent( const ToDoEvent& ) = 0;
-        virtual void replaceEvent( const ToDoEvent& ) = 0;
-        virtual void removeEvent( int uid ) = 0;
-        virtual void setShowCompleted( bool ) = 0;
-        virtual void setShowDeadline(bool ) = 0;
-        virtual void setShowCategory( const QString& = QString::null )= 0;
-        virtual void clear() = 0;
-        virtual QArray<int> completed() = 0;
-
+        /* connect to the show signal */
         void connectShow(QObject* obj,
                          const char* slot ) {
             QObject::connect( hack, SIGNAL(show(int) ),
                               obj, slot );
         }
+        /* connect to edit */
         void connectEdit( QObject* obj,
                           const char* slot ) {
             QObject::connect( hack, SIGNAL(edit(int) ),
@@ -136,6 +163,11 @@ namespace Todo {
         void connectUpdateBig( QObject* obj,
                                const char* slot ) {
             QObject::connect( hack, SIGNAL(update(int, const ToDoEvent& ) ),
+                              obj, slot );
+        }
+        void connectUpdateView( QObject* obj,
+                                const char* slot ) {
+            QObject::connect( hack, SIGNAL(update(QWidget*) ),
                               obj, slot );
         }
     protected:
@@ -153,6 +185,7 @@ namespace Todo {
         void show( int uid ) { hack->emitShow(uid); }
         void edit( int uid ) { hack->emitEdit(uid); }
         void update(int uid, const SmallTodo& to ) {
+
             hack->emitUpdate(uid, to );
         }
         void update(int uid, const ToDoEvent& ev) {

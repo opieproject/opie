@@ -40,6 +40,7 @@ struct SmallTodo::SmallTodoPrivate  : public QShared{
     bool complete:1;
     QDate date;
 
+
     void deleteSelf() { delete this; };
 };
 

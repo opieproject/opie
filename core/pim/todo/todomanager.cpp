@@ -34,6 +34,7 @@ using namespace Todo;
 TodoManager::TodoManager( QObject *obj )
     : QObject( obj ) {
     m_db = new Opie::ToDoDB();
+    m_db->load();
 }
 TodoManager::~TodoManager() {
     delete m_db;
