@@ -1,7 +1,7 @@
 /*
  * mailpluginwidget.cpp
  *
- * copyright   : (c) 2002,2003 by Maximilian Reiß
+ * copyright   : (c) 2002,2003,2004 by Maximilian Reiß
  * email       : harlekin@handhelds.org
  *
  */
@@ -29,7 +29,6 @@ MailPluginWidget::MailPluginWidget( QWidget *parent,  const char* name)
         delete m_mailLabel;
     }
     m_mailLabel = new OClickableLabel( this );
-    //m_mailLabel->setMaximumHeight( 15 );
     connect( m_mailLabel, SIGNAL( clicked() ), this, SLOT( startMail() ) );
 
     if ( m_layout )  {
@@ -38,10 +37,29 @@ MailPluginWidget::MailPluginWidget( QWidget *parent,  const char* name)
     m_layout = new QHBoxLayout( this );
     m_layout->setAutoAdd( true );
 
+
+#if defined(Q_WS_QWS)
+#if !defined(QT_NO_COP)
+    QCopChannel *qCopChannel = new QCopChannel( "QPE/Pim" , this );
+    connect ( qCopChannel, SIGNAL( received( const QCString &, const QByteArray &) ),
+              this, SLOT ( channelReceived( const QCString &, const QByteArray &) ) );
+#endif
+#endif
+
     readConfig();
     getInfo();
 }
 
+
+void MailPluginWidget::channelReceived( const QCString &msg, const QByteArray & data ) {
+    QDataStream stream( data, IO_ReadOnly );
+    if ( msg == "outgoingMails(int)" ) {
+       stream >> m_outgoing;
+    } else if ( msg == "newMails(int)" ) {
+       stream >> m_newMails;
+    }
+    getInfo();
+}
 MailPluginWidget::~MailPluginWidget() {
     delete m_mailLabel;
     delete m_layout;
@@ -51,6 +69,12 @@ MailPluginWidget::~MailPluginWidget() {
 void MailPluginWidget::readConfig() {
     Config cfg( "todaymailplugin" );
     cfg.setGroup( "config" );
+
+    Config cfg2( "mail" );
+    cfg2.setGroup( "Status" );
+
+    m_newMails = cfg2.readNumEntry( "newmails", 0 );
+    m_outgoing = cfg2.readNumEntry( "outgoing", 0 );
 }
 
 
@@ -60,15 +84,9 @@ void MailPluginWidget::refresh()  {
 
 void MailPluginWidget::getInfo() {
 
-    Config cfg( "opiemail" );
-    cfg.setGroup( "today" );
 
-    int NEW_MAILS = cfg.readNumEntry( "newmails", 0 );
-    int OUTGOING = cfg.readNumEntry( "outgoing", 0 );
 
-    //QString output = QObject::tr( "<b>%1</b> new mail(s), <b>%2</b> outgoing" ).arg( NEW_MAILS ).arg( OUTGOING );
-
-    m_mailLabel->setText(  QObject::tr( "<b>%1</b> new mail(s), <b>%2</b> outgoing" ).arg( NEW_MAILS ).arg( OUTGOING ) );
+    m_mailLabel->setText(  QObject::tr( "<b>%1</b> new mail(s), <b>%2</b> outgoing" ).arg( m_newMails ).arg( m_outgoing ) );
 }
 
 /**
@@ -76,5 +94,5 @@ void MailPluginWidget::getInfo() {
  */
 void MailPluginWidget::startMail() {
     QCopEnvelope e("QPE/System", "execute(QString)");
-    e << QString( "mail" );
+    e << QString( "opiemail" );
 }

@@ -1,7 +1,7 @@
 /*
  * mailpluginwidget.h
  *
- * copyright   : (c) 2002,2003 by Maximilian Reiﬂ
+ * copyright   : (c) 2002,2003,2004 by Maximilian Reiﬂ
  * email       : harlekin@handhelds.org
  *
  */
@@ -39,6 +39,12 @@ private:
     QHBoxLayout* m_layout;
     void readConfig();
     void getInfo();
+
+    int m_newMails;
+    int m_outgoing;
+
+private slots:
+    void channelReceived(const QCString &msg, const QByteArray & data);
 };
 
 #endif
