@@ -4,123 +4,123 @@
     <name>Calculator</name>
     <message>
         <source>%</source>
-        <translation type="unfinished">%</translation>
+        <translation>%</translation>
     </message>
     <message>
         <source>(</source>
-        <translation type="unfinished">(</translation>
+        <translation>(</translation>
     </message>
     <message>
         <source>)</source>
-        <translation type="unfinished">)</translation>
+        <translation>)</translation>
     </message>
     <message>
         <source>+</source>
-        <translation type="unfinished">+</translation>
+        <translation>+</translation>
     </message>
     <message>
         <source>-</source>
-        <translation type="unfinished">-</translation>
+        <translation>-</translation>
     </message>
     <message>
         <source>.</source>
-        <translation type="unfinished">.</translation>
+        <translation>.</translation>
     </message>
     <message>
         <source>/</source>
-        <translation type="unfinished">/</translation>
+        <translation>/</translation>
     </message>
     <message>
         <source>0</source>
-        <translation type="unfinished">0</translation>
+        <translation>0</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished">1</translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished">2</translation>
+        <translation>2</translation>
     </message>
     <message>
         <source>3</source>
-        <translation type="unfinished">3</translation>
+        <translation>3</translation>
     </message>
     <message>
         <source>4</source>
-        <translation type="unfinished">4</translation>
+        <translation>4</translation>
     </message>
     <message>
         <source>5</source>
-        <translation type="unfinished">5</translation>
+        <translation>5</translation>
     </message>
     <message>
         <source>6</source>
-        <translation type="unfinished">6</translation>
+        <translation>6</translation>
     </message>
     <message>
         <source>7</source>
-        <translation type="unfinished">7</translation>
+        <translation>7</translation>
     </message>
     <message>
         <source>8</source>
-        <translation type="unfinished">8</translation>
+        <translation>8</translation>
     </message>
     <message>
         <source>9</source>
-        <translation type="unfinished">9</translation>
+        <translation>9</translation>
     </message>
     <message>
         <source>=</source>
-        <translation type="unfinished">=</translation>
+        <translation>=</translation>
     </message>
     <message>
         <source>x</source>
-        <translation type="unfinished">x</translation>
+        <translation>x</translation>
     </message>
     <message>
         <source>CE</source>
-        <translation type="unfinished">CE</translation>
+        <translation>CE</translation>
     </message>
     <message>
         <source>M+</source>
-        <translation type="unfinished">M+</translation>
+        <translation>M+</translation>
     </message>
     <message>
         <source>MC</source>
-        <translation type="unfinished">MC</translation>
+        <translation>MC</translation>
     </message>
     <message>
         <source>MR</source>
-        <translation type="unfinished">MR</translation>
+        <translation>MR</translation>
     </message>
     <message>
         <source>ln</source>
-        <translation type="unfinished">ln</translation>
+        <translation>ln</translation>
     </message>
     <message>
         <source>+/-</source>
-        <translation type="unfinished">+/-</translation>
+        <translation>+/-</translation>
     </message>
     <message>
         <source>cos</source>
-        <translation type="unfinished">cos</translation>
+        <translation>cos</translation>
     </message>
     <message>
         <source>log</source>
-        <translation type="unfinished">log</translation>
+        <translation>log</translation>
     </message>
     <message>
         <source>sin</source>
-        <translation type="unfinished">sen</translation>
+        <translation>sen</translation>
     </message>
     <message>
         <source>tan</source>
-        <translation type="unfinished">tan</translation>
+        <translation>tan</translation>
     </message>
     <message>
         <source>Experimental Calculator</source>
-        <translation type="unfinished">Calculadora Experimental</translation>
+        <translation>Calculadora Experimental</translation>
     </message>
 </context>
 <context>
@@ -131,54 +131,54 @@
     </message>
     <message>
         <source>Standard</source>
-        <translation type="unfinished"></translation>
+        <translation>Padrão</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Standard</source>
-        <translation type="unfinished"></translation>
+        <translation>Padrão</translation>
     </message>
     <message>
         <source>Weight</source>
-        <translation type="unfinished"></translation>
+        <translation>Peso</translation>
     </message>
     <message>
         <source>Distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Distância</translation>
     </message>
     <message>
         <source>Area</source>
-        <translation type="unfinished"></translation>
+        <translation>Área</translation>
     </message>
     <message>
         <source>Temperatures</source>
-        <translation type="unfinished"></translation>
+        <translation>Temperatura</translation>
     </message>
     <message>
         <source>Volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Volume</translation>
     </message>
     <message>
         <source>acres</source>
-        <translation type="unfinished"></translation>
+        <translation>acres</translation>
     </message>
     <message>
         <source>&#xb0;C</source>
-        <translation type="unfinished"></translation>
+        <translation>°C</translation>
     </message>
     <message>
         <source>carats</source>
-        <translation type="unfinished"></translation>
+        <translation>quilates</translation>
     </message>
     <message>
         <source>cm</source>
-        <translation type="unfinished"></translation>
+        <translation>cm</translation>
     </message>
     <message>
         <source>cu cm</source>
-        <translation type="unfinished"></translation>
+        <translation>cm³</translation>
     </message>
     <message>
         <source>cu ft</source>
@@ -190,7 +190,7 @@
     </message>
     <message>
         <source>&#xb0;F</source>
-        <translation type="unfinished"></translation>
+        <translation>°F</translation>
     </message>
     <message>
         <source>fl oz (US)</source>
@@ -218,11 +218,11 @@
     </message>
     <message>
         <source>kg</source>
-        <translation type="unfinished"></translation>
+        <translation>kg</translation>
     </message>
     <message>
         <source>km</source>
-        <translation type="unfinished"></translation>
+        <translation>km</translation>
     </message>
     <message>
         <source>l</source>
@@ -238,11 +238,11 @@
     </message>
     <message>
         <source>m</source>
-        <translation type="unfinished"></translation>
+        <translation>m</translation>
     </message>
     <message>
         <source>mg</source>
-        <translation type="unfinished"></translation>
+        <translation>mg</translation>
     </message>
     <message>
         <source>mi</source>
@@ -250,11 +250,11 @@
     </message>
     <message>
         <source>ml</source>
-        <translation type="unfinished"></translation>
+        <translation>ml</translation>
     </message>
     <message>
         <source>mm</source>
-        <translation type="unfinished"></translation>
+        <translation>mm</translation>
     </message>
     <message>
         <source>naut. mi</source>
@@ -278,7 +278,7 @@
     </message>
     <message>
         <source>sq cm</source>
-        <translation type="unfinished"></translation>
+        <translation>cm²</translation>
     </message>
     <message>
         <source>sq ft</source>
@@ -290,11 +290,11 @@
     </message>
     <message>
         <source>sq km</source>
-        <translation type="unfinished"></translation>
+        <translation>km²</translation>
     </message>
     <message>
         <source>sq m</source>
-        <translation type="unfinished"></translation>
+        <translation>m²</translation>
     </message>
     <message>
         <source>sq mi</source>
@@ -302,7 +302,7 @@
     </message>
     <message>
         <source>sq mm</source>
-        <translation type="unfinished"></translation>
+        <translation>mm²</translation>
     </message>
     <message>
         <source>sq yd</source>

@@ -12,8 +12,8 @@ Name[it]=Telecomando
 Comment[it]=Telecomando
 Name[pt]=Controlo Remoto
 Comment[pt]=Aplicação de controlo remoto
-Name[pt_BR]=Controlo Remoto
-Comment[pt_BR]=Aplicação de controlo remoto
+Name[pt_BR]=Controle Remoto
+Comment[pt_BR]=Aplicação de controle remoto
 Name[zh_TW]=遙控器
 Name[sl]=Daljinec
 Comment[sl]=Daljinec
@@ -21,3 +21,4 @@ Name[nl]=Afstandsbediening
 Comment[nl]=Een afstandsbediening voor alles ;)
 Name[de]=Fernbedienung
 Comment[de]=Infrarot Port als Fernbenienung benutzen
+

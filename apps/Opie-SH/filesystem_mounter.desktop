@@ -12,7 +12,7 @@ Name[it]=Mounter
 Comment[it]=Monta/smonta i filesystem
 Name[pt]=Montar Disco
 Comment[pt]=Interface para montar discos
-Name[pt_BR]=Monta Disco
+Name[pt_BR]=Montador
 Comment[pt_BR]=Interface para montar discos
 Name[sl]=Priklopi datotečni sistem
 Comment[sl]=Priklopi/odklopi datotečni sistem
@@ -20,3 +20,4 @@ Name[nl]=Bestandssysteem Mounter
 Comment[nl]=Koppelen van bestandssystemen van disks
 Name[de]=Mount
 Comment[de]=Oberflaeche, um Dateisystem zu mounten und demounten
+

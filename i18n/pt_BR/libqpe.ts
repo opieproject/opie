@@ -49,47 +49,47 @@
     <name>CategoryEditBase</name>
     <message>
         <source>Add</source>
-        <translation type="unfinished">Adicionar</translation>
+        <translation>Adicionar</translation>
     </message>
     <message>
         <source>Categories Go Here</source>
-        <translation type="unfinished">Categorias Vão Aqui</translation>
+        <translation>Categorias Vão Aqui</translation>
     </message>
     <message>
         <source>Category Edit</source>
-        <translation type="unfinished">Editar Categoria</translation>
+        <translation>Editar Categoria</translation>
     </message>
     <message>
         <source>Global</source>
-        <translation type="unfinished">Global</translation>
+        <translation>Global</translation>
     </message>
     <message>
         <source>Categories</source>
-        <translation type="unfinished">Categorias</translation>
+        <translation>Categorias</translation>
     </message>
     <message>
         <source>Application</source>
-        <translation type="unfinished">Aplicação</translation>
+        <translation>Aplicação</translation>
     </message>
     <message>
         <source>Check the categories this document belongs to.</source>
-        <translation type="unfinished"></translation>
+        <translation>Marque as categorias a que este documento pertence.</translation>
     </message>
     <message>
         <source>Enter a new category here.  Press &lt;b&gt;Add&lt;/b&gt; to add it to the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Entre a nova categoria aqui. Pressione &lt;b&gt;Adicionar&lt;&gt; para adicioná-la a lista.</translation>
     </message>
     <message>
         <source>Enter a new category to the left and press to add it to the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Entre uma nova categoria à esquerda e pressione para adicioná-la a lista.</translation>
     </message>
     <message>
         <source>Press to delete the highlighted category.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pressione para remover a categoria destacada.</translation>
     </message>
     <message>
         <source>Check to make this property available to all applications.</source>
-        <translation type="unfinished"></translation>
+        <translation>Marque para tornar esta propriedade disponível para todas as aplicações.</translation>
     </message>
 </context>
 <context>
@@ -128,19 +128,19 @@ editando as categorias.</translation>
     <name>DateBookMonthHeader</name>
     <message>
         <source>Show January in the selected year</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra Janeiro do ano selecionado</translation>
     </message>
     <message>
         <source>Show the previous month</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra o mês anterior</translation>
     </message>
     <message>
         <source>Show the next month</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra o próximo mês</translation>
     </message>
     <message>
         <source>Show December in the selected year</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra Dezembro do ano selecionado</translation>
     </message>
 </context>
 <context>
@@ -151,27 +151,27 @@ editando as categorias.</translation>
     </message>
     <message>
         <source>Show documents of this type</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar documentos deste tipo</translation>
     </message>
     <message>
         <source>Document View</source>
-        <translation type="unfinished">Visualizador de Documentos</translation>
+        <translation>Visualizador de Documentos</translation>
     </message>
     <message>
         <source>Show documents in this category</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar documentos nesta categoria</translation>
     </message>
     <message>
         <source>Click to select a document from the list</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique para selecionar um documento da lista</translation>
     </message>
     <message>
         <source>, or select &lt;b&gt;New Document&lt;/b&gt; to create a new document.</source>
-        <translation type="unfinished"></translation>
+        <translation>, ou selecione &lt;b&gt;Novo Documento&lt;/b&gt; para cliar um novo documento.</translation>
     </message>
     <message>
         <source>&lt;br&gt;&lt;br&gt;Click and hold for document properties.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;&lt;br&gt;Clique e segure para mostrar as propriedades do documento.</translation>
     </message>
 </context>
 <context>
@@ -185,7 +185,7 @@ editando as categorias.</translation>
     <name>FindDialog</name>
     <message>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Localizar</translation>
     </message>
 </context>
 <context>
@@ -203,31 +203,31 @@ editando as categorias.</translation>
     <name>FindWidgetBase</name>
     <message>
         <source>Find</source>
-        <translation type="unfinished">Localizar</translation>
+        <translation>Localizar</translation>
     </message>
     <message>
         <source>Start Search at:</source>
-        <translation type="unfinished">Começar procura em:</translation>
+        <translation>Começar procura em:</translation>
     </message>
     <message>
         <source>Search Backwards</source>
-        <translation type="unfinished">Procurar p/ trás</translation>
+        <translation>Procurar p/ trás</translation>
     </message>
     <message>
         <source>Find what:</source>
-        <translation type="unfinished">Localizar:</translation>
+        <translation>Localizar:</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished">Categoria:</translation>
+        <translation>Categoria:</translation>
     </message>
     <message>
         <source>Case Sensitive</source>
-        <translation type="unfinished">Sensível a caixa</translation>
+        <translation>Sensível a caixa</translation>
     </message>
     <message>
         <source>Dec 02 01</source>
-        <translation type="unfinished"></translation>
+        <translation>Dez 02 01</translation>
     </message>
 </context>
 <context>
@@ -266,78 +266,78 @@ editando as categorias.</translation>
     </message>
     <message>
         <source>Hard Disk</source>
-        <translation type="unfinished">Disco Rígido</translation>
+        <translation>Disco Rígido</translation>
     </message>
     <message>
         <source>Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Propriedades</translation>
     </message>
 </context>
 <context>
     <name>LnkPropertiesBase</name>
     <message>
         <source>Beam</source>
-        <translation type="unfinished">Enviar</translation>
+        <translation>Enviar</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished">Copia</translation>
+        <translation>Copia</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nome:</translation>
+        <translation>Nome:</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished">Tipo:</translation>
+        <translation>Tipo:</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Apagar</translation>
+        <translation>Apagar</translation>
     </message>
     <message>
         <source>Fast load (consumes memory)</source>
-        <translation type="unfinished">Carregamento rápido (consome memória)</translation>
+        <translation>Carregamento rápido (consome memória)</translation>
     </message>
     <message>
         <source>Comment:</source>
-        <translation type="unfinished">Comentário:</translation>
+        <translation>Comentário:</translation>
     </message>
     <message>
         <source>Location:</source>
-        <translation type="unfinished">Localização</translation>
+        <translation>Localização:</translation>
     </message>
     <message>
         <source>Details</source>
-        <translation type="unfinished">Detalhes</translation>
+        <translation>Detalhes</translation>
     </message>
     <message>
         <source>The media the document resides on.</source>
-        <translation type="unfinished"></translation>
+        <translation>O meio em que o documento reside.</translation>
     </message>
     <message>
         <source>The name of this document.</source>
-        <translation type="unfinished"></translation>
+        <translation>O nome deste documento.</translation>
     </message>
     <message>
         <source>Preload this application so that it is available instantly.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pré-carregue esta aplicação para que ela esteja disponível imediatamente.</translation>
     </message>
     <message>
         <source>Delete this document.</source>
-        <translation type="unfinished"></translation>
+        <translation>Apagar este documento.</translation>
     </message>
     <message>
         <source>Make a copy of this document.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fazer uma cópia deste documento.</translation>
     </message>
     <message>
         <source>Beam this document to another device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Envia este documento para outro dispositivo.</translation>
     </message>
     <message>
         <source>Use custom rotation</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar rotação personalizada</translation>
     </message>
 </context>
 <context>
@@ -351,62 +351,62 @@ editando as categorias.</translation>
     <name>PasswordBase</name>
     <message>
         <source>OK</source>
-        <translation type="unfinished">OK</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Enter passcode</source>
-        <translation type="unfinished">Entre a senha</translation>
+        <translation>Entre a senha</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation>2</translation>
     </message>
     <message>
         <source>3</source>
-        <translation type="unfinished"></translation>
+        <translation>3</translation>
     </message>
     <message>
         <source>4</source>
-        <translation type="unfinished"></translation>
+        <translation>4</translation>
     </message>
     <message>
         <source>5</source>
-        <translation type="unfinished"></translation>
+        <translation>5</translation>
     </message>
     <message>
         <source>6</source>
-        <translation type="unfinished"></translation>
+        <translation>6</translation>
     </message>
     <message>
         <source>7</source>
-        <translation type="unfinished"></translation>
+        <translation>7</translation>
     </message>
     <message>
         <source>8</source>
-        <translation type="unfinished"></translation>
+        <translation>8</translation>
     </message>
     <message>
         <source>9</source>
-        <translation type="unfinished"></translation>
+        <translation>9</translation>
     </message>
     <message>
         <source>0</source>
-        <translation type="unfinished"></translation>
+        <translation>0</translation>
     </message>
 </context>
 <context>
     <name>QMessageBox</name>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Sim</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Não</translation>
     </message>
 </context>
 <context>
@@ -751,139 +751,140 @@ tente novamente.</translation>
     </message>
     <message>
         <source>New Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Novo Documento</translation>
     </message>
     <message>
         <source>Mon</source>
-        <translation type="unfinished">Seg</translation>
+        <translation>Seg</translation>
     </message>
     <message>
         <source>Tue</source>
-        <translation type="unfinished">Ter</translation>
+        <translation>Ter</translation>
     </message>
     <message>
         <source>Wed</source>
-        <translation type="unfinished">Qua</translation>
+        <translation>Qua</translation>
     </message>
     <message>
         <source>Thu</source>
-        <translation type="unfinished">Qui</translation>
+        <translation>Qui</translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation type="unfinished">Sex</translation>
+        <translation>Sex</translation>
     </message>
     <message>
         <source>Sat</source>
-        <translation type="unfinished">Sab</translation>
+        <translation>Sab</translation>
     </message>
     <message>
         <source>Sun</source>
-        <translation type="unfinished">Dom</translation>
+        <translation>Dom</translation>
     </message>
     <message>
         <source>Click to close this window, discarding changes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique para fechar esta janela descartando as mudanças.</translation>
     </message>
     <message>
         <source>Click to close this window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique para fechar esta janela.</translation>
     </message>
     <message>
         <source>Click to close this window and apply changes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique para fechar esta janela e salvar as mudanças.</translation>
     </message>
     <message>
         <source>Click to make this window moveable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique para tornar esta janela móvel.</translation>
     </message>
     <message>
         <source>Click to make this window use all available screen area.</source>
-        <translation type="unfinished"></translation>
+        <translation>Marque para que esta janela ocupe toda a área da tela.</translation>
     </message>
     <message>
         <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;Qt&gt;Ajuda completa não está disponível para esta aplicação, porém existe ajuda sensível ao contexto.&lt;p&gt;Para usar a ajuda sensível ao contexto:&lt;p&gt;&lt;ol&gt;&lt;li&gt;clique e segure no botão de ajuda.&lt;li&gt;quando a barra de título mostrar &lt;b&gt;O que é isto...&lt;/b&gt;, clique em qualquer controle.&lt;/ol&gt;&lt;/Qt&gt;</translation>
     </message>
     <message>
         <source>What&apos;s this...</source>
-        <translation type="unfinished"></translation>
+        <translation>O que é isso...</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Are you sure you want to delete
  %1?&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Tem certeza que você deseja apagar
+%1?&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Jan</source>
-        <translation type="unfinished"></translation>
+        <translation>Jan</translation>
     </message>
     <message>
         <source>Feb</source>
-        <translation type="unfinished"></translation>
+        <translation>Fev</translation>
     </message>
     <message>
         <source>Mar</source>
-        <translation type="unfinished"></translation>
+        <translation>Mar</translation>
     </message>
     <message>
         <source>Apr</source>
-        <translation type="unfinished"></translation>
+        <translation>Abr</translation>
     </message>
     <message>
         <source>May</source>
-        <translation type="unfinished"></translation>
+        <translation>Mai</translation>
     </message>
     <message>
         <source>Jun</source>
-        <translation type="unfinished"></translation>
+        <translation>Jun</translation>
     </message>
     <message>
         <source>Jul</source>
-        <translation type="unfinished"></translation>
+        <translation>Jul</translation>
     </message>
     <message>
         <source>Aug</source>
-        <translation type="unfinished"></translation>
+        <translation>Ago</translation>
     </message>
     <message>
         <source>Sep</source>
-        <translation type="unfinished"></translation>
+        <translation>Sep</translation>
     </message>
     <message>
         <source>Oct</source>
-        <translation type="unfinished"></translation>
+        <translation>Out</translation>
     </message>
     <message>
         <source>Nov</source>
-        <translation type="unfinished"></translation>
+        <translation>Nov</translation>
     </message>
     <message>
         <source>Dec</source>
-        <translation type="unfinished"></translation>
+        <translation>Dez</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Erro</translation>
+        <translation>Erro</translation>
     </message>
     <message>
         <source>Could not find the application </source>
-        <translation type="unfinished"></translation>
+        <translation>Impossível localizar a aplicação</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Could not start the application </source>
-        <translation type="unfinished"></translation>
+        <translation>Impossível iniciar a aplicação</translation>
     </message>
 </context>
 <context>
     <name>QPEApplication</name>
     <message>
         <source>%1 document</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 documento</translation>
     </message>
 </context>
 <context>
@@ -910,30 +911,31 @@ tente novamente.</translation>
     </message>
     <message>
         <source>Internal Memory</source>
-        <translation type="unfinished"></translation>
+        <translation>Memória Interna</translation>
     </message>
     <message>
         <source>MMC Card</source>
-        <translation type="unfinished"></translation>
+        <translation>Cartão MMC</translation>
     </message>
 </context>
 <context>
     <name>TZCombo</name>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Nenhum</translation>
     </message>
 </context>
 <context>
     <name>TimeZoneSelector</name>
     <message>
         <source>citytime executable not found</source>
-        <translation type="unfinished"></translation>
+        <translation>executável citytime não encontrado</translation>
     </message>
     <message>
         <source>In order to choose the time zones,
 please install citytime.</source>
-        <translation type="unfinished"></translation>
+        <translation>paraselecionar o fuso-horário,
+instale o aplicativo citytime.</translation>
     </message>
 </context>
 <context>
@@ -953,20 +955,20 @@ Por Favor libere algum espaço e tente novamente</translation>
     <name>TypeCombo</name>
     <message>
         <source>%1 files</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 arquivos</translation>
     </message>
     <message>
         <source>%1 %2</source>
         <comment>minor mimetype / major mimetype</comment>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2</translation>
     </message>
     <message>
         <source>All %1 files</source>
-        <translation type="unfinished"></translation>
+        <translation>Todos os %1 arquivos</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished"></translation>
+        <translation>Todos os arquivos</translation>
     </message>
 </context>
 </TS>

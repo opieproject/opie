@@ -14,9 +14,10 @@ Comment[it]=Client per Virtual Network Computing
 Name[pt]=Ecrã Remoto
 Comment[pt]=Ecrâ Remoto via VNC
 Name[pt_BR]=Cliente VNC
-Comment[pt_BR]=Ecrâ Remoto via VNC
+Comment[pt_BR]=Terminal Gráfico Remoto via VNC
 Name[zh_TW]=VNC 客戶端
 Name[sl]=VNC pregledovalnik
 Comment[sl]=Virtual Network Computing (VNC) pregledovalnik
 Name[nl]=VNC Client
 Comment[nl]=Virtual Network Computing (VNC) client
+

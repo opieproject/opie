@@ -16,11 +16,12 @@ Name[it]=Gestione Paccchetti
 Comment[it]=Gestione pacchetti
 Name[pt]=Aplicações
 Comment[pt]=Gestor das aplicações instaladas
-Name[pt_BR]=Gestor Pacotes
-Comment[pt_BR]=Gestor de pacotes de software
+Name[pt_BR]=Gerenciador Pacotes
+Comment[pt_BR]=Gerenciador de pacotes de software
 Name[sl]=Paketi
 Comment[sl]=Paketni upravljalnik
 Name[nl]=Pakketmanager
 Comment[nl]=Installatie van programma's
 Name[de]=Paket verwaltung
 Comment[de]=Programmpakete herunterladen, installieren, und loeschen.
+

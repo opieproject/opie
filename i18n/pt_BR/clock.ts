@@ -24,75 +24,75 @@
     </message>
     <message>
         <source>Snooze</source>
-        <translation type="unfinished"></translation>
+        <translation>Dormir</translation>
     </message>
     <message>
         <source>Set Alarm</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajustar Alarme</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation type="unfinished"></translation>
+        <translation>PM</translation>
     </message>
     <message>
         <source>Alarm Is On</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarme Ligado</translation>
     </message>
     <message>
         <source>Alarm Is Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarme Desligado</translation>
     </message>
     <message>
         <source>Set date and time.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajustar data e hora.</translation>
     </message>
     <message>
         <source>Clock: Alarm was missed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Relógio: Alarme perdido.</translation>
     </message>
     <message>
         <source>Alarm set: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarme ajustado: %1</translation>
     </message>
 </context>
 <context>
     <name>Set_Alarm</name>
     <message>
         <source>Set Alarm</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajustar Alarme</translation>
     </message>
     <message>
         <source>Hour</source>
-        <translation type="unfinished"></translation>
+        <translation>Hora</translation>
     </message>
     <message>
         <source>Minute</source>
-        <translation type="unfinished"></translation>
+        <translation>Minuto</translation>
     </message>
     <message>
         <source>AM</source>
-        <translation type="unfinished"></translation>
+        <translation>AM</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation type="unfinished"></translation>
+        <translation>PM</translation>
     </message>
     <message>
         <source>Snooze Delay
 (minutes)</source>
-        <translation type="unfinished"></translation>
+        <translation>Atraso para Dormir (minutos)</translation>
     </message>
     <message>
         <source>mp3 alarm</source>
-        <translation type="unfinished"></translation>
+        <translation>alarme mp3</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Tudo</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio</translation>
     </message>
 </context>
 </TS>
