@@ -17,7 +17,7 @@
 ** not clear to you.
 **
 **********************************************************************/
-#include "resource.h"
+#include <qpe/resource.h>
 #include "viewatt.h"
 #include <qwhatsthis.h>
 #include <qpe/applnk.h>
@@ -33,7 +33,7 @@ ViewAtt::ViewAtt(QWidget *parent, const char *name, WFlags f)
 	installButton = new QAction( tr( "Install" ), Resource::loadPixmap( "exec" ), QString::null, CTRL + Key_C, this, 0 );
 	connect(installButton, SIGNAL(activated()), this, SLOT(install()) );
 	installButton->setWhatsThis(tr("Click here to install the attachment to your Documents"));
-	
+
 	listView = new QListView(this, "AttView");
 	listView->addColumn( tr("Attatchment") );
 	listView->addColumn( tr("Type") );
@@ -46,9 +46,9 @@ void ViewAtt::update(Email *mailIn, bool inbox)
 {
 	QListViewItem *item;
 	Enclosure *ePtr;
-	
 
-	
+
+
 	listView->clear();
 	if (inbox) {
 		bar->clear();
@@ -57,19 +57,19 @@ void ViewAtt::update(Email *mailIn, bool inbox)
 	} else {
 		bar->hide();
 	}
-	
+
 	mail = mailIn;
 	for ( ePtr=mail->files.first(); ePtr != 0; ePtr=mail->files.next() ) {
-		
+
 		QString isInstalled = tr("No");
 		if (ePtr->installed)
 			isInstalled = tr("Yes");
 		item = new QListViewItem(listView, ePtr->originalName, ePtr->contentType, isInstalled);
-		
+
 		const QString& mtypeDef=(const QString&) ePtr->contentType+"/"+ePtr->contentAttribute;
-		
+
 		MimeType mt(mtypeDef);
-		
+
 		item->setPixmap(0, mt.pixmap());
 
 		/*
@@ -96,7 +96,7 @@ void ViewAtt::install()
 	QListViewItem *item;
 	QString filename;
 	DocLnk d;
-	
+
 	item = listView->selectedItem();
 	if (item != NULL) {
 		filename  = item->text(0);
@@ -105,12 +105,12 @@ void ViewAtt::install()
 			if (ePtr->originalName == filename)
 				selPtr = ePtr;
 		}
-		
+
 		if (selPtr == NULL) {
 			qWarning("Internal error, file is not installed to documents");
 			return;
 		}
-		
+
 		d.setName(selPtr->originalName);
 		d.setFile(selPtr->path + selPtr->name);
 		d.setType(selPtr->contentType + "/" + selPtr->contentAttribute);

@@ -104,7 +104,7 @@ void SmtpClient::incomingData()
     case From:  {
           if (response[0] == '2') {
              qDebug(mailPtr->from);
-            *stream << "MAIL FROM: <" << mailPtr->from << ">\r\n";
+            *stream << "MAIL FROM: " << mailPtr->from << "\r\n";
             status = Recv;
           } else errorHandlingWithMsg(ErrUnknownResponse, response );
           break;
@@ -115,7 +115,7 @@ void SmtpClient::incomingData()
             if (it == NULL) {
               errorHandlingWithMsg(ErrUnknownResponse,response);
             }
-            *stream << "RCPT TO: <" << *it << ">\r\n";
+            *stream << "RCPT TO: " << *it << "\r\n";
             status = MRcv;
           } else errorHandlingWithMsg(ErrUnknownResponse,response);
           break;
@@ -124,7 +124,7 @@ void SmtpClient::incomingData()
           if (response[0] == '2') {
             it++;
             if ( it != mailPtr->to.end() ) {
-              *stream << "RCPT TO: <" << *it << ">\r\n";
+              *stream << "RCPT TO: " << *it << "\r\n";
               break;
             } else  {
               status = Data;

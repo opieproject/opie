@@ -29,18 +29,19 @@ extern "C" {
 
 PopClient::PopClient()
 {
-  
+
   socket = new QSocket(this, "popClient");
   connect(socket, SIGNAL(error(int)), this, SLOT(errorHandling(int)));
   connect(socket, SIGNAL(connected()), this, SLOT(connectionEstablished()));
   connect(socket, SIGNAL(readyRead()), this, SLOT(incomingData()));
-  
+
   stream = new QTextStream(socket);
-  
+
   receiving = FALSE;
   synchronize = FALSE;
   lastSync = 0;
   headerLimit = 0;
+  mailList = 0;
   preview = FALSE;
 }
 
@@ -56,13 +57,13 @@ void PopClient::newConnection(const QString &target, int port)
     qWarning("socket in use, connection refused");
     return;
   }
-  
+
   status = Init;
-  
+
   socket->connectToHost(target, port);
   receiving = TRUE;
   //selected = FALSE;
-    
+
   emit updateStatus(tr("DNS lookup"));
 }
 
@@ -70,7 +71,7 @@ void PopClient::setAccount(const QString &popUser, const QString &popPasswd)
 {
   popUserName = popUser;
   popPassword = popPasswd;
-}             
+}
 
 void PopClient::setSynchronize(int lastCount)
 {
@@ -123,9 +124,9 @@ void PopClient::incomingData()
 //  if ( !socket->canReadLine() )
 //    return;
 
-  
+
   response = socket->readLine();
-  
+
   switch(status) {
     //logging in
     case Init:  {
@@ -136,14 +137,14 @@ void PopClient::incomingData()
        {
           timeStamp = response.mid( start , end - start + 1);
           md5Source = timeStamp + popPassword;
-          
+
           md5_buffer( (char const *)md5Source, md5Source.length(),&md5Digest[0]);
 
            for(int j =0;j < MD5_DIGEST_LENGTH ;j++)
            {
               printf("%x", md5Digest[j]);
            }
-           printf("\n");          
+           printf("\n");
 //          qDebug(md5Digest);
           *stream << "APOP " <<  popUserName << " " << md5Digest << "\r\n";
           //    qDebug("%s", stream);
@@ -156,21 +157,21 @@ void PopClient::incomingData()
           *stream << "USER " << popUserName << "\r\n";
           status = Pass;
        }
-          
+
         break;
         }
-    
+
     case Pass:  {
           *stream << "PASS " << popPassword << "\r\n";
     status = Stat;
-    
+
           break;
         }
     //ask for number of messages
     case Stat:  {
           if (response[0] == '+') {
             *stream << "STAT" << "\r\n";
-            status = Mcnt;      
+            status = Mcnt;
           } else errorHandlingWithMsg(ErrLoginFailed, response);
             break;
           }
@@ -183,20 +184,20 @@ void PopClient::incomingData()
             newMessages = temp.toInt();
             messageCount = 1;
             status = List;
-              
+
             if (synchronize) {
               //messages deleted from server, reload all
                 if (newMessages < lastSync)
                   lastSync = 0;
                 messageCount = 1;
               }
-              
-              if (selected) {   
+
+            if (selected && mailList ) {
                 int *ptr = mailList->first();
                 if (ptr != 0) {
                   newMessages++;  //to ensure no early jumpout
                   messageCount = *ptr;
-                } else newMessages = 0; 
+                } else newMessages = 0;
         }
 
             } else errorHandlingWithMsg(ErrUnknownResponse, response);
@@ -224,7 +225,7 @@ void PopClient::incomingData()
             emit updateStatus(tr("No new Messages"));
             status = Quit;
           }
-        } 
+        }
     //get size of message, eg "500 characters in message.." -> int 500
     case Size:  {
           if (status != Quit) { //because of idiotic switch
@@ -234,18 +235,18 @@ void PopClient::incomingData()
               temp = temp.right(temp.length() - ((uint) x + 1) );
               mailSize = temp.toInt();
               emit currentMailSize(mailSize);
-              
+
               status = Retr;
             } else {
               //qWarning(response);
               errorHandlingWithMsg(ErrUnknownResponse, response);
             }
           }
-        } 
+        }
     //Read message number x, count upwards to messageCount
     case Retr:  {
           if (status != Quit) {
-            if ((selected)||(mailSize <= headerLimit)) 
+            if ((selected)||(mailSize <= headerLimit))
       {
               *stream << "RETR " << messageCount << "\r\n";
             } else {        //only header
@@ -254,7 +255,7 @@ void PopClient::incomingData()
             messageCount++;
             status = Ignore;
             break;
-          }         } 
+          }         }
     case Ignore:  {
           if (status != Quit) { //because of idiotic switch
             if (response[0] == '+') {
@@ -286,7 +287,7 @@ void PopClient::incomingData()
               } else {  //incomplete mail downloaded
     emit newMessage(message, messageCount-1, mailSize, FALSE);
               }
-        
+
               if ((messageCount > newMessages)||(selected)) //last message ?
         {
                 status = Quit;
@@ -295,14 +296,14 @@ void PopClient::incomingData()
                     status = Quit;
                   }
         }
-              else 
+              else
         {
                   *stream << "LIST " << messageCount << "\r\n";
                   status = Size;
                   temp2.setNum(newMessages - lastSync);
                   temp.setNum(messageCount - lastSync);
                   emit updateStatus(tr("Retrieving ") + temp + "/" + temp2);
-                  
+
                   break;
               }
               }
@@ -320,7 +321,7 @@ void PopClient::incomingData()
           } else {
             emit updateStatus(tr("No new messages"));
           }
-          
+
           socket->close();
           receiving = FALSE;
           emit mailTransfered(newM);

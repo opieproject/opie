@@ -1,4 +1,4 @@
   config MAILIT
-    boolean "opie-mailit (a simple POP3 email client)"
+    boolean "mailit"
     default "n"
     depends ( LIBQPE || LIBQPE-X11 ) 
