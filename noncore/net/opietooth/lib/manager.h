@@ -110,16 +110,21 @@ Q_OBJECT
     void removedService( const QString& service, bool removed );
     void foundServices( const QString& device, Services::ValueList );
     void foundDevices( const QString& device, RemoteDevices::ValueList );
-      void foundNothing( const QString& device );
+
 private slots:
     void slotProcessExited(OProcess* );
     void slotSDPExited(OProcess*);
     void slotSDPOut(OProcess*, char*, int);
+    void slotHCIExited(OProcess* );
+    void slotHCIOut(OProcess*, char*, int );
   private:
+      Services::ValueList parseSDPOutput( const QString& );
+      RemoteDevices::ValueList parseHCIOutput( const QString& );
       OProcess *m_hcitool;
       OProcess *m_sdp; // not only one
       QString m_device;
       QMap<QString, QString> m_out;
+      QMap<QString, QString> m_devices;
   };
 };
 

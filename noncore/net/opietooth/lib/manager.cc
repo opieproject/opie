@@ -51,7 +51,18 @@ void Manager::isConnected( Device* dev ){
 
 }
 void Manager::searchDevices( const QString& device ){
-
+    OProcess* hcitool = new OProcess();
+    hcitool->setName( device.latin1() );
+    *hcitool << "hcitool" << "scan";
+    connect( hcitool, SIGNAL(processExited(OProcess*) ) ,
+             this, SLOT(slotHCIExited(OProcess* ) ) );
+    connect( hcitool, SIGNAL(receivedStdout(OProcess*, char*, int ) ),
+             this, SLOT(slotHCIOut(OProcess*, char*, int ) ) );
+    if (!hcitool->start() ) {
+        RemoteDevices::ValueList list;
+        emit foundDevices( device, list );
+        delete hcitool;
+    }
 }
 
 void Manager::searchDevices(Device* d ){
@@ -130,5 +141,56 @@ void Manager::slotSDPOut(OProcess* proc, char* ch, int len)
 }
 void Manager::slotSDPExited( OProcess* proc)
 {
+    Services::ValueList  list;
+    if (proc->normalExit()  ) {
+        QMap<QString, QString>::Iterator it = m_out.find( proc->name() );
+        if ( it != m_out.end() ) {
+            list = parseSDPOutput( it.data() );
+            m_out.remove( it );
+        }
+    }
+    emit foundServices( proc->name(), list );
     delete proc;
+}
+Services::ValueList Manager::parseSDPOutput( const QString& out ) {
+    Services::ValueList list;
+    return list;
+}
+
+void Manager::slotHCIExited(OProcess* proc ) {
+    RemoteDevices::ValueList list;
+    if (proc->normalExit() ) {
+        QMap<QString, QString>::Iterator it = m_devices.find(proc->name() );
+        if (it != m_devices.end() ) {
+            list = parseHCIOutput( it.data() );
+            m_devices.remove( it );
+        }
+    }
+    emit foundDevices( proc->name(), list );
+    delete proc;
+}
+void Manager::slotHCIOut(OProcess* proc,  char* ch,  int len) {
+    QCString str( ch, len+1 );
+    QMap<QString, QString>::Iterator it;
+    it = m_devices.find( proc->name() );
+    if (it != m_devices.end() ) {
+        QString string = it.data();
+        string.append( str );
+        m_devices.replace( proc->name(),  string );
+    }
+}
+RemoteDevices::ValueList Manager::parseHCIOutput(const QString& output ) {
+    RemoteDevices::ValueList list;
+    QStringList strList = QStringList::split('\n',  output );
+    QStringList::Iterator it;
+    QString str;
+    for ( it = strList.begin(); it != strList.end(); ++it ) {
+        str = (*it).stripWhiteSpace();
+        qWarning("OpieTooth %s", str.latin1() );
+        QStringList split = QStringList::split("       ", str );
+        qWarning("Left:%s Right:%s",  split[0].latin1() , split[1].latin1() );
+        RemoteDevices rem( split[0].latin1() , split[1].latin1() );
+        list.append( rem );
+    }
+    return list;
 }
