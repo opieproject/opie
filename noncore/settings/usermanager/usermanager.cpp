@@ -27,7 +27,7 @@
  *
  */
 UserConfig::UserConfig(QWidget* parent, const char* name, WFlags fl) : QMainWindow(parent, name, fl) {
-	setCaption(tr("OPIE User Manager"));
+	setCaption(tr("Opie User Manager"));
 	
 	// Create an instance of the global object 'accounts'. This holds all user/group info, and functions to modify them.
 	accounts=new Passwd();
