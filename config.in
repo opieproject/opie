@@ -157,6 +157,7 @@ menu "Theming"
   source noncore/styles/config.in
 endmenu
 menu "Tools"
+  source core/tools/config.in
   source noncore/tools/config.in
   source development/config.in
 endmenu
