@@ -6,11 +6,17 @@
 #include "procctl.h"
 
 ProcContainer *ProcCtl::m_last = 0;
+ProcCtl* ProcCtl::m_self = 0;
 
 ProcCtl::ProcCtl() {
     signal( SIGCHLD, signal_handler );
 }
 ProcCtl::~ProcCtl() {
+}
+ProcCtl* ProcCtl::self() {
+    if (!m_self ) {
+        m_self = new ProcCtl;
+    }
 }
 void ProcCtl::add(pid_t pi,  int fd ) {
     ProcContainer * con = new ProcContainer;
