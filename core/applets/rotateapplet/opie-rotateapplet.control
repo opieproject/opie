@@ -1,0 +1,9 @@
+Files: plugins/applets/librotateapplet.so*
+Priority: optional
+Section: opie/taskbar
+Maintainer: Maximilian Reiﬂ <max.reiss@gmx.de>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base, libopie1
+Description: On-the-fly display rotation applet
+ Applet that allows quick on-the-fly rotation of the display
