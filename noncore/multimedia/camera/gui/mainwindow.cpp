@@ -546,7 +546,7 @@ void CameraMainWindow::stopVideoCapture()
     _capturing = false;
     updateCaption();
     ::close( _capturefd );
-    _framerate = 1000.0 / (_time.elapsed()/_videopics);
+    _framerate = static_cast<int>( 1000.0 / (_time.elapsed()/_videopics) );
 
     QString name;
     if ( outputTo == "Documents Folder" )

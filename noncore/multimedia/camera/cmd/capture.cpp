@@ -187,6 +187,9 @@ int main( int argc, char** argv )
 
     c->checkSettings();
     c->capture();
+
+    delete c;
+    delete a;
     return 0;
 }
 
