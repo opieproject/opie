@@ -39,6 +39,8 @@ using namespace Opie::Core;
 #include <qlayout.h>
 #include <qmessagebox.h>
 #include <qmenubar.h>
+#include <qpe/qpemenubar.h>
+
 #include <qlineedit.h>
 #include <qlistbox.h>
 #include <qvbox.h>
@@ -73,12 +75,13 @@ OpieFtp::OpieFtp( QWidget* parent, const char* name, WFlags fl)
     QWidget *view = new QWidget( wrapperBox );
 
     QGridLayout *layout = new QGridLayout( view );
-    layout->setSpacing( 2);
-    layout->setMargin( 2);
+    layout->setSpacing( 1);
+    layout->setMargin( 1);
     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
 
-    QMenuBar *menuBar = new QMenuBar(this);
-//     QToolBar *menuBar = new QToolBar(this);
+    QPEMenuBar *menuBar = new QPEMenuBar(view);
+//    QMenuBar *menuBar = new QMenuBar(this);
+//     QPEToolBar *menuBar = new QPEToolBar(this);
 //     menuBar->setHorizontalStretchable( TRUE );
 
     QWMatrix matrix;
@@ -135,7 +138,7 @@ OpieFtp::OpieFtp( QWidget* parent, const char* name, WFlags fl)
     cdUpButton->setPixmap(Resource::loadPixmap("up"));
     cdUpButton ->setFixedSize( QSize( 20, 20 ) );
     connect( cdUpButton ,SIGNAL(released()),this,SLOT( upDir()) );
-    layout->addMultiCellWidget( cdUpButton, 0, 0, 3, 3 );
+    layout->addMultiCellWidget( cdUpButton, 0, 0, 4, 4 );
     cdUpButton->hide();
 
 //     docButton = new QPushButton(Resource::loadIconSet("DocsIcon"),"",view,"docsButton");
@@ -144,12 +147,12 @@ OpieFtp::OpieFtp( QWidget* parent, const char* name, WFlags fl)
 //     docButton->setFlat(TRUE);
 //     layout->addMultiCellWidget( docButton, 0, 0, 6, 6 );
 
-    homeButton = new QToolButton(view,"homeButton");
+    homeButton = new QToolButton( view,"homeButton");
     homeButton->setPixmap( Resource::loadPixmap("home"));
     homeButton->setFixedSize( QSize( 20, 20 ) );
     connect(homeButton,SIGNAL(released()),this,SLOT(homeButtonPushed()) );
-    layout->addMultiCellWidget( homeButton, 0, 0, 4, 4);
-     homeButton->hide();
+    layout->addMultiCellWidget( homeButton, 0, 0, 3, 3);
+    homeButton->hide();
 
     TabWidget = new QTabWidget( view, "TabWidget" );
     layout->addMultiCellWidget( TabWidget, 1, 1, 0, 4 );
@@ -252,6 +255,9 @@ OpieFtp::OpieFtp( QWidget* parent, const char* name, WFlags fl)
 
     ServerComboBox = new QComboBox( FALSE, tab_3, "ServerComboBox" );
     ServerComboBox->setEditable(TRUE);
+		ServerComboBox->setAutoCompletion(true);
+//		ServerComboBox->blockSignals(true);
+		
     tabLayout_3->addMultiCellWidget( ServerComboBox, 3, 3, 0, 1 );
 
     connect(ServerComboBox,SIGNAL(activated(int)),this,SLOT(serverComboSelected(int) ));
@@ -1326,34 +1332,38 @@ void OpieFtp::fillCombos()
 
 void OpieFtp::serverComboSelected(int index)
 {
+		QString servername;
     currentServerConfig = index+1;
-    odebug << "server combo selected " << index+1 << "" << oendl; 
+    odebug << "server combo selected " << index + 1 << "" << oendl; 
     QString username, remoteServerStr, remotePathStr, password, port, temp;
-//    remoteServerStr = ServerComboBox->text(index);
+    servername = remoteServerStr = ServerComboBox->text(index);
+		qDebug("server text "  + remoteServerStr);
 
     Config cfg("opieftp");
     cfg.setGroup("Server");
 //    int numberOfEntries = cfg.readNumEntry("numberOfEntries",0);
 
-    temp.setNum(index+1);
+			//  for (int i = 1; i <= numberOfEntries; i++) {
+//    int numberOfEntries = cfg.readNumEntry("numberOfEntries",0);
+
+    temp.setNum(index + 1);
     remoteServerStr = cfg.readEntry( temp,"");
 
-    odebug << "Group" +temp << oendl; 
+    odebug << "Group " +temp << oendl; 
     cfg.setGroup(temp);
-//    odebug << temp << oendl; 
+
     int divider = remoteServerStr.length() - remoteServerStr.find(":",0,TRUE);
     port = remoteServerStr.right( divider - 1);
     bool ok;
     int portInt = port.toInt(&ok,10);
     if( portInt == 0) portInt = 21;
-
     ServerComboBox->lineEdit()->setText(remoteServerStr.left( remoteServerStr.find(":",0,TRUE)));
 
     PortSpinBox->setValue( portInt);
 
     remotePath->setText(cfg.readEntry("RemotePath", "/"));
 
-    username =  cfg.readEntry("Username", "anonymous");
+    username = cfg.readEntry("Username", "anonymous");
     UsernameComboBox->lineEdit()->setText(username);
     odebug << username << oendl; 
 //    odebug << "Password is "+cfg.readEntryCrypt(username << oendl; 
@@ -1362,13 +1372,16 @@ void OpieFtp::serverComboSelected(int index)
 //        PasswordEdit
 
     cfg.setGroup("Server");
-    temp.sprintf("%d",currentServerConfig);
+    temp.sprintf("%d", currentServerConfig);
     cfg.writeEntry("currentServer", temp);
+    cfg.writeEntry(temp,servername);
 
+		
    fuckeduphack = TRUE;
    serverListView->setCurrentItem( index);
-   fuckeduphack=FALSE;
-   odebug << "server list set selected " << index << "" << oendl; 
+   fuckeduphack = FALSE;
+	 qDebug( "server list set selected %d "+temp, index);
+	 ServerComboBox->lineEdit()->setText(servername);
     update();
 }
 
