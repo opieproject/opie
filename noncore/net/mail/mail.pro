@@ -8,7 +8,8 @@ HEADERS	     = defines.h \
                composemail.h \
 	           accountview.h \
 	           mainwindow.h \
-	           opiemail.h 
+	           opiemail.h \
+				imapwrapper.h
                
 SOURCES	     = main.cpp \
 	           opiemail.cpp \

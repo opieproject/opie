@@ -1,4 +1,5 @@
 #include "accountview.h"
+#include "imapwrapper.h"
 #include "defines.h"
 
 IMAPviewItem::IMAPviewItem( IMAPaccount *a, QListView *parent )

@@ -1,7 +1,7 @@
 
 #include <stdlib.h>
 
-#include "mailwrapper.h"
+#include "imapwrapper.h"
 
 
 IMAPwrapper::IMAPwrapper( IMAPaccount *a )

@@ -6,6 +6,8 @@
 #include "settings.h"
 #include "mailwrapper.h"
 
+class IMAPwrapper;
+
 class AccountViewItem : public QListViewItem
 {
         

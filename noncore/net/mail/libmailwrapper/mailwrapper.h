@@ -6,7 +6,6 @@
 #include <libetpan/mailmime.h>
 #include <libetpan/mailimf.h>
 #include <libetpan/mailsmtp.h>
-#include <libetpan/mailimap.h>
 #include <libetpan/mailstorage.h>
 #include <libetpan/maildriver.h>
 #include <qbitarray.h>
@@ -160,24 +159,6 @@ private:
 
     Settings *settings;
         
-};
-
-class IMAPwrapper : public QObject
-{
-    Q_OBJECT
-
-public:
-    IMAPwrapper( IMAPaccount *a );
-    QList<IMAPFolder>* listFolders();
-    void listMessages(const QString & mailbox,Maillist&target );
-    QString fetchBody(const QString & mailbox,const RecMail&mail);
-
-protected:
-    RecMail*parse_list_result(mailimap_msg_att*);
-
-private:
-    IMAPaccount *account;
-    
 };
 
 #endif
