@@ -1,1 +1,12 @@
 TODO:
+
+small things:
+* there are bug in the layouting of the table
+
+
+
+big things:
+* backport the conversions from Kalzium (http://edu.kde.org/kalzium)
+* backport more dataset from Kalzium
+* make the colors confiurable
+* graphical analysation (KalziumGraph.cpp/h)
