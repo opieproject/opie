@@ -133,9 +133,9 @@ private:
     QImage  *imgUp;
     QImage  *imgDn;
     QImage  *imgButtonMask;
-    QBitmap *masks[11];
-    QPixmap *buttonPixUp[11];
-    QPixmap *buttonPixDown[11];
+    QBitmap *masks[10];
+    QPixmap *buttonPixUp[10];
+    QPixmap *buttonPixDown[10];
 
     QPixmap *pixmaps[4];
     Ticker  songInfo;

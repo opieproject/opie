@@ -100,7 +100,6 @@ struct MediaButton {
 MediaButton audioButtons[] = {
    { TRUE,  FALSE, FALSE }, // play
    { FALSE, FALSE, FALSE }, // stop
-   { FALSE,  FALSE, FALSE }, // pause
    { FALSE, FALSE, FALSE }, // next
    { FALSE, FALSE, FALSE }, // previous
    { FALSE, FALSE, FALSE }, // volume up
@@ -111,8 +110,8 @@ MediaButton audioButtons[] = {
    { FALSE, FALSE, FALSE }  // back
 };
 
-const char *skin_mask_file_names[11] = {
-   "play", "stop", "pause", "next", "prev", "up",
+const char *skin_mask_file_names[10] = {
+   "play", "stop", "next", "prev", "up",
    "down", "loop", "playlist", "forward", "back"
 };
 
@@ -145,7 +144,7 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
     imgButtonMask = new QImage( imgUp->width(), imgUp->height(), 8, 255 );
     imgButtonMask->fill( 0 );
 
-    for ( int i = 0; i < 11; i++ ) {
+    for ( int i = 0; i < 10; i++ ) {
         QString filename = QString(getenv("OPIEDIR")) + "/pics/" + skinPath + "/skin_mask_" + skin_mask_file_names[i] + ".png";
         masks[i] = new QBitmap( filename );
 
@@ -162,7 +161,7 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
 
     }
 
-    for ( int i = 0; i < 11; i++ ) {
+    for ( int i = 0; i < 10; i++ ) {
         buttonPixUp[i] = NULL;
         buttonPixDown[i] = NULL;
     }
@@ -212,7 +211,7 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
 
 AudioWidget::~AudioWidget() {
 
-    for ( int i = 0; i < 11; i++ ) {
+    for ( int i = 0; i < 10; i++ ) {
         delete buttonPixUp[i];
         delete buttonPixDown[i];
     }
@@ -220,7 +219,7 @@ AudioWidget::~AudioWidget() {
     delete imgUp;
     delete imgDn;
     delete imgButtonMask;
-    for ( int i = 0; i < 11; i++ ) {
+    for ( int i = 0; i < 10; i++ ) {
         delete masks[i];
     }
 }
@@ -260,7 +259,7 @@ void AudioWidget::resizeEvent( QResizeEvent * ) {
     QPixmap *pixUp = combineImageWithBackground( *imgUp, *pixBg, p );
     QPixmap *pixDn = combineImageWithBackground( *imgDn, *pixBg, p );
 
-    for ( int i = 0; i < 11; i++ ) {
+    for ( int i = 0; i < 10; i++ ) {
         if ( !masks[i]->isNull() ) {
             delete buttonPixUp[i];
             delete buttonPixDown[i];
@@ -427,7 +426,6 @@ void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
 
                 switch (i) {
                 case AudioVolumeUp:
-                    qDebug("more clicked");
                     emit moreClicked();
                     return;
                 case AudioVolumeDown:
@@ -452,9 +450,20 @@ void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
                     qDebug("button toggled3  %d",i);
                 }
                 switch (i) {
-                case AudioPlay:       mediaPlayerState->setPlaying(audioButtons[i].isDown); return;
+                case AudioPlay:
+                    if( mediaPlayerState->isPaused ) {
+                        setToggleButton( i, FALSE );
+                        mediaPlayerState->setPaused( FALSE );
+                        return;
+                    } else if( !mediaPlayerState->isPaused ) {
+                        setToggleButton( i, TRUE );
+                        mediaPlayerState->setPaused( TRUE );
+                        return;
+                    } else {
+                        //  setToggleButton( i, TRUE );
+                        // mediaPlayerState->setPlaying( videoButtons[i].isDown );
+                    }
                 case AudioStop:       mediaPlayerState->setPlaying(FALSE); return;
-                case AudioPause:      mediaPlayerState->setPaused( audioButtons[i].isDown); return;
                 case AudioNext:       mediaPlayerState->setNext(); return;
                 case AudioPrevious:   mediaPlayerState->setPrev(); return;
                 case AudioLoop:       mediaPlayerState->setLooping(audioButtons[i].isDown); return;
