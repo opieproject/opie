@@ -1,11 +1,16 @@
 2004-??-??	The Opie Team <opie@handhelds.org>
 
-	* Fixed ZSafe not starting up (Bug #1324) (mickeyl)
-	* Fixed Drawpad initialization (Bug #1314) (mickeyl)
+	New Features
+	------------
 	* Added four themes courtesy Robert Griebl (http://www.softforge.de/zstyle)
 	* Added Conversion tool for pim-data (eilers)
 	* Modifcation of the PIM API for providing generic use of OPimRecords. (eilers)
-	* Fixed Datebook dependency on libopiedb2 (Bug #1348) (chicken)
+    
+	BugFixes
+	--------
+	* #1324 - ZSafe not starting up (mickeyl)
+	* #1314 - Drawpad initialization (mickeyl)
+	* #1348 - Datebook dependency on libopiedb2 (chicken)
 
 2004-25-04	The Opie Team <opie@handhelds.org>
 
