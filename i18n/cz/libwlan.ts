@@ -3,7 +3,7 @@
     <name>AWLan</name>
     <message>
         <source>&lt;UseHostName&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;PoužítJménoHostitele&gt;</translation>
     </message>
 </context>
 <context>
@@ -109,150 +109,150 @@
     <name>WLanGUI</name>
     <message>
         <source>General</source>
-        <translation type="unfinished">Hlavní</translation>
+        <translation>Hlavní</translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished">Auto</translation>
+        <translation>Auto</translation>
     </message>
     <message>
         <source>Managed</source>
-        <translation type="unfinished">Řízeno</translation>
+        <translation>Řízeno</translation>
     </message>
     <message>
         <source>Ad-Hoc</source>
-        <translation type="unfinished">Ad-Hoc</translation>
+        <translation>Ad-Hoc</translation>
     </message>
     <message>
         <source>Mode</source>
-        <translation type="unfinished">Režim</translation>
+        <translation>Režim</translation>
     </message>
     <message>
         <source>MAC</source>
-        <translation type="unfinished">MAC</translation>
+        <translation>MAC</translation>
     </message>
     <message>
         <source>Encryption</source>
-        <translation type="unfinished">Šifrování</translation>
+        <translation>Šifrování</translation>
     </message>
     <message>
         <source>&amp;Enable Encryption</source>
-        <translation type="unfinished">&amp;Zapnout šifrování</translation>
+        <translation>&amp;Zapnout šifrování</translation>
     </message>
     <message>
         <source>&amp;Key Setting</source>
-        <translation type="unfinished">Nastavení &amp;klíčů</translation>
+        <translation>Nastavení &amp;klíčů</translation>
     </message>
     <message>
         <source>Key &amp;1</source>
-        <translation type="unfinished">Klíč &amp;1</translation>
+        <translation>Klíč &amp;1</translation>
     </message>
     <message>
         <source>Key &amp;4</source>
-        <translation type="unfinished">Klíč &amp;4</translation>
+        <translation>Klíč &amp;4</translation>
     </message>
     <message>
         <source>Key &amp;2</source>
-        <translation type="unfinished">Klíč &amp;2</translation>
+        <translation>Klíč &amp;2</translation>
     </message>
     <message>
         <source>Key &amp;3</source>
-        <translation type="unfinished">Klíč &amp;3</translation>
+        <translation>Klíč &amp;3</translation>
     </message>
     <message>
         <source>AP</source>
-        <translation type="unfinished">AP</translation>
+        <translation>AP</translation>
     </message>
     <message>
         <source>Rate</source>
-        <translation type="unfinished">Rychlost</translation>
+        <translation>Rychlost</translation>
     </message>
     <message>
         <source>Channel</source>
-        <translation type="unfinished">Kanál</translation>
+        <translation>Kanál</translation>
     </message>
     <message>
         <source>Station</source>
-        <translation type="unfinished">Stanice</translation>
+        <translation>Stanice</translation>
     </message>
     <message>
         <source>ESSID</source>
-        <translation type="unfinished">ESSID</translation>
+        <translation>ESSID</translation>
     </message>
     <message>
         <source>Noise</source>
-        <translation type="unfinished">Šum</translation>
+        <translation>Šum</translation>
     </message>
     <message>
         <source>Quality</source>
-        <translation type="unfinished">Kvalita</translation>
+        <translation>Kvalita</translation>
     </message>
     <message>
         <source>Signal</source>
-        <translation type="unfinished">Signál</translation>
+        <translation>Signál</translation>
     </message>
     <message>
         <source>SSID</source>
-        <translation type="unfinished">SSID</translation>
+        <translation>SSID</translation>
     </message>
     <message>
         <source>Chn</source>
-        <translation type="unfinished">Kanál</translation>
+        <translation>Kanál</translation>
     </message>
     <message>
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation>Form1</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Jméno</translation>
     </message>
     <message>
         <source>ESS-ID</source>
-        <translation type="unfinished"></translation>
+        <translation>ESS-ID</translation>
     </message>
     <message>
         <source>&lt;UseHostName&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;PoužítJménoHostitele&gt;</translation>
     </message>
     <message>
         <source>Specify Access Point</source>
-        <translation type="unfinished"></translation>
+        <translation>Specifikovat přístupový bod</translation>
     </message>
     <message>
         <source>Scan</source>
-        <translation type="unfinished"></translation>
+        <translation>Skenovat</translation>
     </message>
     <message>
         <source>Accept Non-Encrypted packets</source>
-        <translation type="unfinished"></translation>
+        <translation>Akceptovat nešifrované pakety</translation>
     </message>
     <message>
         <source>State</source>
-        <translation type="unfinished"></translation>
+        <translation>Stav</translation>
     </message>
     <message>
         <source>Freq</source>
-        <translation type="unfinished"></translation>
+        <translation>Frekv</translation>
     </message>
     <message>
         <source>Link Quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvalita spojení</translation>
     </message>
     <message>
         <source>Live feed </source>
-        <translation type="unfinished"></translation>
+        <translation>Živý posuv</translation>
     </message>
 </context>
 <context>
     <name>WLanNetNode</name>
     <message>
         <source>WLan Device</source>
-        <translation type="unfinished"></translation>
+        <translation>WLan zařízení</translation>
     </message>
     <message>
         <source>&lt;p&gt;Configure Wi/Fi or WLan network cards.&lt;/p&gt;&lt;p&gt;Defines Wireless options for those cards&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Konfiguruje Wi/Fi, nebo WLan síťové karty.&lt;/p&gt;&lt;p&gt;Definuje bezdrátové možnosti těchto karet&lt;/p&gt;</translation>
     </message>
 </context>
 <context>

@@ -97,7 +97,7 @@
     </message>
     <message>
         <source>the Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Obrázek</translation>
     </message>
 </context>
 <context>
@@ -212,7 +212,7 @@
     </message>
     <message>
         <source>Dont show seperate windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Neukazovat rozdělená okna</translation>
     </message>
 </context>
 <context>
@@ -272,11 +272,11 @@
     </message>
     <message>
         <source>&lt;qt&gt;Are you sure you want to delete %1&lt;br&gt; %2?&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Opravdu chcete smazat %1&lt;br&gt; %2?&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Confirm Deletion</source>
-        <translation type="unfinished"></translation>
+        <translation>Potvrzení smazání</translation>
     </message>
 </context>
 <context>

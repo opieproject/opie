@@ -640,19 +640,19 @@ Klikněte do čtverečku nalevo pro výběr balíčku.  Klikněte a podržte pro
     </message>
     <message>
         <source>Information level:</source>
-        <translation type="unfinished"></translation>
+        <translation>Informační úroveň:</translation>
     </message>
     <message>
         <source>Package source lists directory:</source>
-        <translation type="unfinished"></translation>
+        <translation>Adresář seznamů zdrojů balíčků:</translation>
     </message>
     <message>
         <source>Enter the directory where package source feed information is stored.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadejte adresář, kde je uložen seznam zdrojů balíčků.</translation>
     </message>
     <message>
         <source>Tap here to select the directory where package source feed information is stored.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro výběr adresáře, kde je uložen seznam zdrojů balíčků.</translation>
     </message>
 </context>
 <context>

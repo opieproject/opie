@@ -190,7 +190,7 @@ vybraný soubor?</translation>
     </message>
     <message>
         <source>Please select file to play</source>
-        <translation type="unfinished"></translation>
+        <translation>Prosím vyberte soubor pro přehrátí</translation>
     </message>
 </context>
 </TS>

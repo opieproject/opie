@@ -318,7 +318,7 @@ and </source>
     </message>
     <message>
         <source>Click here to filter items by category.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro filtrování položek dle kategorie.</translation>
     </message>
 </context>
 <context>

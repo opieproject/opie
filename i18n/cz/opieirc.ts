@@ -3,59 +3,60 @@
     <name>DCCProgress</name>
     <message>
         <source>Receiving file %1 from %2...</source>
-        <translation type="unfinished"></translation>
+        <translation>Přijímám soubor %1 od %2...</translation>
     </message>
     <message>
         <source>Successfully received %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Úspěšně přijato %1</translation>
     </message>
     <message>
         <source>Aborted</source>
-        <translation type="unfinished"></translation>
+        <translation>Přerušeno</translation>
     </message>
     <message>
         <source>Peer Aborted</source>
-        <translation type="unfinished"></translation>
+        <translation>Vzdálené přerušení</translation>
     </message>
     <message>
         <source>Timeout</source>
-        <translation type="unfinished"></translation>
+        <translation>Vypršel čas</translation>
     </message>
 </context>
 <context>
     <name>DCCTransferTab</name>
     <message>
         <source>DCC Transfers in Progress</source>
-        <translation type="unfinished"></translation>
+        <translation>DCC přenosy jsou v běhu</translation>
     </message>
     <message>
         <source>There are transfers in progress. &lt;br&gt;If you close this tab, they will be canceled.&lt;br&gt;Do you want to close it anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>Přenosy jsou v běhu. &lt;br&gt;Pokud zavřete tuto záložku, tak budou přerušeny.&lt;br&gt;Chcete ji přesto zavřít?</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zavřít</translation>
     </message>
     <message>
         <source>&amp;Don&apos;t Close</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nezavírat</translation>
     </message>
     <message>
         <source>DCC Transfer from %1</source>
-        <translation type="unfinished"></translation>
+        <translation>DCC přenos od %1</translation>
     </message>
     <message>
         <source>%1 is trying to send you the file %2
 (%3 bytes)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 se vám pokouší poslat soubor %2
+(%3 bajtů)</translation>
     </message>
     <message>
         <source>&amp;Accept</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Akceptovat</translation>
     </message>
     <message>
         <source>&amp;Reject</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Odmítnout</translation>
     </message>
 </context>
 <context>
@@ -393,19 +394,19 @@ Skutečné jméno: %4</translation>
     </message>
     <message>
         <source>Received a CTCP PING reply from %1: %2 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Přijata odpověď na CTCP PING od %1: %2 sekund</translation>
     </message>
     <message>
         <source>Received a CTCP PING request from %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Přijata žádost na CTCP PING od %1</translation>
     </message>
     <message>
         <source>Malformed DCC request from %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Zdeformována DCC žádost od %1</translation>
     </message>
     <message>
         <source>Save As</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit jako</translation>
     </message>
 </context>
 <context>
