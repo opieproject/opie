@@ -106,7 +106,7 @@ void OTabWidget::addTab( QWidget *child, const QString &icon, const QString &lab
 {
     QPixmap iconset = loadSmooth( icon );
 
-    QTab * tab = new QTab();
+    QTab *tab = new QTab();
     if ( tabBarStyle == IconTab )
     {
         tab->label = QString::null;
@@ -274,15 +274,20 @@ void OTabWidget::selectTab( OTabInfo *tab )
             setUpLayout();
         }
         tabBar->tab( tab->id() )->setText( tab->label() );
-        currentTab = tab;
+        tabBar->setCurrentTab( tab->id() );
+        setUpLayout();
+        tabBar->update();
     }
-    tabBar->setCurrentTab( tab->id() );
-    setUpLayout();
-    tabBar->update();
+    else
+    {
+        tabBar->setCurrentTab( tab->id() );
+    }
 
     widgetStack->raiseWidget( tab->control() );
 
     emit currentChanged( tab->control() );
+
+    currentTab = tab;
 }
 
 void OTabWidget::setUpLayout()
