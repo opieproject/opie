@@ -11,7 +11,7 @@
 ************************************************************************************/
 // copyright 2002 Jeremy Cowgar <jc@cowgar.com>
 /*
- * $Id: vmemo.cpp,v 1.29 2002-05-26 23:41:26 llornkcor Exp $
+ * $Id: vmemo.cpp,v 1.30 2002-06-02 00:09:44 llornkcor Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 #include <sys/utsname.h>
@@ -228,7 +228,7 @@ VMemo::VMemo( QWidget *parent, const char *_name )
             e << QString("QPE/VMemo");
             e << QString("toggleRecord()");
         }
-        if( vmCfg.readNumEntry("hideIcon",0) == 1)
+        if( vmCfg.readNumEntry("hideIcon",0) == 1 || toggleKey > 0)
             hide();
     }
 }
