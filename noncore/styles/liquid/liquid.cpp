@@ -180,6 +180,7 @@ LiquidStyle::LiquidStyle()
 
 	oldqte = ( qt_version ( ) < 234 );
 	flatTBButtons = false;
+	currentHeader = 0;
 
     btnMaskBmp = QBitmap(37, 26, buttonmask_bits, true);
     btnMaskBmp.setMask(btnMaskBmp);
