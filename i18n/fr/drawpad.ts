@@ -99,7 +99,7 @@
     </message>
     <message>
         <source>More</source>
-        <translation">Plus</translation>
+        <translation>Plus</translation>
     </message>
     <message>
         <source>More...</source>
@@ -164,7 +164,7 @@ the current page?</source>
     </message>
     <message>
         <source>All</source>
-        <translation">Toutes</translation>
+        <translation>Toutes</translation>
     </message>
     <message>
         <source>Current</source>
