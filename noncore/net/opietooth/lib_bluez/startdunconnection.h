@@ -7,7 +7,7 @@
 
 namespace OpieTooth {
 
-    class StartDunConnection : StartConnection {
+    class StartDunConnection : public StartConnection {
 
 	Q_OBJECT
 

@@ -9,7 +9,6 @@
 using namespace OpieTooth;
 
 Manager::Manager( const QString& dev )
-  : QObject()
 {
     qWarning("created");
     m_device = dev;
@@ -17,13 +16,11 @@ Manager::Manager( const QString& dev )
     m_sdp = 0;
 }
 Manager::Manager( Device* /*dev*/ )
-  : QObject()
 {
     m_hcitool = 0;
     m_sdp = 0;
 }
 Manager::Manager()
-  : QObject()
 {
     m_hcitool = 0;
     m_sdp = 0;
@@ -226,19 +223,6 @@ RemoteDevice::ValueList Manager::parseHCIOutput(const QString& output ) {
 }
 
 ////// hcitool cc and hcitool con
-
-/**
- * Create it on the stack as don't care
- * so we don't need to care for it
- * cause hcitool gets reparented
- */
-void Manager::connectTo( const QString& mac) {
-    OProcess proc;
-    proc << "hcitool";
-    proc << "cc";
-    proc << mac;
-    proc.start(OProcess::DontCare); // the lib does not care at this point
-}
 
 
 void Manager::searchConnections() {

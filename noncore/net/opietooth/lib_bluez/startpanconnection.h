@@ -7,7 +7,7 @@
 
 namespace OpieTooth {
 
-    class StartPanConnection : StartConnection {
+    class StartPanConnection : public StartConnection {
 
 	Q_OBJECT
 

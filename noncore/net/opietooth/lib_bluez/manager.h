@@ -7,9 +7,11 @@
 #include <qmap.h>
 #include <qvaluelist.h>
 
-#include "../include/connection.h"
-#include "../include/remotedevice.h"
-#include "../include/services.h"
+#include "connection.h"
+#include "remotedevice.h"
+#include "services.h"
+#include "manager_base.h"
+#include "plugin_interface.h"
 
 class OProcess;
 namespace OpieTooth {
@@ -19,7 +21,7 @@ namespace OpieTooth {
      *  could do from command line in a OO and asynchronus
      *  way.
      */
-    class Manager : public QObject {
+    class Manager : public Manager_Base {
         Q_OBJECT
     public:
         /** c'tor whichs create a new Manager
@@ -110,12 +112,6 @@ namespace OpieTooth {
          * search for services on a remote device
          */
         void searchServices( const RemoteDevice& );
-
-        /**
-         * Starts to connect to the device
-         * in @param
-         */
-        void connectTo(const QString& );
 
         /**
          * Searches for active connections

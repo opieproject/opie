@@ -7,7 +7,8 @@ HEADERS 	= ../include/connection.h \
                   ../include/remotedevice.h \
                   ../include/services.h \
                   startpanconnection.h \
-                  startdunconnection.h 
+                  startdunconnection.h \
+                  bluez_plugininterface.h
 SOURCES		= ../lib_common/connection.cpp \
                   parser.cc \
                   ../lib_common/device.cc \
@@ -15,11 +16,12 @@ SOURCES		= ../lib_common/connection.cpp \
                   ../lib_common/remotedevice.cc \
                   ../lib_common/services.cc \
                   startpanconnection.cpp \
-                  startdunconnection.cpp
+                  startdunconnection.cpp \
+                  bluez_plugininterface.cpp
 TARGET		= opietooth
-INCLUDEPATH += $(OPIEDIR)/include .
-DESTDIR		= $(OPIEDIR)/lib$(PROJMAK)
-LIBS += -lopie
+INCLUDEPATH += $(OPIEDIR)/include ../include
+DESTDIR		= $(OPIEDIR)/plugins/opietooth
+LIBS += -lopie -lopietooth_common
 #VERSION = 0.0.0
 
 TRANSLATIONS = ../../../../i18n/de/libopietooth.ts \
