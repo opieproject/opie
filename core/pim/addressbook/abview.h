@@ -19,7 +19,7 @@ class AbView: public QWidget
 public:
     enum Views{ TableView=0, CardView, PhoneBook, CompanyBook, EmailBook };
 
-    AbView( QWidget* parent, const QValueList<int>& ordered, const QStringList& slOrderedFields );
+    AbView( QWidget* parent, const QValueList<int>& ordered );
 
     bool save();
     void load();
@@ -30,6 +30,8 @@ public:
     void showContact( const OContact& cnt );
     void setShowByCategory( Views view, const QString& cat );
     void setShowByLetter( char c );
+    void setListOrder( const QValueList<int>& ordered );
+
     // Add Entry and put to current
     void addEntry( const OContact &newContact );
     void removeEntry( const int UID );
@@ -74,7 +76,6 @@ private:
     AbLabel* m_ablabel;
 
     QValueList<int> m_orderedFields;
-    QStringList m_slOrderedFields; 
 };
 
 

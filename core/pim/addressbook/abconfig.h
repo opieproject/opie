@@ -16,6 +16,7 @@ public:
     bool useQtMail() const;
     bool useOpieMail() const;
     int  fontSize() const;
+    QValueList<int> orderList() const;
     
     void setUseRegExp( bool v );
     void setUseWildCards( bool v );
@@ -23,6 +24,7 @@ public:
     void setUseQtMail( bool v );
     void setUseOpieMail( bool v );
     void setFontSize( int v );
+    void setOrderList( const QValueList<int>& list );
 
     void operator= ( const AbConfig& cnf );
 
@@ -40,6 +42,7 @@ protected:
     bool m_useRegExp;
     bool m_beCaseSensitive; 
     int m_fontSize;
+    QValueList<int> m_ordered;
 
     bool m_changed;
 };

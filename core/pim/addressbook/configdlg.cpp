@@ -13,11 +13,16 @@ ConfigDlg::ConfigDlg( QWidget *parent = 0, const char *name = 0 ):
 	ConfigDlg_Base(parent, name, true )
 {
 	contFields = OContact::trfields();
-	contFields.remove( tr("File As") );
-	contFields.remove( tr("Gender") );
+// 	QStringList xmlFields = OContact::fields();
 
-	for (uint i=0; i < contFields.count(); i++)
+	// We add all Fields into the Listbox and creating
+	// some translation maps between the translated string and the ID in "recordfields.h".
+	for (uint i=0; i < contFields.count(); i++) {
 		allFieldListBox->insertItem( contFields[i] );
+		m_mapStrToID.insert(contFields[i], i + (Qtopia::CATEGORY_ID + 1));
+		m_mapIDToStr.insert( i + (Qtopia::CATEGORY_ID + 1), contFields[i] );
+		qWarning("Creating map between: %s and %d", contFields[i].latin1(), i + (Qtopia::CATEGORY_ID + 1) );
+	}
 	connect ( m_addButton, SIGNAL( clicked() ), this, SLOT( slotItemAdd() ) );
 	connect ( m_removeButton, SIGNAL( clicked() ), this, SLOT( slotItemRemove() ) );
 	connect ( m_upButton, SIGNAL( clicked() ), this, SLOT( slotItemUp() ) );
@@ -27,21 +32,50 @@ ConfigDlg::ConfigDlg( QWidget *parent = 0, const char *name = 0 ):
 void ConfigDlg::slotItemUp()
 {
 	qWarning( "void ConfigDlg::slotItemUp()" );
+
+	int i = fieldListBox->currentItem();
+	if ( i > 0 ) {
+		QString item = fieldListBox->currentText();
+		fieldListBox->removeItem( i );
+		fieldListBox->insertItem( item, i-1 );
+		fieldListBox->setCurrentItem( i-1 );
+	}
+
 }
 
 void ConfigDlg::slotItemDown()
 {
 	qWarning( "void ConfigDlg::slotItemDown()" );
+
+	int i = fieldListBox->currentItem();
+	if ( i < (int)fieldListBox->count() - 1 ) {
+		QString item = fieldListBox->currentText();
+		fieldListBox->removeItem( i );
+		fieldListBox->insertItem( item, i+1 );
+		fieldListBox->setCurrentItem( i+1 );
+	}
 }
 
 void ConfigDlg::slotItemAdd()
 {
 	qWarning( "void ConfigDlg::slotItemAdd()" );
+
+	int i = allFieldListBox->currentItem();
+	if ( i > 0 ) {
+		QString item = allFieldListBox->currentText();
+		qWarning("ADding %s", item.latin1());
+		fieldListBox->insertItem( item );
+	}	
 }
 
 void ConfigDlg::slotItemRemove()
 {
 	qWarning( "void ConfigDlg::slotItemRemove()" );
+
+	int i = fieldListBox->currentItem();
+	if ( i > 0 ) {
+		fieldListBox->removeItem( i );
+	}	
 }
     
 void ConfigDlg::setConfig( const AbConfig& cnf )
@@ -71,6 +105,11 @@ void ConfigDlg::setConfig( const AbConfig& cnf )
 		m_largeFont->setChecked( true );
 		break;
 	}
+
+	for( uint i = 0; i < m_config.orderList().count(); i++ ) {
+	        fieldListBox -> insertItem ( m_mapIDToStr[ m_config.orderList()[i] ] );
+	}
+
 	
 }
     
@@ -88,6 +127,12 @@ AbConfig ConfigDlg::getConfig()
 		m_config.setFontSize( 1 );
 	if ( m_largeFont->isChecked() )
 		m_config.setFontSize( 2 );
+
+	QValueList<int> orderlist;
+	for( int i = 0; i < (int)fieldListBox->count(); i++ ) {
+	        orderlist.append( m_mapStrToID[ fieldListBox->text(i) ] );
+	}
+	m_config.setOrderList( orderlist );
 
 	return m_config;
 }

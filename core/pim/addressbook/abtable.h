@@ -63,7 +63,7 @@ class AbTable : public QTable
     Q_OBJECT
 
 public:
-    AbTable( const QValueList<int> *ordered, QWidget *parent, const char *name=0 );
+    AbTable( const QValueList<int> ordered, QWidget *parent, const char *name=0 );
     ~AbTable();
 
     // Set the contacts shown in the table
@@ -89,7 +89,7 @@ public:
     // addresspicker mode (What's that ? se)
     void setChoiceNames( const QStringList& list);
     QStringList choiceNames() const;
-    void setChoiceSelection(int index, const QStringList& list);
+    void setChoiceSelection( const QValueList<int>& list );
     QStringList choiceSelection(int index) const;
 
 signals:
@@ -124,7 +124,7 @@ private:
     int lastSortCol;
     bool asc;
     QMap<AbTableItem*, OContact> contactList;
-    const QValueList<int>* intFields;
+    QValueList<int> intFields;
     QStringList choicenames;
     bool enablePainting;
 

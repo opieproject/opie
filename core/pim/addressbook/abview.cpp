@@ -5,7 +5,7 @@ extern QString categoryFileName();
 
 #include <qlayout.h>
 
-AbView::AbView ( QWidget* parent, const QValueList<int>& ordered, const QStringList& slOrderedFields ):
+AbView::AbView ( QWidget* parent, const QValueList<int>& ordered ):
 	QWidget(parent),
 	mCat(0),
 	m_inSearch( false ),
@@ -16,8 +16,7 @@ AbView::AbView ( QWidget* parent, const QValueList<int>& ordered, const QStringL
 	m_contactdb ( "addressbook", 0l, 0l, false ), // Handle syncing myself.. !
 	m_viewStack( 0l ),
 	m_abTable( 0l ),
-	m_orderedFields( ordered ),
-	m_slOrderedFields( slOrderedFields )
+	m_orderedFields( ordered )
 {
 	mCat.load( categoryFileName() );
 
@@ -28,7 +27,7 @@ AbView::AbView ( QWidget* parent, const QValueList<int>& ordered, const QStringL
 	
 	// Creat TableView
  	QVBox* tableBox = new QVBox( m_viewStack );
- 	m_abTable = new AbTable( &m_orderedFields, tableBox, "table" );
+ 	m_abTable = new AbTable( m_orderedFields, tableBox, "table" );
 	m_abTable->setCurrentCell( 0, 0 );
 	m_abTable->setFocus();
 
@@ -156,6 +155,13 @@ void AbView::setShowByLetter( char c )
 	}
 	updateView();
 }
+
+void AbView::setListOrder( const QValueList<int>& ordered )
+{
+	m_orderedFields = ordered;
+	updateView();
+}
+
 
 QString AbView::showCategory() const 
 {
@@ -309,6 +315,7 @@ void  AbView::updateView()
 	// Switch to new View
 	switch ( (int) m_curr_View ) {
 	case TableView:
+		m_abTable -> setChoiceSelection( m_orderedFields );
 		m_abTable -> setContacts( m_list );
 		if ( m_curr_Contact != 0 )
 			m_abTable -> selectContact ( m_curr_Contact );

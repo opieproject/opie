@@ -77,7 +77,7 @@ private slots:
 	void slotViewEdit();
 	void slotPersonalView();
 	void listIsEmpty( bool );
- 	void slotSettings(); 
+/*  	void slotSettings();  */
 	void writeMail();
 	void slotBeam();
 	void beamDone( Ir * );

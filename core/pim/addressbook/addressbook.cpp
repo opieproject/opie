@@ -83,7 +83,9 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 {
 	isLoading = true;
 
-	initFields();
+	m_config.load();
+
+// 	initFields();
 	
 	setCaption( tr("Contacts") );
 	setIcon( Resource::loadPixmap( "AddressBook" ) );
@@ -193,11 +195,6 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	connect( a, SIGNAL( activated() ), this, SLOT( slotPersonalView() ) );
 	a->addTo( edit );
 	
-	// Do we need this function ? (se)	
-	a = new QAction( tr( "Arrange Edit Fields"), QString::null, 0, 0 );
-	connect( a, SIGNAL( activated() ), this, SLOT( slotSettings() ) );
-	a->addTo( edit );
-
 
 #ifdef __DEBUG_RELEASE
 	// Remove this function for public Release ! This is only
@@ -215,7 +212,7 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	listContainer = new QWidget( this );
 	QVBoxLayout *vb = new QVBoxLayout( listContainer );
 	
- 	m_abView = new AbView( listContainer, orderedFields, slOrderedFields);
+ 	m_abView = new AbView( listContainer, m_config.orderList() );
  	vb->addWidget( m_abView );
 	// abList->setHScrollBarMode( QScrollView::AlwaysOff );
 // :SX
@@ -270,6 +267,7 @@ void AddressbookWindow::slotConfig()
 			m_curFontSize = m_config.fontSize();
 			emit slotSetFont( m_curFontSize );
 		}
+		m_abView -> setListOrder( m_config.orderList() );
 	}
 
 	delete dlg;
@@ -769,115 +767,115 @@ void AddressbookWindow::slotSave()
 }
 #endif
 
-void AddressbookWindow::slotSettings()
-{
-	AddressSettings frmSettings( this );
-#if defined(Q_WS_QWS) || defined(_WS_QWS_)
-	frmSettings.showMaximized();
-#endif
+// void AddressbookWindow::slotSettings()
+// {
+// 	AddressSettings frmSettings( this );
+// #if defined(Q_WS_QWS) || defined(_WS_QWS_)
+// 	frmSettings.showMaximized();
+// #endif
 	
-	if ( frmSettings.exec() ) {
-		allFields.clear();
-		orderedFields.clear();
-		slOrderedFields.clear();
-		initFields();
-		if ( abEditor )
-			abEditor->loadFields();
-		// abList->refresh();
-	}
-}
+// 	if ( frmSettings.exec() ) {
+// 		allFields.clear();
+// 		orderedFields.clear();
+// 		slOrderedFields.clear();
+// 		initFields();
+// 		if ( abEditor )
+// 			abEditor->loadFields();
+// 		// abList->refresh();
+// 	}
+// }
 
 // This should be moved to the contact editor.. (se)
-void AddressbookWindow::initFields()
-{
-	// we really don't need the things from the configuration, anymore
-	// only thing that is important are the important categories.  So,
-	// Call the contact functions that correspond to these old functions...
+// void AddressbookWindow::initFields()
+// {
+// 	// we really don't need the things from the configuration, anymore
+// 	// only thing that is important are the important categories.  So,
+// 	// Call the contact functions that correspond to these old functions...
 	
-	QStringList xmlFields = OContact::fields();
-	QStringList visibleFields = OContact::untrfields();
-	// QStringList trFields = OContact::trfields();
+// 	QStringList xmlFields = OContact::fields();
+// 	QStringList visibleFields = OContact::untrfields();
+// 	// QStringList trFields = OContact::trfields();
 
-	xmlFields.remove( "Title" );
-	visibleFields.remove( "Name Title" );
-	visibleFields.remove( "Notes" );
+// 	xmlFields.remove( "Title" );
+// 	visibleFields.remove( "Name Title" );
+// 	visibleFields.remove( "Notes" );
 	
-	int i, version;
-	Config cfg( "AddressBook" );
-	QString zn;
+// 	int i, version;
+// 	Config cfg( "AddressBook" );
+// 	QString zn;
 	
-	// ### Write a function to keep this from happening again...
-	QStringList::ConstIterator it;
-	for ( i = 0, it = xmlFields.begin(); it != xmlFields.end(); ++it, i++ ) {
-		allFields.append( i + 3 );
-	}
+// 	// ### Write a function to keep this from happening again...
+// 	QStringList::ConstIterator it;
+// 	for ( i = 0, it = xmlFields.begin(); it != xmlFields.end(); ++it, i++ ) {
+// 		allFields.append( i + 3 );
+// 	}
 	
-	cfg.setGroup( "Version" );
-	version = cfg.readNumEntry( "version" );
-	i = 0;
+// 	cfg.setGroup( "Version" );
+// 	version = cfg.readNumEntry( "version" );
+// 	i = 0;
 
-	if ( version >= ADDRESSVERSION ) {
+// 	if ( version >= ADDRESSVERSION ) {
 		
-		cfg.setGroup( "ImportantCategory" );
+// 		cfg.setGroup( "ImportantCategory" );
 		
-		zn = cfg.readEntry( "Category" + QString::number(i), QString::null );
-		while ( !zn.isNull() ) {
-			if ( zn.contains( "Work" ) || zn.contains( "Mb" ) ) {
-				slOrderedFields.clear();
-				break;
-			}
-			slOrderedFields.append( zn );
-			zn = cfg.readEntry( "Category" + QString::number(++i), QString::null );
-		}
+// 		zn = cfg.readEntry( "Category" + QString::number(i), QString::null );
+// 		while ( !zn.isNull() ) {
+// 			if ( zn.contains( "Work" ) || zn.contains( "Mb" ) ) {
+// 				slOrderedFields.clear();
+// 				break;
+// 			}
+// 			slOrderedFields.append( zn );
+// 			zn = cfg.readEntry( "Category" + QString::number(++i), QString::null );
+// 		}
 		
 		
-	} else {
-		QString str;
-		str = getenv("HOME");
-		str += "/Settings/AddressBook.conf";
-		QFile::remove( str );
-	}
+// 	} else {
+// 		QString str;
+// 		str = getenv("HOME");
+// 		str += "/Settings/AddressBook.conf";
+// 		QFile::remove( str );
+// 	}
 	
-	if ( slOrderedFields.count() > 0 ) {
-		for( QStringList::ConstIterator it = slOrderedFields.begin();
-		     it != slOrderedFields.end(); ++it ) {
-			QValueList<int>::ConstIterator itVl;
-			QStringList::ConstIterator itVis;
-			itVl = allFields.begin();
-			for ( itVis = visibleFields.begin();
-			      itVis != visibleFields.end() && itVl != allFields.end();
-			      ++itVis, ++itVl ) {
-				if ( *it == *itVis && itVl != allFields.end() ) {
-					orderedFields.append( *itVl );
-				}
-			}
-		}
-	} else {
-		QValueList<int>::ConstIterator it;
-		for ( it = allFields.begin(); it != allFields.end(); ++it )
-			orderedFields.append( *it );
+// 	if ( slOrderedFields.count() > 0 ) {
+// 		for( QStringList::ConstIterator it = slOrderedFields.begin();
+// 		     it != slOrderedFields.end(); ++it ) {
+// 			QValueList<int>::ConstIterator itVl;
+// 			QStringList::ConstIterator itVis;
+// 			itVl = allFields.begin();
+// 			for ( itVis = visibleFields.begin();
+// 			      itVis != visibleFields.end() && itVl != allFields.end();
+// 			      ++itVis, ++itVl ) {
+// 				if ( *it == *itVis && itVl != allFields.end() ) {
+// 					orderedFields.append( *itVl );
+// 				}
+// 			}
+// 		}
+// 	} else {
+// 		QValueList<int>::ConstIterator it;
+// 		for ( it = allFields.begin(); it != allFields.end(); ++it )
+// 			orderedFields.append( *it );
 		
-		slOrderedFields = visibleFields;
-		orderedFields.remove( Qtopia::AddressUid );
-		orderedFields.remove( Qtopia::Title );
-		orderedFields.remove( Qtopia::Groups );
-		orderedFields.remove( Qtopia::AddressCategory );
-		orderedFields.remove( Qtopia::FirstName );
-		orderedFields.remove( Qtopia::LastName );
-		orderedFields.remove( Qtopia::DefaultEmail );
-		orderedFields.remove( Qtopia::FileAs );
-		orderedFields.remove( Qtopia::Notes );
-		orderedFields.remove( Qtopia::Gender );
-		slOrderedFields.remove( "Name Title" );
-		slOrderedFields.remove( "First Name" );
-		slOrderedFields.remove( "Last Name" );
-		slOrderedFields.remove( "File As" );
-		slOrderedFields.remove( "Default Email" );
-		slOrderedFields.remove( "Notes" );
-		slOrderedFields.remove( "Gender" );
+// 		slOrderedFields = visibleFields;
+// 		orderedFields.remove( Qtopia::AddressUid );
+// 		orderedFields.remove( Qtopia::Title );
+// 		orderedFields.remove( Qtopia::Groups );
+// 		orderedFields.remove( Qtopia::AddressCategory );
+// 		orderedFields.remove( Qtopia::FirstName );
+// 		orderedFields.remove( Qtopia::LastName );
+// 		orderedFields.remove( Qtopia::DefaultEmail );
+// 		orderedFields.remove( Qtopia::FileAs );
+// 		orderedFields.remove( Qtopia::Notes );
+// 		orderedFields.remove( Qtopia::Gender );
+// 		slOrderedFields.remove( "Name Title" );
+// 		slOrderedFields.remove( "First Name" );
+// 		slOrderedFields.remove( "Last Name" );
+// 		slOrderedFields.remove( "File As" );
+// 		slOrderedFields.remove( "Default Email" );
+// 		slOrderedFields.remove( "Notes" );
+// 		slOrderedFields.remove( "Gender" );
 		
-	}
-}
+// 	}
+// }
 
 
 // AbLabel* AddressbookWindow::abView()

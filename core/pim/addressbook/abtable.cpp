@@ -117,7 +117,7 @@ void AbPickItem::setContentFromEditor( QWidget *w )
   \brief QTable based class for showing a list of entries
 */
 
-AbTable::AbTable( const QValueList<int> *order, QWidget *parent, const char *name )
+AbTable::AbTable( const QValueList<int> order, QWidget *parent, const char *name )
 	: QTable( parent, name ),
 	  lastSortCol( -1 ),
 	  asc( TRUE ),
@@ -446,7 +446,7 @@ void AbTable::fitColumns()
 {
 	int contentsWidth = visibleWidth() / 2; // :SX Why too low
 	// Fix to better value
-	contentsWidth = 100; 
+	// contentsWidth = 130; 
 	
 	if ( columnVisible == false ){
 		showColumn(0);
@@ -498,24 +498,9 @@ QStringList AbTable::choiceNames() const
 	return choicenames;
 }
 
-void AbTable::setChoiceSelection(int /*index*/, const QStringList& /*list*/)
+void AbTable::setChoiceSelection( const QValueList<int>& list )
 {
-	/* ######
-	   
-	QString selname = choicenames.at(index);
-	for (each row) {
-	OContact *c = contactForRow(row);
-	if ( list.contains(c->email) ) {
-	list.remove(c->email);
-	setText(row, 2, selname);
-	}
-	}
-	for (remaining list items) {
-	OContact *c = new contact(item);
-	setText(newrow, 2, selname);
-	}
-	
-	*/
+	intFields = list;
 }
 
 QStringList AbTable::choiceSelection(int /*index*/) const
@@ -596,8 +581,8 @@ QString AbTable::findContactContact( const OContact &entry, int /* row */ )
 {
 	QString value;
 	value = "";
-	for ( QValueList<int>::ConstIterator it = intFields->begin();
-	      it != intFields->end(); ++it ) {
+	for ( QValueList<int>::ConstIterator it = intFields.begin();
+	      it != intFields.end(); ++it ) {
 		switch ( *it ) {
 		default:
 			break;

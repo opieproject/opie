@@ -1,6 +1,8 @@
 #ifndef _CONFIGDLG_H_
 #define _CONFIGDLG_H_
 
+#include <qmap.h>
+
 #include "configdlg_base.h"
 #include "abconfig.h"
 
@@ -23,6 +25,8 @@ protected slots:
 protected:
     QStringList contFields;
     AbConfig m_config;
+    QMap<QString, int> m_mapStrToID;
+    QMap<int, QString> m_mapIDToStr;
 };
 
 
