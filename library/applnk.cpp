@@ -981,17 +981,52 @@ void AppLnk::removeLinkFile()
     }
 }
 
+class AppLnkImagePrivate {
+public :
+      AppLnkImagePrivate( const QString & ImageName ) {
+        IconName = ImageName;
+        Small = 0;
+        Big = 0;
+      }
+      ~AppLnkImagePrivate( ) {
+        if ( Small ) delete Small;
+        if ( Big ) delete Big;
+      }
+
+      inline QPixmap * small( void ) {
+        if( ! Small ) {
+          QImage unscaledIcon = Resource::loadImage( IconName );
+          // works as long as smallSize remains static
+          Small = new QPixmap();
+          Small->convertFromImage( unscaledIcon.smoothScale( smallSize, smallSize ) );
+        }
+        return Small;
+      }
+
+      inline QPixmap * big( void ) {
+        if( ! Big ) {
+          QImage unscaledIcon = Resource::loadImage( IconName );
+          // works as long as bigSize remains static
+          Big = new QPixmap();
+          Big->convertFromImage( unscaledIcon.smoothScale( bigSize, bigSize ) );
+        }
+        return Big;
+      }
+
+      QString   IconName;
+      QPixmap * Small;
+      QPixmap * Big;
+};
+
 class AppLnkSetPrivate {
 public:
     AppLnkSetPrivate()
     {
-  typPix.setAutoDelete(TRUE);
-  typPixBig.setAutoDelete(TRUE);
-  typName.setAutoDelete(TRUE);
+      typPix.setAutoDelete(TRUE);
+      typName.setAutoDelete(TRUE);
     }
 
-    QDict<QPixmap> typPix;
-    QDict<QPixmap> typPixBig;
+    QDict<AppLnkImagePrivate> typPix;
     QDict<QString> typName;
 };
 
@@ -1086,55 +1121,52 @@ void AppLnkSet::findChildren(const QString &dr, const QString& typ, const QStrin
     QString typNameLocal = typName;
 
     if ( dir.exists( ".directory" ) ) {
-  Config config( dr + "/.directory", Config::File );
-  config.setGroup( "Desktop Entry" );
-  typNameLocal = config.readEntry( "Name", typNameLocal );
-  if ( !typ.isEmpty() ) {
-      QString iconFile = config.readEntry( "Icon", "AppsIcon" );
-      QImage unscaledIcon = Resource::loadImage( iconFile );
-      QPixmap pm, bpm;
-      pm.convertFromImage( unscaledIcon.smoothScale( smallSize, smallSize ) );
-      bpm.convertFromImage( unscaledIcon.smoothScale( bigSize, bigSize ) );
-      d->typPix.insert(typ, new QPixmap(pm));
-      d->typPixBig.insert(typ, new QPixmap(bpm));
-      d->typName.insert(typ, new QString(typNameLocal));
-  }
+      Config config( dr + "/.directory", Config::File );
+      config.setGroup( "Desktop Entry" );
+      typNameLocal = config.readEntry( "Name", typNameLocal );
+      if ( !typ.isEmpty() ) {
+        d->typPix.insert( typ, 
+          new AppLnkImagePrivate( config.readEntry( "Icon", "AppsIcon" ) )
+        );
+        d->typName.insert(typ, new QString(typNameLocal));
+
+      }
     }
 
     const QFileInfoList *list = dir.entryInfoList();
     if ( list ) {
-  QFileInfo* fi;
-  bool cadded=FALSE;
-  for ( QFileInfoListIterator it(*list); (fi=*it); ++it ) {
-      QString bn = fi->fileName();
-//      qDebug("findChildren "+bn);
-      if ( bn[0] != '.' && bn != "CVS" ) {
-    if ( fi->isDir() ) {
-        QString c = typ.isNull() ? bn : typ+"/"+bn;
-        QString d = typNameLocal.isNull() ? bn : typNameLocal+"/"+bn;
-        findChildren(fi->filePath(), c, d, depth );
-    } else {
-        if ( fi->extension(FALSE) == "desktop" ) {
-      AppLnk* app = new AppLnk( fi->filePath() );
+      QFileInfo* fi;
+      bool cadded=FALSE;
+      for ( QFileInfoListIterator it(*list); (fi=*it); ++it ) {
+        QString bn = fi->fileName();
+  //      qDebug("findChildren "+bn);
+        if ( bn[0] != '.' && bn != "CVS" ) {
+          if ( fi->isDir() ) {
+              QString c = typ.isNull() ? bn : typ+"/"+bn;
+              QString d = typNameLocal.isNull() ? bn : typNameLocal+"/"+bn;
+              findChildren(fi->filePath(), c, d, depth );
+          } else {
+            if ( fi->extension(FALSE) == "desktop" ) {
+              AppLnk* app = new AppLnk( fi->filePath() );
 #ifdef QT_NO_QWS_MULTIPROCESS
-      if ( !Global::isBuiltinCommand( app->exec() ) )
-          delete app;
-      else
+              if ( !Global::isBuiltinCommand( app->exec() ) )
+                  delete app;
+              else
 #endif
-      {
-          if ( !typ.isEmpty() ) {
-        if ( !cadded ) {
-            typs.append(typ);
-            cadded = TRUE;
-        }
-        app->setType(typ);
+              {
+                if ( !typ.isEmpty() ) {
+                  if ( !cadded ) {
+                      typs.append(typ);
+                      cadded = TRUE;
+                  }
+                  app->setType(typ);
+                }
+                add(app);
+              }
+            }
           }
-          add(app);
-      }
         }
-    }
       }
-  }
     }
 }
 
@@ -1192,8 +1224,8 @@ QString AppLnkSet::typeName( const QString& t ) const
 */
 QPixmap AppLnkSet::typePixmap( const QString& t ) const
 {
-    QPixmap *pm = d->typPix.find(t);
-    return pm ? *pm : QPixmap();
+    AppLnkImagePrivate *alip = d->typPix.find(t);
+    return alip ? *(alip->small()) : QPixmap();
 }
 
 /*!
@@ -1204,8 +1236,8 @@ QPixmap AppLnkSet::typePixmap( const QString& t ) const
 */
 QPixmap AppLnkSet::typeBigPixmap( const QString& t ) const
 {
-    QPixmap *pm = d->typPixBig.find(t);
-    return pm ? *pm : QPixmap();
+    AppLnkImagePrivate *alip = d->typPix.find(t);
+    return alip ? *(alip->big()) : QPixmap();
 }
 
 /*!

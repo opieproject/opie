@@ -59,13 +59,19 @@ static bool g_notUseSet = ::getenv("OVERWRITE_ICON_SET");
   Returns the QPixmap called \a pix. You should avoid including
   any filename type extension (e.g. .png, .xpm).
 */
+#include <stdio.h>
 QPixmap Resource::loadPixmap( const QString &pix )
 {
-    QPixmap pm;
+    QPixmap pm; // null pixmap
     QString key="QPE_"+pix;
     if ( !QPixmapCache::find(key,pm) ) {
-	pm.convertFromImage(loadImage(pix));
-	QPixmapCache::insert(key,pm);
+	QImage I = loadImage(pix);
+	if( I.isNull() ) {
+          qWarning( "Could not load %s", pix.latin1() );
+	} else {
+          pm.convertFromImage(I);
+          QPixmapCache::insert(key,pm);
+        }
     }
     return pm;
 }
@@ -100,7 +106,6 @@ QString Resource::findPixmap( const QString &pix )
     f = picsPath + pix + ".xpm";
     if ( QFile( f ).exists() )
 	return f;
-
 
     // All formats...
     QStrList fileFormats = QImageIO::inputFormats();
