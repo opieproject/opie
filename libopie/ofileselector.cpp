@@ -768,6 +768,7 @@ void OFileSelector::slotMimeTypeChanged() {
 }
 void OFileSelector::slotDocLnkBridge( const DocLnk& lnk) {
     m_lneEdit->setText( lnk.name() );
+    emit fileSelected( lnk );
     emit fileSelected( lnk.name() );
 }
 void OFileSelector::slotFileBridge( const QString& str) {
