@@ -71,6 +71,14 @@ enum OModel {
 
 	Model_Ramses_All    = ( Model_Ramses | 0xffffff ),
 	Model_Ramses_MNCI   = ( Model_Ramses | 0x000001 ),
+
+	Model_Yopy          = ( 5 << 24 ),
+
+	Model_Yopy_All      = ( Model_Yopy | 0xffffff ),
+	Model_Yopy_3000     = ( Model_Yopy | 0x000001 ),
+	Model_Yopy_3500     = ( Model_Yopy | 0x000002 ),
+	Model_Yopy_3700     = ( Model_Yopy | 0x000003 ),
+
 };
 
 /**
@@ -83,6 +91,7 @@ enum OVendor {
 	Vendor_Sharp,
 	Vendor_SIEMENS,
 	Vendor_MundN,
+	Vendor_GMate,
 };
 
 /**
@@ -93,7 +102,8 @@ enum OSystem {
 
 	System_Familiar,
 	System_Zaurus,
-	System_OpenZaurus
+	System_OpenZaurus,
+	System_Linupy,
 };
 
 enum OLedState {
@@ -118,6 +128,9 @@ enum OHardKey {
 	HardKey_Record    = Qt::Key_F24,
 	HardKey_Suspend   = Qt::Key_F34,
 	HardKey_Backlight = Qt::Key_F35,
+	HardKey_Action    = Qt::Key_F10,
+	HardKey_OK        = Qt::Key_F11,
+	HardKey_End       = Qt::Key_F12,
 };
 
 enum ODirection {
