@@ -1,5 +1,5 @@
-#ifndef __IMAGE_SCROLL_VIEW_H
-#define __IMAGE_SCROLL_VIEW_H
+#ifndef _IMAGE_SCROLL_VIEW_H
+#define _IMAGE_SCROLL_VIEW_H
 
 #include <qscrollview.h>
 #include <qimage.h>

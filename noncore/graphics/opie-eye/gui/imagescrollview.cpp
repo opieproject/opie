@@ -1,5 +1,9 @@
 #include "imagescrollview.h"
 
+#include <opie2/odebug.h>
+
+using namespace Opie::Core;
+
 #include <qimage.h>
 #include <qlayout.h>
 
@@ -10,7 +14,7 @@ ImageScrollView::ImageScrollView (const QImage&img, QWidget * parent, const char
 }
 
 ImageScrollView::ImageScrollView (const QString&img, QWidget * parent, const char * name, WFlags f)
-    :QScrollView(parent,name,f/*|Qt::WRepaintNoErase*/),_image_data(img)
+    :QScrollView(parent,name,f|Qt::WRepaintNoErase),_image_data(img)
 {
     init();
 }
@@ -60,25 +64,29 @@ void ImageScrollView::drawContents(QPainter * p, int clipx, int clipy, int clipw
     p->drawImage(clipx,clipy,_image_data,x,y,w,h);
 }
 
+/* using the real geometry points and not the translated points is wanted! */
 void ImageScrollView::viewportMouseMoveEvent(QMouseEvent* e)
 {
     int mx, my;
-    viewportToContents( e->x(),  e->y(), mx, my );
-
-    scrollBy(_mouseStartPosX-mx,my-_mouseStartPosY);
-    
+    mx = e->x();
+    my = e->y();
+    int diffx = _mouseStartPosX-mx;
+    int diffy = _mouseStartPosY-my;
+    scrollBy(diffx,diffy);
     _mouseStartPosX=mx;
     _mouseStartPosY=my;
 }
 
 void ImageScrollView::contentsMouseReleaseEvent ( QMouseEvent * e)
 {
-    viewportToContents( e->x(),  e->y(), _mouseStartPosX,_mouseStartPosY );
+    _mouseStartPosX = e->x();
+    _mouseStartPosY = e->y();
 }
 
 void ImageScrollView::contentsMousePressEvent ( QMouseEvent * e)
 {
-    viewportToContents( e->x(),  e->y(), _mouseStartPosX,_mouseStartPosY );
+    _mouseStartPosX = e->x();
+    _mouseStartPosY = e->y();
 }
 
 /* for testing */
