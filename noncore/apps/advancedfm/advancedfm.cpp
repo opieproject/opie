@@ -143,10 +143,10 @@ AdvancedFm::AdvancedFm( )
 
     Local_View = new QListView( tab, "Local_View" );
 //    Local_View->setResizePolicy( QListView::AutoOneFit );
-    Local_View->addColumn( tr("File"),140);
-    Local_View->addColumn( tr("Date"),-1);
-    Local_View->setColumnAlignment(1,QListView::AlignRight);
+    Local_View->addColumn( tr("File"),130);
     Local_View->addColumn( tr("Size"),-1);
+    Local_View->setColumnAlignment(1,QListView::AlignRight);
+    Local_View->addColumn( tr("Date"),-1);
     Local_View->setColumnAlignment(2,QListView::AlignRight);
     Local_View->setAllColumnsShowFocus(TRUE);
 //     Local_View->setMultiSelection( TRUE );
@@ -168,10 +168,10 @@ AdvancedFm::AdvancedFm( )
     tabLayout_2->setMargin( 2);
 
     Remote_View = new QListView( tab_2, "Remote_View" );
-    Remote_View->addColumn( tr("File"),140);
-    Remote_View->addColumn( tr("Date"),-1);
-    Remote_View->setColumnAlignment(1,QListView::AlignRight);
+    Remote_View->addColumn( tr("File"),130);
     Remote_View->addColumn( tr("Size"),-1);
+    Remote_View->setColumnAlignment(1,QListView::AlignRight);
+    Remote_View->addColumn( tr("Date"),-1);
     Remote_View->setColumnAlignment(2,QListView::AlignRight);
     Remote_View->setAllColumnsShowFocus(TRUE);
 //     Remote_View->setMultiSelection( TRUE );
@@ -301,7 +301,7 @@ void AdvancedFm::populateLocalView()
             }
         }
         if(fileL !="./" && fi->exists()) {
-            item= new QListViewItem( Local_View, fileL , fileDate, fileS);
+            item= new QListViewItem( Local_View, fileL, fileS , fileDate);
 
             if(isDir || fileL.find("/",0,TRUE) != -1) {
                 if( !QDir( fi->filePath() ).isReadable())
@@ -354,7 +354,7 @@ void AdvancedFm::populateLocalView()
 //                fileS.sprintf("%d,%d", devT,  devT);
                 fileDate.sprintf("%s", ctime( &buf.st_mtime));
                 if( fileL.find(".") == -1 ){
-                    item= new QListViewItem( Local_View, fileL, fileDate, fileS);
+                    item= new QListViewItem( Local_View, fileL, fileS, fileDate);
                     pm =  Resource::loadPixmap( "UnknownDocument-14" );
                     item->setPixmap( 0,pm);
                 }
@@ -408,7 +408,7 @@ void AdvancedFm::populateRemoteView()
             }
         }
         if(fileL !="./" && fi->exists()) {
-            item= new QListViewItem( Remote_View, fileL, fileDate, fileS);
+            item= new QListViewItem( Remote_View, fileL, fileS, fileDate);
             QPixmap pm;
 
             if(isDir || fileL.find("/",0,TRUE) != -1) {
@@ -459,7 +459,7 @@ void AdvancedFm::populateRemoteView()
                 fileS.sprintf("%d,%d", (int) (buf.st_dev>>8)&0xFF, (int) buf.st_dev &0xFF);
                 fileDate.sprintf("%s", ctime( &buf.st_mtime));
                 if( fileL.find(".") == -1 ){
-                    item= new QListViewItem( Remote_View, fileL, fileDate, fileS);
+                    item= new QListViewItem( Remote_View, fileL, fileS, fileDate);
                     pm =  Resource::loadPixmap( "UnknownDocument-14" );
                     item->setPixmap( 0,pm);
                 }
