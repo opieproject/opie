@@ -493,6 +493,8 @@ void Wellenreiter::doAction( const QString& action, const QString& protocol, OPa
 
 void Wellenreiter::joinNetwork(const QString& type, const QString& essid, int channel, const QString& macaddr)
 {
+    // we need the interface too:
+    const QString iface = "wlan0";
     qDebug( "joinNetwork() - %s, %s, %d, %s",
         (const char*) type,
         (const char*) essid,
@@ -502,7 +504,10 @@ void Wellenreiter::joinNetwork(const QString& type, const QString& essid, int ch
     // TODO: Stop scanning here
 
     QCopEnvelope msg( "QPE/Application/networksettings", "wlan(QString,QString,QString)" );
-    msg << "test" << "test" << "test";
+    msg << iface << QString("Mode") << type;
+    msg << iface << QString("ESSID") << essid;
+    msg << iface << QString("Channel") << channel;
+    msg << iface << QString("MacAddr") << macaddr;
 
 }
 
