@@ -2,6 +2,7 @@
 CanFastLoad=1
 Exec=reader
 Icon=opie-reader/uqtreader
+MimeType=etext/*
 Type=Application
 Name=Opie Reader
 Comment=An E-Text Reader
