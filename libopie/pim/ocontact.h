@@ -214,7 +214,10 @@ public:
     void setEmails( const QString &v );
     QString emails() const { return find( Qtopia::Emails ); }
     static int rtti();
-
+    int lastHitField() const {return m_lastHitField;};
+protected:
+    mutable int m_lastHitField;
+    void setLastHitField(int i) const { m_lastHitField = i; };
 
 private:
     // The XML-Backend needs some access to the private functions

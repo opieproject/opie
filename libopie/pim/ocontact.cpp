@@ -958,6 +958,7 @@ bool OContact::match( const QRegExp &r ) const
     QMap<int, QString>::ConstIterator it;
     for ( it = mMap.begin(); it != mMap.end(); ++it ) {
 	if ( (*it).find( r ) > -1 ) {
+            setLastHitField( it.key() );
 	    match = true;
 	    break;
 	}
