@@ -1,7 +1,7 @@
 [Desktop Entry]
-Exec=sheetqt
+Exec=opie-sheet
 Icon=opie-sheet/sheetqt
-MimeType=application/sheet-qt
+MimeType=application/opie-sheet
 Type=Application
 Name=Opie Sheet
 Comment=Spreadsheet Application
