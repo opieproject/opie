@@ -357,7 +357,7 @@ static void setVolume( int t = 0, int percent = -1 )
 					int vol = muted ? 0 : percent;
 					// set both channels to same volume
 					vol |= vol << 8;
-					ioctl( fd, MIXER_WRITE( 0 ), &vol );
+					ioctl( fd, MIXER_WRITE( SOUND_MIXER_PCM ), &vol );
 					::close( fd );
 				}
 #endif
