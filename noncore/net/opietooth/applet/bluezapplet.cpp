@@ -154,7 +154,9 @@ namespace OpieTooth {
             //case 7:
             // With table of currently-detected devices.
         }
+        delete menu;
     }
+
 
 /**
  * Launches the bluetooth manager
