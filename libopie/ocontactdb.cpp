@@ -14,11 +14,14 @@
  *       with our version of libqpe
  *
  * =====================================================================
- * Version: $Id: ocontactdb.cpp,v 1.1.2.16 2002-08-10 15:00:30 eilers Exp $
+ * Version: $Id: ocontactdb.cpp,v 1.1.2.17 2002-08-27 20:11:30 zecke Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb.cpp,v $
- * Revision 1.1.2.16  2002-08-10 15:00:30  eilers
+ * Revision 1.1.2.17  2002-08-27 20:11:30  zecke
+ * So nice to be able to commit again..
+ *
+ * Revision 1.1.2.16  2002/08/10 15:00:30  eilers
  * Improved search interface. Thanks to Zecke
  *
  * Revision 1.1.2.15  2002/08/04 12:24:30  eilers
@@ -245,7 +248,7 @@ namespace {
 			return m_currentQuery;
 		}
 
-		const uint getQuerySettings()
+		const uint querySettings()
 		{
 			return ( OContactDB::query_WildCards 
 				 & OContactDB::query_IgnoreCase 
@@ -614,9 +617,9 @@ bool OContactDB::queryByExample ( const Contact &query, const Query setting )
 	return ( m_backEnd->queryByExample ( query, setting ) );
 }
 
-const uint OContactDB::getQuerySettings()
+const uint OContactDB::querySettings()
 {
-	return ( m_backEnd->getQuerySettings() );
+	return ( m_backEnd->querySettings() );
 }
 
 bool OContactDB::hasQuerySettings ( Query querySettings ) const 

@@ -1,5 +1,5 @@
 /**********************************************************************
-** Copyright (C) 2002 Stefan Eilers (se, eilers.stefan@epost.de
+** Copyright (C) 2002 Stefan Eilers (se, eilers.stefan@epost.de)
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU Library General Public License version 2 as published by the

@@ -12,6 +12,8 @@
 
 #include <qobject.h>
 
+using namespace Opie;
+
 ToDoEvent::ToDoEvent(const ToDoEvent &event )
 {
   *this = event;
@@ -39,7 +41,7 @@ ToDoEvent::ToDoEvent(bool completed, int priority,
     }// generate the ids
     m_uid = uid;
     m_hasAlarmDateTime = false;
-    
+
 }
 QArray<int> ToDoEvent::categories()const
 {
@@ -361,7 +363,7 @@ ToDoEvent &ToDoEvent::operator=(const ToDoEvent &item )
     m_relations = item.m_relations;
     m_hasAlarmDateTime = item.m_hasAlarmDateTime;
     m_alarmDateTime = item.m_alarmDateTime;
-    
+
     return *this;
 }
 

@@ -8,11 +8,15 @@
 #include <qregexp.h>
 #include <qstringlist.h>
 #include <qdatetime.h>
+#include <qvaluelist.h>
 
 #include <qpe/recordfields.h>
 
+namespace Opie {
+
 class ToDoEvent   {
 public:
+    typedef QValueList<ToDoEvent> ValueList;
     enum RecordFields {
         Uid = Qtopia::UID_ID,
         Category = Qtopia::CATEGORY_ID,
@@ -29,7 +33,6 @@ public:
 	HasAlarmDateTime,
 	AlarmDateTime
     };
-    friend class ToDoDB;
  public:
     // priorities from Very low to very high
     enum TaskPriority { VERYHIGH=1, HIGH, NORMAL, LOW, VERYLOW };
@@ -234,6 +237,6 @@ public:
     bool m_hasAlarmDateTime;
     QDateTime m_alarmDateTime;
 };
-
+};
 
 #endif
