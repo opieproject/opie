@@ -88,7 +88,7 @@ DrawPad::DrawPad(QWidget* parent, const char* name)
     QAction* thumbnailViewAction = new QAction(tr("Thumbnail View"), tr("Thumbnail View..."), 0, this);
     connect(thumbnailViewAction, SIGNAL(activated()), this, SLOT(thumbnailView()));
     thumbnailViewAction->addTo(toolsPopupMenu);
-    
+
     QAction* pageInformationAction = new QAction(tr("Page Information"), tr("Page Information..."), 0, this);
     connect(pageInformationAction, SIGNAL(activated()), this, SLOT(pageInformation()));
     pageInformationAction->addTo(toolsPopupMenu);
@@ -127,12 +127,12 @@ DrawPad::DrawPad(QWidget* parent, const char* name)
 
     QPEToolBar* navigationToolBar = new QPEToolBar(this);
 
-    m_pUndoAction = new QAction(tr("Undo"), Resource::loadIconSet("drawpad/undo"), QString::null, 0, this);
+    m_pUndoAction = new QAction(tr("Undo"), Resource::loadIconSet("undo"), QString::null, 0, this);
     connect(m_pUndoAction, SIGNAL(activated()), m_pDrawPadCanvas, SLOT(undo()));
     m_pUndoAction->addTo(navigationToolBar);
     m_pUndoAction->setWhatsThis( tr( "Click here to undo the last action." ) );
 
-    m_pRedoAction = new QAction(tr("Redo"), Resource::loadIconSet("drawpad/redo"), QString::null, 0, this);
+    m_pRedoAction = new QAction(tr("Redo"), Resource::loadIconSet("redo"), QString::null, 0, this);
     connect(m_pRedoAction, SIGNAL(activated()), m_pDrawPadCanvas, SLOT(redo()));
     m_pRedoAction->addTo(navigationToolBar);
     m_pRedoAction->setWhatsThis( tr( "Click here to re-perform the last action." ) );
@@ -556,7 +556,7 @@ void DrawPad::changeBrushColor(const QColor& color)
     painter.begin(m_pBrushColorToolButton->pixmap());
     painter.fillRect(QRect(0, 12, 14, 2), m_brush.color());
     painter.end();
- 
+
     m_pBrushColorToolButton->popup()->hide();
 }
 
