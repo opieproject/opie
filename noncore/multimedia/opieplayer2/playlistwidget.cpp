@@ -322,12 +322,14 @@ void PlayListWidget::readConfig( Config& cfg ) {
         QString entryName;
         entryName.sprintf( "File%i", i + 1 );
         QString linkFile = cfg.readEntry( entryName );
-        DocLnk lnk( linkFile );
-        if ( lnk.isValid() ) {
-            d->selectedFiles->addToSelection( lnk );
+        if(QFileInfo( linkFile).exists() ) {
+            DocLnk lnk( linkFile );
+            if ( QFileInfo( lnk.file()).exists() || linkFile.find("http",0,TRUE) != -1) {
+                d->selectedFiles->addToSelection( lnk );
+            }
         }
     }
-    d->selectedFiles->setSelectedItem( currentString);
+d->selectedFiles->setSelectedItem( currentString);
 }
 
 
@@ -651,7 +653,8 @@ void PlayListWidget::addSelected() {
                   QListIterator<DocLnk> dit( files.children() );
                   for ( ; dit.current(); ++dit ) {
                       if( dit.current()->name() == it.current()->text(0) ) {
-                          d->selectedFiles->addToSelection(  **dit );
+                          if(QFileInfo( dit.current()->file()).exists())
+                              d->selectedFiles->addToSelection(  **dit );
                       }
                   }
                   audioView->setSelected( it.current(),FALSE);
@@ -668,7 +671,8 @@ void PlayListWidget::addSelected() {
                   QListIterator<DocLnk> dit( vFiles.children() );
                   for ( ; dit.current(); ++dit ) {
                       if( dit.current()->name() == it.current()->text(0) ) {
-                          d->selectedFiles->addToSelection(  **dit );
+                          if(QFileInfo( dit.current()->file()).exists())
+                              d->selectedFiles->addToSelection(  **dit );
                       }
                   }
                   videoView->setSelected( it.current(),FALSE);
@@ -701,7 +705,8 @@ void PlayListWidget::addToSelection( QListViewItem *it) {
               QListIterator<DocLnk> dit( files.children() );
               for ( ; dit.current(); ++dit ) {
                   if( dit.current()->name() == it->text(0)) {
-                      d->selectedFiles->addToSelection(  **dit );
+                      if(QFileInfo( dit.current()->file()).exists())
+                          d->selectedFiles->addToSelection(  **dit );
                   }
               }
           }
@@ -710,7 +715,8 @@ void PlayListWidget::addToSelection( QListViewItem *it) {
               QListIterator<DocLnk> dit( vFiles.children() );
               for ( ; dit.current(); ++dit ) {
                   if( dit.current()->name() == it->text(0)) {
-                      d->selectedFiles->addToSelection(  **dit );
+                      if(QFileInfo( dit.current()->file()).exists())
+                          d->selectedFiles->addToSelection(  **dit );
                   }
               }
           }
@@ -1111,16 +1117,18 @@ void PlayListWidget::readm3u(const QString &filename) {
                 if(s.find(" ",0,TRUE) == -1)  { // not sure if this is neede since cf uses vfat
                     if(s.left(2) == "E:" || s.left(2) == "P:") {
                         s=s.right(s.length()-2);
-                        DocLnk lnk( s );
-                        QFileInfo f(s);
-                        QString name = f.baseName();
-                        name = name.right( name.length()-name.findRev( "\\",-1,TRUE ) -1 );
-                        lnk.setName( name );
-                        s=s.replace( QRegExp("\\"),"/");
-                        lnk.setFile( s );
-                        lnk.writeLink();
-                        qDebug("add "+name);
-                        d->selectedFiles->addToSelection( lnk);
+                        if(QFile(s).exists()) {
+                            DocLnk lnk( s );
+                            QFileInfo f(s);
+                            QString name = f.baseName();
+                            name = name.right( name.length()-name.findRev( "\\",-1,TRUE ) -1 );
+                            lnk.setName( name );
+                            s=s.replace( QRegExp("\\"),"/");
+                            lnk.setFile( s );
+                            lnk.writeLink();
+                            qDebug("add "+name);
+                            d->selectedFiles->addToSelection( lnk);
+                        }
                     } else { // is url
                         s.replace(QRegExp("%20")," ");
                         DocLnk lnk( s );
