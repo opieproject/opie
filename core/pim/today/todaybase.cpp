@@ -50,12 +50,21 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
   QPixmap mail = Resource::loadPixmap( "today/mail" );
   
   
-  //if ( !name )
-  //  setName( "TodayBase" );
-  //resize( 223, 307 ); 
+QPalette pal2;
+ QColorGroup cg;
+ cg.setColor( QColorGroup::Text, white );
+ cg.setBrush( QColorGroup::Background, QBrush( QColor( 238, 238, 230), logo ) );
+ pal2.setActive( cg );
+
+
+QPalette pal = this->palette();
+QColor col = pal.color(QPalette::Active, QColorGroup::Background);
+pal.setColor(QPalette::Active, QColorGroup::Button, col);
+this->setPalette(pal);
 
   QVBoxLayout * layout = new QVBoxLayout(this);
   
+
   Frame4 = new QFrame( this, "Frame4" );
   Frame4->setFrameShape( QScrollView::StyledPanel );
   Frame4->setFrameShadow( QScrollView::Sunken );
@@ -68,6 +77,7 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
   DatesButton = new QPushButton (Frame4, "DatesButton" );
   DatesButton->setGeometry( QRect( 2, 4, 36, 32 ) );
   DatesButton->setBackgroundOrigin( QPushButton::WidgetOrigin );
+  DatesButton->setPalette( pal );
   DatesButton->setPixmap( datebook  );
   DatesButton->setFlat( TRUE );
 
@@ -78,21 +88,15 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
 
   // today logo
   Frame = new QLabel( this, "Frame" );
-  QPalette pal;
-  QColorGroup cg;
-  cg.setColor( QColorGroup::Text, white );
-  cg.setBrush( QColorGroup::Background, QBrush( QColor( 238, 238, 230), logo ) );
-  pal.setActive( cg );
-  
-  Frame->setPalette( pal );
+  Frame->setPalette( pal2 );
   Frame->setFrameShape( QFrame::StyledPanel );
   Frame->setFrameShadow( QFrame::Raised );
   Frame->setLineWidth( 0 );
   Frame->setMaximumHeight(50);
   Frame->setMinimumHeight(50);
+  
   // date
   TextLabel1 = new QLabel( Frame, "TextLabel1" );
-  TextLabel1->setPalette( pal );
   TextLabel1->setGeometry( QRect( 10, 35, 168, 12 ) ); 
   QFont TextLabel1_font(  TextLabel1->font() );
   TextLabel1_font.setBold( TRUE );
@@ -107,7 +111,9 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
   
   TodoButton = new QPushButton (Frame15, "TodoButton" );
   TodoButton->setGeometry( QRect( 2, 4, 36, 32 ) );
-  TodoButton->setBackgroundOrigin( QPushButton::WidgetOrigin );
+  //TodoButton->setBackgroundMode(NoBackground);
+  TodoButton->setPalette( pal );
+  //TodoButton->setBackgroundOrigin( QPushButton::WidgetOrigin );
   TodoButton->setPixmap( todo  );
   TodoButton->setFlat( TRUE );
 
@@ -119,20 +125,22 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
 
   PushButton1 = new QPushButton (Frame15, "PushButton1" );
   PushButton1->setGeometry( QRect( 216, 68, 25, 21 ) ); 
-  PushButton1->setBackgroundOrigin( QPushButton::WidgetOrigin );
+  //PushButton1->setBackgroundOrigin( QPushButton::WidgetOrigin );
   PushButton1->setPixmap( config  );
+  PushButton1->setPalette( pal );
   PushButton1->setAutoDefault( TRUE );
   PushButton1->setFlat( TRUE );
 
   // mail
-  MailFrame = new QFrame( this, "MailFrame" );
+  MailFrame = new QFrame( this ,"MailFrame" );
   MailFrame->setFrameShape( QScrollView::StyledPanel );
   MailFrame->setFrameShadow( QScrollView::Sunken );
-  MailFrame->setBackgroundOrigin( QScrollView::ParentOrigin );
+  //MailFrame->setBackgroundOrigin( QScrollView::ParentOrigin );
 
   MailButton = new QPushButton (MailFrame, "MailButton" );
   MailButton->setGeometry( QRect( 2, 10, 36, 19 ) );
-  MailButton->setBackgroundOrigin( QPushButton::WidgetOrigin );
+  //MailButton->setBackgroundOrigin( QPushButton::WidgetOrigin );
+  MailButton->setPalette( pal );
   MailButton->setPixmap( mail  );
   MailButton->setFlat( TRUE );
 
@@ -143,11 +151,15 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
   MailField->setMaximumHeight(15);
   MailField->setMinimumHeight(10);
 
+
+  
+
   layout->addWidget(Frame);
   layout->addWidget(Frame4);
   layout->addWidget(MailFrame);
   layout->addWidget(Frame15);
-  
+  //layout->addWidget(split);
+
   layout->setStretchFactor(Frame4,4);
   layout->setStretchFactor(MailFrame,1);
   layout->setStretchFactor(Frame15,3);
@@ -158,6 +170,6 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
  */
 TodayBase::~TodayBase()
 {
-  // no need to delete child widgets, Qt does it all for us
+
 }
 

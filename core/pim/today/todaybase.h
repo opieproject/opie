@@ -12,6 +12,7 @@
 #include <qvariant.h>
 #include <qwidget.h>
 #include <qscrollview.h>
+#include <qsplitter.h>
 
 class QVBoxLayout; 
 class QHBoxLayout; 
@@ -43,6 +44,7 @@ public:
     QPushButton* getridoffuckingstrippeldlinesbutton;
 
 protected:
+
 
 };
 
