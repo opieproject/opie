@@ -22,7 +22,6 @@
 
 #include <qlayout.h>
 #include <qhbox.h>
-#include <qtoolbutton.h>
 #include <qlabel.h>
 #include <qwhatsthis.h>
 #include <qvgroupbox.h>

@@ -23,13 +23,10 @@
 #include <qcheckbox.h>
 #include <qlabel.h>
 #include <qspinbox.h>
-#include <qtabwidget.h>
 #include <qlayout.h>
 #include <qheader.h>
-#include <qhbox.h>
 #include <qvbox.h>
 #include <qtoolbutton.h>
-#include <qtooltip.h>
 #include <qwhatsthis.h>
 
 class ToolButton : public QToolButton {

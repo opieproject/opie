@@ -19,7 +19,6 @@
 #include <qpe/config.h>
 
 #include <qlayout.h>
-#include <qwhatsthis.h>
 
 
 TodolistPluginConfig::TodolistPluginConfig( QWidget *parent,  const char* name)

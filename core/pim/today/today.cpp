@@ -26,13 +26,10 @@
 #include <qpe/global.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/contact.h>
-#include <qpe/timestring.h>
 
 #include <qdir.h>
-#include <qfile.h>
 #include <qtimer.h>
 #include <qwhatsthis.h>
-#include <qtranslator.h>
 
 struct TodayPlugin {
     TodayPlugin() : library( 0 ), iface( 0 ), guiPart( 0 ), guiBox( 0 ) {}

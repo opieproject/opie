@@ -17,7 +17,6 @@
 
 
 
-#include "datebookevent.h"
 #include "datebookplugin.h"
 #include "datebookpluginconfig.h"
 

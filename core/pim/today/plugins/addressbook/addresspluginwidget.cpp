@@ -18,16 +18,8 @@
 
 #include "addresspluginwidget.h"
 
-#include <qvaluelist.h>
-#include <qtl.h>
-#include <qstring.h>
-#include <qscrollview.h>
-#include <qobject.h>
-#include <qdatetime.h> 
 
 #include <qpe/config.h>
-#include <qpe/timestring.h>
-#include <qpe/qcopenvelope_qws.h>
 
 #include <opie/ocontact.h>
 

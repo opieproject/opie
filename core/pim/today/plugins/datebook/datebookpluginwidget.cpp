@@ -17,11 +17,8 @@
 
 #include "datebookpluginwidget.h"
 
-#include <qpe/timestring.h>
 #include <qpe/config.h>
 
-#include <qdatetime.h>
-#include <qlabel.h>
 #include <qtl.h>
 
 DatebookPluginWidget::DatebookPluginWidget( QWidget *parent, const char* name )

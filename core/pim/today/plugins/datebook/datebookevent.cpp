@@ -16,9 +16,7 @@
 
 #include "datebookevent.h"
 #include <qpe/config.h>
-#include <qpe/timestring.h>
 #include <qpe/qcopenvelope_qws.h>
-#include <qpe/qpeapplication.h>
 #include <qpe/calendar.h>
 
 #include <opie/odevice.h>

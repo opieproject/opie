@@ -17,7 +17,6 @@
 #include "todaybase.h"
 
 #include <qvbox.h>
-#include <qlabel.h>
 #include <qwhatsthis.h>
 
 #include <qpe/resource.h>

@@ -20,10 +20,6 @@
 #include <qpe/config.h>
 
 #include <qlayout.h>
-#include <qlabel.h>
-#include <qhbox.h>
-#include <qwhatsthis.h>
-#include <qvbox.h>
 
 DatebookPluginConfig::DatebookPluginConfig( QWidget* parent, const char* name)
     : TodayConfigWidget( parent, name ) {
