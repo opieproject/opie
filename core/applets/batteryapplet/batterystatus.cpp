@@ -255,8 +255,8 @@ QSize BatteryStatus::sizeHint() const {
 
     if ( bat2 )  {
     return QSize( QMAX( QMIN( 200, qApp->desktop()->width() ),
-                        r.width() ), 2 * 10 + 80 + r.height() +  r2.height() );
+                        r.width()+2*10 ), 2 * 10 + 80 + r.height() +  r2.height() );
     }
     return QSize( QMAX( QMIN( 200, qApp->desktop()->width() ),
-                        r.width() ), 2 * 10 + 40 + r.height() );
+                        r.width()+2*10 ), 2 * 10 + 40 + r.height() );
 }
