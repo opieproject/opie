@@ -120,6 +120,10 @@
         <source>Do you want to restart Opie now?</source>
         <translation>¿Quiere reiniciar Opie ahora?</translation>
     </message>
+    <message>
+        <source>Settings...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditScheme</name>

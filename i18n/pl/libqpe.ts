@@ -217,6 +217,10 @@ edytuje kategorie.</translation>
         <source>Moving Document failed.</source>
         <translation>Blad przenoszenia dokumentu.</translation>
     </message>
+    <message>
+        <source>File does not exist.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LnkPropertiesBase</name>
@@ -712,6 +716,10 @@ Zwolnij wiecej pamieci</translation>
     </message>
     <message>
         <source>Internal Storage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ram FS</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

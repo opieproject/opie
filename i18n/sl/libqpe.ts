@@ -217,6 +217,10 @@ ureja kategorije.</translation>
         <source>Moving Document failed.</source>
         <translation>Premikanje dokumenta spodletelo.</translation>
     </message>
+    <message>
+        <source>File does not exist.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LnkPropertiesBase</name>
@@ -713,6 +717,10 @@ Sprostite nekaj spomina in poizkusite ponovno.</translation>
     <message>
         <source>Internal Storage</source>
         <translation>Notranja shramba</translation>
+    </message>
+    <message>
+        <source>Ram FS</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

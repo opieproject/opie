@@ -122,7 +122,7 @@
     </message>
     <message>
         <source>Save File As?</source>
-        <translation>Datei speichern als?</translation>
+        <translation type="obsolete">Datei speichern als?</translation>
     </message>
     <message>
         <source>Permissions</source>
@@ -313,23 +313,23 @@ This is irreversable!!</source>
     <name>fileSaver</name>
     <message>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation type="obsolete">Name</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Größe</translation>
+        <translation type="obsolete">Größe</translation>
     </message>
     <message>
         <source>fileSaver</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Date</source>
-        <translation>Datum</translation>
+        <translation type="obsolete">Datum</translation>
     </message>
     <message>
         <source>set file permissions</source>
-        <translation>setze Dateirechte</translation>
+        <translation type="obsolete">setze Dateirechte</translation>
     </message>
 </context>
 </TS>

@@ -216,6 +216,10 @@ editing categories.</source>
         <source>Moving Document failed.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>File does not exist.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LnkPropertiesBase</name>
@@ -702,6 +706,10 @@ Free some memory and try again.</source>
     </message>
     <message>
         <source>Internal Storage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ram FS</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

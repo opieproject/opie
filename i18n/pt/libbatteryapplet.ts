@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Close</source>
-        <translation type="obsolete">Fechar</translation>
+        <translation type="unfinished">Fechar</translation>
     </message>
     <message>
         <source>Charging</source>

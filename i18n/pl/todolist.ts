@@ -227,6 +227,10 @@ Quit Anyway?</source>
     </message>
     <message>
         <source>Delete all tasks?</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>all tasks</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

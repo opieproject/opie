@@ -652,7 +652,7 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>Abort</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
 </context>
 <context>

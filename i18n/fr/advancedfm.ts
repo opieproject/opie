@@ -162,6 +162,23 @@
         <source>Beam File</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source> already exists
+Do you really want to delete it?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> As</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy Same Dir</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Output</name>

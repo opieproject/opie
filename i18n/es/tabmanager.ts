@@ -7,19 +7,35 @@
     </message>
     <message>
         <source>Exec</source>
-        <translation>Ejecutar</translation>
+        <translation type="obsolete">Ejecutar</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation>Comentario</translation>
+        <translation type="obsolete">Comentario</translation>
     </message>
     <message>
         <source>Icon</source>
-        <translation>Icono</translation>
+        <translation type="obsolete">Icono</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Nombre</translation>
+        <translation type="obsolete">Nombre</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Icon:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exec:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Comment:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -56,7 +72,7 @@ aún en el grupo.</translation>
     </message>
     <message>
         <source>Application edit</source>
-        <translation>Editor aplicación</translation>
+        <translation type="obsolete">Editor aplicación</translation>
     </message>
     <message>
         <source>Tab</source>
@@ -64,26 +80,49 @@ aún en el grupo.</translation>
     </message>
     <message>
         <source>Can&apos;t save.</source>
-        <translation>No puedo guardar.</translation>
+        <translation type="obsolete">No puedo guardar.</translation>
     </message>
     <message>
         <source>Can&apos;t move application.</source>
-        <translation>No puedo mover aplicación.</translation>
+        <translation type="obsolete">No puedo mover aplicación.</translation>
+    </message>
+    <message>
+        <source>Gathering icons...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Application</source>
+        <translation type="unfinished">Aplicación</translation>
     </message>
 </context>
 <context>
     <name>TabManagerBase</name>
     <message>
         <source>Tab Manger</source>
-        <translation>Gestor de Fichas</translation>
+        <translation type="obsolete">Gestor de Fichas</translation>
     </message>
     <message>
         <source>Groups</source>
-        <translation>Grupos</translation>
+        <translation type="obsolete">Grupos</translation>
     </message>
     <message>
         <source>Applications</source>
-        <translation>Aplicaciones</translation>
+        <translation type="obsolete">Aplicaciones</translation>
+    </message>
+    <message>
+        <source>Tab Manager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hierarchy</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Wait</name>
+    <message>
+        <source>Please Wait...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

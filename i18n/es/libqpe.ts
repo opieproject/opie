@@ -217,6 +217,10 @@ editando categorías.</translation>
         <source>Moving Document failed.</source>
         <translation>Fallo al mover documento.</translation>
     </message>
+    <message>
+        <source>File does not exist.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LnkPropertiesBase</name>
@@ -713,6 +717,10 @@ Libere memoria e intételo de nuevo.</translation>
     <message>
         <source>Internal Storage</source>
         <translation>Almacenamiento interno</translation>
+    </message>
+    <message>
+        <source>Ram FS</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

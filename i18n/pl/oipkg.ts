@@ -42,7 +42,7 @@
     </message>
     <message>
         <source>ipkgfind</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Package</source>
@@ -82,7 +82,7 @@
     </message>
     <message>
         <source>Section: </source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Close Section</source>
@@ -110,7 +110,7 @@
     </message>
     <message>
         <source>ipkgfind: </source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Clear Search</source>
@@ -178,6 +178,18 @@
     </message>
     <message>
         <source>documents</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ipkgfind&amp;killefiz</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Section:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search: </source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -3,15 +3,15 @@
     <name>NetMonitor</name>
     <message>
         <source>Network Offline</source>
-        <translation type="obsolete"></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Disconnect</source>
-        <translation type="obsolete"></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Connect</source>
-        <translation type="obsolete"></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -43,7 +43,7 @@
     </message>
     <message>
         <source>New Page</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nova Página</translation>
     </message>
     <message>
         <source>Clear Page</source>
@@ -119,7 +119,7 @@
     </message>
     <message>
         <source>Pen Color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cor de Desenho</translation>
     </message>
     <message>
         <source>Fill Color</source>
@@ -308,7 +308,7 @@ all the pages?</source>
     <name>TextToolDialog</name>
     <message>
         <source>Insert Text</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Inserir Texto</translation>
     </message>
 </context>
 <context>

@@ -267,7 +267,7 @@ Sair na mesma?</translation>
     </message>
     <message>
         <source>Name Title</source>
-        <translation type="obsolete">Título</translation>
+        <translation type="unfinished">Título</translation>
     </message>
     <message>
         <source>First Name</source>
@@ -299,15 +299,15 @@ Sair na mesma?</translation>
     </message>
     <message>
         <source>Company</source>
-        <translation type="obsolete">Empresa</translation>
+        <translation type="unfinished">Empresa</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="obsolete">Notas</translation>
+        <translation type="unfinished">Notas</translation>
     </message>
     <message>
         <source>Groups</source>
-        <translation type="obsolete">Grupos</translation>
+        <translation type="unfinished">Grupos</translation>
     </message>
     <message>
         <source>Street</source>
@@ -1275,43 +1275,43 @@ Sair na mesma?</translation>
     </message>
     <message>
         <source>Business Street</source>
-        <translation type="obsolete">Rua (Empresa)</translation>
+        <translation type="unfinished">Rua (Empresa)</translation>
     </message>
     <message>
         <source>Home Street</source>
-        <translation type="obsolete">Rua (Pessoal)</translation>
+        <translation type="unfinished">Rua (Pessoal)</translation>
     </message>
     <message>
         <source>Business City</source>
-        <translation type="obsolete">Cidade (Empresa)</translation>
+        <translation type="unfinished">Cidade (Empresa)</translation>
     </message>
     <message>
         <source>Business State</source>
-        <translation type="obsolete">Estado (Empresa)</translation>
+        <translation type="unfinished">Estado (Empresa)</translation>
     </message>
     <message>
         <source>Business Zip</source>
-        <translation type="obsolete">Cód Postal (Empresa)</translation>
+        <translation type="unfinished">Cód Postal (Empresa)</translation>
     </message>
     <message>
         <source>Business Country</source>
-        <translation type="obsolete">País (Empresa)</translation>
+        <translation type="unfinished">País (Empresa)</translation>
     </message>
     <message>
         <source>Home City</source>
-        <translation type="obsolete">Cidade (Pessoal)</translation>
+        <translation type="unfinished">Cidade (Pessoal)</translation>
     </message>
     <message>
         <source>Home State</source>
-        <translation type="obsolete">Estado (Pessoal)</translation>
+        <translation type="unfinished">Estado (Pessoal)</translation>
     </message>
     <message>
         <source>Home Zip</source>
-        <translation type="obsolete">Cód. Postal (Pessoal)</translation>
+        <translation type="unfinished">Cód. Postal (Pessoal)</translation>
     </message>
     <message>
         <source>Home Country</source>
-        <translation type="obsolete">País (Pessoal)</translation>
+        <translation type="unfinished">País (Pessoal)</translation>
     </message>
     <message>
         <source>Department</source>

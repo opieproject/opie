@@ -66,5 +66,9 @@
         <source>Harp</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Teeclub</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

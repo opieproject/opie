@@ -218,6 +218,10 @@ editando as categorias.</translation>
         <source>Document View</source>
         <translation>Visualizador de Documentos</translation>
     </message>
+    <message>
+        <source>File does not exist.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LnkPropertiesBase</name>
@@ -721,6 +725,10 @@ tente novamente.</translation>
     <message>
         <source>Hard Disk</source>
         <translation>Disco Rígido</translation>
+    </message>
+    <message>
+        <source>Ram FS</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

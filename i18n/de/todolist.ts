@@ -233,7 +233,11 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>Delete all tasks?</source>
-        <translation>Alle Aufgaben löschen?</translation>
+        <translation type="obsolete">Alle Aufgaben löschen?</translation>
+    </message>
+    <message>
+        <source>all tasks</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

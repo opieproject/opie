@@ -7,18 +7,34 @@
     </message>
     <message>
         <source>Exec</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Name</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Icon:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exec:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Comment:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -55,7 +71,7 @@ still in the group.</source>
     </message>
     <message>
         <source>Application edit</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Tab</source>
@@ -63,10 +79,18 @@ still in the group.</source>
     </message>
     <message>
         <source>Can&apos;t save.</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Can&apos;t move application.</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>Gathering icons...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Application</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -74,14 +98,29 @@ still in the group.</source>
     <name>TabManagerBase</name>
     <message>
         <source>Tab Manger</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Groups</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Applications</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>Tab Manager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hierarchy</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Wait</name>
+    <message>
+        <source>Please Wait...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

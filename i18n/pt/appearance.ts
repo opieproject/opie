@@ -101,6 +101,10 @@
         <source>Do you want to restart Opie now?</source>
         <translation>Reiniciar o Opie agora?</translation>
     </message>
+    <message>
+        <source>Settings...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditScheme</name>

@@ -38,6 +38,32 @@
     </message>
 </context>
 <context>
+    <name>ModulesDetail</name>
+    <message>
+        <source>Send</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ModulesInfo</name>
+    <message>
+        <source>Module</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use#</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Used By</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MountInfo</name>
     <message>
         <source> total: %1 kB</source>
@@ -133,6 +159,10 @@
     </message>
     <message>
         <source>Version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Modules</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

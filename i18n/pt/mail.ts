@@ -214,7 +214,7 @@
     </message>
     <message>
         <source>Mail</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Correio</translation>
     </message>
     <message>
         <source>Send the mail</source>
@@ -250,11 +250,11 @@
     </message>
     <message>
         <source>Cc</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cc</translation>
     </message>
     <message>
         <source>Bcc</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Bcc</translation>
     </message>
     <message>
         <source>Subj.</source>
@@ -652,7 +652,7 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>Abort</source>
-        <translation>Abortar</translation>
+        <translation type="obsolete">Abortar</translation>
     </message>
 </context>
 <context>
@@ -834,11 +834,11 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>(no subject)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">(sem assunto)</translation>
     </message>
     <message>
         <source>(no from)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">(sem de)</translation>
     </message>
     <message>
         <source>(no recipient)</source>
@@ -854,7 +854,7 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>(no date)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">(sem data)</translation>
     </message>
     <message>
         <source>Getting mail body from server. Please wait...</source>
@@ -862,7 +862,7 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Erro</translation>
     </message>
     <message>
         <source>&lt;p&gt;The mail body is not yet downloaded, so you cannot reply yet.</source>

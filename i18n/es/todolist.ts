@@ -192,7 +192,7 @@ de introducir algún dato</translation>
     </message>
     <message>
         <source>Delete all tasks?</source>
-        <translation>Borrar todas la tareas?</translation>
+        <translation type="obsolete">Borrar todas la tareas?</translation>
     </message>
     <message>
         <source>All Categories</source>
@@ -219,6 +219,10 @@ espacio e inténtelo
 de nuevo.
 
 ¿Salir de todas formas?</translation>
+    </message>
+    <message>
+        <source>all tasks</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

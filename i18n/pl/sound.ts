@@ -7,11 +7,11 @@
     </message>
     <message>
         <source>Vmemo</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Sample Rate</source>
-        <translation>Czestotliwosc probek</translation>
+        <translation type="obsolete">Czestotliwosc probek</translation>
     </message>
     <message>
         <source>11025</source>
@@ -47,23 +47,23 @@
     </message>
     <message>
         <source>Levels</source>
-        <translation>Poziomy</translation>
+        <translation type="obsolete">Poziomy</translation>
     </message>
     <message>
         <source>Loud</source>
-        <translation>Glosno</translation>
+        <translation type="obsolete">Glosno</translation>
     </message>
     <message>
         <source>Output</source>
-        <translation>Wyjscie</translation>
+        <translation type="obsolete">Wyjscie</translation>
     </message>
     <message>
         <source>Mic</source>
-        <translation>Mikrofon</translation>
+        <translation type="obsolete">Mikrofon</translation>
     </message>
     <message>
         <source>Silent</source>
-        <translation>Cicho</translation>
+        <translation type="obsolete">Cicho</translation>
     </message>
     <message>
         <source>Vmemo Settings</source>
@@ -87,11 +87,11 @@
     </message>
     <message>
         <source>Location:</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Record Key:</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Taskbar Icon</source>
@@ -127,7 +127,7 @@
     </message>
     <message>
         <source>Recording Limit:</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>30</source>
@@ -151,6 +151,26 @@
     </message>
     <message>
         <source>seconds</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>Sample Rate:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recording Directory:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recording Key:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recording Limit in seconds:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unlimited</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

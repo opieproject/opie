@@ -654,7 +654,7 @@ Visite http://www.lisa.de/ para informarse.</translation>
     </message>
     <message>
         <source>Abort</source>
-        <translation>Cancelar</translation>
+        <translation type="obsolete">Cancelar</translation>
     </message>
 </context>
 <context>

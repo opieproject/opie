@@ -142,7 +142,7 @@ que ha seleccionado un .desktop
     </message>
     <message>
         <source>Save File As?</source>
-        <translation>¿Guardar fichero como?</translation>
+        <translation type="obsolete">¿Guardar fichero como?</translation>
     </message>
     <message>
         <source>Permissions</source>
@@ -249,23 +249,23 @@ el fichero actual del disco?
     <name>fileSaver</name>
     <message>
         <source>fileSaver</source>
-        <translation>SalvarFichero</translation>
+        <translation type="obsolete">SalvarFichero</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Nombre</translation>
+        <translation type="obsolete">Nombre</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Tamaño</translation>
+        <translation type="obsolete">Tamaño</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation>Fecha</translation>
+        <translation type="obsolete">Fecha</translation>
     </message>
     <message>
         <source>set file permissions</source>
-        <translation>fijar permisos fichero</translation>
+        <translation type="obsolete">fijar permisos fichero</translation>
     </message>
 </context>
 </TS>

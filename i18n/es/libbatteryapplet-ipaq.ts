@@ -77,5 +77,9 @@
         <source>No jacket with battery inserted</source>
         <translation>Sin chaqueta con batería insertada</translation>
     </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

@@ -4,7 +4,7 @@
     <name>SoundSettingsBase</name>
     <message>
         <source>Loud</source>
-        <translation type="unfinished">Alto</translation>
+        <translation type="obsolete">Alto</translation>
     </message>
     <message>
         <source>Record Defaults</source>
@@ -16,7 +16,7 @@
     </message>
     <message>
         <source>Silent</source>
-        <translation type="unfinished">Silencioso</translation>
+        <translation type="obsolete">Silencioso</translation>
     </message>
     <message>
         <source>Stereo</source>
@@ -44,11 +44,11 @@
     </message>
     <message>
         <source>Vmemo</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Sample Rate</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>11025</source>
@@ -80,15 +80,15 @@
     </message>
     <message>
         <source>Levels</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Output</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Mic</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Vmemo Settings</source>
@@ -112,11 +112,11 @@
     </message>
     <message>
         <source>Location:</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Record Key:</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Taskbar Icon</source>
@@ -152,7 +152,7 @@
     </message>
     <message>
         <source>Recording Limit:</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>30</source>
@@ -176,6 +176,26 @@
     </message>
     <message>
         <source>seconds</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>Sample Rate:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recording Directory:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recording Key:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recording Limit in seconds:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unlimited</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

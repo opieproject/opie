@@ -190,7 +190,7 @@ before you enter any data</source>
     </message>
     <message>
         <source>Delete all tasks?</source>
-        <translation>Apagar todas as tarefas?</translation>
+        <translation type="obsolete">Apagar todas as tarefas?</translation>
     </message>
     <message>
         <source>All Categories</source>
@@ -211,6 +211,10 @@ Free up some space
 and try again.
 
 Quit Anyway?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>all tasks</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -122,7 +122,7 @@
     </message>
     <message>
         <source>Save File As?</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Permissions</source>
@@ -300,23 +300,23 @@ Open .desktop file or linked file?</source>
     <name>fileSaver</name>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Nom</translation>
+        <translation type="obsolete">Nom</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Taille</translation>
+        <translation type="obsolete">Taille</translation>
     </message>
     <message>
         <source>fileSaver</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>set file permissions</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
 </context>
 </TS>

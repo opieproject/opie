@@ -182,6 +182,10 @@
         <source>Hide Command List</source>
         <translation>Befehlsliste verstecken</translation>
     </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PlayListSelection</name>

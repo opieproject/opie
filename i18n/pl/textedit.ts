@@ -122,7 +122,7 @@
     </message>
     <message>
         <source>Save File As?</source>
-        <translation>Zapisz plik jako</translation>
+        <translation type="obsolete">Zapisz plik jako</translation>
     </message>
     <message>
         <source>Permissions</source>
@@ -302,23 +302,23 @@ Open .desktop file or linked file?</source>
     <name>fileSaver</name>
     <message>
         <source>fileSaver</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Nazwa</translation>
+        <translation type="obsolete">Nazwa</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Rozmiar</translation>
+        <translation type="obsolete">Rozmiar</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation>Data</translation>
+        <translation type="obsolete">Data</translation>
     </message>
     <message>
         <source>set file permissions</source>
-        <translation>ustaw uprawnienia do pliku</translation>
+        <translation type="obsolete">ustaw uprawnienia do pliku</translation>
     </message>
 </context>
 </TS>

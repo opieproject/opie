@@ -7,31 +7,31 @@
     </message>
     <message>
         <source>Levels</source>
-        <translation>Níveis</translation>
+        <translation type="obsolete">Níveis</translation>
     </message>
     <message>
         <source>Loud</source>
-        <translation>Alto</translation>
+        <translation type="obsolete">Alto</translation>
     </message>
     <message>
         <source>Output</source>
-        <translation>Saída</translation>
+        <translation type="obsolete">Saída</translation>
     </message>
     <message>
         <source>Mic</source>
-        <translation>Mic</translation>
+        <translation type="obsolete">Mic</translation>
     </message>
     <message>
         <source>Silent</source>
-        <translation>Silêncio</translation>
+        <translation type="obsolete">Silêncio</translation>
     </message>
     <message>
         <source>Vmemo</source>
-        <translation>Vmemo</translation>
+        <translation type="obsolete">Vmemo</translation>
     </message>
     <message>
         <source>Sample Rate</source>
-        <translation>Amostragem</translation>
+        <translation type="obsolete">Amostragem</translation>
     </message>
     <message>
         <source>8000</source>
@@ -67,11 +67,11 @@
     </message>
     <message>
         <source>Location:</source>
-        <translation>Localização:</translation>
+        <translation type="obsolete">Localização:</translation>
     </message>
     <message>
         <source>Record Key:</source>
-        <translation>Tecla Gravação:</translation>
+        <translation type="obsolete">Tecla Gravação:</translation>
     </message>
     <message>
         <source>Taskbar Icon</source>
@@ -107,7 +107,7 @@
     </message>
     <message>
         <source>Recording Limit:</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>30</source>
@@ -131,6 +131,26 @@
     </message>
     <message>
         <source>seconds</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>Sample Rate:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recording Directory:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recording Key:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recording Limit in seconds:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unlimited</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

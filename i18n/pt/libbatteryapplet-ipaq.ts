@@ -77,5 +77,9 @@
         <source>No jacket with battery inserted</source>
         <translation>Adaptador externo sem bateria</translation>
     </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

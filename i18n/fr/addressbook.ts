@@ -1,5 +1,5 @@
 <!DOCTYPE TS><TS>
-<codec>iso8859-1</codec>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>AbTable</name>
     <message>
@@ -232,27 +232,27 @@ Quitter ?</translation>
     <name>ContactEditor</name>
     <message>
         <source>Fax</source>
-        <translation type='obsolete'></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Phone</source>
-        <translation type='obsolete'></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>IM</source>
-        <translation type='obsolete'></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Mobile</source>
-        <translation type='obsolete'></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Page</source>
-        <translation type='obsolete'></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Pager</source>
-        <translation type='obsolete'></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Default Email</source>
@@ -308,15 +308,15 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Street</source>
-        <translation type='obsolete'></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Street 2</source>
-        <translation type='obsolete'></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>P.O. Box</source>
-        <translation type='obsolete'></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>City</source>
@@ -328,7 +328,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Zip</source>
-        <translation type='obsolete'></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Country</source>
