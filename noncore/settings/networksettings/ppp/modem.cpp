@@ -1,7 +1,7 @@
 /*
  *              kPPP: A pppd Front End for the KDE project
  *
- * $Id: modem.cpp,v 1.5 2003-05-30 15:06:17 tille Exp $
+ * $Id: modem.cpp,v 1.6 2003-06-06 13:24:19 tille Exp $
  *
  *              Copyright (C) 1997 Bernd Johannes Wuebben
  *                      wuebben@math.cornell.edu
@@ -30,6 +30,8 @@
 #include <fcntl.h>
 #include <signal.h>
 #include <sys/ioctl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 #include <setjmp.h>
 #include <regex.h>
 #include <qregexp.h>
