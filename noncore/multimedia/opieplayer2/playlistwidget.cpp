@@ -209,9 +209,9 @@ void PlayListWidget::clearList() {
 
 void PlayListWidget::viewPressed( int mouse, QListViewItem *, const QPoint& , int) {
     switch (mouse) {
-    case 1:
+    case LeftButton:
         break;
-    case 2:
+    case RightButton:
     {
         QPopupMenu  m;
         m.insertItem( tr( "Play Selected" ), this, SLOT( playSelected() ));
@@ -225,9 +225,9 @@ void PlayListWidget::viewPressed( int mouse, QListViewItem *, const QPoint& , in
 
 void PlayListWidget::playlistViewPressed( int mouse, QListViewItem *, const QPoint& , int ) {
     switch (mouse) {
-    case 1:
+    case LeftButton:
         break;
-    case 2:
+    case RightButton:
     {
         QPopupMenu  m;
         m.insertItem( tr( "Play" ), this, SLOT( playSelected() ));
