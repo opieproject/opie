@@ -69,7 +69,7 @@ Memory is categorized as follows:
     </message>
     <message>
         <source>Use#</source>
-        <translation type="unfinished"></translation>
+        <translation>Use#</translation>
     </message>
     <message>
         <source>Used By</source>
@@ -117,14 +117,14 @@ Click and hold on a module to see additional information about the module, or to
     </message>
     <message>
         <source> : %1 kB</source>
-        <translation type="unfinished"></translation>
+        <translation>: %1 Kb</translation>
     </message>
 </context>
 <context>
     <name>ProcessInfo</name>
     <message>
         <source>PID</source>
-        <translation type="unfinished"></translation>
+        <translation>PID</translation>
     </message>
     <message>
         <source>Command</source>
@@ -204,7 +204,7 @@ Click and hold on a process to see additional information about the process, or 
     </message>
     <message>
         <source>Ha</source>
-        <translation type="unfinished"></translation>
+        <translation>Ha</translation>
     </message>
     <message>
         <source>This graph represents how much storage is currently used on this hard drive.</source>
@@ -212,7 +212,7 @@ Click and hold on a process to see additional information about the process, or 
     </message>
     <message>
         <source>SD</source>
-        <translation type="unfinished"></translation>
+        <translation>SD</translation>
     </message>
     <message>
         <source>This graph represents how much memory is currently used on this Secure Digital memory card.</source>
@@ -220,11 +220,11 @@ Click and hold on a process to see additional information about the process, or 
     </message>
     <message>
         <source>SC</source>
-        <translation type="unfinished"></translation>
+        <translation>SC</translation>
     </message>
     <message>
         <source>In</source>
-        <translation type="unfinished"></translation>
+        <translation>In</translation>
     </message>
     <message>
         <source>This graph represents how much memory is currently used of the built-in memory (i.e. Flash memory) on this handheld device.</source>
@@ -232,11 +232,11 @@ Click and hold on a process to see additional information about the process, or 
     </message>
     <message>
         <source>RAM disk</source>
-        <translation type="unfinished"></translation>
+        <translation>RAM disk</translation>
     </message>
     <message>
         <source>RA</source>
-        <translation type="unfinished"></translation>
+        <translation>RA</translation>
     </message>
     <message>
         <source>This graph represents how much memory is currently used of the temporary RAM disk.</source>

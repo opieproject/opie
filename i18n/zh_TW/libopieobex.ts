@@ -3,47 +3,48 @@
     <name>ObexDlg</name>
     <message>
         <source>OBEX Sending</source>
-        <translation type="unfinished"></translation>
+        <translation>OBEX 傳送中</translation>
     </message>
     <message>
         <source>Sending:</source>
-        <translation type="unfinished"></translation>
+        <translation>正在傳送:</translation>
     </message>
     <message>
         <source>filename</source>
-        <translation type="unfinished"></translation>
+        <translation>檔案名稱</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>取消(&amp;C)</translation>
     </message>
 </context>
 <context>
     <name>ObexInc</name>
     <message>
         <source>OBEX Receiving</source>
-        <translation type="unfinished"></translation>
+        <translation>OBEX 接收</translation>
     </message>
     <message>
         <source>TextLabel1</source>
-        <translation type="unfinished"></translation>
+        <translation>文字標籤1</translation>
     </message>
     <message>
         <source>Filename</source>
-        <translation type="unfinished"></translation>
+        <translation>檔案名稱</translation>
     </message>
     <message>
         <source>A file was beamed 
 to you.</source>
-        <translation type="unfinished"></translation>
+        <translation>有個檔案傳送
+給您了.</translation>
     </message>
     <message>
         <source>Insert</source>
-        <translation type="unfinished"></translation>
+        <translation>插入</translation>
     </message>
     <message>
         <source>Reject</source>
-        <translation type="unfinished"></translation>
+        <translation>拒絕</translation>
     </message>
 </context>
 </TS>

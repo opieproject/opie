@@ -3,148 +3,152 @@
     <name>HandwritingHelp</name>
     <message>
         <source>Handwriting Help</source>
-        <translation type="unfinished"></translation>
+        <translation>手寫說明</translation>
     </message>
     <message>
         <source>&lt;ul&gt;&lt;li&gt;When you start to use the handwriting recogniser write slowly, accurately and firmly.&lt;li&gt;Use the guide lines when drawing your characters.&lt;li&gt;When drawing a character with multiple strokes, each successive stroke must be drawn before the grayed strokes are erased.&lt;li&gt;Practice your handwriting using the handwriting trainer.&lt;li&gt;When adding your own character templates make sure they are sufficiently different from other characters&apos; templates.&lt;/ul&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;ul&gt;&lt;li&gt;當您開始使用手寫辨識時請緩慢, 確實地書寫.&lt;li&gt;在畫出您的字跡時請使用指導線.&lt;li&gt;在書寫具有多個筆劃的字時, 每一劃都必須在灰色的筆劃消失前完成.&lt;li&gt;使用手寫訓練程式來練習您的手寫.&lt;li&gt;要加入您自己的字元範本時請確定它們跟其他字元範本之間有足夠的差異.&lt;/ul&gt;</translation>
     </message>
     <message>
         <source>Tips</source>
-        <translation type="unfinished"></translation>
+        <translation>密訣</translation>
     </message>
     <message>
         <source>Trainer</source>
-        <translation type="unfinished"></translation>
+        <translation>訓練程式</translation>
     </message>
 </context>
 <context>
     <name>HandwritingTrainer</name>
     <message>
         <source>Matched: </source>
-        <translation type="unfinished"></translation>
+        <translation>完全符合的: </translation>
     </message>
     <message>
         <source>Similar to: </source>
-        <translation type="unfinished"></translation>
+        <translation>很類似的: </translation>
     </message>
     <message>
         <source>%1%</source>
-        <translation type="unfinished"></translation>
+        <translation>%1%</translation>
     </message>
     <message>
         <source>Select a reference character from the list.  Practice writing in the area on the right.</source>
-        <translation type="unfinished"></translation>
+        <translation>從清單中選擇參考的字元. 在右邊的區域中練習書寫.</translation>
     </message>
     <message>
         <source>No match</source>
-        <translation type="unfinished"></translation>
+        <translation>不符合</translation>
     </message>
 </context>
 <context>
     <name>InputMethods</name>
     <message>
         <source>Handwriting</source>
-        <translation type="unfinished"></translation>
+        <translation>手寫</translation>
     </message>
 </context>
 <context>
     <name>QIMPenEdit</name>
     <message>
         <source>New...</source>
-        <translation type="unfinished"></translation>
+        <translation>新的...</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>加入</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>移除</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>預設</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>清除</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>確定</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>取消</translation>
     </message>
 </context>
 <context>
     <name>QIMPenInput</name>
     <message>
         <source>Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>簡寫</translation>
     </message>
 </context>
 <context>
     <name>QIMPenInputCharDlg</name>
     <message>
         <source>Enter new character</source>
-        <translation type="unfinished"></translation>
+        <translation>輸入新字元</translation>
     </message>
     <message>
         <source>Character:</source>
-        <translation type="unfinished"></translation>
+        <translation>字元:</translation>
     </message>
 </context>
 <context>
     <name>QIMPenPrefBase</name>
     <message>
+        <source>Form1</source>
+        <translation>表單1</translation>
+    </message>
+    <message>
         <source>Multi-stroke character timeout:</source>
-        <translation type="unfinished"></translation>
+        <translation>多筆劃字元逾時時間:</translation>
     </message>
     <message>
         <source>ms</source>
-        <translation type="unfinished"></translation>
+        <translation>毫秒</translation>
     </message>
     <message>
         <source>Input areas displayed</source>
-        <translation type="unfinished"></translation>
+        <translation>已顯示輸入區</translation>
     </message>
     <message>
         <source>Upper and lower case areas</source>
-        <translation type="unfinished"></translation>
+        <translation>大小寫區</translation>
     </message>
     <message>
         <source>Lower case (toggle Upper case)</source>
-        <translation type="unfinished"></translation>
+        <translation>小寫(切換則為大寫)</translation>
     </message>
 </context>
 <context>
     <name>QIMPenSetup</name>
     <message>
         <source>Setup Handwriting Input</source>
-        <translation type="unfinished"></translation>
+        <translation>設定手寫輸入</translation>
     </message>
     <message>
         <source>Character Profile:</source>
-        <translation type="unfinished"></translation>
+        <translation>字元資料檔:</translation>
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>偏好設定</translation>
     </message>
     <message>
         <source>Customize</source>
-        <translation type="unfinished"></translation>
+        <translation>自定</translation>
     </message>
     <message>
         <source>%1 ms</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 毫秒</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation type="unfinished"></translation>
+        <translation>空間不足</translation>
     </message>
     <message>
         <source>Unable to save information.
@@ -152,7 +156,11 @@ Free up some space
 and try again.
 
 Quit anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>無法儲存資訊.
+請釋放一些空間後
+再試一次.
+
+無論如何都要離開?</translation>
     </message>
 </context>
 </TS>

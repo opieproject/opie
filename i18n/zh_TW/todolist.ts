@@ -131,7 +131,7 @@ Quit Anyway?</source>
     </message>
     <message>
         <source>X-Ref</source>
-        <translation type="unfinished"></translation>
+        <translation>X-Ref</translation>
     </message>
     <message>
         <source>Recurrance</source>
@@ -169,7 +169,7 @@ Quit Anyway?</source>
     </message>
     <message>
         <source>Table View</source>
-        <translation type="unfinished"></translation>
+        <translation>Table View</translation>
     </message>
     <message>
         <source>None</source>

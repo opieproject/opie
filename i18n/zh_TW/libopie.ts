@@ -3,35 +3,35 @@
     <name>ORecurranceBase</name>
     <message>
         <source>Repeating Event </source>
-        <translation type="unfinished">Repeating Event</translation>
+        <translation>Repeating Event</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">無</translation>
+        <translation>無</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation type="unfinished">日</translation>
+        <translation>日</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation type="unfinished">星期</translation>
+        <translation>星期</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation type="unfinished">月份</translation>
+        <translation>月份</translation>
     </message>
     <message>
         <source>Year</source>
-        <translation type="unfinished">年份</translation>
+        <translation>年份</translation>
     </message>
     <message>
         <source>Every:</source>
-        <translation type="unfinished">每:</translation>
+        <translation>每:</translation>
     </message>
     <message>
         <source>Frequency</source>
-        <translation type="unfinished">重復的</translation>
+        <translation>重復的</translation>
     </message>
     <message>
         <source>End On:</source>
@@ -94,19 +94,19 @@
     <name>OTimePickerDialogBase</name>
     <message>
         <source>TimePicker</source>
-        <translation type="unfinished">TimePicker</translation>
+        <translation>TimePicker</translation>
     </message>
     <message>
         <source>Time:</source>
-        <translation type="unfinished">Time:</translation>
+        <translation>Time:</translation>
     </message>
     <message>
         <source>:</source>
-        <translation type="unfinished">:</translation>
+        <translation>:</translation>
     </message>
     <message>
         <source>Pick Time:</source>
-        <translation type="unfinished">Pick Time:</translation>
+        <translation>Pick Time:</translation>
     </message>
 </context>
 </TS>

@@ -3,51 +3,51 @@
     <name>LibMadPlugin</name>
     <message>
         <source>No Song Open</source>
-        <translation type="unfinished"></translation>
+        <translation>尚未開啟歌曲</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>樂曲名稱</translation>
     </message>
     <message>
         <source>Artist</source>
-        <translation type="unfinished"></translation>
+        <translation>演出者</translation>
     </message>
     <message>
         <source>Album</source>
-        <translation type="unfinished"></translation>
+        <translation>專輯</translation>
     </message>
     <message>
         <source>Year</source>
-        <translation type="unfinished"></translation>
+        <translation>年代</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation type="unfinished"></translation>
+        <translation>註解</translation>
     </message>
     <message>
         <source>, Track: </source>
-        <translation type="unfinished"></translation>
+        <translation>, 軌段: </translation>
     </message>
     <message>
         <source>Info: </source>
-        <translation type="unfinished"></translation>
+        <translation>資訊: </translation>
     </message>
     <message>
         <source>Name: </source>
-        <translation type="unfinished"></translation>
+        <translation>名稱: </translation>
     </message>
     <message>
         <source>Genre: </source>
-        <translation type="unfinished"></translation>
+        <translation>類型: </translation>
     </message>
     <message>
         <source>Bitrate: </source>
-        <translation type="unfinished"></translation>
+        <translation>位元率: </translation>
     </message>
     <message>
         <source>URL: </source>
-        <translation type="unfinished"></translation>
+        <translation>網址: </translation>
     </message>
 </context>
 </TS>

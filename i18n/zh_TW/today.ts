@@ -34,7 +34,7 @@
     </message>
     <message>
         <source>Today by Maximilian Rei&#xdf;</source>
-        <translation>Today By Maximilian Rei&#xdf;</translation>
+        <translation>Today By Maximilian Reiß</translation>
     </message>
     <message>
         <source>Click here to get to the config dialog</source>
@@ -53,7 +53,7 @@
     </message>
     <message>
         <source>Move Up</source>
-        <translation type="unfinished">上移</translation>
+        <translation>上移</translation>
     </message>
     <message>
         <source>Move Down</source>
