@@ -13,7 +13,7 @@
 #include "otimezone.h"
 #include "opimrecord.h"
 
-namespace OCalendarHelper {
+struct OCalendarHelper {
     /** calculate the week number of the date */
     static int week( const QDate& );
     /** calculate the occurence of week days since the start of the month */
@@ -26,7 +26,7 @@ namespace OCalendarHelper {
     /** returns the diff of month */
     static int monthDiff( const QDate& first, const QDate& second );
 
-}
+};
 
 class OPimNotifyManager;
 class ORecur;
@@ -139,7 +139,7 @@ private:
 
 class OEffectiveEvent {
 public:
-    QValueList<OEffectiveEvent> ValueList;
+    typedef QValueList<OEffectiveEvent> ValueList;
     enum Position { MidWay, Start, End, StartEnd };
         // If we calculate the effective event of a multi-day event
     // we have to figure out whether we are at the first day,

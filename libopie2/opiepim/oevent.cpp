@@ -9,37 +9,35 @@
 
 #include "oevent.h"
 
-namespace OCalendarHelper {
-    static int week( const QDate& date) {
-        // Calculates the week this date is in within that
-        // month. Equals the "row" is is in in the month view
-        int week = 1;
-        QDate tmp( date.year(), date.month(), 1 );
-        if ( date.dayOfWeek() < tmp.dayOfWeek() )
-            ++week;
+int OCalendarHelper::week( const QDate& date) {
+    // Calculates the week this date is in within that
+    // month. Equals the "row" is is in in the month view
+    int week = 1;
+    QDate tmp( date.year(), date.month(), 1 );
+    if ( date.dayOfWeek() < tmp.dayOfWeek() )
+        ++week;
 
-        week += ( date.day() - 1 ) / 7;
+    week += ( date.day() - 1 ) / 7;
 
-        return week;
+    return week;
+}
+int OCalendarHelper::ocurrence( const QDate& date) {
+    // calculates the number of occurrances of this day of the
+    // week till the given date (e.g 3rd Wednesday of the month)
+    return ( date.day() - 1 ) / 7 + 1;
+}
+int OCalendarHelper::dayOfWeek( char day ) {
+    int dayOfWeek = 1;
+    char i = ORecur::MON;
+    while ( !( i & day ) && i <= ORecur::SUN ) {
+        i <<= 1;
+        ++dayOfWeek;
     }
-    static int occurence( const QDate& date) {
-        // calculates the number of occurrances of this day of the
-        // week till the given date (e.g 3rd Wednesday of the month)
-        return ( date.day() - 1 ) / 7 + 1;
-    }
-    static int dayOfWeek( char day ) {
-        int dayOfWeek = 1;
-        char i = ORecur::MON;
-        while ( !( i & day ) && i <= ORecur::SUN ) {
-            i <<= 1;
-            ++dayOfWeek;
-        }
-        return dayOfWeek;
-    }
-    static int monthDiff( const QDate& first, const QDate& second ) {
-        return ( second.year() - first.year() ) * 12 +
-            second.month() - first.month();
-    }
+    return dayOfWeek;
+}
+int OCalendarHelper::monthDiff( const QDate& first, const QDate& second ) {
+    return ( second.year() - first.year() ) * 12 +
+        second.month() - first.month();
 }
 
 struct OEvent::Data : public QShared {
@@ -130,7 +128,8 @@ void OEvent::setRecurrence( const ORecur& rec) {
         data->recur = new ORecur( rec );
 }
 bool OEvent::hasRecurrence()const {
-    return data->recur;
+    if (!data->recur ) return false;
+    return data->recur->doesRecur();
 }
 QString OEvent::note()const {
     return data->note;

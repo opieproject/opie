@@ -38,6 +38,8 @@ HEADERS   = ofontmenu.h \
     pim/opimresolver.h \
     pim/oevent.h \
     pim/otimezone.h \
+    pim/odatebookaccess.h \
+    pim/odatebookaccessbackend.h \
     orecurrancewidget.h \
     oticker.h 
 #    pim/otodoaccesssql.h \
@@ -75,6 +77,8 @@ SOURCES   = ofontmenu.cc  \
        pim/opimresolver.cpp \
        pim/oevent.cpp \
        pim/otimezone.cpp \
+       pim/odatebookaccess.cpp \
+       pim/odatebookaccessbackend.cpp \
        orecurrancewidget.cpp \
        oticker.cpp
 #             pim/otodoaccesssql.cpp \
