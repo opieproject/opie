@@ -44,8 +44,8 @@ void ObexImpl::slotMessage( const QCString& msg, const QByteArray&data ) {
     QString filename;
     stream >> filename;
     m_obex->send(filename );
-    QCopEnvelope e ("QPE/Obex", "done(QString)" );
-    e << filename;
+    //    QCopEnvelope e ("QPE/Obex", "done(QString)" ); but this into a slot
+    //e << filename;
   }else if(msg == "receive(bool)" ) { // open a GUI
     m_obex->receive();
     ;
