@@ -19,6 +19,8 @@
 #include <qlist.h>
 #include <qframe.h>
 
+#include <opie2/opcap.h>
+
 class QLabel;
 class QString;
 class QSpinBox;
