@@ -334,6 +334,7 @@ void Checkbook::loadCheckbook()
     // Load transactions
     float amount;
     QString stramount;
+    QString symbol = _pCfg->getCurrencySymbol();
     for ( TranInfo *tran = tranList->first(); tran; tran = tranList->next() )
     {
         amount = tran->amount();
@@ -341,7 +342,8 @@ void Checkbook::loadCheckbook()
         {
             amount *= -1;
         }
-        stramount.sprintf( "%s%.2f", _pCfg->getCurrencySymbol().latin1(), amount );
+        stramount.sprintf( "%.2f", amount );
+	stramount.prepend( symbol );
         ( void ) new CBListItem( tran, tranTable, tran->getIdStr(), tran->datestr(false), tran->number(), tran->datestr(true), tran->desc(), stramount );
     }
 
@@ -370,11 +372,14 @@ void Checkbook::adjustBalance()
 {
     // update running balance in register
     QString sRunning;
+    QString symbol = _pCfg->getCurrencySymbol();
     float bal=info->startingBalance();
+    
     for(CBListItem *item=(CBListItem *)tranTable->firstChild(); item; item=(CBListItem *)item->nextSibling() ) {
         TranInfo *tran=item->getTranInfo();
         bal=bal + (tran->withdrawal() ? -1 : 1)*tran->amount() - tran->fee();
-        sRunning.sprintf( "%s%.2f", _pCfg->getCurrencySymbol().latin1(), bal );
+        sRunning.sprintf( "%.2f", bal );
+	sRunning.prepend(symbol);
         item->setText( COL_BAL, sRunning);
     }
 }
@@ -482,6 +487,7 @@ void Checkbook::slotNewTran()
     Transaction *currtran = new Transaction( this, true, info->name(),
                                              traninfo,
                                              _pCfg );
+    QString symbol = _pCfg->getCurrencySymbol();
     if ( QPEApplication::execDialog( currtran ) == QDialog::Accepted )
     {
         // Add to transaction list
@@ -490,8 +496,9 @@ void Checkbook::slotNewTran()
         // Add to transaction table
         float amount;
         QString stramount;
-        amount = (traninfo->withdrawal() ? -1 : 1)*traninfo->amount();
-        stramount.sprintf( "%s%.2f", _pCfg->getCurrencySymbol().latin1(), amount );
+        amount = (traninfo->withdrawal() ? -1 : 1)*traninfo->amount();	
+        stramount.sprintf( "%.2f", amount );
+	stramount.prepend(symbol);
         ( void ) new CBListItem( traninfo, tranTable, traninfo->getIdStr(), traninfo->datestr(false),
                                  traninfo->number(), traninfo->datestr(true), traninfo->desc(),
                                  stramount );
@@ -541,7 +548,8 @@ void Checkbook::slotEditTran()
             amount *= -1;
         }
         QString stramount;
-        stramount.sprintf( "%s%.2f", _pCfg->getCurrencySymbol().latin1(), amount );
+        stramount.sprintf( "%.2f", amount );
+	stramount.prepend( _pCfg->getCurrencySymbol() );
         curritem->setText( COL_AMOUNT, stramount );
         resort();
         adjustBalance();

@@ -193,7 +193,8 @@ void MainWindow::addCheckbook( CBInfo *cb )
     if ( _cfg.getShowBalances() )
     {
         QString balance;
-        balance.sprintf( "%s%.2f", _cfg.getCurrencySymbol().latin1(), cb->balance() );
+        balance.sprintf( "%.2f", cb->balance() );
+	balance.prepend( _cfg.getCurrencySymbol() );
         lvi->setText( posName + 1, balance );
     }
 }
@@ -304,7 +305,8 @@ void MainWindow::openBook(QListViewItem *curritem)
         if ( _cfg.getShowBalances() && cb->balance() != currbalance )
         {
             QString tempstr;
-            tempstr.sprintf( "%s%.2f", _cfg.getCurrencySymbol().latin1(), cb->balance() );
+            tempstr.sprintf( "%.2f", cb->balance() );
+	    tempstr.prepend( _cfg.getCurrencySymbol() );
             curritem->setText( posName + 1, tempstr );
         }
 
