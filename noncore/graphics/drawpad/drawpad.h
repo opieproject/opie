@@ -18,8 +18,8 @@
 
 #include <qpen.h>
 
-class Tool;
 class DrawPadCanvas;
+class Tool;
 
 class QAction;
 class QColor;

@@ -19,6 +19,9 @@
 class DocLnk;
 class FileSelector;
 
+class QCheckBox;
+class QLabel;
+
 class ImportDialog : public QDialog
 { 
     Q_OBJECT
@@ -29,8 +32,14 @@ public:
 
     const DocLnk* selected();
 
+private slots:
+    void fileChanged();
+    void preview();
+
 private:
     FileSelector* m_pFileSelector;
+    QLabel* m_pPreviewLabel;
+    QCheckBox* m_pAutomaticPreviewCheckBox;
 };
 
 #endif // IMPORTDIALOG_H
