@@ -24,6 +24,9 @@ choice
   config TARGET_SIMPAD
     boolean "SIMpad"
 
+  config TARGET_YOPY
+    boolean "Yopy 3500/3700"  
+
 endchoice
 
 config OPTIMIZE
@@ -58,6 +61,7 @@ config SPECFILE
   default "linux-g++" if TARGET_RAMSES && X11
   default "qws/linux-simpad-g++" if TARGET_SIMPAD && (! X11)
   default "linux-g++" if TARGET_SIMPAD && X11
+  default "qws/linux-yopy-g++" if TARGET_YOPY && (! X11)
 
 config CUSTOMFILE
   string
@@ -65,11 +69,13 @@ config CUSTOMFILE
   default "custom-sharp.h" if TARGET_SHARP
   default "custom-ramses.h" if TARGET_RAMSES
   default "custom-ipaq.h" if TARGET_SIMPAD
+  default "custom-yopy.h" if TARGET_YOPY
 
 config OPTIMIZATIONS
   string "Optimization flags"
   depends OPTIMIZE
   default "-march=armv4 -mtune=strongarm1100 -mapcs-32 -fexpensive-optimizations -fomit-frame-pointer -O2" if TARGET_IPAQ
+  default "-march=armv4 -mtune=strongarm1100 -mapcs-32 -fexpensive-optimizations -fomit-frame-pointer -O2" if TARGET_YOPY
   default "-march=armv4 -mtune=strongarm1100 -mapcs-32 -fexpensive-optimizations -fomit-frame-pointer -O2" if TARGET_SHARP
   default "-march=armv4 -mtune=strongarm1100 -mapcs-32 -fexpensive-optimizations -fomit-frame-pointer -O2" if TARGET_RAMSES
   default "-march=armv4 -mtune=strongarm1100 -mapcs-32 -fexpensive-optimizations -fomit-frame-pointer -O2" if TARGET_SIMPAD

@@ -31,6 +31,10 @@ ifdef CONFIG_TARGET_SIMPAD
   PLATFORM=simpad-linux
 endif
 
+ifdef CONFIG_TARGET_YOPY
+  PLATFORM=yopy-linux
+endif
+
 export QMAKE:=$(OPIEDIR)/qmake/qmake
 export QMAKESPECSDIR=$(OPIEDIR)/mkspecs
 
@@ -106,6 +110,9 @@ ifeq ($(STRIP),)
         STRIP=arm-linux-strip
     endif
     ifneq ($(CONFIG_TARGET_SIMPAD),)
+        STRIP=arm-linux-strip
+    endif
+    ifneq ($(CONFIG_TARGET_YOPY),)
         STRIP=arm-linux-strip
     endif
 endif
