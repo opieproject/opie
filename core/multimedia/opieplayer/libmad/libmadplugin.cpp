@@ -117,7 +117,7 @@ static int unmap_file(void *fdm, unsigned long length)
 
 static inline QString tr( const char *str ) {
     // Apparently this is okay from a plugin as it runs in the process space of the owner of the plugin
-    return qApp->translate( "MediaPlayer", str, "libmad strings for mp3 file info" );
+    return qApp->translate( "OpiePlayer", str, "libmad strings for mp3 file info" );
 }
 
 
