@@ -132,6 +132,8 @@ private:
 
 	QAction* m_tableViewButton;
 	QAction* m_cardViewButton;
+
+	int active_view;
 };
 
 #endif

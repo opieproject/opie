@@ -747,7 +747,11 @@ void AddressbookWindow::flush()
 
 void AddressbookWindow::closeEvent( QCloseEvent *e )
 {
-	
+        if(active_view == AbView::CardView){
+	  slotViewSwitched( AbView::TableView );
+	  e->ignore();
+	  return;
+	}
 	if(syncing) {
 		/* shouldn't we save, I hear you say? well its already been set
 		   so that an edit can not occur during a sync, and we flushed
@@ -894,7 +898,7 @@ void AddressbookWindow::slotViewSwitched( int view )
 
 	// Tell the view about the selected view
 	m_abView -> setShowToView ( (AbView::Views) view );
-	
+	active_view = view;
 }
 
 
