@@ -83,14 +83,29 @@ void DataManager :: loadServers()
     }
     else
     {
+        {
+            cout << "Before ipkg.conf read" << endl;
+            vector<Server>::iterator it;
+            for ( it = serverList.begin() ; it != serverList.end() ; ++it )
+                cout << "servername - " << it->getServerName() << endl;
+        }
+        
         while ( fgets( line, sizeof line, fp) != NULL )
         {
             lineStr = line;
-            if ( lineStr.startsWith( "src" ) || lineStr.startsWith( "#src" ) )
+            if ( lineStr.startsWith( "src" ) || lineStr.startsWith( "#src" ) || lineStr.startsWith( "# src" ) )
             {
                 char alias[20];
                 char url[100];
-                sscanf( lineStr, "%*[^ ] %s %s", alias, url );
+
+
+                // Looks a little wierd but read up to the r of src (throwing it away),
+                // then read up to the next space and throw that away, the alias
+                // is next.
+                // Should Handle #src, # src, src, and combinations of
+                sscanf( lineStr, "%*[^r]%*[^ ] %s %s", alias, url );
+                cout << "Adding alias " << alias << " to list" << endl;
+                cout << lineStr << endl;
                 Server s( alias, url );
                 serverList.push_back( s );
 
@@ -106,16 +121,23 @@ void DataManager :: loadServers()
                 destList.push_back( d );
             }
         }
+        {
+            cout << "After ipkg.conf read" << endl;
+            vector<Server>::iterator it;
+            for ( it = serverList.begin() ; it != serverList.end() ; ++it )
+                cout << "servername - " << it->getServerName() << endl;
+        }
+        
     }
     fclose( fp );
 
     // Go through the server destination list and add root, cf and card if they
     // don't already exist
-	/* AQ - commented out as if you don't have a CF or SD card in then
-	 * this causes IPKG to try to create directories on non existant devices
-	 * (which of course fails), gives a nasty error message and can cause ipkg
-	 * to seg fault.
-	 *
+/* AQ - commented out as if you don't have a CF or SD card in then
+ * this causes IPKG to try to create directories on non existant devices
+ * (which of course fails), gives a nasty error message and can cause ipkg
+ * to seg fault.
+ *
     vector<Destination>::iterator dit;
     bool foundRoot = false;
     bool foundCF = false;
@@ -170,7 +192,20 @@ void DataManager :: writeOutIpkgConf()
     QString ipkg_conf = IPKG_CONF;
     ofstream out( ipkg_conf );
 
-    out << "# Written by NetworkPackageManager Package Manager" << endl;
+    out << "# Written by AQPkg" << endl;
+    out << "# Must have one or more source entries of the form:" << endl;
+    out << "#" << endl;
+    out << "#   src <src-name> <source-url>" << endl;
+    out << "#" << endl;
+    out << "# and one or more destination entries of the form:" << endl;
+    out << "#" << endl;
+    out << "#   dest <dest-name> <target-path>" << endl;
+    out << "#" << endl;
+    out << "# where <src-name> and <dest-names> are identifiers that" << endl;
+    out << "# should match [a-zA-Z0-9._-]+, <source-url> should be a" << endl;
+    out << "# URL that points to a directory containing a Familiar" << endl;
+    out << "# Packages file, and <target-path> should be a directory" << endl;
+    out << "# that exists on the target system." << endl << endl;
 
     // Write out servers
     vector<Server>::iterator it = serverList.begin();
@@ -189,6 +224,8 @@ void DataManager :: writeOutIpkgConf()
 
         it++;
     }
+
+    out << endl;
 
     // Write out destinations
     vector<Destination>::iterator it2 = destList.begin();
