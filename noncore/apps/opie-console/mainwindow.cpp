@@ -221,6 +221,13 @@ void MainWindow::initUI() {
     connect(m_transfer, SIGNAL(activated() ),
             this, SLOT(slotTransfer() ) );
 
+    /*
+     * immediate change of line wrap policy
+     */
+    m_isWrapped = false;
+    m_wrap = new QAction( tr("Line wrap"), Resource::loadPixmap( "linewrap" ), QString::null, 0, this, 0 );
+    m_wrap->addTo( m_console );
+    connect( m_wrap, SIGNAL( activated() ), SLOT( slotWrap() ) );
 
     /*
      * fullscreen
@@ -324,6 +331,7 @@ void MainWindow::initUI() {
     m_saveScript->setEnabled( false );
     m_fullscreen->setEnabled( false );
     m_closewindow->setEnabled( false );
+    m_wrap->setEnabled( false );
 
     /*
      * connect to the menu activation
@@ -525,6 +533,7 @@ void MainWindow::slotClose() {
         m_saveScript->setEnabled( false );
         m_scripts->setItemEnabled(m_runScript_id, false);
         m_fullscreen->setEnabled( false );
+        m_wrap->setEnabled( false );
         m_closewindow->setEnabled( false );
     }
 
@@ -565,6 +574,7 @@ void MainWindow::create( const Profile& prof ) {
     m_disconnect->setEnabled( false );
     m_terminate->setEnabled( true );
     m_fullscreen->setEnabled( true );
+    m_wrap->setEnabled( true );
     m_closewindow->setEnabled( true );
     m_transfer->setEnabled( false );
     m_recordScript->setEnabled( false );
@@ -580,6 +590,12 @@ void MainWindow::create( const Profile& prof ) {
 
     QWidget *w = currentSession()->widget();
     if(w) w->setFocus();
+
+    if(currentSession()->profile().readNumEntry("Wrap", 80)){
+        m_isWrapped = true;
+    } else {
+        m_isWrapped = false;
+    }
 
     m_kb->load(currentSession()->profile());
 }
@@ -654,7 +670,34 @@ void MainWindow::slotSessionChanged( Session* ses ) {
         QWidget *w = m_curSession->widget();
         if(w) w->setFocus();
 
+        if(currentSession()->profile().readNumEntry("Wrap", 80)){
+            m_isWrapped = true;
+        } else {
+            m_isWrapped = false;
+        }
+
         m_kb->load(currentSession()->profile());
+    }
+}
+
+void MainWindow::slotWrap()
+{
+    if(m_curSession)
+    {
+        EmulationHandler *e = m_curSession->emulationHandler();
+        if(e)
+        {
+            if(m_isWrapped)
+			{
+				e->setWrap(80);
+				m_isWrapped = false;
+			}
+			else
+			{
+				e->setWrap(0);
+				m_isWrapped = true;
+			}
+        }
     }
 }
 

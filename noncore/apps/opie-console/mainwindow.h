@@ -67,6 +67,7 @@ private slots:
     void slotSaveScript();
     void slotRunScript(int);
     void slotFullscreen();
+    void slotWrap();
     void slotSessionChanged( Session* );
     void slotKeyReceived(FKey, ushort, ushort, bool);
 
@@ -119,11 +120,13 @@ private:
     QAction* m_recordScript;
     QAction* m_saveScript;
     QAction* m_fullscreen;
+    QAction* m_wrap;
     QAction* m_closewindow;
 
     FunctionKeyboard *m_kb;
     int m_runScript_id;
     bool m_isFullscreen;
+    bool m_isWrapped;
 
     QWidget* savedParentFullscreen;
 };

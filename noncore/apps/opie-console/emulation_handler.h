@@ -66,6 +66,8 @@ public:
     /* Run a script by forwarding its keys to the EmulationLayer */
     void runScript(const Script *);
 
+	/* Propagate change to widget */
+	void setWrap(int columns);
 signals:
     void send( const QByteArray& );
     void changeSize(int rows, int cols );
