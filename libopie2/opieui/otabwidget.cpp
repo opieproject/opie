@@ -88,7 +88,10 @@ OTabWidget::OTabWidget( QWidget *parent, const char *name, TabStyle s, TabPositi
 }
 
 OTabWidget::~OTabWidget()
-{}
+{
+    tabs.setAutoDelete( true );
+    tabs.clear();
+}
 
 void OTabWidget::addTab( QWidget *child, const QString &icon, const QString &label )
 {
