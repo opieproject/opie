@@ -1,6 +1,8 @@
 [Desktop Entry]
 Comment=User Manager
 Comment[es]=Gestor de usuarios
+Comment[pt]=Gestor de utilizadores
+Comment[pt_BR]=Gestor de usuários
 Exec=usermanager
 Icon=usermanager/usermanager
 Type=Setting
@@ -8,3 +10,5 @@ Name=User Manager
 Name[es]=Gestor Usuarios
 Name[it]=Gestione Utenti
 Name[fr]=Utilisateurs
+Name[pt]=Utilizadores
+Name[pt_BR]=Usuários

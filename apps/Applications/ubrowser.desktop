@@ -6,4 +6,7 @@ Type=Application
 Name=uBrowser
 MimeType=text/html
 MimeTypeIcons=ubrowser/ubrowser
-
+Name[pt]=Navegador WWW
+Name[pt_BR]=Navegador WWW
+Comment[pt]=Navegador WWW
+Comment[pt_BR]=Navegador WWW

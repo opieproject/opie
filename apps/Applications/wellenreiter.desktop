@@ -2,6 +2,8 @@
 Comment = A WaveLAN Sniffer
 Comment[de]= Ein krasser WaveLAN Sniffer
 Comment[es]=Un olfateador (sniffer) de redes inalámbricas
+Comment[pt]=Um analizador de pacotes de redes sem fios
+Comment[pt_BR]=Um analizador de pacotes de redes sem fios
 Exec = wellenreiter
 File = wellenreiter
 Icon = wellenreiter/appicon-trans
@@ -9,3 +11,5 @@ Name = Wellenreiter
 Type = Application
 Name[de]=Wellenreiter
 Name[es]=Rastreador Inalámbrico
+Name[pt]=Analizador Redes sem Fios
+Name[pt_BR]=Analizador Redes sem Fios

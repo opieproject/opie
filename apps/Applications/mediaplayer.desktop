@@ -1,6 +1,8 @@
 [Desktop Entry]
 Comment=A Media Player
 Comment[es]=Reproductor de ficheros multimedia
+Comment[pt]=Leitor de ficheiros multimédia
+Comment[pt_BR]=Leitor de ficheiros multimédia
 Exec=opieplayer2
 Icon=opieplayer2/MPEGPlayer
 Type=Application
@@ -12,3 +14,5 @@ Name[it]=Media Player
 Name[de]=Media Player
 Name[es]=Multimedia
 Name[fr]=Lecteur multimédia
+Name[pt]=Leitor multimédia
+Name[pt_BR]=Leitor multimédia

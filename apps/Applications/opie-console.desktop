@@ -1,8 +1,12 @@
 [Desktop Entry]
 Comment=Terminal app
 Comment[es]=Aplicación de terminal
+Comment[pt]=Linha de comando
+Comment[pt_BR]=Linha de comando
 Exec=opie-console
 Icon=console/console
 Type=Application
 Name=Opie Terminal
 Name[es]=Consola
+Name[pt]=Consola
+Name[pt_BR]=Consola

@@ -1,8 +1,12 @@
 [Desktop Entry]
 Comment=Start/Stop stowaway keyboard
 Comment[es]=Activa/desactiva teclado Stowaway
+Comment[pt]=Gestor teclado Stowaway
+Comment[pt_BR]=Gerenciador teclado Stowaway
 Exec=stowctrl.sh
 Icon=stowctrl/stowctrl
 Type=Application
 Name=Stowaway Control
 Name[es]=Control Stowaway
+Name[pt]=Teclado Stowaway
+Name[pt_BR]=Teclado Stowaway

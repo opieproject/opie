@@ -1,10 +1,14 @@
 [Desktop Entry]
 Comment=Manage SSH keys
 Comment[es]=Gestor de claves del Secure Shell Protocol (SSH)
+Comment[pt]=Gestor de chaves SSH
+Comment[pt_BR]=Gerenciador de chaves SSH
 Exec=sshkeys
 Icon=sshkeys/sshkeys
 Type=Application
 Name=SSH Keys
 Name[es]=Claves SSH
 Name[it]=Chiavi SSH
-Name[fr]=Clés SSH
+Name[fr]=Clï¿½ SSH
+Name[pt]=Chaves SSH
+Name[pt_BR]=Chaves SSH

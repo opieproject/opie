@@ -6,3 +6,7 @@ Icon=opie-write/opie-write
 Type=Application
 Name=opie-write
 Name[es]=Opie-Write
+Name[pt]=Editor Texto
+Name[pt_BR]=Editor Textos
+Comment[pt]=Editor de texto
+Comment[pt_BR]=Editor de textos

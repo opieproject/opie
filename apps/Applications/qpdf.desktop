@@ -2,6 +2,8 @@
 Comment=PDF Viewer
 Comment[es]=Visor de ficheros en Portable Document Format (PDF)
 Comment[fr]=Visualisateur de fichier PDF (Portable Document Format)
+Comment[pt]=Visualizador de ficheiros PDF
+Comment[pt_BR]=Visualizador de ficheiros PDF
 Exec=qpdf
 Icon=qpdf/qpdf_icon
 Type=Application
