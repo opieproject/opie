@@ -65,10 +65,10 @@ DESTDIR      = $(OPIEDIR)/bin/
 INTERFACES   = configurebase.ui editbase.ui
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
-LIBS        += -lqpe -lopiecore2 -lopieui2 
+LIBS        += -lqpe -lopiecore2 -lopieui2 -lutils
 TARGET       = opie-console
 
-#DEFINES += HAVE_OPENPTY
+DEFINES += HAVE_OPENPTY
 #DEFINES += EAST FSCKED_DISTRI 
 
 include ( $(OPIEDIR)/include.pro )
