@@ -150,11 +150,14 @@ menu "Base"
     source x11/config.in
   endchoice
   source libopie/config.in
+
+  source libopie2/config.in
+  source libqtaux/config.in
+
   source core/opie-login/config.in
   source core/opiealarm/config.in
   source core/tools/quicklauncher/config.in
   source core/launcher/config.in
-  source core/qws/config.in
   source core/symlinker/config.in
 endmenu
 
@@ -233,9 +236,8 @@ comment ""
   depends on EXPERIMENTAL
 menu "Experimental"
   depends on EXPERIMENTAL
-  source libopie2/config.in
-  source libqtaux/config.in
   source libslcompat/config.in
+  source core/qws/config.in
 
   config SQL_PIM_BACKEND
   bool "Add SQL-Backend support"
