@@ -395,9 +395,11 @@ const QString AccountViewItem::contextName="AccountViewItem";
 void AccountViewItem::deleteAllMail(AbstractMail*wrapper,Folder*folder)
 {
     if (!wrapper) return;
+    QString fname="";
+    if (folder) fname = folder->getDisplayName();
     int yesno = QMessageBox::warning(0,QObject::tr("Delete all mails",contextName),
         QObject::tr("<center>Realy delete all mails in box <br>%1</center>",contextName).
-            arg((folder?folder->getDisplayName():"")),
+            arg(fname),
         QObject::tr("Yes",contextName),
         QObject::tr("No",contextName),QString::null,1,1);
     qDebug("Auswahl: %i",yesno);
