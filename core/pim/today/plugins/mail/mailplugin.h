@@ -20,6 +20,7 @@
 
 #include <qstring.h>
 #include <qwidget.h>
+#include <qguardedptr.h>
 
 #include <opie/tododb.h>
 #include <opie/oclickablelabel.h>
@@ -46,7 +47,7 @@ public:
     void refresh();
 
  private:
-    MailPluginWidget *m_widget;
+   QGuardedPtr<MailPluginWidget> m_widget;
 };
 
 #endif

@@ -22,7 +22,7 @@ MailPlugin::MailPlugin() {
 }
 
 MailPlugin::~MailPlugin() {
-    delete m_widget;
+    delete (MailPluginWidget*)m_widget;
 }
 
 QString MailPlugin::pluginName() const {
