@@ -14,7 +14,7 @@
 
 
 FileTransfer::FileTransfer( Type t, IOLayer* lay )
-    : FileTransferLayer( lay ), m_type( t ) {
+    : FileTransferLayer( lay ), m_type( t ), m_pid ( 0 ) {
     signal(SIGPIPE,  SIG_IGN );
 
     m_not = 0l;
@@ -235,7 +235,7 @@ void FileTransfer::slotProgress( const QStringList& list ) {
 
 }
 void FileTransfer::cancel() {
-    ::kill(m_pid,9 );
+    if(m_pid > 0) ::kill(m_pid,9 );
     delete m_not;
 }
 void FileTransfer::slotExec() {

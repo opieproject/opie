@@ -261,7 +261,7 @@ void MainWindow::slotTransfer()
 {
     if ( currentSession() ) {
 	TransferDialog dlg(this);
-	dlg.showMaximized();
+	//dlg.showMaximized();
 	dlg.exec();
     }
 }

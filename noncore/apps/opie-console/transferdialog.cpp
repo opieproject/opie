@@ -5,6 +5,8 @@
 #include <qpushbutton.h>
 #include <qmessagebox.h>
 #include <qprogressbar.h>
+#include <qradiobutton.h>
+#include <qbuttongroup.h>
 
 #include <opie/ofiledialog.h>
 
@@ -15,39 +17,41 @@
 
 #include "transferdialog.h"
 
-
-
-
-
-
-
 TransferDialog::TransferDialog(MainWindow *parent, const char *name)
-: QDialog(/*parent, name*/0l, 0l, true), m_win(parent)
+: QDialog(0l, 0l, true), m_win(parent)
 {
-        m_lay = 0l;
-	QVBoxLayout *vbox;
-	QHBoxLayout *hbox, *hbox2;
+    m_lay = 0l;
+	QVBoxLayout *vbox, *vbox2;
+	QHBoxLayout *hbox, *hbox2, *hbox3;
 	QLabel *file, *mode, *progress, *status;
-	QPushButton *selector;
+	QButtonGroup *group;
+	QRadioButton *mode_send, *mode_receive;
 
+	group = new QButtonGroup(QObject::tr("Transfer mode"), this);
+	mode_send = new QRadioButton(QObject::tr("Send"), group);
+	mode_receive = new QRadioButton(QObject::tr("Receive"), group);
+	group->insert(mode_send, id_send);
+	group->insert(mode_receive, id_receive);
+	vbox2 = new QVBoxLayout(group, 2);
+	vbox2->addSpacing(10);
+	hbox3 = new QHBoxLayout(vbox2, 2);
+	hbox3->add(mode_send);
+	hbox3->add(mode_receive);
+	mode_send->setChecked(true);
+	m_transfermode = id_send;
 
 	file = new QLabel(QObject::tr("Send file"), this);
-	mode = new QLabel(QObject::tr("Transfer mode"), this);
+	mode = new QLabel(QObject::tr("Transfer protocol"), this);
 	progress = new QLabel(QObject::tr("Progress"), this);
 	status = new QLabel(QObject::tr("Status"), this);
 
-	statusbar = new QLabel(QObject::tr("ready"), this);
+	statusbar = new QLabel(QObject::tr("Ready"), this);
 	statusbar->setFrameStyle(QFrame::Panel | QFrame::Sunken);
 
 	protocol = new QComboBox(this);
-        /* use the fscking MetaFactory
-         * because we invented it for that fscking reason
-         * I'm really getting UPSET!!!!
-         */
-        QStringList list = m_win->factory()->fileTransferLayers();
-        for (QStringList::Iterator it =list.begin(); it != list.end(); ++it ) {
-            protocol->insertItem( (*it) );
-        }
+	QStringList list = m_win->factory()->fileTransferLayers();
+	for (QStringList::Iterator it = list.begin(); it != list.end(); ++it)
+		protocol->insertItem((*it));
 
 	filename = new QLineEdit(this);
 
@@ -59,6 +63,7 @@ TransferDialog::TransferDialog(MainWindow *parent, const char *name)
 	cancel = new QPushButton(QObject::tr("Cancel"), this);
 
 	vbox = new QVBoxLayout(this, 2);
+	vbox->add(group);
 	vbox->add(file);
 	hbox = new QHBoxLayout(vbox, 0);
 	hbox->add(filename);
@@ -80,6 +85,7 @@ TransferDialog::TransferDialog(MainWindow *parent, const char *name)
 	connect(selector, SIGNAL(clicked()), SLOT(slotFilename()));
 	connect(ok, SIGNAL(clicked()), SLOT(slotTransfer()));
 	connect(cancel, SIGNAL(clicked()), SLOT(slotCancel()));
+	connect(group, SIGNAL(clicked(int)), SLOT(slotMode(int)));
 }
 
 TransferDialog::~TransferDialog()
@@ -96,7 +102,7 @@ void TransferDialog::slotFilename()
 
 void TransferDialog::slotTransfer()
 {
-	if(filename->text().isEmpty())
+	if((m_transfermode == id_send) && (filename->text().isEmpty()))
 	{
 		QMessageBox::information(this,
 			QObject::tr("Attention"),
@@ -106,13 +112,19 @@ void TransferDialog::slotTransfer()
 
 	ok->setEnabled(false);
 
-	statusbar->setText(QObject::tr("Sending..."));
+	if(m_transfermode == id_send) statusbar->setText(QObject::tr("Sending..."));
+	else statusbar->setText(QObject::tr("Receiving..."));
 
-	m_lay = m_win->factory()->newFileTransfer( protocol->currentText(),
-                                                   m_win->currentSession()->layer() );
-	m_lay->sendFile(filename->text());
+	m_lay = m_win->factory()->newFileTransfer(protocol->currentText(), m_win->currentSession()->layer());
+	if(m_transfermode == id_send)
+	{
+		m_lay->sendFile(filename->text());
+	}
+	else
+	{
+	}
 
- 	connect(m_lay, SIGNAL(progress(const QString&, int, int, int, int, int)), SLOT(slotProgress(const QString&, int, int, int, int, int)));
+	connect(m_lay, SIGNAL(progress(const QString&, int, int, int, int, int)), SLOT(slotProgress(const QString&, int, int, int, int, int)));
 	connect(m_lay, SIGNAL(error(int, const QString&)), SLOT(slotError(int, const QString&)));
 	connect(m_lay, SIGNAL(sent()), SLOT(slotSent()));
 }
@@ -120,11 +132,12 @@ void TransferDialog::slotTransfer()
 void TransferDialog::slotCancel()
 {
 	ok->setEnabled(true);
+	statusbar->setText(QObject::tr("Ready"));
 
 	if(m_lay)
 	{
 		m_lay->cancel();
-		delete  m_lay;
+		delete m_lay;
 		m_lay = 0l;
 		QMessageBox::information(this,
 			QObject::tr("Cancelled"),
@@ -143,6 +156,8 @@ void TransferDialog::slotProgress(const QString& file, int progress, int speed, 
 
 void TransferDialog::slotError(int error, const QString& message)
 {
+	statusbar->setText(QObject::tr("Ready"));
+
 	switch(error)
 	{
 			case FileTransferLayer::NotSupported:
@@ -153,28 +168,28 @@ void TransferDialog::slotError(int error, const QString& message)
 			case FileTransferLayer::StartError:
 				QMessageBox::critical(this,
 					QObject::tr("Error"),
-					QObject::tr("Operation not supported."));
+					QObject::tr("Transfer could not be started."));
 				break;
 			case FileTransferLayer::NoError:
 				QMessageBox::critical(this,
 					QObject::tr("Error"),
-					QObject::tr("Operation not supported."));
+					QObject::tr("No error."));
 				break;
 			case FileTransferLayer::Undefined:
 				QMessageBox::critical(this,
 					QObject::tr("Error"),
-					QObject::tr("Operation not supported."));
+					QObject::tr("Undefined error occured."));
 				break;
 			case FileTransferLayer::Incomplete:
 				QMessageBox::critical(this,
 					QObject::tr("Error"),
-					QObject::tr("Operation not supported."));
+					QObject::tr("Incomplete transfer."));
 				break;
 			case FileTransferLayer::Unknown:
 			default:
 				QMessageBox::critical(this,
 					QObject::tr("Error"),
-					QObject::tr("Operation not supported."));
+					QObject::tr("Unknown error occured."));
 				break;
 	}
 }
@@ -183,5 +198,21 @@ void TransferDialog::slotSent()
 {
 	QMessageBox::information(this, QObject::tr("Sent"), QObject::tr("File has been sent."));
 	ok->setEnabled(true);
+	statusbar->setText(QObject::tr("Ready"));
+}
+
+void TransferDialog::slotMode(int id)
+{
+	if(id == id_send)
+	{
+		selector->setEnabled(true);
+		filename->setEnabled(true);
+	}
+	else
+	{
+		selector->setEnabled(false);
+		filename->setEnabled(false);
+	}
+	m_transfermode = id;
 }
 
