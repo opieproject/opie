@@ -1,17 +1,31 @@
 /*
  * Startup functions of wellenreiter
  *
- * $Id: daemon.cc,v 1.16 2003-02-07 03:36:42 max Exp $
+ * $Id: daemon.cc,v 1.17 2003-02-07 11:35:02 mjm Exp $
  */
 
 #include "config.hh"
 #include "daemon.hh"
 
+// temporary solution, will be removed soon
+#define MAXCHANNEL 13
+char sniffer_device[6];
+int channel=0;
+int timedout=1;
+
+static int chanswitch()
+{
+  if(channel >= MAXCHANNEL)
+    channel=1
+  card_set_channel(sniffer_device, channel, card_type);
+  timedout=0;
+}
+
 /* Main function of wellenreiterd */
 int main(int argc, char **argv)
 {
   int sock, maxfd, retval, card_type;
-  char buffer[WL_SOCKBUF], sniffer_device[6];
+  char buffer[WL_SOCKBUF];
   struct pcap_pkthdr header;
   struct sockaddr_in saddr;
   pcap_t *handletopcap;
@@ -24,6 +38,9 @@ int main(int argc, char **argv)
 
   if(argc < 3)
     usage();
+
+  // removed soon, see above
+  SIGNAL(SIGALRM, chanswitch);
 
   /* Set sniffer device */
   memset(sniffer_device, 0, sizeof(sniffer_device));
@@ -72,10 +89,14 @@ int main(int argc, char **argv)
     FD_SET(sock, &rset);
     FD_SET(pcap_fileno(handletopcap), &rset);
 
+    // blah
+    timedout=1;
+    alarm(1);
+
     /* socket or pcap handle bigger? Will be cleaned up, have to check pcap */
     maxfd = (sock > pcap_fileno(handletopcap) ? sock : pcap_fileno(handletopcap)) + 1;
 
-    if(select(maxfd, &rset, NULL, NULL, NULL) < 0)
+    if(select(maxfd, &rset, NULL, NULL, NULL) < 0 && timedout)
     {
       wl_logerr("Error calling select: %s", strerror(errno));
       break;
@@ -85,7 +106,7 @@ int main(int argc, char **argv)
     if(FD_ISSET(sock, &rset))
     {
       /* Receive data from socket */
-      if((retval=wl_recv(&sock, saddr, buffer, sizeof(buffer))) < 0)
+      if((retval=wl_recv(&sock, saddr, buffer, sizeof(buffer))) < 0 && timedout)
       {
 	wl_logerr("Error trying to read: %s", strerror(errno));
 	break;
