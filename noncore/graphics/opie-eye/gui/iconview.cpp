@@ -7,6 +7,7 @@
 
 #include <lib/imagecache.h>
 #include <gui/imageinfoui.h>
+#include <gui/imagescrollview.h>
 
 #include <iface/dirview.h>
 #include <iface/dirlister.h>
@@ -371,7 +372,12 @@ void PIconView::slotEnd() {
 }
 
 void PIconView::slotShowImage() {
-
+    qDebug("image show");
+    bool isDir = false;
+    QString name = currentFileName(isDir);
+    if (isDir) return;
+    ImageDlg dlg(name);
+    QPEApplication::execDialog(&dlg);    
 }
 void PIconView::slotShowImage( const QString& ) {
 
