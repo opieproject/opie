@@ -50,4 +50,5 @@ TRANSLATIONS = ../../../i18n/de/embeddedkonsole.ts \
         ../../../i18n/sl/embeddedkonsole.ts \
         ../../../i18n/zh_CN/embeddedkonsole.ts \
         ../../../i18n/zh_TW/embeddedkonsole.ts \
-        ../../../i18n/it/embeddedkonsole.ts
+        ../../../i18n/it/embeddedkonsole.ts \
+        ../../../i18n/da/embeddedkonsole.ts

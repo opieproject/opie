@@ -25,3 +25,4 @@ TRANSLATIONS   += ../../i18n/no/libqmultikey.ts
 TRANSLATIONS   += ../../i18n/zh_CN/libqmultikey.ts
 TRANSLATIONS   += ../../i18n/zh_TW/libqmultikey.ts
 TRANSLATIONS   += ../../i18n/fr/libqmultikey.ts
+TRANSLATIONS   += ../../i18n/da/libqmultikey.ts

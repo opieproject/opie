@@ -22,4 +22,5 @@ TRANSLATIONS = ../../../i18n/de/security.ts \
 	 ../../../i18n/pt_BR/security.ts \
 	 ../../../i18n/sl/security.ts \
 	 ../../../i18n/zh_CN/security.ts \
-	 ../../../i18n/zh_TW/security.ts
+	 ../../../i18n/zh_TW/security.ts \
+	 ../../../i18n/da/security.ts
