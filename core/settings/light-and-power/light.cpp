@@ -101,8 +101,8 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
 	config. setGroup ( "Battery" );
 
 	// battery spinboxes
-	interval_dim->      setValue ( config. readNumEntry ( "Dim", 30 ));
-	interval_lightoff-> setValue ( config. readNumEntry ( "LightOff", 20 ));
+	interval_dim->      setValue ( config. readNumEntry ( "Dim", 20 ));
+	interval_lightoff-> setValue ( config. readNumEntry ( "LightOff", 30 ));
 	interval_suspend->  setValue ( config. readNumEntry ( "Suspend", 60 ));
 
 	// battery check and slider
