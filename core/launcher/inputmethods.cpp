@@ -288,7 +288,11 @@ void InputMethods::showKbd( bool on )
   // HACK... Make the texteditor fit with all input methods
   // Input methods should also never use more than about 40% of the screen
   int height = QMIN( method->widget->sizeHint().height(), 134 );
+  #ifdef QT_QWS_SIMPAD
+  method->widget->resize( qApp->desktop()->width() / 2, height );
+  #else
   method->widget->resize( qApp->desktop()->width(), height );
+  #endif
   method->widget->move( 0, mapToGlobal( QPoint() ).y() - height );
   method->widget->show();
     } else {
