@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <qpe/qpeapplication.h>
+#include <qlayout.h>
 #include <qmainwindow.h>
 
 #include "cfgdlg.h"
@@ -10,13 +11,12 @@ int main( int argc, char **argv ) {
 	CfgParser cp;
 	cp.load(QPEApplication::qpeDir()+"/share/zkb/zkb.xml", cfile);
 
-	QMainWindow m;
-	CfgDlg c(&m, &cfile, &app);
-	app.showMainWidget(&m);
-	m.hide();
-	c.showMaximized();
 
-	int ret = app.exec();
+	CfgDlg c(0, &cfile, &app, true);
+
+
+	app.showMainWidget(&c);
+	int ret = QPEApplication::execDialog(&c);
 
 	return ret;
 }

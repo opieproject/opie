@@ -5,7 +5,9 @@
 #include <unistd.h>
 #include "cfgdlg.h"
 
-CfgDlg::CfgDlg(QWidget* parent, CfgFile* cf, QApplication* app):QDialog(parent), cfile(cf), application(app) {
+CfgDlg::CfgDlg(QWidget* parent, CfgFile* cf, QApplication* app, bool mod):
+    QDialog(parent, "CfgDlg", mod), cfile(cf), application(app) {
+
 	setCaption(tr("keyz configurator"));
 
 	QGridLayout* gl = new QGridLayout(this, 7, 5, 5, 5);
@@ -27,7 +29,7 @@ CfgDlg::CfgDlg(QWidget* parent, CfgFile* cf, QApplication* app):QDialog(parent),
 	QLabel* aplabel = new QLabel("Auto Repeat Period (ms)", this);
 	ad = new QSpinBox(50, 5000, 5, this);
 	ap = new QSpinBox(0, 5000, 5, this);
-	
+
 //	QLabel* adms = new QLabel("ms", this);
 //	QLabel* apms = new QLabel("ms", this);
 

@@ -14,7 +14,7 @@ class CfgDlg : public QDialog {
 Q_OBJECT
 
 public:
-	CfgDlg(QWidget* parent, CfgFile* cfile, QApplication *);
+	CfgDlg(QWidget* parent, CfgFile* cfile, QApplication *, bool b = false);
 	virtual ~CfgDlg();
 
 protected:
