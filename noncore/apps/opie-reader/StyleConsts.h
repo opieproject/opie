@@ -3,9 +3,7 @@
 
 typedef unsigned short StyleType;
 
-#ifdef _WINDOWS
 #include <string.h>
-#endif
 #include <stdlib.h>
 #include <qglobal.h>
 class QImage;
