@@ -7,6 +7,7 @@
 
 class OSQLDriver;
 class OSQLResult;
+class OSQLResultItem;
 class OTodoAccessBackendSQL : public OTodoAccessBackend {
 public:
     OTodoAccessBackendSQL( const QString& file );
@@ -19,6 +20,7 @@ public:
 
     QArray<int> queryByExample( const OTodo& t, int sort );
     OTodo find(int uid)const;
+    OTodo find(int uid, const QArray<int>&, uint cur, Frontend::CacheDirection )const;
     void clear();
     bool add( const OTodo& t );
     bool remove( int uid );
@@ -34,6 +36,7 @@ private:
     void fillDict();
     inline bool date( QDate& date, const QString& )const;
     inline OTodo todo( const OSQLResult& )const;
+    inline OTodo todo( OSQLResultItem& )const;
     inline QArray<int> uids( const OSQLResult& )const;
     OTodo todo( int uid )const;
 

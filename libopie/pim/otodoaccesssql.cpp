@@ -81,9 +81,13 @@ namespace {
     class FindQuery : public OSQLQuery {
     public:
         FindQuery(int uid);
+        FindQuery(const QArray<int>& );
         ~FindQuery();
         QString query()const;
     private:
+        QString single()const;
+        QString multi()const;
+        QArray<int> m_uids;
         int m_uid;
     };
 
@@ -138,6 +142,7 @@ namespace {
      * we leave out X-Ref + Alarms
      */
     QString InsertQuery::query()const{
+
         int year, month, day;
         year = month = day = 0;
         if (m_todo.hasDueDate() ) {
@@ -175,11 +180,29 @@ namespace {
     FindQuery::FindQuery(int uid)
         : OSQLQuery(), m_uid(uid ) {
     }
+    FindQuery::FindQuery(const QArray<int>& ints)
+        : OSQLQuery(), m_uids(ints){
+    }
     FindQuery::~FindQuery() {
     }
     QString FindQuery::query()const{
+        if (m_uids.count() == 0 )
+            return single();
+        else
+            return multi();
+    }
+    QString FindQuery::single()const{
         QString qu = "select uid, categories, completed, progress, summary, ";
         qu += "DueDate, priority, description from todolist where uid = " + QString::number(m_uid);
+        return qu;
+    }
+    QString FindQuery::multi()const {
+        QString qu = "select uid, categories, completed, progress, summary, ";
+        qu += "DueDate, priority, description from todolist where ";
+        for (uint i = 0; i < m_uids.count(); i++ ) {
+            qu += " UID = " + QString::number( m_uids[i] ) + " OR";
+        }
+        qu.remove( qu.length()-2, 2 );
         return qu;
     }
 
@@ -260,6 +283,39 @@ OTodo OTodoAccessBackendSQL::find(int uid ) const{
     FindQuery query( uid );
     return todo( m_driver->query(&query) );
 
+}
+OTodo OTodoAccessBackendSQL::find( int uid, const QArray<int>& ints,
+                                   uint cur, Frontend::CacheDirection dir ) const{
+    qWarning("searching for %d", uid );
+    QArray<int> search( 8 );
+    uint size =0;
+    OTodo to;
+
+    // we try to cache 8 items
+    switch( dir ) {
+        /* forward */
+    case 0:
+        for (uint i = cur; i < ints.count() && size < 8; i++ ) {
+            qWarning("size %d %d", size,  ints[i] );
+            search[size] = ints[i];
+            size++;
+        }
+        break;
+        /* reverse */
+    case 1:
+        for (uint i = cur; i >= 0 && size <  8; i-- ) {
+            search[size] = ints[i];
+            size++;
+        }
+        break;
+    }
+    search.resize( size );
+    FindQuery query( search );
+    OSQLResult res = m_driver->query( &query  );
+    if ( res.state() != OSQLResult::Success )
+        return to;
+
+    return todo( res );
 }
 void OTodoAccessBackendSQL::clear() {
     ClearQuery cle;
@@ -393,14 +449,27 @@ OTodo OTodoAccessBackendSQL::todo( const OSQLResult& res) const{
 
     OSQLResultItem::ValueList list = res.results();
     OSQLResultItem::ValueList::Iterator it = list.begin();
+    qWarning("todo1");
+    OTodo to = todo( (*it) );
+    cache( to );
+    ++it;
 
+    for ( ; it != list.end(); ++it ) {
+        qWarning("caching");
+        cache( todo( (*it) ) );
+    }
+    return to;
+}
+OTodo OTodoAccessBackendSQL::todo( OSQLResultItem& item )const {
+    qWarning("todo");
     bool has = false; QDate da = QDate::currentDate();
-    has = date( da, (*it).data("DueDate") );
-    QStringList cats = QStringList::split(";", (*it).data("categories") );
+    has = date( da, item.data("DueDate") );
+    QStringList cats = QStringList::split(";", item.data("categories") );
 
-    OTodo to( (bool)(*it).data("completed").toInt(), (*it).data("priority").toInt(),
-              cats, (*it).data("summary"), (*it).data("description"),
-              (*it).data("progress").toUShort(), has, da, (*it).data("uid").toInt() );
+    OTodo to( (bool)item.data("completed").toInt(), item.data("priority").toInt(),
+              cats, item.data("summary"), item.data("description"),
+              item.data("progress").toUShort(), has, da,
+              item.data("uid").toInt() );
     return to;
 }
 OTodo OTodoAccessBackendSQL::todo( int uid )const {

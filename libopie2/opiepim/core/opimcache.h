@@ -61,7 +61,9 @@ void OPimCacheItem<T>::setRecord( const T& t ) {
 }
 // Cache
 template <class T>
-OPimCache<T>::OPimCache() {
+OPimCache<T>::OPimCache()
+    : m_cache(100, 53 )
+{
     m_cache.setAutoDelete( TRUE );
 }
 template <class T>
