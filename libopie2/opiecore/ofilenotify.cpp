@@ -79,7 +79,7 @@ int OFileNotification::start( const QString& path, bool sshot, OFileNotification
 
     // check if path exists and whether it is a file or a directory, if it exists at all
     int result = ::stat( (const char*) path, &_stat );
-    if ( result == -1 )
+    if ( !(type & Create) && result == -1 )
     {
         qWarning( "OFileNotification::start(): Can't stat '%s': %s.", (const char*) path, strerror( errno ) );
         return -1;
@@ -202,11 +202,18 @@ bool OFileNotification::hasChanged()
     ::memset( &newstat, 0, sizeof newstat );
     int result = ::stat( _path, &newstat ); // may fail if file has been renamed or deleted. that doesn't matter :)
 
-    qDebug( "result of newstat call is %d (%s=%d)", result, strerror( errno ), errno );
+    qDebug( "result of newstat call is %d (%s=%d)", result, result == -1 ? strerror( errno ) : "success", errno );
     qDebug( "stat.atime = %0lx, newstat.atime = %0lx", (long)_stat.st_atime, (long)newstat.st_atime );
     qDebug( "stat.mtime = %0lx, newstat.mtime = %0lx", (long)_stat.st_mtime, (long)newstat.st_mtime );
     qDebug( "stat.ctime = %0lx, newstat.ctime = %0lx", (long)_stat.st_ctime, (long)newstat.st_ctime );
 
+    if ( !c && (_type & Create) &&
+        (long)_stat.st_atime == 0 && (long)_stat.st_mtime == 0 && (long)_stat.st_ctime == 0 &&
+        (long)newstat.st_atime > 0 && (long)newstat.st_mtime > 0 && (long)newstat.st_ctime > 0)
+    {
+        qDebug( "OFileNotification::hasChanged(): file has been created" );
+        c = true;
+    }
     if ( !c && (_type & (Delete|Rename)) && (long)newstat.st_atime == 0 && (long)newstat.st_mtime == 0 && (long)newstat.st_ctime == 0)
     {
         qDebug( "OFileNotification::hasChanged(): file has been deleted or renamed" );
