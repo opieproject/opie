@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Value:</source>
-        <translation>Wartosc:</translation>
+        <translation>Wartość:</translation>
     </message>
 </context>
 <context>
@@ -26,7 +26,7 @@
     </message>
     <message>
         <source>Could not open</source>
-        <translation>Nie mozna otworzyc</translation>
+        <translation>Nie można otworzyć</translation>
     </message>
     <message>
         <source>The directory </source>
@@ -34,14 +34,14 @@
     </message>
     <message>
         <source> could not be opened.</source>
-        <translation>nie moze byc otworzony.</translation>
+        <translation>nie może być otworzony.</translation>
     </message>
 </context>
 <context>
     <name>ListViewItemConfFile</name>
     <message>
         <source>Could not open</source>
-        <translation>Nie mozna otworzyc</translation>
+        <translation>Nie można otworzyć</translation>
     </message>
     <message>
         <source>The file </source>
@@ -49,7 +49,7 @@
     </message>
     <message>
         <source> could not be opened.</source>
-        <translation>nie moze byc otworzony.</translation>
+        <translation>nie może być otworzony.</translation>
     </message>
     <message>
         <source>no group</source>
@@ -68,11 +68,11 @@
     </message>
     <message>
         <source>Revert</source>
-        <translation>Odwroc zmiany</translation>
+        <translation>Cofnij</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Usun</translation>
+        <translation>Usuń</translation>
     </message>
 </context>
 </TS>

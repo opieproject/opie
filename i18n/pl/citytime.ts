@@ -7,26 +7,26 @@
     </message>
     <message>
         <source>There was a problem setting timezone %1</source>
-        <translation>Jest problem z ustawieniem strefy czasowej %1</translation>
+        <translation>Wystąpił problem z ustawieniem strefy czasowej %1</translation>
     </message>
     <message>
         <source>Restore Time Zone</source>
-        <translation>Przywroc Strefe Czasowa</translation>
+        <translation>Przywróć strefę czasową</translation>
     </message>
     <message>
         <source>There was a problem setting your timezone.Your time may be wrong now...</source>
-        <translation>Jest problem z ustwaieniem twojej strefy czasowej. Twoj czas moze byc bledny...</translation>
+        <translation>Wystąpił problem z ustawieniem twojej strefy czasowej. Twój czas może być błędny...</translation>
     </message>
 </context>
 <context>
     <name>CityTimeBase</name>
     <message>
         <source>City Time</source>
-        <translation>Czasy w miastach</translation>
+        <translation>Czas na świecie</translation>
     </message>
     <message>
         <source>Click on one of the set cities to replace it</source>
-        <translation>Kliknij na jednym z ustawionych miast by je zastapic innym</translation>
+        <translation>Kliknij na jedno z ustawionych miast by je zastąpić innym</translation>
     </message>
 </context>
 <context>
@@ -37,19 +37,19 @@
     </message>
     <message>
         <source>Unable to Find Timezone Info</source>
-        <translation>Nie mozna znalesc informacji o strefie czasowej</translation>
+        <translation>Nie mozna znaleźć informacji o strefie czasowej</translation>
     </message>
     <message>
         <source>&lt;p&gt;Unable to find any timezone information in %1</source>
-        <translation>&lt;p&gt;Nie mozna znalesc informacji o strefie czasowej w %1</translation>
+        <translation>&lt;p&gt;Nie można znaleźć informacji o strefie czasowej w %1</translation>
     </message>
     <message>
         <source>Couldn&apos;t Find Map</source>
-        <translation>Nie mozna znalezc mapy</translation>
+        <translation>Nie można znaleźć mapy</translation>
     </message>
     <message>
         <source>&lt;p&gt;Couldn&apos;t load map: %1, exiting</source>
-        <translation>&lt;p&gt;Nie mozna zaladowac mapy: %1, koncze</translation>
+        <translation>&lt;p&gt;Nie można załadować mapy: %1, kończę</translation>
     </message>
     <message>
         <source>Continent</source>

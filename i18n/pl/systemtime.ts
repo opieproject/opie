@@ -35,22 +35,22 @@
     </message>
     <message>
         <source>Weeks start on</source>
-        <translation>Tydzien zaczyna sie w</translation>
+        <translation>Tydzień zaczyna się w</translation>
     </message>
     <message>
         <source>Sunday</source>
-        <translation>Niedziele</translation>
+        <translation>Niedzielę</translation>
     </message>
     <message>
         <source>Monday</source>
-        <translation>Poniedzialek</translation>
+        <translation>Poniedziałek</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>SystemTime</source>
-        <translation>SystemTime</translation>
+        <translation>Czas systemowy</translation>
     </message>
     <message>
         <source>Time</source>
@@ -70,7 +70,7 @@
     </message>
     <message>
         <source>Continue?</source>
-        <translation>Kontynuowac?</translation>
+        <translation>Kontynuować?</translation>
     </message>
     <message>
         <source>Running:
@@ -80,33 +80,33 @@ ntpdate</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Blad</translation>
+        <translation>Błąd</translation>
     </message>
     <message>
         <source>Error while getting time from network.</source>
-        <translation>Blad podczas pobierania czasu z sieci.</translation>
+        <translation>Błąd podczas pobierania czasu z sieci.</translation>
     </message>
     <message>
         <source>Error while executing ntpdate</source>
-        <translation>Blad podczas uruchamiania ntpdate</translation>
+        <translation>Błąd podczas uruchamiania ntpdate</translation>
     </message>
     <message>
         <source>Time Server</source>
-        <translation>Serwer Czasu</translation>
+        <translation>Serwer czasu</translation>
     </message>
     <message>
         <source>Error while getting time from
  server: </source>
-        <translation>Blad podczas pobierania czasu
+        <translation>Błąd podczas pobierania czasu
 z serwera:</translation>
     </message>
     <message>
         <source>Could not connect to server </source>
-        <translation>Nie mozna polaczyc sie z serwerem</translation>
+        <translation>Nie można połączyć się z serwerem</translation>
     </message>
     <message>
         <source>You asked for a delay of %1 minutes, but only %2 minutes elapsed since last lookup.&lt;br&gt;Continue?</source>
-        <translation>Prosiles o opoznienie %1 minut, ale od ostatniego sprawdzania minelo tylko %2 minut.&lt;br&gt;Kontynuowac?</translation>
+        <translation>Prosiłeś o opóźnienie %1 minut, ale od ostatniego sprawdzania minęło tylko %2 minut.&lt;br&gt;Kontynuować?</translation>
     </message>
     <message>
         <source>%1 seconds</source>
@@ -117,7 +117,7 @@ z serwera:</translation>
     <name>NTPTabWidget</name>
     <message>
         <source>Start time</source>
-        <translation>Czas poczatkowy</translation>
+        <translation>Czas początkowy</translation>
     </message>
     <message>
         <source>n/a</source>
@@ -125,7 +125,7 @@ z serwera:</translation>
     </message>
     <message>
         <source>Time shift</source>
-        <translation>Przesuniecie czasu</translation>
+        <translation>Przesunięcie czasu</translation>
     </message>
     <message>
         <source>New time</source>
@@ -148,7 +148,7 @@ z serwera:</translation>
     </message>
     <message>
         <source>Estimated shift</source>
-        <translation>Oszacowane przesuniecie</translation>
+        <translation>Oszacowane przesunięcie</translation>
     </message>
     <message>
         <source>Predicted time</source>
@@ -156,7 +156,7 @@ z serwera:</translation>
     </message>
     <message>
         <source>Shift [s/h]</source>
-        <translation>Pszesuniecie [s/g]</translation>
+        <translation>Pszesunięcie [s/g]</translation>
     </message>
     <message>
         <source>Last [h]</source>
@@ -191,19 +191,19 @@ z serwera:</translation>
     </message>
     <message>
         <source>minutes between time updates</source>
-        <translation>minuty pomiedzy aktualizacjami czasu</translation>
+        <translation>minuty pomiędzy aktualizacjami czasu</translation>
     </message>
     <message>
         <source>minutes between prediction updates</source>
-        <translation>minuty pomiedzy aktualizacjami przewidywan</translation>
+        <translation>minuty pomiędzy aktualizacjami przewidywań</translation>
     </message>
     <message>
         <source>Display time server information</source>
-        <translation>Pokaz informacje o serwerze czasu</translation>
+        <translation>Pokaż informacje o serwerze czasu</translation>
     </message>
     <message>
         <source>Display time prediction information</source>
-        <translation>Pokaz informacje o przewidywaniu czasu</translation>
+        <translation>Pokaż informacje o przewidywaniu czasu</translation>
     </message>
 </context>
 <context>

@@ -3,37 +3,37 @@
     <name>BackupAndRestore</name>
     <message>
         <source>Backup and Restore... working...</source>
-        <translation>Backup and Restore... pracuje...</translation>
+        <translation>Archiwizacja i odzyskiwanie... pracuje...</translation>
     </message>
     <message>
         <source>Backup and Restore</source>
-        <translation>Backup and Restore</translation>
+        <translation>Archiwizacja i odzyskiwanie</translation>
     </message>
     <message>
         <source>Error from System:
 </source>
-        <translation>Blad z Systemu:
+        <translation>Błąd z systemu:
 </translation>
     </message>
     <message>
         <source>Message</source>
-        <translation>Wiadomosc</translation>
+        <translation>Wiadomość</translation>
     </message>
     <message>
         <source>Backup Failed!</source>
-        <translation>Tworzenie kopii sie nie powiodlo!</translation>
+        <translation>Archiwizacja nie powiodła się!</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Details</source>
-        <translation>Szczegoly</translation>
+        <translation>Szczegóły</translation>
     </message>
     <message>
         <source>Backup and Restore.. Failed !!</source>
-        <translation>Backup and Restore.. Porazka!!</translation>
+        <translation>Archiwizacja i odzyskiwanie... Porażka!!</translation>
     </message>
     <message>
         <source>Backup Successfull.</source>
@@ -41,15 +41,15 @@
     </message>
     <message>
         <source>Please select something to restore.</source>
-        <translation>Wybiez cos do odtworzenia.</translation>
+        <translation>Wybierz coś do odzyskania.</translation>
     </message>
     <message>
         <source>Restore Failed.</source>
-        <translation>Odzyskiwanie sie nie powiodlo.</translation>
+        <translation>Odzyskanie nie powiodło się.</translation>
     </message>
     <message>
         <source>Unable to open File: %1</source>
-        <translation>Nie mozna otworzyc pliku: %1</translation>
+        <translation>Nie można otworzyć pliku: %1</translation>
     </message>
     <message>
         <source>Restore Successfull.</source>
@@ -57,22 +57,22 @@
     </message>
     <message>
         <source>Backup Successful.</source>
-        <translation type="unfinished"></translation>
+        <translation>Archiwizacja powiodła się.</translation>
     </message>
     <message>
         <source>Restore Successful.</source>
-        <translation type="unfinished"></translation>
+        <translation>Odzyskanie powiodło się.</translation>
     </message>
 </context>
 <context>
     <name>BackupAndRestoreBase</name>
     <message>
         <source>Backup And Restore</source>
-        <translation>Backup and Restore</translation>
+        <translation>Archiwizacja i odzyskiwanie</translation>
     </message>
     <message>
         <source>Backup</source>
-        <translation>Tworzenie kopii</translation>
+        <translation>Archiwizacja</translation>
     </message>
     <message>
         <source>Applications</source>
@@ -84,7 +84,7 @@
     </message>
     <message>
         <source>&amp;Backup</source>
-        <translation>&amp;Tworz kopie</translation>
+        <translation>&amp;Archiwizuj</translation>
     </message>
     <message>
         <source>Restore</source>
@@ -92,7 +92,7 @@
     </message>
     <message>
         <source>Select Source</source>
-        <translation>Wybierz zrodlo</translation>
+        <translation>Wybierz źródło</translation>
     </message>
     <message>
         <source>Column 1</source>
@@ -104,18 +104,18 @@
     </message>
     <message>
         <source>Update Filelist</source>
-        <translation>Aktualizuj liste plikow</translation>
+        <translation>Aktualizuj listę plików</translation>
     </message>
 </context>
 <context>
     <name>ErrorDialog</name>
     <message>
         <source>Error Info</source>
-        <translation>Informacje o bledzie</translation>
+        <translation>Informacje o błędzie</translation>
     </message>
     <message>
         <source>Error Message:</source>
-        <translation>Tresc Bledu:</translation>
+        <translation>Treść błędu:</translation>
     </message>
     <message>
         <source>&amp;OK</source>

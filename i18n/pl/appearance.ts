@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Current scheme</source>
-        <translation>Aktualny schemat</translation>
+        <translation>Aktualny szablon</translation>
     </message>
     <message>
         <source>Edit...</source>
@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Delete</source>
-        <translation>Usun</translation>
+        <translation>Usuń</translation>
     </message>
     <message>
         <source>Save</source>
@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>Disable styling for these applications ( &lt;b&gt;*&lt;/b&gt; can be used as a wildcard):</source>
-        <translation>Wylacz styl dla aplikacji (mozna uzywac znaku specjalnego &lt;b&gt;*&lt;/b&gt;):</translation>
+        <translation>Wyłącz styl dla aplikacji (można używać znaku specjalnego &lt;b&gt;*&lt;/b&gt;):</translation>
     </message>
     <message>
         <source>Binary file(s)</source>
@@ -35,15 +35,15 @@
     </message>
     <message>
         <source>Tab style:</source>
-        <translation>Styl zakladek:</translation>
+        <translation>Styl zakładek:</translation>
     </message>
     <message>
         <source>Tabs</source>
-        <translation>Zakladki</translation>
+        <translation>Zakładki</translation>
     </message>
     <message>
         <source>Tabs w/icons</source>
-        <translation>Zakladki z ikonami</translation>
+        <translation>Zakładki z ikonami</translation>
     </message>
     <message>
         <source>Drop down list</source>
@@ -55,11 +55,11 @@
     </message>
     <message>
         <source>Top</source>
-        <translation>Gora</translation>
+        <translation>Góra</translation>
     </message>
     <message>
         <source>Bottom</source>
-        <translation>Dol</translation>
+        <translation>Dół</translation>
     </message>
     <message>
         <source>Style</source>
@@ -99,23 +99,23 @@
     </message>
     <message>
         <source>Save Scheme</source>
-        <translation>Zapisz schemat</translation>
+        <translation>Zapisz szablon</translation>
     </message>
     <message>
         <source>Save scheme</source>
-        <translation>Zapisz schemat</translation>
+        <translation>Zapisz szablon</translation>
     </message>
     <message>
         <source>Scheme does already exist.</source>
-        <translation>Schemat juz istnieje.</translation>
+        <translation>Szablon już istnieje.</translation>
     </message>
     <message>
         <source>Delete scheme</source>
-        <translation>Usun schemat</translation>
+        <translation>Usuń szablon</translation>
     </message>
     <message>
         <source>Unable to delete current scheme.</source>
-        <translation>Nie mozna usunac aktualnego schematu.</translation>
+        <translation>Nie można usunąć aktualnego szablonu.</translation>
     </message>
     <message>
         <source>&lt;new&gt;</source>
@@ -125,15 +125,15 @@
         <source>Styles control the way items such as buttons and scroll bars appear in all applications.
 
 Click here to select an available style.</source>
-        <translation>Style okreslaja wyglad elementow takich jak przyciski i listwy przewijania w aplikacjach.
+        <translation>Style określają wygląd elementów takich jak przyciski i listwy przewijania w aplikacjach.
 
-Kliknij tu aby wybrac dostepny styl.</translation>
+Kliknij tu aby wybrać dostępny styl.</translation>
     </message>
     <message>
         <source>Click here to configure the currently selected style.
 
 Note:  This option is not available for all styles.</source>
-        <translation>Kliknij tu aby skonfigurowac wybrany styl.
+        <translation>Kliknij tu aby skonfigurować wybrany styl.
 
 Uwaga: Ta opcja jest niedostepna dla niektorych stylow.</translation>
     </message>
@@ -141,61 +141,61 @@ Uwaga: Ta opcja jest niedostepna dla niektorych stylow.</translation>
         <source>Window decorations control the way the application title bar and its buttons appear.
 
 Click here to select an available decoration.</source>
-        <translation>Dekoracje okien okreslaja wyglad listwy tytulowej aplikacji i wyglad przyciskow na tej listwie.
+        <translation>Dekoracje okien określają wygląd listwy tytułowej aplikacji i wygląd przycisków na tej listwie.
 
-Kliknij tu aby wybrac dostepna dekoracje.</translation>
+Kliknij tu aby wybrać dostepną dekorację.</translation>
     </message>
     <message>
         <source>Select the desired name, style and size of the default font applications will use.</source>
-        <translation>Wybierz nazwe, styl i rozmiar domyslnej czcionki dla aplikacji.</translation>
+        <translation>Wybierz nazwę, styl i rozmiar domyślnej czcionki dla aplikacji.</translation>
     </message>
     <message>
         <source>Color schemes are a collection of colors which are used for various parts of the display.
 
 Click here to select an available scheme.</source>
-        <translation>Schematy barw sa zestawem kolorow uzywanych w roznych wyswietlanych elementach.
+        <translation>Szablony barw sa zestawem kolorów używanych w różnych wyświetlanych elementach.
 
-Kliknij tu aby wybrac dostepny schemat.</translation>
+Kliknij tu aby wybrać dostępny schemat.</translation>
     </message>
     <message>
         <source>Click here to change the colors in the current color scheme.</source>
-        <translation>Kliknij tu aby zmienic kolory w aktualnym schemacie barw.</translation>
+        <translation>Kliknij tu aby zmienić kolory w aktualnym szablonie barw.</translation>
     </message>
     <message>
         <source>Click here to delete the color scheme selected in the list to the left.</source>
-        <translation>Kliknij tu aby usunac schemat barw wybrany na liscie po lewej stronie.</translation>
+        <translation>Kliknij tu aby usunąć szablon barw wybrany na liście po lewej stronie.</translation>
     </message>
     <message>
         <source>Click here to name and save the current color scheme.</source>
-        <translation>Kliknij tu aby nazwac i zapisac aktualny schemat barw.</translation>
+        <translation>Kliknij tu aby nazwać i zapisać aktualny szablon barw.</translation>
     </message>
     <message>
         <source>Click here to allow all applications to use global appearance settings.</source>
-        <translation>Kliknij tu aby zezwolic wszystkim aplikacjom na uzywanie globalnych ustawien wygladu.</translation>
+        <translation>Kliknij tu aby zezwolić wszystkim aplikacjom na używanie globalnych ustawień wyglądu.</translation>
     </message>
     <message>
         <source>If some applications do not display correctly with the global appearance settings, certain features can be turned off for that application.
 
 This area allows you to select an application and which settings you wish to disable.</source>
-        <translation>Jesli niektore aplikacje nie wyswietlaja sie prawidlowo z globalnymi ustawieniami wygladu, pewne funkcje moga byc dla nich  wylaczone.
+        <translation>Jeśli niektóre aplikacje nie wyświetlają się prawidłowo z globalnymi ustawieniami wyglądu, pewne funkcje mogą być dla nich  wyłączone.
 
-Ten obszar pozwala ci na wybor aplikacji i opcji, ktore chcesz wylaczyc.</translation>
+Ten obszar pozwala ci na wybór aplikacji i opcji, ktore chcesz wyłączyć.</translation>
     </message>
     <message>
         <source>Click here to add an application to the list above.</source>
-        <translation>Kliknij tu aby dodac aplikacje do powyzszej listy.</translation>
+        <translation>Kliknij tu aby dodać aplikację do powyższej listy.</translation>
     </message>
     <message>
         <source>Click here to delete the currently selected application.</source>
-        <translation>Kliknij tu aby usunac aktualnie wybrana aplikacje.</translation>
+        <translation>Kliknij tu aby usunąć aktualnie wybraną aplikację.</translation>
     </message>
     <message>
         <source>Click here to move the currently selected application up in the list.</source>
-        <translation>Kliknij to aby przesunac wybrana aplikacje w gore listy.</translation>
+        <translation>Kliknij to aby przesunąć wybraną aplikację w górę listy.</translation>
     </message>
     <message>
         <source>Click here to move the currently selected application down in the list.</source>
-        <translation>Kliknij to aby przesunac wybrana aplikacje w dol listy.</translation>
+        <translation>Kliknij to aby przesunąć wybraną aplikację w dół listy.</translation>
     </message>
     <message>
         <source>Click here to select a desired style for tabbed dialogs (such as this application). The styles available are:
@@ -204,28 +204,28 @@ Ten obszar pozwala ci na wybor aplikacji i opcji, ktore chcesz wylaczyc.</transl
 2. Tabs w/icons - tabs with icons for each tab, text label only appears on current tab
 3. Drop down list - a vertical listing of tabs
 4. Drop down list w/icons - a vertical listing of tabs with icons</source>
-        <translation>Kliknij tu aby wybrac styl dla okien dialogowych z zakladkami (takich jak ta aplikacja). Dostepne style to:
+        <translation>Kliknij tu aby wybrać styl dla okien dialogowych z zakładkami (takich jak ta aplikacja). Dostępne style to:
 
-1. Zakladki - normalne zakladki jedynie z tekstem
-2. Zakladki z ikonami - zakladki z ikonami, etykieta tekstowa pojawia sie jedynie na aktualnej zakladce
-3. Lista rozwijana - pionowa lista zakladek
-4. Lista rozwijana z ikonami - pionowa lista zakladek z ikonami</translation>
+1. Zakładki - normalne zakładki jedynie z tekstem
+2. Zakładki z ikonami - zakładki z ikonami, etykieta tekstowa pojawia się jedynie na aktualnej zakładce
+3. Lista rozwijana - pionowa lista zakładek
+4. Lista rozwijana z ikonami - pionowa lista zakładek z ikonami</translation>
     </message>
     <message>
         <source>Click here so that tabs appear at the top of the window.</source>
-        <translation>Kliknij tu aby zakladki pojawialy sie na gorze okna.</translation>
+        <translation>Kliknij tu aby zakładki pojawiały się na górze okna.</translation>
     </message>
     <message>
         <source>Click here so that tabs appear at the bottom of the window.</source>
-        <translation>Kliknij tu aby zakladki pojawialy sie na dole okna.</translation>
+        <translation>Kliknij tu aby zakładki pojawiały się na dole okna.</translation>
     </message>
     <message>
         <source>This is a preview window.  Look here to see your new appearance as options are changed.</source>
-        <translation>To jest okno podgladu. Mozesz tu zobaczyc jak zmienia sie wyglad wraz ze zmianami opcji.</translation>
+        <translation>To jest okno podglądu. Możesz tu zobaczyć jak zmienia się wygląd wraz ze zmianami opcji.</translation>
     </message>
     <message>
         <source>Appearance Settings</source>
-        <translation>Ustawienia wygladu</translation>
+        <translation>Ustawienia wyglądu</translation>
     </message>
     <message>
         <source>Rotation direction:</source>
@@ -236,18 +236,18 @@ Ten obszar pozwala ci na wybor aplikacji i opcji, ktore chcesz wylaczyc.</transl
     <name>EditScheme</name>
     <message>
         <source>Edit scheme</source>
-        <translation>Edytuj schemat</translation>
+        <translation>Edytuj szablon</translation>
     </message>
     <message>
         <source>Click here to select a color for: </source>
-        <translation>Kliknij tu by wybrac kolor dla:</translation>
+        <translation>Kliknij tu aby wybrać kolor dla:</translation>
     </message>
 </context>
 <context>
     <name>SampleWindow</name>
     <message>
         <source>Sample</source>
-        <translation>Przyklad</translation>
+        <translation>Przykład</translation>
     </message>
     <message>
         <source>Normal Item</source>
@@ -267,7 +267,7 @@ Ten obszar pozwala ci na wybor aplikacji i opcji, ktore chcesz wylaczyc.</transl
     </message>
     <message>
         <source>Highlighted Text</source>
-        <translation>Podswietlony tekst</translation>
+        <translation>Podświetlony tekst</translation>
     </message>
     <message>
         <source>Button</source>
@@ -279,7 +279,7 @@ Ten obszar pozwala ci na wybor aplikacji i opcji, ktore chcesz wylaczyc.</transl
     </message>
     <message>
         <source>Sample window using the selected settings.</source>
-        <translation>Przykladowe okno dla wybranych ustawien.</translation>
+        <translation>Przykładowe okno dla wybranych ustawień.</translation>
     </message>
 </context>
 </TS>
