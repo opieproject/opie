@@ -13,7 +13,7 @@ SOURCES   = main.cpp \
 TARGET    = opieplayer
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
-LIBS            += -lqpe -lpthread -lopiecore2 -lopieui2
+LIBS            += -lqpe -lpthread -lopiecore2 -lopieui2 -lqtaux2
 
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
