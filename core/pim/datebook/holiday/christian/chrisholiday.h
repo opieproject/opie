@@ -20,6 +20,8 @@ public:
     virtual QStringList entries(const QDate&);
     virtual QStringList entries(unsigned year, unsigned month, unsigned day);
     virtual QMap<QDate,QStringList> entries(const QDate&,const QDate&);
+    virtual QValueList<EffectiveEvent> events(const QDate&,const QDate&);
+
 protected:
     HList _internallist;
     unsigned int _lastyear;
