@@ -4,5 +4,5 @@
 #include <opie2/oapplicationfactory.h>
 
 
-OPIE_EXPORT_APP( OApplicationFactory<BackupAndRestore> )
+OPIE_EXPORT_APP( Opie::Core::OApplicationFactory<BackupAndRestore> )
 

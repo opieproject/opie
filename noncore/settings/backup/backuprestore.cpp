@@ -67,7 +67,7 @@ BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name,  WFlags f
 
     scanForApplicationSettings();
 
-    OStorageInfo storage;
+    Opie::Core::OStorageInfo storage;
 
     backupLocations.insert( "Documents", QDir::homeDirPath() + "/Documents" );
     if ( storage.hasCf() )
