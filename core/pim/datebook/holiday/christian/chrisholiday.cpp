@@ -105,7 +105,7 @@ QMap<QDate,QStringList> ChrisHoliday::entries(const QDate&start,const QDate&end)
         daysto = start.daysTo(end);
     }
     QStringList temp;
-    for (int i=0;i<daysto;++i) {
+    for (int i=0;i<=daysto;++i) {
         temp = entries(d.addDays(i));
         if (temp.count()==0) continue;
         ret[d.addDays(i)]+=temp;
@@ -124,7 +124,7 @@ QValueList<EffectiveEvent> ChrisHoliday::events(const QDate&start,const QDate&en
     }
 
     QStringList temp;
-    for (int i =0; i<daysto;++i) {
+    for (int i =0; i<= daysto;++i) {
         temp = entries(d.addDays(i));
         if (temp.count()==0) {
             continue;
