@@ -13,7 +13,9 @@ typedef struct null_driver_s null_driver_t;
 struct null_driver_s {
     vo_driver_t vo_driver;
     uint32_t m_capabilities;
-
+    int m_show_video;
+    int m_video_fullscreen;
+    int m_is_scaling;
 };
 typedef struct opie_frame_s opie_frame_t;
 struct opie_frame_s {
@@ -147,6 +149,9 @@ vo_driver_t* init_video_out_plugin( config_values_t* conf,
 				    void* video ){
     null_driver_t *vo;
     vo = (null_driver_t*)malloc( sizeof(null_driver_t ) );
+    vo->m_show_video = 0; // false
+    vo->m_video_fullscreen = 0;
+    vo->m_is_scaling = 0;
     /* memset? */
 
     /* install callback handlers*/
@@ -181,3 +186,33 @@ vo_info_t *get_video_out_plugin_info(){
     vo_info_null.description = _("xine video output plugin using null device");
     return &vo_info_null;
 }
+
+/* this is special for this device */
+/**
+ * We know that we will be controled by the XINE LIB++
+ */
+
+/**
+ *
+ */
+int null_is_showing_video( vo_driver_t* self ){
+    null_driver_t* this = (null_driver_t*)self;
+    return this->m_show_video;
+}
+void null_set_show_video( vo_driver_t* self, int show ) {
+    ((null_driver_t*)self)->m_show_video = show;
+}
+
+int null_is_fullscreen( vo_driver_t* self ){
+    return ((null_driver_t*)self)->m_video_fullscreen;
+}
+void null_set_fullscreen( vo_driver_t* self, int screen ){
+    ((null_driver_t*)self)->m_video_fullscreen = screen;
+}
+int null_is_scaling( vo_driver_t* self ){
+    return ((null_driver_t*)self)->m_is_scaling;
+}
+void null_set_scaling( vo_driver_t* self, int scale ){
+    ((null_driver_t*)self)->m_is_scaling = scale;
+}
+     

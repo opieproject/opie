@@ -5,6 +5,8 @@
 
 #include <qcstring.h>
 #include <qstring.h>
+#include <qobject.h>
+
 #include <xine.h>
 
 namespace XINE {
@@ -17,7 +19,8 @@ namespace XINE {
      * stooping, seeking.
      */
     class Frame;
-    class Lib {
+    class Lib : public QObject {
+        Q_OBJECT
     public:
         Lib();
         ~Lib();
@@ -45,14 +48,56 @@ namespace XINE {
 
         bool isSeekable()/*const*/;
 
+        /**
+         * Whether or not to show video output
+         */
+        void setShowVideo(bool video);
+
+        /**
+         * is we show video
+         */
+        bool isShowingVideo() /*const*/;
+
+        /**
+         *
+         */
+        void showVideoFullScreen( bool fullScreen );
+
+        /**
+         *
+         */
+        bool isVideoFullScreen()/*const*/ ;
+
+        /**
+         *
+         */
+        bool isScaling();
+
+        /**
+         *
+         */
+        void setScaling( bool );
+        /**
+         * test
+         */
         Frame currentFrame()/*const*/;
+
+        /**
+         * Returns the error code
+         */
         int error() /*const*/;
+
+    signals:
+        void stopped();
     private:
         xine_t *m_xine;
         config_values_t *m_config;
         vo_driver_t *m_videoOutput;
         ao_driver_t* m_audioOutput;
 
+        void handleXineEvent( xine_event_t* t );
+        // C -> C++ bridge for the event system
+        static void xine_event_handler( void* user_data, xine_event_t* t);
     };
 };
 

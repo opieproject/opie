@@ -10,7 +10,14 @@
 
 
 extern "C" {
-vo_driver_t* init_video_out_plugin( config_values_t* conf, void* video);
+    vo_driver_t* init_video_out_plugin( config_values_t* conf, void* video);
+    int null_is_showing_video( vo_driver_t* self );
+    void null_set_show_video( vo_driver_t* self, int show );
+    int null_is_fullscreen( vo_driver_t* self );
+    void null_set_fullscreen( vo_driver_t* self, int screen );
+    int null_is_scaling( vo_driver_t* self );
+    void null_set_scaling( vo_driver_t* self, int scale );
+
 }
 
 using namespace XINE;
@@ -47,13 +54,16 @@ Lib::Lib() {
 //                      m_audioOutput,
 //                      m_config );
     // test loading
-    m_videoOutput = ::init_video_out_plugin( m_config, NULL );		     
+    m_videoOutput = ::init_video_out_plugin( m_config, NULL );
     m_xine = xine_init( m_videoOutput,
 			m_audioOutput, m_config );
+    // install the event handler
+    xine_register_event_listener( m_xine, xine_event_handler, this );
 }
 
 Lib::~Lib() {
     delete m_config;
+    xine_remove_event_listener( m_xine, xine_event_handler );
     xine_exit( m_xine );
     delete m_videoOutput;
     //delete m_audioOutput;
@@ -116,4 +126,28 @@ Frame Lib::currentFrame() {
 int Lib::error() {
     return xine_get_error( m_xine );
 };
-
+void Lib::handleXineEvent( xine_event_t* t ) {
+    if ( t->type == XINE_EVENT_PLAYBACK_FINISHED )
+        emit stopped();
+}
+void Lib::setShowVideo( bool video ) {
+    ::null_set_show_video( m_videoOutput,  video );
+}
+bool Lib::isShowingVideo() {
+    return ::null_is_showing_video( m_videoOutput );
+}
+void Lib::showVideoFullScreen( bool fullScreen ) {
+    ::null_set_fullscreen( m_videoOutput, fullScreen );
+}
+bool Lib::isVideoFullScreen() {
+    return ::null_is_fullscreen( m_videoOutput );
+}
+void Lib::setScaling( bool scale ) {
+    ::null_set_scaling( m_videoOutput, scale  );
+}
+bool Lib::isScaling() {
+    return ::null_is_scaling( m_videoOutput );
+}
+void Lib::xine_event_handler( void* user_data, xine_event_t* t ) {
+    ((Lib*)user_data)->handleXineEvent( t );
+}
