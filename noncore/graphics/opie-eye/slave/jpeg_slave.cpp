@@ -183,12 +183,9 @@ QPixmap JpegSlave::pixmap( const QString& path, int wid, int hei) {
         QImage img;
         QImageIO iio( path, 0l );
         if (wid < ImageInfo.getWidth() || hei<ImageInfo.getHeight()) {
-            odebug << "Scaling "<<ImageInfo.getWidth()<<"x"<<ImageInfo.getHeight()
-                << " to "<<wid<<"x"<<hei<< " ("<<path<<")"<<oendl;
             QString str = QString( "Fast Shrink( 4 ) Scale( %1, %2, ScaleFree)" ).arg( wid ).arg( hei );
             iio.setParameters( str.latin1() );// will be strdupped anyway
         } else {
-            odebug << "Not scaling "<<ImageInfo.getWidth()<<"x"<<ImageInfo.getHeight()<< " ("<<path<<")"<<oendl;
         }
         img = iio.read() ? iio.image() : QImage();
         return ThumbNailTool::scaleImage(  img, wid,hei );
