@@ -25,7 +25,6 @@
 Ntp::Ntp( QWidget* parent,  const char* name, WFlags fl )
     : SetDateTime( parent, name, fl )
 {
- 	qDebug("%s", 	         QPEApplication::qpeDir().latin1());
 	Config ntpSrvs(QPEApplication::qpeDir()+"etc/ntpservers",Config::File);
   ntpSrvs.setGroup("servers");
   int srvCount = ntpSrvs.readNumEntry("count", 0 );
@@ -199,8 +198,9 @@ void Ntp::readLookups()
   TableLookups->horizontalHeader()->setLabel(1,tr("last [h]"));
   TableLookups->horizontalHeader()->setLabel(2,tr("offset [s]"));
   TableLookups->horizontalHeader()->setLabel(0,tr("shift [s/h]"));
-  int cw = 50;//TableLookups->width()/4;
+  int cw = TableLookups->width()/4;
   qDebug("column width %i",cw);
+  cw = 50;
   TableLookups->setColumnWidth( 0, cw+30 );
   TableLookups->setColumnWidth( 1, cw );
   TableLookups->setColumnWidth( 2, cw );
@@ -215,12 +215,12 @@ void Ntp::readLookups()
 //   	qDebug("%i shift %f",i,shift);
     shiftPerSec =  shift / last;
     _shiftPerSec += shiftPerSec;
-		TableLookups->setText( i,0,QString::number(shiftPerSec*60));
+		TableLookups->setText( i,0,QString::number(shiftPerSec*60*60));
 		TableLookups->setText( i,2,QString::number(shift));
-	  TableLookups->setText( i,1,QString::number(last/60));
+	  TableLookups->setText( i,1,QString::number(last/(60*60)));
   }
-  _shiftPerSec /= lookupCount+1;
-  TextLabelShift->setText(QString::number(_shiftPerSec)+tr(" seconds"));
+  _shiftPerSec /= lookupCount;
+  TextLabelShift->setText(QString::number(_shiftPerSec*60*60)+tr(" s/h"));
 }
 
 void Ntp::preditctTime()

@@ -231,12 +231,6 @@ void SetDateTime::writeSettings()
 void  SetDateTime::commitTime()
 {
     tz->setFocus();
-    // really turn off the screensaver before doing anything
-    {
-  // Needs to be encased in { } so that it deconstructs and sends
-  QCopEnvelope disableScreenSaver( "QPE/System", "setScreenSaverIntervals(int,int,int)" );
-  disableScreenSaver << 0 << 0 << 0;
-    }
     // Need to process the QCOP event generated above before proceeding
     qApp->processEvents();
 
@@ -250,6 +244,12 @@ void  SetDateTime::commitTime()
 
 void  SetDateTime::setTime(QDateTime dt)
 {
+    // really turn off the screensaver before doing anything
+    {
+  // Needs to be encased in { } so that it deconstructs and sends
+  QCopEnvelope disableScreenSaver( "QPE/System", "setScreenSaverIntervals(int,int,int)" );
+  disableScreenSaver << 0 << 0 << 0;
+    }
 	Config cfg("ntp",Config::User);
   cfg.setGroup("correction");
     int t = TimeConversion::toUTC(dt);
@@ -265,10 +265,19 @@ void  SetDateTime::setTime(QDateTime dt)
   // to allow the alarm server to get a better grip on itself
   // (example re-trigger alarms for when we travel back in time)
   DateBookDB db;
+    // Restore screensaver
+    QCopEnvelope enableScreenSaver( "QPE/System", "setScreenSaverIntervals(int,int,int)" );
+    enableScreenSaver << -1 << -1 << -1;
 }
 
 void SetDateTime::updateSystem(int i)
 {
+    // really turn off the screensaver before doing anything
+    {
+  // Needs to be encased in { } so that it deconstructs and sends
+  QCopEnvelope disableScreenSaver( "QPE/System", "setScreenSaverIntervals(int,int,int)" );
+  disableScreenSaver << 0 << 0 << 0;
+    }
 	qDebug("SetDateTime::updateSystem(int %i)",i);
  	writeSettings();
 

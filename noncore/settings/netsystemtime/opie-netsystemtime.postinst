@@ -1,0 +1,7 @@
+#!/bin/sh -v
+
+systime=`ipkg status | grep Package | grep -i systemtime | sed  "s/Package://"`
+ipkg remove $pack
+
+cd $QPEDIR/bin/
+ln -s netsystemtime systemtime
