@@ -1166,7 +1166,7 @@ void PlayListWidget::keyReleaseEvent( QKeyEvent *e)
       break;
     case Key_Up:
       if ( !d->selectedFiles->prev() )
-        d->selectedFiles->last();
+        //        d->selectedFiles->last();
 
       break;
       
