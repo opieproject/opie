@@ -30,7 +30,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>429</width>
+            <width>425</width>
             <height>321</height>
         </rect>
     </property>
@@ -48,13 +48,13 @@
         <class>QLayoutWidget</class>
         <property stdset="1">
             <name>name</name>
-            <cstring>Layout22</cstring>
+            <cstring>Layout31</cstring>
         </property>
         <property stdset="1">
             <name>geometry</name>
             <rect>
-                <x>0</x>
-                <y>5</y>
+                <x>1</x>
+                <y>6</y>
                 <width>240</width>
                 <height>310</height>
             </rect>
@@ -68,6 +68,84 @@
                 <name>spacing</name>
                 <number>6</number>
             </property>
+            <widget row="2"  column="0" >
+                <class>QLayoutWidget</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>Layout19</cstring>
+                </property>
+                <hbox>
+                    <property stdset="1">
+                        <name>margin</name>
+                        <number>0</number>
+                    </property>
+                    <property stdset="1">
+                        <name>spacing</name>
+                        <number>6</number>
+                    </property>
+                    <widget>
+                        <class>QLabel</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>txtProg</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Progress:</string>
+                        </property>
+                    </widget>
+                    <widget>
+                        <class>QComboBox</class>
+                        <item>
+                            <property>
+                                <name>text</name>
+                                <string>0%</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property>
+                                <name>text</name>
+                                <string>20%</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property>
+                                <name>text</name>
+                                <string>40%</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property>
+                                <name>text</name>
+                                <string>60%</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property>
+                                <name>text</name>
+                                <string>80%</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property>
+                                <name>text</name>
+                                <string>100%</string>
+                            </property>
+                        </item>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>cmbProg</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>maximumSize</name>
+                            <size>
+                                <width>45</width>
+                                <height>32767</height>
+                            </size>
+                        </property>
+                    </widget>
+                </hbox>
+            </widget>
             <widget row="3"  column="0" >
                 <class>QLayoutWidget</class>
                 <property stdset="1">
@@ -110,41 +188,6 @@
                                 <width>60</width>
                                 <height>0</height>
                             </size>
-                        </property>
-                    </widget>
-                </hbox>
-            </widget>
-            <widget row="4"  column="0" >
-                <class>QLayoutWidget</class>
-                <property stdset="1">
-                    <name>name</name>
-                    <cstring>Layout4</cstring>
-                </property>
-                <hbox>
-                    <property stdset="1">
-                        <name>margin</name>
-                        <number>0</number>
-                    </property>
-                    <property stdset="1">
-                        <name>spacing</name>
-                        <number>6</number>
-                    </property>
-                    <widget>
-                        <class>QLabel</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>TextLabel1</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>text</name>
-                            <string>Summary:</string>
-                        </property>
-                    </widget>
-                    <widget>
-                        <class>QLineEdit</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>lneSum</cstring>
                         </property>
                     </widget>
                 </hbox>
@@ -225,6 +268,13 @@
                     </widget>
                 </hbox>
             </widget>
+            <widget row="5"  column="0" >
+                <class>QMultiLineEdit</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>txtTodo</cstring>
+                </property>
+            </widget>
             <widget row="1"  column="0" >
                 <class>QLayoutWidget</class>
                 <property stdset="1">
@@ -279,11 +329,11 @@
                     </widget>
                 </hbox>
             </widget>
-            <widget row="2"  column="0" >
+            <widget row="4"  column="0" >
                 <class>QLayoutWidget</class>
                 <property stdset="1">
                     <name>name</name>
-                    <cstring>Layout19</cstring>
+                    <cstring>Layout30</cstring>
                 </property>
                 <hbox>
                     <property stdset="1">
@@ -298,71 +348,42 @@
                         <class>QLabel</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>txtProg</cstring>
+                            <cstring>TextLabel1</cstring>
                         </property>
                         <property stdset="1">
                             <name>text</name>
-                            <string>Progress:</string>
+                            <string>Summary:</string>
                         </property>
                     </widget>
                     <widget>
-                        <class>QComboBox</class>
-                        <item>
-                            <property>
-                                <name>text</name>
-                                <string>0%</string>
-                            </property>
-                        </item>
-                        <item>
-                            <property>
-                                <name>text</name>
-                                <string>20%</string>
-                            </property>
-                        </item>
-                        <item>
-                            <property>
-                                <name>text</name>
-                                <string>40%</string>
-                            </property>
-                        </item>
-                        <item>
-                            <property>
-                                <name>text</name>
-                                <string>60%</string>
-                            </property>
-                        </item>
-                        <item>
-                            <property>
-                                <name>text</name>
-                                <string>80%</string>
-                            </property>
-                        </item>
-                        <item>
-                            <property>
-                                <name>text</name>
-                                <string>100%</string>
-                            </property>
-                        </item>
+                        <class>QLineEdit</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>cmbProg</cstring>
+                            <cstring>lneSum</cstring>
+                        </property>
+                    </widget>
+                    <widget>
+                        <class>OClickableLabel</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>lblDown</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>minimumSize</name>
+                            <size>
+                                <width>20</width>
+                                <height>20</height>
+                            </size>
                         </property>
                         <property stdset="1">
                             <name>maximumSize</name>
                             <size>
-                                <width>45</width>
-                                <height>32767</height>
+                                <width>20</width>
+                                <height>20</height>
                             </size>
                         </property>
                     </widget>
                 </hbox>
-            </widget>
-            <widget row="5"  column="0" >
-                <class>QMultiLineEdit</class>
-                <property stdset="1">
-                    <name>name</name>
-                    <cstring>txtTodo</cstring>
-                </property>
             </widget>
         </grid>
     </widget>
@@ -382,6 +403,23 @@
         </sizepolicy>
         <pixmap>image0</pixmap>
     </customwidget>
+    <customwidget>
+        <class>OClickableLabel</class>
+        <header location="global">opie/oclickablelabel.h</header>
+        <sizehint>
+            <width>-1</width>
+            <height>-1</height>
+        </sizehint>
+        <container>0</container>
+        <sizepolicy>
+            <hordata>5</hordata>
+            <verdata>5</verdata>
+        </sizepolicy>
+        <pixmap>image0</pixmap>
+        <signal>clicked()</signal>
+        <signal>toggled(bool)</signal>
+        <slot access="public">slotOn(bool)</slot>
+    </customwidget>
 </customwidgets>
 <images>
     <image>
@@ -396,7 +434,14 @@
         <receiver>buttonDate</receiver>
         <slot>setEnabled(bool)</slot>
     </connection>
+    <connection>
+        <sender>lblDown</sender>
+        <signal>clicked()</signal>
+        <receiver>NewTaskDialogBase</receiver>
+        <slot>slotCopy()</slot>
+    </connection>
     <slot access="protected">dateChanged( const QString &amp; )</slot>
     <slot access="protected">dateChanged( int, int, int )</slot>
+    <slot access="protected">slotCopy()</slot>
 </connections>
 </UI>

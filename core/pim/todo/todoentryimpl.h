@@ -47,7 +47,7 @@ public:
 
 protected slots:
     void dateChanged( int y, int m, int d );
-
+    void slotCopy();
 protected:
     virtual void accept();
 

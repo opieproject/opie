@@ -21,12 +21,14 @@
 
 #include "todoentryimpl.h"
 
+#include <opie/oclickablelabel.h>
 #include <opie/todoevent.h>
 #include <opie/tododb.h>
 
 #include <qpe/categoryselect.h>
 #include <qpe/datebookmonth.h>
 #include <qpe/global.h>
+#include <qpe/resource.h>
 #include <qpe/imageedit.h>
 #include <qpe/timestring.h>
 #include <qpe/palmtoprecord.h>
@@ -99,6 +101,7 @@ void NewTaskDialog::init()
 
     buttonDate->setText( TimeString::longDateString( date ) );
     picker->setDate( date.year(), date.month(), date.day() );
+    lblDown->setPixmap(Resource::loadPixmap("down") );
 }
 
 /*
@@ -140,7 +143,11 @@ ToDoEvent NewTaskDialog::todoEntry()
   todo.setProgress( text.remove( text.length()-1, 1 ).toUShort() );
   return todo;
 }
-
+void NewTaskDialog::slotCopy() 
+{
+    txtTodo->clear();
+    txtTodo->setText( lneSum->text() );
+}
 
 /*!
 
