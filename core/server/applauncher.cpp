@@ -546,36 +546,39 @@ bool AppLauncher::execute(const QString &c, const QString &docParam, bool noRais
     args[j] = NULL;
 
 #ifndef Q_OS_WIN32
-    if ( qlPid && qlReady && QFile::exists( QPEApplication::qpeDir()+"plugins/application/lib"+args[0] + ".so" ) ) {
-	qDebug( "Quick launching: %s", args[0] );
-	if ( getuid() == 0 )
-	    setpriority( PRIO_PROCESS, qlPid, 0 );
-	QCString qlch("QPE/QuickLauncher-");
-	qlch += QString::number(qlPid);
-	QCopEnvelope env( qlch, "execute(QStrList)" );
-	env << slist;
-	runningApps[qlPid] = QString(args[0]);
-	emit launched(qlPid, QString(args[0]));
-	QCopEnvelope e("QPE/System", "busy()");
-	qlPid = 0;
-	qlReady = FALSE;
-	QTimer::singleShot( getuid() == 0 ? 800 : 1500, this, SLOT(createQuickLauncher()) );
-    } else {
-	int pid = ::vfork();
-	if ( !pid ) {
-	    for ( int fd = 3; fd < 100; fd++ )
-		::close( fd );
-	    ::setpgid( ::getpid(), ::getppid() );
-	    // Try bindir first, so that foo/bar works too
-	    ::execv( QPEApplication::qpeDir()+"bin/"+args[0], (char * const *)args );
-	    ::execvp( args[0], (char * const *)args );
-	    _exit( -1 );
-	}
+    { QFileInfo FI(QPEApplication::qpeDir()+"plugins/application/lib"+args[0] + ".so");
+      if ( qlPid && qlReady && FI.exists() && FI.size() > 0 ) {
+          qDebug( "Quick launching: %s", args[0] );
+          if ( getuid() == 0 )
+              setpriority( PRIO_PROCESS, qlPid, 0 );
+          QCString qlch("QPE/QuickLauncher-");
+          qlch += QString::number(qlPid);
+          QCopEnvelope env( qlch, "execute(QStrList)" );
+          env << slist;
+          runningApps[qlPid] = QString(args[0]);
+          emit launched(qlPid, QString(args[0]));
+          QCopEnvelope e("QPE/System", "busy()");
+          qlPid = 0;
+          qlReady = FALSE;
+          QTimer::singleShot( getuid() == 0 ? 800 : 1500, this, SLOT(createQuickLauncher()) );
+      } else {
+          int pid = ::vfork();
+          if ( !pid ) {
+              for ( int fd = 3; fd < 100; fd++ )
+                  ::close( fd );
+              ::setpgid( ::getpid(), ::getppid() );
+              // Try bindir first, so that foo/bar works too
+              ::execv( QPEApplication::qpeDir()+"bin/"+args[0], (char * const *)args );
+              ::execvp( args[0], (char * const *)args );
+              _exit( -1 );
+          }
 
-	runningApps[pid] = QString(args[0]);
-	emit launched(pid, QString(args[0]));
-	QCopEnvelope e("QPE/System", "busy()");
+          runningApps[pid] = QString(args[0]);
+          emit launched(pid, QString(args[0]));
+          QCopEnvelope e("QPE/System", "busy()");
+      }
     }
+
 #else
     QProcess *proc = new QProcess(this);
     if (proc){
