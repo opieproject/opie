@@ -16,8 +16,6 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.48.2.6 2003-07-31 07:20:32 harlekin Exp $
-**
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
 #include <stdlib.h>
@@ -51,6 +49,9 @@
 #include <qtooltip.h>
 #include <qsignal.h>
 #include <qmainwindow.h>
+
+#if defined(Q_WS_QWS) && !defined(QT_NO_COP)
+#define QTOPIA_INTERNAL_INITAPP
 #include "qpeapplication.h"
 #include "qpestyle.h"
 #include "styleinterface.h"
@@ -305,6 +306,16 @@ private:
     mutable QImageDrag *resImage;
 };
 
+static int& hack(int& i)
+{
+#if QT_VERSION <= 230 && defined(QT_NO_CODECS)
+    // These should be created, but aren't in Qt 2.3.0
+    (void)new QUtf8Codec;
+    (void)new QUtf16Codec;
+#endif
+    return i;
+}
+
 static int muted = 0;
 static int micMuted = 0;
 
@@ -486,6 +497,35 @@ static void setTreble( int t = 0, int percent = -1 )
 
 */
 
+
+
+void QPEApplication::processQCopFile()
+{
+    QString qcopfn("/tmp/qcop-msg-");
+    qcopfn += d->appName; // append command name
+
+    QFile f(qcopfn);
+    if ( f.open(IO_ReadWrite) ) {
+#ifndef Q_OS_WIN32
+	flock(f.handle(), LOCK_EX);
+#endif
+	QDataStream ds(&f);
+	QCString channel, message;
+	QByteArray data;
+	while(!ds.atEnd()) {
+	    ds >> channel >> message >> data;
+	    d->enqueueQCop(channel,message,data);
+	}
+	::ftruncate(f.handle(), 0);
+#ifndef Q_OS_WIN32
+	f.flush();
+	flock(f.handle(), LOCK_UN);
+#endif
+    }
+#endif
+}
+
+
 /*!
   \fn void QPEApplication::appMessage( const QCString& msg, const QByteArray& data )
 
@@ -523,7 +563,7 @@ static void setTreble( int t = 0, int percent = -1 )
   the Qtopia server passes GuiServer.
 */
 QPEApplication::QPEApplication( int & argc, char **argv, Type t )
-		: QApplication( argc, argv, t )
+		: QApplication( hack(argc), argv, t ), pidChannel( 0 )
 {
 	d = new QPEApplicationData;
 	d->loadTextCodecs();
@@ -551,6 +591,14 @@ QPEApplication::QPEApplication( int & argc, char **argv, Type t )
 	QMimeSourceFactory::setDefaultFactory( new ResourceMimeFactory );
 
 	connect( this, SIGNAL( lastWindowClosed() ), this, SLOT( hideOrQuit() ) );
+
+
+	sysChannel = new QCopChannel( "QPE/System", this );
+	connect( sysChannel, SIGNAL( received( const QCString &, const QByteArray & ) ),
+	         this, SLOT( systemMessage( const QCString &, const QByteArray & ) ) );
+
+/* COde now in initapp */
+#if 0
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)
 
 	QString qcopfn( "/tmp/qcop-msg-" );
@@ -561,9 +609,7 @@ QPEApplication::QPEApplication( int & argc, char **argv, Type t )
 		flock( f.handle(), LOCK_EX );
 	}
 
-	sysChannel = new QCopChannel( "QPE/System", this );
-	connect( sysChannel, SIGNAL( received( const QCString &, const QByteArray & ) ),
-	         this, SLOT( systemMessage( const QCString &, const QByteArray & ) ) );
+
 
 	QCString channel = QCString( argv[ 0 ] );
 	channel.replace( QRegExp( ".*/" ), "" );
@@ -608,7 +654,9 @@ QPEApplication::QPEApplication( int & argc, char **argv, Type t )
 	setArgs( argc, argv );
 
 #endif
-
+#else
+        initApp( argc, argv );
+#endif
 	//  qwsSetDecoration( new QPEDecoration() );
 
 #ifndef QT_NO_TRANSLATION
@@ -625,13 +673,12 @@ QPEApplication::QPEApplication( int & argc, char **argv, Type t )
 		//###language/font hack; should look it up somewhere
 #ifdef QWS
 
-		if ( lang == "ja" || lang == "zh_CN" || lang == "zh_TW" || lang == "ko" ) {
-			QFont fn = FontManager::unicodeFont( FontManager::Proportional );
-			setFont( fn );
-		}
+                if ( lang == "ja" || lang == "zh_CN" || lang == "zh_TW" || lang == "ko" ) {
+                    QFont fn = FontManager::unicodeFont( FontManager::Proportional );
+                    setFont( fn );
+                }
 #endif
-
-	}
+        }
 #endif
 
 	applyStyle();
@@ -649,6 +696,53 @@ QPEApplication::QPEApplication( int & argc, char **argv, Type t )
 	QToolTip::setEnabled( FALSE );
 #endif
 }
+
+
+#ifdef QTOPIA_INTERNAL_INITAPP
+void QPEApplication::initApp( int argc, char **argv )
+{
+    delete pidChannel;
+    d->keep_running = TRUE;
+    d->preloaded = FALSE;
+    d->forceshow = FALSE;
+
+    QCString channel = QCString(argv[0]);
+
+    channel.replace(QRegExp(".*/"),"");
+    d->appName = channel;
+
+    #if QT_VERSION > 235
+    qt_fbdpy->setIdentity( channel ); // In Qt/E 2.3.6
+    #endif
+
+    channel = "QPE/Application/" + channel;
+    pidChannel = new QCopChannel( channel, this);
+    connect( pidChannel, SIGNAL(received(const QCString &, const QByteArray &)),
+	    this, SLOT(pidMessage(const QCString &, const QByteArray &)));
+
+    processQCopFile();
+    d->keep_running = d->qcopq.isEmpty();
+
+    for (int a=0; a<argc; a++) {
+	if ( qstrcmp(argv[a],"-preload")==0 ) {
+	    argv[a] = argv[a+1];
+	    a++;
+	    d->preloaded = TRUE;
+	    argc-=1;
+	} else if ( qstrcmp(argv[a],"-preload-show")==0 ) {
+	    argv[a] = argv[a+1];
+	    a++;
+	    d->preloaded = TRUE;
+	    d->forceshow = TRUE;
+	    argc-=1;
+	}
+    }
+
+    /* overide stored arguments */
+    setArgs(argc, argv);
+}
+#endif
+
 
 static QPtrDict<void>* inputMethodDict = 0;
 static void createInputMethodDict()
@@ -1124,20 +1218,6 @@ void QPEApplication::systemMessage( const QCString& msg, const QByteArray& data 
 		// emit the signal so everyone else knows...
 		emit timeChanged();
 	}
-	else if ( msg == "execute(QString)" ) {
-		if ( type() == GuiServer ) {
-			QString t;
-			stream >> t;
-			Global::execute( t );
-		}
-	}
-	else if ( msg == "execute(QString,QString)" ) {
-		if ( type() == GuiServer ) {
-			QString t, d;
-			stream >> t >> d;
-			Global::execute( t, d );
-		}
-	}
 	else if ( msg == "addAlarm(QDateTime,QCString,QCString,int)" ) {
 		if ( type() == GuiServer ) {
 			QDateTime when;
@@ -1208,8 +1288,22 @@ void QPEApplication::systemMessage( const QCString& msg, const QByteArray& data 
 	}
 	else if ( msg == "trebleChange(bool)" ) { // Added: 2002-12-13 by Maximilian Reiss <harlekin@handhelds.org>
 	        setTreble();
+	} else if ( msg == "getMarkedText()" ) {
+	if ( type() == GuiServer ) {
+	    const ushort unicode = 'C'-'@';
+	    const int scan = Key_C;
+	    qwsServer->processKeyEvent( unicode, scan, ControlButton, TRUE, FALSE );
+	    qwsServer->processKeyEvent( unicode, scan, ControlButton, FALSE, FALSE );
 	}
-
+    } else if ( msg == "newChannel(QString)") {
+	QString myChannel = "QPE/Application/" + d->appName;
+	QString channel;
+	stream >> channel;
+	if (channel == myChannel) {
+	    processQCopFile();
+	    d->sendQCopQ();
+	}
+    }
 
 
 #endif
@@ -1306,7 +1400,12 @@ void QPEApplication::pidMessage( const QCString& msg, const QByteArray& data)
 			mw = d->qpe_main_widget;
 		if ( mw )
 			Global::setDocument( mw, doc );
-	} else {
+
+	} else if ( msg == "QPEProcessQCop()" ) {
+            processQCopFile();
+            d->sendQCopQ();
+        }
+        {
             bool p = d->keep_running;
             d->keep_running = FALSE;
             emit appMessage( msg, data);
@@ -1771,6 +1870,18 @@ void QPEApplication::hideOrQuit()
 	else
 		quit();
 }
+
+#if (__GNUC__ > 2 )
+extern "C" void __cxa_pure_virtual();
+
+void __cxa_pure_virtual()
+{
+    fprintf( stderr, "Pure virtual called\n");
+    abort();
+
+}
+
+#endif
 
 
 #if defined(QT_QWS_IPAQ) || defined(QT_QWS_SL5XXX) || defined(QT_QWS_RAMSES)

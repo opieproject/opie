@@ -47,17 +47,28 @@ struct InputMethodInterface : public QUnknownInterface
     virtual void onKeyPress( QObject *receiver, const char *slot ) = 0;
 };
 
-// {70F0991C-8282-4625-A279-BD9D7D959FF6} 
+// {70F0991C-8282-4625-A279-BD9D7D959FF6}
 #ifndef IID_ExtInputMethod
 #define IID_ExtInputMethod QUuid( 0x70f0991c, 0x8282, 0x4625, 0xa2, 0x79, 0xbd, 0x9d, 0x7d, 0x95, 0x9f, 0xf6)
 #endif
 
 struct ExtInputMethodInterface : public QUnknownInterface
 {
-    virtual QWSInputMethod *inputMethod() = 0;
-    virtual QPixmap *icon() = 0;
+    //identifying functions.
     virtual QString name() = 0;
-    virtual QWidget *widget( QWidget *parent, Qt::WFlags f )= 0;
+    virtual QPixmap *icon() = 0;
+
+    // state managment.
+    virtual void resetState() = 0;
+
+    virtual QWidget *keyboardWidget( QWidget *parent, Qt::WFlags f ) = 0;
+    // filenames, not menu names.
+    virtual QStringList compatible() = 0;
+
+    virtual QWSInputMethod *inputMethod() = 0;
+    virtual QWidget *statusWidget( QWidget *parent, Qt::WFlags f )= 0;
+
+    virtual void qcopReceive( const QCString &msg, const QByteArray &data )= 0;
 };
 
 

@@ -151,6 +151,9 @@ public:
 			bool includeGlobal = TRUE,
 			ExtraLabels extra = NoExtra ) const;
 
+    QStringList labels( const QString &app,
+			const QArray<int> &catids ) const;
+
     enum DisplaySingle { ShowMulti, ShowAll, ShowFirst };
 
     /** Returns a single string associated with the cat ids for display in

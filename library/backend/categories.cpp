@@ -929,3 +929,11 @@ void CheckedListView::setChecked( const QStringList &checked )
   \internal
 */
 
+
+/* ### FIXME properly merge */
+QStringList Categories::labels( const QString & app, const QArray<int> &catids ) const
+{
+    QStringList strs = mGlobalCats.labels( catids );
+    strs += mAppCats[app].labels( catids );
+    return strs;
+}

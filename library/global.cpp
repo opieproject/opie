@@ -676,62 +676,17 @@ void Global::invoke(const QString &c)
 */
 void Global::execute( const QString &c, const QString& document )
 {
-    if ( qApp->type() != QApplication::GuiServer ) {
 	// ask the server to do the work
 #if !defined(QT_NO_COP)
-	if ( document.isNull() ) {
-	    QCopEnvelope e( "QPE/System", "execute(QString)" );
-	    e << c;
-	} else {
-	    QCopEnvelope e( "QPE/System", "execute(QString,QString)" );
-	    e << c << document;
-	}
-#endif
-	return;
-    }
-
-    // Attempt to execute the app using a builtin class for the app first
-    // else try and find it in the bin directory
-    if (builtin) {
-	for (int i = 0; builtin[i].file; i++) {
-	    if ( builtin[i].file == c ) {
-		if ( running[i] ) {
-		    if ( !document.isNull() && builtin[i].documentary )
-			setDocument(running[i], document);
-		    running[i]->raise();
-		    running[i]->show();
-		    running[i]->setActiveWindow();
-		} else {
-		    running[i] = builtin[i].func( builtin[i].maximized );
-		}
-#ifndef QT_NO_COP
-		QCopEnvelope e("QPE/System", "notBusy(QString)" );
-		e << c; // that was quick ;-)
-#endif
-		return;
-	    }
-	}
-    }
-
-    //Global::invoke(c, document);
-
-    // Convert the command line in to a list of arguments
-    QStringList list = QStringList::split(QRegExp("  *"),c);
-
-#if !defined(QT_NO_COP)
-    QString ap=list[0];
-
-    qDebug("executing %s", ap.latin1() );
-
-    /* if need be, sending a qcop message will result in an invoke, see
-       preceeding function */
-    invoke( ap );
-    //{ QCopEnvelope env( ("QPE/Application/" + ap).latin1(), "raise()" ); }
-    if ( !document.isEmpty() ) {
-	QCopEnvelope env( ("QPE/Application/" + ap).latin1(), "setDocument(QString)" );
-	env << document;
+    if ( document.isNull() ) {
+        QCopEnvelope e( "QPE/System", "execute(QString)" );
+        e << c;
+    } else {
+        QCopEnvelope e( "QPE/System", "execute(QString,QString)" );
+        e << c << document;
     }
 #endif
+    return;
 }
 
 /*!
