@@ -24,8 +24,7 @@
 #include <qstring.h>
 #include <qapplication.h>
 #include "flash.h"
-//#include <qpe/mediaplayerplugininterface.h>
-#include "../mediaplayerplugininterface.h"
+#include <qpe/mediaplayerplugininterface.h>
 
 
 class LibFlashPlugin : public MediaPlayerDecoder {
@@ -49,7 +48,6 @@ public:
     int audioChannels( int /*stream*/ ) { return 2; }
     int audioFrequency( int /*stream*/ ) { return 44100; }
     int audioSamples( int /*stream*/ ) { return 1000000; }
-int audioBitsPerSample(int) { return 0;}
     bool audioSetSample( long sample, int stream );
     long audioGetSample( int stream );
     //bool audioReadMonoSamples( short *output, long samples, long& samplesRead, int stream );

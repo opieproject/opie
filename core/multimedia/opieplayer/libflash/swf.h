@@ -208,7 +208,7 @@ extern "C" {
 };
 extern "C" {
 //#include "zlib.h"
-#include "/opt/qt-2.3.2-embedded/src/3rdparty/zlib/zlib.h"
+#include "../src/3rdparty/zlib/zlib.h"
 };
 
 #include "graphic.h"

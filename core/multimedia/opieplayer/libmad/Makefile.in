@@ -214,12 +214,10 @@ huffman.o: huffman.c \
 
 libmadplugin.o: libmadplugin.cpp \
 		libmadplugin.h \
-		../mediaplayerplugininterface.h \
 		mad.h
 
 libmadpluginimpl.o: libmadpluginimpl.cpp \
 		libmadplugin.h \
-		../mediaplayerplugininterface.h \
 		libmadpluginimpl.h
 
 

@@ -20,7 +20,6 @@
 #include "wavplugin.h"
 #include "wavpluginimpl.h"
 
-
 WavPluginImpl::WavPluginImpl()
     : libmadplugin(0), ref(0)
 {

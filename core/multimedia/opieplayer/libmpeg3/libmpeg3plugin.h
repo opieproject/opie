@@ -20,13 +20,11 @@
 #ifndef LIBMPEG3_PLUGIN_H 
 #define LIBMPEG3_PLUGIN_H
 
-
 #include <qstring.h>
 #include <qapplication.h>
 #include "libmpeg3.h"
 #include "mpeg3protos.h"
-//#include <qpe/mediaplayerplugininterface.h>
-#include "../mediaplayerplugininterface.h"
+#include <qpe/mediaplayerplugininterface.h>
 
 
 // #define OLD_MEDIAPLAYER_API
@@ -52,7 +50,6 @@ public:
     int audioStreams() { return file ? mpeg3_total_astreams( file ) : 0; }
     int audioChannels( int stream ) { return file ? mpeg3_audio_channels( file, stream ) : 0; }
     int audioFrequency( int stream ) { return file ? mpeg3_sample_rate( file, stream ) : 0; }
-    int audioBitsPerSample(int) { return 0;}
     int audioSamples( int stream ) { return file ? mpeg3_audio_samples( file, stream ) : 0; } 
     bool audioSetSample( long sample, int stream ) { return file ? mpeg3_set_sample( file, sample, stream) == 1 : FALSE; }
     long audioGetSample( int stream ) { return file ? mpeg3_get_sample( file, stream ) : 0; }

@@ -20,6 +20,7 @@
 #ifndef MEDIA_PLAYER_PLUGIN_INTERFACE_H
 #define MEDIA_PLAYER_PLUGIN_INTERFACE_H
 
+
 #include <qpe/qcom.h>
 
 #ifndef QT_NO_COMPONENT
@@ -61,7 +62,12 @@ public:
     virtual int audioSamples( int stream ) = 0;
     virtual bool audioSetSample( long sample, int stream ) = 0;
     virtual long audioGetSample( int stream ) = 0;
+//    virtual bool audioReadMonoSamples( short *samples, long samples, long& samplesRead, int stream ) = 0;
+//    virtual bool audioReadStereoSamples( short *samples, long samples, long& samplesRead, int stream ) = 0;
     virtual bool audioReadSamples( short *samples, int channels, long samples, long& samplesRead, int stream ) = 0;
+    // Libmpeg3 functions, perhaps good for reading an audio file with 5 channels or something!
+//    virtual bool audioReadSamples( short *samples, int channel, long samples, int stream ) = 0;
+//    virtual bool audioReReadSamples( short *samples, int channel, long samples, int stream ) = 0;
 
     // If decoder doesn't support video then return 0 here
     virtual int videoStreams() = 0;
@@ -91,9 +97,6 @@ public:
     virtual bool supportsStereo() = 0;
     virtual bool supportsScaling() = 0;
 
-    // File Properies
-    virtual long getPlayTime() { return -1; }
-    virtual int audioBitsPerSample( int stream ) = 0;
 };
 
 

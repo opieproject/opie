@@ -20,10 +20,8 @@
 #ifndef LIBMAD_PLUGIN_H 
 #define LIBMAD_PLUGIN_H
 
-
 #include <qstring.h>
-//#include <qpe/mediaplayerplugininterface.h>
-#include "../mediaplayerplugininterface.h"
+#include <qpe/mediaplayerplugininterface.h>
 
 
 // #define OLD_MEDIAPLAYER_API
@@ -54,7 +52,6 @@ public:
     int audioFrequency( int stream );
     int audioSamples( int stream );
     bool audioSetSample( long sample, int stream );
-    int audioBitsPerSample(int) {return 0;}
     long audioGetSample( int stream );
 #ifdef OLD_MEDIAPLAYER_API
     bool audioReadMonoSamples( short *output, long samples, long& samplesRead, int stream );
