@@ -9,11 +9,11 @@ manual work may be needed after applying the script.
 
 import sys, sre
 
-qDebugExpression = sre.compile( '(.*)(qDebug)\(\s*(.*)\s*\);(.*)' )
-qWarningExpression = sre.compile( '(.*)(qWarning)\(\s*(.*)\s*\);(.*)' )
-qErrorExpression = sre.compile( '(.*)(qError)\(\s*(.*)\s*\);(.*)' )
-qFatalExpression = sre.compile( '(.*)(qFatal)\(\s*(.*)\s*\);(.*)' )
-printfExpression = sre.compile( '(.*)(printf)\(\s*(.*)\s*\);(.*)' )
+qDebugExpression = sre.compile( '(?P<head>.*)(?P<statement>qDebug)\(\s*(?P<content>.*)\s*\);(?P<tail>.*)' )
+qWarningExpression = sre.compile( '(?P<head>.*)(?P<statement>qWarning)\(\s*(?P<content>.*)\s*\);(?P<tail>.*)' )
+qErrorExpression = sre.compile( '(?P<head>.*)(?P<statement>qError)\(\s*(?P<content>.*)\s*\);(?P<tail>.*)' )
+qFatalExpression = sre.compile( '(?P<head>.*)(?P<statement>qFatal)\(\s*(?P<content>.*)\s*\);(?P<tail>.*)' )
+#printfExpression = sre.compile( '(?P<head>.*)(?![s\.])(?P<statement>printf)\(\s*(?P<content>.*)\s*\);(?P<tail>.*)' )
 
 debugTable = { "qDebug" : "odebug",
                "qWarning" : "owarn",
@@ -21,7 +21,7 @@ debugTable = { "qDebug" : "odebug",
                "qFatal" : "ofatal",
                "printf" : "odebug" }
 
-allExpressions = ( qDebugExpression, qWarningExpression, qErrorExpression, qFatalExpression, printfExpression )
+allExpressions = ( qDebugExpression, qWarningExpression, qErrorExpression, qFatalExpression ) #, printfExpression )
 
 ####################################################################################################
 
@@ -36,7 +36,12 @@ def convert( fname ):
                 continue
             else:
                 match = True
-                head, debug, content, tail = m.groups()
+
+                head = m.groupdict()["head"]
+                debug = m.groupdict()["statement"]
+                content = m.groupdict()["content"]
+                tail = m.groupdict()["tail"]
+
                 print >>sys.stderr, "<NOTE>: Groups = ", m.groups()
                 sys.stdout.write( head ) # don't strip() here, because we want to keep indentation
                 sys.stdout.write( debugTable[debug.strip()] )
@@ -95,7 +100,7 @@ def transform( s ):
         else: # % in formatstring
             indirective = True
             i += 1
-            while i < len( formatstring ) and formatstring[i] not in "%dDiouxXfegEscpn":
+            while i < len( formatstring ) and formatstring[i] not in "%dDiouxXfFegEscpn":
                 i += 1
             if formatstring[i] == "%":
                 result += "%"
