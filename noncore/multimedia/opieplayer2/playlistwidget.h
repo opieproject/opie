@@ -47,6 +47,8 @@ class QListView;
 class QPoint;
 class QAction;
 class QLabel;
+class MediaPlayerState;
+class MediaPlayer;
 
 class PlayListWidget : public PlayListWidgetGui {
     Q_OBJECT
@@ -65,7 +67,8 @@ public:
         QString file;
     };
 
-    PlayListWidget( MediaPlayerState &mediaPlayerState, QWidget* parent=0, const char* name=0 );
+    static QString appName() { return QString::fromLatin1("opieplayer2"); }
+    PlayListWidget( QWidget* parent=0, const char* name=0, WFlags = 0 );
     ~PlayListWidget();
 
     // retrieve the current playlist entry (media file link)
@@ -132,6 +135,8 @@ private:
     QString setDocFileRef, currentPlayList;
     int selected;
     QListView *currentFileListView;
+
+    MediaPlayer *m_mp;
 };
 
 #endif // PLAY_LIST_WIDGET_H

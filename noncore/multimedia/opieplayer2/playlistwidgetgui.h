@@ -93,7 +93,7 @@ public:
 class PlayListWidgetGui : public QMainWindow {
     Q_OBJECT
 public:
-    PlayListWidgetGui( MediaPlayerState &_mediaPlayerState, QWidget* parent=0, const char* name=0 );
+    PlayListWidgetGui( QWidget* parent=0, const char* name=0 );
     ~PlayListWidgetGui();
 
 protected:
@@ -122,7 +122,7 @@ protected:
     void setActiveWindow(); // need to handle this to show the right view
     void setView( char );
 
-    MediaPlayerState &mediaPlayerState;
+    MediaPlayerState *mediaPlayerState;
 };
 
 #endif

@@ -4,6 +4,13 @@
 #include "playlistwidget.h"
 #include "mediaplayer.h"
 
+
+
+#include <opie/oapplicationfactory.h>
+
+OPIE_EXPORT_APP( OApplicationFactory<PlayListWidget> )
+
+#if 0
 int main(int argc, char **argv) {
     QPEApplication a(argc,argv);
 
@@ -18,5 +25,5 @@ int main(int argc, char **argv) {
 
     return a.exec();
 }
-
+#endif
 

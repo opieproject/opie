@@ -1,6 +1,4 @@
-TEMPLATE  = app
-CONFIG    = qt warn_on release
-DESTDIR   = $(OPIEDIR)/bin
+CONFIG    = qt warn_on release quick-app
 HEADERS   = playlistselection.h mediaplayerstate.h xinecontrol.h \
    	    videowidget.h audiowidget.h playlistwidget.h om3u.h mediaplayer.h inputDialog.h \
             frame.h lib.h xinevideowidget.h volumecontrol.h playlistwidgetgui.h\
@@ -20,11 +18,6 @@ DEPENDPATH  += $(OPIEDIR)/include
 LIBS        += -lqpe -lpthread -lopie -lxine -lstdc++
 MOC_DIR   = qpeobj
 OBJECTS_DIR = qpeobj
-
-#INCLUDEPATH += $(OPIEDIR)/include
-#DEPENDPATH  += $(OPIEDIR)/include
-
-
 
 TRANSLATIONS = ../../../i18n/de/opieplayer2.ts \
 	 ../../../i18n/nl/opieplayer2.ts \
