@@ -62,25 +62,33 @@ static int log_progress(netbuf *ctl, int xfered, void *arg)
 OpieFtp::OpieFtp( )
         : QMainWindow( )
 {
-    resize( 236, 290 ); 
-    setMaximumSize( QSize( 240, 320 ) );
     setCaption( tr( "OpieFtp" ) );
+
+    QGridLayout *layout = new QGridLayout( this );
+    layout->setSpacing( 2);
+    layout->setMargin( 2);
 
     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
 
-    QPEMenuBar *menuBar = new QPEMenuBar( this );
+    QPEMenuBar *menuBar = new QPEMenuBar(this);
     connectionMenu  = new QPopupMenu( this );
     localMenu  = new QPopupMenu( this );
     remoteMenu  = new QPopupMenu( this );
+	tabMenu = new QPopupMenu( this );
+
+    layout->addMultiCellWidget( menuBar, 0, 0, 0, 3 );
+
     menuBar->insertItem( tr( "Connection" ), connectionMenu);
     menuBar->insertItem( tr( "Local" ), localMenu);
     menuBar->insertItem( tr( "Remote" ), remoteMenu);
+    menuBar->insertItem( tr( "View" ), tabMenu);
 
-    connectionMenu->insertItem( tr( "New" ), this,  SLOT( newConnection() ));
+	connectionMenu->insertItem( tr( "New" ), this,  SLOT( newConnection() ));
     connectionMenu->insertItem( tr( "Connect" ), this,  SLOT( connector() ));
     connectionMenu->insertItem( tr( "Disconnect" ), this,  SLOT( disConnector() ));
 
     localMenu->insertItem( tr( "Show Hidden Files" ), this,  SLOT( showHidden() ));
+    localMenu->insertSeparator();
     localMenu->insertItem( tr( "Upload" ), this, SLOT( localUpload() ));
     localMenu->insertItem( tr( "Make Directory" ), this, SLOT( localMakDir() ));
     localMenu->insertItem( tr( "Rename" ), this, SLOT( localRename() ));
@@ -93,17 +101,22 @@ OpieFtp::OpieFtp( )
     remoteMenu->insertSeparator();
     remoteMenu->insertItem( tr( "Delete" ), this, SLOT( remoteDelete() ));
 
-    ProgressBar = new QProgressBar( this, "ProgressBar" );
-    ProgressBar->setGeometry( QRect( 5, 268, 231, 15 ) ); 
+    tabMenu->insertItem( tr( "Switch to Local" ), this, SLOT( switchToLocalTab() ));
+    tabMenu->insertItem( tr( "Switch to Remote" ), this, SLOT( switchToRemoteTab() ));
+    tabMenu->insertItem( tr( "Switch to Config" ), this, SLOT( switchToConfigTab() ));
 
-    TabWidget = new QTabWidget( this, "TabWidget2" );
-    TabWidget->setGeometry( QRect( 3, 25, 240, 220 ) );
+	TabWidget = new QTabWidget( this, "TabWidget" );
+    layout->addMultiCellWidget( TabWidget, 1, 1, 0, 3 );
+
     TabWidget->setTabShape(QTabWidget::Triangular);
 
     tab = new QWidget( TabWidget, "tab" );
+    tabLayout = new QGridLayout( tab );
+    tabLayout->setSpacing( 2);
+    tabLayout->setMargin( 2);
 
     Local_View = new QListView( tab, "Local_View" );
-    Local_View->setGeometry( QRect( 3, 2, 225, 195 ) );
+//    Local_View->setResizePolicy( QListView::AutoOneFit );
     Local_View->addColumn( "File",120);
     Local_View->addColumn( "Size",-1);
     Local_View->setColumnAlignment(1,QListView::AlignRight);
@@ -111,6 +124,8 @@ OpieFtp::OpieFtp( )
     Local_View->setColumnAlignment(2,QListView::AlignRight);
     Local_View->setAllColumnsShowFocus(TRUE);
     QPEApplication::setStylusOperation( Local_View->viewport(),QPEApplication::RightOnHold);
+
+    tabLayout->addWidget( Local_View, 0, 0 );
 
     connect( Local_View, SIGNAL( doubleClicked( QListViewItem*)),
              this,SLOT( localListClicked(QListViewItem *)) );
@@ -120,9 +135,11 @@ OpieFtp::OpieFtp( )
     TabWidget->insertTab( tab, tr( "Local" ) );
 
     tab_2 = new QWidget( TabWidget, "tab_2" );
+    tabLayout_2 = new QGridLayout( tab_2 );
+    tabLayout_2->setSpacing( 2);
+    tabLayout_2->setMargin( 2);
 
     Remote_View = new QListView( tab_2, "Remote_View" );
-    Remote_View->setGeometry( QRect( 3, 2, 225, 195 ) ); 
     Remote_View->addColumn( "File",120);
     Remote_View->addColumn( "Size",-1);
     Remote_View->setColumnAlignment(1,QListView::AlignRight);
@@ -131,59 +148,76 @@ OpieFtp::OpieFtp( )
     Remote_View->setAllColumnsShowFocus(TRUE);
     QPEApplication::setStylusOperation( Remote_View->viewport(),QPEApplication::RightOnHold);
 
-    connect( Remote_View, SIGNAL( doubleClicked( QListViewItem*)),
+	connect( Remote_View, SIGNAL( doubleClicked( QListViewItem*)),
              this,SLOT( remoteListClicked(QListViewItem *)) );
     connect( Remote_View, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
              this,SLOT( RemoteListPressed(int, QListViewItem *, const QPoint&, int)) );
 
-    TabWidget->insertTab( tab_2, tr( "Remote" ) );
+    tabLayout_2->addWidget( Remote_View, 0, 0 );
+
+	TabWidget->insertTab( tab_2, tr( "Remote" ) );
 
     tab_3 = new QWidget( TabWidget, "tab_3" );
+    tabLayout_3 = new QGridLayout( tab_3 );
+    tabLayout_3->setSpacing( 2);
+    tabLayout_3->setMargin( 2);
 
     TextLabel1 = new QLabel( tab_3, "TextLabel1" );
-    TextLabel1->setGeometry( QRect( 10, 10, 60, 16 ) ); 
     TextLabel1->setText( tr( "Username" ) );
+    tabLayout_3->addMultiCellWidget( TextLabel1, 0, 0, 0, 1 );
+
     UsernameComboBox = new QComboBox( FALSE, tab_3, "UsernameComboBox" );
-    UsernameComboBox->setGeometry( QRect( 10, 25, 196, 21 ) );
     UsernameComboBox->setEditable(TRUE);
-    UsernameComboBox->lineEdit()->setText("anonymous");
+//    UsernameComboBox->lineEdit()->setText("anonymous");
+    UsernameComboBox->lineEdit()->setText("root");
 //    UsernameComboBox->lineEdit()->setText("llornkcor");
+    tabLayout_3->addMultiCellWidget( UsernameComboBox, 1, 1, 0, 1 );
 
     TextLabel2 = new QLabel( tab_3, "TextLabel2" );
-    TextLabel2->setGeometry( QRect( 10, 50, 65, 16 ) ); 
     TextLabel2->setText( tr( "Password" ) );
+    tabLayout_3->addMultiCellWidget( TextLabel2, 0, 0, 2, 3 );
+
     PasswordEdit = new QLineEdit( "", tab_3, "PasswordComboBox" );
-    PasswordEdit->setGeometry( QRect( 10, 65, 195, 16 ) );
     PasswordEdit->setEchoMode(QLineEdit::Password);
-    PasswordEdit->setText( tr( "me@opieftp.org" ) );
+//    PasswordEdit->setText( tr( "me@opieftp.org" ) );
+//    PasswordEdit->setText( tr( "" ) );
+    tabLayout_3->addMultiCellWidget( PasswordEdit, 1, 1, 2, 3 );
 
     TextLabel3 = new QLabel( tab_3, "TextLabel3" );
-    TextLabel3->setGeometry( QRect( 10, 90, 95, 16 ) ); 
     TextLabel3->setText( tr( "Remote server" ) );
+    tabLayout_3->addMultiCellWidget( TextLabel3, 2, 2, 0, 1 );
+
     ServerComboBox = new QComboBox( FALSE, tab_3, "ServerComboBox" );
-    ServerComboBox->setGeometry( QRect( 10, 105, 195, 21 ) );
     ServerComboBox->setEditable(TRUE);
     ServerComboBox->lineEdit()->setText( tr( "" ) );
+    tabLayout_3->addMultiCellWidget( ServerComboBox, 3, 3, 0, 1 );
 //    ServerComboBox->lineEdit()->setText( tr( "llornkcor.com" ) );
+    ServerComboBox->lineEdit()->setText( tr( "192.168.129.201" ) );
 
     QLabel *TextLabel5 = new QLabel( tab_3, "TextLabel5" );
-    TextLabel5->setGeometry( QRect( 10, 130, 95, 16 ) ); 
     TextLabel5->setText( tr( "Remote path" ) );
+    tabLayout_3->addMultiCellWidget( TextLabel5, 2, 2, 2, 3 );
+
     remotePath = new QLineEdit( "/", tab_3, "remotePath" );
-    remotePath->setGeometry( QRect( 10, 145, 195, 16 ) );
     remotePath->setText( currentRemoteDir = "/");
+    tabLayout_3->addMultiCellWidget( remotePath, 3, 3, 2, 3 );
 //    remotePath->setText( currentRemoteDir = "/home/llornkcor/");
-    
+
     TextLabel4 = new QLabel( tab_3, "TextLabel4" );
-    TextLabel4->setGeometry( QRect( 10, 170, 30, 21 ) ); 
     TextLabel4->setText( tr( "Port" ) );
-    PortSpinBox = new QSpinBox( tab_3, "PortSpinBox" );
-    PortSpinBox->setGeometry( QRect( 40, 175, 75, 20 ) ); 
+	tabLayout_3->addMultiCellWidget( TextLabel4, 4, 4, 0, 1 );
+
+	PortSpinBox = new QSpinBox( tab_3, "PortSpinBox" );
     PortSpinBox->setButtonSymbols( QSpinBox::UpDownArrows );
     PortSpinBox->setMaxValue(32786);
-    PortSpinBox->setValue( 21);
+    PortSpinBox->setValue( 4242);
+//    PortSpinBox->setValue( 21);
+	tabLayout_3->addMultiCellWidget( PortSpinBox, 4, 4, 1, 1);
 
-    TabWidget->insertTab( tab_3, tr( "Config" ) );
+    QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
+    tabLayout_3->addItem( spacer, 5, 0 );
+
+	TabWidget->insertTab( tab_3, tr( "Config" ) );
 
     connect(TabWidget,SIGNAL(currentChanged(QWidget *)),
             this,SLOT(tabChanged(QWidget*)));
@@ -192,10 +226,14 @@ OpieFtp::OpieFtp( )
     currentDir.setPath( QDir::currentDirPath());
 //      currentDir.setSorting(/* QDir::Size*/ /*| QDir::Reversed | */QDir::DirsFirst);
     currentPathEdit = new QLineEdit( "/", this, "currentPathEdit" );
-    currentPathEdit->setGeometry( QRect( 5, 248, 220, 18 ) );
-    currentPathEdit->setText( currentDir.canonicalPath());
+    layout->addMultiCellWidget( currentPathEdit, 3, 3, 0, 3 );
+
+	currentPathEdit->setText( currentDir.canonicalPath());
     connect( currentPathEdit,SIGNAL(returnPressed()),this,SLOT(currentPathEditChanged()));
-    
+
+    ProgressBar = new QProgressBar( this, "ProgressBar" );
+    layout->addMultiCellWidget( ProgressBar, 4, 4, 0, 3 );
+
     filterStr="*";
     populateLocalView();
 }
@@ -217,8 +255,11 @@ void OpieFtp::tabChanged(QWidget *w)
 {
     if (TabWidget->currentPageIndex() == 0) {
             currentPathEdit->setText( currentDir.canonicalPath());
-    } else if (TabWidget->currentPageIndex() == 1) {
+    }
+	if (TabWidget->currentPageIndex() == 1) {
             currentPathEdit->setText( currentRemoteDir );
+    }
+	if (TabWidget->currentPageIndex() == 2) {
     }
 }
 
@@ -258,7 +299,8 @@ void OpieFtp::localUpload()
     QCopEnvelope ( "QPE/System", "notBusy()" );
 }
 
-void OpieFtp::nullifyCallBack() {
+void OpieFtp::nullifyCallBack()
+{
         FtpOptions(FTPLIB_CALLBACK, NULL, conn);
         FtpOptions(FTPLIB_IDLETIME, NULL, conn);
         FtpOptions(FTPLIB_CALLBACKARG, NULL, conn);
@@ -277,8 +319,8 @@ void OpieFtp::remoteDownload()
     if (!FtpSize( remoteFile.latin1(), &fsz, FTPLIB_ASCII, conn))
         fsz = 0;
     QString temp;
-    temp.sprintf( remoteFile+" "+" %dkb", fsz); 
-            
+    temp.sprintf( remoteFile+" "+" %dkb", fsz);
+
     ProgressBar->setTotalSteps(fsz);
     FtpOptions(FTPLIB_CALLBACK, (long) log_progress, conn);
     FtpOptions(FTPLIB_IDLETIME, (long) 1000, conn);
@@ -403,12 +445,12 @@ void OpieFtp::populateLocalView()
             QFileInfo sym( symLink);
             fileS.sprintf( "%10li", sym.size() );
             fileL.sprintf( "%s ->  %s",  sym.fileName().data(),sym.absFilePath().data() );
-            fileDate = sym.lastModified().toString(); 
+            fileDate = sym.lastModified().toString();
         } else {
 //        qDebug("Not a dir: "+currentDir.canonicalPath()+fileL);
             fileS.sprintf( "%10li", fi->size() );
             fileL.sprintf( "%s",fi->fileName().data() );
-            fileDate= fi->lastModified().toString(); 
+            fileDate= fi->lastModified().toString();
             if( QDir(QDir::cleanDirPath(currentDir.canonicalPath()+"/"+fileL)).exists() ) {
                 fileL+="/";
 //     qDebug( fileL);
@@ -489,7 +531,7 @@ void OpieFtp::remoteListClicked(QListViewItem *selectedItem)
                 currentRemoteDir = oldRemoteCurrentDir;
                 strItem="";
                 qDebug("RemoteCurrentDir1 "+oldRemoteCurrentDir);
-                
+
                 populateRemoteView();
             } else {
             currentRemoteDir = currentRemoteDir+strItem;
@@ -783,7 +825,22 @@ void OpieFtp::currentPathEditChanged()
                 currentRemoteDir = oldRemoteCurrentDir;
                 currentPathEdit->setText( currentRemoteDir );
             }
-        
+
         remoteDirList( (const QString &)currentRemoteDir);
     }
+}
+
+void OpieFtp::switchToLocalTab()
+{
+TabWidget->setCurrentPage(0);
+}
+
+void OpieFtp::switchToRemoteTab()
+{
+TabWidget->setCurrentPage(1);
+}
+
+void OpieFtp::switchToConfigTab()
+{
+TabWidget->setCurrentPage(2);
 }
