@@ -38,7 +38,7 @@ static const char * pb_xpm[]={
 
 
 PickboardImpl::PickboardImpl()
-    : pickboard(0), icn(0), ref(0)
+    : pickboard(0), icn(0)
 {
 }
 

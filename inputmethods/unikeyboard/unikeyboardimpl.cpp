@@ -43,7 +43,7 @@ static const char * uni_xpm[]={
 "............................"};
 
 UniKeyboardImpl::UniKeyboardImpl()
-    : input(0), icn(0), ref(0)
+    : input(0), icn(0)
 {
 }
 

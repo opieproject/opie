@@ -52,7 +52,6 @@ public:
 private:
     MultiKey::Keyboard *input;
     QPixmap *icn;
-    ulong ref;
 };
 
 } // anonymous namespace

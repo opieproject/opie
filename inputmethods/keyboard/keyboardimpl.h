@@ -52,7 +52,6 @@ public:
 private:
     KeyboardInput::Keyboard *input;
     QPixmap *icn;
-    ulong ref;
 };
 
 } // anonymous namespace

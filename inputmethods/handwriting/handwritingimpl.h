@@ -45,7 +45,6 @@ public:
 private:
     QIMPenInput *input;
     QPixmap *icn;
-    ulong ref;
 };
 
 #endif

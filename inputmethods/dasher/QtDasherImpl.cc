@@ -21,7 +21,7 @@ static const char * qtdasher_xpm[]={
 
 
 QtDasherImpl::QtDasherImpl()
-  : qtdasherwidget(0), icn(0), ref(0), qtdasherinterface(0)
+  : qtdasherwidget(0), icn(0), qtdasherinterface(0)
 {
 }
 

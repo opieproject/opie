@@ -68,7 +68,7 @@ static const char * const opti_xpm[] = {
 
 
 KeyboardImpl::KeyboardImpl()
-    : input(0), icn(0), ref(0)
+    : input(0), icn(0)
 {
 }
 

@@ -43,7 +43,6 @@ public:
 private:
     KJumpX::Keyboard *input;
     QPixmap *icn;
-    ulong ref;
 };
 
 } // anonymous namespace

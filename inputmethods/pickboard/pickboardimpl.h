@@ -45,7 +45,6 @@ public:
 private:
     Pickboard *pickboard;
     QPixmap *icn;
-    ulong ref;
 };
 
 #endif

@@ -28,7 +28,6 @@ private:
     CDasherInterface *qtdasherinterface;
     QtDasherPlugin *qtdasherwidget;
     QPixmap *icn;
-    ulong ref;
 };
 
 #endif

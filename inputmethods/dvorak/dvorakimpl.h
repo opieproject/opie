@@ -52,7 +52,6 @@ public:
 private:
     Dvorak::Keyboard *input;
     QPixmap *icn;
-    ulong ref;
 };
 
 } // anonymous namespace

@@ -43,7 +43,6 @@ public:
 private:
     UniKeyboard *input;
     QPixmap *icn;
-    ulong ref;
 };
 
 #endif
