@@ -54,7 +54,10 @@ struct OModalHelperBase  {
  * you to keep things in sync
  * It's a template class but it sends signals once one Item is ready
  * the signals contains the status and id of the item and then you
- * can fetch it.
+ * need fetch it.
+ * Handled Records will stay available until the first call to retrieve
+ * either the record via the TransactionID or via the QValueList<Record>. Note
+ * that most functions do not take handled records into account.
  * Also if you edit an record external you can tell this class and it'll
  * call the merge() function of your widget to maybe merge in these changes.
  * It also supports multiple modes. Either it can create new dialogs
@@ -79,6 +82,7 @@ public:
     OModalHelper(enum Mode mode, QObject* parnet );
 
     bool handles( Id id)const;
+    TransactionID transactionID( Id id)const;
 
     void cancel();
     void cancel( TransactionID );
@@ -94,9 +98,9 @@ public:
     Record record( TransactionID )const;
     RecordList done()const;
 private:
-    virtual void done( TransactionID, QDialog* );
-    virtual void next( TransactionID, OModalHelperControler * );
-    virtual void prev( TransactionID, OModalHelperControler * );
+    virtual void done( TransactionID );
+    virtual void next( TransactionID );
+    virtual void prev( TransactionID );
 
     Record nextRecord( TransactionID, int * )const;
     Record prevRecord( TransactionID, int * )const;
@@ -107,6 +111,7 @@ private:
     OModalHelperSignal     *m_signal; // our signal
     OModalHelperControler  *m_controler;
     IdMap                  m_ids; // maps ids (uids) to a record
+    IdMap                  m_doneIds;
     TransactionMap         m_transactions; // activate transactions
     TransactionMap         m_done; // done and waiting for getting picked
     DialogMap              m_editing; // only used for New Mode
@@ -133,6 +138,7 @@ class OModalHelperSignal : public QObject {
     Q_OBJECT
 public:
     OModalHelperSignal(OModalHelperBase* base,  QObject* parent);
+    ~OModalHelperSignal();
 
 signals:
     done( int status,  TransactionID transaction );
@@ -153,26 +159,34 @@ public:
     QDialog* dialog()const;
 
 public slots:
-    virtual done(int result );
+    virtual void done(int result );
+    virtual void next();
+    virtual void prev();
 private:
     QDialog *m_dia;
     TransactionID m_id;
     OModalHelperBase *m_base;
 }
 
-class OModalQueueBar;
+struct OModalQueueBar;
 class OModalQueuedDialog : public QDialog {
     Q_OBJECT
 public:
-    OModalQueuedDialog(QWidget *mainWidget);
+    OModalQueuedDialog(QDialog *mainWidget);
     ~OModalQueuedDialog();
 
     QDialog* centerDialog()const;
 
     void setQueueBarEnabled( bool = true );
     void setRecord( int record, int count );
+
+signals:
+    void next();
+    void prev();
+
 private:
     OModalQueueBar *m_bar;
+    QDialog *m_center;
 };
 
 
@@ -194,14 +208,14 @@ OModalHelper<Dialog, Record, Id>::OModalHelper( enum Mode mode, QObject* parent 
     m_mode = mode;
     m_signal = new OModalHelperSignal( this, parent );
     m_controler = new OModalHelperControler( this, m_signal );
+
 }
 
 
 /**
  * This functions looks for your record and sees if it is
- * handled with this helper. Note that done and edited records
- * will not be returned. But if you edit an already edited record
- * the done record will be used
+ * handled with this helper. Note that done records
+ * will not be returned.
  *
  * @return true if the record is currenlty edited otherwise false
  *
@@ -220,13 +234,32 @@ bool OModalHelper<Dialog, Record, Id>::handles( Id id )const {
     return false;
 }
 
+
+/**
+ * just like handles( Id ) but returns the TransactionId
+ */
+template<class Dialog, class Record, typename Id>
+TransactionID OModalHelper<Dialog, Record, Id>::transactionID( Id id)const {
+    if ( m_transactions.isEmpty() )
+        return false;
+
+    TransactionMap::ConstIterator it = m_transactions.begin();
+    for ( ; it != m_transactions.end(); ++it )
+        if ( it.data() == id )
+            return true;
+
+    return false;
+}
+
 /**
  * Cancel will cancel all current operations and clear the list
  * of done operations as well.
+ * This also clears all done operations you did not popped
  */
 template<class Dialog, class Record, typename Id>
 void OModalHelper<Dialog, Record, Id>::cancel() {
     m_ids.clear();
+    m_doneIds.clear();
     m_done.clear();
     m_transactions.clear();
 
@@ -239,7 +272,7 @@ void OModalHelper<Dialog, Record, Id>::cancel() {
     }else if (m_dialog )
         queuedDialog()->setRecord( 0, 0 );
 
-
+    m_controler->setTransactionID( -1 );
 }
 
 
@@ -278,10 +311,15 @@ void OModalHelper::cancel( TransactionID tid ) {
             Record rec = prevRecord( tid, &pos );
             static_cast<Dialog*>( queuedDialog()->centerDialog() )->setRecord( rec );
             queuedDialog()->setRecord( pos, m_transactions.count() );
+            m_controler->setTransactionID( tid );
         }
     }
-    /* now remove from the various maps */
-    m_ids.remove( m_transactions.contains( tid ) ? m_transactions[tid] : m_done[tid ]  );
+    /* now remove from the various maps  done and currently editing map*/
+    if (m_transactions.contains( tid ) )
+        m_ids.remove( m_transactions[tid]  );
+    if (m_done.contains( tid ) )
+        m_doneIds.remove( m_done[tid ]  );
+
 
     m_done.remove( tid );
     m_transactions.remove( tid );
@@ -301,20 +339,67 @@ void OModalHelper<Dialog, Record, Id>::connectDone( QObject* rec, const char* sl
 }
 
 /**
- * Connect to the accepted Signal. SIGNAL( done(int, TransactionID ) )
- * This signal gets emitted whenever a Record was accepted or rejected
+ * Connect to the accepted Signal. SIGNAL( accepted(TransactionID ) )
+ * This signal gets emitted whenever a Record was accepted
  *
  * @param rec  The object where the slot belongs to
  * @param slot The slot which should be called. See the needed parameter above
  */
 template<class Dialog, class Record, typename Id>
-void OModalHelper<Dialog, Record, Id>::( QObject* rec, const char* slot ) {
-
+void OModalHelper<Dialog, Record, Id>::connectAccepted( QObject* rec, const char* slot ) {
+    QObject::connect(m_signal, SIGNAL(accepted(TransactionID) ),
+                     rec, slot );
 }
 
-
+/**
+ * Same as the accepted method but this one gets emitted if the dialog
+ * got rejected.
+ * SIGNAL( rejected(TransactionID) )
+ *
+ * @param rec The QObject of the slot
+ * @param slot The slot make sure the signature is correct
+ */
 template<class Dialog, class Record, typename Id>
-void OModalHelper<Dialog, Record, Id>::( QObject* rec, const char* slot ) {
-
+void OModalHelper<Dialog, Record, Id>::connectRejected( QObject* rec, const char* slot ) {
+    QObject::connect(m_signal, SIGNAL(rejected(TransactionID) ),
+                     rec, slot );
 }
+
+/**
+ * Tell the helper to handle a record. If the record is currently handled
+ * it will be made active.
+ * Already handled record which are waiting getting popped are not taken into account
+ * Otherwise this helpers make the record editable.
+ * The record supplied needs to have a valid copy operator and constructor.
+ * In the case where the record is already present the parameter gets discarded.
+ * If you want the new record to be taken you need to cancel the Transaction first
+ *
+ * @param id  The Identification of the Record. For PIM it would uid()
+ * @param rec The record we want to be edited
+ *
+ * @returns This functions returns the TransactionId assigned to the record
+ *
+ */
+template<class Dialog, class Record, typename Id>
+TransactionID OModalHelper<Dialog, Record, Id>::handle( Id id, const Record& rec ) {
+    static TransactionID t_id = 0;
+    t_id++;
+    /*
+     *this method consists out of two parts divided each into New and Queued Mode.
+     * Either we have the dialog already, in this case we need to highlight the widget
+     * Or we need to add it.
+     */
+    TransactionID tid = 0;
+    /* we already have the record lets see if it was done or not */
+    if ( m_ids.contains( id ) ) {
+
+    }
+
+    /* fall through if the record is in the done list */
+    tid = t_id;
+
+
+    return;
+}
+
 #endif
