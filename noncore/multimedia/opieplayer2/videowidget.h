@@ -56,7 +56,6 @@ public:
     VideoWidget( QWidget* parent=0, const char* name=0, WFlags f=0 );
     ~VideoWidget();
 
-    bool playVideo();
     XineVideoWidget* vidWidget();
 public slots:
     void updateSlider( long, long );

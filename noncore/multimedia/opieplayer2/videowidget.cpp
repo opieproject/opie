@@ -32,7 +32,6 @@
 */
 
 #include <qpe/resource.h>
-#include <qpe/mediaplayerplugininterface.h>
 #include <qpe/config.h>
 
 #include <qwidget.h>
@@ -87,7 +86,6 @@ VideoWidget::VideoWidget(QWidget* parent, const char* name, WFlags f) :
     cfg.setGroup("VideoWidget");
 
     QString Button0aPix, Button0bPix, controlsPix;
-    //backgroundPix=cfg.readEntry( "backgroundPix", "opieplayer/metalFinish");
     Button0aPix=cfg.readEntry( "Button0aPix", "opieplayer/mediaButton0a");
     Button0bPix=cfg.readEntry( "Button0bPix","opieplayer/mediaButton0b");
     controlsPix=cfg.readEntry( "controlsPix","opieplayer/mediaControls0" );
@@ -106,13 +104,15 @@ VideoWidget::VideoWidget(QWidget* parent, const char* name, WFlags f) :
     slider = new QSlider( Qt::Horizontal, this );
     slider->setMinValue( 0 );
     slider->setMaxValue( 1 );
-    slider->setBackgroundPixmap( Resource::loadPixmap( backgroundPix ) );
+
+    slider->setBackgroundPixmap( *this->backgroundPixmap () ); //Resource::loadPixmap( backgroundPix ) );
+    slider->setBackgroundOrigin( QWidget::ParentOrigin);
     slider->setFocusPolicy( QWidget::NoFocus );
     slider->setGeometry( QRect( 7, 250, 220, 20 ) );
 
     videoFrame = new XineVideoWidget ( this, "Video frame" );
 
-	connect ( videoFrame, SIGNAL( videoResized ( const QSize & )), this, SIGNAL( videoResized ( const QSize & )));
+    connect ( videoFrame, SIGNAL( videoResized ( const QSize & )), this, SIGNAL( videoResized ( const QSize & )));
 
     connect( slider, SIGNAL( sliderPressed() ), this, SLOT( sliderPressed() ) );
     connect( slider, SIGNAL( sliderReleased() ), this, SLOT( sliderReleased() ) );
@@ -244,7 +244,9 @@ void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
                 videoButtons[i].isHeld = FALSE;
                 if ( !videoButtons[i].isToggle )
                     setToggleButton( i, FALSE );
+                qDebug("button toggled3  %d",i);
             }
+
         }
         switch (i) {
           case VideoPlay:       mediaPlayerState->setPlaying(videoButtons[i].isDown); return;
@@ -319,21 +321,6 @@ void VideoWidget::closeEvent( QCloseEvent* ) {
 }
 
 
-bool VideoWidget::playVideo() {
-    bool result = FALSE;
-
-    int stream = 0;
-
-    int sw = 240;
-    int sh = 320;
-    int dd = QPixmap::defaultDepth();
-    int w = height();
-    int h = width();
-
-    return true;
-}
-
-
 
 void VideoWidget::keyReleaseEvent( QKeyEvent *e)
 {
@@ -389,6 +376,6 @@ XineVideoWidget* VideoWidget::vidWidget() {
 
 
 void VideoWidget::setFullscreen ( bool b )
-{ 
+{
 	setToggleButton( VideoFullscreen, b );
 }

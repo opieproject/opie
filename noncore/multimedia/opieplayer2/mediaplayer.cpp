@@ -11,6 +11,7 @@
 #include "mediaplayer.h"
 #include "playlistwidget.h"
 #include "audiowidget.h"
+#include "volumecontrol.h"
 
 #include "mediaplayerstate.h"
 
@@ -39,9 +40,13 @@ MediaPlayer::MediaPlayer( QObject *parent, const char *name )
     connect( audioUI,  SIGNAL( moreReleased() ), this, SLOT( stopChangingVolume() ) );
     connect( audioUI,  SIGNAL( lessReleased() ), this, SLOT( stopChangingVolume() ) );
 
+    volControl = new VolumeControl;
+
 }
 
 MediaPlayer::~MediaPlayer() {
+    delete xineControl;
+    delete volControl;
 }
 
 void MediaPlayer::pauseCheck( bool b ) {
@@ -71,7 +76,7 @@ void MediaPlayer::setPlaying( bool play ) {
     if ( playListCurrent != NULL ) {
         currentFile = playListCurrent;
     }
-    
+
     xineControl->play( currentFile->file() );
 
     xineControl->length();
@@ -92,7 +97,7 @@ void MediaPlayer::setPlaying( bool play ) {
 //     audioUI->setTickerText( tickerText + "." );
 
     audioUI->setTickerText( currentFile->file( ) );
-    
+
 }
 
 
@@ -125,16 +130,14 @@ void MediaPlayer::next() {
 void MediaPlayer::startDecreasingVolume() {
     volumeDirection = -1;
     startTimer( 100 );
-    // da kommt demnächst osound denk ich mal
- /////////////////////////// lets just move those change volume here
-    //  AudioDevice::decreaseVolume();
+    volControl->decVol(2);
 }
 
 
 void MediaPlayer::startIncreasingVolume() {
     volumeDirection = +1;
     startTimer( 100 );
-    //  AudioDevice::increaseVolume();
+    volControl->incVol(2);
 }
 
 
@@ -154,27 +157,29 @@ void MediaPlayer::stopChangingVolume() {
 
 
 void MediaPlayer::timerEvent( QTimerEvent * ) {
-    //    if ( volumeDirection == +1 )
-    //  AudioDevice::increaseVolume();
-    //    else if ( volumeDirection == -1 )
-        //       AudioDevice::decreaseVolume();
+    if ( volumeDirection == +1 ) {
+        volControl->incVol(2);
+    }  else if ( volumeDirection == -1 ) {
+        volControl->decVol(2);
+    }
 
-// Display an on-screen display volume
-    unsigned int l, r, v; bool m;
 
-// TODO FIXME
-//    AudioDevice::getVolume( l, r, m );
-//    v = ((l + r) * 11) / (2*0xFFFF);
+    // TODO FIXME
+    int v;
+    v = volControl->getVolume();
+    v = v / 10;
 
-    if ( drawnOnScreenDisplay && onScreenDisplayVolume == v )
-  return;
+   if ( drawnOnScreenDisplay && onScreenDisplayVolume == v ) {
+       return;
+   }
 
     int w = audioUI->width();
     int h = audioUI->height();
 
     if ( drawnOnScreenDisplay ) {
-  if ( onScreenDisplayVolume > v )
-      audioUI->repaint( (w - 200) / 2 + v * 20 + 0, h - yoff + 40, (onScreenDisplayVolume - v) * 20 + 9, 30, FALSE );
+        if ( onScreenDisplayVolume > v ) {
+            audioUI->repaint( (w - 200) / 2 + v * 20 + 0, h - yoff + 40, (onScreenDisplayVolume - v) * 20 + 9, 30, FALSE );
+        }
     }
 
     drawnOnScreenDisplay = TRUE;
@@ -191,10 +196,11 @@ void MediaPlayer::timerEvent( QTimerEvent * ) {
     p.drawText( (w - 200) / 2, h - yoff + 20, tr("Volume") );
 
     for ( unsigned int i = 0; i < 10; i++ ) {
-  if ( v > i ) 
-      p.drawRect( (w - 200) / 2 + i * 20 + 0, h - yoff + 40, 9, 30 );
-   else 
-      p.drawRect( (w - 200) / 2 + i * 20 + 3, h - yoff + 50, 3, 10 );
+        if ( v > i ) {
+            p.drawRect( (w - 200) / 2 + i * 20 + 0, h - yoff + 40, 9, 30 );
+        } else {
+            p.drawRect( (w - 200) / 2 + i * 20 + 3, h - yoff + 50, 3, 10 );
+        }
     }
 }
 

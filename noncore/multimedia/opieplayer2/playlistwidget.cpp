@@ -164,7 +164,7 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     fullScreenButton = new QAction(tr("Full Screen"), Resource::loadPixmap("fullscreen"), QString::null, 0, this, 0);
     fullScreenButton->addTo(pmView);
     scaleButton = new QAction(tr("Scale"), Resource::loadPixmap("opieplayer/scale"), QString::null, 0, this, 0);
-    scaleButton->addTo(pmView);
+    //scaleButton->addTo(pmView);
 
     QVBox *vbox5 = new QVBox( this ); vbox5->setBackgroundMode( PaletteButton );
     QVBox *vbox4 = new QVBox( vbox5 ); vbox4->setBackgroundMode( PaletteButton );

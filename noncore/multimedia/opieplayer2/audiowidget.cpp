@@ -68,7 +68,7 @@ struct MediaButton {
 MediaButton audioButtons[] = {
    { TRUE,  FALSE, FALSE }, // play
    { FALSE, FALSE, FALSE }, // stop
-   { TRUE,  FALSE, FALSE }, // pause
+   { FALSE,  FALSE, FALSE }, // pause
    { FALSE, FALSE, FALSE }, // next
    { FALSE, FALSE, FALSE }, // previous
    { FALSE, FALSE, FALSE }, // volume up
@@ -342,10 +342,6 @@ void AudioWidget::paintButton( QPainter *p, int i ) {
 
 
 void AudioWidget::timerEvent( QTimerEvent * ) {
-//     static int frame = 0;
-//     if ( !mediaPlayerState->paused() && audioButtons[ AudioPlay ].isDown ) {
-//         frame = frame >= 7 ? 0 : frame + 1;
-//     }
 }
 
 
@@ -371,7 +367,9 @@ void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
                       qDebug("more clicked");
                       emit moreClicked();
                       return;
-                  case AudioVolumeDown: emit lessClicked(); return;
+                  case AudioVolumeDown:
+                      emit lessClicked();
+                      return;
                 }
             } else if ( !isOnButton && audioButtons[i].isHeld ) {
                 audioButtons[i].isHeld = FALSE;
@@ -380,12 +378,14 @@ void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
         } else {
             if ( audioButtons[i].isHeld ) {
                 audioButtons[i].isHeld = FALSE;
-                if ( !audioButtons[i].isToggle )
+                if ( !audioButtons[i].isToggle ) {
                     setToggleButton( i, FALSE );
+                       qDebug("button toggled3  %d",i);
+                }
                 switch (i) {
                   case AudioPlay:       mediaPlayerState->setPlaying(audioButtons[i].isDown); return;
                   case AudioStop:       mediaPlayerState->setPlaying(FALSE); return;
-                  case AudioPause:      mediaPlayerState->setPaused(audioButtons[i].isDown); return;
+                  case AudioPause:      mediaPlayerState->setPaused( audioButtons[i].isDown); return;
                   case AudioNext:       mediaPlayerState->setNext(); return;
                   case AudioPrevious:   mediaPlayerState->setPrev(); return;
                   case AudioLoop:       mediaPlayerState->setLooping(audioButtons[i].isDown); return;

@@ -10,7 +10,7 @@
 #include "xinecontrol.h"
 
 class DocLnk;
-
+class VolumeControl;
 
 class MediaPlayer : public QObject {
     Q_OBJECT
@@ -38,7 +38,7 @@ private:
     int     volumeDirection;
     const DocLnk  *currentFile;
     XineControl *xineControl;
-
+    VolumeControl *volControl;
 };
 
 
