@@ -67,3 +67,6 @@ void OPimNotifyManager::registerNotify( const OPimNotify& ) {
 void OPimNotifyManager::deregister( const OPimNotify& ) {
 
 }
+bool OPimNotifyManager::isEmpty()const {
+    return ( m_rem.isEmpty() && m_al.isEmpty() );
+}

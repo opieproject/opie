@@ -39,6 +39,9 @@ public:
      */
     void deregister( const OPimNotify& );
 
+
+    bool isEmpty()const;
+
 private:
     Reminders m_rem;
     Alarms m_al;

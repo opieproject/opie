@@ -504,7 +504,7 @@ QString ORecur::toString()const {
 
         buf += QCString().sprintf("%04d%02d%02d", date.year(), date.month(), date.day() );
     }
-    buf += "\"";
+    buf += "\" ";
 
     return buf;
 }

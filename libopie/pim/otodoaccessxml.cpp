@@ -15,10 +15,28 @@
 #include <qpe/stringutil.h>
 #include <qpe/timeconversion.h>
 
+#include "otimezone.h"
 #include "orecur.h"
 #include "otodoaccessxml.h"
 
 namespace {
+    time_t rp_end;
+    ORecur* rec;
+    ORecur *recur() {
+        if (!rec ) rec = new ORecur;
+        return rec;
+    }
+    int snd;
+    enum MoreAttributes {
+        FRType = OTodo::CompletedDate + 2,
+        FRWeekdays,
+        FRPosition,
+        FRFreq,
+        FRHasEndDate,
+        FREndDate,
+        FRStart,
+        FREnd
+    };
     // FROM TT again
 char *strstrlen(const char *haystack, int hLen, const char* needle, int nLen)
 {
@@ -59,6 +77,7 @@ OTodoAccessXML::~OTodoAccessXML() {
 
 }
 bool OTodoAccessXML::load() {
+    rec = 0;
     m_opened = true;
     m_changed = false;
     /* initialize dict */
@@ -78,14 +97,20 @@ bool OTodoAccessXML::load() {
     dict.insert("DateMonth" ,      new int(OTodo::DateMonth)        );
     dict.insert("DateYear" ,       new int(OTodo::DateYear)         );
     dict.insert("Progress" ,       new int(OTodo::Progress)         );
-    dict.insert("Completed",       new int(OTodo::Completed)        );
+    dict.insert("CompletedDate",   new int(OTodo::CompletedDate)    );
     dict.insert("CrossReference",  new int(OTodo::CrossReference)   );
     dict.insert("State",           new int(OTodo::State)            );
-    dict.insert("Recurrence",      new int(OTodo::Recurrence)       );
     dict.insert("Alarms",          new int(OTodo::Alarms)           );
     dict.insert("Reminders",       new int(OTodo::Reminders)        );
     dict.insert("Notifiers",       new int(OTodo::Notifiers)        );
     dict.insert("Maintainer",      new int(OTodo::Maintainer)       );
+    dict.insert("rtype", new int(FRType) );
+    dict.insert("rweekdays", new int(FRWeekdays) );
+    dict.insert("rposition", new int(FRPosition) );
+    dict.insert("rfreq", new int(FRFreq) );
+    dict.insert("start", new int(FRStart) );
+    dict.insert("rhasenddate", new int(FRHasEndDate) );
+    dict.insert("enddt", new int(FREndDate) );
 
     // here the custom XML parser from TT it's GPL
     // but we want to push OpiePIM... to TT.....
@@ -181,8 +206,17 @@ bool OTodoAccessXML::load() {
         if ( ev.hasDueDate() ) {
             ev.setDueDate( QDate(m_year, m_month, m_day) );
         }
+        if ( rec && rec->doesRecur() ) {
+            OTimeZone utc = OTimeZone::utc();
+            ORecur recu( *rec ); // call copy c'tor
+            recu.setEndDate( utc.fromUTCDateTime( rp_end ).date() );
+            recu.setStart( ev.dueDate() );
+            ev.setRecurrence( recu );
+        }
         m_events.insert(ev.uid(), ev );
         m_year = m_month = m_day = -1;
+        delete rec;
+        rec = 0;
     }
 
     munmap(map_addr, attribut.st_size );
@@ -397,6 +431,37 @@ void OTodoAccessXML::todo( QAsciiDict<int>* dict, OTodo& ev,
         }
         break;
     }
+    /* Recurrence stuff below + post processing later */
+    case FRType:
+        if ( val == "Daily" )
+            recur()->setType( ORecur::Daily );
+        else if ( val == "Weekly" )
+            recur()->setType( ORecur::Weekly);
+        else if ( val == "MonthlyDay" )
+            recur()->setType( ORecur::MonthlyDay );
+        else if ( val == "MonthlyDate" )
+            recur()->setType( ORecur::MonthlyDate );
+        else if ( val == "Yearly" )
+            recur()->setType( ORecur::Yearly );
+        else
+            recur()->setType( ORecur::NoRepeat );
+        break;
+    case FRWeekdays:
+        recur()->setDays( val.toInt() );
+        break;
+    case FRPosition:
+        recur()->setPosition( val.toInt() );
+        break;
+    case FRFreq:
+        recur()->setFrequency( val.toInt() );
+        break;
+    case FRHasEndDate:
+        recur()->setHasEndDate( val.toInt() );
+        break;
+    case FREndDate: {
+        rp_end = (time_t) val.toLong();
+        break;
+    }
     default:
         break;
     }
@@ -435,8 +500,9 @@ QString OTodoAccessXML::toString( const OTodo& ev )const {
         str += extIt.key() + "=\"" +  extIt.data() + "\" ";
     */
     // cross refernce
-    if ( ev.hasRecurrence() )
+    if ( ev.hasRecurrence() ) {
         str += ev.recurrence().toString();
+    }
 
     return str;
 }
