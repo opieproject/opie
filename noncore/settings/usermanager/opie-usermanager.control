@@ -1,9 +1,0 @@
-Files: bin/usermanager apps/Settings/usermanager.desktop pics/usermanager/*
-Priority: optional
-Section: opie/settings
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
-Architecture: arm
-Maintainer: Ted Parnefors <zaurus@bredband.net>
-License: GPL
-Description: User/Group manager for OPIE.

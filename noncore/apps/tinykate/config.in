@@ -1,6 +1,0 @@
-  config TINYKATE
-    boolean "tinykate"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && LIBKATE
-
-source "noncore/apps/tinykate/libkate/config.in"

@@ -1,9 +1,0 @@
-Files: plugins/decorations/libflat.so*
-Priority: optional
-Section: opie/decorations
-Maintainer: Robert Griebl <sandman@handhelds.org>
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION.1
-Depends: opie-base ($QPE_VERSION)
-Description: OPIE window decoration style
- Flat window decoration style for OPIE.

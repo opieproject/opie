@@ -1,4 +1,0 @@
-  config FIFTEEN
-    boolean "fifteen"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

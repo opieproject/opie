@@ -1,8 +1,0 @@
-Files: bin/qpdf apps/Applications/qpdf.desktop pics/qpdf/qpdf_icon.png
-Priority: optional
-Section: opie/applications
-Maintainer: Robert Griebl <sandman@handhelds.org>
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION), gzip
-Description: A PDF viewer for OPIE.

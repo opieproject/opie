@@ -1,4 +1,0 @@
-  config MINESWEEP
-    boolean "minesweep"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,9 +1,0 @@
-Files: bin/advancedfm apps/Applications/advancedfm.desktop pics/advancedfm
-Priority: optional
-Section: opie/applications
-Maintainer: L.J. Potter <ljp@llornkcor.com> 
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
-Description: Advanced File Manager
- The advanced file manager for the Opie environment.

@@ -1,8 +1,0 @@
-Files: bin/sfcave apps/Games/sfcave.desktop pics/sfcave
-Priority: optional
-Section: opie/games
-Maintainer: Andy Qua <andy.qua@blueyonder.co.uk>
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
-Description: SFCave for the Zaurus. Fly the dot though the cave avoiding the walls.

@@ -1,9 +1,0 @@
-Files: bin/citytime apps/Settings/citytime.desktop pics/citytime
-Priority: optional
-Section: opie/settings
-Maintainer: Maximilian Reiss <harlekin@handhelds.org>
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION), timezones
-Description: Time-zone / world clock settings
- The time-zone manager for the Opie environment.

@@ -1,9 +1,0 @@
-Files: plugins/applets/libnotesapplet.so* 
-Priority: optional
-Section: opie/system
-Maintainer: L. J. Potter <ljp@llornkcor.com>
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
-Description: Screenshot Applet
- A simple taskbar applet for making quick notes.

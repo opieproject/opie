@@ -1,7 +1,0 @@
-Files: etc/colors root/etc/init.d/opie bin/opie-reorgfiles apps/*/.directory etc/mime.types apps/Settings/quit.desktop pics/logo/*
-Priority: required
-Section: opie/system
-Maintainer:  Project Opie <opie@handhelds.org>
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION.1
-Description: Core opie files

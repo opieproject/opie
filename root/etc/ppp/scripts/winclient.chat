@@ -1,3 +1,0 @@
-# /etc/ppp/options/winclient.chat
-TIMEOUT 3600
-CLIENT CLIENTSERVER\c
