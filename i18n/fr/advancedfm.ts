@@ -4,7 +4,7 @@
     <name>AdvancedFm</name>
     <message>
         <source>AdvancedFm</source>
-        <translation>AdvancedFm</translation>
+        <translation>Explorateur</translation>
     </message>
     <message>
         <source>File</source>
@@ -12,11 +12,11 @@
     </message>
     <message>
         <source>View</source>
-        <translation>Affichage</translation>
+        <translation>Vue</translation>
     </message>
     <message>
         <source>Show Hidden Files</source>
-        <translation>Montrer Fichiers Cachés</translation>
+        <translation>Afficher Fichiers Cachés</translation>
     </message>
     <message>
         <source>Make Directory</source>
@@ -88,11 +88,11 @@
     </message>
     <message>
         <source>AdvancedFm Output</source>
-        <translation>Sortie d&apos;AdvancedFm</translation>
+        <translation>Sortie Explorateur</translation>
     </message>
     <message>
         <source>Advancedfm Beam out</source>
-        <translation>Envoie AvancedFM</translation>
+        <translation>Emission Explorateur</translation>
     </message>
     <message>
         <source>Ir sent.</source>
@@ -128,11 +128,11 @@
     </message>
     <message>
         <source>File Info</source>
-        <translation>Propriétés Fichier</translation>
+        <translation>Info Fichier</translation>
     </message>
     <message>
         <source>Set Permissions</source>
-        <translation>Définir les Droits</translation>
+        <translation>Définir Permissions</translation>
     </message>
     <message>
         <source>Properties</source>
@@ -140,7 +140,7 @@
     </message>
     <message>
         <source>Beam File</source>
-        <translation>Envoyer fichier</translation>
+        <translation>Emission Fichier</translation>
     </message>
     <message>
         <source>Copy </source>
@@ -152,7 +152,7 @@
     </message>
     <message>
         <source>Copy Same Dir</source>
-        <translation>Copier le même Répertoire</translation>
+        <translation>Copier dans ce même répertoire</translation>
     </message>
     <message>
         <source>Could not copy
@@ -222,20 +222,22 @@ Voulez-vous vraiment l&apos;effacer?</translation>
     </message>
     <message>
         <source>%1 exists. Ok to overwrite?</source>
-        <translation>%1 existe déjà. Confirmer son écrasement ?</translation>
+        <translation>%1 existe déjà.
+Confirmer son écrasement ?</translation>
     </message>
     <message>
         <source>Could not copy %1 to %2</source>
-        <translation>Impossible de copier %1 vers %2</translation>
+        <translation>Impossible de copier
+%1 vers %2</translation>
     </message>
     <message>
         <source>Advanced FileManager
 is copyright 2002-2003 by
 L.J.Potter&lt;llornkcor@handhelds.org&gt;
 and is licensed by the GPL</source>
-        <translation>Advanced FileManager(new line)
-Copyright 2002-2003 de(new line)
-L.J.Potter&lt;llornkcor@handhelds.org&gt;(new line)
+        <translation>Gestionnaire de fichier Explorateur
+Copyright 2002-2003
+L.J.Potter&lt;llornkcor@handhelds.org&gt;
 Sous licence GPL</translation>
     </message>
     <message>
@@ -262,31 +264,33 @@ Ce n&apos;en est pas un!!</translation>
         <source>Cannot remove current directory
 from bookmarks.
 It is not bookmarked!</source>
-        <translation>Impossible d&apos;effacer le répertoire courant
-des favoris.
+        <translation>Impossible d&apos;effacer le répertoire
+courant des favoris.
 Ce n&apos;est pas un favoris !</translation>
     </message>
     <message>
         <source>File Search</source>
-        <translation>Rechercher Fichier</translation>
+        <translation>Recherche Fichier</translation>
     </message>
     <message>
         <source>Really delete %1
 and all it&apos;s contents ?</source>
-        <translation>Voulez-vous réellement supprimer %1
+        <translation>Voulez-vous réellement
+supprimer %1
 et tout son contenu ?</translation>
     </message>
     <message>
         <source>Really delete
 %1?</source>
-        <translation>Confirmer l&apos;effacement de %1 ?</translation>
+        <translation>Confirmer suppression de
+%1 ?</translation>
     </message>
 </context>
 <context>
     <name>Output</name>
     <message>
         <source>Save output to file (name only)</source>
-        <translation>Sauvegarder la sortie dans un fichier</translation>
+        <translation>Enregistrer la sortie dans un fichier</translation>
     </message>
     <message>
         <source>Output</source>
@@ -315,11 +319,11 @@ Terminé
     <name>filePermissions</name>
     <message>
         <source>Set File Permissions</source>
-        <translation>Définir les Droits</translation>
+        <translation>Définir Permissions</translation>
     </message>
     <message>
         <source>Set file permissions for:</source>
-        <translation>Définir les droits pour :</translation>
+        <translation>Définir permissions de :</translation>
     </message>
     <message>
         <source>owner</source>

@@ -39,7 +39,7 @@
     </message>
     <message>
         <source>Task Editor</source>
-        <translation>Task Editor</translation>
+        <translation>Editeur de Tâches</translation>
     </message>
 </context>
 <context>
@@ -479,7 +479,7 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     </message>
     <message>
         <source>Click here if task happens on a regular basis.  If selected, frequency can be set on the Recurrence tab.</source>
-        <translation>Cliquer ici si cette tâches doit-être répétée. La fréquence est choisie dans le tableau de Répétition.</translation>
+        <translation>Cliquez ici si cette tâches doit-être répétée. La fréquence est choisie dans l&apos;onglet de Répétition.</translation>
     </message>
     <message>
         <source>Notes:</source>
@@ -510,19 +510,19 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     </message>
     <message>
         <source>Started</source>
-        <translation>Démarrée</translation>
+        <translation>Démarré</translation>
     </message>
     <message>
         <source>Postponed</source>
-        <translation>Reportée</translation>
+        <translation>Reporté</translation>
     </message>
     <message>
         <source>Finished</source>
-        <translation>Terminée</translation>
+        <translation>Terminé</translation>
     </message>
     <message>
         <source>Not started</source>
-        <translation>Arrétée</translation>
+        <translation>Non Démarré</translation>
     </message>
     <message>
         <source>Progress:</source>
@@ -530,7 +530,7 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     </message>
     <message>
         <source>Select progress made on this task here.</source>
-        <translation>Selectionnez l&apos;avancement de la tâche ici.</translation>
+        <translation>Sélectionnez l&apos;avancement de la tâche ici.</translation>
     </message>
     <message>
         <source>0 %</source>

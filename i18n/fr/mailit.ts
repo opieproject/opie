@@ -86,7 +86,7 @@
     </message>
     <message>
         <source>Get Mail in</source>
-        <translation>Recevoir les messages dans</translation>
+        <translation>Recevoir Messages dans</translation>
     </message>
     <message>
         <source>Edit account</source>

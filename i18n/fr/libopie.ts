@@ -474,23 +474,23 @@ and </source>
     </message>
     <message>
         <source>Office: </source>
-        <translation>Bureau :</translation>
+        <translation>Service :</translation>
     </message>
     <message>
         <source>Business Web Page: </source>
-        <translation>Page Web (bur):</translation>
+        <translation>Page Web (bur.):</translation>
     </message>
     <message>
         <source>Business Phone: </source>
-        <translation>Téléphone (bur):</translation>
+        <translation>Tél (bur.):</translation>
     </message>
     <message>
         <source>Business Fax: </source>
-        <translation>Fax (bur):</translation>
+        <translation>Fax (bur.):</translation>
     </message>
     <message>
         <source>Business Mobile: </source>
-        <translation>Mobile (bur):</translation>
+        <translation>Mobile (bur.):</translation>
     </message>
     <message>
         <source>Business Pager: </source>
@@ -498,19 +498,19 @@ and </source>
     </message>
     <message>
         <source>&lt;br&gt;&lt;br&gt;&lt;b&gt;Home Address:&lt;/b&gt;</source>
-        <translation>&lt;br&gt;&lt;br&gt;&lt;b&gt;Adresse (perso):&lt;/b&gt;</translation>
+        <translation>&lt;br&gt;&lt;br&gt;&lt;b&gt;Adresse (dom.):&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Home Web Page: </source>
-        <translation>Page Web (bur):</translation>
+        <translation>Page Web (bur.):</translation>
     </message>
     <message>
         <source>Home Phone: </source>
-        <translation>Téléphone (perso):</translation>
+        <translation>Téléphone (dom.):</translation>
     </message>
     <message>
         <source>Home Fax: </source>
-        <translation>Fax (perso):</translation>
+        <translation>Fax (dom.):</translation>
     </message>
     <message>
         <source>Home Mobile: </source>
@@ -518,7 +518,7 @@ and </source>
     </message>
     <message>
         <source>All Emails: </source>
-        <translation>EMail(s) :</translation>
+        <translation>E-Mail(s) :</translation>
     </message>
     <message>
         <source>Profession: </source>
@@ -542,11 +542,11 @@ and </source>
     </message>
     <message>
         <source>Gender: </source>
-        <translation>sexe :</translation>
+        <translation>Type :</translation>
     </message>
     <message>
         <source>Spouse: </source>
-        <translation>Epouse :</translation>
+        <translation>Epou(x|se) :</translation>
     </message>
     <message>
         <source>Birthday: </source>
@@ -558,7 +558,7 @@ and </source>
     </message>
     <message>
         <source>Children: </source>
-        <translation>Enfant :</translation>
+        <translation>Enfant(s) :</translation>
     </message>
     <message>
         <source>Nickname: </source>
@@ -570,11 +570,13 @@ and </source>
     </message>
     <message>
         <source>This is an all day event</source>
-        <translation>Cet événement couvre toute la journée</translation>
+        <translation>Cet événement couvre
+toute la journée</translation>
     </message>
     <message>
         <source>This is a multiple day event</source>
-        <translation>Cet événement couvre plusieurs jours</translation>
+        <translation>Cet événement couvre
+plusieurs jours</translation>
     </message>
     <message>
         <source>Start:</source>

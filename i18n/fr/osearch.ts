@@ -4,7 +4,7 @@
     <name>MainWindow</name>
     <message>
         <source>OSearch</source>
-        <translation>OSearch</translation>
+        <translation>Recherche</translation>
     </message>
     <message>
         <source>The details of the current result</source>
@@ -40,7 +40,7 @@
     </message>
     <message>
         <source>Search all</source>
-        <translation>Rechecher tous</translation>
+        <translation>Rechercher tous</translation>
     </message>
     <message>
         <source>Options</source>

@@ -4,7 +4,7 @@
     <name>DateBook</name>
     <message>
         <source>Calendar</source>
-        <translation>Calendrier</translation>
+        <translation>Agenda</translation>
     </message>
     <message>
         <source>New</source>
@@ -16,7 +16,7 @@
     </message>
     <message>
         <source>Day</source>
-        <translation>Jour</translation>
+        <translation>Toute la journée</translation>
     </message>
     <message>
         <source>Week</source>
@@ -66,15 +66,15 @@ your changes.
 Free up some space and try again.
 
 Quit anyway?</source>
-        <translation>L&apos;application n&apos;a pas été capable de sauver
-vos modifications.
+        <translation>L&apos;application n&apos;a pas été capable
+de sauvegarder vos modifications.
 Libérer de l&apos;espace et réessayer.
 
 Quitter ?</translation>
     </message>
     <message>
         <source>(Unknown)</source>
-        <translation>(inconnu)</translation>
+        <translation>(indéfini)</translation>
     </message>
     <message>
         <source>Error!</source>
@@ -226,7 +226,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Calendar</source>
-        <translation>Calendrier</translation>
+        <translation>Agenda</translation>
     </message>
 </context>
 <context>
@@ -249,11 +249,11 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Alarm Settings</source>
-        <translation>Paramètres de l&apos;alarme</translation>
+        <translation>Paramètres des alarmes</translation>
     </message>
     <message>
         <source>Alarm Preset</source>
-        <translation>Paramètres par défaut </translation>
+        <translation>Par défaut</translation>
     </message>
     <message>
         <source> minutes</source>
@@ -273,19 +273,19 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Medium</source>
-        <translation>Moyen</translation>
+        <translation>Moyenne</translation>
     </message>
     <message>
         <source>Large</source>
-        <translation>Grand</translation>
+        <translation>Grande</translation>
     </message>
     <message>
         <source>Views</source>
-        <translation>Vues</translation>
+        <translation>Affichages</translation>
     </message>
     <message>
         <source>Default view:</source>
-        <translation>Vue par défaut :</translation>
+        <translation>Au démarrage :</translation>
     </message>
     <message>
         <source>Day</source>
@@ -309,7 +309,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Time display</source>
-        <translation>Affichage de l&apos;heure</translation>
+        <translation>Affichage heure</translation>
     </message>
     <message>
         <source>None</source>
@@ -337,7 +337,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation>Maison</translation>
+        <translation>Domicile</translation>
     </message>
     <message>
         <source>Category:</source>
@@ -437,7 +437,7 @@ Quitter ?</translation>
     <name>DateEntry</name>
     <message>
         <source>Calendar</source>
-        <translation>Calendrier</translation>
+        <translation>Agenda</translation>
     </message>
     <message>
         <source>Repeat...</source>
@@ -510,7 +510,7 @@ de fin</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation>Maison</translation>
+        <translation>Domicile</translation>
     </message>
     <message>
         <source>Jan 02 00</source>
@@ -518,8 +518,7 @@ de fin</translation>
     </message>
     <message>
         <source>Start time</source>
-        <translation>Heure
-Minutes</translation>
+        <translation>Heure début</translation>
     </message>
     <message>
         <source>All day</source>
@@ -527,7 +526,7 @@ Minutes</translation>
     </message>
     <message>
         <source>Time zone</source>
-        <translation>Zone
+        <translation>Zone Horaire
 </translation>
     </message>
     <message>
@@ -536,15 +535,15 @@ Minutes</translation>
     </message>
     <message>
         <source> minutes</source>
-        <translation>minutes</translation>
+        <translation> mn</translation>
     </message>
     <message>
         <source>Silent</source>
-        <translation>Silencieux</translation>
+        <translation>Silencieuse</translation>
     </message>
     <message>
         <source>Loud</source>
-        <translation>Fort</translation>
+        <translation>Forte</translation>
     </message>
     <message>
         <source>Repeat</source>
@@ -578,7 +577,7 @@ Minutes</translation>
     <name>NoteEntryBase</name>
     <message>
         <source>Edit Note</source>
-        <translation>Editer la note</translation>
+        <translation>Notes</translation>
     </message>
     <message>
         <source>&lt;b&gt;1/10&lt;/b&gt; Lunch</source>
@@ -652,15 +651,15 @@ Minutes</translation>
     </message>
     <message>
         <source>nd</source>
-        <translation>ème</translation>
+        <translation></translation>
     </message>
     <message>
         <source>rd</source>
-        <translation>ème</translation>
+        <translation></translation>
     </message>
     <message>
         <source>th</source>
-        <translation>ème</translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -748,7 +747,7 @@ et</translation>
     </message>
     <message>
         <source>None</source>
-        <translation>Aucun</translation>
+        <translation>Aucune</translation>
     </message>
     <message>
         <source>Day</source>
@@ -764,7 +763,7 @@ et</translation>
     </message>
     <message>
         <source>Year</source>
-        <translation>année</translation>
+        <translation>Année</translation>
     </message>
     <message>
         <source>Every:</source>

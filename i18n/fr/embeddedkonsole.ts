@@ -11,34 +11,34 @@
     <name>CommandEditDialogBase</name>
     <message>
         <source>Commands</source>
-        <translation>Commandes</translation>
+        <translation>Editer Commandes</translation>
     </message>
     <message>
         <source>&lt;B&gt;Commands&lt;/B&gt;:</source>
-        <translation>&lt;B&gt;Commandes&lt;/B&gt; :</translation>
+        <translation>&lt;B&gt;Commandes de l&apos;actuelle liste&lt;/B&gt; :</translation>
     </message>
     <message>
         <source>&lt;B&gt;Suggested Commands&lt;/B&gt;:</source>
-        <translation>&lt;B&gt;Commandes Suggérées&lt;/B&gt; :</translation>
+        <translation>&lt;B&gt;Autres commandes suggérées&lt;/B&gt; :</translation>
     </message>
 </context>
 <context>
     <name>Konsole</name>
     <message>
         <source>Terminal</source>
-        <translation>Terminal</translation>
+        <translation>Konsole</translation>
     </message>
     <message>
         <source>Micro</source>
-        <translation>Micro</translation>
+        <translation>Petite</translation>
     </message>
     <message>
         <source>Small Fixed</source>
-        <translation>Petite Fixé</translation>
+        <translation>Moyenne</translation>
     </message>
     <message>
         <source>Medium Fixed</source>
-        <translation>Moyenne Fixé</translation>
+        <translation>Grande</translation>
     </message>
     <message>
         <source>Font</source>
@@ -78,15 +78,15 @@
     </message>
     <message>
         <source>Show command list</source>
-        <translation>Afficher liste commandes</translation>
+        <translation>Afficher liste</translation>
     </message>
     <message>
         <source>Hide command list</source>
-        <translation>Cacher liste commandes</translation>
+        <translation>Cacher liste</translation>
     </message>
     <message>
         <source>Tabs on Bottom</source>
-        <translation>Onglets en Bas</translation>
+        <translation>Onglets en Dessous</translation>
     </message>
     <message>
         <source>Green on Black</source>
@@ -146,15 +146,15 @@
     </message>
     <message>
         <source>Quick Edit</source>
-        <translation>Edition Rapide</translation>
+        <translation>Liste Editable</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Editer</translation>
+        <translation>Modifier Liste</translation>
     </message>
     <message>
         <source>None</source>
-        <translation>Aucun</translation>
+        <translation>Aucune</translation>
     </message>
     <message>
         <source>Left</source>
@@ -170,11 +170,11 @@
     </message>
     <message>
         <source>Show Command List</source>
-        <translation>Afficher Liste Commandes</translation>
+        <translation>Afficher Liste</translation>
     </message>
     <message>
         <source>Hide Command List</source>
-        <translation>Cacher Liste Commandes</translation>
+        <translation>Cacher Liste</translation>
     </message>
     <message>
         <source>Custom</source>
@@ -182,7 +182,7 @@
     </message>
     <message>
         <source>Command List</source>
-        <translation>Liste des commandes</translation>
+        <translation>Liste Commandes</translation>
     </message>
     <message>
         <source>Wrap</source>
@@ -190,11 +190,11 @@
     </message>
     <message>
         <source>Use Beep</source>
-        <translation>Utiliser les bips</translation>
+        <translation>Avertissement Sonore</translation>
     </message>
     <message>
         <source>Tabs on Top</source>
-        <translation>Onglets au dessus</translation>
+        <translation>Onglets au Dessus</translation>
     </message>
 </context>
 <context>
@@ -212,7 +212,7 @@
     </message>
     <message>
         <source>Enter command to add:</source>
-        <translation>Entrer Commande à ajouter :</translation>
+        <translation>&lt;B&gt;Entrez commande à ajouter&lt;/B&gt; :</translation>
     </message>
 </context>
 </TS>

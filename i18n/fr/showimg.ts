@@ -22,7 +22,7 @@
     <name>ImageViewer</name>
     <message>
         <source>Image Viewer</source>
-        <translation>Visualiseur d&apos;Images</translation>
+        <translation>Diaporama</translation>
     </message>
     <message>
         <source>Horizontal flip</source>
@@ -50,7 +50,7 @@
     </message>
     <message>
         <source> - Image Viewer</source>
-        <translation>- Visualiseur d&apos;images</translation>
+        <translation>- Diaporama</translation>
     </message>
     <message>
         <source> True color</source>
@@ -58,7 +58,7 @@
     </message>
     <message>
         <source>View</source>
-        <translation>Aficchage</translation>
+        <translation>Affichage</translation>
     </message>
     <message>
         <source>Thumbnail View</source>

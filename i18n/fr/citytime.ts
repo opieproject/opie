@@ -58,7 +58,8 @@
     </message>
     <message>
         <source>Select a continent/country here, then select a city</source>
-        <translation>Sélectionnez un continent ou pays ici, puis sélectionnez une ville</translation>
+        <translation>Sélectionnez un continent ou pays ici,
+puis sélectionnez une ville</translation>
     </message>
     <message>
         <source>City</source>

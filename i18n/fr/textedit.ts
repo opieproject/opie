@@ -116,7 +116,7 @@
     </message>
     <message>
         <source>File Permissions</source>
-        <translation>Droits du Fichier</translation>
+        <translation>Permissions du Fichier</translation>
     </message>
     <message>
         <source>Search Bar Open</source>
@@ -148,7 +148,7 @@
     </message>
     <message>
         <source>Permissions</source>
-        <translation>Droits</translation>
+        <translation>Permissions</translation>
     </message>
     <message>
         <source>Choose font</source>
@@ -211,11 +211,11 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
     <name>filePermissions</name>
     <message>
         <source>Set File Permissions</source>
-        <translation>Fixer les Droits du Fichier</translation>
+        <translation>Fixer les Permissions du Fichier</translation>
     </message>
     <message>
         <source>Set file permissions for:</source>
-        <translation>Fixer les droits du fichier pour :</translation>
+        <translation>Fixer les Permissions du fichier pour :</translation>
     </message>
     <message>
         <source>owner</source>
@@ -271,7 +271,7 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
     </message>
     <message>
         <source>File Permissions</source>
-        <translation>Droits du Fichier</translation>
+        <translation>Permissions du Fichier</translation>
     </message>
 </context>
 </TS>

@@ -46,7 +46,8 @@ Votre score : %1</translation>
     </message>
     <message>
         <source>Press any key to begin a new game.</source>
-        <translation>Pressez une touche pour commencer une nouvelle partie.</translation>
+        <translation>Pressez une touche pour commencer
+une nouvelle partie.</translation>
     </message>
 </context>
 </TS>

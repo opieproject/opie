@@ -70,23 +70,23 @@ jours</translation>
     <name>QObject</name>
     <message>
         <source>AddressBook plugin</source>
-        <translation>Module &quot;Répertoire d&apos;Adresse&quot;</translation>
+        <translation>Module &quot;Contacts&quot;</translation>
     </message>
     <message>
         <source>Next birthdays in &lt;b&gt; %1 &lt;/b&gt; days:</source>
-        <translation>Prochaine date de naissance dans &lt;b&gt; %1 &lt;/b&gt; jours :</translation>
+        <translation>Prochain anniversaire dans &lt;b&gt;%1&lt;/b&gt; jour(s):</translation>
     </message>
     <message>
         <source>No birthdays in &lt;b&gt; %1 &lt;/b&gt; days!</source>
-        <translation>Pas d&apos;anniversaire dans les &lt;b&gt;%1&lt;/b&gt; prochains jours !</translation>
+        <translation>Pas d&apos;anniversaire prévu (+&lt;b&gt;%1&lt;/b&gt; jours)!</translation>
     </message>
     <message>
         <source>Next anniversaries in &lt;b&gt; %1 &lt;/b&gt; days:</source>
-        <translation>Prochain anniversaire dans &lt;b&gt;%1&lt;/b&gt; jours :</translation>
+        <translation>Anniversaire dans &lt;b&gt;%1&lt;/b&gt; jour(s):</translation>
     </message>
     <message>
         <source>No anniversaries in &lt;b&gt; %1 &lt;/b&gt; days!</source>
-        <translation>Pas d&apos;anniversaire dans les &lt;b&gt;%1&lt;/b&gt; prochains jours !</translation>
+        <translation>Pas d&apos;anniversaire autre (+&lt;b&gt;%1&lt;/b&gt; jours)!</translation>
     </message>
     <message>
         <source>Database does not provide this search query ! Please upgrade libOpie !&lt;br&gt;</source>

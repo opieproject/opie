@@ -12,7 +12,7 @@
     </message>
     <message>
         <source>Please fill out the business card</source>
-        <translation>Remplissez vos paramètres personnels</translation>
+        <translation>Entrez vos données personnels</translation>
     </message>
     <message>
         <source>No plugins found</source>

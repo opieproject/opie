@@ -20,7 +20,7 @@
     </message>
     <message>
         <source>&amp;Game</source>
-        <translation>Par&amp;tie</translation>
+        <translation>&amp;Jeu</translation>
     </message>
     <message>
         <source>Score: 00</source>
@@ -49,8 +49,9 @@
     <message>
         <source>Game paused.
 Press P to continue!</source>
-        <translation>Jeu en Pause.
-Pressez P pour continuer !</translation>
+        <translation>Jeu en Pause...
+Pressez P pour continuer ou
+sélectionner l&apos;option du menu !</translation>
     </message>
     <message>
         <source>Game Over!
@@ -77,13 +78,15 @@ Score : %1</translation>
     <message>
         <source>Successfully cleared more than 75%.
 </source>
-        <translation>Vous avez réussi à nettoyer plus de 75%.
+        <translation>Vous avez réussi à protéger
+plus de 75%.
 </translation>
     </message>
     <message>
         <source>%1 points: 15 points per life
 </source>
-        <translation>%1 points : 15 points par vie</translation>
+        <translation>%1 points : 15 points par vie
+</translation>
     </message>
     <message>
         <source>%1 points: Bonus
@@ -115,15 +118,17 @@ Try to reduce total space by 75%.
 
 This program is distributed under
 the terms of the GPL v2.</source>
-        <translation>Ecrit par: Stefan Schimanski
-Porté par: Martin Imobersteg
+        <translation>Ecrit par : Stefan Schimanski
+Porté par : Martin Imobersteg
 
-Cliquez pour construire des murs.
-Espace pour changer la direction d&apos;un mur.
-Essayez de réduire l&apos;espace total de 75%.
+-&gt; Cliquez pour construire des murs.
+-&gt; Flèches pour changer la direction
+de construction des murs.
+-&gt; Le but : réduire l&apos;espace total libre
+de 75%.
 
 Ce programme est distribué sous les
-de la licence GPL v2.</translation>
+termes de la licence GPL v2.</translation>
     </message>
 </context>
 </TS>

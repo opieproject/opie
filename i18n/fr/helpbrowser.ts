@@ -16,23 +16,23 @@
     </message>
     <message>
         <source>Add Bookmark</source>
-        <translation>Ajouter Signet</translation>
+        <translation>Ajouter Favoris</translation>
     </message>
     <message>
         <source>Remove from Bookmarks</source>
-        <translation>Effacer Signets</translation>
+        <translation>Effacer Favoris</translation>
     </message>
     <message>
         <source>Bookmarks</source>
-        <translation>Les Signets</translation>
+        <translation>Favoris</translation>
     </message>
     <message>
         <source>Help Browser</source>
-        <translation>Naviguer dans l&apos;Aide</translation>
+        <translation>Aide HTML</translation>
     </message>
     <message>
         <source>HelpBrowser</source>
-        <translation type="obsolete">Aide - Navigateur</translation>
+        <translation>Aide HTML</translation>
     </message>
     <message>
         <source>Go</source>

@@ -4,11 +4,11 @@
     <name>BackupAndRestore</name>
     <message>
         <source>Backup and Restore... working...</source>
-        <translation>Sauvegarde et restauration... travail en cours...</translation>
+        <translation>Sauvegarde Restauration... en cours...</translation>
     </message>
     <message>
         <source>Backup and Restore</source>
-        <translation>Sauvegarde et Restauration</translation>
+        <translation>Sauvegarde Restauration</translation>
     </message>
     <message>
         <source>Error from System:
@@ -34,7 +34,7 @@
     </message>
     <message>
         <source>Backup and Restore.. Failed !!</source>
-        <translation>Sauvegarde et Restauration.. Echec !!</translation>
+        <translation>Sauvegarde Restauration.. Echec !!</translation>
     </message>
     <message>
         <source>Backup Successfull.</source>
@@ -42,7 +42,8 @@
     </message>
     <message>
         <source>Please select something to restore.</source>
-        <translation>Veuillez sélectionner un élément à restaurer.</translation>
+        <translation>Veuillez sélectionner un élément
+à restaurer.</translation>
     </message>
     <message>
         <source>Restore Failed.</source>
@@ -50,18 +51,19 @@
     </message>
     <message>
         <source>Unable to open File: %1</source>
-        <translation>Impossible d&apos;ouvrir fichier : %1</translation>
+        <translation>Impossible d&apos;ouvrir fichier :
+%1</translation>
     </message>
     <message>
         <source>Restore Successfull.</source>
-        <translation>Restauration Effectuée.</translation>
+        <translation>Restauration effectuée.</translation>
     </message>
 </context>
 <context>
     <name>BackupAndRestoreBase</name>
     <message>
         <source>Backup And Restore</source>
-        <translation>Sauvegarde et Restauration</translation>
+        <translation>Sauvegarde Restauration</translation>
     </message>
     <message>
         <source>Backup</source>
@@ -97,7 +99,7 @@
     </message>
     <message>
         <source>Update Filelist</source>
-        <translation>Mise-à-jour Liste des Fichiers</translation>
+        <translation>Rafraichir la liste des fichiers</translation>
     </message>
 </context>
 <context>

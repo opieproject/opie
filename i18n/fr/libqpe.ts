@@ -8,7 +8,7 @@
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Non classé</translation>
+        <translation>Non classée</translation>
     </message>
     <message>
         <source> (multi.)</source>
@@ -16,11 +16,11 @@
     </message>
     <message>
         <source>Business</source>
-        <translation>Professionel</translation>
+        <translation>Professionelle</translation>
     </message>
     <message>
         <source>Personal</source>
-        <translation>Personnel</translation>
+        <translation>Personnelle</translation>
     </message>
 </context>
 <context>
@@ -49,7 +49,7 @@
     <name>CategoryEditBase</name>
     <message>
         <source>Category Edit</source>
-        <translation>Ediion des Catégories</translation>
+        <translation>Edition des Catégories</translation>
     </message>
     <message>
         <source>Categories</source>
@@ -69,7 +69,7 @@
     </message>
     <message>
         <source>Global</source>
-        <translation>Global</translation>
+        <translation>Globale</translation>
     </message>
     <message>
         <source>Check the categories this document belongs to.</source>
@@ -112,7 +112,7 @@
     <message>
         <source>Sorry, another application is
 editing categories.</source>
-        <translation>Désolé, une autre appliation
+        <translation>Désolé, une autre application
 est en train d&apos;éditer les catégories.</translation>
     </message>
     <message>
@@ -128,7 +128,8 @@ est en train d&apos;éditer les catégories.</translation>
     <name>DateBookMonthHeader</name>
     <message>
         <source>Show January in the selected year</source>
-        <translation>Afficher Janvier dans l&apos;année sélectionnée</translation>
+        <translation>Afficher Janvier dans l&apos;année
+sélectionnée</translation>
     </message>
     <message>
         <source>Show the previous month</source>
@@ -140,14 +141,15 @@ est en train d&apos;éditer les catégories.</translation>
     </message>
     <message>
         <source>Show December in the selected year</source>
-        <translation>Afficher Décembre dans l&apos;année sélectionnée</translation>
+        <translation>Afficher Décembre dans l&apos;année
+sélectionnée</translation>
     </message>
 </context>
 <context>
     <name>FileSelector</name>
     <message>
         <source>Close the File Selector</source>
-        <translation>Ferme le sélecteur de fichiers</translation>
+        <translation>Fermer le sélecteur de fichiers</translation>
     </message>
     <message>
         <source>Show documents of this type</source>
@@ -159,19 +161,21 @@ est en train d&apos;éditer les catégories.</translation>
     </message>
     <message>
         <source>Show documents in this category</source>
-        <translation>Afficher les documents dans cette catégorie</translation>
+        <translation>Afficher les documents
+dans cette catégorie</translation>
     </message>
     <message>
         <source>Click to select a document from the list</source>
-        <translation>Cliquez pour sélectionner un document de cette liste</translation>
+        <translation>Cliquez pour sélectionner un document
+de cette liste</translation>
     </message>
     <message>
         <source>, or select &lt;b&gt;New Document&lt;/b&gt; to create a new document.</source>
-        <translation>, ou sélectionnez &lt;b&gt;Nouveau Document&lt;/b&gt; pour créer un nouveau document.</translation>
+        <translation>, ou sélectionnez &lt;b&gt;Nouveau Document&lt;/b&gt;&lt;br&gt;pour créer un nouveau document.</translation>
     </message>
     <message>
         <source>&lt;br&gt;&lt;br&gt;Click and hold for document properties.</source>
-        <translation>&lt;br&gt;&lt;br&gt;Cliquez et restez appuyé pour accéder aux propriétés du document.</translation>
+        <translation>&lt;br&gt;&lt;br&gt;Cliquez et restez appuyé pour accéder&lt;br&gt;aux propriétés du document.</translation>
     </message>
 </context>
 <context>
@@ -238,11 +242,11 @@ est en train d&apos;éditer les catégories.</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Effacer</translation>
+        <translation>Supprimer</translation>
     </message>
     <message>
         <source>File deletion failed.</source>
-        <translation>Echec de l&apos;effacement du fichier.</translation>
+        <translation>Echec suppression fichier.</translation>
     </message>
     <message>
         <source>Copy of </source>
@@ -254,7 +258,7 @@ est en train d&apos;éditer les catégories.</translation>
     </message>
     <message>
         <source>File copy failed.</source>
-        <translation>Echec de la copie de fichier.</translation>
+        <translation>Echec copie fichier.</translation>
     </message>
     <message>
         <source>Details</source>
@@ -262,7 +266,7 @@ est en train d&apos;éditer les catégories.</translation>
     </message>
     <message>
         <source>Moving Document failed.</source>
-        <translation>Echec lors du déplacement de fichier.</translation>
+        <translation>Echec déplacement fichier.</translation>
     </message>
     <message>
         <source>Hard Disk</source>
@@ -281,7 +285,7 @@ est en train d&apos;éditer les catégories.</translation>
     </message>
     <message>
         <source>Comment:</source>
-        <translation>Commentaire :</translation>
+        <translation>Infos :</translation>
     </message>
     <message>
         <source>Type:</source>
@@ -297,7 +301,8 @@ est en train d&apos;éditer les catégories.</translation>
     </message>
     <message>
         <source>Fast load (consumes memory)</source>
-        <translation>Chargement rapide (consomme de la mémoire)</translation>
+        <translation>Chargement rapide
+(consomme de la mémoire)</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -337,14 +342,14 @@ est en train d&apos;éditer les catégories.</translation>
     </message>
     <message>
         <source>Use custom rotation</source>
-        <translation>Utiliser une rotation personnalisée</translation>
+        <translation>Personnaliser la rotation</translation>
     </message>
 </context>
 <context>
     <name>OwnerDlg</name>
     <message>
         <source>Owner Information</source>
-        <translation>Information du Propriétaire</translation>
+        <translation>Information Propriétaire</translation>
     </message>
 </context>
 <context>
@@ -422,8 +427,8 @@ for this program.
 
 Please free up some space and
 try again.</source>
-        <translation>Un problème est survenu lors de la
-création des informations de
+        <translation>Un problème est survenu lors de
+la création des informations de
 configuration du programme.
 
 Veuillez libérer de la mémoire et 
@@ -433,9 +438,10 @@ ré-essayez.</translation>
         <source>Unable to create start up files
 Please free up some space
 before entering data</source>
-        <translation>Impossible de créer les fichiers de départ
-Veuillez libérer de la mémoire avant
-d&apos;entrer des données</translation>
+        <translation>Impossible de créer les fichiers
+de départ. Veuillez libérer de la
+mémoire avant d&apos;entrer des
+données</translation>
     </message>
     <message>
         <source>Unable to schedule alarm.
@@ -487,67 +493,67 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Non classé</translation>
+        <translation>Non classée</translation>
     </message>
     <message>
         <source>&lt;b&gt;Work Address:&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Adresse (bureau)&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Adresse (bur.)&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Home Address:&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Adresse (Domicile)&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Adresse (Dom.)&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Email Addresses: </source>
-        <translation>Adresses de courrier électronique:</translation>
+        <translation>Adresses E-Mails : </translation>
     </message>
     <message>
         <source>Home Phone: </source>
-        <translation>Tél (dom):</translation>
+        <translation>Tél (dom): </translation>
     </message>
     <message>
         <source>Home Fax: </source>
-        <translation>Fax (dom):</translation>
+        <translation>Fax (dom): </translation>
     </message>
     <message>
         <source>Home Mobile: </source>
-        <translation>Mobile (perso):</translation>
+        <translation>Mobile (perso.): </translation>
     </message>
     <message>
         <source>Home Web Page: </source>
-        <translation>Page Web (perso):</translation>
+        <translation>Page Web (perso.): </translation>
     </message>
     <message>
         <source>Business Web Page: </source>
-        <translation>Page Web (bur):</translation>
+        <translation>Page Web (bur.): </translation>
     </message>
     <message>
         <source>Office: </source>
-        <translation>Bureau :</translation>
+        <translation>Service : </translation>
     </message>
     <message>
         <source>Business Phone: </source>
-        <translation>Tél (bur):</translation>
+        <translation>Tél (bur.): </translation>
     </message>
     <message>
         <source>Business Fax: </source>
-        <translation>Fax (bur):</translation>
+        <translation>Fax (bur.): </translation>
     </message>
     <message>
         <source>Business Mobile: </source>
-        <translation>Mobile (bur):</translation>
+        <translation>Mobile (bur.): </translation>
     </message>
     <message>
         <source>Business Pager: </source>
-        <translation>Alphapage (bur):</translation>
+        <translation>Alphapage (bur.): </translation>
     </message>
     <message>
         <source>Profession: </source>
-        <translation>Profession :</translation>
+        <translation>Profession : </translation>
     </message>
     <message>
         <source>Assistant: </source>
-        <translation>Assistant :</translation>
+        <translation>Assistant(e): </translation>
     </message>
     <message>
         <source>Manager: </source>
@@ -563,23 +569,23 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Gender: </source>
-        <translation>Genre :</translation>
+        <translation>Type:</translation>
     </message>
     <message>
         <source>Spouse: </source>
-        <translation>Epouse :</translation>
+        <translation>Epou(x|se): </translation>
     </message>
     <message>
         <source>Birthday: </source>
-        <translation>Date de naissance :</translation>
+        <translation>Date de naissance: </translation>
     </message>
     <message>
         <source>Anniversary: </source>
-        <translation>Anniversaire :</translation>
+        <translation>Anniversaire : </translation>
     </message>
     <message>
         <source>Nickname: </source>
-        <translation>Surnom :</translation>
+        <translation>Surnom : </translation>
     </message>
     <message>
         <source>Name Title</source>
@@ -591,7 +597,7 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Middle Name</source>
-        <translation>Second Prénom</translation>
+        <translation>2nd Prénom</translation>
     </message>
     <message>
         <source>Last Name</source>
@@ -619,15 +625,15 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Business Phone</source>
-        <translation>Tél (bur)</translation>
+        <translation>Tél (bur.)</translation>
     </message>
     <message>
         <source>Business Fax</source>
-        <translation>Fax (bur)</translation>
+        <translation>Fax (bur.)</translation>
     </message>
     <message>
         <source>Business Mobile</source>
-        <translation>Mobile (bur)</translation>
+        <translation>Mobile (bur.)</translation>
     </message>
     <message>
         <source>Default Email</source>
@@ -639,47 +645,47 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Home Phone</source>
-        <translation>Tél (dom)</translation>
+        <translation>Tél (dom.)</translation>
     </message>
     <message>
         <source>Home Fax</source>
-        <translation>Fax (dom)</translation>
+        <translation>Fax (dom.)</translation>
     </message>
     <message>
         <source>Home Mobile</source>
-        <translation>Mobile (dom)</translation>
+        <translation>Mobile (dom.)</translation>
     </message>
     <message>
         <source>Business Street</source>
-        <translation>Rue (bur)</translation>
+        <translation>Rue (bur.)</translation>
     </message>
     <message>
         <source>Business City</source>
-        <translation>Ville (bur)</translation>
+        <translation>Ville (bur.)</translation>
     </message>
     <message>
         <source>Business State</source>
-        <translation>Région (bur)</translation>
+        <translation>Région (bur.)</translation>
     </message>
     <message>
         <source>Business Zip</source>
-        <translation>Code Postal (bur)</translation>
+        <translation>Code Postal (bur.)</translation>
     </message>
     <message>
         <source>Business Country</source>
-        <translation>Pays (bur)</translation>
+        <translation>Pays (bur.)</translation>
     </message>
     <message>
         <source>Business Pager</source>
-        <translation>Alphapage (bu)</translation>
+        <translation>Alphapage (bur.)</translation>
     </message>
     <message>
         <source>Business WebPage</source>
-        <translation>Page Web (bur)</translation>
+        <translation>Page Web (bur.)</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation>Bureau</translation>
+        <translation>Service</translation>
     </message>
     <message>
         <source>Profession</source>
@@ -695,39 +701,39 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Home Street</source>
-        <translation>Rue (dom)</translation>
+        <translation>Rue (dom.)</translation>
     </message>
     <message>
         <source>Home City</source>
-        <translation>Ville (dom)</translation>
+        <translation>Ville (dom.)</translation>
     </message>
     <message>
         <source>Home State</source>
-        <translation>Etat (dom)</translation>
+        <translation>Etat (dom.)</translation>
     </message>
     <message>
         <source>Home Zip</source>
-        <translation>Code Postal (dom)</translation>
+        <translation>Code Postal (dom.)</translation>
     </message>
     <message>
         <source>Home Country</source>
-        <translation>Pays (dom)</translation>
+        <translation>Pays (dom.)</translation>
     </message>
     <message>
         <source>Home Web Page</source>
-        <translation>Page Web (dom)</translation>
+        <translation>Page Web (dom.)</translation>
     </message>
     <message>
         <source>Spouse</source>
-        <translation>Epouse</translation>
+        <translation>Epou(x|se)</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation>Genre</translation>
+        <translation>Type</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation>Date de naissance</translation>
+        <translation>Date de Naissance</translation>
     </message>
     <message>
         <source>Anniversary</source>
@@ -739,7 +745,7 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Children</source>
-        <translation>Enfants</translation>
+        <translation>Enfant(s)</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -843,7 +849,7 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Click to make this window moveable.</source>
-        <translation>Clqiuez pour rendre cette fenêtre déplaçable.</translation>
+        <translation>Cliquez pour rendre cette fenêtre déplaçable.</translation>
     </message>
     <message>
         <source>Click to make this window use all available screen area.</source>
@@ -947,13 +953,14 @@ Libérez de la mémoire et réessayez.</translation>
     <name>TimeZoneSelector</name>
     <message>
         <source>citytime executable not found</source>
-        <translation>Impossible de trouver l&apos;exécutable &quot;citytime&quot;</translation>
+        <translation>Impossible de trouver l&apos;exécutable
+&quot;Heure de Ville&quot;</translation>
     </message>
     <message>
         <source>In order to choose the time zones,
 please install citytime.</source>
-        <translation>Pour choisir le fueau horaire,
-installez &quot;citytime&quot; SVP.</translation>
+        <translation>Pour choisir le fuseau horaire,
+installez &quot;Heure de Ville&quot; SVP.</translation>
     </message>
 </context>
 <context>
@@ -982,7 +989,7 @@ Libérez de la mémoire et réessayez</translation>
     </message>
     <message>
         <source>All %1 files</source>
-        <translation>tous les %1 fichiers</translation>
+        <translation>Tous fichiers %1</translation>
     </message>
     <message>
         <source>All files</source>

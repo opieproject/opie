@@ -100,7 +100,7 @@
     </message>
     <message>
         <source>&amp;Game</source>
-        <translation>&amp;Jeux</translation>
+        <translation>&amp;Jeu</translation>
     </message>
     <message>
         <source>&amp;Skill</source>

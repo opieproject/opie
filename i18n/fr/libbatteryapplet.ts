@@ -8,11 +8,11 @@
     </message>
     <message>
         <source>Percentage battery remaining</source>
-        <translation>Pourcentage de batterie restant</translation>
+        <translation>Pourcentage de batterie chargé</translation>
     </message>
     <message>
         <source>Battery status: </source>
-        <translation>Niveau de la batterie :</translation>
+        <translation>Niveau batterie(s) :</translation>
     </message>
     <message>
         <source>Good</source>
@@ -40,7 +40,7 @@
     </message>
     <message>
         <source>Power on-line</source>
-        <translation>Adaptateur secteur</translation>
+        <translation>Adaptateur secteur connecté</translation>
     </message>
     <message>
         <source>External power disconnected</source>
@@ -72,7 +72,7 @@
     </message>
     <message>
         <source>Percentage battery remaining: </source>
-        <translation>Pourcentage de batterie restant :</translation>
+        <translation>Pourcentage de batterie chargé :</translation>
     </message>
     <message>
         <source>Battery time remaining: </source>
@@ -80,7 +80,7 @@
     </message>
     <message>
         <source>No jacket with battery inserted</source>
-        <translation>Aucune module d&apos;extention avec batterie présent</translation>
+        <translation>Aucune module avec batterie</translation>
     </message>
 </context>
 </TS>

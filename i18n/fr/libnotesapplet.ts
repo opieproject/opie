@@ -20,7 +20,7 @@
     </message>
     <message>
         <source>Do you really want to&lt;BR&gt;&lt;B&gt; delete&lt;/B&gt; this note ?</source>
-        <translation>Voulez-vous &lt;BR&gt;&lt;B&gt; détruire&lt;/B&gt; cette note ?</translation>
+        <translation>Voulez-vous &lt;BR&gt;&lt;B&gt;détruire&lt;/B&gt; cette note ?</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -32,7 +32,7 @@
     </message>
     <message>
         <source>Beam Out</source>
-        <translation>Envoyer</translation>
+        <translation>Emission</translation>
     </message>
     <message>
         <source>Search For...</source>
