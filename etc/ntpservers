@@ -1,5 +1,5 @@
 [servers]
-count = 6
+count = 7
 [0]
 name = time.fu-berlin.de
 [1]
@@ -12,3 +12,5 @@ name = ice.mcc.ac.uk
 name = ptbtime1.ptb.de
 [5]
 name = bernina.ethz.ch
+[6]
+name = ntp.univ-lyon1.fr
