@@ -1,5 +1,6 @@
- source noncore/net/mail/libmailwrapper/config.in
- config MAIL3
+source noncore/net/mail/libmailwrapper/config.in
+config MAIL3
     boolean "opie-mail3 (a mail client)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && LIBMAILWRAPPER
+source noncore/net/mail/taskbarapplet/config.in
