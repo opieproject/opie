@@ -69,7 +69,7 @@ int mpeg3_check_sig(char *path)
 		{
 /* Test file extension. */
 			if(strncasecmp(ext, ".mp2", 4) && 
-				strncasecmp(ext, ".mp3", 4) &&
+//				strncasecmp(ext, ".mp3", 4) &&
 				strncasecmp(ext, ".m1v", 4) &&
 				strncasecmp(ext, ".m2v", 4) &&
 				strncasecmp(ext, ".m2s", 4) &&
