@@ -1,10 +1,12 @@
 2004-??-??	The Opie Team <opie@handhelds.org>
 
+	* Improved big-screen support (zecke,ar)
 	* Improved multikeyboard support, added keyboard layout switching applet (mouse)
 	* Added a new mail client based on libetpan (harlekin,alwin,jgf)
 	* Added new package manager - opie-packagemanager (drw)
 	* Improved light-n-power for C7x0 (mickeyl)
 	* Added automatic rotation support for C7x0 (treke)
+	* Split libopie1 up into a set of smaller - functionality grouped - libraries (mickeyl)
 
 2003-11-29	The Opie Team <opie@handhelds.org>
 
