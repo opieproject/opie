@@ -115,23 +115,23 @@ void OpieScreenSaver::setIntervals ( int i1, int i2, int i3 )
 
 	int v[ 4 ];
 	if ( i1 < 0 )
-		i1 = config. readNumEntry ( "Dim", 30 );
+		i1 = config. readNumEntry ( "Dim", m_on_ac ? 60 : 30 );
 	if ( i2 < 0 )
-		i2 = config. readNumEntry ( "LightOff", 20 );
+		i2 = config. readNumEntry ( "LightOff", m_on_ac ? 120 : 20 );
 	if ( i3 < 0 )
-		i3 = config. readNumEntry ( "Suspend", 60 );
+		i3 = config. readNumEntry ( "Suspend", m_on_ac ? 0 : 60 );
 
 	if ( m_on_ac ) {
 		m_enable_dim_ac = ( i1 > 0 );
 		m_enable_lightoff_ac = ( i2 > 0 );
 		m_enable_suspend_ac = ( i3 > 0 );
-		m_onlylcdoff_ac = config.readNumEntry ( "LcdOffOnly", 0 );
+		m_onlylcdoff_ac = config.readBoolEntry ( "LcdOffOnly", false );
 	}
 	else {
 		m_enable_dim = ( i1 > 0 );
 		m_enable_lightoff = ( i2 > 0 );
 		m_enable_suspend = ( i3 > 0 );
-		m_onlylcdoff = config.readNumEntry ( "LcdOffOnly", 0 );
+		m_onlylcdoff = config.readBoolEntry ( "LcdOffOnly", false );
 	}
 	
 	qDebug("screen saver intervals: %d %d %d", i1, i2, i3);
@@ -167,11 +167,11 @@ void OpieScreenSaver::setBacklight ( int bright )
 	// Read from config
 	Config config ( "apm" );
 	config. setGroup ( m_on_ac ? "AC" : "Battery" );
-	m_backlight_normal = config. readNumEntry ( "Brightness", 255 );
+	m_backlight_normal = config. readNumEntry ( "Brightness", m_on_ac ? 255 : 127 );
 
 	m_use_light_sensor = config. readBoolEntry ( "LightSensor", false );
 
-	qDebug ( "setBacklight: %d (ls: %d)", m_backlight_normal, m_use_light_sensor ? 1 : 0 );
+//	qDebug ( "setBacklight: %d (ls: %d)", m_backlight_normal, m_use_light_sensor ? 1 : 0 );
 
 	killTimers ( );
 	if ( m_use_light_sensor ) {

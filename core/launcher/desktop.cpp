@@ -222,18 +222,18 @@ void DesktopApplication::apmTimeout()
 	if ( m_ps-> acStatus ( ) != m_ps_last-> acStatus ( ))
 		m_screensaver-> powerStatusChanged ( *m_ps );
 
-	int bat = m_ps-> batteryPercentRemaining ( );
+	if ( m_ps-> acStatus ( ) != PowerStatus::Online ) {
+		int bat = m_ps-> batteryPercentRemaining ( );
 
-	if ( m_ps_last-> batteryPercentRemaining ( ) != bat ) {
-		if ( bat <= m_powerCritical ) 
-			pa->alert( tr( "Battery level is critical!\nKeep power off until power restored!" ), 1 );
-		else if ( bat <= m_powerVeryLow )
-			pa->alert( tr( "Battery is running very low." ), 2 );
-
-
+		if ( bat < m_ps_last-> batteryPercentRemaining ( )) {
+			if ( bat <= m_powerCritical ) 
+				pa->alert( tr( "Battery level is critical!\nKeep power off until power restored!" ), 1 );
+			else if ( bat <= m_powerVeryLow )
+				pa->alert( tr( "Battery is running very low." ), 2 );
+		}	
 		if ( m_ps-> backupBatteryStatus ( ) == PowerStatus::VeryLow ) 
 			pa->alert( tr( "The Back-up battery is very low.\nPlease charge the back-up battery." ), 2 );
-  	}
+	}
 }
 
 void DesktopApplication::desktopMessage( const QCString &msg, const QByteArray &data )
