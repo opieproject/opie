@@ -10,22 +10,6 @@
         <translation>Starte NTP?</translation>
     </message>
     <message>
-        <source>You asked for a delay of </source>
-        <translation>Sie haben um eine Verzögerung von</translation>
-    </message>
-    <message>
-        <source> minutes, but only </source>
-        <translation>minuten gebeten, es sind nur</translation>
-    </message>
-    <message>
-        <source> minutes elapsed since last lookup.</source>
-        <translation>minuten vergangen seit dem letzten Lookup.</translation>
-    </message>
-    <message>
-        <source>Rerun NTP?</source>
-        <translation>NTP neu starten?</translation>
-    </message>
-    <message>
         <source>Running:</source>
         <translation>führe aus:</translation>
     </message>
@@ -94,6 +78,10 @@
  server</source>
         <translation>Fehler beim Nachsehen der
 Zeit auf dem Server</translation>
+    </message>
+    <message>
+        <source>You asked for a delay of %1 minutes, but only %2 minutes elapsed since last lookup. &lt;br&gt; Rerun NTP?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

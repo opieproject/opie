@@ -10,22 +10,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>You asked for a delay of </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> minutes, but only </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> minutes elapsed since last lookup.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rerun NTP?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Running:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -92,6 +76,10 @@
     <message>
         <source>Error while getting time form
  server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You asked for a delay of %1 minutes, but only %2 minutes elapsed since last lookup. &lt;br&gt; Rerun NTP?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -152,14 +152,6 @@ The list displays the following information:
 <context>
     <name>OTaskEditor</name>
     <message>
-        <source>Overview</source>
-        <translation>Überblick</translation>
-    </message>
-    <message>
-        <source>Advanced</source>
-        <translation>Fortgeschritten</translation>
-    </message>
-    <message>
         <source>Alarms</source>
         <translation>Alarme</translation>
     </message>
@@ -172,8 +164,16 @@ The list displays the following information:
         <translation>X-Ref</translation>
     </message>
     <message>
-        <source>Recurrance</source>
-        <translation>Wiederholung</translation>
+        <source>Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recurrence</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -219,65 +219,252 @@ The list displays the following information:
     </message>
 </context>
 <context>
-    <name>TaskEditorAdvanced</name>
+    <name>TaskEditorAlarms</name>
     <message>
-        <source>State:</source>
-        <translation>Status:</translation>
+        <source>New</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Started</source>
-        <translation>Begonnen</translation>
+        <source>Edit</source>
+        <translation type="unfinished">Editieren</translation>
     </message>
     <message>
-        <source>Postponed</source>
-        <translation>Verschoben</translation>
-    </message>
-    <message>
-        <source>Finished</source>
-        <translation>Beended</translation>
-    </message>
-    <message>
-        <source>Not started</source>
-        <translation>Nicht begonnen</translation>
-    </message>
-    <message>
-        <source>Maintainer</source>
-        <translation>Verwalter</translation>
-    </message>
-    <message>
-        <source>test</source>
-        <translation>test</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
-        <source>Maintain Mode:</source>
-        <translation>Verwaltermodus:</translation>
-    </message>
-    <message>
-        <source>Responsible</source>
-        <translation>Verantwortlich</translation>
-    </message>
-    <message>
-        <source>Done By</source>
-        <translation>Erledigt von</translation>
-    </message>
-    <message>
-        <source>Coordinating</source>
-        <translation>Koordinatin</translation>
-    </message>
-    <message>
-        <source>Nothing</source>
-        <translation>Nichts</translation>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>TaskEditorAdvancedImpl</name>
+    <name>TaskEditorOverView</name>
     <message>
-        <source>Description</source>
-        <translation>Beschreibung</translation>
+        <source>Description:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter brief description of the task here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Complete </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Work on </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Buy </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Organize </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Get </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Plan </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Call </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mail </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Priority:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select priority of task here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Very High</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>High</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Normal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Low</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Very Low</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Category:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select category to organize this task with.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recurring task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here if task happens on a regular basis.  If selected, frequency can be set on the Recurrence tab.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter any additional information about this task here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Todo List</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TaskEditorStatus</name>
+    <message>
+        <source>Status:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to set the current status of this task.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Started</source>
+        <translation type="unfinished">Begonnen</translation>
+    </message>
+    <message>
+        <source>Postponed</source>
+        <translation type="unfinished">Verschoben</translation>
+    </message>
+    <message>
+        <source>Finished</source>
+        <translation type="unfinished">Beended</translation>
+    </message>
+    <message>
+        <source>Not started</source>
+        <translation type="unfinished">Nicht begonnen</translation>
+    </message>
+    <message>
+        <source>Progress:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select progress made on this task here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>0 %</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>20 %</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>40 %</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>60 %</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>80 %</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>100 %</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start Date:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to set the date this task was started.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Due Date:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to set the date this task needs to be completed by.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Completed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to mark this task as completed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to set the date this task was completed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maintainer Mode:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to set the maintainer&apos;s role.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nothing</source>
+        <translation type="unfinished">Nichts</translation>
+    </message>
+    <message>
+        <source>Responsible</source>
+        <translation type="unfinished">Verantwortlich</translation>
+    </message>
+    <message>
+        <source>Done By</source>
+        <translation type="unfinished">Erledigt von</translation>
+    </message>
+    <message>
+        <source>Coordinating</source>
+        <translation type="unfinished">Koordinatin</translation>
+    </message>
+    <message>
+        <source>Maintainer:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is the name of the current task maintainer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>test</source>
+        <translation type="unfinished">test</translation>
+    </message>
+    <message>
+        <source>Click here to select the task maintainer.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

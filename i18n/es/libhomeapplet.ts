@@ -6,8 +6,8 @@
         <translation>Atajo Inicio</translation>
     </message>
     <message>
-        <source>Home</source>
-        <translation>Inicio</translation>
+        <source>Desktop</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

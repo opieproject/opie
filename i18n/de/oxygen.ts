@@ -103,207 +103,181 @@
         <source>Calculations</source>
         <translation>Berechnungen</translation>
     </message>
-</context>
-<context>
-    <name>PSEWidget</name>
-    <message>
-        <source>Periodic System</source>
-        <translation>Periodensystem</translation>
-    </message>
-</context>
-<context>
-    <name>calcDlgUI</name>
-    <message>
-        <source>ERROR: 
-</source>
-        <translation>Fehler:</translation>
-    </message>
-</context>
-<context>
-    <name>dataWidgetUI</name>
-    <message>
-        <source>Chemical Data</source>
-        <translation>Chemische Daten</translation>
-    </message>
     <message>
         <source>Hydrogen</source>
-        <translation>Wasserstoff</translation>
+        <translation type="unfinished">Wasserstoff</translation>
     </message>
     <message>
         <source>Helium</source>
-        <translation>Helium</translation>
+        <translation type="unfinished">Helium</translation>
     </message>
     <message>
         <source>Lithium</source>
-        <translation>Lithium</translation>
+        <translation type="unfinished">Lithium</translation>
     </message>
     <message>
         <source>Beryllium</source>
-        <translation>Beryllium</translation>
+        <translation type="unfinished">Beryllium</translation>
     </message>
     <message>
         <source>Boron</source>
-        <translation>Bor</translation>
+        <translation type="unfinished">Bor</translation>
     </message>
     <message>
         <source>Carbon</source>
-        <translation>Kohlenstoff</translation>
+        <translation type="unfinished">Kohlenstoff</translation>
     </message>
     <message>
         <source>Nitrogen</source>
-        <translation>Stickstoff</translation>
-    </message>
-    <message>
-        <source>Oxygen</source>
-        <translation>Sauerstoff</translation>
+        <translation type="unfinished">Stickstoff</translation>
     </message>
     <message>
         <source>Fluorine</source>
-        <translation>Flour</translation>
+        <translation type="unfinished">Flour</translation>
     </message>
     <message>
         <source>Neon</source>
-        <translation>Neon</translation>
+        <translation type="unfinished">Neon</translation>
     </message>
     <message>
         <source>Sodium</source>
-        <translation>Natrium</translation>
+        <translation type="unfinished">Natrium</translation>
     </message>
     <message>
         <source>Magnesium</source>
-        <translation>Magnesium</translation>
+        <translation type="unfinished">Magnesium</translation>
     </message>
     <message>
         <source>Aluminum</source>
-        <translation>Aluminum</translation>
+        <translation type="unfinished">Aluminum</translation>
     </message>
     <message>
         <source>Silicon</source>
-        <translation>Silikon</translation>
+        <translation type="unfinished">Silikon</translation>
     </message>
     <message>
         <source>Phosphorus</source>
-        <translation>Phospor</translation>
+        <translation type="unfinished">Phospor</translation>
     </message>
     <message>
         <source>Sulfur</source>
-        <translation>Schwefel</translation>
+        <translation type="unfinished">Schwefel</translation>
     </message>
     <message>
         <source>Chlorine</source>
-        <translation>Chlor</translation>
+        <translation type="unfinished">Chlor</translation>
     </message>
     <message>
         <source>Argon</source>
-        <translation>Argon</translation>
+        <translation type="unfinished">Argon</translation>
     </message>
     <message>
         <source>Potassium</source>
-        <translation>Kalium</translation>
+        <translation type="unfinished">Kalium</translation>
     </message>
     <message>
         <source>Calcium</source>
-        <translation>Kalzium</translation>
+        <translation type="unfinished">Kalzium</translation>
     </message>
     <message>
         <source>Scandium</source>
-        <translation>Scandium</translation>
+        <translation type="unfinished">Scandium</translation>
     </message>
     <message>
         <source>Titanium</source>
-        <translation>Titan</translation>
+        <translation type="unfinished">Titan</translation>
     </message>
     <message>
         <source>Vanadium</source>
-        <translation>Vanadium</translation>
+        <translation type="unfinished">Vanadium</translation>
     </message>
     <message>
         <source>Chromium</source>
-        <translation>Chrom</translation>
+        <translation type="unfinished">Chrom</translation>
     </message>
     <message>
         <source>Manganese</source>
-        <translation>Mangesium</translation>
+        <translation type="unfinished">Mangesium</translation>
     </message>
     <message>
         <source>Iron</source>
-        <translation>Eisen</translation>
+        <translation type="unfinished">Eisen</translation>
     </message>
     <message>
         <source>Cobalt</source>
-        <translation>Kobalt</translation>
+        <translation type="unfinished">Kobalt</translation>
     </message>
     <message>
         <source>Nickel</source>
-        <translation>Nickel</translation>
+        <translation type="unfinished">Nickel</translation>
     </message>
     <message>
         <source>Copper</source>
-        <translation>Kupfer</translation>
+        <translation type="unfinished">Kupfer</translation>
     </message>
     <message>
         <source>Zinc</source>
-        <translation>Zink</translation>
+        <translation type="unfinished">Zink</translation>
     </message>
     <message>
         <source>Gallium</source>
-        <translation>Gallium</translation>
+        <translation type="unfinished">Gallium</translation>
     </message>
     <message>
         <source>Germanium</source>
-        <translation>Germanium</translation>
+        <translation type="unfinished">Germanium</translation>
     </message>
     <message>
         <source>Arsenic</source>
-        <translation>Arsen</translation>
+        <translation type="unfinished">Arsen</translation>
     </message>
     <message>
         <source>Selenium</source>
-        <translation>Selen</translation>
+        <translation type="unfinished">Selen</translation>
     </message>
     <message>
         <source>Bromine</source>
-        <translation>Brom</translation>
+        <translation type="unfinished">Brom</translation>
     </message>
     <message>
         <source>Krypton</source>
-        <translation>Krypton</translation>
+        <translation type="unfinished">Krypton</translation>
     </message>
     <message>
         <source>Rubidium</source>
-        <translation>Rubidium</translation>
+        <translation type="unfinished">Rubidium</translation>
     </message>
     <message>
         <source>Strontium</source>
-        <translation>Strontium</translation>
+        <translation type="unfinished">Strontium</translation>
     </message>
     <message>
         <source>Yttrium</source>
-        <translation>Yttrium</translation>
+        <translation type="unfinished">Yttrium</translation>
     </message>
     <message>
         <source>Zirconium</source>
-        <translation>Zirconium</translation>
+        <translation type="unfinished">Zirconium</translation>
     </message>
     <message>
         <source>Niobium</source>
-        <translation>Niob</translation>
+        <translation type="unfinished">Niob</translation>
     </message>
     <message>
         <source>Molybdenum</source>
-        <translation>Molybden</translation>
+        <translation type="unfinished">Molybden</translation>
     </message>
     <message>
         <source>Technetium</source>
-        <translation>Technetium</translation>
+        <translation type="unfinished">Technetium</translation>
     </message>
     <message>
         <source>Ruthenium</source>
-        <translation>Ruthenium</translation>
+        <translation type="unfinished">Ruthenium</translation>
     </message>
     <message>
         <source>Rhodium</source>
-        <translation>Rhodium</translation>
+        <translation type="unfinished">Rhodium</translation>
     </message>
     <message>
         <source>Palladium</source>
@@ -519,47 +493,69 @@
     </message>
     <message>
         <source>Einsteinium</source>
-        <translation>Einsteinium</translation>
+        <translation type="unfinished">Einsteinium</translation>
     </message>
     <message>
         <source>Fermium</source>
-        <translation>Fermium</translation>
+        <translation type="unfinished">Fermium</translation>
     </message>
     <message>
         <source>Mendelevium</source>
-        <translation>Mendelevium</translation>
+        <translation type="unfinished">Mendelevium</translation>
     </message>
     <message>
         <source>Nobelium</source>
-        <translation>Nobelium</translation>
+        <translation type="unfinished">Nobelium</translation>
     </message>
     <message>
         <source>Lawrencium</source>
-        <translation>Lawrencium</translation>
+        <translation type="unfinished">Lawrencium</translation>
     </message>
     <message>
         <source>Rutherfordium</source>
-        <translation>Rutherfordium</translation>
+        <translation type="unfinished">Rutherfordium</translation>
     </message>
     <message>
         <source>Dubnium</source>
-        <translation>Dubnium</translation>
+        <translation type="unfinished">Dubnium</translation>
     </message>
     <message>
         <source>Seaborgium</source>
-        <translation>Seaborgium</translation>
+        <translation type="unfinished">Seaborgium</translation>
     </message>
     <message>
         <source>Bohrium</source>
-        <translation>Bohrium</translation>
+        <translation type="unfinished">Bohrium</translation>
     </message>
     <message>
         <source>Hassium</source>
-        <translation>Hassium</translation>
+        <translation type="unfinished">Hassium</translation>
     </message>
     <message>
         <source>Meitnerium</source>
-        <translation>Meitnerium</translation>
+        <translation type="unfinished">Meitnerium</translation>
+    </message>
+</context>
+<context>
+    <name>PSEWidget</name>
+    <message>
+        <source>Periodic System</source>
+        <translation>Periodensystem</translation>
+    </message>
+</context>
+<context>
+    <name>calcDlgUI</name>
+    <message>
+        <source>ERROR: 
+</source>
+        <translation>Fehler:</translation>
+    </message>
+</context>
+<context>
+    <name>dataWidgetUI</name>
+    <message>
+        <source>Chemical Data</source>
+        <translation>Chemische Daten</translation>
     </message>
 </context>
 </TS>

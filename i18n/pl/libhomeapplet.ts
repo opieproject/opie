@@ -6,7 +6,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Home</source>
+        <source>Desktop</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

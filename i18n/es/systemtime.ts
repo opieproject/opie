@@ -10,22 +10,6 @@
         <translation>¿Ejecutar NTP?</translation>
     </message>
     <message>
-        <source>You asked for a delay of </source>
-        <translation>Solicitó un retraso de </translation>
-    </message>
-    <message>
-        <source> minutes, but only </source>
-        <translation> minutos, pero sólo </translation>
-    </message>
-    <message>
-        <source> minutes elapsed since last lookup.</source>
-        <translation> minutos han transcurrido desde el última visita.</translation>
-    </message>
-    <message>
-        <source>Rerun NTP?</source>
-        <translation>¿Ejecutar NTP?</translation>
-    </message>
-    <message>
         <source>Running:</source>
         <translation>Ejecutando:</translation>
     </message>
@@ -94,6 +78,10 @@
  server</source>
         <translation>Error al obtener la hora del
 servidor</translation>
+    </message>
+    <message>
+        <source>You asked for a delay of %1 minutes, but only %2 minutes elapsed since last lookup. &lt;br&gt; Rerun NTP?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

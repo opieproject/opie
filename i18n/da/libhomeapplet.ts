@@ -6,8 +6,8 @@
         <translation>Hjem genvej</translation>
     </message>
     <message>
-        <source>Home</source>
-        <translation>Hjem</translation>
+        <source>Desktop</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

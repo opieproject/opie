@@ -26,22 +26,6 @@
         <translation>Kør NTP?</translation>
     </message>
     <message>
-        <source>You asked for a delay of </source>
-        <translation>Du bad om en pause på</translation>
-    </message>
-    <message>
-        <source> minutes, but only </source>
-        <translation> minutter, men kun </translation>
-    </message>
-    <message>
-        <source> minutes elapsed since last lookup.</source>
-        <translation> minutter er gået siden sidste opslag.</translation>
-    </message>
-    <message>
-        <source>Rerun NTP?</source>
-        <translation>Kør NTP igen?</translation>
-    </message>
-    <message>
         <source>Running:</source>
         <translation>Kører:</translation>
     </message>
@@ -95,6 +79,10 @@ tiden fra serveren </translation>
     <message>
         <source>Could not connect to server </source>
         <translation>Kunne ikke forbinde til serveren </translation>
+    </message>
+    <message>
+        <source>You asked for a delay of %1 minutes, but only %2 minutes elapsed since last lookup. &lt;br&gt; Rerun NTP?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

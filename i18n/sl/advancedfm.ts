@@ -233,6 +233,14 @@ exists. Ok to overwrite?</source>
 Do you really want to delete it?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>%1 exists. Ok to overwrite?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not copy %1 to %2</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Output</name>

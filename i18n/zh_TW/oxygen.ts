@@ -103,28 +103,6 @@
         <source>Calculations</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>PSEWidget</name>
-    <message>
-        <source>Periodic System</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>calcDlgUI</name>
-    <message>
-        <source>ERROR: 
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>dataWidgetUI</name>
-    <message>
-        <source>Chemical Data</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Hydrogen</source>
         <translation type="unfinished"></translation>
@@ -151,10 +129,6 @@
     </message>
     <message>
         <source>Nitrogen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Oxygen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -559,6 +533,28 @@
     </message>
     <message>
         <source>Meitnerium</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PSEWidget</name>
+    <message>
+        <source>Periodic System</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>calcDlgUI</name>
+    <message>
+        <source>ERROR: 
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>dataWidgetUI</name>
+    <message>
+        <source>Chemical Data</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

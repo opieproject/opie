@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>New Game</source>
-        <translation >新遊戲</translation>
+        <translation>新遊戲</translation>
     </message>
     <message>
         <source>SNAKE!</source>
@@ -36,7 +36,7 @@ crash into the walls, edges or its tail.</source>
     </message>
     <message>
         <source>Press Any Key to Begin a New Game.</source>
-        <translation >按任意鍵以開始新遊戲</translation>
+        <translation>按任意鍵以開始新遊戲</translation>
     </message>
 </context>
 </TS>

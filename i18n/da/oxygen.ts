@@ -103,6 +103,438 @@
         <source>Calculations</source>
         <translation>Udregninger</translation>
     </message>
+    <message>
+        <source>Hydrogen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Helium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lithium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Beryllium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Boron</source>
+        <translation type="unfinished">Bor</translation>
+    </message>
+    <message>
+        <source>Carbon</source>
+        <translation type="unfinished">Kulstof</translation>
+    </message>
+    <message>
+        <source>Nitrogen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fluorine</source>
+        <translation type="unfinished">Fluor</translation>
+    </message>
+    <message>
+        <source>Neon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sodium</source>
+        <translation type="unfinished">Natrium</translation>
+    </message>
+    <message>
+        <source>Magnesium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Aluminum</source>
+        <translation type="unfinished">Aluminium</translation>
+    </message>
+    <message>
+        <source>Silicon</source>
+        <translation type="unfinished">Silicium</translation>
+    </message>
+    <message>
+        <source>Phosphorus</source>
+        <translation type="unfinished">Phosphor</translation>
+    </message>
+    <message>
+        <source>Sulfur</source>
+        <translation type="unfinished">Svovl</translation>
+    </message>
+    <message>
+        <source>Chlorine</source>
+        <translation type="unfinished">Chlor</translation>
+    </message>
+    <message>
+        <source>Argon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Potassium</source>
+        <translation type="unfinished">Kalium</translation>
+    </message>
+    <message>
+        <source>Calcium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scandium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Titanium</source>
+        <translation type="unfinished">Titan</translation>
+    </message>
+    <message>
+        <source>Vanadium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chromium</source>
+        <translation type="unfinished">Chrom</translation>
+    </message>
+    <message>
+        <source>Manganese</source>
+        <translation type="unfinished">Mangan</translation>
+    </message>
+    <message>
+        <source>Iron</source>
+        <translation type="unfinished">Jern</translation>
+    </message>
+    <message>
+        <source>Cobalt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nickel</source>
+        <translation type="unfinished">Nikkel</translation>
+    </message>
+    <message>
+        <source>Copper</source>
+        <translation type="unfinished">Kobber</translation>
+    </message>
+    <message>
+        <source>Zinc</source>
+        <translation type="unfinished">Zink</translation>
+    </message>
+    <message>
+        <source>Gallium</source>
+        <translation type="unfinished">Galium</translation>
+    </message>
+    <message>
+        <source>Germanium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arsenic</source>
+        <translation type="unfinished">Arsen</translation>
+    </message>
+    <message>
+        <source>Selenium</source>
+        <translation type="unfinished">Selen</translation>
+    </message>
+    <message>
+        <source>Bromine</source>
+        <translation type="unfinished">Brom</translation>
+    </message>
+    <message>
+        <source>Krypton</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rubidium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Strontium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yttrium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zirconium</source>
+        <translation type="unfinished">Zirkonium</translation>
+    </message>
+    <message>
+        <source>Niobium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Molybdenum</source>
+        <translation type="unfinished">Molybdæn</translation>
+    </message>
+    <message>
+        <source>Technetium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ruthenium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rhodium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Palladium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Silver</source>
+        <translation type="unfinished">Sølv</translation>
+    </message>
+    <message>
+        <source>Cadmium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Indium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Antimony</source>
+        <translation type="unfinished">Antimon</translation>
+    </message>
+    <message>
+        <source>Tellurium</source>
+        <translation type="unfinished">Tellur</translation>
+    </message>
+    <message>
+        <source>Iodine</source>
+        <translation type="unfinished">Jod</translation>
+    </message>
+    <message>
+        <source>Xenon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cesium</source>
+        <translation type="unfinished">Cæsium</translation>
+    </message>
+    <message>
+        <source>Barium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lanthanum</source>
+        <translation type="unfinished">Lanthan</translation>
+    </message>
+    <message>
+        <source>Cerium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Praseodymium</source>
+        <translation type="unfinished">Praseodym</translation>
+    </message>
+    <message>
+        <source>Neodymium</source>
+        <translation type="unfinished">Neodym</translation>
+    </message>
+    <message>
+        <source>Promethium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Samarium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Europium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gadolinium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Terbium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dysprosium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Holmium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Erbium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thulium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ytterbium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lutetium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hafnium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tantalum</source>
+        <translation type="unfinished">Tantal</translation>
+    </message>
+    <message>
+        <source>Tungsten</source>
+        <translation type="unfinished">Wolfram</translation>
+    </message>
+    <message>
+        <source>Rhenium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Osmium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Iridium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Platinum</source>
+        <translation type="unfinished">Platin</translation>
+    </message>
+    <message>
+        <source>Gold</source>
+        <translation type="unfinished">Guld</translation>
+    </message>
+    <message>
+        <source>Mercury</source>
+        <translation type="unfinished">Kviksølv</translation>
+    </message>
+    <message>
+        <source>Thallium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lead</source>
+        <translation type="unfinished">Bly</translation>
+    </message>
+    <message>
+        <source>Bismuth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Polonium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Astatine</source>
+        <translation type="unfinished">Astatin</translation>
+    </message>
+    <message>
+        <source>Radon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Francium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Radium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Actinium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thorium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Protactinium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Uranium</source>
+        <translation type="unfinished">Uran</translation>
+    </message>
+    <message>
+        <source>Neptunium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Plutonium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Americium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Berkelium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Californium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Einsteinium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fermium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mendelevium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nobelium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lawrencium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rutherfordium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dubnium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Seaborgium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bohrium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hassium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Meitnerium</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PSEWidget</name>
@@ -125,442 +557,6 @@
     <message>
         <source>Chemical Data</source>
         <translation>Kemiske Data</translation>
-    </message>
-    <message>
-        <source>Hydrogen</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Helium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Lithium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Beryllium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Boron</source>
-        <translation>Bor</translation>
-    </message>
-    <message>
-        <source>Carbon</source>
-        <translation>Kulstof</translation>
-    </message>
-    <message>
-        <source>Nitrogen</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Oxygen</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Fluorine</source>
-        <translation>Fluor</translation>
-    </message>
-    <message>
-        <source>Neon</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Sodium</source>
-        <translation>Natrium</translation>
-    </message>
-    <message>
-        <source>Magnesium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Aluminum</source>
-        <translation>Aluminium</translation>
-    </message>
-    <message>
-        <source>Silicon</source>
-        <translation>Silicium</translation>
-    </message>
-    <message>
-        <source>Phosphorus</source>
-        <translation>Phosphor</translation>
-    </message>
-    <message>
-        <source>Sulfur</source>
-        <translation>Svovl</translation>
-    </message>
-    <message>
-        <source>Chlorine</source>
-        <translation>Chlor</translation>
-    </message>
-    <message>
-        <source>Argon</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Potassium</source>
-        <translation>Kalium</translation>
-    </message>
-    <message>
-        <source>Calcium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Scandium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Titanium</source>
-        <translation>Titan</translation>
-    </message>
-    <message>
-        <source>Vanadium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Chromium</source>
-        <translation>Chrom</translation>
-    </message>
-    <message>
-        <source>Manganese</source>
-        <translation>Mangan</translation>
-    </message>
-    <message>
-        <source>Iron</source>
-        <translation>Jern</translation>
-    </message>
-    <message>
-        <source>Cobalt</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Nickel</source>
-        <translation>Nikkel</translation>
-    </message>
-    <message>
-        <source>Copper</source>
-        <translation>Kobber</translation>
-    </message>
-    <message>
-        <source>Zinc</source>
-        <translation>Zink</translation>
-    </message>
-    <message>
-        <source>Gallium</source>
-        <translation>Galium</translation>
-    </message>
-    <message>
-        <source>Germanium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Arsenic</source>
-        <translation>Arsen</translation>
-    </message>
-    <message>
-        <source>Selenium</source>
-        <translation>Selen</translation>
-    </message>
-    <message>
-        <source>Bromine</source>
-        <translation>Brom</translation>
-    </message>
-    <message>
-        <source>Krypton</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Rubidium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Strontium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Yttrium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Zirconium</source>
-        <translation>Zirkonium</translation>
-    </message>
-    <message>
-        <source>Niobium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Molybdenum</source>
-        <translation>Molybdæn</translation>
-    </message>
-    <message>
-        <source>Technetium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Ruthenium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Rhodium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Palladium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Silver</source>
-        <translation>Sølv</translation>
-    </message>
-    <message>
-        <source>Cadmium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Indium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Tin</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Antimony</source>
-        <translation>Antimon</translation>
-    </message>
-    <message>
-        <source>Tellurium</source>
-        <translation>Tellur</translation>
-    </message>
-    <message>
-        <source>Iodine</source>
-        <translation>Jod</translation>
-    </message>
-    <message>
-        <source>Xenon</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Cesium</source>
-        <translation>Cæsium</translation>
-    </message>
-    <message>
-        <source>Barium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Lanthanum</source>
-        <translation>Lanthan</translation>
-    </message>
-    <message>
-        <source>Cerium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Praseodymium</source>
-        <translation>Praseodym</translation>
-    </message>
-    <message>
-        <source>Neodymium</source>
-        <translation>Neodym</translation>
-    </message>
-    <message>
-        <source>Promethium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Samarium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Europium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Gadolinium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Terbium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Dysprosium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Holmium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Erbium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Thulium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Ytterbium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Lutetium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Hafnium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Tantalum</source>
-        <translation>Tantal</translation>
-    </message>
-    <message>
-        <source>Tungsten</source>
-        <translation>Wolfram</translation>
-    </message>
-    <message>
-        <source>Rhenium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Osmium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Iridium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Platinum</source>
-        <translation>Platin</translation>
-    </message>
-    <message>
-        <source>Gold</source>
-        <translation>Guld</translation>
-    </message>
-    <message>
-        <source>Mercury</source>
-        <translation>Kviksølv</translation>
-    </message>
-    <message>
-        <source>Thallium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Lead</source>
-        <translation>Bly</translation>
-    </message>
-    <message>
-        <source>Bismuth</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Polonium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Astatine</source>
-        <translation>Astatin</translation>
-    </message>
-    <message>
-        <source>Radon</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Francium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Radium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Actinium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Thorium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Protactinium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Uranium</source>
-        <translation>Uran</translation>
-    </message>
-    <message>
-        <source>Neptunium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Plutonium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Americium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Curium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Berkelium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Californium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Einsteinium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Fermium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Mendelevium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Nobelium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Lawrencium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Rutherfordium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Dubnium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Seaborgium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Bohrium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Hassium</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Meitnerium</source>
-        <translation></translation>
     </message>
 </context>
 </TS>

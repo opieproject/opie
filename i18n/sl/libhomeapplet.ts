@@ -6,8 +6,8 @@
         <translation>Domača bljižnica</translation>
     </message>
     <message>
-        <source>Home</source>
-        <translation>Dom</translation>
+        <source>Desktop</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

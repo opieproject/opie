@@ -3,7 +3,7 @@
     <name>InputMethods</name>
     <message>
         <source>Pickboard</source>
-        <translation >Pickboard</translation>
+        <translation>Pickboard</translation>
     </message>
 </context>
 </TS>

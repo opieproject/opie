@@ -93,10 +93,6 @@
 <context>
     <name>OTimePickerDialogBase</name>
     <message>
-        <source>TimePicker</source>
-        <translation>Tomar Hora</translation>
-    </message>
-    <message>
         <source>Time:</source>
         <translation>Hora:</translation>
     </message>
