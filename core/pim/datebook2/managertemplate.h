@@ -12,26 +12,21 @@ namespace Datebook {
      */
     template<class T>
     class ManagerTemplate {
-        typedef typename QMap<QString, T>::Iterator Iterator;
+        typedef typename QMap<QString, T>::ConstIterator Iterator;
     public:
         ManagerTemplate();
         virtual ~ManagerTemplate();
 
         virtual void add( const QString&, const T& t );
         void remove( const QString& );
-        bool load();
-        bool save();
+        virtual bool load() = 0;
+        virtual bool save() = 0;
 
-        QStringList names();
+        QStringList names()const;
         T value(const QString&)const;
 
     protected:
         QMap<QString, T> m_map;
-
-    private:
-        virtual bool doSave() = 0;
-        virtual bool doLoad() = 0;
-
     };
     template<class T>
     ManagerTemplate<T>::ManagerTemplate() {
@@ -48,15 +43,7 @@ namespace Datebook {
         m_map.remove( str );
     }
     template<class T>
-    bool ManagerTemplate<T>::load() {
-        return doLoad();
-    }
-    template<class T>
-    bool ManagerTemplate<T>::save() {
-        return doSave();
-    }
-    template<class T>
-    QStringList ManagerTemplate<T>::names() {
+    QStringList ManagerTemplate<T>::names()const {
         QStringList lst;
         Iterator it;
         for ( it = m_map.begin(); it != m_map.end(); ++it ) {

@@ -5,6 +5,7 @@
 
 #include "managertemplate.h"
 
+class QListView;
 namespace Datebook {
     /**
      * StringManager is a generic manager
@@ -25,10 +26,11 @@ namespace Datebook {
          * cause we do not have a value :)
          */
         void add( const QString& );
+        bool load();
+        bool save();
+        QString baseName()const;
     private:
         QString m_base;
-        bool doLoad();
-        bool doSave();
     };
 
     /**
@@ -41,6 +43,14 @@ namespace Datebook {
         ~StringManagerDialog();
 
         StringManager manager()const;
+    private slots:
+        void init( const StringManager&  );
+        void slotAdd();
+        void slotRemove();
+        void slotRename();
+    private:
+        QListView* m_view;
+        QString m_base;
     };
 }
 

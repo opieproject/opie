@@ -13,6 +13,7 @@
 #include <qpe/qpemessagebox.h>
 #include <qpe/resource.h>
 
+#include "editor.h"
 #include "show.h"
 #include "templatemanager.h"
 #include "bookmanager.h"
@@ -22,14 +23,14 @@
 using namespace Datebook;
 
 MainWindow::MainWindow()
-    : OPimMainWindow( "Datebook", 0, 0 ) {
+    : OPimMainWindow( "Datebook", 0, 0 ), m_descMan( "Descriptions" ),  m_locMan( "Locations" )
+{
     setIcon( Resource::loadPixmap( "datebook_icon" ) );
     initUI();
     initManagers();
     initView();
     initConfig();
 
-    raiseCurrentView();
     QTimer::singleShot(0, this, SLOT(populate() ) );
 
     QCopChannel* chan = new QCopChannel( "QPE/System", this );
@@ -41,6 +42,12 @@ MainWindow::MainWindow()
              this, SLOT( slotReceive( const QCString&, const QByteArray& ) ) );
 }
 MainWindow::~MainWindow() {
+    m_tempMan.save();
+    m_locMan.save();
+    m_descMan.save();
+
+    manager()->save();
+    delete m_manager;
 }
 void MainWindow::doSetDocument( const QString& str ) {
 
@@ -95,7 +102,11 @@ void MainWindow::initUI() {
     mb->insertItem( tr("Settings" ), m_popSetting );
 
     m_popTemplate = new QPopupMenu( this );
+    m_popTemplate->setCheckable( TRUE );
+    connect( m_popTemplate, SIGNAL(activated(int) ),
+             this, SLOT(slotNewFromTemplate(int) ) );
     m_popView->insertItem(tr("New from template"), m_popTemplate, -1, 0);
+
 
     QAction* a = new QAction( tr("New Event"), Resource::loadPixmap("new"),
                               QString::null, 0, this, 0 );
@@ -130,6 +141,10 @@ void MainWindow::initUI() {
     a->addTo( m_popSetting );
     connect(a, SIGNAL( activated() ), this, SLOT(slotConfigureDesc() ) );
 
+    a = new QAction( tr("Configure Templates"), QString::null, 0, 0 );
+    a->addTo( m_popSetting );
+    connect(a, SIGNAL( activated() ), this, SLOT(slotConfigureTemp() ) );
+
     connect( qApp, SIGNAL(clockChanged(bool) ),
              this, SLOT(slotClockChanged(bool) ) );
     connect( qApp, SIGNAL(weekChanged(bool) ),
@@ -146,8 +161,12 @@ void MainWindow::initView() {
 }
 void MainWindow::initManagers() {
     m_manager = new BookManager;
-    m_locMan = new LocationManager( tr("Locations") );
-    m_descMan = new DescriptionManager( tr("Descriptions") );
+
+    m_tempMan.load();
+    m_locMan.load();
+    m_descMan.load();
+
+    setTemplateMenu();
 }
 void MainWindow::raiseCurrentView() {
 
@@ -186,14 +205,20 @@ void MainWindow::slotReceive( const QCString&, const QByteArray& ) {
 BookManager* MainWindow::manager() {
     return m_manager;
 }
-TemplateManager* MainWindow::templateManager() {
+TemplateManager MainWindow::templateManager() {
     return m_tempMan;
 }
-LocationManager* MainWindow::locationManager() {
+LocationManager MainWindow::locationManager() {
     return m_locMan;
 }
-DescriptionManager* MainWindow::descriptionManager() {
+DescriptionManager MainWindow::descriptionManager() {
     return m_descMan;
+}
+void MainWindow::setLocationManager( const LocationManager& loc) {
+    m_locMan = loc;
+}
+void MainWindow::setDescriptionManager( const DescriptionManager& dsc ) {
+    m_descMan = dsc;
 }
 Show* MainWindow::eventShow() {
     return m_show;
@@ -202,10 +227,29 @@ void MainWindow::slotAction( QAction* act ) {
 
 }
 void MainWindow::slotConfigureLocs() {
-
+    LocationManagerDialog dlg( locationManager() );
+    dlg.setCaption( tr("Configure Locations") );
+    dlg.showMaximized();
+    if (dlg.exec() == QDialog::Accepted ) {
+        setLocationManager( dlg.manager() );
+    }
 }
 void MainWindow::slotConfigureDesc() {
-
+    DescriptionManagerDialog dlg( descriptionManager() );
+    dlg.setCaption( tr("Configure Descriptions") );
+    dlg.showMaximized();
+    if (dlg.exec() == QDialog::Accepted ) {
+        setDescriptionManager( dlg.manager() );
+    }
+}
+void MainWindow::slotConfigureTemp() {
+    TemplateDialog dlg( templateManager(), editor() );
+    dlg.setCaption( tr("Configure Templates") );
+    dlg.showMaximized();
+    if ( dlg.exec() == QDialog::Accepted ) {
+        m_tempMan = dlg.manager();
+        setTemplateMenu();
+    }
 }
 void MainWindow::hideShow() {
 
@@ -223,4 +267,39 @@ bool MainWindow::viewAP()const{
 }
 bool MainWindow::viewStartMonday()const {
 
+}
+void MainWindow::setTemplateMenu() {
+    m_popTemplate->clear();
+
+    QStringList list = templateManager().names();
+    for ( QStringList::Iterator it = list.begin(); it != list.end(); ++it ) {
+        m_popTemplate->insertItem( (*it) );
+    }
+}
+/*
+ * get the name of the item with the id id
+ * then ask for an OEvent from the manager
+ */
+void MainWindow::slotNewFromTemplate(int id ) {
+    QString name = m_popTemplate->text( id );
+
+    OEvent ev = templateManager().value( name );
+
+    if ( editor()->edit( ev ) ) {
+        ev =  editor()->event();
+        ev.setUid( -1 );
+        manager()->add( ev );
+
+        /*
+         * no we'll find out if the current view
+         * should show the new event
+         * and then we will ask it to refresh
+         * FIXME for now we'll call a refresh
+         */
+        currentView()->reschedule();
+        raiseCurrentView();
+    }
+}
+Editor* MainWindow::editor() {
+    return m_edit;
 }

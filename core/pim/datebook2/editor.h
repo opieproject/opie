@@ -16,19 +16,22 @@ namespace Datebook {
     class Editor {
     public:
         Editor( MainWindow*, QWidget* parent );
-        virtual Editor();
+        virtual ~Editor();
 
-        bool newEvent( const QDate& );
-        bool newEvent( const QDateTime& start, const QDateTime& end );
-        bool edit( const OEvent& );
+        virtual bool newEvent( const QDate& ) = 0;
+        virtual bool newEvent( const QDateTime& start, const QDateTime& end ) = 0;
+        virtual bool edit( const OEvent&, bool showRec = TRUE ) = 0;
 
-        OEvent event()const;
+        virtual OEvent event()const = 0;
 
     protected:
         DescriptionManager descriptions()const;
         LocationManager locations()const;
         void setDescriptions( const DescriptionManager& );
         void setLocations( const LocationManager& );
+
+    private:
+        MainWindow* m_win;
 
     };
 }

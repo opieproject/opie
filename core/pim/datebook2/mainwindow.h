@@ -7,6 +7,7 @@
 
 #include "descriptionmanager.h"
 #include "locationmanager.h"
+#include "templatemanager.h"
 #include "view.h"
 
 class QAction;
@@ -14,14 +15,14 @@ class QWidgetStack;
 class QPopupMenu;
 class QPEToolBar;
 namespace Datebook {
-
-    class TemplateManager;
     class BookManager;
     class Show;
+    class Editor;
     class MainWindow : public OPimMainWindow {
         Q_OBJECT
         friend class Show; // to avoid QObject
         friend class View; // to avoid QObject
+        friend class Editor;
     public:
         MainWindow();
         ~MainWindow();
@@ -42,7 +43,10 @@ namespace Datebook {
         void slotAction( QAction* ); // View changed
         void slotConfigureLocs(); // Configure the Locations
         void slotConfigureDesc(); // Configure the Desc
+        void slotConfigureTemp();
+        void slotNewFromTemplate(int ); // called when someone chooses the template menu
 
+        void setTemplateMenu(); // updates the templateMenu
 
     protected slots:
         void populate();
@@ -64,10 +68,13 @@ namespace Datebook {
         QPopupMenu* templateMenu();
         View* currentView();
         BookManager* manager();
-        TemplateManager* templateManager();
-        LocationManager* locationManager();
-        DescriptionManager* descriptionManager();
+        TemplateManager templateManager();
+        LocationManager locationManager();
+        DescriptionManager descriptionManager();
+        void setLocationManager( const LocationManager& );
+        void setDescriptionManager( const DescriptionManager& );
         Show* eventShow();
+        Editor* editor();
 
     private: // friend functions for Show
         void hideShow(); // to hide the view
@@ -89,10 +96,11 @@ namespace Datebook {
         QPopupMenu* m_popSetting;
         QPopupMenu* m_popTemplate;
         BookManager* m_manager;
-        TemplateManager* m_tempMan;
-        DescriptionManager* m_descMan;
-        LocationManager* m_locMan;
+        TemplateManager m_tempMan;
+        DescriptionManager m_descMan;
+        LocationManager m_locMan;
         Show* m_show;
+        Editor* m_edit;
     };
 }
 

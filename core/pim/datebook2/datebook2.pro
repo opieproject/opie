@@ -18,7 +18,8 @@ SOURCES	= main.cpp \
           stringmanager.cpp \
           templatemanager.cpp \
           show.cpp \
-          view.cpp
+          view.cpp \
+	  editor.cpp
 
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include

@@ -19,6 +19,16 @@ namespace Datebook {
         static bool calcWeek( const QDate& d, int &week, int &year, bool startOnMonday = false );
 
         virtual QPixmap pixmap()const = 0;
+
+        /**
+         * non translatable name or type
+         */
+        virtual QCString type()const = 0;
+
+        /**
+         * shown to the user
+         */
+        virtual QString name()const = 0;
         virtual QString description()const = 0;
 
         /**

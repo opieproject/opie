@@ -7,18 +7,19 @@
 
 #include "managertemplate.h"
 
+class QListView;
 namespace Datebook {
     /**
      * The OEvent Template Manager
      */
+    class Editor;
     class TemplateManager : public ManagerTemplate<OEvent> {
     public:
         TemplateManager();
         ~TemplateManager();
 
-    private:
-        virtual bool doSave();
-        virtual bool doLoad();
+        bool save();
+        bool load();
     };
     /**
      * a QDialog for editing it
@@ -26,10 +27,21 @@ namespace Datebook {
     class TemplateDialog : public QDialog {
         Q_OBJECT
     public:
-        TemplateDialog(const TemplateManager& man);
+        TemplateDialog(const TemplateManager& man, Editor*);
         ~TemplateDialog();
 
-        virtual TemplateManager manager()const;
+        TemplateManager manager()const;
+
+    private slots:
+        void init( const TemplateManager& );
+        void slotAdd();
+        void slotEdit();
+        void slotRename();
+        void slotRemove();
+
+    private:
+        QListView* m_view;
+        Editor* m_edit;
     };
 }
 
