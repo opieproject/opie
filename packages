@@ -159,3 +159,4 @@ CONFIG_WAVPLUGIN	core/multimedia/opieplayer/wavplugin	wavplugin.pro
 CONFIG_WIRELESSAPPLET	noncore/applets/wirelessapplet	wirelessapplet.pro
 CONFIG_WLAN	noncore/net/networksetup/wlan	wlan.pro
 CONFIG_WORDGAME	noncore/games/wordgame	wordgame.pro
+CONFIG_OPIEALARM	ipaq/opiealarm
