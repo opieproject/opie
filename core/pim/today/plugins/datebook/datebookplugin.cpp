@@ -23,11 +23,10 @@
 
 
 DatebookPlugin::DatebookPlugin()  {
-    m_widget = 0;
 }
 
 DatebookPlugin::~DatebookPlugin() {
-    delete m_widget;
+    delete (DatebookPluginWidget*)m_widget;
 }
 
 QString DatebookPlugin::pluginName() const {

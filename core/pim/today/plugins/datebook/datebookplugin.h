@@ -18,6 +18,7 @@
 #define DATEBOOK_PLUGIN_H
 
 #include <qstring.h>
+#include <qguardedptr.h>
 #include <qwidget.h>
 
 #include <opie/oclickablelabel.h>
@@ -42,7 +43,7 @@ public:
     void refresh();
 
  private:
-    DatebookPluginWidget *m_widget;
+    QGuardedPtr<DatebookPluginWidget> m_widget;
 };
 
 

@@ -21,11 +21,10 @@
 
 
 TodolistPlugin::TodolistPlugin() {
-    m_widget = 0l;
 }
 
 TodolistPlugin::~TodolistPlugin() {
-    delete m_widget;
+    delete (TodolistPluginWidget*)m_widget;
 }
 
 QString TodolistPlugin::pluginName() const {

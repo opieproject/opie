@@ -18,6 +18,7 @@
 #define TODOLIST_PLUGIN_H
 
 #include <qstring.h>
+#include <qguardedptr.h>
 #include <qwidget.h>
 
 #include <opie/tododb.h>
@@ -43,7 +44,7 @@ public:
     void refresh();
 
  private:
-    TodolistPluginWidget *m_widget;
+    QGuardedPtr<TodolistPluginWidget> m_widget;
 };
 
 #endif
