@@ -1153,12 +1153,23 @@ void PlayListWidget::keyReleaseEvent( QKeyEvent *e)
       case Key_2:
           tabWidget->setCurrentPage(1);
           break;
-      case Key_3:
-          tabWidget->setCurrentPage(2);
-          break;
-      case Key_4:
-          tabWidget->setCurrentPage(3);         
-          break;
+    case Key_3:
+      tabWidget->setCurrentPage(2);
+      break;
+    case Key_4:
+      tabWidget->setCurrentPage(3);         
+      break;
+    case Key_Down:
+      if ( !d->selectedFiles->next() )
+        d->selectedFiles->first();
+
+      break;
+    case Key_Up:
+      if ( !d->selectedFiles->prev() )
+        d->selectedFiles->last();
+
+      break;
+      
     }
 }
 
@@ -1336,14 +1347,12 @@ void PlayListWidget::readPls(const QString &filename) {
 //             name = name.left(name.length()-4);
 //             name = name.right(name.findRev("/",0,TRUE));
                 lnk.setName( name);
-                if(s.at(s.length()-4) == '.')
-                    lnk.setFile( s);
-                else {
-                 if( name.right(1).find('/') == -1)
-                   s+="/";
-                   //                  if(s.right(1) != '/')
-                    lnk.setFile( s);
-
+                if(s.at(s.length()-4) == '.') // if this is probably a file
+                  lnk.setFile( s);
+                else { //if its a url
+                  if( name.right(1).find('/') == -1)
+                    s+="/";
+                  lnk.setFile( s);
                 }
                 lnk.setType("audio/x-mpegurl");
 
