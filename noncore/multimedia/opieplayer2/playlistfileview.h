@@ -26,6 +26,7 @@ private:
     QString m_itemPixmapName;
     DocLnkSet m_files;
     bool m_scannedFiles;
+    bool m_viewPopulated;
 };
 
 #endif // PLAYLISTFILEVIEW_H

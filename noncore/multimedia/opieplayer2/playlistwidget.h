@@ -94,12 +94,9 @@ signals:
 
 private:
     int defaultSkinIndex;
-    bool audioPopulated, videoPopulated;
     void readm3u(const QString &);
     void readPls(const QString &);
     void initializeStates();
-    void populateAudioView();
-    void populateVideoView();
 
     QListView *currentFileListView() const;
 

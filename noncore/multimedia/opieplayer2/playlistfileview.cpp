@@ -6,7 +6,8 @@
 #include <qpe/resource.h>
 
 PlayListFileView::PlayListFileView( const QString &mimeTypePattern, const QString &itemPixmapName, QWidget *parent, const char *name )
-    : PlayListView( parent, name ), m_mimeTypePattern( mimeTypePattern ), m_itemPixmapName( itemPixmapName ), m_scannedFiles( false )
+    : PlayListView( parent, name ), m_mimeTypePattern( mimeTypePattern ), m_itemPixmapName( itemPixmapName ), m_scannedFiles( false ),
+      m_viewPopulated( false )
 {
     addColumn( tr( "Title" ), 140);
     addColumn( tr( "Size" ), -1 );
@@ -32,16 +33,27 @@ void PlayListFileView::scanFiles()
         delete sdit.current();
 
     Global::findDocuments( &m_files, m_mimeTypePattern );
+
+    if ( m_viewPopulated ) {
+        m_viewPopulated = false;
+        populateView();
+    }
 }
 
 void PlayListFileView::populateView()
 {
+    if ( m_viewPopulated )
+        return;
+
     clear();
 
     if( !m_scannedFiles ) {
+        m_viewPopulated = false; // avoid a recursion :)
         scanFiles();
         m_scannedFiles = true;
     }
+
+    m_viewPopulated = true;
 
     QString storage;
     QListIterator<DocLnk> dit( m_files.children() );

@@ -151,8 +151,6 @@ PlayListWidget::PlayListWidget( MediaPlayerState &mediaPlayerState, QWidget* par
               &mediaPlayerState,  SLOT( setVideoGamma( int ) ) );
 
     // see which skins are installed
-    audioPopulated=false;
-    videoPopulated=false;
     populateSkinsMenu();
     initializeStates();
 
@@ -254,7 +252,7 @@ void PlayListWidget::addAllToList() {
 
   if(!audioView->scannedFiles()) {
     if(audioView->childCount() < 1)
-      populateAudioView();
+      audioView->populateView();
   }
 
   QListViewItemIterator audioIt( audioView );
@@ -270,7 +268,7 @@ void PlayListWidget::addAllToList() {
 
   if(!videoView->scannedFiles()) {
     if(videoView->childCount() < 1)
-      populateVideoView();
+      videoView->populateView();
   }
 
   QListViewItemIterator videoIt( videoView );
@@ -314,7 +312,7 @@ void PlayListWidget::addAllMusicToList() {
 
   if(!audioView->scannedFiles()) {
     if(audioView->childCount() < 1)
-      populateAudioView();
+      audioView->populateView();
   }
 
   QListViewItemIterator audioIt( audioView );
@@ -347,7 +345,7 @@ void PlayListWidget::addAllVideoToList() {
 
   if(!videoView->scannedFiles()) {
     if(videoView->childCount() < 1)
-      populateVideoView();
+      videoView->populateView();
   }
 
   QListViewItemIterator videoIt( videoView );
@@ -572,8 +570,7 @@ void PlayListWidget::tabChanged(QWidget *) {
     break;
     case AudioFiles:
     {
-      //        audioView->clear();
-        if(!audioPopulated) populateAudioView();
+        audioView->populateView();
 
         if( !tbDeletePlaylist->isHidden() ) {
             tbDeletePlaylist->hide();
@@ -584,8 +581,7 @@ void PlayListWidget::tabChanged(QWidget *) {
     break;
     case VideoFiles:
     {
-      //        videoView->clear();
-        if(!videoPopulated) populateVideoView();
+        videoView->populateView();
         if( !tbDeletePlaylist->isHidden() ) {
             tbDeletePlaylist->hide();
         }
@@ -636,24 +632,10 @@ void PlayListWidget::playSelected() {
 
 void PlayListWidget::scanForAudio() {
   audioView->scanFiles();
-  audioView->scannedFiles() = true;
-  populateAudioView();
 }
 
 void PlayListWidget::scanForVideo() {
   videoView->scanFiles();
-  videoView->scannedFiles() = true;
-  populateVideoView();  
-}
-
-void PlayListWidget::populateAudioView() {
-    audioView->populateView();
-    audioPopulated = true;
-}
-
-void PlayListWidget::populateVideoView() {
-    videoView->populateView();
-    videoPopulated=true;
 }
 
 QListView *PlayListWidget::currentFileListView() const
