@@ -3,66 +3,66 @@
     <name>HelpWindow</name>
     <message>
         <source>&amp;Open File</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Atvērt Failu</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Aizvērt</translation>
     </message>
     <message>
         <source>&amp;Backward</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Atpakaļ</translation>
     </message>
     <message>
         <source>&amp;Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Uz &amp;Priekšu</translation>
     </message>
     <message>
         <source>&amp;Home</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Mājas</translation>
     </message>
     <message>
         <source>Add Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Pievienot Grāmatzīmi</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Fails</translation>
     </message>
     <message>
         <source>&amp;Go</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Iet</translation>
     </message>
     <message>
         <source>History</source>
-        <translation type="unfinished"></translation>
+        <translation>Vēsture</translation>
     </message>
     <message>
         <source>Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Grāmatzīmes</translation>
     </message>
     <message>
         <source>Backward</source>
-        <translation type="unfinished"></translation>
+        <translation>Atpakaļ</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Uz priekšu</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Māja</translation>
     </message>
 </context>
 <context>
     <name>InputDialog</name>
     <message>
         <source>Symbol Lookup</source>
-        <translation type="unfinished"></translation>
+        <translation>Simbolu Meklēšana</translation>
     </message>
     <message>
         <source>Enter something to lookup / search.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ievadiet ko meklēt.</translation>
     </message>
 </context>
 </TS>
