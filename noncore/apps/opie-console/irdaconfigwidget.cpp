@@ -53,7 +53,7 @@ void IrdaConfigWidget::load( const Profile& prof ) {
         m_base->setFlow( IOLayerBase::Hardware );
     } else if (rad_flow == 2) {
         m_base->setFlow( IOLayerBase::Software );
-    } else if (rad_flow == 0) {
+    } else {
          m_base->setFlow( IOLayerBase::None );
     }
 

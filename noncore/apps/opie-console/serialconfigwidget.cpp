@@ -55,14 +55,15 @@ void SerialConfigWidget::load( const Profile& prof ) {
         m_base->setFlow( IOLayerBase::Hardware );
     } else if (rad_flow == 2) {
         m_base->setFlow( IOLayerBase::Software );
-    } else if (rad_flow == 0) {
+    } else {
          m_base->setFlow( IOLayerBase::None );
     }
 
-    if (rad_parity == 1)
+    if (rad_parity == 1) {
         m_base->setParity( IOLayerBase::Even );
-    else
+    } else {
         m_base->setParity( IOLayerBase::Odd );
+    }
 
     switch( speed ) {
     case 115200:
