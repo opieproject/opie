@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/applications
 Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
-Depends: task-opie-minimal
+Depends: task-opie-minimal,libopiecore2, libopieui2
 Description: Image Viewer
  The image viewer for the Opie environment. Supports
  all graphics formats are compiled into Qt/Embedded (eg. PNG).

@@ -27,18 +27,19 @@
 #include "settingsdialog.h"
 
 
-#include <opie/ofiledialog.h>
+#include <opie2/ofiledialog.h>
 
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
 #include <qpe/resource.h>
-#include <math.h>
-#include <qmenubar.h>
 #include <qpe/qpetoolbar.h>
+
 #include <qaction.h>
 #include <qfiledialog.h>
+#include <qmenubar.h>
 #include <qspinbox.h>
 
+#include <math.h>
 
 
 ControlsDialog::ControlsDialog(const QString &caption,QImage image,int *brightness,QWidget *parent)
@@ -198,7 +199,7 @@ void ImageWidget::mouseReleaseEvent(QMouseEvent *)
 
 //===========================================================================
 
-ImageViewer::ImageViewer( QWidget *parent, const char *name, int wFlags )
+ImageViewer::ImageViewer( QWidget *parent, const char *name, int /*wFlags*/ )
 : QMainWindow( parent, name, WResizeNoErase ), filename( 0 ),  bFromDocView( FALSE )
 {
     setCaption( tr("Image Viewer") );
@@ -522,7 +523,7 @@ void ImageViewer::openFile() {
     image << "image/*";
     types.insert("Images",  image);
 
-    QString str = OFileDialog::getOpenFileName( 1,QPEApplication::documentDir(),"", types, 0 );
+    QString str = Opie::OFileDialog::getOpenFileName( 1,QPEApplication::documentDir(),"", types, 0 );
     DocLnk link(str);
 //    if ( link.isValid() )
         openFile(link);

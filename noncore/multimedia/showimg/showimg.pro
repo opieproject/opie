@@ -4,6 +4,6 @@ SOURCES   = main.cpp showimg.cpp ImageFileSelector.cpp settingsdialog.cpp settin
 TARGET          = showimg
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
-LIBS            += -lqpe -lopie
+LIBS            += -lqpe -lopiecore2 -l opieui2
 
 include ( $(OPIEDIR)/include.pro )
