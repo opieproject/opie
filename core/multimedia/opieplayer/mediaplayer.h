@@ -24,7 +24,7 @@
 #include <qmainwindow.h>
 #include <qframe.h>
 #include <qpe/qlibrary.h>
-#include <qpe/mediaplayerplugininterface.h>
+#include "mediaplayerplugininterface.h"
 
 
 class DocLnk;

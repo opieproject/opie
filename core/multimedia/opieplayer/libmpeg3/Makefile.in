@@ -176,7 +176,8 @@ libmpeg3plugin.o: libmpeg3plugin.cpp \
 		audio/mpeg3audio.h \
 		mpeg3vtrack.h \
 		video/mpeg3video.h \
-		mpeg3protos.h
+		mpeg3protos.h \
+		../mediaplayerplugininterface.h
 
 libmpeg3pluginimpl.o: libmpeg3pluginimpl.cpp \
 		libmpeg3plugin.h \
@@ -192,6 +193,7 @@ libmpeg3pluginimpl.o: libmpeg3pluginimpl.cpp \
 		mpeg3vtrack.h \
 		video/mpeg3video.h \
 		mpeg3protos.h \
+		../mediaplayerplugininterface.h \
 		libmpeg3pluginimpl.h
 
 bitstream.o: bitstream.c \
@@ -414,7 +416,7 @@ audio/layer2.o: audio/layer2.c \
 		audio/tables.h
 
 audio/layer3.o: audio/layer3.c \
-		audio/huffman.h \
+		huffman.h \
 		audio/mpeg3audio.h \
 		audio/ac3.h \
 		audio/mpeg3real.h \

@@ -17,11 +17,15 @@
 ** not clear to you.
 **
 **********************************************************************/
+// L.J.Potter added changes Fri 02-15-2002
+
+
 #ifndef AUDIODEVICE_H
 #define AUDIODEVICE_H
 
 
 #include <qobject.h>
+#include <sys/soundcard.h>
 
 
 class AudioDevicePrivate;
@@ -30,7 +34,7 @@ class AudioDevicePrivate;
 class AudioDevice : public QObject {
     Q_OBJECT
 public:
-    AudioDevice( unsigned int freq = 44000, unsigned int channels = 2, unsigned int bytesPerSample = 2 );
+    AudioDevice( unsigned int freq = 44000, unsigned int channels = 2, unsigned int bytesPerSample = AFMT_S16_LE );
     ~AudioDevice();
 
     unsigned int canWrite() const;

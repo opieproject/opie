@@ -136,6 +136,8 @@ REQUIRES=
 
 main.o: main.cpp \
 		$(OPIEDIR)/include/qpe/qpeapplication.h \
+		$(OPIEDIR)/include/qpedecoration_qws.h \
+		$(OPIEDIR)/include/timestring.h \
 		mediaplayerstate.h \
 		playlistwidget.h \
 		$(OPIEDIR)/include/qpe/applnk.h \
@@ -146,11 +148,12 @@ main.o: main.cpp \
 		$(OPIEDIR)/include/qpe/qlibrary.h \
 		$(OPIEDIR)/include/qpe/qcom.h \
 		$(OPIEDIR)/include/qpe/quuid.h \
-		$(OPIEDIR)/include/qpe/mediaplayerplugininterface.h
+		mediaplayerplugininterface.h
 
 loopcontrol.o: loopcontrol.cpp \
 		$(OPIEDIR)/include/qpe/qpeapplication.h \
-		$(OPIEDIR)/include/qpe/qcopenvelope_qws.h \
+		$(OPIEDIR)/include/qpedecoration_qws.h \
+		$(OPIEDIR)/include/timestring.h \
 		loopcontrol.h \
 		videowidget.h \
 		audiodevice.h \
@@ -166,11 +169,13 @@ playlistselection.o: playlistselection.cpp \
 
 mediaplayerstate.o: mediaplayerstate.cpp \
 		$(OPIEDIR)/include/qpe/qpeapplication.h \
+		$(OPIEDIR)/include/qpedecoration_qws.h \
+		$(OPIEDIR)/include/timestring.h \
 		$(OPIEDIR)/include/qpe/qlibrary.h \
 		$(OPIEDIR)/include/qpe/qcom.h \
 		$(OPIEDIR)/include/qpe/quuid.h \
-		$(OPIEDIR)/include/qpe/mediaplayerplugininterface.h \
 		$(OPIEDIR)/include/qpe/config.h \
+		mediaplayerplugininterface.h \
 		mediaplayerstate.h \
 		libmad/libmadpluginimpl.h \
 		libmpeg3/libmpeg3pluginimpl.h \
@@ -178,7 +183,7 @@ mediaplayerstate.o: mediaplayerstate.cpp \
 
 videowidget.o: videowidget.cpp \
 		$(OPIEDIR)/include/qpe/resource.h \
-		$(OPIEDIR)/include/qpe/mediaplayerplugininterface.h \
+		mediaplayerplugininterface.h \
 		$(OPIEDIR)/include/qpe/qcom.h \
 		$(OPIEDIR)/include/qpe/quuid.h \
 		videowidget.h \
@@ -193,6 +198,11 @@ playlistwidget.o: playlistwidget.cpp \
 		$(OPIEDIR)/include/qpe/qpemenubar.h \
 		$(OPIEDIR)/include/qpe/qpetoolbar.h \
 		$(OPIEDIR)/include/qpe/fileselector.h \
+		$(OPIEDIR)/include/filemanager.h \
+		$(OPIEDIR)/include/applnk.h \
+		$(OPIEDIR)/include/qpe/qpeapplication.h \
+		$(OPIEDIR)/include/qpedecoration_qws.h \
+		$(OPIEDIR)/include/timestring.h \
 		$(OPIEDIR)/include/qpe/applnk.h \
 		$(OPIEDIR)/include/qpe/config.h \
 		$(OPIEDIR)/include/qpe/global.h \
@@ -203,13 +213,15 @@ playlistwidget.o: playlistwidget.cpp \
 
 mediaplayer.o: mediaplayer.cpp \
 		$(OPIEDIR)/include/qpe/qpeapplication.h \
+		$(OPIEDIR)/include/qpedecoration_qws.h \
+		$(OPIEDIR)/include/timestring.h \
 		$(OPIEDIR)/include/qpe/qlibrary.h \
 		$(OPIEDIR)/include/qpe/qcom.h \
 		$(OPIEDIR)/include/qpe/quuid.h \
 		$(OPIEDIR)/include/qpe/resource.h \
 		$(OPIEDIR)/include/qpe/config.h \
 		mediaplayer.h \
-		$(OPIEDIR)/include/qpe/mediaplayerplugininterface.h \
+		mediaplayerplugininterface.h \
 		playlistwidget.h \
 		$(OPIEDIR)/include/qpe/applnk.h \
 		audiowidget.h \
@@ -219,9 +231,10 @@ mediaplayer.o: mediaplayer.cpp \
 
 audiodevice.o: audiodevice.cpp \
 		$(OPIEDIR)/include/qpe/qpeapplication.h \
+		$(OPIEDIR)/include/qpedecoration_qws.h \
+		$(OPIEDIR)/include/timestring.h \
 		$(OPIEDIR)/include/qpe/config.h \
-		audiodevice.h \
-		$(OPIEDIR)/include/qpe/qcopenvelope_qws.h
+		audiodevice.h
 
 moc_loopcontrol.o: moc_loopcontrol.cpp \
 		loopcontrol.h
@@ -248,7 +261,7 @@ moc_mediaplayer.o: moc_mediaplayer.cpp \
 		$(OPIEDIR)/include/qpe/qlibrary.h \
 		$(OPIEDIR)/include/qpe/qcom.h \
 		$(OPIEDIR)/include/qpe/quuid.h \
-		$(OPIEDIR)/include/qpe/mediaplayerplugininterface.h
+		mediaplayerplugininterface.h
 
 moc_audiodevice.o: moc_audiodevice.cpp \
 		audiodevice.h

@@ -17,7 +17,10 @@
 ** not clear to you.
 **
 **********************************************************************/
+// L.J.Potter added changes Fri 02-15-2002
+
 #include <qpe/qpeapplication.h>
+
 #ifdef Q_WS_QWS
 #include <qpe/qcopenvelope_qws.h>
 #endif
@@ -42,13 +45,13 @@ extern MediaPlayerState *mediaPlayerState;
 #define DecodeLoopDebug(x)
 
 
-static char	    *audioBuffer = NULL;
+static char     *audioBuffer = NULL;
 static AudioDevice  *audioDevice = NULL;
-static bool	    disabledSuspendScreenSaver = FALSE;
-static bool	    previousSuspendMode = FALSE;
+static bool     disabledSuspendScreenSaver = FALSE;
+static bool     previousSuspendMode = FALSE;
 
 
-pthread_t	audio_tid;
+pthread_t audio_tid;
 pthread_attr_t  audio_attr;
 bool threadOkToGo = FALSE;
 
@@ -56,22 +59,22 @@ bool threadOkToGo = FALSE;
 class Mutex {
 public:
     Mutex() {
-	pthread_mutexattr_t attr;
-	pthread_mutexattr_init( &attr );
-	pthread_mutex_init( &mutex, &attr );
-	pthread_mutexattr_destroy( &attr );
+  pthread_mutexattr_t attr;
+  pthread_mutexattr_init( &attr );
+  pthread_mutex_init( &mutex, &attr );
+  pthread_mutexattr_destroy( &attr );
     }
 
     ~Mutex() {
-	pthread_mutex_destroy( &mutex );
+  pthread_mutex_destroy( &mutex );
     }
 
     void lock() {
-	pthread_mutex_lock( &mutex );
+  pthread_mutex_lock( &mutex );
     }
 
     void unlock() {
-	pthread_mutex_unlock( &mutex );
+  pthread_mutex_unlock( &mutex );
     }
 private:
     pthread_mutex_t mutex;
@@ -81,10 +84,10 @@ private:
 void *startAudioThread( void *ptr ) {
     LoopControl *mpegView = (LoopControl *)ptr;
     while ( TRUE ) {
-	if ( threadOkToGo && mpegView->moreAudio )
-	    mpegView->startAudio();
-	else
-	    usleep( 10000 ); // Semi-buzy-wait till we are playing again
+  if ( threadOkToGo && mpegView->moreAudio )
+      mpegView->startAudio();
+  else
+      usleep( 10000 ); // Semi-buzy-wait till we are playing again
     }
     return 0;
 }
@@ -105,13 +108,13 @@ LoopControl::LoopControl( QObject *parent, const char *name )
 #ifdef USE_REALTIME_AUDIO_THREAD
     // Attempt to set it to real-time round robin
     if ( pthread_attr_setschedpolicy( &audio_attr, SCHED_RR ) == 0 ) {
-	sched_param params;
-	params.sched_priority = 50;
-	pthread_attr_setschedparam(&audio_attr,&params);
+  sched_param params;
+  params.sched_priority = 50;
+  pthread_attr_setschedparam(&audio_attr,&params);
     } else {
-	qDebug( "Error setting up a realtime thread, reverting to using a normal thread." );
-	pthread_attr_destroy(&audio_attr);
-	pthread_attr_init(&audio_attr);
+  qDebug( "Error setting up a realtime thread, reverting to using a normal thread." );
+  pthread_attr_destroy(&audio_attr);
+  pthread_attr_init(&audio_attr);
     }
 #endif
     pthread_create(&audio_tid, &audio_attr, (void * (*)(void *))startAudioThread, this);
@@ -130,14 +133,14 @@ static int currentSample = 0;
 void LoopControl::timerEvent( QTimerEvent *te ) {
 
     if ( te->timerId() == videoId )
-	startVideo();
+  startVideo();
 
     if ( te->timerId() == sliderId ) {
-	if ( hasAudioChannel && !hasVideoChannel && moreAudio ) {
-	    mediaPlayerState->updatePosition( audioSampleCounter );
-	} else if ( hasVideoChannel && moreVideo ) {
-	    mediaPlayerState->updatePosition( current_frame );
-	}
+  if ( hasAudioChannel && !hasVideoChannel && moreAudio ) {
+      mediaPlayerState->updatePosition( audioSampleCounter );
+  } else if ( hasVideoChannel && moreVideo ) {
+      mediaPlayerState->updatePosition( current_frame );
+  }
     }
 
     if ( !moreVideo && !moreAudio ) { 
@@ -151,26 +154,26 @@ void LoopControl::setPosition( long pos ) {
     audioMutex->lock();
 
     if ( hasVideoChannel && hasAudioChannel ) {
-	playtime.restart();
-	playtime = playtime.addMSecs( long((double)-pos * 1000.0 / framerate) );
-	current_frame = pos + 1;
-	mediaPlayerState->curDecoder()->videoSetFrame( current_frame, stream );
-	prev_frame = current_frame - 1;
-	currentSample = (int)( (double)current_frame * freq / framerate );
-	mediaPlayerState->curDecoder()->audioSetSample( currentSample, stream );
-	audioSampleCounter = currentSample - 1;
+  playtime.restart();
+  playtime = playtime.addMSecs( long((double)-pos * 1000.0 / framerate) );
+  current_frame = pos + 1;
+  mediaPlayerState->curDecoder()->videoSetFrame( current_frame, stream );
+  prev_frame = current_frame - 1;
+  currentSample = (int)( (double)current_frame * freq / framerate );
+  mediaPlayerState->curDecoder()->audioSetSample( currentSample, stream );
+  audioSampleCounter = currentSample - 1;
     } else if ( hasVideoChannel ) {
-	playtime.restart();
-	playtime = playtime.addMSecs( long((double)-pos * 1000.0 / framerate) );
-	current_frame = pos + 1;
-	mediaPlayerState->curDecoder()->videoSetFrame( current_frame, stream );
-	prev_frame = current_frame - 1;
+  playtime.restart();
+  playtime = playtime.addMSecs( long((double)-pos * 1000.0 / framerate) );
+  current_frame = pos + 1;
+  mediaPlayerState->curDecoder()->videoSetFrame( current_frame, stream );
+  prev_frame = current_frame - 1;
     } else if ( hasAudioChannel ) {
-	playtime.restart();
-	playtime = playtime.addMSecs( long((double)-pos * 1000.0 / freq) );
-	currentSample = pos + 1;
-	mediaPlayerState->curDecoder()->audioSetSample( currentSample, stream );
-	audioSampleCounter = currentSample - 1;
+  playtime.restart();
+  playtime = playtime.addMSecs( long((double)-pos * 1000.0 / freq) );
+  currentSample = pos + 1;
+  mediaPlayerState->curDecoder()->audioSetSample( currentSample, stream );
+  audioSampleCounter = currentSample - 1;
     }
 
     audioMutex->unlock();
@@ -183,32 +186,32 @@ void LoopControl::startVideo() {
 
         if ( mediaPlayerState->curDecoder() ) {
 
-	    if ( hasAudioChannel && !isMuted ) {
+      if ( hasAudioChannel && !isMuted ) {
 
-		current_frame = long( playtime.elapsed() * framerate / 1000 );
+    current_frame = long( playtime.elapsed() * framerate / 1000 );
 
-		if ( prev_frame != -1 && current_frame <= prev_frame )
-		    return;
+    if ( prev_frame != -1 && current_frame <= prev_frame )
+        return;
 
-	    } else {
-		// Don't skip
-		current_frame++;
-	    }
+      } else {
+    // Don't skip
+    current_frame++;
+      }
 
-	    if ( prev_frame == -1 || current_frame > prev_frame ) {
-		if ( current_frame > prev_frame + 1 ) {
-		    mediaPlayerState->curDecoder()->videoSetFrame( current_frame, stream );
-		}
-		moreVideo = videoUI->playVideo();
-		prev_frame = current_frame;
-	    }
+      if ( prev_frame == -1 || current_frame > prev_frame ) {
+    if ( current_frame > prev_frame + 1 ) {
+        mediaPlayerState->curDecoder()->videoSetFrame( current_frame, stream );
+    }
+    moreVideo = videoUI->playVideo();
+    prev_frame = current_frame;
+      }
 
-	} else {
+  } else {
 
-	    moreVideo = FALSE;
-	    killTimer( videoId );
+      moreVideo = FALSE;
+      killTimer( videoId );
 
-	}
+  }
 
     }
 }
@@ -220,36 +223,37 @@ void LoopControl::startAudio() {
 
     if ( moreAudio ) {
 
-	if ( !isMuted && mediaPlayerState->curDecoder() ) {
+  if ( !isMuted && mediaPlayerState->curDecoder() ) {
 
-	    currentSample = audioSampleCounter + 1;
+      currentSample = audioSampleCounter + 1;
 
-	    if ( currentSample != audioSampleCounter + 1 )
-		qDebug("out of sync with decoder %i %i", currentSample, audioSampleCounter);
+      if ( currentSample != audioSampleCounter + 1 )
+    qDebug("out of sync with decoder %i %i", currentSample, audioSampleCounter);
 
-	    long samplesRead = 0;
-	    bool readOk=mediaPlayerState->curDecoder()->audioReadSamples( (short*)audioBuffer, channels, 1024, samplesRead, stream );
-	    long sampleWeShouldBeAt = long( playtime.elapsed() ) * freq / 1000;
-	    long sampleWaitTime = currentSample - sampleWeShouldBeAt;
+      long samplesRead = 0;
+      bool readOk=mediaPlayerState->curDecoder()->audioReadSamples( (short*)audioBuffer, channels, 1024, samplesRead, stream );
+      long sampleWeShouldBeAt = long( playtime.elapsed() ) * freq / 1000;
+      long sampleWaitTime = currentSample - sampleWeShouldBeAt;
 
-	    if ( ( sampleWaitTime > 2000 ) && ( sampleWaitTime < 20000 ) ) {
-		usleep( (long)((double)sampleWaitTime * 1000000.0 / freq) );
-	    } else if ( sampleWaitTime <= -5000 ) {
-		qDebug("need to catch up by: %li (%i,%li)", -sampleWaitTime, currentSample, sampleWeShouldBeAt );
-		//mediaPlayerState->curDecoder()->audioSetSample( sampleWeShouldBeAt, stream );
-		currentSample = sampleWeShouldBeAt;
-	    }
+//        if ( ( sampleWaitTime > 2000 ) && ( sampleWaitTime < 5000 ) ) {
+//      usleep( (long)((double)sampleWaitTime * 1000000.0 / freq) );
+//        }
+//      else if ( sampleWaitTime <= -5000 ) {
+//     qDebug("need to catch up by: %li (%i,%li)", -sampleWaitTime, currentSample, sampleWeShouldBeAt );
+//     //mediaPlayerState->curDecoder()->audioSetSample( sampleWeShouldBeAt, stream );
+//     currentSample = sampleWeShouldBeAt;
+//       }
 
-	    audioDevice->write( audioBuffer, samplesRead * 2 * channels );
-	    audioSampleCounter = currentSample + samplesRead - 1;
+      audioDevice->write( audioBuffer, samplesRead * 2 * channels );
+      audioSampleCounter = currentSample + samplesRead - 1;
 
-	    moreAudio = readOk && (audioSampleCounter <= total_audio_samples);
+      moreAudio = readOk && (audioSampleCounter <= total_audio_samples);
 
-	} else {
+  } else {
 
-	    moreAudio = FALSE;
+      moreAudio = FALSE;
 
-	}
+  }
 
     }
 
@@ -262,7 +266,7 @@ void LoopControl::killTimers() {
     audioMutex->lock();
 
     if ( hasVideoChannel ) 
-	killTimer( videoId );
+  killTimer( videoId );
     killTimer( sliderId );
     threadOkToGo = FALSE;
 
@@ -278,14 +282,14 @@ void LoopControl::startTimers() {
     moreAudio = FALSE;
 
     if ( hasVideoChannel ) {
-	moreVideo = TRUE;
-	int mSecsBetweenFrames = (int)(100 / framerate); // 10% of the real value
-	videoId = startTimer( mSecsBetweenFrames );
+  moreVideo = TRUE;
+  int mSecsBetweenFrames = (int)(100 / framerate); // 10% of the real value
+  videoId = startTimer( mSecsBetweenFrames );
     }
 
     if ( hasAudioChannel ) {
-	moreAudio = TRUE;
-	threadOkToGo = TRUE;
+  moreAudio = TRUE;
+  threadOkToGo = TRUE;
     }
 
     sliderId = startTimer( 300 ); // update slider every 1/3 second
@@ -297,16 +301,16 @@ void LoopControl::startTimers() {
 void LoopControl::setPaused( bool pause ) {
 
     if ( !mediaPlayerState->curDecoder() || !mediaPlayerState->curDecoder()->isOpen() )
-	return;
+  return;
 
     if ( pause ) {
-	killTimers();
+  killTimers();
     } else {
-	// Force an update of the position
-	mediaPlayerState->setPosition( mediaPlayerState->position() + 1 );
-	mediaPlayerState->setPosition( mediaPlayerState->position() - 1 );
-	// Just like we never stopped
-	startTimers();
+  // Force an update of the position
+  mediaPlayerState->setPosition( mediaPlayerState->position() + 1 );
+  mediaPlayerState->setPosition( mediaPlayerState->position() - 1 );
+  // Just like we never stopped
+  startTimers();
     }
 }
 
@@ -315,28 +319,28 @@ void LoopControl::stop( bool willPlayAgainShortly ) {
 
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)
     if ( !willPlayAgainShortly && disabledSuspendScreenSaver ) {
-	disabledSuspendScreenSaver = FALSE; 
-	// Re-enable the suspend mode
-	QCopEnvelope("QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::Enable;
+  disabledSuspendScreenSaver = FALSE; 
+  // Re-enable the suspend mode
+  QCopEnvelope("QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::Enable;
     }
 #endif
 
     if ( mediaPlayerState->curDecoder() && mediaPlayerState->curDecoder()->isOpen() ) {
 
-	killTimers();
+  killTimers();
 
-	audioMutex->lock();
+  audioMutex->lock();
 
-	mediaPlayerState->curDecoder()->close();
+  mediaPlayerState->curDecoder()->close();
 
-	if ( audioDevice ) {
-	    delete audioDevice;
-	    delete audioBuffer;
-	    audioDevice = 0;
-	    audioBuffer = 0;
-	}
+  if ( audioDevice ) {
+      delete audioDevice;
+      delete audioBuffer;
+      audioDevice = 0;
+      audioBuffer = 0;
+  }
 
-	audioMutex->unlock();
+  audioMutex->unlock();
 
     }
 }
@@ -355,67 +359,67 @@ bool LoopControl::init( const QString& filename ) {
    
     // ### Hack to use libmpeg3plugin to get the number of audio samples if we are using the libmad plugin
     if ( mediaPlayerState->curDecoder()->pluginName() == QString("LibMadPlugin") ) {
-	if ( mediaPlayerState->libMpeg3Decoder() && mediaPlayerState->libMpeg3Decoder()->open( filename ) ) {
-	    total_audio_samples = mediaPlayerState->libMpeg3Decoder()->audioSamples( 0 );
-	    mediaPlayerState->libMpeg3Decoder()->close();
-	}
+  if ( mediaPlayerState->libMpeg3Decoder() && mediaPlayerState->libMpeg3Decoder()->open( filename ) ) {
+      total_audio_samples = mediaPlayerState->libMpeg3Decoder()->audioSamples( 0 );
+      mediaPlayerState->libMpeg3Decoder()->close();
+  }
     }
-
+    
     if ( !mediaPlayerState->curDecoder()|| !mediaPlayerState->curDecoder()->open( filename ) ) {
-	audioMutex->unlock();
-	return FALSE;
+  audioMutex->unlock();
+  return FALSE;
     }
 
     hasAudioChannel = mediaPlayerState->curDecoder()->audioStreams() > 0;
     hasVideoChannel = mediaPlayerState->curDecoder()->videoStreams() > 0;
 
     if ( hasAudioChannel ) {
-	int astream = 0;
+  int astream = 0;
 
-	channels = mediaPlayerState->curDecoder()->audioChannels( astream );
-	DecodeLoopDebug(( "channels = %d\n", channels ));
-	
-	if ( !total_audio_samples )
-	    total_audio_samples = mediaPlayerState->curDecoder()->audioSamples( astream );
+  channels = mediaPlayerState->curDecoder()->audioChannels( astream );
+  qDebug( "LC- channels = %d", channels );
+  
+  if ( !total_audio_samples )
+      total_audio_samples = mediaPlayerState->curDecoder()->audioSamples( astream );
 
-	total_audio_samples += 1000;
+//  total_audio_samples += 1000;
 
-	mediaPlayerState->setLength( total_audio_samples );
-	
-	freq = mediaPlayerState->curDecoder()->audioFrequency( astream );
-	DecodeLoopDebug(( "frequency = %d\n", freq ));
+  mediaPlayerState->setLength( total_audio_samples );
+  
+  freq = mediaPlayerState->curDecoder()->audioFrequency( astream );
+  qDebug( "LC- frequency = %d", freq );
 
-	audioSampleCounter = 0;
+  audioSampleCounter = 0;
 
-	static const int bytes_per_sample = 2; //16 bit
+   int bits_per_sample = mediaPlayerState->curDecoder()->audioBitsPerSample( astream);
 
-	audioDevice = new AudioDevice( freq, channels, bytes_per_sample );
-	audioBuffer = new char[ audioDevice->bufferSize() ];
-	channels = audioDevice->channels();
+  audioDevice = new AudioDevice( freq, channels, bits_per_sample);
+  audioBuffer = new char[ audioDevice->bufferSize() ];
+  channels = audioDevice->channels();
 
-	//### must check which frequency is actually used.
-	static const int size = 1;
-	short int buf[size];
-	long samplesRead = 0;
-	mediaPlayerState->curDecoder()->audioReadSamples( buf, channels, size, samplesRead, stream );
+  //### must check which frequency is actually used.
+  static const int size = 1;
+  short int buf[size];
+  long samplesRead = 0;
+  mediaPlayerState->curDecoder()->audioReadSamples( buf, channels, size, samplesRead, stream );
     }
 
     if ( hasVideoChannel ) {
-	total_video_frames = mediaPlayerState->curDecoder()->videoFrames( stream );
+  total_video_frames = mediaPlayerState->curDecoder()->videoFrames( stream );
 
-	mediaPlayerState->setLength( total_video_frames );
+  mediaPlayerState->setLength( total_video_frames );
 
-	framerate = mediaPlayerState->curDecoder()->videoFrameRate( stream );
-	DecodeLoopDebug(( "Frame rate %g total %ld", framerate, total_video_frames ));
+  framerate = mediaPlayerState->curDecoder()->videoFrameRate( stream );
+  DecodeLoopDebug(( "Frame rate %g total %ld", framerate, total_video_frames ));
 
-	if ( framerate <= 1.0 ) {
-	    DecodeLoopDebug(( "Crazy frame rate, resetting to sensible" ));
-	    framerate = 25;
-	}
+  if ( framerate <= 1.0 ) {
+      DecodeLoopDebug(( "Crazy frame rate, resetting to sensible" ));
+      framerate = 25;
+  }
 
-	if ( total_video_frames == 1 ) {
-	    DecodeLoopDebug(( "Cannot seek to frame" ));
-	}
+  if ( total_video_frames == 1 ) {
+      DecodeLoopDebug(( "Cannot seek to frame" ));
+  }
 
     }
 
@@ -435,11 +439,11 @@ void LoopControl::play() {
 
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)
     if ( !disabledSuspendScreenSaver || previousSuspendMode != hasVideoChannel ) {
-	disabledSuspendScreenSaver = TRUE; 
-	previousSuspendMode = hasVideoChannel;
+  disabledSuspendScreenSaver = TRUE; 
+  previousSuspendMode = hasVideoChannel;
         // Stop the screen from blanking and power saving state
-	QCopEnvelope("QPE/System", "setScreenSaverMode(int)" ) 
-	    << ( hasVideoChannel ? QPEApplication::Disable : QPEApplication::DisableSuspend );
+  QCopEnvelope("QPE/System", "setScreenSaverMode(int)" ) 
+      << ( hasVideoChannel ? QPEApplication::Disable : QPEApplication::DisableSuspend );
     }
 #endif
 
@@ -450,14 +454,14 @@ void LoopControl::play() {
 
 void LoopControl::setMute( bool on ) {
     if ( on != isMuted ) {
-	isMuted = on;
-	if ( !on ) {
-	    // Force an update of the position
-	    mediaPlayerState->setPosition( mediaPlayerState->position() + 1 );
-	    mediaPlayerState->setPosition( mediaPlayerState->position() - 1 );
-	    // Resume playing audio
-	    moreAudio = TRUE;
-	}
+  isMuted = on;
+  if ( !on ) {
+      // Force an update of the position
+      mediaPlayerState->setPosition( mediaPlayerState->position() + 1 );
+      mediaPlayerState->setPosition( mediaPlayerState->position() - 1 );
+      // Resume playing audio
+      moreAudio = TRUE;
+  }
     }
 }
 
