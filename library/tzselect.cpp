@@ -46,23 +46,23 @@ TZCombo::TZCombo( QWidget *p, const char* n )
     // check to see if TZ is set, if it is set the current item to that
     QString tz = getenv("TZ");
     if (parent()->inherits("TimeZoneSelector")) {
-	if ( ((TimeZoneSelector *)parent())->localIncluded() ) {
-	    // overide to the 'local' type.
-	    tz = "None";
-	}
+  if ( ((TimeZoneSelector *)parent())->localIncluded() ) {
+      // overide to the 'local' type.
+      tz = "None";
+  }
     }
     if ( !tz.isNull() ) {
-	int n = 0,
+  int n = 0,
             index = 0;
         for ( QStringList::Iterator it=identifiers.begin();
-	      it!=identifiers.end(); ++it) {
-	    if ( *it == tz )
-		index = n;
-	    n++;
-	}
-	setCurrentItem(index);
+        it!=identifiers.end(); ++it) {
+      if ( *it == tz )
+    index = n;
+      n++;
+  }
+  setCurrentItem(index);
     } else {
-	setCurrentItem(0);
+  setCurrentItem(0);
     }
 
 
@@ -72,7 +72,7 @@ TZCombo::TZCombo( QWidget *p, const char* n )
 #if !defined(QT_NO_COP)
     QCopChannel *channel = new QCopChannel( "QPE/System", this );
     connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
-	this, SLOT(handleSystemChannel(const QCString&, const QByteArray&)) );
+  this, SLOT(handleSystemChannel(const QCString&, const QByteArray&)) );
 #endif
 #endif
 
@@ -95,59 +95,59 @@ void TZCombo::updateZones()
     cfg.setGroup("TimeZones");
     int listIndex = 0;
     if (parent()->inherits("TimeZoneSelector")) {
-	if ( ((TimeZoneSelector *)parent())->localIncluded() ) {
-	    // overide to the 'local' type.
-	    identifiers.append( "None" );
-	    insertItem( tr("None") );
-	    if ( cur == tr("None"))
-		curix = 0;
-	    listIndex++;
-	}
+  if ( ((TimeZoneSelector *)parent())->localIncluded() ) {
+      // overide to the 'local' type.
+      identifiers.append( "None" );
+      insertItem( tr("None") );
+      if ( cur == tr("None"))
+    curix = 0;
+      listIndex++;
+  }
     }
     int cfgIndex = 0;
     while (1) {
-	QString zn = cfg.readEntry("Zone"+QString::number(cfgIndex), QString::null);
-	if ( zn.isNull() )
-	    break;
-	if ( zn == tz )
-	    tzFound = TRUE;
-	QString nm = cfg.readEntry("ZoneName"+QString::number(cfgIndex));
-	identifiers.append(zn);
-	insertItem(nm);
-	if ( nm == cur )
-	    curix = listIndex;
-	++cfgIndex;
-	++listIndex;
+  QString zn = cfg.readEntry("Zone"+QString::number(cfgIndex), QString::null);
+  if ( zn.isNull() )
+      break;
+  if ( zn == tz )
+      tzFound = TRUE;
+  QString nm = cfg.readEntry("ZoneName"+QString::number(cfgIndex));
+  identifiers.append(zn);
+  insertItem(nm);
+  if ( nm == cur )
+      curix = listIndex;
+  ++cfgIndex;
+  ++listIndex;
     }
     if ( !listIndex ) {
         QStringList list = timezoneDefaults();
         for ( QStringList::Iterator it = list.begin(); it!=list.end(); ++it ) {
-	    QString zn = *it;
-	    QString nm = *++it;
-	    if ( zn == tz )
-		tzFound = TRUE;
-	    if ( nm == cur )
-		curix = listIndex;
+      QString zn = *it;
+      QString nm = *++it;
+      if ( zn == tz )
+    tzFound = TRUE;
+      if ( nm == cur )
+    curix = listIndex;
             identifiers.append(zn);
             insertItem(nm);
-	    ++listIndex;
+      ++listIndex;
         }
     }
     for (QStringList::Iterator it=extras.begin(); it!=extras.end(); ++it) {
-	insertItem(*it);
-	identifiers.append(*it);
-	if ( *it == cur )
-	    curix = listIndex;
-	++listIndex;
+  insertItem(*it);
+  identifiers.append(*it);
+  if ( *it == cur )
+      curix = listIndex;
+  ++listIndex;
     }
     if ( !tzFound && !tz.isEmpty()) {
-	int i =  tz.find( '/' );
-	QString nm = tz.mid( i+1 ).replace(QRegExp("_"), " ");
-	identifiers.append(tz);
-	insertItem(nm);
-	if ( nm == cur )
-	    curix = listIndex;
-	++listIndex;
+  int i =  tz.find( '/' );
+  QString nm = tz.mid( i+1 ).replace(QRegExp("_"), " ");
+  identifiers.append(tz);
+  insertItem(nm);
+  if ( nm == cur )
+      curix = listIndex;
+  ++listIndex;
     }
     setCurrentItem(curix);
 }
@@ -175,10 +175,10 @@ QString TZCombo::currZone() const
 void TZCombo::setCurrZone( const QString& id )
 {
     for (int i=0; i< count(); i++) {
-	if ( identifiers[i] == id ) {
-	    setCurrentItem(i);
-	    return;
-	}
+  if ( identifiers[i] == id ) {
+      setCurrentItem(i);
+      return;
+}
     }
     insertItem(id);
     setCurrentItem( count() - 1);
@@ -191,7 +191,7 @@ void TZCombo::setCurrZone( const QString& id )
 void TZCombo::handleSystemChannel(const QCString&msg, const QByteArray&)
 {
     if ( msg == "timeZoneListChange()" ) {
-	updateZones();
+  updateZones();
     }
 }
 
@@ -249,7 +249,7 @@ void TimeZoneSelector::slotTzActive( int )
 void TimeZoneSelector::slotExecute( void )
 {
     // execute the world time application...
-    Global::execute( "worldtime" );
+    Global::execute( "citytime" );
 }
 
 QStringList timezoneDefaults( void )
@@ -262,12 +262,13 @@ QStringList timezoneDefaults( void )
     tzs.append( "Los Angeles" );
     tzs.append( "Australia/Brisbane" );
     tzs.append( "Brisbane" );
-    tzs.append( "Europe/Oslo" );
-    tzs.append( "Oslo" );
+    tzs.append( "Europe/Berlin" );
+    tzs.append( "Berlin" );
     tzs.append( "Asia/Tokyo" );
     tzs.append( "Tokyo" );
-    tzs.append( "Asia/Hong_Kong" );
-    tzs.append( "Hong Kong" );
+    tzs.append( "America/Denver" );
+    tzs.append( "Denver" );
+    
     return tzs;
 }
 
