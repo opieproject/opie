@@ -1210,15 +1210,16 @@ void OThemeStyle::drawPopupMenuItem( QPainter* p, bool checkable, int maxpmw,
 		           highlightWidth( MenuItem ), borderWidth( MenuItem ),
 		           shade() );
 		int dw = decoWidth( MenuItem );
-		if ( !isPixmap( MenuItem ) )
+		if ( !isPixmap( MenuItem ) ) {
 			p->fillRect( x + dw, y + dw, w - dw * 2, h - dw * 2,
 			             colorGroup( g, MenuItem ) ->
 			             brush( QColorGroup::Background ) );
+		}
 		else {
 			// process inactive item pixmaps as one large item
 			p->drawTiledPixmap( x + dw, y + dw, w - dw * 2, h - dw * 2, *scalePixmap
-			                    //                               (w, p->window().height(), MenuItem),
-			                    ( w, p->clipRegion().boundingRect().height(), MenuItem ),
+			                    (w, ((QWidget *)p->device())->height(), MenuItem),
+			                    //( w, p->clipRegion().boundingRect().height(), MenuItem ), // cliping does not work in Qt/E
 			                    x, y );
 		}
 

@@ -5,7 +5,7 @@
 
 */
 
-// $Id: ogfxeffect.cpp,v 1.2 2002-07-01 23:38:26 sandman Exp $
+// $Id: ogfxeffect.cpp,v 1.3 2002-11-01 16:07:10 sandman Exp $
 
 #include <qimage.h>
 #include <qpainter.h>
@@ -23,64 +23,247 @@
 
 
 QPixmap& OGfxEffect::gradient(QPixmap &pixmap, const QColor &ca,
-	const QColor &cb, GradientType eff, int /*ncols*/)
+	const QColor &cb, GradientType eff, int ncols)
 {
-    if(pixmap.depth() > 8 &&
-       (eff == VerticalGradient || eff == HorizontalGradient)) {
+	QImage image = gradient(pixmap.size(), ca, cb, eff, ncols);
+	pixmap.convertFromImage(image);
 
-        int rDiff, gDiff, bDiff;
-        int rca, gca, bca /*, rcb, gcb, bcb*/;
+	return pixmap;
+}
 
-        register int x, y;
+QImage OGfxEffect::gradient(const QSize &size, const QColor &ca,
+                            const QColor &cb, GradientType eff, int /*ncols*/)
+{    
+	int rDiff, gDiff, bDiff;
+	int rca, gca, bca, rcb, gcb, bcb;
+	
+	QImage image(size, 32);
 
-        rDiff = (/*rcb = */ cb.red())   - (rca = ca.red());
-        gDiff = (/*gcb = */ cb.green()) - (gca = ca.green());
-        bDiff = (/*bcb = */ cb.blue())  - (bca = ca.blue());
+	if (size.width() == 0 || size.height() == 0) {
+		qDebug ( "WARNING: OGfxEffect::gradient: invalid image" );
+		return image;
+	}
+
+    register int x, y;
+
+    rDiff = (rcb = cb.red())   - (rca = ca.red());
+    gDiff = (gcb = cb.green()) - (gca = ca.green());
+    bDiff = (bcb = cb.blue())  - (bca = ca.blue());
+
+    if( eff == VerticalGradient || eff == HorizontalGradient ){
+
+        uint *p;
+        uint rgb;
 
         register int rl = rca << 16;
         register int gl = gca << 16;
         register int bl = bca << 16;
 
-        int rcdelta = ((1<<16) / (eff == VerticalGradient ? pixmap.height() : pixmap.width())) * rDiff;
-        int gcdelta = ((1<<16) / (eff == VerticalGradient ? pixmap.height() : pixmap.width())) * gDiff;
-        int bcdelta = ((1<<16) / (eff == VerticalGradient ? pixmap.height() : pixmap.width())) * bDiff;
+        if( eff == VerticalGradient ) {
 
-        QPainter p(&pixmap);
+            int rcdelta = ((1<<16) / size.height()) * rDiff;
+            int gcdelta = ((1<<16) / size.height()) * gDiff;
+            int bcdelta = ((1<<16) / size.height()) * bDiff;
 
-        // these for-loops could be merged, but the if's in the inner loop
-        // would make it slow
-        switch(eff) {
-        case VerticalGradient:
-            for ( y = 0; y < pixmap.height(); y++ ) {
+            for ( y = 0; y < size.height(); y++ ) {
+                p = (uint *) image.scanLine(y);
+
                 rl += rcdelta;
                 gl += gcdelta;
                 bl += bcdelta;
 
-                p.setPen(QColor(rl>>16, gl>>16, bl>>16));
-                p.drawLine(0, y, pixmap.width()-1, y);
+                rgb = qRgb( (rl>>16), (gl>>16), (bl>>16) );
+
+                for( x = 0; x < size.width(); x++ ) {
+                    *p = rgb;
+                    p++;
+                }
             }
-            break;
-        case HorizontalGradient:
-            for( x = 0; x < pixmap.width(); x++) {
+
+        }
+        else {                  // must be HorizontalGradient
+
+            unsigned int *o_src = (unsigned int *)image.scanLine(0);
+            unsigned int *src = o_src;
+
+            int rcdelta = ((1<<16) / size.width()) * rDiff;
+            int gcdelta = ((1<<16) / size.width()) * gDiff;
+            int bcdelta = ((1<<16) / size.width()) * bDiff;
+
+            for( x = 0; x < size.width(); x++) {
+
                 rl += rcdelta;
                 gl += gcdelta;
                 bl += bcdelta;
 
-                p.setPen(QColor(rl>>16, gl>>16, bl>>16));
-                p.drawLine(x, 0, x, pixmap.height()-1);
+                *src++ = qRgb( (rl>>16), (gl>>16), (bl>>16));
             }
-            break;
-        default:
-            ;
+
+            src = o_src;
+
+            // Believe it or not, manually copying in a for loop is faster
+            // than calling memcpy for each scanline (on the order of ms...).
+            // I think this is due to the function call overhead (mosfet).
+
+            for (y = 1; y < size.height(); ++y) {
+
+                p = (unsigned int *)image.scanLine(y);
+                src = o_src;
+                for(x=0; x < size.width(); ++x)
+                    *p++ = *src++;
+            }
         }
     }
-    else {
-//        QImage image = OGfxEffect::gradient(pixmap.size(), ca, cb,
-//                                              (OGfxEffect::GradientType) eff, ncols);
-//        pixmap.convertFromImage(image);
-    }
 
-    return pixmap;
+    else {
+
+        float rfd, gfd, bfd;
+        float rd = rca, gd = gca, bd = bca;
+
+        unsigned char *xtable[3];
+        unsigned char *ytable[3];
+
+        unsigned int w = size.width(), h = size.height();
+        xtable[0] = new unsigned char[w];
+        xtable[1] = new unsigned char[w];
+        xtable[2] = new unsigned char[w];
+        ytable[0] = new unsigned char[h];
+        ytable[1] = new unsigned char[h];
+        ytable[2] = new unsigned char[h];
+        w*=2, h*=2;
+
+        if ( eff == DiagonalGradient || eff == CrossDiagonalGradient) {
+            // Diagonal dgradient code inspired by BlackBox (mosfet)
+            // BlackBox dgradient is (C) Brad Hughes, <bhughes@tcac.net> and
+            // Mike Cole <mike@mydot.com>.
+
+            rfd = (float)rDiff/w;
+            gfd = (float)gDiff/w;
+            bfd = (float)bDiff/w;
+
+            int dir;
+            for (x = 0; x < size.width(); x++, rd+=rfd, gd+=gfd, bd+=bfd) {
+                dir = eff == DiagonalGradient? x : size.width() - x - 1;
+                xtable[0][dir] = (unsigned char) rd;
+                xtable[1][dir] = (unsigned char) gd;
+                xtable[2][dir] = (unsigned char) bd;
+            }
+            rfd = (float)rDiff/h;
+            gfd = (float)gDiff/h;
+            bfd = (float)bDiff/h;
+            rd = gd = bd = 0;
+            for (y = 0; y < size.height(); y++, rd+=rfd, gd+=gfd, bd+=bfd) {
+                ytable[0][y] = (unsigned char) rd;
+                ytable[1][y] = (unsigned char) gd;
+                ytable[2][y] = (unsigned char) bd;
+            }
+
+            for (y = 0; y < size.height(); y++) {
+                unsigned int *scanline = (unsigned int *)image.scanLine(y);
+                for (x = 0; x < size.width(); x++) {
+                    scanline[x] = qRgb(xtable[0][x] + ytable[0][y],
+                                       xtable[1][x] + ytable[1][y],
+                                       xtable[2][x] + ytable[2][y]);
+                }
+            }
+        }
+
+        else if (eff == RectangleGradient ||
+                 eff == PyramidGradient ||
+                 eff == PipeCrossGradient ||
+                 eff == EllipticGradient)
+        {
+            int rSign = rDiff>0? 1: -1;
+            int gSign = gDiff>0? 1: -1;
+            int bSign = bDiff>0? 1: -1;
+
+            rfd = (float)rDiff / size.width();
+            gfd = (float)gDiff / size.width();
+            bfd = (float)bDiff / size.width();
+
+            rd = (float)rDiff/2;
+            gd = (float)gDiff/2;
+            bd = (float)bDiff/2;
+
+            for (x = 0; x < size.width(); x++, rd-=rfd, gd-=gfd, bd-=bfd)
+            {
+                xtable[0][x] = (unsigned char) abs((int)rd);
+                xtable[1][x] = (unsigned char) abs((int)gd);
+                xtable[2][x] = (unsigned char) abs((int)bd);
+            }
+
+            rfd = (float)rDiff/size.height();
+            gfd = (float)gDiff/size.height();
+            bfd = (float)bDiff/size.height();
+
+            rd = (float)rDiff/2;
+            gd = (float)gDiff/2;
+            bd = (float)bDiff/2;
+
+            for (y = 0; y < size.height(); y++, rd-=rfd, gd-=gfd, bd-=bfd)
+            {
+                ytable[0][y] = (unsigned char) abs((int)rd);
+                ytable[1][y] = (unsigned char) abs((int)gd);
+                ytable[2][y] = (unsigned char) abs((int)bd);
+            }
+            unsigned int rgb;
+            int h = (size.height()+1)>>1;
+            for (y = 0; y < h; y++) {
+                unsigned int *sl1 = (unsigned int *)image.scanLine(y);
+                unsigned int *sl2 = (unsigned int *)image.scanLine(QMAX(size.height()-y-1, y));
+
+                int w = (size.width()+1)>>1;
+                int x2 = size.width()-1;
+
+                for (x = 0; x < w; x++, x2--) {
+                    rgb = 0;
+                    if (eff == PyramidGradient) {
+                        rgb = qRgb(rcb-rSign*(xtable[0][x]+ytable[0][y]),
+                                   gcb-gSign*(xtable[1][x]+ytable[1][y]),
+                                   bcb-bSign*(xtable[2][x]+ytable[2][y]));
+                    }
+                    if (eff == RectangleGradient) {
+                        rgb = qRgb(rcb - rSign *
+                                   QMAX(xtable[0][x], ytable[0][y]) * 2,
+                                   gcb - gSign *
+                                   QMAX(xtable[1][x], ytable[1][y]) * 2,
+                                   bcb - bSign *
+                                   QMAX(xtable[2][x], ytable[2][y]) * 2);
+                    }
+                    if (eff == PipeCrossGradient) {
+                        rgb = qRgb(rcb - rSign *
+                                   QMIN(xtable[0][x], ytable[0][y]) * 2,
+                                   gcb - gSign *
+                                   QMIN(xtable[1][x], ytable[1][y]) * 2,
+                                   bcb - bSign *
+                                   QMIN(xtable[2][x], ytable[2][y]) * 2);
+                    }
+                    if (eff == EllipticGradient) {
+                        rgb = qRgb(rcb - rSign *
+                                   (int)sqrt((xtable[0][x]*xtable[0][x] +
+                                              ytable[0][y]*ytable[0][y])*2.0),
+                                   gcb - gSign *
+                                   (int)sqrt((xtable[1][x]*xtable[1][x] +
+                                              ytable[1][y]*ytable[1][y])*2.0),
+                                   bcb - bSign *
+                                   (int)sqrt((xtable[2][x]*xtable[2][x] +
+                                              ytable[2][y]*ytable[2][y])*2.0));
+                    }
+
+                    sl1[x] = sl2[x] = rgb;
+                    sl1[x2] = sl2[x2] = rgb;
+                }
+            }
+        }
+
+        delete [] xtable[0];
+        delete [] xtable[1];
+        delete [] xtable[2];
+        delete [] ytable[0];
+        delete [] ytable[1];
+        delete [] ytable[2];
+    }
+    return image;
 }
 
 

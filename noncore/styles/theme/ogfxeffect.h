@@ -5,7 +5,7 @@
 
 */
 
-// $Id: ogfxeffect.h,v 1.1 2002-06-29 23:45:19 sandman Exp $
+// $Id: ogfxeffect.h,v 1.2 2002-11-01 16:07:10 sandman Exp $
 
 #ifndef __OGFX_EFFECT_H
 #define __OGFX_EFFECT_H
@@ -46,6 +46,9 @@ public:
      * @return Returns the generated pixmap, for convenience.
      */
     static QPixmap& gradient(QPixmap& pixmap, const QColor &ca, const QColor &cb,
+                            GradientType type, int ncols=3);
+
+	static QImage gradient (const QSize &size, const QColor &ca, const QColor &cb,
                             GradientType type, int ncols=3);
 
 
