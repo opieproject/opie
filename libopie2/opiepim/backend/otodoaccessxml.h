@@ -36,6 +36,8 @@ public:
                                 const QDate& end,
                                 bool includeNoDates );
     QArray<int> overDue();
+    QArray<int> sorted( bool asc,  int sortOrder,
+                        int sortFilter, int cat );
 private:
     OTodo todo( QAsciiDict<int>*, Opie::XMLElement* )const;
     QString toString( const OTodo& )const;

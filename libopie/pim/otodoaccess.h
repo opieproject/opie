@@ -17,10 +17,17 @@
 class OTodoAccess : public QObject, public OPimAccessTemplate<OTodo> {
     Q_OBJECT
 public:
+    enum SortOrder { Completed = 0,
+                     Priority,
+                     Description,
+                     Deadline };
+    enum SortFilter{ ShowOverdue = 0,
+                     Category =1,
+                     OnlyOverDue= 2 };
     /**
      * if you use 0l
      * the default resource will be
-     * icked up
+     * picked up
      */
     OTodoAccess( OTodoAccessBackend* = 0l);
     ~OTodoAccess();
@@ -48,6 +55,12 @@ public:
      * return overdue OTodos
      */
     List overDue();
+
+    /**
+     *
+     */
+    List sorted( bool ascending, int sortOrder, int sortFilter, int cat );
+
     /**
      * merge a list of OTodos into
      * the resource
@@ -71,6 +84,7 @@ signals:
      */
     void signalChanged( const OTodoAccess* );
 private:
+    int m_cat;
     OTodoAccessBackend* m_todoBackEnd;
     class OTodoAccessPrivate;
     OTodoAccessPrivate* d;

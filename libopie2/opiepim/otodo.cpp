@@ -172,6 +172,7 @@ void OTodo::setSummary( const QString& sum )
 }
 void OTodo::setPriority(int prio )
 {
+    qWarning("set priority %d",  prio);
     changeOrModify();
     data->priority = prio;
 }

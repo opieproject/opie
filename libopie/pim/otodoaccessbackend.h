@@ -12,6 +12,8 @@ public:
                                         const QDate& end,
                                         bool includeNoDates ) = 0;
     virtual QArray<int> overDue() = 0;
+    virtual QArray<int> sorted( bool asc, int sortOrder, int sortFilter,
+                                int cat ) = 0;
 
 };
 

@@ -68,4 +68,10 @@ void OTodoAccess::delAlarm( int uid) {
                               "QPE/Application/todolist",
                               "alarm(QDateTime,int)", uid );
 }
-
+/* sort order */
+OTodoAccess::List OTodoAccess::sorted( bool ascending, int sort,int filter, int cat ) {
+    QArray<int> ints = m_todoBackEnd->sorted( ascending, sort,
+                                      filter, cat );
+    OTodoAccess::List list( ints, this );
+    return list;
+}

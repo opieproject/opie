@@ -46,17 +46,17 @@ public:
 
     bool operator==( const ORecordListIterator& it );
     bool operator!=( const ORecordListIterator& it );
-    
+
     /**
      * the current item
      */
     uint current()const;
-    
+
     /**
      * the number of items
      */
     uint count()const;
-    
+
     /**
      * sets the current item
      */
@@ -101,12 +101,13 @@ public:
      * the end
      */
     Iterator end();
-    
+
     /**
      * the number of items in the list
      */
      uint count()const;
-     
+
+    T operator[]( uint i );
      // FIXME implemenent remove
     /*
       ConstIterator begin()const;
@@ -146,7 +147,7 @@ ORecordListIterator<T> &ORecordListIterator<T>::operator=( const ORecordListIter
     m_current = it.m_current;
     m_temp = it.m_temp;
     m_end = it.m_end;
-//    m_record = it.m_record;
+    m_record = it.m_record;
 
     return *this;
 }
@@ -251,5 +252,9 @@ ORecordList<T>::Iterator ORecordList<T>::end() {
 template <class T>
 uint ORecordList<T>::count()const {
 return m_ids.count();
+}
+template <class T>
+T ORecordList<T>::operator[]( uint i ) {
+    return m_acc->find( m_ids[i] );
 }
 #endif

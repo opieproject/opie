@@ -1,4 +1,5 @@
 #include <qfile.h>
+#include <qvector.h>
 
 #include <qpe/global.h>
 #include <qpe/stringutil.h>
@@ -256,6 +257,7 @@ OTodo OTodoAccessXML::todo( QAsciiDict<int>* dict, Opie::XMLElement* element)con
             ev.setSummary( it.data() );
             break;
         case OTodo::Priority:
+            qWarning("ParsePriority " + it.data() );
             ev.setPriority( it.data().toInt() );
             break;
         case OTodo::DateDay:
@@ -364,3 +366,146 @@ QString OTodoAccessXML::toString( const OTodo& ev )const {
 QString OTodoAccessXML::toString( const QArray<int>& ints ) const {
     return Qtopia::Record::idsToString( ints );
 }
+
+/* internal class for sorting */
+
+struct OTodoXMLContainer {
+    OTodo todo;
+};
+  /*
+   * Returns:
+   *       0 if item1 == item2
+   *
+   *   non-zero if item1 != item2
+   *
+   *   This function returns int rather than bool so that reimplementations
+   *   can return one of three values and use it to sort by:
+   *
+   *   0 if item1 == item2
+   *
+   *   > 0 (positive integer) if item1 > item2
+   *
+   *   < 0 (negative integer) if item1 < item2
+   *
+   */
+class OTodoXMLVector : public QVector<OTodoXMLContainer> {
+public:
+    OTodoXMLVector(int size, bool asc,  int sort)
+        : QVector<OTodoXMLContainer>( size )
+        {
+            setAutoDelete( true );
+            m_asc = asc;
+            m_sort = sort;
+        }
+        /* return the summary/description */
+    QString string( const OTodo& todo) {
+        return  todo.summary().isEmpty() ?
+            todo.description().left(20 ) :
+            todo.summary();
+    }
+    /**
+     * we take the sortorder( switch on it )
+     *
+     */
+    int compareItems( Item d1, Item d2 ) {
+        qWarning("compare items");
+        int ret =0;
+        OTodoXMLContainer* con1 = (OTodoXMLContainer*)d1;
+        OTodoXMLContainer* con2 = (OTodoXMLContainer*)d2;
+
+        /* same item */
+        if ( con1->todo.uid() == con2->todo.uid() )
+            return 0;
+        qWarning("m_sort %d", m_sort );
+
+        switch ( m_sort ) {
+            /* completed */
+        case 0: {
+            ret = 0;
+            if ( con1->todo.isCompleted() ) ret++;
+            if ( con2->todo.isCompleted() ) ret--;
+            break;
+        }
+            /* priority */
+        case 1: {
+            ret = con1->todo.priority() - con2->todo.priority();
+            qWarning(" priority %d %d %d",  ret,
+                     con1->todo.priority(),
+                     con2->todo.priority()
+                     );
+            break;
+        }
+            /* description */
+        case 2: {
+            QString str1 = string( con1->todo );
+            QString str2 = string( con2->todo );
+            ret  = QString::compare( str1, str2 );
+            break;
+        }
+            /* deadline */
+        case 3: {
+            /* either bot got a dueDate
+             * or one of them got one
+             */
+            if ( con1->todo.hasDueDate() &&
+                 con2->todo.hasDueDate() )
+                ret = con1->todo.dueDate().daysTo( con2->todo.dueDate() );
+            else if ( con1->todo.hasDueDate() )
+                ret = -1;
+            else if ( con2->todo.hasDueDate() )
+                ret = 0;
+            break;
+        }
+        default:
+            ret = 0;
+            break;
+        };
+
+        /* twist it we're not ascending*/
+        if (!m_asc)
+            ret = ret * -1;
+        return ret;
+    }
+ private:
+    bool m_asc;
+    int m_sort;
+
+};
+
+QArray<int> OTodoAccessXML::sorted( bool asc,  int sortOrder,
+                                    int sortFilter,  int cat ) {
+    OTodoXMLVector vector(m_events.count(), asc,sortOrder );
+    QMap<int, OTodo>::Iterator it;
+    int item = 0;
+
+    bool bCat = sortFilter & 1 ? true : false;
+    bool bOver = sortFilter & 0 ? true : false;
+    bool bOnly = split & 2 ? true : false;
+    for ( it = m_events.begin(); it != m_events.end(); ++it ) {
+
+        /* show category */
+        if ( bCat )
+            if (!(*it).categories().contains( cat ) )
+                continue;
+        /* isOverdue but we should not show overdue */
+        if ( (*it).isOverdue() && ( !bOver || !bOnly ) )
+            continue;
+        if ( !(*it).isOverdue() && bOnly )
+            continue;
+
+
+        OTodoXMLContainer* con = new OTodoXMLContainer();
+        con->todo = (*it);
+        vector.insert(item, con );
+        item++;
+    }
+    vector.resize( item );
+    /* sort it now */
+    vector.sort();
+    /* now get the uids */
+    QArray<int> array( vector.count() );
+    for (uint i= 0; i < vector.count(); i++ ) {
+        array[i] = ( vector.at(i) )->todo.uid();
+    }
+    return array;
+};
