@@ -28,12 +28,15 @@
 	* n.a.  - Netsystemtime - fixed UI to prevent error dialog from displaying when it shouldn't, get rid of some compiler warnings
 	* n.a.  - PackageManager - fix bug where lists_dir was not being honored at startup (drw)
 	* n.a.  - PackageManager - provide default value for lists_dir when none is entered in configuration dialog (drw)
+	* n.a.  - Launcher Settings - fix default settings for background in Edit tab dialog (drw)
+	* n.a.  - OTabWidget - fix scroll buttons, fix display position of tabs (drw)
 
 	Internal
 	--------
 	* Worked around bug in Qt/Embedded 2.3.10: qt_version() returns 231 (mickeyl)
 	* Killed the need for weak symbols in QtE (zecke)
 	* Added optional building libqpe without inline images (mickeyl)
+	* OColorButton - fix so does not emit a colorSelected signal inside of resizeEvent (drw)
 
 2005-02-03	Opie 1.1.9
 
