@@ -1,9 +1,8 @@
-
-#include <stdlib.h>
-
 #include "osqlmanager.h"
 #include "osqlbackendmanager.h"
 #include "osqlitedriver.h"
+
+
 
 namespace Opie {
 namespace DB {
@@ -13,12 +12,10 @@ OSQLManager::OSQLManager() {
 OSQLBackEnd::ValueList OSQLManager::queryBackEnd() {
     m_list.clear();
     QString opie = QString::fromLatin1( getenv("OPIEDIR") );
-    QString qpe = QString::fromLatin1( getenv("QPEDIR") );
 
     if ( !m_path.contains(opie) && !opie.isEmpty() )
         m_path << opie;
-    if ( !m_path.contains(qpe) && !qpe.isEmpty() )
-        m_path << qpe;
+
 
     OSQLBackEndManager mng( m_path );
     m_list = mng.scan();
