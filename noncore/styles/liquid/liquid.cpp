@@ -2005,34 +2005,44 @@ void LiquidStyle::drawMenuBarItem(QPainter *p, int x, int y, int w, int h,
         else
             shadow = g.background().dark(130);
 
+		QPixmap *dummy = 0;
+		
+		if ( mi-> pixmap ( ) && !mi-> pixmap ( )-> isNull ( )) {
+			dummy = new QPixmap ( mi-> pixmap ( )-> size ( ));
+			QBitmap dummy_mask ( dummy-> size ( ));
+			dummy_mask. fill ( color1 );
+			dummy-> setMask ( dummy_mask );
+		}
+
         if(active){
             drawClearBevel(p, x+1, y+1, w-1, h-1, g.button(), g.background());
             QApplication::style().drawItem(p, x+1, y+1, w, h,
                                            AlignCenter|ShowPrefix|DontClip|SingleLine,
-                                           g, mi->isEnabled(), NULL, mi->text(),
+                                           g, mi->isEnabled(), dummy, mi->text(),
                                            -1, &shadow);
             QApplication::style().drawItem(p, x, y, w, h,
                                            AlignCenter|ShowPrefix|DontClip|SingleLine,
-                                           g, mi->isEnabled(), NULL, mi->text(),
+                                           g, mi->isEnabled(), mi-> pixmap ( ), mi->text(),
                                            -1, &g.text());
         }
         else{
             QApplication::style().drawItem(p, x+1, y+1, w, h,
                                            AlignCenter|ShowPrefix|DontClip|SingleLine,
-                                           g, mi->isEnabled(), NULL, mi->text(),
+                                           g, mi->isEnabled(), dummy, mi->text(),
                                            -1, &shadow);
             QApplication::style().drawItem(p, x, y, w, h,
                                            AlignCenter|ShowPrefix|DontClip|SingleLine,
-                                           g, mi->isEnabled(), NULL, mi->text(),
+                                           g, mi->isEnabled(), mi-> pixmap ( ), mi->text(),
                                            -1, &g.text());
         }
+        delete dummy;
     }
     else{
         if(active)
             drawClearBevel(p, x+1, y+1, w-1, h-1, g.button(), g.background());
         QApplication::style().drawItem(p, x, y, w, h,
                                        AlignCenter|ShowPrefix|DontClip|SingleLine,
-                                       g, mi->isEnabled(), NULL, mi->text(),
+                                       g, mi->isEnabled(), mi-> pixmap ( ), mi->text(),
                                        -1, &g.text());
     }
 }

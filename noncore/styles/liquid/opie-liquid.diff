@@ -3,7 +3,7 @@ Features:
  - Qt-only
  - works with Qt/E on QPE/OPIE
  
---- -	2002-11-18 04:47:41.000000000 +0100
+--- -	2002-11-21 20:45:47.000000000 +0100
 +++ liquid.h	2002-11-18 03:32:40.000000000 +0100
 @@ -2,7 +2,7 @@
  #define LIQUID_STYLE_H
@@ -141,8 +141,8 @@ Features:
      QPixmap *vsbSliderFillPix;
      TransMenuHandler *menuHandler;
      QPixmap *pixmaps[BITMAP_ITEMS];
---- -	2002-11-18 04:47:41.000000000 +0100
-+++ liquid.cpp	2002-11-18 04:46:13.000000000 +0100
+--- -	2002-11-21 20:45:47.000000000 +0100
++++ liquid.cpp	2002-11-21 20:27:48.000000000 +0100
 @@ -2,6 +2,9 @@
   * Copyright (C)QPL 2001 Daniel M. Duley. All rights reserved.
   */
@@ -341,9 +341,10 @@ Features:
 -                ++it;
 -                if(w->inherits("QMenuBar")){
 -                    w->repaint();
--                }
--            }
 +				wid-> setBackgroundMode( QWidget::PaletteBackground );
+                 }
++			delete ol;
+             }
          }
 -    }
 -    else if(id == MOSFET_BUTTON_CHANGE){
@@ -364,9 +365,8 @@ Features:
 -            ++it;
 -            if(w->inherits("QPushButton")){
 -                ((LiquidStyle*)parent())->applyCustomAttributes((QPushButton *)w);
-+			delete ol;
-             }
-         }
+-            }
+-        }
 +    return(false);
 +}
  
@@ -494,10 +494,10 @@ Features:
 -        pixmaps[HSlider] = processEmbedded("sliderarrow", btnH, btnS, btnV, true);
 +    case CBDown:
 +        pixmaps[CBDown] = processEmbedded("checkboxdown", btnH, btnS, btnV /*, true*/);
-         break;
++        break;
 +    case CBDownHover:
 +        pixmaps[CBDownHover] = processEmbedded("checkboxdown", btnHoverH, btnHoverS, btnHoverV /*, true*/);
-+        break;
+         break;
 +
      case VSlider:
 -        pixmaps[VSlider] = processEmbedded("sliderarrow", btnH, btnS, btnV, true);
@@ -1572,7 +1572,7 @@ Features:
                               Orientation orient, bool, bool)
  {
      p->drawPixmap(x, y, orient == Qt::Horizontal ? *getPixmap(HSlider)->mask() :
-@@ -2065,203 +1980,26 @@
+@@ -2065,243 +1980,76 @@
      p->drawLineSegments(a);
  }
  
@@ -1633,9 +1633,9 @@ Features:
 -        qDrawShadePanel(p, x, y, w, h, g, false, 1,
 -                        &g.brush(QColorGroup::Background));
 -    }
--
--}
  
+-}
+-
 -void LiquidStyle::drawKToolBar(QPainter *p, int x, int y, int w, int h,
 -                           const QColorGroup &g, KToolBarPos, QBrush *)
 +void LiquidStyle::drawMenuBarItem(QPainter *p, int x, int y, int w, int h,
@@ -1788,7 +1788,53 @@ Features:
                  g.background().dark(130);
          }
          else
-@@ -2300,8 +2038,8 @@
+             shadow = g.background().dark(130);
+ 
++		QPixmap *dummy = 0;
++		
++		if ( mi-> pixmap ( ) && !mi-> pixmap ( )-> isNull ( )) {
++			dummy = new QPixmap ( mi-> pixmap ( )-> size ( ));
++			QBitmap dummy_mask ( dummy-> size ( ));
++			dummy_mask. fill ( color1 );
++			dummy-> setMask ( dummy_mask );
++		}
++
+         if(active){
+             drawClearBevel(p, x+1, y+1, w-1, h-1, g.button(), g.background());
+             QApplication::style().drawItem(p, x+1, y+1, w, h,
+                                            AlignCenter|ShowPrefix|DontClip|SingleLine,
+-                                           g, mi->isEnabled(), NULL, mi->text(),
++                                           g, mi->isEnabled(), dummy, mi->text(),
+                                            -1, &shadow);
+             QApplication::style().drawItem(p, x, y, w, h,
+                                            AlignCenter|ShowPrefix|DontClip|SingleLine,
+-                                           g, mi->isEnabled(), NULL, mi->text(),
++                                           g, mi->isEnabled(), mi-> pixmap ( ), mi->text(),
+                                            -1, &g.text());
+         }
+         else{
+             QApplication::style().drawItem(p, x+1, y+1, w, h,
+                                            AlignCenter|ShowPrefix|DontClip|SingleLine,
+-                                           g, mi->isEnabled(), NULL, mi->text(),
++                                           g, mi->isEnabled(), dummy, mi->text(),
+                                            -1, &shadow);
+             QApplication::style().drawItem(p, x, y, w, h,
+                                            AlignCenter|ShowPrefix|DontClip|SingleLine,
+-                                           g, mi->isEnabled(), NULL, mi->text(),
++                                           g, mi->isEnabled(), mi-> pixmap ( ), mi->text(),
+                                            -1, &g.text());
+         }
++        delete dummy;
+     }
+     else{
+         if(active)
+             drawClearBevel(p, x+1, y+1, w-1, h-1, g.button(), g.background());
+         QApplication::style().drawItem(p, x, y, w, h,
+                                        AlignCenter|ShowPrefix|DontClip|SingleLine,
+-                                       g, mi->isEnabled(), NULL, mi->text(),
++                                       g, mi->isEnabled(), mi-> pixmap ( ), mi->text(),
+                                        -1, &g.text());
+     }
  }
  
  void LiquidStyle::drawPopupPanel(QPainter *p, int x, int y, int w, int h,
@@ -1799,7 +1845,7 @@ Features:
  {
      QColor c;
      switch(menuHandler->transType()){
-@@ -2336,8 +2074,6 @@
+@@ -2336,8 +2084,6 @@
  
      maxpmw = QMAX( maxpmw, 20 );
  
@@ -1808,7 +1854,7 @@ Features:
  
      bool dis = !enabled;
      QColorGroup itemg = dis ? pal.disabled() : pal.active();
-@@ -2363,7 +2099,7 @@
+@@ -2363,7 +2109,7 @@
              p->fillRect(x, y, w, h, menuBrush);
          }
          else{
@@ -1817,7 +1863,7 @@ Features:
              if(pix)
                  p->drawPixmap(x, y, *pix, x, y, w, h);
          }
-@@ -2508,25 +2244,6 @@
+@@ -2508,25 +2254,6 @@
      return h;
  }
  
@@ -1843,7 +1889,7 @@ Features:
  
  void LiquidStyle::drawFocusRect(QPainter *p, const QRect &r,
                              const QColorGroup &g, const QColor *c,
-@@ -2536,29 +2253,29 @@
+@@ -2536,29 +2263,29 @@
      if(p->device()->devType() == QInternal::Widget){
          // if so does it use a special focus rectangle?
          QWidget *w = (QWidget *)p->device();
@@ -1878,7 +1924,7 @@ Features:
          return;
      }
      QPixmap tilePix;
-@@ -2671,7 +2388,7 @@
+@@ -2671,7 +2398,7 @@
          vFrame = 8; // was 10
      }
      else
@@ -1887,7 +1933,7 @@ Features:
  }
  
  
-@@ -2699,7 +2416,7 @@
+@@ -2699,7 +2426,7 @@
          p->drawLine(x+1, y+1, x+1, y2-1);
      }
      else if(lineWidth != 2 || !sunken)
@@ -1896,7 +1942,7 @@ Features:
      else{
          QPen oldPen = p->pen();
          int x2 = x+w-1;
-@@ -2726,105 +2443,6 @@
+@@ -2726,105 +2453,6 @@
      }
  }
  
@@ -2002,7 +2048,7 @@ Features:
  
  void LiquidStyle::adjustHSV(QPixmap &pix, int h, int s, int v)
  {
-@@ -2988,110 +2606,5 @@
+@@ -2988,110 +2616,5 @@
      }
  }
  
@@ -2113,9 +2159,9 @@ Features:
 -
  
  /* vim: set noet sw=8 ts=8: */
---- -	2002-11-18 04:47:41.000000000 +0100
-+++ plugin.cpp	2002-11-18 03:54:56.000000000 +0100
-@@ -1,29 +1,79 @@
+--- -	2002-11-21 20:45:47.000000000 +0100
++++ plugin.cpp	2002-11-18 18:11:41.000000000 +0100
+@@ -1,29 +1,84 @@
 +#include <qapplication.h>
 +
  #include "liquid.h"
@@ -2129,53 +2175,53 @@ Features:
 +{
 +	m_widget = 0;
 +}
++    
++LiquidInterface::~LiquidInterface ( )
++{
++}
++        
++QStyle *LiquidInterface::style ( )
++{
++	return new LiquidStyle ( );
++}
  
 -extern "C" {
 -    KStyle* allocate();
 -    int minor_version();
 -    int major_version();
 -    const char *description();
-+LiquidInterface::~LiquidInterface ( )
-+{
- }
- 
--KStyle* allocate()
-+QStyle *LiquidInterface::style ( )
- {
--    return(new LiquidStyle);
-+	return new LiquidStyle ( );
- }
- 
--int minor_version()
 +QString LiquidInterface::name ( ) const
- {
--    return(0);
++{
 +	return qApp-> translate ( "Styles", "Liquid" );
  }
  
--int major_version()
+-KStyle* allocate()
 +QString LiquidInterface::description ( ) const
  {
--    return(1);
+-    return(new LiquidStyle);
 +	return qApp-> translate ( "Styles", "High Performance Liquid style by Mosfet" );
  }
  
--const char *description()
+-int minor_version()
 +bool LiquidInterface::hasSettings ( ) const
  {
--    return(i18n("High performance liquid plugin").utf8());
+-    return(0);
 +	return true;
-+}
-+
+ }
+ 
+-int major_version()
 +QWidget *LiquidInterface::create ( QWidget *parent, const char *name )
-+{
+ {
+-    return(1);
 +	m_widget = new LiquidSettings ( parent, name ? name : "LIQUID-SETTINGS" );
 +		
 +	return m_widget;
-+}
-+
+ }
+ 
+-const char *description()
 +bool LiquidInterface::accept ( )
-+{
+ {
+-    return(i18n("High performance liquid plugin").utf8());
 +	if ( !m_widget )
 +		return false;
 +
@@ -2209,3 +2255,8 @@ Features:
 +	Q_CREATE_INSTANCE( LiquidInterface )
 +}
 +
++
++// For Sharp ROM
++ 
++extern "C" { QStyle *allocate ( ) { return new LiquidStyle ( ); } }
++extern "C" { void drawmenubaritem ( QStyle *sty, QPainter *p, int x, int y, int w, int h, QMenuItem *mi, QColorGroup &g, bool enabled, bool active ) { return ((LiquidStyle *) sty )-> drawMenuBarItem ( p, x, y, w, h, mi, g, enabled, active ); } }
