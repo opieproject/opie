@@ -75,6 +75,13 @@ private:
 	bool m_dirty : 1;
 	QString m_file;
 	QMap<int, OPimContact> m_map;
+
+	/**
+	 * Version of parsed VCard
+	 */
+	uint version_major;
+	uint version_minor;
+
 };
 
 }

@@ -48,7 +48,9 @@ namespace Opie {
 
 OPimContactAccessBackend_VCard::OPimContactAccessBackend_VCard ( const QString& , const QString& filename ):
     m_dirty( false ),
-    m_file( filename )
+    m_file( filename ),
+    version_major( 1 ),
+    version_minor( 0 )
 {
     load();
 }
@@ -186,22 +188,30 @@ bool OPimContactAccessBackend_VCard::wasChangedExternally()
 OPimContact OPimContactAccessBackend_VCard::parseVObject( VObject *obj )
 {
     OPimContact c;
-
     VObjectIterator it;
     initPropIterator( &it, obj );
     while( moreIteration( &it ) ) {
 	    VObject *o = nextVObject( &it );
 	    QCString name = vObjectName( o );
 	    QString value = QString::fromUtf8( vObjectStringZValue( o ) );
-	    odebug << "(1)Read: %s" << QString( value ).latin1() << oendl;
-	    if ( name == VCNameProp ) {
+	    odebug << "(1)Read: " << name << " " << QString( value ).latin1() << oendl;
+	    if ( name == VCVersionProp ) {
+
+		    odebug << "Version: " << value << oendl;
+		    QStringList version = QStringList::split( ".", value );
+		    version_major = version[0].toUInt();
+		    version_minor = version[1].toUInt();
+		    odebug << "Major: "<< version_major << " Minor: " << version_minor << oendl;
+
+	    } 
+	    else if ( name == VCNameProp ) {
 		    VObjectIterator nit;
 		    initPropIterator( &nit, o );
 		    while( moreIteration( &nit ) ) {
 			    VObject *o = nextVObject( &nit );
 			    QCString name = vObjectTypeInfo( o );
 			    QString value = QString::fromUtf8( vObjectStringZValue( o ) );
-			    odebug << "(2)Read: %s" << value.latin1() << oendl;
+			    odebug << "Nametype is: "<< name << " Value: " << value.latin1() << oendl;
 			    if ( name == VCNamePrefixesProp )
 				    c.setTitle( value );
 			    else if ( name == VCNameSuffixesProp )
@@ -226,8 +236,9 @@ OPimContact OPimContactAccessBackend_VCard::parseVObject( VObject *obj )
 		    initPropIterator( &nit, o );
 		    while( moreIteration( &nit ) ) {
 			    VObject *o = nextVObject( &nit );
-			    QCString name = vObjectName( o );
+			    QCString name = vObjectTypeInfo( o );
 			    QString value = QString::fromUtf8( vObjectStringZValue( o ) );
+			    odebug << "AddressType is: "<< name << " Value: " << value.latin1() << oendl;
 			    if ( name == VCHomeProp )
 				    work = FALSE;
 			    else if ( name == VCWorkProp )
@@ -274,6 +285,7 @@ OPimContact OPimContactAccessBackend_VCard::parseVObject( VObject *obj )
 		    while( moreIteration( &nit ) ) {
 			    VObject *o = nextVObject( &nit );
 			    QCString name = vObjectTypeInfo( o );
+			    odebug << "Telephonetype is: "<< name << " Value: " << value.latin1() << oendl;
 			    if ( name == VCHomeProp )
 				    type |= HOME;
 			    else if ( name == VCWorkProp )
@@ -288,6 +300,8 @@ OPimContact OPimContactAccessBackend_VCard::parseVObject( VObject *obj )
 				    type |= PAGER;
 			    else  if ( name == VCPreferredProp )
 				    ;
+			    else  if ( name.left( 2 ) == "X-" || name.left( 2 ) == "x-" )
+				    ; // Ignore
 			    else
 				    type |= UNKNOWN;
 		    }
@@ -297,6 +311,8 @@ OPimContact OPimContactAccessBackend_VCard::parseVObject( VObject *obj )
 			    if ( ( type & (VOICE|CELL|FAX|PAGER) ) == 0 ) // default
 				    type |= VOICE;
 			    
+			    odebug << "value %s %d" << value.data() << type << oendl;
+
 			    if ( (type & (VOICE|HOME) ) == (VOICE|HOME) && (type & (CELL|HOME) ) != (CELL|HOME) )
 				    c.setHomePhone( value );
 			    if ( ( type & (FAX|HOME) ) == (FAX|HOME) )
@@ -321,11 +337,15 @@ OPimContact OPimContactAccessBackend_VCard::parseVObject( VObject *obj )
 		    while( moreIteration( &nit ) ) {
 			    VObject *o = nextVObject( &nit );
 			    QCString name = vObjectTypeInfo( o );
+			    odebug << "Emailtype is: "<< name << " Value: " << value.latin1() << oendl;
 			    if ( name != VCInternetProp && name != VCHomeProp &&
 				 name != VCWorkProp &&
-				 name != VCPreferredProp )
+				 name != VCPreferredProp &&
+				 name.left( 2 ) != "X-" && name.left( 2 ) != "x-" ){
 				    // ### preffered should map to default email
 				    valid = FALSE;
+				    odebug << "Email was detected as invalid!" << oendl;
+			    }
 		    }
 		    if ( valid ) {
 			    c.insertEmail( email );
@@ -581,5 +601,7 @@ VObject* OPimContactAccessBackend_VCard::safeAddProp( VObject *o, const char *pr
         ret = addProp( o, prop );
     return ret;
 }
+
+
 
 }
