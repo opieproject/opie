@@ -21,7 +21,7 @@
 #include "memoryappletimpl.h"
 
 MemoryAppletImpl::MemoryAppletImpl()
-    : memory(0), ref(0)
+    : memory(0)
 {
 }
 

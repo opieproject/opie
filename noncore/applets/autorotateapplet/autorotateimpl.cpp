@@ -3,7 +3,7 @@
 
 
 AutoRotateImpl::AutoRotateImpl()
-    : autoRotate(0), ref(0) {
+    : autoRotate(0){
         qDebug ("here");
 }
 

@@ -38,7 +38,6 @@ public:
 
 private:
     WirelessApplet *wireless;
-    ulong ref;
 };
 
 #endif

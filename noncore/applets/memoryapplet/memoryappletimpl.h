@@ -38,7 +38,6 @@ public:
 
 private:
     MemoryMeter *memory;
-    ulong ref;
 };
 
 #endif

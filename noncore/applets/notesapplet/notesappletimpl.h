@@ -30,7 +30,6 @@ public:
 
 private:
     NotesApplet *notes;
-    ulong ref;
 };
 
 #endif

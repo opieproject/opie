@@ -15,5 +15,4 @@ public:
 
 private:
     AutoRotate *autoRotate;
-    ulong ref;
 };

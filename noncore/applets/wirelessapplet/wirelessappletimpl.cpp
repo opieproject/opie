@@ -22,7 +22,7 @@
 
 
 WirelessAppletImpl::WirelessAppletImpl()
-    : wireless(0), ref(0)
+    : wireless(0)
 {
 }
 

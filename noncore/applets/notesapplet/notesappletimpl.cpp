@@ -14,7 +14,7 @@
 
 
 NotesAppletImpl::NotesAppletImpl()
-    : notes(0), ref(0) {
+    : notes(0){
 }
 
 NotesAppletImpl::~NotesAppletImpl() {
