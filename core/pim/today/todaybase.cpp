@@ -16,6 +16,7 @@
 
 #include "todaybase.h"
 
+#include <qpe/applnk.h>
 #include <qpe/resource.h>
 
 #include <qvbox.h>
@@ -30,7 +31,8 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags )
   opiezillaimage = opiezillaimage.smoothScale( 45, 45 );
   QPixmap opiezilla; //the opiezilla
   opiezilla.convertFromImage( opiezillaimage );
-  QPixmap config = Resource::loadPixmap( "SettingsIcon" );  // config icon
+  QPixmap config;
+  config.convertFromImage( Resource::loadImage( "SettingsIcon" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
 
   layout = 0L;
 
