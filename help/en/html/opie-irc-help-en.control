@@ -1,4 +1,4 @@
-Package: opie-opieirc-help-en
+Package: opie-irc-help-en
 Files: help/en/html/opieirc.html help/en/html/opieirc
 Priority: optional
 Section: opie/onlinedoc
