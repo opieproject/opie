@@ -117,7 +117,7 @@ AudioWidget::AudioWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
                 uchar *line = dest[y];
                 for ( int x = 0; x < imgUp.width(); x++ )
                     if ( !qRed( imgMask.pixel( x, y ) ) )
-                        line[x] = i + 1;
+                        line[x] = button.command + 1;
             }
         }
 
@@ -338,15 +338,16 @@ void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
     for ( unsigned int i = 0; i < buttons.size(); i++ ) {
 
         Button &button = buttons[ i ];
+        Command command = button.command;
 
         if ( event->state() == QMouseEvent::LeftButton ) {
             // The test to see if the mouse click is inside the button or not
-            bool isOnButton = isOverButton( event->pos() - upperLeftOfButtonMask, i );
+            bool isOnButton = isOverButton( event->pos() - upperLeftOfButtonMask, command );
 
             if ( isOnButton && !button.isHeld ) {
                 button.isHeld = TRUE;
                 toggleButton( button );
-                switch (i) {
+                switch ( command ) {
                 case VolumeUp:
                     emit moreClicked();
                     return;
@@ -359,6 +360,7 @@ void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
                 case Back:
                     emit backClicked();
                     return;
+                default: break;
                 }
             } else if ( !isOnButton && button.isHeld ) {
                 button.isHeld = FALSE;
@@ -371,7 +373,7 @@ void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
                     setToggleButton( button, FALSE );
                 }
                 qDebug("mouseEvent %d", i);
-                handleCommand( static_cast<Command>( i ), button.isDown );
+                handleCommand( command, button.isDown );
             }
         }
     }
