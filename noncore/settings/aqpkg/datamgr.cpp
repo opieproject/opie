@@ -86,7 +86,7 @@ void DataManager :: loadServers()
         while ( fgets( line, sizeof line, fp) != NULL )
         {
             lineStr = line;
-            if ( lineStr.startsWith( "src" ) ) //|| lineStr.startsWith( "#src" ) || lineStr.startsWith( "# src" ) )
+            if ( lineStr.startsWith( "src" ) || lineStr.startsWith( "#src" ) || lineStr.startsWith( "# src" ) )
             {
                 char alias[20];
                 char url[100];
