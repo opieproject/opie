@@ -63,7 +63,7 @@ GAMES = noncore/games/minesweep noncore/games/solitaire \
 	noncore/games/kcheckers noncore/games/kpacman \
 	noncore/games/kbill
 
-NONAPPS = noncore/apps/spreadsheet noncore/apps/tableviewer \
+NONAPPS = noncore/apps/opie-sheet noncore/apps/tableviewer \
 	noncore/apps/opie-reader
 	
 NONNET = noncore/net/netsetup noncore/net/opieftp \
