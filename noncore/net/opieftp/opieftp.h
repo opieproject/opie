@@ -47,9 +47,10 @@ class OpieFtp : public QMainWindow
     Q_OBJECT
 
 public:
-    OpieFtp(  );
+    OpieFtp( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     ~OpieFtp();
 
+    static QString appName() { return QString::fromLatin1("opieftp"); }
     QTabWidget *TabWidget;
     QWidget *tab, *tab_2, *tab_3;
     QListView *Local_View, *Remote_View;

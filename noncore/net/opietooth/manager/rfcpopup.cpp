@@ -3,17 +3,21 @@
 
 #include "pppdialog.h"
 #include "rfcpopup.h"
+#include "rfcommassigndialogimpl.h"
 
 using namespace OpieTooth;
 
 /*
  * c'tor init the QAction
  */
-RfcCommPopup::RfcCommPopup()
+RfcCommPopup::RfcCommPopup( OpieTooth::BTDeviceItem* item  )
     : QPopupMenu()  {
     qWarning("RfcCommPopup c'tor");
 
     QAction* a;
+
+
+    m_item = item;
 
     /* connect action */
     a = new QAction(  ); // so it's get deleted
@@ -33,10 +37,10 @@ RfcCommPopup::RfcCommPopup()
 
     /* foo action */
     a = new QAction(  );
-    a->setText("Foo");
+    a->setText("Bind table");
     a->addTo( this );
     connect( a, SIGNAL( activated() ),
-            this, SLOT( slotFoo() ) );
+            this, SLOT( slotBind() ) );
 
 
     /* bar action */
@@ -74,8 +78,15 @@ void RfcCommPopup::slotDisconnect() {
 }
 
 
-void RfcCommPopup::slotFoo() {
-    qWarning("slotFoo");
+void RfcCommPopup::slotBind() {
+    RfcommAssignDialog rfcommAssign ( this, "RfcommAssignDialog", true, WStyle_ContextHelp  );
+
+    rfcommAssign.showMaximized();
+    rfcommAssign.newDevice( m_item->mac() );
+
+    if ( rfcommAssign.exec() == QDialog::Accepted )  {
+        rfcommAssign.saveConfig();
+    }
 }
 
 

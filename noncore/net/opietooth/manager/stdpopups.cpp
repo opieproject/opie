@@ -9,7 +9,7 @@
 extern "C" {
 
     QPopupMenu* newRfcComPopup( const OpieTooth::Services& service,  OpieTooth::BTDeviceItem* item ) {
-        return new OpieTooth::RfcCommPopup(/* servive,  item*/ ); // fix spellin RfComm vs. RfcComm and paramaters
+        return new OpieTooth::RfcCommPopup(/* servive,*/  item ); // fix spellin RfComm vs. RfcComm and paramaters
         //return 0l;
     }
     QPopupMenu* newObexPushPopup( const OpieTooth::Services&,  OpieTooth::BTDeviceItem* ) {

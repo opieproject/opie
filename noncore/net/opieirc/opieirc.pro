@@ -1,6 +1,4 @@
-TEMPLATE	= app
-CONFIG		= qt warn_on release
-DESTDIR		= $(OPIEDIR)/bin
+CONFIG		= qt warn_on release quick-app
 HEADERS		= ircchannel.h ircconnection.h \
               ircmessage.h \
               ircmessageparser.h ircoutput.h \
@@ -21,8 +19,7 @@ SOURCES		= ircchannel.cpp ircconnection.cpp \
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS        += -lqpe -lopie
-TARGET       = opieirc
 
-
+TARGET	= opieirc
 
 include ( $(OPIEDIR)/include.pro )

@@ -20,10 +20,6 @@
 #include <qpe/qpeapplication.h>
 #include "mailitwindow.h"
 
-int main(int argc, char* argv[])
-{
-    QPEApplication a( argc, argv );
-    MailItWindow mw(0, 0);
-    a.showMainDocumentWidget(&mw);
-    return a.exec();
-}
+#include <opie/oapplicationfactory.h>
+
+OPIE_EXPORT_APP( OApplicationFactory<MailItWindow> )

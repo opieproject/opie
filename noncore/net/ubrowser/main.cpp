@@ -18,12 +18,7 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 #include "mainview.h"
 
-int main( int argc, char **argv )
-{
-	QPEApplication a( argc, argv );
-	MainView w;
+#include <opie/oapplicationfactory.h>
 
-//	a.setMainWidget( &w );
-	a.showMainDocumentWidget( &w );
-	 return a.exec();
-}
+OPIE_EXPORT_APP( OApplicationFactory<MainView> )
+

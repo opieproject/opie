@@ -42,31 +42,31 @@ MailAccount* AccountList::dupl(MailAccount *in)
 
 EmailClient::EmailClient( QWidget* parent,  const char* name, WFlags fl )
   : QMainWindow( parent, name, fl )
-{ 
+{
   emailHandler = new EmailHandler();
   addressList = new AddressList();
-  
+
   sending = FALSE;
   receiving = FALSE;
   previewingMail = FALSE;
   mailIdCount = 1;
   accountIdCount = 1;
   allAccounts = FALSE;
-  
+
   init();
-  
- 
-  
+
+
+
   connect(emailHandler, SIGNAL(mailSent()), this, SLOT(mailSent()) );
-  
+
   connect(emailHandler, SIGNAL(smtpError(int,const QString &)), this,
       SLOT(smtpError(int,const QString &)) );
   connect(emailHandler, SIGNAL(popError(int,const QString &)), this,
       SLOT(popError(int,const QString &)) );
-  
+
   connect(inboxView, SIGNAL(doubleClicked(QListViewItem *)), this, SLOT(inboxItemSelected()) );
   connect(outboxView, SIGNAL(doubleClicked(QListViewItem *)), this, SLOT(outboxItemSelected()) );
-  
+
   connect(inboxView, SIGNAL(pressed(QListViewItem *)), this, SLOT(inboxItemPressed()) );
   connect(inboxView, SIGNAL(clicked(QListViewItem *)), this, SLOT(inboxItemReleased()) );
 
@@ -74,20 +74,20 @@ EmailClient::EmailClient( QWidget* parent,  const char* name, WFlags fl )
       SLOT(mailArrived(const Email &, bool)) );
   connect(emailHandler, SIGNAL(mailTransfered(int)), this,
       SLOT(allMailArrived(int)) );
-  
+
   mailconf = new Config("mailit");
   //In case Synchronize is not defined in settings.txt
 
   readSettings();
-  
+
   updateAccounts();
-      
+
   lineShift = "\n";
   readMail();
   lineShift = "\r\n";
-  
+
   mailboxView->setCurrentTab(0);  //ensure that inbox has focus
-  
+
   /*channel = new QCopChannel( "QPE/Application/mailit", this );
   connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
         this, SLOT(receive(const QCString&, const QByteArray&)) );*/
@@ -104,18 +104,18 @@ EmailClient::~EmailClient()
   //different properties
   saveMail(getPath(FALSE) + "outbox.txt", outboxView);
   saveSettings();
-  
+
   mailconf->write();
   delete mailconf;
-  
+
 }
 
 void EmailClient::init()
 {
   initStatusBar(this);
-   
+
   setToolBarsMovable(FALSE);
-  
+
   bar = new QToolBar(this);
   QWhatsThis::add(bar,tr("Main operation toolbar"));
   bar->setHorizontalStretchable( TRUE );
@@ -127,7 +127,7 @@ void EmailClient::init()
 
   QPopupMenu *configure = new QPopupMenu(mb);
   mb->insertItem( tr( "Accounts" ), configure);
-  
+
   selectAccountMenu = new QPopupMenu(mb);
   editAccountMenu = new QPopupMenu(mb);
   deleteAccountMenu = new QPopupMenu(mb);
@@ -142,32 +142,32 @@ void EmailClient::init()
   QWhatsThis::add(getMailButton,tr("Click to download mail via all available accounts.\n Press and hold to select the desired account."));
 
   getMailButton->setPopup(selectAccountMenu);
-      
+
   sendMailButton = new QAction(tr("Send mail"), Resource::loadPixmap("mailit/sendqueue"), QString::null, 0, this, 0);
   connect(sendMailButton, SIGNAL(activated()), this, SLOT(sendQuedMail()) );
   sendMailButton->addTo(bar);
   sendMailButton->addTo(mail);
   sendMailButton->setWhatsThis("Send mail queued in the outbox");
-    
+
   composeButton = new QAction(tr("Compose"), Resource::loadPixmap("new"), QString::null, 0, this, 0);
   connect(composeButton, SIGNAL(activated()), this, SLOT(compose()) );
   composeButton->addTo(bar);
   composeButton->addTo(mail);
   composeButton->setWhatsThis("Compose a new mail");
-  
+
   cancelButton = new QAction(tr("Cancel transfer"), Resource::loadPixmap("close"), QString::null, 0, this, 0);
   connect(cancelButton, SIGNAL(activated()), this, SLOT(cancel()) );
   cancelButton->addTo(mail);
   cancelButton->addTo(bar);
   cancelButton->setEnabled(FALSE);
   cancelButton->setWhatsThis("Stop the currently active mail transfer");
-  
-  
+
+
   deleteButton = new QAction( tr( "Delete" ), Resource::loadPixmap( "trash" ), QString::null, 0, this, 0 );
   connect( deleteButton, SIGNAL( activated() ), this, SLOT( deleteItem() ) );
   deleteButton->addTo(bar);
   deleteButton->setWhatsThis("Remove the currently selected eMail(s)");
-  
+
   mailboxView = new OTabWidget( this, "mailboxView" );
 
   QWidget* widget = new QWidget( mailboxView, "widget" );
@@ -205,23 +205,23 @@ void EmailClient::init()
   "reviewed by double clicking the entry."));
   grid_3->addWidget( outboxView, 0, 0 );
   mailboxView->addTab( widget_2,"mailit/outbox", tr( "Outbox" ) );
-  
+
   setCentralWidget(mailboxView);
-  
+
 }
 
 void EmailClient::initStatusBar(QWidget* parent)
 {
   statusBar = new QStatusBar(parent);
   statusBar->setSizeGripEnabled(FALSE);
-  
+
   status1Label = new QLabel( tr("Idle"), statusBar);
   status2Label = new QLabel("", statusBar);
   connect(emailHandler, SIGNAL(updatePopStatus(const QString &)),
     status2Label, SLOT(setText(const QString &)) );
   connect(emailHandler, SIGNAL(updateSmtpStatus(const QString &)),
     status2Label, SLOT(setText(const QString &)) );
-  
+
   progressBar = new QProgressBar(statusBar);
 
   connect(emailHandler, SIGNAL(mailboxSize(int)),
@@ -260,20 +260,20 @@ void EmailClient::enqueMail(const Email &mail)
       tr("No account selected"), tr("You must create an account"), "OK\n");
     return;
   }
-   
+
   if (accountList.count() > 0) {
     currentAccount = accountList.first();
     qWarning("using account " + currentAccount->name);
   }
-  
+
   Email addMail = mail;
   addMail.from = currentAccount->name;
   addMail.fromMail = currentAccount->emailAddress;
   addMail.rawMail.prepend("From: \"" + addMail.from + "\" <" + addMail.fromMail + ">\n");
   item = new EmailListItem(outboxView, addMail, false);
-  
+
   mailboxView->setCurrentTab(1);
-  
+
 }
 
 void EmailClient::sendQuedMail()
@@ -281,7 +281,7 @@ void EmailClient::sendQuedMail()
   int count = 0;
 
   if (accountList.count() == 0) {
-    QMessageBox::warning(qApp->activeWindow(), "No account selected", "You must create an account", "OK\n");
+    QMessageBox::warning(qApp->activeWindow(), tr("No account selected"), tr("You must create an account"), "OK\n");
     return;
   }
   //traverse listview, find messages to send
@@ -313,30 +313,30 @@ void EmailClient::mailSent()
 {
   sending = FALSE;
   sendMailButton->setEnabled(TRUE);
-  
+
   quedMessages.clear();
   outboxView->clear();    //should be moved to an sentBox
 }
 
 void EmailClient::getNewMail() {
-  
+
   if (accountList.count() == 0) {
-    QMessageBox::warning(qApp->activeWindow(),"No account selected",
-      "You must create an account", "OK\n");
+    QMessageBox::warning(qApp->activeWindow(),tr("No account selected"),
+      tr("You must create an account"), "OK\n");
     return;
   }
-  
+
   setMailAccount();
-  
+
   receiving = TRUE;
   previewingMail = TRUE;
   getMailButton->setEnabled(FALSE);
   cancelButton->setEnabled(TRUE);
   selectAccountMenu->setEnabled(FALSE);
-  
+
   status1Label->setText(currentAccount->accountName + " headers");
   progressBar->reset();
-    
+
   //get any previous mails not downloaded and add to queue
   /*mailDownloadList.clear();
   Email *mailPtr;
@@ -348,16 +348,16 @@ void EmailClient::getNewMail() {
     }
     item = (EmailListItem *) item->nextSibling();
   }*/
-  
+
   emailHandler->getMailHeaders();
-  
+
 }
 
 void EmailClient::getAllNewMail()
 {
   allAccounts = TRUE;
   currentAccount = accountList.first();
-  getNewMail();  
+  getNewMail();
 }
 
 void EmailClient::mailArrived(const Email &mail, bool fromDisk)
@@ -367,57 +367,57 @@ void EmailClient::mailArrived(const Email &mail, bool fromDisk)
   int thisMailId;
   emailHandler->parse( mail.rawMail, lineShift, &newMail);
   mailconf->setGroup(newMail.id);
-  
-  if (fromDisk) 
+
+  if (fromDisk)
   {
-    
+
     newMail.downloaded = mailconf->readBoolEntry("downloaded");
     newMail.size = mailconf->readNumEntry("size");
     newMail.serverId = mailconf->readNumEntry("serverid");
     newMail.fromAccountId = mailconf->readNumEntry("fromaccountid");
-  } 
-  else 
+  }
+  else
   {  //mail arrived from server
-  
+
     newMail.serverId = mail.serverId;
     newMail.size = mail.size;
     newMail.downloaded = mail.downloaded;
-    
+
     newMail.fromAccountId = emailHandler->getAccount()->id;
     mailconf->writeEntry("fromaccountid", newMail.fromAccountId);
   }
-  
+
   //add if read or not
   newMail.read = mailconf->readBoolEntry("mailread");
-    
+
   //check if new mail
   if ( (thisMailId = mailconf->readNumEntry("internalmailid", -1)) == -1) {
     thisMailId = mailIdCount;
     mailIdCount++;
-    
+
     //set server count, so that if the user aborts, the new
     //header is not reloaded
     if ((currentAccount)&&(currentAccount->synchronize))
       currentAccount->lastServerMailCount++;
-    
+
     mailconf->writeEntry("internalmailid", thisMailId);
     mailconf->writeEntry("downloaded", newMail.downloaded);
     mailconf->writeEntry("size", (int) newMail.size);
     mailconf->writeEntry("serverid", newMail.serverId);
-    
+
     //addressList->addContact(newMail.fromMail, newMail.from);
   }
-  
+
   mailconf->writeEntry("downloaded", newMail.downloaded);
-  
+
   QString stringMailId;
   stringMailId.setNum(thisMailId);
   //see if any attatchments needs to be stored
-  
+
   for ( ePtr=newMail.files.first(); ePtr != 0; ePtr=newMail.files.next() ) {
     QString stringId;
     stringId.setNum(ePtr->id);
-    
+
     int id = mailconf->readNumEntry("enclosureid_" + stringId);
     if (id != ePtr->id) {     //new entry
       mailconf->writeEntry("enclosureid_" + stringId, ePtr->id);
@@ -426,7 +426,7 @@ void EmailClient::mailArrived(const Email &mail, bool fromDisk)
       mailconf->writeEntry("contentattribute_" + stringId, ePtr->contentAttribute);
       mailconf->writeEntry("saved_" + stringId, ePtr->saved);
       mailconf->writeEntry("installed_" + stringId, FALSE);
-      
+
             ePtr->name = stringMailId + "_" + stringId;
             ePtr->path = getPath(TRUE);
             if (emailHandler->getEnclosure(ePtr)) { //file saved
@@ -444,18 +444,18 @@ void EmailClient::mailArrived(const Email &mail, bool fromDisk)
       if (ePtr->saved) {
         ePtr->name = mailconf->readEntry("filename_" + stringId);
         ePtr->path = mailconf->readEntry("path_" + stringId);
-      }   
+      }
     }
   }
 
   bool found=false;
-  
-  if (!fromDisk) 
+
+  if (!fromDisk)
   {
-    
+
     Email *mailPtr;
     item = (EmailListItem *) inboxView->firstChild();
-    while ((item != NULL)&&(!found)) 
+    while ((item != NULL)&&(!found))
     {
       mailPtr = item->getMail();
       if (mailPtr->id == newMail.id) {
@@ -472,12 +472,12 @@ void EmailClient::mailArrived(const Email &mail, bool fromDisk)
 //        if (item->getMail()->files.count()>0)
 //        {
 //        item->setPixmap(0, Resource::loadPixmap("mailit/attach"));
-//        }  
+//        }
     /*if (!newMail.downloaded)
       mailDownloadList.sizeInsert(newMail.serverId, newMail.size);*/
-  
+
   mailboxView->setCurrentTab(0);
-  
+
 }
 
 void EmailClient::allMailArrived(int /*count*/)
@@ -495,18 +495,18 @@ void EmailClient::allMailArrived(int /*count*/)
       cancelButton->setEnabled(FALSE);
       selectAccountMenu->setEnabled(TRUE);
       status1Label->setText("Idle");
-  
+
       progressBar->reset();
       return;
     }
   //}
-  
+
   // all headers downloaded from server, start downloading remaining mails
   previewingMail = FALSE;
   status1Label->setText(currentAccount->accountName);
   progressBar->reset();
 
-   
+
   mailboxView->setCurrentTab(0);
 }
 
@@ -521,7 +521,7 @@ void EmailClient::moveMailFront(Email *mailPtr)
 void EmailClient::smtpError(int code, const QString & Msg)
 {
   QString temp;
-  
+
   if (code == ErrUnknownResponse) {
       temp = tr("<qt>Unknown response from server</qt>");
      if( ! Msg.isEmpty() )
@@ -533,13 +533,13 @@ void EmailClient::smtpError(int code, const QString & Msg)
    } else if (code == QSocket::ErrSocketRead) {
       temp = tr("<qt>socket packet error</qt>");
    }
-  
+
   if (code != ErrCancel) {
     QMessageBox::warning(qApp->activeWindow(), "Sending error", temp, "OK\n");
   } else {
     status2Label->setText("Aborted by user");
   }
-  
+
   sending = FALSE;
   sendMailButton->setEnabled(TRUE);
   cancelButton->setEnabled(FALSE);
@@ -549,7 +549,7 @@ void EmailClient::smtpError(int code, const QString & Msg)
 void EmailClient::popError(int code, const QString & Msg)
 {
   QString temp;
-  
+
    if (code == ErrUnknownResponse) {
       temp = tr("<qt>Unknown response from server</qt>");
      if( ! Msg.isEmpty() )
@@ -562,7 +562,7 @@ void EmailClient::popError(int code, const QString & Msg)
      temp = tr("<qt>connection refused</qt>");
    } else if (code == QSocket::ErrSocketRead) {
      temp = tr("<qt>socket packet error</qt>");
-   } 
+   }
 
   if (code != ErrCancel) {
       QMessageBox::warning(qApp->activeWindow(), tr("Receiving error"), temp, tr("OK\n"));
@@ -570,7 +570,7 @@ void EmailClient::popError(int code, const QString & Msg)
   } else {
     status2Label->setText("Aborted by user");
   }
-  
+
   receiving = FALSE;
   getMailButton->setEnabled(TRUE);
   cancelButton->setEnabled(FALSE);
@@ -580,7 +580,7 @@ void EmailClient::popError(int code, const QString & Msg)
 void EmailClient::inboxItemSelected()
 {
   //killTimer(timerID);
-  
+
   item = (EmailListItem*) inboxView->selectedItem();
   if (item != NULL) {
     emit viewEmail(inboxView, item->getMail());
@@ -590,7 +590,7 @@ void EmailClient::inboxItemSelected()
 void EmailClient::outboxItemSelected()
 {
   //killTimer(timerID);
-  
+
   item = (EmailListItem*) outboxView->selectedItem();
   if (item != NULL) {
     emit viewEmail(outboxView, item->getMail());
@@ -605,45 +605,45 @@ void EmailClient::readMail()
   QString s, del;
 
   QFile f(getPath(FALSE) + "inbox.txt");
-  
+
   if ( f.open(IO_ReadOnly) ) {    // file opened successfully
     QTextStream t( &f );        // use a text stream
     s = t.read();
     f.close();
-    
+
     start = 0;
     del = "\n.\n";
     while ((uint) start < s.length()) {
       stop = s.find(del, start);
       if (stop == -1)
         stop = s.length() - del.length();
-    
+
       mail.rawMail = s.mid(start, stop + del.length() - start );
       start = stop + del.length();
       mailArrived(mail, TRUE);
     }
   }
-  
+
   QFile fo(getPath(FALSE) + "outbox.txt");
   if ( fo.open(IO_ReadOnly) ) {    // file opened successfully
     QTextStream t( &fo );        // use a text stream
     s = t.read();
     fo.close();
-    
+
     start = 0;
     del = "\n.\n";
     while ((uint) start < s.length()) {
       stop = s.find(del, start);
       if (stop == -1)
         stop = s.length() - del.length();
-    
+
       mail.rawMail = s.mid(start, stop + del.length() - start );
       start = stop + del.length();
       emailHandler->parse(mail.rawMail, lineShift, &mail);
       mail.sent = false;
       mail.received = false;
           enqueMail(mail);
-      
+
     }
   }
 }
@@ -652,7 +652,7 @@ void EmailClient::saveMail(const QString &fileName, QListView *view)
 {
   QFile f(fileName);
   Email *mail;
-  
+
   if (! f.open(IO_WriteOnly) ) {
     qWarning("could not open file");
     return;
@@ -662,10 +662,10 @@ void EmailClient::saveMail(const QString &fileName, QListView *view)
   while (item != NULL) {
     mail = item->getMail();
     t << mail->rawMail;
-    
+
     mailconf->setGroup(mail->id);
     mailconf->writeEntry("mailread", mail->read);
-    
+
     item = (EmailListItem *) item->nextSibling();
   }
   f.close();
@@ -676,19 +676,19 @@ QString EmailClient::getPath(bool enclosurePath)
 {
   QString basePath = "qtmail";
   QString enclosures = "enclosures";
-  
+
   QDir dir = (QString(getenv("HOME")) + "/Applications/" + basePath);
   if ( !dir.exists() )
     dir.mkdir( dir.path() );
-  
+
   if (enclosurePath) {
     dir = (QString(getenv("HOME")) + "/Applications/" + basePath + "/" + enclosures);
-    
+
     if ( !dir.exists() )
       dir.mkdir( dir.path() );
-    
+
     return (dir.path() + "/");
-  
+
   }
   return (dir.path() + "/");
 }
@@ -696,13 +696,13 @@ QString EmailClient::getPath(bool enclosurePath)
 void EmailClient::readSettings()
 {
   int y,acc_count;
-    
+
     mailconf->setGroup("mailitglobal");
     acc_count=mailconf->readNumEntry("Accounts",0);
-    
-    for (int accountPos = 0;accountPos<acc_count ; accountPos++) 
+
+    for (int accountPos = 0;accountPos<acc_count ; accountPos++)
     {
-      mailconf->setGroup("Account_"+QString::number(accountPos+1));    //Account numbers start at 1 ...      
+      mailconf->setGroup("Account_"+QString::number(accountPos+1));    //Account numbers start at 1 ...
       account.accountName = mailconf->readEntry("AccName","");
       account.name = mailconf->readEntry("UserName","");
       account.emailAddress = mailconf->readEntry("Email","");
@@ -714,23 +714,23 @@ void EmailClient::readSettings()
       account.syncLimit = mailconf->readNumEntry("HeaderLimit",0);
       account.lastServerMailCount = 0;
       account.synchronize = FALSE;
-    
+
       account.synchronize = (mailconf->readEntry("Synchronize","No")=="Yes");
       if (account.synchronize)
       {
-      mailconf->readNumEntry("LASTSERVERMAILCOUNT",0); 
+      mailconf->readNumEntry("LASTSERVERMAILCOUNT",0);
       }
-      
+
       accountList.append(&account);
     }
-  
+
   mailconf->setGroup("mailitglobal");
-  
-  if ( (y = mailconf->readNumEntry("mailidcount", -1)) != -1) 
+
+  if ( (y = mailconf->readNumEntry("mailidcount", -1)) != -1)
   {
     mailIdCount = y;
   }
-  if ( (y = mailconf->readNumEntry("accountidcount", -1)) != -1) 
+  if ( (y = mailconf->readNumEntry("accountidcount", -1)) != -1)
   {
     accountIdCount = y;
   }
@@ -741,15 +741,15 @@ void EmailClient::saveSettings()
   int acc_count=0;
   MailAccount *accountPtr;
 
-    
-  if (!mailconf) 
+
+  if (!mailconf)
   {
     qWarning("could not save settings");
     return;
   }
-  
+
   for (accountPtr = accountList.first(); accountPtr != 0;
-      accountPtr = accountList.next()) 
+      accountPtr = accountList.next())
   {
     mailconf->setGroup("Account_"+QString::number(++acc_count));
     mailconf->writeEntry("AccName",accountPtr->accountName );
@@ -760,18 +760,18 @@ void EmailClient::saveSettings()
     mailconf->writeEntry("POPServer",accountPtr->popServer);
     mailconf->writeEntry("SMTPServer",accountPtr->smtpServer);
     mailconf->writeEntry("AccountId",accountPtr->id);
-    if (accountPtr->synchronize) 
+    if (accountPtr->synchronize)
     {
       mailconf->writeEntry("Synchronize","Yes");
       mailconf->writeEntry("HeaderLimit",accountPtr->syncLimit);
       mailconf->writeEntry("LastServerMailCount",accountPtr->lastServerMailCount);
-    } 
-    else 
+    }
+    else
     {
       mailconf->writeEntry("Synchronize", "No");
     }
   }
-  
+
   mailconf->setGroup("mailitglobal");
   mailconf->writeEntry("Accounts",acc_count);
   mailconf->writeEntry("mailidcount", mailIdCount);
@@ -785,14 +785,14 @@ void EmailClient::selectAccount(int id)
     emit newCaption("Mailit - " + currentAccount->accountName);
     getNewMail();
   } else {
-    emit newCaption("Mailit ! No account defined");
+    emit newCaption( tr("Mailit ! No account defined") );
   }
 }
 
 void EmailClient::editAccount(int id)
 {
   MailAccount *newAccount;
-    
+
   editAccountView = new EditAccount(this, "account", TRUE);
   if (id == newAccountId) {   //new account
     newAccount = new MailAccount;
@@ -801,10 +801,10 @@ void EmailClient::editAccount(int id)
     newAccount = accountList.at(id);
     editAccountView->setAccount(newAccount, FALSE);
   }
-  
+
   editAccountView->showMaximized();
   editAccountView->exec();
-  
+
   if (editAccountView->result() == QDialog::Accepted) {
     if (id == newAccountId) {
       newAccount->id = accountIdCount;
@@ -815,7 +815,7 @@ void EmailClient::editAccount(int id)
       updateAccounts();
     }
   }
-  
+
   delete editAccountView;
 }
 
@@ -823,12 +823,12 @@ void EmailClient::deleteAccount(int id)
 {
   MailAccount *newAccount;
   QString message;
-  
+
   newAccount = accountList.at(id);
-  message = "Delete account:\n" + newAccount->accountName;
+  message = tr("Delete account:\n") + newAccount->accountName;
   switch( QMessageBox::warning( this, "Mailit", message,
       "Yes", "No", 0, 0, 1 ) ) {
-    
+
     case 0: accountList.remove(id);
         updateAccounts();
         break;
@@ -840,20 +840,20 @@ void EmailClient::deleteAccount(int id)
 void EmailClient::updateAccounts()
 {
   MailAccount *accountPtr;
-  
+
   //rebuild menus, clear all first
   editAccountMenu->clear();
   selectAccountMenu->clear();
   deleteAccountMenu->clear();
 
-  newAccountId = editAccountMenu->insertItem("New", this,
+  newAccountId = editAccountMenu->insertItem( tr("New"), this,
       SLOT(editAccount(int)) );
   editAccountMenu->insertSeparator();
-  
+
   idCount = 0;
   for (accountPtr = accountList.first(); accountPtr != 0;
       accountPtr = accountList.next()) {
-    
+
     editAccountMenu->insertItem(accountPtr->accountName,
       this, SLOT(editAccount(int)), 0, idCount);
      selectAccountMenu->insertItem(accountPtr->accountName,
@@ -868,21 +868,21 @@ void EmailClient::deleteMail(EmailListItem *mailItem, bool &inbox)
 {
   Email *mPtr;
   Enclosure *ePtr;
-  
-  if (inbox) 
+
+  if (inbox)
   {
     mPtr = mailItem->getMail();
-    
+
     //if mail is in queue for download, remove it from
     //queue if possible
     if ( (receiving) && (mPtr->fromAccountId == currentAccount->id) ) {
       if ( !mPtr->downloaded )
         mailDownloadList.remove(mPtr->serverId, mPtr->size);
     }
-    
+
     mailconf->setGroup(mPtr->id);
     mailconf->clearGroup();
-    
+
     //delete any temporary attatchemnts storing
     for ( ePtr=mPtr->files.first(); ePtr != 0; ePtr=mPtr->files.next() ) {
       if (ePtr->saved) {
@@ -890,8 +890,8 @@ void EmailClient::deleteMail(EmailListItem *mailItem, bool &inbox)
       }
     }
     inboxView->takeItem(mailItem);
-  } 
-  else 
+  }
+  else
   {
     outboxView->takeItem(mailItem);
   }
@@ -905,7 +905,7 @@ void EmailClient::setMailSize(int size)
 
 void EmailClient::setTotalSize(int /*size*/)
 {
-  
+
 }
 
 void EmailClient::setDownloadedSize(int size)
@@ -923,18 +923,18 @@ void EmailClient::deleteItem()
 {
   bool inbox=mailboxView->currentTab()==0;
   QListView* box;
-  
+
   EmailListItem* eli;
   //  int pos;
-    
+
   inbox ? box=inboxView : box=outboxView;
-  
+
   eli=(EmailListItem*)box->selectedItem();
-  
+
   if (eli)
   {
     box->setSelected(eli->itemBelow(),true);  //select the previous item
-    
+
     deleteMail(eli,(bool&)inbox);   //remove mail entry
   }
 }
@@ -952,21 +952,21 @@ void EmailClient::inboxItemReleased()
 /*void EmailClient::timerEvent(QTimerEvent *e)
 {
   //killTimer(timerID);
-  
-  
+
+
   QPopupMenu *action = new QPopupMenu(this);
-  
+
   int reply=0;
-  
+
   action->insertItem(tr( "Reply To" ),this,SLOT(reply()));
   action->insertItem( tr( "Reply All" ),this,SLOT(replyAll()));
   action->insertItem( tr( "Forward" ), this,SLOT(forward()));
   action->insertItem( tr( "Remove Mail" ), this,SLOT(remove()));
- 
+
   action->exec(QCursor::pos());
-  
+
   if (action) delete action;
-   
+
 }*/
 
 Email* EmailClient::getCurrentMail()
@@ -977,21 +977,21 @@ Email* EmailClient::getCurrentMail()
   else
     return NULL;
 }
-  
+
 void EmailClient::download(Email* mail)
 {
   MailAccount* acc=0;
-  
+
   tempMailDownloadList.clear();
   tempMailDownloadList.sizeInsert(mail->serverId, mail->size);
-  
+
   acc=accountList.at(mail->fromAccountId-1);
   if (acc)
-  { 
+  {
     emailHandler->setAccount(*acc);
     emailHandler->getMailByList(&tempMailDownloadList);
   }
-  else 
+  else
     QMessageBox::warning(qApp->activeWindow(),
           tr("No account associated"), tr("There is no active account \nassociated to this mail\n it can not be downloaded"), "Abort\n");
 }
@@ -1002,9 +1002,9 @@ void EmailClient::receive(const QCString& /*msg*/, const QByteArray& /*data*/)
   {
     //QDialog qd(qApp->activeWindow(),"Getting mail",true);
     QVBoxLayout *vbProg = new QVBoxLayout( &qd );
-  
+
     initStatusBar(&qd);
-    
+
     if (statusBar==0)
     {
       qDebug("No Bar ...");
@@ -1018,23 +1018,23 @@ void EmailClient::receive(const QCString& /*msg*/, const QByteArray& /*data*/)
     //qd.exec();
   }
   else if (msg=="compose()")
-  { 
+  {
     QDialog qd(qApp->activeWindow(),"Getting mail",true);
-    
+
     WriteMail wm(&qd,"write new mail");
     QVBoxLayout vbProg( &qd );
-    
+
     wm.showMaximized();
     vbProg.addWidget(&wm);
-    
+
     qd.showMaximized();
-    
+
     emit composeRequested();
     qd.exec();
-    
+
     QMessageBox::warning(qApp->activeWindow(),tr("Info"), tr("Info"), "OK\n");
   }
-    
+
   else if (msg=="dialog()")
   {
       QMessageBox::warning(qApp->activeWindow(),tr("Info"), tr("Info"), "OK\n");

@@ -1,6 +1,5 @@
-TEMPLATE  = app
 TARGET = mailit
-CONFIG    = qt warn_on release
+CONFIG    = qt warn_on release quick-app
 HEADERS   = emailclient.h \
       emailhandler.h \
       emaillistitem.h \
@@ -37,9 +36,6 @@ INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include 
 LIBS            += -lqpe -lopie
 # -lssl
-MOC_DIR=qpeobj
-OBJECTS_DIR=qpeobj
-DESTDIR=$(OPIEDIR)/bin
 
 TRANSLATIONS = ../../../i18n/de/mailit.ts \
 	 ../../../i18n/nl/mailit.ts \

@@ -40,13 +40,16 @@ namespace OpieTooth {
     public:
         BlueBase( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
         ~BlueBase();
+	
+       static QString appName() { return QString::fromLatin1("bluetooth-manager"); }	
 
     protected:
 
 
     private slots:
         void startScan();
-
+    
+    
     private:
         bool find( const RemoteDevice& device );
 	void readConfig();
@@ -89,6 +92,7 @@ namespace OpieTooth {
         void applyConfigChanges();
 	void addSignalStrength();
 	void addSignalStrength( const QString& mac, const QString& strengh );
+	void rfcommDialog();
 
     };
 
