@@ -160,8 +160,6 @@ void QIMPenProfile::loadData()
 	cs = new QIMPenCharSet( baseDir + "qimpen/" + s );
 	cs->load( Global::applicationFileName("qimpen",s), QIMPenCharSet::User );
 	if ( !cs->isEmpty() ) {
-	    if ( mono () )
-		cs->setDescription( "Latin Characters" );
 	    if ( combining )
 		combining->addCombined( cs );
 	    sets.append( cs );
