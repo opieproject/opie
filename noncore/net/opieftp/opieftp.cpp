@@ -319,7 +319,8 @@ void OpieFtp::newConnection()
    currentServerConfig = -1;
 }
 
-void OpieFtp::serverComboEdited(const QString & edit) {
+void OpieFtp::serverComboEdited(const QString & edit)
+{
     if( !edit.isEmpty() ) {
         currentServerConfig = -1;
 //        qDebug("comboedited");
@@ -654,7 +655,7 @@ bool OpieFtp::populateRemoteView( )
 
 void OpieFtp::remoteListClicked(QListViewItem *selectedItem)
 {
-    if(item) {
+    if( selectedItem) {
         QCopEnvelope ( "QPE/System", "busy()" );
         QString  oldRemoteCurrentDir =  currentRemoteDir;
         QString strItem=selectedItem->text(0);
@@ -711,8 +712,7 @@ void OpieFtp::remoteListClicked(QListViewItem *selectedItem)
 
 void OpieFtp::localListClicked(QListViewItem *selectedItem)
 {
-//    qDebug(selectedItem->text(0));
-    if(item!= NULL) {
+    if(selectedItem!= NULL) {
     
     QString strItem=selectedItem->text(0);
         QString strSize=selectedItem->text(1);
