@@ -1,0 +1,11 @@
+[Desktop Entry]
+Comment=A Note Taking Program
+Exec=drawpad
+Icon=drawpad/DrawPad
+Type=Application
+Name=DrawPad
+Name[de]=Zeichenbrett
+Name[pt]=Bloco Rabiscos
+Name[es]=Pizarra
+Name[zh_TW]=小畫家
+Name[ko]=그림판

@@ -1,0 +1,14 @@
+[Desktop Entry]
+Comment=A Todo List Program
+Exec=todolist
+Icon=TodoList
+Type=Application
+Name=Todo List
+Name[pt_BR]=Afazeres
+Name[no]=Oppgaveliste
+Name[de]=Aufgabenliste
+Name[hu]=Feladatok
+Name[pt]=Tarefas
+Name[es]=Tareas
+Name[zh_TW]=待辦事項
+Name[ko]=할일 목록
