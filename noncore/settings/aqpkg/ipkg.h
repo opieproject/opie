@@ -59,10 +59,12 @@ public slots:
     void commandStdout(OProcess*, char *buffer, int buflen);
     void commandStderr(OProcess*, char *buffer, int buflen);
     void processFinished();
+    void abort();
 
     
 private:
     bool createLinks;
+    bool aborted;
     QString option;
     QString package;
     QString destination;

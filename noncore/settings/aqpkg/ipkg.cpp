@@ -39,6 +39,7 @@ using namespace std;
 
 Ipkg :: Ipkg()
 {
+    proc = 0;
 }
 
 Ipkg :: ~Ipkg()
@@ -136,6 +137,9 @@ bool Ipkg :: runIpkg( )
     dependantPackages->setAutoDelete( true );
 
     ret = executeIpkgCommand( commands, option );
+
+    if ( aborted )
+        return false;
 
     if ( option == "install" || option == "reinstall" )
     {
@@ -256,8 +260,17 @@ void Ipkg :: removeStatusEntry()
 
 int Ipkg :: executeIpkgCommand( QStringList &cmd, const QString option )
 {
+    // If one is already running - should never be but just to be safe
+    if ( proc )
+    {
+        delete proc;
+        proc = 0;
+    }
+    
     // OK we're gonna use OProcess to run this thing
     proc = new OProcess();
+    aborted = false;
+
 
     // Connect up our slots
     connect(proc, SIGNAL(processExited(OProcess *)),
@@ -317,10 +330,19 @@ void Ipkg::commandStderr(OProcess*, char *buffer, int buflen)
 void Ipkg::processFinished()
 {
     delete proc;
+    proc = 0;
     finished = true;
 }
 
 
+void Ipkg :: abort()
+{
+    if ( proc )
+    {
+        proc->kill();
+        aborted = true;
+    }
+}
 
 /*
 int Ipkg :: executeIpkgCommand( QString &cmd, const QString option )
