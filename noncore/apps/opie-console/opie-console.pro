@@ -2,7 +2,7 @@ TEMPLATE     = app
 #CONFIG       = qt warn_on release
 CONFIG 	     = qt debug
 DESTDIR      = $(OPIEDIR)/bin
-HEADERS      = io_layer.h io_serial.h io_irda.h io_bt.h \
+HEADERS      = io_layer.h io_serial.h io_irda.h \
 	       file_layer.h sz_transfer.h \
 	       metafactory.h \
 	       session.h \
@@ -30,7 +30,7 @@ HEADERS      = io_layer.h io_serial.h io_irda.h io_bt.h \
 	       serialconfigwidget.h irdaconfigwidget.h btconfigwidget.h \
 
 
-SOURCES      = io_layer.cpp io_serial.cpp io_irda.cpp io_bt.cpp \
+SOURCES      = io_layer.cpp io_serial.cpp io_irda.cpp \
 	       file_layer.cpp sz_transfer.cpp \
                main.cpp \
 	       metafactory.cpp \
