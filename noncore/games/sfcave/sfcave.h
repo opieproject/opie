@@ -28,14 +28,25 @@ public:
 	int speed;
     int crashLineLength;
 
+    static double UpThrustVals[3][3];
+    static double DownThrustVals[3][3];
+    static double MaxUpThrustVals[3][3];
+    static double MaxDownThrustVals[3][3];
+    static int initialGateGaps[];
+    
+    double thrustUp;
+    double noThrust;
+    double maxUpThrust;
+    double maxDownThrust;
+
     int gateDistance;
     int nextGate;
     int lastGateBottomY;
     
     static QString menuOptions[2][5];
     int currentMenuNr;
-    int nrMenuOptions[2];
-    int currentMenuOption[2];
+    static int nrMenuOptions[2];
+    static int currentMenuOption[2];
 
     static QString dificultyOption[3];
     static QString gameTypes[3];
@@ -46,7 +57,7 @@ public:
 	QTimer *gameTimer;
 
 	int score;
-	int highestScore[3];
+	int highestScore[3][3];
 
 	int mapTop[MAPSIZE];
 	int mapBottom[MAPSIZE];
@@ -59,7 +70,7 @@ public:
 	int nrFrames;
 	int dir;
 
-	bool bossMode;
+	bool showScoreZones;
 
 	bool press;
 	double thrust;
@@ -70,6 +81,12 @@ public:
 	void start();
 	int nextInt( int range );
 	void setUp();
+    void handleGameSFCave();
+    void handleGameGates();
+    void handleGameFly();
+	bool checkFlyGameCollision();
+	void moveFlyGameLandscape();
+	void setFlyPoint( int point );
 	bool checkCollision();
 	void moveLandscape();
 	void addBlock();
@@ -84,6 +101,7 @@ public:
 
 	void keyPressEvent( QKeyEvent *e );
 	void keyReleaseEvent( QKeyEvent *e );
+    void saveScore();
 
 private slots:
 	void run();

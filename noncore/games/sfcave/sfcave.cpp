@@ -9,16 +9,23 @@
 #include <qapplication.h>
 #endif
 
+#include "helpwindow.h"
 #include "sfcave.h"
 
-#define CAPTION "SFCave 1.7 by AndyQ"
+#define CAPTION "SFCave 1.8 by AndyQ"
+
+#define UP_THRUST               0.6
+#define NO_THRUST               0.8
+#define MAX_DOWN_THRUST         4.0
+#define MAX_UP_THRUST           -3.5
 
 // States
 #define STATE_BOSS              0
 #define STATE_RUNNING           1
-#define STATE_CRASHED           2
-#define STATE_NEWGAME           3
-#define STATE_MENU              4
+#define STATE_CRASHING          2
+#define STATE_CRASHED           3
+#define STATE_NEWGAME           4
+#define STATE_MENU              5
 
 // Menus
 #define MENU_MAIN_MENU          0
@@ -27,20 +34,22 @@
 // Main Menu Options
 #define MENU_START_GAME         0
 #define MENU_OPTIONS            1
-#define MENU_QUIT               2
+#define MENU_HELP               2
+#define MENU_QUIT               3
 
 // Option Menu Options
 #define MENU_GAME_TYPE          0
-#define MENU_GAME_DIFFICULTY     1
-#define MENU_BACK               2
-
-QString SFCave::menuOptions[2][5] = { { "Start Game", "Options", "Quit", "", "" },
-                                    { "Game Type - %s", "Game Difficulty - %s", "Back", "", "" } };
+#define MENU_GAME_DIFFICULTY    1
+#define MENU_CLEAR_HIGHSCORES   2
+#define MENU_BACK               3
 
 
 #define NR_GAME_DIFFICULTIES    3
 #define NR_GAME_TYPES           3
 
+#define DIFICULTY_EASY          0
+#define DIFICULTY_NORMAL        1
+#define DIFICULTY_HARD          2
 #define EASY                    "Easy"
 #define NORMAL                  "Normal"
 #define HARD                    "Hard"
@@ -51,11 +60,39 @@ QString SFCave::menuOptions[2][5] = { { "Start Game", "Options", "Quit", "", "" 
 #define SFCAVE_GAME             "SFCave"
 #define GATES_GAME              "Gates"
 #define FLY_GAME                "Fly"
+#define CURRENT_GAME_TYPE       gameTypes[currentGameType]
+#define CURRENT_GAME_DIFFICULTY difficultyOption[currentGameDifficulty];
+
 QString SFCave::dificultyOption[] = { EASY, NORMAL, HARD };
 QString SFCave::gameTypes[] = { SFCAVE_GAME, GATES_GAME, FLY_GAME };
 
-#define CURRENT_GAME_TYPE       gameTypes[currentGameType]
-#define CURRENT_GAME_DIFFICULTY difficultyOption[currentGameDifficulty];
+QString SFCave::menuOptions[2][5] = { { "Start Game", "Options", "Help", "Quit", "" },
+                                    { "Game Type - %s", "Game Difficulty - %s", "Clear High Scores for this game", "Back", "" } };
+
+#define UP_THRUST               0.6
+#define NO_THRUST               0.8
+#define MAX_DOWN_THRUST         4.0
+#define MAX_UP_THRUST           -3.5
+double SFCave::UpThrustVals[3][3]               = {{ 0.6,   0.6, 0.6 },     // SFCave
+                                                   { 0.6,   0.6, 0.8 },     // Gates
+                                                   { 0.4,   0.7, 1.0 } };   // Fly
+                                                   
+double SFCave::DownThrustVals[3][3]             = {{ 0.8,   0.8, 0.8 },     // SFCave
+                                                   { 0.8,   0.8, 1.0 },     // Gates
+                                                   { 0.4,   0.7, 1.0 } };   // Fly
+                                                   
+double SFCave::MaxUpThrustVals[3][3]            = {{ -3.5, -3.5, -3.5 },    // SFCave
+                                                   { -3.5, -4.0, -5.0 },    // Gates
+                                                   { -3.5, -4.0, -5.0 } };  // Fly
+                                                   
+double SFCave::MaxDownThrustVals[3][3]          = {{ 4.0,   4.0, 4.0 },     // SFCave
+                                                   { 4.0,   5.0, 5.5 },     // Gates
+                                                   { 3.5,   4.0, 5.0 } };   // Fly
+
+int SFCave::initialGateGaps[]           = { 75, 50, 25 };
+
+int SFCave::nrMenuOptions[2] = { 4, 4 };
+int SFCave ::currentMenuOption[2] = { 0, 0 };
 
 bool movel;
 
@@ -63,7 +100,6 @@ bool movel;
 int main( int argc, char *argv[] )
 {
     movel = true;
-
 #ifdef QWS
     QPEApplication a( argc, argv );
 #else
@@ -102,22 +138,23 @@ SFCave :: SFCave( int spd, QWidget *w, char *name )
     segSize = sWidth/(MAPSIZE-1)+1;
 
     currentMenuNr = 0;
-    nrMenuOptions[0] = 3;
-    nrMenuOptions[1] = 3;
-    currentMenuOption[0] = 0;
-    currentMenuOption[1] = 0;
     currentGameType = 0;
     currentGameDifficulty = 0;
 
     setCaption( CAPTION );
+    showScoreZones = false;
 
 #ifdef QWS
     Config cfg( "sfcave" );
     cfg.setGroup( "settings" );
     QString key = "highScore_";
-    highestScore[SFCAVE_GAME_TYPE] = cfg.readNumEntry( key + SFCAVE_GAME, 0 );
-    highestScore[GATES_GAME_TYPE] = cfg.readNumEntry( key + GATES_GAME, 0 );
-    highestScore[FLY_GAME_TYPE] = cfg.readNumEntry( key + FLY_GAME, 0 );
+
+    for ( int i = 0 ; i < 3 ; ++i )
+    {
+        for ( int j = 0 ; j < 3 ; ++j )
+            highestScore[i][j] = cfg.readNumEntry( key + gameTypes[i] + "_" + dificultyOption[j], 0 );
+    }
+    
     currentGameType = cfg.readNumEntry( "gameType", 0 );
     currentGameDifficulty = cfg.readNumEntry( "difficulty", 0 );
 #endif
@@ -157,17 +194,39 @@ void SFCave :: setUp()
 
     score = 0;
     offset = 0;
-    maxHeight = 50;
     nrFrames = 0;
     dir = 1;
     thrust = 0;
+
+    if ( CURRENT_GAME_TYPE == SFCAVE_GAME )
+    {
+        thrustUp = UpThrustVals[SFCAVE_GAME_TYPE][currentGameDifficulty];;
+        noThrust = DownThrustVals[SFCAVE_GAME_TYPE][currentGameDifficulty];;
+        maxUpThrust = MaxUpThrustVals[SFCAVE_GAME_TYPE][currentGameDifficulty];;
+        maxDownThrust = MaxDownThrustVals[SFCAVE_GAME_TYPE][currentGameDifficulty];;
+    }
+    else if ( CURRENT_GAME_TYPE == GATES_GAME )
+    {
+        thrustUp = UpThrustVals[GATES_GAME_TYPE][currentGameDifficulty];;
+        noThrust = DownThrustVals[GATES_GAME_TYPE][currentGameDifficulty];;
+        maxUpThrust = MaxUpThrustVals[GATES_GAME_TYPE][currentGameDifficulty];;
+        maxDownThrust = MaxDownThrustVals[GATES_GAME_TYPE][currentGameDifficulty];;
+    }
+    else
+    {
+        thrustUp = UpThrustVals[FLY_GAME_TYPE][currentGameDifficulty];
+        noThrust = DownThrustVals[FLY_GAME_TYPE][currentGameDifficulty];
+        maxUpThrust = MaxUpThrustVals[FLY_GAME_TYPE][currentGameDifficulty];
+        maxDownThrust = MaxDownThrustVals[FLY_GAME_TYPE][currentGameDifficulty];
+    }
+    
     crashLineLength = 0;
 
     user.setRect( 50, sWidth/2, 4, 4 );
 
     blockWidth = 20;
     blockHeight = 70;
-    gapHeight = 125;
+    gapHeight = initialGateGaps[currentGameDifficulty];
     gateDistance = 75;
     nextGate = nextInt( 50 ) + gateDistance;
 
@@ -177,113 +236,224 @@ void SFCave :: setUp()
         trail[i].setY( 0 );
     }
 
-    mapTop[0] = (int)(nextInt(50)) + 5;
-    for ( int i = 1 ; i < MAPSIZE ; ++i )
-        setPoint( i );
+    if ( CURRENT_GAME_TYPE != FLY_GAME )
+    {
+        maxHeight = 50;
+        
+        mapTop[0] = (int)(nextInt(50)) + 5;
+        mapBottom[0] = (int)(nextInt(50)) + 5;
+        for ( int i = 1 ; i < MAPSIZE ; ++i )
+            setPoint( i );
+    }
+    else
+    {
+        maxHeight = 100;
 
+        for ( int i = 0 ; i < MAPSIZE ; ++i )
+            mapBottom[i] = sHeight - 10;
+    }
     for ( int i = 0 ; i < BLOCKSIZE ; ++i )
         blocks[i].setY( -1 );
 }
 
 void SFCave :: run()
 {
-    //running = true;
-    //setUp();
-        switch ( state )
+    switch ( state )
+    {
+        case STATE_MENU:
+            displayMenu();
+            break;
+        case STATE_NEWGAME:
+            setUp();
+            draw();
+            state = STATE_RUNNING;
+            break;
+        case STATE_BOSS:
+            drawBoss();
+            break;
+
+        case STATE_CRASHING:
+        case STATE_CRASHED:
+            draw();
+            break;
+
+        case STATE_RUNNING:
         {
-            case STATE_MENU:
-                displayMenu();
-                break;
-            case STATE_NEWGAME:
-                setUp();
-                draw();
-                state = STATE_RUNNING;
-                break;
-            case STATE_BOSS:
-                drawBoss();
-                break;
+            if ( nrFrames % 2 == 0 )
+                handleKeys();
 
-            case STATE_CRASHED:
-                draw();
-                break;
+            // Apply Game rules
+            nrFrames ++;
+            if ( CURRENT_GAME_TYPE == SFCAVE_GAME )
+                handleGameSFCave();
+            else if ( CURRENT_GAME_TYPE == GATES_GAME )
+                handleGameGates();
+            else if ( CURRENT_GAME_TYPE == FLY_GAME )
+                handleGameFly();
 
-            case STATE_RUNNING:
-            {
-                if ( nrFrames % 5 == 0 )
-                    score ++;
-                if ( nrFrames % 2 == 0 )
-                    handleKeys();
-
-                // Apply Game rules
-                nrFrames ++;
-                if ( CURRENT_GAME_TYPE == SFCAVE_GAME )
-                {
-                    if ( nrFrames % 500 == 0 )
-                    {
-                        if ( maxHeight < sHeight - 100 )
-                        {
-                            maxHeight += 10;
-
-                            // Reduce block height
-                            if ( maxHeight > sHeight - 150 )
-                                blockHeight -= 5;
-                        }
-                    }
-
-                    if ( nrFrames % 100 == 0 )
-                        addBlock();
-                }
-                else if ( CURRENT_GAME_TYPE == GATES_GAME )
-                {
-                    // Slightly random gap distance
-                    if ( nrFrames >= nextGate )
-                    {
-                        nextGate = nrFrames + nextInt( 50 ) + gateDistance;
-                        addGate();
-                    }
-
-                    if ( nrFrames % 500 == 0 )
-                    {
-                        if ( gapHeight > 75 )
-                            gapHeight -= 5;
-                    }
-                }
-                else if ( CURRENT_GAME_TYPE == FLY_GAME )
-                {
-                }
-                    
-                
-                if ( checkCollision() )
-                {
-                    if ( score > highestScore[currentGameType] )
-                        highestScore[currentGameType] = score;
-
-#ifdef QWS
-    Config cfg( "sfcave" );
-    cfg.setGroup( "settings" );
-    QString key = "highScore_";
-    key += CURRENT_GAME_TYPE;
-    cfg.writeEntry( key, highestScore[currentGameType] );
-#endif
-
-                    state = STATE_CRASHED;
-                }
-                else
-                {
-                    if ( movel )
-                        moveLandscape();
-                    //movel = false;
-                }
-
-                draw();
-                break;
-            }
+            draw();
+            break;
         }
+    }
+}
+
+void SFCave :: handleGameSFCave()
+{
+    // Update score
+    if ( nrFrames % 5 == 0 )
+        score ++;
+
+    if ( nrFrames % 500 == 0 )
+    {
+        if ( maxHeight < sHeight - 100 )
+        {
+            maxHeight += 10;
+
+            // Reduce block height
+            if ( maxHeight > sHeight - 150 )
+                blockHeight -= 5;
+        }
+    }
+
+    if ( nrFrames % 100 == 0 )
+        addBlock();
+
+    if ( checkCollision() )
+    {
+        if ( score > highestScore[currentGameType][currentGameDifficulty] )
+        {
+            highestScore[currentGameType][currentGameDifficulty] = score;
+            saveScore();
+        }
+        state = STATE_CRASHING;
+    }
+    else
+    {
+        moveLandscape();
+    }
+
+}
+
+
+void SFCave :: handleGameGates()
+{
+    // Update score
+    if ( nrFrames % 5 == 0 )
+        score ++;
+
+    // Slightly random gap distance
+    if ( nrFrames >= nextGate )
+    {
+        nextGate = nrFrames + nextInt( 50 ) + gateDistance;
+        addGate();
+    }
+
+    if ( nrFrames % 500 == 0 )
+    {
+        if ( gapHeight > 75 )
+            gapHeight -= 5;
+    }
+
+    if ( checkCollision() )
+    {
+        if ( score > highestScore[currentGameType][currentGameDifficulty] )
+        {
+            highestScore[currentGameType][currentGameDifficulty] = score;
+            saveScore();
+        }
+        state = STATE_CRASHING;
+    }
+    else
+    {
+        moveLandscape();
+    }
+
+}
+
+void SFCave :: handleGameFly()
+{
+    if ( nrFrames % 4 == 0 )
+    {
+        // Update score
+        // get distance between landscape and ship
+        int diff = mapBottom[10] - user.y();
+
+        // the closer the difference is to 0 means more points
+        if ( diff < 10 )
+            score += 5;
+        else if ( diff < 20 )
+            score += 3;
+        else if ( diff < 30 )
+            score += 2;
+        else if ( diff < 40 )
+            score += 1;
+    }
+
+    if ( checkFlyGameCollision() )
+    {
+        if ( score > highestScore[currentGameType][currentGameDifficulty] )
+        {
+            highestScore[currentGameType][currentGameDifficulty] = score;
+            saveScore();
+        }
+        state = STATE_CRASHING;
+    }
+    else
+    {
+        moveFlyGameLandscape();
+    }
+}
+
+bool SFCave :: checkFlyGameCollision()
+{
+    if ( (user.y() + user.width()) >= mapBottom[11] )
+        return true;
+
+    return false;
+}
+
+void SFCave :: moveFlyGameLandscape()
+{
+    offset++;
+
+    if ( offset >= segSize )
+    {
+        offset = 0;
+        for ( int i = 0 ; i < MAPSIZE-speed ; ++i )
+            mapBottom[i] = mapBottom[i+speed];
+
+        for ( int i = speed ; i > 0 ; --i )
+            setFlyPoint( MAPSIZE-i );
+    }
+}
+
+void SFCave :: setFlyPoint( int point )
+{
+    static int fly_difficulty_levels[] = { 5, 10, 15 };
+    if ( nextInt(100) >= 75 )
+        dir *= -1;
+
+    int prevPoint = mapBottom[point-1];
+    
+    int nextPoint = prevPoint + (dir * nextInt( fly_difficulty_levels[currentGameDifficulty] ) );
+
+    if ( nextPoint > sHeight )
+    {
+        nextPoint = sHeight;
+        dir *= -1;
+    }
+    else if ( nextPoint < maxHeight )
+    {
+        nextPoint = maxHeight;
+        dir *= 1;
+    }
+
+    mapBottom[point] = nextPoint;
 }
 
 bool SFCave :: checkCollision()
 {
-    if ( (user.y() + user.width()) >= mapBottom[10] || user.y() <= mapTop[10] )
+    if ( (user.y() + user.width()) >= mapBottom[11] || user.y() <= mapTop[11] )
         return true;
 
     for ( int i = 0 ; i < BLOCKSIZE ; ++i )
@@ -350,7 +520,7 @@ void SFCave :: addGate()
         {
             int x1 = sWidth;
             int y1 = mapTop[50];
-            int b1Height = nextInt(mapBottom[50] - mapTop[50] - gateDistance);
+            int b1Height = nextInt(mapBottom[50] - mapTop[50] - gapHeight);
 
             // See if height between last gate and this one is too big
             if ( b1Height - 200 > lastGateBottomY )
@@ -360,7 +530,7 @@ void SFCave :: addGate()
             lastGateBottomY = b1Height;
 
             int x2 = sWidth;
-            int y2 = y1 + b1Height + gateDistance;
+            int y2 = y1 + b1Height + gapHeight;
             int b2Height = mapBottom[50] - y2;
             
 
@@ -389,7 +559,7 @@ void SFCave :: setPoint( int point )
         dir *= -1;
     }
 
-    mapBottom[point] = sHeight - (maxHeight - mapBottom[point]);
+//    mapBottom[point] = sHeight - (maxHeight - mapBottom[point]);
     mapBottom[point] = sHeight - (maxHeight - mapTop[point]);
 }
 
@@ -411,10 +581,28 @@ void SFCave :: draw()
 
     for ( int i = 0 ; i < MAPSIZE -3; ++i )
     {
-        p.drawLine( (i*segSize) - (offset*speed), mapTop[i], ((i+1)*segSize)-(offset*speed), mapTop[i+1] );
+        // Only display top landscape if not running FLY_GAME
+        if ( CURRENT_GAME_TYPE != FLY_GAME )
+            p.drawLine( (i*segSize) - (offset*speed), mapTop[i], ((i+1)*segSize)-(offset*speed), mapTop[i+1] );
+            
         p.drawLine( (i*segSize) - (offset*speed), mapBottom[i], ((i+1)*segSize)-(offset*speed), mapBottom[i+1] );
+
+        if ( CURRENT_GAME_TYPE == FLY_GAME && showScoreZones )
+        {
+            p.setPen( Qt::red );
+            p.drawLine( (i*segSize) - (offset*speed), mapBottom[i]-10, ((i+1)*segSize)-(offset*speed), mapBottom[i+1]-10 );
+            p.drawLine( (i*segSize) - (offset*speed), mapBottom[i]-20, ((i+1)*segSize)-(offset*speed), mapBottom[i+1]-20 );
+            p.drawLine( (i*segSize) - (offset*speed), mapBottom[i]-30, ((i+1)*segSize)-(offset*speed), mapBottom[i+1]-30 );
+            p.drawLine( (i*segSize) - (offset*speed), mapBottom[i]-40, ((i+1)*segSize)-(offset*speed), mapBottom[i+1]-40 );
+            p.setPen( Qt::white );
+        }        
     }
 
+    // Uncomment this to show user segment (usful for checking collision boundary with landscape
+//    p.setPen( Qt::red );
+//    p.drawLine( (11*segSize) - (offset*speed), 0, ((11)*segSize)-(offset*speed), sHeight );
+//    p.setPen( Qt::white );
+    
     // Draw user
     p.drawRect( user );
 
@@ -433,11 +621,11 @@ void SFCave :: draw()
 
     // draw score
     QString s;
-    s.sprintf( "score %06d   high score %06d", score, highestScore[currentGameType] );
+    s.sprintf( "score %06d   high score %06d", score, highestScore[currentGameType][currentGameDifficulty] );
     p.drawText( 5, 10, s );
 
 
-    if ( state == STATE_CRASHED )
+    if ( state == STATE_CRASHING || state == STATE_CRASHED )
     {
         // add next crash line
 
@@ -450,14 +638,16 @@ void SFCave :: draw()
             }
         }
 
-        if ( crashLineLength >= 15 || crashLineLength == -1 )
+        if ( state == STATE_CRASHING && crashLineLength >= 15 ) //|| crashLineLength == -1) )
+            state = STATE_CRASHED;
+
+        if ( state == STATE_CRASHED )
         {
             QString text = "Press up or down to start";
             p.drawText( (sWidth/2) - (fm.width( text )/2), 140, text );
 
             text = "or press OK for menu";
             p.drawText( (sWidth/2) - (fm.width( text )/2), 155, text );
-//           p.drawText( 70, 140, QString( "Press down to start" ) );
         }
         else
             crashLineLength ++;
@@ -492,14 +682,14 @@ void SFCave :: handleKeys()
     if ( speed <= 3 )
     {
         if ( press )
-            thrust -= 0.6;
+            thrust -= thrustUp;
         else
-            thrust += 0.8;
+            thrust += noThrust;
 
-        if ( thrust > 4.0 )
-            thrust = 4.0;
-        else if ( thrust < -3.5 )
-            thrust = -3.5;
+        if ( thrust > maxDownThrust )
+            thrust = maxDownThrust;
+        else if ( thrust < maxUpThrust )
+            thrust = maxUpThrust;
     }
     else
     {
@@ -588,8 +778,14 @@ void SFCave :: keyPressEvent( QKeyEvent *e )
             case Qt::Key_M:
             case Qt::Key_Return:
             case Qt::Key_Enter:
-                if ( state == STATE_CRASHED && crashLineLength >= 15 || crashLineLength == -1 )
+                if ( state == STATE_CRASHED )
                     state = STATE_MENU;
+                break;
+
+            case Qt::Key_Z:
+                showScoreZones = !showScoreZones;
+                break;
+                
            default:
                 e->ignore();
                 break;
@@ -616,7 +812,7 @@ void SFCave :: keyReleaseEvent( QKeyEvent *e )
                 
             case Qt::Key_R:
             case Qt::Key_Down:
-                if ( state == STATE_CRASHED && crashLineLength >= 15 || crashLineLength == -1 )
+                if ( state == STATE_CRASHED )
                 {
                     state = STATE_NEWGAME;
                 }
@@ -697,6 +893,15 @@ void SFCave :: dealWithMenuSelection()
                     currentMenuOption[currentMenuNr] = 0;
                     break;
 
+                case MENU_HELP:
+                {
+                    // Display Help Menu
+                    HelpWindow *dlg = new HelpWindow( this );
+                    dlg->exec();
+                    delete dlg;
+                    break;
+                }
+                
                 case MENU_QUIT:
                     QApplication::exit();
                     break;
@@ -714,8 +919,13 @@ void SFCave :: dealWithMenuSelection()
                 
                 case MENU_GAME_DIFFICULTY:
                     break;
+
+                case MENU_CLEAR_HIGHSCORES:
+                    for ( int i = 0 ; i < 3 ; ++i )
+                        highestScore[currentGameType][i] = 0;
+                    break;
                     
-               case MENU_BACK:
+                case MENU_BACK:
                     currentMenuNr = MENU_MAIN_MENU;
 
 #ifdef QWS
@@ -730,4 +940,17 @@ void SFCave :: dealWithMenuSelection()
             break;
         }
     }      
+}
+
+void SFCave :: saveScore()
+{
+#ifdef QWS
+    Config cfg( "sfcave" );
+    cfg.setGroup( "settings" );
+    QString key = "highScore_";
+
+    cfg.writeEntry( key + gameTypes[currentGameType] + "_" + dificultyOption[currentGameDifficulty], highestScore[currentGameType][currentGameDifficulty] );
+    key += CURRENT_GAME_TYPE;
+    cfg.writeEntry( key, highestScore[currentGameType] );
+#endif
 }
