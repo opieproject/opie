@@ -350,12 +350,8 @@ QWidget *Appearance::createAdvancedTab ( QWidget *parent, Config &cfg )
 
     QLabel* rotlabel = new QLabel( tr( "Rotation direction:" ), tab );
     m_rotdir_cw = new QRadioButton( tab, "rotdir_cw" );
-    QPixmap cw1 = Resource::loadIconSet("redo"). pixmap( );
     m_rotdir_ccw = new QRadioButton( tab, "rotdir_ccw" );
-    QImage ccwImage = cw1. convertToImage( ). mirror( 1, 0 );
-    QPixmap ccw1;
     m_rotdir_flip = new QRadioButton( tab, "rotdir_flip" );
-    QPixmap flip1 = Resource::loadIconSet("pass"). pixmap( );
     QButtonGroup* rotbtngrp = new QButtonGroup( tab, "rotbuttongroup" );
 
     rotbtngrp-> hide ( );
@@ -364,10 +360,15 @@ QWidget *Appearance::createAdvancedTab ( QWidget *parent, Config &cfg )
     rotbtngrp-> insert ( m_rotdir_ccw );
     rotbtngrp-> insert ( m_rotdir_flip );
 
-    ccw1. convertFromImage( ccwImage );
-    m_rotdir_cw-> setPixmap( cw1 );
-    m_rotdir_ccw-> setPixmap( ccw1 );
-    m_rotdir_flip-> setPixmap( flip1 );
+    QImage ccwImage = Resource::loadImage( "redo" );
+    QPixmap cw, ccw, flip;
+    cw.convertFromImage( ccwImage.smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+    ccw.convertFromImage( ccwImage.smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ).mirror( 1, 0 ) );
+    flip.convertFromImage( Resource::loadImage( "pass" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+
+    m_rotdir_cw-> setPixmap( cw );
+    m_rotdir_ccw-> setPixmap( ccw );
+    m_rotdir_flip-> setPixmap( flip );
 
     rotLay-> addWidget ( rotlabel, 0 );
     rotLay-> addWidget ( m_rotdir_cw, 0 );
