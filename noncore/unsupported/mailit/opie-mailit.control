@@ -4,6 +4,5 @@ Section: opie
 Maintainer: L.J. Potter <llornkcor@handhelds.org>
 Architecture: arm
 Version: $OPIE_VERSION-$SUB_VERSION
-Depends: opie-base
 Description: EMail
  A simple POP3 email client for the Opie environment.
