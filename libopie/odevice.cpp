@@ -258,7 +258,7 @@ struct z_button z_buttons_c700 [] = {
 };
 
 struct s_button {
-	uint model;
+    uint model;
     Qt::Key code;
     char *utext;
     char *pix;
@@ -268,15 +268,56 @@ struct s_button {
     char *fheldaction;
 } simpad_buttons [] = {
     { Model_SIMpad_CL4 | Model_SIMpad_SL4 | Model_SIMpad_SLC | Model_SIMpad_TSinus,
-    Qt::Key_F11, QT_TRANSLATE_NOOP("Button", "Menu Button"),
-	"devicebuttons/simpad_menu",
- 	"QPE/TaskBar", "toggleMenu()",
-	"QPE/TaskBar", "toggleStartMenu()" },
+    Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Lower+Up"),
+    "devicebuttons/simpad_lower_up",
+    "datebook", "nextView()",
+    "today", "raise()" },
     { Model_SIMpad_CL4 | Model_SIMpad_SL4 | Model_SIMpad_SLC | Model_SIMpad_TSinus,
-    Qt::Key_F12, QT_TRANSLATE_NOOP("Button", "Home Button"),
-	"devicebuttons/ipaq_home",
-	"QPE/Launcher", "home()",
-	"buttonsettings", "raise()" },
+    Qt::Key_F10, QT_TRANSLATE_NOOP("Button", "Lower+Down"),
+    "devicebuttons/simpad_lower_down",
+    "addressbook", "raise()",
+    "addressbook", "beamBusinessCard()" },
+    { Model_SIMpad_CL4 | Model_SIMpad_SL4 | Model_SIMpad_SLC | Model_SIMpad_TSinus,
+    Qt::Key_F11, QT_TRANSLATE_NOOP("Button", "Lower+Right"),
+    "devicebuttons/simpad_lower_right",
+    "QPE/TaskBar", "toggleMenu()",
+    "QPE/TaskBar", "toggleStartMenu()" },
+    { Model_SIMpad_CL4 | Model_SIMpad_SL4 | Model_SIMpad_SLC | Model_SIMpad_TSinus,
+    Qt::Key_F12, QT_TRANSLATE_NOOP("Button", "Lower+Upper"),
+    "devicebuttons/simpad_lower_upper",
+    "QPE/Launcher", "home()",
+    "buttonsettings", "raise()" },
+    { Model_SIMpad_CL4 | Model_SIMpad_SL4 | Model_SIMpad_SLC | Model_SIMpad_TSinus,
+    Qt::Key_F13, QT_TRANSLATE_NOOP("Button", "Lower+Left"),
+    "devicebuttons/simpad_lower_left",
+    "mail", "raise()",
+    "mail", "newMail()" },
+
+    { Model_SIMpad_CL4 | Model_SIMpad_SL4 | Model_SIMpad_SLC | Model_SIMpad_TSinus,
+    Qt::Key_F5, QT_TRANSLATE_NOOP("Button", "Upper+Up"),
+    "devicebuttons/simpad_upper_up",
+    "datebook", "nextView()",
+    "today", "raise()" },
+    { Model_SIMpad_CL4 | Model_SIMpad_SL4 | Model_SIMpad_SLC | Model_SIMpad_TSinus,
+    Qt::Key_F6, QT_TRANSLATE_NOOP("Button", "Upper+Down"),
+    "devicebuttons/simpad_upper_down",
+    "addressbook", "raise()",
+    "addressbook", "beamBusinessCard()" },
+    { Model_SIMpad_CL4 | Model_SIMpad_SL4 | Model_SIMpad_SLC | Model_SIMpad_TSinus,
+    Qt::Key_F7, QT_TRANSLATE_NOOP("Button", "Upper+Right"),
+    "devicebuttons/simpad_upper_right",
+    "QPE/TaskBar", "toggleMenu()",
+    "QPE/TaskBar", "toggleStartMenu()" },
+    /*{ Model_SIMpad_CL4 | Model_SIMpad_SL4 | Model_SIMpad_SLC | Model_SIMpad_TSinus,
+    Qt::Key_F12, QT_TRANSLATE_NOOP("Button", "Lower+Upper"),
+    "devicebuttons/simpad_lower_upper",
+    "QPE/Launcher", "home()",
+    "buttonsettings", "raise()" },*/
+    { Model_SIMpad_CL4 | Model_SIMpad_SL4 | Model_SIMpad_SLC | Model_SIMpad_TSinus,
+    Qt::Key_F13, QT_TRANSLATE_NOOP("Button", "Upper+Left"),
+    "devicebuttons/simpad_upper_left",
+    "mail", "raise()",
+    "mail", "newMail()" },
 };
 
 static QCString makeChannel ( const char *str )
