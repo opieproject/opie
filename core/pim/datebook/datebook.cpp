@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.11 2002-06-23 18:18:27 zecke Exp $
+** $Id: datebook.cpp,v 1.12 2002-06-25 18:18:59 zecke Exp $
 **
 **********************************************************************/
 
@@ -58,6 +58,7 @@
 #include <qregexp.h>
 #include <qtextcodec.h>
 #include <qtextstream.h>
+#include <qtimer.h>
 #include <qtl.h>
 #include <qwidgetstack.h>
 #include <qwindowsystem_qws.h>
@@ -86,6 +87,7 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
       inSearch(FALSE),
       alarmCounter(0)
 {
+    bool needEvilHack= false; // if we need an Evil Hack
     QTime t;
     t.start();
     db = new DateBookDBHack;
@@ -181,7 +183,7 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
     if (current==DAY) a->setOn(true), viewDay();
     ag->insert(a);
     a = new QAction( tr( "Week" ), QString::null, 0, 0, 0, true );
-    if (current==WEEK) a->setOn(true), viewWeek();
+    if (current==WEEK) a->setOn(true), /*viewWeek(),*/ needEvilHack = true;
     ag->insert(a);
     a = new QAction( tr( "WeekLst" ), QString::null, 0, 0, 0, true );
     if (current==WEEKLST) a->setOn(true), viewWeekLst();
@@ -219,7 +221,24 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
 #endif
 
     qDebug("done t=%d", t.elapsed() );
-
+    
+    /*
+     *  Here is a problem description:
+     *  When Weekview is the default view
+     *  a DateBookWeekView get's created
+     *  redraw() get's called. So what?
+     *  Remember that we're still in the c'tor
+     *  and no final layout has happened? Ok
+     *  now all Events get arranged. Their x
+     *  position get's determined by a QHeader
+     *  position. But the QHeader isn't layouted or
+     *  at the right position. redraw() is a slot
+     *  so we'll call it then via a singleShot
+     *  from view()
+     */
+    if( needEvilHack ){
+	QTimer::singleShot( 500, this, SLOT(viewWeek()) );
+    }
 }
 
 void DateBook::receive( const QCString &msg, const QByteArray &data )
