@@ -7,7 +7,8 @@ class QStringList;
 #include <qstring.h>
 #include <opie/ocontact.h>
 
-#define CONTACT_FIELD_ODER_NAME "opie-contactfield-order"
+#define CONTACT_FIELD_ORDER_NAME "opie-contactfield-order"
+#define DEFAULT_FIELD_ORDER "1234"
 
 class OContactFields{
 
@@ -17,6 +18,7 @@ class OContactFields{
     void setFieldOrder( int, int );
     int getFieldOrder( int );
     void saveToRecord( OContact& );
+    void loadFromRecord( OContact& );
 
  private:
     QString fieldOrder;

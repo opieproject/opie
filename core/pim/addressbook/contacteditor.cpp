@@ -68,8 +68,8 @@ ContactEditor::ContactEditor(	const OContact &entry,
 	  
 {
 	cmbDefaultEmail = 0;
-	contactfields = 0;
 	defaultEmailChooserPosition = -1;
+	contactfields = new OContactFields();
 	init();
 	setEntry( entry );
 }
@@ -81,6 +81,8 @@ ContactEditor::~ContactEditor() {
 void ContactEditor::init() {
 
 	useFullName = true;
+
+	if (cmbDefaultEmail) cmbDefaultEmail->hide();
 
 	uint i = 0;
 
@@ -579,10 +581,10 @@ void ContactEditor::init() {
 	cmbChooserField3->insertStringList( trlChooserNames );
 	cmbChooserField4->insertStringList( trlChooserNames );
 
-	// qDebug("fieldoder %i %i %i",contactfields->getFieldOrder(0),contactfields->getFieldOrder(1), contactfields->getFieldOrder(2) );
-//	cmbChooserField1->setCurrentItem( contactfields->getFieldOrder(0) );
-//	cmbChooserField2->setCurrentItem( contactfields->getFieldOrder(1) );
-//	cmbChooserField3->setCurrentItem( contactfields->getFieldOrder(2) );
+	qDebug("fieldoder %i %i %i",contactfields->getFieldOrder(0),contactfields->getFieldOrder(1), contactfields->getFieldOrder(2) );
+	cmbChooserField1->setCurrentItem( contactfields->getFieldOrder(0) );
+	cmbChooserField2->setCurrentItem( contactfields->getFieldOrder(1) );
+	cmbChooserField3->setCurrentItem( contactfields->getFieldOrder(2) );
 
 	connect( btnFullName, SIGNAL(clicked()), this, SLOT(slotName()) );
 
@@ -646,7 +648,7 @@ void ContactEditor::populateDefaultEmailCmb(){
 void ContactEditor::chooserChange( const QString &textChanged, int index, QLineEdit *inputWid, int widgetPos ) {
 	QString type = slChooserNames[index];
 	qDebug("ContactEditor::chooserChange( type=>%s<, textChanged=>%s< index=%i, widgetPos=%i",type.latin1(),textChanged.latin1(), index,  widgetPos );
-//	contactfields->setFieldOrder( widgetPos, index );
+	contactfields->setFieldOrder( widgetPos, index );
         if ( type == "Default Email"){         
 	  defaultEmail = textChanged;
 	  if (cmbDefaultEmail) delete cmbDefaultEmail;
@@ -834,6 +836,7 @@ void ContactEditor::accept() {
 		cleanupFields();
 		reject();
 	} else {
+	        contactfields->saveToRecord( ent );
 		saveEntry();
 		cleanupFields();
 		QDialog::accept();
@@ -1121,12 +1124,9 @@ void ContactEditor::setEntry( const OContact &entry ) {
 
 	ent = entry;
 
+	qDebug("load fields order");
+	contactfields->loadFromRecord( ent );
 
-	qDebug("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-	if ( contactfields )
-		delete contactfields;
-	contactfields = new OContactFields();
-	qDebug("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 
 	emails = QStringList(ent.emailList());
 	defaultEmail = ent.defaultEmail();

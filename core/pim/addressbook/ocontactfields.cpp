@@ -284,20 +284,24 @@ QMap<QString, int> OContactFields::trFieldsToId()
 }
 
 OContactFields::OContactFields(): 
-	fieldOrder("1234")
+	fieldOrder( DEFAULT_FIELD_ORDER )
 {
-  qDebug("ocontactfields c'tor");
-  qDebug("get custom field");
-  // if (fieldOrder.isEmpty()) fieldOrder = "1234";
 }
 
 OContactFields::~OContactFields(){
 }
 
 
+ 
 void OContactFields::saveToRecord( OContact& cnt ){
-  qDebug("ocontactfields saveToRecord");
-  cnt.setCustomField( CONTACT_FIELD_ODER_NAME, fieldOrder );
+  qDebug("ocontactfields saveToRecord: >%s<",fieldOrder.latin1());
+  cnt.setCustomField( CONTACT_FIELD_ORDER_NAME, fieldOrder );
+}
+
+void OContactFields::loadFromRecord( OContact& cnt ){
+  qDebug("ocontactfields loadFromRecord");
+  fieldOrder = DEFAULT_FIELD_ORDER;
+  fieldOrder = cnt.customField( CONTACT_FIELD_ORDER_NAME );
 }
 
 void OContactFields::setFieldOrder( int pos, int index ){
@@ -310,7 +314,10 @@ int OContactFields::getFieldOrder( int pos ){
   if(fieldOrder.isEmpty()) qDebug("PANIC fieldOrder empty");
   else qDebug("fieldOrder ok");
   qDebug("fieldOrder >%s<",fieldOrder.latin1());
-  int ret = QString( fieldOrder[pos] ).toInt();
+  bool *ok;
+  int ret = QString( fieldOrder[pos] ).toInt(ok, 10);
   qDebug("pos %i -> %i",pos,ret);
+  if (!ok) ret = pos;
+  qDebug("returning >%i<",ret);
   return ret;
 }
