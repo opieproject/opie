@@ -57,31 +57,7 @@ WellenreiterConfigWindow::WellenreiterConfigWindow( QWidget * parent, const char
         ++it;
     }
 
-    if ( !load() ) // no configuration present
-    {
-        // try to guess device type
-        QFile m( "/proc/modules" );
-        if ( m.open( IO_ReadOnly ) )
-        {
-            int devicetype(0);
-            QString line;
-            QTextStream modules( &m );
-            while( !modules.atEnd() && !devicetype )
-            {
-                modules >> line;
-                if ( line.contains( "cisco" ) ) devicetype = DEVTYPE_CISCO;
-                else if ( line.contains( "hostap" ) ) devicetype = DEVTYPE_HOSTAP;
-                else if ( line.contains( "prism" ) ) devicetype = DEVTYPE_WLAN_NG;
-                else if ( line.contains( "orinoco" ) ) devicetype = DEVTYPE_ORINOCO;
-            }
-            if ( devicetype )
-            {
-                deviceType->setCurrentItem( devicetype );
-                _guess = devicetype;
-                qDebug( "Wellenreiter: guessed device type to be #%d", devicetype );
-            }
-        }
-    }
+    load();
 
     #ifdef Q_WS_X11 // We're on X11: adding an Ok-Button for the Dialog here
     QPushButton* okButton = new QPushButton( "ok", this );
@@ -97,12 +73,47 @@ WellenreiterConfigWindow::WellenreiterConfigWindow( QWidget * parent, const char
 
     // make the checkbox 'channelAll' control all other channels
     connect( channelAll, SIGNAL( stateChanged(int) ), this, SLOT( channelAllClicked(int) ) );
+
+    connect( autodetect, SIGNAL( clicked() ), this, SLOT( performAutodetection() ) );
 };
 
 
 WellenreiterConfigWindow::~WellenreiterConfigWindow()
 {
     save();
+}
+
+
+void WellenreiterConfigWindow::performAutodetection()
+{
+    //TODO: insert modal splash screen here
+    //      and sleep a second, so that it looks
+    //      like we're actually doing something fancy... ;-)
+
+    qDebug( "WellenreiterConfigWindow::performAutodetection()" );
+
+    // try to guess device type
+    QFile m( "/proc/modules" );
+    if ( m.open( IO_ReadOnly ) )
+    {
+        int devicetype(0);
+        QString line;
+        QTextStream modules( &m );
+        while( !modules.atEnd() && !devicetype )
+        {
+            modules >> line;
+            if ( line.contains( "cisco" ) ) devicetype = DEVTYPE_CISCO;
+            else if ( line.contains( "hostap" ) ) devicetype = DEVTYPE_HOSTAP;
+            else if ( line.contains( "prism" ) ) devicetype = DEVTYPE_WLAN_NG;
+            else if ( line.contains( "orinoco" ) ) devicetype = DEVTYPE_ORINOCO;
+        }
+        if ( devicetype )
+        {
+            deviceType->setCurrentItem( devicetype );
+            _guess = devicetype;
+            qDebug( "Wellenreiter: guessed device type to be #%d", devicetype );
+        }
+    }
 }
 
 
@@ -221,11 +232,11 @@ int WellenreiterConfigWindow::gpsPort() const
 }
 
 
-bool WellenreiterConfigWindow::load()
+void WellenreiterConfigWindow::load()
 {
 #ifdef Q_WS_X11
     #warning Persistent Configuration not yet implemented for standalone X11 build
-    return false;
+    performAutodetection();
 #else
     qDebug( "loading configuration settings..." );
 
@@ -234,8 +245,36 @@ bool WellenreiterConfigWindow::load()
     OConfig* c = oApp->config();
 
     c->setGroup( "Interface" );
-    //interfaceName->setCurrentText( c->readEntry( "name" ) );
-    //deviceType->setCurrentText( c->readEntry( "type", "<select>" ) );
+
+    QString interface = c->readEntry( "name", "<none>" );
+    if ( interface != "<none>" )
+    {
+#if QT_VERSION < 300
+        interfaceName->insertItem( interface, 0 );
+        interfaceName->setCurrentItem( 0 );
+#else
+        interfaceName->setCurrentText( interface );
+#endif
+
+        QString device = c->readEntry( "type", "<select>" );
+#if QT_VERSION < 300
+        for ( int i = 0; i < deviceType->count(); ++i )
+        {
+            if ( deviceType->text( i ) == device )
+            {
+                deviceType->setCurrentItem( i );
+                break;
+            }
+        }
+#else
+        deviceType->setCurrentText( device );
+#endif
+    }
+    else
+    {
+        performAutodetection();
+    }
+
     prismHeader->setChecked( c->readBoolEntry( "prism", false ) );
     hopChannels->setChecked( c->readBoolEntry( "hop", true ) );
     hopInterval->setValue( c->readNumEntry( "interval", 100 ) );
@@ -261,7 +300,6 @@ bool WellenreiterConfigWindow::load()
     startGPS->setChecked( c->readBoolEntry( "start", false ) );
     commandGPS->setText( c->readEntry( "command", "gpsd -p /dev/ttyS3 -s 57600" ) );
 
-    return false; // false = perform autodetection; true = use config settings
 #endif
 }
 

@@ -38,7 +38,7 @@ class WellenreiterConfigWindow : public WellenreiterConfigBase
   public:
     WellenreiterConfigWindow( QWidget * parent = 0, const char * name = "WellenreiterConfigWindow", WFlags f = 0 );
     ~WellenreiterConfigWindow();
-    
+
     int driverType() const;
     const QString soundOnNetwork() const { return "";/*netSound->currentText();*/ };
     const QString soundOnBeacon() const { return "";/*beaconSound->currentText();*/ };
@@ -53,12 +53,12 @@ class WellenreiterConfigWindow : public WellenreiterConfigBase
     int gpsPort() const;
 
     void save();
-    bool load();
+    void load();
 
   public slots:
     void changedDeviceType(int);
     void getCaptureFileNameClicked();
-
+    void performAutodetection();
     void channelAllClicked(int);
 
   protected:
