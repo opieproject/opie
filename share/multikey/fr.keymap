@@ -1,7 +1,7 @@
 # comment lines must start with a '#' (for now...)
 # order is: row qcode unicode length blah
 #
-# please don't write anything between a key definition and it's xpm (excpet for spaces)
+# please don't write anything between a key definition and its xpm (except for spaces)
 title = French
 
 1 0x1000    0       2 # and you can write whatever you want after the last element

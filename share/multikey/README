@@ -23,7 +23,7 @@ that starts with 2, and replace the 3rd column with the code you found in
 xmbdfed. save the file and test it out by selecting another map, and
 selecting the one you are editing again.
 
-it worked, right?  if all you see is a square in it's place, that means your
+it worked, right?  if all you see is a square in its place, that means your
 default font doesn't have that char. go to appearance and change the font to
 one that has that char.
 
