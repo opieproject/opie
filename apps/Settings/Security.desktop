@@ -4,6 +4,7 @@ Exec=security
 Icon=security/Security
 Name=Security
 Name[de]=Sicherheits einstellungen
+Name[it]=Sicurezza
 Name[pt_BR]=Seguranca
 Name[pt]=Segurança
 Name[es]=Seguridad
