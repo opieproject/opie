@@ -5,6 +5,7 @@
 #include <qpopupmenu.h>
 #include <qfile.h>
 #include <qapplication.h>
+#include <qvaluelist.h>
 
 #include <qpe/config.h>
 
@@ -18,13 +19,47 @@
 #include "mailtypes.h"
 
 AttachItem::AttachItem(QListView * parent,QListViewItem *after, const QString&mime,const QString&desc,const QString&file,
-    const QString&fsize,int num)
+    const QString&fsize,int num,const QValueList<int>&path)
 	: QListViewItem(parent,after),_partNum(num)
 {
+    _path=path;
 	setText(0, mime);
 	setText(1, desc);
 	setText(2, file);
     setText(3, fsize);
+}
+
+AttachItem::AttachItem(QListViewItem * parent,QListViewItem *after, const QString&mime,const QString&desc,const QString&file,
+    const QString&fsize,int num,const QValueList<int>&path)
+	: QListViewItem(parent,after),_partNum(num)
+{
+    _path=path;
+	setText(0, mime);
+	setText(1, desc);
+	setText(2, file);
+    setText(3, fsize);
+}
+
+bool AttachItem::isParentof(const QValueList<int>&path)
+{
+    /* if not set, then no parent */
+    if (path.count()==0||_path.count()==0) return false;
+    /* the parent must have one digit less then a child */
+    if (path.count()!=_path.count()+1) return false;
+    for (unsigned int i=0; i < _path.count();++i) {
+        if (_path[i]!=path[i]) return false;
+    }
+    return true;
+}
+
+AttachItem* ViewMail::searchParent(const QValueList<int>&path)
+{
+    QListViewItemIterator it( attachments );
+    for ( ; it.current(); ++it ) {
+        AttachItem*ati = (AttachItem*)it.current();
+        if (ati->isParentof(path)) return ati;
+    }
+    return 0;
 }
 
 void ViewMail::setBody( RecBody body ) {
@@ -37,6 +72,7 @@ if (body.Parts().count()==0) {
     return;
 }
 AttachItem * curItem=0;
+AttachItem * parentItem = 0;
 QString type=body.Description().Type()+"/"+body.Description().Subtype();
 QString desc,fsize;
 double s = body.Description().Size();
@@ -73,8 +109,9 @@ default:
     o << s << " " << q << "Byte";
 }
 
-curItem=new AttachItem(attachments,curItem,type,"Mailbody","",fsize,-1);
+curItem=new AttachItem(attachments,curItem,type,"Mailbody","",fsize,-1,body.Description().Positionlist());
 QString filename = "";
+
 for (unsigned int i = 0; i < body.Parts().count();++i) {
     type = body.Parts()[i].Type()+"/"+body.Parts()[i].Subtype();
     part_plist_t::ConstIterator it = body.Parts()[i].Parameters().begin();
@@ -107,7 +144,13 @@ for (unsigned int i = 0; i < body.Parts().count();++i) {
     o.setf(QTextStream::fixed);
     o << s << " " << q << "Byte";
     desc = body.Parts()[i].Description();
-    curItem=new AttachItem(attachments,curItem,type,desc,filename,fsize,i);
+    parentItem = searchParent(body.Parts()[i].Positionlist());
+    if (parentItem) {
+        curItem=new AttachItem(parentItem,curItem,type,desc,filename,fsize,i,body.Parts()[i].Positionlist());
+        attachments->setRootIsDecorated(true);
+    } else {
+        curItem=new AttachItem(attachments,curItem,type,desc,filename,fsize,i,body.Parts()[i].Positionlist());
+    }
 }
 }
 

@@ -4,6 +4,7 @@
 #include <qlistview.h>
 #include <qmap.h>
 #include <qstringlist.h>
+#include <qvaluelist.h>
 
 #include "viewmailbase.h"
 #include "mailtypes.h"
@@ -12,11 +13,16 @@ class AttachItem : public QListViewItem
 {
 public:
     AttachItem(QListView * parent,QListViewItem *after, const QString&mime,const QString&desc,const QString&file,
-        const QString&fsize,int num);
+        const QString&fsize,int num,const QValueList<int>&path);
+    AttachItem(QListViewItem * parent,QListViewItem *after, const QString&mime,const QString&desc,const QString&file,
+        const QString&fsize,int num,const QValueList<int>&path);
     int Partnumber() { return _partNum; }
+    bool isParentof(const QValueList<int>&path);
 
 private:
     int _partNum;
+    /* needed for a better display of attachments */
+    QValueList<int> _path;
 };
 
 class ViewMail : public ViewMailBase
@@ -35,6 +41,7 @@ public:
 
 protected:
 	QString deHtml(const QString &string);
+    AttachItem* searchParent(const QValueList<int>&path);
 
 protected slots:
 	void slotReply();
