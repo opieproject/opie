@@ -1,6 +1,7 @@
 
 #include "backuprestore.h"
 //#include "output.h"
+#include "errordialog.h"
 
 #include <qapplication.h>
 #include <qmultilineedit.h>
@@ -18,6 +19,8 @@
 #include <qlist.h>
 #include <stdlib.h>
 #include <qregexp.h>
+#include <qtextstream.h>
+#include <qtextview.h>
 
 #include <errno.h>
 #include <stdlib.h>
@@ -30,6 +33,9 @@
 #define BACKUP_LOCATION 2
 
 #define EXTENSION ".bck"
+
+const QString tempFileName = "/tmp/backup.err";
+
 
 BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name)
         : BackupAndRestoreBase(parent, name){
@@ -44,6 +50,8 @@ BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name)
           this, SLOT(selectItem(QListViewItem*))); 
   connect(restoreSource, SIGNAL(activated( int  )),
           this, SLOT(sourceDirChanged(int))); 
+  connect(updateList, SIGNAL(clicked()),
+          this, SLOT( fileListUpdate())); 
 
   applicationSettings = new QListViewItem(backupList, "Application Settings", "",
                                           QDir::homeDirPath() + "/Settings/");
@@ -127,6 +135,10 @@ BackupAndRestore::~BackupAndRestore(){
     }
   }
   config.writeEntry("Total", count);
+
+  // Remove Temp File
+  if ( QFile::exists( tempFileName ) )
+	  QFile::remove( tempFileName );
 }
 
 QList<QListViewItem> BackupAndRestore::getAllItems(QListViewItem *item, QList<QListViewItem> &list){
@@ -191,8 +203,10 @@ void BackupAndRestore::backupPressed(){
   setCaption(tr("Backup and Restore... working..."));
   QString outputFile = backupLocations[storeToLocation->currentText()];
 
-  QDateTime time = QDateTime::currentDateTime();
-  QString dateString = time.date().toString().replace(QRegExp(" "), "");
+  QDateTime datetime = QDateTime::currentDateTime();
+  QString dateString = QString::number( datetime.date().year() ) + QString::number( datetime.date().month() ).rightJustify(2, '0') + 
+	  QString::number( datetime.date().day() ).rightJustify(2, '0');
+
   outputFile += "/" + dateString;
  
   QString t = outputFile;
@@ -202,22 +216,56 @@ void BackupAndRestore::backupPressed(){
     c++;
   }
 
-  qDebug(QString("system(\"tar -c %1 | gzip > %2\")").arg(backupFiles).arg(outputFile).latin1());
+  // We execute tar and compressing its output with gzip.. 
+  // The error output will be written into a temp-file which could be provided
+  // for debugging..
+  qDebug( "Storing file: %s", outputFile.latin1() );
   outputFile += EXTENSION;
 
-   int r = system( QString("tar -c %1 | gzip > %2").arg(backupFiles).arg(outputFile).latin1() );
+  qWarning( QString("(tar -c %1 | gzip > %2 ) 2> %3")
+	    .arg( backupFiles )
+	    .arg( outputFile.latin1() )
+	    .arg( tempFileName.latin1() ) );
 
 
+  int r = system( QString("(tar -c %1 | gzip > %2 ) 2> %3")
+		  .arg( backupFiles )
+		  .arg( outputFile.latin1() )
+		  .arg( tempFileName.latin1() ) );
 
    if(r != 0){
     perror("Error: ");
-    QString errorMsg="Error\n"+(QString)strerror(errno);
+    QString errorMsg= tr( "Error from System:\n" ) + (QString)strerror( errno );
 
-     QMessageBox::critical(this, "Message", "Backup Failed.\n"+errorMsg, QString("Ok") );
+     switch( QMessageBox::critical(this, tr( "Message" ), tr( "Backup Failed!" ) + "\n" 
+				   + errorMsg, QString( tr( "Ok" ) ), QString( tr( "Details" ) ) ) ){
+
+     case 1:
+	     qWarning("Details pressed !");
+	     ErrorDialog* pErrDialog = new ErrorDialog( this, NULL, true );
+	     QFile errorFile( tempFileName );
+	     if ( errorFile.open(IO_ReadOnly) ) {
+		     QTextStream t( &errorFile );
+		     QString s;
+		     while ( !t.eof() ) {        // until end of file...
+			     s += t.readLine();       // line of text excluding '\n'
+		     }
+		     errorFile.close();
+ 
+		     pErrDialog->m_textarea->setText( s );
+	     }else{
+		     pErrDialog->m_textarea->setText( "Unable to open File: /tmp/backup.er" );
+	     }
+	     pErrDialog->showMaximized();
+	     pErrDialog->exec();
+	     delete pErrDialog;
+	     break;
+     }
+     setCaption(tr("Backup and Restore.. Failed !!"));
      return;   
    }
    else{
-     QMessageBox::information(this, "Message", "Backup Successfull.",QString("Ok") );
+     QMessageBox::information(this, tr( "Message" ), tr( "Backup Successfull." ), QString(tr( "Ok" ) ) );
      
    }
    setCaption(tr("Backup and Restore"));
@@ -261,6 +309,13 @@ void BackupAndRestore::sourceDirChanged(int selection){
   rescanFolder(backupLocations[restoreSource->text(selection)]);
 }
 
+void BackupAndRestore::fileListUpdate()
+{
+	qWarning("void BackupAndRestore::fileListUpdate()");
+	restoreList->clear();
+	rescanFolder( backupLocations[restoreSource->currentText()] );
+}
+
 /**
  * Scans directory for any backup files.  Will recursivly go down,
  * but will not follow symlinks.
@@ -299,23 +354,55 @@ void BackupAndRestore::rescanFolder(QString directory){
 void BackupAndRestore::restore(){
   QListViewItem *restoreItem = restoreList->currentItem();
   if(!restoreItem){
-    QMessageBox::critical(this, "Message",
-                          "Please select something to restore.",QString("Ok") );
+    QMessageBox::critical(this, tr( "Message" ),
+                          tr( "Please select something to restore." ),QString( tr( "Ok") ) );
     return;   
   }
+  setCaption(tr("Backup and Restore... working..."));
+
   QString restoreFile = backupLocations[restoreSource->currentText()];
   
   restoreFile += "/" + restoreItem->text(0);
   
-  int r = system(QString("tar -C / -zxf %1").arg(restoreFile).latin1());
+  int r = system(QString("tar -C / -zxf %1 2> %3")
+		 .arg( restoreFile.latin1() )
+		 .arg( tempFileName.latin1() ) );
   if(r != 0){
-    QMessageBox::critical(this, "Message",
-                          "Restore Failed.",QString("Ok") );
+    QString errorMsg= tr( "Error from System:\n" ) + (QString)strerror( errno );
+    switch( QMessageBox::critical(this, tr( "Message" ), tr( "Restore Failed." ) + "\n" 
+				  + errorMsg, QString( tr( "Ok") ), QString( tr( "Details" ) ) ) ) {
+    case 1:
+	    qWarning("Details pressed !");
+	    ErrorDialog* pErrDialog = new ErrorDialog( this, NULL, true );
+	    QFile errorFile( tempFileName );
+	    if ( errorFile.open(IO_ReadOnly) ) {
+		    QTextStream t( &errorFile );
+		    QString s;
+		    while ( !t.eof() ) {        // until end of file...
+			    s += t.readLine();       // line of text excluding '\n'
+		    }
+		    errorFile.close();
+		    
+		    pErrDialog->m_textarea->setText( s );
+	    }else{
+		    pErrDialog->m_textarea->setText( tr( "Unable to open File: %1" ).arg( "/tmp/backup.er" ) );
+	    }
+	    pErrDialog->showMaximized();
+	    pErrDialog->exec();
+	    delete pErrDialog;
+
+	    setCaption(tr("Backup and Restore.. Failed !!"));
+	    return;   
+
+	    break;
+
+    }
   }
   else{
-    QMessageBox::critical(this, "Message",
-                          "Restore Successfull.",QString("Ok") );
+    QMessageBox::critical(this, tr( "Message" ),
+                          tr( "Restore Successfull." ), QString( tr( "Ok") ) );
   }
+  setCaption(tr("Backup and Restore"));
 }
 
 // backuprestore.cpp
