@@ -1,5 +1,3 @@
-MOC_DIR         = ./moc
-OBJECTS_DIR     = ./obj
 DESTDIR         = $(OPIEDIR)/bin
 TEMPLATE        = app
 CONFIG          += qt warn_on debug
@@ -13,7 +11,7 @@ SOURCES         = previewwidget.cpp \
 
 INCLUDEPATH     += $(OPIEDIR)/include ../lib
 DEPENDPATH      += $(OPIEDIR)/include ../lib
-LIBS            += -lqpe -lopie -lopiecore2 -lopiecam
+LIBS            += -lopiecore2 -lopieui2 -lopiecam
 INTERFACES      =
 TARGET          = opiecam
 

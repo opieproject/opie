@@ -1,5 +1,3 @@
-MOC_DIR         = ./moc
-OBJECTS_DIR     = ./obj
 DESTDIR         = $(OPIEDIR)/bin
 TEMPLATE        = app
 CONFIG          += qt warn_on debug

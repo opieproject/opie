@@ -1,5 +1,3 @@
-MOC_DIR         = ./moc
-OBJECTS_DIR     = ./obj
 DESTDIR         = $(OPIEDIR)/lib
 TEMPLATE        = lib
 CONFIG          += qt warn_on debug
@@ -14,7 +12,7 @@ SOURCES         = avi.c \
 
 INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
-LIBS            += -lqpe -lopie -lopiecore2
+LIBS            += -lopiecore2
 INTERFACES      =
 VERSION         = 1.0.0
 TARGET          = opiecam

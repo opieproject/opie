@@ -19,6 +19,18 @@
 #include "imageio.h"
 #include "avi.h"
 
+/* OPIE */
+#include <opie2/ofiledialog.h>
+#include <opie2/odevice.h>
+#include <opie2/oapplication.h>
+#include <opie2/oconfig.h>
+#include <opie2/odebug.h>
+#include <qpe/global.h>
+#include <qpe/resource.h>
+#include <qpe/qcopenvelope_qws.h>
+using namespace Opie;
+
+/* QT */
 #include <qapplication.h>
 #include <qaction.h>
 #include <qvbox.h>
@@ -36,16 +48,8 @@
 #include <qmessagebox.h>
 #include <qlayout.h>
 #include <qdirectpainter_qws.h>
-#include <qpe/global.h>
-#include <qpe/resource.h>
-#include <qpe/qcopenvelope_qws.h>
-#include <opie/ofiledialog.h>
-#include <opie/odevice.h>
-using namespace Opie;
-#include <opie2/oapplication.h>
-#include <opie2/oconfig.h>
-#include <opie2/odebug.h>
 
+/* STD */
 #include <assert.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -438,7 +442,7 @@ void CameraMainWindow::shutterClicked()
         qApp->processEvents();
 
         odebug << "Shutter has been pressed" << oendl;
-        ODevice::inst()->touchSound();
+        ODevice::inst()->playTouchSound();
 
         performCapture( captureFormat );
     }
@@ -492,7 +496,7 @@ void CameraMainWindow::performCapture( const QString& format )
 
 void CameraMainWindow::startVideoCapture()
 {
-    ODevice::inst()->touchSound();
+    ODevice::inst()->playTouchSound();
     ODevice::inst()->setLedState( Led_Mail, Led_BlinkSlow );
 
     _capturefd = ::open( CAPTUREFILE, O_WRONLY | O_CREAT | O_TRUNC );
@@ -534,7 +538,7 @@ void CameraMainWindow::timerEvent( QTimerEvent* )
 void CameraMainWindow::stopVideoCapture()
 {
     killTimers();
-    ODevice::inst()->touchSound();
+    ODevice::inst()->playTouchSound();
     ODevice::inst()->setLedState( Led_Mail, Led_Off );
     _capturing = false;
     updateCaption();
