@@ -30,12 +30,16 @@ namespace Opie {
 enum OModel {
 	Model_Unknown,
 
-	Model_iPAQ_H31xx,
-	Model_iPAQ_H36xx,
-	Model_iPAQ_H37xx,
-	Model_iPAQ_H38xx,
+	Model_iPAQ = ( 1 << 16 ),
 
-	Model_Zaurus_SL5000
+	Model_iPAQ_H31xx = ( Model_iPAQ | 1 ),
+	Model_iPAQ_H36xx = ( Model_iPAQ | 2 ),
+	Model_iPAQ_H37xx = ( Model_iPAQ | 3 ),
+	Model_iPAQ_H38xx = ( Model_iPAQ | 4 ),
+
+	Model_Zaurus = ( 2 << 16 ),
+
+	Model_Zaurus_SL5000 = ( Model_Zaurus | 1 ),
 };
 
 enum OVendor {	
@@ -128,6 +132,9 @@ public:
 	virtual QValueList <OLedState> ledStateList ( OLed led ) const;
 	virtual OLedState ledState ( OLed led ) const;
 	virtual bool setLedState ( OLed led, OLedState st );
+
+	virtual bool hasLightSensor ( ) const;
+	virtual int readLightSensor ( );
 
 	//virtual QValueList <int> keyList ( ) const;
 };

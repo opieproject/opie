@@ -83,6 +83,9 @@ public:
 	virtual QValueList <OLedState> ledStateList ( OLed led ) const;
 	virtual OLedState ledState ( OLed led ) const;
 	virtual bool setLedState ( OLed led, OLedState st );
+
+	virtual bool hasLightSensor ( ) const;
+	virtual int readLightSensor ( );
 	
 	//virtual QValueList <int> keyList ( ) const;
 	
@@ -356,6 +359,15 @@ bool ODevice::setLedState ( OLed /*which*/, OLedState /*st*/ )
 	return false;
 }
 
+bool ODevice::hasLightSensor ( ) const
+{
+	return false;
+}
+
+int ODevice::readLightSensor ( )
+{
+	return -1;
+}
 
 
 //QValueList <int> ODevice::keyList ( ) const
@@ -663,6 +675,36 @@ bool iPAQ::setDisplayBrightness ( int bright )
 int iPAQ::displayBrightnessResolution ( ) const
 {
 	return 255; // really 128, but logarithmic control is smoother this way
+}
+
+
+bool iPAQ::hasLightSensor ( ) const
+{
+	return true;
+}
+
+int iPAQ::readLightSensor ( )
+{
+	int fd;
+	int val = -1;
+	
+	if (( fd = ::open ( "/proc/hal/lightsensor", O_RDONLY )) >= 0 ) {
+		char buffer [5];
+	
+		if ( ::read ( fd, buffer, 4 ) == 4 ) {
+			char *endptr;
+		
+			buffer [4] = 0;
+			val = ::strtol ( buffer + 2, &endptr, 16 );
+			
+			if ( *endptr != 0 )
+				val = -1;
+		}
+	
+		::close ( fd );
+	}
+
+	return val;
 }
 
 
