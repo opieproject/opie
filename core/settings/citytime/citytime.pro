@@ -5,6 +5,8 @@ INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
 LIBS            += -lqpe
 
+TARGET	= citytime
+
 TRANSLATIONS = ../../../i18n/de/citytime.ts \
 	 ../../../i18n/nl/citytime.ts \
 	 ../../../i18n/xx/citytime.ts \

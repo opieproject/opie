@@ -6,6 +6,8 @@ INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= ../$(OPIEDIR)/include
 LIBS            += -lqpe -lopie
 
+TARGET		= light-and-power
+
 TRANSLATIONS = ../../../i18n/de/light-and-power.ts \
 	 ../../../i18n/nl/light-and-power.ts \
 	 ../../../i18n/xx/light-and-power.ts \

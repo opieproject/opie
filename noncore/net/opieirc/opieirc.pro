@@ -20,4 +20,6 @@ INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS        += -lqpe -lopie
 
+TARGET	= opieirc
+
 include ( $(OPIEDIR)/include.pro )

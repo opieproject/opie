@@ -16,6 +16,8 @@ INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS		+= -lqpe -lopie
 
+TARGET		= systemtime
+
 TRANSLATIONS = ../../../i18n/de/systemtime.ts \
 	 ../../../i18n/nl/systemtime.ts \
 	 ../../../i18n/da/systemtime.ts \

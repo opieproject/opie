@@ -23,6 +23,7 @@ INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 LIBS            += -lqpe -lopie
 
+TARGET	= sysinfo
 
 TRANSLATIONS = ../../../i18n/de/sysinfo.ts \
 	 ../../../i18n/nl/sysinfo.ts \

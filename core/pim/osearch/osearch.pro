@@ -31,6 +31,8 @@ HEADERS += mainwindow.h \
            doclnkitem.h \
            doclnksearch.h 
 
+TARGET	= osearch
+
 INCLUDEPATH = $(OPIEDIR)/include
 DEPENDPATH += $(OPIEDIR)/include
 LIBS += -lqpe -lopie

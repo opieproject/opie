@@ -7,6 +7,8 @@ LIBS            += -lqpe -lopie
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 
+TARGET 		= appearance
+
 TRANSLATIONS = ../../../i18n/de/appearance.ts \
 	 ../../../i18n/nl/appearance.ts \
 	 ../../../i18n/xx/appearance.ts \

@@ -22,6 +22,8 @@ DEPENDPATH      += $(OPIEDIR)/include
 LIBS		+= -lqpe -lstdc++
 INTERFACES	= calcdlg.ui 
 
+TARGET	= oxygen
+
 TRANSLATIONS = ../../../i18n/de/oxygen.ts \
 	 ../../../i18n/nl/oxygen.ts \
 	 ../../../i18n/xx/oxygen.ts \

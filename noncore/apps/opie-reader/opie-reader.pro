@@ -80,6 +80,7 @@ SOURCES		= Aportis.cpp \
                   version.cpp \
                   ztxt.cpp
 
+TARGET = reader
 
 INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
