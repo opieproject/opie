@@ -181,6 +181,7 @@ void MediumMountGui::startGui() {
   CheckBoxText->setChecked(checkmimetext);
   CheckBoxVideo->setChecked(checkmimevideo);
   CheckBoxAll->setChecked( checkmimeall );
+  deactivateOthers();
   // buttons
   quit = new QPushButton( this );
   quit->setGeometry( QRect( (this->width()/2)- 90 , 260, 80, 22 ) ); 
