@@ -60,7 +60,7 @@ bool PmIpkg::runIpkg(const QString& args, const QString& dest )
 #ifdef OPROCESS
   ipkgProcess->clearArguments();
   *ipkgProcess << "/usr/bin/ipkg ";
-  QString cmd = "";
+  cmd = "";
 #endif
 	pvDebug( 3,"PmIpkg::runIpkg got dest="+dest);
 	if ( dest == "" )
@@ -153,7 +153,8 @@ bool PmIpkg::runIpkg(const QString& args, const QString& dest )
 void PmIpkg::makeLinks(Package *pack)
 {
 	pvDebug( 2, "PmIpkg::makeLinks "+ pack->name());
-  linkPackage( pack->name(), pack->dest() );
+ 	QString pn = pack->name();
+  linkPackage( pack->packageName(), pack->dest() );
 }
 
 QStringList* PmIpkg::getList( QString packFileName, QString d )

@@ -26,6 +26,7 @@ class Package : public QObject
 
   QString name();
   QString installName();
+  QString packageName();
   bool    installed();
   bool    otherInstalled();
 

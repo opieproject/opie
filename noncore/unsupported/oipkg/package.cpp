@@ -139,6 +139,14 @@ QString Package::installName()
   else return _name;
 }
 
+QString Package::packageName()
+{
+	QString pn = installName();
+ 	pn = pn.right(pn.length()-pn.findRev("/"));
+  pn = pn.left(pn.find("_"));
+ 	return pn;
+}
+
 bool Package::installed()
 {
   if (_status.contains("installed"))
