@@ -17,7 +17,7 @@ LIBS+= -lqpe -lopie
 DESTDIR = $(OPIEDIR)/plugins/today
 TARGET = todaydatebookplugin
 
-TRANSLATIONS = ../../../../../i18n/de/todaydatebookplugin.ts \
+TRANSLATIONS = ../../../../../i18n/de/libtodaydatebookplugin.ts \
          ../../../../../i18n/xx/libtodaydatebookplugin.ts \
          ../../../../../i18n/en/libtodaydatebookplugin.ts \
          ../../../../../i18n/es/libtodaydatebookplugin.ts \
@@ -31,8 +31,8 @@ TRANSLATIONS = ../../../../../i18n/de/todaydatebookplugin.ts \
          ../../../../../i18n/pt_BR/libtodaydatebookplugin.ts \
          ../../../../../i18n/sl/libtodaydatebookplugin.ts \
          ../../../../../i18n/zh_CN/libtodaydatebookplugin.ts \
-         ../../../../../i18n/zh_TW/todaydatebookplugin.ts \
-         ../../../../../i18n/it/todaydatebookplugin.ts \
-         ../../../../../i18n/da/todaydatebookplugin.ts
+         ../../../../../i18n/zh_TW/libtodaydatebookplugin.ts \
+         ../../../../../i18n/it/libtodaydatebookplugin.ts \
+         ../../../../../i18n/da/libtodaydatebookplugin.ts
 
 include ( $(OPIEDIR)/include.pro )
