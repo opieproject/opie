@@ -461,6 +461,11 @@ public:
      */
     void detach();
 
+    /**
+     * @return the PID of @a process, or -1 if the process is not running
+     */
+    static int processPID( const QString& process );
+
 signals:
 
     /**

@@ -1,3 +1,3 @@
 TEMPLATE        = subdirs
-unix:SUBDIRS    = odebugdemo oconfigdemo oglobalsettingsdemo
+unix:SUBDIRS    = odebugdemo oconfigdemo oglobalsettingsdemo oprocessdemo
 

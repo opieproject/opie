@@ -36,10 +36,12 @@ _;:,     .>    :=|.         This program is free software; you can
 /* QT */
 
 #include <qapplication.h>
+#include <qdir.h>
 #include <qfile.h>
 #include <qmap.h>
 #include <qregexp.h>
 #include <qsocketnotifier.h>
+#include <qtextstream.h>
 
 /* STD */
 #include <errno.h>
@@ -913,3 +915,31 @@ bool OProcess::isExecutable( const QCString &filename )
     return true;
 }
 
+int OProcess::processPID( const QString& process )
+{
+    QString line;
+    QDir d = QDir( "/proc" );
+    QStringList dirs = d.entryList( QDir::Dirs );
+    QStringList::Iterator it;
+    for ( it = dirs.begin(); it != dirs.end(); ++it )
+    {
+        //qDebug( "next entry: %s", (const char*) *it );
+        QFile file( "/proc/"+*it+"/cmdline" );
+        file.open( IO_ReadOnly );
+        if ( !file.isOpen() ) continue;
+        QTextStream t( &file );
+        line = t.readLine();
+        //qDebug( "cmdline = %s", (const char*) line );
+        if ( line.contains( process ) ) break; //FIXME: That may find also other process, if the name is not long enough ;)
+    }
+    if ( line.contains( process ) )
+    {
+        //qDebug( "found process id #%d", (*it).toInt() );
+        return (*it).toInt();
+    }
+    else
+    {
+        //qDebug( "process '%s' not found", (const char*) process );
+        return -1;
+    }
+}
