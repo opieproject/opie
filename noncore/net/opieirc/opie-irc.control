@@ -1,0 +1,9 @@
+Files: bin/opieirc pics/opieirc apps/Applications/opieirc.desktop
+Priority: optional
+Section: opie/taskbar
+Maintainer: Wenzel Jakob <root@wazlaf.de>
+Architecture: arm
+Version: $QPE_VERSION-3
+Depends: opie-base ($QPE_VERSION)
+Description: The Opie IRC client lets you chat on your favorite
+    IRC server using your zaurus or ipaq
