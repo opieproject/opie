@@ -33,11 +33,10 @@
 
 
 extern "C" {
-#include <ft2build.h>
-#include FT_FREETYPE_H
-#include FT_GLYPH_H
-#include FT_OUTLINE_H
-#include FT_BBOX_H
+#include <freetype/freetype.h>
+#include <freetype/ftglyph.h>
+#include <freetype/ftoutln.h>
+#include <freetype/ftbbox.h>
 }
 
 class QDiskFontFT : public QDiskFontPrivate {
@@ -69,6 +68,8 @@ public:
 
     ~QRenderedFontFT()
     {
+	// When inter-process glyph sharing is implemented, the glyph data
+	// for this font can be dereferenced here.
     }
 
     bool unicode(int & i) const
@@ -108,7 +109,7 @@ public:
 	if(err)
 	    qFatal("Load glyph error %x",err);
 
-	int width,height,pitch,size = 0;
+	int width=0,height=0,pitch=0,size=0;
 	FT_Glyph glyph;
 	err=FT_Get_Glyph( myface->glyph, &glyph );
 	if(err)
@@ -154,6 +155,12 @@ public:
 	result.metrics->linestep=pitch;
 	result.metrics->width=width;
 	result.metrics->height=height;
+
+	// XXX memory manage me
+	// At some point inter-process glyph data sharing must be implemented
+	// and the flag below can be set to prevent Qt from deleting the glyph
+	// data.
+	// result.metrics->flags = QGlyphMetrics::RendererOwnsData;
 
 	FT_Done_Glyph( glyph );
 

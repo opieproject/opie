@@ -33,8 +33,7 @@
 #ifdef QT_NO_FREETYPE
 
 extern "C" {
-#include <ft2build.h>
-#include FT_FREETYPE_H
+#include <freetype/freetype.h>
 }
 
 // ascent, descent, width(ch), width(string), maxwidth?

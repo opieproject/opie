@@ -48,7 +48,7 @@ QRESULT FreeTypeFactoryImpl::queryInterface( const QUuid &uuid, QUnknownInterfac
 
     if ( *iface )
 	(*iface)->addRef();
-    return QS_OK;
+    return (*iface) ? QS_OK : QS_FALSE;
 }
 
 Q_EXPORT_INTERFACE()
