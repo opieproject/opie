@@ -115,31 +115,13 @@ void MScanListView::addNewItem( QString type, QString essid, QString macaddr, bo
     MScanListItem* network;
     MScanListItem* item = static_cast<MScanListItem*> ( firstChild() );
 
-    while ( item && ( item->text( 0 ) != essid ) )
+    while ( item && ( item->text( col_essid ) != essid ) )
     {
-        qDebug( "itemtext: %s", (const char*) item->text( 0 ) );
-        item = static_cast<MScanListItem*> ( item->itemBelow() );
+        qDebug( "itemtext: %s", (const char*) item->text( col_essid ) );
+        item = static_cast<MScanListItem*> ( item->nextSibling() );
     }
     if ( item )
     {
-        // animate the item
-
-        /*
-
-        const QPixmap* pixmap = item->pixmap( 0 );
-        const QPixmap* nextpixmap = ani2;
-        if ( pixmap == ani1 )
-            nextpixmap = ani2;
-        else if ( pixmap == ani2 )
-            nextpixmap = ani3;
-        else if ( pixmap == ani3 )
-            nextpixmap = ani4;
-        else if ( pixmap == ani4 )
-            nextpixmap = ani1;
-        item->setPixmap( 0, *nextpixmap ); */
-
-        //qDebug( "current pixmap %d, next %d", pixmap, nextpixmap );
-
         // we have already seen this net, check all childs if MAC exists
 
         network = item;
@@ -147,10 +129,10 @@ void MScanListView::addNewItem( QString type, QString essid, QString macaddr, bo
         item = static_cast<MScanListItem*> ( item->firstChild() );
         assert( item ); // this shouldn't fail
 
-        while ( item && ( item->text( 2 ) != macaddr ) )
+        while ( item && ( item->text( col_ap ) != macaddr ) )
         {
-            qDebug( "subitemtext: %s", (const char*) item->text( 2 ) );
-            item = static_cast<MScanListItem*> ( item->itemBelow() );
+            qDebug( "subitemtext: %s", (const char*) item->text( col_ap ) );
+            item = static_cast<MScanListItem*> ( item->nextSibling() );
         }
 
         if ( item )
@@ -199,7 +181,7 @@ void MScanListView::addIfNotExisting( MScanListItem* network, QString addr )
     while ( subitem && ( subitem->text( col_ap ) != addr ) )
     {
         qDebug( "subitemtext: %s", (const char*) subitem->text( col_ap ) );
-        subitem = static_cast<MScanListItem*> ( subitem->itemBelow() );
+        subitem = static_cast<MScanListItem*> ( subitem->nextSibling() );
     }
 
     if ( subitem )
