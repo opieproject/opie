@@ -4,7 +4,7 @@
 **
 ** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: zsafe.cpp,v 1.24 2004-07-21 20:44:12 llornkcor Exp $
+** $Id: zsafe.cpp,v 1.25 2004-07-27 00:53:35 llornkcor Exp $
 **
 ** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 **
@@ -666,7 +666,7 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
     ListView->setAllColumnsShowFocus(TRUE);
 
 #ifdef DESKTOP
-    ListView->setResizePolicy(QScrollView::AutoOneFit);
+   // ListView->setResizePolicy(QScrollView::AutoOneFit);
     // ListView->setGeometry( QRect( 0, 22, this->width(), this->height() - 30 ) );
 #else
     ListView->setResizePolicy(QScrollView::AutoOneFit);
@@ -674,7 +674,7 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
                            // this->width(), this->height() - 30 ) );
     // ListView->setMaximumSize( QSize( 440, 290 ) );
 #endif
-    ListView->setVScrollBarMode( QListView::Auto );
+   // ListView->setVScrollBarMode( QListView::Auto );
 
     QBoxLayout * l = new QVBoxLayout( this );
     l->addWidget (menu);
@@ -711,6 +711,10 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
            this,SLOT( ListPressed(int, QListViewItem *, const QPoint&, int)) );
 
 	   this->setIcon( image0);
+#ifdef Q_WS_WIN
+	   ListView->setSelected( ListView->firstChild() , true);
+	   ListView->setSelected( ListView->firstChild() , false);
+#endif
 }
 
 const QColor *ZSafe::evenRowColor = &Qt::white;
