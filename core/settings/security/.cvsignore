@@ -3,5 +3,6 @@ Makefile*
 moc_*
 loginbase.*
 syncbase.*
+securitybase.*
 .moc
 .obj
