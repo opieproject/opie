@@ -14,6 +14,7 @@ ifneq ($(CONFIG_DEBUG),)
 else
 	echo CONFIG -= debug >> $@
 	echo CONFIG += release >> $@
+	echo DEFINES += "OPIE_NO_DEBUG" >> $@
 endif
 ifeq ($(filter 3.%,$(QTE_VERSION)),) # not qt3
 	echo CONFIG -= qt3 >> $@
