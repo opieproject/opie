@@ -1,7 +1,32 @@
 #!/bin/sh
 
-RHOST=qpe.sf.net
-RDIR=/home/groups/q/qp/qpe/htdocs/packages/ipaq/unstable/
+case "$1" in
+-oz)
+    RHOST=openzaurus.sf.net
+    RDIR=/home/groups/o/op/openzaurus/htdocs/feeds/3.0
+    INDEXER="~/ipkg-make-index ."
+    shift
+    ;;
+-hh.org)
+    RHOST=opie.handhelds.org
+    RDIR=/home/opie/website/html/feed/ipaq
+    INDEXER="/home/opie/ipkg-make-index ."
+    shift
+    ;;
+-qpe)
+    RHOST=qpe.sf.net
+    RDIR=/home/groups/q/qp/qpe/htdocs/packages/ipaq/unstable
+    shift
+    ;;
+esac
+
+if [ -z "$RHOST" -o -z "$RDIR" ]
+then
+    echo Error: RHOST and RDIR not set! Aborting.
+    exit
+fi 
+
+[ -z "$INDEXER" ] && INDEXER="./mkPackages"
 
 NEW=""
 rm -f *.ipk
@@ -23,7 +48,7 @@ if [ -n "$NEW" ]
 then
     scp $NEW $RHOST:$RDIR
     rm $NEW
-    ssh $RHOST -C "cd $RDIR; chmod g+w *.ipk; ./mkPackages"
+    ssh $RHOST -C "cd $RDIR; chmod g+w *.ipk; $INDEXER"
 fi
 
 rm currentipks
