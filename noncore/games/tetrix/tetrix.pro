@@ -1,8 +1,7 @@
 TEMPLATE	= app
 CONFIG		= qt warn_on release
 DESTDIR		= $(OPIEDIR)/bin
-HEADERS		= minefield.h \
-		    gtetrix.h \
+HEADERS		= gtetrix.h \
 		    qtetrix.h \
 		    qtetrixb.h \
 		    tpiece.h
@@ -30,4 +29,5 @@ TRANSLATIONS = ../../../i18n/de/tetrix.ts \
 	 ../../../i18n/pt_BR/tetrix.ts \
 	 ../../../i18n/sl/tetrix.ts \
 	 ../../../i18n/zh_CN/tetrix.ts \
+	 ../../../i18n/it/tetrix.ts \
 	 ../../../i18n/zh_TW/tetrix.ts

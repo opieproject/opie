@@ -12,7 +12,6 @@ HEADERS		= d3des.h \
 		  kvnc.h \
 		  kvncconnectdlg.h \
 		  kvncoptionsdlg.h \
-		  version.h \
 		  vncauth.h
 SOURCES		= d3des.c \
 		  vncauth.c \

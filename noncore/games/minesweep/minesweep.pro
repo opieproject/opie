@@ -25,4 +25,5 @@ TRANSLATIONS = ../../../i18n/de/minesweep.ts \
 	 ../../../i18n/pt_BR/minesweep.ts \
 	 ../../../i18n/sl/minesweep.ts \
 	 ../../../i18n/zh_CN/minesweep.ts \
+	 ../../../i18n/it/minesweep.ts \
 	 ../../../i18n/zh_TW/minesweep.ts

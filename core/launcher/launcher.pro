@@ -114,4 +114,5 @@ TRANSLATIONS = ../../i18n/de/qpe.ts \
 	 ../../i18n/pt_BR/qpe.ts \
 	 ../../i18n/sl/qpe.ts \
 	 ../../i18n/zh_CN/qpe.ts \
+	 ../../i18n/it/qpe.ts \
 	 ../../i18n/zh_TW/qpe.ts
