@@ -22,14 +22,14 @@
 #define ABTABLE_H
 
 #include <qpe/categories.h>
-#include <qpe/contact.h>
+#include <opie/ocontact.h>
 
 #include <qmap.h>
 #include <qtable.h>
 #include <qstringlist.h>
 #include <qcombobox.h>
 
-#include <opie/ocontactdb.h>
+#include <opie/ocontactaccess.h>
 
 class AbTableItem : public QTableItem
 {
@@ -66,9 +66,9 @@ public:
     AbTable( const QValueList<int> *ordered, QWidget *parent, const char *name=0 );
     ~AbTable();
     // NEW
-    void addEntry( const Contact &newContact );
-    Contact currentEntry();
-    void replaceCurrentEntry( const Contact &newContact );
+    void addEntry( const OContact &newContact );
+    OContact currentEntry();
+    void replaceCurrentEntry( const OContact &newContact );
 
     void init();
 
@@ -124,19 +124,19 @@ private:
     void loadFile( const QString &strFile, bool journalFile );
     void fitColumns();
     void resort();
-    void updateJournal( const Contact &contact, Contact::journal_action action,
+    void updateJournal( const OContact &contact, OContact::journal_action action,
 			int row = -1 );
-    void insertIntoTable( const Contact &contact, int row );
-    QString findContactName( const Contact &entry );
-    QString findContactContact( const Contact &entry, int row );
-    void journalFreeReplace( const Contact &cnt, int row );
+    void insertIntoTable( const OContact &contact, int row );
+    QString findContactName( const OContact &entry );
+    QString findContactContact( const OContact &entry, int row );
+    void journalFreeReplace( const OContact &cnt, int row );
     void journalFreeRemove( int row );
     void realignTable( int );
     void updateVisible();
     int lastSortCol;
     bool asc;
     char showChar;
-    QMap<AbTableItem*, Contact> contactList;
+    QMap<AbTableItem*, OContact> contactList;
     const QValueList<int> *intFields;
     int currFindRow;
     QString showCat;
@@ -147,7 +147,7 @@ private:
     QString showBk;
     bool columnVisible;
 
-    OContactDB m_contactdb;
+    OContactAccess m_contactdb;
 
 };
 #endif // ABTABLE_H

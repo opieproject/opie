@@ -49,7 +49,7 @@ void parseEmailFrom( const QString &txt, QString &strDefaultEmail,
 void parseEmailTo( const QString &strDefaultEmail,
 		   const QString &strOtherEmail, QString &strBack );
 
-ContactEditor::ContactEditor(	const Contact &entry,
+ContactEditor::ContactEditor(	const OContact &entry,
 				const QValueList<int> *newOrderedValues,
 				QStringList *slNewOrdered,
 				QWidget *parent,
@@ -1292,7 +1292,7 @@ void ContactEditor::cleanupFields() {
 
 }
 
-void ContactEditor::setEntry( const Contact &entry ) {
+void ContactEditor::setEntry( const OContact &entry ) {
 
 	cleanupFields();
 

@@ -13,7 +13,7 @@
 **
 ** See http://www.trolltech.com/gpl/ for GPL licensing information.
 **
-** Contact info@trolltech.com if any conditions of this licensing are
+** OContact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
 **********************************************************************/
@@ -324,8 +324,8 @@ void AddressbookWindow::setDocument( const QString &filename )
 	if ( filename.find(".vcf") != int(filename.length()) - 4 ) 
 		return;
 	
-	QValueList<Contact> cl = Contact::readVCard( filename );
-	for( QValueList<Contact>::Iterator it = cl.begin(); it != cl.end(); ++it ) {
+	QValueList<OContact> cl = OContact::readVCard( filename );
+	for( QValueList<OContact>::Iterator it = cl.begin(); it != cl.end(); ++it ) {
 		//  QString msg = tr("You received a vCard for\n%1.\nDo You want to add it to your\naddressbook?")
 		//          .arg( (*it).fullName() );
 		//  if ( QMessageBox::information( this, tr("received contact"), msg, QMessageBox::Ok, QMessageBox::Cancel ) ==
@@ -355,7 +355,7 @@ AddressbookWindow::~AddressbookWindow()
 
 void AddressbookWindow::slotUpdateToolbar()
 {
-	Contact ce = abList->currentEntry();
+	OContact ce = abList->currentEntry();
 	actionMail->setEnabled( !ce.defaultEmail().isEmpty() );
 }
 
@@ -393,14 +393,14 @@ void AddressbookWindow::showView()
 
 void AddressbookWindow::slotListNew()
 {
-	Contact cnt;
+	OContact cnt;
 	if( !syncing ) {
 		if ( abEditor )
 			abEditor->setEntry( cnt );
 		abView()->init( cnt );
 		editEntry( NewEntry );
 	} else {
-		QMessageBox::warning(this, tr("Contacts"),
+		QMessageBox::warning(this, tr("OContacts"),
 				     tr("Can not edit data, currently syncing"));
 	}
 }
@@ -415,7 +415,7 @@ void AddressbookWindow::slotListView()
 void AddressbookWindow::slotListDelete()
 {
 	if(!syncing) {
-		Contact tmpEntry = abList->currentEntry();
+		OContact tmpEntry = abList->currentEntry();
 		
 		// get a name, do the best we can...
 		QString strName = tmpEntry.fullName();
@@ -462,7 +462,7 @@ void AddressbookWindow::slotViewEdit()
 
 void AddressbookWindow::writeMail()
 {
-	Contact c = abList->currentEntry();
+	OContact c = abList->currentEntry();
 	QString name = c.fileAs();
 	QString email = c.defaultEmail();
 	QCopEnvelope e("QPE/Application/qtmail", "writeMail(QString,QString)");
@@ -474,17 +474,17 @@ static const char * beamfile = "/tmp/obex/contact.vcf";
 void AddressbookWindow::slotBeam()
 {
 	QString filename;
-	Contact c;
+	OContact c;
 	if ( actionPersonal->isOn() ) {
 		filename = addressbookPersonalVCardName();
 		if (!QFile::exists(filename))
 			return; // can't beam a non-existent file
-		c = Contact::readVCard( filename )[0];
+		c = OContact::readVCard( filename )[0];
 	} else {
 		unlink( beamfile ); // delete if exists
 		c = abList->currentEntry();
 		mkdir("/tmp/obex/", 0755);
-		Contact::writeVCard( beamfile, c );
+		OContact::writeVCard( beamfile, c );
 		filename = beamfile;
 	}
 	Ir *ir = new Ir( this );
@@ -540,7 +540,7 @@ void AddressbookWindow::appMessage(const QCString &msg, const QByteArray &data)
 		QString name, email;
 		stream >> name >> email;
 		
-		Contact cnt;
+		OContact cnt;
 		QString fn, mn, ln;
 		parseName( name, &fn, &mn, &ln );
 		//  qDebug( " %s - %s - %s", fn.latin1(), mn.latin1(), ln.latin1() );
@@ -599,9 +599,9 @@ void AddressbookWindow::appMessage(const QCString &msg, const QByteArray &data)
 void AddressbookWindow::editPersonal()
 {
 	QString filename = addressbookPersonalVCardName();
-	Contact me;
+	OContact me;
 	if (QFile::exists(filename))
-		me = Contact::readVCard( filename )[0];
+		me = OContact::readVCard( filename )[0];
 	if (bAbEditFirstTime) {
 		abEditor = new ContactEditor( me, &orderedFields, &slOrderedFields,
 					      this, "editor" );
@@ -617,9 +617,9 @@ void AddressbookWindow::editPersonal()
 	abEditor->setNameFocus();
 	if ( abEditor->exec() ) {
 		setFocus();
-		Contact new_personal = abEditor->entry();
+		OContact new_personal = abEditor->entry();
 		QString fname = addressbookPersonalVCardName();
-		Contact::writeVCard( fname, new_personal );
+		OContact::writeVCard( fname, new_personal );
 		abView()->init(new_personal);
 		abView()->sync();
 	}
@@ -651,9 +651,9 @@ void AddressbookWindow::slotPersonalView()
 	
 	setCaption( tr("Contacts - My Personal Details") );
 	QString filename = addressbookPersonalVCardName();
-	Contact me;
+	OContact me;
 	if (QFile::exists(filename))
-		me = Contact::readVCard( filename )[0];
+		me = OContact::readVCard( filename )[0];
 	
 	abView()->init( me );
 	abView()->sync();
@@ -665,7 +665,7 @@ void AddressbookWindow::slotPersonalView()
 
 void AddressbookWindow::editEntry( EntryMode entryMode )
 {
-	Contact entry;
+	OContact entry;
 	if ( bAbEditFirstTime ) {
 		abEditor = new ContactEditor( entry, &orderedFields, &slOrderedFields,
 					      this, "editor" );
@@ -684,11 +684,11 @@ void AddressbookWindow::editEntry( EntryMode entryMode )
 	if ( abEditor->exec() ) {
 		setFocus();
 		if ( entryMode == NewEntry ) {
-			Contact insertEntry = abEditor->entry();
+			OContact insertEntry = abEditor->entry();
 			insertEntry.assignUid();
 			abList->addEntry( insertEntry );
 		} else {
-			Contact replaceEntry = abEditor->entry();
+			OContact replaceEntry = abEditor->entry();
 			if ( !replaceEntry.isValidUid() )
 				replaceEntry.assignUid();
 			abList->replaceCurrentEntry( replaceEntry );
@@ -811,8 +811,8 @@ void AddressbookWindow::initFields()
 	// only thing that is important are the important categories.  So,
 	// Call the contact functions that correspond to these old functions...
 	
-	QStringList xmlFields = Contact::fields();
-	QStringList visibleFields = Contact::trfields();
+	QStringList xmlFields = OContact::fields();
+	QStringList visibleFields = OContact::trfields();
 	xmlFields.remove( "Title" );
 	visibleFields.remove( tr("Name Title") );
 	visibleFields.remove( tr("Notes") );
@@ -901,7 +901,7 @@ AbLabel *AddressbookWindow::abView()
 {
 	if ( !mView ) {
 		mView = new AbLabel( this, "viewer" );
-		mView->init( Contact()  );
+		mView->init( OContact()  );
 		connect( mView, SIGNAL( okPressed() ), this, SLOT( slotListView() ) );
 	}
 	return mView;

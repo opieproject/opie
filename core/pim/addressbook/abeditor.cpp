@@ -51,7 +51,7 @@ void parseEmailTo( const QString &strDefaultEmail,
 
 
 
-AbEditor::AbEditor( const Contact &entry, const QValueList<int> *newOrdered,
+AbEditor::AbEditor( const OContact &entry, const QValueList<int> *newOrdered,
 		    QStringList *slNewOrdered,
 		    QWidget *parent = 0, const char *name = 0, WFlags fl = 0 )
     : QDialog( parent, name, TRUE, fl ),
@@ -182,7 +182,7 @@ void AbEditor::loadFields()
     }
 }
 
-void AbEditor::setEntry( const Contact &entry )
+void AbEditor::setEntry( const OContact &entry )
 {
     ent = entry;
     QListIterator<QLineEdit> it( listValue );

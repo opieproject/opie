@@ -18,7 +18,7 @@ INTERFACES	= addresssettingsbase.ui
 TARGET		= addressbook
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
-LIBS            += -lqpe -lopie-two
+LIBS            += -lqpe -lopie
 
 TRANSLATIONS = ../../../i18n/de/addressbook.ts \
 	 ../../../i18n/en/addressbook.ts \

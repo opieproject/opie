@@ -38,17 +38,17 @@ class AbEditor : public QDialog
 {
     Q_OBJECT
 public:
-    AbEditor( const Contact &entry, const QValueList<int> *newOrdedValues,
+    AbEditor( const OContact &entry, const QValueList<int> *newOrdedValues,
 	      QStringList *slNewOrdered,
 	      QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     ~AbEditor();
     void loadFields();
     void setNameFocus();
-    Contact entry() const { return ent; }
+    OContact entry() const { return ent; }
 
 public slots:
     void slotNote();
-    void setEntry( const Contact &entry );
+    void setEntry( const OContact &entry );
 
 protected slots:
     void accept();
@@ -63,7 +63,7 @@ private:
     QDialog *dlgNote;
     QLabel *lblNote;
     QMultiLineEdit *txtNote;
-    Contact ent;
+    OContact ent;
     QScrollView *svPage;
     QLineEdit *firstEdit;
     QLineEdit *lastEdit;

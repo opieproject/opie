@@ -25,6 +25,8 @@
 #include <qpe/stringutil.h>
 #include <qpe/qcopenvelope_qws.h>
 
+#include <opie/orecordlist.h>
+
 #include <qasciidict.h>
 #include <qdatetime.h>
 #include <qfile.h>
@@ -40,7 +42,7 @@
 
 #include <ctype.h> //toupper() for key hack
 
-static bool contactCompare( const Contact &cnt, const QRegExp &r, int category );
+static bool contactCompare( const OContact &cnt, const QRegExp &r, int category );
 
 
 /*!
@@ -184,9 +186,9 @@ void AbTable::resort()
 	}
 }
 
-Contact AbTable::currentEntry()
+OContact AbTable::currentEntry()
 {
-	Contact cnt;
+	OContact cnt;
 	AbTableItem *abItem;
 	abItem = static_cast<AbTableItem*>(item( currentRow(), 0 ));
 	if ( abItem ) {
@@ -196,7 +198,7 @@ Contact AbTable::currentEntry()
 	return cnt;
 }
 
-void AbTable::replaceCurrentEntry( const Contact &newContact )
+void AbTable::replaceCurrentEntry( const OContact &newContact )
 {
 	int row = currentRow();
 	updateVisible();
@@ -302,7 +304,7 @@ void AbTable::moveTo( char c )
 }
 
 
-QString AbTable::findContactName( const Contact &entry )
+QString AbTable::findContactName( const OContact &entry )
 {
 	// We use the fileAs, then company, defaultEmail
 	QString str;
@@ -316,7 +318,7 @@ QString AbTable::findContactName( const Contact &entry )
 	return str;
 }
 
-QString AbTable::findContactContact( const Contact &entry, int /* row */ )
+QString AbTable::findContactContact( const OContact &entry, int /* row */ )
 {
 	QString value;
 	value = "";
@@ -442,7 +444,7 @@ QString AbTable::findContactContact( const Contact &entry, int /* row */ )
 	return value;
 }
 
-void AbTable::addEntry( const Contact &newCnt )
+void AbTable::addEntry( const OContact &newCnt )
 {
 	int row = numRows();
 	
@@ -450,7 +452,7 @@ void AbTable::addEntry( const Contact &newCnt )
 	insertIntoTable( newCnt, row );
 	
 	qWarning("abtable:AddContact");
-	m_contactdb.addContact( newCnt );
+	m_contactdb.add ( newCnt );
 	
 	setCurrentCell( row, 0 );
 	// updateVisible();
@@ -485,10 +487,11 @@ void AbTable::load( const QString& /* fn */ )
 	
 	qWarning("abtable:Load data");
 	
-	OContactDB::Iterator it = m_contactdb.allContacts();
-	setNumRows( it.count() );
+	OContactAccess::List list  = m_contactdb.allRecords();
+	OContactAccess::List::Iterator it;
+	setNumRows( list.count() );
 	int row = 0;
-	for ( it = it.begin(); it != it.end(); ++it )
+	for ( it = list.begin(); it != list.end(); ++it )
 		insertIntoTable( *it, row++ );
 	
 	resort();
@@ -520,7 +523,7 @@ void AbTable::realignTable( int row )
 }
 
 // Add contact into table.
-void AbTable::insertIntoTable( const Contact &cnt, int row )
+void AbTable::insertIntoTable( const OContact &cnt, int row )
 {
 	QString strName,
 		strContact;
@@ -543,7 +546,7 @@ void AbTable::insertIntoTable( const Contact &cnt, int row )
 
 
 // Replace or add an entry
-void AbTable::journalFreeReplace( const Contact &cnt, int row )
+void AbTable::journalFreeReplace( const OContact &cnt, int row )
 {
 	QString strName,
 		strContact;
@@ -558,7 +561,7 @@ void AbTable::journalFreeReplace( const Contact &cnt, int row )
 	if ( ati != 0 ) { // replace
 		// :SX db access -> replace
 		qWarning ("Replace Contact in DB ! UID: %d", contactList[ati].uid() );
-		m_contactdb.replaceContact( contactList[ati].uid(), cnt );
+		m_contactdb.replace ( cnt );
 		
 		contactList.remove( ati );
 		ati->setItem( strName, strContact );
@@ -574,7 +577,7 @@ void AbTable::journalFreeReplace( const Contact &cnt, int row )
 		// gets deleted when returning -- Why ? (se)
 		// :SX db access -> add
 		qWarning ("Are you sure to add to database ? -> Currently disabled !!");
-		// m_contactdb.addContact( cnt );
+		// m_contactdb.add( cnt );
 	}
 }
 
@@ -588,7 +591,7 @@ void AbTable::journalFreeRemove( int row )
 	
 	// :SX db access -> remove
 	qWarning ("Remove Contact from DB ! UID: %d",contactList[ati].uid() );
-	m_contactdb.removeContact( contactList[ati].uid() );
+	m_contactdb.remove( contactList[ati].uid() );
 	
 	contactList.remove( ati ); 
 	
@@ -679,7 +682,7 @@ void AbTable::slotDoFind( const QString &findString, bool caseSensitive,
 	}
 }
 
-static bool contactCompare( const Contact &cnt, const QRegExp &r, int category )
+static bool contactCompare( const OContact &cnt, const QRegExp &r, int category )
 {
 	bool returnMe;
 	QArray<int> cats;
@@ -763,14 +766,14 @@ void AbTable::setChoiceSelection(int /*index*/, const QStringList& /*list*/)
 	   
 	QString selname = choicenames.at(index);
 	for (each row) {
-	Contact *c = contactForRow(row);
+	OContact *c = contactForRow(row);
 	if ( list.contains(c->email) ) {
 	list.remove(c->email);
 	setText(row, 2, selname);
 	}
 	}
 	for (remaining list items) {
-	Contact *c = new contact(item);
+	OContact *c = new contact(item);
 	setText(newrow, 2, selname);
 	}
 	
@@ -784,7 +787,7 @@ QStringList AbTable::choiceSelection(int /*index*/) const
 	   
 	QString selname = choicenames.at(index);
 	for (each row) {
-	Contact *c = contactForRow(row);
+	OContact *c = contactForRow(row);
 	if ( text(row,2) == selname ) {
 	r.append(c->email);
 	}
@@ -838,7 +841,7 @@ void AbTable::updateVisible()
 		row;
 	bool hide;
 	AbTableItem *ati;
-	Contact *cnt;
+	OContact *cnt;
 	QString fileAsName;
 	QString tmpStr;
 	visible = 0;
