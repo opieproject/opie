@@ -2,6 +2,7 @@
 #include "packagelistdoclnk.h"
 
 #include <qpe/applnk.h>
+#include <qpe/config.h>
 #include <qlist.h>
 
 #include "package.h"
@@ -16,11 +17,17 @@ PackageListDocLnk::PackageListDocLnk(PackageManagerSettings* s)
 PackageListDocLnk::PackageListDocLnk()
 	: PackageList()
 {
-	doclnkset = new DocLnkSet("/mnt/nfs/ipk","application/ipkg");
+	Config cfg( "oipkg", Config::User );
+	cfg.setGroup( "Common" );
+	docLnkDir = cfg.readEntry( "docLnkDir", "/root/" );
+	doclnkset = new DocLnkSet(docLnkDir,"application/ipkg");
 }
 
 PackageListDocLnk::~PackageListDocLnk()
 {
+	Config cfg( "oipkg", Config::User );
+	cfg.setGroup( "Common" );
+	cfg.writeEntry( "docLnkDir", docLnkDir );
 }
 
 

@@ -35,7 +35,18 @@ void PackageListView::setCurrent( QListViewItem* p )
   if ( !p ) return;
   activePackageListItem = (PackageListItem*)p;
   activePackage = activePackageListItem->getPackage();
-  if (!activePackage) return;
+  if (!activePackage)
+  {
+//		QDictIterator<QCheckListItem> it( rootItems );
+//		while ( it.current() )
+//    {
+//			if ( it.current()==p )
+//   			pvDebug(2,"current item");
+//			++it;
+//		}
+
+		return;
+  }
   popupTimer->start( 750, true );
 }
 

@@ -16,6 +16,7 @@ public slots:
   void update();
 private:
 	DocLnkSet *doclnkset;
+ 	QString docLnkDir;
 };
 
 
