@@ -220,8 +220,35 @@ int suspend ( int fix_rtc )
 
 	tzset ( );  // not sure if it is really needed -- it probably doesn't hurt ...
 	
-	do { // try/catch simulation
+	time ( &syst );// get the UNIX system time
+	sys = *localtime ( &syst );		
 	
+	do {
+		
+		if (( fd = open ( "/dev/misc/rtc", O_RDWR )) < 0 )
+			if (( fd = open ( "/dev/rtc", O_RDWR )) < 0 )
+				break; //  ( 1, "rtc" );	
+	
+		memset ( &rtc, 0, sizeof ( struct tm ));    // get the RTC time
+	
+		if ( ioctl ( fd, RTC_RD_TIME, &rtc ) < 0 )
+			break; //  ( 1, "ioctl RTC_RD_TIME" );		
+	
+		rtct = mktime ( &rtc );
+
+		rtc_sys_diff = ( syst - rtct ) - sys. tm_gmtoff;  // calculate the difference between system and hardware time
+	
+		if ( fix_rtc && (( rtc_sys_diff < -3 ) || ( rtc_sys_diff > 3 ))) {
+			struct tm set;		
+			set = *gmtime ( &syst );
+		
+			// if the difference between system and hardware time is more than 3 seconds,
+			// we have to set the RTC (hwclock --systohc), or alarms won't work reliably.
+
+	    		if ( ioctl ( fd, RTC_SET_TIME, &set ) < 0 )
+				break; //  ( 1, "ioctl RTC_SET_TIME" );
+		}
+
 		// read the wakeup time from /etc/resumeat
 		if (!( fp = fopen ( "/etc/resumeat", "r" ))) 
 			break; //  ( 1, "/etc/resumeat" );
@@ -232,39 +259,17 @@ int suspend ( int fix_rtc )
 		fclose ( fp );
 	
 		alrt = atoi ( buf ); // get the alarm time
+
 		if ( alrt == 0 )
 			break; //  ( 0, "/etc/resumeat contains an invalid time description" );	
 		alrt -= 5; 	// wake up 5 sec before the specified time	
+	
 		alr = *gmtime ( &alrt );
-
-		time ( &syst );// get the UNIX system time
-		sys = *localtime ( &syst );		
-		
-		if (( fd = open ( "/dev/misc/rtc", O_RDWR )) < 0 )
-			if (( fd = open ( "/dev/rtc", O_RDWR )) < 0 )
-				break; //  ( 1, "rtc" );	
-		
-		memset ( &rtc, 0, sizeof ( struct tm ));    // get the RTC time
-		if ( ioctl ( fd, RTC_RD_TIME, &rtc ) < 0 )
-			break; //  ( 1, "ioctl RTC_RD_TIME" );		
-		rtct = mktime ( &rtc );
-
-		rtc_sys_diff = ( syst - rtct ) - sys. tm_gmtoff;  // calculate the difference between system and hardware time
 	
-		if ( fix_rtc && (( rtc_sys_diff < -3 ) || ( rtc_sys_diff > 3 ))) {
-			struct tm set;		
-			set = *gmtime ( &syst );
-			
-			// if the difference between system and hardware time is more than 3 seconds,
-			// we have to set the RTC (hwclock --systohc), or alarms won't work reliably.
-	
-	    	if ( ioctl ( fd, RTC_SET_TIME, &set ) < 0 )
-		       break; //  ( 1, "ioctl RTC_SET_TIME" );
-		}
-
 		if ( ioctl ( fd, RTC_ALM_SET, &alr ) < 0 )  // set RTC alarm time
 			break; //  ( 1, "ioctl RTC_ALM_SET" );		
- 		if ( ioctl ( fd, RTC_AIE_ON, 0 ) < 0 )
+	
+	 	if ( ioctl ( fd, RTC_AIE_ON, 0 ) < 0 )
 			break; //  ( 1, "ioctl RTC_AIE_ON" );   // enable RTC alarm irq
 
 		// tell the parent it is safe to exit now .. we have set the RTC alarm
@@ -278,21 +283,27 @@ int suspend ( int fix_rtc )
 	
 		if ( ioctl ( fd, RTC_AIE_OFF, 0 ) < 0 )     // disable RTC alarm irq
 			break; //  ( 1, "ioctl RTC_AIE_OFF" );
-		
+
 		close ( fd );
-	
-		remove_pidfile ( ); // normal exit
-		return 0;	
 		
-	} while ( 0 );
+		remove_pidfile ( );
+		
+		return 0;	
+
+	} while ( 0 )
+
+	if ( fp != NULL )
+		fclose ( fp );
 	
-	kill ( parent_pid, SIGUSR1 );  // parent is still running - it can exit now
+	if ( fd != -1 )
+		close ( fd );
+
+	kill ( parent_pid, SIGUSR1 );
 
 	while ( 1 )		    // pretend that we are waiting on RTC, so opiealarm -r can kill us
 		sleep ( 1000 ); // if we don't do this, the "resuspend on AC" would be triggerd
 	return 0;
 }
-
 
 int onac ( void )
 {
