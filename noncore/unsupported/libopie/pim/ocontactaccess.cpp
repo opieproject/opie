@@ -17,11 +17,14 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccess.cpp,v 1.9 2004-03-02 12:14:22 alwin Exp $
+ * Version: $Id: ocontactaccess.cpp,v 1.1 2004-11-16 21:46:07 mickeyl Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccess.cpp,v $
- * Revision 1.9  2004-03-02 12:14:22  alwin
+ * Revision 1.1  2004-11-16 21:46:07  mickeyl
+ * libopie1 goes into unsupported
+ *
+ * Revision 1.9  2004/03/02 12:14:22  alwin
  * run the optimize_connect script
  * the whole cvs is tagged with "before_optimize_connect" if there are problems you
  * can check the diff (but it had compiled and run here)

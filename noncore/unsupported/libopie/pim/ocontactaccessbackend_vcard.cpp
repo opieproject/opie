@@ -13,11 +13,14 @@
  * ToDo:
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_vcard.cpp,v 1.11 2003-08-01 12:30:16 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_vcard.cpp,v 1.1 2004-11-16 21:46:07 mickeyl Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_vcard.cpp,v $
- * Revision 1.11  2003-08-01 12:30:16  eilers
+ * Revision 1.1  2004-11-16 21:46:07  mickeyl
+ * libopie1 goes into unsupported
+ *
+ * Revision 1.11  2003/08/01 12:30:16  eilers
  * Merging changes from BRANCH_1_0 to HEAD
  *
  * Revision 1.10.4.3  2003/07/23 08:54:37  eilers

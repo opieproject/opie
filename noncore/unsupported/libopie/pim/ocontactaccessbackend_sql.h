@@ -12,11 +12,14 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_sql.h,v 1.3 2004-03-14 13:50:35 alwin Exp $
+ * Version: $Id: ocontactaccessbackend_sql.h,v 1.1 2004-11-16 21:46:07 mickeyl Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_sql.h,v $
- * Revision 1.3  2004-03-14 13:50:35  alwin
+ * Revision 1.1  2004-11-16 21:46:07  mickeyl
+ * libopie1 goes into unsupported
+ *
+ * Revision 1.3  2004/03/14 13:50:35  alwin
  * namespace correction
  *
  * Revision 1.2  2003/12/08 15:18:11  eilers

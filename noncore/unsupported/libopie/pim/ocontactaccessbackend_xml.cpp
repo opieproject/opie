@@ -11,11 +11,14 @@
  * =====================================================================
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_xml.cpp,v 1.10 2004-03-01 15:44:36 chicken Exp $
+ * Version: $Id: ocontactaccessbackend_xml.cpp,v 1.1 2004-11-16 21:46:07 mickeyl Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_xml.cpp,v $
- * Revision 1.10  2004-03-01 15:44:36  chicken
+ * Revision 1.1  2004-11-16 21:46:07  mickeyl
+ * libopie1 goes into unsupported
+ *
+ * Revision 1.10  2004/03/01 15:44:36  chicken
  * fix includes
  *
  * Revision 1.9  2003/09/22 14:31:16  eilers

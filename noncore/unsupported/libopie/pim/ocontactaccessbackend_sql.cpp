@@ -10,11 +10,14 @@
  *      version 2 of the License, or (at your option) any later version.
  * =====================================================================
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_sql.cpp,v 1.5 2004-03-14 13:50:35 alwin Exp $
+ * Version: $Id: ocontactaccessbackend_sql.cpp,v 1.1 2004-11-16 21:46:07 mickeyl Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_sql.cpp,v $
- * Revision 1.5  2004-03-14 13:50:35  alwin
+ * Revision 1.1  2004-11-16 21:46:07  mickeyl
+ * libopie1 goes into unsupported
+ *
+ * Revision 1.5  2004/03/14 13:50:35  alwin
  * namespace correction
  *
  * Revision 1.4  2003/12/22 10:19:26  eilers

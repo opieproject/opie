@@ -1,6 +1,6 @@
 /*
 
-   $Id: oprocess.cpp,v 1.3 2004-03-01 15:44:36 chicken Exp $
+   $Id: oprocess.cpp,v 1.1 2004-11-16 21:46:05 mickeyl Exp $
 
    This file is part of the KDE libraries
    Copyright (C) 1997 Christian Czezatke (e9025461@student.tuwien.ac.at)

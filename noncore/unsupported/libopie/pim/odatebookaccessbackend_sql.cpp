@@ -10,11 +10,14 @@
  *      version 2 of the License, or (at your option) any later version.
  * =====================================================================
  * =====================================================================
- * Version: $Id: odatebookaccessbackend_sql.cpp,v 1.4 2004-03-14 13:50:35 alwin Exp $
+ * Version: $Id: odatebookaccessbackend_sql.cpp,v 1.1 2004-11-16 21:46:08 mickeyl Exp $
  * =====================================================================
  * History:
  * $Log: odatebookaccessbackend_sql.cpp,v $
- * Revision 1.4  2004-03-14 13:50:35  alwin
+ * Revision 1.1  2004-11-16 21:46:08  mickeyl
+ * libopie1 goes into unsupported
+ *
+ * Revision 1.4  2004/03/14 13:50:35  alwin
  * namespace correction
  *
  * Revision 1.3  2003/12/22 11:41:39  eilers

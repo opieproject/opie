@@ -15,11 +15,14 @@
  * =====================================================================
  * ToDo: Define enum for query settings
  * =====================================================================
- * Version: $Id: ocontactaccessbackend.h,v 1.7 2004-02-19 02:05:37 zecke Exp $
+ * Version: $Id: ocontactaccessbackend.h,v 1.1 2004-11-16 21:46:07 mickeyl Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend.h,v $
- * Revision 1.7  2004-02-19 02:05:37  zecke
+ * Revision 1.1  2004-11-16 21:46:07  mickeyl
+ * libopie1 goes into unsupported
+ *
+ * Revision 1.7  2004/02/19 02:05:37  zecke
  * Add notes for API fixes and BC stuff
  *
  * Revision 1.6  2003/08/01 12:30:16  eilers

@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: colordialog.h,v 1.6 2003-05-07 14:45:49 zecke Exp $
+** $Id: colordialog.h,v 1.1 2004-11-16 21:45:59 mickeyl Exp $
 **
 ** Definition of OColorDialog class
 **

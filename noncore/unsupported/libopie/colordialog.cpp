@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: colordialog.cpp,v 1.6 2004-03-02 12:14:21 alwin Exp $
+** $Id: colordialog.cpp,v 1.1 2004-11-16 21:45:59 mickeyl Exp $
 **
 ** Implementation of OColorDialog class
 **

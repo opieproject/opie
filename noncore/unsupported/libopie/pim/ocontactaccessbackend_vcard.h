@@ -13,11 +13,14 @@
  * ToDo:
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_vcard.h,v 1.6 2003-04-13 18:07:10 zecke Exp $
+ * Version: $Id: ocontactaccessbackend_vcard.h,v 1.1 2004-11-16 21:46:07 mickeyl Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_vcard.h,v $
- * Revision 1.6  2003-04-13 18:07:10  zecke
+ * Revision 1.1  2004-11-16 21:46:07  mickeyl
+ * libopie1 goes into unsupported
+ *
+ * Revision 1.6  2003/04/13 18:07:10  zecke
  * More API doc
  * QString -> const QString&
  * QString = 0l -> QString::null

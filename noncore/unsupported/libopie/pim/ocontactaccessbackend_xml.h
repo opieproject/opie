@@ -14,11 +14,14 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_xml.h,v 1.15 2003-09-22 14:31:16 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_xml.h,v 1.1 2004-11-16 21:46:07 mickeyl Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_xml.h,v $
- * Revision 1.15  2003-09-22 14:31:16  eilers
+ * Revision 1.1  2004-11-16 21:46:07  mickeyl
+ * libopie1 goes into unsupported
+ *
+ * Revision 1.15  2003/09/22 14:31:16  eilers
  * Added first experimental incarnation of sql-backend for addressbook.
  * Some modifications to be able to compile the todo sql-backend.
  * A lot of changes fill follow...

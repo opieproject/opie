@@ -13,11 +13,14 @@
  * =====================================================================
  * ToDo: Define enum for query settings
  * =====================================================================
- * Version: $Id: ocontactaccess.h,v 1.10 2003-12-22 10:19:26 eilers Exp $
+ * Version: $Id: ocontactaccess.h,v 1.1 2004-11-16 21:46:07 mickeyl Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccess.h,v $
- * Revision 1.10  2003-12-22 10:19:26  eilers
+ * Revision 1.1  2004-11-16 21:46:07  mickeyl
+ * libopie1 goes into unsupported
+ *
+ * Revision 1.10  2003/12/22 10:19:26  eilers
  * Finishing implementation of sql-backend for datebook. But I have to
  * port the PIM datebook application to use it, before I could debug the
  * whole stuff.
