@@ -5,6 +5,7 @@ HEADERS     = oclickablelabel.h      \
               odialog.h              \
               ofontselector.h        \
               oimageeffect.h         \
+	      okeyconfigwidget.h     \
               olistview.h            \
               opixmapeffect.h        \
               opopupmenu.h           \
@@ -25,6 +26,7 @@ SOURCES     = oclickablelabel.cpp    \
               odialog.cpp            \
               ofontselector.cpp      \
               oimageeffect.cpp       \
+	      okeyconfigwidget.cpp   \
               olistview.cpp          \
               opixmapeffect.cpp      \
               opopupmenu.cpp         \

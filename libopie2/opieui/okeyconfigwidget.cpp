@@ -1188,12 +1188,13 @@ void OKeyChooserConfigDialog::keyPressEvent( QKeyEvent* ev ) {
         default:
             break;
         }
-        if (mod )
+        if (mod ) {
             m_mod |= mod;
-        else
+            key = 0;
+        }else
             m_key = key;
 
-        if ( ( !mod || m_key ) && !m_timer->isActive() )
+        if ( ( !mod || m_key || key ) && !m_timer->isActive() )
             m_timer->start( 150, true );
 
         m_keyPair = OKeyPair( m_key, m_mod );
