@@ -17,6 +17,7 @@
 **********************************************************************/
 
 /* OPIE */
+#include <opie2/ostorageinfo.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpedecoration_qws.h>
@@ -52,6 +53,9 @@ extern "C"
 
 #define DHRYSTONE_RUNS   20000000
 #define TEST_DURATION    3
+
+#define BUFF_SIZE        8192
+#define FILE_SIZE        1024 * 1024  // 1Mb
 
 //===========================================================================
 
@@ -154,38 +158,22 @@ void BenchmarkInfo::run()
         test_gfx->setOn( false );
     }
 
-    if ( test_ram->isOn() )
+    if ( test_ram->isOn() )    // /tmp is supposed to be in RAM on a PDA
     {
-        t.start();
-        writeFile( "/tmp/benchmarkFile.dat" );    // /tmp is supposed to be in RAM on a PDA
-        readFile( "/tmp/benchmarkFile.dat" );
-        QFile::remove( "/tmp/benchmarkFile.dat" );
-        test_ram->setText( 1, QString( "%1 secs" ).arg( QString::number( t.elapsed() / 1000.0 ) ) );
-        test_ram->setOn( false );
+        performFileTest( "/tmp/benchmarkFile.dat", test_ram );
     }
-/*
+
     if ( test_cf->isOn() )
     {
-        t.start();
-        benchInteger();
-        test_alu->setText( 1, QString( "%1 secs" ).arg( QString::number( t.elapsed() / 1000.0 ) ) );
-        test_alu->setOn( false );
+        OStorageInfo storage;
+        performFileTest( storage.cfPath() + "/benchmarkFile.dat", test_cf );
     }
 
     if ( test_sd->isOn() )
     {
-        t.start();
-        benchInteger();
-        test_alu->setText( 1, QString( "%1 secs" ).arg( QString::number( t.elapsed() / 1000.0 ) ) );
-        test_alu->setOn( false );
+        OStorageInfo storage;
+        performFileTest( storage.sdPath() + "/benchmarkFile.dat", test_sd );
     }
-
-    if ( ( which_clipb ) && ( buf.length() > 0 ) )
-    {
-        clb = QApplication::clipboard();
-        clb->setText( dt_buf + buf );
-    }
-    */
 
     startButton->setText( tr( "&Start Tests!" ) );
 }
@@ -288,12 +276,22 @@ int BenchmarkInfo::gfxRendering( int seconds )
     
 }
 
-// **********************************************************************
-// Read & Write
-// v2.0.0
-// **********************************************************************
-#define   BUFF_SIZE        8192
-#define   FILE_SIZE        1024 * 1024  // 1Mb
+void BenchmarkInfo::performFileTest( const QString& fname, QCheckListItem* item )
+{
+    QTime time;
+    time.start();
+    if ( writeFile( fname ) &&
+            readFile( fname ) )
+    {
+        QFile::remove( fname );
+        item->setText( 1, QString( "%1 kb/sec" ).arg( QString::number( 1024.0 / ( time.elapsed() / 1000.0 ) ) ) );
+        item->setOn( false );
+    }
+    else
+    {
+        item->setText( 1, tr( "error" ) );
+    }
+}
 
 char FileBuf[ BUFF_SIZE + 1 ];
 
@@ -363,47 +361,7 @@ bool BenchmarkInfo::writeFile( const QString& w_path )
         writeFile.close();
     }
     return ( true );
-    // ------------------------------------*/
 
-    /* ----------------------------------
-     srand( time( NULL ) );
-
-     FILE *fp;
-
-     for( n= 0 ; n < 40 ; n++ )
-     {
-      if (( fp = fopen( w_path, "wt" )) == NULL )
-       return( false );
-      memset( FileBuf, '\0', BUFF_SIZE+1 );
-      // ------------------------------------------ sequential write
-      for( i= 0 ; i < FILE_SIZE / BUFF_SIZE ; i++ )
-            {
-             for( k= 0 ; k < 128 ; k++ )
-                {
-        n = rand() % 30;
-        memcpy( &FileBuf[k*8], &data[n], 32 );
-                }
-       fputs( FileBuf, fp );
-            }
-      // ------------------------------------------ random write
-      for( i= 0 ; i < 300 ; i++ )
-            {
-       memset( FileBuf, '\0', 130 );
-             len = rand() % 120 + 8;
-             for( k= 0 ; k < 16 ; k++ )
-                {
-        n = rand() % 54;
-        memcpy( &FileBuf[k*8], &data[n], 8 );
-                }
-       pos = rand() % ( FILE_SIZE / BUFF_SIZE - BUFF_SIZE );
-
-       fseek( fp, pos, SEEK_SET );
-       fputs( FileBuf, fp );
-            }
-            fclose( fp );
-     }
-     return( true );
-    -------------------------------------*/
 }
 
 

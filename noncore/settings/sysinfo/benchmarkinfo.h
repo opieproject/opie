@@ -54,10 +54,11 @@ public:
 
     int textRendering( int );
     int gfxRendering( int );
-    bool writeFile( const QString& );
-    bool readFile( const QString& );
+    void performFileTest( const QString& fname, QCheckListItem* item );
 
 private slots:
+    bool writeFile( const QString& );
+    bool readFile( const QString& );
     void run();
-
 };
+
