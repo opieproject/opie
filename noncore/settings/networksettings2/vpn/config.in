@@ -1,4 +1,4 @@
   config NS2VPN
     boolean "opie-networksettings2plugin-vpn (set up VPN)"
-    default "n" if NS2MAIN
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && NS2MAIN && NS2CORE
+    default "n" if NS2
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && NS2CORE

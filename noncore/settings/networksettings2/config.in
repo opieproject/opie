@@ -2,13 +2,8 @@
 
 config NS2
   boolean
-  default "y" if NS2MAIN
-  depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && NS2MAIN
-
-config NS2CORE
-  boolean
-  default "y" if NS2
-  depends ( LIBQPE || LIBQPE-X11 ) && NS2
+  default "y"
+  depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && NS2CORE
 
   source noncore/settings/networksettings2/profile/config.in
   source noncore/settings/networksettings2/network/config.in
