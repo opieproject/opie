@@ -145,6 +145,7 @@ bool OTGateway::needsEnabling() {
 
 bool OTGateway::isEnabled() {
       if( getOTDevice()->deviceNr() >= 0 &&
+          AllDrivers.count() != 0 &&
           driver( getOTDevice()->deviceNr() )->isUp() )
         return TRUE;
 

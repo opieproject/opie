@@ -89,7 +89,7 @@ public :
       OTDriverList & getDriverList()
         { return AllDrivers; }
       OTDriver * driver( int nr ) 
-        { return AllDrivers[nr]; }
+        { return AllDrivers.count() == 0 ? 0 : AllDrivers[nr]; }
       void updateDrivers();
 
       PANConnectionVector getPANConnections();
