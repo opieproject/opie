@@ -653,7 +653,6 @@ void MainWindowImp::receive(const QCString &msg, const QByteArray &arg)
 {
     bool found = false;
     qDebug("MainWindowImp::receive QCop msg >"+msg+"<");
-    QPEApplication::setKeepRunning();
     if (msg == "raise") {
         raise();
         return;
