@@ -23,7 +23,12 @@ HEADERS   = ofontmenu.h \
     pim/opimaccesstemplate.h \
     pim/opimaccessbackend.h \
     pim/otodoaccess.h \
-    pim/otodacessbackend.h
+    pim/otodacessbackend.h \
+    pim/ocontact.h \
+    pim/ocontactaccess.h \
+    pim/ocontactaccessbackend.h \
+    pim/ocontactaccessbackend_xml.h
+    
 SOURCES   = ofontmenu.cc  \
 	    xmltree.cc \
 	    tododb.cpp todoevent.cpp \
@@ -43,7 +48,9 @@ SOURCES   = ofontmenu.cc  \
              pim/otodo.cpp \
              pim/opimrecord.cpp \
 	     pim/otodoaccess.cpp \
-	     pim/otodoaccessbackend.cpp
+	     pim/otodoaccessbackend.cpp \
+             pim/ocontact.cpp \
+             pim/ocontactaccess.cpp
 
 TARGET    = opie
 INCLUDEPATH += $(OPIEDIR)/include

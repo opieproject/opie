@@ -1,0 +1,11 @@
+To compile successfully ocontact there have to be the 
+following symbolic links created:
+
+ln -s ../../library/backend/qfiledirect_p.h    
+ln -s ../../library/backend/vobject_p.h 
+
+
+This "dirty" solution will be fixed, soon !
+
+
+Bye, Stefan (Eilers.Stefan@epost.de)
