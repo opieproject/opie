@@ -85,6 +85,7 @@ CONFIG_LIGHT-AND-POWER	core/settings/light-and-power	light-and-power.pro
 CONFIG_LIQUID	noncore/styles/liquid	liquid.pro
 CONFIG_LOGOUTAPPLET	core/applets/logoutapplet	logoutapplet.pro
 CONFIG_MAILIT		noncore/net/mailit		mailit.pro
+CONFIG_LIBMAILWRAPPER   noncore/net/mail/libmailwrapper  libmailwrapper.pro
 CONFIG_MAIL3		noncore/net/mail		mail.pro
 CONFIG_MEDIUMMOUNT	noncore/settings/mediummount	mediummount.pro
 CONFIG_MEMORYAPPLET	noncore/applets/memoryapplet	memoryapplet.pro
