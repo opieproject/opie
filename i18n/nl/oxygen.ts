@@ -1,545 +1,560 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>CategoryFilterImpl</name>
+    <name>CalcDlg</name>
     <message>
-        <source>Category Filter</source>
+        <source>Molecular Weight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select one or more groups</source>
+        <source>Chemical Formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Molecular Weight (u):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Elemental Composition (%):</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>DataManager</name>
+    <name>OxydataWidget</name>
     <message>
-        <source>Reading configuration...</source>
+        <source>%1 u</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 pm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 J</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 g/cm^3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 K</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Weight</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Block</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Electronegativity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Atomic radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ionizationenergie</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Density</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Boilingpoint</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Meltingpoint</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>InputDialog</name>
+    <name>Oxygen</name>
     <message>
-        <source>&amp;OK</source>
+        <source>Oxygen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Cancel</source>
+        <source>PSE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hydrogen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Helium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lithium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Beryllium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Boron</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Carbon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nitrogen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fluorine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Neon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sodium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Magnesium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Aluminum</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Silicon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Phosphorus</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sulfur</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chlorine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Argon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Potassium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calcium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scandium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Titanium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vanadium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chromium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Manganese</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Iron</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cobalt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nickel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copper</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zinc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gallium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Germanium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arsenic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Selenium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bromine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Krypton</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rubidium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Strontium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yttrium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zirconium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Niobium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Molybdenum</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Technetium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ruthenium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rhodium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Palladium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Silver</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cadmium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Indium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Antimony</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tellurium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Iodine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Xenon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cesium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Barium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lanthanum</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cerium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Praseodymium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Neodymium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Promethium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Samarium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Europium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gadolinium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Terbium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dysprosium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Holmium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Erbium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thulium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ytterbium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lutetium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hafnium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tantalum</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tungsten</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rhenium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Osmium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Iridium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Platinum</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mercury</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thallium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lead</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bismuth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Polonium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Astatine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Radon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Francium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Radium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Actinium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thorium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Protactinium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Uranium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Neptunium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Plutonium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Americium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Berkelium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Californium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Einsteinium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fermium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mendelevium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nobelium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lawrencium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rutherfordium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dubnium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Seaborgium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bohrium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hassium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Meitnerium</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>InstallDlgImpl</name>
+    <name>PSEWidget</name>
     <message>
-        <source>Remove
+        <source>Periodic System</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>calcDlgUI</name>
+    <message>
+        <source>ERROR: 
 </source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Install
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Upgrade
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>(ReInstall)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>(Upgrade)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Destination</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Space Avail</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Output</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Start</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Abort</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>
-**** User Clicked ABORT ***</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>**** Process Aborted ****</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unknown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save output</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
-    <name>InstallOptionsDlgImpl</name>
+    <name>dataWidgetUI</name>
     <message>
-        <source>Options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Force Depends</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Force Reinstall</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Force Remove</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Force Overwrite</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Information Level</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Errors only</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Normal messages</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Informative messages</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Troubleshooting output</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>MainWindow</name>
-    <message>
-        <source>AQPkg - Package Manager</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Type the text to search for here.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to hide the Quick Jump toolbar.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Update lists</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to update package lists from servers.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Upgrade</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to upgrade all installed packages if a newer version is available.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Download</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to download the currently selected package(s).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Apply changes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to install, remove or upgrade currently selected package(s).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Configure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to configure this application.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Actions</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show packages not installed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to show packages available which have not been installed.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show installed packages</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to show packages currently installed on this device.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show updated packages</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to show packages currently installed on this device which have a newer version available.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Filter by category</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to list packages belonging to one category.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Set filter category</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to change package category to used filter.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Find</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to search for text in package names.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Find next</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to find the next package name containing the text you are searching for.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Quick Jump keypad</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to display/hide keypad to allow quick movement through the package list.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to hide the find toolbar.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Servers:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to select a package feed.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Packages</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This is a listing of all packages for the server feed selected above.
-
-A blue dot next to the package name indicates that the package is currently installed.
-
-A blue dot with a star indicates that a newer version of the package is available from the server feed.
-
-Click inside the box at the left to select a package.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to uninstall the currently selected package(s).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Building server list:
-<byte value="x9"/>%1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Building package list for:
-<byte value="x9"/>%1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Refreshing server package lists</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>WARNING: Upgrading while
-Opie/Qtopia is running
-is NOT recommended!
-
-Are you sure?
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Upgrading installed packages</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Are you sure you wish to delete
-%1?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Are you sure?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Download to where</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter path to download to</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Install Remote Package</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter package location</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Nothing to do</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No packages selected</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you wish to remove or reinstall
-%1?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Remove or ReInstall</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ReInstall</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>R</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you wish to remove or upgrade
-%1?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Remove or Upgrade</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>U</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Updating Launcher...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>PackageWindow</name>
-    <message>
-        <source>&lt;b&gt;Description&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;&lt;b&gt;Installed To&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;&lt;b&gt;Size&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;&lt;b&gt;Section&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;&lt;b&gt;Filename&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;&lt;b&gt;Version Installed&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;&lt;b&gt;Version Available&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Package Information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Package information is unavailable</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SettingsImpl</name>
-    <message>
-        <source>Configuration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Servers</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Destinations</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Proxies</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Server</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Name:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Address:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Active Server</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Update</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Destination</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Location:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Link to root</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>HTTP Proxy</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enabled</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>FTP Proxy</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Username:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Password:</source>
+        <source>Chemical Data</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

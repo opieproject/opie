@@ -1,489 +1,349 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>CategoryFilterImpl</name>
+    <name>IRCChannelTab</name>
     <message>
-        <source>Category Filter</source>
+        <source>Talking on channel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select one or more groups</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>DataManager</name>
-    <message>
-        <source>Reading configuration...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>InputDialog</name>
-    <message>
-        <source>&amp;OK</source>
+        <source>Channel discussion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>InstallDlgImpl</name>
-    <message>
-        <source>Remove
-</source>
+        <source>Type your message here to participate in the channel discussion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Install
-</source>
+        <source>CTCP</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Upgrade
-</source>
+        <source>Query</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>(ReInstall)</source>
+        <source>Ping</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>(Upgrade)</source>
+        <source>Version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Destination</source>
+        <source>Whois</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Space Avail</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Output</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Start</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Abort</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>
-**** User Clicked ABORT ***</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>**** Process Aborted ****</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unknown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save output</source>
+        <source>Disconnected</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>InstallOptionsDlgImpl</name>
+    <name>IRCConnection</name>
     <message>
-        <source>Options</source>
+        <source>Connected, logging in ..</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Force Depends</source>
+        <source>Successfully logged in.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Force Reinstall</source>
+        <source>Socket error : </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Force Remove</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Force Overwrite</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Information Level</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Errors only</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Normal messages</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Informative messages</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Troubleshooting output</source>
+        <source>Connection closed</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>MainWindow</name>
+    <name>IRCMessageParser</name>
     <message>
-        <source>AQPkg - Package Manager</source>
+        <source>Received unhandled numeric command : </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Type the text to search for here.</source>
+        <source>Received unhandled ctcp command : </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Click here to hide the Quick Jump toolbar.</source>
+        <source>Received unhandled literal command : </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Update lists</source>
+        <source>Nonexistant channel join - desynchronized?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Click here to update package lists from servers.</source>
+        <source> joined channel </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Upgrade</source>
+        <source>Person has already joined the channel - desynchronized?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Click here to upgrade all installed packages if a newer version is available.</source>
+        <source>You already joined the channel - desynchronized?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Download</source>
+        <source>You left channel </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Click here to download the currently selected package(s).</source>
+        <source> left channel </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Apply changes</source>
+        <source>Parting person not found - desynchronized?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Click here to install, remove or upgrade currently selected package(s).</source>
+        <source>Channel for part not found - desynchronized?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Configure</source>
+        <source>Channel message with unknown sender</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Click here to configure this application.</source>
+        <source>Channel message with unknown channel </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Actions</source>
+        <source>Received PRIVMSG of unknown type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show packages not installed</source>
+        <source>You are now known as </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Click here to show packages available which have not been installed.</source>
+        <source> is now known as </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show installed packages</source>
+        <source>Nickname change of an unknown person</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Click here to show packages currently installed on this device.</source>
+        <source> has quit </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show updated packages</source>
+        <source>Unknown person quit - desynchronized?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Click here to show packages currently installed on this device which have a newer version available.</source>
+        <source> changed topic to </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Filter by category</source>
+        <source>Unknown channel topic - desynchronized?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Click here to list packages belonging to one category.</source>
+        <source>Received a CTCP PING from </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Set filter category</source>
+        <source>Received a CTCP VERSION from </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Click here to change package category to used filter.</source>
+        <source>CTCP ACTION with unknown person - Desynchronized?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Find</source>
+        <source>CTCP ACTION with unknown channel - Desynchronized?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Click here to search for text in package names.</source>
+        <source>CTCP ACTION with bad recipient</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Find next</source>
+        <source>Mode change has unknown type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Click here to find the next package name containing the text you are searching for.</source>
+        <source>Mode change with unknown person - Desynchronized?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Quick Jump keypad</source>
+        <source>Mode change with unknown flag</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Click here to display/hide keypad to allow quick movement through the package list.</source>
+        <source>Mode change with unknown kannel - Desynchronized?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View</source>
+        <source>User modes not supported yet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Click here to hide the find toolbar.</source>
+        <source>You were kicked from </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Servers:</source>
+        <source> by </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Click here to select a package feed.</source>
+        <source> was kicked from </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Packages</source>
+        <source>Unknown person kick - desynchronized?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>This is a listing of all packages for the server feed selected above.
-
-A blue dot next to the package name indicates that the package is currently installed.
-
-A blue dot with a star indicates that a newer version of the package is available from the server feed.
-
-Click inside the box at the left to select a package.</source>
+        <source>Unknown channel kick - desynchronized?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Remove</source>
+        <source>Server message with unknown channel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Click here to uninstall the currently selected package(s).</source>
+        <source>You joined channel </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Building server list:
-<byte value="x9"/>%1</source>
+        <source>Nickname is in use, please reconnect with a different nickname</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Building package list for:
-<byte value="x9"/>%1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Refreshing server package lists</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>WARNING: Upgrading while
-Opie/Qtopia is running
-is NOT recommended!
-
-Are you sure?
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Upgrading installed packages</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Are you sure you wish to delete
-%1?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Are you sure?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Download to where</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter path to download to</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Install Remote Package</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter package location</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Nothing to do</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No packages selected</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you wish to remove or reinstall
-%1?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Remove or ReInstall</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ReInstall</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>R</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you wish to remove or upgrade
-%1?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Remove or Upgrade</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>U</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Updating Launcher...</source>
+        <source>No such nickname</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>PackageWindow</name>
+    <name>IRCQueryTab</name>
     <message>
-        <source>&lt;b&gt;Description&lt;/b&gt; - </source>
+        <source>Talking to </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;p&gt;&lt;b&gt;Installed To&lt;/b&gt; - </source>
+        <source>Private discussion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;p&gt;&lt;b&gt;Size&lt;/b&gt; - </source>
+        <source>Type your text here in order to send a message to the other person</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;p&gt;&lt;b&gt;Section&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;&lt;b&gt;Filename&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;&lt;b&gt;Version Installed&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;&lt;b&gt;Version Available&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Package Information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Package information is unavailable</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Close</source>
+        <source>Disconnected</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>SettingsImpl</name>
+    <name>IRCServerEditor</name>
     <message>
-        <source>Configuration</source>
+        <source>Profile name :</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Servers</source>
+        <source>The name of this server profile in the overview</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Destinations</source>
+        <source>Hostname :</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Proxies</source>
+        <source>The server to connect to - can be any valid host name or IP address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>New</source>
+        <source>Port :</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The server port to connect to. Usually 6667</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nickname :</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your nick name on the IRC network</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Realname :</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your real name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Password :</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Password to connect to the server (if required)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Channels :</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Comma-Separated list of all channels you would like to join automatically</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit server information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Profile name required</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Host name required</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Port required</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nickname required</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Realname required</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The channel list needs to contain a
+comma separated list of channel
+ names which start with either &apos;#&apos; or &apos;+&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>IRCServerList</name>
+    <message>
+        <source>Serverlist Browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please choose a server profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a server profile from this list and then tap on OK in the upper-right corner</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -491,55 +351,159 @@ Are you sure?
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Server</source>
+        <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Name:</source>
+        <source>Add</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Address:</source>
+        <source>Delete the currently selected server profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Active Server</source>
+        <source>Edit the currently selected server profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Update</source>
+        <source>Add a new server profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>IRCServerTab</name>
+    <message>
+        <source>Connection to</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Destination</source>
+        <source>Server messages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Location:</source>
+        <source>Type commands here. A list of available commands can be found inside the OpieIRC help</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>IRCSettings</name>
+    <message>
+        <source>Lines displayed :</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Link to root</source>
+        <source>Amount of lines to be displayed in chats before old lines get deleted - this is necessary to restrain memory consumption. Set to 0 if you don&apos;t need this</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>HTTP Proxy</source>
+        <source>General</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Enabled</source>
+        <source>Background color :</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>FTP Proxy</source>
+        <source>Background color to be used in chats</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Username:</source>
+        <source>Normal text color :</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Password:</source>
+        <source>Text color to be used in chats</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error color :</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text color to be used to display errors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text written by yourself :</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text color to be used to identify text written by yourself</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text written by others :</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text color to be used to identify text written by others</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text written by the server :</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text color to be used to identify text written by the server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notifications :</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text color to be used to display notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Colors</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>IRCTab</name>
+    <message>
+        <source>Missing description</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description of the tab&apos;s content</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close this tab</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MainWindow</name>
+    <message>
+        <source>IRC Client</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Server connections, channels, queries and other things will be placed here</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>IRC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New connection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a new connection to an IRC server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure OpieIRC&apos;s behavior and appearance</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

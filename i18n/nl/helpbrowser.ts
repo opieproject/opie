@@ -31,7 +31,7 @@
     </message>
     <message>
         <source>HelpBrowser</source>
-        <translation>Helppagina's</translation>
+        <translation>Helppagina&apos;s</translation>
     </message>
 </context>
 </TS>
