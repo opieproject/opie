@@ -196,16 +196,11 @@ void FunctionKeyboard::loadDefaults() {
 
 /* FunctionKeyboardConfig {{{1 */
 
-<<<<<<< function_keyboard.cpp
-FunctionKeyboardConfig::FunctionKeyboardConfig(const QString& name, QWidget* parent) :
-    ProfileDialogKeyWidget(name, parent),
+FunctionKeyboardConfig::FunctionKeyboardConfig(const QString& name, QWidget* parent, const char* na )
+    : ProfileDialogKeyWidget(name, parent, na), 
     selectedRow(0), selectedCol(0) 
 {
-=======
-FunctionKeyboardConfig::FunctionKeyboardConfig(const QString& name, QWidget* parent, const char* na )
-    : ProfileDialogKeyWidget(name, parent, na) {
     qWarning("FunctionKeyboardConfig");
->>>>>>> 1.11
 
 
     kb = new FunctionKeyboard(this);
