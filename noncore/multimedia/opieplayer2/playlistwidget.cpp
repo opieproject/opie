@@ -185,19 +185,21 @@ void PlayListWidget::writeDefaultPlaylist() {
     QString filename=QPEApplication::documentDir() + "/default.m3u";
     QString currentString = config.readEntry( "CurrentPlaylist", filename);
     if( currentString == filename) {
-        Om3u *m3uList;
-//    qDebug("<<<<<<<<<<<<<default>>>>>>>>>>>>>>>>>>>");
+      Om3u *m3uList;
+      //    qDebug("<<<<<<<<<<<<<default>>>>>>>>>>>>>>>>>>>");
+      if( d->selectedFiles->first() ) {
         m3uList = new Om3u(filename, IO_ReadWrite | IO_Truncate);
-        d->selectedFiles->first();
         do {
-//        qDebug(d->selectedFiles->current()->file());
-            m3uList->add( d->selectedFiles->current()->file() );
+          //        qDebug(d->selectedFiles->current()->file());
+          m3uList->add( d->selectedFiles->current()->file() );
         }
         while ( d->selectedFiles->next() );
 
         m3uList->write();
         m3uList->close();
         if(m3uList) delete m3uList;
+        
+      }
     }
 }
 
@@ -853,9 +855,11 @@ void PlayListWidget::writeCurrentM3u() {
   cfg.setGroup("PlayList");
   QString currentPlaylist = cfg.readEntry("CurrentPlaylist","");
 
+  if( d->selectedFiles->first()) {
   Om3u *m3uList;
   m3uList = new Om3u( currentPlaylist, IO_ReadWrite | IO_Truncate );
-  d->selectedFiles->first();
+
+  
       qDebug( d->selectedFiles->current()->file());
   do {
       qDebug( d->selectedFiles->current()->file());
@@ -867,6 +871,7 @@ void PlayListWidget::writeCurrentM3u() {
   m3uList->close();
 
   if(m3uList) delete m3uList;
+  }
 }
 
   /*
@@ -890,40 +895,39 @@ void PlayListWidget::writem3u() {
             filename = QPEApplication::documentDir() + "/" +name+".m3u";
         }
 
+        if( d->selectedFiles->first()) {
         m3uList = new Om3u(filename, IO_ReadWrite);
- 
-        d->selectedFiles->first();
 
-        do {
+          do {
             m3uList->add( d->selectedFiles->current()->file());
-    }
-    while ( d->selectedFiles->next() );
-//    qDebug( list );
-        m3uList->write();
-        m3uList->close();
-    if(m3uList) delete m3uList;
+          }
+          while ( d->selectedFiles->next() );
+          //    qDebug( list );
+          m3uList->write();
+          m3uList->close();
+          if(m3uList) delete m3uList;
         
-    if(fileDlg) delete fileDlg;
+          if(fileDlg) delete fileDlg;
 
-    DocLnk lnk;
-    lnk.setFile( filename);
-    lnk.setIcon("opieplayer2/playlist2");
-    lnk.setName( name); //sets file name
+          DocLnk lnk;
+          lnk.setFile( filename);
+          lnk.setIcon("opieplayer2/playlist2");
+          lnk.setName( name); //sets file name
 
-// qDebug(filename);
-    Config config( "OpiePlayer" );
-    config.setGroup( "PlayList" );
+          // qDebug(filename);
+          Config config( "OpiePlayer" );
+          config.setGroup( "PlayList" );
     
-    config.writeEntry("CurrentPlaylist",filename);
-    currentPlayList=filename;
+          config.writeEntry("CurrentPlaylist",filename);
+          currentPlayList=filename;
 
-    if(!lnk.writeLink()) {
-        qDebug("Writing doclink did not work");
+          if(!lnk.writeLink()) {
+            qDebug("Writing doclink did not work");
+          }
+
+          setCaption(tr("OpiePlayer: ") + name);
+        }
     }
-
-    setCaption(tr("OpiePlayer: ") + name);
-    }
-
 }
 
 void PlayListWidget::keyReleaseEvent( QKeyEvent *e ) {

@@ -50,15 +50,9 @@
 
 Om3u::Om3u( const QString &filePath, int mode)
       : QStringList (){
-//filePath is path name to m3u
 //qDebug("<<<<<<<new m3u "+filePath);
- f.setName(filePath);
-//         if(f.exists())
-//             f.open( IO_ReadWrite);
-//         else
-//             f.open( IO_ReadWrite | IO_Truncate);
-       f.open(mode);
-        
+  f.setName(filePath);
+  f.open(mode);
 }
 
 Om3u::~Om3u(){}
@@ -131,12 +125,14 @@ void Om3u::readPls() { //it's a pls file
 }
 
 void Om3u::write() { //writes list to m3u file
-    QString list;
+  QString list;
+  if(count()>0) {
     for ( QStringList::ConstIterator it = begin(); it != end(); ++it ) {
-        qDebug(*it);
-        list += *it+"\n";
+      qDebug(*it);
+      list += *it+"\n";
     }
     f.writeBlock( list, list.length() );
+  }
 //    f.close();
 }
 
@@ -145,16 +141,17 @@ void Om3u::add(const QString &filePath) { //adds to m3u file
 }
 
 void Om3u::remove(const QString &filePath) { //removes from m3u list
-    QString list, currentFile;
+  QString list, currentFile;
+  if(count()>0) {
     for ( QStringList::ConstIterator it = begin(); it != end(); ++it ) {
-        currentFile=*it;
-//        qDebug(*it);
+      currentFile=*it;
+      //        qDebug(*it);
         
-        if( filePath != currentFile)
+      if( filePath != currentFile)
         list += currentFile+"\n";
     }
     f.writeBlock( list, list.length() );
-
+  }
 }
 
 void Om3u::deleteFile(const QString &filePath) {//deletes m3u file
