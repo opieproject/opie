@@ -48,6 +48,8 @@ using namespace Opie;
 #include <qfiledialog.h>
 #endif
 
+#include <unistd.h>
+
 WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * name, WFlags f )
            :QMainWindow( parent, name, f )
 {
@@ -134,7 +136,7 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
 
     QPopupMenu* demo = new QPopupMenu( mb );
     demo->insertItem( tr( "&Add something" ), this, SLOT( demoAddStations() ) );
-    demo->insertItem( tr( "&Read from GPSd" ), this, SLOT( demoReadFromGps() ) );
+    //demo->insertItem( tr( "&Read from GPSd" ), this, SLOT( demoReadFromGps() ) );
 
     id = mb->insertItem( tr( "&File" ), file );
     //id = mb->insertItem( tr( "&View" ), view );
@@ -219,7 +221,7 @@ void WellenreiterMainWindow::changedSniffingState()
 
 WellenreiterMainWindow::~WellenreiterMainWindow()
 {
-    qDebug( "Wellenreiter:: bye." );
+    qDebug( "Wellenreiter: bye." );
 };
 
 
@@ -239,10 +241,11 @@ void WellenreiterMainWindow::demoReadFromGps()
 {
     WellenreiterConfigWindow* configwindow = WellenreiterConfigWindow::instance();
     GPS* gps = new GPS( this );
+    qDebug( "Wellenreiter::demoReadFromGps(): url=gps://%s:%d/", (const char*) configwindow->gpsdHost->currentText(), configwindow->gpsdPort->value() );
     gps->open( configwindow->gpsdHost->currentText(), configwindow->gpsdPort->value() );
     GpsLocation loc = gps->position();
-
     QMessageBox::information( this, "Wellenreiter/Opie", tr( "GPS said:\n%1" ).arg( loc.dmsPosition() ) );
+    delete gps;
 }
 
 

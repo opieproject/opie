@@ -57,7 +57,7 @@ GpsLocation GPS::position() const
         if ( numAvail )
         {                     
             int numRead = _socket->readBlock( &buf[0], sizeof buf );
-            int numScan = sscanf( &buf[0], "GPSD,P=%lg %lg", &lat, &lon);
+            int numScan = ::sscanf( &buf[0], "GPSD,P=%lg %lg", &lat, &lon);
             
             if ( numRead < 7 || numScan != 2 )
             {

@@ -1392,7 +1392,7 @@
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
-                                    <string>gpsd -p /dev/ttyS3 -s 57600</string>
+                                    <string>gpsd -p /dev/ttyS3 -s 4800</string>
                                 </property>
                             </widget>
                             <spacer>
