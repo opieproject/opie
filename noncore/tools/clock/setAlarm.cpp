@@ -69,6 +69,7 @@ Set_Alarm::Set_Alarm( QWidget* parent,  const char* name, bool modal, WFlags fl 
 
     Minute_Slider = new QSlider( this, "Minute_Slider" );
     Minute_Slider->setMaxValue( 59);
+    Minute_Slider->setPageStep( 1);
     Minute_Slider->setOrientation( QSlider::Horizontal );
     connect(Minute_Slider, SIGNAL(  valueChanged(int)),this,SLOT(slotChangeMinute(int)));
     

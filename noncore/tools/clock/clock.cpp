@@ -159,11 +159,11 @@ Clock::Clock( QWidget * parent, const char * name, WFlags f )
     minute = tmp.toInt(&ok,10);
 
     if( config.readEntry("clockAlarmSet","FALSE") == "TRUE") {
-        alarmOffBtn->setText( tr( "Alarm On" ) );
+        alarmOffBtn->setText( tr( "Alarm Is On" ) );
         alarmBool=TRUE;
         snoozeBtn->show();
     } else {
-        alarmOffBtn->setText( tr( "Alarm Off" ) );
+        alarmOffBtn->setText( tr( "Alarm Is Off" ) );
         alarmBool=FALSE;
         snoozeBtn->hide();
     }
@@ -326,13 +326,13 @@ void Clock::slotToggleAlarm()
     config.setGroup("Time");
     if(alarmBool) {
         config.writeEntry("clockAlarmSet","FALSE");
-        alarmOffBtn->setText( tr( "Alarm Off" ) );
+        alarmOffBtn->setText( tr( "Alarm Is Off" ) );
         snoozeBtn->hide();
         alarmBool=FALSE;
         alarmOff();
     } else {
         config.writeEntry("clockAlarmSet","TRUE");
-        alarmOffBtn->setText( tr( "Alarm On" ) );
+        alarmOffBtn->setText( tr( "Alarm Is On" ) );
         snoozeBtn->show();
         alarmBool=TRUE;
         alarmOn();
