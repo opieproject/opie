@@ -296,7 +296,7 @@ void Today::draw() {
     for ( uint i = 0; i < pluginList.count(); i++ ) {
 	plugin = pluginList[i];
 
-    	if ( plugin.active ) {
+        if ( plugin.active ) {
             //   qDebug( plugin.name + " is ACTIVE " );
             plugin.guiBox->show();
         } else {
