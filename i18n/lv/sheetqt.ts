@@ -321,83 +321,83 @@
     </message>
     <message>
         <source>&amp;Adjust</source>
-        <translation type="unfinished">&amp;Regulēt</translation>
+        <translation>&amp;Regulēt</translation>
     </message>
     <message>
         <source>Show Row</source>
-        <translation type="unfinished"></translation>
+        <translation>Rādīt Rindu</translation>
     </message>
     <message>
         <source>&amp;Show</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Rādīt</translation>
     </message>
     <message>
         <source>Hide Row</source>
-        <translation type="unfinished"></translation>
+        <translation>Slēpt Rindu</translation>
     </message>
     <message>
         <source>&amp;Hide</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Slēpt</translation>
     </message>
     <message>
         <source>Column Width</source>
-        <translation type="unfinished"></translation>
+        <translation>Kolonas Platums</translation>
     </message>
     <message>
         <source>&amp;Width</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Platums</translation>
     </message>
     <message>
         <source>Adjust Column</source>
-        <translation type="unfinished"></translation>
+        <translation>Regulēt Kolonu</translation>
     </message>
     <message>
         <source>Show Column</source>
-        <translation type="unfinished"></translation>
+        <translation>Rādīt Kolonu</translation>
     </message>
     <message>
         <source>Hide Column</source>
-        <translation type="unfinished"></translation>
+        <translation>Slēpt Kolonu</translation>
     </message>
     <message>
         <source>Rename Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Pārsaukt Tabulu</translation>
     </message>
     <message>
         <source>&amp;Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Pārsaukt</translation>
     </message>
     <message>
         <source>Remove Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Izņemt Tabulu</translation>
     </message>
     <message>
         <source>R&amp;emove</source>
-        <translation type="unfinished"></translation>
+        <translation>I&amp;zņemt</translation>
     </message>
     <message>
         <source>Sort Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Šķirot Datus</translation>
     </message>
     <message>
         <source>&amp;Sort</source>
-        <translation type="unfinished"></translation>
+        <translation>Šķ&amp;irot</translation>
     </message>
     <message>
         <source>Find &amp;&amp; Replace</source>
-        <translation type="unfinished"></translation>
+        <translation>Meklēt un Aizvietot</translation>
     </message>
     <message>
         <source>&amp;Find &amp;&amp; Replace</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Meklēt un Aizvietot</translation>
     </message>
     <message>
         <source>Equal To</source>
-        <translation type="unfinished"></translation>
+        <translation>Vienāds Ar</translation>
     </message>
     <message>
         <source>&amp;Equal To</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vienāds Ar</translation>
     </message>
     <message>
         <source>Addition</source>
