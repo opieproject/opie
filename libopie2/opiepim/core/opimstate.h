@@ -34,8 +34,10 @@ public:
 private:
     void deref();
     inline void copyInternally();
+
     struct Data;
     Data* data;
+
     class Private;
     Private *d;
 };
