@@ -1523,7 +1523,7 @@ bool Zaurus::isZaurus()
 		     || model == "SHARP Corgi"
 		     || model == "SHARP Shepherd" 
 		     || model == "SHARP Poodle" 
-                     || model == "SHARP Husky" )
+                     || model == "SHARP Husky"
 		   )
 			is_zaurus = true;
 
