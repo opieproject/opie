@@ -24,8 +24,10 @@ AdressSearch::AdressSearch(QListView* parent, QString name):
 	SearchGroup(parent, name)
 {
 	_contacts = 0;
-	QIconSet is = Resource::loadIconSet( "addressbook/AddressBook" );
-	setPixmap( 0, is.pixmap( QIconSet::Small, true ) );
+	QIconSet is = Resource::loadIconSet( "addressbook/AddressBookSmall" );	
+	setPixmap( 0, is.pixmap( QIconSet::Large, true ) );
+	
+	
 //	QWhatsThis::add( this, QObject::tr("Search the addressbook") );
 /*	QPixmap pix = Resource::loadPixmap( "addressbook/AddressBook" );
 	QImage img = pix.convertToImage();

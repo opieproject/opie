@@ -28,8 +28,8 @@
 DocLnkSearch::DocLnkSearch(QListView* parent, QString name)
 : AppLnkSearch(parent, name), _popupMenu(0)
 {
-	QIconSet is = Resource::loadIconSet( "osearch/documents" );
-	setPixmap( 0, is.pixmap( QIconSet::Small, true ) );
+	QIconSet is = Resource::loadIconSet( "osearch/documentsSmall" );
+	setPixmap( 0, is.pixmap( QIconSet::Automatic, true ) );
 
 	actionSearchInFiles = new QAction( QObject::tr("search content"),QString::null,  0, 0, 0, true );
 	Config cfg( "osearch", Config::User );

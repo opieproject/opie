@@ -48,6 +48,27 @@
 #include "doclnksearch.h"
 #include "mainwindow.h"
 
+static const char* const image1_data[] = { 
+"14 14 3 1",
+". c None",
+"# c #000000",
+"a c #ff0000",
+"..............",
+"..##.......###",
+".#aa#....##aa#",
+"#aaaa#.##aaaa#",
+".##aaa#aaaaa##",
+"...#aaaaaaa#..",
+"....#aaaaa#...",
+"...#aaaaa#....",
+"..#aaaaaaa#...",
+".#aaaaaaaaa#..",
+"#aaaa###aaaa#.",
+"#aaa#..##aaa#.",
+"#aaa#...#aa#..",
+".###.....##..."};
+
+
 MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
   QMainWindow( parent, name, f ), _currentItem(0)
 {
@@ -60,7 +81,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
 
   mainLayout = new QVBoxLayout( mainFrame );
   mainLayout->setSpacing( 0 );
-  mainLayout->setMargin( 0 );
+  mainLayout->setMargin( 3 );
 
   resultsList = new OListView( mainFrame );
   resultsList->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
@@ -154,15 +175,30 @@ void MainWindow::makeMenu()
   actionWildcards->addTo( searchOptions );
 
   //SEARCH BAR
+  LabelEnterText = new QLabel( searchBar, "Label" );
+  LabelEnterText->setAutoMask( FALSE );
+  LabelEnterText->setText( tr( "Search for: " ) );
+  
   addToolBar( searchBar, "Search", QMainWindow::Top, TRUE );
   QLineEdit *searchEdit = new QLineEdit( searchBar, "seachEdit" );
   QWhatsThis::add( searchEdit, tr("Enter your search terms here") );
   searchEdit->setFocus();
   searchBar->setHorizontalStretchable( TRUE );
   searchBar->setStretchableWidget( searchEdit );
+  
+  //Search button
   SearchAllAction->addTo( searchBar );
-  connect( searchEdit, SIGNAL( textChanged( const QString & ) ),
-       this, SLOT( setSearch( const QString & ) ) );
+  
+  //image ripped of off opie-login/loginwindow.cpp
+  QPixmap image1( ( const char** ) image1_data );
+  
+  //Clear text
+  ClearSearchText = new QToolButton( searchBar, "ClearSearchText");
+  ClearSearchText->setText( tr( "" ) );
+  ClearSearchText->setPixmap( image1 );
+  
+  connect( searchEdit, SIGNAL( textChanged( const QString & ) ),this, SLOT( setSearch( const QString & ) ) );
+  connect( ClearSearchText, SIGNAL( clicked() ), searchEdit, SLOT( clear() ) );
 
 }
 

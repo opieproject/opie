@@ -19,12 +19,13 @@
 
 #include "applnkitem.h"
 
+
 AppLnkSearch::AppLnkSearch(QListView* parent, QString name): SearchGroup(parent, name)
 {
 	_apps = 0;
-	QIconSet is = Resource::loadIconSet( "osearch/applications" );
+	QIconSet is = Resource::loadIconSet( "osearch/applicationsSmall" );
 	//QIconSet is = Resource::loadIconSet( "AppsIcon" );
-	setPixmap( 0, is.pixmap( QIconSet::Small, true ) );
+	setPixmap( 0, is.pixmap( QIconSet::Large, true ) );
 }
 
 
@@ -42,15 +43,16 @@ void AppLnkSearch::load()
 int AppLnkSearch::search()
 {
 	QList<AppLnk> appList = _apps->children();
+	
 	for ( AppLnk *app = appList.first(); app != 0; app = appList.next() ){
 		if ( (_search.match( app->name() ) != -1)
 		    || (_search.match(app->comment()) != -1)
-		    || (_search.match(app->exec()) != -1) ) {
+		    || (_search.match(app->exec()) != -1) ) {	    
 			insertItem( app );
 		}else
 		if (searchFile( app ))
-			insertItem( app );
-		qApp->processEvents( 100 );
+			insertItem( app );		
+		qApp->processEvents( 100 );		
 	}
 	return _resultCount;
 }

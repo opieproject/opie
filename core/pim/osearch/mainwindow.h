@@ -32,6 +32,7 @@ class OListViewItem;
 class QListViewItem;
 class QPopupMenu;
 class QTimer;
+class QLabel;
 
 class QSignalMapper;
 class QButton;
@@ -71,6 +72,8 @@ private:
   QFrame *detailsFrame;
   QTimer *popupTimer;
   QTimer *searchTimer;
+  QToolButton* ClearSearchText;
+  QLabel* LabelEnterText;
 
   QString _searchString;
   QList<SearchGroup> searches;
