@@ -41,11 +41,11 @@ public:
   QString getLeaseObtained() const { return leaseObtained; };
   QString getLeaseExpires() const { return leaseExpires; };
 
-public slots:
-  bool refresh();
-  void start();
-  void stop();
-  void restart();
+ public slots:
+  virtual bool refresh();
+  virtual void start();
+  virtual void stop();
+  virtual void restart();
 
 private:
   // Interface information
