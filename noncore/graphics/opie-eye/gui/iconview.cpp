@@ -42,6 +42,7 @@ namespace {
     static QPixmap* _dirPix = 0;
     static QPixmap* _unkPix = 0;
     static QPixmap* _picPix = 0;
+    static QPixmap* _emptyPix = 0;
     class IconViewItem : public QIconViewItem {
     public:
         IconViewItem( QIconView*, const QString& path, const QString& name, bool isDir = false);
@@ -49,6 +50,10 @@ namespace {
         QString path()const { return m_path; }
         bool isDir()const { return m_isDir; }
         void setText( const QString& );
+        bool textOnly()const{return m_textOnly;}
+        void setTextOnly(bool how){m_textOnly=how;}
+        virtual void setPixmap( const QPixmap & icon, bool recalc, bool redraw = TRUE );
+        virtual void setPixmap( const QPixmap & icon);
 
     protected:
         mutable QPixmap* m_pix;
@@ -57,6 +62,9 @@ namespace {
         QString m_path;
         bool m_isDir : 1;
         bool m_noInfo :1;
+        bool m_textOnly:1;
+        bool m_NameOnly:1;
+        bool m_Pixset:1;
     };
     class TextViewItem : public IconViewItem {
         TextViewItem( QIconView*, const QString& path, const QString& name, bool isDir = false );
@@ -80,18 +88,34 @@ namespace {
     IconViewItem::IconViewItem( QIconView* view,const QString& path,
                                 const QString& name, bool isDir )
         : QIconViewItem( view, name ), m_path( path ), m_isDir( isDir ),
-          m_noInfo( false )
+          m_noInfo( false ),m_textOnly(false),m_Pixset(false)
     {
         if ( isDir && !_dirPix )
             _dirPix = new QPixmap( Resource::loadPixmap("advancedfm/FileBrowser"));
         else if ( !isDir && !_unkPix )
             _unkPix = new QPixmap( Resource::loadPixmap( "UnknownDocument" ) );
     }
+
+    inline void IconViewItem::setPixmap( const QPixmap & icon, bool recalc, bool redraw)
+    {
+        m_Pixset = true;
+        QIconViewItem::setPixmap(icon,recalc,redraw);
+    }
+    inline void IconViewItem::setPixmap( const QPixmap & icon)
+    {
+        m_Pixset = true;
+        QIconViewItem::setPixmap(icon);
+    }
+
     inline QPixmap* IconViewItem::pixmap()const {
 //      qWarning(  "Name is " + m_path.right( 15 ) + " rect is %d %d %d %d | %d %d",
 //                 rect().x(),rect().y(),rect().width(),rect().height(),
 //                 iconView()->contentsX(), iconView()->contentsY());
 
+        if (textOnly()&&!m_isDir) {
+            if (!_emptyPix) _emptyPix = new QPixmap(0,0,1);
+            return _emptyPix;
+        }
         if ( m_isDir )
             return _dirPix;
         else{
@@ -101,9 +125,12 @@ namespace {
             }
 
             m_pix = PPixmapCache::self()->cachedImage( m_path, 64, 64 );
-            if ( !m_pix && !g_stringPix.contains( m_path )) {
+            if (!m_pix && !g_stringPix.contains( m_path )&&!m_Pixset) {
                 currentView()->dirLister()->thumbNail( m_path, 64, 64 );
                 g_stringPix.insert( m_path, const_cast<IconViewItem*>(this));
+            }
+            if (m_Pixset) {
+                return QIconViewItem::pixmap();
             }
             return m_pix ? m_pix : _unkPix;
         }
@@ -367,17 +394,24 @@ void PIconView::slotReloadDir() {
  */
 void PIconView::addFolders(  const QStringList& lst) {
     QStringList::ConstIterator it;
+    IconViewItem * _iv;
 
-    for(it=lst.begin(); it != lst.end(); ++it )
-        (void)new IconViewItem( m_view, m_path+"/"+(*it), (*it), true );
-
-
+    for(it=lst.begin(); it != lst.end(); ++it ) {
+        _iv = new IconViewItem( m_view, m_path+"/"+(*it), (*it), true );
+        if (m_mode==3) _iv->setTextOnly(true);
+    }
 }
 
 void PIconView::addFiles(  const QStringList& lst) {
     QStringList::ConstIterator it;
-    for (it=lst.begin(); it!= lst.end(); ++it )
-        (void)new IconViewItem( m_view, m_path+"/"+(*it), (*it) );
+    IconViewItem * _iv;
+    QPixmap*m_pix = 0;
+    for (it=lst.begin(); it!= lst.end(); ++it ) {
+         m_pix = PPixmapCache::self()->cachedImage( m_path+"/"+(*it), 64, 64 );
+        _iv = new IconViewItem( m_view, m_path+"/"+(*it), (*it) );
+        if (m_mode==3) _iv->setTextOnly(true);
+        if (m_pix) _iv->setPixmap(*m_pix);
+    }
 
 }
 
@@ -404,6 +438,9 @@ void PIconView::slotThumbInfo( const QString& _path, const QString& str ) {
     if (!item )
         return;
 
+    if (m_mode == 2) {
+        return;
+    }
     if ( item->intersects(QRect( m_view->contentsX(),m_view->contentsY(),
                                  m_view->contentsWidth(), m_view->contentsHeight() ) ) )
         m_updatet = true;
@@ -424,10 +461,12 @@ void PIconView::slotThumbNail(const QString& _path, const QPixmap &pix) {
                                  m_view->contentsWidth(), m_view->contentsHeight() ) ) )
         m_updatet = true;
 
-    if (pix.width()>0)
+    if (pix.width()>0) {
         PPixmapCache::self()->insertImage( _path, pix, 64, 64 );
-
-
+        item->setPixmap(pix,true);
+    } else {
+        PPixmapCache::self()->insertImage( _path, Resource::loadPixmap( "UnknownDocument" ), 64, 64 );
+    }
     g_stringPix.remove( _path );
 }
 
@@ -548,5 +587,22 @@ void PIconView::resizeEvent( QResizeEvent* re ) {
 
 
 void PIconView::calculateGrid() {
+    odebug << "Calc grid: x=" << m_view->gridX() << " y=" << m_view->gridY() << oendl;
+    odebug << "Size of view: " << m_view->size() << oendl;
 
+    switch (m_mode) {
+        case 2:
+            m_view->setGridX(80);
+            m_view->setGridY(80);
+            break;
+        case 3:
+            m_view->setGridX(m_view->width());
+            m_view->setGridY(8);
+            break;
+        case 1:
+        default:
+            m_view->setGridX(m_view->width());
+            m_view->setGridY(80);
+            break;
+    }
 }

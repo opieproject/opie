@@ -105,21 +105,20 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
     prevButton = new QToolButton(bar);
     prevButton->setIconSet( Resource::loadIconSet( "back" ) );
     connect(prevButton,SIGNAL(clicked()),m_view,SLOT(slotShowPrev()));
-    prevButton->hide();
 
     nextButton = new QToolButton(bar);
     nextButton->setIconSet( Resource::loadIconSet( "forward" ) );
     connect(nextButton,SIGNAL(clicked()),m_view,SLOT(slotShowNext()));
-    nextButton->hide();
 
     rotateButton = new QToolButton(bar);
     rotateButton->setIconSet( Resource::loadIconSet( "rotate" ) );
     rotateButton->setToggleButton(true);
 
-    odebug << "Mode = " << m_stack->mode() << oendl;
     if (m_stack->mode() == Opie::Ui::OWidgetStack::SmallScreen) {
         rotateButton->setOn(true);
         autoRotate = true;
+        prevButton->hide();
+        nextButton->hide();
     } else {
         rotateButton->setOn(false);
         autoRotate = false;
@@ -299,11 +298,13 @@ void PMainWindow::slotShowInfo( const QString& inf ) {
         initInfo();
     }
     m_info->setPath( inf );
-    prevButton->hide();
-    nextButton->hide();
-    upButton->hide();
-    fsButton->hide();
-    viewModeButton->hide();
+    if (m_stack->mode() == Opie::Ui::OWidgetStack::SmallScreen) {
+        prevButton->hide();
+        nextButton->hide();
+        upButton->hide();
+        fsButton->hide();
+        viewModeButton->hide();
+    }
     m_stack->raiseWidget( ImageInfo );
 }
 
@@ -312,11 +313,13 @@ void PMainWindow::slotDisplay( const QString& inf ) {
         initDisp();
     }
     m_disp->setImage( inf );
-    prevButton->show();
-    nextButton->show();
-    upButton->hide();
-    fsButton->hide();
-    viewModeButton->hide();
+    if (m_stack->mode() == Opie::Ui::OWidgetStack::SmallScreen) {
+        prevButton->show();
+        nextButton->show();
+        upButton->hide();
+        fsButton->hide();
+        viewModeButton->hide();
+    }
     m_stack->raiseWidget( ImageDisplay );
 }
 
@@ -341,11 +344,13 @@ void PMainWindow::closeEvent( QCloseEvent* ev ) {
 }
 
 void PMainWindow::raiseIconView() {
-    prevButton->hide();
-    nextButton->hide();
-    upButton->show();
-    fsButton->show();
-    viewModeButton->show();
+    if (m_stack->mode() == Opie::Ui::OWidgetStack::SmallScreen) {
+        prevButton->hide();
+        nextButton->hide();
+        upButton->show();
+        fsButton->show();
+        viewModeButton->show();
+    }
     m_stack->raiseWidget( IconView );
 }
 
