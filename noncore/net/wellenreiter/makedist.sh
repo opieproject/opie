@@ -1,4 +1,4 @@
-VERSION=2-beta
+VERSION=2-1.0rc2
 
 TGZDIR=$PWD
 
