@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/applets
 Maintainer: Rajko Albrecht <alwin@handhelds.org>, Juergen Graf <jgf@handhelds.org>, Maximilian Reiﬂ <harlekin@handhelds.org>
 Architecture: arm
-Version: 0.3-$SUB_VERSION
+Version: 0.4-$SUB_VERSION
 Depends: task-opie-minimal, libopie1, opie-mail
 Description: A Biff-Like mailchecker
 License: LGPL
