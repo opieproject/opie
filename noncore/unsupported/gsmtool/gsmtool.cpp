@@ -287,13 +287,9 @@ void GSMTool::doNewSMSSendButton()
 
         SMSSubmitMessage m(msgtext, dest);
 	try {
-		Ref<SMSMessage> ackPDU;
 		m.setAt(new GsmAt(*me));
-		m.send(ackPDU);
+		m.send();
 		
-		// print acknowledgement if available
-		if (! ackPDU.isnull())
-			cout << ackPDU->toString();
 		NewSMSStatusLabel->setText("Message sent.");
 	} catch (GsmException &ge) {
 		NewSMSStatusLabel->setText("Failed.");
