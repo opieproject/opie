@@ -85,4 +85,7 @@ ifeq ($(STRIP),)
     ifneq ($(CONFIG_TARGET_RAMSES),)
         STRIP=arm-linux-strip
     endif
+    ifneq ($(CONFIG_TARGET_SIMPAD),)
+        STRIP=arm-linux-strip
+    endif
 endif
