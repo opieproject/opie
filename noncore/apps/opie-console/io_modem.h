@@ -45,15 +45,12 @@ public:
 
     virtual QString identifier() const;
     virtual QString name() const;
-    virtual QBitArray supports() const;
-    virtual bool isConnected();
 
 signals:
     void received(const QByteArray &);
     void error(int, const QString &);
 
 public slots:
-    virtual void send( const QByteArray& );
     virtual bool open();
     virtual void close();
     virtual void reload(const Profile &);
@@ -65,10 +62,6 @@ private:
     int  m_dialTime, m_delayRedial, m_numberTries, m_dtrDropTime,
         m_bpsDetect, m_dcdLines, m_multiLineUntag;
     Profile m_profile;
-
-private slots:
-    void slotExited(Opie::Core::OProcess* proc);
-
 };
 
 #endif

@@ -2,10 +2,6 @@
 #include "io_modem.h"
 #include "dialer.h"
 
-/* OPIE */
-#include <opie2/odebug.h>
-using namespace Opie::Core;
-
 IOModem::IOModem( const Profile &profile )
 	: IOSerial( profile ) {
 	m_profile = profile;
@@ -87,22 +83,4 @@ QString IOModem::identifier() const {
 
 QString IOModem::name() const {
     return "Modem IO Layer";
-}
-
-void IOModem::slotExited(OProcess* proc ){
-    close();
-    /* delete it afterwards */
-    delete proc;
-}
-
-QBitArray IOModem::supports()const {
-    return QBitArray( 3 );
-}
-
-bool IOModem::isConnected() {
-    return false;
-}
-
-void IOModem::send(const QByteArray &data) {
-    odebug << "Please overload me..." << oendl; 
 }

@@ -28,7 +28,8 @@ HEADERS      = io_layer.h io_serial.h io_irda.h io_bt.h io_modem.h \
            emulation_handler.h TECommon.h \
            TEHistory.h TEScreen.h TEWidget.h \
            TEmuVt102.h TEmulation.h MyPty.h \
-           consoleconfigwidget.h fixit.h
+           consoleconfigwidget.h fixit.h \
+	   comboboxhelper.h
 
 SOURCES      = io_layer.cpp io_serial.cpp io_irda.cpp io_bt.cpp io_modem.cpp \
            file_layer.cpp filetransfer.cpp \
@@ -58,7 +59,8 @@ SOURCES      = io_layer.cpp io_serial.cpp io_irda.cpp io_bt.cpp io_modem.cpp \
         emulation_handler.cpp TEHistory.cpp \
         TEScreen.cpp TEWidget.cpp \
         TEmuVt102.cpp TEmulation.cpp MyPty.cpp \
-        consoleconfigwidget.cpp fixit.cpp
+        consoleconfigwidget.cpp fixit.cpp \
+	comboboxhelper.cpp
 
 
 DESTDIR      = $(OPIEDIR)/bin/
@@ -69,6 +71,6 @@ LIBS        += -lqpe -lopiecore2 -lopieui2 -lutil
 TARGET       = opie-console
 
 DEFINES += HAVE_OPENPTY
-#DEFINES += EAST FSCKED_DISTRI 
+DEFINES += EAST FSCKED_DISTRI 
 
 include ( $(OPIEDIR)/include.pro )

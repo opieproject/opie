@@ -12,10 +12,8 @@
 #include "fixit.h"
 
 /* OPIE */
-#include <opie2/odebug.h>
 #include <opie2/ofiledialog.h>
 #include <qpe/filemanager.h>
-using namespace Opie::Core;
 using namespace Opie::Ui;
 
 /* QT */
@@ -481,13 +479,11 @@ void MainWindow::slotClose() {
         return;
 
     Session* ses = currentSession();
-    owarn << "removing! currentSession " << currentSession()->name().latin1() << "" << oendl;
     /* set to NULL to be safe, if its needed slotSessionChanged resets it automatically */
     m_curSession = NULL;
     tabWidget()->remove( /*currentSession()*/ses );
     /*it's autodelete */
     m_sessions.remove( ses );
-    owarn << "after remove!!" << oendl;
 
     if (!currentSession() ) {
         m_connect->setEnabled( false );
@@ -604,8 +600,6 @@ void MainWindow::slotOpenButtons( bool state ) {
 
 
 void MainWindow::slotSessionChanged( Session* ses ) {
-    owarn << "changed!" << oendl;
-
     if(m_curSession)
         if(m_curSession->transferDialog()) m_curSession->transferDialog()->hide();
     if(ses)
@@ -613,7 +607,6 @@ void MainWindow::slotSessionChanged( Session* ses ) {
 
     if ( ses ) {
         m_curSession = ses;
-        odebug << QString("is connected : %1").arg(  m_curSession->layer()->isConnected() ) << oendl;
         if ( m_curSession->layer()->isConnected() ) {
             m_connect->setEnabled( false );
             m_disconnect->setEnabled( true );

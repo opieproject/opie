@@ -1,9 +1,5 @@
 #include "function_keyboard.h"
 
-/* OPIE */
-#include <opie2/odebug.h>
-using namespace Opie::Core;
-
 /* QT */
 #include <qlayout.h>
 #include <qlistbox.h>
@@ -42,7 +38,6 @@ FunctionKeyboard::FunctionKeyboard(QWidget *parent) :
                  FKey (value_list[0], value_list[1], value_list[2].toUShort(), value_list[3].toUShort())
             );
         }
-    //owarn << "loaded " << keys.count() << " keys" << oendl; 
     */
     if (keys.isEmpty()) loadDefaults();
 
@@ -261,23 +256,20 @@ FunctionKeyboardConfig::FunctionKeyboardConfig(const QString& name, QWidget* par
     : ProfileDialogKeyWidget(name, parent, na),
       selectedRow(0), selectedCol(0)
 {
-    owarn << "FunctionKeyboardConfig" << oendl; 
-
-
     kb = new FunctionKeyboard(this);
     connect (kb, SIGNAL(keyPressed(FKey,ushort,ushort,bool)),
              this, SLOT(slotKeyPressed(FKey,ushort,ushort,bool)));
 
     QGroupBox *dimentions = new QGroupBox(2, Qt::Horizontal, tr("Dimensions"), this);
-    QLabel *l = new QLabel("Rows", dimentions);
+    QLabel *l = new QLabel(tr("Rows"), dimentions);
     m_rowBox = new QSpinBox(1, 15, 1, dimentions);
     connect (m_rowBox, SIGNAL(valueChanged(int)), this, SLOT(slotChangeRows(int)));
-    l = new QLabel("Columns", dimentions);
+    l = new QLabel(tr("Columns"), dimentions);
     m_colBox = new QSpinBox(1, 15, 1, dimentions);
     connect (m_colBox, SIGNAL(valueChanged(int)), this, SLOT(slotChangeCols(int)));
 
     QGroupBox *editKey = new QGroupBox(2, Qt::Horizontal, tr("Edit Key"), this);
-    l = new QLabel("Label", editKey);
+    l = new QLabel(tr("Label"), editKey);
     m_labels = new QComboBox(true, editKey);
     m_labels->setInsertionPolicy(QComboBox::AtCurrent);
     m_labels->insertItem("");
@@ -291,14 +283,14 @@ FunctionKeyboardConfig::FunctionKeyboardConfig(const QString& name, QWidget* par
     connect (m_labels, SIGNAL(activated(int)), this, SLOT(slotChangeIcon(int)));
     connect (m_labels, SIGNAL(textChanged(const QString&)), this, SLOT(slotChangeLabelText(const QString&)));
 
-    l = new QLabel("Q Keycode", editKey);
+    l = new QLabel(tr("Q Keycode", "Qt Key Code for the OnScreen Keyboard"), editKey);
     m_qvalues = new QComboBox(true, editKey);
     m_qvalues->setInsertionPolicy(QComboBox::AtTop);
     m_qvalues->setDuplicatesEnabled(false);
     m_qvalues->insertItem("");
     connect (m_qvalues, SIGNAL(textChanged(const QString&)), this, SLOT(slotChangeQCode(const QString&)));
 
-    l = new QLabel("Unicode Value", editKey);
+    l = new QLabel(tr("Unicode Value", "The Unicode value of the key"), editKey);
     m_uniValues = new QComboBox(true, editKey);
     m_uniValues->setInsertionPolicy(QComboBox::AtTop);
     m_uniValues->setDuplicatesEnabled(false);

@@ -1,3 +1,7 @@
+#include "btconfigwidget.h"
+#include "iolayerbase.h"
+#include "comboboxhelper.h"
+
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qlineedit.h>
@@ -5,22 +9,8 @@
 #include <qhbox.h>
 #include <qradiobutton.h>
 
-#include "iolayerbase.h"
-#include "btconfigwidget.h"
 
-namespace {
-    void setCurrent( const QString& str, QComboBox* bo ) {
-        uint b = bo->count();
-        for (int i = 0; i < bo->count(); i++ ) {
-            if ( bo->text(i) == str ) {
-                bo->setCurrentItem( i );
-                return;
-            }
-        }
-        bo->insertItem( str );
-        bo->setCurrentItem( b );
-    }
-}
+
 
 BTConfigWidget::BTConfigWidget( const QString& name,
                                 QWidget* parent,
@@ -115,7 +105,7 @@ void BTConfigWidget::load( const Profile& prof ) {
     }
 
     if ( prof.readEntry("Device").isEmpty() ) return;
-    setCurrent( prof.readEntry("Device"), m_deviceCmb );
+    ComboboxHelper::setCurrent( prof.readEntry("Device"), m_deviceCmb );
 
 }
 /*

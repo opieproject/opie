@@ -1,10 +1,9 @@
 #include "modemconfigwidget.h"
 #include "dialdialog.h"
+#include "comboboxhelper.h"
 
 /* OPIE */
-#include <opie2/odebug.h>
 #include <qpe/qpeapplication.h>
-using namespace Opie::Core;
 
 /* QT */
 #include <qlabel.h>
@@ -13,19 +12,6 @@ using namespace Opie::Core;
 #include <qpushbutton.h>
 #include <qhbox.h>
 
-namespace {
-    void setCurrent( const QString& str, QComboBox* bo ) {
-        uint b = bo->count();
-        for (int i = 0; i < bo->count(); i++ ) {
-            if ( bo->text(i) == str ) {
-                bo->setCurrentItem( i );
-                return;
-            }
-        }
-        bo->insertItem( str );
-        bo->setCurrentItem( b );
-    }
-}
 
 ModemConfigWidget::ModemConfigWidget( const QString& name, QWidget* parent,
                                 const char* na )
@@ -146,10 +132,9 @@ void ModemConfigWidget::load( const Profile& prof ) {
 
     atConf->readConfig( prof );
     if ( prof.readEntry( "Device" ).isEmpty() ) {
-        owarn << "device empty!" << oendl;
         return;
     }
-    setCurrent( prof.readEntry( "Device" ), m_deviceCmb );
+    ComboboxHelper::setCurrent( prof.readEntry( "Device" ), m_deviceCmb );
 
 
 }

@@ -1,3 +1,8 @@
+#include "profileeditordialog.h"
+#include "metafactory.h"
+#include "comboboxhelper.h"
+
+
 #include <qlayout.h>
 #include <qlineedit.h>
 #include <qlabel.h>
@@ -6,19 +11,10 @@
 #include <qcheckbox.h>
 #include <qscrollview.h>
 
-#include "metafactory.h"
-#include "profileeditordialog.h"
+
 
 using namespace Opie::Ui;
-namespace {
-    void setCurrent( const QString& str, QComboBox* bo ) {
-        for (int i = 0; i < bo->count(); i++ ) {
-            if ( bo->text(i) == str ) {
-                bo->setCurrentItem( i );
-            }
-        }
-    };
-}
+
 
 ProfileEditorDialog::ProfileEditorDialog( MetaFactory* fact,
                                           const Profile& prof )
@@ -124,8 +120,8 @@ void ProfileEditorDialog::initUI()
     // load profile values
     m_name->setText(m_prof.name());
     slotKeyActivated( "Default Keyboard" );
-    setCurrent( m_fact->external(m_prof.ioLayerName() ), m_conCmb );
-    setCurrent( m_fact->external(m_prof.terminalName() ), m_termCmb );
+    ComboboxHelper::setCurrent( m_fact->external(m_prof.ioLayerName() ), m_conCmb );
+    ComboboxHelper::setCurrent( m_fact->external(m_prof.terminalName() ), m_termCmb );
     slotConActivated(  m_fact->external(m_prof.ioLayerName()  ) );
     slotTermActivated( m_fact->external(m_prof.terminalName() ) );
     m_autoConnect->setChecked(m_prof.autoConnect());

@@ -1,10 +1,6 @@
 #include "dialer.h"
 #include "io_modem.h"
 
-/* OPIE */
-#include <opie2/odebug.h>
-using namespace Opie::Core;
-
 /* QT */
 #include <qlayout.h>
 #include <qprogressbar.h>
@@ -109,7 +105,6 @@ void Dialer::slotCancel()
 
 void Dialer::reset()
 {
-    owarn << "reset" << oendl; 
 	switchState(state_cancel);
 }
 
@@ -141,18 +136,15 @@ void Dialer::dial(const QString& number)
 
 void Dialer::trydial(const QString& number)
 {
-    owarn << "TryDial:" << number.latin1() << "" << oendl; 
 	if(state != state_cancel) switchState(state_preinit);
 	if(cleanshutdown)
 	{
-            owarn << "HangupString " << m_profile.readEntry("HangupString") << oendl; 
             send(m_profile.readEntry("HangupString", MODEM_DEFAULT_HANGUP_STRING ) + "\r");
 	}
 
 	if(state != state_cancel)
 	{
 		switchState(state_init);
-//                owarn << "Init String " + m_profile.readEntry("InitString") << oendl; 
 		send(m_profile.readEntry("InitString",MODEM_DEFAULT_INIT_STRING ) + "\r");
 		QString response2 = receive();
 		if(!response2.contains("\nOK\r"))
@@ -183,7 +175,6 @@ void Dialer::trydial(const QString& number)
 
 	if(state != state_cancel)
 	{
-            owarn << "progress" << oendl; 
 		switchState(state_dialing);
 
 //		send(QString("ATDT %1\r").arg(number));
@@ -199,7 +190,7 @@ void Dialer::trydial(const QString& number)
 			{
 				QMessageBox::warning(this,
 					QObject::tr("Failure"),
-					QObject::tr("Dialing the number failed."));
+					QObject::tr("<qt>Dialing the number failed.</qt>"));
 				slotCancel();
 			}
 		}
@@ -219,7 +210,6 @@ void Dialer::send(const QString& msg)
 	int bytes;
 	QString termination;
 
-	owarn << "Sending: " << m.latin1() << "" << oendl; 
 
 /*	termination = "\r";
 	//termination = m_profile.readEntry("Termination");
@@ -252,11 +242,9 @@ QString Dialer::receive()
 			for(int i = 0; i < ret; i++)
 				buffer[i] = buffer[i] & 0x7F;
 			buffer[ret] = 0;
-			owarn << "Got: " << buffer << "" << oendl; 
 			buf.append(QString(buffer));
 			if(buf.contains("OK") || buf.contains("ERROR") || buf.contains("CONNECT") || (buf.contains("BUSY")))
 			{
-				//owarn << "Receiving: '" << buf.latin1() << "'" << oendl; 
 				cleanshutdown = 1;
 				return buf;
 			}else if (buf.contains("NO CARRIER") || buf.contains("NO DIALTONE")  ) {

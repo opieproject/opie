@@ -1,9 +1,5 @@
 #include "io_irda.h"
 
-/* OPIE */
-#include <opie2/odebug.h>
-using namespace Opie::Core;
-
 IOIrda::IOIrda( const Profile &config ) : IOSerial( config ) {
     m_attach = 0;
 }
@@ -27,7 +23,7 @@ bool IOIrda::open() {
     bool ret;
 
     // irdaattach here
-    m_attach = new OProcess();
+    m_attach = new Opie::Core::OProcess();
     *m_attach << "irattach /dev/ttyS2 -s";
 
     connect( m_attach, SIGNAL( processExited(Opie::Core::OProcess*) ),
@@ -37,7 +33,6 @@ bool IOIrda::open() {
         ret= IOSerial::open();
     } else {
     // emit error!!!
-        owarn << "could not attach to device" << oendl; 
         delete m_attach;
 	m_attach = 0l;
     }
@@ -62,19 +57,8 @@ QString IOIrda::name() const {
     return "Irda IO Layer";
 }
 
-void IOIrda::slotExited(OProcess* proc ){
+void IOIrda::slotExited(Opie::Core::OProcess* proc ){
     close();
     delete proc;
 }
 
-QBitArray IOIrda::supports()const {
-    return QBitArray( 3 );
-}
-
-bool IOIrda::isConnected() {
-    return false;
-}
-
-void IOIrda::send(const QByteArray &data) {
-    odebug << "Please overload me..." << oendl; 
-}

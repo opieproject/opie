@@ -66,10 +66,6 @@
 #include "procctl.h"
 #include "MyPty.h"
 
-/* OPIE */
-#include <opie2/odebug.h>
-using namespace Opie::Core;
-
 /* QT */
 #include <qsocketnotifier.h>
 #include <qfile.h>
@@ -102,7 +98,6 @@ using namespace Opie::Core;
 
 void MyPty::setSize(int lines, int columns)
 {
-    owarn << "setting size" << oendl; 
   struct winsize wsize;
   wsize.ws_row = (unsigned short)lines;
   wsize.ws_col = (unsigned short)columns;

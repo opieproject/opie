@@ -224,10 +224,6 @@ void EmulationWidget::calcGeometry()
 {
 	m_scrollbar->resize(QApplication::style().scrollBarExtent().width(), contentsRect().height() );
 
-        odebug << QString(" TEST").arg( contentsRect().width() ) << oendl; 
-        odebug << QString(" TEST").arg( contentsRect().height() ) << oendl; 
-        odebug << "NEUER TESTT!!!!!!!!" << oendl; 
-
        	switch( scrollLoc )
 	{
 	case SCRNONE :
@@ -258,7 +254,6 @@ void EmulationWidget::calcGeometry()
 
 void EmulationWidget::drawAttrString( QString& string, QPainter &painter, QRect rect, Character attr, bool usePixmap, bool clear )
 {
-    owarn << "Color1 " << color_table[attr.b].color.name().latin1() << "" << oendl; 
     if ( usePixmap && color_table[attr.b].transparent )
     {
 	painter.setBackgroundMode( TransparentMode );
@@ -272,7 +267,6 @@ void EmulationWidget::drawAttrString( QString& string, QPainter &painter, QRect 
 	else
 	{
 	    painter.setBackgroundMode( OpaqueMode );
-            owarn << "Color " << color_table[attr.b].color.name().latin1() << "" << oendl; 
 	    painter.setBackgroundColor( color_table[attr.b].color );
 	}
     }

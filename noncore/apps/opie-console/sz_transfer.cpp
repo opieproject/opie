@@ -40,47 +40,30 @@ void SzTransfer::sendFile(const QString& file) {
 }
 
 void SzTransfer::SzReceivedStdout(OProcess *, char *buffer, int buflen) {
-
-    owarn << "recieved from sz on stdout " << buflen << " bytes" << oendl; 
-
     QByteArray data(buflen);
     data.fill(*buffer, buflen);
+    
+#ifdef DEBUG_RECEIVE    
     for (uint i = 0; i < data.count(); i++ ) {
         printf("%c", buffer[i] );
     }
     printf("\n");
+#endif    
 
     // send out through the io layer
     layer()->send(data);
 }
 
 void SzTransfer::SzReceivedStderr(OProcess *, char *buffer, int length) {
-
-    // parse and show data in a progress dialog/widget
-    printf("stderr:\n");
-    //for (int i = 0; i < length; i++)
-    //    printf("%c", buffer[i]);
-    //printf("\n");
 }
 
 void SzTransfer::receivedStdin(const QByteArray &data) {
-
-    owarn << "recieved from io_serial " << data.size() << " bytes" << oendl; 
-
     // recieved data from the io layer goes to sz
     proc->writeStdin(data.data(), data.size());
-
 }
 
 void SzTransfer::sent() {
-
-    owarn << "sent file" << oendl; 
-
-    //setcbreak(0); /* default */
-
-
     delete proc;
     disconnect(layer(), SIGNAL(received(const QByteArray&)),
             this, SLOT(receivedStdin(const QByteArray&)));
-
 }

@@ -1,10 +1,6 @@
 
 #include "io_bt.h"
 
-/* OPIE */
-#include <opie2/odebug.h>
-using namespace Opie::Core;
-
 IOBt::IOBt( const Profile &config ) : IOSerial( config ) {
     m_attach = 0;
 }
@@ -35,7 +31,7 @@ bool IOBt::open() {
 
         // now it should also be checked, if there is a connection to the device with that mac allready
         // hciattach here
-        m_attach = new OProcess();
+        m_attach = new Opie::Core::OProcess();
         *m_attach << "hciattach /dev/ttyS2 any 57600";
 
         // then start hcid, then rcfomm handling (m_mac)
@@ -46,7 +42,6 @@ bool IOBt::open() {
         if ( m_attach->start() ) {
             ret = IOSerial::open();
         } else {
-            owarn << "could not attach to device" << oendl; 
             delete m_attach;
             m_attach = 0;
         }
@@ -78,19 +73,7 @@ QString IOBt::name() const {
     return "BLuetooth IO Layer";
 }
 
-void IOBt::slotExited( OProcess* proc ){
+void IOBt::slotExited( Opie::Core::OProcess* proc ){
     close();
     delete proc;
-}
-
-QBitArray IOBt::supports() const {
-    return QBitArray( 3 );
-}
-
-bool IOBt::isConnected() {
-    return false;
-}
-
-void IOBt::send(const QByteArray &data) {
-    odebug << "Please overload me..." << oendl; 
 }

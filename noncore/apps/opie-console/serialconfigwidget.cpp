@@ -1,25 +1,12 @@
+#include "iolayerbase.h"
+#include "serialconfigwidget.h"
+#include "comboboxhelper.h"
+
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qcombobox.h>
 
-#include "iolayerbase.h"
-#include "serialconfigwidget.h"
 
-namespace {
-    void setCurrent( const QString& str, QComboBox* bo ) {
-        uint b = bo->count();
-        for (int i = 0; i < bo->count(); i++ ) {
-            if ( bo->text(i) == str ) {
-                bo->setCurrentItem( i );
-                return;
-            }
-        }
-        bo->insertItem( str );
-        bo->setCurrentItem( b );
-    }
-
-
-}
 
 SerialConfigWidget::SerialConfigWidget( const QString& name,
                                         QWidget* parent,
@@ -116,7 +103,7 @@ void SerialConfigWidget::load( const Profile& prof ) {
     }
 
     if ( prof.readEntry("Device").isEmpty() ) return;
-    setCurrent( prof.readEntry("Device"), m_deviceCmb );
+    ComboboxHelper::setCurrent( prof.readEntry("Device"), m_deviceCmb );
 
 }
 /*

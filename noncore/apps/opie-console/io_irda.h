@@ -25,15 +25,12 @@ public:
 
     virtual QString identifier() const;
     virtual QString name() const;
-    virtual QBitArray supports() const;
-    virtual bool isConnected();
 
 signals:
     void received(const QByteArray &);
     void error(int, const QString &);
 
 public slots:
-    virtual void send( const QByteArray& );
     virtual bool open();
     virtual void close();
     virtual void reload(const Profile &);

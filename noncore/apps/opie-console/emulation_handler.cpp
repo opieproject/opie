@@ -4,13 +4,8 @@
 #include "script.h"
 #include "logger.h"
 
-/* OPIE */
-#include <opie2/odebug.h>
-
 #include <qfile.h>
 #include <qtextstream.h>
-
-using namespace Opie::Core;
 
 EmulationHandler::EmulationHandler( const Profile& prof, QWidget* parent,const char* name )
     : QObject(0, name )
@@ -148,11 +143,9 @@ QColor EmulationHandler::foreColor(int col) {
         co = Qt::black;
         break;
     case Profile::Green:
-        owarn << "Foreground green" << oendl;
         co = Qt::green;
         break;
     case Profile::Orange:
-        owarn << "Foreground orange" << oendl;
         co.setRgb( 231, 184, 98 );
         break;
     }
@@ -172,11 +165,9 @@ QColor EmulationHandler::backColor(int col ) {
         co = Qt::white;
         break;
     case Profile::Green:
-        owarn << "Background black" << oendl;
         co = Qt::black;
         break;
     case Profile::Orange:
-        owarn << "Background black" << oendl;
         co = Qt::black;
         break;
     }

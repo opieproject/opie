@@ -1,10 +1,6 @@
 #include "atconfigdialog.h"
 #include "io_modem.h"
 
-/* OPIE */
-#include <opie2/odebug.h>
-using namespace Opie::Core;
-
 /* QT */
 #include <qlineedit.h>
 #include <qspinbox.h>
@@ -155,8 +151,6 @@ QWidget* ATConfigDialog::tab1( QWidget* parent ) {
 
 
 void ATConfigDialog::readConfig( const Profile& config ) {
-    owarn << "config in atconfigdialog" << oendl; 
-
     initStringLine->setText( config.readEntry("InitString", MODEM_DEFAULT_INIT_STRING ) );
     resetStringLine->setText( config.readEntry("ResetString", MODEM_DEFAULT_RESET_STRING ) );
     dialPref1Line->setText( config.readEntry("DialPrefix1", MODEM_DEFAULT_DIAL_PREFIX1 ) );
