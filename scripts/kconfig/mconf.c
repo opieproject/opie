@@ -49,18 +49,18 @@ setmod_text[] =
 	"This feature depends on another which has been configured as a module.\n"
 	"As a result, this feature will be built as a module.",
 nohelp_text[] =
-	"There is no help available for this kernel option.\n",
+	"There is no help available for this option.\n",
 load_config_text[] =
 	"Enter the name of the configuration file you wish to load.  "
 	"Accept the name shown to restore the configuration you "
 	"last retrieved.  Leave blank to abort.",
 load_config_help[] =
 	"\n"
-	"For various reasons, one may wish to keep several different kernel\n"
+	"For various reasons, one may wish to keep several different \n"
 	"configurations available on a single machine.\n"
 	"\n"
 	"If you have saved a previous configuration in a file other than the\n"
-	"kernel's default, entering the name of the file here will allow you\n"
+	"default, entering the name of the file here will allow you\n"
 	"to modify that configuration.\n"
 	"\n"
 	"If you are uncertain, then you have probably never used alternate\n"
@@ -70,7 +70,7 @@ save_config_text[] =
 	"as an alternate.  Leave blank to abort.",
 save_config_help[] =
 	"\n"
-	"For various reasons, one may wish to keep different kernel\n"
+	"For various reasons, one may wish to keep different\n"
 	"configurations available on a single machine.\n"
 	"\n"
 	"Entering a file name here will allow you to later retrieve, modify\n"
@@ -147,12 +147,17 @@ static void init_wsize(void)
 
 static void cprint_init(void)
 {
+	char *env = getenv("LXDIALOG");
 	bufptr = buf;
 	argptr = args;
 	memset(args, 0, sizeof(args));
 	indent = 0;
 	child_count = 0;
-	cprint("./scripts/lxdialog/lxdialog");
+	if(env != NULL) {
+		cprint(env);
+	} else {
+		cprint("./scripts/lxdialog/lxdialog");
+	}
 	cprint("--backtitle");
 	cprint(menu_backtitle);
 }
@@ -302,11 +307,8 @@ static void build_conf(struct menu *menu)
 					cprint1("%s%*c%s",
 						menu->data ? "-->" : "++>",
 						indent + 1, ' ', prompt);
-				} else {
-					if (menu->parent != &rootmenu)
-						cprint1("   %*c", indent + 1, ' ');
-					cprint1("%s  --->", prompt);
-				}
+				} else
+					cprint1("   %*c%s  --->", indent + 1, ' ', prompt);
 
 				cprint_done();
 				if (single_menu_mode && menu->data)
@@ -373,6 +375,11 @@ static void build_conf(struct menu *menu)
 		}
 		cprint_done();
 	} else {
+		if (menu == current_menu) {
+			cprint(":%p", menu);
+			cprint("---%*c%s", indent + 1, ' ', menu_get_prompt(menu));
+			goto conf_childs;
+		}
 		child_count++;
 		val = sym_get_tristate_value(sym);
 		if (sym_is_choice_value(sym) && val == yes) {
@@ -382,7 +389,10 @@ static void build_conf(struct menu *menu)
 			switch (type) {
 			case S_BOOLEAN:
 				cprint("t%p", menu);
-				cprint1("[%c]", val == no ? ' ' : '*');
+				if (sym_is_changable(sym))
+					cprint1("[%c]", val == no ? ' ' : '*');
+				else
+					cprint1("---");
 				break;
 			case S_TRISTATE:
 				cprint("t%p", menu);
@@ -391,7 +401,10 @@ static void build_conf(struct menu *menu)
 				case mod: ch = 'M'; break;
 				default:  ch = ' '; break;
 				}
-				cprint1("<%c>", ch);
+				if (sym_is_changable(sym))
+					cprint1("<%c>", ch);
+				else
+					cprint1("---");
 				break;
 			default:
 				cprint("s%p", menu);
@@ -400,13 +413,20 @@ static void build_conf(struct menu *menu)
 				if (tmp < 0)
 					tmp = 0;
 				cprint1("%*c%s%s", tmp, ' ', menu_get_prompt(menu),
-					sym_has_value(sym) ? "" : " (NEW)");
+					(sym_has_value(sym) || !sym_is_changable(sym)) ?
+					"" : " (NEW)");
 				cprint_done();
 				goto conf_childs;
 			}
 		}
 		cprint1("%*c%s%s", indent + 1, ' ', menu_get_prompt(menu),
-			sym_has_value(sym) ? "" : " (NEW)");
+			(sym_has_value(sym) || !sym_is_changable(sym)) ?
+			"" : " (NEW)");
+		if (menu->prompt->type == P_MENU) {
+			cprint1("  --->");
+			cprint_done();
+			return;
+		}
 		cprint_done();
 	}
 
@@ -445,9 +465,9 @@ static void conf(struct menu *menu)
 			cprint(":");
 			cprint("--- ");
 			cprint("L");
-			cprint("Load an Alternate Configuration File");
+			cprint("    Load an Alternate Configuration File");
 			cprint("S");
-			cprint("Save Configuration to an Alternate File");
+			cprint("    Save Configuration to an Alternate File");
 		}
 		stat = exec_conf();
 		if (stat < 0)
@@ -484,6 +504,8 @@ static void conf(struct menu *menu)
 			case 't':
 				if (sym_is_choice(sym) && sym_get_tristate_value(sym) == yes)
 					conf_choice(submenu);
+				else if (submenu->prompt->type == P_MENU)
+					conf(submenu);
 				break;
 			case 's':
 				conf_string(submenu);
@@ -744,8 +766,7 @@ int main(int ac, char **av)
 
 	sym = sym_lookup("KERNELRELEASE", 0);
 	sym_calc_value(sym);
-	sprintf(menu_backtitle, "Opie %s Configuration",
-		sym_get_string_value(sym));
+	sprintf(menu_backtitle, "Build Configuration");
 
 	mode = getenv("MENUCONFIG_MODE");
 	if (mode) {
@@ -770,11 +791,12 @@ int main(int ac, char **av)
 	if (stat == 0) {
 		conf_write(NULL);
 		printf("\n\n"
-			"*** End of Opie configuration.\n"
-			"*** Check the top-level Makefile for additional configuration.\n"
-			"*** Next, you may run 'make'.\n\n");
+			"*** End of configuration.\n"
+			"\n\n");
 	} else
-		printf("\n\nYour Opie  configuration changes were NOT saved.\n\n");
+		printf("\n\n"
+			"Your configuration changes were NOT saved."
+			"\n\n");
 
 	return 0;
 }
