@@ -74,12 +74,11 @@ bool MultiauthPassword::needToAuthenticate(bool at_poweron)
  * \brief Require user authentication to unlock and continue
  *
  * This method will check if you require authentication
- * and then will lock the screen and require a succesfull
- * authentication.
- * Authenticate may enter the event loop and only returns
- * if the user sucesfully authenticated to the system.
- *
- * @return only if succesfully authenticated
+ * and then will lock the screen and ask for a successful
+ * authentication (explaining what it does or not, depending
+ * on your local configuration).
+ * It may go into an event loop, but anyhow it will only end
+ * when the user has successfully authenticated to the system.
  */
 void MultiauthPassword::authenticate(bool at_poweron)
 {

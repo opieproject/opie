@@ -39,11 +39,11 @@ namespace Opie {
 namespace Security {
 
 /**
- * This is the dropin replacement for libqpes Password class.
+ * This is the dropin replacement for the libqpe Password class.
  * If you call authenticate() a widget will cover the whole screen
  * and only return if the user is able to authenticate with any of the
  * configured Authentication Plugins.
- * This uses the \sa Opie::Security::MultiauthMainWindow internally.
+ * It uses the Opie::Security::MultiauthMainWindow QDialog internally.
  *
  * @author Clement Séveillac, Holger Freyther
  */
