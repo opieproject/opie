@@ -3,44 +3,21 @@
 #
 
 #
-# x11
+# Build Parameters
 #
+CONFIG_TARGET_X86=y
+# CONFIG_TARGET_SHARP is not set
+# CONFIG_TARGET_IPAQ is not set
+CONFIG_SPECFILE="qws/linux-generic-g++"
+# CONFIG_X11 is not set
 
 #
-# ipc
+# Non-core
 #
-
-#
-# server
-#
-
-#
-# noncore
-#
-
-#
-# todayplugins
-#
-CONFIG_TODAY_FORTUNE=y
-
-#
-# stockticker
-#
-CONFIG_TODAY_STOCKTICKER=y
-
-#
-# stockticker
-#
-CONFIG_TODAY_STOCKTICKERLIB=y
 
 #
 # unsupported
 #
-
-#
-# netsetup
-#
-CONFIG_DIALUP=y
 
 #
 # opiemail
@@ -50,6 +27,11 @@ CONFIG_CONVERTER=y
 #
 # ifaces
 #
+
+#
+# netsetup
+#
+CONFIG_DIALUP=y
 
 #
 # tools
@@ -76,7 +58,6 @@ CONFIG_FLAT=y
 #
 # settings
 #
-CONFIG_BACKUP=y
 CONFIG_USERMANAGER=y
 CONFIG_TABMANAGER=y
 CONFIG_SSHKEYS=y
@@ -85,6 +66,7 @@ CONFIG_ROTATION=y
 CONFIG_NETSYSTEMTIME=y
 CONFIG_MEDIUMMOUNT=y
 CONFIG_LANGUAGE=y
+CONFIG_BACKUP=y
 CONFIG_APPSKEY=y
 CONFIG_APPEARANCE2=y
 
@@ -94,10 +76,6 @@ CONFIG_APPEARANCE2=y
 
 #
 # net
-#
-
-#
-# opietooth
 #
 CONFIG_OPIEIRC=y
 CONFIG_OPIEFTP=y
@@ -180,11 +158,7 @@ CONFIG_AQPKG=y
 CONFIG_ADVANCEDFM=y
 
 #
-# Noncore Applets
-#
-
-#
-# testing
+# applets
 #
 CONFIG_WIRELESSAPPLET=y
 CONFIG_NOTESAPPLET=y
@@ -193,10 +167,6 @@ CONFIG_NOTESAPPLET=y
 # libsql
 #
 CONFIG_LIBQPE=y
-
-#
-# libopie
-#
 CONFIG_LIBOPIE=y
 
 #
@@ -225,7 +195,7 @@ CONFIG_FREETYPE=y
 #
 
 #
-# core
+# Core
 #
 
 #
@@ -263,7 +233,7 @@ CONFIG_OPIE-LOGIN=y
 #
 # opieplayer
 #
-CONFIG_LIBFFMPEG=y
+CONFIG_OPIEPLAYER=y
 CONFIG_LIBMAD=y
 CONFIG_LIBMPEG3=y
 CONFIG_MODPLUG=y
@@ -283,14 +253,14 @@ CONFIG_EMBEDDEDKONSOLE=y
 #
 # applets
 #
-
-#
-# restartapplet2
-#
 CONFIG_VOLUMEAPPLET=y
 CONFIG_VMEMO=y
 CONFIG_SUSPENDAPPLET=y
 CONFIG_SCREENSHOTAPPLET=y
+
+#
+# restartapplet2
+#
 
 #
 # restartapplet
