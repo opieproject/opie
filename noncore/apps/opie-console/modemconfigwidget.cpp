@@ -175,13 +175,16 @@ void ModemConfigWidget::save( Profile& prof ) {
     prof.writeEntry( "Parity", parity );
     prof.writeEntry( "Speed", speed );
     prof.writeEntry( "Number", m_telNumber->text() );
+
+
+    atConf->writeConfig(prof);
 }
 
 void ModemConfigWidget::slotAT() {
     //  ATConfigDialog conf( this, "ATConfig", true );
     atConf->showMaximized();
-    if ( atConf->exec() == QDialog::Accepted ) {
-        //      atConf->writeConfig();
+    if ( atConf->exec() != QDialog::Accepted ) {
+        // reload old settings
     }
 }
 
