@@ -30,7 +30,6 @@
 
 #include "mediawidget.h"
 #include "threadutil.h"
-#include "singleton.h"
 
 struct SkinData;
 
@@ -65,21 +64,6 @@ private:
 
     Skin( const Skin & );
     Skin &operator=( const Skin & );
-};
-
-class SkinCache : public Singleton<SkinCache>
-{
-public:
-    SkinCache();
-
-    QImage loadImage( const QString &name );
-
-private:
-    typedef QDict<QImage> ImageCache;
-
-    ImageCache m_cache;
-
-    ThreadUtil::Mutex m_cacheGuard;
 };
 
 class SkinLoader : public ThreadUtil::Thread

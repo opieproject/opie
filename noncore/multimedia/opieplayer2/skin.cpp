@@ -21,6 +21,7 @@
 */
 
 #include "skin.h"
+#include "singleton.h"
 
 #include <qpe/resource.h>
 #include <qpe/config.h>
@@ -36,6 +37,21 @@ struct SkinData
     QImage buttonDownImage;
     QImage buttonMask;
     ButtonMaskImageMap buttonMasks;
+};
+
+class SkinCache : public Singleton<SkinCache>
+{
+public:
+    SkinCache();
+
+    QImage loadImage( const QString &name );
+
+private:
+    typedef QDict<QImage> ImageCache;
+
+    ImageCache m_cache;
+
+    ThreadUtil::Mutex m_cacheGuard;
 };
 
 Skin::Skin( const QString &name, const QString &fileNameInfix )
