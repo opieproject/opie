@@ -226,11 +226,11 @@ void TinyKate::slotCurrentChanged( QWidget * view)
     if (currentView)
     {
 
-        disconnect(editCopy,SIGNAL(activated()),currentView,SLOT(copy()));
-        disconnect(editCut,SIGNAL(activated()),currentView,SLOT(cut()));
-        disconnect(editPaste,SIGNAL(activated()),currentView,SLOT(paste()));
-        disconnect(editUndo,SIGNAL(activated()),currentView,SLOT(undo()));
-        disconnect(editRedo,SIGNAL(activated()),currentView,SLOT(redo()));
+        disconnect(editCopy,SIGNAL(clicked()),currentView,SLOT(copy()));
+        disconnect(editCut,SIGNAL(clicked()),currentView,SLOT(cut()));
+        disconnect(editPaste,SIGNAL(clicked()),currentView,SLOT(paste()));
+        disconnect(editUndo,SIGNAL(clicked()),currentView,SLOT(undo()));
+        disconnect(editRedo,SIGNAL(clicked()),currentView,SLOT(redo()));
         disconnect(viewIncFontSizes,SIGNAL(activated()), currentView,SLOT(slotIncFontSizes()));
         disconnect(viewDecFontSizes,SIGNAL(activated()), currentView,SLOT(slotDecFontSizes()));
         disconnect(hlmenu,SIGNAL(activated(int)), currentView,SLOT(setHl(int)));
