@@ -70,6 +70,10 @@ ContactEditor::ContactEditor(	const OContact &entry,
 	cmbDefaultEmail = 0;
 	defaultEmailChooserPosition = -1;
 	contactfields = new OContactFields();
+
+	qDebug("load fields order");
+	contactfields->loadFromRecord( ent );
+
 	init();
 	setEntry( entry );
 }
@@ -831,11 +835,13 @@ void ContactEditor::slotFullNameChange( const QString &textChanged ) {
 }
 
 void ContactEditor::accept() {
+  qDebug("editor accept");
 
 	if ( isEmpty() ) {
 		cleanupFields();
 		reject();
 	} else {
+	  qDebug("and save it");
 	        contactfields->saveToRecord( ent );
 		saveEntry();
 		cleanupFields();
@@ -1123,9 +1129,6 @@ void ContactEditor::setEntry( const OContact &entry ) {
 	cleanupFields();
 
 	ent = entry;
-
-	qDebug("load fields order");
-	contactfields->loadFromRecord( ent );
 
 
 	emails = QStringList(ent.emailList());

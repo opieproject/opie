@@ -8,8 +8,8 @@ class QStringList;
 #include <opie/ocontact.h>
 
 #define CONTACT_FIELD_ORDER_NAME "opie-contactfield-order"
-#define DEFAULT_FIELD_ORDER "1234"
-
+#define DEFAULT_FIELD_ORDER ""
+ 
 class OContactFields{
 
  public:

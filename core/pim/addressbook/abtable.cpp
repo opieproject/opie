@@ -126,7 +126,7 @@ AbTable::AbTable( const QValueList<int> order, QWidget *parent, const char *name
 	  columnVisible( true ),
 	  countNested( 0 )
 {
-	qWarning("C'tor start");
+  //	qWarning("C'tor start");
 
 	setSelectionMode( NoSelection );
 	init();
@@ -135,7 +135,7 @@ AbTable::AbTable( const QValueList<int> order, QWidget *parent, const char *name
 		 this, SLOT(itemClicked(int,int)) );
 
 	contactList.clear();
-	qWarning("C'tor end");
+	//	qWarning("C'tor end");
 }
 
 AbTable::~AbTable()
@@ -157,7 +157,7 @@ void AbTable::init()
 
 void AbTable::setContacts( const OContactAccess::List& viewList )
 {
-	qWarning("AbTable::setContacts()");
+  //	qWarning("AbTable::setContacts()");
 
 	clear();
 	m_viewList = viewList;
@@ -183,7 +183,7 @@ void AbTable::setContacts( const OContactAccess::List& viewList )
 
 bool AbTable::selectContact( int UID )
 {
-	qWarning( "AbTable::selectContact( %d )", UID );
+  //	qWarning( "AbTable::selectContact( %d )", UID );
 	int rows = numRows();
 	AbTableItem *abi;
 	OContact* foundContact = 0l;
@@ -213,7 +213,7 @@ bool AbTable::selectContact( int UID )
 
 void AbTable::insertIntoTable( const OContact& cnt, int row )
 {
-	qWarning( "void AbTable::insertIntoTable( const OContact& cnt, %d )", row );
+  //	qWarning( "void AbTable::insertIntoTable( const OContact& cnt, %d )", row );
 	QString strName,
 		strContact;
 	
@@ -254,7 +254,7 @@ void AbTable::columnClicked( int col )
 
 void AbTable::resort()
 {
-	qWarning( "void AbTable::resort()" );
+  //	qWarning( "void AbTable::resort()" );
 	setPaintingEnabled( FALSE );
 	if ( sorting() ) {
 		if ( lastSortCol == -1 )
@@ -268,7 +268,7 @@ void AbTable::resort()
 
 OContact AbTable::currentEntry()
 {
-	qWarning( "OContact AbTable::currentEntry()" );
+  //	qWarning( "OContact AbTable::currentEntry()" );
 	OContact cnt;
 	AbTableItem *abItem;
 	abItem = static_cast<AbTableItem*>(item( currentRow(), 0 ));
@@ -286,7 +286,7 @@ int AbTable::currentEntry_UID()
 
 void AbTable::clear()
 {
-	qWarning( "void AbTable::clear()" );
+  //	qWarning( "void AbTable::clear()" );
 	contactList.clear();
 
 	setPaintingEnabled( FALSE );
@@ -304,7 +304,7 @@ void AbTable::clear()
 // Refresh updates column 2 if the contactsettings changed
 void AbTable::refresh()
 {
-	qWarning( "void AbTable::refresh()" );
+  //	qWarning( "void AbTable::refresh()" );
 	int rows = numRows();
 	QString value;
 	AbTableItem *abi;
@@ -326,7 +326,7 @@ void AbTable::keyPressEvent( QKeyEvent *e )
 	if ( key >= 'A' && key <= 'Z' )
 		moveTo( key );
 	
-	qWarning("Received key ..");
+	//	qWarning("Received key ..");
 	switch( e->key() ) {
 	case Qt::Key_Space:
 	case Qt::Key_Return:
@@ -349,7 +349,7 @@ void AbTable::keyPressEvent( QKeyEvent *e )
 
 void AbTable::moveTo( char c )
 {
-	qWarning( "void AbTable::moveTo( char c )" );
+  //	qWarning( "void AbTable::moveTo( char c )" );
 	
 	int rows = numRows();
 	QString value;
@@ -411,7 +411,7 @@ void AbTable::resizeRows() {
 
 void AbTable::realignTable()
 {
-	qWarning( "void AbTable::realignTable()" );
+  //	qWarning( "void AbTable::realignTable()" );
 
 	setPaintingEnabled( FALSE );
 
@@ -461,7 +461,7 @@ void QTable::paintEmptyArea( QPainter *p, int cx, int cy, int cw, int ch )
 
 void AbTable::fitColumns()
 {
-	qWarning( "void AbTable::fitColumns()" );
+  //	qWarning( "void AbTable::fitColumns()" );
 	int contentsWidth = visibleWidth() / 2; // :SX Why too low
 	// Fix to better value
 	// contentsWidth = 130; 
@@ -473,7 +473,7 @@ void AbTable::fitColumns()
 		columnVisible = true;
 	}
 	
-	qWarning("Width: %d", contentsWidth);
+	//	qWarning("Width: %d", contentsWidth);
 
 	setColumnWidth( 0, contentsWidth );
 	adjustColumn(1);
@@ -485,7 +485,7 @@ void AbTable::fitColumns()
 
 void AbTable::show()
 {
-	qWarning( "void AbTable::show()" );
+  //	qWarning( "void AbTable::show()" );
 	realignTable();
 	QTable::show();
 }
@@ -507,11 +507,11 @@ void AbTable::setChoiceNames( const QStringList& list)
 
 void AbTable::itemClicked(int,int col)
 {
-	qWarning( "AbTable::itemClicked(int, col:%d)", col);
+  //	qWarning( "AbTable::itemClicked(int, col:%d)", col);
 	if ( col == 2 ) {
 		return;
 	} else {
-		qWarning ("Emitting signalSwitch()");
+	  //	qWarning ("Emitting signalSwitch()");
 		emit signalSwitch();
 	}
 }
@@ -548,7 +548,7 @@ QStringList AbTable::choiceSelection(int /*index*/) const
 
 void AbTable::updateVisible()
 {
-	qWarning("void AbTable::updateVisible()");
+  //	qWarning("void AbTable::updateVisible()");
 
 	int visible,
 		totalRows,
@@ -586,7 +586,7 @@ void AbTable::updateVisible()
 
 void AbTable::setPaintingEnabled( bool e )
 {
-	qWarning("IN void AbTable::setPaintingEnabled( %d )->Nested: %d", e, countNested );
+  //	qWarning("IN void AbTable::setPaintingEnabled( %d )->Nested: %d", e, countNested );
 
 	if ( e ) {
 		if ( countNested > 0 )
@@ -602,11 +602,11 @@ void AbTable::setPaintingEnabled( bool e )
 		enablePainting = false;
 		setUpdatesEnabled( false );
 	}
-	qWarning("OUT void AbTable::setPaintingEnabled( %d )->Nested: %d", e, countNested );
+	//	qWarning("OUT void AbTable::setPaintingEnabled( %d )->Nested: %d", e, countNested );
 }
 
 void AbTable::viewportPaintEvent( QPaintEvent* e ) {
-	qWarning(" void AbTable::viewportPaintEvent( QPaintEvent* e ) -> %d", enablePainting);
+  //	qWarning(" void AbTable::viewportPaintEvent( QPaintEvent* e ) -> %d", enablePainting);
 	if ( enablePainting )
 		QTable::viewportPaintEvent( e );
 }

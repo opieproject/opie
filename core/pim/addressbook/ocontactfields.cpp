@@ -300,13 +300,16 @@ void OContactFields::saveToRecord( OContact& cnt ){
 
 void OContactFields::loadFromRecord( OContact& cnt ){
   qDebug("ocontactfields loadFromRecord");
-  fieldOrder = DEFAULT_FIELD_ORDER;
   fieldOrder = cnt.customField( CONTACT_FIELD_ORDER_NAME );
+  qDebug("loaded fieldOrder >%s<",fieldOrder.latin1());
+  if (fieldOrder.isEmpty()) fieldOrder = DEFAULT_FIELD_ORDER;
+  qDebug("effective fieldOrder >%s<",fieldOrder.latin1());
 }
 
 void OContactFields::setFieldOrder( int pos, int index ){
-  qDebug("qcontactfields setfieldorder");
-  fieldOrder[pos] = index;
+  qDebug("qcontactfields setfieldorder pos %i -> %i",pos,index);
+  fieldOrder[pos] = QString::number( index )[0];
+  qDebug("fieldOrder >%s<",fieldOrder.latin1());
 }
 
 int OContactFields::getFieldOrder( int pos ){
