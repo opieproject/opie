@@ -706,6 +706,7 @@ void AddressbookWindow::appMessage(const QCString &msg, const QByteArray &data)
 		m_abView -> setCurrentUid( uid );
 		slotViewSwitched ( AbView::CardView );
 		
+		showMaximized();
 		qApp->exec();
 
 	} else if ( msg == "edit(int)" ) {
