@@ -1,21 +1,11 @@
-Speed up patches backported from
 
-http://robotics.dei.unipd.it/~koral/KDE/kflicker.html
+#
+# Patch managed by http://www.holgerschurig.de/patcher.html
+#
 
-and
-
-http://lists.kde.org/?l=kde-optimize&m=105382164111363&w=2 (complete thread)
-
-
-
-
-
-
-
-diff -ur qt-2.3.8-old/src/iconview/qiconview.cpp qt-2.3.8/src/iconview/qiconview.cpp
---- qt-2.3.8-old/src/iconview/qiconview.cpp	2004-07-22 01:07:46.000000000 +0200
-+++ qt-2.3.8/src/iconview/qiconview.cpp	2004-07-23 19:13:09.000000000 +0200
-@@ -224,6 +224,7 @@
+--- qt-2.3.10-snapshot-20050131/src/iconview/qiconview.cpp~qiconview-speed
++++ qt-2.3.10-snapshot-20050131/src/iconview/qiconview.cpp
+@@ -225,6 +225,7 @@
      QIconView::SelectionMode selectionMode;
      QIconViewItem *currentItem, *tmpCurrentItem, *highlightedItem, *startDragItem, *pressedItem, *selectAnchor;
      QRect *rubber;
@@ -23,7 +13,7 @@ diff -ur qt-2.3.8-old/src/iconview/qiconview.cpp qt-2.3.8/src/iconview/qiconview
      QTimer *scrollTimer, *adjustTimer, *updateTimer, *inputTimer,
  	*fullRedrawTimer;
      int rastX, rastY, spacing;
-@@ -2267,6 +2268,7 @@
+@@ -2268,6 +2269,7 @@
      d->currentItem = 0;
      d->highlightedItem = 0;
      d->rubber = 0;
@@ -31,7 +21,7 @@ diff -ur qt-2.3.8-old/src/iconview/qiconview.cpp qt-2.3.8/src/iconview/qiconview
      d->scrollTimer = 0;
      d->startDragItem = 0;
      d->tmpCurrentItem = 0;
-@@ -2415,6 +2417,8 @@
+@@ -2416,6 +2418,8 @@
  	delete item;
  	item = tmp;
      }
@@ -40,7 +30,7 @@ diff -ur qt-2.3.8-old/src/iconview/qiconview.cpp qt-2.3.8/src/iconview/qiconview
      delete d->fm;
      d->fm = 0;
  #ifndef QT_NO_TOOLTIP
-@@ -2881,6 +2885,48 @@
+@@ -2882,6 +2886,48 @@
  }
  
  /*!
@@ -89,7 +79,7 @@ diff -ur qt-2.3.8-old/src/iconview/qiconview.cpp qt-2.3.8/src/iconview/qiconview
    \reimp
  */
  
-@@ -4937,7 +4983,7 @@
+@@ -4939,7 +4985,7 @@
  		if ( !d->rubber )
  		    drawDragShapes( d->oldDragPos );
  	    }
@@ -98,7 +88,7 @@ diff -ur qt-2.3.8-old/src/iconview/qiconview.cpp qt-2.3.8/src/iconview/qiconview
  	    if ( d->dragging ) {
  		if ( !d->rubber )
  		    drawDragShapes( d->oldDragPos );
-@@ -5374,11 +5420,19 @@
+@@ -5377,11 +5423,19 @@
  	return;
  
      if ( item->d->container1 && d->firstContainer ) {
@@ -120,9 +110,8 @@ diff -ur qt-2.3.8-old/src/iconview/qiconview.cpp qt-2.3.8/src/iconview/qiconview
      }
      item->d->container2 = 0;
  
-diff -ur qt-2.3.8-old/src/iconview/qiconview.h qt-2.3.8/src/iconview/qiconview.h
---- qt-2.3.8-old/src/iconview/qiconview.h	2004-07-22 01:07:46.000000000 +0200
-+++ qt-2.3.8/src/iconview/qiconview.h	2004-07-23 19:13:09.000000000 +0200
+--- qt-2.3.10-snapshot-20050131/src/iconview/qiconview.h~qiconview-speed
++++ qt-2.3.10-snapshot-20050131/src/iconview/qiconview.h
 @@ -444,6 +444,7 @@
      virtual void contentsDropEvent( QDropEvent *e );
  #endif
@@ -131,15 +120,3 @@ diff -ur qt-2.3.8-old/src/iconview/qiconview.h qt-2.3.8/src/iconview/qiconview.h
      virtual void resizeEvent( QResizeEvent* e );
      virtual void keyPressEvent( QKeyEvent *e );
      virtual void focusInEvent( QFocusEvent *e );
---- qt-2.3.8-old/src/widgets/qscrollview.cpp	2004-07-22 01:07:44.000000000 +0200
-+++ qt-2.3.8/src/widgets/qscrollview.cpp	2004-07-23 19:21:06.000000000 +0200
-@@ -1280,6 +1280,9 @@
- 	case QEvent::LayoutHint:
- 	    d->autoResizeHint(this);
- 	    break;
-+	case QEvent::WindowActivate:
-+	case QEvent::WindowDeactivate:
-+	    return TRUE;
- 	default:
- 	    break;
- 	}

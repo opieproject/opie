@@ -1,25 +1,10 @@
-German umlaute quite likely french, italian, spanish did
-not work due QFile::[decode,encode]Name did call QString
-local8Bit,fromLocal8Bit which plainly tried to use utf8
-encoding even if not useful. So a filename got changed
-and QFileInfo recognized the file not beeing present anymore...
-which lead to files not be shown.
-Also with Year-Names problem exists as the base system sent
-it encoded upstream.
 
-If you want to have UTF-8 encoding use LC_CTYPE as always and
-QTextCodec::codecForLocale will use the right UTF-8 encoding.
+#
+# Patch managed by http://www.holgerschurig.de/patcher.html
+#
 
-As fallback the old behaviour was preserved
-
-
-
-
-
-
-
---- qt-2.3.8-old/src/tools/qstring.cpp	2004-07-23 14:33:02.000000000 +0200
-+++ qt-2.3.8/src/tools/qstring.cpp	2004-07-23 14:32:31.000000000 +0200
+--- qt-2.3.9-snapshot-20041211/src/tools/qstring.cpp~encoding
++++ qt-2.3.9-snapshot-20041211/src/tools/qstring.cpp
 @@ -14469,7 +14469,11 @@
      return qt_winQString2MB( *this );
  #endif

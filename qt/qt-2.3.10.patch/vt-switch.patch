@@ -3,9 +3,9 @@
 # Patch managed by http://www.holgerschurig.de/patcher.html
 #
 
---- qt-2.3.7/src/kernel/qapplication_qws.cpp~vt-switch.patch
-+++ qt-2.3.7/src/kernel/qapplication_qws.cpp
-@@ -123,6 +123,12 @@
+--- qt-2.3.9-snapshot-20041221/src/kernel/qapplication_qws.cpp~vt-switch.patch
++++ qt-2.3.9-snapshot-20041221/src/kernel/qapplication_qws.cpp
+@@ -124,6 +124,12 @@
  static int qt_thread_pipe[2];
  #endif
  
@@ -18,7 +18,7 @@
  const int qwsSharedRamSize = 32 * 1024;	//Small amount to fit on small devices.
  
  // These are in qapplication.cpp in qt/main
-@@ -163,6 +169,8 @@
+@@ -164,6 +170,8 @@
  bool qws_accel = TRUE;	    // ### never set
  const char *qws_display_spec = ":0";
  int qws_display_id = 0;
@@ -27,7 +27,7 @@
  int qws_client_id = 0;
  QWidget *qt_pressGrab = 0;
  QWidget *qt_mouseGrb = 0;
-@@ -1628,6 +1636,15 @@
+@@ -1700,6 +1708,15 @@
  	    type = QApplication::GuiServer;
  	} else if ( arg == "-interlaced" ) {
  	    qws_screen_is_interlaced = TRUE;
@@ -43,7 +43,7 @@
  	} else if ( arg == "-display" ) {
  	    if ( ++i < argc )
  		qws_display_spec = argv[i];
-@@ -1652,6 +1669,53 @@
+@@ -1724,6 +1741,53 @@
      if ( type == QApplication::GuiServer ) {
  	qt_appType = type;
  	qws_single_process = TRUE;
@@ -97,7 +97,7 @@
  	QWSServer::startup(flags);
  	setenv("QWS_DISPLAY", qws_display_spec, 0);
      }
-@@ -1702,7 +1766,36 @@
+@@ -1774,7 +1838,36 @@
      QFontManager::cleanup();
  
      if ( qws_single_process ) {
@@ -135,36 +135,9 @@
      }
      if ( qt_is_gui_used ) {
  	delete qt_fbdpy;
-@@ -2584,7 +2677,7 @@
-     if ( !widget ) {				// don't know this window
- 	if ( !QWidget::mouseGrabber()
- #ifndef QT_NO_QWS_MANAGER
--	    && !QWSManager::grabbedMouse() 
-+	    && !QWSManager::grabbedMouse()
- #endif
- 	    ) {
- 	    qt_last_cursor = 0xffffffff; // cursor can be changed by another application
-@@ -3394,7 +3487,7 @@
- #ifndef QT_NO_QWS_IM
- 			    if ( mouse.state&button && w != QInputContext::microFocusWidget() ) //button press
- 				QInputContext::reset( oldFocus );
--#endif	
-+#endif
- 			    QFocusEvent::setReason( QFocusEvent::Mouse);
- 			    w->setFocus();
- 			    QFocusEvent::resetReason();
-@@ -3540,7 +3633,7 @@
- 		    QApplication::sendEvent( widget, &enter );
- 		    (*mouseInWidget) = widget;
- #ifndef QT_NO_QWS_IM
--		    if ( e.type() == QEvent::MouseButtonPress && 
-+		    if ( e.type() == QEvent::MouseButtonPress &&
- 			 !widget->testWFlags( Qt::WStyle_Tool ) &&
- 			 !widget->topLevelWidget()->testWFlags( Qt::WStyle_Tool ) )
- 			QInputContext::reset( oldFocus );
---- qt-2.3.7/src/kernel/qkeyboard_qws.cpp~vt-switch.patch
-+++ qt-2.3.7/src/kernel/qkeyboard_qws.cpp
-@@ -1068,6 +1068,24 @@
+--- qt-2.3.9-snapshot-20041221/src/kernel/qkeyboard_qws.cpp~vt-switch.patch
++++ qt-2.3.9-snapshot-20041221/src/kernel/qkeyboard_qws.cpp
+@@ -1247,6 +1247,24 @@
  {
      if (kbdFD >= 0)
      {
@@ -189,8 +162,8 @@
  #if !defined(_OS_FREEBSD_) && !defined(_OS_SOLARIS_)
  	ioctl(kbdFD, KDSKBMODE, K_XLATE);
  #endif
---- qt-2.3.7/src/kernel/qgfxlinuxfb_qws.cpp~vt-switch.patch
-+++ qt-2.3.7/src/kernel/qgfxlinuxfb_qws.cpp
+--- qt-2.3.9-snapshot-20041221/src/kernel/qgfxlinuxfb_qws.cpp~vt-switch.patch
++++ qt-2.3.9-snapshot-20041221/src/kernel/qgfxlinuxfb_qws.cpp
 @@ -251,9 +251,9 @@
  
  bool QLinuxFbScreen::initDevice()

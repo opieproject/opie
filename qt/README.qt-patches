@@ -1,6 +1,6 @@
 The Qt patches are patches generally useful for all platforms.
 For specefic Device patches like Keyboard and Mousedrivers see
 
-http://openembedded.bkbits.net:8080/packages/src/qte/qte-2.3.7?nav=index.html|src/.|src/qte
+http://openembedded.bkbits.net:8080/packages/src/qte/qte-2.3.10?nav=index.html|src/.|src/qte
 
 

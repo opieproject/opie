@@ -1,11 +1,11 @@
 
 #
-# Patch managed by http://www.mn-logistik.de/unsupported/pxa250/patcher
+# Patch managed by http://www.holgerschurig.de/patcher.html
 #
 
---- qt-2.3.7/src/kernel/qapplication_qws.cpp~daemonize	2004-07-17 22:47:54.840820000 +0200
-+++ qt-2.3.7/src/kernel/qapplication_qws.cpp	2004-07-17 23:34:32.407525912 +0200
-@@ -103,6 +103,7 @@
+--- qt-2.3.9-snapshot-20041211/src/kernel/qapplication_qws.cpp~daemonize
++++ qt-2.3.9-snapshot-20041211/src/kernel/qapplication_qws.cpp
+@@ -104,6 +104,7 @@
  #endif
  
  #include <sys/time.h>
@@ -13,7 +13,7 @@
  
  #if defined(_OS_AIX_) && defined(_CC_GNU_)
  #include <sys/select.h>
-@@ -162,6 +163,7 @@
+@@ -163,6 +164,7 @@
  //these used to be environment variables, they are initialized from
  //environment variables in
  
@@ -21,7 +21,7 @@
  bool qws_savefonts = FALSE;
  bool qws_screen_is_interlaced=FALSE; //### should be detected
  bool qws_shared_memory = FALSE;
-@@ -1614,6 +1616,10 @@
+@@ -1686,6 +1688,10 @@
  		mwGeometry = argv[i];
  	} else if ( arg == "-shared" ) {
  	    qws_shared_memory = TRUE;
@@ -32,7 +32,7 @@
  	} else if ( arg == "-noshared" ) {
  	    qws_shared_memory = FALSE;
  	} else if ( arg == "-savefonts" ) {
-@@ -1670,6 +1676,78 @@
+@@ -1742,6 +1748,78 @@
  	qt_appType = type;
  	qws_single_process = TRUE;
  
