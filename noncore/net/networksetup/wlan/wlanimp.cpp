@@ -164,13 +164,16 @@ void WLANImp::changeAndSaveSettingFile(){
       stream << "\tKEY3=" << keyLineEdit3->text() << "\n";
       
       if(wepEnabled->isChecked()){
-        stream << "\tKEY=";
+        stream << "\tKEY=\"";
         if(keyRadio0->isChecked()) stream << keyLineEdit0->text();
         if(keyRadio1->isChecked()) stream << keyLineEdit1->text();
         if(keyRadio2->isChecked()) stream << keyLineEdit2->text();
         if(keyRadio3->isChecked()) stream << keyLineEdit3->text();
-	if(authOpen->isChecked()) stream << " open";
-	stream << "\n";
+	if(authOpen->isChecked())
+	  stream << " open";
+	else
+	  stream << " restricted";
+	stream << "\n\"";
       }
       stream << "\tCHANNEL=" << networkChannel->value() << "\n";
       stream << "\tRATE=auto\n";
