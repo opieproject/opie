@@ -13,11 +13,14 @@
  * ToDo:
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_vcard.cpp,v 1.2 2002-11-10 15:41:53 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_vcard.cpp,v 1.3 2002-11-11 16:41:09 kergoth Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_vcard.cpp,v $
- * Revision 1.2  2002-11-10 15:41:53  eilers
+ * Revision 1.3  2002-11-11 16:41:09  kergoth
+ * no default arguments in implementation
+ *
+ * Revision 1.2  2002/11/10 15:41:53  eilers
  * Bugfixes..
  *
  * Revision 1.1  2002/11/09 14:34:52  eilers
@@ -32,7 +35,7 @@
 
 #include <qfile.h>
 
-OContactAccessBackend_VCard::OContactAccessBackend_VCard ( QString , QString filename = 0l ):
+OContactAccessBackend_VCard::OContactAccessBackend_VCard ( QString , QString filename ):
 	m_dirty( false ),
 	m_file( filename )
 {
