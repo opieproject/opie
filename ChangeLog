@@ -8,12 +8,14 @@
 	Fixed Bugs
 	----------
 	* #1236 - VCards contained empty home and work address entries causing Palms to crash (eilers)
+	* #1472 - Opie textedit now check for unsaved changes on ESC key (ljp)
 	* #1474 - Implement GUI for Scrollbars on the Left in Appearance (zecke)
 	* #1482 - Fix double '/' in paths (zecke)
 	* #1536 - Autosave of custom locations in opie backup (ar)
 	* #1539 - Fixed displaying too long path in the delete dialog in opie-eye (zecke)
 	* #1540 - Implemented deletion of DocLnks in opie-eye (zecke)
 	* #1542 - Fix Todo crash when priority < 1 or > 5 (drw)
+	* #1550 - Browse for alarm sound start in QPEDIR/sounds/ (zecke)
 	* #1554 - Fixed Opie-Console name in .desktop file (mickeyl)
 	* #1556 - Start to look for sound files in /opt/QtPalmtop/sounds (zecke)
 	* #1558 - Fixed opie-login breaking opie startup (mickeyl)
