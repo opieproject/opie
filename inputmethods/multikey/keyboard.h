@@ -63,11 +63,11 @@ public:
     bool    *pressedPtr(const int row, const int col);
     ushort  shift(const ushort);
     ushort  meta(const ushort);
-    QPixmap *pix(const int row, const int col);
+    QImage *pix(const int row, const int col);
     int     numKeys(const int row);
     void    setKeysFromFile(const char *filename);
     void    setKey(const int row, const int qcode, const ushort unicode, 
-                    const int width, QPixmap *pix);
+                    const int width, QImage *pix);
     void    setPressed(const int row, const int col, const bool pressed);
     QString lang;
     QString label;
@@ -81,7 +81,7 @@ private:
 
         // only needed for keys like ctrl that can have multiple keys pressed at once
         bool *pressed; 
-	    QPixmap *pix;
+	    QImage *pix;
     };
 
     QList<Key> keys[6];

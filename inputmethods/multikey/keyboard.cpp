@@ -177,7 +177,7 @@ void Keyboard::drawKeyboard(QPainter &p, int row, int col)
                    keyWidth * defaultKeyWidth - 1, keyHeight - 1, 
                    pressed || keys->pressed(row, col) ? keycolor_pressed : keycolor);
 
-        QPixmap *pix = keys->pix(row,col);
+        QImage *pix = keys->pix(row,col);
 
         ushort c = keys->uni(row, col);
 
@@ -195,7 +195,7 @@ void Keyboard::drawKeyboard(QPainter &p, int row, int col)
         }
         else
             // center the image in the middle of the key
-            p.drawPixmap( x + (defaultKeyWidth * keyWidth - pix->width())/2, 
+            p.drawImage( x + (defaultKeyWidth * keyWidth - pix->width())/2, 
                           y + (keyHeight - pix->height())/2 + 1, 
                           *pix );
 
@@ -219,7 +219,7 @@ void Keyboard::drawKeyboard(QPainter &p, int row, int col)
 
         for (int col = 0; col < keys->numKeys(row); col++) {
 
-            QPixmap *pix = keys->pix(row, col);
+            QImage *pix = keys->pix(row, col);
             int keyWidth = keys->width(row, col);
 
 
@@ -244,9 +244,10 @@ void Keyboard::drawKeyboard(QPainter &p, int row, int col)
             }
             else {
                 // center the image in the middle of the key
-                p.drawPixmap( x + (keyWidthPix - pix->width())/2, 
+                pix->setColor(1, textcolor.rgb());
+                p.drawImage( x + (keyWidthPix - pix->width())/2, 
                               y + (keyHeight - pix->height())/2 + 1, 
-                              QPixmap(*pix) );
+                              QImage(*pix) );
             }
 
             p.setPen(keycolor_lines);
@@ -1044,7 +1045,7 @@ void Keys::setKeysFromFile(const char * filename) {
         QString buf;
         QString comment;
         char * xpm[256]; //couldnt be larger than that... could it?
-        QPixmap *xpm2pix = 0;
+        QImage *xpm2pix = 0;
 
         buf = t.readLine();
         while (buf) {
@@ -1090,7 +1091,7 @@ void Keys::setKeysFromFile(const char * filename) {
                 }
                 if (xpmLineCount) {
 
-                    xpm2pix = new QPixmap((const char **)xpm);
+                    xpm2pix = new QImage((const char **)xpm);
                     for (int i = 0; i < xpmLineCount; i++) 
 
                         delete [] (xpm[i]);
@@ -1159,7 +1160,7 @@ void Keys::setKeysFromFile(const char * filename) {
 
 // Keys::setKey {{{2
 void Keys::setKey(const int row, const int qcode, const ushort unicode, 
-                    const int width, QPixmap *pix) {
+                    const int width, QImage *pix) {
 
     Key * key;
     key = new Key; 
@@ -1216,7 +1217,7 @@ int Keys::qcode(const int row, const int col) {
     return keys[row].at(col)->qcode;
 }
 
-QPixmap *Keys::pix(const int row, const int col) {
+QImage *Keys::pix(const int row, const int col) {
 
     return keys[row].at(col)->pix;
 
