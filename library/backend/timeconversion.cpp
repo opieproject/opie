@@ -25,9 +25,9 @@
 
 QString TimeConversion::toString( const QDate &d )
 {
-	QString empty;
-	if ( d.isNull() )
-		return empty;
+// 	QString empty;
+// 	if ( d.isNull() )
+// 		return empty;
 
 	QString r = QString::number( d.day() ) + "." +
 		QString::number( d.month() ) + "." +
@@ -39,9 +39,9 @@ QString TimeConversion::toString( const QDate &d )
 
 QDate TimeConversion::fromString( const QString &datestr )
 {
-    QDate empty;
-    if ( datestr.isEmpty() )
-	    return empty;
+//     QDate empty;
+//     if ( datestr.isEmpty() )
+// 	    return empty;
 
     int monthPos = datestr.find('.');
     int yearPos = datestr.find('.', monthPos+1 );

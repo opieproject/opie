@@ -203,8 +203,6 @@ public:
     void setUid( int i )
 { Record::setUid(i); replace( Qtopia::AddressUid , QString::number(i)); }
 
-    void setEmails( const QString &v );
-    QString emails() const { return find( Qtopia::Emails ); }
 private:
     friend class AbEditor;
     friend class AbTable;
@@ -213,6 +211,8 @@ private:
 
     QString emailSeparator() const { return " "; }
      // the emails should be seperated by a comma
+    void setEmails( const QString &v );
+    QString emails() const { return find( Qtopia::Emails ); }
 
     void insert( int key, const QString &value );
     void replace( int key, const QString &value );
