@@ -27,7 +27,7 @@ protected:
     virtual void fillGroups();
 
     NNTPaccount*m_Account;
-    QStringList subscribedGroups;
+    QStringList subscribedGroups,subscribedGroupsNotListed;
 };
 
 #endif
