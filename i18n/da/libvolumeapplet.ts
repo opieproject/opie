@@ -3,19 +3,19 @@
     <name>VolumeControl</name>
     <message>
         <source>Enable Sounds for:</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivér lyde for:</translation>
     </message>
     <message>
         <source>Screen Taps</source>
-        <translation type="unfinished"></translation>
+        <translation>Skærmen</translation>
     </message>
     <message>
         <source>Key Clicks</source>
-        <translation type="unfinished"></translation>
+        <translation>Taster</translation>
     </message>
     <message>
         <source>Alarm Sound</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarmen</translation>
     </message>
 </context>
 </TS>
