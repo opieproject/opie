@@ -3,38 +3,38 @@
     <name>SSHKeysApp</name>
     <message>
         <source>Error running ssh-add</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout bij uitvoeren ssh-add</translation>
     </message>
 </context>
 <context>
     <name>SSHKeysBase</name>
     <message>
         <source>SSH Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>SSH Sleutels</translation>
     </message>
     <message>
         <source>Add Keys:</source>
-        <translation type="unfinished"></translation>
+        <translation>Voeg sleutels toe:</translation>
     </message>
     <message>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Ververs</translation>
     </message>
     <message>
         <source>Clear Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Schoon sleutels</translation>
     </message>
     <message>
         <source>Key Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Sleutelnaam</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Grootte</translation>
     </message>
     <message>
         <source>Fingerprint</source>
-        <translation type="unfinished"></translation>
+        <translation>Vingerafdruk</translation>
     </message>
 </context>
 </TS>
