@@ -36,10 +36,11 @@ InterfaceSetupImp::InterfaceSetupImp(QWidget* parent, const char* name, Interfac
 /**
  * Save the current settings, then write out the interfaces file and close. 
  */
-void InterfaceSetupImp::saveChanges(){
+bool InterfaceSetupImp::saveChanges(){
   if(!saveSettings())
-    return;
+    return false;
   interfaces->write();
+  return true;
 }
 
 /**
@@ -59,7 +60,7 @@ bool InterfaceSetupImp::saveSettings(){
   }
   
   if(!dhcpCheckBox->isChecked() && (ipAddressEdit->text().isEmpty() || subnetMaskEdit->text().isEmpty())){
-   QMessageBox::information(this, "Not Saved.", "Please fill in address, subnet,\n and gateway entries.", "Ok");
+   QMessageBox::information(this, "Not Saved.", "Please fill in the IP address and\n subnet entries.", "Ok");
    return false;
   }	
   interfaces->removeAllInterfaceOptions();

@@ -121,8 +121,8 @@ bool WLANImp::writeConfig()
 void WLANImp::accept()
 {
   if ( writeConfig() ){
-    interfaceSetup->saveChanges();
-    QDialog::accept();
+    if(interfaceSetup->saveChanges())
+      QDialog::accept();
   }
 }
 

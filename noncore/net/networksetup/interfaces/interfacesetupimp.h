@@ -12,11 +12,12 @@ class InterfaceSetupImp : public InterfaceSetup {
 	
 public:
   InterfaceSetupImp( QWidget* parent = 0, const char* name = 0, Interface *i=0, WFlags fl = 0);
-  void saveChanges();
+  bool saveChanges();
   
 public slots:
   void setProfile(const QString &profile);
   bool saveSettings();
+
 private:
   Interfaces *interfaces;
   Interface *interface;
@@ -43,8 +44,8 @@ private:
 
 protected slots:
   void accept(){
-    interfaceSetup->saveChanges();
-    QDialog::accept();
+    if(interfaceSetup->saveChanges())
+      QDialog::accept();
   };
 
 };
