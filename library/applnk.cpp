@@ -50,7 +50,7 @@ static int bigSize = 32;
 static QString safeFileName(const QString& n)
 {
     QString safename=n;
-    safename.replace(QRegExp("[^0-9A-Za-z.]"),"_");
+    safename.replace(QRegExp("[^0-9A-Za-z.]"),"_"); // Njaard says this is broken
     safename.replace(QRegExp("^[^A-Za-z]*"),"");
     if ( safename.isEmpty() )
 	safename = "_";
@@ -295,7 +295,7 @@ QString AppLnk::type() const
 QString AppLnk::file() const
 {
     if ( mFile.isNull() ) {
-	AppLnk* that = (AppLnk*)this;
+	AppLnk* that = (AppLnk*)this; // copy?
 	QString ext = MimeType(mType).extension();
 	if ( !ext.isEmpty() )
 	    ext = "." + ext;
@@ -306,13 +306,15 @@ QString AppLnk::file() const
 	} else if ( mType.contains('/') ) {
 	    that->mFile =
 		QString(getenv("HOME"))+"/Documents/"+mType+"/"+safeFileName(that->mName);
-	    if ( QFile::exists(that->mFile+ext) || QFile::exists(that->mFile+".desktop") ) {
+	    if ( QFile::exists(that->mFile+ext) || QFile::exists(that->mFile+".desktop") ) { // a .desktop with the same name exists
 		int n=1;
+		qWarning("AppLnk::file() n=1 %s", that->mFile.latin1() );
 		QString nn;
 		while (QFile::exists((nn=(that->mFile+"_"+QString::number(n)))+ext)
 			|| QFile::exists(nn+".desktop"))
 		    n++;
 		that->mFile = nn;
+		qWarning("AppLnl::file() now mFile is %s", that->mFile.latin1() );
 	    }
 	    that->mLinkFile = that->mFile+".desktop";
 	    that->mFile += ext;
@@ -343,14 +345,24 @@ QString AppLnk::linkFile() const
 	    } else
 		that->mLinkFile = getenv( "HOME" );
 	    that->mLinkFile += "/Documents/"+type()+"/"+safeFileName(that->mName);
-	    if ( QFile::exists(that->mLinkFile+".desktop") ) {
+	    if ( QFile::exists(that->mLinkFile+".desktop") ) { // ok the file exists lets check if we point to the same file
 		int n=1;
 		QString nn;
-		while (QFile::exists((nn=that->mLinkFile+"_"+QString::number(n))+".desktop"))
+		AppLnk lnk( that->mLinkFile+".desktop" );
+		if(that->file() != lnk.file() ){
+		  qWarning("AppLnk::linkFile exists %s", that->mLinkFile.latin1() );
+		  while (QFile::exists((nn=that->mLinkFile+"_"+QString::number(n))+".desktop")){
 		    n++;
-		that->mLinkFile = nn;
+		    AppLnk lnk(nn ); // just to be sure
+		    if(lnk.file() ==that->file() ){ 
+		      break;
+		    }   
+		  }    
+		  that->mLinkFile = nn;
+		}
 	    }
 	    that->mLinkFile += ".desktop";
+	    qWarning("AppLnk::linkFile is %s", that->mLinkFile.latin1() );
 	    storeLink();
 	}
 	return that->mLinkFile;
