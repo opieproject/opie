@@ -1,10 +1,10 @@
 /****************************************************************************
-** formatter.cpp
-**
-** Copyright: Thu Apr 11 11:01:13 2002
-**      by:  L. J. Potter
-**
-****************************************************************************/
+ ** formatter.cpp
+ **
+ ** Copyright: Thu Apr 11 11:01:13 2002
+ **      by:  L. J. Potter
+ **
+ ****************************************************************************/
 
 #include "formatter.h"
 #include "inputDialog.h"
@@ -53,13 +53,13 @@
 #define DELIMITER '#'
 
 /* 
-Blah blah blah blah */
+   Blah blah blah blah */
 FormatterApp::FormatterApp( QWidget* parent,  const char* name, bool modal, WFlags fl )
-    : QMainWindow( parent, name, fl )
+        : QMainWindow( parent, name, fl )
 //    : QDialog( parent, name, modal, fl )
 {
     if ( !name )
-  setName( "FormatterApp" );
+        setName( "FormatterApp" );
     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
 
     setCaption( tr( "Formatter" ) );
@@ -71,49 +71,52 @@ FormatterApp::FormatterApp( QWidget* parent,  const char* name, bool modal, WFla
 
     tab = new QWidget( TabWidget, "tab" );
     tabLayout = new QGridLayout( tab ); 
-    tabLayout->setSpacing( 6);
-    tabLayout->setMargin( 11);
+    tabLayout->setSpacing( 3);
+    tabLayout->setMargin( 2);
 
     storageComboBox = new QComboBox( FALSE, tab, "storageComboBox" );
+    storageComboBox->setMaximumWidth(220);
 
-    tabLayout->addMultiCellWidget( storageComboBox, 0, 0, 0, 1 );
+    tabLayout->addMultiCellWidget( storageComboBox, 0, 0, 0, 0 );
 
     TextLabel4 = new QLabel( tab, "TextLabel4" );
     TextLabel4->setText( tr( "Storage Type" ) );
 
-    tabLayout->addMultiCellWidget( TextLabel4, 1, 1, 0, 1 );
+    tabLayout->addMultiCellWidget( TextLabel4, 1, 1, 0, 0 );
 
     TextLabel2 = new QLabel( tab, "TextLabel2" );
     TextLabel2->setText( tr( "File Systems" ) );
 
-    tabLayout->addMultiCellWidget( TextLabel2, 4, 4, 0, 1 );
+    tabLayout->addMultiCellWidget( TextLabel2, 4, 4, 0, 0 );
 
     fileSystemsCombo = new QComboBox( FALSE, tab, "fileSystemsCombo" );
+    fileSystemsCombo->setMaximumWidth(220);
 
-    tabLayout->addMultiCellWidget( fileSystemsCombo, 3, 3, 0, 1 );
-    QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
-    tabLayout->addItem( spacer, 2, 1 );
+    tabLayout->addMultiCellWidget( fileSystemsCombo, 3, 3, 0, 0 );
+    QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Minimum );
+    tabLayout->addItem( spacer, 2, 0 );
 
     formatPushButton = new QPushButton( tab, "formatPushButton" );
     formatPushButton->setText( tr( "Format" ) );
-
-    tabLayout->addMultiCellWidget( formatPushButton, 6, 6, 0, 1 );
-    QSpacerItem* spacer_2 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
+    formatPushButton->setMaximumWidth(170);
+    
+    tabLayout->addMultiCellWidget( formatPushButton, 6, 6, 0, 0 );
+    QSpacerItem* spacer_2 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Minimum );
     tabLayout->addItem( spacer_2, 5, 0 );
     TabWidget->insertTab( tab, tr( "Main" ) );
 
     tab_2 = new QWidget( TabWidget, "tab_2" );
     tabLayout_2 = new QGridLayout( tab_2 ); 
-    tabLayout_2->setSpacing( 6);
-    tabLayout_2->setMargin( 11);
+    tabLayout_2->setSpacing(3);
+    tabLayout_2->setMargin(2);
 
     mountPointLineEdit = new QLineEdit( tab_2, "mountPointLineEdit" );
 
-    tabLayout_2->addMultiCellWidget( mountPointLineEdit, 0, 0, 0, 1 );
+    tabLayout_2->addMultiCellWidget( mountPointLineEdit, 0, 0, 0, 0 );
 
     deviceComboBox = new QComboBox( FALSE, tab_2, "deviceComboBox" );
 
-    tabLayout_2->addMultiCellWidget( deviceComboBox, 3, 3, 0, 1 );
+    tabLayout_2->addMultiCellWidget( deviceComboBox, 3, 3, 0, 0 );
 
     TextLabel5 = new QLabel( tab_2, "TextLabel5" );
     TextLabel5->setText( tr( "CAUTION:\n"
@@ -121,7 +124,7 @@ FormatterApp::FormatterApp( QWidget* parent,  const char* name, bool modal, WFla
                              "page may cause your system \n"
                              "to stop functioning properly!!" ) );//idiot message
 
-    tabLayout_2->addMultiCellWidget( TextLabel5, 6, 6, 0, 1 );
+    tabLayout_2->addMultiCellWidget( TextLabel5, 6, 6, 0, 0 );
 
     editPushButton = new QPushButton( tab_2, "editPushButton" );
     editPushButton->setText( tr( "Edit fstab" ) );
@@ -131,19 +134,19 @@ FormatterApp::FormatterApp( QWidget* parent,  const char* name, bool modal, WFla
     fsckButton = new QPushButton( tab_2, "fsckPushButton" );
     fsckButton->setText( tr( "Check Disk" ) );
 
-    tabLayout_2->addMultiCellWidget( fsckButton, 7, 7, 1, 1 );
+    tabLayout_2->addMultiCellWidget( fsckButton, 7, 7, 1, 0 );
 
     TextLabel3 = new QLabel( tab_2, "TextLabel3" );
     TextLabel3->setText( tr( "Device" ) );
 
-    tabLayout_2->addMultiCellWidget( TextLabel3, 4, 4, 0, 1 );
+    tabLayout_2->addMultiCellWidget( TextLabel3, 4, 4, 0, 0 );
     QSpacerItem* spacer_3 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
     tabLayout_2->addItem( spacer_3, 5, 0 );
 
     TextLabel1 = new QLabel( tab_2, "TextLabel1" );
     TextLabel1->setText( tr( "Mount Point" ) );
 
-    tabLayout_2->addMultiCellWidget( TextLabel1, 1, 1, 0, 1 );
+    tabLayout_2->addMultiCellWidget( TextLabel1, 1, 1, 0, 0 );
     QSpacerItem* spacer_4 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
     tabLayout_2->addItem( spacer_4, 2, 1 );
     TabWidget->insertTab( tab_2, tr( "Advanced" ) );
@@ -162,12 +165,7 @@ FormatterApp::FormatterApp( QWidget* parent,  const char* name, bool modal, WFla
     fillCombos();
 }
 
-/*  
- *  Destroys the object and frees any allocated resources
- frickin no duh?!?
- */
-FormatterApp::~FormatterApp()
-{
+FormatterApp::~FormatterApp() {
 
 }
 
@@ -326,7 +324,7 @@ void FormatterApp::fillCombos() {
         }
 //        deviceComboBox->insertItem(disk);
     }
-     parsetab("/etc/mtab");
+    parsetab("/etc/mtab");
 //    parsetab("/etc/fstab");
     fileSystemsCombo->insertStringList( fsList,-1);
     deviceComboBox->insertStringList( deviceList,-1);
@@ -351,7 +349,7 @@ void FormatterApp::storageComboSelected(int index ) {
 //    qDebug(fsType);
     for(int i = 0; i < fileSystemsCombo->count(); i++) {
         if( fsType == fileSystemsCombo->text(i))
-             fileSystemsCombo->setCurrentItem(i);
+            fileSystemsCombo->setCurrentItem(i);
     }
 //    deviceComboSelected(index);     
 }
@@ -391,7 +389,7 @@ void FormatterApp::deviceComboSelected(int index) {
     }
     fsType = getFileSystemType((const QString &)selectedText);
 
-    TextLabel5->setText("Type: "+ nameS+" Formatted with "+ fsType + " \n" + totalS + usedS + avS);
+    TextLabel5->setText("Type: "+ nameS+"\nFormatted with "+ fsType + " \n" + totalS + usedS + avS);
 //     storageComboSelected(0);
 }
 
@@ -421,7 +419,7 @@ void FormatterApp::parsetab(const QString &fileName) {
                     & filesystemType.find("proc",0,TRUE) == -1
                     & filesystemType.find("cramfs",0,TRUE) == -1
                     & filesystemType.find("auto",0,TRUE) == -1)
-                fsList << filesystemType;
+                    fsList << filesystemType;
                 deviceList << deviceName;
                 qDebug(deviceName+"::"+filesystemType);
                 fileSystemTypeList << deviceName+"::"+filesystemType;
@@ -490,64 +488,64 @@ bool FormatterApp::doFsck() {
     if(fsType == "ext2") cmd = "e2fsck -cpvy ";
     cmd += selectedDevice + " 2>&1";
 
-          outDlg = new Output(this, tr("Formatter Output"),FALSE);
-          outDlg->showMaximized();
-          outDlg->show();
-          qApp->processEvents();
-          FILE *fp;
-          char line[130];
-          outDlg->OutputEdit->append( tr("Trying to umount."));
-          outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
+    outDlg = new Output(this, tr("Formatter Output"),FALSE);
+    outDlg->showMaximized();
+    outDlg->show();
+    qApp->processEvents();
+    FILE *fp;
+    char line[130];
+    outDlg->OutputEdit->append( tr("Trying to umount."));
+    outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
 
-          sleep(1);
+    sleep(1);
 //          qDebug("Command is "+umountS);
-          fp = popen(  (const char *) umountS, "r");
+    fp = popen(  (const char *) umountS, "r");
 //          qDebug("%d", fp);
-          if ( !fp ) {
-              qDebug("Could not execute '" + umountS + "'!\n" +(QString)strerror(errno)); 
-              QMessageBox::warning( this, tr("Formatter"), tr("umount failed!"), tr("&OK") );
-              pclose(fp);             
-              return false;
-          } else {
-//               outDlg->OutputEdit->append( currentText + tr("\nhas been successfully umounted."));
+    if ( !fp ) {
+        qDebug("Could not execute '" + umountS + "'!\n" +(QString)strerror(errno)); 
+        QMessageBox::warning( this, tr("Formatter"), tr("umount failed!"), tr("&OK") );
+        pclose(fp);             
+        return false;
+    } else {
+//             outDlg->OutputEdit->append( currentText + tr("\nhas been successfully umounted."));
 //             outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
-              while ( fgets( line, sizeof line, fp)) {
-                  if( ((QString)line).find("busy",0,TRUE) != -1) {
-                      qDebug("Could not find '" + umountS); 
-                      QMessageBox::warning( this, tr("Formatter"), tr("Could not umount.\nDevice is busy!"), tr("&OK") );
-                      pclose(fp);             
-              return false;
-                  } else {
-                      QString lineStr = line;
-                      lineStr=lineStr.left(lineStr.length()-1);
-                      outDlg->OutputEdit->append(lineStr);
-                      outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
-                  }
-              }
-          }
-          pclose(fp);             
+        while ( fgets( line, sizeof line, fp)) {
+            if( ((QString)line).find("busy",0,TRUE) != -1) {
+                qDebug("Could not find '" + umountS); 
+                QMessageBox::warning( this, tr("Formatter"), tr("Could not umount.\nDevice is busy!"), tr("&OK") );
+                pclose(fp);             
+                return false;
+            } else {
+                QString lineStr = line;
+                lineStr=lineStr.left(lineStr.length()-1);
+                outDlg->OutputEdit->append(lineStr);
+                outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
+            }
+        }
+    }
+    pclose(fp);             
 /////////////////////////////////////
-          fp = popen(  (const char *) cmd, "r"); 
-          while ( fgets( line, sizeof line, fp)) {
-              if( ((QString)line).find("No such device",0,TRUE) != -1) {
-                  qDebug("No such device '" + umountS); 
-                  QMessageBox::warning( this, tr("Formatter"), tr("No such device!"), tr("&OK") );
-                  pclose(fp);             
+    fp = popen(  (const char *) cmd, "r"); 
+    while ( fgets( line, sizeof line, fp)) {
+        if( ((QString)line).find("No such device",0,TRUE) != -1) {
+            qDebug("No such device '" + umountS); 
+            QMessageBox::warning( this, tr("Formatter"), tr("No such device!"), tr("&OK") );
+            pclose(fp);             
 //               outDlg->OutputEdit->append("No such device");
 //             outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
-              return false;
-              } else {
-                  QString lineStr = line;
-                  lineStr=lineStr.left(lineStr.length()-1);
-                  outDlg->OutputEdit->append(lineStr);
-                  outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
-              }
-          }
-          outDlg->OutputEdit->append(tr("You can now close the output window."));
-          outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
+            return false;
+        } else {
+            QString lineStr = line;
+            lineStr=lineStr.left(lineStr.length()-1);
+            outDlg->OutputEdit->append(lineStr);
+            outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
+        }
+    }
+    outDlg->OutputEdit->append(tr("You can now close the output window."));
+    outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
 //           outDlg->OutputEdit->append( currentText + tr("\nhas been successfully formatted."));
 //           outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
-          pclose(fp);             
+    pclose(fp);             
 
 /////////////////////////////////////////    
 
