@@ -3,7 +3,7 @@ Files: i18n/pl/.directory i18n/pl/*.qm
 Priority: optional
 Section: opie/i18n
 Maintainer: Daniel Grabowski <daniel@handhelds.org>
-Architecture: arm
+Architecture: all
 Depends: task-opie-minimal, opie-language
 Description: Polish
  Polish UI texts and dictionary for Opie environment.

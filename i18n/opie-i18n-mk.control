@@ -3,7 +3,7 @@ Files: i18n/mk/.directory i18n/mk/*.qm
 Priority: optional
 Section: opie/i18n
 Maintainer: Darko Nikolovski <arkon@macedonia.homelinux.org>
-Architecture: arm
+Architecture: all
 Depends: task-opie-minimal, opie-language
 Description: Makedonian
  Makedonian UI texts and dictionary for Opie environment.

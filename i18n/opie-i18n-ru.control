@@ -3,7 +3,7 @@ Files: i18n/ru/.directory i18n/ru/*.qm
 Priority: optional
 Section: opie/i18n
 Maintainer: Sergei Klink <sklink@yandex.ru>
-Architecture: arm
+Architecture: all
 Depends: task-opie-minimal, opie-language
 Description: Russian
  Russian UI texts and dictionary for Opie environment.

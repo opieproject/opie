@@ -3,7 +3,7 @@ Files: i18n/fr/.directory i18n/fr/*.qm etc/dict/dawg.fr
 Priority: optional
 Section: opie/i18n
 Maintainer: Amrein-Marie Christophe <christophe@handhelds.org>
-Architecture: arm
+Architecture: all
 Depends: task-opie-minimal, opie-language
 Description: French
  French UI texts and dictionary for Opie environment.

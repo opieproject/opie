@@ -3,7 +3,7 @@ Files: i18n/es/.directory i18n/es/*.qm etc/dict/dawg.es
 Priority: optional
 Section: opie/i18n
 Maintainer: Jose Luis Fernandez Barros <fbarros@handhelds.org>
-Architecture: arm
+Architecture: all
 Depends: task-opie-minimal, opie-language
 Description: Spanish
  Spanish UI texts and dictionary for Opie environment.

@@ -3,7 +3,7 @@ Files: i18n/it/.directory i18n/it/*.qm
 Priority: optional
 Section: opie/i18n
 Maintainer: Daniele Foci <sunscan@sunscan.org>
-Architecture: arm
+Architecture: all
 Depends: task-opie-minimal, opie-language
 Description: Italian
  Italian UI texts and dictionary for Opie environment.
