@@ -67,19 +67,20 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
 
     FileStack = new QWidgetStack( this );
 
-	 ListView = new QListView( this, "ListView" );
+   ListView = new QListView( this, "ListView" );
     ListView->setMinimumSize( QSize( 100, 25 ) );
     ListView->addColumn( tr( "Name" ) );
-    ListView->setColumnWidth(0,140);
+    ListView->setColumnWidth(0,120);
     ListView->setSorting( 2, FALSE);
     ListView->addColumn( tr( "Size" ) );
-    ListView->setColumnWidth(1,59);
+    ListView->setColumnWidth(1,-1);
+    ListView->addColumn( "Date",-1);
 //      ListView->addColumn( tr( "" ) );
     ListView->setColumnWidthMode(0,QListView::Manual);
     ListView->setColumnAlignment(1,QListView::AlignRight);
-//      ListView->setMultiSelection(true);
-//      ListView->setSelectionMode(QListView::Extended);
+    ListView->setColumnAlignment(2,QListView::AlignRight);
     ListView->setAllColumnsShowFocus( TRUE );
+
     connect( ListView, SIGNAL(pressed( QListViewItem*)), SLOT(listClicked(QListViewItem *)) );
     FileStack->addWidget( ListView, get_unique_id() );
 
@@ -118,13 +119,14 @@ void fileBrowser::setFileView( int selection )
 void fileBrowser::populateList()
 {
     ListView->clear();
+    bool isDir=FALSE;
 //qDebug(currentDir.canonicalPath());
     currentDir.setSorting(/* QDir::Size*/ /*| QDir::Reversed | */QDir::DirsFirst);
     currentDir.setMatchAllDirs(TRUE);
 
     currentDir.setNameFilter(filterStr);
 //    currentDir.setNameFilter("*.txt;*.etx");
-    QString fileL, fileS;
+    QString fileL, fileS, fileDate;
     const QFileInfoList *list = currentDir.entryInfoList( /*QDir::All*/ /*, QDir::SortByMask*/);
     QFileInfoListIterator it(*list);
     QFileInfo *fi;
@@ -136,20 +138,30 @@ void fileBrowser::populateList()
          QFileInfo sym( symLink);
             fileS.sprintf( "%10li", sym.size() );
             fileL.sprintf( "%s ->  %s",  sym.fileName().data(),sym.absFilePath().data() );
-
+            fileDate = sym.lastModified().toString();
         } else {
 //        qDebug("Not a dir: "+currentDir.canonicalPath()+fileL);
             fileS.sprintf( "%10li", fi->size() );
             fileL.sprintf( "%s",fi->fileName().data() );
+            fileDate= fi->lastModified().toString();
             if( QDir(QDir::cleanDirPath(currentDir.canonicalPath()+"/"+fileL)).exists() ) {
                 fileL+="/";
+                isDir=TRUE;
 //     qDebug( fileL);
             }
         }
-        item= new QListViewItem( ListView,fileL,fileS );
+        if(fileL !="./") {
+        item= new QListViewItem( ListView,fileL,fileS , fileDate);
+        if(isDir || fileL.find("/",0,TRUE) != -1)
+            item->setPixmap( 0,  Resource::loadPixmap( "folder" ));
+        else
+            item->setPixmap( 0, Resource::loadPixmap( "fileopen" ));
+        }        
+        isDir=FALSE;
         ++it;
     }
-    ListView->setSorting( 2, FALSE);
+//    ListView->setSorting( 2, FALSE);
+    ListView->setSorting( 3, FALSE);
     dirLabel->setText(currentDir.canonicalPath());
 }
 

@@ -356,7 +356,6 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     connect( searchEdit, SIGNAL( textChanged( const QString & ) ),
        this, SLOT( search() ) );
 
-
     a = new QAction( tr( "Find Next" ), Resource::loadPixmap( "next" ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( findNext() ) );
     a->addTo( searchBar );
@@ -419,7 +418,7 @@ TextEdit::~TextEdit()
     cfg.writeEntry("Bold",f.bold());
     cfg.writeEntry("Italic",f.italic());
     cfg.writeEntry("Wrap",editor->wordWrap() == QMultiLineEdit::WidgetWidth);
-	 cfg.writeEntry( "FileView", viewSelection );
+   cfg.writeEntry( "FileView", viewSelection );
 }
 
 void TextEdit::zoomIn()
@@ -517,6 +516,10 @@ void TextEdit::fileOpen()
     edited=FALSE;
     if(caption().left(1)=="*")
         setCaption(caption().right(caption().length()-1));
+    Config cfg("TextEdit");
+    cfg.setGroup("View");
+    if(cfg.readEntry("SearchBar","Closed") != "Opened")
+    searchBar->hide();
 }
 
 #if 0
@@ -571,6 +574,10 @@ void TextEdit::editFind()
     searchBar->show();
     searchVisible = TRUE;
     searchEdit->setFocus();
+    Config cfg("TextEdit");
+    cfg.setGroup("View");
+    cfg.writeEntry("SearchBar","Opened");
+    
 }
 
 void TextEdit::findNext()
@@ -583,6 +590,10 @@ void TextEdit::findClose()
 {
     searchVisible = FALSE;
     searchBar->hide();
+    Config cfg("TextEdit");
+    cfg.setGroup("View");
+    cfg.writeEntry("SearchBar","Closed");
+    cfg.write();
 }
 
 void TextEdit::search()
