@@ -1,6 +1,6 @@
 [Desktop Entry]
 Exec=qashmoney
-Icon=qashmoney.png
+Icon=qashmoney/qashmoney.png
 Terminal=false
 Type=Application
 Name=QashMoney
