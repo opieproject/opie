@@ -16,11 +16,11 @@
     </message>
     <message>
         <source>attach...</source>
-        <translation>attache...</translation>
+        <translation>Attacher...</translation>
     </message>
     <message>
         <source>Adding attachments</source>
-        <translation>Ajout de(s) fichier(s)</translation>
+        <translation>Ajout de fichier</translation>
     </message>
 </context>
 <context>
@@ -47,11 +47,13 @@
     </message>
     <message>
         <source>POP username</source>
-        <translation>Nom Utilisateur POP</translation>
+        <translation>Nom Utilisateur
+POP</translation>
     </message>
     <message>
         <source>POP password</source>
-        <translation>Mot de passe POP</translation>
+        <translation>Mot de passe
+POP</translation>
     </message>
     <message>
         <source>POP server</source>
@@ -67,7 +69,8 @@
     </message>
     <message>
         <source>Mail Size (k)</source>
-        <translation>Taille Messages (k)</translation>
+        <translation>Taille
+Message (Ko)</translation>
     </message>
 </context>
 <context>
@@ -86,7 +89,7 @@
     </message>
     <message>
         <source>Get Mail in</source>
-        <translation>Recevoir Messages dans</translation>
+        <translation>Recevoir Messages</translation>
     </message>
     <message>
         <source>Edit account</source>
@@ -588,23 +591,25 @@ Cliquez et garder la pression pour plus d&apos;options.</translation>
     </message>
     <message>
         <source>Incorrect recipient separator</source>
-        <translation>Séparateur de destinataire incorrecte</translation>
+        <translation>Séparateur destinataire incorrecte</translation>
     </message>
     <message>
         <source>Recipients must be separated by ;
 and be valid emailaddresses</source>
-        <translation>Les destinataires doivent être séparés par ;
-et être des adresses Emails valides</translation>
+        <translation>Les destinataires doivent être
+séparés par ; et être des
+adresses E-Mails valides</translation>
     </message>
     <message>
         <source>Incorrect carbon copy separator</source>
-        <translation>Séparateur des destinataires en copie incorrect</translation>
+        <translation>Séparateur copie carbone incorrect</translation>
     </message>
     <message>
         <source>CC Recipients must be separated by ;
 and be valid emailaddresses</source>
-        <translation>Les destinataires en copie doivent être séparés par ;
-et être des adresses Emails valides</translation>
+        <translation>Les destinataires en copie doivent
+être séparés par ; et être des
+adresses E-Mails valides</translation>
     </message>
     <message>
         <source>Re: </source>
