@@ -41,7 +41,6 @@ OYatzee::OYatzee( QWidget *parent , const char *name, WFlags fl ) : QMainWindow(
 
 	sb = new Scoreboard( thing , "sb" );
 	dw = new DiceWidget( thing , "dw" );
-
 	
 	vbox->addWidget( sb );
 	vbox->addWidget( dw );
@@ -122,7 +121,11 @@ Dice::Dice( QWidget *parent , const char *name ) : QFrame( parent , name )
 
 void Dice::slotSelected()
 {
-	qDebug( QString::number( Value ) );
+	if ( isSelected )
+		isSelected = false;
+	else isSelected = true;
+
+	update();
 }
 
 int Dice::hasValue()
@@ -149,6 +152,9 @@ void Dice::paintEvent( QPaintEvent * )
 	p.begin( this );
 
 	p.drawRect( 0,0, this->width() , this->height() );
+
+	if ( isSelected )
+		p.drawRect( 20,20, 10,10 );
 
 	paintNumber( &p );
 }

@@ -1,4 +1,4 @@
-#include "wordgame.h"
+#include "oyatzee.h"
 
 #include <qpe/qpeapplication.h>
 

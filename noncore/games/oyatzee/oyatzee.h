@@ -47,6 +47,7 @@ class Dice : public QFrame
 		Dice( QWidget* parent = 0, const char* name = 0 );
 
 		int Value;
+		bool isSelected;
 
 		int hasValue();
 		void roll();
