@@ -27,6 +27,9 @@ or
 export OPIEDIR=~/projects/sources/opie
 or where ever you placed Opie sources.
 
+and then do:
+export LD_LIBRARY_PATH=$OPIEDIR/lib:$QTDIR/lib:$LD_LIBRARY_PATH
+
 You will want to apply the patches in the $OPIEDIR/qt directory to qt-embedded-2.3.7
 
 qte234-for-opie091-gfxraster.patch
