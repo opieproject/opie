@@ -9,6 +9,7 @@
 #include <qpe/timestring.h>
 #include <qpe/datebookmonth.h>
 #include <qpe/config.h>
+#include <qpe/resource.h>
 
 #include <qdatetime.h>
 #include <qheader.h>
@@ -35,7 +36,9 @@ DateBookWeekLstHeader::DateBookWeekLstHeader(bool onM, QWidget* parent,
     labelDate->setBackgroundMode( PaletteButton );
     labelWeek->setBackgroundMode( PaletteButton );
     forward->setBackgroundMode( PaletteButton );
+    forward->setPixmap( Resource::loadPixmap("forward") );
     back->setBackgroundMode( PaletteButton );
+    back->setPixmap( Resource::loadPixmap("back") );
     DateBookWeekLstHeaderBaseLayout->setSpacing(0);
     DateBookWeekLstHeaderBaseLayout->setMargin(0);
     //setSizePolicy(QSizePolicy(QSizePolicy::Fixed,QSizePolicy::Expanding));
