@@ -1,4 +1,4 @@
-#  config #BLUE-PIN
-#    boolean "blue-pin"
-#    default "y"
-#    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+  config #BLUE-PIN
+    boolean "blue-pin"
+    default "y"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

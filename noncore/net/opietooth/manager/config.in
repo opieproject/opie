@@ -1,4 +1,4 @@
-#  config #MANAGER
-#    boolean "manager"
-#    default "y"
-#    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+  config #MANAGER
+    boolean "manager"
+    default "y"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
