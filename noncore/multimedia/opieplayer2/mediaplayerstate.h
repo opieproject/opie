@@ -50,19 +50,19 @@ public:
     MediaPlayerState( QObject *parent, const char *name );
     ~MediaPlayerState();
 
-    bool isStreaming() const;
-    bool isSeekable() const;
-    bool isFullscreen() const;
-    bool isScaled() const;
-    bool isLooping() const;
-    bool isShuffled() const;
-    bool isUsingPlaylist() const;
-    bool isPaused() const;
-    bool isPlaying() const;
-    bool isStop() const;
-    long position() const;
-    long length() const;
-    char view() const;
+    bool isStreaming() const { return streaming; }
+    bool isSeekable() const { return seekable; }
+    bool isFullscreen() const { return fullscreen; }
+    bool isScaled() const { return scaled; }
+    bool isLooping() const { return looping; }
+    bool isShuffled() const { return shuffled; }
+    bool isUsingPlaylist() const { return usePlaylist; }
+    bool isPaused() const { return paused; }
+    bool isPlaying() const { return playing; }
+    bool isStop() const { return stoped; }
+    long position() const { return curPosition; }
+    long length() const { return curLength; }
+    char view() const { return curView; }
 
 public slots:
     void setIsStreaming( bool b );

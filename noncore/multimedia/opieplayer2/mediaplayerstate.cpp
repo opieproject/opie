@@ -88,63 +88,6 @@ void MediaPlayerState::writeConfig( Config& cfg ) const {
     cfg.writeEntry( "VideoGamma",  videoGamma );
 }
 
-
-// public stuff
-
-
-bool MediaPlayerState::isStreaming() const {
-    return streaming;
-}
-
-bool MediaPlayerState::isSeekable() const {
-    return seekable;
-}
-
-bool MediaPlayerState::isFullscreen() const {
-    return fullscreen;
-}
-
-bool MediaPlayerState::isScaled() const {
-    return scaled;
-}
-
-bool MediaPlayerState::isLooping() const {
-    return looping;
-}
-
-bool MediaPlayerState::isShuffled() const {
-    return shuffled;
-}
-
-
-bool MediaPlayerState::isUsingPlaylist() const {
-    return usePlaylist;
-}
-
-bool MediaPlayerState::isPaused() const {
-    return paused;
-}
-
-bool MediaPlayerState::isPlaying() const {
-    return playing;
-}
-
-bool MediaPlayerState::isStop() const {
-    return stoped;
-}
-
-long MediaPlayerState::position() const {
-    return curPosition;
-}
-
-long MediaPlayerState::length() const {
-    return curLength;
-}
-
-char MediaPlayerState::view() const {
-    return curView;
-}
-
 // slots
 void MediaPlayerState::setIsStreaming( bool b ) {
 
