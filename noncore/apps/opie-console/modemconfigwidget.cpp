@@ -34,8 +34,9 @@ ModemConfigWidget::ModemConfigWidget( const QString& name, QWidget* parent,
 
     QLabel* telLabel = new QLabel( this );
     telLabel->setText( tr( "Enter telefon number here:" ) );
-    m_telNumber = new QLineEdit( this );
+    // m_telNumber = new QLineEdit( this );
     QHBox *buttonBox = new QHBox( this );
+    m_telNumber = new QLineEdit( buttonBox );
     QPushButton *atButton = new QPushButton( buttonBox );
     atButton->setText( tr( "AT commands" ) );
     // disabled for now
@@ -46,15 +47,14 @@ ModemConfigWidget::ModemConfigWidget( const QString& name, QWidget* parent,
     dialButton->setText( tr( "Enter number" ) );
     connect( dialButton, SIGNAL( clicked() ), this, SLOT( slotDial() ) );
 
-
     m_base = new IOLayerBase( this, "base" );
 
     m_lay->addWidget( m_device );
     m_lay->addWidget( m_deviceCmb );
     m_lay->addWidget( telLabel );
-    m_lay->addWidget( m_telNumber );
     m_lay->addWidget( buttonBox );
     m_lay->addWidget( m_base );
+    m_lay->addStretch( 0 );
 
     m_deviceCmb->insertItem( "/dev/ttyS0" );
     m_deviceCmb->insertItem( "/dev/ttyS1" );
@@ -71,6 +71,8 @@ void ModemConfigWidget::load( const Profile& prof ) {
     int rad_flow = prof.readNumEntry( "Flow" );
     int rad_parity = prof.readNumEntry( "Parity" );
     int speed = prof.readNumEntry( "Speed" );
+    int dbits = prof.readNumEntry("DataBits");
+    int sbits = prof.readNumEntry("StopBits");
     QString number = prof.readEntry( "Number" );
 
     if ( !number.isEmpty() ) {
@@ -113,6 +115,27 @@ void ModemConfigWidget::load( const Profile& prof ) {
         break;
     }
 
+
+    if ( dbits == 5) {
+        m_base->setData( IOLayerBase::Data_Five );
+    } else if (rad_flow == 6) {
+        m_base->setData( IOLayerBase::Data_Six );
+    } else if (rad_flow == 7) {
+        m_base->setData( IOLayerBase::Data_Seven );
+    } else {
+        m_base->setData( IOLayerBase::Data_Eight );
+    }
+
+    if ( sbits == 2) {
+        m_base->setStop( IOLayerBase::Stop_Two );
+    } else if ( sbits == 15 ) {
+        m_base->setStop( IOLayerBase::Stop_OnePointFive );
+    } else {
+        m_base->setStop( IOLayerBase::Stop_One );
+    }
+
+
+
     if ( prof.readEntry( "Device" ).isEmpty() ) {
         return;
     }
@@ -127,8 +150,8 @@ void ModemConfigWidget::load( const Profile& prof ) {
  * parity
  */
 void ModemConfigWidget::save( Profile& prof ) {
-    int flow, parity, speed;
-    flow = parity = speed = 0;
+    int flow, parity, speed, data, stop;
+    flow = parity = speed = data = stop = 0;
     prof.writeEntry( "Device", m_deviceCmb->currentText() );
 
 
@@ -174,9 +197,38 @@ void ModemConfigWidget::save( Profile& prof ) {
         break;
     }
 
+    switch( m_base->data() ) {
+    case IOLayerBase::Data_Five:
+        data = 5;
+        break;
+    case IOLayerBase::Data_Six:
+        data = 6;
+        break;
+    case IOLayerBase::Data_Seven:
+        data = 7;
+        break;
+    case IOLayerBase::Data_Eight:
+        data = 8;
+        break;
+    }
+
+    switch( m_base->stop() ) {
+    case IOLayerBase::Stop_One:
+        stop = 1;
+        break;
+    case IOLayerBase::Stop_OnePointFive:
+        stop = 15;
+        break;
+    case IOLayerBase::Stop_Two:
+        stop = 2;
+        break;
+    }
+
     prof.writeEntry( "Flow", flow );
     prof.writeEntry( "Parity", parity );
     prof.writeEntry( "Speed", speed );
+    prof.writeEntry("DataBits", data);
+    prof.writeEntry("StopBits", stop);
     prof.writeEntry( "Number", m_telNumber->text() );
 
 
