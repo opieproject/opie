@@ -22,8 +22,11 @@ char MediaDetect::videoOrAudio( const QString& fileName ) {
                 (fileName.lower()).right(4) == ".wav" ) {
         qDebug("AUDIO out taken");
         return 'a';
+    } else if ( (fileName.lower()).left(7) == "http://" &&
+       (fileName.lower()).right(1) == "/" ) {
+        return 'a';
     } else {
-         return 'f';
+        return 'f';
     }
 }
 

@@ -165,8 +165,8 @@ int Lib::play( const QString& fileName,
                int start_time ) {
     QString str = fileName.stripWhiteSpace();
     //workaround OpiePlayer bug
-    if (str.right(1) == QString::fromLatin1("/") )
-        str = str.mid( str.length() -1 );
+    //f (str.right(1) == QString::fromLatin1("/") )
+    //    str = str.mid( str.length() -1 );
     return xine_play( m_xine, QFile::encodeName(str.utf8() ).data(),
                startPos, start_time);
 }

@@ -81,8 +81,9 @@ void Ticker::timerEvent( QTimerEvent * ) {
 }
 
 void Ticker::drawContents( QPainter *p ) {
-  for ( int i = 0; i - pos < width() && (i < 1 || pixelLen > width()); i += pixelLen )
-      p->drawText( i - pos, 0, INT_MAX, height(), AlignVCenter, scrollText );
+    for ( int i = 0; i - pos < width() && (i < 1 || pixelLen > width()); i += pixelLen ) {
+        p->drawText( i - pos, 0, INT_MAX, height(), AlignVCenter, scrollText );
+    }
     QPixmap pm( width(), height() );
     pm.fill( colorGroup().base() );
     QPainter pmp( &pm );
@@ -93,7 +94,7 @@ void Ticker::drawContents( QPainter *p ) {
 }
 
 struct MediaButton {
-   bool isToggle, isHeld, isDown;
+    bool isToggle, isHeld, isDown;
 };
 
 //Layout information for the audioButtons (and if it is a toggle button or not)
@@ -127,17 +128,16 @@ static const int numButtons = (sizeof(audioButtons)/sizeof(MediaButton));
 
 
 AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
-        QWidget( parent, name, f ), songInfo( this ), slider( Qt::Horizontal, this ),  time( this ) {
 
-
+    QWidget( parent, name, f ), songInfo( this ), slider( Qt::Horizontal, this ),  time( this ) {
 
     setCaption( tr("OpiePlayer") );
 
     Config cfg("OpiePlayer");
     cfg.setGroup("Options");
     skin = cfg.readEntry("Skin","default");
-      //skin = "scaleTest";
-// color of background, frame, degree of transparency
+    //skin = "scaleTest";
+    // color of background, frame, degree of transparency
 
     QString skinPath = "opieplayer2/skins/" + skin;
     pixBg = new QPixmap( Resource::loadPixmap( QString("%1/background").arg(skinPath) ) );
@@ -193,7 +193,7 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
     connect( mediaPlayerState, SIGNAL( lengthChanged(long) ),  this, SLOT( setLength(long) ) );
     connect( mediaPlayerState, SIGNAL( viewChanged(char) ),    this, SLOT( setView(char) ) );
     connect( mediaPlayerState, SIGNAL( loopingToggled(bool) ), this, SLOT( setLooping(bool) ) );
-//    connect( mediaPlayerState, SIGNAL( pausedToggled(bool) ),  this, SLOT( setPaused(bool) ) );
+    //    connect( mediaPlayerState, SIGNAL( pausedToggled(bool) ),  this, SLOT( setPaused(bool) ) );
     connect( mediaPlayerState, SIGNAL( playingToggled(bool) ), this, SLOT( setPlaying(bool) ) );
 
     connect( this,  SIGNAL( forwardClicked() ), this, SLOT( skipFor() ) );
@@ -207,7 +207,7 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
     setLength( mediaPlayerState->length() );
     setPosition( mediaPlayerState->position() );
     setLooping( mediaPlayerState->fullscreen() );
-//    setPaused( mediaPlayerState->paused() );
+    //    setPaused( mediaPlayerState->paused() );
     setPlaying( mediaPlayerState->playing() );
 
 }
@@ -236,8 +236,7 @@ QPixmap *combineImageWithBackground( QImage img, QPixmap bg, QPoint offset ) {
 }
 
 
-QPixmap *maskPixToMask( QPixmap pix, QBitmap mask )
-{
+QPixmap *maskPixToMask( QPixmap pix, QBitmap mask ) {
     QPixmap *pixmap = new QPixmap( pix );
     pixmap->setMask( mask );
     return pixmap;
@@ -292,7 +291,7 @@ void AudioWidget::sliderReleased() {
 }
 
 void AudioWidget::setPosition( long i ) {
-//    qDebug("<<<<<<<<<<<<<<<<<<<<<<<<set position %d",i);
+    //    qDebug("<<<<<<<<<<<<<<<<<<<<<<<<set position %d",i);
     updateSlider( i, mediaPlayerState->length() );
 }
 
@@ -304,7 +303,7 @@ void AudioWidget::setLength( long max ) {
 
 void AudioWidget::setView( char view ) {
 
-// this isnt working for some reason
+    // this isnt working for some reason
 
     if ( mediaPlayerState->streaming() ) {
         qDebug("<<<<<<<<<<<<<<file is STREAMING>>>>>>>>>>>>>>>>>>>");
@@ -406,8 +405,8 @@ void AudioWidget::stopSkip() {
 
 
 void AudioWidget::timerEvent( QTimerEvent * ) {
-       if ( skipDirection == +1 ) {
-           mediaPlayerState->setPosition(  mediaPlayerState->position() + 2 );
+    if ( skipDirection == +1 ) {
+        mediaPlayerState->setPosition(  mediaPlayerState->position() + 2 );
     }  else if ( skipDirection == -1 ) {
         mediaPlayerState->setPosition(  mediaPlayerState->position() - 2 );
     }
@@ -442,11 +441,10 @@ void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
                     emit backClicked();
                     return;
                 }
+            } else if ( !isOnButton && audioButtons[i].isHeld ) {
+                audioButtons[i].isHeld = FALSE;
+                toggleButton(i);
             }
-              else if ( !isOnButton && audioButtons[i].isHeld ) {
-                  audioButtons[i].isHeld = FALSE;
-                  toggleButton(i);
-              }
         } else {
             if ( audioButtons[i].isHeld ) {
                 audioButtons[i].isHeld = FALSE;
@@ -522,15 +520,14 @@ void AudioWidget::paintEvent( QPaintEvent * pe) {
     }
 }
 
-void AudioWidget::keyReleaseEvent( QKeyEvent *e)
-{
+void AudioWidget::keyReleaseEvent( QKeyEvent *e) {
     switch ( e->key() ) {
-////////////////////////////// Zaurus keys
+        ////////////////////////////// Zaurus keys
       case Key_Home:
           break;
       case Key_F9: //activity
            hide();
-//           qDebug("Audio F9");
+           //           qDebug("Audio F9");
           break;
       case Key_F10: //contacts
           break;
@@ -544,37 +541,37 @@ void AudioWidget::keyReleaseEvent( QKeyEvent *e)
           break;
       case Key_Space: {
           if(mediaPlayerState->playing()) {
-//                toggleButton(1);
+              //                toggleButton(1);
               mediaPlayerState->setPlaying(FALSE);
-//                toggleButton(1);
+              //                toggleButton(1);
           } else {
-//                toggleButton(0);
+              //                toggleButton(0);
               mediaPlayerState->setPlaying(TRUE);
-//                toggleButton(0);
+              //                toggleButton(0);
           }
       }
           break;
       case Key_Down:
-//              toggleButton(6);
+          //              toggleButton(6);
           emit lessClicked();
           emit lessReleased();
-//          toggleButton(6);
+          //          toggleButton(6);
           break;
       case Key_Up:
-//             toggleButton(5);
+          //             toggleButton(5);
            emit moreClicked();
            emit moreReleased();
-//             toggleButton(5);
+           //             toggleButton(5);
            break;
       case Key_Right:
-//            toggleButton(3);
+          //            toggleButton(3);
           mediaPlayerState->setNext();
-//            toggleButton(3);
+          //            toggleButton(3);
           break;
       case Key_Left:
-//            toggleButton(4);
+          //            toggleButton(4);
           mediaPlayerState->setPrev();
-//            toggleButton(4);
+          //            toggleButton(4);
           break;
       case Key_Escape: {
 #if defined(QT_QWS_IPAQ)
