@@ -54,7 +54,7 @@
     <name>QObject</name>
     <message>
         <source>Wellenreiter: trying to run as non-root!</source>
-        <translation>Wellenreiter als non-root!</translation>
+        <translation>Wellenreiter nicht als Root gestartet!</translation>
     </message>
     <message>
         <source>You have started Wellenreiter II
@@ -71,8 +71,8 @@ zur Verfügung stehen! Weitermachen?</translation>
 This can severly limit scanning!
 Should I kill it for you?</source>
         <translation>Es läuft ein DHCP Client.
-Dies behindert das Scannen!
-Soll ich ihn abschalten?</translation>
+Dies kann das Scannen empfindlich stören.
+Soll er abgeschaltet werden?</translation>
     </message>
 </context>
 <context>
@@ -106,7 +106,7 @@ Monitormodus ein.</translation>
     </message>
     <message>
         <source>Wellenreiter II - replaying capture file...</source>
-        <translation>Wellenreiter II - Spele Capturefile ab...</translation>
+        <translation>Wellenreiter II - Spiele Capturefile ab...</translation>
     </message>
 </context>
 <context>
@@ -127,7 +127,7 @@ Martin J. Muench&lt;br&gt;
 Michael Lauer&lt;br&gt;&lt;hr&gt;
 &lt;b&gt;www.remote-exploit.org&lt;/b&gt;
 &lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p align=center&gt;
+        <translation>&lt;p align=center&gt;
 &lt;hr&gt;
 Max Moser&lt;br&gt;
 Martin J. Muench&lt;br&gt;
@@ -145,7 +145,7 @@ Michael Lauer&lt;br&gt;&lt;hr&gt;
     </message>
     <message>
         <source>Log</source>
-        <translation type="unfinished">Log</translation>
+        <translation>Log</translation>
     </message>
     <message>
         <source>Hex</source>
@@ -172,39 +172,39 @@ Michael Lauer&lt;br&gt;&lt;hr&gt;
     </message>
     <message>
         <source>Sniffer</source>
-        <translation type="unfinished"></translation>
+        <translation>Schnüffler</translation>
     </message>
     <message>
         <source>Choose the interface used for sniffing.</source>
-        <translation>Wählen SIe das gewünschte Netzwerkinterface aus.</translation>
+        <translation>Wählen Sie das gewünschte Netzwerkinterface zum Mithören aus.</translation>
     </message>
     <message>
         <source>&lt;select&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;Auswählen&gt;</translation>
     </message>
     <message>
         <source>cisco</source>
-        <translation type="unfinished"></translation>
+        <translation>Cisco</translation>
     </message>
     <message>
         <source>wlan-ng</source>
-        <translation type="unfinished"></translation>
+        <translation>wlan-ng</translation>
     </message>
     <message>
         <source>hostap</source>
-        <translation type="unfinished"></translation>
+        <translation>hostap</translation>
     </message>
     <message>
         <source>orinoco</source>
-        <translation type="unfinished"></translation>
+        <translation>orinoco</translation>
     </message>
     <message>
         <source>&lt;manual&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;Manuell&gt;</translation>
     </message>
     <message>
         <source>&lt;file&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;Datei&gt;</translation>
     </message>
     <message>
         <source>Choose the type of driver used for sniffing.</source>
@@ -212,15 +212,15 @@ Michael Lauer&lt;br&gt;&lt;hr&gt;
     </message>
     <message>
         <source> ms</source>
-        <translation type="unfinished"></translation>
+        <translation>ms</translation>
     </message>
     <message>
         <source>Choose the channel hop interval.</source>
-        <translation>Wählen Sie das Kanalhop-Intervall.</translation>
+        <translation>Wählen Sie den Kanalwechsel-Intervall.</translation>
     </message>
     <message>
         <source>Hop Interval</source>
-        <translation>Hop-Intervall</translation>
+        <translation>Wechselintervall</translation>
     </message>
     <message>
         <source>Device Type</source>
@@ -232,15 +232,15 @@ Michael Lauer&lt;br&gt;&lt;hr&gt;
     </message>
     <message>
         <source>Fake MAC:</source>
-        <translation>MAC faken:</translation>
+        <translation>MAC-Adresse fälschen:</translation>
     </message>
     <message>
         <source>44:44:44:44:44:44</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Active Scanning (caution!)</source>
-        <translation>Aktives Scannen (Warnung!)</translation>
+        <translation>Aktives Scannen (Vorsicht!)</translation>
     </message>
     <message>
         <source>sound on new net</source>
@@ -248,7 +248,7 @@ Michael Lauer&lt;br&gt;&lt;hr&gt;
     </message>
     <message>
         <source>Ignore</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ignorieren</translation>
     </message>
     <message>
         <source>Touch</source>
@@ -268,19 +268,19 @@ Michael Lauer&lt;br&gt;&lt;hr&gt;
     </message>
     <message>
         <source>Write Capture File</source>
-        <translation>Capture File schreiben</translation>
+        <translation>Capture-Datei schreiben</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>GUI</source>
-        <translation type="unfinished"></translation>
+        <translation>GUI</translation>
     </message>
     <message>
         <source>CaptureFile:</source>
-        <translation type="unfinished"></translation>
+        <translation>Capture-Datei:</translation>
     </message>
 </context>
 <context>
@@ -291,11 +291,11 @@ Michael Lauer&lt;br&gt;&lt;hr&gt;
     </message>
     <message>
         <source>&amp;Text Log...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Text Log...</translation>
     </message>
     <message>
         <source>&amp;Hex Log...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Hex Log...</translation>
     </message>
     <message>
         <source>&amp;New</source>
@@ -319,11 +319,11 @@ Michael Lauer&lt;br&gt;&lt;hr&gt;
     </message>
     <message>
         <source>&amp;Start</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Start</translation>
     </message>
     <message>
         <source>Sto&amp;p</source>
-        <translation type="unfinished"></translation>
+        <translation>Sto&amp;pp</translation>
     </message>
     <message>
         <source>&amp;Add something</source>
@@ -339,11 +339,11 @@ Michael Lauer&lt;br&gt;&lt;hr&gt;
     </message>
     <message>
         <source>&amp;Sniffer</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Schnüffler</translation>
     </message>
     <message>
         <source>&amp;Demo</source>
-        <translation type="unfinished">&amp;Demo</translation>
+        <translation>&amp;Demo</translation>
     </message>
     <message>
         <source>Ready.</source>

@@ -3,15 +3,15 @@
     <name>Board</name>
     <message>
         <source>Blanks: </source>
-        <translation type="unfinished"></translation>
+        <translation>Leerzeichen:</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <source>Unknown word</source>
@@ -38,7 +38,7 @@
     </message>
     <message>
         <source>AI3: Smart AI player</source>
-        <translation type="unfinished"></translation>
+        <translation>KI3: Kluger KI-Spieler</translation>
     </message>
     <message>
         <source>Rules</source>
@@ -69,7 +69,7 @@
     </message>
     <message>
         <source>Edit...</source>
-        <translation>Editieren...</translation>
+        <translation>Bearbeiten...</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -99,27 +99,27 @@
     <name>WordGame</name>
     <message>
         <source>Word Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Wortspiel</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Zurück</translation>
     </message>
     <message>
         <source>Done</source>
-        <translation type="unfinished"></translation>
+        <translation>Fertig</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Schließen</translation>
     </message>
     <message>
         <source>End game</source>
-        <translation type="unfinished"></translation>
+        <translation>Spiel beenden</translation>
     </message>
     <message>
         <source>Do you want to end the game early?</source>
-        <translation type="unfinished"></translation>
+        <translation>Möchten Sie das Spiel vorzeitig beenden?</translation>
     </message>
     <message>
         <source>Yes</source>

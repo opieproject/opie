@@ -90,75 +90,75 @@ Der Player wird beendet.</translation>
     <name>PlayListWidget</name>
     <message>
         <source>OpiePlayer</source>
-        <translation type="unfinished">OpiePlayer</translation>
+        <translation>OpiePlayer</translation>
     </message>
     <message>
         <source>Play Operations</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiedergabefunktionen</translation>
     </message>
     <message>
         <source>Add to Playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Zur Stückliste zufügen</translation>
     </message>
     <message>
         <source>Remove from Playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Von Stückliste entfernen</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation type="unfinished"></translation>
+        <translation>Abspielen</translation>
     </message>
     <message>
         <source>Randomize</source>
-        <translation type="unfinished"></translation>
+        <translation>Zufällig</translation>
     </message>
     <message>
         <source>Loop</source>
-        <translation type="unfinished"></translation>
+        <translation>Schleife</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei</translation>
     </message>
     <message>
         <source>Clear List</source>
-        <translation type="unfinished"></translation>
+        <translation>Liste löschen</translation>
     </message>
     <message>
         <source>Add all audio files</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Audiodateien hinzufügen</translation>
     </message>
     <message>
         <source>Add all video files</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Videodateien hinzufügen</translation>
     </message>
     <message>
         <source>Add all files</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Dateien hinzufügen</translation>
     </message>
     <message>
         <source>Save PlayList</source>
-        <translation type="unfinished"></translation>
+        <translation>Stückliste speichern</translation>
     </message>
     <message>
         <source>Open File or URL</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei oder URL öffnen</translation>
     </message>
     <message>
         <source>Rescan for Audio Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Audiodateien suchen</translation>
     </message>
     <message>
         <source>Rescan for Video Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Videodateien suchen</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Ansicht</translation>
     </message>
     <message>
         <source>Full Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Vollbild</translation>
     </message>
     <message>
         <source>Scale</source>
@@ -166,102 +166,104 @@ Der Player wird beendet.</translation>
     </message>
     <message>
         <source>Move Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoch</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Entfernen</translation>
     </message>
     <message>
         <source>Move Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Runter</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Titel</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Größe</translation>
     </message>
     <message>
         <source>Media</source>
-        <translation type="unfinished"></translation>
+        <translation>Medium</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Video</translation>
     </message>
     <message>
         <source>Lists</source>
-        <translation type="unfinished"></translation>
+        <translation>Listen</translation>
     </message>
     <message>
         <source>OpiePlayer: </source>
-        <translation type="unfinished"></translation>
+        <translation>OpiePlayer:</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation type="unfinished"></translation>
+        <translation>Zu wenig Speicherplatz</translation>
     </message>
     <message>
         <source>There was a problem saving the playlist.
 Your playlist may be missing some entries
 the next time you start it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Stückliste konnte nicht gespeichert werden.
+Einige Einträge können beim nächsten Start
+fehlen.</translation>
     </message>
     <message>
         <source>Invalid File</source>
-        <translation type="unfinished"></translation>
+        <translation>Ungültige Datei</translation>
     </message>
     <message>
         <source>There was a problem in getting the file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Datei konnte nicht geöffnet werden.</translation>
     </message>
     <message>
         <source>Remove Playlist?</source>
-        <translation type="unfinished"></translation>
+        <translation>Stückliste entfernen?</translation>
     </message>
     <message>
         <source>You really want to delete
 this playlist?</source>
-        <translation type="unfinished"></translation>
+        <translation>Soll diese Stückliste wirklich gelöscht werden?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nein</translation>
     </message>
     <message>
         <source>Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Eigenschaften</translation>
     </message>
     <message>
         <source>Play Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgewählte abspielen</translation>
     </message>
     <message>
         <source>Open file or URL</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei oder URL öffnen</translation>
     </message>
     <message>
         <source>Save m3u Playlist </source>
-        <translation type="unfinished"></translation>
+        <translation>Stückliste als m3u speichern</translation>
     </message>
     <message>
         <source>Skins</source>
-        <translation type="unfinished"></translation>
+        <translation>Oberfläche</translation>
     </message>
     <message>
         <source>Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Pfad</translation>
     </message>
 </context>
 <context>
