@@ -21,3 +21,4 @@ void BackGammonView::contentsMousePressEvent(QMouseEvent* e)
     int y=e->y();
     emit mouse(x,y);
 }
+
