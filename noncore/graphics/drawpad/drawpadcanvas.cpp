@@ -182,7 +182,9 @@ void DrawPadCanvas::load(QIODevice* ioDevice)
     m_pages = drawPadCanvasXmlHandler.pages();
 
     if (m_pages.isEmpty()) {
-        m_pages.append(new Page("", contentsRect().size()));
+        m_pages.append(new Page("",         
+		clipper()->width()+(verticalScrollBar()->isVisible()?verticalScrollBar()->width():0),
+	        clipper()->height()+(horizontalScrollBar()->isVisible()?horizontalScrollBar()->height():0)));
         m_pages.current()->pixmap()->fill(Qt::white);
     }
 
@@ -194,7 +196,11 @@ void DrawPadCanvas::load(QIODevice* ioDevice)
 
 void DrawPadCanvas::initialPage()
 {
-    m_pages.append(new Page("", 236, 232));
+    m_pages.append(new Page("", 
+	clipper()->width()+(verticalScrollBar()->isVisible()?verticalScrollBar()->width():0),
+	clipper()->height()+(horizontalScrollBar()->isVisible()?horizontalScrollBar()->height():0)));
+	//236, 232)); no more fixed sizes
+
     m_pages.current()->pixmap()->fill(Qt::white);
 
     resizeContents(m_pages.current()->pixmap()->width(), m_pages.current()->pixmap()->height());
@@ -349,7 +355,10 @@ void DrawPadCanvas::deleteAll()
 {
     m_pages.clear();
 
-    m_pages.append(new Page("", contentsRect().size()));
+    m_pages.append(new Page("",         
+	clipper()->width()+(verticalScrollBar()->isVisible()?verticalScrollBar()->width():0),
+        clipper()->height()+(horizontalScrollBar()->isVisible()?horizontalScrollBar()->height():0)));
+
     m_pages.current()->pixmap()->fill(Qt::white);
 
     resizeContents(m_pages.current()->pixmap()->width(), m_pages.current()->pixmap()->height());
@@ -382,7 +391,10 @@ void DrawPadCanvas::deletePage()
     m_pages.remove(m_pages.current());
 
     if (m_pages.isEmpty()) {
-        m_pages.append(new Page("", contentsRect().size()));
+        m_pages.append(new Page("",         
+		clipper()->width()+(verticalScrollBar()->isVisible()?verticalScrollBar()->width():0),
+	        clipper()->height()+(horizontalScrollBar()->isVisible()?horizontalScrollBar()->height():0)));
+
         m_pages.current()->pixmap()->fill(Qt::white);
     }
 
