@@ -194,6 +194,15 @@ QString OFileDialog::getSaveFileName(int selector,
 
     OFileDialog dlg( caption.isEmpty() ? tr("Save") : caption,
                      wid, OFileSelector::Save, selector, startDir, file, mimes);
+
+    /*
+     * For the save mode we do not want a file to be written
+     * if the user just clicked on it
+     * #1522
+     */
+    dlg.disconnect( dlg.file, SIGNAL(fileSelected(const QString&)) );
+    dlg.disconnect( dlg.file, SIGNAL(ok()) );
+
     if( QPEApplication::execDialog(&dlg) )
     {
         ret = dlg.fileName();
