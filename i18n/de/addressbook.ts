@@ -176,7 +176,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Name Title</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Titel</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -216,7 +216,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">nicht eingeteilt</translation>
     </message>
 </context>
 <context>
@@ -267,7 +267,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Name Title</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Titel</translation>
     </message>
     <message>
         <source>First Name</source>
@@ -1319,7 +1319,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Contacts</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Adressen</translation>
     </message>
     <message>
         <source>Work Mobile</source>

@@ -54,7 +54,7 @@
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Einstellugnen</translation>
     </message>
     <message>
         <source>Help</source>
@@ -74,7 +74,7 @@
     </message>
     <message>
         <source>Servers</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Server</translation>
     </message>
     <message>
         <source>Destinations</source>
@@ -189,7 +189,7 @@
     <name>PackageListView</name>
     <message>
         <source>Package</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Paket</translation>
     </message>
     <message>
         <source>Install to</source>
@@ -197,7 +197,7 @@
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Entfernen</translation>
     </message>
     <message>
         <source>Reinstall</source>
@@ -208,7 +208,7 @@
     <name>PackageManagerSettings</name>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Neu</translation>
     </message>
 </context>
 <context>
@@ -235,7 +235,7 @@
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Entfernen</translation>
     </message>
     <message>
         <source>Servers</source>
