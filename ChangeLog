@@ -26,10 +26,10 @@
 	* #1269 - VCards were imported into personal area if it was activated (eilers)
 	* #1464 - Packagemanager dont set active filter after install a package (drw)
 	* #1479 - Improved VCard-Parser to import VCards created by Evolution 2 and Apple Addressbook (eilers)
+	* #1493 - Fixed one column layout bug of the launcher (hrw)
 	* n.a. - PackageManager - (Minor UI tweak) in filter dialog, when option is enabled, set focus to widget that corresponds to that option (drw)
 	* n.a. - PackageManager - (Minor UI tweak) fix double entry in source feed configuration when adding a new feed (drw)
 	* n.a. - Battery Applet - fix sizing of battery info popup
-	* #1493 - Fixed one column layout bug of the launcher (hrw)
 
 	Internal
 	--------
