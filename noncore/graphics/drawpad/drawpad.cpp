@@ -47,9 +47,10 @@
 #include <qspinbox.h>
 #include <qtoolbutton.h>
 #include <qtooltip.h>
+#include <qwhatsthis.h>
 
 DrawPad::DrawPad(QWidget* parent, const char* name)
-    : QMainWindow(parent, name)
+    : QMainWindow(parent, name, WStyle_ContextHelp)
 {
     // init members
 
@@ -104,17 +105,20 @@ DrawPad::DrawPad(QWidget* parent, const char* name)
 
     QPEToolBar* pageToolBar = new QPEToolBar(this);
 
-    QAction* newPageAction = new QAction(tr("New Page"), Resource::loadIconSet("new"), QString::null, 0, this);
+    QAction* newPageAction = new QAction(tr("New Page"), Resource::loadPixmap("new"), QString::null, 0, this);
     connect(newPageAction, SIGNAL(activated()), this, SLOT(newPage()));
     newPageAction->addTo(pageToolBar);
+    newPageAction->setWhatsThis( tr( "Click here to add a new sheet." ) );
 
-    QAction* clearPageAction = new QAction(tr("Clear Page"), Resource::loadIconSet("drawpad/clear"), QString::null, 0, this);
+    QAction* clearPageAction = new QAction(tr("Clear Page"), Resource::loadPixmap("drawpad/clear"), QString::null, 0, this);
     connect(clearPageAction, SIGNAL(activated()), this, SLOT(clearPage()));
     clearPageAction->addTo(pageToolBar);
+    clearPageAction->setWhatsThis( tr( "Click here to erase the current sheet." ) );
 
-    QAction* deletePageAction = new QAction(tr("Delete Page"), Resource::loadIconSet("trash"), QString::null, 0, this);
+    QAction* deletePageAction = new QAction(tr("Delete Page"), Resource::loadPixmap("trash"), QString::null, 0, this);
     connect(deletePageAction, SIGNAL(activated()), this, SLOT(deletePage()));
     deletePageAction->addTo(pageToolBar);
+    deletePageAction->setWhatsThis( tr( "Click here to remove the current sheet." ) );
 
     QPEToolBar* emptyToolBar = new QPEToolBar(this);
     emptyToolBar->setHorizontalStretchable(true);
@@ -126,26 +130,32 @@ DrawPad::DrawPad(QWidget* parent, const char* name)
     m_pUndoAction = new QAction(tr("Undo"), Resource::loadIconSet("drawpad/undo"), QString::null, 0, this);
     connect(m_pUndoAction, SIGNAL(activated()), m_pDrawPadCanvas, SLOT(undo()));
     m_pUndoAction->addTo(navigationToolBar);
+    m_pUndoAction->setWhatsThis( tr( "Click here to undo the last action." ) );
 
     m_pRedoAction = new QAction(tr("Redo"), Resource::loadIconSet("drawpad/redo"), QString::null, 0, this);
     connect(m_pRedoAction, SIGNAL(activated()), m_pDrawPadCanvas, SLOT(redo()));
     m_pRedoAction->addTo(navigationToolBar);
+    m_pRedoAction->setWhatsThis( tr( "Click here to re-perform the last action." ) );
 
     m_pFirstPageAction = new QAction(tr("First Page"), Resource::loadIconSet("fastback"), QString::null, 0, this);
     connect(m_pFirstPageAction, SIGNAL(activated()), m_pDrawPadCanvas, SLOT(goFirstPage()));
     m_pFirstPageAction->addTo(navigationToolBar);
+    m_pFirstPageAction->setWhatsThis( tr( "Click here to view the first page." ) );
 
     m_pPreviousPageAction = new QAction(tr("Previous Page"), Resource::loadIconSet("back"), QString::null, 0, this);
     connect(m_pPreviousPageAction, SIGNAL(activated()), m_pDrawPadCanvas, SLOT(goPreviousPage()));
     m_pPreviousPageAction->addTo(navigationToolBar);
+    m_pPreviousPageAction->setWhatsThis( tr( "Click here to view the previous page." ) );
 
     m_pNextPageAction = new QAction(tr("Next Page"), Resource::loadIconSet("forward"), QString::null, 0, this);
     connect(m_pNextPageAction, SIGNAL(activated()), m_pDrawPadCanvas, SLOT(goNextPage()));
     m_pNextPageAction->addTo(navigationToolBar);
+    m_pNextPageAction->setWhatsThis( tr( "Click here to view the next page." ) );
 
     m_pLastPageAction = new QAction(tr("Last Page"), Resource::loadIconSet("fastforward"), QString::null, 0, this);
     connect(m_pLastPageAction, SIGNAL(activated()), m_pDrawPadCanvas, SLOT(goLastPage()));
     m_pLastPageAction->addTo(navigationToolBar);
+    m_pLastPageAction->setWhatsThis( tr( "Click here to view the last page." ) );
 
     // init draw mode toolbar
 
@@ -153,14 +163,16 @@ DrawPad::DrawPad(QWidget* parent, const char* name)
 
     m_pLineToolButton = new QToolButton(drawModeToolBar);
     m_pLineToolButton->setToggleButton(true);
+    QWhatsThis::add( m_pLineToolButton, tr( "Click here to select one of the available tools to draw lines." ) );
+
 
     QPopupMenu* linePopupMenu = new QPopupMenu(m_pLineToolButton);
 
-    m_pPointToolAction = new QAction(tr("Draw Point"), Resource::loadIconSet("drawpad/point.png"), "", 0, this);
+    m_pPointToolAction = new QAction(tr("Draw Point"), Resource::loadPixmap("drawpad/point"), "", 0, this);
     connect(m_pPointToolAction, SIGNAL(activated()), this, SLOT(setPointTool()));
     m_pPointToolAction->addTo(linePopupMenu);
 
-    m_pLineToolAction = new QAction(tr("Draw Line"), Resource::loadIconSet("drawpad/line.png"), "", 0, this);
+    m_pLineToolAction = new QAction(tr("Draw Line"), Resource::loadPixmap("drawpad/line"), "", 0, this);
     connect(m_pLineToolAction, SIGNAL(activated()), this, SLOT(setLineTool()));
     m_pLineToolAction->addTo(linePopupMenu);
 
@@ -169,14 +181,15 @@ DrawPad::DrawPad(QWidget* parent, const char* name)
 
     m_pRectangleToolButton = new QToolButton(drawModeToolBar);
     m_pRectangleToolButton->setToggleButton(true);
+    QWhatsThis::add( m_pRectangleToolButton, tr( "Click here to select one of the available tools to draw rectangles." ) );
 
     QPopupMenu* rectanglePopupMenu = new QPopupMenu(m_pRectangleToolButton);
 
-    m_pRectangleToolAction = new QAction(tr("Draw Rectangle"), Resource::loadIconSet("drawpad/rectangle.png"), "", 0, this);
+    m_pRectangleToolAction = new QAction(tr("Draw Rectangle"), Resource::loadPixmap("drawpad/rectangle"), "", 0, this);
     connect(m_pRectangleToolAction, SIGNAL(activated()), this, SLOT(setRectangleTool()));
     m_pRectangleToolAction->addTo(rectanglePopupMenu);
 
-    m_pFilledRectangleToolAction = new QAction(tr("Draw Filled Rectangle"), Resource::loadIconSet("drawpad/filledrectangle.png"), "", 0, this);
+    m_pFilledRectangleToolAction = new QAction(tr("Draw Filled Rectangle"), Resource::loadPixmap("drawpad/filledrectangle"), "", 0, this);
     connect(m_pFilledRectangleToolAction, SIGNAL(activated()), this, SLOT(setFilledRectangleTool()));
     m_pFilledRectangleToolAction->addTo(rectanglePopupMenu);
 
@@ -185,34 +198,38 @@ DrawPad::DrawPad(QWidget* parent, const char* name)
 
     m_pEllipseToolButton = new QToolButton(drawModeToolBar);
     m_pEllipseToolButton->setToggleButton(true);
+    QWhatsThis::add( m_pEllipseToolButton, tr( "Click here to select one of the available tools to draw ellipses." ) );
 
     QPopupMenu* ellipsePopupMenu = new QPopupMenu(m_pEllipseToolButton);
 
-    m_pEllipseToolAction = new QAction(tr("Draw Ellipse"), Resource::loadIconSet("drawpad/ellipse.png"), "", 0, this);
+    m_pEllipseToolAction = new QAction(tr("Draw Ellipse"), Resource::loadPixmap("drawpad/ellipse"), "", 0, this);
     connect(m_pEllipseToolAction, SIGNAL(activated()), this, SLOT(setEllipseTool()));
     m_pEllipseToolAction->addTo(ellipsePopupMenu);
 
-    m_pFilledEllipseToolAction = new QAction(tr("Draw Filled Ellipse"), Resource::loadIconSet("drawpad/filledellipse.png"), "", 0, this);
+    m_pFilledEllipseToolAction = new QAction(tr("Draw Filled Ellipse"), Resource::loadPixmap("drawpad/filledellipse"), "", 0, this);
     connect(m_pFilledEllipseToolAction, SIGNAL(activated()), this, SLOT(setFilledEllipseTool()));
     m_pFilledEllipseToolAction->addTo(ellipsePopupMenu);
 
     m_pEllipseToolButton->setPopup(ellipsePopupMenu);
     m_pEllipseToolButton->setPopupDelay(0);
 
-    m_pTextToolAction = new QAction(tr("Insert Text"), Resource::loadIconSet("drawpad/text.png"), QString::null, 0, this);
+    m_pTextToolAction = new QAction(tr("Insert Text"), Resource::loadPixmap("drawpad/text"), QString::null, 0, this);
     m_pTextToolAction->setToggleAction(true);
     connect(m_pTextToolAction, SIGNAL(activated()), this, SLOT(setTextTool()));
     m_pTextToolAction->addTo(drawModeToolBar);
+    m_pTextToolAction->setWhatsThis( tr( "Click here to select the text drawing tool." ) );
 
-    m_pFillToolAction = new QAction(tr("Fill Region"), Resource::loadIconSet("drawpad/fill.png"), QString::null, 0, this);
+    m_pFillToolAction = new QAction(tr("Fill Region"), Resource::loadPixmap("drawpad/fill"), QString::null, 0, this);
     m_pFillToolAction->setToggleAction(true);
     connect(m_pFillToolAction, SIGNAL(activated()), this, SLOT(setFillTool()));
     m_pFillToolAction->addTo(drawModeToolBar);
+    m_pFillToolAction->setWhatsThis( tr( "Click here to select the fill tool." ) );
 
-    m_pEraseToolAction = new QAction(tr("Erase Point"), Resource::loadIconSet("drawpad/erase.png"), QString::null, 0, this);
+    m_pEraseToolAction = new QAction(tr("Erase Point"), Resource::loadPixmap("drawpad/erase"), QString::null, 0, this);
     m_pEraseToolAction->setToggleAction(true);
     connect(m_pEraseToolAction, SIGNAL(activated()), this, SLOT(setEraseTool()));
     m_pEraseToolAction->addTo(drawModeToolBar);
+    m_pEraseToolAction->setWhatsThis( tr( "Click here to select the eraser tool." ) );
 
     m_pTool = 0;
     setRectangleTool();
@@ -233,9 +250,11 @@ DrawPad::DrawPad(QWidget* parent, const char* name)
     QToolTip::add(m_pPenWidthSpinBox, tr("Pen Width"));
     m_pPenWidthSpinBox->setValue(1);
     m_pPenWidthSpinBox->setFocusPolicy(QWidget::NoFocus);
+    QWhatsThis::add( m_pPenWidthSpinBox, tr( "Click here to select the width of the drawing pen." ) );
 
     m_pPenColorToolButton = new QToolButton(drawParametersToolBar);
-    m_pPenColorToolButton->setPixmap(Resource::loadPixmap("drawpad/pencolor.png"));
+    m_pPenColorToolButton->setPixmap(Resource::loadPixmap("drawpad/pencolor"));
+    QWhatsThis::add( m_pPenColorToolButton, tr( "Click here to select the color used when drawing." ) );
 
     ColorPopupMenu* penColorPopupMenu = new ColorPopupMenu(Qt::black, m_pPenColorToolButton);
     connect(penColorPopupMenu, SIGNAL(colorSelected(const QColor&)), this, SLOT(changePenColor(const QColor&)));
@@ -247,7 +266,8 @@ DrawPad::DrawPad(QWidget* parent, const char* name)
     changePenColor(Qt::black);
 
     m_pBrushColorToolButton = new QToolButton(drawParametersToolBar);
-    m_pBrushColorToolButton->setPixmap(Resource::loadPixmap("drawpad/brushcolor.png"));
+    m_pBrushColorToolButton->setPixmap(Resource::loadPixmap("drawpad/brushcolor"));
+    QWhatsThis::add( m_pBrushColorToolButton, tr( "Click here to select the color used when filling in areas." ) );
 
     ColorPopupMenu* brushColorPopupMenu = new ColorPopupMenu(Qt::white, m_pBrushColorToolButton);
     connect(brushColorPopupMenu, SIGNAL(colorSelected(const QColor&)), this, SLOT(changeBrushColor(const QColor&)));
@@ -545,8 +565,7 @@ void DrawPad::updateView()
     uint pagePosition = m_pDrawPadCanvas->pagePosition();
     uint pageCount = m_pDrawPadCanvas->pageCount();
 
-    setCaption(tr("DrawPad") + " - " + tr("Page") + " "
-               + QString::number(pagePosition) + "/" + QString::number(pageCount));
+    setCaption( tr( "DrawPad - Page %1/%2" ).arg( pagePosition ).arg( pageCount ) );
 
     m_pUndoAction->setEnabled(m_pDrawPadCanvas->currentPage()->undoEnabled());
     m_pRedoAction->setEnabled(m_pDrawPadCanvas->currentPage()->redoEnabled());

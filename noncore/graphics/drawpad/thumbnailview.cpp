@@ -27,6 +27,7 @@
 #include <qlayout.h>
 #include <qmessagebox.h>
 #include <qtoolbutton.h>
+#include <qwhatsthis.h>
 
 #define THUMBNAIL_SIZE 48
 
@@ -56,10 +57,11 @@ PageListBoxItem::PageListBoxItem(Page* page, QListBox* parent)
 
     m_thumbnail.convertFromImage(thumbnailImage);
 
-    m_titleText = QObject::tr("Title:") + " " + m_pPage->title();
-    m_dimensionText = QObject::tr("Dimension:") + " " + QString::number(m_pPage->pixmap()->width())
-                      + "x" + QString::number(m_pPage->pixmap()->height());
-    m_dateText = QObject::tr("Date:") + " " + dateTimeString(m_pPage->lastModified());
+    m_titleText = QObject::tr( "Title: %1" ).arg( m_pPage->title() );
+    m_dimensionText = QObject::tr( "Dimension: %1x%2" ).
+                        arg( m_pPage->pixmap()->width() ).
+                        arg( m_pPage->pixmap()->height() );
+    m_dateText = QObject::tr( "Date: %1" ).arg( dateTimeString(m_pPage->lastModified()) );
 
     QColor baseColor = parent->colorGroup().base();
     int h, s, v;
@@ -144,24 +146,24 @@ QString PageListBoxItem::dateTimeString(QDateTime dateTime)
     for (int i = 0; i < 3; i++) {
         switch((shortOrder >> (i * 3)) & 0x0007) {
             case 0x0001:
-                result += QString().sprintf("%02d", dateTime.date().day());
+                result.append( QString().sprintf("%02d", dateTime.date().day()) );
                 break;
             case 0x0002:
-                result += QString().sprintf("%02d", dateTime.date().month());
+                result.append( QString().sprintf("%02d", dateTime.date().month()) );
                 break;
             case 0x0004:
-                result += QString().sprintf("%04d", dateTime.date().year());
+                result.append( QString().sprintf("%04d", dateTime.date().year()) );
                 break;
             default:
                 break;
         }
 
         if (i < 2) {
-            result += separator;
+            result.append( separator );
         }
     }
 
-    result += QString().sprintf(" %02d:%02d", dateTime.time().hour(), dateTime.time().minute());
+    result.append( QString().sprintf(" %02d:%02d", dateTime.time().hour(), dateTime.time().minute()) );
 
     return result;
 }
@@ -229,7 +231,7 @@ Page* PageListBox::selected() const
 }
 
 ThumbnailView::ThumbnailView(DrawPad* drawPad, DrawPadCanvas* drawPadCanvas, QWidget* parent, const char* name)
-    : QWidget(parent, name, Qt::WType_Modal | Qt::WType_TopLevel)
+    : QWidget(parent, name, Qt::WType_Modal | Qt::WType_TopLevel | Qt::WStyle_ContextHelp)
 {
     inLoop = false;
 
@@ -242,26 +244,31 @@ ThumbnailView::ThumbnailView(DrawPad* drawPad, DrawPadCanvas* drawPadCanvas, QWi
     newPageButton->setIconSet(Resource::loadIconSet("new"));
     newPageButton->setAutoRaise(true);
     connect(newPageButton, SIGNAL(clicked()), this, SLOT(newPage()));
+    QWhatsThis::add( newPageButton, tr( "Click here to add a new sheet." ) );
 
     QToolButton* clearPageButton = new QToolButton(this);
     clearPageButton->setIconSet(Resource::loadIconSet("drawpad/clear"));
     clearPageButton->setAutoRaise(true);
     connect(clearPageButton, SIGNAL(clicked()), this, SLOT(clearPage()));
+    QWhatsThis::add( clearPageButton, tr( "Click here to erase the current sheet." ) );
 
     QToolButton* deletePageButton = new QToolButton(this);
     deletePageButton->setIconSet(Resource::loadIconSet("trash"));
     deletePageButton->setAutoRaise(true);
     connect(deletePageButton, SIGNAL(clicked()), this, SLOT(deletePage()));
+    QWhatsThis::add( deletePageButton, tr( "Click here to remove the current sheet." ) );
 
     m_pMovePageUpButton = new QToolButton(this);
     m_pMovePageUpButton->setIconSet(Resource::loadIconSet("up"));
     m_pMovePageUpButton->setAutoRaise(true);
     connect(m_pMovePageUpButton, SIGNAL(clicked()), this, SLOT(movePageUp()));
-
+    QWhatsThis::add( m_pMovePageUpButton, tr( "Click here to move the current sheet up one position in the list." ) );
+    
     m_pMovePageDownButton = new QToolButton(this);
     m_pMovePageDownButton->setIconSet(Resource::loadIconSet("down"));
     m_pMovePageDownButton->setAutoRaise(true);
     connect(m_pMovePageDownButton, SIGNAL(clicked()), this, SLOT(movePageDown()));
+    QWhatsThis::add( m_pMovePageDownButton, tr( "Click here to move the current sheet down one position in the list." ) );
 
     m_pPageListBox = new PageListBox(m_pDrawPadCanvas, this);
     connect(m_pPageListBox, SIGNAL(selectionChanged()), this, SLOT(changePage()));

@@ -94,24 +94,24 @@ QString PageInformationDialog::dateTimeString(QDateTime dateTime)
     for (int i = 0; i < 3; i++) {
         switch((shortOrder >> (i * 3)) & 0x0007) {
             case 0x0001:
-                result += QString().sprintf("%02d", dateTime.date().day());
+                result.append( QString().sprintf("%02d", dateTime.date().day()) );
                 break;
             case 0x0002:
-                result += QString().sprintf("%02d", dateTime.date().month());
+                result.append( QString().sprintf("%02d", dateTime.date().month()) );
                 break;
             case 0x0004:
-                result += QString().sprintf("%04d", dateTime.date().year());
+                result.append( QString().sprintf("%04d", dateTime.date().year()) );
                 break;
             default:
                 break;
         }
 
         if (i < 2) {
-            result += separator;
+            result.append( separator );
         }
     }
 
-    result += QString().sprintf(" %02d:%02d", dateTime.time().hour(), dateTime.time().minute());
+    result.append( QString().sprintf(" %02d:%02d", dateTime.time().hour(), dateTime.time().minute()) );
 
     return result;
 }
