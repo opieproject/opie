@@ -3,16 +3,17 @@
     <name>LogoutApplet</name>
     <message>
         <source>Logout shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Skrot wyloguj</translation>
     </message>
     <message>
         <source>Logout</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyloguj</translation>
     </message>
     <message>
         <source>Do you really want to
 end this session ?</source>
-        <translation type="unfinished"></translation>
+        <translation>Czy na pewno chcesz
+zakonczyc sesje?</translation>
     </message>
 </context>
 </TS>

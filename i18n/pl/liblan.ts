@@ -3,72 +3,74 @@
     <name>Lan</name>
     <message>
         <source>LAN Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustawienie LAN</translation>
     </message>
     <message>
         <source>This name already
 exists. Please choose a
 different name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Taka nazwa juz
+istnieje. Wybierz inna
+nazwe.</translation>
     </message>
 </context>
 <context>
     <name>LanBase</name>
     <message>
         <source>LAN </source>
-        <translation type="unfinished"></translation>
+        <translation>LAN</translation>
     </message>
     <message>
         <source>Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Konto</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nazwa:</translation>
     </message>
     <message>
         <source>Specify TCP/IP Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Podaj informacje TCP/IP</translation>
     </message>
     <message>
         <source>Obtain TCP/IP Information Automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Pobierz informacje TCP/IP automatycznie</translation>
     </message>
     <message>
         <source>TCP/IP</source>
-        <translation type="unfinished"></translation>
+        <translation>TCP/IP</translation>
     </message>
     <message>
         <source>IP Address</source>
-        <translation type="unfinished"></translation>
+        <translation>Adres IP</translation>
     </message>
     <message>
         <source>Gateway</source>
-        <translation type="unfinished"></translation>
+        <translation>Brama</translation>
     </message>
     <message>
         <source>Subnet Mask</source>
-        <translation type="unfinished"></translation>
+        <translation>Maska podsieci</translation>
     </message>
     <message>
         <source>Broadcast</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozglaszanie</translation>
     </message>
     <message>
         <source>DNS</source>
-        <translation type="unfinished"></translation>
+        <translation>DNS</translation>
     </message>
     <message>
         <source>First DNS</source>
-        <translation type="unfinished"></translation>
+        <translation>Pierwszy DNS</translation>
     </message>
     <message>
         <source>Second DNS</source>
-        <translation type="unfinished"></translation>
+        <translation>Drugi DNS</translation>
     </message>
     <message>
         <source>Proxies</source>
-        <translation type="unfinished"></translation>
+        <translation>Proxy</translation>
     </message>
 </context>
 <context>
@@ -79,58 +81,58 @@ different name.</source>
     </message>
     <message>
         <source>Service:</source>
-        <translation type="unfinished"></translation>
+        <translation>Usluga:</translation>
     </message>
     <message>
         <source>IP address:</source>
-        <translation type="unfinished"></translation>
+        <translation>Adres IP:</translation>
     </message>
     <message>
         <source>0.0.0.0</source>
-        <translation type="unfinished"></translation>
+        <translation>0.0.0.0</translation>
     </message>
 </context>
 <context>
     <name>ProxiesPageBase</name>
     <message>
         <source>Proxy Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustawienia proxy</translation>
     </message>
     <message>
         <source>No proxies</source>
-        <translation type="unfinished"></translation>
+        <translation>Bez proxy</translation>
     </message>
     <message>
         <source>Auto configure proxies</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatyczna konfiguracja proxy</translation>
     </message>
     <message>
         <source>Set proxies</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustaw proxy</translation>
     </message>
     <message>
         <source>Config:</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguracja:</translation>
     </message>
     <message>
         <source>Port:</source>
-        <translation type="unfinished"></translation>
+        <translation>Port:</translation>
     </message>
     <message>
         <source>HTTP:</source>
-        <translation type="unfinished"></translation>
+        <translation>HTTP:</translation>
     </message>
     <message>
         <source>FTP:</source>
-        <translation type="unfinished"></translation>
+        <translation>FTP:</translation>
     </message>
     <message>
         <source>Host:</source>
-        <translation type="unfinished"></translation>
+        <translation>Host:</translation>
     </message>
     <message>
         <source>No proxies for:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bez proxy dla:</translation>
     </message>
 </context>
 </TS>
