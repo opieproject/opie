@@ -828,7 +828,7 @@ OPacket* OPacketCapturer::next()
     if ( _pcd )
         pcap_dump( (u_char*) _pcd, &header, pdata );
 
-    if ( header.len )
+    if ( pdata && header.len )
     {
         OPacket* p = new OPacket( dataLink(), header, pdata, 0 );
         // packets shouldn't be inserted in the QObject child-parent hierarchy,
@@ -842,6 +842,7 @@ OPacket* OPacketCapturer::next()
     }
     else
     {
+        qWarning( "OPacketCapturer::next() - no packet received!" );
         return 0;
     }
 }
