@@ -34,13 +34,13 @@ ProfileEditorDialog::ProfileEditorDialog( MetaFactory* fact,
 ProfileEditorDialog::ProfileEditorDialog( MetaFactory* fact )
     : QDialog(0, 0, TRUE), m_fact( fact )
 {
-	// Default profile
-	m_prof = Profile(tr("New Profile"), "serial", "default", Profile::Black, Profile::White, Profile::VT102);
+    // Default profile
+    m_prof = Profile(tr("New Profile"), "serial", "default", Profile::Black, Profile::White, Profile::VT102);
 
-	initUI();
+    initUI();
 
-	// Apply current profile
-	// plugin_plugin->load(profile);
+    // Apply current profile
+    // plugin_plugin->load(profile);
 }
 
 Profile ProfileEditorDialog::profile() const
@@ -123,11 +123,11 @@ void ProfileEditorDialog::initUI()
 
     // load profile values
     m_name->setText(m_prof.name());
-    slotConActivated(  m_fact->external(m_prof.ioLayerName()  ) );
-    slotTermActivated( m_fact->external(m_prof.terminalName() ) );
     slotKeyActivated( "Default Keyboard" );
     setCurrent( m_fact->external(m_prof.ioLayerName() ), m_conCmb );
     setCurrent( m_fact->external(m_prof.terminalName() ), m_termCmb );
+    slotConActivated(  m_fact->external(m_prof.ioLayerName()  ) );
+    slotTermActivated( m_fact->external(m_prof.terminalName() ) );
     m_autoConnect->setChecked(m_prof.autoConnect());
 
 
@@ -201,10 +201,11 @@ void ProfileEditorDialog::slotConActivated( const QString& str ) {
     // supports auto connect and then set it as prefered
     if ( m_conCmb ->currentText() == tr("Local Console") ) {
         m_autoConnect->setChecked( true );
-
-        m_prof.setTerminal( Profile::Linux );
+        m_prof.writeEntry("Terminal", Profile::Linux );
         slotTermActivated( m_fact->external (m_prof.terminalName() ) );
     } else {
+        m_prof.writeEntry("Terminal", Profile::VT102 );
+        slotTermActivated( m_fact->external (m_prof.terminalName() ) );
         m_autoConnect->setChecked( false );
     }
 
