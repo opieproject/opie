@@ -23,6 +23,33 @@
 #include "odatebookaccessbackend_xml.h"
 
 namespace {
+    // FROM TT again
+char *strstrlen(const char *haystack, int hLen, const char* needle, int nLen)
+{
+    char needleChar;
+    char haystackChar;
+    if (!needle || !haystack || !hLen || !nLen)
+	return 0;
+
+    const char* hsearch = haystack;
+
+    if ((needleChar = *needle++) != 0) {
+	nLen--; //(to make up for needle++)
+	do {
+	    do {
+		if ((haystackChar = *hsearch++) == 0)
+		    return (0);
+		if (hsearch >= haystack + hLen)
+		    return (0);
+	    } while (haystackChar != needleChar);
+	} while (strncmp(hsearch, needle, QMIN(hLen - (hsearch - haystack), nLen)) != 0);
+	hsearch--;
+    }
+    return ((char *)hsearch);
+}
+}
+
+namespace {
     time_t start, end, created, rp_end;
     ORecur* rec;
     ORecur* recur() {
@@ -342,7 +369,7 @@ bool ODateBookAccessBackend_XML::loadFile() {
     const char* collectionString = "<event ";
     int strLen = ::strlen(collectionString);
     int *find;
-    while ( dt + 1 != 0 && (( point = ::strstr( dt+i, collectionString ) ) != 0 ) ) {
+    while ( (  point = ::strstrlen( dt+i, len -i, collectionString, strLen ) ) != 0  ) {
         i = point -dt;
         i+= strLen;
 
