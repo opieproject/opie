@@ -938,8 +938,10 @@ void LauncherView::clearViewFont()
 
 void LauncherView::resizeEvent(QResizeEvent *e)
 {
+//	qDebug("LauncherView resize event");
     QVBox::resizeEvent( e );
-    if ( e->size().width() != e->oldSize().width() )
+// commented out for launcherview and qt/e 2.3.8 problems, probably needs real fixing somewhere...
+//    if ( e->size().width() != e->oldSize().width() )
 	sort();
 }
 
