@@ -17,8 +17,8 @@
 ** not clear to you.
 **
 **********************************************************************/
-#ifndef SCREENSHOTAPPLETIMPL_H
-#define SCREENSHOTAPPLETIMPL_H
+#ifndef IRDAAPPLETIMPL_H
+#define IRDAAPPLETIMPL_H
 
 #include <qpe/taskbarappletinterface.h>
 
