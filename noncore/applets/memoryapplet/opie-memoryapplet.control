@@ -1,0 +1,10 @@
+Package: opie-memoryapplet
+Files: plugins/applets/libmemoryapplet.so* $OPIEDIR/pics/memory
+Priority: optional
+Section: opie/system
+Maintainer: Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
+Architecture: arm
+Depends: task-opie-minimal
+Description: Memory Applet
+ This applet displays the amount of free memory and manages the swap partition
+Version: $QPE_VERSION$EXTRAVERSION
