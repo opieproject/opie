@@ -1,0 +1,9 @@
+Package: opie-multikeyapplet
+Files: plugins/applets/libmultikeyapplet.so*
+Priority: optional
+Section: opie/taskbar
+Maintainer: Anton Kachalov <mouse@altlinux.ru>
+Architecture: arm
+Depends: task-opie-minimal
+Description: Multikey Keyboard Layout Switcher Applet
+Version: $QPE_VERSION$EXTRAVERSION
