@@ -334,6 +334,57 @@ Reservebatterij opladen aub.</translation>
     </message>
 </context>
 <context>
+    <name>MediumMountSetting::MediumMountWidget</name>
+    <message>
+        <source>Configure this medium. The changes will go into effect when the application gets closed. To update the Document Tab you need to remove and insert this medium.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Which media files</source>
+        <translation type="unfinished">Welke mediabestanden</translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="unfinished">Audio</translation>
+    </message>
+    <message>
+        <source>All</source>
+        <translation type="unfinished">Alle</translation>
+    </message>
+    <message>
+        <source>Image</source>
+        <translation type="unfinished">Plaatjes</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation type="unfinished">Tekst</translation>
+    </message>
+    <message>
+        <source>Video</source>
+        <translation type="unfinished">Video</translation>
+    </message>
+    <message>
+        <source>Limit search to:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished">Voeg toe</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scan whole media</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Always check this medium</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <source>Battery Status</source>

@@ -9,20 +9,24 @@
         <source>win avg: %1 turns (%2 games)</source>
         <translation>Winstgem: %1 beurten (%2 spellen)</translation>
     </message>
+    <message>
+        <source>Mind Breaker</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MindBreakerBoard</name>
     <message>
         <source>Go%1p%2</source>
-        <translation>Beurt%1p%2</translation>
+        <translation type="obsolete">Beurt%1p%2</translation>
     </message>
     <message>
         <source>CurrentGo%1</source>
-        <translation>HuidigeBeurt%1</translation>
+        <translation type="obsolete">HuidigeBeurt%1</translation>
     </message>
     <message>
         <source>Answer%1</source>
-        <translation>Antwoord%1</translation>
+        <translation type="obsolete">Antwoord%1</translation>
     </message>
     <message>
         <source>Reset Statistics</source>

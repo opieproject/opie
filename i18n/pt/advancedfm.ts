@@ -38,14 +38,6 @@
         <translation>Apagar</translation>
     </message>
     <message>
-        <source>Switch to Local</source>
-        <translation type="obsolete">Mudar para Local</translation>
-    </message>
-    <message>
-        <source>Switch to Remote</source>
-        <translation type="obsolete">Mudar para Remoto</translation>
-    </message>
-    <message>
         <source>Size</source>
         <translation>Tamanho</translation>
     </message>
@@ -269,10 +261,6 @@ e os seus conteúdos?</translation>
     <message>
         <source> kB free</source>
         <translation>KB livres</translation>
-    </message>
-    <message>
-        <source>Copy &apos;%1&apos; As</source>
-        <translation type="obsolete">Copiar &apos;%1&apos; Como</translation>
     </message>
     <message>
         <source>Copy </source>

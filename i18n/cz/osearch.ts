@@ -61,6 +61,10 @@
         <source>Enter your search terms here</source>
         <translation>Sem zadejte hledaná slova</translation>
     </message>
+    <message>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OListView</name>

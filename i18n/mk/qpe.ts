@@ -333,6 +333,57 @@ Please charge the back-up battery.</source>
     </message>
 </context>
 <context>
+    <name>MediumMountSetting::MediumMountWidget</name>
+    <message>
+        <source>Configure this medium. The changes will go into effect when the application gets closed. To update the Document Tab you need to remove and insert this medium.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Which media files</source>
+        <translation type="unfinished">Кои датотеки</translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="unfinished">Аудио</translation>
+    </message>
+    <message>
+        <source>All</source>
+        <translation type="unfinished">Сите</translation>
+    </message>
+    <message>
+        <source>Image</source>
+        <translation type="unfinished">Слика</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation type="unfinished">Текст</translation>
+    </message>
+    <message>
+        <source>Video</source>
+        <translation type="unfinished">Видео</translation>
+    </message>
+    <message>
+        <source>Limit search to:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished">Додај</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scan whole media</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Always check this medium</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <source>Battery Status</source>

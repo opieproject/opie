@@ -3,73 +3,73 @@
     <name>Decoration</name>
     <message>
         <source>Liquid</source>
-        <translation type="obsolete">Vloeibaar</translation>
+        <translation type="unfinished">Vloeibaar</translation>
     </message>
 </context>
 <context>
     <name>LiquidSettings</name>
     <message>
         <source>Liquid Style</source>
-        <translation type="unfinished">Stijl Vloeibaar</translation>
+        <translation type="obsolete">Stijl Vloeibaar</translation>
     </message>
     <message>
         <source>No translucency</source>
-        <translation type="unfinished">Geen transparantie</translation>
+        <translation type="obsolete">Geen transparantie</translation>
     </message>
     <message>
         <source>Stippled, background color</source>
-        <translation type="unfinished">Gestippeld, achtergrondkleur</translation>
+        <translation type="obsolete">Gestippeld, achtergrondkleur</translation>
     </message>
     <message>
         <source>Stippled, button color</source>
-        <translation type="unfinished">Gestippeld, knopkleur</translation>
+        <translation type="obsolete">Gestippeld, knopkleur</translation>
     </message>
     <message>
         <source>Translucent stippled, background color</source>
-        <translation type="unfinished">Transparant gestippeld, achtergrondkleur</translation>
+        <translation type="obsolete">Transparant gestippeld, achtergrondkleur</translation>
     </message>
     <message>
         <source>Translucent stippled, button color</source>
-        <translation type="unfinished">Transparant gestippeld, knopkleur</translation>
+        <translation type="obsolete">Transparant gestippeld, knopkleur</translation>
     </message>
     <message>
         <source>Custom translucency</source>
-        <translation type="unfinished">Eigen transparantie</translation>
+        <translation type="obsolete">Eigen transparantie</translation>
     </message>
     <message>
         <source>Menu color</source>
-        <translation type="unfinished">Menukleur</translation>
+        <translation type="obsolete">Menukleur</translation>
     </message>
     <message>
         <source>Text color</source>
-        <translation type="unfinished">Tekstkleur</translation>
+        <translation type="obsolete">Tekstkleur</translation>
     </message>
     <message>
         <source>Opacity</source>
-        <translation type="unfinished">Opaciteit</translation>
+        <translation type="obsolete">Opaciteit</translation>
     </message>
     <message>
         <source>Use shadowed menu text</source>
-        <translation type="unfinished">Gebruik geschaduwde menutekst</translation>
+        <translation type="obsolete">Gebruik geschaduwde menutekst</translation>
     </message>
     <message>
         <source>Make toolbar buttons appear flat</source>
-        <translation type="unfinished">Maak gereedschapsbalk vlak</translation>
+        <translation type="obsolete">Maak gereedschapsbalk vlak</translation>
     </message>
     <message>
         <source>Stipple contrast</source>
-        <translation type="unfinished">Gestippeld contrast</translation>
+        <translation type="obsolete">Gestippeld contrast</translation>
     </message>
 </context>
 <context>
     <name>Styles</name>
     <message>
         <source>Liquid</source>
-        <translation type="unfinished">Vloeibaar</translation>
+        <translation type="obsolete">Vloeibaar</translation>
     </message>
     <message>
         <source>High Performance Liquid style by Mosfet</source>
-        <translation type="unfinished">High Performance Vloeibaar stijl door Mosfet</translation>
+        <translation type="obsolete">High Performance Vloeibaar stijl door Mosfet</translation>
     </message>
 </context>
 </TS>

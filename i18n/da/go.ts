@@ -48,9 +48,5 @@
         <source>Prisoners: black %1, white %2</source>
         <translation>Fanger: Sort %1, hvid %2</translation>
     </message>
-    <message>
-        <source>Go</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 </TS>

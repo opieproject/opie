@@ -49,6 +49,10 @@
         <source>Video</source>
         <translation>Video</translation>
     </message>
+    <message>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MediumMountSetting::MediumMountWidget</name>
@@ -91,6 +95,14 @@
     <message>
         <source>Always check this medium</source>
         <translation>Controlla sempre questo supporto</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scan whole media</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -51,7 +51,7 @@
     </message>
     <message>
         <source>Go</source>
-        <translation>Go</translation>
+        <translation type="obsolete">Go</translation>
     </message>
 </context>
 </TS>

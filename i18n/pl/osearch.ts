@@ -61,6 +61,10 @@
         <source>Search for: </source>
         <translation>Szukaj: </translation>
     </message>
+    <message>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OListView</name>

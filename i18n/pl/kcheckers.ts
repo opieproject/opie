@@ -125,5 +125,9 @@
         <source> Rules of Play </source>
         <translation>Reguly gry</translation>
     </message>
+    <message>
+        <source>KCheckers</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

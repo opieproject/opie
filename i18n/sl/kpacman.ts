@@ -232,6 +232,10 @@ ali pa je v neznani obliki.</translation>
         <translation>@DD@.@MM@.@YY@</translation>
     </message>
     <message>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>                          </source>
         <translation type="unfinished"></translation>
     </message>

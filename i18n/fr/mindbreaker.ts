@@ -10,20 +10,24 @@
         <source>win avg: %1 turns (%2 games)</source>
         <translation>Moyenne : %1 tours (%2 jeux)</translation>
     </message>
+    <message>
+        <source>Mind Breaker</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MindBreakerBoard</name>
     <message>
         <source>Go%1p%2</source>
-        <translation>Tour %1p%2</translation>
+        <translation type="obsolete">Tour %1p%2</translation>
     </message>
     <message>
         <source>CurrentGo%1</source>
-        <translation>Tour courant %1</translation>
+        <translation type="obsolete">Tour courant %1</translation>
     </message>
     <message>
         <source>Answer%1</source>
-        <translation>Réponse %1</translation>
+        <translation type="obsolete">Réponse %1</translation>
     </message>
     <message>
         <source>Reset Statistics</source>

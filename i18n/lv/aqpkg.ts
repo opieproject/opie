@@ -117,7 +117,7 @@
     <name>InstallOptionsDlgImpl</name>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Opcijas</translation>
     </message>
     <message>
         <source>Force Depends</source>
@@ -539,7 +539,7 @@ Are you sure?
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Aizvērt</translation>
     </message>
 </context>
 <context>
@@ -634,7 +634,7 @@ Are you sure?
     </message>
     <message>
         <source>Destination</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mērķis</translation>
     </message>
     <message>
         <source>Location:</source>

@@ -10,20 +10,24 @@
         <source>win avg: %1 turns (%2 games)</source>
         <translation>perc vitt: %1 turni (%2 partite)</translation>
     </message>
+    <message>
+        <source>Mind Breaker</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MindBreakerBoard</name>
     <message>
         <source>Go%1p%2</source>
-        <translation>Go%1p%2</translation>
+        <translation type="obsolete">Go%1p%2</translation>
     </message>
     <message>
         <source>CurrentGo%1</source>
-        <translation>CorrenteGo%1</translation>
+        <translation type="obsolete">CorrenteGo%1</translation>
     </message>
     <message>
         <source>Answer%1</source>
-        <translation>Risposta%1</translation>
+        <translation type="obsolete">Risposta%1</translation>
     </message>
     <message>
         <source>Reset Statistics</source>

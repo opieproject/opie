@@ -9,20 +9,24 @@
         <source>win avg: %1 turns (%2 games)</source>
         <translation>勝利平均: %1 輪 (%2 場遊戲)</translation>
     </message>
+    <message>
+        <source>Mind Breaker</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MindBreakerBoard</name>
     <message>
         <source>Go%1p%2</source>
-        <translation>到%1p%2</translation>
+        <translation type="obsolete">到%1p%2</translation>
     </message>
     <message>
         <source>CurrentGo%1</source>
-        <translation>目前到%1</translation>
+        <translation type="obsolete">目前到%1</translation>
     </message>
     <message>
         <source>Answer%1</source>
-        <translation>答案%1</translation>
+        <translation type="obsolete">答案%1</translation>
     </message>
     <message>
         <source>Reset Statistics</source>

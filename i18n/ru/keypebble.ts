@@ -30,7 +30,7 @@ connection.</source>
     <name>KRFBDecoder</name>
     <message>
         <source>Waiting for server initialisation...</source>
-        <translation>Ожидаю инициализации сервера...</translation>
+        <translation type="obsolete">Ожидаю инициализации сервера...</translation>
     </message>
     <message>
         <source>Waiting for desktop name...</source>
@@ -47,6 +47,10 @@ connection.</source>
     <message>
         <source>Protocol Error: An unknown encoding was used by the server %1</source>
         <translation>Ошибка протокола: Сервер %1 использует неизвестную кодировку</translation>
+    </message>
+    <message>
+        <source>Waiting for server initialization...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

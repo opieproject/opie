@@ -116,14 +116,6 @@ og er GPL lisensiert</translation>
         <translation>Velg alle</translation>
     </message>
     <message>
-        <source>Switch to Local</source>
-        <translation type="obsolete">Bytt til lokal</translation>
-    </message>
-    <message>
-        <source>Switch to Remote</source>
-        <translation type="obsolete">Bytt til ekstern</translation>
-    </message>
-    <message>
         <source>Bookmark Directory</source>
         <translation>Bokmerke katalog</translation>
     </message>

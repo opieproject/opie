@@ -6,10 +6,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Solve</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Game</source>
         <translation type="unfinished"></translation>
     </message>

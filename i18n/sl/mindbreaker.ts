@@ -9,20 +9,24 @@
         <source>win avg: %1 turns (%2 games)</source>
         <translation>zmage pov.: %1 prehodov (%2 iger)</translation>
     </message>
+    <message>
+        <source>Mind Breaker</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MindBreakerBoard</name>
     <message>
         <source>Go%1p%2</source>
-        <translation>Gre%1p%2</translation>
+        <translation type="obsolete">Gre%1p%2</translation>
     </message>
     <message>
         <source>CurrentGo%1</source>
-        <translation>TrenutnGre%1</translation>
+        <translation type="obsolete">TrenutnGre%1</translation>
     </message>
     <message>
         <source>Answer%1</source>
-        <translation>Odgovor%1</translation>
+        <translation type="obsolete">Odgovor%1</translation>
     </message>
     <message>
         <source>Reset Statistics</source>

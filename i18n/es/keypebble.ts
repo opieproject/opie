@@ -30,7 +30,7 @@ se desconectó.</translation>
     <name>KRFBDecoder</name>
     <message>
         <source>Waiting for server initialisation...</source>
-        <translation>Esperando inicialización servidor...</translation>
+        <translation type="obsolete">Esperando inicialización servidor...</translation>
     </message>
     <message>
         <source>Waiting for desktop name...</source>
@@ -47,6 +47,10 @@ se desconectó.</translation>
     <message>
         <source>Protocol Error: An unknown encoding was used by the server %1</source>
         <translation>Error de protocolo: Codificación desconocida del servidor %1</translation>
+    </message>
+    <message>
+        <source>Waiting for server initialization...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

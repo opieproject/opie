@@ -38,14 +38,6 @@
         <translation>刪除</translation>
     </message>
     <message>
-        <source>Switch to Local</source>
-        <translation type="obsolete">切換至本地端</translation>
-    </message>
-    <message>
-        <source>Switch to Remote</source>
-        <translation type="obsolete">切換至遠端</translation>
-    </message>
-    <message>
         <source>Size</source>
         <translation>大小</translation>
     </message>

@@ -27,7 +27,7 @@
     <name>GoWidget</name>
     <message>
         <source>Go</source>
-        <translation>Vai</translation>
+        <translation type="obsolete">Vai</translation>
     </message>
     <message>
         <source>A draw.</source>

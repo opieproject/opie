@@ -39,14 +39,6 @@
         <translation>Supprimer</translation>
     </message>
     <message>
-        <source>Switch to Local</source>
-        <translation type="obsolete">Basculer sur &quot;Local&quot;</translation>
-    </message>
-    <message>
-        <source>Switch to Remote</source>
-        <translation type="obsolete">Basculer sur &quot;Distant&quot;</translation>
-    </message>
-    <message>
         <source>Size</source>
         <translation>Taille</translation>
     </message>
@@ -193,12 +185,6 @@ du fichier %1 ?</translation>
         <translation>Supprimer le répertoire ?</translation>
     </message>
     <message>
-        <source>Really delete
-</source>
-        <translation type="obsolete">Confirmer l&apos;effacement
-</translation>
-    </message>
-    <message>
         <source>Really copy
 %1 files?</source>
         <translation>Confirmer la copie
@@ -239,14 +225,6 @@ and is licensed by the GPL</source>
 Copyright 2002-2003
 L.J.Potter &lt;llornkcor@handhelds.org&gt;
 Sous licence GPL</translation>
-    </message>
-    <message>
-        <source>Cannot remove current directory
-from bookmarks.
-It is not bookmarked!!</source>
-        <translation type="obsolete">Impossible d&apos;effacer le répertoire courant
-des favoris.
-Ce n&apos;en est pas un!!</translation>
     </message>
     <message>
         <source>Bookmark Directory</source>

@@ -38,14 +38,6 @@
         <translation>Usun</translation>
     </message>
     <message>
-        <source>Switch to Local</source>
-        <translation type="obsolete">Przelacz na lokalne</translation>
-    </message>
-    <message>
-        <source>Switch to Remote</source>
-        <translation type="obsolete">przelacz na zdalne</translation>
-    </message>
-    <message>
         <source>Size</source>
         <translation>Rozmiar</translation>
     </message>

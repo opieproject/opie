@@ -38,14 +38,6 @@
         <translation>Borrar</translation>
     </message>
     <message>
-        <source>Switch to Local</source>
-        <translation type="obsolete">Pasar a local</translation>
-    </message>
-    <message>
-        <source>Switch to Remote</source>
-        <translation type="obsolete">Pasar a remoto</translation>
-    </message>
-    <message>
         <source>Size</source>
         <translation>Tamaño</translation>
     </message>
@@ -277,10 +269,6 @@ de %1?</translation>
     <message>
         <source> kB free</source>
         <translation type="unfinished"> kB libres</translation>
-    </message>
-    <message>
-        <source>Copy &apos;%1&apos; As</source>
-        <translation type="obsolete">Copiar &quot;%1&quot; como</translation>
     </message>
     <message>
         <source>Switch to View 1</source>

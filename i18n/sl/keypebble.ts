@@ -30,7 +30,7 @@ povezavo.</translation>
     <name>KRFBDecoder</name>
     <message>
         <source>Waiting for server initialisation...</source>
-        <translation>Čakam na zagon strežnika...</translation>
+        <translation type="obsolete">Čakam na zagon strežnika...</translation>
     </message>
     <message>
         <source>Waiting for desktop name...</source>
@@ -47,6 +47,10 @@ povezavo.</translation>
     <message>
         <source>Protocol Error: An unknown encoding was used by the server %1</source>
         <translation>Napaka prtokola: Strežnik %1 je uporabil neznano kodiranje </translation>
+    </message>
+    <message>
+        <source>Waiting for server initialization...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

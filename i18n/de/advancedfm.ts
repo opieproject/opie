@@ -39,14 +39,6 @@
         <translation>Löschen</translation>
     </message>
     <message>
-        <source>Switch to Local</source>
-        <translation type="obsolete">Lokalansicht</translation>
-    </message>
-    <message>
-        <source>Switch to Remote</source>
-        <translation type="obsolete">Fernansicht</translation>
-    </message>
-    <message>
         <source>Size</source>
         <translation>Größe</translation>
     </message>

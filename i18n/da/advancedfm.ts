@@ -106,14 +106,6 @@
         <translation>Vælg alle</translation>
     </message>
     <message>
-        <source>Switch to Local</source>
-        <translation type="obsolete">Skift til lokal</translation>
-    </message>
-    <message>
-        <source>Switch to Remote</source>
-        <translation type="obsolete">Skift til ekstern</translation>
-    </message>
-    <message>
         <source>Size</source>
         <translation>Størrelse</translation>
     </message>
@@ -276,10 +268,6 @@ og alt hvad der er i den?</translation>
     <message>
         <source> kB free</source>
         <translation type="unfinished">kB ledig</translation>
-    </message>
-    <message>
-        <source>Copy &apos;%1&apos; As</source>
-        <translation type="obsolete">Kopier &apos;%1&apos; som</translation>
     </message>
     <message>
         <source>Switch to View 1</source>

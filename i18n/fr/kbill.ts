@@ -36,7 +36,7 @@
     </message>
     <message>
         <source>&lt;b&gt;The Story&lt;/b&gt;&lt;p&gt;Yet again, the fate of the world rests in your hands!  An evil computer hacker, known only by his handle &apos;Bill&apos;, has created the ultimate computer virus.  A virus so powerful that it has the power to transmute an ordinary computer into a toaster oven.  (oooh!) &apos;Bill&apos; has cloned himself into a billion-jillion micro-Bills.  Their sole purpose is to deliver the nefarious virus, which has been cleverly diguised as a popular operating system. As System Administrator and Exterminator, your job is to keep Bill from succeeding at his task.</source>
-        <translation>&lt;b&gt;L&apos;histoire&lt;/b&gt;&lt;p&gt;Encore une fois, le destin du monde se retrouve entre vos mains ! Un méchant hacker, connu seulement sous le pseudo &quot;Bill&quot;, a créé l&apos;ultime virus pour ordinateur. Un virus si puissant qu&apos;il transforme un ordinateur ordinaire en un simple grille-pain (oooh !). &quot;Bill&quot; a su se cloner lui même (en plusieurs milliards de micro Bills). Le but unique de ce célérat est aujourd&apos;hui de livrer ce virus partout en le faisant passer habilement pour un système d&apos;exploitation populaire. Au commande de votre interface &quot;Exterminator&quot;, vous devrez agir pour maintenir votre système réseau sain et sauf. Bonne chance !!!&lt;/p&gt;.
+        <translation type="obsolete">&lt;b&gt;L&apos;histoire&lt;/b&gt;&lt;p&gt;Encore une fois, le destin du monde se retrouve entre vos mains ! Un méchant hacker, connu seulement sous le pseudo &quot;Bill&quot;, a créé l&apos;ultime virus pour ordinateur. Un virus si puissant qu&apos;il transforme un ordinateur ordinaire en un simple grille-pain (oooh !). &quot;Bill&quot; a su se cloner lui même (en plusieurs milliards de micro Bills). Le but unique de ce célérat est aujourd&apos;hui de livrer ce virus partout en le faisant passer habilement pour un système d&apos;exploitation populaire. Au commande de votre interface &quot;Exterminator&quot;, vous devrez agir pour maintenir votre système réseau sain et sauf. Bonne chance !!!&lt;/p&gt;.
 </translation>
     </message>
     <message>
@@ -57,6 +57,10 @@
 &lt;LI&gt;Apporter des seaux pour éteindre les étincelles (cliquer-déplacer)&lt;/LI&gt;
 &lt;P&gt;Le score évolu en fonction du temps et du bon fonctionnement général du système, avec des bonifications pour le massacre des &quot;Bill&quot;.
 Et pour le reste, vous pourrez certainement trouver de vous même...&lt;/P&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;The Story&lt;/b&gt;&lt;p&gt;Yet again, the fate of the world rests in your hands!  An evil computer hacker, known only by his handle &apos;Bill&apos;, has created the ultimate computer virus.  A virus so powerful that it has the power to transmute an ordinary computer into a toaster oven.  (oooh!) &apos;Bill&apos; has cloned himself into a billion-jillion micro-Bills.  Their sole purpose is to deliver the nefarious virus, which has been cleverly disguised as a popular operating system. As System Administrator and Exterminator, your job is to keep Bill from succeeding at his task.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

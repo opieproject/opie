@@ -30,7 +30,7 @@ connection.</source>
     <name>KRFBDecoder</name>
     <message>
         <source>Waiting for server initialisation...</source>
-        <translation>等候伺服器初始化...</translation>
+        <translation type="obsolete">等候伺服器初始化...</translation>
     </message>
     <message>
         <source>Waiting for desktop name...</source>
@@ -47,6 +47,10 @@ connection.</source>
     <message>
         <source>Protocol Error: An unknown encoding was used by the server %1</source>
         <translation>通訊協定錯誤: 伺服器 %1 使用了未知的編碼</translation>
+    </message>
+    <message>
+        <source>Waiting for server initialization...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

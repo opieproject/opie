@@ -326,6 +326,57 @@ Kérem töltse fel a biztonsági-elemt.</translation>
     </message>
 </context>
 <context>
+    <name>MediumMountSetting::MediumMountWidget</name>
+    <message>
+        <source>Configure this medium. The changes will go into effect when the application gets closed. To update the Document Tab you need to remove and insert this medium.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Which media files</source>
+        <translation type="unfinished">Mely média fájlokat</translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="unfinished">Hang</translation>
+    </message>
+    <message>
+        <source>All</source>
+        <translation type="unfinished">Minden</translation>
+    </message>
+    <message>
+        <source>Image</source>
+        <translation type="unfinished">Kép</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation type="unfinished">Szöveg</translation>
+    </message>
+    <message>
+        <source>Video</source>
+        <translation type="unfinished">Videó</translation>
+    </message>
+    <message>
+        <source>Limit search to:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished">Hozzáad</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scan whole media</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Always check this medium</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <source>Battery Status</source>

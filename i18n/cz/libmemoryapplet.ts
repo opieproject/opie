@@ -158,5 +158,9 @@ Paměť je kategorizována následovně:
         <source>Swapfile activated.</source>
         <translation>Swap soubor aktivován.</translation>
     </message>
+    <message>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

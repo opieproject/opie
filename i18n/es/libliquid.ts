@@ -3,73 +3,73 @@
     <name>Decoration</name>
     <message>
         <source>Liquid</source>
-        <translation type="obsolete">Líquido</translation>
+        <translation type="unfinished">Líquido</translation>
     </message>
 </context>
 <context>
     <name>LiquidSettings</name>
     <message>
         <source>Liquid Style</source>
-        <translation type="unfinished">Estilo Líquido</translation>
+        <translation type="obsolete">Estilo Líquido</translation>
     </message>
     <message>
         <source>No translucency</source>
-        <translation type="unfinished">Sin transparencia</translation>
+        <translation type="obsolete">Sin transparencia</translation>
     </message>
     <message>
         <source>Stippled, background color</source>
-        <translation type="unfinished">Punteado, color de fondo</translation>
+        <translation type="obsolete">Punteado, color de fondo</translation>
     </message>
     <message>
         <source>Stippled, button color</source>
-        <translation type="unfinished">Punteado, color de botón</translation>
+        <translation type="obsolete">Punteado, color de botón</translation>
     </message>
     <message>
         <source>Translucent stippled, background color</source>
-        <translation type="unfinished">Punteado translúcido, color de fondo</translation>
+        <translation type="obsolete">Punteado translúcido, color de fondo</translation>
     </message>
     <message>
         <source>Translucent stippled, button color</source>
-        <translation type="unfinished">Punteado translúcido, color de botón</translation>
+        <translation type="obsolete">Punteado translúcido, color de botón</translation>
     </message>
     <message>
         <source>Custom translucency</source>
-        <translation type="unfinished">Transparencia propia</translation>
+        <translation type="obsolete">Transparencia propia</translation>
     </message>
     <message>
         <source>Menu color</source>
-        <translation type="unfinished">Color del menú</translation>
+        <translation type="obsolete">Color del menú</translation>
     </message>
     <message>
         <source>Text color</source>
-        <translation type="unfinished">Color del texto</translation>
+        <translation type="obsolete">Color del texto</translation>
     </message>
     <message>
         <source>Opacity</source>
-        <translation type="unfinished">Opacidad</translation>
+        <translation type="obsolete">Opacidad</translation>
     </message>
     <message>
         <source>Use shadowed menu text</source>
-        <translation type="unfinished">Usar texto del munú sombreado</translation>
+        <translation type="obsolete">Usar texto del munú sombreado</translation>
     </message>
     <message>
         <source>Make toolbar buttons appear flat</source>
-        <translation type="unfinished">Botones de barra de herramientas planos</translation>
+        <translation type="obsolete">Botones de barra de herramientas planos</translation>
     </message>
     <message>
         <source>Stipple contrast</source>
-        <translation type="unfinished">Contraste punteado</translation>
+        <translation type="obsolete">Contraste punteado</translation>
     </message>
 </context>
 <context>
     <name>Styles</name>
     <message>
         <source>Liquid</source>
-        <translation type="unfinished">Líquido</translation>
+        <translation type="obsolete">Líquido</translation>
     </message>
     <message>
         <source>High Performance Liquid style by Mosfet</source>
-        <translation type="unfinished">Estilo de alto rendimiento Liquid por Mosfet</translation>
+        <translation type="obsolete">Estilo de alto rendimiento Liquid por Mosfet</translation>
     </message>
 </context>
 </TS>

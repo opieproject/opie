@@ -206,6 +206,10 @@ or is of an unknown format.</source>
         <translation>FOO</translation>
     </message>
     <message>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>                          </source>
         <translation type="unfinished"></translation>
     </message>

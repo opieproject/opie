@@ -10,7 +10,7 @@
 (Note that such a tab scans &lt;i&gt;all&lt;/i&gt; documents
 on &lt;i&gt;all&lt;/i&gt; external media, which can be quite
 slow and annyoing...)</source>
-        <translation>&lt;b&gt;Czy chcesz używać zakładki Dokumenty?&lt;/b&gt;&lt;p&gt;
+        <translation type="obsolete">&lt;b&gt;Czy chcesz używać zakładki Dokumenty?&lt;/b&gt;&lt;p&gt;
 (Zakładka ta skanuje &lt;i&gt;wszystkie&lt;/i&gt; dokumenty
 na &lt;i&gt;wszystkich&lt;/i&gt; nośnikach, co może być całkiem
 powolne i denerwujące...)</translation>
@@ -26,6 +26,13 @@ powolne i denerwujące...)</translation>
     <message>
         <source>No, thanks.</source>
         <translation>Nie, dziękuję.</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Do you want a Documents Tab?&lt;/b&gt;&lt;p&gt;
+(Note that such a tab scans &lt;i&gt;all&lt;/i&gt; documents
+on &lt;i&gt;all&lt;/i&gt; external media, which can be quite
+slow and annoying...)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

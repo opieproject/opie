@@ -30,7 +30,7 @@ polaczenie.</translation>
     <name>KRFBDecoder</name>
     <message>
         <source>Waiting for server initialisation...</source>
-        <translation>Oczekiwanie na inicjalizacje serwera...</translation>
+        <translation type="obsolete">Oczekiwanie na inicjalizacje serwera...</translation>
     </message>
     <message>
         <source>Waiting for desktop name...</source>
@@ -47,6 +47,10 @@ polaczenie.</translation>
     <message>
         <source>Protocol Error: An unknown encoding was used by the server %1</source>
         <translation>Blad protokolu: Serwer %1 uzyl nieznanego kodowania</translation>
+    </message>
+    <message>
+        <source>Waiting for server initialization...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -28,6 +28,10 @@
         <source>Click on one of the set cities to replace it</source>
         <translation>Kliknite na eno od nastavljenih mest, da ga zamenjate</translation>
     </message>
+    <message>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ZoneMap</name>

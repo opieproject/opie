@@ -125,5 +125,9 @@
         <source>Incorrect course.</source>
         <translation type="unfinished">Forkert rute</translation>
     </message>
+    <message>
+        <source>KCheckers</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

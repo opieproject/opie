@@ -158,5 +158,9 @@ Memory is categorized as follows:
         <source>Swapfile activated.</source>
         <translation>Файл подкачки подключен.</translation>
     </message>
+    <message>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

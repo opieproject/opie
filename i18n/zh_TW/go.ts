@@ -50,7 +50,7 @@
     </message>
     <message>
         <source>Go</source>
-        <translation>圍棋</translation>
+        <translation type="obsolete">圍棋</translation>
     </message>
 </context>
 </TS>

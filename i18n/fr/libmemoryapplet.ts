@@ -158,5 +158,9 @@ La mémoire (i.e RAM) est divisée en catégories comme suit :
         <source>Swapfile activated.</source>
         <translation>Fichier d&apos;échange activé.</translation>
     </message>
+    <message>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

@@ -1,5 +1,72 @@
 <!DOCTYPE TS><TS>
 <context>
+    <name>BenchmarkInfo</name>
+    <message>
+        <source>This area shows the available tests, the results for which the tests have been performed, and comparison values for one selected device. Use the checkboxes to define which tests you want to perform.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tests</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Results</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Comparison</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1. Integer Arithmetic  </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>2. Floating Point Unit  </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>3. Text Rendering  </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>4. Gfx Rendering  </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>5. RAM Performance  </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>6. SD Card Performance  </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7. CF Card Performance  </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Start Tests!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to perform the selected tests.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose a model to compare your results with.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Compare To:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>error</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>FileSysInfo</name>
     <message>
         <source>CF</source>
@@ -152,7 +219,12 @@ Klikněte a podržte na modulu, pokud se chcete dozvědět více, nebo modul uvo
     </message>
     <message>
         <source>You really want to execute %1 for this module?</source>
-        <translation>Opravdu chcete poslat %1 tomuto modulu?</translation>
+        <translation type="obsolete">Opravdu chcete poslat %1 tomuto modulu?</translation>
+    </message>
+    <message>
+        <source>You really want to execute
+%1 for this module?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -248,6 +320,10 @@ tomuto procesu?</translation>
     <message>
         <source>Version</source>
         <translation>Verze</translation>
+    </message>
+    <message>
+        <source>Benchmark</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

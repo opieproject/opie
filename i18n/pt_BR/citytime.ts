@@ -29,6 +29,10 @@
         <source>Click on one of the set cities to replace it</source>
         <translation>Clique em uma das cidades para substituí-la</translation>
     </message>
+    <message>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ZoneMap</name>

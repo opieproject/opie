@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Solve</source>
-        <translation>Los op</translation>
+        <translation type="obsolete">Los op</translation>
     </message>
     <message>
         <source>Game</source>

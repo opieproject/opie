@@ -28,6 +28,10 @@
         <source>Click on one of the set cities to replace it</source>
         <translation>點選已設定的城市來取代</translation>
     </message>
+    <message>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ZoneMap</name>

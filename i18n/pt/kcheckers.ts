@@ -125,5 +125,9 @@
         <source>Incorrect course.</source>
         <translation>Jogada incorrecta.</translation>
     </message>
+    <message>
+        <source>KCheckers</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

@@ -38,14 +38,6 @@
         <translation>Izbriši</translation>
     </message>
     <message>
-        <source>Switch to Local</source>
-        <translation type="obsolete">Preklopi na lokalen</translation>
-    </message>
-    <message>
-        <source>Switch to Remote</source>
-        <translation type="obsolete">Preklopi na oddaljen</translation>
-    </message>
-    <message>
         <source>Size</source>
         <translation>Velikost</translation>
     </message>
@@ -231,14 +223,6 @@ and is licensed by the GPL</source>
 pravice pridržane 2002-2003
 LJ.Potter&lt;llornkcor@handhelds.org&gt;
 in je licencirano pod GPL</translation>
-    </message>
-    <message>
-        <source>Cannot remove current directory
-from bookmarks.
-It is not bookmarked!!</source>
-        <translation type="obsolete">Ne morem odstraniti trenutnega imenika
-iz zaznamkov.
-Ni med zaznamki!!</translation>
     </message>
     <message>
         <source>Bookmark Directory</source>

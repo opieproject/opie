@@ -106,14 +106,6 @@
         <translation>FOO</translation>
     </message>
     <message>
-        <source>Switch to Local</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Switch to Remote</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>Size</source>
         <translation>FOO</translation>
     </message>
@@ -262,10 +254,6 @@ and all it&apos;s contents ?</source>
     <message>
         <source> kB free</source>
         <translation type="unfinished">FOO</translation>
-    </message>
-    <message>
-        <source>Copy &apos;%1&apos; As</source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Switch to View 1</source>

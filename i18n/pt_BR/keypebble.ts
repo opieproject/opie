@@ -39,7 +39,7 @@ a conexão.</translation>
     </message>
     <message>
         <source>Waiting for server initialisation...</source>
-        <translation>Eperando a inicialização do servidor...</translation>
+        <translation type="obsolete">Eperando a inicialização do servidor...</translation>
     </message>
     <message>
         <source>Protocol Error: An unknown encoding was used by the server %1</source>
@@ -48,6 +48,10 @@ a conexão.</translation>
     <message>
         <source>Protocol Error: Message Id %1 was found when expecting an update message.</source>
         <translation>Erro de Protocolo: A mensagem Id %1 foi </translation>
+    </message>
+    <message>
+        <source>Waiting for server initialization...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

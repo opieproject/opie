@@ -222,6 +222,10 @@ tem um formato desconhecido.</translation>
         <translation>@YY@/@MM@/@DD@</translation>
     </message>
     <message>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>                          </source>
         <translation type="unfinished"></translation>
     </message>

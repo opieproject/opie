@@ -10,6 +10,10 @@
         <source>win avg: %1 turns (%2 games)</source>
         <translation>méd. vitórias: %1 turnos (%2 jogos)</translation>
     </message>
+    <message>
+        <source>Mind Breaker</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MindBreakerBoard</name>
@@ -27,7 +31,7 @@
     </message>
     <message>
         <source>Answer%1</source>
-        <translation>Resposta %1</translation>
+        <translation type="obsolete">Resposta %1</translation>
     </message>
     <message>
         <source>Reset Statistics</source>
@@ -35,11 +39,11 @@
     </message>
     <message>
         <source>CurrentGo%1</source>
-        <translation>Atual%1</translation>
+        <translation type="obsolete">Atual%1</translation>
     </message>
     <message>
         <source>Go%1p%2</source>
-        <translation>Ir%1p%2</translation>
+        <translation type="obsolete">Ir%1p%2</translation>
     </message>
 </context>
 </TS>

@@ -96,14 +96,6 @@ en valt onder de GPL</translation>
         <translation>Verzend bestand via IR</translation>
     </message>
     <message>
-        <source>Cannot remove current directory
-from bookmarks.
-It is not bookmarked!!</source>
-        <translation type="obsolete">Kan huidige directory niet
-uit favorieten verwijderen,
-er is hier geen favoriet van!</translation>
-    </message>
-    <message>
         <source>AdvancedFm</source>
         <translation>AdvancedFm</translation>
     </message>
@@ -122,14 +114,6 @@ er is hier geen favoriet van!</translation>
     <message>
         <source>Select All</source>
         <translation>Selecteer alles</translation>
-    </message>
-    <message>
-        <source>Switch to Local</source>
-        <translation type="obsolete">Schakel naar lokaal</translation>
-    </message>
-    <message>
-        <source>Switch to Remote</source>
-        <translation type="obsolete">Schakel naar server</translation>
     </message>
     <message>
         <source>Bookmark Directory</source>
@@ -172,12 +156,6 @@ echt verwijderen?</translation>
     <message>
         <source>Delete Directory?</source>
         <translation>Verwijder map?</translation>
-    </message>
-    <message>
-        <source>Really delete
-</source>
-        <translation type="obsolete">Echt verwijderen
-</translation>
     </message>
     <message>
         <source>Really copy
@@ -288,10 +266,6 @@ echt verwijderen?</translation>
 %1?</source>
         <translation>%1
 echt verwijderen?</translation>
-    </message>
-    <message>
-        <source>Copy &apos;%1&apos; As</source>
-        <translation type="obsolete">Kopiëer &apos;%1&apos; als</translation>
     </message>
     <message>
         <source>Switch to View 1</source>
