@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: metal.cpp,v 1.1 2002-06-25 01:46:34 llornkcor Exp $
+** $Id: metal.cpp,v 1.2 2003-05-26 04:07:44 llornkcor Exp $
 **
 ** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
 **
@@ -10,16 +10,7 @@
 
 #include "metal.h"
 #include <qapplication.h>
-#include <qpainter.h>
-#include <qdrawutil.h> // for now
-#include <qpixmap.h> // for now
-#include <qpalette.h> // for now
-#include <qwidget.h>
-#include <qlabel.h>
-#include <qimage.h>
 #include <qpushbutton.h>
-#include <qwidget.h>
-#include <qrangecontrol.h>
 #include <qscrollbar.h>
 #include <limits.h>
 
