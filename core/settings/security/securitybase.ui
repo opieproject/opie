@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>281</width>
+            <width>277</width>
             <height>328</height>
         </rect>
     </property>
@@ -22,14 +22,17 @@
     <property>
         <name>layoutMargin</name>
     </property>
+    <property>
+        <name>layoutSpacing</name>
+    </property>
     <grid>
         <property stdset="1">
             <name>margin</name>
-            <number>11</number>
+            <number>3</number>
         </property>
         <property stdset="1">
             <name>spacing</name>
-            <number>6</number>
+            <number>3</number>
         </property>
         <widget row="0"  column="0" >
             <class>QLayoutWidget</class>
@@ -150,6 +153,12 @@
                             <property>
                                 <name>text</name>
                                 <string>10.0.0.0/8</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property>
+                                <name>text</name>
+                                <string>1.0.0.0/8</string>
                             </property>
                         </item>
                         <item>
