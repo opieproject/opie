@@ -31,7 +31,7 @@
     </message>
     <message>
         <source>Off</source>
-        <translation>Spento</translation>
+        <translation>Spenta</translation>
     </message>
     <message>
         <source>on Battery</source>
@@ -63,7 +63,7 @@
     </message>
     <message>
         <source>Full</source>
-        <translation>Completo</translation>
+        <translation>Intensa</translation>
     </message>
     <message>
         <source>Use Light Sensor</source>
@@ -87,7 +87,7 @@
     </message>
     <message>
         <source>Low power warning interval</source>
-        <translation type="unfinished"></translation>
+        <translation>Intervalli livello critico ogni</translation>
     </message>
     <message>
         <source> %</source>
@@ -95,23 +95,23 @@
     </message>
     <message>
         <source>At what battery level should the low power warning pop up</source>
-        <translation type="unfinished"></translation>
+        <translation>A che livello di carica della batteria l&apos;avviso di livello basso deve essere inviato</translation>
     </message>
     <message>
         <source>how often should be checked for low power. This determines the rate popups occure in low power situations</source>
-        <translation type="unfinished"></translation>
+        <translation>Quanto spesso bisogna controllare il livello di carica della batteria. Questo determina quanto spesso l&apos;avviso di livello basso deve essere inviato</translation>
     </message>
     <message>
         <source>At what battery level should the critical power warning pop up</source>
-        <translation type="unfinished"></translation>
+        <translation>A che livello di carica della batteria l&apos;avviso di livello critico deve essere inviato</translation>
     </message>
     <message>
         <source>very low battery warning at</source>
-        <translation type="unfinished"></translation>
+        <translation>livello molto basso al</translation>
     </message>
     <message>
         <source>critical power warning at</source>
-        <translation type="unfinished"></translation>
+        <translation>livello critico al</translation>
     </message>
 </context>
 <context>
@@ -122,7 +122,7 @@
     </message>
     <message>
         <source>Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Intensa</translation>
     </message>
     <message>
         <source>Off</source>
@@ -130,11 +130,11 @@
     </message>
     <message>
         <source>Dark</source>
-        <translation type="unfinished"></translation>
+        <translation>Scuro</translation>
     </message>
     <message>
         <source>Light</source>
-        <translation type="unfinished"></translation>
+        <translation>Chiaro</translation>
     </message>
     <message>
         <source>Steps</source>
@@ -142,7 +142,7 @@
     </message>
     <message>
         <source>Check interval</source>
-        <translation type="unfinished"></translation>
+        <translation>Intervallo di controllo</translation>
     </message>
     <message>
         <source> sec</source>

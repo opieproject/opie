@@ -132,7 +132,7 @@ Per ordinarla per un campo specifico, clicca sul nome della colonna.</translatio
     </message>
     <message>
         <source>New</source>
-        <translation>Nuovo</translation>
+        <translation>Nuova</translation>
     </message>
     <message>
         <source>Click here to add a new transaction.</source>
@@ -176,7 +176,7 @@ Per ordinarla per un campo specifico, clicca sul nome della colonna.</translatio
     </message>
     <message>
         <source>Draw</source>
-        <translation>Ritira</translation>
+        <translation>Disegna</translation>
     </message>
     <message>
         <source>Click here to draw the selected chart.</source>

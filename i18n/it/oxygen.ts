@@ -90,7 +90,7 @@
     <name>Oxygen</name>
     <message>
         <source>Oxygen</source>
-        <translation>Oxygen</translation>
+        <translation>Ossigeno</translation>
     </message>
     <message>
         <source>PSE</source>
@@ -242,7 +242,7 @@
     </message>
     <message>
         <source>Krypton</source>
-        <translation>Krypton</translation>
+        <translation>Crypton</translation>
     </message>
     <message>
         <source>Rubidium</source>
@@ -314,7 +314,7 @@
     </message>
     <message>
         <source>Xenon</source>
-        <translation>Xenon</translation>
+        <translation>Xeno</translation>
     </message>
     <message>
         <source>Cesium</source>
@@ -378,7 +378,7 @@
     </message>
     <message>
         <source>Ytterbium</source>
-        <translation>Ytterbio</translation>
+        <translation>Itterbio</translation>
     </message>
     <message>
         <source>Lutetium</source>
@@ -386,7 +386,7 @@
     </message>
     <message>
         <source>Hafnium</source>
-        <translation>Hafnio</translation>
+        <translation>Afnio</translation>
     </message>
     <message>
         <source>Tantalum</source>

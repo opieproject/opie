@@ -150,18 +150,86 @@ the current page?</source>
 la pagina corrente?</translation>
     </message>
     <message>
-        <source>DrawPad</source>
-        <translation>DrawPad</translation>
-    </message>
-    <message>
-        <source>Page</source>
-        <translation>Pagina</translation>
-    </message>
-    <message>
         <source>Do you want to delete
 all the pages?</source>
         <translation>Vuoi eliminare tutte
 le pagine?</translation>
+    </message>
+    <message>
+        <source>Click here to add a new sheet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to erase the current sheet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to remove the current sheet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to undo the last action.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to re-perform the last action.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to view the first page.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to view the previous page.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to view the next page.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to view the last page.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to select one of the available tools to draw lines.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to select one of the available tools to draw rectangles.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to select one of the available tools to draw ellipses.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to select the text drawing tool.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to select the fill tool.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to select the eraser tool.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to select the width of the drawing pen.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to select the color used when drawing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to select the color used when filling in areas.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DrawPad - Page %1/%2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -296,16 +364,16 @@ automatica</translation>
 <context>
     <name>QObject</name>
     <message>
-        <source>Title:</source>
-        <translation>Titolo:</translation>
+        <source>Title: %1</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Dimension:</source>
-        <translation>Dimensione:</translation>
+        <source>Dimension: %1x%2</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Date:</source>
-        <translation>Data:</translation>
+        <source>Date: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -348,6 +416,26 @@ la pagina selezionata?</translation>
 the selected page?</source>
         <translation>Vuoi eliminare
 la pagina selezionata?</translation>
+    </message>
+    <message>
+        <source>Click here to add a new sheet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to erase the current sheet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to remove the current sheet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to move the current sheet up one position in the list.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to move the current sheet down one position in the list.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
