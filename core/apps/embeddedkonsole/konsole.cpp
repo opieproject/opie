@@ -168,8 +168,7 @@ Konsole::Konsole(QWidget* parent, const char* name, WFlags fl) :
     QMainWindow(parent, name, fl)
 {
     QStrList args;
-    init("/bin/ash",args);
-//    init("/bin/sh",args);
+    init("/bin/sh",args);
 }
 
 Konsole::Konsole(const char* name, const char* _pgm, QStrList & _args, int)
