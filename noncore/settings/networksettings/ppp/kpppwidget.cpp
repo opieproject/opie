@@ -2,7 +2,7 @@
  *
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: kpppwidget.cpp,v 1.2 2003-05-24 16:12:02 tille Exp $
+ * $Id: kpppwidget.cpp,v 1.3 2003-05-25 00:47:30 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -241,10 +241,6 @@ KPPPWidget::KPPPWidget( QWidget *parent, const char *name, bool modal, WFlags fl
 //  statdlg = new PPPStatsDlg(0, "stats", this, stats);
 //  statdlg->hide();
 
-  debugwindow = new DebugWidget(0,"debugwindow");
-  // KWin::setIcons(debugwindow->winId(), kapp->icon(), kapp->miniIcon());
-  debugwindow->hide();
-
   // load up the accounts combo box
 
 //  resetaccounts();
@@ -257,14 +253,6 @@ KPPPWidget::KPPPWidget( QWidget *parent, const char *name, bool modal, WFlags fl
 //   con->setGeometry(desk.center().x()-175, desk.center().y()-55, 350,110);
 
   // connect the ConnectWidgets various signals
-//   connect(con, SIGNAL(closeDebugWindow()),
-// 	  debugwindow, SLOT(hide()));
-//   connect(con, SIGNAL(debugMessage(const QString &)),
-// 	  debugwindow, SLOT(statusLabel(const QString &)));
-//   connect(con, SIGNAL(toggleDebugWindow()),
-// 	  debugwindow, SLOT(toggleVisibility()));
-//   connect(con, SIGNAL(debugPutChar(unsigned char)),
-// 	  debugwindow, SLOT(addChar(unsigned char)));
 // //   connect(con, SIGNAL(startAccounting()),
 // // 	  this, SLOT(startAccounting()));
 // //   connect(con, SIGNAL(stopAccounting()),
@@ -273,11 +261,6 @@ KPPPWidget::KPPPWidget( QWidget *parent, const char *name, bool modal, WFlags fl
 // 	  this, SLOT(saveMyself()));
 //   connect(qApp, SIGNAL(shutDown()),
 // 	  this, SLOT(shutDown()));
-
-//   debugwindow->setGeometry(desk.center().x()+190, desk.center().y()-55,
-// 			   debugwindow->width(),debugwindow->height());
-
-//  move(desk.center().x()-width()/2, desk.center().y()-height()/2);
 
 
 //   KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
@@ -635,15 +618,6 @@ void KPPPWidget::beginConnect() {
 
 //   con->show();
 
-  bool show_debug = PPPData::data()->get_show_log_window();
-//  con->debug->setOn(show_debug);	// toggle button
-  debugwindow->clear();
-  if (!show_debug)
-    debugwindow->hide();
-  else {
-    debugwindow->show();
-//    con->raise();
-  }
 
   emit begin_connect();
 }

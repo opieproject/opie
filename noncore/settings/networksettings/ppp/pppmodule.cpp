@@ -80,6 +80,7 @@ QWidget *PPPModule::information(Interface *i){
  */
 QList<Interface> PPPModule::getInterfaces(){
   // List all of the files in the peer directory
+    qDebug("PPPModule::getInterfaces");
   return list;
 }
 

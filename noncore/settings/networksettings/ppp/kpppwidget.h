@@ -2,7 +2,7 @@
  *
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: kpppwidget.h,v 1.1 2003-05-23 19:43:46 tille Exp $
+ * $Id: kpppwidget.h,v 1.2 2003-05-25 00:47:30 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -29,26 +29,11 @@
 
 #include <qstring.h>
 
-//#include "accounting.h"
 #include "conwindow.h"
 #include "accounts.h"
 #include "connect.h"
-#include "debug.h"
-//#include "pppstatdlg.h"
 
-//class GraphSetup;
-//class AboutWidget;
-//class PPPStats;
-class QDialog;
 class QPushButton;
-
-/* class SignalEvent : public QEvent { */
-/* public: */
-/*   SignalEvent(int s) : QEvent(User), sig(s) { } */
-/*   int sigType() const { return sig; } */
-/* private: */
-/*   int sig; */
-/* }; */
 
 
 class KPPPWidget : public QDialog {
@@ -59,19 +44,12 @@ public:
   ~KPPPWidget();
 
   void setPW_Edit(const QString &);
-  //  virtual bool eventFilter(QObject *, QEvent *);
 
-  void setQuitOnDisconnect (bool b);
-  //  bool quitOnDisconnect () {return m_bQuitOnDisconnect;};
 
 private slots:
   void newdefaultaccount(int);
-//  void expandbutton();
   void beginConnect();
   void quitbutton();
-  //  void helpbutton();
-  //  void setup();
-  // void rulesetLoadError();
   void usernameChanged(const QString &);
   void passwordChanged(const QString &);
   void enterPressedInID();
@@ -79,19 +57,10 @@ private slots:
   void saveMyself();
   void shutDown();
 
-/* protected slots: */
-/*     virtual void accept(); */
-/*     virtual void reject(); */
 
 public slots:
-    //  void resetaccounts();
-/*   void resetCosts(const QString &); */
-/*   void resetVolume(const QString &); */
   void disconnect();
   void log_window_toggled(bool on);
-/*   void startAccounting(); */
-/*   void stopAccounting(); */
-/*   void showStats(); */
 
 signals:
   void begin_connect();
@@ -100,7 +69,6 @@ signals:
 public:
   QCheckBox *log;
   bool connected;
-  DebugWidget *debugwindow;
   QString con_speed;
   //  ConnectWidget *con;
   //  ConWindow *con_win;
@@ -119,7 +87,6 @@ private:
 
   QString ruleset_load_errmsg;
 
-  // QPushButton *help_b;
   QPushButton *setup_b;
   QFrame *fline;
   QFrame *fline1;
@@ -136,16 +103,6 @@ private:
   QLabel *label5;
   QLabel *label6;
   QLabel *radio_label;
-
-
-  //  QTabWidget *tabWindow;
-  //  AccountWidget *accounts;
-  //  GeneralWidget *general;
-  //  ModemWidget *modem1;
-  //  ModemWidget2 *modem2;
-  //  GraphSetup *graph;
-  // AboutWidget *about;
-
 
 /*   QString m_strCmdlAccount; */
 /*   bool m_bQuitOnDisconnect; */
