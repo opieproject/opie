@@ -460,28 +460,30 @@ AppLnk& AppLnk::operator=(const AppLnk &copy)
 */
 const QPixmap& AppLnk::pixmap( int pos, int size ) const {
     if ( d->mPixmaps[pos].isNull() ) {
-  AppLnk* that = (AppLnk*)this;
-  if ( mIconFile.isEmpty() ) {
-      MimeType mt(type());
-      that->d->mPixmaps[pos] = pos ? mt.bigPixmap() : mt.pixmap();
-      if ( that->d->mPixmaps[pos].isNull() )
-    that->d->mPixmaps[pos].convertFromImage(
-        Resource::loadImage("UnknownDocument")
-      .smoothScale( size, size ) );
-      return that->d->mPixmaps[pos];
-  }
-  QImage unscaledIcon = Resource::loadImage( that->mIconFile );
-  if ( unscaledIcon.isNull() ) {
-    //  qDebug( "Cannot find icon: %s", that->mIconFile.latin1() );
-      that->d->mPixmaps[pos].convertFromImage(
-        Resource::loadImage("UnknownDocument")
-      .smoothScale( size, size ) );
-  } else {
-      that->d->mPixmaps[0].convertFromImage( unscaledIcon.smoothScale( smallSize, smallSize ) );
-      that->d->mPixmaps[1].convertFromImage( unscaledIcon.smoothScale( bigSize, bigSize ) );
-  }
-  return that->d->mPixmaps[pos];
+        AppLnk* that = (AppLnk*)this;
+        if ( mIconFile.isEmpty() ) {
+            MimeType mt(type());
+            that->d->mPixmaps[pos] = pos ? mt.bigPixmap() : mt.pixmap();
+            if ( that->d->mPixmaps[pos].isNull() )
+                that->d->mPixmaps[pos].convertFromImage(
+                    Resource::loadImage("UnknownDocument")
+                    .smoothScale( size, size ) );
+            return that->d->mPixmaps[pos];
+        }
+
+        QImage unscaledIcon = Resource::loadImage( that->mIconFile );
+        if ( unscaledIcon.isNull() ) {
+           //  qDebug( "Cannot find icon: %s", that->mIconFile.latin1() );
+            that->d->mPixmaps[pos].convertFromImage(
+                Resource::loadImage("UnknownDocument")
+                .smoothScale( size, size ) );
+        } else {
+            that->d->mPixmaps[0].convertFromImage( unscaledIcon.smoothScale( smallSize, smallSize ) );
+            that->d->mPixmaps[1].convertFromImage( unscaledIcon.smoothScale( bigSize, bigSize ) );
+        }
+        return that->d->mPixmaps[pos];
     }
+
     return d->mPixmaps[pos];
 }
 
@@ -984,33 +986,33 @@ void AppLnk::removeLinkFile()
 class AppLnkImagePrivate {
 public :
       AppLnkImagePrivate( const QString & ImageName ) {
-        IconName = ImageName;
-        Small = 0;
-        Big = 0;
+          IconName = ImageName;
+          Small = 0;
+          Big = 0;
       }
       ~AppLnkImagePrivate( ) {
-        if ( Small ) delete Small;
-        if ( Big ) delete Big;
+          if ( Small ) delete Small;
+          if ( Big ) delete Big;
       }
 
       inline QPixmap * small( void ) {
-        if( ! Small ) {
-          QImage unscaledIcon = Resource::loadImage( IconName );
-          // works as long as smallSize remains static
-          Small = new QPixmap();
-          Small->convertFromImage( unscaledIcon.smoothScale( smallSize, smallSize ) );
-        }
-        return Small;
+          if( ! Small ) {
+              QImage unscaledIcon = Resource::loadImage( IconName );
+              // works as long as smallSize remains static
+              Small = new QPixmap();
+              Small->convertFromImage( unscaledIcon.smoothScale( smallSize, smallSize ) );
+          }
+          return Small;
       }
 
       inline QPixmap * big( void ) {
-        if( ! Big ) {
-          QImage unscaledIcon = Resource::loadImage( IconName );
-          // works as long as bigSize remains static
-          Big = new QPixmap();
-          Big->convertFromImage( unscaledIcon.smoothScale( bigSize, bigSize ) );
-        }
-        return Big;
+          if( ! Big ) {
+              QImage unscaledIcon = Resource::loadImage( IconName );
+              // works as long as bigSize remains static
+              Big = new QPixmap();
+              Big->convertFromImage( unscaledIcon.smoothScale( bigSize, bigSize ) );
+          }
+          return Big;
       }
 
       QString   IconName;
@@ -1125,7 +1127,7 @@ void AppLnkSet::findChildren(const QString &dr, const QString& typ, const QStrin
       config.setGroup( "Desktop Entry" );
       typNameLocal = config.readEntry( "Name", typNameLocal );
       if ( !typ.isEmpty() ) {
-        d->typPix.insert( typ, 
+        d->typPix.insert( typ,
           new AppLnkImagePrivate( config.readEntry( "Icon", "AppsIcon" ) )
         );
         d->typName.insert(typ, new QString(typNameLocal));
