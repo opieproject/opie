@@ -1,7 +1,7 @@
-#/**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+/**********************************************************************
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -18,18 +18,22 @@
 **
 **********************************************************************/
 
+#define QTOPIA_INTERNAL_LANGLIST
+
 #include "helpbrowser.h"
 
-#include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
-#include <qpe/global.h>
+#include <qtopia/qpeapplication.h>
+#include <qtopia/resource.h>
+#include <qtopia/mimetype.h>
+#include <qtopia/applnk.h>
+#include <qtopia/global.h>
 
 #include <qstatusbar.h>
 #include <qdragobject.h>
 #include <qpixmap.h>
 #include <qpopupmenu.h>
-#include <qpe/qpemenubar.h>
-#include <qpe/qpetoolbar.h>
+#include <qtopia/qpemenubar.h>
+#include <qtopia/qpetoolbar.h>
 #include <qtoolbutton.h>
 #include <qiconset.h>
 #include <qfile.h>
@@ -48,8 +52,9 @@
 #include <qpaintdevicemetrics.h>
 #include <qaction.h>
 
-#include <ctype.h>
+#include <cctype>
 
+#include "magictextbrowser.h"
 
 HelpBrowser::HelpBrowser( QWidget* parent, const char *name, WFlags f )
     : QMainWindow( parent, name, f ),
@@ -58,11 +63,14 @@ HelpBrowser::HelpBrowser( QWidget* parent, const char *name, WFlags f )
     init( "index.html" );
 }
 
+
+
 void HelpBrowser::init( const QString& _home )
 {
-    setIcon( Resource::loadPixmap( "help_icon" ) );
+    setIcon( Resource::loadPixmap( "HelpBrowser" ) );
+    setBackgroundMode( PaletteButton );
 
-    browser = new QTextBrowser( this );
+    browser = new MagicTextBrowser( this );
     browser->setFrameStyle( QFrame::Panel | QFrame::Sunken );
     connect( browser, SIGNAL( textChanged() ),
 	     this, SLOT( textChanged() ) );
@@ -97,8 +105,7 @@ void HelpBrowser::init( const QString& _home )
     forwardAction->addTo( toolbar );
     forwardAction->setEnabled( FALSE );
 
-    QAction *a = new QAction( tr( "Home" ), Resource::loadPixmap(
-"home" ), QString::null, 0, this, 0 );
+    QAction *a = new QAction( tr( "Home" ), Resource::loadIconSet( "home" ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), browser, SLOT( home() ) );
     //a->addTo( go );
     a->addTo( toolbar );
@@ -117,6 +124,7 @@ void HelpBrowser::init( const QString& _home )
 
     resize( 240, 300 );
     browser->setFocus();
+    browser->setFrameStyle( QFrame::NoFrame );
 
     connect( qApp, SIGNAL(appMessage(const QCString&, const QByteArray&)),
 	     this, SLOT(appMessage(const QCString&, const QByteArray&)) );
