@@ -147,21 +147,21 @@ DateBookWeekLstEvent::DateBookWeekLstEvent(const EffectiveEvent &ev,
     event(ev)
 {
     char s[10];
-    if ( ev.startDate() != ev.date() ) { // multiday event (not first day)
-      if ( ev.endDate() == ev.date() ) { // last day
-	strcpy(s, "__|__");
-      } else {
-	strcpy(s, "    |---");
-      }
-    } else {
-      if(ev.event().type() == Event::Normal )
-        sprintf(s,"%.2d:%.2d",ev.start().hour(),ev.start().minute());
-      else
-        sprintf(s,"     ");
-    }
-    setText(QString(s) + " " + ev.description());
-    connect(this, SIGNAL(clicked()), this, SLOT(editMe()));
-    setAlignment( int( QLabel::WordBreak | QLabel::AlignLeft ) );
+	if ( ev.startDate() != ev.date() ) { // multiday event (not first day)
+		if ( ev.endDate() == ev.date() ) { // last day
+			strcpy(s, "__|__");
+		} else {
+			strcpy(s, "    |---");
+		}
+	} else {
+		if(ev.event().type() == Event::Normal )
+			sprintf(s,"%.2d:%.2d",ev.start().hour(),ev.start().minute());
+		else
+			sprintf(s,"     ");
+	}
+	setText(QString(s) + " " + ev.description());
+	connect(this, SIGNAL(clicked()), this, SLOT(editMe()));
+	setAlignment( int( QLabel::WordBreak | QLabel::AlignLeft ) );
 }
 void DateBookWeekLstEvent::editMe() {
     emit editEvent(event.event());
@@ -208,11 +208,13 @@ DateBookWeekLstView::DateBookWeekLstView(QValueList<EffectiveEvent> &ev,
 
 	// Events
 	while ( (*it).date().dayOfWeek() == dayOrder[i] && it!=ev.end() ) {
-	    DateBookWeekLstEvent *l=new DateBookWeekLstEvent(*it,this);
-	    layout->addWidget(l);
-	    connect (l, SIGNAL(editEvent(const Event &)),
-		     this, SIGNAL(editEvent(const Event &)));
-	    it++;
+		if(!((*it).end().hour()==(*it).start().hour() && (*it).end().minute()==(*it).start().minute())) {	// Skip effective events with no duration. (i.e ending at 00:00)
+			DateBookWeekLstEvent *l=new DateBookWeekLstEvent(*it,this);
+			layout->addWidget(l);
+			connect (l, SIGNAL(editEvent(const Event &)),
+							this, SIGNAL(editEvent(const Event &)));
+		}
+		it++;
 	}
 
 	layout->addItem(new QSpacerItem(1,1, QSizePolicy::Minimum, QSizePolicy::Expanding));
