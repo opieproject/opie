@@ -55,12 +55,7 @@ MainWindowImp::MainWindowImp(QWidget *parent, const char *name, WFlags) : MainWi
 
     // Load connections.
     // /usr/local/kde/lib/libinterfaces.la
-#ifdef QWS
     loadModules(QPEApplication::qpeDir() + "plugins/networksettings");
-#else
-    loader = KLibLoader::self();
-    loadModules(QString("/usr/")+KStandardDirs::kde_default("lib"));
-#endif
     getAllInterfaces();
 
     Interfaces i;
@@ -146,7 +141,6 @@ MainWindowImp::~MainWindowImp()
             delete iIt.key();
     }
 
-#ifdef QWS
     // Delete Modules and Libraries
     QMap<Module*, QLibrary*>::Iterator it;
     for( it = libraries.begin(); it != libraries.end(); ++it )
@@ -156,9 +150,6 @@ MainWindowImp::~MainWindowImp()
         // What fucking shit this is.
         //delete it.data();
     }
-#else
-    // klibloader automaticly deletes the libraries for us...
-#endif
 }
 
 /**
@@ -284,6 +275,7 @@ void MainWindowImp::loadModules(const QString &path)
     if(!d.exists())
         return;
 
+    QString lang = ::getenv("LANG");
     // Don't want sym links
     d.setFilter( QDir::Files | QDir::NoSymLinks );
     const QFileInfoList *list = d.entryInfoList();
@@ -291,14 +283,17 @@ void MainWindowImp::loadModules(const QString &path)
     QFileInfo *fi;
     while ( (fi=it.current()) )
     {
-#ifdef QWS
         if(fi->fileName().contains(".so"))
         {
-#else
-        if(fi->fileName().contains(".so") && fi->fileName().contains("networksettings_"))
-        {
-#endif
-            loadPlugin(path + "/" + fi->fileName());
+            /* if loaded install translation */
+            if( loadPlugin(path + "/" + fi->fileName()) != 0l ){
+                QTranslator *trans = new QTranslator(qApp);
+                QString fn = QPEApplication::qpeDir()+"/i18n/"+lang+"/"+ fi->fileName().left( fi->fileName().find(".") )+".qm";
+                if( trans->load( fn ) )
+                    qApp->installTranslator( trans );
+                else
+                    delete trans;
+            }
             odebug << "loaded plugin: >" << QString(path + "/" + fi->fileName()).latin1() << "< " << oendl;
         }
         ++it;
@@ -316,7 +311,6 @@ Module* MainWindowImp::loadPlugin(const QString &pluginFileName, const QString &
 #ifdef DEBUG
     odebug << "MainWindowImp::loadPlugin: " << pluginFileName.latin1() << ": resolving " << resolveString.latin1() << "" << oendl;
 #endif
-#ifdef QWS
     QLibrary *lib = new QLibrary(pluginFileName);
     void *functionPointer = lib->resolve(resolveString);
     if( !functionPointer )
@@ -325,47 +319,23 @@ Module* MainWindowImp::loadPlugin(const QString &pluginFileName, const QString &
         odebug << "MainWindowImp::loadPlugin: Warning: " << pluginFileName.latin1() << " is not a plugin" << oendl;
 #endif
         delete lib;
-        return NULL;
+        return 0;
     }
     // Try to get an object.
     Module *object = ((Module* (*)()) functionPointer)();
-    if(object == NULL)
+    if(object == 0)
     {
 #ifdef DEBUG
         odebug << "MainWindowImp: Couldn't create object, but did load library!" << oendl;
 #endif
         delete lib;
-        return NULL;
+        return 0;
     }
 
     m_handledIfaces += object->handledInterfaceNames();
     // Store for deletion later
     libraries.insert(object, lib);
     return object;
-
-#else
-    QLibrary *lib = loader->library(pluginFileName);
-    if( !lib || !lib->hasSymbol(resolveString) )
-    {
-        odebug << QString("MainWindowImp::loadPlugin: File: %1 is not a plugin, but though was.").arg(pluginFileName).latin1() << oendl;
-        return NULL;
-    }
-    // Try to get an object.
-    Module *object = ((Module* (*)()) lib->symbol(resolveString))();
-    if(object == NULL)
-    {
-#ifdef DEBUG
-        odebug << "MainWindowImp: Couldn't create object, but did load library!" << oendl;
-#endif
-        return NULL;
-    }
-#ifdef DEBUG
-    odebug << "MainWindowImp::loadPlugin:: Found object, storing." << oendl;
-#endif
-    // Store for deletion later
-    libraries.insert(object, lib);
-    return object;
-#endif
 }
 
 /**
