@@ -192,11 +192,25 @@ SetDateTime::SetDateTime(QWidget *parent, const char *name, WFlags f )
                       timeButton, SLOT( slotTzChange( const QString& ) ) );
     QObject::connect( tz, SIGNAL( signalNewTz( const QString& ) ),
                        SLOT( tzChange( const QString& ) ) );
+
+    QObject::connect( weekStartCombo, SIGNAL( activated ( int )),
+    									SLOT(updateSystem(int ) ));
+    QObject::connect( ampmCombo, SIGNAL( activated ( int )),
+    									SLOT(updateSystem(int ) ));
+    QObject::connect( dateFormatCombo, SIGNAL( activated ( int )),
+    									SLOT(updateSystem(int ) ));
+    QObject::connect( clockAppletCombo, SIGNAL( activated ( int )),
+    									SLOT(updateSystem(int ) ));
 }
 
 SetDateTime::~SetDateTime()
 {
+	writeSettings();
 
+}
+
+void SetDateTime::writeSettings()
+{
     Config config("qpe");
     config.setGroup( "Time" );
     config.writeEntry( "AMPM", ampmCombo->currentItem() );
@@ -247,10 +261,16 @@ void  SetDateTime::setTime(QDateTime dt)
   if ( myTv.tv_sec != -1 )
       ::settimeofday( &myTv, 0 );
   Global::writeHWClock();
+}
+
+void SetDateTime::updateSystem(int i)
+{
+	qDebug("SetDateTime::updateSystem(int %i)",i);
+ 	writeSettings();
   // since time has changed quickly load in the datebookdb
   // to allow the alarm server to get a better grip on itself
   // (example re-trigger alarms for when we travel back in time)
-  DateBookDB db;
+ // DateBookDB db;
 
     // set the timezone for everyone else...
     QCopEnvelope setTimeZone( "QPE/System", "timeChange(QString)" );
@@ -276,6 +296,7 @@ void  SetDateTime::setTime(QDateTime dt)
 
 void SetDateTime::tzChange( const QString &tz )
 {
+	qDebug("SetDateTime::tzChange");
     // set the TZ get the time and leave gracefully...
     QString strSave;
     strSave = getenv( "TZ" );
@@ -287,6 +308,7 @@ void SetDateTime::tzChange( const QString &tz )
   setenv( "TZ", strSave, 1 );
     }
     dateButton->setDate( d );
+    updateSystem();
 }
 
 void SetDateTime::formatChanged(int i)
@@ -430,6 +452,7 @@ void SetTime::checkedPM( int c )
 
 void SetTime::slotTzChange( const QString &tz )
 {
+	qDebug("SetTime::slotTzChange");
     // set the TZ get the time and leave gracefully...
     QString strSave;
     strSave = getenv( "TZ" );

@@ -42,7 +42,7 @@ Ntp::Ntp( QWidget* parent,  const char* name, WFlags fl )
   					this, SLOT(ntpFinished(OProcess*)));
   connect(runNtp, SIGNAL(clicked()), this, SLOT(slotRunNtp()));
   connect(PushButtonPredict, SIGNAL(clicked()), this, SLOT(preditctTime()));
-
+  slotCheckNtp(-1);
 //  slotRunNtp();
   readLookups();
 }

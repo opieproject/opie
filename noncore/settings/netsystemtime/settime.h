@@ -74,9 +74,11 @@ protected slots:
 		void commitTime();
     void tzChange( const QString &tz );
     void formatChanged(int);
+		void updateSystem(int i=0);
 
 protected:
    	void  setTime(QDateTime dt);
+    void writeSettings();
 
     SetTime *timeButton;
     DateButton *dateButton;
