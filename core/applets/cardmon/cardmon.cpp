@@ -138,13 +138,8 @@ void CardMonitor::mousePressEvent( QMouseEvent * ) {
         m_commandOrig = 1;
         execCommand("/sbin/cardctl eject 0");
     } else if ( opt == 0 ) {
-        if ( ODevice::inst() ->system() == System_Familiar ) {
-            cmd = "umount /dev/mmc/part1";
-        } else {
-            cmd = "umount /dev/mmcda1";
-        }
         m_commandOrig = 2;
-        execCommand( cmd );
+        execCommand( QString("umount %1").arg(cardSdName));
     } else if ( opt == 2 ) {
         m_commandOrig = 3;
         execCommand( "/sbin/cardctl eject 1" );
@@ -282,11 +277,12 @@ bool CardMonitor::getStatusSd( int showPopUp ) {
 
     if ( mntfp ) {
         while ( ( me = getmntent( mntfp ) ) != 0 ) {
-            QString fs = me->mnt_fsname;
+            QString fs = QFile::decodeName( me->mnt_fsname );
             //odebug << fs << oendl;
             if ( fs.left( 14 ) == "/dev/mmc/part1" || fs.left( 7 ) == "/dev/sd"
                     || fs.left( 9 ) == "/dev/mmcd" ) {
                 cardInSd = TRUE;
+                cardSdName = fs;
                 show();
             }
             //            else {
@@ -338,6 +334,8 @@ int CardMonitor::position() {
 }
 
 void CardMonitor::execCommand( const QString &command ) {
+    delete m_process;
+    m_process = 0;
 
     if ( m_process == 0 ) {
         m_process = new OProcess();
@@ -371,9 +369,6 @@ void CardMonitor::slotExited( OProcess*  ) {
             }
         }
     }
-
-    delete m_process;
-    m_process = 0;
 }
 
 EXPORT_OPIE_APPLET_v1( CardMonitor )

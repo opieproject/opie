@@ -59,6 +59,7 @@ private:
     QString cardInPcmcia1Name;
     QString cardInPcmcia1Type;
     bool cardInSd;
+    QString cardSdName; // the device which is mounted
     void iconShow();
     QPopupMenu *popupMenu;
     void popUp(QString message, QString icon = QString::null );
