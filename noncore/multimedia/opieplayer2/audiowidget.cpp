@@ -215,9 +215,9 @@ void AudioWidget::resizeEvent( QResizeEvent * ) {
     slider.setBackgroundOrigin( QWidget::ParentOrigin );
     time.setGeometry( QRect( w - 85, h - 30, 70, 20 ) );
 
-    xoff = ( w - imgUp.width() ) / 2;
-    yoff = (( h - imgUp.height() ) / 2) - 10;
-    QPoint p( xoff, yoff );
+    upperLeftOfButtonMask.rx() = ( w - imgUp.width() ) / 2;
+    upperLeftOfButtonMask.ry() = (( h - imgUp.height() ) / 2) - 10;
+    QPoint p = upperLeftOfButtonMask;
 
     QPixmap pixUp = combineImageWithBackground( imgUp, pixBg, p );
     QPixmap pixDn = combineImageWithBackground( imgDn, pixBg, p );
@@ -342,9 +342,9 @@ void AudioWidget::toggleButton( int i ) {
 
 void AudioWidget::paintButton( QPainter *p, int i ) {
     if ( buttons[i].isDown ) {
-        p->drawPixmap( xoff, yoff, *buttonPixDown[i] );
+        p->drawPixmap( upperLeftOfButtonMask, *buttonPixDown[i] );
     } else {
-        p->drawPixmap( xoff, yoff, *buttonPixUp[i] );
+        p->drawPixmap( upperLeftOfButtonMask, *buttonPixUp[i] );
     }
 }
 
@@ -381,8 +381,8 @@ void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
     for ( unsigned int i = 0; i < buttons.size(); i++ ) {
         if ( event->state() == QMouseEvent::LeftButton ) {
             // The test to see if the mouse click is inside the button or not
-            int x = event->pos().x() - xoff;
-            int y = event->pos().y() - yoff;
+            int x = event->pos().x() - upperLeftOfButtonMask.x();
+            int y = event->pos().y() - upperLeftOfButtonMask.y();
 
             bool isOnButton = ( x > 0 && y > 0 && x < buttonMask.width()
                                 && y < buttonMask.height()

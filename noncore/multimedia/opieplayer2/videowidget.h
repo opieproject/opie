@@ -105,7 +105,6 @@ private:
     QPixmap *buttonPixDown[7];
     QString skin;
 //    QPixmap *pixmaps[4];
-    int xoff, yoff;
 
 
     void paintButton( QPainter *p, int i );

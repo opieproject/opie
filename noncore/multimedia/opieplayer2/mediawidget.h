@@ -71,6 +71,8 @@ protected:
     ButtonVector buttons;
 
     QImage buttonMask;
+
+    QPoint upperLeftOfButtonMask;
 };
 
 #endif // MEDIAWIDGET_H

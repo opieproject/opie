@@ -180,12 +180,12 @@ void VideoWidget::resizeEvent( QResizeEvent * ) {
     slider->setFocusPolicy( QWidget::NoFocus );
     slider->setBackgroundPixmap( pixBg );
 
-    xoff = 0;// ( imgUp->width() ) / 2;
+    upperLeftOfButtonMask.rx() = 0;// ( imgUp->width() ) / 2;
     if(w>h)
-        yoff = 0;
+        upperLeftOfButtonMask.ry() = 0;
     else
-        yoff = 185;//(( Vh  - imgUp->height() ) / 2) - 10;
-    QPoint p( xoff, yoff );
+        upperLeftOfButtonMask.ry() = 185;//(( Vh  - imgUp->height() ) / 2) - 10;
+    QPoint p = upperLeftOfButtonMask;
 
     QPixmap *pixUp = combineVImageWithBackground( imgUp, pixBg, p );
     QPixmap *pixDn = combineVImageWithBackground( imgDn, pixBg, p );
@@ -272,9 +272,9 @@ void VideoWidget::toggleButton( int i ) {
 void VideoWidget::paintButton( QPainter *p, int i ) {
 
     if ( buttons[i].isDown ) {
-        p->drawPixmap( xoff, yoff, *buttonPixDown[i] );
+        p->drawPixmap( upperLeftOfButtonMask, *buttonPixDown[i] );
     } else {
-        p->drawPixmap( xoff, yoff, *buttonPixUp[i] );
+        p->drawPixmap( upperLeftOfButtonMask, *buttonPixUp[i] );
     }
 }
 
@@ -282,8 +282,8 @@ void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
     for ( unsigned int i = 0; i < buttons.size(); i++ ) {
         if ( event->state() == QMouseEvent::LeftButton ) {
             // The test to see if the mouse click is inside the button or not
-            int x = event->pos().x() - xoff;
-            int y = event->pos().y() - yoff;
+            int x = event->pos().x() - upperLeftOfButtonMask.x();
+            int y = event->pos().y() - upperLeftOfButtonMask.y();
 
             bool isOnButton = ( x > 0 && y > 0 && x < buttonMask.width()
                                 && y < buttonMask.height()

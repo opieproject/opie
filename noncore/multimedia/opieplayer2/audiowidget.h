@@ -107,7 +107,6 @@ private:
     OTicker  songInfo;
     QSlider slider;
     QLineEdit time;
-    int xoff, yoff;
     bool isStreaming : 1;
 };
 
