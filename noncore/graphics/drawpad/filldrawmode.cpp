@@ -45,7 +45,7 @@ void FillDrawMode::mousePressEvent(QMouseEvent* e)
         fillNorth(x, y - 1);
 
         m_pDrawPadCanvas->currentPage()->convertFromImage(m_image);
-        m_pDrawPadCanvas->repaint();
+        m_pDrawPadCanvas->viewport()->update();
     }
 }
 

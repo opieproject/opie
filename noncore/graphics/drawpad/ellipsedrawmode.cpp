@@ -20,67 +20,26 @@
 #include <qpixmap.h>
 
 EllipseDrawMode::EllipseDrawMode(DrawPad* drawPad, DrawPadCanvas* drawPadCanvas)
-    : DrawMode(drawPad, drawPadCanvas)
+    : ShapeDrawMode(drawPad, drawPadCanvas)
 {
-    m_mousePressed = false;
-    m_polyline.resize(3);
 }
 
 EllipseDrawMode::~EllipseDrawMode()
 {
 }
 
-void EllipseDrawMode::mousePressEvent(QMouseEvent* e)
+void EllipseDrawMode::drawFinalShape(QPainter& p)
 {
-    m_mousePressed = true;
-    m_polyline[2] = m_polyline[1] = m_polyline[0] = e->pos();
+    p.setRasterOp(Qt::NotROP);
+    p.drawRect(QRect(m_polyline[2], m_polyline[0]));
+    p.setPen(m_pDrawPad->pen());
+    p.setRasterOp(Qt::CopyROP);
+    p.drawEllipse(QRect(m_polyline[2], m_polyline[0]));
 }
 
-void EllipseDrawMode::mouseReleaseEvent(QMouseEvent* e)
+void EllipseDrawMode::drawTemporaryShape(QPainter& p)
 {
-    Q_UNUSED(e)
-
-    QPainter painter;
-    painter.begin(m_pDrawPadCanvas->currentPage());
-    painter.setRasterOp(Qt::NotROP);
-    painter.drawRect(QRect(m_polyline[2], m_polyline[0]));
-    painter.setPen(m_pDrawPad->pen());
-    painter.setRasterOp(Qt::CopyROP);
-    painter.drawEllipse(QRect(m_polyline[2], m_polyline[0]));
-    painter.end();
-
-    QRect r = m_polyline.boundingRect();
-    r = r.normalize();
-    r.setLeft(r.left() - m_pDrawPad->pen().width());
-    r.setTop(r.top() - m_pDrawPad->pen().width());
-    r.setRight(r.right() + m_pDrawPad->pen().width());
-    r.setBottom(r.bottom() + m_pDrawPad->pen().width());
-
-    bitBlt(m_pDrawPadCanvas, r.x(), r.y(), m_pDrawPadCanvas->currentPage(), r.x(), r.y(), r.width(), r.height());
-
-    m_mousePressed = false;
-}
-
-void EllipseDrawMode::mouseMoveEvent(QMouseEvent* e)
-{
-    if (m_mousePressed) {
-        QPainter painter;
-        painter.begin(m_pDrawPadCanvas->currentPage());
-        painter.setRasterOp(Qt::NotROP);
-        m_polyline[0] = e->pos();
-        painter.drawRect(QRect(m_polyline[2], m_polyline[1]));
-        painter.drawRect(QRect(m_polyline[2], m_polyline[0]));
-        painter.end();
-
-        QRect r = m_polyline.boundingRect();
-        r = r.normalize();
-        r.setLeft(r.left() - m_pDrawPad->pen().width());
-        r.setTop(r.top() - m_pDrawPad->pen().width());
-        r.setRight(r.right() + m_pDrawPad->pen().width());
-        r.setBottom(r.bottom() + m_pDrawPad->pen().width());
-
-        bitBlt(m_pDrawPadCanvas, r.x(), r.y(), m_pDrawPadCanvas->currentPage(), r.x(), r.y(), r.width(), r.height());
-
-        m_polyline[1] = m_polyline[0];
-    }
+    p.setRasterOp(Qt::NotROP);
+    p.drawRect(QRect(m_polyline[2], m_polyline[1]));
+    p.drawRect(QRect(m_polyline[2], m_polyline[0]));
 }

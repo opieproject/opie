@@ -14,23 +14,17 @@
 #ifndef LINEDRAWMODE_H
 #define LINEDRAWMODE_H
 
-#include "drawmode.h"
+#include "shapedrawmode.h"
 
-#include <qpointarray.h>
-
-class LineDrawMode : public DrawMode
+class LineDrawMode : public ShapeDrawMode
 { 
 public:
     LineDrawMode(DrawPad* drawPad, DrawPadCanvas* drawPadCanvas);
     ~LineDrawMode();
 
-    void mousePressEvent(QMouseEvent* e);
-    void mouseReleaseEvent(QMouseEvent* e);
-    void mouseMoveEvent(QMouseEvent* e);
-
-private:
-    bool m_mousePressed;
-    QPointArray m_polyline;
+protected:
+    void drawFinalShape(QPainter& p);
+    void drawTemporaryShape(QPainter& p);
 };
 
 #endif // LINEDRAWMODE_H

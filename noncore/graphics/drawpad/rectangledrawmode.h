@@ -14,23 +14,17 @@
 #ifndef RECTANGLEDRAWMODE_H
 #define RECTANGLEDRAWMODE_H
 
-#include "drawmode.h"
+#include "shapedrawmode.h"
 
-#include <qpointarray.h>
-
-class RectangleDrawMode : public DrawMode
+class RectangleDrawMode : public ShapeDrawMode
 { 
 public:
     RectangleDrawMode(DrawPad* drawPad, DrawPadCanvas* drawPadCanvas);
     ~RectangleDrawMode();
 
-    void mousePressEvent(QMouseEvent* e);
-    void mouseReleaseEvent(QMouseEvent* e);
-    void mouseMoveEvent(QMouseEvent* e);
-
-private:
-    bool m_mousePressed;
-    QPointArray m_polyline;
+protected:
+    void drawFinalShape(QPainter& p);
+    void drawTemporaryShape(QPainter& p);
 };
 
 #endif // RECTANGLEDRAWMODE_H

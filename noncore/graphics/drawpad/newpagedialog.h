@@ -11,29 +11,30 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "rectangledrawmode.h"
+#ifndef NEWPAGEDIALOG_H
+#define NEWPAGEDIALOG_H
 
-#include "drawpad.h"
-#include "drawpadcanvas.h"
+#include <qdialog.h>
 
-RectangleDrawMode::RectangleDrawMode(DrawPad* drawPad, DrawPadCanvas* drawPadCanvas)
-    : ShapeDrawMode(drawPad, drawPadCanvas)
-{
-}
+class QSpinBox;
 
-RectangleDrawMode::~RectangleDrawMode()
-{
-}
+class NewPageDialog : public QDialog
+{ 
+    Q_OBJECT
 
-void RectangleDrawMode::drawFinalShape(QPainter& p)
-{
-    p.setPen(m_pDrawPad->pen());
-    p.drawRect(QRect(m_polyline[2], m_polyline[0]));
-}
+public:
+    NewPageDialog(QWidget* parent = 0, const char* name = 0);
+    ~NewPageDialog();
 
-void RectangleDrawMode::drawTemporaryShape(QPainter& p)
-{
-    p.setRasterOp(Qt::NotROP);
-    p.drawRect(QRect(m_polyline[2], m_polyline[1]));
-    p.drawRect(QRect(m_polyline[2], m_polyline[0]));
-}
+    void setWidth(int width);
+    void setHeight(int height);
+
+    int width();
+    int height();
+
+private:
+    QSpinBox* m_pWidthSpinBox;
+    QSpinBox* m_pHeightSpinBox;
+};
+
+#endif // NEWPAGEDIALOG_H

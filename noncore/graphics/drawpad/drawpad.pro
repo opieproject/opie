@@ -9,8 +9,10 @@ HEADERS		= colordialog.h \
 		  erasedrawmode.h \
 		  filldrawmode.h \
 		  linedrawmode.h \
+		  newpagedialog.h \
 		  pointdrawmode.h \
-		  rectangledrawmode.h
+		  rectangledrawmode.h \
+		  shapedrawmode.h
 SOURCES		= colordialog.cpp \
 		  colorpanel.cpp \
 		  drawmode.cpp \
@@ -21,8 +23,10 @@ SOURCES		= colordialog.cpp \
 		  filldrawmode.cpp \
 		  linedrawmode.cpp \
 		  main.cpp \
+		  newpagedialog.cpp \
 		  pointdrawmode.cpp \
-		  rectangledrawmode.cpp
+		  rectangledrawmode.cpp \
+		  shapedrawmode.cpp
 INCLUDEPATH	+= $(OPIEDIR)/include \
 		  $(QTDIR)/src/3rdparty/zlib
 DEPENDPATH	+= $(OPIEDIR)/include

@@ -14,7 +14,7 @@
 #ifndef DRAWPADCANVAS_H
 #define DRAWPADCANVAS_H
 
-#include <qwidget.h>
+#include <qscrollview.h>
 
 #include <qlist.h>
 #include <qpointarray.h>
@@ -23,15 +23,16 @@ class DrawPad;
 
 class QPixmap;
 
-class DrawPadCanvas : public QWidget
+class DrawPadCanvas : public QScrollView
 { 
     Q_OBJECT
 
 public:
-    DrawPadCanvas(DrawPad* drawPad, QWidget* parent = 0, const char* name = 0, WFlags f = 0);
+    DrawPadCanvas(DrawPad* drawPad, QWidget* parent = 0, const char* name = 0);
     ~DrawPadCanvas();
 
     void load(QIODevice* ioDevice);
+    void initialPage();
     void save(QIODevice* ioDevice);
 
     bool undoEnabled();
@@ -40,6 +41,8 @@ public:
     bool goNextPageEnabled();
 
     QPixmap* currentPage();
+    uint pagePosition();
+    uint pageCount();
 
 public slots:
     void clearAll();
@@ -60,11 +63,10 @@ signals:
     void pageBackupsChanged();
 
 protected:
-    void mousePressEvent(QMouseEvent* e);
-    void mouseReleaseEvent(QMouseEvent* e);
-    void mouseMoveEvent(QMouseEvent* e);
-    void resizeEvent(QResizeEvent* e);
-    void paintEvent(QPaintEvent* e);
+    void contentsMousePressEvent(QMouseEvent* e);
+    void contentsMouseReleaseEvent(QMouseEvent* e);
+    void contentsMouseMoveEvent(QMouseEvent* e);
+    void drawContents(QPainter* p, int cx, int cy, int cw, int ch);
 
 private:
     DrawPad* m_pDrawPad;

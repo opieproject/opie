@@ -35,23 +35,16 @@
 #include <qtoolbutton.h>
 #include <qtooltip.h>
 
-DrawPad::DrawPad(QWidget* parent, const char* name, WFlags f)
-    : QMainWindow(parent, name, f)
+DrawPad::DrawPad(QWidget* parent, const char* name)
+    : QMainWindow(parent, name)
 {
-    setCaption(tr("DrawPad"));
-
     // init members
 
     m_pDrawPadCanvas = new DrawPadCanvas(this, this);
+
     connect(m_pDrawPadCanvas, SIGNAL(pagesChanged()), this, SLOT(updateNavigationToolButtons()));
+    connect(m_pDrawPadCanvas, SIGNAL(pagesChanged()), this, SLOT(updateCaption()));
     connect(m_pDrawPadCanvas, SIGNAL(pageBackupsChanged()), this, SLOT(updateUndoRedoToolButtons()));
-
-    QFile file(Global::applicationFileName("drawpad", "drawpad.xml"));
-
-    if (file.open(IO_ReadOnly)) {
-        m_pDrawPadCanvas->load(&file);
-        file.close();
-    }
 
     setCentralWidget(m_pDrawPadCanvas);
 
@@ -106,8 +99,6 @@ DrawPad::DrawPad(QWidget* parent, const char* name, WFlags f)
     connect(m_pRedoAction, SIGNAL(activated()), m_pDrawPadCanvas, SLOT(redo()));
     m_pRedoAction->addTo(navigationToolBar);
 
-    updateUndoRedoToolButtons();
-
     m_pFirstPageAction = new QAction(tr("First Page"), Resource::loadIconSet("fastback"), QString::null, 0, this);
     connect(m_pFirstPageAction, SIGNAL(activated()), m_pDrawPadCanvas, SLOT(goFirstPage()));
     m_pFirstPageAction->addTo(navigationToolBar);
@@ -123,8 +114,6 @@ DrawPad::DrawPad(QWidget* parent, const char* name, WFlags f)
     m_pLastPageAction = new QAction(tr("Last Page"), Resource::loadIconSet("fastforward"), QString::null, 0, this);
     connect(m_pLastPageAction, SIGNAL(activated()), m_pDrawPadCanvas, SLOT(goLastPage()));
     m_pLastPageAction->addTo(navigationToolBar);
-
-    updateNavigationToolButtons();
 
     // init draw mode toolbar
 
@@ -217,6 +206,17 @@ DrawPad::DrawPad(QWidget* parent, const char* name, WFlags f)
     m_pBrushColorToolButton->setPopupDelay(0);
 
     brushColorPopupMenu->activateItemAt(1);
+
+    // init pages
+
+    QFile file(Global::applicationFileName("drawpad", "drawpad.xml"));
+
+    if (file.open(IO_ReadOnly)) {
+        m_pDrawPadCanvas->load(&file);
+        file.close();
+    } else {
+        m_pDrawPadCanvas->initialPage();
+    }
 }
 
 DrawPad::~DrawPad()
@@ -378,4 +378,13 @@ void DrawPad::updateNavigationToolButtons()
     m_pPreviousPageAction->setEnabled(m_pDrawPadCanvas->goPreviousPageEnabled());
     m_pNextPageAction->setEnabled(m_pDrawPadCanvas->goNextPageEnabled());
     m_pLastPageAction->setEnabled(m_pDrawPadCanvas->goNextPageEnabled());
+}
+
+void DrawPad::updateCaption()
+{
+    uint pagePosition = m_pDrawPadCanvas->pagePosition();
+    uint pageCount = m_pDrawPadCanvas->pageCount();
+
+    setCaption(tr("DrawPad") + " - " + tr("Page") + " "
+               + QString::number(pagePosition) + "/" + QString::number(pageCount));
 }

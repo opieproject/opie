@@ -62,6 +62,12 @@ void PointDrawMode::mouseMoveEvent(QMouseEvent* e)
         r.setRight(r.right() + m_pDrawPad->pen().width());
         r.setBottom(r.bottom() + m_pDrawPad->pen().width());
 
-        bitBlt(m_pDrawPadCanvas, r.x(), r.y(), m_pDrawPadCanvas->currentPage(), r.x(), r.y(), r.width(), r.height());
+        QRect viewportRect(m_pDrawPadCanvas->contentsToViewport(r.topLeft()),
+                           m_pDrawPadCanvas->contentsToViewport(r.bottomRight()));
+
+        bitBlt(m_pDrawPadCanvas->viewport(), viewportRect.x(), viewportRect.y(),
+               m_pDrawPadCanvas->currentPage(), r.x(), r.y(), r.width(), r.height());
+
+        m_pDrawPadCanvas->viewport()->update(viewportRect);
     }
 }

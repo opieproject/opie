@@ -14,23 +14,17 @@
 #ifndef ELLIPSEDRAWMODE_H
 #define ELLIPSEDRAWMODE_H
 
-#include "drawmode.h"
+#include "shapedrawmode.h"
 
-#include <qpointarray.h>
-
-class EllipseDrawMode : public DrawMode
+class EllipseDrawMode : public ShapeDrawMode
 { 
 public:
     EllipseDrawMode(DrawPad* drawPad, DrawPadCanvas* drawPadCanvas);
     ~EllipseDrawMode();
 
-    void mousePressEvent(QMouseEvent* e);
-    void mouseReleaseEvent(QMouseEvent* e);
-    void mouseMoveEvent(QMouseEvent* e);
-
-private:
-    bool m_mousePressed;
-    QPointArray m_polyline;
+protected:
+    void drawFinalShape(QPainter& p);
+    void drawTemporaryShape(QPainter& p);
 };
 
 #endif // ELLIPSEDRAWMODE_H

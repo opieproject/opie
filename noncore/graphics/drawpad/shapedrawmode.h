@@ -11,29 +11,31 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "rectangledrawmode.h"
+#ifndef SHAPEDRAWMODE_H
+#define SHAPEDRAWMODE_H
 
-#include "drawpad.h"
-#include "drawpadcanvas.h"
+#include "drawmode.h"
 
-RectangleDrawMode::RectangleDrawMode(DrawPad* drawPad, DrawPadCanvas* drawPadCanvas)
-    : ShapeDrawMode(drawPad, drawPadCanvas)
-{
-}
+#include <qpointarray.h>
 
-RectangleDrawMode::~RectangleDrawMode()
-{
-}
+class ShapeDrawMode : public DrawMode
+{ 
+public:
+    ShapeDrawMode(DrawPad* drawPad, DrawPadCanvas* drawPadCanvas);
+    ~ShapeDrawMode();
 
-void RectangleDrawMode::drawFinalShape(QPainter& p)
-{
-    p.setPen(m_pDrawPad->pen());
-    p.drawRect(QRect(m_polyline[2], m_polyline[0]));
-}
+    void mousePressEvent(QMouseEvent* e);
+    void mouseReleaseEvent(QMouseEvent* e);
+    void mouseMoveEvent(QMouseEvent* e);
 
-void RectangleDrawMode::drawTemporaryShape(QPainter& p)
-{
-    p.setRasterOp(Qt::NotROP);
-    p.drawRect(QRect(m_polyline[2], m_polyline[1]));
-    p.drawRect(QRect(m_polyline[2], m_polyline[0]));
-}
+protected:
+    virtual void drawFinalShape(QPainter& p) = 0;
+    virtual void drawTemporaryShape(QPainter& p) = 0;
+
+    QPointArray m_polyline;
+
+private:
+    bool m_mousePressed;
+};
+
+#endif // SHAPEDRAWMODE_H

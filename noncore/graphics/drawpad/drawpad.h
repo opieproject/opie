@@ -31,7 +31,7 @@ class DrawPad : public QMainWindow
     Q_OBJECT
 
 public:
-    DrawPad(QWidget* parent = 0, const char* name = 0, WFlags f = WType_TopLevel);
+    DrawPad(QWidget* parent = 0, const char* name = 0);
     ~DrawPad();
 
     DrawMode* drawMode() { return m_pDrawMode; }
@@ -54,6 +54,7 @@ private slots:
 
     void updateUndoRedoToolButtons();
     void updateNavigationToolButtons();
+    void updateCaption();
 
 private:
     DrawPadCanvas* m_pDrawPadCanvas;

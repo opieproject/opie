@@ -16,68 +16,24 @@
 #include "drawpad.h"
 #include "drawpadcanvas.h"
 
-#include <qpainter.h>
-#include <qpixmap.h>
-
 LineDrawMode::LineDrawMode(DrawPad* drawPad, DrawPadCanvas* drawPadCanvas)
-    : DrawMode(drawPad, drawPadCanvas)
+    : ShapeDrawMode(drawPad, drawPadCanvas)
 {
-    m_mousePressed = false;
-    m_polyline.resize(3);
 }
 
 LineDrawMode::~LineDrawMode()
 {
 }
 
-void LineDrawMode::mousePressEvent(QMouseEvent* e)
+void LineDrawMode::drawFinalShape(QPainter& p)
 {
-    m_mousePressed = true;
-    m_polyline[2] = m_polyline[1] = m_polyline[0] = e->pos();
+    p.setPen(m_pDrawPad->pen());
+    p.drawLine(m_polyline[2], m_polyline[0]);
 }
 
-void LineDrawMode::mouseReleaseEvent(QMouseEvent* e)
+void LineDrawMode::drawTemporaryShape(QPainter& p)
 {
-    Q_UNUSED(e)
-
-    QPainter painter;
-    painter.begin(m_pDrawPadCanvas->currentPage());
-    painter.setPen(m_pDrawPad->pen());
-    painter.drawLine(m_polyline[2], m_polyline[0]);
-    painter.end();
-
-    QRect r = m_polyline.boundingRect();
-    r = r.normalize();
-    r.setLeft(r.left() - m_pDrawPad->pen().width());
-    r.setTop(r.top() - m_pDrawPad->pen().width());
-    r.setRight(r.right() + m_pDrawPad->pen().width());
-    r.setBottom(r.bottom() + m_pDrawPad->pen().width());
-
-    bitBlt(m_pDrawPadCanvas, r.x(), r.y(), m_pDrawPadCanvas->currentPage(), r.x(), r.y(), r.width(), r.height());
-
-    m_mousePressed = false;
-}
-
-void LineDrawMode::mouseMoveEvent(QMouseEvent* e)
-{
-    if (m_mousePressed) {
-        QPainter painter;
-        painter.begin(m_pDrawPadCanvas->currentPage());
-        painter.setRasterOp(Qt::NotROP);
-        m_polyline[0] = e->pos();
-        painter.drawLine(m_polyline[2], m_polyline[1]);
-        painter.drawLine(m_polyline[2], m_polyline[0]);
-        painter.end();
-
-        QRect r = m_polyline.boundingRect();
-        r = r.normalize();
-        r.setLeft(r.left() - m_pDrawPad->pen().width());
-        r.setTop(r.top() - m_pDrawPad->pen().width());
-        r.setRight(r.right() + m_pDrawPad->pen().width());
-        r.setBottom(r.bottom() + m_pDrawPad->pen().width());
-
-        bitBlt(m_pDrawPadCanvas, r.x(), r.y(), m_pDrawPadCanvas->currentPage(), r.x(), r.y(), r.width(), r.height());
-
-        m_polyline[1] = m_polyline[0];
-    }
+    p.setRasterOp(Qt::NotROP);
+    p.drawLine(m_polyline[2], m_polyline[1]);
+    p.drawLine(m_polyline[2], m_polyline[0]);
 }

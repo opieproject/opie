@@ -15,6 +15,7 @@
 
 #include "drawmode.h"
 #include "drawpad.h"
+#include "newpagedialog.h"
 
 #include <qbuffer.h>
 #include <qimage.h>
@@ -137,17 +138,12 @@ bool DrawPadCanvasXmlHandler::characters(const QString& ch)
     return true;
 }
 
-DrawPadCanvas::DrawPadCanvas(DrawPad* drawPad, QWidget* parent, const char* name, WFlags f)
-    : QWidget(parent, name, f)
+DrawPadCanvas::DrawPadCanvas(DrawPad* drawPad, QWidget* parent, const char* name)
+    : QScrollView(parent, name)
 {
-    setBackgroundMode(QWidget::PaletteBase);
-
     m_pDrawPad = drawPad;
     m_pages.setAutoDelete(true);
-    m_pages.append(new QPixmap(width(), height()));
-    m_pages.current()->fill(Qt::white);
     m_pageBackups.setAutoDelete(true);
-    m_pageBackups.append(new QPixmap(*(m_pages.current())));
 }
 
 DrawPadCanvas::~DrawPadCanvas()
@@ -169,14 +165,33 @@ void DrawPadCanvas::load(QIODevice* ioDevice)
     m_pages = drawPadCanvasXmlHandler.pixmaps();
 
     if (m_pages.isEmpty()) {
-        m_pages.append(new QPixmap(width(), height()));
+        m_pages.append(new QPixmap(contentsRect().size()));
         m_pages.current()->fill(Qt::white);
     }
 
     m_pageBackups.clear();
     m_pageBackups.append(new QPixmap(*(m_pages.current())));
 
-    repaint();
+    resizeContents(m_pages.current()->width(), m_pages.current()->height());
+    viewport()->update();
+
+    emit pagesChanged();
+    emit pageBackupsChanged();
+}
+
+void DrawPadCanvas::initialPage()
+{
+    m_pages.append(new QPixmap(234, 252));
+    m_pages.current()->fill(Qt::white);
+
+    m_pageBackups.clear();
+    m_pageBackups.append(new QPixmap(*(m_pages.current())));
+
+    resizeContents(m_pages.current()->width(), m_pages.current()->height());
+    viewport()->update();
+
+    emit pagesChanged();
+    emit pageBackupsChanged();
 }
 
 void DrawPadCanvas::save(QIODevice* ioDevice)
@@ -229,17 +244,28 @@ QPixmap* DrawPadCanvas::currentPage()
     return m_pages.current();
 }
 
+uint DrawPadCanvas::pagePosition()
+{
+    return (m_pages.at() + 1);
+}
+
+uint DrawPadCanvas::pageCount()
+{
+    return m_pages.count();
+}
+
 void DrawPadCanvas::clearAll()
 {
     m_pages.clear();
 
-    m_pages.append(new QPixmap(width(), height()));
+    m_pages.append(new QPixmap(contentsRect().size()));
     m_pages.current()->fill(Qt::white);
 
     m_pageBackups.clear();
     m_pageBackups.append(new QPixmap(*(m_pages.current())));
 
-    repaint();
+    resizeContents(m_pages.current()->width(), m_pages.current()->height());
+    viewport()->update();
 
     emit pagesChanged();
     emit pageBackupsChanged();
@@ -247,20 +273,32 @@ void DrawPadCanvas::clearAll()
 
 void DrawPadCanvas::newPage()
 {
-    m_pages.insert(m_pages.at() + 1, new QPixmap(width(), height()));
-    m_pages.current()->fill(Qt::white);
-    m_pageBackups.clear();
-    m_pageBackups.append(new QPixmap(*(m_pages.current())));
-    repaint();
+    QRect rect = contentsRect();
 
-    emit pagesChanged();
-    emit pageBackupsChanged();
+    NewPageDialog newPageDialog(this);
+    newPageDialog.setWidth(rect.width());
+    newPageDialog.setHeight(rect.height());
+
+    if (newPageDialog.exec() == QDialog::Accepted) {
+        m_pages.insert(m_pages.at() + 1, new QPixmap(newPageDialog.width(), newPageDialog.height()));
+        m_pages.current()->fill(Qt::white);
+
+        m_pageBackups.clear();
+        m_pageBackups.append(new QPixmap(*(m_pages.current())));
+
+        resizeContents(m_pages.current()->width(), m_pages.current()->height());
+        viewport()->update();
+
+        emit pagesChanged();
+        emit pageBackupsChanged();
+    }
 }
 
 void DrawPadCanvas::clearPage()
 {
     m_pages.current()->fill(Qt::white);
-    repaint();
+
+    viewport()->update();
 }
 
 void DrawPadCanvas::deletePage()
@@ -268,14 +306,15 @@ void DrawPadCanvas::deletePage()
     m_pages.remove(m_pages.current());
 
     if (m_pages.isEmpty()) {
-        m_pages.append(new QPixmap(width(), height()));
+        m_pages.append(new QPixmap(contentsRect().size()));
         m_pages.current()->fill(Qt::white);
     }
 
     m_pageBackups.clear();
     m_pageBackups.append(new QPixmap(*(m_pages.current())));
 
-    repaint();
+    resizeContents(m_pages.current()->width(), m_pages.current()->height());
+    viewport()->update();
 
     emit pagesChanged();
     emit pageBackupsChanged();
@@ -304,7 +343,8 @@ bool DrawPadCanvas::goNextPageEnabled()
 void DrawPadCanvas::undo()
 {
     *(m_pages.current()) = *(m_pageBackups.prev());
-    repaint();
+
+    viewport()->update();
 
     emit pageBackupsChanged();
 }
@@ -312,7 +352,8 @@ void DrawPadCanvas::undo()
 void DrawPadCanvas::redo()
 {
     *(m_pages.current()) = *(m_pageBackups.next());
-    repaint();
+
+    viewport()->update();
 
     emit pageBackupsChanged();
 }
@@ -322,7 +363,9 @@ void DrawPadCanvas::goFirstPage()
     m_pages.first();
     m_pageBackups.clear();
     m_pageBackups.append(new QPixmap(*(m_pages.current())));
-    repaint();
+
+    resizeContents(m_pages.current()->width(), m_pages.current()->height());
+    viewport()->update();
 
     emit pagesChanged();
     emit pageBackupsChanged();
@@ -333,7 +376,9 @@ void DrawPadCanvas::goPreviousPage()
     m_pages.prev();
     m_pageBackups.clear();
     m_pageBackups.append(new QPixmap(*(m_pages.current())));
-    repaint();
+
+    resizeContents(m_pages.current()->width(), m_pages.current()->height());
+    viewport()->update();
 
     emit pagesChanged();
     emit pageBackupsChanged();
@@ -344,7 +389,9 @@ void DrawPadCanvas::goNextPage()
     m_pages.next();
     m_pageBackups.clear();
     m_pageBackups.append(new QPixmap(*(m_pages.current())));
-    repaint();
+
+    resizeContents(m_pages.current()->width(), m_pages.current()->height());
+    viewport()->update();
 
     emit pagesChanged();
     emit pageBackupsChanged();
@@ -355,18 +402,20 @@ void DrawPadCanvas::goLastPage()
     m_pages.last();
     m_pageBackups.clear();
     m_pageBackups.append(new QPixmap(*(m_pages.current())));
-    repaint();
+
+    resizeContents(m_pages.current()->width(), m_pages.current()->height());
+    viewport()->update();
 
     emit pagesChanged();
     emit pageBackupsChanged();
 }
 
-void DrawPadCanvas::mousePressEvent(QMouseEvent* e)
+void DrawPadCanvas::contentsMousePressEvent(QMouseEvent* e)
 {
     m_pDrawPad->drawMode()->mousePressEvent(e);
 }
 
-void DrawPadCanvas::mouseReleaseEvent(QMouseEvent* e)
+void DrawPadCanvas::contentsMouseReleaseEvent(QMouseEvent* e)
 {
     m_pDrawPad->drawMode()->mouseReleaseEvent(e);
 
@@ -384,37 +433,14 @@ void DrawPadCanvas::mouseReleaseEvent(QMouseEvent* e)
     emit pageBackupsChanged();
 }
 
-void DrawPadCanvas::mouseMoveEvent(QMouseEvent* e)
+void DrawPadCanvas::contentsMouseMoveEvent(QMouseEvent* e)
 {
     m_pDrawPad->drawMode()->mouseMoveEvent(e);
 }
 
-void DrawPadCanvas::resizeEvent(QResizeEvent* e)
+void DrawPadCanvas::drawContents(QPainter* p, int cx, int cy, int cw, int ch)
 {
-    QWidget::resizeEvent(e);
+    QRect clipRect(cx, cy, cw, ch);
 
-    QListIterator<QPixmap> bufferIterator(m_pages);
-
-    for (bufferIterator.toFirst(); bufferIterator.current() != 0; ++bufferIterator) {
-        int w = width() > bufferIterator.current()->width() ? width() : bufferIterator.current()->width();
-        int h = height() > bufferIterator.current()->height() ? height() : bufferIterator.current()->height();
-
-        QPixmap tmpPixmap(*(bufferIterator.current()));
-        bufferIterator.current()->resize(w, h);
-        bufferIterator.current()->fill(Qt::white);
-
-        bitBlt(bufferIterator.current(), 0, 0, &tmpPixmap, 0, 0, tmpPixmap.width(), tmpPixmap.height());
-    }
-}
-
-void DrawPadCanvas::paintEvent(QPaintEvent* e)
-{
-    QWidget::paintEvent(e);
-
-    QArray<QRect> rects = e->region().rects();
-
-    for (uint i = 0; i < rects.count(); i++) {
-        QRect r = rects[i];
-        bitBlt(this, r.x(), r.y(), m_pages.current(), r.x(), r.y(), r.width(), r.height());
-    }
+    p->drawPixmap(clipRect.topLeft(), *(m_pages.current()), clipRect);
 }
