@@ -441,10 +441,10 @@ void EditNetworkSetup::SLOT_SelectNode( QListViewItem * it ) {
     NN = (*Mapping)[ it ];
 
     if( ! NN ) {
-      // intermediate node
+      // intermediate (controller) node
       NN = (*Mapping)[ it->parent() ];
       if( NN ) {
-        // figure out type of this node -> produce mesage
+        // figure out type of this node -> produce message
         Description_LBL->setText( NSResources->netNode2Description(
                                   NN->needs()[0]) );
       } else {
@@ -453,6 +453,7 @@ void EditNetworkSetup::SLOT_SelectNode( QListViewItem * it ) {
       return;
     }
 
+    // clicked on regular node 
     Description_LBL->setText( NN->nodeDescription() );
 
     if( ! it->isSelectable() ) {
@@ -461,13 +462,16 @@ void EditNetworkSetup::SLOT_SelectNode( QListViewItem * it ) {
 
     ANetNode::NetNodeList & NNL = NN->alternatives();
 
-    if( NNL.size() != 1 ) {
-      if( NNL.size() == 0 ||
-        ! ((MyQCheckListItem *)it)->isOn() 
-      ) {
-        // not clicked on Check or Radio item
-        return;
-      }
+    if( NNL.size() == 0 ) {
+      // this item has no alternatives -> end node
+      TmpIsValid = 0;
+      updateGUI( it, NN );
+      return;
+    }
+
+    if( ! ((MyQCheckListItem *)it)->isOn() ) {
+      // not clicked on Check or Radio item
+      return;
     }
 
     // item has really changed -> update 
@@ -529,6 +533,7 @@ void EditNetworkSetup::updateGUI( QListViewItem * it, ANetNode * NN ) {
 
     bool HCC = haveCompleteConfig( it );
     Tab_TB->setTabEnabled( Setup_FRM, HCC );
+    Log(( "COMPLETE CONFIG %d\n", HCC ));
     Setup_FRM->setEnabled( HCC );
 
     // disable children of all siblings at same level
@@ -626,6 +631,7 @@ bool EditNetworkSetup::haveCompleteConfig( QListViewItem * it ) {
         }
 
         if( ! Found ) {
+          Log(( "Setup not complete\n" ));
           return 0; // no not complete -> a radio should have been chkd
         }
 
