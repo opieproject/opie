@@ -34,6 +34,7 @@ TARGET    = embeddedkonsole
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 LIBS            += -lqpe -lopie
+TMAKE_CXXFLAGS += -DQT_QWS_OPIE
 
 TRANSLATIONS = ../../../i18n/de/embeddedkonsole.ts \
         ../../../i18n/en/embeddedkonsole.ts \

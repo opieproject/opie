@@ -19,7 +19,7 @@
 /*                        */
 /* -------------------------------------------------------------------------- */
 // enhancements added by L.J. Potter <ljp@llornkcor.com>
-#define QWS_QT_OPIE
+//#define QT_QWS_OPIE
 
 #include <qpe/resource.h>
 
@@ -55,7 +55,7 @@
 #include "keytrans.h"
 #include "commandeditdialog.h"
 
-#ifdef  QWS_QT_OPIE
+#ifdef  QT_QWS_OPIE
 #include <opie/colorpopupmenu.h>
 #endif
 
@@ -296,7 +296,7 @@ void Konsole::init(const char* _pgm, QStrList & _args)
   colorMenu->insertItem(tr( "Blue on Black"));
   colorMenu->insertItem(tr( "Amber on Black"));
 
-#ifdef QWS_QT_OPIE
+#ifdef QT_QWS_OPIE
   colorMenu->insertItem(tr( "Custom"));
 #endif
   
@@ -370,8 +370,11 @@ void Konsole::init(const char* _pgm, QStrList & _args)
  
   configMenu->insertItem(tr( "ScrollBar" ),scrollMenu);
 
-  configMenu->insertItem(tr( "Wrap" ));
-  int jut = configMenu->insertItem(tr( "Use Beep" ));
+  int jut = configMenu->insertItem(tr( "Wrap" ));
+    cfg.setGroup("ScrollBar");
+  configMenu->setItemChecked(jut, cfg.readBoolEntry("HorzScroll",0));
+
+  jut = configMenu->insertItem(tr( "Use Beep" ));
   cfg.setGroup("Menubar");
   configMenu->setItemChecked(jut, cfg.readBoolEntry("useBeep",0));
 
@@ -753,7 +756,7 @@ void Konsole::colorMenuSelected(int iD)
             cfg.writeEntry("Schema","18");
             colorMenu->setItemChecked(-18,TRUE);
         }
-#ifdef QWS_QT_OPIE        
+#ifdef QT_QWS_OPIE        
         if(iD==-19) {
 // Custom
             qDebug("do custom");
@@ -797,7 +800,7 @@ void Konsole::configMenuSelected(int iD)
     Config cfg("Konsole");
     cfg.setGroup("Menubar");
     int i,j;
-#ifdef QWS_QT_OPIE
+#ifdef QT_QWS_OPIE
     i=-29;j=-30;
 #else
     i=-28;j=-29;
@@ -1000,7 +1003,7 @@ void Konsole::changeForegroundColor(const QColor &color) {
     cfg.write();
 
 qDebug("do other dialog");
-#ifdef QWS_QT_OPIE
+#ifdef QT_QWS_OPIE
 
  ColorPopupMenu* penColorPopupMenu2 = new ColorPopupMenu(Qt::black, this,"background color");
     connect(penColorPopupMenu2, SIGNAL(colorSelected(const QColor&)), this,
@@ -1024,7 +1027,7 @@ void Konsole::changeBackgroundColor(const QColor &color) {
 
 void Konsole::doWrap() {
 int i;
-#ifdef QWS_QT_OPIE
+#ifdef QT_QWS_OPIE
 i=-29;
 #else
 i=-28;
