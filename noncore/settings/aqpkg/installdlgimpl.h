@@ -29,6 +29,7 @@ class InstallDlgImpl : public InstallDlg
 {
 public:
     InstallDlgImpl( vector<QString> &packageList, DataManager *dataManager, QWidget * parent = 0, const char* name = 0, bool modal = false, WFlags fl = 0 );
+    InstallDlgImpl( QWidget * parent = 0, const char* name = 0, bool modal = false, WFlags fl = 0 );
     ~InstallDlgImpl();
 
 	bool showDlg();
@@ -43,6 +44,7 @@ private:
 	vector<QString> updateList;
     int flags;
     Ipkg ipkg;
+    bool upgradePackages;
 
 	bool runIpkg( QString &option, const QString& package, const QString& dest, int flags );
 
