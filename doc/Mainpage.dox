@@ -18,7 +18,10 @@
 	* - <a href="pim/html/index.html"><b>PIM</b></a>
 	*   (<a href="pim/html/classes.html">classes</a>)\n
 	*   <i>Libopie PIM</i>
-	*
+	* - <a href="network/html/index.html"><b>Network Settings Modules</b></a>
+	*   (<a href="network/html/classes.html">classes</a>)\n
+        *   <i>Networksettings</i>
+        *
 	*/
 
 /**

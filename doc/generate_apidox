@@ -14,6 +14,7 @@ mkdir $OPIEDIR/apidocs/qt
 mkdir $OPIEDIR/apidocs/libqpe
 mkdir $OPIEDIR/apidocs/libopie
 mkdir $OPIEDIR/apidocs/pim
+mkdir $OPIEDIR/apidocs/network
 
 # now copy qt doc
 echo "Scanning and copying QT docu"
@@ -39,6 +40,13 @@ echo "Creating docu for PIM"
 # now it's time for libopie/pim
 cp $OPIEDIR/doc/Doxyfile_pim $OPIEDIR/libopie/pim/Doxyfile
 cd $OPIEDIR/libopie/pim
+doxygen Doxyfile
+rm -f Doxyfile
+
+echo "Creating docu for NetworkSettings"
+# now do networksettings
+cp $OPIEDIR/doc/Doxyfile_net $OPIEDIR/noncore/settings/networksettings/Doxyfile
+cd $OPIEDIR/noncore/settings/networksettings
 doxygen Doxyfile
 rm -f Doxyfile
 
