@@ -83,9 +83,9 @@ OMacAddress::~OMacAddress()
 }
 
 
-#ifdef QT_NO_DEBUG
-inline
-#endif
+//#ifdef QT_NO_DEBUG
+//inline
+//#endif
 const unsigned char* OMacAddress::native() const
 {
     return (const unsigned char*) &_bytes;
