@@ -1,4 +1,4 @@
   config MOBILEMSG
     boolean "opie-mobilemsg (send SMS messages)"
-    default "y"
+    default "n"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,4 +1,4 @@
   config GSMTOOL
     boolean "opie-gsmtool (an GSM phone utility program)"
-    default "y"
+    default "n"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
