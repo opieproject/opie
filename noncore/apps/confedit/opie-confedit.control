@@ -1,5 +1,5 @@
 Packagename: opie-confeditor
-Files: plugins/application/libconfedit.so.* bin/confedit apps/Settings/confedit.desktop pics/confedit/confedit.png
+Files: plugins/application/libconfedit.so* bin/confedit apps/Settings/confedit.desktop pics/confedit/confedit.png
 Priority: optional
 Section: opie/
 Maintainer: Patrick S. Vogt <tille@handhelds.org>

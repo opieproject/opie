@@ -1,5 +1,5 @@
 Package: opie-keypebble
-Files: plugins/application/libkeypebble.so.* bin/keypebble apps/Applications/keypebble.desktop pics/vnc
+Files: plugins/application/libkeypebble.so* bin/keypebble apps/Applications/keypebble.desktop pics/vnc
 Priority: optional
 Section: opie/applications
 Maintainer: Martin Imobersteg <imm@gmx.ch>

@@ -1,5 +1,5 @@
 Package: opie-launcher-settings
-Files: plugins/application/liblaunchersettings.so.* bin/launchersettings apps/Settings/Launcher.desktop pics/launchersettings
+Files: plugins/application/liblaunchersettings.so* bin/launchersettings apps/Settings/Launcher.desktop pics/launchersettings
 Priority: optional
 Section: opie/settings
 Maintainer: Robert Griebl <sandman@handhelds.org>

@@ -1,5 +1,5 @@
 Package: opie-datebook
-Files: plugins/application/libdatebook.so.* bin/datebook apps/1Pim/datebook.desktop
+Files: plugins/application/libdatebook.so* bin/datebook apps/1Pim/datebook.desktop
 Priority: optional
 Section: opie/applications
 Conflicts: qpe-tkccalendar

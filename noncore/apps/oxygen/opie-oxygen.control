@@ -1,5 +1,5 @@
 Package: opie-oxygen
-Files: plugins/application/liboxygen.so.* bin/oxygen apps/Applications/oxygen.desktop pics/oxygen/oxygen.png share/oxygen/*
+Files: plugins/application/liboxygen.so* bin/oxygen apps/Applications/oxygen.desktop pics/oxygen/oxygen.png share/oxygen/*
 Priority: optional
 Section: applications
 Maintainer: Carsten Niehaus <cniehaus@handhelds.org>

@@ -1,5 +1,5 @@
 Package: opie-light-and-power
-Files: plugins/application/liblight-and-power.so.* bin/light-and-power apps/Settings/Light.desktop pics/lightandpower
+Files: plugins/application/liblight-and-power.so* bin/light-and-power apps/Settings/Light.desktop pics/lightandpower
 Priority: optional
 Section: opie/settings
 Maintainer: Maximilian Reiss <harlekin@handhelds.org>

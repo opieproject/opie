@@ -1,5 +1,5 @@
 Package: opie-aqpkg
-Files: plugins/application/libaqpkg.so.* bin/aqpkg pics/aqpkg apps/Settings/aqpkg.desktop 
+Files: plugins/application/libaqpkg.so* bin/aqpkg pics/aqpkg apps/Settings/aqpkg.desktop 
 Priority: optional
 Section: Settings
 Depends: task-opie-minimal

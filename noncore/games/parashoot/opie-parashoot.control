@@ -1,5 +1,5 @@
 Package: opie-parashoot
-Files: plugins/application/libparashoot.so.* bin/parashoot apps/Games/parashoot.desktop pics/parashoot
+Files: plugins/application/libparashoot.so* bin/parashoot apps/Games/parashoot.desktop pics/parashoot
 Priority: optional
 Section: opie/games
 Maintainer: Martin Imobersteg <imm@gmx.ch>

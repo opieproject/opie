@@ -1,5 +1,5 @@
 Package: opie-bluepin
-Files: plugins/application/libbluepin.so.* bin/bluepin
+Files: plugins/application/libbluepin.so* bin/bluepin
 Priority: optional
 Section: opie/applications
 Maintainer: Holger Freyther <zecke@handhelds.org>

@@ -1,5 +1,5 @@
 Package: opie-fifteen
-Files: plugins/application/libfifteen.so.* bin/fifteen apps/Games/fifteen.desktop pics/fifteen
+Files: plugins/application/libfifteen.so* bin/fifteen apps/Games/fifteen.desktop pics/fifteen
 Priority: optional
 Section: opie/games
 Maintainer: Martin Imobersteg <imm@gmx.ch> 

@@ -1,5 +1,5 @@
 Package: opie-remote
-Files: plugins/application/libremote.so.* bin/remote apps/Applications/remote.desktop pics/remote/*.png
+Files: plugins/application/libremote.so* bin/remote apps/Applications/remote.desktop pics/remote/*.png
 Priority: optional
 Section: opie/applications
 Maintainer: Thomas Stephens <spiralman@softhome.net>

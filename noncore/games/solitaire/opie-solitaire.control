@@ -1,5 +1,5 @@
 Package: opie-solitaire
-Files: plugins/application/libpatience.so.* bin/patience apps/Games/patience.desktop pics/cards
+Files: plugins/application/libpatience.so* bin/patience apps/Games/patience.desktop pics/cards
 Priority: optional
 Section: opie/games
 Maintainer: Martin Imobersteg <imm@gmx.ch>

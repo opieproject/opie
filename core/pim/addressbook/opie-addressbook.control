@@ -1,5 +1,5 @@
 Package: opie-addressbook
-Files: plugins/application/libaddressbook.so.* bin/addressbook apps/1Pim/addressbook.desktop
+Files: plugins/application/libaddressbook.so* bin/addressbook apps/1Pim/addressbook.desktop
 Priority: optional
 Section: opie/applications
 Conflicts: qpe-tkcaddressbook

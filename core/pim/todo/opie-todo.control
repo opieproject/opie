@@ -1,5 +1,5 @@
 Package: opie-todo
-Files: plugins/application/libtodolist.so.* bin/todolist apps/1Pim/todo.desktop
+Files: plugins/application/libtodolist.so* bin/todolist apps/1Pim/todo.desktop
 Priority: optional
 Section: opie/applications
 Maintainer: Holger 'zecke' Freyther <zecke@handhelds.org>
