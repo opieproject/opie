@@ -1,29 +1,3 @@
---- src/kernel/qwsmouse_qws.cpp.orig    2003-01-31 04:34:52.000000000 +0100
-+++ src/kernel/qwsmouse_qws.cpp 2003-03-10 12:26:40.000000000 +0100
-@@ -61,12 +61,14 @@
- #endif
- 
- #if defined(QT_QWS_IPAQ)
-+#include <sys/time.h>
- #define QT_QWS_IPAQ_RAW
- typedef struct {
-         unsigned short pressure;
-         unsigned short x;
-         unsigned short y;
-         unsigned short pad;
-+        struct timeval stamp;
- } TS_EVENT;
- #elif defined(QT_QWS_SL5XXX)
- #define QT_QWS_SL5XXX_RAW
-@@ -1241,7 +1243,7 @@
- #if defined(QT_QWS_IPAQ) || defined(QT_QWS_SL5XXX)
- #if defined(QT_QWS_IPAQ)
- # ifdef QT_QWS_IPAQ_RAW
--    if ((mouseFD = open( "/dev/h3600_tsraw", O_RDONLY | O_NDELAY)) < 0) {
-+    if ((mouseFD = open( "/dev/touchscreen/ucb1x00", O_RDONLY | O_NONBLOCK /*O_NDELAY*/)) < 0) {
- # else
-     if ((mouseFD = open( "/dev/h3600_ts", O_RDONLY | O_NDELAY)) < 0) {
- # endif
 --- src/kernel/qkeyboard_qws.cpp.orig	Fri May 30 16:05:20 2003
 +++ src/kernel/qkeyboard_qws.cpp	Fri May 30 16:03:41 2003
 @@ -37,6 +37,7 @@
