@@ -1,32 +1,19 @@
 /**********************************************************************
+// textedit.cpp
 ** Copyright (C) 2000 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of Opie Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
 ** Foundation and appearing in the file LICENSE.GPL included in the
 ** packaging of this file.
 **
-** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
-** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
-**
-** See http://www.trolltech.com/gpl/ for GPL licensing information.
-**
-** Contact info@trolltech.com if any conditions of this licensing are
-** not clear to you.
-**
 **********************************************************************/
 // changes added by L. J. Potter Sun 02-17-2002 21:31:31
-/*
-  useAdvancedfeatures =
-  1) do not prompt on cancel, even if text is edited.
-  2) prompt user is .desktop file
-  3) prompt user for File Permissions on saveAs
- */
 #include "textedit.h"
 #include "filePermissions.h"
-//#include "fontDialog.h"
+
 
 #include <opie/ofileselector.h>
 #include <opie/ofiledialog.h>
@@ -43,6 +30,7 @@
 #include <qpe/qpetoolbar.h>
 #include <qpe/qcopenvelope_qws.h>
 
+#include <qpoint.h>
 #include <qtextstream.h>
 #include <qdatetime.h>
 #include <qclipboard.h>
@@ -169,16 +157,22 @@ static char * filesave_xpm[] = {
 
 class QpeEditor : public QMultiLineEdit
 {
-    //    Q_OBJECT
+
 public:
     QpeEditor( QWidget *parent, const char * name = 0 )
-  : QMultiLineEdit( parent, name ) {
-            clearTableFlags();
-            setTableFlags( Tbl_vScrollBar | Tbl_autoHScrollBar );
+            : QMultiLineEdit( parent, name ) {
+        clearTableFlags();
+        setTableFlags( Tbl_vScrollBar | Tbl_autoHScrollBar );
 }
 
     void find( const QString &txt, bool caseSensitive,
                             bool backwards );
+protected:
+    bool markIt;
+    int line1, line2, col1, col2;
+    void mousePressEvent( QMouseEvent * );
+    void mouseReleaseEvent( QMouseEvent * );
+
 //public slots:
       /*
 signals:
@@ -190,6 +184,38 @@ private:
 
 };
 
+void QpeEditor::mousePressEvent( QMouseEvent *e ) {
+ switch(e->button()) {
+   case RightButton:
+   { //rediculous workaround for qt popup menu
+     //and the hold right click mechanism
+       this->setSelection( line1, col1, line2, col2);
+       QMultiLineEdit::mousePressEvent( e );
+       markIt = false;
+   }
+   break;
+   default:
+   {
+       if(!markIt) {
+           int line, col;
+           this->getCursorPosition(&line, &col);
+           line1=line2=line;
+           col1=col2=col;
+       }
+       QMultiLineEdit::mousePressEvent( e );
+   }
+       break;
+ };
+}
+
+void QpeEditor::mouseReleaseEvent( QMouseEvent * ) {
+    if(this->hasMarkedText()) {
+        markIt = true;
+        this->getMarkedRegion( &line1, &col1, &line2, & col2 );
+    } else {
+       markIt = false;
+    }
+}
 
 void QpeEditor::find ( const QString &txt, bool caseSensitive,
            bool backwards )
@@ -268,49 +294,58 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     bar = new QPEToolBar( this );
     editBar = bar;
 
-    QAction *a = new QAction( tr( "New" ), Resource::loadPixmap( "new" ), QString::null, 0, this, 0 );
+    QAction *a = new QAction( tr( "New" ), Resource::loadPixmap( "new" ),
+                              QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( fileNew() ) );
 //    a->addTo( bar );
     a->addTo( file );
 
-    a = new QAction( tr( "Open" ), Resource::loadPixmap( "fileopen" ), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Open" ), Resource::loadPixmap( "fileopen" ),
+                     QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( fileOpen() ) );
     a->addTo( bar );
     a->addTo( file );
 
-    a = new QAction( tr( "Save" ), QPixmap(( const char** ) filesave_xpm  ) , QString::null, 0, this, 0 );
+    a = new QAction( tr( "Save" ), QPixmap(( const char** ) filesave_xpm  ) ,
+                     QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( save() ) );
     file->insertSeparator();
     a->addTo( bar );
     a->addTo( file );
 
-    a = new QAction( tr( "Save As" ), QPixmap(( const char** ) filesave_xpm  ) , QString::null, 0, this, 0 );
+    a = new QAction( tr( "Save As" ), QPixmap(( const char** ) filesave_xpm  ) ,
+                     QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( saveAs() ) );
     a->addTo( file );
 
-    a = new QAction( tr( "Cut" ), Resource::loadPixmap( "cut" ), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Cut" ), Resource::loadPixmap( "cut" ),
+                     QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( editCut() ) );
     a->addTo( editBar );
     a->addTo( edit );
 
-    a = new QAction( tr( "Copy" ), Resource::loadPixmap( "copy" ), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Copy" ), Resource::loadPixmap( "copy" ),
+                     QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( editCopy() ) );
     a->addTo( editBar );
     a->addTo( edit );
 
-    a = new QAction( tr( "Paste" ), Resource::loadPixmap( "paste" ), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Paste" ), Resource::loadPixmap( "paste" ),
+                     QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( editPaste() ) );
     a->addTo( editBar );
     a->addTo( edit );
 
 
 #ifndef QT_NO_CLIPBOARD
-    a = new QAction( tr( "Insert Time and Date" ), Resource::loadPixmap( "paste" ), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Insert Time and Date" ), Resource::loadPixmap( "paste" ),
+                     QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( editPasteTimeDate() ) );
     a->addTo( edit );
 #endif
     
-    a = new QAction( tr( "Find..." ), Resource::loadPixmap( "find" ), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Find..." ), Resource::loadPixmap( "find" ),
+                     QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( editFind() ) );
     edit->insertSeparator();
     a->addTo( bar );
@@ -326,40 +361,52 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     zout->addTo( font );
 
     font->insertSeparator();
-//    font->insertSeparator();
+
     font->insertItem(tr("Font"), this, SLOT(changeFont()) );
 
     font->insertSeparator();
     font->insertItem(tr("Advanced Features"), advancedMenu);
     
-    QAction *wa = new QAction( tr("Wrap lines"), QString::null, 0, this, 0 );
-    connect( wa, SIGNAL( toggled(bool) ), this, SLOT( setWordWrap(bool) ) );
+    QAction *wa = new QAction( tr("Wrap lines"),
+                               QString::null, 0, this, 0 );
+    connect( wa, SIGNAL( toggled(bool) ),
+             this, SLOT( setWordWrap(bool) ) );
     wa->setToggleAction(true);
     wa->addTo( advancedMenu);
 
-    nStart = new QAction( tr("Start with new file"), QString::null, 0, this, 0 );
-    connect( nStart, SIGNAL( toggled(bool) ), this, SLOT( changeStartConfig(bool) ) );
+    nStart = new QAction( tr("Start with new file"),
+                          QString::null, 0, this, 0 );
+    connect( nStart, SIGNAL( toggled(bool) ),
+             this, SLOT( changeStartConfig(bool) ) );
     nStart->setToggleAction(true);
     nStart->addTo( advancedMenu );
     nStart->setEnabled(false);
 
-    nAdvanced = new QAction( tr("Prompt on Exit"), QString::null, 0, this, 0 );
-    connect( nAdvanced, SIGNAL( toggled(bool) ), this, SLOT( doPrompt(bool) ) );
+    nAdvanced = new QAction( tr("Prompt on Exit"),
+                             QString::null, 0, this, 0 );
+    connect( nAdvanced, SIGNAL( toggled(bool) ),
+             this, SLOT( doPrompt(bool) ) );
     nAdvanced->setToggleAction(true);
     nAdvanced->addTo( advancedMenu );
 
-    desktopAction = new QAction( tr("Always open linked file"), QString::null, 0, this, 0 );
-    connect( desktopAction, SIGNAL( toggled(bool) ), this, SLOT( doDesktop(bool) ) );
+    desktopAction = new QAction( tr("Always open linked file"),
+                                 QString::null, 0, this, 0 );
+    connect( desktopAction, SIGNAL( toggled(bool) ),
+             this, SLOT( doDesktop(bool) ) );
     desktopAction->setToggleAction(true);
     desktopAction->addTo( advancedMenu);
 
-    filePermAction = new QAction( tr("File Permissions"), QString::null, 0, this, 0 );
-    connect( filePermAction, SIGNAL( toggled(bool) ), this, SLOT( doFilePerms(bool) ) );
+    filePermAction = new QAction( tr("File Permissions"),
+                                  QString::null, 0, this, 0 );
+    connect( filePermAction, SIGNAL( toggled(bool) ),
+             this, SLOT( doFilePerms(bool) ) );
     filePermAction->setToggleAction(true);
     filePermAction->addTo( advancedMenu);
 
-    searchBarAction = new QAction( tr("Search Bar Open"), QString::null, 0, this, 0 );
-    connect( searchBarAction, SIGNAL( toggled(bool) ), this, SLOT( setSearchBar(bool) ) );
+    searchBarAction = new QAction( tr("Search Bar Open"),
+                                   QString::null, 0, this, 0 );
+    connect( searchBarAction, SIGNAL( toggled(bool) ),
+             this, SLOT( setSearchBar(bool) ) );
     searchBarAction->setToggleAction(true);
     searchBarAction->addTo( advancedMenu);
 
@@ -382,17 +429,20 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     connect( searchEdit, SIGNAL( textChanged( const QString & ) ),
        this, SLOT( search() ) );
 
-    a = new QAction( tr( "Find Next" ), Resource::loadPixmap( "next" ), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Find Next" ), Resource::loadPixmap( "next" ),
+                     QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( findNext() ) );
     a->addTo( searchBar );
     a->addTo( edit );
 
-    a = new QAction( tr( "Close Find" ), Resource::loadPixmap( "close" ), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Close Find" ), Resource::loadPixmap( "close" ),
+                     QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( findClose() ) );
     a->addTo( searchBar );
 
     edit->insertSeparator();
-    a = new QAction( tr( "Delete" ), Resource::loadPixmap( "close" ), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Delete" ), Resource::loadPixmap( "close" ),
+                     QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( editDelete() ) );
     a->addTo( edit );
 
@@ -401,7 +451,9 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     editor = new QpeEditor( this );
     setCentralWidget( editor );
     editor->setFrameStyle( QFrame::Panel | QFrame::Sunken );
-    connect( editor, SIGNAL( textChanged() ), this, SLOT( editorChanged() ) );
+    connect( editor, SIGNAL( textChanged() ),
+             this, SLOT( editorChanged() ) );
+
     QPEApplication::setStylusOperation( editor, QPEApplication::RightOnHold);
 
     Config cfg("TextEdit");
@@ -449,33 +501,24 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
         }
     } else {
     edited1=false;
-        
-//        if(startWithNew ) {
             openDotFile("");
-//            fileNew();
-//        }
-//        else {
-//             fileOpen();
-//         }
     }
 
     viewSelection = cfg.readNumEntry( "FileView", 0 );
-//    setCaption(tr("Text Editor"));
 }
 
 TextEdit::~TextEdit() {
-//    qDebug("destr");
+    qWarning("textedit d'tor");
+    delete editor;
 }
 
 void TextEdit::closeEvent(QCloseEvent *) {
-//    qDebug("closing here");
       if( edited1 && promptExit)
           saveAs();
      qApp->quit();
 }
 
 void TextEdit::cleanUp() {
-//  qDebug("cleanUp");//    save();
   
     Config cfg ( "TextEdit" );
     cfg. setGroup ( "Font" );
@@ -499,7 +542,6 @@ void TextEdit::cleanUp() {
 
 
 void TextEdit::accept() {
-//    qDebug("accept");
         if( edited1)
             saveAs();
      qApp->quit();
@@ -790,7 +832,7 @@ bool TextEdit::save() {
     qDebug("saveAsFile " + currentFileName);
     if(currentFileName.isEmpty()) {
         saveAs();
-        return;
+        return false;
     }
   QString file = doc->file();
     qDebug("saver file "+file);
@@ -1053,7 +1095,7 @@ void TextEdit::editorChanged() {
     edited=true;
 }
 
-void TextEdit::receive(const QCString&msg, const QByteArray &data) {
+void TextEdit::receive(const QCString&msg, const QByteArray &) {
     qDebug("QCop "+msg);
   if ( msg == "setDocument(QString)" ) {
       qDebug("bugger all");
@@ -1098,4 +1140,3 @@ void TextEdit::editPasteTimeDate() {
   editor->paste();
 #endif
 }
-
