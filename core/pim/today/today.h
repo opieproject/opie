@@ -18,17 +18,12 @@
 #ifndef TODAY_H
 #define TODAY_H
 
-#include <opie/tododb.h>
-
-#include <qdatetime.h>
-#include <qlist.h>
-#include <qhbox.h>
 
 #include <qpe/qlibrary.h>
-#include <qpe/event.h>
 
 #include "todayconfig.h"
 #include "todaybase.h"
+
 #include <opie/todayplugininterface.h>
 
 class QVBoxLayout;

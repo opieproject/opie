@@ -16,7 +16,6 @@
 
 #include "todaybase.h"
 
-#include <qframe.h>
 #include <qlabel.h>
 #include <qimage.h>
 #include <qpixmap.h>

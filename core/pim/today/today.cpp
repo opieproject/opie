@@ -19,7 +19,6 @@
 #define QTOPIA_INTERNAL_LANGLIST
 
 #include "today.h"
-#include <opie/todayconfigwidget.h>
 
 #include <qpe/config.h>
 #include <qpe/qcopenvelope_qws.h>
@@ -30,14 +29,7 @@
 
 #include <qdir.h>
 #include <qfile.h>
-#include <qpushbutton.h>
-#include <qlabel.h>
 #include <qtimer.h>
-#include <qpixmap.h>
-#include <qlayout.h>
-#include <qhbox.h>
-#include <opie/otabwidget.h>
-#include <qdialog.h>
 #include <qwhatsthis.h>
 #include <qtranslator.h>
 

@@ -27,8 +27,8 @@
 #include <qscrollview.h>
 #include <qtimer.h>
 
-DatebookPluginWidget::DatebookPluginWidget( QWidget *parent,  const char* name)
-    : QWidget(parent,  name ) {
+DatebookPluginWidget::DatebookPluginWidget( QWidget *parent, const char* name )
+    : QWidget(parent, name ) {
 
     db = 0l;
     m_layoutDates = 0l;
