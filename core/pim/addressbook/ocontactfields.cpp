@@ -6,6 +6,8 @@
 
 // We should use our own enum in the future ..
 #include <qpe/recordfields.h>
+#include <qpe/config.h>
+#include <opie/ocontact.h>
 
 /*!
   \internal
@@ -199,7 +201,7 @@ QStringList OContactFields::untrfields( bool sorted )
 QMap<int, QString> OContactFields::idToTrFields()
 {
 	QMap<int, QString> ret_map;
-	
+
 	ret_map.insert( Qtopia::Title, QObject::tr( "Name Title") );
 	ret_map.insert( Qtopia::FirstName, QObject::tr( "First Name" ) );
 	ret_map.insert( Qtopia::MiddleName, QObject::tr( "Middle Name" ) );
@@ -254,7 +256,7 @@ QMap<int, QString> OContactFields::idToTrFields()
 
 	// other
 	ret_map.insert( Qtopia::Notes, QObject::tr( "Notes" ) );
-	
+
 
 	return ret_map;
 }
@@ -268,7 +270,100 @@ QMap<QString, int> OContactFields::trFieldsToId()
         QMap<int, QString>::Iterator it;
         for( it = idtostr.begin(); it != idtostr.end(); ++it )
 		ret_map.insert( *it, it.key() );
-	
+
 
 	return ret_map;
+}
+
+OContactFields::OContactFields():
+	fieldOrder( DEFAULT_FIELD_ORDER ),
+	changedFieldOrder( false )
+{
+	// Get the global field order from the config file and
+	// use it as a start pattern
+	Config cfg ( "AddressBook" );
+	cfg.setGroup( "ContactFieldOrder" );
+	globalFieldOrder = cfg.readEntry( "General", DEFAULT_FIELD_ORDER );
+}
+
+OContactFields::~OContactFields(){
+
+	// We will store the fieldorder into the config file
+	// to reuse it for the future.. 
+	if ( changedFieldOrder ){
+		Config cfg ( "AddressBook" );
+		cfg.setGroup( "ContactFieldOrder" );
+		cfg.writeEntry( "General", globalFieldOrder );
+	}
+}
+
+
+
+void OContactFields::saveToRecord( OContact &cnt ){
+
+	qDebug("ocontactfields saveToRecord: >%s<",fieldOrder.latin1());
+
+	// Store fieldorder into this contact.
+	cnt.setCustomField( CONTACT_FIELD_ORDER_NAME, fieldOrder );
+
+	globalFieldOrder = fieldOrder;
+	changedFieldOrder = true;
+
+}
+
+void OContactFields::loadFromRecord( const OContact &cnt ){
+	qDebug("ocontactfields loadFromRecord");
+	qDebug("loading >%s<",cnt.fullName().latin1());
+
+	// Get fieldorder for this contact. If none is defined,
+	// we will use the global one from the config file..
+
+	fieldOrder = cnt.customField( CONTACT_FIELD_ORDER_NAME );
+
+	qDebug("fieldOrder from contact>%s<",fieldOrder.latin1());
+
+	if (fieldOrder.isEmpty()){
+		fieldOrder = globalFieldOrder;
+	}
+
+
+	qDebug("effective fieldOrder in loadFromRecord >%s<",fieldOrder.latin1());
+}
+
+void OContactFields::setFieldOrder( int num, int index ){
+	qDebug("qcontactfields setfieldorder pos %i -> %i",num,index);
+
+	fieldOrder[num] = QString::number( index )[0];
+
+	// We will store this new fieldorder globally to 
+	// remember it for contacts which have none
+	globalFieldOrder = fieldOrder;
+	changedFieldOrder = true;
+
+	qDebug("fieldOrder >%s<",fieldOrder.latin1());
+}
+
+int OContactFields::getFieldOrder( int num, int defIndex ){
+	qDebug("ocontactfields getFieldOrder");
+	qDebug("fieldOrder >%s<",fieldOrder.latin1());
+
+	// Get index of combo as char..
+	QChar poschar = fieldOrder[num];
+
+	bool ok;
+	int ret = 0;
+	// Convert char to number..
+	if ( !( poschar == QChar::null ) )
+		ret = QString( poschar ).toInt(&ok, 10);
+	else
+		ok = false;
+
+	// Return default value if index for
+	// num was not set or if anything else happened..
+	if ( !ok ) ret = defIndex;
+
+	qDebug("returning >%i<",ret);
+
+	return ret;
+
 }

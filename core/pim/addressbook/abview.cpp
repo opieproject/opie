@@ -95,28 +95,28 @@ AbView::~AbView()
 
 void AbView::setView( Views view )
 {
-	qWarning("AbView::setView( Views view )");
+	//	qWarning("AbView::setView( Views view )");
  	m_curr_View = view;
  	load();
 }
 
 void AbView::addEntry( const OContact &newContact )
 {
-	qWarning("abview:AddContact");
+	//	qWarning("abview:AddContact");
 	m_contactdb->add ( newContact );
 	load();
 
 }
 void AbView::removeEntry( const int UID )
 {
-	qWarning("abview:RemoveContact");
+	//	qWarning("abview:RemoveContact");
 	m_contactdb->remove( UID );
 	load();
 }
 
 void AbView::replaceEntry( const OContact &contact )
 {
-	qWarning("abview:ReplaceContact");
+	//	qWarning("abview:ReplaceContact");
 	m_contactdb->replace( contact );
 	load();
 
@@ -140,14 +140,14 @@ OContact AbView::currentEntry()
 
 bool AbView::save()
 {
-	qWarning("abView:Save data");
+	//	qWarning("abView:Save data");
 
 	return m_contactdb->save();
 }
 
 void AbView::load()
 {
-	qWarning("abView:Load data");
+	//	qWarning("abView:Load data");
 
 	// Letter Search is stopped at this place
 	emit signalClearLetterPicker();
@@ -160,7 +160,7 @@ void AbView::load()
 		clearForCategory();
 	}
 
-	qWarning ("Number of contacts: %d", m_list.count());
+	//	qWarning ("Number of contacts: %d", m_list.count());
 
 	updateView( true );
 
@@ -168,7 +168,7 @@ void AbView::load()
 
 void AbView::reload()
 {
-	qWarning( "void AbView::reload()" );
+	//	qWarning( "void AbView::reload()" );
 
 	m_contactdb->reload();
 	load();
@@ -181,7 +181,7 @@ void AbView::clear()
 
 void AbView::setShowByCategory( const QString& cat )
 {
-	qWarning("AbView::setShowCategory( const QString& cat )");
+	//	qWarning("AbView::setShowCategory( const QString& cat )");
 
 	int intCat = 0;
 
@@ -193,7 +193,7 @@ void AbView::setShowByCategory( const QString& cat )
 
 	// Just do anything if we really change the category
 	if ( intCat != m_curr_category ){
-		qWarning ("Categories: Selected %s.. Number: %d", cat.latin1(), m_curr_category);
+		//		qWarning ("Categories: Selected %s.. Number: %d", cat.latin1(), m_curr_category);
 
 		m_curr_category = intCat;
 		emit signalClearLetterPicker();
@@ -205,9 +205,9 @@ void AbView::setShowByCategory( const QString& cat )
 
 void AbView::setShowToView( Views view )
 {
-	qWarning("void AbView::setShowToView( View %d )", view);
+	//	qWarning("void AbView::setShowToView( View %d )", view);
 
-	qWarning ("Change the View (Category is: %d)", m_curr_category);
+	//	qWarning ("Change the View (Category is: %d)", m_curr_category);
 
 	if ( m_curr_View != view ){
 		m_prev_View = m_curr_View;
@@ -220,7 +220,7 @@ void AbView::setShowToView( Views view )
 
 void AbView::setShowByLetter( char c )
 {
-	qWarning("void AbView::setShowByLetter( %c )", c );
+	//	qWarning("void AbView::setShowByLetter( %c )", c );
 	OContact query;
 	if ( c == 0 ){
 		load();
@@ -254,7 +254,7 @@ QString AbView::showCategory() const
 
 void AbView::showPersonal( bool personal )
 {
-	qWarning ("void AbView::showPersonal( %d )", personal);
+	//	qWarning ("void AbView::showPersonal( %d )", personal);
 
 	if ( personal ){
 
@@ -303,7 +303,7 @@ QStringList AbView::categories()
 void AbView::slotDoFind( const QString &str, bool caseSensitive, bool useRegExp,
 			 bool , QString cat )
 {
-	qWarning( "void AbView::slotDoFind" );
+	//	qWarning( "void AbView::slotDoFind" );
 
 	// We reloading the data: Deselect Letterpicker
 	emit signalClearLetterPicker();
@@ -317,7 +317,7 @@ void AbView::slotDoFind( const QString &str, bool caseSensitive, bool useRegExp,
 		category = mCat.id("Contacts", cat );
 	}
 
-	qWarning ("Find in Category %d", category);
+	//	qWarning ("Find in Category %d", category);
 
 	QRegExp r( str );
 	r.setCaseSensitive( caseSensitive );
@@ -326,7 +326,7 @@ void AbView::slotDoFind( const QString &str, bool caseSensitive, bool useRegExp,
 	// Get all matching entries out of the database
 	m_list = m_contactdb->matchRegexp( r );
 
-	qWarning( "found: %d", m_list.count() );
+	//	qWarning( "found: %d", m_list.count() );
 	if ( m_list.count() == 0 ){
 		emit signalNotFound();
 		return;
@@ -349,7 +349,7 @@ void AbView::offSearch()
 }
 
 void AbView::slotSwitch(){
-	qWarning("AbView::slotSwitch()");
+	//	qWarning("AbView::slotSwitch()");
 
 	m_prev_View = m_curr_View;
 	switch ( (int) m_curr_View ){
@@ -377,7 +377,7 @@ void AbView::clearForCategory()
 	if ( m_curr_category != -1 ){
 		for ( it = allList.begin(); it != allList.end(); ++it ){
 			if ( !contactCompare( *it, m_curr_category ) ){
-				qWarning("Removing %d", (*it).uid());
+				//				qWarning("Removing %d", (*it).uid());
 				m_list.remove( (*it).uid() );
 			}
 		}
@@ -387,13 +387,13 @@ void AbView::clearForCategory()
 
 bool AbView::contactCompare( const OContact &cnt, int category )
 {
-	qWarning ("bool AbView::contactCompare( const OContact &cnt, %d )", category);
+	//	qWarning ("bool AbView::contactCompare( const OContact &cnt, %d )", category);
 
 	bool returnMe;
 	QArray<int> cats;
 	cats = cnt.categories();
 
-	qWarning ("Number of categories: %d", cats.count() );
+	//	qWarning ("Number of categories: %d", cats.count() );
 
 	returnMe = false;
 	if ( cats.count() == 0 && category == 0 )
@@ -402,14 +402,14 @@ bool AbView::contactCompare( const OContact &cnt, int category )
 	else {
 		int i;
 		for ( i = 0; i < int(cats.count()); i++ ) {
-			qWarning("Comparing %d with %d",cats[i],category );
+			//			qWarning("Comparing %d with %d",cats[i],category );
 			if ( cats[i] == category ) {
 				returnMe = true;
 				break;
 			}
 		}
 	}
-	qWarning ("Return: %d", returnMe);
+	//	qWarning ("Return: %d", returnMe);
 	return returnMe;
 }
 
@@ -422,7 +422,7 @@ void AbView::updateListinViews()
 
 void  AbView::updateView( bool newdata )
 {
-	qWarning("AbView::updateView()");
+	//	qWarning("AbView::updateView()");
 
 	if ( m_viewStack -> visibleWidget() ){
 		m_viewStack -> visibleWidget() -> clearFocus();

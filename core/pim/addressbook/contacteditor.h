@@ -30,6 +30,8 @@
 #include <qmap.h>
 #include <qstringlist.h>
 
+#include "ocontactfields.h"
+
 const int NAME_LF = 0;
 const int NAME_LFM = 1;
 const int NAME_FL = 2;
@@ -108,6 +110,7 @@ class ContactEditor : public QDialog {
 		void populateDefaultEmailCmb();
 		void chooserChange( const QString&, int , QLineEdit*, int );
 		bool cmbChooserChange( int , QLineEdit*, int );
+		OContactFields contactfields;
 
 		bool useFullName;
 
@@ -176,6 +179,8 @@ class ContactEditor : public QDialog {
 		QToolButton* birthdayButton;
 		DateBookMonth* anniversaryPicker;
 		QToolButton* anniversaryButton;
+
+		bool initializing;
 	};
 
 #endif

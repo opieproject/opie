@@ -5,8 +5,42 @@ class QStringList;
 
 #include <qmap.h>
 #include <qstring.h>
+#include <opie/ocontact.h>
 
+#define CONTACT_FIELD_ORDER_NAME "opie-contactfield-order"
+#define DEFAULT_FIELD_ORDER "__________"
+ 
 class OContactFields{
+
+ public:
+    OContactFields();
+    ~OContactFields();
+    /** Set the index for combo boxes.
+     *  Sets the <b>index</b> of combo <b>num</b>.
+     *  @param num selects the number of the combo
+     *  @param index sets the index in the combo
+     */
+    void setFieldOrder( int num, int index );
+
+    /** Get the index for combo boxes.
+     * Returns the index of combo <b>num</b> or defindex
+     * if none was defined..
+     * @param num Selects the number of the combo
+     * @param defIndex will be returned if none was defined (either 
+     * globally in the config file, nor by the contact which was used 
+     * by loadFromRecord() )
+     */
+    int getFieldOrder( int num, int defIndex);
+
+    /** Store fieldorder to contact. */
+    void saveToRecord( OContact& );
+    /** Get Fieldorder from contact. */
+    void loadFromRecord( const OContact& );
+
+ private:
+    QString fieldOrder;
+    QString globalFieldOrder;
+    bool changedFieldOrder;
 
  public:
     static QStringList trphonefields( bool sorted = true );

@@ -67,20 +67,27 @@ ContactEditor::ContactEditor(	const OContact &entry,
 				const char *name,
 				WFlags fl )
 	: QDialog( parent, name, TRUE, fl ),
-	  m_personalView ( false )
-	  
+	  defaultEmailChooserPosition( -1 ),
+	  m_personalView ( false ),
+	  cmbDefaultEmail( 0 ),
+	  initializing ( false )
 {
+
+	initializing = true;
 
 	init();
 	setEntry( entry );
-	cmbDefaultEmail = 0;
-	defaultEmailChooserPosition = -1;
+// 	cmbDefaultEmail = 0;
+// 	defaultEmailChooserPosition = -1;
+
+	initializing = false;
 }
 
 ContactEditor::~ContactEditor() {
 }
 
 void ContactEditor::init() {
+	qWarning("init() START");
 	
 	useFullName = true;
 
@@ -600,9 +607,9 @@ void ContactEditor::init() {
 	cmbChooserField3->insertStringList( trlChooserNames );
 	cmbChooserField4->insertStringList( trlChooserNames );
 
-	cmbChooserField1->setCurrentItem( 0 );
-	cmbChooserField2->setCurrentItem( 1 );
-	cmbChooserField3->setCurrentItem( 2 );
+ 	cmbChooserField1->setCurrentItem( 0 );
+ 	cmbChooserField2->setCurrentItem( 1 );
+ 	cmbChooserField3->setCurrentItem( 2 );
 
 	connect( btnFullName, SIGNAL(clicked()), this, SLOT(slotName()) );
 
@@ -642,6 +649,8 @@ void ContactEditor::init() {
 	new QPEDialogListener(this);
 
 	setPersonalView ( m_personalView );
+
+	qWarning("init() END");
 }
 
 void ContactEditor::defaultEmailChanged(int i){
@@ -692,15 +701,18 @@ void ContactEditor::populateDefaultEmailCmb(){
 // be handled by something else..
 bool ContactEditor::cmbChooserChange( int index, QLineEdit *inputWid, int widgetPos ) {
 	QString type = slChooserNames[index];
-	qWarning("ContactEditor::cmbChooserChange -> Type: %s", type.latin1() );
+	qWarning("ContactEditor::cmbChooserChange -> Type: %s, WidgetPos: %d", type.latin1(), widgetPos );
+
+	if ( !initializing )
+		contactfields.setFieldOrder( widgetPos-1, index );
 
 	// Create and connect combobox for selecting the default email 
         if ( type == "Default Email"){         
-		qWarning("Choosing default-email ");
+		qWarning("Choosing default-email (defaultEmailChooserPosition= %d) ", defaultEmailChooserPosition);
 		
 		// More than one defaul-email chooser is not allowed !
 		if ( ( defaultEmailChooserPosition != -1 ) && 
-		     defaultEmailChooserPosition != widgetPos ){
+		     defaultEmailChooserPosition != widgetPos && !initializing){
 			chooserError( widgetPos );
 			return true;
 		}
@@ -710,7 +722,13 @@ bool ContactEditor::cmbChooserChange( int index, QLineEdit *inputWid, int widget
 			cmbDefaultEmail = 0l;
 		}
 		cmbDefaultEmail = new QComboBox(inputWid->parentWidget());	   
-		cmbDefaultEmail->setGeometry(inputWid->frameGeometry()); 
+		cmbDefaultEmail->setGeometry(inputWid->frameGeometry()); /* :SX */
+
+		QRect rect = inputWid->frameGeometry();
+		qWarning("Geometrie: X=%d, Y=%d, Left=%d, Top=%d, Right=%d, Bottom=%d", 
+			 rect.x(), rect.y(), rect.left(), rect.top(), rect.right(), rect.bottom());
+		QPoint pnt = inputWid->pos();
+		qWarning("Position : X=%d, Y=%d", pnt.x(), pnt.y() );
 		
 		connect( cmbDefaultEmail,SIGNAL( activated(int) ),
 			 SLOT( defaultEmailChanged(int) ) ); 
@@ -943,6 +961,11 @@ void ContactEditor::slotCmbChooser4Change( int index ) {
 }
 
 void ContactEditor::slotAddressTypeChange( int index ) {
+
+
+	if ( !initializing )
+		contactfields.setFieldOrder( 4, index );
+
 
 	if ( index == 0 ) {
 
@@ -1276,11 +1299,11 @@ void ContactEditor::cleanupFields() {
 
 void ContactEditor::setEntry( const OContact &entry ) {
 
+	initializing = true;
+
 	cleanupFields();
 
 	ent = entry;
-
-
 
 	emails = QStringList(ent.emailList());
 	defaultEmail = ent.defaultEmail();
@@ -1455,14 +1478,32 @@ void ContactEditor::setEntry( const OContact &entry ) {
 
 	txtNote->setText( ent.notes() );
 
+	slotAddressTypeChange( cmbAddress->currentItem() );
+
+	// Calling "show()" to arrange all widgets. Otherwise we will get
+	// a wrong position of the textfields and are unable to put our
+	// default-email combo over it.. This is very ugly !
+	// Does anybody has a better solution ? 
+	// Basically we should rethink the strategy to hide
+	// a textfield with overwriting.. (se)
+	show();
+
+	// Get combo-settings from contact and set preset..
+	contactfields.loadFromRecord( ent );
+	cmbChooserField1->setCurrentItem( contactfields.getFieldOrder(0, 0) );
+	cmbChooserField2->setCurrentItem( contactfields.getFieldOrder(1, 1) );
+	cmbChooserField3->setCurrentItem( contactfields.getFieldOrder(2, 2) );
+	cmbChooserField4->setCurrentItem( contactfields.getFieldOrder(3, 5) );
+	cmbAddress->setCurrentItem( contactfields.getFieldOrder(4, 1) );
 	slotCmbChooser1Change( cmbChooserField1->currentItem() );
 	slotCmbChooser2Change( cmbChooserField2->currentItem() );
 	slotCmbChooser3Change( cmbChooserField3->currentItem() );
-
+	slotCmbChooser4Change( cmbChooserField4->currentItem() );
 	slotAddressTypeChange( cmbAddress->currentItem() );
 
-	// loadFields(); :SX
 	updateDatePicker();
+
+	initializing = false;
 }
 void ContactEditor::updateDatePicker()
 {
@@ -1483,7 +1524,9 @@ void ContactEditor::updateDatePicker()
 
 void ContactEditor::saveEntry() {
 
-
+	// Store current combo into contact
+	contactfields.saveToRecord( ent );
+ 
 	if ( useFullName ) {
 		txtFirstName->setText( parseName( txtFullName->text(), NAME_F ) );
 		txtMiddleName->setText( parseName( txtFullName->text(), NAME_M ) );

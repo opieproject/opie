@@ -6,16 +6,17 @@ Feature requests:
 - Dial by mobile phone by tapping the number.. 
   (Maybe using gsmtool. And we may
 	add a library class for this)
-- dial with dtmfdial incase it's installed and there's no mobile
+- dial with dtmfdial in case it's installed and there's no mobile
 - 3rd column for 2. Contact
 - Implementing additional Views (Phonebook, ...)
 - Birthday & Anniversary Reminder
-- Plugin for Today for Birthdays and Anniversaries
 - Beaming of multiple contacts (current list/ by search or by category)
+- Configure the letter-picker: lastname/fullname search 
 
 Known Bugs:
 -----------
-
+- Email-button: A lot of problems.. :(
+- Default Email-Button: Sometimes not hiding the textfields completely
 
 Bugs but not in addressbook:
 -----------------------------
@@ -29,7 +30,6 @@ Urgent:
 ContactEditor:
 - Contact-Editor is temporarely reenabled. Wait for replacement.
 - Redesign of Contacteditor
-- Store last settings of combo-boxes
 - Category is on the wrong position after changing to personal and back to normal
 	( Temporarily workaround: Category is never deactivated.. :S )
 
@@ -40,7 +40,6 @@ Important:
 
 - If new contact is added (contacteditor closed): focus (table, card) to
   this entry !
-- Implement a picker/combo for the default email.
 - After search (Started with Return): KeyFocus should be on Tabelle
 
 - "What's this" should be added (Deleyed after Feature Freeze)
@@ -48,7 +47,6 @@ Important:
 Less important:
 ---------------
 - Reload if contacts were changed externally
-- Overview window cleanup needed..
 - The picker (alphabetical sort widget) should be
    placed verticaly or horizontally (configurable)
 - Find a smart solution for activating/deactivating the "send email" event
@@ -57,7 +55,7 @@ Should be Fixed (not absolute sure, need further validation):
 -------------------------------------------------------------
 
 
-Fixed:
+Fixed/Ready:
 -------
 - Syncing: abtable not reloaded after sync.
 - Find widget should be replaced by something like 
@@ -110,3 +108,7 @@ Fixed:
 	1. Configure nicht übersetzt (alles leer).
 	2. Contacteditor nur teilweise übersetzt.
 	3. Kategorie-Picker geht nicht.
+- Plugin for Today for Birthdays and Anniversaries
+- Implement a picker/combo for the default email.
+- Overview window cleanup needed..
+- Store last settings of combo-boxes
