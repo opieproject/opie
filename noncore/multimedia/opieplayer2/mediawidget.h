@@ -51,6 +51,8 @@ public:
         QPixmap pixDown;
     };
     typedef std::vector<Button> ButtonVector;
+    // when the transition is done this should be Command -> Button
+    typedef QMap<int, Button> ButtonMap;
 
     struct SkinButtonInfo
     {
@@ -91,7 +93,7 @@ protected:
     MediaPlayerState &mediaPlayerState;
     PlayListWidget &playList;
 
-    ButtonVector buttons;
+    ButtonMap buttons;
 
     QImage buttonMask;
 

@@ -74,14 +74,13 @@ VideoWidget::VideoWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
     Button toggleButton = defaultButton;
     toggleButton.type = ToggleButton;
 
-    buttons.reserve( 7 );
-    buttons.push_back( toggleButton ); // play
-    buttons.push_back( defaultButton ); // stop
-    buttons.push_back( defaultButton ); // next
-    buttons.push_back( defaultButton ); // previous
-    buttons.push_back( defaultButton ); // volUp
-    buttons.push_back( defaultButton ); // volDown
-    buttons.push_back( toggleButton ); //fullscreen
+    buttons.insert( 0, toggleButton ); // play
+    buttons.insert( 1, toggleButton ); // stop
+    buttons.insert( 2, toggleButton ); // next
+    buttons.insert( 3, toggleButton ); // previous
+    buttons.insert( 4, toggleButton ); // volUp
+    buttons.insert( 5, toggleButton ); // volDown
+    buttons.insert( 6, toggleButton ); // fullscreen
 
     videoFrame = new XineVideoWidget ( this, "Video frame" );
 
@@ -271,7 +270,7 @@ void VideoWidget::paintButton( QPainter &p, int i ) {
 }
 
 void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
-    for ( unsigned int i = 0; i < buttons.size(); i++ ) {
+    for ( unsigned int i = 0; i < buttons.count(); i++ ) {
         if ( event->state() == QMouseEvent::LeftButton ) {
             // The test to see if the mouse click is inside the button or not
             bool isOnButton = isOverButton( event->pos() - upperLeftOfButtonMask, i );
@@ -413,14 +412,14 @@ void VideoWidget::paintEvent( QPaintEvent * pe) {
             QPainter p( &pix );
             p.translate( -pe->rect().topLeft().x(), -pe->rect().topLeft().y() );
             p.drawTiledPixmap( pe->rect(), pixBg, pe->rect().topLeft() );
-            for ( unsigned int i = 0; i < buttons.size(); i++ ) {
+            for ( unsigned int i = 0; i < buttons.count(); i++ ) {
                 paintButton( p, i );
             }
             QPainter p2( this );
             p2.drawPixmap( pe->rect().topLeft(), pix );
         } else {
             QPainter p( this );
-            for ( unsigned int i = 0; i < buttons.size(); i++ )
+            for ( unsigned int i = 0; i < buttons.count(); i++ )
                 paintButton( p, i );
         }
         //slider->repaint( TRUE );

@@ -120,7 +120,7 @@ AudioWidget::AudioWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
             }
         }
 
-        buttons.push_back( button );
+        buttons.insert( i, button );
     }
 
     setBackgroundPixmap( pixBg );
@@ -208,7 +208,7 @@ void AudioWidget::resizeEvent( QResizeEvent * ) {
     QPixmap pixUp = combineImageWithBackground( imgUp, pixBg, p );
     QPixmap pixDn = combineImageWithBackground( imgDn, pixBg, p );
 
-    for ( uint i = 0; i < buttons.size(); i++ ) {
+    for ( uint i = 0; i < buttons.count(); i++ ) {
         if ( !buttons[i].mask.isNull() ) {
             buttons[i].pixUp = maskPixToMask( pixUp, buttons[i].mask );
             buttons[i].pixDown = maskPixToMask( pixDn, buttons[i].mask );
@@ -351,7 +351,7 @@ void AudioWidget::timerEvent( QTimerEvent * ) {
 
 
 void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
-    for ( unsigned int i = 0; i < buttons.size(); i++ ) {
+    for ( unsigned int i = 0; i < buttons.count(); i++ ) {
         if ( event->state() == QMouseEvent::LeftButton ) {
             // The test to see if the mouse click is inside the button or not
             bool isOnButton = isOverButton( event->pos() - upperLeftOfButtonMask, i );
@@ -414,13 +414,13 @@ void AudioWidget::paintEvent( QPaintEvent * pe ) {
         QPainter p( &pix );
         p.translate( -pe->rect().topLeft().x(), -pe->rect().topLeft().y() );
         p.drawTiledPixmap( pe->rect(), pixBg, pe->rect().topLeft() );
-        for ( unsigned int i = 0; i < buttons.size(); i++ )
+        for ( unsigned int i = 0; i < buttons.count(); i++ )
             paintButton( p, i );
         QPainter p2( this );
         p2.drawPixmap( pe->rect().topLeft(), pix );
     } else {
         QPainter p( this );
-        for ( unsigned int i = 0; i < buttons.size(); i++ )
+        for ( unsigned int i = 0; i < buttons.count(); i++ )
             paintButton( p, i );
     }
 }
