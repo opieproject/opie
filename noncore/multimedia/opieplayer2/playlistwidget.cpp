@@ -516,8 +516,11 @@ void PlayListWidget::addToSelection( QListViewItem *it) {
               QListIterator<DocLnk> dit( files.children() );
               for ( ; dit.current(); ++dit ) {
                   if( dit.current()->name() == it->text(0)) {
-                      if(QFileInfo( dit.current()->file()).exists())
+                      if(QFileInfo( dit.current()->file()).exists()) {
                           d->selectedFiles->addToSelection(  **dit );
+                          qDebug("blah "+ dit.current()->name());
+                          d->selectedFiles->setSelectedItem( dit.current()->name());
+                      }
                   }
               }
               writeCurrentM3u();          
@@ -527,8 +530,11 @@ void PlayListWidget::addToSelection( QListViewItem *it) {
               QListIterator<DocLnk> dit( vFiles.children() );
               for ( ; dit.current(); ++dit ) {
                   if( dit.current()->name() == it->text(0)) {
-                      if( QFileInfo( dit.current()->file()).exists() )
+                      if( QFileInfo( dit.current()->file()).exists() ) {
                           d->selectedFiles->addToSelection(  **dit );
+                          qDebug("blah "+ dit.current()->name());
+                          d->selectedFiles->setSelectedItem( dit.current()->name());
+                      }
                   }
               }
               writeCurrentM3u();          
@@ -539,6 +545,7 @@ void PlayListWidget::addToSelection( QListViewItem *it) {
               break;
         };
         tabWidget->setCurrentPage(0);
+        
     }
 }
 
@@ -745,6 +752,7 @@ void PlayListWidget::openFile() {
 
             d->selectedFiles->addToSelection(  lnk );
             writeCurrentM3u();
+            d->selectedFiles->setSelectedItem( lnk->name());
         }
         else if( filename.right( 3) == "m3u" ) {
             readm3u( filename );
@@ -756,6 +764,7 @@ void PlayListWidget::openFile() {
             lnk.setFile( filename ); //sets file name
             d->selectedFiles->addToSelection(  lnk);
             writeCurrentM3u();
+            d->selectedFiles->setSelectedItem( lnk.name());
         }
     }
             
@@ -886,6 +895,7 @@ void PlayListWidget::writeCurrentM3u() {
 
   if(m3uList) delete m3uList;
   }
+  
 }
 
   /*
