@@ -236,7 +236,7 @@ void Manager::connectTo( const QString& mac) {
     OProcess proc;
     proc << "hcitool";
     proc << "cc";
-    proc << "mac";
+    proc << mac;
     proc.start(OProcess::DontCare); // the lib does not care at this point
 }
 
@@ -259,7 +259,7 @@ void Manager::searchConnections() {
         delete proc;
     }
 }
-void Manager::slotConnectionExited( OProcess* proc ) {
+void Manager::slotConnectionExited( OProcess* /*proc*/ ) {
     qWarning("exited");
     Connection::ValueList list;
     list = parseConnections( m_hcitoolCon );
@@ -286,6 +286,14 @@ Connection::ValueList Manager::parseConnections( const QString& out ) {
         qWarning("6: %s", value[6].latin1() );
         qWarning("7: %s", value[7].latin1() );
         qWarning("8: %s", value[8].latin1() );
+        Connection con;
+        con.setDirection( value[0] == QString::fromLatin1("<") ? Outgoing : Incoming );
+        con.setConnectionMode( value[1] );
+        con.setMac( value[2] );
+        con.setHandle( value[4].toInt() );
+        con.setState( value[6].toInt() );
+        con.setLinkMode( value[8] == QString::fromLatin1("MASTER") ? Master : Client );
+        list2.append( con );
     }
     return list2;
 }
