@@ -25,6 +25,7 @@ extern "C" {
     ProfileDialogWidget* newConsoleWid     (const QString&, QWidget* );
 
     ProfileDialogWidget* newTerminalWidget(const QString&, QWidget* );
+    ProfileDialogWidget* newKeyboardWidget(const QString&, QWidget* );
 
 //    EmulationLayer* newVT102( WidgetLayer* );
 };

@@ -4,7 +4,10 @@
 #include <qpe/config.h>
 #include <qframe.h>
 #include <qpainter.h>
+#include <qvbox.h>
+#include <qgroupbox.h>
 #include <qmap.h>
+#include "profiledialogwidget.h"
 
 class FKey {
 
@@ -61,6 +64,19 @@ private:
     int pressedRow, pressedCol;
 
     QObject *parent;
+
+};
+
+class FunctionKeyboardConfig : public ProfileDialogKeyWidget {
+    Q_OBJECT
+public:
+    FunctionKeyboardConfig(const QString& name, QWidget *wid);
+    ~FunctionKeyboardConfig();
+
+    void load(const Profile&);
+    void save(Profile&);
+
+private:
 
 };
 

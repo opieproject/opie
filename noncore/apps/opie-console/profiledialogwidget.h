@@ -10,7 +10,8 @@ class ProfileDialogWidget : public QWidget {
 public:
     enum Type {
         Connection,
-        Terminal
+        Terminal,
+        Keyboard
     };
     ProfileDialogWidget( const QString& name, QWidget* parent, const char* name = 0l);
     ~ProfileDialogWidget();
@@ -45,6 +46,14 @@ public:
     ~ProfileDialogConnectionWidget();
     Type type() const;
 
+};
+class ProfileDialogKeyWidget : public ProfileDialogWidget {
+    Q_OBJECT
+public:
+    ProfileDialogKeyWidget( const QString &name, QWidget* parent,
+                           const char *name =0l);
+    ~ProfileDialogKeyWidget();
+    Type type() const;
 };
 
 #endif

@@ -9,6 +9,7 @@
 #include "btconfigwidget.h"
 #include "modemconfigwidget.h"
 #include "terminalwidget.h"
+#include "function_keyboard.h"
 #include "MyPty.h"
 
 #include "default.h"
@@ -76,6 +77,11 @@ extern "C" {
         return new TerminalWidget(na, wid,0 );
     }
 
+    // Function Keyboard Widget
+    ProfileDialogWidget* newKeyboardWidget(const QString& na, QWidget *wid) {
+        return new FunctionKeyboardConfig(na, wid);
+    }
+
 /*    // VT Emulations
     EmulationLayer* newVT102( WidgetLayer* wid ) {
         return new Vt102Emulation( wid );
@@ -105,6 +111,8 @@ Default::Default( MetaFactory* fact ) {
     fact->addConnectionWidgetFactory( "console", QObject::tr("Console"), newConsoleWid );
 
     fact->addTerminalWidgetFactory( "default", QObject::tr("Default Terminal"),  newTerminalWidget );
+    fact->addKeyboardWidgetFactory( "defaultKeys", QObject::tr("Default Keyboard"),
+ newKeyboardWidget );
 
 //    fact->addEmulationLayer( "default", QObject::tr("Default Terminal"), newVT102 );
 }

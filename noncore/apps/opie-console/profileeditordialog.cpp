@@ -53,7 +53,7 @@ Profile ProfileEditorDialog::profile() const
 
 void ProfileEditorDialog::initUI()
 {
-    m_con = m_term = 0l;
+    m_con = m_term = m_key = 0l;
 
     QVBoxLayout *mainLayout = new QVBoxLayout( this );
     tabWidget = new OTabWidget( this );
@@ -64,10 +64,12 @@ void ProfileEditorDialog::initUI()
     tabprof   = new QWidget(this);
     m_tabTerm = new QWidget(this);
     m_tabCon  = new QWidget(this);
+    m_tabKey  = new QWidget(this);
 
     /* base layout for tabs */
     m_layCon  = new QHBoxLayout( m_tabCon , 2 );
     m_layTerm = new QHBoxLayout( m_tabTerm, 2 );
+    m_layKey = new QHBoxLayout( m_tabKey, 2 );
 
     // profile tab
 
@@ -94,6 +96,7 @@ void ProfileEditorDialog::initUI()
     tabWidget->addTab(tabprof, "", QObject::tr("Profile"));
     //tabWidget->addTab(m_tabCon, "", QObject::tr("Connection"));
     tabWidget->addTab(m_tabTerm, "", QObject::tr("Terminal"));
+    tabWidget->addTab(m_tabKey, "", QObject::tr("Special Keys"));
     tabWidget->setCurrentTab( tabprof );
 
 
@@ -112,6 +115,7 @@ void ProfileEditorDialog::initUI()
     m_name->setText(m_prof.name());
     slotConActivated(  m_fact->external(m_prof.ioLayerName()  ) );
     slotTermActivated( m_fact->external(m_prof.terminalName() ) );
+    slotKeyActivated( "Default Keyboard" );
     setCurrent( m_fact->external(m_prof.ioLayerName() ), m_conCmb );
     setCurrent( m_fact->external(m_prof.terminalName() ), m_termCmb );
     m_autoConnect->setChecked(m_prof.autoConnect());
@@ -150,6 +154,8 @@ void ProfileEditorDialog::accept()
             m_con->save( m_prof );
         if (m_term )
             m_term->save( m_prof );
+        if (m_key)
+            m_key->save( m_prof );
 
 	QDialog::accept();
 }
@@ -178,6 +184,7 @@ void ProfileEditorDialog::slotConActivated( const QString& str ) {
     if ( m_con ) {
         m_con->load( m_prof );
         m_layCon->addWidget( m_con );
+
         if(!m_showconntab)
         {
             tabWidget->addTab( m_tabCon, "", QObject::tr("Connection") );
@@ -202,3 +209,14 @@ void ProfileEditorDialog::slotTermActivated( const QString& str ) {
     }
 }
 
+void ProfileEditorDialog::slotKeyActivated(const QString &str) {
+    delete m_key;
+    m_key = m_fact->newKeyboardPlugin( str, m_tabKey );
+
+    if (m_key) {
+
+        m_key->load(m_prof);
+        m_layKey->addWidget(m_key);
+    }
+
+}

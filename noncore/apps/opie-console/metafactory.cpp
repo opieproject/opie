@@ -18,6 +18,13 @@ void MetaFactory::addTerminalWidgetFactory( const QCString& name,
     m_strings.insert( str, name );
     m_termFact.insert( str, wid );
 }
+void MetaFactory::addKeyboardWidgetFactory( const QCString& name,
+                                            const QString & str,
+                                            configWidget wid) {
+    m_strings.insert( str, name );
+    m_keyFact.insert( str, wid );
+
+}
 void MetaFactory::addIOLayerFactory( const QCString& name,
                                      const QString& str,
                                      iolayer lay) {
@@ -124,6 +131,19 @@ ProfileDialogWidget *MetaFactory::newTerminalPlugin( const QString& str, QWidget
     QMap<QString, configWidget>::Iterator it;
     it = m_termFact.find( str );
     if ( it != m_termFact.end() ) {
+        wid = (*(it.data() ) )(str,parent);
+    }
+    return wid;
+}
+ProfileDialogWidget *MetaFactory::newKeyboardPlugin( const QString& str, QWidget *parent) {
+
+    if (str.isEmpty() )
+        return 0l;
+    ProfileDialogWidget* wid = 0l;
+
+    QMap<QString, configWidget>::Iterator it;
+    it = m_keyFact.find( str );
+    if ( it != m_keyFact.end() ) {
         wid = (*(it.data() ) )(str,parent);
     }
     return wid;

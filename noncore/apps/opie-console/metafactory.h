@@ -40,6 +40,9 @@ public:
     void addTerminalWidgetFactory  ( const QCString& internalName,
                                      const QString& name,
                                      configWidget );
+    void addKeyboardWidgetFactory  ( const QCString& internalName,
+                                     const QString& name,
+                                     configWidget );
 
     /**
      *  adds an IOLayer factory
@@ -83,6 +86,7 @@ public:
     IOLayer* newIOLayer( const QString&,const Profile& );
     ProfileDialogWidget *newConnectionPlugin ( const QString&, QWidget* );
     ProfileDialogWidget* newTerminalPlugin( const QString&, QWidget* );
+    ProfileDialogWidget* newKeyboardPlugin( const QString&, QWidget* );
     EmulationLayer* newEmulationLayer(const QString&, WidgetLayer* );
     FileTransferLayer* newFileTransfer(const QString&, IOLayer* );
     ReceiveLayer* newReceive(const QString&, IOLayer* );
@@ -105,6 +109,7 @@ private:
     QMap<QString, QCString> m_strings;
     QMap<QString, configWidget> m_conFact;
     QMap<QString, configWidget> m_termFact;
+    QMap<QString, configWidget> m_keyFact;
     QMap<QString, iolayer> m_layerFact;
     QMap<QString, filelayer> m_fileFact;
     QMap<QString, receivelayer> m_receiveFact;

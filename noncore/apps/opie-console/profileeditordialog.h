@@ -33,6 +33,7 @@ public slots:
 private slots:
     void slotConActivated(const QString& );
     void slotTermActivated( const QString& );
+    void slotKeyActivated(const QString&);
 private:
     void initUI();
     QString profName()const;
@@ -46,9 +47,9 @@ private:
     QComboBox *m_conCmb, *m_termCmb;
     QCheckBox *m_autoConnect;
 
-    QWidget *m_tabCon, *m_tabTerm;
-    ProfileDialogWidget* m_con, *m_term;
-    QHBoxLayout *m_layCon, *m_layTerm;
+    QWidget *m_tabCon, *m_tabTerm, *m_tabKey;
+    ProfileDialogWidget* m_con, *m_term, *m_key;
+    QHBoxLayout *m_layCon, *m_layTerm, *m_layKey;
     OTabWidget *tabWidget;
     QWidget *tabprof;
     int m_showconntab;

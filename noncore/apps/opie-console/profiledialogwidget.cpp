@@ -30,3 +30,14 @@ ProfileDialogConnectionWidget::~ProfileDialogConnectionWidget() {
 ProfileDialogWidget::Type ProfileDialogConnectionWidget::type()const {
     return Connection;
 }
+ProfileDialogKeyWidget::ProfileDialogKeyWidget( const QString &na,
+                                                QWidget *parent,
+                                                const char *name)
+    : ProfileDialogWidget(na, parent, name ) 
+{
+}
+ProfileDialogKeyWidget::~ProfileDialogKeyWidget() {
+}
+ProfileDialogWidget::Type ProfileDialogKeyWidget::type() const{
+    return Keyboard;
+}

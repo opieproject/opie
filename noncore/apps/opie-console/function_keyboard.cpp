@@ -3,6 +3,7 @@
 #include <qevent.h>
 #include <qwindowsystem_qws.h>
 #include <qapplication.h>
+#include <qlayout.h>
 
 FunctionKeyboard::FunctionKeyboard(QWidget *parent) : 
     QFrame(parent), numRows(2), numCols(11), 
@@ -12,8 +13,8 @@ FunctionKeyboard::FunctionKeyboard(QWidget *parent) :
 
     Config conf("opie-console-keys");
     conf.setGroup("keys");
-    for (int r = 0; r < numRows; r++)
-        for (int c = 0; c < numCols; c++) {
+    for (uint r = 0; r < numRows; r++)
+        for (uint c = 0; c < numCols; c++) {
 
             QString handle = "r" + QString::number(r) + "c" + QString::number(c);
             QStringList value_list = conf.readListEntry( handle, '|');
@@ -59,8 +60,8 @@ void FunctionKeyboard::paintEvent(QPaintEvent *e) {
         p.drawLine(0, i, width(), i);
     }
 
-    for (int r = 0; r < numRows; r++) {
-        for (int c = 0; c < numCols; c++) {
+    for (uint r = 0; r < numRows; r++) {
+        for (uint c = 0; c < numCols; c++) {
 
             QString handle = "r" + QString::number(r) + "c" + QString::number(c);
             if (keys.contains(handle)) {
@@ -153,5 +154,29 @@ void FunctionKeyboard::loadDefaults() {
     keys.insert( "r1c8", FKey ("End", 4113, 0)); 
     keys.insert( "r1c9", FKey ("PU", 4118, 0)); 
     keys.insert( "r1c10", FKey ("PD", 4119, 0)); 
+
+}
+
+
+FunctionKeyboardConfig::FunctionKeyboardConfig(const QString& name, QWidget* parent) : 
+    ProfileDialogKeyWidget(name, parent) {
+
+
+    FunctionKeyboard *kb = new FunctionKeyboard(this);
+    QGroupBox *dimentions = new QGroupBox(2, Qt::Horizontal, tr("Dimentions"), this);
+    QGroupBox *editKey = new QGroupBox(2, Qt::Horizontal, tr("Edit"), this);
+
+    QVBoxLayout *root = new QVBoxLayout(this, 2);
+    root->addWidget(kb);
+    root->addWidget(dimentions);
+    root->addWidget(editKey);
+}
+FunctionKeyboardConfig::~FunctionKeyboardConfig() {
+
+}
+void FunctionKeyboardConfig::load (const Profile& prof) {
+
+}
+void FunctionKeyboardConfig::save (Profile& prof) {
 
 }
