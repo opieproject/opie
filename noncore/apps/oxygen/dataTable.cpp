@@ -81,10 +81,10 @@ void OxydataWidget::setTable() const
     DataTable->setText( 2,0, tr( "Group" )) ;
     DataTable->setText( 3,0, tr( "Electronegativity" )) ;
     DataTable->setText( 4,0, tr( "Atomic radius" )) ;
-    DataTable->setText( 5,0, tr( "Ionizationenergie" )) ;
+    DataTable->setText( 5,0, tr( "Ionization Energy" )) ;
     DataTable->setText( 6,0, tr( "Density" )) ;
-    DataTable->setText( 7,0, tr( "Boilingpoint" ) );
-    DataTable->setText( 8,0, tr( "Meltingpoint" ) );
+    DataTable->setText( 7,0, tr( "Boiling point" ) );
+    DataTable->setText( 8,0, tr( "Melting point" ) );
 }
 
 void OxydataWidget::setLayout()
