@@ -369,6 +369,20 @@ struct ieee_802_11_mgmt_body {
 //  struct tim_t	tim;
 };
 
+/* a 802.11 value */
+struct val_80211 {
+    unsigned int did;
+    unsigned short status, len;
+    unsigned int data;
+};
+
+/* header attached during prism monitor mode */
+struct prism_hdr {
+    unsigned int msgcode, msglen;
+    char devname[16];
+    struct val_80211 hosttime, mactime, channel, rssi, sq, signal,
+        noise, rate, istx, frmlen;
+};
 
 struct ieee_802_11_data_body {
 //FIXME

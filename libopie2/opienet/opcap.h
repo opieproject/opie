@@ -155,6 +155,25 @@ class OEthernetPacket : public QObject
 
 
 /*======================================================================================
+ * OPrismHeaderPacket - DLT_PRISM_HEADER frame
+ *======================================================================================*/
+
+class OPrismHeaderPacket : public QObject
+{
+  Q_OBJECT
+
+  public:
+    OPrismHeaderPacket( const unsigned char*, const struct prism_hdr*, QObject* parent = 0 );
+    virtual ~OPrismHeaderPacket();
+
+    unsigned int signalStrength() const;
+
+  private:
+    const struct prism_hdr* _header;
+};
+
+
+/*======================================================================================
  * OWaveLanPacket - DLT_IEEE802_11 frame
  *======================================================================================*/
 

@@ -65,6 +65,11 @@ OPacket::OPacket( int datalink, packetheaderstruct header, const unsigned char* 
             new OWaveLanPacket( _end, (const struct ieee_802_11_header*) data, this );
             break;
 
+        case DLT_PRISM_HEADER:
+            qDebug( "OPacket::OPacket(): Received Packet. Datalink = PRISM_HEADER" );
+            new OPrismHeaderPacket( _end, (const struct prism_hdr*) (unsigned char*) data, this );
+            break;
+
         default:
             qWarning( "OPacket::OPacket(): Received Packet over unsupported datalink '%s'!", datalink );
     }
@@ -314,6 +319,32 @@ OTCPPacket::~OTCPPacket()
 {
 }
 
+
+/*======================================================================================
+ * OPrismHeaderPacket
+ *======================================================================================*/
+
+
+OPrismHeaderPacket::OPrismHeaderPacket( const unsigned char* end, const struct prism_hdr* data, QObject* parent )
+                :QObject( parent, "Prism" ), _header( data )
+
+{
+    qDebug( "OPrismHeaderPacket::OPrismHeaderPacket(): decoding PRISM header..." );
+
+    qDebug( "Signal Strength = %d", data->signal.data );
+
+    new OWaveLanPacket( end, (const struct ieee_802_11_header*) (data+1), this );
+}
+
+OPrismHeaderPacket::~OPrismHeaderPacket()
+{
+}
+
+
+unsigned int OPrismHeaderPacket::signalStrength() const
+{
+    return _header->signal.data;
+}
 
 /*======================================================================================
  * OWaveLanPacket

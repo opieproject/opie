@@ -651,7 +651,8 @@ void OWirelessNetworkInterface::setMonitorMode( bool b )
 bool OWirelessNetworkInterface::monitorMode() const
 {
     qDebug( "dataLinkType = %d", dataLinkType() );
-    return dataLinkType() == ARPHRD_IEEE80211;
+    return ( dataLinkType() == ARPHRD_IEEE80211 || dataLinkType() == 802 );
+    // 802 is the header type for PRISM - Linux support for this is pending...
 }
 
 
@@ -933,7 +934,7 @@ OOrinocoMonitoringInterface::~OOrinocoMonitoringInterface()
 
 void OOrinocoMonitoringInterface::setChannel( int c )
 {
-    _if->setPrivate( "monitor", 2, 2, c );
+    _if->setPrivate( "monitor", 2, 1, c );
 }
 
 
