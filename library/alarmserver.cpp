@@ -18,18 +18,17 @@
 **
 **********************************************************************/
 
-#include <qdir.h>
-
-
-#include <qpe/qpeapplication.h>
-
-#include <qpe/qcopenvelope_qws.h>
 #include "alarmserver.h"
+
+#include <qpe/global.h>
+#include <qpe/qpeapplication.h>
+#include <qpe/qcopenvelope_qws.h>
 #include <qpe/timeconversion.h>
+
+#include <qdir.h>
 
 #include <sys/types.h>
 #include <sys/stat.h>
-
 #include <stdlib.h>
 #include <unistd.h>
 

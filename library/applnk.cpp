@@ -27,6 +27,7 @@
 #include <qpe/qpeapplication.h>
 #include <qpe/categories.h>
 #include <qpe/categoryselect.h>
+#include <qpe/global.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/mimetype.h>
 #include <qpe/config.h>

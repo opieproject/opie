@@ -28,6 +28,7 @@
 #include <stdlib.h>
 
 #include <qcopchannel_qws.h>
+#include <qpe/global.h>
 #include <qpe/qpeapplication.h>
 #include <qmessagebox.h>
 
