@@ -30,6 +30,10 @@ MainWindowBase::MainWindowBase(QWidget *parent, const char *name, WFlags fl)
 	addToolBar(toolbar);
 	toolbar->setHorizontalStretchable(true);
 
+	QLabel *spacer = new QLabel(toolbar);
+	spacer->setBackgroundMode(QWidget::PaletteButton);
+	toolbar->setStretchableWidget(spacer);
+
 	compose = new QAction(tr("Compose new mail"), QIconSet(Resource::loadPixmap("mail/newmail")), 0, 0, this);
 	compose->addTo(toolbar);
 	compose->addTo(mailmenu);
@@ -50,10 +54,6 @@ MainWindowBase::MainWindowBase(QWidget *parent, const char *name, WFlags fl)
 	configure = new QAction(tr("Configuration"), QIconSet(Resource::loadPixmap("mail/configure")), 0, 0, this);
 	configure->addTo(toolbar);
 	configure->addTo(servermenu);
-
-	QLabel *spacer = new QLabel(toolbar);
-	spacer->setBackgroundMode(QWidget::PaletteButton);
-	toolbar->setStretchableWidget(spacer);
 
 	stop = new QAction(tr("Abort"), QIconSet(Resource::loadPixmap("mail/abort")), 0, 0, this);
 	stop->addTo(toolbar);

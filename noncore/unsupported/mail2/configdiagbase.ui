@@ -233,17 +233,6 @@
                                             <string>Blink LED</string>
                                         </property>
                                     </widget>
-                                    <widget row="2"  column="2" >
-                                        <class>QToolButton</class>
-                                        <property stdset="1">
-                                            <name>name</name>
-                                            <cstring>testbutton</cstring>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>text</name>
-                                            <string> Test </string>
-                                        </property>
-                                    </widget>
                                     <widget row="0"  column="0"  rowspan="1"  colspan="3" >
                                         <class>QCheckBox</class>
                                         <property stdset="1">

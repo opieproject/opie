@@ -37,8 +37,6 @@ protected slots:
 	void slotNewAccount();
 	void slotEditAccount();
 	void slotDelAccount();
-	void slotTestSettings();
-	void slotEndTest();
 
 private:
 	Config *_configBenD;

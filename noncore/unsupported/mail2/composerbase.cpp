@@ -27,6 +27,10 @@ ComposerBase::ComposerBase(QWidget *parent, const char *name, WFlags fl)
 	addToolBar(toolbar);
 	toolbar->setHorizontalStretchable(true);
 
+	QLabel *spacer = new QLabel(toolbar);
+	spacer->setBackgroundMode(QWidget::PaletteButton);
+	toolbar->setStretchableWidget(spacer);
+
 	sendmail = new QAction(tr("Send the mail"), QIconSet(Resource::loadPixmap("mail/sendmail")), 0, 0, this);
 	sendmail->addTo(toolbar);
 	sendmail->addTo(mailmenu);
@@ -43,10 +47,6 @@ ComposerBase::ComposerBase(QWidget *parent, const char *name, WFlags fl)
 	addressbook = new QAction(tr("Addressbook"), QIconSet(Resource::loadPixmap("mail/addbook")), 0, 0, this);
 	addressbook->addTo(toolbar);
 	addressbook->addTo(mailmenu);
-
-	QLabel *spacer = new QLabel(toolbar);
-	spacer->setBackgroundMode(QWidget::PaletteButton);
-	toolbar->setStretchableWidget(spacer);
 
 	abort = new QAction(tr("Abort sending"), QIconSet(Resource::loadPixmap("mail/abort")), 0, 0, this);
 	abort->addTo(toolbar);

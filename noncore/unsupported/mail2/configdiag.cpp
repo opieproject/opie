@@ -12,7 +12,6 @@
 #include <qpe/config.h>
 
 #include "accounteditor.h"
-#include "zaurusstuff.h"
 #include "configdiag.h"
 #include "defines.h"
 
@@ -48,8 +47,6 @@ ConfigDiag::ConfigDiag(QWidget *parent, const char *name, bool modal, WFlags fl)
 	connect(accountNew, SIGNAL(clicked()), SLOT(slotNewAccount()));
 	connect(accountEdit, SIGNAL(clicked()), SLOT(slotEditAccount()));
 	connect(accountDelete, SIGNAL(clicked()), SLOT(slotDelAccount()));
-
-	connect(testbutton, SIGNAL(clicked()), SLOT(slotTestSettings()));
 
 	slotFillLists();
 }
@@ -124,22 +121,5 @@ void ConfigDiag::slotDelAccount()
 	ConfigFile::deleteAccount(account);
 	slotFillLists();
 	emit changed();
-}
-
-void ConfigDiag::slotTestSettings()
-{
-	testbutton->setEnabled(false);
-
-	if (blinkLed->isChecked()) ZaurusStuff::blinkLedOn();
-	if (playSound->isChecked()) ZaurusStuff::buzzerOn();
-	QTimer::singleShot(3000, this, SLOT(slotEndTest()));
-}
-
-void ConfigDiag::slotEndTest()
-{
-	if (playSound->isChecked()) ZaurusStuff::buzzerOff();
-	if (blinkLed->isChecked()) ZaurusStuff::blinkLedOff();
-
-	testbutton->setEnabled(true);
 }
 
