@@ -25,14 +25,35 @@
 #define HALIGN_COUNT 3
 #define VALIGN_COUNT 3
 
-QColor qtColors[COLOR_COUNT]={Qt::black, Qt::white, Qt::darkGray, Qt::gray, Qt::lightGray, Qt::red, Qt::green, Qt::blue, Qt::cyan, Qt::magenta, Qt::yellow, Qt::darkRed, Qt::darkGreen, Qt::darkBlue, Qt::darkCyan, Qt::darkMagenta, Qt::darkYellow};
-Qt::BrushStyle brushStyles[STYLE_COUNT]={Qt::SolidPattern, Qt::Dense1Pattern, Qt::Dense2Pattern, Qt::Dense3Pattern, Qt::Dense4Pattern, Qt::Dense5Pattern, Qt::Dense6Pattern, Qt::Dense7Pattern, Qt::HorPattern, Qt::VerPattern, Qt::CrossPattern, Qt::BDiagPattern, Qt::FDiagPattern, Qt::DiagCrossPattern};
+QColor qtColors[COLOR_COUNT]={Qt::black,Qt::white, Qt::darkGray,
+                              Qt::gray, Qt::lightGray, Qt::red,
+                              Qt::green, Qt::blue, Qt::cyan,
+                              Qt::magenta, Qt::yellow,
+                              Qt::darkRed, Qt::darkGreen,
+                              Qt::darkBlue, Qt::darkCyan,
+                              Qt::darkMagenta, Qt::darkYellow};
+
+Qt::BrushStyle brushStyles[STYLE_COUNT]={Qt::SolidPattern,
+                                         Qt::Dense1Pattern, Qt::Dense2Pattern,
+                                         Qt::Dense3Pattern, Qt::Dense4Pattern,
+                                         Qt::Dense5Pattern, Qt::Dense6Pattern,
+                                         Qt::Dense7Pattern, Qt::HorPattern,
+                                         Qt::VerPattern, Qt::CrossPattern,
+                                         Qt::BDiagPattern, Qt::FDiagPattern,
+                                         Qt::DiagCrossPattern};
+
 QString namesHAlign[HALIGN_COUNT]={"Left", "Right", "Center"};
 QString namesVAlign[VALIGN_COUNT]={"Top", "Bottom", "Center"};
-Qt::AlignmentFlags flagsHAlign[HALIGN_COUNT]={Qt::AlignLeft, Qt::AlignRight, Qt::AlignHCenter};
-Qt::AlignmentFlags flagsVAlign[VALIGN_COUNT]={Qt::AlignTop, Qt::AlignBottom, Qt::AlignVCenter};
 
-CellFormat::CellFormat(QWidget *parent=0)
+Qt::AlignmentFlags flagsHAlign[HALIGN_COUNT]={Qt::AlignLeft,
+                                              Qt::AlignRight,
+                                              Qt::AlignHCenter};
+
+Qt::AlignmentFlags flagsVAlign[VALIGN_COUNT]={Qt::AlignTop,
+                                              Qt::AlignBottom,
+                                              Qt::AlignVCenter};
+
+CellFormat::CellFormat(QWidget *parent)
            :QDialog(parent, 0, TRUE)
 {
   // Main widget
@@ -52,14 +73,18 @@ CellFormat::CellFormat(QWidget *parent=0)
   // Borders tab
   borderEditor=new BorderEditor(widgetBorders);
   borderEditor->setGeometry(10, 10, 215, 145);
-  connect(borderEditor, SIGNAL(clicked(BorderEditor::BorderArea)), this, SLOT(borderClicked(BorderEditor::BorderArea)));
+  connect(borderEditor, SIGNAL(clicked(BorderEditor::BorderArea)),
+          this, SLOT(borderClicked(BorderEditor::BorderArea)));
 
   comboBordersWidth=createCombo(COMBO_WIDTH, widgetBorders, tr("&Width:"), 165);
   comboBordersColor=createCombo(COMBO_COLOR, widgetBorders, tr("&Color:"), 165+(COMBO_HEIGHTS+10));
 
   buttonBordersDefaults=new QPushButton(tr("&Default Borders"), widgetBorders);
-  buttonBordersDefaults->setGeometry(115, 165+2*(COMBO_HEIGHTS+10), 110, COMBO_HEIGHTS);
-  connect(buttonBordersDefaults, SIGNAL(clicked()), this, SLOT(slotBordersDefaults()));
+  buttonBordersDefaults->setGeometry(115, 165+2*(COMBO_HEIGHTS+10),
+                                     110, COMBO_HEIGHTS);
+
+  connect(buttonBordersDefaults, SIGNAL(clicked()),
+          this, SLOT(slotBordersDefaults()));
 
   // Background tab
   frameBackground=new QFrame(widgetBackground);
@@ -292,7 +317,8 @@ int CellFormat::findComboItemIndex(QComboBox *combo, const QString &item)
   return 0;
 }
 
-QComboBox *CellFormat::createCombo(comboType type, QWidget *parent, const QString &caption, int y)
+QComboBox *CellFormat::createCombo(comboType type, QWidget *parent,
+                                   const QString &caption, int y)
 {
   QComboBox *combo=new QComboBox(FALSE, parent);
   combo->setGeometry(70, y, COMBO_WIDTHS, COMBO_HEIGHTS);
@@ -307,6 +333,7 @@ QComboBox *CellFormat::createCombo(comboType type, QWidget *parent, const QStrin
     case COMBO_COLOR: createColorCombo(combo); break;
     case COMBO_HALIGN: createHAlignCombo(combo); break;
     case COMBO_VALIGN: createVAlignCombo(combo); break;
+  default: break;
   }
 
   QLabel *label=new QLabel(combo, caption, parent);
@@ -495,7 +522,7 @@ int CellFormat::exec(Sheet *s)
 // Border Editor
 //
 
-BorderEditor::BorderEditor(QWidget *parent=0)
+BorderEditor::BorderEditor(QWidget *parent)
              :QFrame(parent)
 {
   setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);

@@ -16,7 +16,7 @@
 #include <qradiobutton.h>
 #include "finddlg.h"
 
-FindDialog::FindDialog(QWidget *parent=0)
+FindDialog::FindDialog(QWidget *parent)
            :QDialog(parent, 0, TRUE)
 {
   // Main widget

@@ -14,6 +14,9 @@ You should have received a copy of the GNU General Public License along with thi
 Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 */
 
+#ifndef HELP_TAB_H
+#define HELP_TAB_H
+
 #include <qwidget.h>
 #include <qtextview.h>
 #include <qstring.h>
@@ -24,3 +27,5 @@ class HelpTab : public QWidget
 public:
 	HelpTab(QWidget *parent=0, const char *name=0);
 };
+
+#endif

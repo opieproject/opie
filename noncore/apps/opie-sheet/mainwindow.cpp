@@ -166,7 +166,7 @@ void MainWindow::documentOpen(const DocLnk &lnkDoc)
   }
 }
 
-int MainWindow::saveCurrentFile(bool ask=TRUE)
+int MainWindow::saveCurrentFile(bool ask)
 {
   if (ask)
   {

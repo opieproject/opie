@@ -107,7 +107,7 @@ void Sheet::swapCells(int row1, int col1, int row2, int col2)
   }
 }
 
-QString Sheet::getParameter(const QString &parameters, int paramNo, bool giveError=FALSE, const QString funcName="")
+QString Sheet::getParameter(const QString &parameters, int paramNo, bool giveError, const QString funcName)
 {
   QString params(parameters);
   int position;
@@ -145,7 +145,7 @@ bool Sheet::findRange(const QString &variable1, const QString &variable2, int *r
   return TRUE;
 }
 
-bool Sheet::findRowColumn(const QString &variable, int *row, int *col, bool giveError=FALSE)
+bool Sheet::findRowColumn(const QString &variable, int *row, int *col, bool giveError)
 {
   int position=variable.find(QRegExp("\\d"));
   if (position<1)
@@ -452,7 +452,7 @@ QString Sheet::getData()
   return "";
 }
 
-void Sheet::lockClicks(bool lock=TRUE)
+void Sheet::lockClicks(bool lock)
 {
   clicksLocked=lock;
 }
@@ -736,7 +736,7 @@ void Sheet::editCut()
   editClear();
 }
 
-void Sheet::editPaste(bool onlyContents=FALSE)
+void Sheet::editPaste(bool onlyContents)
 {
   int row1=currentRow(), col1=currentColumn();
   typeCellData *cellData, *tempCellData;
@@ -761,7 +761,7 @@ void Sheet::editPaste(bool onlyContents=FALSE)
   }
 }
 
-void Sheet::insertRows(int no=1, bool allColumns=TRUE)
+void Sheet::insertRows(int no, bool allColumns)
 {
   setNumRows(numRows()+no);
 
@@ -783,7 +783,7 @@ void Sheet::insertRows(int no=1, bool allColumns=TRUE)
  emit sheetModified();
 }
 
-void Sheet::insertColumns(int no=1, bool allRows=TRUE)
+void Sheet::insertColumns(int no, bool allRows)
 {
   int noCols=numCols();
   int newCols=noCols+no;
@@ -809,7 +809,7 @@ void Sheet::insertColumns(int no=1, bool allRows=TRUE)
   emit sheetModified();
 }
 
-void Sheet::dataFindReplace(const QString &findStr, const QString &replaceStr, bool matchCase=TRUE, bool allCells=TRUE, bool entireCell=FALSE, bool replace=FALSE, bool replaceAll=FALSE)
+void Sheet::dataFindReplace(const QString &findStr, const QString &replaceStr, bool matchCase, bool allCells, bool entireCell, bool replace, bool replaceAll)
 {
   typeCellData *tempCellData;
   int row1, col1, row2, col2;

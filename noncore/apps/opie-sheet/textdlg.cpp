@@ -14,7 +14,7 @@
 
 #include "textdlg.h"
 
-TextDialog::TextDialog(QWidget *parent=0)
+TextDialog::TextDialog(QWidget *parent)
            :QDialog(parent, 0, TRUE)
 {
   edit=new QLineEdit(this);
@@ -31,7 +31,8 @@ TextDialog::~TextDialog()
 {
 }
 
-int TextDialog::exec(const QString &caption, const QString &text, const QString &value="")
+int TextDialog::exec(const QString &caption, const QString &text,
+                     const QString &value)
 {
   setCaption(caption);
   label->setText(text);

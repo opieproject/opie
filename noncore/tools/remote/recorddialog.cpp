@@ -16,11 +16,12 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 #include "recorddialog.h"
 
-RecordDialog::RecordDialog(QWidget *parent=0, const char *name=0):QDialog(parent, name)
+RecordDialog::RecordDialog(QWidget *parent, const char *name)
+    :QDialog(parent, name)
 {
 	QVBoxLayout *layout = new QVBoxLayout(this);
 	QHBoxLayout *hlayout = new QHBoxLayout(this);
-	
+
 	layout->insertSpacing(0,5);
 	output = new QTextView("Please enter the name of the new remote, and press Return\n", 0, this, "output");
 	layout->insertWidget(-1, output);
@@ -32,13 +33,13 @@ RecordDialog::RecordDialog(QWidget *parent=0, const char *name=0):QDialog(parent
 	input = new QLineEdit(this, "input");
 	hlayout->insertWidget(-1, input, 1);
 	hlayout->insertSpacing(-1, 5);
-	
+
 	QPushButton *ret = new QPushButton("Return", this, "return");
 	hlayout->insertWidget(-1, ret);
 	hlayout->insertSpacing(-1, 5);
 	connect(ret, SIGNAL(clicked()), this, SLOT(retPressed()) );
 	where = 0;
-	
+
 	record = new OProcess;
 }
 

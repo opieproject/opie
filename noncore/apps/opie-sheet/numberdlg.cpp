@@ -14,7 +14,7 @@
 
 #include "numberdlg.h"
 
-NumberDialog::NumberDialog(QWidget *parent=0)
+NumberDialog::NumberDialog(QWidget *parent)
              :QDialog(parent, 0, TRUE)
 {
   edit=new QSpinBox(this);
@@ -31,7 +31,8 @@ NumberDialog::~NumberDialog()
 {
 }
 
-int NumberDialog::exec(const QString &caption, const QString &text, int value=1, int min=1, int max=99, int step=1)
+int NumberDialog::exec(const QString &caption, const QString &text,
+                       int value, int min, int max, int step)
 {
   setCaption(caption);
   label->setText(text);

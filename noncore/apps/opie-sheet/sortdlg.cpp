@@ -17,7 +17,7 @@
 #include <qmessagebox.h>
 #include "sortdlg.h"
 
-SortDialog::SortDialog(QWidget *parent=0)
+SortDialog::SortDialog(QWidget *parent)
            :QDialog(parent, 0, TRUE)
 {
   // Main widget
@@ -178,7 +178,8 @@ int SortDialog::exec(Sheet *s)
   return QDialog::Rejected;
 }
 
-int SortDialog::compareItems(QTableItem *item1, QTableItem *item2, int descending=0, bool caseSensitive=TRUE)
+int SortDialog::compareItems(QTableItem *item1, QTableItem *item2,
+                             int descending, bool caseSensitive)
 {
   int result=0;
   if (item1)
