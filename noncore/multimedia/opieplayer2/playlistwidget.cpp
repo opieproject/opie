@@ -180,11 +180,14 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     tabWidget->insertTab( pTab,"Playlist");
 
 
+   QGridLayout *Playout = new QGridLayout( pTab );
+   Playout->setSpacing( 2);
+   Playout->setMargin( 2);
+
     // Add the playlist area
 
     QVBox *vbox3 = new QVBox( pTab ); vbox3->setBackgroundMode( PaletteButton );
     d->playListFrame = vbox3;
-    d->playListFrame ->setMinimumSize(235,250);
 
     QHBox *hbox2 = new QHBox( vbox3 ); hbox2->setBackgroundMode( PaletteButton );
 
@@ -199,10 +202,17 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     new ToolButton( vbox1, tr( "Move Down" ), "opieplayer2/down", d->selectedFiles, SLOT(moveSelectedDown()) );
     QVBox *stretch2 = new QVBox( vbox1 ); stretch2->setBackgroundMode( PaletteButton ); // add stretch
 
+    
+    Playout->addMultiCellWidget( vbox3, 0, 0, 0, 1 );
+
     QWidget *aTab;
     aTab = new QWidget( tabWidget, "aTab" );
+
+   QGridLayout *Alayout = new QGridLayout( aTab );
+   Alayout->setSpacing( 2);
+   Alayout->setMargin( 2);
+
     audioView = new QListView( aTab, "Audioview" );
-    audioView->setMinimumSize(233,250);
     audioView->addColumn( tr("Title"),140);
     audioView->addColumn(tr("Size"), -1);
     audioView->addColumn(tr("Media"),-1);
@@ -213,14 +223,20 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     audioView->setMultiSelection( TRUE );
     audioView->setSelectionMode( QListView::Extended);
 
+    Alayout->addMultiCellWidget( audioView, 0, 0, 0, 1 );
+
     tabWidget->insertTab(aTab,tr("Audio"));
 
     QPEApplication::setStylusOperation( audioView->viewport(),QPEApplication::RightOnHold);
 
     QWidget *vTab;
     vTab = new QWidget( tabWidget, "vTab" );
+
+    QGridLayout *Vlayout = new QGridLayout( vTab );
+   Vlayout->setSpacing( 2);
+   Vlayout->setMargin( 2);
+
     videoView = new QListView( vTab, "Videoview" );
-    videoView->setMinimumSize(233,250);
 
     videoView->addColumn(tr("Title"),140);
     videoView->addColumn(tr("Size"),-1);
@@ -231,6 +247,12 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     videoView->setMultiSelection( TRUE );
     videoView->setSelectionMode( QListView::Extended);
 
+//     d->playListFrame->setMaximumSize(235,240);
+//     audioView->setMaximumSize(233,240);
+//     videoView->setMaximumSize(233,240);
+
+    Vlayout->addMultiCellWidget( videoView, 0, 0, 0, 1 );
+
     QPEApplication::setStylusOperation( videoView->viewport(),QPEApplication::RightOnHold);
 
     tabWidget->insertTab( vTab,tr("Video"));
@@ -238,8 +260,14 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     //playlists list
     QWidget *LTab;
     LTab = new QWidget( tabWidget, "LTab" );
+    QGridLayout *Llayout = new QGridLayout( LTab );
+   Llayout->setSpacing( 2);
+   Llayout->setMargin( 2);
+
     playLists = new FileSelector( "playlist/plain", LTab, "fileselector" , FALSE, FALSE); //buggy
-    playLists->setMinimumSize(233,260);
+    //    playLists->setMinimumSize(233,260);
+    Llayout->addMultiCellWidget( playLists, 0, 0, 0, 1 );
+
     tabWidget->insertTab(LTab,tr("Lists"));
 
     connect(tbDeletePlaylist,(SIGNAL(released())),SLOT( deletePlaylist()));
@@ -676,8 +704,7 @@ void PlayListWidget::removeSelected() {
 }
 
 void PlayListWidget::playIt( QListViewItem *it) {
-    // if(it==NULL) return;
-    qDebug("playIt");
+ if(!it) return;
     mediaPlayerState->setPlaying(FALSE);
     mediaPlayerState->setPlaying(TRUE);
     d->selectedFiles->unSelect();
