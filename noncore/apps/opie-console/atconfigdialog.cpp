@@ -5,7 +5,6 @@
 #include <qcombobox.h>
 #include <qtabwidget.h>
 #include <qlabel.h>
-#include <qcombobox.h>
 #include <qscrollview.h>
 
 #include "atconfigdialog.h"

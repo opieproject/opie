@@ -8,7 +8,6 @@
 #include <qfileinfo.h>
 
 #include <qpe/filemanager.h>
-#include <qpe/qpeapplication.h>
 
 #include <opie2/ofiledialog.h>
 
