@@ -202,7 +202,7 @@ void quickRec() {
                printf("peak %ld\r",peak);
                fflush(stdout);
             }
-            
+
 
             //------------->>>> out to file
             //           if(filePara.channels==1)
@@ -280,7 +280,7 @@ outbuffer[i]=inbuffer[i]>>1; // no clippy, please
                printf("peak %ld\r",peak);
                fflush(stdout);
             }
-            
+
 
             filePara.numberSamples = total;
             if(filePara.SecondsToRecord !=0)
@@ -290,7 +290,7 @@ outbuffer[i]=inbuffer[i]>>1; // no clippy, please
 
             ioctl( filePara.sd, SNDCTL_DSP_GETIPTR, &info);
 //            qDebug("%d, %d", info.bytes, ( info.bytes / filePara.sampleRate) / 2);
-                
+
             filePara.numberOfRecordedSeconds = (float)total / (float)filePara.sampleRate / (float)2;
 
             timeString.sprintf("%.2f", filePara.numberOfRecordedSeconds);
@@ -558,7 +558,7 @@ void QtRec::init() {
 //#endif
    sampleRateComboBox->insertItem( tr( "22050"));
    //#ifndef QT_QWS_VERCEL_IDR
-   sampleRateComboBox->insertItem( tr( "16000"));    
+   sampleRateComboBox->insertItem( tr( "16000"));
    sampleRateComboBox->insertItem( tr( "11025"));
    sampleRateComboBox->insertItem( tr( "8000"));
    //#endif
@@ -727,30 +727,30 @@ void QtRec::init() {
 
    ///**********<<<<<<<<<<<<>>>>>>>>>>>>***************
 
-   tab_4 = new QWidget( TabWidget, "tab_4" );
-   QGridLayout *layout4 = new QGridLayout( tab_4);
-   layout4->setSpacing( 2);
-   layout4->setMargin( 2);
-   TabWidget->insertTab( tab_4, tr( "Help"));
+//    tab_4 = new QWidget( TabWidget, "tab_4" );
+//    QGridLayout *layout4 = new QGridLayout( tab_4);
+//    layout4->setSpacing( 2);
+//    layout4->setMargin( 2);
+//    TabWidget->insertTab( tab_4, tr( "Help"));
 
-   ///////////////////////////////////////////// FIXME change to a real helpfile path
-   QString url="/index.html";
-   HelpWindow *help = new HelpWindow( url, ".", tab_4, "opierec_help");
-   layout4->addMultiCellWidget( help, 0, 1, 0, 1);
-   if( !QFile(url).exists()) {
-      help->hide();
-      //help->showMaximized();
-      QLabel *helpLabel;
-      helpLabel = new QLabel( tab_4, "TimeLabel" );
-      layout4->addMultiCellWidget( helpLabel, 0, 3, 0, 4 );
-      helpLabel->setText( "<B>OpieRec</B><br>"
-                          "Records files in standard wav format<br>"
-                          "or a compressed version<br>"
-                          "For help, please email the author<br>"
-                          "<B>OpieRec</B> is copyright&copy; 2002 by"
-                          " L.J. Potter<br>llornkcor@handhelds.org<BR>"
-                          "and is licensed under the <B>QPL</B>");
-   }
+//    ///////////////////////////////////////////// FIXME change to a real helpfile path
+//    QString url="/index.html";
+//    HelpWindow *help = new HelpWindow( url, ".", tab_4, "opierec_help");
+//    layout4->addMultiCellWidget( help, 0, 1, 0, 1);
+//    if( !QFile(url).exists()) {
+//       help->hide();
+//       //help->showMaximized();
+//       QLabel *helpLabel;
+//       helpLabel = new QLabel( tab_4, "TimeLabel" );
+//       layout4->addMultiCellWidget( helpLabel, 0, 3, 0, 4 );
+//       helpLabel->setText( "<B>OpieRec</B><br>"
+//                           "Records files in standard wav format<br>"
+//                           "or a compressed version<br>"
+//                           "For help, please email the author<br>"
+//                           "<B>OpieRec</B> is copyright&copy; 2002 by"
+//                           " L.J. Potter<br>llornkcor@handhelds.org<BR>"
+//                           "and is licensed under the <B>QPL</B>");
+//    }
    ///**********<<<<<<<<<<<<>>>>>>>>>>>>***************
 
 }
@@ -848,7 +848,7 @@ void QtRec::initConfig() {
    QString temp;
 //     for(int i=1;i<13; i++) {
 //        temp = sizeLimitCombo->text(i);
-        
+
 //         sizeLimitCombo->insertItem( QString::number(i*5)+tr(" secs"));
 //     }
    sizeLimitCombo->setCurrentItem((i/5));
@@ -930,8 +930,8 @@ bool QtRec::rec() { //record
       monitoring=false;
       setRecordButton(true);
       stopped=false;
-  
-      if( setupAudio( true)) 
+
+      if( setupAudio( true))
          if(setUpFile())  {
             qDebug("Ok to start recording");
             int fileSize=0;
@@ -1000,7 +1000,7 @@ bool QtRec::rec() { //record
          } //end setUpFile
    } //end setupAudio
    //             _exit( 0);
-   
+
    // ///*      default:
 //      //     /* pid greater than zero is parent getting the child's pid */
 // /*          printf("Child's pid is %d\n",pid);
@@ -1116,17 +1116,17 @@ bool QtRec::setupAudio( bool b) {
    soundDevice->reset();
 
    qDebug("device has been made %d", soundDevice->sd);
-    
+
    //////////////////         <<<<<<<<<<<<>>>>>>>>>>>>
    soundDevice->setDeviceFormat( sampleformat);
    soundDevice->setDeviceChannels( filePara.channels);
    soundDevice->setDeviceRate( filePara.sampleRate);
    soundDevice->getDeviceFragSize();
-#ifdef QT_QWS_EBX   
+#ifdef QT_QWS_EBX
    int frag = FRAGSIZE;
    soundDevice->setFragSize( frag);
    soundDevice->getDeviceFragSize();
-#endif    
+#endif
    /////////////////
    filePara.sd = soundDevice->sd;
 
@@ -1351,11 +1351,11 @@ void QtRec::changesamplerateCombo(int i) {
    filePara.sampleRate=rate;
 /*     soundDevice = new Device( this, DSPSTROUT, DSPSTRMIXER, false);
        soundDevice->openDsp();*/
-// 
+//
 //     soundDevice->setDeviceFormat(AFMT_S16_LE);
 //     soundDevice->setDeviceChannels(filePara.channels);
 //     soundDevice->setDeviceRate(filePara.sampleRate);
-// 
+//
 //     soundDevice->closeDevice( true);
 //     soundDevice=0;
 //     delete soundDevice;
@@ -1989,7 +1989,7 @@ void QtRec::timerEvent( QTimerEvent *e ) {
 #ifdef DEV_VERSION
    QString msg;
    msg.sprintf("%d, %d, %d", filePara.sampleRate, filePara.channels, filePara.resolution);
-   setCaption( msg +" ::  "+QString::number(secCount));    
+   setCaption( msg +" ::  "+QString::number(secCount));
 #endif
 
    if( !playing ) {
@@ -2258,7 +2258,7 @@ long findPeak(long input ) {
    {
 // Exponential decay of output when signal is low.
       output = output * scalar;
-//  
+//
 //   When current gets close to 0.0, set current to 0.0 to prevent FP underflow
 //   which can cause a severe performance degradation due to a flood
 //   of interrupts.
