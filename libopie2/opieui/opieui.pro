@@ -19,7 +19,8 @@ HEADERS     = oclickablelabel.h      \
               omessagebox.h          \
               oresource.h            \
               otaskbarapplet.h       \
-              oseparator.h
+              oseparator.h           \
+	      owait.h
 
 SOURCES     = oclickablelabel.cpp    \
               ofontselector.cpp      \
@@ -37,7 +38,8 @@ SOURCES     = oclickablelabel.cpp    \
               odialog.cpp            \
               oresource.cpp          \
               otaskbarapplet.cpp     \
-              oseparator.cpp
+              oseparator.cpp         \
+	      owait.cpp
 
 include ( big-screen/big-screen.pro )
 include ( fileselector/fileselector.pro )
