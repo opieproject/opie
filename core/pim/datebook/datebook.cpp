@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.16 2003-03-23 22:48:20 umopapisdn Exp $
+** $Id: datebook.cpp,v 1.17 2003-03-24 07:45:52 umopapisdn Exp $
 **
 **********************************************************************/
 
@@ -908,6 +908,7 @@ void DateBook::slotFind()
 		      SIGNAL(signalWrapAround()),
 		      &frmFind,
 		      SLOT(slotWrapAround()) );
+	frmFind.move(0,0);
     frmFind.exec();
     inSearch = false;
 }
