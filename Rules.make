@@ -129,6 +129,7 @@ $(TOPDIR)/scripts/filesubst : FORCE
 		echo 's,^\(\./\)*bin/,$(prefix)/bin/,g'; \
 		echo 's,^\(\./\)*pics/,$(prefix)/pics/,g'; \
 		echo 's,^\(\./\)*sounds/,$(prefix)/sounds/,g'; \
+		echo 's,^\(\./\)*i18n/,$(prefix)/i18n/,g'; \
 		echo 's,^\(\./\)*plugins/,$(prefix)/plugins/,g'; \
 		echo 's,^\(\./\)*apps/,$(prefix)/apps/,g'; \
 		echo 's,^\(\./\)*share/,$(prefix)/share/,g'; \
