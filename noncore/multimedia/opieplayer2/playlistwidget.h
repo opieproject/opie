@@ -61,7 +61,7 @@ public:
     DocLnkSet vFiles;
     bool fromSetDocument;
     bool insanityBool;
-    QString setDocFileRef;
+    QString setDocFileRef, currentPlayList;
     // retrieve the current playlist entry (media file link)
     const DocLnk *current();
     void useSelectedDocument();
