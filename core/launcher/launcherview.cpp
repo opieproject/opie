@@ -97,29 +97,18 @@ public:
     void setBusy(bool on)
     {
 	QIconViewItem *c = on ? currentItem() : 0;
+	qDebug ( "set busy %d -> %s", on, c ? c-> text ().latin1() : "(null)" );
+	
 	if ( bsy != c ) {
-	    if ( bsy )
-		bsy-> repaint ( );
+	    QIconViewItem *oldbsy = bsy;
 	    bsy = c;
 	
+	    if ( oldbsy )
+		oldbsy-> repaint ( );
+	
 	    if ( bsy ) {
-	    	busystate = 5;
-	    	for ( int i = 0; i <= 5; i++ )
-	    		bpm [i] = QPixmap ( );
-	    	timerEvent ( 0 );
-	    	busytimer = startTimer ( 150 );
-	    }
-	    else
-		killTimer ( busytimer );
-	}
-    }
-
-    virtual void timerEvent ( QTimerEvent *te )
-    {
-	if ( !te || ( te-> timerId ( ) == busytimer )) {
-	    if ( bsy ) {
-	        if ( bpm [::abs(busystate)]. isNull ( )) {
-		    QPixmap *src = bsy-> QIconViewItem::pixmap();
+		QPixmap *src = bsy-> QIconViewItem::pixmap();
+	    	for ( int i = 0; i <= 5; i++ ) {
 		    QImage img = src->convertToImage();
 		    QRgb* rgb;
 		    int count;
@@ -131,7 +120,7 @@ public:
 			count = img.numColors();
 		    }
 		    int rc, gc, bc;
-		    int bs = ::abs ( busystate * 10 ) + 25;
+		    int bs = ::abs ( i * 10 ) + 25;
 		    colorGroup().highlight().rgb( &rc, &gc, &bc );
 		    rc = rc * bs / 100;
 		    gc = gc * bs / 100;
@@ -145,13 +134,30 @@ public:
 			*rgb = qRgba ( ri, gi, bi, ai );
 		    }
 
-		    bpm [::abs(busystate)].convertFromImage( img );
+		    bpm [i].convertFromImage( img );
 		}
-		bsy-> repaint ( );
+	    	busystate = 0;	
+	    	if ( busytimer )
+	    	    killTimer ( busytimer );
+	    	timerEvent ( 0 );
+	    	busytimer = startTimer ( 180 );
+	    }
+	    else {
+		killTimer ( busytimer );
+		busytimer = 0;
+	    }
+	}
+    }
 
+    virtual void timerEvent ( QTimerEvent *te )
+    {
+	if ( !te || ( te-> timerId ( ) == busytimer )) {
+	    if ( bsy ) {
 		busystate++;
 		if ( busystate > 5 )
 			busystate = -4;
+			
+		bsy-> repaint ( );
 	    }
 	}
     }
@@ -206,7 +212,8 @@ public:
     void drawBackground( QPainter *p, const QRect &r )
     {
 	if ( !bgPixmap.isNull() ) {
-           p->drawTiledPixmap( r, bgPixmap,
+	    p-> fillRect ( r, bgColor );
+	    p->drawTiledPixmap( r, bgPixmap,
                    QPoint( (r.x() + contentsX()) % bgPixmap.width(),
                            (r.y() + contentsY()) % bgPixmap.height() ) );
 	} else {
