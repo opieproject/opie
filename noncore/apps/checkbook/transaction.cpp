@@ -49,7 +49,9 @@ Transaction::Transaction( QWidget *parent, const QString &acctname, TranInfo *in
 						  char symbol )
 	: QDialog( parent, 0, TRUE, WStyle_ContextHelp )
 {
-	setCaption( tr( "Transaction for " ) + acctname );
+	QString tempstr = tr( "Transaction for " );
+	tempstr.append( acctname );
+	setCaption( tempstr );
 
 	tran = info;
 	currencySymbol = symbol;

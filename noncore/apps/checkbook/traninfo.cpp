@@ -30,6 +30,8 @@
 
 #include <qpe/config.h>
 
+QString tempstr;
+
 TranInfo::TranInfo( int id, const QString &desc, const QDate &date, bool withdrawal,
 					const QString &type, const QString &category, float amount,
 					float fee, const QString &number, const QString &notes )
@@ -117,15 +119,32 @@ TranInfo::TranInfo( Config config, int entry )
 	}
 }
 
+const QString &TranInfo::datestr()
+{
+	tempstr = QString::number( td.year() );
+	tempstr.append( '/' );
+	int tempfield = td.month();
+	if ( tempfield < 10 ) tempstr.append( '0' );
+	tempstr.append( QString::number( tempfield ) );
+	tempstr.append( '/' );
+	tempfield = td.day();
+	if ( tempfield < 10 ) tempstr.append( '0' );
+	tempstr.append( QString::number( tempfield ) );
+
+	return( tempstr );
+}
+
 void TranInfo::write( Config *config, int entry )
 {
 	config->setGroup( QString::number( entry ) );
 
 	config->writeEntry( "Description", d );
 
-	QString tempstr = QString::number( td.month() ) + "/" +
-					  QString::number( td.day() ) + "/" +
-					  QString::number( td.year() );
+	tempstr = QString::number( td.month() );
+	tempstr.append( '/' );
+	tempstr.append( QString::number( td.day() ) );
+	tempstr.append( '/' );
+	tempstr.append(  QString::number( td.year() ) );
 	config->writeEntry( "Date", tempstr );
 
 	w ? tempstr = "true"

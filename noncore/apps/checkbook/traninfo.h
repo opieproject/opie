@@ -47,6 +47,7 @@ class TranInfo
 		int            id()			const { return i; }
 		const QString &desc()		const { return d; }
 		const QDate   &date()		const { return td; }
+		const QString &datestr();
 		bool           withdrawal()	const { return w; }
 		const QString &type()		const { return t; }
 		const QString &category()	const { return c; }

@@ -137,7 +137,10 @@ void MainWindow::slotEdit()
 			cbList->changeItem( newname, cbList->currentItem() );
 			cbList->sort();
 
-			QFile f( cbDir + currname + ".qcb" );
+			QString tempstr = cbDir;
+			tempstr.append( currname );
+			tempstr.append( ".qcb" );
+			QFile f( tempstr );
 			if ( f.exists() )
 			{
 				f.remove();
@@ -151,8 +154,10 @@ void MainWindow::slotDelete()
 {
 	if ( QPEMessageBox::confirmDelete ( this, tr( "Delete checkbook" ), cbList->currentText() ) )
 	{
-		QString name = cbDir + cbList->currentText() + ".qcb";
-		QFile f( name );
+		QString tempstr = cbDir;
+		tempstr.append( cbList->currentText() );
+		tempstr.append( ".qcb" );
+		QFile f( tempstr );
 		if ( f.exists() )
 		{
 			f.remove();

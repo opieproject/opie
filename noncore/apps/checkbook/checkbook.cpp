@@ -28,6 +28,8 @@
 
 #include "checkbook.h"
 #include "transaction.h"
+#include "graph.h"
+#include "graphinfo.h"
 
 #include <opie/otabwidget.h>
 #include <qpe/config.h>
@@ -50,14 +52,19 @@ Checkbook::Checkbook( QWidget *parent, const QString &n, const QString &fd, char
 	: QDialog( parent, 0, TRUE, WStyle_ContextHelp )
 {
 	name = n;
-	filename = fd + name + ".qcb";
+	filename = fd;
+	filename.append( name );
+	filename.append( ".qcb" );
 	filedir = fd;
 	currencySymbol = symbol;
 	currBalance = 0.0;
 
 	if ( name != "" )
 	{
-		setCaption( name + " - " + tr( "Checkbook" ) );
+		QString tempstr = name;
+		tempstr.append( " - " );
+		tempstr.append( tr( "Checkbook" ) );
+		setCaption( tempstr );
 	}
 	else
 	{
@@ -242,13 +249,14 @@ QWidget *Checkbook::initCharts()
 	layout->addWidget( graphList, 0, 1 );
 */
 
-	QWidget *graphWidget = new QWidget( control );
-	QWhatsThis::add( graphWidget, tr( "Graph not implemented yet." ) );
+	GraphInfo* info = new GraphInfo( GraphInfo::BarChart, 0x0, tr( "Graph Title" ),
+									 tr( "X-Axis" ), tr( "Y-Axis" ) );
+	graphWidget = new Graph( control, info );
+	QWhatsThis::add( graphWidget, tr( "Charting is not implemented yet." ) );
 	layout->addMultiCellWidget( graphWidget, 0, 0, 0, 1 );
-	graphWidget->setBackgroundMode( QWidget::PaletteBase );
 
 	QPushButton *btn = new QPushButton( Resource::loadPixmap( "checkbook/drawbtn" ), tr( "Draw" ), control );
-	QWhatsThis::add( btn, tr( "Click here to draw the graph." ) );
+	QWhatsThis::add( btn, tr( "Click here to draw the chart." ) );
 	connect( btn, SIGNAL( clicked() ), this, SLOT( slotDrawGraph() ) );
 	layout->addWidget( btn, 1, 1 );
 
@@ -276,8 +284,8 @@ void Checkbook::loadCheckbook()
 		}
 	}
 	bankEdit->setText( config.readEntry( "Bank", "" ) );
-	acctNumEdit->setText( config.readEntry( "Number", "" ) );
-	pinNumEdit->setText( config.readEntry( "PINNumber", "" ) );
+	acctNumEdit->setText( config.readEntryCrypt( "Number", "" ) );
+	pinNumEdit->setText( config.readEntryCrypt( "PINNumber", "" ) );
 	balanceEdit->setText( config.readEntry( "Balance", "0.0" ) );
 	notesEdit->setText( config.readEntry( "Notes", "" ) );
 
@@ -309,11 +317,7 @@ void Checkbook::loadCheckbook()
 			transactions.append( tran );
 
 			// Add to transaction table
-			QDate date = tran->date();
-			QString datestr = QString::number( date.month() ) + "/" +
-							  QString::number( date.day() ) + "/" +
-							  QString::number( date.year() );
-			( void ) new QListViewItem( tranTable, QString::number( i ), datestr,
+			( void ) new QListViewItem( tranTable, QString::number( i ), tran->datestr(),
 										trandesc, stramount );
 		}
 		else
@@ -357,8 +361,8 @@ void Checkbook::accept()
 	config->setGroup( "Account" );
 	config->writeEntry( "Type", typeList->currentText() );
 	config->writeEntry( "Bank", bankEdit->text() );
-	config->writeEntry( "Number", acctNumEdit->text() );
-	config->writeEntry( "PINNumber", pinNumEdit->text() );
+	config->writeEntryCrypt( "Number", acctNumEdit->text() );
+	config->writeEntryCrypt( "PINNumber", pinNumEdit->text() );
 	config->writeEntry( "Balance", balanceEdit->text() );
 	config->writeEntry( "Notes", notesEdit->text() );
 
@@ -379,8 +383,13 @@ void Checkbook::accept()
 void Checkbook::slotNameChanged( const QString &newname )
 {
 	name = newname;
-	filename = filedir + newname + ".qcb";
-	setCaption( name + " - " + tr( "Checkbook" ) );
+	filename = filedir;
+	filename.append( newname );
+	filename.append( ".qcb" );
+	QString tempstr = name;
+	tempstr.append( " - " );
+	tempstr.append( tr( "Checkbook" ) );
+	setCaption( tempstr );
 }
 
 void Checkbook::slotStartingBalanceChanged( const QString &newbalance )
@@ -414,13 +423,8 @@ void Checkbook::slotNewTran()
 		transactions.append( traninfo );
 
 		// Add to transaction table
-
-		QDate date = traninfo->date();
-		QString datestr = QString::number( date.month() ) + "/" +
-						  QString::number( date.day() ) + "/" +
-						  QString::number( date.year() );
-		( void ) new QListViewItem( tranTable, QString::number( highTranNum ), datestr,
-									traninfo->desc(), stramount );
+		( void ) new QListViewItem( tranTable, QString::number( highTranNum ),
+									traninfo->datestr(), traninfo->desc(), stramount );
 
 		adjustBalance( amount );
 	}
@@ -454,11 +458,7 @@ void Checkbook::slotEditTran()
 	currtran->showMaximized();
 	if ( currtran->exec() == QDialog::Accepted )
 	{
-		QDate date = traninfo->date();
-		QString datestr = QString::number( date.month() ) + "/" +
-						  QString::number( date.day() ) + "/" +
-						  QString::number( date.year() );
-		curritem->setText( 1, datestr );
+		curritem->setText( 1, traninfo->datestr() );
 
 		curritem->setText( 2, traninfo->desc() );
 
@@ -489,7 +489,6 @@ void Checkbook::slotDeleteTran()
 
 	bool ok;
 	int tranid = curritem->text( 0 ).toInt( &ok );
-	//TranInfo *traninfo = transactions.at( tranid - 1 );
 	TranInfo *traninfo = findTranByID( tranid );
 
 	if ( QPEMessageBox::confirmDelete ( this, tr( "Delete transaction" ), traninfo->desc() ) )

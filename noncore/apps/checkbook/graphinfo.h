@@ -26,78 +26,57 @@
 
 */
 
-#ifndef CHECKBOOK_H
-#define CHECKBOOK_H
+#ifndef GRAPHINFO_H
+#define GRAPHINFO_H
 
-#include "traninfo.h"
+#include <qlist.h>
+#include <qstringlist.h>
 
-#include <qdialog.h>
-
-class OTabWidget;
-
-class Graph;
-class QComboBox;
-class QLabel;
-class QLineEdit;
-class QListView;
-class QMultiLineEdit;
-class QString;
-
-class Checkbook : public QDialog
+class DataPointInfo
 {
-	Q_OBJECT
-
 	public:
-		Checkbook( QWidget * = 0x0, const QString & = 0x0, const QString & = 0x0, char = '$' );
-		~Checkbook();
+		DataPointInfo()
+			: l( 0x0 ), v( 0.0 ) {}
+		DataPointInfo( const QString &label, float value )
+			: l( label ), v( value ) {}
 
-		const QString &getName();
+		const QString &label() { return l; }
+		float          value() { return v; }
 
 	private:
-		TranInfoList transactions;
-		QString      name;
-		QString      filename;
-		QString      filedir;
-		char         currencySymbol;
-		int          highTranNum;
+		QString l;
+		float   v;
+};
 
-		OTabWidget *mainWidget;
-		void        loadCheckbook();
-		void        adjustBalance( float );
-		TranInfo   *findTranByID( int );
+typedef QList<DataPointInfo> DataPointList;
 
-		// Info tab
-		QWidget        *initInfo();
-		QLineEdit      *nameEdit;
-		QComboBox      *typeList;
-		QLineEdit      *bankEdit;
-		QLineEdit      *acctNumEdit;
-		QLineEdit      *pinNumEdit;
-		QLineEdit      *balanceEdit;
-		QMultiLineEdit *notesEdit;
-		float           startBalance;
+class GraphInfo
+{
+	public:
+		enum GraphType { BarChart, LineChart, PieChart };
 
-		// Transactions tab
-		QWidget   *initTransactions();
-		QListView *tranTable;
-		QLabel    *balanceLabel;
-		float      currBalance;
+		GraphInfo( GraphType = BarChart, DataPointList * = 0x0,
+				   const QString & = 0x0, const QString & = 0x0, const QString & = 0x0 );
 
-		// Charts tab
-		QWidget    *initCharts();
-		//QComboBox *graphList;
-		Graph      *graphWidget;
+		GraphInfo::GraphType graphType();
+		void                 setGraphType( GraphType );
 
-	protected slots:
-		void accept();
+		DataPointList *dataPoints();
+		void           setDataPoints( DataPointList * );
 
-	private slots:
-		void slotNameChanged( const QString & );
-		void slotStartingBalanceChanged( const QString & );
-		void slotNewTran();
-		void slotEditTran();
-		void slotDeleteTran();
-		void slotDrawGraph();
+		float maxValue();
+		float minValue();
+
+		void setGraphTitle( const QString & );
+		void setXAxisTitle( const QString & );
+		void setYAxisTitle( const QString & );
+
+	private:
+		GraphType      t;
+		DataPointList *d;
+		QString        gt;
+		QString        xt;
+		QString        yt;
 };
 
 #endif

@@ -26,78 +26,38 @@
 
 */
 
-#ifndef CHECKBOOK_H
-#define CHECKBOOK_H
+#ifndef GRAPH_H
+#define GRAPH_H
 
-#include "traninfo.h"
+#include <qpixmap.h>
+#include <qwidget.h>
 
-#include <qdialog.h>
+class GraphInfo;
 
-class OTabWidget;
-
-class Graph;
-class QComboBox;
-class QLabel;
-class QLineEdit;
-class QListView;
-class QMultiLineEdit;
-class QString;
-
-class Checkbook : public QDialog
+class Graph : public QWidget
 {
 	Q_OBJECT
 
 	public:
-		Checkbook( QWidget * = 0x0, const QString & = 0x0, const QString & = 0x0, char = '$' );
-		~Checkbook();
+		Graph( QWidget * = 0x0, GraphInfo * = 0x0, const QString & = 0x0, int = 0 );
 
-		const QString &getName();
+		void setGraphInfo( GraphInfo * );
+
+		void drawGraph( bool = FALSE );
+		
+	protected:
+		void paintEvent( QPaintEvent * );
+		void resizeEvent( QResizeEvent * );
 
 	private:
-		TranInfoList transactions;
-		QString      name;
-		QString      filename;
-		QString      filedir;
-		char         currencySymbol;
-		int          highTranNum;
+		GraphInfo *data;
 
-		OTabWidget *mainWidget;
-		void        loadCheckbook();
-		void        adjustBalance( float );
-		TranInfo   *findTranByID( int );
+		QPixmap graph;
 
-		// Info tab
-		QWidget        *initInfo();
-		QLineEdit      *nameEdit;
-		QComboBox      *typeList;
-		QLineEdit      *bankEdit;
-		QLineEdit      *acctNumEdit;
-		QLineEdit      *pinNumEdit;
-		QLineEdit      *balanceEdit;
-		QMultiLineEdit *notesEdit;
-		float           startBalance;
-
-		// Transactions tab
-		QWidget   *initTransactions();
-		QListView *tranTable;
-		QLabel    *balanceLabel;
-		float      currBalance;
-
-		// Charts tab
-		QWidget    *initCharts();
-		//QComboBox *graphList;
-		Graph      *graphWidget;
-
-	protected slots:
-		void accept();
-
-	private slots:
-		void slotNameChanged( const QString & );
-		void slotStartingBalanceChanged( const QString & );
-		void slotNewTran();
-		void slotEditTran();
-		void slotDeleteTran();
-		void slotDrawGraph();
+		void initGraph();
+		void drawBarChart();
+		void drawLineChart();
+		void drawPieChart();
 };
 
 #endif
