@@ -21,6 +21,7 @@
 #include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/config.h>
+#include <qpe/mimetype.h>
 
 #include <qstringlist.h>
 #include <qtextstream.h>
@@ -202,6 +203,7 @@ OpieFtp::OpieFtp( )
     TextLabel5->setText( tr( "Remote path" ) );
     tabLayout_3->addMultiCellWidget( TextLabel5, 2, 2, 2, 3 );
 
+
     remotePath = new QLineEdit( "/", tab_3, "remotePath" );
     tabLayout_3->addMultiCellWidget( remotePath, 3, 3, 2, 3 );
 
@@ -225,7 +227,6 @@ OpieFtp::OpieFtp( )
     connectServerBtn->setToggleButton(TRUE);
     connect(connectServerBtn,SIGNAL( toggled( bool)),SLOT( connectorBtnToggled(bool) ));
 
-
     QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
     tabLayout_3->addItem( spacer, 5, 0 );
 
@@ -240,11 +241,11 @@ OpieFtp::OpieFtp( )
 
     currentPathCombo = new QComboBox( FALSE, this, "currentPathCombo" );
     layout->addMultiCellWidget( currentPathCombo, 3, 3, 0, 3 );
-
+    currentPathCombo->setEditable(TRUE);
     currentPathCombo->lineEdit()->setText( currentDir.canonicalPath());
 
     connect( currentPathCombo, SIGNAL( activated( const QString & ) ),
-              this, SLOT(  currentPathComboChanged()currentPathCombo( const QString & ) ) );
+              this, SLOT(  currentPathComboActivated( const QString & ) ) );
 
     connect( currentPathCombo->lineEdit(),SIGNAL(returnPressed()),
              this,SLOT(currentPathComboChanged()));
@@ -265,6 +266,7 @@ OpieFtp::OpieFtp( )
 //    remotePath->setText( currentRemoteDir = "/home/llornkcor");
     PasswordEdit->setText( tr( "" ) );
 #endif
+
     filterStr="*";
     b=FALSE;
     populateLocalView();
@@ -326,7 +328,7 @@ void OpieFtp::newConnection()
 void OpieFtp::serverComboEdited(const QString & edit) {
     if( !edit.isEmpty() ) {
         currentServerConfig = -1;
-        qDebug("comboedited");
+//        qDebug("comboedited");
     }
 }
 
@@ -550,24 +552,30 @@ void OpieFtp::populateLocalView()
 //     qDebug( fileL);
             }
         }
-        if(fileL !="./") {
-            item= new QListViewItem( ListView,fileL,fileS , fileDate);
+        if(fileL !="./" && fi->exists()) {
+            item= new QListViewItem( Local_View,fileL,fileS , fileDate);
             QPixmap pm;
-            pm= Resource::loadPixmap( "folder" );
          
             if(isDir || fileL.find("/",0,TRUE) != -1) {
-                if( !QDir( fi->filePath() ).isReadable())
+                if( !QDir( fi->filePath() ).isReadable()) 
                     pm = Resource::loadPixmap( "lockedfolder" );
+                else 
+                    pm= Resource::loadPixmap( "folder" );
                 item->setPixmap( 0,pm );
             } else {
                 if( !fi->isReadable() )
                     pm = Resource::loadPixmap( "locked" );
-                else
-                    pm =  Resource::loadPixmap( "fileopen" );
-                item->setPixmap( 0,pm);
+                else {
+                    MimeType mt(fi->filePath());
+                    pm=mt.pixmap();
+                    if(pm.isNull())
+                        pm =  Resource::loadPixmap( "UnknownDocument-14" );
+                    item->setPixmap( 0,pm);
+                }
             }
             if(  fileL.find("->",0,TRUE) != -1) {
                   // overlay link image
+                pm= Resource::loadPixmap( "folder" );
                 QPixmap lnk = Resource::loadPixmap( "symlink" );
                 QPainter painter( &pm );
                 painter.drawPixmap( pm.width()-lnk.width(), pm.height()-lnk.height(), lnk );
@@ -640,92 +648,96 @@ bool OpieFtp::populateRemoteView( )
 
 void OpieFtp::remoteListClicked(QListViewItem *selectedItem)
 {
-    QCopEnvelope ( "QPE/System", "busy()" );
-    QString  oldRemoteCurrentDir =  currentRemoteDir;
-    QString strItem=selectedItem->text(0);
-    strItem=strItem.simplifyWhiteSpace();
-    if(strItem == "../") { // the user wants to go ^
-        if( FtpCDUp( conn) == 0) {
-            QString msg;
-            msg.sprintf(tr("Unable to cd up\n")+"%s",FtpLastResponse(conn));
-            msg.replace(QRegExp(":"),"\n");
-            QMessageBox::message(tr("Note"),msg);
-            qDebug(msg);
-        }
-        char path[256];
-        if( FtpPwd( path,sizeof(path),conn) == 0) { //this is easier than fudging the string
-            QString msg;
-            msg.sprintf(tr("Unable to get working dir\n")+"%s",FtpLastResponse(conn));
-            msg.replace(QRegExp(":"),"\n");
-            QMessageBox::message(tr("Note"),msg);
-            qDebug(msg);
-        }
-        currentRemoteDir=path;
-    } else {
-        if(strItem.find("->",0,TRUE) != -1) { //symlink on some servers
-            strItem=strItem.right( strItem.length() - strItem.find("->",0,TRUE) - 2 );
-            strItem = strItem.stripWhiteSpace();
-            currentRemoteDir = strItem;
-            if( !remoteChDir( (const QString &)strItem)) {
-                currentRemoteDir = oldRemoteCurrentDir;
-                strItem="";
-                qDebug("RemoteCurrentDir1 "+oldRemoteCurrentDir);
+    if(item) {
+        QCopEnvelope ( "QPE/System", "busy()" );
+        QString  oldRemoteCurrentDir =  currentRemoteDir;
+        QString strItem=selectedItem->text(0);
+        strItem=strItem.simplifyWhiteSpace();
+        if(strItem == "../") { // the user wants to go ^
+            if( FtpCDUp( conn) == 0) {
+                QString msg;
+                msg.sprintf(tr("Unable to cd up\n")+"%s",FtpLastResponse(conn));
+                msg.replace(QRegExp(":"),"\n");
+                QMessageBox::message(tr("Note"),msg);
+                qDebug(msg);
             }
-        } else if(strItem.find("/",0,TRUE) != -1) { // this is a directory
-            qDebug("trying directory");
-            if( !remoteChDir( (const QString &)currentRemoteDir + strItem)) {
-                currentRemoteDir = oldRemoteCurrentDir;
-                strItem="";
-                qDebug("RemoteCurrentDir1 "+oldRemoteCurrentDir);
-
-            } else {
-            currentRemoteDir = currentRemoteDir+strItem;
+            char path[256];
+            if( FtpPwd( path,sizeof(path),conn) == 0) { //this is easier than fudging the string
+                QString msg;
+                msg.sprintf(tr("Unable to get working dir\n")+"%s",FtpLastResponse(conn));
+                msg.replace(QRegExp(":"),"\n");
+                QMessageBox::message(tr("Note"),msg);
+                qDebug(msg);
             }
+            currentRemoteDir=path;
         } else {
-            qDebug("download "+strItem);
+            if(strItem.find("->",0,TRUE) != -1) { //symlink on some servers
+                strItem=strItem.right( strItem.length() - strItem.find("->",0,TRUE) - 2 );
+                strItem = strItem.stripWhiteSpace();
+                currentRemoteDir = strItem;
+                if( !remoteChDir( (const QString &)strItem)) {
+                    currentRemoteDir = oldRemoteCurrentDir;
+                    strItem="";
+                    qDebug("RemoteCurrentDir1 "+oldRemoteCurrentDir);
+                }
+            } else if(strItem.find("/",0,TRUE) != -1) { // this is a directory
+                qDebug("trying directory");
+                if( !remoteChDir( (const QString &)currentRemoteDir + strItem)) {
+                    currentRemoteDir = oldRemoteCurrentDir;
+                    strItem="";
+                    qDebug("RemoteCurrentDir1 "+oldRemoteCurrentDir);
+
+                } else {
+                    currentRemoteDir = currentRemoteDir+strItem;
+                }
+            } else {
+                qDebug("download "+strItem);
+            }
         }
+        remoteDirList( (const QString &)currentRemoteDir); //this also calls populate
+        if(currentRemoteDir.right(1) !="/")
+            currentRemoteDir +="/";
+        currentPathCombo->lineEdit()->setText( currentRemoteDir );
+        fillRemoteCombo( (const QString &)currentDir);
+        QCopEnvelope ( "QPE/System", "notBusy()" );
     }
-    remoteDirList( (const QString &)currentRemoteDir); //this also calls populate
-    if(currentRemoteDir.right(1) !="/")
-        currentRemoteDir +="/";
-    currentPathCombo->lineEdit()->setText( currentRemoteDir );
-    fillRemoteCombo( (const QString &)currentDir);
-    QCopEnvelope ( "QPE/System", "notBusy()" );
 }
 
 void OpieFtp::localListClicked(QListViewItem *selectedItem)
 {
-    QString strItem=selectedItem->text(0);
-    QString strSize=selectedItem->text(1);
-    strSize=strSize.stripWhiteSpace();
-    if(strItem.find("@",0,TRUE) !=-1 || strItem.find("->",0,TRUE) !=-1 ) { //if symlink
-          // is symlink
-        QString strItem2 = strItem.right( (strItem.length() - strItem.find("->",0,TRUE)) - 4);
-        if(QDir(strItem2).exists() ) {
-            currentDir.cd(strItem2, TRUE);
-            populateLocalView();
-        }
-    } else { // not a symlink
-        if(strItem.find(". .",0,TRUE) && strItem.find("/",0,TRUE)!=-1 ) {
-            if(QDir(QDir::cleanDirPath(currentDir.canonicalPath()+"/"+strItem)).exists() ) {
-                strItem=QDir::cleanDirPath(currentDir.canonicalPath()+"/"+strItem);
-                currentDir.cd(strItem,FALSE);
+    if(item) {
+        QString strItem=selectedItem->text(0);
+        QString strSize=selectedItem->text(1);
+        strSize=strSize.stripWhiteSpace();
+        if(strItem.find("@",0,TRUE) !=-1 || strItem.find("->",0,TRUE) !=-1 ) { //if symlink
+              // is symlink
+            QString strItem2 = strItem.right( (strItem.length() - strItem.find("->",0,TRUE)) - 4);
+            if(QDir(strItem2).exists() ) {
+                currentDir.cd(strItem2, TRUE);
                 populateLocalView();
+            }
+        } else { // not a symlink
+            if(strItem.find(". .",0,TRUE) && strItem.find("/",0,TRUE)!=-1 ) {
+                if(QDir(QDir::cleanDirPath(currentDir.canonicalPath()+"/"+strItem)).exists() ) {
+                    strItem=QDir::cleanDirPath(currentDir.canonicalPath()+"/"+strItem);
+                    currentDir.cd(strItem,FALSE);
+                    populateLocalView();
+                } else {
+                    currentDir.cdUp();
+                    populateLocalView();
+                }
+                if(QDir(strItem).exists()){
+                    currentDir.cd(strItem, TRUE);
+                    populateLocalView();
+                }
             } else {
-                currentDir.cdUp();
-                populateLocalView();
-            }
-            if(QDir(strItem).exists()){
-                currentDir.cd(strItem, TRUE);
-                populateLocalView();
-            }
-        } else {
-            strItem=QDir::cleanDirPath(currentDir.canonicalPath()+"/"+strItem);
-            if( QFile::exists(strItem ) ) {
-                qDebug("upload "+strItem);
-            }
-        } //end not symlink
-        chdir(strItem.latin1());
+                strItem=QDir::cleanDirPath(currentDir.canonicalPath()+"/"+strItem);
+                if( QFile::exists(strItem ) ) {
+                    qDebug("upload "+strItem);
+                }
+            } //end not symlink
+            chdir(strItem.latin1());
+        }
     }
 }
 
@@ -964,7 +976,7 @@ void OpieFtp::currentPathComboActivated(const QString & currentPath) {
     if (TabWidget->currentPageIndex() == 0) {
     chdir( currentPath.latin1() );
     currentDir.cd( currentPath, TRUE);
-    populateLocalList();
+    populateLocalView();
     update();
     } else {
 //     chdir( currentPath.latin1() );
@@ -977,27 +989,27 @@ void OpieFtp::currentPathComboActivated(const QString & currentPath) {
 
 void OpieFtp::fillCombo(const QString &currentPath) {
 
-        currentPathComboBox->lineEdit()->setText(currentPath);
+        currentPathCombo->lineEdit()->setText(currentPath);
         if( localDirPathStringList.grep(currentPath,TRUE).isEmpty() ) {
-            currentPathComboBox->clear();
+            currentPathCombo->clear();
             localDirPathStringList.prepend(currentPath );
-            currentPathComboBox->insertStringList( localDirPathStringList,-1);
+            currentPathCombo->insertStringList( localDirPathStringList,-1);
         }
-        currentPathComboBox->lineEdit()->setText(currentPath);
+        currentPathCombo->lineEdit()->setText(currentPath);
         if( remoteDirPathStringList.grep(currentPath,TRUE).isEmpty() ) {
-            currentPathComboBox->clear();
+            currentPathCombo->clear();
             remoteDirPathStringList.prepend(currentPath );
-            currentPathComboBox->insertStringList( remoteDirPathStringList,-1);
+            currentPathCombo->insertStringList( remoteDirPathStringList,-1);
         }
 }
 
 void OpieFtp::fillRemoteCombo(const QString &currentPath) {
 
-        dirPathCombo->lineEdit()->setText(currentPath);
+        currentPathCombo->lineEdit()->setText(currentPath);
         if( remoteDirPathStringList.grep(currentPath,TRUE).isEmpty() ) {
-            dirPathCombo->clear();
+            currentPathCombo->clear();
             remoteDirPathStringList.prepend(currentPath );
-            dirPathCombo->insertStringList( remoteDirPathStringList,-1);
+            currentPathCombo->insertStringList( remoteDirPathStringList,-1);
         }
 }
 
@@ -1127,7 +1139,7 @@ void OpieFtp::serverComboSelected(int index)
     temp.setNum(index+1);
     remoteServerStr = cfg.readEntry( temp,"");
     cfg.setGroup(temp);
-    qDebug(temp);
+//    qDebug(temp);
     int divider = remoteServerStr.length() - remoteServerStr.find(":",0,TRUE);
     port = remoteServerStr.right( divider - 1);
     bool ok;

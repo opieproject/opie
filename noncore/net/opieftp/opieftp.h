@@ -52,7 +52,7 @@ public:
     QListView *Local_View, *Remote_View;
 
     QComboBox *UsernameComboBox, *ServerComboBox, *currentPathCombo;
-    QLineEdit *PasswordEdit, *remotePath, *currentPathEdit;
+    QLineEdit *PasswordEdit, *remotePath;
     QLabel *TextLabel2, *TextLabel1, *TextLabel3, *TextLabel4;;
     QSpinBox* PortSpinBox;
     QPopupMenu *connectionMenu, *localMenu, *remoteMenu, *tabMenu;
@@ -94,14 +94,13 @@ protected slots:
     void remoteRename();
     void localRename();
     void currentPathComboChanged();
-    void fillCombos();
-    void fillCombo(const QString &);
-    void currentPathComboActivated(const QString &);
+  void currentPathComboActivated(const QString &);
   void switchToLocalTab();
   void switchToRemoteTab();
   void switchToConfigTab();
-  void fillCombo();
-  void fillRemoteCombo();
+  void fillCombos();
+  void fillRemoteCombo(const QString&);
+  void fillCombo(const QString &);
   void serverComboSelected(int);
   void deleteServer();
   void connectorBtnToggled(bool);  
