@@ -10,11 +10,14 @@
  *      version 2 of the License, or (at your option) any later version.
  * =====================================================================
  * =====================================================================
- * Version: $Id: odatebookaccessbackend_sql.cpp,v 1.2 2003-12-22 10:19:26 eilers Exp $
+ * Version: $Id: odatebookaccessbackend_sql.cpp,v 1.3 2003-12-22 11:41:39 eilers Exp $
  * =====================================================================
  * History:
  * $Log: odatebookaccessbackend_sql.cpp,v $
- * Revision 1.2  2003-12-22 10:19:26  eilers
+ * Revision 1.3  2003-12-22 11:41:39  eilers
+ * Fixing stupid bug, found by sourcode review..
+ *
+ * Revision 1.2  2003/12/22 10:19:26  eilers
  * Finishing implementation of sql-backend for datebook. But I have to
  * port the PIM datebook application to use it, before I could debug the
  * whole stuff.
@@ -206,6 +209,7 @@ OEvent ODateBookAccessBackend_SQL::find( int uid ) const{
 	return retDate;
 }
 
+// FIXME: Speed up update of uid's..
 bool ODateBookAccessBackend_SQL::add( const OEvent& ev ) 
 {
 	QMap<int,QString> eventMap = ev.toMap();
@@ -244,10 +248,14 @@ bool ODateBookAccessBackend_SQL::add( const OEvent& ev )
 	if ( res.state() != OSQLResult::Success ){
 		return false;
 	}
+
+	// Update list of uid's 
+	update();
 	
 	return true;
 }
 
+// FIXME: Speed up update of uid's..
 bool ODateBookAccessBackend_SQL::remove( int uid ) 
 {
 	QString qu = "DELETE from datebook where uid = " 
@@ -260,6 +268,9 @@ bool ODateBookAccessBackend_SQL::remove( int uid )
 	if ( res.state() != OSQLResult::Success ){
 		return false;
 	}
+
+	// Update list of uid's
+	update();
 
 	return true;
 }
