@@ -248,8 +248,9 @@ void StockTickerPluginWidget::DefProxy(void) {
 }
 
 void  StockTickerPluginWidget::timerEvent( QTimerEvent *e ) {
+    qDebug("timer");
     killTimer(e->timerId());    
     doStocks();
     if(timerDelay > 0)
-        startTimer(timerDelay*1000);
+        startTimer(timerDelay*60000);
 }
