@@ -352,7 +352,7 @@ void TodoWindow::slotDeleteAll()
   
   //QString strName = table->text( table->currentRow(), 2 ).left( 30 );
   
-  if ( !QPEMessageBox::confirmDelete( this, tr( "Todo" ), tr("Delete all tasks?") ) )
+  if ( !QPEMessageBox::confirmDelete( this, tr( "Todo" ), tr("all tasks") ) )
     return;
   
   
