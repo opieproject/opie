@@ -145,7 +145,7 @@ void MyPty::start() {
     char* cmd = "/bin/sh";
 
     if ( QFile::exists( "/bin/bash" ) ) {
-        char* cmd = "/bin/bash";
+        cmd = "/bin/bash";
     }
 
     QStrList lis;
