@@ -21,9 +21,11 @@ class DrawPadCanvas;
 
 class DrawMode : QObject
 { 
-public:
+protected:
     DrawMode(DrawPad* drawPad, DrawPadCanvas* drawPadCanvas);
-    ~DrawMode();
+
+public:
+    virtual ~DrawMode();
 
     virtual void mousePressEvent(QMouseEvent* e) = 0;
     virtual void mouseReleaseEvent(QMouseEvent* e) = 0;

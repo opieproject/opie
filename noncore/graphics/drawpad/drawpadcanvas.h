@@ -34,6 +34,8 @@ public:
     void load(QIODevice* ioDevice);
     void save(QIODevice* ioDevice);
 
+    bool undoEnabled();
+    bool redoEnabled();
     bool goPreviousPageEnabled();
     bool goNextPageEnabled();
 
@@ -45,10 +47,17 @@ public slots:
     void clearPage();
     void deletePage();
 
+    void undo();
+    void redo();
+
     void goFirstPage();
     void goPreviousPage();
     void goNextPage();
     void goLastPage();
+
+signals:
+    void pagesChanged();
+    void pageBackupsChanged();
 
 protected:
     void mousePressEvent(QMouseEvent* e);
@@ -59,7 +68,8 @@ protected:
 
 private:
     DrawPad* m_pDrawPad;
-    QList<QPixmap> m_buffers;
+    QList<QPixmap> m_pages;
+    QList<QPixmap> m_pageBackups;
 };
 
 #endif // DRAWPADCANVAS_H

@@ -41,6 +41,8 @@ DrawPad::DrawPad(QWidget* parent, const char* name, WFlags f)
     // init members
 
     m_pDrawPadCanvas = new DrawPadCanvas(this, this);
+    connect(m_pDrawPadCanvas, SIGNAL(pagesChanged()), this, SLOT(updateNavigationToolButtons()));
+    connect(m_pDrawPadCanvas, SIGNAL(pageBackupsChanged()), this, SLOT(updateUndoRedoToolButtons()));
 
     QFile file(Global::applicationFileName("drawpad", "drawpad.xml"));
 
@@ -71,7 +73,7 @@ DrawPad::DrawPad(QWidget* parent, const char* name, WFlags f)
     QPopupMenu *toolsPopupMenu = new QPopupMenu(menuBar);
 
     QAction* clearAllAction = new QAction(tr("Clear All"), QString::null, 0, this);
-    connect(clearAllAction, SIGNAL(activated()), this, SLOT(clearAll()));
+    connect(clearAllAction, SIGNAL(activated()), m_pDrawPadCanvas, SLOT(clearAll()));
     clearAllAction->addTo(toolsPopupMenu);
 
     toolsPopupMenu->insertSeparator();
@@ -86,7 +88,7 @@ DrawPad::DrawPad(QWidget* parent, const char* name, WFlags f)
     QPEToolBar* pageToolBar = new QPEToolBar(this);
 
     QAction* newPageAction = new QAction(tr("New Page"), Resource::loadIconSet("new"), QString::null, 0, this);
-    connect(newPageAction, SIGNAL(activated()), this, SLOT(newPage()));
+    connect(newPageAction, SIGNAL(activated()), m_pDrawPadCanvas, SLOT(newPage()));
     newPageAction->addTo(pageToolBar);
 
     QAction* clearPageAction = new QAction(tr("Clear Page"), Resource::loadIconSet("drawpad/clear"), QString::null, 0, this);
@@ -94,7 +96,7 @@ DrawPad::DrawPad(QWidget* parent, const char* name, WFlags f)
     clearPageAction->addTo(pageToolBar);
 
     QAction* deletePageAction = new QAction(tr("Delete Page"), Resource::loadIconSet("trash"), QString::null, 0, this);
-    connect(deletePageAction, SIGNAL(activated()), this, SLOT(deletePage()));
+    connect(deletePageAction, SIGNAL(activated()), m_pDrawPadCanvas, SLOT(deletePage()));
     deletePageAction->addTo(pageToolBar);
 
     QPEToolBar* emptyToolBar = new QPEToolBar(this);
@@ -104,23 +106,33 @@ DrawPad::DrawPad(QWidget* parent, const char* name, WFlags f)
 
     QPEToolBar* navigationToolBar = new QPEToolBar(this);
 
+    m_pUndoAction = new QAction(tr("Undo"), Resource::loadIconSet("drawpad/undo"), QString::null, 0, this);
+    connect(m_pUndoAction, SIGNAL(activated()), m_pDrawPadCanvas, SLOT(undo()));
+    m_pUndoAction->addTo(navigationToolBar);
+
+    m_pRedoAction = new QAction(tr("Redo"), Resource::loadIconSet("drawpad/redo"), QString::null, 0, this);
+    connect(m_pRedoAction, SIGNAL(activated()), m_pDrawPadCanvas, SLOT(redo()));
+    m_pRedoAction->addTo(navigationToolBar);
+
+    updateUndoRedoToolButtons();
+
     m_pFirstPageAction = new QAction(tr("First Page"), Resource::loadIconSet("fastback"), QString::null, 0, this);
-    connect(m_pFirstPageAction, SIGNAL(activated()), this, SLOT(goFirstPage()));
+    connect(m_pFirstPageAction, SIGNAL(activated()), m_pDrawPadCanvas, SLOT(goFirstPage()));
     m_pFirstPageAction->addTo(navigationToolBar);
 
     m_pPreviousPageAction = new QAction(tr("Previous Page"), Resource::loadIconSet("back"), QString::null, 0, this);
-    connect(m_pPreviousPageAction, SIGNAL(activated()), this, SLOT(goPreviousPage()));
+    connect(m_pPreviousPageAction, SIGNAL(activated()), m_pDrawPadCanvas, SLOT(goPreviousPage()));
     m_pPreviousPageAction->addTo(navigationToolBar);
 
     m_pNextPageAction = new QAction(tr("Next Page"), Resource::loadIconSet("forward"), QString::null, 0, this);
-    connect(m_pNextPageAction, SIGNAL(activated()), this, SLOT(goNextPage()));
+    connect(m_pNextPageAction, SIGNAL(activated()), m_pDrawPadCanvas, SLOT(goNextPage()));
     m_pNextPageAction->addTo(navigationToolBar);
 
     m_pLastPageAction = new QAction(tr("Last Page"), Resource::loadIconSet("fastforward"), QString::null, 0, this);
-    connect(m_pLastPageAction, SIGNAL(activated()), this, SLOT(goLastPage()));
+    connect(m_pLastPageAction, SIGNAL(activated()), m_pDrawPadCanvas, SLOT(goLastPage()));
     m_pLastPageAction->addTo(navigationToolBar);
 
-    updateNavigationToolBar();
+    updateNavigationToolButtons();
 
     // init draw mode toolbar
 
@@ -161,6 +173,9 @@ DrawPad::DrawPad(QWidget* parent, const char* name, WFlags f)
 
     emptyToolBar = new QPEToolBar(this);
     emptyToolBar->setHorizontalStretchable(true);
+    emptyToolBar->addSeparator();
+
+    // init draw parameters toolbar
 
     QPEToolBar* drawParametersToolBar = new QPEToolBar(this);
 
@@ -216,48 +231,6 @@ DrawPad::~DrawPad()
         m_pDrawPadCanvas->save(&file);
         file.close();
     }
-}
-
-void DrawPad::clearAll()
-{
-    m_pDrawPadCanvas->clearAll();
-    updateNavigationToolBar();
-}
-
-void DrawPad::newPage()
-{
-    m_pDrawPadCanvas->newPage();
-    updateNavigationToolBar();
-}
-
-void DrawPad::deletePage()
-{
-    m_pDrawPadCanvas->deletePage();
-    updateNavigationToolBar();
-}
-
-void DrawPad::goFirstPage()
-{
-    m_pDrawPadCanvas->goFirstPage();
-    updateNavigationToolBar();
-}
-
-void DrawPad::goPreviousPage()
-{
-    m_pDrawPadCanvas->goPreviousPage();
-    updateNavigationToolBar();
-}
-
-void DrawPad::goNextPage()
-{
-    m_pDrawPadCanvas->goNextPage();
-    updateNavigationToolBar();
-}
-
-void DrawPad::goLastPage()
-{
-    m_pDrawPadCanvas->goLastPage();
-    updateNavigationToolBar();
 }
 
 void DrawPad::setPointDrawMode()
@@ -381,7 +354,13 @@ void DrawPad::changeBrushColor(int index)
     painter.end();
 }
 
-void DrawPad::updateNavigationToolBar()
+void DrawPad::updateUndoRedoToolButtons()
+{
+    m_pUndoAction->setEnabled(m_pDrawPadCanvas->undoEnabled());
+    m_pRedoAction->setEnabled(m_pDrawPadCanvas->redoEnabled());
+}
+
+void DrawPad::updateNavigationToolButtons()
 {
     m_pFirstPageAction->setEnabled(m_pDrawPadCanvas->goPreviousPageEnabled());
     m_pPreviousPageAction->setEnabled(m_pDrawPadCanvas->goPreviousPageEnabled());

@@ -39,15 +39,6 @@ public:
     QBrush brush() { return m_brush; }
 
 private slots:
-    void clearAll();
-    void newPage();
-    void deletePage();
-
-    void goFirstPage();
-    void goPreviousPage();
-    void goNextPage();
-    void goLastPage();
-
     void setPointDrawMode();
     void setLineDrawMode();
     void setRectangleDrawMode();
@@ -59,15 +50,19 @@ private slots:
     void changePenColor(int index);
     void changeBrushColor(int index);
 
-private:
-    void updateNavigationToolBar();
+    void updateUndoRedoToolButtons();
+    void updateNavigationToolButtons();
 
+private:
     DrawPadCanvas* m_pDrawPadCanvas;
     QArray<QColor> m_colors;
 
     DrawMode* m_pDrawMode;
     QPen m_pen;
     QBrush m_brush;
+
+    QAction* m_pUndoAction;
+    QAction* m_pRedoAction;
 
     QAction* m_pFirstPageAction;
     QAction* m_pPreviousPageAction;
