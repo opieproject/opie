@@ -457,15 +457,13 @@ void PlayListWidget::setDocument(const QString& fileref) {
         return;
     }
 //    qDebug("setDocument "+fileref);
-//     if(fileref.find("m3u",0,TRUE) != -1) { //is m3u
-//         clearList();
-//         addToSelection( DocLnk( fileref ) );
-//         d->setDocumentUsed = TRUE;
-//         d->selectedFiles->first();
-//         qApp->processEvents();
-//     }
-//    else
-    if(fileref.find("playlist",0,TRUE) != -1) {//is playlist
+     if(fileref.find("m3u",0,TRUE) != -1) { //is m3u
+         readm3u( fileref);
+     }
+     else if(fileref.find("pls",0,TRUE) != -1) { //is pls
+         readPls( fileref);
+     }
+    else if(fileref.find("playlist",0,TRUE) != -1) {//is playlist
         clearList();
         loadList(DocLnk(fileref));
         d->selectedFiles->first();
@@ -1186,7 +1184,7 @@ void PlayListWidget::doUnblank() {
 
 void PlayListWidget::readm3u(const QString &filename) {
 
-    qDebug("playlist filename is "+filename);
+    qDebug("m3u filename is "+filename);
     QFile f(filename);
 
     if(f.open(IO_ReadOnly)) {
@@ -1236,26 +1234,44 @@ void PlayListWidget::writem3u(const QString &filename) {
 
 void PlayListWidget::readPls(const QString &filename) {
 
-    qDebug("playlist filename is "+filename);
+    qDebug("pls filename is "+filename);
     QFile f(filename);
 
     if(f.open(IO_ReadOnly)) {
         QTextStream t(&f);
         QString s;//, first, second;
         int i=0;
-        while ( !t.atEnd()) {
+         while ( !t.atEnd()) {
+             s=t.readLine();
+             if(s.left(4) == "File") {
+                 s=s.right(s.length() - 6);
+                 qDebug("adding "+s+" to playlist");
+// numberofentries=2
+// File1=http
+  // Title
+// Length
+// Version
+// File2=http
+             
+        s=s.replace( QRegExp("\\"),"/");
 //        Lview->insertLine(t.readLine(),-1);
 //             s=t.readLine();
 //             s=s.right(s.length()-2);
-//             DocLnk lnk( s );
+             DocLnk lnk( s );
+             QFileInfo f(s);
+             QString name = f.baseName();
+             name = name.right(name.length()-name.findRev("\\",-1,TRUE)-1);
 //             QFileInfo f(s);
 //             QString name = f.baseName();
 // //                          name = name.left(name.length()-4);
 //             name = name.right(name.findRev("/",0,TRUE));
-//             lnk.setName( name);
-//             lnk.setFile( s);
-//             qDebug("add "+name);
-//                         d->selectedFiles->addToSelection( lnk);
+             lnk.setName( name);
+             lnk.setFile( s+"/");
+             lnk.setType("audio/x-mpegurl");
+
+             qDebug("DocLnk add "+name);
+             d->selectedFiles->addToSelection( lnk);
+         }
         }
         i++;
     }
