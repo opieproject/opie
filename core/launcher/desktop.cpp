@@ -414,9 +414,9 @@ void DesktopApplication::systemMessage( const QCString & msg, const QByteArray &
     m_screensaver-> setMode ( mode );
   }
   else if ( msg == "setDisplayState(int)" ) {
-  	int state;
-  	stream >> state;
-  	m_screensaver-> setDisplayState ( state != 0 );
+    int state;
+    stream >> state;
+    m_screensaver-> setDisplayState ( state != 0 );
   }
   else if ( msg == "suspend()" ) {
     emit power();
@@ -475,12 +475,12 @@ bool DesktopApplication::qwsEventFilter( QWSEvent *e )
         }
         return TRUE;
       }
-      /* menu key now opens application menu/toolbar
+//       menu key now opens application menu/toolbar
        if ( ke->simpleData.keycode == Key_F11 ) {
        if ( press ) emit menu();
        return TRUE;
        }
-      */
+      
       if ( ke->simpleData.keycode == Key_F12 ) {
         while ( activePopupWidget() )
           activePopupWidget() ->close();

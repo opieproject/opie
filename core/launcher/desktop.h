@@ -41,104 +41,105 @@ class QPEScreenSaver;
 
 class DesktopApplication : public QPEApplication
 {
-	Q_OBJECT
+  Q_OBJECT
 public:
-	DesktopApplication( int& argc, char **argv, Type t );
-	~DesktopApplication();
+  DesktopApplication( int& argc, char **argv, Type t );
+  ~DesktopApplication();
 
-	static void switchLCD ( bool on ); // only for togglePower in Desktop
+  static void switchLCD ( bool on ); // only for togglePower in Desktop
 
 signals:
-	void home();
-	void datebook();
-	void contacts();
-	void launch();
-	void email();
-	void backlight();
-	void power();
-	void symbol();
-	void numLockStateToggle();
-	void capsLockStateToggle();
-	void prepareForRestart();
+  void menu();
+  void home();
+  void datebook();
+  void contacts();
+  void launch();
+  void email();
+  void backlight();
+  void power();
+  void symbol();
+  void numLockStateToggle();
+  void capsLockStateToggle();
+  void prepareForRestart();
 
 protected:
 #ifdef Q_WS_QWS
 
-	bool qwsEventFilter( QWSEvent * );
+  bool qwsEventFilter( QWSEvent * );
 #endif
 
-	void shutdown();
-	void restart();
+  void shutdown();
+  void restart();
 
 public slots:
-	virtual void desktopMessage ( const QCString &msg, const QByteArray &data );
-	virtual void systemMessage ( const QCString &msg, const QByteArray &data );
+  virtual void desktopMessage ( const QCString &msg, const QByteArray &data );
+  virtual void systemMessage ( const QCString &msg, const QByteArray &data );
 
 protected slots:
-	void shutdown( ShutdownImpl::Type );
-	void psTimeout();
-	void sendCard();
+  void shutdown( ShutdownImpl::Type );
+  void psTimeout();
+  void sendCard();
 private:
-	DesktopPowerAlerter *pa;
-	PowerStatus *ps;
-	QTimer *cardSendTimer;
-	QCopChannel *channel;
-	QPEScreenSaver *m_screensaver;
+  DesktopPowerAlerter *pa;
+  PowerStatus *ps;
+  QTimer *cardSendTimer;
+  QCopChannel *channel;
+  QPEScreenSaver *m_screensaver;
 };
 
 
 class Desktop : public QWidget
 {
-	Q_OBJECT
+  Q_OBJECT
 public:
-	Desktop();
-	~Desktop();
+  Desktop();
+  ~Desktop();
 
-	static bool screenLocked();
+  static bool screenLocked();
 
-	void show();
-	void checkMemory();
+  void show();
+  void checkMemory();
 
-	void keyClick();
-	void screenClick();
-	static void soundAlarm();
+  void keyClick();
+  void screenClick();
+  static void soundAlarm();
 
 public slots:
-	void raiseDatebook();
-	void raiseContacts();
-	void raiseMenu();
-	void raiseLauncher();
-	void raiseEmail();
-	void execAutoStart();
-	void togglePower();
-	void toggleLight();
-	void toggleNumLockState();
-	void toggleCapsLockState();
-	void toggleSymbolInput();
-	void terminateServers();
-	void rereadVolumes();
+  void raiseDatebook();
+  void raiseContacts();
+  void raiseMenu();
+  void raiseLauncher();
+  void raiseEmail();
+  void execAutoStart();
+  void togglePower();
+  void toggleLight();
+  void toggleNumLockState();
+  void toggleCapsLockState();
+  void toggleSymbolInput();
+  void terminateServers();
+  void rereadVolumes();
 
-	void home ( );
+  void home ( );
 
 protected:
-	void executeOrModify( const QString& appLnkFile );
-	void styleChange( QStyle & );
-	void timerEvent( QTimerEvent *e );
+  void executeOrModify( const QString& appLnkFile );
+  void styleChange( QStyle & );
+  void timerEvent( QTimerEvent *e );
 
-	QWidget *bg;
-	Launcher *launcher;
-	TaskBar *tb;
+  QWidget *bg;
+  Launcher *launcher;
+  TaskBar *tb;
 
 private:
-	void startTransferServer();
-	bool recoverMemory();
+  void startTransferServer();
+  bool recoverMemory();
 
-	QCopBridge *qcopBridge;
-	TransferServer *transferServer;
-	PackageSlave *packageSlave;
+  QCopBridge *qcopBridge;
+  TransferServer *transferServer;
+  PackageSlave *packageSlave;
 
-	QDateTime suspendTime;
-	bool keyclick, touchclick, alarmsound;
+  QDateTime suspendTime;
+  bool keyclick, touchclick, alarmsound;
 };
 
 

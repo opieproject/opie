@@ -91,6 +91,7 @@ int initApplication( int argc, char ** argv )
 
     Desktop *d = new Desktop();
 
+    QObject::connect( &a, SIGNAL(menu()), d, SLOT(raiseMenu()) );
     QObject::connect( &a, SIGNAL(datebook()), d, SLOT(raiseDatebook()) );
     QObject::connect( &a, SIGNAL(contacts()), d, SLOT(raiseContacts()) );
     QObject::connect( &a, SIGNAL(launch()),   d, SLOT(raiseLauncher()) );
