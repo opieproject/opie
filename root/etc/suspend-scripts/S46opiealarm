@@ -1,0 +1,7 @@
+#!/bin/sh
+# Starts opiealarm, which only runs while the iPaq sleeps 
+# and wakes it up when the RTC alarm goes off.
+
+export HOME=/root
+start-stop-daemon --make-pidfile --start --quiet --pidfile /var/run/opiealarm.pid --exec /opt/QtPalmtop/bin/opiealarm &
+

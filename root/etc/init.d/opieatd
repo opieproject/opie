@@ -1,0 +1,15 @@
+#!/bin/sh
+
+PATH=/usr/bin:/bin
+HOME=/root
+
+case "$1" in
+  start)
+    /opt/QtPalmtop/bin/opieatd &
+    ;;
+  stop)
+    killall opieatd
+    ;;
+esac
+
+exit 0

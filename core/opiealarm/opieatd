@@ -1,0 +1,22 @@
+#!/bin/sh
+
+timefile=/etc/resumeat
+
+mkdir -p /var/spool/at
+[ -p /var/spool/at/trigger ] || mkfifo /var/spool/at/trigger
+
+while true; do
+	cat /var/spool/at/trigger | while read line; do
+		FILE=`ls -1 /var/spool/at/[0-9]* | head -n1`
+		echo "File = $FILE"
+		if [ -z "$FILE" ]; then
+			echo "clear resume at"
+			echo "" >$timefile
+		else
+			unixtime=`basename $FILE | cut -c1-10`
+			echo "Datestring = $unixtime"
+			echo "$unixtime" >$timefile
+		fi
+	done
+done
+
