@@ -13,11 +13,14 @@
  * =====================================================================
  * ToDo: ...
  * =====================================================================
- * Version: $Id: ocontactdb.h,v 1.1.2.13 2002-08-04 12:24:30 eilers Exp $
+ * Version: $Id: ocontactdb.h,v 1.1.2.14 2002-08-05 09:26:11 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb.h,v $
- * Revision 1.1.2.13  2002-08-04 12:24:30  eilers
+ * Revision 1.1.2.14  2002-08-05 09:26:11  eilers
+ * forgotten to set methods to abstract
+ *
+ * Revision 1.1.2.13  2002/08/04 12:24:30  eilers
  * It is now possible to ask the backend which kind of queries he support
  * or if a query is correct...
  *
@@ -163,12 +166,12 @@ class OContactBackend {
 	 *  @return All settings provided by the current backend 
 	 * (i.e.: query_WildCards & query_IgnoreCase)
 	 */
-	const uint getQuerySettings();
+	const uint getQuerySettings() = 0;
 
 	/** Check whether settings are correct.
 	 * @return <i>true</i> if the given settings are correct and possible.
 	 */
-	bool hasQuerySettings (uint querySettings) const;
+	bool hasQuerySettings (uint querySettings) const = 0;
 
 	/** Requests a contact which was selected by queryByExample().
 	 * Use this function to move through the list of selected contacts.
