@@ -151,8 +151,6 @@ PlayListWidget::PlayListWidget( MediaPlayerState &mediaPlayerState, QWidget* par
               &mediaPlayerState,  SLOT( setVideoGamma( int ) ) );
 
     // see which skins are installed
-    videoScan=false;
-    audioScan=false;
     audioPopulated=false;
     videoPopulated=false;
     populateSkinsMenu();
@@ -254,7 +252,7 @@ void PlayListWidget::addAllToList() {
 //   QTime t;
 //   t.start();
 
-  if(!audioScan) {
+  if(!audioView->scannedFiles()) {
     if(audioView->childCount() < 1)
       populateAudioView();
   }
@@ -270,7 +268,7 @@ void PlayListWidget::addAllToList() {
     d->selectedFiles->addToSelection(  lnk);
   }      
 
-  if(!videoScan) {
+  if(!videoView->scannedFiles()) {
     if(videoView->childCount() < 1)
       populateVideoView();
   }
@@ -314,7 +312,7 @@ void PlayListWidget::addAllToList() {
 
 void PlayListWidget::addAllMusicToList() {
 
-  if(!audioScan) {
+  if(!audioView->scannedFiles()) {
     if(audioView->childCount() < 1)
       populateAudioView();
   }
@@ -347,7 +345,7 @@ void PlayListWidget::addAllMusicToList() {
 
 void PlayListWidget::addAllVideoToList() {
 
-  if(!videoScan) {
+  if(!videoView->scannedFiles()) {
     if(videoView->childCount() < 1)
       populateVideoView();
   }
@@ -638,13 +636,13 @@ void PlayListWidget::playSelected() {
 
 void PlayListWidget::scanForAudio() {
   audioView->scanFiles();
-  audioScan = true;
+  audioView->scannedFiles() = true;
   populateAudioView();
 }
 
 void PlayListWidget::scanForVideo() {
   videoView->scanFiles();
-  videoScan = true;
+  videoView->scannedFiles() = true;
   populateVideoView();  
 }
 
@@ -652,7 +650,7 @@ void PlayListWidget::populateAudioView() {
     audioView->clear();
     StorageInfo storageInfo;
     //    const QList<FileSystem> &fs = storageInfo.fileSystems();
-    if(!audioScan) {
+    if(!audioView->scannedFiles()) {
         scanForAudio();
     }
 
@@ -695,7 +693,7 @@ void PlayListWidget::populateVideoView() {
     StorageInfo storageInfo;
     //    const QList<FileSystem> &fs = storageInfo.fileSystems();
 
-    if(!videoScan ) {
+    if(!videoView->scannedFiles()) {
         scanForVideo();
     }
 

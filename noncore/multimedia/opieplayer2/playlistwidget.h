@@ -94,7 +94,7 @@ signals:
 
 private:
     int defaultSkinIndex;
-    bool audioScan, videoScan, audioPopulated, videoPopulated;
+    bool audioPopulated, videoPopulated;
     void readm3u(const QString &);
     void readPls(const QString &);
     void initializeStates();

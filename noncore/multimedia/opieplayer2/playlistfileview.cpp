@@ -4,7 +4,7 @@
 #include <qpe/global.h>
 
 PlayListFileView::PlayListFileView( const QString &mimeTypePattern, QWidget *parent, const char *name )
-    : PlayListView( parent, name ), m_mimeTypePattern( mimeTypePattern )
+    : PlayListView( parent, name ), m_mimeTypePattern( mimeTypePattern ), m_scannedFiles( false )
 {
     addColumn( tr( "Title" ), 140);
     addColumn( tr( "Size" ), -1 );
