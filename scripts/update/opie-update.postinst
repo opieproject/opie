@@ -8,7 +8,7 @@
 IPKG_REMOVE="ipkg remove"
 IPKG_INSTALL="ipkg install"
 echo "Upating opie"
-pack=`ipkg status | grep Package | grep -i opie | sed  "s/Package://"`
+pack=`ipkg status | grep Package | grep -i opie | grep -v update | sed  "s/Package://"`
 
 
 echo "Stopping Opie"
