@@ -24,7 +24,7 @@ using namespace std;
 #include "server.h"
 #include "destination.h"
 
-#define LOCAL_SERVER			"local"
+#define LOCAL_SERVER			"Installed Pgks"
 #define LOCAL_IPKGS				"local IPKG"
 
 /**
