@@ -1,4 +1,5 @@
 /***************************************************************************
+
  main.cpp  -  main routine
  ***************************************************************************/
 //// main.cpp
@@ -24,6 +25,7 @@ int main(int argc, char* argv[]) {
 
 #include <opie2/oapplicationfactory.h>
 
+using namespace Opie::Core;
 OPIE_EXPORT_APP( OApplicationFactory<QtRec> )
 
 #endif

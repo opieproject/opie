@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: helpwindow.cpp,v 1.4 2003-12-07 14:06:28 mickeyl Exp $
+** $Id: helpwindow.cpp,v 1.5 2004-03-13 23:10:27 zecke Exp $
 **
 ** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
 **
@@ -11,7 +11,7 @@
 #include "helpwindow.h"
 #include <qlayout.h>
 
-#include <qpe/qpetoolbar.h>
+#include <qtoolbar.h>
 #include <qpe/resource.h>
 
 #include <qaction.h>

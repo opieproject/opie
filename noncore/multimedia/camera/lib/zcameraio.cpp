@@ -30,6 +30,8 @@
 
 #define SHARPZDC "/dev/sharp_zdc"
 
+using namespace Opie::Core;
+
 ZCameraIO* ZCameraIO::_instance = 0;
 
 ZCameraIO* ZCameraIO::instance()

@@ -28,7 +28,6 @@
 #include <qpe/global.h>
 #include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
-using namespace Opie;
 
 /* QT */
 #include <qapplication.h>
@@ -63,6 +62,10 @@ using namespace Opie;
 
 #define OUTPUT_TO_CUSTOM 250
 #define OUTPUT_TO_DOCFOLDER 251
+
+
+using namespace Opie::Ui;
+using namespace Opie::Core;
 
 CameraMainWindow::CameraMainWindow( QWidget * parent, const char * name, WFlags f )
            :QMainWindow( parent, name, f ),

@@ -18,6 +18,7 @@
 #include <opie2/odebug.h>
 #include <qimage.h>
 
+using namespace Opie::Core;
 
 void bufferToImage( int _width, int _height, unsigned char* bp, QImage* image )
 {

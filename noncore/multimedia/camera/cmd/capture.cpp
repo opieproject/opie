@@ -24,6 +24,8 @@
 
 #include <qimage.h>
 
+using namespace Opie::Core;
+using namespace Opie::Core;
 Capturer::Capturer()
          :QFrame( 0 ), height( 320 ), width( 240 ), zoom( 1 ), quality( 90 ),
          flip( "A" ), format( "JPEG" ), name( "Untitled" )
