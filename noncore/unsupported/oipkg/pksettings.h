@@ -19,6 +19,9 @@ public:
   bool createLinks();
   QStringList getActiveServers();
   QStringList getDestinationUrls();
+  QStringList getDestinationNames();
+  QString getDestinationUrlByName(QString);
+
 private:
   QIntDict<QString> serverurlDic;
   QIntDict<QString> destinationurlDic;

@@ -9,8 +9,14 @@ Package::~Package()
 {
 }
 
-Package::Package()
+Package::Package( PackageManagerSettings *s )
 {
+	init(s);
+}
+
+void Package::init( PackageManagerSettings *s )
+{
+	settings = s;
   _size = "";
   _section = "";
   _subsection = "";
@@ -19,25 +25,26 @@ Package::Package()
   _name = "";
   _toProcess = false;
   _status = "";
+  _dest = "";
 }
 
-Package::Package( QStringList pack )
+Package::Package( QStringList pack, PackageManagerSettings *s  )
 {	
-  Package();
+  init(s);
   parsePackage( pack );
   _toProcess = false;
 }
 
-Package::Package( QString n )
+Package::Package( QString n, PackageManagerSettings *s )
 {	
-  Package();
+  init(s);
   _name = QString( n );
   _toProcess = false;
 }
 
 Package::Package( Package *pi )
 {
-  Package();
+  init(pi->settings);
   copyValues( pi );
   _toProcess = false;
 }
@@ -172,7 +179,7 @@ void Package::copyValues( Package* pack )
   if (!installed() && _status.isEmpty()    && !pack->_status.isEmpty()) _status = QString( pack->_status );
 }
 
-QString Package::getSection()
+QString Package::section()
 {
   return _section;
 }
@@ -190,7 +197,7 @@ void Package::setSection( QString s)
     }
 }
 
-QString Package::getSubSection()
+QString Package::subSection()
 {
   return _subsection;
 }
@@ -253,11 +260,38 @@ QString Package::details()
   return description;
 }
 
-/** No descriptions */
 void Package::processed()
 {
 	_toProcess = false;
- //hack, but we're mot writing status anyway...
+ //hack, but we're not writing status anyway...
 	if ( installed() ) _status = "install";
  	else _status = "installed";
+}
+
+QString Package::dest()
+{
+	if ( installed()||(!installed() && _toProcess) )
+		return _dest!=""?_dest:settings->getDestinationName();
+  else return "";
+}
+
+void Package::setDest( QString d )
+{
+	_dest = d;
+}
+
+void Package::setOn()
+{
+	_toProcess = true;	
+}
+
+bool Package::link()
+{
+	if ( _dest == "root" || (!installed() && !_toProcess) ) return false;
+	return _link;
+}
+
+void Package::setLink(bool b)
+{
+	_link = b;
 }

@@ -42,7 +42,7 @@
             </property>
             <property stdset="1">
                 <name>progress</name>
-                <number>42</number>
+                <number>0</number>
             </property>
         </widget>
         <widget row="1"  column="0" >

@@ -9,11 +9,13 @@
 #include <qpixmap.h>
 #include <qdict.h>
 
+#include "pksettings.h"
+
 class PackageListItem
 : public QCheckListItem
 {
 public:
-  PackageListItem(QListView*, Package* );
+  PackageListItem(QListView*, Package*, PackageManagerSettings*);
   void paintCell( QPainter*, const QColorGroup&, int, int, int );
   void paintFocus( QPainter*, const QColorGroup&, const QRect&  );
   QPixmap statePixmap() const;
@@ -22,8 +24,12 @@ public:
   QString getName() { return package->name(); } ;
   bool isInstalled(){ return package->installed(); };
   virtual void setOn ( bool );
+  void displayDetails();
 
 private:
+	QCheckListItem *destItem;
+	QCheckListItem *linkItem;
+  PackageManagerSettings *settings;
   Package *package;
 };
 

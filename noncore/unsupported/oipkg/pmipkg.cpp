@@ -8,7 +8,6 @@
 #include <qpe/resource.h>
 #include <qpe/config.h>
 #include <qpe/stringutil.h>
-#include <qpe/qcopenvelope_qws.h>
 #include <qdir.h>
 #include <qfile.h>
 #include <qmultilineedit.h>
@@ -40,38 +39,37 @@ PmIpkg::~PmIpkg()
 
 //#define PROC
 #define SYSTEM
-int PmIpkg::runIpkg(const QString& args)
+int PmIpkg::runIpkg(const QString& args, const QString& dest )
 {
   pvDebug(2,"PmIpkg::runIpkg "+args);
 
-  //to make script ipkg happy
-  pvDebug(2, "cd "+settings->getDestinationUrl()+"/tmp/ipkg");
-  if (!QDir::setCurrent(settings->getDestinationUrl()+"/tmp/ipkg"))
-  {
-  	QDir instDir = QDir(settings->getDestinationUrl()+"/tmp/ipkg");
-   	instDir.mkdir(settings->getDestinationUrl()+"/tmp/ipkg");
-  }
 #ifdef PROC
   QStringList cmd = "/usr/bin/ipkg ";
 #endif
 #ifdef SYSTEM
   QString cmd = "/usr/bin/ipkg ";
 #endif
-  cmd += " -dest "+settings->getDestinationName();
+	pvDebug( 3,"PmIpkg::runIpkg got dest="+dest);
+	if ( dest == "" )
+	  cmd += " -dest "+settings->getDestinationName();
+  else
+	  cmd += " -dest "+ dest;
+
  	cmd += " -force-defaults ";
 
   out( "<hr><br>Starting to "+ args+"<br>\n");
   cmd += args;
-  out( "running:<br>\n"+cmd+"<br>\n" );
   int r = 0;
 #ifdef PROC
 	QString o = "start";
-  Process ipkg( cmd );
+  Process *ipkg = new Process( "ls");//cmd );
+  out( "running:<br>\n"+ipkg->arguments().join(" ")+"<br>\n" );
   QString description;
-  ipkg.exec("",o);
-  out( o );
+  ipkg->exec("",o);
+//  out( o );
 #endif
 #ifdef SYSTEM
+  out( "running:<br>\n"+cmd+"<br>\n" );
   QString redirect = "/tmp/oipkg.pipe";
   cmd += " | tee "+redirect+" 2>&1";
   pvDebug(2, "running >"+cmd+"<");
@@ -80,16 +78,19 @@ int PmIpkg::runIpkg(const QString& args)
   QString line;
   QString oldLine;
   while ( ! f.open(IO_ReadOnly) ) {};
-  {
+ // {
     QTextStream t( &f );
  //   QString fp;
     while ( !t.eof() )
     {
       line = t.readLine();
-			if ( line != oldLine ) out( line +"<br>" );
-    	oldLine = line;
+			if ( line != oldLine )
+   	 	{
+      	out( line +"<br>" );
+				oldLine = line;
+    	}
     }
-  }
+//  }
   f.close();
   out( "Finished!<br>");
 #endif
@@ -97,22 +98,24 @@ int PmIpkg::runIpkg(const QString& args)
   return r;
 }
 
-void PmIpkg::makeLinks(QString pack)
+void PmIpkg::makeLinks(Package *pack)
 {
-	pvDebug( 2, "PmIpkg::makeLinks "+ pack);
+	pvDebug( 2, "PmIpkg::makeLinks "+ pack->name());
+  QString dest = settings->getDestinationUrlByName( pack->dest() );
+  if (dest == "/" ) return;
   out( "<br>creating links<br>" );
-  QString dest = settings->getDestinationUrl();
-  out("for package "+pack+" in "+dest+"<br>");
+  out("for package "+pack->name()+" in "+dest+"<br>");
 	{
     Config cfg( "oipkg", Config::User );
     cfg.setGroup( "Common" );
     QString statusDir = cfg.readEntry( "statusDir", "" );
 	}
- 	QString fn = dest+"/"+statusDir+"/info/"+pack+".list";
+ 	QString fn = dest+"/"+statusDir+"/info/"+pack->name()+".list";
   QFile f( fn );
   if ( ! f.open(IO_ReadOnly) )
   {
   	out( "<b>Panik!</b> Could not open:<br>"+fn );
+   	return;
   };
   QTextStream t( &f );
   QString fp;
@@ -126,8 +129,10 @@ void PmIpkg::makeLinks(QString pack)
 
 void PmIpkg::processLinkDir( QString file, QString dest )
 {
+	if ( dest == "???" ) return;
   QString destFile = file;
 	file = dest+"/"+file;
+ 	if (file == dest) return;
   QFileInfo fileInfo( file );
   if ( fileInfo.isDir() )
   {
@@ -166,30 +171,21 @@ void PmIpkg::commit( PackageList pl )
   int sizecount = 0;
   QString rem="<b>To remove:</b><br>\n";
   QString inst="<b>To install:</b><br>\n";;
+  pl.allPackages();
   for( Package *pack = pl.first();pack ; (pack = pl.next())  )
     {
       if ( pack && (pack->name() != "") && pack)
 	{
 	  if ( pack->toInstall() )
 	    {
- #ifndef NEWLIST
-	      to_install.append( pack->name() );
- #endif
- #ifdef NEWLIST
 	      to_install.append( pack );
        	sizecount += pack->size().toInt();
- #endif
-	      inst += pack->name()+"<br>";
+	      inst += pack->name()+"\t(on "+pack->dest()+")<br>";
 	    }
 	  if ( pack->toRemove() )
 	    {
- #ifndef NEWLIST
-	      to_remove.append( pack->name() );
- #endif
- #ifdef NEWLIST
 	      to_remove.append( pack );
        	sizecount += 1;
- #endif
 	      rem += pack->name()+"<br>";
 	    }
 	}
@@ -211,11 +207,6 @@ void PmIpkg::commit( PackageList pl )
   					runwindow, SLOT( close() ) );
 
 	runwindow->exec();
-  // ##### If we looked in the list of files, we could send out accurate
-  // ##### messages. But we don't bother yet, and just do an "all".
-  QCopEnvelope e("QPE/System", "linkChanged(QString)");
-  QString lf = QString::null;
-  e << lf;
   return;
 }
 
@@ -233,18 +224,6 @@ void PmIpkg::remove()
 
 	out("<hr><hr><b>"+tr("Removing")+"<br>"+tr("please wait")+"</b><br>");
 
- #ifndef NEWLIST
-   for (QStringList::ConstIterator it=to_remove.begin(); it!=to_remove.end(); ++it)
-   {
-      if ( runIpkg("remove " + *it) == 0)
-      {
-
-  		}else{
-      	out("<b>"+tr("Error while removing")+"</b>"+*it);
-      }
-    }
-#endif
- #ifdef NEWLIST
    for (Package *it=to_remove.first(); it != 0; it=to_remove.next() )
    {
       if ( runIpkg("remove " + it->name()) == 0)
@@ -256,7 +235,6 @@ void PmIpkg::remove()
       	out("<b>"+tr("Error while removing")+"</b>"+it->name());
       }
     }
-#endif
 }
 
 
@@ -265,36 +243,22 @@ void PmIpkg::install()
  	if ( to_install.count() == 0 ) return;
 	show( true );
 	out("<hr><hr><b>"+tr("Installing")+"<br>"+tr("please wait")+"</b><br>");
- #ifndef NEWLIST
-    for (QStringList::ConstIterator it=to_install.begin(); it!=to_install.end(); ++it)
+ 	for (Package *it=to_install.first(); it != 0; it=to_install.next() )
     {
-      if ( runIpkg("install " + *it) == 0 )
-		  {
-	    	if ( settings->createLinks() )
-					makeLinks( *it );
-  		}else{
-      	out("<b>"+tr("Error while installing")+"</b>"+*it);
-      }
-    }
-#endif
- #ifdef NEWLIST
- 	  for (Package *it=to_install.first(); it != 0; it=to_install.next() )
-    {
-      if ( runIpkg("install " + it->name()) == 0 )
+
+      if ( runIpkg("install " + it->name(), it->dest() ) == 0 )
 		  {    	
       	runwindow->progress->setProgress( it->size().toInt() + runwindow->progress->progress());
-	    	if ( settings->createLinks() )
-					makeLinks( it->name() );
+	    	if ( it->link() )
+					makeLinks( it );
      		it->processed();
   		}else{
       	out("<b>"+tr("Error while installing")+"</b>"+it->name());
       }
     }
-#endif
 }
 
 void PmIpkg::linkDestination( const QString msg, const QByteArray dest )
-// add 3rd package parameter
 {
 	qDebug("msg="+msg+" -- "+QString(dest) );	
 //  QDir d( src );
@@ -345,8 +309,8 @@ void PmIpkg::show(bool b)
 	if (!runwindow->isVisible())
 	  runwindow->showMaximized();
 	showButtons(b);
-//	if ( b )
+	if ( b )
  		runwindow->progress->hide();
-//  else
-// 		runwindow->progress->show();
+  else
+ 		runwindow->progress->show();
 }

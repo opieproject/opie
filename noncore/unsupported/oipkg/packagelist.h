@@ -12,7 +12,9 @@
   static QString statusDir="/usr/lib/ipkg/";
 #endif
 
-class PackageList {
+class PackageList //:QObject
+{
+//  	Q_OBJECT
 public:
 //	static QString all = QObject::tr("All");
 
@@ -29,8 +31,8 @@ public:
   void setSettings( PackageManagerSettings* );
   void filterPackages( QString );
   Package* getByName( QString );
-  /** No descriptions */
   void clear();
+  void allPackages();
 
 public slots:
   void setSection(QString);
@@ -61,7 +63,7 @@ private:
   void updateSections( Package* );
   void parseStatus();
   void parseList();
-  void readFileEntries( QString );
+  void readFileEntries( QString file, QString dest );
 };
 
 

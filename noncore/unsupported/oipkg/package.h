@@ -8,14 +8,16 @@
 #include <qdict.h>
 #include <qobject.h>
 
+#include "pksettings.h"
+
 class Package //: public QObject
 {
   //	Q_OBJECT
  public:
-  Package();
+  Package(PackageManagerSettings *);
   ~Package();
-  Package( QStringList );
-  Package( QString );
+  Package( QStringList, PackageManagerSettings * );
+  Package( QString, PackageManagerSettings * );
   Package( Package* );
  	
   void    setValue( QString, QString );
@@ -29,27 +31,35 @@ class Package //: public QObject
   QString desc();
   QString size();
   void    setSection( QString );
-  QString getSection();
-  QString getSubSection();
+  QString section();
+  QString subSection();
   QString details();
   bool    toProcess();
   bool    toInstall();
   bool    toRemove();
-  /** No descriptions */
   void processed();
+  QString dest();
+  void setDest( QString d );
+  void setOn();
+  bool link();
+  void setLink(bool);
 public slots:
   void toggleProcess();
 
 private:
+  PackageManagerSettings *settings;
   QString _name;
   bool    _toProcess;
+  bool    _link;
   QString _status;
   QString _size;
   QString _section;
   QString _subsection;
   QString _shortDesc;
   QString _desc;
+  QString _dest;
   void parsePackage( QStringList );
+  void init(PackageManagerSettings *);
 };
 
 

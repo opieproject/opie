@@ -15,7 +15,7 @@ class QComboBox;
 class QPEToolBar;
 class QLineEdit;
 class QListView;
-
+class PackageListItem;
 
 class MainWindow : public QMainWindow
 {
@@ -46,6 +46,9 @@ public slots:
   void findClose();
   void findShow(bool);
   void filterList();
+  void showPopup();
+  void changePackageDest( int );
+  void stopTimer( QListViewItem* );
 
 private:
   void makeMenu();
@@ -57,19 +60,21 @@ private:
   PackageDetails* details;
   PackageList packageList;
   Package *activePackage;
+  PackageListItem *activePackageListItem;
   QAction *runAction;
   QAction *detailsAction;
   QAction *updateAction;
   QAction *findAction;
   QAction *sectionAction;
   QListView *listViewPackages;
-  QPopupMenu *contextMenu;
   QPEToolBar *findBar;
   QLineEdit *findEdit;
   QPEToolBar *sectionBar;
   QComboBox *section;
   QComboBox *subsection;
+  QTimer *popupTimer;
   QPopupMenu *popupMenu;
+  QPopupMenu *destsMenu;
   bool updateIcon;
 private slots:
   void rotateUpdateIcon();

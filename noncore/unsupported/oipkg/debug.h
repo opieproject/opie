@@ -7,6 +7,7 @@ extern int debugLevel;
 
 #define HACK
 
+#define NEWLAYOUT
 
 #define pvDebug(I, S) \
 if ( debugLevel < 3 ) \

@@ -20,8 +20,6 @@ public:
   bool createLinks();
   QStringList getActiveServers();
   QStringList getDestinationUrls();
-  /** No descriptions */
-  QComboBox getActiveDestinationCombo();
 
 private:
   QIntDict<QString> serverurlDic;

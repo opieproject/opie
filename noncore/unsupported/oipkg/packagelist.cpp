@@ -70,8 +70,8 @@ void PackageList::filterPackages( QString f )
   while ( pack )
     {	
       if (
-      			((aktSection=="All")||(pack->getSection()==aktSection)) &&
-	   				((aktSubSection=="All")||(pack->getSubSection()==aktSubSection)) &&
+      			((aktSection=="All")||(pack->section()==aktSection)) &&
+	   				((aktSubSection=="All")||(pack->subSection()==aktSubSection)) &&
         		 pack->name().contains( f )
     			)
 			{
@@ -126,11 +126,11 @@ void PackageList::setSubSection( QString ssec )
 
 void PackageList::updateSections( Package* pack )
 {
-  QString s = pack->getSection();
+  QString s = pack->section();
   if ( s.isEmpty() || s == "") return;
   if ( sections.contains(s) )  return;
   sections += s;
-  QString ss = pack->getSubSection();
+  QString ss = pack->subSection();
   if ( ss.isEmpty() || ss == "" ) return;
   if ( !subSections[s] ) {
     subSections.insert( s, new QStringList() );
@@ -150,10 +150,13 @@ void PackageList::updateSections( Package* pack )
 void PackageList::parseStatus()
 {
   QStringList dests = settings->getDestinationUrls();
-  for ( QStringList::Iterator it = dests.begin(); it != dests.end(); ++it )
+  QStringList destnames = settings->getDestinationNames();
+  QStringList::Iterator name = destnames.begin();
+  for ( QStringList::Iterator dir = dests.begin(); dir != dests.end(); ++dir )
     {
-      pvDebug( 2,"Status Dir: "+*it+statusDir+"/status");
-      readFileEntries( *it+statusDir+"/status" );
+      pvDebug( 2,"Status: "+*dir+statusDir+"/status");
+      readFileEntries( *dir+statusDir+"/status", *name );
+      ++name;
     };
 }
 
@@ -163,12 +166,12 @@ void PackageList::parseList()
 	
   for ( QStringList::Iterator it = srvs.begin(); it != srvs.end(); ++it )
     {
-      pvDebug( 2, "List Dir: "+listsDir+"/"+*it);
-      readFileEntries( listsDir+"/"+*it );  	
+      pvDebug( 2, "List: "+listsDir+"/"+*it);
+      readFileEntries( listsDir+"/"+*it, "" );  	
     }
 }
 
-void PackageList::readFileEntries( QString filename )
+void PackageList::readFileEntries( QString filename, QString dest )
 { 	
   QStringList packEntry;
   QFile f( filename );
@@ -182,7 +185,8 @@ void PackageList::readFileEntries( QString filename )
 	  //end of package
 	  if ( ! packEntry.isEmpty() )
 	    {
-	      Package *p = new Package( packEntry );
+	      Package *p = new Package( packEntry, settings );
+       	p->setDest( dest );
 	      if ( p )
 		{
 		  insertPackage( p );
@@ -199,11 +203,11 @@ void PackageList::readFileEntries( QString filename )
 
 void PackageList::update()
 {
-  pvDebug( 3, "parseStatus");
+  pvDebug( 2, "parseStatus");
   parseStatus();
-  pvDebug( 3, "parseList");
+  pvDebug( 2, "parseList");
   parseList();
-  pvDebug( 3, "finished parsing");
+  pvDebug( 2, "finished parsing");
 }
 
 void PackageList::setSettings( PackageManagerSettings *s )
@@ -220,4 +224,18 @@ void PackageList::clear()
 {
 	origPackageList.clear();
 	packageList.clear();
+}
+
+void PackageList::allPackages()
+{
+	packageList.clear();
+  QDictIterator<Package> filterIter( origPackageList );
+  filterIter.toFirst();
+  Package *pack= filterIter.current() ;
+  while ( pack )
+    {	
+	  	packageList.insert( pack->name(), pack );
+      ++filterIter;
+      pack = filterIter.current();
+    }
 }

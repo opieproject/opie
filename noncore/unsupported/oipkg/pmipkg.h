@@ -11,7 +11,6 @@
 #include "packagelist.h"
 #include "debug.h"
 
-//#define NEWLIST
 class Package;
 class PmIpkg : public QObject
 {
@@ -29,20 +28,13 @@ public:
 private:
   PackageManagerSettings* settings;
   RunWindow *runwindow;
-#ifndef NEWLIST
-  QStringList to_remove;
-  QStringList to_install;
-#endif
-#ifdef NEWLIST
   QList<Package> to_remove;
   QList<Package> to_install;
-#endif
   bool runwindowopen;
 
-  void makeLinks(QString);
+  void makeLinks(Package*);
   void processLinkDir( QString, QString );
-
-  int runIpkg(const QString& args);
+  int  runIpkg(const QString& args, const QString& dest="" );
   void out( QString );
 
 public slots:

@@ -4,6 +4,6 @@ Section: opie/settings
 Maintainer: Patrick S. Vogt <tille@almana.ch>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
+Depends: opie-base ($QPE_VERSION), ipkg (>0.9)
 Description: Package Manager 
  A GUI front-end to ipkg for the Opie environment.

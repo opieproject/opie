@@ -469,6 +469,7 @@ QStringList PackageManagerSettings::getActiveServers()
     }
   return sl;
 }
+
 /** returns the destination listed in ipkg.conf */
 QStringList PackageManagerSettings::getDestinationUrls()
 {
@@ -479,6 +480,29 @@ QStringList PackageManagerSettings::getDestinationUrls()
     }
   return sl;
 }
+
+/** returns the destination listed in ipkg.conf */
+QString PackageManagerSettings::getDestinationUrlByName(QString n)
+{
+  QStringList sl;	
+  for (int i=0; i<(int)destinations->count(); i++)
+    {   	
+      if ( n ==  destinations->text(i)) return*destinationurlDic[i];
+    }
+  return "";
+}
+
+/** returns the destination listed in ipkg.conf */
+QStringList PackageManagerSettings::getDestinationNames()
+{
+  QStringList sl;	
+  for (int i=0; i<(int)destinations->count(); i++)
+    {   	
+      sl += destinations->text(i);
+    }
+  return sl;
+}
+
 
 void PackageManagerSettings::linkEnabled( bool b )
 {
