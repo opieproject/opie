@@ -175,20 +175,13 @@ void DesktopApplication::switchLCD ( bool on )
 DesktopApplication::DesktopApplication( int& argc, char **argv, Type appType )
 		: QPEApplication( argc, argv, appType )
 {
-
-	Config cfg( "apm" );
-	cfg.setGroup( "Warnings" );
-	//cfg.readNumEntry( "checkinterval", 10000 )
-	m_powerVeryLow = cfg.readNumEntry( "powerverylow", 10 );
-	m_powerCritical = cfg.readNumEntry( "powercritical", 5 );
-
 	m_ps = new PowerStatus;
 	m_ps_last = new PowerStatus;
 	pa = new DesktopPowerAlerter( 0 );
 
-	m_timer = new QTimer( this );
-	connect( m_timer, SIGNAL( timeout() ), this, SLOT( apmTimeout() ) );
-	m_timer->start( 5000 );
+	m_apm_timer = new QTimer ( this );
+	connect ( m_apm_timer, SIGNAL( timeout ( )), this, SLOT( apmTimeout ( )));	
+	reloadPowerWarnSettings ( );
 
 	m_last_button = 0;
 	m_button_timer = new QTimer ( );
@@ -226,7 +219,7 @@ DesktopApplication::~DesktopApplication()
 
 void DesktopApplication::apmTimeout()
 {
-	qpedesktop->checkMemory(); // in case no events are being generated
+	qpedesktop-> checkMemory ( ); // in case no events are being generated
 
 	*m_ps_last = *m_ps;
 	*m_ps = PowerStatusManager::readStatus();
@@ -296,14 +289,19 @@ void DesktopApplication::systemMessage( const QCString & msg, const QByteArray &
 	}
 }
 
-void DesktopApplication::reloadPowerWarnSettings()
+void DesktopApplication::reloadPowerWarnSettings ( )
 {
-	Config cfg( "apm" );
-	cfg.setGroup( "Warnings" );
+	Config cfg ( "apm" );
+	cfg. setGroup ( "Warnings" );
 
-	//  m_timer->changeInterval( cfg.readNumEntry( "checkinterval", 10000 ) );
-	m_powerVeryLow = cfg.readNumEntry( "powerverylow", 10 );
-	m_powerCritical = cfg.readNumEntry( "powervcritical", 5 );
+	int iv = cfg. readNumEntry ( "checkinterval", 10000 );
+
+	m_apm_timer-> stop ( );	
+	if ( iv )
+		m_apm_timer-> start ( iv );
+		
+	m_powerVeryLow  = cfg. readNumEntry ( "powerverylow", 10 );
+	m_powerCritical = cfg. readNumEntry ( "powervcritical", 5 );
 }
 
 
@@ -342,7 +340,7 @@ void DesktopApplication::sendHeldAction ( )
 
 
 
-void DesktopApplication::checkButtonAction ( const ODeviceButton *db, int keycode, bool press, bool autoRepeat )
+void DesktopApplication::checkButtonAction ( const ODeviceButton *db, int /*keycode*/, bool press, bool autoRepeat )
 {		
 	if ( db ) {
 		if ( !press && !autoRepeat && m_button_timer-> isActive ( )) {

@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>371</width>
+            <width>367</width>
             <height>532</height>
         </rect>
     </property>
@@ -1062,15 +1062,31 @@
                                     <string> sec</string>
                                 </property>
                                 <property stdset="1">
+                                    <name>specialValueText</name>
+                                    <string>never</string>
+                                </property>
+                                <property stdset="1">
+                                    <name>wrapping</name>
+                                    <bool>true</bool>
+                                </property>
+                                <property stdset="1">
                                     <name>buttonSymbols</name>
                                     <enum>PlusMinus</enum>
                                 </property>
                                 <property stdset="1">
                                     <name>maxValue</name>
-                                    <number>60</number>
+                                    <number>300</number>
                                 </property>
                                 <property stdset="1">
                                     <name>minValue</name>
+                                    <number>0</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>lineStep</name>
+                                    <number>5</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>value</name>
                                     <number>5</number>
                                 </property>
                                 <property>

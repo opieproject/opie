@@ -95,7 +95,7 @@ private:
 	QTimer *cardSendTimer;
 	QCopChannel *channel;
 	OpieScreenSaver *m_screensaver;
-	QTimer * m_timer;
+	QTimer * m_apm_timer;
 	int m_powerVeryLow;
 	int m_powerCritical;
 	int m_currentPowerLevel;
