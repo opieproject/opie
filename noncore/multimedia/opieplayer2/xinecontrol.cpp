@@ -77,14 +77,11 @@ void XineControl::play( const QString& fileName ) {
 
     libXine->play( fileName );
     mediaPlayerState->setPlaying( true );
-    // default to audio view until we know how to handle video
-    //   MediaDetect mdetect;
     char whichGui = mdetect.videoOrAudio( fileName );
     if (whichGui == 'f') {
         qDebug("Nicht erkannter Dateityp");
         return;
     }
-
     if (whichGui == 'a') {
         libXine->setShowVideo( false );
         hasAudioChannel=TRUE;
@@ -92,7 +89,6 @@ void XineControl::play( const QString& fileName ) {
         libXine->setShowVideo( true );
         hasVideoChannel=TRUE;
     }
-
     // determine if slider is shown
     mediaPlayerState->setIsStreaming( !libXine->isSeekable() );
     // which gui (video / audio)
@@ -122,8 +118,6 @@ void XineControl::setGamma( int value ) {
 void XineControl::stop( bool isSet ) {
     if ( !isSet) {
         libXine->stop( );
-        mediaPlayerState->setList();
-        //        mediaPlayerState->setPlaying( false );
 
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)
         if ( disabledSuspendScreenSaver ) {
@@ -133,8 +127,6 @@ void XineControl::stop( bool isSet ) {
         }
 #endif
 
-    } else {
-        // play again
     }
 }
 
