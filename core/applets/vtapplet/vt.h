@@ -44,11 +44,9 @@ public:
 public slots:
     virtual void changeVT( int index );
     virtual void updateMenu();
-
 private:
-    ulong ref;
+    mutable QPopupMenu* m_subMenu;
 };
 
-static QPopupMenu* submenu;
 
 #endif

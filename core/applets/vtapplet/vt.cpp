@@ -30,7 +30,7 @@
 #include "vt.h"
 
 VTApplet::VTApplet ( )
-	: QObject ( 0, "VTApplet" ), ref ( 0 )
+	: QObject ( 0, "VTApplet" )
 {
 }
 
@@ -84,19 +84,19 @@ QPopupMenu *VTApplet::popup ( QWidget* parent ) const
     if ( fd == -1 ) return 0;
     if ( ioctl( fd, VT_GETSTATE, &vtstat ) == -1 ) return 0;
 
-    submenu = new QPopupMenu( parent );
-    submenu->setCheckable( true );
+    m_subMenu = new QPopupMenu( parent );
+    m_subMenu->setCheckable( true );
     for ( int i = 1; i < 10; ++i )
     {
-        int id = submenu->insertItem( QString::number( i ), 500+i );
-        submenu->setItemChecked( id, id-500 == vtstat.v_active );
+        int id = m_subMenu->insertItem( QString::number( i ), 500+i );
+        m_subMenu->setItemChecked( id, id-500 == vtstat.v_active );
     }
     ::close( fd );
 
-    connect( submenu, SIGNAL( activated(int) ), this, SLOT( changeVT(int) ) );
-    connect( submenu, SIGNAL( aboutToShow() ), this, SLOT( updateMenu() ) );
+    connect( m_subMenu, SIGNAL( activated(int) ), this, SLOT( changeVT(int) ) );
+    connect( m_subMenu, SIGNAL( aboutToShow() ), this, SLOT( updateMenu() ) );
 
-    return submenu;
+    return m_subMenu;
 }
 
 
@@ -128,7 +128,7 @@ void VTApplet::updateMenu()
             qDebug( "VT %d _not_ disallocated == busy", i );
         */
 
-        submenu->setItemEnabled( 500+i, result == -1 );
+        m_subMenu->setItemEnabled( 500+i, result == -1 );
     }
 
     ::close( fd );
