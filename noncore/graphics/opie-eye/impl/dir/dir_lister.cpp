@@ -48,7 +48,10 @@ QString Dir_DirLister::currentPath()const {
 
 
 QStringList Dir_DirLister::folders()const {
-    return m_currentDir.entryList( QDir::Dirs );
+    QStringList dirs = m_currentDir.entryList( QDir::Dirs );
+    dirs.remove(".");
+    
+    return dirs;
 }
 
 QStringList Dir_DirLister::recFiles(const QString&aPath,int currentDepth)const
