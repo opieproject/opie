@@ -13,13 +13,13 @@ That means you must download and configure/make it:
 wget ftp://ftp.trolltech.com/qt/source/qt-x11-2.3.2.tar.gz
 (Alternatively, you can get static binaries from http://www.vanille.de/tools)
 
-The recommended version of Qt/Embedded is 2.3.7
+The recommended version of Qt/Embedded is 2.3.10
 
 You can get it from:
-ftp://ftp.trolltech.com/qt/source/qt-embedded-2.3.7.tar.bz2
+ftp://ftp.trolltech.com/qt/source/qt-embedded-2.3.10-free.tar.bz2
 
 Set QTDIR to point to your qt/embedded source tree, such as:
-export QTDIR=/opt/qt-2.3.7
+export QTDIR=/opt/qt-2.3.10
 
 You need to do set the OPIEDIR environment variable:
 export OPIEDIR=`pwd`
