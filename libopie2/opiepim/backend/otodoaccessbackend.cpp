@@ -42,9 +42,35 @@ OPimTodoAccessBackend::~OPimTodoAccessBackend() {
 
 }
 
-UIDArray OPimTodoAccessBackend::queryByExample( const OPimTodo&, int settings,
-                                                 const QDateTime& d)const {
-    return UIDArray();
+const uint OPimTodoAccessBackend::querySettings() const
+{
+	return 0;
+}
+
+bool OPimTodoAccessBackend::hasQuerySettings (uint querySettings) const
+{
+	return false;
+}
+
+
+UIDArray OPimTodoAccessBackend::queryByExample( const UIDArray& uidlist, const OPimTodo& query, int settings,
+                                                 const QDateTime& endperiod )const 
+{
+	qDebug( "Accessing OPimTodoAccessBackend::queryByExample() which is not implemented!" );
+	return UIDArray();
+    
+//     odebug << "Using Unaccelerated OPimContactAccessBackend implementation of queryByExample!" << oendl;
+
+//     UIDArray m_currentQuery( uid_array.count() );
+//     uint arraycounter = 0;
+
+//     for( uint it = 0; it < uid_array.count(); ++it ){
+// 	    /* Search all fields and compare them with query object. Store them into list
+// 	     * if all fields matches.
+// 	     */
+//     }
+
+
 }
 
 UIDArray OPimTodoAccessBackend::sorted( const UIDArray& events, bool asc,

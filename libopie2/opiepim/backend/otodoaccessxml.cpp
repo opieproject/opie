@@ -326,10 +326,7 @@ QArray<int> OPimTodoAccessXML::allRecords()const {
 
     return ids;
 }
-QArray<int> OPimTodoAccessXML::queryByExample( const OPimTodo&, int, const QDateTime& ) {
-    QArray<int> ids(0);
-    return ids;
-}
+
 OPimTodo OPimTodoAccessXML::find( int uid )const {
     OPimTodo todo;
     todo.setUid( 0 ); // isEmpty()

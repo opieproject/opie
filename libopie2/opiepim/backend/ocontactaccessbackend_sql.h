@@ -75,7 +75,7 @@ class OPimContactAccessBackend_SQL : public OPimContactAccessBackend {
 	OPimContact find( int uid ) const;
 	OPimContact find( int uid, const UIDArray& items, uint cur, Frontend::CacheDirection ) const; 
 
-	UIDArray queryByExample ( const OPimContact &query, int settings, 
+	UIDArray queryByExample ( const UIDArray& uidlist, const OPimContact &query, int settings, 
 				     const QDateTime& d ) const;
 
 	UIDArray matchRegexp(  const QRegExp &r ) const;

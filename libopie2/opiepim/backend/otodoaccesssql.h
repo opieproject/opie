@@ -53,7 +53,7 @@ public:
     bool save();
     QArray<UID> allRecords()const;
 
-    QArray<UID> queryByExample( const OPimTodo& t, int settings, const QDateTime& d = QDateTime() );
+/*     QArray<UID> queryByExample( const UIDArray& uidlist, const OPimTodo& t, int settings, const QDateTime& d = QDateTime() ); */
     OPimTodo find(UID uid)const;
     OPimTodo find(UID uid, const QArray<int>&, uint cur, Frontend::CacheDirection )const;
     void clear();

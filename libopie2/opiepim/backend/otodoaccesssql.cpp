@@ -301,10 +301,12 @@ namespace {
 
     RemoveQuery::RemoveQuery(int uid )
         : OSQLQuery(), m_uid( uid ) {}
+
     RemoveQuery::~RemoveQuery() {}
+
     QString RemoveQuery::query()const {
         QString qu = "DELETE FROM todolist WHERE uid = " + QString::number(m_uid) + " ;";
-    qu += "DELETE FROM custom_data WHERE uid = " + QString::number(m_uid);
+	qu += "DELETE FROM custom_data WHERE uid = " + QString::number(m_uid);
         return qu;
     }
 
@@ -312,18 +314,26 @@ namespace {
     ClearQuery::ClearQuery()
         : OSQLQuery() {}
     ClearQuery::~ClearQuery() {}
-    QString ClearQuery::query()const {
-        QString qu = "drop table todolist";
-        return qu;
+    QString ClearQuery::query()const 
+    {
+	    QString qu = "drop table todolist";
+	    return qu;
     }
+
     FindQuery::FindQuery(int uid)
-        : OSQLQuery(), m_uid(uid ) {
+        : OSQLQuery(), m_uid(uid ) 
+    {
     }
+    
     FindQuery::FindQuery(const QArray<int>& ints)
-        : OSQLQuery(), m_uids(ints){
+	    : OSQLQuery(), m_uids(ints)
+    {
     }
-    FindQuery::~FindQuery() {
+
+    FindQuery::~FindQuery() 
+    {
     }
+
     QString FindQuery::query()const{
         if (m_uids.count() == 0 )
             return single();
@@ -448,10 +458,10 @@ QArray<int> OPimTodoAccessBackendSQL::allRecords()const {
 
     return m_uids;
 }
-QArray<int> OPimTodoAccessBackendSQL::queryByExample( const OPimTodo& , int, const QDateTime& ){
-    QArray<int> ints(0);
-    return ints;
-}
+// QArray<int> OPimTodoAccessBackendSQL::queryByExample( const UIDArray& uidlist, const OPimTodo& , int, const QDateTime& ){
+//     QArray<int> ints(0);
+//     return ints;
+// }
 OPimTodo OPimTodoAccessBackendSQL::find(int uid ) const{
     FindQuery query( uid );
     return parseResultAndCache( uid, m_driver->query(&query) );
@@ -619,7 +629,7 @@ QArray<int> OPimTodoAccessBackendSQL::sorted( bool asc, int sortOrder,
 
 
 bool OPimTodoAccessBackendSQL::date( QDate& da, const QString& str ) const{
-    if ( str == "0-0-0" )
+    if ( str == "0000-00-00" )
         return false;
     else{
         int day, year, month;

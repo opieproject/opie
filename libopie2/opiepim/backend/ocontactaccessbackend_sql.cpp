@@ -279,7 +279,9 @@ namespace {
 
     RemoveQuery::RemoveQuery(int uid )
         : OSQLQuery(), m_uid( uid ) {}
+
     RemoveQuery::~RemoveQuery() {}
+
     QString RemoveQuery::query()const {
         QString qu = "DELETE from addressbook where uid = "
             + QString::number(m_uid) + ";";
@@ -287,8 +289,6 @@ namespace {
             + QString::number(m_uid) + ";";
         return qu;
     }
-
-
 
 
     FindQuery::FindQuery(int uid)
@@ -300,11 +300,13 @@ namespace {
     FindQuery::~FindQuery() {
     }
     QString FindQuery::query()const{
-	    if ( m_uids.count() == 0 )
-		    return single();
-	    else
-		    return multi();
+           if ( m_uids.count() == 0 )
+                   return single();
+           else
+                   return multi();
     }
+
+
 
     QString FindQuery::multi()const {
 	    QString qu = "select * from addressbook where";
@@ -528,10 +530,23 @@ OPimContact OPimContactAccessBackend_SQL::find( int uid, const UIDArray& queryUi
 }
 
 
-UIDArray OPimContactAccessBackend_SQL::queryByExample ( const OPimContact &query, int settings, 
+UIDArray OPimContactAccessBackend_SQL::queryByExample ( const UIDArray& uidlist, const OPimContact &query, int settings, 
 							   const QDateTime& qd ) const
 {
     QString qu = "SELECT uid FROM addressbook WHERE";
+
+    // Just add uid's selection if we really try to search in a subset of all uids! Otherwise this would
+    // just take time and memory!
+    if ( uidlist.count() != m_uids.count() ) {
+	    qu += " (";
+
+	    for ( uint i = 0; i < uidlist.count(); i++ ) {
+		    qu += " uid = " + QString::number( uidlist[i] ) + " OR";
+	    }
+	    qu.remove( qu.length()-2, 2 ); // Hmmmm..
+	    qu += " ) AND ";
+    }
+
     QString searchQuery ="";
 
     QDate startDate;

@@ -75,14 +75,14 @@ public:
      *  (i.e.: query_WildCards & query_IgnoreCase)
      *  See implementation in the specific backends for contacts, todo and dates.
      */
-    virtual const uint querySettings() const { return 0; } /* FIXME: Make Abstrakt !! = 0; */ 
+    virtual const uint querySettings() const = 0;
 
     /**
      * Check whether settings are correct for queryByExample()
      * See implementation in the specific backends for OPimContactAccess, OPimTodoAccess and ODateBookAccess.
      * @return <i>true</i> if the given settings are correct and possible.
      */
-    virtual bool hasQuerySettings (uint querySettings) const { return false; } /* FIXME: Make Abstrakt !! = 0; */
+    virtual bool hasQuerySettings (uint querySettings) const = 0;
     //@}
 
 
@@ -90,7 +90,7 @@ public:
     virtual UIDArray allRecords()const = 0;
     virtual UIDArray matchRegexp(const QRegExp &r) const;
     virtual UIDArray queryByExample( const UIDArray&, const T& t, 
-				     int settings, const QDateTime& d = QDateTime() )const  { return UIDArray(); } /* FIXME: Make Abstrakt !! = 0; */
+				     int settings, const QDateTime& d = QDateTime() )const = 0;
     virtual UIDArray queryByExample( const T& t, int settings, const QDateTime& d = QDateTime() )const;
     virtual UIDArray queryByExample( const OPimRecord* rec, int settings, const QDateTime& d = QDateTime() )const;
     virtual UIDArray sorted( const UIDArray&, bool asc, int sortOrder, int sortFilter,  const QArray<int>& cats )const = 0;

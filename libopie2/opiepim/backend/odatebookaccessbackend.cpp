@@ -100,14 +100,17 @@ OPimBackendOccurrence::List ODateBookAccessBackend::occurrences( const QDate& fr
 
     return tmpList;
 }
-OPimBackendOccurrence::List ODateBookAccessBackend::occurrences( const QDateTime& dt )const {
+
+OPimBackendOccurrence::List ODateBookAccessBackend::occurrences( const QDateTime& dt )const 
+{
     OPimBackendOccurrence::List day = occurrences( dt.date(), dt.date() );
 
     return filterOccurrences( day, dt );
 }
 
 OPimBackendOccurrence::List ODateBookAccessBackend::effectiveNonRepeatingEvents( const QDate& from,
-                                                                                 const QDate& to )const {
+                                                                                 const QDate& to )const 
+{
     OPimBackendOccurrence::List tmpList;
     OPimEvent::ValueList list = directNonRepeats();
 
@@ -116,14 +119,28 @@ OPimBackendOccurrence::List ODateBookAccessBackend::effectiveNonRepeatingEvents(
     return tmpList;
 }
 
-OPimBackendOccurrence::List ODateBookAccessBackend::effectiveNonRepeatingEvents( const QDateTime& dt )const {
+OPimBackendOccurrence::List ODateBookAccessBackend::effectiveNonRepeatingEvents( const QDateTime& dt )const 
+{
     OPimBackendOccurrence::List day = effectiveNonRepeatingEvents( dt.date(), dt.date() );
     return filterOccurrences( day,dt );
 }
 
+const uint ODateBookAccessBackend::querySettings() const
+{
+	return 0;
+}
 
-UIDArray ODateBookAccessBackend::queryByExample( const OPimEvent&, int settings,
-                                                 const QDateTime& d )const {
+bool ODateBookAccessBackend::hasQuerySettings (uint querySettings) const
+{
+	return false;
+}
+
+
+
+UIDArray ODateBookAccessBackend::queryByExample( const UIDArray& uidlist, const OPimEvent&, int settings,
+                                                 const QDateTime& d )const 
+{
+	qDebug( "Accessing ODateBookAccessBackend::queryByExample() which is not implemented!" );
     return UIDArray();
 }
 

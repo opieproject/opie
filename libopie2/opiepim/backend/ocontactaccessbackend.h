@@ -80,13 +80,13 @@ class OPimContactAccessBackend: public OPimAccessBackend<OPimContact> {
      *  @return All settings provided by the current backend
      * (i.e.: query_WildCards & query_IgnoreCase)
      */
-    virtual const uint querySettings() const;
+    const uint querySettings() const;
 
     /**
      * Check whether settings are correct.
      * @return <i>true</i> if the given settings are correct and possible.
      */
-    virtual bool hasQuerySettings (uint querySettings) const;
+    bool hasQuerySettings (uint querySettings) const;
 
     /** 
      * Advanced search mechanism. 

@@ -94,7 +94,20 @@ public:
      * and occurrences
      */
 //@{
-    UIDArray queryByExample( const OPimEvent&, int settings, const QDateTime& d = QDateTime() )const;
+    /**
+     *  Return all possible settings.
+     *  @return All settings provided by the current backend
+     * (i.e.: query_WildCards & query_IgnoreCase)
+     */
+    const uint querySettings() const;
+
+    /**
+     * Check whether settings are correct.
+     * @return <i>true</i> if the given settings are correct and possible.
+     */
+    bool hasQuerySettings (uint querySettings) const;
+
+    UIDArray queryByExample( const UIDArray& uidlist, const OPimEvent&, int settings, const QDateTime& d = QDateTime() )const;
     UIDArray sorted( const UIDArray&, bool asc, int, int, const QArray<int>& )const;
     OPimBackendOccurrence::List occurrences( const QDate&, const QDate& end )const;
     OPimBackendOccurrence::List occurrences( const QDateTime& )const;
