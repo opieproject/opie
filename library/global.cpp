@@ -773,13 +773,18 @@ void Global::findDocuments(DocLnkSet* folder, const QString &mimefilter)
           continue;
         Config conf((*it)->path() + "/.opiestorage.cf", Config::File );
         conf.setGroup("subdirs");
-        QStringList subDirs = conf.readListEntry("subdirs",':');
-        if (subDirs.isEmpty()) {
-            subDirs.append("Documents");
-        }
-        for (unsigned c = 0; c < subDirs.count();++c) {
-            DocLnkSet ide( path+"/"+subDirs[c], mimefilter );
-            folder->appendFrom(ide);        
+        if (conf.readBoolEntry("wholemedia",true)) {
+            DocLnkSet ide( path,mimefilter);
+            folder->appendFrom(ide);
+        } else {
+            QStringList subDirs = conf.readListEntry("subdirs",':');
+            if (subDirs.isEmpty()) {
+                subDirs.append("Documents");
+            }
+            for (unsigned c = 0; c < subDirs.count();++c) {
+                DocLnkSet ide( path+"/"+subDirs[c], mimefilter );
+                folder->appendFrom(ide);
+            }
         }
       } else if ( (*it)->disk() == "/dev/mtdblock6" || (*it)->disk() == "tmpfs" ) {
 	QString path = (*it)->path() + "/Documents";
