@@ -27,6 +27,8 @@
 PSEWidget::PSEWidget() : QWidget()
 {
     this->setCaption( tr( "Periodic System" ) );
+	
+	lastElement=1;
 
     QVBoxLayout *vlay = new QVBoxLayout( this );
     
@@ -65,19 +67,23 @@ QColor PSEWidget::PSEColor( QString block )
     return  c;
 };
 
-void PSEWidget::inverseColor( QString number )
+void PSEWidget::inverseColor( QString number)
 {
     Config configobj( QPEApplication::qpeDir() +"share/oxygen/oxygendata", Config::File );
     configobj.setGroup(  number );
 	QString block = configobj.readEntry( "Block" );
-    QColor c;
-    if ( block == "s" ) c.setRgb( 213 , 233 , 231 );
-    else if ( block == "d" ) c.setRgb( 200,230,160 );
-    else if ( block == "p" ) c.setRgb( 238,146,138 );
-    else if ( block == "f" ) c.setRgb( 190 , 190 , 190 );
-	c.dark();
+    QColor c, d;
+	c = PSEColor( block );
+	d = c.dark();
+	
+	PSEframe.at( number.toUInt() )->setPalette(  QPalette( d ) );
 
-	PSEframe.at( number.toUInt() )->setPalette(  QPalette( c ) );
+	configobj.setGroup( QString::number( lastElement+1 ) );
+	block = configobj.readEntry( "Block" );
+	c = PSEColor( block );
+	PSEframe.at( lastElement )->setPalette(  QPalette( c ) );
+
+	lastElement=number.toInt();
 }
 
 void PSEWidget::slotShowElement(QString number)

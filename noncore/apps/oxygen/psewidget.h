@@ -36,6 +36,8 @@ class PSEWidget : public QWidget
 
         QList<OxyFrame> PSEframe;
 
+		int lastElement;
+
     private:
         QGridLayout *maingrid;
         
