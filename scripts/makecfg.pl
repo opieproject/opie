@@ -11,12 +11,11 @@ while(<FILE>){$packages.=$_;}
 close(FILE);
 
 my ($dirname,$dir,$file,@files,$filename,$tagname,$name,$caps,$pre,$post,$sources,@dupecheck,$basedir);
+my @founddirs;
 $file = shift || die;
 $basedir = shift;
-push(@files, $file);
 
-foreach(@files){
-my $cfg=$_;
+my $cfg=$file;
 ($dirname=$cfg)=~s,(.*)/(.*),$1,;
 ($filename=$cfg)=~s,(.*/)(.*),$2,;
 ($tagname=$dirname)=~s,.*/,,;
@@ -38,6 +37,11 @@ if(-e "$dirname/config.in.in"){
 		$pre = $contents;
 	}
 } else {
+	my ($firstletter, $rest);
+	$firstletter = substr($tagname, 0, 1);
+	$rest = substr($tagname, 1);
+	$firstletter =~ tr/a-z/A-Z/;
+	$tagname = $firstletter . $rest;
 	$pre = "menu \"$tagname\"\n";
 	$post = "endmenu\n";
 }
@@ -47,10 +51,25 @@ select(CFG);
 print $pre;
 @dupecheck=();
 File::Find::find({wanted => \&wanted}, $dirname);
+@::founddirs=sort(@::founddirs);
+foreach (@::founddirs) {
+	if(grep(/^$_\/config.in$/, @dupecheck)){
+		next;
+	}
+	my $nslashes = $_ =~ tr!/!!;
+	my $dirnslashes = $dirname =~ tr!/!!;
+	$dirnslashes++;
+	if($dirnslashes != $nslashes){next;}
+	my $reldir;
+	if (defined($basedir)) {
+		($reldir=$_)=~s,^$basedir/,,;
+	}
+	print "  source " . $reldir . "/config.in\n";
+	push(@dupecheck, $_ . "/config.in");
+}
 print $post;
 select(STDOUT);
 close(CFG);
-}
 exit;
 
 use vars qw/*name *dir *prune/;
@@ -60,20 +79,6 @@ use vars qw/*name *dir *prune/;
 	
 sub wanted {
 	if( /config.in$/s ) {
-		if(grep(/^$File::Find::dir\/config.in$/, @dupecheck)){
-			return;
-		}
-		my $nslashes = $File::Find::dir =~ tr!/!!;
-		my $dirnslashes = $dirname =~ tr!/!!;
-		$dirnslashes++;
-#		print STDERR "dirnslashes is $dirnslashes\n";
-#		print STDERR "nslashes is $nslashes\n";
-		if($dirnslashes != $nslashes){return;}
-		my $reldir;
-		if (defined($basedir)) {
-			($reldir=$File::Find::dir)=~s,^$basedir/,,;
-		}
-		print "  source " . $reldir . "/config.in\n";
-		push(@dupecheck, $File::Find::dir . "/config.in");
+		push(@::founddirs,$File::Find::dir);
 	}
 }
