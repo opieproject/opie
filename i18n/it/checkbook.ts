@@ -3,284 +3,284 @@
     <name>QCheckDetailsBase</name>
     <message>
         <source>Transaction Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Dettagli Traduzione</translation>
     </message>
 </context>
 <context>
     <name>QCheckEntry</name>
     <message>
         <source>Automobile</source>
-        <translation type="unfinished"></translation>
+        <translation>Automobile</translation>
     </message>
     <message>
         <source>Bills</source>
-        <translation type="unfinished"></translation>
+        <translation>Conti</translation>
     </message>
     <message>
         <source>CDs</source>
-        <translation type="unfinished"></translation>
+        <translation>CD</translation>
     </message>
     <message>
         <source>Clothing</source>
-        <translation type="unfinished"></translation>
+        <translation>Vestiti</translation>
     </message>
     <message>
         <source>Computer</source>
-        <translation type="unfinished"></translation>
+        <translation>Computer</translation>
     </message>
     <message>
         <source>DVDs</source>
-        <translation type="unfinished"></translation>
+        <translation>DVD</translation>
     </message>
     <message>
         <source>Eletronics</source>
-        <translation type="unfinished"></translation>
+        <translation>Elettronica</translation>
     </message>
     <message>
         <source>Entertainment</source>
-        <translation type="unfinished"></translation>
+        <translation>Intrattenimento</translation>
     </message>
     <message>
         <source>Food</source>
-        <translation type="unfinished"></translation>
+        <translation>Cibo</translation>
     </message>
     <message>
         <source>Gasoline</source>
-        <translation type="unfinished"></translation>
+        <translation>Benzina</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation type="unfinished"></translation>
+        <translation>Varie</translation>
     </message>
     <message>
         <source>Movies</source>
-        <translation type="unfinished"></translation>
+        <translation>Film</translation>
     </message>
     <message>
         <source>Rent</source>
-        <translation type="unfinished"></translation>
+        <translation>Affitto</translation>
     </message>
     <message>
         <source>Travel</source>
-        <translation type="unfinished"></translation>
+        <translation>Viaggio</translation>
     </message>
     <message>
         <source>Debit Charge</source>
-        <translation type="unfinished"></translation>
+        <translation>Debito</translation>
     </message>
     <message>
         <source>Written Check</source>
-        <translation type="unfinished"></translation>
+        <translation>Assegno</translation>
     </message>
     <message>
         <source>Transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Trasferimento</translation>
     </message>
     <message>
         <source>Credit Card</source>
-        <translation type="unfinished"></translation>
+        <translation>Carta di Credito</translation>
     </message>
     <message>
         <source>Work</source>
-        <translation type="unfinished"></translation>
+        <translation>Lavoro</translation>
     </message>
     <message>
         <source>Family Member</source>
-        <translation type="unfinished"></translation>
+        <translation>Familiare</translation>
     </message>
     <message>
         <source>Misc. Credit</source>
-        <translation type="unfinished"></translation>
+        <translation>Credito</translation>
     </message>
     <message>
         <source>Automatic Payment</source>
-        <translation type="unfinished"></translation>
+        <translation>Pagamento Automatico</translation>
     </message>
     <message>
         <source>Cash</source>
-        <translation type="unfinished"></translation>
+        <translation>Contante</translation>
     </message>
 </context>
 <context>
     <name>QCheckEntryBase</name>
     <message>
         <source>Account Transaction</source>
-        <translation type="unfinished"></translation>
+        <translation>Transazioni Conto</translation>
     </message>
     <message>
         <source>$</source>
-        <translation type="unfinished"></translation>
+        <translation>E</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation>Categoria:</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Descrizione:</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo:</translation>
     </message>
     <message>
         <source>Amount:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ammontare:</translation>
     </message>
     <message>
         <source>Automobile</source>
-        <translation type="unfinished"></translation>
+        <translation>Automobile</translation>
     </message>
     <message>
         <source>Bills</source>
-        <translation type="unfinished"></translation>
+        <translation>Conti</translation>
     </message>
     <message>
         <source>CDs</source>
-        <translation type="unfinished"></translation>
+        <translation>CD</translation>
     </message>
     <message>
         <source>Clothing</source>
-        <translation type="unfinished"></translation>
+        <translation>Vestiti</translation>
     </message>
     <message>
         <source>Computer</source>
-        <translation type="unfinished"></translation>
+        <translation>Computer</translation>
     </message>
     <message>
         <source>DVDs</source>
-        <translation type="unfinished"></translation>
+        <translation>DVD</translation>
     </message>
     <message>
         <source>Eletronics</source>
-        <translation type="unfinished"></translation>
+        <translation>Elettronica</translation>
     </message>
     <message>
         <source>Entertainment</source>
-        <translation type="unfinished"></translation>
+        <translation>Intrattenimento</translation>
     </message>
     <message>
         <source>Food</source>
-        <translation type="unfinished"></translation>
+        <translation>Cibo</translation>
     </message>
     <message>
         <source>Gasoline</source>
-        <translation type="unfinished"></translation>
+        <translation>Benzina</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation type="unfinished"></translation>
+        <translation>Varie</translation>
     </message>
     <message>
         <source>Movies</source>
-        <translation type="unfinished"></translation>
+        <translation>Film</translation>
     </message>
     <message>
         <source>Rent</source>
-        <translation type="unfinished"></translation>
+        <translation>Affitto</translation>
     </message>
     <message>
         <source>Travel</source>
-        <translation type="unfinished"></translation>
+        <translation>Viaggio</translation>
     </message>
     <message>
         <source>Check Number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Numero:</translation>
     </message>
     <message>
         <source>Extra Fee:</source>
-        <translation type="unfinished"></translation>
+        <translation>Spesa Extra:</translation>
     </message>
     <message>
         <source>Additional Notes:</source>
-        <translation type="unfinished"></translation>
+        <translation>Note Aggiuntive:</translation>
     </message>
     <message>
         <source>Date:</source>
-        <translation type="unfinished"></translation>
+        <translation>Data:</translation>
     </message>
     <message>
         <source>Debit Charge</source>
-        <translation type="unfinished"></translation>
+        <translation>Debito</translation>
     </message>
     <message>
         <source>Written Check</source>
-        <translation type="unfinished"></translation>
+        <translation>Assegno</translation>
     </message>
     <message>
         <source>Transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Trasferimento</translation>
     </message>
     <message>
         <source>Credit Card</source>
-        <translation type="unfinished"></translation>
+        <translation>Carta di Credito</translation>
     </message>
     <message>
         <source>Deposit</source>
-        <translation type="unfinished"></translation>
+        <translation>Deposito</translation>
     </message>
     <message>
         <source>Payment</source>
-        <translation type="unfinished"></translation>
+        <translation>Pagamento</translation>
     </message>
 </context>
 <context>
     <name>QCheckGraphBase</name>
     <message>
         <source>Account Graph</source>
-        <translation type="unfinished"></translation>
+        <translation>Grafico Conto</translation>
     </message>
 </context>
 <context>
     <name>QCheckMMBase</name>
     <message>
         <source>Main Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu Principale</translation>
     </message>
     <message>
         <source>Select from the check books below or click the &quot;New&quot; icon in the toolbar.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona i libri qui sotto o premi l&apos;icona &quot;Nuovo&quot; nella barra.</translation>
     </message>
 </context>
 <context>
     <name>QCheckNameBase</name>
     <message>
         <source>Check Book Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Controlla Nome Libro</translation>
     </message>
     <message>
         <source>Name...</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome...</translation>
     </message>
     <message>
         <source>Please name your check book (limit: 15 characters):</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserisci il nome del check book (limite: 15 caratteri):</translation>
     </message>
     <message>
         <source>&amp;Done</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Fatto</translation>
     </message>
 </context>
 <context>
     <name>QCheckViewBase</name>
     <message>
         <source>Account Transactions</source>
-        <translation type="unfinished"></translation>
+        <translation>Transazioni Conto</translation>
     </message>
     <message>
         <source>$0.00</source>
-        <translation type="unfinished"></translation>
+        <translation>E0.00</translation>
     </message>
     <message>
         <source>Balance:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bilancio:</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Out of Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Spazio Esaurito</translation>
     </message>
     <message>
         <source>There was a problem creating
@@ -289,7 +289,11 @@ for this program.
 
 Please free up some space and
 try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile creare il file di
+configurazione per questa
+applicazione.
+Liberare dello spazio e
+riprovare.</translation>
     </message>
 </context>
 </TS>

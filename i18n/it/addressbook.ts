@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Vuoto</translation>
+        <translation>Vuota</translation>
     </message>
 </context>
 <context>
@@ -220,11 +220,11 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>All</source>
-        <translation>Tutti</translation>
+        <translation>Tutte</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Vuoto</translation>
+        <translation>Vuota</translation>
     </message>
 </context>
 <context>
@@ -823,11 +823,11 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>Kuait</source>
-        <translation type="obsolete">Kuwait</translation>
+        <translation>Kuwait</translation>
     </message>
     <message>
         <source>Kyrgyztan</source>
-        <translation type="obsolete">Kyrgyztan</translation>
+        <translation>Kyrgyztan</translation>
     </message>
     <message>
         <source>Laos</source>
@@ -1328,18 +1328,6 @@ Uscire comunque?</translation>
     <message>
         <source>Work Mobile</source>
         <translation>Cellulare Ufficio</translation>
-    </message>
-    <message>
-        <source>Business Country</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Kuwait</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Kyrgystan</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

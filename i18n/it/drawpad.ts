@@ -43,7 +43,7 @@
     </message>
     <message>
         <source>Tools</source>
-        <translation>Opzioni</translation>
+        <translation>Opz.</translation>
     </message>
     <message>
         <source>New Page</source>
@@ -192,7 +192,7 @@ le pagine?</translation>
     </message>
     <message>
         <source>Export As</source>
-        <translation>Esporta Come</translation>
+        <translation>Esporta come</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -211,7 +211,8 @@ le pagine?</translation>
     </message>
     <message>
         <source>Automatic preview</source>
-        <translation>Anteprima automatica</translation>
+        <translation>Anteprima
+automatica</translation>
     </message>
     <message>
         <source>Preview</source>
