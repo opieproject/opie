@@ -52,63 +52,80 @@ int main( int argc, char **argv )
 
     a.processEvents(); // show the window before doing the safety checks
     int result = -1;
-
-    // root check
-    if ( getuid() )
-    {
-        qWarning( QObject::tr( "Wellenreiter: trying to run as non-root!" ) );
-        result = QMessageBox::warning( w, " - Wellenreiter II -  (non-root)", QObject::tr( "You have started Wellenreiter II\n"
-          "as non-root. You will have\nonly limited functionality.\nProceed anyway?" ),
-          QMessageBox::Yes, QMessageBox::No );
-        if ( result == QMessageBox::No ) return -1;
-    }
-
-    // dhcp check - NOT HERE! This really belongs as a static member to OProcess
-    // and I want to call it like that: if ( OProcess::isRunning( QString& ) ) ...
-
     static int killed = false;
 
-    QString line;
-    QDir d = QDir( "/proc" );
-    QStringList dirs = d.entryList( QDir::Dirs );
-    QStringList::Iterator it;
-    for ( it = dirs.begin(); it != dirs.end(); ++it )
+    bool check = true;
+    for ( int i = 1; i < argc; ++i )
     {
-        //qDebug( "next entry: %s", (const char*) *it );
-        QFile file( "/proc/"+*it+"/cmdline" );
-        file.open( IO_ReadOnly );
-        if ( !file.isOpen() ) continue;
-        QTextStream t( &file );
-        line = t.readLine();
-        //qDebug( "cmdline = %s", (const char*) line );
-        if ( line.contains( "dhcp" ) ) break;
-    }
-    if ( line.contains( "dhcp" ) )
-    {
-        qWarning( "Wellenreiter: found dhcp process #%d", (*it).toInt() );
-        result = QMessageBox::warning( w, " - Wellenreiter II -  (dhcp)", QObject::tr( "You have a dhcp client running.\n"
-          "This can severly limit scanning!\nShould I kill it for you?" ),
-          QMessageBox::Yes, QMessageBox::No );
-        if ( result == QMessageBox::Yes )
+        if ( !strcmp( "-nocheck", argv[i] ) )
         {
-            if ( -1 == ::kill( (*it).toInt(), SIGTERM ) )
-                qWarning( "Wellenreiter: can't kill process #%d (%s)", result, strerror( errno ) );
-            else
-                killed = true;
+            qDebug( "-nocheck found" );
+            check = false;
+            break;
+        }
+    }
+
+    if ( check )
+    {
+        // root check
+        if ( getuid() )
+        {
+            qWarning( QObject::tr( "Wellenreiter: trying to run as non-root!" ) );
+            result = QMessageBox::warning( w, " - Wellenreiter II -  (non-root)", QObject::tr( "You have started Wellenreiter II\n"
+            "as non-root. You will have\nonly limited functionality.\nProceed anyway?" ),
+            QMessageBox::Yes, QMessageBox::No );
+            if ( result == QMessageBox::No ) return -1;
+        }
+
+        // dhcp check - NOT HERE! This really belongs as a static member to OProcess
+        // and I want to call it like that: if ( OProcess::isRunning( QString& ) ) ...
+
+        QString line;
+        QDir d = QDir( "/proc" );
+        QStringList dirs = d.entryList( QDir::Dirs );
+        QStringList::Iterator it;
+        for ( it = dirs.begin(); it != dirs.end(); ++it )
+        {
+            //qDebug( "next entry: %s", (const char*) *it );
+            QFile file( "/proc/"+*it+"/cmdline" );
+            file.open( IO_ReadOnly );
+            if ( !file.isOpen() ) continue;
+            QTextStream t( &file );
+            line = t.readLine();
+            //qDebug( "cmdline = %s", (const char*) line );
+            if ( line.contains( "dhcp" ) ) break;
+        }
+        if ( line.contains( "dhcp" ) )
+        {
+            qWarning( "Wellenreiter: found dhcp process #%d", (*it).toInt() );
+            result = QMessageBox::warning( w, " - Wellenreiter II -  (dhcp)", QObject::tr( "You have a dhcp client running.\n"
+            "This can severly limit scanning!\nShould I kill it for you?" ),
+            QMessageBox::Yes, QMessageBox::No );
+            if ( result == QMessageBox::Yes )
+            {
+                if ( -1 == ::kill( (*it).toInt(), SIGTERM ) )
+                    qWarning( "Wellenreiter: can't kill process #%d (%s)", result, strerror( errno ) );
+                else
+                    killed = true;
+            }
         }
     }
 
     a.exec();
 
-    if ( killed )
+    if ( check )
     {
-        result = QMessageBox::warning( w, " - Wellenreiter II -  (dhcp)", QObject::tr( "Restart your dhcp client?" ), QMessageBox::Yes, QMessageBox::No );
-        if ( result == QMessageBox::Yes )
-        {
-            system( QString().sprintf( "dhclient &; udhcpcd &; dhcpcd &" ) );
-        }
-    }
 
-    delete w;
+        if ( killed )
+        {
+            result = QMessageBox::warning( w, " - Wellenreiter II -  (dhcp)", QObject::tr( "Restart your dhcp client?" ), QMessageBox::Yes, QMessageBox::No );
+            if ( result == QMessageBox::Yes )
+            {
+                system( QString().sprintf( "dhclient &; udhcpcd &; dhcpcd &" ) );
+            }
+        }
+
+        delete w;
+    }
     return 0;
 }

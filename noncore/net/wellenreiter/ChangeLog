@@ -1,5 +1,6 @@
 2004-??-??	Michael Lauer		<mickey@Vanille.de>
 
+	* Added command line option "-nocheck" to skip non-root and dhcp tests
 	* Improved the speed reading the manufacturer list
 	* GPS coordinates are now presented in the DMS (as opposed to decimal) format
 
