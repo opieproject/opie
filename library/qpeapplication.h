@@ -188,36 +188,40 @@ private:
 
 inline void QPEApplication::showDialog( QDialog* d, bool nomax )
 {
-    QSize sh = d->sizeHint();
-    int w = QMAX(sh.width(),d->width());
-    int h = QMAX(sh.height(),d->height());
-    if ( !nomax
-            && (  qApp->desktop()->width() <= 320 ) )
-    {
-        d->showMaximized();
-    } else {
-        d->resize(w,h);
-        d->show();
-    }
+    showWidget( d, nomax );
 }
 
 inline int QPEApplication::execDialog( QDialog* d, bool nomax )
 {
-    showDialog(d,nomax);
+    showDialog( d, nomax );
     return d->exec();
 }
 
+#ifdef Q_WS_QWS
+extern Q_EXPORT QRect qt_maxWindowRect;
+#endif
+
 inline void QPEApplication::showWidget( QWidget* wg, bool nomax )
 {
-    QSize sh = wg->sizeHint();
-    int w = QMAX(sh.width(),wg->width());
-    int h = QMAX(sh.height(),wg->height());
     if ( !nomax
             && ( qApp->desktop()->width() <= 320 ) )
     {
         wg->showMaximized();
     } else {
-        wg->resize(w,h);
+        #ifdef Q_WS_QWS
+            QSize desk = QSize( qApp->desktop()->width(), qApp->desktop()->height() );
+        #else
+            QSize desk = QSize( qt_maxWindowRect.width(), qt_maxWindowRect.height() );
+        #endif
+
+        QSize sh = wg->sizeHint();
+        int w = QMAX( sh.width(), wg->width() );
+        int h = QMAX( sh.height(), wg->height() );
+        //              desktop                              widget-frame                      taskbar
+        w = QMIN( w, ( desk.width() - ( wg->frameGeometry().width() - wg->geometry().width() ) - 25 ) );
+        h = QMIN( h, ( desk.height() - ( wg->frameGeometry().height() - wg->geometry().height() ) - 25 ) );
+
+        wg->resize( w, h );
         wg->show();
     }
 }
@@ -226,14 +230,14 @@ enum Transformation { Rot0, Rot90, Rot180, Rot270 }; /* from qgfxtransformed_qws
 
 inline int TransToDeg ( Transformation t )
 {
-	int d = static_cast<int>( t );
-	return d * 90;
+    int d = static_cast<int>( t );
+    return d * 90;
 }
 
 inline Transformation DegToTrans ( int d )
 {
-	Transformation t = static_cast<Transformation>( d / 90 );
-	return t;
+    Transformation t = static_cast<Transformation>( d / 90 );
+    return t;
 }
 
 /*
