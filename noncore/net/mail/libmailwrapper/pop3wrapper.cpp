@@ -31,17 +31,18 @@ void POP3wrapper::pop3_progress( size_t current, size_t maximum ) {
     qDebug( "POP3: %i of %i", current, maximum );
 }
 
-RecBody POP3wrapper::fetchBody( const RecMailP &mail ) {
+RecBodyP POP3wrapper::fetchBody( const RecMailP &mail ) {
     int err = MAILPOP3_NO_ERROR;
     char *message = 0;
     size_t length = 0;
 
+    RecBodyP body = new RecBody();
+
     login();
     if ( !m_pop3 ) {
-        return RecBody();
+        return body;
     }
 
-    RecBody body;
     mailmessage * mailmsg;
     if (mail->Msgsize()>HARD_MSG_SIZE_LIMIT) {
         qDebug("Message to large: %i",mail->Msgsize());

@@ -111,10 +111,27 @@ const QStringList& RecMail::References()const
 }
 
 RecPart::RecPart()
-    : m_type(""),m_subtype(""),m_identifier(""),m_encoding(""),m_description(""),m_lines(0),m_size(0)
+    : Opie::Core::ORefCount(),
+     m_type(""),m_subtype(""),m_identifier(""),m_encoding(""),m_description(""),m_lines(0),m_size(0)
 {
     m_Parameters.clear();
     m_poslist.clear();
+}
+
+RecPart::RecPart(const RecPart&old)
+    : Opie::Core::ORefCount(),
+    m_type(""),m_subtype(""),m_identifier(""),m_encoding(""),m_description(""),m_lines(0),m_size(0)
+{
+    m_type = old.m_type;
+    m_subtype = old.m_subtype;
+    m_identifier = old.m_identifier;
+    m_encoding = old.m_encoding;
+    m_description = old.m_description;
+    m_lines = old.m_lines;
+    m_size = old.m_size;
+    m_Parameters = old.m_Parameters;
+    m_poslist = old.m_poslist;
+    qDebug("RecPart copy constructor");
 }
 
 RecPart::~RecPart()
@@ -227,9 +244,18 @@ const QValueList<int>& RecPart::Positionlist()const
 }
 
 RecBody::RecBody()
-    : m_BodyText(),m_PartsList(),m_description()
+    : Opie::Core::ORefCount(),m_BodyText(),m_description(new RecPart())
 {
     m_PartsList.clear();
+}
+
+RecBody::RecBody(const RecBody&old)
+    :Opie::Core::ORefCount(),m_BodyText(),m_PartsList(),m_description(new RecPart())
+{
+    m_BodyText = old.m_BodyText;
+    m_PartsList = old.m_PartsList;
+    m_description = old.m_description;
+    qDebug("Recbody copy constructor");
 }
 
 RecBody::~RecBody()
@@ -246,28 +272,28 @@ const QString& RecBody::Bodytext()const
     return m_BodyText;
 }
 
-void RecBody::setParts(const QValueList<RecPart>&parts)
+void RecBody::setParts(const QValueList<RecPartP>&parts)
 {
     m_PartsList.clear();
     m_PartsList = parts;
 }
 
-const QValueList<RecPart>& RecBody::Parts()const
+const QValueList<RecPartP>& RecBody::Parts()const
 {
     return m_PartsList;
 }
 
-void RecBody::addPart(const RecPart& part)
+void RecBody::addPart(const RecPartP& part)
 {
     m_PartsList.append(part);
 }
 
-void RecBody::setDescription(const RecPart&des)
+void RecBody::setDescription(const RecPartP&des)
 {
     m_description = des;
 }
 
-const RecPart& RecBody::Description()const
+const RecPartP& RecBody::Description()const
 {
     return m_description;
 }

@@ -36,9 +36,9 @@ public:
 
     void hide();
     void exec();
-        void setMail( RecMailP mail );
-        void setBody( RecBody body );
-        bool deleted;
+    void setMail(const RecMailP&mail );
+    void setBody(const RecBodyP&body);
+    bool deleted;
 
 protected:
     QString deHtml(const QString &string);
@@ -48,9 +48,9 @@ protected:
 protected slots:
     void slotReply();
     void slotForward();
-        void setText();
-        void slotItemClicked( QListViewItem * item , const QPoint & point, int c );
-        void slotDeleteMail( );
+    void setText();
+    void slotItemClicked( QListViewItem * item , const QPoint & point, int c );
+    void slotDeleteMail( );
     void slotShowHtml( bool );
 
 private:
@@ -59,15 +59,14 @@ private:
     bool _inLoop;
     QString m_mailHtml;
     bool m_gotBody;
-        RecBody m_body;
-        RecMailP m_recMail;
+    RecBodyP m_body;
+    RecMailP m_recMail;
     bool m_showHtml;
 
-        // 0 from  1 subject  2 bodytext 3 date
-        QMap <int,QString>  m_mail;
-        // 0 to 1 cc 2 bcc
-        QMap <int,QStringList> m_mail2;
-
+    // 0 from  1 subject  2 bodytext 3 date
+    QMap <int,QString>  m_mail;
+    // 0 to 1 cc 2 bcc
+    QMap <int,QStringList> m_mail2;
 };
 
 #endif

@@ -280,7 +280,7 @@ ComposeMail::~ComposeMail()
 void ComposeMail::reEditMail(const RecMailP&current)
 {
     RecMailP data = current;
-    message->setText(data->Wrapper()->fetchBody(current).Bodytext());
+    message->setText(data->Wrapper()->fetchBody(current)->Bodytext());
     subjectLine->setText( data->getSubject());
     toLine->setText(data->To().join(","));
     ccLine->setText(data->CC().join(","));

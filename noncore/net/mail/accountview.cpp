@@ -114,10 +114,10 @@ void AccountView::refreshAll()
 {
 }
 
-RecBody AccountView::fetchBody(const RecMailP&aMail)
+RecBodyP AccountView::fetchBody(const RecMailP&aMail)
 {
     QListViewItem*item = selectedItem ();
-    if (!item) return RecBody();
+    if (!item) return new RecBody();
     AccountViewItem *view = static_cast<AccountViewItem *>(item);
     return view->fetchBody(aMail);
 }

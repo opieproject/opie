@@ -21,7 +21,7 @@ public:
     AccountView( QWidget *parent = 0, const char *name = 0, WFlags flags = 0 );
     virtual ~AccountView();
     virtual void populate( QList<Account> list );
-    virtual RecBody fetchBody(const Opie::Core::OSmartPointer<RecMail>&aMail);
+    virtual RecBodyP fetchBody(const Opie::Core::OSmartPointer<RecMail>&aMail);
     virtual void downloadMails(const Opie::Core::OSmartPointer<Folder>&fromFolder,AbstractMail*fromWrapper);
     virtual bool currentisDraft();
 

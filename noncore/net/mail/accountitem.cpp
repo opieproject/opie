@@ -76,7 +76,7 @@ void POP3viewItem::refresh()
     delete folders;
 }
 
-RecBody POP3viewItem::fetchBody( const RecMailP &mail )
+RECBODYP POP3viewItem::fetchBody( const RecMailP &mail )
 {
     qDebug( "POP3 fetchBody" );
     return wrapper->fetchBody( mail );
@@ -161,7 +161,7 @@ void POP3folderItem::refresh(QValueList<RecMailP>&target)
         pop3->getWrapper()->listMessages( folder->getName(),target );
 }
 
-RecBody POP3folderItem::fetchBody(const RecMailP&aMail)
+RECBODYP POP3folderItem::fetchBody(const RecMailP&aMail)
 {
     return pop3->getWrapper()->fetchBody(aMail);
 }
@@ -267,7 +267,7 @@ void NNTPviewItem::refresh()
     delete folders;
 }
 
-RecBody NNTPviewItem::fetchBody( const RecMailP &mail )
+RECBODYP NNTPviewItem::fetchBody( const RecMailP &mail )
 {
     qDebug( "NNTP fetchBody" );
     return wrapper->fetchBody( mail );
@@ -365,7 +365,7 @@ void NNTPfolderItem::refresh(QValueList<RecMailP>&target)
         nntp->getWrapper()->listMessages( folder->getName(),target );
 }
 
-RecBody NNTPfolderItem::fetchBody(const RecMailP&aMail)
+RECBODYP NNTPfolderItem::fetchBody(const RecMailP&aMail)
 {
     return nntp->getWrapper()->fetchBody(aMail);
 }
@@ -562,9 +562,9 @@ void IMAPviewItem::contextMenuSelected(int id)
     }
 }
 
-RecBody IMAPviewItem::fetchBody(const RecMailP&)
+RECBODYP IMAPviewItem::fetchBody(const RecMailP&)
 {
-    return RecBody();
+    return new RecBody();
 }
 
 bool IMAPviewItem::offline()
@@ -622,7 +622,7 @@ void IMAPfolderItem::refresh(QValueList<RecMailP>&target)
     }
 }
 
-RecBody IMAPfolderItem::fetchBody(const RecMailP&aMail)
+RECBODYP IMAPfolderItem::fetchBody(const RecMailP&aMail)
 {
     return imap->getWrapper()->fetchBody(aMail);
 }
@@ -800,7 +800,7 @@ void MHviewItem::refresh(bool force)
     delete folders;
 }
 
-RecBody MHviewItem::fetchBody( const RecMailP &mail )
+RECBODYP MHviewItem::fetchBody( const RecMailP &mail )
 {
     qDebug( "MH fetchBody" );
     return wrapper->fetchBody( mail );
@@ -921,7 +921,7 @@ void MHfolderItem::refresh(QValueList<RecMailP>&target)
         mbox->getWrapper()->listMessages( folder->getName(),target );
 }
 
-RecBody MHfolderItem::fetchBody(const RecMailP&aMail)
+RECBODYP MHfolderItem::fetchBody(const RecMailP&aMail)
 {
     return mbox->getWrapper()->fetchBody(aMail);
 }

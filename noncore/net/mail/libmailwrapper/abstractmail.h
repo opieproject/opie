@@ -24,10 +24,10 @@ public:
     virtual QValueList<Opie::Core::OSmartPointer<Folder> >* listFolders()=0;
     virtual void listMessages(const QString & mailbox,QValueList<RecMailP>&target )=0;
     virtual void statusFolder(folderStat&target_stat,const QString & mailbox="INBOX")=0;
-    virtual RecBody fetchBody(const RecMailP&mail)=0;
-    virtual QString fetchTextPart(const RecMailP&mail,const RecPart&part)=0;
-    virtual encodedString* fetchDecodedPart(const RecMailP&mail,const RecPart&part)=0;
-    virtual encodedString* fetchRawPart(const RecMailP&mail,const RecPart&part)=0;
+    virtual RecBodyP fetchBody(const RecMailP&mail)=0;
+    virtual QString fetchTextPart(const RecMailP&mail,const RecPartP&part)=0;
+    virtual encodedString* fetchDecodedPart(const RecMailP&mail,const RecPartP&part)=0;
+    virtual encodedString* fetchRawPart(const RecMailP&mail,const RecPartP&part)=0;
     virtual encodedString* fetchRawBody(const RecMailP&mail)=0;
 
     virtual void deleteMail(const RecMailP&mail)=0;

@@ -78,22 +78,22 @@ AttachItem* ViewMail::lastChild(AttachItem*parent)
     return item;
 }
 
-void ViewMail::setBody( RecBody body )
+void ViewMail::setBody(const RecBodyP&body )
 {
 
     m_body = body;
-    m_mail[2] = body.Bodytext();
-    attachbutton->setEnabled(body.Parts().count()>0);
-    attachments->setEnabled(body.Parts().count()>0);
-    if (body.Parts().count()==0)
+    m_mail[2] = body->Bodytext();
+    attachbutton->setEnabled(body->Parts().count()>0);
+    attachments->setEnabled(body->Parts().count()>0);
+    if (body->Parts().count()==0)
     {
         return;
     }
     AttachItem * curItem=0;
     AttachItem * parentItem = 0;
-    QString type=body.Description().Type()+"/"+body.Description().Subtype();
+    QString type=body->Description()->Type()+"/"+body->Description()->Subtype();
     QString desc,fsize;
-    double s = body.Description().Size();
+    double s = body->Description()->Size();
     int w;
     w=0;
 
@@ -129,15 +129,15 @@ void ViewMail::setBody( RecBody body )
         o << s << " " << q << "Byte";
     }
 
-    curItem=new AttachItem(attachments,curItem,type,"Mailbody","",fsize,-1,body.Description().Positionlist());
+    curItem=new AttachItem(attachments,curItem,type,"Mailbody","",fsize,-1,body->Description()->Positionlist());
     QString filename = "";
 
-    for (unsigned int i = 0; i < body.Parts().count();++i)
+    for (unsigned int i = 0; i < body->Parts().count();++i)
     {
         filename = "";
-        type = body.Parts()[i].Type()+"/"+body.Parts()[i].Subtype();
-        part_plist_t::ConstIterator it = body.Parts()[i].Parameters().begin();
-        for (;it!=body.Parts()[i].Parameters().end();++it)
+        type = body->Parts()[i]->Type()+"/"+body->Parts()[i]->Subtype();
+        part_plist_t::ConstIterator it = body->Parts()[i]->Parameters().begin();
+        for (;it!=body->Parts()[i]->Parameters().end();++it)
         {
             qDebug(it.key());
             if (it.key().lower()=="name")
@@ -145,7 +145,7 @@ void ViewMail::setBody( RecBody body )
                 filename=it.data();
             }
         }
-        s = body.Parts()[i].Size();
+        s = body->Parts()[i]->Size();
         w = 0;
         while (s>1024)
         {
@@ -169,19 +169,19 @@ void ViewMail::setBody( RecBody body )
         if (w>0) o.precision(2); else o.precision(0);
         o.setf(QTextStream::fixed);
         o << s << " " << q << "Byte";
-        desc = body.Parts()[i].Description();
-        parentItem = searchParent(body.Parts()[i].Positionlist());
+        desc = body->Parts()[i]->Description();
+        parentItem = searchParent(body->Parts()[i]->Positionlist());
         if (parentItem)
         {
             AttachItem*temp = lastChild(parentItem);
             if (temp) curItem = temp;
-            curItem=new AttachItem(parentItem,curItem,type,desc,filename,fsize,i,body.Parts()[i].Positionlist());
+            curItem=new AttachItem(parentItem,curItem,type,desc,filename,fsize,i,body->Parts()[i]->Positionlist());
             attachments->setRootIsDecorated(true);
             curItem = parentItem;
         }
         else
         {
-            curItem=new AttachItem(attachments,curItem,type,desc,filename,fsize,i,body.Parts()[i].Positionlist());
+            curItem=new AttachItem(attachments,curItem,type,desc,filename,fsize,i,body->Parts()[i]->Positionlist());
         }
     }
 }
@@ -226,7 +226,7 @@ void ViewMail::slotItemClicked( QListViewItem * item , const QPoint & point, int
 
             if( !str.isEmpty() )
             {
-                encodedString*content = m_recMail->Wrapper()->fetchDecodedPart( m_recMail, m_body.Parts()[ ( ( AttachItem* )item )->Partnumber() ] );
+                encodedString*content = m_recMail->Wrapper()->fetchDecodedPart( m_recMail, m_body->Parts()[ ( ( AttachItem* )item )->Partnumber() ] );
                 if (content)
                 {
                     QFile output(str);
@@ -248,7 +248,7 @@ void ViewMail::slotItemClicked( QListViewItem * item , const QPoint & point, int
         {
             if (  m_recMail->Wrapper() != 0l )
             { // make sure that there is a wrapper , even after delete or simular actions
-                browser->setText( m_recMail->Wrapper()->fetchTextPart( m_recMail, m_body.Parts()[ ( ( AttachItem* )item )->Partnumber() ] ) );
+                browser->setText( m_recMail->Wrapper()->fetchTextPart( m_recMail, m_body->Parts()[ ( ( AttachItem* )item )->Partnumber() ] ) );
             }
         }
         break;
@@ -257,7 +257,7 @@ void ViewMail::slotItemClicked( QListViewItem * item , const QPoint & point, int
 }
 
 
-void ViewMail::setMail( RecMailP mail )
+void ViewMail::setMail(const RecMailP&mail )
 {
 
     m_recMail = mail;

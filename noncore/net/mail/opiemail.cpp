@@ -146,7 +146,7 @@ void OpieMail::displayMail()
     QListViewItem*item = mailView->currentItem();
     if (!item) return;
     RecMailP mail = ((MailListViewItem*)item)->data();
-    RecBody body = folderView->fetchBody(mail);
+    RecBodyP body = folderView->fetchBody(mail);
     ViewMail readMail( this,"", Qt::WType_Modal | WStyle_ContextHelp  );
     readMail.setBody( body );
     readMail.setMail( mail );

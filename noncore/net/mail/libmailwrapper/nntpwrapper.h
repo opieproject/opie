@@ -30,7 +30,7 @@ public:
     virtual void answeredMail(const RecMailP&mail);
     virtual int deleteAllMail(const Opie::Core::OSmartPointer<Folder>&);
 
-    virtual RecBody fetchBody( const RecMailP &mail );
+    virtual RecBodyP fetchBody( const RecMailP &mail );
     virtual encodedString* fetchRawBody(const RecMailP&mail);
     virtual void logout();
     virtual MAILLIB::ATYPE getType()const;

@@ -35,10 +35,10 @@ public:
         const QString&targetFolder,AbstractMail*targetWrapper,bool moveit);
     virtual void mvcpMail(const RecMailP&mail,const QString&targetFolder,AbstractMail*targetWrapper,bool moveit);
 
-    virtual RecBody fetchBody(const RecMailP&mail);
-    virtual QString fetchTextPart(const RecMailP&mail,const RecPart&part);
-    virtual encodedString* fetchDecodedPart(const RecMailP&mail,const RecPart&part);
-    virtual encodedString* fetchRawPart(const RecMailP&mail,const RecPart&part);
+    virtual RecBodyP fetchBody(const RecMailP&mail);
+    virtual QString fetchTextPart(const RecMailP&mail,const RecPartP&part);
+    virtual encodedString* fetchDecodedPart(const RecMailP&mail,const RecPartP&part);
+    virtual encodedString* fetchRawPart(const RecMailP&mail,const RecPartP&part);
     virtual encodedString* fetchRawBody(const RecMailP&mail);
 
     virtual int createMbox(const QString&,const Opie::Core::OSmartPointer<Folder>&parentfolder=0,
@@ -60,15 +60,15 @@ protected:
     virtual encodedString*fetchRawPart(const RecMailP&mail,const QValueList<int>&path,bool internal_call);
     int selectMbox(const QString&mbox);
 
-    void fillSinglePart(RecPart&target_part,mailimap_body_type_1part*Description);
-    void fillSingleTextPart(RecPart&target_part,mailimap_body_type_text*which);
-    void fillSingleBasicPart(RecPart&target_part,mailimap_body_type_basic*which);
-    void fillSingleMsgPart(RecPart&target_part,mailimap_body_type_msg*which);
-    void fillMultiPart(RecPart&target_part,mailimap_body_type_mpart*which);
-    void traverseBody(const RecMailP&mail,mailimap_body*body,RecBody&target_body,int current_recursion,QValueList<int>recList,int current_count=1);
+    void fillSinglePart(RecPartP&target_part,mailimap_body_type_1part*Description);
+    void fillSingleTextPart(RecPartP&target_part,mailimap_body_type_text*which);
+    void fillSingleBasicPart(RecPartP&target_part,mailimap_body_type_basic*which);
+    void fillSingleMsgPart(RecPartP&target_part,mailimap_body_type_msg*which);
+    void fillMultiPart(RecPartP&target_part,mailimap_body_type_mpart*which);
+    void traverseBody(const RecMailP&mail,mailimap_body*body,RecBodyP&target_body,int current_recursion,QValueList<int>recList,int current_count=1);
 
     /* just helpers */
-    static void fillBodyFields(RecPart&target_part,mailimap_body_fields*which);
+    static void fillBodyFields(RecPartP&target_part,mailimap_body_fields*which);
     static QStringList address_list_to_stringlist(clist*list);
 
 

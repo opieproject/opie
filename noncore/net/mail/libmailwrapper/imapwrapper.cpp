@@ -483,9 +483,9 @@ RecMail*IMAPwrapper::parse_list_result(mailimap_msg_att* m_att)
     return m;
 }
 
-RecBody IMAPwrapper::fetchBody(const RecMailP&mail)
+RecBodyP IMAPwrapper::fetchBody(const RecMailP&mail)
 {
-    RecBody body;
+    RecBodyP body = new RecBody();
     const char *mb;
     int err = MAILIMAP_NO_ERROR;
     clist *result = 0;
@@ -642,7 +642,7 @@ encodedString*IMAPwrapper::fetchRawPart(const RecMailP&mail,const QValueList<int
 
 /* current_recursion is for recursive calls.
    current_count means the position inside the internal loop! */
-void IMAPwrapper::traverseBody(const RecMailP&mail,mailimap_body*body,RecBody&target_body,
+void IMAPwrapper::traverseBody(const RecMailP&mail,mailimap_body*body,RecBodyP&target_body,
     int current_recursion,QValueList<int>recList,int current_count)
 {
     if (!body || current_recursion>=10) {
@@ -653,28 +653,28 @@ void IMAPwrapper::traverseBody(const RecMailP&mail,mailimap_body*body,RecBody&ta
     {
         QValueList<int>countlist = recList;
         countlist.append(current_count);
-        RecPart currentPart;
+        RecPartP currentPart = new RecPart();
         mailimap_body_type_1part*part1 = body->bd_data.bd_body_1part;
         QString id("");
-        currentPart.setPositionlist(countlist);
+        currentPart->setPositionlist(countlist);
         for (unsigned int j = 0; j < countlist.count();++j) {
             id+=(j>0?" ":"");
             id+=QString("%1").arg(countlist[j]);
         }
         qDebug("ID = %s",id.latin1());
-        currentPart.setIdentifier(id);
+        currentPart->setIdentifier(id);
         fillSinglePart(currentPart,part1);
         /* important: Check for is NULL 'cause a body can be empty!
            And we put it only into the mail if it is the FIRST part */
-        if (part1->bd_type==MAILIMAP_BODY_TYPE_1PART_TEXT && target_body.Bodytext().isNull() && countlist[0]==1) {
-            QString body_text = fetchTextPart(mail,countlist,true,currentPart.Encoding());
-            target_body.setDescription(currentPart);
-            target_body.setBodytext(body_text);
+        if (part1->bd_type==MAILIMAP_BODY_TYPE_1PART_TEXT && target_body->Bodytext().isNull() && countlist[0]==1) {
+            QString body_text = fetchTextPart(mail,countlist,true,currentPart->Encoding());
+            target_body->setDescription(currentPart);
+            target_body->setBodytext(body_text);
             if (countlist.count()>1) {
-                target_body.addPart(currentPart);
+                target_body->addPart(currentPart);
             }
         } else {
-            target_body.addPart(currentPart);
+            target_body->addPart(currentPart);
         }
         if (part1->bd_type==MAILIMAP_BODY_TYPE_1PART_MSG) {
             traverseBody(mail,part1->bd_data.bd_type_msg->bd_body,target_body,current_recursion+1,countlist);
@@ -691,12 +691,12 @@ void IMAPwrapper::traverseBody(const RecMailP&mail,mailimap_body*body,RecBody&ta
         for (current=clist_begin(mailDescription->bd_list);current!=0;current=clist_next(current)) {
             current_body = (mailimap_body*)current->data;
             if (current_body->bd_type==MAILIMAP_BODY_MPART) {
-                RecPart targetPart;
-                targetPart.setType("multipart");
+                RecPartP targetPart = new RecPart();
+                targetPart->setType("multipart");
                 fillMultiPart(targetPart,mailDescription);
                 countlist.append(current_count);
-                targetPart.setPositionlist(countlist);
-                target_body.addPart(targetPart);
+                targetPart->setPositionlist(countlist);
+                target_body->addPart(targetPart);
                 QString id("");
                 for (unsigned int j = 0; j < countlist.count();++j) {
                     id+=(j>0?" ":"");
@@ -717,21 +717,21 @@ void IMAPwrapper::traverseBody(const RecMailP&mail,mailimap_body*body,RecBody&ta
     }
 }
 
-void IMAPwrapper::fillSinglePart(RecPart&target_part,mailimap_body_type_1part*Description)
+void IMAPwrapper::fillSinglePart(RecPartP&target_part,mailimap_body_type_1part*Description)
 {
     if (!Description) {
         return;
     }
     switch (Description->bd_type) {
         case MAILIMAP_BODY_TYPE_1PART_TEXT:
-            target_part.setType("text");
+            target_part->setType("text");
             fillSingleTextPart(target_part,Description->bd_data.bd_type_text);
             break;
         case MAILIMAP_BODY_TYPE_1PART_BASIC:
             fillSingleBasicPart(target_part,Description->bd_data.bd_type_basic);
             break;
         case MAILIMAP_BODY_TYPE_1PART_MSG:
-            target_part.setType("message");
+            target_part->setType("message");
             fillSingleMsgPart(target_part,Description->bd_data.bd_type_msg);
             break;
         default:
@@ -739,7 +739,7 @@ void IMAPwrapper::fillSinglePart(RecPart&target_part,mailimap_body_type_1part*De
     }
 }
 
-void IMAPwrapper::fillSingleTextPart(RecPart&target_part,mailimap_body_type_text*which)
+void IMAPwrapper::fillSingleTextPart(RecPartP&target_part,mailimap_body_type_text*which)
 {
     if (!which) {
         return;
@@ -747,41 +747,41 @@ void IMAPwrapper::fillSingleTextPart(RecPart&target_part,mailimap_body_type_text
     QString sub;
     sub = which->bd_media_text;
     qDebug("Type= text/%s",which->bd_media_text);
-    target_part.setSubtype(sub.lower());
-    target_part.setLines(which->bd_lines);
+    target_part->setSubtype(sub.lower());
+    target_part->setLines(which->bd_lines);
     fillBodyFields(target_part,which->bd_fields);
 }
 
-void IMAPwrapper::fillSingleMsgPart(RecPart&target_part,mailimap_body_type_msg*which)
+void IMAPwrapper::fillSingleMsgPart(RecPartP&target_part,mailimap_body_type_msg*which)
 {
     if (!which) {
         return;
     }
-    target_part.setSubtype("rfc822");
+    target_part->setSubtype("rfc822");
     qDebug("Message part");
     /* we set this type to text/plain */
-    target_part.setLines(which->bd_lines);
+    target_part->setLines(which->bd_lines);
     fillBodyFields(target_part,which->bd_fields);
 }
 
-void IMAPwrapper::fillMultiPart(RecPart&target_part,mailimap_body_type_mpart*which)
+void IMAPwrapper::fillMultiPart(RecPartP&target_part,mailimap_body_type_mpart*which)
 {
     if (!which) return;
     QString sub = which->bd_media_subtype;
-    target_part.setSubtype(sub.lower());
+    target_part->setSubtype(sub.lower());
     if (which->bd_ext_mpart && which->bd_ext_mpart->bd_parameter && which->bd_ext_mpart->bd_parameter->pa_list) {
         clistcell*cur = 0;
         mailimap_single_body_fld_param*param=0;
         for (cur = clist_begin(which->bd_ext_mpart->bd_parameter->pa_list);cur!=NULL;cur=clist_next(cur)) {
             param = (mailimap_single_body_fld_param*)cur->data;
             if (param) {
-                target_part.addParameter(QString(param->pa_name).lower(),QString(param->pa_value));
+                target_part->addParameter(QString(param->pa_name).lower(),QString(param->pa_value));
             }
         }
     }
 }
 
-void IMAPwrapper::fillSingleBasicPart(RecPart&target_part,mailimap_body_type_basic*which)
+void IMAPwrapper::fillSingleBasicPart(RecPartP&target_part,mailimap_body_type_basic*which)
 {
     if (!which) {
         return;
@@ -818,12 +818,12 @@ void IMAPwrapper::fillSingleBasicPart(RecPart&target_part,mailimap_body_type_bas
         sub = "";
     }
     qDebug("Type = %s/%s",type.latin1(),sub.latin1());
-    target_part.setType(type.lower());
-    target_part.setSubtype(sub.lower());
+    target_part->setType(type.lower());
+    target_part->setSubtype(sub.lower());
     fillBodyFields(target_part,which->bd_fields);
 }
 
-void IMAPwrapper::fillBodyFields(RecPart&target_part,mailimap_body_fields*which)
+void IMAPwrapper::fillBodyFields(RecPartP&target_part,mailimap_body_fields*which)
 {
     if (!which) return;
     if (which->bd_parameter && which->bd_parameter->pa_list && which->bd_parameter->pa_list->count>0) {
@@ -832,7 +832,7 @@ void IMAPwrapper::fillBodyFields(RecPart&target_part,mailimap_body_fields*which)
         for (cur = clist_begin(which->bd_parameter->pa_list);cur!=NULL;cur=clist_next(cur)) {
             param = (mailimap_single_body_fld_param*)cur->data;
             if (param) {
-                target_part.addParameter(QString(param->pa_name).lower(),QString(param->pa_value));
+                target_part->addParameter(QString(param->pa_name).lower(),QString(param->pa_value));
             }
         }
     }
@@ -864,10 +864,10 @@ void IMAPwrapper::fillBodyFields(RecPart&target_part,mailimap_body_fields*which)
         }
     }
     if (which->bd_description) {
-        target_part.setDescription(QString(which->bd_description));
+        target_part->setDescription(QString(which->bd_description));
     }
-    target_part.setEncoding(encoding);
-    target_part.setSize(which->bd_size);
+    target_part->setEncoding(encoding);
+    target_part->setSize(which->bd_size);
 }
 
 void IMAPwrapper::deleteMail(const RecMailP&mail)
@@ -948,22 +948,22 @@ QString IMAPwrapper::fetchTextPart(const RecMailP&mail,const QValueList<int>&pat
     return body;
 }
 
-QString IMAPwrapper::fetchTextPart(const RecMailP&mail,const RecPart&part)
+QString IMAPwrapper::fetchTextPart(const RecMailP&mail,const RecPartP&part)
 {
-    return fetchTextPart(mail,part.Positionlist(),false,part.Encoding());
+    return fetchTextPart(mail,part->Positionlist(),false,part->Encoding());
 }
 
-encodedString* IMAPwrapper::fetchDecodedPart(const RecMailP&mail,const RecPart&part)
+encodedString* IMAPwrapper::fetchDecodedPart(const RecMailP&mail,const RecPartP&part)
 {
-    encodedString*res = fetchRawPart(mail,part.Positionlist(),false);
-    encodedString*r = decode_String(res,part.Encoding());
+    encodedString*res = fetchRawPart(mail,part->Positionlist(),false);
+    encodedString*r = decode_String(res,part->Encoding());
     delete res;
     return r;
 }
 
-encodedString* IMAPwrapper::fetchRawPart(const RecMailP&mail,const RecPart&part)
+encodedString* IMAPwrapper::fetchRawPart(const RecMailP&mail,const RecPartP&part)
 {
-    return fetchRawPart(mail,part.Positionlist(),false);
+    return fetchRawPart(mail,part->Positionlist(),false);
 }
 
 int IMAPwrapper::deleteAllMail(const FolderP&folder)

@@ -123,9 +123,9 @@ void MHwrapper::answeredMail(const RecMailP&)
 {
 }
 
-RecBody MHwrapper::fetchBody( const RecMailP &mail )
+RecBodyP MHwrapper::fetchBody( const RecMailP &mail )
 {
-    RecBody body;
+    RecBodyP body = new RecBody();
     init_storage();
     if (!m_storage) {
         return body;

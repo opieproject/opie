@@ -84,7 +84,7 @@ protected:
 typedef Opie::Core::OSmartPointer<RecMail> RecMailP;
 typedef QMap<QString,QString> part_plist_t;
 
-class RecPart
+class RecPart:public Opie::Core::ORefCount
 {
 protected:
     QString m_type,m_subtype,m_identifier,m_encoding,m_description;
@@ -95,6 +95,7 @@ protected:
 
 public:
     RecPart();
+    RecPart(const RecPart&);
     virtual ~RecPart();
 
     const QString&Type()const;
@@ -121,26 +122,31 @@ public:
     const QValueList<int>& Positionlist()const;
 };
 
-class RecBody
+typedef Opie::Core::OSmartPointer<RecPart> RecPartP;
+
+class RecBody:public Opie::Core::ORefCount
 {
 protected:
     QString m_BodyText;
-    QValueList<RecPart> m_PartsList;
-    RecPart m_description;
+    QValueList<RecPartP> m_PartsList;
+    RecPartP m_description;
 
 public:
     RecBody();
+    RecBody(const RecBody&old);
     virtual ~RecBody();
     void setBodytext(const QString&);
     const QString& Bodytext()const;
 
-    void setDescription(const RecPart&des);
-    const RecPart& Description()const;
+    void setDescription(const RecPartP&des);
+    const RecPartP& Description()const;
 
-    void setParts(const QValueList<RecPart>&parts);
-    const QValueList<RecPart>& Parts()const;
-    void addPart(const RecPart&part);
+    void setParts(const QValueList<RecPartP>&parts);
+    const QValueList<RecPartP>& Parts()const;
+    void addPart(const RecPartP&part);
 };
+
+typedef Opie::Core::OSmartPointer<RecBody> RecBodyP;
 
 class encodedString
 {

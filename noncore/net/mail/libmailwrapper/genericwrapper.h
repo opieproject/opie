@@ -34,25 +34,25 @@ public:
     Genericwrapper();
     virtual ~Genericwrapper();
 
-    virtual encodedString* fetchDecodedPart(const RecMailP&mail,const RecPart&part);
-    virtual encodedString* fetchRawPart(const RecMailP&mail,const RecPart&part);
-    virtual QString fetchTextPart(const RecMailP&mail,const RecPart&part);
+    virtual encodedString* fetchDecodedPart(const RecMailP&mail,const RecPartP&part);
+    virtual encodedString* fetchRawPart(const RecMailP&mail,const RecPartP&part);
+    virtual QString fetchTextPart(const RecMailP&mail,const RecPartP&part);
     virtual void cleanMimeCache();
     virtual int deleteMbox(const Opie::Core::OSmartPointer<Folder>&){return 1;}
     virtual void logout(){};
     virtual void storeMessage(const char*msg,size_t length, const QString&folder){};
 
 protected:
-    RecBody parseMail( mailmessage * msg );
+    RecBodyP parseMail( mailmessage * msg );
     QString parseMailboxList( mailimf_mailbox_list *list );
     QString parseMailbox( mailimf_mailbox *box );
     QString parseGroup( mailimf_group *group );
     QString parseAddressList( mailimf_address_list *list );
     QString parseDateTime( mailimf_date_time *date );
 
-    void traverseBody(RecBody&target,mailmessage*message,mailmime*mime,QValueList<int>recList,unsigned int current_rek=0,int current_count=1);
-    static void fillSingleBody(RecPart&target,mailmessage*message,mailmime*mime);
-    static void fillParameters(RecPart&target,clist*parameters);
+    void traverseBody(RecBodyP&target,mailmessage*message,mailmime*mime,QValueList<int>recList,unsigned int current_rek=0,int current_count=1);
+    static void fillSingleBody(RecPartP&target,mailmessage*message,mailmime*mime);
+    static void fillParameters(RecPartP&target,clist*parameters);
     static QString getencoding(mailmime_mechanism*aEnc);
     virtual void parseList(QValueList<Opie::Core::OSmartPointer<RecMail> > &target,mailsession*session,const QString&mailbox,bool mbox_as_to=false);
     QStringList parseInreplies(mailimf_in_reply_to * in_replies);

@@ -33,7 +33,7 @@ public:
 
     virtual void storeMessage(const char*msg,size_t length, const QString&folder);
 
-    virtual RecBody fetchBody( const RecMailP &mail );
+    virtual RecBodyP fetchBody( const RecMailP &mail );
     static void mbox_progress( size_t current, size_t maximum );
 
     virtual encodedString* fetchRawBody(const RecMailP&mail);

@@ -33,17 +33,17 @@ void NNTPwrapper::nntp_progress( size_t current, size_t maximum ) {
 }
 
 
-RecBody NNTPwrapper::fetchBody( const RecMailP &mail ) {
+RecBodyP NNTPwrapper::fetchBody( const RecMailP &mail ) {
     int err = NEWSNNTP_NO_ERROR;
     char *message = 0;
     size_t length = 0;
 
+    RecBodyP body = new RecBody();
     login();
     if ( !m_nntp ) {
-        return RecBody();
+        return body;
     }
 
-    RecBody body;
     mailmessage * mailmsg;
     if (mail->Msgsize()>HARD_MSG_SIZE_LIMIT) {
         qDebug("Message to large: %i",mail->Msgsize());

@@ -87,9 +87,9 @@ void MBOXwrapper::answeredMail(const RecMailP&)
 {
 }
 
-RecBody MBOXwrapper::fetchBody( const RecMailP &mail )
+RecBodyP MBOXwrapper::fetchBody( const RecMailP &mail )
 {
-    RecBody body;
+    RecBodyP body = new RecBody();
     mailstorage*storage = mailstorage_new(NULL);
     QString p = MBOXPath+"/";
     p+=mail->getMbox();
