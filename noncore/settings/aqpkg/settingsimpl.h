@@ -51,4 +51,6 @@ private:
 	void removeDestination();
 
     void toggleJumpTo( bool val );
+
+    void proxyApplyChanges();
 };

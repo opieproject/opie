@@ -58,6 +58,21 @@ public:
     static QString getAvailableCategories() { return availableCategories; }
     static void setAvailableCategories( QString section );
 
+    QString getHttpProxy()                          { return httpProxy; }
+    QString getFtpProxy()                           { return ftpProxy; }
+    QString getProxyUsername()                      { return proxyUsername; }
+    QString getProxyPassword()                      { return proxyPassword; }
+
+    bool getHttpProxyEnabled()                      { return httpProxyEnabled; }
+    bool getFtpProxyEnabled()                       { return ftpProxyEnabled; }
+
+    void setHttpProxy( QString proxy )              { httpProxy = proxy; }
+    void setFtpProxy( QString proxy )               { ftpProxy = proxy; }
+    void setProxyUsername( QString name )           { proxyUsername = name; }
+    void setProxyPassword( QString pword )          { proxyPassword = pword; }
+
+    void setHttpProxyEnabled( bool val )            { httpProxyEnabled = val; }
+    void setFtpProxyEnabled( bool val )            { ftpProxyEnabled = val; }
 private:
     static QString availableCategories;
     QString activeServer;
@@ -65,6 +80,9 @@ private:
     QString ftpProxy;
     QString proxyUsername;
     QString proxyPassword;
+
+    bool httpProxyEnabled;
+    bool ftpProxyEnabled;
 
     vector<Server> serverList;
     vector<Destination> destList;

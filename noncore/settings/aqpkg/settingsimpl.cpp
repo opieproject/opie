@@ -78,6 +78,7 @@ void SettingsImpl :: setupData()
     for ( it2 = dataMgr->getDestinationList().begin() ; it2 != dataMgr->getDestinationList().end() ; ++it2 )
         destinations->insertItem( it2->getDestinationName() );
 
+    // setup general tab
 #ifdef QWS
     Config cfg( "aqpkg" );
     cfg.setGroup( "settings" );
@@ -85,6 +86,14 @@ void SettingsImpl :: setupData()
 #else
     jumpTo->setChecked( true );
 #endif
+
+    // setup proxy tab
+    txtHttpProxy->setText( dataMgr->getHttpProxy() );
+    txtFtpProxy->setText( dataMgr->getFtpProxy() );
+    txtUsername->setText( dataMgr->getProxyUsername() );
+    txtPassword->setText( dataMgr->getProxyPassword() );
+    chkHttpProxyEnabled->setChecked( dataMgr->getHttpProxyEnabled() );
+    chkFtpProxyEnabled->setChecked( dataMgr->getFtpProxyEnabled() );
 }
 
 //------------------ Servers tab ----------------------
@@ -244,3 +253,15 @@ void SettingsImpl :: toggleJumpTo( bool val )
 #endif
 }
 
+//------------------ Proxy tab ----------------------
+void SettingsImpl :: proxyApplyChanges()
+{
+    changed = true;
+    dataMgr->setHttpProxy( txtHttpProxy->text() );
+    dataMgr->setFtpProxy( txtFtpProxy->text() );
+    dataMgr->setProxyUsername( txtUsername->text() );
+    dataMgr->setProxyPassword( txtPassword->text() );
+
+    dataMgr->setHttpProxyEnabled( chkHttpProxyEnabled->isChecked() );
+    dataMgr->setFtpProxyEnabled( chkFtpProxyEnabled->isChecked() );
+}

@@ -130,15 +130,27 @@ void DataManager :: loadServers()
                 
                 destList.push_back( d );
             }
-            else if ( lineStr.startsWith( "option" ) )
+            else if ( lineStr.startsWith( "option" ) || lineStr.startsWith( "#option" ) )
             {
                 char type[20];
                 char val[100];
                 sscanf( lineStr, "%*[^ ] %s %s", type, val );
                 if ( stricmp( type, "http_proxy" ) == 0 )
+                {
                     httpProxy = val;
+                    if ( lineStr.startsWith( "#" ) )
+                        httpProxyEnabled = false;
+                    else
+                        httpProxyEnabled = true;
+                }
                 if ( stricmp( type, "ftp_proxy" ) == 0 )
+                {
                     ftpProxy = val;
+                    if ( lineStr.startsWith( "#" ) )
+                        ftpProxyEnabled = false;
+                    else
+                        ftpProxyEnabled = true;
+                }
                 if ( stricmp( type, "proxy_username" ) == 0 )
                     proxyUsername = val;
                 if ( stricmp( type, "proxy_password" ) == 0 )
@@ -218,18 +230,26 @@ void DataManager :: writeOutIpkgConf()
         it2++;
     }
 
+    out << endl;
     out << "# Proxy Support" << endl;
-    out << "#" << endl;
 
-    if ( httpProxy == "" )
+    if ( !httpProxyEnabled && httpProxy == "" )
         out << "#option http_proxy http://proxy.tld:3128" << endl;
     else
+    {
+        if ( !httpProxyEnabled )
+            out << "#";
         out << "option http_proxy " << httpProxy << endl;
+    }
 
-    if ( ftpProxy == "" )
+    if ( !ftpProxyEnabled && ftpProxy == "" )
         out << "#option ftp_proxy http://proxy.tld:3128" << endl;
     else
+    {
+        if ( !ftpProxyEnabled )
+            out << "#";
         out << "option ftp_proxy " << ftpProxy << endl;
+    }
     if ( proxyUsername == "" )
         out << "#option proxy_username <username>" << endl;
     else
