@@ -1,0 +1,143 @@
+<!DOCTYPE UI><UI>
+<class>SSHKeysBase</class>
+<widget>
+    <class>QWidget</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>SSHKeysBase</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>736</width>
+            <height>446</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>SSH Keys</string>
+    </property>
+    <grid>
+        <property stdset="1">
+            <name>margin</name>
+            <number>11</number>
+        </property>
+        <property stdset="1">
+            <name>spacing</name>
+            <number>6</number>
+        </property>
+        <widget row="0"  column="1"  rowspan="1"  colspan="2" >
+            <class>QComboBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>KeyFileName</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>7</hsizetype>
+                    <vsizetype>0</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>editable</name>
+                <bool>true</bool>
+            </property>
+        </widget>
+        <widget row="0"  column="0" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>AddButton</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>1</hsizetype>
+                    <vsizetype>0</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Add Keys:</string>
+            </property>
+        </widget>
+        <widget row="1"  column="0" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>RefreshListButton</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Refresh</string>
+            </property>
+        </widget>
+        <widget row="1"  column="1" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>RemoveAllButton</cstring>
+            </property>
+            <property stdset="1">
+                <name>enabled</name>
+                <bool>false</bool>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Clear Keys</string>
+            </property>
+        </widget>
+        <widget row="3"  column="0"  rowspan="1"  colspan="3" >
+            <class>QMultiLineEdit</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextOutput</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>7</hsizetype>
+                    <vsizetype>1</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>readOnly</name>
+                <bool>true</bool>
+            </property>
+        </widget>
+        <widget row="2"  column="0"  rowspan="1"  colspan="3" >
+            <class>QTable</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>KeyList</cstring>
+            </property>
+            <property stdset="1">
+                <name>font</name>
+                <font>
+                    <family>adobe-helvetica</family>
+                    <pointsize>9</pointsize>
+                </font>
+            </property>
+            <property stdset="1">
+                <name>resizePolicy</name>
+                <enum>AutoOneFit</enum>
+            </property>
+            <property stdset="1">
+                <name>numRows</name>
+                <number>1</number>
+            </property>
+            <property stdset="1">
+                <name>numCols</name>
+                <number>3</number>
+            </property>
+            <property stdset="1">
+                <name>showGrid</name>
+                <bool>false</bool>
+            </property>
+        </widget>
+    </grid>
+</widget>
+</UI>
