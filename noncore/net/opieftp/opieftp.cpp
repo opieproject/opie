@@ -171,8 +171,8 @@ OpieFtp::OpieFtp( )
 
     UsernameComboBox = new QComboBox( FALSE, tab_3, "UsernameComboBox" );
     UsernameComboBox->setEditable(TRUE);
-//    UsernameComboBox->lineEdit()->setText("anonymous");
-    UsernameComboBox->lineEdit()->setText("root");
+    UsernameComboBox->lineEdit()->setText("anonymous");
+//    UsernameComboBox->lineEdit()->setText("root");
 //    UsernameComboBox->lineEdit()->setText("llornkcor");
     tabLayout_3->addMultiCellWidget( UsernameComboBox, 1, 1, 0, 1 );
 
@@ -182,7 +182,7 @@ OpieFtp::OpieFtp( )
 
     PasswordEdit = new QLineEdit( "", tab_3, "PasswordComboBox" );
     PasswordEdit->setEchoMode(QLineEdit::Password);
-//    PasswordEdit->setText( tr( "me@opieftp.org" ) );
+    PasswordEdit->setText( tr( "me@opieftp.org" ) );
 //    PasswordEdit->setText( tr( "" ) );
     tabLayout_3->addMultiCellWidget( PasswordEdit, 1, 1, 2, 3 );
 
@@ -195,7 +195,7 @@ OpieFtp::OpieFtp( )
     ServerComboBox->lineEdit()->setText( tr( "" ) );
     tabLayout_3->addMultiCellWidget( ServerComboBox, 3, 3, 0, 1 );
 //    ServerComboBox->lineEdit()->setText( tr( "llornkcor.com" ) );
-    ServerComboBox->lineEdit()->setText( tr( "192.168.129.201" ) );
+//    ServerComboBox->lineEdit()->setText( tr( "192.168.129.201" ) );
 
     QLabel *TextLabel5 = new QLabel( tab_3, "TextLabel5" );
     TextLabel5->setText( tr( "Remote path" ) );
@@ -213,8 +213,8 @@ OpieFtp::OpieFtp( )
     PortSpinBox = new QSpinBox( tab_3, "PortSpinBox" );
     PortSpinBox->setButtonSymbols( QSpinBox::UpDownArrows );
     PortSpinBox->setMaxValue(32786);
-    PortSpinBox->setValue( 4242);
-//    PortSpinBox->setValue( 21);
+//    PortSpinBox->setValue( 4242);
+    PortSpinBox->setValue( 21);
     tabLayout_3->addMultiCellWidget( PortSpinBox, 4, 4, 1, 1);
 
     QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
