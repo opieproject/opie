@@ -145,21 +145,21 @@ void NetworkPackageManager :: selectLocalPackage( const QString &pkg )
 
 void NetworkPackageManager :: initGui()
 {
-    QLabel *l = new QLabel( "Servers", this );
+    QLabel *l = new QLabel( tr( "Servers" ), this );
     serversList = new QComboBox( this );
     packagesList = new QListView( this );
-    update = new QPushButton( "Refresh Lists", this );
-    download = new QPushButton( "Download", this );
-    upgrade = new QPushButton( "Upgrade", this );
-    apply = new QPushButton( "Apply", this );
+    update = new QPushButton( tr( "Refresh Lists" ), this );
+    download = new QPushButton( tr( "Download" ), this );
+    upgrade = new QPushButton( tr( "Upgrade" ), this );
+    apply = new QPushButton( tr( "Apply" ), this );
 
-    QVBoxLayout *vbox = new QVBoxLayout( this, 0, -1, "VBox" );
-    QHBoxLayout *hbox1 = new QHBoxLayout( vbox, -1, "HBox1" );
+    QVBoxLayout *vbox = new QVBoxLayout( this, 0, -1 );
+    QHBoxLayout *hbox1 = new QHBoxLayout( vbox, -1 );
     hbox1->addWidget( l );
     hbox1->addWidget( serversList );
 
-    QHBoxLayout *hbox3 = new QHBoxLayout( vbox, -1, "HBox1" );
-    QHBoxLayout *hbox4 = new QHBoxLayout( vbox, -1, "HBox1" );
+    QHBoxLayout *hbox3 = new QHBoxLayout( vbox, -1 );
+    QHBoxLayout *hbox4 = new QHBoxLayout( vbox, -1 );
 
 
     if ( showJumpTo )
@@ -179,9 +179,9 @@ void NetworkPackageManager :: initGui()
     }
 
     vbox->addWidget( packagesList );
-    packagesList->addColumn( "Packages" );
+    packagesList->addColumn( tr( "Packages" ) );
 
-    QHBoxLayout *hbox2 = new QHBoxLayout( vbox, -1, "HBox2" );
+    QHBoxLayout *hbox2 = new QHBoxLayout( vbox, -1 );
     hbox2->addWidget( update );
     hbox2->addWidget( download );
     hbox2->addWidget( upgrade );
@@ -308,29 +308,29 @@ void NetworkPackageManager :: serverSelected( int, bool raiseProgress )
                     destName = it->getInstalledTo()->getDestinationName();
             }
             if ( destName != "" )
-                new QCheckListItem( item, QString( "Installed To - " ) + destName );
+                new QCheckListItem( item, QString( tr( "Installed To - " ) ) + destName );
         }
         
         if ( !it->isPackageStoredLocally() )
         {
-            new QCheckListItem( item, QString( "Description - " ) + it->getDescription() );
-            new QCheckListItem( item, QString( "Size - " ) + it->getPackageSize() );
-            new QCheckListItem( item, QString( "Section - " ) + it->getSection() );
+            new QCheckListItem( item, QString( tr( "Description - " ) ) + it->getDescription() );
+            new QCheckListItem( item, QString( tr( "Size - " ) ) + it->getPackageSize() );
+            new QCheckListItem( item, QString( tr( "Section - " ) ) + it->getSection() );
         }
         else
-            new QCheckListItem( item, QString( "Filename - " ) + it->getFilename() );
+            new QCheckListItem( item, QString( tr( "Filename - " ) ) + it->getFilename() );
         
 		if ( serverName == LOCAL_SERVER )
 		{
-        	new QCheckListItem( item, QString( "V. Installed - " ) + it->getVersion() );
+        	new QCheckListItem( item, QString( tr( "V. Installed - " ) ) + it->getVersion() );
 		}
 		else
 		{
-        	new QCheckListItem( item, QString( "V. Available - " ) + it->getVersion() );
+        	new QCheckListItem( item, QString( tr( "V. Available - " ) ) + it->getVersion() );
         	if ( it->getLocalPackage() )
         	{
 				if ( it->isInstalled() )
-	            	new QCheckListItem( item, QString( "V. Installed - " ) + it->getInstalledVersion() );
+	            	new QCheckListItem( item, QString( tr( "V. Installed - " ) ) + it->getInstalledVersion() );
 			}
 		}
 
@@ -341,20 +341,20 @@ void NetworkPackageManager :: serverSelected( int, bool raiseProgress )
     if ( serverName == LOCAL_SERVER )
     {
         upgrade->setEnabled( false );
-        download->setText( "Download" );
+        download->setText( tr( "Download" ) );
         download->setEnabled( true );
     }
     else if ( serverName == LOCAL_IPKGS )
     {
         upgrade->setEnabled( false );
         download->setEnabled( true );
-        download->setText( "Remove" );
+        download->setText( tr( "Remove" ) );
     }
     else
     {
         upgrade->setEnabled( true );
         download->setEnabled( true );
-        download->setText( "Download" );
+        download->setText( tr( "Download" ) );
     }
 
     // Display this widget once everything is done
@@ -379,7 +379,7 @@ void NetworkPackageManager :: updateServer()
     Ipkg ipkg;
     ipkg.setOption( "update" );
 
-    InstallDlgImpl dlg( &ipkg, "Refreshing server package lists", this, "Upgrade", true );
+    InstallDlgImpl dlg( &ipkg, tr( "Refreshing server package lists" ), this, tr( "Upgrade" ), true );
     dlg.showDlg();
 
     // Reload data
@@ -392,8 +392,8 @@ void NetworkPackageManager :: upgradePackages()
 {
     // We're gonna do an upgrade of all packages
     // First warn user that this isn't recommended
-    QString text = "WARNING: Upgrading while\nOpie/Qtopia is running\nis NOT recommended!\n\nAre you sure?\n";
-    QMessageBox warn("Warning", text, QMessageBox::Warning,
+    QString text = tr( "WARNING: Upgrading while\nOpie/Qtopia is running\nis NOT recommended!\n\nAre you sure?\n" );
+    QMessageBox warn( tr( "Warning" ), text, QMessageBox::Warning,
                         QMessageBox::Yes,
                         QMessageBox::No | QMessageBox::Escape | QMessageBox::Default ,
                         0, this );
@@ -408,7 +408,7 @@ void NetworkPackageManager :: upgradePackages()
         Ipkg ipkg;
         ipkg.setOption( "upgrade" );
         
-        InstallDlgImpl dlg( &ipkg, "Upgrading installed packages", this, "Upgrade", true );
+        InstallDlgImpl dlg( &ipkg, tr( "Upgrading installed packages" ), this, tr( "Upgrade" ), true );
         dlg.showDlg();
 
         // Reload data
@@ -421,7 +421,7 @@ void NetworkPackageManager :: upgradePackages()
 void NetworkPackageManager :: downloadPackage()
 {
     bool doUpdate = true;
-    if ( download->text() == "Download" )
+    if ( download->text() == tr( "Download" ) )
     {
         // See if any packages are selected
         bool found = false;
@@ -445,7 +445,7 @@ void NetworkPackageManager :: downloadPackage()
             downloadRemotePackage();
         
     }
-    else if ( download->text() == "Remove" )
+    else if ( download->text() == tr( "Remove" ) )
     {
         doUpdate = false;
         for ( QCheckListItem *item = (QCheckListItem *)packagesList->firstChild();
@@ -466,9 +466,9 @@ void NetworkPackageManager :: downloadPackage()
                 Package *p = dataMgr->getServer( serversList->currentText() )->getPackage( name );
 
                 QString msgtext;
-                msgtext.sprintf( "Are you sure you wish to delete\n%s?", (const char *)p->getPackageName() );
-                if ( QMessageBox::information( this, "Are you sure?",
-                                    msgtext, "No", "Yes" ) == 1 )
+                msgtext = tr( "Are you sure you wish to delete\n%1?" ).arg( (const char *)p->getPackageName() );
+                if ( QMessageBox::information( this, tr( "Are you sure?" ),
+                                    msgtext, tr( "No" ), tr( "Yes" ) ) == 1 )
                 {
                     doUpdate = true;
                     QFile f( p->getFilename() );
@@ -546,7 +546,7 @@ void NetworkPackageManager :: downloadRemotePackage()
 {
     // Display dialog
     bool ok;
-    QString package = InputDialog::getText( "Install Remote Package", tr( "Enter package location" ), "http://", &ok, this );
+    QString package = InputDialog::getText( tr( "Install Remote Package" ), tr( "Enter package location" ), "http://", &ok, this );
     if ( !ok || package.isEmpty() )
         return;
 //    DownloadRemoteDlgImpl dlg( this, "Install", true );
@@ -603,8 +603,8 @@ void NetworkPackageManager :: applyChanges()
     if ( workingPackages.size() == 0 )
     {
         // Nothing to do
-        QMessageBox::information( this, "Nothing to do",
-                             "No packages selected", "OK" );
+        QMessageBox::information( this, tr( "Nothing to do" ),
+                             tr( "No packages selected" ), tr( "OK" ) );
         
         return;
     }
@@ -703,18 +703,18 @@ InstallData NetworkPackageManager :: dealWithItem( QCheckListItem *item )
             if ( val == 0 )
             {
                 // Version available is the same - option to remove or reinstall
-                caption = "Do you wish to remove or reinstall\n%s?";
-                text = "Remove or ReInstall";
-                secondButton = "ReInstall";
-                secondOption = "R";
+                caption = tr( "Do you wish to remove or reinstall\n%1?" );
+                text = tr( "Remove or ReInstall" );
+                secondButton = tr( "ReInstall" );
+                secondOption = tr( "R" );
             }
             else if ( val == 1 )
             {
                 // Version available is newer - option to remove or upgrade
-                caption = "Do you wish to remove or upgrade\n%s?";
-                text = "Remove or Upgrade";
-                secondButton = "Upgrade";
-                secondOption = "U";
+                caption = tr( "Do you wish to remove or upgrade\n%1?" );
+                text = tr( "Remove or Upgrade" );
+                secondButton = tr( "Upgrade" );
+                secondOption = tr( "U" );
             }
 
             // Sticky option not implemented yet, but will eventually allow
@@ -722,9 +722,9 @@ InstallData NetworkPackageManager :: dealWithItem( QCheckListItem *item )
             if ( stickyOption == "" )
             {
                 QString msgtext;
-                msgtext.sprintf( caption, (const char *)name );
+                msgtext = caption.arg( ( const char * )name );
                 switch( QMessageBox::information( this, text,
-                                    msgtext, "Remove", secondButton ) )
+                                    msgtext, tr( "Remove" ), secondButton ) )
                 {
                     case 0: // Try again or Enter
                         // option 0 = Remove
@@ -797,7 +797,7 @@ void NetworkPackageManager :: searchForPackage( bool findNext )
 {
     bool ok = false;
     if ( !findNext || lastSearchText.isEmpty() )
-        lastSearchText = InputDialog::getText( "Search for package", "Enter package to search for", lastSearchText, &ok, this ).lower();
+        lastSearchText = InputDialog::getText( tr( "Search for package" ), tr( "Enter package to search for" ), lastSearchText, &ok, this ).lower();
     else
         ok = true;
         

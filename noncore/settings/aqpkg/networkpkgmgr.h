@@ -25,7 +25,6 @@
 #include <qlistview.h>
 
 #include "datamgr.h"
-#include "progressdlg.h"
 
 class InstallData;
 
@@ -59,7 +58,6 @@ private:
     QPushButton *download;
     QPushButton *apply;
 
-    ProgressDlg *progressDlg;
     QString currentlySelectedServer;
     QString lastSearchText;
     QString categoryFilter;

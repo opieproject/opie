@@ -43,30 +43,30 @@ MainWindow :: MainWindow( QWidget *p, char *name )
 
     // Create our menu
     help = new QPopupMenu( this );
-    help->insertItem( "&General", this, SLOT(displayHelp()), Qt::CTRL+Qt::Key_G );
-	help->insertItem( "&About", this, SLOT(displayAbout()), Qt::CTRL+Qt::Key_A );
+    help->insertItem( tr( "General" ), this, SLOT(displayHelp()) );
+	help->insertItem( tr( "About" ), this, SLOT(displayAbout()) );
 
     settings = new QPopupMenu( this );
-	settings->insertItem( "&Settings", this, SLOT(displaySettings()), Qt::CTRL+Qt::Key_S );
+	settings->insertItem( tr( "Settings" ), this, SLOT(displaySettings()) );
 
     edit = new QPopupMenu( this );
-	edit->insertItem( "&Find", this, SLOT(searchForPackage()), Qt::CTRL+Qt::Key_I );
-	edit->insertItem( "Find &Next", this, SLOT(repeatSearchForPackage()), Qt::CTRL+Qt::Key_N );
+	edit->insertItem( tr( "Find" ), this, SLOT(searchForPackage()) );
+	edit->insertItem( tr( "Find Next" ), this, SLOT(repeatSearchForPackage()) );
 
     filter = new QPopupMenu( this );
-	mnuShowUninstalledPkgsId = filter->insertItem( "Show &Non-Installed Packages", this, SLOT(filterUninstalledPackages()), Qt::CTRL+Qt::Key_U );
-	mnuShowInstalledPkgsId = filter->insertItem( "Show In&stalled Packages", this, SLOT(filterInstalledPackages()), Qt::CTRL+Qt::Key_S );
-	mnuShowUpgradedPkgsId = filter->insertItem( "Show U&pdated Packages", this, SLOT(filterUpgradedPackages()), Qt::CTRL+Qt::Key_P );
+	mnuShowUninstalledPkgsId = filter->insertItem( tr( "Show Non-Installed Packages" ), this, SLOT(filterUninstalledPackages()) );
+	mnuShowInstalledPkgsId = filter->insertItem( tr( "Show Installed Packages" ), this, SLOT(filterInstalledPackages()) );
+	mnuShowUpgradedPkgsId = filter->insertItem( tr( "Show Updated Packages" ), this, SLOT(filterUpgradedPackages()) );
     filter->insertSeparator();
-    mnuFilterByCategory = filter->insertItem( "Filter By &Category", this, SLOT(filterCategory()), Qt::CTRL+Qt::Key_C );
-    mnuSetFilterCategory = filter->insertItem( "Set Filter C&ategory", this, SLOT(setFilterCategory()), Qt::CTRL+Qt::Key_A );
+    mnuFilterByCategory = filter->insertItem( tr( "Filter By Category" ), this, SLOT(filterCategory()) );
+    mnuSetFilterCategory = filter->insertItem( tr( "Set Filter Category" ), this, SLOT(setFilterCategory()) );
 
 	// Create the main menu
 	menu = menuBar();  //new QMenuBar( this );
-	menu->insertItem( tr( "&Settings" ), settings );
-	menu->insertItem( tr( "&Edit" ), edit );
-	menu->insertItem( tr( "&Filter" ), filter );
-	menu->insertItem( tr( "&Help" ), help );
+	menu->insertItem( tr( "Settings" ), settings );
+	menu->insertItem( tr( "Edit" ), edit );
+	menu->insertItem( tr( "Filter" ), filter );
+	menu->insertItem( tr( "Help" ), help );
 
 	// Create UI widgets
 	stack = new QWidgetStack( this );
@@ -145,7 +145,7 @@ void MainWindow :: repeatSearchForPackage()
 
 void MainWindow :: displayAbout()
 {
-    QMessageBox::about( this, "About AQPkg", VERSION_TEXT );
+    QMessageBox::about( this, tr( "About AQPkg" ), tr( VERSION_TEXT ) );
 }
 
 
