@@ -1,9 +1,0 @@
-Files: $QTDIR/lib/libqte.so.$QTE_VERSION $QTDIR/lib/libqte.so.2.3 $QTDIR/lib/libqte.so.2 $QTDIR/lib/fonts/fontdir $QTDIR/lib/fonts/helvetica_*t10* $QTDIR/lib/fonts/fixed_*t10* $QTDIR/lib/fonts/micro_*t10* $QTDIR/lib/fonts/smallsmooth_*t10* $QTDIR/lib/fonts/smoothtimes_{170,100}_50*t10*
-Priority: required
-Section: opie/system
-Maintainer: Warwick Allison <warwick@trolltech.com>
-Architecture: arm
-Version: $QTE_VERSION-16
-Description: Qt/Embedded environment
- A complete windowing system and GUI toolkit for handhelds.
- See "QPE" for applications.

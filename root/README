@@ -1,3 +1,0 @@
-The files here are files needed to build missing packages for the iPAQ Familiar
-distribution. Since CVS cannot store device files, you will need to run "makeptydevs"
-script (as root) if you want to make the ptydevs package.
