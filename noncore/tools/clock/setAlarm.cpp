@@ -204,7 +204,13 @@ void Set_Alarm::slotChangemp3CkeckBox(bool b) {
     Config config( "qpe" );
     config.setGroup("Time");
     if(b) {
-        QString str = OFileDialog::getOpenFileName( 2,"/");//,"", "*", this );
+        QMap<QString, QStringList> map;
+        map.insert(tr("All"), QStringList() );
+        QStringList text;
+        text << "audio/*";
+        map.insert(tr("Audio"), text );
+        QString str = OFileDialog::getOpenFileName( 2,"/", QString::null, map);//,"", "*", this );
+//        QString str = OFileDialog::getOpenFileName( 2,"/");//,"", "*", this );
         if(!str.isEmpty() ) {
             qDebug(str);
             config.writeEntry("mp3Alarm",1);
