@@ -96,7 +96,7 @@ static const int numButtons = (sizeof(audioButtons)/sizeof(MediaButton));
 
 
 AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
-    QWidget( parent, name, f ), songInfo( this ), slider( Qt::Horizontal, this ),  time( this )
+        QWidget( parent, name, f ), songInfo( this ), slider( Qt::Horizontal, this ),  time( this ) {
     setCaption( tr("OpiePlayer") );
 
     Config cfg("OpiePlayer");
