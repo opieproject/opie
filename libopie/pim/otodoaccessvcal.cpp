@@ -15,12 +15,20 @@ namespace {
         // description
         if( ( ob = isAPropertyOf( obj, VCDescriptionProp )) != 0 ){
             name = vObjectStringZValue( ob );
+#if 0
             event.setDescription( name );
+#else
+            event.setSummary( name );
+#endif
         }
         // summary
         if ( ( ob = isAPropertyOf( obj,  VCSummaryProp ) ) != 0 ) {
             name = vObjectStringZValue( ob );
+#if 0
             event.setSummary( name );
+#else
+            event.setDescription( name );
+#endif
         }
         // completed
         if( ( ob = isAPropertyOf( obj, VCStatusProp )) != 0 ){
