@@ -60,15 +60,15 @@ class CGeneral8Bit : public CEncoding
     int m_index;
  public:
     CGeneral8Bit(int _i) : m_index(_i)
-	{
-//	    qDebug("8Bit:%d", _i);
-//	    qDebug("%s", unicodetable::iterator(_i)->mime);
-	}
+    {
+//      odebug << "8Bit: " << _i << oendl;
+//      odebug << unicodetable::iterator(_i)->mime << oendl;
+    }
     void getch(tchar& ch, CStyle& sty)
-	{
-	    parent->getch(ch, sty);
-	    ch = unicodetable::unicodevalue(m_index, ch);
-	}
+    {
+        parent->getch(ch, sty);
+        ch = unicodetable::unicodevalue(m_index, ch);
+    }
 };
 
 #endif

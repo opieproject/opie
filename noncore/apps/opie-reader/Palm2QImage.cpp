@@ -1,4 +1,12 @@
 /* -*- mode: c; indent-tabs-mode: nil; -*- */
+
+/* OPIE */
+#include <opie2/odebug.h>
+
+/* QT */
+#include <qimage.h>
+
+/* STD */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,7 +17,6 @@
 #include <sys/stat.h>
 #include <stdarg.h>
 
-#include <qimage.h>
 
 /***********************************************************************/
 /***********************************************************************/
@@ -42,10 +49,10 @@ typedef struct {
 } ColorMapEntry;
 
 static ColorMapEntry Palm8BitColormap[] = {
-  { 255, 255, 255 }, { 255, 204, 255 }, { 255, 153, 255 }, { 255, 102, 255 }, 
-  { 255,  51, 255 }, { 255,   0, 255 }, { 255, 255, 204 }, { 255, 204, 204 }, 
-  { 255, 153, 204 }, { 255, 102, 204 }, { 255,  51, 204 }, { 255,   0, 204 }, 
-  { 255, 255, 153 }, { 255, 204, 153 }, { 255, 153, 153 }, { 255, 102, 153 }, 
+  { 255, 255, 255 }, { 255, 204, 255 }, { 255, 153, 255 }, { 255, 102, 255 },
+  { 255,  51, 255 }, { 255,   0, 255 }, { 255, 255, 204 }, { 255, 204, 204 },
+  { 255, 153, 204 }, { 255, 102, 204 }, { 255,  51, 204 }, { 255,   0, 204 },
+  { 255, 255, 153 }, { 255, 204, 153 }, { 255, 153, 153 }, { 255, 102, 153 },
   { 255,  51, 153 }, { 255,   0, 153 }, { 204, 255, 255 }, { 204, 204, 255 },
   { 204, 153, 255 }, { 204, 102, 255 }, { 204,  51, 255 }, { 204,   0, 255 },
   { 204, 255, 204 }, { 204, 204, 204 }, { 204, 153, 204 }, { 204, 102, 204 },
@@ -139,36 +146,38 @@ QImage* Palm2QImage
   transparent_index = palmimage[12];
   compression_type = palmimage[13];
   /* bytes 14 and 15 are reserved by Palm and always 0 */
-  
+
 #if 0
-//  qDebug ("Palm image is %dx%d, %d bpp, version %d, flags 0x%x, compression %d", width, height, bits_per_pixel, version, flags, compression_type);
+//  odebug << "Palm image is " << width << "x" << height
+//         << ", " << bits_per_pixel << " bpp, version " << version
+//         << ", flags 0x" << flags << ", compression " << compression_type << oendl;
 #endif
 
   if (compression_type == PALM_COMPRESSION_PACKBITS) {
-//    qDebug ("Image uses packbits compression; not yet supported");
+//    odebug << "Image uses packbits compression; not yet supported" << oendl;
     return NULL;
   } else if ((compression_type != PALM_COMPRESSION_NONE) &&
     (compression_type != PALM_COMPRESSION_RLE) &&
       (compression_type != PALM_COMPRESSION_SCANLINE)) {
-//    qDebug ("Image uses unknown compression, code 0x%x", compression_type);
+//    odebug << "Image uses unknown compression, code 0x" << compression_type << oendl;
     return NULL;
   }
 
   /* as of PalmOS 4.0, there are 6 different kinds of Palm pixmaps:
-     
+
      1, 2, or 4 bit grayscale
      8-bit StaticColor using the Palm standard colormap
      8-bit PseudoColor using a user-specified colormap
      16-bit DirectColor using 5 bits for red, 6 for green, and 5 for blue
-     
+
      Each of these can be compressed with one of four compression schemes,
      "RLE", "Scanline", "PackBits", or none.
-     
+
      We begin by constructing the colormap.
      */
 
   if (flags & PALM_HAS_COLORMAP_FLAG) {
-//    qDebug("Palm images with custom colormaps are not currently supported.\n");
+//    odebug << "Palm images with custom colormaps are not currently supported." << oendl;
     return NULL;
   } else if (bits_per_pixel == 1) {
     colormap = Palm1BitColormap;
@@ -187,18 +196,20 @@ QImage* Palm2QImage
     palm_red_bits = palmimage[16];
     palm_green_bits = palmimage[17];
     palm_blue_bits = palmimage[18];
-//    qDebug("Bits:%d, %d, %d", palm_red_bits, palm_green_bits, palm_blue_bits);
+//    odebug << "Bits:" << palm_red_bits << ", " << palm_green_bits << ", " << palm_blue_bits << oendl;
     if (palm_blue_bits > 8 || palm_green_bits > 8 || palm_red_bits > 8) {
-//      qDebug("Can't handle this format DirectColor image -- too wide in some color (%d:%d:%d)\n", palm_red_bits, palm_green_bits, palm_blue_bits);
+//      odebug << "Can't handle this format DirectColor image -- too wide in some color ("
+//             << palm_red_bits << ":" << palm_green_bits << ":" << palm_blue_bits << oendl;
       return NULL;
     }
     if (bits_per_pixel > (8 * sizeof(unsigned long))) {
-//      qDebug ("Can't handle this format DirectColor image -- too many bits per pixel (%d)\n", bits_per_pixel);
+//      odebug << "Can't handle this format DirectColor image -- too many bits per pixel ("
+//             << bits_per_pixel << ")" << oendl;
       return NULL;
     }
     imagedatastart = palmimage + 24;
   } else {
-//    qDebug("Unknown bits-per-pixel of %d encountered.\n", bits_per_pixel);
+//    odebug << "Unknown bits-per-pixel of " << bits_per_pixel << " encountered" << oendl;
     return NULL;
   }
 
@@ -213,26 +224,27 @@ QImage* Palm2QImage
   lastrow = new unsigned char[bytes_per_row * width];
 
   for (i=0, palm_ptr = imagedatastart , x_ptr = imagedata;  i < height;  ++i) {
-//        qDebug("inval:%x palm_ptr:%x x_ptr:%x bpr:%x", inval, palm_ptr, x_ptr, bytes_per_row);
+//        odebug << "inval:" << inval << " palm_ptr:" << palm_ptr << " x_ptr:" << x_ptr
+//               << " bpr:" << bytes_per_row << oendl;
 
     /* first, uncompress the Palm image */
     if ((flags & PALM_IS_COMPRESSED_FLAG) && (compression_type == PALM_COMPRESSION_RLE)) {
       for (j = 0;  j < bytes_per_row;  ) {
-	incount = *palm_ptr++;
-	inval = *palm_ptr++;
-	memset(rowbuf + j, inval, incount);
-	j += incount;
+    incount = *palm_ptr++;
+    inval = *palm_ptr++;
+    memset(rowbuf + j, inval, incount);
+    j += incount;
       }
     } else if ((flags & PALM_IS_COMPRESSED_FLAG) && (compression_type == PALM_COMPRESSION_SCANLINE)) {
       for (j = 0;  j < bytes_per_row;  j += 8) {
-	incount = *palm_ptr++;
-	inval = ((bytes_per_row - j) < 8) ? (bytes_per_row - j) : 8;
-	for (inbit = 0;  inbit < inval;  inbit += 1) {
-	  if (incount & (1 << (7 - inbit)))
-	    rowbuf[j + inbit] = *palm_ptr++;
-	  else
-	    rowbuf[j + inbit] = lastrow[j + inbit];
-	}
+    incount = *palm_ptr++;
+    inval = ((bytes_per_row - j) < 8) ? (bytes_per_row - j) : 8;
+    for (inbit = 0;  inbit < inval;  inbit += 1) {
+      if (incount & (1 << (7 - inbit)))
+        rowbuf[j + inbit] = *palm_ptr++;
+      else
+        rowbuf[j + inbit] = lastrow[j + inbit];
+    }
       }
       memcpy (lastrow, rowbuf, bytes_per_row);
     } else if (((flags & PALM_IS_COMPRESSED_FLAG) &&
@@ -243,12 +255,12 @@ QImage* Palm2QImage
         palm_ptr += bytes_per_row;
     }
     else {
-        qDebug("Case 4");
-        qDebug("Is compressed:%s", ((flags & PALM_IS_COMPRESSED_FLAG) == 0) ? "false" : "true");
-        qDebug("Has colourmap:%s", ((flags & PALM_HAS_COLORMAP_FLAG) == 0) ? "false" : "true");
-        qDebug("Has transparency:%s", ((flags & PALM_HAS_TRANSPARENCY_FLAG) == 0) ? "false" : "true");
-        qDebug("Direct colour:%s", ((flags & PALM_DIRECT_COLOR_FLAG) == 0) ? "false" : "true");
-        qDebug("four byte field:%s", ((flags & PALM_4_BYTE_FIELD_FLAG) == 0) ? "false" : "true");
+        odebug << "Case 4" << oendl;
+        odebug << "Is compressed:" << (((flags & PALM_IS_COMPRESSED_FLAG) == 0) ? "false" : "true") << oendl;
+        odebug << "Has colourmap:" << (((flags & PALM_HAS_COLORMAP_FLAG) == 0) ? "false" : "true") << oendl;
+        odebug << "Has transparency:" << (((flags & PALM_HAS_TRANSPARENCY_FLAG) == 0) ? "false" : "true") << oendl;
+        odebug << "Direct colour:" << (((flags & PALM_DIRECT_COLOR_FLAG) == 0) ? "false" : "true") << oendl;
+        odebug << "four byte field:" << (((flags & PALM_4_BYTE_FIELD_FLAG) == 0) ? "false" : "true") << oendl;
       memcpy (rowbuf, palm_ptr, bytes_per_row);
       palm_ptr += bytes_per_row;
     }
@@ -256,37 +268,36 @@ QImage* Palm2QImage
     if (colormap) {
       mask = (1 << bits_per_pixel) - 1;
       for (inbit = 8 - bits_per_pixel, inbyte = rowbuf, j = 0; j < width; ++j) {
-	inval = ((*inbyte) & (mask << inbit)) >> inbit;
-	/* correct for oddity of the 8-bit color Palm pixmap... */
-	if ((bits_per_pixel == 8) && (inval == 0xFF)) inval = 231;
-	/* now lookup the correct color and set the pixel in the GTK bitmap */
-	QRgb colour = qRgb(colormap[inval].red, colormap[inval].green, colormap[inval].blue);
+    inval = ((*inbyte) & (mask << inbit)) >> inbit;
+    /* correct for oddity of the 8-bit color Palm pixmap... */
+    if ((bits_per_pixel == 8) && (inval == 0xFF)) inval = 231;
+    /* now lookup the correct color and set the pixel in the GTK bitmap */
+    QRgb colour = qRgb(colormap[inval].red, colormap[inval].green, colormap[inval].blue);
         qimage->setPixel(j, i, colour);
-	if (!inbit) {
-	  ++inbyte;
-	  inbit = 8 - bits_per_pixel;
-	} else {
-	  inbit -= bits_per_pixel;
-	}
+    if (!inbit) {
+      ++inbyte;
+      inbit = 8 - bits_per_pixel;
+    } else {
+      inbit -= bits_per_pixel;
+    }
       }
     } else if (!colormap &&
       bits_per_pixel == 16) {
       for (inbyte = rowbuf, j = 0; j < width; ++j) {
-	inval = ((unsigned short)inbyte[0] << (unsigned short)8) | inbyte[1];
+    inval = ((unsigned short)inbyte[0] << (unsigned short)8) | inbyte[1];
 
 /*
-	qDebug ("pixel is %d,%d (%d:%d:%d)",
-		      j, i,
-		      ((inval >> (bits_per_pixel - palm_red_bits)) & ((1 << palm_red_bits) - 1)) << (8-palm_red_bits),
-		      ((inval >> palm_blue_bits) & ((1 << palm_green_bits) - 1)) << (8-palm_green_bits),
-		      ((inval >> 0) & ((1 << palm_blue_bits) - 1)) << (8-palm_blue_bits));
+    odebug << "pixel is " << j << "," << i << " ("
+           << (((inval >> (bits_per_pixel - palm_red_bits)) & ((1 << palm_red_bits) - 1)) << (8-palm_red_bits)) << ":"
+           << (((inval >> palm_blue_bits) & ((1 << palm_green_bits) - 1)) << (8-palm_green_bits)) << ":"
+           << (((inval >> 0) & ((1 << palm_blue_bits) - 1)) << (8-palm_blue_bits)) << ")" << oendl;
 */
-	QRgb colour = qRgb(
-            ((inval >> (bits_per_pixel - palm_red_bits)) & ((1 << palm_red_bits) - 1)) << (8-palm_red_bits), 
+    QRgb colour = qRgb(
+            ((inval >> (bits_per_pixel - palm_red_bits)) & ((1 << palm_red_bits) - 1)) << (8-palm_red_bits),
             ((inval >> palm_blue_bits) & ((1 << palm_green_bits) - 1)) << (8-palm_green_bits),
             ((inval >> 0) & ((1 << palm_blue_bits) - 1)) << (8-palm_blue_bits));
         qimage->setPixel(j, i, colour);
-	inbyte += 2;
+    inbyte += 2;
       }
     }
   }
@@ -299,7 +310,7 @@ QImage* Palm2QImage
 
 QImage* hRule(int w, int h, unsigned char r, unsigned char g, unsigned char b)
 {
-////    qDebug("hrule [%d, %d]", w, h);
+//    odebug << "hrule [" << w << ", " << h << "]" << oendl;
     QPixmap* qimage = new QPixmap(w, h);
     qimage->fill(QColor(r,g,b));
     QImage* ret = new QImage(qimage->convertToImage());

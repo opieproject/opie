@@ -21,8 +21,8 @@ class QTReader : public QWidget
 {
     Q_OBJECT
 
-	static tchar pluckernextpart[];
-	static tchar jplucknextpart[];
+    static tchar pluckernextpart[];
+    static tchar jplucknextpart[];
       friend class QTReaderApp;
     void suspend();
     void increaseScroll();
@@ -59,13 +59,13 @@ public:
     void zoomin();
     void zoomout();
     void setSaveData(unsigned char*& data, unsigned short& len, unsigned char* src, unsigned short srclen)
-	{
-	    buffdoc.setSaveData(data, len, src, srclen);
-	}
+    {
+        buffdoc.setSaveData(data, len, src, srclen);
+    }
     void putSaveData(unsigned char*& src, unsigned short& srclen)
-	{
-	    buffdoc.putSaveData(src, srclen);
-	}
+    {
+        buffdoc.putSaveData(src, srclen);
+    }
     bool empty();
     void setContinuous(bool _b);
     void toggle_autoscroll();
@@ -75,7 +75,7 @@ public:
       {
 /*
         size_t nd = locate();
-	jumpto(m_mark);
+    jumpto(m_mark);
         QString text;
         while (m_mark < nd)
           {
@@ -91,73 +91,73 @@ public:
     /*
     void setText(bool oldfile)
       {
-	if (oldfile)
-	  {
-	    m_string = m_lastfile;
-	    load_file((const tchar*)m_string);
-	  }
-	else
-	  {
-	    m_string = QString::null;
-	  }
+    if (oldfile)
+      {
+        m_string = m_lastfile;
+        load_file((const tchar*)m_string);
+      }
+    else
+      {
+        m_string = QString::null;
+      }
       };
     */
     void setlead(int _lead)
-	{
-	    m_fontControl.setlead(_lead);
-	}
+    {
+        m_fontControl.setlead(_lead);
+    }
     int getlead()
-	{
-	    return m_fontControl.getlead();
-	}
+    {
+        return m_fontControl.getlead();
+    }
     void setextraspace(int _lead)
-	{
-	    m_fontControl.setextraspace(_lead);
-	}
+    {
+        m_fontControl.setextraspace(_lead);
+    }
     int getextraspace()
-	{
-	    return m_fontControl.getextraspace();
-	}
+    {
+        return m_fontControl.getextraspace();
+    }
     void setpagemode(bool _b)
       {
-	m_bpagemode = _b;
+    m_bpagemode = _b;
       }
     void setmono(bool _b)
       {
-	m_bMonoSpaced = _b;
-	ChangeFont(m_fontControl.currentsize());
-	locate(pagelocate());
+    m_bMonoSpaced = _b;
+    ChangeFont(m_fontControl.currentsize());
+    locate(pagelocate());
       }
     void setencoding(int _f)
-	{
-	    m_encd = _f;
-	    setfilter(getfilter());
-	}
+    {
+        m_encd = _f;
+        setfilter(getfilter());
+    }
     MarkupType PreferredMarkup();
     CEncoding* getencoding()
-	{
-//	    qDebug("m_encd:%d", m_encd);
-	    switch (m_encd)
-	    {
-		case 4:
-//		    qDebug("palm");
-		    return new CPalm;
-		case 1:
-//		    qDebug("utf8");
-		    return new CUtf8;
-		case 2:
-//		    qDebug("ucs16be");
-		    return new CUcs16be;
-		case 3:
-//		    qDebug("ucs16le");
-		    return new CUcs16le;
-		case 0:
-//		    qDebug("ascii");
-		    return new CAscii;
-		default:
-		    return new CGeneral8Bit(m_encd-MAX_ENCODING+1);
-	    }
-	}
+    {
+//      odebug << "m_encd:" << m_encd << oendl;
+        switch (m_encd)
+        {
+        case 4:
+//          odebug << "palm" << oendl;
+            return new CPalm;
+        case 1:
+//          odebug << "utf8" << oendl;
+            return new CUtf8;
+        case 2:
+//          odebug << "ucs16be" << oendl;
+            return new CUcs16be;
+        case 3:
+//          odebug << "ucs16le" << oendl;
+            return new CUcs16le;
+        case 0:
+//          odebug << "ascii" << oendl;
+            return new CAscii;
+        default:
+            return new CGeneral8Bit(m_encd-MAX_ENCODING+1);
+        }
+    }
   CFilterChain* getfilter()
   {
     CFilterChain * filt = new CFilterChain(getencoding());
@@ -189,7 +189,7 @@ private slots:
     void goHome();
     void goBack();
     void goForward();
-	void doscroll();
+    void doscroll();
     void   drawIt( QPainter * );
     void   paintEvent( QPaintEvent * );
 //    void   resizeEvent( QResizeEvent * p ) { update(); }

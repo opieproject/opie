@@ -140,7 +140,7 @@ class QTReaderApp : public QMainWindow
 {
     Q_OBJECT
 
-	unsigned long m_savedpos;
+    unsigned long m_savedpos;
     int m_debounce;
     timeb m_lastkeytime;
     bool m_annoIsEditing;
@@ -149,15 +149,15 @@ class QTReaderApp : public QMainWindow
     fontselector_action m_fontAction;
     void doAction(ActionTypes a, QKeyEvent* e);
 
-	public:
+    public:
     QTReaderApp( QWidget *parent = 0, const char *name = 0, WFlags f = 0 );
     ~QTReaderApp();
 
     void handlekey(QKeyEvent* e);
     void hideEvent(QHideEvent*)
-	{
-	    suspend();
-	}
+    {
+        suspend();
+    }
 
     void suspend();
     void openFile( const QString & );
@@ -171,24 +171,24 @@ class QTReaderApp : public QMainWindow
     Bkmk* m_anno;
 //    void resizeEvent(QResizeEvent* e);
     void closeEvent( QCloseEvent *e );
-	void readbkmks();
-	void do_mono(const QString&);
-	void do_jump(const QString&);
-	void do_settarget(const QString&);
+    void readbkmks();
+    void do_mono(const QString&);
+    void do_jump(const QString&);
+    void do_settarget(const QString&);
 #ifdef _SCROLLPIPE
-//	void do_setpipetarget(const QString&);
+//  void do_setpipetarget(const QString&);
 #endif
-	void do_saveconfig(const QString&, bool);
-	bool readconfig(const QString&, bool);
-	bool PopulateConfig(const char*);
-	ActionTypes ActNameToInt(const QString&);
+    void do_saveconfig(const QString&, bool);
+    bool readconfig(const QString&, bool);
+    bool PopulateConfig(const char*);
+    ActionTypes ActNameToInt(const QString&);
     bool m_doAnnotation;
     bool m_doDictionary;
     bool m_doClipboard;
     bool m_fullscreen;
     bool m_loadedconfig;
  public:
-	void saveprefs();
+    void saveprefs();
 public slots:
     void setDocument(const QString&);
 private slots:
@@ -207,17 +207,17 @@ private slots:
     void setTwoTouch(bool _b);
  void restoreFocus();
  void OnAnnotation(bool _b)
-	{
-	    m_doAnnotation = _b;
-	}
+    {
+        m_doAnnotation = _b;
+    }
     void OnDictionary(bool _b)
-	{
-	    m_doDictionary = _b;
-	}
+    {
+        m_doDictionary = _b;
+    }
     void OnClipboard(bool _b)
-	{
-	    m_doClipboard = _b;
-	}
+    {
+        m_doClipboard = _b;
+    }
     void OnWordSelected(const QString&, size_t, const QString&);
     void OnURLSelected(const QString& href);
     void showgraphic(QImage&);
@@ -226,30 +226,30 @@ private slots:
     void addanno();
     void showAnnotation();
     void do_setencoding(int i);
-	void do_setfont(const QString&);
-	void buttonActionSelected(QAction*);
-//	void msgHandler(const QCString&, const QByteArray&);
-	void monospace(bool);
-	void jump();
-	void settarget();
+    void do_setfont(const QString&);
+    void buttonActionSelected(QAction*);
+//  void msgHandler(const QCString&, const QByteArray&);
+    void monospace(bool);
+    void jump();
+    void settarget();
 #ifdef _SCROLLPIPE
-//	void setpipetarget();
-//	void setpause(bool);
+//  void setpipetarget();
+//  void setpause(bool);
 #endif
-//	void setspacing();
-	void setfont();
-	void clearBkmkList();
-	void listBkmkFiles();
-	void editMark();
-	void autoScroll(bool);
-	void addbkmk();
-	void savebkmks();
-//	void importFiles();
-	void showprefs();
-	void showtoolbarprefs();
-	void infoClose();
-	//    void oldFile();
-	void showinfo();
+//  void setspacing();
+    void setfont();
+    void clearBkmkList();
+    void listBkmkFiles();
+    void editMark();
+    void autoScroll(bool);
+    void addbkmk();
+    void savebkmks();
+//  void importFiles();
+    void showprefs();
+    void showtoolbarprefs();
+    void infoClose();
+    //    void oldFile();
+    void showinfo();
 
 //    void indentplus();
 //    void indentminus();
@@ -367,7 +367,7 @@ private slots:
     CBkmkSelector* bkmkselector;
 
     ActionTypes m_spaceTarget, m_escapeTarget, m_returnTarget, m_leftTarget, m_rightTarget,
-	m_upTarget, m_downTarget;
+    m_upTarget, m_downTarget;
     bool m_leftScroll, m_rightScroll, m_upScroll, m_downScroll;
     bool m_bcloseDisabled, m_disableesckey;
     size_t searchStart;
@@ -399,8 +399,8 @@ private slots:
     /*
       void resizeEvent( QResizeEvent * r)
       {
-//      qDebug("resize:(%u,%u)", r->oldSize().width(), r->oldSize().height());
-//      qDebug("resize:(%u,%u)", r->size().width(), r->size().height());
+//      odebug << "resize:(" << r->oldSize().width() << "," << r->oldSize().height() << ")" << oendl;
+//      odebug << "resize:(" << r->size().width() << "," << r->size().height() << ")" << oendl;
       //    bgroup->move( width()-bgroup->width(), 0 );
       }
     */

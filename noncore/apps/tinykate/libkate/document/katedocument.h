@@ -6,7 +6,7 @@
                            (C) 2002 by Joseph Wenninger
     email                : crossfire@babylon2k.de
                            jowenn@kde.org
- 
+
 ***************************************************************************/
 
 /***************************************************************************
@@ -76,7 +76,7 @@ public:
         uchar row=c.row();
         short *wa=warray[row];
         if (!wa) {
-                // qDebug("create row: %d",row);
+                // odebug << "create row: " << row << oendl;
                 wa=warray[row]=new short[256];
                 for (int i=0; i<256; i++) wa[i]=-1;
         }
@@ -179,7 +179,7 @@ class KateDocument: public Kate::Document
 
     void insert_Line(const QString& s,int line=-1, bool update=true);
     void remove_Line(int line,bool update=true);
-    void replaceLine(const QString& s,int line=-1);   
+    void replaceLine(const QString& s,int line=-1);
     virtual void insertAt( const QString &s, int line, int col, bool mark = FALSE );
     virtual void removeLine( int line );
     virtual int length() const;
@@ -534,15 +534,15 @@ class KateDocument: public Kate::Document
     public:
           bool hlSetByUser;
   };
- 
- 
+
+
 // BCI: Add a real d-pointer in the next BIC release
 static QPtrDict<KateDocPrivate>* d_ptr;
 static void cleanup_d_ptr()
       {
           delete d_ptr;
       }
- 
+
 KateDocPrivate* d( const KateDocument* foo )
       {
            if ( !d_ptr ) {
@@ -556,7 +556,7 @@ KateDocPrivate* d( const KateDocument* foo )
                 }
                 return ret;
       }
- 
+
 void delete_d( const KateDocument* foo )
      {
           if ( d_ptr )

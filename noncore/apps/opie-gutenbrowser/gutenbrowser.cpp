@@ -421,8 +421,9 @@ void Gutenbrowser::ForwardBtn() {
                     //          int length = Lview->length();
 
                 pageStopArray[i_pageNum ] = currentFilePos;
-                    //         qDebug("%d current page is number %d, pagesize %d, length %d, current %d",
-                    //                currentFilePos, i_pageNum, pageSize, Lview->length(), pageStopArray[i_pageNum] );
+                    //         odebug << currentFilePos << " current page is number " << i_pageNum
+                    //                << ", pagesize " << pageSize << ", length " << Lview->length()
+                    //                << ", current " << pageStopArray[i_pageNum] << oendl;
                 setStatus();
                 Lview->setCursorPosition( 0, 0, FALSE);
                     //        }
@@ -455,8 +456,9 @@ void Gutenbrowser::BackBtn() {
                 i_pageNum--;
                 currentFilePos = f.at();
 
-                    //         qDebug("%d move back to %d, current page number %d, %d, length %d",
-                    //                currentFilePos, pageStopArray[i_pageNum - 1 ], i_pageNum, pageSize, Lview->length() );
+                    //         odebug << currentFilePos << " move back to " << pageStopArray[i_pageNum - 1 ]
+                    //                << ", current page number " << i_pageNum
+                    //                << ", " << pageSize << ", length " << Lview->length() << oendl;
 
                 if(  i_pageNum < 2) {
                         f.at( 0);
@@ -799,8 +801,9 @@ bool Gutenbrowser::load( const char *fileName) {
 
         pageStopArray[1] = currentFilePos;
 
-        qDebug("<<<<<<<<<<<%d current page is number %d, length %d, current %d, pageSize %d",
-                     currentFilePos, i_pageNum, Lview->length(), pageStopArray[i_pageNum], Lview->PageSize() );
+        odebug << "<<<<<<<<<<<" << currentFilePos << " current page is number " << i_pageNum
+               << ", length " << Lview->length() << ", current " << pageStopArray[i_pageNum]
+               << ", pageSize " << Lview->PageSize() << oendl;
 
         Lview->setMaxLines(Lview->PageSize()*2);
         odebug << "Gulped " << currentLine << "" << oendl;

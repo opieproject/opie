@@ -21,24 +21,24 @@ class BuffDoc
     CFilterChain* filt;
  public:
     void setSaveData(unsigned char*& data, unsigned short& len, unsigned char* src, unsigned short srclen)
-	{
-	    if (exp == NULL)
-	    {
-		data = NULL;
-		len = 0;
-	    }
-	    else
-	    {
-		exp->setSaveData(data, len, src, srclen);
-	    }
-	}
+    {
+        if (exp == NULL)
+        {
+        data = NULL;
+        len = 0;
+        }
+        else
+        {
+        exp->setSaveData(data, len, src, srclen);
+        }
+    }
     void putSaveData(unsigned char*& src, unsigned short& srclen)
-	{
-	    if (exp != NULL)
-	    {
-		exp->putSaveData(src, srclen);
-	    }
-	}
+    {
+        if (exp != NULL)
+        {
+        exp->putSaveData(src, srclen);
+        }
+    }
 #ifdef USEQPE
     void suspend() { if (exp != NULL) exp->suspend(); }
     void unsuspend() { if (exp != NULL) exp->unsuspend(); }
@@ -47,47 +47,47 @@ class BuffDoc
     void unsuspend() {}
 #endif
     ~BuffDoc()
-	{
-	    delete filt;
-	    delete exp;
-	}
+    {
+        delete filt;
+        delete exp;
+    }
     BuffDoc()
-	{
-	    exp = NULL;
-	    filt = NULL;
-	    lastword.empty();
-//	    //    qDebug("Buffdoc created");
-	}
+    {
+        exp = NULL;
+        filt = NULL;
+        lastword.empty();
+        //    odebug << "Buffdoc created" << oendl;
+    }
     bool empty() { return (exp == NULL); }
     void setfilter(CFilterChain* _f)
-	{
-	    if (filt != NULL) delete filt;
-	    filt = _f;
-	    filt->setsource(exp);
-	}
+    {
+        if (filt != NULL) delete filt;
+        filt = _f;
+        filt->setsource(exp);
+    }
     CList<Bkmk>* getbkmklist() { return exp->getbkmklist(); }
     bool hasrandomaccess() { return (exp == NULL) ? false : exp->hasrandomaccess(); }
     bool iseol() { return (lastword[0] == '\0'); }
     int openfile(QWidget* _parent, const char *src);
     tchar getch()
-	{
-	    tchar ch = UEOF;
-	    CStyle sty;
-	    if (exp != NULL)
-	    {
-		filt->getch(ch, sty);
-	    }
-	    return ch;
-	}
+    {
+        tchar ch = UEOF;
+        CStyle sty;
+        if (exp != NULL)
+        {
+        filt->getch(ch, sty);
+        }
+        return ch;
+    }
     void getch(tchar& ch, CStyle& sty)
-	{
-	    if (exp != NULL)
-	    {
-		filt->getch(ch, sty);
-	    }
-	    else
-		ch = UEOF;
-	}
+    {
+        if (exp != NULL)
+        {
+        filt->getch(ch, sty);
+        }
+        else
+        ch = UEOF;
+    }
     void setwidth(int w) { if (exp != NULL) exp->setwidth(w); }
     QImage* getPicture(unsigned long tgt) { return (exp == NULL) ? NULL : exp->getPicture(tgt); }
     unsigned int startSection() { return (exp == NULL) ? 0 : exp->startSection(); }
@@ -103,15 +103,15 @@ class BuffDoc
     bool getline(CDrawBuffer* buff, int w, int cw, unsigned char _border);
     void sizes(unsigned long& fs, unsigned long& ts) { exp->sizes(fs,ts); }
     int getpara(CBuffer& buff)
-	{
-	    tchar ch;
-	    int i = 0;
-	    while ((ch = getch()) != 10 && ch != UEOF) buff[i++] = ch;
-	    buff[i] = '\0';
-	    if (i == 0 && ch == UEOF) i = -1;
-	    laststartline = exp->locate();
-	    return i;
-	}
+    {
+        tchar ch;
+        int i = 0;
+        while ((ch = getch()) != 10 && ch != UEOF) buff[i++] = ch;
+        buff[i] = '\0';
+        if (i == 0 && ch == UEOF) i = -1;
+        laststartline = exp->locate();
+        return i;
+    }
     void saveposn(size_t posn) { exp->saveposn(posn); }
     void writeposn(size_t posn) { exp->writeposn(posn); }
     bool forward(size_t& loc) { return exp->forward(loc); }
