@@ -47,6 +47,7 @@ class QAction;
 class FileSelector;
 class QpeEditor;
 class QPopupMenu;
+class QTimer;
 
 class TextEdit : public QMainWindow
 {
@@ -56,18 +57,23 @@ public:
     TextEdit( QWidget *parent = 0, const char *name = 0, WFlags f = 0 );
     ~TextEdit();
 
+protected:
     QPopupMenu *font;
-    QAction *nStart, *nFileDlgOpt, *nAdvanced, *desktopAction, *filePermAction, *searchBarAction;
+    QAction *nStart, *nFileDlgOpt, *nAdvanced, *desktopAction, *filePermAction, *searchBarAction, *nAutoSave;
     bool edited, edited1;
     void openFile( const QString & );
-        QCopChannel * channel;
-public slots:
-    void editorChanged();
-void  receive(const QCString&, const QByteArray&);
-protected:
+    QCopChannel * channel;
+
+    bool featureAutoSave;
     void closeEvent( QCloseEvent *e );
     void doSearchBar();
+    int savePrompt();
+    void setTimer();
 private slots:
+    void editorChanged();
+     void receive(const QCString&, const QByteArray&);
+    void timerCrank();
+    void doTimer(bool); 
     void editPasteTimeDate();
     void doPrompt(bool);
     void doDesktop(bool);

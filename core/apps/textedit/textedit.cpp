@@ -49,6 +49,8 @@
 #include <qcombo.h>
 #include <qlayout.h>
 #include <qapplication.h>
+#include <qtimer.h>
+#include <qdir.h>
 #include <unistd.h>
 #include <sys/stat.h>
 #include <stdlib.h> //getenv
@@ -410,6 +412,13 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     searchBarAction->setToggleAction(true);
     searchBarAction->addTo( advancedMenu);
 
+    nAutoSave = new QAction( tr("Auto Save 5 min."),
+                                   QString::null, 0, this, 0 );
+    connect( nAutoSave, SIGNAL( toggled(bool) ),
+             this, SLOT( doTimer(bool) ) );
+    nAutoSave->setToggleAction(true);
+    nAutoSave->addTo( advancedMenu);
+     
 
     font->insertSeparator();
 
@@ -478,17 +487,24 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     filePerms = cfg.readBoolEntry ( "FilePermissions", false );
     useSearchBar = cfg.readBoolEntry ( "SearchBar", false );
     startWithNew =  cfg.readBoolEntry ( "startNew", true);
+    featureAutoSave = cfg.readBoolEntry( "autosave", false);
     
     if(useSearchBar) searchBarAction->setOn(true);
-    if(promptExit )  nAdvanced->setOn( true );
+    if(promptExit)  nAdvanced->setOn( true );
     if(openDesktop) desktopAction->setOn( true );
     if(filePerms) filePermAction->setOn( true );
     if(startWithNew) nStart->setOn( true );
-      
+    if(featureAutoSave) nAutoSave->setOn(true);
+
+//       {
+//           doTimer(true);
+//       }
+        
     bool wrap = cfg. readBoolEntry ( "Wrap", true );
     wa-> setOn ( wrap );
     setWordWrap ( wrap );
 
+/////////////////
     if( qApp->argc() > 1) {
         currentFileName=qApp->argv()[1];
         
@@ -513,9 +529,30 @@ TextEdit::~TextEdit() {
 }
 
 void TextEdit::closeEvent(QCloseEvent *) {
-      if( edited1 && promptExit)
-          saveAs();
-     qApp->quit();
+    if( edited1 && promptExit)
+      {
+          switch( savePrompt() )
+            {
+              case 1:
+              {
+                  saveAs();
+                  qApp->quit();
+              }
+              break;
+
+              case 2: 
+              {
+                  qApp->quit();
+              }
+              break;
+
+              case -1: 
+                  break;
+            };
+      }
+    else
+        qApp->quit();
+        
 }
 
 void TextEdit::cleanUp() {
@@ -814,6 +851,7 @@ void TextEdit::openFile( const DocLnk &f ) {
 
     doc->setName(currentFileName);
     updateCaption();
+    setTimer();
 }
 
 void TextEdit::showEditTools() {
@@ -834,7 +872,8 @@ bool TextEdit::save() {
         saveAs();
         return false;
     }
-  QString file = doc->file();
+
+    QString file = doc->file();
     qDebug("saver file "+file);
     QString name= doc->name();
     qDebug("File named "+name);
@@ -886,6 +925,7 @@ bool TextEdit::save() {
 /*!
   prompted save */
 bool TextEdit::saveAs() {
+
     if(caption() == tr("Text Editor"))
         return false;
     qDebug("saveAsFile " + currentFileName);
@@ -944,11 +984,16 @@ bool TextEdit::saveAs() {
     QString filee = cuFi.fileName();
     QString dire = cuFi.dirPath();
     if(dire==".")
-       dire = QPEApplication::documentDir();
-    QString str = OFileDialog::getSaveFileName( 2,
-                  dire,
-                  filee, map);
-
+        dire = QPEApplication::documentDir();
+    QString str;
+    if( !featureAutoSave)
+      {
+          str = OFileDialog::getSaveFileName( 2,
+                                                      dire,
+                                                      filee, map);
+      }
+    else
+        str=currentFileName;
     if(!str.isEmpty()) {
         QString fileNm=str;
 
@@ -1139,4 +1184,82 @@ void TextEdit::editPasteTimeDate() {
   cb->setText( dt.toString());
   editor->paste();
 #endif
+}
+
+int TextEdit::savePrompt()
+{
+    switch( QMessageBox::information( 0, (tr("Textedit")),
+                                      (tr("Textedit detected\n"
+                                          "you have unsaved changes\n"
+                                          "Go ahead and save?\n")),
+                                      (tr("Save")), (tr("Don't Save")), (tr("&Cancel")), 2, 2 ) )
+      {
+        case 0:
+        {
+            return 1;
+        }
+        break;
+
+        case 1: 
+        {
+            return 2;
+        }
+        break;
+
+        case 2:
+        {
+            return -1;
+        }
+        break;
+      };
+
+    return 0;
+}
+
+void TextEdit::timerCrank()
+{
+    if(featureAutoSave)
+      {
+          if( edited1 )
+            {
+                if(currentFileName.isEmpty())
+                  {
+                    currentFileName = QDir::homeDirPath()+"/textedit.tmp";
+                    saveAs();
+                  }
+                else
+                  {
+                      qDebug("autosave");
+                      save();
+                  }
+                setTimer();
+            }
+      }
+}
+
+void TextEdit::doTimer(bool b)
+{
+    Config cfg("TextEdit");
+    cfg.setGroup ( "View" );
+    cfg.writeEntry ( "autosave", b); 
+    featureAutoSave = b; 
+    nAutoSave->setOn(b);
+    if(b)
+      {
+          qDebug("doTimer true");
+          setTimer();      
+      }
+    else
+        qDebug("doTimer false");
+}
+
+void TextEdit::setTimer()
+{
+if(featureAutoSave)
+  {
+      qDebug("setting autosave");
+      QTimer *timer = new QTimer(this );
+      connect( timer, SIGNAL(timeout()), this, SLOT(timerCrank()) );
+      timer->start( 30000/*0*/, true); //5 minutes
+    }
 }
