@@ -234,19 +234,19 @@ niemand anders Zugang dazu erhält !
     <name>ChooserWidget</name>
     <message>
         <source>&amp;Edit...</source>
-        <translation type="unfinished">&amp;Editieren...</translation>
+        <translation>&amp;Editieren...</translation>
     </message>
     <message>
         <source>&amp;New...</source>
-        <translation type="unfinished">&amp;Neu...</translation>
+        <translation>&amp;Neu...</translation>
     </message>
     <message>
         <source>Co&amp;py</source>
-        <translation type="unfinished">Ko&amp;pieren</translation>
+        <translation>Ko&amp;pieren</translation>
     </message>
     <message>
         <source>De&amp;lete</source>
-        <translation type="unfinished">L&amp;öschen</translation>
+        <translation>L&amp;öschen</translation>
     </message>
 </context>
 <context>
@@ -713,16 +713,17 @@ For more information take a look at the handbook (or help) in the section &quot;
     <name>InterfacePPP</name>
     <message>
         <source>No password</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Passwort</translation>
     </message>
     <message>
         <source>Username defined but no password
  Please enter a password</source>
-        <translation type="unfinished"></translation>
+        <translation>Nutzername vorhanden aber kein Passwort
+Bitte Passwort eingeben</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler</translation>
     </message>
 </context>
 <context>
@@ -736,7 +737,7 @@ For more information take a look at the handbook (or help) in the section &quot;
     <name>ModemWidget</name>
     <message>
         <source>Modem &amp;name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Modem &amp;name:</translation>
     </message>
     <message>
         <source>Modem de&amp;vice:</source>
@@ -944,7 +945,7 @@ you setup the modem</source>
     <name>PPPdArguments</name>
     <message>
         <source>Customize pppd Arguments</source>
-        <translation type="unfinished"></translation>
+        <translation>pppd-Parameter spezifizieren</translation>
     </message>
     <message>
         <source>Argument:</source>
@@ -952,11 +953,11 @@ you setup the modem</source>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished">Hinzu</translation>
+        <translation>Hinzu</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Entfernen</translation>
+        <translation>Entfernen</translation>
     </message>
     <message>
         <source>Defaults</source>
@@ -967,11 +968,11 @@ you setup the modem</source>
     <name>PhoneNumberDialog</name>
     <message>
         <source>Add Phone Number</source>
-        <translation type="unfinished"></translation>
+        <translation>Tel. Nummer hinzufügen</translation>
     </message>
     <message>
         <source>Enter a phone number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte Tel. Nummer eingeben:</translation>
     </message>
 </context>
 <context>
@@ -1408,15 +1409,15 @@ Ask your system administrator to create this file (can be empty) with appropriat
     <name>ScriptWidget</name>
     <message>
         <source>Add</source>
-        <translation type="unfinished">Hinzu</translation>
+        <translation>Hinzu</translation>
     </message>
     <message>
         <source>Insert</source>
-        <translation type="unfinished"></translation>
+        <translation>Einfügen</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Entfernen</translation>
+        <translation>Entfernen</translation>
     </message>
 </context>
 </TS>
