@@ -35,6 +35,8 @@ QString AppLnkItem::toRichText()
     text += "<b><h3>" + _app->name() + "</b></h3><br>";
     text += _app->comment() + "<br>";
     text += "<br>`" + _app->exec() + "`<br>";
+    text += "<br>`" + _app->file() + "`<br>";
+    text += "<br>`" + _app->linkFile() + "`<br>";
     return text;
 }
 
@@ -43,12 +45,8 @@ void AppLnkItem::action( int act )
 	if (!_app->isValid()) qDebug("INVALID");
 	if (act == 0) _app->execute();
 	else if (act == 1){
-		QFileInfo file( _app->file() );
-		qDebug("opening %s in filemanager", file.dirPath().latin1());
  		QCopEnvelope e("QPE/Application/advancedfm", "setDocument(QString)");
- 		e << file.dirPath();
-// 		QCopEnvelope e("QPE/Application/advancedfm", "setDocument(QString)");
- //		e << _app->file();
+		e << _app->linkFile();
 	}
 }
 

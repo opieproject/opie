@@ -35,6 +35,7 @@ QString DocLnkItem::toRichText()
     text += "<b><h3>" + _doc->name() + "</b></h3><br>";
     text += _doc->comment() + "<br>";
     text += "File: " + _doc->file() + "<br>";
+    text += "Link: " + _doc->linkFile() + "<br>";
     text += "Mimetype: " + _doc->type() + "<br>";
     if ( _doc->type().contains( "text" ) ){
 	text += "<br><br><hr><br>";
@@ -63,12 +64,8 @@ void DocLnkItem::action( int act )
 	if (!_doc->isValid()) qDebug("INVALID");
 	if (act == 0) _doc->execute();
 	else if (act == 1){
-		QFileInfo file( _doc->file() );
-		qDebug("opening %s in filemanager", file.dirPath().latin1());
  		QCopEnvelope e("QPE/Application/advancedfm", "setDocument(QString)");
- 		e << file.dirPath();
-// 		QCopEnvelope e("QPE/Application/advancedfm", "setDocument(QString)");
- //		e << _doc->file();
+		e << _doc->file();
 	}
 }
 
