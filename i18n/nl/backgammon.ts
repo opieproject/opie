@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>&lt;b&gt;Rescue&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Redden&lt;/b&gt;</translation>
     </message>
     <message>
         <source>?</source>
@@ -15,23 +15,23 @@
     </message>
     <message>
         <source>&lt;b&gt;Eliminate&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Slaan&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Expose&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Openstellen&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Protect&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Bescherm&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Safe&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Veilig&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Empty&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Leeg&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Default Values</source>
@@ -43,35 +43,39 @@
     </message>
     <message>
         <source>Bring the pieces out of the endzone</source>
-        <translation type="unfinished"></translation>
+        <translation>Haal de stukken uit de eindzone</translation>
     </message>
     <message>
         <source>Eliminate an opponents piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Sla een stuk van de tegenstander</translation>
     </message>
     <message>
         <source>Expose you own pieces.
 After such a move only one piece will remain in the slot</source>
-        <translation type="unfinished"></translation>
+        <translation>Stel je eigen stukken open.
+Na deze zet zal er maar een steen op deze plek blijven staan</translation>
     </message>
     <message>
         <source>Protect a single piece by
 putting another one in this slot</source>
-        <translation type="unfinished"></translation>
+        <translation>Bescherm een enkel stuk
+door er een extra bij te zetten</translation>
     </message>
     <message>
         <source>Move piece to a slot already
 occupied by the player</source>
-        <translation type="unfinished"></translation>
+        <translation>Verplaats stuk naar een plek
+die al ingenomen wordt door de speler</translation>
     </message>
     <message>
         <source>Move piece to an empty slot</source>
-        <translation type="unfinished"></translation>
+        <translation>Verplaats een stuk naar een lege plek</translation>
     </message>
     <message>
         <source>Press and hold the ? buttton
 next to a field for help</source>
-        <translation type="unfinished"></translation>
+        <translation>Houd de ? knop naast een
+veld ingedrukt voor hulp</translation>
     </message>
 </context>
 <context>
