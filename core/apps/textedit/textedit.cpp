@@ -378,7 +378,7 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     editor->setFrameStyle( QFrame::Panel | QFrame::Sunken );
     connect( editor, SIGNAL( textChanged() ), this, SLOT( editorChanged() ) );
 
-    resize( 200, 300 );
+//    resize( 200, 300 );
 
 //    setFontSize(defsize,TRUE);
     FontDatabase fdb;

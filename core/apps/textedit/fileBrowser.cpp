@@ -195,11 +195,21 @@ void fileBrowser::populateList()
         }
         if(fileL !="./") {
         item= new QListViewItem( ListView,fileL,fileS , fileDate);
-        if(isDir || fileL.find("/",0,TRUE) != -1)
-            item->setPixmap( 0,  Resource::loadPixmap( "folder" ));
-        else
-            item->setPixmap( 0, Resource::loadPixmap( "fileopen" ));
+         QPixmap pm;
+         pm= Resource::loadPixmap( "folder" );
+         if(isDir || fileL.find("/",0,TRUE) != -1)
+             item->setPixmap( 0,pm );
+         else
+             item->setPixmap( 0, Resource::loadPixmap( "fileopen" ));
+         if(  fileL.find("->",0,TRUE) != -1) {
+               // overlay link image
+             QPixmap lnk = Resource::loadPixmap( "symlink" );
+             QPainter painter( &pm );
+             painter.drawPixmap( pm.width()-lnk.width(), pm.height()-lnk.height(), lnk );
+             pm.setMask( pm.createHeuristicMask( FALSE ) );
+         item->setPixmap( 0, pm);
         }
+    }
         isDir=FALSE;
         ++it;
     }
