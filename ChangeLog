@@ -4,9 +4,10 @@
 	------------
 	* Fifteen gained configurable number of items (zecke)
 	* Fifteen can have custom background images (zecke)
-        * Added daemonizing capabilities to QWS Server [via Qt/Embedded] (mickeyl)
-        * Integrated the new security framework into libopie2 (zecke,clem)
-        * Converted the launcher to use the new security framework (zecke)
+	* Added daemonizing capabilities to QWS Server [via Qt/Embedded] (mickeyl)
+	* Integrated the new security framework into libopie2 (zecke,clem)
+	* Converted the launcher to use the new security framework (zecke)
+	* Backup can now handle custom locations for backup and restore (ar)
 
 	Fixed Bugs
 	--------
@@ -24,7 +25,7 @@
 	* Introduced new OPimAccessFactory and OBackendFactory which simplyfies database access (eilers)
 	* Modified the PIM API for providing generic use of OPimRecords (eilers)
 	* Clicking on the application symbol now iterates over the application's top level widgets if already raised (zecke)
-    
+
 	Fixed Bugs
 	--------
 	* #1068 - Country Drop Down Box Off Screen
