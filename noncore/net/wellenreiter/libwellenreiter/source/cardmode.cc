@@ -1,7 +1,7 @@
 /* 
  * Set card modes for sniffing
  *
- * $Id: cardmode.cc,v 1.14 2003-02-09 20:50:34 max Exp $
+ * $Id: cardmode.cc,v 1.15 2003-02-09 21:00:55 max Exp $
  */
 
 #include "cardmode.hh"
@@ -131,6 +131,7 @@ int card_set_promisc_up (const char *device)
     if (err < 0)
     {
     	perror("Could not access the interface, ");
+    	close(fd);
         return 0;
     }
     
@@ -140,18 +141,20 @@ int card_set_promisc_up (const char *device)
     if (err < 0)
     {
         perror("Could not access the interface, ");
+    	close(fd);
         return 0;
     }
 
     if(ifr.ifr_flags && IFF_UP)
     {
-     printf("%s is ok\n", device);
-     return 1;
+    	close(fd);
+        return 1;
     }
     else
     {
-     printf("%s flags could not be set", device);
-     return 0;
+		wl_logerr("Could not set promisc flag on %d", device);
+		close(fd);
+        return 0;
     }
 }
 
@@ -172,6 +175,7 @@ int card_set_channel (const char *device, int channel, int cardtype)
    	int *ptr;
 	   /* Socket needed to use the iocall to */
 	   fd = socket(AF_INET, SOCK_STREAM, 0);
+
 	   if ( fd == -1 ) {
  	     return -1;
  	  }
@@ -183,12 +187,14 @@ int card_set_channel (const char *device, int channel, int cardtype)
 	   if (ioctl( fd, SIOCIWFIRSTPRIV + 0x8, &ireq)==0)
 	   {
 		  /* All was fine... */
-		  // close(fd);
+		  close(fd);
   		wl_loginfo("Set channel %d on interface %s",channel, device);
 	       return 1;
 	   }
 	   else
-	   {   /* iocall does not work */
+	   {
+	   	   /* iocall does not work */
+			close(fd);
 			wl_logerr("Could not set channel %d on %s, check cardtype",channel, device);
 			return 0;
 	   }
