@@ -7,17 +7,21 @@
  *
  * =====================================================================
  *	This program is free software; you can redistribute it and/or
- *	modify it under the terms of the GNU General Public License as
- *	published by the Free Software Foundation; either version 2 of
- *	the License, or (at your option) any later version.
+ *	modify it under the terms of the GNU Library General Public 
+ *      License as published by the Free Software Foundation; 
+ *      either version 2 of the License, or (at your option) any later 
+ *      version.
  * =====================================================================
  * ToDo: ...
  * =====================================================================
- * Version: $Id: ocontactdb.h,v 1.1.2.1 2002-07-01 16:49:46 eilers Exp $
+ * Version: $Id: ocontactdb.h,v 1.1.2.2 2002-07-03 06:55:54 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb.h,v $
- * Revision 1.1.2.1  2002-07-01 16:49:46  eilers
+ * Revision 1.1.2.2  2002-07-03 06:55:54  eilers
+ * Moved to LGPL
+ *
+ * Revision 1.1.2.1  2002/07/01 16:49:46  eilers
  * First attempt for cross reference
  *
  * =====================================================================

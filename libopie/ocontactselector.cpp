@@ -6,17 +6,20 @@
  *
  * =====================================================================
  *	This program is free software; you can redistribute it and/or
- *	modify it under the terms of the GNU General Public 
+ *	modify it under the terms of the GNU Library General Public 
  *      License as published by the Free Software Foundation; either 
  *      version 2 of the License, or (at your option) any later version.
  * =====================================================================
  * ToDo: There is a lot todo.. It is currently very simplistic..
  * =====================================================================
- * Version: $Id: ocontactselector.cpp,v 1.1.2.2 2002-07-02 16:36:47 eilers Exp $
+ * Version: $Id: ocontactselector.cpp,v 1.1.2.3 2002-07-03 06:55:54 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactselector.cpp,v $
- * Revision 1.1.2.2  2002-07-02 16:36:47  eilers
+ * Revision 1.1.2.3  2002-07-03 06:55:54  eilers
+ * Moved to LGPL
+ *
+ * Revision 1.1.2.2  2002/07/02 16:36:47  eilers
  * changed interface
  *
  * Revision 1.1.2.1  2002/07/01 16:49:46  eilers
