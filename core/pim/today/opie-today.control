@@ -4,7 +4,7 @@ Section: opie/applications
 Maintainer: Maximilian Reiﬂ <max.reiss@gmx.de>
 Architecture: arm
 Version: 0.3.0-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
+Depends: opie-base ($QPE_VERSION), libopie ($QPE_VERSION
 License: GPL
 Description: today screen
  A short overview over current appointments and tasks.
