@@ -1,6 +1,6 @@
 /*
                =.            This file is part of the OPIE Project
-             .=l.            Copyright (c)  2002 <>
+             .=l.            Copyright (c)  2002 Holger Freyther <zecke@handhelds.org>
            .>+-=
  _;:,     .>    :=|.         This library is free software; you can 
 .> <`_,   >  .   <=          redistribute it and/or  modify it under
@@ -36,10 +36,14 @@
 #include <qlineedit.h>
 #include <qcheckbox.h>
 #include <qlabel.h>
+#include <qheader.h>
+#include <qdir.h>
 
+#include <qpe/qpeapplication.h>
 #include <qpe/fileselector.h>
 #include <qpe/applnk.h>
 #include <qpe/global.h>
+#include <qpe/mimetype.h>
 
 #include "ofileselector.h"
 
@@ -268,9 +272,81 @@ void OFileSelector::updateLay()
   if( m_shPerm )
     m_checkPerm->setChecked(check );
 }
+// let's update the mimetypes. Use the current mimefilter for the 2nd QDir retrieve
+// insert QListViewItems with the right options
+bool OFileSelector::compliesMime(const QString &path, const QString &mime )
+{
+  if( mime == "All" )
+    return true;
+  MimeType type( path );
+  if( type.id() == mime )
+    return true;
+  return false;
+}
+
 void OFileSelector::reparse()
 {
+  if(m_View== 0)
+    return;
 
+  m_View->clear();
+ 
+  QDir dir( m_currentDir );
+  QString currMime =m_mimeCheck->currentText();
+  // update the mimetype now
+  if( m_autoMime ) {
+    m_mimetypes.clear();
+    m_mimeCheck->clear();
+    dir.setFilter( QDir::Files | QDir::Readable );
+    dir.setSorting(QDir::Size ); 
+    const QFileInfoList *list = dir.entryInfoList();
+    QFileInfoListIterator it( *list );
+    QFileInfo *fi;
+    while( (fi=it.current())  ){
+      if(fi->extension() == QString::fromLatin1("desktop") ){
+	++it;
+	continue;
+      }
+      MimeType type(fi->filePath() );
+      if( !m_mimetypes.contains( type.id() ) )
+	m_mimetypes.append( type.id() );
+
+      ++it;
+    }
+    m_mimeCheck->insertStringList(m_mimetypes );
+    // set it to the current mimetype
+  };
+  dir.setFilter(QDir::All );
+  dir.setSorting(QDir::Name | QDir::DirsFirst  );
+  const QFileInfoList *list = dir.entryInfoList();
+  QFileInfoListIterator it( *list );
+  QFileInfo *fi;
+  while( (fi=it.current())  ){
+    if(fi->isSymLink() ){
+      QString file = fi->readLink();
+      for(int i=0; i<=4; i++ ){ // prepend from dos
+	QFileInfo info( file );
+	if( !info.exists() ){
+	  addSymlink(m_currentDir, info.fileName(), TRUE );
+	  break;
+	}else if( info.isDir() ){ 
+	  //addDir( );
+	}else if( info.isFile() ){
+	  
+	}else if( info.isSymLink() ){
+	  file = info.readLink();
+	}else if( i == 4 ){ // just insert it and have the symlink symbol
+	  addSymlink(m_currentDir, info.fileName() );
+	}
+      }
+    }else if( fi->isDir() ){
+
+    }else if( fi->isFile() ) { // file ?
+
+
+    }
+    ++it;  
+  }
 }
 QString OFileSelector::directory()
 {
@@ -365,6 +441,9 @@ void OFileSelector::slotViewCheck(const QString &view ){
   if( view == QString::fromLatin1("Documents") ){
     // get the mimetype now
     // check if we're the current widget and return
+    if( m_View != 0) // delete 0 shouldn't crash but it did :( 
+      delete m_View;
+    m_View = 0;
     delete m_select;
     m_select = new FileSelector( currMime == "All" ? QString::null : currMime,
 				 m_stack,"fileselector", FALSE, FALSE );
@@ -373,21 +452,24 @@ void OFileSelector::slotViewCheck(const QString &view ){
     m_selector = NORMAL;
 
   }else if(view == QString::fromLatin1("Files") ){
-    if( m_select != 0 ){
-      // remove from the stack
-      delete m_select;
-      m_select = 0;
-      m_selector = EXTENDED;
-      // create the ListView or IconView
+    // remove from the stack
+    delete m_select;
+    m_select = 0;
+    delete m_View;
+    m_View = 0;
+    m_selector = EXTENDED;
+    // create the ListView or IconView
+    initializeListView();
 
-      reparse();
-    }
+    reparse();
   }else if(view == QString::fromLatin1("All Files") ) {
     // remove from the stack
     delete m_select;
     m_select = 0;
+    delete m_View;
+    m_View = 0;
     m_selector = EXTENDED_ALL;
-
+    initializeListView();
     reparse();
   };
 };
@@ -407,7 +489,33 @@ void OFileSelector::updateMimes() // lets check which mode is active
       m_mimetypes.append( (*dit)->type() );
     }
   }else{
-
+    // should be allreday updatet
 
   }
 };
+void OFileSelector::initializeListView()
+{
+  m_View = new QListView(m_stack, "Extended view" );
+  m_stack->addWidget( m_View, EXTENDED );
+  m_stack->raiseWidget( EXTENDED );
+  QPEApplication::setStylusOperation( m_View->viewport(),QPEApplication::RightOnHold);
+  // set up the stuff
+  // Pixmap Name Date Size mime
+  //(m_View->header() )->hide();
+  //m_View->setRootIsDecorated(false);
+  m_View->addColumn(" ");
+  m_View->addColumn(tr("Name") );
+  m_View->addColumn(tr("Size") );
+  m_View->addColumn(tr("Date"), 60 );
+  m_View->addColumn(tr("Mime Type") );
+  QHeader *header = m_View->header();
+  header->hide();
+};
+
+
+
+
+
+
+
+

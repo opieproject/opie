@@ -58,6 +58,8 @@ class QLabel;
 class QWidgetStack;
 class QHBoxLayout;
 class QVBoxLayout;
+class QPopupMenu;
+
 
 class OFileSelectorItem : public QListViewItem {
  public:
@@ -102,10 +104,14 @@ class OFileSelector : public QWidget {
   bool setPermission() const;
   void setPermissionChecked( bool check );
   void setMode( int );
+  void setShowDirs(bool dir ) { };
+  bool showDirs() {bool turn; return turn; }
   int mode()const { return m_mode;  };
   int selector()const { return m_selector; };
   void setSelector( int );
   QString selectedName( );
+  void setPopupMenu( const QPopupMenu * );
+
   const DocLnk* selectedDocument()const;
   void updateLay();
 
@@ -162,10 +168,16 @@ class OFileSelector : public QWidget {
  protected:
 
  private:
+  // implementation todo
+  virtual void addFile(const QString &path, const QString &name, bool symlink = FALSE ) {};
+  virtual void addDir( const QString &path, const QString &dir , bool symlink = FALSE ){};
+  virtual void addSymlink(const QString &path, const QString &name, bool broken = FALSE ){};
   void delItems();
   void initializeName();
   void initializeYes();
   void initializeChooser();
+  void initializeListView();
+  bool compliesMime(const QString &path, const QString &mime);
 
   class OFileSelectorPrivate;
   OFileSelectorPrivate *d;
