@@ -32,3 +32,4 @@ TRANSLATIONS = ../../../i18n/de/libscreenshotapplet.ts \
 
 
 include ( $(OPIEDIR)/include.pro )
+target.path = $$prefix/plugins/applets

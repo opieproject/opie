@@ -30,3 +30,4 @@ TRANSLATIONS = ../../../i18n/de/libbatteryapplet.ts \
 
 
 include ( $(OPIEDIR)/include.pro )
+target.path = $$prefix/plugins/applets

@@ -14,3 +14,4 @@ OBJECTS_DIR=opieobj
 
 
 include ( $(OPIEDIR)/include.pro )
+target.path = $$prefix/plugins/applets

@@ -30,3 +30,4 @@ TRANSLATIONS = ../../../i18n/de/libclipboardapplet.ts \
 
 
 include ( $(OPIEDIR)/include.pro )
+target.path = $$prefix/plugins/applets

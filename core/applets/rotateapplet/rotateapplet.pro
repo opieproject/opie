@@ -28,3 +28,4 @@ TRANSLATIONS = ../../../i18n/de/librotateapplet.ts \
          ../../../i18n/zh_TW/librotateapplet.ts
 
 include ( $(OPIEDIR)/include.pro )
+target.path = $$prefix/plugins/applets

@@ -30,3 +30,4 @@ TRANSLATIONS = ../../../i18n/de/libclockapplet.ts \
 
 
 include ( $(OPIEDIR)/include.pro )
+target.path = $$prefix/plugins/applets
