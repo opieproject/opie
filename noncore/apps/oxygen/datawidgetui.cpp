@@ -40,7 +40,7 @@ dataWidgetUI::dataWidgetUI() : QWidget()
 	int i = 0;
     for ( QStringList::Iterator it =  names->begin() ; it != names->end() ; ++it,i++)
     {
-        dataCombo->insertItem( QString::number( i )+" - "+*it );
+        dataCombo->insertItem( QString::number( i+1 )+" - "+*it );
     }
     
     OxydataWidget *oxyDW = new OxydataWidget(this, "OxydataWidget_oxyDW", names);
