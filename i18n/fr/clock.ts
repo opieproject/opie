@@ -44,7 +44,7 @@
     </message>
     <message>
         <source>Set date and time.</source>
-        <translation>Paramètrer la date et l&apos;heure.</translation>
+        <translation>Paramétrer la date et l&apos;heure.</translation>
     </message>
     <message>
         <source>Clock: Alarm was missed.</source>

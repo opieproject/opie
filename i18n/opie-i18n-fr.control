@@ -2,7 +2,7 @@ Package: opie-i18n-fr
 Files: i18n/fr/.directory i18n/fr/*.qm etc/dict/dawg.fr
 Priority: optional
 Section: opie/i18n
-Maintainer: Amrein-Marie Christophe <Christophe.Amrein-Marie@wanadoo.fr>
+Maintainer: Amrein-Marie Christophe <christophe@handhelds.org>
 Architecture: arm
 Depends: task-opie-minimal, opie-language
 Description: i18n: French

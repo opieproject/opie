@@ -237,7 +237,7 @@
     <name>Ipkg</name>
     <message>
         <source>Dealing with package %1</source>
-        <translation>Traitement du package %1</translation>
+        <translation>Traitement du paquet %1</translation>
     </message>
     <message>
         <source>Removing symbolic links...
@@ -267,7 +267,7 @@
     </message>
     <message>
         <source>package - </source>
-        <translation>package -</translation>
+        <translation>paquet -</translation>
     </message>
     <message>
         <source>Couldn&apos;t open status file - </source>
@@ -318,7 +318,7 @@
     <name>MainWindow</name>
     <message>
         <source>AQPkg - Package Manager</source>
-        <translation>AQPkg - Gestionnaire de Package</translation>
+        <translation>AQPkg - Gestionnaire de Paquets</translation>
     </message>
     <message>
         <source>Type the text to search for here.</source>
@@ -334,7 +334,7 @@
     </message>
     <message>
         <source>Click here to update package lists from servers.</source>
-        <translation>Cliquez ici pour mettre les listes de packages à jour depuis les serveurs.</translation>
+        <translation>Cliquez ici pour mettre les listes de paquets à jour depuis les serveurs.</translation>
     </message>
     <message>
         <source>Upgrade</source>
@@ -342,7 +342,7 @@
     </message>
     <message>
         <source>Click here to upgrade all installed packages if a newer version is available.</source>
-        <translation>Cliquez ici pour mettre à jour tous les packages installés si une nouvelle version est disponible.</translation>
+        <translation>Cliquez ici pour mettre à jour tous les paquets installés si une nouvelle version est disponible.</translation>
     </message>
     <message>
         <source>Download</source>
@@ -350,7 +350,7 @@
     </message>
     <message>
         <source>Click here to download the currently selected package(s).</source>
-        <translation>Cliquer ici pour télécharger le(s) package(s) sélectionné(s).</translation>
+        <translation>Cliquer ici pour télécharger le(s) paquet(s) sélectionné(s).</translation>
     </message>
     <message>
         <source>Apply changes</source>
@@ -358,7 +358,7 @@
     </message>
     <message>
         <source>Click here to install, remove or upgrade currently selected package(s).</source>
-        <translation>Cliquez ici pour installer, enlever ou mettre à jour le(s) package(s) sélectionné(s).</translation>
+        <translation>Cliquez ici pour installer, enlever ou mettre à jour le(s) paquet(s) sélectionné(s).</translation>
     </message>
     <message>
         <source>Actions</source>
@@ -366,27 +366,27 @@
     </message>
     <message>
         <source>Show packages not installed</source>
-        <translation>Montrer les packages non installés</translation>
+        <translation>Montrer les paquets non installés</translation>
     </message>
     <message>
         <source>Click here to show packages available which have not been installed.</source>
-        <translation>Cliquez ici pour afficher les packages non installés disponibles.</translation>
+        <translation>Cliquez ici pour afficher les paquets non installés disponibles.</translation>
     </message>
     <message>
         <source>Show installed packages</source>
-        <translation>Afficher les packages installés</translation>
+        <translation>Afficher les paquets installés</translation>
     </message>
     <message>
         <source>Click here to show packages currently installed on this device.</source>
-        <translation>Cliquez ici pour afficher les packages installés sur cet appareil.</translation>
+        <translation>Cliquez ici pour afficher les paquets installés sur cet appareil.</translation>
     </message>
     <message>
         <source>Show updated packages</source>
-        <translation>Afficher les packages mis à jour</translation>
+        <translation>Afficher les paquets mis à jour</translation>
     </message>
     <message>
         <source>Click here to show packages currently installed on this device which have a newer version available.</source>
-        <translation>Cliquez ici pour afficher les packages installés sur cet appareil et dont une version plus récente est disponible.</translation>
+        <translation>Cliquez ici pour afficher les paquets installés sur cet appareil et dont une version plus récente est disponible.</translation>
     </message>
     <message>
         <source>Filter by category</source>
@@ -394,7 +394,7 @@
     </message>
     <message>
         <source>Click here to list packages belonging to one category.</source>
-        <translation>Cliquez ici pour afficher les packages appartenant à une catégorie.</translation>
+        <translation>Cliquez ici pour afficher les paquets appartenant à une catégorie.</translation>
     </message>
     <message>
         <source>Set filter category</source>
@@ -402,7 +402,7 @@
     </message>
     <message>
         <source>Click here to change package category to used filter.</source>
-        <translation>Cliquez ici pour changer la catégorie de packages à utiliser comme filtre.</translation>
+        <translation>Cliquez ici pour changer la catégorie de paquets à utiliser comme filtre.</translation>
     </message>
     <message>
         <source>Find</source>
@@ -410,7 +410,7 @@
     </message>
     <message>
         <source>Click here to search for text in package names.</source>
-        <translation>Cliquez ici pour rechercher un texte dans les noms de packages.</translation>
+        <translation>Cliquez ici pour rechercher un texte dans les noms de paquets.</translation>
     </message>
     <message>
         <source>Find next</source>
@@ -418,7 +418,7 @@
     </message>
     <message>
         <source>Click here to find the next package name containing the text you are searching for.</source>
-        <translation>Cliquez ici pour trouver le package suivant contenant le texte recherché.</translation>
+        <translation>Cliquez ici pour trouver le paquets suivant contenant le texte recherché.</translation>
     </message>
     <message>
         <source>Quick Jump keypad</source>
@@ -426,7 +426,7 @@
     </message>
     <message>
         <source>Click here to display/hide keypad to allow quick movement through the package list.</source>
-        <translation>Cliquez ici pour afficher/cacher le clavier permettant le déplacement rapide dans la liste des packages.</translation>
+        <translation>Cliquez ici pour afficher/cacher le clavier permettant le déplacement rapide dans la liste des paquets.</translation>
     </message>
     <message>
         <source>View</source>
@@ -502,7 +502,7 @@ Cochez la case en début de ligne pour sélectionner un package.</translation>
     </message>
     <message>
         <source>Click here to uninstall the currently selected package(s).</source>
-        <translation>Cliquez ici pour désinstaller le(s) package(s) sélectionné(s).</translation>
+        <translation>Cliquez ici pour désinstaller le(s) paquet(s) sélectionné(s).</translation>
     </message>
     <message>
         <source>Building server list:
@@ -514,7 +514,7 @@ Cochez la case en début de ligne pour sélectionner un package.</translation>
     <message>
         <source>Building package list for:
 <byte value="x9"/>%1</source>
-        <translation>Construit la liste des packages pour :
+        <translation>Construit la liste des paquets pour :
 %1</translation>
     </message>
     <message>
@@ -547,7 +547,7 @@ Cochez la case en début de ligne pour sélectionner un package.</translation>
     </message>
     <message>
         <source>Refreshing server package lists</source>
-        <translation>Rafraîchit la liste de packages des serveurs</translation>
+        <translation>Rafraîchit la liste de paquets des serveurs</translation>
     </message>
     <message>
         <source>WARNING: Upgrading while
@@ -568,7 +568,7 @@ Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>Upgrading installed packages</source>
-        <translation>Met à jour les packages installés</translation>
+        <translation>Met à jour les paquets installés</translation>
     </message>
     <message>
         <source>Are you sure you wish to delete
@@ -598,11 +598,11 @@ Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>Install Remote Package</source>
-        <translation>Installer Package Distant</translation>
+        <translation>Installer Paquet Distant</translation>
     </message>
     <message>
         <source>Enter package location</source>
-        <translation>Entrez la chemin du package</translation>
+        <translation>Entrez la chemin du paquet</translation>
     </message>
     <message>
         <source>Nothing to do</source>
@@ -610,7 +610,7 @@ Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>No packages selected</source>
-        <translation>Aucun package sélectionné</translation>
+        <translation>Aucun paquet sélectionné</translation>
     </message>
     <message>
         <source>OK</source>
@@ -685,11 +685,11 @@ Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>Package Information</source>
-        <translation>Information Package</translation>
+        <translation>Information Paquet</translation>
     </message>
     <message>
         <source>Package information is unavailable</source>
-        <translation>Informations du Package non disponibles</translation>
+        <translation>Informations sur le paquet non disponibles</translation>
     </message>
     <message>
         <source>Close</source>
@@ -700,11 +700,11 @@ Etes-vous sûr ?</translation>
     <name>QObject</name>
     <message>
         <source>Installed packages</source>
-        <translation>Packages installés</translation>
+        <translation>Paquets installés</translation>
     </message>
     <message>
         <source>Local packages</source>
-        <translation>Packages locaux</translation>
+        <translation>Paquets locaux</translation>
     </message>
     <message>
         <source>N/A</source>
@@ -713,7 +713,7 @@ Etes-vous sûr ?</translation>
     <message>
         <source>Package - %1
               version - %2</source>
-        <translation>Package - %1
+        <translation>Paquets - %1
              version - %2</translation>
     </message>
     <message>
