@@ -1,3 +1,3 @@
 #define QPE_VENDOR "Project Opie"
-#define QPE_VERSION "0.9.9-snapshot"
+#define QPE_VERSION "1.0.0"
 #define SUB_VERSION ""
