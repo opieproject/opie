@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.13 2002-06-29 00:25:26 sandman Exp $
+** $Id: qpeapplication.cpp,v 1.14 2002-07-01 09:45:51 sandman Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -1349,7 +1349,7 @@ void QPEApplication::internalSetStyle( const QString &style )
 
 		do { // try/catch simulation
 			// QLibrary *lib = new QLibrary ( path, QLibrary::Immediately );
-			void *lib = ::dlopen ( path. local8Bit ( ), RTLD_NOW | RTLD_GLOBAL );
+			void *lib = ::dlopen ( path. local8Bit ( ), RTLD_LAZY | RTLD_GLOBAL );
 			
 			if ( lib ) {
 				//QStyle * (*fpa) ( ) = (QStyle * (*) ( )) lib-> resolve ( "allocate" );	
