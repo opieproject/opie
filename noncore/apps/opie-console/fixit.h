@@ -17,13 +17,9 @@
 /*
  * The Zaurus rom
  */
-class FixIt : public QObject {
-
-    Q_OBJECT
-
+class FixIt {
 public:
     FixIt();
-    ~FixIt();
     void fixIt();
     /* no real interested in implementing it */
     void breakIt();

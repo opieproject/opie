@@ -47,9 +47,6 @@ FixIt::FixIt() : QObject() {
 "sy::respawn:/sbin/shsync\n";
 }
 
-FixIt::~FixIt() {
-}
-
 /*
  * the retail Zaurus is broken in many ways
  * one is that pppd is listening on our port...
