@@ -169,6 +169,8 @@ void MainWindow::runNTP()
 		msg.append( tr( " minutes, but only " ) );
 		msg.append( QString::number( _lookupDiff / 60 ) );
 		msg.append( tr(" minutes elapsed since last lookup.<br>Continue?") );
+
+		QString msg = tr( "You asked for a delay of %1 minutes, but only %2 minutes elapsed since last lookup.<br>Continue?" ).arg( QString::number( ntpDelay ) ).arg( QString::number( _lookupDiff / 60 ) );
 		
 		switch (
 			QMessageBox::warning( this, tr( "Continue?" ), msg, QMessageBox::Yes, QMessageBox::No )
@@ -341,8 +343,7 @@ void MainWindow::slotNtpFinished( OProcess *p )
 	if ( timeShift == 0.0 )
 		return;
 	int secsSinceLast = time - lastLookup;
-	output = QString::number( timeShift );
-	output.append( tr( " seconds" ) );
+	output = tr( "%1 seconds").arg(QString::number( timeShift ));
 	
 	// Display information on time server tab
 	if ( ntpTabEnabled )
