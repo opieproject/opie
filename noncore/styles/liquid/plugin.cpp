@@ -109,3 +109,5 @@ QRESULT LiquidSettingsInterface::queryInterface ( const QUuid &uuid, QUnknownInt
 	return QS_OK;
 }
 
+// Hack for Retail Z experiments
+extern "C" { QStyle *allocate ( ) { return new LiquidStyle ( ); } }

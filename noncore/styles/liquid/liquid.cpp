@@ -125,9 +125,9 @@ bool TransMenuHandler::eventFilter(QObject *obj, QEvent *ev)
                 QPixmapEffect::fade(*pix, (((float)opacity)+80)*0.01, color);
             }
 
-            if (p->inherits("QPopupMenu"))
-                pixDict.insert(p->winId(), pix);
-            else {
+            pixDict.insert(p->winId(), pix);
+            
+            if (!p->inherits("QPopupMenu")) {
             	p->setBackgroundPixmap(*pix);
             	
             	QObjectList *ol = p-> queryList("QWidget");
@@ -146,10 +146,9 @@ bool TransMenuHandler::eventFilter(QObject *obj, QEvent *ev)
            type == Custom){
 //            qWarning("Deleting menu pixmap, width %d", pixDict.find(p->winId())->width());
 
-            if (p->inherits("QPopupMenu"))
-                pixDict.remove(p->winId());
-            else {
-            	p->setBackgroundMode(QWidget::PaletteBackground);
+            pixDict.remove(p->winId());
+            if (!p->inherits("QPopupMenu")) {
+                p->setBackgroundMode(QWidget::PaletteBackground);
 
             	QObjectList *ol = p-> queryList("QWidget");
 				for ( QObjectListIt it( *ol ); it. current ( ); ++it ) {
@@ -845,7 +844,8 @@ void LiquidStyle::polish(QWidget *w)
     }
    
     
-    w-> setBackgroundOrigin ( QWidget::ParentOrigin );
+    if ( !w-> inherits("QFrame") || (((QFrame*) w)-> frameShape () == QFrame::NoFrame ))
+	    w-> setBackgroundOrigin ( QWidget::ParentOrigin );
 
     if(w->inherits("QComboBox") ||
        w->inherits("QLineEdit") || w->inherits("QRadioButton") ||
