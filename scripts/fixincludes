@@ -19,9 +19,9 @@ sub copy_file($$);
 sub process_source_file($);
 
 # some global variables
-$verbose = 0; # turns on debugging
-$modify = 0;  # if 1 it should try to fix the files as well
-$experimental = 0; # try&error if an include is obsolete (slow!!)
+$verbose = 1; # turns on debugging
+$modify = 1;  # if 1 it should try to fix the files as well
+$experimental = 1; # try&error if an include is obsolete (slow!!)
 @explicitfiles = (); # filled in if passing files on the command line
 
 # statistic variables
@@ -55,61 +55,6 @@ $hExt       = "(h|H|hh|hxx|hpp|h\\+\\+)";
 
 # list of compat headers. scroll down ... much of boring stuff here..
 %compatmap = (
- 'qapp.h'        =>  "qapplication.h",
- #'qarray.h'      =>  "qmemarray.h",
- #'qbitarry.h'    =>  "qbitarray.h",
- 'qbttngrp.h'    =>  "qbuttongroup.h",
- #'qchkbox.h'     =>  "qcheckbox.h",
- 'qclipbrd.h'    =>  "qclipboard.h",
- #'qcollect.h'    =>  "qptrcollection.h",
- #'qcollection.h' =>  "qptrcollection.h",
- 'qcombo.h'      =>  "qcombobox.h",
- 'qconnect.h'    =>  "qconnection.h",
- 'qdatetm.h'     =>  "qdatetime.h",
- 'qdrawutl.h'    =>  "qdrawutil.h",
- 'qdstream.h'    =>  "qdatastream.h",
- #'qfiledef.h'    =>  "private/qfiledefs_p.h",
- 'qfiledlg.h'    =>  "qfiledialog.h",
- 'qfileinf.h'    =>  "qfileinfo.h",
- 'qfontdta.h'    =>  "qfontdata.h",
- 'qfontinf.h'    =>  "qfontinfo.h",
- 'qfontmet.h'    =>  "qfontmetrics.h",
- 'qgrpbox.h'     =>  "qgroupbox.h",
- 'qintcach.h'    =>  "qintcache.h",
- 'qiodev.h'      =>  "qiodevice.h",
- 'qlcdnum.h'     =>  "qlcdnumber.h",
- 'qlined.h'      =>  "qlineedit.h",
- #'qlist.h'       =>  "qptrlist.h",
- 'qmenudta.h'    =>  "qmenudata.h",
- 'qmetaobj.h'    =>  "qmetaobject.h",
- 'qmlined.h'     =>  "qtmultilineedit.h",
- 'qmsgbox.h'     =>  "qmessagebox.h",
- 'qmultilinedit.h' =>  "qmultilineedit.h",
- 'qobjcoll.h'    =>  "qobjectlist.h>\n\#include <qobjectdict.h",
- 'qobjdefs.h'    =>  "qobjectdefs.h",
- 'qpaintd.h'     =>  "qpaintdevice.h",
- 'qpaintdc.h'    =>  "qpaintdevicedefs.h",
- 'qpdevmet.h'    =>  "qpaintdevicemetrics.h",
- 'qpmcache.h'    =>  "qpixmapcache.h",
- 'qpntarry.h'    =>  "qpointarray.h",
- 'qpopmenu.h'    =>  "qpopupmenu.h",
- 'qprndlg.h'     =>  "qprintdialog.h",
- 'qprogbar.h'    =>  "qprogressbar.h",
- 'qprogdlg.h'    =>  "qprogressdialog.h",
- 'qpsprn.h'      =>  "<private/qpsprinter_p.h>",
- 'qpushbt.h'     =>  "qpushbutton.h",
- 'qqueue.h'      =>  "qptrqueue.h",
- 'qradiobt.h'    =>  "qradiobutton.h",
- 'qrangect.h'    =>  "qrangecontrol.h",
- 'qscrbar.h'     =>  "qscrollbar.h",
- 'qsocknot.h'    =>  "qsocketnotifier.h",
-# 'qstack.h'      =>  "qptrstack.h",
- 'qtabdlg.h'     =>  "qtabdialog.h",
- 'qtstream.h'    =>  "qtextstream.h",
-# 'qvector.h'     =>  "qptrvector.h",
- 'qwidcoll.h'    =>  "qwidgetlist.h\n\#include <qwidgetintdict.h",
- 'qwindefs.h'    =>  "qwindowdefs.h",
-
 # and now the KDE specific compat includes
 # 'kapp.h'        =>  "kapplication.h",
 # 'kstddirs.h'    =>  "kstandarddirs.h",
