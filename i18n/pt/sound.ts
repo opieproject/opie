@@ -1,5 +1,25 @@
 <!DOCTYPE TS><TS>
 <context>
+    <name>SoundSettings</name>
+    <message>
+        <source>Restart</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To implement a new key switch
+Opie will have to be restarted./n&lt;B&gt;Restart&lt;/B&gt; Opie now?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SoundSettingsBase</name>
     <message>
         <source>Vmemo Settings</source>
