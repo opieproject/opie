@@ -39,7 +39,6 @@ TodolistPluginWidget::TodolistPluginWidget( QWidget *parent,  const char* name )
     todo = new ToDoDB();
 
     readConfig();
-    m_maxCharClip = 36;
     getTodo();
 }
 
@@ -52,6 +51,7 @@ void TodolistPluginWidget::readConfig() {
     Config cfg( "todaytodoplugin" );
     cfg.setGroup( "config" );
     m_maxLinesTask = cfg.readNumEntry( "maxlinestask", 5 );
+    m_maxCharClip =  cfg.readNumEntry( "maxcharclip", 38 );
 }
 
 

@@ -39,9 +39,12 @@ private:
     void writeConfig();
 
     QSpinBox* SpinBox2;
+    QSpinBox* SpinBoxClip;
 
     // how many lines should be showed in the todolist section
     int m_max_lines_task;
+    // clip the lines after X chars
+    int m_maxCharClip;
 
 
 

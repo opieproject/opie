@@ -19,32 +19,37 @@
 #include <qpe/config.h>
 
 #include <qlayout.h>
+#include <qhbox.h>
 #include <qtoolbutton.h>
 #include <qlabel.h>
+
 
 
 TodolistPluginConfig::TodolistPluginConfig( QWidget *parent,  const char* name)
     : ConfigWidget(parent,  name ) {
 
     QVBoxLayout * layout = new QVBoxLayout( this );
+    layout->setMargin( 20 );
 
-    QFrame* Frame9 = new QFrame( this, "Frame9" );
-    Frame9->setGeometry( QRect( -5, 0, 230, 310 ) );
-    Frame9->setFrameShape( QFrame::StyledPanel );
-    Frame9->setFrameShadow( QFrame::Raised );
+    QHBox *box1 = new QHBox( this );
 
-    QLabel* TextLabel6 = new QLabel( Frame9, "TextLabel6" );
-    TextLabel6->setGeometry( QRect( 20, 10, 100, 60 ) );
-    TextLabel6->setText( tr( "How many\n"
-                             "tasks should \n"
+    QLabel* TextLabel6 = new QLabel( box1, "TextLabel6" );
+    TextLabel6->setText( tr( "How many\n tasks should \n"
                              "be shown?" ) );
 
-    SpinBox2 = new QSpinBox( Frame9, "SpinBox2" );
-    SpinBox2->setGeometry( QRect( 115, 20, 58, 25 ) );
-    SpinBox2->setMaxValue( 20 );
-    SpinBox2->setValue( 5 );
+    SpinBox2 = new QSpinBox( box1, "SpinBox2" );
+    SpinBox2->setMaxValue( 40 );
 
-    layout->addWidget( Frame9 );
+    QHBox *box2 = new QHBox( this );
+
+    QLabel* clipLabel = new QLabel( box2, "" );
+    clipLabel->setText( tr( "Clip line after\n X chars" ) );
+
+    SpinBoxClip = new QSpinBox( box2, "SpinClip" );
+    SpinBoxClip->setMaxValue( 200 );
+
+    layout->addWidget( box1 );
+    layout->addWidget( box2 );
 
     readConfig();
 }
@@ -54,6 +59,8 @@ void TodolistPluginConfig::readConfig() {
     cfg.setGroup( "config" );
     m_max_lines_task = cfg.readNumEntry( "maxlinestask", 5 );
     SpinBox2->setValue( m_max_lines_task );
+    m_maxCharClip =  cfg.readNumEntry( "maxcharclip", 38 );
+    SpinBoxClip->setValue( m_maxCharClip );
 }
 
 
@@ -62,6 +69,8 @@ void TodolistPluginConfig::writeConfig() {
     cfg.setGroup( "config" );
     m_max_lines_task = SpinBox2->value();
     cfg.writeEntry( "maxlinestask", m_max_lines_task );
+    m_maxCharClip = SpinBoxClip->value();
+    cfg.writeEntry( "maxcharclip",  m_maxCharClip );
     cfg.write();
 }
 
