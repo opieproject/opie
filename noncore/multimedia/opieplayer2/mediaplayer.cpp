@@ -108,6 +108,7 @@ void MediaPlayer::startDecreasingVolume() {
     volumeDirection = -1;
     startTimer( 100 );
     // da kommt demnächst osound denk ich mal
+ /////////////////////////// lets just move those change volume here
     //  AudioDevice::decreaseVolume();
 }
 
@@ -119,8 +120,18 @@ void MediaPlayer::startIncreasingVolume() {
 }
 
 
+bool drawnOnScreenDisplay = FALSE;
+unsigned int onScreenDisplayVolume = 0;
+const int yoff = 110;
+
 void MediaPlayer::stopChangingVolume() {
     killTimers();
+    // Get rid of the on-screen display stuff
+    drawnOnScreenDisplay = FALSE;
+    onScreenDisplayVolume = 0;
+    int w = audioUI->width();
+    int h = audioUI->height();
+    audioUI->repaint( (w - 200) / 2, h - yoff, 200 + 9, 70, FALSE );
 }
 
 
@@ -129,6 +140,42 @@ void MediaPlayer::timerEvent( QTimerEvent * ) {
     //  AudioDevice::increaseVolume();
     //    else if ( volumeDirection == -1 )
         //       AudioDevice::decreaseVolume();
+
+// Display an on-screen display volume
+    unsigned int l, r, v; bool m;
+    AudioDevice::getVolume( l, r, m );
+    v = ((l + r) * 11) / (2*0xFFFF);
+
+    if ( drawnOnScreenDisplay && onScreenDisplayVolume == v )
+  return;
+
+    int w = audioUI->width();
+    int h = audioUI->height();
+
+    if ( drawnOnScreenDisplay ) {
+  if ( onScreenDisplayVolume > v )
+      audioUI->repaint( (w - 200) / 2 + v * 20 + 0, h - yoff + 40, (onScreenDisplayVolume - v) * 20 + 9, 30, FALSE );
+    }
+
+    drawnOnScreenDisplay = TRUE;
+    onScreenDisplayVolume = v;
+
+    QPainter p( audioUI );
+    p.setPen( QColor( 0x10, 0xD0, 0x10 ) );
+    p.setBrush( QColor( 0x10, 0xD0, 0x10 ) );
+
+    QFont f;
+    f.setPixelSize( 20 );
+    f.setBold( TRUE );
+    p.setFont( f );
+    p.drawText( (w - 200) / 2, h - yoff + 20, tr("Volume") );
+
+    for ( unsigned int i = 0; i < 10; i++ ) {
+  if ( v > i ) 
+      p.drawRect( (w - 200) / 2 + i * 20 + 0, h - yoff + 40, 9, 30 );
+   else 
+      p.drawRect( (w - 200) / 2 + i * 20 + 3, h - yoff + 50, 3, 10 );
+    }
 }
 
 void MediaPlayer::keyReleaseEvent( QKeyEvent *e) {

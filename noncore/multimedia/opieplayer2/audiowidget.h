@@ -25,7 +25,7 @@ enum AudioButtons {
 };
 
 
-#define USE_DBLBUF
+//#define USE_DBLBUF
 
 
 class Ticker : public QFrame {
@@ -75,6 +75,7 @@ protected:
     void doUnblank();
     void paintEvent( QPaintEvent *pe );
     void showEvent( QShowEvent *se );
+    void resizeEvent( QResizeEvent *re );
     void mouseMoveEvent( QMouseEvent *event );
     void mousePressEvent( QMouseEvent *event );
     void mouseReleaseEvent( QMouseEvent *event );
@@ -85,9 +86,20 @@ private:
     void toggleButton( int );
     void setToggleButton( int, bool );
     void paintButton( QPainter *p, int i );
+    QString skin;
+    QPixmap *pixBg;
+    QImage  *imgUp;
+    QImage  *imgDn;
+    QImage  *imgButtonMask;
+    QBitmap *masks[11];
+    QPixmap *buttonPixUp[11];
+    QPixmap *buttonPixDown[11];
+    
     QPixmap *pixmaps[4];
-    Ticker *songInfo;
-    QSlider *slider;
+    Ticker  songInfo;
+    QSlider slider;
+    QLineEdit time;
+    int xoff, yoff;
 };
 
 
