@@ -29,7 +29,7 @@
 #ifndef WEATHER_PLUGIN_IMPL_H
 #define WEATHER_PLUGIN_IMPL_H
 
-#include <opie/todayplugininterface.h>
+#include <opie2/todayplugininterface.h>
 
 class WeatherPlugin;
 

@@ -29,11 +29,11 @@
 #ifndef WEATHER_PLUGIN_H
 #define WEATHER_PLUGIN_H
 
+#include <opie2/todayplugininterface.h>
+#include <opie2/todayconfigwidget.h>
+
 #include <qstring.h>
 #include <qwidget.h>
-
-#include <opie/todayplugininterface.h>
-#include <opie/todayconfigwidget.h>
 
 class WeatherPlugin : public TodayPluginObject
 {

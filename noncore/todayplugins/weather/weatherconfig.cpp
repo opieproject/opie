@@ -26,7 +26,11 @@
 
 */
 
-#include <stdlib.h>
+#include "weatherconfig.h"
+
+#include <qpe/config.h>
+#include <qpe/qpeapplication.h>
+#include <qpe/resource.h>
 
 #include <qcheckbox.h>
 #include <qclipboard.h>
@@ -39,12 +43,7 @@
 #include <qspinbox.h>
 #include <qwhatsthis.h>
 
-#include <qpe/config.h>
-#include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
-#include <opie/todayconfigwidget.h>
-
-#include "weatherconfig.h"
+#include <stdlib.h>
 
 WeatherPluginConfig::WeatherPluginConfig( QWidget *parent,  const char* name)
 	: TodayConfigWidget(parent,  name )

@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/applications
 Maintainer: Dan Williams <drw@handhelds.org>
 Architecture: arm
-Depends: libqte2, opie-today
+Depends: libqte2, libopiecore2, libopiepim2, opie-today
 Description: Weather plugin for Today
  Displays current weather conditions.
 Version: $QPE_VERSION$EXTRAVERSION

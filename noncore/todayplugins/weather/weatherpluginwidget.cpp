@@ -33,7 +33,7 @@
 #include <qpixmap.h>
 #include <qtextstream.h>
 
-#include <opie/oprocess.h>
+#include <opie2/oprocess.h>
 
 #include <qpe/config.h>
 #include <qpe/resource.h>
@@ -85,7 +85,7 @@ void WeatherPluginWidget::retreiveData()
 	location = config.readEntry( "Location", "" );
 	useMetric = config.readBoolEntry( "Metric", TRUE );
 	frequency = config.readNumEntry( "Frequency", 5 );
-	
+
 	startTimer( frequency * 60000 );
 
 	localFile = "/tmp/";
@@ -114,7 +114,7 @@ void WeatherPluginWidget::displayWeather()
 	weatherData = QString::null;
 
 	QFile file( localFile );
-	
+
 	if ( file.size() > 0 && file.open( IO_ReadOnly ) )
 	{
 		QTextStream data( &file );

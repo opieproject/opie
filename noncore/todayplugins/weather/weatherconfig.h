@@ -32,7 +32,7 @@
 #include <qstring.h>
 #include <qwidget.h>
 
-#include <opie/todayconfigwidget.h>
+#include <opie2/todayconfigwidget.h>
 
 class QCheckBox;
 class QLineEdit;
