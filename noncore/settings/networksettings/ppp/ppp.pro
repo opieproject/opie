@@ -9,7 +9,6 @@ SOURCES		= pppmodule.cpp modem.cpp modeminfo.cpp pppdata.cpp runtests.cpp genera
 INCLUDEPATH	+= $(OPIEDIR)/include ../ ../interfaces/
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe -L../interfaces/ -linterfaces
-INTERFACES	= 
 TARGET		= kppp
 VERSION		= 1.0.0
 
