@@ -200,9 +200,9 @@ bool DesktopApplication::qwsEventFilter( QWSEvent *e )
       when user presses key, unless keyboard has been requested from app.
       will not send multiple repeats if user holds key
       i.e. one shot
-      
+
      */
-    if (!keyRegisterList.isEmpty())  { 
+    if (!keyRegisterList.isEmpty())  {
       KeyRegisterList::Iterator it;
       for( it = keyRegisterList.begin(); it != keyRegisterList.end(); ++it ) {
           if ((*it).getKeyCode() == ke->simpleData.keycode &&  !autoRepeat && !keyboardGrabbed() && press) {
@@ -250,7 +250,7 @@ bool DesktopApplication::qwsEventFilter( QWSEvent *e )
       if ( press ) emit power();
       return TRUE;
     }
-// This was used for the iPAQ PowerButton 
+// This was used for the iPAQ PowerButton
 // See main.cpp for new KeyboardFilter
 //
 //    if ( ke->simpleData.keycode == Key_SysReq ) {
@@ -559,15 +559,14 @@ void Desktop::execAutoStart() {
     QDateTime now = QDateTime::currentDateTime();
     Config cfg( "autostart" );
     cfg.setGroup( "AutoStart" );
-    appName = cfg.readEntry("Apps", "");
-    delay = (cfg.readEntry("Delay", "0" )).toInt();
+    appName = cfg.readEntry( "Apps", "" );
+    delay = ( cfg.readEntry( "Delay", "0" ) ).toInt();
     // If the time between suspend and resume was longer then the
     // value saved as delay, start the app
-    if ( suspendTime.secsTo(now) >= (delay*60) ) {
-        QCopEnvelope e("QPE/System", "execute(QString)");
-        e << QString(appName);
-    } //else {
-    //}
+    if ( suspendTime.secsTo( now ) >= ( delay * 60 )  && !appName.isEmpty() ) {
+        QCopEnvelope e( "QPE/System", "execute(QString)" );
+        e << QString( appName );
+    }
 }
 
 #if defined(QPE_HAVE_TOGGLELIGHT)
@@ -607,10 +606,10 @@ void Desktop::togglePower()
 	extern void qpe_setBacklight ( int ); // We need to toggle the LCD fast - no time to send a QCop
 
 	static bool excllock = false;
-	
+
 	if ( excllock )
 		return;
-		
+
 	excllock = true;
 
 	bool wasloggedin = loggedin;
@@ -638,9 +637,9 @@ void Desktop::togglePower()
 	execAutoStart();
 	//qcopBridge->closeOpenConnections();
 	//qDebug("called togglePower()!!!!!!");
-  
+
 	qApp-> processEvents ( );
-  
+
   	excllock = false;
 }
 
@@ -700,12 +699,12 @@ void DesktopApplication::shutdown( ShutdownImpl::Type t )
       break;
   case ShutdownImpl::TerminateDesktop:
       prepareForTermination(FALSE);
-      
+
       // This is a workaround for a Qt bug
       // clipboard applet has to stop its poll timer, or Qt/E
-      // will hang on quit() right before it emits aboutToQuit()      
+      // will hang on quit() right before it emits aboutToQuit()
       emit aboutToQuit ( );
-      
+
       quit();
       break;
     }
@@ -798,7 +797,7 @@ bool Desktop::eventFilter( QObject *, QEvent *ev )
     QKeyEvent *ke = (QKeyEvent *) ev;
     if ( ke-> key ( ) == Qt::Key_F11 ) { // menu key
       QWidget *active = qApp-> activeWindow ( );
-      
+
       if ( active && active-> isPopup ( ))
         active->close();
 
