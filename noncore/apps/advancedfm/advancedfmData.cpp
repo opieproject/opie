@@ -77,7 +77,7 @@ void AdvancedFm::init() {
   homeButton->setFixedSize( QSize( 20, 20 ) );
   layout->addMultiCellWidget( homeButton, 0, 0, 7, 7);
 
-  fileMenu->insertItem( tr( "Show Hidden Files" ), this,  SLOT( showHidden() ));
+  fileMenu->insertItem( tr( "Show Hidden Files" ), this,  SLOT( showMenuHidden() ));
   fileMenu->setItemChecked( fileMenu->idAt(0),TRUE);
   fileMenu->insertSeparator();
   fileMenu->insertItem( tr( "Make Directory" ), this, SLOT( mkDir() ));
@@ -198,8 +198,7 @@ void AdvancedFm::init() {
   filterStr="*";
   b=FALSE;
 
-
-    
+   
 }
 
 void AdvancedFm::initConnections() {

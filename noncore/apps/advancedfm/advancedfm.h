@@ -11,6 +11,7 @@
  ***************************************************************************/
 #ifndef ADVANCEDFM_H
 #define ADVANCEDFM_H
+#define QTOPIA_INTERNAL_FSLP // to get access to fileproperties
 
 #include <qpe/ir.h>
 
@@ -77,6 +78,7 @@ protected slots:
     void populateLocalView();
     void populateRemoteView();
     void showHidden();
+    void showMenuHidden();
     void showRemoteHidden();
     void writeConfig();
     void readConfig();
