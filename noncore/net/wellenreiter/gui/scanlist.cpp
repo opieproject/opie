@@ -15,6 +15,7 @@
 
 #include "scanlist.h"
 #include "configwindow.h"
+#include "logwindow.h"
 
 #include <assert.h>
 #include "manufacturers.h"
@@ -40,9 +41,10 @@ const int col_ap = 2;
 const int col_channel = 3;
 const int col_wep = 4;
 const int col_traffic = 5;
-const int col_manuf = 6;
-const int col_firstseen = 7;
-const int col_lastseen = 8;
+const int col_ip = 6;
+const int col_manuf = 7;
+const int col_firstseen = 8;
+const int col_lastseen = 9;
 
 MScanListView::MScanListView( QWidget* parent, const char* name )
               :OListView( parent, name ), _manufacturerdb( 0 )
@@ -52,23 +54,25 @@ MScanListView::MScanListView( QWidget* parent, const char* name )
     setFrameShadow( QListView::Sunken );
 
     addColumn( tr( "Net/Station" ) );
-    setColumnAlignment( 0, AlignLeft || AlignVCenter );
+    setColumnAlignment( col_essid, AlignLeft || AlignVCenter );
     addColumn( tr( "#" ) );
-    setColumnAlignment( 1, AlignCenter );
+    setColumnAlignment( col_sig, AlignCenter );
     addColumn( tr( "MAC" ) );
-    setColumnAlignment( 2, AlignCenter );
+    setColumnAlignment( col_ap, AlignCenter );
     addColumn( tr( "Chn" ) );
-    setColumnAlignment( 3, AlignCenter );
+    setColumnAlignment( col_channel, AlignCenter );
     addColumn( tr( "W" ) );
-    setColumnAlignment( 4, AlignCenter );
+    setColumnAlignment( col_wep, AlignCenter );
     addColumn( tr( "T" ) );
-    setColumnAlignment( 5, AlignCenter );
+    setColumnAlignment( col_traffic, AlignCenter );
+    addColumn( tr( "IP" ) );
+    setColumnAlignment( col_ip, AlignCenter );
     addColumn( tr( "Manufacturer" ) );
-    setColumnAlignment( 6, AlignCenter );
+    setColumnAlignment( col_manuf, AlignCenter );
     addColumn( tr( "First Seen" ) );
-    setColumnAlignment( 7, AlignCenter );
+    setColumnAlignment( col_firstseen, AlignCenter );
     addColumn( tr( "Last Seen" ) );
-    setColumnAlignment( 8, AlignCenter );
+    setColumnAlignment( col_lastseen, AlignCenter );
     setRootIsDecorated( true );
     setAllColumnsShowFocus( true );
 };
@@ -103,11 +107,10 @@ void MScanListView::addNewItem( QString type, QString essid, QString macaddr, bo
 {
     // FIXME: scanlistitem needs a proper encapsulation and not such a damn dealing with text(...)
 
-        qDebug( "MScanList::addNewItem( %s / %s / %s [%d]",
-        (const char*) type,
-        (const char*) essid,
-        (const char*) macaddr,
-        channel );
+    #ifdef DEBUG
+    qDebug( "MScanList::addNewItem( %s / %s / %s [%d]", (const char*) type,
+            (const char*) essid, (const char*) macaddr, channel );
+    #endif
 
     // search, if we already have seen this net
 
@@ -117,7 +120,9 @@ void MScanListView::addNewItem( QString type, QString essid, QString macaddr, bo
 
     while ( item && ( item->text( col_essid ) != essid ) )
     {
+        #ifdef DEBUG
         qDebug( "itemtext: %s", (const char*) item->text( col_essid ) );
+        #endif
         item = static_cast<MScanListItem*> ( item->nextSibling() );
     }
     if ( item )
@@ -131,7 +136,9 @@ void MScanListView::addNewItem( QString type, QString essid, QString macaddr, bo
 
         while ( item && ( item->text( col_ap ) != macaddr ) )
         {
+            #ifdef DEBUG
             qDebug( "subitemtext: %s", (const char*) item->text( col_ap ) );
+            #endif
             item = static_cast<MScanListItem*> ( item->nextSibling() );
         }
 
@@ -147,8 +154,8 @@ void MScanListView::addNewItem( QString type, QString essid, QString macaddr, bo
     }
     else
     {
-        s.sprintf( "(i) new network: '%s'", (const char*) essid );
-        //TODO send s to logwindow
+        s.sprintf( "(i) New network: ESSID '%s'", (const char*) essid );
+        MLogWindow::logwindow()->log( s );
         network = new MScanListItem( this, "network", essid, QString::null, 0, 0, 0 );
     }
 
@@ -156,7 +163,9 @@ void MScanListView::addNewItem( QString type, QString essid, QString macaddr, bo
     // insert new station as child from network
     // no essid to reduce clutter, maybe later we have a nick or stationname to display!?
 
+    #ifdef DEBUG
     qDebug( "inserting new station %s", (const char*) macaddr );
+    #endif
 
     MScanListItem* station = new MScanListItem( network, type, "", macaddr, wep, channel, signal );
     if ( _manufacturerdb )
@@ -164,13 +173,13 @@ void MScanListView::addNewItem( QString type, QString essid, QString macaddr, bo
 
     if ( type == "managed" )
     {
-        s.sprintf( "(i) new AP in '%s' [%d]", (const char*) essid, channel );
+        s.sprintf( "(i) New Access Point in '%s' [%d]", (const char*) essid, channel );
     }
     else
     {
-        s.sprintf( "(i) new adhoc station in '%s' [%d]", (const char*) essid, channel );
+        s.sprintf( "(i) New AdHoc station in '%s' [%d]", (const char*) essid, channel );
     }
-    //TODO send s to logwindow
+    MLogWindow::logwindow()->log( s );
 
 }
 
@@ -181,7 +190,9 @@ void MScanListView::addIfNotExisting( MScanListItem* network, QString addr, cons
 
     while ( subitem && ( subitem->text( col_ap ) != addr ) )
     {
+        #ifdef DEBUG
         qDebug( "subitemtext: %s", (const char*) subitem->text( col_ap ) );
+        #endif
         subitem = static_cast<MScanListItem*> ( subitem->nextSibling() );
     }
 
@@ -203,13 +214,13 @@ void MScanListView::addIfNotExisting( MScanListItem* network, QString addr, cons
     QString s;
     if ( type == "station" )
     {
-        s.sprintf( "(i) new station in '%s' [??]", (const char*) network->text( col_essid ) );
+        s.sprintf( "(i) New Station in '%s' [xx]", (const char*) network->text( col_essid ) );
     }
     else
     {
-        s.sprintf( "(i) new wireless station in '%s' [??]", (const char*) network->text( col_essid ) );
+        s.sprintf( "(i) New Wireless Station in '%s' [xx]", (const char*) network->text( col_essid ) );
     }
-    //TODO send s to logwindow
+    MLogWindow::logwindow()->log( s );
 }
 
 
@@ -233,6 +244,7 @@ void MScanListView::WDStraffic( QString from, QString to, QString viaFrom, QStri
     else
     {
         qDebug( "D'Oh! Stations without AP... ignoring for now... will handle this in 1.1 version :-D" );
+        MLogWindow::logwindow()->log( "WARNING: Unhandled WSD traffic!" );
     }
 }
 
@@ -254,8 +266,11 @@ void MScanListView::toDStraffic( QString from, QString to, QString via )
     else
     {
         qDebug( "D'Oh! Station without AP... ignoring for now... will handle this in 1.1 :-D" );
+        MLogWindow::logwindow()->log( "WARNING: Unhandled toDS traffic!" );
+
     }
 }
+
 
 void MScanListView::fromDStraffic( QString from, QString to, QString via )
 {
@@ -274,13 +289,36 @@ void MScanListView::fromDStraffic( QString from, QString to, QString via )
     else
     {
         qDebug( "D'Oh! Station without AP... ignoring for now... will handle this in 1.1 :-D" );
+        MLogWindow::logwindow()->log( "WARNING: Unhandled fromDS traffic!" );
     }
 }
+
 
 void MScanListView::IBSStraffic( QString from, QString to, QString via )
 {
     qWarning( "D'oh! Not yet implemented..." );
+    MLogWindow::logwindow()->log( "WARNING: Unhandled IBSS traffic!" );
 }
+
+
+void MScanListView::identify( const QString& macaddr, const QString& ip )
+{
+    qDebug( "identify %s = %s", (const char*) macaddr, (const char*) ip );
+
+    QListViewItemIterator it( this );
+    for ( ; it.current(); ++it )
+    {
+        if ( it.current()->text( col_ap ) == macaddr )
+        {
+            it.current()->setText( col_ip, ip );
+            return;
+        }
+    }
+    qDebug( "D'oh! Received identification, but item not yet in list... ==> Handle this!" );
+    MLogWindow::logwindow()->log( QString().sprintf( "WARNING: Unhandled identification %s = %s!",
+                                                     (const char*) macaddr, (const char*) ip ) );
+}
+
 
 //============================================================
 // MScanListItem
@@ -292,7 +330,9 @@ MScanListItem::MScanListItem( QListView* parent, QString type, QString essid, QS
                 _type( type ), _essid( essid ), _macaddr( macaddr ), _wep( wep ),
                 _channel( channel ), _signal( signal ), _beacons( 1 )
 {
+    #ifdef DEBUG
     qDebug( "creating scanlist item" );
+    #endif
     if ( WellenreiterConfigWindow::instance() && type == "network" )
         playSound( WellenreiterConfigWindow::instance()->soundOnNetwork() );
     decorateItem( type, essid, macaddr, wep, channel, signal );
@@ -302,7 +342,9 @@ MScanListItem::MScanListItem( QListViewItem* parent, QString type, QString essid
                               bool wep, int channel, int signal )
                :OListViewItem( parent, essid, QString::null, macaddr, QString::null, QString::null )
 {
+    #ifdef DEBUG
     qDebug( "creating scanlist item" );
+    #endif
     decorateItem( type, essid, macaddr, wep, channel, signal );
 }
 
@@ -313,7 +355,9 @@ OListViewItem* MScanListItem::childFactory()
 
 void MScanListItem::serializeTo( QDataStream& s ) const
 {
+    #ifdef DEBUG
     qDebug( "serializing MScanListItem" );
+    #endif
     OListViewItem::serializeTo( s );
 
     s << _type;
@@ -322,7 +366,9 @@ void MScanListItem::serializeTo( QDataStream& s ) const
 
 void MScanListItem::serializeFrom( QDataStream& s )
 {
+    #ifdef DEBUG
     qDebug( "serializing MScanListItem" );
+    #endif
     OListViewItem::serializeFrom( s );
 
     char wep;
@@ -340,11 +386,13 @@ void MScanListItem::serializeFrom( QDataStream& s )
 
 void MScanListItem::decorateItem( QString type, QString essid, QString macaddr, bool wep, int channel, int signal )
 {
+    #ifdef DEBUG
     qDebug( "decorating scanlist item %s / %s / %s [%d]",
         (const char*) type,
         (const char*) essid,
         (const char*) macaddr,
         channel );
+    #endif
 
     // set icon for managed or adhoc mode
     QString name;

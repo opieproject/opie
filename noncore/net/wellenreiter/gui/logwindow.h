@@ -31,8 +31,13 @@ class MLogWindow: public QVBox
     const QString getLog() const;
     void clear();
 
+    static MLogWindow* logwindow() { return MLogWindow::_instance; };
+
   protected:
     QMultiLineEdit* ledit;
+
+  private:
+    static MLogWindow* _instance;
 
 };
 

@@ -46,6 +46,8 @@ class MScanListView: public OListView
     void WDStraffic( QString from, QString to, QString viaFrom, QString viaTo );
     void IBSStraffic( QString from, QString to, QString via ); // NYI
 
+    void identify( const QString& macaddr, const QString& ipaddr );
+
   protected:
     void addIfNotExisting( MScanListItem* parent, QString addr, const QString& type = "station" );
 

@@ -17,11 +17,15 @@
 #include <qmultilineedit.h>
 #include <qdatetime.h>
 
+MLogWindow* MLogWindow::_instance;
+
 MLogWindow::MLogWindow( QWidget * parent, const char * name, WFlags f )
            :QVBox( parent, name, f )
 {
     ledit = new QMultiLineEdit( this );
     ledit->setReadOnly( true );
+
+    MLogWindow::_instance = this;
 }
 
 

@@ -132,11 +132,11 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
     demo->insertItem( tr( "&Add something" ), this, SLOT( demoAddStations() ) );
 
     id = mb->insertItem( tr( "&File" ), file );
-    id = mb->insertItem( tr( "&View" ), view );
-    mb->setItemEnabled( id, false );
+    //id = mb->insertItem( tr( "&View" ), view );
+    //mb->setItemEnabled( id, false );
     id = mb->insertItem( tr( "&Sniffer" ), sniffer );
-    id = mb->insertItem( tr( "&Demo" ), demo );
-    mb->setItemEnabled( id, true );
+    //id = mb->insertItem( tr( "&Demo" ), demo );
+    //mb->setItemEnabled( id, true );
 
     #ifdef QWS
     mb->insertItem( startButton );

@@ -137,7 +137,115 @@ void Wellenreiter::channelHopped(int c)
 }
 
 
-void Wellenreiter::receivePacket(OPacket* p)
+void Wellenreiter::handleBeacon( OPacket* p, OWaveLanManagementPacket* beacon )
+{
+    QString type;
+    if ( beacon->canIBSS() )
+    {
+        type = "adhoc";
+    }
+    else if ( beacon->canESS() )
+    {
+        type = "managed";
+    }
+    else
+    {
+        qWarning( "Wellenreiter::invalid frame [possibly noise] detected!" );
+        return;
+    }
+
+    OWaveLanManagementSSID* ssid = static_cast<OWaveLanManagementSSID*>( p->child( "802.11 SSID" ) );
+    QString essid = ssid ? ssid->ID() : QString("<unknown>");
+    OWaveLanManagementDS* ds = static_cast<OWaveLanManagementDS*>( p->child( "802.11 DS" ) );
+    int channel = ds ? ds->channel() : -1;
+
+    OWaveLanPacket* header = static_cast<OWaveLanPacket*>( p->child( "802.11" ) );
+    netView()->addNewItem( type, essid, header->macAddress2().toString(), beacon->canPrivacy(), channel, 0 );
+
+    // update graph window
+    if ( ds )
+    {
+        OPrismHeaderPacket* prism = static_cast<OPrismHeaderPacket*>( p->child( "Prism" ) );
+        if ( prism )
+            graphwindow->traffic( ds->channel(), prism->signalStrength() );
+        else
+            graphwindow->traffic( ds->channel(), 95 );
+    }
+}
+
+
+void Wellenreiter::handleData( OPacket* p, OWaveLanDataPacket* data )
+{
+    OWaveLanPacket* wlan = (OWaveLanPacket*) p->child( "802.11" );
+    if ( wlan->fromDS() && !wlan->toDS() )
+    {
+        qDebug( "FromDS traffic: '%s' -> '%s' via '%s'",
+            (const char*) wlan->macAddress3().toString(true),
+            (const char*) wlan->macAddress1().toString(true),
+            (const char*) wlan->macAddress2().toString(true) );
+        netView()->fromDStraffic( wlan->macAddress3().toString(),
+                                wlan->macAddress1().toString(),
+                                wlan->macAddress2().toString() );
+    }
+    else
+    if ( !wlan->fromDS() && wlan->toDS() )
+    {
+        qDebug( "ToDS traffic: '%s' -> '%s' via '%s'",
+            (const char*) wlan->macAddress2().toString(true),
+            (const char*) wlan->macAddress3().toString(true),
+            (const char*) wlan->macAddress1().toString(true) );
+        netView()->toDStraffic( wlan->macAddress2().toString(),
+                                wlan->macAddress3().toString(),
+                                wlan->macAddress1().toString() );
+    }
+    else
+    if ( wlan->fromDS() && wlan->toDS() )
+    {
+        qDebug( "WDS(bridge) traffic: '%s' -> '%s' via '%s' and '%s'",
+            (const char*) wlan->macAddress4().toString(true),
+            (const char*) wlan->macAddress3().toString(true),
+            (const char*) wlan->macAddress1().toString(true),
+            (const char*) wlan->macAddress2().toString(true) );
+        netView()->WDStraffic( wlan->macAddress4().toString(),
+                            wlan->macAddress3().toString(),
+                            wlan->macAddress1().toString(),
+                            wlan->macAddress2().toString() );
+    }
+    else
+    {
+        qDebug( "IBSS(AdHoc) traffic: '%s' -> '%s' (Cell: '%s')'",
+            (const char*) wlan->macAddress2().toString(true),
+            (const char*) wlan->macAddress1().toString(true),
+            (const char*) wlan->macAddress3().toString(true) );
+        netView()->IBSStraffic( wlan->macAddress2().toString(),
+                                wlan->macAddress1().toString(),
+                                wlan->macAddress3().toString() );
+    }
+
+    OARPPacket* arp = (OARPPacket*) p->child( "ARP" );
+    if ( arp )
+    {
+        qDebug( "Received ARP traffic (type '%s'): ", (const char*) arp->type() );
+        if ( arp->type() == "REQUEST" )
+        {
+            netView()->identify( arp->senderMacAddress().toString(), arp->senderIPV4Address().toString() );
+        }
+        else if ( arp->type() == "REPLY" )
+        {
+            netView()->identify( arp->senderMacAddress().toString(), arp->senderIPV4Address().toString() );
+            netView()->identify( arp->targetMacAddress().toString(), arp->targetIPV4Address().toString() );
+        }
+    }
+
+    OIPPacket* ip = (OIPPacket*) p->child( "IP" );
+    if ( ip )
+    {
+        qDebug( "Received IP packet." );
+    }
+}
+
+
+void Wellenreiter::receivePacket( OPacket* p )
 {
     hexWindow()->log( p->dump( 8 ) );
 
@@ -145,91 +253,17 @@ void Wellenreiter::receivePacket(OPacket* p)
     OWaveLanManagementPacket* beacon = static_cast<OWaveLanManagementPacket*>( p->child( "802.11 Management" ) );
     if ( beacon && beacon->managementType() == "Beacon" )
     {
-        QString type;
-        if ( beacon->canIBSS() )
-        {
-            type = "adhoc";
-        }
-        else if ( beacon->canESS() )
-        {
-            type = "managed";
-        }
-        else
-        {
-            qDebug( "Wellenreiter::invalid frame detected: '%s'", (const char*) p->dump( 16 ) );
-            return;
-        }
-
-        OWaveLanManagementSSID* ssid = static_cast<OWaveLanManagementSSID*>( p->child( "802.11 SSID" ) );
-        QString essid = ssid ? ssid->ID() : QString("<unknown>");
-        OWaveLanManagementDS* ds = static_cast<OWaveLanManagementDS*>( p->child( "802.11 DS" ) );
-        int channel = ds ? ds->channel() : -1;
-
-        OWaveLanPacket* header = static_cast<OWaveLanPacket*>( p->child( "802.11" ) );
-        netView()->addNewItem( type, essid, header->macAddress2().toString(), beacon->canPrivacy(), channel, 0 );
-
-        // update graph window
-        if ( ds )
-        {
-            OPrismHeaderPacket* prism = static_cast<OPrismHeaderPacket*>( p->child( "Prism" ) );
-            if ( prism )
-                graphwindow->traffic( ds->channel(), prism->signalStrength() );
-            else
-                graphwindow->traffic( ds->channel(), 95 );
-        }
+        handleBeacon( p, beacon );
         return;
     }
+
+    //TODO: WEP check here
 
     // check for a data frame
     OWaveLanDataPacket* data = static_cast<OWaveLanDataPacket*>( p->child( "802.11 Data" ) );
     if ( data )
     {
-        OWaveLanPacket* wlan = (OWaveLanPacket*) p->child( "802.11" );
-        if ( wlan->fromDS() && !wlan->toDS() )
-        {
-            qDebug( "FromDS traffic: '%s' -> '%s' via '%s'",
-                (const char*) wlan->macAddress3().toString(true),
-                (const char*) wlan->macAddress1().toString(true),
-                (const char*) wlan->macAddress2().toString(true) );
-            netView()->fromDStraffic( wlan->macAddress3().toString(),
-                                      wlan->macAddress1().toString(),
-                                      wlan->macAddress2().toString() );
-        }
-        else
-        if ( !wlan->fromDS() && wlan->toDS() )
-        {
-            qDebug( "ToDS traffic: '%s' -> '%s' via '%s'",
-                (const char*) wlan->macAddress2().toString(true),
-                (const char*) wlan->macAddress3().toString(true),
-                (const char*) wlan->macAddress1().toString(true) );
-            netView()->toDStraffic( wlan->macAddress2().toString(),
-                                    wlan->macAddress3().toString(),
-                                    wlan->macAddress1().toString() );
-        }
-        else
-        if ( wlan->fromDS() && wlan->toDS() )
-        {
-            qDebug( "WDS(bridge) traffic: '%s' -> '%s' via '%s' and '%s'",
-                (const char*) wlan->macAddress4().toString(true),
-                (const char*) wlan->macAddress3().toString(true),
-                (const char*) wlan->macAddress1().toString(true),
-                (const char*) wlan->macAddress2().toString(true) );
-            netView()->WDStraffic( wlan->macAddress4().toString(),
-                                   wlan->macAddress3().toString(),
-                                   wlan->macAddress1().toString(),
-                                   wlan->macAddress2().toString() );
-        }
-        else
-        {
-            qDebug( "IBSS(AdHoc) traffic: '%s' -> '%s' (Cell: '%s')'",
-                (const char*) wlan->macAddress2().toString(true),
-                (const char*) wlan->macAddress1().toString(true),
-                (const char*) wlan->macAddress3().toString(true) );
-            netView()->IBSStraffic( wlan->macAddress2().toString(),
-                                    wlan->macAddress1().toString(),
-                                    wlan->macAddress3().toString() );
-        }
-        return;
+        handleData( p, data );
     }
 }
 

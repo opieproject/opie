@@ -26,9 +26,10 @@ using namespace Opie;
 class QTimerEvent;
 class QPixmap;
 class OPacket;
+class OWaveLanManagementPacket;
+class OWaveLanDataPacket;
 class OPacketCapturer;
 class OWirelessNetworkInterface;
-
 class ManufacturerDB;
 class WellenreiterConfigWindow;
 class MLogWindow;
@@ -61,6 +62,10 @@ class Wellenreiter : public WellenreiterBase {
   signals:
     void startedSniffing();
     void stoppedSniffing();
+
+  private:
+    void handleBeacon( OPacket* p, OWaveLanManagementPacket* beacon );
+    void handleData( OPacket* p, OWaveLanDataPacket* data );
 
   private:
     #ifdef QWS
