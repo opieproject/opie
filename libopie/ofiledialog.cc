@@ -65,11 +65,10 @@ OFileDialog::OFileDialog(const QString &caption,
   connect(file, SIGNAL(fileSelected(const QString&) ),
 	  this, SLOT(slotFileSelected(const QString&) ) );
 
+#if 0
   connect(file, SIGNAL(dirSelected(const QString &) ),
 	  this, SLOT(slotDirSelected(const QString &) ) );
-
-
-  file->setYesCancelVisible( false );  // relayout
+#endif
 }
 /**
  * @returns the mimetype of the selected
