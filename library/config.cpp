@@ -147,7 +147,6 @@ void ConfigCache::removeLru() {
              (*it).used.tv_usec < (*lru).used.tv_usec))
             lru = it;
 
-    qWarning( "Removing item" );
     m_totalSize -= (*lru).size;
     m_cached.remove(lru);
 }
