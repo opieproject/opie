@@ -137,191 +137,191 @@
     <name>QObject</name>
     <message>
         <source>Standard</source>
-        <translation type="unfinished">Standard</translation>
+        <translation>Standardowy</translation>
     </message>
     <message>
         <source>Weight</source>
-        <translation type="unfinished"></translation>
+        <translation>Waga</translation>
     </message>
     <message>
         <source>Distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Odleglosc</translation>
     </message>
     <message>
         <source>Area</source>
-        <translation type="unfinished"></translation>
+        <translation>Powierzchnia</translation>
     </message>
     <message>
         <source>Temperatures</source>
-        <translation type="unfinished"></translation>
+        <translation>Temperatury</translation>
     </message>
     <message>
         <source>Volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzwiek</translation>
     </message>
     <message>
         <source>acres</source>
-        <translation type="unfinished"></translation>
+        <translation>akry</translation>
     </message>
     <message>
         <source>&#xb0;C</source>
-        <translation type="unfinished"></translation>
+        <translation>°C</translation>
     </message>
     <message>
         <source>carats</source>
-        <translation type="unfinished"></translation>
+        <translation>karaty</translation>
     </message>
     <message>
         <source>cm</source>
-        <translation type="unfinished"></translation>
+        <translation>cm</translation>
     </message>
     <message>
         <source>cu cm</source>
-        <translation type="unfinished"></translation>
+        <translation>cm sz</translation>
     </message>
     <message>
         <source>cu ft</source>
-        <translation type="unfinished"></translation>
+        <translation>st sz</translation>
     </message>
     <message>
         <source>cu in</source>
-        <translation type="unfinished"></translation>
+        <translation>cal sz</translation>
     </message>
     <message>
         <source>&#xb0;F</source>
-        <translation type="unfinished"></translation>
+        <translation>°F</translation>
     </message>
     <message>
         <source>fl oz (US)</source>
-        <translation type="unfinished"></translation>
+        <translation>fl oz (US)</translation>
     </message>
     <message>
         <source>ft</source>
-        <translation type="unfinished"></translation>
+        <translation>st</translation>
     </message>
     <message>
         <source>g</source>
-        <translation type="unfinished"></translation>
+        <translation>g</translation>
     </message>
     <message>
         <source>gal (US)</source>
-        <translation type="unfinished"></translation>
+        <translation>gal (US)</translation>
     </message>
     <message>
         <source>hectares</source>
-        <translation type="unfinished"></translation>
+        <translation>hektary</translation>
     </message>
     <message>
         <source>in</source>
-        <translation type="unfinished"></translation>
+        <translation>cal</translation>
     </message>
     <message>
         <source>kg</source>
-        <translation type="unfinished"></translation>
+        <translation>kg</translation>
     </message>
     <message>
         <source>km</source>
-        <translation type="unfinished"></translation>
+        <translation>km</translation>
     </message>
     <message>
         <source>l</source>
-        <translation type="unfinished"></translation>
+        <translation>l</translation>
     </message>
     <message>
         <source>lb</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">lb</translation>
     </message>
     <message>
         <source>Lg tons</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">tony Lg</translation>
     </message>
     <message>
         <source>m</source>
-        <translation type="unfinished"></translation>
+        <translation>m</translation>
     </message>
     <message>
         <source>mg</source>
-        <translation type="unfinished"></translation>
+        <translation>mg</translation>
     </message>
     <message>
         <source>mi</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">mi</translation>
     </message>
     <message>
         <source>ml</source>
-        <translation type="unfinished"></translation>
+        <translation>ml</translation>
     </message>
     <message>
         <source>mm</source>
-        <translation type="unfinished"></translation>
+        <translation>mm</translation>
     </message>
     <message>
         <source>naut. mi</source>
-        <translation type="unfinished"></translation>
+        <translation>mi mor</translation>
     </message>
     <message>
         <source>oz</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">oz</translation>
     </message>
     <message>
         <source>points</source>
-        <translation type="unfinished"></translation>
+        <translation>punkty</translation>
     </message>
     <message>
         <source>pt</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">pt</translation>
     </message>
     <message>
         <source>qt</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">qt</translation>
     </message>
     <message>
         <source>sq cm</source>
-        <translation type="unfinished"></translation>
+        <translation>cm kw</translation>
     </message>
     <message>
         <source>sq ft</source>
-        <translation type="unfinished"></translation>
+        <translation>st kw</translation>
     </message>
     <message>
         <source>sq in</source>
-        <translation type="unfinished"></translation>
+        <translation>cal kw</translation>
     </message>
     <message>
         <source>sq km</source>
-        <translation type="unfinished"></translation>
+        <translation>km kw</translation>
     </message>
     <message>
         <source>sq m</source>
-        <translation type="unfinished"></translation>
+        <translation>m kw</translation>
     </message>
     <message>
         <source>sq mi</source>
-        <translation type="unfinished"></translation>
+        <translation>mi kw</translation>
     </message>
     <message>
         <source>sq mm</source>
-        <translation type="unfinished"></translation>
+        <translation>mm kw</translation>
     </message>
     <message>
         <source>sq yd</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">yd kw</translation>
     </message>
     <message>
         <source>st</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">st</translation>
     </message>
     <message>
         <source>St tons</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">tony st</translation>
     </message>
     <message>
         <source>tblspoon</source>
-        <translation type="unfinished"></translation>
+        <translation>lyzka stolowa</translation>
     </message>
     <message>
         <source>teaspoons</source>
-        <translation type="unfinished"></translation>
+        <translation>lyzeczka</translation>
     </message>
     <message>
         <source>tonnes</source>
@@ -329,7 +329,7 @@
     </message>
     <message>
         <source>yd</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">yd</translation>
     </message>
 </context>
 </TS>

@@ -87,11 +87,11 @@
     </message>
     <message>
         <source>AdvancedFm Output</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyjscie AdvancedFm</translation>
     </message>
     <message>
         <source>Advancedfm Beam out</source>
-        <translation type="unfinished"></translation>
+        <translation>Emisja AdvancedFm</translation>
     </message>
     <message>
         <source>Ir sent.</source>
@@ -143,11 +143,11 @@
     </message>
     <message>
         <source>Copy </source>
-        <translation type="unfinished">Kopiuj</translation>
+        <translation>Kopiuj</translation>
     </message>
     <message>
         <source> As</source>
-        <translation type="unfinished">Jako</translation>
+        <translation>Jako</translation>
     </message>
     <message>
         <source>Copy Same Dir</source>
@@ -266,23 +266,23 @@ wraz z zawartoscia?</translation>
     </message>
     <message>
         <source>AdvancedFm :: </source>
-        <translation type="unfinished"></translation>
+        <translation>AdvancedFm ::</translation>
     </message>
     <message>
         <source> kB free</source>
-        <translation type="unfinished"></translation>
+        <translation>kB wolne</translation>
     </message>
     <message>
         <source>Switch to View 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Przelacz na Widok 1</translation>
     </message>
     <message>
         <source>Switch to View 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Przelacz na widok 2</translation>
     </message>
     <message>
         <source>Not Yet Implemented</source>
-        <translation type="unfinished"></translation>
+        <translation>Jeszcze niezaimplementowane</translation>
     </message>
 </context>
 <context>
@@ -297,18 +297,18 @@ wraz z zawartoscia?</translation>
     </message>
     <message>
         <source>Process could not start</source>
-        <translation type="unfinished"></translation>
+        <translation>Proces nie mogl rozpoczac dzialania</translation>
     </message>
     <message>
         <source>Error
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Blad</translation>
     </message>
     <message>
         <source>
 Finished
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Skonczone</translation>
     </message>
 </context>
 <context>
@@ -355,27 +355,27 @@ Finished
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Ostrzezenie</translation>
     </message>
     <message>
         <source>Error- no user</source>
-        <translation type="unfinished"></translation>
+        <translation>Blad - brak uzytkownika</translation>
     </message>
     <message>
         <source>Error- no  group</source>
-        <translation type="unfinished"></translation>
+        <translation>Blad - brak grupy</translation>
     </message>
     <message>
         <source>Error setting ownership or group</source>
-        <translation type="unfinished"></translation>
+        <translation>Blad podczas ustawiania grupy</translation>
     </message>
     <message>
         <source>Error setting mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Blad podczas ustawiania uprawnien</translation>
     </message>
     <message>
         <source>filePermissions</source>
-        <translation type="unfinished"></translation>
+        <translation>uprawnieniaPliku</translation>
     </message>
 </context>
 </TS>

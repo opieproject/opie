@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>Pick</source>
-        <translation>Elita</translation>
+        <translation>Wybór</translation>
     </message>
 </context>
 <context>
@@ -286,15 +286,15 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>Search widget expects regular expressions if selected</source>
-        <translation type="unfinished">&quot;Widget&quot; wyszukiwarki bedzie oczekiwal wyrazen regularnych</translation>
+        <translation>Obiekt wyszukiwarki bedzie oczekiwal wyrazen regularnych</translation>
     </message>
     <message>
         <source>Search widget just expects simple wildcards</source>
-        <translation type="unfinished">&quot;Widget&quot; wyszukiwarki oczekuje tylko prostych znakow specjalnych</translation>
+        <translation>Obiekt wyszukiwarki oczekuje tylko prostych znakow specjalnych</translation>
     </message>
     <message>
         <source>If selected, search differs between upper and lower chars</source>
-        <translation type="unfinished">Wyszukiwarka bedzie rozrozniala wielkosc znakow</translation>
+        <translation>Wyszukiwarka bedzie rozrozniala wielkosc znakow</translation>
     </message>
     <message>
         <source>Font size for list- and card view</source>
@@ -681,7 +681,7 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>Faroe Islands</source>
-        <translation type="unfinished">Wyspy Faroe</translation>
+        <translation>Wyspy Faroe</translation>
     </message>
     <message>
         <source>Fiji</source>
@@ -713,7 +713,7 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>Georgia</source>
-        <translation type="unfinished">Georgia</translation>
+        <translation>Georgia</translation>
     </message>
     <message>
         <source>Germany</source>
