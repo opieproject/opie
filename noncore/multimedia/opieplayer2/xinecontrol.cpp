@@ -55,6 +55,7 @@ XineControl::XineControl( QWidget *videoContainerWidget, XineVideoWidget *xineWi
     connect( &mediaPlayerState, SIGNAL( positionChanged( long ) ),  this,  SLOT( seekTo( long ) ) );
     connect( &mediaPlayerState,  SIGNAL( videoGammaChanged( int ) ), this,  SLOT( setGamma( int ) ) );
     connect( libXine, SIGNAL( stopped() ), this, SLOT( nextMedia() ) );
+    connect( libXine, SIGNAL( initialized() ), this, SIGNAL( initialized() ) );
 
     disabledSuspendScreenSaver = FALSE;
 }

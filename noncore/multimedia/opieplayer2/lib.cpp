@@ -70,7 +70,9 @@ extern "C" {
 
 using namespace XINE;
 
-Lib::Lib( XineVideoWidget* widget ) {
+Lib::Lib( XineVideoWidget* widget ) 
+{
+    ThreadUtil::AutoLock lock( m_initGuard );
     m_initialized = false;
     m_video = false;
     m_wid = widget;
@@ -87,6 +89,11 @@ Lib::Lib( XineVideoWidget* widget ) {
         f.close();
     }
 
+    start();
+}
+
+void Lib::run()
+{
     initialize();
 }
 
@@ -124,7 +131,10 @@ void Lib::initialize()
 
     xine_event_create_listener_thread (m_queue, xine_event_handler, this);
 
+    ThreadUtil::AutoLock lock( m_initGuard );
     m_initialized = true;
+
+    send( new ThreadUtil::ChannelMessage( InitializationMessageType ), OneWay );
 }
 
 Lib::~Lib() {
@@ -284,12 +294,19 @@ int Lib::error() const {
 void Lib::receiveMessage( ThreadUtil::ChannelMessage *msg, SendType sendType )
 {
     assert( sendType == ThreadUtil::Channel::OneWay );
-    handleXineEvent( msg->type() );
+    switch ( msg->type() ) {
+        case XineMessageType:
+            handleXineEvent( static_cast<XineMessage *>( msg )->xineEvent );
+            break;
+        case InitializationMessageType:
+            emit initialized();
+            break;
+    }
     delete msg;
 }
 
 void Lib::handleXineEvent( const xine_event_t* t ) {
-    send( new ThreadUtil::ChannelMessage( t->type ), OneWay );
+    send( new XineMessage( t->type ), OneWay );
 }
 
 void Lib::handleXineEvent( int type ) {

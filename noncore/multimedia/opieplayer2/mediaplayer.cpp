@@ -365,7 +365,8 @@ void MediaPlayer::recreateAudioAndVideoWidgets()
     connect( videoUI,  SIGNAL( lessReleased() ), this, SLOT( stopChangingVolume() ) );
 
     xineControl = new XineControl( videoUI, videoUI->vidWidget(), mediaPlayerState );
-    mediaPlayerState.setBackendInitialized();
+    connect( xineControl, SIGNAL( initialized() ),
+             &mediaPlayerState, SLOT( setBackendInitialized() ) );
 }
 
 void MediaPlayer::reloadSkins()

@@ -55,7 +55,8 @@ namespace XINE {
      * stooping, seeking.
      */
     class Frame;
-    class Lib : public ThreadUtil::Channel {
+    class Lib : public ThreadUtil::Channel, private ThreadUtil::Thread
+    {
         Q_OBJECT
     public:
         Lib(XineVideoWidget* = 0);
@@ -177,13 +178,28 @@ namespace XINE {
 
         void stopped();
 
+        void initialized();
+
     protected:
         virtual void receiveMessage( ThreadUtil::ChannelMessage *msg, SendType sendType );
+
+        virtual void run();
 
     private:
         void initialize();
 
         void assertInitialized() const;
+
+        enum { XineMessageType = 1, InitializationMessageType };
+
+        struct XineMessage : public ThreadUtil::ChannelMessage
+        {
+            XineMessage( int _xineEvent ) : ThreadUtil::ChannelMessage( XineMessageType ),
+                xineEvent( _xineEvent )
+            {}
+
+            int xineEvent;
+        };
 
         mutable ThreadUtil::Mutex m_initGuard;
         bool m_initialized : 1;

@@ -114,6 +114,8 @@ private:
 
 signals:
     void positionChanged( long );
+
+    void initialized();
 };
 
 
