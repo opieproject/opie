@@ -13,76 +13,74 @@ export PATH=$PATH:$OPIEDIR/bin
 if [ -e /proc/cpuinfo ] ; then
 	model=`grep "^Hardware" /proc/cpuinfo | sed -e "s/.*: *//" | tr a-z A-Z`
 	
-    case "$model" in	
-        "HP IPAQ H3100" | "HP IPAQ H3800" )
-	     export QWS_DISPLAY=Transformed:Rot90:0 ;;
+	case "$model" in	
+	"HP IPAQ H3100" | "HP IPAQ H3800" )
+		export QWS_DISPLAY=Transformed:Rot90:0 ;;
 	"HP IPAQ H5400" | "HP JORNADA 56X" | "HP IPAQ H2200" | "SHARP Tosa")
-	     export QWS_DISPLAY=Transformed:Rot0:0 ;;
+		export QWS_DISPLAY=Transformed:Rot0:0 ;;
 	*SIMPAD* )
-	     export QWS_KEYBOARD='SIMpad'
-             export QWS_DISPLAY=Transformed:Rot0:0 ;;
-	     
+		export QWS_KEYBOARD='SIMpad'
+		export QWS_DISPLAY=Transformed:Rot0:0 ;;
+	RAMSES )
+		# already set based on /proc/sys/board/lcd_type
+		;;
 	*)
-	     export QWS_DISPLAY=Transformed:Rot270:0 ;;
-    esac
+		export QWS_DISPLAY=Transformed:Rot270:0 ;;
+	esac
 else
-    export QWS_DISPLAY=Transformed:Rot270:0
+	export QWS_DISPLAY=Transformed:Rot270:0
 fi
 
 if [ ! -x $OPIEDIR/bin/qpe ] ; then 
-    echo Opie not installed
-    exit 0  
+	echo Opie not installed
+	exit 0  
 fi
 
 . /etc/profile
 
 case $1 in
 'start')
-    cd $HOME
-    rm -f /etc/rc2.d/S99x # Can't have both running!
-    
-    if [ -x $OPIEDIR/bin/opie-login ]; then
-        if ! killall -0 syslogd 2>/dev/null >/dev/null; then
-            echo Starting Opie-login....
-            $OPIEDIR/bin/opie-login 2>/dev/null >/dev/null &
-        else
-            echo Starting Opie-login with syslog logging.....
-            ( $OPIEDIR/bin/opie-login  2>&1 | logger ) &
-        fi
-    else
-        $OPIEDIR/bin/opie-reorgfiles
-        if [ -x /usr/bin/ssh-agent ]; then
-             SSHAGENT=/usr/bin/ssh-agent
-        else
-             SSHAGENT=""
-        fi
-        
-        if [ -x $OPIEDIR/bin/opie-sh-ssh-askpass.sh ]; then
-            export SSH_ASKPASS=$OPIEDIR/bin/opie-sh-ssh-askpass.sh
-        fi
-            
-        if ! killall -0 syslogd 2>/dev/null >/dev/null; then
-            echo Starting Opie....
-            $SSHAGENT $OPIEDIR/bin/qpe 2>/dev/null >/dev/null &
-        else
-            echo Starting Opie with syslog logging.....
-            ( $SSHAGENT $OPIEDIR/bin/qpe 2>&1 | logger ) &
-        fi
-    fi
-
-    ;;
+	cd $HOME
+	rm -f /etc/rc2.d/S99x # Can't have both running!
+	
+	if [ -x $OPIEDIR/bin/opie-login ]; then
+		if ! killall -0 syslogd 2>/dev/null >/dev/null; then
+			echo Starting Opie-login....
+			$OPIEDIR/bin/opie-login 2>/dev/null >/dev/null &
+		else
+			echo Starting Opie-login with syslog logging.....
+			( $OPIEDIR/bin/opie-login  2>&1 | logger ) &
+		fi
+	else
+		$OPIEDIR/bin/opie-reorgfiles
+		if [ -x /usr/bin/ssh-agent ]; then
+			 SSHAGENT=/usr/bin/ssh-agent
+		else
+			 SSHAGENT=""
+		fi
+		
+		if [ -x $OPIEDIR/bin/opie-sh-ssh-askpass.sh ]; then
+			export SSH_ASKPASS=$OPIEDIR/bin/opie-sh-ssh-askpass.sh
+		fi
+			
+		if ! killall -0 syslogd 2>/dev/null >/dev/null; then
+			echo Starting Opie....
+			$SSHAGENT $OPIEDIR/bin/qpe 2>/dev/null >/dev/null &
+		else
+			echo Starting Opie with syslog logging.....
+			( $SSHAGENT $OPIEDIR/bin/qpe 2>&1 | logger ) &
+		fi
+	fi
+	;;
 
 'stop')
-    echo "Killing Opie..."
-    killall qpe
-    killall opie-login
-
-    ;;
+	echo "Killing Opie..."
+	killall qpe
+	killall opie-login
+	;;
 
 *)
-    echo "usage: $0 { start | stop }"
-
-    ;;
+	echo "usage: $0 { start | stop }"
+	;;
 
 esac
-
