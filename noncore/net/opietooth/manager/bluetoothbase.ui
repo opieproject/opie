@@ -217,7 +217,7 @@
                     </property>
                     <property stdset="1">
                         <name>title</name>
-                        <string>Bluetooh Basic Config</string>
+                        <string>Bluetooth Basic Config</string>
                     </property>
                     <vbox>
                         <property stdset="1">
