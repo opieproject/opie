@@ -56,9 +56,9 @@ void MediumMountWidget::initGUI()
   m_desc = new QLabel(m_infoBox );
   m_desc->setTextFormat( Qt::RichText );
   QWhatsThis::add( this, tr("Configure this medium. The changes will"
-      " go into effect when the application get's"
+      " go into effect when the application gets"
       " closed. To update the Document Tab you need"
-                            " to removeand insert this medium."));
+                            " to remove and insert this medium."));
   m_desc->setText("" );
   m_box->addWidget( m_infoBox ); // add the widget to the layout
 

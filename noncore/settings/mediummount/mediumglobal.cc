@@ -34,7 +34,7 @@ void MediumGlobalWidget::initGUI()
   m_label->setTextFormat( Qt::RichText );
   m_label->setText( tr("") );
   QWhatsThis::add( this, ("If a medium gets inserted into this device Opie "
-           "tries to search the medium for Dcouments. On "
+           "tries to search the medium for Documents. On "
            "large mediums this can take some time. You can choose "
            "if Opie should scan for Documents globally or on a "
            "per medium level. You're also able to reconfigure "
