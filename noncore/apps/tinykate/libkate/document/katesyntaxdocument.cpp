@@ -296,9 +296,10 @@ QStringList& SyntaxDocument::finddata(const QString& mainGroup,const QString& ty
 	        if (e1->attribute("name")==type)
         	{
 			for (Opie::XMLElement *e2=e1->firstChild();e2;e2=e2->nextChild())
-				qDebug("FOUND A LIST ENTRY("+e2->tagName()+"):"+e2->value());
-	            		m_data+="TEST";//e2->value().stripWhiteSpace();
-
+			{
+				qDebug("FOUND A LIST ENTRY("+e2->tagName()+"):"+e2->firstChild()->value());
+	            		m_data+=e2->firstChild()->value().stripWhiteSpace();
+			}
 	           break;
 		}
         }
