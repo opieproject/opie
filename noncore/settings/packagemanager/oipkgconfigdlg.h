@@ -63,15 +63,9 @@ private:
 
     bool           m_installOptions; // If true, will only display the Options tab
 
-    // Server cached information
-    bool           m_serverNew;      // Indicates if server information is for a new server
-    int            m_serverCurrent;  // Index of currently selected server in m_serverList
-    QString        m_serverCurrName; // Name of currently selected server in m_serverList
-
-    // Destination cached information
-    bool           m_destNew;      // Indicates if destination information is for a new destination
-    int            m_destCurrent;  // Index of currently selected destination in m_destList
-    QString        m_destCurrName; // Name of currently selected destination in m_destList
+    // Server/Destination cached information
+    int m_serverCurrent; // Index of currently selected server in m_serverList
+    int m_destCurrent;   // Index of currently selected destination in m_destList
 
     // UI controls
     QVBoxLayout           m_layout;        // Main dialog layout control
@@ -87,10 +81,9 @@ private:
     QPushButton *m_serverDeleteBtn; // Server edit button
 
     // Destination configuration UI controls
-    QListBox   *m_destList;     // Destination list selection
-    QLineEdit  *m_destName;     // Destination name edit box
-    QLineEdit  *m_destLocation; // Destination location URL edit box
-    QCheckBox  *m_destActive;   // Activate destination check box
+    QListBox    *m_destList;      // Destination list selection
+    QPushButton *m_destEditBtn;   // Destination edit button
+    QPushButton *m_destDeleteBtn; // Destination edit button
 
     // Proxy server configuration UI controls
     QLineEdit *m_proxyHttpServer;  // HTTP proxy server URL edit box
@@ -122,13 +115,11 @@ private slots:
     void slotServerNew();
     void slotServerEdit();
     void slotServerDelete();
-//    void slotServerUpdate();
 
-    void slotDestEdit( int index );
+    void slotDestSelected( int index );
     void slotDestNew();
+    void slotDestEdit();
     void slotDestDelete();
-    void slotDestSelectPath();
-    void slotDestUpdate();
 };
 
 class OIpkgServerDlg : public QDialog
@@ -149,6 +140,28 @@ private:
     QLineEdit *m_location;   // Server location URL edit box
     QCheckBox *m_compressed; // Indicates whether the server is a 'src/gz' feed
     QCheckBox *m_active;     // Indicates whether the server is activated
+};
+
+class OIpkgDestDlg : public QDialog
+{
+    Q_OBJECT
+
+public:
+    OIpkgDestDlg( OConfItem *dest = 0l, QWidget *parent = 0l );
+
+protected slots:
+    void accept();
+    
+private:
+    OConfItem *m_dest;
+
+    // UI controls
+    QLineEdit *m_name;       // Destination name edit box
+    QLineEdit *m_location;   // Destination location URL edit box
+    QCheckBox *m_active;     // Indicates whether the destination is activated
+
+private slots:
+    void slotSelectPath();
 };
 
 #endif

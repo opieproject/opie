@@ -51,9 +51,7 @@ OIpkgConfigDlg::OIpkgConfigDlg( OIpkg *ipkg, bool installOptions, QWidget *paren
     , m_ipkg( ipkg )
     , m_configs( 0l )
     , m_installOptions( installOptions )
-    , m_serverNew( false )
     , m_serverCurrent( -1 )
-    , m_destNew( false )
     , m_destCurrent( -1 )
     , m_layout( this, 2, 4 )
     , m_tabWidget( this )
@@ -173,7 +171,7 @@ void OIpkgConfigDlg::initServerWidget()
     QWhatsThis::add( m_serverList, tr( "This is a list of all servers configured.  Select one here to edit or delete, or add a new one below." ) );
     m_serverList->setSizePolicy( QSizePolicy( QSizePolicy::Preferred, QSizePolicy::Preferred ) );
     connect( m_serverList, SIGNAL(highlighted(int)), this, SLOT(slotServerSelected(int)) );
-    layout->addMultiCellWidget( m_serverList, 0, 0, 0, 1 );
+    layout->addMultiCellWidget( m_serverList, 0, 0, 0, 2 );
 
     QPushButton *btn = new QPushButton( Resource::loadPixmap( "new" ), tr( "New" ), container );
     QWhatsThis::add( btn, tr( "Tap here to create a new entry.  Fill in the fields below and then tap on Update." ) );
@@ -205,58 +203,30 @@ void OIpkgConfigDlg::initDestinationWidget()
     sv->setFrameStyle( QFrame::NoFrame );
     QWidget *container = new QWidget( sv->viewport() );
     sv->addChild( container );
-    QGridLayout *layout = new QGridLayout( container, 3, 2, 2, 4 );
+    QGridLayout *layout = new QGridLayout( container, 2, 3, 2, 4 );
 
     m_destList = new QListBox( container );
     QWhatsThis::add( m_destList, tr( "This is a list of all destinations configured for this device.  Select one here to edit or delete, or add a new one below." ) );
     m_destList->setSizePolicy( QSizePolicy( QSizePolicy::Preferred, QSizePolicy::Preferred ) );
-    connect( m_destList, SIGNAL(highlighted(int)), this, SLOT(slotDestEdit(int)) );
-    layout->addMultiCellWidget( m_destList, 0, 0, 0, 1 );
+    connect( m_destList, SIGNAL(highlighted(int)), this, SLOT(slotDestSelected(int)) );
+    layout->addMultiCellWidget( m_destList, 0, 0, 0, 2 );
 
     QPushButton *btn = new QPushButton( Resource::loadPixmap( "new" ), tr( "New" ), container );
     QWhatsThis::add( btn, tr( "Tap here to create a new entry.  Fill in the fields below and then tap on Update." ) );
     connect( btn, SIGNAL(clicked()), this, SLOT(slotDestNew()) );
     layout->addWidget( btn, 1, 0 );
 
-    btn = new QPushButton( Resource::loadPixmap( "trash" ), tr( "Delete" ), container );
-    QWhatsThis::add( btn, tr( "Tap here to delete the entry selected above." ) );
-    connect( btn, SIGNAL(clicked()), this, SLOT(slotDestDelete()) );
-    layout->addWidget( btn, 1, 1 );
-
-    QGroupBox *grpbox = new QGroupBox( 0, Qt::Vertical, tr( "Destination" ), container );
-    grpbox->layout()->setSpacing( 2 );
-    grpbox->layout()->setMargin( 4 );
-    layout->addMultiCellWidget( grpbox, 2, 2, 0, 1 );
-
-    QGridLayout *grplayout = new QGridLayout( grpbox->layout() );
-
-    QLabel *label = new QLabel( tr( "Name:" ), grpbox );
-    QWhatsThis::add( label, tr( "Enter the name of this entry here." ) );
-    grplayout->addWidget( label, 0, 0 );
-    m_destName = new QLineEdit( grpbox );
-    QWhatsThis::add( m_destName, tr( "Enter the name of this entry here." ) );
-    grplayout->addMultiCellWidget( m_destName, 0, 0, 1, 2 );
-
-    label = new QLabel( tr( "Location:" ), grpbox );
-    QWhatsThis::add( label, tr( "Enter the absolute directory path of this entry here." ) );
-    grplayout->addWidget( label, 1, 0 );
-    m_destLocation = new QLineEdit( grpbox );
-    QWhatsThis::add( m_destLocation, tr( "Enter the absolute directory path of this entry here." ) );
-    grplayout->addWidget( m_destLocation, 1, 1 );
-    btn = new QPushButton( Resource::loadPixmap( "folder" ), QString::null, grpbox );
-    btn->setMaximumWidth( btn->height() );
-    QWhatsThis::add( btn, tr( "Tap here to select the desired location." ) );
-    connect( btn, SIGNAL(clicked()), this, SLOT(slotDestSelectPath()) );
-    grplayout->addWidget( btn, 1, 2 );
-
-    m_destActive = new QCheckBox( tr( "Active" ), grpbox );
-    QWhatsThis::add( m_destActive, tr( "Tap here to indicate whether this entry is active or not." ) );
-    grplayout->addMultiCellWidget( m_destActive, 2, 2, 0, 2 );
-
-    btn = new QPushButton( Resource::loadPixmap( "edit" ), tr( "Update" ), grpbox );
-    QWhatsThis::add( btn, tr( "Tap here to update the entry's information." ) );
-    connect( btn, SIGNAL(clicked()), this, SLOT(slotDestUpdate()) );
-    grplayout->addMultiCellWidget( btn, 3, 3, 0, 2 );
+    m_destEditBtn = new QPushButton( Resource::loadPixmap( "edit" ), tr( "Edit" ), container );
+    m_destEditBtn->setEnabled( false );
+    QWhatsThis::add( m_destEditBtn, tr( "Tap here to edit the entry selected above." ) );
+    connect( m_destEditBtn, SIGNAL(clicked()), this, SLOT(slotDestEdit()) );
+    layout->addWidget( m_destEditBtn, 1, 1 );
+    
+    m_destDeleteBtn = new QPushButton( Resource::loadPixmap( "trash" ), tr( "Delete" ), container );
+    m_destDeleteBtn->setEnabled( false );
+    QWhatsThis::add( m_destDeleteBtn, tr( "Tap here to delete the entry selected above." ) );
+    connect( m_destDeleteBtn, SIGNAL(clicked()), this, SLOT(slotDestDelete()) );
+    layout->addWidget( m_destDeleteBtn, 1, 2 );
 }
 
 void OIpkgConfigDlg::initProxyWidget()
@@ -474,7 +444,7 @@ void OIpkgConfigDlg::slotServerEdit()
     // Find selected server in list
     OConfItem *server = findConfItem( OConfItem::Source, m_serverList->currentText() );
 
-    // Delete server
+    // Edit server
     if ( server )
     {
         QString origName = server->name();
@@ -501,33 +471,51 @@ void OIpkgConfigDlg::slotServerDelete()
     }
 }
 
-void OIpkgConfigDlg::slotDestEdit( int index )
+void OIpkgConfigDlg::slotDestSelected( int index )
 {
-    m_destNew = false;
     m_destCurrent = index;
-
-    // Find selected destination in list
-    OConfItem *destination = findConfItem( OConfItem::Destination, m_destList->currentText() );
-
-    // Display destination details
-    if ( destination )
-    {
-        m_destCurrName = destination->name();
-        m_destName->setText( destination->name() );
-        m_destLocation->setText( destination->value() );
-        m_destActive->setChecked( destination->active() );
-        m_destName->setFocus();
-    }
+    
+    // Enable Edit and Delete buttons
+    m_destEditBtn->setEnabled( true );
+    m_destDeleteBtn->setEnabled( true );
 }
 
 void OIpkgConfigDlg::slotDestNew()
 {
-    m_destNew = true;
+    OConfItem *dest = new OConfItem( OConfItem::Destination );
+    
+    OIpkgDestDlg dlg( dest, this );
+    if ( QPEApplication::execDialog( &dlg ) == QDialog::Accepted )
+    {
+        // Add to configuration option list
+        m_configs->append( dest );
+        m_configs->sort();
 
-    m_destName->setText( QString::null );
-    m_destLocation->setText( QString::null );
-    m_destActive->setChecked( true );
-    m_destName->setFocus();
+        // Add to destination list
+        m_destList->insertItem( dest->name() );
+        m_destList->setCurrentItem( m_destList->count() );
+    }
+    else
+        delete dest;
+}
+
+void OIpkgConfigDlg::slotDestEdit()
+{
+    // Find selected destination in list
+    OConfItem *dest = findConfItem( OConfItem::Destination, m_destList->currentText() );
+
+    // Edit destination
+    if ( dest )
+    {
+        QString origName = dest->name();
+        OIpkgDestDlg dlg( dest, this );
+        if ( QPEApplication::execDialog( &dlg ) == QDialog::Accepted )
+        {
+            // Check to see if name has changed, if so update the dest list
+            if ( dest->name() != origName )
+                m_destList->changeItem( dest->name(), m_destCurrent );
+        }
+    }
 }
 
 void OIpkgConfigDlg::slotDestDelete()
@@ -543,62 +531,11 @@ void OIpkgConfigDlg::slotDestDelete()
     }
 }
 
-void OIpkgConfigDlg::slotDestSelectPath()
-{
-    QString path = Opie::Ui::OFileDialog::getDirectory( 0, m_destLocation->text() );
-    if ( path.at( path.length() - 1 ) == '/' )
-        path.truncate( path.length() - 1 );
-    m_destLocation->setText( path );
-}
-
-void OIpkgConfigDlg::slotDestUpdate()
-{
-    QString newName = m_destName->text();
-
-    // Convert any spaces to underscores
-    newName.replace( QRegExp( " " ), "_" );
-
-    if ( !m_destNew )
-    {
-        // Find selected destination in list
-        OConfItem *destination = findConfItem( OConfItem::Destination, m_destCurrName );
-
-        // Display destination details
-        if ( destination )
-        {
-            // Update url
-            destination->setValue( m_destLocation->text() );
-            destination->setActive( m_destActive->isChecked() );
-
-            // Check if destination name has changed, if it has then we need to replace the key in the map
-            if ( m_destCurrName != newName )
-            {
-                // Update destination name
-                destination->setName( newName );
-
-                // Update list box
-                m_destList->changeItem( newName, m_destCurrent );
-            }
-        }
-    }
-    else
-    {
-        // Add new destination to configuration list
-        m_configs->append( new OConfItem( OConfItem::Destination, newName,
-                           m_destLocation->text(), QString::null, m_destActive->isChecked() ) );
-        m_configs->sort();
-
-        m_destList->insertItem( newName );
-        m_destList->setCurrentItem( m_destList->count() );
-        m_destNew = false;
-    }
-}
-
 OIpkgServerDlg::OIpkgServerDlg( OConfItem *server, QWidget *parent )
     : QDialog( parent, QString::null, true, WStyle_ContextHelp )
     , m_server( server )
 {
-    setCaption( tr( "Edit server" ) );
+    setCaption( tr( "Edit Server" ) );
 
     // Initialize UI    
     QVBoxLayout *layout = new QVBoxLayout( this, 2, 4 );
@@ -644,7 +581,9 @@ OIpkgServerDlg::OIpkgServerDlg( OConfItem *server, QWidget *parent )
 void OIpkgServerDlg::accept()
 {
     // Save information entered
-    m_server->setName( m_name->text() );
+    QString name = m_name->text();
+    name.replace( QRegExp( " " ), "_" );
+    m_server->setName( name );
     m_server->setValue( m_location->text() );
     m_compressed->isChecked() ? m_server->setFeatures( "Compressed" )
                               : m_server->setFeatures( QString::null );
@@ -652,3 +591,74 @@ void OIpkgServerDlg::accept()
 
     QDialog::accept();
 }
+
+OIpkgDestDlg::OIpkgDestDlg( OConfItem *dest, QWidget *parent )
+    : QDialog( parent, QString::null, true, WStyle_ContextHelp )
+    , m_dest( dest )
+{
+    setCaption( tr( "Edit Destination" ) );
+
+    // Initialize UI    
+    QVBoxLayout *layout = new QVBoxLayout( this, 2, 4 );
+
+    m_active = new QCheckBox( tr( "Active" ), this );
+    QWhatsThis::add( m_active, tr( "Tap here to indicate whether this entry is active or not." ) );
+    layout->addWidget( m_active );
+
+    layout->addStretch();
+    
+    QLabel *label = new QLabel( tr( "Name:" ), this );
+    QWhatsThis::add( label, tr( "Enter the name of this entry here." ) );
+    layout->addWidget( label );
+    m_name = new QLineEdit( this );
+    QWhatsThis::add( m_name, tr( "Enter the name of this entry here." ) );
+    layout->addWidget( m_name );
+
+    layout->addStretch();
+    
+    label = new QLabel( tr( "Location:" ), this );
+    QWhatsThis::add( label, tr( "Enter the absolute directory path of this entry here." ) );
+    layout->addWidget( label );
+
+    QHBoxLayout *layout2 = new QHBoxLayout( this, 2, 4 );
+    layout->addLayout( layout2 );
+    
+    m_location = new QLineEdit( this );
+    QWhatsThis::add( m_location, tr( "Enter the absolute directory path of this entry here." ) );
+    layout2->addWidget( m_location );
+    QPushButton *btn = new QPushButton( Resource::loadPixmap( "folder" ), QString::null, this );
+    btn->setMaximumWidth( btn->height() );
+    QWhatsThis::add( btn, tr( "Tap here to select the desired location." ) );
+    connect( btn, SIGNAL(clicked()), this, SLOT(slotSelectPath()) );
+    layout2->addWidget( btn );
+    
+    // Populate initial information
+    if ( m_dest )
+    {
+        m_name->setText( m_dest->name() );
+        m_location->setText( m_dest->value() );
+        m_active->setChecked( m_dest->active() );
+    }
+}
+
+void OIpkgDestDlg::accept()
+{
+    // Save information entered
+    QString name = m_name->text();
+    name.replace( QRegExp( " " ), "_" );
+    m_dest->setName( name );
+    m_dest->setValue( m_location->text() );
+    m_dest->setActive( m_active->isChecked() );
+
+    QDialog::accept();
+}
+
+void OIpkgDestDlg::slotSelectPath()
+{
+    QString path = Opie::Ui::OFileDialog::getDirectory( 0, m_location->text() );
+    if ( path.at( path.length() - 1 ) == '/' )
+        path.truncate( path.length() - 1 );
+    if ( !path.isNull() )
+        m_location->setText( path );
+}
+
