@@ -57,7 +57,7 @@ public:
     ~TextEdit();
 
     QPopupMenu *font;
-    QAction *nStart, *nFileDlgOpt, *nAdvanced;
+    QAction *nStart, *nFileDlgOpt, *nAdvanced, *desktopAction, *filePermAction;
     bool edited, edited1;
     void openFile( const QString & );
         QCopChannel * channel;
@@ -65,12 +65,14 @@ public slots:
     void editorChanged();
 void  receive(const QCString&, const QByteArray&);
 protected:
-    bool fileIs, useAdvancedFeatures; 
+    bool fileIs, useAdvancedFeatures, promptExit, openDesktop, filePerms;
     void closeEvent( QCloseEvent *e );
     void doSearchBar();
 private slots:
     void editPasteTimeDate();
-    void doAdvanced(bool);
+    void doPrompt(bool);
+    void doDesktop(bool);
+    void doFilePerms(bool);
     void doAbout();
     void setDocument(const QString&);
     void changeFont();
@@ -116,6 +118,7 @@ private:
 //    fileBrowser *browseForFiles;
     QpeEditor* editor;
     QToolBar *menu, *editBar, *searchBar;
+    QPopupMenu *advancedMenu;
     QLineEdit *searchEdit;
     DocLnk *doc;
     bool searchVisible;

@@ -262,6 +262,8 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     QPEMenuBar *mb = new QPEMenuBar( bar );
     QPopupMenu *file = new QPopupMenu( this );
     QPopupMenu *edit = new QPopupMenu( this );
+    QPopupMenu *advancedMenu = new QPopupMenu(this);
+    
     font = new QPopupMenu( this );
 
     bar = new QPEToolBar( this );
@@ -324,27 +326,36 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     zout->addTo( font );
 
     font->insertSeparator();
-
-    QAction *wa = new QAction( tr("Wrap lines"), QString::null, 0, this, 0 );
-    connect( wa, SIGNAL( toggled(bool) ), this, SLOT( setWordWrap(bool) ) );
-    wa->setToggleAction(TRUE);
-    wa->addTo( font );
-
-    font->insertSeparator();
+//    font->insertSeparator();
     font->insertItem(tr("Font"), this, SLOT(changeFont()) );
 
     font->insertSeparator();
+    font->insertItem(tr("Advanced Features"), advancedMenu);
+    
+    QAction *wa = new QAction( tr("Wrap lines"), QString::null, 0, this, 0 );
+    connect( wa, SIGNAL( toggled(bool) ), this, SLOT( setWordWrap(bool) ) );
+    wa->setToggleAction(TRUE);
+    wa->addTo( advancedMenu);
 
     nStart = new QAction( tr("Start with new file"), QString::null, 0, this, 0 );
     connect( nStart, SIGNAL( toggled(bool) ), this, SLOT( changeStartConfig(bool) ) );
     nStart->setToggleAction(TRUE);
-    nStart->addTo( font );
+    nStart->addTo( advancedMenu );
 
-    nAdvanced = new QAction( tr("Advanced features"), QString::null, 0, this, 0 );
-    connect( nAdvanced, SIGNAL( toggled(bool) ), this, SLOT( doAdvanced(bool) ) );
+    nAdvanced = new QAction( tr("Prompt on Exit"), QString::null, 0, this, 0 );
+    connect( nAdvanced, SIGNAL( toggled(bool) ), this, SLOT( doPrompt(bool) ) );
     nAdvanced->setToggleAction(TRUE);
-    nAdvanced->addTo( font );
+    nAdvanced->addTo( advancedMenu );
 
+    desktopAction = new QAction( tr("Always open linked file"), QString::null, 0, this, 0 );
+    connect( desktopAction, SIGNAL( toggled(bool) ), this, SLOT( doDesktop(bool) ) );
+    desktopAction->setToggleAction(TRUE);
+    desktopAction->addTo( advancedMenu);
+
+    filePermAction = new QAction( tr("File Permissions"), QString::null, 0, this, 0 );
+    connect( filePermAction, SIGNAL( toggled(bool) ), this, SLOT( doFilePerms(bool) ) );
+    filePermAction->setToggleAction(TRUE);
+    filePermAction->addTo( advancedMenu);
 
     font->insertSeparator();
 
@@ -386,8 +397,7 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     connect( editor, SIGNAL( textChanged() ), this, SLOT( editorChanged() ) );
 
     Config cfg("TextEdit");
-
-  cfg. setGroup ( "Font" );
+    cfg. setGroup ( "Font" );
 
     QFont defaultFont = editor-> font ( );
 
@@ -403,11 +413,14 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
 
     cfg.setGroup ( "View" );
 
-    useAdvancedFeatures = cfg. readBoolEntry ( "AdvancedFeatures", false ); 
-    
-    if ( useAdvancedFeatures )
-        nAdvanced-> setOn ( true );
-  
+    promptExit = cfg. readBoolEntry ( "PromptExit", false );
+    openDesktop = cfg. readBoolEntry ( "OpenDesktop", true );
+    filePerms = cfg. readBoolEntry ( "FilePermissions", false );
+        
+    if(promptExit )  nAdvanced->setOn ( true );
+    if(openDesktop) desktopAction->setOn ( true );
+    if(filePerms) filePermAction->setOn ( true );
+      
     bool wrap = cfg. readBoolEntry ( "Wrap", true );
     wa-> setOn ( wrap );
     setWordWrap ( wrap );
@@ -423,7 +436,7 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
 }
 
 TextEdit::~TextEdit() {
-    if( edited1 & !useAdvancedFeatures )
+    if( edited1 & promptExit )
         saveAs();
 }
 
@@ -441,7 +454,10 @@ void TextEdit::cleanUp() {
     cfg. setGroup ( "View" );
     cfg. writeEntry ( "Wrap",     editor-> wordWrap ( ) == QMultiLineEdit::WidgetWidth );
     cfg. writeEntry ( "FileView", viewSelection );
-  cfg. writeEntry ( "AdvancedFeatures", useAdvancedFeatures );
+
+    cfg. writeEntry ( "PromptExit", promptExit );
+    cfg. writeEntry ( "OpenDesktop", openDesktop );
+    cfg. writeEntry ( "FilePermissions", filePerms );
 }
 
 
@@ -622,7 +638,7 @@ void TextEdit::openFile( const QString &f ) {
     qDebug("filename is "+ f);
     QString filer;
 //    bFromDocView = TRUE;
-    if(f.find(".desktop",0,TRUE) != -1 && useAdvancedFeatures) {
+    if(f.find(".desktop",0,TRUE) != -1 && !openDesktop) {
         switch ( QMessageBox::warning(this,tr("Text Editor"),
         tr("Text Editor has detected<BR>you selected a <B>.desktop</B>
 file.<BR>Open <B>.desktop</B> file or <B>linked</B> file?"),
@@ -823,7 +839,7 @@ bool TextEdit::saveAs() {
                 return false;
             }
 
-            if( useAdvancedFeatures ) {
+            if( filePerms ) {
                 filePermissions *filePerm;
                 filePerm = new filePermissions(this, tr("Permissions"),true,0,(const QString &)fileNm);
                 filePerm->showMaximized();
@@ -947,8 +963,16 @@ void TextEdit::doAbout() {
                          "and is licensed under the GPL"));
 }
 
-void TextEdit::doAdvanced(bool b) {
-  useAdvancedFeatures=b;
+void TextEdit::doPrompt(bool b) {
+  promptExit=b;
+}
+
+void TextEdit::doDesktop(bool b) {
+  openDesktop=b;
+}
+
+void TextEdit::doFilePerms(bool b) {
+  filePerms=b;
 }
 
 void TextEdit::editPasteTimeDate() {
