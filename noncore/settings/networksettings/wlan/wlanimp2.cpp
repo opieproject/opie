@@ -1,4 +1,5 @@
 #include "wlanimp2.h"
+#include "keyedit.h"
 #include "interfacesetupimp.h"
 
 #include <qfile.h>

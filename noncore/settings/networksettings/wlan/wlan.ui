@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>255</width>
+            <width>251</width>
             <height>299</height>
         </rect>
     </property>
@@ -396,27 +396,6 @@
                         <name>spacing</name>
                         <number>6</number>
                     </property>
-                    <spacer row="0"  column="0" >
-                        <property>
-                            <name>name</name>
-                            <cstring>Spacer30</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>orientation</name>
-                            <enum>Vertical</enum>
-                        </property>
-                        <property stdset="1">
-                            <name>sizeType</name>
-                            <enum>Expanding</enum>
-                        </property>
-                        <property>
-                            <name>sizeHint</name>
-                            <size>
-                                <width>20</width>
-                                <height>20</height>
-                            </size>
-                        </property>
-                    </spacer>
                     <widget row="0"  column="0" >
                         <class>QCheckBox</class>
                         <property stdset="1">
@@ -451,50 +430,6 @@
                                 <name>spacing</name>
                                 <number>6</number>
                             </property>
-                            <widget row="0"  column="1" >
-                                <class>QLineEdit</class>
-                                <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>keyLineEdit0</cstring>
-                                </property>
-                                <property stdset="1">
-                                    <name>echoMode</name>
-                                    <enum>Password</enum>
-                                </property>
-                            </widget>
-                            <widget row="1"  column="1" >
-                                <class>QLineEdit</class>
-                                <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>keyLineEdit1</cstring>
-                                </property>
-                                <property stdset="1">
-                                    <name>echoMode</name>
-                                    <enum>Password</enum>
-                                </property>
-                            </widget>
-                            <widget row="2"  column="1" >
-                                <class>QLineEdit</class>
-                                <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>keyLineEdit2</cstring>
-                                </property>
-                                <property stdset="1">
-                                    <name>echoMode</name>
-                                    <enum>Password</enum>
-                                </property>
-                            </widget>
-                            <widget row="3"  column="1" >
-                                <class>QLineEdit</class>
-                                <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>keyLineEdit3</cstring>
-                                </property>
-                                <property stdset="1">
-                                    <name>echoMode</name>
-                                    <enum>Password</enum>
-                                </property>
-                            </widget>
                             <widget row="0"  column="0" >
                                 <class>QRadioButton</class>
                                 <property stdset="1">
@@ -541,6 +476,78 @@
                                 <property stdset="1">
                                     <name>text</name>
                                     <string>Key &amp;4</string>
+                                </property>
+                            </widget>
+                            <widget row="0"  column="1" >
+                                <class>KeyEdit</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>keyLineEdit0</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>sizePolicy</name>
+                                    <sizepolicy>
+                                        <hsizetype>3</hsizetype>
+                                        <vsizetype>5</vsizetype>
+                                    </sizepolicy>
+                                </property>
+                                <property stdset="1">
+                                    <name>focusPolicy</name>
+                                    <enum>StrongFocus</enum>
+                                </property>
+                            </widget>
+                            <widget row="1"  column="1" >
+                                <class>KeyEdit</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>keyLineEdit1</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>sizePolicy</name>
+                                    <sizepolicy>
+                                        <hsizetype>3</hsizetype>
+                                        <vsizetype>5</vsizetype>
+                                    </sizepolicy>
+                                </property>
+                                <property stdset="1">
+                                    <name>focusPolicy</name>
+                                    <enum>StrongFocus</enum>
+                                </property>
+                            </widget>
+                            <widget row="2"  column="1" >
+                                <class>KeyEdit</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>keyLineEdit2</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>sizePolicy</name>
+                                    <sizepolicy>
+                                        <hsizetype>3</hsizetype>
+                                        <vsizetype>5</vsizetype>
+                                    </sizepolicy>
+                                </property>
+                                <property stdset="1">
+                                    <name>focusPolicy</name>
+                                    <enum>StrongFocus</enum>
+                                </property>
+                            </widget>
+                            <widget row="3"  column="1" >
+                                <class>KeyEdit</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>keyLineEdit3</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>sizePolicy</name>
+                                    <sizepolicy>
+                                        <hsizetype>3</hsizetype>
+                                        <vsizetype>5</vsizetype>
+                                    </sizepolicy>
+                                </property>
+                                <property stdset="1">
+                                    <name>focusPolicy</name>
+                                    <enum>StrongFocus</enum>
                                 </property>
                             </widget>
                         </grid>
@@ -608,11 +615,55 @@
                             </widget>
                         </grid>
                     </widget>
+                    <spacer row="3"  column="0" >
+                        <property>
+                            <name>name</name>
+                            <cstring>Spacer30</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>orientation</name>
+                            <enum>Vertical</enum>
+                        </property>
+                        <property stdset="1">
+                            <name>sizeType</name>
+                            <enum>Expanding</enum>
+                        </property>
+                        <property>
+                            <name>sizeHint</name>
+                            <size>
+                                <width>20</width>
+                                <height>20</height>
+                            </size>
+                        </property>
+                    </spacer>
                 </grid>
             </widget>
         </widget>
     </vbox>
 </widget>
+<customwidgets>
+    <customwidget>
+        <class>KeyEdit</class>
+        <header location="global">/usr/src/opie/noncore/net/networksettings/wlan/keyedit.h</header>
+        <sizehint>
+            <width>-1</width>
+            <height>-1</height>
+        </sizehint>
+        <container>0</container>
+        <sizepolicy>
+            <hordata>5</hordata>
+            <verdata>5</verdata>
+        </sizepolicy>
+        <pixmap>image0</pixmap>
+        <slot access="public">setEnabled(bool)</slot>
+    </customwidget>
+</customwidgets>
+<images>
+    <image>
+        <name>image0</name>
+        <data format="XPM.GZ" length="646">789c6dd2c10ac2300c00d07bbf2234b7229d1ddec44f503c0ae2a154410f53d0ed20e2bf6bdb656dd6861dd23d9a66591b0587fd1654235ebded6f0edcd53e419d87ae7b1f4f9b8f906d0bfe012317426a70b07bdc2f3ec77f8ed6b89559061a0343d06a124cc105596482585094bc0ae599b04646c9018926491b2205e140c485cace25755c175d0a967b622ff900b8cc9c7d29af594ea722d589167f813aa852ba07d94b9dce296e883fe7bb163f23896753</data>
+    </image>
+</images>
 <connections>
     <connection>
         <sender>specifyAp</sender>
