@@ -645,10 +645,11 @@ const ODeviceButton *ODevice::buttonForKeycode ( ushort code )
 void ODevice::reloadButtonMapping()
 {
     if(!d->m_buttons)
-        initButtons();
+	initButtons();
     
     if(!d->m_initializedButtonQcop) {
-	connect(qApp,SIGNAL(systemMessageSignal(const QCString&,const QByteArray&)),
+	QCopChannel *chan = new QCopChannel("QPE/System", this, "ODevice button channel");
+	connect(chan,SIGNAL(received(const QCString&,const QByteArray&)),
 		this,SLOT(systemMessage(const QCString&,const QByteArray&)));
 	d->m_initializedButtonQcop = true;
     }
