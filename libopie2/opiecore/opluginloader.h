@@ -157,6 +157,7 @@ public:
  */
 class OPluginManager {
 public:
+    typedef QValueList<OPluginManager*> List;
     OPluginManager( OGenericPluginLoader* );
     OPluginManager( const QString& name, const OPluginItem::List&, bool isSorted = false );
     virtual ~OPluginManager();

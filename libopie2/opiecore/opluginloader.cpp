@@ -565,7 +565,6 @@ OPluginItem::List OGenericPluginLoader::plugins( const QString& _dir, bool sorte
 
 
     QStringList list = dir.entryList();
-    QStringList::Iterator it;
     for (QStringList::Iterator it = list.begin(); it != list.end(); ++it ) {
         QString str = unlibify( *it );
         OPluginItem item( str, _dir + "/" + *it );
@@ -672,7 +671,7 @@ OPluginLoader::~OPluginLoader() {
  * @param name The name
  */
 OPluginManager::OPluginManager(  OGenericPluginLoader* loader)
-    : m_loader( loader )
+    : m_loader( loader ), m_isSorted( false )
 {
 }
 
@@ -871,7 +870,20 @@ QString OPluginManager::configName()const {
  * @internal.. replace in m_plugins by path... this is linear search O(n/2)
  */
 void OPluginManager::replace( const OPluginItem& item ) {
-// ### fixme
+    OPluginItem _item;
+
+    /* for all plugins */
+    for ( OPluginItem::List::Iterator it=m_plugins.begin();it != m_plugins.end(); ++it ) {
+        _item = *it;
+        /* if path and name are the same we will remove, readd and return */
+        if ( _item.path() == item.path() &&
+             _item.name() == item.name() ) {
+            it = m_plugins.remove( it );
+            m_plugins.append( item );
+            return;
+        }
+
+    }
 }
 
 }
