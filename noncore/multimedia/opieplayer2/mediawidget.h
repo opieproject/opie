@@ -91,6 +91,7 @@ protected:
     void paintButton( const Button &button );
     void paintButton( QPainter &p, const Button &button );
 
+    void setToggleButton( int buttonId, bool down );
     void toggleButton( int buttonId );
 
     MediaPlayerState &mediaPlayerState;

@@ -101,7 +101,6 @@ private:
     QString skin;
 
 
-    void setToggleButton( int, bool );
 
     QString backgroundPix;
     QSlider *slider;

@@ -305,14 +305,6 @@ void AudioWidget::updateSlider( long i, long max ) {
     }
 }
 
-
-void AudioWidget::setToggleButton( int i, bool down ) {
-    qDebug("setToggleButton %d", i);
-    if ( down != buttons[i].isDown ) {
-        toggleButton( i );
-    }
-}
-
 void AudioWidget::skipFor() {
     skipDirection = +1;
     startTimer( 50 );

@@ -90,7 +90,6 @@ private slots:
     void skipBack();
     void stopSkip();
 private:
-    void setToggleButton( int, bool );
     int skipDirection;
     QString skin;
     QImage  imgUp;

@@ -242,12 +242,6 @@ void VideoWidget::updateSlider( long i, long max ) {
     }
 }
 
-void VideoWidget::setToggleButton( int i, bool down ) {
-    if ( down != buttons[i].isDown ) {
-        toggleButton( i );
-    }
-}
-
 void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
     for ( unsigned int i = 0; i < buttons.count(); i++ ) {
         if ( event->state() == QMouseEvent::LeftButton ) {
