@@ -1,4 +1,4 @@
-Files: bin/sysinfo apps/Applications/sysinfo.desktop pics/opielogo.png pics/tux-logo.png
+Files: bin/sysinfo apps/Applications/sysinfo.desktop
 Priority: optional
 Section: qpe/applications
 Maintainer: Warwick Allison <warwick@trolltech.com>
