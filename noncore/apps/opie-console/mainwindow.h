@@ -115,6 +115,8 @@ private:
     FunctionKeyboard *m_kb;
     QuickButton *m_qb;
     bool m_isFullscreen;
+
+    QWidget* savedParentFullscreen;
 };
 
 
