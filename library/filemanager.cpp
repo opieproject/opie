@@ -318,7 +318,6 @@ bool FileManager::renameFile( const QString & src, const QString & dest ) {
 }
 
 
-=======
 bool FileManager::copyFile( const QString & src, const QString & dest ) {
    bool success = true;
    struct stat status;
