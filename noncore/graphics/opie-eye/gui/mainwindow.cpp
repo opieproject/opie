@@ -284,6 +284,7 @@ void PMainWindow::initDisp() {
         connect(m_disp,SIGNAL(dispNext()),m_view,SLOT(slotShowNext()));
         connect(m_disp,SIGNAL(dispPrev()),m_view,SLOT(slotShowPrev()));
         connect(m_disp,SIGNAL(toggleFullScreen()),this,SLOT(slotToggleFullScreen()));
+        connect(m_disp,SIGNAL(hideMe()),this,SLOT(raiseIconView()));
     }
 }
 
@@ -298,12 +299,16 @@ void PMainWindow::slotToggleFullScreen()
         odebug << "full" << oendl;
         m_disp->setBackgroundColor(black);
         m_disp->reparent(0,QPoint(0,0));
+        m_disp->setVScrollBarMode(QScrollView::AlwaysOff);
+        m_disp->setHScrollBarMode(QScrollView::AlwaysOff);
         m_disp->resize(qApp->desktop()->width(), qApp->desktop()->height());
         m_disp->showFullScreen();
     } else {
         odebug << "window" << oendl;
         m_disp->setBackgroundColor(white);
         m_stack->addWidget(m_disp,ImageDisplay);
+        m_disp->setVScrollBarMode(QScrollView::Auto);
+        m_disp->setHScrollBarMode(QScrollView::Auto);
         m_stack->raiseWidget(m_disp);
         if (m_stack->mode() != Opie::Ui::OWidgetStack::SmallScreen) {
             m_disp->resize(m_disp->minimumSize());
@@ -331,6 +336,9 @@ void PMainWindow::slotShowInfo( const QString& inf ) {
         fsButton->hide();
         viewModeButton->hide();
     }
+    if (m_disp && m_disp->fullScreen() && m_disp->isVisible()) {
+        m_disp->hide();
+    }
     m_stack->raiseWidget( ImageInfo );
 }
 
@@ -346,7 +354,11 @@ void PMainWindow::slotDisplay( const QString& inf ) {
         fsButton->hide();
         viewModeButton->hide();
     }
-    m_stack->raiseWidget( ImageDisplay );
+    if (m_disp->fullScreen()) {
+        m_disp->show();
+    } else {
+        m_stack->raiseWidget( ImageDisplay );
+    }
 }
 
 void PMainWindow::slotReturn() {
@@ -376,6 +388,9 @@ void PMainWindow::raiseIconView() {
         upButton->show();
         fsButton->show();
         viewModeButton->show();
+    }
+    if (m_disp && m_disp->fullScreen() && m_disp->isVisible()) {
+        m_disp->hide();
     }
     m_stack->raiseWidget( IconView );
 }

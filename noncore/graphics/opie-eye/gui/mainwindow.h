@@ -46,7 +46,7 @@ public slots:
     void setDocument( const QString& );
     virtual void slotToggleFullScreen();
 
-protected:
+protected slots:
     void raiseIconView();
     void closeEvent( QCloseEvent* );
 

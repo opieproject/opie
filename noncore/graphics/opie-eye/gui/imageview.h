@@ -31,6 +31,7 @@ signals:
     void dispNext();
     void dispPrev();
     void toggleFullScreen();
+    void hideMe();
 
 protected:
     Opie::Core::OConfig * m_cfg;

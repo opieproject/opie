@@ -66,6 +66,7 @@ void ImageView::keyReleaseEvent(QKeyEvent * e)
     if (e->key()==Qt::Key_N) slotDispNext();
     if (e->key()==Qt::Key_P) slotDispPrev();
     if (e->key()==Qt::Key_F) emit toggleFullScreen();
+    if (e->key()==Qt::Key_Escape && fullScreen()) emit hideMe();
 }
 
 void ImageView::slotDispNext()
