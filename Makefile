@@ -102,7 +102,10 @@ export CFLAGS_RELEASE=$(patsubst "%,%,$(CONFIG_OPTIMIZATIONS))
 export CFLAGS_RELEASE:=$(patsubst %",%,$(CFLAGS_RELEASE))
 endif
 
-all clean lupdate lrelease install ipk: $(SUBDIRS) 
+all clean install ipk: $(SUBDIRS) 
+
+lupdate lrelease:
+	@for i in $(SUBDIRS); do $(MAKE) -C $$i $@; done;
 
 $(subdir-y) : $(if $(CONFIG_LIBQPE),$(QTDIR)/stamp-headers $(OPIEDIR)/stamp-headers) \
 	$(if $(CONFIG_LIBQPE-X11),$(QTDIR)/stamp-headers-x11 $(OPIEDIR)/stamp-headers-x11 ) \
