@@ -34,6 +34,7 @@ class HelpBrowser : public QMainWindow
     Q_OBJECT
 public:
     HelpBrowser( QWidget* parent = 0, const char *name=0, WFlags f=0 );
+    static QString appName() { return QString::fromLatin1("helpbrowser"); }
     ~HelpBrowser();
 
 public slots:
