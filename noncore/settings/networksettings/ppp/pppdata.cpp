@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdata.cpp,v 1.11.2.5 2003-07-29 14:58:45 tille Exp $
+ * $Id: pppdata.cpp,v 1.11.2.6 2003-07-30 03:55:02 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -45,7 +45,7 @@ PPPData::PPPData()
     : //modemDeviceGroup(-1),
       passwd(""),
       highcount(-1),        // start out with no entries
-      caccount(-1),         // set the current account index also
+//      caccount(-1),         // set the current account index also
       suidprocessid(-1),    // process ID of setuid child
       pppdisrunning(false),
       pppderror(0)
@@ -54,16 +54,16 @@ PPPData::PPPData()
 
   Config cfg = config();
   cfg.setGroup(GENERAL_GRP);
-  _deleted = cfg.readListEntry("Deleted_Accounts", ',' );
+  accountList = cfg.readListEntry(ACCOUNT_LIST, ',' );
 
-  if (highcount > MAX_ACCOUNTS)
-    highcount = MAX_ACCOUNTS;
+//   if (highcount > MAX_ACCOUNTS)
+//     highcount = MAX_ACCOUNTS;
 
-  if(highcount >= 0 && defaultAccount().isEmpty()) {
-    setAccountbyIndex(0);
-    setDefaultAccount(accname());
-  } else if(!setAccount(defaultAccount()))
-    setDefaultAccount(accname());
+ //  if(highcount >= 0 && defaultAccount().isEmpty()) {
+//     setAccountbyIndex(0);
+//     setDefaultAccount(accname());
+//   } else if(!setAccount(defaultAccount()))
+  setDefaultAccount(accname());
 
   // start out with internal debugging disabled
   // the user is still free to specify `debug' on his own
@@ -88,10 +88,9 @@ void PPPData::save()
     QString key;
     QStringList keys;
     Config cfg = config();
-    if (!_deleted.isEmpty()){
-        cfg.setGroup(GENERAL_GRP);
-        cfg.writeEntry("Deleted_Accounts", _deleted, ',' );
-    }
+    cfg.setGroup(GENERAL_GRP);
+    cfg.writeEntry(ACCOUNT_LIST, accountList, ',' );
+
     for( QMap<QString,QString>::Iterator it = stringEntries.begin();
          it != stringEntries.end(); ++it ){
         QString val = it.data();
@@ -99,11 +98,9 @@ void PPPData::save()
 //        qDebug("saving %s -> %s", key.latin1(), val.latin1() );
         keys = QStringList::split( "SEPARATOR", key );
         //qDebug("group >%s< key >%s< value >%s<", keys[0].latin1(), keys[1].latin1(), val.latin1() );
-        if(_deleted.find(keys[0])==_deleted.end()){
-            cfg.setGroup(keys[0]);
-            cfg.writeEntry(keys[1], val);
-        }
-    }
+        cfg.setGroup(keys[0]);
+        cfg.writeEntry(keys[1], val);
+     }
     for( QMap<QString,int>::Iterator it = intEntries.begin();
          it != intEntries.end(); ++it ){
         int val = it.data();
@@ -111,11 +108,9 @@ void PPPData::save()
 //        qDebug("saving %s -> %i", key.latin1(), val );
         keys = QStringList::split( "SEPARATOR", key );
         //qDebug("group >%s< key >%s< val %i", keys[0].latin1(), keys[1].latin1(), val );
-        if(_deleted.find(keys[0])==_deleted.end()){
-            cfg.setGroup(keys[0]);
-            cfg.writeEntry(keys[1], val);
-        }
-    }
+        cfg.setGroup(keys[0]);
+        cfg.writeEntry(keys[1], val);
+     }
     for( QMap<QString,QStringList>::Iterator it = listEntries.begin();
          it != listEntries.end(); ++it ){
         QStringList val = it.data();
@@ -123,11 +118,9 @@ void PPPData::save()
         QChar sep = sepEntries[key];
 //        qDebug("saving %s -> %s", key.latin1(), val.join(sep).latin1() );
         keys = QStringList::split( "SEPARATOR", key );
-        if(_deleted.find(keys[0])==_deleted.end()){
-            cfg.setGroup(keys[0]);
-            cfg.writeEntry(keys[1], val, sep);
-        }
-    }
+        cfg.setGroup(keys[0]);
+        cfg.writeEntry(keys[1], val, sep);
+     }
 }
 
 
@@ -724,19 +717,21 @@ int PPPData::count() const {
 
 bool PPPData::setAccount(const QString &aname) {
     qDebug("setting account to >%s<", aname.latin1());
-  for(int i = 0; i <= highcount; i++) {
-    setAccountbyIndex(i);
-    if(accname() == aname) {
-      caccount = i;
-      qDebug("SUCCESS");
-      return true;
+    for ( QStringList::Iterator it = accountList.begin(); it != accountList.end(); ++it ) {
+        cgroup = *it;
+        qDebug("PPPData::setAccount %s", cgroup.latin1());
+        qDebug( "iterator %s", (*it).latin1() );
+        if(accname() == aname) {
+            qDebug("SUCCESS");
+            return true;
+        }
+
     }
-  }
-  qDebug("FAILURE");
-  return false;
+    qDebug("FAILURE");
+    return false;
 }
 
-
+/*
 bool PPPData::setAccountbyIndex(int i) {
   if(i >= 0 && i <= highcount) {
     QString tmp;
@@ -748,18 +743,22 @@ bool PPPData::setAccountbyIndex(int i) {
   }
   return false;
 }
-
+*/
 
 bool PPPData::isUniqueAccname(const QString &n) {
-  int current = caccount;
-  for(int i=0; i <= highcount; i++) {
-    setAccountbyIndex(i);
-    if(accname() == n && i != current) {
-      setAccountbyIndex(current);
-      return false;
-    }
+  QString save_cgroup = cgroup;
+  for ( QStringList::Iterator it = accountList.begin(); it != accountList.end(); ++it ) {
+      cgroup = *it;
+      qDebug("PPPData::setAccount %s", cgroup.latin1());
+      qDebug( "%s \n", (*it).latin1() );
+      if(accname() == n && cgroup != save_cgroup) {
+          cgroup = save_cgroup;
+          qDebug("SUCCESS");
+          return false;
+      }
+
   }
-  setAccountbyIndex(current);
+  cgroup = save_cgroup;
   return true;
 }
 
@@ -769,8 +768,41 @@ bool PPPData::deleteAccount() {
     Config cfg = PPPData::config();
     cfg.setGroup(cgroup);
     cfg.clearGroup();
-    _deleted << cgroup;
-    highcount--;
+    accountList.remove(cgroup);
+
+    QString key;
+    QStringList keys;
+    for( QMap<QString,QString>::Iterator it = stringEntries.begin();
+         it != stringEntries.end(); ++it ){
+        QString val = it.data();
+        key = it.key();
+        keys = QStringList::split( "SEPARATOR", key );
+        if(keys[0]==cgroup){
+            stringEntries.remove( it );
+            qDebug("deleting >%s< key >%s< value >%s<", keys[0].latin1(), keys[1].latin1(), val.latin1() );
+        }
+    }
+    for( QMap<QString,int>::Iterator it = intEntries.begin();
+         it != intEntries.end(); ++it ){
+        int val = it.data();
+        key = it.key();
+        keys = QStringList::split( "SEPARATOR", key );
+        if(keys[0]==cgroup){
+            intEntries.remove( it );
+            qDebug("deleting >%s< key >%s< value >%i<", keys[0].latin1(), keys[1].latin1(), val );
+        }
+    }
+    for( QMap<QString,QStringList>::Iterator it = listEntries.begin();
+         it != listEntries.end(); ++it ){
+        QStringList val = it.data();
+        key = it.key();
+        if(keys[0]==cgroup){
+            listEntries.remove( it );
+            sepEntries.remove( key );
+            qDebug("deleting >%s< key >%s< value >%s<", keys[0].latin1(), keys[1].latin1(), val.join("").latin1() );
+        }
+    }
+
     return false;
 }
 
@@ -789,19 +821,16 @@ int PPPData::newaccount() {
 
     qDebug("PPPData::newaccount highcount %i/%i",highcount,MAX_ACCOUNTS);
 //  if(!config) open();
-  if (highcount >= MAX_ACCOUNTS) return -1;
+//  if (highcount >= MAX_ACCOUNTS) return -1;
 
-  highcount++;
-  if (_deleted.isEmpty()){
-      setAccountbyIndex(highcount);
-  }else{
-      int firstFree = highcount;
-      //FIXME wich is first free
-      setAccountbyIndex(firstFree);
-  }
+
+  QString tmp;
+  tmp.sprintf("%s%i", ACCOUNT_GRP, ++highcount);
+  cgroup = QString(tmp);
+  accountList << tmp;
+  qDebug("PPPData::newaccount() Group: >%s<",cgroup.latin1());
   setpppdArgumentDefaults();
-  qDebug("PPPData::newaccount -> %i",caccount);
-  return caccount;
+  return highcount;
 }
 
 int PPPData::copyaccount(int i) {
@@ -1276,3 +1305,16 @@ QString PPPData::encodeWord(const QString &s) {
     r.replace(QRegExp("\\"), "\\\\");
     return r;
 }
+
+QStringList PPPData::getAccountList()
+{
+    QStringList list;
+    QString save_cgroup;
+    save_cgroup = cgroup;
+    for ( QStringList::Iterator it = accountList.begin(); it != accountList.end(); ++it ) {
+        cgroup = *it;
+        list << accname();
+    }
+    cgroup = save_cgroup;
+    return list;
+};

@@ -2,7 +2,7 @@
  *
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdata.h,v 1.8.2.3 2003-07-29 14:38:51 tille Exp $
+ * $Id: pppdata.h,v 1.8.2.4 2003-07-30 03:55:02 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -64,6 +64,7 @@ class Config;
 //#define WINPOS_GRP         "WindowPosition"
 
 // general
+#define ACCOUNT_LIST       "AccountList"
 #define DEFAULTACCOUNT_KEY "DefaultAccount"
 #define PPPDVERSION_KEY    "pppdVersion"
 #define PPPDTIMEOUT_KEY    "pppdTimeout"
@@ -162,6 +163,8 @@ public:
     void save();
     void cancel();
 
+    QStringList getAccountList();
+
     static QMap<QString,QString> getConfiguredInterfaces();
     static void setConfiguredInterfaces( QMap<QString,QString> );
 
@@ -184,7 +187,7 @@ public:
   QString password();
   void setPassword(const QString &);
 
-  int currentAccountID() { return caccount; };
+//  int currentAccountID() { return caccount; };
   const QString defaultAccount();
   void setDefaultAccount(const QString &);
 
@@ -313,7 +316,7 @@ public:
   // functions to set/get account information
   int count() const;
   bool setAccount(const QString &);
-  bool setAccountbyIndex(int);
+//  bool setAccountbyIndex(int);
 
   bool isUniqueAccname(const QString &);
 
@@ -419,7 +422,7 @@ private:
     QString passwd;
     QString deviceName;
     int highcount;                         // index of highest account
-    int caccount;                          // index of the current account
+//    int caccount;                          // index of the current account
     QString cgroup;                        // name of current config group
     pid_t suidprocessid;                   // process ID of setuid child
     bool pppdisrunning;                    // pppd process
@@ -429,7 +432,7 @@ private:
 
 
     QStringList phonelist;
-    QStringList _deleted;
+    QStringList accountList;
     QMap<QString,QString> stringEntries;
     QMap<QString,int> intEntries;
     QMap<QString,QStringList> listEntries;

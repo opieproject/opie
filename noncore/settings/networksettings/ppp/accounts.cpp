@@ -1,7 +1,7 @@
 /*
  *           kPPP: A pppd front end for the KDE project
  *
- * $Id: accounts.cpp,v 1.9.2.3 2003-07-29 14:58:45 tille Exp $
+ * $Id: accounts.cpp,v 1.9.2.4 2003-07-30 03:55:02 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -90,21 +90,15 @@ AccountWidget::AccountWidget( PPPData *pd, QWidget *parent, const char *name )
   l1->addStretch(1);
   l1->addLayout(l12);
 
-  int currAccId = _pppdata->currentAccountID();
-  qDebug("currentAccountID %i", currAccId);
+  accountlist_l->insertStringList(_pppdata->getAccountList());
 
-  //load up account list from gppdata to the list box
-  if(_pppdata->count() > 0) {
-    for(int i=0; i <= _pppdata->count()-1; i++) {
-      _pppdata->setAccountbyIndex(i);
-      accountlist_l->insertItem(_pppdata->accname());
-    }
+  for (int i = 0; i < accountlist_l->count(); i++){
+      if ( accountlist_l->text(i) == _pppdata->accname() )
+          accountlist_l->setCurrentItem( i );
   }
-  _pppdata->setAccountbyIndex( currAccId );
-
-  qDebug("setting listview index to %i",_pppdata->currentAccountID() );
-  accountlist_l->setCurrentItem( _pppdata->currentAccountID() );
-  slotListBoxSelect( _pppdata->currentAccountID() );
+//   qDebug("setting listview index to %i",_pppdata->currentAccountID() );
+//   accountlist_l->setCurrentItem( _pppdata->currentAccountID() );
+//   slotListBoxSelect( _pppdata->currentAccountID() );
 
   l1->activate();
 }
@@ -112,15 +106,12 @@ AccountWidget::AccountWidget( PPPData *pd, QWidget *parent, const char *name )
 
 
 void AccountWidget::slotListBoxSelect(int idx) {
+    bool ok = _pppdata->setAccount( accountlist_l->text(idx) );
 //FIXME
-    delete_b->setEnabled((bool)(idx != -1));
-  edit_b->setEnabled((bool)(idx != -1));
-//FIXME  copy_b->setEnabled((bool)(idx != -1));
-  if(idx!=-1) {
-      qDebug("setting account to %i", idx);
-    QString account = _pppdata->accname();
-    _pppdata->setAccountbyIndex(accountlist_l->currentItem());
- }
+    delete_b->setEnabled(ok);
+  edit_b->setEnabled(ok);
+//FIXME  copy_b->setEnabled(ok);
+
 }
 
 void AccountWidget::editaccount() {

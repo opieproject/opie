@@ -28,7 +28,7 @@ PPPConfigWidget::PPPConfigWidget( InterfacePPP* iface, QWidget *parent,
     qDebug(" interface->getHardwareName >%s<", interface->getHardwareName().latin1());
 
     qDebug(" _pppdata->accname >%s<",interface->data()->accname().latin1());
-    qDebug(" _pppdata->currentAccountID() >%i<",interface->data()->currentAccountID());
+
 
   QVBoxLayout *layout = new QVBoxLayout( this );
   layout->setSpacing( 0 );
