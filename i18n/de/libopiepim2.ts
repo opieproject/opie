@@ -154,216 +154,216 @@
     <name>OPimRecurrenceBase</name>
     <message>
         <source>Repeating Event </source>
-        <translation type="unfinished">Wiederholendes Ereignis</translation>
+        <translation>Wiederholendes Ereignis</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">Keines</translation>
+        <translation>Keines</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation type="unfinished">Tag</translation>
+        <translation>Tag</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation type="unfinished">Woche</translation>
+        <translation>Woche</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation type="unfinished">Monat</translation>
+        <translation>Monat</translation>
     </message>
     <message>
         <source>Year</source>
-        <translation type="unfinished">Jahr</translation>
+        <translation>Jahr</translation>
     </message>
     <message>
         <source>Every:</source>
-        <translation type="unfinished">Jeden:</translation>
+        <translation>Jeden:</translation>
     </message>
     <message>
         <source>Frequency</source>
-        <translation type="unfinished">Häufigkeit</translation>
+        <translation>Häufigkeit</translation>
     </message>
     <message>
         <source>End On:</source>
-        <translation type="unfinished">Endet am:</translation>
+        <translation>Endet am:</translation>
     </message>
     <message>
         <source>No End Date</source>
-        <translation type="unfinished">Kein Enddatum</translation>
+        <translation>Kein Enddatum</translation>
     </message>
     <message>
         <source>Repeat On</source>
-        <translation type="unfinished">Wiederholung an</translation>
+        <translation>Wiederholung an</translation>
     </message>
     <message>
         <source>Mon</source>
-        <translation type="unfinished">Mon</translation>
+        <translation>Mon</translation>
     </message>
     <message>
         <source>Tue</source>
-        <translation type="unfinished">Di</translation>
+        <translation>Di</translation>
     </message>
     <message>
         <source>Wed</source>
-        <translation type="unfinished">Mi</translation>
+        <translation>Mi</translation>
     </message>
     <message>
         <source>Thu</source>
-        <translation type="unfinished">Do</translation>
+        <translation>Do</translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation type="unfinished">Fr</translation>
+        <translation>Fr</translation>
     </message>
     <message>
         <source>Sat</source>
-        <translation type="unfinished">Sa</translation>
+        <translation>Sa</translation>
     </message>
     <message>
         <source>Sun</source>
-        <translation type="unfinished">So</translation>
+        <translation>So</translation>
     </message>
     <message>
         <source>Every</source>
-        <translation type="unfinished">Jeden</translation>
+        <translation>Jeden</translation>
     </message>
     <message>
         <source>Var1</source>
-        <translation type="unfinished">Var1</translation>
+        <translation>Var1</translation>
     </message>
     <message>
         <source>Var 2</source>
-        <translation type="unfinished">Var 2</translation>
+        <translation>Var 2</translation>
     </message>
     <message>
         <source>WeekVar</source>
-        <translation type="unfinished">WeekVar</translation>
+        <translation>WeekVar</translation>
     </message>
 </context>
 <context>
     <name>OPimRecurrenceWidget</name>
     <message>
         <source>No End Date</source>
-        <translation type="unfinished">Kein Enddatum</translation>
+        <translation>Kein Enddatum</translation>
     </message>
     <message>
         <source>days</source>
-        <translation type="unfinished">Tage</translation>
+        <translation>Tage</translation>
     </message>
     <message>
         <source>day</source>
-        <translation type="unfinished">Tag</translation>
+        <translation>Tag</translation>
     </message>
     <message>
         <source>weeks</source>
-        <translation type="unfinished">Wochen</translation>
+        <translation>Wochen</translation>
     </message>
     <message>
         <source>week</source>
-        <translation type="unfinished">Woche</translation>
+        <translation>Woche</translation>
     </message>
     <message>
         <source>months</source>
-        <translation type="unfinished">Monate</translation>
+        <translation>Monate</translation>
     </message>
     <message>
         <source>month</source>
-        <translation type="unfinished">Monat</translation>
+        <translation>Monat</translation>
     </message>
     <message>
         <source>years</source>
-        <translation type="unfinished">Jahre</translation>
+        <translation>Jahre</translation>
     </message>
     <message>
         <source>year</source>
-        <translation type="unfinished">Jahr</translation>
+        <translation>Jahr</translation>
     </message>
     <message>
         <source> and </source>
-        <translation type="unfinished">und </translation>
+        <translation>und </translation>
     </message>
     <message>
         <source>,
 and </source>
-        <translation type="unfinished">,
+        <translation>,
 und</translation>
     </message>
     <message>
         <source>, and </source>
-        <translation type="unfinished">, and</translation>
+        <translation>, and</translation>
     </message>
     <message>
         <source>on </source>
-        <translation type="unfinished">an</translation>
+        <translation>an</translation>
     </message>
     <message>
         <source>No Repeat</source>
-        <translation type="unfinished">Keine Wiederholung</translation>
+        <translation>Keine Wiederholung</translation>
     </message>
     <message>
         <source>day(s)</source>
-        <translation type="unfinished">Tag(e)</translation>
+        <translation>Tag(e)</translation>
     </message>
     <message>
         <source>Repeat On</source>
-        <translation type="unfinished">Wiederholung an</translation>
+        <translation>Wiederholung an</translation>
     </message>
     <message>
         <source>Mon</source>
-        <translation type="unfinished">Mon</translation>
+        <translation>Mon</translation>
     </message>
     <message>
         <source>Tue</source>
-        <translation type="unfinished">Di</translation>
+        <translation>Di</translation>
     </message>
     <message>
         <source>Wed</source>
-        <translation type="unfinished">Mi</translation>
+        <translation>Mi</translation>
     </message>
     <message>
         <source>Thu</source>
-        <translation type="unfinished">Do</translation>
+        <translation>Do</translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation type="unfinished">Fr</translation>
+        <translation>Fr</translation>
     </message>
     <message>
         <source>Sat</source>
-        <translation type="unfinished">Sa</translation>
+        <translation>Sa</translation>
     </message>
     <message>
         <source>Sun</source>
-        <translation type="unfinished">So</translation>
+        <translation>So</translation>
     </message>
     <message>
         <source>week(s)</source>
-        <translation type="unfinished">Woche(n)</translation>
+        <translation>Woche(n)</translation>
     </message>
     <message>
         <source>Repeat By</source>
-        <translation type="unfinished">Wiederholen bis</translation>
+        <translation>Wiederholen bis</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation type="unfinished">Tag</translation>
+        <translation>Tag</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished">Datum</translation>
+        <translation>Datum</translation>
     </message>
     <message>
         <source>month(s)</source>
-        <translation type="unfinished">Monat(e)</translation>
+        <translation>Monat(e)</translation>
     </message>
     <message>
         <source>year(s)</source>
-        <translation type="unfinished">Jahr(e)</translation>
+        <translation>Jahr(e)</translation>
     </message>
     <message>
         <source>Every</source>
-        <translation type="unfinished">Jeden</translation>
+        <translation>Jeden</translation>
     </message>
 </context>
 <context>
@@ -601,71 +601,71 @@ und</translation>
     <name>Opie::OPimMainWindow</name>
     <message>
         <source>Item</source>
-        <translation type="unfinished"></translation>
+        <translation>Element</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Alles</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht zugeordnet</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Ansicht</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Neu</translation>
     </message>
     <message>
         <source>Click here to create a new item.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken, um ein neues Element zu erstellen.</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Bearbeiten</translation>
     </message>
     <message>
         <source>Click here to edit the selected item.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken, um das ausgewählte Element zu bearbeiten.</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopieren</translation>
     </message>
     <message>
         <source>Click here to duplicate the selected item.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken, um das ausgewählte Element zu kopieren.</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Löschen</translation>
     </message>
     <message>
         <source>Click here to delete the selected item.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken, um das ausgewählte Element zu löschen.</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation type="unfinished"></translation>
+        <translation>Senden</translation>
     </message>
     <message>
         <source>Click here to transmit the selected item.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken, um das gewählte Element zu übertragen.</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurieren</translation>
     </message>
     <message>
         <source>Click here to set your preferences for this application.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken, um Ihre Einstellungen für diese Anwendung vorzunehmen.</translation>
     </message>
     <message>
         <source>Click here to filter items by category.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um Elemente nach Kategorien zu filtern.</translation>
     </message>
 </context>
 <context>
@@ -702,7 +702,7 @@ und</translation>
     <name>QObject</name>
     <message>
         <source>Description:</source>
-        <translation type="unfinished">Beschreibung:</translation>
+        <translation>Beschreibung:</translation>
     </message>
     <message>
         <source>Priority:</source>
@@ -734,11 +734,11 @@ und</translation>
     </message>
     <message>
         <source>Business Web Page: </source>
-        <translation>Geschäftswebseiten: </translation>
+        <translation>Webseite / Büro:</translation>
     </message>
     <message>
         <source>Business Phone: </source>
-        <translation>Geschäftstelefon:</translation>
+        <translation>Telefon / Büro:</translation>
     </message>
     <message>
         <source>Business Fax: </source>
@@ -746,11 +746,11 @@ und</translation>
     </message>
     <message>
         <source>Business Mobile: </source>
-        <translation>Geschäftshandy: </translation>
+        <translation>Handy / Büro: </translation>
     </message>
     <message>
         <source>Business Pager: </source>
-        <translation>Geschäftspiepser: </translation>
+        <translation>Piepser / Büro: </translation>
     </message>
     <message>
         <source>&lt;b&gt;Home Address:&lt;/b&gt;</source>
@@ -758,19 +758,19 @@ und</translation>
     </message>
     <message>
         <source>Home Web Page: </source>
-        <translation>Private Webseiten: </translation>
+        <translation>Webseite / Privat: </translation>
     </message>
     <message>
         <source>Home Phone: </source>
-        <translation>Privates Telefon: </translation>
+        <translation>Telefon / Privat: </translation>
     </message>
     <message>
         <source>Home Fax: </source>
-        <translation>Privates Fax: </translation>
+        <translation>Fax / Privat: </translation>
     </message>
     <message>
         <source>Home Mobile: </source>
-        <translation>Privates Handy: </translation>
+        <translation>Handy / Privat: </translation>
     </message>
     <message>
         <source>All Emails: </source>
@@ -942,211 +942,211 @@ und</translation>
     </message>
     <message>
         <source>&lt;br&gt;&lt;b&gt;Work Address:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;&lt;b&gt;Arbeitsadresse:&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;br&gt;&lt;b&gt;Home Address:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;&lt;b&gt;Privatadresse:&lt;/b&gt;</translation>
     </message>
     <message>
         <source>User Id</source>
-        <translation type="unfinished"></translation>
+        <translation>Nutzer Id</translation>
     </message>
     <message>
         <source>Categories</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategorien</translation>
     </message>
     <message>
         <source>Name Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Titel</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorname</translation>
     </message>
     <message>
         <source>Middle Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Mittelname</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nachname</translation>
     </message>
     <message>
         <source>Suffix</source>
-        <translation type="unfinished"></translation>
+        <translation>Suffix</translation>
     </message>
     <message>
         <source>File As</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichern als</translation>
     </message>
     <message>
         <source>Job Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Tätigkeit</translation>
     </message>
     <message>
         <source>Department</source>
-        <translation type="unfinished"></translation>
+        <translation>Abteilung</translation>
     </message>
     <message>
         <source>Company</source>
-        <translation type="unfinished"></translation>
+        <translation>Firma</translation>
     </message>
     <message>
         <source>Business Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>Telefon / Büro</translation>
     </message>
     <message>
         <source>Business Fax</source>
-        <translation type="unfinished"></translation>
+        <translation>Fax / Büro</translation>
     </message>
     <message>
         <source>Business Mobile</source>
-        <translation type="unfinished"></translation>
+        <translation>Handy / Büro</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation type="unfinished"></translation>
+        <translation>Standard EMail</translation>
     </message>
     <message>
         <source>Emails</source>
-        <translation type="unfinished"></translation>
+        <translation>EMails</translation>
     </message>
     <message>
         <source>Home Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>Telefon / Privat</translation>
     </message>
     <message>
         <source>Home Fax</source>
-        <translation type="unfinished"></translation>
+        <translation>Fax / Privat</translation>
     </message>
     <message>
         <source>Home Mobile</source>
-        <translation type="unfinished"></translation>
+        <translation>Handy / Privat</translation>
     </message>
     <message>
         <source>Business Street</source>
-        <translation type="unfinished"></translation>
+        <translation>Strasse / Büro</translation>
     </message>
     <message>
         <source>Business City</source>
-        <translation type="unfinished"></translation>
+        <translation>Stadt / Büro</translation>
     </message>
     <message>
         <source>Business State</source>
-        <translation type="unfinished"></translation>
+        <translation>Staat / Büro</translation>
     </message>
     <message>
         <source>Business Zip</source>
-        <translation type="unfinished"></translation>
+        <translation>PLZ / Büro</translation>
     </message>
     <message>
         <source>Business Country</source>
-        <translation type="unfinished"></translation>
+        <translation>Land / Büro</translation>
     </message>
     <message>
         <source>Business Pager</source>
-        <translation type="unfinished"></translation>
+        <translation>Piepser / Büro</translation>
     </message>
     <message>
         <source>Business WebPage</source>
-        <translation type="unfinished"></translation>
+        <translation>Webseite / Büro</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation type="unfinished"></translation>
+        <translation>Büro</translation>
     </message>
     <message>
         <source>Profession</source>
-        <translation type="unfinished"></translation>
+        <translation>Beruf</translation>
     </message>
     <message>
         <source>Assistant</source>
-        <translation type="unfinished"></translation>
+        <translation>Assistent</translation>
     </message>
     <message>
         <source>Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Manager</translation>
     </message>
     <message>
         <source>Home Street</source>
-        <translation type="unfinished"></translation>
+        <translation>Strasse / Privat</translation>
     </message>
     <message>
         <source>Home City</source>
-        <translation type="unfinished"></translation>
+        <translation>Stadt / Privat</translation>
     </message>
     <message>
         <source>Home State</source>
-        <translation type="unfinished"></translation>
+        <translation>Staat / Privat</translation>
     </message>
     <message>
         <source>Home Zip</source>
-        <translation type="unfinished"></translation>
+        <translation>PLZ / Privat</translation>
     </message>
     <message>
         <source>Home Country</source>
-        <translation type="unfinished"></translation>
+        <translation>Land / Privat</translation>
     </message>
     <message>
         <source>Home Web Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Webseite / Privat</translation>
     </message>
     <message>
         <source>Spouse</source>
-        <translation type="unfinished"></translation>
+        <translation>Ehepartner</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation type="unfinished"></translation>
+        <translation>Geschlecht</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Geburtstag</translation>
     </message>
     <message>
         <source>Anniversary</source>
-        <translation type="unfinished"></translation>
+        <translation>Jahrestag</translation>
     </message>
     <message>
         <source>Nickname</source>
-        <translation type="unfinished"></translation>
+        <translation>Spitzname</translation>
     </message>
     <message>
         <source>Children</source>
-        <translation type="unfinished"></translation>
+        <translation>Kinder</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen</translation>
     </message>
     <message>
         <source>Has a due-date</source>
-        <translation type="unfinished"></translation>
+        <translation>Hat ein Fälligkeitsdatum</translation>
     </message>
     <message>
         <source>No due-date</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Fälligkeitsdatum</translation>
     </message>
     <message>
         <source>Completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Beendet</translation>
     </message>
     <message>
         <source>Not completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht beendet</translation>
     </message>
     <message>
         <source>No reccurrence</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Wiederholung</translation>
     </message>
     <message>
         <source>No start-date</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Startdatum</translation>
     </message>
     <message>
         <source>No completed-date</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Fertigdatum</translation>
     </message>
 </context>
 <context>

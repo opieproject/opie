@@ -47,7 +47,7 @@
     </message>
     <message>
         <source>Server has no TLS support!</source>
-        <translation type="unfinished"></translation>
+        <translation>Server hat keine TLS Unterstützung!</translation>
     </message>
 </context>
 <context>
@@ -124,11 +124,11 @@
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
@@ -156,19 +156,20 @@
     <message>
         <source>Download mail?
 It is %1 kByte but your limit is %2 kByte</source>
-        <translation type="unfinished"></translation>
+        <translation>Mail herunterladen?
+Die Größe der Mail beträgt %1 kByte, aber Ihr Limit ist %2 kByte</translation>
     </message>
     <message>
         <source>Download message</source>
-        <translation type="unfinished"></translation>
+        <translation>Lade Nachricht herunter</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nein</translation>
     </message>
 </context>
 <context>
@@ -251,31 +252,31 @@ It is %1 kByte but your limit is %2 kByte</source>
     </message>
     <message>
         <source>Starttls not supported</source>
-        <translation type="unfinished"></translation>
+        <translation>Starttls wird nicht unterstützt</translation>
     </message>
     <message>
         <source>&lt;center&gt;%1&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;%1&lt;/center&gt;</translation>
     </message>
     <message>
         <source>Error init SMTP connection: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Initialisieren der SMTP Verbindung: %1</translation>
     </message>
     <message>
         <source>Error init SMTP tls: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Initialisieren von SMTP tls: %1</translation>
     </message>
     <message>
         <source>Login aborted - storing mail to localfolder</source>
-        <translation type="unfinished"></translation>
+        <translation>Login abgebrochen - speichere Mail im lokalen Ordner</translation>
     </message>
     <message>
         <source>Authentification failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Authentifizierung fehlgeschlagen</translation>
     </message>
     <message>
         <source>Error sending mail: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Mailversand: %1</translation>
     </message>
 </context>
 <context>

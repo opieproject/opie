@@ -151,20 +151,21 @@
     </message>
     <message>
         <source>Find by Ingredient</source>
-        <translation type="unfinished"></translation>
+        <translation>Finden nach Zutaten</translation>
     </message>
     <message>
         <source>Edit Drink</source>
-        <translation type="unfinished"></translation>
+        <translation>Getränk bearbeiten</translation>
     </message>
     <message>
         <source>Failed to write to drink database!
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte nicht in die Getränkedatenbank schreiben!
+</translation>
     </message>
     <message>
         <source>Ingredient</source>
-        <translation type="unfinished"></translation>
+        <translation>Zutat</translation>
     </message>
 </context>
 <context>
