@@ -5,7 +5,7 @@
 #include "netnodeinterface.h"
 
 static const char * ProfileNeeds[] = 
-    { "NetworkSetup", 
+    { "connection", 
       0
     };
 static const char * ProfileProvides[] = 
@@ -16,7 +16,7 @@ static const char * ProfileProvides[] =
 /**
  * Constructor, find all of the possible interfaces
  */
-ProfileNetNode::ProfileNetNode() : ANetNode( tr("Regular NetworkSetup profile")) {
+ProfileNetNode::ProfileNetNode() : ANetNode( tr("Regular connection profile")) {
 
     NSResources->addSystemFile(
       "interfaces", "/etc/network/interfaces", 1 );
@@ -31,8 +31,8 @@ ProfileNetNode::~ProfileNetNode(){
 
 const QString ProfileNetNode::nodeDescription(){
       return tr("\
-<p>Define use of an IP NetworkSetup.</p>\
-<p>Configure if and when this NetworkSetup needs to be established</p>\
+<p>Define use of an IP connection.</p>\
+<p>Configure if and when this connection needs to be established</p>\
 "
 );
 }

@@ -30,7 +30,7 @@ USBNetNode::~USBNetNode(){
 const QString USBNetNode::nodeDescription(){
       return tr("\
 <p>Configure Ethernet over USB.</p>\
-<p>Use this for a computer to computer USB cable NetworkSetup</p>\
+<p>Use this for a computer to computer USB cable connection</p>\
 "
 );
 }

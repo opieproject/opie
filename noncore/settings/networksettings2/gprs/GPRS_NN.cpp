@@ -12,7 +12,7 @@ static const char * GPRSNeeds[] =
     };
 
 static const char * GPRSProvides[] = 
-    { "NetworkSetup", 
+    { "connection", 
       0
     };
 

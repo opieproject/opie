@@ -181,10 +181,12 @@ void TheNSResources::findAvailableNetNodes( void ){
         }
 
         // merge this node with global node
-        for( QListIterator<ANetNode> it(PNN);
-             it.current();
-             ++it ) {
-          AllNodeTypes.insert( it.current()->name(), it.current() );
+        for( QListIterator<ANetNode> nnit(PNN);
+             nnit.current();
+             ++nnit ) {
+          Log(( "Found node type %s in plugin %s\n",
+             nnit.current()->name(), (*it).name().latin1() ));
+          AllNodeTypes.insert( nnit.current()->name(), nnit.current() );
         }
       }
 
