@@ -100,8 +100,6 @@ private:
     QPixmap pixBg;
     QImage  imgUp;
     QImage  imgDn;
-    QPixmap *buttonPixUp[7];
-    QPixmap *buttonPixDown[7];
     QString skin;
 
 

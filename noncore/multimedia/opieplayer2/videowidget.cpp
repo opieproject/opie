@@ -118,11 +118,6 @@ VideoWidget::VideoWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
         }
     }
 
-    for ( int i = 0; i < 7; i++ ) {
-        buttonPixUp[i] = NULL;
-        buttonPixDown[i] = NULL;
-    }
-
     setBackgroundPixmap( pixBg );
 
     slider = new QSlider( Qt::Horizontal, this );
@@ -140,11 +135,8 @@ VideoWidget::VideoWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
 }
 
 
-VideoWidget::~VideoWidget() {
-    for ( int i = 0; i < 7; i++ ) {
-        delete buttonPixUp[i];
-        delete buttonPixDown[i];
-    }
+VideoWidget::~VideoWidget() 
+{
 }
 
 QPixmap *combineVImageWithBackground( QImage img, QPixmap bg, QPoint offset ) {
@@ -155,9 +147,9 @@ QPixmap *combineVImageWithBackground( QImage img, QPixmap bg, QPoint offset ) {
     return new QPixmap( pix );
 }
 
-QPixmap *maskVPixToMask( QPixmap pix, QBitmap mask ) {
-    QPixmap *pixmap = new QPixmap( pix );
-    pixmap->setMask( mask );
+QPixmap maskVPixToMask( QPixmap pix, QBitmap mask ) {
+    QPixmap pixmap( pix );
+    pixmap.setMask( mask );
     return pixmap;
 }
 
@@ -187,10 +179,8 @@ void VideoWidget::resizeEvent( QResizeEvent * ) {
         Button &button = buttons[ i ];
 
         if ( !button.mask.isNull() ) {
-            delete buttonPixUp[i];
-            delete buttonPixDown[i];
-            buttonPixUp[i] = maskVPixToMask( *pixUp, button.mask );
-            buttonPixDown[i] = maskVPixToMask( *pixDn, button.mask );
+            button.pixUp = maskVPixToMask( *pixUp, button.mask );
+            button.pixDown = maskVPixToMask( *pixDn, button.mask );
         }
     }
 
@@ -260,10 +250,12 @@ void VideoWidget::setToggleButton( int i, bool down ) {
 
 void VideoWidget::paintButton( QPainter &p, int i ) {
 
-    if ( buttons[i].isDown ) {
-        p.drawPixmap( upperLeftOfButtonMask, *buttonPixDown[i] );
+    Button &button = buttons[ i ];
+
+    if ( button.isDown ) {
+        p.drawPixmap( upperLeftOfButtonMask, button.pixDown );
     } else {
-        p.drawPixmap( upperLeftOfButtonMask, *buttonPixUp[i] );
+        p.drawPixmap( upperLeftOfButtonMask, button.pixUp );
     }
 }
 
