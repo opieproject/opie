@@ -41,7 +41,7 @@ ODict::ODict() : QMainWindow()
 	activated_name = QString::null;
 	
 	vbox = new QVBox( this );
-	setCaption( tr( "OPIE-Dictionary" ) );
+	setCaption( tr( "Opie-Dictionary" ) );
 	setupMenus();
 
 	QHBox *hbox = new QHBox( vbox );
