@@ -117,11 +117,11 @@
     </message>
     <message>
         <source>Blue on Magenta</source>
-        <translation type="unfinished">Синий на Magenta</translation>
+        <translation>Синий на малиновом</translation>
     </message>
     <message>
         <source>Magenta on Blue</source>
-        <translation type="unfinished">Magenta на синем</translation>
+        <translation>Малиновый на синем</translation>
     </message>
     <message>
         <source>Cyan on White</source>

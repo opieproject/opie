@@ -7,27 +7,28 @@
     </message>
     <message>
         <source>Solve</source>
-        <translation type="unfinished"></translation>
+        <translation>Решение</translation>
     </message>
     <message>
         <source>Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Игра</translation>
     </message>
     <message>
         <source>Fifteen Pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>Пятнашки</translation>
     </message>
 </context>
 <context>
     <name>PiecesTable</name>
     <message>
         <source>Fifteen Pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>Пятнашки</translation>
     </message>
     <message>
         <source>Congratulations!
 You win the game!</source>
-        <translation type="unfinished"></translation>
+        <translation>Поздравления!
+Вы выиграли!</translation>
     </message>
     <message>
         <source>R&amp;andomize Pieces</source>

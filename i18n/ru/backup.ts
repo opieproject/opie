@@ -56,11 +56,11 @@
     </message>
     <message>
         <source>Backup Successful.</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранили успешно.</translation>
     </message>
     <message>
         <source>Restore Successful.</source>
-        <translation type="unfinished"></translation>
+        <translation>Восстановили успешно.</translation>
     </message>
 </context>
 <context>

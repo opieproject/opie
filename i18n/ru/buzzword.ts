@@ -7,15 +7,15 @@
     </message>
     <message>
         <source>&amp;New game</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Новая игра</translation>
     </message>
     <message>
         <source>&amp;Game</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Игра</translation>
     </message>
     <message>
         <source>&lt;h1&gt;&lt;b&gt;BINGO !&lt;/b&gt;&lt;/h1&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h1&gt;&lt;b&gt;ЕСТЬ !&lt;/b&gt;&lt;/h1&gt;</translation>
     </message>
 </context>
 </TS>
