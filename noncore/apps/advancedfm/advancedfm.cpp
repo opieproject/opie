@@ -318,17 +318,18 @@ void AdvancedFm::populateLocalView()
                 else
                     pm= Resource::loadPixmap( "folder" );
 //                 item->setPixmap( 0,pm );
+            } else if ( fs == "vfat" && fileInfo.filePath().contains("/bin") ) {
+                pm = Resource::loadPixmap( "exec");
             } else if( (fileInfo.permission( QFileInfo::ExeUser)
-                     | fileInfo.permission( QFileInfo::ExeGroup)
-                       | fileInfo.permission( QFileInfo::ExeOther))
-                       | fs == "vfat" && fileInfo.filePath().contains("/bin") ) {
-                    pm = Resource::loadPixmap( "exec");
+                        | fileInfo.permission( QFileInfo::ExeGroup)
+                        | fileInfo.permission( QFileInfo::ExeOther)) && fs != "vfat" ) {
+                pm = Resource::loadPixmap( "exec");
 //                 else { //is exec
 //                  pm = Resource::loadPixmap( "exec");
 //                 }
 // //                 item->setPixmap( 0,pm);
-            } else if( !fi->isReadable() ) { 
-                pm = Resource::loadPixmap( "locked" );
+        } else if( !fi->isReadable() ) { 
+            pm = Resource::loadPixmap( "locked" );
 //                 item->setPixmap( 0,pm);
             } else { //everything else goes by mimetype
                 MimeType mt(fi->filePath());
@@ -430,7 +431,7 @@ void AdvancedFm::populateRemoteView()
 //     qDebug( fileL);
             }
         }
-        QFileInfo fileInfo(  currentDir.canonicalPath()+"/"+fileL);
+        QFileInfo fileInfo(  currentRemoteDir.canonicalPath()+"/"+fileL);
         if(fileL !="./" && fi->exists()) {
             item= new QListViewItem( Remote_View, fileL, fileS, fileDate);
             QPixmap pm;
@@ -441,12 +442,12 @@ void AdvancedFm::populateRemoteView()
                 else
                     pm= Resource::loadPixmap( "folder" );
 //                 item->setPixmap( 0,pm );
+            } else if ( fs == "vfat" && fileInfo.filePath().contains("/bin") ) {
+                pm = Resource::loadPixmap( "exec");
             } else if( (fileInfo.permission( QFileInfo::ExeUser)
-                     | fileInfo.permission( QFileInfo::ExeGroup)
-                       | fileInfo.permission( QFileInfo::ExeOther))
-                       | fs == "vfat" && fileInfo.filePath().contains("/bin") ) {
-/////                }  else if(fileInfo.isExecutable()){ //is exec <<<< BROKEN!!
-                  pm = Resource::loadPixmap( "exec");
+                        | fileInfo.permission( QFileInfo::ExeGroup)
+                        | fileInfo.permission( QFileInfo::ExeOther)) && fs != "vfat" ) {
+                pm = Resource::loadPixmap( "exec");
 //                     item->setPixmap( 0,pm);
             } else if( !fi->isReadable() ) {
                 pm = Resource::loadPixmap( "locked" );
