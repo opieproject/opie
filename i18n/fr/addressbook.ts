@@ -1242,7 +1242,7 @@ gratuitement!</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation>Date de naissance</translation>
+        <translation>Date de naiss.</translation>
     </message>
     <message>
         <source>Anniversary</source>
@@ -1349,7 +1349,7 @@ gratuitement!</translation>
     <name>QObject</name>
     <message>
         <source>Business Phone</source>
-        <translation>Téléphone (Bureau)</translation>
+        <translation>Tél. (Bureau)</translation>
     </message>
     <message>
         <source>Business Fax</source>
@@ -1357,7 +1357,7 @@ gratuitement!</translation>
     </message>
     <message>
         <source>Business Mobile</source>
-        <translation>Portable (Bureau)</translation>
+        <translation>Port. (Bureau)</translation>
     </message>
     <message>
         <source>Default Email</source>
@@ -1369,7 +1369,7 @@ gratuitement!</translation>
     </message>
     <message>
         <source>Home Phone</source>
-        <translation>Téléphone (Domicile)</translation>
+        <translation>Tél. (Domicile)</translation>
     </message>
     <message>
         <source>Home Fax</source>
@@ -1377,7 +1377,7 @@ gratuitement!</translation>
     </message>
     <message>
         <source>Home Mobile</source>
-        <translation>Portable (Domicile)</translation>
+        <translation>Port. (Domicile)</translation>
     </message>
     <message>
         <source>Office</source>
@@ -1405,7 +1405,7 @@ gratuitement!</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation>Date de naissance</translation>
+        <translation>Date de naiss.</translation>
     </message>
     <message>
         <source>Anniversary</source>
