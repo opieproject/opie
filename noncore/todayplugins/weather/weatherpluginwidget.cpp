@@ -1,30 +1,36 @@
 /*
-                             This file is part of the OPIE Project
+                     This file is part of the OPIE Project
                =.
-             .=l.            Copyright (c)  2002 Dan Williams <williamsdr@acm.org>
-           .>+-=
- _;:,     .>    :=|.         This file is free software; you can
-.> <`_,   >  .   <=          redistribute it and/or modify it under
-:`=1 )Y*s>-.--   :           the terms of the GNU General Public
-.="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.
-    .i_,=:_.      -<s.       This file is distributed in the hope that
-     +  .  -:.       =       it will be useful, but WITHOUT ANY WARRANTY;
-    : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU General
-..}^=.=       =       ;      Public License for more details.
-++=   -.     .`     .:
- :     =  ...= . :.=-        You should have received a copy of the GNU
- -.   .:....=;==+<;          General Public License along with this file;
-  -_. . .   )=.  =           see the file COPYING. If not, write to the
-    --        :-=`           Free Software Foundation, Inc.,
+      .=l.            Copyright (c)  2002 Dan Williams <williamsdr@acm.org>
+     .>+-=
+_;:,   .>  :=|.         This file is free software; you can
+.> <`_,  > .  <=          redistribute it and/or modify it under
+:`=1 )Y*s>-.--  :           the terms of the GNU General Public
+.="- .-=="i,   .._         License as published by the Free Software
+- .  .-<_>   .<>         Foundation; either version 2 of the License,
+  ._= =}    :          or (at your option) any later version.
+  .%`+i>    _;_.
+  .i_,=:_.   -<s.       This file is distributed in the hope that
+  + . -:.    =       it will be useful, but WITHOUT ANY WARRANTY;
+  : ..  .:,   . . .    without even the implied warranty of
+  =_    +   =;=|`    MERCHANTABILITY or FITNESS FOR A
+ _.=:.    :  :=>`:     PARTICULAR PURPOSE. See the GNU General
+..}^=.=    =    ;      Public License for more details.
+++=  -.   .`   .:
+:   = ...= . :.=-        You should have received a copy of the GNU
+-.  .:....=;==+<;          General Public License along with this file;
+ -_. . .  )=. =           see the file COPYING. If not, write to the
+  --    :-=`           Free Software Foundation, Inc.,
                              59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
 
 */
+
+#include <opie2/oprocess.h>
+
+#include <qpe/applnk.h>
+#include <qpe/config.h>
+#include <qpe/resource.h>
 
 #include <qfile.h>
 #include <qimage.h>
@@ -33,30 +39,24 @@
 #include <qpixmap.h>
 #include <qtextstream.h>
 
-#include <opie2/oprocess.h>
-
-#include <qpe/config.h>
-#include <qpe/resource.h>
-
 #include "weatherpluginwidget.h"
 
 using namespace Opie::Core;
 WeatherPluginWidget::WeatherPluginWidget( QWidget *parent,  const char* name )
 	: QWidget( parent,  name )
 {
-	QHBoxLayout *layout = new QHBoxLayout( this );
-	layout->setAutoAdd( TRUE );
-	layout->setSpacing( 2 );
+	QHBoxLayout *layout = new QHBoxLayout( this, 1, 2 );
+	layout->setAutoAdd( true );
 
 	weatherIcon = new QLabel( this );
-	weatherIcon->setMaximumWidth( 32 );
-	QImage logo1 = Resource::loadImage( "Clock" );
-	QPixmap pic;
-	pic.convertFromImage( logo1 );
+    QPixmap pic;
+    pic.convertFromImage( Resource::loadImage( "Clock" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
 	weatherIcon->setPixmap( pic );
 
 	weatherLabel = new QLabel( tr( "Retreiving current weather information." ), this );
 	weatherLabel->setSizePolicy( QSizePolicy( QSizePolicy::Expanding, QSizePolicy::Preferred ) );
+
+    weatherIcon->setFixedSize( weatherLabel->height(), weatherLabel->height() );
 
 	startTimer(1000);
 }
@@ -84,7 +84,7 @@ void WeatherPluginWidget::retreiveData()
 	config.setGroup( "Config" );
 
 	location = config.readEntry( "Location", "" );
-	useMetric = config.readBoolEntry( "Metric", TRUE );
+	useMetric = config.readBoolEntry( "Metric", true );
 	frequency = config.readNumEntry( "Frequency", 5 );
 
 	startTimer( frequency * 60000 );
@@ -145,10 +145,9 @@ void WeatherPluginWidget::displayWeather()
 		tmpstr = "todayweatherplugin/";
 		getIcon( weatherData );
 		tmpstr.append( dataStr );
-		QImage logo1 = Resource::loadImage( tmpstr );
-		QPixmap pic;
-		pic.convertFromImage( logo1 );
-		weatherIcon->setPixmap( pic );
+        QPixmap pic;
+        pic.convertFromImage( Resource::loadImage( tmpstr ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+        weatherIcon->setPixmap( pic );
 	}
 	else
 	{
