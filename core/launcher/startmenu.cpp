@@ -223,7 +223,15 @@ bool StartMenu::loadMenu( AppLnkSet *folder, QPopupMenu *menu )
                 if ( pmenu ) {
                     QString t = app->name();
                     t.replace(QRegExp("&"),"&&"); // escape shortcut character
-                    pmenu->insertItem( app->pixmap(), t, app->id() );
+                    
+                    int index = -1;
+                                        
+                    for ( index = 0; index < pmenu-> count ( ); index++ ) {
+                    	if ( pmenu-> text ( pmenu-> idAt ( index )). compare ( t ) > 0 )
+	                    	break;
+                    }
+                    
+                    pmenu->insertItem( app->pixmap(), t, app->id(), index );
                 }
                 result=TRUE;
             }
