@@ -29,7 +29,12 @@ else
 	echo CONFIG -= quick-app >> $@
 	echo CONFIG += quick-app-bin >> $@
 	echo \} >> $@
-endif	
+endif
+ifeq ($(CONFIG_SQL_PIM_BACKEND),y)
+	echo ENABLE_SQL_PIM_BACKEND=$(CONFIG_SQL_PIM_BACKEND) >> $@
+else
+	echo ENABLE_SQL_PIM_BACKEND=n >> $@
+endif
 ifeq ($(CONFIG_OPIE_NO_OVERRIDE_QT),y)
 	echo CONFIG += no-override >> $@
 endif

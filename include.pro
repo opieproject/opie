@@ -110,7 +110,7 @@ QMAKE_LFLAGS += -Wl,-rpath=$$prefix/lib
 # on linux. Therefore I remove the "plugin" term, which is needed by MacOS-X
 CONFIG -= plugin
 }
-QMAKE_LIBDIR += $(OPIEDIR)/lib
+LIBS += -L$(OPIEDIR)/lib
 
 MOC_DIR=.moc/$(PLATFORM)
 OBJECTS_DIR=.obj/$(PLATFORM)
