@@ -3,59 +3,59 @@
     <name>ButtonSettings</name>
     <message>
         <source>Button Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuración Botones</translation>
     </message>
     <message>
         <source>&lt;center&gt;Press or hold the button you want to remap.&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;Pulse o mantenga el botón que quiera reasignar.&lt;/center&gt;</translation>
     </message>
     <message>
         <source>Press:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulsar:</translation>
     </message>
     <message>
         <source>Hold:</source>
-        <translation type="unfinished"></translation>
+        <translation>Mantener:</translation>
     </message>
     <message>
         <source>Beam VCard</source>
-        <translation type="unfinished"></translation>
+        <translation>Emitir vCard</translation>
     </message>
     <message>
         <source>Send eMail</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviar correo-e</translation>
     </message>
     <message>
         <source>Toggle Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Conmutar menú</translation>
     </message>
     <message>
         <source>Toggle O-Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Conmutar Menú-O</translation>
     </message>
     <message>
         <source>Show Desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar escritorio</translation>
     </message>
     <message>
         <source>Toggle Recording</source>
-        <translation type="unfinished"></translation>
+        <translation>Conmutar grabadora</translation>
     </message>
     <message>
         <source>&lt;nobr&gt;Ignored&lt;/nobr&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;nobr&gt;Ignorado&lt;/nobr&gt;</translation>
     </message>
     <message>
         <source>&lt;nobr&gt;Show &lt;b&gt;%1&lt;/b&gt;&lt;/nobr&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;nobr&gt;Mostrar &lt;b&gt;%1&lt;/b&gt;&lt;/nobr&gt;</translation>
     </message>
     <message>
         <source>&lt;nobr&gt;Call &lt;b&gt;%1&lt;/b&gt;: &lt;i&gt;%2&lt;/i&gt;&lt;/nobr&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;nobr&gt;Llamar &lt;b&gt;%1&lt;/b&gt;: &lt;i&gt;%2&lt;/i&gt;&lt;/nobr&gt;</translation>
     </message>
     <message>
         <source>&lt;nobr&gt;Call &lt;b&gt;%1&lt;/b&gt; &lt;i&gt;%2&lt;/i&gt;&lt;/nobr&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;nobr&gt;Llamar &lt;b&gt;%1&lt;/b&gt; &lt;i&gt;%2&lt;/i&gt;&lt;/nobr&gt;</translation>
     </message>
 </context>
 <context>
@@ -63,50 +63,50 @@
     <message>
         <source>%1 %2</source>
         <comment>(hold|press) buttoname</comment>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2</translation>
     </message>
     <message>
         <source>Held</source>
-        <translation type="unfinished"></translation>
+        <translation>Mantenido</translation>
     </message>
     <message>
         <source>Pressed</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulsado</translation>
     </message>
     <message>
         <source>No mapping</source>
-        <translation type="unfinished"></translation>
+        <translation>No asignado</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Predeterminado</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Personalizado</translation>
     </message>
     <message>
         <source>Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Acciones</translation>
     </message>
     <message>
         <source>Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar</translation>
     </message>
 </context>
 <context>
     <name>RemapDlgBase</name>
     <message>
         <source>Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Acción</translation>
     </message>
     <message>
         <source>Channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Canal</translation>
     </message>
     <message>
         <source>Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Mensaje</translation>
     </message>
 </context>
 </TS>

@@ -3,114 +3,115 @@
     <name>QObject</name>
     <message>
         <source>Weather plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>Módulo Tiempo</translation>
     </message>
 </context>
 <context>
     <name>WeatherPluginConfig</name>
     <message>
         <source>Enter ICAO location identifier:</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduzca identificador de localidad ICAO:</translation>
     </message>
     <message>
         <source>Enter the 4 letter code for the desired location here.  See http://www.nws.noaa.gov/tg/siteloc.shtml to find a location near you.</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduzca el código de 4 letras de la localización deseada. Vea http://www.nws.noaa.gov/tg/siteloc.shtml para buscar una localidad próxima.</translation>
     </message>
     <message>
         <source>Visit http://www.nws.noaa.gov/tg/siteloc.shtml to find the nearest location.</source>
-        <translation type="unfinished"></translation>
+        <translation>Visite http://www.nws.noaa.gov/tg/siteloc.shtml para buscar la locaridad más cercana.</translation>
     </message>
     <message>
         <source>Use metric units</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar unidades métricas</translation>
     </message>
     <message>
         <source>Click here to select type of units displayed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse aquí para seleccionar el tipo de unidades mostradas.</translation>
     </message>
     <message>
         <source>Update frequency (in minutes):</source>
-        <translation type="unfinished"></translation>
+        <translation>Frecuencia de ctualización (en minutos): </translation>
     </message>
     <message>
         <source>Select how often (in minutes) you want the weather to be updated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccione la frecuencia (en minutos) con la que quiere que el Tiempo sea actualizado.</translation>
     </message>
 </context>
 <context>
     <name>WeatherPluginWidget</name>
     <message>
         <source>Retreiving current weather information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Recuperando información meteorológica actual.</translation>
     </message>
     <message>
         <source>Temp: </source>
-        <translation type="unfinished"></translation>
+        <translation>Temp: </translation>
     </message>
     <message>
         <source>  Wind: </source>
-        <translation type="unfinished"></translation>
+        <translation>Viento: </translation>
     </message>
     <message>
         <source>
 Pres: </source>
-        <translation type="unfinished"></translation>
+        <translation>
+Pres: </translation>
     </message>
     <message>
         <source>Current weather data not available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Datos meteorológicos actuales no disponibles.</translation>
     </message>
     <message>
         <source>n/a</source>
-        <translation type="unfinished"></translation>
+        <translation>n/d</translation>
     </message>
     <message>
         <source>E </source>
-        <translation type="unfinished"></translation>
+        <translation>E</translation>
     </message>
     <message>
         <source>NE </source>
-        <translation type="unfinished"></translation>
+        <translation>NE</translation>
     </message>
     <message>
         <source>N </source>
-        <translation type="unfinished"></translation>
+        <translation>N</translation>
     </message>
     <message>
         <source>NW </source>
-        <translation type="unfinished"></translation>
+        <translation>NO</translation>
     </message>
     <message>
         <source>W </source>
-        <translation type="unfinished"></translation>
+        <translation>O</translation>
     </message>
     <message>
         <source>SW </source>
-        <translation type="unfinished"></translation>
+        <translation>SO</translation>
     </message>
     <message>
         <source>S </source>
-        <translation type="unfinished"></translation>
+        <translation>S</translation>
     </message>
     <message>
         <source>SE </source>
-        <translation type="unfinished"></translation>
+        <translation>SE</translation>
     </message>
     <message>
         <source> KPH</source>
-        <translation type="unfinished"></translation>
+        <translation>kph</translation>
     </message>
     <message>
         <source> MPH</source>
-        <translation type="unfinished"></translation>
+        <translation>mph</translation>
     </message>
     <message>
         <source> hPa</source>
-        <translation type="unfinished"></translation>
+        <translation>hPa</translation>
     </message>
     <message>
         <source> Hg</source>
-        <translation type="unfinished"></translation>
+        <translation>Hg</translation>
     </message>
 </context>
 </TS>

@@ -3,306 +3,306 @@
     <name>QTReaderApp</name>
     <message>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Cerrar</translation>
     </message>
     <message>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info</translation>
     </message>
     <message>
         <source>On Action...</source>
-        <translation type="unfinished"></translation>
+        <translation>En acción...</translation>
     </message>
     <message>
         <source>Open File</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir fichero</translation>
     </message>
     <message>
         <source>Autoscroll</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoavance</translation>
     </message>
     <message>
         <source>Mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Marcar</translation>
     </message>
     <message>
         <source>Fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation>Pantalla completa</translation>
     </message>
     <message>
         <source>Navigation</source>
-        <translation type="unfinished"></translation>
+        <translation>Navegación</translation>
     </message>
     <message>
         <source>Scroll</source>
-        <translation type="unfinished"></translation>
+        <translation>Avanzar</translation>
     </message>
     <message>
         <source>Jump</source>
-        <translation type="unfinished"></translation>
+        <translation>Saltar</translation>
     </message>
     <message>
         <source>Page/Line Scroll</source>
-        <translation type="unfinished"></translation>
+        <translation>Avanzar página/línea</translation>
     </message>
     <message>
         <source>Set Overlap</source>
-        <translation type="unfinished"></translation>
+        <translation>Solapar</translation>
     </message>
     <message>
         <source>Use Cursor</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar cursor</translation>
     </message>
     <message>
         <source>Set Dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Diccionario</translation>
     </message>
     <message>
         <source>Two/One Touch</source>
-        <translation type="unfinished"></translation>
+        <translation>Uno/dos toques</translation>
     </message>
     <message>
         <source>Target</source>
-        <translation type="unfinished"></translation>
+        <translation>Objetivo</translation>
     </message>
     <message>
         <source>Annotation</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotación</translation>
     </message>
     <message>
         <source>Dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Diccionario</translation>
     </message>
     <message>
         <source>Clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Portapapeles</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Arriba</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Abajo</translation>
     </message>
     <message>
         <source>Find...</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar...</translation>
     </message>
     <message>
         <source>Continuous</source>
-        <translation type="unfinished"></translation>
+        <translation>Contínuo</translation>
     </message>
     <message>
         <source>Markup</source>
-        <translation type="unfinished"></translation>
+        <translation>Marcado</translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished"></translation>
+        <translation>Auto</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Ninguno</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Texto</translation>
     </message>
     <message>
         <source>HTML</source>
-        <translation type="unfinished"></translation>
+        <translation>HTML</translation>
     </message>
     <message>
         <source>Peanut/PML</source>
-        <translation type="unfinished"></translation>
+        <translation>Peanut/PML</translation>
     </message>
     <message>
         <source>Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Esquema</translation>
     </message>
     <message>
         <source>Strip CR</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar CR</translation>
     </message>
     <message>
         <source>Dehyphen</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar guiones</translation>
     </message>
     <message>
         <source>Single Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Espacio simple</translation>
     </message>
     <message>
         <source>Unindent</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar tabuladores</translation>
     </message>
     <message>
         <source>Re-paragraph</source>
-        <translation type="unfinished"></translation>
+        <translation>Reconstruir párrafos</translation>
     </message>
     <message>
         <source>Double Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Doble espacio</translation>
     </message>
     <message>
         <source>Indent+</source>
-        <translation type="unfinished"></translation>
+        <translation>Sangrado+</translation>
     </message>
     <message>
         <source>Indent-</source>
-        <translation type="unfinished"></translation>
+        <translation>Sangrado-</translation>
     </message>
     <message>
         <source>Repalm</source>
-        <translation type="unfinished"></translation>
+        <translation>Re-palm</translation>
     </message>
     <message>
         <source>Remap</source>
-        <translation type="unfinished"></translation>
+        <translation>Reasignar</translation>
     </message>
     <message>
         <source>Embolden</source>
-        <translation type="unfinished"></translation>
+        <translation>Animar</translation>
     </message>
     <message>
         <source>Zoom In</source>
-        <translation type="unfinished"></translation>
+        <translation>Acercar</translation>
     </message>
     <message>
         <source>Zoom Out</source>
-        <translation type="unfinished"></translation>
+        <translation>Alejar</translation>
     </message>
     <message>
         <source>Ideogram/Word</source>
-        <translation type="unfinished"></translation>
+        <translation>Ideograma/palabra</translation>
     </message>
     <message>
         <source>Set width</source>
-        <translation type="unfinished"></translation>
+        <translation>Fijar anchura</translation>
     </message>
     <message>
         <source>Encoding</source>
-        <translation type="unfinished"></translation>
+        <translation>Codificación</translation>
     </message>
     <message>
         <source>Ascii</source>
-        <translation type="unfinished"></translation>
+        <translation>Ascii</translation>
     </message>
     <message>
         <source>UTF-8</source>
-        <translation type="unfinished"></translation>
+        <translation>UTF-8</translation>
     </message>
     <message>
         <source>UCS-2(BE)</source>
-        <translation type="unfinished"></translation>
+        <translation>UCS-2(BE)</translation>
     </message>
     <message>
         <source>USC-2(LE)</source>
-        <translation type="unfinished"></translation>
+        <translation>USC-2(LE)</translation>
     </message>
     <message>
         <source>Palm</source>
-        <translation type="unfinished"></translation>
+        <translation>Palm</translation>
     </message>
     <message>
         <source>Windows(1252)</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows(1252)</translation>
     </message>
     <message>
         <source>Set Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Fijar letra</translation>
     </message>
     <message>
         <source>Annotate</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotar</translation>
     </message>
     <message>
         <source>Goto</source>
-        <translation type="unfinished"></translation>
+        <translation>Ir</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar</translation>
     </message>
     <message>
         <source>Autogen</source>
-        <translation type="unfinished"></translation>
+        <translation>Autogenerar</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Limpiar</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvar</translation>
     </message>
     <message>
         <source>Tidy</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordenado</translation>
     </message>
     <message>
         <source>Start Block</source>
-        <translation type="unfinished"></translation>
+        <translation>Inicio bloque</translation>
     </message>
     <message>
         <source>Copy Block</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar bloque</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichero</translation>
     </message>
     <message>
         <source>Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Formato</translation>
     </message>
     <message>
         <source>Marks</source>
-        <translation type="unfinished"></translation>
+        <translation>Marcas</translation>
     </message>
     <message>
         <source>Find Next</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar siguiente</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Cerrar búsqueda</translation>
     </message>
     <message>
         <source>Do Reg</source>
-        <translation type="unfinished"></translation>
+        <translation>Exp.reg</translation>
     </message>
     <message>
         <source>Close Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Cerrar edición</translation>
     </message>
 </context>
 <context>
     <name>fileBrowser</name>
     <message>
         <source>Browse for file</source>
-        <translation type="unfinished"></translation>
+        <translation>Hojear fichero</translation>
     </message>
     <message>
         <source>/</source>
-        <translation type="unfinished"></translation>
+        <translation>/</translation>
     </message>
     <message>
         <source>Hidden</source>
-        <translation type="unfinished"></translation>
+        <translation>Oculto</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamaño</translation>
     </message>
 </context>
 </TS>
