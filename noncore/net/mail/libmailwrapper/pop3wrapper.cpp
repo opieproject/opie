@@ -138,7 +138,9 @@ void POP3wrapper::login()
     bool ssl = account->getSSL();
 
     m_pop3=mailstorage_new(NULL);
-    pop3_mailstorage_init(m_pop3,(char*)server,port,NULL,CONNECTION_TYPE_TRY_STARTTLS,POP3_AUTH_TYPE_TRY_APOP,
+    int conntype = (ssl?CONNECTION_TYPE_TLS:CONNECTION_TYPE_PLAIN);
+    
+    pop3_mailstorage_init(m_pop3,(char*)server,port,NULL,conntype,POP3_AUTH_TYPE_PLAIN,
         (char*)user,(char*)pass,0,0,0);
 
     m_folder = mailfolder_new(m_pop3, NULL, NULL);
@@ -157,7 +159,6 @@ void POP3wrapper::login()
         mailstorage_free(m_pop3);
         m_pop3 = 0;
     }
-    qDebug( "POP3: logged in!" );
 }
 
 void POP3wrapper::logout()
