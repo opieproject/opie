@@ -4,6 +4,6 @@ Section: opie/applications
 Maintainer: Warwick Allison <warwick@trolltech.com>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
+Depends: opie-base ($QPE_VERSION) libopie
 Description: Contacts
  A simple addressbook for the Opie environment.
