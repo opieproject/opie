@@ -12,3 +12,20 @@ INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS		+= -lqpe
 DESTDIR 	=  $(OPIEDIR)/bin
+
+
+TRANSLATIONS = ../../../i18n/de/kbill.ts
+TRANSLATIONS += ../../../i18n/en/kbill.ts
+TRANSLATIONS += ../../../i18n/es/kbill.ts
+TRANSLATIONS += ../../../i18n/fr/kbill.ts
+TRANSLATIONS += ../../../i18n/hu/kbill.ts
+TRANSLATIONS += ../../../i18n/ja/kbill.ts
+TRANSLATIONS += ../../../i18n/ko/kbill.ts
+TRANSLATIONS += ../../../i18n/no/kbill.ts
+TRANSLATIONS += ../../../i18n/pl/kbill.ts
+TRANSLATIONS += ../../../i18n/pt/kbill.ts
+TRANSLATIONS += ../../../i18n/pt_BR/kbill.ts
+TRANSLATIONS += ../../../i18n/sl/kbill.ts
+TRANSLATIONS += ../../../i18n/zh_CN/kbill.ts
+TRANSLATIONS += ../../../i18n/zh_TW/kbill.ts
+

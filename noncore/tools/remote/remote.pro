@@ -7,3 +7,20 @@ INCLUDEPATH	+=$(OPIEDIR)/include
 DEPENDPATH	+=$(OPIEDIR)/include
 LIBS		+=-lqpe
 TARGET          = remote
+
+
+TRANSLATIONS = ../../../i18n/de/remote.ts
+TRANSLATIONS += ../../../i18n/en/remote.ts
+TRANSLATIONS += ../../../i18n/es/remote.ts
+TRANSLATIONS += ../../../i18n/fr/remote.ts
+TRANSLATIONS += ../../../i18n/hu/remote.ts
+TRANSLATIONS += ../../../i18n/ja/remote.ts
+TRANSLATIONS += ../../../i18n/ko/remote.ts
+TRANSLATIONS += ../../../i18n/no/remote.ts
+TRANSLATIONS += ../../../i18n/pl/remote.ts
+TRANSLATIONS += ../../../i18n/pt/remote.ts
+TRANSLATIONS += ../../../i18n/pt_BR/remote.ts
+TRANSLATIONS += ../../../i18n/sl/remote.ts
+TRANSLATIONS += ../../../i18n/zh_CN/remote.ts
+TRANSLATIONS += ../../../i18n/zh_TW/remote.ts
+

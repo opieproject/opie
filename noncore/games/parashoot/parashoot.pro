@@ -8,17 +8,20 @@ INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe
 
-TRANSLATIONS = ../i18n/de/parashoot.ts
-TRANSLATIONS += ../i18n/es/parashoot.ts
-TRANSLATIONS += ../i18n/pt/parashoot.ts
-TRANSLATIONS += ../i18n/pt_BR/parashoot.ts
-TRANSLATIONS   += ../i18n/en/parashoot.ts
-TRANSLATIONS   += ../i18n/hu/parashoot.ts
-TRANSLATIONS   += ../i18n/ja/parashoot.ts
-TRANSLATIONS   += ../i18n/pl/parashoot.ts
-TRANSLATIONS   += ../i18n/ko/parashoot.ts
-TRANSLATIONS   += ../i18n/fr/parashoot.ts
-TRANSLATIONS   += ../i18n/sl/parashoot.ts
-TRANSLATIONS   += ../i18n/no/parashoot.ts
-TRANSLATIONS   += ../i18n/zh_CN/parashoot.ts
-TRANSLATIONS   += ../i18n/zh_TW/parashoot.ts
+
+
+TRANSLATIONS = ../../../i18n/de/parashoot.ts
+TRANSLATIONS += ../../../i18n/en/parashoot.ts
+TRANSLATIONS += ../../../i18n/es/parashoot.ts
+TRANSLATIONS += ../../../i18n/fr/parashoot.ts
+TRANSLATIONS += ../../../i18n/hu/parashoot.ts
+TRANSLATIONS += ../../../i18n/ja/parashoot.ts
+TRANSLATIONS += ../../../i18n/ko/parashoot.ts
+TRANSLATIONS += ../../../i18n/no/parashoot.ts
+TRANSLATIONS += ../../../i18n/pl/parashoot.ts
+TRANSLATIONS += ../../../i18n/pt/parashoot.ts
+TRANSLATIONS += ../../../i18n/pt_BR/parashoot.ts
+TRANSLATIONS += ../../../i18n/sl/parashoot.ts
+TRANSLATIONS += ../../../i18n/zh_CN/parashoot.ts
+TRANSLATIONS += ../../../i18n/zh_TW/parashoot.ts
+

@@ -15,17 +15,20 @@ DEPENDPATH      += ../$(OPIEDIR)/include ../../launcher
 LIBS            += -lqpe
 VERSION		= 1.0.0
 
-TRANSLATIONS    = ../../i18n/pt_BR/libqdvorak.ts
-TRANSLATIONS    += ../../i18n/es/libqdvorak.ts
-TRANSLATIONS    += ../../i18n/pt/libqdvorak.ts
-TRANSLATIONS   += ../../i18n/de/libqdvorak.ts
-TRANSLATIONS   += ../../i18n/en/libqdvorak.ts
-TRANSLATIONS   += ../../i18n/hu/libqdvorak.ts
-TRANSLATIONS   += ../../i18n/sl/libqdvorak.ts
-TRANSLATIONS   += ../../i18n/pl/libqdvorak.ts
-TRANSLATIONS   += ../../i18n/ja/libqdvorak.ts
-TRANSLATIONS   += ../../i18n/ko/libqdvorak.ts
-TRANSLATIONS   += ../../i18n/no/libqdvorak.ts
-TRANSLATIONS   += ../../i18n/zh_CN/libqdvorak.ts
-TRANSLATIONS   += ../../i18n/zh_TW/libqdvorak.ts
-TRANSLATIONS   += ../../i18n/fr/libqdvorak.ts
+
+
+TRANSLATIONS = ../../i18n/de/libqdvorak.ts
+TRANSLATIONS += ../../i18n/en/libqdvorak.ts
+TRANSLATIONS += ../../i18n/es/libqdvorak.ts
+TRANSLATIONS += ../../i18n/fr/libqdvorak.ts
+TRANSLATIONS += ../../i18n/hu/libqdvorak.ts
+TRANSLATIONS += ../../i18n/ja/libqdvorak.ts
+TRANSLATIONS += ../../i18n/ko/libqdvorak.ts
+TRANSLATIONS += ../../i18n/no/libqdvorak.ts
+TRANSLATIONS += ../../i18n/pl/libqdvorak.ts
+TRANSLATIONS += ../../i18n/pt/libqdvorak.ts
+TRANSLATIONS += ../../i18n/pt_BR/libqdvorak.ts
+TRANSLATIONS += ../../i18n/sl/libqdvorak.ts
+TRANSLATIONS += ../../i18n/zh_CN/libqdvorak.ts
+TRANSLATIONS += ../../i18n/zh_TW/libqdvorak.ts
+

@@ -58,6 +58,20 @@ LIBS        += -L $(OPIEDIR)/lib -lqpe -lopie
 DESTDIR      = $(OPIEDIR)/bin
 TARGET       = qpdf
 
-TRANSLATIONS = ../../i18n/de/qpdf.ts
-TRANSLATIONS += ../../i18n/es/qpdf.ts
-TRANSLATIONS += ../../i18n/pt/qpdf.ts
+
+
+TRANSLATIONS = ../../../i18n/de/qpdf.ts
+TRANSLATIONS += ../../../i18n/en/qpdf.ts
+TRANSLATIONS += ../../../i18n/es/qpdf.ts
+TRANSLATIONS += ../../../i18n/fr/qpdf.ts
+TRANSLATIONS += ../../../i18n/hu/qpdf.ts
+TRANSLATIONS += ../../../i18n/ja/qpdf.ts
+TRANSLATIONS += ../../../i18n/ko/qpdf.ts
+TRANSLATIONS += ../../../i18n/no/qpdf.ts
+TRANSLATIONS += ../../../i18n/pl/qpdf.ts
+TRANSLATIONS += ../../../i18n/pt/qpdf.ts
+TRANSLATIONS += ../../../i18n/pt_BR/qpdf.ts
+TRANSLATIONS += ../../../i18n/sl/qpdf.ts
+TRANSLATIONS += ../../../i18n/zh_CN/qpdf.ts
+TRANSLATIONS += ../../../i18n/zh_TW/qpdf.ts
+

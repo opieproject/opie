@@ -16,17 +16,20 @@ DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe
 INTERFACES	= 
 
-TRANSLATIONS = ../i18n/pt_BR/tetrix.ts
-TRANSLATIONS += ../i18n/es/tetrix.ts
-TRANSLATIONS += ../i18n/pt/tetrix.ts
-TRANSLATIONS   += ../i18n/de/tetrix.ts
-TRANSLATIONS   += ../i18n/en/tetrix.ts
-TRANSLATIONS   += ../i18n/fr/tetrix.ts
-TRANSLATIONS   += ../i18n/hu/tetrix.ts
-TRANSLATIONS   += ../i18n/sl/tetrix.ts
-TRANSLATIONS   += ../i18n/ja/tetrix.ts
-TRANSLATIONS   += ../i18n/ko/tetrix.ts
-TRANSLATIONS   += ../i18n/no/tetrix.ts
-TRANSLATIONS   += ../i18n/zh_CN/tetrix.ts
-TRANSLATIONS   += ../i18n/pl/tetrix.ts
-TRANSLATIONS   += ../i18n/zh_TW/tetrix.ts
+
+
+TRANSLATIONS = ../../../i18n/de/tetrix.pro.in.ts
+TRANSLATIONS += ../../../i18n/en/tetrix.pro.in.ts
+TRANSLATIONS += ../../../i18n/es/tetrix.pro.in.ts
+TRANSLATIONS += ../../../i18n/fr/tetrix.pro.in.ts
+TRANSLATIONS += ../../../i18n/hu/tetrix.pro.in.ts
+TRANSLATIONS += ../../../i18n/ja/tetrix.pro.in.ts
+TRANSLATIONS += ../../../i18n/ko/tetrix.pro.in.ts
+TRANSLATIONS += ../../../i18n/no/tetrix.pro.in.ts
+TRANSLATIONS += ../../../i18n/pl/tetrix.pro.in.ts
+TRANSLATIONS += ../../../i18n/pt/tetrix.pro.in.ts
+TRANSLATIONS += ../../../i18n/pt_BR/tetrix.pro.in.ts
+TRANSLATIONS += ../../../i18n/sl/tetrix.pro.in.ts
+TRANSLATIONS += ../../../i18n/zh_CN/tetrix.pro.in.ts
+TRANSLATIONS += ../../../i18n/zh_TW/tetrix.pro.in.ts
+

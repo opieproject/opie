@@ -11,17 +11,20 @@ DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe
 INTERFACES	= 
 
-TRANSLATIONS = ../i18n/de/minesweep.ts
-TRANSLATIONS += ../i18n/es/minesweep.ts
-TRANSLATIONS += ../i18n/pt/minesweep.ts
-TRANSLATIONS += ../i18n/pt_BR/minesweep.ts
-TRANSLATIONS   += ../i18n/en/minesweep.ts
-TRANSLATIONS   += ../i18n/hu/minesweep.ts
-TRANSLATIONS   += ../i18n/ja/minesweep.ts
-TRANSLATIONS   += ../i18n/fr/minesweep.ts
-TRANSLATIONS   += ../i18n/ko/minesweep.ts
-TRANSLATIONS   += ../i18n/pl/minesweep.ts
-TRANSLATIONS   += ../i18n/sl/minesweep.ts
-TRANSLATIONS   += ../i18n/no/minesweep.ts
-TRANSLATIONS   += ../i18n/zh_CN/minesweep.ts
-TRANSLATIONS   += ../i18n/zh_TW/minesweep.ts
+
+
+TRANSLATIONS = ../../../i18n/de/minesweep.pro.in.ts
+TRANSLATIONS += ../../../i18n/en/minesweep.pro.in.ts
+TRANSLATIONS += ../../../i18n/es/minesweep.pro.in.ts
+TRANSLATIONS += ../../../i18n/fr/minesweep.pro.in.ts
+TRANSLATIONS += ../../../i18n/hu/minesweep.pro.in.ts
+TRANSLATIONS += ../../../i18n/ja/minesweep.pro.in.ts
+TRANSLATIONS += ../../../i18n/ko/minesweep.pro.in.ts
+TRANSLATIONS += ../../../i18n/no/minesweep.pro.in.ts
+TRANSLATIONS += ../../../i18n/pl/minesweep.pro.in.ts
+TRANSLATIONS += ../../../i18n/pt/minesweep.pro.in.ts
+TRANSLATIONS += ../../../i18n/pt_BR/minesweep.pro.in.ts
+TRANSLATIONS += ../../../i18n/sl/minesweep.pro.in.ts
+TRANSLATIONS += ../../../i18n/zh_CN/minesweep.pro.in.ts
+TRANSLATIONS += ../../../i18n/zh_TW/minesweep.pro.in.ts
+

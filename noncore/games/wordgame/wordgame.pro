@@ -10,17 +10,20 @@ INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe
 
-TRANSLATIONS    = ../i18n/pt_BR/wordgame.ts
-TRANSLATIONS    += ../i18n/es/wordgame.ts
-TRANSLATIONS    += ../i18n/pt/wordgame.ts
-TRANSLATIONS   += ../i18n/de/wordgame.ts
-TRANSLATIONS   += ../i18n/en/wordgame.ts
-TRANSLATIONS   += ../i18n/hu/wordgame.ts
-TRANSLATIONS   += ../i18n/sl/wordgame.ts
-TRANSLATIONS   += ../i18n/ja/wordgame.ts
-TRANSLATIONS   += ../i18n/ko/wordgame.ts
-TRANSLATIONS   += ../i18n/pl/wordgame.ts
-TRANSLATIONS   += ../i18n/no/wordgame.ts
-TRANSLATIONS   += ../i18n/zh_CN/wordgame.ts
-TRANSLATIONS   += ../i18n/zh_TW/wordgame.ts
-TRANSLATIONS   += ../i18n/fr/wordgame.ts
+
+
+TRANSLATIONS = ../../../i18n/de/wordgame.ts
+TRANSLATIONS += ../../../i18n/en/wordgame.ts
+TRANSLATIONS += ../../../i18n/es/wordgame.ts
+TRANSLATIONS += ../../../i18n/fr/wordgame.ts
+TRANSLATIONS += ../../../i18n/hu/wordgame.ts
+TRANSLATIONS += ../../../i18n/ja/wordgame.ts
+TRANSLATIONS += ../../../i18n/ko/wordgame.ts
+TRANSLATIONS += ../../../i18n/no/wordgame.ts
+TRANSLATIONS += ../../../i18n/pl/wordgame.ts
+TRANSLATIONS += ../../../i18n/pt/wordgame.ts
+TRANSLATIONS += ../../../i18n/pt_BR/wordgame.ts
+TRANSLATIONS += ../../../i18n/sl/wordgame.ts
+TRANSLATIONS += ../../../i18n/zh_CN/wordgame.ts
+TRANSLATIONS += ../../../i18n/zh_TW/wordgame.ts
+

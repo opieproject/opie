@@ -9,17 +9,20 @@ DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe
 TARGET		= fifteen
 
-TRANSLATIONS = ../i18n/pt_BR/fifteen.ts
-TRANSLATIONS += ../i18n/es/fifteen.ts
-TRANSLATIONS += ../i18n/pt/fifteen.ts
-TRANSLATIONS   += ../i18n/de/fifteen.ts
-TRANSLATIONS   += ../i18n/en/fifteen.ts
-TRANSLATIONS   += ../i18n/hu/fifteen.ts
-TRANSLATIONS   += ../i18n/pl/fifteen.ts
-TRANSLATIONS   += ../i18n/ja/fifteen.ts
-TRANSLATIONS   += ../i18n/sl/fifteen.ts
-TRANSLATIONS   += ../i18n/ko/fifteen.ts
-TRANSLATIONS   += ../i18n/fr/fifteen.ts
-TRANSLATIONS   += ../i18n/no/fifteen.ts
-TRANSLATIONS   += ../i18n/zh_CN/fifteen.ts
-TRANSLATIONS   += ../i18n/zh_TW/fifteen.ts
+
+
+TRANSLATIONS = ../../../i18n/de/fifteen.ts
+TRANSLATIONS += ../../../i18n/en/fifteen.ts
+TRANSLATIONS += ../../../i18n/es/fifteen.ts
+TRANSLATIONS += ../../../i18n/fr/fifteen.ts
+TRANSLATIONS += ../../../i18n/hu/fifteen.ts
+TRANSLATIONS += ../../../i18n/ja/fifteen.ts
+TRANSLATIONS += ../../../i18n/ko/fifteen.ts
+TRANSLATIONS += ../../../i18n/no/fifteen.ts
+TRANSLATIONS += ../../../i18n/pl/fifteen.ts
+TRANSLATIONS += ../../../i18n/pt/fifteen.ts
+TRANSLATIONS += ../../../i18n/pt_BR/fifteen.ts
+TRANSLATIONS += ../../../i18n/sl/fifteen.ts
+TRANSLATIONS += ../../../i18n/zh_CN/fifteen.ts
+TRANSLATIONS += ../../../i18n/zh_TW/fifteen.ts
+
