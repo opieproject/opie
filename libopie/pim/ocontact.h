@@ -186,22 +186,11 @@ public:
 //     const QString &customField( const QString &key )
 //         { return find( Custom- + key ); }
 
-    static QStringList fields();
-    static QStringList trphonefields( bool sorted = true );
-    static QStringList untrphonefields( bool sorted = true );
-    static QStringList trdetailsfields( bool sorted = true );
-    static QStringList untrdetailsfields( bool sorted = true );
-    static QStringList trfields( bool sorted = true );
-    static QStringList untrfields( bool sorted = true );
 
     QString toRichText() const;
     QMap<int, QString> toMap() const;
     QString field( int key ) const { return find( key ); }
 
-
-    // journaling...
-    void saveJournal( journal_action action, const QString &key = QString::null );
-    void save( QString &buf ) const;
 
     void setUid( int i )
 { OPimRecord::setUid(i); replace( Qtopia::AddressUid , QString::number(i)); }
@@ -220,13 +209,19 @@ public:
 
 private:
     friend class AbEditor;
-    friend class AbTable;
+    //    friend class AbTable;
     friend class AddressBookAccessPrivate;
+    friend class OContactAccessBackend_XML;
     friend class XMLIO;
 
     void insert( int key, const QString &value );
     void replace( int key, const QString &value );
     QString find( int key ) const;
+    static QStringList fields();
+
+    // journaling...
+    void saveJournal( journal_action action, const QString &key = QString::null );
+    void save( QString &buf ) const;
 
     QString displayAddress( const QString &street,
 			    const QString &city,
