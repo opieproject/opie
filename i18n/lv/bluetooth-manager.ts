@@ -3,332 +3,333 @@
     <name>BlueBase</name>
     <message>
         <source>Bluetooth Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Bluetooth Menedžeris</translation>
     </message>
     <message>
         <source>&lt;b&gt;Device name : &lt;/b&gt; Ipaq</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Iekārtas nosaukums &quot; &lt;/b&gt; Ipaq</translation>
     </message>
     <message>
         <source>MAC adress: </source>
-        <translation type="unfinished"></translation>
+        <translation>MAC adrese:</translation>
     </message>
     <message>
         <source>Class</source>
-        <translation type="unfinished"></translation>
+        <translation>Klase</translation>
     </message>
     <message>
         <source>Test</source>
-        <translation type="unfinished"></translation>
+        <translation>Tests</translation>
     </message>
     <message>
         <source>Changes were applied.</source>
-        <translation type="unfinished"></translation>
+        <translation>Izmaiņas uzstādītas.</translation>
     </message>
     <message>
         <source>rescan sevices</source>
-        <translation type="unfinished"></translation>
+        <translation>pārskanēt servisus</translation>
     </message>
     <message>
         <source>to group</source>
-        <translation type="unfinished"></translation>
+        <translation>uz grupu</translation>
     </message>
     <message>
         <source>delete</source>
-        <translation type="unfinished"></translation>
+        <translation>dzēst</translation>
     </message>
     <message>
         <source>Test1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Test1:</translation>
     </message>
     <message>
         <source>no services found</source>
-        <translation type="unfinished"></translation>
+        <translation>servisi nav atrasti</translation>
     </message>
     <message>
         <source>No connections found</source>
-        <translation type="unfinished"></translation>
+        <translation>Nav atrastas konekcijas</translation>
     </message>
 </context>
 <context>
     <name>BluetoothBase</name>
     <message>
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation>Forma1</translation>
     </message>
     <message>
         <source>Devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Iekārtas</translation>
     </message>
     <message>
         <source>Device Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Iekārtas Nosaukums</translation>
     </message>
     <message>
         <source>Online</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiešsaistē</translation>
     </message>
     <message>
         <source>Scan for Devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Skanēt Iekārtas</translation>
     </message>
     <message>
         <source>Connections</source>
-        <translation type="unfinished"></translation>
+        <translation>Savienojumi</translation>
     </message>
     <message>
         <source>Connection type</source>
-        <translation type="unfinished"></translation>
+        <translation>Savienojumu tips</translation>
     </message>
     <message>
         <source>Signal</source>
-        <translation type="unfinished"></translation>
+        <translation>Signāls</translation>
     </message>
     <message>
         <source>Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurācija</translation>
     </message>
     <message>
         <source>Bluetooh Basic Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Bluetooth Pamata Konfigurācija</translation>
     </message>
     <message>
         <source>Default Passkey</source>
-        <translation type="unfinished"></translation>
+        <translation>Noklusētais Atslēgvārds</translation>
     </message>
     <message>
         <source>enable authentification</source>
-        <translation type="unfinished"></translation>
+        <translation>atļaut autentifikāciju</translation>
     </message>
     <message>
         <source>enable encryption</source>
-        <translation type="unfinished"></translation>
+        <translation>atļaut kriptēšanu</translation>
     </message>
     <message>
         <source>Enable Page scan</source>
-        <translation type="unfinished"></translation>
+        <translation>Atļaut lapu skanēšanu</translation>
     </message>
     <message>
         <source>Enable Inquiry scan</source>
-        <translation type="unfinished"></translation>
+        <translation>Atļaut Meklēšanas skanēšanu</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzstādīt</translation>
     </message>
     <message>
         <source>Rfcomm Bind Table</source>
-        <translation type="unfinished"></translation>
+        <translation>Rfcomm Saistību Tabula</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Statuss</translation>
     </message>
     <message>
         <source>Status Label</source>
-        <translation type="unfinished"></translation>
+        <translation>Statusa Etiķete</translation>
     </message>
 </context>
 <context>
     <name>DeviceDialog</name>
     <message>
         <source>Form2</source>
-        <translation type="unfinished"></translation>
+        <translation>Forma2</translation>
     </message>
     <message>
         <source>Devicename</source>
-        <translation type="unfinished"></translation>
+        <translation>Iekārtasvārds</translation>
     </message>
     <message>
         <source>Services</source>
-        <translation type="unfinished"></translation>
+        <translation>Servisi</translation>
     </message>
     <message>
         <source>change settings</source>
-        <translation type="unfinished"></translation>
+        <translation>mainīt uzstādījumus</translation>
     </message>
     <message>
         <source>active</source>
-        <translation type="unfinished"></translation>
+        <translation>aktīvs</translation>
     </message>
     <message>
         <source>service name</source>
-        <translation type="unfinished"></translation>
+        <translation>servisa nosaukums</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzstādījumi</translation>
     </message>
     <message>
         <source>Change device 
 name</source>
-        <translation type="unfinished"></translation>
+        <translation>Mainīt iekārtas vārdu</translation>
     </message>
     <message>
         <source>Default PIN 
 Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Noklusētais PIN 
+Kods</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Informācija</translation>
     </message>
     <message>
         <source>TextLabel9</source>
-        <translation type="unfinished"></translation>
+        <translation>TextEtiķete9</translation>
     </message>
 </context>
 <context>
     <name>DunPopup</name>
     <message>
         <source>connect</source>
-        <translation type="unfinished"></translation>
+        <translation>savienot</translation>
     </message>
     <message>
         <source>connect+conf</source>
-        <translation type="unfinished"></translation>
+        <translation>savienot+konf</translation>
     </message>
     <message>
         <source>disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>atvienot</translation>
     </message>
 </context>
 <context>
     <name>ObexDialog</name>
     <message>
         <source>beam files </source>
-        <translation type="unfinished"></translation>
+        <translation>bīmot failus</translation>
     </message>
     <message>
         <source>Which file should be beamed?</source>
-        <translation type="unfinished"></translation>
+        <translation>Kurš fails jābīmo?</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished"></translation>
+        <translation>Sūtīt</translation>
     </message>
 </context>
 <context>
     <name>OpieTooth::ScanDialog</name>
     <message>
         <source>Scan for devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Iekārtu skanēšana</translation>
     </message>
     <message>
         <source>Start scan</source>
-        <translation type="unfinished"></translation>
+        <translation>Sākt skanēšanu</translation>
     </message>
     <message>
         <source>Add Device</source>
-        <translation type="unfinished"></translation>
+        <translation>Pievienot Iekārtu</translation>
     </message>
     <message>
         <source>Stop scan</source>
-        <translation type="unfinished"></translation>
+        <translation>Pārtraukt skanēšanu</translation>
     </message>
 </context>
 <context>
     <name>PPPDialog</name>
     <message>
         <source>ppp connection </source>
-        <translation type="unfinished"></translation>
+        <translation>ppp savienojums</translation>
     </message>
     <message>
         <source>Enter an ppp script name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ievadiet ppp skripta nosaukumu:</translation>
     </message>
     <message>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Savienot</translation>
     </message>
 </context>
 <context>
     <name>PanPopup</name>
     <message>
         <source>connect</source>
-        <translation type="unfinished"></translation>
+        <translation>savienot</translation>
     </message>
     <message>
         <source>connect+conf</source>
-        <translation type="unfinished"></translation>
+        <translation>savienot+konf</translation>
     </message>
     <message>
         <source>disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>atvienot</translation>
     </message>
 </context>
 <context>
     <name>RfcommAssignDialogBase</name>
     <message>
         <source>Rfcomm Bind</source>
-        <translation type="unfinished"></translation>
+        <translation>Rfcomm Saistības</translation>
     </message>
     <message>
         <source>Bind device to a interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Sasaistīt iekārtu ar interfeisu</translation>
     </message>
 </context>
 <context>
     <name>RfcommDialogItemBase</name>
     <message>
         <source>Form2</source>
-        <translation type="unfinished"></translation>
+        <translation>Forma2</translation>
     </message>
     <message>
         <source>Mac</source>
-        <translation type="unfinished"></translation>
+        <translation>Mak</translation>
     </message>
     <message>
         <source>Channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Kanāls</translation>
     </message>
     <message>
         <source>0</source>
-        <translation type="unfinished"></translation>
+        <translation>0</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>3</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>4</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>5</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>6</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>7</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>8</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>9</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>10</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Comment:</source>
-        <translation type="unfinished"></translation>
+        <translation>Komentārs:</translation>
     </message>
 </context>
 </TS>
