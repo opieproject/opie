@@ -1,5 +1,5 @@
-diff -ru qte-2.3.7_orig/include/qapplication.h qte-2.3.7/include/qapplication.h
---- qte-2.3.7_orig/include/qapplication.h	Thu Jul 17 03:20:25 2003
+diff -ru qt-2.3.7/include/qapplication.h qte-2.3.7/include/qapplication.h
+--- qt-2.3.7/include/qapplication.h	Thu Jul 17 03:20:25 2003
 +++ qte-2.3.7/include/qapplication.h	Mon Oct 27 14:21:28 2003
 @@ -61,6 +61,10 @@
  class QSemaphore;
@@ -56,10 +56,9 @@ diff -ru qte-2.3.7_orig/include/qapplication.h qte-2.3.7/include/qapplication.h
  #endif
  #endif
  
-Only in qte-2.3.7/include: qconfig-qpe.h
-diff -ru qte-2.3.7_orig/include/qconfig.h qte-2.3.7/include/qconfig.h
---- qte-2.3.7_orig/include/qconfig.h	Fri Jan 26 14:43:06 2001
-+++ qte-2.3.7/include/qconfig.h	Wed Oct 29 22:13:16 2003
+diff -ru qt-2.3.7/include/qconfig.h qte-2.3.7/include/qconfig.h
+--- qt-2.3.7/include/qconfig.h	Fri Jan 26 14:43:06 2001
++++ qte-2.3.7/include/qconfig.h	Sun Nov 16 13:35:10 2003
 @@ -1,3 +1,26 @@
 +// Copied from qconfig-qpe.h
 +/**********************************************************************
@@ -87,7 +86,7 @@ diff -ru qte-2.3.7_orig/include/qconfig.h qte-2.3.7/include/qconfig.h
  // Empty leaves all features enabled.  See doc/html/features.html for choices.
  
  // Note that disabling some features will produce a libqt that is not
-@@ -8,3 +31,69 @@
+@@ -8,3 +31,71 @@
  #ifndef QT_DLL
  #define QT_DLL // Internal
  #endif
@@ -157,8 +156,11 @@ diff -ru qte-2.3.7_orig/include/qconfig.h qte-2.3.7/include/qconfig.h
 +#define QT_NO_QWS_KDE2_WM_STYLE
 +#define QT_NO_QWS_KDE_WM_STYLE
 +#define QT_NO_QWS_WINDOWS_WM_STYLE
-diff -ru qte-2.3.7_orig/include/qfontdatabase.h qte-2.3.7/include/qfontdatabase.h
---- qte-2.3.7_orig/include/qfontdatabase.h	Thu Jul 17 03:20:25 2003
++
++#define QT_NO_SOUND
+\ No newline at end of file
+diff -ru qt-2.3.7/include/qfontdatabase.h qte-2.3.7/include/qfontdatabase.h
+--- qt-2.3.7/include/qfontdatabase.h	Thu Jul 17 03:20:25 2003
 +++ qte-2.3.7/include/qfontdatabase.h	Mon Oct 27 14:21:28 2003
 @@ -59,6 +59,10 @@
  class QDiskFont;
@@ -189,10 +191,9 @@ diff -ru qte-2.3.7_orig/include/qfontdatabase.h qte-2.3.7/include/qfontdatabase.
      QStringList styles( const QString &family,
  			const QString &charSet = QString::null ) const;
      QStringList charSets( const QString &familyName,
-Only in qte-2.3.7_orig/include: qgifimageformat_p.h
-diff -ru qte-2.3.7_orig/include/qmodules.h qte-2.3.7/include/qmodules.h
---- qte-2.3.7_orig/include/qmodules.h	Fri Aug 31 17:00:56 2001
-+++ qte-2.3.7/include/qmodules.h	Wed Oct 29 21:57:53 2003
+diff -ru qt-2.3.7/include/qmodules.h qte-2.3.7/include/qmodules.h
+--- qt-2.3.7/include/qmodules.h	Fri Aug 31 17:00:56 2001
++++ qte-2.3.7/include/qmodules.h	Sun Nov 16 13:34:58 2003
 @@ -1,14 +1,12 @@
 -#ifndef QT_H
 -#endif // QT_H
@@ -212,74 +213,8 @@ diff -ru qte-2.3.7_orig/include/qmodules.h qte-2.3.7/include/qmodules.h
  #define QT_MODULE_XML
 -#define QT_MODULE_NETWORK
 +#define QT_MODULE_OPENGL
-Only in qte-2.3.7_orig/include: qxt.h
-Only in qte-2.3.7/lib: libqte.dylib
-Only in qte-2.3.7/lib: libqte.dylib.2
-Only in qte-2.3.7/lib: libqte.dylib.2.3
-Only in qte-2.3.7/lib: libqte.dylib.2.3.7
-Only in qte-2.3.7/src/3rdparty/kernel: qgifimageformat.o
-Only in qte-2.3.7/src/3rdparty/kernel: qpointarray.o
-Only in qte-2.3.7/src/3rdparty/kernel: qpolygonscanner.o
-Only in qte-2.3.7/src/3rdparty/kernel: qregion_qws.o
-Only in qte-2.3.7/src/3rdparty/libpng: png.o
-Only in qte-2.3.7/src/3rdparty/libpng: pngerror.o
-Only in qte-2.3.7/src/3rdparty/libpng: pngget.o
-Only in qte-2.3.7/src/3rdparty/libpng: pngmem.o
-Only in qte-2.3.7/src/3rdparty/libpng: pngpread.o
-Only in qte-2.3.7/src/3rdparty/libpng: pngread.o
-Only in qte-2.3.7/src/3rdparty/libpng: pngrio.o
-Only in qte-2.3.7/src/3rdparty/libpng: pngrtran.o
-Only in qte-2.3.7/src/3rdparty/libpng: pngrutil.o
-Only in qte-2.3.7/src/3rdparty/libpng: pngset.o
-Only in qte-2.3.7/src/3rdparty/libpng: pngtrans.o
-Only in qte-2.3.7/src/3rdparty/libpng: pngwio.o
-Only in qte-2.3.7/src/3rdparty/libpng: pngwrite.o
-Only in qte-2.3.7/src/3rdparty/libpng: pngwtran.o
-Only in qte-2.3.7/src/3rdparty/libpng: pngwutil.o
-Only in qte-2.3.7/src/3rdparty/tools: qbig5codec.o
-Only in qte-2.3.7/src/3rdparty/tools: qeucjpcodec.o
-Only in qte-2.3.7/src/3rdparty/tools: qeuckrcodec.o
-Only in qte-2.3.7/src/3rdparty/tools: qgbkcodec.o
-Only in qte-2.3.7/src/3rdparty/tools: qjiscodec.o
-Only in qte-2.3.7/src/3rdparty/tools: qjpunicode.o
-Only in qte-2.3.7/src/3rdparty/tools: qrtlcodec.o
-Only in qte-2.3.7/src/3rdparty/tools: qsjiscodec.o
-Only in qte-2.3.7/src/3rdparty/tools: qtsciicodec.o
-Only in qte-2.3.7/src/3rdparty/zlib: Makefile
-Only in qte-2.3.7/src/3rdparty/zlib: adler32.o
-Only in qte-2.3.7/src/3rdparty/zlib: compress.o
-Only in qte-2.3.7/src/3rdparty/zlib: crc32.o
-Only in qte-2.3.7/src/3rdparty/zlib: deflate.o
-Only in qte-2.3.7/src/3rdparty/zlib: gzio.o
-Only in qte-2.3.7/src/3rdparty/zlib: infblock.o
-Only in qte-2.3.7/src/3rdparty/zlib: infcodes.o
-Only in qte-2.3.7/src/3rdparty/zlib: inffast.o
-Only in qte-2.3.7/src/3rdparty/zlib: inflate.o
-Only in qte-2.3.7/src/3rdparty/zlib: inftrees.o
-Only in qte-2.3.7/src/3rdparty/zlib: infutil.o
-Only in qte-2.3.7/src/3rdparty/zlib: trees.o
-Only in qte-2.3.7/src/3rdparty/zlib: uncompr.o
-Only in qte-2.3.7/src/3rdparty/zlib: zutil.o
-Only in qte-2.3.7/src: Makefile
-Only in qte-2.3.7/src: allmoc.cpp
-Only in qte-2.3.7/src: allmoc.o
-Only in qte-2.3.7/src/canvas: qcanvas.o
-Only in qte-2.3.7/src/dialogs: qcolordialog.moc
-Only in qte-2.3.7/src/dialogs: qcolordialog.o
-Only in qte-2.3.7/src/dialogs: qfiledialog.moc
-Only in qte-2.3.7/src/dialogs: qfiledialog.o
-Only in qte-2.3.7/src/dialogs: qfontdialog.o
-Only in qte-2.3.7/src/dialogs: qinputdialog.o
-Only in qte-2.3.7/src/dialogs: qmessagebox.o
-Only in qte-2.3.7/src/dialogs: qprintdialog.o
-Only in qte-2.3.7/src/dialogs: qprogressdialog.o
-Only in qte-2.3.7/src/dialogs: qtabdialog.o
-Only in qte-2.3.7/src/dialogs: qwizard.o
-Only in qte-2.3.7/src/iconview: qiconview.o
-Only in qte-2.3.7/src/kernel: qabstractlayout.o
-Only in qte-2.3.7/src/kernel: qaccel.o
-diff -ru qte-2.3.7_orig/src/kernel/qapplication.cpp qte-2.3.7/src/kernel/qapplication.cpp
---- qte-2.3.7_orig/src/kernel/qapplication.cpp	Thu Jul 17 03:20:25 2003
+diff -ru qt-2.3.7/src/kernel/qapplication.cpp qte-2.3.7/src/kernel/qapplication.cpp
+--- qt-2.3.7/src/kernel/qapplication.cpp	Thu Jul 17 03:20:25 2003
 +++ qte-2.3.7/src/kernel/qapplication.cpp	Mon Oct 27 14:21:28 2003
 @@ -35,6 +35,8 @@
  **
@@ -363,8 +298,8 @@ diff -ru qte-2.3.7_orig/src/kernel/qapplication.cpp qte-2.3.7/src/kernel/qapplic
  			    const char* className )
  {
      bool all = FALSE;
-diff -ru qte-2.3.7_orig/src/kernel/qapplication.h qte-2.3.7/src/kernel/qapplication.h
---- qte-2.3.7_orig/src/kernel/qapplication.h	Thu Jul 17 03:20:25 2003
+diff -ru qt-2.3.7/src/kernel/qapplication.h qte-2.3.7/src/kernel/qapplication.h
+--- qt-2.3.7/src/kernel/qapplication.h	Thu Jul 17 03:20:25 2003
 +++ qte-2.3.7/src/kernel/qapplication.h	Mon Oct 27 14:21:28 2003
 @@ -61,6 +61,10 @@
  class QSemaphore;
@@ -421,9 +356,8 @@ diff -ru qte-2.3.7_orig/src/kernel/qapplication.h qte-2.3.7/src/kernel/qapplicat
  #endif
  #endif
  
-Only in qte-2.3.7/src/kernel: qapplication.o
-diff -ru qte-2.3.7_orig/src/kernel/qapplication_qws.cpp qte-2.3.7/src/kernel/qapplication_qws.cpp
---- qte-2.3.7_orig/src/kernel/qapplication_qws.cpp	Thu Jul 17 03:20:25 2003
+diff -ru qt-2.3.7/src/kernel/qapplication_qws.cpp qte-2.3.7/src/kernel/qapplication_qws.cpp
+--- qt-2.3.7/src/kernel/qapplication_qws.cpp	Thu Jul 17 03:20:25 2003
 +++ qte-2.3.7/src/kernel/qapplication_qws.cpp	Mon Oct 27 14:21:28 2003
 @@ -2804,6 +2804,11 @@
  */
@@ -437,33 +371,8 @@ diff -ru qte-2.3.7_orig/src/kernel/qapplication_qws.cpp qte-2.3.7/src/kernel/qap
      if ( d ) {
  	delete qws_decoration;
  	qws_decoration = d;
-Only in qte-2.3.7/src/kernel: qapplication_qws.cpp~
-Only in qte-2.3.7/src/kernel: qapplication_qws.o
-Only in qte-2.3.7/src/kernel: qasyncimageio.o
-Only in qte-2.3.7/src/kernel: qasyncio.o
-Only in qte-2.3.7/src/kernel: qbitmap.o
-Only in qte-2.3.7/src/kernel: qclipboard.o
-Only in qte-2.3.7/src/kernel: qclipboard_qws.o
-Only in qte-2.3.7/src/kernel: qcolor.o
-Only in qte-2.3.7/src/kernel: qcolor_p.o
-Only in qte-2.3.7/src/kernel: qcolor_qws.o
-Only in qte-2.3.7/src/kernel: qconnection.o
-Only in qte-2.3.7/src/kernel: qcopchannel_qws.moc
-Only in qte-2.3.7/src/kernel: qcopchannel_qws.o
-Only in qte-2.3.7/src/kernel: qcursor.o
-Only in qte-2.3.7/src/kernel: qcursor_qws.o
-Only in qte-2.3.7/src/kernel: qdialog.o
-Only in qte-2.3.7/src/kernel: qdirectpainter_qws.o
-Only in qte-2.3.7/src/kernel: qdnd_qws.o
-Only in qte-2.3.7/src/kernel: qdragobject.o
-Only in qte-2.3.7/src/kernel: qdrawutil.o
-Only in qte-2.3.7/src/kernel: qdropsite.o
-Only in qte-2.3.7/src/kernel: qevent.o
-Only in qte-2.3.7/src/kernel: qfocusdata.o
-Only in qte-2.3.7/src/kernel: qfont.o
-Only in qte-2.3.7/src/kernel: qfont_qws.o
-diff -ru qte-2.3.7_orig/src/kernel/qfontdatabase.cpp qte-2.3.7/src/kernel/qfontdatabase.cpp
---- qte-2.3.7_orig/src/kernel/qfontdatabase.cpp	Thu Jul 17 03:20:25 2003
+diff -ru qt-2.3.7/src/kernel/qfontdatabase.cpp qte-2.3.7/src/kernel/qfontdatabase.cpp
+--- qt-2.3.7/src/kernel/qfontdatabase.cpp	Thu Jul 17 03:20:25 2003
 +++ qte-2.3.7/src/kernel/qfontdatabase.cpp	Mon Oct 27 14:21:28 2003
 @@ -35,6 +35,8 @@
  **
@@ -488,8 +397,8 @@ diff -ru qte-2.3.7_orig/src/kernel/qfontdatabase.cpp qte-2.3.7/src/kernel/qfontd
                                                   const QString &style,
                                                   const QString &charSet )
  {
-diff -ru qte-2.3.7_orig/src/kernel/qfontdatabase.h qte-2.3.7/src/kernel/qfontdatabase.h
---- qte-2.3.7_orig/src/kernel/qfontdatabase.h	Thu Jul 17 03:20:25 2003
+diff -ru qt-2.3.7/src/kernel/qfontdatabase.h qte-2.3.7/src/kernel/qfontdatabase.h
+--- qt-2.3.7/src/kernel/qfontdatabase.h	Thu Jul 17 03:20:25 2003
 +++ qte-2.3.7/src/kernel/qfontdatabase.h	Mon Oct 27 14:21:28 2003
 @@ -59,6 +59,10 @@
  class QDiskFont;
@@ -520,12 +429,8 @@ diff -ru qte-2.3.7_orig/src/kernel/qfontdatabase.h qte-2.3.7/src/kernel/qfontdat
      QStringList styles( const QString &family,
  			const QString &charSet = QString::null ) const;
      QStringList charSets( const QString &familyName,
-Only in qte-2.3.7/src/kernel: qfontdatabase.o
-Only in qte-2.3.7/src/kernel: qfontfactorybdf_qws.o
-Only in qte-2.3.7/src/kernel: qfontfactoryttf_qws.o
-Only in qte-2.3.7/src/kernel: qfontmanager_qws.o
-diff -ru qte-2.3.7_orig/src/kernel/qgfx_qws.cpp qte-2.3.7/src/kernel/qgfx_qws.cpp
---- qte-2.3.7_orig/src/kernel/qgfx_qws.cpp	Thu Jul 17 03:20:25 2003
+diff -ru qt-2.3.7/src/kernel/qgfx_qws.cpp qte-2.3.7/src/kernel/qgfx_qws.cpp
+--- qt-2.3.7/src/kernel/qgfx_qws.cpp	Thu Jul 17 03:20:25 2003
 +++ qte-2.3.7/src/kernel/qgfx_qws.cpp	Mon Oct 27 14:27:25 2003
 @@ -32,7 +32,7 @@
  #include "qgfx_qws.h"
@@ -536,9 +441,8 @@ diff -ru qte-2.3.7_orig/src/kernel/qgfx_qws.cpp qte-2.3.7/src/kernel/qgfx_qws.cp
  #include <sys/types.h>
  #include <dirent.h>
  #include <stdlib.h>
-Only in qte-2.3.7/src/kernel: qgfx_qws.o
-diff -ru qte-2.3.7_orig/src/kernel/qgfxraster_qws.cpp qte-2.3.7/src/kernel/qgfxraster_qws.cpp
---- qte-2.3.7_orig/src/kernel/qgfxraster_qws.cpp	Thu Jul 17 03:20:25 2003
+diff -ru qt-2.3.7/src/kernel/qgfxraster_qws.cpp qte-2.3.7/src/kernel/qgfxraster_qws.cpp
+--- qt-2.3.7/src/kernel/qgfxraster_qws.cpp	Thu Jul 17 03:20:25 2003
 +++ qte-2.3.7/src/kernel/qgfxraster_qws.cpp	Mon Oct 27 14:27:25 2003
 @@ -75,7 +75,11 @@
  # if __BYTE_ORDER == __BIG_ENDIAN
@@ -598,15 +502,8 @@ diff -ru qte-2.3.7_orig/src/kernel/qgfxraster_qws.cpp qte-2.3.7/src/kernel/qgfxr
      // ### fix for 8bpp
      // This seems to be reliable now, at least for 16bpp
  
-Only in qte-2.3.7/src/kernel: qgfxraster_qws.cpp~
-Only in qte-2.3.7/src/kernel: qgfxraster_qws.o
-Only in qte-2.3.7/src/kernel: qguardedptr.o
-Only in qte-2.3.7/src/kernel: qiconset.o
-Only in qte-2.3.7/src/kernel: qimage.o
-Only in qte-2.3.7/src/kernel: qinputcontext_qws.o
-Only in qte-2.3.7/src/kernel: qjpegio.o
-diff -ru qte-2.3.7_orig/src/kernel/qkeyboard_qws.cpp qte-2.3.7/src/kernel/qkeyboard_qws.cpp
---- qte-2.3.7_orig/src/kernel/qkeyboard_qws.cpp	Thu Jul 17 03:20:25 2003
+diff -ru qt-2.3.7/src/kernel/qkeyboard_qws.cpp qte-2.3.7/src/kernel/qkeyboard_qws.cpp
+--- qt-2.3.7/src/kernel/qkeyboard_qws.cpp	Thu Jul 17 03:20:25 2003
 +++ qte-2.3.7/src/kernel/qkeyboard_qws.cpp	Mon Oct 27 14:42:11 2003
 @@ -69,7 +69,7 @@
  #if !defined(_OS_QNX6_)
@@ -675,15 +572,8 @@ diff -ru qte-2.3.7_orig/src/kernel/qkeyboard_qws.cpp qte-2.3.7/src/kernel/qkeybo
  	ioctl(kbdFD, KDSKBMODE, K_XLATE);
  #endif
  	tcsetattr(kbdFD, TCSANOW, &origTermData);
-Only in qte-2.3.7/src/kernel: qkeyboard_qws.cpp.rej
-Only in qte-2.3.7/src/kernel: qkeyboard_qws.cpp~
-Only in qte-2.3.7/src/kernel: qkeyboard_qws.moc
-Only in qte-2.3.7/src/kernel: qkeyboard_qws.o
-Only in qte-2.3.7/src/kernel: qlayout.o
-Only in qte-2.3.7/src/kernel: qlayoutengine.o
-Only in qte-2.3.7/src/kernel: qlocalfs.o
-diff -ru qte-2.3.7_orig/src/kernel/qlock_qws.cpp qte-2.3.7/src/kernel/qlock_qws.cpp
---- qte-2.3.7_orig/src/kernel/qlock_qws.cpp	Thu Jul 17 03:20:25 2003
+diff -ru qt-2.3.7/src/kernel/qlock_qws.cpp qte-2.3.7/src/kernel/qlock_qws.cpp
+--- qt-2.3.7/src/kernel/qlock_qws.cpp	Thu Jul 17 03:20:25 2003
 +++ qte-2.3.7/src/kernel/qlock_qws.cpp	Mon Oct 27 14:27:25 2003
 @@ -38,7 +38,7 @@
  #include <errno.h>
@@ -694,58 +584,8 @@ diff -ru qte-2.3.7_orig/src/kernel/qlock_qws.cpp qte-2.3.7/src/kernel/qlock_qws.
  /* union semun is defined by including <sys/sem.h> */
  #else
  /* according to X/OPEN we have to define it ourselves */
-Only in qte-2.3.7/src/kernel: qlock_qws.o
-Only in qte-2.3.7/src/kernel: qmemorymanager_qws.o
-Only in qte-2.3.7/src/kernel: qmetaobject.o
-Only in qte-2.3.7/src/kernel: qmime.o
-Only in qte-2.3.7/src/kernel: qmngio.o
-Only in qte-2.3.7/src/kernel: qmovie.moc
-Only in qte-2.3.7/src/kernel: qmovie.o
-Only in qte-2.3.7/src/kernel: qnetworkprotocol.o
-Only in qte-2.3.7/src/kernel: qobject.o
-Only in qte-2.3.7/src/kernel: qpaintdevice_qws.o
-Only in qte-2.3.7/src/kernel: qpaintdevicemetrics.o
-Only in qte-2.3.7/src/kernel: qpainter.o
-Only in qte-2.3.7/src/kernel: qpainter_qws.o
-Only in qte-2.3.7/src/kernel: qpalette.o
-Only in qte-2.3.7/src/kernel: qpicture.o
-Only in qte-2.3.7/src/kernel: qpixmap.o
-Only in qte-2.3.7/src/kernel: qpixmap_qws.o
-Only in qte-2.3.7/src/kernel: qpixmapcache.o
-Only in qte-2.3.7/src/kernel: qpngio.o
-Only in qte-2.3.7/src/kernel: qpoint.o
-Only in qte-2.3.7/src/kernel: qprinter.o
-Only in qte-2.3.7/src/kernel: qprinter_qws.o
-Only in qte-2.3.7/src/kernel: qpsprinter.o
-Only in qte-2.3.7/src/kernel: qrect.o
-Only in qte-2.3.7/src/kernel: qregion.o
-Only in qte-2.3.7/src/kernel: qrichtext.o
-Only in qte-2.3.7/src/kernel: qsemimodal.o
-Only in qte-2.3.7/src/kernel: qsharedmemory.o
-Only in qte-2.3.7/src/kernel: qsignal.o
-Only in qte-2.3.7/src/kernel: qsignalmapper.o
-Only in qte-2.3.7/src/kernel: qsimplerichtext.o
-Only in qte-2.3.7/src/kernel: qsize.o
-Only in qte-2.3.7/src/kernel: qsizegrip.o
-Only in qte-2.3.7/src/kernel: qsocketnotifier.o
-Only in qte-2.3.7/src/kernel: qsound.o
-Only in qte-2.3.7/src/kernel: qsound_qws.o
-Only in qte-2.3.7/src/kernel: qsoundqss_qws.moc
-Only in qte-2.3.7/src/kernel: qsoundqss_qws.o
-Only in qte-2.3.7/src/kernel: qstyle.o
-Only in qte-2.3.7/src/kernel: qstylesheet.o
-Only in qte-2.3.7/src/kernel: qthread_unix.moc
-Only in qte-2.3.7/src/kernel: qthread_unix.o
-Only in qte-2.3.7/src/kernel: qtimer.o
-Only in qte-2.3.7/src/kernel: qtranslator.o
-Only in qte-2.3.7/src/kernel: qurl.o
-Only in qte-2.3.7/src/kernel: qurlinfo.o
-Only in qte-2.3.7/src/kernel: qurloperator.o
-Only in qte-2.3.7/src/kernel: qvariant.o
-Only in qte-2.3.7/src/kernel: qwidget.o
-Only in qte-2.3.7/src/kernel: qwidget_qws.o
-diff -ru qte-2.3.7_orig/src/kernel/qwindowsystem_qws.cpp qte-2.3.7/src/kernel/qwindowsystem_qws.cpp
---- qte-2.3.7_orig/src/kernel/qwindowsystem_qws.cpp	Thu Jul 17 03:20:26 2003
+diff -ru qt-2.3.7/src/kernel/qwindowsystem_qws.cpp qte-2.3.7/src/kernel/qwindowsystem_qws.cpp
+--- qt-2.3.7/src/kernel/qwindowsystem_qws.cpp	Thu Jul 17 03:20:26 2003
 +++ qte-2.3.7/src/kernel/qwindowsystem_qws.cpp	Mon Oct 27 14:27:25 2003
 @@ -844,6 +844,18 @@
  {
@@ -783,21 +623,8 @@ diff -ru qte-2.3.7_orig/src/kernel/qwindowsystem_qws.cpp qte-2.3.7/src/kernel/qw
  	if( mount(0, "/var/shm", "shm", 0, 0) ) {
  	    /* This just confuses people with 2.2 kernels
  	    if ( errno != EBUSY )
-Only in qte-2.3.7/src/kernel: qwindowsystem_qws.cpp~
-Only in qte-2.3.7/src/kernel: qwindowsystem_qws.o
-Only in qte-2.3.7/src/kernel: qwmatrix.o
-Only in qte-2.3.7/src/kernel: qwsbeosdecoration_qws.o
-Only in qte-2.3.7/src/kernel: qwscommand_qws.o
-Only in qte-2.3.7/src/kernel: qwscursor_qws.o
-Only in qte-2.3.7/src/kernel: qwsdecoration_qws.o
-Only in qte-2.3.7/src/kernel: qwsdefaultdecoration_qws.o
-Only in qte-2.3.7/src/kernel: qwsevent_qws.o
-Only in qte-2.3.7/src/kernel: qwshydrodecoration_qws.o
-Only in qte-2.3.7/src/kernel: qwskde2decoration_qws.o
-Only in qte-2.3.7/src/kernel: qwskdedecoration_qws.o
-Only in qte-2.3.7/src/kernel: qwsmanager_qws.o
-diff -ru qte-2.3.7_orig/src/kernel/qwsmouse_qws.cpp qte-2.3.7/src/kernel/qwsmouse_qws.cpp
---- qte-2.3.7_orig/src/kernel/qwsmouse_qws.cpp	Thu Jul 17 03:20:26 2003
+diff -ru qt-2.3.7/src/kernel/qwsmouse_qws.cpp qte-2.3.7/src/kernel/qwsmouse_qws.cpp
+--- qt-2.3.7/src/kernel/qwsmouse_qws.cpp	Thu Jul 17 03:20:26 2003
 +++ qte-2.3.7/src/kernel/qwsmouse_qws.cpp	Mon Oct 27 14:27:25 2003
 @@ -336,7 +336,7 @@
  	tty.c_oflag     = 0;
@@ -817,50 +644,21 @@ diff -ru qte-2.3.7_orig/src/kernel/qwsmouse_qws.cpp qte-2.3.7/src/kernel/qwsmous
  		tty.c_line = 0;
  #endif // _OS_FREEBSD_
  		tty.c_cc[VTIME] = 0;
-Only in qte-2.3.7/src/kernel: qwsmouse_qws.moc
-Only in qte-2.3.7/src/kernel: qwsmouse_qws.o
-Only in qte-2.3.7/src/kernel: qwsproperty_qws.o
-Only in qte-2.3.7/src/kernel: qwsregionmanager_qws.o
-Only in qte-2.3.7/src/kernel: qwssocket_qws.o
-Only in qte-2.3.7/src/kernel: qwswindowsdecoration_qws.o
-Only in qte-2.3.7/src/moc: Makefile
-Only in qte-2.3.7/src/moc: moc
-Only in qte-2.3.7/src/moc: mocgen.o
-Only in qte-2.3.7/src/moc: qbuffer.o
-Only in qte-2.3.7/src/moc: qcollection.o
-Only in qte-2.3.7/src/moc: qcstring.o
-Only in qte-2.3.7/src/moc: qdatastream.o
-Only in qte-2.3.7/src/moc: qdatetime.o
-Only in qte-2.3.7/src/moc: qfile.o
-Only in qte-2.3.7/src/moc: qfile_unix.o
-Only in qte-2.3.7/src/moc: qgarray.o
-Only in qte-2.3.7/src/moc: qgdict.o
-Only in qte-2.3.7/src/moc: qglist.o
-Only in qte-2.3.7/src/moc: qglobal.o
-Only in qte-2.3.7/src/moc: qgvector.o
-Only in qte-2.3.7/src/moc: qiodevice.o
-Only in qte-2.3.7/src/moc: qregexp.o
-Only in qte-2.3.7/src/moc: qstring.o
-Only in qte-2.3.7/src/moc: qtextcodec.o
-Only in qte-2.3.7/src/moc: qtextstream.o
-Only in qte-2.3.7/src/moc: qutfcodec.o
-Only in qte-2.3.7/src/network: qdns.o
-Only in qte-2.3.7/src/network: qftp.o
-Only in qte-2.3.7/src/network: qhostaddress.o
-Only in qte-2.3.7/src/network: qnetwork.o
-Only in qte-2.3.7/src/network: qserversocket.o
-Only in qte-2.3.7/src/network: qsocket.o
-Only in qte-2.3.7/src/network: qsocketdevice.o
-Only in qte-2.3.7/src/network: qsocketdevice_unix.o
-Only in qte-2.3.7/src/table: qtable.o
-Only in qte-2.3.7/src/tools: qbitarray.o
-Only in qte-2.3.7/src/tools: qbuffer.o
-Only in qte-2.3.7/src/tools: qcollection.o
-Only in qte-2.3.7/src/tools: qconfig-qpe.h
-Only in qte-2.3.7/src/tools: qconfig-qpe.h~
-diff -ru qte-2.3.7_orig/src/tools/qconfig.h qte-2.3.7/src/tools/qconfig.h
---- qte-2.3.7_orig/src/tools/qconfig.h	Fri Jan 26 14:43:06 2001
-+++ qte-2.3.7/src/tools/qconfig.h	Wed Oct 29 22:13:16 2003
+diff -ru qt-2.3.7/src/network/qdns.cpp qte-2.3.7/src/network/qdns.cpp
+--- qt-2.3.7/src/network/qdns.cpp	Thu Jul 17 03:20:26 2003
++++ qte-2.3.7/src/network/qdns.cpp	Sun Nov 16 13:44:27 2003
+@@ -1991,7 +1991,7 @@
+     domains = new QStrList( TRUE );
+     domains->setAutoDelete( TRUE );
+ 
+-    res_init();
++    // res_init(); (eilers: Caused link problems)
+     int i;
+     // find the name servers to use
+     for( i=0; i < MAXNS && i < _res.nscount; i++ ) {
+diff -ru qt-2.3.7/src/tools/qconfig.h qte-2.3.7/src/tools/qconfig.h
+--- qt-2.3.7/src/tools/qconfig.h	Fri Jan 26 14:43:06 2001
++++ qte-2.3.7/src/tools/qconfig.h	Sun Nov 16 13:35:10 2003
 @@ -1,3 +1,26 @@
 +// Copied from qconfig-qpe.h
 +/**********************************************************************
@@ -888,7 +686,7 @@ diff -ru qte-2.3.7_orig/src/tools/qconfig.h qte-2.3.7/src/tools/qconfig.h
  // Empty leaves all features enabled.  See doc/html/features.html for choices.
  
  // Note that disabling some features will produce a libqt that is not
-@@ -8,3 +31,69 @@
+@@ -8,3 +31,71 @@
  #ifndef QT_DLL
  #define QT_DLL // Internal
  #endif
@@ -958,27 +756,12 @@ diff -ru qte-2.3.7_orig/src/tools/qconfig.h qte-2.3.7/src/tools/qconfig.h
 +#define QT_NO_QWS_KDE2_WM_STYLE
 +#define QT_NO_QWS_KDE_WM_STYLE
 +#define QT_NO_QWS_WINDOWS_WM_STYLE
-Only in qte-2.3.7/src/tools: qconfig.h~
-Only in qte-2.3.7/src/tools: qcstring.o
-Only in qte-2.3.7/src/tools: qdatastream.o
-Only in qte-2.3.7/src/tools: qdatetime.o
-Only in qte-2.3.7/src/tools: qdir.o
-Only in qte-2.3.7/src/tools: qdir_unix.o
-Only in qte-2.3.7/src/tools: qfile.o
-Only in qte-2.3.7/src/tools: qfile_unix.o
-Only in qte-2.3.7/src/tools: qfileinfo.o
-Only in qte-2.3.7/src/tools: qfileinfo_unix.o
-Only in qte-2.3.7/src/tools: qgarray.o
-Only in qte-2.3.7/src/tools: qgcache.o
-Only in qte-2.3.7/src/tools: qgdict.o
-Only in qte-2.3.7/src/tools: qglist.o
-Only in qte-2.3.7/src/tools: qglobal.o
-Only in qte-2.3.7/src/tools: qgvector.o
-Only in qte-2.3.7/src/tools: qiodevice.o
-Only in qte-2.3.7/src/tools: qmap.o
-diff -ru qte-2.3.7_orig/src/tools/qmodules.h qte-2.3.7/src/tools/qmodules.h
---- qte-2.3.7_orig/src/tools/qmodules.h	Fri Aug 31 17:00:56 2001
-+++ qte-2.3.7/src/tools/qmodules.h	Wed Oct 29 21:57:53 2003
++
++#define QT_NO_SOUND
+\ No newline at end of file
+diff -ru qt-2.3.7/src/tools/qmodules.h qte-2.3.7/src/tools/qmodules.h
+--- qt-2.3.7/src/tools/qmodules.h	Fri Aug 31 17:00:56 2001
++++ qte-2.3.7/src/tools/qmodules.h	Sun Nov 16 13:34:58 2003
 @@ -1,14 +1,12 @@
 -#ifndef QT_H
 -#endif // QT_H
@@ -998,20 +781,8 @@ diff -ru qte-2.3.7_orig/src/tools/qmodules.h qte-2.3.7/src/tools/qmodules.h
  #define QT_MODULE_XML
 -#define QT_MODULE_NETWORK
 +#define QT_MODULE_OPENGL
-Only in qte-2.3.7/src/tools: qregexp.o
-Only in qte-2.3.7/src/tools: qstring.o
-Only in qte-2.3.7/src/tools: qstringlist.o
-Only in qte-2.3.7/src/tools: qtextcodec.o
-Only in qte-2.3.7/src/tools: qtextstream.o
-Only in qte-2.3.7/src/tools: qutfcodec.o
-Only in qte-2.3.7/src/widgets: qaction.o
-Only in qte-2.3.7/src/widgets: qbutton.o
-Only in qte-2.3.7/src/widgets: qbuttongroup.o
-Only in qte-2.3.7/src/widgets: qcdestyle.o
-Only in qte-2.3.7/src/widgets: qcheckbox.o
-Only in qte-2.3.7/src/widgets: qcombobox.o
-diff -ru qte-2.3.7_orig/src/widgets/qcommonstyle.cpp qte-2.3.7/src/widgets/qcommonstyle.cpp
---- qte-2.3.7_orig/src/widgets/qcommonstyle.cpp	Thu Jul 17 03:20:26 2003
+diff -ru qt-2.3.7/src/widgets/qcommonstyle.cpp qte-2.3.7/src/widgets/qcommonstyle.cpp
+--- qt-2.3.7/src/widgets/qcommonstyle.cpp	Thu Jul 17 03:20:26 2003
 +++ qte-2.3.7/src/widgets/qcommonstyle.cpp	Mon Oct 27 14:21:28 2003
 @@ -566,7 +566,7 @@
  				    bool enabled, bool active )
@@ -1022,25 +793,8 @@ diff -ru qte-2.3.7_orig/src/widgets/qcommonstyle.cpp qte-2.3.7/src/widgets/qcomm
      if (draw_menu_bar_impl != 0) {
  	QDrawMenuBarItemImpl impl = draw_menu_bar_impl;
  	(this->*impl)(p, x, y, w, h, mi, g, enabled, active);
-Only in qte-2.3.7/src/widgets: qcommonstyle.o
-Only in qte-2.3.7/src/widgets: qcompactstyle.o
-Only in qte-2.3.7/src/widgets: qdial.o
-Only in qte-2.3.7/src/widgets: qeffects.moc
-Only in qte-2.3.7/src/widgets: qeffects.o
-Only in qte-2.3.7/src/widgets: qframe.o
-Only in qte-2.3.7/src/widgets: qgrid.o
-Only in qte-2.3.7/src/widgets: qgroupbox.o
-Only in qte-2.3.7/src/widgets: qhbox.o
-Only in qte-2.3.7/src/widgets: qhbuttongroup.o
-Only in qte-2.3.7/src/widgets: qheader.o
-Only in qte-2.3.7/src/widgets: qhgroupbox.o
-Only in qte-2.3.7/src/widgets: qinterlacestyle.o
-Only in qte-2.3.7/src/widgets: qlabel.o
-Only in qte-2.3.7/src/widgets: qlcdnumber.o
-Only in qte-2.3.7/src/widgets: qlineedit.o
-Only in qte-2.3.7/src/widgets: qlistbox.o
-diff -ru qte-2.3.7_orig/src/widgets/qlistview.cpp qte-2.3.7/src/widgets/qlistview.cpp
---- qte-2.3.7_orig/src/widgets/qlistview.cpp	Thu Jul 17 03:20:26 2003
+diff -ru qt-2.3.7/src/widgets/qlistview.cpp qte-2.3.7/src/widgets/qlistview.cpp
+--- qt-2.3.7/src/widgets/qlistview.cpp	Thu Jul 17 03:20:26 2003
 +++ qte-2.3.7/src/widgets/qlistview.cpp	Mon Oct 27 14:21:28 2003
 @@ -4968,9 +4968,9 @@
  	l = l->childItem ? l->childItem : l->siblingItem;
@@ -1055,36 +809,8 @@ diff -ru qte-2.3.7_orig/src/widgets/qlistview.cpp qte-2.3.7/src/widgets/qlistvie
  
      if ( s.width() > s.height() * 3 )
  	s.setHeight( s.width() / 3 );
-Only in qte-2.3.7/src/widgets: qlistview.o
-Only in qte-2.3.7/src/widgets: qmainwindow.moc
-Only in qte-2.3.7/src/widgets: qmainwindow.o
-Only in qte-2.3.7/src/widgets: qmenubar.o
-Only in qte-2.3.7/src/widgets: qmenudata.o
-Only in qte-2.3.7/src/widgets: qmotifplusstyle.o
-Only in qte-2.3.7/src/widgets: qmotifstyle.o
-Only in qte-2.3.7/src/widgets: qmultilineedit.o
-Only in qte-2.3.7/src/widgets: qplatinumstyle.o
-Only in qte-2.3.7/src/widgets: qpopupmenu.o
-Only in qte-2.3.7/src/widgets: qprogressbar.o
-Only in qte-2.3.7/src/widgets: qpushbutton.o
-Only in qte-2.3.7/src/widgets: qradiobutton.o
-Only in qte-2.3.7/src/widgets: qrangecontrol.o
-Only in qte-2.3.7/src/widgets: qscrollbar.o
-Only in qte-2.3.7/src/widgets: qscrollview.o
-Only in qte-2.3.7/src/widgets: qsgistyle.o
-Only in qte-2.3.7/src/widgets: qslider.o
-Only in qte-2.3.7/src/widgets: qspinbox.o
-Only in qte-2.3.7/src/widgets: qsplitter.o
-Only in qte-2.3.7/src/widgets: qstatusbar.o
-Only in qte-2.3.7/src/widgets: qtabbar.o
-Only in qte-2.3.7/src/widgets: qtableview.o
-Only in qte-2.3.7/src/widgets: qtabwidget.o
-Only in qte-2.3.7/src/widgets: qtextbrowser.o
-Only in qte-2.3.7/src/widgets: qtextview.o
-Only in qte-2.3.7/src/widgets: qtoolbar.moc
-Only in qte-2.3.7/src/widgets: qtoolbar.o
-diff -ru qte-2.3.7_orig/src/widgets/qtoolbutton.cpp qte-2.3.7/src/widgets/qtoolbutton.cpp
---- qte-2.3.7_orig/src/widgets/qtoolbutton.cpp	Thu Jul 17 03:20:27 2003
+diff -ru qt-2.3.7/src/widgets/qtoolbutton.cpp qte-2.3.7/src/widgets/qtoolbutton.cpp
+--- qt-2.3.7/src/widgets/qtoolbutton.cpp	Thu Jul 17 03:20:27 2003
 +++ qte-2.3.7/src/widgets/qtoolbutton.cpp	Mon Oct 27 14:21:28 2003
 @@ -230,7 +230,7 @@
  	else
@@ -1113,49 +839,3 @@ diff -ru qte-2.3.7_orig/src/widgets/qtoolbutton.cpp qte-2.3.7/src/widgets/qtoolb
  	QPixmap pm = iconSet(TRUE).pixmap(QIconSet::Small, QIconSet::Normal);
  	w = pm.width();
  	h = pm.height();
-Only in qte-2.3.7/src/widgets: qtoolbutton.o
-Only in qte-2.3.7/src/widgets: qtooltip.moc
-Only in qte-2.3.7/src/widgets: qtooltip.o
-Only in qte-2.3.7/src/widgets: qvalidator.o
-Only in qte-2.3.7/src/widgets: qvbox.o
-Only in qte-2.3.7/src/widgets: qvbuttongroup.o
-Only in qte-2.3.7/src/widgets: qvgroupbox.o
-Only in qte-2.3.7/src/widgets: qwhatsthis.moc
-Only in qte-2.3.7/src/widgets: qwhatsthis.o
-Only in qte-2.3.7/src/widgets: qwidgetstack.o
-Only in qte-2.3.7/src/widgets: qwindowsstyle.o
-Only in qte-2.3.7/src/workspace: qworkspace.moc
-Only in qte-2.3.7/src/workspace: qworkspace.o
-Only in qte-2.3.7/src/xml: qdom.o
-Only in qte-2.3.7/src/xml: qxml.o
-Only in qte-2.3.7: src-mt.mk
-Only in qte-2.3.7: stamp-headers
-Only in qte-2.3.7/tools: Makefile
-Only in qte-2.3.7/tools/designer: Makefile
-Only in qte-2.3.7/tools/designer/designer: Makefile
-Only in qte-2.3.7/tools/designer/examples/walkthrough: Makefile
-Only in qte-2.3.7/tools/designer/integration/rc2ui: Makefile
-Only in qte-2.3.7/tools/designer/tools/createcw: Makefile
-Only in qte-2.3.7/tools/designer/uic: Makefile
-Only in qte-2.3.7/tools/designer/util: Makefile
-Only in qte-2.3.7/tools/makeqpf: Makefile
-Only in qte-2.3.7/tools/mergetr: Makefile
-Only in qte-2.3.7/tools/msg2qm: Makefile
-Only in qte-2.3.7/tools/qconfig: Makefile
-Only in qte-2.3.7/tools/qembed: Makefile
-Only in qte-2.3.7/tools/qvfb: Makefile
-Only in qte-2.3.7/tutorial: Makefile
-Only in qte-2.3.7/tutorial/t1: Makefile
-Only in qte-2.3.7/tutorial/t10: Makefile
-Only in qte-2.3.7/tutorial/t11: Makefile
-Only in qte-2.3.7/tutorial/t12: Makefile
-Only in qte-2.3.7/tutorial/t13: Makefile
-Only in qte-2.3.7/tutorial/t14: Makefile
-Only in qte-2.3.7/tutorial/t2: Makefile
-Only in qte-2.3.7/tutorial/t3: Makefile
-Only in qte-2.3.7/tutorial/t4: Makefile
-Only in qte-2.3.7/tutorial/t5: Makefile
-Only in qte-2.3.7/tutorial/t6: Makefile
-Only in qte-2.3.7/tutorial/t7: Makefile
-Only in qte-2.3.7/tutorial/t8: Makefile
-Only in qte-2.3.7/tutorial/t9: Makefile
