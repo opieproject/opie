@@ -35,8 +35,10 @@ protected:
 /*  void accept(); */
 /*  void reject(); */
  void updateStorageCombo();
+ void updateLocationCombo();
   
 private slots:
+    void setKeyButton(const QString &);
  void setLocation(const QString &);
  void cleanUp();    
  void setVolume(int);

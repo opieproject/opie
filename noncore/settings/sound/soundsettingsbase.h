@@ -47,7 +47,8 @@ public:
     QCheckBox* AlertCheckBox;
     QLabel* TextLabel1;
     QComboBox* LocationComboBox;
-
+    QComboBox* keyComboBox;
+    bool keyReset;
 protected:
     QGridLayout* SoundSettingsBaseLayout;
     QVBoxLayout* GroupBox3Layout;

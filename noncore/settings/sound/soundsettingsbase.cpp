@@ -226,13 +226,37 @@ SoundSettingsBase::SoundSettingsBase( QWidget* parent,  const char* name, bool m
     Layout11->addWidget( AlertCheckBox );
 
     TextLabel1 = new QLabel( privateLayoutWidget, "TextLabel1" );
-    TextLabel1->setText( tr( "Location" ) );
+    TextLabel1->setText( tr( "Location:" ) );
     Layout11->addWidget( TextLabel1 );
+
 
     LocationComboBox = new QComboBox( FALSE, privateLayoutWidget, "LocationComboBox" );
     Layout11->addWidget( LocationComboBox );
-    Layout12_2->addWidget( GroupBox1 );
 
+    QLabel *TextLabelKey;
+    TextLabelKey = new QLabel( privateLayoutWidget, "TextLabelKey" );
+    TextLabelKey->setText( tr( "Record Key:" ) );
+
+    keyComboBox = new QComboBox( FALSE, privateLayoutWidget, "keyComboBox" );
+    keyComboBox->insertItem( tr( "" ) );
+    keyComboBox->insertItem( tr( "Taskbar Icon" ) );
+    keyComboBox->insertItem( tr( "Key_Escape" ) );
+    keyComboBox->insertItem( tr( "Key_Space" ) );
+    keyComboBox->insertItem( tr( "Key_Home" ) );
+    keyComboBox->insertItem( tr( "Key_Calender" ) );
+    keyComboBox->insertItem( tr( "Key_Contacts" ) );
+    keyComboBox->insertItem( tr( "Key_Menu" ) );
+    keyComboBox->insertItem( tr( "Key_Mail" ) );
+
+    Layout11->addWidget( TextLabelKey );
+
+    Layout11->addWidget( keyComboBox );
+
+    QSpacerItem* spacer_9 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
+    Layout11->addItem( spacer_9 );
+
+
+    Layout12_2->addWidget( GroupBox1 );
 // //     touchsound = new QCheckBox( this, "touchsound" );
 // //     touchsound->setText( tr( "Screen sounds" ) );
 // //     Layout12_2->addWidget( touchsound );
@@ -240,8 +264,6 @@ SoundSettingsBase::SoundSettingsBase( QWidget* parent,  const char* name, bool m
 // //     keysound = new QCheckBox( this, "keysound" );
 // //     keysound->setText( tr( "Keyboard sounds" ) );
 // //     Layout12_2->addWidget( keysound );
-     QSpacerItem* spacer_9 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
-     Layout12_2->addItem( spacer_9 );
 
     SoundSettingsBaseLayout->addLayout( Layout12_2, 0, 1 );
 }

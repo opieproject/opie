@@ -35,6 +35,8 @@
 SoundSettings::SoundSettings( QWidget* parent,  const char* name, WFlags fl )
     : SoundSettingsBase( parent, name, TRUE, fl )
 {
+    keyReset=FALSE;
+
     Config config( "qpe");
     config.setGroup( "Volume" );
     volume->setValue(100-config.readNumEntry("VolumePercent"));
@@ -61,12 +63,17 @@ SoundSettings::SoundSettings( QWidget* parent,  const char* name, WFlags fl )
     stereoCheckBox->setChecked(cfg.readNumEntry("Stereo", 0));
     sixteenBitCheckBox->setChecked(cfg.readNumEntry("SixteenBit", 1));
 
+    cfg.setGroup("Defaults");
+    keyComboBox->setCurrentItem(cfg.readNumEntry("toggleKey") );
+
     updateStorageCombo();
+
     connect(volume, SIGNAL(valueChanged(int)), this, SLOT(setVolume(int)));
     connect(mic, SIGNAL(valueChanged(int)), this, SLOT(setMic(int)));
     connect(qApp, SIGNAL( volumeChanged(bool) ), this, SLOT( volumeChanged(bool) ) );
     connect(qApp, SIGNAL( micChanged(bool) ), this, SLOT ( micChanged(bool) ) );
     connect( LocationComboBox,SIGNAL(activated(const QString &)),this,SLOT( setLocation(const QString &)));
+    connect( keyComboBox,SIGNAL(activated(const QString &)),this,SLOT(setKeyButton(const QString &)));
 //     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
 }
 
@@ -157,6 +164,11 @@ void SoundSettings::micChanged( bool )
 
 void SoundSettings::updateStorageCombo() {
 
+   Config config( "Vmemo" );
+   config.setGroup( "System" );
+   QString loc = config.readEntry("RecLocation","/");
+int i=0;
+int set=0; 
    StorageInfo storageInfo;
    QString sName, sPath;
    QStringList list;
@@ -167,21 +179,27 @@ void SoundSettings::updateStorageCombo() {
             const QString path = (*it)->path();
             qDebug("storage name "+name +" storage path is "+path);
             list << name + ": " +path;
+            if( loc.find( path,0,TRUE) != -1)
+                set = i;      
 //             if(dit.current()->file().find(path) != -1 ) storage=name;
+            i++;
         }
         LocationComboBox->insertStringList(list);
+        qDebug("set item %d", set);
+        LocationComboBox->setCurrentItem(set);
 }
 
 void SoundSettings::setLocation(const QString & string) {
    Config config( "Vmemo" );
    config.setGroup( "System" );
    config.writeEntry("RecLocation",string);
-
+   qDebug("set location "+string);
+   config.write();
 }
 
 void SoundSettings::cleanUp() {
-  qDebug("cleanup");
-  Config config( "qpe" );
+    qDebug("cleanup");
+    Config config( "qpe" );
     config.setGroup( "Volume" );
     config.writeEntry("VolumePercent",100-volume->value());
     config.writeEntry("Mic",100-mic->value());
@@ -197,4 +215,19 @@ void SoundSettings::cleanUp() {
     cfg.writeEntry("SampleRate",sampleRate->currentText());
     cfg.writeEntry("Stereo",stereoCheckBox->isChecked());
     cfg.writeEntry("SixteenBit",sixteenBitCheckBox->isChecked());
+
+    if(keyReset) QCopEnvelope ("QPE/System", "restart()");
+        
+}
+
+void SoundSettings::setKeyButton(const QString &name) {
+    Config cfg("Vmemo");
+    cfg.setGroup("Defaults");
+    cfg.writeEntry( "toggleKey", keyComboBox->currentItem()  );
+    keyReset = TRUE;
+    cfg.write();
+}
+
+void SoundSettings::updateLocationCombo() {
+
 }
