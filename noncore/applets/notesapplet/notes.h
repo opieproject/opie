@@ -41,7 +41,7 @@ public:
     QListBox *box;
     QPushButton *saveButton, *deleteButton, *newButton;
     QString FileNamePath;
-    bool doPopulate;
+    bool loaded, edited, doPopulate;
     void save();
     void populateBox();
     void load();
@@ -49,7 +49,6 @@ public:
 private:
       QTimer menuTimer;
       DocLnk *doc;
-      bool loaded, edited;
       QString oldDocName;
       void focusOutEvent( QFocusEvent * );
       void load(const QString&);
