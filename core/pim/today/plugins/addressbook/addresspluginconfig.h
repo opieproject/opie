@@ -26,7 +26,7 @@
 #include <opie/ocolorbutton.h>
 
 class AddressBookPluginConfig : public TodayConfigWidget {
-
+    Q_OBJECT
 
 public:
 
