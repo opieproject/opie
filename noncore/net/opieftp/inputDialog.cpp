@@ -23,7 +23,7 @@ InputDialog::InputDialog( QWidget* parent,  const char* name, bool modal, WFlags
     : QDialog( parent, name, modal, fl )
 {
     if ( !name )
-  setName( "InputDialog" );
+        setName( "InputDialog" );
     resize( 234, 50 ); 
     setMaximumSize( QSize( 240, 50 ) );
     setCaption( tr(name ) );
