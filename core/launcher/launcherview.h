@@ -240,7 +240,6 @@ private:
 #endif
     BusyIndicatorType busyType;
     QTimer m_eyeTimer;
-    QMap<QString,LauncherItem*> m_itemCache;
 };
 
 #endif // LAUNCHERVIEW_H

@@ -131,7 +131,7 @@ LauncherItem::~LauncherItem()
 {
     LauncherIconView* liv = (LauncherIconView*)iconView();
     if ( liv->busyItem() == this )
-    liv->setBusy(FALSE);
+        liv->setBusy(FALSE);
     delete app;
 }
 
@@ -276,6 +276,7 @@ LauncherIconView::LauncherIconView( QWidget* parent, const char* name )
 
 LauncherIconView::~LauncherIconView()
 {
+    odebug << "LauncherIconView::~LauncherIconView()" << oendl;
 #if 0 // debuggery
     QListIterator<AppLnk> it(hidden);
     AppLnk* l;
@@ -429,14 +430,7 @@ void LauncherIconView::setEyePixmap(const QPixmap&aPixmap,const QString&aFile,in
 {
     int s = ( bigIcns ) ? AppLnk::bigIconSize() : AppLnk::smallIconSize();
     if (s!=width) return;
-    LauncherItem*item = 0;
-    QMap<QString,LauncherItem*>::Iterator it;
-    if ( ( it = m_itemCache.find(aFile))!=m_itemCache.end()) {
-        item = it.data();
-        m_itemCache.remove(it);
-    } else {
-        item = findDocItem(aFile);
-    }
+    LauncherItem*item = findDocItem(aFile);
     if (!item||!item->isEyeImage()) return;
     item->setEyePixmap(aPixmap);
 }
@@ -465,7 +459,6 @@ void LauncherIconView::requestEyePix(const LauncherItem*item)
     if (item->isEyeImage()) {
         checkCallback();
         int s = ( bigIcns ) ? AppLnk::bigIconSize() : AppLnk::smallIconSize();
-        m_itemCache[item->appLnk()->file()]=(LauncherItem*)item;
         m_EyeCallBack->requestThumb(item->appLnk()->file(),s,s);
     }
 }
@@ -476,7 +469,6 @@ void LauncherIconView::stopEyeTimer()
         delete m_EyeCallBack;
         m_EyeCallBack=0;
     }
-    m_itemCache.clear();
     m_eyeTimer.stop();
 }
 
@@ -702,23 +694,20 @@ void LauncherView::hideIcons()
 void LauncherView::setToolsEnabled(bool y)
 {
     if ( !y != !tools ) {
-    if ( y ) {
-        tools = new QHBox(this);
-
-        // Type filter
-        typemb = new QComboBox(tools);
-        QSizePolicy p = typemb->sizePolicy();
-        p.setHorData(QSizePolicy::Expanding);
-        typemb->setSizePolicy(p);
-
-        // Category filter
-        updateTools();
-        tools->show();
-
-    } else {
-        delete tools;
-        tools = 0;
-    }
+        if ( y ) {
+            tools = new QHBox(this);
+            // Type filter
+            typemb = new QComboBox(tools);
+            QSizePolicy p = typemb->sizePolicy();
+            p.setHorData(QSizePolicy::Expanding);
+            typemb->setSizePolicy(p);
+            // Category filter
+            updateTools();
+            tools->show();
+        } else {
+            delete tools;
+            tools = 0;
+        }
     }
 }
 
@@ -726,8 +715,9 @@ void LauncherView::updateTools()
 {
     disconnect( typemb, SIGNAL(activated(int)),
             this, SLOT(showType(int)) );
-    if ( catmb ) disconnect( catmb, SIGNAL(signalSelected(int)),
-            this, SLOT(showCategory(int)) );
+    if ( catmb ) {
+        disconnect( catmb, SIGNAL(signalSelected(int)),this,SLOT(showCategory(int)));
+    }
 
     // ### I want to remove this
     icons->updateCategoriesAndMimeTypes();
@@ -738,47 +728,48 @@ void LauncherView::updateTools()
     QStringList types;
     typelist = icons->mimeTypes();
     for (QStringList::ConstIterator it = typelist.begin(); it!=typelist.end(); ++it) {
-    QString t = *it;
-    if ( t.left(12) == "application/" ) {
-        MimeType mt(t);
-        const AppLnk* app = mt.application();
-        if ( app )
-        t = app->name();
-        else
-        t = t.mid(12);
-    } else {
-        t[0] = t[0].upper();
-    }
-    types += t;
+        QString t = *it;
+        if ( t.left(12) == "application/" ) {
+            MimeType mt(t);
+            const AppLnk* app = mt.application();
+            if ( app )
+                t = app->name();
+            else
+                t = t.mid(12);
+        } else {
+            t[0] = t[0].upper();
+        }
+        types += t;
     }
     types << tr("All types");
     prev = typemb->currentText();
     typemb->clear();
     typemb->insertStringList(types);
     for (int i=0; i<typemb->count(); i++) {
-    if ( typemb->text(i) == prev ) {
-        typemb->setCurrentItem(i);
-        break;
+        if ( typemb->text(i) == prev ) {
+            typemb->setCurrentItem(i);
+            break;
+        }
     }
+    if ( prev.isNull() ) {
+        typemb->setCurrentItem(typemb->count()-1);
     }
-    if ( prev.isNull() )
-    typemb->setCurrentItem(typemb->count()-1);
 
     int pcat = catmb ? catmb->currentCategory() : -2;
     if ( !catmb )
-    catmb = new CategorySelect(tools);
+        catmb = new CategorySelect(tools);
     Categories cats( 0 );
     cats.load( categoryFileName() );
     QArray<int> vl( 0 );
     catmb->setCategories( vl, "Document View", // No tr
-    tr("Document View") );
+        tr("Document View") );
     catmb->setRemoveCategoryEdit( TRUE );
     catmb->setAllCategories( TRUE );
     catmb->setCurrentCategory(pcat);
 
     // if type has changed we need to redisplay
     if ( typemb->currentText() != prev )
-    showType( typemb->currentItem() );
+        showType( typemb->currentItem() );
 
     connect(typemb, SIGNAL(activated(int)), this, SLOT(showType(int)));
     connect(catmb, SIGNAL(signalSelected(int)), this, SLOT(showCategory(int)));
@@ -792,12 +783,12 @@ void LauncherView::sortBy(int s)
 void LauncherView::showType(int t)
 {
     if ( t >= (int)typelist.count() ) {
-    icons->setTypeFilter("",TRUE);
+        icons->setTypeFilter("",TRUE);
     } else {
-    QString ty = typelist[t];
-    if ( !ty.contains('/') )
-        ty += "/*";
-    icons->setTypeFilter(ty,TRUE);
+        QString ty = typelist[t];
+        if ( !ty.contains('/') )
+            ty += "/*";
+        icons->setTypeFilter(ty,TRUE);
     }
 }
 
@@ -808,21 +799,22 @@ void LauncherView::showCategory( int c )
 
 void LauncherView::setViewMode( ViewMode m )
 {
+    odebug << "LauncherView::setViewMode( ViewMode m )" << oendl;
     if ( vmode != m ) {
-    bool bigIcons = m == Icon;
-    icons->viewport()->setUpdatesEnabled( FALSE );
-    icons->setBigIcons( bigIcons );
-    switch ( m ) {
-        case List:
-        icons->setItemTextPos( QIconView::Right );
+        bool bigIcons = m == Icon;
+        icons->viewport()->setUpdatesEnabled( FALSE );
+        icons->setBigIcons( bigIcons );
+        switch ( m ) {
+            case List:
+            icons->setItemTextPos( QIconView::Right );
         break;
         case Icon:
-        icons->setItemTextPos( QIconView::Bottom );
+            icons->setItemTextPos( QIconView::Bottom );
         break;
-    }
-    icons->hideOrShowItems( FALSE );
-    icons->viewport()->setUpdatesEnabled( TRUE );
-    vmode = m;
+        }
+        icons->hideOrShowItems( FALSE );
+        icons->viewport()->setUpdatesEnabled( TRUE );
+        vmode = m;
     }
 }
 
@@ -1046,6 +1038,7 @@ void LauncherView::itemPressed( int btn, QIconViewItem *item )
 
 void LauncherView::removeAllItems()
 {
+    odebug << "LauncherView::removeAllItems()" << oendl;
     icons->clear();
 }
 
@@ -1168,7 +1161,7 @@ void LauncherThumbReceiver::requestThumb(const QString&file,int width,int height
     rItem.width = width;
     rItem.height = height;
     m_inThumbNail.append(rItem);
-    QTimer::singleShot(0, this, SLOT(sendRequest()));
+    QTimer::singleShot(2, this, SLOT(sendRequest()));
 }
 
 void LauncherThumbReceiver::sendRequest()

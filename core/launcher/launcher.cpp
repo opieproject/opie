@@ -357,12 +357,12 @@ void LauncherTabWidget::setBusy(bool on)
     currentView()->setBusy(TRUE);
     else {
     for ( int i = 0; i < categoryBar->count(); i++ ) {
-	if (categoryBar->tab(i)) {
-	    LauncherView *view = ((LauncherTab *)categoryBar->tab(i))->view;
-	    view->setBusy( FALSE );
-	} else {
-	    odebug << "Averting Disaster with tab " << i << " == NULL! " << oendl;
-	}
+    if (categoryBar->tab(i)) {
+        LauncherView *view = ((LauncherTab *)categoryBar->tab(i))->view;
+        view->setBusy( FALSE );
+    } else {
+        odebug << "Averting Disaster with tab " << i << " == NULL! " << oendl;
+    }
     }
     }
 }
@@ -601,9 +601,11 @@ void Launcher::properties( AppLnk *appLnk )
     // Not supported: flat is simpler for the user
     } else {
 /* ### libqtopia FIXME also moving docLnks... */
-    LnkProperties prop(appLnk,0 );
+        LnkProperties prop(appLnk,0 );
 
-    QPEApplication::execDialog( &prop );
+        if (QPEApplication::execDialog( &prop )==QDialog::Accepted && tabs->currentView()==tabs->docView()) {
+            tabs->docView()->updateTools();
+        }
     }
 }
 
