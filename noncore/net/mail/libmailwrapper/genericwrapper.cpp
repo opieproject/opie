@@ -148,7 +148,6 @@ void Genericwrapper::traverseBody(RecBodyP&target,mailmessage*message,mailmime*m
     char*data = 0;
     size_t len;
     clistiter * cur = 0;
-    QString b;
     RecPartP part = new RecPart();
 
     switch (mime->mm_type) {
@@ -159,25 +158,28 @@ void Genericwrapper::traverseBody(RecBodyP&target,mailmessage*message,mailmime*m
         r = mailmessage_fetch_section(message,mime,&data,&len);
         part->setSize(len);
         part->setPositionlist(countlist);
-        b = gen_attachment_id();
-        part->setIdentifier(b);
         fillSingleBody(part,message,mime);
+        if (part->Identifier().isEmpty()) {
+            part->setIdentifier(gen_attachment_id());
+        }
+
         if (part->Type()=="text" && target->Bodytext().isNull()) {
             encodedString*rs = new encodedString();
             rs->setContent(data,len);
             encodedString*res = decode_String(rs,part->Encoding());
             if (countlist.count()>2) {
-                bodyCache[b]=rs;
+                bodyCache[part->Identifier()]=rs;
                 target->addPart(part);
             } else {
                 delete rs;
             }
+            QString b;
             b = QString(res->Content());
             delete res;
             target->setBodytext(b);
             target->setDescription(part);
         } else {
-            bodyCache[b]=new encodedString(data,len);
+            bodyCache[part->Identifier()]=new encodedString(data,len);
             target->addPart(part);
         }
     }
@@ -214,11 +216,10 @@ void Genericwrapper::traverseBody(RecBodyP&target,mailmessage*message,mailmime*m
             r = mailmessage_fetch_section(message,mime,&data,&len);
             part->setSize(len);
             part->setPositionlist(countlist);
-            b = gen_attachment_id();
-            part->setIdentifier(b);
+            part->setIdentifier(gen_attachment_id());
             part->setType("message");
             part->setSubtype("rfc822");
-            bodyCache[b]=new encodedString(data,len);
+            bodyCache[part->Identifier()]=new encodedString(data,len);
             target->addPart(part);
         }
         if (mime->mm_data.mm_message.mm_msg_mime != NULL) {
