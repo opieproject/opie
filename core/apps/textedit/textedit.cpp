@@ -350,6 +350,8 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     connect( nStart, SIGNAL( toggled(bool) ), this, SLOT( changeStartConfig(bool) ) );
     nStart->setToggleAction(TRUE);
     nStart->addTo( font );
+    font->insertSeparator();
+   font->insertItem(tr("About"), this, SLOT( doAbout()) );
 
     mb->insertItem( tr( "File" ), file );
     mb->insertItem( tr( "Edit" ), edit );
@@ -412,6 +414,7 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
      } else {
          fileOpen();
      }
+     
     viewSelection = cfg.readNumEntry( "FileView", 0 );
 }
 
@@ -504,7 +507,7 @@ void TextEdit::fileOpen()
     Config cfg("TextEdit");
     cfg.setGroup("View");
     bool b=FALSE;
-        if(cfg.readEntry("useOldFileDialog") == "TRUE")
+       if(cfg.readEntry("useOldFileDialog") == "TRUE")
     b=TRUE;
     if(!b) {
         QString str = OFileDialog::getOpenFileName( 1,"/","", "text/plain", this );
@@ -530,11 +533,11 @@ void TextEdit::fileOpen()
                 if( fileName != "Unnamed" || fileName != "Empty Text"  ) {
                     currentFileName = fileName;
                     qDebug("please open "+currentFileName);
-                    openFile(str );
+                    openFile(currentFileName );
                 }
             }
             viewSelection = browseForFiles->SelectionCombo->currentItem();
-        }
+         }
         delete browseForFiles;
         editor->setEdited( FALSE);
         edited1=FALSE;
@@ -663,8 +666,10 @@ void TextEdit::openFile( const QString &f )
               filer = sf.file();
               break;
         }
-    } else
+    } else {
         filer = f;
+        fileIs = TRUE;
+    }
         
     DocLnk nf;
     nf.setType("text/plain");
@@ -742,11 +747,22 @@ bool TextEdit::save()
             mode_t mode;
             stat(file.latin1(), &buf);
             mode = buf.st_mode;
-
-            doc->setName( name);
-            FileManager fm;
-            if ( !fm.saveFile( *doc, rt ) ) {
-                return false;
+            if(!fileIs) {
+                doc->setName( name);
+                FileManager fm;
+                if ( !fm.saveFile( *doc, rt ) ) {
+                    return false;
+                }
+            } else {
+                qDebug("regular save file");
+                QFile f(file);
+                 if( f.open(IO_WriteOnly)) {
+                     f.writeBlock(rt,rt.length());
+                 } else {
+                     QMessageBox::message("Text Edit","Write Failed");
+                 return false;
+                 }
+                     
             }
             editor->setEdited( FALSE);
             edited1=FALSE;
@@ -968,4 +984,10 @@ void TextEdit::receive(const QCString&msg, const QByteArray&) {
       qDebug("bugger all");
   }
 
+}
+void TextEdit::doAbout() {
+    QMessageBox::about(0,"Text Edit","Text Edit is copyright\n"
+                         "2000 Trolltech AS, and\n"
+                         "2002 by L.J.Potter \nljp@llornkcor.com\n"
+                         "and is licensed under the GPL");
 }

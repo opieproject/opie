@@ -65,9 +65,11 @@ public slots:
     void editorChanged();
 void  receive(const QCString&, const QByteArray&);
 protected:
+    bool fileIs; 
     void closeEvent( QCloseEvent *e );
     void doSearchBar();
 private slots:
+    void doAbout();
     void setDocument(const QString&);
     void changeFont();
     void fileNew();
