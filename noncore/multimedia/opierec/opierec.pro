@@ -20,6 +20,7 @@ DEPENDPATH  += $(OPIEDIR)/include
 LIBS            += -lqpe -lpthread
 INTERFACES  =
 TARGET    = opierec
+DESTDIR=$(OPIEDIR)/bin
 
 include ( $(OPIEDIR)/include.pro )
 
