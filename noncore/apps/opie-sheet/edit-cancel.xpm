@@ -1,0 +1,25 @@
+/* XPM */
+static const char *edit_cancel_xpm[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 3 1",
+". c red",
+"X c #ffffffffffff",
+"  c None",
+/* pixels */
+"                ",
+"                ",
+"     .....      ",
+"   .........    ",
+"  ...........   ",
+"  ..XX...XX..   ",
+" ...XXX.XXX...  ",
+" ....XXXXX....  ",
+" .....XXX.....  ",
+" ....XXXXX....  ",
+" ...XXX.XXX...  ",
+"  ..XX...XX..   ",
+"  ...........   ",
+"   .........    ",
+"     .....      ",
+"                ",
+};
