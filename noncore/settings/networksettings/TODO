@@ -1,6 +1,16 @@
+Types:
+-Ethernet Connection (Done)
+-ISDN Connection
+-Modem COnnection (Started)
+-xDSL connection
+-Token Ring Connection
+-CIPE (VPN) connection (ipsec?)
+-Wireless Connection (Done)
+-Bluetooth
+-IPChains?
+
 test WEP
-WEP key in file wireless.conf is not encrypted !, therefore it is very easy to get the key out of the zaurus..
-WEP transimtion rat
+Add WEP transimtion rate
 1 or 2
 5.5
 1
@@ -10,13 +20,19 @@ udchcp needs to output the dhcp information so interfaces can read it
 
 interfacesetupimp really doesn't need a interface* pointer
 
-Possible other modules to write: ppp, ipsec, bluetooth, ipchains
-
 PPP module needs to scan pppd.tdb to see what is currently active
 
-WLAN - add possiblity to input text or hex without knowing "s:"
+WLAN
+- add possiblity to input text or hex without knowing "s:"
+- Handle "any" and any the same way in config
 
 Interface setupimp needs to use kernel calls.
+
+Add a route/DNS editor under the ViewAdvancedInfo button
+
+Use a true TCP/IP widget
+
+Make it so that pcmcia doesn't need to be stopped/started for wlan
 
 Automaticly update the main list of interfaces:
 > That would be me. :-D  netlink, can you point me in the right

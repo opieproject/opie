@@ -231,6 +231,9 @@ void WLANImp::accept(){
     initpath = "/etc/rc.d/init.d";
   else if( QDir("/etc/init.d").exists() )
     initpath = "/etc/init.d";
+
+  // It would be kinda cool if we didn't have to do this and could just to ifup/down
+  
   if( initpath )
     system(QString("%1/pcmcia stop").arg(initpath));
   if( initpath )
