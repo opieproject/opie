@@ -86,6 +86,7 @@ private:
     void toggleButton( int );
     void setToggleButton( int, bool );
 
+    QString backgroundPix;
     QSlider *slider;
     QPixmap *pixmaps[3];
     QImage *currentFrame;

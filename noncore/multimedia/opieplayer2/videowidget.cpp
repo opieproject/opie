@@ -86,11 +86,16 @@ VideoWidget::VideoWidget(QWidget* parent, const char* name, WFlags f) :
     Config cfg("OpiePlayer");
     cfg.setGroup("VideoWidget");
 
-    QString backgroundPix, Button0aPix, Button0bPix, controlsPix;
-    backgroundPix=cfg.readEntry( "backgroundPix", "opieplayer/metalFinish");
+    QString Button0aPix, Button0bPix, controlsPix;
+    //backgroundPix=cfg.readEntry( "backgroundPix", "opieplayer/metalFinish");
     Button0aPix=cfg.readEntry( "Button0aPix", "opieplayer/mediaButton0a");
     Button0bPix=cfg.readEntry( "Button0bPix","opieplayer/mediaButton0b");
     controlsPix=cfg.readEntry( "controlsPix","opieplayer/mediaControls0" );
+
+    cfg.setGroup("AudioWidget");
+    QString skin = cfg.readEntry("Skin","default");
+    QString skinPath = "opieplayer/skins/" + skin;
+    backgroundPix =   QString("%1/background").arg(skinPath) ;
 
     setBackgroundPixmap( Resource::loadPixmap( backgroundPix) );
     pixmaps[0] = new QPixmap( Resource::loadPixmap( Button0aPix ) );
@@ -123,7 +128,7 @@ VideoWidget::VideoWidget(QWidget* parent, const char* name, WFlags f) :
     setPlaying( mediaPlayerState->playing() );
 
     videoFrame = new XineVideoWidget( 240, 155 ,this, "Video frame" );
-    videoFrame->setGeometry( QRect( 0, 15 , 240 ,170  ) );
+
 }
 
 
@@ -269,17 +274,17 @@ void VideoWidget::mouseReleaseEvent( QMouseEvent *event ) {
 
 
 void VideoWidget::makeVisible() {
-    if ( mediaPlayerState->fullscreen() ) {
-        setBackgroundMode( QWidget::NoBackground );
-        showFullScreen();
-        resize( qApp->desktop()->size() );
-        slider->hide();
-    } else {
-        setBackgroundPixmap( Resource::loadPixmap( "opieplayer/metalFinish" ) );
-        showNormal();
-        showMaximized();
-        slider->show();
-    }
+  if ( mediaPlayerState->fullscreen() ) {
+    setBackgroundMode( QWidget::NoBackground );
+    showFullScreen();
+    resize( qApp->desktop()->size() );
+    slider->hide();
+  } else {
+    setBackgroundPixmap( Resource::loadPixmap(  backgroundPix ) );
+    showNormal();
+    showMaximized();
+    slider->show();
+  }
 }
 
 
@@ -290,9 +295,12 @@ void VideoWidget::paintEvent( QPaintEvent * ) {
         // Clear the background
       p.setBrush( QBrush( Qt::black ) );
       videoFrame->setGeometry( QRect( 0, 0 , 240 ,340  ) );
-    
+
     } else {
+
+      videoFrame->setGeometry( QRect( 0, 15 , 240 ,170  ) );
          // draw the buttons
+
         for ( int i = 0; i < numButtons; i++ ) {
             paintButton( &p, i );
         }
