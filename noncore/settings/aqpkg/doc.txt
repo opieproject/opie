@@ -1,0 +1,49 @@
+<qt><h1>Documentation for AQPkg</h1><p>
+AQPkg is a package manager for the Sharp Zaurus.<br>
+Basic Instructions:<br>
+On startup, you will be shown a window. The main part of the window is taken up
+by a list box showing packages. The packages shown will depend on the server selected.<br>
+The servers list contains network servers containing feeds of packages that can be downloaded 
+and installed onto your Zaurus. These are held in the file /etc/ipkg.conf and can be maintained 
+using AQPkg. In addition to the servers defined in ipkg.conf file, there are two other servers -
+local and local IPKGs. These are not network servers but views of yours Zaurus.<br>
+The local server shows all installed packages, and the local IPKGs server shows all ipks
+that are stored on your Zaurus.<br>
+On the local server, you can only remove packages. On the local IPKGs server you can only 
+install and delete packages - removing installed packages is currently not working. On all other 
+servers you can install, uninstall, upgrade and download packages.<br>
+To get the latest package list for a server (or refresh the view), select the server you
+wish to update and click the Refresh List button.<br>
+To download a package from a remote server, select the server (any except local and local IPKGs), 
+then select the package(s) you wish to download (by tapping in the box next to the package 
+name so that a tick appears in the box) and click the Download button. Enter the path where you 
+want the package to be downloaded to and click OK to download the package.<br>
+To install, upgrade or remove a package select the packages you wish to install and click the Apply
+button. You will then be shown a dialog which allows you to select which destination you wish
+to install the package to, which packages will be installed, removed and upgraded. You can also
+set various options. (for the moment, see the documentation for IPKG for more details on these
+options). To start the process, click Start. This will perform the necessary operations and
+will show you what is happening. Once everything has completed click the Close button.<br>
+Note: Currently, the operation to perform for a package is automatically decided based on the
+following rules:<br>
+If a package isn't installed, then it will be installed.<br>
+If a package is installed and there isn't a later version available then it will be removed.<br>
+If a package is installed and a different version is available then it will be upgraded. (Note,
+I haven't yet found a way to determine if an available package is newer or older than the one
+currently installed so it is possible that a package may be downgraded).<br>
+As previously mentioned, a package can be explicitly removed by using the local server.<br><br>
+A couple of last notes, in the main window, the following may be useful:<br>
+If a package is installed then it will have (installed) after it.<br>
+If a different version is available then it will have a * after the package name.<br>
+You can view details of a package by tapping twice (quickly) on the package name (NOT the
+box next to the package name). This will show you a brief description of the package, the
+version installed (if it is installed), and the version available for download/installation
+(if a different on is available).<br><br><br>
+Well, hope you enjoy using this program. If you have any ideas/suggestions/ideas for improvements
+then please let me know at andy.qua@blueyonder.co.uk.<br><br>
+Thanks for using this.
+Andy.
+</p></qt>
+
+
+

@@ -1,0 +1,132 @@
+<!DOCTYPE UI><UI>
+<class>InstallOptionsDlg</class>
+<widget>
+    <class>QDialog</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>InstallOptionsDlg</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>158</width>
+            <height>205</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>Options</string>
+    </property>
+    <property stdset="1">
+        <name>sizeGripEnabled</name>
+        <bool>false</bool>
+    </property>
+    <grid>
+        <property stdset="1">
+            <name>margin</name>
+            <number>11</number>
+        </property>
+        <property stdset="1">
+            <name>spacing</name>
+            <number>6</number>
+        </property>
+        <widget row="0"  column="0" >
+            <class>QGroupBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>GroupBox1</cstring>
+            </property>
+            <property stdset="1">
+                <name>title</name>
+                <string>Options</string>
+            </property>
+            <grid>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>11</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>6</number>
+                </property>
+                <widget row="0"  column="0" >
+                    <class>QCheckBox</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>forceDepends</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Force Depends</string>
+                    </property>
+                </widget>
+                <widget row="1"  column="0" >
+                    <class>QCheckBox</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>forceReinstall</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Force Reinstall</string>
+                    </property>
+                </widget>
+                <widget row="2"  column="0" >
+                    <class>QCheckBox</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>forceRemove</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Force Remove</string>
+                    </property>
+                </widget>
+                <widget row="3"  column="0" >
+                    <class>QCheckBox</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>forceOverwrite</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Force Overwrite</string>
+                    </property>
+                </widget>
+                <widget row="4"  column="0" >
+                    <class>QCheckBox</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>makeLinks</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Link to root</string>
+                    </property>
+                </widget>
+            </grid>
+        </widget>
+        <widget row="1"  column="0" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>btnOK</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>OK</string>
+            </property>
+        </widget>
+    </grid>
+</widget>
+<connections>
+    <connection>
+        <sender>btnOK</sender>
+        <signal>clicked()</signal>
+        <receiver>InstallOptionsDlg</receiver>
+        <slot>accept()</slot>
+    </connection>
+</connections>
+</UI>
