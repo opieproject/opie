@@ -97,7 +97,6 @@ protected:
 
 private:
 //    Ticker songInfo;
-    QPixmap pixBg;
     QImage  imgUp;
     QImage  imgDn;
     QString skin;

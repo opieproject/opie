@@ -94,7 +94,6 @@ private:
     void setToggleButton( int, bool );
     int skipDirection;
     QString skin;
-    QPixmap pixBg;
     QImage  imgUp;
     QImage  imgDn;
 

@@ -95,7 +95,7 @@ AudioWidget::AudioWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
     // color of background, frame, degree of transparency
 
     QString skinPath = "opieplayer2/skins/" + skin;
-    pixBg = QPixmap( Resource::loadPixmap( QString("%1/background").arg(skinPath) ) );
+    backgroundPixmap = QPixmap( Resource::loadPixmap( QString("%1/background").arg(skinPath) ) );
     imgUp = QImage( Resource::loadImage( QString("%1/skin_up").arg(skinPath) ) );
     imgDn = QImage( Resource::loadImage( QString("%1/skin_down").arg(skinPath) ) );
 
@@ -123,7 +123,7 @@ AudioWidget::AudioWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
         buttons.insert( i, button );
     }
 
-    setBackgroundPixmap( pixBg );
+    setBackgroundPixmap( backgroundPixmap );
 
     songInfo.setFocusPolicy( QWidget::NoFocus );
 //    changeTextColor( &songInfo );
@@ -136,7 +136,7 @@ AudioWidget::AudioWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
     slider.setMinValue( 0 );
     slider.setMaxValue( 1 );
     slider.setFocusPolicy( QWidget::NoFocus );
-    slider.setBackgroundPixmap( pixBg );
+    slider.setBackgroundPixmap( backgroundPixmap );
 
 //     Config cofg("qpe");
 //     cofg.setGroup("Appearance");
@@ -205,8 +205,8 @@ void AudioWidget::resizeEvent( QResizeEvent * ) {
     upperLeftOfButtonMask.ry() = (( h - imgUp.height() ) / 2) - 10;
     QPoint p = upperLeftOfButtonMask;
 
-    QPixmap pixUp = combineImageWithBackground( imgUp, pixBg, p );
-    QPixmap pixDn = combineImageWithBackground( imgDn, pixBg, p );
+    QPixmap pixUp = combineImageWithBackground( imgUp, backgroundPixmap, p );
+    QPixmap pixDn = combineImageWithBackground( imgDn, backgroundPixmap, p );
 
     for ( uint i = 0; i < buttons.count(); i++ ) {
         if ( !buttons[i].mask.isNull() ) {
@@ -404,7 +404,7 @@ void AudioWidget::paintEvent( QPaintEvent * pe ) {
         QPixmap pix( pe->rect().size() );
         QPainter p( &pix );
         p.translate( -pe->rect().topLeft().x(), -pe->rect().topLeft().y() );
-        p.drawTiledPixmap( pe->rect(), pixBg, pe->rect().topLeft() );
+        p.drawTiledPixmap( pe->rect(), backgroundPixmap, pe->rect().topLeft() );
         for ( unsigned int i = 0; i < buttons.count(); i++ )
             paintButton( p, buttons[ i ] );
         QPainter p2( this );
