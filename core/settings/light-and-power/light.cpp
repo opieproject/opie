@@ -124,6 +124,7 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
     brightness-> setPageStep ( QMAX( 1, 256 / m_bres ));
     brightness-> setValue ( bright );
 
+//
     if (m_cres) {
         contrast-> setTickInterval ( QMAX( 16, 256 / m_cres ));
         contrast-> setLineStep ( QMAX( 1, 256 / m_cres ));
@@ -180,9 +181,11 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
 
     if ( PowerStatusManager::readStatus ( ). acStatus ( ) != PowerStatus::Online ) {
         tabs-> setCurrentPage ( 0 );
+	brightness->setFocus();
     }
     else {
         tabs-> setCurrentPage ( 1 );
+	brightness_ac->setFocus();
     }
 
     connect ( brightness, SIGNAL( valueChanged(int)), this, SLOT( setBacklight(int)));
