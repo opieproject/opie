@@ -358,6 +358,18 @@ void AddressbookWindow::slotItemEdit()
 
 void AddressbookWindow::slotItemDuplicate()
 {
+    if(!syncing)
+    {
+        Opie::OPimContact entry = m_abView->currentEntry();
+        entry.assignUid();
+        m_abView->addEntry( entry );
+        m_abView->setCurrentUid( entry.uid() );
+    }
+    else
+    {
+        QMessageBox::warning( this, tr("Contacts"),
+                              tr("Can not edit data, currently syncing") );
+    }
 }
 
 void AddressbookWindow::slotItemDelete()
