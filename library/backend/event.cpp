@@ -614,14 +614,11 @@ QDateTime Event::end() const {
 */
 QDateTime Event::end( bool actual ) const
 {
-    QDateTime dt = TimeConversion::fromUTC( endUTC );
-
+    /* small work around... */
     if ( actual && typ == AllDay ) {
-	QTime t = dt.time();
-	t.setHMS( 23, 59, 59 );
-	dt.setTime( t );
+	return QDateTime( TimeConversion::fromUTC( startUTC ).date(), QTime(23, 59, 59 ) );
     }
-    return dt;
+    return TimeConversion::fromUTC( endUTC );
 }
 
 /*!
