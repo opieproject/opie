@@ -244,7 +244,8 @@ DateEntry::~DateEntry()
 
 void DateEntry::slotEditNote() {
   QString s;
-  s.sprintf("<B>%d/%d</B> ", startDate.day(), startDate.month());
+  s = "<B>"+ TimeString::longDateString( startDate ) + "</B>";
+//  s.sprintf("<B>%d/%d</B> ", startDate.day(), startDate.month());
   NoteEntry noteDlg(s+comboDescription->currentText(), noteStr,
 		    this,0,TRUE);
 
