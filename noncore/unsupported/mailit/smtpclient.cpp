@@ -50,7 +50,7 @@ void SmtpClient::newConnection(QString target, int port)
   sending = TRUE;
   socket->connectToHost(target, port);
   
-  emit updateStatus("DNS lookup");
+  emit updateStatus(tr("DNS lookup"));
 }
 
 void SmtpClient::addMail(QString from, QString subject, QStringList to, QString body)
@@ -67,7 +67,7 @@ void SmtpClient::addMail(QString from, QString subject, QStringList to, QString 
 
 void SmtpClient::connectionEstablished()
 {
-  emit updateStatus("Connection established");
+  emit updateStatus(tr("Connection established"));
 
 }
 
@@ -129,7 +129,7 @@ void SmtpClient::incomingData()
           if (response[0] == '2') {
             *stream << "DATA\r\n";
             status = Body;
-            emit updateStatus("Sending: " + mailPtr->subject);
+            emit updateStatus(tr("Sending: ") + mailPtr->subject);
           } else errorHandling(ErrUnknownResponse);
           break;
         } 
@@ -151,7 +151,7 @@ void SmtpClient::incomingData()
             status = Done;
             QString temp;
             temp.setNum(mailList.count());
-            emit updateStatus("Sent " + temp + " messages");
+            emit updateStatus(tr("Sent ") + temp + tr(" messages"));
             emit mailSent();
             mailList.clear();
             sending = FALSE;

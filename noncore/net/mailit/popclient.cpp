@@ -97,12 +97,12 @@ void PopClient::setSelectedMails(MailList *list)
 
 void PopClient::connectionEstablished()
 {
-  emit updateStatus("Connection established");
+  emit updateStatus(tr("Connection established"));
 }
 
 void PopClient::errorHandling(int status)
 {
-  emit updateStatus("Error Occured");
+  emit updateStatus(tr("Error Occured"));
   emit errorOccurred(status);
   socket->close();
   receiving = FALSE;
@@ -212,19 +212,19 @@ void PopClient::incomingData()
             temp2.setNum(newMessages - lastSync);
             temp.setNum(messageCount - lastSync);
             if (!selected) {
-              emit updateStatus("Retrieving " + temp + "/" + temp2);
+              emit updateStatus(tr("Retrieving ") + temp + "/" + temp2);
             } else {
               //completing a previously closed transfer
               if ( (messageCount - lastSync) <= 0) {
                 temp.setNum(messageCount);
-                emit updateStatus("Previous message " + temp);
+                emit updateStatus(tr("Previous message ") + temp);
               } else {
-                emit updateStatus("Completing message " + temp);
+                emit updateStatus(tr("Completing message ") + temp);
               }
             }
             break;
           } else {
-            emit updateStatus("No new Messages");
+            emit updateStatus(tr("No new Messages"));
             status = Quit;
           }
         } 
@@ -300,10 +300,10 @@ void PopClient::incomingData()
                     //completing a previously closed transfer
                     if ( (messageCount - lastSync) <= 0) {
                       temp.setNum(messageCount);
-                      emit updateStatus("Previous message " + temp);
+                      emit updateStatus(tr("Previous message ") + temp);
                     } else {
                       temp.setNum(messageCount - lastSync);
-                      emit updateStatus("Completing message " + temp);
+                      emit updateStatus(tr("Completing message ") + temp);
                     }
                     break;
                   } else {
@@ -315,7 +315,7 @@ void PopClient::incomingData()
                   status = Size;
                   temp2.setNum(newMessages - lastSync);
                   temp.setNum(messageCount - lastSync);
-                  emit updateStatus("Retrieving " + temp + "/" + temp2);
+                  emit updateStatus(tr("Retrieving ") + temp + "/" + temp2);
                   
                   break;
                 }
@@ -331,9 +331,9 @@ void PopClient::incomingData()
           int newM = newMessages - lastSync;
           if (newM > 0) {
             temp.setNum(newM);
-            emit updateStatus(temp + " new messages");
+            emit updateStatus(temp + tr(" new messages"));
           } else {
-            emit updateStatus("No new messages");
+            emit updateStatus(tr("No new messages"));
           }
           
           socket->close();
