@@ -83,8 +83,8 @@ const char *skinV_mask_file_names[7] = {
 static const int numVButtons = (sizeof(videoButtons)/sizeof(MediaButton));
 
 
-VideoWidget::VideoWidget(QWidget* parent, const char* name, WFlags f) :
-QWidget( parent, name, f ), scaledWidth( 0 ), scaledHeight( 0 ) {
+VideoWidget::VideoWidget(QWidget* parent, const char* name) :
+MediaWidget( parent, name ), scaledWidth( 0 ), scaledHeight( 0 ) {
 
 
     setCaption( tr("OpiePlayer - Video") );
@@ -139,7 +139,6 @@ QWidget( parent, name, f ), scaledWidth( 0 ), scaledHeight( 0 ) {
     resizeEvent( NULL );
 
     connect( mediaPlayerState, SIGNAL( lengthChanged(long) ),  this, SLOT( setLength(long) ) );
-    connect( mediaPlayerState, SIGNAL( displayTypeChanged(MediaPlayerState::DisplayType) ),    this, SLOT( setDisplayType(MediaPlayerState::DisplayType) ) );
     connect( mediaPlayerState, SIGNAL( playingToggled(bool) ), this, SLOT( setPlaying(bool) ) );
 
     setLength( mediaPlayerState->length() );

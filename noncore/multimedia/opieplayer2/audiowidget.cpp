@@ -90,9 +90,9 @@ static void changeTextColor( QWidget *w ) {
 static const int numButtons = (sizeof(audioButtons)/sizeof(MediaButton));
 
 
-AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
+AudioWidget::AudioWidget(QWidget* parent, const char* name) :
 
-    QWidget( parent, name, f ), songInfo( this ), slider( Qt::Horizontal, this ),  time( this ) {
+    MediaWidget( parent, name ), songInfo( this ), slider( Qt::Horizontal, this ),  time( this ) {
 
     setCaption( tr("OpiePlayer") );
 
@@ -160,7 +160,6 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
     resizeEvent( NULL );
 
     connect( mediaPlayerState, SIGNAL( lengthChanged(long) ),  this, SLOT( setLength(long) ) );
-    connect( mediaPlayerState, SIGNAL( displayTypeChanged(MediaPlayerState::DisplayType) ),    this, SLOT( setDisplayType(MediaPlayerState::DisplayType) ) );
     connect( mediaPlayerState, SIGNAL( loopingToggled(bool) ), this, SLOT( setLooping(bool) ) );
     connect( mediaPlayerState, SIGNAL( playingToggled(bool) ), this, SLOT( setPlaying(bool) ) );
     connect( mediaPlayerState, SIGNAL( isSeekableToggled( bool ) ), this, SLOT( setSeekable( bool ) ) );

@@ -34,7 +34,6 @@
 #ifndef AUDIO_WIDGET_H
 #define AUDIO_WIDGET_H
 
-#include <qwidget.h>
 #include <qpainter.h>
 #include <qdrawutil.h>
 #include <qpixmap.h>
@@ -46,7 +45,7 @@
 
 #include <opie/oticker.h>
 
-#include "mediaplayerstate.h"
+#include "mediawidget.h"
 
 class QPixmap;
 
@@ -66,10 +65,10 @@ enum AudioButtons {
 };
 };
 
-class AudioWidget : public QWidget {
+class AudioWidget : public MediaWidget {
     Q_OBJECT
 public:
-    AudioWidget( QWidget* parent=0, const char* name=0, WFlags f=0 );
+    AudioWidget( QWidget* parent=0, const char* name=0 );
     ~AudioWidget();
     void setTickerText( const QString &text ) { songInfo.setText( text ); }
 public slots:
@@ -81,6 +80,8 @@ public slots:
     void setPosition( long );
     void setLength( long );
     void setSeekable( bool );
+
+public:
     void setDisplayType( MediaPlayerState::DisplayType displayType );
 
 signals:
