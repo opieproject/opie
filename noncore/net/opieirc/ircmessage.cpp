@@ -1,3 +1,8 @@
+#include <opie2/odebug.h>
+
+using namespace Opie::Core;
+
+
 #include <qtextstream.h>
 #include <qstring.h>
 #include <qstringlist.h>
@@ -69,20 +74,17 @@ IRCMessage::IRCMessage(QString line) {
     }
 
     
-       //-- Uncomment to debug --
-    /*
-    printf("Parsed : '%s'\n", line.ascii());
-    printf("Prefix : '%s'\n", m_prefix.ascii());
-    printf("Command : '%s'\n", m_command.ascii());
-    printf("Allparameters : '%s'\n", m_allParameters.ascii());
+    odebug << "Parsed: " << line << oendl;
+    odebug << "Prefix: " << m_prefix << oendl;
+    odebug << "Command: " << m_command << oendl;
+    odebug << "Allparameters: " << m_allParameters << oendl;
     for (unsigned int i=0; i<m_parameters.count(); i++) {
-        printf("Parameter %i : '%s'\n", i, m_parameters[i].ascii());
+        odebug << "Parameter " << i << ":" << m_parameters[i] << oendl;
     }
-    printf("CTCP Command : '%s'\n", m_ctcpCommand.latin1());
-    printf("CTCP Destination : '%s'\n", m_ctcpDestination.latin1());
-    printf("CTCP param  count is : '%i'\n", m_parameters.count()); 
-    */
-   
+    odebug << "CTCP Command: " << m_ctcpCommand << oendl;
+    odebug << "CTCP Destination: " << m_ctcpDestination << oendl;
+    odebug << "CTCP param  count is: " << m_parameters.count() << oendl;
+    
 }
 
 QString IRCMessage::param(int param) {
@@ -97,15 +99,15 @@ QStringList IRCMessage::params(const QString &paramstring) const {
     for (QStringList::Iterator it = params.begin(); it != end; ++it) {
         int pos = (*it).find(':');
         if(pos < 0) {    
-            if(static_cast<unsigned int>((*it).toInt()) < m_parameters.count())
-                retvalue << m_parameters[(*it).toInt()];
+            if((*it).toUInt() < m_parameters.count())
+                retvalue << m_parameters[(*it).toUInt()];
         }
 
         else {
-            int start, end;
-            start = (*it).left(pos).toInt();
-            end = (*it).mid(pos+1).toInt();
-            for (int i=start;i<=end && i < static_cast<int>(m_parameters.count()) ;++i) {
+            unsigned int start, end;
+            start = (*it).left(pos).toUInt();
+            end = (*it).mid(pos+1).toUInt();
+            for (unsigned int i=start;i<=end && i < m_parameters.count() ;++i) {
                 retvalue << m_parameters[i];
             }
         }      
