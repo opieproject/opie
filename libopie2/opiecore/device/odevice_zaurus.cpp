@@ -102,18 +102,18 @@ struct z_button z_buttons_c700 [] = {
     "opiemail", "raise()",
     "opiemail", "newMail()" },
 
-    { Qt::Key_F15, QT_TRANSLATE_NOOP("Button", "Display Rotate"),
-    "devicebuttons/z_hinge",
+    { Qt::Key_F15, QT_TRANSLATE_NOOP("Button", "Hinge1"),
+    "devicebuttons/z_hinge1",
     "QPE/Rotation", "rotateDefault()",
-    "QPE/Dummy", "doNothing()" },
-    { Qt::Key_F16, QT_TRANSLATE_NOOP("Button", "Display Rotate"),
-    "devicebuttons/z_hinge",
+    "QPE/Rotation", "rotateDefault()" },
+    { Qt::Key_F16, QT_TRANSLATE_NOOP("Button", "Hinge2"),
+    "devicebuttons/z_hinge2",
     "QPE/Rotation", "rotateDefault()",
-    "QPE/Dummy", "doNothing()" },
-    { Qt::Key_F17, QT_TRANSLATE_NOOP("Button", "Display Rotate"),
-    "devicebuttons/z_hinge",
+    "QPE/Rotation", "rotateDefault()" },
+    { Qt::Key_F17, QT_TRANSLATE_NOOP("Button", "Hinge3"),
+    "devicebuttons/z_hinge3",
     "QPE/Rotation", "rotateDefault()",
-    "QPE/Dummy", "doNothing()" },
+    "QPE/Rotation", "rotateDefault()" },
 };
 
 // FIXME This gets unnecessary complicated. We should think about splitting the Zaurus
@@ -488,7 +488,7 @@ bool Zaurus::suspend()
     if ( !isQWS( ) ) // only qwsserver is allowed to suspend
         return false;
 
-    if ( d->m_model == Model_Unknown ) // better don't suspend in qvfb / on unkown devices
+    if ( d->m_model == Model_Unknown ) // better don't suspend on unknown devices
         return false;
 
     bool res = false;
@@ -534,7 +534,7 @@ Transformation Zaurus::rotation() const
             }
             else
             {
-                if ( hs == CASE_PORTRAIT ) rot = Rot270;
+                if ( hs == CASE_PORTRAIT ) rot = Rot90;
                 else if ( hs == CASE_UNKNOWN ) rot = Rot0;
                 else rot = Rot0;
             }

@@ -185,7 +185,7 @@ ODevice::ODevice()
 
     /* mixer */
     d->m_sound = d->m_vol   = d->m_mixer = -1;
-    
+
     /* System QCopChannel created */
     d->m_initializedButtonQcop = false;
 
@@ -271,33 +271,7 @@ ODevice::~ODevice()
 */
 bool ODevice::suspend()
 {
-    if ( !isQWS( ) ) // only qwsserver is allowed to suspend
-        return false;
-
-    if ( d->m_model == Model_Unknown ) // better don't suspend in qvfb / on unkown devices
-        return false;
-
-    bool res = false;
-    ODevice::sendSuspendmsg();
-
-    struct timeval tvs, tvn;
-    ::gettimeofday ( &tvs, 0 );
-
-    ::sync(); // flush fs caches
-    res = ( ::system ( "apm --suspend" ) == 0 );
-
-    // This is needed because the iPAQ apm implementation is asynchronous and we
-    // can not be sure when exactly the device is really suspended
-    // This can be deleted as soon as a stable familiar with a synchronous apm implementation exists.
-
-    if ( res ) {
-        do { // wait at most 1.5 sec: either suspend didn't work or the device resumed
-            ::usleep ( 200 * 1000 );
-            ::gettimeofday ( &tvn, 0 );
-        } while ((( tvn. tv_sec - tvs. tv_sec ) * 1000 + ( tvn. tv_usec - tvs. tv_usec ) / 1000 ) < 1500 );
-    }
-
-    return res;
+    return false; // default implementation == unknown device or qvfb
 }
 
 //#include <linux/fb.h> better not rely on kernel headers in userspace ...
@@ -313,25 +287,10 @@ bool ODevice::suspend()
 /**
 * This sets the display on or off
 */
-bool ODevice::setDisplayStatus ( bool on )
+bool ODevice::setDisplayStatus( bool on )
 {
-    qDebug("ODevice::setDisplayStatus(%d)", on);
-
-    if ( d->m_model == Model_Unknown )
-        return false;
-
-    bool res = false;
-    int fd;
-
-#ifdef QT_QWS_DEVFS
-    if (( fd = ::open ( "/dev/fb/0", O_RDWR )) >= 0 ) {
-#else
-    if (( fd = ::open ( "/dev/fb0", O_RDWR )) >= 0 ) {
-#endif
-        res = ( ::ioctl ( fd, FBIOBLANK, on ? VESA_NO_BLANKING : VESA_POWERDOWN ) == 0 );
-        ::close ( fd );
-    }
-    return res;
+    qDebug( "ODevice::setDisplayStatus( %d ) - please override me.", on );
+    return false; // don't do anything for unknown models
 }
 
 /**
@@ -340,16 +299,16 @@ bool ODevice::setDisplayStatus ( bool on )
 * @param b The brightness to be set on a scale from 0 to 255
 * @return success or failure
 */
-bool ODevice::setDisplayBrightness ( int b)
+bool ODevice::setDisplayBrightness( int b )
 {
-        Q_UNUSED( b )
+    qDebug( "ODevice::setDisplayBrightness( %d ) - please override me.", b );
     return false;
 }
 
 /**
- * 
- * @return Returns the number of steppings on the brightness slider
- * in the Light-'n-Power settings. Values smaller zero and bigger
+ *
+ * @returns the number of steppings on the brightness slider
+ * in the Light-'n-Power settings. Values smaller than zero and bigger
  * than 255 do not make sense.
  *
  * \sa QSlider::setLineStep
@@ -357,26 +316,28 @@ bool ODevice::setDisplayBrightness ( int b)
  */
 int ODevice::displayBrightnessResolution() const
 {
+    qDebug( "ODevice::displayBrightnessResolution() - please override me." );
     return 16;
 }
 
 /**
 * This sets the display contrast
 * @param p The contrast to be set on a scale from 0 to 255
-* @return success or failure
+* @returns success or failure
 */
-bool ODevice::setDisplayContrast ( int p)
+bool ODevice::setDisplayContrast( int p )
 {
-        Q_UNUSED( p )
+    qDebug( "ODevice::setDisplayContrast( %d ) - please override me.", p );
     return false;
 }
 
 /**
-* @return return the max value for the brightness settings slider
+* @returns the maximum value for the contrast settings slider
 *         or 0 if the device doesn't support setting of a contrast
 */
 int ODevice::displayContrastResolution() const
 {
+    qDebug( "ODevice::displayBrightnessResolution() - please override me." );
     return 0;
 }
 
@@ -639,7 +600,7 @@ const ODeviceButton *ODevice::buttonForKeycode ( ushort code )
     initButtons();
 
     for ( QValueListConstIterator<ODeviceButton> it = d->m_buttons->begin(); it != d->m_buttons->end(); ++it ) {
-        if ( (*it). keycode() == code )
+        if ( (*it).keycode() == code )
             return &(*it);
     }
     return 0;
@@ -649,7 +610,7 @@ void ODevice::reloadButtonMapping()
 {
     if(!d->m_buttons)
 	initButtons();
-    
+
     if(!d->m_initializedButtonQcop) {
 	QCopChannel *chan = new QCopChannel("QPE/System", this, "ODevice button channel");
 	connect(chan,SIGNAL(received(const QCString&,const QByteArray&)),
@@ -679,7 +640,6 @@ void ODevice::reloadButtonMapping()
         }
 
         b. setPressedAction ( OQCopMessage ( pch, pm, pdata ));
-
         b. setHeldAction ( OQCopMessage ( hch, hm, hdata ));
     }
 }
@@ -741,10 +701,10 @@ void ODevice::virtual_hook(int, void* ){
  * Sends a QCOP message to channel QPE/System
  * with the message "aboutToSuspend()" if this
  * is the windowing server.
- * 
+ *
  * Call this in your custom \sa suspend() Method
  * before going to suspend.
- * 
+ *
  */
 void ODevice::sendSuspendmsg()
 {
@@ -787,7 +747,7 @@ void ODevice::remPreHandler(QWSServer::KeyboardFilter*aFilter)
 
 /**
  * @internal
- * 
+ *
  * @see changeMixerForAlarm
  */
 void ODevice::playingStopped() {
@@ -829,13 +789,13 @@ void ODevice::playingStopped() {
  * changeMixerForAlarm( my_channel, "/dev/mixer", &snd );
  * snd.play()
  * \endcode
- * 
- * 
+ *
+ *
  *
  * @param mixer The mixer number/channel to use
  * @param file  The file name. If you convert from QString use QFile::encodeName
  * @param snd   The sound to wait for finishing
- * 
+ *
  */
 void ODevice::changeMixerForAlarm( int mixer, const char* file, Sound *snd ) {
 #ifndef QT_NO_SOUND
