@@ -780,6 +780,28 @@ static void qtopia_loadTranslations( const QStringList& qms )
 }
 #endif
 
+/*
+	Turn off qDebug in release mode
+ */
+static void qtopiaMsgHandler(QtMsgType type, const char* msg)
+{
+		switch ( type ) {
+			case QtDebugMsg:
+#ifdef QT_DEBUG
+					fprintf( stderr, "Debug: %s\n", msg );
+#endif
+					break;
+			case QtWarningMsg:
+#ifdef QT_DEBUG
+					fprintf( stderr, "Warning: %s\n", msg );
+#endif
+					break;
+			case QtFatalMsg:
+					fprintf( stderr, "Fatal: %s\n", msg );
+					abort();
+    }
+}
+
 /*!
   Constructs a QPEApplication just as you would construct
   a QApplication, passing \a argc, \a argv, and \a t.
@@ -791,6 +813,7 @@ QPEApplication::QPEApplication( int & argc, char **argv, Type t )
         : QApplication( hack(argc), argv, t ), pidChannel( 0 )
 {
     QPixmapCache::setCacheLimit(256); // sensible default for smaller devices.
+    qInstallMsgHandler(qtopiaMsgHandler);
 
     d = new QPEApplicationData;
     d->loadTextCodecs();
