@@ -192,7 +192,7 @@ void ComposeMail::accept()
     AttachViewItem *it = (AttachViewItem *) attList->firstChild();
     while ( it != NULL ) {
         mail->addAttachment( it->getAttachment() );
-        it = (AttachViewItem *) it->itemBelow();
+        it = (AttachViewItem *) it->nextSibling();
     }
 
     SMTPwrapper wrapper( settings );
