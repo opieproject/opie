@@ -2,7 +2,6 @@
 #include "screensaver.h"
 
 #include <qpe/config.h>
-#include <qpe/power.h>
 #include <qpe/network.h>
 
 #include <opie2/odevice.h>

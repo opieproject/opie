@@ -25,7 +25,6 @@
 #include <qpe/applnk.h>
 #include <qpe/config.h>
 #include <qpe/power.h>
-#include <qpe/qpeapplication.h>
 
 /* QT */
 #include <qpainter.h>

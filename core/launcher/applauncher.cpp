@@ -50,14 +50,10 @@
 #include <qtimer.h>
 #include <qwindowsystem_qws.h>
 #include <qmessagebox.h>
-#include <qfile.h>
 #include <qfileinfo.h>
 
 #include <qtopia/qcopenvelope_qws.h>
-#include <qtopia/applnk.h>
 #include <qtopia/qpeapplication.h>
-#include <qtopia/config.h>
-#include <qtopia/global.h>
 
 #include "applauncher.h"
 #include "documentlist.h"

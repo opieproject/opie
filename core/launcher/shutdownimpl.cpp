@@ -29,7 +29,6 @@
 #include <qbuttongroup.h>
 #include <qlabel.h>
 #include <qlayout.h>
-#include <qpalette.h>
 
 
 static void changeButtonColor ( QPushButton *btn, const QColor &col )

@@ -20,7 +20,6 @@
 
 #include "calibrate.h"
 
-#include <qfile.h>
 #include <qpe/qpeapplication.h>
 
 #ifdef QWS

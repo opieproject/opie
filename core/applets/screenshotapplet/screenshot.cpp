@@ -33,7 +33,6 @@
 #include <qlayout.h>
 #include <qcheckbox.h>
 #include <qmessagebox.h>
-#include <qimage.h>
 
 
 /* XPM */

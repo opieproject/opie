@@ -36,20 +36,13 @@
 
 #include <qtopia/resource.h>
 #include <qtopia/qcopenvelope_qws.h>
-#include <qtopia/qpeapplication.h>
 #include <qtopia/config.h>
-#include <qtopia/applnk.h>
-#include <qtopia/mimetype.h>
 #include <qtopia/fontmanager.h>
 
-#include <qapplication.h>
 #include <qfile.h>
 #include <qpainter.h>
-#include <qcstring.h>
 #include <qsimplerichtext.h>
-#include <qcolor.h>
 #include <qpushbutton.h>
-#include <qhbox.h>
 #include <qlabel.h>
 #include <qtimer.h>
 
@@ -58,7 +51,6 @@
 #include <qgfx_qws.h>
 #endif
 
-#include <qwindowsystem_qws.h>
 
 #include <stdlib.h>
 #include <sys/types.h>

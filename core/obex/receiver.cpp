@@ -6,18 +6,14 @@
 
 #include <fcntl.h>
 
-#include <qfile.h>
 #include <qfileinfo.h>
 #include <qlabel.h>
-#include <qhbox.h>
-#include <qregexp.h>
 #include <qtextview.h>
 #include <qpushbutton.h>
 
 #include <qpe/applnk.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/qcopenvelope_qws.h>
-#include <qpe/global.h>
 
 #include "obex.h"
 #include "receiver.h"

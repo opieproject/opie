@@ -24,8 +24,6 @@
 
 #include <qlayout.h>
 #include <qdir.h>
-#include <qmessagebox.h>
-#include <qtranslator.h>
 
 #include "systray.h"
 

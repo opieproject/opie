@@ -20,19 +20,12 @@
 
 #define QTOPIA_INTERNAL_PRELOADACCESS
 
-#include <qtopia/global.h>
 
 #include <stdlib.h>
 
-#include <qtimer.h>
-#include <qpopupmenu.h>
 #include <qpainter.h>
-#include <qmessagebox.h>
 
-#include <qtopia/qpeapplication.h>
-#include <qtopia/applnk.h>
 #include <qtopia/qcopenvelope_qws.h>
-#include <qtopia/mimetype.h>
 
 #include "runningappbar.h"
 #include "serverinterface.h"

@@ -14,10 +14,7 @@
 **********************************************************************/
 
 #include <qpe/resource.h>
-#include <qpe/qcopenvelope_qws.h>
 
-#include <qapplication.h>
-#include <qiconset.h>
 #include <qpopupmenu.h>
 
 #include <fcntl.h>

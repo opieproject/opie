@@ -16,16 +16,10 @@
 
 /* OPIE */
 #include <opie2/otaskbarapplet.h>
-#include <qpe/global.h>
-#include <qpe/config.h>
 #include <qpe/qcopenvelope_qws.h>
-#include <qpe/qpeapplication.h>
 
 /* QT */
-#include <qlabel.h>
 #include <qdir.h>
-#include <qfileinfo.h>
-#include <qcopchannel_qws.h>
 
 Multikey::Multikey(QWidget *parent) : QLabel(parent), popupMenu(this), current("EN")
 {

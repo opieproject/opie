@@ -32,17 +32,13 @@
 
 /* OPIE */
 #include <opie/odevice.h>
-#include <qpe/applnk.h>
 #include <qpe/config.h>
 #include <qpe/power.h>
-#include <qpe/qpeapplication.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/resource.h>
 using namespace Opie;
 
 /* QT */
-#include <qiconset.h>
-#include <qpopupmenu.h>
 
 #include <time.h>
 

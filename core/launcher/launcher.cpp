@@ -25,7 +25,6 @@
 #include <qtopia/resource.h>
 #include <qtopia/applnk.h>
 #include <qtopia/config.h>
-#include <qtopia/global.h>
 #include <qtopia/qpeapplication.h>
 #include <qtopia/mimetype.h>
 #include <qtopia/private/categories.h>
@@ -43,7 +42,6 @@
 #include <qpushbutton.h>
 #include <qtabbar.h>
 #include <qwidgetstack.h>
-#include <qlayout.h>
 #include <qregexp.h>
 #include <qmessagebox.h>
 #include <qframe.h>

@@ -29,14 +29,10 @@
 
 #include <qtopia/qpeapplication.h>
 #include <qtopia/config.h>
-#include <qtopia/applnk.h>
-#include <qtopia/global.h>
 #include <qtopia/resource.h>
 #include <qtopia/mimetype.h>
 #include <qtopia/qlibrary.h>
 
-#include <qdict.h>
-#include <qdir.h>
 //#include <qpainter.h>
 
 //#include <stdlib.h>

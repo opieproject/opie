@@ -6,13 +6,11 @@
 #include <qpe/power.h>
 
 /* QT */
-#include <qpainter.h>
 #include <qpushbutton.h>
 #include <qdrawutil.h>
 #include <qfile.h>
 #include <qlayout.h>
 #include <qtextstream.h>
-#include <qapplication.h>
 #include <qmessagebox.h>
 
 using namespace Opie;

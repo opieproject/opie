@@ -23,20 +23,15 @@
 #endif
 #include "server.h"
 #include "serverapp.h"
-#include "taskbar.h"
 #include "stabmon.h"
-#include "launcher.h"
 #include "firstuse.h"
 
 #include <opie2/oglobal.h>
 
-#include <qtopia/qpeapplication.h>
 #include <qtopia/network.h>
-#include <qtopia/config.h>
 //#include <qtopia/custom.h>
 
 
-#include <qfile.h>
 #include <qdir.h>
 #ifdef QWS
 #include <qwindowsystem_qws.h>

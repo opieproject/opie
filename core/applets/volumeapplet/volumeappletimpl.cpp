@@ -19,8 +19,6 @@
 **********************************************************************/
 #include "volume.h"
 #include "volumeappletimpl.h"
-#include <qpe/qcopenvelope_qws.h>
-#include <qpe/config.h>
 
 VolumeAppletImpl::VolumeAppletImpl()
     : volume(0)

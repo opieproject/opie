@@ -25,10 +25,8 @@
 #include <qpe/resource.h>
 
 /* QT */
-#include <qapplication.h>
 #include <qcopchannel_qws.h>
 #include <qpainter.h>
-#include <qmessagebox.h>
 #include <qfile.h>
 #include <qtextstream.h>
 #include <qsound.h>

@@ -23,7 +23,6 @@
 #include "volume.h"
 
 #include <qpe/resource.h>
-#include <qpe/qpeapplication.h>
 #include <qpe/applnk.h>
 #include <qpe/config.h>
 #if ( defined Q_WS_QWS || defined(_WS_QWS_) ) && !defined(QT_NO_COP)
@@ -34,12 +33,9 @@
 #include <qcheckbox.h>
 #include <qslider.h>
 #include <qlayout.h>
-#include <qframe.h>
-#include <qpixmap.h>
 #include <qvbox.h>
 #include <qlabel.h>
 
-#include <qtoolbutton.h>
 #include <qpushbutton.h>
 #include <qtimer.h>
 

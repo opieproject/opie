@@ -22,7 +22,6 @@
 
 #include <qtopia/resource.h>
 
-#include <qimage.h>
 #include <qpainter.h>
 #include <qapplication.h>
 #include <qpushbutton.h>

@@ -3,10 +3,6 @@
  *
  * TT 2002-2002,2003
  */
-#include <qstring.h>
-#include <qcstring.h>
-#include <qwidget.h>
-#include <qguardedptr.h>
 #include <qfile.h>
 #include <qtextstream.h>
 

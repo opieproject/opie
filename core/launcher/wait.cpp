@@ -20,14 +20,10 @@
 
 #include "wait.h"
 
-#include <qtopia/resource.h>
 #include <qtopia/config.h>
 
 #include <opie2/owait.h>
 
-#include <qwidget.h>
-#include <qpixmap.h>
-#include <qpainter.h>
 
 
 Wait *lastWaitObject = NULL;

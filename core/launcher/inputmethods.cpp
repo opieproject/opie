@@ -23,19 +23,13 @@
 
 #include <qtopia/config.h>
 #include <qtopia/qpeapplication.h>
-#include <qtopia/inputmethodinterface.h>
-#include <qtopia/global.h>
 
 #include <qpopupmenu.h>
-#include <qpushbutton.h>
 #include <qtoolbutton.h>
 #include <qwidgetstack.h>
-#include <qwidget.h>
 #include <qlayout.h>
-#include <qtimer.h>
 #include <qdir.h>
 #include <stdlib.h>
-#include <qtranslator.h>
 #include <qtl.h>
 
 #ifdef Q_WS_QWS

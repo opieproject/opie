@@ -1,13 +1,9 @@
 #include <qpushbutton.h>
 #include <qlabel.h>
-#include <qhbox.h>
 #include <qlayout.h>
 #include <qtimer.h>
-#include <qtl.h>
 
-#include <qcopchannel_qws.h>
 
-#include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
 
 #include "obex.h"

@@ -29,16 +29,8 @@
 #include <qtopia/qpeapplication.h>
 
 #include <qtopia/version.h>
-#include <qtopia/config.h>
 
-#include <qdir.h>
-#include <qfile.h>
 #include <qtextstream.h>
-#include <qdatastream.h>
-#include <qcstring.h>
-#include <qstringlist.h>
-#include <qfileinfo.h>
-#include <qregexp.h>
 #include <qtimer.h>
 #ifdef Q_WS_QWS
 #include <qcopchannel_qws.h>

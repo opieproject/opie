@@ -20,8 +20,8 @@
 
 #include "server.h"
 #include "serverapp.h"
-#include "launcher.h"
 #include "startmenu.h"
+#include "launcher.h"
 #include "transferserver.h"
 #include "qcopbridge.h"
 #include "irserver.h"
@@ -29,7 +29,6 @@
 #include "calibrate.h"
 #include "qrsync.h"
 #include "syncdialog.h"
-#include "launcher.h"
 #include "shutdownimpl.h"
 #include "applauncher.h"
 #if 0

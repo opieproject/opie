@@ -14,19 +14,14 @@
 **
 **********************************************************************/
 
-#include <qcopchannel_qws.h>
 
-#include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
-#include <qpe/ir.h>
 #include <qpe/qcopenvelope_qws.h>
-#include <qpe/sound.h>
 
 #include <qpainter.h>
 #include <qfile.h>
 #include <qtimer.h>
 #include <qtextstream.h>
-#include <qpopupmenu.h>
 
 #include <unistd.h>
 #include <net/if.h>

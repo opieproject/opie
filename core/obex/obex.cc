@@ -1,10 +1,6 @@
 
-#include <qapplication.h>
-#include <qfile.h>
 #include <qfileinfo.h>
-#include <qtextcodec.h>
 
-#include <qpe/qcopenvelope_qws.h>
 
 #include <opie/oprocess.h>
 #include "obex.h"

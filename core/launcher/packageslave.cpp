@@ -25,13 +25,11 @@
 #include <qtopia/qcopenvelope_qws.h>
 #endif
 
-#include <qdatastream.h>
 #ifdef Q_WS_QWS
 #include <qcopchannel_qws.h>
 #endif
 
 #include <qtextstream.h>
-#include <qdir.h>
 
 #include <stdlib.h>
 #include <sys/stat.h> // mkdir()

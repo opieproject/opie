@@ -24,7 +24,6 @@
 #include <qtopia/qlibrary.h>
 #include <qtopia/qpeapplication.h>
 
-#include <qtranslator.h>
 
 #include "obexinterface.h"
 

@@ -19,9 +19,6 @@
 **********************************************************************/
 #include "launchertab.h"
 #include <qapplication.h>
-#include <qstyle.h>
-#include <qpainter.h>
-#include <qbitmap.h>
 
 
 LauncherTabBar::LauncherTabBar( QWidget *parent, const char *name )

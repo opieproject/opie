@@ -20,7 +20,6 @@
 //#define _XOPEN_SOURCE
 
 #include <opie2/oglobal.h>
-#include <qtopia/qpeapplication.h>
 
 #ifndef Q_OS_WIN32
 #include <pwd.h>
@@ -44,20 +43,11 @@
 #include <shadow.h>
 #endif
 
-#include <qdir.h>
-#include <qfile.h>
 #include <qtextstream.h>
-#include <qdatastream.h>
 #include <qmessagebox.h>
-#include <qstringlist.h>
-#include <qfileinfo.h>
-#include <qregexp.h>
 //#include <qtopia/qcopchannel_qws.h>
 #include <qtopia/process.h>
-#include <qtopia/global.h>
-#include <qtopia/config.h>
 #include <qtopia/private/contact.h>
-#include <qtopia/quuid.h>
 #include <qtopia/version.h>
 #ifdef Q_WS_QWS
 #include <qtopia/qcopenvelope_qws.h>

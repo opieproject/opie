@@ -21,29 +21,15 @@
 #include "launcherview.h"
 
 #include <qtopia/qpeapplication.h>
-#include <qtopia/applnk.h>
-#include <qtopia/qpedebug.h>
 #include <qtopia/private/categories.h>
 #include <qtopia/categoryselect.h>
-#include <qtopia/menubutton.h>
 #include <qtopia/mimetype.h>
 #include <qtopia/resource.h>
-#include <qtopia/qpetoolbar.h>
 //#include <qtopia/private/palmtoprecord.h>
 
 #include <qtimer.h>
-#include <qtextstream.h>
-#include <qdict.h>
-#include <qfile.h>
 #include <qfileinfo.h>
-#include <qhbox.h>
 #include <qiconview.h>
-#include <qwidgetstack.h>
-#include <qpainter.h>
-#include <qregexp.h>
-#include <qtoolbutton.h>
-#include <qimage.h>
-#include <qlabel.h>
 #include <qobjectlist.h>
 
 

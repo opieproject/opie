@@ -1,5 +1,4 @@
 
-#include <qpixmap.h>
 #include <qbitmap.h>
 #include <qpainter.h>
 

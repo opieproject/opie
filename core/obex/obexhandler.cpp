@@ -1,4 +1,3 @@
-#include <qcopchannel_qws.h>
 
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpeapplication.h>
