@@ -51,6 +51,8 @@
 #endif
 
 
+using namespace Opie;
+
 #define FACTORY(T) \
     static QWidget *new##T( bool maximized ) { \
   QWidget *w = new T( 0, "test", QWidget::WDestructiveClose | QWidget::WGroupLeader ); \
@@ -281,7 +283,13 @@ void TaskBar::receive( const QCString &msg, const QByteArray &data )
 		int led, status;
 		stream >> led >> status;
 
-		ODevice::inst ( )-> setLed ( led, status ? OLED_BlinkSlow : OLED_Off );
+		QValueList <OLed> ll = ODevice::inst ( )-> ledList ( );
+		if ( ll. count ( ))	{
+			OLed l = ll. contains ( Led_Mail ) ? Led_Mail : ll [0];
+			bool canblink = ODevice::inst ( )-> ledStateList ( l ). contains ( Led_BlinkSlow );
+			
+			ODevice::inst ( )-> setLedState ( l, status ? ( canblink ? Led_BlinkSlow : Led_On ) : Led_Off );
+		}
 	}
 }
 
