@@ -408,7 +408,7 @@ void NotesControl::slotViewEdited() {
 //               if(e->key() == Key_V) { //paste
 //     QClipboard *cb = QApplication::clipboard();
 //     QString text;
-// view
+// //view
 //     cb->setText();
 //               }
 //               break;
@@ -437,7 +437,7 @@ void NotesApplet::mousePressEvent( QMouseEvent *) {
 //    vc = new NotesControl;
 //    QPoint curPos = mapToGlobal( rect().topLeft() );
         vc->show();
-        vc->move( 5, 18);
+        vc->move( 2, 28);
         vc->doPopulate=true;
         vc->populateBox();
         vc->doPopulate=false;

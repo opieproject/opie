@@ -35,7 +35,6 @@ class NotesControl : public QFrame {
     Q_OBJECT
 public:
     NotesControl( QWidget *parent=0, const char *name=0 );
-    void performGrab();
 
     QPixmap notes;
     QMultiLineEdit *view;
