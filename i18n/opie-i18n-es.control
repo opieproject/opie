@@ -4,6 +4,6 @@ Section: opie/i18n
 Maintainer: Jose Luis Fernandez Barros <fbarros@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base
+Depends: opie-base, opie-language
 Description: i18n: Spanish
  Spanish UI texts and dictionary for OPIE environment.

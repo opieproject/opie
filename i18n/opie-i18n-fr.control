@@ -4,6 +4,6 @@ Section: opie/i18n
 Maintainer: Eric Santonacci <Eric.Santonacci@talc.fr>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base
+Depends: opie-base, opie-language
 Description: i18n: French
  French UI texts and dictionary for OPIE environment.
