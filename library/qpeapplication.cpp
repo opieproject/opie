@@ -80,6 +80,7 @@
 #include "network.h"
 #ifdef QWS
 #include "fontmanager.h"
+#include "fontdatabase.h"
 #endif
 
 #include "alarmserver.h"
@@ -803,7 +804,6 @@ QPEApplication::QPEApplication( int & argc, char **argv, Type t )
     d = new QPEApplicationData;
     d->loadTextCodecs();
     d->loadImageCodecs();
-    int dw = desktop() ->width();
 
     setFont( QFont( d->fontFamily, d->fontSize ) );
     AppLnk::setSmallIconSize( d->smallIconSize );
@@ -878,8 +878,10 @@ QPEApplication::QPEApplication( int & argc, char **argv, Type t )
 #else
         initApp( argc, argv );
 #endif
-    //  qwsSetDecoration( new QPEDecoration() );
-
+#ifdef Q_WS_QWS
+    /* load the font renderer factories */
+    FontDatabase::loadRenderers();
+#endif
 #ifndef QT_NO_TRANSLATION
 
     d->langs = Global::languageList();

@@ -44,8 +44,6 @@ class QFontFactory;
  * The dynamic shared object goes to
  * OPIEDIR/plugins/fontfactories.
  *
- * As of version Opie 1.0.2 loading of the plugins is not
- * yet implemented
  *
  */
 struct FontFactoryInterface : public QUnknownInterface
