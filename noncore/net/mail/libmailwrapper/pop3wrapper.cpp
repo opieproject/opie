@@ -177,10 +177,9 @@ void POP3wrapper::logout()
 }
 
 
-QList<Folder>* POP3wrapper::listFolders() {
-    QList<Folder> * folders = new QList<Folder>();
-    folders->setAutoDelete( false );
-    Folder*inb=new Folder("INBOX","/");
+QValueList<Opie::osmart_pointer<Folder> >* POP3wrapper::listFolders() {
+    QValueList<Opie::osmart_pointer<Folder> >* folders = new QValueList<FolderP>();
+    FolderP inb=new Folder("INBOX","/");
     folders->append(inb);
     return folders;
 }
@@ -197,7 +196,7 @@ void POP3wrapper::deleteMail(const RecMail&mail) {
 
 void POP3wrapper::answeredMail(const RecMail&) {}
 
-int POP3wrapper::deleteAllMail(const Folder*) {
+int POP3wrapper::deleteAllMail(const FolderP&) {
     login();
     if (!m_pop3)
         return 0;

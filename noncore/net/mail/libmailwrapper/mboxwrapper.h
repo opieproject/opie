@@ -16,16 +16,17 @@ class MBOXwrapper : public Genericwrapper
 public:
     MBOXwrapper(const QString & dir,const QString&name);
     virtual ~MBOXwrapper();
-    
+
     virtual void listMessages(const QString & mailbox, QList<RecMail> &target );
-    virtual QList<Folder>* listFolders();
+    virtual QValueList<Opie::osmart_pointer<Folder> >* listFolders();
     virtual void statusFolder(folderStat&target_stat,const QString & mailbox="INBOX");
 
     virtual void deleteMail(const RecMail&mail);
     virtual void answeredMail(const RecMail&mail);
-    
-    virtual int createMbox(const QString&folder,const Folder*f=0,const QString&d="",bool s=false);
-    virtual int deleteMbox(const Folder*);
+
+    virtual int createMbox(const QString&folder,const Opie::osmart_pointer<Folder>&f=0,
+        const QString&d="",bool s=false);
+    virtual int deleteMbox(const Opie::osmart_pointer<Folder>&);
 
     virtual void storeMessage(const char*msg,size_t length, const QString&folder);
 
@@ -34,7 +35,7 @@ public:
 
     virtual encodedString* fetchRawBody(const RecMail&mail);
     virtual void deleteMails(const QString & FolderName,QList<RecMail> &target);
-    virtual int deleteAllMail(const Folder*);
+    virtual int deleteAllMail(const Opie::osmart_pointer<Folder>&);
     virtual MAILLIB::ATYPE getType()const;
     virtual const QString&getName()const;
 

@@ -35,6 +35,10 @@ Folder::Folder(const QString&tmp_name, const QString&sep  )
     prefix = "";
 }
 
+Folder::~Folder()
+{
+}
+
 const QString& Folder::Separator()const
 {
     return separator;
@@ -55,6 +59,10 @@ IMAPFolder::IMAPFolder(const QString&name,const QString&sep, bool select,bool no
             nameDisplay=nameDisplay.right(nameDisplay.length()-prefix.length());
         }
     }
+}
+
+IMAPFolder::~IMAPFolder()
+{
 }
 
 static unsigned char base64chars[] =
@@ -163,4 +171,8 @@ MHFolder::MHFolder(const QString&disp_name,const QString&mbox)
         nameDisplay = separator;
     }
     prefix = mbox;
+}
+
+MHFolder::~MHFolder()
+{
 }

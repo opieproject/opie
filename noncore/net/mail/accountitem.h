@@ -3,6 +3,7 @@
 
 #include <qlistview.h>
 #include <qlist.h>
+#include <opie2/osmart_pointer.h>
 
 class POP3wrapper;
 class RecMail;
@@ -18,11 +19,13 @@ class Folder;
 
 class AccountViewItem : public QListViewItem
 {
-        
+
 public:
     AccountViewItem( AccountView *parent );
     AccountViewItem( QListViewItem *parent);
     AccountViewItem( QListViewItem *parent , QListViewItem*after  );
+    AccountViewItem( const Opie::osmart_pointer<Folder>&folderInit,QListViewItem *parent , QListViewItem*after  );
+
     virtual ~AccountViewItem();
     virtual void refresh(QList<RecMail>&)=0;
     virtual RecBody fetchBody(const RecMail&)=0;
@@ -36,10 +39,10 @@ protected:
     AccountViewItem*findSubItem(const QString&path,AccountViewItem*start=0);
     virtual void init();
     virtual void removeChilds();
-    virtual void deleteAllMail(AbstractMail*wrapper,Folder*f);
+    virtual void deleteAllMail(AbstractMail*wrapper,const Opie::osmart_pointer<Folder>&f);
     static const QString contextName;
     AccountView*m_Backlink;
-    Folder *folder;
+    Opie::osmart_pointer<Folder> folder;
 };
 
 class POP3viewItem : public AccountViewItem
@@ -66,7 +69,7 @@ class POP3folderItem : public AccountViewItem
 {
 
 public:
-    POP3folderItem( Folder *folder, POP3viewItem *parent , QListViewItem*after  );
+    POP3folderItem( const Opie::osmart_pointer<Folder>&folder, POP3viewItem *parent , QListViewItem*after  );
     virtual ~POP3folderItem();
     virtual void refresh(QList<RecMail>&);
     virtual RecBody fetchBody(const RecMail&);
@@ -104,7 +107,7 @@ class NNTPfolderItem : public AccountViewItem
 {
 
 public:
-    NNTPfolderItem( Folder *folder, NNTPviewItem *parent , QListViewItem*after  );
+    NNTPfolderItem(const Opie::osmart_pointer<Folder>&folder, NNTPviewItem *parent , QListViewItem*after  );
     virtual ~NNTPfolderItem();
     virtual void refresh(QList<RecMail>&);
     virtual RecBody fetchBody(const RecMail&);
@@ -144,8 +147,8 @@ class IMAPfolderItem : public AccountViewItem
 {
 
 public:
-    IMAPfolderItem( Folder *folder, IMAPviewItem *parent , QListViewItem*after  );
-    IMAPfolderItem( Folder *folder, IMAPfolderItem *parent , QListViewItem*after, IMAPviewItem *master  );
+    IMAPfolderItem( const Opie::osmart_pointer<Folder>&folder, IMAPviewItem *parent , QListViewItem*after  );
+    IMAPfolderItem( const Opie::osmart_pointer<Folder>&folder, IMAPfolderItem *parent , QListViewItem*after, IMAPviewItem *master  );
     virtual ~IMAPfolderItem();
     virtual void refresh(QList<RecMail>&);
     virtual RecBody fetchBody(const RecMail&);
@@ -186,14 +189,14 @@ class MHfolderItem : public AccountViewItem
 {
 
 public:
-    MHfolderItem( Folder *folder, MHviewItem *parent , QListViewItem*after  );
-    MHfolderItem( Folder *folder, MHfolderItem *parent, QListViewItem*after, MHviewItem*master);
+    MHfolderItem( const Opie::osmart_pointer<Folder>&folder, MHviewItem *parent , QListViewItem*after  );
+    MHfolderItem( const Opie::osmart_pointer<Folder>&folder, MHfolderItem *parent, QListViewItem*after, MHviewItem*master);
     virtual ~MHfolderItem();
     virtual void refresh(QList<RecMail>&);
     virtual RecBody fetchBody(const RecMail&);
     virtual QPopupMenu * getContextMenu();
     virtual void contextMenuSelected(int);
-    virtual Folder*getFolder();
+    virtual const Opie::osmart_pointer<Folder>&getFolder()const;
     virtual bool isDraftfolder();
 
 protected:

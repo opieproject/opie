@@ -23,15 +23,16 @@ class IMAPwrapper : public AbstractMail
 public:
     IMAPwrapper( IMAPaccount *a );
     virtual ~IMAPwrapper();
-    virtual QList<Folder>* listFolders();
+    virtual QValueList<Opie::osmart_pointer<Folder> >* listFolders();
     virtual void listMessages(const QString & mailbox,QList<RecMail>&target );
     virtual void statusFolder(folderStat&target_stat,const QString & mailbox="INBOX");
-    
+
     virtual void deleteMail(const RecMail&mail);
     virtual void answeredMail(const RecMail&mail);
-    virtual int deleteAllMail(const Folder*folder);
+    virtual int deleteAllMail(const Opie::osmart_pointer<Folder>&folder);
     virtual void storeMessage(const char*msg,size_t length, const QString&folder);
-    virtual void mvcpAllMails(Folder*fromFolder,const QString&targetFolder,AbstractMail*targetWrapper,bool moveit);
+    virtual void mvcpAllMails(const Opie::osmart_pointer<Folder>&fromFolder,
+        const QString&targetFolder,AbstractMail*targetWrapper,bool moveit);
     virtual void mvcpMail(const RecMail&mail,const QString&targetFolder,AbstractMail*targetWrapper,bool moveit);
 
     virtual RecBody fetchBody(const RecMail&mail);
@@ -40,11 +41,12 @@ public:
     virtual encodedString* fetchRawPart(const RecMail&mail,const RecPart&part);
     virtual encodedString* fetchRawBody(const RecMail&mail);
 
-    virtual int createMbox(const QString&,const Folder*parentfolder=0,const QString& delemiter="/",bool getsubfolder=false);
-    virtual int deleteMbox(const Folder*folder);
-    
+    virtual int createMbox(const QString&,const Opie::osmart_pointer<Folder>&parentfolder=0,
+        const QString& delemiter="/",bool getsubfolder=false);
+    virtual int deleteMbox(const Opie::osmart_pointer<Folder>&folder);
+
     static void imap_progress( size_t current, size_t maximum );
-    
+
     virtual void logout();
     virtual MAILLIB::ATYPE getType()const;
     virtual const QString&getName()const;
@@ -64,7 +66,7 @@ protected:
     void fillSingleMsgPart(RecPart&target_part,mailimap_body_type_msg*which);
     void fillMultiPart(RecPart&target_part,mailimap_body_type_mpart*which);
     void traverseBody(const RecMail&mail,mailimap_body*body,RecBody&target_body,int current_recursion,QValueList<int>recList,int current_count=1);
-    
+
     /* just helpers */
     static void fillBodyFields(RecPart&target_part,mailimap_body_fields*which);
     static QStringList address_list_to_stringlist(clist*list);

@@ -188,10 +188,9 @@ void NNTPwrapper::logout()
    m_nntp = 0;
 }
 
-QList<Folder>* NNTPwrapper::listFolders() {
+QValueList<Opie::osmart_pointer<Folder> >* NNTPwrapper::listFolders() {
 
-    QList<Folder> * folders = new QList<Folder>();
-    folders->setAutoDelete( false );
+    QValueList<Opie::osmart_pointer<Folder> >* folders = new QValueList<Opie::osmart_pointer<Folder> >();
     QStringList groups;
     if (account) {
         groups = account->getGroups();
@@ -204,7 +203,7 @@ QList<Folder>* NNTPwrapper::listFolders() {
 
 /* we made this method in raw nntp access of etpan and not via generic interface
  * 'cause in that case there will be doubled copy operations. eg. the etpan would
- * copy that stuff into its own structures and we must copy it into useable c++ 
+ * copy that stuff into its own structures and we must copy it into useable c++
  * structures for our frontend. this would not make sense, so it is better to reimplement
  * the stuff from generic interface of etpan but copy it direct to qt classes.
  */
@@ -280,5 +279,5 @@ const QString&NNTPwrapper::getName()const{
 void NNTPwrapper::deleteMail(const RecMail&) {
 }
 
-int NNTPwrapper::deleteAllMail(const Folder*) {
+int NNTPwrapper::deleteAllMail(const FolderP&) {
 }

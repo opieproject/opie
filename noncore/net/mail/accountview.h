@@ -3,6 +3,7 @@
 
 #include <qlistview.h>
 #include <qlist.h>
+#include <opie2/osmart_pointer.h>
 
 class Selectstore;
 class RecMail;
@@ -22,7 +23,7 @@ public:
     virtual ~AccountView();
     virtual void populate( QList<Account> list );
     virtual RecBody fetchBody(const RecMail&aMail);
-    virtual void downloadMails(Folder*fromFolder,AbstractMail*fromWrapper);
+    virtual void downloadMails(const Opie::osmart_pointer<Folder>&fromFolder,AbstractMail*fromWrapper);
     virtual bool currentisDraft();
 
 public slots:
@@ -34,9 +35,9 @@ public slots:
     void setupFolderselect(Selectstore*sels);
 
 signals:
-    void refreshMailview(QList<RecMail>*);  
+    void refreshMailview(QList<RecMail>*);
 
-protected: 
+protected:
     QListViewItem* m_currentItem;
     QValueList<IMAPviewItem*> imapAccounts;
     QValueList<MHviewItem*> mhAccounts;

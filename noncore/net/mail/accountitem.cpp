@@ -57,7 +57,7 @@ void POP3viewItem::refresh( QList<RecMail> & )
 void POP3viewItem::refresh()
 {
     if (account->getOffline()) return;
-    QList<Folder> *folders = wrapper->listFolders();
+    QValueList<FolderP> *folders = wrapper->listFolders();
     QListViewItem *child = firstChild();
     while ( child )
     {
@@ -65,15 +65,13 @@ void POP3viewItem::refresh()
         child = child->nextSibling();
         delete tmp;
     }
-    Folder *it;
+    QValueList<FolderP>::ConstIterator it;
     QListViewItem*item = 0;
-    for ( it = folders->first(); it; it = folders->next() )
+    for ( it = folders->begin(); it!=folders->end(); ++it)
     {
-        item = new POP3folderItem( it, this , item );
-        item->setSelectable(it->may_select());
+        item = new POP3folderItem( (*it), this , item );
+        item->setSelectable( (*it)->may_select());
     }
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    folders->setAutoDelete(false);
     delete folders;
 }
 
@@ -141,10 +139,9 @@ void POP3viewItem::contextMenuSelected(int which)
 POP3folderItem::~POP3folderItem()
 {}
 
-POP3folderItem::POP3folderItem( Folder *folderInit, POP3viewItem *parent , QListViewItem*after  )
-        : AccountViewItem( parent,after )
+POP3folderItem::POP3folderItem( const FolderP&folderInit, POP3viewItem *parent , QListViewItem*after  )
+        : AccountViewItem(folderInit,parent,after )
 {
-    folder = folderInit;
     pop3 = parent;
     if (folder->getDisplayName().lower()!="inbox")
     {
@@ -250,7 +247,8 @@ void NNTPviewItem::refresh( QList<RecMail> & )
 void NNTPviewItem::refresh()
 {
     if (account->getOffline()) return;
-    QList<Folder> *folders = wrapper->listFolders();
+    QValueList<FolderP> *folders = wrapper->listFolders();
+
     QListViewItem *child = firstChild();
     while ( child )
     {
@@ -258,15 +256,13 @@ void NNTPviewItem::refresh()
         child = child->nextSibling();
         delete tmp;
     }
-    Folder *it;
+    QValueList<FolderP>::ConstIterator it;
     QListViewItem*item = 0;
-    for ( it = folders->first(); it; it = folders->next() )
+    for ( it = folders->begin(); it!=folders->end(); ++it)
     {
-        item = new NNTPfolderItem( it, this , item );
-        item->setSelectable(it->may_select());
+        item = new NNTPfolderItem( (*it), this , item );
+        item->setSelectable( (*it)->may_select());
     }
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    folders->setAutoDelete(false);
     delete folders;
 }
 
@@ -347,10 +343,9 @@ void NNTPviewItem::contextMenuSelected(int which)
 NNTPfolderItem::~NNTPfolderItem()
 {}
 
-NNTPfolderItem::NNTPfolderItem( Folder *folderInit, NNTPviewItem *parent , QListViewItem*after  )
-        : AccountViewItem( parent,after )
+NNTPfolderItem::NNTPfolderItem( const FolderP &folderInit, NNTPviewItem *parent , QListViewItem*after  )
+        : AccountViewItem( folderInit, parent,after )
 {
-    folder = folderInit;
     nntp = parent;
     if (folder->getDisplayName().lower()!="inbox")
     {
@@ -450,31 +445,29 @@ void IMAPviewItem::refreshFolders(bool force)
 
     removeChilds();
     currentFolders.clear();
-    QList<Folder> *folders = wrapper->listFolders();
+    QValueList<FolderP> * folders = wrapper->listFolders();
 
-    Folder *it;
+    QValueList<FolderP>::Iterator it;
     QListViewItem*item = 0;
     QListViewItem*titem = 0;
     QString fname,del,search;
     int pos;
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    folders->setAutoDelete(false);
 
-    for ( it = folders->first(); it; it = folders->next() )
+    for ( it = folders->begin(); it!=folders->end(); ++it)
     {
-        if (it->getDisplayName().lower()=="inbox")
+        if ((*it)->getDisplayName().lower()=="inbox")
         {
-            item = new IMAPfolderItem( it, this , item );
+            item = new IMAPfolderItem( (*it), this , item );
             folders->remove(it);
             qDebug("inbox found");
             break;
         }
     }
-    for ( it = folders->first(); it; it = folders->next() )
+    for ( it = folders->begin(); it!=folders->end(); ++it)
     {
-        fname = it->getDisplayName();
-        currentFolders.append(it->getName());
-        pos = fname.findRev(it->Separator());
+        fname = (*it)->getDisplayName();
+        currentFolders.append((*it)->getName());
+        pos = fname.findRev((*it)->Separator());
         if (pos != -1)
         {
             fname = fname.left(pos);
@@ -483,14 +476,14 @@ void IMAPviewItem::refreshFolders(bool force)
         if (pitem)
         {
             titem = item;
-            item = new IMAPfolderItem(it,pitem,pitem->firstChild(),this);
+            item = new IMAPfolderItem( (*it),pitem,pitem->firstChild(),this);
             /* setup the short name */
-            item->setText(0,it->getDisplayName().right(it->getDisplayName().length()-pos-1));
+            item->setText(0,(*it)->getDisplayName().right((*it)->getDisplayName().length()-pos-1));
             item = titem;
         }
         else
         {
-            item = new IMAPfolderItem( it, this , item );
+            item = new IMAPfolderItem( (*it), this , item );
         }
     }
     delete folders;
@@ -578,10 +571,9 @@ bool IMAPviewItem::offline()
     return account->getOffline();
 }
 
-IMAPfolderItem::IMAPfolderItem( Folder *folderInit, IMAPviewItem *parent , QListViewItem*after )
-        : AccountViewItem( parent , after )
+IMAPfolderItem::IMAPfolderItem( const FolderP& folderInit, IMAPviewItem *parent , QListViewItem*after )
+        : AccountViewItem( folderInit, parent , after )
 {
-    folder = folderInit;
     imap = parent;
     if (folder->getDisplayName().lower()!="inbox")
     {
@@ -594,10 +586,9 @@ IMAPfolderItem::IMAPfolderItem( Folder *folderInit, IMAPviewItem *parent , QList
     setText( 0, folder->getDisplayName() );
 }
 
-IMAPfolderItem::IMAPfolderItem( Folder *folderInit, IMAPfolderItem *parent , QListViewItem*after, IMAPviewItem *master  )
-        : AccountViewItem( parent,after )
+IMAPfolderItem::IMAPfolderItem(const FolderP &folderInit, IMAPfolderItem *parent , QListViewItem*after, IMAPviewItem *master  )
+        : AccountViewItem(folderInit, parent,after )
 {
-    folder = folderInit;
     imap = master;
     if (folder->getDisplayName().lower()!="inbox")
     {
@@ -768,20 +759,20 @@ void MHviewItem::refresh(bool force)
     if (childCount()>0 && force==false) return;
     removeChilds();
     currentFolders.clear();
-    QList<Folder> *folders = wrapper->listFolders();
-    Folder *it;
+    QValueList<FolderP> *folders = wrapper->listFolders();
+    QValueList<FolderP>::ConstIterator it;
     MHfolderItem*item = 0;
     MHfolderItem*pmaster = 0;
     QString fname = "";
     int pos;
-    for ( it = folders->first(); it; it = folders->next() )
+    for ( it = folders->begin(); it!=folders->end(); ++it)
     {
-        fname = it->getDisplayName();
+        fname = (*it)->getDisplayName();
         /* this folder itself */
         if (fname=="/")
         {
             currentFolders.append(fname);
-            folder = it;
+            folder = (*it);
             continue;
         }
         currentFolders.append(fname);
@@ -797,16 +788,14 @@ void MHviewItem::refresh(bool force)
         }
         if (pmaster)
         {
-            item = new MHfolderItem( it, pmaster, item, this );
+            item = new MHfolderItem( (*it), pmaster, item, this );
         }
         else
         {
-            item = new MHfolderItem( it, this , item );
+            item = new MHfolderItem( (*it), this , item );
         }
-        item->setSelectable(it->may_select());
+        item->setSelectable((*it)->may_select());
     }
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    folders->setAutoDelete(false);
     delete folders;
 }
 
@@ -878,16 +867,15 @@ void MHviewItem::contextMenuSelected(int which)
 MHfolderItem::~MHfolderItem()
 {}
 
-MHfolderItem::MHfolderItem( Folder *folderInit, MHviewItem *parent , QListViewItem*after  )
-        : AccountViewItem( parent,after )
+MHfolderItem::MHfolderItem( const FolderP &folderInit, MHviewItem *parent , QListViewItem*after  )
+        : AccountViewItem(folderInit, parent,after )
 {
-    folder = folderInit;
     mbox = parent;
     initName();
 }
 
-MHfolderItem::MHfolderItem( Folder *folderInit, MHfolderItem *parent, QListViewItem*after, MHviewItem*master)
-        : AccountViewItem( parent,after )
+MHfolderItem::MHfolderItem(const FolderP& folderInit, MHfolderItem *parent, QListViewItem*after, MHviewItem*master)
+        : AccountViewItem(folderInit, parent,after )
 {
     folder = folderInit;
     mbox = master;
@@ -921,7 +909,7 @@ void MHfolderItem::initName()
     setText( 0, bName );
 }
 
-Folder*MHfolderItem::getFolder()
+const FolderP&MHfolderItem::getFolder()const
 {
     return folder;
 }
@@ -1043,13 +1031,19 @@ AccountViewItem::AccountViewItem( AccountView *parent )
 }
 
 AccountViewItem::AccountViewItem( QListViewItem *parent)
-        : QListViewItem( parent)
+        : QListViewItem( parent),folder(0)
 {
     init();
 }
 
 AccountViewItem::AccountViewItem( QListViewItem *parent , QListViewItem*after  )
-        :QListViewItem( parent,after )
+        :QListViewItem( parent,after ),folder(0)
+{
+    init();
+}
+
+AccountViewItem::AccountViewItem( const Opie::osmart_pointer<Folder>&folderInit,QListViewItem *parent , QListViewItem*after  )
+       :QListViewItem( parent,after ),folder(folderInit)
 {
     init();
 }
@@ -1057,12 +1051,11 @@ AccountViewItem::AccountViewItem( QListViewItem *parent , QListViewItem*after  )
 void AccountViewItem::init()
 {
     m_Backlink = 0;
-    folder = 0;
 }
 
 AccountViewItem::~AccountViewItem()
 {
-    if (folder) delete folder;
+    folder = 0;
 }
 
 AccountView*AccountViewItem::accountView()
@@ -1070,7 +1063,7 @@ AccountView*AccountViewItem::accountView()
     return m_Backlink;
 }
 
-void AccountViewItem::deleteAllMail(AbstractMail*wrapper,Folder*folder)
+void AccountViewItem::deleteAllMail(AbstractMail*wrapper,const FolderP&folder)
 {
     if (!wrapper) return;
     QString fname="";

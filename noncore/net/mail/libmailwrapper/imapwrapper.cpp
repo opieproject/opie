@@ -266,7 +266,7 @@ void IMAPwrapper::listMessages(const QString&mailbox,QList<RecMail> &target )
     if (result) mailimap_fetch_list_free(result);
 }
 
-QList<Folder>* IMAPwrapper::listFolders()
+QValueList<Opie::osmart_pointer<Folder> >* IMAPwrapper::listFolders()
 {
     const char *path, *mask;
     int err = MAILIMAP_NO_ERROR;
@@ -275,8 +275,7 @@ QList<Folder>* IMAPwrapper::listFolders()
     clistcell*cur_flag = 0;
     mailimap_mbx_list_flags*bflags = 0;
 
-    QList<Folder> * folders = new QList<Folder>();
-    folders->setAutoDelete( false );
+    QValueList<FolderP>* folders = new QValueList<FolderP>();
     login();
     if (!m_imap) {
         return folders;
@@ -966,7 +965,7 @@ encodedString* IMAPwrapper::fetchRawPart(const RecMail&mail,const RecPart&part)
     return fetchRawPart(mail,part.Positionlist(),false);
 }
 
-int IMAPwrapper::deleteAllMail(const Folder*folder)
+int IMAPwrapper::deleteAllMail(const FolderP&folder)
 {
     login();
     if (!m_imap) {
@@ -1007,7 +1006,7 @@ int IMAPwrapper::deleteAllMail(const Folder*folder)
     return 1;
 }
 
-int IMAPwrapper::createMbox(const QString&folder,const Folder*parentfolder,const QString& delemiter,bool getsubfolder)
+int IMAPwrapper::createMbox(const QString&folder,const FolderP&parentfolder,const QString& delemiter,bool getsubfolder)
 {
     if (folder.length()==0) return 0;
     login();
@@ -1037,7 +1036,7 @@ int IMAPwrapper::createMbox(const QString&folder,const Folder*parentfolder,const
     return 1;
 }
 
-int IMAPwrapper::deleteMbox(const Folder*folder)
+int IMAPwrapper::deleteMbox(const FolderP&folder)
 {
     if (!folder) return 0;
     login();
@@ -1123,7 +1122,8 @@ encodedString* IMAPwrapper::fetchRawBody(const RecMail&mail)
     return fetchRawPart(mail,path,false);
 }
 
-void IMAPwrapper::mvcpAllMails(Folder*fromFolder,const QString&targetFolder,AbstractMail*targetWrapper,bool moveit)
+void IMAPwrapper::mvcpAllMails(const FolderP&fromFolder,
+    const QString&targetFolder,AbstractMail*targetWrapper,bool moveit)
 {
     if (targetWrapper != this) {
         AbstractMail::mvcpAllMails(fromFolder,targetFolder,targetWrapper,moveit);

@@ -133,6 +133,7 @@ void ViewMail::setBody( RecBody body )
 
     for (unsigned int i = 0; i < body.Parts().count();++i)
     {
+        filename = "";
         type = body.Parts()[i].Type()+"/"+body.Parts()[i].Subtype();
         part_plist_t::ConstIterator it = body.Parts()[i].Parameters().begin();
         for (;it!=body.Parts()[i].Parameters().end();++it)
@@ -395,7 +396,7 @@ void ViewMail::slotReply()
     }
 
     QString rtext;
-    rtext += QString("* %1 wrote on %2:\n")		// no i18n on purpose
+    rtext += QString("* %1 wrote on %2:\n")        // no i18n on purpose
              .arg(  m_mail[0] )
              .arg( m_mail[3] );
 
@@ -410,7 +411,7 @@ void ViewMail::slotReply()
 
     QString prefix;
     if ( m_mail[1].find(QRegExp("^Re: .*$")) != -1) prefix = "";
-    else prefix = "Re: ";				// no i18n on purpose
+    else prefix = "Re: ";                // no i18n on purpose
 
     Settings *settings = new Settings();
     ComposeMail composer( settings ,this, 0, true);
@@ -422,7 +423,7 @@ void ViewMail::slotReply()
     composer.setSubject( prefix + m_mail[1] );
     composer.setMessage( rtext );
     composer.setInReplyTo(m_recMail.Msgid());
-    
+
     if ( QDialog::Accepted == QPEApplication::execDialog( &composer ) )
     {
         m_recMail.Wrapper()->answeredMail(m_recMail);

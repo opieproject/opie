@@ -143,7 +143,7 @@ void AccountView::setupFolderselect(Selectstore*sels)
     }
 }
 
-void AccountView::downloadMails(Folder*fromFolder,AbstractMail*fromWrapper)
+void AccountView::downloadMails(const FolderP&fromFolder,AbstractMail*fromWrapper)
 {
     AbstractMail*targetMail = 0;
     QString targetFolder = "";

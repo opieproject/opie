@@ -3,8 +3,10 @@
 
 #include "maildefines.h"
 
-#include <qobject.h>
 #include "settings.h"
+
+#include <qobject.h>
+#include <opie2/osmart_pointer.h>
 
 class RecMail;
 class RecBody;
@@ -21,7 +23,7 @@ class AbstractMail:public QObject
 public:
     AbstractMail(){};
     virtual ~AbstractMail(){}
-    virtual QList<Folder>* listFolders()=0;
+    virtual QValueList<Opie::osmart_pointer<Folder> >* listFolders()=0;
     virtual void listMessages(const QString & mailbox,QList<RecMail>&target )=0;
     virtual void statusFolder(folderStat&target_stat,const QString & mailbox="INBOX")=0;
     virtual RecBody fetchBody(const RecMail&mail)=0;
@@ -32,12 +34,13 @@ public:
 
     virtual void deleteMail(const RecMail&mail)=0;
     virtual void answeredMail(const RecMail&mail)=0;
-    virtual int deleteAllMail(const Folder*)=0;
+    virtual int deleteAllMail(const Opie::osmart_pointer<Folder>&)=0;
     virtual void deleteMails(const QString & FolderName,QList<RecMail> &target);
-    virtual int deleteMbox(const Folder*)=0;
+    virtual int deleteMbox(const Opie::osmart_pointer<Folder>&)=0;
     virtual void storeMessage(const char*msg,size_t length, const QString&folder)=0;
 
-    virtual void mvcpAllMails(Folder*fromFolder,const QString&targetFolder,AbstractMail*targetWrapper,bool moveit);
+    virtual void mvcpAllMails(const Opie::osmart_pointer<Folder>&fromFolder,
+        const QString&targetFolder,AbstractMail*targetWrapper,bool moveit);
     virtual void mvcpMail(const RecMail&mail,const QString&targetFolder,AbstractMail*targetWrapper,bool moveit);
 
     virtual void cleanMimeCache(){};
@@ -46,7 +49,8 @@ public:
      * if the implementing subclass has prefixes,
      * them has to be appended automatic.
      */
-    virtual int createMbox(const QString&,const Folder*parentfolder=0,const QString& delemiter="/",bool getsubfolder=false);
+    virtual int createMbox(const QString&,const Opie::osmart_pointer<Folder>&parentfolder=0,
+        const QString& delemiter="/",bool getsubfolder=false);
     virtual void logout()=0;
 
     static AbstractMail* getWrapper(IMAPaccount *a);

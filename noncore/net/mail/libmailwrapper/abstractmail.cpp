@@ -111,7 +111,7 @@ QString AbstractMail::gen_attachment_id()
     return "{" + stream.read().stripWhiteSpace() + "}";
 }
 
-int AbstractMail::createMbox(const QString&,const Folder*,const QString& delemiter,bool)
+int AbstractMail::createMbox(const QString&,const FolderP&,const QString& delemiter,bool)
 {
     return 0;
 }
@@ -133,7 +133,8 @@ void AbstractMail::deleteMails(const QString &,QList<RecMail> &)
 {
 }
 
-void AbstractMail::mvcpAllMails(Folder*fromFolder,const QString&targetFolder,AbstractMail*targetWrapper,bool moveit)
+void AbstractMail::mvcpAllMails(const FolderP&fromFolder,
+    const QString&targetFolder,AbstractMail*targetWrapper,bool moveit)
 {
     QList<RecMail> t;
     listMessages(fromFolder->getName(),t);

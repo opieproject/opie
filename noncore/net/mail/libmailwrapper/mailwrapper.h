@@ -13,7 +13,7 @@
 class Attachment
 {
 public:
-    Attachment( DocLnk lnk ); 
+    Attachment( DocLnk lnk );
     virtual ~Attachment(){}
     const QString getFileName()const{ return doc.file(); }
     const QString getName()const{ return doc.name(); }
@@ -21,7 +21,7 @@ public:
     const QPixmap getPixmap()const{ return doc.pixmap(); }
     const int getSize()const { return size; }
     DocLnk  getDocLnk() { return doc; }
-    
+
 protected:
     DocLnk doc;
     int size;
@@ -40,7 +40,7 @@ public:
     virtual ~Mail(){}
     void addAttachment( Attachment *att ) { attList.append( att ); }
     const QList<Attachment>& getAttachments()const { return attList; }
-    void removeAttachment( Attachment *att ) { attList.remove( att ); } 
+    void removeAttachment( Attachment *att ) { attList.remove( att ); }
     const QString&getName()const { return name; }
     void setName( QString s ) { name = s; }
     const QString&getMail()const{ return mail; }
@@ -66,12 +66,11 @@ private:
     QStringList m_in_reply_to;
 };
 
-class Folder : public QObject
+class Folder:public Opie::oref_count
 {
-    Q_OBJECT
-
 public:
     Folder( const QString&init_name,const QString&sep );
+    virtual ~Folder();
     const QString&getDisplayName()const { return nameDisplay; }
     const QString&getName()const { return name; }
     const QString&getPrefix()const{return prefix; }
@@ -83,17 +82,20 @@ protected:
     QString nameDisplay, name, separator,prefix;
 };
 
+typedef Opie::osmart_pointer<Folder> FolderP;
+
 class MHFolder : public Folder
 {
-    Q_OBJECT
 public:
     MHFolder(const QString&disp_name,const QString&mbox);
+    virtual ~MHFolder();
 };
 
 class IMAPFolder : public Folder
 {
     public:
         IMAPFolder(const QString&name, const QString&sep, bool select=true,bool noinf=false,const QString&prefix="" );
+        virtual ~IMAPFolder();
         virtual bool may_select()const{return m_MaySelect;}
         virtual bool no_inferior()const{return m_NoInferior;}
     private:

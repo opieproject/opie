@@ -18,13 +18,13 @@ public:
     virtual ~POP3wrapper();
     /* mailbox will be ignored */
     virtual void listMessages(const QString & mailbox, QList<RecMail> &target );
-    virtual QList<Folder>* listFolders();
+    virtual QValueList<Opie::osmart_pointer<Folder> >* listFolders();
     /* mailbox will be ignored */
     virtual void statusFolder(folderStat&target_stat,const QString & mailbox="INBOX");
 
     virtual void deleteMail(const RecMail&mail);
     virtual void answeredMail(const RecMail&mail);
-    virtual int deleteAllMail(const Folder*);
+    virtual int deleteAllMail(const Opie::osmart_pointer<Folder>&);
 
     virtual RecBody fetchBody( const RecMail &mail );
     virtual encodedString* fetchRawBody(const RecMail&mail);

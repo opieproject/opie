@@ -8,7 +8,6 @@
 #define FLAG_DRAFT    4
 #define FLAG_RECENT   5
 
-#include <qlist.h>
 #include <qbitarray.h>
 #include <qstring.h>
 #include <qstringlist.h>

@@ -14,7 +14,7 @@ MBOXwrapper::MBOXwrapper(const QString & mbox_dir,const QString&mbox_name)
         dir.mkdir(MBOXPath);
     }
 }
-    
+
 MBOXwrapper::~MBOXwrapper()
 {
 }
@@ -24,10 +24,10 @@ void MBOXwrapper::listMessages(const QString & mailbox, QList<RecMail> &target )
     mailstorage*storage = mailstorage_new(NULL);
     QString p = MBOXPath+"/";
     p+=mailbox;
-    
+
     int r = mbox_mailstorage_init(storage,(char*)p.latin1(),0,0,0);
     mailfolder*folder;
-    folder = mailfolder_new( storage,(char*)p.latin1(),NULL);   
+    folder = mailfolder_new( storage,(char*)p.latin1(),NULL);
     r = mailfolder_connect(folder);
     if (r != MAIL_NO_ERROR) {
         qDebug("Error initializing mbox");
@@ -35,26 +35,25 @@ void MBOXwrapper::listMessages(const QString & mailbox, QList<RecMail> &target )
         mailstorage_free(storage);
         return;
     }
-    
+
     parseList(target,folder->fld_session,mailbox);
-    
+
     mailfolder_disconnect(folder);
     mailfolder_free(folder);
     mailstorage_free(storage);
     Global::statusMessage(tr("Mailbox has %1 mail(s)").arg(target.count()));
 }
 
-QList<Folder>* MBOXwrapper::listFolders()
+QValueList<Opie::osmart_pointer<Folder> >* MBOXwrapper::listFolders()
 {
-    QList<Folder> * folders = new QList<Folder>();
-    folders->setAutoDelete( false );
+    QValueList<Opie::osmart_pointer<Folder> >* folders = new QValueList<Opie::osmart_pointer<Folder> >();
     QDir dir(MBOXPath);
     if (!dir.exists()) return folders;
     dir.setFilter(QDir::Files|QDir::Writable|QDir::Readable);
     QStringList entries = dir.entryList();
     QStringList::ConstIterator it = entries.begin();
     for (;it!=entries.end();++it) {
-        Folder*inb=new Folder(*it,"/");
+        FolderP inb=new Folder(*it,"/");
         folders->append(inb);
     }
     return folders;
@@ -67,7 +66,7 @@ void MBOXwrapper::deleteMail(const RecMail&mail)
     p+=mail.getMbox();
     int r = mbox_mailstorage_init(storage,(char*)p.latin1(),0,0,0);
     mailfolder*folder;
-    folder = mailfolder_new( storage,(char*)p.latin1(),NULL);   
+    folder = mailfolder_new( storage,(char*)p.latin1(),NULL);
     r = mailfolder_connect(folder);
     if (r != MAIL_NO_ERROR) {
         qDebug("Error initializing mbox");
@@ -99,7 +98,7 @@ RecBody MBOXwrapper::fetchBody( const RecMail &mail )
 
     int r = mbox_mailstorage_init(storage,(char*)p.latin1(),0,0,0);
     mailfolder*folder;
-    folder = mailfolder_new( storage,(char*)p.latin1(),NULL);   
+    folder = mailfolder_new( storage,(char*)p.latin1(),NULL);
     r = mailfolder_connect(folder);
     if (r != MAIL_NO_ERROR) {
         qDebug("Error initializing mbox");
@@ -122,11 +121,11 @@ RecBody MBOXwrapper::fetchBody( const RecMail &mail )
         mailmessage_free(msg);
         return body;
     }
-    body = parseMail(msg);    
+    body = parseMail(msg);
     mailmessage_fetch_result_free(msg,data);
     mailfolder_free(folder);
     mailstorage_free(storage);
-    
+
     return body;
 }
 
@@ -135,7 +134,7 @@ void MBOXwrapper::mbox_progress( size_t current, size_t maximum )
     qDebug("MBOX %i von %i",current,maximum);
 }
 
-int MBOXwrapper::createMbox(const QString&folder,const Folder*,const QString&,bool )
+int MBOXwrapper::createMbox(const QString&folder,const FolderP&,const QString&,bool )
 {
     QString p = MBOXPath+"/";
     p+=folder;
@@ -182,7 +181,7 @@ encodedString* MBOXwrapper::fetchRawBody(const RecMail&mail)
 
     int r = mbox_mailstorage_init(storage,(char*)p.latin1(),0,0,0);
     mailfolder*folder;
-    folder = mailfolder_new( storage,(char*)p.latin1(),NULL);   
+    folder = mailfolder_new( storage,(char*)p.latin1(),NULL);
     r = mailfolder_connect(folder);
     if (r != MAIL_NO_ERROR) {
         Global::statusMessage(tr("Error initializing mbox"));
@@ -243,12 +242,12 @@ void MBOXwrapper::deleteMails(mailmbox_folder*f,QList<RecMail> &target)
     }
 }
 
-int MBOXwrapper::deleteAllMail(const Folder*tfolder)
+int MBOXwrapper::deleteAllMail(const FolderP&tfolder)
 {
     if (!tfolder) return 0;
     QString p = MBOXPath+"/"+tfolder->getDisplayName();
     int res = 1;
-    
+
     mailfolder*folder = 0;
     mailmessage_list*l=0;
     mailstorage*storage = mailstorage_new(NULL);
@@ -258,7 +257,7 @@ int MBOXwrapper::deleteAllMail(const Folder*tfolder)
         res = 0;
     }
     if (res) {
-        folder = mailfolder_new( storage,(char*)p.latin1(),NULL);   
+        folder = mailfolder_new( storage,(char*)p.latin1(),NULL);
         r = mailfolder_connect(folder);
         if (r != MAIL_NO_ERROR) {
             Global::statusMessage(tr("Error initializing mbox"));
@@ -286,7 +285,7 @@ int MBOXwrapper::deleteAllMail(const Folder*tfolder)
     return res;
 }
 
-int MBOXwrapper::deleteMbox(const Folder*tfolder)
+int MBOXwrapper::deleteMbox(const FolderP&tfolder)
 {
     if (!tfolder) return 0;
     QString p = MBOXPath+"/"+tfolder->getDisplayName();
@@ -316,7 +315,7 @@ void MBOXwrapper::statusFolder(folderStat&target_stat,const QString & mailbox)
         return;
     }
     int r = mbox_mailstorage_init(storage,(char*)p.latin1(),0,0,0);
-    folder = mailfolder_new( storage,(char*)p.latin1(),NULL);   
+    folder = mailfolder_new( storage,(char*)p.latin1(),NULL);
     r = mailfolder_connect(folder);
     r = mailsession_status_folder(folder->fld_session,(char*)mailbox.latin1(),&target_stat.message_count,
         &target_stat.message_recent,&target_stat.message_unseen);
