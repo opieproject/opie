@@ -16,7 +16,7 @@
     =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
   _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU General
 ..}^=.=       =       ;      Public License for more details.
-++=   -.     .`     .:       
+++=   -.     .`     .:
  :     =  ...= . :.=-        You should have received a copy of the GNU
  -.   .:....=;==+<;          General Public License along with this file;
   -_. . .   )=.  =           see the file COPYING. If not, write to the
@@ -29,9 +29,13 @@
 #ifndef APPEARANCESETTINGS_H
 #define APPEARANCESETTINGS_H
 
+#include <opie2/ofontselector.h>
+
 #include <qpe/fontdatabase.h>
 
 #include <qdialog.h>
+
+using Opie::OFontSelector;
 
 class QCheckBox;
 class QComboBox;
@@ -58,9 +62,9 @@ public:
     static QString appName() { return QString::fromLatin1("appearance"); }
 
 protected:
-	virtual void accept ( );
-	virtual void done ( int r );
-	
+    virtual void accept ( );
+    virtual void done ( int r );
+
 protected slots:
     void styleClicked ( int );
     void styleSettingsClicked ( );
@@ -71,9 +75,9 @@ protected slots:
     void editSchemeClicked();
     void saveSchemeClicked();
     void deleteSchemeClicked();
-    
+
     void tabChanged ( QWidget * );
-    
+
     void addExcept ( );
     void delExcept ( );
     void upExcept ( );
@@ -82,12 +86,12 @@ protected slots:
 
 private:
     void changeText();
-	
-	QWidget *createStyleTab ( QWidget *parent, Config &cfg );
-	QWidget *createDecoTab ( QWidget *parent, Config &cfg );
-	QWidget *createFontTab ( QWidget *parent, Config &cfg );
-	QWidget *createColorTab ( QWidget *parent, Config &cfg );
-	QWidget *createAdvancedTab ( QWidget *parent, Config &cfg );
+
+    QWidget *createStyleTab ( QWidget *parent, Config &cfg );
+    QWidget *createDecoTab ( QWidget *parent, Config &cfg );
+    QWidget *createFontTab ( QWidget *parent, Config &cfg );
+    QWidget *createColorTab ( QWidget *parent, Config &cfg );
+    QWidget *createAdvancedTab ( QWidget *parent, Config &cfg );
 
 private:
     bool m_style_changed;
@@ -100,7 +104,7 @@ private:
     int  m_original_deco;
     int  m_original_tabstyle;
     bool m_original_tabpos;
-    
+
     QListBox *    m_style_list;
     QPushButton * m_style_settings;
 
@@ -108,10 +112,10 @@ private:
 
     QListBox *    m_color_list;
 
-	OFontSelector *m_fontselect;
+    OFontSelector *m_fontselect;
 
-	SampleWindow *m_sample;
-    
+    SampleWindow *m_sample;
+
     QComboBox *   m_tabstyle_list;
     QRadioButton *m_tabstyle_top;
     QRadioButton *m_tabstyle_bottom;
@@ -120,7 +124,7 @@ private:
     QRadioButton *m_rotdir_ccw;
     QRadioButton *m_rotdir_flip;
 
-	QWidget *     m_advtab;
+    QWidget *     m_advtab;
     QListView *   m_except;
     QCheckBox *   m_force;
 };

@@ -16,7 +16,7 @@
     =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
   _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU General
 ..}^=.=       =       ;      Public License for more details.
-++=   -.     .`     .:       
+++=   -.     .`     .:
  :     =  ...= . :.=-        You should have received a copy of the GNU
  -.   .:....=;==+<;          General Public License along with this file;
   -_. . .   )=.  =           see the file COPYING. If not, write to the
@@ -29,25 +29,29 @@
 #ifndef EDITSCHEME_H
 #define EDITSCHEME_H
 
+#include <opie2/ocolorbutton.h>
+
 #include <qdialog.h>
+
+using Opie::OColorButton;
 
 class QColor;
 class OColorButton;
 
 class EditScheme : public QDialog {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
-	EditScheme ( int cnt, const QString *labels, QColor *colors, QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
-	virtual ~EditScheme ( );
+    EditScheme ( int cnt, const QString *labels, QColor *colors, QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+    virtual ~EditScheme ( );
 
 protected slots:
-	virtual void accept ( );
+    virtual void accept ( );
 
 private:
-	int m_count;
-	QColor *m_colors;
-	OColorButton **m_buttons;
+    int m_count;
+    QColor *m_colors;
+    OColorButton **m_buttons;
 };
 
 #endif

@@ -28,8 +28,6 @@
 
 #include "editScheme.h"
 
-#include <opie/ocolorbutton.h>
-
 #include <qaction.h>
 #include <qlabel.h>
 #include <qlayout.h>
@@ -39,10 +37,10 @@
 #include <qwhatsthis.h>
 
 EditScheme::EditScheme ( int cnt, const QString *labels, QColor *colors, QWidget* parent,  const char* name, bool modal, WFlags )
-	: QDialog ( parent, name, modal, WStyle_ContextHelp )
+    : QDialog ( parent, name, modal, WStyle_ContextHelp )
 {
-	setCaption ( tr( "Edit scheme" ) );
-	QGridLayout *layout = new QGridLayout ( this, 0, 0, 4, 4 );
+    setCaption ( tr( "Edit scheme" ) );
+    QGridLayout *layout = new QGridLayout ( this, 0, 0, 4, 4 );
 
     m_count = cnt;
     m_buttons = new OColorButton * [cnt];
@@ -52,24 +50,24 @@ EditScheme::EditScheme ( int cnt, const QString *labels, QColor *colors, QWidget
     {
         QLabel *l = new QLabel ( labels [i], this );
         layout-> addWidget ( l, i, 0 );
-		QWhatsThis::add( l, tr( "Click here to select a color for: " ).arg( labels [i] ) );
+        QWhatsThis::add( l, tr( "Click here to select a color for: " ).arg( labels [i] ) );
 
         m_buttons [i] = new OColorButton ( this, colors [i] );
         layout-> addWidget ( m_buttons [i], i, 1 );
-		QWhatsThis::add( m_buttons [i], tr( "Click here to select a color for: " ).arg( labels [i] ) );
+        QWhatsThis::add( m_buttons [i], tr( "Click here to select a color for: " ).arg( labels [i] ) );
     }
 }
 
 EditScheme::~EditScheme ( )
 {
-	delete [] m_buttons;
+    delete [] m_buttons;
 }
 
 void EditScheme::accept ( )
 {
-	for ( int i = 0; i < m_count; i++ ) 
-		m_colors [i] = m_buttons [i]-> color ( );
-		
-	QDialog::accept ( );
+    for ( int i = 0; i < m_count; i++ )
+        m_colors [i] = m_buttons [i]-> color ( );
+
+    QDialog::accept ( );
 }
 

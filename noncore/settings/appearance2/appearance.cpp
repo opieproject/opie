@@ -36,10 +36,9 @@
 #include "sample.h"
 
 /* OPIE */
-#include <opie/ofontselector.h>
-#include <opie/odevice.h>
-#include <opie/ofiledialog.h>
-#include <opie/otabwidget.h>
+#include <opie2/odevice.h>
+#include <opie2/ofiledialog.h>
+#include <opie2/otabwidget.h>
 
 #include <qpe/config.h>
 #include <qpe/global.h>
