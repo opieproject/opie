@@ -70,7 +70,7 @@ config OPTIMIZATIONS
 
 endmenu
 
-menu "Libraries"
+menu "Base"
   choice
     prompt "Qpe Library Selection"
     default LIBQPE
@@ -79,11 +79,57 @@ menu "Libraries"
     source x11/config.in
   endchoice
   source libopie/config.in
-  source freetype/config.in
+  source core/opie-login/config.in
+  source core/opiealarm/config.in
+  source core/launcher/config.in
 endmenu
 
-source inputmethods/config.in
-source core/config.in
-source noncore/config.in
-source development/config.in
-source quickexec/config.in
+comment ""
+
+menu "Applets"
+  source core/applets/config.in
+  source noncore/applets/config.in
+endmenu
+menu "Apps"
+  source core/apps/config.in
+  source noncore/apps/config.in
+endmenu
+menu "Communications and Networking"
+  source noncore/comm/config.in
+  source noncore/mail/config.in
+  source noncore/net/config.in
+endmenu
+menu "Games"
+  source noncore/games/config.in
+endmenu
+menu "Graphics and Multimedia"
+  source freetype/config.in
+  source noncore/graphics/config.in
+  source core/multimedia/config.in
+  source noncore/multimedia/config.in
+endmenu
+menu "Input methods"
+  source inputmethods/config.in
+endmenu
+menu "Pim"
+  source core/pim/config.in
+  menu "Today Plugins"
+    source noncore/todayplugins/config.in
+    source core/pim/today/plugins/config.in
+  endmenu
+endmenu
+menu "Settings"
+  source core/settings/config.in
+  source noncore/settings/config.in
+endmenu
+menu "Theming"
+  source noncore/decorations/config.in
+  source noncore/styles/config.in
+endmenu
+menu "Tools"
+  source noncore/tools/config.in
+  source development/config.in
+endmenu
+menu "Unsupported"
+  source noncore/unsupported/config.in
+endmenu

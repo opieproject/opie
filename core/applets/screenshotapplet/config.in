@@ -1,4 +1,4 @@
   config SCREENSHOTAPPLET
-    boolean "screenshotapplet"
+    boolean "Screenshot"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

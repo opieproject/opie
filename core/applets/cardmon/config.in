@@ -1,4 +1,4 @@
   config CARDMON
-    boolean "cardmon"
+    boolean "Cardmon (monitor cf/sd/mmc card status, and eject function)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

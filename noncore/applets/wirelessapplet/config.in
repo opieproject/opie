@@ -1,4 +1,4 @@
   config WIRELESSAPPLET
-    boolean "wirelessapplet"
+    boolean "Wireless (view wireless signal strength, and renew IP on AP change)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,4 +1,4 @@
-#  config #UBROWSER
-#    boolean "ubrowser"
-#    default "y"
-#    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+  config UBROWSER
+    boolean "ubrowser"
+    default "n"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

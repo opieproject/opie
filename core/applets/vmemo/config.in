@@ -1,4 +1,4 @@
   config VMEMO
-    boolean "vmemo"
+    boolean "Vmemo (take voice memos)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
