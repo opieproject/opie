@@ -534,6 +534,10 @@ void Config::read()
 bool Config::parse( const QString &l )
 {
     QString line = l.stripWhiteSpace();
+    
+    if ( line [0] == QChar ( '#' ))
+    	return true; // ignore comments
+    
     if ( line[ 0 ] == QChar( '[' ) ) {
 	QString gname = line;
 	gname = gname.remove( 0, 1 );
