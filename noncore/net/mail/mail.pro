@@ -8,12 +8,13 @@ HEADERS	     = defines.h \
                composemail.h \
 	           accountview.h \
 	           mainwindow.h \
-		viewmail.h \
-		viewmailbase.h \
+               viewmail.h \
+               viewmailbase.h \
 	           opiemail.h \
-				imapwrapper.h \
-				mailtypes.h \
-				mailistviewitem.h
+               imapwrapper.h \
+               mailtypes.h \
+               mailistviewitem.h \
+               pop3wrapper.h
                
 SOURCES	     = main.cpp \
 	           opiemail.cpp \
@@ -25,10 +26,11 @@ SOURCES	     = main.cpp \
                addresspicker.cpp \
                editaccounts.cpp \
                logindialog.cpp \
-		viewmail.cpp \
-		viewmailbase.cpp \
+               viewmail.cpp \
+               viewmailbase.cpp \
                settings.cpp \
-				mailtypes.cpp 
+               mailtypes.cpp \
+               pop3wrapper.cpp
                
 INTERFACES	 = editaccountsui.ui \
                selectmailtypeui.ui \

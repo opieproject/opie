@@ -1,7 +1,44 @@
 #include "accountview.h"
 #include "imapwrapper.h"
+#include "pop3wrapper.h"
 #include "mailtypes.h"
 #include "defines.h"
+
+
+/**
+ * POP3 Account stuff
+ */
+
+POP3viewItem::POP3viewItem( POP3account *a, QListView *parent )
+    : AccountViewItem( parent )
+{
+    account = a;
+    wrapper = new POP3wrapper( account );
+    setPixmap( 0, PIXMAP_POP3FOLDER );
+    setText( 0, account->getAccountName() );
+}
+
+POP3viewItem::~POP3viewItem()
+{
+    delete wrapper;
+}
+
+void POP3viewItem::refresh( QList<RecMail> &target )
+{
+    qDebug( "POP3: refresh" );
+    wrapper->listMessages( target );
+}
+
+
+RecBody POP3viewItem::fetchBody( const RecMail & )
+{
+    qDebug( "POP3 fetchBody: IMPLEMENT ME!!" );
+    return RecBody();
+}
+
+/**
+ * IMAP Account stuff
+ */
 
 IMAPviewItem::IMAPviewItem( IMAPaccount *a, QListView *parent )
     : AccountViewItem( parent )
@@ -69,6 +106,10 @@ RecBody IMAPfolderItem::fetchBody(const RecMail&aMail)
     return imap->getWrapper()->fetchBody(aMail);
 }
 
+/**
+ * Generic stuff
+ */
+
 AccountView::AccountView( QWidget *parent, const char *name, WFlags flags )
     : QListView( parent, name, flags )
 {
@@ -86,6 +127,10 @@ void AccountView::populate( QList<Account> list )
             IMAPaccount *imap = static_cast<IMAPaccount *>(it);
             qDebug( "added IMAP " + imap->getAccountName() );
             (void) new IMAPviewItem( imap, this );
+        } else if ( it->getType().compare( "POP3" ) == 0 ) {
+            POP3account *pop3 = static_cast<POP3account *>(it);
+            qDebug( "added POP3 " + pop3->getAccountName() );
+            (void) new POP3viewItem( pop3, this );
         }
     }
 }

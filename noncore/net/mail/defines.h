@@ -13,6 +13,7 @@
 #define PIC_EDITACCOUNTS    "opiemail/editaccounts"
 #define PIC_SYNC            "opiemail/sync"
 #define PIC_IMAPFOLDER      "opiemail/imapfolder"
+#define PIC_POP3FOLDER      "opiemail/pop3folder"
 
 #define ICON_COMPOSEMAIL    QIconSet( Resource::loadPixmap( PIC_COMPOSEMAIL ) ) 
 #define ICON_SENDQUEUED     QIconSet( Resource::loadPixmap( PIC_SENDQUEUED ) ) 
@@ -23,6 +24,7 @@
 #define ICON_SYNC           QIconSet( Resource::loadPixmap( PIC_SYNC ) ) 
 
 #define PIXMAP_IMAPFOLDER   QPixmap( Resource::loadPixmap( PIC_IMAPFOLDER ) )
+#define PIXMAP_POP3FOLDER   QPixmap( Resource::loadPixmap( PIC_POP3FOLDER ) )
 
 #define IMAP_PORT           "143"
 #define IMAP_SSL_PORT       "993"

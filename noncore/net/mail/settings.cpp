@@ -132,7 +132,6 @@ QString IMAPaccount::getUniqueFileName()
     QString unique;
     
     QDir dir( (QString) getenv( "HOME" ) + "/Applications/opiemail" );
-    QStringList::Iterator it;
 
     QStringList imap = dir.entryList( "imap-*" );
     do {
@@ -210,7 +209,6 @@ QString POP3account::getUniqueFileName()
     QString unique;
     
     QDir dir( (QString) getenv( "HOME" ) + "/Applications/opiemail" );
-    QStringList::Iterator it;
 
     QStringList imap = dir.entryList( "pop3-*" );
     do {
@@ -288,7 +286,6 @@ QString SMTPaccount::getUniqueFileName()
     QString unique;
     
     QDir dir( (QString) getenv( "HOME" ) + "/Applications/opiemail" );
-    QStringList::Iterator it;
 
     QStringList imap = dir.entryList( "smtp-*" );
     do {
@@ -384,7 +381,6 @@ QString NNTPaccount::getUniqueFileName()
     QString unique;
     
     QDir dir( (QString) getenv( "HOME" ) + "/Applications/opiemail" );
-    QStringList::Iterator it;
 
     QStringList imap = dir.entryList( "nntp-*" );
     do {

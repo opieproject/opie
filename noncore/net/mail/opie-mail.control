@@ -2,7 +2,7 @@ Package: opie-mail
 Files: bin/opiemail apps/1Pim/opiemail.desktop pics/mail/*.png
 Priority: optional
 Section: opie/applications
-Maintainer: Juergen Graf <jgf@openbsd.de>
+Maintainer: Juergen Graf <jgf@handhelds.org>
 Architecture: arm
 Version: 0.0.1-$SUB_VERSION
 Depends: task-opie-minimal, libopie1

@@ -8,6 +8,7 @@
 #include "mailwrapper.h"
 
 class IMAPwrapper;
+class POP3wrapper;
 class RecMail;
 class RecBody;
 
@@ -19,6 +20,21 @@ public:
     AccountViewItem( QListViewItem *parent ) : QListViewItem( parent ) {}
     virtual void refresh(QList<RecMail>&)=0;
     virtual RecBody fetchBody(const RecMail&)=0;
+};
+
+class POP3viewItem : public AccountViewItem
+{
+
+public:
+    POP3viewItem( POP3account *a, QListView *parent );
+    ~POP3viewItem();
+    virtual void refresh( QList<RecMail> &target );
+    virtual RecBody fetchBody(const RecMail & );
+
+private:
+    POP3account *account;
+    POP3wrapper *wrapper;
+
 };
 
 class IMAPviewItem : public AccountViewItem
