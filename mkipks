@@ -4,8 +4,6 @@ QTE_VERSION=2.3.4
 DEB_VERSION=2.0
 
 # Have to do this here, since CVS can't store symlinks
-mkdir -p $OPIEDIR/etc/rc2.d
-ln -sf ../init.d/opie $OPIEDIR/etc/rc2.d/S98opie
 
 mkdir -p $OPIEDIR/etc/rcS.d
 ln -sf ../init.d/bootsplash $OPIEDIR/etc/rcS.d/S01bootsplash
