@@ -63,18 +63,18 @@ namespace OpieTooth {
         progress->setTotalSteps(20);
 
 
-       QFrame *buttonFrame = new QFrame(Frame7, "");	
-	
+       QFrame *buttonFrame = new QFrame(Frame7, "");
+
         StartButton = new QPushButton( buttonFrame, "StartButton" );
         StartButton->setText( tr( "Start" ) );
 
         StopButton = new QPushButton( buttonFrame, "StopButton" );
         StopButton->setText( tr( "Cancel" ) );
 
- 
+
         QHBoxLayout *buttonLayout = new QHBoxLayout(buttonFrame);
         buttonLayout->addWidget(StartButton);
-	buttonLayout->addWidget(StopButton);	
+	buttonLayout->addWidget(StopButton);
 
         ListView1 = new QListView( privateLayoutWidget, "ListView1" );
 
@@ -96,11 +96,11 @@ namespace OpieTooth {
     }
 
 // hack, make cleaner later
-    void ScanDialog::progressTimer(int maxSeconds) {
+    void ScanDialog::progressTimer() {
 
         progressStat++;
-            if (progressStat++ < maxSeconds) {
-                QTimer::singleShot( 1000, this, SLOT(progressTimer ) );
+            if (progressStat++ < 20) {
+                QTimer::singleShot( 1000, this, SLOT(progressTimer() ) );
             }
 
     }
@@ -109,11 +109,11 @@ namespace OpieTooth {
         progress->setProgress(0);
         progressStat = 0;
 
-        progressTimer(20);
+        progressTimer();
         // when finished, it emmite foundDevices()
         // checken ob initialisiert , qcop ans applet.
         localDevice->searchDevices();
-        progress->setProgress(20);
+
     }
 
     void ScanDialog::stopSearch() {
