@@ -1,5 +1,6 @@
 2004-??-??	The Opie Team <opie@handhelds.org>
 
+	* Fixed ZSafe not starting up (Bug #1324) (mickeyl)
 	* Fixed Drawpad initialization (Bug #1314) (mickeyl)
 	* Added four themes courtesy Robert Griebl (http://www.softforge.de/zstyle)
 	* Added Conversion tool for pim-data (eilers)

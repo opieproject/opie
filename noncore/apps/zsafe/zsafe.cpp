@@ -4,7 +4,7 @@
 **
 ** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: zsafe.cpp,v 1.14 2004-04-04 13:54:46 mickeyl Exp $
+** $Id: zsafe.cpp,v 1.15 2004-05-26 16:17:16 mickeyl Exp $
 **
 ** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 **
@@ -487,59 +487,30 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
 #endif
 
 #endif
-    // setCaption( tr( "ZSafe" ) );
-
-    filename = conf->readEntry(APP_KEY+"document");
+   setCaption( tr( "ZSafe" ) );
+   QString zsafeAppDirPath = QDir::homeDirPath() + "/Documents/application/zsafe";
+   QString filename = conf->readEntry(APP_KEY+"document");
    if (filename.isEmpty() || filename.isNull())
    {
-
-    // check if the directory application exists, if not
-    // create it
-// #ifndef WIN32
-    // QString d1("Documents/application");
-// #else
-    QString d1(QDir::homeDirPath() + "/Documents/application");
-// #endif
-    QDir pd1(d1);
-    if (!pd1.exists())
-    {
-       QDir pd1("Documents");
-       if (!pd1.mkdir("application", FALSE))
+       if ( !QDir( zsafeAppDirPath ).exists() )
        {
-          QMessageBox::critical( 0, tr("ZSafe"),
-#ifdef JPATCH_HDE
-               tr("Can't create directory\n.../Documents/application\n\nZSafe will now exit."));
-#else
-               tr("Can't create directory\n%1\n\nZSafe will now exit.").arg(d1));
-#endif
-          exitZs (1);
+           //FIXME: Pending someone to look into why QDir.mkdir does not work as expected
+           QString cmdline = QString().sprintf( "mkdir -p %s", (const char*) zsafeAppDirPath );
+           ::system( cmdline );
+       }
+       if ( !QDir( zsafeAppDirPath ).exists() )
+       {
+               QMessageBox::critical( 0, "ZSafe", tr("Can't create application data directory.\nZSafe will now exit."));
+               exitZs (1);
        }
     }
-     QString d2(QDir::homeDirPath() + "/Documents/application/zsafe");
-    QDir pd2(d2);
-    if (!pd2.exists())
-    {
-       QDir pd2(QDir::homeDirPath() + "Documents/application");
-       if (!pd2.mkdir("zsafe", FALSE))
-       {
-          QMessageBox::critical( 0, tr("ZSafe"),
-#ifdef JPATCH_HDE
-               tr("Can't create directory\n...//Documents/application/zsafe\n\nZSafe will now exit."));
-#else
-               tr("Can't create directory\n%1\n\nZSafe will now exit.").arg(d2));
-#endif
-          exitZs (1);
-       }
-    }
-
 
     // set the default filename
-    filename=d2 + "/passwords.zsf";
+    filename = zsafeAppDirPath + "/passwords.zsf";
 
     // save the current filename to the config file
     conf->writeEntry(APP_KEY+"document", filename);
     saveConf();
-   }
 
    //if (filename == "INVALIDPWD")
       //filename = "";
@@ -2256,7 +2227,7 @@ bool ZSafe::saveDocument(const char* _filename,
        retval = saveEntry(entry);
            for (int z=0; z<i; z++) free(entry[z]);
            if (retval == PWERR_DATA) {
-              owarn << "1: Error writing file, contents not saved" << oendl; 
+              owarn << "1: Error writing file, contents not saved" << oendl;
               saveFinalize();
               return false;
            }
@@ -2300,7 +2271,7 @@ bool ZSafe::saveDocument(const char* _filename,
                   free(entry[z]);
               }
               if (retval == PWERR_DATA) {
-                        owarn << "1: Error writing file, contents not saved" << oendl; 
+                        owarn << "1: Error writing file, contents not saved" << oendl;
                         saveFinalize();
                         return false;
               }
@@ -2309,7 +2280,7 @@ bool ZSafe::saveDocument(const char* _filename,
         }
 
     if (saveFinalize() == PWERR_DATA) {
-                owarn << "2: Error writing file, contents not saved" << oendl; 
+                owarn << "2: Error writing file, contents not saved" << oendl;
         return false;
     } else {
 #ifndef DESKTOP
@@ -3187,7 +3158,7 @@ void ZSafe::editCategory()
 
            if (cat)
            {
-              owarn << "Category found" << oendl; 
+              owarn << "Category found" << oendl;
 
               // if (!icon.isEmpty() && !icon.isNull())
               if (icon != "predefined.png")
