@@ -35,6 +35,7 @@
 InstallDlgImpl::InstallDlgImpl( vector<InstallData> &packageList, DataManager *dataManager, QWidget * parent, const char* name, bool modal, WFlags fl )
     : InstallDlg( parent, name, modal, fl )
 {
+    pIpkg = 0;
     upgradePackages = false;
     dataMgr = dataManager;
     vector<Destination>::iterator dit;
