@@ -1,10 +1,15 @@
 #include <qtextstream.h>
 #include <qdatetime.h>
 
+#include <opie2/ofiledialog.h>
+#include <opie2/ofileselector.h>
+#include <opie2/odebug.h>
+
 #include "ircmessageparser.h"
 #include "ircversion.h"
 #include "ircchannelperson.h"
-//#include "transferreceiver.h"
+#include "dcctransfertab.h"
+#include "ircservertab.h"
 
 /* Lookup table for literal commands */
 IRCLiteralMessageParserStruct IRCMessageParser::literalParserProcTable[] = {
@@ -461,12 +466,25 @@ void IRCMessageParser::parseCTCPAction(IRCMessage *message) {
 
 void IRCMessageParser::parseCTCPDCC(IRCMessage *message) {
     QStringList params = QStringList::split(' ', message->param(0).stripWhiteSpace());
-    if( params.count() != 5) {
-        emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Malformed DCC request from ") + IRCPerson(message->prefix()).nick()));
-        return;
-    }
+    
+    if(params[0] == "SEND") {
+        QString nickname = IRCPerson(message->prefix()).nick();
+        if( params.count() != 5) {
+            emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Malformed DCC request from %1").arg(nickname)));
+            return;
+        }
+        bool accepted = DCCTransferTab::confirm(static_cast<QWidget*>(m_session->parent()), nickname, params[1], params[4].toUInt());
+        if(!accepted)
+            return;
+        QString filename = Opie::Ui::OFileDialog::getSaveFileName(Opie::Ui::OFileSelector::EXTENDED_ALL,
+                QString::null, params[1], MimeTypes(), 0, tr("Save As"));
+        if(filename.isEmpty())
+            return;
 
-    //TransferReceiver *foo = new TransferReceiver(params[2].toUInt(),  params[3].toUInt(), params[1], params[4].toUInt());
+        odebug << "Receiving file " << filename << " from " << nickname << oendl;
+        static_cast<IRCServerTab*>(m_session->parent())->mainwindow()->addDCC(DCCTransfer::Recv, params[2].toUInt(), params[3].toUInt(),
+                filename, nickname, params[4].toUInt());
+    }
 }
 
 void IRCMessageParser::parseLiteralMode(IRCMessage *message) {

@@ -4,11 +4,12 @@
 #include "ircchannelperson.h"
 #include "ircversion.h"
 
-IRCSession::IRCSession(QWidget *parent, IRCServer *server) {
+IRCSession::IRCSession(QObject *parent, IRCServer *server)
+    : QObject(parent)
+{
     m_server = server;
     m_connection = new IRCConnection(m_server);
     m_parser     = new IRCMessageParser(this);
-    m_parent = parent;
     connect(m_connection, SIGNAL(messageArrived(IRCMessage*)), this, SLOT(handleMessage(IRCMessage*)));
     connect(m_parser, SIGNAL(outputReady(IRCOutput)), this, SIGNAL(outputReady(IRCOutput)));
     connect(m_connection, SIGNAL(outputReady(IRCOutput)), this, SIGNAL(outputReady(IRCOutput)));

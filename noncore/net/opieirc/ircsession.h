@@ -30,6 +30,7 @@
 #include "ircoutput.h"
 
 class IRCMessageParser;
+class IRCServerTab;
 
 /* The IRCSession stores all information relating to the connection
    to one IRC server. IRCSession makes it possible to run multiple
@@ -39,7 +40,7 @@ class IRCSession : public QObject {
 friend class IRCMessageParser;
     Q_OBJECT
 public:
-    IRCSession(QWidget *parent, IRCServer *server);
+    IRCSession(QObject *parent, IRCServer *server);
     ~IRCSession();
     
     void join(QString channel);
@@ -90,7 +91,6 @@ protected:
     QList<IRCPerson>       m_people;
     QString                m_validUsermodes;
     QString                m_validChannelmodes;
-    QWidget               *m_parent;         
 };
 
 #endif /* __IRCSESSION_H */

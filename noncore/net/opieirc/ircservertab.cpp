@@ -412,4 +412,8 @@ void IRCServerTab::slotUpdateChannels() {
         it.current()->list()->update();
     }
 }
+
+MainWindow *IRCServerTab::mainwindow() {
+    return m_mainWindow;
+}
                                                                                                  

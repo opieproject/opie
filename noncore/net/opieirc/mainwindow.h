@@ -24,9 +24,12 @@
 #include <qmainwindow.h>
 #include <qaction.h>
 #include <qlist.h>
-#include "mainwindow.h"
+
+#include "dcctransfer.h"
 #include "ircmisc.h"
 #include "irctab.h"
+
+class DCCTransferTab;
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -37,6 +40,8 @@ public:
     void killTab(IRCTab *tab, bool now = false);
     static QString appName() { return QString::fromLatin1("opieirc"); }
     static QString appCaption();
+    void addDCC(DCCTransfer::Type type, Q_UINT32 ip4Addr, Q_UINT16 port, 
+        const QString &filename, const QString &nickname, unsigned int size);
 signals:
     void updateScroll();
 protected slots:
@@ -56,6 +61,7 @@ protected:
     IRCTabWidget *m_tabWidget;
     QList<IRCTab> m_tabs;
     QList<IRCTab> m_toDelete;
+    DCCTransferTab *m_dccTab;
 };
 
 #endif /* __MAINWINDOW_H */

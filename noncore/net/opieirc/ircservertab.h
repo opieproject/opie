@@ -41,6 +41,7 @@ public:
     QString title();
     IRCSession *session();
     IRCServer *server();
+    MainWindow *mainwindow();
 
     /* Start the server session */
     void doConnect();
