@@ -3,293 +3,296 @@
     <name>Checkbook</name>
     <message>
         <source>Checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Čekugrāmata</translation>
     </message>
     <message>
         <source>New checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Jauna Čeku grāmata</translation>
     </message>
     <message>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info</translation>
     </message>
     <message>
         <source>Transactions</source>
-        <translation type="unfinished"></translation>
+        <translation>Tranzakcijas</translation>
     </message>
     <message>
         <source>Charts</source>
-        <translation type="unfinished"></translation>
+        <translation>Grafiki</translation>
     </message>
     <message>
         <source>Password protect</source>
-        <translation type="unfinished"></translation>
+        <translation>Paroles aizsardzība</translation>
     </message>
     <message>
         <source>Click here to enable/disable password protection of this checkbook.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai izslēgtu/ieslēgtu paroles aizsardzību šajā čeku grāmatiņā.</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nosaukums:</translation>
     </message>
     <message>
         <source>Enter name of checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ievadiet čeku grāmatiņas nosaukumu.</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tips:</translation>
     </message>
     <message>
         <source>Select type of checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Izvēlaties čeku grāmatiņas tipu.</translation>
     </message>
     <message>
         <source>Bank:</source>
-        <translation type="unfinished"></translation>
+        <translation>Banka:</translation>
     </message>
     <message>
         <source>Enter name of the bank for this checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ievadiet bankas nosaukumu čeku grāmatiņai.</translation>
     </message>
     <message>
         <source>Account number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Konta nummurs:</translation>
     </message>
     <message>
         <source>Enter account number for this checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ievadiet konta nummuru šai čeku grāmatiņai.</translation>
     </message>
     <message>
         <source>PIN number:</source>
-        <translation type="unfinished"></translation>
+        <translation>PIN:</translation>
     </message>
     <message>
         <source>Enter PIN number for this checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ievadiet čeku grāmatiņas PIN kodu.</translation>
     </message>
     <message>
         <source>Starting balance:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sākuma atlikums:</translation>
     </message>
     <message>
         <source>Enter the initial balance for this checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ievadied čeku grāmatiņas sākuma bilanci.</translation>
     </message>
     <message>
         <source>Notes:</source>
-        <translation type="unfinished"></translation>
+        <translation>Piezīmes:</translation>
     </message>
     <message>
         <source>Enter any additional information for this checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ievadiet jebkuru papildus informāciju par čeku grāmatiņu.</translation>
     </message>
     <message>
         <source>Sort by:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kārtot pēc:</translation>
     </message>
     <message>
         <source>Select checkbook sorting here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Izvēlaties čeku grāmatiņas kārtošanu.</translation>
     </message>
     <message>
         <source>Entry Order</source>
-        <translation type="unfinished"></translation>
+        <translation>Ierakstu Kārtība</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Datums</translation>
     </message>
     <message>
         <source>Number</source>
-        <translation type="unfinished"></translation>
+        <translation>Numurs</translation>
     </message>
     <message>
         <source>This is a listing of all transactions entered for this checkbook.
 
 To sort entries by a specific field, click on the column name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Šis ir visu čeku grāmatiņā ierakstīto transakciju saraksts.
+
+Lai sakārtotu ierakstus pēc kāda lauka, klikšķiniet uz kolonas vārda.</translation>
     </message>
     <message>
         <source>Id</source>
-        <translation type="unfinished"></translation>
+        <translation>Id</translation>
     </message>
     <message>
         <source>SortDate</source>
-        <translation type="unfinished"></translation>
+        <translation>SortDatums</translation>
     </message>
     <message>
         <source>Num</source>
-        <translation type="unfinished"></translation>
+        <translation>Num</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Apraksts</translation>
     </message>
     <message>
         <source>Amount</source>
-        <translation type="unfinished"></translation>
+        <translation>Summa</translation>
     </message>
     <message>
         <source>Balance</source>
-        <translation type="unfinished"></translation>
+        <translation>Bilance</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Jauns</translation>
     </message>
     <message>
         <source>Click here to add a new transaction.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit, lai pievienotu jaunu transakciju.</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Labot</translation>
     </message>
     <message>
         <source>Select a transaction and then click here to edit it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Izvēlaties tranzakciju un tad klikšķiniet šeit, lai to labotu.</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēst</translation>
     </message>
     <message>
         <source>Select a checkbook and then click here to delete it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Izvēlaties čeku grāmatiņu un tad klikšķiniet šeit, lai to dzēstu.</translation>
     </message>
     <message>
         <source>Select the desired chart below and then click on the Draw button.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet uz izvēlētā grafika zemāk un tad klikšķiniet uz Zīmēt pogas.</translation>
     </message>
     <message>
         <source>Click here to select the desired chart type.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai norādītu izvēlēto grafika tipu.</translation>
     </message>
     <message>
         <source>Account balance</source>
-        <translation type="unfinished"></translation>
+        <translation>Konta bilance</translation>
     </message>
     <message>
         <source>Withdrawals by category</source>
-        <translation type="unfinished"></translation>
+        <translation>Izņemšana pēc kategorijas</translation>
     </message>
     <message>
         <source>Deposits by category</source>
-        <translation type="unfinished"></translation>
+        <translation>Ienākumi pēc kategorijas</translation>
     </message>
     <message>
         <source>Draw</source>
-        <translation type="unfinished"></translation>
+        <translation>Zīmēt</translation>
     </message>
     <message>
         <source>Click here to draw the selected chart.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai zīmētu izvēlēto grafiku.</translation>
     </message>
     <message>
         <source>Enter password</source>
-        <translation type="unfinished"></translation>
+        <translation>Ievadiet paroli</translation>
     </message>
     <message>
         <source>Please enter your password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lūdzu ievadiet savu paroli:</translation>
     </message>
     <message>
         <source>Confirm password</source>
-        <translation type="unfinished"></translation>
+        <translation>Apstiprini paroli</translation>
     </message>
     <message>
         <source>Please confirm your password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lūdzu apstipriniet paroli:</translation>
     </message>
     <message>
         <source>Please enter your password to confirm removal of password protection:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lūdzu ievadiet paroli, lai apstiprininātu paroles aizsardzības noņemšanu:</translation>
     </message>
     <message>
         <source>Delete transaction</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēst tranzakciju</translation>
     </message>
 </context>
 <context>
     <name>Configuration</name>
     <message>
         <source>Configure Checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurēt Čeku Grāmatiņu</translation>
     </message>
     <message>
         <source>&amp;Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Iestatījumi</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Tips</translation>
     </message>
     <message>
         <source>New Account Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Jauns Konta Tips</translation>
     </message>
     <message>
         <source>&amp;Account Types</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Kontu Tipi</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategorija</translation>
     </message>
     <message>
         <source>New Category</source>
-        <translation type="unfinished"></translation>
+        <translation>Jauna Kategorija</translation>
     </message>
     <message>
         <source>Expense</source>
-        <translation type="unfinished"></translation>
+        <translation>Izdevumi</translation>
     </message>
     <message>
         <source>Income</source>
-        <translation type="unfinished"></translation>
+        <translation>Ienākumi</translation>
     </message>
     <message>
         <source>&amp;Categories</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Kategorijas</translation>
     </message>
     <message>
         <source>Payee</source>
-        <translation type="unfinished"></translation>
+        <translation>Maksātājs</translation>
     </message>
     <message>
         <source>New Payee</source>
-        <translation type="unfinished"></translation>
+        <translation>Jauns Maksātājs</translation>
     </message>
     <message>
         <source>&amp;Payees</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Maksātāji</translation>
     </message>
     <message>
         <source>Enter currency symbol:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ievadiet valūtas simbolu:</translation>
     </message>
     <message>
         <source>Enter your local currency symbol here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Šeit ievadiet jūsu lokālās valūtas apzīmējumu.</translation>
     </message>
     <message>
         <source>Show whether checkbook is password
 protected</source>
-        <translation type="unfinished"></translation>
+        <translation>Rādīt vai čeku grāmatiņa ir aizsargāta
+ar paroli</translation>
     </message>
     <message>
         <source>Click here to select whether or not the main window will display that the checkbook is protected with a password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit, lai izvēlētos vai galvenais logs attēlo vai dotā čeku grāmatiņa ir aizsargāta ar paroli vai nē.</translation>
     </message>
     <message>
         <source>Show checkbook balances</source>
-        <translation type="unfinished"></translation>
+        <translation>Rādīt čeku grāmatiņas bilances</translation>
     </message>
     <message>
         <source>Click here to select whether or not the main window will display the current balance for each checkbook.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit, lai izvēlētos vai galvenais logs rādīs tekošo bilanci katrai čeku gramatiņai.</translation>
     </message>
     <message>
         <source>Open last checkbook</source>
