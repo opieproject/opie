@@ -310,11 +310,6 @@ void VideoWidget::paintButton( QPainter *p, int i ) {
    {
       p->drawPixmap( xoff, yoff, *buttonPixUp[i] );
    }
-//     int x = videoButtons[i].xPos;
-//     int y = videoButtons[i].yPos;
-//     int offset = 10 + videoButtons[i].isDown;
-//     p->drawPixmap( x, y, *pixmaps[videoButtons[i].isDown] );
-//     p->drawPixmap( x + 1 + offset, y + offset, *pixmaps[2], 9 * videoButtons[i].controlType, 0, 9, 9 );
 }
 
 
@@ -388,108 +383,6 @@ void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
             }
         }
     }
-
-//    for ( int i = 0; i < numVButtons; i++ )
-//    {
-//       if ( event->state() == QMouseEvent::LeftButton )
-//       {
-//          // The test to see if the mouse click is inside the button or not
-//          int x = event->pos().x() - xoff;
-//          int y = event->pos().y() - yoff;
-
-//          bool isOnButton = ( x > 0 && y > 0 && x < imgButtonMask->width()
-//                              && y < imgButtonMask->height()
-//                              && imgButtonMask->pixelIndex( x, y ) == i + 1 );
-
-//          if ( isOnButton && !videoButtons[i].isHeld )
-//          {
-//             qDebug("key %d", i);
-
-//             videoButtons[i].isHeld = TRUE;
-//             toggleButton(i);
-//                 switch (i) {
-//                 case VideoVolUp:
-//                     emit moreClicked();
-//                     return;
-//                 case VideoVolDown:
-//                     emit lessClicked();
-//                     return;
-//                 }
-//             } else if ( !isOnButton && videoButtons[i].isHeld ) {
-//                         videoButtons[i].isHeld = FALSE;
-//                         toggleButton(i);
-//             }
-
-
-//       } else {
-
-//          if ( videoButtons[i].isHeld )
-//          {
-//             videoButtons[i].isHeld = FALSE;
-//             if ( !videoButtons[i].isToggle ) {
-//                setToggleButton( i, FALSE );
-//             }
-//             qDebug("key %d", i);
-//             switch(i)  {
-//             case VideoPlay:
-//             {
-//                if( mediaPlayerState->isPaused ) {
-//                   setToggleButton( i, FALSE );
-//                   mediaPlayerState->setPaused( FALSE );
-//                   return;
-//                }
-//                else if( !mediaPlayerState->isPaused )  {
-//                   setToggleButton( i, TRUE );
-//                   mediaPlayerState->setPaused( TRUE );
-//                   return;
-//                } else {
-//                   return;
-//                }
-//             }
-
-//             case VideoStop:       mediaPlayerState->setPlaying(FALSE); return;
-// //            case VideoPlay:       mediaPlayerState->setPlaying(videoButtons[i].isDown); return;
-// //           case VideoPause:      mediaPlayerState->setPaused(videoButtons[i].isDown); return;
-//             case VideoNext:       mediaPlayerState->setNext(); return;
-//             case VideoPrevious:   mediaPlayerState->setPrev(); return;
-//                 case VideoVolUp:      emit moreReleased(); return;
-//                 case VideoVolDown:    emit lessReleased(); return;
-// //            case VideoPlayList:   mediaPlayerState->setList(); return;
-//             case VideoFullscreen: mediaPlayerState->setFullscreen( TRUE ); makeVisible(); return;
-//             }
-//          }
-//       }
-//    }
-
-
-
-
-
-//     for ( int i = 0; i < numButtons; i++ ) {
-//         int x = videoButtons[i].xPos;
-//         int y = videoButtons[i].yPos;
-//         if ( event->state() == QMouseEvent::LeftButton ) {
-//               // The test to see if the mouse click is inside the circular button or not
-//               // (compared with the radius squared to avoid a square-root of our distance)
-//             int radius = 16;
-//             QPoint center = QPoint( x + radius, y + radius );
-//             QPoint dXY = center - event->pos();
-//             int dist = dXY.x() * dXY.x() + dXY.y() * dXY.y();
-//             bool isOnButton = dist <= (radius * radius);
-//             if ( isOnButton != videoButtons[i].isHeld ) {
-//                 videoButtons[i].isHeld = isOnButton;
-//                 toggleButton(i);
-//             }
-//         } else {
-//             if ( videoButtons[i].isHeld ) {
-//                 videoButtons[i].isHeld = FALSE;
-//                 if ( !videoButtons[i].isToggle )
-//                     setToggleButton( i, FALSE );
-//             }
-//         }
-
-
-//    }
 }
 
 
