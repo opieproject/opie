@@ -1,5 +1,5 @@
 Package: libopietooth1
-Files: lib/libopietooth.so.1.0.0 lib/libopietooth.so.1.0 lib/libopietooth.so.1
+Files: lib/libopietooth1.so*
 Priority: optional
 Section: libs
 Maintainer: Maximilian Reiﬂ <max.reiss@gmx.de>
