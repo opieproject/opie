@@ -42,6 +42,7 @@
 #include <qstring.h>
 #include <qfile.h>
 #include <qtimer.h>
+#include <qtextstream.h>
 #include <qpopupmenu.h>
 
 #include <net/if.h>
@@ -128,24 +129,59 @@ int IrdaApplet::setIrdaDiscoveryStatus(int d) {
 }
 
 
+void IrdaApplet::showDiscovered() {
+    QFile discovery("/proc/net/irda/discovery");
+
+    if (discovery.open(IO_ReadOnly) ) {
+        QStringList list;
+        // since it is /proc we _must_ use QTextStream
+        QTextStream stream ( &discovery);
+        QString streamIn;
+        streamIn = stream.read();
+        list = QStringList::split("\n", streamIn);
+
+        for(QStringList::Iterator line=list.begin(); line!=list.end(); line++) {
+            if( (*line).startsWith("nickname:") ){
+                discoveredDevice  = (*line).mid(((*line).find(':'))+1,(*line).find(',')-(*line).find(':')-1);
+                qDebug(discoveredDevice);
+            }
+        }
+    }
+
+}
+
 void IrdaApplet::mousePressEvent( QMouseEvent *) {
     QPopupMenu *menu = new QPopupMenu();
     QString cmd;
     int ret=0;
+    showDiscovered();
 
     /* Refresh active state */
     timerEvent(NULL);
 
 //	menu->insertItem( tr("More..."), 4 );
-    if (irdaactive)
-        menu->insertItem( tr("Disable IrDA"), 0 );
-    else
-        menu->insertItem( tr("Enable IrDA"), 1 );
 
-    if (irdaDiscoveryActive)
+    menu->insertItem( tr("Discovered Device:"),  9);
+
+    if ( !discoveredDevice.isEmpty() ) {
+        menu->insertItem( discoveredDevice ,7 );
+    } else {
+        menu->insertItem( tr("None"), 8);
+    }
+
+    menu->insertSeparator();
+
+    if (irdaactive) {
+        menu->insertItem( tr("Disable IrDA"), 0 );
+    } else {
+        menu->insertItem( tr("Enable IrDA"), 1 );
+    }
+
+    if (irdaDiscoveryActive) {
         menu->insertItem( tr("Disable Discovery"), 2 );
-    else
+    } else {
         menu->insertItem( tr("Enable Discovery"), 3 );
+    }
 
     if( receiveActive ){
         menu->insertItem( tr("Disable Receive"), 5 );

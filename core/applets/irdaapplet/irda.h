@@ -42,6 +42,7 @@ private:
     int setIrdaStatus(int);
     int checkIrdaDiscoveryStatus();
     int setIrdaDiscoveryStatus(int);
+    void showDiscovered();
     int sockfd;
 
 private:
@@ -49,6 +50,7 @@ private:
     QPixmap irdaOffPixmap;
     QPixmap irdaDiscoveryOnPixmap;
     QPixmap receiveActivePixmap;
+    QString discoveredDevice;
     int irdaactive; // bool and bitfields later bool irdaactive :1 ;
     int irdaDiscoveryActive;
     bool receiveActive : 1;
