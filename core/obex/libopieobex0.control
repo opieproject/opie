@@ -4,7 +4,7 @@ Priority: optional
 Section: libs
 Maintainer: holger Freyther <zecke@handhelds.org>
 Architecture: arm
-Depends: task-opie-minimal ($QPE_VERSION), openobex | libopenobex1
+Depends: task-opie-minimal ($QPE_VERSION), openobex | libopenobex-1.0-1
 Provides: libopieobex1
 Replaces: libopieobex1
 Description: Irda obex lib

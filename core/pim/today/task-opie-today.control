@@ -3,8 +3,8 @@ Priority: optional
 Section: opie/pim
 Maintainer: Maximilian Reiﬂ <harlekin@handhelds.org>
 Architecture: arm
-Version: 0.5-$SUB_VERSION
-Depends: task-opie-minimal, libopie1, opie-today, opie-today-datebookplugin, opie-today-todolistplugin
+Version: $QPE_VERSION$EXTRAVERSION
+Depends: task-opie-minimal, opie-today, opie-today-datebookplugin, opie-today-todolistplugin
 License: GPL
 Description: Task for basic Today app setup
  Includes datebook and todolist plugins.

@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/applications
 Architecture: arm
 Maintainer: Opie Team <opie@handhelds.org>
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: task-opie-minimal, libopie1
+Version: $QPE_VERSION$EXTRAVERSION
+Depends: task-opie-minimal, libqpe1
 Description: Standalone calibration utility
  Use this standalone calibration utility to calibrate your touchscreen.

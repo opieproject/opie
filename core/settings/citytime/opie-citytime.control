@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/settings
 Maintainer: Maximilian Reiss <harlekin@handhelds.org>
 Architecture: arm
-Depends: task-opie-minimal, timezones
+Depends: task-opie-minimal
 Description: Time-zone / world clock settings
  The time-zone manager for the Opie environment.
 Version: $QPE_VERSION$EXTRAVERSION
