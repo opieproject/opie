@@ -2,5 +2,5 @@
     boolean "opie-memoryapplet (view memory status and manage a swap file)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2UI && SYSINFO
-  comment "opie-memoryapplet needs a libqpe, libopie and sysinfo"
+  comment "opie-memoryapplet needs a libqpe, libopie2ui and sysinfo"
     depends ! ( LIBOPIE && SYSINFO )
