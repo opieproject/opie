@@ -605,7 +605,7 @@ void Konsole::init(const char* _pgm, QStrList & _args)
     QAction *a;
 
     // Button Commands
-    a = new QAction( tr("New"), Resource::loadPixmap( "konsole/Terminal" ), QString::null, 0, this, 0 );
+    a = new QAction( tr("New"), Resource::loadPixmap( "konsole/konsole" ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( newSession() ) );
     a->addTo( toolBar );
 

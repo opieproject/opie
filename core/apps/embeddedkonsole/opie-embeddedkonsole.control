@@ -1,5 +1,5 @@
 Package: opie-embeddedkonsole
-Files: plugins/application/libembeddedkonsole.so* bin/embeddedkonsole apps/Applications/embeddedkonsole.desktop pics/konsole
+Files: plugins/application/libembeddedkonsole.so* bin/embeddedkonsole apps/Applications/embeddedkonsole.desktop pics/konsole/Terminal.png  pics/konsole/down.png pics/konsole/enter.png pics/konsole/konsole.png pics/konsole/space.png pics/konsole/tab.png pics/konsole/up.png
 Priority: optional
 Section: opie/applications
 Maintainer: L.J. Potter <lpotter@trolltech.com>
