@@ -593,61 +593,61 @@ DateBookDayWidget::DateBookDayWidget( const EffectiveEvent &e,
 // 	where = strCat.find( "<", where );
 //     }
 
-    QString strNote = ev.notes();
-    where = strNote.find( "<" );
-    while ( where != -1 ) {
-	strNote.remove( where, 1 );
-	strNote.insert( where, "&#60;" );
-	where = strNote.find( "<", where );
-    }
+	QString strNote = ev.notes();
+	where = strNote.find( "<" );
+	while ( where != -1 ) {
+		strNote.remove( where, 1 );
+		strNote.insert( where, "&#60;" );
+		where = strNote.find( "<", where );
+	}
 
-    text = "<b>" + strDesc + "</b><br>" + "<i>";
-    if ( !strCat.isEmpty() )  {
-    text += strCat + "</i><br>";
-    }
-    if (ev.event().type() == Event::Normal )
-        setEventText( text );
-    else
-        setAllDayText( text );
+	text = "<b>" + strDesc + "</b><br>" + "<i>";
+	if ( !strCat.isEmpty() )  {
+		text += strCat + "</i><br>";
+	}
+	if (ev.event().type() == Event::Normal )
+		setEventText( text );
+	else
+		setAllDayText( text );
 
     text += "<br><br>" + strNote;
 
     setBackgroundMode( PaletteBase );
 
-    QTime start = ev.start();
-    QTime end = ev.end();
-    int y = start.hour()*60+start.minute();
-    int h = end.hour()*60+end.minute()-y;
-    int rh = dateBook->dayView()->rowHeight(0);
-    y = y*rh/60;
-    h = h*rh/60;
-    if ( h < 3 )  {
-        h = 3;
-    }
-    geom.setY( y );
-    geom.setHeight( h );
-    geom.setX( 0 );
-    geom.setWidth(dateBook->dayView()->columnWidth(0)-1);
+	QTime start = ev.start();
+	QTime end = ev.end();
+	int y = start.hour()*60+start.minute();
+	int h = end.hour()*60+end.minute()-y;
+	int rh = dateBook->dayView()->rowHeight(0);
+	y = y*rh/60;
+	h = h*rh/60;
+
+	if ( h < 12 ) h = 12;	// Make sure the widget is no smaller than 12 pixels high, so that it's possible to read atleast the first line.
+	if ( y > ((24*rh)-12) ) y=(24*rh)-12;	// Make sure the widget fits inside the dayview.
+	geom.setY( y );
+	geom.setHeight( h );
+	geom.setX( 0 );
+	geom.setWidth(dateBook->dayView()->columnWidth(0)-1);
 
 }
 void DateBookDayWidget::setAllDayText( QString &text ) {
-    text += "<b>" + tr("This is an all day event.") + "</b><br>";
+    text += "<b>" + tr("This is an all day event.") + "</b>";
 }
 void DateBookDayWidget::setEventText( QString& text ) {
-    bool whichClock = dateBook->dayView()->whichClock();
-    if ( ev.startDate() != ev.endDate() ) {
-        text += "<b>" + tr("Start") + "</b>: ";
-	text += TimeString::timeString( ev.event().start().time(), whichClock, FALSE );
-	text += " - " + TimeString::longDateString( ev.startDate() ) + "<br>";
-        text += "<b>" + tr("End") + "</b>: ";
-	text += TimeString::timeString( ev.event().end().time(), whichClock, FALSE );
-	text += " - " + TimeString::longDateString( ev.endDate() ) + "<br>";
-    } else {
-        text += "<b>" + tr("Time") + "</b>: ";
-	text += TimeString::timeString( ev.start(), whichClock, FALSE );
-        text += "<b>" + tr(" - ") + "</b>";
-	text += TimeString::timeString( ev.end(), whichClock, FALSE );
-    }
+	bool whichClock = dateBook->dayView()->whichClock();
+	if ( ev.startDate() != ev.endDate() ) {
+		text += "<b>" + tr("Start") + "</b>: ";
+		text += TimeString::timeString( ev.event().start().time(), whichClock, FALSE );
+		text += " - " + TimeString::longDateString( ev.startDate() ) + "<br>";
+		text += "<b>" + tr("End") + "</b>: ";
+		text += TimeString::timeString( ev.event().end().time(), whichClock, FALSE );
+		text += " - " + TimeString::longDateString( ev.endDate() );
+	} else {
+		text += "<b>" + tr("Time") + "</b>: ";
+		text += TimeString::timeString( ev.start(), whichClock, FALSE );
+		text += "<b>" + tr(" - ") + "</b>";
+		text += TimeString::timeString( ev.end(), whichClock, FALSE );
+	}
 }
 
 DateBookDayWidget::~DateBookDayWidget()
