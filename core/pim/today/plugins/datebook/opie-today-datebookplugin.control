@@ -1,4 +1,4 @@
-Files: $OPIEDIR/plugins/today/libtodaydatebookplugin.so*
+Files: plugins/today/libtodaydatebookplugin.so*
 Priority: optional
 Section: opie/applications
 Maintainer: Maximilian Reiss <harlekin@handhelds.org>

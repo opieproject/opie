@@ -1,4 +1,4 @@
-Files: $OPIEDIR/plugins/today/libtodaymailplugin.so*
+Files: plugins/today/libtodaymailplugin.so*
 Priority: optional
 Section: opie/applications
 Maintainer: Maximilian Reiss <harlekin@handhelds.org>
