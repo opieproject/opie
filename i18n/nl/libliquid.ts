@@ -11,19 +11,19 @@
     </message>
     <message>
         <source>Stippled, background color</source>
-        <translation type="unfinished">##, achtergrondkleur</translation>
+        <translation>Gestippeld, achtergrondkleur</translation>
     </message>
     <message>
         <source>Stippled, button color</source>
-        <translation type="unfinished">##, knopkleur</translation>
+        <translation>Gestippeld, knopkleur</translation>
     </message>
     <message>
         <source>Translucent stippled, background color</source>
-        <translation type="unfinished">Transparant ##, achtergrondkleur</translation>
+        <translation>Transparant gestippeld, achtergrondkleur</translation>
     </message>
     <message>
         <source>Translucent stippled, button color</source>
-        <translation type="unfinished">Transparant ##, knopkleur</translation>
+        <translation>Transparant gestippeld, knopkleur</translation>
     </message>
     <message>
         <source>Custom translucency</source>
@@ -51,7 +51,7 @@
     </message>
     <message>
         <source>Stipple contrast</source>
-        <translation type="unfinished">## contrast</translation>
+        <translation>Gestippeld contrast</translation>
     </message>
 </context>
 <context>
