@@ -484,55 +484,55 @@ void Desktop::executeOrModify(const QString& appLnkFile)
 {
     AppLnk lnk(MimeType::appsFolderName() + "/" + appLnkFile);
     if ( lnk.isValid() ) {
-  QCString app = lnk.exec().utf8();
-  Global::terminateBuiltin("calibrate");
-  if ( QCopChannel::isRegistered("QPE/Application/" + app) ) {
-      MRUList::addTask(&lnk);
-      if ( hasVisibleWindow(app) )
-    QCopChannel::send("QPE/Application/" + app, "nextView()");
-      else
-    QCopChannel::send("QPE/Application/" + app, "raise()");
-  } else {
-      lnk.execute();
-  }
+        QCString app = lnk.exec().utf8();
+        Global::terminateBuiltin("calibrate");
+        if ( QCopChannel::isRegistered("QPE/Application/" + app) ) {
+            MRUList::addTask(&lnk);
+            if ( hasVisibleWindow(app) )
+                QCopChannel::send("QPE/Application/" + app, "nextView()");
+            else
+                QCopChannel::send("QPE/Application/" + app, "raise()");
+        } else {
+            lnk.execute();
+        }
     }
 }
 
 void Desktop::raiseDatebook()
 {
-    Config cfg("qpe"); //F9 'Activity'
-    cfg.setGroup("AppsKey");
+    Config cfg( "qpe" ); //F9 'Activity'
+    cfg.setGroup( "AppsKey" );
     QString tempItem;
-    tempItem = cfg.readEntry("LeftEnd","Calender");
-    if(tempItem == "Calender" || tempItem.isEmpty())  executeOrModify("Applications/datebook.desktop");
-    else {
-        QCopEnvelope e("QPE/System","execute(QString)");
-        e << tempItem;
+    tempItem = cfg.readEntry( "LeftEnd" , "Calender" );
+    if ( tempItem == "Calender" || tempItem.isEmpty() ) {
+        tempItem = "datebook";
     }
+    QCopEnvelope e( "QPE/System", "execute(QString)" );
+    e << tempItem;
 }
 
 void Desktop::raiseContacts()
 {
-    Config cfg("qpe"); //F10, 'Contacts'
-    cfg.setGroup("AppsKey");
+    Config cfg( "qpe" ); //F10, 'Contacts'
+    cfg.setGroup( "AppsKey" );
     QString tempItem;
-    tempItem = cfg.readEntry("Left2nd","Address Book");
-    if(tempItem == "Address Book" || tempItem.isEmpty())  executeOrModify("Applications/addressbook.desktop");
-    else {
-        QCopEnvelope e("QPE/System","execute(QString)");
-        e << tempItem;
+    tempItem = cfg.readEntry( "Left2nd", "Address Book" );
+    if ( tempItem == "Address Book" || tempItem.isEmpty() )  {
+        tempItem = "addressbook";
     }
+    QCopEnvelope e("QPE/System","execute(QString)");
+    e << tempItem;
 }
 
 void Desktop::raiseMenu()
 {
-    Config cfg("qpe"); //F11, 'Menu'
-    cfg.setGroup("AppsKey");
+    Config cfg( "qpe" ); //F11, 'Menu
+    cfg.setGroup( "AppsKey" );
     QString tempItem;
-    tempItem = cfg.readEntry("Right2nd","Popup Menu");
-    if(tempItem == "Popup Menu" || tempItem.isEmpty()) {
-    Global::terminateBuiltin("calibrate");
-    tb->startMenu()->launch();
+    tempItem = cfg.readEntry( "Right2nd" , "Popup Menu" );
+    if ( tempItem == "Popup Menu" || tempItem.isEmpty() ) {
+        Global::terminateBuiltin("calibrate");
+        tb->startMenu()->launch();
     } else {
         QCopEnvelope e("QPE/System","execute(QString)");
         e << tempItem;
@@ -541,15 +541,15 @@ void Desktop::raiseMenu()
 
 void Desktop::raiseEmail()
 {
-    Config cfg("qpe"); //F13, 'Mail'
-    cfg.setGroup("AppsKey");
+    Config cfg( "qpe" ); //F13, 'Mail'
+    cfg.setGroup( "AppsKey" );
     QString tempItem;
-    tempItem = cfg.readEntry("RightEnd","Mail");
-    if(tempItem == "Mail" || tempItem == "qtmail" || tempItem.isEmpty())  executeOrModify("Applications/qtmail.desktop");
-    else {
-        QCopEnvelope e("QPE/System","execute(QString)");
-        e << tempItem;
+    tempItem = cfg.readEntry( "RightEnd", "Mail" );
+    if ( tempItem == "Mail" || tempItem == "qtmail" || tempItem.isEmpty() ) {
+        tempItem = "mail";
     }
+    QCopEnvelope e("QPE/System","execute(QString)");
+    e << tempItem;
 }
 
 // autoStarts apps on resume and start
