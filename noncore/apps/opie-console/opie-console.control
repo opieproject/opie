@@ -4,7 +4,7 @@ Section: opie/applications
 Maintainer: Opie team <opie@handhelds.org>
 Architecture: arm
 Version: 0.6-$SUB_VERSION
-Depends: qpe-base ($QPE_VERSION), libopie ($QPE_VERSION)
+Depends: qpe-base ($QPE_VERSION), libopie ($QPE_VERSION), opie-console-help-en
 License: GPL
 Description: Opie terminal app
  

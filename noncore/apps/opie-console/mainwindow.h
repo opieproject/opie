@@ -23,7 +23,7 @@ class FunctionKeyboard;
 class MainWindow : public QMainWindow {
     Q_OBJECT
 public:
-    MainWindow();
+    MainWindow( QWidget *parent = 0, const char *name = 0, WFlags fl = 0 );
     ~MainWindow();
 
     /**

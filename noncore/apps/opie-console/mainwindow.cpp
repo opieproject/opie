@@ -9,6 +9,7 @@
 #include <qtoolbar.h>
 #include <qmessagebox.h>
 #include <qpushbutton.h>
+#include <qwhatsthis.h>
 
 #include <qpe/resource.h>
 #include <opie/ofiledialog.h>
@@ -50,7 +51,7 @@ static char * menu_xpm[] = {
 "            "};
 
 
-MainWindow::MainWindow() {
+MainWindow::MainWindow(QWidget *parent, const char *name, WFlags) : QMainWindow(parent, name, WStyle_ContextHelp)  {
     KeyTrans::loadAll();
     for (int i = 0; i < KeyTrans::count(); i++ ) {
         KeyTrans* s = KeyTrans::find(i );
@@ -465,20 +466,19 @@ void MainWindow::slotFullscreen() {
 
     } else {
         ( m_curSession->widgetStack() )->setFrameStyle( QFrame::NoFrame );
-        ( m_curSession->widgetStack() )->reparent( 0,WStyle_Tool | WStyle_Customize | WStyle_StaysOnTop,
-                                                   QPoint(0,0), false);
+        ( m_curSession->widgetStack() )->reparent( 0,WStyle_Tool | WStyle_Customize | WStyle_StaysOnTop
+                                                   , QPoint(0,0), false);
         ( m_curSession->widgetStack() )->resize(qApp->desktop()->width(), qApp->desktop()->height());
         ( m_curSession->widgetStack() )->setFocus();
         ( m_curSession->widgetStack() )->show();
 
-        //QPushButton *cornerButton = new QPushButton( );
-        //cornerButton->setPixmap( QPixmap( (const char**)menu_xpm ) );
-        //connect( cornerButton, SIGNAL( pressed() ), this, SLOT( slotFullscreen() ) );
-        // need teh scrollbar
-        //          ( m_curSession->widgetStack() )->setCornerWidget( cornerButton );
+        QPushButton *cornerButton = new QPushButton( m_curSession->widgetStack() );
+        cornerButton->setPixmap( QPixmap( (const char**)menu_xpm ) );
+        connect( cornerButton, SIGNAL( pressed() ), this, SLOT( slotFullscreen() ) );
+        // would need a scrollview
+        //  ( m_curSession->widgetStack() )->setCornerWidget( cornerButton );
         m_fullscreen->setText( tr("Stop full screen") );
     }
-
     m_isFullscreen = !m_isFullscreen;
 
 }
