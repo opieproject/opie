@@ -249,6 +249,9 @@ void OThemeStyle::drawBaseButton( QPainter *p, int x, int y, int w, int h,
                                   const QColorGroup &g, bool sunken, bool
                                   rounded, WidgetType type, const QBrush * )
 {
+	if ( w <= 0 || h <= 0 )
+		return;
+
 	int offset = borderPixmap( type ) ? 0 : decoWidth( type );
 	QPen oldPen = p->pen();
 
@@ -287,9 +290,10 @@ void OThemeStyle::drawBaseButton( QPainter *p, int x, int y, int w, int h,
 				p->fillRect( x + offset, y + offset, w - offset * 2, h - offset * 2,
 				             g.brush( QColorGroup::Button ) );
 		}
-		if ( borderPixmap( type ) )
+		if ( borderPixmap( type ) ) {
 			bitBlt( p->device(), x, y, scaleBorder( w, h, type ), 0, 0, w, h,
 			        Qt::CopyROP, false );
+		}
 		else
 			drawShade( p, x, y, w, h, g, sunken, rounded,
 			           highlightWidth( type ), borderWidth( type ), shade() );

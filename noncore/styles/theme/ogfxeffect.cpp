@@ -5,7 +5,7 @@
 
 */
 
-// $Id: ogfxeffect.cpp,v 1.4 2002-11-03 11:14:01 zecke Exp $
+// $Id: ogfxeffect.cpp,v 1.5 2002-11-28 00:37:59 sandman Exp $
 
 #include <qimage.h>
 #include <qpainter.h>
@@ -27,9 +27,10 @@
 QPixmap& OGfxEffect::gradient(QPixmap &pixmap, const QColor &ca,
 	const QColor &cb, GradientType eff, int ncols)
 {
-	QImage image = gradient(pixmap.size(), ca, cb, eff, ncols);
-	pixmap.convertFromImage(image);
-
+	if ( !pixmap. isNull ( )) {
+		QImage image = gradient(pixmap.size(), ca, cb, eff, ncols);
+		pixmap.convertFromImage(image);
+	}
 	return pixmap;
 }
 
@@ -280,15 +281,16 @@ QPixmap& OGfxEffect::blend(QPixmap &pixmap, float initial_intensity,
 			  const QColor &bgnd, GradientType eff,
 			  bool anti_dir, int /*ncols*/)
 {
-    QImage image = pixmap.convertToImage();
-    OGfxEffect::blend(image, initial_intensity, bgnd, eff, anti_dir);
+	if ( !pixmap. isNull ( )) {
+	    QImage image = pixmap.convertToImage();
+   		OGfxEffect::blend(image, initial_intensity, bgnd, eff, anti_dir);
 
-	if ( pixmap. depth ( ) <= 8 )
-		image. convertDepth ( pixmap. depth ( ));
+		if ( pixmap. depth ( ) <= 8 )
+			image. convertDepth ( pixmap. depth ( ));
 
-    pixmap.convertFromImage(image);
-
-    return pixmap;
+	    pixmap.convertFromImage(image);
+	}	
+   	return pixmap;
 }
 
 
