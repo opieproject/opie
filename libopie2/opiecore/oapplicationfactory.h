@@ -331,3 +331,5 @@ int main( int argc,  char **argv ) {                                    \
 }
 #endif
 
+
+#define OPIE_EXPORT_APPNAME  static QString appName() { return QString::fromLatin1( QUICKAPP_NAME ); }
