@@ -251,7 +251,7 @@ ODevice::ODevice ( )
 	d-> m_systemstr = "Unknown";
 	d-> m_system = System_Unknown;
 	d-> m_sysverstr = "0.0";
-	d-> m_rotation = None;
+	d-> m_rotation = Rot0;
 	
 	d-> m_holdtime = 1000; // 1000ms
 	

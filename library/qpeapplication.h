@@ -157,7 +157,7 @@ inline int QPEApplication::execDialog( QDialog* d, bool nomax )
     return d->exec();
 }
 
-enum Transformation { None, Rot90, Rot180, Rot270 }; /* from qgfxtransformed_qws.cpp */
+enum Transformation { Rot0, Rot90, Rot180, Rot270 }; /* from qgfxtransformed_qws.cpp */
 
 inline void QPEApplication::setCurrentRotation( int r )
 {
@@ -165,7 +165,7 @@ inline void QPEApplication::setCurrentRotation( int r )
 
     switch (r) {
         case 0:
-            e = None;
+            e = Rot0;
             break;
         case 90:
             e = Rot90;
