@@ -76,6 +76,7 @@ static void metaQmFile( const QString &opiedir,
           ++it ) {
         QString fileName = opiedir + "/i18n/" + (*it) + "/" + target;
         qWarning("Target is %s", fileName.latin1() );
+	releaseQmFile( fileName, verb );
     }
 }
 int main( int argc, char **argv )
@@ -131,12 +132,14 @@ int main( int argc, char **argv )
         	for ( t = toks.begin(); t != toks.end(); ++t ) {
 		    if ( it.key() == "TARGET" ) {
 			target = *t;
+			qWarning("%s %s", it.key().latin1(), (*t).latin1() );
 		    }else if ( it.key() == "TEMPLATE" ) {
                         if ( (*t).stripWhiteSpace().lower() == "lib" )
                             isLib = TRUE;
                     }
 		}
 	    }
+	    qWarning("%s", target.latin1() );
             metaQmFile( OPIE::self()->opieDir(opiedir),
                         languageList,  target, isLib, verbose );
 	}
