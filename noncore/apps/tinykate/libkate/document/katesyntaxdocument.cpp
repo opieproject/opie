@@ -37,7 +37,7 @@ SyntaxDocument::SyntaxDocument()
 void SyntaxDocument::setIdentifier(const QString& identifier)
 {
 #warning FIXME  delete m_root;
-  m_root=Opie::XMLElement::load(identifier);
+  m_root=Opie::Core::XMLElement::load(identifier);
   if (!m_root)    KMessageBox::error( 0L, i18n("Can't open %1").arg(identifier) );
   
 }
@@ -78,7 +78,7 @@ void SyntaxDocument::setupModeList(bool force)
     {
 	qDebug("Found a description file:"+path+(*it));
         setIdentifier(path+(*it));
-        Opie::XMLElement *e=m_root;
+        Opie::Core::XMLElement *e=m_root;
         if (e)
         {
 	  e=e->firstChild();
@@ -195,7 +195,7 @@ syntaxContextData* SyntaxDocument::getSubItems(syntaxContextData* data)
 
 syntaxContextData* SyntaxDocument::getConfig(const QString& mainGroupName, const QString &Config)
 {
-  Opie::XMLElement *e = m_root->firstChild()->firstChild();
+  Opie::Core::XMLElement *e = m_root->firstChild()->firstChild();
 
   while (e)
   {
@@ -203,7 +203,7 @@ syntaxContextData* SyntaxDocument::getConfig(const QString& mainGroupName, const
 
     if (e->tagName().compare(mainGroupName)==0 )
     {
-       Opie::XMLElement *e1=e->firstChild();
+       Opie::Core::XMLElement *e1=e->firstChild();
 
       while (e1)
       {
@@ -237,7 +237,7 @@ syntaxContextData* SyntaxDocument::getConfig(const QString& mainGroupName, const
 syntaxContextData* SyntaxDocument::getGroupInfo(const QString& mainGroupName, const QString &group)
 {
 
-  Opie::XMLElement *e=m_root->firstChild()->firstChild();
+  Opie::Core::XMLElement *e=m_root->firstChild()->firstChild();
 
   while (e)
   {
@@ -245,7 +245,7 @@ syntaxContextData* SyntaxDocument::getGroupInfo(const QString& mainGroupName, co
 
     if (e->tagName().compare(mainGroupName)==0 )
     {
-      Opie::XMLElement *e1=e->firstChild();
+      Opie::Core::XMLElement *e1=e->firstChild();
 
       while (e1)
       {
@@ -276,7 +276,7 @@ syntaxContextData* SyntaxDocument::getGroupInfo(const QString& mainGroupName, co
 
 QStringList& SyntaxDocument::finddata(const QString& mainGroup,const QString& type,bool clearList)
 {
-  Opie::XMLElement *e  = m_root->firstChild();
+  Opie::Core::XMLElement *e  = m_root->firstChild();
   if (clearList)
     m_data.clear();
 
@@ -284,13 +284,13 @@ QStringList& SyntaxDocument::finddata(const QString& mainGroup,const QString& ty
   {
     if (e->tagName()==mainGroup)
     {
-	for (Opie::XMLElement *e1=e->firstChild();e1;e1=e1->nextChild())
+	for (Opie::Core::XMLElement *e1=e->firstChild();e1;e1=e1->nextChild())
 	{
 	  if (e1->tagName()!="list") continue;
 
 	        if (e1->attribute("name")==type)
         	{
-			for (Opie::XMLElement *e2=e1->firstChild();e2;e2=e2->nextChild())
+			for (Opie::Core::XMLElement *e2=e1->firstChild();e2;e2=e2->nextChild())
 			{
 				qDebug("FOUND A LIST ENTRY("+e2->tagName()+"):"+e2->firstChild()->value());
 	            		m_data+=e2->firstChild()->value().stripWhiteSpace();

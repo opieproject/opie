@@ -36,9 +36,9 @@ class syntaxModeListItem
 class syntaxContextData
 {
   public:
-    Opie::XMLElement *parent;
-    Opie::XMLElement *currentGroup;
-    Opie::XMLElement *item;
+    Opie::Core::XMLElement *parent;
+    Opie::Core::XMLElement *currentGroup;
+    Opie::Core::XMLElement *item;
 };
 
 typedef QList<syntaxModeListItem> SyntaxModeList;
@@ -63,7 +63,7 @@ class SyntaxDocument
     void setIdentifier(const QString& identifier);
 
   private:
-     Opie::XMLElement *m_root;
+     Opie::Core::XMLElement *m_root;
      void setupModeList(bool force=false);
      QString currentFile;
     SyntaxModeList myModeList;

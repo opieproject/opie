@@ -48,7 +48,6 @@
 
 
 using namespace Opie::Ui;
-using namespace Opie::Ui;
 SearchDialog::SearchDialog( QWidget *parent, QStringList &searchFor, QStringList &replaceWith, int flags )
   : KDialogBase( parent, 0L, true, i18n( "Find Text" ), Ok | Cancel, Ok )
   , m_replace( 0L )
@@ -532,7 +531,7 @@ FontConfig::FontConfig( QWidget *parent, char *name )
 //     int size = cfg. readNumEntry ( "FontSize", 10 );
 //  OFontSelector *m_fontselect;
 
-    m_fontselect = new Opie::OFontSelector ( false, this, "FontTab" );
+    m_fontselect = new OFontSelector ( false, this, "FontTab" );
 //    m_fontselect-> setSelectedFont ( familyStr, styleStr, size );
 //   QWhatsThis::add( m_fontselect,
 //   tr( "Select the desired name, style and size of the default font applications will use." ) );
