@@ -103,6 +103,12 @@ enum OHardKey {
 	HardKey_Backlight = Qt::Key_F35,
 };
 
+enum ODirection {
+	CW   = 0,
+	CCW  = 1,
+	Flip = 2,
+};
+
 /**
  * A singleton which gives informations about device specefic option
  * like the Hardware used, LEDs, the Base Distribution and
@@ -150,6 +156,7 @@ public:
 	QString systemVersionString ( ) const;
 
 	Transformation rotation ( ) const;
+	ODirection direction ( ) const;
 
 // system
 

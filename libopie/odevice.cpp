@@ -67,6 +67,7 @@ public:
 	QString m_sysverstr;
 
 	Transformation m_rotation;
+	ODirection m_direction;
 
 	QValueList <ODeviceButton> *m_buttons;
 	uint                        m_holdtime;
@@ -254,6 +255,7 @@ ODevice::ODevice ( )
 	d-> m_system = System_Unknown;
 	d-> m_sysverstr = "0.0";
 	d-> m_rotation = Rot0;
+	d-> m_direction = CW;
 
 	d-> m_holdtime = 1000; // 1000ms
 	d-> m_buttons = 0;
@@ -467,6 +469,14 @@ QString ODevice::systemVersionString ( ) const
 Transformation ODevice::rotation ( ) const
 {
 	return d-> m_rotation;
+}
+
+/**
+ *  @return the current rotation direction
+ */
+ODirection ODevice::direction ( ) const
+{
+	return d-> m_direction;
 }
 
 /**
