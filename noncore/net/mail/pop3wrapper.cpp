@@ -59,7 +59,7 @@ RecBody POP3wrapper::parseBody( const char *message )
     return body;
 }
 
-void POP3wrapper::listMessages( QList<RecMail> &target )
+void POP3wrapper::listMessages(const QString &, QList<RecMail> &target )
 {
     int err = MAILPOP3_NO_ERROR;
     char *header;
@@ -268,3 +268,22 @@ void POP3wrapper::logout()
     m_pop3 = NULL;
 }
 
+
+QList<Folder>* POP3wrapper::listFolders()
+{
+    QList<Folder> * folders = new QList<Folder>();
+    folders->setAutoDelete( true );
+    Folder*inb=new Folder("INBOX");
+    folders->append(inb);
+    return folders;
+}
+
+QString POP3wrapper::fetchPart(const RecMail&,const QValueList<int>&,bool)
+{
+    return "";
+}
+
+QString POP3wrapper::fetchPart(const RecMail&,const RecPart&)
+{
+    return "";
+}

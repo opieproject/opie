@@ -6,6 +6,7 @@
 #include <libetpan/mailimap.h>
 
 IMAPwrapper::IMAPwrapper( IMAPaccount *a )
+    : AbstractMail()
 {
     account = a;
     m_imap = 0;
@@ -139,14 +140,14 @@ void IMAPwrapper::listMessages(const QString&mailbox,QList<RecMail> &target )
     mailimap_fetch_list_free(result);
 }
 
-QList<IMAPFolder>* IMAPwrapper::listFolders()
+QList<Folder>* IMAPwrapper::listFolders()
 {
     const char *path, *mask;
     int err = MAILIMAP_NO_ERROR;
     clist *result;
     clistcell *current;
 
-    QList<IMAPFolder> * folders = new QList<IMAPFolder>();
+    QList<Folder> * folders = new QList<Folder>();
     folders->setAutoDelete( true );
     login();
     if (!m_imap) {

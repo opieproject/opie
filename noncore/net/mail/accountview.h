@@ -6,8 +6,8 @@
 
 #include "settings.h"
 #include "mailwrapper.h"
+#include "abstractmail.h"
 
-class IMAPwrapper;
 class POP3wrapper;
 class RecMail;
 class RecBody;
@@ -33,7 +33,7 @@ public:
 
 private:
     POP3account *account;
-    POP3wrapper *wrapper;
+    AbstractMail *wrapper;
 
 };
 
@@ -45,25 +45,22 @@ public:
     ~IMAPviewItem();
     virtual void refresh(QList<RecMail>&);
     virtual RecBody fetchBody(const RecMail&);
-    IMAPwrapper *getWrapper();
-
+    AbstractMail *getWrapper();
 private:
     IMAPaccount *account;
-    IMAPwrapper *wrapper;
-    
+    AbstractMail *wrapper;
 };
 
 class IMAPfolderItem : public AccountViewItem
 {
 
 public:
-    IMAPfolderItem( IMAPFolder *folder, IMAPviewItem *parent );
+    IMAPfolderItem( Folder *folder, IMAPviewItem *parent );
     ~IMAPfolderItem();
     virtual void refresh(QList<RecMail>&);
     virtual RecBody fetchBody(const RecMail&);
-
 private:
-    IMAPFolder *folder;
+    Folder *folder;
     IMAPviewItem *imap;
     
 };

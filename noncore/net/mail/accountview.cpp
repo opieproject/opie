@@ -1,6 +1,4 @@
 #include "accountview.h"
-#include "imapwrapper.h"
-#include "pop3wrapper.h"
 #include "mailtypes.h"
 #include "defines.h"
 
@@ -13,7 +11,7 @@ POP3viewItem::POP3viewItem( POP3account *a, QListView *parent )
     : AccountViewItem( parent )
 {
     account = a;
-    wrapper = new POP3wrapper( account );
+    wrapper = AbstractMail::getWrapper( account );
     setPixmap( 0, PIXMAP_POP3FOLDER );
     setText( 0, account->getAccountName() );
 }
@@ -26,7 +24,7 @@ POP3viewItem::~POP3viewItem()
 void POP3viewItem::refresh( QList<RecMail> &target )
 {
     qDebug( "POP3: refresh" );
-    wrapper->listMessages( target );
+    wrapper->listMessages("INBOX", target );
 }
 
 
@@ -44,7 +42,7 @@ IMAPviewItem::IMAPviewItem( IMAPaccount *a, QListView *parent )
     : AccountViewItem( parent )
 {
     account = a;
-    wrapper = new IMAPwrapper( account );
+    wrapper = AbstractMail::getWrapper( account );
     setPixmap( 0, PIXMAP_IMAPFOLDER );
     setText( 0, account->getAccountName() );
     setOpen( true );
@@ -55,14 +53,14 @@ IMAPviewItem::~IMAPviewItem()
     delete wrapper;
 }
 
-IMAPwrapper *IMAPviewItem::getWrapper()
+AbstractMail *IMAPviewItem::getWrapper()
 {
     return wrapper;
 }
 
 void IMAPviewItem::refresh(QList<RecMail>&)
 {
-    QList<IMAPFolder> *folders = wrapper->listFolders();
+    QList<Folder> *folders = wrapper->listFolders();
     
     QListViewItem *child = firstChild();
     while ( child ) {
@@ -71,7 +69,7 @@ void IMAPviewItem::refresh(QList<RecMail>&)
         delete tmp;
     }
     
-    IMAPFolder *it;
+    Folder *it;
     for ( it = folders->first(); it; it = folders->next() ) {
         (void) new IMAPfolderItem( it, this );
     }
@@ -87,7 +85,7 @@ IMAPfolderItem::~IMAPfolderItem()
     delete folder;
 }
 
-IMAPfolderItem::IMAPfolderItem( IMAPFolder *folderInit, IMAPviewItem *parent )
+IMAPfolderItem::IMAPfolderItem( Folder *folderInit, IMAPviewItem *parent )
     : AccountViewItem( parent )
 {
     folder = folderInit;

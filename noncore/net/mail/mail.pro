@@ -14,7 +14,8 @@ HEADERS	     = defines.h \
                imapwrapper.h \
                mailtypes.h \
                mailistviewitem.h \
-               pop3wrapper.h
+               pop3wrapper.h \
+	       abstractmail.h
                
 SOURCES	     = main.cpp \
 	           opiemail.cpp \
@@ -30,7 +31,8 @@ SOURCES	     = main.cpp \
                viewmailbase.cpp \
                settings.cpp \
                mailtypes.cpp \
-               pop3wrapper.cpp
+               pop3wrapper.cpp \
+	       abstractmail.cpp
                
 INTERFACES	 = editaccountsui.ui \
                selectmailtypeui.ui \

@@ -3,6 +3,7 @@
 
 #include <qlist.h>
 #include "mailwrapper.h"
+#include "abstractmail.h"
 
 struct mailimap;
 struct mailimap_body_type_1part;
@@ -12,22 +13,18 @@ struct mailimap_body_type_msg;
 struct mailimap_body_type_mpart;
 struct mailimap_body_fields;
 struct mailimap_msg_att;
-class RecMail;
-class RecBody;
-class RecPart;
 
-class IMAPwrapper : public QObject
+class IMAPwrapper : public AbstractMail
 {
     Q_OBJECT
-
 public:
     IMAPwrapper( IMAPaccount *a );
     virtual ~IMAPwrapper();
-    QList<IMAPFolder>* listFolders();
-    void listMessages(const QString & mailbox,QList<RecMail>&target );
-    RecBody fetchBody(const RecMail&mail);
-    QString fetchPart(const RecMail&mail,const QValueList<int>&path,bool internal_call=false);
-    QString fetchPart(const RecMail&mail,const RecPart&part);
+    virtual QList<Folder>* listFolders();
+    virtual void listMessages(const QString & mailbox,QList<RecMail>&target );
+    virtual RecBody fetchBody(const RecMail&mail);
+    virtual QString fetchPart(const RecMail&mail,const QValueList<int>&path,bool internal_call=false);
+    virtual QString fetchPart(const RecMail&mail,const RecPart&part);
     static void imap_progress( size_t current, size_t maximum );
 
 protected:

@@ -18,7 +18,6 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow( QWidget *parent = 0, const char *name = 0, WFlags flags = 0 );
-    static QString appName() { return QString::fromLatin1("opiemail"); }
 
 public slots:
     void slotAdjustColumns();
