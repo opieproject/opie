@@ -411,6 +411,7 @@ void OEditListBox::virtual_hook( int, void* )
 OEditListBox::CustomEditor::CustomEditor( OComboBox *combo )
 {
     m_representationWidget = combo;
-    m_lineEdit = dynamic_cast<OLineEdit*>( combo->lineEdit() );
-    assert( m_lineEdit );
+    assert( combo->lineEdit()->inherits( "OLineEdit" ) );
+    m_lineEdit = static_cast<OLineEdit*>( combo->lineEdit() );
+
 }

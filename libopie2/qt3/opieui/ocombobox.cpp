@@ -320,7 +320,10 @@ void OComboBox::setLineEdit( OLineEdit *edit )
 {
     #if QT_VERSION > 290
     QComboBox::setLineEdit( edit );
-    d->olineEdit = dynamic_cast<OLineEdit*>( edit );
+    if ( !edit->inherits( "OLineEdit" ) )
+        d->olineEdit = 0;
+    else
+        d->olineEdit = static_cast<OLineEdit*>( edit );
     setDelegate( d->olineEdit );
 
     // forward some signals. We only emit returnPressed() ourselves.
