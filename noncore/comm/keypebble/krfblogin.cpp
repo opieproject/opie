@@ -8,6 +8,7 @@ extern "C" {
 #include "krfblogin.h"
 #include "krfbconnection.h"
 #include <qtimer.h>
+#include <qregexp.h>
 
 // The length of the various messages (used to decide how many bytes to
 // wait for).
