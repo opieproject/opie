@@ -5,5 +5,5 @@ Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION.3
 Provides: qpe-base
 Conflicts: qpe-base
-Depends: qt-embedded (>=$QTE_VERSION), qt-embedded-rotation, opie-common, libqpe1, libopie11, opie-qcop, opie-taskbar, opie-sounds, apmd, opie-pics, timezones
+Depends: qt-embedded (>=$QTE_VERSION), qt-embedded-rotation, opie-common, libqpe1, libopie1, opie-qcop, opie-taskbar, opie-sounds, apmd, opie-pics, timezones
 Description: opie-base virtual package
