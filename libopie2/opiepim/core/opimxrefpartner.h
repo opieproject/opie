@@ -12,7 +12,7 @@
  */
 class OPimXRefPartner {
 public:
-    OPimXRefPartner( const QString& appName = QString::null,
+    OPimXRefPartner( const QString& service = QString::null,
                      int uid = 0, int field = -1 );
     OPimXRefPartner( const OPimXRefPartner& );
     OPimXRefPartner& operator=( const OPimXRefPartner& );
@@ -20,11 +20,11 @@ public:
 
     bool operator==(const OPimXRefPartner& );
 
-    QString appName()const;
+    QString service()const;
     int uid()const;
     int field()const;
 
-    void setAppName( const QString& appName );
+    void setService( const QString& service );
     void setUid( int uid );
     void setField( int field );
 private:

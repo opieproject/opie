@@ -34,8 +34,8 @@ void OPimXRef::setPartner( enum Partners par,  const OPimXRefPartner& part) {
     m_partners[par] = part;
 }
 bool OPimXRef::containsString( const QString& string ) const{
-    if ( m_partners[One].appName() == string ||
-         m_partners[Two].appName() == string ) return true;
+    if ( m_partners[One].service() == string ||
+         m_partners[Two].service() == string ) return true;
 
     return false;
 }

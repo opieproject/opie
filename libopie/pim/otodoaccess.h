@@ -68,6 +68,17 @@ public:
     void mergeWith( const QValueList<OTodo>& );
 
     /**
+     * delete all already completed items
+     */
+    void removeAllCompleted();
+
+signals:
+    /**
+     * if the OTodoAccess was changed
+     */
+    void signalChanged( const OTodoAccess* );
+private:
+    /**
      * add an Alarm to the AlarmServer
      */
     void addAlarm( const OTodo& );
@@ -78,12 +89,6 @@ public:
      */
     void delAlarm( int uid );
 
-signals:
-    /**
-     * if the OTodoAccess was changed
-     */
-    void signalChanged( const OTodoAccess* );
-private:
     int m_cat;
     OTodoAccessBackend* m_todoBackEnd;
     class OTodoAccessPrivate;

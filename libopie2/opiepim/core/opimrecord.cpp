@@ -79,3 +79,6 @@ Qtopia::UidGen &OPimRecord::uidGen() {
 OPimXRefManager &OPimRecord::xrefmanager() {
     return m_xrefman;
 }
+int OPimRecord::rtti(){
+    return 0;
+}

@@ -45,7 +45,8 @@ OTodoAccess::List OTodoAccess::overDue() {
     return lis;
 }
 void OTodoAccess::addAlarm( const OTodo& event) {
-    if (!event.hasAlarmDateTime() )
+/* FIXME use the new notifier architecture
+  if (!event.hasAlarmDateTime() )
         return;
 
     QDateTime now      = QDateTime::currentDateTime();
@@ -57,6 +58,7 @@ void OTodoAccess::addAlarm( const OTodo& event) {
                                "alarm(QDateTime,int)", event.uid() );
 
     }
+*/
 }
 void OTodoAccess::delAlarm( int uid) {
 
@@ -78,4 +80,7 @@ OTodoAccess::List OTodoAccess::sorted( bool ascending, int sort,int filter, int 
                                       filter, cat );
     OTodoAccess::List list( ints, this );
     return list;
+}
+void OTodoAccess::removeAllCompleted() {
+    m_todoBackEnd->removeAllCompleted();
 }

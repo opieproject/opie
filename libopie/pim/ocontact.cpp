@@ -1095,7 +1095,9 @@ void OContact::insertEmails( const QStringList &v )
     for ( QStringList::ConstIterator it = v.begin(); it != v.end(); ++it )
 	insertEmail( *it );
 }
-
+int OContact::rtti() {
+    return 2;
+}
 void OContact::setUid( int i )
 { 
 	OPimRecord::setUid(i); 

@@ -154,6 +154,12 @@ bool OTodoAccessVCal::remove( int uid ) {
     m_dirty = true;
     return true;
 }
+void OTodoAccessVCal::removeAllCompleted() {
+    for ( QMap<int, OTodo>::Iterator it = m_map.begin(); it != m_map.end(); ++it ) {
+        if ( (*it).isCompleted() )
+            m_map.remove( it );
+    }
+}
 bool OTodoAccessVCal::replace( const OTodo& to ) {
     m_map.replace( to.uid(), to );
     m_dirty = true;

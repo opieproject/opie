@@ -93,6 +93,7 @@ public:
      * @return <i>true</i> if added successfully.
      */
     virtual bool add( const T& t ) ;
+    bool add( const OPimRecord& );
 
     /* only the uid matters */
     /**
@@ -210,6 +211,15 @@ template <class T>
 bool OPimAccessTemplate<T>::add( const T& t ) {
     cache( t );
     return m_backEnd->add( t );
+}
+template <class T>
+bool OPimAccessTemplate<T>::add( const OPimRecord& rec) {
+    /* same type */
+    if ( rec.rtti() == T::rtti() ) {
+        const T &t = static_cast<const T&>(rec);
+        return add(t);
+    }
+    return false;
 }
 template <class T>
 bool OPimAccessTemplate<T>::remove( const T& t ) {

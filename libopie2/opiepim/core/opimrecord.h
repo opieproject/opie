@@ -89,8 +89,8 @@ public:
     /**
      * returns a reference of the
      * Cross Reference Manager
-     * Partner One is THIS PIM RECORD!
-     * Two is the Partner where we link to
+     * Partner 'One' is THIS PIM RECORD!
+     * 'Two' is the Partner where we link to
      */
     OPimXRefManager& xrefmanager();
 
@@ -98,6 +98,12 @@ public:
      * set the uid
      */
     virtual void setUid( int uid );
+
+    /*
+     * used inside the Templates for casting
+     * REIMPLEMENT in your ....
+     */
+    static int rtti();
 
 protected:
     Qtopia::UidGen &uidGen();

@@ -26,6 +26,8 @@ public:
     bool remove( int uid );
     bool replace( const OTodo& );
 
+    void removeAllCompleted();
+
 private:
     bool m_dirty : 1;
     QString m_file;

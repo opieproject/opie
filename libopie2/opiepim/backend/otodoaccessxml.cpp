@@ -28,7 +28,7 @@ bool OTodoAccessXML::load() {
     /*
      * UPDATE dict if you change anything!!!
      */
-    QAsciiDict<int> dict(15);
+    QAsciiDict<int> dict(21);
     dict.setAutoDelete( TRUE );
     dict.insert("Categories" ,     new int(OTodo::Category)         );
     dict.insert("Uid" ,            new int(OTodo::Uid)              );
@@ -43,11 +43,15 @@ bool OTodoAccessXML::load() {
     dict.insert("Progress" ,       new int(OTodo::Progress)         );
     dict.insert("Completed",       new int(OTodo::Completed)        );
     dict.insert("CrossReference",  new int(OTodo::CrossReference)   );
-    dict.insert("HasAlarmDateTime",new int(OTodo::HasAlarmDateTime) );
-    dict.insert("AlarmDateTime",   new int(OTodo::AlarmDateTime)    );
+    dict.insert("State",           new int(OTodo::State)            );
+    dict.insert("Recurrence",      new int(OTodo::Recurrence)       );
+    dict.insert("Alarms",          new int(OTodo::Alarms)           );
+    dict.insert("Reminders",       new int(OTodo::Reminders)        );
+    dict.insert("Notifiers",       new int(OTodo::Notifiers)        );
+    dict.insert("Maintainer",      new int(OTodo::Maintainer)       );
 
     // here the custom XML parser from TT it's GPL
-    // but we want to push that to TT.....
+    // but we want to push OpiePIM... to TT.....
     QFile f(m_file );
     if (!f.open(IO_ReadOnly) )
         return false;
@@ -336,14 +340,6 @@ void OTodoAccessXML::todo( QAsciiDict<int>* dict, OTodo& ev,
         }
         break;
     }
-    case OTodo::HasAlarmDateTime:
-        ev.setHasAlarmDateTime( val.toInt() );
-        break;
-    case OTodo::AlarmDateTime: {
-        /* this sounds better ;) zecke */
-        ev.setAlarmDateTime( TimeConversion::fromISO8601( val.local8Bit() ) );
-        break;
-    }
     default:
         break;
     }
@@ -383,7 +379,6 @@ QString OTodoAccessXML::toString( const OTodo& ev )const {
     */
     // cross refernce
 
-    str += "AlarmDateTime=\"" + TimeConversion::toISO8601( ev.alarmDateTime() ) + "\" ";
 
     return str;
 }
@@ -616,3 +611,9 @@ QArray<int> OTodoAccessXML::sorted( bool asc,  int sortOrder,
     qWarning("array count = %d %d", array.count(), vector.count() );
     return array;
 };
+void OTodoAccessXML::removeAllCompleted() {
+    for ( QMap<int, OTodo>::Iterator it = m_events.begin(); it != m_events.end(); ++it ) {
+        if ( (*it).isCompleted() )
+            m_events.remove( it );
+    }
+}

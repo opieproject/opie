@@ -15,6 +15,7 @@
 #include "opimstate.h"
 #include "orecur.h"
 #include "opimmaintainer.h"
+#include "opimnotifymanager.h"
 
 #include "otodo.h"
 
@@ -31,11 +32,12 @@ struct OTodo::OTodoData : public QShared {
     QString sum;
     QMap<QString, QString> extra;
     ushort prog;
-    bool hasAlarmDateTime :1;
-    QDateTime alarmDateTime;
     OPimState state;
     ORecur recur;
     OPimMaintainer maintainer;
+    QDate start;
+    QDate completed;
+    OPimNotifyManager notifiers;
 };
 
 OTodo::OTodo(const OTodo &event )
@@ -73,8 +75,6 @@ OTodo::OTodo(bool completed, int priority,
     data->sum = summary;
     data->prog = progress;
     data->desc = Qtopia::simplifyMultiLineSpace(description );
-    data->hasAlarmDateTime = false;
-
 }
 OTodo::OTodo(bool completed, int priority,
                      const QStringList &category,
@@ -96,8 +96,6 @@ OTodo::OTodo(bool completed, int priority,
     data->sum = summary;
     data->prog = progress;
     data->desc = Qtopia::simplifyMultiLineSpace(description );
-    data->hasAlarmDateTime = false;
-
 }
 bool OTodo::match( const QRegExp &regExp )const
 {
@@ -120,9 +118,11 @@ bool OTodo::hasDueDate() const
 {
     return data->hasDate;
 }
-bool OTodo::hasAlarmDateTime() const
-{
-    return data->hasAlarmDateTime;
+bool OTodo::hasStartDate()const {
+    return data->start.isValid();
+}
+bool OTodo::hasCompletedDate()const {
+    return data->completed.isValid();
 }
 int OTodo::priority()const
 {
@@ -140,12 +140,12 @@ QDate OTodo::dueDate()const
 {
     return data->date;
 }
-
-QDateTime OTodo::alarmDateTime() const
-{
-    return data->alarmDateTime;
+QDate OTodo::startDate()const {
+    return data->start;
 }
-
+QDate OTodo::completedDate()const {
+    return data->completed;
+}
 QString OTodo::description()const
 {
     return data->desc;
@@ -169,11 +169,6 @@ void OTodo::setHasDueDate( bool hasDate )
     changeOrModify();
     data->hasDate = hasDate;
 }
-void OTodo::setHasAlarmDateTime( bool hasAlarmDateTime )
-{
-    changeOrModify();
-    data->hasAlarmDateTime = hasAlarmDateTime;
-}
 void OTodo::setDescription(const QString &desc )
 {
 //    qWarning( "desc " + desc );
@@ -190,15 +185,18 @@ void OTodo::setPriority(int prio )
     changeOrModify();
     data->priority = prio;
 }
-void OTodo::setDueDate( QDate date )
+void OTodo::setDueDate( const QDate& date )
 {
     changeOrModify();
     data->date = date;
 }
-void OTodo::setAlarmDateTime( const QDateTime& alarm )
-{
+void OTodo::setStartDate( const QDate& date ) {
     changeOrModify();
-    data->alarmDateTime = alarm;
+    data->start = date;
+}
+void OTodo::setCompletedDate( const QDate& date ) {
+    changeOrModify();
+    data->completed = date;
 }
 void OTodo::setState( const OPimState& state ) {
     changeOrModify();
@@ -254,17 +252,15 @@ QString OTodo::toRichText() const
     text += dueDate().toString();
     text += "<br>";
   }
-  if (hasAlarmDateTime() ){
-    text += "<b>" + QObject::tr( "Alarmed Notification:") + " </b>";
-    text += alarmDateTime().toString();
-    text += "<br>";
-  }
 
   text += "<b>" + QObject::tr( "Category:") + "</b> ";
   text += categoryNames().join(", ");
   text += "<br>";
 
   return text;
+}
+OPimNotifyManager& OTodo::notifiers() {
+    return data->notifiers;
 }
 
 bool OTodo::operator<( const OTodo &toDoEvent )const{
@@ -327,10 +323,6 @@ bool OTodo::operator==(const OTodo &toDoEvent )const
     if ( data->date != toDoEvent.data->date ) return false;
     if ( data->sum != toDoEvent.data->sum ) return false;
     if ( data->desc != toDoEvent.data->desc ) return false;
-    if ( data->hasAlarmDateTime != toDoEvent.data->hasAlarmDateTime )
-        return false;
-    if ( data->alarmDateTime != toDoEvent.data->alarmDateTime )
-	return false;
     if ( data->maintainer    != toDoEvent.data->maintainer )
         return false;
 
@@ -371,9 +363,11 @@ QMap<int, QString> OTodo::toMap() const {
     map.insert( DateYear, QString::number( data->date.year() ) );
     map.insert( Progress, QString::number( data->prog ) );
 //    map.insert( CrossReference, crossToString() );
-    map.insert( HasAlarmDateTime,  QString::number( data->hasAlarmDateTime ) );
-    map.insert( AlarmDateTime, data->alarmDateTime.toString() );
-
+    /* FIXME!!!   map.insert( State,  );
+    map.insert( Recurrence, );
+    map.insert( Reminders, );
+    map.
+    */
     return map;
 }
 
@@ -408,11 +402,12 @@ void OTodo::copy( OTodoData* src, OTodoData* dest ) {
     dest->sum = src->sum;
     dest->extra = src->extra;
     dest->prog = src->prog;
-    dest->hasAlarmDateTime = src->hasAlarmDateTime;
-    dest->alarmDateTime = src->alarmDateTime;
     dest->state = src->state;
     dest->recur = src->recur;
     dest->maintainer = src->maintainer;
+    dest->start = src->start;
+    dest->completed = src->completed;
+    dest->notifiers = src->notifiers;
 }
 QString OTodo::type() const {
     return QString::fromLatin1("OTodo");
@@ -421,3 +416,6 @@ QString OTodo::recordField(int /*id*/ )const {
     return QString::null;
 }
 
+int OTodo::rtti(){
+    return 1;
+}

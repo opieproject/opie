@@ -1,6 +1,6 @@
 #include "opimmaintainer.h"
 
-OPimMaintainer::OPimMaintainer( enum Mode mode, int uid )
+OPimMaintainer::OPimMaintainer( int mode, int uid )
     :  m_mode(mode), m_uid(uid )
 {}
 OPimMaintainer::~OPimMaintainer() {
@@ -23,13 +23,13 @@ bool OPimMaintainer::operator==( const OPimMaintainer& main ) {
 bool OPimMaintainer::operator!=( const OPimMaintainer& main ) {
     return !(*this == main );
 }
-OPimMaintainer::Mode OPimMaintainer::mode()const {
+int OPimMaintainer::mode()const {
     return m_mode;
 }
 int OPimMaintainer::uid()const {
     return m_uid;
 }
-void OPimMaintainer::setMode( enum Mode mo) {
+void OPimMaintainer::setMode( int mo) {
     m_mode = mo;
 }
 void OPimMaintainer::setUid( int uid ) {

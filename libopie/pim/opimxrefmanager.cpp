@@ -36,10 +36,10 @@ QStringList OPimXRefManager::apps()const {
 
     QString str;
     for ( it = m_list.begin(); it != m_list.end(); ++it ) {
-        str = (*it).partner( OPimXRef::One ).appName();
+        str = (*it).partner( OPimXRef::One ).service();
         if ( !list.contains( str ) ) list << str;
 
-        str = (*it).partner( OPimXRef::Two ).appName();
+        str = (*it).partner( OPimXRef::Two ).service();
         if ( !list.contains( str ) ) list << str;
     }
     return list;

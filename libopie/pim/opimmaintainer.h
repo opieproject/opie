@@ -9,10 +9,12 @@
 class OPimMaintainer {
 public:
     enum Mode { Undefined = -1,
-                Responsible = 0,
+                Nothing = 0,
+                Responsible,
                 DoneBy,
-                Coordinating };
-    OPimMaintainer( enum Mode mode = Undefined, int uid = 0);
+                Coordinating,
+    };
+    OPimMaintainer( int mode = Undefined, int uid = 0);
     OPimMaintainer( const OPimMaintainer& );
     ~OPimMaintainer();
 
@@ -21,15 +23,17 @@ public:
     bool operator!=( const OPimMaintainer& );
 
 
-    Mode mode()const;
+    int mode()const;
     int uid()const;
 
-    void setMode( enum Mode );
+    void setMode( int mode );
     void setUid( int uid );
 
 private:
-    Mode m_mode;
+    int m_mode;
     int m_uid;
+    class Private;
+    Private *d;
 
 };
 

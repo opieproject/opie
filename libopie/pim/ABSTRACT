@@ -1,0 +1,18 @@
+What is Opie PIM? Why is it special?
+Why do we need Opie PIM?
+
+The goal of OpiePIM is to be first of all 
+extendable, light weight, scalable and fast.
+For the programmer we try to add a nice but 
+powerful API to all classes.
+
+Memory is a costy resource on small and embedded
+devices. So we try to keep the memory usage as 
+low as possible. Never the less we won't use structs
+and Pointers in the public API.
+The whole pim framework is value based. Internally we try
+to use implicit sharing as found in other Qt classes as well.
+This makes it possible to give 3rd party devels a nice
+API while keeping the memory usage as low as possible.
+
+We use C++ Templates

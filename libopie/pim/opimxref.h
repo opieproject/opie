@@ -26,7 +26,7 @@ public:
 
     void setPartner( enum Partners,  const OPimXRefPartner& );
 
-    bool containsString( const QString& appName)const;
+    bool containsString( const QString& service)const;
     bool containsUid( int uid )const;
 
 private:

@@ -19,6 +19,7 @@
 class OPimState;
 class ORecur;
 class OPimMaintainer;
+class OPimNotifyManager;
 class OTodo : public  OPimRecord  {
 public:
     typedef QValueList<OTodo> ValueList;
@@ -35,13 +36,14 @@ public:
         DateYear,
         Progress,
         CrossReference,
-        HasAlarmDateTime,
-        AlarmDateTime,
         State,
-        Recurrance,
+        Recurrence,
         Alarms,
         Reminders,
-        Notifiers
+        Notifiers,
+        Maintainer,
+        StartDate,
+        CompletedDate
     };
  public:
     // priorities from Very low to very high
@@ -73,9 +75,9 @@ public:
            bool hasDate = false,  QDate date = QDate::currentDate(),
            int uid = 0 /* empty */ );
 
-    /* Copy c'tor
-
-    **/
+    /** Copy c'tor
+     *
+     */
     OTodo(const OTodo & );
 
     /**
@@ -92,6 +94,8 @@ public:
      * Does this Event have a deadline
      */
     bool hasDueDate() const;
+    bool hasStartDate()const;
+    bool hasCompletedDate()const;
 
     /**
      * Does this Event has an alarm time ?
@@ -114,9 +118,14 @@ public:
     QDate dueDate()const;
 
     /**
-     * Alarm Date and Time
+     * When did it start?
      */
-    QDateTime alarmDateTime()const;
+    QDate startDate()const;
+
+    /**
+     * When was it completed?
+     */
+    QDate completedDate()const;
 
     /**
      * What is the state of this OTodo?
@@ -149,8 +158,16 @@ public:
      */
     QString toRichText() const;
 
+    /*
+     * check if the sharing is still fine!! -zecke
+     */
     /**
-     * reimplementation
+     * return a reference to our notifiers...
+     */
+    OPimNotifyManager &notifiers();
+
+    /**
+     * reimplementations
      */
     QString type()const;
     QString toShortText()const;
@@ -172,11 +189,10 @@ public:
      * set if this todo got an end data
      */
     void setHasDueDate( bool hasDate );
-
-    /**
-     * set if this todo has an alarm time and date
-     */
-    void setHasAlarmDateTime ( bool hasAlarm );
+    // FIXME we do not have these for start, completed
+    // cause we'll use the isNull() of QDate for figuring
+    // out if it's has a date...
+    // decide what to do here? -zecke
 
     /**
      * Set the priority of the Todo
@@ -191,8 +207,17 @@ public:
     /**
      * set the end date
      */
-    void setDueDate( QDate date );
+    void setDueDate( const QDate& date );
 
+    /**
+     * set the start date
+     */
+    void setStartDate( const QDate& date );
+
+    /**
+     * set the completed date
+     */
+    void setCompletedDate( const QDate& date );
 
     void setRecurrence( const ORecur& );
     /**
@@ -226,6 +251,8 @@ public:
     bool operator>=(const OTodo &toDoEvent)const;
     bool operator==(const OTodo &toDoEvent )const;
     OTodo &operator=(const OTodo &toDoEvent );
+
+    static int rtti();
 
  private:
     class OTodoPrivate;

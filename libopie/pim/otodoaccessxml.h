@@ -29,6 +29,7 @@ public:
     void clear();
     bool add( const OTodo& );
     bool remove( int uid );
+    void removeAllCompleted();
     bool replace( const OTodo& );
 
     /* our functions */

@@ -23,7 +23,7 @@ bool OPimXRefPartner::operator==( const OPimXRefPartner& par ) {
 
     return true;
 }
-QString OPimXRefPartner::appName()const {
+QString OPimXRefPartner::service()const {
     return m_app;
 }
 int OPimXRefPartner::uid()const {
@@ -32,7 +32,7 @@ int OPimXRefPartner::uid()const {
 int OPimXRefPartner::field()const {
     return m_field;
 }
-void OPimXRefPartner::setAppName( const QString& appName ) {
+void OPimXRefPartner::setService( const QString& appName ) {
     m_app = appName;
 }
 void OPimXRefPartner::setUid( int uid ) {

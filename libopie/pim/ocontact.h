@@ -46,7 +46,7 @@ public:
 
     enum journal_action { ACTION_ADD, ACTION_REMOVE, ACTION_REPLACE };
 
-    /* 
+    /*
      * do we need to inline them
      * if yes do we need to inline them this way?
      * -zecke
@@ -211,6 +211,7 @@ public:
     // the emails should be seperated by a comma
     void setEmails( const QString &v );
     QString emails() const { return find( Qtopia::Emails ); }
+    static int rtti();
 
 
 private:

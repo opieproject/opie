@@ -31,7 +31,7 @@ public:
      */
     QStringList apps()const;
     OPimXRef::ValueList list()const;
-    OPimXRef::ValueList list( const QString& appName )const;
+    OPimXRef::ValueList list( const QString& service )const;
     OPimXRef::ValueList list( int uid )const;
 
 private:
