@@ -1,4 +1,4 @@
-/* @(#) $Header: /media/disk-5/tmp/opie-cvs/cvs/opie/noncore/net/wellenreiter/daemon/source/Attic/ieee802_11.h,v 1.1 2002-11-11 15:37:18 max Exp $ (LBL) */
+/* $Id: ieee802_11.hh,v 1.1 2002-11-12 22:12:33 mjm Exp $ */
 /*
  * Copyright (c) 2001
  *	Fortress Technologies
@@ -20,6 +20,9 @@
  * WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  */
+
+#ifndef IEEE802_11_HH
+#define IEEE802_11_HH
 
 #define IEEE802_11_FC_LEN	2
 
@@ -243,3 +246,5 @@ struct ctrl_end_ack_t {
 #define IV_IV(iv)	((iv) & 0xFFFFFF)
 #define IV_PAD(iv)	(((iv) >> 24) & 0x3F)
 #define IV_KEYID(iv)	(((iv) >> 30) & 0x03)
+
+#endif /* IEEE802_11_HH */

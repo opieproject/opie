@@ -1,3 +1,4 @@
+/* $Id */
 /*
  * Copyright (c) 1992, 1993, 1994, 1995, 1996
  *	The Regents of the University of California.  All rights reserved.
@@ -17,11 +18,11 @@
  * THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR IMPLIED
  * WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- *
- * @(#) $Header: /media/disk-5/tmp/opie-cvs/cvs/opie/noncore/net/wellenreiter/daemon/source/Attic/extract.h,v 1.1 2002-11-11 15:37:18 max Exp $ (LBL)
  */
-
 /* Network to host order macros */
+
+#ifndef EXTRACT_HH
+#define EXTRACT_HH
 
 #ifdef LBL_ALIGN
 #define EXTRACT_16BITS(p) \
@@ -55,3 +56,5 @@
 		     (u_int32_t)*((const u_int8_t *)(p) + 2) << 16 | \
 		     (u_int32_t)*((const u_int8_t *)(p) + 1) << 8 | \
 		     (u_int32_t)*((const u_int8_t *)(p) + 0)))
+
+#endif /* EXTRACT_HH */

@@ -1,5 +1,0 @@
-compile it using:
-
-gcc -o sniffer ./sniffer.c -lpcap
-
-

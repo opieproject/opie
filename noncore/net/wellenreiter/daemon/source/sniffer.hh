@@ -1,4 +1,7 @@
-// Wellenreiter-sniffer-code header file
+/* $Id: sniffer.hh,v 1.1 2002-11-12 22:12:33 mjm Exp $ */
+
+#ifndef SNIFFER_HH
+#define SNIFFER_HH
 
 #include <string.h>
 #include <stdio.h>
@@ -9,8 +12,6 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <net/bpf.h>
-#include "ieee802_11.h"
-#include "extract.h"
 
 #define   DEFAULT_PATH       "/proc/driver/aironet/%s/Config"
 #define   CARD_TYPE_CISCO	1
@@ -47,39 +48,17 @@ struct packetinfo
 
 
 /* Prototypes */
+
+int sniffer(void);
 int card_into_monitormode (char * device, int cardtype);
-
 int card_set_promisc_up (char * device);
-
 int start_sniffing (char * device);
-
 void process_packets(u_char *useless,const struct pcap_pkthdr* pkthdr,const u_char* packet);
-
 int decode_80211b_hdr(const u_char *p,struct packetinfo *ppinfo);
-
 void etheraddr_string(register const u_char *ep,char * text);
-
 int handle_beacon(u_int16_t fc, const u_char *p,struct packetinfo *ppinfo);
 
 static int GetHeaderLength(u_int16_t fc);
-
-static const char *subtype_text[]={
-	"Assoc Request",
-	"Assoc Response",
-	"ReAssoc Request",
-	"ReAssoc Response",
-	"Probe Request",
-	"Probe Response",
-	"RESERVED",
-	"RESERVED",
-	"Beacon",
-	"ATIM",
-	"Disassociation",
-	"Authentication",
-	"DeAuthentication",
-	"RESERVED",
-	"RESERVED"
-};
 
 /*
  * True if  "l" bytes of "var" were captured.
@@ -100,3 +79,5 @@ static const char *subtype_text[]={
 
 /* Bail if "var" was not captured */
 #define TCHECK(var) TCHECK2(var, sizeof(var))
+
+#endif /* SNIFFER_HH */

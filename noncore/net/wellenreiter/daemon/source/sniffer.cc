@@ -1,32 +1,28 @@
-/* Its just a simple rfmon mode sniffer
-   i hope my C is at last a bit better then in my 
-   early days :-).
-   This works only with cisco wireless cards with an rfmon
-   able driver and not with wifi stuff.
-   Btw. did i mention that i hate C?
-   
-   To compile use:
-   gcc sniffer.c -o wlan-sniffer -lpcap
+/* 
+ *  rfmon mode sniffer
+ *  This works only with cisco wireless cards with an rfmon
+ *  able driver and not with wifi stuff.
+ *
+ *  $Id: sniffer.cc,v 1.1 2002-11-12 22:12:33 mjm Exp $
+ */
 
-*/
-#include "sniffer.h"
+#include "config.hh"
+#include "sniffer.hh"
+#include "ieee802_11.hh"
+#include "extract.hh"
 
-int main(int argc, char **argv)
-{
-	int ret;   /* return code */	
-	ret = card_into_monitormode (SNIFFER_DEVICE, CARD_TYPE_NG);
-	if (ret == -1)
-	{
-		exit(-1);
-	}
+int sniffer(void)
+{	
+	if(card_into_monitormode (SNIFFER_DEVICE, CARD_TYPE_NG) < 0)
+		return 0;
 	start_sniffing (SNIFFER_DEVICE);	
 
-  return 0;
+  return 1;
 }
 
-int card_into_monitormode (char * device, int cardtype)
+int card_into_monitormode (char *device, int cardtype)
 {
-	int ret = -1;
+
 	int datalink; /* used for getting the pcap datalink type */
 	char CiscoRFMON[35] = "/proc/driver/aironet/";
 	FILE *CISCO_CONFIG_FILE;
@@ -37,7 +33,7 @@ int card_into_monitormode (char * device, int cardtype)
 	if(device == NULL)
 	{
 		printf ("Fatal error i did not have any interfaces to sniff on\n");
-		exit(1);
+		return 0;
     }
 
 	/* Setting the prmiscous and up flag to the interface */
@@ -61,10 +57,10 @@ int card_into_monitormode (char * device, int cardtype)
 	{
 		char wlanngcmd[62];
 		snprintf(wlanngcmd, sizeof(wlanngcmd),"%s %s lnxreq_wlansniff channel=1 enable=true",WLANCTL_PATH,device);
-		if (ret = (system (wlanngcmd)) != 0)
+		if (system (wlanngcmd) != 0)
 		{
 			printf ("\n Fatal error could not set %s in raw mode, check cardtype\n",device);
-			exit(1);
+			return 0;
 	    }
 	}
 	else if (cardtype == CARD_TYPE_HOSTAP)
@@ -82,15 +78,15 @@ int card_into_monitormode (char * device, int cardtype)
 	if (datalink == DLT_IEEE802_11) /* Rawmode is IEEE802_11 */
 	{
 		printf ("Your successfully listen on %s in 802.11 raw mode\n",device);
-        pcap_close(handle); 
-		return (0);
+		pcap_close(handle); 
+		return 0;
 
 	}
 	else 
 	{
 		printf ("Fatal error, cannot continue, your interface %s does not work in the correct 802.11 raw mode, check you driver please\n",device);
-        pcap_close(handle); 
-		exit(1);
+		pcap_close(handle); 
+		return 0;
 	}
 }
 
@@ -103,21 +99,19 @@ int card_set_promisc_up (char * device)
 	if (ret > 0)
 	{
 		printf ("\nFatal error, could not execute %s please check your card,binary location and permission\n",ifconfigcmd);
-	    exit(1);
+		return 0;
 	}
-	return(0);
+	return 1;
 }
 
 int start_sniffing (char * device)
 {
-	int ret;   /* return code */
+ 
 	pcap_t *handletopcap;
 	char errbuf[PCAP_ERRBUF_SIZE];
-    struct pcap_pkthdr header;          /* The header that pcap gives us */
-    const u_char *packet;                 /* The actual packet */
 
 	/* opening the pcap for sniffing */
-    handletopcap = pcap_open_live(device, BUFSIZ, 1, 1000, errbuf);
+	handletopcap = pcap_open_live(device, BUFSIZ, 1, 1000, errbuf);
 
 	/* Next few lines a taken out of kismet */
 	#ifdef HAVE_PCAP_NONBLOCK
@@ -125,10 +119,10 @@ int start_sniffing (char * device)
 	#endif
 
 	/*start scanning */
-    pcap_loop(handletopcap,-1,process_packets,NULL);
+	pcap_loop(handletopcap,-1,process_packets,NULL);
 
-    printf("\nDone processing packets... wheew!\n");
-    return 0;
+	printf("\nDone processing packets... wheew!\n");
+	return 1;
 }
 
 void process_packets(u_char *useless,const struct pcap_pkthdr* pkthdr,const u_char* packet)
@@ -137,9 +131,7 @@ void process_packets(u_char *useless,const struct pcap_pkthdr* pkthdr,const u_ch
 	u_int length = pkthdr->len;
 	u_int16_t fc;
 	u_int HEADER_LENGTH;
-	u_short extracted_ethertype;
-	int snapend;
-	int ret;
+
 	/* pinfo holds all interresting information for us */
 	struct packetinfo pinfo;
 	struct packetinfo *pinfoptr;
@@ -263,17 +255,15 @@ void process_packets(u_char *useless,const struct pcap_pkthdr* pkthdr,const u_ch
    all the infos is placed into the packetinfo structure			 */
 int decode_80211b_hdr(const u_char *p,struct packetinfo *ppinfo)
 {
-	char * ret;
-	char testme[16];
 	const struct mgmt_header_t *mgthdr = (const struct mgmt_header_t *) p;
 	ppinfo->fcsubtype = FC_SUBTYPE(mgthdr->fc);
-	
+
 	/* Get the sender, bssid and dest mac address */
 	etheraddr_string(mgthdr->bssid,ppinfo->bssid);
 	etheraddr_string(mgthdr->da,ppinfo->desthwaddr);
 	etheraddr_string(mgthdr->sa,ppinfo->sndhwaddr);
 	ppinfo->fc_wep = FC_WEP(mgthdr->fc);
-	return(0);
+	return 0;
 }
 
 
@@ -295,7 +285,6 @@ void etheraddr_string(register const u_char *ep,char * text)
 	}
 	*cp = '\0';
 	strcpy(text,buf);
-	return;
 }
 
 int handle_beacon(u_int16_t fc, const u_char *p,struct packetinfo *ppinfo)
@@ -328,13 +317,13 @@ int handle_beacon(u_int16_t fc, const u_char *p,struct packetinfo *ppinfo)
 				{
 					memcpy(&(pbody.ssid.ssid),p+offset,pbody.ssid.length); offset += pbody.ssid.length;
 					pbody.ssid.ssid[pbody.ssid.length]='\0';
-					if (strcmp(pbody.ssid.ssid,"")==0)
+					if (strcmp((char *)pbody.ssid.ssid,"")==0)
 					{
 						ppinfo->ssid = NONBROADCASTING;
 					}
 					else
 					{
-						ppinfo->ssid = pbody.ssid.ssid;
+						ppinfo->ssid = (char *)pbody.ssid.ssid;
 					}
 					ppinfo->ssid_len = pbody.ssid.length;
 				}
@@ -370,17 +359,12 @@ int handle_beacon(u_int16_t fc, const u_char *p,struct packetinfo *ppinfo)
 				}
 				break;
 			default:
-#if 0
-			printf("(1) unhandled element_id (%d)  ", *(p+offset) );
-#endif
+
 			offset+= *(p+offset+1) + 2;
 			break;
 		} /* end of switch*/
 	} /* end of for loop */
-	return(0);
-
-
-
+	return 1;
 	
 } /* End of handle_beacon */
 
