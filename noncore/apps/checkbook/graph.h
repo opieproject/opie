@@ -33,6 +33,7 @@
 #include <qwidget.h>
 
 class GraphInfo;
+class QPainter;
 
 class Graph : public QWidget
 {
@@ -44,7 +45,7 @@ class Graph : public QWidget
 		void setGraphInfo( GraphInfo * );
 
 		void drawGraph( bool = FALSE );
-		
+
 	protected:
 		void paintEvent( QPaintEvent * );
 		void resizeEvent( QResizeEvent * );
@@ -55,9 +56,9 @@ class Graph : public QWidget
 		QPixmap graph;
 
 		void initGraph();
-		void drawBarChart();
-		void drawLineChart();
-		void drawPieChart();
+		void drawBarChart( int, int, float );
+		void drawLineChart( int, int, float );
+		void drawPieChart( int, int, float );
 };
 
 #endif

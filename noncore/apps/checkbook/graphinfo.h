@@ -42,6 +42,8 @@ class DataPointInfo
 
 		const QString &label() { return l; }
 		float          value() { return v; }
+		
+		void addToValue( float value ) { v += value; }
 
 	private:
 		QString l;
@@ -57,15 +59,19 @@ class GraphInfo
 
 		GraphInfo( GraphType = BarChart, DataPointList * = 0x0,
 				   const QString & = 0x0, const QString & = 0x0, const QString & = 0x0 );
+		~GraphInfo();
 
 		GraphInfo::GraphType graphType();
 		void                 setGraphType( GraphType );
 
 		DataPointList *dataPoints();
 		void           setDataPoints( DataPointList * );
+		DataPointInfo *firstDataPoint();
+		DataPointInfo *nextDataPoint();
+		int            numberDataPoints();
 
 		float maxValue();
-		float minValue();
+		float totalValue();
 
 		void setGraphTitle( const QString & );
 		void setXAxisTitle( const QString & );

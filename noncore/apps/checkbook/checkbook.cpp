@@ -232,33 +232,30 @@ QWidget *Checkbook::initTransactions()
 
 QWidget *Checkbook::initCharts()
 {
+	graphInfo = 0x0;
+
 	QWidget *control = new QWidget( mainWidget );
 
 	QGridLayout *layout = new QGridLayout( control );
 	layout->setSpacing( 2 );
 	layout->setMargin( 4 );
 
-/*
-	QLabel *label = new QLabel( control );
-	label->setText( tr( "Graph type:" ) );
-	layout->addWidget( label, 0, 0 );
-	graphList = new QComboBox( control );
-	graphList->insertItem( tr( "By category" ) );
-	graphList->insertItem( tr( "..." ) );
-	graphList->insertItem( tr( "..." ) );
-	layout->addWidget( graphList, 0, 1 );
-*/
+	graphWidget = new Graph( control );
+	QWhatsThis::add( graphWidget, tr( "Select the desired chart below and then click on the Draw button." ) );
+	layout->addMultiCellWidget( graphWidget, 0, 0, 0, 2 );
 
-	GraphInfo* info = new GraphInfo( GraphInfo::BarChart, 0x0, tr( "Graph Title" ),
-									 tr( "X-Axis" ), tr( "Y-Axis" ) );
-	graphWidget = new Graph( control, info );
-	QWhatsThis::add( graphWidget, tr( "Charting is not implemented yet." ) );
-	layout->addMultiCellWidget( graphWidget, 0, 0, 0, 1 );
+	graphList = new QComboBox( control );
+	QWhatsThis::add( graphList, tr( "Click here to select the desired chart type." ) );
+	graphList->insertItem( tr( "Account balance" ) );
+	graphList->insertItem( tr( "Withdrawals by category" ) );
+	graphList->insertItem( tr( "Deposits by category" ) );
+
+	layout->addMultiCellWidget( graphList, 1, 1, 0, 1 );
 
 	QPushButton *btn = new QPushButton( Resource::loadPixmap( "checkbook/drawbtn" ), tr( "Draw" ), control );
-	QWhatsThis::add( btn, tr( "Click here to draw the chart." ) );
+	QWhatsThis::add( btn, tr( "Click here to draw the selected chart." ) );
 	connect( btn, SIGNAL( clicked() ), this, SLOT( slotDrawGraph() ) );
-	layout->addWidget( btn, 1, 1 );
+	layout->addWidget( btn, 1, 2 );
 
 	return control;
 }
@@ -367,12 +364,10 @@ void Checkbook::accept()
 	config->writeEntry( "Notes", notesEdit->text() );
 
 	// Save transactions
-	TranInfo *tran = transactions.first();
 	int i = 1;
-	while ( tran )
+	for ( TranInfo *tran = transactions.first(); tran; tran = transactions.next() )
 	{
 		tran->write( config, i );
-		tran = transactions.next();
 		i++;
 	}
 	config->write();
@@ -509,4 +504,93 @@ void Checkbook::slotDeleteTran()
 
 void Checkbook::slotDrawGraph()
 {
+	if ( graphInfo )
+	{
+		delete graphInfo;
+	}
+
+	switch ( graphList->currentItem() )
+	{
+		case 0 : drawBalanceChart();
+			break;
+		case 1 : drawCategoryChart( TRUE );
+			break;
+		case 2 : drawCategoryChart( FALSE );
+			break;
+	};
+
+	graphWidget->setGraphInfo( graphInfo );
+	graphWidget->drawGraph( TRUE );
+}
+
+void Checkbook::drawBalanceChart()
+{
+	DataPointList *list = new DataPointList();
+
+	float balance = startBalance;
+	float amount;
+	QString label;
+	int i = 0;
+	int count = transactions.count();
+
+	for ( TranInfo *tran = transactions.first(); tran; tran = transactions.next() )
+	{
+		i++;
+		balance -= tran->fee();
+		amount = tran->amount();
+		if ( tran->withdrawal() )
+		{
+			amount *= -1;
+		}
+		balance += amount;
+		if ( i == 1 || i == count / 2 || i == count )
+		{
+			label = tran->datestr();
+		}
+		else
+		{
+			label = "";
+		}
+		list->append( new DataPointInfo( label, balance ) );
+	}
+
+	graphInfo = new GraphInfo( GraphInfo::BarChart, list );
+}
+
+void Checkbook::drawCategoryChart( bool withdrawals )
+{
+	DataPointList *list = new DataPointList();
+
+	TranInfo *tran = transactions.first();
+	if ( tran->withdrawal() == withdrawals )
+	{
+		list->append( new DataPointInfo( tran->category(), tran->amount() ) );
+	}
+	tran = transactions.next();
+
+	DataPointInfo *cat;
+	for ( ; tran; tran = transactions.next() )
+	{
+		if ( tran->withdrawal() == withdrawals )
+		{
+			// Find category in list
+			for ( cat = list->first(); cat; cat = list->next() )
+			{
+				if ( cat->label() == tran->category() )
+				{
+					break;
+				}
+			}
+			if ( cat && cat->label() == tran->category() )
+			{ // Found category, add to transaction to category total
+				cat->addToValue( tran->amount() );
+			}
+			else
+			{ // Didn't find category, add category to list
+				list->append( new DataPointInfo( tran->category(), tran->amount() ) );
+			}
+		}
+	}
+
+	graphInfo = new GraphInfo( GraphInfo::PieChart, list );
 }

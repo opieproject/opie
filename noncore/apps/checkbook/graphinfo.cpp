@@ -38,6 +38,17 @@ GraphInfo::GraphInfo( GraphType type, DataPointList *data, const QString &title,
 	yt = ytitle;
 }
 
+GraphInfo::~GraphInfo()
+{
+	if ( d )
+	{
+		for ( DataPointInfo *data = d->first(); data; data = d->next() )
+		{
+			delete data;
+		}
+	}
+}
+
 GraphInfo::GraphType GraphInfo::graphType()
 {
 	return t;
@@ -58,14 +69,42 @@ void GraphInfo::setDataPoints( DataPointList *data )
 	d = data;
 }
 
-float GraphInfo::maxValue()
+DataPointInfo *GraphInfo::firstDataPoint()
 {
-	float max;
-
+	return( d->first() );
 }
 
-float GraphInfo::minValue()
+DataPointInfo *GraphInfo::nextDataPoint()
 {
+	return( d->next() );
+}
+
+int GraphInfo::numberDataPoints()
+{
+	return( d->count() );
+}
+
+float GraphInfo::maxValue()
+{
+	float max = 0.0;
+	for ( DataPointInfo *data = d->first(); data; data = d->next() )
+	{
+		if ( data->value() > max )
+		{
+			max = data->value();
+		}
+	}
+	return max;
+}
+
+float GraphInfo::totalValue()
+{
+	float sum = 0.0;
+	for ( DataPointInfo *data = d->first(); data; data = d->next() )
+	{
+		sum += data->value();
+	}
+	return sum;
 }
 
 void GraphInfo::setGraphTitle( const QString &title )

@@ -36,6 +36,7 @@
 class OTabWidget;
 
 class Graph;
+class GraphInfo;
 class QComboBox;
 class QLabel;
 class QLineEdit;
@@ -84,9 +85,13 @@ class Checkbook : public QDialog
 		float      currBalance;
 
 		// Charts tab
-		QWidget    *initCharts();
-		//QComboBox *graphList;
-		Graph      *graphWidget;
+		QWidget   *initCharts();
+		GraphInfo *graphInfo;
+		QComboBox *graphList;
+		Graph     *graphWidget;
+
+		void drawBalanceChart();
+		void drawCategoryChart( bool = TRUE );
 
 	protected slots:
 		void accept();
