@@ -1,7 +1,7 @@
 /* 
  * Set card modes for sniffing
  *
- * $Id: cardmode.cc,v 1.21 2003-02-12 22:46:02 mickeyl Exp $
+ * $Id: cardmode.cc,v 1.22 2003-02-13 10:57:19 max Exp $
  */
 
 #include "cardmode.hh"
@@ -74,8 +74,36 @@ int card_into_monitormode (pcap_t **orighandle, const char *device, int cardtype
       }
     return 1;
 #else
-#warning Hi _MAX_, please use a system call for hostap with wireless extensions < 15
-  // TODO: Implement switching HOSTAP into monitor mode with system call
+       // Wireless Extensions < Version 15 need iwpriv commandos for monitoring
+       int fd;
+   	//Wireless tools structure for the iocalls
+   	struct iwreq ireq;  
+   	int *ptr;
+	   /* Socket needed to use the iocall to */
+	   fd = socket(AF_INET, SOCK_STREAM, 0);
+
+	   if ( fd == -1 ) {
+ 	     return -1;
+ 	  }
+
+	   ptr = (int *) ireq.u.name;
+	   // This is the monitor mode for 802.11 non-prism header
+	   ptr[0] = 2;
+	   strcpy(ireq.ifr_ifrn.ifrn_name, device);
+	   if (ioctl( fd, SIOCIWFIRSTPRIV + 4, &ireq)==0)
+	   {
+		  /* All was fine... */
+		  close(fd);
+  		wl_loginfo("Set hostap card %s into monitormode",device);
+	       return 1;
+	   }
+	   else
+	   {
+	   	   /* iocall does not work */
+			close(fd);
+			wl_logerr("Could not set hostap card %s into monitormode, check cardtype",device);
+			return 0;
+	   }
 #endif
   }
   else if (cardtype == CARD_TYPE_ORINOCCO )
