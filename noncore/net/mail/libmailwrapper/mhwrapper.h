@@ -8,6 +8,7 @@ class RecMail;
 class RecBody;
 class encodedString;
 struct mailmbox_folder;
+class OProcess;
 
 class MHwrapper : public Genericwrapper
 {
@@ -39,6 +40,10 @@ public:
     virtual const QString&getType()const;
     virtual const QString&getName()const;
 
+public slots:
+    /* for deleting maildirs we are using a system call */
+    virtual void oprocessStderr(OProcess*, char *buffer, int );
+    virtual void processEnded(OProcess *);
 protected:
     QString buildPath(const QString&p);
     QString MHPath;
@@ -47,6 +52,8 @@ protected:
     
     void init_storage();
     void clean_storage();
+    
+    bool removeMboxfailed;
 };
 
 #endif

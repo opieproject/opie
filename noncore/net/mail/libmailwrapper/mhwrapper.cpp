@@ -3,8 +3,10 @@
 #include "mailwrapper.h"
 #include <libetpan/libetpan.h>
 #include <qdir.h>
+#include <qmessagebox.h>
 #include <stdlib.h>
 #include <qpe/global.h>
+#include <opie/oprocess.h>
 
 const QString MHwrapper::wrapperType="MH";
 
@@ -80,6 +82,8 @@ QList<Folder>* MHwrapper::listFolders()
 {
     QList<Folder> * folders = new QList<Folder>();
     folders->setAutoDelete( false );
+    /* this is needed! */
+    if (m_storage) mailstorage_disconnect(m_storage);
     init_storage();
     if (!m_storage) {
         return folders;
@@ -167,20 +171,28 @@ QString MHwrapper::buildPath(const QString&p)
     return f;
 }
 
-int MHwrapper::createMbox(const QString&folder,const Folder*,const QString&,bool )
+int MHwrapper::createMbox(const QString&folder,const Folder*pfolder,const QString&,bool )
 {
     init_storage();
     if (!m_storage) {
         return 0;
     }
-    QString f = buildPath(folder);
+    QString f;
+    if (!pfolder) {
+        // toplevel folder
+        f  = buildPath(folder);
+    } else {
+        f = pfolder->getName();
+        f+="/";
+        f+=folder;
+    }
+    qDebug(f);
     int r = mailsession_create_folder(m_storage->sto_session,(char*)f.latin1());
     if (r != MAIL_NO_ERROR) {
-        qDebug("error creating folder");
+        qDebug("error creating folder %i",r);
         return 0;
     }
     qDebug("Folder created");
-    mailstorage_disconnect(m_storage);
     return 1;
 }
 
@@ -295,14 +307,46 @@ int MHwrapper::deleteMbox(const Folder*tfolder)
         return 0;
     }
     if (!tfolder) return 0;
+    if (tfolder->getName()=="/" || tfolder->getName().isEmpty()) return 0;
+    
     int r = mailsession_delete_folder(m_storage->sto_session,(char*)tfolder->getName().latin1());
+    
     if (r != MAIL_NO_ERROR) {
         qDebug("error deleting mail box");
         return 0;
     }
+    QString cmd = "rm -rf "+tfolder->getName();
+    QStringList command;
+    command << "/bin/sh";
+    command << "-c";
+    command << cmd.latin1();
+    OProcess *process = new OProcess();
+    
+    connect(process, SIGNAL(processExited(OProcess *)),
+            this, SLOT( processEnded(OProcess *)));
+    connect(process, SIGNAL( receivedStderr(OProcess *, char *, int)),
+            this, SLOT( oprocessStderr(OProcess *, char *, int)));
+
+    *process << command;
+    removeMboxfailed = false;
+    if(!process->start(OProcess::Block, OProcess::All) ) {
+        qDebug("could not start process");
+        return 0;
+    }
     qDebug("mail box deleted");
-    mailstorage_disconnect(m_storage);
     return 1;
+}
+
+void MHwrapper::processEnded(OProcess *p)
+{
+    if (p) delete p;
+}
+
+void MHwrapper::oprocessStderr(OProcess*, char *buffer, int )
+{
+    QString lineStr = buffer;
+    QMessageBox::warning( 0, tr("Error"), lineStr ,tr("Ok") );
+    removeMboxfailed = true;
 }
 
 void MHwrapper::statusFolder(folderStat&target_stat,const QString & mailbox)
