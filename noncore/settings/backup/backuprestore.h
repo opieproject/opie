@@ -32,6 +32,7 @@ private slots:
     void addLocation();
     void removeLocation();
     void saveLocations();
+    void selectLocation();
 
 private:
     void scanForApplicationSettings();

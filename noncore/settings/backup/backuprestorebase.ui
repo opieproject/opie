@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>290</width>
+            <width>282</width>
             <height>243</height>
         </rect>
     </property>
@@ -222,31 +222,6 @@
                         <name>spacing</name>
                         <number>4</number>
                     </property>
-                    <widget row="0"  column="0"  rowspan="1"  colspan="3" >
-                        <class>QLineEdit</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>locationEdit</cstring>
-                        </property>
-                    </widget>
-                    <widget row="0"  column="3" >
-                        <class>QToolButton</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>locationSelectBtn</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>maximumSize</name>
-                            <size>
-                                <width>20</width>
-                                <height>30</height>
-                            </size>
-                        </property>
-                        <property stdset="1">
-                            <name>text</name>
-                            <string>...</string>
-                        </property>
-                    </widget>
                     <widget row="1"  column="0"  rowspan="1"  colspan="4" >
                         <class>QListView</class>
                         <column>
@@ -299,6 +274,38 @@
                         <property stdset="1">
                             <name>text</name>
                             <string>Save</string>
+                        </property>
+                    </widget>
+                    <widget row="0"  column="3" >
+                        <class>QPushButton</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>selectLocationButton</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>sizePolicy</name>
+                            <sizepolicy>
+                                <hsizetype>0</hsizetype>
+                                <vsizetype>0</vsizetype>
+                            </sizepolicy>
+                        </property>
+                        <property stdset="1">
+                            <name>maximumSize</name>
+                            <size>
+                                <width>20</width>
+                                <height>30</height>
+                            </size>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>...</string>
+                        </property>
+                    </widget>
+                    <widget row="0"  column="0"  rowspan="1"  colspan="3" >
+                        <class>QLineEdit</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>locationEdit</cstring>
                         </property>
                     </widget>
                 </grid>
