@@ -156,17 +156,19 @@ void NNTPwrapper::login()
         conntype = CONNECTION_TYPE_TRY_STARTTLS;
     }
 
-    nntp_mailstorage_init(m_nntp,(char*)server, port, NULL, conntype, NNTP_AUTH_TYPE_PLAIN,
+   nntp_mailstorage_init(m_nntp,(char*)server, port, NULL, conntype, NNTP_AUTH_TYPE_PLAIN,
                           (char*)user,(char*)pass,0,0,0);
 
-    err = mailstorage_connect(m_nntp);
+    err = mailstorage_connect( m_nntp );
 
-    if (err != NEWSNNTP_NO_ERROR) {
+   if (err != NEWSNNTP_NO_ERROR) {
         qDebug( QString( "FEHLERNUMMER %1" ).arg(  err ) );
      //   Global::statusMessage(tr("Error initializing folder"));
         mailstorage_free(m_nntp);
         m_nntp = 0;
+
     }
+
 }
 
 void NNTPwrapper::logout()
@@ -175,23 +177,35 @@ void NNTPwrapper::logout()
     if ( m_nntp == NULL )
         return;
     mailstorage_free(m_nntp);
-    m_nntp = 0;
+   m_nntp = 0;
 }
 
 QList<Folder>* NNTPwrapper::listFolders() {
+
+
+
+
     QList<Folder> * folders = new QList<Folder>();
     folders->setAutoDelete( false );
     clist *result = 0;
+    clistcell *current;
+    newsnntp_group_description *list;
 
-   // int err =
-//    if ( err == _NO_ERROR ) {
-//        current = result->first;
-//        for ( current=clist_begin(result);current!=NULL;current=clist_next(current)) {
+  login();
+  if ( m_nntp )   {
+  mailsession * session = m_nntp->sto_session;
+ newsnntp * news =  ( (  nntp_session_state_data * )session->sess_data )->nntp_session;
+   int err = newsnntp_list_newsgroups(news, NULL, &result);
 
-
+   if ( err == NEWSNNTP_NO_ERROR ) {
+        current = result->first;
+        for ( current=clist_begin(result);current!=NULL;current=clist_next(current)) {
+               list = (  newsnntp_group_description* ) current->data;
+               qDebug(  list->grp_name );
+       }
 //    Folder*inb=new Folder("INBOX","/");
-
-
+   }
+ }
 //    folders->append(inb);
     return folders;
 }
