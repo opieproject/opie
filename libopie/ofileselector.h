@@ -84,7 +84,8 @@ class OFileSelector : public QWidget {
   Q_OBJECT
  public:
   enum Mode {OPEN=1, SAVE, FILESELECTOR };
-  enum Selector{NORMAL=1, EXTENDED };
+  enum Selector{NORMAL=1, EXTENDED = 2, EXTENDED_ALL =4 };
+  enum View { DIRS = 1, FILES = 2, TREE = 4, ICON = 8 };
   OFileSelector(QWidget *wid, int mode, int selector, const QString &dirName, const QString &fileName = QString::null, const QStringList mimetypes = QStringList() );
 
   bool showToolbar() const { return m_shTool;  };
@@ -123,8 +124,10 @@ class OFileSelector : public QWidget {
   void slotOk();
   void slotCancel();
   void slotViewCheck(const QString & );
+  void slotMimeCheck(const QString & );
  protected:
   void init();
+  void updateMimes();
   int m_mode, m_selector;
   QComboBox *m_location, *m_mimeCheck, *m_viewCheck;
   QPushButton *m_homeButton, *m_docButton, *m_hideButton, *m_ok, *m_cancel;
@@ -154,6 +157,7 @@ class OFileSelector : public QWidget {
   bool m_shChooser:1;
   bool m_shYesNo:1;
   bool m_boCheckPerm:1;
+  bool m_autoMime:1;
 
  protected:
 

@@ -38,6 +38,8 @@
 #include <qlabel.h>
 
 #include <qpe/fileselector.h>
+#include <qpe/applnk.h>
+#include <qpe/global.h>
 
 #include "ofileselector.h"
 
@@ -49,6 +51,9 @@ OFileSelector::OFileSelector(QWidget *wid, int mode, int selector, const QString
   m_currentDir = dirName;
   m_name = fileName;
   m_mimetypes = mimetypes;
+  if( mimetypes.isEmpty() )
+    m_autoMime = true;
+
   m_mode = mode;
   m_shTool = true;
   m_shPerm = true;
@@ -82,6 +87,7 @@ OFileSelector::OFileSelector(QWidget *wid, int mode, int selector, const QString
 
   m_lay = new QVBoxLayout(this);
   init();
+  m_edit->setText( fileName );
 }
 
 // let's initialize the gui
@@ -326,28 +332,82 @@ void OFileSelector::initializeChooser()
   m_viewCheck->insertItem(tr("Files") );
   m_viewCheck->insertItem(tr("All Files") );
 
+  if(!m_autoMime )
+    m_mimeCheck->insertItem(m_mimetypes.join("," ) );
+  else{ // check
+    updateMimes();
+    m_mimeCheck->insertStringList( m_mimetypes );
+  }
+
   connect( m_viewCheck, SIGNAL(activated(const QString &) ),
 	   this, SLOT(slotViewCheck(const QString & ) ) );
-  
-}
 
+  connect( m_mimeCheck, SIGNAL(activated(const QString &) ),
+	   this, SLOT(slotMimeCheck(const QString & ) ) );
+}
+void OFileSelector::slotMimeCheck(const QString &view ){
+  if(m_selector == NORMAL ){
+    delete m_select;
+    m_select = new FileSelector(view == "All" ? QString::null : view 
+				, m_stack, "fileselector", FALSE, FALSE );
+    m_stack->addWidget( m_select, NORMAL );
+    m_stack->raiseWidget( NORMAL );
+  }else{
+
+
+  }
+}
 
 void OFileSelector::slotViewCheck(const QString &view ){
   qWarning("changed: show %s", view.latin1() );
   // if the current view is the one
-
+  QString currMime = m_mimeCheck->currentText();
   if( view == QString::fromLatin1("Documents") ){
     // get the mimetype now
     // check if we're the current widget and return
+    delete m_select;
+    m_select = new FileSelector( currMime == "All" ? QString::null : currMime,
+				 m_stack,"fileselector", FALSE, FALSE );
+    m_stack->addWidget( m_select, NORMAL );
+    m_stack->raiseWidget( NORMAL );
+    m_selector = NORMAL;
+
   }else if(view == QString::fromLatin1("Files") ){
     if( m_select != 0 ){
       // remove from the stack
       delete m_select;
       m_select = 0;
+      m_selector = EXTENDED;
+      // create the ListView or IconView
+
+      reparse();
     }
   }else if(view == QString::fromLatin1("All Files") ) {
     // remove from the stack
     delete m_select;
     m_select = 0;
+    m_selector = EXTENDED_ALL;
+
+    reparse();
   };
+};
+
+
+void OFileSelector::updateMimes() // lets check which mode is active
+  // check the current dir for items then
+{
+  m_mimetypes.clear();
+  m_mimetypes.append("All" );
+  if( m_selector == NORMAL ){
+    DocLnkSet set;
+    Global::findDocuments(&set, QString::null );
+    QListIterator<DocLnk> dit( set.children() );
+    for ( ; dit.current(); ++dit ) {
+      if( !m_mimetypes.contains((*dit)->type()  ) )
+      m_mimetypes.append( (*dit)->type() );
+    }
+  }else{
+
+
+  }
 };
