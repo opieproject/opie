@@ -111,7 +111,7 @@ Bitte laden Sie sie auf.</translation>
     </message>
     <message>
         <source>All types of file</source>
-        <translation>Alle Dateien dieses Typs</translation>
+        <translation>Alle Dateien</translation>
     </message>
     <message>
         <source>Document View</source>

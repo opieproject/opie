@@ -54,11 +54,11 @@
     </message>
     <message>
         <source>Small Fixed</source>
-        <translation>klein, fixiert</translation>
+        <translation>klein, feste Breite</translation>
     </message>
     <message>
         <source>Medium Fixed</source>
-        <translation>mittel, fixiert</translation>
+        <translation>mittel, feste Breite</translation>
     </message>
     <message>
         <source>Font</source>
