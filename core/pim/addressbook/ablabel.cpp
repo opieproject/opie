@@ -90,6 +90,7 @@ void AbLabel::sync()
 
 void AbLabel::keyPressEvent( QKeyEvent *e )
 {
+
 	// Commonly handled keys
 	if ( !m_empty ){
 		switch( e->key() ) {
@@ -103,20 +104,33 @@ void AbLabel::keyPressEvent( QKeyEvent *e )
 			break;
 		case Qt::Key_Up:
 			qWarning( "UP..");
-			--m_itCurContact;
-			if ( *m_itCurContact != OContact() )
-				sync();
-			else
-				m_itCurContact = m_viewList.end();
+			if ( ( visibleHeight() < contentsHeight() ) &&
+			     ( verticalScrollBar()->value() > verticalScrollBar()->minValue() ) )
+				scrollBy( 0, -(visibleHeight()-20) );
+			else {
+				--m_itCurContact;
+				if ( *m_itCurContact != OContact() )
+					sync();
+				else
+					m_itCurContact = m_viewList.end();
+			}
 
 			break;
 		case Qt::Key_Down:
 			qWarning( "DOWN..");
-			++m_itCurContact;
-			if ( *m_itCurContact != OContact() )
-				sync();
-			else
-				m_itCurContact = m_viewList.begin();
+// 			qWarning( "visible: %d, content: %d",visibleHeight(),contentsHeight()); 
+// 			qWarning( "value: %d; barMaxValue: %d", verticalScrollBar()->value()
+// 				  , verticalScrollBar()->maxValue() );
+			if ( ( visibleHeight() < contentsHeight() ) &&
+			     ( verticalScrollBar()->value() < verticalScrollBar()->maxValue() ) )
+				scrollBy( 0, visibleHeight()-20 );
+			else {
+				++m_itCurContact;
+				if ( *m_itCurContact != OContact() )
+					sync();
+				else
+					m_itCurContact = m_viewList.begin();
+			}
 			break;
                 case Qt::Key_Return: // fall through
                 case Qt::Key_Space: // fall through

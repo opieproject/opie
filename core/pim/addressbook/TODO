@@ -13,8 +13,6 @@ Feature requests:
 - Beaming of multiple contacts (current list/ by search or by category)
 - Configure the letter-picker: lastname/fullname search 
 - User center of the joypad to switch back from card to listview !
-- Cursor-UP/Down: Should additionally scroll cardview if it is too large 
-  (behaviour should be selectable by configuration)
 
 Known Bugs:
 -----------
@@ -114,3 +112,5 @@ Fixed/Ready:
 	If on second tab: The combo chooser is on the top left of the screen ! :(
 - Default Email-Button: Sometimes not hiding the textfields completely
 - Fix handling of 3 Firstnames
+- Cursor-UP/Down: Should additionally scroll cardview if it is too large 
+  (behaviour should be selectable by configuration)
