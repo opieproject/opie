@@ -30,8 +30,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>281</width>
-            <height>30</height>
+            <width>249</width>
+            <height>26</height>
         </rect>
     </property>
     <property>
@@ -47,8 +47,78 @@
         </property>
         <property stdset="1">
             <name>spacing</name>
-            <number>6</number>
+            <number>0</number>
         </property>
+        <widget>
+            <class>QToolButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>backmonth</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string></string>
+            </property>
+            <property stdset="1">
+                <name>pixmap</name>
+                <pixmap></pixmap>
+            </property>
+            <property stdset="1">
+                <name>toggleButton</name>
+                <bool>false</bool>
+            </property>
+            <property stdset="1">
+                <name>autoRepeat</name>
+                <bool>true</bool>
+            </property>
+            <property stdset="1">
+                <name>autoRaise</name>
+                <bool>true</bool>
+            </property>
+            <property stdset="1">
+                <name>toggleButton</name>
+                <bool>false</bool>
+            </property>
+            <property>
+                <name>toolTip</name>
+                <string></string>
+            </property>
+        </widget>
+        <widget>
+            <class>QToolButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>backweek</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string></string>
+            </property>
+            <property stdset="1">
+                <name>pixmap</name>
+                <pixmap></pixmap>
+            </property>
+            <property stdset="1">
+                <name>toggleButton</name>
+                <bool>false</bool>
+            </property>
+            <property stdset="1">
+                <name>autoRepeat</name>
+                <bool>true</bool>
+            </property>
+            <property stdset="1">
+                <name>autoRaise</name>
+                <bool>true</bool>
+            </property>
+            <property stdset="1">
+                <name>toggleButton</name>
+                <bool>false</bool>
+            </property>
+            <property>
+                <name>toolTip</name>
+                <string></string>
+            </property>
+        </widget>
         <widget>
             <class>QSpinBox</class>
             <property stdset="1">
@@ -109,8 +179,29 @@
                 <number>1</number>
             </property>
         </widget>
+        <spacer>
+            <property>
+                <name>name</name>
+                <cstring>Spacer1_1</cstring>
+            </property>
+            <property stdset="1">
+                <name>orientation</name>
+                <enum>Horizontal</enum>
+            </property>
+            <property stdset="1">
+                <name>sizeType</name>
+                <enum>Expanding</enum>
+            </property>
+            <property>
+                <name>sizeHint</name>
+                <size>
+                    <width>20</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
         <widget>
-            <class>QLabel</class>
+            <class>QToolButton</class>
             <property stdset="1">
                 <name>name</name>
                 <cstring>labelDate</cstring>
@@ -132,32 +223,113 @@
                 <name>text</name>
                 <string>00. Jan-00. Jan</string>
             </property>
+        </widget>
+        <spacer>
+            <property>
+                <name>name</name>
+                <cstring>Spacer1_2</cstring>
+            </property>
             <property stdset="1">
-                <name>alignment</name>
-                <set>AlignCenter</set>
+                <name>orientation</name>
+                <enum>Horizontal</enum>
+            </property>
+            <property stdset="1">
+                <name>sizeType</name>
+                <enum>Expanding</enum>
             </property>
             <property>
-                <name>hAlign</name>
+                <name>sizeHint</name>
+                <size>
+                    <width>20</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
+        <widget>
+            <class>QToolButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>forwardweek</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string></string>
+            </property>
+            <property stdset="1">
+                <name>pixmap</name>
+                <pixmap></pixmap>
+            </property>
+            <property stdset="1">
+                <name>autoRepeat</name>
+                <bool>true</bool>
+            </property>
+            <property stdset="1">
+                <name>autoRaise</name>
+                <bool>true</bool>
+            </property>
+        </widget>
+        <widget>
+            <class>QToolButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>forwardmonth</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string></string>
+            </property>
+            <property stdset="1">
+                <name>pixmap</name>
+                <pixmap></pixmap>
+            </property>
+            <property stdset="1">
+                <name>autoRepeat</name>
+                <bool>true</bool>
+            </property>
+            <property stdset="1">
+                <name>autoRaise</name>
+                <bool>true</bool>
             </property>
         </widget>
     </hbox>
 </widget>
 <connections>
     <connection>
-        <sender>spinYear</sender>
-        <signal>valueChanged(int)</signal>
+        <sender>backmonth</sender>
+        <signal>clicked()</signal>
         <receiver>DateBookWeekHeaderBase</receiver>
-        <slot>yearChanged( int )</slot>
+        <slot>prevMonth()</slot>
     </connection>
     <connection>
-        <sender>spinWeek</sender>
-        <signal>valueChanged(int)</signal>
+        <sender>backweek</sender>
+        <signal>clicked()</signal>
         <receiver>DateBookWeekHeaderBase</receiver>
-        <slot>weekChanged( int )</slot>
+        <slot>prevWeek()</slot>
+    </connection>
+    <connection>
+        <sender>forwardweek</sender>
+        <signal>clicked()</signal>
+        <receiver>DateBookWeekHeaderBase</receiver>
+        <slot>nextWeek()</slot>
+    </connection>
+    <connection>
+        <sender>forwardmonth</sender>
+        <signal>clicked()</signal>
+        <receiver>DateBookWeekHeaderBase</receiver>
+        <slot>nextMonth()</slot>
+    </connection>
+    <connection>
+        <sender>labelDate</sender>
+        <signal>clicked()</signal>
+        <receiver>DateBookWeekHeaderBase</receiver>
+        <slot>pickDate()</slot>
     </connection>
     <slot access="public">yearChanged( int )</slot>
     <slot access="public">nextWeek()</slot>
     <slot access="public">prevWeek()</slot>
     <slot access="public">weekChanged( int )</slot>
+    <slot access="public">nextMonth()</slot>
+    <slot access="public">prevMonth()</slot>
+	<slot access="public">pickDate()</slot>
 </connections>
 </UI>

@@ -39,10 +39,14 @@ signals:
     void dateChanged( int y, int w );
 
 public slots:
-    void yearChanged( int );
-    void nextWeek();
-    void prevWeek();
-    void weekChanged( int );
+	void pickDate();
+	void yearChanged( int );
+	void nextMonth();
+	void prevMonth();
+	void nextWeek();
+	void prevWeek();
+	void weekChanged( int );
+	void setDate( int y, int m, int d);
 
 protected slots:
     void keyPressEvent(QKeyEvent *e)
