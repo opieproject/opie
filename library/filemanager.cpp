@@ -17,28 +17,18 @@
 ** not clear to you.
 **
 **********************************************************************/
+
 #include "filemanager.h"
 #include "applnk.h"
 
+/* QT */
+#include <qdir.h>
 #include <qfileinfo.h>
 #include <qtextstream.h>
 
-#include <errno.h>
+/* STD */
 #include <stdlib.h>
-#include <unistd.h>
 #include <sys/stat.h>
-#include <dirent.h>
-#ifdef Q_OS_MACX
-// MacOS X does not have sendfile.. :(
-// But maybe in the future.. !?
-#  ifdef SENDFILE
-#    include <sys/types.h>
-#    include <sys/socket.h>
-#  endif
-#else
-#  include <sys/sendfile.h>
-#endif /* Q_OS_MACX */
-#include <fcntl.h>
 
 /*!
   \class FileManager
@@ -57,7 +47,6 @@ FileManager::FileManager()
 */
 FileManager::~FileManager()
 {
-
 }
 
 /*!
@@ -67,26 +56,29 @@ FileManager::~FileManager()
 */
 bool FileManager::saveFile( const DocLnk &f, const QByteArray &data )
 {
- QString fn = f.file() + ".new";
-    ensurePathExists( fn );
-    QFile fl( fn );
-    if ( !fl.open( IO_WriteOnly|IO_Raw ) ) {
-       qWarning("open failed");
-       return FALSE;
+    QString fileName = f.file() + ".new";
+    ensurePathExists( fileName );
+    QFile file( fileName );
+
+    //write data in temporary .new file
+    if ( !file.open( IO_WriteOnly|IO_Raw ) )
+    {
+        qWarning("open failed");
+        return FALSE;
     }
-    int total_written = fl.writeBlock( data );
-    fl.close();
-    if ( total_written != int(data.size()) || !f.writeLink() ) {
-  QFile::remove( fn );
-  return FALSE;
+    int total_written = file.writeBlock( data );
+    file.close();
+    //check if every was written
+    if ( total_written != int(data.size()) || !f.writeLink() )
+    {
+        QFile::remove( fileName );
+        return FALSE;
     }
-       qDebug("total written %d out of %d", total_written, data.size());
-    // else rename the file...
-    if ( !renameFile( fn.latin1(), f.file().latin1() ) ) {
-  qWarning( "problem renaming file %s to %s, errno: %d", fn.latin1(),
-      f.file().latin1(), errno );
-  // remove the file...
-    }
+    qDebug("total written %d out of %d", total_written, data.size());
+
+    //rename temporary .new file in original filenam
+    if ( !renameFile( fileName,  f.file() ) )
+        QFile::remove( fileName);
     return TRUE;
 }
 
@@ -99,28 +91,30 @@ bool FileManager::saveFile( const DocLnk &f, const QByteArray &data )
 */
 bool FileManager::saveFile( const DocLnk &f, const QString &text )
 {
- QString fn = f.file() + ".new";
-    ensurePathExists( fn );
-    QFile fl( fn );
-    if ( !fl.open( IO_WriteOnly|IO_Raw ) ) {
-       qWarning("open failed");
-       return FALSE;
+    QString fileName = f.file() + ".new";
+    ensurePathExists( fileName );
+    QFile file( fileName );
+
+    //write data in temporary .new file
+    if ( !file.open( IO_WriteOnly|IO_Raw ) )
+    {
+        qWarning("open failed");
+        return FALSE;
     }
 
     QCString cstr = text.utf8();
     int total_written;
-    total_written = fl.writeBlock( cstr.data(), cstr.length() );
-    fl.close();
-    if ( total_written != int(cstr.length()) || !f.writeLink() ) {
-       QFile::remove( fn );
-       return FALSE;
+    total_written = file.writeBlock( cstr.data(), cstr.length() );
+    file.close();
+    if ( total_written != int(cstr.length()) || !f.writeLink() )
+    {
+        QFile::remove( fileName );
+        return FALSE;
     }
-    // okay now rename the file..
-    if ( !renameFile( fn.latin1(), f.file().latin1() ) ) {
-       qWarning( "problem renaming file %s to %s, errno: %d", fn.latin1(),
-                 f.file().latin1(), errno );
 
-    }
+    // okay now rename the file..
+    if ( !renameFile( fileName,  f.file() ) )
+        QFile::remove( fileName);
     return TRUE;
 }
 
@@ -137,7 +131,7 @@ bool FileManager::loadFile( const DocLnk &f, QString &text )
     QString fn = f.file();
     QFile fl( fn );
     if ( !fl.open( IO_ReadOnly ) )
-  return FALSE;
+        return FALSE;
     QTextStream ts( &fl );
 #if QT_VERSION <= 230 && defined(QT_NO_CODECS)
     // The below should work, but doesn't in Qt 2.3.0
@@ -161,10 +155,10 @@ bool FileManager::loadFile( const DocLnk &f, QByteArray &ba )
     QString fn = f.file();
     QFile fl( fn );
     if ( !fl.open( IO_ReadOnly ) )
-  return FALSE;
+        return FALSE;
     ba.resize( fl.size() );
     if ( fl.size() > 0 )
-  fl.readBlock( ba.data(), fl.size() );
+        fl.readBlock( ba.data(), fl.size() );
     fl.close();
     return TRUE;
 }
@@ -177,204 +171,94 @@ bool FileManager::loadFile( const DocLnk &f, QByteArray &ba )
 */
 bool FileManager::copyFile( const AppLnk &src, const AppLnk &dest )
 {
-    QFile sf( src.file() );
-    if ( !sf.open( IO_ReadOnly ) )
-  return FALSE;
+    QFile srcFile( src.file() );
+    if ( !srcFile.open( IO_ReadOnly ) )
+        return FALSE;
 
-    QString fn = dest.file() + ".new";
-    ensurePathExists( fn );
-    QFile df( fn );
-    if ( !df.open( IO_WriteOnly|IO_Raw ) )
-  return FALSE;
+    QString fileName = dest.file() + ".new";
 
+    ensurePathExists( fileName );
+
+    bool ok = TRUE;
+    ok = copyFile( src.file(), fileName );
+
+    if ( ok )
+        ok = dest.writeLink();
+
+    if ( ok )
+    {
+        // okay now rename the file...
+        if ( !renameFile( fileName.latin1(), dest.file().latin1() )  )
+            // remove the tmp file, otherwise, it will just lay around...
+            QFile::remove( fileName.latin1() );
+    }
+    else
+    {
+        QFile::remove( fileName.latin1() );
+    }
+    return ok;
+}
+
+bool FileManager::copyFile( const QString & src, const QString & dest )
+{
+    //open read file
+    QFile srcFile( src );
+    if( !srcFile.open( IO_ReadOnly|IO_Raw) )
+    {
+        qWarning( "open read failed %s, %s", src.latin1(), dest.latin1() );
+        return FALSE;
+    }
+
+    //open write file
+    QFile destFile( dest );
+    if( !destFile.open( IO_WriteOnly|IO_Raw ) )
+    {
+        qWarning( "open write failed %s, %s", src.latin1(), dest.latin1() );
+        srcFile.close();
+        return FALSE;
+    }
+
+    //copy content
     const int bufsize = 16384;
     char buffer[bufsize];
     bool ok = TRUE;
     int bytesRead = 0;
-    while ( ok && !sf.atEnd() ) {
-  bytesRead = sf.readBlock( buffer, bufsize );
-  if ( bytesRead < 0 )
-      ok = FALSE;
-  while ( ok && bytesRead > 0 ) {
-      int bytesWritten = df.writeBlock( buffer, bytesRead );
-      if ( bytesWritten < 0 )
-    ok = FALSE;
-      else
-    bytesRead -= bytesWritten;
-  }
+    while ( ok && !srcFile.atEnd() )
+    {
+        bytesRead = srcFile.readBlock( buffer, bufsize );
+        if ( bytesRead < 0 )
+            ok = FALSE;
+        while ( ok && bytesRead > 0 )
+        {
+            int bytesWritten = destFile.writeBlock( buffer, bytesRead );
+            if ( bytesWritten < 0 )
+                ok = FALSE;
+            else
+                bytesRead -= bytesWritten;
+        }
     }
-
-    if ( ok )
-  ok = dest.writeLink();
-    
-    if ( ok ) {
-  // okay now rename the file...
-  if ( !renameFile( fn.latin1(), dest.file().latin1() )  ) {
-      qWarning( "problem renaming file %s to %s, errno: %d", fn.latin1(),
-          dest.file().latin1(), errno );
-      // remove the tmp file, otherwise, it will just lay around...
-      QFile::remove( fn.latin1() );
-  }
-    } else {
-  QFile::remove( fn.latin1() );
+    srcFile.close();
+    destFile.close();
+    // Set file permissions
+    struct stat status;
+    if( stat( (const char *) src, &status ) == 0 )
+    {
+        chmod( (const char *) dest, status.st_mode );
     }
-
     return ok;
 }
 
-bool FileManager::copyFile( const QString & src, const QString & dest ) {
-   bool success = true;
-   struct stat status;
-   int read_fd=0;
-   int write_fd=0;
-   struct stat stat_buf;
-   off_t offset = 0;
-   QFile srcFile(src);
-   QFile destFile(dest);
 
-   if(!srcFile.open( IO_ReadOnly|IO_Raw)) {
-         return success = false;
-   }
-   read_fd = srcFile.handle();
-   if(read_fd != -1) {
-      fstat (read_fd, &stat_buf);
-      if( !destFile.open( IO_WriteOnly|IO_Raw ) )
-            return success = false;
-      write_fd = destFile.handle(); 
-      if(write_fd != -1) {
-         int err=0;
-         QString msg;
-#ifdef Q_OS_MACX
-#ifdef SENDFILE
-	 /* FreeBSD does support a different kind of 
-	  * sendfile. (eilers)
-	  * I took this from Very Secure FTPd
-	  * Licence: GPL
-	  * Author: Chris Evans
-	  * sysdeputil.c
-	  */
-          /* XXX - start_pos will truncate on 32-bit machines - can we
-           * say "start from current pos"?
-           */
-          off_t written = 0;
-	  int retval = 0;
-          retval = sendfile(read_fd, write_fd, offset, stat_buf.st_size, NULL,
-                            &written, 0);
-          /* Translate to Linux-like retval */
-          if (written > 0)
-          {
-            err = (int) written;
-          }
-#else /* SENDFILE */
-	  err == -1;
-	  msg = "FAILURE: Using unsupported function \"sendfile()\" Need Workaround !!";
-	  success = false;
-#         warning "Need workaround for sendfile!!(eilers)"
-#endif  /* SENDFILE */
-
-#else
-	  err = sendfile(write_fd, read_fd, &offset, stat_buf.st_size);
-	  if( err == -1) {
-		  switch(errno) {
-		  case EBADF : msg = "The input file was not opened for reading or the output file was not opened for writing. ";
-		  case EINVAL: msg = "Descriptor is not valid or locked. ";
-		  case ENOMEM: msg = "Insufficient memory to read from in_fd.";
-		  case EIO: msg = "Unspecified error while reading from in_fd.";
-		  };
-		  success = false;
-	  }
-#endif /* Q_OS_MACX */
-	  if( !success )
-		  qWarning( msg );
-     } else {
-         qWarning("open write failed %s, %s",src.latin1(), dest.latin1());
-         success = false;
-      }
-   } else {
-      qWarning("open read failed %s, %s",src.latin1(), dest.latin1());
-      success = false;
-   }
-   srcFile.close();
-   destFile.close();
-    // Set file permissions
-  if( stat( (const char *) src, &status ) == 0 ) {
-      chmod( (const char *) dest, status.st_mode );
+bool FileManager::renameFile( const QString & src, const QString & dest )
+{
+    QDir dir( QFileInfo( src ).absFilePath() );
+    if ( !dir.rename( src, dest ) )
+    {
+        qWarning( "problem renaming file %s to %s", src, dest );
+        return false;
     }
-
-  return success;
+    return true;
 }
-
-
-bool FileManager::renameFile( const QString & src, const QString & dest ) {
-   if(copyFile( src, dest )) {
-      if(QFile::remove(src) ) {
-       return true;
-      }
-   }
-    return false;  
-}
-
-/*
-bool FileManager::copyFile( const QString & src, const QString & dest ) {
-   bool success = true;
-   struct stat status;
-   int read_fd=0;
-   int write_fd=0;
-   struct stat stat_buf;
-   off_t offset = 0;
-   QFile srcFile(src);
-   QFile destFile(dest);
-
-   if(!srcFile.open( IO_ReadOnly|IO_Raw)) {
-         return success = false;
-   }
-   read_fd = srcFile.handle();
-   if(read_fd != -1) {
-      fstat (read_fd, &stat_buf);
-      if( !destFile.open( IO_WriteOnly|IO_Raw ) )
-            return success = false;
-      write_fd = destFile.handle();
-      if(write_fd != -1) {
-         int err=0;
-         QString msg;
-         err = sendfile(write_fd, read_fd, &offset, stat_buf.st_size);
-         if( err == -1) {
-            switch(err) {
-            case EBADF : msg = "The input file was not opened for reading or the output file was not opened for writing. ";
-            case EINVAL: msg = "Descriptor is not valid or locked. ";
-            case ENOMEM: msg = "Insufficient memory to read from in_fd.";
-            case EIO: msg = "Unspecified error while reading from in_fd.";
-            };
-            success = false;
-         }
-      } else {
-         qWarning("open write failed %s, %s",src.latin1(), dest.latin1());
-         success = false;
-      }
-   } else {
-      qWarning("open read failed %s, %s",src.latin1(), dest.latin1());
-      success = false;
-   }
-   srcFile.close();
-   destFile.close();
-    // Set file permissions
-  if( stat( (const char *) src, &status ) == 0 ) {
-      chmod( (const char *) dest, status.st_mode );
-    }
-
-  return success;
-}
-
-
-bool FileManager::renameFile( const QString & src, const QString & dest ) {
-   if(copyFile( src, dest )) {
-      if(QFile::remove(src) ) {
-       return true;
-      }
-   }
-    return false;
-}
-*/
 
 /*!
   Opens the document specified by \a f as a readable QIODevice.
@@ -386,8 +270,9 @@ QIODevice* FileManager::openFile( const DocLnk& f )
 {
     QString fn = f.file();
     QFile* fl = new QFile( fn );
-    if ( !fl->open( IO_ReadOnly ) ) {
-  delete fl;
+    if ( !fl->open( IO_ReadOnly ) )
+    {
+        delete fl;
         fl = 0;
     }
     return fl;
@@ -404,10 +289,13 @@ QIODevice* FileManager::saveFile( const DocLnk& f )
     QString fn = f.file();
     ensurePathExists( fn );
     QFile* fl = new QFile( fn );
-    if ( fl->open( IO_WriteOnly ) ) {
-  f.writeLink();
-    } else {
-  delete fl;
+    if ( fl->open( IO_WriteOnly ) )
+    {
+        f.writeLink();
+    }
+    else
+    {
+        delete fl;
         fl = 0;
     }
     return fl;
@@ -422,7 +310,6 @@ bool FileManager::exists( const DocLnk &f )
     return QFile::exists(f.file());
 }
 
-
 /*!
   Ensures that the path \a fn exists, by creating required directories.
   Returns TRUE if successful.
@@ -431,9 +318,10 @@ bool FileManager::ensurePathExists( const QString &fn )
 {
     QFileInfo fi(fn);
     fi.setFile( fi.dirPath(TRUE) );
-    if ( !fi.exists() ) {
-  if ( system(("mkdir -p "+fi.filePath())) )
-      return FALSE;
+    if ( !fi.exists() )
+    {
+        if ( system(("mkdir -p "+fi.filePath())) )
+            return FALSE;
     }
 
     return TRUE;
