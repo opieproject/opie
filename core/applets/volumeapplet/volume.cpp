@@ -183,20 +183,11 @@ VolumeControl::VolumeControl ( VolumeApplet *icon, bool /*showMic*/, QWidget *pa
 {
   m_icon = icon;
   
-  bool has_wav_alarm = false;
+  bool has_wav_alarm = true;
   
   switch ( ODevice::inst ( )-> model ( )) { // we need to add other devices eventually
-    case OMODEL_iPAQ_H31xx:
-    case OMODEL_iPAQ_H36xx:
-    case OMODEL_iPAQ_H37xx:
-    case OMODEL_iPAQ_H38xx: 
-      has_wav_alarm = true;
-      break;
     case OMODEL_Zaurus_SL5000:
-        has_wav_alarm = false; //poor guys probably feeling left out...
-      break;
-    default:
-      has_wav_alarm = true; //lets just presume 
+      has_wav_alarm = false; //poor guys probably feeling left out...
       break;
   }
   
@@ -408,8 +399,6 @@ void VolumeControl::show ( bool /*showMic*/ )
   readConfig ( );
 
   QPoint curPos = m_icon-> mapToGlobal ( QPoint ( 0, 0 ));
-  printf ( "SHOW AT : %d/%d\n", curPos.x(), curPos.y());
-  printf ( "SIZEHINT: %d/%d\n", sizeHint().width(),sizeHint().height());
   
   int w = sizeHint ( ). width ( );
   int x = curPos.x ( ) - ( w / 2 );
@@ -417,7 +406,6 @@ void VolumeControl::show ( bool /*showMic*/ )
   if (( x + w ) > QPEApplication::desktop ( )-> width ( ))
     x = QPEApplication::desktop ( )-> width ( ) - w;
     
-
   move ( x, curPos. y ( ) - sizeHint ( ). height ( ));
   QFrame::show ( );
 
@@ -471,21 +459,16 @@ void VolumeControl::readConfig ( bool force )
 
 void VolumeControl::volumeChanged ( bool nowMuted )
 {
-  int previousVolume = m_vol_percent;
+  int prevVol = m_vol_percent;
+  bool prevMute = m_vol_muted;
 
-  if ( !nowMuted )
-    readConfig ( );
+  readConfig ( );
 
   // Handle case where muting it toggled
-  if ( m_vol_muted != nowMuted ) {
-    m_vol_muted = nowMuted;
-    m_icon-> repaint ( true );
-  }
-  else if ( previousVolume != m_vol_percent ) {
-    // Avoid over repainting
-    m_icon-> repaint( 2, height ( ) - 3, width ( ) - 4, 2, false );
-  }
-
+  if ( m_vol_muted != prevMute )
+  	m_icon-> redraw ( true );
+  else if ( prevVol != m_vol_percent ) // Avoid over repainting
+  	m_icon-> redraw ( false );
 }
 
 void VolumeControl::micChanged ( bool nowMuted )
@@ -517,7 +500,7 @@ void VolumeControl::volMuteToggled ( bool b )
 {
   m_vol_muted = !b;
   
-  m_icon-> repaint ( !m_vol_muted ); // clear if removing mute
+  m_icon-> redraw ( true );
   
   writeConfigEntry ( "Mute", m_vol_muted, UPD_Vol );
 }
@@ -536,8 +519,8 @@ void VolumeControl::volMoved ( int percent )
   // clamp volume percent to be between 0 and 100
   m_vol_percent = ( m_vol_percent < 0 ) ? 0 : (( m_vol_percent > 100 ) ? 100 : m_vol_percent );
   // repaint just the little volume rectangle
-  repaint ( 2, height ( ) - 3, width ( ) - 4, 2, false );
-
+  m_icon-> redraw ( false );
+  
   writeConfigEntry ( "VolumePercent", m_vol_percent, UPD_Vol );
 }
 
@@ -612,6 +595,14 @@ void VolumeApplet::mousePressEvent ( QMouseEvent * )
     m_dialog-> hide ( );
   else
     m_dialog-> show ( true );
+}
+
+void VolumeApplet::redraw ( bool all )
+{
+	if ( all )
+		repaint ( true );
+	else
+		repaint ( 2, height ( ) - 3, width ( ) - 4, 2, false );
 }
 
 

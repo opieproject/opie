@@ -110,6 +110,8 @@ public:
 	VolumeApplet ( QWidget *parent = 0, const char *name=0 );
 	~VolumeApplet ( );
 
+	void redraw ( bool all = true );
+
 protected:
 	virtual void mousePressEvent ( QMouseEvent * );
 	virtual void paintEvent ( QPaintEvent* );
