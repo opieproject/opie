@@ -1,25 +1,25 @@
 /*
-               =.            This file is part of the OPIE Project
-             .=l.            Copyright (c)  2002 <zecke>
-           .>+-=
- _;:,     .>    :=|.         This program is free software; you can
-.> <`_,   >  .   <=          redistribute it and/or  modify it under
-:`=1 )Y*s>-.--   :           the terms of the GNU General Public
-.="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.
-    .i_,=:_.      -<s.       This program is distributed in the hope that
-     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
-    : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=       =       ;      Library General Public License for more
-++=   -.     .`     .:       details.
- :     =  ...= . :.=-
- -.   .:....=;==+<;          You should have received a copy of the GNU
-  -_. . .   )=.  =           Library General Public License along with
-    --        :-=`           this library; see the file COPYING.LIB.
+       =.            This file is part of the OPIE Project
+      .=l.            Copyright (c)  2002 <zecke>
+     .>+-=
+_;:,   .>  :=|.         This program is free software; you can
+.> <`_,  > .  <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--  :           the terms of the GNU General Public
+.="- .-=="i,   .._         License as published by the Free Software
+- .  .-<_>   .<>         Foundation; either version 2 of the License,
+  ._= =}    :          or (at your option) any later version.
+  .%`+i>    _;_.
+  .i_,=:_.   -<s.       This program is distributed in the hope that
+  + . -:.    =       it will be useful,  but WITHOUT ANY WARRANTY;
+  : ..  .:,   . . .    without even the implied warranty of
+  =_    +   =;=|`    MERCHANTABILITY or FITNESS FOR A
+ _.=:.    :  :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=    =    ;      Library General Public License for more
+++=  -.   .`   .:       details.
+:   = ...= . :.=-
+-.  .:....=;==+<;          You should have received a copy of the GNU
+ -_. . .  )=. =           Library General Public License along with
+  --    :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
@@ -33,11 +33,11 @@
 #include <opie2/opimrecurrence.h>
 
 #include <qpe/config.h>
+#include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
 
 #include <qcombobox.h>
 #include <qlineedit.h>
-#include <qtimer.h>
 #include <qpopupmenu.h>
 
 #include "mainwindow.h"
@@ -117,18 +117,13 @@ TableView::TableView( MainWindow* window, QWidget* wid )
     setLeftMargin( 0 );
     verticalHeader()->hide();
 
+    QPEApplication::setStylusOperation( viewport(), QPEApplication::RightOnHold );
     connect((QTable*)this, SIGNAL( clicked(int,int,int,const QPoint&) ),
             this, SLOT( slotClicked(int,int,int,const QPoint&) ) );
-    connect((QTable*)this, SIGNAL( pressed(int,int,int,const QPoint&) ),
-            this, SLOT( slotPressed(int,int,int,const QPoint&) ) );
     connect((QTable*)this, SIGNAL(valueChanged(int,int) ),
             this, SLOT( slotValueChanged(int,int) ) );
     connect((QTable*)this, SIGNAL(currentChanged(int,int) ),
             this, SLOT( slotCurrentChanged(int,int) ) );
-
-    m_menuTimer = new QTimer( this );
-    connect( m_menuTimer, SIGNAL(timeout()),
-             this, SLOT(slotShowMenu()) );
 
     /* now let's init the config */
     initConfig();
@@ -156,11 +151,6 @@ TableView::~TableView() {
     config.setGroup( "Options" );
     for (int i = 0; i < numCols(); i++ )
         config.writeEntry("Width"+QString::number(i), columnWidth(i) );
-}
-void TableView::slotShowMenu() {
-    QPopupMenu *menu = todoWindow()->contextMenu( current(), sorted()[currentRow()].recurrence().doesRecur() );
-    menu->exec(QCursor::pos() );
-    delete menu;
 }
 QString TableView::type() const {
     return QString::fromLatin1( tr("Table View") );
@@ -280,10 +270,9 @@ void TableView::setShowDeadline( bool b ) {
 void TableView::setShowCategory( const QString& str) {
     if ( str != m_oleCat || m_first )
         updateView();
-
+    
     m_oleCat = str;
     m_first = false;
-
 }
 void TableView::clear() {
     setNumRows(0);
@@ -326,31 +315,16 @@ void TableView::slotClicked(int row, int col, int,
         break;
 
     case 2: {
-        m_menuTimer->stop();
         showTodo( ui );
         break;
     }
     case 3: {
-        m_menuTimer->stop();
         TodoView::edit( ui );
         break;
     }
     }
 
 
-}
-void TableView::slotPressed(int row, int col, int,
-                            const QPoint& point) {
-
-    m_prevP = point;
-    /* TextColumn column */
-    if ( col == 2 && cellGeometry( row, col ).contains( point ) )
-        m_menuTimer->start( 750, TRUE );
-}
-void TableView::slotValueChanged( int, int ) {
-}
-void TableView::slotCurrentChanged(int, int ) {
-    m_menuTimer->stop();
 }
 QWidget* TableView::widget() {
     return this;
@@ -579,7 +553,7 @@ void TableView::timerEvent( QTimerEvent*  ) {
  * WORKAROUND: strike through needs to strike through the same
  * row and two columns!
  */
-void TableView::contentsMouseReleaseEvent( QMouseEvent* e) {
+void TableView::contentsMouseReleaseEvent( QMouseEvent *e ) {
     int row = rowAt(m_prevP.y());
     int colOld = columnAt(m_prevP.x() );
     int colNew = columnAt(e->x() );
@@ -590,9 +564,15 @@ void TableView::contentsMouseReleaseEvent( QMouseEvent* e) {
     }
     QTable::contentsMouseReleaseEvent( e );
 }
-void TableView::contentsMouseMoveEvent( QMouseEvent* e ) {
-    m_menuTimer->stop();
-    QTable::contentsMouseMoveEvent( e );
+void TableView::contentsMousePressEvent( QMouseEvent *e ) {
+    if ( e->button() == RightButton ) {
+        QPopupMenu *menu = todoWindow()->contextMenu( current(), sorted()[currentRow()].recurrence().doesRecur() );
+        menu->exec( QCursor::pos() );
+    }
+    else {
+        m_prevP = e->pos();
+        QTable::contentsMousePressEvent( e );
+    }
 }
 void TableView::keyPressEvent( QKeyEvent* event) {
     if ( m_editorWidget.cellWidget() ) {

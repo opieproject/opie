@@ -1,25 +1,25 @@
 /*
-               =.            This file is part of the OPIE Project
-             .=l.            Copyright (c)  2002 <>
-           .>+-=
- _;:,     .>    :=|.         This program is free software; you can
-.> <`_,   >  .   <=          redistribute it and/or  modify it under
-:`=1 )Y*s>-.--   :           the terms of the GNU General Public
-.="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.
-    .i_,=:_.      -<s.       This program is distributed in the hope that
-     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
-    : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=       =       ;      Library General Public License for more
-++=   -.     .`     .:       details.
- :     =  ...= . :.=-
- -.   .:....=;==+<;          You should have received a copy of the GNU
-  -_. . .   )=.  =           Library General Public License along with
-    --        :-=`           this library; see the file COPYING.LIB.
+       =.            This file is part of the OPIE Project
+      .=l.            Copyright (c)  2002 <>
+     .>+-=
+_;:,   .>  :=|.         This program is free software; you can
+.> <`_,  > .  <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--  :           the terms of the GNU General Public
+.="- .-=="i,   .._         License as published by the Free Software
+- .  .-<_>   .<>         Foundation; either version 2 of the License,
+  ._= =}    :          or (at your option) any later version.
+  .%`+i>    _;_.
+  .i_,=:_.   -<s.       This program is distributed in the hope that
+  + . -:.    =       it will be useful,  but WITHOUT ANY WARRANTY;
+  : ..  .:,   . . .    without even the implied warranty of
+  =_    +   =;=|`    MERCHANTABILITY or FITNESS FOR A
+ _.=:.    :  :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=    =    ;      Library General Public License for more
+++=  -.   .`   .:       details.
+:   = ...= . :.=-
+-.  .:....=;==+<;          You should have received a copy of the GNU
+ -_. . .  )=. =           Library General Public License along with
+  --    :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
@@ -78,7 +78,6 @@ namespace Todo {
     private:
         /* reimplented for internal reasons */
         void viewportPaintEvent( QPaintEvent* );
-        QTimer *m_menuTimer;
         bool m_enablePaint:1;
         QString m_oleCat;
         bool m_first : 1;
@@ -88,8 +87,8 @@ namespace Todo {
 
     protected:
         void keyPressEvent( QKeyEvent* );
-        void contentsMouseReleaseEvent( QMouseEvent* );
-        void contentsMouseMoveEvent( QMouseEvent* );
+        void contentsMouseReleaseEvent( QMouseEvent *e );
+        void contentsMousePressEvent( QMouseEvent *e );
         void timerEvent( QTimerEvent* e );
         QWidget* createEditor(int row, int col, bool initFromCell )const;
         void setCellContentFromEditor( int row, int col );
@@ -111,13 +110,8 @@ namespace Todo {
         EditorWidget m_editorWidget;
 
 private slots:
-        void slotShowMenu();
         void slotClicked(int, int, int,
                          const QPoint& );
-        void slotPressed(int, int, int,
-                         const QPoint& );
-        void slotValueChanged(int, int);
-        void slotCurrentChanged(int, int );
         void slotPriority();
     private:
         void initConfig();

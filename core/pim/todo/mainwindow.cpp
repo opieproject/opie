@@ -1,25 +1,25 @@
 /*
-               =.            This file is part of the OPIE Project
-             .=l.            Copyright (c)  2002 <>
-           .>+-=
- _;:,     .>    :=|.         This program is free software; you can
-.> <`_,   >  .   <=          redistribute it and/or  modify it under
-:`=1 )Y*s>-.--   :           the terms of the GNU General Public
-.="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.
-    .i_,=:_.      -<s.       This program is distributed in the hope that
-     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
-    : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=       =       ;      Library General Public License for more
-++=   -.     .`     .:       details.
- :     =  ...= . :.=-
- -.   .:....=;==+<;          You should have received a copy of the GNU
-  -_. . .   )=.  =           General Public License along with
-    --        :-=`           this library; see the file COPYING.LIB.
+       =.            This file is part of the OPIE Project
+      .=l.            Copyright (c)  2002 <>
+     .>+-=
+_;:,   .>  :=|.         This program is free software; you can
+.> <`_,  > .  <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--  :           the terms of the GNU General Public
+.="- .-=="i,   .._         License as published by the Free Software
+- .  .-<_>   .<>         Foundation; either version 2 of the License,
+  ._= =}    :          or (at your option) any later version.
+  .%`+i>    _;_.
+  .i_,=:_.   -<s.       This program is distributed in the hope that
+  + . -:.    =       it will be useful,  but WITHOUT ANY WARRANTY;
+  : ..  .:,   . . .    without even the implied warranty of
+  =_    +   =;=|`    MERCHANTABILITY or FITNESS FOR A
+ _.=:.    :  :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=    =    ;      Library General Public License for more
+++=  -.   .`   .:       details.
+:   = ...= . :.=-
+-.  .:....=;==+<;          You should have received a copy of the GNU
+ -_. . .  )=. =           General Public License along with
+  --    :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
@@ -42,21 +42,23 @@
 #include <qpe/alarmserver.h>
 #include <qpe/qpeapplication.h>
 
+#include <qaction.h>
+#include <qlayout.h>
 #include <qmenubar.h>
 #include <qmessagebox.h>
 #include <qpushbutton.h>
-#include <qaction.h>
+#include <qstringlist.h>
 #include <qtimer.h>
-#include <qlayout.h>
 #include <qwhatsthis.h>
 
 #include "quickeditimpl.h"
 #include "todotemplatemanager.h"
-#include "templateeditor.h"
+#include "templatedialogimpl.h"
 #include "tableview.h"
 
 #include "textviewshow.h"
 #include "todoeditor.h"
+#include "newtaskdlg.h"
 #include "mainwindow.h"
 
 using Opie::Core::OApplicationFactory;
@@ -67,7 +69,8 @@ using namespace Todo;
 
 MainWindow::MainWindow( QWidget* parent,
                         const char* name, WFlags )
-    : Opie::OPimMainWindow( "Todolist", parent, name, WType_TopLevel | WStyle_ContextHelp )
+    : Opie::OPimMainWindow( "Todolist", tr( "Todo List" ), "Todo List", tr( "Task" ), "todo",
+                            parent, name, WType_TopLevel | WStyle_ContextHelp )
 {
     if (!name)
         setName("todo window");
@@ -78,176 +81,78 @@ MainWindow::MainWindow( QWidget* parent,
     m_tempManager = new TemplateManager();
     m_tempManager->load();
 
-    initUI();
     initConfig();
+    initUI();
     initViews();
     initActions();
     initEditor();
     initShow();
-    initTemplate();
 
-    populateTemplates();
     raiseCurrentView();
-    QTimer::singleShot(0, this, SLOT(populateCategories() ) );
+    QTimer::singleShot( 0, this, SLOT(initStuff()) );
 }
-void MainWindow::initTemplate() {
-    m_curTempEd = new TemplateEditor( this, templateManager() );
+void MainWindow::initStuff() {   
+    m_todoMgr.load();
+    setViewCategory( m_curCat );
+    setCategory( m_curCat );
 }
 void MainWindow::initActions() {
+    // Insert Task menu items
+    QActionGroup *items = new QActionGroup( this, QString::null, false );
+    
+    m_deleteCompleteAction = new QAction( QString::null, QWidget::tr( "Delete completed" ),
+                                          0, items, 0 );
+    connect( m_deleteCompleteAction, SIGNAL(activated()), this, SLOT(slotDeleteCompleted()) );
 
-    // Data menu
-    m_edit->insertItem(QWidget::tr("New from template"), m_template,
-                       -1, 0 );
+    insertItemMenuItems( items );    
 
-    QAction* a = new QAction( QWidget::tr("New Task" ), Resource::loadPixmap( "new" ),
-                              QString::null, 0, this, 0 );
-    connect(a, SIGNAL( activated() ),
-            this, SLOT( slotNew() ) );
-    a->setWhatsThis( QWidget::tr( "Click here to create a new task." ) );
-    a->addTo(m_tool );
-    a->addTo(m_edit );
-
-    a = new QAction( QWidget::tr("Edit Task"), Resource::loadIconSet( "edit" ),
-                     QString::null, 0, this, 0 );
-    connect(a, SIGNAL(activated() ),
-            this, SLOT( slotEdit() ) );
-    a->setWhatsThis( QWidget::tr( "Click here to modify the current task." ) );
-    a->addTo( m_tool );
-    a->addTo( m_edit );
-    m_editAction = a;
-
-    a = new QAction( QString::null, QWidget::tr("View Task"), 0, this, 0 );
-    connect(a, SIGNAL( activated() ),
-            this, SLOT( slotShowDetails() ) );
-    a->addTo( m_edit );
-
-    m_edit->insertSeparator();
-
-    a = new QAction( QWidget::tr("Delete..."),  Resource::loadIconSet( "trash" ),
-                     QString::null, 0, this, 0 );
-    connect(a, SIGNAL(activated() ),
-            this, SLOT(slotDelete() ) );
-    a->setWhatsThis( QWidget::tr( "Click here to remove the current task." ) );
-    a->addTo( m_tool );
-    a->addTo( m_edit );
-    m_deleteAction = a;
-
-    a = new QAction( QString::null, QWidget::tr("Delete all..."), 0, this, 0 );
-    connect(a, SIGNAL( activated() ),
-            this, SLOT( slotDeleteAll() ) );
-    a->addTo(m_edit );
-    m_deleteAllAction = a;
-
-    a = new QAction( QString::null, QWidget::tr("Delete completed"),
-                     0, this, 0 );
-    connect(a, SIGNAL( activated() ),
-            this, SLOT( slotDeleteCompleted() ) );
-    a->addTo(m_edit );
-    a->setEnabled( TRUE );
-    m_deleteCompleteAction = a;
-
-    m_edit->insertSeparator();
-
-    a = new QAction( QString::null, QWidget::tr("Duplicate"), 0, this, 0 );
-    connect(a, SIGNAL( activated() ),
-            this, SLOT( slotDuplicate() ) );
-    a->addTo(m_edit );
-    m_duplicateAction = a;
-
-    m_edit->insertSeparator();
-
-    if ( Ir::supported() ) {
-        a = new QAction( QWidget::tr( "Beam" ), Resource::loadPixmap( "beam" ), QString::null, 0, this, 0 );
-        connect( a, SIGNAL( activated() ), this, SLOT( slotBeam() ) );
-        a->setWhatsThis( QWidget::tr( "Click here to send the current task to another device." ) );
-        a->addTo( m_edit );
-        a->addTo( m_tool );
-    }
-
-#if 0
-    // Options menu
-    a = new QAction( QWidget::tr("Find"), Resource::loadIconSet( "mag" ),
-                     QString::null, 0, this, 0 );
-    connect(a, SIGNAL( activated() ), this, SLOT( slotFind() ) );
-    a->addTo( m_options );
-    m_findAction = a;
-
-
-    m_options->insertSeparator();
-#endif
-
+    // Insert View menu items
+    items = new QActionGroup( this, QString::null, false );
+    
     m_completedAction = new QAction( QString::null, QWidget::tr("Show completed tasks"),
-                                     0, this, 0, TRUE );
-    m_completedAction->addTo( m_options );
+                                     0, items, 0, true );
     m_completedAction->setOn( showCompleted() );
-    connect(m_completedAction, SIGNAL( toggled(bool) ), this, SLOT(slotShowCompleted(bool) ) );
+    connect( m_completedAction, SIGNAL(toggled(bool)), this, SLOT(slotShowCompleted(bool)) );
 
-    a = new QAction( QString::null, QWidget::tr("Show only over-due tasks"),
-                     0, this, 0, TRUE );
-    a->addTo( m_options );
+    QAction *a = new QAction( QString::null, QWidget::tr("Show only over-due tasks"),
+                              0, items, 0, true );
     a->setOn( showOverDue() );
-    connect(a, SIGNAL(toggled(bool)), this, SLOT(slotShowDue(bool) ) );
+    connect( a, SIGNAL(toggled(bool)), this, SLOT(slotShowDue(bool)) );
 
     m_showDeadLineAction = new QAction( QString::null, QWidget::tr("Show task deadlines"),
-                                        0, this, 0, TRUE );
-    m_showDeadLineAction->addTo( m_options );
+                                        0, items, 0, true );
     m_showDeadLineAction->setOn( showDeadline() );
-    connect(m_showDeadLineAction, SIGNAL(toggled(bool) ), this, SLOT( slotShowDeadLine(bool) ) );
+    connect( m_showDeadLineAction, SIGNAL(toggled(bool)), this, SLOT(slotShowDeadLine(bool)) );
 
     m_showQuickTaskAction = new QAction( QString::null, QWidget::tr("Show quick task bar"),
-                                     0, this, 0, TRUE );
-    m_showQuickTaskAction->addTo( m_options );
+                                         0, items, 0, true );
     m_showQuickTaskAction->setOn( showQuickTask() );
-    connect(m_showQuickTaskAction, SIGNAL( toggled(bool) ), this, SLOT(slotShowQuickTask(bool) ) );
-
-    m_options->insertSeparator();
-
-    m_bar->insertItem( QWidget::tr("Data") ,m_edit );
-    m_bar->insertItem( QWidget::tr("Category"),  m_catMenu );
-    m_bar->insertItem( QWidget::tr("Options"), m_options );
-
-    m_curQuick = new QuickEditImpl( this, m_quicktask );
-    addToolBar( (QToolBar *)m_curQuick->widget(), QWidget::tr( "QuickEdit" ), QMainWindow::Top, TRUE );
-    m_curQuick->signal()->connect( this, SLOT(slotQuickEntered() ) );
-
+    connect( m_showQuickTaskAction, SIGNAL(toggled(bool)), this, SLOT(slotShowQuickTask(bool)) );
+    
+    insertViewMenuItems( items );
 }
 /* m_curCat from Config */
 void MainWindow::initConfig() {
     Config config( "todo" );
     config.setGroup( "View" );
-    m_completed =  config.readBoolEntry( "ShowComplete", TRUE );
-    m_curCat = config.readEntry( "Category",    QString::null );
-    m_deadline =  config.readBoolEntry( "ShowDeadLine", TRUE);
-    m_overdue = config.readBoolEntry("ShowOverDue", FALSE );
-    m_quicktask = config.readBoolEntry("ShowQuickTask", TRUE);
+    m_completed =  config.readBoolEntry( "ShowComplete", true );
+    m_curCat = config.readEntry( "Category", QString::null );
+    m_deadline =  config.readBoolEntry( "ShowDeadLine", true);
+    m_overdue = config.readBoolEntry("ShowOverDue", false );
+    m_quicktask = config.readBoolEntry("ShowQuickTask", true);
 }
 void MainWindow::initUI() {
-
+    // Create main widget stack
     m_stack = new Opie::Ui::OWidgetStack(this,  "main stack");
-
     setCentralWidget( m_stack );
-
-    setToolBarsMovable( FALSE );
-
-    QToolBar *menubarholder = new QToolBar( this );
-    menubarholder->setHorizontalStretchable( TRUE );
-    m_bar = new QMenuBar( menubarholder );
-
-    m_tool = new QToolBar( this );
-
-    /** QPopupMenu */
-    m_edit = new QPopupMenu( this );
-    m_options = new QPopupMenu( this );
-    m_catMenu = new QPopupMenu( this );
-    m_template = new QPopupMenu( this );
-
-    m_catMenu->setCheckable( TRUE );
-    m_template->setCheckable( TRUE );
-
-    connect(m_catMenu, SIGNAL(activated(int) ),
-            this, SLOT(setCategory(int) ) );
-    connect(m_template, SIGNAL(activated(int) ),
-            this, SLOT(slotNewFromTemplate(int) ) );
+    connect( this, SIGNAL(categorySelected(const QString&)),
+            this, SLOT(setCategory(const QString&)) );
+    
+    // Create quick task toolbar
+    m_curQuick = new QuickEditImpl( this, m_quicktask );
+    addToolBar( (QToolBar *)m_curQuick->widget(), QWidget::tr( "QuickEdit" ),
+                QMainWindow::Top, true );
+    m_curQuick->signal()->connect( this, SLOT(slotQuickEntered()) );
 }
 void MainWindow::initViews() {
 
@@ -275,43 +180,17 @@ MainWindow::~MainWindow() {
 void MainWindow::connectBase( ViewBase* ) {
     // once templates and signals mix we'll use it again
 }
-QPopupMenu* MainWindow::contextMenu( int , bool recur ) {
-    QPopupMenu* menu = new QPopupMenu();
-
-    m_editAction->addTo( menu );
-    m_deleteAction->addTo( menu );
-    m_duplicateAction->addTo( menu );
-
-    menu->insertSeparator();
-
-    /*
-     * if this event recurs we allow
-     * to detach it.
-     * remove all
-     */
-    if ( recur ) {
-        ; // FIXME
-    }
-
-    return menu;
-}
-QPopupMenu* MainWindow::options() {
-    return m_options;
-}
-QPopupMenu* MainWindow::edit() {
-    return m_edit;
-}
-QToolBar* MainWindow::toolbar() {
-    return m_tool;
+QPopupMenu* MainWindow::contextMenu( int , bool /*recur*/ ) {
+    return itemContextMenu();
 }
 OPimTodoAccess::List MainWindow::list()const {
     return m_todoMgr.list();
 }
 OPimTodoAccess::List MainWindow::sorted( bool asc, int sortOrder ) {
     int cat = 0;
-    if ( m_curCat != QWidget::tr("All Categories") )
+    if ( m_curCat != tr( "All" ) )
         cat = currentCatId();
-    if ( m_curCat == QWidget::tr("Unfiled") )
+    if ( m_curCat == tr( "Unfiled" ) )
         cat = -1;
 
     int filter = OPimTodoAccess::FilterCategory;
@@ -320,17 +199,17 @@ OPimTodoAccess::List MainWindow::sorted( bool asc, int sortOrder ) {
         filter |= OPimTodoAccess::DoNotShowCompleted;
     if (m_overdue)
         filter |= OPimTodoAccess::OnlyOverDue;
-
+    
     return m_todoMgr.sorted( asc, sortOrder, filter, cat );
 }
 OPimTodoAccess::List MainWindow::sorted( bool asc, int sortOrder, int addFilter) {
     int cat = 0;
-    if ( m_curCat != QWidget::tr("All Categories") )
+    if ( m_curCat != tr( "All" ) )
         cat = currentCatId();
 
-    if ( m_curCat == QWidget::tr("Unfiled") )
+    if ( m_curCat == tr( "Unfiled" ) )
         cat = -1;
-
+    
     return m_todoMgr.sorted(asc, sortOrder, addFilter,  cat );
 }
 OPimTodo MainWindow::event( int uid ) {
@@ -349,7 +228,7 @@ TodoShow* MainWindow::currentShow() {
     return m_curShow;
 }
 void MainWindow::slotReload() {
-    m_syncing = FALSE;
+    m_syncing = false;
     m_todoMgr.reload();
     currentView()->updateView( );
     raiseCurrentView();
@@ -403,46 +282,33 @@ void MainWindow::closeEvent( QCloseEvent* e ) {
         QTimer::singleShot(0, qApp, SLOT(closeAllWindows()) );
     }
 }
-void MainWindow::populateTemplates() {
-    m_template->clear();
-    QStringList list = templateManager()->templates();
-    QStringList::Iterator it;
-    for ( it = list.begin(); it != list.end(); ++it ) {
-        m_template->insertItem( (*it) );
+void MainWindow::slotItemNew() {
+    NewTaskDlg dlg( templateManager()->templates(), this );
+    if ( QPEApplication::execDialog( &dlg ) == QDialog::Accepted ) {
+        QString tempName = dlg.tempSelected();
+        if ( tempName.isNull() )
+            // Create new, blank task
+            create();
+        else {
+            // Create new task from the template selected
+            OPimTodo event = templateManager()->templateEvent( tempName );
+            event = currentEditor()->edit( this, event );
+            if ( currentEditor()->accepted() ) {
+                event.setUid( 1 );
+                handleAlarms( OPimTodo(), event );
+                m_todoMgr.add( event );
+                currentView()->addEvent( event );
+        
+                reloadCategories();
+            }
+            raiseCurrentView();
+        }
     }
 }
-/*
- * slotNewFromTemplate
- * We use the edit widget to do
- * the config but we setUid(1)
- * to get a new uid
- */
-/*
- * first we get the name of the template
- * then we will use the TemplateManager
- */
-void MainWindow::slotNewFromTemplate( int id ) {
-    QString name = m_template->text( id );
-
-    OPimTodo event = templateManager()->templateEvent( name );
-    event = currentEditor()->edit(this,
-                                  event );
-
-    if ( currentEditor()->accepted() ) {
-        /* assign new todo */
-        event.setUid( 1 );
-        handleAlarms( OPimTodo(), event );
-        m_todoMgr.add( event );
-        currentView()->addEvent( event );
-
-        populateCategories();
-    }
-    raiseCurrentView();
+void MainWindow::slotItemEdit() {
+    slotEdit( currentView()->current() );
 }
-void MainWindow::slotNew() {
-    create();
-}
-void MainWindow::slotDuplicate() {
+void MainWindow::slotItemDuplicate() {
     if(m_syncing) {
         QMessageBox::warning(this, QWidget::tr("Todo"),
 							 QWidget::tr("Data can not be edited, currently syncing"));
@@ -456,7 +322,7 @@ void MainWindow::slotDuplicate() {
     currentView()->addEvent( ev );
     raiseCurrentView();
 }
-void MainWindow::slotDelete() {
+void MainWindow::slotItemDelete() {
     if (!currentView()->current() )
         return;
 
@@ -473,6 +339,18 @@ void MainWindow::slotDelete() {
     m_todoMgr.remove( currentView()->current() );
     currentView()->removeEvent( currentView()->current() );
     raiseCurrentView();
+}
+
+static const char *beamfile = "/tmp/opie-todo.vcs";
+void MainWindow::slotItemBeam() {
+    beam( currentView()->current() );
+}
+void MainWindow::slotItemFind() {
+}
+void MainWindow::slotConfigure() {
+    TemplateDialogImpl dlg( this, m_tempManager );
+    if ( QPEApplication::execDialog( &dlg ) != QDialog::Accepted )
+        m_tempManager->load();
 }
 void MainWindow::slotDelete(int uid ) {
     if( uid == 0 ) return;
@@ -520,35 +398,14 @@ void MainWindow::slotDeleteCompleted() {
     m_todoMgr.removeCompleted();
     currentView()->updateView( );
 }
-void MainWindow::slotFind() {
-
-}
-void MainWindow::slotEdit() {
-    slotEdit( currentView()->current() );
-}
 /*
  * set the category
  */
-void MainWindow::setCategory( int c) {
-    if ( c <= 0 ) return;
-
-
-    for ( unsigned int i = 1; i < m_catMenu->count(); i++ )
-        m_catMenu->setItemChecked(i, c == (int)i );
-
-    if (c == 1 ) {
+void MainWindow::setCategory( const QString &category ) {
+    m_curCat = category;
+    if ( m_curCat == tr( "All" ) )
         m_curCat = QString::null;
-        setCaption( QWidget::tr("Todo") + " - " + QWidget::tr("All Categories" ) );
-
-    }else if ( c == (int)m_catMenu->count() - 1 ) {
-        m_curCat = QWidget::tr("Unfiled");
-        setCaption( QWidget::tr("Todo") + " - " + QWidget::tr("Unfiled") );
-    }else {
-        m_curCat = m_todoMgr.categories()[c-2];
-        setCaption( QWidget::tr("Todo") + " - " + m_curCat );
-    }
-    m_catMenu->setItemChecked( c, true );
-
+    
     currentView()->setShowCategory( m_curCat );
     raiseCurrentView();
 }
@@ -576,11 +433,6 @@ void MainWindow::setDocument( const QString& fi) {
         receiveFile(doc.file() );
     else
         receiveFile(fi );
-}
-
-static const char *beamfile = "/tmp/opie-todo.vcs";
-void MainWindow::slotBeam() {
-    beam( currentView()->current() );
 }
 void MainWindow::beamDone( Ir* ir) {
     delete ir;
@@ -610,36 +462,11 @@ void MainWindow::receiveFile( const QString& filename ) {
 }
 
 void MainWindow::slotFlush() {
-    m_syncing = TRUE;
+    m_syncing = true;
     m_todoMgr.save();
 }
 void MainWindow::slotShowDetails() {
     slotShow( currentView()->current() );
-}
-/*
- * populate the Categories
- * Menu
- */
-void MainWindow::populateCategories() {
-    m_todoMgr.load();
-
-    m_catMenu->clear();
-    int id, rememberId;
-    id = 1;
-    rememberId = 1;
-
-    m_catMenu->insertItem( QWidget::tr( "All Categories" ), id++ );
-    m_catMenu->insertSeparator();
-    QStringList categories = m_todoMgr.categories();
-    categories.append( QWidget::tr( "Unfiled" ) );
-    for ( QStringList::Iterator it = categories.begin();
-	  it != categories.end(); ++it ) {
-	m_catMenu->insertItem( *it, id );
-	if ( *it == currentCategory() )
-	    rememberId = id;
-	++id;
-    }
-    setCategory( rememberId );
 }
 bool MainWindow::showCompleted()const {
     return m_completed;
@@ -709,7 +536,7 @@ void MainWindow::slotEdit( int uid ) {
         m_todoMgr.update( todo.uid(), todo );
 	currentView()->replaceEvent( todo );
         /* a Category might have changed */
-        populateCategories();
+        reloadCategories();
     }
 
     raiseCurrentView();
@@ -858,7 +685,7 @@ int MainWindow::create() {
         // I'm afraid we must call this every time now, otherwise
         // spend expensive time comparing all these strings...
         // but only call if we changed something -zecke
-        populateCategories();
+        reloadCategories();
     }
     raiseCurrentView( );
 
@@ -915,7 +742,7 @@ void MainWindow::add( const OPimRecord& rec) {
     // I'm afraid we must call this every time now, otherwise
     // spend expensive time comparing all these strings...
     // but only call if we changed something -zecke
-    populateCategories();
+    reloadCategories();
 }
 void MainWindow::slotReturnFromView() {
     m_showing = false;
@@ -1004,7 +831,7 @@ void MainWindow::doAlarm( const QDateTime& dt, int uid ) {
     if (loud)
         startAlarm();
 
-    QDialog dlg(this, 0, TRUE );
+    QDialog dlg(this, 0, true );
     QVBoxLayout* lay = new QVBoxLayout( &dlg );
     QTextView* view = new QTextView( &dlg );
     lay->addWidget( view );

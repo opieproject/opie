@@ -1,25 +1,25 @@
 /*
-               =.            This file is part of the OPIE Project
-             .=l.            Copyright (c)  2002 Holger Freyther <zecke@handhelds.org>
-           .>+-=
- _;:,     .>    :=|.         This program is free software; you can
-.> <`_,   >  .   <=          redistribute it and/or  modify it under
-:`=1 )Y*s>-.--   :           the terms of the GNU General Public
-.="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.
-    .i_,=:_.      -<s.       This program is distributed in the hope that
-     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
-    : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=       =       ;      Library General Public License for more
-++=   -.     .`     .:       details.
- :     =  ...= . :.=-
- -.   .:....=;==+<;          You should have received a copy of the GNU
-  -_. . .   )=.  =           Library General Public License along with
-    --        :-=`           this library; see the file COPYING.LIB.
+       =.            This file is part of the OPIE Project
+      .=l.            Copyright (c)  2002 Holger Freyther <zecke@handhelds.org>
+     .>+-=
+_;:,   .>  :=|.         This program is free software; you can
+.> <`_,  > .  <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--  :           the terms of the GNU General Public
+.="- .-=="i,   .._         License as published by the Free Software
+- .  .-<_>   .<>         Foundation; either version 2 of the License,
+  ._= =}    :          or (at your option) any later version.
+  .%`+i>    _;_.
+  .i_,=:_.   -<s.       This program is distributed in the hope that
+  + . -:.    =       it will be useful,  but WITHOUT ANY WARRANTY;
+  : ..  .:,   . . .    without even the implied warranty of
+  =_    +   =;=|`    MERCHANTABILITY or FITNESS FOR A
+ _.=:.    :  :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=    =    ;      Library General Public License for more
+++=  -.   .`   .:       details.
+:   = ...= . :.=-
+-.  .:....=;==+<;          You should have received a copy of the GNU
+ -_. . .  )=. =           Library General Public License along with
+  --    :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
@@ -54,7 +54,6 @@ namespace Todo {
     class TemplateManager;
     class Editor;
     class TodoShow;
-    class TemplateEditor;
     struct QuickEditBase;
 
     class MainWindow : public Opie::OPimMainWindow {
@@ -71,10 +70,6 @@ namespace Todo {
 
         /** return a context menu for an OPimTodo */
         QPopupMenu* contextMenu(int uid, bool doesRecur = FALSE );
-        QPopupMenu* options();
-        QPopupMenu* edit();
-        QToolBar*   toolbar();
-
 
         void updateList();
         OPimTodoAccess::List list()const;
@@ -94,12 +89,10 @@ namespace Todo {
         QuickEditBase* quickEditor();
 
         void updateTodo( const OPimTodo& );
-        void populateTemplates();
         Editor* currentEditor();
         void setReadAhead(uint count );
 private slots:
         void slotQuickEntered();
-        void populateCategories();
         void slotReload();
         void slotFlush();
 
@@ -117,7 +110,6 @@ private slots:
         void initViews();
         void initEditor();
         void initShow();
-        void initTemplate();
         void raiseCurrentView();
         ViewBase* currentView();
         ViewBase* m_curView;
@@ -126,11 +118,7 @@ private slots:
         Editor* m_curEdit;
         TodoShow* currentShow();
         TodoShow* m_curShow;
-        TemplateEditor* currentTemplateEditor();
-        TemplateEditor* m_curTempEd;
 
-        QMenuBar* m_bar;
-        QToolBar* m_tool;
         QAction* m_editAction,
             *m_deleteAction,
             *m_findAction,
@@ -143,10 +131,6 @@ private slots:
             *m_showQuickTaskAction,
             *m_effectiveAction;
         Opie::Ui::OWidgetStack *m_stack;
-        QPopupMenu* m_catMenu,
-            *m_edit,
-            *m_options,
-            *m_template;
 
         bool m_syncing:1;
         bool m_deadline:1;
@@ -161,24 +145,28 @@ private slots:
 
 
      private slots:
+        void initStuff();
+
+        void slotItemNew();
+        void slotItemEdit();
+        void slotItemDuplicate();
+        void slotItemDelete();
+        void slotItemBeam();
+        void slotItemFind();
+        void slotConfigure();
+                
         void slotShow(int);
         void slotEdit(int);
         void slotUpdate3( QWidget* );
         void slotComplete( int uid );
         void slotComplete( const OPimTodo& ev );
-        void slotNewFromTemplate(int id );
-        void slotNew();
-        void slotDuplicate();
 
-        void slotDelete();
         void slotDelete(int uid );
         void slotDeleteAll();
         void slotDeleteCompleted();
 
-        void slotEdit();
-        void slotFind();
 
-        void setCategory( int );
+        void setCategory( const QString &category );
 
         void slotShowDeadLine( bool );
         void slotShowCompleted( bool );
@@ -187,7 +175,6 @@ private slots:
         void setDocument( const QString& );
 
 
-        void slotBeam();
         void beamDone( Ir* );
         void slotShowDetails();
         void slotShowNext();
