@@ -78,7 +78,8 @@ LnkProperties::LnkProperties( AppLnk* l, QWidget* parent )
     if ( lnk->type().contains('/') ) { // A document? (#### better predicate needed)
 	connect(d->unlink,SIGNAL(clicked()),this,SLOT(unlinkLnk()));
 	connect(d->duplicate,SIGNAL(clicked()),this,SLOT(duplicateLnk()));
-
+	connect(d->delicon,SIGNAL(clicked()),this,SLOT(unlinkIcon()));
+	
 	d->docname->setReadOnly( FALSE );
 	d->preload->hide();
 	d->spacer->hide();
@@ -128,6 +129,22 @@ void LnkProperties::unlinkLnk()
 	lnk->removeFiles();
 	if ( QFile::exists(lnk->file()) ) {
 	    QMessageBox::warning( this, tr("Delete"), tr("File deletion failed.") );
+	} else {
+	    reject();
+	}
+    }
+}
+
+
+/*
+ * remove only the link from documents, not also the file
+ */
+void LnkProperties::unlinkIcon() 
+{
+    if ( QPEMessageBox::confirmDelete( this, tr("Delete Icon and leave file"), lnk->name() ) ) {
+	lnk->removeLinkFile();
+       	if ( QFile::exists(lnk->linkFile()) ) {
+	    QMessageBox::warning( this, tr("Delete"), tr("Icon deletion failed.") );
 	} else {
 	    reject();
 	}
