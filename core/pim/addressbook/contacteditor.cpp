@@ -56,8 +56,8 @@ void parseEmailFrom( const QString &txt, QString &strDefaultEmail,
 		     QString &strAll );
 
 // helper convert from file format to comma delimited...
-//void parseEmailTo( const QString &strDefaultEmail,
-//		   const QString &strOtherEmail, QString &strBack );
+void parseEmailTo( const QString &strDefaultEmail,
+		   const QString &strOtherEmail, QString &strBack );
 
 ContactEditor::ContactEditor(	const OContact &entry,
 				QWidget *parent,
@@ -78,7 +78,7 @@ ContactEditor::~ContactEditor() {
 }
 
 void ContactEditor::init() {
-
+	
 	useFullName = true;
 
 	uint i = 0;
@@ -596,8 +596,6 @@ void ContactEditor::init() {
                  this, SLOT(slotChooser4Change(const QString &)) );
 	connect( txtAddress, SIGNAL(textChanged(const QString &)),
                  this, SLOT(slotAddressChange(const QString &)) );
-	//connect( txtAddress2, SIGNAL(textChanged(const QString &)), this, SLOT(slotAddress2Change(const QString &)) );
-	//connect( txtPOBox, SIGNAL(textChanged(const QString &)), this, SLOT(slotPOBoxChange(const QString &)) );
 	connect( txtCity, SIGNAL(textChanged(const QString &)),
                  this, SLOT(slotCityChange(const QString &)) );
 	connect( txtState, SIGNAL(textChanged(const QString &)),
@@ -631,27 +629,43 @@ void ContactEditor::defaultEmailChanged(int i){
 
 }
 
-void ContactEditor::chooserChange( const QString &textChanged, int index, QLineEdit *inputWid, int widgetPos ) {
+void ContactEditor::populateDefaultEmailCmb(){       
+	cmbDefaultEmail->clear();    
+	cmbDefaultEmail->insertStringList(emails);
+	for ( int i = 0; i < cmbDefaultEmail->count(); i++){
+	  qDebug(" populateDefaultEmailCmb text >%s< defaultEmail >%s<",cmbDefaultEmail->text( i ).latin1(),defaultEmail.latin1());
+	  if ( cmbDefaultEmail->text( i ).stripWhiteSpace() == defaultEmail.stripWhiteSpace() ){
+	      cmbDefaultEmail->setCurrentItem( i );
+		qDebug("set");
+		}
+	}
+}
 
-	qDebug("defaultEmailChooserPosition %i, widgetPos %i ",defaultEmailChooserPosition,widgetPos);
-        if (slChooserNames[index] == "Default Email"){         
+void ContactEditor::chooserChange( const QString &textChanged, int index, QLineEdit *inputWid, int widgetPos ) {
+	QString type = slChooserNames[index];
+	qDebug("ContactEditor::chooserChange( type=>%s<, textChanged=>%s< index=%i, widgetPos=%i",type.latin1(),textChanged.latin1(), index,  widgetPos );
+        if ( type == "Default Email"){         
+	  defaultEmail = textChanged;
 	  if (cmbDefaultEmail) delete cmbDefaultEmail;
 	  cmbDefaultEmail = new QComboBox(inputWid->parentWidget());	   
-	  cmbDefaultEmail->setGeometry(inputWid->frameGeometry());        
-	  cmbDefaultEmail->insertStringList(ent.emailList());
-	  connect(cmbDefaultEmail,SIGNAL(activated(int)),
-		  SLOT(defaultEmailChanged(int))); 
-	  QString demail = ent.defaultEmail();
-	  for ( int i = 0; i < cmbDefaultEmail->count(); i++)
-	    if ( cmbDefaultEmail->text( i ) == demail )
-	      cmbDefaultEmail->setCurrentItem( i );
-
+	  cmbDefaultEmail->setGeometry(inputWid->frameGeometry()); 
 	  cmbDefaultEmail->show();
+	  populateDefaultEmailCmb();
+ 	  connect(cmbDefaultEmail,SIGNAL(activated(int)),
+		  SLOT(defaultEmailChanged(int))); 
 	  defaultEmailChooserPosition = widgetPos;
         }else if (defaultEmailChooserPosition == widgetPos){
 	qDebug("cmbDefaultEmail->hide()");
 	  if (cmbDefaultEmail) cmbDefaultEmail->hide();
+	  widgetPos=-1;
+	}else if (type == "Emails"){
+	  qDebug("emails");
+	  QString de;
+	  emails = QStringList::split (",", textChanged );
+
+	  populateDefaultEmailCmb();
 	}
+	
 
 
 	slChooserValues[index] = textChanged;
@@ -738,6 +752,7 @@ void ContactEditor::slotCountryChange( const QString &textChanged ) {
 		slHomeAddress[6] = textChanged;
 	}
 }
+
 
 void ContactEditor::slotCmbChooser1Change( int index ) {
 
@@ -1060,6 +1075,7 @@ QString ContactEditor::parseName( const QString fullName, int type ) {
 
 void ContactEditor::cleanupFields() {
 	QStringList::Iterator it = slChooserValues.begin();
+
 	for ( int i = 0; it != slChooserValues.end(); i++, ++it ) {
 		(*it) = "";
 	}
@@ -1101,6 +1117,13 @@ void ContactEditor::setEntry( const OContact &entry ) {
 	cleanupFields();
 
 	ent = entry;
+
+
+
+	emails = QStringList(ent.emailList());
+	defaultEmail = ent.defaultEmail();
+	if (defaultEmail.isEmpty()) defaultEmail = emails[0];
+	qDebug("default email=%s",defaultEmail.latin1());
 
 	useFullName = false;
 	txtFirstName->setText( ent.firstName() );

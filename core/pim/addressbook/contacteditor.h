@@ -104,7 +104,9 @@ class ContactEditor : public QDialog {
 
 	private:
 		int defaultEmailChooserPosition;
+		void populateDefaultEmailCmb();
 		void chooserChange( const QString&, int , QLineEdit*, int );
+
 		bool useFullName;
 
 		OContact ent;
@@ -124,6 +126,8 @@ class ContactEditor : public QDialog {
 		QStringList slBusinessAddress;
 		QStringList slChooserNames;
 		QStringList slChooserValues;
+		QStringList emails;
+		QString defaultEmail;
 
 		QMultiLineEdit *txtNote;
 		QLabel *lblNote;
