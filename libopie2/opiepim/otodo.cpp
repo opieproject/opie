@@ -187,7 +187,7 @@ void OTodo::setAlarmDateTime( const QDateTime& alarm )
 }
 bool OTodo::isOverdue( )
 {
-    if( data->hasDate )
+    if( data->hasDate && !data->isCompleted)
 	return QDate::currentDate() > data->date;
     return false;
 }
