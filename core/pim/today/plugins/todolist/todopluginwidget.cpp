@@ -36,7 +36,9 @@ TodolistPluginWidget::TodolistPluginWidget( QWidget *parent,  const char* name )
     if ( todo ) {
         delete todo;
     }
-    todo = new ToDoDB();
+
+    todo = new OTodoAccess();
+    todo->load();
 
     readConfig();
     getTodo();
@@ -67,7 +69,6 @@ void TodolistPluginWidget::getTodo() {
     }
 
     todoLabel = new OClickableLabel( this );
-    todoLabel->setSizePolicy( QSizePolicy( QSizePolicy::Minimum, QSizePolicy::Minimum ) );
     connect( todoLabel, SIGNAL( clicked() ), this, SLOT( startTodolist() ) );
 
     QString output;
@@ -76,14 +77,13 @@ void TodolistPluginWidget::getTodo() {
     int ammount = 0;
 
     // get overdue todos first
-    QValueList<ToDoEvent> overDueList = todo->overDue();
-    qBubbleSort( overDueList );
-    for ( QValueList<ToDoEvent>::Iterator it = overDueList.begin();
-          it != overDueList.end(); ++it ) {
-        if (!(*it).isCompleted() && ( ammount < m_maxLinesTask ) ) {
-            QString desc = (*it).summary();
+    m_list = todo->overDue();
+
+    for ( m_it = m_list.begin(); m_it != m_list.end(); ++m_it ) {
+        if (!(*m_it).isCompleted() && ( ammount < m_maxLinesTask ) ) {
+            QString desc = (*m_it).summary();
             if( desc.isEmpty() ) {
-                desc = (*it).description();
+                desc = (*m_it).description();
             }
             tmpout += "<font color=#e00000><b>-" + desc.mid( 0, m_maxCharClip ) + "</b></font><br>";
             ammount++;
@@ -91,25 +91,21 @@ void TodolistPluginWidget::getTodo() {
     }
 
     // get total number of still open todos
-    QValueList<ToDoEvent> openTodo = todo->rawToDos();
-    qBubbleSort( openTodo );
-    for ( QValueList<ToDoEvent>::Iterator it = openTodo.begin();
-          it != openTodo.end(); ++it ) {
-        if ( !(*it).isCompleted() ){
-            count +=1;
-            // not the overdues, we allready got them, and not if we are
-            // over the maxlines
-            if ( !(*it).isOverdue() && ( ammount < m_maxLinesTask ) ) {
-                QString desc = (*it).summary();
-                if( desc.isEmpty() ) {
-                    desc = (*it).description();
-                }
-                tmpout += "<b>-</b>" + desc.mid( 0, m_maxCharClip ) + "<br>";
-                ammount++;
+    m_list = todo->sorted( true, 1, 4, 1);
+
+    for ( m_it = m_list.begin(); m_it != m_list.end(); ++m_it ) {
+        count +=1;
+        // not the overdues, we allready got them, and not if we are
+        // over the maxlines
+        if ( !(*m_it).isOverdue() && ( ammount < m_maxLinesTask ) ) {
+            QString desc = (*m_it).summary();
+            if( desc.isEmpty() ) {
+                desc = (*m_it).description();
             }
+            tmpout += "<b>-</b>" + desc.mid( 0, m_maxCharClip ) + "<br>";
+            ammount++;
         }
     }
-
 
     if ( count > 0 ) {
         if( count == 1 ) {

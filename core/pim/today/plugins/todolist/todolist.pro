@@ -1,7 +1,6 @@
 TEMPLATE = lib
-#TEMPLATE = app
 CONFIG -= moc
-CONFIG += qt debug
+CONFIG += qt release
 
 # Input
 HEADERS = todoplugin.h todopluginimpl.h todopluginconfig.h  \

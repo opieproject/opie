@@ -32,7 +32,7 @@ QString TodolistPlugin::pluginName() const {
 }
 
 double TodolistPlugin::versionNumber() const {
-    return 0.7;
+    return 0.8;
 }
 
 QString TodolistPlugin::pixmapNameWidget() const {

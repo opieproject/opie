@@ -20,7 +20,8 @@
 #include <qstring.h>
 #include <qwidget.h>
 
-#include <opie/tododb.h>
+#include <opie/otodo.h>
+#include <opie/otodoaccess.h>
 #include <opie/oclickablelabel.h>
 
 
@@ -37,7 +38,10 @@ protected slots:
 
 private:
     OClickableLabel *todoLabel;
-    ToDoDB *todo;
+
+    OTodoAccess *todo;
+    OTodoAccess::List m_list;
+    OTodoAccess::List::Iterator m_it;
 
     void readConfig();
     void getTodo();
