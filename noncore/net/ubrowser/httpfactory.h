@@ -30,7 +30,7 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #include <netdb.h>
 #include <arpa/inet.h>
 
-#include "httpcomm.h"
+//#include "httpcomm.h"
 
 class HttpFactory : public QMimeSourceFactory
 {
@@ -40,7 +40,7 @@ public:
 	const QMimeSource * data(const QString &abs_or_rel_name, const QString & context) const;
 private:
 //	QSocket *socket;
-	HttpComm *comm;
+//	HttpComm *comm;
 	QTextDrag *text;
 	QImageDrag *image;
 	QTextBrowser *browser;

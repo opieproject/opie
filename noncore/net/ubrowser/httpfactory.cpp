@@ -223,6 +223,11 @@ const QByteArray HttpFactory::processResponse( int sockfd, bool &isText ) const
 			{
 				isText = true;
 				printf( "HttpFactory::processResponse: content type text\n" );
+				if( currentLine.contains( "html", false ) )
+				{
+					browser->setTextFormat(Qt::RichText);
+					printf( "HttpFactory::processResponse: content type html\n" );
+				}
 			}
 			
 			if( currentLine.contains( "Content-Type: image", false ) >= 1 )
