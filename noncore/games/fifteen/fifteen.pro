@@ -1,4 +1,4 @@
-CONFIG		= qt warn_on  
+CONFIG		= qt warn_on  quick-app
 HEADERS		= fifteen.h \
                   fifteenconfigdialog.h
 SOURCES		= fifteen.cpp \ 
