@@ -1,7 +1,8 @@
 #ifndef __Text_h
 #define __Text_h
 #include <stdio.h>
-#include <zlib.h>
+#include "zlib/zlib.h"
+//#include <zlib.h>
 #include <sys/stat.h>
 
 #include "CExpander.h"
