@@ -130,12 +130,17 @@ public:
         fontSize = cfg.readNumEntry( "FontSize", 10 );
         smallIconSize = cfg.readNumEntry( "SmallIconSize", 14 );
         bigIconSize = cfg.readNumEntry( "BigIconSize", 32 );
+#ifdef OPIE_ROHFEEDBACK
         RoH = 0;
+#endif
     }
 
     int presstimer;
     QWidget* presswidget;
     QPoint presspos;
+#ifdef OPIE_ROHFEEDBACK
+    Opie::Internal::RoHFeedback *RoH;
+#endif
 
     bool rightpressed : 1;
     bool kbgrabbed    : 1;
@@ -497,8 +502,6 @@ static void qpe_show_dialog( QDialog* d, bool nomax )
             }
         }
     }
-
-    Opie::Internal::RoHFeedback * RoH;
 };
 
 class ResourceMimeFactory : public QMimeSourceFactory
@@ -1212,7 +1215,9 @@ QPEApplication::~QPEApplication()
     delete sysChannel;
     delete pidChannel;
 #endif
+#ifdef OPIE_ROHFEEDBACK
     delete d->RoH;
+#endif
     delete d;
 }
 
@@ -2035,7 +2040,7 @@ bool QPEApplication::eventFilter( QObject *o, QEvent *e )
                             d->rightpressed = FALSE;
                             // just for the time being
                             static int pref = 500;
-#ifdef WITHROHFEEDBACK
+#ifdef OPIE_ROHFEEDBACK
                             if( ! d->RoH )
                               d->RoH = new Opie::Internal::RoHFeedback;
 
@@ -2050,7 +2055,7 @@ bool QPEApplication::eventFilter( QObject *o, QEvent *e )
                     case QEvent::MouseMove:
                         if (d->presstimer && (me->pos() - d->presspos).manhattanLength() > 8) {
                             killTimer(d->presstimer);
-#ifdef WITHROHFEEDBACK
+#ifdef OPIE_ROHFEEDBACK
                             if( d->RoH )
                               d->RoH->stop( );
 #endif
@@ -2061,7 +2066,7 @@ bool QPEApplication::eventFilter( QObject *o, QEvent *e )
                         if ( me->button() == LeftButton ) {
                             if ( d->presstimer ) {
                                 killTimer(d->presstimer);
-#ifdef WITHROHFEEDBACK
+#ifdef OPIE_ROHFEEDBACK
                                 if( d->RoH )
                                   d->RoH->stop( );
 #endif
@@ -2118,7 +2123,9 @@ void QPEApplication::timerEvent( QTimerEvent *e )
         killTimer( d->presstimer );
         d->presstimer = 0;
         d->rightpressed = TRUE;
+#ifdef OPIE_ROHFEEDBACK
         d->RoH->stop();
+#endif
     }
 }
 
