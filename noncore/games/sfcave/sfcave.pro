@@ -1,0 +1,9 @@
+TEMPLATE	= app
+CONFIG		+= qt warn_on release
+DESTDIR		= $(OPIEDIR)/bin
+SOURCES 	= sfcave.cpp
+HEADERS 	= sfcave.h
+TARGET		= sfcave
+INCLUDEPATH 	+= $(OPIEDIR)/include
+DEPENDPATH	+= $(OPIEDIR)/include
+LIBS            += -lqpe
