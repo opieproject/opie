@@ -69,7 +69,7 @@ TodayConfig::TodayConfig( QWidget* parent, const char* name, bool modal )
     m_appletListView->addColumn( "PluginList" );
     m_appletListView->header()->hide();
     m_appletListView->setSorting( -1 );
-    QWhatsThis::add( m_appletListView, tr( "Check a checkbox to activate/deactivate a plugin ore use the arrow buttons on the right to change the appearance order" ) );
+    QWhatsThis::add( m_appletListView, tr( "Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order" ) );
     QVBox *vbox1 = new QVBox( hbox1 );
     new ToolButton( vbox1, tr( "Move Up" ), "up",  this , SLOT( moveSelectedUp() ) );
     new ToolButton( vbox1, tr( "Move Down" ), "down", this , SLOT( moveSelectedDown() ) );
