@@ -166,7 +166,7 @@
     </message>
     <message>
         <source>ScrollBar</source>
-        <translation type="unfinished">Barre de défilement</translation>
+        <translation>Barre de défilement</translation>
     </message>
     <message>
         <source>Show Command List</source>

@@ -4,7 +4,7 @@
     <name>KCheckers</name>
     <message>
         <source>What&apos;s This</source>
-        <translation type="unfinished">Qu&apos;est-ce que c&apos;est ?</translation>
+        <translation>Qu&apos;est-ce que c&apos;est</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
@@ -12,7 +12,7 @@
     </message>
     <message>
         <source>Go!</source>
-        <translation type="unfinished">Jouez !</translation>
+        <translation>Jouez !</translation>
     </message>
     <message>
         <source>Congratulation! You have won!</source>
@@ -24,7 +24,7 @@
     </message>
     <message>
         <source>You have lost. Game over.</source>
-        <translation type="unfinished">Vous avez perdu.</translation>
+        <translation>Vous avez perdu.</translation>
     </message>
     <message>
         <source>Incorrect course.</source>

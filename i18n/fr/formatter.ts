@@ -144,7 +144,7 @@ a réussi a être monté. </translation>
     </message>
     <message>
         <source>You can now close the output window.</source>
-        <translation type="unfinished">Vous pouvez maintenant fermer la fenêtre de sortie.</translation>
+        <translation>Vous pouvez maintenant fermer la fenêtre de sortie.</translation>
     </message>
     <message>
         <source>Internal</source>
@@ -175,7 +175,7 @@ a réussi a être monté. </translation>
 Changing parameters on this
 page may cause your system
 to stop functioning properly!</source>
-        <translation type="unfinished">AVERTISSEMENT:
+        <translation>AVERTISSEMENT:
 Changer les paramètres de
 cette page peut rendre votre
 système instable !</translation>

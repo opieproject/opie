@@ -107,7 +107,7 @@
     </message>
     <message>
         <source>Paste failed!</source>
-        <translation type="unfinished">&quot;Coller&quot; a échoué !</translation>
+        <translation>&quot;Coller&quot; a échoué !</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -119,7 +119,7 @@
     </message>
     <message>
         <source>Cut failed!</source>
-        <translation type="unfinished">&quot;Couper&quot; a échoué !</translation>
+        <translation>&quot;Couper&quot; a échoué !</translation>
     </message>
     <message>
         <source>Delete</source>
