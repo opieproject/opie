@@ -388,6 +388,17 @@ void OTabWidget::selectTab( OTabInfo *tab )
         m_tabBar->setCurrentTab( tab->id() );
 
         setUpLayout();
+
+        QSize t;
+
+        t = m_tabBar->sizeHint();
+        if ( t.width() > width() )
+            t.setWidth( width() );
+        int lw = m_widgetStack->lineWidth();
+        if ( m_tabBarPosition == Bottom )
+            m_tabBar->setGeometry( QMAX(0, lw-2), height() - t.height() - lw, t.width(), t.height() );
+        else
+            m_tabBar->setGeometry( QMAX(0, lw-2), 0, t.width(), t.height() );
     }
     else if ( m_tabBarStyle == TextTab )
     {
@@ -418,11 +429,14 @@ void OTabWidget::resizeEvent( QResizeEvent * )
     {
         m_tabBar->layoutTabs();
         t = m_tabBar->sizeHint();
+        if ( t.width() > width() )
+            t.setWidth( width() );
     }
     else
+    {
         t = m_tabList->sizeHint();
-
-    t.setWidth( width() );
+        t.setWidth( width() );
+    }
 
     int lw = m_widgetStack->lineWidth();
     if ( m_tabBarPosition == Bottom )
