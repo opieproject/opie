@@ -23,10 +23,10 @@
 #include "addressbook.h"
 
 
-#include <opie/ofileselector.h>
-#include <opie/ofiledialog.h>
-#include <opie/ocontact.h>
-#include <opie/ocontactaccessbackend_vcard.h>
+#include <opie2/ofileselector.h>
+#include <opie2/ofiledialog.h>
+#include <opie2/opimcontact.h>
+#include <opie2/ocontactaccessbackend_vcard.h>
 
 #include <qpe/resource.h>
 #include <qpe/ir.h>
@@ -317,7 +317,7 @@ void AddressbookWindow::slotSetFont( int size )
 
 
 void AddressbookWindow::importvCard() {
-        QString str = OFileDialog::getOpenFileName( 1,"/");//,"", "*", this );
+        QString str = Opie::Ui::OFileDialog::getOpenFileName( 1,"/");//,"", "*", this );
         if(!str.isEmpty() ){
 		setDocument((const QString&) str );
 	}
@@ -326,14 +326,14 @@ void AddressbookWindow::importvCard() {
 void AddressbookWindow::exportvCard()
 {
 	qWarning(" void AddressbookWindow::exportvCard()");
-        QString filename = OFileDialog::getSaveFileName( 1,"/home/"); //,"", "*", this );
+        QString filename = Opie::Ui::OFileDialog::getSaveFileName( 1,"/home/"); //,"", "*", this );
         if( !filename.isEmpty() &&  ( filename[filename.length()-1] != '/' ) ){
 		qWarning(" Save to file %s, (%d)", filename.latin1(), filename.length()-1 );
-		OContact curCont = m_abView->currentEntry();
+		Opie::OPimContact curCont = m_abView->currentEntry();
 		if ( !curCont.isEmpty() ){
-			OContactAccessBackend* vcard_backend = new OContactAccessBackend_VCard( QString::null,
+			Opie::OPimContactAccessBackend* vcard_backend = new Opie::OPimContactAccessBackend_VCard( QString::null,
 												filename );
-			OContactAccess* access = new OContactAccess ( "addressbook_exp", QString::null , vcard_backend, true );
+			Opie::OPimContactAccess* access = new Opie::OPimContactAccess ( "addressbook_exp", QString::null , vcard_backend, true );
 			if ( access ){
 				access->add( curCont );
 				access->save();
@@ -371,10 +371,10 @@ void AddressbookWindow::setDocument( const QString &filename )
 		}
 	}
 
-	OContactAccessBackend* vcard_backend = new OContactAccessBackend_VCard( QString::null,
+	Opie::OPimContactAccessBackend* vcard_backend = new Opie::OPimContactAccessBackend_VCard( QString::null,
 									 filename );
-	OContactAccess* access = new OContactAccess ( "addressbook", QString::null , vcard_backend, true );
-	OContactAccess::List allList = access->allRecords();
+	Opie::OPimContactAccess* access = new Opie::OPimContactAccess ( "addressbook", QString::null , vcard_backend, true );
+	Opie::OPimContactAccess::List allList = access->allRecords();
 	qWarning( "Found number of contacts in File: %d", allList.count() );
 
 	if ( !allList.count() ) {
@@ -384,7 +384,7 @@ void AddressbookWindow::setDocument( const QString &filename )
 	}
 
 	bool doAsk = true;
-	OContactAccess::List::Iterator it;
+	Opie::OPimContactAccess::List::Iterator it;
 	for ( it = allList.begin(); it != allList.end(); ++it ){
 		qWarning("Adding Contact from: %s", (*it).fullName().latin1() );
 		if ( doAsk ){
@@ -433,13 +433,13 @@ AddressbookWindow::~AddressbookWindow()
 
 void AddressbookWindow::slotUpdateToolbar()
 {
- 	OContact ce = m_abView->currentEntry();
+ 	Opie::OPimContact ce = m_abView->currentEntry();
 	actionMail->setEnabled( !ce.defaultEmail().isEmpty() );
 }
 
 void AddressbookWindow::slotListNew()
 {
-	OContact cnt;
+	Opie::OPimContact cnt;
 	if( !syncing ) {
 		editEntry( NewEntry );
 	} else {
@@ -458,7 +458,7 @@ void AddressbookWindow::slotListNew()
 void AddressbookWindow::slotListDelete()
 {
 	if(!syncing) {
-		OContact tmpEntry = m_abView ->currentEntry();
+		Opie::OPimContact tmpEntry = m_abView ->currentEntry();
 
 		// get a name, do the best we can...
 		QString strName = tmpEntry.fullName();
@@ -525,7 +525,7 @@ void AddressbookWindow::slotViewEdit()
 
 void AddressbookWindow::writeMail()
 {
-	OContact c = m_abView -> currentEntry();
+	Opie::OPimContact c = m_abView -> currentEntry();
 	QString name = c.fileAs();
 	QString email = c.defaultEmail();
 
@@ -565,16 +565,16 @@ static const char * beamfile = "/tmp/obex/contact.vcf";
 void AddressbookWindow::slotBeam()
 {
 	QString beamFilename;
-	OContact c;
+	Opie::OPimContact c;
 	if ( actionPersonal->isOn() ) {
 		beamFilename = addressbookPersonalVCardName();
 		if ( !QFile::exists( beamFilename ) )
 			return; // can't beam a non-existent file
-		OContactAccessBackend* vcard_backend = new OContactAccessBackend_VCard( QString::null,
+		Opie::OPimContactAccessBackend* vcard_backend = new Opie::OPimContactAccessBackend_VCard( QString::null,
 											beamFilename );
-		OContactAccess* access = new OContactAccess ( "addressbook", QString::null , vcard_backend, true );
-		OContactAccess::List allList = access->allRecords();
-		OContactAccess::List::Iterator it = allList.begin();  // Just take first
+		Opie::OPimContactAccess* access = new Opie::OPimContactAccess ( "addressbook", QString::null , vcard_backend, true );
+		Opie::OPimContactAccess::List allList = access->allRecords();
+		Opie::OPimContactAccess::List::Iterator it = allList.begin();  // Just take first
 		c = *it;
 
 		delete access;
@@ -582,9 +582,9 @@ void AddressbookWindow::slotBeam()
 		unlink( beamfile ); // delete if exists
 		mkdir("/tmp/obex/", 0755);
 		c = m_abView -> currentEntry();
-		OContactAccessBackend* vcard_backend = new OContactAccessBackend_VCard( QString::null,
+		Opie::OPimContactAccessBackend* vcard_backend = new Opie::OPimContactAccessBackend_VCard( QString::null,
 											beamfile );
-		OContactAccess* access = new OContactAccess ( "addressbook", QString::null , vcard_backend, true );
+		Opie::OPimContactAccess* access = new Opie::OPimContactAccess ( "addressbook", QString::null , vcard_backend, true );
 		access->add( c );
 		access->save();
 		delete access;
@@ -652,7 +652,7 @@ void AddressbookWindow::appMessage(const QCString &msg, const QByteArray &data)
 		QString name, email;
 		stream >> name >> email;
 
-		OContact cnt;
+		Opie::OPimContact cnt;
 		QString fn, mn, ln;
 		parseName( name, &fn, &mn, &ln );
 		//  qDebug( " %s - %s - %s", fn.latin1(), mn.latin1(), ln.latin1() );
@@ -722,7 +722,7 @@ void AddressbookWindow::appMessage(const QCString &msg, const QByteArray &data)
 
 void AddressbookWindow::editEntry( EntryMode entryMode )
 {
-	OContact entry;
+	Opie::OPimContact entry;
 	if ( !abEditor ) {
 		abEditor = new ContactEditor( entry, this, "editor" );
 	}
@@ -738,12 +738,12 @@ void AddressbookWindow::editEntry( EntryMode entryMode )
 	if ( QPEApplication::execDialog( abEditor ) ) {
 		setFocus();
 		if ( entryMode == NewEntry ) {
-			OContact insertEntry = abEditor->entry();
+			Opie::OPimContact insertEntry = abEditor->entry();
 			insertEntry.assignUid();
 			m_abView -> addEntry( insertEntry );
 			m_abView -> setCurrentUid( insertEntry.uid() );
 		} else {
-			OContact replEntry = abEditor->entry();
+			Opie::OPimContact replEntry = abEditor->entry();
 
 			if ( !replEntry.isValidUid() )
 				replEntry.assignUid();
@@ -757,7 +757,7 @@ void AddressbookWindow::editEntry( EntryMode entryMode )
 
 void AddressbookWindow::editPersonal()
 {
-	OContact entry;
+	Opie::OPimContact entry;
 
 	// Switch to personal view if not selected
 	// but take care of the menu, too

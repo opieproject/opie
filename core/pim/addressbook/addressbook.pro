@@ -23,6 +23,6 @@ INTERFACES	= configdlg_base.ui
 TARGET		= addressbook
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
-LIBS            += -lqpe -lopie
+LIBS            += -lqpe -lopiecore2 -lopieui2 -lopiepim2 -lopiedb2
 
 include ( $(OPIEDIR)/include.pro )

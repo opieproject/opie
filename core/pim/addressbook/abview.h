@@ -1,12 +1,13 @@
 #ifndef _ABVIEW_H_
 #define _ABVIEW_H_
 
-#include <qwidget.h>
-#include <qwidgetstack.h> 
+#include <opie2/opimcontact.h>
+#include <opie2/ocontactaccess.h>
 
 #include <qpe/categories.h>
-#include <opie/ocontact.h>
-#include <opie/ocontactaccess.h>
+
+#include <qwidget.h>
+#include <qwidgetstack.h>
 
 #include "contacteditor.h"
 #include "abtable.h"
@@ -37,10 +38,10 @@ public:
     void setListOrder( const QValueList<int>& ordered );
 
     // Add Entry and put to current
-    void addEntry( const OContact &newContact );
+    void addEntry( const Opie::OPimContact &newContact );
     void removeEntry( const int UID );
-    void replaceEntry( const OContact &contact );
-    OContact currentEntry();
+    void replaceEntry( const Opie::OPimContact &contact );
+    Opie::OPimContact currentEntry();
 
     void inSearch()  { m_inSearch = true; }
     void offSearch();
@@ -54,15 +55,15 @@ signals:
 	void signalViewSwitched ( int );
 
 public slots:
-    void slotDoFind( const QString &str, bool caseSensitive, bool useRegExp, 
+    void slotDoFind( const QString &str, bool caseSensitive, bool useRegExp,
 		     bool backwards, QString category = QString::null );
-    void slotSwitch(); 
+    void slotSwitch();
 
 private:
     void updateListinViews();
-    void updateView( bool newdata = false ); 
+    void updateView( bool newdata = false );
     void clearForCategory();
-    bool contactCompare( const OContact &cnt, int category );
+    bool contactCompare( const Opie::OPimContact &cnt, int category );
     void parseName( const QString& name, QString *first, QString *middle,
 		    QString * last );
 
@@ -73,10 +74,10 @@ private:
     Views m_curr_View;
     Views m_prev_View;
     int m_curr_Contact;
-    
-    OContactAccess* m_contactdb;
-    OContactAccess* m_storedDB;
-    OContactAccess::List m_list;
+
+    Opie::OPimContactAccess* m_contactdb;
+    Opie::OPimContactAccess* m_storedDB;
+    Opie::OPimContactAccess::List m_list;
 
     QWidgetStack* m_viewStack;
     AbTable* m_abTable;

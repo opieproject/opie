@@ -20,10 +20,10 @@
 #ifndef ABLABEL_H
 #define ABLABEL_H
 
-#include <opie/ocontact.h>
-#include <qtextview.h>
+#include <opie2/opimcontact.h>
+#include <opie2/ocontactaccess.h>
 
-#include <opie/ocontactaccess.h>
+#include <qtextview.h>
 
 class AbLabel : public QTextView
 {
@@ -34,7 +34,7 @@ public:
     ~AbLabel();
 
     // Set the contacts
-    void setContacts( const OContactAccess::List& viewList );
+    void setContacts( const Opie::OPimContactAccess::List& viewList );
 
     // Selects a contact
     bool selectContact( int UID );
@@ -43,7 +43,7 @@ public:
     int currentEntry_UID();
 
     //
-    OContact currentEntry();
+    Opie::OPimContact currentEntry();
 
 signals:
     void signalOkPressed();
@@ -53,8 +53,8 @@ protected:
     void keyPressEvent( QKeyEvent * );
 
 private:
-    OContactAccess::List m_viewList;
-    OContactAccess::List::Iterator m_itCurContact;
+    Opie::OPimContactAccess::List m_viewList;
+    Opie::OPimContactAccess::List::Iterator m_itCurContact;
 
     bool m_empty;
 

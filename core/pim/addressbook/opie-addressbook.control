@@ -5,7 +5,7 @@ Section: opie/pim
 Conflicts: qpe-tkcaddressbook
 Maintainer: Stefan Eilers <eilers.stefan@epost.de>
 Architecture: arm
-Depends: task-opie-minimal, libopie1, opie-pics
+Depends: task-opie-minimal, opie-pics, libopiecore2, libopieui2, libopiepim2, libopiedb2
 Description: Contacts
  A simple addressbook for the Opie environment.
 Version: $QPE_VERSION$EXTRAVERSION

@@ -21,8 +21,8 @@
 #ifndef CONTACTEDITOR_H
 #define CONTACTEDITOR_H
 
-#include <opie/ocontact.h>
-#include <opie/ocontactfields.h>
+#include <opie2/opimcontact.h>
+#include <opie2/opimcontactfields.h>
 
 #include <qpe/datebookmonth.h>
 
@@ -30,7 +30,7 @@
 #include <qlist.h>
 #include <qmap.h>
 #include <qstringlist.h>
-#include <qwidgetstack.h> 
+#include <qwidgetstack.h>
 
 const int NAME_LF  = 0;
 const int NAME_LFM = 1;
@@ -56,19 +56,19 @@ class ContactEditor : public QDialog {
 	Q_OBJECT
 
 	public:
-		ContactEditor(	const OContact &entry,
+		ContactEditor(	const Opie::OPimContact &entry,
 				QWidget *parent = 0,
 				const char *name = 0,
 				WFlags fl = 0 );
 		~ContactEditor();
 		void setNameFocus();
 		void setPersonalView( bool personal = true );
-		OContact entry() const { return ent; }
+		Opie::OPimContact entry() const { return ent; }
 
 	public slots:
 		void slotNote();
 		void slotName();
-		void setEntry(const OContact &entry);
+		void setEntry(const Opie::OPimContact &entry);
 
 	protected slots:
 		void accept();
@@ -113,9 +113,9 @@ class ContactEditor : public QDialog {
 		void populateDefaultEmailCmb();
 		void chooserChange( const QString&, int , QLineEdit*, int );
 		bool cmbChooserChange( int , QWidgetStack*, int );
-		OContactFields contactfields;
+		Opie::OPimContactFields contactfields;
 
-		OContact ent;
+		Opie::OPimContact ent;
 
 		QDialog *dlgNote;
 		QDialog *dlgName;

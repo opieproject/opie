@@ -22,15 +22,16 @@
 #ifndef ABTABLE_H
 #define ABTABLE_H
 
+#include <opie2/opimcontact.h>
+#include <opie2/ocontactaccess.h>
+
 #include <qpe/categories.h>
-#include <opie/ocontact.h>
-#include <opie/ocontactaccess.h>
 
 #include <qmap.h>
 #include <qtable.h>
 #include <qstringlist.h>
 #include <qcombobox.h>
-#include <qpixmap.h> 
+#include <qpixmap.h>
 
 #if 0
 class AbTableItem : public QTableItem
@@ -83,21 +84,21 @@ public:
     ~AbTable();
 
     // Set the contacts shown in the table
-    void setContacts( const OContactAccess::List& viewList );
+    void setContacts( const Opie::OPimContactAccess::List& viewList );
 
     // Set the list for primary contacts
     void setOrderedList( const QValueList<int> ordered );
 
     // Selects a contact of a specific UID
     bool selectContact( int UID );
-    
+
     // Get the current selected entry
-    OContact currentEntry();
+    Opie::OPimContact currentEntry();
 
     // Get the UID of the current selected Entry
     int currentEntry_UID();
 
-    // QString findContactName( const OContact &entry );
+    // QString findContactName( const Opie::OPimContact &entry );
 
     void init();
     void clear();
@@ -135,8 +136,8 @@ protected slots:
     void rowHeightChanged( int row );
 
 private:
-    // void insertIntoTable( const OContact &cnt, int row );
-    ContactItem findContactContact( const OContact &entry, int row );
+    // void insertIntoTable( const Opie::OPimContact &cnt, int row );
+    ContactItem findContactContact( const Opie::OPimContact &entry, int row );
     void fitColumns();
     void resizeRows();
     void realignTable();
@@ -145,14 +146,14 @@ private:
 
     int lastSortCol;
     bool asc;
-    // QMap<AbTableItem*, OContact> contactList;
+    // QMap<AbTableItem*, Opie::OPimContact> contactList;
     QValueList<int> intFields;
     QStringList choicenames;
     bool enablePainting;
     bool columnVisible;
     int countNested;
 
-    OContactAccess::List m_viewList;
+    Opie::OPimContactAccess::List m_viewList;
 
 };
 #endif // ABTABLE_H

@@ -16,11 +16,11 @@
 
 #include "abview.h"
 
-#include <qlayout.h>
+#include <opie2/ocontactaccessbackend_vcard.h>
 
 #include <qpe/global.h>
 
-#include <opie/ocontactaccessbackend_vcard.h>
+#include <qlayout.h>
 
 #include <assert.h>
 
@@ -53,7 +53,7 @@ AbView::AbView ( QWidget* parent, const QValueList<int>& ordered ):
 {
 	qWarning("AbView::c'tor");
 	// Load default database and handle syncing myself.. !
-	m_contactdb = new OContactAccess ( "addressbook", 0l, 0l, false );
+	m_contactdb = new Opie::OPimContactAccess ( "addressbook", 0l, 0l, false );
 	m_contactdb -> setReadAhead( 16 ); // Use ReadAhead-Cache if available
 	mCat.load( categoryFileName() );
 
@@ -104,7 +104,7 @@ void AbView::setView( Views view )
  	load();
 }
 
-void AbView::addEntry( const OContact &newContact )
+void AbView::addEntry( const Opie::OPimContact &newContact )
 {
 	qWarning("abview:AddContact");
 	m_contactdb->add ( newContact );
@@ -118,7 +118,7 @@ void AbView::removeEntry( const int UID )
 	load();
 }
 
-void AbView::replaceEntry( const OContact &contact )
+void AbView::replaceEntry( const Opie::OPimContact &contact )
 {
 	qWarning("abview:ReplaceContact");
 	m_contactdb->replace( contact );
@@ -126,9 +126,9 @@ void AbView::replaceEntry( const OContact &contact )
 
 }
 
-OContact AbView::currentEntry()
+Opie::OPimContact AbView::currentEntry()
 {
-	OContact currentContact;
+	Opie::OPimContact currentContact;
 
 	switch ( (int) m_curr_View ) {
 	case TableView:
@@ -157,7 +157,7 @@ void AbView::load()
 	emit signalClearLetterPicker();
 
 	if ( m_inPersonal )
-		// VCard Backend does not sort.. 
+		// VCard Backend does not sort..
 		m_list = m_contactdb->allRecords();
 	else{
 		m_list = m_contactdb->sorted( true, 0, 0, 0 );
@@ -228,14 +228,14 @@ void AbView::setShowByLetter( char c, AbConfig::LPSearchMode mode )
 
 	assert( mode < AbConfig::LASTELEMENT );
 
-	OContact query;
+	Opie::OPimContact query;
 	if ( c == 0 ){
 		load();
 		return;
 	}else{
-		// If the current Backend is unable to solve the query, we will 
+		// If the current Backend is unable to solve the query, we will
 		// ignore the request ..
-		if ( ! m_contactdb->hasQuerySettings( OContactAccess::WildCards | OContactAccess::IgnoreCase ) ){
+		if ( ! m_contactdb->hasQuerySettings( Opie::OPimContactAccess::WildCards | Opie::OPimContactAccess::IgnoreCase ) ){
 			return;
 		}
 
@@ -251,7 +251,7 @@ void AbView::setShowByLetter( char c, AbConfig::LPSearchMode mode )
 			qWarning( "I will ignore it.." );
 			return;
 		}
-		m_list = m_contactdb->queryByExample( query, OContactAccess::WildCards | OContactAccess::IgnoreCase );
+		m_list = m_contactdb->queryByExample( query, Opie::OPimContactAccess::WildCards | Opie::OPimContactAccess::IgnoreCase );
 		if ( m_curr_category != -1 )
 			clearForCategory();
 		m_curr_Contact = 0;
@@ -289,9 +289,9 @@ void AbView::showPersonal( bool personal )
 		// to avoid unneeded load/stores.
 		m_storedDB = m_contactdb;
 
-		OContactAccessBackend* vcard_backend = new OContactAccessBackend_VCard( QString::null,
+		Opie::OPimContactAccessBackend* vcard_backend = new Opie::OPimContactAccessBackend_VCard( QString::null,
 									  addressbookPersonalVCardName() );
-		m_contactdb = new OContactAccess ( "addressbook", QString::null , vcard_backend, true );
+		m_contactdb = new Opie::OPimContactAccess ( "addressbook", QString::null , vcard_backend, true );
 
 		m_inPersonal = true;
 		m_curr_View = CardView;
@@ -318,7 +318,7 @@ void AbView::showPersonal( bool personal )
 void AbView::setCurrentUid( int uid ){
 
 	m_curr_Contact = uid;
-	updateView( true ); //true: Don't modificate the UID ! 
+	updateView( true ); //true: Don't modificate the UID !
 }
 
 
@@ -401,10 +401,10 @@ void AbView::slotSwitch(){
 
 void AbView::clearForCategory()
 {
-	OContactAccess::List::Iterator it;
+	Opie::OPimContactAccess::List::Iterator it;
 	// Now remove all contacts with wrong category if any category selected
 
-	OContactAccess::List allList = m_list;
+	Opie::OPimContactAccess::List allList = m_list;
 	if ( m_curr_category != -1 ){
 		for ( it = allList.begin(); it != allList.end(); ++it ){
 			if ( !contactCompare( *it, m_curr_category ) ){
@@ -416,9 +416,9 @@ void AbView::clearForCategory()
 
 }
 
-bool AbView::contactCompare( const OContact &cnt, int category )
+bool AbView::contactCompare( const Opie::OPimContact &cnt, int category )
 {
-	//	qWarning ("bool AbView::contactCompare( const OContact &cnt, %d )", category);
+	//	qWarning ("bool AbView::contactCompare( const Opie::OPimContact &cnt, %d )", category);
 
 	bool returnMe;
 	QArray<int> cats;

@@ -32,7 +32,7 @@ AbLabel::~AbLabel()
 {
 }
 
-void AbLabel::setContacts( const OContactAccess::List& viewList )
+void AbLabel::setContacts( const Opie::OPimContactAccess::List& viewList )
 {
 	m_viewList = viewList;
 	if (m_viewList.count() != 0){
@@ -48,7 +48,7 @@ void AbLabel::setContacts( const OContactAccess::List& viewList )
 
 int AbLabel::currentEntry_UID()
 {
-	OContact contact = currentEntry();
+	Opie::OPimContact contact = currentEntry();
 
 	if ( contact.isEmpty() )
 		return 0;
@@ -56,12 +56,12 @@ int AbLabel::currentEntry_UID()
 		return ( contact.uid() );
 }
 
-OContact AbLabel::currentEntry()
+Opie::OPimContact AbLabel::currentEntry()
 {
 	if ( ! m_empty )
 		return ( *m_itCurContact );
 	else
-		return OContact();
+		return Opie::OPimContact();
 }
 
 
@@ -109,7 +109,7 @@ void AbLabel::keyPressEvent( QKeyEvent *e )
 				scrollBy( 0, -(visibleHeight()-20) );
 			else {
 				--m_itCurContact;
-				if ( *m_itCurContact != OContact() )
+				if ( *m_itCurContact != Opie::OPimContact() )
 					sync();
 				else
 					m_itCurContact = m_viewList.end();
@@ -118,7 +118,7 @@ void AbLabel::keyPressEvent( QKeyEvent *e )
 			break;
 		case Qt::Key_Down:
 			qWarning( "DOWN..");
-// 			qWarning( "visible: %d, content: %d",visibleHeight(),contentsHeight()); 
+// 			qWarning( "visible: %d, content: %d",visibleHeight(),contentsHeight());
 // 			qWarning( "value: %d; barMaxValue: %d", verticalScrollBar()->value()
 // 				  , verticalScrollBar()->maxValue() );
 			if ( ( visibleHeight() < contentsHeight() ) &&
@@ -126,7 +126,7 @@ void AbLabel::keyPressEvent( QKeyEvent *e )
 				scrollBy( 0, visibleHeight()-20 );
 			else {
 				++m_itCurContact;
-				if ( *m_itCurContact != OContact() )
+				if ( *m_itCurContact != Opie::OPimContact() )
 					sync();
 				else
 					m_itCurContact = m_viewList.begin();
