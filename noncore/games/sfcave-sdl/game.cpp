@@ -69,7 +69,11 @@ void Game :: init()
 
 void Game :: handleKeys( SDL_KeyboardEvent &key )
 {
-	if ( !replay && key.keysym.sym == SDLK_SPACE )
+	if ( !replay && 
+   	     (key.keysym.sym == SDLK_SPACE ||
+   	     key.keysym.sym == SDLK_KP_ENTER ||
+   	     key.keysym.sym == SDLK_RETURN ||
+   	     key.keysym.sym == SDLK_UP) )
 	{
 		if ( key.type == SDL_KEYDOWN )
 		{
