@@ -212,7 +212,7 @@ Disse muligheder er primært givet til brug under udvikling og test af Opie syst
     <name>SyncAuthentication</name>
     <message>
         <source>Sync Connection</source>
-        <translation>Sync Forbindelse</translation>
+        <translation>Synkroniserings-forbindelse</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade.</source>
