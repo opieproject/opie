@@ -493,6 +493,7 @@ OKeyConfigManager::OKeyConfigManager( Opie::Core::OConfig* conf,
 OKeyConfigManager::~OKeyConfigManager() {
     if ( m_grab )
         QPEApplication::ungrabKeyboard();
+    delete m_map;
 }
 
 /**
@@ -511,12 +512,14 @@ void OKeyConfigManager::load() {
      */
     int key, mod;
     for( OKeyConfigItem::List::Iterator it = m_keys.begin(); it != m_keys.end(); ++it ) {
-        key = m_conf->readNumEntry( (*it).configKey()+"key", (*it).defaultKeyPair().keycode()  );
-        mod = m_conf->readNumEntry( (*it).configKey()+"mod", (*it).defaultKeyPair().modifier() );
+        key = m_conf->readNumEntry( (*it).configKey()+"key",
+                                    (*it).defaultKeyPair().keycode()  );
+        mod = m_conf->readNumEntry( (*it).configKey()+"mod",
+                                    (*it).defaultKeyPair().modifier() );
         OKeyPair okey( key, mod );
 
         if (  !m_blackKeys.contains( okey ) && key != -1  && mod != -1 )
-            (*it).setKeyPair( OKeyPair(key, mod) );
+            (*it).setKeyPair( okey );
         else
             (*it).setKeyPair( OKeyPair::emptyKey() );
     }
@@ -685,6 +688,9 @@ bool OKeyConfigManager::eventFilter( QObject* obj, QEvent* ev) {
     if ( !obj->isWidgetType() )
         return false;
 
+    /*
+     * check  if we care for the event
+     */
     if ( (ev->type() != QEvent::KeyPress||!testEventMask(MaskPressed)) &&
         (ev->type() != QEvent::KeyRelease||!testEventMask(MaskReleased)) )
         return false;
