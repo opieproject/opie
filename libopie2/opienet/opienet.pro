@@ -4,14 +4,15 @@ DESTDIR     = $(OPIEDIR)/lib
 HEADERS     = 802_11_user.h       \
               dhcp.h              \
               udp_ports.h         \
-              wireless.h          \
+              wireless.15.h       \
+              wireless.16.h       \
               odebugmapper.h      \
               omanufacturerdb.h   \
               onetutils.h         \
               onetwork.h          \
               opcap.h             \
               ostation.h
-SOURCES     = odebugmapper.cpp       \
+SOURCES     = odebugmapper.cpp    \
               omanufacturerdb.cpp \
               onetutils.cpp       \
               onetwork.cpp        \
@@ -32,3 +33,4 @@ LIBS        += -lpcap
 contains( platform, x11 ) {
   LIBS        += -L$(OPIEDIR)/lib -Wl,-rpath,$(OPIEDIR)/lib 
 }
+

@@ -1,7 +1,7 @@
 /*
                              This file is part of the Opie Project
-                             Copyright (C) 2003 by Michael 'Mickey' Lauer <mickey@Vanille.de>
-              =.
+                             Copyright (C) 2003-2004 by Michael 'Mickey' Lauer
+              =.             <mickey@Vanille.de>
             .=l.
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
@@ -582,8 +582,15 @@ void OWirelessNetworkInterface::dumpInformation() const
 {
     odebug << "OWirelessNetworkInterface::() -------------- dumping information block ----------------" << oendl;
 
-    qDebug( " - driver's idea of maximum throughput is %d bps = %d byte/s = %d Kb/s = %f.2 Mb/s", _range.throughput, _range.throughput / 8, _range.throughput / 8 / 1024, float( _range.throughput ) / 8.0 / 1024.0 / 1024.0 );
-    qDebug( " - driver for '%s' has been compiled against WE V%d (source=V%d)", name(), _range.we_version_compiled, _range.we_version_source );
+    qDebug( " - driver's idea of maximum throughput is %d bps = %d byte/s = %d Kb/s = %f.2 Mb/s", 
+            _range.throughput, _range.throughput / 8, _range.throughput / 8 / 1024, float( _range.throughput ) / 8.0 / 1024.0 / 1024.0 );
+    qDebug( " - driver for '%s' (V%d) has been compiled against WE V%d",
+             name(), _range.we_version_source, _range.we_version_compiled );
+             
+    if ( _range.we_version_compiled != WIRELESS_EXT )
+    {
+        owarn << "Version mismatch! WE_DRIVER = " << _range.we_version_compiled << " and WE_OPIENET = " << WIRELESS_EXT << oendl;
+    }
 
     odebug << "OWirelessNetworkInterface::() ---------------------------------------------------------" << oendl;
 }
@@ -965,10 +972,24 @@ OStationList* OWirelessNetworkInterface::scanNetwork()
 
 
 int OWirelessNetworkInterface::signalStrength() const
-{
-    int max = _range.max_qual.level;
-    odebug << "signalStrength(): max quality seems to be " << max << "dBM" << oendl;
-    return 50;
+{   
+    iw_statistics stat;
+    ::memset( &stat, 0, sizeof stat );
+    _iwr.u.data.pointer = (char*) &stat;
+    _iwr.u.data.flags = 0;
+    _iwr.u.data.length = sizeof stat;
+    
+    if ( !wioctl( SIOCGIWSTATS ) )
+    {
+        return -1;
+    }
+   
+    int max = _range.max_qual.qual;
+    int cur = stat.qual.qual;
+    int lev = stat.qual.level; //FIXME: Do something with them?
+    int noi = stat.qual.noise; //FIXME: Do something with them?
+    
+    return cur*100/max;
 }
 
 

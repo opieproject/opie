@@ -31,7 +31,17 @@
 #ifndef ONETWORK_H
 #define ONETWORK_H
 
-#include "wireless.h"
+#if !defined( OPIE_WE_VERSION )
+#error Need to define a wireless extension version to build against!
+#endif
+
+#if OPIE_WE_VERSION == 15
+#include "wireless.15.h"
+#endif
+
+#if OPIE_WE_VERSION == 16
+#include "wireless.16.h"
+#endif
 
 /* OPIE */
 
