@@ -279,7 +279,7 @@ OTodoAccess::List MainWindow::list()const {
 }
 OTodoAccess::List MainWindow::sorted( bool asc, int sortOrder ) {
     int cat = 0;
-    if ( m_curCat == tr("All Categories") )
+    if ( m_curCat != tr("All Categories") )
         cat = currentCatId();
 
     int filter = 1;
@@ -293,7 +293,7 @@ OTodoAccess::List MainWindow::sorted( bool asc, int sortOrder ) {
 }
 OTodoAccess::List MainWindow::sorted( bool asc, int sortOrder, int addFilter) {
     int cat = 0;
-    if ( m_curCat == tr("All Categories") )
+    if ( m_curCat != tr("All Categories") )
         cat = currentCatId();
 
     return m_todoMgr.sorted(asc, sortOrder, addFilter,  cat );
