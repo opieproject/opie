@@ -197,7 +197,7 @@ void InstallDlg::slotDisplayAvailSpace( const QString &destination )
         }
     }
 
-    // Display available space (if known)
+    // Display available space
     m_availSpace->setText( space );
 }
 
@@ -227,7 +227,10 @@ void InstallDlg::slotBtnStart()
     m_btnStart->setText( tr( "Abort" ) );
     m_btnStart->setIconSet( Resource::loadPixmap( "close" ) );
 
-    m_packman->executeCommand( m_command[ 0 ], m_packages[ 0 ], m_destination->currentText(), this,
+    QString dest;
+    if ( m_destination )
+        dest = m_destination->currentText();
+    m_packman->executeCommand( m_command[ 0 ], m_packages[ 0 ], dest, this,
                                SLOT(slotOutput(OProcess*,char*,int)), SLOT(slotErrors(OProcess*,char*,int)),
                                SLOT(slotFinished(OProcess*)), true );
 }
