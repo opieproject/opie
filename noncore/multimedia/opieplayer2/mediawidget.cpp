@@ -72,7 +72,7 @@ MediaWidget::Button MediaWidget::setupButton( const SkinButtonInfo &buttonInfo, 
 
 QBitmap MediaWidget::setupButtonMask( const Command &command, const QString &fileName )
 {
-    QBitmap mask( fileName );
+    QBitmap mask( Resource::findPixmap( fileName ) );
     if ( mask.isNull() )
         return mask;
 
@@ -105,7 +105,7 @@ void MediaWidget::loadSkin( const SkinButtonInfo *skinInfo, uint buttonCount, co
     buttonDownImage = QImage( Resource::loadImage( QString( "%1/skin%2_down" ).arg( skinPath ).arg( fileNameInfix ) ) );
 
     setupButtons( skinInfo, buttonCount,
-                  QPEApplication::qpeDir()  + "/pics/" + skinPath + QString::fromLatin1( "/skin%1_mask_" ).arg( fileNameInfix ), buttonUpImage.size() );
+                  skinPath + QString::fromLatin1( "/skin%1_mask_" ).arg( fileNameInfix ), buttonUpImage.size() );
 }
 
 void MediaWidget::closeEvent( QCloseEvent * )
