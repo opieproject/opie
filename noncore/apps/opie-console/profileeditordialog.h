@@ -26,22 +26,19 @@ public:
 	QString prof_type();
 
 	QString conn_device();
-	int conn_baud();
-	int conn_parity();
-	int conn_databits();
-	int conn_stopbits();
-	int conn_flow();
 
 	QString term_type();
 
 public slots:
-	void slotOk();
+	void accept();
+	//void slotOk();
 	void slotCancel();
 
 	void slotDevice(int id);
 
 private:
-    //void initUI();
+    void initUI();
+
     MetaFactory* m_fact;
     EditBase* m_base;
     QTabWidget* m_tab;

@@ -65,17 +65,47 @@ static QWidget *factory_modem(QWidget *parent)
 	return device_frame;
 }
 
+// Something like that must be called upon plugin_plugin->save()
+//void save_modem()
+//{
+//	// special settings
+//	p.writeEntry("Device", dlg.conn_device());
+//	p.writeEntry("Baud", dlg.conn_baud());
+//	p.writeEntry("Parity", dlg.conn_parity());
+//	p.writeEntry("DataBits", dlg.conn_databits());
+//	p.writeEntry("StopBits", dlg.conn_stopbits());
+//	p.writeEntry("Flow", dlg.conn_flow());
+//}
+
 ProfileEditorDialog::ProfileEditorDialog( MetaFactory* fact,
                                           const Profile& prof )
     : QTabDialog(0, 0, TRUE), m_fact( fact ), m_prof( prof )
 {
-//    initUI();
-    /* now set the widgets */
+    initUI();
 
+	// Apply current profile
+	// plugin_plugin->load(profile);
+	// ... (reset profile name line edit etc.)
 }
 
 ProfileEditorDialog::ProfileEditorDialog( MetaFactory* fact )
     : QTabDialog(0, 0, TRUE), m_fact( fact )
+{
+	// Default profile
+	m_prof = Profile("serial", QString::null, Profile::Black, Profile::White, Profile::VT102);
+
+	initUI();
+
+	// Apply current profile
+	// plugin_plugin->load(profile);
+}
+
+Profile ProfileEditorDialog::profile() const
+{
+	return m_prof;
+}
+
+void ProfileEditorDialog::initUI()
 {
 	QWidget *tabterm, *tabconn, *tabprof;
 
@@ -174,6 +204,8 @@ ProfileEditorDialog::ProfileEditorDialog( MetaFactory* fact )
 	QCheckBox *conv_inbound = new QCheckBox(QObject::tr("Inbound"), tabterm);
 	QCheckBox *conv_outbound = new QCheckBox(QObject::tr("Outbound"), tabterm);
 
+	size_small->setChecked(true);
+
 	// layouting
 
 	QVBoxLayout *vbox3 = new QVBoxLayout(tabprof, 2);
@@ -225,7 +257,7 @@ ProfileEditorDialog::ProfileEditorDialog( MetaFactory* fact )
 	setOkButton(QObject::tr("OK"));
 	setCancelButton(QObject::tr("Cancel"));
 
-	connect(this, SIGNAL(applyButtonPressed()), SLOT(slotOk()));
+	//connect(this, SIGNAL(applyButtonPressed()), SLOT(slotOk()));
 	connect(this, SIGNAL(defaultButtonPressed()), SLOT(slotOk()));
 	connect(this, SIGNAL(cancelButtonPressed()), SLOT(slotCancel()));
 
@@ -243,10 +275,15 @@ void ProfileEditorDialog::slotDevice(int id)
 	plugin_plugin = m_fact->newConfigWidget(prof_type(), plugin_base);
 	plugin_layout->add(plugin_plugin);
 
+	// Reload profile associated to device, including e.g. conn_device()
+	// m_prof = plugin_plugin->profile()
+	// or, keeping the profile name: m_prof->reload(plugin_plugin->profile())
+
 	plugin_plugin->show();
+	// This would be: plugin_plugin->widget()->show();
 }
 
-void ProfileEditorDialog::slotOk()
+void ProfileEditorDialog::accept()
 {
 	if(prof_name().isEmpty())
 	{
@@ -256,7 +293,10 @@ void ProfileEditorDialog::slotOk()
 		return;
 	}
 
-	accept();
+	// Save profile and plugin profile
+	//if(plugin_plugin) plugin_plugin->save();
+
+	QDialog::accept();
 }
 
 void ProfileEditorDialog::slotCancel()
@@ -271,18 +311,9 @@ QString ProfileEditorDialog::prof_name()
 
 QString ProfileEditorDialog::prof_type()
 {
-	switch(device_box->currentItem())
-	{
-		case 0:
-			return "serial";
-			break;
-		case 1:
-			return "irda";
-			break;
-		case 2:
-			return "modem";
-			break;
-	}
+	QStringList w = m_fact->configWidgets();
+	for(QStringList::Iterator it = w.begin(); it != w.end(); it++)
+		if(device_box->currentText() == m_fact->name((*it))) return (*it);
 
 	return QString::null;
 }
@@ -290,32 +321,7 @@ QString ProfileEditorDialog::prof_type()
 QString ProfileEditorDialog::conn_device()
 {
 	//return frame_device_line->text();
-	return "serial";
-}
-
-int ProfileEditorDialog::conn_baud()
-{
-	return speed_box->currentText().toInt();
-}
-
-int ProfileEditorDialog::conn_parity()
-{
-	return 0;
-}
-
-int ProfileEditorDialog::conn_databits()
-{
-	return 0;
-}
-
-int ProfileEditorDialog::conn_stopbits()
-{
-	return 0;
-}
-
-int ProfileEditorDialog::conn_flow()
-{
-	return 0;
+	return "/dev/ttyS0";
 }
 
 QString ProfileEditorDialog::term_type()

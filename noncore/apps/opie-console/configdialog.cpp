@@ -64,7 +64,12 @@ void ConfigDialog::slotRemove() {
 }
 
 void ConfigDialog::slotEdit() {
-	ProfileEditorDialog dlg(new MetaFactory());
+	Profile p;
+
+	// Load profile
+	// p = currentItem()->profile();
+
+	ProfileEditorDialog dlg(new MetaFactory(), p);
 
 	dlg.setCaption("Edit Connection Profile");
 	dlg.showMaximized();
@@ -80,8 +85,6 @@ void ConfigDialog::slotEdit() {
 
 
 void ConfigDialog::slotAdd() {
-	qWarning("ConfigDialog::slotAdd");
-
 	ProfileEditorDialog dlg(new MetaFactory());
 
 	dlg.setCaption("New Connection");
@@ -90,23 +93,13 @@ void ConfigDialog::slotAdd() {
 
 	if(ret == QDialog::Accepted)
 	{
-		// defaults
-		int profile = Profile::VT102;
-
+		// TODO: Move into general profile save part
 		// assignments
-		QString type = dlg.term_type();
-		if(type == "VT102") profile = Profile::VT102;
+		//QString type = dlg.term_type();
+		//if(type == "VT102") profile = Profile::VT102;
 
-		// new profile
-		Profile p(dlg.prof_name(), dlg.prof_type(), Profile::White, Profile::Black, profile);
-
-		// special settings
-		p.writeEntry("Device", dlg.conn_device());
-		p.writeEntry("Baud", dlg.conn_baud());
-		p.writeEntry("Parity", dlg.conn_parity());
-		p.writeEntry("DataBits", dlg.conn_databits());
-		p.writeEntry("StopBits", dlg.conn_stopbits());
-		p.writeEntry("Flow", dlg.conn_flow());
+		// get profile from editor
+		Profile p = dlg.profile();
 
 		new ConfigListItem(lstView, p);
 	}
