@@ -5,6 +5,7 @@
 	* Launcher: Support a static background pixmap (mickeyl)
 	* LauncherSettings: Choose whether to have a static background pixmap (mickeyl)
 	* PackageManager supports the 'lists_dir' ipkg configuration option (drw)
+	* Added hi-res inline images for large resolution devices (drw)
 
 	Fixed Bugs
 	----------
@@ -21,9 +22,12 @@
 	* #1556 - Start to look for sound files in /opt/QtPalmtop/sounds (zecke)
 	* #1558 - Fixed opie-login breaking opie startup (mickeyl)
 	* #1570 - Confirmation needed befor Restore a backup and overwrite local data (ar)
+	* #1599 - Security - change recommendation for opie-multiauth to opie-securityplugin (gints)
 	* #1604 - Checkbook crashes on startup (drw)
 	* n.a.  - PackageManager - fixed where last package in status file was not shown as installed when it should be (drw)
 	* n.a.  - Netsystemtime - fixed UI to prevent error dialog from displaying when it shouldn't, get rid of some compiler warnings
+	* n.a.  - PackageManager - fix bug where lists_dir was not being honored at startup (drw)
+	* n.a.  - PackageManager - provide default value for lists_dir when none is entered in configuration dialog (drw)
 
 	Internal
 	--------
