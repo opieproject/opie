@@ -23,4 +23,5 @@ class DingWidget : public QWidget
 
 	private:
 		void parseInfo( QStringList& , QString&, QString& );
+		QString queryword;
 };

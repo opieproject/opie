@@ -32,6 +32,7 @@
 
 DingWidget::DingWidget(QWidget *parent, QString word, QTextBrowser *browser_top, QTextBrowser *browser_bottom) : QWidget(parent)
 {
+	queryword = word;
   	QString opie_dir = getenv("OPIEDIR");
 	QFile file( opie_dir+"/noncore/apps/odict/eng_ita.dic" );
 	QStringList lines;
@@ -57,16 +58,21 @@ DingWidget::DingWidget(QWidget *parent, QString word, QTextBrowser *browser_top,
 
 void DingWidget::parseInfo( QStringList &lines, QString &top, QString &bottom )
 {
-	QRegExp reg( "\\" );
+	QRegExp reg_div( "\\" );
+	QRegExp reg_word( queryword );
+	QString substitute = "<b>"+queryword+"</b>";
 	QStringList toplist, bottomlist;
 	for( QStringList::Iterator it = lines.begin() ; it != lines.end() ; ++it )
 	{
 		QString current = *it;
-		toplist.append(  current.left( current.find(reg) ) );
-		bottomlist.append(  current.right( current.length() - current.find(reg) - 1 ) );
+        QString temp = current.left( current.find(reg_div) );
+		temp.replace( reg_word, substitute );
+		toplist.append( temp );
+		temp =  current.right( current.length() - current.find(reg_div) - 1 );
+		temp.replace( reg_word, substitute );
+		bottomlist.append( temp );
 	}
 		
-
 	//thats it, the lists are rendered. Lets put them in one string
 	bottom = bottomlist.join( "\n" );
 	top = toplist.join( "\n" );
