@@ -186,6 +186,10 @@
         <source>Custom</source>
         <translation>Benutzerdefiniert</translation>
     </message>
+    <message>
+        <source>Command List</source>
+        <translation>Befehlsliste</translation>
+    </message>
 </context>
 <context>
     <name>PlayListSelection</name>
