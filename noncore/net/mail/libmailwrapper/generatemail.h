@@ -6,6 +6,8 @@
 #include <qobject.h>
 #include <libetpan/clist.h>
 
+#include <opie2/osmart_pointer.h>
+
 class Mail;
 class RecMail;
 class Attachment;
@@ -34,8 +36,8 @@ protected:
     mailmime *buildFilePart(const QString&filename,const QString&mimetype,const QString&content);
     mailmime *buildTxtPart(const QString&str );
     mailimf_mailbox *newMailbox(const QString&name,const QString&mail );
-    mailimf_fields *createImfFields(const Mail &mail );
-    mailmime *createMimeMail(const Mail&mail );
+    mailimf_fields *createImfFields(const Opie::osmart_pointer<Mail> &mail );
+    mailmime *createMimeMail(const Opie::osmart_pointer<Mail>&mail );
     clist *createRcptList( mailimf_fields *fields );
 
     static const char* USER_AGENT;

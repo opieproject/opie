@@ -8,6 +8,8 @@
 
 #include "settings.h"
 
+#include <opie2/osmart_pointer.h>
+
 class Attachment
 {
 public:
@@ -26,7 +28,7 @@ protected:
 
 };
 
-class Mail
+class Mail:public Opie::oref_count
 {
 public:
     Mail();

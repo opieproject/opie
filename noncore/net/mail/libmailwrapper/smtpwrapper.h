@@ -11,6 +11,8 @@
 #include "settings.h"
 #include "generatemail.h"
 
+#include <opie2/osmart_pointer.h>
+
 class SMTPaccount;
 class AbstractMail;
 
@@ -21,7 +23,7 @@ class SMTPwrapper : public Generatemail
 public:
     SMTPwrapper(SMTPaccount * aSmtp);
     virtual ~SMTPwrapper();
-    void sendMail(const Mail& mail,bool later=false );
+    void sendMail(const Opie::osmart_pointer<Mail>& mail,bool later=false );
     bool flushOutbox();
 
     static progressMailSend*sendProgress;

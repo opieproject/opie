@@ -45,7 +45,9 @@ IMAPFolder::IMAPFolder(const QString&name,const QString&sep, bool select,bool no
 {
   // Decode IMAP foldername
   nameDisplay = IMAPFolder::decodeFolderName( name );
+  /*
   qDebug( "folder " + name + " - displayed as " + nameDisplay );
+  */
     prefix = aprefix;
 
     if (prefix.length()>0) {
@@ -145,7 +147,7 @@ QString IMAPFolder::decodeFolderName( const QString &name )
 }
 
 Mail::Mail()
-    :name(""), mail(""), to(""), cc(""), bcc(""), reply(""), subject(""), message("")
+    :Opie::oref_count(),name(""), mail(""), to(""), cc(""), bcc(""), reply(""), subject(""), message("")
 {
 }
 

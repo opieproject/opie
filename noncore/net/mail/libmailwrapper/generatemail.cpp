@@ -5,7 +5,7 @@
 
 #include <qt.h>
 
-const char* Generatemail::USER_AGENT="OpieMail v0.5";
+const char* Generatemail::USER_AGENT="OpieMail v0.6";
 
 Generatemail::Generatemail()
 {
@@ -279,7 +279,7 @@ mailimf_mailbox *Generatemail::newMailbox(const QString&name, const QString&mail
                                 strdup( mail.latin1() ) );
 }
 
-mailimf_fields *Generatemail::createImfFields(const Mail&mail )
+mailimf_fields *Generatemail::createImfFields(const Opie::osmart_pointer<Mail>&mail )
 {
     mailimf_fields *fields = NULL;
     mailimf_field *xmailer = NULL;
@@ -287,17 +287,17 @@ mailimf_fields *Generatemail::createImfFields(const Mail&mail )
     mailimf_mailbox_list *from=0;
     mailimf_address_list *to=0, *cc=0, *bcc=0, *reply=0;
     clist*in_reply_to = 0;
-    char *subject = strdup( mail.getSubject().latin1() );
+    char *subject = strdup( mail->getSubject().latin1() );
     int err;
     int res = 1;
 
-    sender = newMailbox( mail.getName(), mail.getMail() );
+    sender = newMailbox( mail->getName(), mail->getMail() );
     if ( sender == NULL ) {
         res = 0;
     }
 
     if (res) {
-        fromBox = newMailbox( mail.getName(), mail.getMail() );
+        fromBox = newMailbox( mail->getName(), mail->getMail() );
     }
     if ( fromBox == NULL ) {
         res = 0;
@@ -317,17 +317,17 @@ mailimf_fields *Generatemail::createImfFields(const Mail&mail )
         }
     }
 
-    if (res) to = parseAddresses( mail.getTo() );
-    if (res) cc = parseAddresses( mail.getCC() );
-    if (res) bcc = parseAddresses( mail.getBCC() );
-    if (res) reply = parseAddresses( mail.getReply() );
+    if (res) to = parseAddresses( mail->getTo() );
+    if (res) cc = parseAddresses( mail->getCC() );
+    if (res) bcc = parseAddresses( mail->getBCC() );
+    if (res) reply = parseAddresses( mail->getReply() );
 
-    if (res && mail.Inreply().count()>0) {
+    if (res && mail->Inreply().count()>0) {
         in_reply_to = clist_new();
         char*c_reply;
         unsigned int nsize = 0;
-        for (QStringList::ConstIterator it=mail.Inreply().begin();
-             it != mail.Inreply().end();++it) {
+        for (QStringList::ConstIterator it=mail->Inreply().begin();
+             it != mail->Inreply().end();++it) {
             if ((*it).isEmpty())
                 continue;
             QString h((*it));
@@ -399,7 +399,7 @@ mailimf_fields *Generatemail::createImfFields(const Mail&mail )
     return fields;
 }
 
-mailmime *Generatemail::createMimeMail(const Mail &mail ) {
+mailmime *Generatemail::createMimeMail(const Opie::osmart_pointer<Mail> &mail ) {
     mailmime *message, *txtPart;
     mailimf_fields *fields;
     int err;
@@ -414,7 +414,7 @@ mailmime *Generatemail::createMimeMail(const Mail &mail ) {
 
     mailmime_set_imf_fields( message, fields );
 
-    txtPart = buildTxtPart( mail.getMessage() );
+    txtPart = buildTxtPart( mail->getMessage() );
 
     if ( txtPart == NULL )
         goto err_free_message;
@@ -423,7 +423,7 @@ mailmime *Generatemail::createMimeMail(const Mail &mail ) {
     if ( err != MAILIMF_NO_ERROR )
         goto err_free_txtPart;
 
-    addFileParts( message, mail.getAttachments() );
+    addFileParts( message, mail->getAttachments() );
 
     return message;         // Success :)
 

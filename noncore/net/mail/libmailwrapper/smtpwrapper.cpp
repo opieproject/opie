@@ -312,7 +312,7 @@ int SMTPwrapper::smtpSend(char*from,clist*rcpts,const char*data,size_t size )
     return result;
 }
 
-void SMTPwrapper::sendMail(const Mail&mail,bool later )
+void SMTPwrapper::sendMail(const Opie::osmart_pointer<Mail>&mail,bool later )
 {
     mailmime * mimeMail;
 
