@@ -40,11 +40,11 @@
     </message>
     <message>
         <source>Switch to Local</source>
-        <translation>Basculer sur &quot;Local&quot;</translation>
+        <translation type="obsolete">Basculer sur &quot;Local&quot;</translation>
     </message>
     <message>
         <source>Switch to Remote</source>
-        <translation>Basculer sur &quot;Distant&quot;</translation>
+        <translation type="obsolete">Basculer sur &quot;Distant&quot;</translation>
     </message>
     <message>
         <source>Size</source>
@@ -289,6 +289,22 @@ et tout son contenu ?</translation>
         <source>AdvancedFm :: </source>
         <translation>Explorateur :: </translation>
     </message>
+    <message>
+        <source> kB free</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Switch to View 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Switch to View 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not Yet Implemented</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Output</name>
@@ -380,6 +396,10 @@ Terminé
     <message>
         <source>Error setting mode</source>
         <translation>Erreur lors du changement de mode</translation>
+    </message>
+    <message>
+        <source>filePermissions</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -40,11 +40,11 @@
     </message>
     <message>
         <source>Switch to Local</source>
-        <translation>Lokalansicht</translation>
+        <translation type="obsolete">Lokalansicht</translation>
     </message>
     <message>
         <source>Switch to Remote</source>
-        <translation>Fernansicht</translation>
+        <translation type="obsolete">Fernansicht</translation>
     </message>
     <message>
         <source>Size</source>
@@ -272,7 +272,19 @@ and all it&apos;s contents ?</source>
     </message>
     <message>
         <source> kB free</source>
-        <translation type="obsolete">kB frei</translation>
+        <translation type="unfinished">kB frei</translation>
+    </message>
+    <message>
+        <source>Switch to View 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Switch to View 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not Yet Implemented</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -363,6 +375,10 @@ Fertig</translation>
     <message>
         <source>Error setting mode</source>
         <translation>Fehler beim Setzen des Modus</translation>
+    </message>
+    <message>
+        <source>filePermissions</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

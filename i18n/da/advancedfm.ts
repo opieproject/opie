@@ -107,11 +107,11 @@
     </message>
     <message>
         <source>Switch to Local</source>
-        <translation>Skift til lokal</translation>
+        <translation type="obsolete">Skift til lokal</translation>
     </message>
     <message>
         <source>Switch to Remote</source>
-        <translation>Skift til ekstern</translation>
+        <translation type="obsolete">Skift til ekstern</translation>
     </message>
     <message>
         <source>Size</source>
@@ -275,11 +275,23 @@ og alt hvad der er i den?</translation>
     </message>
     <message>
         <source> kB free</source>
-        <translation type="obsolete">kB ledig</translation>
+        <translation type="unfinished">kB ledig</translation>
     </message>
     <message>
         <source>Copy &apos;%1&apos; As</source>
         <translation type="obsolete">Kopier &apos;%1&apos; som</translation>
+    </message>
+    <message>
+        <source>Switch to View 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Switch to View 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not Yet Implemented</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -372,6 +384,10 @@ Afsluttet
     <message>
         <source>Error setting mode</source>
         <translation>Der opstod fejl under indstilling af rettigheder</translation>
+    </message>
+    <message>
+        <source>filePermissions</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -107,11 +107,11 @@
     </message>
     <message>
         <source>Switch to Local</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Switch to Remote</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Size</source>
@@ -261,11 +261,23 @@ and all it&apos;s contents ?</source>
     </message>
     <message>
         <source> kB free</source>
-        <translation type="obsolete">FOO</translation>
+        <translation type="unfinished">FOO</translation>
     </message>
     <message>
         <source>Copy &apos;%1&apos; As</source>
         <translation type="obsolete">FOO</translation>
+    </message>
+    <message>
+        <source>Switch to View 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Switch to View 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not Yet Implemented</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -355,6 +367,10 @@ Finished
     <message>
         <source>Error setting mode</source>
         <translation>FOO</translation>
+    </message>
+    <message>
+        <source>filePermissions</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -100,11 +100,11 @@
     </message>
     <message>
         <source>Switch to Local</source>
-        <translation>Cambia su Locale</translation>
+        <translation type="obsolete">Cambia su Locale</translation>
     </message>
     <message>
         <source>Switch to Remote</source>
-        <translation>Cambia su Remoto</translation>
+        <translation type="obsolete">Cambia su Remoto</translation>
     </message>
     <message>
         <source>Size</source>
@@ -274,6 +274,22 @@ e tutto il suo contenuto ?</translation>
         <source>AdvancedFm :: </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source> kB free</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Switch to View 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Switch to View 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not Yet Implemented</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Output</name>
@@ -365,6 +381,10 @@ Terminato
     <message>
         <source>Error setting mode</source>
         <translation>Errore impostazioni permessi</translation>
+    </message>
+    <message>
+        <source>filePermissions</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -39,11 +39,11 @@
     </message>
     <message>
         <source>Switch to Local</source>
-        <translation>Preklopi na lokalen</translation>
+        <translation type="obsolete">Preklopi na lokalen</translation>
     </message>
     <message>
         <source>Switch to Remote</source>
-        <translation>Preklopi na oddaljen</translation>
+        <translation type="obsolete">Preklopi na oddaljen</translation>
     </message>
     <message>
         <source>Size</source>
@@ -276,6 +276,22 @@ and all it&apos;s contents ?</source>
         <source>AdvancedFm :: </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source> kB free</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Switch to View 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Switch to View 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not Yet Implemented</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Output</name>
@@ -363,6 +379,10 @@ Finished
     </message>
     <message>
         <source>Error setting mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>filePermissions</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

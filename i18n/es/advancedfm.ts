@@ -39,11 +39,11 @@
     </message>
     <message>
         <source>Switch to Local</source>
-        <translation>Pasar a local</translation>
+        <translation type="obsolete">Pasar a local</translation>
     </message>
     <message>
         <source>Switch to Remote</source>
-        <translation>Pasar a remoto</translation>
+        <translation type="obsolete">Pasar a remoto</translation>
     </message>
     <message>
         <source>Size</source>
@@ -276,11 +276,23 @@ de %1?</translation>
     </message>
     <message>
         <source> kB free</source>
-        <translation type="obsolete"> kB libres</translation>
+        <translation type="unfinished"> kB libres</translation>
     </message>
     <message>
         <source>Copy &apos;%1&apos; As</source>
         <translation type="obsolete">Copiar &quot;%1&quot; como</translation>
+    </message>
+    <message>
+        <source>Switch to View 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Switch to View 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not Yet Implemented</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -373,6 +385,10 @@ Finalizado
     <message>
         <source>Error setting mode</source>
         <translation>Error fijando modo</translation>
+    </message>
+    <message>
+        <source>filePermissions</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
