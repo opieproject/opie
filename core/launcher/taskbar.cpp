@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -16,33 +16,31 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-*********************************************************************/
+**********************************************************************/
 
 #include "startmenu.h"
 #include "inputmethods.h"
 #include "runningappbar.h"
 #include "systray.h"
-#include "calibrate.h"
 #include "wait.h"
 #include "appicons.h"
 
 #include "taskbar.h"
-#include "desktop.h"
+#include "server.h"
 
-#include <qpe/qpeapplication.h>
-#include <qpe/qcopenvelope_qws.h>
-#include <qpe/global.h>
-
-#if defined( QT_QWS_SL5XXX ) || defined( QT_QWS_IPAQ ) || defined( QT_QWS_RAMSES)
-#include <qpe/custom.h>
+#include <qtopia/qpeapplication.h>
+#ifdef QWS
+#include <qtopia/qcopenvelope_qws.h>
 #endif
-
-#include <opie/odevice.h>
+#include <qtopia/global.h>
+#include <qtopia/custom.h>
 
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qtimer.h>
+#ifdef QWS
 #include <qwindowsystem_qws.h>
+#endif
 #include <qwidgetstack.h>
 
 #if defined( Q_WS_QWS )
@@ -50,21 +48,6 @@
 #include <qgfx_qws.h>
 #endif
 
-
-using namespace Opie;
-
-static Global::Command builtins[] = {
-
-#if defined(QT_QWS_IPAQ) || defined(QT_QWS_CASSIOPEIA) || defined(QT_QWS_SL5XXX) || defined(QT_QWS_RAMSES)
-        { "calibrate",          TaskBar::calibrate, 1, 0 },
-#endif
-#if !defined(QT_QWS_CASSIOPEIA)
-  { "shutdown",           Global::shutdown,   1, 0 },
-//  { "run",                run,      1, 0 },
-#endif
-
-  { 0,            TaskBar::calibrate, 0, 0 },
-};
 
 static bool initNumLock()
 {
@@ -74,41 +57,113 @@ static bool initNumLock()
     return FALSE;
 }
 
+//---------------------------------------------------------------------------
+
+class SafeMode : public QWidget
+{
+    Q_OBJECT
+public:
+    SafeMode( QWidget *parent ) : QWidget( parent ), menu(0)
+    {
+	message = tr("Safe Mode");
+	QFont f( font() );
+	f.setWeight( QFont::Bold );
+	setFont( f );
+    }
+
+    void mousePressEvent( QMouseEvent *);
+    QSize sizeHint() const;
+    void paintEvent( QPaintEvent* );
+
+private slots:
+    void action(int i);
+
+private:
+    QString message;
+    QPopupMenu *menu;
+};
+
+void SafeMode::mousePressEvent( QMouseEvent *)
+{
+    if ( !menu ) {
+	menu = new QPopupMenu(this);
+	menu->insertItem( tr("Plugin Manager..."), 0 );
+	menu->insertItem( tr("Restart Qtopia"), 1 );
+	menu->insertItem( tr("Help..."), 2 );
+	connect(menu, SIGNAL(activated(int)), this, SLOT(action(int)));
+    }
+    QPoint curPos = mapToGlobal( QPoint(0,0) );
+    QSize sh = menu->sizeHint();
+    menu->popup( curPos-QPoint((sh.width()-width())/2,sh.height()) );
+}
+
+void SafeMode::action(int i)
+{
+    switch (i) {
+	case 0:
+	    Global::execute( "pluginmanager" );
+	    break;
+	case 1:
+	    Global::restart();
+	    break;
+	case 2:
+	    Global::execute( "helpbrowser", "safemode.html" );
+	    break;
+    }
+}
+
+QSize SafeMode::sizeHint() const
+{
+    QFontMetrics fm = fontMetrics();
+
+    return QSize( fm.width(message), fm.height() );
+}
+
+void SafeMode::paintEvent( QPaintEvent* )
+{
+    QPainter p(this);
+    p.drawText( rect(), AlignCenter, message );
+}
+
+//---------------------------------------------------------------------------
+
 class LockKeyState : public QWidget
 {
 public:
     LockKeyState( QWidget *parent ) :
-  QWidget(parent),
-  nl(initNumLock()), cl(FALSE)
+	QWidget(parent),
+	nl(initNumLock()), cl(FALSE)
     {
-  nl_pm = Resource::loadPixmap("numlock");
-  cl_pm = Resource::loadPixmap("capslock");
+	nl_pm = Resource::loadPixmap("numlock");
+	cl_pm = Resource::loadPixmap("capslock");
     }
     QSize sizeHint() const
     {
-  return QSize(nl_pm.width()+2,nl_pm.width()+nl_pm.height()+1);
+	return QSize(nl_pm.width()+2,nl_pm.width()+nl_pm.height()+1);
     }
     void toggleNumLockState()
     {
-  nl = !nl; repaint();
+	nl = !nl; repaint();
     }
     void toggleCapsLockState()
     {
-  cl = !cl; repaint();
+	cl = !cl; repaint();
     }
     void paintEvent( QPaintEvent * )
     {
-  int y = (height()-sizeHint().height())/2;
-  QPainter p(this);
-  if ( nl )
-      p.drawPixmap(1,y,nl_pm);
-  if ( cl )
-      p.drawPixmap(1,y+nl_pm.height()+1,cl_pm);
+	int y = (height()-sizeHint().height())/2;
+	QPainter p(this);
+	if ( nl )
+	    p.drawPixmap(1,y,nl_pm);
+	if ( cl )
+	    p.drawPixmap(1,y+nl_pm.height()+1,cl_pm);
     }
 private:
     QPixmap nl_pm, cl_pm;
     bool nl, cl;
 };
+
+//---------------------------------------------------------------------------
 
 TaskBar::~TaskBar()
 {
@@ -117,13 +172,13 @@ TaskBar::~TaskBar()
 
 TaskBar::TaskBar() : QHBox(0, 0, WStyle_Customize | WStyle_Tool | WStyle_StaysOnTop | WGroupLeader)
 {
-    Global::setBuiltinCommands(builtins);
-
     sm = new StartMenu( this );
+    connect( sm, SIGNAL(tabSelected(const QString&)), this,
+	    SIGNAL(tabSelected(const QString&)) );
 
     inputMethods = new InputMethods( this );
     connect( inputMethods, SIGNAL(inputToggled(bool)),
-       this, SLOT(calcMaxWindowRect()) );
+	     this, SLOT(calcMaxWindowRect()) );
 
     stack = new QWidgetStack( this );
     stack->setSizePolicy( QSizePolicy( QSizePolicy::Expanding, QSizePolicy::Minimum ) );
@@ -137,21 +192,34 @@ TaskBar::TaskBar() : QHBox(0, 0, WStyle_Customize | WStyle_Tool | WStyle_StaysOn
 
     sysTray = new SysTray( this );
 
-    // ## make customizable in some way? 
+    /* ### FIXME plugin loader and safe mode */
+#if 0
+    if (PluginLoader::inSafeMode())
+	(void)new SafeMode( this );
+#endif
+
+    // ## make customizable in some way?
+#ifdef QT_QWS_CUSTOM
     lockState = new LockKeyState( this );
+#else
+    lockState = 0;
+#endif
 
 #if defined(Q_WS_QWS)
 #if !defined(QT_NO_COP)
     QCopChannel *channel = new QCopChannel( "QPE/TaskBar", this );
     connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
-  this, SLOT(receive(const QCString&, const QByteArray&)) );
+	this, SLOT(receive(const QCString&, const QByteArray&)) );
 #endif
 #endif
     waitTimer = new QTimer( this );
     connect( waitTimer, SIGNAL( timeout() ), this, SLOT( stopWait() ) );
     clearer = new QTimer( this );
     QObject::connect(clearer, SIGNAL(timeout()), SLOT(clearStatusBar()));
-    QObject::connect(clearer, SIGNAL(timeout()), sysTray, SLOT(show()));
+
+    connect( qApp, SIGNAL(symbol()), this, SLOT(toggleSymbolInput()) );
+    connect( qApp, SIGNAL(numLockStateToggle()), this, SLOT(toggleNumLockState()) );
+    connect( qApp, SIGNAL(capsLockStateToggle()), this, SLOT(toggleCapsLockState()) );
 }
 
 void TaskBar::setStatusMessage( const QString &text )
@@ -171,7 +239,9 @@ void TaskBar::clearStatusBar()
 {
     label->clear();
     stack->raiseWidget(runningAppBar);
-     //  stack->raiseWidget( mru );
+    if ( sysTray )
+	sysTray->show();
+    //     stack->raiseWidget( mru );
 }
 
 void TaskBar::startWait()
@@ -181,24 +251,36 @@ void TaskBar::startWait()
     waitTimer->start( 10 * 1000, true );
 }
 
-void TaskBar::stopWait(const QString& /*app*/)
+void TaskBar::stopWait(const QString&)
 {
     waitTimer->stop();
-    //mru->addTask(sm->execToLink(app));
     waitIcon->setWaiting( false );
 }
 
 void TaskBar::stopWait()
 {
     waitTimer->stop();
-
     waitIcon->setWaiting( false );
 }
 
+/*
+ * This resizeEvent will be captured by
+ * the ServerInterface and it'll layout
+ * and calc rect. Now if we go from bigger
+ * to smaller screen the SysTray is out of
+ * bounds and repaint() won't trigger an Event
+ */
 void TaskBar::resizeEvent( QResizeEvent *e )
 {
+    if ( sysTray )
+        sysTray->hide();
+
     QHBox::resizeEvent( e );
-    calcMaxWindowRect();
+
+    if ( sysTray )
+        sysTray->show();
+
+    qWarning("TaskBar::resize event");
 }
 
 void TaskBar::styleChange( QStyle &s )
@@ -209,24 +291,26 @@ void TaskBar::styleChange( QStyle &s )
 
 void TaskBar::calcMaxWindowRect()
 {
+    /*
 #ifdef Q_WS_QWS
     QRect wr;
     int displayWidth  = qApp->desktop()->width();
     QRect ir = inputMethods->inputRect();
     if ( ir.isValid() ) {
-  wr.setCoords( 0, 0, displayWidth-1, ir.top()-1 );
+	wr.setCoords( 0, 0, displayWidth-1, ir.top()-1 );
     } else {
-  wr.setCoords( 0, 0, displayWidth-1, y()-1 );
+	wr.setCoords( 0, 0, displayWidth-1, y()-1 );
     }
 
-#if QT_VERSION < 300
+#if QT_VERSION < 0x030000
     QWSServer::setMaxWindowRect( qt_screen->mapToDevice(wr,
-  QSize(qt_screen->width(),qt_screen->height()))
-  );
+	QSize(qt_screen->width(),qt_screen->height()))
+	);
 #else
     QWSServer::setMaxWindowRect( wr );
 #endif
 #endif
+    */
 }
 
 void TaskBar::receive( const QCString &msg, const QByteArray &data )
@@ -237,55 +321,34 @@ void TaskBar::receive( const QCString &msg, const QByteArray &data )
         stream >> text;
         setStatusMessage( text );
     } else if ( msg == "hideInputMethod()" ) {
-        inputMethods->hideInputMethod();
+	inputMethods->hideInputMethod();
     } else if ( msg == "showInputMethod()" ) {
-        inputMethods->showInputMethod();
+	inputMethods->showInputMethod();
+    } else if ( msg == "showInputMethod(QString)" ) {
+        QString name;
+        stream >> name;
+	inputMethods->showInputMethod(name);
     } else if ( msg == "reloadInputMethods()" ) {
-        inputMethods->loadInputMethods();
-    } else if ( msg == "toggleInputMethod()" ) {
-        inputMethods->shown() ? inputMethods->hideInputMethod() : inputMethods->showInputMethod();
-    } else if ( msg == "reloadApps()" ) {
-        sm->reloadApps();
+	inputMethods->loadInputMethods();
     } else if ( msg == "reloadApplets()" ) {
-        sysTray->clearApplets();
-        sysTray->addApplets();
-        sm->reloadApplets();
-    } else if ( msg == "soundAlarm()" ) {
-        DesktopApplication::soundAlarm ( );
-    }
-    else if ( msg == "setLed(int,bool)" ) {
-        int led, status;
-        stream >> led >> status;
-
-        QValueList <OLed> ll = ODevice::inst ( )-> ledList ( );
-        if ( ll. count ( ))	{
-            OLed l = ll. contains ( Led_Mail ) ? Led_Mail : ll [0];
-            bool canblink = ODevice::inst ( )-> ledStateList ( l ). contains ( Led_BlinkSlow );
-
-            ODevice::inst ( )-> setLedState ( l, status ? ( canblink ? Led_BlinkSlow : Led_On ) : Led_Off );
-        }
-    }
-    else if ( msg == "toggleMenu()" ) {
-        if ( sm-> launchMenu-> isVisible ( ))
-            sm-> launch ( );
-        else {
-            QCopEnvelope e ( "QPE/System", "toggleApplicationMenu()" );
-        }
-    }
-    else if ( msg == "toggleStartMenu()" ) {
-        sm-> launch ( );
-    }
+	sysTray->clearApplets();
+	sm->createMenu();
+	sysTray->addApplets();
+    }else if ( msg == "toggleMenu()" ) {
+        if ( sm-> launchMenu-> isVisible() )
+            sm-> launch();
+        else
+            QCopEnvelope e( "QPE/System", "toggleApplicationMenu()" );
+    }else if ( msg == "toggleStartMenu()" )
+        sm->launch();
 }
 
-QWidget *TaskBar::calibrate(bool)
+void TaskBar::setApplicationState( const QString &name, ServerInterface::ApplicationState state )
 {
-#ifdef Q_WS_QWS
-    Calibrate *c = new Calibrate;
-    c->show();
-    return c;
-#else
-    return 0;
-#endif
+    if ( state == ServerInterface::Launching )
+	runningAppBar->applicationLaunched( name );
+    else if ( state == ServerInterface::Terminated )
+	runningAppBar->applicationTerminated( name );
 }
 
 void TaskBar::toggleNumLockState()
@@ -300,16 +363,12 @@ void TaskBar::toggleCapsLockState()
 
 void TaskBar::toggleSymbolInput()
 {
-    if ( inputMethods->currentShown() == "Unicode" ) {
-  inputMethods->hideInputMethod();
+    QString unicodeInput = qApp->translate( "InputMethods", "Unicode" );
+    if ( inputMethods->currentShown() == unicodeInput ) {
+	inputMethods->hideInputMethod();
     } else {
-  inputMethods->showInputMethod("Unicode");
+	inputMethods->showInputMethod( unicodeInput );
     }
 }
 
-bool TaskBar::recoverMemory()
-{
-    //mru->quitOldApps() is no longer supported
-    return true;
-}
-
+#include "taskbar.moc"
