@@ -1,4 +1,4 @@
-Files: bin/drawpad apps/Applications/drawpad.desktop pics/drawpad
+Files: bin/drawpad apps/Applications/drawpad.desktop pics/drawpad pics/drawpad/DrawPad.png
 Package: opie-drawpad
 Priority: optional
 Section: opie/applications

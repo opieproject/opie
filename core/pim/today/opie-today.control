@@ -1,4 +1,4 @@
-Files: bin/today apps/Applications/today.desktop pics/today/today_logo.png pics/today/config.png pics/today/mail.png
+Files: bin/today apps/Applications/today.desktop pics/today/today_logo.png pics/today/config.png pics/today/mail.png pics/today/today_icon.png
 Priority: optional
 Section: opie/applications
 Maintainer: Maximilian Reiﬂ <max.reiss@gmx.de>
