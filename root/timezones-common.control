@@ -3,7 +3,6 @@ Files: root/usr/share/zoneinfo/iso3166.tab root/usr/share/zoneinfo/zone.tab
 Priority: optional
 Section: base
 Maintainer: Holger Schurig
-Provides: timezones
 Version: 1.0.1-2
 Architecture: noarch
 Description: Common timezone data
