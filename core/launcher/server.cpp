@@ -107,7 +107,7 @@ static Global::Command builtins[] = {
 #endif
 
     /* FIXME defines need to be defined*/
-#if defined(QPE_NEED_CALIBRATION)
+#if !defined(OPIE_NO_BUILTIN_CALIBRATE)
         { "calibrate",          calibrate,	        1, 0 }, // No tr
 #endif
 #if !defined(OPIE_NO_BUILTIN_SHUTDOWN)
