@@ -305,8 +305,8 @@ void Clock::slotSetAlarm()
         minute = setAlarmDlg->Minute_Slider->value();
         snoozeTime=setAlarmDlg->SnoozeSlider->value();
         if(ampm) {
-        	if ( hour == 12 )
-        		hour = 0;
+          if ( hour == 12 )
+            hour = 0;
         
             if(setAlarmDlg->Pm_RadioButton->isChecked() && hour < 12 )
                 hour+=12;
@@ -387,8 +387,17 @@ void Clock::appMessage(const QCString& msg, const QByteArray& data)
     bSound=TRUE;
     qDebug("Message received in clock");
    if ( msg == "alarm(QDateTime,int)" ) {
+       Config config( "qpe" );
+       config.setGroup("Time");
+       if(config.readBoolEntry("mp3Alarm",0)){
+            
+           QCopEnvelope e("QPE/Application/opieplayer","setDocument(QString)");
+           e<<config.readEntry("mp3File","");
+       } else {
+
        Sound::soundAlarm();
        stopTimer = startTimer( timerStay);
+    }
    }
    show();
    raise();

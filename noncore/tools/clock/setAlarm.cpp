@@ -14,8 +14,10 @@
 
 #include "setAlarm.h"
 
-#include <qpe/config.h>
+#include <opie/ofileselector.h>
+#include <opie/ofiledialog.h>
 
+#include <qpe/config.h>
 #include <qpe/qpeapplication.h>
 #include <qstring.h>
 #include <qlabel.h>
@@ -28,6 +30,7 @@
 #include <qtooltip.h>
 #include <qwhatsthis.h>
 #include <qbuttongroup.h>
+#include <qcheckbox.h>
 
 Set_Alarm::Set_Alarm( QWidget* parent,  const char* name, bool modal, WFlags fl )
     : QDialog( parent, name, modal, fl )
@@ -36,7 +39,7 @@ Set_Alarm::Set_Alarm( QWidget* parent,  const char* name, bool modal, WFlags fl 
   setName( "Set_Alarm" );
     resize( 240, 101 ); 
     setMaximumSize( QSize( 240, 320 ) );
-    move(0,48);
+    move(0,45);
     setCaption( tr( "Set Alarm" ) );
     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
 
@@ -97,6 +100,12 @@ Set_Alarm::Set_Alarm( QWidget* parent,  const char* name, bool modal, WFlags fl 
     
     Set_AlarmLayout->addMultiCellWidget(Pm_RadioButton, 1, 2, 3, 4 );
 
+    useMp3Check = new QCheckBox ( tr( "mp3 alarm" ), this );
+    useMp3Check-> setFocusPolicy ( QWidget::NoFocus );
+    Set_AlarmLayout->addMultiCellWidget( useMp3Check, 2, 3, 3, 4 );
+
+
+
     TextLabel3 = new QLabel( this, "TextLabel3" );
     TextLabel3->setText( tr( "Snooze Delay\n(minutes)" ) );
 
@@ -114,7 +123,7 @@ Set_Alarm::Set_Alarm( QWidget* parent,  const char* name, bool modal, WFlags fl 
     SnoozeSlider->setOrientation( QSlider::Horizontal );
     connect(SnoozeSlider, SIGNAL(  valueChanged(int)),this,SLOT(slotChangeSnooze(int)));
 
-    Set_AlarmLayout->addMultiCellWidget( SnoozeSlider, 3, 3, 3, 4 );
+    Set_AlarmLayout->addMultiCellWidget( SnoozeSlider, 4, 4, 1, 2 );
 
     Config config( "qpe" );
     config.setGroup("Time");
@@ -148,7 +157,11 @@ Set_Alarm::Set_Alarm( QWidget* parent,  const char* name, bool modal, WFlags fl 
         Am_RadioButton->hide();
         Pm_RadioButton->hide();
     }
+    if( config.readBoolEntry("mp3Alarm") )
+        useMp3Check->setChecked(true);        
+
     // signals and slots connections
+    connect(useMp3Check,SIGNAL(toggled(bool)),this,SLOT(slotChangemp3CkeckBox(bool)));
 }
 
 Set_Alarm::~Set_Alarm()
@@ -185,4 +198,20 @@ void Set_Alarm::pmButtonToggled(bool b)
 
 void Set_Alarm::cleanUp()
 {
+}
+
+void Set_Alarm::slotChangemp3CkeckBox(bool b) {
+    Config config( "qpe" );
+    config.setGroup("Time");
+    if(b) {
+        QString str = OFileDialog::getOpenFileName( 2,"/");//,"", "*", this );
+        if(!str.isEmpty() ) {
+            qDebug(str);
+            config.writeEntry("mp3Alarm",1);
+            config.writeEntry("mp3File",str);
+        }
+    } else {
+        config.writeEntry("mp3Alarm",0);
+        config.writeEntry("mp3File","");
+    }
 }

@@ -26,7 +26,7 @@ class QLabel;
 class QRadioButton;
 class QSlider;
 class QButtonGroup;
-
+class QCheckBox;
 class Set_Alarm : public QDialog
 { 
     Q_OBJECT
@@ -43,7 +43,9 @@ public:
 
     QRadioButton* Pm_RadioButton;
     QButtonGroup *ButtonGroup1;
+    QCheckBox *useMp3Check;
 protected slots:
+        void slotChangemp3CkeckBox(bool);   
     void slotChangeHour(int);
     void slotChangeMinute(int);
     void slotChangeSnooze(int);
