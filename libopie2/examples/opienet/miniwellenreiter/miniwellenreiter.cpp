@@ -165,7 +165,7 @@ public slots:
     if ( beacon )
     {
         OWaveLanManagementSSID* ssid = static_cast<OWaveLanManagementSSID*>( p->child( "802.11 SSID" ) );
-        QString essid = ssid ? ssid->ID() : "<unknown>";
+        QString essid = ssid ? ssid->ID() : QString::fromLatin1( "<unknown>" );
 
         if ( stations.find( essid ) )
             stations[essid]->beacons++;
