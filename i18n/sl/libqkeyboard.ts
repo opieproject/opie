@@ -3,7 +3,7 @@
     <name>InputMethods</name>
     <message>
         <source>Keyboard</source>
-        <translation>Tipkovnica</translation>
+        <translation type="obsolete">Tipkovnica</translation>
     </message>
 </context>
 </TS>

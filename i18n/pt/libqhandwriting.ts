@@ -41,7 +41,7 @@
     <name>InputMethods</name>
     <message>
         <source>Handwriting</source>
-        <translation>Escrita Manual</translation>
+        <translation type="obsolete">Escrita Manual</translation>
     </message>
 </context>
 <context>

@@ -30,5 +30,25 @@
         <source>, Track: </source>
         <translation>Trilha: </translation>
     </message>
+    <message>
+        <source>Info: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Genre: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bitrate: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>URL: </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

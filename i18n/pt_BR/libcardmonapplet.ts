@@ -4,11 +4,11 @@
     <name>CardMonitor</name>
     <message>
         <source>&amp;OK</source>
-        <translation>&amp;OK</translation>
+        <translation type="obsolete">&amp;OK</translation>
     </message>
     <message>
         <source>CardMonitor</source>
-        <translation>Monitor de Cartão</translation>
+        <translation type="obsolete">Monitor de Cartão</translation>
     </message>
     <message>
         <source>Eject card</source>

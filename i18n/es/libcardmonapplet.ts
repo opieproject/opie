@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>CardMonitor</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>CF/PCMCIA card eject failed!</source>
@@ -23,7 +23,7 @@
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>SD/MMC card eject failed!</source>

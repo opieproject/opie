@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>CardMonitor</source>
-        <translation>MonitorKart</translation>
+        <translation type="obsolete">MonitorKart</translation>
     </message>
     <message>
         <source>Card eject failed!</source>
@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Eject SD/ MMC card</source>

@@ -78,7 +78,7 @@
     <message>
         <source>Do you want to apply your changes?
 </source>
-        <translation>Quiere aplicar los cambios?</translation>
+        <translation type="obsolete">Quiere aplicar los cambios?</translation>
     </message>
     <message>
         <source>Open File</source>
@@ -95,6 +95,30 @@
     <message>
         <source>Default</source>
         <translation>Por omisión</translation>
+    </message>
+    <message>
+        <source>Font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Apply</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restart</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to restart Opie now?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

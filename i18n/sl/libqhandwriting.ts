@@ -41,7 +41,7 @@
     <name>InputMethods</name>
     <message>
         <source>Handwriting</source>
-        <translation>Ročno pisanje</translation>
+        <translation type="obsolete">Ročno pisanje</translation>
     </message>
 </context>
 <context>

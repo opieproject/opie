@@ -57,5 +57,13 @@
         <source>Turn Three Cards</source>
         <translation>Volver tres cartas</translation>
     </message>
+    <message>
+        <source>Chicane</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Harp</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

@@ -150,5 +150,33 @@
         <source>Key_Mail</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Recording Limit:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>30</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>20</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>15</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>10</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>seconds</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

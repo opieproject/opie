@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>CardMonitor</source>
-        <translation>NadzorKartic</translation>
+        <translation type="obsolete">NadzorKartic</translation>
     </message>
     <message>
         <source>Card eject failed!</source>
@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation>&amp;Vredu</translation>
+        <translation type="obsolete">&amp;Vredu</translation>
     </message>
     <message>
         <source>Eject SD/ MMC card</source>

@@ -40,7 +40,7 @@
     <message>
         <source>Do you want to apply your changes?
 </source>
-        <translation>Czy chcesz zatwierdzic zmiany?
+        <translation type="obsolete">Czy chcesz zatwierdzic zmiany?
 </translation>
     </message>
     <message>
@@ -83,6 +83,30 @@
     </message>
     <message>
         <source>Default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished">Rozmiar</translation>
+    </message>
+    <message>
+        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Apply</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restart</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to restart Opie now?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -82,5 +82,17 @@
         <translation>Duración cabezadita
 (minutos)</translation>
     </message>
+    <message>
+        <source>mp3 alarm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

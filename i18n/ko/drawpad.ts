@@ -164,6 +164,10 @@ the current page?</source>
 all the pages?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Anti-Aliasing</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DrawPadCanvas</name>

@@ -42,7 +42,7 @@
     <name>InputMethods</name>
     <message>
         <source>Handwriting</source>
-        <translation>Escrita</translation>
+        <translation type="obsolete">Escrita</translation>
     </message>
 </context>
 <context>

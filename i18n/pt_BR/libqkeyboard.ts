@@ -4,7 +4,7 @@
     <name>InputMethods</name>
     <message>
         <source>Keyboard</source>
-        <translation>Teclado</translation>
+        <translation type="obsolete">Teclado</translation>
     </message>
 </context>
 </TS>

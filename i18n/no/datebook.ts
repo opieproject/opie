@@ -183,6 +183,10 @@ Quit anyway?</source>
         <source>Beam</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>This is an all day event.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookSettings</name>
@@ -235,6 +239,37 @@ Quit anyway?</source>
     </message>
     <message>
         <source> minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Misc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Row style:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Medium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Large</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jump to current time (dayview)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DateBookWeek</name>
+    <message>
+        <source>This is an all day event.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

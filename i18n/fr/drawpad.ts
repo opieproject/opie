@@ -167,6 +167,10 @@ all the pages?</source>
         <translation>Voulez-vous supprimer
 toutes les pages ?</translation>
     </message>
+    <message>
+        <source>Anti-Aliasing</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DrawPadCanvas</name>

@@ -167,6 +167,10 @@ all the pages?</source>
         <translation type="unfinished">Ali želite izbrisati
 vse strani?</translation>
     </message>
+    <message>
+        <source>Anti-Aliasing</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DrawPadCanvas</name>

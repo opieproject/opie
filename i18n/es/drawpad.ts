@@ -125,53 +125,99 @@
         <source>Insert Text</source>
         <translation>Insertar texto</translation>
     </message>
+    <message>
+        <source>Thumbnail View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thumbnail View...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page Information...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Anti-Aliasing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to clear
+the current page?</source>
+        <translation type="unfinished">¿Quiere limpiar la
+página actual?</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished">Sí</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished">No</translation>
+    </message>
+    <message>
+        <source>Do you want to delete
+the current page?</source>
+        <translation type="unfinished">¿Quiere borrar la
+página actual?</translation>
+    </message>
+    <message>
+        <source>Do you want to delete
+all the pages?</source>
+        <translation type="unfinished">¿Quiere borrar todas
+las páginas?</translation>
+    </message>
 </context>
 <context>
     <name>DrawPadCanvas</name>
     <message>
         <source>Delete All</source>
-        <translation>Borrar todo</translation>
+        <translation type="obsolete">Borrar todo</translation>
     </message>
     <message>
         <source>Do you want to delete
 all the pages?</source>
-        <translation>¿Quiere borrar todas
+        <translation type="obsolete">¿Quiere borrar todas
 las páginas?</translation>
     </message>
     <message>
         <source>Clear Page</source>
-        <translation>Limpiar página</translation>
+        <translation type="obsolete">Limpiar página</translation>
     </message>
     <message>
         <source>Do you want to clear
 the current page?</source>
-        <translation>¿Quiere limpiar la
+        <translation type="obsolete">¿Quiere limpiar la
 página actual?</translation>
     </message>
     <message>
         <source>Delete Page</source>
-        <translation>Borrar página</translation>
+        <translation type="obsolete">Borrar página</translation>
     </message>
     <message>
         <source>Do you want to delete
 the current page?</source>
-        <translation>¿Quiere borrar la
+        <translation type="obsolete">¿Quiere borrar la
 página actual?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Sí</translation>
+        <translation type="obsolete">Sí</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>No</translation>
+        <translation type="obsolete">No</translation>
     </message>
 </context>
 <context>
     <name>ExportDialog</name>
     <message>
         <source>Export</source>
-        <translation>Exportar</translation>
+        <translation type="obsolete">Exportar</translation>
     </message>
     <message>
         <source>Page Selection</source>
@@ -205,12 +251,16 @@ página actual?</translation>
         <source>Format:</source>
         <translation>Formato:</translation>
     </message>
+    <message>
+        <source>DrawPad - Export</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ImportDialog</name>
     <message>
         <source>Import</source>
-        <translation>Importar</translation>
+        <translation type="obsolete">Importar</translation>
     </message>
     <message>
         <source>Automatic preview</source>
@@ -219,6 +269,10 @@ página actual?</translation>
     <message>
         <source>Preview</source>
         <translation>Vistazo</translation>
+    </message>
+    <message>
+        <source>DrawPad - Import</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -229,15 +283,15 @@ página actual?</translation>
     </message>
     <message>
         <source>Page Size</source>
-        <translation>Tamaño página</translation>
+        <translation type="obsolete">Tamaño página</translation>
     </message>
     <message>
         <source>Width :</source>
-        <translation>Ancho:</translation>
+        <translation type="obsolete">Ancho:</translation>
     </message>
     <message>
         <source>Height :</source>
-        <translation>Alto:</translation>
+        <translation type="obsolete">Alto:</translation>
     </message>
     <message>
         <source>Contents</source>
@@ -270,6 +324,57 @@ página actual?</translation>
     <message>
         <source>Fill Color</source>
         <translation>Color relleno</translation>
+    </message>
+    <message>
+        <source>General</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Title:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PageInformationDialog</name>
+    <message>
+        <source>Page Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>General</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Title:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -308,10 +413,58 @@ página actual?</translation>
     </message>
 </context>
 <context>
+    <name>QObject</name>
+    <message>
+        <source>Title:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dimension:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TextToolDialog</name>
     <message>
         <source>Insert Text</source>
         <translation>Insertar texto</translation>
+    </message>
+</context>
+<context>
+    <name>ThumbnailView</name>
+    <message>
+        <source>DrawPad - Thumbnail View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear Page</source>
+        <translation type="unfinished">Limpiar página</translation>
+    </message>
+    <message>
+        <source>Do you want to clear
+the selected page?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished">Sí</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished">No</translation>
+    </message>
+    <message>
+        <source>Delete Page</source>
+        <translation type="unfinished">Borrar página</translation>
+    </message>
+    <message>
+        <source>Do you want to delete
+the selected page?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

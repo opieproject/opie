@@ -169,6 +169,14 @@ Open .desktop file or linked file?</source>
         <source>Linked Document</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>All</source>
+        <translation type="unfinished">Vse</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>fileBrowser</name>

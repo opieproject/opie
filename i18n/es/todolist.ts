@@ -56,6 +56,34 @@
         <source>5 - Very Low</source>
         <translation>5 - Muy baja</translation>
     </message>
+    <message>
+        <source>Progress:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>0%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>20%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>40%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>60%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>80%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>100%</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TodoTable</name>

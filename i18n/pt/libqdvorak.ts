@@ -3,7 +3,7 @@
     <name>InputMethods</name>
     <message>
         <source>Dvorak</source>
-        <translation>Dvorak</translation>
+        <translation type="obsolete">Dvorak</translation>
     </message>
 </context>
 </TS>
