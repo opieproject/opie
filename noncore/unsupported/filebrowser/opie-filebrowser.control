@@ -1,4 +1,4 @@
-Files: bin/filebrowser apps/Applications/filebrowser.desktop
+Files: bin/filebrowser apps/Applications/filebrowser.desktop pics/symlink.png
 Priority: optional
 Section: opie/applications
 Maintainer: Warwick Allison <warwick@trolltech.com>

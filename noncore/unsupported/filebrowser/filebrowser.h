@@ -54,12 +54,19 @@ class FileView : public QListView
 
 public:
     FileView( const QString & dir, QWidget * parent = 0,
-        const char * name = 0 );
+			  const char * name = 0, 
+			  bool hidden = FALSE,
+			  bool symlinks = FALSE );
+
     void    setDir( const QString & dir );
     QString cd(){ return currentDir; }
     QStringList history() const { return dirHistory; }
     bool showingHidden;
 
+	void setShowHidden(bool hidden);
+	void setShowSymlinks(bool symlinks);
+	void setMenuKeepsOpen(bool keepOpen);
+	
 public slots:
     void updateDir();
     void parentDir();
@@ -97,6 +104,9 @@ private:
     InlineEdit * le;
     FileItem   * itemToRename;
     bool         selected;
+    bool		showHidden;
+    bool		showSymlinks;
+	bool menuKeepsOpen;	
 
     bool copyFile( const QString & dest, const QString & src );
 
@@ -120,7 +130,7 @@ public slots:
 private:
     void init(const QString & dir);
     QString      fileToCopy;
-    QPopupMenu * dirMenu, * sortMenu;
+    QPopupMenu * dirMenu, * sortMenu, *viewMenu;
     FileView   * fileView;
     QAction    * pasteAction;
     QAction *lastAction;
@@ -136,10 +146,10 @@ private slots:
     void sortSize();
     void sortType();
     void updateSorting();
-
+	void updateShowHidden();
+	void updateShowSymlinks();
     void updateDirMenu();
     void dirSelected( int id );
-    void showHidden();
 };
 
 #endif

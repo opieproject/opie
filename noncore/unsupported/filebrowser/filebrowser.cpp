@@ -25,6 +25,7 @@
 #include <qpe/global.h>
 #include <qpe/mimetype.h>
 #include <qpe/applnk.h>
+#include <qpe/config.h>
 
 #include <qcopchannel_qws.h>
 #include <qpe/qcopenvelope_qws.h>
@@ -61,8 +62,10 @@ FileItem::FileItem( QListView * parent, const QFileInfo & fi )
 
     MimeType mt(fi.filePath());
 
-    if( fi.isDir() )
-  setText( 3, "directory" );
+	if ( fi.isSymLink() )
+		setText( 3, "symlink" );
+    else if( fi.isDir() )
+		setText( 3, "directory" );
     else if( isLib() )
   setText( 3, "library" );
     else
@@ -83,6 +86,13 @@ FileItem::FileItem( QListView * parent, const QFileInfo & fi )
   pm = mt.pixmap();
     if ( pm.isNull() )
   pm = Resource::loadPixmap("UnknownDocument-14");
+   if( fi.isSymLink() ){
+		// overlay link image
+		QPixmap lnk = Resource::loadPixmap( "symlink" );
+		QPainter painter( &pm );
+		painter.drawPixmap( pm.width()-lnk.width(), pm.height()-lnk.height(), lnk );
+        pm.setMask( pm.createHeuristicMask( FALSE ) );
+    }
     setPixmap(0,pm);
 }
 
@@ -165,21 +175,23 @@ bool FileItem::rename( const QString & name )
 //  FileView
 //
 FileView::FileView( const QString & dir, QWidget * parent,
-          const char * name )
+					const char * name, 
+					bool hidden, bool symlinks )
     : QListView( parent, name ),
       menuTimer( this ),
       le( NULL ),
-      itemToRename( NULL )
+      itemToRename( NULL ),
+      showHidden( hidden ),
+      showSymlinks( symlinks),
+	  menuKeepsOpen( FALSE )
 {
     addColumn( "Name" );
     addColumn( "Date" );
     addColumn( "Size" );
     addColumn( "Type" );
 
-    showingHidden=FALSE;
-
     setMultiSelection( TRUE );
-    header()->hide();
+    //header()->hide();
 
     setColumnWidthMode( 0, Manual );
     setColumnWidthMode( 3, Manual );
@@ -202,7 +214,7 @@ void FileView::resizeEvent( QResizeEvent *e )
     setColumnWidth( 0, width() - 2 * lineWidth() - 20 - columnWidth( 1 ) - columnWidth( 2 ) );
 
     // hide type column, we use it for "sort by type" only
-    setColumnWidth( 3, 0 );
+    //setColumnWidth( 3, 0 );
     QListView::resizeEvent( e );
 }
 
@@ -224,13 +236,16 @@ void FileView::setDir( const QString & dir )
 
 void FileView::generateDir( const QString & dir )
 {
-    QDir d( dir );
+	if(menuKeepsOpen){		
+		cancelMenuTimer();
+    }
+	QDir d( dir );
 
     if( d.exists() && !d.isReadable() ) return;
 
     currentDir = d.canonicalPath();
 
-      if( !showingHidden)
+      if( !showHidden)
     d.setFilter( QDir::Dirs | QDir::Files );
       else
     d.setFilter( QDir::Dirs | QDir::Files |QDir::Hidden | QDir::All);
@@ -248,7 +263,11 @@ void FileView::generateDir( const QString & dir )
       ++it;
       continue;
     }
-    (void) new FileItem( (QListView *) this, *fi );
+ 	if(!showSymlinks && fi->isSymLink()){
+		++it;
+		continue;
+	}
+   (void) new FileItem( (QListView *) this, *fi );
     ++it;
     }
     emit dirChanged();
@@ -570,7 +589,11 @@ void FileView::itemClicked( QListViewItem * i)
 
 void FileView::itemDblClicked( QListViewItem * i)
 {
-    FileItem * t = (FileItem *) i;
+	if(menuKeepsOpen){		
+		cancelMenuTimer();
+	}
+
+	FileItem * t = (FileItem *) i;
 
     if(t == NULL) return;
     if(t->launch() == -1){
@@ -602,7 +625,10 @@ void FileView::contentsMousePressEvent( QMouseEvent * e )
 void FileView::contentsMouseReleaseEvent( QMouseEvent * e )
 {
     QListView::contentsMouseReleaseEvent( e );
-    menuTimer.stop();
+	if(!menuKeepsOpen){		
+		menuTimer.stop();
+	}
+	
 }
 
 void FileView::cancelMenuTimer()
@@ -676,6 +702,21 @@ void FileView::showFileMenu()
 //  FileBrowser
 //
 
+void FileView::setShowHidden(bool hidden)
+{
+	showHidden=hidden;
+}
+
+void FileView::setShowSymlinks(bool symlinks)
+{
+	showSymlinks=symlinks;
+}
+
+void FileView::setMenuKeepsOpen(bool keepOpen)
+{
+	menuKeepsOpen=keepOpen;	
+}
+
 FileBrowser::FileBrowser( QWidget * parent,
               const char * name, WFlags f ) :
     QMainWindow( parent, name, f )
@@ -695,9 +736,19 @@ void FileBrowser::init(const QString & dir)
     setCaption( tr("File Manager") );
     setIcon( Resource::loadPixmap( "filebrowser_icon" ) );
 
-    fileView = new FileView( dir, this );
-    fileView->setAllColumnsShowFocus( TRUE );
+	Config cfg("Filebrowser");
+	cfg.setGroup("View");
+	bool showHidden=(cfg.readEntry("Hidden","FALSE") == "TRUE");
+	bool showSymlinks=(cfg.readEntry("Symlinks","FALSE") == "TRUE");
 
+	cfg.setGroup("Menu");	
+	bool menuKeepsOpen=(cfg.readEntry("KeepOpen", "FALSE") == "TRUE");
+	
+
+    fileView = new FileView( dir, this, 0, showHidden, showSymlinks );
+    fileView->setAllColumnsShowFocus( TRUE );
+	fileView->setMenuKeepsOpen(menuKeepsOpen);
+	
     setCentralWidget( fileView );
     setToolBarsMovable( FALSE );
 
@@ -717,14 +768,18 @@ void FileBrowser::init(const QString & dir)
     sortMenu->insertItem( tr( "by Type "), this, SLOT( sortType() ) );
     sortMenu->insertSeparator();
     sortMenu->insertItem( tr( "Ascending" ), this, SLOT( updateSorting() ) );
-    sortMenu->insertSeparator();
-    sortMenu->insertItem( tr( "Show Hidden "), this, SLOT( showHidden() ) );
-
-//    fileView->showingHidden=FALSE;    
 
     sortMenu->setItemChecked( sortMenu->idAt( 5 ), TRUE );
     sortMenu->setItemChecked( sortMenu->idAt( 0 ), TRUE );
 
+    viewMenu = new QPopupMenu( this);  
+	viewMenu->insertItem( tr( "Hidden"), this, SLOT( updateShowHidden() ) );
+	viewMenu->insertItem( tr( "Symlinks"), this, SLOT( updateShowSymlinks() ) );
+    viewMenu->setItemChecked( viewMenu->idAt( 0 ), showHidden );
+    viewMenu->setItemChecked( viewMenu->idAt( 1 ), showSymlinks );
+
+	menuBar->insertItem( tr("View"), viewMenu );
+    
     toolBar = new QPEToolBar( this );
 
     lastAction = new QAction( tr("Previous dir"), Resource::loadIconSet( "back" ),
@@ -870,17 +925,6 @@ void FileBrowser::updateSorting()
     sortType();
 }
 
-void FileBrowser::showHidden() {
-    if(!fileView->showingHidden) {
-         fileView->showingHidden=TRUE;
-    sortMenu->setItemChecked( sortMenu->idAt( 7),TRUE);
-    } else {
-         fileView->showingHidden=FALSE;
-    sortMenu->setItemChecked( sortMenu->idAt( 7),FALSE);
-    }
-    fileView->updateDir();
-}
-
 void FileView::chPerm() {
     FileItem * i;
     QStringList fl;
@@ -908,4 +952,32 @@ void FileView::chPerm() {
       }
     updateDir();
     }
+}
+
+void FileBrowser::updateShowHidden()
+{
+ 	bool valShowHidden=viewMenu->isItemChecked( viewMenu->idAt( 0 ) );
+ 	valShowHidden=!valShowHidden;
+  	viewMenu->setItemChecked( viewMenu->idAt( 0 ), valShowHidden );
+	fileView->setShowHidden(valShowHidden);
+    
+    Config cfg("Filebrowser");
+    cfg.setGroup("View");
+    cfg.writeEntry("Hidden",valShowHidden?"TRUE":"FALSE");
+
+	fileView->updateDir();
+}
+
+void FileBrowser::updateShowSymlinks()
+{
+ 	bool valShowSymlinks=viewMenu->isItemChecked( viewMenu->idAt( 1 ) );
+ 	valShowSymlinks=!valShowSymlinks;
+  	viewMenu->setItemChecked( viewMenu->idAt( 1 ), valShowSymlinks );
+	fileView->setShowSymlinks(valShowSymlinks);
+
+    Config cfg("Filebrowser");
+    cfg.setGroup("View");
+    cfg.writeEntry("Symlinks",valShowSymlinks?"TRUE":"FALSE");
+
+	fileView->updateDir();
 }
