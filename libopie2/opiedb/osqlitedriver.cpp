@@ -41,9 +41,6 @@
 // is replaced by fromLatin1() (eilers)
 #define __BUGGY_LOCAL8BIT_
 
-	char *regex_raw;
-	regex_t regex_c;
-
 using namespace Opie::DB;
 using namespace Opie::DB::Internal;
 
@@ -89,32 +86,36 @@ void OSQLiteDriver::setOptions( const QStringList& ) {
 /*
  * Functions to patch a regex search into sqlite
  */
-int sqliteRlikeCompare(const char *zPattern, const char *zString){
+int sqliteRlikeCompare(const char *zPattern, const char *zString, sqregex *reg){
 	int res;
-	if (regex_raw == NULL || (strcmp (zPattern, regex_raw) != 0)){
-		if (regex_raw != NULL) {
-		    free(regex_raw);
-		    regfree(&regex_c);
+
+	if (reg->regex_raw == NULL || (strcmp (zPattern, reg->regex_raw) != 0)){
+		if (reg->regex_raw != NULL) {
+		    free(reg->regex_raw);
+		    regfree(&reg->regex_c);
 		}
-		regex_raw = (char *)malloc(strlen(zPattern)+1);
-		strncpy(regex_raw, zPattern, strlen(zPattern)+1);
-		res = regcomp(&regex_c, zPattern, REG_EXTENDED);
+		reg->regex_raw = (char *)malloc(strlen(zPattern)+1);
+		strncpy(reg->regex_raw, zPattern, strlen(zPattern)+1);
+		res = regcomp(&reg->regex_c, zPattern, REG_EXTENDED);
 		if ( res != 0 ) {
 		    printf("Regcomp failed with code %u on string %s\n",res,zPattern);
-		    free(regex_raw);
-		    regex_raw=NULL;
+		    free(reg->regex_raw);
+		    reg->regex_raw=NULL;
 		return 0;
 		}
 	}
-	res = (regexec(&regex_c, zString, 0, NULL, 0)==0);
+	res = (regexec(&reg->regex_c, zString, 0, NULL, 0)==0);
 	return res;
 }
 
 void rlikeFunc(sqlite_func *context, int arg, const char **argv){
-	if( argv[0]==0 || argv[1]==0 ) return;
+	if( argv[0]==0 || argv[1]==0 || argv[2]==0){
+		printf("One of arguments Null!!\n");
+		return;
+	}
 		sqlite_set_result_int(context,
 		sqliteRlikeCompare((const char*)argv[0],
-	(const char*)argv[1]));
+	(const char*)argv[1], (sqregex*)argv[2]));
 }
 
 /*
@@ -135,7 +136,8 @@ bool OSQLiteDriver::open() {
         free( error );
         return false;
     }
-    sqlite_create_function(m_sqlite,"rlike",2,rlikeFunc,NULL);
+    sqreg = (sqregex *)malloc(sizeof(sqreg));
+    sqlite_create_function(m_sqlite,"rlike",3,rlikeFunc,&sqreg);
     return true;
 }
 
@@ -147,9 +149,11 @@ bool OSQLiteDriver::open() {
 bool OSQLiteDriver::close() {
     if (m_sqlite )
         sqlite_close( m_sqlite ), m_sqlite=0l;
-	free(regex_raw);
-	regex_raw=NULL;
-	regfree(&regex_c);
+	if (sqreg->regex_raw != NULL){
+    	    free(sqreg->regex_raw);
+	    sqreg->regex_raw=NULL;
+	    regfree(&sqreg->regex_c);
+	}
     return true;
 }
 

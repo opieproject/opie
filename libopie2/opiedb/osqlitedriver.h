@@ -2,6 +2,7 @@
 #define OSQL_LITE_DRIVER_H
 
 #include <sqlite.h>
+#include <regex.h>
 
 #include "osqldriver.h"
 #include "osqlerror.h"
@@ -10,6 +11,11 @@
 namespace Opie {
 namespace DB {
 namespace Internal {
+
+struct sqregex {
+	char *regex_raw;
+	regex_t regex_c;
+};
 
 class OSQLiteDriver : public OSQLDriver {
     Q_OBJECT
@@ -26,6 +32,7 @@ public:
     OSQLError lastError();
     OSQLResult query( OSQLQuery* );
     OSQLTable::ValueList tables()const;
+
 private:
     OSQLError m_lastE;
     OSQLResult m_result;
@@ -34,6 +41,7 @@ private:
     static int call_back( void*, int, char**, char** );
     QString m_url;
     sqlite *m_sqlite;
+    sqregex *sqreg;
 };
 }
 }
