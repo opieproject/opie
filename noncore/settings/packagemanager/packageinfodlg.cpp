@@ -36,7 +36,7 @@
 
 #include <qpe/resource.h>
 
-#include <opie/otabwidget.h>
+#include <opie2/otabwidget.h>
 
 PackageInfoDlg::PackageInfoDlg( QWidget *parent, OPackageManager *pm, const QString &package )
     : QWidget( 0x0 )

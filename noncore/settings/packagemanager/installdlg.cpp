@@ -45,7 +45,7 @@
 #include <qpe/resource.h>
 #include <qpe/storage.h>
 
-#include <opie/ofiledialog.h>
+#include <opie2/ofiledialog.h>
 
 #include "opackagemanager.h"
 
@@ -275,7 +275,7 @@ void InstallDlg::slotBtnOptions()
     text << "*";
     map.insert( tr( "All" ), text );
 
-    QString filename = OFileDialog::getSaveFileName( 2, "/", "ipkg-output", map );
+    QString filename = Opie::OFileDialog::getSaveFileName( 2, "/", "ipkg-output", map );
     if( !filename.isEmpty() )
     {
         QString currentFileName = QFileInfo( filename ).fileName();

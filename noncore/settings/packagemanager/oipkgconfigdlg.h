@@ -36,7 +36,7 @@
 #include <qdialog.h>
 #include <qlayout.h>
 
-#include <opie/otabwidget.h>
+#include <opie2/otabwidget.h>
 
 #include "oipkg.h"
 

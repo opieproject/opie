@@ -33,8 +33,6 @@
 #include <qmultilineedit.h>
 #include <qwidget.h>
 
-#include <opie/oprocess.h>
-
 #include "opackage.h"
 
 class QPushButton;

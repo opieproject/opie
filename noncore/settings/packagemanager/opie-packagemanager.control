@@ -2,7 +2,7 @@ Package: opie-packagemanager
 Files: plugins/application/libpackagemanager.so* bin/packagemanager pics/packagemanager apps/Settings/packagemanager.desktop
 Priority: optional
 Section: opie/settings
-Depends: task-opie-minimal
+Depends: task-opie-minimal, libopiecore2, libopieui2
 Replaces: packagemanager
 Architecture: arm
 Maintainer: Dan Williams (drw@handhelds.org)

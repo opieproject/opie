@@ -1,7 +1,4 @@
 CONFIG       = qt warn_on release quick-app
-//TEMPLATE     = app
-//CONFIG      += qte warn_on debug
-//DESTDIR      = $(OPIEDIR)/bin
 
 SOURCES      = opackage.cpp        \
                oconfitem.cpp       \
@@ -32,7 +29,7 @@ DEFINES     += HAVE_MKDTEMP
 TARGET       = packagemanager
 INCLUDEPATH += $(OPIEDIR)/include $(IPKGDIR)
 DEPENDPATH  += $(OPIEDIR)/include
-LIBS        += -lqpe -lopie -lipkg
+LIBS        += -lqpe -lopiecore2 -lopieui2 -lipkg
 
 include ( $(OPIEDIR)/include.pro )
 
