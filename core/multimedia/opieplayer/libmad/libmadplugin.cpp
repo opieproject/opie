@@ -293,7 +293,7 @@ int LibMadPlugin::http_read_line(int tcp_sock, char *buf, int size) {
     int offset = 0;
 
     do {
-        if (std::read(tcp_sock, buf + offset, 1) < 0)
+        if (::read(tcp_sock, buf + offset, 1) < 0)
             return -1;
         if (buf[offset] != '\r')    /* Strip \r from answer */
             offset++;
@@ -385,7 +385,7 @@ int LibMadPlugin::http_open(const QString& path ) {
 
         if (QString(http_request).left(9) == "Location:") {
             /* redirect */
-            std::close(tcp_sock);
+            ::close(tcp_sock);
             http_request[strlen(http_request) - 1] = '\0';
             return http_open(&http_request[10]);
         }
