@@ -34,6 +34,7 @@
 	* #1558 - Fixed opie-login breaking opie startup (mickeyl)
 	* #1560 - Fixed Opie-Console picking up the wrong shell (bluelightning)
 	* #1570 - Confirmation needed befor Restore a backup and overwrite local data (ar)
+	* #1591 - Addressbook sortorder changed by clicking on column 0 (eilers)
 	* #1599 - Security - change recommendation for opie-multiauth to opie-securityplugin (gints)
 	* #1604 - Checkbook crashed on startup (drw)
 	* #1608 - Addressbook crashed after search, which may caused by not initialzed member variable (eilers)
