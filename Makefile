@@ -49,6 +49,8 @@ NONCORESETTINGS  =noncore/settings/language noncore/settings/rotation \
 NONCORETOOLS = noncore/tools/calculator noncore/tools/clock \
 	 noncore/tools/remote noncore/tools/opie-sh noncore/apps/advancedfm
 
+NONCORESTYLES = noncore/styles/liquid
+
 GAMES = noncore/games/minesweep noncore/games/solitaire \
 	noncore/games/tetrix noncore/games/wordgame \
 	noncore/games/parashoot noncore/games/snake \
@@ -71,7 +73,7 @@ NONCOMM = noncore/comm/keypebble
 
 APPS=$(LOCALAPPS) $(PIMAPPS)  $(COREAPPS)     \
 	$(COREMULTIMEDIA) $(CORESETTINGS) \
-	$(NONCORESETTINGS) $(NONCORETOOLS) \
+	$(NONCORESETTINGS) $(NONCORETOOLS) $(NONCORESTYLES) \
 	$(NONAPPS) $(NONNET) $(NONMULT) \
 	$(NONCOMM) $(GAMES)
     
