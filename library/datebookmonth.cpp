@@ -29,6 +29,9 @@
 #include <qvaluestack.h>
 #include <qwhatsthis.h>
 
+static const QColor s_colorNormalLight = QColor(255, 150, 150);
+static const QColor s_colorRepeatLight = QColor(150, 150, 255);
+static const QColor s_colorHolidayLight= QColor(150, 255, 150);
 
 DateBookMonthHeader::DateBookMonthHeader( QWidget *parent, const char *name )
     : QHBox( parent, name )
@@ -610,20 +613,20 @@ void DayItemMonth::paint( QPainter *p, const QColorGroup &cg,
 	if (normalAllDay)
 	    if (repeatAllDay) {
 		p->fillRect( 0, 0, cr.width(), cr.height() / 2,
-			colorNormalLight );
+			s_colorNormalLight );
 		p->fillRect( 0, cr.height() / 2, cr.width(), cr.height() / 2,
 			colorRepeatLight );
 	    } else {
 			if (!holidayAllDay) {
 		p->fillRect( 0, 0, cr.width(), cr.height(),
-			colorNormalLight );
+			s_colorNormalLight );
 			} else {
 		p->fillRect( 0, 0, cr.width(), cr.height(),
-			QColor(0,220,0) );
+			s_colorHolidayLight );
 			}
 	    } else if (repeatAllDay) {
 		p->fillRect( 0, 0, cr.width(), cr.height(),
-			colorRepeatLight );
+			s_colorRepeatLight );
 		}
     } else {
 	p->fillRect( 0, 0, cr.width(),
