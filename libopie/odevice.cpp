@@ -19,6 +19,8 @@
 
 #include <qfile.h>
 #include <qtextstream.h>
+#include <qpe/sound.h>
+#include <qpe/resource.h>
 
 
 #include "odevice.h"
@@ -44,8 +46,6 @@ protected:
 	
 public:
 	virtual void alarmSound ( );
-	virtual void keySound ( );
-	virtual void touchSound ( );	
 
 	virtual uint hasLeds ( ) const;
 	virtual OLedState led ( uint which ) const;
@@ -68,9 +68,6 @@ public:
 protected:
 	virtual void buzzer ( int snd );
 };
-
-
-
 
 
 
@@ -145,14 +142,32 @@ OSystem ODevice::system ( )
 
 void ODevice::alarmSound ( )
 {
+#ifndef QT_NO_SOUND
+	static Sound snd ( "alarm" );
+
+	if ( snd. isFinished ( ))
+		snd. play ( );
+#endif
 }
 
 void ODevice::keySound ( )
 {
+#ifndef QT_NO_SOUND
+	static Sound snd ( "keysound" );
+
+	if ( snd. isFinished ( ))
+		snd. play ( );
+#endif
 }
 
 void ODevice::touchSound ( )
 {
+#ifndef QT_NO_SOUND
+	static Sound snd ( "touchsound" );
+
+	if ( snd. isFinished ( ))
+		snd. play ( );
+#endif
 }
 
 uint ODevice::hasLeds ( ) const
@@ -215,9 +230,7 @@ void ODeviceIPAQ::init ( )
 #include <sys/ioctl.h>
 #include <linux/soundcard.h>
 #include <qapplication.h>
-#include <qpe/resource.h>
 #include <qpe/config.h>
-#include <qpe/sound.h>
 
 //#include <linux/h3600_ts.h>  // including kernel headers is evil ...  
 
@@ -274,27 +287,6 @@ void ODeviceIPAQ::alarmSound ( )
 	}
 #endif
 }
-
-void ODeviceIPAQ::touchSound ( )
-{
-#ifndef QT_NO_SOUND
-	static Sound snd ( "touchsound" );
-
-	if ( snd. isFinished ( ))
-		snd. play ( );
-#endif
-}
-
-void ODeviceIPAQ::keySound ( )
-{
-#ifndef QT_NO_SOUND
-	static Sound snd ( "keysound" );
-
-	if ( snd. isFinished ( ))
-		snd. play ( );
-#endif
-}
-
 
 uint ODeviceIPAQ::hasLeds ( ) const
 {

@@ -40,7 +40,7 @@ enum OVendor {
 	OVENDOR_Unknown,
 
 	OVENDOR_HP,
-	OVENDOR_Sharp,
+	OVENDOR_Sharp
 };	
 
 enum OSystem {
