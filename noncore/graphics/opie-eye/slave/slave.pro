@@ -15,6 +15,6 @@ SOURCES = main.cpp gif_slave.cpp   slavereciever.cpp \
 INCLUDEPATH += $(OPIEDIR)/include ../
 DEPENDSPATH += $(OPIEDIR)/include
 
-LIBS += -lqpe -lopiecore2
+LIBS += -lqpe -lopiecore2 -lopiemm2
 
 include ( $(OPIEDIR)/include.pro )
