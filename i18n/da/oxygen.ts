@@ -7,108 +7,108 @@
     </message>
     <message>
         <source>Molecular Weight</source>
-        <translation type="unfinished"></translation>
+        <translation>Molar Masse</translation>
     </message>
     <message>
         <source>Chemical Formula</source>
-        <translation type="unfinished"></translation>
+        <translation>Kemisk Formel</translation>
     </message>
     <message>
         <source>Calculate</source>
-        <translation type="unfinished"></translation>
+        <translation>Beregn</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Slet</translation>
     </message>
     <message>
         <source>Molecular Weight (u):</source>
-        <translation type="unfinished"></translation>
+        <translation>Molar Masse (u):</translation>
     </message>
     <message>
         <source>Elemental Composition (%):</source>
-        <translation type="unfinished"></translation>
+        <translation>Grundstoffernes Komposition (%):</translation>
     </message>
 </context>
 <context>
     <name>OxydataWidget</name>
     <message>
         <source>%1 u</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>%1 J</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>%1 nm</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>%1 K</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Weight:</source>
-        <translation type="unfinished"></translation>
+        <translation>Masse:</translation>
     </message>
     <message>
         <source>Block</source>
-        <translation type="unfinished"></translation>
+        <translation>Blok</translation>
     </message>
     <message>
         <source>Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Gruppe</translation>
     </message>
     <message>
         <source>Electronegativity</source>
-        <translation type="unfinished"></translation>
+        <translation>Elektronegativitet</translation>
     </message>
     <message>
         <source>Atomic radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Atomradius</translation>
     </message>
     <message>
         <source>Ionizationenergie</source>
-        <translation type="unfinished"></translation>
+        <translation>Ioniseringsenergi</translation>
     </message>
     <message>
         <source>Density</source>
-        <translation type="unfinished"></translation>
+        <translation>Densitet</translation>
     </message>
     <message>
         <source>Boilingpoint</source>
-        <translation type="unfinished"></translation>
+        <translation>Kogepunkt</translation>
     </message>
     <message>
         <source>Meltingpoint</source>
-        <translation type="unfinished"></translation>
+        <translation>Smeltepunkt</translation>
     </message>
 </context>
 <context>
     <name>Oxygen</name>
     <message>
         <source>Oxygen</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>PSE</source>
-        <translation type="unfinished"></translation>
+        <translation>GPS</translation>
     </message>
     <message>
         <source>Data</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Calculations</source>
-        <translation type="unfinished"></translation>
+        <translation>Udregninger</translation>
     </message>
 </context>
 <context>
     <name>PSEWidget</name>
     <message>
         <source>Periodic System</source>
-        <translation type="unfinished"></translation>
+        <translation>Periodiske System</translation>
     </message>
 </context>
 <context>
@@ -116,14 +116,15 @@
     <message>
         <source>ERROR: 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>FEJL: 
+</translation>
     </message>
 </context>
 <context>
     <name>dataWidgetUI</name>
     <message>
         <source>Chemical Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Kemiske Data</translation>
     </message>
 </context>
 </TS>
