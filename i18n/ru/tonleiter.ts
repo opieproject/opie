@@ -34,7 +34,7 @@
     </message>
     <message>
         <source>Note</source>
-        <translation>Заметка</translation>
+        <translation>Нота</translation>
     </message>
     <message>
         <source>show</source>
