@@ -46,13 +46,6 @@
 #include <qobject.h>
 #include <qhostaddress.h>
 
-#ifndef IFNAMSIZ
-#define IFNAMSIZ 16
-#endif
-#ifndef IW_MAX_PRIV_DEF
-#define IW_MAX_PRIV_DEF        128
-#endif
-
 // ML: Yeah, I hate to include kernel headers, but it's necessary here
 // ML: Here comes an ugly hack to prevent <linux/wireless.h> including <linux/if.h>
 // ML: which conflicts with the user header <net/if.h>
@@ -60,6 +53,14 @@
 // ML: I will drop Jean a mail on that subject
 
 #include <net/if.h>
+
+#ifndef IFNAMSIZ
+#define IFNAMSIZ 16
+#endif
+#ifndef IW_MAX_PRIV_DEF
+#define IW_MAX_PRIV_DEF        128
+#endif
+
 #define _LINUX_IF_H
 #include <linux/wireless.h>
 
