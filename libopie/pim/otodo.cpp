@@ -274,7 +274,7 @@ QString OTodo::toRichText() const
   QStringList catlist;
 
   // summary
-  text += "<b><h3><img src=\"todo/TodoList\">";
+  text += "<b><h3><img src=\"todo/TodoList\"> ";
   if ( !summary().isEmpty() ) {
       text += Qtopia::escapeString(summary() ).replace(QRegExp( "[\n]"),  "" );
   }
@@ -289,7 +289,7 @@ QString OTodo::toRichText() const
   // priority
   int priorityval = priority();
   text += "<b>" + QObject::tr( "Priority:") +" </b><img src=\"todo/priority" +
-          QString::number( priorityval ) + "\">";
+          QString::number( priorityval ) + "\"> ";
 //  text += "<b>" + QObject::tr( "Priority:") +"</b><img src=\"todo/priority" +
 //          QString::number( priority() ) + "\"><br>";
   switch ( priorityval )

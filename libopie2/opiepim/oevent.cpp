@@ -238,7 +238,7 @@ QString OEvent::toRichText()const {
     QString text, value;
     
     // description
-    text += "<b><h3><img src=\"datebook/DateBook\">";
+    text += "<b><h3><img src=\"datebook/DateBook\"> ";
     if ( !description().isEmpty() ) {
         text += Qtopia::escapeString(description() ).replace(QRegExp( "[\n]"),  "" );
     }
