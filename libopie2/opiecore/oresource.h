@@ -39,10 +39,6 @@
 namespace Opie {
 namespace Core {
 
-static int smallIconSize = -1; // Size of small icons (width & height)
-static int bigIconSize   = -1; // Size of large icons (width & height)
-
-
 class OResource
 {
     public:
@@ -66,7 +62,8 @@ class OResource
         OResource() {}
 
         /**
-         *  Load specified image.
+         * @fn loadImage( const QString &name, Scale scale = NoScale )
+         * @brief Load specified image.
          *
          * @param name - name of pixmap image to load
          * @param scale - scaling (if any) to preform on image
@@ -76,7 +73,8 @@ class OResource
         static QImage loadImage( const QString &name, Scale scale = NoScale );
 
         /**
-         *  Load specified image.
+         * @fn loadPixmap( const QString &name, Scale scale = NoScale )
+         * @brief Load specified image.
          *
          * @param name - name of pixmap image to load
          * @param scale - scaling (if any) to preform on image

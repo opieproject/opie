@@ -39,6 +39,9 @@
 namespace Opie {
 namespace Core {
 
+static int smallIconSize = -1; // Size of small icons (width & height)
+static int bigIconSize   = -1; // Size of large icons (width & height)
+
 QImage OResource::loadImage( const QString &name, Scale scale )
 {
     // Load image
