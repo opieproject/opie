@@ -27,7 +27,6 @@
 #include <qsound.h>
 #include <qpe/sound.h>
 
-#include <qmessagebox.h>
 
 #ifndef QT_NO_SOUND
 
