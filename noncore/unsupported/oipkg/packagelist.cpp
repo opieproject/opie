@@ -176,7 +176,7 @@ void PackageList::readFileEntries( QString filename, QString dest )
   if ( !f.open(IO_ReadOnly) ) return;
   QTextStream *statusStream = new QTextStream( &f );
   while ( !statusStream ->eof() )
-  { 	
+  {
      QString line = statusStream->readLine();
      if ( line.find(QRegExp("[\n\t ]*")) || line == "" )
 			{
@@ -195,6 +195,17 @@ void PackageList::readFileEntries( QString filename, QString dest )
 	  		packEntry << line;
 			};
     }
+  //there might be no nl at the end of the package file
+	if ( ! packEntry.isEmpty() )
+	{
+		Package *p = new Package( packEntry, settings );
+	  if ( p )
+		{
+	      p->setDest( dest );
+	 			insertPackage( p );
+			  packEntry.clear();
+		}
+	}
  	delete statusStream;
   return;
 }
