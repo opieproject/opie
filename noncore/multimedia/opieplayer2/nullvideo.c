@@ -104,35 +104,35 @@ struct opie_frame_s {
   uint8_t           *rgb_dst;
   int                yuv_stride;
   int                stripe_height, stripe_inc;
-  
+ 
   null_driver_t     *output;
 };
 
-static uint32_t null_get_capabilities( vo_driver_t *self ){   
+static uint32_t null_get_capabilities( vo_driver_t *self ){
   null_driver_t* this = (null_driver_t*)self;
   return this->m_capabilities;
 }
 
 static void null_frame_copy (vo_frame_t *vo_img, uint8_t **src) {
   opie_frame_t  *frame = (opie_frame_t *) vo_img ;
- 
+
   vo_img->proc_called = 1;
 
-  if (!frame->output->m_show_video) { 
+  if (!frame->output->m_show_video) {
     /* printf("nullvideo: no video\n");  */
-    return; 
-  } 
+    return;
+  }
 
   if (frame->format == XINE_IMGFMT_YV12) {
     frame->yuv2rgb->yuv2rgb_fun (frame->yuv2rgb, frame->rgb_dst,
-         src[0], src[1], src[2]);
+				 src[0], src[1], src[2]);
   } else {
 
     frame->yuv2rgb->yuy22rgb_fun (frame->yuv2rgb, frame->rgb_dst,
-          src[0]);
-  } 
-  
-  frame->rgb_dst += frame->stripe_inc; 
+				  src[0]);
+  }
+
+  frame->rgb_dst += frame->stripe_inc;
 }
 
 static void null_frame_field (vo_frame_t *vo_img, int which_field) {
@@ -156,7 +156,7 @@ static void null_frame_field (vo_frame_t *vo_img, int which_field) {
 
 
 /* take care of the frame*/
-static void null_frame_dispose( vo_frame_t* vo_img){    
+static void null_frame_dispose( vo_frame_t* vo_img){
   opie_frame_t* frame = (opie_frame_t*)vo_img;
 
   if (frame->data)
@@ -166,41 +166,42 @@ static void null_frame_dispose( vo_frame_t* vo_img){
 
 /* end take care of frames*/
 
-static vo_frame_t* null_alloc_frame( vo_driver_t* self ){    
+static vo_frame_t* null_alloc_frame( vo_driver_t* self ){
 
   null_driver_t* this = (null_driver_t*)self;
   opie_frame_t* frame;
 
-#ifdef LOG  
+#ifdef LOG
   fprintf (stderr, "nullvideo: alloc_frame\n");
-#endif  
+#endif
 
   frame = (opie_frame_t*)malloc ( sizeof(opie_frame_t) );
-  
+
   memset( frame, 0, sizeof( opie_frame_t) );
   memcpy (&frame->sc, &this->sc, sizeof(vo_scale_t));
-  
+
   pthread_mutex_init (&frame->frame.mutex, NULL);
-  
+
   frame->output = this;
-  
+
   /* initialize the frame*/
   frame->frame.driver = self;
   frame->frame.proc_slice = null_frame_copy;
   frame->frame.field = null_frame_field;
   frame->frame.dispose = null_frame_dispose;
-  
+
   /*
    *    colorspace converter for this frame
-   */   
+   */
   frame->yuv2rgb = this->yuv2rgb_factory->create_converter (this->yuv2rgb_factory);
-  
+
   return (vo_frame_t*) frame;
 }
 
 static void null_update_frame_format( vo_driver_t* self, vo_frame_t* img,
-              uint32_t width, uint32_t height,
-              double ratio_code,  int format, int flags ){
+				      uint32_t width, uint32_t height,
+				      double ratio_code,  int format, 
+				      int flags ){
   null_driver_t* this = (null_driver_t*) self;
   opie_frame_t*  frame = (opie_frame_t*)img;
   /* not needed now */
@@ -235,7 +236,7 @@ static void null_update_frame_format( vo_driver_t* self, vo_frame_t* img,
     vo_scale_compute_ideal_size ( &frame->sc );
     vo_scale_compute_output_size( &frame->sc );
 
-#ifdef LOG  
+#ifdef LOG
     fprintf (stderr, "nullvideo: gui %dx%d delivered %dx%d output %dx%d\n",
        frame->sc.gui_width, frame->sc.gui_height,
        frame->sc.delivered_width, frame->sc.delivered_height,
@@ -243,27 +244,27 @@ static void null_update_frame_format( vo_driver_t* self, vo_frame_t* img,
 #endif
 
     /*
-     * (re-) allocate 
+     * (re-) allocate
      */
     if( frame->data ) {
       if( frame->chunk[0] ){
-  free( frame->chunk[0] );
-  frame->chunk[0] = NULL; 
-      } 
+	  free( frame->chunk[0] );
+	  frame->chunk[0] = NULL;
+      }
       if( frame->chunk[1] ){
-  free ( frame->chunk[1] );
-  frame->chunk[1] = NULL;
-      }   
+	  free ( frame->chunk[1] );
+	  frame->chunk[1] = NULL;
+      }
       if( frame->chunk[2] ){
-  free ( frame->chunk[2] );
-  frame->chunk[2] = NULL;
+	  free ( frame->chunk[2] );
+	  frame->chunk[2] = NULL;
       }
       free ( frame->data );
     }
 
-    frame->data = xine_xmalloc (frame->sc.output_width 
-        * frame->sc.output_height 
-        * this->bytes_per_pixel );
+    frame->data = xine_xmalloc (frame->sc.output_width
+				* frame->sc.output_height
+				* this->bytes_per_pixel );
 
     if( format == XINE_IMGFMT_YV12 ) {
       frame->frame.pitches[0] = 8*((width + 7) / 8);
@@ -275,17 +276,17 @@ static void null_update_frame_format( vo_driver_t* self, vo_frame_t* img,
 
     }else{
       frame->frame.pitches[0] = 8*((width + 3) / 4);
-      
+
       frame->frame.base[0] = xine_xmalloc_aligned (16, frame->frame.pitches[0] * height,
-               (void **)&frame->chunk[0]);
+						   (void **)&frame->chunk[0]);
       frame->chunk[1] = NULL;
       frame->chunk[2] = NULL;
     }
 
     frame->stripe_height = 16 * frame->sc.output_height / frame->sc.delivered_height;
     frame->bytes_per_line = frame->sc.output_width * this->bytes_per_pixel;
-  
-    /* 
+
+    /*
      * set up colorspace converter
      */
 
@@ -293,24 +294,24 @@ static void null_update_frame_format( vo_driver_t* self, vo_frame_t* img,
     case VO_TOP_FIELD:
     case VO_BOTTOM_FIELD:
       frame->yuv2rgb->configure (frame->yuv2rgb,
-         frame->sc.delivered_width,
-         16,
-         2*frame->frame.pitches[0],
-         2*frame->frame.pitches[1],
-         frame->sc.output_width,
-         frame->stripe_height,
-         frame->bytes_per_line*2);
+				 frame->sc.delivered_width,
+				 16,
+				 2*frame->frame.pitches[0],
+				 2*frame->frame.pitches[1],
+				 frame->sc.output_width,
+				 frame->stripe_height,
+				 frame->bytes_per_line*2);
       frame->yuv_stride = frame->bytes_per_line*2;
       break;
     case VO_BOTH_FIELDS:
       frame->yuv2rgb->configure (frame->yuv2rgb,
-         frame->sc.delivered_width,
-         16,
-         frame->frame.pitches[0],
-         frame->frame.pitches[1],
-         frame->sc.output_width,
-         frame->stripe_height,
-         frame->bytes_per_line);
+				 frame->sc.delivered_width,
+				 16,
+				 frame->frame.pitches[0],
+				 frame->frame.pitches[1],
+				 frame->sc.output_width,
+				 frame->stripe_height,
+				 frame->bytes_per_line);
       frame->yuv_stride = frame->bytes_per_line;
       break;
     }
@@ -338,38 +339,39 @@ static void null_update_frame_format( vo_driver_t* self, vo_frame_t* img,
       frame->stripe_inc = frame->stripe_height * frame->bytes_per_line;
       break;
     }
-  }    
+  }
 }
 
-static void null_display_frame( vo_driver_t* self, vo_frame_t *frame_gen ){   
+static void null_display_frame( vo_driver_t* self, vo_frame_t *frame_gen ){
   null_driver_t* this = (null_driver_t*) self;
   opie_frame_t* frame = (opie_frame_t*)frame_gen;
   display_xine_frame_t display = this->frameDis;
-  
-  if (!this->m_show_video) 
+
+  if (!this->m_show_video)
     return;
 
   if( display != NULL ) {
     (*display)(this->caller, frame->data,
-         frame->sc.output_width, frame->sc.output_height,
-         frame->bytes_per_line );
+	       frame->sc.output_width, frame->sc.output_height,
+	       frame->bytes_per_line );
   }
-  
+
   frame->frame.free(&frame->frame);
 }
 
 
 /* blending related */
-static void null_overlay_clut_yuv2rgb (null_driver_t  *this, 
-               vo_overlay_t *overlay,
-               opie_frame_t *frame) {
+static void null_overlay_clut_yuv2rgb (null_driver_t  *this,
+				       vo_overlay_t *overlay,
+				       opie_frame_t *frame) {
   int i;
   clut_t* clut = (clut_t*) overlay->color;
   if (!overlay->rgb_clut) {
     for (i = 0; i < sizeof(overlay->color)/sizeof(overlay->color[0]); i++) {
       *((uint32_t *)&clut[i]) =
-  frame->yuv2rgb->yuv2rgb_single_pixel_fun (frame->yuv2rgb,
-              clut[i].y, clut[i].cb, clut[i].cr);
+	  frame->yuv2rgb->yuv2rgb_single_pixel_fun (frame->yuv2rgb,
+						    clut[i].y, clut[i].cb,
+						    clut[i].cr);
     }
     overlay->rgb_clut++;
   }
@@ -378,17 +380,18 @@ static void null_overlay_clut_yuv2rgb (null_driver_t  *this,
     for (i = 0; i < sizeof(overlay->color)/sizeof(overlay->color[0]); i++) {
       *((uint32_t *)&clut[i]) =
   frame->yuv2rgb->yuv2rgb_single_pixel_fun(frame->yuv2rgb,
-             clut[i].y, clut[i].cb, clut[i].cr);
+					   clut[i].y, clut[i].cb, clut[i].cr);
     }
     overlay->clip_rgb_clut++;
   }
 }
 
-static void null_overlay_blend ( vo_driver_t *this_gen, vo_frame_t *frame_gen, vo_overlay_t *overlay) {
+static void null_overlay_blend ( vo_driver_t *this_gen, vo_frame_t *frame_gen,
+				 vo_overlay_t *overlay) {
   null_driver_t  *this = (null_driver_t *) this_gen;
   opie_frame_t   *frame = (opie_frame_t *) frame_gen;
 
-  if(!this->m_show_video || frame->sc.output_width == 0 
+  if(!this->m_show_video || frame->sc.output_width == 0
      || frame->sc.output_height== 0)
     return;
 
@@ -396,7 +399,7 @@ static void null_overlay_blend ( vo_driver_t *this_gen, vo_frame_t *frame_gen, v
   if (overlay->rle) {
     if( !overlay->rgb_clut || !overlay->clip_rgb_clut)
       null_overlay_clut_yuv2rgb(this,overlay,frame);
-    
+
     switch(this->bpp) {
     case 16:
       blend_rgb16( (uint8_t *)frame->data, overlay,
@@ -416,29 +419,29 @@ static void null_overlay_blend ( vo_driver_t *this_gen, vo_frame_t *frame_gen, v
     default:
       /* It should never get here */
       break;
-    }        
+    }
   }
 }
 
 
 static int null_get_property( vo_driver_t* self,
-            int property ){
+			      int property ){
   return 0;
 }
 static int null_set_property( vo_driver_t* self,
-            int property,
-            int value ){
+			      int property,
+			      int value ){
   return value;
 }
 static void null_get_property_min_max( vo_driver_t* self,
-               int property, int *min,
-               int *max ){
+				       int property, int *min,
+				       int *max ){
   *max = 0;
   *min = 0;
 }
 static int null_gui_data_exchange( vo_driver_t* self,
-           int data_type,
-           void *data ){
+				   int data_type,
+				   void *data ){
   return 0;
 }
 
@@ -449,10 +452,12 @@ static void null_dispose ( vo_driver_t* self ){
 static int null_redraw_needed( vo_driver_t* self ){
   return 0;
 }
-               
+
 
 xine_vo_driver_t* init_video_out_plugin( xine_t *xine,
-           void* video, display_xine_frame_t frameDisplayFunc, void *userData ){
+					 void* video,
+					 display_xine_frame_t frameDisplayFunc,
+					 void *userData ){
   null_driver_t *vo;
   vo = (null_driver_t*)malloc( sizeof(null_driver_t ) );
 
@@ -487,8 +492,8 @@ xine_vo_driver_t* init_video_out_plugin( xine_t *xine,
 
   /* capabilities */
   vo->m_capabilities = /* VO_CAP_COPIES_IMAGE | */ VO_CAP_YUY2 | VO_CAP_YV12;
-  vo->yuv2rgb_factory = yuv2rgb_factory_init (MODE_16_RGB, vo->yuv2rgb_swap, 
-                vo->yuv2rgb_cmap);
+  vo->yuv2rgb_factory = yuv2rgb_factory_init (MODE_16_RGB, vo->yuv2rgb_swap,
+					      vo->yuv2rgb_cmap);
 
   vo->caller = userData;
   vo->frameDis = frameDisplayFunc;
@@ -544,7 +549,7 @@ void null_set_videoGamma( xine_vo_driver_t* self , int value ) {
 void null_set_scaling( xine_vo_driver_t* self, int scale ) {
   ((null_driver_t*)self->driver)->m_is_scaling = scale;
 }
-     
+
 void null_set_gui_width( xine_vo_driver_t* self, int width ) {
   ((null_driver_t*)self->driver)->gui_width = width;
 }
@@ -555,7 +560,7 @@ void null_set_gui_height( xine_vo_driver_t* self, int height ) {
 
 void null_set_mode( xine_vo_driver_t* self, int depth,  int rgb  ) {
   null_driver_t* this = (null_driver_t*)self->driver;
-    
+
   this->bytes_per_pixel = (depth + 7 ) / 8;
   this->bpp = this->bytes_per_pixel * 8;
   this->depth = depth;
@@ -565,13 +570,13 @@ void null_set_mode( xine_vo_driver_t* self, int depth,  int rgb  ) {
   case 32:
     if( rgb == 0 )
       this->yuv2rgb_mode = MODE_32_RGB;
-    else  
+    else
       this->yuv2rgb_mode = MODE_32_BGR;
-  case 24:  
+  case 24:
     if( this->bpp == 32 ) {
-      if( rgb == 0 ) {  
+      if( rgb == 0 ) {
   this->yuv2rgb_mode = MODE_32_RGB;
-      } else {  
+      } else {
   this->yuv2rgb_mode = MODE_32_BGR;
       }
     }else{
