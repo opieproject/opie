@@ -226,13 +226,13 @@ void MainWindow::initUI() {
     m_bar->insertItem( tr("Connection"), m_console );
 
     /* the scripts menu */
-    #ifdef EAST
-    OConfig cfg("opie-console");
+#ifdef EAST
+    Opie::Core::OConfig cfg("opie-console");
 	cfg.setGroup("10east");
    	if( !cfg.readEntry("scripthide",0) ) {
     	m_bar->insertItem( tr("Scripts"), m_scripts );
     }
-	#endif
+#endif
 
     /* and the keyboard */
     m_keyBar = new QToolBar(this);

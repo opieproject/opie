@@ -71,6 +71,6 @@ LIBS        += -lqpe -lopiecore2 -lopieui2 -lutil
 TARGET       = opie-console
 
 DEFINES += HAVE_OPENPTY
-DEFINES += EAST FSCKED_DISTRI 
+#DEFINES += EAST FSCKED_DISTRI 
 
 include ( $(OPIEDIR)/include.pro )
