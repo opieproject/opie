@@ -15,26 +15,26 @@
     </message>
     <message>
         <source>Unknown word</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekanntes Wort</translation>
     </message>
     <message>
         <source>&lt;p&gt;The word &quot;%1&quot; is not in the dictionary.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Das Wort &quot;%1&quot; ist nicht in der Datenbank.</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Hinzufügen</translation>
     </message>
     <message>
         <source>Ignore</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorieren</translation>
     </message>
 </context>
 <context>
     <name>NewGameBase</name>
     <message>
         <source>Players</source>
-        <translation type="unfinished"></translation>
+        <translation>Spieler</translation>
     </message>
     <message>
         <source>AI3: Smart AI player</source>
@@ -42,57 +42,57 @@
     </message>
     <message>
         <source>Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Regeln</translation>
     </message>
     <message>
         <source>&amp;Start</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Start</translation>
     </message>
 </context>
 <context>
     <name>RulesBase</name>
     <message>
         <source>Game Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Spielregeln</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Name:</translation>
     </message>
     <message>
         <source>Board</source>
-        <translation type="unfinished"></translation>
+        <translation>Brett</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Größe:</translation>
     </message>
     <message>
         <source>Edit...</source>
-        <translation type="unfinished"></translation>
+        <translation>Editieren...</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Löschen</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ok</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Abbrechen</translation>
     </message>
 </context>
 <context>
     <name>ScoreInfo</name>
     <message>
         <source>&lt;P&gt;Invalid move</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Ungültiger Zug</translation>
     </message>
     <message>
         <source>&lt;P&gt;Score: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Punkte:</translation>
     </message>
 </context>
 <context>
@@ -123,11 +123,11 @@
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nein</translation>
     </message>
 </context>
 </TS>

@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>RotationSettings</name>
     <message>
@@ -11,7 +12,7 @@
     </message>
     <message>
         <source>Automatically restart Opie?</source>
-        <translation type="unfinished"></translation>
+        <translation>OPIE automatisch neu starten?</translation>
     </message>
     <message>
         <source>&lt;p&gt;Rotation is not enabled in this demo, however this is a supported feature of Qt/Embedded.</source>

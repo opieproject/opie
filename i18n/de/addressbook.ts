@@ -1239,7 +1239,7 @@ ist frei erhältlich !</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation>Gesch. Tel.</translation>
+        <translation>EMail</translation>
     </message>
     <message>
         <source>Emails</source>

@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>Security</name>
     <message>
@@ -60,11 +61,11 @@ eingegeben werden</translation>
     </message>
     <message>
         <source>Sync</source>
-        <translation type="unfinished"></translation>
+        <translation>Synchroniseren</translation>
     </message>
     <message>
         <source>Accept sync from network:</source>
-        <translation type="unfinished"></translation>
+        <translation>Synchronisierung gestatten aus dem Netzwerk:</translation>
     </message>
     <message>
         <source>192.168.0.0/16</source>
