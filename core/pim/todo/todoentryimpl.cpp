@@ -44,7 +44,7 @@
 #include <qlabel.h>
 #include <qtimer.h>
 #include <qapplication.h>
-
+#include <qvaluelist.h> 
 
 NewTaskDialog::NewTaskDialog( const ToDoEvent& task, QWidget *parent,
 			      const char *name, bool modal, WFlags fl )
@@ -125,19 +125,26 @@ void NewTaskDialog::dateChanged( int y, int m, int d )
 }
 void NewTaskDialog::groupButtonClicked ()
 {
-	OContactSelectorDialog cd(this);
+	OContactSelectorDialog cd( this );
+	QArray<int> todo_relations = todo.relations ( "addressbook" );
+	QValueList<int> selectedContacts;
+	
+	for ( uint i=0; i < todo_relations.size(); i++ ){
+		printf ("old: %d\n", todo_relations[i]);
+		selectedContacts.append( todo_relations[i] );
+	}
+	cd.setSelected (selectedContacts);
 	cd.showMaximized();
-	cd.exec();
-	QValueList<int> selected = cd.getSelected();
-	for (uint i=0; i < selected.count(); i++){
-		printf ("Selected: %d\n", (*selected.at(i)));
+	if ( cd.exec() == QDialog::Accepted ){
+		selectedContacts = cd.selected ();
+		QValueListIterator<int> it;
+		for( it = selectedContacts.begin(); it != selectedContacts.end(); ++it ){
+			printf ("Adding: %d\n", (*it));
+			todo.addRelated( "addressbook", (*it) );
+		}
+	
 	}
 
-	// Check if setting works...
-	OContactSelectorDialog cd2(this);
-	cd2.setSelected (selected);
-	cd2.showMaximized();
-	cd2.exec();
 }
 
 ToDoEvent NewTaskDialog::todoEntry()
