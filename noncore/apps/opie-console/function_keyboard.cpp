@@ -115,7 +115,7 @@ void FunctionKeyboard::paintKey(int row, int col) {
     if (row == numRows) {
 
         // sometimes it doesnt draw the last line
-        p.drawLine((col+1) * keyWidth -2, row * keyHeight, 
+        p.drawLine((col+1) * keyWidth -2, row * keyHeight,
                    (col+1) * keyWidth -2, (row + 1) * keyHeight
         );
     }
@@ -188,8 +188,8 @@ void FunctionKeyboard::loadDefaults() {
 
 /* FunctionKeyboardConfig {{{1 */
 
-FunctionKeyboardConfig::FunctionKeyboardConfig(const QString& name, QWidget* parent) :
-    ProfileDialogKeyWidget(name, parent) {
+FunctionKeyboardConfig::FunctionKeyboardConfig(const QString& name, QWidget* parent, const char* na )
+    : ProfileDialogKeyWidget(name, parent, na) {
 
 
     kb = new FunctionKeyboard(this);
@@ -226,12 +226,12 @@ FunctionKeyboardConfig::~FunctionKeyboardConfig() {
 
 }
 void FunctionKeyboardConfig::load (const Profile& prof) {
-    int i = prof.readNumEntry("keb_rows", 1);
-    //m_rowBox->setValue(i);
+    //int i = prof.readNumEntry("keb_rows", 1);
+    m_rowBox->setValue( 2 );
 }
 void FunctionKeyboardConfig::save (Profile& prof) {
 
-    //prof.writeEntry("keb_rows", m_rowBox->value());
+    prof.writeEntry("keb_rows", m_rowBox->value());
 
 }
 void FunctionKeyboardConfig::slotChangeRows(int r) {

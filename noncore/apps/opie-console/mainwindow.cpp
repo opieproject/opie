@@ -497,11 +497,8 @@ void MainWindow::slotFullscreen() {
 
 
     if ( m_isFullscreen ) {
-        ( m_curSession->widgetStack() )->reparent(  savedParentFullscreen, 0, QPoint(0,0), false );
-        ( m_curSession->widgetStack() )->setFrameStyle( QFrame::Panel | QFrame::Sunken );
-
-        setCentralWidget( m_consoleWindow );
-        ( m_curSession->widgetStack() )->show();
+        ( m_curSession->widgetStack() )->reparent(  savedParentFullscreen, 0, QPoint(0,0), true );
+        ( m_curSession->widgetStack() )->resize( savedParentFullscreen->width(), savedParentFullscreen->height() );
         ( m_curSession->emulationHandler() )->cornerButton()->hide();
         disconnect( ( m_curSession->emulationHandler() )->cornerButton(), SIGNAL( pressed() ), this, SLOT( slotFullscreen() ) );
 

@@ -63,6 +63,7 @@ private:
     QMap<QString, FKey> keys;
 
     uint numRows;
+    int test;
     uint numCols;
     uint keyHeight;
     double keyWidth; // decimal point matters!
@@ -74,9 +75,11 @@ private:
 };
 
 class FunctionKeyboardConfig : public ProfileDialogKeyWidget {
+
     Q_OBJECT
+
 public:
-    FunctionKeyboardConfig(const QString& name, QWidget *wid);
+    FunctionKeyboardConfig(const QString& name, QWidget *wid, const char* name = 0l );
     ~FunctionKeyboardConfig();
 
     void load(const Profile&);
