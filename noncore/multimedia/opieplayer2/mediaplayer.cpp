@@ -34,6 +34,8 @@ extern MediaPlayerState *mediaPlayerState;
 MediaPlayer::MediaPlayer( QObject *parent, const char *name )
     : QObject( parent, name ), volumeDirection( 0 ), currentFile( NULL ) {
 
+    playList->setCaption(tr("OpiePlayer: Initializating"));
+    
     qApp->processEvents();
     //    QPEApplication::grabKeyboard(); // EVIL
     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
@@ -58,6 +60,7 @@ MediaPlayer::MediaPlayer( QObject *parent, const char *name )
 
     volControl = new VolumeControl;
     xineControl = new XineControl();
+    playList->setCaption(tr("OpiePlayer"));
 }
 
 MediaPlayer::~MediaPlayer() {
@@ -263,7 +266,7 @@ void MediaPlayer::blank( bool b ) {
         }
         close( fd );
     } else {
-        qDebug("<< /dev/fb0 could not be opend  >>");
+        qDebug("<< /dev/fb0 could not be opened  >>");
     }
 }
 
@@ -289,7 +292,8 @@ void MediaPlayer::keyReleaseEvent( QKeyEvent *e) {
     }
 }
 
-void MediaPlayer::cleanUp() {
+void MediaPlayer::cleanUp() {// this happens on closing
+    
 //     QPEApplication::grabKeyboard();
 //     QPEApplication::ungrabKeyboard();
 }

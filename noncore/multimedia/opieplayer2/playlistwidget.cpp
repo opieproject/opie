@@ -99,7 +99,7 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
 
   setBackgroundMode( PaletteButton );
 
-  setCaption( tr("OpiePlayer") );
+//  setCaption( tr("OpiePlayer") );
   setIcon( Resource::loadPixmap( "opieplayer2/MPEGPlayer" ) );
 
   setToolBarsMovable( FALSE );
