@@ -36,7 +36,7 @@ ImportDialog::ImportDialog(QWidget* parent, const char* name)
     m_pPreviewLabel->setFrameStyle(QFrame::Panel | QFrame::Sunken);
     m_pPreviewLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     m_pPreviewLabel->setFixedSize(114, 114);
-    m_pPreviewLabel->setBackgroundMode(QWidget:: PaletteMid);
+    m_pPreviewLabel->setBackgroundMode(QWidget::PaletteMid);
 
     m_pAutomaticPreviewCheckBox = new QCheckBox(tr("Automatic preview"), this);
     m_pAutomaticPreviewCheckBox->setChecked(true);
