@@ -116,7 +116,7 @@ void avi_end(int fd, int width, int height, int fps)
         fprint_quartet( fd, 18 );       // ???
         fprint_quartet( fd, offset );
         fprint_quartet( fd, sizes[i] );
-        offset += sizes[i];
+        offset += sizes[i] + 8; //+8 (for the additional header)
     }
 
     free( sizes );
@@ -125,6 +125,7 @@ void avi_end(int fd, int width, int height, int fps)
     strcpy(ah.avih, "avih");
     ah.time = 1000000 / fps;
     ah.maxbytespersec = 1000000.0*(totalsize/nframes)/ah.time;
+    ah.nframes = nframes;
     ah.numstreams = 1;
     ah.flags = AVIF_HASINDEX;
     ah.width = width;

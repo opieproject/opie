@@ -496,8 +496,12 @@ void CameraMainWindow::postProcessVideo( const QString& infile, const QString& o
         preview->repaint();
         qApp->processEvents();
 
+        #ifndef QT_NO_DEBUG
+        QString tmpfilename;
+        tmpfilename.sprintf( "/tmp/test/%04d.jpg", i );
+        #else
         QString tmpfilename( "/tmp/tempfile" );
-        //tmpfilename.sprintf( "/tmp/test/%d.jpg", i );
+        #endif
 
         imageToFile( &image, tmpfilename, "JPEG", quality );
 
@@ -542,9 +546,9 @@ void CameraMainWindow::doSomething()
 {
     captureX = 240;
     captureY = 320;
-    _videopics = 176;
+    _videopics = 50;
     _framerate = 5;
-    postProcessVideo( "/var/compile/opie/noncore/multimedia/camera/capture-320x240.dat",
+    postProcessVideo( "/var/compile/opie/noncore/multimedia/camera/capture.dat",
     "/tmp/output.avi" );
 }
 #endif
