@@ -23,10 +23,13 @@ namespace OpieTooth {
         bool m_complete:1;
         bool m_ok;
         bool m_classOver:1;
+        bool m_profOver:1;
         bool m_protocolOver:1;
         bool m_protocolAdded:1;
         QString m_protName;
         int m_protId;
+        QString m_profName;
+        int m_profId;
     };
 };
 

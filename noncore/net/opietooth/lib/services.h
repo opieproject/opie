@@ -63,7 +63,7 @@ namespace OpieTooth {
       /**
        * operator==
        */
-      friend bool operator==(const ProfileDescriptor&, const ProfileDescriptor& );
+//      friend bool operator==(const ProfileDescriptor&, const ProfileDescriptor& );
     private:
       QString m_id;
       int m_idInt;
@@ -94,8 +94,8 @@ namespace OpieTooth {
       int port()const;
       void setPort(int );
       ProtocolDescriptor &operator=( const ProtocolDescriptor& );
-      friend bool operator==( const ProtocolDescriptor&,
-			      const ProtocolDescriptor& );
+        //friend bool operator==( const ProtocolDescriptor&,
+        //	      const ProtocolDescriptor& );
     private:
       QString m_name;
       int m_number;
@@ -131,8 +131,13 @@ namespace OpieTooth {
     void removeProfileDescriptor(const ProfileDescriptor& );
     ProfileDescriptor::ValueList profileDescriptor()const;
 
-
-
+  private:
+      QString m_name;
+      int m_recHandle;
+      QString m_classList;
+      int m_classId;
+      QValueList<ProfileDescriptor> m_profiles;
+      QValueList<ProtocolDescriptor> m_protocols;
   };
 };
 #endif

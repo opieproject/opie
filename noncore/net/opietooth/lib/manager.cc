@@ -1,5 +1,8 @@
+
+
 #include <opie/oprocess.h>
 
+#include "parser.h"
 #include "manager.h"
 
 
@@ -13,7 +16,7 @@ Manager::Manager( const QString& dev )
     m_hcitool = 0;
     m_sdp = 0;
 }
-Manager::Manager( Device* dev )
+Manager::Manager( Device* /*dev*/ )
   : QObject()
 {
     m_hcitool = 0;
@@ -32,7 +35,7 @@ Manager::~Manager(){
 void Manager::setDevice( const QString& dev ){
     m_device = dev;
 }
-void Manager::setDevice( Device* dev ){
+void Manager::setDevice( Device* /*dev*/ ){
 
 }
 void Manager::isAvailable( const QString& device ){
@@ -47,7 +50,8 @@ void Manager::isAvailable( const QString& device ){
     }
 
 }
-void Manager::isAvailable( Device* dev ){
+
+void Manager::isAvailable( Device* /*dev*/ ){
 
 
 }
@@ -68,7 +72,7 @@ void Manager::searchDevices( const QString& device ){
     }
 }
 
-void Manager::searchDevices(Device* d ){
+void Manager::searchDevices(Device* /*d*/ ){
 
 
 }
@@ -115,11 +119,11 @@ void Manager::searchServices( const QString& remDevice ){
 void Manager::searchServices( const RemoteDevice& dev){
     searchServices( dev.mac() );
 }
-QString Manager::toDevice( const QString& mac ){
-
+QString Manager::toDevice( const QString& /*mac*/ ){
+    return QString::null;
 }
-QString Manager::toMac( const QString &device ){
-
+QString Manager::toMac( const QString &/*device*/ ){
+    return QString::null;
 }
 void Manager::slotProcessExited(OProcess* proc ) {
     bool conn= false;
@@ -157,6 +161,8 @@ void Manager::slotSDPExited( OProcess* proc)
 }
 Services::ValueList Manager::parseSDPOutput( const QString& out ) {
     Services::ValueList list;
+    Parser parser( out );
+    list = parser.services();
     return list;
 }
 

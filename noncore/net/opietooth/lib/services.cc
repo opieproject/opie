@@ -105,64 +105,78 @@ Services::Services(){
 
 }
 Services::Services(const Services& service ){
-
+    (*this) = service;
 }
 Services::~Services(){
 
 }
-Services &Services::operator=( const Services& ){
+Services &Services::operator=( const Services& ser){
+    m_name =  ser.m_name;
+    m_recHandle = ser.m_recHandle;
+    m_classList = ser.m_classList;
+    m_classId = ser.m_classId;
+    m_protocols = ser.m_protocols;
+    m_profiles = ser.m_profiles;
   return *this;
 }
-bool operator==( const Services&,
-		 const Services& ){
+bool operator==( const Services& one,
+		 const Services& two){
+    if ( ( one.recHandle() == two.recHandle() ) &&
+         ( one.classIdListInt() == two.classIdListInt() ) &&
+         ( one.serviceName() == two.serviceName() ) &&
+         ( one.classIdList() == two.classIdList() ) &&
+         ( one.protocolDescriptorList() == two.protocolDescriptorList() ) &&
+         ( one.profileDescriptor() == two.profileDescriptor() ) )
+        return true;
   return false;
 }
 QString Services::serviceName() const{
-
+    return m_name;
 }
 void Services::setServiceName( const QString& service ){
-
+    m_name = service;
 }
 int Services::recHandle() const{
-
+    return m_recHandle;
 }
-void Services::setRecHandle( int ){
-
+void Services::setRecHandle( int handle){
+    m_recHandle = handle;
 }
 QString Services::classIdList() const{
-
+    return m_classList;
 }
-void Services::setClassIdList( const QString& ){
-
+void Services::setClassIdList( const QString& str){
+    m_classList = str;
 }
 int Services::classIdListInt() const{
-
+    return m_classId;
 }
-void Services::setClassIdList(int ){
-
+void Services::setClassIdList(int id){
+    m_classId = id;
 }
-void Services::insertProtocolDescriptor( const ProtocolDescriptor& ){
-
+void Services::insertProtocolDescriptor( const ProtocolDescriptor& prot){
+    m_protocols.append( prot );
 }
 void Services::clearProtocolDescriptorList(){
-
+    m_protocols.clear();
 }
-void Services::removeProtocolDescriptor( const ProtocolDescriptor& ){
-
+void Services::removeProtocolDescriptor( const ProtocolDescriptor& prot){
+    m_protocols.remove( prot );
 }
 Services::ProtocolDescriptor::ValueList Services::protocolDescriptorList()const{
-
+    return m_protocols;
 }
 
-void Services::insertProfileDescriptor( const ProfileDescriptor& ){
 
+void Services::insertProfileDescriptor( const ProfileDescriptor& prof){
+    m_profiles.append( prof );
 }
 void Services::clearProfileDescriptorList(){
-
+    m_profiles.clear();
 }
-void Services::removeProfileDescriptor( const ProfileDescriptor& ){
-
+void Services::removeProfileDescriptor( const ProfileDescriptor& prof){
+    m_profiles.remove(prof );
 }
 Services::ProfileDescriptor::ValueList Services::profileDescriptor() const{
-
+    return m_profiles;
 }
