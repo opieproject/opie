@@ -13,8 +13,8 @@ bool BuffDoc::hyperlink(unsigned int n)
     lastispara = false;
     if (exp != NULL)
     {
-	bRet = exp->hyperlink(n);
-	lastsizes[0] = laststartline = exp->locate();
+  bRet = exp->hyperlink(n);
+  lastsizes[0] = laststartline = exp->locate();
     }
     return bRet;
 }
@@ -37,9 +37,9 @@ bool BuffDoc::getline(CDrawBuffer* buff, int w)
     buff->empty();
     if (exp == NULL)
     {
-//	(*buff)[0] = '\0';
-	buff->empty();
-	return false;
+//  (*buff)[0] = '\0';
+  buff->empty();
+  return false;
     }
   int len = 0, lastcheck = 0;
   if (lastword.length() > 0)
@@ -54,9 +54,9 @@ bool BuffDoc::getline(CDrawBuffer* buff, int w)
   if (slen > w)
     {
       for ( ; len > 0; len--)
-	{
-	  if (buff->width(len) < w) break;
-	}
+  {
+    if (buff->width(len) < w) break;
+  }
 //      lastword = buff->data() + len - 1;
       laststartline = lastsizes[len-1];
       lastword.setright(*buff, len - 1);
@@ -88,10 +88,10 @@ bool BuffDoc::getline(CDrawBuffer* buff, int w)
       getch(ch, cs);
       while (ch != ' ' && ch != '\012' && ch != UEOF && len < 128)
       {
-	  len++;
-	  buff->addch(ch,cs);
-	  allsizes[len] = exp->locate();
-	  getch(ch, cs);
+    len++;
+    buff->addch(ch,cs);
+    allsizes[len] = exp->locate();
+    getch(ch, cs);
       }
       (*buff)[len] = 0;
       slen = buff->width(len);
@@ -100,8 +100,8 @@ bool BuffDoc::getline(CDrawBuffer* buff, int w)
       allsizes[len] = exp->locate();
       if (slen < w && ch != ' ')
       {
-	  lastcheck = len;
-	  break;
+    lastcheck = len;
+    break;
       }
       lastispara = (ch == '\012');
   }
@@ -130,17 +130,17 @@ bool BuffDoc::getline(CDrawBuffer* buff, int w, int cw)
     buff->empty();
     if (exp == NULL)
     {
-	return false;
+  return false;
     }
     tchar ch;
     CStyle cs;
     int i = 0;
     while (i*cw < w)
     {
-	getch(ch, cs);
-	if (ch == '\12' || ch == UEOF) break;
-	buff->addch(ch,cs);
-	i++;
+  getch(ch, cs);
+  if (ch == '\12' || ch == UEOF) break;
+  buff->addch(ch,cs);
+  i++;
     }
     buff->truncate(i);
     laststartline = exp->locate();
@@ -164,53 +164,53 @@ int BuffDoc::openfile(QWidget* _parent, const char *src)
     int ret = exp->openfile(src);
     if (ret == -1)
     {
-	delete exp;
-	exp = NULL;
-	return ret;
+  delete exp;
+  exp = NULL;
+  return ret;
     }
     if (ret == -2)
     {
 
-	delete exp;
-	exp = new ztxt;
-	ret = exp->openfile(src);
+  delete exp;
+  exp = new ztxt;
+  ret = exp->openfile(src);
     }
     if (ret != 0)
     {
 
-	delete exp;
-	exp = new CPlucker;
-	ret = exp->openfile(src);
+  delete exp;
+  exp = new CPlucker;
+  ret = exp->openfile(src);
     }
 #ifndef SMALL
     if (ret != 0)
     {
-	delete exp;
-	qDebug("Trying ppms");
-	exp = new ppm_expander;
-	ret = exp->openfile(src);
+  delete exp;
+  qDebug("Trying ppms");
+  exp = new ppm_expander;
+  ret = exp->openfile(src);
     }
-	    
+      
     if (ret != 0)
     {
-	delete exp;
-	exp = new Text;
-//		qDebug("Trying text");
-	ret = exp->openfile(src);
+  delete exp;
+  exp = new Text;
+//    qDebug("Trying text");
+  ret = exp->openfile(src);
     }
 #else
     if (ret != 0)
     {
-	delete exp;
-	exp = new Text;
-	ret = exp->openfile(src);
+  delete exp;
+  exp = new Text;
+  ret = exp->openfile(src);
     }
 #endif
     if (ret != 0)
     {
-	delete exp;
-	QMessageBox::information(_parent, "QTReader", "Unknown file compression type","Try another file");
-	return ret;
+  delete exp;
+  QMessageBox::information(_parent, "OpieReader", "Unknown file compression type","Try another file");
+  return ret;
     }
     //        qDebug("Doing final open:%x:%x",exp,filt);
 
