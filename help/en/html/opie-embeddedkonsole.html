@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<html> <head>
+<title>Opie Embeddedkonsole</title>
+</head>
+
+<body>
+<center><h1>Opie Embeddedkonsole</h1></center>
+is a terminal emulation program. You use it as you would any
+commandline.
+<BR>You can add new konsole tabs by clicking on the 'Terminal'
+icon. This will start a new konsole session.
+<BR>There are only three fonts to choose from, but several color
+schemes, and you can choose your own colors by selecting <b>'Custom'</b> from
+the Options menu.
+<P>It has a hidable commandlist for easily selecting much used or long
+commands.
+<br>You can also edit these two ways, <b>'Quick Edit'</b> simply lets
+you edit in the combo box. <br><b>'Edit'</b> will open a commandlist editing
+window. Here you can rearrange the order of commands. You can remove,
+or add commands.
+<P>There is a way to start commands from another command:<pre>
+qcop QPE/Application/embeddedkonsole 'setDocument(QString)' 'ssh -V'
+
+or
+
+embeddedconsole -e uberhotub</pre>
+<hr>
+<address><center><pre>
+&copy; 2002<a href="mailto:llornkcor@handhelds.org">ljp</a> llornkcor@handhelds.org</a></pre></address>
+<!-- hhmts start -->
+Last modified: Fri Oct 18 02:41:26 +0000 2002
+<!-- hhmts end -->
+</body> </html>

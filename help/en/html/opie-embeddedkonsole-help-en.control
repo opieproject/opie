@@ -1,0 +1,10 @@
+Files: help/en/html/opie-embeddedkonsole.html
+Priority: optional
+Section: opie/onlinedoc
+Maintainer: ljp <llornkcor@handhelds.org>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-embeddedkonsole
+License: GPL
+Description: Open Embeddedkonsole help files (english)
+ 
