@@ -532,7 +532,7 @@ void EmailClient::readMail()
 
   QFile f(getPath(FALSE) + "inbox.txt");
 //  QFileInfo fi(f);
-  qDebug( f.name());
+  //qDebug( f.name());
 
   if ( f.open(IO_ReadOnly) ) {    // file opened successfully
     QTextStream t( &f );        // use a text stream
@@ -586,12 +586,12 @@ void EmailClient::saveMail(QString fileName, QListView *view)
     return;
   }
   item = (EmailListItem *) view->firstChild();
-  qDebug (QString("Write : ") );
+  //qDebug (QString("Write : ") );
   QTextStream t(&f);
   while (item != NULL) {
     mail = item->getMail();
-    qDebug(mail->rawMail);
-    qDebug(mail->recipients.first());
+    //qDebug(mail->rawMail);
+    //qDebug(mail->recipients.first());
     t << mail->rawMail;
     
     mailconf->setGroup(mail->id);

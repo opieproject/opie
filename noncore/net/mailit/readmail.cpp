@@ -89,6 +89,7 @@ void ReadMail::init()
 	viewMenu->insertItem(Resource::loadPixmap("close"), "Close", this, SLOT(close()));
 		
 	emailView = new QTextView( this, "emailView" );
+	
 	setCentralWidget(emailView);
 
 	mime = new QMimeSourceFactory();

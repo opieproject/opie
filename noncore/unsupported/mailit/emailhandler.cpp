@@ -163,8 +163,6 @@ bool EmailHandler::parse(QString in, QString lineShift, Email *mail)
   temp = lineShift + "." + lineShift;
   
   if (in.right(temp.length()) != temp) {
-    qWarning(in.right(temp.length()));
-    qWarning(" . added at end of email as separator");
     mail->rawMail += temp;
   }
 

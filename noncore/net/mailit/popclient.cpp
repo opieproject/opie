@@ -119,7 +119,7 @@ void PopClient::incomingData()
 //    return;
   
   response = socket->readLine();
-  qDebug(response +" %d", status);
+  //qDebug(response +" %d", status);
   
   switch(status) {
     //logging in
@@ -131,7 +131,7 @@ void PopClient::incomingData()
        {
           timeStamp = response.mid( start , end - start + 1);
           md5Source = timeStamp + popPassword;
-          qDebug( md5Source);
+          //qDebug( md5Source);
 //           for( int i = 0; i < md5Source.length(); i++) {
 //              buff[i] = (QChar)md5Source[i];
 //           }
@@ -192,7 +192,7 @@ void PopClient::incomingData()
               //messages deleted from server, reload all
               if (newMessages < lastSync)
                 lastSync = 0;
-                messageCount = lastSync + 1;
+                messageCount = 1;
               }
               
               if (selected) {
@@ -240,7 +240,7 @@ void PopClient::incomingData()
               
               status = Retr;
             } else {
-              qWarning(response);
+              //qWarning(response);
               errorHandling(ErrUnknownResponse);
             }
           }
@@ -286,7 +286,7 @@ void PopClient::incomingData()
               if ( (!preview ) || ((preview) && (mailSize <= headerLimit)) ){
                 emit newMessage(message, messageCount-1, mailSize, TRUE);
               } else {  //incomplete mail downloaded
-                emit newMessage(message, messageCount-1, mailSize, FALSE);
+		emit newMessage(message, messageCount-1, mailSize, FALSE);
               }
               if (messageCount > newMessages) //that was the last message
                 status = Quit;

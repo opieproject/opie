@@ -127,7 +127,7 @@ void AddressList::read()
 	{
 		//oc=(OContact*) it;
 		if ((*it).defaultEmail().length()!=0)
-			addContact((*it).defaultEmail(),(*it).fullName());
+			addContact((*it).defaultEmail(),(*it).fileAs());
 	}
 	
 	/*if (! f.open(IO_ReadOnly) )
