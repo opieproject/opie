@@ -165,11 +165,6 @@ enum Transformation { Rot0, Rot90, Rot180, Rot270 }; /* from qgfxtransformed_qws
 
 inline void QPEApplication::setCurrentRotation( int r )
 {
-    if ( qApp->type() != GuiServer ) {
-        QCopEnvelope e( "QPE/System", "setCurrentRotation(int)" );
-        e << r;
-        return;
-    }
     Transformation e;
 
     switch (r) {
