@@ -19,7 +19,7 @@
     </message>
     <message>
         <source>Undefined key</source>
-        <translation type="unfinished">Udefineret knap</translation>
+        <translation>Udefineret knap</translation>
     </message>
 </context>
 <context>
@@ -34,7 +34,7 @@
     </message>
     <message>
         <source>&amp;Hall of fame</source>
-        <translation type="unfinished">&amp;Rangliste</translation>
+        <translation>&amp;Rangliste</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
@@ -83,7 +83,7 @@ the last 10 years of her friendship.
     </message>
     <message>
         <source>KPacman</source>
-        <translation type="unfinished"></translation>
+        <translation>KPacman</translation>
     </message>
 </context>
 <context>
@@ -204,10 +204,6 @@ or is of an unknown format.</source>
     <message>
         <source>@YY@/@MM@/@DD@</source>
         <translation type="unfinished">@DD@/@MM@ &apos;@YY@</translation>
-    </message>
-    <message>
-        <source>                          </source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

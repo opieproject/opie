@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>eth0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>IP Address</source>
@@ -149,7 +149,7 @@
     </message>
     <message>
         <source>255.255.255.0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>

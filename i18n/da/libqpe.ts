@@ -402,11 +402,11 @@ redigere kategorierne.</translation>
     <name>QMessageBox</name>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nej</translation>
     </message>
 </context>
 <context>
@@ -783,84 +783,85 @@ Frigør noget hukommelse og prøv igen.</translation>
     </message>
     <message>
         <source>Click to close this window, discarding changes.</source>
-        <translation type="unfinished">Klik for at lukke dette vindue og kassere ændringer.</translation>
+        <translation>Klik for at lukke dette vindue uden at gemme ændringer.</translation>
     </message>
     <message>
         <source>Click to close this window.</source>
-        <translation type="unfinished">Klik for at lukke dette vindue.</translation>
+        <translation>Klik for at lukke dette vindue.</translation>
     </message>
     <message>
         <source>Click to close this window and apply changes.</source>
-        <translation type="unfinished">Klik for at lukke dette vindue og anvende ændringer.</translation>
+        <translation>Klik for at lukke dette vindue og anvende ændringer.</translation>
     </message>
     <message>
         <source>Click to make this window moveable.</source>
-        <translation type="unfinished">Klik for at gøre dette vindue flytbart.</translation>
+        <translation>Klik for at gøre dette vindue flytbart.</translation>
     </message>
     <message>
         <source>Click to make this window use all available screen area.</source>
-        <translation type="unfinished">Klik for at få dette vindue til at bruge hele skærmen.</translation>
+        <translation>Klik for at få dette vindue til at bruge hele skærmen.</translation>
     </message>
     <message>
         <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
-        <translation type="unfinished">&lt;Qt&gt;Der findes ikke nogen omfattende hjælp til dette program, men der er stadig kontekstfølsom hjælp.&lt;p&gt;Sådan bruger du kontekstfølsom hjælp:&lt;p&gt;&lt;ol&gt;&lt;li&gt;klik og hold hjælpeknappen&lt;li&gt;når vindues titlen viser &lt;b&gt;Hvad er det...&lt;/b&gt;, så klik på det du vil have hjælp med.&lt;/ol&gt;&lt;/Qt&gt;</translation>
+        <translation>&lt;Qt&gt;Der findes ikke nogen omfattende hjælp til dette program, men der er stadig kontekstfølsom hjælp.&lt;p&gt;Sådan bruger du kontekstfølsom hjælp:&lt;p&gt;&lt;ol&gt;&lt;li&gt;klik og hold hjælpeknappen&lt;li&gt;når vindues titlen viser &lt;b&gt;Hvad er det...&lt;/b&gt;, så klik på det du vil have hjælp med.&lt;/ol&gt;&lt;/Qt&gt;</translation>
     </message>
     <message>
         <source>What&apos;s this...</source>
-        <translation type="unfinished">Hvad er det...</translation>
+        <translation>Hvad er det...</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Are you sure you want to delete
  %1?&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Vil du slette(new line)
+%1?&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Jan</source>
-        <translation type="unfinished"></translation>
+        <translation>Jan</translation>
     </message>
     <message>
         <source>Feb</source>
-        <translation type="unfinished"></translation>
+        <translation>Feb</translation>
     </message>
     <message>
         <source>Mar</source>
-        <translation type="unfinished"></translation>
+        <translation>Mar</translation>
     </message>
     <message>
         <source>Apr</source>
-        <translation type="unfinished"></translation>
+        <translation>Apr</translation>
     </message>
     <message>
         <source>May</source>
-        <translation type="unfinished"></translation>
+        <translation>Maj</translation>
     </message>
     <message>
         <source>Jun</source>
-        <translation type="unfinished"></translation>
+        <translation>Jun</translation>
     </message>
     <message>
         <source>Jul</source>
-        <translation type="unfinished"></translation>
+        <translation>Jul</translation>
     </message>
     <message>
         <source>Aug</source>
-        <translation type="unfinished"></translation>
+        <translation>Aug</translation>
     </message>
     <message>
         <source>Sep</source>
-        <translation type="unfinished"></translation>
+        <translation>Sep</translation>
     </message>
     <message>
         <source>Oct</source>
-        <translation type="unfinished"></translation>
+        <translation>Okt</translation>
     </message>
     <message>
         <source>Nov</source>
-        <translation type="unfinished"></translation>
+        <translation>Nov</translation>
     </message>
     <message>
         <source>Dec</source>
-        <translation type="unfinished"></translation>
+        <translation>Dec</translation>
     </message>
 </context>
 <context>

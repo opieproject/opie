@@ -181,11 +181,11 @@ eksisterer. Overskriv?</translation>
     </message>
     <message>
         <source>Copy </source>
-        <translation type="unfinished">Kopier</translation>
+        <translation>Kopier</translation>
     </message>
     <message>
         <source> As</source>
-        <translation type="unfinished">Som</translation>
+        <translation>Som</translation>
     </message>
     <message>
         <source>Could not move

@@ -22,19 +22,19 @@
     <name>TodoPluginConfigBase</name>
     <message>
         <source>Set the maximum number of task that should be shown</source>
-        <translation type="unfinished">Indstil maksimum antal opgaver der skal vises</translation>
+        <translation>Indstil maksimum antal opgaver der skal vises</translation>
     </message>
     <message>
         <source>tasks shown</source>
-        <translation type="unfinished"></translation>
+        <translation>opgaver vist</translation>
     </message>
     <message>
         <source>After how many chars should be the info about the task be cut off</source>
-        <translation type="unfinished">Hvor mange tegns information omkring opgaven skal der vises</translation>
+        <translation>Hvor mange tegns information omkring opgaven skal der vises</translation>
     </message>
     <message>
         <source>Clip line after X chars</source>
-        <translation type="unfinished">Klip linien efter X tegn</translation>
+        <translation>Klip linien efter X tegn</translation>
     </message>
 </context>
 <context>

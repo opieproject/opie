@@ -104,7 +104,7 @@ Adgang nægtet</translation>
     </message>
     <message>
         <source>Passcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Kodeord</translation>
     </message>
     <message>
         <source>Login</source>

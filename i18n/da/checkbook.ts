@@ -47,27 +47,27 @@
     </message>
     <message>
         <source>Savings</source>
-        <translation type="unfinished">Sparepenge</translation>
+        <translation>Opsparinger</translation>
     </message>
     <message>
         <source>Checking</source>
-        <translation type="unfinished">Regninger</translation>
+        <translation>Regninger</translation>
     </message>
     <message>
         <source>CD</source>
-        <translation type="unfinished">CD</translation>
+        <translation>CD</translation>
     </message>
     <message>
         <source>Money market</source>
-        <translation type="unfinished">Pengemarkedet</translation>
+        <translation>Pengemarkedet</translation>
     </message>
     <message>
         <source>Mutual fund</source>
-        <translation type="unfinished">Fælleskapital</translation>
+        <translation>Fælleskapital</translation>
     </message>
     <message>
         <source>Other</source>
-        <translation type="unfinished">Andet</translation>
+        <translation>Andet</translation>
     </message>
     <message>
         <source>Bank:</source>
@@ -75,7 +75,7 @@
     </message>
     <message>
         <source>Enter name of the bank for this checkbook here.</source>
-        <translation type="unfinished">Skriv checkhæftets banks navn her.</translation>
+        <translation>Skriv checkhæftets banks navn her.</translation>
     </message>
     <message>
         <source>Account number:</source>
@@ -91,7 +91,7 @@
     </message>
     <message>
         <source>Enter PIN number for this checkbook here.</source>
-        <translation type="unfinished">Skriv checkhæftets pinkode her.</translation>
+        <translation>Skriv checkhæftets pinkode her.</translation>
     </message>
     <message>
         <source>Starting balance:</source>
@@ -111,7 +111,7 @@
     </message>
     <message>
         <source>Current balance: %10.00</source>
-        <translation type="unfinished">Nuværende saldo: %10,00</translation>
+        <translation>Nuværende saldo: %10.00</translation>
     </message>
     <message>
         <source>This area shows the current balance in this checkbook.</source>
@@ -179,7 +179,7 @@ For at sortere efter en kolonne, klik på kolonnens navn.</translation>
     </message>
     <message>
         <source>Withdrawals by category</source>
-        <translation type="unfinished">Udtrækning efter kategori</translation>
+        <translation>Udtrækninger efter kategori</translation>
     </message>
     <message>
         <source>Deposits by category</source>
@@ -195,7 +195,7 @@ For at sortere efter en kolonne, klik på kolonnens navn.</translation>
     </message>
     <message>
         <source>Current balance: %1%2</source>
-        <translation type="unfinished">Nuværende saldo: %1%2</translation>
+        <translation>Nuværende saldo: %1%2</translation>
     </message>
     <message>
         <source>Enter password</source>
@@ -234,7 +234,7 @@ For at sortere efter en kolonne, klik på kolonnens navn.</translation>
     </message>
     <message>
         <source>Enter your local currency symbol here.</source>
-        <translation type="unfinished">Skriv symbolet for den lokale valuta her (fx. Kr).</translation>
+        <translation>Skriv symbolet for den lokale valuta her (fx. Kr).</translation>
     </message>
     <message>
         <source>Show whether checkbook is password
@@ -248,7 +248,7 @@ kodeord</translation>
     </message>
     <message>
         <source>Show checkbook balances</source>
-        <translation type="unfinished">Vis checkhæfte-saldi</translation>
+        <translation>Vis checkhæfte-saldi</translation>
     </message>
     <message>
         <source>Click here to select whether or not the main window will display the current balance for each checkbook.</source>
@@ -311,7 +311,7 @@ Du kan også vælge Slet fra Checkhæfte-menuen.</translation>
     </message>
     <message>
         <source>Checkbook Name</source>
-        <translation type="unfinished">Checkhæfte-navn</translation>
+        <translation>Checkhæfte-navn</translation>
     </message>
     <message>
         <source>Balance</source>
@@ -334,11 +334,11 @@ Du kan også vælge Slet fra Checkhæfte-menuen.</translation>
     <name>Transaction</name>
     <message>
         <source>Transaction for </source>
-        <translation type="unfinished">Transaktion for</translation>
+        <translation>Transaktion for</translation>
     </message>
     <message>
         <source>Withdrawal</source>
-        <translation type="unfinished">Udtrækning</translation>
+        <translation>Udtrækning</translation>
     </message>
     <message>
         <source>Select whether the transaction is a withdrawal or deposit here.</source>
@@ -518,7 +518,7 @@ Beløbet skal altid være positivt.</translation>
     </message>
     <message>
         <source>Electronics</source>
-        <translation type="unfinished"></translation>
+        <translation>Elektronik</translation>
     </message>
 </context>
 </TS>

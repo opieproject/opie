@@ -66,12 +66,12 @@ Genoplad venligst back-up batteriet.</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished">Information</translation>
+        <translation>Information</translation>
     </message>
     <message>
         <source>&lt;p&gt;The system date doesn&apos;t seem to be valid.
 (%1)&lt;/p&gt;&lt;p&gt;Do you want to correct the clock ?&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Systemets dato ser ikke ud til at være korrekt.
+        <translation>&lt;p&gt;Systemets dato ser ikke ud til at være korrekt.
 (%1)&lt;/p&gt;&lt;p&gt;Ønsker du at indstille uret?&lt;/p&gt;</translation>
     </message>
 </context>
@@ -95,11 +95,11 @@ Genoplad venligst back-up batteriet.</translation>
     </message>
     <message>
         <source>Finding documents</source>
-        <translation type="unfinished">Finder dokumenter</translation>
+        <translation>Finder dokumenter</translation>
     </message>
     <message>
         <source>Searching documents</source>
-        <translation type="unfinished">Søger dokumenter</translation>
+        <translation>Søger dokumenter</translation>
     </message>
 </context>
 <context>
@@ -176,7 +176,7 @@ Genoplad venligst back-up batteriet.</translation>
     <name>QObject</name>
     <message>
         <source>Battery Status</source>
-        <translation type="unfinished">Batteri Status</translation>
+        <translation>Batteristatus</translation>
     </message>
 </context>
 <context>

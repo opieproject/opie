@@ -199,7 +199,7 @@ Afslut alligevel?</translation>
     </message>
     <message>
         <source>Beam this occurence</source>
-        <translation type="unfinished"></translation>
+        <translation>Send denne begivenhed</translation>
     </message>
 </context>
 <context>
@@ -281,11 +281,11 @@ Afslut alligevel?</translation>
     </message>
     <message>
         <source>Views</source>
-        <translation type="unfinished">Visninger</translation>
+        <translation>Visninger</translation>
     </message>
     <message>
         <source>Default view:</source>
-        <translation type="unfinished">Standard visning:</translation>
+        <translation>Standard visning:</translation>
     </message>
     <message>
         <source>Day</source>
@@ -297,7 +297,7 @@ Afslut alligevel?</translation>
     </message>
     <message>
         <source>Week List</source>
-        <translation type="unfinished">Ugeliste</translation>
+        <translation>Ugeliste</translation>
     </message>
     <message>
         <source>Month</source>
@@ -305,11 +305,11 @@ Afslut alligevel?</translation>
     </message>
     <message>
         <source>Jump to current time</source>
-        <translation type="unfinished">Gå til dags dato</translation>
+        <translation>Gå til dags dato</translation>
     </message>
     <message>
         <source>Time display</source>
-        <translation type="unfinished">Klokketslet for</translation>
+        <translation>Klokketslet for</translation>
     </message>
     <message>
         <source>None</source>
@@ -329,7 +329,7 @@ Afslut alligevel?</translation>
     </message>
     <message>
         <source>Location:</source>
-        <translation type="unfinished">Sted:</translation>
+        <translation>Sted:</translation>
     </message>
     <message>
         <source>Office</source>
@@ -355,7 +355,7 @@ Afslut alligevel?</translation>
     <name>DateBookWeekHeader</name>
     <message>
         <source>w</source>
-        <translation type="unfinished"></translation>
+        <translation>u</translation>
     </message>
 </context>
 <context>
@@ -370,14 +370,14 @@ Afslut alligevel?</translation>
     <message>
         <source>MTWTFSSM</source>
         <comment>Week days</comment>
-        <translation type="unfinished"></translation>
+        <translation>MTOTFLSM</translation>
     </message>
 </context>
 <context>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>
-        <translation type="unfinished"></translation>
+        <translation>u</translation>
     </message>
 </context>
 <context>
@@ -532,7 +532,7 @@ Afslut alligevel?</translation>
     <name>DatebookAlldayDisp</name>
     <message>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info</translation>
     </message>
 </context>
 <context>
@@ -698,7 +698,7 @@ og </translation>
     </message>
     <message>
         <source>on </source>
-        <translation type="unfinished"></translation>
+        <translation>på</translation>
     </message>
 </context>
 <context>

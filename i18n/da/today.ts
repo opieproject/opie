@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Owned by </source>
-        <translation type="unfinished">Ejes af </translation>
+        <translation>Ejes af </translation>
     </message>
     <message>
         <source>Please fill out the business card</source>
@@ -132,59 +132,59 @@ ved opvågning?
     </message>
     <message>
         <source>Check this if today should be autostarted on resume.</source>
-        <translation type="unfinished">Vælg denne hvis Idag skal startes automatisk ved opvågning.</translation>
+        <translation>Vælg denne hvis Idag skal startes automatisk ved opvågning.</translation>
     </message>
     <message>
         <source>autostart on resume?</source>
-        <translation type="unfinished"></translation>
+        <translation>autostart ved opvågning?</translation>
     </message>
     <message>
         <source>tiny banner</source>
-        <translation type="unfinished"></translation>
+        <translation>minibanner</translation>
     </message>
     <message>
         <source>Have small banner </source>
-        <translation type="unfinished"></translation>
+        <translation>Minibanner</translation>
     </message>
     <message>
         <source> min</source>
-        <translation type="unfinished"></translation>
+        <translation>min</translation>
     </message>
     <message>
         <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
-        <translation type="unfinished">Hvor mange minutter PDA&apos;en har været i dvale før autostart egenskaben er aktiv ved opvågning</translation>
+        <translation>Hvor mange minutter PDA&apos;en har været i dvale før autostart egenskaben er aktiv ved opvågning</translation>
     </message>
     <message>
         <source>minutes inactive</source>
-        <translation type="unfinished">Minutter inaktiv</translation>
+        <translation>Minutter inaktiv</translation>
     </message>
     <message>
         <source> pixel</source>
-        <translation type="unfinished"></translation>
+        <translation>pixels</translation>
     </message>
     <message>
         <source>Set the icon size in pixel</source>
-        <translation type="unfinished">Indstil størrelsen på ikonet i pixels</translation>
+        <translation>Indstil størrelsen på ikonet i pixels</translation>
     </message>
     <message>
         <source>icon size</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikonstørrelse</translation>
     </message>
     <message>
         <source> sec</source>
-        <translation type="unfinished"> sek</translation>
+        <translation> sek</translation>
     </message>
     <message>
         <source>never</source>
-        <translation type="unfinished">aldrig</translation>
+        <translation>aldrig</translation>
     </message>
     <message>
         <source>How often should Today refresh itself</source>
-        <translation type="unfinished">Hvor ofte Idag skal genopfriske sig selv</translation>
+        <translation>Hvor ofte Idag skal genopfriske sig selv</translation>
     </message>
     <message>
         <source>refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>genopfrisk</translation>
     </message>
 </context>
 </TS>

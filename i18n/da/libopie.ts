@@ -78,15 +78,15 @@
     </message>
     <message>
         <source>Red:</source>
-        <translation type="unfinished"></translation>
+        <translation>Rød:</translation>
     </message>
     <message>
         <source>Green:</source>
-        <translation type="unfinished"></translation>
+        <translation>Grøn:</translation>
     </message>
     <message>
         <source>Blue:</source>
-        <translation type="unfinished"></translation>
+        <translation>Blå:</translation>
     </message>
     <message>
         <source>Alpha channel:</source>
@@ -146,7 +146,7 @@
     </message>
     <message>
         <source>Mime Type</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -168,15 +168,15 @@
     <name>OFontSelector</name>
     <message>
         <source>Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Stil</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Størelse</translation>
+        <translation>Størrelse</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="unfinished"></translation>
+        <translation>The Quick Brown Fox Jumps Over Lazy Dog</translation>
     </message>
 </context>
 <context>
@@ -392,7 +392,7 @@ og</translation>
     </message>
     <message>
         <source>on </source>
-        <translation type="unfinished"></translation>
+        <translation>på</translation>
     </message>
 </context>
 <context>
@@ -482,11 +482,11 @@ og</translation>
     </message>
     <message>
         <source>Profession: </source>
-        <translation type="unfinished">Stilling</translation>
+        <translation>Stilling:</translation>
     </message>
     <message>
         <source>Assistant: </source>
-        <translation type="unfinished"></translation>
+        <translation>Assistent:</translation>
     </message>
     <message>
         <source>Manager: </source>
@@ -506,7 +506,7 @@ og</translation>
     </message>
     <message>
         <source>Spouse: </source>
-        <translation type="unfinished"></translation>
+        <translation>Ægtefælle:</translation>
     </message>
     <message>
         <source>Birthday: </source>
@@ -514,7 +514,7 @@ og</translation>
     </message>
     <message>
         <source>Anniversary: </source>
-        <translation type="unfinished"></translation>
+        <translation>Bryllupsdag:</translation>
     </message>
     <message>
         <source>Children: </source>
@@ -546,7 +546,7 @@ og</translation>
     </message>
     <message>
         <source>%1 %2 every </source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 hver </translation>
     </message>
     <message>
         <source>The %1 every </source>
@@ -638,7 +638,7 @@ og</translation>
     </message>
     <message>
         <source>The %1 %2 of every</source>
-        <translation type="unfinished"></translation>
+        <translation>Den %1 %2 på hver</translation>
     </message>
 </context>
 <context>

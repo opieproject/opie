@@ -3,19 +3,16 @@
     <name>DateBookEvent</name>
     <message>
         <source>[with alarm]</source>
-        <translation type="unfinished"></translation>
+        <translation>[med alarm]</translation>
     </message>
     <message>
         <source>note</source>
-        <translation type="unfinished"></translation>
+        <translation>notat</translation>
     </message>
     <message>
         <source>All day</source>
-        <translation type="unfinished"></translation>
+        <translation>Hele dagen</translation>
     </message>
-</context>
-<context>
-    <name>DatebookPluginConfig</name>
 </context>
 <context>
     <name>DatebookPluginConfigBase</name>
@@ -25,43 +22,43 @@
     </message>
     <message>
         <source>Show location</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis sted</translation>
     </message>
     <message>
         <source>Check this if the location of an appointment should be shown for each one</source>
-        <translation type="unfinished"></translation>
+        <translation>Vælg dette, hvis stedet for hver aftale skal vises</translation>
     </message>
     <message>
         <source>Show notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis notater</translation>
     </message>
     <message>
         <source>Check this if the note attached to an appointment should be shown for each one</source>
-        <translation type="unfinished"></translation>
+        <translation>Vælg dette. hvis notater for hver aftale skal vises</translation>
     </message>
     <message>
         <source>Show only later appointments</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis kun aftaler i fremtiden</translation>
     </message>
     <message>
         <source>Check this if only appointments later then current time should be shown</source>
-        <translation type="unfinished"></translation>
+        <translation>Vælg dette, hvis kun aftaler &quot;senere end nu&quot; skal vises</translation>
     </message>
     <message>
         <source>Show time in extra line</source>
-        <translation type="unfinished"></translation>
+        <translation>Hvis tidspunkt i en linje for sig selv</translation>
     </message>
     <message>
         <source>How many appointments should be shown maximal. In chronical order</source>
-        <translation type="unfinished"></translation>
+        <translation>Hvor mange aftaler skal der højest vises? (I kronologisk rækkefølge.)</translation>
     </message>
     <message>
         <source>How many appointment should be shown?</source>
-        <translation type="unfinished"></translation>
+        <translation>Hvor mange aftaler skal der vises?</translation>
     </message>
     <message>
         <source>only today</source>
-        <translation type="unfinished"></translation>
+        <translation>kun idag</translation>
     </message>
     <message>
         <source>How many more days should be in the range</source>
@@ -69,22 +66,22 @@
     </message>
     <message>
         <source>How many more days</source>
-        <translation type="unfinished"></translation>
+        <translation>Hvor mange ekstra dage</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Datebook plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>Kalender plugin</translation>
     </message>
     <message>
         <source>No more appointments today</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikke flere aftaler idag</translation>
     </message>
     <message>
         <source>No appointments today</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingen aftaler idag</translation>
     </message>
 </context>
 </TS>
