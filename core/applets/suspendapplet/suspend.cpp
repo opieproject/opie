@@ -49,7 +49,7 @@ QPopupMenu *SuspendApplet::popup ( QWidget * ) const
 void SuspendApplet::activated ( )
 {
 	// suspend
-	QCopEnvelope ( "QPE/Desktop", "suspend()" );
+	QCopEnvelope ( "QPE/System", "suspend()" );
 }
 
 

@@ -49,7 +49,7 @@ QPopupMenu *HomeApplet::popup ( QWidget * ) const
 void HomeApplet::activated ( )
 {
 	// to desktop (home)
-	QCopEnvelope ( "QPE/Desktop", "home()" );
+	QCopEnvelope ( "QPE/Application/qpe", "raise()" );
 }
 
 
