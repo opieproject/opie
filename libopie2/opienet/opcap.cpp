@@ -44,35 +44,34 @@
  * OPacket
  *======================================================================================*/
 
-OPacket::OPacket( packetheaderstruct header, const unsigned char* data, QObject* parent )
+OPacket::OPacket( int datalink, packetheaderstruct header, const unsigned char* data, QObject* parent )
         :QObject( parent, "Generic" ), _hdr( header ), _data( data )
 {
-    qDebug( "OPacket::OPacket(): (Len %d, CapLen %d)" /*, ctime((const time_t*) header.ts.tv_sec)*/, header.len, header.caplen );
+    //qDebug( "OPacket::OPacket(): (Len %d, CapLen %d)" /*, ctime((const time_t*) header.ts.tv_sec)*/, header.len, header.caplen );
 
     _end = (unsigned char*) data + header.len;
-    qDebug( "OPacket::data @ %0x, end @ %0x", data, _end );
+    //qDebug( "OPacket::data @ %0x, end @ %0x", data, _end );
 
-    if ( packetCapturer()->dataLink() == DLT_EN10MB )
+    switch ( datalink )
     {
-        qDebug( "OPacket::OPacket(): Received Packet. Datalink = ETHERNET" );
-        new OEthernetPacket( _end, (const struct ether_header*) data, this );
-    }
-    else
-    {
-        qDebug( "OPacket::OPacket(): Received Packet. Datalink = IEEE802.11" );
-        new OWaveLanPacket( _end, (const struct ieee_802_11_header*) data, this );
+        case DLT_EN10MB:
+            qDebug( "OPacket::OPacket(): Received Packet. Datalink = ETHERNET" );
+            new OEthernetPacket( _end, (const struct ether_header*) data, this );
+            break;
+
+        case DLT_IEEE802_11:
+            qDebug( "OPacket::OPacket(): Received Packet. Datalink = IEEE802.11" );
+            new OWaveLanPacket( _end, (const struct ieee_802_11_header*) data, this );
+            break;
+
+        default:
+            qWarning( "OPacket::OPacket(): Received Packet over unsupported datalink '%s'!", datalink );
     }
 }
 
 
 OPacket::~OPacket()
 {
-}
-
-
-OPacketCapturer* OPacket::packetCapturer() const
-{
-    return parent()->inherits( "OPacketCapturer" ) ? static_cast<OPacketCapturer*>( parent() ) : 0;
 }
 
 
@@ -316,7 +315,7 @@ OWaveLanPacket::OWaveLanPacket( const unsigned char* end, const struct ieee_802_
     qDebug( "subType: %0X", subType() );
     qDebug( "duration: %d", duration() );
     qDebug( "powermanagement: %d", usesPowerManagement() );
-    qDebug( "wep: %d", usesWep() );
+    qDebug( "payload is encrypted: %s", usesWep() ? "yes" : "no" );
     qDebug( "MAC1: %s", (const char*) macAddress1().toString() );
     qDebug( "MAC2: %s", (const char*) macAddress2().toString() );
     qDebug( "MAC3: %s", (const char*) macAddress3().toString() );
@@ -326,8 +325,8 @@ OWaveLanPacket::OWaveLanPacket( const unsigned char* end, const struct ieee_802_
     {
         case T_MGMT: new OWaveLanManagementPacket( end, (const struct ieee_802_11_mgmt_header*) data, this ); break;
         case T_DATA: new OWaveLanDataPacket( end, (const struct ieee_802_11_data_header*) data, this ); break;
-        //case T_CTRL: new OWaveLanControlPacket( end, (const struct ieee_802_11_ctrl_header*) data, this ); break;
-        default: qDebug( "OWaveLanPacket::OWaveLanPacket(): Warning: Unknown type!" );
+        case T_CTRL: new OWaveLanControlPacket( end, (const struct ieee_802_11_control_header*) data, this ); break;
+        default: qDebug( "OWaveLanPacket::OWaveLanPacket(): Warning: Unknown major type '%d'!", type() );
     }
 }
 
@@ -417,14 +416,7 @@ OWaveLanManagementPacket::OWaveLanManagementPacket( const unsigned char* end, co
                 _body( (const struct ieee_802_11_mgmt_body*) (data+1) )
 {
     qDebug( "OWaveLanManagementPacket::OWaveLanManagementPacket(): decoding frame..." );
-
-    switch ( ((OWaveLanPacket*) this->parent() )->subType() )
-    {
-        case ST_BEACON:
-        {
-            // nice, received a beacon...
-        }
-    }
+    qDebug( "Detected subtype is '%s'", (const char*) managementType() );
 
     // grab tagged values
     const unsigned char* ptr = (const unsigned char*) (_body+1);
@@ -449,6 +441,28 @@ OWaveLanManagementPacket::OWaveLanManagementPacket( const unsigned char* end, co
 
 OWaveLanManagementPacket::~OWaveLanManagementPacket()
 {
+}
+
+
+QString OWaveLanManagementPacket::managementType() const
+{
+    switch ( FC_SUBTYPE( EXTRACT_LE_16BITS( &_header->fc ) ) )
+    {
+        case ST_ASSOC_REQUEST: return "AssociationRequest"; break;
+        case ST_ASSOC_RESPONSE: return "AssociationResponse"; break;
+        case ST_REASSOC_REQUEST: return "ReassociationRequest"; break;
+        case ST_REASSOC_RESPONSE: return "ReassociationResponse"; break;
+        case ST_PROBE_REQUEST: return "ProbeRequest"; break;
+        case ST_PROBE_RESPONSE: return "ProbeResponse"; break;
+        case ST_BEACON: return "Beacon"; break;
+        case ST_ATIM: return "Atim"; break;
+        case ST_DISASSOC: return "Disassociation"; break;
+        case ST_AUTH: return "Authentication"; break;
+        case ST_DEAUTH: return "Deathentication"; break;
+        default:
+            qWarning( "OWaveLanManagementPacket::managementType(): unhandled subtype %d", FC_SUBTYPE( EXTRACT_LE_16BITS( &_header->fc ) ) );
+            return "Unknown";
+    }
 }
 
 
@@ -682,6 +696,24 @@ OLLCPacket::~OLLCPacket()
 {
 }
 
+
+/*======================================================================================
+ * OWaveLanControlPacket
+ *======================================================================================*/
+
+OWaveLanControlPacket::OWaveLanControlPacket( const unsigned char* end, const struct ieee_802_11_control_header* data, OWaveLanPacket* parent )
+                :QObject( parent, "802.11 Data" ), _header( data )
+{
+    qDebug( "OWaveLanControlPacket::OWaveLanDataControl(): decoding frame..." );
+    //TODO: Implement this
+}
+
+
+OWaveLanControlPacket::~OWaveLanControlPacket()
+{
+}
+
+
 /*======================================================================================
  * OPacketCapturer
  *======================================================================================*/
@@ -770,9 +802,17 @@ OPacket* OPacketCapturer::next()
     qDebug( "<== OPacketCapturer::next()" );
 
     if ( header.len )
-        return new OPacket( header, pdata, this );
+    {
+        return new OPacket( dataLink(), header, pdata, 0 );
+        // packets shouldn't be inserted in the QObject child-parent hierarchy,
+        // because due to memory constraints they will be deleted as soon
+        // as possible - that is right after they have been processed
+        // by emit() [ see below ]
+    }
     else
+    {
         return 0;
+    }
 }
 
 
@@ -827,6 +867,9 @@ bool OPacketCapturer::isOpen() const
 void OPacketCapturer::readyToReceive()
 {
     qDebug( "OPacketCapturer::readyToReceive(): about to emit 'receivePacket(...)'" );
-    emit receivedPacket( next() );
+    OPacket* p = next();
+    emit receivedPacket( p );
+    // emit is synchronous - packet has been dealt with, now it's safe to delete
+    delete p;
 }
 

@@ -71,12 +71,10 @@ class OPacket : public QObject
   Q_OBJECT
 
   public:
-    OPacket( packetheaderstruct, const unsigned char*, QObject* parent );
+    OPacket( int datalink, packetheaderstruct, const unsigned char*, QObject* parent );
     virtual ~OPacket();
 
     timevalstruct timeval() const;
-
-    OPacketCapturer* packetCapturer() const;
 
     int caplen() const;
     int len() const;
@@ -150,6 +148,8 @@ class OWaveLanManagementPacket : public QObject
   public:
     OWaveLanManagementPacket( const unsigned char*, const struct ieee_802_11_mgmt_header*, OWaveLanPacket* parent = 0 );
     virtual ~OWaveLanManagementPacket();
+
+    QString managementType() const;
 
     int beaconInterval() const;
     int capabilities() const; // generic
@@ -312,6 +312,22 @@ class OWaveLanDataPacket : public QObject
 
   private:
     const struct ieee_802_11_data_header* _header;
+};
+
+/*======================================================================================
+ * OWaveLanControlPacket - type: control (T_CTRL)
+ *======================================================================================*/
+
+class OWaveLanControlPacket : public QObject
+{
+  Q_OBJECT
+
+  public:
+    OWaveLanControlPacket( const unsigned char*, const struct ieee_802_11_control_header*, OWaveLanPacket* parent = 0 );
+    virtual ~OWaveLanControlPacket();
+
+  private:
+    const struct ieee_802_11_control_header* _header;
 };
 
 /*======================================================================================

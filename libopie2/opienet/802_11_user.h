@@ -255,6 +255,18 @@ struct ieee_802_11_data_header {
 //	u_int8_t	gap[8];
 };
 
+struct ieee_802_11_control_header {
+	u_int16_t	frame_control;
+	u_int16_t	duration;
+	u_int8_t	mac1[6];
+	u_int8_t	mac2[6];
+	u_int8_t	mac3[6];
+	u_int16_t	SeqCtl;
+	u_int8_t	mac4[6];
+//	u_int16_t	gapLen;
+//	u_int8_t	gap[8];
+};
+
 #define CAPABILITY_ESS(cap)     ((cap) & 0x0001)
 #define CAPABILITY_IBSS(cap)    ((cap) & 0x0002)
 #define CAPABILITY_CFP(cap)     ((cap) & 0x0004)
@@ -359,6 +371,10 @@ struct ieee_802_11_mgmt_body {
 
 
 struct ieee_802_11_data_body {
+//FIXME
+};
+
+struct ieee_802_11_control_body {
 //FIXME
 };
 
