@@ -19,19 +19,19 @@
     </message>
     <message>
         <source>Stippled, background color</source>
-        <translation type="unfinished">Stippled, background color</translation>
+        <translation>Pointillé, couleur de fond</translation>
     </message>
     <message>
         <source>Stippled, button color</source>
-        <translation type="unfinished">Stippled, button color</translation>
+        <translation>Pointillé, couleur de bouton</translation>
     </message>
     <message>
         <source>Translucent stippled, background color</source>
-        <translation type="unfinished">Translucent stippled, background color</translation>
+        <translation>Pointillé translucide, couleur de fond</translation>
     </message>
     <message>
         <source>Translucent stippled, button color</source>
-        <translation type="unfinished">Translucent stippled, button color</translation>
+        <translation>Pointillé translucident, couleur de bouton</translation>
     </message>
     <message>
         <source>Custom translucency</source>
@@ -59,18 +59,18 @@
     </message>
     <message>
         <source>Stipple contrast</source>
-        <translation type="unfinished">Stipple contrast</translation>
+        <translation>Contraste pointillé</translation>
     </message>
 </context>
 <context>
     <name>Styles</name>
     <message>
         <source>Liquid</source>
-        <translation>Liquid</translation>
+        <translation>Liquide</translation>
     </message>
     <message>
         <source>High Performance Liquid style by Mosfet</source>
-        <translation>Thème &quot;High Performance Liquid&quot; par Mosfet</translation>
+        <translation>Thème liquide haute performance par Mosfet</translation>
     </message>
 </context>
 </TS>

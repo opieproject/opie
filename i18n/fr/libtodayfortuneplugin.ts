@@ -1,9 +1,10 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>QObject</name>
     <message>
         <source>Fortune plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>Module &quot;Fortune&quot;</translation>
     </message>
 </context>
 </TS>

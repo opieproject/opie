@@ -124,39 +124,39 @@
     </message>
     <message>
         <source>Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Disposition</translation>
     </message>
     <message>
         <source>Strip CR</source>
-        <translation type="unfinished"></translation>
+        <translation>Bande CR</translation>
     </message>
     <message>
         <source>Dehyphen</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Trait d&apos;union</translation>
     </message>
     <message>
         <source>Single Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Simple espace</translation>
     </message>
     <message>
         <source>Unindent</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Dé-identé</translation>
     </message>
     <message>
         <source>Re-paragraph</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Re-paragrapher</translation>
     </message>
     <message>
         <source>Double Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Espace double</translation>
     </message>
     <message>
         <source>Indent+</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Identation +</translation>
     </message>
     <message>
         <source>Indent-</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Indentation -</translation>
     </message>
     <message>
         <source>Repalm</source>
@@ -168,7 +168,7 @@
     </message>
     <message>
         <source>Embolden</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Envahir</translation>
     </message>
     <message>
         <source>Zoom In</source>
@@ -244,7 +244,7 @@
     </message>
     <message>
         <source>Tidy</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordonner</translation>
     </message>
     <message>
         <source>Start Block</source>

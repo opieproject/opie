@@ -682,11 +682,11 @@
     </message>
     <message>
         <source>Shift cells &amp;down</source>
-        <translation>&amp;Descendre la cellule</translation>
+        <translation>&amp;Déplacer cellule vers le bas</translation>
     </message>
     <message>
         <source>Shift cells &amp;right</source>
-        <translation type="unfinished"></translation>
+        <translation>Déplacer Cellule à d&amp;roite</translation>
     </message>
     <message>
         <source>Entire ro&amp;w</source>

@@ -1,127 +1,128 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>ConfigDlg</name>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Options</translation>
     </message>
     <message>
         <source>Searchmethod</source>
-        <translation type="unfinished"></translation>
+        <translation>Méthode de recherche</translation>
     </message>
     <message>
         <source>General Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Config. Générale</translation>
     </message>
     <message>
         <source>Searchmethods</source>
-        <translation type="unfinished"></translation>
+        <translation>Méthodes de recherche</translation>
     </message>
 </context>
 <context>
     <name>ODict</name>
     <message>
         <source>OPIE-Dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>OPIE-Dictionnaire</translation>
     </message>
     <message>
         <source>Query:</source>
-        <translation type="unfinished"></translation>
+        <translation>Requête :</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ok</translation>
     </message>
     <message>
         <source>Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Config</translation>
     </message>
     <message>
         <source>Searchmethods</source>
-        <translation type="unfinished"></translation>
+        <translation>Méthodes de recherche</translation>
     </message>
     <message>
         <source>C&amp;ase sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>Respecter la C&amp;asse</translation>
     </message>
     <message>
         <source>Only &amp;complete Words</source>
-        <translation type="unfinished"></translation>
+        <translation>Les Mots c&amp;omplets seulement</translation>
     </message>
     <message>
         <source>Allow &amp;reg. expressions</source>
-        <translation type="unfinished"></translation>
+        <translation>Inclure les expressions en&amp;registrées</translation>
     </message>
     <message>
         <source>0 Errors</source>
-        <translation type="unfinished"></translation>
+        <translation>0 Erreur</translation>
     </message>
     <message>
         <source>1 Errors</source>
-        <translation type="unfinished"></translation>
+        <translation>1 Erreur</translation>
     </message>
     <message>
         <source>2 Errors</source>
-        <translation type="unfinished"></translation>
+        <translation>2 Erreurs</translation>
     </message>
     <message>
         <source>3 Errors</source>
-        <translation type="unfinished"></translation>
+        <translation>3 Erreurs</translation>
     </message>
     <message>
         <source>4 Errors</source>
-        <translation type="unfinished"></translation>
+        <translation>4 Erreurs</translation>
     </message>
     <message>
         <source>Until Hit</source>
-        <translation type="unfinished"></translation>
+        <translation>Jusqu&apos;au succès</translation>
     </message>
     <message>
         <source>&amp;Error tolerance</source>
-        <translation type="unfinished"></translation>
+        <translation>Tolérance d&apos;&amp;Erreur</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurations</translation>
     </message>
     <message>
         <source>Parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramêtre</translation>
     </message>
 </context>
 <context>
     <name>SearchMethodDlg</name>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom :</translation>
     </message>
     <message>
         <source>Dictionary file</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier Dictionnaire</translation>
     </message>
     <message>
         <source>Browse</source>
-        <translation type="unfinished"></translation>
+        <translation>Explorer</translation>
     </message>
     <message>
         <source>Language 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Langage 1</translation>
     </message>
     <message>
         <source>Decollator</source>
-        <translation type="unfinished"></translation>
+        <translation>Déliassé</translation>
     </message>
     <message>
         <source>Language 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Langage 2</translation>
     </message>
     <message>
         <source>New Searchmethod</source>
-        <translation type="unfinished"></translation>
+        <translation>Nouvelle méthode de recherche</translation>
     </message>
     <message>
         <source>Change Searchmethod</source>
-        <translation type="unfinished"></translation>
+        <translation>Changer la méthode de recherche</translation>
     </message>
 </context>
 </TS>

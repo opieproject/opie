@@ -345,7 +345,7 @@
     </message>
     <message>
         <source>Xenon</source>
-        <translation type="unfinished">Xénon</translation>
+        <translation>Xénon</translation>
     </message>
     <message>
         <source>Cesium</source>

@@ -348,7 +348,7 @@ gratuitement!</translation>
     </message>
     <message>
         <source>Switch to fixed menu-/toolbars after restarting application !</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser un menu-/barre d&apos;outils fixe après redémarrage de l&apos;application !</translation>
     </message>
     <message>
         <source>Moveable</source>
@@ -356,7 +356,7 @@ gratuitement!</translation>
     </message>
     <message>
         <source>Switch to moveable menu-/toolbars after restarting application !</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser un menu-/barre d&apos;outils mobile après redémarrage de l&apos;application !</translation>
     </message>
 </context>
 <context>

@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>LauncherSettings</name>
     <message>
@@ -131,7 +132,7 @@
     </message>
     <message>
         <source>foobar</source>
-        <translation type="unfinished"></translation>
+        <translation>foobar</translation>
     </message>
     <message>
         <source>New</source>

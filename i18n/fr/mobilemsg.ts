@@ -1,72 +1,73 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>MobileMsg</name>
     <message>
         <source>Messages: </source>
-        <translation type="unfinished"></translation>
+        <translation>Messages :</translation>
     </message>
 </context>
 <context>
     <name>MobileMsgBase</name>
     <message>
         <source>Mobile Messaging</source>
-        <translation type="unfinished"></translation>
+        <translation>Message du Mobile</translation>
     </message>
     <message>
         <source>Number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre :</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished"></translation>
+        <translation>Envoyer</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Texte</translation>
     </message>
     <message>
         <source>Flash</source>
-        <translation type="unfinished"></translation>
+        <translation>Flasher</translation>
     </message>
     <message>
         <source>Unicode</source>
-        <translation type="unfinished"></translation>
+        <translation>Unicode</translation>
     </message>
     <message>
         <source>SMS: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>SMS : %1</translation>
     </message>
     <message>
         <source>Nokia</source>
-        <translation type="unfinished"></translation>
+        <translation>Nokia</translation>
     </message>
     <message>
         <source>Country:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pays :</translation>
     </message>
     <message>
         <source>Logo</source>
-        <translation type="unfinished"></translation>
+        <translation>Logo</translation>
     </message>
     <message>
         <source>Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Groupe</translation>
     </message>
     <message>
         <source>Picture</source>
-        <translation type="unfinished"></translation>
+        <translation>Image</translation>
     </message>
     <message>
         <source>Message:</source>
-        <translation type="unfinished"></translation>
+        <translation>Message :</translation>
     </message>
     <message>
         <source>EMS</source>
-        <translation type="unfinished"></translation>
+        <translation>EMS</translation>
     </message>
     <message>
         <source>Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Tab</translation>
     </message>
 </context>
 </TS>

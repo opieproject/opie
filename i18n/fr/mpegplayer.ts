@@ -65,7 +65,7 @@
     </message>
     <message>
         <source>Play Operations</source>
-        <translation type="unfinished"></translation>
+        <translation>Opérations de Lecture</translation>
     </message>
     <message>
         <source>Add to Playlist</source>
@@ -153,12 +153,13 @@ lors du prochain démarrage.</translation>
     </message>
     <message>
         <source>There was a problem in getting the file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Une erreur est survenue lors de l&apos;accès au fichier.</translation>
     </message>
     <message>
         <source>This is all ready in your playlist.
 Continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ceci est déjà présent dans votre liste de lecture.
+Continuer ?</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -180,7 +181,7 @@ cette liste?</translation>
     </message>
     <message>
         <source>Play Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Jouer la Séléction</translation>
     </message>
     <message>
         <source>Title</source>

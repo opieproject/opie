@@ -4,31 +4,31 @@
     <name>LiquidSet</name>
     <message>
         <source>Liquid Style</source>
-        <translation>Thème Liquid</translation>
+        <translation>Thème Liquide</translation>
     </message>
     <message>
         <source>No translucency</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas de transparence</translation>
     </message>
     <message>
         <source>Stippled, background color</source>
-        <translation type="unfinished"></translation>
+        <translation>Pointillé, couleur de fond</translation>
     </message>
     <message>
         <source>Stippled, button color</source>
-        <translation type="unfinished"></translation>
+        <translation>Pointillé, couleur de bouton</translation>
     </message>
     <message>
         <source>Translucent stippled, background color</source>
-        <translation type="unfinished"></translation>
+        <translation>Pointillé translucide, couleur de fond</translation>
     </message>
     <message>
         <source>Translucent stippled, button color</source>
-        <translation type="unfinished"></translation>
+        <translation>Pointillé translucide, couleur de bouton</translation>
     </message>
     <message>
         <source>Custom translucency</source>
-        <translation type="unfinished"></translation>
+        <translation>Transparence personnalisée</translation>
     </message>
     <message>
         <source>Menu color</source>
