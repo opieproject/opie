@@ -69,13 +69,13 @@ void AdvancedFm::cleanUp() {
 }
 
 void AdvancedFm::tabChanged(QWidget *wd) {
-//		qDebug("tabChanged");
  		if(wd == tab) {
 				whichTab = 1;
  				viewMenu->setItemChecked(viewMenu->idAt(0), true);
  				viewMenu->setItemChecked(viewMenu->idAt(1), false);
 // 				qDebug("tabchanged: LOCAL VIEW SHOWN");
 		}
+
  		else if(wd == tab_2) {
 				whichTab = 2;
  				viewMenu->setItemChecked(viewMenu->idAt(0), false);
@@ -84,10 +84,6 @@ void AdvancedFm::tabChanged(QWidget *wd) {
 		}
 		qApp->processEvents();
  		QString path = CurrentDir()->canonicalPath();
-//		qDebug(path);
- 		if ( TabWidget->currentWidget() == tab) {
- 		} else {
- 		}
 
  		chdir( path.latin1());
  		currentPathCombo->lineEdit()->setText(path);
@@ -266,15 +262,15 @@ void AdvancedFm::refreshCurrentTab() {
 }
 
 void AdvancedFm::switchToLocalTab() {
-		TabWidget->setCurrentWidget(0);
-//		Local_View->setFocus();
-		whichTab = 1;
+		TabWidget->setCurrentWidget(tab);
+		Local_View->setFocus();
+//		whichTab = 1;
 }
 
 void AdvancedFm::switchToRemoteTab() {
-		TabWidget->setCurrentWidget(1);
-//		Remote_View->setFocus();
-		whichTab = 2;
+		TabWidget->setCurrentWidget(tab_2);
+		Remote_View->setFocus();
+//		whichTab = 2;
 }
 
 void  AdvancedFm::currentPathComboChanged() {
@@ -758,9 +754,15 @@ void AdvancedFm::setDocument(const QString &file) {
 
 
 void AdvancedFm::slotSwitchMenu(int item) {
-		Q_UNUSED(item);
-//		qDebug( "Switch %d",item);
-   //   viewMenu->setItemChecked(item, true);
+   if(item == -23)  {
+      switchToLocalTab();
+      tabChanged( tab);
+    }
+
+    if(item == -24) {
+      switchToRemoteTab();
+      tabChanged( tab_2);
+    }
 }
 
 void AdvancedFm::navigateToSelected() {
