@@ -9,6 +9,7 @@ DESTDIR		= ../../plugins/inputmethods
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH      += ../$(OPIEDIR)/include ../../launcher
 LIBS            += -lqpe -L$(OPIEDIR)/plugins/inputmethods -lqpickboard
+QMAKE_LFLAGS	+= -Wl,-rpath,/opt/QtPalmtop/plugins/inputmethods
 VERSION		= 1.0.0
 
 TRANSLATIONS = ../../i18n/de/libqdvorak.ts \
