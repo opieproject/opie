@@ -1,11 +1,11 @@
 Package: opie-bounce
 Files: plugins/application/libbounce.so* bin/bounce apps/Games/bounce.desktop pics/bounce/*.png
-Version: 0.6-$SUB_VERSION 
-Depends: task-opie-minimal
+Version: 0.6-$SUB_VERSION
+Depends: task-opie-minimal, libopiecore2
 Priority: optional
 Section: opie/games
-Maintainer: Martin Imobersteg <imm@gmx.ch> 
+Maintainer: Martin Imobersteg <imm@gmx.ch>
 Architecture: arm
 License: GPL
-Description: bounce 
+Description: bounce
  A JezzGame like game for Qtopia.
