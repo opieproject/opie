@@ -155,8 +155,8 @@ void  Ntp::ntpFinished(OProcess *p)
   // (example re-trigger alarms for when we travel back in time)
   DateBookDB db;
   
-  QCopEnvelope timeApplet( "QPE/TaskBar", "reloadApplets()" );
-  timeApplet << "";
+//  QCopEnvelope timeApplet( "QPE/TaskBar", "reloadApplets()" );
+//  timeApplet << "";
   
 	Config cfg("ntp",Config::User);
   cfg.setGroup("lookups");
