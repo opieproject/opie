@@ -1,4 +1,4 @@
-default:  dynamic
+indefault:  dynamic
 
 all: default docs
 
@@ -11,43 +11,51 @@ COMPONENTS=$(LOCALCOMPONENTS) inputmethods/keyboard \
 	inputmethods/jumpx \
 	inputmethods/kjumpx \
 	inputmethods/dvorak \
-	launcher/batteryapplet \
-	launcher/batteryapplet-ipaq \
-	launcher/irdaapplet \
-	launcher/volumeapplet \
-	launcher/clockapplet \
-	launcher/netmonapplet \
-	launcher/screenshotapplet \
-	launcher/clipboardapplet \
-	launcher/cardmon \
-	launcher/obex \
-	launcher/vmemo \
-	netsetup/dialup \
-	netsetup/lan \
-	opiemail/ifaces/pop3 opiemail/ifaces/smtp \
-	core/opieplayer/libmpeg3 \
-	core/opieplayer/libmad \
-	core/opieplayer/wavplugin \
+	core/applets/batteryapplet \
+	core/applets/batteryapplet-ipaq \
+	core/applets/irdaapplet \
+	core/applets/volumeapplet \
+	core/applets/clockapplet \
+	core/applets/netmonapplet \
+	core/applets/screenshotapplet \
+	core/applets/clipboardapplet \
+	core/applets/cardmon \
+	core/applets/obex \
+	core/applets/vmemo \
+	noncore/net/netsetup/dialup \
+	noncore/net/netsetup/lan \
+	core/multimedia/opieplayer/libmpeg3 \
+	core/multimedia/opieplayer/libmad \
+	core/multimedia/opieplayer/wavplugin \
 	noncore/mail/libmail \
 	noncore/mail/bend \
 
-APPS=$(LOCALAPPS) core/addressbook calculator clock datebook \
-    filebrowser helpbrowser minesweep core/opieplayer \
-    settings/light-and-power \
-    settings/language \
-    settings/rotation \
-    settings/appearance \
-    settings/security \
-    settings/sound \
-    settings/systemtime \
-    settings/mediummount \
-    settings/tabmanager \
-    solitaire spreadsheet tetrix textedit \
-    todo wordgame embeddedkonsole launcher sysinfo \
-    parashoot snake citytime showimg netsetup core/wlansetup tableviewer \
-    core/oipkg mindbreaker go qasteroids qcop fifteen keypebble  today opiemail/converter opiemail \
-    noncore/tictac noncore/opieftp noncore/drawpad noncore/kcheckers noncore/appskey noncore/qpdf \
-    noncore/kpacman noncore/advancedfm noncore/kbill noncore/remote noncore/opie-sh \
+APPS=$(LOCALAPPS) core/pim/addressbook noncore/tools/calculator \
+    noncore/tools/clock core/pim/datebook core/apps/filebrowser \
+    core/apps/helpbrowser noncore/games/minesweep \
+    core/multimedia/opieplayer core/settings/light-and-power \
+    noncore/settings/language \
+    noncore/settings/rotation \
+    noncore/settings/appearance \
+    core/settings/security \
+    noncore/settings/sound \
+    core/settings/systemtime \
+    noncore/settings/mediummount \
+    noncore/settings/tabmanager \
+    noncore/games/solitaire noncore/apps/spreadsheet \
+    noncore/games/tetrix  core/apps/textedit  \
+    core/pim/todo noncore/games/wordgame core/apps/embeddedkonsole \
+    core/launcher core/apps/sysinfo \
+    noncore/games/parashoot noncore/games/snake core/settings/citytime  \
+    noncore/multimedia/showimg noncore/net/netsetup core/settings/wlansetup \
+    noncore/apps/tableviewer   core/apps/oipkg noncore/games/mindbreaker \
+    noncore/games/go noncore/games/qasteroids core/apps/qcop \
+    noncore/games/fifteen noncore/comm/keypebble  \
+    core/pim/today  noncore/games/tictac noncore/net/opieftp  \
+    noncore/graphics/drawpad noncore/games/kcheckers noncore/settings/appskey \
+    noncore/graphics/qpdf   noncore/games/kpacman noncore/apps/advancedfm  \
+    noncore/games/kbill noncore/tools/remote  \
+    noncore/tools/opie-sh \
     noncore/mail
 
 NONTMAKEAPPS := ipaq/opiealarm noncore/nethack

@@ -288,6 +288,6 @@ done
 
 MAKE=make
 echo
-echo "QPE is now configured for building. Just run $MAKE (or $MAKE single)."
+echo "Opie is now configured for building. Just run $MAKE (or $MAKE single)."
 echo "To reconfigure, run $MAKE clean and configure."
 echo
