@@ -522,6 +522,13 @@ QHostAddress ODHCPPacket::relayAddress() const
     return EXTRACT_32BITS( &_dhcphdr->giaddr );
 }
 
+
+OMacAddress ODHCPPacket::clientMacAddress() const
+{
+    return OMacAddress( _dhcphdr->chaddr );
+}
+
+
 /*======================================================================================
  * OTCPPacket
  *======================================================================================*/

@@ -509,6 +509,8 @@ class ODHCPPacket : public QObject
     QHostAddress serverAddress() const;
     QHostAddress relayAddress() const;
 
+    OMacAddress clientMacAddress() const;
+
     bool isRequest() const;
     bool isReply() const;
     QString type() const;
