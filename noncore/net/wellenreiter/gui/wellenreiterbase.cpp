@@ -33,6 +33,7 @@ using namespace Opie;
 #include <qtabwidget.h>
 #endif
 
+#define WELLENREITER_VERSION "V1.0.3 (unofficial)"
 
 /*
  *  Constructs a WellenreiterBase which is a child of 'parent', with the
@@ -105,7 +106,14 @@ WellenreiterBase::WellenreiterBase( QWidget* parent,  const char* name, WFlags f
     PixmapLabel1_3_2->setLineWidth( 2 );
     PixmapLabel1_3_2->setMargin( 0 );
     PixmapLabel1_3_2->setMidLineWidth( 0 );
-    PixmapLabel1_3_2->setPixmap(  Resource::loadPixmap( "wellenreiter/logo" ) );
+
+    QPixmap logo = Resource::loadPixmap( "wellenreiter/logo" );
+    QPainter draw( &logo );
+    draw.setPen( Qt::black );
+    draw.setFont( QFont( "Fixed", 8 ) );
+    draw.drawText( 30, 10, WELLENREITER_VERSION );
+
+    PixmapLabel1_3_2->setPixmap( logo );
     PixmapLabel1_3_2->setScaledContents( TRUE );
     PixmapLabel1_3_2->setAlignment( int( QLabel::AlignCenter ) );
 
@@ -168,14 +176,14 @@ bool WellenreiterBase::event( QEvent* ev )
 {
     bool ret = QWidget::event( ev );
     if ( ev->type() == QEvent::ApplicationFontChange ) {
-	//QFont Log_2_font(  Log_2->font() );
-	//Log_2_font.setFamily( "adobe-courier" );
-	//Log_2_font.setPointSize( 8 );
-	//Log_2->setFont( Log_2_font );
-	QFont TextLabel1_4_2_font(  TextLabel1_4_2->font() );
-	TextLabel1_4_2_font.setFamily( "adobe-helvetica" );
-	TextLabel1_4_2_font.setPointSize( 10 );
-	TextLabel1_4_2->setFont( TextLabel1_4_2_font );
+    //QFont Log_2_font(  Log_2->font() );
+    //Log_2_font.setFamily( "adobe-courier" );
+    //Log_2_font.setPointSize( 8 );
+    //Log_2->setFont( Log_2_font );
+    QFont TextLabel1_4_2_font(  TextLabel1_4_2->font() );
+    TextLabel1_4_2_font.setFamily( "adobe-helvetica" );
+    TextLabel1_4_2_font.setPointSize( 10 );
+    TextLabel1_4_2->setFont( TextLabel1_4_2_font );
     }
     return ret;
 }

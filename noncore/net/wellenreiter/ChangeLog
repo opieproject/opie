@@ -1,5 +1,9 @@
-2004-??-??	Michael Lauer		<mickey@Vanille.de>
+2004-05-04	Michael Lauer		<mickey@Vanille.de>
 
+	* Released as Version 1.0.3
+	* Removed the dummy capture file which has always been written to if none was chosen.
+	* Removed the old dumb hex window tab and added a nice PackageViewer tab.
+	* Added configuration options for the PackageViewer buffer size.
 	* Registered a signal handler. We're now trying to gracefully exit and emergency close capture files.
           This should allow reproducing failures.
 	* Added sanity check for compile time vs. run time Wireless Extension versions.

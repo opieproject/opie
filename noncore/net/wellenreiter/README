@@ -2,11 +2,11 @@
 /*                W e l l e n r e i t e r   I I
 /*               ===============================
 /*
-/*                    Version: 1.0.2
+/*                    Version: 1.0.3
 /************************************************************************
 
 ----------------------------------------------------
- Release Notes for Wellenreiter II / December 2003
+ Release Notes for Wellenreiter II / May 2004
 ----------------------------------------------------
 
 =====================
@@ -31,7 +31,7 @@ packages for Qt3/X11, depending on the distribution e.g. libqt3-devel, libqt3-de
  * as root, './build install'
  * Wellenreiter will be installed in /usr/local (sorry, no relocation possible yet)
 
-The current CVS version of Wellenreiter II is _not_ X11 compatible.
+NOTE: The current version of Wellenreiter II is _not_ X11 compatible.
 
 =====================
 = Precompiled Binaries
