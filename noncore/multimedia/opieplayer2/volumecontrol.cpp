@@ -6,13 +6,12 @@
 
 #include "volumecontrol.h"
 
-int VolumeControl::getVolume() {
-    int volumePerc;
+int VolumeControl::volume() {
     Config cfg( "qpe" );
     cfg. setGroup( "Volume" );
-    volumePerc = cfg. readNumEntry( "VolumePercent", 50 );
-    m_volumePerc = volumePerc;
-    return volumePerc;
+    m_volumePerc = cfg. readNumEntry( "VolumePercent", 50 );
+    
+    return m_volumePerc;
 }
 
 
@@ -35,18 +34,18 @@ void VolumeControl::setVolume( int volumePerc ) {
 
 
 void VolumeControl::incVol( int ammount ) {
-    int oldVol = getVolume();
+    int oldVol = volume();
     setVolume( oldVol + ammount);
 }
 
 void VolumeControl::decVol( int ammount ) {
-     int oldVol = getVolume();
+     int oldVol = volume();
     setVolume( oldVol - ammount);
 }
 
 
 VolumeControl::VolumeControl( ) {
-    getVolume();
+    volume();
 }
 
 VolumeControl::~VolumeControl() {

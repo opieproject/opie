@@ -43,7 +43,6 @@ class XineControl : public QObject  {
 public:
     XineControl( QObject *parent = 0, const char *name =0 );
     ~XineControl();
-    int m_length;
 
     bool hasVideo() const { return hasVideoChannel; }
     bool hasAudio() const { return hasAudioChannel; }
@@ -64,12 +63,13 @@ public slots:
 private:
     XINE::Lib *libXine;
     MediaDetect mdetect;
-    long m_currentTime;
+    long m_currentTime;    
     long m_position;
+    int m_length;
     QString m_fileName;
-    bool disabledSuspendScreenSaver;
-    bool hasVideoChannel;
-    bool hasAudioChannel;
+    bool disabledSuspendScreenSaver : 1;
+    bool hasVideoChannel : 1;
+    bool hasAudioChannel : 1;
 signals:
     void positionChanged( long );
 

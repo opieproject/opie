@@ -141,6 +141,7 @@ void XineVideoWidget::paintEvent ( QPaintEvent * )
           case 1: src += ( (( clip. y ( ) - framerect. y ( )) * m_bytes_per_pixel ) + (( clip. x ( ) - framerect. x ( )) * m_bytes_per_line_frame ) + (( framerect. height ( ) - 1 ) * m_bytes_per_pixel ) ); break;
           case 2: src += ( (( clip. x ( ) - framerect. x ( )) * m_bytes_per_pixel ) + (( clip. y ( ) - framerect. y ( )) * m_bytes_per_line_frame ) + (( framerect. height ( ) - 1 ) * m_bytes_per_line_frame ) ); break;
           case 3: src += ( (( clip. y ( ) - framerect. y ( )) * m_bytes_per_pixel ) + (( clip. x ( ) - framerect. x ( )) * m_bytes_per_line_frame ) ); break;
+	  default: break;
         }
 
         uint leftfill = 0;
@@ -169,6 +170,7 @@ void XineVideoWidget::paintEvent ( QPaintEvent * )
                 case 1: memcpy_step ( dst + leftfill, src, framefill, m_bytes_per_line_frame );     break;
                 case 2: memcpy_rev ( dst + leftfill, src, framefill );                              break;
                 case 3: memcpy_step_rev ( dst + leftfill, src, framefill, m_bytes_per_line_frame ); break;
+		default: break;
               }
             }
             if ( rightfill )
@@ -182,6 +184,7 @@ void XineVideoWidget::paintEvent ( QPaintEvent * )
             case 1: src -= m_bytes_per_pixel;      break;
             case 2: src -= m_bytes_per_line_frame; break;
             case 3: src += m_bytes_per_pixel;      break;
+	    default: break;
           }
         }
       }
@@ -244,7 +247,7 @@ void XineVideoWidget::resizeEvent ( QResizeEvent * )
 }
 
 
-void XineVideoWidget::mousePressEvent ( QMouseEvent *me )
+void XineVideoWidget::mousePressEvent ( QMouseEvent * /*me*/ )
 {
   QWidget *p = parentWidget ( );
 
@@ -256,7 +259,7 @@ void XineVideoWidget::mousePressEvent ( QMouseEvent *me )
   }
 }
 
-void XineVideoWidget::mouseReleaseEvent ( QMouseEvent *me )
+void XineVideoWidget::mouseReleaseEvent ( QMouseEvent * /*me*/ )
 {
   QWidget *p = parentWidget ( );
 

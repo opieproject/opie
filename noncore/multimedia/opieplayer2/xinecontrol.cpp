@@ -71,7 +71,9 @@ void XineControl::play( const QString& fileName ) {
     hasVideoChannel=FALSE;
     hasAudioChannel=FALSE;
     m_fileName = fileName;
+    
     qDebug("<<FILENAME: " + fileName  + ">>>>");
+    
     libXine->play( fileName );
     mediaPlayerState->setPlaying( true );
     // default to audio view until we know how to handle video

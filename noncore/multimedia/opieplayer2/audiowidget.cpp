@@ -165,8 +165,8 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
     }
 
     for ( int i = 0; i < 10; i++ ) {
-        buttonPixUp[i] = NULL;
-        buttonPixDown[i] = NULL;
+        buttonPixUp[i] = 0l;
+        buttonPixDown[i] = 0l;
     }
 
     setBackgroundPixmap( *pixBg );
@@ -227,6 +227,8 @@ AudioWidget::~AudioWidget() {
     }
 }
 
+namespace {
+
 QPixmap *combineImageWithBackground( QImage img, QPixmap bg, QPoint offset ) {
     QPixmap pix( img.width(), img.height() );
     QPainter p( &pix );
@@ -242,7 +244,7 @@ QPixmap *maskPixToMask( QPixmap pix, QBitmap mask ) {
     return pixmap;
 }
 
-
+};
 
 void AudioWidget::resizeEvent( QResizeEvent * ) {
     int h = height();

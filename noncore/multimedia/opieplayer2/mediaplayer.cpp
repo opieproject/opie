@@ -180,8 +180,8 @@ void MediaPlayer::timerEvent( QTimerEvent * ) {
 
 
       // TODO FIXME
-    unsigned int v;
-    v = volControl->getVolume();
+    unsigned int v= 0;
+    v = volControl->volume();
     v = v / 10;
 
     if ( drawnOnScreenDisplay && onScreenDisplayVolume == v ) {

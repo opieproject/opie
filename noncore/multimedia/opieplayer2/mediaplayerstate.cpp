@@ -16,7 +16,7 @@ MediaPlayerState::MediaPlayerState( QObject *parent, const char *name )
         : QObject( parent, name ) {
     Config cfg( "OpiePlayer" );
     readConfig( cfg );
-
+    isStreaming = false;
 }
 
 

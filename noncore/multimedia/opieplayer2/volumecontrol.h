@@ -25,7 +25,7 @@ public:
      * Get the volume in percent
      * @return volume percentage
      */
-    int getVolume();
+    int volume();
 
 public slots:
 

@@ -26,12 +26,16 @@ InputDialog::InputDialog( QWidget* parent,  const char* name, bool modal, WFlags
     LineEdit1 = new QLineEdit( this, "LineEdit1" );
     LineEdit1->setGeometry( QRect( 4, 10, 190, 22 ) );
 }
-
+/*
+ * return the current text(input)
+ */
+QString InputDialog::text() const {
+   return LineEdit1->text(); 
+}
 /*
  *  Destroys the object and frees any allocated resources
  */
 InputDialog::~InputDialog() {
-    inputText= LineEdit1->text();
 }
 
 void InputDialog::browse() {

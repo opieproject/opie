@@ -46,6 +46,8 @@
 
 class QPixmap;
 
+namespace {
+
 enum AudioButtons {
     AudioPlay=0,
     AudioStop,
@@ -58,7 +60,7 @@ enum AudioButtons {
     AudioForward,
     AudioBack
 };
-
+};
 
 class Ticker : public QFrame {
     Q_OBJECT
@@ -140,6 +142,7 @@ private:
     QSlider slider;
     QLineEdit time;
     int xoff, yoff;
+    bool isStreaming : 1;
 };
 
 

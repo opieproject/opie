@@ -589,7 +589,7 @@ void PlayListWidget::saveList() {
   if( fileDlg->result() == 1 ) {
     if ( d->current )
       delete d->current;
-    filename = fileDlg->LineEdit1->text();//+".playlist";
+    filename = fileDlg->text();//+".playlist";
     //         qDebug("saving playlist "+filename+".playlist");
     Config cfg( filename +".playlist");
     writeConfig( cfg );
@@ -948,7 +948,7 @@ void PlayListWidget::openFile() {
   fileDlg = new InputDialog(this,tr("Open file or URL"),TRUE, 0);
   fileDlg->exec();
   if( fileDlg->result() == 1 ) {
-    filename = fileDlg->LineEdit1->text();
+    filename = fileDlg->text();
 
     qDebug("Selected filename is "+filename);
     if(filename.right(3) == "m3u") {
@@ -1123,7 +1123,7 @@ void PlayListWidget::writem3u() {
   fileDlg->exec();
   QString filename,list;
   if( fileDlg->result() == 1 ) {
-    filename = fileDlg->LineEdit1->text();
+    filename = fileDlg->text();
     qDebug(filename);
     int noOfFiles = 0;
     d->selectedFiles->first();
