@@ -64,6 +64,13 @@ void PackageListView::showPopup()
 	  connect( destsMenu, SIGNAL( activated( int ) ),
 		   this, SLOT( changePackageDest( int ) ) );
    }else{
+   	popupAction = new QAction( QObject::tr("Remove"),QString::null,  0, this, 0 );
+		popupAction->addTo( popupMenu );
+  	connect( popupAction, SIGNAL( activated() ),
+	   	this , SLOT( toggleProcess() ) );
+   	popupAction = new QAction( QObject::tr("Reinstall"),QString::null,  0, this, 0 );
+		popupAction->addTo( popupMenu );
+  	popupAction->setEnabled( false );
    }
   popupMenu->popup( QCursor::pos() );
 }
