@@ -127,18 +127,17 @@ bool TransMenuHandler::eventFilter(QObject *obj, QEvent *ev)
 
             pixDict.insert(p->winId(), pix);
             
-            if (!p->inherits("QPopupMenu")) {
+            if ( !p->inherits("QPopupMenu")) 
             	p->setBackgroundPixmap(*pix);
             	
-            	QObjectList *ol = p-> queryList("QWidget");
-				for ( QObjectListIt it( *ol ); it. current ( ); ++it ) {
-					QWidget *wid = (QWidget *) it.current ( );
+            QObjectList *ol = p-> queryList("QWidget");
+			for ( QObjectListIt it( *ol ); it. current ( ); ++it ) {
+				QWidget *wid = (QWidget *) it.current ( );
 					
-					wid-> setBackgroundPixmap(*pix);
-			    	wid-> setBackgroundOrigin(QWidget::ParentOrigin);					
-                }
-				delete ol;
-   			}
+				wid-> setBackgroundPixmap(*pix);
+			   	wid-> setBackgroundOrigin(QWidget::ParentOrigin);					
+            }
+			delete ol;
         }
     }
     else if(ev->type() == QEvent::Hide){
@@ -147,17 +146,16 @@ bool TransMenuHandler::eventFilter(QObject *obj, QEvent *ev)
 //            qWarning("Deleting menu pixmap, width %d", pixDict.find(p->winId())->width());
 
             pixDict.remove(p->winId());
-            if (!p->inherits("QPopupMenu")) {
+            if ( !p->inherits("QPopupMenu")) 
                 p->setBackgroundMode(QWidget::PaletteBackground);
 
-            	QObjectList *ol = p-> queryList("QWidget");
-				for ( QObjectListIt it( *ol ); it. current ( ); ++it ) {
-					QWidget *wid = (QWidget *) it.current ( );
-					
-					wid-> setBackgroundMode( QWidget::PaletteBackground );
-                }
-				delete ol;
+          	QObjectList *ol = p-> queryList("QWidget");
+			for ( QObjectListIt it( *ol ); it. current ( ); ++it ) {
+				QWidget *wid = (QWidget *) it.current ( );
+				
+				wid-> setBackgroundMode( QWidget::PaletteBackground );
             }
+			delete ol;
         }
     }
     return(false);
