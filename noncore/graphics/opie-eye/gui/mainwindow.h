@@ -65,6 +65,7 @@ protected slots:
     void showToolbar(bool);
     void listviewselected(QAction*);
     void slotFullScreenButton(bool);
+    void check_view_fullscreen();
 
 private:
     template<class T>  void initT( const char* name, T**, int );

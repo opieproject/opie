@@ -73,6 +73,7 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
     setupMenu();
     m_aHideToolbar->setOn(m_cfg->readBoolEntry("showtoolbar",true));
     m_aAutoRotate->setEnabled(!m_aUnscaled->isOn());
+    odebug << "mainwindow constructor done" << oendl;
 }
 
 PMainWindow::~PMainWindow() {
@@ -433,13 +434,26 @@ void PMainWindow::closeEvent( QCloseEvent* ev ) {
     QTimer::singleShot(0, qApp, SLOT(closeAllWindows()));
 }
 
-void PMainWindow::setDocument( const QString& showImg ) {
+void PMainWindow::setDocument( const QString& showImg )
+{
+    bool first_start = m_disp==0;
+
     QString file = showImg;
     DocLnk lnk(showImg);
     if (lnk.isValid() )
         file = lnk.file();
-
     slotDisplay( file );
+    if (first_start && m_aFullScreen->isOn()) {
+        QTimer::singleShot(0,this,SLOT(check_view_fullscreen()));
+    }
+}
+
+void PMainWindow::check_view_fullscreen()
+{
+    if (!m_view) return;
+    if (!m_view->hasFocus()&&m_aFullScreen->isOn()) {
+        qwsDisplay()->requestFocus( m_disp->winId(), TRUE);
+    }
 }
 
 void PMainWindow::slotSelectDir(int id)
