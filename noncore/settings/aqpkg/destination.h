@@ -28,6 +28,9 @@ public:
 
     void setDestinationName( const QString &name ) { destName = name; }
     void setDestinationPath( const QString &path )   { destPath = path; }
+    void linkToRoot( bool val )             { linkToRootDir = val; }
+
+    bool linkToRoot()             { return linkToRootDir; }
     QString &getDestinationName() { return destName; }
     QString &getDestinationPath()  { return destPath; }
 
@@ -36,6 +39,7 @@ protected:
 private:
   QString destName;
   QString destPath;
+  bool linkToRootDir;
 };
 
 #endif
