@@ -68,3 +68,5 @@ ipk.commands = tmp=`mktemp -d /tmp/ipkg-opie.XXXXXXXXXX` && ( $(MAKE) INSTALL_RO
 QMAKE_EXTRA_UNIX_TARGETS += lupdate lrelease ipk
 QMAKE_LFLAGS += -Wl,-rpath=$$prefix/lib
 QMAKE_LIBDIR += $(OPIEDIR)/lib
+
+include ( $(OPIEDIR)/gen.pro )

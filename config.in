@@ -38,6 +38,10 @@ config OPTIMIZE
   boolean "Use optimizations"
   default "y" if ! TARGET_X86
 
+config DEBUG
+  boolean "Enable debug builds"
+  default "n"
+
 config SPECFILE
   string
   default "qws/linux-generic-g++" if TARGET_X86 && (! X11)
