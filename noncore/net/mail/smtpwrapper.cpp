@@ -525,7 +525,7 @@ void SMTPwrapper::progress( size_t current, size_t maximum )
 {
     if (SMTPwrapper::sendProgress) {
         SMTPwrapper::sendProgress->setSingleMail(current, maximum );
-        qDebug("%u of %u",current,maximum);
+        qApp->processEvents();
     }
 }
 
@@ -652,9 +652,9 @@ void SMTPwrapper::sendMail(const Mail&mail,bool later )
         qDebug( "sendMail: error creating mime mail" );
     } else {
         sendProgress = new progressMailSend();
-        sendProgress->showMaximized();
+//        sendProgress->showMaximized(); 
         sendProgress->show();
-        qApp->processEvents(10);
+        sendProgress->setMaxMails(1);
         smtpSend( mimeMail,later,smtp);
         mailmime_free( mimeMail );
         qDebug("Clean up done");
@@ -713,6 +713,11 @@ void SMTPwrapper::flushOutbox(SMTPaccount*smtp)
         return;
     }
     mailsToSend.setAutoDelete(false);
+    sendProgress = new progressMailSend();
+//        sendProgress->showMaximized(); 
+   sendProgress->show();
+   sendProgress->setMaxMails(mailsToSend.count());
+
     while (mailsToSend.count()>0) {
         if (sendQueuedMail(wrap,smtp,mailsToSend.at(0))==0) {
             QMessageBox::critical(0,tr("Error sending mail"),
@@ -721,7 +726,11 @@ void SMTPwrapper::flushOutbox(SMTPaccount*smtp)
         }
         mailsToRemove.append(mailsToSend.at(0));
         mailsToSend.removeFirst();
+        sendProgress->setCurrentMails(mailsToRemove.count());
     }
+    sendProgress->hide();
+    delete sendProgress;
+    sendProgress = 0;
     wrap->deleteMails(mbox,mailsToRemove);
     mailsToSend.setAutoDelete(true);
     delete wrap;

@@ -4,7 +4,7 @@
 #include <qstring.h>
 
 progressMailSend::progressMailSend(QWidget*parent, const char * name)
-    :progressMailSendUI(parent,name,false),m_current_mail(0),m_current_single(0),m_max_mail(0),m_max_single(0)
+    :progressMailSendUI(parent,name,true),m_current_mail(0),m_current_single(0),m_max_mail(0),m_max_single(0)
 {
 }
 
@@ -43,6 +43,6 @@ void progressMailSend::setSingle()
 
 void progressMailSend::setMails()
 {
-    QString text = QString(tr("Sending mail %1 of %2")).arg(m_current_single+1).arg(m_max_single);
+    QString text = QString(tr("Sending mail %1 of %2")).arg(m_current_mail+1).arg(m_max_mail);
     allMailLabel->setText(text);
 }
