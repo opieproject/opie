@@ -7,6 +7,9 @@
 #include <qdir.h>
 #include <qt.h>
 
+#include <qpe/config.h>
+#include <qpe/qcopenvelope_qws.h>
+
 #include <libetpan/libetpan.h>
 
 #include "smtpwrapper.h"
@@ -23,6 +26,16 @@ SMTPwrapper::SMTPwrapper( Settings *s )
     : QObject()
 {
     settings = s;
+    Config cfg( "mail" );
+    cfg.setGroup( "Status" );
+    m_queuedMail =  cfg.readNumEntry( "outgoing", 0 );
+    emit queuedMails( m_queuedMail );
+    connect( this, SIGNAL( queuedMails( int ) ), this, SLOT( emitQCop( int ) )  );
+}
+
+void SMTPwrapper::emitQCop( int queued ) {
+    QCopEnvelope env( "QPE/Pim", "outgoingMails(int)" );
+    env << queued;
 }
 
 QString SMTPwrapper::mailsmtpError( int errnum )
@@ -248,7 +261,7 @@ mailmime *SMTPwrapper::buildFilePart(const QString&filename,const QString&mimety
         name = strdup( tmp.latin1() );        // just filename
         file = strdup( filename.latin1() );   // full name with path
     }
-    
+
     int disptype = MAILMIME_DISPOSITION_TYPE_ATTACHMENT;
     int mechanism = MAILMIME_MECHANISM_BASE64;
 
@@ -350,7 +363,7 @@ mailmime *SMTPwrapper::createMimeMail(const Mail &mail )
     mailmime_set_imf_fields( message, fields );
 
     txtPart = buildTxtPart( mail.getMessage() );
-    
+
     if ( txtPart == NULL ) goto err_free_message;
 
     err = mailmime_smart_add_part( message, txtPart );
@@ -489,7 +502,7 @@ void SMTPwrapper::smtpSend( mailmime *mail,bool later, SMTPaccount *smtp )
         return;
     }
     from = data = 0;
-    
+
     mailmessage * msg = 0;
     msg = mime_message_init(mail);
     mime_message_set_tmpdir(msg,getenv( "HOME" ));
@@ -507,6 +520,10 @@ void SMTPwrapper::smtpSend( mailmime *mail,bool later, SMTPaccount *smtp )
     if (later) {
         storeMail((char*)tmp.data(),tmp.length(),"Outgoing");
         if (data) free( data );
+        Config cfg( "mail" );
+        cfg.setGroup( "Status" );
+        cfg.writeEntry( "outgoing", ++m_queuedMail );
+        emit queuedMails( m_queuedMail );
         return;
     }
     from = getFrom( mail );
@@ -653,7 +670,7 @@ int SMTPwrapper::sendQueuedMail(MBOXwrapper*wrap,SMTPaccount*smtp,RecMail*which)
     }
     if (data) {
         free(data);
-    }    
+    }
     if (from) {
         free(from);
     }
@@ -700,6 +717,11 @@ bool SMTPwrapper::flushOutbox(SMTPaccount*smtp)
         mailsToSend.removeFirst();
         sendProgress->setCurrentMails(mailsToRemove.count());
     }
+    Config cfg( "mail" );
+    cfg.setGroup( "Status" );
+    m_queuedMail = 0;
+    cfg.writeEntry( "outgoing", m_queuedMail );
+    emit queuedMails( m_queuedMail );
     sendProgress->hide();
     delete sendProgress;
     sendProgress = 0;

@@ -25,6 +25,9 @@ OpieMail::OpieMail( QWidget *parent, const char *name, WFlags flags )
     connect( qApp, SIGNAL( appMessage( const QCString&, const QByteArray& ) ),
              this, SLOT( appMessage( const QCString&, const QByteArray& ) ) );
 #endif
+
+
+
 }
 
 void OpieMail::appMessage(const QCString &msg, const QByteArray &data)

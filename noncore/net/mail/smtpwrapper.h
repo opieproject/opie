@@ -31,6 +31,10 @@ public:
     bool flushOutbox(SMTPaccount*smtp);
 
     static progressMailSend*sendProgress;
+
+signals:
+    void queuedMails( int );  
+
 protected:
     mailimf_mailbox *newMailbox(const QString&name,const QString&mail );
     mailimf_fields *createImfFields(const Mail &mail );
@@ -56,6 +60,12 @@ protected:
     Settings *settings;
     
     int sendQueuedMail(MBOXwrapper*wrap,SMTPaccount*smtp,RecMail*which);
+
+    int m_queuedMail;
+
+protected slots:
+   void emitQCop( int queued );
+
 };
 
 #endif
