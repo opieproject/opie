@@ -3,6 +3,8 @@
 	Fixed Bugs
 	----------
 	* n.a.	- scale O-Menu-Applets appropriately (mickeyl)
+	* #1535	- Missing line break and unnecessary location shown with Today-Calendar plugin (deller)
+	* n.a.	- always show volume and wireless applet popups inside visible screen (deller)
 
 2005-03-25	Opie 1.2.0
 

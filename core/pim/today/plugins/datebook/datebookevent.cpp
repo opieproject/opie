@@ -50,8 +50,9 @@ DateBookEvent::DateBookEvent(const EffectiveEvent &ev,
     }
 
     // include location or not
-    if ( show_location ) {
-        msg += "<BR><i>" + (ev).location() + "</i>";
+    if ( show_location && !(ev).location().isEmpty() ) {
+        if ( (ev).location() != tr("(Unknown)") )
+               msg += "<BR><i>" + (ev).location() + "</i>";
     }
 
     QString timeSpacer = "   ";
@@ -59,13 +60,14 @@ DateBookEvent::DateBookEvent(const EffectiveEvent &ev,
         timeSpacer = "<br>";
     }
 
+    msg += timeSpacer;
+
     if ( ( TimeString::timeString( QTime( (ev).event().start().time() ) ) == "00:00" )
          &&  ( TimeString::timeString( QTime( (ev).event().end().time() ) ) == "23:59" ) ) {
         msg += tr ( "All day" );
     }  else {
         // start time of event
 //         QDate tempDate = (ev).event().start().date();
-        msg += timeSpacer;
         msg += ampmTime( QTime( (ev).event().start().time() ) )
                // end time of event
                + "<b> - </b>" + ampmTime( QTime( (ev).event().end().time() ) );
