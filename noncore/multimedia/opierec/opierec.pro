@@ -1,4 +1,4 @@
-CONFIG   = qtopia warn_on debug
+CONFIG   = qt warn_on debug
 #CONFIG    = qt warn_on release quick-app
 HEADERS   = adpcm.h pixmaps.h qtrec.h device.h wavFile.h
 SOURCES   = adpcm.c main.cpp qtrec.cpp device.cpp wavFile.cpp
