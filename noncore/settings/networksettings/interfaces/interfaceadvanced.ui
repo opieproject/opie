@@ -18,7 +18,7 @@
     <property stdset="1">
         <name>maximumSize</name>
         <size>
-            <width>240</width>
+            <width>32767</width>
             <height>32767</height>
         </size>
     </property>
