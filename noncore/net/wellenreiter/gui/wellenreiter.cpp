@@ -233,7 +233,7 @@ void Wellenreiter::handleEthernetData( OPacket* p, OEthernetPacket* data, OMacAd
 }
 
 
-void Wellenreiter::handleIPData( OPacket* p, OIPPacket* ip, OMacAddress& source, OMacAddress& dest )
+void Wellenreiter::handleARPData( OPacket* p, OARPPacket*, OMacAddress& source, OMacAddress& dest )
 {
     OARPPacket* arp = (OARPPacket*) p->child( "ARP" );
     if ( arp )
@@ -249,6 +249,12 @@ void Wellenreiter::handleIPData( OPacket* p, OIPPacket* ip, OMacAddress& source,
             netView()->identify( arp->targetMacAddress(), arp->targetIPV4Address().toString() );
         }
     }
+}
+
+
+void Wellenreiter::handleIPData( OPacket* p, OIPPacket* ip, OMacAddress& source, OMacAddress& dest )
+{
+    //TODO: Implement more IP based protocols
 
     ODHCPPacket* dhcp = (ODHCPPacket*) p->child( "DHCP" );
     if ( dhcp )
@@ -347,6 +353,14 @@ void Wellenreiter::receivePacket( OPacket* p )
     if ( eth )
     {
         handleEthernetData( p, eth, source, dest );
+    }
+
+    // check for an arp frame since arp frames come in two flavours:
+    // 802.11 encapsulates ARP data within IP packets while wired ethernet doesn't.
+    OARPPacket* arp = static_cast<OARPPacket*>( childIfToParse( p, "ARP" ) );
+    if ( arp )
+    {
+        handleARPData( p, arp, source, dest );
     }
 
     // check for a ip frame

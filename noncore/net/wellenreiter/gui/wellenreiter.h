@@ -29,6 +29,7 @@ class OPacket;
 class OWaveLanManagementPacket;
 class OWaveLanDataPacket;
 class OEthernetPacket;
+class OARPPacket;
 class OMacAddress;
 class OIPPacket;
 class OPacketCapturer;
@@ -73,6 +74,7 @@ class Wellenreiter : public WellenreiterBase {
     void handleBeacon( OPacket* p, OWaveLanManagementPacket* beacon );
     void handleWlanData( OPacket* p, OWaveLanDataPacket* data, OMacAddress& from, OMacAddress& to );
     void handleEthernetData( OPacket* p, OEthernetPacket* data, OMacAddress& from, OMacAddress& to );
+    void handleARPData( OPacket* p, OARPPacket* arp, OMacAddress& from, OMacAddress& to );
     void handleIPData( OPacket* p, OIPPacket* ip, OMacAddress& from, OMacAddress& to );
     void handleNotification( OPacket* p );
     void doAction( const QString& action, const QString& protocol, OPacket* p );
