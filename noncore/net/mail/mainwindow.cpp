@@ -139,7 +139,6 @@ void MainWindow::slotAdjustLayout() {
     } else {
     layout->setDirection( QBoxLayout::LeftToRight );
   }
-  delete d;
 }
 
 void MainWindow::slotAdjustColumns()
