@@ -2,7 +2,7 @@
 #include <opie/todoevent.h>
 #include <qpe/palmtopuidgen.h>
 #include <qpe/stringutil.h>
-//#include <qpe/palmtoprecord.h>
+#include <qpe/palmtoprecord.h>
 
 ToDoEvent::ToDoEvent(const ToDoEvent &event )
 {
@@ -25,6 +25,23 @@ ToDoEvent::ToDoEvent(bool completed, int priority, const QString &category,
 	delete uidgen;
     }// generate the ids
     m_uid = uid; 
+}
+QArray<int> ToDoEvent::categories()const
+{
+  QArray<int> array(1); // currently the datebook can be only in one category
+  array = Qtopia::Record::idsFromString( category() );
+  return array;
+}
+bool ToDoEvent::match( const QRegExp &regExp )const
+{
+  if( QString::number( m_priority ).find( regExp ) != -1 ){
+    return true;
+  }else if( m_hasDate && m_date.toString().find( regExp) != -1 ){
+    return true;
+  }else if(m_desc.find( regExp ) != -1 ){
+    return true;
+  }
+  return false;
 }
 bool ToDoEvent::isCompleted() const
 {
@@ -64,7 +81,8 @@ void ToDoEvent::setDescription(const QString &desc )
 }
 void ToDoEvent::setCategory( const QString &cat )
 {
-    m_category = cat;
+  qWarning("setCategory %s", cat.latin1() );
+  m_category = cat;
 }
 void ToDoEvent::setPriority(int prio )
 {

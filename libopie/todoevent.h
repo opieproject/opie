@@ -17,6 +17,7 @@ class ToDoEvent {
     bool hasDate() const;
     int priority()const ;
     QString category()const;
+    QArray<int> categories() const;
     QDate date()const;
     QString description()const;
 
@@ -29,6 +30,8 @@ class ToDoEvent {
     void setDate( QDate date );
     void setDescription(const QString& );
     bool isOverdue();
+
+    bool match( const QRegExp &r )const;
 
     void setUid(int id) {m_uid = id; };
     bool operator<(const ToDoEvent &toDoEvent )const;

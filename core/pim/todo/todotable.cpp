@@ -20,6 +20,7 @@
 
 #include "todotable.h"
 
+#include <opie/tododb.h>
 #include <qpe/categoryselect.h>
 #include <qpe/xmlreader.h>
 
@@ -39,7 +40,7 @@
 
 
 
-static bool taskCompare( const Task &task, const QRegExp &r, int category );
+static bool taskCompare( const ToDoEvent &task, const QRegExp &r, int category );
 
 static QString journalFileName();
 
@@ -62,7 +63,7 @@ void CheckItem::setChecked( bool b )
 void CheckItem::toggle()
 {
     TodoTable *parent = static_cast<TodoTable*>(table());
-    Task newTodo = parent->currentEntry();
+    ToDoEvent newTodo = parent->currentEntry();
     checked = !checked;
     newTodo.setCompleted( checked );
     table()->updateCell( row(), col() );
@@ -133,7 +134,7 @@ QWidget *ComboItem::createEditor() const
 void ComboItem::setContentFromEditor( QWidget *w )
 {
     TodoTable *parent = static_cast<TodoTable*>(table());
-    Task newTodo = parent->currentEntry();
+    ToDoEvent newTodo = parent->currentEntry();
 
     if ( w->inherits( "QComboBox" ) )
 	setText( ( (QComboBox*)w )->currentText() );
@@ -194,12 +195,12 @@ TodoTable::TodoTable( QWidget *parent, const char *name )
     connect( menuTimer, SIGNAL(timeout()), this, SLOT(slotShowMenu()) );
 }
 
-void TodoTable::addEntry( const Task &todo )
+void TodoTable::addEntry( const ToDoEvent &todo )
 {
     int row = numRows();
     setNumRows( row + 1 );
     updateJournal( todo, ACTION_ADD );
-    insertIntoTable( new Task(todo), row );
+    insertIntoTable( new ToDoEvent(todo), row );
     setCurrentCell(row, currentColumn());
     updateVisible();
 }
@@ -252,28 +253,28 @@ void TodoTable::slotCurrentChanged( int, int )
     menuTimer->stop();
 }
 
-void TodoTable::internalAddEntries( QList<Task> &list )
+void TodoTable::internalAddEntries( QList<ToDoEvent> &list )
 {
     setNumRows( list.count() );
     int row = 0;
-    Task *it;
+    ToDoEvent *it;
     for ( it = list.first(); it; it = list.next() )
 	insertIntoTable( it, row++ );
 }
 
 
-Task TodoTable::currentEntry() const
+ToDoEvent TodoTable::currentEntry() const
 {
     QTableItem *i = item( currentRow(), 0 );
     if ( !i || rowHeight( currentRow() ) <= 0 )
-        return Task();
-    Task *todo = todoList[(CheckItem*)i];
+        return ToDoEvent();
+    ToDoEvent *todo = todoList[(CheckItem*)i];
     todo->setCompleted( ( (CheckItem*)item( currentRow(), 0 ) )->isChecked() );
     todo->setPriority( ( (ComboItem*)item( currentRow(), 1 ) )->text().toInt() );
     return *todo;
 }
 
-void TodoTable::replaceCurrentEntry( const Task &todo, bool fromTableItem )
+void TodoTable::replaceCurrentEntry( const ToDoEvent &todo, bool fromTableItem )
 {
     int row = currentRow();
     updateJournal( todo, ACTION_REPLACE, row );
@@ -286,7 +287,7 @@ void TodoTable::replaceCurrentEntry( const Task &todo, bool fromTableItem )
 
 void TodoTable::removeCurrentEntry()
 {
-    Task *oldTodo;
+    ToDoEvent *oldTodo;
     int row = currentRow();
     CheckItem *chk;
 
@@ -307,45 +308,22 @@ void TodoTable::removeCurrentEntry()
 bool TodoTable::save( const QString &fn )
 {
     QString strNewFile = fn + ".new";
-    QFile f( strNewFile );
-    if ( !f.open( IO_WriteOnly|IO_Raw ) )
-        return false;
-
-    QString buf("<!DOCTYPE Tasks>\n<Tasks>\n");
-    QCString str;
-    int total_written;
-
-    for ( QMap<CheckItem*, Task *>::Iterator it = todoList.begin();
+    QFile::remove( strNewFile ); // just to be sure
+    ToDoDB todoDB( strNewFile );
+    for ( QMap<CheckItem*, ToDoEvent *>::Iterator it = todoList.begin();
 	  it != todoList.end(); ++it ) {
         if ( !item( it.key()->row(), 0 ) )
             continue;
-        Task *todo = *it;
+        ToDoEvent *todo = *it;
 	// sync item with table
 	todo->setCompleted( ((CheckItem*)item(it.key()->row(), 0))->isChecked() );
 	todo->setPriority( ((ComboItem*)item( it.key()->row(), 1))->text().toInt() );
-	buf += "<Task";
-        todo->save( buf );
-	buf += " />\n";
-	str = buf.utf8();
-	total_written = f.writeBlock( str.data(), str.length() );
-	if ( total_written != int(str.length()) ) {
-	    f.close();
-	    QFile::remove( strNewFile );
-	    return false;
-	}
-	buf = "";
+	todoDB.addEvent( *todo );
     }
-
-    buf += "</Tasks>\n";
-    str = buf.utf8();
-    total_written = f.writeBlock( str.data(), str.length() );
-    if ( total_written != int(str.length()) ) {
-	f.close();
-	QFile::remove( strNewFile );
-	return false;
-    }
-    f.close();
-
+    if(!todoDB.save() ){
+      QFile::remove( strNewFile );
+      return false;
+    };
     // now do the rename
     if ( ::rename( strNewFile, fn ) < 0 )
 	qWarning( "problem renaming file %s to %s errno %d",
@@ -380,7 +358,7 @@ void TodoTable::updateVisible()
     int id = mCat.id( "Todo List", showCat );
     for ( int row = 0; row < numRows(); row++ ) {
 	CheckItem *ci = (CheckItem *)item( row, 0 );
-	Task *t = todoList[ci];
+	ToDoEvent *t = todoList[ci];
 	QArray<int> vlCats = t->categories();
 	bool hide = false;
 	if ( !showComp && ci->isChecked() )
@@ -440,9 +418,9 @@ void TodoTable::setPaintingEnabled( bool e )
 
 void TodoTable::clear()
 {
-    for ( QMap<CheckItem*, Task *>::Iterator it = todoList.begin();
+    for ( QMap<CheckItem*, ToDoEvent *>::Iterator it = todoList.begin();
 	  it != todoList.end(); ++it ) {
-	Task *todo = *it;
+	ToDoEvent *todo = *it;
 	delete todo;
     }
     todoList.clear();
@@ -477,7 +455,7 @@ void TodoTable::slotCheckPriority(int row, int col )
 }
 
 
-void TodoTable::updateJournal( const Task &todo, journal_action action, int row )
+void TodoTable::updateJournal( const ToDoEvent &todo, journal_action action, int row )
 {
     QFile f( journalFileName() );
     if ( !f.open(IO_WriteOnly|IO_Append) )
@@ -485,7 +463,7 @@ void TodoTable::updateJournal( const Task &todo, journal_action action, int row 
     QString buf;
     QCString str;
     buf = "<Task";
-    todo.save( buf );
+    //    todo.save( buf );
     buf += " Action=\"" + QString::number( int(action) ) + "\"";
     buf += " Row=\"" + QString::number( row ) + "\"";
     buf += "/>\n";
@@ -502,192 +480,28 @@ void TodoTable::rowHeightChanged( int row )
 
 void TodoTable::loadFile( const QString &strFile, bool fromJournal )
 {
-    QFile f( strFile );
-    if ( !f.open(IO_ReadOnly) )
-	return;
 
-    int action, row;
-    action = 0; row = 0;
-
-    enum Attribute {
-	FCompleted = 0,
-	FHasDate,
-	FPriority,
-	FCategories,
-	FDescription,
-	FDateYear,
-	FDateMonth,
-	FDateDay,
-	FUid,
-	FAction,
-	FRow
-    };
-
-    QAsciiDict<int> dict( 31 );
-    QList<Task> list;
-    dict.setAutoDelete( TRUE );
-    dict.insert( "Completed", new int(FCompleted) );
-    dict.insert( "HasDate", new int(FHasDate) );
-    dict.insert( "Priority", new int(FPriority) );
-    dict.insert( "Categories", new int(FCategories) );
-    dict.insert( "Description", new int(FDescription) );
-    dict.insert( "DateYear", new int(FDateYear) );
-    dict.insert( "DateMonth", new int(FDateMonth) );
-    dict.insert( "DateDay", new int(FDateDay) );
-    dict.insert( "Uid", new int(FUid) );
-    dict.insert( "Action", new int(FAction) );
-    dict.insert( "Row", new int(FRow) );
-
-    QByteArray ba = f.readAll();
-    f.close();
-    char* dt = ba.data();
-    int len = ba.size();
-    bool hasDueDate = FALSE;
-
-    action = ACTION_ADD;
-    int i = 0;
-    char *point;
-    while ( ( point = strstr( dt+i, "<Task " ) ) != NULL ) {
-	// new Task
-	i = point - dt;
-	Task *todo = new Task;
-	int dtY = 0, dtM = 0, dtD = 0;
-
-	i += 5;
-
-	while( 1 ) {
-	    while ( i < len && (dt[i] == ' ' || dt[i] == '\n' || dt[i] == '\r') )
-		++i;
-	    if ( i >= len-2 || (dt[i] == '/' && dt[i+1] == '>') )
-		break;
-	    // we have another attribute, read it.
-	    int j = i;
-	    while ( j < len && dt[j] != '=' )
-		++j;
-	    char *attr = dt+i;
-	    dt[j] = '\0';
-	    i = ++j; // skip =
-	    while ( i < len && dt[i] != '"' )
-		++i;
-	    j = ++i;
-	    bool haveUtf = FALSE;
-	    bool haveEnt = FALSE;
-	    while ( j < len && dt[j] != '"' ) {
-		if ( ((unsigned char)dt[j]) > 0x7f )
-		    haveUtf = TRUE;
-		if ( dt[j] == '&' )
-		    haveEnt = TRUE;
-		++j;
-	    }
-	    if ( i == j ) {
-		// empty value
-		i = j + 1;
-		continue;
-	    }
-	    QCString value( dt+i, j-i+1 );
-	    i = j + 1;
-	    int *lookup = dict[ attr ];
-	    if ( !lookup ) {
-		todo->setCustomField(attr, value);
-		continue;
-	    }
-	    switch( *lookup ) {
-	    case FCompleted:
-		todo->setCompleted( value.toInt() );
-		break;
-	    case FHasDate:
-		// leave...
-		hasDueDate = value.toInt();
-		break;
-	    case FPriority:
-		todo->setPriority( value.toInt() );
-		break;
-	    case FCategories: {
-		//QString str = Qtopia::plainString( value );
-		todo->setCategories( Qtopia::Record::idsFromString( value ) );
-		    break;
-		}
-	    case FDescription:
-	    {
-		QString str = (haveUtf ? QString::fromUtf8( value )
-			       : QString::fromLatin1( value ) );
-		if ( haveEnt )
-		    str = Qtopia::plainString( str );
-		todo->setDescription( str );
-		break;
-	    }
-	    case FDateYear:
-		dtY = value.toInt();
-		break;
-	    case FDateMonth:
-		dtM = value.toInt();
-		break;
-	    case FDateDay:
-		dtD = value.toInt();
-		break;
-	    case FUid:
-		todo->setUid( value.toInt() );
-		break;
-	    case FAction:
-		action = value.toInt();
-		break;
-	    case FRow:
-		row = value.toInt();
-		break;
-	    default:
-		qDebug( "huh??? missing enum? -- attr.: %s", attr );
-		break;
-	    }
-	}
-        
-	if ( dtY != 0 && dtM != 0 && dtD != 0 )
-	    todo->setDueDate( QDate( dtY, dtM, dtD), hasDueDate );
-	else
-	    todo->setHasDueDate( hasDueDate );
-
-//         if ( categoryList.find( todo.category() ) == categoryList.end() )
-//             categoryList.append( todo.category() );
-
-
-	// sadly we can't delay adding of items from the journal to get
-	// the proper effect, but then, the journal should _never_ be
-	// that huge
-
-	switch( action ) {
-	case ACTION_ADD:
-	    if ( fromJournal ) {
-		int myrows = numRows();
-		setNumRows( myrows + 1 );
-		insertIntoTable( todo, myrows );
-		delete todo;
-	    } else
-		list.append( todo );
-	    break;
-	case ACTION_REMOVE:
-	    journalFreeRemoveEntry( row );
-	    break;
-	case ACTION_REPLACE:
-	    journalFreeReplaceEntry( *todo, row );
-	    delete todo;
-	    break;
-	default:
-	    break;
-	}
-    }
-//     qDebug("parsing done=%d", t.elapsed() );
-    if ( list.count() > 0 ) {
-	internalAddEntries( list );
-	list.clear();
-    }
+  QList<ToDoEvent> list;
+  ToDoDB todoDB;
+  QValueList<ToDoEvent> vaList = todoDB.rawToDos();
+  for(QValueList<ToDoEvent>::ConstIterator it = vaList.begin(); it != vaList.end(); ++it ){
+    list.append( new ToDoEvent( (*it) ) );
+  }   
+  vaList.clear();
+  //     qDebug("parsing done=%d", t.elapsed() );
+  if ( list.count() > 0 ) {
+    internalAddEntries( list );
+    list.clear();
+  }
 //     qDebug("loading done: t=%d", t.elapsed() );
 }
 
-void TodoTable::journalFreeReplaceEntry( const Task &todo, int row )
+void TodoTable::journalFreeReplaceEntry( const ToDoEvent &todo, int row )
 {
     QString strTodo;
     strTodo = todo.description().left(40).simplifyWhiteSpace();
     if ( row == -1 ) {
-	QMapIterator<CheckItem*, Task *> it;
+	QMapIterator<CheckItem*, ToDoEvent *> it;
 	for ( it = todoList.begin(); it != todoList.end(); ++it ) {
 	    if ( *(*it) == todo ) {
 		row = it.key()->row();
@@ -698,13 +512,13 @@ void TodoTable::journalFreeReplaceEntry( const Task &todo, int row )
 	    }
 	}
     } else {
-	Task *t = todoList[static_cast<CheckItem*>(item(row, 0))];
+	ToDoEvent *t = todoList[static_cast<CheckItem*>(item(row, 0))];
 	todoList.remove( static_cast<CheckItem*>(item(row, 0)) );
 	delete t;
 	static_cast<CheckItem*>(item(row, 0))->setChecked( todo.isCompleted() );
 	static_cast<ComboItem*>(item(row, 1))->setText( QString::number(todo.priority()) );
 	item( row, 2 )->setText( strTodo );
-	todoList.insert( static_cast<CheckItem*>(item(row,0)), new Task(todo) );
+	todoList.insert( static_cast<CheckItem*>(item(row,0)), new ToDoEvent(todo) );
     }
 }
 
@@ -814,7 +628,7 @@ int TodoTable::showCategoryId() const
     return id;
 }
 
-static bool taskCompare( const Task &task, const QRegExp &r, int category )
+static bool taskCompare( const ToDoEvent &task, const QRegExp &r, int category )
 {
     bool returnMe;
     QArray<int> cats;

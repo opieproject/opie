@@ -24,6 +24,9 @@
 #include "todoentryimpl.h"
 #include "todotable.h"
 
+#include <opie/tododb.h>
+#include <opie/todovcalresource.h>
+
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
 #include <qpe/finddialog.h>
@@ -32,7 +35,7 @@
 #include <qpe/qpemenubar.h>
 #include <qpe/qpemessagebox.h>
 #include <qpe/resource.h>
-#include <qpe/task.h>
+//#include <qpe/task.h>
 #include <qpe/qpetoolbar.h>
 
 #include <qaction.h>
@@ -215,17 +218,17 @@ void TodoWindow::slotNew()
 	id = ids[0];
     NewTaskDialog e( id, this, 0, TRUE );
 
-    Task todo;
+    ToDoEvent todo;
 
 #if defined(Q_WS_QWS) || defined(_WS_QWS_)
     e.showMaximized();
 #endif
     int ret = e.exec();
-
+    qWarning("finished" );
     if ( ret == QDialog::Accepted ) {
 	table->setPaintingEnabled( false );
         todo = e.todoEntry();
-	todo.assignUid();
+	//todo.assignUid();
         table->addEntry( todo );
 	table->setPaintingEnabled( true );
 	findAction->setEnabled( TRUE );
@@ -275,7 +278,7 @@ void TodoWindow::slotEdit()
 	return;
     }
 
-    Task todo = table->currentEntry();
+    ToDoEvent todo = table->currentEntry();
 
     NewTaskDialog e( todo, this, 0, TRUE );
     e.setCaption( tr( "Edit Task" ) );
@@ -349,8 +352,7 @@ void TodoWindow::populateCategories()
     completedAction->addTo( catMenu );
     completedAction->setOn( table->showCompleted() );
 
-    int id,
-	rememberId;
+    int id, rememberId;
     id = 1;
     catMenu->insertItem( tr( "All Categories" ), id++ );
 //    catMenu->insertSeparator();
@@ -443,8 +445,9 @@ void TodoWindow::setDocument( const QString &filename )
 {
     if ( filename.find(".vcs") != int(filename.length()) - 4 ) return;
 
-    QValueList<Task> tl = Task::readVCalendar( filename );
-    for( QValueList<Task>::Iterator it = tl.begin(); it != tl.end(); ++it ) {
+    ToDoDB todoDB(filename, new ToDoVCalResource() );
+    QValueList<ToDoEvent> tl = todoDB.rawToDos();
+    for( QValueList<ToDoEvent>::Iterator it = tl.begin(); it != tl.end(); ++it ) {
 	table->addEntry( *it );
     }
 }
@@ -454,9 +457,11 @@ static const char * beamfile = "/tmp/obex/todo.vcs";
 void TodoWindow::slotBeam()
 {
     unlink( beamfile ); // delete if exists
-    Task c = table->currentEntry();
+    ToDoEvent c = table->currentEntry();
     mkdir("/tmp/obex/", 0755);
-    Task::writeVCalendar( beamfile, c );
+    ToDoDB todoDB( beamfile, new ToDoVCalResource() );
+    todoDB.addEvent( c );
+    todoDB.save();
     Ir *ir = new Ir( this );
     connect( ir, SIGNAL( done( Ir * ) ), this, SLOT( beamDone( Ir * ) ) );
     QString description = c.description();

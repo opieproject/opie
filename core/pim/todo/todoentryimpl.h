@@ -23,7 +23,7 @@
 
 #include "todoentry.h"
 
-#include <qpe/task.h>
+#include <opie/todoevent.h>
 
 #include <qdatetime.h>
 #include <qpalette.h>
@@ -37,13 +37,13 @@ class NewTaskDialog : public NewTaskDialogBase
     Q_OBJECT
 
 public:
-    NewTaskDialog( const Task &task, QWidget *parent = 0, const char* name = 0,
+    NewTaskDialog( const ToDoEvent &task, QWidget *parent = 0, const char* name = 0,
 		   bool modal = FALSE, WFlags fl = 0 );
     NewTaskDialog( int id, QWidget* parent = 0, const char* name = 0,
 		   bool modal = FALSE, WFlags fl = 0 );
     ~NewTaskDialog();
 
-    Task todoEntry();
+    ToDoEvent todoEntry();
 
 protected slots:
     void dateChanged( int y, int m, int d );
@@ -53,7 +53,7 @@ protected:
 
 private:
     void init();
-    Task todo;
+    ToDoEvent todo;
     QDate date;
     DateBookMonth *picker;
 };

@@ -23,7 +23,8 @@
 
 #include <qpe/categories.h>
 #include <qpe/stringutil.h>
-#include <qpe/task.h>
+//#include <qpe/task.h>
+#include <opie/todoevent.h>
 
 #include <qtable.h>
 #include <qmap.h>
@@ -86,11 +87,11 @@ class TodoTable : public QTable
 
 public:
     TodoTable( QWidget *parent = 0, const char * name = 0 );
-    void addEntry( const Task &todo );
+    void addEntry( const ToDoEvent &todo );
     void clearFindRow() { currFindRow = -2; }
 
-    Task currentEntry() const;
-    void replaceCurrentEntry( const Task &todo, bool fromTableItem = false );
+    ToDoEvent currentEntry() const;
+    void replaceCurrentEntry( const ToDoEvent &todo, bool fromTableItem = false );
 
     QStringList categories();
 
@@ -128,11 +129,11 @@ protected:
 private:
     void updateVisible();
     void viewportPaintEvent( QPaintEvent * );
-    void internalAddEntries( QList<Task> &list);
-    inline void insertIntoTable( Task *todo, int row );
-    void updateJournal( const Task &todo, journal_action action, int row = -1);
+    void internalAddEntries( QList<ToDoEvent> &list);
+    inline void insertIntoTable( ToDoEvent *todo, int row );
+    void updateJournal( const ToDoEvent &todo, journal_action action, int row = -1);
     void mergeJournal();
-    void journalFreeReplaceEntry( const Task &todo, int row );
+    void journalFreeReplaceEntry( const ToDoEvent &todo, int row );
     void journalFreeRemoveEntry( int row );
     inline void realignTable( int row );
     void loadFile( const QString &strFile, bool fromJournal = false );
@@ -150,7 +151,7 @@ private slots:
 private:
     friend class TodoWindow;
 
-    QMap<CheckItem*, Task *> todoList;
+    QMap<CheckItem*, ToDoEvent *> todoList;
     QStringList categoryList;
     bool showComp;
     QString showCat;
@@ -161,7 +162,7 @@ private:
 };
 
 
-inline void TodoTable::insertIntoTable( Task *todo, int row )
+inline void TodoTable::insertIntoTable( ToDoEvent *todo, int row )
 {
     QString sortKey = (char) ((todo->isCompleted() ? 'a' : 'A') 
 			      + todo->priority() ) 

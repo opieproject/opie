@@ -14,7 +14,7 @@ INTERFACES	= todoentry.ui
 TARGET		= todolist
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
-LIBS            += -lqpe
+LIBS            += -lqpe -lopie
 
 TRANSLATIONS = ../i18n/de/todolist.ts
 TRANSLATIONS += ../i18n/pt_BR/todolist.ts
