@@ -12,11 +12,14 @@
  * =====================================================================
  * ToDo: There is a lot todo.. It is currently very simplistic..
  * =====================================================================
- * Version: $Id: ocontactselector.cpp,v 1.1.2.8 2002-07-24 14:14:09 zecke Exp $
+ * Version: $Id: ocontactselector.cpp,v 1.1.2.9 2002-09-12 17:01:52 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactselector.cpp,v $
- * Revision 1.1.2.8  2002-07-24 14:14:09  zecke
+ * Revision 1.1.2.9  2002-09-12 17:01:52  eilers
+ * First attempt of iterator in ocontactdb
+ *
+ * Revision 1.1.2.8  2002/07/24 14:14:09  zecke
  * First of all sorry for the wrong identing.
  * I hope you'll fix it
  * e->ignore() if Key_Escape
@@ -104,11 +107,13 @@ OContactSelector::~OContactSelector (){}
 void OContactSelector::loadTable()
 {
 	/* Fill the table with all entries of the contact database */
-	QValueList<Contact> allContacts = contactdb.allContacts();
-	QValueListIterator<Contact> it;
-	setNumRows (allContacts.count());
+	OContactDB::Iterator it = contactdb.allContacts();
+
+	setNumRows ( it.count() );
+	qWarning ("Number of Rows: %d", it.count());
 	int row = 0;
-	for( it = allContacts.begin(); it != allContacts.end(); ++it ){
+	for( it = it.begin(); it != it.end(); ++it ){
+		qWarning ("+*+");
 		ONameItem *nameitem = new ONameItem (this,
 						     (*it).fullName(),
 						     (*it).firstName(),

@@ -12,13 +12,16 @@
  *      either version 2 of the License, or (at your option) any later
  *      version.
  * =====================================================================
- * ToDo: ...
+ * ToDo: Define enum for query settings
  * =====================================================================
- * Version: $Id: ocontactdb.h,v 1.1.2.18 2002-08-31 20:22:59 zecke Exp $
+ * Version: $Id: ocontactdb.h,v 1.1.2.19 2002-09-12 17:01:52 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb.h,v $
- * Revision 1.1.2.18  2002-08-31 20:22:59  zecke
+ * Revision 1.1.2.19  2002-09-12 17:01:52  eilers
+ * First attempt of iterator in ocontactdb
+ *
+ * Revision 1.1.2.18  2002/08/31 20:22:59  zecke
  * libopie renamed to libopie-two for now
  * toMap added to ToDoEvent
  * renamed date -> dueDate
@@ -101,7 +104,9 @@ class OContactBackend {
 	 */
 	virtual bool isChangedExternally() = 0;
 
-	/** Finds a Contact by the uid.
+	/** Finds a Contact by the uid. 
+	 * <b>Important: </b>This function must not change foundContact
+	 * if nothing was found !
 	 * @param foundContact The Contact found if returnvalue is <i>true</i>
 	 * @param uid The user ID of the contact
 	 * @return <i>true</i> if found, else <i>false</i>
@@ -109,9 +114,9 @@ class OContactBackend {
 	virtual bool findContact(Contact &foundContact, int uid ) = 0;
 
 	/** Returns all Contacts.
-	 * @return List of all contacts.
+	 * @return UID-List of all contacts.
 	 */
-	virtual QValueList<Contact> allContacts() const = 0;
+	virtual QValueList<int> allContacts() const = 0;
 
 	/** "Query by example" like search.
 	 * To find a special contact, just fill all known information into
@@ -126,19 +131,12 @@ class OContactBackend {
 	 */
 	virtual bool queryByExample ( const Contact &query, const uint querysettings ) = 0;
 
-	/** Returns the list of all found contacts, found by a query.
-	 * @return The list of all contacts found by the pervious query.
+	/** Returns the list (all UID's) of all found contacts, found by a query.
+	 * @return The list of all contacts (all UID's) found by the pervious query. The list is empty
+	 *         if none found.
 	 * @see queryByExample()
 	 */
-	virtual const QValueList<Contact> allFound () = 0;
-
-	/** Requests a contact which was selected by queryByExample().
-	 * Use this function to move through the list of selected contacts.
-	 * @param next Is the next contact if this function returns <i>true</i>
-	 * @return <i>true</i> if there is a valid contact returned.
-	 * @see qeryByExample()
-	 */
-	virtual bool nextFound ( Contact& next ) = 0;
+	virtual const QValueList<int> allFound () = 0;
 
 	/** Return all possible settings.
 	 *  @return All settings provided by the current backend
@@ -182,6 +180,36 @@ class OContactDB: public QObject
 {
     Q_OBJECT
 
+	    
+    class Iterator{
+	    friend OContactDB;
+    public:
+	    Iterator();
+	    Iterator ( const Iterator& copy );
+
+	    bool operator== ( const Iterator& it );
+	    bool operator!= ( const Iterator& it );
+	    Iterator& operator= ( const  Iterator& it );
+	    Iterator& operator++ ();    // prefix
+	    /* 	        Iterator operator++ ( int );  // postfix */
+	    Iterator& operator-- ();    // prefix
+	    /* 		Iterator operator-- (int);    // postfix */
+	    Contact operator*() const;
+	    Contact operator->() const;
+
+	    Iterator begin();
+	    Iterator end();
+
+	    uint count() const;
+
+    private:
+	    QValueList<int> m_uids;
+	    int m_cur_position;
+	    bool m_end_reached;
+	    OContactDB *m_db;
+	    
+    };
+
  public:
 	/** Create Database with contacts (addressbook).
 	 * @param appname Name of application which wants access to the database
@@ -204,7 +232,8 @@ class OContactDB: public QObject
 	 * Use this constants to set the query parameters.
 	 * Note: <i>query_IgnoreCase</i> just make sense with one of the other attributes !
 	 * @see queryByExample()
-	 * - why not enum - zecke?
+	 * - why not enum - zecke? 
+	 *   -> Had some implementation problems .. Will use enum soon ! .. (se)
 	 */
 	typedef uint Query;
         static const Query query_WildCards  = 0x0001;
@@ -213,9 +242,9 @@ class OContactDB: public QObject
 	static const Query query_ExactMatch = 0x0008;
 
 	/** Returns all Contacts.
-	 * @return List of all contacts.
+	 * @return Iterator to access the contacts. 
 	 */
-	QValueList<Contact> allContacts() const;
+	Iterator allContacts();
 
 	/** Finds a Contact by the uid.
 	 * @param foundContact The Contact found if returnvalue is <i>true</i>
@@ -230,25 +259,11 @@ class OContactDB: public QObject
 	 * All information will be connected by an "AND".
 	 * @param query The query form.
 	 * @param querysettings The parameters how to perform the query (OContactBackend::query_*).
-	 * @return <i>true</i> if something was found.
+	 * @return Iterator to access the found Contacts.
 	 * @see nextFound(), OContactBackend::query_RegExp, OContactBackend::query_WildCards,
 	 * OContactBackend::query_ExactMatch, OContactBackend::query_IgnoreCase
 	 */
-	bool queryByExample ( const Contact &query, Query querysettings );
-
-	/** Returns the list of all found contacts, found by a query.
-	 * @return The list of all contacts found by the pervious query.
-	 * @see queryByExample()
-	 */
-	const QValueList<Contact> allFound ();
-
-	/** Requests a contact which was selected by queryByExample().
-	 * Use this function to move through the list of selected contacts.
-	 * @param next Is the next contact if this function returns <i>true</i>
-	 * @return <i>true</i> if there is a valid contact returned.
-	 * @see qeryByExample
-	 */
-	bool nextFound ( Contact& next );
+	Iterator queryByExample ( const Contact &query, Query querysettings );
 
 	/** Return all possible settings.
 	 *  @return All settings provided by the current backend
