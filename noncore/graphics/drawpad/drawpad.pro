@@ -1,5 +1,4 @@
-TEMPLATE	= app
-CONFIG		= qt warn_on release
+CONFIG		= qt warn_on release quick-app
 HEADERS		= drawpad.h \
 		  drawpadcanvas.h \
 		  ellipsetool.h \
@@ -42,7 +41,7 @@ SOURCES		= drawpad.cpp \
 INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS		+= -lqpe -lopie
-DESTDIR		= $(OPIEDIR)/bin
+
 TARGET		= drawpad
 
 TRANSLATIONS = ../../../i18n/de/drawpad.ts \
@@ -63,7 +62,5 @@ TRANSLATIONS = ../../../i18n/de/drawpad.ts \
 	 ../../../i18n/zh_CN/drawpad.ts \
 	 ../../../i18n/it/drawpad.ts \
 	 ../../../i18n/zh_TW/drawpad.ts
-
-
 
 include ( $(OPIEDIR)/include.pro )
