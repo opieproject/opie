@@ -34,12 +34,17 @@ public:
 	void valueChanged(QString);
   virtual void displayText();
   virtual void changed();
+  virtual void remove();
   void save(QTextStream*);
+  virtual void revert();
 private:
  	QString _file;
 	QString _group;
 	QString _key;
 	QString _value;
+	QString _groupOrig;
+	QString _keyOrig;
+	QString _valueOrig;
   ListViewItemConfFile *_fileItem;
 };
 

@@ -78,15 +78,21 @@ void ListViewItemConfFile::parseFile()
 }
 
 
+void ListViewItemConfFile::remove()
+{
+  QFile::remove(confFileInfo->absFilePath());
+  QFile::remove(backupFileName());
+  delete this;
+}
+
 void ListViewItemConfFile::revert()
 {
 	if (_changed)
  	{
     parseFile();
   }else{
-		QString backup = confFileInfo->absFilePath()+"~";
 	 	QFile conf(confFileInfo->absFilePath());
-  	QFile back(backup);
+  	QFile back(backupFileName());
 
 	  if (!back.open(IO_ReadOnly)) return;
   	if (!conf.open(IO_WriteOnly)) return;
@@ -102,15 +108,12 @@ void ListViewItemConfFile::revert()
 void ListViewItemConfFile::save()
 {
 	if (!_changed) return;
-	QString backup = confFileInfo->absFilePath()+"~";
-	qDebug("make backup to "+backup);
  	QFile conf(confFileInfo->absFilePath());
-  QFile back(backup);
+  QFile back(backupFileName());
 
   if (!conf.open(IO_ReadOnly)) return;
   if (!back.open(IO_WriteOnly)) return;
 
-  #define SIZE 124
   char buf[SIZE];
   while (int c = conf.readBlock(buf, SIZE) ) back.writeBlock(buf,c);
   conf.close();
@@ -130,5 +133,10 @@ void ListViewItemConfFile::save()
 
 bool ListViewItemConfFile::revertable()
 {
- 	return _changed || QFile(confFileInfo->absFilePath()+"~").exists();
+ 	return _changed || QFile(backupFileName()).exists();
+}
+
+QString ListViewItemConfFile::backupFileName()
+{
+	return confFileInfo->absFilePath()+"~";
 }

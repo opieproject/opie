@@ -19,6 +19,9 @@ ListViewItemConfigEntry::ListViewItemConfigEntry(ListViewItemConfFile *parent, Q
 	_file = parent->fileName();
  	_group = group;
 	setKey(key);
+ 	_groupOrig = group;
+  _keyOrig = _key;
+  _valueOrig = _value;
  	_fileItem->unchanged();
 }
 
@@ -107,6 +110,12 @@ void ListViewItemConfigEntry::changed()
  	_fileItem->changed();
 }
 
+
+void ListViewItemConfigEntry::remove()
+{
+	delete this;
+}
+
 void ListViewItemConfigEntry::save(QTextStream *t)
 {
 	QString s;
@@ -125,4 +134,13 @@ void ListViewItemConfigEntry::save(QTextStream *t)
   {
    	((ListViewItemConfigEntry*)it)->save(t);
   }
+}
+
+void ListViewItemConfigEntry::revert()
+{
+	_group = _groupOrig;	
+	_key = _keyOrig;	
+	_value = _valueOrig;	
+	_changed=false;
+ 	displayText();
 }

@@ -23,10 +23,14 @@ public:
 	~ListViewItemConf();
 
  	int getType();
+  void save();
+  virtual void revert() = 0;
+  virtual void remove() = 0;
   virtual void displayText() = 0;
   virtual void changed();
   bool isChanged() {return _changed;};
   virtual void unchanged();
+  virtual bool revertable();
 
 protected:
 	int _type;

@@ -21,7 +21,7 @@
 class QPEToolBar;
 class ListViewItemConfFile;
 class ListViewConfDir;
-
+class ListViewItemConf;
 
 class MainWindow : public QMainWindow
 {
@@ -42,10 +42,12 @@ public slots:
   void stopTimer( QListViewItem* );
   void saveConfFile();
   void revertConfFile();
+  void removeConfFile();
 
 private:
 	ListViewConfDir *settingList;
  	EditWidget *editor;
+  ListViewItemConf *_item;
   ListViewItemConfigEntry *_currentItem;
   ListViewItemConfFile *_fileItem;
   QTimer *popupTimer;

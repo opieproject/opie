@@ -44,3 +44,8 @@ void ListViewItemConf::unchanged()
   }
  	displayText();
 }
+
+bool ListViewItemConf::revertable()
+{
+	return _changed;
+}

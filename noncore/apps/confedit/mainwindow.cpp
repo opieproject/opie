@@ -40,18 +40,25 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
 
   QWidget *mainWidget = new  QWidget(this);
   setCentralWidget( mainWidget);
-
   QGridLayout *mainLayout = new QGridLayout( mainWidget );
 	mainLayout->setSpacing( 3 );
   mainLayout->setMargin( 3 );
 
 
+  qDebug("settingList");
   settingList = new ListViewConfDir( "/root/Settings/", this, "settingslist");
+  settingList->setSizePolicy( QSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding));//, sizePolicy().hasHeightForWidth() ) );
   mainLayout->addWidget( settingList, 0, 0 );
 
+  qDebug("editor");
   editor = new EditWidget(this);
+  editor->setSizePolicy( QSizePolicy( QSizePolicy::Minimum, QSizePolicy::Minimum));//, sizePolicy().hasHeightForWidth() ) );
+//  editor->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)3, (QSizePolicy::SizeType)3));//, sizePolicy().hasHeightForWidth() ) );
   mainLayout->addWidget( editor, 1, 0 );
 
+  makeMenu();
+
+  qDebug("connect");
   connect(settingList, SIGNAL( pressed(QListViewItem*) ),
 						this, SLOT(setCurrent(QListViewItem*)));
 
@@ -62,29 +69,46 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
 	           SLOT( keyChanged(const QString&) ) );
  	connect( editor->LineEditValue, SIGNAL( textChanged(const QString&) ),
 	           SLOT( valueChanged(const QString&) ) );
-  makeMenu();
+//  qDebug("editor->hide()");
+// 	editor->hide();
+  qDebug("connect");
+	connect( settingList, SIGNAL( clicked( QListViewItem* ) ),
+					   this, SLOT( stopTimer( QListViewItem* ) ) );	
 }
 
 void MainWindow::makeMenu()
 {
-
+  qDebug("MainWindow::makeMenu()");
 
   popupTimer = new QTimer(this);
   popupMenuFile = new QPopupMenu(this);
+  popupMenuEntry = new QPopupMenu(this);
 
+  qDebug("Save");
 	popupActionSave = new QAction( tr("Save"),QString::null,  0, this, 0 );
 	popupActionSave->addTo( popupMenuFile );
+ // popupActionSave->addTo( popupMenuEntry );
   connect( popupActionSave, SIGNAL( activated() ),
 		  	 	this , SLOT( saveConfFile() ) );
+
+  qDebug("Revert");
 	popupActionRevert = new QAction( tr("Revert"),QString::null,  0, this, 0 );
 	popupActionRevert->addTo( popupMenuFile );
+  popupActionRevert->addTo( popupMenuEntry );
   connect( popupActionRevert, SIGNAL( activated() ),
 		  	 	this , SLOT( revertConfFile() ) );
 
+  qDebug("Delete");
+  popupActionDelete = new QAction( tr("Delete"),QString::null,  0, this, 0 );
+	popupActionDelete->addTo( popupMenuFile );
+  popupActionDelete->addTo( popupMenuEntry );
+  connect( popupActionDelete, SIGNAL( activated() ),
+		  	 	this , SLOT( removeConfFile() ) );
+
+  qDebug("connect");
   connect( popupTimer, SIGNAL(timeout()),
 		  			this, SLOT(showPopup()) );
-	connect( settingList, SIGNAL( clicked( QListViewItem* ) ),
-					   this, SLOT( stopTimer( QListViewItem* ) ) );	
+  qDebug("connect");
 }
 
 MainWindow::~MainWindow()
@@ -96,12 +120,11 @@ MainWindow::~MainWindow()
 void MainWindow::setCurrent(QListViewItem *item)
 {
 	if (!item) return;
- 	ListViewItemConf *i = (ListViewItemConf*) item;
-  if (!i) return;
-  if (i->getType() == ListViewItemConf::File)
+ 	_item = (ListViewItemConf*) item;
+  if (!_item) return;
+  popupTimer->start( 750, true );
+  if (_item->getType() == ListViewItemConf::File)
   {
-  	qDebug("start timer");
-	  popupTimer->start( 750, true );
   	editor->hide();
    	updateGeometry();
     _currentItem=0;
@@ -126,6 +149,8 @@ void MainWindow::setCurrent(QListViewItem *item)
     editor->isKey(false);
   }
   updateGeometry();
+  editor->updateGeometry();
+  settingList->updateGeometry();
 }
 
 
@@ -150,7 +175,6 @@ void MainWindow::valueChanged(const QString &v)
 
 void MainWindow::stopTimer( QListViewItem* )
 {
-	qDebug("stopTimer");
 	popupTimer->stop();
 }
 
@@ -162,20 +186,27 @@ void MainWindow::saveConfFile()
 
 void MainWindow::revertConfFile()
 {
-	if (!_fileItem) return;	
- 	_fileItem->revert();
+	if (!_item) return;	
+ 	_item->revert();
 }
 
+void MainWindow::removeConfFile()
+{
+	if (!_item) return;	
+ 	_item->remove();
+}
 void MainWindow::showPopup()
 {
-	qDebug("showPopup");
+qDebug("showPopup");
+ 	if (!_item) return;
+ 	popupActionRevert->setEnabled(_item->revertable());
+	popupActionSave->setEnabled(_item->isChanged());
  	if (_fileItem)
   {
  		popupActionSave->setEnabled(_fileItem->isChanged());
- 		popupActionRevert->setEnabled(_fileItem->revertable());
     popupMenuFile->popup( QCursor::pos() );
-  }else if(_currentItem->isChanged())
+  }else if(_currentItem)
   {
-
+    popupMenuEntry->popup( QCursor::pos() );
   }
 }

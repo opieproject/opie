@@ -24,10 +24,12 @@ public:
 	~ListViewItemConfFile();
   void parseFile();
 	QString fileName();
-  virtual void displayText();
-  bool revertable();
   void save();
-  void revert();
+  virtual void displayText();
+  virtual bool revertable();
+  virtual void revert();
+  virtual void remove();
+  QString backupFileName();
 protected:
 private:
 	bool _valid;
