@@ -55,7 +55,7 @@ class MultiauthMainWindow : public QDialog {
     Q_OBJECT
 
     public:
-        MultiauthMainWindow();
+        MultiauthMainWindow(bool allowBypass = false);
         ~MultiauthMainWindow();
         bool isAlreadyDone();
 

@@ -6,8 +6,11 @@
 namespace Opie {
 namespace Security {
 
-/// Initializes widgets according to allowBypass and explanScreens config
-MultiauthMainWindow::MultiauthMainWindow()
+/// Initializes widgets according to allowBypass argument (false by default) and explanScreens config
+/**
+ * \note if allowBypass is true, we will show explanatory screens anyway
+ */
+MultiauthMainWindow::MultiauthMainWindow(bool allowBypass = false)
     : QDialog(0, "main Opie multiauth modal dialog", TRUE,
               Qt::WStyle_NoBorder | Qt::WStyle_Customize | Qt::WStyle_StaysOnTop)
 
@@ -17,11 +20,15 @@ MultiauthMainWindow::MultiauthMainWindow()
     quit = 0;
     message2 = 0;
 
-    Config *pcfg = new Config("Security");
-    pcfg->setGroup("Misc");
-    explanScreens = pcfg->readBoolEntry("explanScreens", true);
-    allowBypass = pcfg->readBoolEntry("allowBypass", false);
-    delete pcfg;
+    if (allowBypass == true)
+        explanScreens = true;
+    else
+    {
+        Config *pcfg = new Config("Security");
+        pcfg->setGroup("Misc");
+        explanScreens = pcfg->readBoolEntry("explanScreens", true);
+        delete pcfg;
+    }
 
     layout = new QVBoxLayout(this);
     layout->setSpacing(11);
@@ -53,7 +60,7 @@ MultiauthMainWindow::MultiauthMainWindow()
         if ( allowBypass == true )
         {
             // very important: we can close the widget through the quit button, and bypass authentication, only if allowBypass is set!
-            message2 = new QLabel("<center><i>" + tr("Note: the 'exit' button should be removed for real protection, through Security config dialog") + ".</i></center>", this);
+            message2 = new QLabel("<center><i>" + tr("Note: this 'exit' button only appears during <b>simulations</b>, like the one we are in.") + "</i></center>", this);
             layout->addWidget(message2);
             QObject::connect(quit, SIGNAL(clicked()), this, SLOT(close()));
         }
@@ -114,10 +121,12 @@ void MultiauthMainWindow::proceed() {
         else
         {
             // authentication has failed, explain that according to allowBypass
-            message->setText( "<center><h3>" + tr("You have not succeeded enough authentication steps!") + "</h3></center>" );
+            message->setText( "<center><h3>" + tr("You have <b>not</b> succeeded enough authentication steps!") + "</h3></center>" );
             proceedButton->show();
             if ( allowBypass == true )
-                message2->setText( "<center><p>" + tr("Note: if 'allow to bypass' was uncheck in Security config, you would have to go back through all the steps now.") + "</p></center>" );
+            {
+                message2->setText( "<center><p>" + tr("Be careful: if this was not a <b>simulation</b>, you would have to go back through all the steps now.") + "</p></center>" );
+                message2->show();
         }
     }
 }

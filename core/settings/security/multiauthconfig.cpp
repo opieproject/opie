@@ -1,6 +1,5 @@
-#include "multiauthconfig.h"
-
 #include <opie2/odebug.h>
+#include <opie2/multiauthmainwindow.h>
 
 #include <qgroupbox.h>
 #include <qvgroupbox.h>
@@ -16,6 +15,8 @@
 #include <qdir.h>
 #include <qpe/qlibrary.h>
 #include <qpe/qpeapplication.h>
+
+#include "multiauthconfig.h"
 
 
 using Opie::Security::MultiauthPluginInterface;
@@ -56,9 +57,11 @@ class ToolButton : public QToolButton {
             }
 };
 
-    MultiauthGeneralConfig::MultiauthGeneralConfig(QWidget * parent, const char * name = "general Opie-multiauthentication config widget")
-: QWidget(parent, name), onStart(0), onResume(0), nbSuccessMin(0)
+    MultiauthGeneralConfig::MultiauthGeneralConfig(MultiauthConfig * parentConfig, QWidget * parent, const char * name = "general Opie-multiauthentication config widget")
+: QWidget(parent, name), m_onStart(0), m_onResume(0), m_noProtectConfig(0), m_explanScreens(0), m_nbSuccessMin(0), m_tryButton(0)
 {
+    // keep track of the MultiauthConfig parent in one of our attributes
+    m_parentConfig = parentConfig;
     QVBoxLayout *vb = new QVBoxLayout(this);
     vb->setSpacing(11);
     vb->setMargin(11);
@@ -67,62 +70,75 @@ class ToolButton : public QToolButton {
     QGroupBox *lockBox = new QGroupBox(0, Qt::Vertical, tr("When to lock Opie"), this, "lock box");
     vb->addWidget(lockBox);
     QGridLayout *boxLayout = new QGridLayout( lockBox->layout() );
-    onStart = new QCheckBox( tr( "on Opie start" ), lockBox, "lock on opie start");
-    onResume = new QCheckBox( tr( "on Opie resume" ), lockBox, "lock on opie resume");
-    boxLayout->addWidget(onStart, 0, 0);
-    boxLayout->addWidget(onResume, 0, 1);
+    m_onStart = new QCheckBox( tr( "on Opie start" ), lockBox, "lock on opie start");
+    m_onResume = new QCheckBox( tr( "on Opie resume" ), lockBox, "lock on opie resume");
+    boxLayout->addWidget(m_onStart, 0, 0);
+    boxLayout->addWidget(m_onResume, 0, 1);
 
     QGroupBox *nbBox = new QGroupBox(0, Qt::Vertical, tr("Multiple plugins authentication"), this, "nb box");
     vb->addWidget(nbBox);
     QGridLayout *nbBoxLayout = new QGridLayout( nbBox->layout() );
-    nbSuccessMin = new QSpinBox(nbBox);
+    m_nbSuccessMin = new QSpinBox(nbBox);
     QLabel *lNbSuccessMin = new QLabel( tr( "Required successes" ), nbBox);
-    nbBoxLayout->addWidget(nbSuccessMin, 0, 0);
+    nbBoxLayout->addWidget(m_nbSuccessMin, 0, 0);
     nbBoxLayout->addWidget(lNbSuccessMin, 0, 1);
-    nbSuccessMin->setMinValue(1); // the max value is defined in MultiauthConfig constructor
+    m_nbSuccessMin->setMinValue(1); // the max value is defined in MultiauthConfig constructor
 
-    QGroupBox *devBox = new QGroupBox(0, Qt::Vertical, tr("Debug options"), this, "dev box");
+    QGroupBox *devBox = new QGroupBox(0, Qt::Vertical, tr("Options"), this, "dev box");
     vb->addWidget(devBox);
     QGridLayout *devBoxLayout = new QGridLayout( devBox->layout() );
-    noProtectConfig = new QCheckBox( tr("Don't protect this config screen"), devBox, "don't protect config");
-    explanScreens = new QCheckBox( tr("Show explanatory screens"), devBox, "Show explan. screens");
-    allowBypass = new QCheckBox( tr("Allow to bypass authentication"), devBox, "AllowBypass");
-    QLabel *logicNote = new QLabel( "<p>" + tr("Note: the third option implies the second one") + "</p>", devBox );
-    devBoxLayout->addWidget(noProtectConfig, 0, 0);
-    devBoxLayout->addWidget(explanScreens, 1, 0);
-    devBoxLayout->addWidget(allowBypass, 2, 0);
-    devBoxLayout->addMultiCellWidget(logicNote, 3, 3, 0, 1);
+    m_noProtectConfig = new QCheckBox( tr("Don't protect this config screen"), devBox, "don't protect config");
+    m_explanScreens = new QCheckBox( tr("Show explanatory screens"), devBox, "Show explan. screens");
+    devBoxLayout->addWidget(m_noProtectConfig, 0, 0);
+    devBoxLayout->addWidget(m_explanScreens, 1, 0);
 
-    connect( explanScreens, SIGNAL(toggled(bool)), this, SLOT(checkBypass()) );
-    connect( allowBypass, SIGNAL(toggled(bool)), this, SLOT(checkScreens()) );
+    QVGroupBox *tryBox = new QVGroupBox(tr("Testing"), this, "try box");
+    vb->addWidget(tryBox);
+    m_tryButton = new QPushButton( tr("Test the authentication now"), tryBox, "try button");
+    connect( m_tryButton, SIGNAL(clicked()), this, SLOT(tryAuth()) );
+
 }
 
 /// nothing to do
 MultiauthGeneralConfig::~MultiauthGeneralConfig()
 {}
 
-/// Be sure that explanScreens is checked if allowBypass is
-void MultiauthGeneralConfig::checkScreens()
+/// launches the authentication process, as configured, with the option to bypass it
+void MultiauthGeneralConfig::tryAuth()
 {
-    if ( (allowBypass->isChecked() == true) && (explanScreens->isChecked() == false) )
-        explanScreens->setChecked(true);
+    QMessageBox confirmSave(
+                         tr("Attention"),
+                         "<p>" + tr("You must save your current settings before trying to authenticate. Press OK to accept and launch a simulated authentication process.") + "</p><p><em>" +
+                         tr("If you don't like the result of this test, don't forget to change your settings before you exit the configuration application!") + "</em></p>",
+                         QMessageBox::Warning,
+                         QMessageBox::Cancel, QMessageBox::Yes, QMessageBox::NoButton,
+                         0, QString::null, TRUE, WStyle_StaysOnTop);
+    confirmSave.setButtonText(QMessageBox::Cancel, tr("Cancel"));
+    confirmSave.setButtonText(QMessageBox::Yes, tr("OK"));
+
+    if ( confirmSave.exec() == QMessageBox::Yes)
+    {
+        owarn << "writing config as user accepted" << oendl;
+        m_parentConfig->writeConfigs();
+        owarn << "testing authentication" << oendl;
+
+        /* launch the authentication in debug, aka "allowBypass == true", mode
+         */
+
+        Opie::Security::MultiauthMainWindow win(true);
+        // resize the QDialog object so it fills all the screen
+        QRect desk = qApp->desktop()->geometry();
+        win.setGeometry( 0, 0, desk.width(), desk.height() );
+
+        // the authentication has already succeeded (without win interactions)
+        if ( win.isAlreadyDone() )
+            return;
+
+        win.exec();
+
+    }
+
 }
-
-/// Be sure that allowBypass is not checked if explanScreens is not
-void MultiauthGeneralConfig::checkBypass()
-{
-    if ( (allowBypass->isChecked() == true) && (explanScreens->isChecked() == false) )
-        allowBypass->setChecked(false);
-}
-
-
-
-
-
-
-
-
-
 
 
 /// Builds and displays the Opie multi-authentication configuration dialog
@@ -139,7 +155,7 @@ static void test_and_start() {
 
 
 
-    MultiauthConfig::MultiauthConfig(QWidget* par, const char* w,  WFlags f)
+    MultiauthConfig::MultiauthConfig(QWidget* par, const char* w = "MultiauthConfig dialog",  WFlags f = 0)
 : QDialog(par, w, TRUE, f),
     m_mainTW(0), m_pluginListView(0), m_pluginListWidget(0),
     m_generalConfig(0), m_loginWidget(0), m_syncWidget(0),
@@ -162,7 +178,7 @@ static void test_and_start() {
 
     setCaption( tr( "Security configuration" ) );
     QVBoxLayout *layout = new QVBoxLayout( this );
-    m_mainTW = new Opie::Ui::OTabWidget( this );
+    m_mainTW = new Opie::Ui::OTabWidget( this, "main tab widget" );
     layout->addWidget(m_mainTW);
 
     if (m_pluginsInstalled)
@@ -190,7 +206,7 @@ static void test_and_start() {
         connect ( m_pluginListView , SIGNAL( clicked ( QListViewItem * ) ), this, SLOT( pluginsChanged ( ) ) );
 
         // general Opie multi-authentication configuration tab
-        m_generalConfig = new MultiauthGeneralConfig(m_mainTW);
+        m_generalConfig = new MultiauthGeneralConfig(this, m_mainTW);
         m_mainTW->addTab(m_generalConfig, "SettingsIcon", tr( "Authentication") );
 
     }
@@ -241,7 +257,7 @@ static void test_and_start() {
         m_mainTW->setCurrentTab(m_pluginListWidget);
 
         // put the number of plugins as the max number of req. auth.
-        m_generalConfig->nbSuccessMin->setMaxValue( pluginList.count() );
+        m_generalConfig->m_nbSuccessMin->setMaxValue( pluginList.count() );
     }
     else
     {
@@ -271,14 +287,19 @@ MultiauthConfig::~MultiauthConfig()
 {
 }
 
-void MultiauthConfig::accept() {
+/// saves the general and plugin(s) configurations
+void MultiauthConfig::writeConfigs() {
     writeConfig();
 
     MultiauthConfigWidget* confWidget = 0;
     for ( confWidget = configWidgetList.first(); confWidget != 0;
           confWidget = configWidgetList.next() )
         confWidget->writeConfig();
+}
 
+/// on QDialog::accept, we save all the configurations and exit the QDialog normally
+void MultiauthConfig::accept() {
+    writeConfigs();
     QDialog::accept();
 }
 
@@ -314,12 +335,11 @@ void MultiauthConfig::readConfig()
     if (m_pluginsInstalled)
     {
         pcfg->setGroup( "Misc" );
-        m_generalConfig->onStart->setChecked( pcfg->readBoolEntry( "onStart", false ) );
-        m_generalConfig->onResume->setChecked( pcfg->readBoolEntry( "onResume", false ) );
-        m_generalConfig->nbSuccessMin->setValue( pcfg->readNumEntry( "nbSuccessMin", 1 ) );
-        m_generalConfig->noProtectConfig->setChecked( pcfg->readBoolEntry( "noProtectConfig", true) );
-        m_generalConfig->explanScreens->setChecked( pcfg->readBoolEntry( "explanScreens", true ) );
-        m_generalConfig->allowBypass->setChecked( pcfg->readBoolEntry( "allowBypass", false ) );
+        m_generalConfig->m_onStart->setChecked( pcfg->readBoolEntry( "onStart", false ) );
+        m_generalConfig->m_onResume->setChecked( pcfg->readBoolEntry( "onResume", false ) );
+        m_generalConfig->m_nbSuccessMin->setValue( pcfg->readNumEntry( "nbSuccessMin", 1 ) );
+        m_generalConfig->m_noProtectConfig->setChecked( pcfg->readBoolEntry( "noProtectConfig", true) );
+        m_generalConfig->m_explanScreens->setChecked( pcfg->readBoolEntry( "explanScreens", true ) );
 
         pcfg->setGroup( "Plugins" );
         m_excludePlugins = pcfg->readListEntry( "ExcludePlugins", ',' );
@@ -423,12 +443,11 @@ void MultiauthConfig::writeConfig()
         pcfg->writeEntry( "AllPlugins",  allPlugins, ',' );
 
         pcfg->setGroup( "Misc" );
-        pcfg->writeEntry( "onStart",  m_generalConfig->onStart->isChecked() );
-        pcfg->writeEntry( "onResume",  m_generalConfig->onResume->isChecked() );
-        pcfg->writeEntry( "nbSuccessMin",  m_generalConfig->nbSuccessMin->text() );
-        pcfg->writeEntry( "noProtectConfig",  m_generalConfig->noProtectConfig->isChecked() );
-        pcfg->writeEntry( "explanScreens",  m_generalConfig->explanScreens->isChecked() );
-        pcfg->writeEntry( "allowBypass",  m_generalConfig->allowBypass->isChecked() );
+        pcfg->writeEntry( "onStart",  m_generalConfig->m_onStart->isChecked() );
+        pcfg->writeEntry( "onResume",  m_generalConfig->m_onResume->isChecked() );
+        pcfg->writeEntry( "nbSuccessMin",  m_generalConfig->m_nbSuccessMin->text() );
+        pcfg->writeEntry( "noProtectConfig",  m_generalConfig->m_noProtectConfig->isChecked() );
+        pcfg->writeEntry( "explanScreens",  m_generalConfig->m_explanScreens->isChecked() );
     }
 
     /* Login and Sync stuff */
@@ -579,7 +598,7 @@ void MultiauthConfig::restoreDefaults()
                          QMessageBox::Cancel, QMessageBox::Yes, QMessageBox::NoButton,
                          0, QString::null, TRUE, WStyle_StaysOnTop);
     unrecbox.setButtonText(QMessageBox::Cancel, tr("Cancel"));
-    unrecbox.setButtonText(QMessageBox::Yes, tr("Ok"));
+    unrecbox.setButtonText(QMessageBox::Yes, tr("OK"));
 
     if ( unrecbox.exec() == QMessageBox::Yes)
     {

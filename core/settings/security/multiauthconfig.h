@@ -57,22 +57,26 @@
 #include "syncbase.h"
 #include "loginbase.h"
 
+class MultiauthConfig;
+class MultiauthGeneralConfig;
 
 /// the "misc" configuration tab, about general Opie Multiauth settings
 class MultiauthGeneralConfig : public QWidget
 {
     Q_OBJECT
 public:
-    MultiauthGeneralConfig(QWidget * parent, const char * name);
+    MultiauthGeneralConfig(MultiauthConfig * parentConfig, QWidget * parent, const char * name);
     ~MultiauthGeneralConfig();
 protected:
-    QCheckBox *onStart, *onResume, *noProtectConfig, *explanScreens, *allowBypass;
-    QSpinBox *nbSuccessMin;
+    QCheckBox *m_onStart, *m_onResume, *m_noProtectConfig, *m_explanScreens;
+    QSpinBox *m_nbSuccessMin;
 private:
     friend class MultiauthConfig;
+    /// pointer to the MultiauthConfig that called us
+    MultiauthConfig *m_parentConfig;
+    QPushButton *m_tryButton;
 private slots:
-    void checkBypass();
-    void checkScreens();
+    void tryAuth();
 };
 
 /// the whole configuration dialog
@@ -84,7 +88,6 @@ public:
     static QString appName() { return QString::fromLatin1("security"); }
     MultiauthConfig(QWidget *parent, const char* name, WFlags fl);
     virtual ~MultiauthConfig();
-    void writeConfig();
     QList<Opie::Security::MultiauthConfigWidget> configWidgetList;
     
 protected slots:
@@ -93,6 +96,7 @@ protected slots:
     void pluginsChanged();
     void moveSelectedUp();
     void moveSelectedDown();
+    void writeConfigs();
 
 private slots:
     // Login and Sync stuff
@@ -104,6 +108,7 @@ private slots:
     void deleteListEntry();
 
 private:
+    friend class MultiauthGeneralConfig;
     /// the widget holding all the tabs (or pages)
     Opie::Ui::OTabWidget *m_mainTW;
     /// list of authentication plugins in the "Plugins" page
@@ -124,6 +129,7 @@ private:
     bool m_pluginsInstalled;
     
     void readConfig();
+    void writeConfig();
     void loadPlugins();
 
     // Login and Sync stuff
