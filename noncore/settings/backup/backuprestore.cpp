@@ -249,7 +249,7 @@ void BackupAndRestore::backup()
     qDebug( "Storing file: %s", outputFile.latin1() );
     outputFile += EXTENSION;
 
-    QString commandLine = QString( "(tar -C %1 -c %2 | gzip > %3 ) 2> %4" ).arg( QDir::homeDirPath() )
+    QString commandLine = QString( "(tar -C %1 -z --exclude=*.bck -c %2 > %3 ) 2> %4" ).arg( QDir::homeDirPath() )
                                                                            .arg( backupFiles )
                                                                            .arg( outputFile.latin1() )
                                                                            .arg( tempFileName.latin1() );
