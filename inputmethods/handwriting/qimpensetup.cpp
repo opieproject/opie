@@ -36,6 +36,7 @@
 #include <qtabwidget.h>
 #include <qdir.h>
 #include <qmessagebox.h>
+#include <opie2/odebug.h>
 
 
 /* XPM */
@@ -108,7 +109,7 @@ QIMPenSetup::QIMPenSetup( QIMPenProfile *p, QWidget *parent,
     profileList.append( profile );
 #endif
 
-    qWarning("profiles: %d", profileList.count());
+    owarn << "profiles: " << profileList.count() << oendl;
     
     QTabWidget *tw = new QTabWidget( this );
     vb->addWidget( tw );

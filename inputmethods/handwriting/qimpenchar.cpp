@@ -392,8 +392,8 @@ bool QIMPenCharSet::save( Domain d )
 
 	if ( ok ) {
 		if ( ::rename( tmpFn.latin1(), fn.latin1() ) < 0 ) {
-			qWarning( "problem renaming file %s to %s, errno: %d",
-					tmpFn.latin1(), fn.latin1(), errno );
+			owarn << "problem renaming file " <<tmpFn.latin1() << " to "<< fn.latin1()
+			<< ", errno: " <<  errno << oendl;
 			// remove the tmp file, otherwise, it will just lay around...
 			QFile::remove( tmpFn.latin1() );
 			ok = FALSE;
