@@ -13,11 +13,18 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_xml.cpp,v 1.5 2003-04-13 18:07:10 zecke Exp $
+ * Version: $Id: ocontactaccessbackend_xml.cpp,v 1.5.4.1 2003-07-07 16:42:48 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_xml.cpp,v $
- * Revision 1.5  2003-04-13 18:07:10  zecke
+ * Revision 1.5.4.1  2003-07-07 16:42:48  eilers
+ * Fixing function hasQuerySettings().
+ * This fix was made into main, too. Sorry for the conflict if we merge into
+ * main, but this function returned useless results.
+ * Thus, I wanted to have it fixed..
+ * This bugfix interfere with the addressbook-plugin of today. Please upgrade this, too !
+ *
+ * Revision 1.5  2003/04/13 18:07:10  zecke
  * More API doc
  * QString -> const QString&
  * QString = 0l -> QString::null
@@ -447,9 +454,31 @@ bool OContactAccessBackend_XML::hasQuerySettings (uint querySettings) const
 	 * Wildcards, RegExp, ExactMatch should never used at the same time...
 	 */
 
+	// INFO: Modification of "hasQuerySettings" is already ported to HEAD, due
+	//       to the fact that this functions returned unacceptable results !
+	//       Thus, it will cause a conflict if we merge the changes of this
+	//       tree.. Any conflict of this function can be ignored safely!! (eilers)
+
+	// Step 1: Check whether the given settings are supported by this backend
+	if ( ( querySettings & ( 
+				OContactAccess::IgnoreCase
+				| OContactAccess::WildCards
+				| OContactAccess::DateDiff
+				| OContactAccess::DateYear
+				| OContactAccess::DateMonth
+				| OContactAccess::DateDay
+				| OContactAccess::RegExp
+				| OContactAccess::ExactMatch
+			       ) ) != querySettings )
+		return false;
+
+	// Step 2: Check whether the given combinations are ok..
+
+	// IngoreCase alone is invalid
 	if ( querySettings == OContactAccess::IgnoreCase )
 		return false;
 
+	// WildCards, RegExp and ExactMatch should never used at the same time 
 	switch ( querySettings & ~( OContactAccess::IgnoreCase
 				    | OContactAccess::DateDiff
 				    | OContactAccess::DateYear
@@ -462,6 +491,8 @@ bool OContactAccessBackend_XML::hasQuerySettings (uint querySettings) const
 	case OContactAccess::WildCards:
 		return ( true );
 	case OContactAccess::ExactMatch:
+		return ( true );
+	case 0: // one of the upper removed bits were set..
 		return ( true );
 	default:
 		return ( false );
