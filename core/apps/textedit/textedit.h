@@ -52,7 +52,8 @@ class TextEdit : public QMainWindow
 public:
     TextEdit( QWidget *parent = 0, const char *name = 0, WFlags f = 0 );
     ~TextEdit();
- QPopupMenu *font;
+
+    QPopupMenu *font;
     QAction *nStart;
     bool edited, edited1;
     void openFile( const QString & );

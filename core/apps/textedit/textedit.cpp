@@ -493,7 +493,7 @@ void TextEdit::fileNew()
 
 void TextEdit::fileOpen()
 {
-    browseForFiles=new fileBrowser(this,"Open File",TRUE,0, "*");
+    browseForFiles=new fileBrowser(this,"Open File",TRUE,0, "text/*"); //
     browseForFiles->setFileView( viewSelection );
     browseForFiles->showMaximized();
     if( browseForFiles->exec() != -1 ) {

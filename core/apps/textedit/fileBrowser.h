@@ -52,19 +52,20 @@ public:
     fileBrowser( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 ,const QString filter=0);
     ~fileBrowser();
 
-    QString selectedFileName, mimeType;
+    QString selectedFileName;
     QFile file;
     QStringList fileList;
     QComboBox *SelectionCombo;
 public slots:
     void setFileView( int );
+    void setMimeType(const QString &);
 
 private:
 //    QDict<void> mimes;
     QPushButton *buttonOk, *buttonCancel, *homeButton, *docButton, *hideButton, *cdUpButton;
     QListView* ListView;
     QLabel *dirLabel;
-    QString filterStr;
+    QString filterStr, mimeType;
     QDir currentDir;
     QStringList dirPathStringList;
     QListViewItem * item;

@@ -11,6 +11,7 @@
 ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 **
 ****************************************************************************/
+#define QTOPIA_INTERNAL_MIMEEXT
 #include "fileBrowser.h"
 //#include "inputDialog.h"
 
@@ -43,13 +44,22 @@ static int get_unique_id()
     return u_id++;
 }
 
-fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags fl , const QString filter )
+fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags fl , const QString mimeFilter )
     : QDialog( parent, name, modal, fl )
 {
     if ( !name )
         setName( "fileBrowser" );
     setCaption(tr( name ) );
-    filterStr = filter;
+    mimeType =  mimeFilter;
+    MimeType mt( mimeType);
+    if( mt.extension().isEmpty())
+        filterStr =  "*";
+    else
+        filterStr = "*."+ mt.extension();
+//      qDebug("description "+mt.description());
+//      qDebug( "id "+mt.id());
+//      qDebug("extension "+mt.extension());
+
 //      channel = new QCopChannel( "QPE/fileDialog", this );
 //      connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
 //         this, SLOT(receive(const QCString&, const QByteArray&)) );
@@ -79,7 +89,6 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
     cdUpButton ->setFlat(TRUE);
     layout->addMultiCellWidget( cdUpButton, 0, 0, 5, 5 );
 
-
     docButton = new QPushButton(Resource::loadIconSet("DocsIcon"),"",this,"docsButton");
     docButton->setMinimumSize( QSize( 20, 20 ) );
     docButton->setMaximumSize( QSize( 20, 20 ) );
@@ -95,7 +104,6 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
     layout->addMultiCellWidget( homeButton, 0, 0, 7, 7 );
 
     FileStack = new QWidgetStack( this );
-
 
     ListView = new QListView( this, "ListView" );
 //     ListView->setMinimumSize( QSize( 100, 25 ) );
@@ -118,7 +126,7 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
     connect( ListView, SIGNAL( clicked( QListViewItem*)), SLOT(listClicked(QListViewItem *)) );
 
     FileStack->addWidget( ListView, get_unique_id() );
-mimeType="text/*";
+
     fileSelector = new FileSelector( mimeType, FileStack, "fileselector" , FALSE, FALSE); //buggy
 //    connect( fileSelector, SIGNAL( closeMe() ), this, SLOT( showEditTools() ) );
 //    connect( fileSelector, SIGNAL( newSelected( const DocLnk &) ), this, SLOT( newFile( const DocLnk & ) ) );
@@ -151,6 +159,10 @@ mimeType="text/*";
 
 fileBrowser::~fileBrowser()
 {
+}
+
+void fileBrowser::setMimeType(const QString &type) {
+    mimeType = type;
 }
 
 void fileBrowser::setFileView( int selection )
