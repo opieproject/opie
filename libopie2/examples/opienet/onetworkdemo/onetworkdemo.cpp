@@ -26,6 +26,14 @@ int main( int argc, char** argv )
                 qDebug( "DEMO: Associated AP has MAC Address '%s'", (const char*) iface->associatedAP() );
             //}
 
+            // try to set monitor mode
+
+            // first some wrong calls to check if this is working
+            iface->setPrivate( "seppel", 10 );
+            iface->setPrivate( "monitor", 0 );
+
+            // now the real deal
+            iface->setPrivate( "monitor", 2, 2, 3 );
         }
         ++it;
     }

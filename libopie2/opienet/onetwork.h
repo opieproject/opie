@@ -183,6 +183,8 @@ class OWirelessNetworkInterface : public ONetworkInterface
     friend class OHostAPMonitoringInterface;
     friend class OOrinocoMonitoringInterface;
 
+    friend class OPrivateIOCTL;
+
   public:
     enum Mode { AdHoc, Managed, Monitor };
 
@@ -206,6 +208,9 @@ class OWirelessNetworkInterface : public ONetworkInterface
 
     virtual void setNickName( const QString& ) {};
     virtual QString nickName() const;
+
+    virtual void setPrivate( const QString&, int, ... );
+    virtual void getPrivate( const QString& );
 
     virtual bool isAssociated() const {};
     virtual QString associatedAP() const;

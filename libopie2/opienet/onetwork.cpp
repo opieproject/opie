@@ -52,6 +52,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <linux/sockios.h>
+#include <stdarg.h>
 
 using namespace std;
 
@@ -579,6 +580,38 @@ QString OWirelessNetworkInterface::nickName() const
         str[_iwr.u.data.length] = 0x0; // some drivers (e.g. wlan-ng) don't zero-terminate the string
         return str;
     }
+}
+
+
+void OWirelessNetworkInterface::setPrivate( const QString& call, int numargs, ... )
+{
+    OPrivateIOCTL* priv = static_cast<OPrivateIOCTL*>( child( (const char*) call ) );
+    if ( !priv )
+    {
+        qDebug( "OWirelessNetworkInterface::setPrivate(): interface '%s' does not support private ioctl '%s'", name(), (const char*) call );
+        return;
+    }
+    if ( priv->numberSetArgs() != numargs )
+    {
+        qDebug( "OWirelessNetworkInterface::setPrivate(): parameter count not matching. '%s' expects %d arguments, but got %d", (const char*) call, priv->numberSetArgs(), numargs );
+        return;
+    }
+
+    qDebug( "OWirelessNetworkInterface::setPrivate(): about to call '%s' on interface '%s'", (const char*) call, name() );
+    memset( &_iwr, 0, sizeof _iwr );
+    va_list argp;
+    va_start( argp, numargs );
+    for ( int i = 0; i < numargs; ++i )
+    {
+        priv->setParameter( i, va_arg( argp, int ) );
+    }
+    va_end( argp );
+    priv->invoke();
+}
+
+
+void OWirelessNetworkInterface::getPrivate( const QString& call )
+{
 }
 
 

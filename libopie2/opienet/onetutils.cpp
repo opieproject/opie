@@ -30,6 +30,7 @@
 */
 
 #include <opie2/onetutils.h>
+#include <opie2/onetwork.h>
 
 #include <net/if.h>
 
@@ -118,29 +119,53 @@ OPrivateIOCTL::~OPrivateIOCTL()
 }
 
 
-inline int OPrivateIOCTL::numberGetArgs() const
+#ifdef QT_NO_DEBUG
+inline
+#endif
+int OPrivateIOCTL::numberGetArgs() const
 {
     return _getargs & IW_PRIV_SIZE_MASK;
 }
 
 
-inline int OPrivateIOCTL::typeGetArgs() const
+#ifdef QT_NO_DEBUG
+inline
+#endif
+int OPrivateIOCTL::typeGetArgs() const
 {
     return _getargs & IW_PRIV_TYPE_MASK >> 12;
 }
 
 
-inline int OPrivateIOCTL::numberSetArgs() const
+#ifdef QT_NO_DEBUG
+inline
+#endif
+int OPrivateIOCTL::numberSetArgs() const
 {
     return _setargs & IW_PRIV_SIZE_MASK;
 }
 
 
-inline int OPrivateIOCTL::typeSetArgs() const
+#ifdef QT_NO_DEBUG
+inline
+#endif
+int OPrivateIOCTL::typeSetArgs() const
 {
     return _setargs & IW_PRIV_TYPE_MASK >> 12;
 }
 
+
+void OPrivateIOCTL::invoke() const
+{
+    ( (OWirelessNetworkInterface*) parent() )->wioctl( _ioctl );
+}
+
+
+void OPrivateIOCTL::setParameter( int num, u_int32_t value )
+{
+    u_int32_t* arglist = (u_int32_t*) &( (OWirelessNetworkInterface*) parent() )->_iwr.u.name;
+    arglist[num] = value;
+}
 
 /*======================================================================================
  * assorted functions

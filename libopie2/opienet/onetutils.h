@@ -98,10 +98,14 @@ class OPrivateIOCTL : public QObject
     int numberSetArgs() const;
     int typeSetArgs() const;
 
+    void invoke() const;
+    void setParameter( int, u_int32_t );
+
   private:
     u_int32_t _ioctl;
     u_int16_t _getargs;
     u_int16_t _setargs;
+
 };
 
  /*======================================================================================
