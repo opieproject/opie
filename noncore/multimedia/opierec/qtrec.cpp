@@ -107,11 +107,6 @@ int sd;
 void quickRec() {
 //void QtRec::quickRec() {
 
-   qDebug("%d",
-          filePara.numberSamples/filePara.sampleRate * filePara.channels);
-   qDebug("samples %d, rate %d, channels %d",
-          filePara.numberSamples, filePara.sampleRate, filePara.channels);
-
    int total = 0;  // Total number of bytes read in so far.
    int bytesWritten, number;
 
@@ -127,26 +122,19 @@ void quickRec() {
 
    recording = true;
    //rate=filePara.sampleRate;
-   int bits = filePara.resolution;
-   qDebug("bits %d", bits);
-//   if( filePara.format==WAVE_FORMAT_DVI_ADPCM)
-//   else
+   //   int bits = filePara.resolution;
    audio_buf_info inInfo;
    ioctl( filePara.fd, SNDCTL_DSP_GETISPACE, &inInfo);
-   qDebug("ispace is frags %d, total %d", inInfo.fragments, inInfo.fragstotal);
+   //   qDebug("ispace is frags %d, total %d", inInfo.fragments, inInfo.fragstotal);
 
    if( filePara.resolution == 16 ) { //AFMT_S16_LE)
-      qDebug("AFMT_S16_LE size %d", filePara.SecondsToRecord);
-      qDebug("samples to record %d", filePara.samplesToRecord);
-      qDebug("%d", filePara.sd);
       level=7;
       threshold=0;
       timeString.sprintf("%.2f",  filePara.numberOfRecordedSeconds);
       timeLabel->setText( timeString+ " seconds");
 
       if( filePara.format==WAVE_FORMAT_DVI_ADPCM) {
-         qDebug("start recording WAVE_FORMAT_DVI_ADPCM");
-         // <<<<<<<<<<<<<<<<<<<<<<<<<<<  WAVE_FORMAT_DVI_ADPCM  >>>>>>>>>>>>>>>>>>>>>>
+         //         qDebug("start recording WAVE_FORMAT_DVI_ADPCM");
          char abuf[BUFSIZE/2];
          short sbuf[BUFSIZE];
          short sbuf2[BUFSIZE];
@@ -156,29 +144,22 @@ void quickRec() {
 
          for(;;) {
             if (stopped) {
-               qDebug("quickRec:: stopped");
                break;  // stop if playing was set to false
-//                    return;
             }
 
             number=::read( filePara.sd, sbuf, BUFSIZE);
-
             if(number <= 0) {
                perror("recording error ");
-               qDebug( "%s %d", filePara.fileName, number);
+               //               qDebug( "%s %d", filePara.fileName, number);
                //          errorStop();
                recording=stopped=false;
-//                     QMessageBox::message("Note",
-//                                          "Error recording to file\n%s",
-//                                          filePara.fileName);
+//                     QMessageBox::message("Note", "Error recording to file\n%s",filePara.fileName);
                return;
             }
             //if(stereo == 2) {
 //        adpcm_coder( sbuf2, abuf, number/2, &encoder_state);
             adpcm_coder( sbuf, abuf, number/2, &encoder_state);
-
             bytesWritten = ::write( filePara.fd , abuf, number/4);
-
             long peak;
             for (int i = 0; i < number; i++)
             { //since Z is mono do normally
@@ -186,8 +167,6 @@ void quickRec() {
                printf("peak %ld\r",peak);
                fflush(stdout);
             }
-
-
             //------------->>>> out to file
             //           if(filePara.channels==1)
             //               total += bytesWritten/2; //mono
@@ -200,17 +179,7 @@ void quickRec() {
             timeSlider->setValue( total);
 
             filePara.numberOfRecordedSeconds = (float)total / (float)filePara.sampleRate * (float)2;
-
-//                 printf("Writing number %d, bytes %d,total %d, sample rate %d, secs %.2f \n",
-//                        number,
-//                        bytesWritten ,
-//                        total,
-//                        filePara.sampleRate,
-//                        filePara.numberOfRecordedSeconds);
-//                 fflush(stdout);
             ioctl( filePara.sd, SNDCTL_DSP_GETIPTR, &info);
-//            qDebug("%d, %d", info.bytes, (info.bytes / filePara.sampleRate) / 2);
-
             timeString.sprintf("%.2f", filePara.numberOfRecordedSeconds);
             timeLabel->setText( timeString + " seconds");
 
@@ -219,30 +188,23 @@ void quickRec() {
                break;
          }
       } else {
-         // <<<<<<<<<<<<<<<<<<<<<<<<<<<  WAVE_FORMAT_PCM   >>>>>>>>>>>>>>>>>>>>>>
-         qDebug("start recording WAVE_FORMAT_PCM");
+         //         qDebug("start recording WAVE_FORMAT_PCM");
          short inbuffer[BUFSIZE], outbuffer[BUFSIZE];
          memset( inbuffer,0,BUFSIZE);
          memset( outbuffer,0,BUFSIZE);
          for(;;) {
             if (stopped) {
-               qDebug("quickRec:: stopped");
                break;  // stop if playing was set to false
-               return;
             }
 
             number=::read( filePara.sd, inbuffer, BUFSIZE);
-
             if(number <= 0) {
                perror("recording error ");
-               qDebug( filePara.fileName);
                recording=stopped=false;
                //          errorStop();
-//                    QMessageBox::message("Note","error recording to file\n%s",filePara.fileName);
                return;// false;
             }
 /*                for (int i=0;i< number;i++) { //2*i is left channel
-
 outbuffer[i]=inbuffer[i]>>1; // no clippy, please
 }*/
             bytesWritten = ::write( filePara.fd , inbuffer, number);
@@ -264,8 +226,6 @@ outbuffer[i]=inbuffer[i]>>1; // no clippy, please
                printf("peak %ld\r",peak);
                fflush(stdout);
             }
-
-
             filePara.numberSamples = total;
             if(filePara.SecondsToRecord !=0)
                timeSlider->setValue( total);
@@ -276,10 +236,8 @@ outbuffer[i]=inbuffer[i]>>1; // no clippy, please
 //            qDebug("%d, %d", info.bytes, ( info.bytes / filePara.sampleRate) / 2);
 
             filePara.numberOfRecordedSeconds = (float)total / (float)filePara.sampleRate / (float)2;
-
             timeString.sprintf("%.2f", filePara.numberOfRecordedSeconds);
             timeLabel->setText( timeString + " seconds");
-
             qApp->processEvents();
             if( total >= filePara.samplesToRecord)
                break;
@@ -293,7 +251,7 @@ outbuffer[i]=inbuffer[i]>>1; // no clippy, please
 
       for(;;) {
          if (stopped) {
-            qDebug("quickRec:: stopped");
+            //            qDebug("quickRec:: stopped");
             break;  // stop if playing was set to false
          }
          number=::read( filePara.sd, unsigned_inbuffer, BUFSIZE);
@@ -348,18 +306,12 @@ void playIt() {
 
 }
 
-
-
 /////////////////<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>
-/////////////////<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>
-
 QtRec::QtRec( QWidget* parent,  const char* name, WFlags fl )
    : QWidget( parent, name, fl ) {
    //    QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << true;  // mute device
    //  autoMute=TRUE;
 //     QPEApplication::grabKeyboard();
-
-//    signal(SIGPIPE, SIG_IGN);
 
    if ( !name )
       setName( "OpieRec" );
@@ -411,7 +363,6 @@ void QtRec::cleanUp() {
 
    if(wavFile) delete wavFile;
 // if(soundDevice) delete soundDevice;
-
 //     QPEApplication::grabKeyboard();
 //     QPEApplication::ungrabKeyboard();
 }
@@ -754,9 +705,10 @@ void QtRec::initIconView() {
       QListViewItem * item;
       QString fileS, mediaLocation, fileDate,  filePath;
 
-//      temp.sprintf("%d",i);
+      temp.sprintf("%d",i);
       temp=cfg.readEntry(temp,""); //reads currentFile
       filePath = cfg.readEntry(temp,""); //currentFileName
+      //      qDebug(filePath);
 
       QFileInfo info(filePath);
       fileDate = info.lastModified().toString();
@@ -859,7 +811,7 @@ void QtRec::initConfig() {
 //================
 
 void QtRec::stop() {
-   qDebug("<<<<<<<<<stop()");
+   //   qDebug("<<<<<<<<<stop()");
    setRecordButton(false);
    monitoring=false;
    stopped=true;
@@ -887,7 +839,6 @@ void QtRec::doPlayBtn() {
 
 void QtRec::start() { //play
    if(stopped) {
-      qDebug("start::");
       QPixmap image3( ( const char** ) image3_data );
       Stop_PushButton->setPixmap( image3 );
       Stop_PushButton->setDown(true);
@@ -902,13 +853,10 @@ void QtRec::start() { //play
 }
 
 bool QtRec::rec() { //record
-   qDebug("rec()");
    if(!stopped) {
-      qDebug("rec:: !stopped");
       monitoring=true;
       return false;
    } else {
-      qDebug("go ahead and record");
       secCount=1;
       playLabel2->setText(tr("Stop"));
       monitoring=false;
@@ -917,45 +865,30 @@ bool QtRec::rec() { //record
 
       if( setupAudio( true))
          if(setUpFile())  {
-            qDebug("Ok to start recording");
             int fileSize=0;
             Config cfg("OpieRec");
             cfg.setGroup("Settings");
-            qDebug( "<<<<<<<Device bits %d, device rate %d, device channels %d",
-                    soundDevice->getDeviceBits(),
-                    soundDevice->getDeviceRate(),
-                    soundDevice->getDeviceChannels());
-
             //filePara.sampleRate = cfg.readNumEntry("samplerate", 22050);
-            qDebug("sample rate is %d", filePara.sampleRate);
+            //            qDebug("sample rate is %d", filePara.sampleRate);
             filePara.SecondsToRecord = getCurrentSizeLimit();
 
-            qDebug("size limit %d sec", filePara.SecondsToRecord);
             int diskSize = checkDiskSpace( (const QString &) wavFile->trackName());
 
             if( filePara.SecondsToRecord == 0) {
                fileSize = diskSize;
             } else if( filePara.format==WAVE_FORMAT_PCM) {
-               qDebug("WAVE_FORMAT_PCM");
                fileSize = (filePara.SecondsToRecord ) * filePara.channels
                           * filePara.sampleRate *(filePara.resolution/8)+1000;
             } else {
-               qDebug("WAVE_FORMAT_DVI_ADPCM");
                fileSize = ((filePara.SecondsToRecord) * filePara.channels
                            * filePara.sampleRate *(filePara.resolution/8) )/4+250;
             }
 
             filePara.samplesToRecord = fileSize;
-            qDebug("filesize should be %d, bits %d, rate %d",
-                   filePara.samplesToRecord, filePara.resolution, filePara.sampleRate);
             if(paused) {
                paused = false;
             }
-            //                  else {
-            qDebug("Setting timeslider %d", filePara.samplesToRecord);
-            //           if(fileSize != 0)
             timeSlider->setRange(0, filePara.samplesToRecord);
-            //                  }
 
             if( diskSize < fileSize/1024) {
                QMessageBox::warning(this,
@@ -971,11 +904,9 @@ bool QtRec::rec() { //record
                setCaption( msg);
 #endif
                filePara.fileName=currentFile.latin1();
-               qDebug("Start recording thread");
 
                pthread_t thread1;
                pthread_create( &thread1, NULL, (void * (*)(void *))quickRec, NULL/* &*/);
-//                            quickRec();
                toBeginningButton->setEnabled(false);
                toEndButton->setEnabled(false);
 
@@ -1010,8 +941,8 @@ void QtRec::thisTab(QWidget* widg) {
    if(widg != NULL) {
       int index=TabWidget->currentPageIndex();
 
-      if(index==0) { //file page
-      }
+//        if(index==0) { //file page
+//        }
 
       if(index ==1) { //control page
          fillDirectoryCombo();
@@ -1019,8 +950,8 @@ void QtRec::thisTab(QWidget* widg) {
 //       soundDevice->getInVol();
       }
 
-      if(index==2) { //help page
-      }
+//        if(index==2) { //help page
+//        }
       qApp->processEvents();
       update();
    }
@@ -1028,13 +959,11 @@ void QtRec::thisTab(QWidget* widg) {
 
 void QtRec::getOutVol( ) {
    filePara.outVol = soundDevice->getOutVolume();
-   qDebug("out vol %d", filePara.outVol);
    OutputSlider->setValue( -filePara.outVol);
 }
 
 void QtRec::getInVol() {
    filePara.inVol = soundDevice->getInVolume();
-   qDebug("in vol %d", filePara.inVol);
    InputSlider->setValue( -filePara.inVol);
 }
 
@@ -1055,7 +984,6 @@ bool QtRec::setupAudio( bool b) {
    filePara.resolution = bitRateComboBox->currentText().toInt( &ok,10);  //16
 
    if( !b){ // we want to play
-      qDebug("setting up DSP for playing");
       if( filePara.resolution == 16 || compressionCheckBox->isChecked() ) {
          sampleformat = AFMT_S16_LE;
          filePara.resolution = 16;
@@ -1069,7 +997,6 @@ bool QtRec::setupAudio( bool b) {
       dspString = DSPSTROUT;
       mixerString = DSPSTRMIXEROUT;
    } else { // we want to record
-      qDebug("setting up DSP for recording");
 
       if( !bitRateComboBox->isEnabled() || bitRateComboBox->currentText() == "16")
          sampleformat = AFMT_S16_LE;
@@ -1078,30 +1005,22 @@ bool QtRec::setupAudio( bool b) {
 
       if( !compressionCheckBox->isChecked()) {
          filePara.format=WAVE_FORMAT_PCM;
-         qDebug("WAVE_FORMAT_PCM");
       }  else {
          filePara.format=WAVE_FORMAT_DVI_ADPCM;
          sampleformat=AFMT_S16_LE;
-         qDebug("WAVE_FORMAT_DVI_ADPCM");
       }
 
       stereo = filePara.channels = 1;
-//        filePara.sampleRate = sampleRateComboBox->currentText().toInt( &ok,10);//44100;
       flags= O_RDWR;
-//        flags= O_RDONLY;
       dspString = DSPSTRIN;
       mixerString = DSPSTRMIXEROUT;
    }
 
    // if(soundDevice) delete soundDevice;
-   qDebug("<<<<<<<<<<<<<<<<<<<open dsp %d %d %d", filePara.sampleRate, filePara.channels, sampleformat);
    soundDevice = new Device( this, dspString, mixerString, b);
 //    soundDevice->openDsp();
    soundDevice->reset();
 
-   qDebug("device has been made %d", soundDevice->sd);
-
-   //////////////////         <<<<<<<<<<<<>>>>>>>>>>>>
    soundDevice->setDeviceFormat( sampleformat);
    soundDevice->setDeviceChannels( filePara.channels);
    soundDevice->setDeviceRate( filePara.sampleRate);
@@ -1111,15 +1030,14 @@ bool QtRec::setupAudio( bool b) {
    soundDevice->setFragSize( frag);
    soundDevice->getDeviceFragSize();
 #endif
-   /////////////////
+
    filePara.sd = soundDevice->sd;
 
    if ( filePara.sd == -1) {
-
       monitoring=false;
       stopped=true;
       update();
-      setCaption( tr( "OpieRecord " ) + QString::number(VERSION) );
+      setCaption( tr( "OpieRecord " ) /*+ QString::number(VERSION)*/ );
       stopped=true;
       return false;
    }
@@ -1131,7 +1049,7 @@ bool QtRec::setupAudio( bool b) {
 
 
 bool QtRec::setUpFile() { //setup file for recording
-   qDebug("Setting up wavfile");
+   //   qDebug("Setting up wavfile");
 //  if(wavFile) delete wavFile;
    wavFile = new WavFile( this, (const QString &)"",
                           true,
@@ -1160,7 +1078,7 @@ bool QtRec::doPlay() {
    recording = false;
 //    int number=0;
    if( !paused) {
-      qDebug("new");
+      //      qDebug("new");
       total=0;
       bytesWritten=0;
       filePara.numberOfRecordedSeconds = 0;
@@ -1173,23 +1091,22 @@ bool QtRec::doPlay() {
 
    QString num;
 //    block=BUFSIZE;
-   qDebug("Play number of samples %d", filePara.numberSamples);
    timeSlider->setRange(0, filePara.numberSamples);
    timeString.sprintf("%.2f",  filePara.numberOfRecordedSeconds);
    timeLabel->setText( timeString+ tr(" seconds"));
 
-   if( filePara.format==WAVE_FORMAT_DVI_ADPCM) {
-      qDebug("WAVE_FORMAT_DVI_ADPCM");
-   } else {
-      qDebug("WAVE_FORMAT_PCM");
-   }
+//     if( filePara.format==WAVE_FORMAT_DVI_ADPCM) {
+//        //      qDebug("WAVE_FORMAT_DVI_ADPCM");
+//     } else {
+//        //      qDebug("WAVE_FORMAT_PCM");
+//     }
    QString msg;
    msg.sprintf("%d, %d, %d", filePara.sampleRate, filePara.channels, filePara.resolution);
 #ifdef DEV_VERSION
    setCaption( msg);
 #endif
    if( filePara.resolution == 16 ) { //AFMT_S16_LE) {
-      qDebug("16 bit");
+      //      qDebug("16 bit");
 
       startTimer(1000);
 
@@ -1277,7 +1194,7 @@ bool QtRec::doPlay() {
 //            fflush(stdout);
       } //end loop
    } else { /////////////////////////////// format = AFMT_U8;
-      unsigned char unsigned_inbuffer[BUFSIZE], unsigned_outbuffer[BUFSIZE];
+      unsigned char unsigned_inbuffer[BUFSIZE];//, unsigned_outbuffer[BUFSIZE];
       memset( unsigned_inbuffer,0,BUFSIZE);
       for(;;) {          // main loop
          if (stopped)
@@ -1343,7 +1260,7 @@ void QtRec::changesamplerateCombo(int i) {
 //     soundDevice->closeDevice( true);
 //     soundDevice=0;
 //     delete soundDevice;
-   qDebug("Change sample rate %d", rate);
+   //   qDebug("Change sample rate %d", rate);
    cfg.write();
 
 }
@@ -1364,7 +1281,7 @@ void QtRec::changeDirCombo(int index) {
          const QString path = (*it)->path();
          recDir =  path;
          cfg.writeEntry("directory", recDir);
-         qDebug("new rec dir "+recDir);
+         //         qDebug("new rec dir "+recDir);
       }
    }
    cfg.write();
@@ -1379,10 +1296,10 @@ void QtRec::changeSizeLimitCombo(int) {
 }
 
 void QtRec::newSound() {
-   qDebug("<<<<<<<<<new sound");
+   //   qDebug("<<<<<<<<<new sound");
 
    if( !rec()) {
-      qDebug("rec() failed");
+      //      qDebug("rec() failed");
       endRecording();
       deleteSound();
    }
@@ -1448,7 +1365,7 @@ void QtRec::deleteSound() {
 #ifndef DEV_VERSION
    };
 #endif
-   setCaption( tr( "OpieRecord " ) + QString::number(VERSION) );
+   setCaption( tr( "OpieRecord " ) /*+ QString::number(VERSION)*/ );
 
 }
 
@@ -1513,7 +1430,7 @@ void QtRec::keyPressEvent( QKeyEvent *e) {
       //    newSound();
       break;
    case Key_Left: {
-      qDebug("rewinding");
+      //      qDebug("rewinding");
       if( !e->isAutoRepeat())
          rewindPressed();
    }
@@ -1567,7 +1484,7 @@ void  QtRec::keyReleaseEvent( QKeyEvent *e) {
       break;
    case Key_Up:
       //      stop();
-      qDebug("Up");
+      //      qDebug("Up");
       break;
    case Key_Down:
       //      start();
@@ -1575,18 +1492,18 @@ void  QtRec::keyReleaseEvent( QKeyEvent *e) {
       //    newSound();
       break;
    case Key_Left:
-      qDebug("Left");
+      //      qDebug("Left");
       rewindReleased();
       break;
    case Key_Right:
-      qDebug("Right");
+      //    qDebug("Right");
       FastforwardReleased();
       break;
    }
 }
 
 void QtRec::endRecording() {
-   qDebug("endRecording");
+   // qDebug("endRecording");
    setRecordButton(false);
    timeSlider->setValue(0);
    toBeginningButton->setEnabled(true);
@@ -1617,11 +1534,11 @@ void QtRec::endRecording() {
 // move tmp file to regular file
          QString cmd;
          cmd.sprintf("mv "+ wavFile->trackName() + " " + wavFile->currentFileName);
-         qDebug("moving tmp file to "+currentFileName);
+         //         qDebug("moving tmp file to "+currentFileName);
          system(cmd.latin1());
       }
 
-      qDebug("Just moved "+wavFile->currentFileName);
+      //      qDebug("Just moved "+wavFile->currentFileName);
       Config cfg("OpieRec");
       cfg.setGroup("Sounds");
 
@@ -1637,10 +1554,10 @@ void QtRec::endRecording() {
       QString time;
       time.sprintf("%.2f", filePara.numberOfRecordedSeconds);
       cfg.writeEntry( wavFile->currentFileName, time );
-      qDebug("writing config numberOfRecordedSeconds "+time);
+      //      qDebug("writing config numberOfRecordedSeconds "+time);
 
       cfg.write();
-      qDebug("finished recording");
+      //      qDebug("finished recording");
       timeLabel->setText("");
    }
 
@@ -1652,7 +1569,7 @@ void QtRec::endRecording() {
 
 void QtRec::endPlaying() {
 
-   qDebug("end playing");
+   //   qDebug("end playing");
    setRecordButton(false);
 
    toBeginningButton->setEnabled(true);
@@ -1664,7 +1581,7 @@ void QtRec::endPlaying() {
    soundDevice->closeDevice( false);
    soundDevice->sd=-1;
    //  if(soundDevice) delete soundDevice;
-   qDebug("file and sound device closed");
+   //   qDebug("file and sound device closed");
    stopped=true;
    recording=false;
    playing=false;
@@ -1677,7 +1594,7 @@ void QtRec::endPlaying() {
    filePara.fd=0;
 //  if(wavFile) delete wavFile; //this crashes
 
-   qDebug("track closed");
+   //   qDebug("track closed");
    timeSlider->setValue(0);
 
    if(soundDevice) delete soundDevice;
@@ -1699,7 +1616,7 @@ bool QtRec::openPlayFile() {
    for(int i=0;i<nFiles+1;i++) { //look for file
       if( cfg.readEntry( QString::number(i),"").find( currentFile,0,true) != -1) {
          currentFileName=cfg.readEntry( currentFile, "" );
-         qDebug("opening for play: "+currentFileName);
+         //         qDebug("opening for play: "+currentFileName);
       }
    }
    wavFile = new WavFile(this,
@@ -1710,7 +1627,7 @@ bool QtRec::openPlayFile() {
       //  if(!track.open(IO_ReadOnly)) {
       QString errorMsg=(QString)strerror(errno);
       monitoring=false;
-      setCaption( tr( "OpieRecord " ) + QString::number(VERSION) );
+      setCaption( tr( "OpieRecord " )/* + QString::number(VERSION)*/ );
       QMessageBox::message(tr("Note"),tr("Could not open audio file.\n")
                            +errorMsg+"\n"+currentFile);
       return false;
@@ -1821,8 +1738,8 @@ void QtRec::doRename() {
 }
 
 void QtRec::okRename() {
-   qDebug("okRename");
-   qDebug(renameBox->text());
+   //   qDebug("okRename");
+   //   qDebug(renameBox->text());
    QString  filename = renameBox->text();
    cancelRename();
 
@@ -1834,7 +1751,7 @@ void QtRec::okRename() {
 
    QString file = ListView1->currentItem()->text(0);
 
-   qDebug("filename is  " + filename);
+   //   qDebug("filename is  " + filename);
 
    int nFiles = cfg.readNumEntry("NumberofFiles",0);
 
@@ -1858,7 +1775,7 @@ void QtRec::okRename() {
 }
 
 void QtRec::cancelRename() {
-   qDebug("cancel rename");
+   //   qDebug("cancel rename");
    bool resetFocus = ListView1->viewport()->focusProxy() == renameBox;
    delete renameBox;
    renameBox = 0;
@@ -1894,7 +1811,7 @@ int QtRec::getCurrentSizeLimit() {
 }
 
 void QtRec::timerBreak() {
-   qDebug("timer break");
+   //   qDebug("timer break");
    stop();
 }
 
@@ -1961,8 +1878,8 @@ long QtRec::checkDiskSpace(const QString &path) {
 //   char  f_fname[6]; /* Volumename */
 //   char  f_fpack[6]; /* Pack name */
 
-void QtRec::receive( const QCString &msg, const QByteArray & ) {
-   qDebug("Voicerecord received message "+msg);
+void QtRec::receive( const QCString &/* msg*/, const QByteArray & ) {
+   //   qDebug("Voicerecord received message "+msg);
 
 }
 
@@ -2227,19 +2144,16 @@ void QtRec::selectItemByName(const QString & name) {
 long findPeak(long input ) {
 
 // halfLife = time in seconds for output to decay to half value after an impulse
-   static float output = 0.0;
-   int halfLife = .25;
+   float output = 0.0;
+   float halfLife = .25;
    float vsf = .0025;
    float scalar = pow( 0.5, 1.0/(halfLife * filePara.sampleRate ));
    if( input < 0.0 )
       input = -input;  // Absolute value.
-   if ( input >= output )
-   {
+   if ( input >= output)   {
       // When we hit a peak, ride the peak to the top.
       output = input;
-   }
-   else
-   {
+   }  else {
 // Exponential decay of output when signal is low.
       output = output * scalar;
 //
@@ -2250,5 +2164,5 @@ long findPeak(long input ) {
       if( output < vsf ) output = 0.0;
    }
 
-   return output;
+   return (long)output;
 }
