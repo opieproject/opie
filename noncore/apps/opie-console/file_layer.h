@@ -9,7 +9,9 @@ class QFile;
  * this is the layer for sending files
  */
 class FileTransferLayer : public QObject {
+
     Q_OBJECT
+
 public:
     /**
      *the io layer to be used

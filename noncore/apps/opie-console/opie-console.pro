@@ -1,5 +1,6 @@
 TEMPLATE     = app
-CONFIG       = qt warn_on release
+#CONFIG       = qt warn_on release
+CONFIG 	     = qt debug
 DESTDIR      = $(OPIEDIR)/bin
 HEADERS      = io_layer.h io_serial.h \
 	       file_layer.h \

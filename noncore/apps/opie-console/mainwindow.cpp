@@ -9,6 +9,7 @@
 #include "metafactory.h"
 #include "profilemanager.h"
 #include "mainwindow.h"
+#include "tabwidget.h"
 
 MainWindow::MainWindow() {
     m_factory = new MetaFactory();
@@ -40,8 +41,6 @@ void MainWindow::initUI() {
     connect(a, SIGNAL(activated() ),
             this, SLOT(slotNew() ) );
 
-
-
     /*
      * connect action
      */
@@ -50,7 +49,6 @@ void MainWindow::initUI() {
     m_connect->addTo( m_console );
     connect(m_connect, SIGNAL(activated() ),
             this, SLOT(slotConnect() ) );
-
 
     /*
      * disconnect action
@@ -101,15 +99,19 @@ void MainWindow::initUI() {
     connect( m_sessionsPop, SIGNAL(activated(int) ),
              this, SLOT(slotProfile(int) ) );
 
+    m_consoleWindow = new TabWidget( this, "blah");
+    setCentralWidget( m_consoleWindow );
+
 }
+
 ProfileManager* MainWindow::manager() {
     return m_manager;
 }
+
 void MainWindow::populateProfiles() {
     m_sessionsPop->clear();
     Profile::ValueList list = manager()->all();
-    for (Profile::ValueList::Iterator it = list.begin(); it != list.end();
-         ++it ) {
+    for (Profile::ValueList::Iterator it = list.begin(); it != list.end(); ++it ) {
         m_sessionsPop->insertItem( (*it).name() );
     }
 
@@ -129,17 +131,21 @@ Session* MainWindow::currentSession() {
 QList<Session> MainWindow::sessions() {
     return m_sessions;
 }
+
 void MainWindow::slotNew() {
     qWarning("New Connection");
 }
+
 void MainWindow::slotConnect() {
     if ( currentSession() )
         currentSession()->layer()->open();
 }
+
 void MainWindow::slotDisconnect() {
     if ( currentSession() )
         currentSession()->layer()->close();
 }
+
 void MainWindow::slotTerminate() {
     if ( currentSession() )
         currentSession()->layer()->close();
@@ -147,9 +153,10 @@ void MainWindow::slotTerminate() {
     m_curSession = 0l;
     /* FIXME move to the next session */
 }
+
 void MainWindow::slotConfigure() {
     qWarning("configure");
-    ConfigDialog  conf( manager()->all() );
+    ConfigDialog conf( manager()->all() );
     conf.showMaximized();
 
     int ret = conf.exec();
@@ -159,9 +166,11 @@ void MainWindow::slotConfigure() {
         populateProfiles();
     }
 }
+
 void MainWindow::slotClose() {
 
 }
+
 void MainWindow::slotProfile(int) {
 
 }

@@ -15,12 +15,13 @@ class QToolBar;
 class QMenuBar;
 class QAction;
 class MetaFactory;
-
+class TabWidget;
 class ProfileManager;
+
 class MainWindow : public QMainWindow {
     Q_OBJECT
 public:
-    MainWindow(  );
+    MainWindow();
     ~MainWindow();
 
     /**
@@ -73,6 +74,7 @@ private:
     MetaFactory* m_factory;
     ProfileManager* m_manager;
 
+    TabWidget* m_consoleWindow;
     QToolBar* m_tool;
     QMenuBar* m_bar;
     QPopupMenu* m_console;
