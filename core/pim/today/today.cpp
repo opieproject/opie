@@ -105,7 +105,7 @@ void Today::setOwnerField() {
     QString returnString = cont.fullName();
     OwnerField->setText( tr ("<b>Owned by " + returnString + "</b>"));
   } else {
-    OwnerField->setText( tr ("<b>to lame to fill out the business card </b>"));
+    OwnerField->setText( tr ("<b>Please fill out the business card </b>"));
   }
 }
 
