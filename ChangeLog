@@ -31,6 +31,8 @@
 	* n.a.  - Launcher Settings - fix default settings for background in Edit tab dialog (drw)
 	* n.a.  - OTabWidget - fix scroll buttons, fix display position of tabs (drw)
 	* n.a.  - AddressBook - fix sorting by 'File As' name (drw)
+	* n.a.  - AddressBook - fix category handling for 'All' and 'Unfiled' (drw)
+	* n.a.  - AddressBook - fix letter picker record selection and sort records afterwards (drw)
 
 	Internal
 	--------
