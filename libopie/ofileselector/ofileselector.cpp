@@ -262,8 +262,6 @@ void OFileSelector::setPopupFactory(OPopupMenuFactory */*popup*/ )
 */
 }
 
-//void OFileSelector::updateL
-
 QString OFileSelector::selectedName() const
 {
   QString name;
@@ -271,11 +269,7 @@ QString OFileSelector::selectedName() const
       DocLnk lnk = m_select->selectedDocument();
       name = lnk.file();
   }else {
-      if ( m_shLne ) {
-          name = m_currentDir + "/" +m_edit->text();
-      }else{
-          name = m_currentDir + "/" + currentView()->selectedName();
-      }
+      name = currentLister()->selectedName();
   }
   return name;
 }
@@ -422,7 +416,6 @@ void OFileSelector::slotLocationActivated(const QString &file)
         cd(info.dirPath( TRUE ) ); //absolute
     else
         cd(name );
-    reparse();
 }
 void OFileSelector::slotInsertLocationPath(const QString &currentPath, int count)
 {
@@ -454,8 +447,6 @@ void OFileSelector::locationComboChanged()
         cd(info.dirPath(TRUE) ); //absolute path
     else
         cd( m_location->lineEdit()->text() );
-
-    reparse();
 }
 void OFileSelector::init()
 {
@@ -854,6 +845,8 @@ void OFileSelector::slotDelete()
 }
 void OFileSelector::cdUP()
 {
+    // FIXME won't work on non filesystem based systems
+    // better call the Olister
   QDir dir( m_currentDir );
   dir.cdUp();
   if(dir.exists() ){
@@ -862,8 +855,6 @@ void OFileSelector::cdUP()
     int count = m_location->count();
     slotInsertLocationPath( m_currentDir, count);
     m_location->setCurrentItem( indexByString( m_location, m_currentDir));
-    //this wont work in all instances
-    // FIXME
   }
 }
 void OFileSelector::slotHome()

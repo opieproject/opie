@@ -11,6 +11,11 @@ public:
     QMap<QString, QStringList> mimeTypes(const QString& dir );
     void fileSelected( const QString& dir, const QString& file, const QString& );
     void changedDir( const QString& dir, const QString& file,const QString& );
+    QString selectedName()const;
+    QStringList selectedNames()const;
+
+private:
+    QString m_dir;
 };
 
 #endif

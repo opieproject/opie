@@ -1,4 +1,5 @@
 #include <qcombobox.h>
+#include <qlineedit.h>
 
 #include "olister.h"
 #include "ofileview.h"
@@ -112,6 +113,9 @@ void OLister::addSymlink( const QString& mine,
 OFileSelector* OLister::view() {
     return m_view;
 }
+OFileSelector* OLister::view()const {
+    return m_view;
+}
 OPixmapProvider* OLister::provider() {
     return m_prov;
 }
@@ -168,4 +172,10 @@ QString OListerCmbAccess::currentText()const {
         str = m_cmb->currentText();
 
     return str;
+}
+QString OLister::lineEdit()const {
+    if ( view()->m_shLne )
+        return view()->m_edit->text();
+
+    return QString::null;
 }

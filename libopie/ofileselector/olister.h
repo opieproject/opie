@@ -23,7 +23,11 @@ class OLister {
 public:
     OLister( OFileSelector* );
     virtual ~OLister();
-    virtual void reparse(const QString& path) = 0;
+
+    /**
+     * if path == QString::null reread current dir
+     */
+    virtual void reparse(const QString& path = QString::null ) = 0;
 
     /**
      * return a list of available mimetypes
@@ -35,6 +39,8 @@ public:
     /* some way a slot */
     virtual void fileSelected( const QString& dir, const QString& file, const QString& extra ) = 0;
     virtual void changedDir( const QString& dir, const QString& file, const QString& extra ) = 0;
+    virtual QString selectedName()const = 0;
+    virtual QStringList selectedNames()const = 0;
 protected:
     /**
      * I hate too big classes
@@ -77,9 +83,19 @@ protected:
                      const QString& extra = QString::null,
                      bool isSymlink = FALSE );
     OFileSelector* view();
+    OFileSelector* view()const;
     OPixmapProvider* provider();
     void internFileSelected( const QString& file );
     void internChangedDir( const QString& dir );
+
+    /**
+     * try to take
+     * the text from the mainwindows
+     * lineedit
+     * if it's not available QString::null
+     * will be returned
+     */
+    QString lineEdit()const;
 private:
     OFileSelector* m_view;
     OPixmapProvider* m_prov;

@@ -5,11 +5,13 @@
 #include <qpe/mimetype.h>
 
 #include "ofileselector.h"
+#include "ofileview.h"
 #include "olocallister.h"
 
 OLocalLister::OLocalLister( OFileSelector* file )
     : OLister( file )
 {
+    m_dir = QDir::homeDirPath();
 }
 OLocalLister::~OLocalLister() {
 }
@@ -51,9 +53,12 @@ QMap<QString, QStringList> OLocalLister::mimeTypes( const QString& curDir ) {
  * filter files
  * filter mimetypes
  */
-void OLocalLister::reparse( const QString& path ) {
+void OLocalLister::reparse( const QString& pa ) {
+    if (!pa.isEmpty() )
+        m_dir = pa;
+
     QString currentMimeType;
-    QDir dir( path );
+    QDir dir( m_dir );
 
     dir.setSorting( view()->sorting() );
     dir.setFilter( view()->filter() );
@@ -122,4 +127,24 @@ void OLocalLister::fileSelected( const QString& dir, const QString& file, const 
 }
 void OLocalLister::changedDir( const QString& dir, const QString& file, const QString& ) {
     internChangedDir( dir + "/" + file );
+}
+/*
+ * assemble the the Url now
+ */
+QString OLocalLister::selectedName()const {
+    QString str = m_dir;
+    QString name = lineEdit();
+
+    if ( name.isEmpty() )
+        name = view()->currentView()->selectedName();
+
+    str += "/" + name;
+
+    return str;
+}
+QStringList OLocalLister::selectedNames()const {
+    QStringList list;
+    list << selectedName();
+
+    return list;
 }
