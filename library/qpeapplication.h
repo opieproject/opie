@@ -192,8 +192,7 @@ inline void QPEApplication::showDialog( QDialog* d, bool nomax )
     int w = QMAX(sh.width(),d->width());
     int h = QMAX(sh.height(),d->height());
     if ( !nomax
-            && ( w > qApp->desktop()->width()*3/4
-                 || h > qApp->desktop()->height()*3/4 ) )
+            && (  qApp->desktop()->width() <= 320 ) )
     {
         d->showMaximized();
     } else {
@@ -214,8 +213,7 @@ inline void QPEApplication::showWidget( QWidget* wg, bool nomax )
     int w = QMAX(sh.width(),wg->width());
     int h = QMAX(sh.height(),wg->height());
     if ( !nomax
-            && ( w > qApp->desktop()->width()*3/4
-                 || h > qApp->desktop()->height()*3/4 ) )
+            && ( qApp->desktop()->width() <= 320 ) )
     {
         wg->showMaximized();
     } else {
