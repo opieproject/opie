@@ -50,7 +50,7 @@ class AudioWidget : public QWidget {
 public:
     AudioWidget( QWidget* parent=0, const char* name=0, WFlags f=0 );
     ~AudioWidget();
-    void setTickerText( const QString &text ) { songInfo->setText( text ); }
+    void setTickerText( const QString &text ) { songInfo.setText( text ); }
     bool isStreaming;
 public slots:
     void updateSlider( long, long );
