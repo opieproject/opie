@@ -1,0 +1,4 @@
+  config NS2MAIN
+    boolean
+    default "y" if NS2
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && NS2

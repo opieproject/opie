@@ -1,0 +1,22 @@
+config NS2
+  boolean "opie-networksettings-2 (TCP/IP network settings)"
+  default "y"
+  depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+
+config NS2CORE
+  boolean
+  default "y" if NS2
+  depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && NS2
+
+  source noncore/settings/networksettings2/profile/config.in
+  source noncore/settings/networksettings2/network/config.in
+  source noncore/settings/networksettings2/lancard/config.in
+  source noncore/settings/networksettings2/ppp/config.in
+  source noncore/settings/networksettings2/wlan/config.in
+  source noncore/settings/networksettings2/usb/config.in
+  source noncore/settings/networksettings2/irda/config.in
+  source noncore/settings/networksettings2/vpn/config.in
+  source noncore/settings/networksettings2/bluetooth/config.in
+  source noncore/settings/networksettings2/cable/config.in
+  source noncore/settings/networksettings2/modem/config.in
+  source noncore/settings/networksettings2/networksettings2/config.in

@@ -1,0 +1,10 @@
+Package: opie-networksettings
+Files: plugins/application/libnetworksettings.so* bin/networksettings apps/Settings/networksettings.desktop pics/networksettings/* pics/Network/PPPConnect.png $OPIEDIR/lib/libinterfaces.so* root/usr/bin/changedns bin/getprofile
+Priority: optional
+Section: opie/settings
+Maintainer: Patrick S. Vogt <tille@handhelds.org>
+Architecture: arm
+Depends: task-opie-minimal
+Description: Network settings.
+Replaces: opie-networksetup
+Version: $QPE_VERSION$EXTRAVERSION

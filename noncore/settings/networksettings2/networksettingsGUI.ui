@@ -1,0 +1,598 @@
+<!DOCTYPE UI><UI>
+<class>NetworkSettingsGUI</class>
+<widget>
+    <class>QWidget</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>NetworkSettingsGUI</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>403</width>
+            <height>502</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>Network Settings</string>
+    </property>
+    <property>
+        <name>layoutMargin</name>
+    </property>
+    <property>
+        <name>layoutSpacing</name>
+    </property>
+    <vbox>
+        <property stdset="1">
+            <name>margin</name>
+            <number>0</number>
+        </property>
+        <property stdset="1">
+            <name>spacing</name>
+            <number>2</number>
+        </property>
+        <widget>
+            <class>QFrame</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Frame4</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>7</hsizetype>
+                    <vsizetype>0</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>frameShape</name>
+                <enum>NoFrame</enum>
+            </property>
+            <property stdset="1">
+                <name>frameShadow</name>
+                <enum>Raised</enum>
+            </property>
+            <property>
+                <name>layoutMargin</name>
+            </property>
+            <property>
+                <name>layoutSpacing</name>
+            </property>
+            <hbox>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>0</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>1</number>
+                </property>
+                <widget>
+                    <class>QToolButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>Add_TB</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>0</hsizetype>
+                            <vsizetype>0</vsizetype>
+                        </sizepolicy>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>...</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QToolButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>Delete_TB</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>0</hsizetype>
+                            <vsizetype>0</vsizetype>
+                        </sizepolicy>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>...</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QToolButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>CheckState_TB</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>0</hsizetype>
+                            <vsizetype>0</vsizetype>
+                        </sizepolicy>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>...</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QToolButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>GenConfig_TB</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>0</hsizetype>
+                            <vsizetype>0</vsizetype>
+                        </sizepolicy>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>...</string>
+                    </property>
+                </widget>
+                <spacer>
+                    <property>
+                        <name>name</name>
+                        <cstring>Spacer1</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>orientation</name>
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property stdset="1">
+                        <name>sizeType</name>
+                        <enum>Expanding</enum>
+                    </property>
+                    <property>
+                        <name>sizeHint</name>
+                        <size>
+                            <width>20</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget>
+                    <class>QToolButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>On_TB</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>0</hsizetype>
+                            <vsizetype>0</vsizetype>
+                        </sizepolicy>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>...</string>
+                    </property>
+                    <property stdset="1">
+                        <name>toggleButton</name>
+                        <bool>true</bool>
+                    </property>
+                    <property stdset="1">
+                        <name>toggleButton</name>
+                        <bool>true</bool>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QToolButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>Enable_TB</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>0</hsizetype>
+                            <vsizetype>0</vsizetype>
+                        </sizepolicy>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>...</string>
+                    </property>
+                    <property stdset="1">
+                        <name>toggleButton</name>
+                        <bool>true</bool>
+                    </property>
+                    <property stdset="1">
+                        <name>toggleButton</name>
+                        <bool>true</bool>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QToolButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>Connect_TB</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>0</hsizetype>
+                            <vsizetype>0</vsizetype>
+                        </sizepolicy>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>...</string>
+                    </property>
+                    <property stdset="1">
+                        <name>toggleButton</name>
+                        <bool>true</bool>
+                    </property>
+                    <property stdset="1">
+                        <name>toggleButton</name>
+                        <bool>true</bool>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+        <widget>
+            <class>QIconView</class>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>New Item</string>
+                </property>
+                <property>
+                    <name>pixmap</name>
+                    <pixmap>image0</pixmap>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>New Item</string>
+                </property>
+                <property>
+                    <name>pixmap</name>
+                    <pixmap>image0</pixmap>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>New Item</string>
+                </property>
+                <property>
+                    <name>pixmap</name>
+                    <pixmap>image0</pixmap>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>New Item</string>
+                </property>
+                <property>
+                    <name>pixmap</name>
+                    <pixmap>image0</pixmap>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>New Item</string>
+                </property>
+                <property>
+                    <name>pixmap</name>
+                    <pixmap>image0</pixmap>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>New Item</string>
+                </property>
+                <property>
+                    <name>pixmap</name>
+                    <pixmap>image0</pixmap>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>New Item</string>
+                </property>
+                <property>
+                    <name>pixmap</name>
+                    <pixmap>image0</pixmap>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>New Item</string>
+                </property>
+                <property>
+                    <name>pixmap</name>
+                    <pixmap>image0</pixmap>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>New Item</string>
+                </property>
+                <property>
+                    <name>pixmap</name>
+                    <pixmap>image0</pixmap>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>New Item</string>
+                </property>
+                <property>
+                    <name>pixmap</name>
+                    <pixmap>image0</pixmap>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>New Item</string>
+                </property>
+                <property>
+                    <name>pixmap</name>
+                    <pixmap>image0</pixmap>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>New Item</string>
+                </property>
+                <property>
+                    <name>pixmap</name>
+                    <pixmap>image0</pixmap>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>New Item</string>
+                </property>
+                <property>
+                    <name>pixmap</name>
+                    <pixmap>image0</pixmap>
+                </property>
+            </item>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Profiles_IV</cstring>
+            </property>
+            <property stdset="1">
+                <name>spacing</name>
+                <number>5</number>
+            </property>
+            <property stdset="1">
+                <name>itemsMovable</name>
+                <bool>false</bool>
+            </property>
+            <property stdset="1">
+                <name>showToolTips</name>
+                <bool>false</bool>
+            </property>
+        </widget>
+        <widget>
+            <class>QGroupBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>CurProfile_GB</cstring>
+            </property>
+            <property stdset="1">
+                <name>title</name>
+                <string></string>
+            </property>
+            <property>
+                <name>layoutMargin</name>
+            </property>
+            <property>
+                <name>layoutSpacing</name>
+            </property>
+            <vbox>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>4</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>1</number>
+                </property>
+                <widget>
+                    <class>QLayoutWidget</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>Layout3</cstring>
+                    </property>
+                    <hbox>
+                        <property stdset="1">
+                            <name>margin</name>
+                            <number>0</number>
+                        </property>
+                        <property stdset="1">
+                            <name>spacing</name>
+                            <number>6</number>
+                        </property>
+                        <widget>
+                            <class>QLabel</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>TextLabel2</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>text</name>
+                                <string>State</string>
+                            </property>
+                        </widget>
+                        <widget>
+                            <class>QLabel</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>State_LBL</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>text</name>
+                                <string>State</string>
+                            </property>
+                            <property stdset="1">
+                                <name>indent</name>
+                                <number>0</number>
+                            </property>
+                        </widget>
+                        <spacer>
+                            <property>
+                                <name>name</name>
+                                <cstring>Spacer6</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>orientation</name>
+                                <enum>Horizontal</enum>
+                            </property>
+                            <property stdset="1">
+                                <name>sizeType</name>
+                                <enum>Expanding</enum>
+                            </property>
+                            <property>
+                                <name>sizeHint</name>
+                                <size>
+                                    <width>20</width>
+                                    <height>20</height>
+                                </size>
+                            </property>
+                        </spacer>
+                    </hbox>
+                </widget>
+                <widget>
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>Description_LBL</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>5</hsizetype>
+                            <vsizetype>7</vsizetype>
+                        </sizepolicy>
+                    </property>
+                    <property stdset="1">
+                        <name>frameShape</name>
+                        <enum>NoFrame</enum>
+                    </property>
+                    <property stdset="1">
+                        <name>frameShadow</name>
+                        <enum>Raised</enum>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string></string>
+                    </property>
+                    <property stdset="1">
+                        <name>alignment</name>
+                        <set>AlignTop|AlignLeft</set>
+                    </property>
+                    <property>
+                        <name>vAlign</name>
+                    </property>
+                </widget>
+            </vbox>
+        </widget>
+    </vbox>
+</widget>
+<images>
+    <image>
+        <name>image0</name>
+        <data format="XPM.GZ" length="1347">789c7dd3c14ac4301405d07dbf22f4ed8a743ace0882f8098a4b415ca4c92475310a3a2e44fc777393a64df2dabed7452e1c6eb368778d787e7a10cdaefabac8cb9b126a909fa2d1dfe7f3cfcbebfd6f551fae857bf69dd8d75755dd0a251e3fde4f38933b53e707b10f518df18478e8b08803e271c21af1e6168b681165e7f688681055874594211a13a242347efc95da9688dad58946ca75e58d6be9e5ba0a46e92d351a952aa2d3b2495459989849f949546632b5688c32c65aeadde428ed0132da23306e4c5863f1ba017042738f6fc138a5fdbd0a135b2203ec7bca7b723022e23d19628601cb0d6f59e8612dce0c2b2641658fb5650b375a0795a2c2b8afcaaba4859ba852c4cda4364da9964daed64caa60c2475d9a590503c54d54d1d0a2096abb67541bf79955fc0debbfbbea1f81b84f0e</data>
+    </image>
+</images>
+<connections>
+    <connection>
+        <sender>Add_TB</sender>
+        <signal>clicked()</signal>
+        <receiver>NetworkSettingsGUI</receiver>
+        <slot>SLOT_AddNode()</slot>
+    </connection>
+    <connection>
+        <sender>Delete_TB</sender>
+        <signal>clicked()</signal>
+        <receiver>NetworkSettingsGUI</receiver>
+        <slot>SLOT_DeleteNode()</slot>
+    </connection>
+    <connection>
+        <sender>CheckState_TB</sender>
+        <signal>clicked()</signal>
+        <receiver>NetworkSettingsGUI</receiver>
+        <slot>SLOT_CheckState()</slot>
+    </connection>
+    <connection>
+        <sender>Enable_TB</sender>
+        <signal>clicked()</signal>
+        <receiver>NetworkSettingsGUI</receiver>
+        <slot>SLOT_Enable()</slot>
+    </connection>
+    <connection>
+        <sender>Connect_TB</sender>
+        <signal>clicked()</signal>
+        <receiver>NetworkSettingsGUI</receiver>
+        <slot>SLOT_Connect()</slot>
+    </connection>
+    <connection>
+        <sender>On_TB</sender>
+        <signal>clicked()</signal>
+        <receiver>NetworkSettingsGUI</receiver>
+        <slot>SLOT_On()</slot>
+    </connection>
+    <connection>
+        <sender>GenConfig_TB</sender>
+        <signal>clicked()</signal>
+        <receiver>NetworkSettingsGUI</receiver>
+        <slot>SLOT_GenerateConfig()</slot>
+    </connection>
+    <connection>
+        <sender>Profiles_IV</sender>
+        <signal>selectionChanged(QIconViewItem*)</signal>
+        <receiver>NetworkSettingsGUI</receiver>
+        <slot>SLOT_ShowNode( QIconViewItem*)</slot>
+    </connection>
+    <connection>
+        <sender>Profiles_IV</sender>
+        <signal>doubleClicked(QIconViewItem*)</signal>
+        <receiver>NetworkSettingsGUI</receiver>
+        <slot>SLOT_EditNode( QIconViewItem*)</slot>
+    </connection>
+    <connection>
+        <sender>Profiles_IV</sender>
+        <signal>currentChanged(QIconViewItem*)</signal>
+        <receiver>NetworkSettingsGUI</receiver>
+        <slot>SLOT_ShowNode( QIconViewItem*)</slot>
+    </connection>
+    <slot access="public">SLOT_AddNode()</slot>
+    <slot access="public">SLOT_CheckState()</slot>
+    <slot access="public">SLOT_Connect()</slot>
+    <slot access="public">SLOT_DeleteNode()</slot>
+    <slot access="public">SLOT_EditNode( QIconViewItem*)</slot>
+    <slot access="public">SLOT_Enable()</slot>
+    <slot access="public">SLOT_GenerateConfig()</slot>
+    <slot access="public">SLOT_On()</slot>
+    <slot access="public">SLOT_ShowNode( QIconViewItem*)</slot>
+</connections>
+</UI>

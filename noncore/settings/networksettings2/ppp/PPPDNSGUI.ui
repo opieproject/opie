@@ -1,0 +1,340 @@
+<!DOCTYPE UI><UI>
+<class>PPPDNSGUI</class>
+<widget>
+    <class>QWidget</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>PPPDNSGUI</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>228</width>
+            <height>169</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>PPPDNS</string>
+    </property>
+    <property>
+        <name>layoutMargin</name>
+    </property>
+    <property>
+        <name>layoutSpacing</name>
+    </property>
+    <vbox>
+        <property stdset="1">
+            <name>margin</name>
+            <number>2</number>
+        </property>
+        <property stdset="1">
+            <name>spacing</name>
+            <number>2</number>
+        </property>
+        <widget>
+            <class>QButtonGroup</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>ButtonGroup18</cstring>
+            </property>
+            <property stdset="1">
+                <name>frameShape</name>
+                <enum>NoFrame</enum>
+            </property>
+            <property stdset="1">
+                <name>title</name>
+                <string></string>
+            </property>
+            <property>
+                <name>layoutMargin</name>
+            </property>
+            <property>
+                <name>layoutSpacing</name>
+            </property>
+            <vbox>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>2</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>2</number>
+                </property>
+                <widget>
+                    <class>QRadioButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>DNSServerAssigned_RB</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Server assigned</string>
+                    </property>
+                    <property stdset="1">
+                        <name>checked</name>
+                        <bool>true</bool>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QRadioButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>DNSFixed_RB</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Fixed</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QLayoutWidget</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>Layout13</cstring>
+                    </property>
+                    <hbox>
+                        <property stdset="1">
+                            <name>margin</name>
+                            <number>0</number>
+                        </property>
+                        <property stdset="1">
+                            <name>spacing</name>
+                            <number>6</number>
+                        </property>
+                        <spacer>
+                            <property>
+                                <name>name</name>
+                                <cstring>Spacer29</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>orientation</name>
+                                <enum>Horizontal</enum>
+                            </property>
+                            <property stdset="1">
+                                <name>sizeType</name>
+                                <enum>Fixed</enum>
+                            </property>
+                            <property>
+                                <name>sizeHint</name>
+                                <size>
+                                    <width>20</width>
+                                    <height>20</height>
+                                </size>
+                            </property>
+                        </spacer>
+                        <widget>
+                            <class>QFrame</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>Frame21</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>enabled</name>
+                                <bool>false</bool>
+                            </property>
+                            <property stdset="1">
+                                <name>sizePolicy</name>
+                                <sizepolicy>
+                                    <hsizetype>7</hsizetype>
+                                    <vsizetype>5</vsizetype>
+                                </sizepolicy>
+                            </property>
+                            <property stdset="1">
+                                <name>frameShape</name>
+                                <enum>NoFrame</enum>
+                            </property>
+                            <property stdset="1">
+                                <name>frameShadow</name>
+                                <enum>Raised</enum>
+                            </property>
+                            <property>
+                                <name>layoutMargin</name>
+                            </property>
+                            <property>
+                                <name>layoutSpacing</name>
+                            </property>
+                            <grid>
+                                <property stdset="1">
+                                    <name>margin</name>
+                                    <number>2</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>spacing</name>
+                                    <number>2</number>
+                                </property>
+                                <widget row="0"  column="0" >
+                                    <class>QLabel</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>TextLabel5</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>text</name>
+                                        <string>DomainName</string>
+                                    </property>
+                                </widget>
+                                <widget row="1"  column="0" >
+                                    <class>QLabel</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>TextLabel6</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>text</name>
+                                        <string>Address</string>
+                                    </property>
+                                </widget>
+                                <widget row="0"  column="1" >
+                                    <class>QLineEdit</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>DomainName_LE</cstring>
+                                    </property>
+                                </widget>
+                                <widget row="1"  column="1" >
+                                    <class>QLineEdit</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>ServerAddress_LE</cstring>
+                                    </property>
+                                </widget>
+                                <widget row="3"  column="1" >
+                                    <class>QListBox</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>Servers_LB</cstring>
+                                    </property>
+                                </widget>
+                                <widget row="2"  column="1" >
+                                    <class>QFrame</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>Frame22</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>sizePolicy</name>
+                                        <sizepolicy>
+                                            <hsizetype>7</hsizetype>
+                                            <vsizetype>0</vsizetype>
+                                        </sizepolicy>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>frameShape</name>
+                                        <enum>NoFrame</enum>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>frameShadow</name>
+                                        <enum>Raised</enum>
+                                    </property>
+                                    <property>
+                                        <name>layoutMargin</name>
+                                    </property>
+                                    <property>
+                                        <name>layoutSpacing</name>
+                                    </property>
+                                    <hbox>
+                                        <property stdset="1">
+                                            <name>margin</name>
+                                            <number>0</number>
+                                        </property>
+                                        <property stdset="1">
+                                            <name>spacing</name>
+                                            <number>0</number>
+                                        </property>
+                                        <widget>
+                                            <class>QToolButton</class>
+                                            <property stdset="1">
+                                                <name>name</name>
+                                                <cstring>Add_TB</cstring>
+                                            </property>
+                                            <property stdset="1">
+                                                <name>text</name>
+                                                <string>...</string>
+                                            </property>
+                                        </widget>
+                                        <spacer>
+                                            <property>
+                                                <name>name</name>
+                                                <cstring>Spacer2</cstring>
+                                            </property>
+                                            <property stdset="1">
+                                                <name>orientation</name>
+                                                <enum>Horizontal</enum>
+                                            </property>
+                                            <property stdset="1">
+                                                <name>sizeType</name>
+                                                <enum>Expanding</enum>
+                                            </property>
+                                            <property>
+                                                <name>sizeHint</name>
+                                                <size>
+                                                    <width>20</width>
+                                                    <height>20</height>
+                                                </size>
+                                            </property>
+                                        </spacer>
+                                        <widget>
+                                            <class>QToolButton</class>
+                                            <property stdset="1">
+                                                <name>name</name>
+                                                <cstring>Remove_TB</cstring>
+                                            </property>
+                                            <property stdset="1">
+                                                <name>text</name>
+                                                <string>...</string>
+                                            </property>
+                                        </widget>
+                                    </hbox>
+                                </widget>
+                                <widget row="3"  column="0" >
+                                    <class>QLabel</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>TextLabel7</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>text</name>
+                                        <string>List</string>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>alignment</name>
+                                        <set>AlignTop|AlignLeft</set>
+                                    </property>
+                                    <property>
+                                        <name>vAlign</name>
+                                    </property>
+                                </widget>
+                            </grid>
+                        </widget>
+                    </hbox>
+                </widget>
+            </vbox>
+        </widget>
+    </vbox>
+</widget>
+<connections>
+    <connection>
+        <sender>DNSFixed_RB</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>Frame21</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>Add_TB</sender>
+        <signal>clicked()</signal>
+        <receiver>PPPDNSGUI</receiver>
+        <slot>SLOT_AddServer()</slot>
+    </connection>
+    <connection>
+        <sender>Remove_TB</sender>
+        <signal>clicked()</signal>
+        <receiver>PPPDNSGUI</receiver>
+        <slot>SLOT_RemoveServer()</slot>
+    </connection>
+    <slot access="public">SLOT_AddServer()</slot>
+    <slot access="public">SLOT_RemoveServer()</slot>
+</connections>
+</UI>
