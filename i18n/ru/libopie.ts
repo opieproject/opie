@@ -124,7 +124,7 @@
     <name>OFileDialog</name>
     <message>
         <source>FileDialog</source>
-        <translation type="unfinished"></translation>
+        <translation>ФайлДиалог</translation>
     </message>
     <message>
         <source>Open</source>
@@ -694,7 +694,7 @@ and </source>
     </message>
     <message>
         <source>File As</source>
-        <translation type="unfinished"></translation>
+        <translation>Записать как</translation>
     </message>
     <message>
         <source>Job Title</source>

@@ -63,7 +63,7 @@ Pres: </source>
     </message>
     <message>
         <source>n/a</source>
-        <translation type="unfinished">n/a</translation>
+        <translation>н/д</translation>
     </message>
     <message>
         <source>E </source>
@@ -107,7 +107,7 @@ Pres: </source>
     </message>
     <message>
         <source> hPa</source>
-        <translation type="unfinished">кПа</translation>
+        <translation>кПа</translation>
     </message>
     <message>
         <source> Hg</source>

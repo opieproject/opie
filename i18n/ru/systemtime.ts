@@ -92,7 +92,7 @@ ntpdate</translation>
     </message>
     <message>
         <source>Time Server</source>
-        <translation type="unfinished">Сервер времени</translation>
+        <translation>Сервер времени</translation>
     </message>
     <message>
         <source>Error while getting time from
@@ -117,11 +117,11 @@ ntpdate</translation>
     <name>NTPTabWidget</name>
     <message>
         <source>Start time</source>
-        <translation type="unfinished">Начало времени</translation>
+        <translation>Начало времени</translation>
     </message>
     <message>
         <source>n/a</source>
-        <translation type="unfinished">n/a</translation>
+        <translation>н/д</translation>
     </message>
     <message>
         <source>Time shift</source>
@@ -129,7 +129,7 @@ ntpdate</translation>
     </message>
     <message>
         <source>New time</source>
-        <translation type="unfinished">Новое время</translation>
+        <translation>Новое время</translation>
     </message>
     <message>
         <source>Get time from the network</source>
@@ -144,11 +144,11 @@ ntpdate</translation>
     </message>
     <message>
         <source>n/a</source>
-        <translation type="unfinished">n/a</translation>
+        <translation>н/д</translation>
     </message>
     <message>
         <source>Estimated shift</source>
-        <translation type="unfinished">Прикинуть сдвиг</translation>
+        <translation>Прикинутый сдвиг</translation>
     </message>
     <message>
         <source>Predicted time</source>
@@ -160,11 +160,11 @@ ntpdate</translation>
     </message>
     <message>
         <source>Last [h]</source>
-        <translation type="unfinished">Последний (h)</translation>
+        <translation>Последний (ч)</translation>
     </message>
     <message>
         <source>Offset [s]</source>
-        <translation type="unfinished"></translation>
+        <translation>Сдвиг [с]</translation>
     </message>
     <message>
         <source>Predict time</source>

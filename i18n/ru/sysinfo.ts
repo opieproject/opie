@@ -111,11 +111,17 @@ Memory is categorized as follows:
 2. Buffers - temporary storage used to improve performance
 3. Cached - information that has recently been used, but has not been freed yet.
 4. Free - memory not currently used by Opie or any running applications.</source>
-        <translation type="unfinished"></translation>
+        <translation>Эта вкладка показывает как память(т.е. RAM) распределена на вашем устройстве.
+Память разделена на следующие категории:
+
+1. Занято - память используемая Opie и открытыми приложениями.
+2. Буфера - временное хранение для увеличения производительности.
+3. Кэш - информация которая была недавно использована, но еще не освобождена.
+4. Свободная - память не используемая Opie или открытыми приложениями.</translation>
     </message>
     <message>
         <source>Total Swap: %1 kB</source>
-        <translation type="unfinished"></translation>
+        <translation>Подкачки: %1 кбайт</translation>
     </message>
 </context>
 <context>
@@ -228,7 +234,8 @@ Click and hold on a process to see additional information about the process, or 
     <message>
         <source>Really want to send %1
 to this process?</source>
-        <translation type="unfinished"></translation>
+        <translation>Действительно хотите
+послать %1 этому процессу?</translation>
     </message>
 </context>
 <context>
@@ -298,11 +305,11 @@ to this process?</source>
     </message>
     <message>
         <source>&lt;br&gt;Model: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;Модель:</translation>
     </message>
     <message>
         <source>&lt;br&gt;Vendor: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;Производитель:</translation>
     </message>
 </context>
 </TS>

@@ -345,11 +345,11 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     <name>TableView</name>
     <message>
         <source>Table View</source>
-        <translation type="unfinished">В виде таблицы</translation>
+        <translation>В виде таблицы</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет</translation>
     </message>
     <message>
         <source>%1 day(s)</source>
@@ -574,11 +574,11 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>Maintainer Mode:</source>
-        <translation type="unfinished">Режим ведущего:</translation>
+        <translation>Режим ведущего:</translation>
     </message>
     <message>
         <source>Click here to set the maintainer&apos;s role.</source>
-        <translation type="unfinished">Нажмите чтобы установить роль ведущего.</translation>
+        <translation>Нажмите чтобы установить роль ведущего.</translation>
     </message>
     <message>
         <source>Nothing</source>

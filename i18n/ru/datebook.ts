@@ -354,7 +354,7 @@ Quit anyway?</source>
     <name>DateBookWeekHeader</name>
     <message>
         <source>w</source>
-        <translation type="unfinished"></translation>
+        <translation>н</translation>
     </message>
 </context>
 <context>
@@ -376,14 +376,14 @@ Quit anyway?</source>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>
-        <translation type="unfinished"></translation>
+        <translation>н</translation>
     </message>
 </context>
 <context>
     <name>DateBookWeekLstHeaderBase</name>
     <message>
         <source>W: 00,00</source>
-        <translation type="unfinished"></translation>
+        <translation>Н: 00,00</translation>
     </message>
     <message>
         <source>2</source>
