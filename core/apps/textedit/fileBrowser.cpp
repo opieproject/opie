@@ -152,6 +152,7 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
 
     currentDir.setPath(QDir::currentDirPath());
     currentDir.setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden */| QDir::All);
+    currentDir.setNameFilter(filterStr);
 
     populateList();
     move(0,15);
@@ -159,10 +160,6 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
 
 fileBrowser::~fileBrowser()
 {
-}
-
-void fileBrowser::setMimeType(const QString &type) {
-    mimeType = type;
 }
 
 void fileBrowser::setFileView( int selection )
@@ -179,7 +176,6 @@ void fileBrowser::populateList()
     currentDir.setSorting(/* QDir::Size*/ /*| QDir::Reversed | */QDir::DirsFirst);
     currentDir.setMatchAllDirs(TRUE);
 
-    currentDir.setNameFilter(filterStr);
 //    currentDir.setNameFilter("*.txt;*.etx");
     QString fileL, fileS, fileDate;
     const QFileInfoList *list = currentDir.entryInfoList( /*QDir::All*/ /*, QDir::SortByMask*/);
@@ -386,7 +382,7 @@ void fileBrowser::showListMenu(QListViewItem *item) {
     m.insertItem( tr( "Change Directory" ), this, SLOT( doCd() ));
     else
     m.insertItem( tr( "Make Directory" ), this, SLOT( makDir() ));
-    m.insertItem( tr( "Rescan" ), this, SLOT( populateList()() ));
+    m.insertItem( tr( "Rescan" ), this, SLOT( populateList() ));
     m.insertItem( tr( "Rename" ), this, SLOT( localRename() ));
     m.insertSeparator();
     m.insertItem( tr( "Delete" ), this, SLOT( localDelete() ));
@@ -481,7 +477,29 @@ void fileBrowser::updateMimeTypeMenu() {
 void fileBrowser::showType(const QString &t) {
 
     qDebug(t);
-    mimeType = t+"/*";
+    if(t.find("All",0,TRUE) != -1) {
+        filterStr =  "*";
+    } else {
+        QStringList list =  mimetypes.grep( t,TRUE);
+        QString ext;     
+        for ( QStringList::Iterator it = list.begin(); it != list.end(); ++it ) {
+            mimeType =(*it);
+            MimeType mt( mimeType);
+            qDebug("mime "+mimeType);
+//         qDebug("description "+mt.description());
+//         qDebug( "id "+mt.id());
+            qDebug("extension "+mt.extension());
+            if( mt.extension().isEmpty())
+                filterStr =  "*";
+            else
+                filterStr = "*."+ mt.extension()+" ";
+//         printf( "%s \n", (*it).latin1() );
+        }
+    }
+    currentDir.setNameFilter(filterStr);
+
+    populateList();
+    update();
 //      if(fileSelector) {
 //      disconnect( fileSelector, SIGNAL( fileSelected( const DocLnk &) ), this, SLOT( docOpen( const DocLnk & ) ) );
 //          delete fileSelector;
@@ -491,7 +509,6 @@ void fileBrowser::showType(const QString &t) {
 //    connect( fileSelector, SIGNAL( newSelected( const DocLnk &) ), this, SLOT( newFile( const DocLnk & ) ) );
       //   connect( fileSelector, SIGNAL( fileSelected( const DocLnk &) ), this, SLOT( docOpen( const DocLnk & ) ) );
 //    fileSelector->reread();
-    repaint();
 //      if ( t == tr("All") ) {
 //          icons->setTypeFilter("",TRUE);
 //      } else {
@@ -501,6 +518,7 @@ void fileBrowser::showType(const QString &t) {
 }
 
 QStringList fileBrowser::getMimeTypes() {
+
     QStringList r;
     AppLnkSet apps( QPEApplication::qpeDir() + "apps" );
     QFile file( QPEApplication::qpeDir()+"etc/available.mime");
@@ -512,6 +530,7 @@ QStringList fileBrowser::getMimeTypes() {
         QStringList::ConstIterator f;
         for (  f = maj.begin(); f != maj.end(); f++ ) {
             QString  temp = *f;
+            mimetypes << temp;
             int sl = temp.find('/');
             if (sl >= 0) {
                 QString k = temp.left(sl);

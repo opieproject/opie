@@ -58,7 +58,6 @@ public:
     QComboBox *SelectionCombo;
 public slots:
     void setFileView( int );
-    void setMimeType(const QString &);
 
 private:
 //    QDict<void> mimes;
@@ -67,7 +66,7 @@ private:
     QLabel *dirLabel;
     QString filterStr, mimeType;
     QDir currentDir;
-    QStringList dirPathStringList;
+    QStringList dirPathStringList, mimetypes;
     QListViewItem * item;
     QComboBox *dirPathCombo;
     MenuButton *typemb;
