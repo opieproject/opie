@@ -1,9 +1,9 @@
-Files: i18n/dk/.directory 
+Files: i18n/da/.directory i18n/da/*.qm
 Priority: optional
 Section: opie/i18n
-Maintainer: Carsten Niehaus <cniehaus@handhelds.org>
+Maintainer: Tais M. Hansen <mellen@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
 Description: i18n: Danish
- Danish UI texts and dictionary for OPIE environment.
+ Danish UI texts for OPIE environment.
