@@ -136,20 +136,20 @@ void AdvancedFm::populateView() {
 						if(isDir || fileL.find("/",0,TRUE) != -1) {
 
 								if( !QDir( fi->filePath() ).isReadable()) //is directory
-										pm = Resource::loadPixmap( "lockedfolder" );
+										pm.convertFromImage( Resource::loadImage( "lockedfolder" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
 								else
-										pm= Resource::loadPixmap( "folder" );
+										pm.convertFromImage( Resource::loadImage( "folder" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
 						}
 						else if ( fs == "vfat" && fileInfo.filePath().contains("/bin") ) {
-								pm = Resource::loadPixmap( "exec");
+								pm.convertFromImage( Resource::loadImage( "exec" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
 						}
 						else if( (fileInfo.permission( QFileInfo::ExeUser)
 											| fileInfo.permission( QFileInfo::ExeGroup)
 											| fileInfo.permission( QFileInfo::ExeOther)) && fs != "vfat" ) {
-								pm = Resource::loadPixmap( "exec");
+								pm.convertFromImage( Resource::loadImage( "exec" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
 						}
 						else if( !fi->isReadable() )  {
-								pm = Resource::loadPixmap( "locked" );
+								pm.convertFromImage( Resource::loadImage( "locked" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
 						}
 						else { //everything else goes by mimetype
 								MimeType mt(fi->filePath());
@@ -160,14 +160,14 @@ void AdvancedFm::populateView() {
 						}
 						if(  fi->isSymLink() || fileL.find("->",0,TRUE) != -1) {
 									//  odebug << " overlay link image" << oendl;
-								pm= Resource::loadPixmap( "advancedfm/symlink" );
+								pm.convertFromImage( Resource::loadImage( "advancedfm/symlink" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
 									//              pm= Resource::loadPixmap( "folder" );
 //                QPixmap lnk = Resource::loadPixmap( "opie/symlink" );
 //                QPainter painter( &pm );
 //                painter.drawPixmap( pm.width()-lnk.width(), pm.height()-lnk.height(), lnk );
 //                pm.setMask( pm.createHeuristicMask( FALSE ) );
 						}
-						item->setPixmap( 0,pm);
+						item->setPixmap( 0, pm );
 
 				}
 				isDir=FALSE;
