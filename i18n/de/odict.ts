@@ -26,7 +26,7 @@
   <context>
     <name>ODict</name>
     <message>
-      <source>OPIE-Dictionary</source>
+      <source>Opie-Dictionary</source>
       <translation>OPIE-Wörterbuch</translation>
     </message>
     <message>

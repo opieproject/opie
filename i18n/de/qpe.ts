@@ -24,7 +24,7 @@ accurately to calibrate your screen.</source>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation>Willkommen bei OPIE</translation>
+        <translation>Willkommen bei Opie</translation>
     </message>
 </context>
 <context>
@@ -189,7 +189,7 @@ Soll es nach neuen Dokumenten durchsucht werden ?</translation>
     </message>
     <message>
         <source>Terminate Opie</source>
-        <translation>OPIE beenden </translation>
+        <translation>Opie beenden </translation>
     </message>
     <message>
         <source>Reboot</source>
@@ -197,7 +197,7 @@ Soll es nach neuen Dokumenten durchsucht werden ?</translation>
     </message>
     <message>
         <source>Restart Opie</source>
-        <translation>OPIE neu starten</translation>
+        <translation>Opie neu starten</translation>
     </message>
     <message>
         <source>Shutdown</source>
@@ -206,7 +206,7 @@ Soll es nach neuen Dokumenten durchsucht werden ?</translation>
     <message>
         <source>&lt;p&gt;
 These termination options are provided primarily for use while developing and testing the Opie system. In a normal environment, these concepts are unnecessary.</source>
-        <translation>Die Optionen zum Herunterfahren sind ausschliesslich zur Entwicklung und fr Tests des OPIE-Systems gedacht. Unter normalen Bedingungen sind sie nicht notwendig.</translation>
+        <translation>Die Optionen zum Herunterfahren sind ausschließlich zur Entwicklung und für Tests des Opie-Systems gedacht. Unter normalen Bedingungen sind sie nicht notwendig.</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -214,7 +214,7 @@ These termination options are provided primarily for use while developing and te
     </message>
     <message>
         <source>Shutdown...</source>
-        <translation>Herunterfahren ...</translation>
+        <translation>Herunterfahren...</translation>
     </message>
 </context>
 <context>

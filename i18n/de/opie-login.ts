@@ -22,7 +22,7 @@ kalibrieren.</translation>
     </message>
     <message>
         <source>&lt;center&gt;Welcome to OPIE&lt;/center&gt;</source>
-        <translation>&lt;center&gt;Welcome to OPIE&lt;/center&gt;</translation>
+        <translation>&lt;center&gt;Willkommen in Opie&lt;/center&gt;</translation>
     </message>
     <message>
         <source>User</source>
@@ -68,7 +68,7 @@ kalibrieren.</translation>
 by an uncaught signal
 (%1)
 </source>
-        <translation>OPIE wurde durch
+        <translation type="obsolete">OPIE wurde durch
 ein nicht abgefangenes
 Signal beendet: %1
 </translation>
@@ -79,11 +79,24 @@ Signal beendet: %1
     </message>
     <message>
         <source>Could not start OPIE.</source>
-        <translation>OPIE konnte nicht gestartet werden.</translation>
+        <translation type="obsolete">OPIE konnte nicht gestartet werden.</translation>
     </message>
     <message>
         <source>Could not switch to new user identity</source>
         <translation>Konnte nicht zu einer anderen Identität wechseln</translation>
+    </message>
+    <message>
+        <source>Opie was terminated
+by an uncaught signal
+(%1)
+</source>
+        <translation>Opie wurde durch
+ein nicht abgefangenes
+Signal beendet: %1</translation>
+    </message>
+    <message>
+        <source>Could not start Opie.</source>
+        <translation>Opie konnte nicht gestartet werden.</translation>
     </message>
 </context>
 </TS>
