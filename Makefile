@@ -118,9 +118,6 @@ endif
 SUBDIRS = $(subdir-y)
 
 all clean install ipk: $(SUBDIRS)
-	make -C bin clean
-	make -C lib clean
-	make -C plugins clean
 
 lupdate lrelease:
 	@for i in $(SUBDIRS); do $(MAKE) -C $$i $@; done
@@ -133,6 +130,9 @@ $(subdir-y) : $(if $(CONFIG_LIBQPE),$(QTDIR)/stamp-headers $(OPIEDIR)/stamp-head
 	$(TOPDIR)/library/custom.h
 
 clean : $(TOPDIR)/.config
+	make -C bin clean
+	make -C lib clean
+	make -C plugins clean
 
 apidox : doc/generate_apidox 
 
