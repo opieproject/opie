@@ -9,6 +9,8 @@
 
 #include <xine.h>
 
+class XineVideoWidget;
+
 namespace XINE {
 
     /**
@@ -22,7 +24,7 @@ namespace XINE {
     class Lib : public QObject {
         Q_OBJECT
     public:
-        Lib();
+        Lib(XineVideoWidget* = 0);
         ~Lib();
         QCString version();
         int majorVersion()/*const*/;

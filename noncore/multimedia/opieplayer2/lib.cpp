@@ -5,6 +5,7 @@
 
 #include <qfile.h>
 
+#include "xinevideowidget.h"
 #include "frame.h"
 #include "lib.h"
 
@@ -22,7 +23,7 @@ extern "C" {
 
 using namespace XINE;
 
-Lib::Lib() {
+Lib::Lib(XineVideoWidget* /*widget*/) {
     printf("Lib");
     QCString str( getenv("HOME") );
     str += "/Settings/opiexine.cf";
