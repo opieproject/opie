@@ -1,0 +1,4 @@
+  config LIBTREMORPLUGIN
+    boolean "libtremorplugin"
+    default "y"
+    depends ( LIBQPE || LIBQPE-X11 ) && OPIEPLAYER

@@ -1,0 +1,9 @@
+Files: root/usr/lib/libtremor.so root/usr/lib/libtremor.so.1 root/usr/lib/libtremor.so.1.0 root/usr/lib/libtremor.so.1.0.0
+Priority: optional
+Section: opie/plugins
+Maintainer: Lorn Potter <llornkcor@handhelds.org>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base
+Description: vorbis (tremor) library
+ Library needed for playing OGG files with the mediaplayer in the Opie environment.
