@@ -86,14 +86,6 @@ void Skin::init( const QString &name )
     d = SkinCache::self().lookupAndTake( m_skinPath, m_fileNameInfix );
 }
 
-void Skin::preload( const MediaWidget::SkinButtonInfo *skinButtonInfo, uint buttonCount )
-{
-    backgroundPixmap();
-    buttonUpImage();
-    buttonDownImage();
-    ( void )buttonMask( skinButtonInfo, buttonCount );
-}
-
 QPixmap Skin::backgroundPixmap() const
 {
     if ( d->backgroundPixmap.isNull() )

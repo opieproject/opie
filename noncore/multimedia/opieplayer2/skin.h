@@ -38,8 +38,6 @@ public:
     Skin( const QString &fileNameInfix );
     ~Skin();
 
-    void preload( const MediaWidget::SkinButtonInfo *skinButtonInfo, uint buttonCount );
-
     QPixmap backgroundPixmap() const;
     QImage buttonUpImage() const;
     QImage buttonDownImage() const;
