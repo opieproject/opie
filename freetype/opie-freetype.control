@@ -4,6 +4,6 @@ Priority: optional
 Section: libs
 Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
+Version: $QPE_VERSION$EXTRAVERSION
 Depends: task-opie-minimal, libfreetype6
 Description: Freetype fontfactory plugin

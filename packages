@@ -121,8 +121,11 @@ CONFIG_NETWORKAPPLET	noncore/applets/networkapplet	networkapplet.pro
 CONFIG_NETWORKSETUP	noncore/settings/networksettings	networksettings.pro
 CONFIG_NOTESAPPLET	noncore/applets/notesapplet	notesapplet.pro
 CONFIG_NS2BT	noncore/settings/networksettings2/bluetooth	bluetooth.pro
+CONFIG_NS2GPRS	noncore/settings/networksettings2/gprs	GPRS.pro
 CONFIG_NS2CABLE	noncore/settings/networksettings2/cable	cable.pro
 CONFIG_NS2CORE	noncore/settings/networksettings2/networksettings2	networksettings2.pro
+CONFIG_NS2OPIETOOTH	noncore/settings/networksettings2/opietooth2	opietooth2.pro
+CONFIG_NS2OPIETOOTHAPPLET	noncore/settings/networksettings2/opietooth2_applet	opietooth2_applet.pro
 CONFIG_NS2IRDA	noncore/settings/networksettings2/irda	irda.pro
 CONFIG_NS2LANCARD	noncore/settings/networksettings2/lancard	lancard.pro
 CONFIG_NS2MODEM	noncore/settings/networksettings2/modem	modem.pro

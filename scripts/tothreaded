@@ -115,6 +115,10 @@ do
        T_provides=`findthreadedequiv ${line#Provides: }`
        echo "Provides: $T_provides"
        ;;
+     "Recommends: "*)
+       T_recommends=`findthreadedequiv ${line#Recommends: }`
+       echo "Recommends: $T_recommends"
+       ;;
      "Conflicts: "*)
        conflicts=`echo "${line#Conflicts: }" | tokenize`
        T_conflicts=`findthreadedequiv ${conflicts}`

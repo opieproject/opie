@@ -49,7 +49,7 @@ ipks-mt: $(OPIEDIR)/scripts/subst $(OPIEDIR)/scripts/filesubst FORCE $(TOPDIR)/.
 		echo "Converting $$ctrl to -mt package"; \
 		nctrl=`$(OPIEDIR)/scripts/tothreaded $$ctrl $(OPIEDIR)/AllThreadedPackages`; \
 		echo "Building ipk of $$ctrl"; \
-		[ -n $$nctrl ] && cd $(OPIEDIR) && $(OPIEDIR)/scripts/mkipkg --subst=$(OPIEDIR)/scripts/subst --filesubst=$(OPIEDIR)/scripts/filesubst --control=$$nctrl --prerm=$${nctrl/\.control$$/.prerm/} --preinst=$${nctrl/\.control$$/.preinst/} --postrm=$${nctrl/\.control$$/.postrm/} --postinst=$${nctrl/\.control$$/.postinst/} --strip=$(STRIP) $(OPIEDIR); \
+		[ -n $$nctrl ] && cd $(OPIEDIR) && $(OPIEDIR)/scripts/mkipkg --subst=$(OPIEDIR)/scripts/subst --filesubst=$(OPIEDIR)/scripts/filesubst --control=$$nctrl --prerm=$${nctrl/-mt.control/.prerm} --preinst=$${nctrl/-mt.control/.preinst} --postrm=$${nctrl/-mt.control/.postrm} --postinst=$${nctrl/-mt.control/.postinst} --strip=$(STRIP) $(OPIEDIR); \
 		done
 	@rm -f $(OPIEDIR)/AllThreadedPackages
 
