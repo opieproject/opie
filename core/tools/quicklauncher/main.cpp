@@ -24,7 +24,13 @@
 #include <qguardedptr.h>
 #include <qcopchannel_qws.h>
 #define QTOPIA_INTERNAL_INITAPP
+
+#ifdef private
+#       undef  private
+#endif
+#define private public
 #include <qtopia/qpeapplication.h>
+#undef private
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
@@ -235,11 +241,23 @@ int main( int argc, char** argv )
 
     if ( mainWindow )
 	delete (QWidget*)mainWindow;
+	
+    delete app;
     if ( appIface )
 	loader->releaseInterface( appIface );
     delete loader;
-
-    delete app;
+    // Neither QLibrary nor my Dropin is a QObject and they don't depend
+    // on a qApp so we destroy QWidget::destroyMapper() without
+    // crashing the app
+    //
+    // The problem is there are some 'static' resources not freed
+    // in the apps and on destructing these objects are not available
+    // anymore. In future fix up the apps but for now
+    // we just skip deletion and hope things go well -zecke
+//    delete app;
+    // hack instead -zecke
+//    delete app->pidChannel;
+//    app->pidChannel = 0;
 
     return rv;
 }

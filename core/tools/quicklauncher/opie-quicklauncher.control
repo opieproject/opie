@@ -1,0 +1,10 @@
+Package: opie-quicklauncher
+Files: bin/quicklauncher
+Priority: required
+Section: opie/system
+Maintainer: Trolltech (www.trolltech.com)
+Architecture: arm
+Version: $QPE_VERSION$EXTRAVERSION
+Depends:
+Description: Quick launcher stub
+ Launcher stub for quick launch enabled applications.
