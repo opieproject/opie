@@ -422,12 +422,12 @@ löschen oder neu installieren ?</translation>
     <message>
         <source>Do you wish to remove or upgrade
 %1?</source>
-        <translation>Möchten Sie %1 
-löschen oder ugraden ?</translation>
+        <translation>Möchten Sie %1
+löschen oder aktualisieren ?</translation>
     </message>
     <message>
         <source>Remove or Upgrade</source>
-        <translation>Löschen oder Upgraden</translation>
+        <translation>Löschen oder Aktualisieren</translation>
     </message>
     <message>
         <source>U</source>
