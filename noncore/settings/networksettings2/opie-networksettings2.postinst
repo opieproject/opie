@@ -1,0 +1,9 @@
+#!/bin/sh
+
+QTPB=/opt/QtPalmtop/bin
+
+[ ! -L ${QTPB}/networksettings2-request ] && ln -sf ${QTPB}/networksettings2 ${QTPB}/networksettings2-request
+
+qcop QPE/TaskBar "reloadApps()"
+
+exit 0
