@@ -146,7 +146,8 @@ OpieFtp::OpieFtp( )
     UsernameComboBox = new QComboBox( FALSE, tab_3, "UsernameComboBox" );
     UsernameComboBox->setGeometry( QRect( 10, 25, 196, 21 ) );
     UsernameComboBox->setEditable(TRUE);
-    UsernameComboBox->lineEdit()->setText("llornkcor");
+    UsernameComboBox->lineEdit()->setText("anonymous");
+//    UsernameComboBox->lineEdit()->setText("llornkcor");
 
     TextLabel2 = new QLabel( tab_3, "TextLabel2" );
     TextLabel2->setGeometry( QRect( 10, 50, 65, 16 ) ); 
@@ -154,6 +155,7 @@ OpieFtp::OpieFtp( )
     PasswordEdit = new QLineEdit( "", tab_3, "PasswordComboBox" );
     PasswordEdit->setGeometry( QRect( 10, 65, 195, 16 ) );
     PasswordEdit->setEchoMode(QLineEdit::Password);
+    PasswordEdit->setText( tr( "me@opieftp.org" ) );
 
     TextLabel3 = new QLabel( tab_3, "TextLabel3" );
     TextLabel3->setGeometry( QRect( 10, 90, 95, 16 ) ); 
@@ -161,14 +163,16 @@ OpieFtp::OpieFtp( )
     ServerComboBox = new QComboBox( FALSE, tab_3, "ServerComboBox" );
     ServerComboBox->setGeometry( QRect( 10, 105, 195, 21 ) );
     ServerComboBox->setEditable(TRUE);
-    ServerComboBox->lineEdit()->setText( tr( "llornkcor.com" ) );
+    ServerComboBox->lineEdit()->setText( tr( "" ) );
+//    ServerComboBox->lineEdit()->setText( tr( "llornkcor.com" ) );
 
     QLabel *TextLabel5 = new QLabel( tab_3, "TextLabel5" );
     TextLabel5->setGeometry( QRect( 10, 130, 95, 16 ) ); 
     TextLabel5->setText( tr( "Remote path" ) );
     remotePath = new QLineEdit( "/", tab_3, "remotePath" );
     remotePath->setGeometry( QRect( 10, 145, 195, 16 ) );
-    remotePath->setText( currentRemoteDir = "/home/llornkcor/");
+    remotePath->setText( currentRemoteDir = "/");
+//    remotePath->setText( currentRemoteDir = "/home/llornkcor/");
     
     TextLabel4 = new QLabel( tab_3, "TextLabel4" );
     TextLabel4->setGeometry( QRect( 10, 170, 30, 21 ) ); 
