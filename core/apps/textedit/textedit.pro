@@ -7,7 +7,7 @@ SOURCES = main.cpp textedit.cpp fileBrowser.cpp fontDialog.cpp fileSaver.cpp fil
 
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
-LIBS            += -lqpe
+LIBS            += -lqpe -lopie
 
 TARGET    = textedit
 
