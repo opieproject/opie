@@ -369,28 +369,6 @@ struct s_button {
     */
 };
 
-struct r_button {
-	uint model;
-    Qt::Key code;
-    char *utext;
-    char *pix;
-    char *fpressedservice;
-    char *fpressedaction;
-    char *fheldservice;
-    char *fheldaction;
-} ramses_buttons [] = {
-    { Model_Ramses_MNCI,
-    Qt::Key_F11, QT_TRANSLATE_NOOP("Button", "Menu Button"),
-	"devicebuttons/z_menu",
- 	"QPE/TaskBar", "toggleMenu()",
-	"QPE/TaskBar", "toggleStartMenu()" },
-    { Model_Ramses_MNCI,
-    Qt::Key_F12, QT_TRANSLATE_NOOP("Button", "Home Button"),
-	"devicebuttons/ipaq_home",
-	"QPE/Launcher", "home()",
-	"buttonsettings", "raise()" },
-};
-
 class Yopy : public ODevice {
 protected:
   virtual void init ( );
@@ -452,12 +430,12 @@ ODevice *ODevice::inst ( )
 			dev = new Zaurus ( );
 		else if ( QFile::exists ( "/proc/ucb1x00" ) && QFile::exists ( "/proc/cs3" ))
 			dev = new SIMpad ( );
-		else if ( QFile::exists ( "/proc/sys/board/name" ))
-			dev = new Ramses ( );
 		else if ( Yopy::isYopy() )
 		        dev = new Yopy ( );
 		else if ( Jornada::isJornada() )
 			dev = new Jornada ( );
+		else if ( QFile::exists ( "/proc/sys/board/sys_name" ))
+			dev = new Ramses ( );
 		else
 			dev = new ODevice ( );
 		dev-> init ( );
@@ -2528,7 +2506,7 @@ void Ramses::init()
 	d->m_modelstr = "Ramses";
 	d->m_model = Model_Ramses_MNCI;
 
-	d->m_rotation = Rot0;
+	d->m_rotation = Rot90;
 	d->m_holdtime = 1000;
 
 	f.setName("/etc/oz_version");
