@@ -164,6 +164,8 @@ QString KeyboardImpl::name()
 
 void KeyboardImpl::onKeyPress( QObject *receiver, const char *slot )
 {
+    Q_UNUSED( receiver );
+    Q_CONST_UNUSED( slot );
     //if ( input )
 	//QObject::connect( input, SIGNAL(key(ushort,ushort,ushort,bool,bool)), receiver, slot );
 }
@@ -176,6 +178,8 @@ QRESULT KeyboardImpl::queryInterface( const QUuid &uuid, QUnknownInterface **ifa
 	*iface = this;
     else if ( uuid == IID_InputMethod )
 	*iface = this;
+    else
+	return QS_FALSE;
 
     if ( *iface )
 	(*iface)->addRef();

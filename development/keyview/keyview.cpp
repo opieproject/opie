@@ -65,11 +65,16 @@ KeyFilter::KeyFilter(QObject * parent, const char *name) : QObject( parent, name
 {
 }
 
+KeyFilter::~KeyFilter() {
+    /* we need to remove the KeyFilter */
+    Opie::Core::OKeyFilter::inst()->remHandler( this );
+}
+
 bool KeyFilter::filter(int unicode, int keycode, int modifiers, bool isPress,
                        bool autoRepeat) {
 
     qDebug( "unicode: %d, keycode: %d, modifiers: %0x, isPress: %d, autoRepeat: %d",
-             unicode, keycode, modifiers, isPress );
+             unicode, keycode, modifiers, isPress, autoRepeat );
     emit keyPressed(unicode, keycode, modifiers, isPress, autoRepeat);
     return 0; // return 1 to stop key emiting
 

@@ -23,7 +23,6 @@ private:
     QLineEdit *modifiers;
     QLineEdit *isPress;
     QLineEdit *autoRepeat;
-
 };
 
 class KeyFilter : public QObject, public QWSServer::KeyboardFilter
@@ -32,6 +31,7 @@ class KeyFilter : public QObject, public QWSServer::KeyboardFilter
 
 public:
     KeyFilter( QObject* parent, const char* name = 0);
+    virtual ~KeyFilter();
     virtual bool filter(int unicode, int keycode, int modifiers, bool isPress,
                 bool autoRepeat);
 
