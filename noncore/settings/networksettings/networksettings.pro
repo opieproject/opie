@@ -6,6 +6,6 @@ HEADERS   = mainwindowimp.h addconnectionimp.h defaultmodule.h  module.h
 SOURCES   = main.cpp mainwindowimp.cpp addconnectionimp.cpp
 INCLUDEPATH += $(OPIEDIR)/include interfaces/
 DEPENDPATH  += $(OPIEDIR)/include interfaces/ wlan/
-LIBS            += -lqpe -L$(OPIEDIR)/plugins/networksetup -Linterfaces/ -linterfaces
+LIBS            += -lqpe -L$(OPIEDIR)/plugins/networksettings -Linterfaces/ -linterfaces
 INTERFACES  = mainwindow.ui addconnection.ui
 TARGET    = networksettings
