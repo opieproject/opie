@@ -15,7 +15,7 @@ name = bernina.ethz.ch
 [6]
 name = ntp.univ-lyon1.fr
 [7]
-name = time-a.timefreq.bldrdoc.gov
+name = ntp.bri.connect.com.au
 [8]
 name = nist1.datum.com
 [9]
