@@ -1,6 +1,6 @@
 #include "okeyconfigwidget.h"
+#include "okeyconfigwidget_p.h"
 
-#include <opie2/olistview.h>
 
 #include <qgroupbox.h>
 #include <qradiobutton.h>
@@ -10,9 +10,11 @@
 #include <qaccel.h>
 #include <qlayout.h>
 #include <qlabel.h>
+#include <qtimer.h>
 
 
 using namespace Opie::Ui;
+
 
 
 /**
@@ -539,28 +541,8 @@ OKeyConfigItem OKeyConfigManager::handleKeyEvent( QKeyEvent* e ) {
     * Also key() on virtual inputmethods are zero and only ascii. We need to fix upper and lower
     * case ascii
     */
-    int key = e->key();
-    int mod = e->state();
-
-/*
- * virtual keyboard
- * else change the button mod only
- */
-    if ( key == 0 ) {
-        key = e->ascii();
-        if (  key > 96 && key < 123)
-            key -=  32;
-    }else{
-        int new_mod = 0;
-        if ( mod & 256 )
-            new_mod |= Qt::ShiftButton;
-        else if ( mod & 512 )
-            new_mod |= Qt::ControlButton;
-        else if ( mod & 1024 )
-            new_mod |= Qt::AltButton;
-
-        mod = new_mod == 0? mod : new_mod;
-    }
+    int key, mod;
+    Opie::Ui::Private::fixupKeys( key, mod, e );
 
     OKeyConfigItem::List _keyList =  keyList( key );
     if ( _keyList.isEmpty() )
@@ -732,32 +714,9 @@ OKeyConfigItem::List OKeyConfigManager::keyList( int keycode) {
 }
 
 
-
-/////////////////////////
-//////// Widget Starts Here
 namespace Opie {
 namespace Ui {
 namespace Private {
-    static QString keyToString( const OKeyPair& );
-    class OKeyListViewItem : public Opie::Ui::OListViewItem {
-    public:
-        OKeyListViewItem( const OKeyConfigItem& item, OKeyConfigManager*, Opie::Ui::OListViewItem* parent);
-        ~OKeyListViewItem();
-
-        void setDefault();
-
-        OKeyConfigItem& item();
-        OKeyConfigItem origItem()const;
-        void setItem( const OKeyConfigItem& item );
-        void updateText();
-
-        OKeyConfigManager *manager();
-    private:
-        OKeyConfigItem m_item;
-        OKeyConfigItem m_origItem;
-        OKeyConfigManager* m_manager;
-
-    };
 
     OKeyListViewItem::OKeyListViewItem( const OKeyConfigItem& item, OKeyConfigManager* man, OListViewItem* parent)
         : Opie::Ui::OListViewItem( parent ), m_manager( man )  {
@@ -801,6 +760,30 @@ namespace Private {
         return QAccel::keyToString( mod + pair.keycode() );
     }
 
+    void fixupKeys( int& key, int &mod, QKeyEvent* e ) {
+        key = e->key();
+        mod = e->state();
+       /*
+        * virtual keyboard
+        * else change the button mod only
+        */
+        if ( key == 0 ) {
+            key = e->ascii();
+            if (  key > 96 && key < 123)
+                key -=  32;
+        }else{
+            int new_mod = 0;
+            if ( mod & 256 )
+                new_mod |= Qt::ShiftButton;
+            else if ( mod & 512 )
+                new_mod |= Qt::ControlButton;
+            else if ( mod & 1024 )
+                new_mod |= Qt::AltButton;
+
+            mod = new_mod == 0? mod : new_mod;
+        }
+    }
+
     struct OKeyConfigWidgetPrivate{
         OKeyConfigWidgetPrivate(const QString& = QString::null,
                                 OKeyConfigManager* = 0);
@@ -827,7 +810,8 @@ namespace Private {
 
 
 ////////////////////////
-
+////////////////////////
+//////// Widget Starts Here
 
 
 
@@ -1039,14 +1023,7 @@ void OKeyConfigWidget::slotNoKey() {
      * If immediate we need to remove and readd the key
      */
     Opie::Ui::Private::OKeyListViewItem *item =  static_cast<Opie::Ui::Private::OKeyListViewItem*>(m_view->currentItem());
-    if ( m_mode == Imediate )
-        item->manager()->removeKeyConfig( item->item() );
-    item->item().setKeyPair( OKeyPair::emptyKey() );
-    item->updateText();
-
-    if ( m_mode == Imediate )
-        item->manager()->addKeyConfig( item->item() );
-
+    updateItem( item, OKeyPair::emptyKey() );
 }
 
 void OKeyConfigWidget::slotDefaultKey() {
@@ -1059,18 +1036,7 @@ void OKeyConfigWidget::slotDefaultKey() {
         return;
 
     Opie::Ui::Private::OKeyListViewItem *item =  static_cast<Opie::Ui::Private::OKeyListViewItem*>(m_view->currentItem());
-
-   /*
-    * If immediate we need to remove and readd the key
-    */
-    if ( m_mode == Imediate )
-        item->manager()->removeKeyConfig( item->item() );
-
-    item->item().setKeyPair( item->item().defaultKeyPair() );
-    item->updateText();
-
-    if ( m_mode == Imediate )
-        item->manager()->addKeyConfig( item->item() );
+    updateItem( item, item->item().defaultKeyPair() );
 }
 
 void OKeyConfigWidget::slotCustomKey() {
@@ -1082,28 +1048,164 @@ void OKeyConfigWidget::slotCustomKey() {
     if ( !m_view->currentItem() || !m_view->currentItem()->parent() )
         return;
 
+
 }
 
 void OKeyConfigWidget::slotConfigure() {
+    if ( !m_view->currentItem() || !m_view->currentItem()->parent() )
+        return;
+
+   /* FIXME make use of OModalHelper */
+    OKeyChooserConfigDialog dlg( this, "Dialog Name", true );
+    dlg.setCaption(tr("Configure Key"));
+    connect(&dlg, SIGNAL(keyCaptured()), &dlg, SLOT(accept()) );
+
+    if ( QPEApplication::execDialog( &dlg ) == QDialog::Accepted ) {
+        Opie::Ui::Private::OKeyListViewItem *item = static_cast<Opie::Ui::Private::OKeyListViewItem*>(m_view->currentItem());
+        updateItem( item, dlg.keyPair() );
+    }
+
 
 }
 
+void OKeyConfigWidget::updateItem( Opie::Ui::Private::OKeyListViewItem *item,
+                                   const OKeyPair& newItem) {
+    /* sanity check
+     * check against the blacklist of the manager
+     * check if another item uses this key which is o(n) at least
+     */
+    if ( !newItem.isEmpty() ) {
 
+    }
+
+    /*
+    * If immediate we need to remove and readd the key
+    */
+    if ( m_mode == Imediate )
+        item->manager()->removeKeyConfig( item->item() );
+
+    item->item().setKeyPair( newItem );
+    item->updateText();
+
+    if ( m_mode == Imediate )
+        item->manager()->addKeyConfig( item->item() );
+}
+
+
+
+/////
 OKeyChooserConfigDialog::OKeyChooserConfigDialog( QWidget* par, const char* nam,
                                                   bool mod, WFlags fl )
-    : QDialog( par, nam, mod, fl ) {
+    : QDialog( par, nam, mod, fl ), m_virtKey( false ), m_keyPair( OKeyPair::emptyKey() ) ,
+      m_key( 0 ), m_mod( 0 ) {
+    setFocusPolicy( StrongFocus );
+
+    QHBoxLayout *lay = new QHBoxLayout( this );
+
+    QLabel *lbl = new QLabel( tr("Configure Key" ), this );
+    lay->addWidget( lbl );
+    lbl->setFocusPolicy( NoFocus );
+
+    m_lbl = new QLabel( this );
+    lay->addWidget( m_lbl );
+    m_lbl->setFocusPolicy( NoFocus );
+
+    m_timer = new QTimer( this );
+    connect(m_timer, SIGNAL(timeout()),
+            this, SLOT(slotTimeUp()) );
 }
 
 OKeyChooserConfigDialog::~OKeyChooserConfigDialog() {
 }
 
 Opie::Ui::OKeyPair OKeyChooserConfigDialog::keyPair()const{
+    return m_keyPair;
 }
 
 void OKeyChooserConfigDialog::keyPressEvent( QKeyEvent* ev ) {
-    ev->ignore();
+    QDialog::keyPressEvent( ev );
+
+    if ( ev->isAutoRepeat() )
+        return;
+
+    qWarning( "Key Press Event" );
+    int mod, key;
+    Opie::Ui::Private::fixupKeys( key,mod, ev );
+
+    /* either we used software keyboard
+     * or we've true support
+     */
+    if ( !m_virtKey && !ev->key()) {
+        m_virtKey = true;
+        m_keyPair = OKeyPair( key, mod );
+    }else{
+        mod = 0;
+        switch( key ) {
+        case Qt::Key_Control:
+            mod = Qt::ControlButton;
+            break;
+        case Qt::Key_Shift:
+            mod = Qt::ShiftButton;
+            break;
+        case Qt::Key_Alt:
+            mod = Qt::AltButton;
+            break;
+        default:
+            break;
+        }
+        if (mod ) {
+            m_mod |= mod;
+        }else
+            m_key = key;
+
+        if ( ( !mod || m_key ) && !m_timer->isActive() )
+            m_timer->start( 50, true );
+
+        m_keyPair = OKeyPair( m_key, m_mod );
+    }
+
+    m_lbl->setText( Opie::Ui::Private::keyToString( m_keyPair ) );
+
 }
 
 void OKeyChooserConfigDialog::keyReleaseEvent( QKeyEvent* ev ) {
-    ev->ignore();
+    m_timer->stop();
+    QDialog::keyPressEvent( ev );
+
+    if ( ev->isAutoRepeat() )
+        return;
+
+
+    if ( m_virtKey && !ev->key()) {
+        m_virtKey = false;
+        slotTimeUp();
+    }else {
+        int mod = 0;
+        int key = ev->key();
+        switch( key ) {
+        case Qt::Key_Control:
+            mod = Qt::ControlButton;
+            break;
+        case Qt::Key_Shift:
+            mod = Qt::ShiftButton;
+            break;
+        case Qt::Key_Alt:
+            mod = Qt::AltButton;
+            break;
+        default:
+            break;
+        }
+        if (mod )
+            m_mod &= ~mod;
+        else
+            m_key = key;
+       m_keyPair = OKeyPair( m_key, m_mod );
+       m_lbl->setText( Opie::Ui::Private::keyToString( m_keyPair ) );
+    }
+}
+
+
+void OKeyChooserConfigDialog::slotTimeUp() {
+    m_mod = m_key = 0;
+    QTimer::singleShot(0, this, SIGNAL(keyCaptured()) );
 }

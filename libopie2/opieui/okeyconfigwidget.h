@@ -21,12 +21,14 @@ class QLabel;
 class QPushButton;
 class QListViewItem;
 class QRadioButton;
+class QTimer;
 
 namespace Opie {
 namespace Ui {
 namespace Private {
     class OKeyConfigWidgetPrivate;
     typedef QValueList<OKeyConfigWidgetPrivate> OKeyConfigWidgetPrivateList;
+    class OKeyListViewItem;
 }
     class OListViewItem;
     class OListView;
@@ -251,6 +253,8 @@ private slots:
     void slotConfigure();
 
 private:
+    void updateItem( Opie::Ui::Private::OKeyListViewItem* man,
+                            const OKeyPair& newItem);
     void initUi();
     Opie::Ui::OListView *m_view;
     Opie::Ui::Private::OKeyConfigWidgetPrivateList m_list;
@@ -296,8 +300,15 @@ protected:
 signals:
     void keyCaptured();
 
+private slots:
+    void  slotTimeUp();
+
 private:
+    QTimer *m_timer;
+    QLabel *m_lbl;
+    bool m_virtKey : 1;
     OKeyPair m_keyPair;
+    int m_key, m_mod;
     class Private;
     Private *d;
 };
