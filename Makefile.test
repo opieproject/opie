@@ -1,0 +1,11 @@
+#!/usr/bin/make -f
+TOPDIR:=$(shell pwd)
+
+all :
+
+-include $(TOPDIR)/.config
+-include $(TOPDIR)/.depends
+
+all : $(TOPDIR)/.depends $(subdir-y)
+
+include $(TOPDIR)/Rules.make
