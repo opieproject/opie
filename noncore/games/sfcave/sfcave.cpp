@@ -14,7 +14,7 @@
 #include "helpwindow.h"
 #include "sfcave.h"
 
-#define CAPTION "SFCave 1.10 by AndyQ"
+#define CAPTION "SFCave 1.11 by AndyQ"
 
 #define UP_THRUST               0.6
 #define NO_THRUST               0.8
