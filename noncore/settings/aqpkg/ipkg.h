@@ -43,7 +43,8 @@ class Ipkg : public QObject
 public:
     Ipkg();
     ~Ipkg();
-    bool runIpkg( );
+	void runIpkg();
+	void createSymLinks();
 
     void setOption( const char *opt )               { option = opt; }
     void setPackage( const char *pkg )              { package = pkg; }
@@ -54,6 +55,7 @@ public:
 
 signals:
     void outputText( const QString &text );
+	void ipkgFinished();
 
 public slots:
     void commandStdout(OProcess*, char *buffer, int buflen);

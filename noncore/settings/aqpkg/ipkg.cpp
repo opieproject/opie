@@ -55,10 +55,9 @@ Ipkg :: ~Ipkg()
 // destDir is the dir that the destination alias points to (used to link to root)
 // flags is the ipkg options flags
 // dir is the directory to run ipkg in (defaults to "")
-bool Ipkg :: runIpkg( )
+void Ipkg :: runIpkg()
 {
     error = false;
-    bool ret = false;
     QStringList commands;
 
     QDir::setCurrent( "/tmp" );
@@ -137,11 +136,12 @@ bool Ipkg :: runIpkg( )
     dependantPackages = new QList<QString>;
     dependantPackages->setAutoDelete( true );
 
-    ret = executeIpkgCommand( commands, option );
+    executeIpkgCommand( commands, option );
 
-    if ( aborted )
-        return false;
+}
 
+void Ipkg :: createSymLinks()
+{
     if ( option == "install" || option == "reinstall" || option == "upgrade" )
     {
         // If we are not removing packages and make links option is selected
@@ -171,7 +171,6 @@ bool Ipkg :: runIpkg( )
 
     emit outputText( "Finished" );
     emit outputText( "" );
-    return ret;
 }
 
 void Ipkg :: removeStatusEntry()
@@ -295,10 +294,6 @@ int Ipkg :: executeIpkgCommand( QStringList &cmd, const QString /*option*/ )
     {
         emit outputText( QString( "Couldn't start ipkg process" ) );
     }
-
-    // Now wait for it to finish
-    while ( !finished )
-        qApp->processEvents();
 }
 
 void Ipkg::commandStdout(OProcess*, char *buffer, int buflen)
@@ -354,6 +349,8 @@ void Ipkg::processFinished()
     delete proc;
     proc = 0;
     finished = true;
+
+	emit ipkgFinished();
 }
 
 

@@ -45,7 +45,7 @@ class InstallDlgImpl : public QWidget
 {
     Q_OBJECT
 public:
-    InstallDlgImpl( QList<InstallData> &packageList, DataManager *dataManager, const char *title = 0 );
+    InstallDlgImpl( const QList<InstallData> &packageList, DataManager *dataManager, const char *title = 0 );
     InstallDlgImpl( Ipkg *ipkg, QString initialText, const char *title = 0 );
     ~InstallDlgImpl();
 
@@ -55,9 +55,8 @@ protected:
 
 private:
     DataManager *dataMgr;
-    QList<InstallData> installList;
-    QList<InstallData> removeList;
-    QList<InstallData> updateList;
+    QList<InstallData> packages;
+	bool firstPackage;
     int flags;
     int infoLevel;
     Ipkg *pIpkg;
@@ -81,6 +80,7 @@ public slots:
     void installSelected();
     void displayText(const QString &text );
     void displayAvailableSpace( const QString &text);
+	void ipkgFinished();
 };
 
 #endif

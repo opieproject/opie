@@ -106,7 +106,7 @@ private:
     void initProgressWidget();
     
 public slots:
-//    void setDocument( const QString &doc );
+    void setDocument( const QString &doc );
     void displayFindBar();
     void displayJumpBar();
     void repeatFind();

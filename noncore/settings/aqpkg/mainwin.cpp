@@ -297,7 +297,7 @@ void MainWindow :: init()
 
     stack->raiseWidget( networkPkgWindow );
 }
-/*
+
 void MainWindow :: setDocument( const QString &doc )
 {
     // Remove path from package
@@ -327,7 +327,7 @@ void MainWindow :: setDocument( const QString &doc )
         }
     }
 }
-*/
+
 void MainWindow :: displaySettings()
 {
     SettingsImpl *dlg = new SettingsImpl( mgr, this, "Settings", true );
@@ -992,14 +992,14 @@ InstallData *MainWindow :: dealWithItem( QCheckListItem *item )
     QString dest = "root";
     if ( !p->isInstalled() )
     {
-        InstallData *newitem = new InstallData();;
+        InstallData *newitem = new InstallData();
         newitem->option = "I";
         newitem->packageName = name;
         return newitem;
     }
     else
     {
-        InstallData *newitem = new InstallData();;
+        InstallData *newitem = new InstallData();
         newitem->option = "D";
         if ( !p->isPackageStoredLocally() )
             newitem->packageName = p->getInstalledPackageName();
