@@ -28,6 +28,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <time.h>
+#include <crypt.h>
 
 #ifndef Q_OS_MACX
 #include <shadow.h>
