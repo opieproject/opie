@@ -209,7 +209,8 @@ hinzufügen?</translation>
 provided in the SHARP 
 default ROM. Opie-Mail 
 is provided free !</source>
-      <translation>Beachte: QT-Mail is nur im Sharp Default-Rom enthalten. Opie-Mail
+      <translation>Beachte: QT-Mail is nur im Sharp 
+Default-Rom enthalten. Opie-Mail
 ist frei erhältlich !</translation>
     </message>
     <message>

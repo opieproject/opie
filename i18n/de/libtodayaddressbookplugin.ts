@@ -73,7 +73,7 @@ fällige Termine</translation>
     </message>
     <message>
         <source>Next birthdays in &lt;b&gt; %1 &lt;/b&gt; days:</source>
-        <translation>Nächste Geburtstage &lt;b&gt;%1&lt;/b&gt; Tagen: </translation>
+        <translation>Nächste Geburtstage in &lt;b&gt;%1&lt;/b&gt; Tagen: </translation>
     </message>
     <message>
         <source>No birthdays in &lt;b&gt; %1 &lt;/b&gt; days!</source>
@@ -85,7 +85,7 @@ fällige Termine</translation>
     </message>
     <message>
         <source>No anniversaries in &lt;b&gt; %1 &lt;/b&gt; days!</source>
-        <translation>Keine Jahrestage &lt;b&gt;%1&lt;/b&gt; Tagen !</translation>
+        <translation>Keine Jahrestage in &lt;b&gt;%1&lt;/b&gt; Tagen !</translation>
     </message>
     <message>
         <source>Database does not provide this search query ! Please upgrade libOpie !&lt;br&gt;</source>
