@@ -233,19 +233,19 @@ niemand er toegang toe krijgt!</translation>
     <name>ChooserWidget</name>
     <message>
         <source>&amp;Edit...</source>
-        <translation type="unfinished">&amp;Wijzig...</translation>
+        <translation>&amp;Wijzig...</translation>
     </message>
     <message>
         <source>&amp;New...</source>
-        <translation type="unfinished">&amp;Nieuw...</translation>
+        <translation>&amp;Nieuw...</translation>
     </message>
     <message>
         <source>Co&amp;py</source>
-        <translation type="unfinished">Ko&amp;pieer</translation>
+        <translation>Ko&amp;pieer</translation>
     </message>
     <message>
         <source>De&amp;lete</source>
-        <translation type="unfinished">&amp;Verwijder</translation>
+        <translation>&amp;Verwijder</translation>
     </message>
 </context>
 <context>
@@ -394,32 +394,33 @@ verbinding
     </message>
     <message>
         <source>No devices selected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen apparaat geselecteerd.</translation>
     </message>
     <message>
         <source>Are you sure you want to delete
 the device &quot;%1&quot;?</source>
-        <translation type="unfinished"></translation>
+        <translation>Deze verbinding echt 
+verwijderen: &quot;%1&quot;?</translation>
     </message>
     <message>
         <source>Confirm</source>
-        <translation type="unfinished">Bevestig</translation>
+        <translation>Bevestig</translation>
     </message>
     <message>
         <source>New Device</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw apparaat</translation>
     </message>
     <message>
         <source>Edit Device: </source>
-        <translation type="unfinished"></translation>
+        <translation>Wijzig apparaat:</translation>
     </message>
     <message>
         <source>&amp;Device</source>
-        <translation type="unfinished">&amp;Apparaat</translation>
+        <translation>&amp;Apparaat</translation>
     </message>
     <message>
         <source>&amp;Modem</source>
-        <translation type="unfinished">&amp;Modem</translation>
+        <translation>&amp;Modem</translation>
     </message>
     <message>
         <source>You must enter a unique account name</source>
@@ -427,28 +428,33 @@ the device &quot;%1&quot;?</source>
     </message>
     <message>
         <source>Allows you to modify the selected device</source>
-        <translation type="unfinished"></translation>
+        <translation>Staat toe het geselecteerde apparaat te wijzigen</translation>
     </message>
     <message>
         <source>Create a new device</source>
-        <translation type="unfinished"></translation>
+        <translation>Maak een nieuw apparaat aan</translation>
     </message>
     <message>
         <source>Makes a copy of the selected device. All
 settings of the selected device are copied
 to a new device, that you can modify to fit your
 needs</source>
-        <translation type="unfinished"></translation>
+        <translation>Maakt een kopie van de geselecteerde verbinding.
+Alle instellingen van de verbinding worden
+gekopieerd naar een nieuwe verbinding, die
+naar wens aan te passen zijn</translation>
     </message>
     <message>
         <source>&lt;p&gt;Deletes the selected device
 
 &lt;font color=&quot;red&quot;&gt;&lt;b&gt;Use with care!&lt;/b&gt;&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Verwijdert het geselecteerde
+apparaat
+&lt;font color=&quot;red&quot;&gt;&lt;b&gt;Pas op!&lt;/b&gt;&lt;/font&gt;</translation>
     </message>
     <message>
         <source>You must enter a unique device name</source>
-        <translation type="unfinished"></translation>
+        <translation>Unieke verbindingsnaam invoeren</translation>
     </message>
 </context>
 <context>
@@ -745,11 +751,11 @@ geen wachtwoord. Voer wachtwoord in</translation>
     <name>ModemWidget</name>
     <message>
         <source>Modem &amp;name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Modem&amp;naam:</translation>
     </message>
     <message>
         <source>Modem de&amp;vice:</source>
-        <translation type="unfinished"></translation>
+        <translation>Modema&amp;pparaat:</translation>
     </message>
     <message>
         <source>This specifies the serial port your modem is attached 
@@ -763,19 +769,19 @@ should select one of the /dev/ttyIx devices.</source>
     </message>
     <message>
         <source>&amp;Flow control:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Flow control:</translation>
     </message>
     <message>
         <source>Hardware [CRTSCTS]</source>
-        <translation type="unfinished"></translation>
+        <translation>Hardware [CRTSCTS]</translation>
     </message>
     <message>
         <source>Software [XON/XOFF]</source>
-        <translation type="unfinished"></translation>
+        <translation>Software [XON/XOFF]</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen</translation>
     </message>
     <message>
         <source>&lt;p&gt;Specifies how the serial port and modem
@@ -801,7 +807,7 @@ settings here
     </message>
     <message>
         <source>Co&amp;nnection speed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbi&amp;ndingssnelheid:</translation>
     </message>
     <message>
         <source>Specifies the speed your modem and the serial
@@ -814,7 +820,7 @@ that your serial port supports higher speeds).</source>
     </message>
     <message>
         <source>&amp;Use lock file</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebr&amp;uik lock file</translation>
     </message>
     <message>
         <source>&lt;p&gt;To prevent other programs from accessing the
@@ -830,11 +836,11 @@ be done.
     </message>
     <message>
         <source>Modem timeout:</source>
-        <translation type="unfinished">Modem timeout:</translation>
+        <translation>Modem timeout:</translation>
     </message>
     <message>
         <source> sec</source>
-        <translation type="unfinished"></translation>
+        <translation>sec</translation>
     </message>
     <message>
         <source>This specifies how long &lt;i&gt;kppp&lt;/i&gt; waits for a
@@ -851,7 +857,7 @@ recommended value is 30 seconds.</source>
     </message>
     <message>
         <source>&amp;Wait for dial tone before dialing</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Wacht op kiestoon voor kiezen</translation>
     </message>
     <message>
         <source>&lt;p&gt;Normally the modem waits for a dial tone
@@ -865,7 +871,7 @@ does not emit such a tone, uncheck this option
     </message>
     <message>
         <source> sec</source>
-        <translation type="unfinished"></translation>
+        <translation>sec</translation>
     </message>
     <message>
         <source>Specifies the number of seconds to wait before
@@ -879,7 +885,7 @@ this unless you need to.</source>
     </message>
     <message>
         <source>Modem &amp;volume:</source>
-        <translation type="unfinished"></translation>
+        <translation>Modem &amp;volume:</translation>
     </message>
     <message>
         <source>Most modems have a speaker which makes
@@ -905,7 +911,7 @@ problems with this, do not modify this setting.
     </message>
     <message>
         <source>Mod&amp;em Commands...</source>
-        <translation type="unfinished"></translation>
+        <translation>Mo&amp;demcommando&apos;s...</translation>
     </message>
     <message>
         <source>Allows you to change the AT command for
@@ -1210,19 +1216,19 @@ Ask your system administrator to create this file (can be empty) with appropriat
     </message>
     <message>
         <source>Byte</source>
-        <translation type="unfinished">Byte</translation>
+        <translation>Byte</translation>
     </message>
     <message>
         <source>KB</source>
-        <translation type="unfinished">KB</translation>
+        <translation>KB</translation>
     </message>
     <message>
         <source>MB</source>
-        <translation type="unfinished">MB</translation>
+        <translation>MB</translation>
     </message>
     <message>
         <source>GB</source>
-        <translation type="unfinished">GB</translation>
+        <translation>GB</translation>
     </message>
     <message>
         <source>Connecting to: </source>
