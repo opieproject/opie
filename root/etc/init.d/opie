@@ -10,32 +10,24 @@ export QPEDIR=/opt/QtPalmtop
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$OPIEDIR/lib
 export PATH=$PATH:$OPIEDIR/bin
 
-if [ -e /proc/hal/model ] ; then
-	ipaq=`cat /proc/hal/model`
-
-    case "$ipaq" in
-        "3100" ) export QWS_DISPLAY=Transformed:Rot90:0 ;;
-        "3600" ) export QWS_DISPLAY=Transformed:Rot270:0 ;;
-        "3700" ) export QWS_DISPLAY=Transformed:Rot270:0 ;;
-        "3800" ) export QWS_DISPLAY=Transformed:Rot90:0 ;;
-        "3900" ) export QWS_DISPLAY=Transformed:Rot270:0 ;;
-	"5400" ) export QWS_DISPLAY=Transformed:Rot0:0 ;;
-        *)       echo "Unknown iPAQ model: $ipaq" ;;
+if [ -e /proc/cpuinfo ] ; then
+	model=`grep "^Hardware" /proc/cpuinfo | sed -e "s/.*: *//" | tr a-z A-Z`
+	
+    case "$model" in	
+        "HP IPAQ H3100" | "HP IPAQ H3800" )
+	     export QWS_DISPLAY=Transformed:Rot90:0 ;;
+	"HP IPAQ H5400" | "HP JORNADA 56X" | "HP IPAQ H2200" )
+	     export QWS_DISPLAY=Transformed:Rot0:0 ;;
+	*SIMPAD* )
+	     export QWS_KEYBOARD='SIMpad'
+             export QWS_DISPLAY=Transformed:Rot0:0 ;;
+	     
+	*)
+	     export QWS_DISPLAY=Transformed:Rot270:0 ;;
     esac
 else
     export QWS_DISPLAY=Transformed:Rot270:0
 fi
-
-if [ -e /proc/cpuinfo ] ; then
-	if (grep -qi "Simpad" /proc/cpuinfo) ; then
-           export QWS_KEYBOARD='SIMpad'
-           export QWS_DISPLAY=Transformed:Rot0:0
-    fi
-    	if (grep -qi "HP Jornada 56x" /proc/cpuinfo) ; then
-	   export QWS_DISPLAY=Transformed:Rot0:0
-    fi
-fi
-
 
 if [ ! -x $OPIEDIR/bin/qpe ] ; then 
     echo Opie not installed
