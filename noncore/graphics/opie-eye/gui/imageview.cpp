@@ -46,6 +46,7 @@ ImageView::ImageView(Opie::Core::OConfig *cfg, QWidget* parent, const char* name
     m_sysChannel = new QCopChannel( "QPE/System", this );
     connect( m_sysChannel, SIGNAL( received(const QCString&,const QByteArray&) ),
         this, SLOT( systemMessage(const QCString&,const QByteArray&) ) );
+    setKeyCompression(true);
 }
 
 void ImageView::slotIncBrightness()
@@ -66,11 +67,9 @@ void ImageView::systemMessage( const QCString& msg, const QByteArray& data )
 {
     int _newrotation;
     QDataStream stream( data, IO_ReadOnly );
-    odebug << "received system message: " << msg << oendl;
     if ( msg == "setCurrentRotation(int)" )
     {
         stream >> _newrotation;
-        odebug << "received setCurrentRotation(" << _newrotation << ")" << oendl;
         if (!fullScreen()) {
             m_rotation = _newrotation;
             return;
@@ -236,7 +235,6 @@ void ImageView::contentsMousePressEvent ( QMouseEvent * e)
     if (e->button()==1) {
         return OImageScrollView::contentsMousePressEvent(e);
     }
-    odebug << "Popup " << oendl;
     QPopupMenu *m = new QPopupMenu(this);
     if (!m) return;
     if (m_hGroup) {
@@ -289,7 +287,6 @@ void ImageView::setFullScreen(bool how,bool force)
 void ImageView::focusInEvent(QFocusEvent *)
 {
       // Always do it here, no matter the size.
-    odebug << "Focus in (view)" << oendl;
     //if (fullScreen()) parentWidget()->showNormal();
     if (m_ignore_next_in){m_ignore_next_in=false;return;}
     if (fullScreen()) enableFullscreen();

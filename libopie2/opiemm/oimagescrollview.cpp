@@ -205,6 +205,7 @@ void OImageScrollView::setAutoScale(bool how)
     if (ImageIsJpeg() && how == false && ImageScaledLoaded()==true) {
         loadJpeg(true);
     }
+    _newImage = true;
     generateImage();
 }
 
@@ -348,8 +349,10 @@ void OImageScrollView::rotate_into_data(Rotation r)
 // yes - sorry - it is NOT gamma it is just BRIGHTNESS. Alwin
 void OImageScrollView::apply_gamma(int aValue)
 {
-    if (!_image_data.size().isValid()) return;
+    if (aValue==0 || !_image_data.size().isValid()) return;
     float percent = ((float)aValue/100.0);
+    /* make sure working on a copy */
+    _image_data.detach();
 
     int segColors = _image_data.depth() > 8 ? 256 : _image_data.numColors();
     /* must be - otherwise it displays some ... strange colors */

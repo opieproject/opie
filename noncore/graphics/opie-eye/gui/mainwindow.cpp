@@ -649,6 +649,7 @@ void PMainWindow::setupActions()
     m_IncBrightness = new QAction(tr("Increase brightness by 5"),Resource::loadIconSet( "up" ),0, 0, this, 0, false);
     m_DecBrightness = new QAction(tr("Decrease brightness by 5"),Resource::loadIconSet( "down" ),0, 0, this, 0, false);
     m_hBright = new QActionGroup(this,"actioncollection",false),
+    m_hBright->insert(m_setCurrentBrightness);
     m_hBright->insert(m_IncBrightness);
     m_hBright->insert(m_DecBrightness);
 }
@@ -658,9 +659,18 @@ void PMainWindow::setupBrightness()
     if (!m_disp) {
         return;
     }
+    bool reshow=false;
+    if (m_disp->isVisible()&&m_disp->fullScreen()) {
+        m_disp->hide();
+        reshow = true;
+    }
     int lb = m_disp->Intensity();
     if (Valuebox(0,-100,100,lb,lb)) {
         m_disp->setIntensity(lb,true);
+    }
+    if (reshow) {
+        m_disp->showFullScreen();
+        qwsDisplay()->requestFocus( m_disp->winId(), TRUE);
     }
 }
 
@@ -683,7 +693,6 @@ void PMainWindow::setupToolbar()
     }
     m_aShowInfo->addTo(toolBar);
     m_aTrash->addTo(toolBar);
-//    m_aSetup->addTo(toolBar);
 
     m_gDisplayType->addTo(toolBar);
 
@@ -730,8 +739,6 @@ void PMainWindow::setupMenu()
     m_gDisplayType->addTo(dispMenu);
     dispMenu->insertSeparator();
     m_gPrevNext->addTo(dispMenu);
-    m_setCurrentBrightness->addTo(dispMenu);
-    m_setCurrentBrightness->setEnabled(false);
     dispMenu->insertSeparator();
     m_hBright->addTo(dispMenu);
     m_hBright->setEnabled(false);
