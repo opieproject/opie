@@ -228,6 +228,10 @@ Cette partie vous permet de selectionner une application et quelle préférence 
         <source>Appearance Settings</source>
         <translation>Préference d&apos;Apparence</translation>
     </message>
+    <message>
+        <source>Rotation direction:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditScheme</name>

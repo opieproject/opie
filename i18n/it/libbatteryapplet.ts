@@ -3,10 +3,6 @@
 <context>
     <name>BatteryStatus</name>
     <message>
-        <source>Battery Status</source>
-        <translation type="obsolete">Stato Batteria</translation>
-    </message>
-    <message>
         <source>Close</source>
         <translation>Chiudi</translation>
     </message>

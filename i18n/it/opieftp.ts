@@ -71,10 +71,6 @@
         <translation>Cambia su Config</translation>
     </message>
     <message>
-        <source>About</source>
-        <translation type="obsolete">Informazioni</translation>
-    </message>
-    <message>
         <source>File</source>
         <translation>File</translation>
     </message>

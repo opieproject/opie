@@ -232,10 +232,6 @@ Il doit être vide</translation>
         <translation>Ce répertoire n&apos;existe pas</translation>
     </message>
     <message>
-        <source>About</source>
-        <translation>A propos</translation>
-    </message>
-    <message>
         <source>Rescan</source>
         <translation>Rafraîchir</translation>
     </message>

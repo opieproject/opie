@@ -33,16 +33,8 @@
         <translation>Mostra Miniature</translation>
     </message>
     <message>
-        <source>Slideshow</source>
-        <translation>Slideshow</translation>
-    </message>
-    <message>
         <source>Preferences..</source>
         <translation>Impostazioni..</translation>
-    </message>
-    <message>
-        <source>Help</source>
-        <translation>Aiuto</translation>
     </message>
     <message>
         <source>Image Info ...</source>
@@ -119,6 +111,49 @@
     <message>
         <source>8-bit alpha channel</source>
         <translation>8-bit alpha channel</translation>
+    </message>
+    <message>
+        <source>Slide show</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stop Slideshow</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SettingsDialogBase</name>
+    <message>
+        <source>Preferences</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Slide Show</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delay between pictures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Repeat slideshow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show pictures in reverse</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load pictures rotated 90 degrees</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fast load pictures</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

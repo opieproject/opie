@@ -1,5 +1,52 @@
 <!DOCTYPE TS><TS>
 <context>
+    <name>FileSysInfo</name>
+    <message>
+        <source>CF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used on this Compact Flash memory card.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ha</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This graph represents how much storage is currently used on this hard drive.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SD</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used on this Secure Digital memory card.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>In</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used of the built-in memory (i.e. Flash memory) on this handheld device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RA</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used of the temporary RAM disk.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>LoadInfo</name>
     <message>
         <source>Application CPU usage (%)</source>
@@ -155,81 +202,6 @@ Click and hold on a process to see additional information about the process, or 
     <message>
         <source>You really want to send
 </source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>StorageInfo</name>
-    <message>
-        <source>CF Card: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hard Disk </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SD Card </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hard Disk /dev/hd </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SCSI Hard Disk /dev/sd </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Int. Storage </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>CF</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This graph represents how much memory is currently used on this Compact Flash memory card.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ha</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This graph represents how much storage is currently used on this hard drive.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SD</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This graph represents how much memory is currently used on this Secure Digital memory card.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SC</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>In</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This graph represents how much memory is currently used of the built-in memory (i.e. Flash memory) on this handheld device.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>RAM disk</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>RA</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This graph represents how much memory is currently used of the temporary RAM disk.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

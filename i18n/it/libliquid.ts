@@ -1,79 +1,69 @@
 <!DOCTYPE TS><TS>
 <defaultcodec>iso8859-1</defaultcodec>
 <context>
-    <name>Decoration</name>
-    <message>
-        <source>Liquid</source>
-        <translation type="obsolete">Liquid</translation>
-    </message>
-</context>
-<context>
     <name>LiquidSettings</name>
     <message>
         <source>Liquid Style</source>
-        <translation>Stile Liquid</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>No translucency</source>
-        <translation>No trasparenza</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Stippled, background color</source>
-        <translation>Colore sfondo
-</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Stippled, button color</source>
-        <translation>Colore bottone
-</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Translucent stippled, background color</source>
-        <translation>Colore sfondo trasparente</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Translucent stippled, button color</source>
-        <translation>Colore bottone trasparente
-</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Custom translucency</source>
-        <translation>Trasparenza personalizzata</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Menu color</source>
-        <translation>Colore menu</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Text color</source>
-        <translation>Colore testo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Opacity</source>
-        <translation>Opacità</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Use shadowed menu text</source>
-        <translation>Usa testo menu ombreggiato</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Make toolbar buttons appear flat</source>
-        <translation>Bottoni barra applicazioni senza rilievo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Stipple contrast</source>
-        <translation>Contrasto</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Styles</name>
     <message>
         <source>Liquid</source>
-        <translation>Liquid</translation>
+        <translation type="unfinished">Liquid</translation>
     </message>
     <message>
         <source>High Performance Liquid style by Mosfet</source>
-        <translation>Stile Liquid ad alte prestazione by Mosfet</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

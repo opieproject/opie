@@ -191,64 +191,6 @@ ntpdate </source>
     </message>
 </context>
 <context>
-    <name>SetDateTime</name>
-    <message>
-        <source>Date</source>
-        <translation type="obsolete">Data</translation>
-    </message>
-    <message>
-        <source>Weeks start on</source>
-        <translation type="obsolete">Semana começa no(a)</translation>
-    </message>
-    <message>
-        <source>Time Zone</source>
-        <translation type="obsolete">Zona Horária</translation>
-    </message>
-    <message>
-        <source>12 hour</source>
-        <translation type="obsolete">12 horas</translation>
-    </message>
-    <message>
-        <source>Monday</source>
-        <translation type="obsolete">Segunda</translation>
-    </message>
-    <message>
-        <source>24 hour</source>
-        <translation type="obsolete">24 horas</translation>
-    </message>
-    <message>
-        <source>Sunday</source>
-        <translation type="obsolete">Domingo</translation>
-    </message>
-    <message>
-        <source>Date format</source>
-        <translation type="obsolete">Formato de data</translation>
-    </message>
-    <message>
-        <source>Time format</source>
-        <translation type="obsolete">Formato de hora</translation>
-    </message>
-</context>
-<context>
-    <name>SetTime</name>
-    <message>
-        <source>AM</source>
-        <translation type="obsolete">AM</translation>
-    </message>
-    <message>
-        <source>PM</source>
-        <translation type="obsolete">PM</translation>
-    </message>
-    <message>
-        <source>Hour</source>
-        <translation type="obsolete">Hora</translation>
-    </message>
-    <message>
-        <source>Minute</source>
-        <translation type="obsolete">Minuto</translation>
-    </message>
-</context>
-<context>
     <name>SettingsTabWidget</name>
     <message>
         <source>Time server</source>

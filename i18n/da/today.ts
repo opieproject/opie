@@ -44,10 +44,6 @@
 <context>
     <name>TodayConfig</name>
     <message>
-        <source>Today config</source>
-        <translation>Idag indstillinger</translation>
-    </message>
-    <message>
         <source>Load which plugins in what order:</source>
         <translation>Hent hvilke plugins i hvilken rækkefølge:</translation>
     </message>
@@ -114,6 +110,14 @@ ved opvågning?
     <message>
         <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order</source>
         <translation>Afkryds feltet for at aktivere/deaktivere et plugin eller brug piletasterne til højre for at ændre rækkefølgen de bliver vist</translation>
+    </message>
+    <message>
+        <source>Today Config</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tiny Banner</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -7,10 +7,6 @@
         <translation>Shortcut Home</translation>
     </message>
     <message>
-        <source>Home</source>
-        <translation type="obsolete">Home</translation>
-    </message>
-    <message>
         <source>Desktop</source>
         <translation>Desktop</translation>
     </message>

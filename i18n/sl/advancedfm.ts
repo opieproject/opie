@@ -238,12 +238,6 @@ LJ.Potter&lt;llornkcor@handhelds.org&gt;
 in je licencirano pod GPL</translation>
     </message>
     <message>
-        <source>Cannot remove current directory
-from bookmarks.
-It is not bookmarked!!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Bookmark Directory</source>
         <translation type="unfinished"></translation>
     </message>
@@ -253,6 +247,16 @@ It is not bookmarked!!</source>
     </message>
     <message>
         <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot remove current directory
+from bookmarks.
+It is not bookmarked!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File Search</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -1,5 +1,52 @@
 <!DOCTYPE TS><TS>
 <context>
+    <name>FileSysInfo</name>
+    <message>
+        <source>CF</source>
+        <translation type="unfinished">CF</translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used on this Compact Flash memory card.</source>
+        <translation type="unfinished">Ez a grafikon jelképezi, hogy mennyi memória van felhasználva ezen a Compact Flash memóriakártyán.</translation>
+    </message>
+    <message>
+        <source>Ha</source>
+        <translation type="unfinished">Ha</translation>
+    </message>
+    <message>
+        <source>This graph represents how much storage is currently used on this hard drive.</source>
+        <translation type="unfinished">Ez a grafikon jelképezi, hogy mennyi tárhely van felhasználva ezen merevlemezen.</translation>
+    </message>
+    <message>
+        <source>SD</source>
+        <translation type="unfinished">SD</translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used on this Secure Digital memory card.</source>
+        <translation type="unfinished">Ez a grafikon jelképezi, hogy mennyi memória van felhasználva ezen a Secure Digital memóriakártyán.</translation>
+    </message>
+    <message>
+        <source>SC</source>
+        <translation type="unfinished">SC</translation>
+    </message>
+    <message>
+        <source>In</source>
+        <translation type="unfinished">In</translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used of the built-in memory (i.e. Flash memory) on this handheld device.</source>
+        <translation type="unfinished">Ez a grafikon jelképezi, hogy mennyi memória van felhasználva a beépített (Flash) memóriából ezen az kéziszámítógépen.</translation>
+    </message>
+    <message>
+        <source>RA</source>
+        <translation type="unfinished">RA</translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used of the temporary RAM disk.</source>
+        <translation type="unfinished">Ez a grafikon jelképezi, hogy mennyi memória van felhasználva az ideiglenes RAM diszken.</translation>
+    </message>
+</context>
+<context>
     <name>LoadInfo</name>
     <message>
         <source>Application CPU usage (%)</source>
@@ -168,81 +215,6 @@ Bökjön a processzre és tartsa, hogy további információkat kapjon a process
 </source>
         <translation>Biztosan küldeni akar
 </translation>
-    </message>
-</context>
-<context>
-    <name>StorageInfo</name>
-    <message>
-        <source>CF Card: </source>
-        <translation>CF kártya:</translation>
-    </message>
-    <message>
-        <source>Hard Disk </source>
-        <translation>Merevlemez</translation>
-    </message>
-    <message>
-        <source>SD Card </source>
-        <translation>SD kártya</translation>
-    </message>
-    <message>
-        <source>Hard Disk /dev/hd </source>
-        <translation>Merevlemez /dev/hd</translation>
-    </message>
-    <message>
-        <source>SCSI Hard Disk /dev/sd </source>
-        <translation>SCSI merevlemez /dev/sd</translation>
-    </message>
-    <message>
-        <source>Int. Storage </source>
-        <translation>Belső tároló</translation>
-    </message>
-    <message>
-        <source>CF</source>
-        <translation>CF</translation>
-    </message>
-    <message>
-        <source>This graph represents how much memory is currently used on this Compact Flash memory card.</source>
-        <translation>Ez a grafikon jelképezi, hogy mennyi memória van felhasználva ezen a Compact Flash memóriakártyán.</translation>
-    </message>
-    <message>
-        <source>Ha</source>
-        <translation>Ha</translation>
-    </message>
-    <message>
-        <source>This graph represents how much storage is currently used on this hard drive.</source>
-        <translation>Ez a grafikon jelképezi, hogy mennyi tárhely van felhasználva ezen merevlemezen.</translation>
-    </message>
-    <message>
-        <source>SD</source>
-        <translation>SD</translation>
-    </message>
-    <message>
-        <source>This graph represents how much memory is currently used on this Secure Digital memory card.</source>
-        <translation>Ez a grafikon jelképezi, hogy mennyi memória van felhasználva ezen a Secure Digital memóriakártyán.</translation>
-    </message>
-    <message>
-        <source>SC</source>
-        <translation>SC</translation>
-    </message>
-    <message>
-        <source>In</source>
-        <translation>In</translation>
-    </message>
-    <message>
-        <source>This graph represents how much memory is currently used of the built-in memory (i.e. Flash memory) on this handheld device.</source>
-        <translation>Ez a grafikon jelképezi, hogy mennyi memória van felhasználva a beépített (Flash) memóriából ezen az kéziszámítógépen.</translation>
-    </message>
-    <message>
-        <source>RAM disk</source>
-        <translation>RAM diszk</translation>
-    </message>
-    <message>
-        <source>RA</source>
-        <translation>RA</translation>
-    </message>
-    <message>
-        <source>This graph represents how much memory is currently used of the temporary RAM disk.</source>
-        <translation>Ez a grafikon jelképezi, hogy mennyi memória van felhasználva az ideiglenes RAM diszken.</translation>
     </message>
 </context>
 <context>

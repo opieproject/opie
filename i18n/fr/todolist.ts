@@ -1,18 +1,21 @@
 <!DOCTYPE TS><TS>
 <defaultcodec>iso8859-1</defaultcodec>
 <context>
+    <name>MainWindow</name>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;h1&gt;Alarm at %0&lt;/h1&gt;&lt;br&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>OTaskEditor</name>
     <message>
         <source>Alarms</source>
         <translation>Alarmes</translation>
-    </message>
-    <message>
-        <source>Reminders</source>
-        <translation>Rappels</translation>
-    </message>
-    <message>
-        <source>X-Ref</source>
-        <translation>X-Ref</translation>
     </message>
     <message>
         <source>Information</source>
@@ -36,6 +39,14 @@
     <message>
         <source>Edit Task</source>
         <translation>Editer la Tâche</translation>
+    </message>
+    <message>
+        <source>silent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>loud</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -217,6 +228,102 @@ Quitter?</translation>
         <source>Priority:</source>
         <translation>Priorité:</translation>
     </message>
+    <message>
+        <source>Template Editor</source>
+        <translation type="unfinished">Editeur de Modèle</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished">Ajouter</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editer</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished">Effacer</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Nom</translation>
+    </message>
+    <message>
+        <source>New Template %1</source>
+        <translation type="unfinished">Nouveau Modèle %1</translation>
+    </message>
+    <message>
+        <source>Click here to set the priority of new task.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation type="unfinished">Cliquer ici pour définir la prioriré de la nouvelle tâche.
+
+Cette partie est appelé &quot;la barre d&apos;outils&quot;.
+
+Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. Cette partie peut-être affichée ou cachée en selectionnant Option-&gt;&apos;Montrer la barre d&apos;outils&apos; dans le menu ci-dessus.</translation>
+    </message>
+    <message>
+        <source>Enter description of new task here.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation type="unfinished">Entrer la description de la nouvelle tâche ici.
+
+Cette partie est appelé &quot;la barre d&apos;outils&quot;.
+
+Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. Cette partie peut-être affichée ou cachée en selectionnant Option-&gt;&apos;Montrer la barre d&apos;outils&apos; dans le menu ci-dessus.</translation>
+    </message>
+    <message>
+        <source>More</source>
+        <translation type="unfinished">Plus</translation>
+    </message>
+    <message>
+        <source>Click here to enter additional information for new task.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation type="unfinished">Cliquer ici pour entrer des informations supplémentaires pour la nouvelle tâche.
+
+Cette partie est appelé &quot;la barre d&apos;outils&quot;.
+
+Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. Cette partie peut-être affichée ou cachée en selectionnant Option-&gt;&apos;Montrer la barre d&apos;outils&apos; dans le menu ci-dessus.</translation>
+    </message>
+    <message>
+        <source>Enter</source>
+        <translation type="unfinished">Valider</translation>
+    </message>
+    <message>
+        <source>Click here to add new task.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation type="unfinished">Cliquer ici pour ajouter une nouvelle tâche.
+
+Cette partie est appelé &quot;la barre d&apos;outils&quot;.
+
+Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. Cette partie peut-être affichée ou cachée en selectionnant Option-&gt;&apos;Montrer la barre d&apos;outils&apos; dans le menu ci-dessus.</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Annuler</translation>
+    </message>
+    <message>
+        <source>Click here to reset new task information.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation type="unfinished">Cliquer ici pour réinitialiser les informations de la nouvelle tâche.
+
+Cette partie est appelé &quot;la barre d&apos;outils&quot;.
+
+Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. Cette partie peut-être affichée ou cachée en selectionnant Option-&gt;&apos;Montrer la barre d&apos;outils&apos; dans le menu ci-dessus.</translation>
+    </message>
 </context>
 <context>
     <name>TableView</name>
@@ -246,6 +353,18 @@ Quitter?</translation>
     <message>
         <source>Delete</source>
         <translation>Effacer</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -476,111 +595,6 @@ Quitter?</translation>
     <message>
         <source>Click here to select the task maintainer.</source>
         <translation>Cliquer ici pour selectionner le mainteneur de la tâche.</translation>
-    </message>
-</context>
-<context>
-    <name>TemplateDialog</name>
-    <message>
-        <source>Template Editor</source>
-        <translation>Editeur de Modèle</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation>Ajouter</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation>Editer</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation>Effacer</translation>
-    </message>
-</context>
-<context>
-    <name>TemplateDialogImpl</name>
-    <message>
-        <source>Name</source>
-        <translation>Nom</translation>
-    </message>
-    <message>
-        <source>New Template %1</source>
-        <translation>Nouveau Modèle %1</translation>
-    </message>
-</context>
-<context>
-    <name>Todo</name>
-    <message>
-        <source>More</source>
-        <translation>Plus</translation>
-    </message>
-    <message>
-        <source>Enter</source>
-        <translation>Valider</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Annuler</translation>
-    </message>
-    <message>
-        <source>Click here to set the priority of new task.
-
-This area is called the quick task bar.
-
-It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation>Cliquer ici pour définir la prioriré de la nouvelle tâche.
-
-Cette partie est appelé &quot;la barre d&apos;outils&quot;.
-
-Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. Cette partie peut-être affichée ou cachée en selectionnant Option-&gt;&apos;Montrer la barre d&apos;outils&apos; dans le menu ci-dessus.</translation>
-    </message>
-    <message>
-        <source>Enter description of new task here.
-
-This area is called the quick task bar.
-
-It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation>Entrer la description de la nouvelle tâche ici.
-
-Cette partie est appelé &quot;la barre d&apos;outils&quot;.
-
-Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. Cette partie peut-être affichée ou cachée en selectionnant Option-&gt;&apos;Montrer la barre d&apos;outils&apos; dans le menu ci-dessus.</translation>
-    </message>
-    <message>
-        <source>Click here to enter additional information for new task.
-
-This area is called the quick task bar.
-
-It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation>Cliquer ici pour entrer des informations supplémentaires pour la nouvelle tâche.
-
-Cette partie est appelé &quot;la barre d&apos;outils&quot;.
-
-Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. Cette partie peut-être affichée ou cachée en selectionnant Option-&gt;&apos;Montrer la barre d&apos;outils&apos; dans le menu ci-dessus.</translation>
-    </message>
-    <message>
-        <source>Click here to add new task.
-
-This area is called the quick task bar.
-
-It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation>Cliquer ici pour ajouter une nouvelle tâche.
-
-Cette partie est appelé &quot;la barre d&apos;outils&quot;.
-
-Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. Cette partie peut-être affichée ou cachée en selectionnant Option-&gt;&apos;Montrer la barre d&apos;outils&apos; dans le menu ci-dessus.</translation>
-    </message>
-    <message>
-        <source>Click here to reset new task information.
-
-This area is called the quick task bar.
-
-It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation>Cliquer ici pour réinitialiser les informations de la nouvelle tâche.
-
-Cette partie est appelé &quot;la barre d&apos;outils&quot;.
-
-Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. Cette partie peut-être affichée ou cachée en selectionnant Option-&gt;&apos;Montrer la barre d&apos;outils&apos; dans le menu ci-dessus.</translation>
     </message>
 </context>
 </TS>

@@ -44,10 +44,6 @@
 <context>
     <name>TodayConfig</name>
     <message>
-        <source>Today config</source>
-        <translation>Ma beállítása</translation>
-    </message>
-    <message>
         <source>Load which plugins in what order:</source>
         <translation>Mely kiegészítő milyen sorrendben töltödjön be:</translation>
     </message>
@@ -114,6 +110,14 @@ automatikusan induljon?
     <message>
         <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order</source>
         <translation>Ikszelje be a négyzetet a kiegészítő aktiválásához vagy használja a jobboldali nyilakat a sorrend beállításához</translation>
+    </message>
+    <message>
+        <source>Today Config</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tiny Banner</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

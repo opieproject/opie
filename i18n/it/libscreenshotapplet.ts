@@ -2,14 +2,6 @@
 <context>
     <name>ScreenshotControl</name>
     <message>
-        <source>Snapshot</source>
-        <translation type="obsolete">Snapshot</translation>
-    </message>
-    <message>
-        <source>scap</source>
-        <translation type="obsolete">scap</translation>
-    </message>
-    <message>
         <source>Name of screenshot </source>
         <translation>Nome dello screenshot</translation>
     </message>

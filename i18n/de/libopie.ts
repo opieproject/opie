@@ -283,6 +283,127 @@
     </message>
 </context>
 <context>
+    <name>ORecurranceWidget</name>
+    <message>
+        <source>No End Date</source>
+        <translation type="unfinished">Kein Enddatum</translation>
+    </message>
+    <message>
+        <source>days</source>
+        <translation type="unfinished">Tage</translation>
+    </message>
+    <message>
+        <source>day</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>weeks</source>
+        <translation type="unfinished">Wochen</translation>
+    </message>
+    <message>
+        <source>week</source>
+        <translation type="unfinished">Woche</translation>
+    </message>
+    <message>
+        <source>months</source>
+        <translation type="unfinished">Monate</translation>
+    </message>
+    <message>
+        <source>month</source>
+        <translation type="unfinished">Monat</translation>
+    </message>
+    <message>
+        <source>years</source>
+        <translation type="unfinished">Jahre</translation>
+    </message>
+    <message>
+        <source>year</source>
+        <translation type="unfinished">Jahr</translation>
+    </message>
+    <message>
+        <source> and </source>
+        <translation type="unfinished">und </translation>
+    </message>
+    <message>
+        <source>,
+and </source>
+        <translation type="unfinished">,
+und</translation>
+    </message>
+    <message>
+        <source>, and </source>
+        <translation type="unfinished">, and</translation>
+    </message>
+    <message>
+        <source>No Repeat</source>
+        <translation type="unfinished">Keine Wiederholung</translation>
+    </message>
+    <message>
+        <source>day(s)</source>
+        <translation type="unfinished">Tag(e)</translation>
+    </message>
+    <message>
+        <source>Repeat On</source>
+        <translation type="unfinished">Wiederholung an</translation>
+    </message>
+    <message>
+        <source>Mon</source>
+        <translation type="unfinished">Mon</translation>
+    </message>
+    <message>
+        <source>Tue</source>
+        <translation type="unfinished">Di</translation>
+    </message>
+    <message>
+        <source>Wed</source>
+        <translation type="unfinished">Mi</translation>
+    </message>
+    <message>
+        <source>Thu</source>
+        <translation type="unfinished">Do</translation>
+    </message>
+    <message>
+        <source>Fri</source>
+        <translation type="unfinished">Fr</translation>
+    </message>
+    <message>
+        <source>Sat</source>
+        <translation type="unfinished">Sa</translation>
+    </message>
+    <message>
+        <source>Sun</source>
+        <translation type="unfinished">So</translation>
+    </message>
+    <message>
+        <source>week(s)</source>
+        <translation type="unfinished">Woche(n)</translation>
+    </message>
+    <message>
+        <source>Repeat By</source>
+        <translation type="unfinished">Wiederholen bis</translation>
+    </message>
+    <message>
+        <source>Day</source>
+        <translation type="unfinished">Tag</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation type="unfinished">Datum</translation>
+    </message>
+    <message>
+        <source>month(s)</source>
+        <translation type="unfinished">Monat(e)</translation>
+    </message>
+    <message>
+        <source>year(s)</source>
+        <translation type="unfinished">Jahr(e)</translation>
+    </message>
+    <message>
+        <source>Every</source>
+        <translation type="unfinished">Jeden</translation>
+    </message>
+</context>
+<context>
     <name>OTimePickerDialogBase</name>
     <message>
         <source>Time:</source>
@@ -476,134 +597,35 @@
         <translation>Sonntag</translation>
     </message>
     <message>
-        <source>No End Date</source>
-        <translation>Kein Enddatum</translation>
+        <source>Start:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>days</source>
-        <translation>Tage</translation>
+        <source>End:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>day</source>
-        <translation></translation>
+        <source>Note:</source>
+        <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>weeks</source>
-        <translation>Wochen</translation>
-    </message>
-    <message>
-        <source>week</source>
-        <translation>Woche</translation>
-    </message>
-    <message>
-        <source>months</source>
-        <translation>Monate</translation>
-    </message>
-    <message>
-        <source>month</source>
-        <translation>Monat</translation>
-    </message>
-    <message>
-        <source>years</source>
-        <translation>Jahre</translation>
-    </message>
-    <message>
-        <source>year</source>
-        <translation>Jahr</translation>
-    </message>
-    <message>
-        <source> and </source>
-        <translation>und </translation>
-    </message>
-    <message>
-        <source>,
-and </source>
-        <translation>,
-und</translation>
-    </message>
-    <message>
-        <source>, and </source>
-        <translation>, and</translation>
-    </message>
-    <message>
-        <source>No Repeat</source>
-        <translation>Keine Wiederholung</translation>
-    </message>
-    <message>
-        <source>day(s)</source>
-        <translation>Tag(e)</translation>
-    </message>
-    <message>
-        <source>Repeat On</source>
-        <translation>Wiederholung an</translation>
-    </message>
-    <message>
-        <source>Mon</source>
-        <translation>Mon</translation>
-    </message>
-    <message>
-        <source>Tue</source>
-        <translation>Di</translation>
-    </message>
-    <message>
-        <source>Wed</source>
-        <translation>Mi</translation>
-    </message>
-    <message>
-        <source>Thu</source>
-        <translation>Do</translation>
-    </message>
-    <message>
-        <source>Fri</source>
-        <translation>Fr</translation>
-    </message>
-    <message>
-        <source>Sat</source>
-        <translation>Sa</translation>
-    </message>
-    <message>
-        <source>Sun</source>
-        <translation>So</translation>
-    </message>
-    <message>
-        <source>week(s)</source>
-        <translation>Woche(n)</translation>
-    </message>
-    <message>
-        <source>Repeat By</source>
-        <translation>Wiederholen bis</translation>
-    </message>
-    <message>
-        <source>Day</source>
-        <translation>Tag</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation>Datum</translation>
-    </message>
-    <message>
-        <source>month(s)</source>
-        <translation>Monat(e)</translation>
-    </message>
-    <message>
-        <source>year(s)</source>
-        <translation>Jahr(e)</translation>
-    </message>
+</context>
+<context>
+    <name>QWidget</name>
     <message>
         <source>st</source>
-        <translation>.</translation>
+        <translation type="unfinished">.</translation>
     </message>
     <message>
         <source>nd</source>
-        <translation>.</translation>
+        <translation type="unfinished">.</translation>
     </message>
     <message>
         <source>rd</source>
-        <translation>.</translation>
+        <translation type="unfinished">.</translation>
     </message>
     <message>
         <source>th</source>
-        <translation>.</translation>
+        <translation type="unfinished">.</translation>
     </message>
 </context>
 </TS>

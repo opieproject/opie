@@ -1,8 +1,5 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>MobileMsg</name>
-</context>
-<context>
     <name>MobileMsgBase</name>
     <message>
         <source>Mobile Messaging</source>

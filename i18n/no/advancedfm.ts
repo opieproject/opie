@@ -93,12 +93,6 @@ and is licensed by the GPL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot remove current directory
-from bookmarks.
-It is not bookmarked!!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>AdvancedFm</source>
         <translation type="unfinished"></translation>
     </message>
@@ -244,6 +238,16 @@ Do you really want to delete it?</source>
     </message>
     <message>
         <source>Could not rename</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot remove current directory
+from bookmarks.
+It is not bookmarked!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File Search</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -239,15 +239,6 @@ L.J.Potter&lt;llornkcor@handhelds.org&gt;
 unter der GPL</translation>
     </message>
     <message>
-        <source>Cannot remove current directory
-from bookmarks.
-It is not bookmarked!!</source>
-        <translation>Das aktuelle Verzeichnis ist nicht in 
-den Lesezeichen und kann deshalb
-nicht entfernt werden.
-</translation>
-    </message>
-    <message>
         <source>Bookmark Directory</source>
         <translation>Lesezeichen-Verzeichnis</translation>
     </message>
@@ -258,6 +249,16 @@ nicht entfernt werden.
     <message>
         <source>Error</source>
         <translation>Fehler</translation>
+    </message>
+    <message>
+        <source>Cannot remove current directory
+from bookmarks.
+It is not bookmarked!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File Search</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

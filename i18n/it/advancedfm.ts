@@ -11,16 +11,6 @@
         <translation>La directory non esiste</translation>
     </message>
     <message>
-        <source>Advanced FileManager
-is copyright 2002 by
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
-and is licensed by the GPL</source>
-        <translation type="obsolete">Advanced FileManager
-copyright 2002 di
-L.J.Potter &lt;llornkcor@handhelds.org&gt;
-sotto licenza GPL</translation>
-    </message>
-    <message>
         <source>Show Hidden Files</source>
         <translation>Mostra File Nascosti</translation>
     </message>
@@ -117,10 +107,6 @@ sotto licenza GPL</translation>
         <translation>Cambia su Remoto</translation>
     </message>
     <message>
-        <source>About</source>
-        <translation type="obsolete">Informazioni</translation>
-    </message>
-    <message>
         <source>Size</source>
         <translation>Dimensione</translation>
     </message>
@@ -137,12 +123,6 @@ sotto licenza GPL</translation>
         <translation>2</translation>
     </message>
     <message>
-        <source>Do you really want to delete
-</source>
-        <translation type="obsolete">Vuoi veramente cancellare
-</translation>
-    </message>
-    <message>
         <source>Yes</source>
         <translation>Sì</translation>
     </message>
@@ -153,12 +133,6 @@ sotto licenza GPL</translation>
     <message>
         <source>Could not rename</source>
         <translation>Impossibile rinominare</translation>
-    </message>
-    <message>
-        <source> already exists
-Do you really want to delete it?</source>
-        <translation type="obsolete"> già esiste
-Vuoi veramente cancellarlo?</translation>
     </message>
     <message>
         <source>Could not copy
@@ -191,14 +165,6 @@ Vuoi veramente cancellarlo?</translation>
         <translation>Output AdvancedFm</translation>
     </message>
     <message>
-        <source>command failed!</source>
-        <translation type="obsolete">commando fallito!</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;OK</translation>
-    </message>
-    <message>
         <source>Advancedfm Beam out</source>
         <translation>Trasmissione Advancedfm</translation>
     </message>
@@ -223,14 +189,6 @@ sotto licenza GPL</translation>
     <message>
         <source>Change Directory</source>
         <translation>Cambia Directory</translation>
-    </message>
-    <message>
-        <source>Cannot remove current directory
-from bookmarks.
-It is not bookmarked!!</source>
-        <translation>Impossibile eliminare la directory corrente
-dai bookmarks.
-Non è inserita nei bookmark!!</translation>
     </message>
     <message>
         <source>Select All</source>
@@ -293,6 +251,16 @@ Vuoi veramente eliminarlo?</translation>
     <message>
         <source>Error</source>
         <translation>Errore</translation>
+    </message>
+    <message>
+        <source>Cannot remove current directory
+from bookmarks.
+It is not bookmarked!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File Search</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

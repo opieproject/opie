@@ -3,15 +3,15 @@
     <name>ParaShoot</name>
     <message>
         <source>ParaShoot</source>
-        <translation >ParaShoot</translation>
+        <translation>ParaShoot</translation>
     </message>
     <message>
         <source>New Game</source>
-        <translation >新遊戲</translation>
+        <translation>新遊戲</translation>
     </message>
     <message>
         <source>     Level: %1       Score: %2   </source>
-        <translation >     等級: %1       分數: %2   </translation>
+        <translation>     等級: %1       分數: %2   </translation>
     </message>
     <message>
         <source>       GAME OVER!

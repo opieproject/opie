@@ -74,6 +74,10 @@ Chiusura player.</translation>
         <source>, Length: </source>
         <translation>, Lunghezza: </translation>
     </message>
+    <message>
+        <source>Volume</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PlayListSelection</name>
@@ -135,10 +139,6 @@ Chiusura player.</translation>
     <message>
         <source>Save PlayList</source>
         <translation>Salava Playlist</translation>
-    </message>
-    <message>
-        <source>Export playlist to m3u</source>
-        <translation>Esporta playlist come m3u</translation>
     </message>
     <message>
         <source>Open File or URL</source>
@@ -225,10 +225,6 @@ al prossimo avvio.</translation>
         <translation>Errore nell&apos;aprire il file.</translation>
     </message>
     <message>
-        <source>Save Playlist</source>
-        <translation>Salva Playlist</translation>
-    </message>
-    <message>
         <source>Remove Playlist?</source>
         <translation>Elimino Playlist?</translation>
     </message>
@@ -261,6 +257,14 @@ questa playlist?</translation>
     <message>
         <source>Save m3u Playlist </source>
         <translation>Salva Playlist come m3u</translation>
+    </message>
+    <message>
+        <source>Skins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Path</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

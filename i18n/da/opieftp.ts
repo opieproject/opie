@@ -70,10 +70,6 @@
         <translation>Skift til indstillinger</translation>
     </message>
     <message>
-        <source>About</source>
-        <translation type="obsolete">Om</translation>
-    </message>
-    <message>
         <source>File</source>
         <translation>Fil</translation>
     </message>

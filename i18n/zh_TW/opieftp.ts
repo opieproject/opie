@@ -234,10 +234,6 @@ It must be empty</source>
         <translation>目錄並不存在</translation>
     </message>
     <message>
-        <source>About</source>
-        <translation>關於</translation>
-    </message>
-    <message>
         <source>Rescan</source>
         <translation>重新整理</translation>
     </message>

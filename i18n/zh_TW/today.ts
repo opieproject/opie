@@ -44,10 +44,6 @@
 <context>
     <name>TodayConfig</name>
     <message>
-        <source>Today config</source>
-        <translation>「今日」個人設定</translation>
-    </message>
-    <message>
         <source>Load which plugins in what order:</source>
         <translation>載入及順序設定</translation>
     </message>
@@ -114,6 +110,14 @@ resume?
     <message>
         <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order</source>
         <translation>勾選要啟動的plugins，並用右側的上下箭頭來調整顯示順序</translation>
+    </message>
+    <message>
+        <source>Today Config</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tiny Banner</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

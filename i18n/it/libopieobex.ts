@@ -1,54 +1,6 @@
 <!DOCTYPE TS><TS>
 <defaultcodec>iso8859-1</defaultcodec>
 <context>
-    <name>ObexDlg</name>
-    <message>
-        <source>OBEX Sending</source>
-        <translation type="obsolete">Trasmissione OBEX</translation>
-    </message>
-    <message>
-        <source>Sending:</source>
-        <translation type="obsolete">Trasmissione:</translation>
-    </message>
-    <message>
-        <source>filename</source>
-        <translation type="obsolete">nome file</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Cancella</translation>
-    </message>
-</context>
-<context>
-    <name>ObexInc</name>
-    <message>
-        <source>OBEX Receiving</source>
-        <translation type="obsolete">Ricezione OBEX</translation>
-    </message>
-    <message>
-        <source>TextLabel1</source>
-        <translation type="obsolete">TextLabel1</translation>
-    </message>
-    <message>
-        <source>Filename</source>
-        <translation type="obsolete">Nome File</translation>
-    </message>
-    <message>
-        <source>A file was beamed 
-to you.</source>
-        <translation type="obsolete">Un file ti è stato 
-trasmesso.</translation>
-    </message>
-    <message>
-        <source>Insert</source>
-        <translation type="obsolete">Inserisci</translation>
-    </message>
-    <message>
-        <source>Reject</source>
-        <translation type="obsolete">Rifiuta</translation>
-    </message>
-</context>
-<context>
     <name>OtherHandler</name>
     <message>
         <source>&lt;qt&gt;&lt;b&gt;Received:&lt;/b&gt;&lt;/qt&gt;</source>

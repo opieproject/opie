@@ -3,7 +3,7 @@
     <name>MineSweep</name>
     <message>
         <source>You won!</source>
-        <translation >你贏了!</translation>
+        <translation>你贏了!</translation>
     </message>
     <message>
         <source>You exploded!</source>
@@ -19,7 +19,7 @@
     </message>
     <message>
         <source>Advanced</source>
-        <translation >進階</translation>
+        <translation>進階</translation>
     </message>
     <message>
         <source>Expert</source>

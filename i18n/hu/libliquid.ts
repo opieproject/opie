@@ -1,8 +1,5 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>Decoration</name>
-</context>
-<context>
     <name>LiquidSettings</name>
     <message>
         <source>Liquid Style</source>

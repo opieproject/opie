@@ -260,10 +260,6 @@ Quit anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Movable</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Switch to moveable menu-/toolbars after restarting application !</source>
         <translation type="unfinished"></translation>
     </message>
@@ -344,6 +340,10 @@ is provided free !</source>
     </message>
     <message>
         <source>Order (up -&gt; down) defines the primary contact shown in the second column of the list view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Moveable</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

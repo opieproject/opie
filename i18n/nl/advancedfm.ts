@@ -96,14 +96,6 @@ en is valt onder de GPL</translation>
         <translation>Verzend bestand via IR</translation>
     </message>
     <message>
-        <source>Cannot remove current directory
-from bookmarks.
-It is not bookmarked!!</source>
-        <translation>Kan huidige directory niet
-uit favorieten verwijderen,
-er is hier geen favoriet van!</translation>
-    </message>
-    <message>
         <source>AdvancedFm</source>
         <translation>AdvancedFm</translation>
     </message>
@@ -255,6 +247,16 @@ Wilt u het echt verwijderen?</translation>
     <message>
         <source>Could not rename</source>
         <translation>Kan bestand niet hernoemen</translation>
+    </message>
+    <message>
+        <source>Cannot remove current directory
+from bookmarks.
+It is not bookmarked!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File Search</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

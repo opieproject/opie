@@ -1,6 +1,53 @@
 <!DOCTYPE TS><TS>
 <defaultcodec>iso8859-1</defaultcodec>
 <context>
+    <name>FileSysInfo</name>
+    <message>
+        <source>CF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used on this Compact Flash memory card.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ha</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This graph represents how much storage is currently used on this hard drive.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SD</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used on this Secure Digital memory card.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>In</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used of the built-in memory (i.e. Flash memory) on this handheld device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RA</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used of the temporary RAM disk.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>LoadInfo</name>
     <message>
         <source>Application CPU usage (%)</source>
@@ -13,6 +60,10 @@
     <message>
         <source>Type: </source>
         <translation>Tipo: </translation>
+    </message>
+    <message>
+        <source>This page shows how much this device&apos;s processor is being used.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -37,12 +88,15 @@
         <source>Total Memory: %1 kB</source>
         <translation>Memoria Totale: %1 kB</translation>
     </message>
-</context>
-<context>
-    <name>ModulesDetail</name>
     <message>
-        <source>Send</source>
-        <translation>Trasmetti</translation>
+        <source>This page shows how memory (i.e. RAM) is being allocated on your handheld device.
+Memory is categorized as follows:
+
+1. Used - memory used to by Opie and any running applications.
+2. Buffers - temporary storage used to improve performance
+3. Cached - information that has recently been used, but has not been freed yet.
+4. Free - memory not currently used by Opie or any running applications.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -63,6 +117,33 @@
         <source>Used By</source>
         <translation>Usato Da</translation>
     </message>
+    <message>
+        <source>This is a list of all the kernel modules currently loaded on this handheld device.
+
+Click and hold on a module to see additional information about the module, or to unload it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a command here and then click the Send button to the right to send the command to module selected above.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to send the selected command to the module selected above.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This area shows detailed information about this module.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You really want to execute
+</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MountInfo</name>
@@ -77,13 +158,6 @@
     <message>
         <source>Available (%1 kB)</source>
         <translation>Disponibile (%1 kB)</translation>
-    </message>
-</context>
-<context>
-    <name>ProcessDetail</name>
-    <message>
-        <source>Send</source>
-        <translation>Trametti (%1 kB)</translation>
     </message>
 </context>
 <context>
@@ -104,20 +178,32 @@
         <source>Time</source>
         <translation>Tempo</translation>
     </message>
-</context>
-<context>
-    <name>StorageInfo</name>
     <message>
-        <source>Hard Disk</source>
-        <translation>Hard Disk</translation>
+        <source>This is a list of all the processes on this handheld device.
+
+Click and hold on a process to see additional information about the process, or to send a signal to it.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>SCSI Hard Disk</source>
-        <translation>Hard Disk SCSI</translation>
+        <source>Select a signal here and then click the Send button to the right to send to this process.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Int. Storage</source>
-        <translation>Storage Interno</translation>
+        <source>Send</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to send the selected signal to this process.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This area shows detailed information about this process.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You really want to send
+</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -168,6 +254,22 @@
     <message>
         <source>Built on: </source>
         <translation>Compilato il:</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Version: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Model: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Vendor: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This page shows the current versions of Opie, the Linux kernel and distribution running on this handheld device.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

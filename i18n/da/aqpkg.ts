@@ -329,34 +329,6 @@ Klik inde i boksen til venstre for at vælge en pakke.</translation>
 <byte value="x9"/>%1</translation>
     </message>
     <message>
-        <source>Installed To - %1</source>
-        <translation type="obsolete">Installeret på - %1</translation>
-    </message>
-    <message>
-        <source>Description - %1</source>
-        <translation type="obsolete">Beskrivelse - %1</translation>
-    </message>
-    <message>
-        <source>Size - %1</source>
-        <translation type="obsolete">Størrelse - %1</translation>
-    </message>
-    <message>
-        <source>Section - %1</source>
-        <translation type="obsolete">Sektion - %1</translation>
-    </message>
-    <message>
-        <source>Filename - %1</source>
-        <translation type="obsolete">Filnavn - %1</translation>
-    </message>
-    <message>
-        <source>V. Installed - %1</source>
-        <translation type="obsolete">V. installeret - %1</translation>
-    </message>
-    <message>
-        <source>V. Available - %1</source>
-        <translation type="obsolete">V. tilgængelig - %1</translation>
-    </message>
-    <message>
         <source>Refreshing server package lists</source>
         <translation>Genopfrisker server pakke lister</translation>
     </message>

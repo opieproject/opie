@@ -331,34 +331,6 @@ Um ein Paket auszuwählen klicken Sie in das Rechtecke auf der linken Seite.</tr
 <byte value="x9"/>%1</translation>
     </message>
     <message>
-        <source>Installed To - %1</source>
-        <translation type="obsolete">Installiert auf - %1</translation>
-    </message>
-    <message>
-        <source>Description - %1</source>
-        <translation type="obsolete">Beschreibung - %1</translation>
-    </message>
-    <message>
-        <source>Size - %1</source>
-        <translation type="obsolete">Größe - %1</translation>
-    </message>
-    <message>
-        <source>Section - %1</source>
-        <translation type="obsolete">Sektion - %1</translation>
-    </message>
-    <message>
-        <source>Filename - %1</source>
-        <translation type="obsolete">Dateiname - %1</translation>
-    </message>
-    <message>
-        <source>V. Installed - %1</source>
-        <translation type="obsolete">V. Installiert - %1</translation>
-    </message>
-    <message>
-        <source>V. Available - %1</source>
-        <translation type="obsolete">V. Verfügbar - %1</translation>
-    </message>
-    <message>
         <source>Refreshing server package lists</source>
         <translation>Aktualisierung der Paketliste</translation>
     </message>

@@ -204,28 +204,8 @@
         <translation>另存新檔(&amp;A)</translation>
     </message>
     <message>
-        <source>Quit</source>
-        <translation>離開</translation>
-    </message>
-    <message>
-        <source>&amp;Quit</source>
-        <translation>離開(&amp;Q)</translation>
-    </message>
-    <message>
-        <source>General Help</source>
-        <translation>一般說明</translation>
-    </message>
-    <message>
-        <source>&amp;General</source>
-        <translation>一般(&amp;G)</translation>
-    </message>
-    <message>
         <source>About Opie Sheet</source>
         <translation>關於 Opie 試算表</translation>
-    </message>
-    <message>
-        <source>&amp;About</source>
-        <translation>關於(&amp;A)</translation>
     </message>
     <message>
         <source>Accept</source>
@@ -500,10 +480,6 @@
         <translation>資料(&amp;D)</translation>
     </message>
     <message>
-        <source>&amp;Help</source>
-        <translation>說明(&amp;H)</translation>
-    </message>
-    <message>
         <source>&amp;Row</source>
         <translation>列(&amp;R)</translation>
     </message>
@@ -662,10 +638,6 @@
     <message>
         <source>Functions</source>
         <translation>函數</translation>
-    </message>
-    <message>
-        <source>Help file not found!</source>
-        <translation>找不到說明檔!</translation>
     </message>
     <message>
         <source>&amp;Number of rows:</source>

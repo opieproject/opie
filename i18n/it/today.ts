@@ -45,10 +45,6 @@
 <context>
     <name>TodayConfig</name>
     <message>
-        <source>Today config</source>
-        <translation>Configurazione</translation>
-    </message>
-    <message>
         <source>Load which plugins in what order:</source>
         <translation>Carica i plugin nell&apos;ordine:</translation>
     </message>
@@ -115,6 +111,14 @@ resume?(new line)
     <message>
         <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order</source>
         <translation>Clicca per attivare/disattivare un plugin o utilizza le frecce a destra per cambiare l&apos;ordine di visualizzazione</translation>
+    </message>
+    <message>
+        <source>Today Config</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tiny Banner</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

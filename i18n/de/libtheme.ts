@@ -14,11 +14,11 @@
     <name>ThemeSettings</name>
     <message>
         <source>Theme Style</source>
-        <translation type='unfinished'>Schema</translation>
+        <translation type="unfinished">Schema</translation>
     </message>
     <message>
         <source>Select the theme to be used</source>
-        <translation>Wählen Sie das Schema aus, welches benutzt werden soll</translation>
+        <translation>Wï¿½len Sie das Schema aus, welches benutzt werden soll</translation>
     </message>
     <message>
         <source>Name</source>

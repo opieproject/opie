@@ -41,10 +41,6 @@
         <translation></translation>
     </message>
     <message>
-        <source>Weight:</source>
-        <translation type="obsolete">Masse:</translation>
-    </message>
-    <message>
         <source>Block</source>
         <translation>Blok</translation>
     </message>
