@@ -26,6 +26,7 @@
 #include <qpe/storage.h>
 #include <qpe/applnk.h>
 #include <qpe/qcopenvelope_qws.h>
+#include <qpe/config.h>
 
 #include <qfile.h>
 #include <qlabel.h>
@@ -766,12 +767,20 @@ void Global::findDocuments(DocLnkSet* folder, const QString &mimefilter)
     QListIterator<FileSystem> it ( fs );
     for ( ; it.current(); ++it ) {
       if ( (*it)->isRemovable() ) { // let's find out  if we should search on it
-	// this is a candidate look at the cf and see if we should search on it
-	QString path = (*it)->path();
-	if( !checkStorage((*it)->path() + "/.opiestorage.cf" ) )
-	  continue;
-	DocLnkSet ide( path, mimefilter );
-	folder->appendFrom(ide);
+        // this is a candidate look at the cf and see if we should search on it
+        QString path = (*it)->path();
+        if( !checkStorage((*it)->path() + "/.opiestorage.cf" ) )
+          continue;
+        Config conf((*it)->path() + "/.opiestorage.cf", Config::File );
+        conf.setGroup("subdirs");
+        QStringList subDirs = conf.readListEntry("subdirs",':');
+        if (subDirs.isEmpty()) {
+            subDirs.append("Documents");
+        }
+        for (unsigned c = 0; c < subDirs.count();++c) {
+            DocLnkSet ide( path+"/"+subDirs[c], mimefilter );
+            folder->appendFrom(ide);        
+        }
       } else if ( (*it)->disk() == "/dev/mtdblock6" || (*it)->disk() == "tmpfs" ) {
 	QString path = (*it)->path() + "/Documents";
 	DocLnkSet ide( path, mimefilter );
