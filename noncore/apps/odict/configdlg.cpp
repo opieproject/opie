@@ -29,20 +29,11 @@
 #include <qlineedit.h>
 #include <qstringlist.h>
 
-#include <opie/otabwidget.h>
-
 ConfigDlg::ConfigDlg(QWidget *parent, const char *name, bool modal) : QDialog(parent, name, modal)
 {
 	setCaption( tr( "Options" ) );
 	QVBoxLayout *vbox_layout = new QVBoxLayout( this );
-	tab = new OTabWidget( this, "OTabWidget_tab", OTabWidget::Global, OTabWidget::Bottom );
-	vbox_layout->addWidget( tab );
-
-	/*general settings*/
-	settings_tab = new QWidget( tab , "settings_tab" );
-
-	/*searchmethods*/
-	search_tab = new QWidget( tab , "search_tab" );
+	search_tab = new QWidget( this , "search_tab" );
 	QVBoxLayout *vbox_layout_searchtab = new QVBoxLayout( search_tab, 4 , 4 ,"blah" );
 	
 	QHBox *hbox = new QHBox( search_tab );
@@ -51,18 +42,17 @@ ConfigDlg::ConfigDlg(QWidget *parent, const char *name, bool modal) : QDialog(pa
 	loadSearchMethodNames();
 	
 	QVBox *vbox = new QVBox( hbox );
-	new_button = new QPushButton( "New" , vbox );
-	change_button = new QPushButton( "Change" , vbox );
-	delete_button = new QPushButton( "Delete" , vbox );
+	new_button = new QPushButton( tr( "New" ) , vbox );
+	change_button = new QPushButton( tr( "Change" ) , vbox );
+	delete_button = new QPushButton( tr( "Delete" ) , vbox );
 	connect( new_button, SIGNAL( clicked() ), this, SLOT( slotNewMethod() ) );
 	connect( change_button, SIGNAL( clicked() ), this, SLOT( slotChangeMethod() ));
 	connect( delete_button, SIGNAL( clicked() ), this, SLOT( slotDeleteMethod() ));
 	
 	vbox_layout_searchtab->addWidget( hbox );
 
-	/*add the tabs and maximize*/
-	tab->addTab( settings_tab, "pass", tr( "General Settings" ) );
-	tab->addTab( search_tab, "zoom", tr( "Searchmethods" ) );
+	vbox_layout->addWidget( search_tab );
+
 	showMaximized();
 }
 
