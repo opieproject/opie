@@ -1,97 +1,99 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>@default</name>
     <message>
         <source>Text Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Edition de texte</translation>
     </message>
     <message>
         <source>Write Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;écriture a échouée</translation>
     </message>
     <message>
         <source>Unnamed</source>
-        <translation type="unfinished"></translation>
+        <translation>Sansnom</translation>
     </message>
     <message>
         <source>Text Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Editeur de texte</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Tous</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Texte</translation>
     </message>
     <message>
         <source>Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Persmissions</translation>
     </message>
     <message>
         <source>Choose font</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisir une font</translation>
     </message>
     <message>
         <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
 from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous réellement &lt;B&gt;effacer&lt;/b&gt; le fichier courant
+du disque?&lt;br&gt; C&apos;est &lt;b&gt;irréversible!!&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Oui</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Non</translation>
     </message>
     <message>
         <source>Text Edit is copyright&lt;BR&gt;2000 Trolltech AS, and&lt;BR&gt;2002 by &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;and is licensed under the GPL</source>
-        <translation type="unfinished"></translation>
+        <translation>Text Edit est copyrighté&lt;br&gt;2000 Trolltech AS, et &lt;BR&gt;2002 par &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt; et est sous license GPL</translation>
     </message>
 </context>
 <context>
     <name>TextEdit</name>
     <message>
         <source>New</source>
-        <translation type="unfinished">Nouveau</translation>
+        <translation>Nouveau</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished">Ouvrir</translation>
+        <translation>Ouvrir</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Enregistrer</translation>
+        <translation>Enregistrer</translation>
     </message>
     <message>
         <source>Save As</source>
-        <translation type="unfinished">Enregistrer Sous</translation>
+        <translation>Enregistrer Sous</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation type="unfinished">Couper</translation>
+        <translation>Couper</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished">Copier</translation>
+        <translation>Copier</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation type="unfinished">Coller</translation>
+        <translation>Coller</translation>
     </message>
     <message>
         <source>Find...</source>
-        <translation type="unfinished">Chercher...</translation>
+        <translation>Chercher...</translation>
     </message>
     <message>
         <source>Zoom in</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoom avant</translation>
     </message>
     <message>
         <source>Zoom out</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoom arrière</translation>
     </message>
     <message>
         <source>Wrap lines</source>
@@ -99,67 +101,67 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
     </message>
     <message>
         <source>Start with new file</source>
-        <translation type="unfinished"></translation>
+        <translation>Démarrer avec un nouveau fichier</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished">Fichier</translation>
+        <translation>Fichier</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished">Edition</translation>
+        <translation>Edition</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Vue</translation>
     </message>
     <message>
         <source>Find Next</source>
-        <translation type="unfinished"></translation>
+        <translation>Trouver suivant</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Fermer &quot;Rechercher&quot;</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Effacer</translation>
+        <translation>Effacer</translation>
     </message>
     <message>
         <source>Text Editor</source>
-        <translation type="unfinished">Editeur Texte</translation>
+        <translation>Editeur Texte</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation type="unfinished">Fonte</translation>
+        <translation>Fonte</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>A propos</translation>
     </message>
     <message>
         <source>.desktop File</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier .desktop</translation>
     </message>
     <message>
         <source>Linked Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Raccourci de Document</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Tous</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Texte</translation>
     </message>
     <message>
         <source>Insert Time and Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Insérer la date et l&apos;heure</translation>
     </message>
     <message>
         <source>Advanced Features</source>
-        <translation type="unfinished"></translation>
+        <translation>Options avancées</translation>
     </message>
     <message>
         <source>Prompt on Exit</source>
@@ -167,11 +169,11 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
     </message>
     <message>
         <source>Always open linked file</source>
-        <translation type="unfinished"></translation>
+        <translation>Toujours ouvrir les fichiers raccourci</translation>
     </message>
     <message>
         <source>File Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Permissions de fichier</translation>
     </message>
     <message>
         <source>Search Bar Open</source>
@@ -182,67 +184,67 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
     <name>filePermissions</name>
     <message>
         <source>Set File Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Fixer les permissions du fichier</translation>
     </message>
     <message>
         <source>Set file permissions for:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fixer les permissions du fichier pour:</translation>
     </message>
     <message>
         <source>owner</source>
-        <translation type="unfinished">propriétaire</translation>
+        <translation>propriétaire</translation>
     </message>
     <message>
         <source>group</source>
-        <translation type="unfinished">groupe</translation>
+        <translation>groupe</translation>
     </message>
     <message>
         <source>others</source>
-        <translation type="unfinished"></translation>
+        <translation>autre</translation>
     </message>
     <message>
         <source>Owner</source>
-        <translation type="unfinished">Propriétaire</translation>
+        <translation>Propriétaire</translation>
     </message>
     <message>
         <source>Group</source>
-        <translation type="unfinished">Groupe</translation>
+        <translation>Groupe</translation>
     </message>
     <message>
         <source>read</source>
-        <translation type="unfinished">lectire</translation>
+        <translation>lecture</translation>
     </message>
     <message>
         <source>write</source>
-        <translation type="unfinished">écriture</translation>
+        <translation>écriture</translation>
     </message>
     <message>
         <source>execute</source>
-        <translation type="unfinished"></translation>
+        <translation>exécution</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Attention</translation>
     </message>
     <message>
         <source>Error- no user</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur- pas d&apos;utilisateur</translation>
     </message>
     <message>
         <source>Error- no  group</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur- pas de groupe</translation>
     </message>
     <message>
         <source>Error setting ownership or group</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur dans la définition du propriétatire ou du groupe</translation>
     </message>
     <message>
         <source>Error setting mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur dans la défintiion du mode</translation>
     </message>
     <message>
         <source>File Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Permissions du fichier</translation>
     </message>
 </context>
 </TS>
