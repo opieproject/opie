@@ -219,22 +219,16 @@ FileSystem::FileSystem( const QString &p )
 void FileSystem::update()
 {
 #if defined(_OS_LINUX_) || defined(Q_OS_LINUX)
-    struct statfs fs;
-    if ( !statfs( fspath.latin1(), &fs ) ) {
-        if( fspath.left(8) == "/mnt/ram") { //ugly hack openzaurus
-            blkSize = fs.f_bsize;
-            totalBlks = fs.f_blocks;
-            availBlks = fs.f_ffree;
-        } else {
-            blkSize = fs.f_bsize;
-            totalBlks = fs.f_blocks;
-            availBlks = fs.f_bavail;
-        }
-    } else {
-        blkSize = 0;
-        totalBlks = 0;
-        availBlks = 0;
-    }
+  struct statfs fs;
+  if ( !statfs( fspath.latin1(), &fs ) ) {
+    blkSize = fs.f_bsize;
+    totalBlks = fs.f_blocks;
+    availBlks = fs.f_bavail;
+  } else {
+    blkSize = 0;
+    totalBlks = 0;
+    availBlks = 0;
+  }
 #endif
 }
 
