@@ -75,7 +75,7 @@ Memory is categorized as follows:
 2. Buffers - temporary storage used to improve performance
 3. Cached - information that has recently been used, but has not been freed yet.
 4. Free - memory not currently used by Opie or any running applications.</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Used (%1 kB)</source>
@@ -96,6 +96,20 @@ Memory is categorized as follows:
     <message>
         <source>Total Memory: %1 kB</source>
         <translation>FOO</translation>
+    </message>
+    <message>
+        <source>This page shows how memory (i.e. RAM) is being allocated on your device.
+Memory is categorized as follows:
+
+1. Used - memory used to by Opie and any running applications.
+2. Buffers - temporary storage used to improve performance
+3. Cached - information that has recently been used, but has not been freed yet.
+4. Free - memory not currently used by Opie or any running applications.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Total Swap: %1 kB</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -214,7 +228,12 @@ Click and hold on a process to see additional information about the process, or 
     </message>
     <message>
         <source>You really want to send %1 to this process?</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
+    </message>
+    <message>
+        <source>Really want to send %1
+to this process?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -272,15 +291,23 @@ Click and hold on a process to see additional information about the process, or 
     </message>
     <message>
         <source>&lt;p&gt;Model: </source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>&lt;p&gt;Vendor: </source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>This page shows the current versions of Opie, the Linux kernel and distribution running on this handheld device.</source>
         <translation>FOO</translation>
+    </message>
+    <message>
+        <source>&lt;br&gt;Model: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;br&gt;Vendor: </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

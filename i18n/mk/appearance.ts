@@ -194,19 +194,19 @@ This area allows you to select an application and which settings you wish to dis
     </message>
     <message>
         <source>Restart</source>
-        <translation>Рестарт</translation>
+        <translation type="obsolete">Рестарт</translation>
     </message>
     <message>
         <source>Do you want to restart %1 now?</source>
-        <translation>Дали сакате да рестартиреате %1 сега?</translation>
+        <translation type="obsolete">Дали сакате да рестартиреате %1 сега?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Да</translation>
+        <translation type="obsolete">Да</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>Не</translation>
+        <translation type="obsolete">Не</translation>
     </message>
     <message>
         <source>Save Scheme</source>

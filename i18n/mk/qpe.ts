@@ -13,6 +13,10 @@
         <source>Personal Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>DocTab</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AppLauncher</name>
@@ -238,6 +242,10 @@ Please charge the back-up battery.</source>
         <source>&lt;b&gt;Finding Documents...&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&lt;b&gt;The Documents Tab&lt;p&gt;has been disabled.&lt;p&gt;Use Settings-&gt;Launcher-&gt;DocTab&lt;p&gt;to reenable it.&lt;/b&gt;&lt;/center&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LauncherView</name>
@@ -354,21 +362,17 @@ Please charge the back-up battery.</source>
     <message>
         <source>Battery level is critical!
 Keep power off until power restored!</source>
-        <translation type="unfinished">Нивото на батеријата е критично!</translation>
+        <translation type="obsolete">Нивото на батеријата е критично!</translation>
     </message>
     <message>
         <source>The Back-up battery is very low.
 Please charge the back-up battery.</source>
-        <translation type="unfinished">Помошната батерија е многу слаба.
+        <translation type="obsolete">Помошната батерија е многу слаба.
 Наполни ја помошната батерија.</translation>
     </message>
     <message>
         <source>business card</source>
         <translation type="unfinished">Визиткарта</translation>
-    </message>
-    <message>
-        <source>Battery is running very low. </source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Safe Mode</source>
@@ -399,6 +403,26 @@ Please save data.</source>
         <source>Critical Memory Shortage
 Please end this application
 immediately.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WARNING</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;The battery level is critical!&lt;p&gt;Keep power off until AC is restored</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The battery is running very low. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;The Back-up battery is very low&lt;p&gt;Please charge the back-up battery</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -447,7 +471,7 @@ These termination options are provided primarily for use while developing and te
     </message>
     <message>
         <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade.</source>
-        <translation type="unfinished">&lt;p&gt;Неавторизиран систем бара да се поврзе со овој уред.&lt;p&gt;Aко користите веризја на Qtopia постара од 1.5.1 надградете ја.</translation>
+        <translation type="obsolete">&lt;p&gt;Неавторизиран систем бара да се поврзе со овој уред.&lt;p&gt;Aко користите веризја на Qtopia постара од 1.5.1 надградете ја.</translation>
     </message>
     <message>
         <source>Deny</source>
@@ -460,6 +484,10 @@ These termination options are provided primarily for use while developing and te
     <message>
         <source>Allow</source>
         <translation type="unfinished">Дозволи</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade or change the security setting to use IntelliSync.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

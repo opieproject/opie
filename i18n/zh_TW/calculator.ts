@@ -126,7 +126,7 @@
     <name>CalculatorImpl</name>
     <message>
         <source>Calculator</source>
-        <translation>計算機</translation>
+        <translation type="obsolete">計算機</translation>
     </message>
     <message>
         <source>Standard</source>

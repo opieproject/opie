@@ -1347,167 +1347,167 @@ Opie-Mail fås gratis!</translation>
     <name>QObject</name>
     <message>
         <source>Business Phone</source>
-        <translation>Arbejdstelefon</translation>
+        <translation type="obsolete">Arbejdstelefon</translation>
     </message>
     <message>
         <source>Business Fax</source>
-        <translation>Arbejdsfax</translation>
+        <translation type="obsolete">Arbejdsfax</translation>
     </message>
     <message>
         <source>Business Mobile</source>
-        <translation>Arbejdsmobil</translation>
+        <translation type="obsolete">Arbejdsmobil</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation>Standard email</translation>
+        <translation type="obsolete">Standard email</translation>
     </message>
     <message>
         <source>Emails</source>
-        <translation>Emails</translation>
+        <translation type="obsolete">Emails</translation>
     </message>
     <message>
         <source>Home Phone</source>
-        <translation>Hjemmetelefon</translation>
+        <translation type="obsolete">Hjemmetelefon</translation>
     </message>
     <message>
         <source>Home Fax</source>
-        <translation>Hjemmefax</translation>
+        <translation type="obsolete">Hjemmefax</translation>
     </message>
     <message>
         <source>Home Mobile</source>
-        <translation>Hjemmemobil</translation>
+        <translation type="obsolete">Hjemmemobil</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation>Kontor</translation>
+        <translation type="obsolete">Kontor</translation>
     </message>
     <message>
         <source>Profession</source>
-        <translation>Profession</translation>
+        <translation type="obsolete">Profession</translation>
     </message>
     <message>
         <source>Assistant</source>
-        <translation>Assistent</translation>
+        <translation type="obsolete">Assistent</translation>
     </message>
     <message>
         <source>Manager</source>
-        <translation>Bestyrer</translation>
+        <translation type="obsolete">Bestyrer</translation>
     </message>
     <message>
         <source>Spouse</source>
-        <translation>Ægtefælle</translation>
+        <translation type="obsolete">Ægtefælle</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation>Køn</translation>
+        <translation type="obsolete">Køn</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation>Fødselsdag</translation>
+        <translation type="obsolete">Fødselsdag</translation>
     </message>
     <message>
         <source>Anniversary</source>
-        <translation>Årsdag</translation>
+        <translation type="obsolete">Årsdag</translation>
     </message>
     <message>
         <source>Nickname</source>
-        <translation>Øgenavn</translation>
+        <translation type="obsolete">Øgenavn</translation>
     </message>
     <message>
         <source>Children</source>
-        <translation>Børn</translation>
+        <translation type="obsolete">Børn</translation>
     </message>
     <message>
         <source>Name Title</source>
-        <translation>Navn titel</translation>
+        <translation type="obsolete">Navn titel</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation>Fornavn</translation>
+        <translation type="obsolete">Fornavn</translation>
     </message>
     <message>
         <source>Middle Name</source>
-        <translation>Mellemnavn</translation>
+        <translation type="obsolete">Mellemnavn</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation>Efternavn</translation>
+        <translation type="obsolete">Efternavn</translation>
     </message>
     <message>
         <source>Suffix</source>
-        <translation>Suffiks</translation>
+        <translation type="obsolete">Suffiks</translation>
     </message>
     <message>
         <source>File As</source>
-        <translation>Gem som</translation>
+        <translation type="obsolete">Gem som</translation>
     </message>
     <message>
         <source>Job Title</source>
-        <translation>Job titel</translation>
+        <translation type="obsolete">Job titel</translation>
     </message>
     <message>
         <source>Department</source>
-        <translation>Afdeling</translation>
+        <translation type="obsolete">Afdeling</translation>
     </message>
     <message>
         <source>Company</source>
-        <translation>Firma</translation>
+        <translation type="obsolete">Firma</translation>
     </message>
     <message>
         <source>Business Street</source>
-        <translation>Arbejds adresse</translation>
+        <translation type="obsolete">Arbejds adresse</translation>
     </message>
     <message>
         <source>Business City</source>
-        <translation>Arbejds by</translation>
+        <translation type="obsolete">Arbejds by</translation>
     </message>
     <message>
         <source>Business State</source>
-        <translation>Arbejds stat</translation>
+        <translation type="obsolete">Arbejds stat</translation>
     </message>
     <message>
         <source>Business Zip</source>
-        <translation>Arbejds postnummer</translation>
+        <translation type="obsolete">Arbejds postnummer</translation>
     </message>
     <message>
         <source>Business Country</source>
-        <translation>Arbejds land</translation>
+        <translation type="obsolete">Arbejds land</translation>
     </message>
     <message>
         <source>Business Pager</source>
-        <translation>Arbejds personsøger</translation>
+        <translation type="obsolete">Arbejds personsøger</translation>
     </message>
     <message>
         <source>Business WebPage</source>
-        <translation>Arbejds hjemmeside</translation>
+        <translation type="obsolete">Arbejds hjemmeside</translation>
     </message>
     <message>
         <source>Home Street</source>
-        <translation>Hjemmeadresse</translation>
+        <translation type="obsolete">Hjemmeadresse</translation>
     </message>
     <message>
         <source>Home City</source>
-        <translation>Hjemmeby</translation>
+        <translation type="obsolete">Hjemmeby</translation>
     </message>
     <message>
         <source>Home State</source>
-        <translation>Hjemmestat</translation>
+        <translation type="obsolete">Hjemmestat</translation>
     </message>
     <message>
         <source>Home Zip</source>
-        <translation>Hjemmepostnummer</translation>
+        <translation type="obsolete">Hjemmepostnummer</translation>
     </message>
     <message>
         <source>Home Country</source>
-        <translation>Hjemmeland</translation>
+        <translation type="obsolete">Hjemmeland</translation>
     </message>
     <message>
         <source>Home Web Page</source>
-        <translation>Hjemme website</translation>
+        <translation type="obsolete">Hjemme website</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation>Noter</translation>
+        <translation type="obsolete">Noter</translation>
     </message>
 </context>
 </TS>

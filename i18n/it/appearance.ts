@@ -194,19 +194,19 @@ Quest&apos;area permette di selezionare un&apos;applicazione e quali impostazion
     </message>
     <message>
         <source>Restart</source>
-        <translation>Riavvia</translation>
+        <translation type="obsolete">Riavvia</translation>
     </message>
     <message>
         <source>Do you want to restart %1 now?</source>
-        <translation>Vuoi riavviare %1 ora?</translation>
+        <translation type="obsolete">Vuoi riavviare %1 ora?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Sì</translation>
+        <translation type="obsolete">Sì</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>No</translation>
+        <translation type="obsolete">No</translation>
     </message>
     <message>
         <source>Save Scheme</source>

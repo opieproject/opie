@@ -222,7 +222,7 @@ Afslut alligevel?</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation>Beskrivelse</translation>
+        <translation type="obsolete">Beskrivelse</translation>
     </message>
     <message>
         <source>Deadline</source>
@@ -339,6 +339,10 @@ Det hjælper dig med hurtigt at tilføje en ny opgave til din liste. Dette områ
     <message>
         <source>Data can&apos;t be edited, currently syncing</source>
         <translation>Data kan ikke redigeres, er ved at synkronisere</translation>
+    </message>
+    <message>
+        <source>Summary</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

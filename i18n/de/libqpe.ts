@@ -867,19 +867,19 @@ frei und versuchen Sie es noch einmal
     </message>
     <message>
         <source>Error</source>
-        <translation>Fehler</translation>
+        <translation type="obsolete">Fehler</translation>
     </message>
     <message>
         <source>Could not find the application </source>
-        <translation>Konnte die Anwendung nicht finden</translation>
+        <translation type="obsolete">Konnte die Anwendung nicht finden</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation type="obsolete">Ok</translation>
     </message>
     <message>
         <source>Could not start the application </source>
-        <translation>Konnte die Anwendung nicht starten</translation>
+        <translation type="obsolete">Konnte die Anwendung nicht starten</translation>
     </message>
 </context>
 <context>

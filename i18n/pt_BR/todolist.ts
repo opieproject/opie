@@ -223,7 +223,7 @@ Sair assim mesmo ?</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation>Descrição</translation>
+        <translation type="obsolete">Descrição</translation>
     </message>
     <message>
         <source>Deadline</source>
@@ -340,6 +340,10 @@ Ela permite que você adicione rapidamente uma nova tarefa a sua lista.  Esta co
     <message>
         <source>Data can&apos;t be edited, currently syncing</source>
         <translation>Dados não podem ser editados. Sincronização em andamento</translation>
+    </message>
+    <message>
+        <source>Summary</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

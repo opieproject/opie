@@ -8,6 +8,13 @@
     </message>
 </context>
 <context>
+    <name>LightSettings</name>
+    <message>
+        <source>Backlight &amp;&amp; Contrast</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>LightSettingsBase</name>
     <message>
         <source>Off</source>
@@ -111,6 +118,18 @@
     </message>
     <message>
         <source>critical power warning at</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CPU Frequency</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>set a fix value for contrast</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CPU frequency</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -193,19 +193,19 @@ Dit gedeelte geeft de mogelijkheid een programma te selecteren en de uit te scha
     </message>
     <message>
         <source>Restart</source>
-        <translation>Herstart</translation>
+        <translation type="obsolete">Herstart</translation>
     </message>
     <message>
         <source>Do you want to restart %1 now?</source>
-        <translation>Wil je %1 nu herstarten?</translation>
+        <translation type="obsolete">Wil je %1 nu herstarten?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Ja</translation>
+        <translation type="obsolete">Ja</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>Nee</translation>
+        <translation type="obsolete">Nee</translation>
     </message>
     <message>
         <source>Save Scheme</source>

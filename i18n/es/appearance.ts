@@ -83,19 +83,19 @@
     </message>
     <message>
         <source>Restart</source>
-        <translation>Reiniciar</translation>
+        <translation type="obsolete">Reiniciar</translation>
     </message>
     <message>
         <source>Do you want to restart %1 now?</source>
-        <translation>¿Quiere reiniciar ahora?</translation>
+        <translation type="obsolete">¿Quiere reiniciar ahora?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Sí</translation>
+        <translation type="obsolete">Sí</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>No</translation>
+        <translation type="obsolete">No</translation>
     </message>
     <message>
         <source>Save Scheme</source>

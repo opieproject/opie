@@ -205,13 +205,13 @@ Fermeture du lecteur en cours.</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation>Plus de mémoire</translation>
+        <translation type="obsolete">Plus de mémoire</translation>
     </message>
     <message>
         <source>There was a problem saving the playlist.
 Your playlist may be missing some entries
 the next time you start it.</source>
-        <translation>Un problème est survenu lors de la sauvegarde
+        <translation type="obsolete">Un problème est survenu lors de la sauvegarde
 de la liste. Votre liste sera peut-être incomplète
 lors du prochain chargement.</translation>
     </message>

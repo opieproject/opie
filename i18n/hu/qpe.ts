@@ -13,6 +13,10 @@
         <source>Personal Information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>DocTab</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AppLauncher</name>
@@ -231,6 +235,10 @@ Kérem töltse fel a biztonsági-elemt.</translation>
         <source>&lt;b&gt;Finding Documents...&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&lt;b&gt;The Documents Tab&lt;p&gt;has been disabled.&lt;p&gt;Use Settings-&gt;Launcher-&gt;DocTab&lt;p&gt;to reenable it.&lt;/b&gt;&lt;/center&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LauncherView</name>
@@ -347,22 +355,18 @@ Kérem töltse fel a biztonsági-elemt.</translation>
     <message>
         <source>Battery level is critical!
 Keep power off until power restored!</source>
-        <translation type="unfinished">Az elem szintje kritikus!
+        <translation type="obsolete">Az elem szintje kritikus!
 Tartsa kikapcsolva, amíg az áramellátás visszaáll!</translation>
     </message>
     <message>
         <source>The Back-up battery is very low.
 Please charge the back-up battery.</source>
-        <translation type="unfinished">A biztonsági-elem szintje nagyon alacsony.
+        <translation type="obsolete">A biztonsági-elem szintje nagyon alacsony.
 Kérem töltse fel a biztonsági-elemt.</translation>
     </message>
     <message>
         <source>business card</source>
         <translation type="unfinished">névjegykártya</translation>
-    </message>
-    <message>
-        <source>Battery is running very low. </source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Safe Mode</source>
@@ -393,6 +397,26 @@ Please save data.</source>
         <source>Critical Memory Shortage
 Please end this application
 immediately.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WARNING</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;The battery level is critical!&lt;p&gt;Keep power off until AC is restored</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The battery is running very low. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;The Back-up battery is very low&lt;p&gt;Please charge the back-up battery</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -441,7 +465,7 @@ Ezeka bezárási lehetőségek elsősorban az Opie fejlesztése és tesztelése 
     </message>
     <message>
         <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade.</source>
-        <translation type="unfinished">&lt;p&gt;Egy jogosulatlan rendszer hozzáférést kér ehhez az eszközhöz.&lt;p&gt;Ha a Qtopia Desktop 1.5.1-es verziójánál régebbit használ, kérjük frissítsen.</translation>
+        <translation type="obsolete">&lt;p&gt;Egy jogosulatlan rendszer hozzáférést kér ehhez az eszközhöz.&lt;p&gt;Ha a Qtopia Desktop 1.5.1-es verziójánál régebbit használ, kérjük frissítsen.</translation>
     </message>
     <message>
         <source>Deny</source>
@@ -454,6 +478,10 @@ Ezeka bezárási lehetőségek elsősorban az Opie fejlesztése és tesztelése 
     <message>
         <source>Allow</source>
         <translation type="unfinished">Engedélyez</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade or change the security setting to use IntelliSync.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

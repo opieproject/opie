@@ -151,6 +151,10 @@ Afslut alligevel?</translation>
         <source>Sunday</source>
         <translation>Søndag</translation>
     </message>
+    <message>
+        <source>DateBookDayHeaderBase</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookDayView</name>
@@ -370,7 +374,7 @@ Afslut alligevel?</translation>
     <message>
         <source>MTWTFSSM</source>
         <comment>Week days</comment>
-        <translation type="obsolete">MTOTFLSM</translation>
+        <translation type="unfinished">MTOTFLSM</translation>
     </message>
 </context>
 <context>
@@ -489,7 +493,7 @@ Afslut alligevel?</translation>
     </message>
     <message>
         <source>Start time</source>
-        <translation type="obsolete">Start tid</translation>
+        <translation type="unfinished">Start tid</translation>
     </message>
     <message>
         <source>All day</source>
@@ -529,7 +533,7 @@ Afslut alligevel?</translation>
     </message>
     <message>
         <source>Start Time</source>
-        <translation type="unfinished">Start tid</translation>
+        <translation type="obsolete">Start tid</translation>
     </message>
 </context>
 <context>

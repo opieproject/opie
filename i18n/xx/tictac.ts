@@ -3,7 +3,7 @@
     <name>QObject</name>
     <message>
         <source>TicTac</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
 </context>
 <context>

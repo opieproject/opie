@@ -197,7 +197,7 @@ echt &lt;font size=+2&gt;&lt;B&gt;VERWIJDEREN&lt;/B&gt;&lt;/font&gt;?</translati
     </message>
     <message>
         <source>auto Mute</source>
-        <translation>auto Stil</translation>
+        <translation type="obsolete">auto Stil</translation>
     </message>
     <message>
         <source>mute</source>
@@ -206,6 +206,14 @@ echt &lt;font size=+2&gt;&lt;B&gt;VERWIJDEREN&lt;/B&gt;&lt;/font&gt;?</translati
     <message>
         <source>Stop</source>
         <translation>Stop</translation>
+    </message>
+    <message>
+        <source>Auto Mute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stereo Channels</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

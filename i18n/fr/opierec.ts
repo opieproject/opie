@@ -198,7 +198,7 @@ des fichiers sélectionnés ?</translation>
     </message>
     <message>
         <source>auto Mute</source>
-        <translation>Silence auto </translation>
+        <translation type="obsolete">Silence auto </translation>
     </message>
     <message>
         <source>mute</source>
@@ -207,6 +207,14 @@ des fichiers sélectionnés ?</translation>
     <message>
         <source>Stop</source>
         <translation>Stopper</translation>
+    </message>
+    <message>
+        <source>Auto Mute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stereo Channels</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -95,13 +95,27 @@ Memory is categorized as follows:
 2. Buffers - temporary storage used to improve performance
 3. Cached - information that has recently been used, but has not been freed yet.
 4. Free - memory not currently used by Opie or any running applications.</source>
-        <translation>Ta strona prezentuje alokacje pamieci (np. RAM) na Twoim urzadzeniu.
+        <translation type="obsolete">Ta strona prezentuje alokacje pamieci (np. RAM) na Twoim urzadzeniu.
 Pamiec jest podzielona na kategorie:
 
 1. Uzywana - pamiec uzywana przez Opie i inne dzialajace aplikacje.
 2. Bufory - tymczasowa przestrzen uzywana do poprawienia wydajnosci.
 3. Podreczna - informacje, ktore zostaly juz uzyte, ale nie zostaly jeszcze zwolnione.
 4. Wolna - pamiec nie bedaca aktualnie w uzyciu przez zadne aplikacje.</translation>
+    </message>
+    <message>
+        <source>This page shows how memory (i.e. RAM) is being allocated on your device.
+Memory is categorized as follows:
+
+1. Used - memory used to by Opie and any running applications.
+2. Buffers - temporary storage used to improve performance
+3. Cached - information that has recently been used, but has not been freed yet.
+4. Free - memory not currently used by Opie or any running applications.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Total Swap: %1 kB</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -210,7 +224,12 @@ Kliknij i przytrzymaj na procesie by zobaczyc dodatkowe informacje o nim lub by 
     </message>
     <message>
         <source>You really want to send %1 to this process?</source>
-        <translation>Czy na pewno chcesz wyslac %1 do tego procesu?</translation>
+        <translation type="obsolete">Czy na pewno chcesz wyslac %1 do tego procesu?</translation>
+    </message>
+    <message>
+        <source>Really want to send %1
+to this process?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -268,15 +287,23 @@ Kliknij i przytrzymaj na procesie by zobaczyc dodatkowe informacje o nim lub by 
     </message>
     <message>
         <source>&lt;p&gt;Model: </source>
-        <translation>&lt;p&gt;Model:</translation>
+        <translation type="obsolete">&lt;p&gt;Model:</translation>
     </message>
     <message>
         <source>&lt;p&gt;Vendor: </source>
-        <translation>&lt;p&gt;Sprzedawca:</translation>
+        <translation type="obsolete">&lt;p&gt;Sprzedawca:</translation>
     </message>
     <message>
         <source>This page shows the current versions of Opie, the Linux kernel and distribution running on this handheld device.</source>
         <translation>Ta strona prezentuje aktualne wersje Opie, jadra Linuksa i dystrybucji dzialajacych na tym urzadzeniu.</translation>
+    </message>
+    <message>
+        <source>&lt;br&gt;Model: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;br&gt;Vendor: </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

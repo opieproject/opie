@@ -196,7 +196,7 @@ the selected file?</source>
     </message>
     <message>
         <source>auto Mute</source>
-        <translation>Silêncio Automático</translation>
+        <translation type="obsolete">Silêncio Automático</translation>
     </message>
     <message>
         <source>mute</source>
@@ -205,6 +205,14 @@ the selected file?</source>
     <message>
         <source>Stop</source>
         <translation>Parar</translation>
+    </message>
+    <message>
+        <source>Auto Mute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stereo Channels</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -230,7 +230,7 @@ Voulez-vous quitter ?</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation>Description</translation>
+        <translation type="obsolete">Description</translation>
     </message>
     <message>
         <source>Deadline</source>
@@ -347,6 +347,10 @@ It allows you to quickly add a new task to your list.  This area can be shown or
 Cette partie est appelé &quot;la barre d&apos;outils&quot;.
 
 Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. Cette partie peut-être affichée ou cachée en selectionnant Option-&gt;&apos;Montrer la barre d&apos;outils&apos; dans le menu ci-dessus.</translation>
+    </message>
+    <message>
+        <source>Summary</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

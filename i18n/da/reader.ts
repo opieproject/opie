@@ -315,7 +315,7 @@ Leading</source>
     <name>CMarkBarPrefs</name>
     <message>
         <source>Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Bogmærke</translation>
     </message>
     <message>
         <source>Annotate</source>
@@ -440,15 +440,15 @@ Leading</source>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tilbage</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Hjem</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Frem</translation>
     </message>
     <message>
         <source>Page Up</source>
@@ -676,7 +676,7 @@ Leading</source>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Visning</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -720,15 +720,15 @@ Leading</source>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tilbage</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Hjem</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Frem</translation>
     </message>
     <message>
         <source>Scrolling</source>
@@ -752,7 +752,7 @@ Leading</source>
     </message>
     <message>
         <source>Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Bogmærke</translation>
     </message>
     <message>
         <source>Reader</source>

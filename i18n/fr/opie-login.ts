@@ -51,7 +51,7 @@ accurately to calibrate your screen.</source>
     </message>
     <message>
         <source>&lt;center&gt;%1 %2&lt;/center&gt;</source>
-        <translation>&lt;center&gt;%1 %2&lt;/center&gt;</translation>
+        <translation type="obsolete">&lt;center&gt;%1 %2&lt;/center&gt;</translation>
     </message>
     <message>
         <source>Wrong password</source>
@@ -95,6 +95,10 @@ signal non pris en charge
     <message>
         <source>Could not start Opie.</source>
         <translation>Impossible de démarrer Opie.</translation>
+    </message>
+    <message>
+        <source>&lt;center&gt;Welcome to OPIE %1&lt;/center&gt;&lt;center&gt;&amp; %2 %3&lt;/center&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -50,10 +50,6 @@ for at kalibrere skærmen.</translation>
         <translation>Afslut</translation>
     </message>
     <message>
-        <source>&lt;center&gt;%1 %2&lt;/center&gt;</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Wrong password</source>
         <translation>Forkert kodeord</translation>
     </message>
@@ -79,6 +75,10 @@ by an uncaught signal
     <message>
         <source>Could not start Opie.</source>
         <translation>Kunne ikke starte Opie.</translation>
+    </message>
+    <message>
+        <source>&lt;center&gt;Welcome to OPIE %1&lt;/center&gt;&lt;center&gt;&amp; %2 %3&lt;/center&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

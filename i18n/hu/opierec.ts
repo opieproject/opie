@@ -193,15 +193,19 @@ the selected file?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>auto Mute</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>mute</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Stop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto Mute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stereo Channels</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

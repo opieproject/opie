@@ -151,6 +151,10 @@ longa que o intervalo entre repetições.</translation>
         <source>Thursday</source>
         <translation>Quinta</translation>
     </message>
+    <message>
+        <source>DateBookDayHeaderBase</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookDayView</name>
@@ -366,6 +370,14 @@ longa que o intervalo entre repetições.</translation>
     </message>
 </context>
 <context>
+    <name>DateBookWeekLstDayHdr</name>
+    <message>
+        <source>MTWTFSSM</source>
+        <comment>Week days</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>
@@ -517,7 +529,11 @@ longa que o intervalo entre repetições.</translation>
     </message>
     <message>
         <source>Start Time</source>
-        <translation>Horário Inicial</translation>
+        <translation type="obsolete">Horário Inicial</translation>
+    </message>
+    <message>
+        <source>Start time</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

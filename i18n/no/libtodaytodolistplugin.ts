@@ -37,7 +37,4 @@
         <translation type="unfinished"></translation>
     </message>
 </context>
-<context>
-    <name>TodolistPluginConfig</name>
-</context>
 </TS>

@@ -128,10 +128,6 @@
         <source>Standard</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Calculator</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>QObject</name>

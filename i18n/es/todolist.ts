@@ -222,7 +222,7 @@ e inténtelo de nuevo.
     </message>
     <message>
         <source>Description</source>
-        <translation>Descripción</translation>
+        <translation type="obsolete">Descripción</translation>
     </message>
     <message>
         <source>Deadline</source>
@@ -339,6 +339,10 @@ Le permite añadir rápidamente una nueva tarea a la lista. Esta área puede mos
     <message>
         <source>Data can&apos;t be edited, currently syncing</source>
         <translation>Los datos no pueden ser editados, estoy sincronizando</translation>
+    </message>
+    <message>
+        <source>Summary</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

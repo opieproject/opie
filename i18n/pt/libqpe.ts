@@ -863,19 +863,19 @@ novamente.</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Erro</translation>
+        <translation type="obsolete">Erro</translation>
     </message>
     <message>
         <source>Could not find the application </source>
-        <translation>Não foi possível encontrar a aplicação</translation>
+        <translation type="obsolete">Não foi possível encontrar a aplicação</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation type="obsolete">Ok</translation>
     </message>
     <message>
         <source>Could not start the application </source>
-        <translation>Não foi possível iniciar a aplicação</translation>
+        <translation type="obsolete">Não foi possível iniciar a aplicação</translation>
     </message>
 </context>
 <context>

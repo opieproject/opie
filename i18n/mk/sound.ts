@@ -124,5 +124,9 @@
         <source>Restart Opie if needed</source>
         <translation>Рестартирај го Opiе ако треба</translation>
     </message>
+    <message>
+        <source>Use ADPCM compression</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

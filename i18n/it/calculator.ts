@@ -130,7 +130,7 @@
     </message>
     <message>
         <source>Calculator</source>
-        <translation>Calcolatrice</translation>
+        <translation type="obsolete">Calcolatrice</translation>
     </message>
 </context>
 <context>

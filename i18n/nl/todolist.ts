@@ -226,7 +226,7 @@ Toch stoppen?</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation>Omschrijving</translation>
+        <translation type="obsolete">Omschrijving</translation>
     </message>
     <message>
         <source>Deadline</source>
@@ -343,6 +343,10 @@ Deze staat u toe om snel een nieuwe taak aan de lijst toe te voegen. Dit vlak ka
     <message>
         <source>Data can&apos;t be edited, currently syncing</source>
         <translation>Kan data niet wijzigen tijdens synchronisatie</translation>
+    </message>
+    <message>
+        <source>Summary</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

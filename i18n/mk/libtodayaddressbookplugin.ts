@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>To activate settings: Restart application !</source>
-        <translation type="obsolete">За да се активираат промените: Рестартирај ја апликацијата!</translation>
+        <translation type="unfinished">За да се активираат промените: Рестартирај ја апликацијата!</translation>
     </message>
     <message>
         <source>Set Headline Color: </source>
@@ -62,6 +62,26 @@ Color if below </source>
     <message>
         <source>The urgent color will be used if the birthday/anniversary is closer than given days !</source>
         <translation>Оваа боја ќе се користи ако роденденот/годишнијната е поблиски од дадениот број на денови!</translation>
+    </message>
+    <message>
+        <source>Enable/Disable Views</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show &amp;Birthdays</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show &amp;Anniveraries</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The next birthdays will just be shown, if enabled!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The next anniversaries will just be shown, if enabled !</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -3,7 +3,7 @@
     <name>Today</name>
     <message>
         <source>Today</source>
-        <translation>Dzisiaj</translation>
+        <translation type="obsolete">Dzisiaj</translation>
     </message>
     <message>
         <source>Please fill out the business card</source>

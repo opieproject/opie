@@ -150,6 +150,10 @@ Mégis kilép?</translation>
         <source>Sunday</source>
         <translation>Vasárnap</translation>
     </message>
+    <message>
+        <source>DateBookDayHeaderBase</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookDayView</name>
@@ -365,6 +369,14 @@ Mégis kilép?</translation>
     </message>
 </context>
 <context>
+    <name>DateBookWeekLstDayHdr</name>
+    <message>
+        <source>MTWTFSSM</source>
+        <comment>Week days</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>
@@ -472,7 +484,7 @@ Mégis kilép?</translation>
     </message>
     <message>
         <source>Start time</source>
-        <translation type="obsolete">Kezdő időpont</translation>
+        <translation type="unfinished">Kezdő időpont</translation>
     </message>
     <message>
         <source>All day</source>
@@ -520,7 +532,7 @@ Mégis kilép?</translation>
     </message>
     <message>
         <source>Start Time</source>
-        <translation type="unfinished">Kezdő időpont</translation>
+        <translation type="obsolete">Kezdő időpont</translation>
     </message>
 </context>
 <context>

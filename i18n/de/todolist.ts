@@ -226,7 +226,7 @@ Es wird gerade synchronisiert</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation>Beschreibung</translation>
+        <translation type="obsolete">Beschreibung</translation>
     </message>
     <message>
         <source>Deadline</source>
@@ -338,6 +338,10 @@ Er ermöglicht die schnelle Erfassung einer neuen Aufgabe. Dieser Bereich kann e
     <message>
         <source>Data can&apos;t be edited, currently syncing</source>
         <translation>Daten können nicht bearbeitet werden, es wird synchronisiert</translation>
+    </message>
+    <message>
+        <source>Summary</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

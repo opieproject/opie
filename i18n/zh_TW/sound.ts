@@ -124,5 +124,9 @@
         <source>Key_Record</source>
         <translation>錄音鍵</translation>
     </message>
+    <message>
+        <source>Use ADPCM compression</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

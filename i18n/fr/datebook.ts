@@ -152,6 +152,10 @@ Quitter ?</translation>
         <source>Sunday</source>
         <translation>Dimanche</translation>
     </message>
+    <message>
+        <source>DateBookDayHeaderBase</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookDayView</name>
@@ -372,7 +376,7 @@ dans : </translation>
     <message>
         <source>MTWTFSSM</source>
         <comment>Week days</comment>
-        <translation type="obsolete">LMMJVSDL</translation>
+        <translation type="unfinished">LMMJVSDL</translation>
     </message>
 </context>
 <context>
@@ -520,7 +524,7 @@ fin</translation>
     </message>
     <message>
         <source>Start time</source>
-        <translation type="obsolete">Heure
+        <translation type="unfinished">Heure
 de début</translation>
     </message>
     <message>
@@ -572,7 +576,7 @@ Horaire
     </message>
     <message>
         <source>Start Time</source>
-        <translation>Heure de
+        <translation type="obsolete">Heure de
 début</translation>
     </message>
 </context>

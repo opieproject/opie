@@ -305,6 +305,13 @@ et tout son contenu ?</translation>
         <source>Not Yet Implemented</source>
         <translation>Pas Encore Implémenté</translation>
     </message>
+    <message>
+        <source>Could not copy 
+%1 
+to 
+%2</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Output</name>

@@ -145,6 +145,10 @@ Quit anyway?</source>
         <source>Sunday</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>DateBookDayHeaderBase</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookDayView</name>
@@ -360,6 +364,14 @@ Quit anyway?</source>
     </message>
 </context>
 <context>
+    <name>DateBookWeekLstDayHdr</name>
+    <message>
+        <source>MTWTFSSM</source>
+        <comment>Week days</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>
@@ -510,7 +522,7 @@ Quit anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Start Time</source>
+        <source>Start time</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -1349,167 +1349,167 @@ wird nach dem Neustart der Anwendung aktiv!</translation>
     <name>QObject</name>
     <message>
         <source>Business Phone</source>
-        <translation>Tel. gesch.</translation>
+        <translation type="obsolete">Tel. gesch.</translation>
     </message>
     <message>
         <source>Business Fax</source>
-        <translation>Fax gesch.</translation>
+        <translation type="obsolete">Fax gesch.</translation>
     </message>
     <message>
         <source>Business Mobile</source>
-        <translation>Handy gesch.</translation>
+        <translation type="obsolete">Handy gesch.</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation>Standard-EMail</translation>
+        <translation type="obsolete">Standard-EMail</translation>
     </message>
     <message>
         <source>Emails</source>
-        <translation>E-Mails</translation>
+        <translation type="obsolete">E-Mails</translation>
     </message>
     <message>
         <source>Home Phone</source>
-        <translation>Priv. Telefon</translation>
+        <translation type="obsolete">Priv. Telefon</translation>
     </message>
     <message>
         <source>Home Fax</source>
-        <translation>Priv. Fax</translation>
+        <translation type="obsolete">Priv. Fax</translation>
     </message>
     <message>
         <source>Home Mobile</source>
-        <translation>Priv. Handy</translation>
+        <translation type="obsolete">Priv. Handy</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation>Büro</translation>
+        <translation type="obsolete">Büro</translation>
     </message>
     <message>
         <source>Profession</source>
-        <translation>Beruf</translation>
+        <translation type="obsolete">Beruf</translation>
     </message>
     <message>
         <source>Assistant</source>
-        <translation>Assistent</translation>
+        <translation type="obsolete">Assistent</translation>
     </message>
     <message>
         <source>Manager</source>
-        <translation>Manager</translation>
+        <translation type="obsolete">Manager</translation>
     </message>
     <message>
         <source>Spouse</source>
-        <translation>Ehepartner</translation>
+        <translation type="obsolete">Ehepartner</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation>Geschlecht</translation>
+        <translation type="obsolete">Geschlecht</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation>Geburtstag</translation>
+        <translation type="obsolete">Geburtstag</translation>
     </message>
     <message>
         <source>Anniversary</source>
-        <translation>Jahrestag</translation>
+        <translation type="obsolete">Jahrestag</translation>
     </message>
     <message>
         <source>Nickname</source>
-        <translation>Spitzname</translation>
+        <translation type="obsolete">Spitzname</translation>
     </message>
     <message>
         <source>Children</source>
-        <translation>Kinder</translation>
+        <translation type="obsolete">Kinder</translation>
     </message>
     <message>
         <source>Name Title</source>
-        <translation>Titel</translation>
+        <translation type="obsolete">Titel</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation>Vorname</translation>
+        <translation type="obsolete">Vorname</translation>
     </message>
     <message>
         <source>Middle Name</source>
-        <translation>Mittlerer Name</translation>
+        <translation type="obsolete">Mittlerer Name</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation>Nachname</translation>
+        <translation type="obsolete">Nachname</translation>
     </message>
     <message>
         <source>Suffix</source>
-        <translation>Suffix</translation>
+        <translation type="obsolete">Suffix</translation>
     </message>
     <message>
         <source>File As</source>
-        <translation>Speichern unter</translation>
+        <translation type="obsolete">Speichern unter</translation>
     </message>
     <message>
         <source>Job Title</source>
-        <translation>Berufsbezeichnung</translation>
+        <translation type="obsolete">Berufsbezeichnung</translation>
     </message>
     <message>
         <source>Department</source>
-        <translation>Abteilung</translation>
+        <translation type="obsolete">Abteilung</translation>
     </message>
     <message>
         <source>Company</source>
-        <translation>Firma</translation>
+        <translation type="obsolete">Firma</translation>
     </message>
     <message>
         <source>Business Street</source>
-        <translation>Straße, gesch.</translation>
+        <translation type="obsolete">Straße, gesch.</translation>
     </message>
     <message>
         <source>Business City</source>
-        <translation>Gesch. Stadt</translation>
+        <translation type="obsolete">Gesch. Stadt</translation>
     </message>
     <message>
         <source>Business State</source>
-        <translation>Gesch. Staat</translation>
+        <translation type="obsolete">Gesch. Staat</translation>
     </message>
     <message>
         <source>Business Zip</source>
-        <translation>Gesch. PLZ</translation>
+        <translation type="obsolete">Gesch. PLZ</translation>
     </message>
     <message>
         <source>Business Country</source>
-        <translation>Gesch. Land</translation>
+        <translation type="obsolete">Gesch. Land</translation>
     </message>
     <message>
         <source>Business Pager</source>
-        <translation>Gesch. Pager</translation>
+        <translation type="obsolete">Gesch. Pager</translation>
     </message>
     <message>
         <source>Business WebPage</source>
-        <translation>Gesch. Web</translation>
+        <translation type="obsolete">Gesch. Web</translation>
     </message>
     <message>
         <source>Home Street</source>
-        <translation>Priv. Straße</translation>
+        <translation type="obsolete">Priv. Straße</translation>
     </message>
     <message>
         <source>Home City</source>
-        <translation>Priv. Stadt</translation>
+        <translation type="obsolete">Priv. Stadt</translation>
     </message>
     <message>
         <source>Home State</source>
-        <translation>Priv. Staat</translation>
+        <translation type="obsolete">Priv. Staat</translation>
     </message>
     <message>
         <source>Home Zip</source>
-        <translation>Priv. PLZ</translation>
+        <translation type="obsolete">Priv. PLZ</translation>
     </message>
     <message>
         <source>Home Country</source>
-        <translation>Priv. Land</translation>
+        <translation type="obsolete">Priv. Land</translation>
     </message>
     <message>
         <source>Home Web Page</source>
-        <translation>Priv. Webseite</translation>
+        <translation type="obsolete">Priv. Webseite</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation>Notizen</translation>
+        <translation type="obsolete">Notizen</translation>
     </message>
 </context>
 </TS>

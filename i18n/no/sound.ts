@@ -124,5 +124,9 @@
         <source>Restart Opie if needed</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Use ADPCM compression</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

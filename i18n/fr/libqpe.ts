@@ -871,19 +871,19 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Erreur</translation>
+        <translation type="obsolete">Erreur</translation>
     </message>
     <message>
         <source>Could not find the application </source>
-        <translation>L&apos;application n&apos;a pas été trouvée</translation>
+        <translation type="obsolete">L&apos;application n&apos;a pas été trouvée</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation type="obsolete">Ok</translation>
     </message>
     <message>
         <source>Could not start the application </source>
-        <translation>L&apos;application n&apos;a pas été lancée</translation>
+        <translation type="obsolete">L&apos;application n&apos;a pas été lancée</translation>
     </message>
 </context>
 <context>

@@ -95,13 +95,27 @@ Memory is categorized as follows:
 2. Buffers - temporary storage used to improve performance
 3. Cached - information that has recently been used, but has not been freed yet.
 4. Free - memory not currently used by Opie or any running applications.</source>
-        <translation>Esta página mostra quanta memória (i.e. RAM) está alocada no seu dispositivo.
+        <translation type="obsolete">Esta página mostra quanta memória (i.e. RAM) está alocada no seu dispositivo.
 A memória está categorizada da seguinte forma:
 
 1. Usada - memória usada pelo Opie e pelas aplicações a correr.
 2. Buffers - memória temporária usada para melhorar a performance.
 3. Cached - memória temporária para manter a ultima informação usada 
 4. Free - memória não usada.</translation>
+    </message>
+    <message>
+        <source>This page shows how memory (i.e. RAM) is being allocated on your device.
+Memory is categorized as follows:
+
+1. Used - memory used to by Opie and any running applications.
+2. Buffers - temporary storage used to improve performance
+3. Cached - information that has recently been used, but has not been freed yet.
+4. Free - memory not currently used by Opie or any running applications.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Total Swap: %1 kB</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -210,7 +224,12 @@ Clique e espere num processo para ver informação adicional, ou para lhe enviar
     </message>
     <message>
         <source>You really want to send %1 to this process?</source>
-        <translation>Deseja mesmo enviar %1 para este processo?</translation>
+        <translation type="obsolete">Deseja mesmo enviar %1 para este processo?</translation>
+    </message>
+    <message>
+        <source>Really want to send %1
+to this process?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -268,15 +287,23 @@ Clique e espere num processo para ver informação adicional, ou para lhe enviar
     </message>
     <message>
         <source>&lt;p&gt;Model: </source>
-        <translation>&lt;p&gt;Modelo:</translation>
+        <translation type="obsolete">&lt;p&gt;Modelo:</translation>
     </message>
     <message>
         <source>&lt;p&gt;Vendor: </source>
-        <translation>&lt;p&gt;Marca:</translation>
+        <translation type="obsolete">&lt;p&gt;Marca:</translation>
     </message>
     <message>
         <source>This page shows the current versions of Opie, the Linux kernel and distribution running on this handheld device.</source>
         <translation>Esta página mostra a versão do Opie, do kernel do Linux e da distribuição a correr neste dispositivo.</translation>
+    </message>
+    <message>
+        <source>&lt;br&gt;Model: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;br&gt;Vendor: </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

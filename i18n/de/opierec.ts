@@ -199,7 +199,7 @@ Datei &lt;font size=+2&gt;&lt;B&gt;LÖSCHEN&lt;/B&gt;&lt;/font&gt;?</translation
     </message>
     <message>
         <source>auto Mute</source>
-        <translation>auto still</translation>
+        <translation type="obsolete">auto still</translation>
     </message>
     <message>
         <source>mute</source>
@@ -208,6 +208,14 @@ Datei &lt;font size=+2&gt;&lt;B&gt;LÖSCHEN&lt;/B&gt;&lt;/font&gt;?</translation
     <message>
         <source>Stop</source>
         <translation>Stopp</translation>
+    </message>
+    <message>
+        <source>Auto Mute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stereo Channels</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

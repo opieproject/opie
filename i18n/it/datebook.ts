@@ -151,6 +151,10 @@ Uscire comunque?</translation>
         <source>Sunday</source>
         <translation>Domenica</translation>
     </message>
+    <message>
+        <source>DateBookDayHeaderBase</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookDayView</name>
@@ -370,7 +374,7 @@ Uscire comunque?</translation>
     <message>
         <source>MTWTFSSM</source>
         <comment>Week days</comment>
-        <translation type="obsolete">LMMGVSDL</translation>
+        <translation type="unfinished">LMMGVSDL</translation>
     </message>
 </context>
 <context>
@@ -524,7 +528,7 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>Start time</source>
-        <translation type="obsolete">Ora inizio</translation>
+        <translation type="unfinished">Ora inizio</translation>
     </message>
     <message>
         <source>All day</source>
@@ -564,7 +568,7 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>Start Time</source>
-        <translation type="unfinished">Inizio</translation>
+        <translation type="obsolete">Inizio</translation>
     </message>
 </context>
 <context>

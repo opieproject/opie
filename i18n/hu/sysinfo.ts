@@ -95,13 +95,27 @@ Memory is categorized as follows:
 2. Buffers - temporary storage used to improve performance
 3. Cached - information that has recently been used, but has not been freed yet.
 4. Free - memory not currently used by Opie or any running applications.</source>
-        <translation>Ez a lap megmutatja, a memória (azaz RAM) hogyan van felosztva az ön kéziszámítógépében.
+        <translation type="obsolete">Ez a lap megmutatja, a memória (azaz RAM) hogyan van felosztva az ön kéziszámítógépében.
 A memória az alábbiak szerint van kategoruzálva:
 
 1. Felhasznált - az Opie és más futó alkalmazások által felhasznált memória.
 2. Átmeneti tár - ideiglenes tároló a teljesítmény növeléséhez.
 3. Gyorsítótár - nemrég használt, de még fel nem szabadított információk.
 4. Szabad - az Opie vagy más futó alkalmazás által fel nem használt memória.</translation>
+    </message>
+    <message>
+        <source>This page shows how memory (i.e. RAM) is being allocated on your device.
+Memory is categorized as follows:
+
+1. Used - memory used to by Opie and any running applications.
+2. Buffers - temporary storage used to improve performance
+3. Cached - information that has recently been used, but has not been freed yet.
+4. Free - memory not currently used by Opie or any running applications.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Total Swap: %1 kB</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -225,7 +239,8 @@ Bökjön a processzre és tartsa, hogy további információkat kapjon a process
 </translation>
     </message>
     <message>
-        <source>You really want to send %1 to this process?</source>
+        <source>Really want to send %1
+to this process?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -285,15 +300,23 @@ Bökjön a processzre és tartsa, hogy további információkat kapjon a process
     </message>
     <message>
         <source>&lt;p&gt;Model: </source>
-        <translation>&lt;p&gt;Modell:</translation>
+        <translation type="obsolete">&lt;p&gt;Modell:</translation>
     </message>
     <message>
         <source>&lt;p&gt;Vendor: </source>
-        <translation>&lt;p&gt;Gyártó:</translation>
+        <translation type="obsolete">&lt;p&gt;Gyártó:</translation>
     </message>
     <message>
         <source>This page shows the current versions of Opie, the Linux kernel and distribution running on this handheld device.</source>
         <translation>Ez a lap mutatja a gépen futó Opie, a Linux Kernel és a disztribúció verzióit.</translation>
+    </message>
+    <message>
+        <source>&lt;br&gt;Model: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;br&gt;Vendor: </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

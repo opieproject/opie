@@ -3,11 +3,11 @@
     <name>AccountWidget</name>
     <message>
         <source>IP</source>
-        <translation>IP</translation>
+        <translation type="obsolete">IP</translation>
     </message>
     <message>
         <source>Gateway</source>
-        <translation>Gateway</translation>
+        <translation type="obsolete">Gateway</translation>
     </message>
 </context>
 <context>
@@ -33,174 +33,174 @@
     <name>DialWidget</name>
     <message>
         <source>&amp;Remove</source>
-        <translation>&amp;Entfernen</translation>
+        <translation type="obsolete">&amp;Entfernen</translation>
     </message>
 </context>
 <context>
     <name>InterfaceAdvanced</name>
     <message>
         <source>Advanced Interface Information</source>
-        <translation>Erweiterte Informationen</translation>
+        <translation type="obsolete">Erweiterte Informationen</translation>
     </message>
     <message>
         <source>eth0</source>
-        <translation>eth0</translation>
+        <translation type="obsolete">eth0</translation>
     </message>
     <message>
         <source>IP Address</source>
-        <translation>IP Adresse</translation>
+        <translation type="obsolete">IP Adresse</translation>
     </message>
     <message>
         <source>Interface</source>
-        <translation>Gerät</translation>
+        <translation type="obsolete">Gerät</translation>
     </message>
     <message>
         <source>Subnet Mask</source>
-        <translation>Netzmaske</translation>
+        <translation type="obsolete">Netzmaske</translation>
     </message>
     <message>
         <source>0.0.0.0</source>
-        <translation>0.0.0.0</translation>
+        <translation type="obsolete">0.0.0.0</translation>
     </message>
     <message>
         <source>DHCP Information</source>
-        <translation>DHCP Information</translation>
+        <translation type="obsolete">DHCP Information</translation>
     </message>
     <message>
         <source>DHCP Server</source>
-        <translation>DHCP Server</translation>
+        <translation type="obsolete">DHCP Server</translation>
     </message>
     <message>
         <source>Lease Expires</source>
-        <translation>Lease verfällt</translation>
+        <translation type="obsolete">Lease verfällt</translation>
     </message>
     <message>
         <source>Lease Obtained</source>
-        <translation>Lease erhalten</translation>
+        <translation type="obsolete">Lease erhalten</translation>
     </message>
     <message>
         <source>Broadcast</source>
-        <translation>Broadcast</translation>
+        <translation type="obsolete">Broadcast</translation>
     </message>
     <message>
         <source>MAC Address</source>
-        <translation>MAC Adresse</translation>
+        <translation type="obsolete">MAC Adresse</translation>
     </message>
     <message>
         <source>00:00:00:00:00:00</source>
-        <translation>00:00:00:00:00:00</translation>
+        <translation type="obsolete">00:00:00:00:00:00</translation>
     </message>
 </context>
 <context>
     <name>InterfaceInformation</name>
     <message>
         <source>Interface Information</source>
-        <translation>Geräte Information</translation>
+        <translation type="obsolete">Geräte Information</translation>
     </message>
     <message>
         <source>IP Address</source>
-        <translation>IP Adresse</translation>
+        <translation type="obsolete">IP Adresse</translation>
     </message>
     <message>
         <source>0.0.0.0</source>
-        <translation>0.0.0.0</translation>
+        <translation type="obsolete">0.0.0.0</translation>
     </message>
     <message>
         <source>Subnet Mask</source>
-        <translation>Netzmaske</translation>
+        <translation type="obsolete">Netzmaske</translation>
     </message>
     <message>
         <source>00:00:00:00:00:00</source>
-        <translation>00:00:00:00:00:00</translation>
+        <translation type="obsolete">00:00:00:00:00:00</translation>
     </message>
     <message>
         <source>MAC Address</source>
-        <translation>MAC Adresse</translation>
+        <translation type="obsolete">MAC Adresse</translation>
     </message>
     <message>
         <source>Broadcast</source>
-        <translation>Broadcast</translation>
+        <translation type="obsolete">Broadcast</translation>
     </message>
     <message>
         <source>&amp;Refresh</source>
-        <translation>&amp;Erneuern</translation>
+        <translation type="obsolete">&amp;Erneuern</translation>
     </message>
     <message>
         <source>S&amp;top</source>
-        <translation>S&amp;top</translation>
+        <translation type="obsolete">S&amp;top</translation>
     </message>
     <message>
         <source>R&amp;estart</source>
-        <translation>N&amp;eustart</translation>
+        <translation type="obsolete">N&amp;eustart</translation>
     </message>
     <message>
         <source>&amp;Start</source>
-        <translation>&amp;Start</translation>
+        <translation type="obsolete">&amp;Start</translation>
     </message>
     <message>
         <source>&amp;View Advanced Information</source>
-        <translation>Erweiterte &amp;Informationen</translation>
+        <translation type="obsolete">Erweiterte &amp;Informationen</translation>
     </message>
     <message>
         <source>be &amp;silent</source>
-        <translation>Ruhig &amp;sein</translation>
+        <translation type="obsolete">Ruhig &amp;sein</translation>
     </message>
 </context>
 <context>
     <name>InterfacePPP</name>
     <message>
         <source>Error</source>
-        <translation>Fehler</translation>
+        <translation type="obsolete">Fehler</translation>
     </message>
 </context>
 <context>
     <name>InterfaceSetup</name>
     <message>
         <source>Interface Configuration</source>
-        <translation>Geräte Konfiguration</translation>
+        <translation type="obsolete">Geräte Konfiguration</translation>
     </message>
     <message>
         <source>Automatically bring up</source>
-        <translation>Automatisch starten</translation>
+        <translation type="obsolete">Automatisch starten</translation>
     </message>
     <message>
         <source>DHCP</source>
-        <translation>DHCP</translation>
+        <translation type="obsolete">DHCP</translation>
     </message>
     <message>
         <source>Static Ip Configuration</source>
-        <translation>Statische IP</translation>
+        <translation type="obsolete">Statische IP</translation>
     </message>
     <message>
         <source>Subnet Mask</source>
-        <translation>Netzmaske</translation>
+        <translation type="obsolete">Netzmaske</translation>
     </message>
     <message>
         <source>255.255.255.0</source>
-        <translation>255.255.255.0</translation>
+        <translation type="obsolete">255.255.255.0</translation>
     </message>
     <message>
         <source>First DNS</source>
-        <translation>Erster DNS</translation>
+        <translation type="obsolete">Erster DNS</translation>
     </message>
     <message>
         <source>IP Address</source>
-        <translation>IP Adresse</translation>
+        <translation type="obsolete">IP Adresse</translation>
     </message>
     <message>
         <source>Gateway</source>
-        <translation>Gateway</translation>
+        <translation type="obsolete">Gateway</translation>
     </message>
     <message>
         <source>Second DNS</source>
-        <translation>Zweiter DNS</translation>
+        <translation type="obsolete">Zweiter DNS</translation>
     </message>
 </context>
 <context>
     <name>InterfaceSetupImp</name>
     <message>
         <source>Restarting interface</source>
-        <translation>Gerät neustarten</translation>
+        <translation type="obsolete">Gerät neustarten</translation>
     </message>
 </context>
 <context>
@@ -317,153 +317,153 @@
     <name>ModemTransfer</name>
     <message>
         <source>Error</source>
-        <translation>Fehler</translation>
+        <translation type="obsolete">Fehler</translation>
     </message>
 </context>
 <context>
     <name>WLAN</name>
     <message>
         <source>Wireless Configuration</source>
-        <translation>WLAN Konfiguration</translation>
+        <translation type="obsolete">WLAN Konfiguration</translation>
     </message>
     <message>
         <source>General</source>
-        <translation>Generell</translation>
+        <translation type="obsolete">Generell</translation>
     </message>
     <message>
         <source>any</source>
-        <translation>Alle</translation>
+        <translation type="obsolete">Alle</translation>
     </message>
     <message>
         <source>SSID</source>
-        <translation>SSID</translation>
+        <translation type="obsolete">SSID</translation>
     </message>
     <message>
         <source>Infrastructure</source>
-        <translation>Infrastruktur</translation>
+        <translation type="obsolete">Infrastruktur</translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation>Auto</translation>
+        <translation type="obsolete">Auto</translation>
     </message>
     <message>
         <source>Managed</source>
-        <translation>Managed</translation>
+        <translation type="obsolete">Managed</translation>
     </message>
     <message>
         <source>Ad-Hoc</source>
-        <translation>Ad-Hoc</translation>
+        <translation type="obsolete">Ad-Hoc</translation>
     </message>
     <message>
         <source>Mode</source>
-        <translation>Modus</translation>
+        <translation type="obsolete">Modus</translation>
     </message>
     <message>
         <source>Specify &amp;Access Point</source>
-        <translation>Acces Point fest &amp;einstellen</translation>
+        <translation type="obsolete">Acces Point fest &amp;einstellen</translation>
     </message>
     <message>
         <source>MAC</source>
-        <translation>MAC</translation>
+        <translation type="obsolete">MAC</translation>
     </message>
     <message>
         <source>Specify &amp;Channel</source>
-        <translation>&amp;Kanal fest einstellen</translation>
+        <translation type="obsolete">&amp;Kanal fest einstellen</translation>
     </message>
     <message>
         <source>Rescan Neighbourhood</source>
-        <translation>Neu scannen</translation>
+        <translation type="obsolete">Neu scannen</translation>
     </message>
     <message>
         <source>Chn</source>
-        <translation>Chn</translation>
+        <translation type="obsolete">Chn</translation>
     </message>
     <message>
         <source>Encryption</source>
-        <translation>Verschlüsselung</translation>
+        <translation type="obsolete">Verschlüsselung</translation>
     </message>
     <message>
         <source>&amp;Enable Encryption</source>
-        <translation>Verschlüsselung &amp;einschalten</translation>
+        <translation type="obsolete">Verschlüsselung &amp;einschalten</translation>
     </message>
     <message>
         <source>&amp;Key Setting</source>
-        <translation>&amp;Schlüssel</translation>
+        <translation type="obsolete">&amp;Schlüssel</translation>
     </message>
     <message>
         <source>Key &amp;1</source>
-        <translation>Schlüssel &amp;1</translation>
+        <translation type="obsolete">Schlüssel &amp;1</translation>
     </message>
     <message>
         <source>Key &amp;2</source>
-        <translation>Schlüssel &amp;2</translation>
+        <translation type="obsolete">Schlüssel &amp;2</translation>
     </message>
     <message>
         <source>Key &amp;3</source>
-        <translation>Schlüssel &amp;3</translation>
+        <translation type="obsolete">Schlüssel &amp;3</translation>
     </message>
     <message>
         <source>Key &amp;4</source>
-        <translation>Schlüssel &amp;4</translation>
+        <translation type="obsolete">Schlüssel &amp;4</translation>
     </message>
     <message>
         <source>Non-encrypted Packets</source>
-        <translation>Unverschlüsselte Pakete</translation>
+        <translation type="obsolete">Unverschlüsselte Pakete</translation>
     </message>
     <message>
         <source>&amp;Accept</source>
-        <translation>&amp;Annehmen</translation>
+        <translation type="obsolete">&amp;Annehmen</translation>
     </message>
     <message>
         <source>&amp;Reject</source>
-        <translation>&amp;Verwerfen</translation>
+        <translation type="obsolete">&amp;Verwerfen</translation>
     </message>
 </context>
 <context>
     <name>WlanInfo</name>
     <message>
         <source>Interface Information</source>
-        <translation>Geräte Information</translation>
+        <translation type="obsolete">Geräte Information</translation>
     </message>
     <message>
         <source>802.11b</source>
-        <translation>802.11b</translation>
+        <translation type="obsolete">802.11b</translation>
     </message>
     <message>
         <source>Channel</source>
-        <translation>Kanal</translation>
+        <translation type="obsolete">Kanal</translation>
     </message>
     <message>
         <source>Mode</source>
-        <translation>Modus</translation>
+        <translation type="obsolete">Modus</translation>
     </message>
     <message>
         <source>ESSID</source>
-        <translation>ESSID</translation>
+        <translation type="obsolete">ESSID</translation>
     </message>
     <message>
         <source>Station</source>
-        <translation>Station</translation>
+        <translation type="obsolete">Station</translation>
     </message>
     <message>
         <source>AP</source>
-        <translation>AP</translation>
+        <translation type="obsolete">AP</translation>
     </message>
     <message>
         <source>Rate</source>
-        <translation>Durchsatz</translation>
+        <translation type="obsolete">Durchsatz</translation>
     </message>
     <message>
         <source>Quality</source>
-        <translation>Qualität</translation>
+        <translation type="obsolete">Qualität</translation>
     </message>
     <message>
         <source>Noise</source>
-        <translation>Rauschen</translation>
+        <translation type="obsolete">Rauschen</translation>
     </message>
     <message>
         <source>Signal</source>
-        <translation>Signal</translation>
+        <translation type="obsolete">Signal</translation>
     </message>
 </context>
 </TS>

@@ -1348,167 +1348,167 @@ je zastonj!</translation>
     <name>QObject</name>
     <message>
         <source>Business Phone</source>
-        <translation>Službeni telefon</translation>
+        <translation type="obsolete">Službeni telefon</translation>
     </message>
     <message>
         <source>Business Fax</source>
-        <translation>Službeni faks</translation>
+        <translation type="obsolete">Službeni faks</translation>
     </message>
     <message>
         <source>Business Mobile</source>
-        <translation>Službeni mobitel</translation>
+        <translation type="obsolete">Službeni mobitel</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation>Privzeta epošta</translation>
+        <translation type="obsolete">Privzeta epošta</translation>
     </message>
     <message>
         <source>Emails</source>
-        <translation>Epošta</translation>
+        <translation type="obsolete">Epošta</translation>
     </message>
     <message>
         <source>Home Phone</source>
-        <translation>Domači telefon</translation>
+        <translation type="obsolete">Domači telefon</translation>
     </message>
     <message>
         <source>Home Fax</source>
-        <translation>Domači faks</translation>
+        <translation type="obsolete">Domači faks</translation>
     </message>
     <message>
         <source>Home Mobile</source>
-        <translation>Domači mobitel</translation>
+        <translation type="obsolete">Domači mobitel</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation>Pisarna</translation>
+        <translation type="obsolete">Pisarna</translation>
     </message>
     <message>
         <source>Profession</source>
-        <translation>Poklic</translation>
+        <translation type="obsolete">Poklic</translation>
     </message>
     <message>
         <source>Assistant</source>
-        <translation>Pomočnik</translation>
+        <translation type="obsolete">Pomočnik</translation>
     </message>
     <message>
         <source>Manager</source>
-        <translation>Upravnik</translation>
+        <translation type="obsolete">Upravnik</translation>
     </message>
     <message>
         <source>Spouse</source>
-        <translation>Zakonec</translation>
+        <translation type="obsolete">Zakonec</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation>Spol</translation>
+        <translation type="obsolete">Spol</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation>Rojstni dan</translation>
+        <translation type="obsolete">Rojstni dan</translation>
     </message>
     <message>
         <source>Anniversary</source>
-        <translation>Obletnica</translation>
+        <translation type="obsolete">Obletnica</translation>
     </message>
     <message>
         <source>Nickname</source>
-        <translation>Vzdevek</translation>
+        <translation type="obsolete">Vzdevek</translation>
     </message>
     <message>
         <source>Children</source>
-        <translation>Otroci</translation>
+        <translation type="obsolete">Otroci</translation>
     </message>
     <message>
         <source>Name Title</source>
-        <translation>Naziv</translation>
+        <translation type="obsolete">Naziv</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation>Ime</translation>
+        <translation type="obsolete">Ime</translation>
     </message>
     <message>
         <source>Middle Name</source>
-        <translation>Medimek</translation>
+        <translation type="obsolete">Medimek</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation>Priimek</translation>
+        <translation type="obsolete">Priimek</translation>
     </message>
     <message>
         <source>Suffix</source>
-        <translation>Pripona</translation>
+        <translation type="obsolete">Pripona</translation>
     </message>
     <message>
         <source>File As</source>
-        <translation>Datoteka kot</translation>
+        <translation type="obsolete">Datoteka kot</translation>
     </message>
     <message>
         <source>Job Title</source>
-        <translation>Delovno mesto</translation>
+        <translation type="obsolete">Delovno mesto</translation>
     </message>
     <message>
         <source>Department</source>
-        <translation>Oddelek</translation>
+        <translation type="obsolete">Oddelek</translation>
     </message>
     <message>
         <source>Company</source>
-        <translation>Podjetje</translation>
+        <translation type="obsolete">Podjetje</translation>
     </message>
     <message>
         <source>Business Street</source>
-        <translation>Ulica podjetja</translation>
+        <translation type="obsolete">Ulica podjetja</translation>
     </message>
     <message>
         <source>Business City</source>
-        <translation>Mesto podjetja</translation>
+        <translation type="obsolete">Mesto podjetja</translation>
     </message>
     <message>
         <source>Business State</source>
-        <translation>Okrožje podjetja</translation>
+        <translation type="obsolete">Okrožje podjetja</translation>
     </message>
     <message>
         <source>Business Zip</source>
-        <translation>Poštna št. podjetja</translation>
+        <translation type="obsolete">Poštna št. podjetja</translation>
     </message>
     <message>
         <source>Business Country</source>
-        <translation>Država podjetja</translation>
+        <translation type="obsolete">Država podjetja</translation>
     </message>
     <message>
         <source>Business Pager</source>
-        <translation>Službeni pozivnik</translation>
+        <translation type="obsolete">Službeni pozivnik</translation>
     </message>
     <message>
         <source>Business WebPage</source>
-        <translation>Službena spletna stran</translation>
+        <translation type="obsolete">Službena spletna stran</translation>
     </message>
     <message>
         <source>Home Street</source>
-        <translation>Domača ulica</translation>
+        <translation type="obsolete">Domača ulica</translation>
     </message>
     <message>
         <source>Home City</source>
-        <translation>Domače mesto</translation>
+        <translation type="obsolete">Domače mesto</translation>
     </message>
     <message>
         <source>Home State</source>
-        <translation>Domače okrožje</translation>
+        <translation type="obsolete">Domače okrožje</translation>
     </message>
     <message>
         <source>Home Zip</source>
-        <translation>Domača poštna številka</translation>
+        <translation type="obsolete">Domača poštna številka</translation>
     </message>
     <message>
         <source>Home Country</source>
-        <translation>Domača država</translation>
+        <translation type="obsolete">Domača država</translation>
     </message>
     <message>
         <source>Home Web Page</source>
-        <translation>Domača spletna stran</translation>
+        <translation type="obsolete">Domača spletna stran</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation>Zapiski</translation>
+        <translation type="obsolete">Zapiski</translation>
     </message>
 </context>
 </TS>

@@ -865,19 +865,7 @@ wilt verwijderen?</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Fout</translation>
-    </message>
-    <message>
-        <source>Could not find the application </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ok</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Could not start the application </source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Fout</translation>
     </message>
 </context>
 <context>

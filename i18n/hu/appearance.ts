@@ -178,19 +178,15 @@ This area allows you to select an application and which settings you wish to dis
     </message>
     <message>
         <source>Restart</source>
-        <translation type="unfinished">Újraindít</translation>
-    </message>
-    <message>
-        <source>Do you want to restart %1 now?</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Újraindít</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished">Igen</translation>
+        <translation type="obsolete">Igen</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished">Nem</translation>
+        <translation type="obsolete">Nem</translation>
     </message>
     <message>
         <source>Save Scheme</source>

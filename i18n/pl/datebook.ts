@@ -150,6 +150,10 @@ Wyjsc ?</translation>
         <source>Sunday</source>
         <translation>Niedziela</translation>
     </message>
+    <message>
+        <source>DateBookDayHeaderBase</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookDayView</name>
@@ -365,6 +369,14 @@ Wyjsc ?</translation>
     </message>
 </context>
 <context>
+    <name>DateBookWeekLstDayHdr</name>
+    <message>
+        <source>MTWTFSSM</source>
+        <comment>Week days</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>
@@ -507,7 +519,7 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>Start time</source>
-        <translation type="obsolete">Poczatek</translation>
+        <translation type="unfinished">Poczatek</translation>
     </message>
     <message>
         <source>All day</source>
@@ -555,7 +567,7 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>Start Time</source>
-        <translation>Poczatek</translation>
+        <translation type="obsolete">Poczatek</translation>
     </message>
 </context>
 <context>

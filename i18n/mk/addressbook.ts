@@ -1348,167 +1348,167 @@ SHARP основниот ROM.
     <name>QObject</name>
     <message>
         <source>Name Title</source>
-        <translation>Име/Наслов</translation>
+        <translation type="obsolete">Име/Наслов</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation>Име</translation>
+        <translation type="obsolete">Име</translation>
     </message>
     <message>
         <source>Middle Name</source>
-        <translation>средно име</translation>
+        <translation type="obsolete">средно име</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation>Презиме</translation>
+        <translation type="obsolete">Презиме</translation>
     </message>
     <message>
         <source>Suffix</source>
-        <translation>Суфикс</translation>
+        <translation type="obsolete">Суфикс</translation>
     </message>
     <message>
         <source>File As</source>
-        <translation>Сними како</translation>
+        <translation type="obsolete">Сними како</translation>
     </message>
     <message>
         <source>Job Title</source>
-        <translation>Работно Место</translation>
+        <translation type="obsolete">Работно Место</translation>
     </message>
     <message>
         <source>Department</source>
-        <translation>Одделение/Сектор</translation>
+        <translation type="obsolete">Одделение/Сектор</translation>
     </message>
     <message>
         <source>Company</source>
-        <translation>Компанија</translation>
+        <translation type="obsolete">Компанија</translation>
     </message>
     <message>
         <source>Business Phone</source>
-        <translation>Тел. на работа</translation>
+        <translation type="obsolete">Тел. на работа</translation>
     </message>
     <message>
         <source>Business Fax</source>
-        <translation>Факс на работа</translation>
+        <translation type="obsolete">Факс на работа</translation>
     </message>
     <message>
         <source>Business Mobile</source>
-        <translation>Службен мобилен</translation>
+        <translation type="obsolete">Службен мобилен</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation>Адреса за електронска пошта (основна)</translation>
+        <translation type="obsolete">Адреса за електронска пошта (основна)</translation>
     </message>
     <message>
         <source>Emails</source>
-        <translation>Останати адреси за електронска пошта</translation>
+        <translation type="obsolete">Останати адреси за електронска пошта</translation>
     </message>
     <message>
         <source>Home Phone</source>
-        <translation>Домашен телефон</translation>
+        <translation type="obsolete">Домашен телефон</translation>
     </message>
     <message>
         <source>Home Fax</source>
-        <translation>Домашен факс</translation>
+        <translation type="obsolete">Домашен факс</translation>
     </message>
     <message>
         <source>Home Mobile</source>
-        <translation>Приватен Мобилен</translation>
+        <translation type="obsolete">Приватен Мобилен</translation>
     </message>
     <message>
         <source>Business Street</source>
-        <translation>Улица на фирмата</translation>
+        <translation type="obsolete">Улица на фирмата</translation>
     </message>
     <message>
         <source>Business City</source>
-        <translation>Град на фирмата</translation>
+        <translation type="obsolete">Град на фирмата</translation>
     </message>
     <message>
         <source>Business State</source>
-        <translation>Република на Фирмата</translation>
+        <translation type="obsolete">Република на Фирмата</translation>
     </message>
     <message>
         <source>Business Zip</source>
-        <translation>Поштенски код на Фирмата</translation>
+        <translation type="obsolete">Поштенски код на Фирмата</translation>
     </message>
     <message>
         <source>Business Country</source>
-        <translation>Држава на фирмата</translation>
+        <translation type="obsolete">Држава на фирмата</translation>
     </message>
     <message>
         <source>Business Pager</source>
-        <translation>Службен Пејџер</translation>
+        <translation type="obsolete">Службен Пејџер</translation>
     </message>
     <message>
         <source>Business WebPage</source>
-        <translation>Интернет страница на фирмата</translation>
+        <translation type="obsolete">Интернет страница на фирмата</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation>Канцеларија</translation>
+        <translation type="obsolete">Канцеларија</translation>
     </message>
     <message>
         <source>Profession</source>
-        <translation>Професија</translation>
+        <translation type="obsolete">Професија</translation>
     </message>
     <message>
         <source>Assistant</source>
-        <translation>Асистент</translation>
+        <translation type="obsolete">Асистент</translation>
     </message>
     <message>
         <source>Manager</source>
-        <translation>Раководител/менаџер</translation>
+        <translation type="obsolete">Раководител/менаџер</translation>
     </message>
     <message>
         <source>Home Street</source>
-        <translation>Улица</translation>
+        <translation type="obsolete">Улица</translation>
     </message>
     <message>
         <source>Home City</source>
-        <translation>Град</translation>
+        <translation type="obsolete">Град</translation>
     </message>
     <message>
         <source>Home State</source>
-        <translation>Република</translation>
+        <translation type="obsolete">Република</translation>
     </message>
     <message>
         <source>Home Zip</source>
-        <translation>Поштенски код</translation>
+        <translation type="obsolete">Поштенски код</translation>
     </message>
     <message>
         <source>Home Country</source>
-        <translation>Држава</translation>
+        <translation type="obsolete">Држава</translation>
     </message>
     <message>
         <source>Home Web Page</source>
-        <translation>Интернет страница</translation>
+        <translation type="obsolete">Интернет страница</translation>
     </message>
     <message>
         <source>Spouse</source>
-        <translation>Сопруг/Сопруга</translation>
+        <translation type="obsolete">Сопруг/Сопруга</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation>пол</translation>
+        <translation type="obsolete">пол</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation>Роденден</translation>
+        <translation type="obsolete">Роденден</translation>
     </message>
     <message>
         <source>Anniversary</source>
-        <translation>Годишнина</translation>
+        <translation type="obsolete">Годишнина</translation>
     </message>
     <message>
         <source>Nickname</source>
-        <translation>Надимак</translation>
+        <translation type="obsolete">Надимак</translation>
     </message>
     <message>
         <source>Children</source>
-        <translation>Деца</translation>
+        <translation type="obsolete">Деца</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation>Забелешки</translation>
+        <translation type="obsolete">Забелешки</translation>
     </message>
 </context>
 </TS>

@@ -218,7 +218,7 @@ Wyjsc mimo to?</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation>Opis</translation>
+        <translation type="obsolete">Opis</translation>
     </message>
     <message>
         <source>Deadline</source>
@@ -335,6 +335,10 @@ Dzieki niemu mozesz szybko dodac zadanie do listy. Moze on byc pokazany lub ukry
     <message>
         <source>Data can&apos;t be edited, currently syncing</source>
         <translation>Dane nie mogo byc zmienione, trwa synchronizacja</translation>
+    </message>
+    <message>
+        <source>Summary</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

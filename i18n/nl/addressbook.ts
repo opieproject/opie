@@ -1353,167 +1353,167 @@ geleverd!</translation>
     <name>QObject</name>
     <message>
         <source>Business Phone</source>
-        <translation>Telefoon werk</translation>
+        <translation type="obsolete">Telefoon werk</translation>
     </message>
     <message>
         <source>Business Fax</source>
-        <translation>Fax werk</translation>
+        <translation type="obsolete">Fax werk</translation>
     </message>
     <message>
         <source>Business Mobile</source>
-        <translation>Mobiel werk</translation>
+        <translation type="obsolete">Mobiel werk</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation>Standaard email</translation>
+        <translation type="obsolete">Standaard email</translation>
     </message>
     <message>
         <source>Emails</source>
-        <translation>Emails</translation>
+        <translation type="obsolete">Emails</translation>
     </message>
     <message>
         <source>Home Phone</source>
-        <translation>Telefoon prive</translation>
+        <translation type="obsolete">Telefoon prive</translation>
     </message>
     <message>
         <source>Home Fax</source>
-        <translation>Fax prive</translation>
+        <translation type="obsolete">Fax prive</translation>
     </message>
     <message>
         <source>Home Mobile</source>
-        <translation>Mobiel prive</translation>
+        <translation type="obsolete">Mobiel prive</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation>Kantoor</translation>
+        <translation type="obsolete">Kantoor</translation>
     </message>
     <message>
         <source>Profession</source>
-        <translation>Beroep</translation>
+        <translation type="obsolete">Beroep</translation>
     </message>
     <message>
         <source>Assistant</source>
-        <translation>Assistent</translation>
+        <translation type="obsolete">Assistent</translation>
     </message>
     <message>
         <source>Manager</source>
-        <translation>Manager</translation>
+        <translation type="obsolete">Manager</translation>
     </message>
     <message>
         <source>Spouse</source>
-        <translation>Echtgeno(o)t(e)</translation>
+        <translation type="obsolete">Echtgeno(o)t(e)</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation>Geslacht</translation>
+        <translation type="obsolete">Geslacht</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation>Verjaardag</translation>
+        <translation type="obsolete">Verjaardag</translation>
     </message>
     <message>
         <source>Anniversary</source>
-        <translation>Jaardag</translation>
+        <translation type="obsolete">Jaardag</translation>
     </message>
     <message>
         <source>Nickname</source>
-        <translation>Bijnaam</translation>
+        <translation type="obsolete">Bijnaam</translation>
     </message>
     <message>
         <source>Children</source>
-        <translation>Kinderen</translation>
+        <translation type="obsolete">Kinderen</translation>
     </message>
     <message>
         <source>Name Title</source>
-        <translation>Titel</translation>
+        <translation type="obsolete">Titel</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation>Voornaam</translation>
+        <translation type="obsolete">Voornaam</translation>
     </message>
     <message>
         <source>Middle Name</source>
-        <translation>Tussenvoegsel</translation>
+        <translation type="obsolete">Tussenvoegsel</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation>Achternaam</translation>
+        <translation type="obsolete">Achternaam</translation>
     </message>
     <message>
         <source>Suffix</source>
-        <translation>Achtervoegsel</translation>
+        <translation type="obsolete">Achtervoegsel</translation>
     </message>
     <message>
         <source>File As</source>
-        <translation>Sla op als</translation>
+        <translation type="obsolete">Sla op als</translation>
     </message>
     <message>
         <source>Job Title</source>
-        <translation>Functie</translation>
+        <translation type="obsolete">Functie</translation>
     </message>
     <message>
         <source>Department</source>
-        <translation>Afdeling</translation>
+        <translation type="obsolete">Afdeling</translation>
     </message>
     <message>
         <source>Company</source>
-        <translation>Bedrijf</translation>
+        <translation type="obsolete">Bedrijf</translation>
     </message>
     <message>
         <source>Business Street</source>
-        <translation>Bedrijf adres</translation>
+        <translation type="obsolete">Bedrijf adres</translation>
     </message>
     <message>
         <source>Business City</source>
-        <translation>Bedrijf woonplaats</translation>
+        <translation type="obsolete">Bedrijf woonplaats</translation>
     </message>
     <message>
         <source>Business State</source>
-        <translation>Bedrijf provincie</translation>
+        <translation type="obsolete">Bedrijf provincie</translation>
     </message>
     <message>
         <source>Business Zip</source>
-        <translation>Bedrijf Postcode</translation>
+        <translation type="obsolete">Bedrijf Postcode</translation>
     </message>
     <message>
         <source>Business Country</source>
-        <translation>Bedrijf land</translation>
+        <translation type="obsolete">Bedrijf land</translation>
     </message>
     <message>
         <source>Business Pager</source>
-        <translation>Bedijf pieper</translation>
+        <translation type="obsolete">Bedijf pieper</translation>
     </message>
     <message>
         <source>Business WebPage</source>
-        <translation>Bedrijf website</translation>
+        <translation type="obsolete">Bedrijf website</translation>
     </message>
     <message>
         <source>Home Street</source>
-        <translation>Prive adres</translation>
+        <translation type="obsolete">Prive adres</translation>
     </message>
     <message>
         <source>Home City</source>
-        <translation>Prive woonplaats</translation>
+        <translation type="obsolete">Prive woonplaats</translation>
     </message>
     <message>
         <source>Home State</source>
-        <translation>Prive provincie</translation>
+        <translation type="obsolete">Prive provincie</translation>
     </message>
     <message>
         <source>Home Zip</source>
-        <translation>Prive postcode</translation>
+        <translation type="obsolete">Prive postcode</translation>
     </message>
     <message>
         <source>Home Country</source>
-        <translation>Prive land</translation>
+        <translation type="obsolete">Prive land</translation>
     </message>
     <message>
         <source>Home Web Page</source>
-        <translation>Prive website</translation>
+        <translation type="obsolete">Prive website</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation>Notities</translation>
+        <translation type="obsolete">Notities</translation>
     </message>
 </context>
 </TS>

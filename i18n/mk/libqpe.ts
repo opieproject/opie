@@ -863,19 +863,7 @@ Free some memory and try again.</source>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Грешка</translation>
-    </message>
-    <message>
-        <source>Could not find the application </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ok</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Could not start the application </source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Грешка</translation>
     </message>
 </context>
 <context>

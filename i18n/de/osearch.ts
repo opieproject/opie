@@ -78,6 +78,10 @@
         <source>Contacts</source>
         <translation>Adressbuch</translation>
     </message>
+    <message>
+        <source>Search for: </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OListView</name>

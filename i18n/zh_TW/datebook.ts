@@ -148,6 +148,10 @@ Quit anyway?</translation>
         <source>Sunday</source>
         <translation>天</translation>
     </message>
+    <message>
+        <source>DateBookDayHeaderBase</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookDayView</name>
@@ -363,6 +367,14 @@ Quit anyway?</translation>
     </message>
 </context>
 <context>
+    <name>DateBookWeekLstDayHdr</name>
+    <message>
+        <source>MTWTFSSM</source>
+        <comment>Week days</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>
@@ -470,7 +482,7 @@ Quit anyway?</translation>
     </message>
     <message>
         <source>Start time</source>
-        <translation type="obsolete">開始時間</translation>
+        <translation type="unfinished">開始時間</translation>
     </message>
     <message>
         <source>All day</source>
@@ -518,7 +530,7 @@ Quit anyway?</translation>
     </message>
     <message>
         <source>Start Time</source>
-        <translation type="unfinished">開始時間</translation>
+        <translation type="obsolete">開始時間</translation>
     </message>
 </context>
 <context>

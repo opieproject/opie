@@ -83,22 +83,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Restart</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you want to restart %1 now?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Save Scheme</source>
         <translation type="unfinished"></translation>
     </message>

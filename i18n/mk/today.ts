@@ -3,7 +3,7 @@
     <name>Today</name>
     <message>
         <source>Today</source>
-        <translation>Денес</translation>
+        <translation type="obsolete">Денес</translation>
     </message>
     <message>
         <source>Owned by </source>

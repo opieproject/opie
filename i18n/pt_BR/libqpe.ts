@@ -865,19 +865,19 @@ tente novamente.</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Erro</translation>
+        <translation type="obsolete">Erro</translation>
     </message>
     <message>
         <source>Could not find the application </source>
-        <translation>Impossível localizar a aplicação</translation>
+        <translation type="obsolete">Impossível localizar a aplicação</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation>OK</translation>
+        <translation type="obsolete">OK</translation>
     </message>
     <message>
         <source>Could not start the application </source>
-        <translation>Impossível iniciar a aplicação</translation>
+        <translation type="obsolete">Impossível iniciar a aplicação</translation>
     </message>
 </context>
 <context>

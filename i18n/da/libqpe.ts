@@ -865,19 +865,7 @@ Frigør noget hukommelse og prøv igen.</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Fejl</translation>
-    </message>
-    <message>
-        <source>Could not find the application </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ok</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Could not start the application </source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Fejl</translation>
     </message>
 </context>
 <context>

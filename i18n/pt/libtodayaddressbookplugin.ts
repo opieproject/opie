@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>To activate settings: Restart application !</source>
-        <translation type="obsolete">Para activar as alterações reinicie a aplicação!</translation>
+        <translation type="unfinished">Para activar as alterações reinicie a aplicação!</translation>
     </message>
     <message>
         <source>Set Headline Color: </source>
@@ -62,6 +62,26 @@ urgente se abaixo</translation>
     <message>
         <source>The urgent color will be used if the birthday/anniversary is closer than given days !</source>
         <translation>Esta cor urgente será usada se estiver a menos de x dias de um nascimento ou aniversário!</translation>
+    </message>
+    <message>
+        <source>Enable/Disable Views</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show &amp;Birthdays</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show &amp;Anniveraries</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The next birthdays will just be shown, if enabled!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The next anniversaries will just be shown, if enabled !</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -77,6 +77,10 @@
         <source>Contacts</source>
         <translation>FOO</translation>
     </message>
+    <message>
+        <source>Search for: </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OListView</name>

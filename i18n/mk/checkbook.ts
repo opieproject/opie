@@ -47,27 +47,27 @@
     </message>
     <message>
         <source>Savings</source>
-        <translation>Штедна</translation>
+        <translation type="obsolete">Штедна</translation>
     </message>
     <message>
         <source>Checking</source>
-        <translation>Тековна</translation>
+        <translation type="obsolete">Тековна</translation>
     </message>
     <message>
         <source>CD</source>
-        <translation>Кредитна</translation>
+        <translation type="obsolete">Кредитна</translation>
     </message>
     <message>
         <source>Money market</source>
-        <translation>Пазар на пари</translation>
+        <translation type="obsolete">Пазар на пари</translation>
     </message>
     <message>
         <source>Mutual fund</source>
-        <translation>Заеднички фонд</translation>
+        <translation type="obsolete">Заеднички фонд</translation>
     </message>
     <message>
         <source>Other</source>
-        <translation>Останато</translation>
+        <translation type="obsolete">Останато</translation>
     </message>
     <message>
         <source>Bank:</source>
@@ -111,11 +111,11 @@
     </message>
     <message>
         <source>Current balance: %10.00</source>
-        <translation>Моментална состојба: %10.00</translation>
+        <translation type="obsolete">Моментална состојба: %10.00</translation>
     </message>
     <message>
         <source>This area shows the current balance in this checkbook.</source>
-        <translation>Овде е прикажана моменталната состојба на оваа сметка.</translation>
+        <translation type="obsolete">Овде е прикажана моменталната состојба на оваа сметка.</translation>
     </message>
     <message>
         <source>This is a listing of all transactions entered for this checkbook.
@@ -195,7 +195,7 @@ To sort entries by a specific field, click on the column name.</source>
     </message>
     <message>
         <source>Current balance: %1%2</source>
-        <translation>Моментална состојба: %1 %2</translation>
+        <translation type="obsolete">Моментална состојба: %1 %2</translation>
     </message>
     <message>
         <source>Enter password</source>
@@ -220,6 +220,34 @@ To sort entries by a specific field, click on the column name.</source>
     <message>
         <source>Delete transaction</source>
         <translation>Избриши трансакција</translation>
+    </message>
+    <message>
+        <source>Sort by:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select checkbook sorting here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Entry Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Id</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SortDate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Balance</source>
+        <translation type="unfinished">Состојба</translation>
     </message>
 </context>
 <context>
@@ -253,6 +281,89 @@ protected</source>
     <message>
         <source>Click here to select whether or not the main window will display the current balance for each checkbook.</source>
         <translation>Кликно овде за да се избере дали главниот прозорец ќе ги прикажува моменталните состојби за секоја сметка.</translation>
+    </message>
+    <message>
+        <source>&amp;Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Account Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Account Types</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Category</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Category</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Expense</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Income</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Categories</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Payee</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Payee</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Payees</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open last checkbook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to select whether the last open checkbook will be opened at startup.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show last checkbook tab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to select whether the last tab in a checkbook should be displayed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save new description as payee</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to save new descriptions in the list of payess.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ListEdit</name>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Избриши</translation>
     </message>
 </context>
 <context>
@@ -328,6 +439,125 @@ You also can select Delete from the Checkbook menu.</source>
     <message>
         <source>Delete checkbook</source>
         <translation>Избриши сметка</translation>
+    </message>
+</context>
+<context>
+    <name>QWidget</name>
+    <message>
+        <source>Date</source>
+        <translation type="unfinished">Дата</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Уреди</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished">Нова</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Избриши</translation>
+    </message>
+    <message>
+        <source>Savings</source>
+        <translation type="unfinished">Штедна</translation>
+    </message>
+    <message>
+        <source>Checking</source>
+        <translation type="unfinished">Тековна</translation>
+    </message>
+    <message>
+        <source>CD</source>
+        <translation type="unfinished">Кредитна</translation>
+    </message>
+    <message>
+        <source>Money market</source>
+        <translation type="unfinished">Пазар на пари</translation>
+    </message>
+    <message>
+        <source>Mutual fund</source>
+        <translation type="unfinished">Заеднички фонд</translation>
+    </message>
+    <message>
+        <source>Other</source>
+        <translation type="unfinished">Останато</translation>
+    </message>
+    <message>
+        <source>Expense</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Automobile</source>
+        <translation type="unfinished">Автомобил</translation>
+    </message>
+    <message>
+        <source>Bills</source>
+        <translation type="unfinished">Сметки</translation>
+    </message>
+    <message>
+        <source>CDs</source>
+        <translation type="unfinished">ЦД-а</translation>
+    </message>
+    <message>
+        <source>Clothing</source>
+        <translation type="unfinished">Облека</translation>
+    </message>
+    <message>
+        <source>Computer</source>
+        <translation type="unfinished">Компјутер</translation>
+    </message>
+    <message>
+        <source>DVDs</source>
+        <translation type="unfinished">DVD-а</translation>
+    </message>
+    <message>
+        <source>Electronics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Entertainment</source>
+        <translation type="unfinished">Забава</translation>
+    </message>
+    <message>
+        <source>Food</source>
+        <translation type="unfinished">Храна</translation>
+    </message>
+    <message>
+        <source>Gasoline</source>
+        <translation type="unfinished">Гориво</translation>
+    </message>
+    <message>
+        <source>Misc</source>
+        <translation type="unfinished">Општо</translation>
+    </message>
+    <message>
+        <source>Movies</source>
+        <translation type="unfinished">Филмпви</translation>
+    </message>
+    <message>
+        <source>Rent</source>
+        <translation type="unfinished">Кирија</translation>
+    </message>
+    <message>
+        <source>Travel</source>
+        <translation type="unfinished">Патувања</translation>
+    </message>
+    <message>
+        <source>Income</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Work</source>
+        <translation type="unfinished">Работа</translation>
+    </message>
+    <message>
+        <source>Family Member</source>
+        <translation type="unfinished">Член на фамилија</translation>
+    </message>
+    <message>
+        <source>Misc. Credit</source>
+        <translation type="unfinished">Општо Кредит</translation>
     </message>
 </context>
 <context>
@@ -426,27 +656,27 @@ The value entered should always be positive.</source>
     </message>
     <message>
         <source>Automobile</source>
-        <translation>Автомобил</translation>
+        <translation type="obsolete">Автомобил</translation>
     </message>
     <message>
         <source>Bills</source>
-        <translation>Сметки</translation>
+        <translation type="obsolete">Сметки</translation>
     </message>
     <message>
         <source>CDs</source>
-        <translation>ЦД-а</translation>
+        <translation type="obsolete">ЦД-а</translation>
     </message>
     <message>
         <source>Clothing</source>
-        <translation>Облека</translation>
+        <translation type="obsolete">Облека</translation>
     </message>
     <message>
         <source>Computer</source>
-        <translation>Компјутер</translation>
+        <translation type="obsolete">Компјутер</translation>
     </message>
     <message>
         <source>DVDs</source>
-        <translation>DVD-а</translation>
+        <translation type="obsolete">DVD-а</translation>
     </message>
     <message>
         <source>Eletronics</source>
@@ -454,31 +684,31 @@ The value entered should always be positive.</source>
     </message>
     <message>
         <source>Entertainment</source>
-        <translation>Забава</translation>
+        <translation type="obsolete">Забава</translation>
     </message>
     <message>
         <source>Food</source>
-        <translation>Храна</translation>
+        <translation type="obsolete">Храна</translation>
     </message>
     <message>
         <source>Gasoline</source>
-        <translation>Гориво</translation>
+        <translation type="obsolete">Гориво</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation>Општо</translation>
+        <translation type="obsolete">Општо</translation>
     </message>
     <message>
         <source>Movies</source>
-        <translation>Филмпви</translation>
+        <translation type="obsolete">Филмпви</translation>
     </message>
     <message>
         <source>Rent</source>
-        <translation>Кирија</translation>
+        <translation type="obsolete">Кирија</translation>
     </message>
     <message>
         <source>Travel</source>
-        <translation>Патувања</translation>
+        <translation type="obsolete">Патувања</translation>
     </message>
     <message>
         <source>Debit Charge</source>
@@ -498,15 +728,15 @@ The value entered should always be positive.</source>
     </message>
     <message>
         <source>Work</source>
-        <translation>Работа</translation>
+        <translation type="obsolete">Работа</translation>
     </message>
     <message>
         <source>Family Member</source>
-        <translation>Член на фамилија</translation>
+        <translation type="obsolete">Член на фамилија</translation>
     </message>
     <message>
         <source>Misc. Credit</source>
-        <translation>Општо Кредит</translation>
+        <translation type="obsolete">Општо Кредит</translation>
     </message>
     <message>
         <source>Automatic Payment</source>
@@ -515,10 +745,6 @@ The value entered should always be positive.</source>
     <message>
         <source>Cash</source>
         <translation>Кеш</translation>
-    </message>
-    <message>
-        <source>Electronics</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

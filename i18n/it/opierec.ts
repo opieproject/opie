@@ -199,7 +199,7 @@ il file selezionato?</translation>
     </message>
     <message>
         <source>auto Mute</source>
-        <translation>Mute automatico</translation>
+        <translation type="obsolete">Mute automatico</translation>
     </message>
     <message>
         <source>mute</source>
@@ -208,6 +208,14 @@ il file selezionato?</translation>
     <message>
         <source>Stop</source>
         <translation>Stop</translation>
+    </message>
+    <message>
+        <source>Auto Mute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stereo Channels</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

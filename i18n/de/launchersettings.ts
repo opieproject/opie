@@ -1,6 +1,48 @@
 <!DOCTYPE TS><TS>
 <defaultcodec>iso8859-1</defaultcodec>
 <context>
+    <name>DocTabSettings</name>
+    <message>
+        <source>Enable the Documents Tab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Note:&lt;/b&gt; Changing these settings may need restarting Opie to become effective.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check, if you want the Documents Tab to be visible.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>InputMethodSettings</name>
+    <message>
+        <source>Resize application on Popup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable floating and resizing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Note:&lt;/b&gt; Changing these settings may need restarting Opie to become effective.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check, if you want the application to be automatically resized if the input method pops up.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check, if you want to move and/or resize input methods</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Specify the percentage of the screen width for the input method</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>LauncherSettings</name>
     <message>
         <source>Launcher Settings</source>
@@ -17,6 +59,14 @@
     <message>
         <source>Tabs</source>
         <translation>Reiter</translation>
+    </message>
+    <message>
+        <source>InputMethods</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DocTab</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -36,6 +86,10 @@
     <message>
         <source>Adds the contents of the Launcher Tabs as menus in the O-Menu.</source>
         <translation>Fügt die Inhalte der Launcher-Reiter als Menüs in das O-Menü ein.</translation>
+    </message>
+    <message>
+        <source>Show Applications in subpopups</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -152,7 +206,7 @@
     </message>
     <message>
         <source>Enable blinking busy indicator</source>
-        <translation>Blinkenden &quot;Busy-Indicator&quot; aktivieren</translation>
+        <translation type="obsolete">Blinkenden &quot;Busy-Indicator&quot; aktivieren</translation>
     </message>
     <message>
         <source>Select the Launcher Tab you want to edit or delete.</source>
@@ -176,7 +230,7 @@
     </message>
     <message>
         <source>Activate this, if you want a blinking busy indicator for starting applications in the Launcher.</source>
-        <translation>Aktivieren Sie dieses wenn Sie eine große Tätigkeitsanzeige in der Taskbar möchten.</translation>
+        <translation type="obsolete">Aktivieren Sie dieses wenn Sie eine große Tätigkeitsanzeige in der Taskbar möchten.</translation>
     </message>
     <message>
         <source>All Tabs</source>
@@ -193,6 +247,14 @@
     <message>
         <source>Not implemented yet</source>
         <translation>Noch nicht implementiert</translation>
+    </message>
+    <message>
+        <source>Enable animated busy indicator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Activate this, if you want an animatedbusy indicator for starting applications in the Launcher.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

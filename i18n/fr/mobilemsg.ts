@@ -4,7 +4,7 @@
     <name>MobileMsg</name>
     <message>
         <source>Messages: </source>
-        <translation>Messages :</translation>
+        <translation type="obsolete">Messages :</translation>
     </message>
 </context>
 <context>
@@ -23,7 +23,7 @@
     </message>
     <message>
         <source>Text</source>
-        <translation>Texte</translation>
+        <translation type="obsolete">Texte</translation>
     </message>
     <message>
         <source>Flash</source>
@@ -35,7 +35,7 @@
     </message>
     <message>
         <source>SMS: %1</source>
-        <translation>SMS : %1</translation>
+        <translation type="obsolete">SMS : %1</translation>
     </message>
     <message>
         <source>Nokia</source>
@@ -43,23 +43,23 @@
     </message>
     <message>
         <source>Country:</source>
-        <translation>Pays :</translation>
+        <translation type="obsolete">Pays :</translation>
     </message>
     <message>
         <source>Logo</source>
-        <translation>Logo</translation>
+        <translation type="obsolete">Logo</translation>
     </message>
     <message>
         <source>Group</source>
-        <translation>Groupe</translation>
+        <translation type="obsolete">Groupe</translation>
     </message>
     <message>
         <source>Picture</source>
-        <translation>Image</translation>
+        <translation type="obsolete">Image</translation>
     </message>
     <message>
         <source>Message:</source>
-        <translation>Message :</translation>
+        <translation type="obsolete">Message :</translation>
     </message>
     <message>
         <source>EMS</source>
@@ -67,7 +67,23 @@
     </message>
     <message>
         <source>Tab</source>
-        <translation>Tab</translation>
+        <translation type="obsolete">Tab</translation>
+    </message>
+    <message>
+        <source>SMS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Messages: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Image:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

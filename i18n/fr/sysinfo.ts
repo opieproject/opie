@@ -98,13 +98,27 @@ Memory is categorized as follows:
 2. Buffers - temporary storage used to improve performance
 3. Cached - information that has recently been used, but has not been freed yet.
 4. Free - memory not currently used by Opie or any running applications.</source>
-        <translation>Cette page montre l&apos;utilisation de la mémoire par votre PDA.
+        <translation type="obsolete">Cette page montre l&apos;utilisation de la mémoire par votre PDA.
 La mémoire est divisée en catégories comme suit :
 
 1. Utilisée - Mémoire utilisée par Opie et toutes autres applications en cours d&apos;exécution.
 2. Buffers - Mémoire temporaire utilisée pour accroître les performances
 3. Cache - Espace utilisé récemment et non encore libéré.
 4. Libre - Mémoire disponible non encore utilisée par Opie ou par les applications en cours.</translation>
+    </message>
+    <message>
+        <source>This page shows how memory (i.e. RAM) is being allocated on your device.
+Memory is categorized as follows:
+
+1. Used - memory used to by Opie and any running applications.
+2. Buffers - temporary storage used to improve performance
+3. Cached - information that has recently been used, but has not been freed yet.
+4. Free - memory not currently used by Opie or any running applications.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Total Swap: %1 kB</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -230,7 +244,12 @@ Cliquez et maintenez appuyer pour voir les informations à propos du processus o
     </message>
     <message>
         <source>You really want to send %1 to this process?</source>
-        <translation>Vous désirez vraiment envoyer %1 à ce processus ?</translation>
+        <translation type="obsolete">Vous désirez vraiment envoyer %1 à ce processus ?</translation>
+    </message>
+    <message>
+        <source>Really want to send %1
+to this process?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -363,15 +382,23 @@ Cliquez et maintenez appuyer pour voir les informations à propos du processus o
     </message>
     <message>
         <source>&lt;p&gt;Model: </source>
-        <translation>&lt;p&gt;Modèle : </translation>
+        <translation type="obsolete">&lt;p&gt;Modèle : </translation>
     </message>
     <message>
         <source>&lt;p&gt;Vendor: </source>
-        <translation>&lt;p&gt;Fabricant : </translation>
+        <translation type="obsolete">&lt;p&gt;Fabricant : </translation>
     </message>
     <message>
         <source>This page shows the current versions of Opie, the Linux kernel and distribution running on this handheld device.</source>
         <translation>Cette page montre la version courante de Opie, du noyau Linux, et de la distribution installés sur cet appareil de poche.</translation>
+    </message>
+    <message>
+        <source>&lt;br&gt;Model: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;br&gt;Vendor: </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

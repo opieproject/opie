@@ -83,19 +83,19 @@
     </message>
     <message>
         <source>Restart</source>
-        <translation>重新啟動</translation>
+        <translation type="obsolete">重新啟動</translation>
     </message>
     <message>
         <source>Do you want to restart %1 now?</source>
-        <translation>您現在想要重新啟動 %1 ?</translation>
+        <translation type="obsolete">您現在想要重新啟動 %1 ?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>是</translation>
+        <translation type="obsolete">是</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>否</translation>
+        <translation type="obsolete">否</translation>
     </message>
     <message>
         <source>Save Scheme</source>

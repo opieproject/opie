@@ -150,6 +150,10 @@ Toch afsluiten?</translation>
         <source>Sunday</source>
         <translation>Zondag</translation>
     </message>
+    <message>
+        <source>DateBookDayHeaderBase</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookDayView</name>
@@ -369,7 +373,7 @@ Toch afsluiten?</translation>
     <message>
         <source>MTWTFSSM</source>
         <comment>Week days</comment>
-        <translation type="obsolete">MDWDVZZM
+        <translation type="unfinished">MDWDVZZM
 
 Weekdagen</translation>
     </message>
@@ -574,7 +578,7 @@ Zondag</translation>
     </message>
     <message>
         <source>Start time</source>
-        <translation type="obsolete">Aanvangstijd</translation>
+        <translation type="unfinished">Aanvangstijd</translation>
     </message>
     <message>
         <source>All day</source>
@@ -614,7 +618,7 @@ Zondag</translation>
     </message>
     <message>
         <source>Start Time</source>
-        <translation type="unfinished">Aanvangstijd</translation>
+        <translation type="obsolete">Aanvangstijd</translation>
     </message>
 </context>
 <context>

@@ -222,7 +222,7 @@ Mégis kilép?</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished">Leírás</translation>
+        <translation type="obsolete">Leírás</translation>
     </message>
     <message>
         <source>Deadline</source>
@@ -338,6 +338,10 @@ Lehetővé teszi, hogy gyorsan felvegyen új feladatokat a listába. Ez a terül
     </message>
     <message>
         <source>Data can&apos;t be edited, currently syncing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Summary</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -13,6 +13,10 @@
         <source>Personal Information</source>
         <translation type="unfinished">Informacje Osobiste</translation>
     </message>
+    <message>
+        <source>DocTab</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AppLauncher</name>
@@ -155,6 +159,10 @@
         <source>List View</source>
         <translation type="unfinished">Pokazuj liste</translation>
     </message>
+    <message>
+        <source>&lt;b&gt;The Documents Tab&lt;p&gt;has been disabled.&lt;p&gt;Use Settings-&gt;Launcher-&gt;DocTab&lt;p&gt;to reenable it.&lt;/b&gt;&lt;/center&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LauncherView</name>
@@ -201,17 +209,17 @@
     <message>
         <source>Battery level is critical!
 Keep power off until power restored!</source>
-        <translation type="unfinished">Poziom energii jest krytyczny!
+        <translation type="obsolete">Poziom energii jest krytyczny!
 Wylacz urzadzenie az do naladowania baterii!</translation>
     </message>
     <message>
         <source>Battery is running very low. </source>
-        <translation type="unfinished">Poziom energii bardzo niski.</translation>
+        <translation type="obsolete">Poziom energii bardzo niski.</translation>
     </message>
     <message>
         <source>The Back-up battery is very low.
 Please charge the back-up battery.</source>
-        <translation type="unfinished">Bateria zapasowa sie rozladowuje.
+        <translation type="obsolete">Bateria zapasowa sie rozladowuje.
 Doladuj baterie zapasowa.</translation>
     </message>
     <message>
@@ -251,6 +259,26 @@ immediately.</source>
         <translation type="unfinished">Krytyczny Brak Pamieci
 Zakoncz natychmiast 
 ta aplikacje.</translation>
+    </message>
+    <message>
+        <source>WARNING</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;The battery level is critical!&lt;p&gt;Keep power off until AC is restored</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The battery is running very low. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;The Back-up battery is very low&lt;p&gt;Please charge the back-up battery</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -298,7 +326,7 @@ Te opcje zamykajace zostaly pierwotnie dodane do uzytku deweloperow i dla testow
     </message>
     <message>
         <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade.</source>
-        <translation type="unfinished">&lt;p&gt;Nieautoryzowany system zada dostepu do tego urzadzenia.&lt;p&gt;Jesli uzywasz Qtopia Desktop w wersji wczesniejszej niz 1.5.1, zaktualizuj ja.</translation>
+        <translation type="obsolete">&lt;p&gt;Nieautoryzowany system zada dostepu do tego urzadzenia.&lt;p&gt;Jesli uzywasz Qtopia Desktop w wersji wczesniejszej niz 1.5.1, zaktualizuj ja.</translation>
     </message>
     <message>
         <source>Deny</source>
@@ -311,6 +339,10 @@ Te opcje zamykajace zostaly pierwotnie dodane do uzytku deweloperow i dla testow
     <message>
         <source>Allow</source>
         <translation type="unfinished">Zezwol</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade or change the security setting to use IntelliSync.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

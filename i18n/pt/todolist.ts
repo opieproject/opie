@@ -222,7 +222,7 @@ Sair na mesma?</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation>Descrição</translation>
+        <translation type="obsolete">Descrição</translation>
     </message>
     <message>
         <source>Deadline</source>
@@ -340,6 +340,10 @@ Ela permite-lhe adicionar rápidamente uma tarefa à lista. Esta àrea pode ser 
     <message>
         <source>Data can&apos;t be edited, currently syncing</source>
         <translation>Não é possível editar os dados enquanto está a sincronizar</translation>
+    </message>
+    <message>
+        <source>Summary</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

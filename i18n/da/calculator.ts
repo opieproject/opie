@@ -130,7 +130,7 @@
     </message>
     <message>
         <source>Calculator</source>
-        <translation>Lommeregner</translation>
+        <translation type="obsolete">Lommeregner</translation>
     </message>
 </context>
 <context>

@@ -222,6 +222,10 @@ oppure è in un formato sconosciuto.</translation>
         <source>@YY@/@MM@/@DD@</source>
         <translation>@YY@/@MM@/@DD@</translation>
     </message>
+    <message>
+        <source>                          </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Status</name>

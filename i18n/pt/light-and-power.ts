@@ -7,6 +7,13 @@
     </message>
 </context>
 <context>
+    <name>LightSettings</name>
+    <message>
+        <source>Backlight &amp;&amp; Contrast</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>LightSettingsBase</name>
     <message>
         <source>By sensing the ambient light where you are using your device, the screen light can be adjusted automatically. The brightness setting still affects the average brightness.</source>
@@ -111,6 +118,18 @@
     <message>
         <source>critical power warning at</source>
         <translation>bateria crítica aos</translation>
+    </message>
+    <message>
+        <source>CPU Frequency</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>set a fix value for contrast</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CPU frequency</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

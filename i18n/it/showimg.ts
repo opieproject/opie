@@ -149,9 +149,6 @@
     </message>
 </context>
 <context>
-    <name>QObject</name>
-</context>
-<context>
     <name>SettingsDialogBase</name>
     <message>
         <source>Preferences</source>

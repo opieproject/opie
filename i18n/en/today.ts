@@ -2,10 +2,6 @@
 <context>
     <name>Today</name>
     <message>
-        <source>Today</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Please fill out the business card</source>
         <translation type="unfinished"></translation>
     </message>

@@ -150,6 +150,10 @@ Sair na mesma?</translation>
         <source>Sunday</source>
         <translation>Domingo</translation>
     </message>
+    <message>
+        <source>DateBookDayHeaderBase</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookDayView</name>
@@ -369,7 +373,7 @@ Sair na mesma?</translation>
     <message>
         <source>MTWTFSSM</source>
         <comment>Week days</comment>
-        <translation type="obsolete">STQQSSDS</translation>
+        <translation type="unfinished">STQQSSDS</translation>
     </message>
 </context>
 <context>
@@ -523,7 +527,7 @@ Sair na mesma?</translation>
     </message>
     <message>
         <source>Start time</source>
-        <translation type="obsolete">Hora Início</translation>
+        <translation type="unfinished">Hora Início</translation>
     </message>
     <message>
         <source>All day</source>
@@ -563,7 +567,7 @@ Sair na mesma?</translation>
     </message>
     <message>
         <source>Start Time</source>
-        <translation>Hora Início</translation>
+        <translation type="obsolete">Hora Início</translation>
     </message>
 </context>
 <context>

@@ -1340,167 +1340,167 @@ is provided free !</source>
     <name>QObject</name>
     <message>
         <source>Business Phone</source>
-        <translation>公司電話號碼</translation>
+        <translation type="obsolete">公司電話號碼</translation>
     </message>
     <message>
         <source>Business Fax</source>
-        <translation>公司傳真號碼</translation>
+        <translation type="obsolete">公司傳真號碼</translation>
     </message>
     <message>
         <source>Business Mobile</source>
-        <translation>公司手機號碼</translation>
+        <translation type="obsolete">公司手機號碼</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation>預設電郵地址</translation>
+        <translation type="obsolete">預設電郵地址</translation>
     </message>
     <message>
         <source>Emails</source>
-        <translation>電子郵件</translation>
+        <translation type="obsolete">電子郵件</translation>
     </message>
     <message>
         <source>Home Phone</source>
-        <translation>住家電話號碼</translation>
+        <translation type="obsolete">住家電話號碼</translation>
     </message>
     <message>
         <source>Home Fax</source>
-        <translation>住家傳真號碼</translation>
+        <translation type="obsolete">住家傳真號碼</translation>
     </message>
     <message>
         <source>Home Mobile</source>
-        <translation>私人手機號碼</translation>
+        <translation type="obsolete">私人手機號碼</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation>公司</translation>
+        <translation type="obsolete">公司</translation>
     </message>
     <message>
         <source>Profession</source>
-        <translation>職業</translation>
+        <translation type="obsolete">職業</translation>
     </message>
     <message>
         <source>Assistant</source>
-        <translation>助理</translation>
+        <translation type="obsolete">助理</translation>
     </message>
     <message>
         <source>Manager</source>
-        <translation>經理</translation>
+        <translation type="obsolete">經理</translation>
     </message>
     <message>
         <source>Spouse</source>
-        <translation>配偶</translation>
+        <translation type="obsolete">配偶</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation>性別</translation>
+        <translation type="obsolete">性別</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation>生日</translation>
+        <translation type="obsolete">生日</translation>
     </message>
     <message>
         <source>Anniversary</source>
-        <translation>週年紀念日</translation>
+        <translation type="obsolete">週年紀念日</translation>
     </message>
     <message>
         <source>Nickname</source>
-        <translation>綽號</translation>
+        <translation type="obsolete">綽號</translation>
     </message>
     <message>
         <source>Children</source>
-        <translation>子女</translation>
+        <translation type="obsolete">子女</translation>
     </message>
     <message>
         <source>Name Title</source>
-        <translation>名稱</translation>
+        <translation type="obsolete">名稱</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation>名</translation>
+        <translation type="obsolete">名</translation>
     </message>
     <message>
         <source>Middle Name</source>
-        <translation>中名</translation>
+        <translation type="obsolete">中名</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation>姓</translation>
+        <translation type="obsolete">姓</translation>
     </message>
     <message>
         <source>Suffix</source>
-        <translation>Suffix</translation>
+        <translation type="obsolete">Suffix</translation>
     </message>
     <message>
         <source>File As</source>
-        <translation>歸檔為</translation>
+        <translation type="obsolete">歸檔為</translation>
     </message>
     <message>
         <source>Job Title</source>
-        <translation>職稱</translation>
+        <translation type="obsolete">職稱</translation>
     </message>
     <message>
         <source>Department</source>
-        <translation>部門</translation>
+        <translation type="obsolete">部門</translation>
     </message>
     <message>
         <source>Company</source>
-        <translation>公司</translation>
+        <translation type="obsolete">公司</translation>
     </message>
     <message>
         <source>Business Street</source>
-        <translation>公司所在街道名稱</translation>
+        <translation type="obsolete">公司所在街道名稱</translation>
     </message>
     <message>
         <source>Business City</source>
-        <translation>公司所在城市名稱</translation>
+        <translation type="obsolete">公司所在城市名稱</translation>
     </message>
     <message>
         <source>Business State</source>
-        <translation>公司所在州名</translation>
+        <translation type="obsolete">公司所在州名</translation>
     </message>
     <message>
         <source>Business Zip</source>
-        <translation>公司郵遞區號</translation>
+        <translation type="obsolete">公司郵遞區號</translation>
     </message>
     <message>
         <source>Business Country</source>
-        <translation>公司所在國家名稱</translation>
+        <translation type="obsolete">公司所在國家名稱</translation>
     </message>
     <message>
         <source>Business Pager</source>
-        <translation>公司呼叫器號碼</translation>
+        <translation type="obsolete">公司呼叫器號碼</translation>
     </message>
     <message>
         <source>Business WebPage</source>
-        <translation>公司網頁</translation>
+        <translation type="obsolete">公司網頁</translation>
     </message>
     <message>
         <source>Home Street</source>
-        <translation>住家所在街道名稱</translation>
+        <translation type="obsolete">住家所在街道名稱</translation>
     </message>
     <message>
         <source>Home City</source>
-        <translation>住家所在城市名稱</translation>
+        <translation type="obsolete">住家所在城市名稱</translation>
     </message>
     <message>
         <source>Home State</source>
-        <translation>住家所在州名</translation>
+        <translation type="obsolete">住家所在州名</translation>
     </message>
     <message>
         <source>Home Zip</source>
-        <translation>住家郵遞區號</translation>
+        <translation type="obsolete">住家郵遞區號</translation>
     </message>
     <message>
         <source>Home Country</source>
-        <translation>住家所在國家名稱</translation>
+        <translation type="obsolete">住家所在國家名稱</translation>
     </message>
     <message>
         <source>Home Web Page</source>
-        <translation>個人網頁</translation>
+        <translation type="obsolete">個人網頁</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation>備註</translation>
+        <translation type="obsolete">備註</translation>
     </message>
 </context>
 </TS>

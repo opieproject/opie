@@ -1348,167 +1348,167 @@ ingyenesen elérhető !</translation>
     <name>QObject</name>
     <message>
         <source>Business Phone</source>
-        <translation>Üzleti telefon</translation>
+        <translation type="obsolete">Üzleti telefon</translation>
     </message>
     <message>
         <source>Business Fax</source>
-        <translation>Üzleti fax</translation>
+        <translation type="obsolete">Üzleti fax</translation>
     </message>
     <message>
         <source>Business Mobile</source>
-        <translation>Üzleti mobil</translation>
+        <translation type="obsolete">Üzleti mobil</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation>Alapértelmezett e-mail</translation>
+        <translation type="obsolete">Alapértelmezett e-mail</translation>
     </message>
     <message>
         <source>Emails</source>
-        <translation>E-mailek</translation>
+        <translation type="obsolete">E-mailek</translation>
     </message>
     <message>
         <source>Home Phone</source>
-        <translation>Lakás telefon</translation>
+        <translation type="obsolete">Lakás telefon</translation>
     </message>
     <message>
         <source>Home Fax</source>
-        <translation>Lakás fax</translation>
+        <translation type="obsolete">Lakás fax</translation>
     </message>
     <message>
         <source>Home Mobile</source>
-        <translation>Lakás mobil</translation>
+        <translation type="obsolete">Lakás mobil</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation>Iroda</translation>
+        <translation type="obsolete">Iroda</translation>
     </message>
     <message>
         <source>Profession</source>
-        <translation>Szakma</translation>
+        <translation type="obsolete">Szakma</translation>
     </message>
     <message>
         <source>Assistant</source>
-        <translation>Titkár</translation>
+        <translation type="obsolete">Titkár</translation>
     </message>
     <message>
         <source>Manager</source>
-        <translation>Manager</translation>
+        <translation type="obsolete">Manager</translation>
     </message>
     <message>
         <source>Spouse</source>
-        <translation>Hitves</translation>
+        <translation type="obsolete">Hitves</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation>Nem</translation>
+        <translation type="obsolete">Nem</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation>Születésnap</translation>
+        <translation type="obsolete">Születésnap</translation>
     </message>
     <message>
         <source>Anniversary</source>
-        <translation>Évforduló</translation>
+        <translation type="obsolete">Évforduló</translation>
     </message>
     <message>
         <source>Nickname</source>
-        <translation>Becenév</translation>
+        <translation type="obsolete">Becenév</translation>
     </message>
     <message>
         <source>Children</source>
-        <translation>Gyerekek</translation>
+        <translation type="obsolete">Gyerekek</translation>
     </message>
     <message>
         <source>Name Title</source>
-        <translation>Megszólítás</translation>
+        <translation type="obsolete">Megszólítás</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation>Keresztnév</translation>
+        <translation type="obsolete">Keresztnév</translation>
     </message>
     <message>
         <source>Middle Name</source>
-        <translation>Középső név</translation>
+        <translation type="obsolete">Középső név</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation>Vezetéknév</translation>
+        <translation type="obsolete">Vezetéknév</translation>
     </message>
     <message>
         <source>Suffix</source>
-        <translation>Kiterjesztés</translation>
+        <translation type="obsolete">Kiterjesztés</translation>
     </message>
     <message>
         <source>File As</source>
-        <translation>Rögzít mint</translation>
+        <translation type="obsolete">Rögzít mint</translation>
     </message>
     <message>
         <source>Job Title</source>
-        <translation>Beosztás</translation>
+        <translation type="obsolete">Beosztás</translation>
     </message>
     <message>
         <source>Department</source>
-        <translation>Részleg</translation>
+        <translation type="obsolete">Részleg</translation>
     </message>
     <message>
         <source>Company</source>
-        <translation>Cég</translation>
+        <translation type="obsolete">Cég</translation>
     </message>
     <message>
         <source>Business Street</source>
-        <translation>Üzleti cím</translation>
+        <translation type="obsolete">Üzleti cím</translation>
     </message>
     <message>
         <source>Business City</source>
-        <translation>Üzleti város</translation>
+        <translation type="obsolete">Üzleti város</translation>
     </message>
     <message>
         <source>Business State</source>
-        <translation>Üzleti állam</translation>
+        <translation type="obsolete">Üzleti állam</translation>
     </message>
     <message>
         <source>Business Zip</source>
-        <translation>Üzleti irányítószám</translation>
+        <translation type="obsolete">Üzleti irányítószám</translation>
     </message>
     <message>
         <source>Business Country</source>
-        <translation>Üzleti ország</translation>
+        <translation type="obsolete">Üzleti ország</translation>
     </message>
     <message>
         <source>Business Pager</source>
-        <translation>Üzleti személyhívó</translation>
+        <translation type="obsolete">Üzleti személyhívó</translation>
     </message>
     <message>
         <source>Business WebPage</source>
-        <translation>Üzleti weblap</translation>
+        <translation type="obsolete">Üzleti weblap</translation>
     </message>
     <message>
         <source>Home Street</source>
-        <translation>Lakás utca</translation>
+        <translation type="obsolete">Lakás utca</translation>
     </message>
     <message>
         <source>Home City</source>
-        <translation>Lakás város</translation>
+        <translation type="obsolete">Lakás város</translation>
     </message>
     <message>
         <source>Home State</source>
-        <translation>Lakás állam</translation>
+        <translation type="obsolete">Lakás állam</translation>
     </message>
     <message>
         <source>Home Zip</source>
-        <translation>Lakás irányítószám</translation>
+        <translation type="obsolete">Lakás irányítószám</translation>
     </message>
     <message>
         <source>Home Country</source>
-        <translation>Lakás ország</translation>
+        <translation type="obsolete">Lakás ország</translation>
     </message>
     <message>
         <source>Home Web Page</source>
-        <translation>Lakás weblap</translation>
+        <translation type="obsolete">Lakás weblap</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation>Jegyzetek</translation>
+        <translation type="obsolete">Jegyzetek</translation>
     </message>
 </context>
 </TS>

@@ -75,7 +75,7 @@ Memory is categorized as follows:
 2. Buffers - temporary storage used to improve performance
 3. Cached - information that has recently been used, but has not been freed yet.
 4. Free - memory not currently used by Opie or any running applications.</source>
-        <translation>Denne side viser hvor meget hukommelse (f.eks. RAM) der bliver allokeret på din håndholdte enhed.
+        <translation type="obsolete">Denne side viser hvor meget hukommelse (f.eks. RAM) der bliver allokeret på din håndholdte enhed.
 Hukommelse er kategoriseret som følgende:
 
 1. Brugt - hukommelse brugt af Opie og alle igangværende programmer.
@@ -102,6 +102,20 @@ Hukommelse er kategoriseret som følgende:
     <message>
         <source>Total Memory: %1 kB</source>
         <translation>Hukommelse ialt: %1 kB</translation>
+    </message>
+    <message>
+        <source>This page shows how memory (i.e. RAM) is being allocated on your device.
+Memory is categorized as follows:
+
+1. Used - memory used to by Opie and any running applications.
+2. Buffers - temporary storage used to improve performance
+3. Cached - information that has recently been used, but has not been freed yet.
+4. Free - memory not currently used by Opie or any running applications.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Total Swap: %1 kB</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -225,7 +239,8 @@ Klik og hold på en proces for at se yderligere information om processen eller f
 </translation>
     </message>
     <message>
-        <source>You really want to send %1 to this process?</source>
+        <source>Really want to send %1
+to this process?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -284,15 +299,23 @@ Klik og hold på en proces for at se yderligere information om processen eller f
     </message>
     <message>
         <source>&lt;p&gt;Model: </source>
-        <translation>&lt;p&gt;Model: </translation>
+        <translation type="obsolete">&lt;p&gt;Model: </translation>
     </message>
     <message>
         <source>&lt;p&gt;Vendor: </source>
-        <translation>&lt;p&gt;Producent: </translation>
+        <translation type="obsolete">&lt;p&gt;Producent: </translation>
     </message>
     <message>
         <source>This page shows the current versions of Opie, the Linux kernel and distribution running on this handheld device.</source>
         <translation>Denne side viser de nuværende versioner af Opie, Linux kernen og distributionen der kører på denne håndholdte enhed.</translation>
+    </message>
+    <message>
+        <source>&lt;br&gt;Model: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;br&gt;Vendor: </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -149,6 +149,10 @@ Libere espacio y vuelva a intentarlo.
         <source>Sunday</source>
         <translation>Domingo</translation>
     </message>
+    <message>
+        <source>DateBookDayHeaderBase</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookDayView</name>
@@ -368,7 +372,7 @@ Libere espacio y vuelva a intentarlo.
     <message>
         <source>MTWTFSSM</source>
         <comment>Week days</comment>
-        <translation type="obsolete">LMXJVSDL</translation>
+        <translation type="unfinished">LMXJVSDL</translation>
     </message>
 </context>
 <context>
@@ -514,7 +518,7 @@ Libere espacio y vuelva a intentarlo.
     </message>
     <message>
         <source>Start time</source>
-        <translation type="obsolete">Hora inicio</translation>
+        <translation type="unfinished">Hora inicio</translation>
     </message>
     <message>
         <source>All day</source>
@@ -562,7 +566,7 @@ Libere espacio y vuelva a intentarlo.
     </message>
     <message>
         <source>Start Time</source>
-        <translation type="unfinished">Hora inicio</translation>
+        <translation type="obsolete">Hora inicio</translation>
     </message>
 </context>
 <context>

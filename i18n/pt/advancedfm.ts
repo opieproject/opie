@@ -294,6 +294,13 @@ e os seus conteúdos?</translation>
         <source>Not Yet Implemented</source>
         <translation>Ainda Não Implementado</translation>
     </message>
+    <message>
+        <source>Could not copy 
+%1 
+to 
+%2</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Output</name>

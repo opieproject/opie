@@ -15,9 +15,6 @@
     </message>
 </context>
 <context>
-    <name>DatebookPluginConfig</name>
-</context>
-<context>
     <name>DatebookPluginConfigBase</name>
     <message>
         <source>DatebookPluginConfigBase</source>

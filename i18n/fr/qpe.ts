@@ -14,6 +14,10 @@
         <source>Personal Information</source>
         <translation>Information Personnelle</translation>
     </message>
+    <message>
+        <source>DocTab</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AppLauncher</name>
@@ -240,6 +244,10 @@ Veuillez rechargez la batterie de sauvegarde.</translation>
         <source>List View</source>
         <translation>Vue Liste</translation>
     </message>
+    <message>
+        <source>&lt;b&gt;The Documents Tab&lt;p&gt;has been disabled.&lt;p&gt;Use Settings-&gt;Launcher-&gt;DocTab&lt;p&gt;to reenable it.&lt;/b&gt;&lt;/center&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LauncherView</name>
@@ -356,17 +364,17 @@ Veuillez rechargez la batterie de sauvegarde.</translation>
     <message>
         <source>Battery level is critical!
 Keep power off until power restored!</source>
-        <translation>Le niveau de batterie est critique !
+        <translation type="obsolete">Le niveau de batterie est critique !
 Eteigner la machine jusqu&apos;à ça recharge !</translation>
     </message>
     <message>
         <source>Battery is running very low. </source>
-        <translation>Battery très faible.</translation>
+        <translation type="obsolete">Battery très faible.</translation>
     </message>
     <message>
         <source>The Back-up battery is very low.
 Please charge the back-up battery.</source>
-        <translation>La niveau de la batterie de sauvegarde est très bas.
+        <translation type="obsolete">La niveau de la batterie de sauvegarde est très bas.
 Veuillez rechargez la batterie de sauvegarde.</translation>
     </message>
     <message>
@@ -406,6 +414,26 @@ immediately.</source>
         <translation>Ressource Mémoire Critique
 Vous devriez fermer cette
 application immédiatement.</translation>
+    </message>
+    <message>
+        <source>WARNING</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;The battery level is critical!&lt;p&gt;Keep power off until AC is restored</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The battery is running very low. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;The Back-up battery is very low&lt;p&gt;Please charge the back-up battery</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -453,7 +481,7 @@ Ces options sont destinés à être utilisées durant le développement et les t
     </message>
     <message>
         <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade.</source>
-        <translation>&lt;p&gt;Un systeme non authorisé demande l&apos;accès à ce périphérique.&lt;p&gt; Si vous utiliser une version de &quot;Qtopia Desktop&quot; plus vieille que 1.5.1, vous devriez la mettre à jour.</translation>
+        <translation type="obsolete">&lt;p&gt;Un systeme non authorisé demande l&apos;accès à ce périphérique.&lt;p&gt; Si vous utiliser une version de &quot;Qtopia Desktop&quot; plus vieille que 1.5.1, vous devriez la mettre à jour.</translation>
     </message>
     <message>
         <source>Deny</source>
@@ -466,6 +494,10 @@ Ces options sont destinés à être utilisées durant le développement et les t
     <message>
         <source>Allow</source>
         <translation>Authorisé</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade or change the security setting to use IntelliSync.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

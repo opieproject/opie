@@ -151,6 +151,10 @@ Trozdem beenden?</translation>
         <source>Sunday</source>
         <translation>Sonntag</translation>
     </message>
+    <message>
+        <source>DateBookDayHeaderBase</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookDayView</name>
@@ -370,7 +374,7 @@ Trozdem beenden?</translation>
     <message>
         <source>MTWTFSSM</source>
         <comment>Week days</comment>
-        <translation type="obsolete">MDMDFSSM</translation>
+        <translation type="unfinished">MDMDFSSM</translation>
     </message>
 </context>
 <context>
@@ -516,7 +520,7 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>Start time</source>
-        <translation type="obsolete">Startzeit</translation>
+        <translation type="unfinished">Startzeit</translation>
     </message>
     <message>
         <source>All day</source>
@@ -564,7 +568,7 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>Start Time</source>
-        <translation>Startzeit</translation>
+        <translation type="obsolete">Startzeit</translation>
     </message>
 </context>
 <context>

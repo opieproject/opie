@@ -38,30 +38,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Savings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Checking</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>CD</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Money market</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mutual fund</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Other</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Bank:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -99,14 +75,6 @@
     </message>
     <message>
         <source>Enter any additional information for this checkbook here.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Current balance: %10.00</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This area shows the current balance in this checkbook.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -180,10 +148,6 @@ To sort entries by a specific field, click on the column name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Current balance: %1%2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Delete transaction</source>
         <translation type="unfinished"></translation>
     </message>
@@ -219,6 +183,34 @@ To sort entries by a specific field, click on the column name.</source>
         <source>Please enter your password to confirm removal of password protection:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Sort by:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select checkbook sorting here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Entry Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Id</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SortDate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Balance</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Configuration</name>
@@ -249,6 +241,89 @@ protected</source>
     </message>
     <message>
         <source>Click here to select whether or not the main window will display the current balance for each checkbook.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Account Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Account Types</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Category</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Category</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Expense</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Income</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Categories</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Payee</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Payee</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Payees</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open last checkbook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to select whether the last open checkbook will be opened at startup.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show last checkbook tab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to select whether the last tab in a checkbook should be displayed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save new description as payee</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to save new descriptions in the list of payess.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ListEdit</name>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -318,6 +393,125 @@ You also can select Delete from the Checkbook menu.</source>
     </message>
     <message>
         <source>Please enter your password:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QWidget</name>
+    <message>
+        <source>Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Savings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Checking</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CD</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Money market</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mutual fund</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Expense</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Automobile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bills</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CDs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clothing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Computer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DVDs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Electronics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Entertainment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Food</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gasoline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Misc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Movies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Travel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Income</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Work</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Family Member</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Misc. Credit</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -410,58 +604,6 @@ The value entered should always be positive.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Automobile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bills</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>CDs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Clothing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Computer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>DVDs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Entertainment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Food</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Gasoline</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Misc</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Movies</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Travel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Debit Charge</source>
         <translation type="unfinished"></translation>
     </message>
@@ -478,27 +620,11 @@ The value entered should always be positive.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Work</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Family Member</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Misc. Credit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Automatic Payment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Electronics</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

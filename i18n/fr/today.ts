@@ -4,7 +4,7 @@
     <name>Today</name>
     <message>
         <source>Today</source>
-        <translation>Aujourd&apos;hui</translation>
+        <translation type="obsolete">Aujourd&apos;hui</translation>
     </message>
     <message>
         <source>Owned by </source>

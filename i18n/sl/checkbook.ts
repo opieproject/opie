@@ -39,27 +39,27 @@
     </message>
     <message>
         <source>Savings</source>
-        <translation>Prihranki</translation>
+        <translation type="obsolete">Prihranki</translation>
     </message>
     <message>
         <source>Checking</source>
-        <translation>Preverjam</translation>
+        <translation type="obsolete">Preverjam</translation>
     </message>
     <message>
         <source>CD</source>
-        <translation>CD</translation>
+        <translation type="obsolete">CD</translation>
     </message>
     <message>
         <source>Money market</source>
-        <translation>Denarni trg</translation>
+        <translation type="obsolete">Denarni trg</translation>
     </message>
     <message>
         <source>Mutual fund</source>
-        <translation>Skupni fond</translation>
+        <translation type="obsolete">Skupni fond</translation>
     </message>
     <message>
         <source>Other</source>
-        <translation>Drugo</translation>
+        <translation type="obsolete">Drugo</translation>
     </message>
     <message>
         <source>Bank:</source>
@@ -103,11 +103,11 @@
     </message>
     <message>
         <source>Current balance: %10.00</source>
-        <translation>Trenutno stanje: %10.00</translation>
+        <translation type="obsolete">Trenutno stanje: %10.00</translation>
     </message>
     <message>
         <source>This area shows the current balance in this checkbook.</source>
-        <translation>Ta prostor prikazuje trenutno stanje v čekovni knjižici.</translation>
+        <translation type="obsolete">Ta prostor prikazuje trenutno stanje v čekovni knjižici.</translation>
     </message>
     <message>
         <source>This is a listing of all transactions entered for this checkbook.
@@ -183,7 +183,7 @@ Da uredite vnose po določenem polju, kliknite na ime stolpca.</translation>
     </message>
     <message>
         <source>Current balance: %1%2</source>
-        <translation>Trenutno stanje: %1%2</translation>
+        <translation type="obsolete">Trenutno stanje: %1%2</translation>
     </message>
     <message>
         <source>Delete transaction</source>
@@ -221,6 +221,34 @@ Da uredite vnose po določenem polju, kliknite na ime stolpca.</translation>
         <source>Please enter your password to confirm removal of password protection:</source>
         <translation>Prosim vnesite vaše geslo, da potrdite odstranitev zaščite z geslom:</translation>
     </message>
+    <message>
+        <source>Sort by:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select checkbook sorting here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Entry Order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Id</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SortDate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Balance</source>
+        <translation type="unfinished">Stanje</translation>
+    </message>
 </context>
 <context>
     <name>Configuration</name>
@@ -253,6 +281,89 @@ z geslom</translation>
     <message>
         <source>Click here to select whether or not the main window will display the current balance for each checkbook.</source>
         <translation>Kliknite tu, da izberete, če želite, da glavno okno prikaže trenutno stanje za vsako čekovno knjižico.</translation>
+    </message>
+    <message>
+        <source>&amp;Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Account Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Account Types</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Category</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Category</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Expense</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Income</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Categories</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Payee</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Payee</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Payees</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open last checkbook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to select whether the last open checkbook will be opened at startup.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show last checkbook tab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to select whether the last tab in a checkbook should be displayed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save new description as payee</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to save new descriptions in the list of payess.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ListEdit</name>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Izbriši</translation>
     </message>
 </context>
 <context>
@@ -328,6 +439,125 @@ Lahko tudi izberete Izbriši iz menuja.</translation>
     <message>
         <source>Please enter your password:</source>
         <translation>Prosim vnesite geslo:</translation>
+    </message>
+</context>
+<context>
+    <name>QWidget</name>
+    <message>
+        <source>Date</source>
+        <translation type="unfinished">Datum</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Uredi</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished">Nova</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Izbriši</translation>
+    </message>
+    <message>
+        <source>Savings</source>
+        <translation type="unfinished">Prihranki</translation>
+    </message>
+    <message>
+        <source>Checking</source>
+        <translation type="unfinished">Preverjam</translation>
+    </message>
+    <message>
+        <source>CD</source>
+        <translation type="unfinished">CD</translation>
+    </message>
+    <message>
+        <source>Money market</source>
+        <translation type="unfinished">Denarni trg</translation>
+    </message>
+    <message>
+        <source>Mutual fund</source>
+        <translation type="unfinished">Skupni fond</translation>
+    </message>
+    <message>
+        <source>Other</source>
+        <translation type="unfinished">Drugo</translation>
+    </message>
+    <message>
+        <source>Expense</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Automobile</source>
+        <translation type="unfinished">Avto</translation>
+    </message>
+    <message>
+        <source>Bills</source>
+        <translation type="unfinished">Računi</translation>
+    </message>
+    <message>
+        <source>CDs</source>
+        <translation type="unfinished">CDji</translation>
+    </message>
+    <message>
+        <source>Clothing</source>
+        <translation type="unfinished">Oblačila</translation>
+    </message>
+    <message>
+        <source>Computer</source>
+        <translation type="unfinished">Računalnik</translation>
+    </message>
+    <message>
+        <source>DVDs</source>
+        <translation type="unfinished">DVDji</translation>
+    </message>
+    <message>
+        <source>Electronics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Entertainment</source>
+        <translation type="unfinished">Zabava</translation>
+    </message>
+    <message>
+        <source>Food</source>
+        <translation type="unfinished">Hrana</translation>
+    </message>
+    <message>
+        <source>Gasoline</source>
+        <translation type="unfinished">Bencin</translation>
+    </message>
+    <message>
+        <source>Misc</source>
+        <translation type="unfinished">Različno</translation>
+    </message>
+    <message>
+        <source>Movies</source>
+        <translation type="unfinished">Filmi</translation>
+    </message>
+    <message>
+        <source>Rent</source>
+        <translation type="unfinished">Najem</translation>
+    </message>
+    <message>
+        <source>Travel</source>
+        <translation type="unfinished">Potovanje</translation>
+    </message>
+    <message>
+        <source>Income</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Work</source>
+        <translation type="unfinished">Delo</translation>
+    </message>
+    <message>
+        <source>Family Member</source>
+        <translation type="unfinished">Član družine</translation>
+    </message>
+    <message>
+        <source>Misc. Credit</source>
+        <translation type="unfinished">Različni krediti</translation>
     </message>
 </context>
 <context>
@@ -426,27 +656,27 @@ Vnesena vrednost mora biti pozitivna.</translation>
     </message>
     <message>
         <source>Automobile</source>
-        <translation>Avto</translation>
+        <translation type="obsolete">Avto</translation>
     </message>
     <message>
         <source>Bills</source>
-        <translation>Računi</translation>
+        <translation type="obsolete">Računi</translation>
     </message>
     <message>
         <source>CDs</source>
-        <translation>CDji</translation>
+        <translation type="obsolete">CDji</translation>
     </message>
     <message>
         <source>Clothing</source>
-        <translation>Oblačila</translation>
+        <translation type="obsolete">Oblačila</translation>
     </message>
     <message>
         <source>Computer</source>
-        <translation>Računalnik</translation>
+        <translation type="obsolete">Računalnik</translation>
     </message>
     <message>
         <source>DVDs</source>
-        <translation>DVDji</translation>
+        <translation type="obsolete">DVDji</translation>
     </message>
     <message>
         <source>Eletronics</source>
@@ -454,31 +684,31 @@ Vnesena vrednost mora biti pozitivna.</translation>
     </message>
     <message>
         <source>Entertainment</source>
-        <translation>Zabava</translation>
+        <translation type="obsolete">Zabava</translation>
     </message>
     <message>
         <source>Food</source>
-        <translation>Hrana</translation>
+        <translation type="obsolete">Hrana</translation>
     </message>
     <message>
         <source>Gasoline</source>
-        <translation>Bencin</translation>
+        <translation type="obsolete">Bencin</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation>Različno</translation>
+        <translation type="obsolete">Različno</translation>
     </message>
     <message>
         <source>Movies</source>
-        <translation>Filmi</translation>
+        <translation type="obsolete">Filmi</translation>
     </message>
     <message>
         <source>Rent</source>
-        <translation>Najem</translation>
+        <translation type="obsolete">Najem</translation>
     </message>
     <message>
         <source>Travel</source>
-        <translation>Potovanje</translation>
+        <translation type="obsolete">Potovanje</translation>
     </message>
     <message>
         <source>Debit Charge</source>
@@ -498,15 +728,15 @@ Vnesena vrednost mora biti pozitivna.</translation>
     </message>
     <message>
         <source>Work</source>
-        <translation>Delo</translation>
+        <translation type="obsolete">Delo</translation>
     </message>
     <message>
         <source>Family Member</source>
-        <translation>Član družine</translation>
+        <translation type="obsolete">Član družine</translation>
     </message>
     <message>
         <source>Misc. Credit</source>
-        <translation>Različni krediti</translation>
+        <translation type="obsolete">Različni krediti</translation>
     </message>
     <message>
         <source>Automatic Payment</source>
@@ -515,10 +745,6 @@ Vnesena vrednost mora biti pozitivna.</translation>
     <message>
         <source>Cash</source>
         <translation>Gotovina</translation>
-    </message>
-    <message>
-        <source>Electronics</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -217,7 +217,7 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation>Descrizione</translation>
+        <translation type="obsolete">Descrizione</translation>
     </message>
     <message>
         <source>Deadline</source>
@@ -334,6 +334,10 @@ Ti permette di aggiungere velocemente una nuova attività.  Quest&apos;area può
     <message>
         <source>Data can&apos;t be edited, currently syncing</source>
         <translation>Dati non modificabili, sincronizzazione in corso</translation>
+    </message>
+    <message>
+        <source>Summary</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

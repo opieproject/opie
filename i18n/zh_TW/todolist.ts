@@ -210,10 +210,6 @@ Quit Anyway?</source>
         <translation type="unfinished">優先順序</translation>
     </message>
     <message>
-        <source>Description</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Deadline</source>
         <translation type="unfinished">到期日</translation>
     </message>
@@ -307,6 +303,10 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>Data can&apos;t be edited, currently syncing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Summary</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -32,7 +32,7 @@
     </message>
     <message>
         <source>HelpBrowser</source>
-        <translation>Aide HTML</translation>
+        <translation type="obsolete">Aide HTML</translation>
     </message>
     <message>
         <source>Go</source>

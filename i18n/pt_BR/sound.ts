@@ -125,5 +125,9 @@
         <source>Key_Record</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Use ADPCM compression</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

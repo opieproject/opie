@@ -126,7 +126,7 @@
     <name>CalculatorImpl</name>
     <message>
         <source>Calculator</source>
-        <translation>Calculadora</translation>
+        <translation type="obsolete">Calculadora</translation>
     </message>
     <message>
         <source>Standard</source>

@@ -57,6 +57,10 @@
         <source>Contacts</source>
         <translation>Kontakter</translation>
     </message>
+    <message>
+        <source>Search for: </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OListView</name>

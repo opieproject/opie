@@ -58,6 +58,10 @@
         <source>Enter your search terms here</source>
         <translation>Entrez les termes recherchés ici</translation>
     </message>
+    <message>
+        <source>Search for: </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OListView</name>

@@ -83,19 +83,19 @@
     </message>
     <message>
         <source>Restart</source>
-        <translation>Ponovno zaženi</translation>
+        <translation type="obsolete">Ponovno zaženi</translation>
     </message>
     <message>
         <source>Do you want to restart %1 now?</source>
-        <translation>Ali bi radi ponovno zagnali %1?</translation>
+        <translation type="obsolete">Ali bi radi ponovno zagnali %1?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Da</translation>
+        <translation type="obsolete">Da</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>Ne</translation>
+        <translation type="obsolete">Ne</translation>
     </message>
     <message>
         <source>Save Scheme</source>

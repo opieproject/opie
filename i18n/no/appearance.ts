@@ -193,19 +193,19 @@ Dette området tillater deg å velge en applikasjon og hvilke innstillinger du v
     </message>
     <message>
         <source>Restart</source>
-        <translation>Omstart</translation>
+        <translation type="obsolete">Omstart</translation>
     </message>
     <message>
         <source>Do you want to restart %1 now?</source>
-        <translation>Vil du starte om %1 nå?</translation>
+        <translation type="obsolete">Vil du starte om %1 nå?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Ja</translation>
+        <translation type="obsolete">Ja</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>Nei</translation>
+        <translation type="obsolete">Nei</translation>
     </message>
     <message>
         <source>Save Scheme</source>

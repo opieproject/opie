@@ -13,6 +13,10 @@
         <source>Personal Information</source>
         <translation>Informação Pessoal</translation>
     </message>
+    <message>
+        <source>DocTab</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AppLauncher</name>
@@ -155,6 +159,10 @@
         <source>List View</source>
         <translation>Vista em Lista</translation>
     </message>
+    <message>
+        <source>&lt;b&gt;The Documents Tab&lt;p&gt;has been disabled.&lt;p&gt;Use Settings-&gt;Launcher-&gt;DocTab&lt;p&gt;to reenable it.&lt;/b&gt;&lt;/center&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LauncherView</name>
@@ -201,17 +209,17 @@
     <message>
         <source>Battery level is critical!
 Keep power off until power restored!</source>
-        <translation>O nível de energia está muito baixo.
+        <translation type="obsolete">O nível de energia está muito baixo.
 Desligue o dispositivo ou ligue-o à corrente!</translation>
     </message>
     <message>
         <source>Battery is running very low. </source>
-        <translation>O nível de energia da bateria está muito baixo.</translation>
+        <translation type="obsolete">O nível de energia da bateria está muito baixo.</translation>
     </message>
     <message>
         <source>The Back-up battery is very low.
 Please charge the back-up battery.</source>
-        <translation>O nível de energia da bateria extra está baixo.
+        <translation type="obsolete">O nível de energia da bateria extra está baixo.
 Deve carregá-la.</translation>
     </message>
     <message>
@@ -251,12 +259,32 @@ immediately.</source>
         <translation>Memória Criticamente em Baixo
 Termine esta aplicação imediatamente.</translation>
     </message>
+    <message>
+        <source>WARNING</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;The battery level is critical!&lt;p&gt;Keep power off until AC is restored</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The battery is running very low. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;The Back-up battery is very low&lt;p&gt;Please charge the back-up battery</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ShutdownImpl</name>
     <message>
         <source>Shutdown...</source>
-        <translation>Desligar</translation>
+        <translation>A desligar...</translation>
     </message>
     <message>
         <source>Terminate</source>
@@ -285,8 +313,8 @@ Estas operações estão disponíveis principalmente para desenvolvimento e test
         <translation>Cancelar</translation>
     </message>
     <message>
-        <source>Shutdown...</source>
-        <translation>A desligar...</translation>
+        <source>Shutdown</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -297,7 +325,7 @@ Estas operações estão disponíveis principalmente para desenvolvimento e test
     </message>
     <message>
         <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade.</source>
-        <translation>&lt;p&gt;Um sistema sem autorização está a requisitar acesso a este dispositivo.&lt;p&gt;Se estiver a usar uma versão do Ambiente Qtopia mais antigo que a 1.5.1, deverá actualizá-lo.</translation>
+        <translation type="obsolete">&lt;p&gt;Um sistema sem autorização está a requisitar acesso a este dispositivo.&lt;p&gt;Se estiver a usar uma versão do Ambiente Qtopia mais antigo que a 1.5.1, deverá actualizá-lo.</translation>
     </message>
     <message>
         <source>Deny</source>
@@ -310,6 +338,10 @@ Estas operações estão disponíveis principalmente para desenvolvimento e test
     <message>
         <source>Allow</source>
         <translation>Permitir</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade or change the security setting to use IntelliSync.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

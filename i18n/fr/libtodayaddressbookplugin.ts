@@ -28,7 +28,7 @@
     </message>
     <message>
         <source>To activate settings: Restart application !</source>
-        <translation type="obsolete">Pour activer les changement: Redémarrez l&apos;application !</translation>
+        <translation type="unfinished">Pour activer les changement: Redémarrez l&apos;application !</translation>
     </message>
     <message>
         <source>Set Headline Color: </source>
@@ -64,6 +64,26 @@ jours</translation>
     <message>
         <source>The urgent color will be used if the birthday/anniversary is closer than given days !</source>
         <translation>La Couleur d&apos;Urgence est utilisée si les dates sont plus proches que le nombre défini de jours !</translation>
+    </message>
+    <message>
+        <source>Enable/Disable Views</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show &amp;Birthdays</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show &amp;Anniveraries</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The next birthdays will just be shown, if enabled!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The next anniversaries will just be shown, if enabled !</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
