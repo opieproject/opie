@@ -20,9 +20,7 @@ OTodo Editor::newTodo( int cur,
     e->init( cur );
 
 
-#if defined(Q_WS_QWS) || defined(_WS_QWS_)
     e->showMaximized();
-#endif
 
     int ret = e->exec();
     if ( QDialog::Accepted == ret ) {
@@ -43,9 +41,7 @@ OTodo Editor::edit( QWidget *,
     e->init( todo );
     e->setCaption( QObject::tr( "Edit Task" ) );
 
-#if defined(Q_WS_QWS) || defined(_WS_QWS_)
     e->showMaximized();
-#endif
     int ret = e->exec();
 
     OTodo ev = e->todo();

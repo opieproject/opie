@@ -13,7 +13,7 @@ TemplateManager::TemplateManager() {
     m_path =  Global::applicationFileName("todolist", "templates.xml");
 }
 TemplateManager::~TemplateManager() {
-
+    save();
 }
 void TemplateManager::load() {
     Config conf("todolist_templates");
@@ -31,16 +31,18 @@ void TemplateManager::load() {
         if (str.isEmpty() )
             continue;
 
-        m_templates.insert( str,
-                            ev );
+        m_templates.insert( str, ev );
     }
 }
 void TemplateManager::save() {
+    qWarning("Saving!!!!");
     Config conf("todolist_templates");
 
     OTodoAccessXML *res = new OTodoAccessXML( "template",
                                                 m_path );
     OTodoAccess db(res);
+    db.load();
+    db.clear();
 
 
     QMap<QString, OTodo>::Iterator it;
@@ -56,7 +58,11 @@ void TemplateManager::save() {
 void TemplateManager::addEvent( const QString& str,
                                 const OTodo& ev) {
     qWarning("AddEvent"+  str );
-    m_templates.replace( str,  ev );
+    OTodo todo = ev;
+    if( ev.uid() == 0 )
+	todo.setUid(1); // generate a new uid 
+	
+    m_templates.replace( str,  todo );
 }
 void TemplateManager::removeEvent( const QString& str ) {
     m_templates.remove( str );
