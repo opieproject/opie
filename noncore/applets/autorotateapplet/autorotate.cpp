@@ -10,32 +10,34 @@
  *                                                                       *
  *************************************************************************/
 
-
 #include "autorotate.h"
 
-#include <qpe/resource.h>
-
+/* OPIE */
 #include <opie/odevice.h>
-
 #include <qpe/applnk.h>
 #include <qpe/config.h>
+#include <qpe/resource.h>
 
-#include <qcopchannel_qws.h>
-#include <qpainter.h>
-#include <qmessagebox.h>
-#include <qfile.h>
-#include <qtextstream.h>
-#include <qtimer.h>
+/* QT */
 #include <qapplication.h>
+#include <qfile.h>
+#include <qcopchannel_qws.h>
+#include <qmessagebox.h>
+#include <qpainter.h>
+#include <qpixmap.h>
+#include <qimage.h>
+#include <qtimer.h>
+#include <qtextstream.h>
 
 using namespace Opie;
 
-AutoRotate::AutoRotate(QWidget * parent):QWidget(parent),
-    enabledPm( Resource::loadPixmap("autorotate/rotate") ), 
-    disabledPm( Resource::loadPixmap("autorotate/norotate") )
+AutoRotate::AutoRotate(QWidget * parent):QWidget(parent)
 {
-    setFixedWidth ( AppLnk::smallIconSize()  );
-    setFixedHeight ( AppLnk::smallIconSize()  );
+    setFixedWidth( AppLnk::smallIconSize() );
+    setFixedHeight( AppLnk::smallIconSize() );
+
+    enabledPm.convertFromImage( Resource::loadImage("autorotate/rotate").smoothScale( height(), width() ) );
+    disabledPm.convertFromImage( Resource::loadImage("autorotate/norotate").smoothScale( height(), width() ) );
 
     repaint(true);
     popupMenu = 0;
@@ -52,24 +54,15 @@ AutoRotate::~AutoRotate()
 void AutoRotate::mousePressEvent(QMouseEvent *)
 {
     QPopupMenu *menu = new QPopupMenu(this);
-
-    if (isRotateEnabled())
-	    menu->insertItem("Disable Rotation",1);
-    else
-	    menu->insertItem("Enable Rotation",1);
-
+    menu->insertItem( isRotateEnabled()? "Disable Rotation" : "Enable Rotation" ,1 );
 
     QPoint p = mapToGlobal(QPoint(0, 0));
     QSize s = menu->sizeHint();
-    int opt = menu->exec(QPoint(p.x() + (width() / 2) - (s.width() / 2),
-				p.y() - s.height()), 0);
+    int opt = menu->exec(QPoint(p.x() + (width() / 2) - (s.width() / 2), p.y() - s.height()), 0);
 
-    if (opt==1) {
-        if (isRotateEnabled())
-            setRotateEnabled(false);
-        else
-            setRotateEnabled(true);
-                
+    if (opt==1)
+    {
+        setRotateEnabled( !isRotateEnabled() );
         repaint(true);
     }
 
@@ -79,19 +72,14 @@ void AutoRotate::mousePressEvent(QMouseEvent *)
 void AutoRotate::paintEvent(QPaintEvent *)
 {
     QPainter p(this);
-
-    if ( isRotateEnabled() ) {
-	    p.drawPixmap(0, 0, enabledPm  );
-    } else {
-	    p.drawPixmap(0, 0, disabledPm  );
-    }
+    p.drawPixmap( 0, 0, isRotateEnabled()? enabledPm : disabledPm );
 }
 
 void AutoRotate::setRotateEnabled(bool status)
 {
     Config cfg( "qpe" );
     cfg.setGroup( "Appearance" );
-    cfg.writeEntry( "rotateEnabled",status );
+    cfg.writeEntry( "rotateEnabled", status );
 
 }
 bool AutoRotate::isRotateEnabled()
@@ -101,7 +89,7 @@ bool AutoRotate::isRotateEnabled()
 
     bool res = cfg.readBoolEntry( "rotateEnabled" );
 
-    if (res ) 
+    if (res )
         qDebug("Enabled");
     else
         qDebug("Disabled");
