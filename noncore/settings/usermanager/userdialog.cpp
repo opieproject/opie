@@ -32,7 +32,8 @@ using namespace Opie;
  * UserDialog constructor. Setup the dialog, fill the groupComboBox & groupsListView with all groups.
  *
  */
-UserDialog::UserDialog(QWidget* parent, const char* name, bool modal, WFlags fl) : QDialog(parent, name, modal, fl) {
+UserDialog::UserDialog(int viewmode, QWidget* parent, const char* name, bool modal, WFlags fl) : QDialog(parent, name, modal, fl) {
+	vm=viewmode;
 	QVBoxLayout *layout = new QVBoxLayout(this);
 	myTabWidget=new QTabWidget(this,"User Tab Widget");
 	layout->addWidget(myTabWidget);
@@ -109,13 +110,13 @@ void UserDialog::setupTab1() {
 	groupLabel->setText("Primary group: ");
 	groupComboBox=new QComboBox(tabpage,"PrimaryGroup");
 
-	// Copy /etc/skel
-	QLabel *skelLabel=new QLabel(tabpage,"skel");
-	skelLabel->setText("Copy /etc/skel: ");
-	skelCheckBox=new QCheckBox(tabpage);
-	skelCheckBox->setChecked(true);
-//	skelLabel->setDisabled(true);
-//	skelCheckBox->setDisabled(true);
+	if(vm==VIEWMODE_NEW) {
+		// Copy /etc/skel
+		skelLabel=new QLabel(tabpage,"skel");
+		skelLabel->setText("Copy /etc/skel: ");
+		skelCheckBox=new QCheckBox(tabpage);
+		skelCheckBox->setChecked(true);
+	}
 	
 	// Widget layout
 	QHBoxLayout *hlayout=new QHBoxLayout(-1,"hlayout");
@@ -136,8 +137,10 @@ void UserDialog::setupTab1() {
 		vlayout1->addWidget(shellLabel);
 		vlayout1->addSpacing(5);
 		vlayout1->addWidget(groupLabel);
-		vlayout1->addSpacing(5);
-		vlayout1->addWidget(skelLabel);
+		if(vm==VIEWMODE_NEW) {
+			vlayout1->addSpacing(5);
+			vlayout1->addWidget(skelLabel);
+		}
 		// Second column, data
 		vlayout2->addWidget(loginLineEdit);
 		vlayout2->addSpacing(5);
@@ -150,8 +153,10 @@ void UserDialog::setupTab1() {
 		vlayout2->addWidget(shellComboBox);
 		vlayout2->addSpacing(5);
 		vlayout2->addWidget(groupComboBox);
-		vlayout2->addSpacing(5);
-		vlayout2->addWidget(skelCheckBox);
+		if(vm==VIEWMODE_NEW) {
+			vlayout2->addSpacing(5);
+			vlayout2->addWidget(skelCheckBox);
+		}
 	hlayout->addLayout(vlayout1);
 	hlayout->addLayout(vlayout2);
 	
@@ -196,7 +201,8 @@ bool UserDialog::addUser(int uid, int gid) {
 	QFile ozTest;
 	int oz=false;
 	if(ODevice::inst()->system()==System_OpenZaurus) oz=true;
-	UserDialog *adduserDialog=new UserDialog();
+	// viewmode is a workaround for a bug in qte-2.3.4 that gives bus error on manipulating adduserDialog's widgets here.
+	UserDialog *adduserDialog=new UserDialog(VIEWMODE_NEW);
 	adduserDialog->setCaption(tr("Add User"));
 	adduserDialog->userID=uid;	// Set next available UID as default uid.
 	adduserDialog->groupID=gid;	// Set next available GID as default gid.
@@ -298,7 +304,8 @@ bool UserDialog::delUser(const char *username) {
  */
 bool UserDialog::editUser(const char *username) {
 	int invalid_group=0;
-	UserDialog *edituserDialog=new UserDialog();	// Create Dialog
+	// viewmode is a workaround for a bug in qte-2.3.4 that gives bus error on manipulating edituserDialog's widgets here.
+	UserDialog *edituserDialog=new UserDialog(VIEWMODE_EDIT);	// Create Dialog
 	edituserDialog->setCaption(tr("Edit User"));
 	accounts->findUser(username);	// Locate user in database and fill variables in 'accounts' object.
 	if(!(accounts->findGroup(accounts->pw_gid))) {	// Locate the user's primary group, and fill group variables in 'accounts' object.

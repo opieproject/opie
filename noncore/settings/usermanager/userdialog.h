@@ -42,7 +42,12 @@ private:
 	QImage userImage;
 	int groupID;
 	int userID;
-	
+	int vm;
+	enum VIEWMODE {
+		VIEWMODE_NEW,
+		VIEWMODE_EDIT
+	};
+		
 	void setupTab1(void);
 	void setupTab2(void);
 	void accept(void);
@@ -51,7 +56,7 @@ private slots:
 	void clickedPicture(void);
 
 public:
-	UserDialog( QWidget* parent = 0, const char* name = 0, bool modal=true, WFlags fl = 0 );
+	UserDialog( int viewmode=VIEWMODE_NEW, QWidget* parent = 0, const char* name = 0, bool modal=true, WFlags fl = 0 );
 	~UserDialog();
 	static bool addUser(int uid, int gid);
 	static bool editUser(const char *username);

@@ -51,6 +51,7 @@ char *Passwd::crypt_make_salt() {
 	return result;
 }
 
+//  opens the files /etc/passwd & /etc/group and loads the contents into passwdStringList & groupStringList
 bool Passwd::open() {
 	int returnvalue=false;
 	
@@ -76,6 +77,7 @@ bool Passwd::open() {
 	return returnvalue;
 }
 
+// Writes back the contents of passwdStringList to /etc/passwd & groupStringList to /etc/group
 bool Passwd::close() {
 	int returnvalue=false;
 	QFile passwd_file("/etc/passwd");
@@ -98,6 +100,7 @@ bool Passwd::close() {
 	return returnvalue;
 }
 
+// Splits a "passwd" line into the components and stores them in the pw_* variables.
 void Passwd::splitPasswdEntry(QString &userString) {
 	userdataStringList=QStringList::split(":",userString,true);
 	QStringList::Iterator it=userdataStringList.begin();
@@ -110,6 +113,7 @@ void Passwd::splitPasswdEntry(QString &userString) {
 	pw_shell=(*it++);
 }
 
+// Splits a "group" line into the components and stores them in the gr_* variables.
 void Passwd::splitGroupEntry(QString &groupString) {
 	groupdataStringList=QStringList::split(":",groupString,true);
 	QStringList::Iterator it=groupdataStringList.begin();
@@ -119,6 +123,7 @@ void Passwd::splitGroupEntry(QString &groupString) {
 	gr_mem=QStringList::split(" ",(*it++));
 }
 
+// Find a user in the passwdStringList. Return true if found and also fill the pw_* variables.
 bool Passwd::searchUser(QRegExp &userRegExp) {
 	QStringList tempStringList(passwdStringList.grep(userRegExp));
 	if((tempStringList.isEmpty())) {
@@ -130,16 +135,19 @@ bool Passwd::searchUser(QRegExp &userRegExp) {
 	return true;
 }
 
+// Find a user by login.
 bool Passwd::findUser(const char *username) {
 	QRegExp userRegExp(QString("^%1\\:").arg(username));
 	return searchUser(userRegExp);
 }
 
+// Find a user by uid.
 bool Passwd::findUser(int uid) {
 	QRegExp userRegExp(QString(":%1\\:").arg(uid));
 	return searchUser(userRegExp);
 }
 
+// Add a user to the passwdStringList, create home directory, and optionally create a group for the user.
 bool Passwd::addUser(QString pw_name, QString pw_passwd, int pw_uid, int pw_gid, QString pw_gecos,QString pw_dir, QString pw_shell, bool createGroup) {
 	QString tempString;
 	if((createGroup) && (!(findGroup(pw_gid)))) addGroup(pw_name,pw_gid);
@@ -156,6 +164,7 @@ bool Passwd::addUser(QString pw_name, QString pw_passwd, int pw_uid, int pw_gid,
 	return 1;
 }
 
+// Update info for a user in passwdStringList, take info from the pw_* fields.
 bool Passwd::updateUser(QString login) {
 	QRegExp userRegExp(QString("^%1\\:").arg(login));
 	for(QStringList::Iterator it=passwdStringList.begin(); it!=passwdStringList.end(); ++it) {
@@ -167,6 +176,7 @@ bool Passwd::updateUser(QString login) {
 	return false;
 }
 
+// Delete a user from passwdStringList.
 bool Passwd::deleteUser(QRegExp &userRegExp, bool delGroup) {
 	for(QStringList::Iterator it=passwdStringList.begin(); it!=passwdStringList.end(); ++it) {
 		if(userRegExp.find((*it),0)!=-1) {
@@ -179,16 +189,19 @@ bool Passwd::deleteUser(QRegExp &userRegExp, bool delGroup) {
 	return false;
 }
 
+// Delete a user by login, and optionally also delete group.
 bool Passwd::delUser(const char *username, bool delGroup) {
 	QRegExp userRegExp(QString("^%1\\:").arg(username));
 	return deleteUser(userRegExp,delGroup);
 }
 
+// Delete a user by uid, and optionally also delete group.
 bool Passwd::delUser(int uid, bool delGroup) {
 	QRegExp userRegExp(QString(":%1\\:").arg(uid));
 	return deleteUser(userRegExp,delGroup);
 }
 
+// Locate a group in the groupStringList, fill out the gr_* variables and return "true" if found.
 bool Passwd::searchGroup(QRegExp &groupRegExp) {
 	QStringList tempStringList(groupStringList.grep(groupRegExp));
 	if((tempStringList.isEmpty())) {
@@ -200,16 +213,19 @@ bool Passwd::searchGroup(QRegExp &groupRegExp) {
 	return true;
 }
 
+// Find a group by groupname.
 bool Passwd::findGroup(const char *groupname) {
 	QRegExp groupRegExp(QString("^%1\\:").arg(groupname));
 	return searchGroup(groupRegExp);
 }
 
+// Find a group by gid.
 bool Passwd::findGroup(int gid) {
 	QRegExp groupRegExp(QString(":%1\\:").arg(gid));
 	return searchGroup(groupRegExp);
 }
 
+// Add a group to groupStringList
 bool Passwd::addGroup(QString gr_name, int gr_gid) {
 	QString tempString;
 	tempString=gr_name+":*:"+QString::number(gr_gid)+":";
@@ -217,6 +233,7 @@ bool Passwd::addGroup(QString gr_name, int gr_gid) {
 	return 1;
 }
 
+// Update fields for a group in groupStringList, take info from the gr_* variables.
 bool Passwd::updateGroup(int gid) {
 	QRegExp groupRegExp(QString(":%1\\:").arg(QString::number(gid)));
 	for(QStringList::Iterator it=groupStringList.begin(); it!=groupStringList.end(); ++it) {
@@ -232,6 +249,7 @@ bool Passwd::updateGroup(int gid) {
 	return false;
 }
 
+// Delete a group from groupStringList.
 bool Passwd::deleteGroup(QRegExp &groupRegExp) {
 	for(QStringList::Iterator it=groupStringList.begin(); it!=groupStringList.end(); ++it) {
 		if(groupRegExp.find((*it),0)!=-1) {
@@ -242,16 +260,19 @@ bool Passwd::deleteGroup(QRegExp &groupRegExp) {
 	return false;
 }
 
+// Delete a group by groupname.
 bool Passwd::delGroup(const char *groupname) {
 	QRegExp groupRegExp(QString("^%1\\:").arg(groupname));
 	return deleteGroup(groupRegExp);
 }
 
+// Delete a group by gid.
 bool Passwd::delGroup(int gid) {
 	QRegExp groupRegExp(QString(":%1\\:").arg(gid));
 	return deleteGroup(groupRegExp);
 }
 
+// Add a user as a member to a group in groupStringList.
 bool Passwd::addGroupMember(QString groupname, QString member) {
 	if(!(findGroup(groupname))) return false;
 	gr_mem << member;
@@ -259,6 +280,7 @@ bool Passwd::addGroupMember(QString groupname, QString member) {
 	return true;
 }
 
+// Delete a user as a groupmember from a group in groupStringList.
 bool Passwd::delGroupMember(QString groupname, QString member) {
 	if(!(findGroup(groupname))) return false;
 	for(QStringList::Iterator it=gr_mem.begin(); it!=gr_mem.end(); ++it) {
@@ -271,4 +293,5 @@ bool Passwd::delGroupMember(QString groupname, QString member) {
 	return true;
 }
 
+// Global Object 
 Passwd *accounts;
