@@ -18,23 +18,32 @@ the future
   Serial IOLayer
   Saving and Restoring Profiles
   ConfigDialog Framework
+  IOLayer
+  Profile->Session and MainWidget
+  FilesendingLayer ( Z/Y Modem tested X does not work at all )
 
 TASKS in progress:
-  Profile->Session and MainWidget --- Harlekin
-  IOLayer - wazlaf
+  Irda  ConfigWidget - Harlekin
+  BT ConfigWidget - Harlekin
+  IRDA-Layer - Harlekin
+  Bluetooth-Layer - Harlekin
+  Modem - Harlekin
+  Keys - hash
   TE - ibotty
   Scripting - wazlaf 
-  FilesendingLayer
+   
   Session->Profile - hash => why is this needed? you can not change any settings
                              after you start the session, so all you would do is
                              create a duplicate of the profile used to open the
                              current session. maybe needed later when you can change
                              settings while the session is running (colors, fonts...)
+	             zecke => think of that. You try to hook up with a New Device 
+		    	     neither know anything.... speed flow and such stuff
+			     you start to experiment and it starts to work
+			     now you want to save the session
 
 OPEN tasks:
-  Irda  ConfigWidget - Harlekin
-  BT ConfigWidget
-  Keys - hash
-  IRDA-Layer - open
-  Bluetooth-Layer - open
-  Fullscreen mode ( maybe spy at vnc viewer )
+  Modem
+  Fullscreen mode ( maybe spy at vnc viewer  or read NeoTrons HOWTO)
+  Receiving ( copy &n paste from filetransfer.cpp )
+  
