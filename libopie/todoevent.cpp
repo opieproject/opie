@@ -131,7 +131,7 @@ QString ToDoEvent::richText() const
   // Description of the todo
   if ( !description().isEmpty() ){
     text += "<b>" + QObject::tr( "Description:" ) + "</b><br>";
-    text += Qtopia::escapeString(description() ) + "<br>";
+    text += Qtopia::escapeString(description() ).replace(QRegExp( "[\n]"), "<br>" ) + "<br>";
   }
   text += "<b>" + QObject::tr( "Priority:") +" </b>"
     +  QString::number( priority() ) + "<br>";
