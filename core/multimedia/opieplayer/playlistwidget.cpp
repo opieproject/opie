@@ -23,6 +23,7 @@
 
 #include <qmenubar.h>
 #include <qtoolbar.h>
+#include <qpe/qpemenubar.h>
 #include <qpe/fileselector.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/lnkproperties.h>
