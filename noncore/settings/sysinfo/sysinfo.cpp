@@ -17,6 +17,10 @@
 ** not clear to you.
 **
 **********************************************************************/
+**
+**  Enhancements by: Dan Williams, <williamsdr@acm.org>
+**
+**********************************************************************/
 
 #include "memory.h"
 #include "load.h"
@@ -26,7 +30,7 @@
 #include "versioninfo.h"
 #include "sysinfo.h"
 
-#include "otabwidget.h"
+#include <opie/otabwidget.h>
 
 #include <qpe/config.h>
 #include <qpe/resource.h>
@@ -46,7 +50,7 @@ SystemInfo::SystemInfo( QWidget *parent, const char *name, WFlags f )
     bool advanced = config.readBoolEntry( "Advanced", TRUE );
 
     QVBoxLayout *lay = new QVBoxLayout( this );
-    OTabWidget *tab = new OTabWidget( this, "tabwidget", OTabWidget::Global, OTabWidget::Bottom );
+    OTabWidget *tab = new OTabWidget( this, "tabwidget", OTabWidget::Global );
     lay->addWidget( tab );
     tab->addTab( new MemoryInfo( tab ), "sysinfo/memorytabicon.png", tr("Memory") );
 #if defined(_OS_LINUX_) || defined(Q_OS_LINUX)
@@ -60,6 +64,7 @@ SystemInfo::SystemInfo( QWidget *parent, const char *name, WFlags f )
     }
     tab->addTab( new VersionInfo( tab ), "sysinfo/versiontabicon.png", tr("Version") );
 
+    tab->setCurrentTab( tr( "Memory" ) );
 }
 
 

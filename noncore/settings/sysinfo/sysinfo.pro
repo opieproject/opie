@@ -10,7 +10,6 @@ HEADERS   = memory.h \
       modulesinfo.h \
       modulesdetail.h \
       versioninfo.h \
-      otabwidget.h \
       sysinfo.h
 SOURCES   = main.cpp \
       memory.cpp \
@@ -22,12 +21,11 @@ SOURCES   = main.cpp \
       processdetail.cpp \
       modulesdetail.cpp \
       versioninfo.cpp \
-      otabwidget.cpp \
       sysinfo.cpp
 INTERFACES  = 
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
-LIBS            += -lqpe
+LIBS            += -lqpe -lopie
 TARGET    = sysinfo
 
 TRANSLATIONS = ../../../i18n/de/sysinfo.ts \

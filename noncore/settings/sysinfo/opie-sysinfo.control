@@ -1,9 +1,9 @@
 Files: bin/sysinfo apps/Applications/sysinfo.desktop pics/sysinfo
 Priority: optional
 Section: opie/applications
-Maintainer: Warwick Allison <warwick@trolltech.com>
+Maintainer: Dan Williams <wiliamsdr@acm.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
+Depends: opie-base ($QPE_VERSION), libopie ($QPE_VERSION)
 Description: System Information dialog
  For the Opie environment.
