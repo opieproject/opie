@@ -367,7 +367,7 @@ void AddressbookWindow::setDocument( const QString &filename )
 			switch( QMessageBox::information( this, tr ( "Add Contact?" ),
 							  tr( "Do you really want add contact for \n%1?" )
 							  .arg( (*it).fullName().latin1() ),
-							  tr( "&Yes" ), tr( "&No" ), tr( "&AllYes"),
+							  tr( "&Yes" ), tr( "&No" ), tr( "&All Yes"),
 							  0,      // Enter == button 0
 							  2 ) ) { // Escape == button 2
 			case 0: 
