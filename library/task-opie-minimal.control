@@ -4,8 +4,7 @@ Section: opie/system
 Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-oipkg, opie-base, task-opie-pim, opie-keyboard,
-opie-batteryapplet, opie-clockapplet, opie-volumeapplet
-Description: Bootstrap Qtopia environment
- A complete GUI environment for handhelds.
+Depends: opie-oipkg opie-base
+Description: Bootstrap Qtopia environment(minimal)
+ A complete GUI environment for handhelds. This is the _minimal_ version.
  You will probably want to install one of the opie-i18n-* packages.
