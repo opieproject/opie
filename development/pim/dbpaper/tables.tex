@@ -62,7 +62,7 @@ Recurrence:\\
 \begin{verbatim}
 CREATE TABLE RECURRENCE (
   UID          int NOT NULL UNIQUE,
-  TID 	  int NOT NULL
+  TID     int NOT NULL
   RType        int,
   RWeekDays    int,
   RPosition    int,
@@ -128,11 +128,12 @@ Personal data: \\
 \hline
 \end{tabular}
 \begin{verbatim}
-CREATE TABLE PERSONAL_DATA_CONTACT (
-  UID    int NOT NULL UNIQUE,
-  ID     int AUTOINCREMENT,
-  Ident  text,
-  Value  text,
+CREATE TABLE PERSONAL_DATA (
+  UID       int NOT NULL UNIQUE,
+  ID        int AUTOINCREMENT,
+  Ident     text,
+  Priority  int,
+  Value     text,
   PRIMARY KEY(UID,ID)
 );      
 \end{verbatim}
@@ -171,10 +172,10 @@ CrossRef: \\
 CREATE TABLE CROSSREF (
   TID1       int NOT NULL,
   UID1       int NOT NULL,
-  Item1      int NOT NULL,
-  TID2       int MOT NULL,
+  ID1        int NOT NULL,
+  TID2       int NOT NULL,
   UID2       int NOT NULL,
-  Item2      int NOT NULL,
+  ID2        int NOT NULL,
   PRIMARY KEY() 
 );
 \end{verbatim}
@@ -194,7 +195,7 @@ CREATE TABLE CATEGORY (
   UID   int NOT NULL UNIQUE,
   Name  text,
   ApplicationName text,
-  ForeGroundColor text,	<-- maybe hex?
+  ForeGroundColor text, <-- maybe hex?
   BackGroundColor text,
   PRIMARY KEY(UID)
 );
@@ -237,7 +238,7 @@ CREATE TABLE APPLICATION (
 \end{verbatim}
 
 \noindent
-Location: \\ 		
+Location: \\            
 \begin{tabular}[ht]{|l|l|}
 \hline
 \underline{UID} & Name  \\
