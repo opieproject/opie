@@ -15,18 +15,6 @@
 
 using namespace OpieTooth;
 
-PinDlg::PinDlg( const QString& status,
-                const QString& mac, QWidget* parent,
-                const char* name )
-        : PinDlgBase( parent, name, WType_Modal )
-{
-    m_mac = mac;
-    test( mac );
-    txtStatus->setText(status);
-    if(!m_mac.isEmpty())
-	    QPEApplication::showDialog( this );
-}
-
 PinDlg::PinDlg(QWidget* parent,
                const char* name, 
                Qt::WFlags f )
@@ -38,13 +26,13 @@ PinDlg::PinDlg(QWidget* parent,
     {
         // can't obtain MAC
         printf("ERR\n"); 
-	qApp->quit();
+	::exit(0);
     }
     else
     {
         test( m_mac );
         txtStatus->setText(makeTextFromArgs());
-        QPEApplication::showDialog( this ) ; 
+        QPEApplication::showDialog( this , true) ; 
     }
 }
 
@@ -68,12 +56,7 @@ void PinDlg::test( const QString& mac )
         Config cfg("bluepin");
         cfg.setGroup(mac);
         lnePin->setText(cfg.readEntryCrypt("pin", QString::null ) );
-        if ( !lnePin->text().isEmpty() )
-        {
-            //QTimer::singleShot(100,  this,  SLOT(accept() ) );
-        }
     }
-
 }
 
 QString PinDlg::makeTextFromArgs()
@@ -100,13 +83,13 @@ QString PinDlg::makeTextFromArgs()
         return status ;
     }
     else
-        return QString();
+        return QString::null;
 }
 
 QString PinDlg::makeMacFromArgs()
 {
     if(qApp->argc() < 3)
-        return QString();
+        return QString::null;
     else
         return qApp->argv()[2] ;
 }
@@ -122,4 +105,5 @@ void PinDlg::accept()
     printf("PIN:%s\n", lnePin->text().latin1());
     QDialog::accept();
     qApp->quit();
+    ::exit(0);
 }

@@ -10,14 +10,7 @@ namespace OpieTooth {
 	Q_OBJECT
 	
     public:
-        PinDlg(const QString& text="",
-               const QString& mac="",
-               QWidget* parent = 0,
-               const char* name= 0 );
-        
-        PinDlg(QWidget* parent,
-               const char* name, 
-               Qt::WFlags f );
+        PinDlg(QWidget* parent = 0,const char* name = 0, Qt::WFlags f = 0);
 
         ~PinDlg();
         void setMac( const QString& );

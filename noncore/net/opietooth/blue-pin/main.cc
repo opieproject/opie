@@ -7,5 +7,10 @@
 
 #include "pindlg.h"
 
-using namespace Opie::Core;
-OPIE_EXPORT_APP( OApplicationFactory<OpieTooth::PinDlg> )
+int main(int argc, char *argv[]) {
+    QPEApplication oapp(argc, argv);
+    
+    OpieTooth::PinDlg dlg;
+    return oapp.exec();
+}
+

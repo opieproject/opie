@@ -12,15 +12,15 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>254</width>
-            <height>245</height>
+            <width>267</width>
+            <height>161</height>
         </rect>
     </property>
     <property stdset="1">
         <name>caption</name>
         <string>Please enter pin</string>
     </property>
-    <vbox>
+    <grid>
         <property stdset="1">
             <name>margin</name>
             <number>11</number>
@@ -29,28 +29,7 @@
             <name>spacing</name>
             <number>6</number>
         </property>
-        <spacer>
-            <property>
-                <name>name</name>
-                <cstring>Spacer4_2</cstring>
-            </property>
-            <property stdset="1">
-                <name>orientation</name>
-                <enum>Vertical</enum>
-            </property>
-            <property stdset="1">
-                <name>sizeType</name>
-                <enum>Expanding</enum>
-            </property>
-            <property>
-                <name>sizeHint</name>
-                <size>
-                    <width>20</width>
-                    <height>20</height>
-                </size>
-            </property>
-        </spacer>
-        <widget>
+        <widget row="0"  column="0" >
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
@@ -65,7 +44,7 @@
                 <enum>RichText</enum>
             </property>
         </widget>
-        <widget>
+        <widget row="1"  column="0" >
             <class>QLayoutWidget</class>
             <property stdset="1">
                 <name>name</name>
@@ -153,28 +132,7 @@
                 </widget>
             </vbox>
         </widget>
-        <spacer>
-            <property>
-                <name>name</name>
-                <cstring>Spacer5</cstring>
-            </property>
-            <property stdset="1">
-                <name>orientation</name>
-                <enum>Vertical</enum>
-            </property>
-            <property stdset="1">
-                <name>sizeType</name>
-                <enum>Expanding</enum>
-            </property>
-            <property>
-                <name>sizeHint</name>
-                <size>
-                    <width>20</width>
-                    <height>20</height>
-                </size>
-            </property>
-        </spacer>
-        <widget>
+        <widget row="2"  column="0" >
             <class>QLayoutWidget</class>
             <property stdset="1">
                 <name>name</name>
@@ -255,7 +213,7 @@
                 </spacer>
             </hbox>
         </widget>
-    </vbox>
+    </grid>
 </widget>
 <connections>
     <connection>
