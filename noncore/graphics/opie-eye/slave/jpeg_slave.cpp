@@ -1300,7 +1300,7 @@ QString JpegSlave::iconViewName( const QString& path) {
         return QString::null;
 
     QString tag;
-    tag  = QObject::tr( "<qt>Comment: %1\n" ).arg( ImageInfo.getComment() );
+    tag  = QObject::tr( "Comment: %1\n" ).arg( ImageInfo.getComment() );
     {
 // ODP fixme
         QString timestring = TimeString::dateString( parseDateTime(  ImageInfo.getDateTime() ), FALSE );
@@ -1312,7 +1312,6 @@ QString JpegSlave::iconViewName( const QString& path) {
     tag += color_mode_to_string(  ImageInfo.getIsColor() );
 
     tag += compression_to_string( ImageInfo.getCompressionLevel() );
-    tag += QObject::tr( "</qt>" );
 
     return tag;
 }
@@ -1327,7 +1326,7 @@ QString JpegSlave::fullImageInfo( const QString& path) {
         return QString::null;
 
     QString tag, tmp;
-    tag   = QObject::tr( "Comment: %1\n" ).arg( ImageInfo.getComment() );
+    tag   = QObject::tr( "<qt>Comment: %1\n" ).arg( ImageInfo.getComment() );
 
     tmp =  ImageInfo.getCameraMake();
     if ( tmp.length() )

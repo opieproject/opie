@@ -13,7 +13,7 @@ PHUNK_VIEW_INTERFACE( "Gif", GifSlave );
 
 namespace {
 /*
-** $Id: gif_slave.cpp,v 1.1 2004-03-22 23:34:31 zecke Exp $
+** $Id: gif_slave.cpp,v 1.2 2004-04-02 19:28:09 zecke Exp $
 **
 ** Minimal GIF parser, for use in extracting and setting metadata.
 ** Modified for standalone & KDE calling by Bryce Nesbitt
@@ -286,8 +286,9 @@ QString GifSlave::iconViewName(const QString& str) {
 }
 
 QString GifSlave::fullImageInfo( const QString& str) {
-    QString st;
+    QString st = "<qt>";
     get_gif_info(QFile::encodeName( str ).data(), st, true );
+    st.append(  "</qt>" );
     return st;
 }
 

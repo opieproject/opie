@@ -195,8 +195,9 @@ QString PNGSlave::iconViewName( const QString& path) {
 }
 
 QString PNGSlave::fullImageInfo( const QString& path) {
-    QString str;
+    QString str = "<qt>";
     read_comment( path, true, str );
+    str += "</qt>";
     return str;
 }
 

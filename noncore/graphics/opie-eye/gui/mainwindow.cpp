@@ -109,7 +109,7 @@ void PMainWindow::slotConfig() {
         QWidget *_wid = inf->configWidget( *m_cfg );
         _wid->reparent(wid, QPoint() );
         lst.insert( view, _wid );
-        wid->addTab( _wid, QString::null, inf->name() );
+        wid->addTab( _wid, "fileopen", inf->name() );
     }
 
 /*

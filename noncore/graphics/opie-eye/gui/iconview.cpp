@@ -12,6 +12,7 @@
 
 #include <opie2/oconfig.h>
 #include <opie2/okeyconfigwidget.h>
+#include <opie2/odebug.h>
 
 #include <qpe/resource.h>
 #include <qpe/qpemessagebox.h>
@@ -42,7 +43,8 @@ namespace {
         QString path()const { return m_path; }
         bool isDir()const { return m_isDir; }
         void setText( const QString& );
-        void reCalc();
+
+
     private:
         mutable QPixmap* m_pix;
         QString m_path;
@@ -70,6 +72,10 @@ namespace {
             _unkPix = new QPixmap( Resource::loadPixmap( "UnknownDocument" ) );
     }
     inline QPixmap* IconViewItem::pixmap()const {
+        qWarning(  "Name is " + m_path.right( 15 ) + " rect is %d %d %d %d | %d %d",
+                   rect().x(),rect().y(),rect().width(),rect().height(),
+                   iconView()->contentsX(), iconView()->contentsY());
+
         if ( m_isDir )
             return _dirPix;
         else{
@@ -90,12 +96,6 @@ namespace {
         QString text = QIconViewItem::text()+"\n"+str;
         m_noInfo = true;
         QIconViewItem::setText( text );
-        reCalc();
-    }
-
-    inline void IconViewItem::reCalc()
-    {
-        calcRect();
     }
 }
 
@@ -122,11 +122,10 @@ PIconView::PIconView( QWidget* wid, Opie::Core::OConfig* cfg )
 
     m_view->setArrangement( QIconView::LeftToRight );
     m_view->setItemTextPos( QIconView::Right );
-    m_view->setResizeMode(QIconView::Adjust);
 
     int dw = QApplication::desktop()->width();
     int viewerWidth = dw-style().scrollBarExtent().width();
-    m_view->setGridX( viewerWidth-2*m_view->spacing() );
+    m_view->setGridX( viewerWidth-3*m_view->spacing());
     m_view->setGridY( fontMetrics().height()*2+40 );
 
 
@@ -196,11 +195,11 @@ void PIconView::slotChangeDir(const QString& path) {
     lister->setStartPath(  path );
     m_path = lister->currentPath();
 
-    m_view->setUpdatesEnabled( false );
+    m_view->viewport()->setUpdatesEnabled( false );
     m_view->clear();
     addFolders( lister->folders() );
     addFiles( lister->files() );
-    m_view->setUpdatesEnabled( true );
+    m_view->viewport()->setUpdatesEnabled( true );
 
     // Also invalidate the cache. We can't cancel the operations anyway
     g_stringPix.clear();
@@ -314,7 +313,6 @@ void PIconView::slotThumbInfo( const QString& _path, const QString& str ) {
         /* if set the view shows nonsens!
            I dont know how to fix the format of displayed text :(*/
         item->setText( str );
-        item->repaint();
         g_stringInf.remove( _path );
     }
 }
@@ -325,11 +323,9 @@ void PIconView::slotThumbNail(const QString& _path, const QPixmap &pix) {
         if (pix.width()>0) {
             PPixmapCache::self()->insertImage( _path, pix, 64, 64 );
             /* required for a recalculated rectangle. otherwise the view show nonsense! */
-            item->reCalc();
         } else {
             PPixmapCache::self()->insertImage(_path,Resource::loadPixmap( "UnknownDocument" ),64,64 );
         }
-        item->repaint();
         g_stringPix.remove( _path );
     }
 }
@@ -357,11 +353,12 @@ void PIconView::slotBeamDone( Ir* ir) {
 }
 
 void PIconView::slotStart() {
-    m_view->setUpdatesEnabled( false );
+    m_view->viewport()->setUpdatesEnabled( false );
 }
 
 void PIconView::slotEnd() {
-    m_view->setUpdatesEnabled( true );
+    m_view->arrangeItemsInGrid( );
+    m_view->viewport()->setUpdatesEnabled( true );
 }
 
 void PIconView::slotShowImage() {
