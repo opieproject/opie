@@ -5,7 +5,7 @@
     <message>
         <source>Touch the crosshairs firmly and
 accurately to calibrate your screen.</source>
-        <translation>Touchez la croix fermement et 
+        <translation>Appuyez la croix fermement et 
 avec précision pour calibrer l&apos;écran.</translation>
     </message>
     <message>

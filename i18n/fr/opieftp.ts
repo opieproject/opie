@@ -116,7 +116,7 @@
     </message>
     <message>
         <source>Please set the server info</source>
-        <translation>Veuillez définir les paramêtres
+        <translation>Veuillez définir les paramètres
 du serveur distant</translation>
     </message>
     <message>

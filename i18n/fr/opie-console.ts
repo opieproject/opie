@@ -3,7 +3,7 @@
     <name>ATConfigDialog</name>
     <message>
         <source>Dialing parameter setup</source>
-        <translation>Config. des Paramêtres d&apos;appel</translation>
+        <translation>Config. des paramètres d&apos;appel</translation>
     </message>
     <message>
         <source>Settings1</source>

@@ -4,7 +4,7 @@
     <name>Clock</name>
     <message>
         <source>Snooze</source>
-        <translation>Sonner</translation>
+        <translation>Sommeiller</translation>
     </message>
     <message>
         <source>Clock</source>
@@ -20,15 +20,15 @@
     </message>
     <message>
         <source>Reset</source>
-        <translation>Initialiser</translation>
+        <translation>Remise à zéro</translation>
     </message>
     <message>
         <source>Set Alarm</source>
-        <translation>Définir Alarme</translation>
+        <translation>Définir alarme</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation>Arréter</translation>
+        <translation>Arrêter</translation>
     </message>
     <message>
         <source>PM</source>
@@ -36,19 +36,19 @@
     </message>
     <message>
         <source>Alarm Is On</source>
-        <translation>Alarme Activée</translation>
+        <translation>Alarme activée</translation>
     </message>
     <message>
         <source>Alarm Is Off</source>
-        <translation>Alarme Désactivée</translation>
+        <translation>Alarme désactivée</translation>
     </message>
     <message>
         <source>Set date and time.</source>
-        <translation>Paramétrer Date et Heure.</translation>
+        <translation>Paramétrer date et heure.</translation>
     </message>
     <message>
         <source>Clock: Alarm was missed.</source>
-        <translation>Horloge: Alarme manquée.</translation>
+        <translation>Horloge: alarme manquée.</translation>
     </message>
     <message>
         <source>Alarm set: %1</source>
@@ -59,7 +59,7 @@
     <name>Set_Alarm</name>
     <message>
         <source>Set Alarm</source>
-        <translation>Définir Alarme</translation>
+        <translation>Définir alarme</translation>
     </message>
     <message>
         <source>Hour</source>
@@ -81,7 +81,7 @@
         <source>Snooze Delay
 (minutes)</source>
         <translation>Délai avant
-Sonnerie (mn)</translation>
+sonnerie (mn)</translation>
     </message>
     <message>
         <source>mp3 alarm</source>

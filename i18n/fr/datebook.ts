@@ -17,7 +17,7 @@
     <message>
         <source>Day</source>
         <translation>Toute la
-Journée</translation>
+journée</translation>
     </message>
     <message>
         <source>Week</source>
@@ -33,7 +33,7 @@ Journée</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>Trouver</translation>
+        <translation>Chercher</translation>
     </message>
     <message>
         <source>Event duration is potentially longer
@@ -47,7 +47,7 @@ que l&apos;intervalle entre les répétitions.</translation>
     </message>
     <message>
         <source>Edit Event</source>
-        <translation>Editer un événement</translation>
+        <translation>Modifier un événement</translation>
     </message>
     <message>
         <source> minutes)</source>
@@ -69,9 +69,9 @@ Free up some space and try again.
 Quit anyway?</source>
         <translation>L&apos;application n&apos;a pas été capable
 de sauvegarder vos modifications.
-Libérer de l&apos;espace et réessayer.
+Libérez de l&apos;espace et réessayez.
 
-Quitter ?</translation>
+Quitter quand même ?</translation>
     </message>
     <message>
         <source>(Unknown)</source>
@@ -83,7 +83,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Fix it</source>
-        <translation>A modifier</translation>
+        <translation>A corriger</translation>
     </message>
     <message>
         <source>Continue</source>
@@ -91,11 +91,11 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Duplicate Event</source>
-        <translation>Dupliquer évènement</translation>
+        <translation>Dupliquer l&apos;événement</translation>
     </message>
     <message>
         <source>Edit...</source>
-        <translation>Éditer...</translation>
+        <translation>Modifier...</translation>
     </message>
     <message>
         <source>error box</source>
@@ -172,7 +172,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Editer</translation>
+        <translation>Modifier</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -299,7 +299,7 @@ dans : </translation>
     </message>
     <message>
         <source>Week List</source>
-        <translation>Liste Semaine</translation>
+        <translation>Liste semaine</translation>
     </message>
     <message>
         <source>Month</source>
@@ -315,7 +315,7 @@ dans : </translation>
     </message>
     <message>
         <source>None</source>
-        <translation>Non</translation>
+        <translation>Aucun</translation>
     </message>
     <message>
         <source>Start</source>
@@ -331,7 +331,7 @@ dans : </translation>
     </message>
     <message>
         <source>Location:</source>
-        <translation>Emplacement:</translation>
+        <translation type="unfinished">Lieu :</translation>
     </message>
     <message>
         <source>Office</source>
@@ -357,7 +357,7 @@ dans : </translation>
     <name>DateBookWeekHeader</name>
     <message>
         <source>w</source>
-        <translation>w</translation>
+        <translation>s</translation>
     </message>
 </context>
 <context>
@@ -379,7 +379,7 @@ dans : </translation>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>
-        <translation>w</translation>
+        <translation>s</translation>
     </message>
 </context>
 <context>
@@ -526,12 +526,12 @@ de début</translation>
     <message>
         <source>All day</source>
         <translation>Toute la
-Journée</translation>
+journée</translation>
     </message>
     <message>
         <source>Time zone</source>
-        <translation>Zone
-Horaire
+        <translation>Fuseau
+horaire
 </translation>
     </message>
     <message>
@@ -591,7 +591,7 @@ début</translation>
     </message>
     <message>
         <source>&lt;b&gt;1/10&lt;/b&gt; Lunch</source>
-        <translation>&lt;b&gt;1/10&lt;/b&gt; Lunch</translation>
+        <translation>&lt;b&gt;1/10&lt;/b&gt; Déjeuner</translation>
     </message>
 </context>
 <context>
@@ -794,7 +794,7 @@ de fin</translation>
     </message>
     <message>
         <source>Repeat On</source>
-        <translation>Répéter Le</translation>
+        <translation>Répéter le</translation>
     </message>
     <message>
         <source>Mon</source>

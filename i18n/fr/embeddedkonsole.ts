@@ -4,18 +4,18 @@
     <name>CommandEditDialog</name>
     <message>
         <source>Command Selection</source>
-        <translation>Sélection Commande</translation>
+        <translation>Sélection commande</translation>
     </message>
 </context>
 <context>
     <name>CommandEditDialogBase</name>
     <message>
         <source>Commands</source>
-        <translation>Editer Commandes</translation>
+        <translation>Editer commandes</translation>
     </message>
     <message>
         <source>&lt;B&gt;Commands&lt;/B&gt;:</source>
-        <translation>&lt;B&gt;Commandes de l&apos;actuelle liste&lt;/B&gt; : </translation>
+        <translation>&lt;B&gt;Commandes de la liste actuelle&lt;/B&gt; : </translation>
     </message>
     <message>
         <source>&lt;B&gt;Suggested Commands&lt;/B&gt;:</source>
@@ -86,59 +86,59 @@
     </message>
     <message>
         <source>Tabs on Bottom</source>
-        <translation>Onglets en Dessous</translation>
+        <translation>Onglets en dessous</translation>
     </message>
     <message>
         <source>Green on Black</source>
-        <translation>Vert sur Noir</translation>
+        <translation>Vert sur noir</translation>
     </message>
     <message>
         <source>Black on White</source>
-        <translation>Noir sur Blanc</translation>
+        <translation>Noir sur blanc</translation>
     </message>
     <message>
         <source>White on Black</source>
-        <translation>Blanc sur Noir</translation>
+        <translation>Blanc sur noir</translation>
     </message>
     <message>
         <source>Black on Transparent</source>
-        <translation>Noir sur Transparent</translation>
+        <translation>Noir sur transparent</translation>
     </message>
     <message>
         <source>Black on Red</source>
-        <translation>Noir sur Rouge</translation>
+        <translation>Noir sur rouge</translation>
     </message>
     <message>
         <source>Red on Black</source>
-        <translation>Rouge sur Noir</translation>
+        <translation>Rouge sur noir</translation>
     </message>
     <message>
         <source>Green on Yellow</source>
-        <translation>Vert sur Jaune</translation>
+        <translation>Vert sur jaune</translation>
     </message>
     <message>
         <source>Blue on Magenta</source>
-        <translation>Bleu sur Magenta</translation>
+        <translation>Bleu sur magenta</translation>
     </message>
     <message>
         <source>Magenta on Blue</source>
-        <translation>Magenta sur Bleu</translation>
+        <translation>Magenta sur bleu</translation>
     </message>
     <message>
         <source>Cyan on White</source>
-        <translation>Cyan sur Blanc</translation>
+        <translation>Cyan sur blanc</translation>
     </message>
     <message>
         <source>White on Cyan</source>
-        <translation>Blanc sur Cyan</translation>
+        <translation>Blanc sur cyan</translation>
     </message>
     <message>
         <source>Blue on Black</source>
-        <translation>Bleu sur Noir</translation>
+        <translation>Bleu sur noir</translation>
     </message>
     <message>
         <source>Amber on Black</source>
-        <translation>Ambre sur Noir</translation>
+        <translation>Ambre sur noir</translation>
     </message>
     <message>
         <source>Colors</source>
@@ -146,11 +146,11 @@
     </message>
     <message>
         <source>Quick Edit</source>
-        <translation>Liste Editable</translation>
+        <translation>Liste éditable</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Modifier Liste</translation>
+        <translation>Modifier liste</translation>
     </message>
     <message>
         <source>None</source>
@@ -166,15 +166,15 @@
     </message>
     <message>
         <source>ScrollBar</source>
-        <translation>Barre de Défilement</translation>
+        <translation type="unfinished">Barre de défilement</translation>
     </message>
     <message>
         <source>Show Command List</source>
-        <translation>Afficher Liste</translation>
+        <translation>Afficher liste</translation>
     </message>
     <message>
         <source>Hide Command List</source>
-        <translation>Cacher Liste</translation>
+        <translation>Cacher liste</translation>
     </message>
     <message>
         <source>Custom</source>
@@ -182,7 +182,7 @@
     </message>
     <message>
         <source>Command List</source>
-        <translation>Liste Commandes</translation>
+        <translation>Liste commandes</translation>
     </message>
     <message>
         <source>Wrap</source>
@@ -190,25 +190,25 @@
     </message>
     <message>
         <source>Use Beep</source>
-        <translation>Avertissement Sonore</translation>
+        <translation>Avertissement sonore</translation>
     </message>
     <message>
         <source>Tabs on Top</source>
-        <translation>Onglets au Dessus</translation>
+        <translation>Onglets au dessus</translation>
     </message>
 </context>
 <context>
     <name>PlayListSelection</name>
     <message>
         <source>Command Selection</source>
-        <translation>Sélection Commande</translation>
+        <translation>Sélection commande</translation>
     </message>
 </context>
 <context>
     <name>editCommandBase</name>
     <message>
         <source>Add command</source>
-        <translation>Ajouter Commande</translation>
+        <translation>Ajouter commande</translation>
     </message>
     <message>
         <source>Enter command to add:</source>

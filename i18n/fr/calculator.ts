@@ -4,7 +4,7 @@
     <name>Calculator</name>
     <message>
         <source>Experimental Calculator</source>
-        <translation>Calculatrice Expérimentale</translation>
+        <translation>Calculatrice expérimentale</translation>
     </message>
     <message>
         <source>M+</source>
@@ -182,11 +182,11 @@
     </message>
     <message>
         <source>cu ft</source>
-        <translation>ft^3</translation>
+        <translation>pieds^3</translation>
     </message>
     <message>
         <source>cu in</source>
-        <translation>in^3</translation>
+        <translation>pouces^3</translation>
     </message>
     <message>
         <source>&#xb0;F</source>
@@ -194,11 +194,11 @@
     </message>
     <message>
         <source>fl oz (US)</source>
-        <translation>fl oz (US)</translation>
+        <translation>onces liquide (US)</translation>
     </message>
     <message>
         <source>ft</source>
-        <translation>ft</translation>
+        <translation>pieds</translation>
     </message>
     <message>
         <source>g</source>
@@ -214,7 +214,7 @@
     </message>
     <message>
         <source>in</source>
-        <translation>in</translation>
+        <translation>pouces</translation>
     </message>
     <message>
         <source>kg</source>
@@ -230,7 +230,7 @@
     </message>
     <message>
         <source>lb</source>
-        <translation>lb</translation>
+        <translation>livres</translation>
     </message>
     <message>
         <source>Lg tons</source>
@@ -246,7 +246,7 @@
     </message>
     <message>
         <source>mi</source>
-        <translation>mi</translation>
+        <translation>milles</translation>
     </message>
     <message>
         <source>ml</source>
@@ -258,7 +258,7 @@
     </message>
     <message>
         <source>naut. mi</source>
-        <translation>naut. mi</translation>
+        <translation type="unfinished">milles naut.</translation>
     </message>
     <message>
         <source>oz</source>
@@ -270,11 +270,11 @@
     </message>
     <message>
         <source>pt</source>
-        <translation>pt</translation>
+        <translation>pintes</translation>
     </message>
     <message>
         <source>qt</source>
-        <translation>qt</translation>
+        <translation>quarts</translation>
     </message>
     <message>
         <source>sq cm</source>
@@ -282,11 +282,11 @@
     </message>
     <message>
         <source>sq ft</source>
-        <translation>ft^2</translation>
+        <translation>pieds^2</translation>
     </message>
     <message>
         <source>sq in</source>
-        <translation>in^2</translation>
+        <translation>pouces^2</translation>
     </message>
     <message>
         <source>sq km</source>
@@ -298,7 +298,7 @@
     </message>
     <message>
         <source>sq mi</source>
-        <translation>mi^2</translation>
+        <translation>milles^2</translation>
     </message>
     <message>
         <source>sq mm</source>
@@ -306,7 +306,7 @@
     </message>
     <message>
         <source>sq yd</source>
-        <translation>yd^2</translation>
+        <translation>yard^2</translation>
     </message>
     <message>
         <source>st</source>
@@ -318,11 +318,11 @@
     </message>
     <message>
         <source>tblspoon</source>
-        <translation>tblspoon</translation>
+        <translation type="unfinished">cuil. à soupe</translation>
     </message>
     <message>
         <source>teaspoons</source>
-        <translation>teaspoons</translation>
+        <translation type="unfinished">cuil. à café</translation>
     </message>
     <message>
         <source>tonnes</source>
@@ -330,7 +330,7 @@
     </message>
     <message>
         <source>yd</source>
-        <translation>yd</translation>
+        <translation>yards</translation>
     </message>
 </context>
 </TS>

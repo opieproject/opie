@@ -4,7 +4,7 @@
     <name>Checkbook</name>
     <message>
         <source>Checkbook</source>
-        <translation>Livre de Compte</translation>
+        <translation>Livre de comptes</translation>
     </message>
     <message>
         <source>New checkbook</source>
@@ -28,7 +28,7 @@
     </message>
     <message>
         <source>Enter name of checkbook here.</source>
-        <translation>Entrez le nom du livre de compte ici.</translation>
+        <translation>Entrez ici le nom du livre de comptes .</translation>
     </message>
     <message>
         <source>Type:</source>
@@ -76,7 +76,7 @@
     </message>
     <message>
         <source>Enter account number for this checkbook here.</source>
-        <translation>Entrez ici le n° du compte de ce livre de compte.</translation>
+        <translation>Entrez ici le n° du compte de ce livre de comptes.</translation>
     </message>
     <message>
         <source>PIN number:</source>
@@ -84,7 +84,7 @@
     </message>
     <message>
         <source>Enter PIN number for this checkbook here.</source>
-        <translation>Entrez le numéro de PIN pour ce livre de compte ici.</translation>
+        <translation>Entrez ici le numéro de PIN pour ce livre de comptes .</translation>
     </message>
     <message>
         <source>Starting balance:</source>
@@ -92,7 +92,7 @@
     </message>
     <message>
         <source>Enter the initial balance for this checkbook here.</source>
-        <translation>Entrez le solde initial pour ce livre de compte ici.</translation>
+        <translation>Entrez ici le solde initial pour ce livre de comptes .</translation>
     </message>
     <message>
         <source>Notes:</source>
@@ -100,7 +100,7 @@
     </message>
     <message>
         <source>Enter any additional information for this checkbook here.</source>
-        <translation>Entrez les informations supplémentaires pour ce livre de compte ici.</translation>
+        <translation>Entrez les informations supplémentaires pour ce livre de comptes ici.</translation>
     </message>
     <message>
         <source>Current balance: %10.00</source>
@@ -114,7 +114,7 @@
         <source>This is a listing of all transactions entered for this checkbook.
 
 To sort entries by a specific field, click on the column name.</source>
-        <translation>Ceci est la liste de toutes les transactions entrées pour ce livre de compte.
+        <translation>Voici la liste de toutes les transactions entrées pour ce livre de comptes.
 
 Pour trier la liste par rapport à un champ spécifique, cliquez sur le nom de la colonne.</translation>
     </message>
@@ -140,11 +140,11 @@ Pour trier la liste par rapport à un champ spécifique, cliquez sur le nom de l
     </message>
     <message>
         <source>Edit</source>
-        <translation>Editer</translation>
+        <translation>Modifier</translation>
     </message>
     <message>
         <source>Select a transaction and then click here to edit it.</source>
-        <translation>Sélectionnez une transaction et cliquez ici pour l&apos;éditer.</translation>
+        <translation>Sélectionnez une transaction et cliquez ici pour la modifier.</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -152,7 +152,7 @@ Pour trier la liste par rapport à un champ spécifique, cliquez sur le nom de l
     </message>
     <message>
         <source>Select a checkbook and then click here to delete it.</source>
-        <translation>Sélectionnez un livre de compte et cliquez ici pour l&apos;effacer.</translation>
+        <translation>Sélectionnez un livre de comptes et cliquez ici pour l&apos;effacer.</translation>
     </message>
     <message>
         <source>Select the desired chart below and then click on the Draw button.</source>
@@ -196,7 +196,7 @@ Pour trier la liste par rapport à un champ spécifique, cliquez sur le nom de l
     </message>
     <message>
         <source>Click here to enable/disable password protection of this checkbook.</source>
-        <translation>Cliquez ici pour activer/désactiver la protection du livre de compte par mot de passe.</translation>
+        <translation>Cliquez ici pour activer/désactiver la protection du livre de comptes par mot de passe.</translation>
     </message>
     <message>
         <source>Num</source>
@@ -268,7 +268,7 @@ Pour trier la liste par rapport à un champ spécifique, cliquez sur le nom de l
     <message>
         <source>Show whether checkbook is password
 protected</source>
-        <translation>Montrer si le livre de compte est protégé
+        <translation>Montrer si le livre de comptes est protégé
 par mot de passe</translation>
     </message>
     <message>
@@ -277,11 +277,11 @@ par mot de passe</translation>
     </message>
     <message>
         <source>Show checkbook balances</source>
-        <translation>Montrer le solde des livres de compte</translation>
+        <translation>Montrer le solde des livres de comptes</translation>
     </message>
     <message>
         <source>Click here to select whether or not the main window will display the current balance for each checkbook.</source>
-        <translation>Cliquez ici pour sélectionner si, oui ou non, la fenêtre principale affichera le solde pour chaque livre de compte.</translation>
+        <translation>Cliquez ici pour sélectionner si, oui ou non, la fenêtre principale affichera le solde pour chaque livre de comptes.</translation>
     </message>
     <message>
         <source>&amp;Settings</source>
@@ -360,7 +360,7 @@ par mot de passe</translation>
     <name>ListEdit</name>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ajouter</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -371,7 +371,7 @@ par mot de passe</translation>
     <name>MainWindow</name>
     <message>
         <source>Checkbook</source>
-        <translation>Livre de compte</translation>
+        <translation>Livre de comptes</translation>
     </message>
     <message>
         <source>New</source>
@@ -381,22 +381,22 @@ par mot de passe</translation>
         <source>Click here to create a new checkbook.
 
 You also can select New from the Checkbook menu.</source>
-        <translation>Cliquez ici pour créer un nouveau livre de compte.
+        <translation>Cliquez ici pour créer un nouveau livre de comptes.
 
-Vous pouvez aussi sélectionner &quot;Nouveau&quot; à partir du menu de Livre de Compte.</translation>
+Vous pouvez aussi sélectionner &quot;Nouveau&quot; à partir du menu &quot;Livre de Comptes&quot;.</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Editer</translation>
+        <translation>Modifier</translation>
     </message>
     <message>
         <source>Select a checkbook and then click here to edit it.
 
 You also can select Edit from the Checkbook menu, or click and hold on a checkbook name.</source>
-        <translation>Sélectionnez un livre de compte puis cliquez ici pour l&apos;éditer.
+        <translation>Sélectionnez un livre de comptes puis cliquez ici pour le modifier.
 
-Vous pouvez aussi sélectionner &quot;Éditer&quot; à partir du menu de &quot;Livre de Compte&quot;, ou bien cliquez
-en maintenant appuyé sur le nom d&apos;un livre de compte.</translation>
+Vous pouvez aussi sélectionner &quot;Modifier&quot; à partir du menu de &quot;Livre de Comptes&quot;, ou bien cliquer
+en maintenant appuyé sur le nom d&apos;un livre de comptes.</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -406,9 +406,9 @@ en maintenant appuyé sur le nom d&apos;un livre de compte.</translation>
         <source>Select a checkbook and then click here delete it.
 
 You also can select Delete from the Checkbook menu.</source>
-        <translation>Sélectionnez un livre de compte puis cliquez ici pour le détruire.
+        <translation>Sélectionnez un livre de comptes puis cliquez ici pour le détruire.
 
-Vous pouvez aussi cliquer sur &quot;Supprimer&quot; à partir du menu de &quot;Livre de compte&quot;.</translation>
+Vous pouvez aussi cliquer sur &quot;Supprimer&quot; à partir du menu de &quot;Livre de comptes&quot;.</translation>
     </message>
     <message>
         <source>This is a listing of all checkbooks currently available.</source>
@@ -416,7 +416,7 @@ Vous pouvez aussi cliquer sur &quot;Supprimer&quot; à partir du menu de &quot;L
     </message>
     <message>
         <source>Delete checkbook</source>
-        <translation>Supprimer un livre de compte</translation>
+        <translation>Supprimer un livre de comptes</translation>
     </message>
     <message>
         <source>Configure</source>
@@ -428,7 +428,7 @@ Vous pouvez aussi cliquer sur &quot;Supprimer&quot; à partir du menu de &quot;L
     </message>
     <message>
         <source>Checkbook Name</source>
-        <translation>Nom du Livre de Compte</translation>
+        <translation>Nom du Livre de Comptes</translation>
     </message>
     <message>
         <source>Balance</source>
@@ -451,7 +451,7 @@ Vous pouvez aussi cliquer sur &quot;Supprimer&quot; à partir du menu de &quot;L
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished">Editer</translation>
+        <translation type="unfinished">Modifier</translation>
     </message>
     <message>
         <source>New</source>
@@ -467,7 +467,7 @@ Vous pouvez aussi cliquer sur &quot;Supprimer&quot; à partir du menu de &quot;L
     </message>
     <message>
         <source>Checking</source>
-        <translation type="unfinished">Compte chèque</translation>
+        <translation type="unfinished">Compte chèques</translation>
     </message>
     <message>
         <source>CD</source>
@@ -487,7 +487,7 @@ Vous pouvez aussi cliquer sur &quot;Supprimer&quot; à partir du menu de &quot;L
     </message>
     <message>
         <source>Expense</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Dépense</translation>
     </message>
     <message>
         <source>Automobile</source>
@@ -515,7 +515,7 @@ Vous pouvez aussi cliquer sur &quot;Supprimer&quot; à partir du menu de &quot;L
     </message>
     <message>
         <source>Electronics</source>
-        <translation type="unfinished">Electroniques</translation>
+        <translation type="unfinished">Electronique</translation>
     </message>
     <message>
         <source>Entertainment</source>
@@ -547,7 +547,7 @@ Vous pouvez aussi cliquer sur &quot;Supprimer&quot; à partir du menu de &quot;L
     </message>
     <message>
         <source>Income</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Revenu</translation>
     </message>
     <message>
         <source>Work</source>
@@ -555,7 +555,7 @@ Vous pouvez aussi cliquer sur &quot;Supprimer&quot; à partir du menu de &quot;L
     </message>
     <message>
         <source>Family Member</source>
-        <translation type="unfinished">Personnel</translation>
+        <translation type="unfinished">Membre de la famille</translation>
     </message>
     <message>
         <source>Misc. Credit</source>

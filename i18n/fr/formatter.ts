@@ -177,7 +177,7 @@ Changing parameters on this
 page may cause your system
 to stop functioning properly!</source>
         <translation>AVERTISSEMENT:
-Changer les paramêtres de
+Changer les paramètres de
 cette page peut causer un
 disfonctionnement de votre
 système !</translation>

@@ -4,7 +4,7 @@
     <name>DrawPad</name>
     <message>
         <source>Delete All</source>
-        <translation>Supprimer Tout</translation>
+        <translation>Tout supprimer</translation>
     </message>
     <message>
         <source>Import</source>
@@ -48,83 +48,83 @@
     </message>
     <message>
         <source>First Page</source>
-        <translation>Premiere Page</translation>
+        <translation>Première page</translation>
     </message>
     <message>
         <source>Previous Page</source>
-        <translation>Page Précédente</translation>
+        <translation>Page précédente</translation>
     </message>
     <message>
         <source>Next Page</source>
-        <translation>Page Suivante</translation>
+        <translation>Page suivante</translation>
     </message>
     <message>
         <source>Last Page</source>
-        <translation>Dernière Page</translation>
+        <translation>Dernière page</translation>
     </message>
     <message>
         <source>Draw Point</source>
-        <translation>Dessiner Point</translation>
+        <translation>Dessiner point</translation>
     </message>
     <message>
         <source>Draw Line</source>
-        <translation>Dessiner Ligne</translation>
+        <translation>Dessiner ligne</translation>
     </message>
     <message>
         <source>Draw Rectangle</source>
-        <translation>Dessiner Rectangle</translation>
+        <translation>Dessiner rectangle</translation>
     </message>
     <message>
         <source>Draw Filled Rectangle</source>
-        <translation>Dessiner Rectangle Plein</translation>
+        <translation>Dessiner rectangle plein</translation>
     </message>
     <message>
         <source>Draw Ellipse</source>
-        <translation>Dessiner Ellipse</translation>
+        <translation>Dessiner ellipse</translation>
     </message>
     <message>
         <source>Draw Filled Ellipse</source>
-        <translation>Dessiner Ellipse Pleine</translation>
+        <translation>Dessiner ellipse pleine</translation>
     </message>
     <message>
         <source>Fill Region</source>
-        <translation>Remplir Région</translation>
+        <translation>Remplir région</translation>
     </message>
     <message>
         <source>Erase Point</source>
-        <translation>Effacer Point</translation>
+        <translation>Effacer point</translation>
     </message>
     <message>
         <source>Pen Width</source>
-        <translation>Largeur Pinceau</translation>
+        <translation>Largeur pinceau</translation>
     </message>
     <message>
         <source>Pen Color</source>
-        <translation>Couleur Pinceau</translation>
+        <translation>Couleur pinceau</translation>
     </message>
     <message>
         <source>Fill Color</source>
-        <translation>Couleur Remplissage</translation>
+        <translation>Couleur remplissage</translation>
     </message>
     <message>
         <source>Insert Text</source>
-        <translation>Insérer Texte</translation>
+        <translation>Insérer texte</translation>
     </message>
     <message>
         <source>Thumbnail View</source>
-        <translation>Vue Miniature</translation>
+        <translation>Vue miniature</translation>
     </message>
     <message>
         <source>Thumbnail View...</source>
-        <translation>Vue Miniature...</translation>
+        <translation>Vue miniature...</translation>
     </message>
     <message>
         <source>Page Information</source>
-        <translation>Informations Page</translation>
+        <translation>Informations page</translation>
     </message>
     <message>
         <source>Page Information...</source>
-        <translation>Informations Page...</translation>
+        <translation>Informations page...</translation>
     </message>
     <message>
         <source>Do you want to clear
@@ -202,7 +202,7 @@ toutes les pages ?</translation>
     </message>
     <message>
         <source>Click here to select one of the available tools to draw ellipses.</source>
-        <translation>Cliquez ici pour sélectionner un outils pour dessiner des ellipses.</translation>
+        <translation>Cliquez ici pour sélectionner un outil pour dessiner des ellipses.</translation>
     </message>
     <message>
         <source>Click here to select the text drawing tool.</source>
@@ -237,7 +237,7 @@ toutes les pages ?</translation>
     <name>ExportDialog</name>
     <message>
         <source>Page Selection</source>
-        <translation>Sélection Page</translation>
+        <translation>Sélection page</translation>
     </message>
     <message>
         <source>All</source>
@@ -273,7 +273,7 @@ toutes les pages ?</translation>
     </message>
     <message>
         <source>All Images</source>
-        <translation>Toutes les Images</translation>
+        <translation>Toutes les images</translation>
     </message>
 </context>
 <context>
@@ -311,11 +311,11 @@ toutes les pages ?</translation>
     </message>
     <message>
         <source>Pen Color</source>
-        <translation>Couleur du Pinceau</translation>
+        <translation>Couleur du pinceau</translation>
     </message>
     <message>
         <source>Fill Color</source>
-        <translation>Couleur de Remplissage</translation>
+        <translation>Couleur de remplissage</translation>
     </message>
     <message>
         <source>General</source>
@@ -342,7 +342,7 @@ toutes les pages ?</translation>
     <name>PageInformationDialog</name>
     <message>
         <source>Page Information</source>
-        <translation>Informations Page</translation>
+        <translation>Informations page</translation>
     </message>
     <message>
         <source>General</source>
@@ -399,7 +399,7 @@ toutes les pages ?</translation>
     </message>
     <message>
         <source>Clear Page</source>
-        <translation>Effacer la Page</translation>
+        <translation>Effacer la page</translation>
     </message>
     <message>
         <source>Do you want to clear
@@ -417,7 +417,7 @@ la page sélectionnée ?</translation>
     </message>
     <message>
         <source>Delete Page</source>
-        <translation>Supprimer Page</translation>
+        <translation>Supprimer page</translation>
     </message>
     <message>
         <source>Do you want to delete

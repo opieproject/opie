@@ -4,26 +4,26 @@
     <name>CityTime</name>
     <message>
         <source>Time Changing</source>
-        <translation>Changement d&apos;Heure</translation>
+        <translation>Changement d&apos;heure</translation>
     </message>
     <message>
         <source>There was a problem setting timezone %1</source>
-        <translation>Un problème est survenu lors de la configuration de la zone horaire %1</translation>
+        <translation>Un problème est survenu lors de la configuration du fuseau horaire %1</translation>
     </message>
     <message>
         <source>Restore Time Zone</source>
-        <translation>Restaurer la zone horaire</translation>
+        <translation>Rétablir le fuseau horaire</translation>
     </message>
     <message>
         <source>There was a problem setting your timezone.Your time may be wrong now...</source>
-        <translation>Un problème est survenu lors de la mise en place de la zone horaire. L&apos;heure est sûrement fausse maintenant...</translation>
+        <translation>Un problème est survenu lors de la définition de votre fuseau horaire. L&apos;heure est sans doute incorrecte maintenant...</translation>
     </message>
 </context>
 <context>
     <name>CityTimeBase</name>
     <message>
         <source>City Time</source>
-        <translation>Heure de Ville</translation>
+        <translation>Heure de ville</translation>
     </message>
     <message>
         <source>Click on one of the set cities to replace it</source>

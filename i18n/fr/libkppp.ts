@@ -368,9 +368,9 @@ settings of the selected device are copied
 to a new device, that you can modify to fit your
 needs</source>
         <translation>Crée un copie du dispositif sélectionné. Tous
-les anciens paramêtres sont copiés. Vous
+les anciens paramètres sont copiés. Vous
 pouvez alors modifier la copie en entrant vos
-nouveaux paramêtres</translation>
+nouveaux paramètres</translation>
     </message>
     <message>
         <source>&lt;p&gt;Deletes the selected device
@@ -1005,7 +1005,7 @@ de vous envoyer ces informations</translation>
     <message>
         <source>Can&apos;t restore tty settings: tcsetattr()
 </source>
-        <translation>Impossible de restaurer les paramêtres tty : tcsetattr()</translation>
+        <translation>Impossible de restaurer les paramètres tty : tcsetattr()</translation>
     </message>
     <message>
         <source>The modem does not respond.</source>

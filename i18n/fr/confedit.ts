@@ -4,7 +4,7 @@
     <name>EditWidget</name>
     <message>
         <source>File Name:</source>
-        <translation>Nom Fichier : </translation>
+        <translation>Nom du fichier : </translation>
     </message>
     <message>
         <source>Group:</source>

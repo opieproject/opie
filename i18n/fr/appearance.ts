@@ -281,7 +281,7 @@ Cette partie vous permet de sélectionner une application et de lui attribuer de
     </message>
     <message>
         <source>Sample window using the selected settings.</source>
-        <translation>Fenêtre d&apos;exemple utilisant les nouveaux paramêtres.</translation>
+        <translation>Fenêtre d&apos;exemple utilisant les nouveaux paramètres.</translation>
     </message>
 </context>
 </TS>
