@@ -152,6 +152,10 @@ config OPIE_TASKBAR_LOCK_KEY_STATE
   default y if TARGET_SHARP
   default n if !TARGET_SHARP
 
+config LIBQPE_WITHROHFEEDBACK
+  boolean "Build libqpe with Right-On-Hold feedback"
+  default y
+
 config OPIE_NO_SOUND_PCM_READ_BITS
   boolean "There is not a pcm_read_bits io control"
   default y if TARGET_SHARP
