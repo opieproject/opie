@@ -13,7 +13,9 @@
 
 #include "thumbnailview.h"
 
+#include "drawpad.h"
 #include "drawpadcanvas.h"
+#include "newpagedialog.h"
 #include "page.h"
 
 #include <qpe/resource.h>
@@ -143,10 +145,12 @@ Page* PageListView::selected() const
     return page;
 }
 
-ThumbnailView::ThumbnailView(DrawPadCanvas* drawPadCanvas, QWidget* parent, const char* name)
+ThumbnailView::ThumbnailView(DrawPad* drawPad, DrawPadCanvas* drawPadCanvas, QWidget* parent, const char* name)
     : QWidget(parent, name, Qt::WType_Modal | Qt::WType_TopLevel)
 {
     inLoop = false;
+
+    m_pDrawPad = drawPad;
     m_pDrawPadCanvas = drawPadCanvas;
 
     setCaption(tr("Thumbnail"));
@@ -154,10 +158,12 @@ ThumbnailView::ThumbnailView(DrawPadCanvas* drawPadCanvas, QWidget* parent, cons
     QToolButton* newPageButton = new QToolButton(this);
     newPageButton->setIconSet(Resource::loadIconSet("new"));
     newPageButton->setAutoRaise(true);
+    connect(newPageButton, SIGNAL(clicked()), this, SLOT(newPage()));
 
     QToolButton* clearPageButton = new QToolButton(this);
     clearPageButton->setIconSet(Resource::loadIconSet("drawpad/clear"));
     clearPageButton->setAutoRaise(true);
+    connect(clearPageButton, SIGNAL(clicked()), this, SLOT(clearPage()));
 
     QToolButton* deletePageButton = new QToolButton(this);
     deletePageButton->setIconSet(Resource::loadIconSet("trash"));
@@ -211,6 +217,36 @@ void ThumbnailView::exec()
     if (!inLoop) {
         inLoop = true;
         qApp->enter_loop();
+    }
+}
+
+void ThumbnailView::newPage()
+{
+    QRect rect = m_pDrawPadCanvas->contentsRect();
+
+    NewPageDialog newPageDialog(rect.width(), rect.height(), m_pDrawPad->pen().color(),
+                                m_pDrawPad->brush().color(), this);
+
+    if (newPageDialog.exec() == QDialog::Accepted) {
+        m_pDrawPadCanvas->newPage(newPageDialog.selectedWidth(), newPageDialog.selectedHeight(),
+                                  newPageDialog.selectedColor());
+        m_pPageListView->updateView();
+    }
+}
+
+void ThumbnailView::clearPage()
+{
+    QMessageBox messageBox(tr("Clear Page"), tr("Do you want to clear\nthe selected page?"),
+                           QMessageBox::Information, QMessageBox::Yes,
+                           QMessageBox::No | QMessageBox::Escape | QMessageBox::Default,
+                           QMessageBox::NoButton, this);
+
+    messageBox.setButtonText(QMessageBox::Yes, tr("Yes"));
+    messageBox.setButtonText(QMessageBox::No, tr("No"));
+
+    if (messageBox.exec() == QMessageBox::Yes) {
+        m_pDrawPadCanvas->clearPage();
+        m_pPageListView->updateView();
     }
 }
 

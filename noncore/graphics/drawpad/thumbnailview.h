@@ -17,6 +17,7 @@
 #include <qwidget.h>
 #include <qlistview.h>
 
+class DrawPad;
 class DrawPadCanvas;
 class Page;
 
@@ -55,18 +56,22 @@ class ThumbnailView : public QWidget
     Q_OBJECT
 
 public:
-    ThumbnailView(DrawPadCanvas* drawPadCanvas, QWidget* parent = 0, const char* name = 0);
+    ThumbnailView(DrawPad* drawPad, DrawPadCanvas* drawPadCanvas, QWidget* parent = 0, const char* name = 0);
     ~ThumbnailView();
     
     void hide();
     void exec();
 
 public slots:
+    void newPage();
+    void clearPage();
     void deletePage();
     void changePage();
 
 private:
     bool inLoop;
+
+    DrawPad* m_pDrawPad;
     DrawPadCanvas* m_pDrawPadCanvas;
 
     PageListView* m_pPageListView;

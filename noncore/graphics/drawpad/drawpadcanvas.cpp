@@ -14,7 +14,6 @@
 #include "drawpadcanvas.h"
 
 #include "drawpad.h"
-#include "newpagedialog.h"
 #include "page.h"
 #include "tool.h"
 
@@ -373,34 +372,32 @@ void DrawPadCanvas::deleteAll()
     emit pageBackupsChanged();
 }
 
-void DrawPadCanvas::newPage()
+void DrawPadCanvas::newPage(uint width, uint height, const QColor& color)
 {
-    QRect rect = contentsRect();
+    m_pages.insert(m_pages.at() + 1, new Page(width, height));
+    m_pages.current()->fill(color);
 
-    NewPageDialog newPageDialog(rect.width(), rect.height(), m_pDrawPad->pen().color(),
-                                m_pDrawPad->brush().color(), this);
+    m_pageBackups.clear();
+    m_pageBackups.append(new Page(*(m_pages.current())));
 
-    if (newPageDialog.exec() == QDialog::Accepted) {
-        m_pages.insert(m_pages.at() + 1, new Page(newPageDialog.selectedWidth(),
-                                                  newPageDialog.selectedHeight()));
-        m_pages.current()->fill(newPageDialog.selectedColor());
+    resizeContents(m_pages.current()->width(), m_pages.current()->height());
+    viewport()->update();
 
-        m_pageBackups.clear();
-        m_pageBackups.append(new Page(*(m_pages.current())));
-
-        resizeContents(m_pages.current()->width(), m_pages.current()->height());
-        viewport()->update();
-
-        emit pagesChanged();
-        emit pageBackupsChanged();
-    }
+    emit pagesChanged();
+    emit pageBackupsChanged();
 }
 
 void DrawPadCanvas::clearPage()
 {
     m_pages.current()->fill(Qt::white);
 
+    m_pageBackups.clear();
+    m_pageBackups.append(new Page(*(m_pages.current())));
+
+    resizeContents(m_pages.current()->width(), m_pages.current()->height());
     viewport()->update();
+
+    emit pageBackupsChanged();
 }
 
 void DrawPadCanvas::deletePage()

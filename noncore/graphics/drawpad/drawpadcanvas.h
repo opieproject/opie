@@ -52,7 +52,7 @@ public:
 
 public slots:
     void deleteAll();
-    void newPage();
+    void newPage(uint width, uint height, const QColor& color);
     void clearPage();
     void deletePage();
 

@@ -39,6 +39,7 @@ public:
     QBrush brush() { return m_brush; }
 
 private slots:
+    void newPage();
     void clearPage();
     void deletePage();
 

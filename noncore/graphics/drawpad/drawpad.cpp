@@ -22,6 +22,7 @@
 #include "filltool.h"
 #include "importdialog.h"
 #include "linetool.h"
+#include "newpagedialog.h"
 #include "pointtool.h"
 #include "rectangletool.h"
 #include "texttool.h"
@@ -93,7 +94,7 @@ DrawPad::DrawPad(QWidget* parent, const char* name)
     QPEToolBar* pageToolBar = new QPEToolBar(this);
 
     QAction* newPageAction = new QAction(tr("New Page"), Resource::loadIconSet("new"), QString::null, 0, this);
-    connect(newPageAction, SIGNAL(activated()), m_pDrawPadCanvas, SLOT(newPage()));
+    connect(newPageAction, SIGNAL(activated()), this, SLOT(newPage()));
     newPageAction->addTo(pageToolBar);
 
     QAction* clearPageAction = new QAction(tr("Clear Page"), Resource::loadIconSet("drawpad/clear"), QString::null, 0, this);
@@ -265,6 +266,18 @@ DrawPad::~DrawPad()
     if (file.open(IO_WriteOnly)) {
         m_pDrawPadCanvas->save(&file);
         file.close();
+    }
+}
+
+void DrawPad::newPage()
+{
+    QRect rect = m_pDrawPadCanvas->contentsRect();
+
+    NewPageDialog newPageDialog(rect.width(), rect.height(), m_pen.color(), m_brush.color(), this);
+
+    if (newPageDialog.exec() == QDialog::Accepted) {
+        m_pDrawPadCanvas->newPage(newPageDialog.selectedWidth(), newPageDialog.selectedHeight(),
+                                  newPageDialog.selectedColor());
     }
 }
 
@@ -575,7 +588,7 @@ void DrawPad::exportPage()
 
 void DrawPad::thumbnailView()
 {
-    ThumbnailView thumbnailView(m_pDrawPadCanvas, this);
+    ThumbnailView thumbnailView(this, m_pDrawPadCanvas, this);
 
     thumbnailView.showMaximized();
     thumbnailView.exec();
