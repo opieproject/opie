@@ -61,15 +61,24 @@ Setup udp socket for incoming commands:
 int commsock(const char *, int);
 
 Fist argument is the host where it should listen and second
-is the port.
+is the port. Socket is returned, on failure -1 is returned.
 
-Return values: 
+
+Recvfrom socket:
+int recv_commsock(int *, char *, int);
+
+First argument is the address of the socket, second is a buffer
+that should be filled in and the third is the maxlength of the
+buffer. On error, -1 is returned, on success the number of 
+packet type is returned. (return value should be used with switch
+command, for types see proto.hh)
 
 Send command to udp socket:
 int sendcomm(const char *, int, const char *, ...);
 
 First two arguments are the host and port where the command should
-be send to, followed by buffer that should be send.
+be send to, followed by buffer that should be send. On error, -1
+is returned.
 
 
 ---
