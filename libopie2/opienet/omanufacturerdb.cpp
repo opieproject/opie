@@ -32,9 +32,12 @@
 
 /* OPIE */
 #include <opie2/odebug.h>
+#include <qpe/qpeapplication.h>
 #ifdef OPIE_IMPROVE_GUI_LATENCY
 #include <qpe/global.h>
 #endif
+
+
 
 /* QT */
 #include <qapplication.h>
@@ -67,7 +70,7 @@ OManufacturerDB::OManufacturerDB()
     odebug << "OManufacturerDB: trying to read " << filename << oendl;
     if ( !QFile::exists( filename ) )
     {
-        filename = "/opt/QtPalmtop/etc/manufacturers";
+        filename = QPEApplication::qpeDir()+"/etc/manufacturers";
         odebug << "OManufacturerDB: trying to read " << filename << oendl;
         if ( !QFile::exists( filename ) )
         {
