@@ -31,6 +31,7 @@
 typedef QMap< QString, QString > ConfigGroup;
 typedef QMap< QString, ConfigGroup> ConfigGroupMap;
 
+class QTextStream;
 class ConfigPrivate;
 class Config
 {
@@ -92,8 +93,8 @@ protected:
     void read();
     bool parse( const QString &line );
 
-    QMap< QString, ConfigGroup > groups;
-    QMap< QString, ConfigGroup >::Iterator git;
+    ConfigGroupMap groups;
+    ConfigGroupMap::Iterator git;
     QString filename;
     QString lang;
     QString glang;
@@ -103,6 +104,7 @@ protected:
 
 private: // Sharp ROM compatibility
     Config( const QString &name, bool what );
+    void read( QTextStream &s);
 };
 
 #endif

@@ -34,7 +34,35 @@
 #define QTOPIA_INTERNAL_LANGLIST
 #include "config.h"
 #include "global.h"
+#include "qpeapplication.h"
 
+
+/*
+ * Internal Class
+ */
+class ConfigPrivate {
+public:
+    ConfigPrivate() : multilang(FALSE) {}
+    ConfigPrivate(const ConfigPrivate& o) :
+        trfile(o.trfile),
+        trcontext(o.trcontext),
+        multilang(o.multilang)
+    {}
+    ConfigPrivate& operator=(const ConfigPrivate& o)
+    {
+        trfile = o.trfile;
+        trcontext = o.trcontext;
+        multilang = o.multilang;
+        return *this;
+    }
+
+    QString trfile;
+    QCString trcontext;
+    bool multilang;
+};
+
+/////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
 
 /*!
   \internal
@@ -52,6 +80,26 @@ QString Config::configFilename(const QString& name, Domain d)
 	}
     }
     return name;
+}
+
+/* This cannot be made public because of binary compat issues */
+void Config::read( QTextStream &s )
+{
+#if QT_VERSION <= 230 && defined(QT_NO_CODECS)
+    // The below should work, but doesn't in Qt 2.3.0
+    s.setCodec( QTextCodec::codecForMib( 106 ) );
+#else
+    s.setEncoding( QTextStream::UnicodeUTF8 );
+#endif
+
+    QStringList list = QStringList::split('\n', s.read() );
+
+    for ( QStringList::Iterator it = list.begin(); it != list.end(); ++it ) {
+        if ( !parse( *it ) ) {
+            git = groups.end();
+            return;
+        }
+    }
 }
 
 /*!
@@ -94,10 +142,8 @@ Config::Config( const QString &name, Domain domain )
     : filename( configFilename(name,domain) )
 {
     git = groups.end();
+    d = 0;
     read();
-    QStringList l = Global::languageList();
-    lang = l[0];
-    glang = l[1];
 }
 
 
@@ -106,10 +152,8 @@ Config::Config ( const QString &name, bool what )
 	: filename( configFilename(name,what ? User : File) )
 {
     git = groups.end();
+    d = 0;
     read();
-    QStringList l = Global::languageList();
-    lang = l[0];
-    glang = l[1];
 }
 
 /*!
@@ -118,7 +162,9 @@ Config::Config ( const QString &name, bool what )
 Config::~Config()
 {
     if ( changed )
-	write();
+        write();
+
+    delete d;
 }
 
 /*!
@@ -129,6 +175,15 @@ bool Config::hasKey( const QString &key ) const
     if ( groups.end() == git )
 	return FALSE;
     ConfigGroup::ConstIterator it = ( *git ).find( key );
+    if ( it == ( *git ).end() ) {
+        if ( d && !d->trcontext.isNull() ) {
+            it = ( *git ).find( key + "[]" );
+        } else if ( d && d->multilang ) {
+            it = ( *git ).find( key + "["+lang+"]" );
+            if ( it == ( *git ).end() && !glang.isEmpty() )
+                it = ( *git ).find( key + "["+glang+"]" );
+        }
+    }
     return it != ( *git ).end();
 }
 
@@ -309,11 +364,17 @@ void Config::removeEntry( const QString &key )
   Tests for inequality with \a other. Config objects are equal if they refer to the same filename.
 */
 
+
 /*!
   \fn QString Config::readEntry( const QString &key, const QString &deflt ) const
 
   Reads a string entry stored with \a key, defaulting to \a deflt if there is no entry.
 */
+
+/*
+ * ### !LocalTranslator::translate was kept out!
+ *
+ */
 
 /*!
   \internal
@@ -321,15 +382,30 @@ void Config::removeEntry( const QString &key )
 */
 QString Config::readEntry( const QString &key, const QString &deflt )
 {
-    QString res = readEntryDirect( key+"["+lang+"]" );
-    if ( !res.isNull() )
-	return res;
-    if ( !glang.isEmpty() ) {
-	res = readEntryDirect( key+"["+glang+"]" );
-	if ( !res.isNull() )
-	    return res;
+    QString r;
+    if ( d && !d->trcontext.isNull() ) {
+        // Still try untranslated first, becuase:
+        //  1. It's the common case
+        //  2. That way the value can be WRITTEN (becoming untranslated)
+        r = readEntryDirect( key );
+        if ( !r.isNull() )
+            return r;
+        r = readEntryDirect( key + "[]" );
+        if ( !r.isNull() )
+            return qApp->translate(d->trfile,d->trcontext,r);
+    } else if ( d && d->multilang ) {
+        // For compatibilitity
+        r = readEntryDirect( key + "["+lang+"]" );
+        if ( !r.isNull() )
+            return r;
+        if ( !glang.isEmpty() ) {
+            r = readEntryDirect( key + "["+glang+"]" );
+            if ( !r.isNull() )
+                return r;
+        }
     }
-    return readEntryDirect( key, deflt );
+    r = readEntryDirect( key, deflt );
+    return r;
 }
 
 /*!
@@ -344,13 +420,9 @@ QString Config::readEntry( const QString &key, const QString &deflt )
 */
 QString Config::readEntryCrypt( const QString &key, const QString &deflt )
 {
-    QString res = readEntryDirect( key+"["+lang+"]" );
-    if ( res.isNull() && glang.isEmpty() )
-	res = readEntryDirect( key+"["+glang+"]" );
+    QString res = readEntry( key );
     if ( res.isNull() )
-	res = readEntryDirect( key, QString::null );
-    if ( res.isNull() )
-	return deflt;
+        return deflt;
     return decipher(res);
 }
 
@@ -489,8 +561,11 @@ void Config::write( const QString &fn )
     if ( rename( strNewFile, filename ) < 0 ) {
 	qWarning( "problem renaming the file %s to %s", strNewFile.latin1(),
 		  filename.latin1() );
-	QFile::remove( strNewFile );
+        QFile::remove( strNewFile );
+        return;
     }
+
+    changed = FALSE;
 }
 
 /*!
@@ -508,46 +583,42 @@ void Config::read()
 {
     changed = FALSE;
 
-    if ( !QFileInfo( filename ).exists() ) {
-	git = groups.end();
-	return;
+    QString readFilename(filename);
+
+    if ( !QFile::exists(filename) ) {
+        bool failed = TRUE;
+        QFileInfo fi(filename);
+        QString settingsDir = QDir::homeDirPath() + "/Settings";
+        if (fi.dirPath(TRUE) == settingsDir) {
+        // User setting - see if there is a default in $OPIEDIR/etc/default/
+            QString dftlFile = QPEApplication::qpeDir() + "etc/default/" + fi.fileName();
+            if (QFile::exists(dftlFile)) {
+                readFilename = dftlFile;
+                failed = FALSE;
+            }
+        }
+        if (failed) {
+            git = groups.end();
+            return;
+        }
     }
 
-    QFile f( filename );
+
+    QFile f( readFilename );
     if ( !f.open( IO_ReadOnly ) ) {
-	git = groups.end();
-	return;
+        git = groups.end();
+        return;
     }
 
-
-    // hack to avoid problems if big files are passed to test
-    // if they are valid configs ( like passing a mp3 ... )
-    // I just hope that there are no conf files > 100000 byte
-    // not the best solution, find something else later
-    if ( f.getch()!='[' ||f.size() > 100000 )  {
+    if (f.getch()!='[') {
         git = groups.end();
         return;
     }
     f.ungetch('[');
 
-
     QTextStream s( &f );
-#if QT_VERSION <= 230 && defined(QT_NO_CODECS)
-    // The below should work, but doesn't in Qt 2.3.0
-    s.setCodec( QTextCodec::codecForMib( 106 ) );
-#else
-    s.setEncoding( QTextStream::UnicodeUTF8 );
-#endif
-
-    QStringList list = QStringList::split('\n', s.read() );
+    read( s );
     f.close();
-
-    for ( QStringList::Iterator it = list.begin(); it != list.end(); ++it ) {
-        if ( !parse( *it ) ) {
-            git = groups.end();
-            return;
-        }
-    }
 }
 
 /*!
@@ -556,25 +627,51 @@ void Config::read()
 bool Config::parse( const QString &l )
 {
     QString line = l.stripWhiteSpace();
-
-    if ( line [0] == QChar ( '#' ))
-        return true; // ignore comments
-
     if ( line[ 0 ] == QChar( '[' ) ) {
-	QString gname = line;
-	gname = gname.remove( 0, 1 );
-	if ( gname[ (int)gname.length() - 1 ] == QChar( ']' ) )
-	    gname = gname.remove( gname.length() - 1, 1 );
-	git = groups.insert( gname, ConfigGroup() );
+        QString gname = line;
+        gname = gname.remove( 0, 1 );
+        if ( gname[ (int)gname.length() - 1 ] == QChar( ']' ) )
+            gname = gname.remove( gname.length() - 1, 1 );
+        git = groups.insert( gname, ConfigGroup() );
     } else if ( !line.isEmpty() ) {
-	if ( git == groups.end() )
-	    return FALSE;
-	int eq = line.find( '=' );
-	if ( eq == -1 )
-	    return FALSE;
-	QString key = line.left(eq).stripWhiteSpace();
-	QString value = line.mid(eq+1).stripWhiteSpace();
-	( *git ).insert( key, value );
+        if ( git == groups.end() )
+            return FALSE;
+        int eq = line.find( '=' );
+        if ( eq == -1 )
+            return FALSE;
+        QString key = line.left(eq).stripWhiteSpace();
+        QString value = line.mid(eq+1).stripWhiteSpace();
+
+        if ( git.key() == "Translation" ) {
+            if ( key == "File" ) {
+                if ( !d )
+                    d = new ConfigPrivate;
+                d->trfile = value;
+            } else if ( key == "Context" ) {
+                if ( !d )
+                    d = new ConfigPrivate;
+                d->trcontext = value.latin1();
+            } else if ( key.startsWith("Comment") ) {
+                return TRUE; // ignore comment for ts file
+            } else {
+                return FALSE; // Unrecognized
+            }
+        }
+
+        int kl = key.length();
+        if ( kl > 1 && key[kl-1] == ']' && key[kl-2] != '[' ) {
+            // Old-style translation (inefficient)
+            if ( !d )
+                d = new ConfigPrivate;
+            if ( !d->multilang ) {
+                QStringList l = Global::languageList();
+                lang = l[0];
+                glang = l[1];
+                d->multilang = TRUE;
+            }
+        }
+
+        ( *git ).insert( key, value );
     }
     return TRUE;
 }
