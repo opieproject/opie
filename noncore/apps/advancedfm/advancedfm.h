@@ -78,7 +78,6 @@ protected:
    bool b;
    QStringList fileSystemTypeList, fsList;
    int currentServerConfig;
-   bool zaurusDevice;
    QGridLayout *tabLayout, *tabLayout_2, *tabLayout_3;
    QStringList remoteDirPathStringList, localDirPathStringList;
    QLineEdit *renameBox;

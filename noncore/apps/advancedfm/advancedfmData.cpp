@@ -215,18 +215,10 @@ void AdvancedFm::init() {
 
 	 ///////////////
 
-	 if ( QFile::exists ( "/dev/sharp_buz" ) || QFile::exists ( "/dev/sharp_led" ))
-			zaurusDevice=TRUE;
-	 else
-			zaurusDevice=FALSE;
-
-
 	 if( !StorageInfo::hasSd() || !StorageInfo::hasMmc()) {
-			odebug << "not have sd" << oendl;
 			sdButton->hide();
 	 }
 	 if( !StorageInfo::hasCf() ) {
-			odebug << "not have cf" << oendl;
 			cfButton->hide();
 	 }
 	 currentDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
@@ -234,8 +226,6 @@ void AdvancedFm::init() {
 
 	 currentRemoteDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
 	 currentRemoteDir.setPath( QDir::currentDirPath());
-
-	 //  b = TRUE;
 
 	 filterStr="*";
 	 showMenuHidden();
