@@ -58,7 +58,7 @@
     </message>
     <message>
         <source>OK</source>
-        <translation>Ок</translation>
+        <translation>ОК</translation>
     </message>
 </context>
 <context>
@@ -126,7 +126,7 @@
     </message>
     <message>
         <source>&lt;p&gt;No application is defined for this document.&lt;p&gt;Type is %1.</source>
-        <translation>&lt;p&gt; Нет программы, сопоставленной с документом.&lt;p&gt; Тип %1.</translation>
+        <translation>&lt;p&gt; Нет заданной программы для документа.&lt;p&gt; Тип %1.</translation>
     </message>
     <message>
         <source>Documents</source>
@@ -149,11 +149,11 @@
     </message>
     <message>
         <source>Icon View</source>
-        <translation>Таблицей</translation>
+        <translation>Пиктограммы</translation>
     </message>
     <message>
         <source>List View</source>
-        <translation>Списком</translation>
+        <translation>Список</translation>
     </message>
 </context>
 <context>
@@ -179,7 +179,7 @@
     </message>
     <message>
         <source>Restart Qtopia</source>
-        <translation>Перегрузить Otopia</translation>
+        <translation>Перезагрузить Otopia</translation>
     </message>
     <message>
         <source>Help...</source>
@@ -203,7 +203,7 @@
 Keep power off until power restored!</source>
         <translation>Аккумулятор сел совсем!
 Выключите питание до тех пор,
-пока не восстановится аккумулятор!</translation>
+пока заряд не восстановится!</translation>
     </message>
     <message>
         <source>Battery is running very low. </source>
@@ -229,7 +229,7 @@ Please charge the back-up battery.</source>
     </message>
     <message>
         <source>OK</source>
-        <translation>Ок</translation>
+        <translation>ОК</translation>
     </message>
     <message>
         <source>Plugin Manager...</source>
@@ -237,7 +237,7 @@ Please charge the back-up battery.</source>
     </message>
     <message>
         <source>Memory Status</source>
-        <translation>Память</translation>
+        <translation>Статус памяти</translation>
     </message>
     <message>
         <source>Memory Low
@@ -257,15 +257,15 @@ immediately.</source>
     <name>ShutdownImpl</name>
     <message>
         <source>Terminate</source>
-        <translation>Завершить</translation>
+        <translation>Завершить сеанс</translation>
     </message>
     <message>
         <source>Terminate Opie</source>
-        <translation>Завершить Opie</translation>
+        <translation>Выйти из Opie</translation>
     </message>
     <message>
         <source>Reboot</source>
-        <translation>Перезагрузка</translation>
+        <translation>Перезагрузить</translation>
     </message>
     <message>
         <source>Restart Opie</source>
@@ -279,7 +279,7 @@ immediately.</source>
         <source>&lt;p&gt;
 These termination options are provided primarily for use while developing and testing the Opie system. In a normal environment, these concepts are unnecessary.</source>
         <translation>&lt;p&gt;
-Функции завершения предназначены для разработки и тестирования Opie. При нормальной работе эти функции не нужны.</translation>
+Функции завершения сеанса предназначены для разработки и тестирования Opie. При нормальной работе эти функции не нужны.</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -287,18 +287,18 @@ These termination options are provided primarily for use while developing and te
     </message>
     <message>
         <source>Shutdown...</source>
-        <translation>Выключить...</translation>
+        <translation>Завершить сеанс...</translation>
     </message>
 </context>
 <context>
     <name>SyncAuthentication</name>
     <message>
         <source>Sync Connection</source>
-        <translation>Коррекция синхронизации</translation>
+        <translation>Запрос на синхронизацию</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade.</source>
-        <translation>&lt;p&gt;Неавторизованная система требует доступа.&lt;p&gt;Если у Вас Qtopia Desktop 1.5.1 и меньше, обновите его.</translation>
+        <translation>&lt;p&gt;Неавторизованная система требует доступа к устройству.&lt;p&gt;Если у Вас Qtopia Desktop 1.5.1 и меньше, пожалуйста обновите его.</translation>
     </message>
     <message>
         <source>Deny</source>
@@ -306,7 +306,7 @@ These termination options are provided primarily for use while developing and te
     </message>
     <message>
         <source>&lt;p&gt;An unrecognized system is requesting access to this device.&lt;p&gt;If you have just initiated a Sync for the first time, this is normal.</source>
-        <translation>&lt;p&gt;Неизвестная система требует доступа.&lt;p&gt;Если Вы только что установили синхронизатор, то это нормально.</translation>
+        <translation>&lt;p&gt;Неизвестная система требует доступа к устройству.&lt;p&gt;Если Вы только что первый раз запустили синхронизатор, то это нормально.</translation>
     </message>
     <message>
         <source>Allow</source>
