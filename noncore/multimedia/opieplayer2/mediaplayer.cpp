@@ -60,6 +60,8 @@ MediaPlayer::MediaPlayer( PlayListWidget &_playList, MediaPlayerState &_mediaPla
 
 MediaPlayer::~MediaPlayer() {
     delete xineControl;
+    delete audioUI;
+    delete videoUI;
     delete volControl;
 }
 
