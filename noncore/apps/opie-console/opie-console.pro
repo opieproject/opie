@@ -23,7 +23,7 @@ HEADERS      = io_layer.h io_serial.h io_irda.h io_bt.h io_modem.h \
 	       btconfigwidget.h modemconfigwidget.h \
 	       atconfigdialog.h dialdialog.h \  
                procctl.h \
-           function_keyboard.h \
+               function_keyboard.h quick_button.h \
 	       receive_layer.h filereceive.h \
 	       script.h \
 	       dialer.h \
@@ -52,7 +52,7 @@ SOURCES      = io_layer.cpp io_serial.cpp io_irda.cpp io_bt.cpp io_modem.cpp \
 	       btconfigwidget.cpp modemconfigwidget.cpp \ 
 	       atconfigdialog.cpp dialdialog.cpp \
 	       default.cpp  procctl.cpp \
-           function_keyboard.cpp \
+               function_keyboard.cpp quick_button.cpp \
 	       receive_layer.cpp filereceive.cpp \
 	       script.cpp \
 		   dialer.cpp \

@@ -28,6 +28,7 @@
 #include "function_keyboard.h"
 #include "emulation_handler.h"
 #include "script.h"
+#include "quick_button.h"
 
 
 
@@ -172,6 +173,20 @@ void MainWindow::initUI() {
     m_openKeys->addTo(m_icons);
 
 
+     /*
+     * action that open/closes the keyboard
+     */
+    m_openButtons = new QAction ( tr( "Open Buttons..." ),
+                             Resource::loadPixmap( "down" ),
+                             QString::null, 0, this, 0 );
+
+    m_openButtons->setToggleAction( true );
+
+    connect ( m_openButtons, SIGNAL( toggled( bool ) ),
+             this, SLOT( slotOpenButtons( bool ) ) );
+    m_openButtons->addTo( m_icons );
+
+
     /* insert the submenu */
     m_console->insertItem(tr("New from Profile"), m_sessionsPop,
                           -1, 0);
@@ -195,6 +210,14 @@ void MainWindow::initUI() {
     connect(m_kb, SIGNAL(keyPressed(ushort, ushort, bool, bool, bool)),
             this, SLOT(slotKeyReceived(ushort, ushort, bool, bool, bool)));
 
+    m_buttonBar = new QToolBar( this );
+    addToolBar( m_buttonBar, "Buttons",  QMainWindow::Top, TRUE );
+    m_buttonBar->setHorizontalStretchable( TRUE );
+    m_buttonBar->hide();
+
+    m_qb = new QuickButton( m_buttonBar );
+    connect( m_qb, SIGNAL( keyPressed( ushort, ushort, bool, bool, bool) ),
+            this, SLOT( slotKeyReceived( ushort, ushort, bool, bool, bool) ) );
 
 
     m_connect->setEnabled( false );
@@ -431,6 +454,19 @@ void MainWindow::slotOpenKeb(bool state) {
     else m_keyBar->hide();
 
 }
+
+
+void MainWindow::slotOpenButtons( bool state ) {
+
+    if ( state ) {
+        m_buttonBar->show();
+    } else {
+        m_buttonBar->hide();
+    }
+}
+
+
+
 void MainWindow::slotSessionChanged( Session* ses ) {
     qWarning("changed!");
     if ( ses ) {

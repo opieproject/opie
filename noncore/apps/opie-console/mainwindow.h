@@ -20,6 +20,8 @@ class TabWidget;
 class ProfileManager;
 class Profile;
 class FunctionKeyboard;
+class QuickButton;
+
 class MainWindow : public QMainWindow {
     Q_OBJECT
 public:
@@ -59,6 +61,7 @@ private slots:
     void slotProfile(int);
     void slotTransfer();
     void slotOpenKeb(bool);
+    void slotOpenButtons(bool);
     void slotRecordScript();
     void slotSaveScript();
     void slotRunScript();
@@ -90,6 +93,7 @@ private:
     QToolBar* m_tool;
     QToolBar* m_icons;
     QToolBar* m_keyBar;
+    QToolBar* m_buttonBar;
     QMenuBar* m_bar;
     QPopupMenu* m_console;
     QPopupMenu* m_settings;
@@ -101,6 +105,7 @@ private:
     QAction* m_transfer;
     QAction* m_setProfiles;
     QAction* m_openKeys;
+    QAction* m_openButtons;
     QAction* m_recordScript;
     QAction* m_saveScript;
     QAction* m_runScript;
@@ -108,6 +113,7 @@ private:
     QAction* m_closewindow;
 
     FunctionKeyboard *m_kb;
+    QuickButton *m_qb;
     bool m_isFullscreen;
 };
 
