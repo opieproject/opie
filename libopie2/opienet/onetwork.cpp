@@ -834,7 +834,7 @@ void OWirelessNetworkInterface::setPrivate( const QString& call, int numargs, ..
 }
 
 
-void OWirelessNetworkInterface::getPrivate( const QString& call )
+void OWirelessNetworkInterface::getPrivate( const QString&  )
 {
     oerr << "OWirelessNetworkInterface::getPrivate() is not implemented yet." << oendl;
 }
@@ -842,7 +842,7 @@ void OWirelessNetworkInterface::getPrivate( const QString& call )
 
 bool OWirelessNetworkInterface::hasPrivate( const QString& call )
 {
-    return child( (const char*) call );
+    return child( call.local8Bit() );
 }
 
 
@@ -1012,8 +1012,8 @@ int OWirelessNetworkInterface::signalStrength() const
 
     int max = _range.max_qual.qual;
     int cur = stat.qual.qual;
-    int lev = stat.qual.level; //FIXME: Do something with them?
-    int noi = stat.qual.noise; //FIXME: Do something with them?
+//    int lev = stat.qual.level; //FIXME: Do something with them?
+//    int noi = stat.qual.noise; //FIXME: Do something with them?
 
 
     return max != 0 ? cur*100/max: -1;
@@ -1071,7 +1071,7 @@ void OMonitoringInterface::setChannel( int c )
 }
 
 
-void OMonitoringInterface::setEnabled( bool b )
+void OMonitoringInterface::setEnabled( bool  )
 {
 }
 
@@ -1092,7 +1092,7 @@ OCiscoMonitoringInterface::~OCiscoMonitoringInterface()
 }
 
 
-void OCiscoMonitoringInterface::setEnabled( bool b )
+void OCiscoMonitoringInterface::setEnabled( bool /*b*/ )
 {
     QString fname;
     fname.sprintf( "/proc/driver/aironet/%s", (const char*) _if->name() );
