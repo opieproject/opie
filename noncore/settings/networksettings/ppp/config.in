@@ -1,0 +1,4 @@
+  config PPP
+    boolean "PPP Module"
+    default "n" if NETWORKSETUP
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && NETWORKSETUP && NETWORKSETUP-CORE && INTERFACES
