@@ -13,6 +13,7 @@
 #include <qgroupbox.h>
 #include <qmainwindow.h>
 
+#include <qpe/qpeapplication.h>
 #include <qlabel.h>
 #include <qpushbutton.h>
 #include <qslider.h>
@@ -84,6 +85,7 @@ SoundSettingsBase::SoundSettingsBase( QWidget* parent,  const char* name, bool m
   setName( "SoundSettingsBase" );
     resize( 255, 301 ); 
     setCaption( tr( "Vmemo Settings" ) );
+
     SoundSettingsBaseLayout = new QGridLayout( this ); 
     SoundSettingsBaseLayout->setSpacing( 6 );
     SoundSettingsBaseLayout->setMargin( 11 );
@@ -251,4 +253,3 @@ SoundSettingsBase::~SoundSettingsBase()
 {
     // no need to delete child widgets, Qt does it all for us
 }
-

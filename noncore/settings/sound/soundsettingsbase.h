@@ -11,6 +11,8 @@
 
 #include <qvariant.h>
 #include <qdialog.h>
+#include <qmainwindow.h>
+
 class QVBoxLayout; 
 class QHBoxLayout; 
 class QGridLayout; 
@@ -20,7 +22,7 @@ class QGroupBox;
 class QLabel;
 class QSlider;
 
-class SoundSettingsBase : public QDialog
+class SoundSettingsBase : public QMainWindow
 { 
     Q_OBJECT
 
@@ -45,8 +47,6 @@ public:
     QCheckBox* AlertCheckBox;
     QLabel* TextLabel1;
     QComboBox* LocationComboBox;
-/*      QCheckBox* touchsound; */
-/*      QCheckBox* keysound; */
 
 protected:
     QGridLayout* SoundSettingsBaseLayout;
@@ -58,6 +58,8 @@ protected:
     QHBoxLayout* Layout17;
     QVBoxLayout* Layout12_2;
     QVBoxLayout* Layout11;
+protected slots:
+        
 };
 
 #endif // SOUNDSETTINGSBASE_H
