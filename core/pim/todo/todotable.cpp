@@ -193,14 +193,17 @@ void DueTextItem::setToDoEvent( const ToDoEvent *ev )
   if( ev->hasDate() ){
     QDate today = QDate::currentDate();
     m_off = today.daysTo(ev->date() );
+    //qWarning("DueText m_off=%d", m_off );
     setText( QString::number(m_off)  + " day(s) " );
   }else{
     setText("n.d." );
     m_off = 0;
   }
+  //qWarning("m_off=%d", m_off );
 }
 void DueTextItem::paint( QPainter *p, const QColorGroup &cg, const QRect &cr, bool selected )
 {
+  //qWarning ("paint m_off=%d", m_off );
   QColorGroup cg2(cg);
   QColor text = cg.text();
   if( m_hasDate && !m_completed ){
@@ -261,6 +264,10 @@ TodoTable::TodoTable( QWidget *parent, const char *name )
 
     menuTimer = new QTimer( this );
     connect( menuTimer, SIGNAL(timeout()), this, SLOT(slotShowMenu()) );
+
+    mDayTimer = new QTimer( this );
+    connect( mDayTimer, SIGNAL(timeout()), this, SLOT(slotCheckDay() ) );
+    mDay = QDate::currentDate();
 }
 
 void TodoTable::addEntry( const ToDoEvent &todo )
@@ -421,6 +428,7 @@ void TodoTable::load( const QString &fn )
     QTable::sortColumn(0,TRUE,TRUE);
     setCurrentCell( 0, 2 );
     setSorting(true );
+    mDayTimer->start( 60 * 1000 ); // gone in 60 seconds?
 }
 void TodoTable::updateVisible()
 {
@@ -780,6 +788,21 @@ void TodoTable::applyJournal()
     QFile::remove(journalFileName()+ "_new" );
     tododb.save();
   }
+}
+void TodoTable::slotCheckDay()
+{
+  QDate date = QDate::currentDate();
+  if( mDay.daysTo(date )!= 0 ){
+    setPaintingEnabled( FALSE );
+    for(int i=0; i < numRows(); i++ ){
+      ToDoEvent *t = todoList[static_cast<CheckItem*>(item(i, 0))];      
+      static_cast<DueTextItem*>(item(i, 3) )->setToDoEvent( t );
+
+    }
+    setPaintingEnabled( TRUE );
+    mDay = date;
+    }
+  mDayTimer->start( 60 * 1000 ); // 60 seconds
 }
 // check Action and decide
 /*

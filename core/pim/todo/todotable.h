@@ -167,6 +167,7 @@ private slots:
 		     bool backwards, int category );
     void slotShowMenu();
     void rowHeightChanged( int row );
+    void slotCheckDay(); // check the day
 
 private:
     friend class TodoWindow;
@@ -176,6 +177,8 @@ private:
     bool showComp;
     QString showCat;
     QTimer *menuTimer;
+    QDate mDay;
+    QTimer *mDayTimer; // see if the day changed
     bool enablePainting;
     Categories mCat;
     int currFindRow;
