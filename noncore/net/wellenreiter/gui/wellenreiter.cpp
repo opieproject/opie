@@ -314,8 +314,8 @@ void Wellenreiter::startClicked()
     // get configuration from config window
 
     const QString& interface = configwindow->interfaceName->currentText();
-    const int cardtype = configwindow->daemonDeviceType();
-    const int interval = configwindow->daemonHopInterval();
+    const int cardtype = configwindow->driverType();
+    const int interval = configwindow->hoppingInterval();
 
     if ( ( interface == "" ) || ( cardtype == 0 ) )
     {

@@ -47,13 +47,13 @@ void MFrequencySpectrum::drawLine( QPainter* p, int x, int y, int width, const Q
 
 void MFrequencySpectrum::drawBar( QPainter* p, int x, int y, int width, int height, int maxheight )
 {
-/*    int h1 = 133; int h2 = 0;
+    int h1 = 133; int h2 = 0;
     int s1 = 200; int s2 = 255;
-    int v1 = 140; int v2 = 255; */
+    int v1 = 140; int v2 = 255;
 
-    int h1 = 196; int h2 = 194;
+    /*int h1 = 196; int h2 = 194;
     int s1 = 85; int s2 = 15;
-    int v1 = 95; int v2 = 237;
+    int v1 = 95; int v2 = 237;*/
 
     QColor c( 120, 60, 200 );
     for ( int i = 0; i < height; ++i )
@@ -125,7 +125,7 @@ MGraphWindow::MGraphWindow( QWidget* parent, const char* name, WFlags f )
 {
     spectrum = new MFrequencySpectrum( 14, this );
     legende = new Legende( 14, this );
-    startTimer( 50 );
+    startTimer( 50 ); //FIXME: tweak
 
     //testGraph();
 
@@ -146,7 +146,7 @@ void MGraphWindow::timerEvent( QTimerEvent* e )
 {
     for ( int i = 0; i < 14; i++ )
     {
-        spectrum->decrease( i, 4 );
+        spectrum->decrease( i, 1 ); //TODO: make this customizable?
     }
     spectrum->repaint();
 }

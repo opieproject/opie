@@ -181,8 +181,7 @@ void WellenreiterMainWindow::showConfigure()
 void WellenreiterMainWindow::updateToolButtonState()
 {
     const QString& interface = cw->interfaceName->currentText();
-    const int cardtype = cw->daemonDeviceType();
-    const int interval = cw->daemonHopInterval();
+    const int cardtype = cw->driverType();
 
     if ( ( interface != "<select>" ) && ( cardtype != 0 ) )
     {

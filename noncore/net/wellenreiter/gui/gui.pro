@@ -13,7 +13,8 @@ HEADERS         = wellenreiterbase.h \
                   statwindow.h \
                   configwindow.h \
                   manufacturers.h \
-                  graphwindow.h
+                  graphwindow.h \
+                  protolistview.h
 
 SOURCES         = main.cpp \
                   mainwindow.cpp \
@@ -25,11 +26,12 @@ SOURCES         = main.cpp \
                   statwindow.cpp \
                   configwindow.cpp \
                   manufacturers.cpp \
-                  graphwindow.cpp
+                  graphwindow.cpp \
+                  protolistview.cpp
 
 INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
-INTERFACES      = configbase.ui #configbasenew.ui
+INTERFACES      = configbase.ui
 TARGET          = wellenreiter
 
 !contains( platform, x11 ) {
