@@ -189,19 +189,19 @@ Please charge the back-up battery.</source>
     <name>Launcher</name>
     <message>
         <source>Launcher</source>
-        <translation>啟動器</translation>
+        <translation type="unfinished">啟動器</translation>
     </message>
     <message>
         <source> - Launcher</source>
-        <translation> - 啟動器</translation>
+        <translation type="unfinished"> - 啟動器</translation>
     </message>
     <message>
         <source>No application</source>
-        <translation>無應用程式</translation>
+        <translation type="unfinished">無應用程式</translation>
     </message>
     <message>
         <source>&lt;p&gt;No application is defined for this document.&lt;p&gt;Type is %1.</source>
-        <translation>&lt;p&gt;沒有可開啟此文件的應用程式&lt;p&gt;Type is %1.</translation>
+        <translation type="unfinished">&lt;p&gt;沒有可開啟此文件的應用程式&lt;p&gt;Type is %1.</translation>
     </message>
     <message>
         <source>Documents</source>
@@ -219,16 +219,16 @@ Please charge the back-up battery.</source>
 <context>
     <name>LauncherTabWidget</name>
     <message>
-        <source>&lt;b&gt;Finding Documents...&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Icon View</source>
         <translation type="unfinished">圖示瀏覽</translation>
     </message>
     <message>
         <source>List View</source>
         <translation type="unfinished">列表瀏覽</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Finding Documents...&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -243,7 +243,7 @@ Please charge the back-up battery.</source>
     </message>
     <message>
         <source>Document View</source>
-        <translation>文件瀏覽</translation>
+        <translation type="unfinished">文件瀏覽</translation>
     </message>
     <message>
         <source>All types</source>
@@ -350,10 +350,6 @@ Keep power off until power restored!</source>
 請把電源關掉直到插上插座</translation>
     </message>
     <message>
-        <source>Battery is running very low. </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The Back-up battery is very low.
 Please charge the back-up battery.</source>
         <translation type="unfinished">低電量警告.
@@ -362,6 +358,10 @@ Please charge the back-up battery.</source>
     <message>
         <source>business card</source>
         <translation type="unfinished">business card </translation>
+    </message>
+    <message>
+        <source>Battery is running very low. </source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Safe Mode</source>
@@ -399,60 +399,60 @@ immediately.</source>
     <name>ShutdownImpl</name>
     <message>
         <source>Terminate</source>
-        <translation>終止</translation>
+        <translation type="unfinished">終止</translation>
     </message>
     <message>
         <source>Terminate Opie</source>
-        <translation>終止Opie</translation>
+        <translation type="unfinished">終止Opie</translation>
     </message>
     <message>
         <source>Reboot</source>
-        <translation>重開機</translation>
+        <translation type="unfinished">重開機</translation>
     </message>
     <message>
         <source>Restart Opie</source>
-        <translation>重新啟動Opie</translation>
+        <translation type="unfinished">重新啟動Opie</translation>
     </message>
     <message>
         <source>Shutdown</source>
-        <translation>關機</translation>
+        <translation type="unfinished">關機</translation>
     </message>
     <message>
         <source>&lt;p&gt;
 These termination options are provided primarily for use while developing and testing the Opie system. In a normal environment, these concepts are unnecessary.</source>
-        <translation>&lt;p&gt;
+        <translation type="unfinished">&lt;p&gt;
 These termination options are provided primarily for use while developing and testing the Opie system. In a normal environment, these concepts are unnecessary.</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>取消</translation>
+        <translation type="unfinished">取消</translation>
     </message>
     <message>
         <source>Shutdown...</source>
-        <translation>關機..</translation>
+        <translation type="unfinished">關機..</translation>
     </message>
 </context>
 <context>
     <name>SyncAuthentication</name>
     <message>
         <source>Sync Connection</source>
-        <translation>同步連結</translation>
+        <translation type="unfinished">同步連結</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade.</source>
-        <translation>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade.</translation>
+        <translation type="unfinished">&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade.</translation>
     </message>
     <message>
         <source>Deny</source>
-        <translation>沒有權限</translation>
+        <translation type="unfinished">沒有權限</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unrecognized system is requesting access to this device.&lt;p&gt;If you have just initiated a Sync for the first time, this is normal.</source>
-        <translation>&lt;p&gt;An unrecognized system is requesting access to this device.&lt;p&gt;If you have just initiated a Sync for the first time, this is normal.</translation>
+        <translation type="unfinished">&lt;p&gt;An unrecognized system is requesting access to this device.&lt;p&gt;If you have just initiated a Sync for the first time, this is normal.</translation>
     </message>
     <message>
         <source>Allow</source>
-        <translation>淮許</translation>
+        <translation type="unfinished">淮許</translation>
     </message>
 </context>
 <context>

@@ -191,19 +191,19 @@ Cambiarla subito.</translation>
     <name>Launcher</name>
     <message>
         <source>Launcher</source>
-        <translation>Launcher</translation>
+        <translation type="unfinished">Launcher</translation>
     </message>
     <message>
         <source> - Launcher</source>
-        <translation> - Launcher</translation>
+        <translation type="unfinished"> - Launcher</translation>
     </message>
     <message>
         <source>No application</source>
-        <translation>Nessuna applicazione</translation>
+        <translation type="unfinished">Nessuna applicazione</translation>
     </message>
     <message>
         <source>&lt;p&gt;No application is defined for this document.&lt;p&gt;Type is %1.</source>
-        <translation>&lt;p&gt;Nessuna applicazione è definita per questo documento.&lt;p&gt;Il tipo è %1.</translation>
+        <translation type="unfinished">&lt;p&gt;Nessuna applicazione è definita per questo documento.&lt;p&gt;Il tipo è %1.</translation>
     </message>
     <message>
         <source>Finding documents</source>
@@ -229,16 +229,16 @@ Cambiarla subito.</translation>
 <context>
     <name>LauncherTabWidget</name>
     <message>
-        <source>&lt;b&gt;Finding Documents...&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Icon View</source>
         <translation type="unfinished">Mostra Icone</translation>
     </message>
     <message>
         <source>List View</source>
         <translation type="unfinished">Mostra Lista</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Finding Documents...&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -253,7 +253,7 @@ Cambiarla subito.</translation>
     </message>
     <message>
         <source>Document View</source>
-        <translation>Mostra Documento</translation>
+        <translation type="unfinished">Mostra Documento</translation>
     </message>
     <message>
         <source>All types</source>
@@ -360,10 +360,6 @@ Keep power off until power restored!</source>
 Tieni spento il dispositivo finchè la batteria non è di nuovo carica!</translation>
     </message>
     <message>
-        <source>Battery is running very low. </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The Back-up battery is very low.
 Please charge the back-up battery.</source>
         <translation type="unfinished">La batteria di Back-up si sta scaricando.
@@ -372,6 +368,10 @@ Cambiarla subito.</translation>
     <message>
         <source>business card</source>
         <translation type="unfinished">biglietto da visita</translation>
+    </message>
+    <message>
+        <source>Battery is running very low. </source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Safe Mode</source>
@@ -409,60 +409,60 @@ immediately.</source>
     <name>ShutdownImpl</name>
     <message>
         <source>Terminate</source>
-        <translation>Chiudi</translation>
+        <translation type="unfinished">Chiudi</translation>
     </message>
     <message>
         <source>Terminate Opie</source>
-        <translation>Chiudi Opie</translation>
+        <translation type="unfinished">Chiudi Opie</translation>
     </message>
     <message>
         <source>Reboot</source>
-        <translation>Riavvia</translation>
+        <translation type="unfinished">Riavvia</translation>
     </message>
     <message>
         <source>Restart Opie</source>
-        <translation>Riavvia Opie</translation>
+        <translation type="unfinished">Riavvia Opie</translation>
     </message>
     <message>
         <source>Shutdown</source>
-        <translation>Sospendi</translation>
+        <translation type="unfinished">Sospendi</translation>
     </message>
     <message>
         <source>&lt;p&gt;
 These termination options are provided primarily for use while developing and testing the Opie system. In a normal environment, these concepts are unnecessary.</source>
-        <translation>&lt;p&gt;
+        <translation type="unfinished">&lt;p&gt;
 Queste opzioni di chiusura sono state inserite principalmente per sviluppo e test di Opie. Per un uso normale, queste opzioni non sono necessarie.</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Cancella</translation>
+        <translation type="unfinished">Cancella</translation>
     </message>
     <message>
         <source>Shutdown...</source>
-        <translation>Sospendi...</translation>
+        <translation type="unfinished">Sospendi...</translation>
     </message>
 </context>
 <context>
     <name>SyncAuthentication</name>
     <message>
         <source>Sync Connection</source>
-        <translation>Sync Connessione</translation>
+        <translation type="unfinished">Sync Connessione</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade.</source>
-        <translation>&lt;p&gt;Un sistema non autorizzato sta richiedendo l&apos;accesso a questo dispositivo.&lt;p&gt;Se stai utilizzando una versione di Qtopia Desktop più vecchia della 1.5.1, fai l&apos;upgrade.</translation>
+        <translation type="unfinished">&lt;p&gt;Un sistema non autorizzato sta richiedendo l&apos;accesso a questo dispositivo.&lt;p&gt;Se stai utilizzando una versione di Qtopia Desktop più vecchia della 1.5.1, fai l&apos;upgrade.</translation>
     </message>
     <message>
         <source>Deny</source>
-        <translation>Nega</translation>
+        <translation type="unfinished">Nega</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unrecognized system is requesting access to this device.&lt;p&gt;If you have just initiated a Sync for the first time, this is normal.</source>
-        <translation>&lt;p&gt;Un sistema non autorizzato sta richiedendo l&apos;accesso a questo dispositivo.&lt;p&gt;Se hai appena iniziato un Sync per la prima volta, questo è normale.</translation>
+        <translation type="unfinished">&lt;p&gt;Un sistema non autorizzato sta richiedendo l&apos;accesso a questo dispositivo.&lt;p&gt;Se hai appena iniziato un Sync per la prima volta, questo è normale.</translation>
     </message>
     <message>
         <source>Allow</source>
-        <translation>Permetti</translation>
+        <translation type="unfinished">Permetti</translation>
     </message>
 </context>
 <context>

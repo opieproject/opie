@@ -190,7 +190,7 @@ Reservebatterij opladen aub.</translation>
     <name>Launcher</name>
     <message>
         <source>Launcher</source>
-        <translation>Launcher</translation>
+        <translation type="unfinished">Launcher</translation>
     </message>
     <message>
         <source>Finding documents</source>
@@ -202,15 +202,15 @@ Reservebatterij opladen aub.</translation>
     </message>
     <message>
         <source> - Launcher</source>
-        <translation>- Launcher</translation>
+        <translation type="unfinished">- Launcher</translation>
     </message>
     <message>
         <source>No application</source>
-        <translation>Geen programma</translation>
+        <translation type="unfinished">Geen programma</translation>
     </message>
     <message>
         <source>&lt;p&gt;No application is defined for this document.&lt;p&gt;Type is %1.</source>
-        <translation>Er is geen programma ingesteld voor dit document.&lt;p&gt;Type is %1.</translation>
+        <translation type="unfinished">Er is geen programma ingesteld voor dit document.&lt;p&gt;Type is %1.</translation>
     </message>
     <message>
         <source>Documents</source>
@@ -228,16 +228,16 @@ Reservebatterij opladen aub.</translation>
 <context>
     <name>LauncherTabWidget</name>
     <message>
-        <source>&lt;b&gt;Finding Documents...&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Icon View</source>
         <translation type="unfinished">Icoonaanzicht</translation>
     </message>
     <message>
         <source>List View</source>
         <translation type="unfinished">Lijstaanzicht</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Finding Documents...&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -252,7 +252,7 @@ Reservebatterij opladen aub.</translation>
     </message>
     <message>
         <source>Document View</source>
-        <translation>Documentaanzicht</translation>
+        <translation type="unfinished">Documentaanzicht</translation>
     </message>
     <message>
         <source>All types</source>
@@ -359,10 +359,6 @@ Keep power off until power restored!</source>
 Laat uitgeschakeld tot kan worden opgeladen!</translation>
     </message>
     <message>
-        <source>Battery is running very low. </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The Back-up battery is very low.
 Please charge the back-up battery.</source>
         <translation type="unfinished">De reservebatterijlading is erg laag.
@@ -371,6 +367,10 @@ Reservebatterij opladen aub.</translation>
     <message>
         <source>business card</source>
         <translation type="unfinished">visitekaartje</translation>
+    </message>
+    <message>
+        <source>Battery is running very low. </source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Safe Mode</source>
@@ -408,60 +408,60 @@ immediately.</source>
     <name>ShutdownImpl</name>
     <message>
         <source>Shutdown...</source>
-        <translation>Afsluiten...</translation>
+        <translation type="unfinished">Afsluiten...</translation>
     </message>
     <message>
         <source>Terminate</source>
-        <translation>Beeindigen</translation>
+        <translation type="unfinished">Beeindigen</translation>
     </message>
     <message>
         <source>Terminate Opie</source>
-        <translation>Opie beeindigen</translation>
+        <translation type="unfinished">Opie beeindigen</translation>
     </message>
     <message>
         <source>Reboot</source>
-        <translation>Herstarten</translation>
+        <translation type="unfinished">Herstarten</translation>
     </message>
     <message>
         <source>Restart Opie</source>
-        <translation>Opie herstarten</translation>
+        <translation type="unfinished">Opie herstarten</translation>
     </message>
     <message>
         <source>Shutdown</source>
-        <translation>Afsluiten</translation>
+        <translation type="unfinished">Afsluiten</translation>
     </message>
     <message>
         <source>&lt;p&gt;
 These termination options are provided primarily for use while developing and testing the Opie system. In a normal environment, these concepts are unnecessary.</source>
-        <translation>&lt;p&gt;
+        <translation type="unfinished">&lt;p&gt;
 Deze afsluitopties worden voornamelijk voor gebruik tijdens ontwikkeling en tests van het Opie systeem. In een normale omgeving zijn deze opties niet nodig.</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Annuleren</translation>
+        <translation type="unfinished">Annuleren</translation>
     </message>
 </context>
 <context>
     <name>SyncAuthentication</name>
     <message>
         <source>Sync Connection</source>
-        <translation>Synchronisatieverbinding</translation>
+        <translation type="unfinished">Synchronisatieverbinding</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade.</source>
-        <translation>Een niet geautoriseerd systeem probeert toegang te krijgen tot dit apparaat.&lt;p&gt;Aub upgraden als u een versie van Qtopia desktop ouder dan 1.5.1 gebruikt.</translation>
+        <translation type="unfinished">Een niet geautoriseerd systeem probeert toegang te krijgen tot dit apparaat.&lt;p&gt;Aub upgraden als u een versie van Qtopia desktop ouder dan 1.5.1 gebruikt.</translation>
     </message>
     <message>
         <source>Deny</source>
-        <translation>Weiger</translation>
+        <translation type="unfinished">Weiger</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unrecognized system is requesting access to this device.&lt;p&gt;If you have just initiated a Sync for the first time, this is normal.</source>
-        <translation>&lt;p&gt;Een onbekend systeem probeert toegang te krijgen tot dit apparaat. Dit is normaal als dit de eerste keer is dat u synchroniseert.</translation>
+        <translation type="unfinished">&lt;p&gt;Een onbekend systeem probeert toegang te krijgen tot dit apparaat. Dit is normaal als dit de eerste keer is dat u synchroniseert.</translation>
     </message>
     <message>
         <source>Allow</source>
-        <translation>Sta toe</translation>
+        <translation type="unfinished">Sta toe</translation>
     </message>
 </context>
 <context>

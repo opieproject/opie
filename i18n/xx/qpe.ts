@@ -186,19 +186,19 @@ Please charge the back-up battery.</source>
     <name>Launcher</name>
     <message>
         <source>Launcher</source>
-        <translation>FOO</translation>
+        <translation type="unfinished">FOO</translation>
     </message>
     <message>
         <source> - Launcher</source>
-        <translation>FOO</translation>
+        <translation type="unfinished">FOO</translation>
     </message>
     <message>
         <source>No application</source>
-        <translation>FOO</translation>
+        <translation type="unfinished">FOO</translation>
     </message>
     <message>
         <source>&lt;p&gt;No application is defined for this document.&lt;p&gt;Type is %1.</source>
-        <translation>FOO</translation>
+        <translation type="unfinished">FOO</translation>
     </message>
     <message>
         <source>Finding documents</source>
@@ -224,16 +224,16 @@ Please charge the back-up battery.</source>
 <context>
     <name>LauncherTabWidget</name>
     <message>
-        <source>&lt;b&gt;Finding Documents...&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Icon View</source>
         <translation type="unfinished">FOO</translation>
     </message>
     <message>
         <source>List View</source>
         <translation type="unfinished">FOO</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Finding Documents...&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -248,7 +248,7 @@ Please charge the back-up battery.</source>
     </message>
     <message>
         <source>Document View</source>
-        <translation>FOO</translation>
+        <translation type="unfinished">FOO</translation>
     </message>
     <message>
         <source>All types</source>
@@ -353,10 +353,6 @@ Keep power off until power restored!</source>
         <translation type="unfinished">FOO</translation>
     </message>
     <message>
-        <source>Battery is running very low. </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The Back-up battery is very low.
 Please charge the back-up battery.</source>
         <translation type="unfinished">FOO</translation>
@@ -364,6 +360,10 @@ Please charge the back-up battery.</source>
     <message>
         <source>business card</source>
         <translation type="unfinished">FOO</translation>
+    </message>
+    <message>
+        <source>Battery is running very low. </source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Safe Mode</source>
@@ -401,59 +401,59 @@ immediately.</source>
     <name>ShutdownImpl</name>
     <message>
         <source>Terminate</source>
-        <translation>FOO</translation>
+        <translation type="unfinished">FOO</translation>
     </message>
     <message>
         <source>Terminate Opie</source>
-        <translation>FOO</translation>
+        <translation type="unfinished">FOO</translation>
     </message>
     <message>
         <source>Reboot</source>
-        <translation>FOO</translation>
+        <translation type="unfinished">FOO</translation>
     </message>
     <message>
         <source>Restart Opie</source>
-        <translation>FOO</translation>
+        <translation type="unfinished">FOO</translation>
     </message>
     <message>
         <source>Shutdown</source>
-        <translation>FOO</translation>
+        <translation type="unfinished">FOO</translation>
     </message>
     <message>
         <source>&lt;p&gt;
 These termination options are provided primarily for use while developing and testing the Opie system. In a normal environment, these concepts are unnecessary.</source>
-        <translation>FOO</translation>
+        <translation type="unfinished">FOO</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>FOO</translation>
+        <translation type="unfinished">FOO</translation>
     </message>
     <message>
         <source>Shutdown...</source>
-        <translation>FOO</translation>
+        <translation type="unfinished">FOO</translation>
     </message>
 </context>
 <context>
     <name>SyncAuthentication</name>
     <message>
         <source>Sync Connection</source>
-        <translation>FOO</translation>
+        <translation type="unfinished">FOO</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade.</source>
-        <translation>FOO</translation>
+        <translation type="unfinished">FOO</translation>
     </message>
     <message>
         <source>Deny</source>
-        <translation>FOO</translation>
+        <translation type="unfinished">FOO</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unrecognized system is requesting access to this device.&lt;p&gt;If you have just initiated a Sync for the first time, this is normal.</source>
-        <translation>FOO</translation>
+        <translation type="unfinished">FOO</translation>
     </message>
     <message>
         <source>Allow</source>
-        <translation>FOO</translation>
+        <translation type="unfinished">FOO</translation>
     </message>
 </context>
 <context>

@@ -62,18 +62,6 @@
     </message>
 </context>
 <context>
-    <name>AppMonitor</name>
-</context>
-<context>
-    <name>Calibrate</name>
-</context>
-<context>
-    <name>CategoryTabWidget</name>
-</context>
-<context>
-    <name>DesktopApplication</name>
-</context>
-<context>
     <name>DesktopPowerAlerter</name>
     <message>
         <source>Battery Status</source>
@@ -129,6 +117,10 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Documents</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source> - Launcher</source>
         <translation type="unfinished"></translation>
     </message>
@@ -138,10 +130,6 @@
     </message>
     <message>
         <source>&lt;p&gt;No application is defined for this document.&lt;p&gt;Type is %1.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Documents</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -171,19 +159,13 @@
 <context>
     <name>LauncherView</name>
     <message>
-        <source>Document View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>All types</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>MediumMountGui</name>
-</context>
-<context>
-    <name>QObject</name>
+    <message>
+        <source>Document View</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SafeMode</name>

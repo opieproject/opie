@@ -190,19 +190,19 @@ Kérem töltse fel a biztonsági-elemt.</translation>
     <name>Launcher</name>
     <message>
         <source>Launcher</source>
-        <translation>Indító</translation>
+        <translation type="unfinished">Indító</translation>
     </message>
     <message>
         <source> - Launcher</source>
-        <translation>- Indító</translation>
+        <translation type="unfinished">- Indító</translation>
     </message>
     <message>
         <source>No application</source>
-        <translation>Nincs alkalmazás</translation>
+        <translation type="unfinished">Nincs alkalmazás</translation>
     </message>
     <message>
         <source>&lt;p&gt;No application is defined for this document.&lt;p&gt;Type is %1.</source>
-        <translation>&lt;p&gt;Ehhez a dokumentumhoz nincs alkalmazás megadva.&lt;p&gt;Típusa: %1.</translation>
+        <translation type="unfinished">&lt;p&gt;Ehhez a dokumentumhoz nincs alkalmazás megadva.&lt;p&gt;Típusa: %1.</translation>
     </message>
     <message>
         <source>Documents</source>
@@ -220,16 +220,16 @@ Kérem töltse fel a biztonsági-elemt.</translation>
 <context>
     <name>LauncherTabWidget</name>
     <message>
-        <source>&lt;b&gt;Finding Documents...&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Icon View</source>
         <translation type="unfinished">Ikon nézet</translation>
     </message>
     <message>
         <source>List View</source>
         <translation type="unfinished">Listanézet</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Finding Documents...&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -244,7 +244,7 @@ Kérem töltse fel a biztonsági-elemt.</translation>
     </message>
     <message>
         <source>Document View</source>
-        <translation>Dokumentum nézet</translation>
+        <translation type="unfinished">Dokumentum nézet</translation>
     </message>
     <message>
         <source>All types</source>
@@ -351,10 +351,6 @@ Keep power off until power restored!</source>
 Tartsa kikapcsolva, amíg az áramellátás visszaáll!</translation>
     </message>
     <message>
-        <source>Battery is running very low. </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The Back-up battery is very low.
 Please charge the back-up battery.</source>
         <translation type="unfinished">A biztonsági-elem szintje nagyon alacsony.
@@ -363,6 +359,10 @@ Kérem töltse fel a biztonsági-elemt.</translation>
     <message>
         <source>business card</source>
         <translation type="unfinished">névjegykártya</translation>
+    </message>
+    <message>
+        <source>Battery is running very low. </source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Safe Mode</source>
@@ -400,60 +400,60 @@ immediately.</source>
     <name>ShutdownImpl</name>
     <message>
         <source>Terminate</source>
-        <translation>Bezárás</translation>
+        <translation type="unfinished">Bezárás</translation>
     </message>
     <message>
         <source>Terminate Opie</source>
-        <translation>Opie bezárása</translation>
+        <translation type="unfinished">Opie bezárása</translation>
     </message>
     <message>
         <source>Reboot</source>
-        <translation>Újraindít</translation>
+        <translation type="unfinished">Újraindít</translation>
     </message>
     <message>
         <source>Restart Opie</source>
-        <translation>Opie újraindítása</translation>
+        <translation type="unfinished">Opie újraindítása</translation>
     </message>
     <message>
         <source>Shutdown</source>
-        <translation>Leállítás</translation>
+        <translation type="unfinished">Leállítás</translation>
     </message>
     <message>
         <source>&lt;p&gt;
 These termination options are provided primarily for use while developing and testing the Opie system. In a normal environment, these concepts are unnecessary.</source>
-        <translation>&lt;p&gt;
+        <translation type="unfinished">&lt;p&gt;
 Ezeka bezárási lehetőségek elsősorban az Opie fejlesztése és tesztelése céljából vannak. Egy normális környezetben ezek feleslegesek.</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Mégsem</translation>
+        <translation type="unfinished">Mégsem</translation>
     </message>
     <message>
         <source>Shutdown...</source>
-        <translation>Leállítás...</translation>
+        <translation type="unfinished">Leállítás...</translation>
     </message>
 </context>
 <context>
     <name>SyncAuthentication</name>
     <message>
         <source>Sync Connection</source>
-        <translation>Szinkronizációs kapcsolat</translation>
+        <translation type="unfinished">Szinkronizációs kapcsolat</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade.</source>
-        <translation>&lt;p&gt;Egy jogosulatlan rendszer hozzáférést kér ehhez az eszközhöz.&lt;p&gt;Ha a Qtopia Desktop 1.5.1-es verziójánál régebbit használ, kérjük frissítsen.</translation>
+        <translation type="unfinished">&lt;p&gt;Egy jogosulatlan rendszer hozzáférést kér ehhez az eszközhöz.&lt;p&gt;Ha a Qtopia Desktop 1.5.1-es verziójánál régebbit használ, kérjük frissítsen.</translation>
     </message>
     <message>
         <source>Deny</source>
-        <translation>Megtagad</translation>
+        <translation type="unfinished">Megtagad</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unrecognized system is requesting access to this device.&lt;p&gt;If you have just initiated a Sync for the first time, this is normal.</source>
-        <translation>&lt;p&gt;Egy jogosulatlan rendszer hozzáférést kér ehhez az eszközhöz.&lt;p&gt;Ha éppen most telepítette a Szinkronozálót először, ez normális.</translation>
+        <translation type="unfinished">&lt;p&gt;Egy jogosulatlan rendszer hozzáférést kér ehhez az eszközhöz.&lt;p&gt;Ha éppen most telepítette a Szinkronozálót először, ez normális.</translation>
     </message>
     <message>
         <source>Allow</source>
-        <translation>Engedélyez</translation>
+        <translation type="unfinished">Engedélyez</translation>
     </message>
 </context>
 <context>

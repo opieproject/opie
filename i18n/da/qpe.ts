@@ -190,19 +190,19 @@ Genoplad venligst back-up batteriet.</translation>
     <name>Launcher</name>
     <message>
         <source>Launcher</source>
-        <translation>Starter</translation>
+        <translation type="unfinished">Starter</translation>
     </message>
     <message>
         <source> - Launcher</source>
-        <translation> - Starter</translation>
+        <translation type="unfinished"> - Starter</translation>
     </message>
     <message>
         <source>No application</source>
-        <translation>Intet program</translation>
+        <translation type="unfinished">Intet program</translation>
     </message>
     <message>
         <source>&lt;p&gt;No application is defined for this document.&lt;p&gt;Type is %1.</source>
-        <translation>&lt;p&gt;Der er ikke defineret noget program til dette dokument.&lt;p&gt;Typen er %1.</translation>
+        <translation type="unfinished">&lt;p&gt;Der er ikke defineret noget program til dette dokument.&lt;p&gt;Typen er %1.</translation>
     </message>
     <message>
         <source>Finding documents</source>
@@ -228,16 +228,16 @@ Genoplad venligst back-up batteriet.</translation>
 <context>
     <name>LauncherTabWidget</name>
     <message>
-        <source>&lt;b&gt;Finding Documents...&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Icon View</source>
         <translation type="unfinished">Ikoner</translation>
     </message>
     <message>
         <source>List View</source>
         <translation type="unfinished">Liste</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Finding Documents...&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -252,7 +252,7 @@ Genoplad venligst back-up batteriet.</translation>
     </message>
     <message>
         <source>Document View</source>
-        <translation>Dokument visning</translation>
+        <translation type="unfinished">Dokument visning</translation>
     </message>
     <message>
         <source>All types</source>
@@ -359,10 +359,6 @@ Keep power off until power restored!</source>
 Hold enheden slukket indtil den får strøm igen!</translation>
     </message>
     <message>
-        <source>Battery is running very low. </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The Back-up battery is very low.
 Please charge the back-up battery.</source>
         <translation type="unfinished">Back-up batteriet er næsten tomt.
@@ -371,6 +367,10 @@ Genoplad venligst back-up batteriet.</translation>
     <message>
         <source>business card</source>
         <translation type="unfinished">visitkort</translation>
+    </message>
+    <message>
+        <source>Battery is running very low. </source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Safe Mode</source>
@@ -408,60 +408,60 @@ immediately.</source>
     <name>ShutdownImpl</name>
     <message>
         <source>Terminate</source>
-        <translation>Luk ned</translation>
+        <translation type="unfinished">Luk ned</translation>
     </message>
     <message>
         <source>Terminate Opie</source>
-        <translation>Luk Opie</translation>
+        <translation type="unfinished">Luk Opie</translation>
     </message>
     <message>
         <source>Reboot</source>
-        <translation>Genstart</translation>
+        <translation type="unfinished">Genstart</translation>
     </message>
     <message>
         <source>Restart Opie</source>
-        <translation>Genstart Opie</translation>
+        <translation type="unfinished">Genstart Opie</translation>
     </message>
     <message>
         <source>Shutdown</source>
-        <translation>Luk ned</translation>
+        <translation type="unfinished">Luk ned</translation>
     </message>
     <message>
         <source>&lt;p&gt;
 These termination options are provided primarily for use while developing and testing the Opie system. In a normal environment, these concepts are unnecessary.</source>
-        <translation>&lt;p&gt;
+        <translation type="unfinished">&lt;p&gt;
 Disse muligheder er primært givet til brug under udvikling og test af Opie systemet. I et normalt miljø er dette unødvendigt.</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Fortryd</translation>
+        <translation type="unfinished">Fortryd</translation>
     </message>
     <message>
         <source>Shutdown...</source>
-        <translation>Luk ned...</translation>
+        <translation type="unfinished">Luk ned...</translation>
     </message>
 </context>
 <context>
     <name>SyncAuthentication</name>
     <message>
         <source>Sync Connection</source>
-        <translation>Synkroniserings-forbindelse</translation>
+        <translation type="unfinished">Synkroniserings-forbindelse</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade.</source>
-        <translation>&lt;p&gt;Et uautoriseret system ønsker adgang til denne enhed.&lt;p&gt;Hvis du bruger en Qtopia Desktop version ælder end 1.5.1 skal du opgradere.</translation>
+        <translation type="unfinished">&lt;p&gt;Et uautoriseret system ønsker adgang til denne enhed.&lt;p&gt;Hvis du bruger en Qtopia Desktop version ælder end 1.5.1 skal du opgradere.</translation>
     </message>
     <message>
         <source>Deny</source>
-        <translation>Afvis</translation>
+        <translation type="unfinished">Afvis</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unrecognized system is requesting access to this device.&lt;p&gt;If you have just initiated a Sync for the first time, this is normal.</source>
-        <translation>&lt;p&gt;Et ukendt system ønsker adgang til denne enhed.&lt;p&gt;Hvis det er første gang du synkroniserer er dette normalt.</translation>
+        <translation type="unfinished">&lt;p&gt;Et ukendt system ønsker adgang til denne enhed.&lt;p&gt;Hvis det er første gang du synkroniserer er dette normalt.</translation>
     </message>
     <message>
         <source>Allow</source>
-        <translation>Tillad</translation>
+        <translation type="unfinished">Tillad</translation>
     </message>
 </context>
 <context>

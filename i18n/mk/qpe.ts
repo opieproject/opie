@@ -189,7 +189,7 @@ Please charge the back-up battery.</source>
     <name>Launcher</name>
     <message>
         <source>Launcher</source>
-        <translation>Стартувач</translation>
+        <translation type="unfinished">Стартувач</translation>
     </message>
     <message>
         <source>Finding documents</source>
@@ -201,15 +201,15 @@ Please charge the back-up battery.</source>
     </message>
     <message>
         <source> - Launcher</source>
-        <translation>- Стартувач</translation>
+        <translation type="unfinished">- Стартувач</translation>
     </message>
     <message>
         <source>No application</source>
-        <translation>Нема Апликација</translation>
+        <translation type="unfinished">Нема Апликација</translation>
     </message>
     <message>
         <source>&lt;p&gt;No application is defined for this document.&lt;p&gt;Type is %1.</source>
-        <translation>&lt;p&gt;Нема апликација дефинирана за овој документ.&lt;p&gt;Типот е %1.</translation>
+        <translation type="unfinished">&lt;p&gt;Нема апликација дефинирана за овој документ.&lt;p&gt;Типот е %1.</translation>
     </message>
     <message>
         <source>Documents</source>
@@ -227,16 +227,16 @@ Please charge the back-up battery.</source>
 <context>
     <name>LauncherTabWidget</name>
     <message>
-        <source>&lt;b&gt;Finding Documents...&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Icon View</source>
         <translation type="unfinished">Преглед по икони</translation>
     </message>
     <message>
         <source>List View</source>
         <translation type="unfinished">Преглед по листа</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Finding Documents...&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -251,7 +251,7 @@ Please charge the back-up battery.</source>
     </message>
     <message>
         <source>Document View</source>
-        <translation>Преглед на документи</translation>
+        <translation type="unfinished">Преглед на документи</translation>
     </message>
     <message>
         <source>All types</source>
@@ -357,10 +357,6 @@ Keep power off until power restored!</source>
         <translation type="unfinished">Нивото на батеријата е критично!</translation>
     </message>
     <message>
-        <source>Battery is running very low. </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The Back-up battery is very low.
 Please charge the back-up battery.</source>
         <translation type="unfinished">Помошната батерија е многу слаба.
@@ -369,6 +365,10 @@ Please charge the back-up battery.</source>
     <message>
         <source>business card</source>
         <translation type="unfinished">Визиткарта</translation>
+    </message>
+    <message>
+        <source>Battery is running very low. </source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Safe Mode</source>
@@ -406,60 +406,60 @@ immediately.</source>
     <name>ShutdownImpl</name>
     <message>
         <source>Shutdown...</source>
-        <translation>Изгаси...</translation>
+        <translation type="unfinished">Изгаси...</translation>
     </message>
     <message>
         <source>Terminate</source>
-        <translation>Исклучи</translation>
+        <translation type="unfinished">Исклучи</translation>
     </message>
     <message>
         <source>Terminate Opie</source>
-        <translation>Исклучи Opie</translation>
+        <translation type="unfinished">Исклучи Opie</translation>
     </message>
     <message>
         <source>Reboot</source>
-        <translation>Рестартирај</translation>
+        <translation type="unfinished">Рестартирај</translation>
     </message>
     <message>
         <source>Restart Opie</source>
-        <translation>Рестартирај Opie</translation>
+        <translation type="unfinished">Рестартирај Opie</translation>
     </message>
     <message>
         <source>Shutdown</source>
-        <translation>Изгаси</translation>
+        <translation type="unfinished">Изгаси</translation>
     </message>
     <message>
         <source>&lt;p&gt;
 These termination options are provided primarily for use while developing and testing the Opie system. In a normal environment, these concepts are unnecessary.</source>
-        <translation>&lt;p&gt;
+        <translation type="unfinished">&lt;p&gt;
 Овие иоции за гасење се наменети за користење за време на развој и тестирање на Опие системот. Во нормална околина, овие концепти се непотребни.</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Откажи</translation>
+        <translation type="unfinished">Откажи</translation>
     </message>
 </context>
 <context>
     <name>SyncAuthentication</name>
     <message>
         <source>Sync Connection</source>
-        <translation>Врска за синхронизирање</translation>
+        <translation type="unfinished">Врска за синхронизирање</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade.</source>
-        <translation>&lt;p&gt;Неавторизиран систем бара да се поврзе со овој уред.&lt;p&gt;Aко користите веризја на Qtopia постара од 1.5.1 надградете ја.</translation>
+        <translation type="unfinished">&lt;p&gt;Неавторизиран систем бара да се поврзе со овој уред.&lt;p&gt;Aко користите веризја на Qtopia постара од 1.5.1 надградете ја.</translation>
     </message>
     <message>
         <source>Deny</source>
-        <translation>Одбиј</translation>
+        <translation type="unfinished">Одбиј</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unrecognized system is requesting access to this device.&lt;p&gt;If you have just initiated a Sync for the first time, this is normal.</source>
-        <translation>&lt;p&gt;Непознат систем бара да се поврзе со овој уред.&lt;p&gt;Aко првпат го имате инсталирано Sync ова е нормално.</translation>
+        <translation type="unfinished">&lt;p&gt;Непознат систем бара да се поврзе со овој уред.&lt;p&gt;Aко првпат го имате инсталирано Sync ова е нормално.</translation>
     </message>
     <message>
         <source>Allow</source>
-        <translation>Дозволи</translation>
+        <translation type="unfinished">Дозволи</translation>
     </message>
 </context>
 <context>
