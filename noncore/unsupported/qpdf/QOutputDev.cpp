@@ -19,6 +19,8 @@
 #include <string.h>
 #include <ctype.h>
 #include <math.h>
+#include <iostream>
+
 #include "GString.h"
 #include "Object.h"
 #include "Stream.h"
@@ -670,7 +672,7 @@ void QOutputDev::drawChar ( GfxState *state, fp_t x, fp_t y,
 		if ( dorot ) {	
 			oldmat = m_painter-> worldMatrix ( );
 
-			cerr << endl << "ROTATED: " << m11 << ", " << m12 << ", " << m21 << ", " << m22 << " / SIZE: " << fsize << " / TEXT: " << str. local8Bit ( ) << endl << endl;
+			std::cerr << std::endl << "ROTATED: " << m11 << ", " << m12 << ", " << m21 << ", " << m22 << " / SIZE: " << fsize << " / TEXT: " << str. local8Bit ( ) << endl << endl;
 						
 			QWMatrix mat ( lrint ( m11 / fsize ), lrint ( m12 / fsize ), -lrint ( m21 / fsize ), -lrint ( m22 / fsize ), lrint ( x1 ), lrint ( y1 ));
 			
@@ -777,8 +779,8 @@ void QOutputDev::drawImageMask ( GfxState *state, Object */*ref*/, Stream *str, 
 #ifndef QT_NO_TRANSFORMATIONS			
 	QWMatrix mat ( ctm [0] / width, ctm [1], ctm [2], ctm [3] / height, ctm [4], ctm [5] );
 	
-	cerr << "MATRIX T=" << mat. dx ( ) << "/" << mat. dy ( ) << endl 
-	         << " - M=" << mat. m11 ( ) << "/" << mat. m12 ( ) << "/" << mat. m21 ( ) << "/" << mat. m22 ( ) << endl;
+	std::cerr << "MATRIX T=" << mat. dx ( ) << "/" << mat. dy ( ) << std::endl 
+	         << " - M=" << mat. m11 ( ) << "/" << mat. m12 ( ) << "/" << mat. m21 ( ) << "/" << mat. m22 ( ) << std::endl;
 	         
 	QWMatrix oldmat = m_painter-> worldMatrix ( );
 	m_painter-> setWorldMatrix ( mat, true );
@@ -906,8 +908,8 @@ void QOutputDev::drawImage(GfxState *state, Object */*ref*/, Stream *str, int wi
 #ifndef QT_NO_TRANSFORMATIONS			
 	QWMatrix mat ( ctm [0] / width, ctm [1], ctm [2], ctm [3] / height, ctm [4], ctm [5] );
 
-	cerr << "MATRIX T=" << mat. dx ( ) << "/" << mat. dy ( ) << endl 
-	         << " - M=" << mat. m11 ( ) << "/" << mat. m12 ( ) << "/" << mat. m21 ( ) << "/" << mat. m22 ( ) << endl;
+	std::cerr << "MATRIX T=" << mat. dx ( ) << "/" << mat. dy ( ) << std::endl 
+	         << " - M=" << mat. m11 ( ) << "/" << mat. m12 ( ) << "/" << mat. m21 ( ) << "/" << mat. m22 ( ) << std::endl;
 
 	QWMatrix oldmat = m_painter-> worldMatrix ( );
 	m_painter-> setWorldMatrix ( mat, true );

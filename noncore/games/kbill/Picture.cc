@@ -17,7 +17,7 @@
 #include "Picture.h"
 #include "objects.h"
 
-#include <iostream.h>
+#include <iostream>
 
 #include <qstring.h>
 #include <qpe/resource.h>
@@ -47,10 +47,10 @@ void Picture::load(const char *name, int index) {
 	} else {
 	  file = dirs.findResource("data","kbill/pixmaps/" + QString::fromLocal8Bit(name) + ".xpm");
 	}
-	kdDebug() << file << endl;
+	kdDebug() << file << std::endl;
 	pix = new QPixmap();
 	if (pix->load(file) == FALSE)
-		cerr << "cannot open " << file << endl;
+		std::cerr << "cannot open " << file << std::endl;
 	width = pix->width();
 	height = pix->height();
 #endif

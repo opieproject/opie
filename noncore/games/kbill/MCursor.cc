@@ -25,7 +25,7 @@
 #include <kapp.h>
 #include <kstandarddirs.h>
 #endif
-#include <iostream.h>
+#include <iostream>
 #include <qpe/resource.h>
 MCursor::~MCursor() {
 	delete cursor;
@@ -42,14 +42,14 @@ void MCursor::load(const char *name, int masked) {
 
 	QBitmap bitmap, mask;
 	if (bitmap.load(file) == FALSE) {
-		cerr << "cannot open " << file << endl;
+		std::cerr << "cannot open " << file << std::endl;
 		exit(1);
 	}
 	if (masked == SEP_MASK) {
 //		mfile.sprintf ("%sbitmaps/%s_mask.xbm", (const char*)dir, name);
 		mfile = file = dirs.findResource("data","kbill/bitmaps/" + QString::fromLocal8Bit(name)  + "_mask.xbm");
 		if (mask.load(mfile) == FALSE) {
-			cerr << "cannot open " << file << endl;
+			std::cerr << "cannot open " << file << std::endl;
 			exit(1);
 		}
 	}
