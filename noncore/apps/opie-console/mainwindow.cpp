@@ -84,7 +84,7 @@ void MainWindow::initUI() {
     /*
      * new Action for new sessions
      */
-    QAction* newCon = new QAction(tr("New Connection"),
+    QAction* newCon = new QAction(tr("New Profile"),
                              Resource::loadPixmap( "new" ),
                              QString::null, 0, this, 0);
     newCon->addTo( m_console );
@@ -93,7 +93,7 @@ void MainWindow::initUI() {
 
     m_console->insertSeparator();
 
-    QAction *saveCon = new QAction(tr("Save Connection"),
+    QAction *saveCon = new QAction( tr("Save Profile" ),
                       Resource::loadPixmap( "save" ), QString::null,
                     0, this, 0 );
     saveCon->addTo( m_console );
@@ -428,6 +428,7 @@ void MainWindow::slotQuickLaunch()  {
         Profile newProf =  Profile( "default",  "console", "default" ,  0, 3,  0 );
         newProf.setAutoConnect( true );
         create( newProf );
+        slotSaveSession();
     }
 
 }

@@ -8,6 +8,10 @@
 #include <qregexp.h>
 #include <stdio.h>
 
+#include <pwd.h>
+#include <sys/types.h>
+
+
 #include "consoleconfigwidget.h"
 
 ConsoleConfigWidget::ConsoleConfigWidget( const QString& name, QWidget* parent,
@@ -65,11 +69,18 @@ ConsoleConfigWidget::~ConsoleConfigWidget() {
 
 void ConsoleConfigWidget::load( const Profile& prof ) {
     /*
-     * we will use /bin/bash as default
-     * but will fallback in MyPty to /bin/sh
-     * if necessary
+     * default to the users default shell
      */
-    m_cmd->setText(prof.readEntry("Command", "/bin/bash"));
+    struct passwd *ent = 0;
+    char *shell = "/bin/sh";
+
+    while ( (ent = getpwent()) != 0 ) {
+        if (ent->pw_shell != "")  {
+            shell = ent->pw_shell;
+        }
+    }
+
+    m_cmd->setText(prof.readEntry("Command", shell ));
     int envcount = prof.readNumEntry("EnvVars", 0);
     for (int i=0; i<envcount; i++) {
         QString name = prof.readEntry("Env_Name_" + QString::number(i), "");

@@ -199,9 +199,11 @@ void ProfileEditorDialog::slotConActivated( const QString& str ) {
 
     // FIXME ugly hack right. Right solution would be to look into the layer and see if it
     // supports auto connect and then set it as prefered
-    //if (  (  )->layer()->supports()[0] == 1 ) {
     if ( m_conCmb ->currentText() == tr("Local Console") ) {
         m_autoConnect->setChecked( true );
+
+        m_prof.setTerminal( Profile::Linux );
+        slotTermActivated( m_fact->external (m_prof.terminalName() ) );
     } else {
         m_autoConnect->setChecked( false );
     }
@@ -220,7 +222,7 @@ void ProfileEditorDialog::slotTermActivated( const QString& str ) {
 
     m_term = m_fact->newTerminalPlugin( str, m_svTerm->viewport() );
 
-    if (m_term) {
+    if ( m_term ) {
         m_term->load( m_prof );
         m_svTerm->addChild( m_term );
     }
