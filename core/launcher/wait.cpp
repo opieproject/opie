@@ -20,20 +20,26 @@
 
 #include "wait.h"
 
-#include <qtopia/config.h>
-
 #include <opie2/owait.h>
 
-
+#include <qtopia/config.h>
+#include <qtopia/applnk.h>
 
 Wait *lastWaitObject = NULL;
 
 
 using namespace Opie::Ui;
 Wait::Wait( QWidget *parent ) : QWidget( parent ),
-	pm( Resource::loadPixmap( "wait" ) ), waiting( FALSE )
+                                waiting( FALSE )
 {
-    setFixedSize( pm.size() );
+
+    QSize size( AppLnk::smallIconSize(), AppLnk::smallIconSize() );
+    setFixedSize( size );
+
+    QImage img = Resource::loadImage( "wait" );
+    img = img.smoothScale( size.width(), size.height() );
+    pm.convertFromImage( img );
+
     lastWaitObject = this;
     m_centralWait = new OWait( 0l );
     m_centralWait->hide();
