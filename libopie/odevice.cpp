@@ -750,7 +750,7 @@ bool iPAQ::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, b
 		}
 	}
 			
-k	if ( newkeycode != keycode ) {
+	if ( newkeycode != keycode ) {
 		if ( newkeycode != Key_unknown )
 			QWSServer::sendKeyEvent ( -1, newkeycode, modifiers, isPress, autoRepeat );
 		return true;
