@@ -510,6 +510,10 @@ ca* TEScreen::getCookedImage()
   ca* merged = (ca*)malloc(lines*columns*sizeof(ca));
   ca dft(' ',DEFAULT_FORE_COLOR,DEFAULT_BACK_COLOR,DEFAULT_RENDITION);
 
+  if (histCursor > hist.getLines()) {
+    histCursor = hist.getLines();
+  }
+
   for (y = 0; (y < lines) && (y < (hist.getLines()-histCursor)); y++)
   {
     int len = QMIN(columns,hist.getLineLen(y+histCursor));
@@ -558,7 +562,7 @@ ca* TEScreen::getCookedImage()
 
 void TEScreen::reset()
 {
-  Config cfg("Konsole");
+  Config cfg("Qkonsole");
   cfg.setGroup("ScrollBar");
   if( !cfg.readBoolEntry("HorzScroll",0) )
     setMode(MODE_Wrap  ); saveMode(MODE_Wrap  );  // wrap at end of margin
@@ -971,6 +975,9 @@ void TEScreen::clearSelection()
 
 void TEScreen::setSelBeginXY(const int x, const int y)
 {
+  if (histCursor > hist.getLines()) {
+    histCursor = hist.getLines();
+  }
   sel_begin = loc(x,y+histCursor) ;
   sel_BR = sel_begin;
   sel_TL = sel_begin;
@@ -979,6 +986,9 @@ void TEScreen::setSelBeginXY(const int x, const int y)
 void TEScreen::setSelExtentXY(const int x, const int y)
 {
   if (sel_begin == -1) return;
+  if (histCursor > hist.getLines()) {
+    histCursor = hist.getLines();
+  }
   int l =  loc(x,y + histCursor);
 
   if (l < sel_begin)
@@ -1185,6 +1195,12 @@ void TEScreen::addHistLine()
 void TEScreen::setHistCursor(int cursor)
 {
   histCursor = cursor; //FIXME:rangecheck
+  if (histCursor > hist.getLines()) {
+    histCursor = hist.getLines();
+  }
+  if (histCursor < 0) {
+    histCursor = 0;
+  }
 }
 
 void TEScreen::setHorzCursor(int cursor)

@@ -37,7 +37,8 @@ class TESession;
 
 class TEWidget : public QFrame
 // a widget representing attributed text
-{ Q_OBJECT
+{ 
+  Q_OBJECT
 
 //  friend class Konsole;
 
@@ -74,6 +75,7 @@ public:
 
     bool useHorzScroll;
     bool useBeep;
+    int color_menu_item;
 
     void Bell();
     void emitText(QString text);
@@ -93,6 +95,11 @@ signals:
     void extendSelectionSignal( const int x, const int y );
     void endSelectionSignal(const BOOL preserve_line_breaks);
 
+    void changeFontSize(int);
+    void toggleFullScreen();
+    void setFullScreen(bool);
+    void changeSession(int);
+    void newSession();
 
 protected:
     virtual void styleChange( QStyle& );
@@ -152,7 +159,7 @@ private:
 
     QChar (*fontMap)(QChar); // possible vt100 font extention
 
-    bool fixed_font; // has fixed pitch
+    //    bool fixed_font; // has fixed pitch
     int  font_h;     // height
     int  font_w;     // width
     int  font_a;     // ascend
@@ -182,8 +189,9 @@ private:
     QScrollBar* scrollbar, *hScrollbar;
     
     int         scrollLoc, hScrollLoc;
-  int hposition, vcolumns;
+    int hposition, vcolumns;
 
+    int mouse_down_x, mouse_down_y;
     
 //#define SCRNONE  0
 //#define SCRLEFT  1
@@ -194,9 +202,11 @@ private:
     QTimer* blinkT;  // active when hasBlinker
     QPopupMenu* m_drop;
     QString dropText;
+
  public:
     // current session in this widget
     TESession *currentSession;
+
 private slots:
     void drop_menu_activated(int item);
 };

@@ -195,6 +195,7 @@ void TEmulation::onRcvChar(int c)
 // this is a trivial scanner
 {
   c &= 0xff;
+
   switch (c)
   {
     case '\b'      : scr->BackSpace();                 break;

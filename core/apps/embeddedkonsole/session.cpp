@@ -23,13 +23,14 @@
     of the abilities of the framework - multible sessions.
 */
 
-TESession::TESession(QMainWindow* main, TEWidget* te, const char* _pgm, QStrList & _args, const char *_term) : schema_no(0), font_no(3), pgm(_pgm), args(_args)
+TESession::TESession(QMainWindow* main, TEWidget* _te, const char* _pgm, QStrList & _args, const char *_term) : schema_no(0), font_no(3), pgm(_pgm), args(_args)
 {
+  te = _te;
+  term = _term;
+
   // sh = new TEPty();
   sh = new MyPty();
   em = new TEmuVt102(te);
-
-  term = _term;
 
   sh->setSize(te->Lines(),te->Columns()); // not absolutely nessesary
   QObject::connect( sh,SIGNAL(block_in(const char*,int)),
@@ -48,10 +49,12 @@ TESession::TESession(QMainWindow* main, TEWidget* te, const char* _pgm, QStrList
                     sh,SLOT(send_bytes(const char*,int)) );
   QObject::connect( em,SIGNAL(changeColumns(int)),
                     main,SLOT(changeColumns(int)) );
-/*
+
+  
+
   QObject::connect( em,SIGNAL(changeTitle(int, const QString&)),
-                    main,SLOT(changeTitle(int, const QString&)) );
-*/
+                    this,SLOT(changeTitle(int, const QString&)) );
+
   QObject::connect( sh,SIGNAL(done(int)), this,SLOT(done(int)) );
 }
 
@@ -83,7 +86,7 @@ void TESession::setConnect(bool c)
 
 void TESession::done(int status)
 {
-  emit done(this,status);
+  emit done(te,status);
 }
 
 void TESession::terminate()
@@ -134,9 +137,10 @@ void TESession::setFontNo(int fn)
   font_no = fn;
 }
 
-void TESession::setTitle(const QString& title)
+void TESession::changeTitle(int, const QString& title)
 {
   this->title = title;
+  emit changeTitle(te, title);
 }
 
 const QString& TESession::Title()

@@ -6,11 +6,11 @@
 /*                                                                            */
 /* Copyright (c) 1997,1998 by Lars Doelle <lars.doelle@on-line.de>            */
 /*                                                                            */
-/* This file is part of Konsole - an X terminal for KDE                       */
+/* This file is part of Qkonsole - an X terminal for KDE                       */
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
 /*                        */
-/* Ported Konsole to Qt/Embedded                                              */
+/* Ported Qkonsole to Qt/Embedded                                              */
 /*                        */
 /* Copyright (C) 2000 by John Ryland <jryland@trolltech.com>                  */
 /*                        */
@@ -23,6 +23,8 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <errno.h>
+
+#include <qpe/config.h>
 
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
 
@@ -40,180 +42,189 @@
    of cells and line/column indexed read access to the scroll
    at constant costs.
 
-FIXME: some complain about the history buffer comsuming the
-       memory of their machines. This problem is critical
-       since the history does not behave gracefully in cases
-       where the memory is used up completely.
-
-       I put in a workaround that should handle it problem
-       now gracefully. I'm not satisfied with the solution.
-
-FIXME: Terminating the history is not properly indicated
-       in the menu. We should throw a signal.
-
-FIXME: There is noticable decrease in speed, also. Perhaps,
-       there whole feature needs to be revisited therefore.
-       Disadvantage of a more elaborated, say block-oriented
-       scheme with wrap around would be it's complexity.
 */
 
-//FIXME: tempory replacement for tmpfile
-//       this is here one for debugging purpose.
-
-//#define tmpfile xTmpFile
-
-FILE* xTmpFile()
-{
-  static int fid = 0;
-  char fname[80];
-  sprintf(fname,"TmpFile.%d",fid++);
-  return fopen(fname,"w");
-}
-
-
-// History Buffer ///////////////////////////////////////////
-
-/*
-   A Row(X) data type which allows adding elements to the end.
-*/
-
-HistoryBuffer::HistoryBuffer()
-{
-  ion    = -1;
-  length = 0;
-}
-
-HistoryBuffer::~HistoryBuffer()
-{
-  setScroll(FALSE);
-}
-
-void HistoryBuffer::setScroll(bool on)
-{
-  if (on == hasScroll()) return;
-
-  if (on)
-  {
-    assert( ion < 0 );
-    assert( length == 0);
-    FILE* tmp = tmpfile(); if (!tmp) { perror("konsole: cannot open temp file.\n"); return; }
-    ion = dup(fileno(tmp)); if (ion<0) perror("konsole: cannot dup temp file.\n");
-    fclose(tmp);
-  }
-  else
-  {
-    assert( ion >= 0 );
-    close(ion);
-    ion    = -1;
-    length = 0;
-  }
-}
-
-bool HistoryBuffer::hasScroll()
-{
-  return ion >= 0;
-}
-
-void HistoryBuffer::add(const unsigned char* bytes, int len)
-{ int rc;
-  assert(hasScroll());
-  rc = lseek( ion, length, SEEK_SET);
-  if (rc < 0) { perror("HistoryBuffer::add.seek"); setScroll(FALSE); return; }
-  rc = write( ion, bytes, len);
-  if (rc < 0) { perror("HistoryBuffer::add.write"); setScroll(FALSE); return; }
-  length += rc;
-}
-
-void HistoryBuffer::get(unsigned char* bytes, int len, int loc) {
-    int rc;
-  assert(hasScroll());
-//  qDebug("history get len %d, loc %d, length %d", len, loc, length);
-  if (loc < 0 || len < 0 || loc + len > length)
-     fprintf(stderr,"getHist(...,%d,%d): invalid args.\n",len,loc);
-     
-  rc = lseek( ion, loc, SEEK_SET);
-  if (rc < 0) { perror("HistoryBuffer::get.seek"); setScroll(FALSE); return; }
-  rc = read( ion, bytes, len);
-  if (rc < 0) { perror("HistoryBuffer::get.read"); setScroll(FALSE); return; }
-}
-
-int HistoryBuffer::len()
-{
-  return length;
-}
-
-// History Scroll //////////////////////////////////////
-
-/* 
-   The history scroll makes a Row(Row(Cell)) from
-   two history buffers. The index buffer contains
-   start of line positions which refere to the cells
-   buffer.
-
-   Note that index[0] addresses the second line
-   (line #1), while the first line (line #0) starts
-   at 0 in cells.
-*/
 
 HistoryScroll::HistoryScroll()
 {
+  m_lines = NULL;
+  m_max_lines = 0;
+  m_cells = NULL;
+  m_max_cells = 0;
+  m_num_lines = 0;
+  m_first_line = 0;
+  m_last_cell = 0;
+  m_start_line = 0;
 }
 
 HistoryScroll::~HistoryScroll()
 {
+  setSize(0,0);
 }
  
+void HistoryScroll::setSize(int lines, int cells) 
+{
+  // could try to preserve the existing data...
+  //  printf("setSize(%d,%d)\n", lines, cells);
+  if (m_lines) {
+    delete m_lines;
+    m_lines = NULL;
+  }
+  if (m_cells) {
+    delete m_cells;
+    m_cells = NULL;
+  }
+  m_max_lines = m_max_cells = 0;
+  if (lines > 0 && cells > 0) {
+    m_max_lines = lines;
+    m_lines = new int[m_max_lines];
+    m_lines[0] = 0;
+    m_max_cells = cells;
+    m_cells = new ca[m_max_cells];
+  }
+  m_first_line = 0;
+  m_num_lines = 0;
+  m_last_cell = 0;
+  m_start_line = 0;
+}
+  
 void HistoryScroll::setScroll(bool on)
 {
-  index.setScroll(on);
-  cells.setScroll(on);
+  Config cfg("Qkonsole");
+  cfg.setGroup("History");
+  //  printf("setScroll(%d)\n", on);
+  if (on) {
+    int lines = cfg.readNumEntry("history_lines",300);
+    int avg_line = cfg.readNumEntry("avg_line_length",60);
+    int cells = lines * avg_line;
+    setSize(lines,cells);
+  } else {
+    setSize(0,0);
+  }
 }
  
 bool HistoryScroll::hasScroll()
 {
-  return index.hasScroll() && cells.hasScroll();
+  return (m_max_lines > 0);
 }
 
 int HistoryScroll::getLines()
 {
-  if (!hasScroll()) return 0;
-  return index.len() / sizeof(int);
+  return(m_num_lines);
 }
 
 int HistoryScroll::getLineLen(int lineno)
 {
   if (!hasScroll()) return 0;
-  return (startOfLine(lineno+1) - startOfLine(lineno)) / sizeof(ca);
+  if (lineno >= m_num_lines) {
+    //    printf("getLineLen(%d) out of range %d\n", lineno, m_num_lines);
+    return(0);
+  }
+  int len =  startOfLine(lineno+1) - startOfLine(lineno);
+  if (len < 0) {
+    len += m_max_cells;
+  }
+  //  printf("getLineLen(%d) = %d\n", lineno, len);
+  return(len);
 }
 
 int HistoryScroll::startOfLine(int lineno)
 {
-  if (lineno <= 0) return 0;
+  //  printf("startOfLine(%d) =", lineno);
   if (!hasScroll()) return 0;
-  if (lineno <= getLines())
-  { int res;
-    index.get((unsigned char*)&res,sizeof(int),(lineno-1)*sizeof(int));
-    return res;
+  assert(lineno >= 0 && lineno <= m_num_lines);
+  if (lineno < m_num_lines) {
+    int index = lineno + m_first_line;
+    if (index >= m_max_lines)
+      index -= m_max_lines;
+    //    printf("%d\n", m_lines[index]);
+    return(m_lines[index]);
+  } else {
+    //    printf("last %d\n", m_last_cell);
+    return(m_last_cell);
   }
-  return cells.len();
 }
 
-void HistoryScroll::getCells(int lineno, int colno, int count, ca res[])
+void HistoryScroll::getCells(int lineno, int colno, int count, ca *res)
 {
+  //  printf("getCells(%d,%d,%d) num_lines=%d\n", lineno, colno, count, m_num_lines);
   assert(hasScroll());
-//get(unsigned char* bytes, int len, int loc)   
-  cells.get( (unsigned char*)res, count * sizeof(ca), startOfLine( lineno) + colno * sizeof(ca) );
+  assert(lineno >= 0 && lineno < m_num_lines);
+  int index = lineno + m_first_line;
+  if (index >= m_max_lines)
+    index -= m_max_lines;
+  assert(index >= 0 && index < m_max_lines);
+  index = m_lines[index] + colno;
+  assert(index >= 0 && index < m_max_cells);
+  while(count-- > 0) {
+    *res++ = m_cells[index];
+    if (++index >= m_max_cells) {
+      index = 0;
+    }
+  }
 }
 
-void HistoryScroll::addCells(ca text[], int count)
+void HistoryScroll::addCells(ca *text, int count)
 {
   if (!hasScroll()) return;
-  cells.add((unsigned char*)text,count*sizeof(ca));
+  int start_cell = m_last_cell;
+  //  printf("addCells count=%d start=%d first_line=%d first_cell=%d lines=%d\n", 
+  //  	 count, start_cell, m_first_line, m_lines[m_first_line], m_num_lines);
+  if (count <= 0) {
+    return;
+  }
+  while(count-- > 0) {
+    assert (m_last_cell >= 0 && m_last_cell < m_max_cells );
+    m_cells[m_last_cell] = *text++;
+    if (++m_last_cell >= m_max_cells) {
+      m_last_cell = 0;
+    }
+  }
+  if (m_num_lines > 1) {
+    if (m_last_cell > start_cell) {
+      while(m_num_lines > 0
+	    && m_lines[m_first_line] >= start_cell 
+	    && m_lines[m_first_line] < m_last_cell) {
+	//		printf("A remove %d>%d && %d<%d first_line=%d num_lines=%d\n", 
+	//		       m_lines[m_first_line], start_cell, m_lines[m_first_line], m_last_cell,
+	//		       m_first_line, m_num_lines);
+	if (++m_first_line >= m_max_lines) {
+	  m_first_line = 0;
+	}
+	m_num_lines--;
+      }
+    } else {
+      while(m_num_lines > 0
+	    && (m_lines[m_first_line] >= start_cell 
+		|| m_lines[m_first_line] < m_last_cell)) {
+	//		printf("B remove %d>%d || %d<%d first_line=%d num_lines=%d\n", 
+	//		       m_lines[m_first_line], start_cell, m_lines[m_first_line], m_last_cell,
+	//       m_first_line, m_num_lines);
+	if (++m_first_line >= m_max_lines) {
+	  m_first_line = 0;
+	}
+	m_num_lines--;
+      }
+    }
+  }
 }
 
 void HistoryScroll::addLine()
 {
   if (!hasScroll()) return;
-  int locn = cells.len();
-  index.add((unsigned char*)&locn,sizeof(int));
+  int index = m_first_line + m_num_lines;
+  if (index >= m_max_lines) {
+    index -= m_max_lines;
+  }
+  //  printf("addLine line=%d cell=%d\n", index, m_last_cell);
+  assert(index >= 0 && index < m_max_lines);
+  m_lines[index] = m_start_line;
+  m_start_line = m_last_cell;
+  if (m_num_lines >= m_max_lines) {
+    if (++m_first_line >= m_num_lines) {
+      m_first_line = 0;
+    }
+  } else {
+    m_num_lines++;
+  }
 }

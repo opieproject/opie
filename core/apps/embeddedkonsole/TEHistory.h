@@ -21,29 +21,6 @@
 
 #include "TECommon.h"
 
-/*
-   An extendable tmpfile(1) based buffer.
-*/
-class HistoryBuffer
-{
-public:
-  HistoryBuffer();
- ~HistoryBuffer();
-
-public:
-  void setScroll(bool on);
-  bool hasScroll();
-
-public:
-  void add(const unsigned char* bytes, int len);
-  void get(unsigned char* bytes, int len, int loc);
-  int  len();
-
-private:
-  int  ion;
-  int  length;
-};
-
 class HistoryScroll
 {
 public:
@@ -51,25 +28,30 @@ public:
  ~HistoryScroll();
 
 public:
-  void setScroll(bool on);
-  bool hasScroll();
+ void setSize(int lines, int cells);
+ void setScroll(bool on);
+ bool hasScroll();
 
-public: // access to history
-  int  getLines();
-  int  getLineLen(int lineno);
-  void getCells(int lineno, int colno, int count, ca res[]);
+ int  getLines();
+ int  getLineLen(int lineno);
+ void getCells(int lineno, int colno, int count, ca *res);
 
-public: // backward compatibility (obsolete)
   ca   getCell(int lineno, int colno) { ca res; getCells(lineno,colno,1,&res); return res; }
 
-public: // adding lines.
-  void addCells(ca a[], int count);
+  void addCells(ca *text, int count);
   void addLine();
 
 private:
   int startOfLine(int lineno);
-  HistoryBuffer index; // lines Row(int)
-  HistoryBuffer cells; // text  Row(ca)
+
+  int m_max_lines;
+  int *m_lines;
+  int m_max_cells;
+  ca *m_cells;
+  int m_first_line;
+  int m_last_cell;
+  int m_num_lines;
+  int m_start_line;
 };
 
 #endif // TEHISTORY_H

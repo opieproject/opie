@@ -56,7 +56,6 @@ public:
   void setSchemaNo(int sn);
   void setKeymapNo(int kn);
   void setFontNo(int fn);
-  void setTitle(const QString& title);
   void kill(int signal);
 
 public slots:
@@ -64,10 +63,12 @@ public slots:
   void run();
   void done(int status);
   void terminate();
+  void changeTitle(int, const QString& title);
 
 signals:
 
-  void done(TESession*, int);
+  void done(TEWidget*, int);
+  void changeTitle(TEWidget*, QString);
 
 private:
 

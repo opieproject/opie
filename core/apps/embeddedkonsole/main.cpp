@@ -36,3 +36,4 @@
 
 /* --| main |------------------------------------------------------ */
 OPIE_EXPORT_APP( OApplicationFactory<Konsole> )
+

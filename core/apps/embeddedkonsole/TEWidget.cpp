@@ -66,6 +66,7 @@
 #include <qstyle.h>
 #include <qfile.h>
 #include <qdragobject.h>
+#include <qnamespace.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -244,23 +245,17 @@ void TEWidget::fontChange(const QFont &)
 {
   QFontMetrics fm(font());
   font_h = fm.height();
+  //  font_w = fm.maxWidth();
+  font_w = fm.width("m");
+  font_a = fm.ascent();
+  printf("font h=%d max_width=%d width_m=%d assent=%d\n", font_h,
+	 fm.maxWidth(), font_w, font_a);
 
-    // font_w = max width of ASCII chars (U.B.)
-	font_w = 0;
-	int fw;
-	for (int i = 0x20; i < 0x80; i++) {
-			if (isprint(i) && font_w < (fw = fm.width(i))) {
-					font_w = fw;
-			}
-	}
-		//font_w = fm.maxWidth();
-
-	font_a = fm.ascent();
-//printf("font_h: %d\n",font_h);
-//printf("font_w: %d\n",font_w);
-//printf("font_a: %d\n",font_a);
-//printf("charset: %s\n",QFont::encodingName(font().charSet()).ascii());
-//printf("rawname: %s\n",font().rawName().ascii());
+  //printf("font_h: %d\n",font_h);
+  //printf("font_w: %d\n",font_w);
+  //printf("font_a: %d\n",font_a);
+  //printf("charset: %s\n",QFont::encodingName(font().charSet()).ascii());
+  //printf("rawname: %s\n",font().rawName().ascii());
   fontMap =
 #if QT_VERSION < 300
   strcmp(QFont::encodingName(font().charSet()).ascii(),"iso10646")
@@ -307,11 +302,11 @@ TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
   hScrollbar = new QScrollBar(this);
   hScrollbar->setCursor( arrowCursor );
   hScrollbar->setOrientation(QScrollBar::Horizontal);
-  hScrollbar->setMaximumHeight(16);
+  //  hScrollbar->setMaximumHeight(16);
 
   connect( hScrollbar, SIGNAL(valueChanged(int)), this, SLOT( hScrollChanged(int)));
 
-  Config cfg("Konsole");
+  Config cfg("Qkonsole");
   cfg.setGroup("ScrollBar");
   switch( cfg.readNumEntry("Position",2)){
   case 0:
@@ -684,12 +679,15 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
   int    tLx = tL.x();
   int    tLy = tL.y();
 
-  word_selection_mode = FALSE;
+  mouse_down_x = ev->x();
+  mouse_down_y = ev->y();
 
 //printf("press top left [%d,%d] by=%d\n",tLx,tLy, bY);
   if ( ev->button() == LeftButton)
   {
     QPoint pos = QPoint((ev->x()-tLx-blX)/font_w,(ev->y()-tLy-bY)/font_h);
+
+    word_selection_mode = (ev->state() & ShiftButton);
 
     if ( ev->state() & ControlButton ) preserve_line_breaks = FALSE ;
 
@@ -815,6 +813,12 @@ void TEWidget::mouseReleaseEvent(QMouseEvent* ev)
 //printf("release [%d,%d] %d\n",ev->x()/font_w,ev->y()/font_h,ev->button());
   if ( ev->button() == LeftButton)
   {
+    if (QABS(ev->x() - mouse_down_x) < 3 
+	&& QABS(ev->y() - mouse_down_y) < 3
+	&& ev->y() < qApp->desktop()->height()/8) {
+      emit setFullScreen(false);
+    }
+
     if ( actSel > 1 ) emit endSelectionSignal(preserve_line_breaks);
     preserve_line_breaks = TRUE;
     actSel = 0;
@@ -1030,7 +1034,6 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
     static bool alt = FALSE;
 //    qDebug(" Has a keyboard with no CTRL and ALT keys, but we fake it:");
     bool dele=FALSE;
-		
     if ( e->type() == QEvent::KeyPress || e->type() == QEvent::KeyRelease ) {
         QKeyEvent* ke = (QKeyEvent*)e;
         bool keydown = e->type() == QEvent::KeyPress || ke->isAutoRepeat();
@@ -1069,25 +1072,83 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
           // know where the current selection is.
 
 //     qDebug("key pressed is 0x%x, ascii is 0x%x, state %d", ke->key(), ke->ascii(), ke->state());
-				if(ke->key() == Key_Escape) {
-     qDebug("key pressed is 0x%x, ascii is 0x%x, state %d", ke->key(), ke->ascii(), ke->state());
-	
-				}
-				
-        if( ke->state() == ShiftButton && ke->key() == Key_Tab) {
-          //lets hardcode this sucker
 
-//     qDebug("key pressed 2 is 0x%x", ke->key());
-            emitText("\\"); // expose
-        }
-        else if( ke->state() == ControlButton && ke->key() == Key_V) {
-          pasteClipboard();
-        }
-//        else if( ke->state() == ControlButton && ke->key() == Key_C) {
-//          pasteClipboard();
-//        }
-        else
-            emit keyPressedSignal(ke); // expose
+	bool special_function = true;
+	switch(ke->key()) {
+	  //	case 0x201b:  // fn-5
+	  //	case Key_F1:
+	  // switch sessions (?)
+	  // emitText("\\"); // expose  (??)
+	  //	  break;
+
+	case 0x2016:  // fn-p
+	case Key_F2:
+	  pasteClipboard();
+	  break;
+
+	case 0x2018:  // fn-S
+	case Key_F3:
+	  emit changeSession(1);
+	  break;
+
+	case 0x2019: // fn-n
+	  emit newSession();
+	  break;
+
+	case Qt::Key_Tab:
+	  if (ke->state() == ControlButton) {
+	    emit changeSession(1);
+	  } else {
+	    special_function = false;
+	  }
+	  break;
+
+#if 0
+	case Qt::Key_Left:
+	  if (vcolumns == 0) {
+	    emit changeSession(-1);
+	  } else {
+	    special_function = false;
+	  }
+	  break;
+
+	case Qt::Key_Right:
+	  if (vcolumns == 0) {
+	    emit changeSession(1);
+	  } else {
+	    special_function = false;
+	  }
+	  break;
+#endif
+
+	case 0x201b:  // fn-5
+	case Key_F4:
+	  emit toggleFullScreen();
+	  break;
+
+	case 0x200f:  // fn-1 magnify minus
+	case Key_F5:
+	  emit changeFontSize(-1);
+	  break;
+
+	case 0x2010:  // fn-2 magnify plus
+	case Key_F6:
+	  emit changeFontSize(1);
+	  break;
+
+	default:
+	  special_function = false;
+	}
+	if (special_function) {
+	  return true;
+	}
+	//        else if( ke->state() == ControlButton && ke->key() == Key_V) {
+	//          pasteClipboard();
+	//        }
+	//        else if( ke->state() == ControlButton && ke->key() == Key_C) {
+	//          pasteClipboard();
+	//        }
+	emit keyPressedSignal(ke); // expose
         ke->accept();
 #ifdef FAKE_CTRL_AND_ALT
         if ( dele ) delete e;
@@ -1116,7 +1177,6 @@ void TEWidget::frameChanged()
   propagateSize();
   update();
 }
-
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
 /*                                   Sound                                   */
@@ -1167,7 +1227,7 @@ void TEWidget::calcGeometry()
     int showhscrollbar = 1;
     int hwidth = 0;
     int dcolumns;
-    Config cfg("Konsole");
+    Config cfg("Qkonsole");
     cfg.setGroup("ScrollBar");
     useHorzScroll=cfg.readBoolEntry("HorzScroll",0);
 
@@ -1368,6 +1428,6 @@ void TEWidget::drop_menu_activated(int item)
 void TEWidget::setWrapAt(int columns)
 {
   vcolumns = columns;
-    propagateSize();
-    update();
+  propagateSize();
+  update();
 }
