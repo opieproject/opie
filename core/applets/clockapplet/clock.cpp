@@ -20,21 +20,9 @@
 
 #include "clock.h"
 
-#include <qpe/global.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/config.h>
-
-#include <qmainwindow.h>
-#include <qlayout.h>
-#include <qpushbutton.h>
-#include <qmessagebox.h>
-#include <qdatetime.h>
-#include <qtimer.h>
-#include <qpopupmenu.h>
-#include <qfile.h>
-#include <stdlib.h>
-
 
 LauncherClock::LauncherClock( QWidget *parent ) : QLabel( parent )
 {
