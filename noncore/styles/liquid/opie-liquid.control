@@ -1,4 +1,4 @@
-Files: plugins/styles/libliquid.so*
+Files: plugins/styles/libliquid.so* bin/liquid-settings apps/Settings/Liquid.desktop pics/liquid/Liquid.png
 Priority: optional
 Section: opie/system
 Maintainer: Robert Griebl <sandman@handhelds.org>

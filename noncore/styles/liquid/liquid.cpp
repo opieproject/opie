@@ -83,12 +83,17 @@ void TransMenuHandler::reloadSettings()
     color = QColor ( config. readEntry("Color",  QApplication::palette().active().button().name()));
     fgColor = QColor ( config. readEntry("TextColor", QApplication::palette().active().text().name()));
     opacity = config. readNumEntry("Opacity", 10);
+    if ( opacity < -20 )
+    	opacity = 20;
+    else if ( opacity > 20 )
+    	opacity = 20;
+    
     shadowText = config. readBoolEntry("ShadowText", true);
 }
 
 bool TransMenuHandler::eventFilter(QObject *obj, QEvent *ev)
 {
-    QPopupMenu *p = (QPopupMenu *)obj;
+    QWidget *p = (QWidget *)obj;
 
     if(ev->type() == QEvent::Show){
         if(type == TransStippleBg || type == TransStippleBtn ||
@@ -118,14 +123,50 @@ bool TransMenuHandler::eventFilter(QObject *obj, QEvent *ev)
             else{
                 QPixmapEffect::fade(*pix, (((float)opacity)+80)*0.01, color);
             }
-            pixDict.insert(p->winId(), pix);
+
+            if (p->inherits("QPopupMenu"))
+                pixDict.insert(p->winId(), pix);
+            else {
+            	p->setBackgroundPixmap(*pix);
+            	
+            	QObjectList *ol = p-> queryList("QWidget");
+				for ( QObjectListIt it( *ol ); it. current ( ); ++it ) {
+					QWidget *wid = (QWidget *) it.current ( );
+					
+					wid-> setBackgroundPixmap(*pix);
+			    	wid-> setBackgroundOrigin(QWidget::ParentOrigin);					
+                }
+				delete ol;
+   			}
         }
     }
     else if(ev->type() == QEvent::Hide){
         if(type == TransStippleBg || type == TransStippleBtn ||
            type == Custom){
 //            qWarning("Deleting menu pixmap, width %d", pixDict.find(p->winId())->width());
-            pixDict.remove(p->winId());
+
+            if (p->inherits("QPopupMenu"))
+                pixDict.remove(p->winId());
+            else {
+            	p->setBackgroundMode(QWidget::PaletteBackground);
+
+            	QObjectList *ol = p-> queryList("QWidget");
+				for ( QObjectListIt it( *ol ); it. current ( ); ++it ) {
+					QWidget *wid = (QWidget *) it.current ( );
+					
+					wid-> setBackgroundMode( QWidget::PaletteBackground );
+                }
+				delete ol;
+            }
+        }
+    }
+    else if(ev->type() == QEvent::Paint){
+        if(type == TransStippleBg || type == TransStippleBtn ||
+           type == Custom){
+//            qWarning("Deleting menu pixmap, width %d", pixDict.find(p->winId())->width());
+
+            if (!p->inherits("QPopupMenu"))
+            	p->erase();
         }
     }
     return(false);
@@ -796,10 +837,15 @@ void LiquidStyle::polish(QWidget *w)
     }
     if(w->inherits("QPopupMenu"))
         w->setBackgroundMode(QWidget::NoBackground);
-
+    else if(w-> testWFlags(Qt::WType_Popup)) {
+    	printf("install popup: %s\n", w-> className ( ));
+    	w->installEventFilter(menuHandler);
+    }
+    
     if(w->isTopLevel()){
         return;
     }
+   
     
     w-> setBackgroundOrigin ( QWidget::ParentOrigin );
 
@@ -886,6 +932,9 @@ void LiquidStyle::unPolish(QWidget *w)
 
     if(w->inherits("QPopupMenu"))
         w->setBackgroundMode(QWidget::PaletteButton);
+    else if(w-> testWFlags(Qt::WType_Popup)) {
+    	w->removeEventFilter(menuHandler);
+    }
 
     if(w->isTopLevel())
         return;
