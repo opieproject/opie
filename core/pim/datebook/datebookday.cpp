@@ -795,6 +795,8 @@ void DateBookDayWidget::mousePressEvent( QMouseEvent *e )
 	update();
 	dateBook->repaint();
 
+        Event eve = ev.event();
+
 	QPopupMenu m;
 	m.insertItem( tr( "Edit" ), 1 );
 	m.insertItem( tr( "Duplicate" ), 4 );
@@ -803,13 +805,13 @@ void DateBookDayWidget::mousePressEvent( QMouseEvent *e )
         if(Ir::supported() && ev.event().doRepeat() ) m.insertItem( tr( "Beam this occurence"), 5 );
 	int r = m.exec( e->globalPos() );
 	if ( r == 1 ) {
-		emit editMe( ev.event() );
+		emit editMe( eve );
 	} else if ( r == 2 ) {
-		emit deleteMe( ev.event() );
+		emit deleteMe( eve );
 	} else if ( r == 3 ) {
-		emit beamMe( ev.event() );
+		emit beamMe( eve );
 	} else if ( r == 4 ) {
-		emit duplicateMe( ev.event() );
+		emit duplicateMe( eve );
 	} else if ( r == 5 ) {
             // create an Event and beam it...
             /*

@@ -156,6 +156,7 @@ void DatebookAlldayDisp::beam_single_event()
 
 void DatebookAlldayDisp::mousePressEvent(QMouseEvent*e)
 {
+    Event ev = m_Ev.event();
     QColor b = backgroundColor();
     setBackgroundColor(green);
     update();
@@ -171,22 +172,22 @@ void DatebookAlldayDisp::mousePressEvent(QMouseEvent*e)
     update();
     switch (r) {
     case 1:
-        emit editMe( m_Ev.event() );
+        emit editMe( ev );
         break;
     case 2:
-        emit deleteMe( m_Ev.event() );
+        emit deleteMe( ev );
         break;
     case 3:
-        emit beamMe( m_Ev.event() );
+        emit beamMe( ev );
         break;
     case 4:
-        emit duplicateMe( m_Ev.event() );
+        emit duplicateMe( ev );
         break;
     case 5:
         beam_single_event();
         break;
     case 6:
-        emit displayMe( m_Ev.event() );
+        emit displayMe( ev );
         break;
     default:
         break;

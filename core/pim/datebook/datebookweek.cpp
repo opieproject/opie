@@ -82,9 +82,6 @@ DateBookWeekView::DateBookWeekView( bool ap, bool startOnMonday,
 
 void DateBookWeekView::initNames()
 {
-#warning Please review this ! (eilers)
-
-    // Ok, I am Mr. Pedantic, but shouldn't we count until 6 instead of 7, if bOnMonday is false ? (eilers)
 
     static bool bFirst = true;
     if ( bFirst ) {
@@ -314,7 +311,6 @@ void DateBookWeekView::resizeEvent( QResizeEvent *e )
     const int hourWidth = 20;
     QScrollView::resizeEvent( e );
 
-#warning check the geometry i have choosen BRANCH_1_0 (waspe)
 
     //HEAD
     /*

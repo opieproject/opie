@@ -124,7 +124,7 @@ private:
      * it got a start and an end Time
      */
     void setEventText( QString& text );
-    const EffectiveEvent ev;
+    EffectiveEvent ev;
     DateBookDay *dateBook;
     QString text;
     QRect geom;
