@@ -965,15 +965,24 @@ void TextEdit::doAbout() {
 }
 
 void TextEdit::doPrompt(bool b) {
-  promptExit=b;
+    promptExit=b;
+    Config cfg("TextEdit");
+    cfg.setGroup ( "View" );
+    cfg.writeEntry ( "PromptExit", b); 
 }
 
 void TextEdit::doDesktop(bool b) {
-  openDesktop=b;
+    openDesktop=b;
+    Config cfg("TextEdit");
+    cfg.setGroup ( "View" );
+    cfg.writeEntry ( "OpenDesktop", b); 
 }
 
 void TextEdit::doFilePerms(bool b) {
-  filePerms=b;
+    filePerms=b;
+    Config cfg("TextEdit");
+    cfg.setGroup ( "View" );
+    cfg.writeEntry ( "FilePermissions", b); 
 }
 
 void TextEdit::editPasteTimeDate() {
