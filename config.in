@@ -148,3 +148,8 @@ menu "Tools"
   source noncore/tools/config.in
   source development/config.in
 endmenu
+comment ""
+menu "Experimental"
+  source libopie2/config.in
+endmenu
+

@@ -47,14 +47,22 @@ $(QTDIR)/stamp-headers-x11 :
 
 $(OPIEDIR)/stamp-headers :
 	@-rm -f $(OPIEDIR)/stamp-headers*
-	mkdir -p $(TOPDIR)/include/qpe $(TOPDIR)/include/qtopia \
-		$(TOPDIR)/include/opie $(TOPDIR)/include/qtopia/private
+	mkdir -p $(TOPDIR)/include/qpe \
+                 $(TOPDIR)/include/qtopia \
+		 $(TOPDIR)/include/opie \
+                 $(TOPDIR)/include/qtopia/private \
+                 $(TOPDIR)/include/opie2
 	( cd include/qpe &&  rm -f *.h; ln -sf ../../library/*.h .; ln -sf ../../library/backend/*.h .; rm -f *_p.h; )
 	( cd include/qtopia && rm -f *.h; ln -sf ../../library/*.h .; )
 	( cd include/qtopia/private && rm -f *.h; ln -sf ../../../library/backend/*.h .; )
 	( cd include/opie &&  rm -f *.h; ln -sf ../../libopie/*.h .; rm -f *_p.h; )
 	( cd include/opie &&  ln -sf ../../libsql/*.h .; )
 	( cd include/opie &&  ln -sf ../../libopie/pim/*.h .; )
+	( cd include/opie2 && ln -sf ../../libopie2/opiecore/*.h .; )
+	#( cd include/opie2 && ln -sf ../../libopie2/opiedb/*.h .; )
+	( cd include/opie2 && ln -sf ../../libopie2/opienet/*.h .; )
+	#( cd include/opie2 && ln -sf ../../libopie2/opiepim/*.h .; )
+	( cd include/opie2 && ln -sf ../../libopie2/opieui/*.h .; )
 	( cd include/opie; for generatedHeader in `cd ../../libopie; ls *.ui | sed -e "s,\.ui,\.h,g"`; do \
 	ln -sf ../../libopie/$$generatedHeader $$generatedHeader; done )
 	ln -sf ../../library/custom.h $(TOPDIR)/include/qpe/custom.h

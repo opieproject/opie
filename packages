@@ -77,6 +77,12 @@ CONFIG_LIBMAD	core/multimedia/opieplayer/libmad	libmad.pro
 CONFIG_LIBMAIL	noncore/mail/libmail	libmail.pro
 CONFIG_LIBMPEG3	core/multimedia/opieplayer/libmpeg3	libmpeg3.pro
 CONFIG_LIBOPIE	libopie	libopie.pro
+CONFIG_LIBOPIE2CORE	libopie2/opiecore	opiecore.pro
+CONFIG_LIBOPIE2DB	libopie2/opiedb	opiedb.pro
+CONFIG_LIBOPIE2NET	libopie2/opienet	opienet.pro
+CONFIG_LIBOPIE2PIM	libopie2/opiepim	opiepim.pro
+CONFIG_LIBOPIE2UI	libopie2/opieui	opieui.pro
+CONFIG_LIBOPIE2EXAMPLES	libopie2/examples	examples.pro
 CONFIG_LIBQPE	library	library.pro
 CONFIG_LIBQPE-X11	x11/libqpe-x11	libqpe-x11.pro
 CONFIG_LIGHT-AND-POWER	core/settings/light-and-power	light-and-power.pro
