@@ -171,7 +171,7 @@ This is irreversable!!</source>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Text</translation>
     </message>
     <message>
         <source>Insert Time and Date</source>

@@ -119,11 +119,11 @@
     </message>
     <message>
         <source>Thumbnail View</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorschau</translation>
     </message>
     <message>
         <source>Thumbnail View...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorschau...</translation>
     </message>
     <message>
         <source>Page Information</source>
@@ -200,7 +200,7 @@ wirklich löschen?</translation>
     </message>
     <message>
         <source>DrawPad - Export</source>
-        <translation>Zeichenbrett - Exportieren</translation>
+        <translation>Schmierzettel - Exportieren</translation>
     </message>
 </context>
 <context>
@@ -215,7 +215,7 @@ wirklich löschen?</translation>
     </message>
     <message>
         <source>DrawPad - Import</source>
-        <translation>Zeichenbrett - Importieren</translation>
+        <translation>Schmierzettel- Importieren</translation>
     </message>
 </context>
 <context>
@@ -281,7 +281,7 @@ wirklich löschen?</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Größe:</translation>
+        <translation>Größe</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -318,7 +318,7 @@ wirklich löschen?</translation>
     <name>ThumbnailView</name>
     <message>
         <source>DrawPad - Thumbnail View</source>
-        <translation type="unfinished"></translation>
+        <translation>Schmierzettel - Vorschau</translation>
     </message>
     <message>
         <source>Clear Page</source>

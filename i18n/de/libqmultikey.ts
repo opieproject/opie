@@ -3,11 +3,11 @@
     <name>ConfigDlg</name>
     <message>
         <source>Multikey Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Multikey Konfiguration</translation>
     </message>
     <message>
         <source>General Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Allgemeine Einstallungen</translation>
     </message>
     <message>
         <source>Keymap File</source>
@@ -15,15 +15,15 @@
     </message>
     <message>
         <source>Current Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktuelle Sprache</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Hinzufügen</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Entfernen</translation>
     </message>
     <message>
         <source>Pickboard</source>
@@ -35,11 +35,11 @@
     </message>
     <message>
         <source>Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Farben</translation>
     </message>
     <message>
         <source>Key Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Tastenfarbe</translation>
     </message>
     <message>
         <source>Key Pressed Color</source>
@@ -47,18 +47,18 @@
     </message>
     <message>
         <source>Line Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Linienfarbe</translation>
     </message>
     <message>
         <source>Text Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Textfarbe</translation>
     </message>
 </context>
 <context>
     <name>InputMethods</name>
     <message>
         <source>Multikey</source>
-        <translation type="unfinished"></translation>
+        <translation>Multikey</translation>
     </message>
 </context>
 </TS>
