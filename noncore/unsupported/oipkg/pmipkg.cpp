@@ -180,17 +180,20 @@ QStringList* PmIpkg::getList( QString packFileName, QString d )
     QString statusDir = cfg.readEntry( "statusDir", "" );
 	}
  	QString packFileDir = dest+"/"+statusDir+"/info/"+packFileName+".list";
- 	QFile f( packFileName );
+ 	QFile f( packFileDir );
+  qDebug("Try to open %s", packFileDir.latin1());
  	if ( ! f.open(IO_ReadOnly) )
   {
   	out( "Could not open:\n"+packFileDir );
 	  f.close();
    	packFileDir = "/"+statusDir+"/info/"+packFileName+".list";
    	f.setName( packFileDir );
+	  qDebug("Try to open %s", packFileDir.latin1());
 	 	if ( ! f.open(IO_ReadOnly) )
   	{
 	   	qDebug(" Panik!  Could not open"+packFileDir);
  		 	out( "Could not open:\n"+packFileDir+"\n Panik!" );
+     	return (QStringList*)0;
     }
   }
   QStringList *fileList = new QStringList();
