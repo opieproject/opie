@@ -132,8 +132,8 @@ void VideoWidget::resizeEvent( QResizeEvent * ) {
         upperLeftOfButtonMask.ry() = 185;//(( Vh  - imgUp->height() ) / 2) - 10;
     QPoint p = upperLeftOfButtonMask;
 
-    QPixmap *pixUp = combineVImageWithBackground( imgUp, backgroundPixmap, p );
-    QPixmap *pixDn = combineVImageWithBackground( imgDn, backgroundPixmap, p );
+    QPixmap *pixUp = combineVImageWithBackground( buttonUpImage, backgroundPixmap, p );
+    QPixmap *pixDn = combineVImageWithBackground( buttonDownImage, backgroundPixmap, p );
 
     for ( ButtonVector::iterator it = buttons.begin(); it != buttons.end(); ++it ) {
         Button &button = *it;
@@ -187,14 +187,14 @@ void VideoWidget::loadSkin()
 {
     Config cfg("OpiePlayer");
     cfg.setGroup("Options");
-    skin = cfg.readEntry("Skin","default");
+    QString skin = cfg.readEntry("Skin","default");
 
     QString skinPath = "opieplayer2/skins/" + skin;
     backgroundPixmap = QPixmap( Resource::loadPixmap( QString("%1/background").arg(skinPath) ) );
-    imgUp = QImage( Resource::loadImage( QString("%1/skinV_up").arg(skinPath) ) );
-    imgDn = QImage( Resource::loadImage( QString("%1/skinV_down").arg(skinPath) ) );
+    buttonUpImage = QImage( Resource::loadImage( QString("%1/skinV_up").arg(skinPath) ) );
+    buttonDownImage = QImage( Resource::loadImage( QString("%1/skinV_down").arg(skinPath) ) );
 
-    setupButtons( skinInfo, buttonCount, QPEApplication::qpeDir()  + "/pics/" + skinPath + "/skinV_mask_", imgUp.size() );
+    setupButtons( skinInfo, buttonCount, QPEApplication::qpeDir()  + "/pics/" + skinPath + "/skinV_mask_", buttonUpImage.size() );
 
     setBackgroundPixmap( backgroundPixmap );
 
@@ -202,7 +202,7 @@ void VideoWidget::loadSkin()
     slider = new QSlider( Qt::Horizontal, this );
     slider->setMinValue( 0 );
     slider->setMaxValue( 1 );
-    slider->setBackgroundPixmap( Resource::loadPixmap( backgroundPix ) );
+    slider->setBackgroundPixmap( backgroundPixmap );
     //slider->setFocusPolicy( QWidget::NoFocus );
 
     resizeEvent( 0 );

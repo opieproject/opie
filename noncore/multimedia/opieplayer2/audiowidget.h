@@ -86,8 +86,6 @@ private slots:
 private:
     int skipDirection;
     QString skin;
-    QImage  imgUp;
-    QImage  imgDn;
 
     OTicker  songInfo;
     QSlider slider;

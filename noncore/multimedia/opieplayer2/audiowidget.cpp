@@ -140,12 +140,12 @@ void AudioWidget::resizeEvent( QResizeEvent * ) {
     slider.setBackgroundOrigin( QWidget::ParentOrigin );
     time.setGeometry( QRect( w - 85, h - 30, 70, 20 ) );
 
-    upperLeftOfButtonMask.rx() = ( w - imgUp.width() ) / 2;
-    upperLeftOfButtonMask.ry() = (( h - imgUp.height() ) / 2) - 10;
+    upperLeftOfButtonMask.rx() = ( w - buttonUpImage.width() ) / 2;
+    upperLeftOfButtonMask.ry() = (( h - buttonUpImage.height() ) / 2) - 10;
     QPoint p = upperLeftOfButtonMask;
 
-    QPixmap pixUp = combineImageWithBackground( imgUp, backgroundPixmap, p );
-    QPixmap pixDn = combineImageWithBackground( imgDn, backgroundPixmap, p );
+    QPixmap pixUp = combineImageWithBackground( buttonUpImage, backgroundPixmap, p );
+    QPixmap pixDn = combineImageWithBackground( buttonDownImage, backgroundPixmap, p );
 
     for ( uint i = 0; i < buttons.size(); i++ ) {
         if ( !buttons[i].mask.isNull() ) {
@@ -200,10 +200,10 @@ void AudioWidget::loadSkin()
 
     QString skinPath = "opieplayer2/skins/" + skin;
     backgroundPixmap = QPixmap( Resource::loadPixmap( QString("%1/background").arg(skinPath) ) );
-    imgUp = QImage( Resource::loadImage( QString("%1/skin_up").arg(skinPath) ) );
-    imgDn = QImage( Resource::loadImage( QString("%1/skin_down").arg(skinPath) ) );
+    buttonUpImage = QImage( Resource::loadImage( QString("%1/skin_up").arg(skinPath) ) );
+    buttonDownImage = QImage( Resource::loadImage( QString("%1/skin_down").arg(skinPath) ) );
 
-    setupButtons( skinInfo, buttonCount, QPEApplication::qpeDir()  + "/pics/" + skinPath + "/skin_mask_", imgUp.size() );
+    setupButtons( skinInfo, buttonCount, QPEApplication::qpeDir()  + "/pics/" + skinPath + "/skin_mask_", buttonUpImage.size() );
 
     setBackgroundPixmap( backgroundPixmap );
 

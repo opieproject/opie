@@ -137,6 +137,8 @@ protected:
     QPoint upperLeftOfButtonMask;
 
     QPixmap backgroundPixmap;
+    QImage buttonUpImage;
+    QImage buttonDownImage;
 };
 
 #endif // MEDIAWIDGET_H

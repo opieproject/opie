@@ -82,13 +82,7 @@ protected:
 
 private:
 //    Ticker songInfo;
-    QImage  imgUp;
-    QImage  imgDn;
-    QString skin;
 
-
-
-    QString backgroundPix;
     QSlider *slider;
     QImage *currentFrame;
     int scaledWidth;
