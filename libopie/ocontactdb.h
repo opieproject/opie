@@ -13,11 +13,14 @@
  * =====================================================================
  * ToDo: ...
  * =====================================================================
- * Version: $Id: ocontactdb.h,v 1.1.2.14 2002-08-05 09:26:11 eilers Exp $
+ * Version: $Id: ocontactdb.h,v 1.1.2.15 2002-08-05 09:27:49 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb.h,v $
- * Revision 1.1.2.14  2002-08-05 09:26:11  eilers
+ * Revision 1.1.2.15  2002-08-05 09:27:49  eilers
+ * i think i need hollidays..
+ *
+ * Revision 1.1.2.14  2002/08/05 09:26:11  eilers
  * forgotten to set methods to abstract
  *
  * Revision 1.1.2.13  2002/08/04 12:24:30  eilers
@@ -166,12 +169,12 @@ class OContactBackend {
 	 *  @return All settings provided by the current backend 
 	 * (i.e.: query_WildCards & query_IgnoreCase)
 	 */
-	const uint getQuerySettings() = 0;
+	virtual const uint getQuerySettings() = 0;
 
 	/** Check whether settings are correct.
 	 * @return <i>true</i> if the given settings are correct and possible.
 	 */
-	bool hasQuerySettings (uint querySettings) const = 0;
+	virtual bool hasQuerySettings (uint querySettings) const = 0;
 
 	/** Requests a contact which was selected by queryByExample().
 	 * Use this function to move through the list of selected contacts.
