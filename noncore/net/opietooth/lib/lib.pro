@@ -1,9 +1,9 @@
 TEMPLATE        = lib
 CONFIG          += qte warn_on release
-HEADERS 	= device.h manager.h remotedevice.h services.h
-SOURCES		= device.cc manager.cc remotedevice.cc services.cc
+HEADERS 	= parser.h device.h manager.h remotedevice.h services.h
+SOURCES		= parser.cc device.cc manager.cc remotedevice.cc services.cc
 TARGET		= opietooth
-INCLUDEPATH += $(OPIEDIR)/include
+INCLUDEPATH += $(OPIEDIR)/include .
 DESTDIR         = $(QTDIR)/lib$(PROJMAK)
 LIBS += -lopie
 #VERSION = 0.0.0

@@ -7,7 +7,7 @@ using namespace OpieTooth;
 Services::ProfileDescriptor::ProfileDescriptor(){
 
 }
-Services::ProfileDescriptor::ProfileDescriptor(const QString &id, uint idInt, uint version ){
+Services::ProfileDescriptor::ProfileDescriptor(const QString &id, int idInt, int version ){
   m_id = id;
   m_idInt = idInt;
   m_version = version;
@@ -21,16 +21,16 @@ QString Services::ProfileDescriptor::id() const {
 void Services::ProfileDescriptor::setId( const QString& id ){
   m_id = id;
 }
-void Services::ProfileDescriptor::setId(uint id ){
+void Services::ProfileDescriptor::setId(int id ){
   m_idInt = id;
 }
-uint Services::ProfileDescriptor::idInt()const{
+int Services::ProfileDescriptor::idInt()const{
   return m_idInt;
 }
-uint Services::ProfileDescriptor::version() const{
+int Services::ProfileDescriptor::version() const{
   return m_version;
 }
-void Services::ProfileDescriptor::setVersion(uint version){
+void Services::ProfileDescriptor::setVersion(int version){
   m_version = version;
 }
 Services::ProfileDescriptor& Services::ProfileDescriptor::operator=( const Services::ProfileDescriptor& prof){
@@ -39,10 +39,10 @@ Services::ProfileDescriptor& Services::ProfileDescriptor::operator=( const Servi
   m_version = prof.m_version;
   return *this;
 }
-bool operator==(const Services::ProfileDescriptor& first, 
+bool operator==(const Services::ProfileDescriptor& first,
 		const Services::ProfileDescriptor& second ){
 
-  if( (first.id() == second.id() ) && 
+  if( (first.id() == second.id() ) &&
       (first.version() == second.version() ) &&
       (first.idInt() == second.idInt() ) )
     return true;
@@ -54,8 +54,8 @@ Services::ProtocolDescriptor::ProtocolDescriptor(){
   m_channel = 0;
 }
 Services::ProtocolDescriptor::ProtocolDescriptor(const QString& name,
-						 uint number,
-						 uint channel){
+						 int number,
+						 int channel){
   m_name = name;
   m_number = number;
   m_channel = channel;
@@ -72,16 +72,16 @@ QString Services::ProtocolDescriptor::name() const{
 void Services::ProtocolDescriptor::setName(const QString& name ){
   m_name = name;
 }
-uint Services::ProtocolDescriptor::id()const {
+int Services::ProtocolDescriptor::id()const {
   return m_number;
 }
-void Services::ProtocolDescriptor::setId( uint id ){
+void Services::ProtocolDescriptor::setId( int id ){
   m_number = id;
 }
-uint Services::ProtocolDescriptor::port()const {
+int Services::ProtocolDescriptor::port()const {
   return m_channel;
 }
-void Services::ProtocolDescriptor::setPort( uint port ){
+void Services::ProtocolDescriptor::setPort( int port ){
   m_channel = port;
 }
 Services::ProtocolDescriptor &Services::ProtocolDescriptor::operator=( const Services::ProtocolDescriptor& desc ){
@@ -93,7 +93,7 @@ Services::ProtocolDescriptor &Services::ProtocolDescriptor::operator=( const Ser
 bool operator==( const Services::ProtocolDescriptor &first,
 		 const Services::ProtocolDescriptor &second ){
   if( ( first.name() == second.name() ) &&
-      ( first.id() == second.id() ) && 
+      ( first.id() == second.id() ) &&
       ( first.port() == second.port() ) )
     return true;
 

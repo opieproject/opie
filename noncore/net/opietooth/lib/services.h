@@ -26,7 +26,7 @@ namespace OpieTooth {
        *  @param idInt The id as uint ( 0x1102 )
        *  @param version Version of the Profile ( 1 )
        */
-      ProfileDescriptor(const QString &id, uint idInt, uint version );
+      ProfileDescriptor(const QString &id, int idInt, int version );
       /**
        * copy c'tor
        */
@@ -41,21 +41,21 @@ namespace OpieTooth {
       void setId(const QString& id);
 
       /**
-       * sets the uint id
+       * sets the int id
        */
-      void setId(uint );
+      void setId(int );
       /**
        * reutns the id as int
        */
-      uint idInt()const;
+      int idInt()const;
       /**
        * returns the version
        */
-      uint version()const;
+      int version()const;
       /**
        * sets the Version
        */
-      void setVersion(uint version );
+      void setVersion(int version );
       /**
        * copy operator
        */
@@ -66,8 +66,8 @@ namespace OpieTooth {
       friend bool operator==(const ProfileDescriptor&, const ProfileDescriptor& );
     private:
       QString m_id;
-      uint m_idInt;
-      uint m_version;
+      int m_idInt;
+      int m_version;
     };
     /**
      * Protocol Descriptor
@@ -84,22 +84,22 @@ namespace OpieTooth {
        * number
        * channel/port
        */
-      ProtocolDescriptor(const QString&, uint, uint channel ); // Q_UINT8 ?
+      ProtocolDescriptor(const QString&, int, int port = -1 ); // Q_UINT8 ?
       ProtocolDescriptor(const ProtocolDescriptor& );
       ~ProtocolDescriptor();
       QString name()const;
       void setName(const QString& );
-      uint id()const;
-      void setId(uint );
-      uint port()const;
-      void setPort(uint );
+      int id()const;
+      void setId(int );
+      int port()const;
+      void setPort(int );
       ProtocolDescriptor &operator=( const ProtocolDescriptor& );
       friend bool operator==( const ProtocolDescriptor&,
 			      const ProtocolDescriptor& );
     private:
       QString m_name;
-      uint m_number;
-      uint m_channel;
+      int m_number;
+      int m_channel;
     };
 
   public:
