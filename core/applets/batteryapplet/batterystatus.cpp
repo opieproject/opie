@@ -211,7 +211,7 @@ void BatteryStatus::paintEvent( QPaintEvent * ) {
 
   int rightEnd1 = width() - 47;
   int rightEnd2 = width() - 35;
-  int percent2 = ( percent / 100 ) * rightEnd1 ;
+  int percent2 = (percent * rightEnd1) / 100;
   p.setPen( black );
   qDrawShadePanel( &p,   9, 30, rightEnd1 , 39, colorGroup(), TRUE, 1, NULL);
   qDrawShadePanel( &p, rightEnd2, 37,  12, 24, colorGroup(), TRUE, 1, NULL);
