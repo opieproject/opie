@@ -200,10 +200,13 @@ void WLANImp::changeAndSaveSettingFile(){
  * Save wireless.opts, save interfaces
  */
 void WLANImp::accept(){
+		printf( "Accept pressed\n" );
   if(wepEnabled->isChecked()){
     if(keyLineEdit0->text().isEmpty() && keyLineEdit1->text().isEmpty() && keyLineEdit2->text().isEmpty() && keyLineEdit3->text().isEmpty() )
-    QMessageBox::information(this, "", "Please enter a key for WEP.", QMessageBox::Ok);
-    return;
+	{
+    	QMessageBox::information(this, "", "Please enter a key for WEP.", QMessageBox::Ok);
+    	return;
+	}
   }	
   
   // Ok settings are good here, save
