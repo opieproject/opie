@@ -23,7 +23,8 @@
 // Remove this for OPIE releae 1.0 !
 // #define __DEBUG_RELEASE
 
-#include <qmainwindow.h>
+#include <opie2/opimmainwindow.h>
+
 #include <qvaluelist.h>
 #include <qstringlist.h>
 #include <qlineedit.h>
@@ -41,8 +42,9 @@ class QDialog;
 class Ir;
 class QAction;
 class LetterPicker;
+class Opie::OPimRecord;
 
-class AddressbookWindow: public QMainWindow
+class AddressbookWindow: public Opie::OPimMainWindow
 {
 	Q_OBJECT
 public:
@@ -69,27 +71,34 @@ public slots:
 	// void slotSave();
 #endif
 
+protected slots:
+    int  create();
+    bool remove( int uid );
+    void beam( int uid );
+    void show( int uid );
+    void edit( int uid );
+    void add( const Opie::OPimRecord& );
+
 private slots:
+    void slotItemNew();
+    void slotItemEdit();
+    void slotItemDuplicate();
+    void slotItemDelete();
+    void slotItemBeam();
+    void slotItemFind();
+    void slotConfigure();
+
 	void importvCard();
 	void exportvCard();
-	void slotListNew();
-/* 	void slotListView(); */
-	void slotListDelete();
 	void slotViewBack();
-	void slotViewEdit();
 	void slotPersonalView();
-	void listIsEmpty( bool );
-/*  	void slotSettings();  */
 	void writeMail();
-	void slotBeam();
 	void beamDone( Ir * );
-	void slotSetCategory( int );
+	void slotSetCategory( const QString &category );
 	void slotSetLetter( char );
-	void slotUpdateToolbar();
 	void slotSetFont(int);
 
-	void slotFindOpen();
-	void slotFindClose();
+	void slotShowFind( bool show );
 	void slotFind();
 	void slotNotFound();
 	void slotWrapAround();
@@ -98,25 +107,19 @@ private slots:
 	void slotListView();
 	void slotCardView();
 
-	void slotConfig();
-
 private:
-	void populateCategories();
-
-	QPopupMenu *catMenu;
 	QToolBar *listTools;
-	QToolButton *deleteButton;
 	enum Panes { paneList=0, paneView, paneEdit };
 	ContactEditor *abEditor;
 	LetterPicker *pLabel;
 	AbView* m_abView;
-	QWidget *listContainer;
+	QWidget *m_listContainer;
 
 	// Searching stuff
-	OFloatBar* searchBar;
-	QLineEdit* searchEdit;
+	OFloatBar* m_searchBar;
+	QLineEdit* m_searchEdit;
 
-	QAction *actionNew, *actionEdit, *actionTrash, *actionFind, *actionBeam, *actionPersonal, *actionMail;
+	QAction *m_actionPersonal, *m_actionMail;
 
 	int viewMargin;
 
@@ -127,9 +130,6 @@ private:
 	bool isLoading;
 
 	AbConfig m_config;
-
-	QAction* m_tableViewButton;
-	QAction* m_cardViewButton;
 
 	int active_view;
 };

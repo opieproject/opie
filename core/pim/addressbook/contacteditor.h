@@ -23,6 +23,7 @@
 
 #include <opie2/opimcontact.h>
 #include <opie2/opimcontactfields.h>
+#include <opie2/otabwidget.h>
 
 #include <qpe/datebookmonth.h>
 
@@ -42,9 +43,7 @@ const int NAME_M = 5;
 const int NAME_L = 6;
 const int NAME_S = 7;
 
-
 class QScrollView;
-class QTabWidget;
 class QMultiLineEdit;
 class QLineEdit;
 class QComboBox;
@@ -144,7 +143,8 @@ class ContactEditor : public QDialog {
 		QLineEdit *txtLastName;
 		QLineEdit *txtSuffix;
 
-		QTabWidget *tabMain;
+		Opie::Ui::OTabWidget *tabMain;
+        QWidget     *m_generalWidget;
 		QScrollView *svGeneral;
 		QPushButton *btnFullName;
 		QPushButton *btnNote;

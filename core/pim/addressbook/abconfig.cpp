@@ -19,7 +19,7 @@ AbConfig::AbConfig( ):
 
 AbConfig::~AbConfig()
 {
-}    
+}
 
 bool AbConfig::useRegExp() const
 {
@@ -64,6 +64,11 @@ bool AbConfig::fixedBars() const
 AbConfig::LPSearchMode AbConfig::letterPickerSearch() const
 {
 	return ( AbConfig::LPSearchMode ) m_lpSearchMode;
+}
+
+const QString &AbConfig::category() const
+{
+    return m_category;
 }
 
 void AbConfig::setUseRegExp( bool v )
@@ -121,10 +126,18 @@ void AbConfig::setLetterPickerSearch( const AbConfig::LPSearchMode mode )
 	m_changed = true;
 }
 
+void AbConfig::setCategory( const QString &cat )
+{
+    m_category = cat;
+}
+
 void AbConfig::load()
 {
 	// Read Config settings
 	Config cfg("AddressBook");
+
+    cfg.setGroup( "View" );
+    m_category = cfg.readEntry( "Category", "All" );
 
 	cfg.setGroup("Font");
 	m_fontSize = cfg.readNumEntry( "fontSize", 1 );
@@ -166,6 +179,9 @@ void AbConfig::save()
 {
 	if ( m_changed ){
 		Config cfg("AddressBook");
+        cfg.setGroup( "View" );
+        cfg.writeEntry( "Category", m_category );
+
 		cfg.setGroup("Font");
 		cfg.writeEntry("fontSize", m_fontSize);
 
@@ -193,9 +209,9 @@ void AbConfig::save()
 		cfg.writeEntry( "Mainversion", MAINVERSION );
 		cfg.writeEntry( "SubVersion", SUBVERSION );
 		cfg.writeEntry( "PatchVersion", PATCHVERSION );
-		
+
 	}
-	
+
 }
 
 void AbConfig::operator= ( const AbConfig& cnf )

@@ -31,7 +31,6 @@
 #include <qpe/resource.h>
 
 #include <qlabel.h>
-#include <qtabwidget.h>
 #include <qlayout.h>
 #include <qlineedit.h>
 #include <qmultilineedit.h>
@@ -58,7 +57,7 @@ ContactEditor::ContactEditor(	const Opie::OPimContact &entry,
 				QWidget *parent,
 				const char *name,
 				WFlags )
-	: QDialog( parent, name, TRUE, WStyle_ContextHelp ),
+	: QDialog( parent, name, true, WStyle_ContextHelp ),
 	  defaultEmailChooserPosition( -1 ),
 	  m_personalView ( false ),
 	  cmbDefaultEmail( 0 ),
@@ -119,14 +118,14 @@ void ContactEditor::init() {
 
 	QVBoxLayout *vb = new QVBoxLayout( this );
 
-	tabMain = new QTabWidget( this );
+	tabMain = new Opie::Ui::OTabWidget( this );
 	vb->addWidget( tabMain );
 
-	QWidget *tabViewport = new QWidget ( tabMain );
+	m_generalWidget = new QWidget ( tabMain );
 
-	vb = new QVBoxLayout( tabViewport );
+	vb = new QVBoxLayout( m_generalWidget );
 
-	svGeneral = new QScrollView( tabViewport );
+	svGeneral = new QScrollView( m_generalWidget );
 	vb->addWidget( svGeneral, 0, 0 );
 	svGeneral->setResizePolicy( QScrollView::AutoOneFit );
 	// svGeneral->setHScrollBarMode( QScrollView::AlwaysOff );
@@ -136,8 +135,7 @@ void ContactEditor::init() {
 	QWidget *container = new QWidget( svGeneral->viewport() );
 	svGeneral->addChild( container );
 
-	QGridLayout *gl = new QGridLayout( container, 1, 1, 2, 4 );
-	gl->setResizeMode( QLayout::FreeResize );
+	QGridLayout *gl = new QGridLayout( container, 10, 2, 2, 4 );
 
 	btnFullName = new QPushButton( tr( "Full Name..." ), container );
 	QWhatsThis::add( btnFullName, tr( "Press to enter last- middle and firstname" ) );
@@ -168,7 +166,7 @@ void ContactEditor::init() {
 	gl->addWidget( txtOrganization, 3, 1 );
 
 	// Chooser 1
-	cmbChooserField1 = new QComboBox( FALSE, container );
+	cmbChooserField1 = new QComboBox( false, container );
 	QWhatsThis::add( cmbChooserField1, tr( "Press to select attribute to change" ) );
 	cmbChooserField1->setMaximumWidth( 90 );
 	gl->addWidget( cmbChooserField1, 4, 0 );
@@ -181,7 +179,7 @@ void ContactEditor::init() {
 	m_widgetStack1 -> raiseWidget( TextField );
 
 	// Chooser 2
-	cmbChooserField2 = new QComboBox( FALSE, container );
+	cmbChooserField2 = new QComboBox( false, container );
 	QWhatsThis::add( cmbChooserField2, tr( "Press to select attribute to change" ) );
 	cmbChooserField2->setMaximumWidth( 90 );
 	gl->addWidget( cmbChooserField2, 5, 0 );
@@ -194,7 +192,7 @@ void ContactEditor::init() {
 	m_widgetStack2 -> raiseWidget( TextField );
 
 	// Chooser 3
-	cmbChooserField3 = new QComboBox( FALSE, container );
+	cmbChooserField3 = new QComboBox( false, container );
 	QWhatsThis::add( cmbChooserField3, tr( "Press to select attribute to change" ) );
 	cmbChooserField3->setMaximumWidth( 90 );
 	gl->addWidget( cmbChooserField3, 6, 0 );
@@ -209,7 +207,7 @@ void ContactEditor::init() {
 	l = new QLabel( tr( "File As" ), container );
 	QWhatsThis::add( l, tr( "Press to select how to store the name (and howto show it in the listview)" ) );
 	gl->addWidget( l, 7, 0 );
-	cmbFileAs = new QComboBox( TRUE, container );
+	cmbFileAs = new QComboBox( true, container );
 	gl->addWidget( cmbFileAs, 7, 1 );
 
 	labCat = new QLabel( tr( "Category" ), container );
@@ -219,12 +217,12 @@ void ContactEditor::init() {
 	labCat->show();
 	cmbCat->show();
 
-	btnNote = new QPushButton( tr( "Notes..." ), container );
+	btnNote = new QPushButton( Resource::loadPixmap( "edit" ), tr( "Notes..." ), container );
 	gl->addWidget( btnNote, 9, 1 );
 
-	tabMain->insertTab( tabViewport, tr( "General" ) );
+	tabMain->addTab( m_generalWidget, "addressbook/AddressBookSmall", tr( "General" ) );
 
-	tabViewport = new QWidget ( tabMain );
+	QWidget *tabViewport = new QWidget ( tabMain );
 
 	vb = new QVBoxLayout( tabViewport );
 
@@ -238,7 +236,7 @@ void ContactEditor::init() {
 
 	gl = new QGridLayout( container, 8, 3, 2, 4 ); // row 7 QSpacerItem
 
-	cmbAddress = new QComboBox( FALSE, container );
+	cmbAddress = new QComboBox( false, container );
 	cmbAddress->insertItem( tr( "Business" ) );
 	cmbAddress->insertItem( tr( "Home" ) );
 	gl->addMultiCellWidget( cmbAddress, 0, 0, 0, 1 );
@@ -265,7 +263,7 @@ void ContactEditor::init() {
 
 	l = new QLabel( tr( "Country" ), container );
 	gl->addWidget( l, 5, 0 );
-	cmbCountry = new QComboBox( TRUE, container );
+	cmbCountry = new QComboBox( true, container );
 	cmbCountry->insertItem( "" );
 	cmbCountry->insertItem( tr ( "United States" ) );
 	cmbCountry->insertItem( tr ( "United Kingdom" ) );
@@ -485,7 +483,7 @@ void ContactEditor::init() {
 	gl->addMultiCellWidget( cmbCountry, 5, 5, 1, 2 );
 
 	// Chooser 4
-	cmbChooserField4 = new QComboBox( FALSE, container );
+	cmbChooserField4 = new QComboBox( false, container );
 	cmbChooserField4->setMaximumWidth( 90 );
 	gl->addWidget( cmbChooserField4, 6, 0 );
 	// Textfield for chooser 2
@@ -501,7 +499,7 @@ void ContactEditor::init() {
                                              QSizePolicy::MinimumExpanding );
 	gl->addItem( space, 7, 0 );
 
-	tabMain->insertTab( tabViewport, tr( "Address" ) );
+	tabMain->addTab( tabViewport, "home", tr( "Address" ) );
 
 	tabViewport = new QWidget ( tabMain );
 
@@ -525,7 +523,7 @@ void ContactEditor::init() {
 	gl->addWidget( l, counter, 0 );
 
  	QPopupMenu* m1 = new QPopupMenu( container );
- 	birthdayPicker = new DateBookMonth( m1, 0, TRUE );
+ 	birthdayPicker = new DateBookMonth( m1, 0, true );
  	m1->insertItem( birthdayPicker );
 
 	birthdayButton= new QToolButton( hBox, "buttonStart" );
@@ -550,7 +548,7 @@ void ContactEditor::init() {
 	gl->addWidget( l, counter, 0 );
 
  	m1 = new QPopupMenu( container );
- 	anniversaryPicker = new DateBookMonth( m1, 0, TRUE );
+ 	anniversaryPicker = new DateBookMonth( m1, 0, true );
  	m1->insertItem( anniversaryPicker );
 
 	anniversaryButton= new QToolButton( hBox, "buttonStart" );
@@ -599,16 +597,16 @@ void ContactEditor::init() {
 	//	loadFields();
 
 
-	tabMain->insertTab( tabViewport, tr( "Details" ) );
+	tabMain->addTab( tabViewport, "UtilsIcon", tr( "Details" ) );
 
-	dlgNote = new QDialog( this, "Note Dialog", TRUE );
+	dlgNote = new QDialog( this, "Note Dialog", true );
 	dlgNote->setCaption( tr("Enter Note") );
 	QVBoxLayout *vbNote = new QVBoxLayout( dlgNote );
 	txtNote = new QMultiLineEdit( dlgNote );
 	vbNote->addWidget( txtNote );
 	connect( btnNote, SIGNAL(clicked()), this, SLOT(slotNote()) );
 
-	dlgName = new QDialog( this, "Name Dialog", TRUE );
+	dlgName = new QDialog( this, "Name Dialog", true );
 	dlgName->setCaption( tr("Edit Name") );
 	gl = new QGridLayout( dlgName, 5, 2, 2, 3 );
 
@@ -1093,7 +1091,7 @@ void ContactEditor::slotName() {
 	// txtSuffix->setText( parseName(txtFullName->text(), NAME_S) );
 
 	if ( QPEApplication::execDialog( dlgName ) ) {
-		 if ( txtLastName->text().contains( ' ', TRUE ) )
+		 if ( txtLastName->text().contains( ' ', true ) )
 			 tmpName =  txtLastName->text() + ", " + txtFirstName->text() + " " + txtMiddleName->text();
 		 else
 			 tmpName = txtFirstName->text() + " " + txtMiddleName->text() + " " + txtLastName->text();
@@ -1138,7 +1136,7 @@ QString ContactEditor::parseName( const QString fullName, int type ) {
 
 	odebug << "Fullname: " << simplifiedName << oendl;
 
-	commapos = simplifiedName.find( ',', 0, TRUE);
+	commapos = simplifiedName.find( ',', 0, true);
 	if ( commapos >= 0 ) {
 		odebug << " Commapos: " << commapos << oendl;
 
@@ -1262,7 +1260,7 @@ void ContactEditor::setEntry( const Opie::OPimContact &entry ) {
 
 	// Cleanup and activate the general Page ..
 	cleanupFields();
-	tabMain->setCurrentPage( 0 );
+	tabMain->setCurrentTab( m_generalWidget );
 
 	ent = entry;
 
@@ -1283,7 +1281,7 @@ void ContactEditor::setEntry( const Opie::OPimContact &entry ) {
 
 	if ( !ent.isEmpty() ){
 		// Lastnames with multiple words need to be protected by a comma !
-		if ( ent.lastName().contains( ' ', TRUE ) )
+		if ( ent.lastName().contains( ' ', true ) )
 			txtFullName->setText( ent.lastName() + ", " + ent.firstName() + " " + ent.middleName() );
 		else
 			txtFullName->setText( ent.firstName() + " " + ent.middleName() + " " + ent.lastName() );
@@ -1687,8 +1685,8 @@ static inline bool containsAlphaNum( const QString &str )
 		count = str.length();
 	for ( i = 0; i < count; i++ )
 		if ( !str[i].isSpace() )
-			return TRUE;
-	return FALSE;
+			return true;
+	return false;
 }
 
 static inline bool constainsWhiteSpace( const QString &str )
@@ -1697,8 +1695,8 @@ static inline bool constainsWhiteSpace( const QString &str )
 		count = str.length();
 	for (i = 0; i < count; i++ )
 		if ( str[i].isSpace() )
-			return TRUE;
-	return FALSE;
+			return true;
+	return false;
 }
 
 void ContactEditor::setPersonalView( bool personal )
