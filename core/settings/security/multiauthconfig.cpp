@@ -123,7 +123,7 @@ void MultiauthGeneralConfig::tryAuth()
         owarn << "testing authentication" << oendl;
         // launch the authentication in testing mode
         Opie::Security::MultiauthPassword::authenticate(Opie::Security::TestNow);
-
+    }
 }
 
 
