@@ -3,149 +3,78 @@
     <name>AbTable</name>
     <message>
         <source>Full Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Volledige naam</translation>
     </message>
     <message>
         <source>Contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Contact</translation>
     </message>
     <message>
         <source>Pick</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies</translation>
     </message>
 </context>
 <context>
     <name>AddressbookWindow</name>
     <message>
         <source>Contacts</source>
-        <translation type="unfinished"></translation>
+        <translation>Contacten</translation>
     </message>
     <message>
         <source>Contact</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>List</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Card</source>
-        <translation type="unfinished"></translation>
+        <translation>Contact</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Wijzig</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Start Search</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Close Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Vind</translation>
     </message>
     <message>
         <source>Write Mail To</source>
-        <translation type="unfinished"></translation>
+        <translation>Schrijf mail aan</translation>
     </message>
     <message>
         <source>Beam Entry</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Import vCard</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Export vCard</source>
-        <translation type="unfinished"></translation>
+        <translation>Stuur via IR</translation>
     </message>
     <message>
         <source>My Personal Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Mijn persoonlijke gegevens</translation>
     </message>
     <message>
-        <source>Save all Data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Config</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You have to select a contact !</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You have to set a filename !</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Right file type ?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The selected file 
- does not end with &quot;.vcf&quot;.
- Do you really want to open it?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Yes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;No</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add Contact?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you really want add contact for 
-%1?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;All Yes</source>
-        <translation type="unfinished"></translation>
+        <source>View</source>
+        <translation>Bekijk</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Address</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan niet wijzigen tijdens synchronisatie</translation>
     </message>
     <message>
         <source>Edit My Personal Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Wijzig persoonlijke gegevens</translation>
+    </message>
+    <message>
+        <source>Edit Address</source>
+        <translation>Wijzig adres</translation>
     </message>
     <message>
         <source>Contacts - My Personal Details</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Contacten - Mijn persoonlijke gegevens</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen ruimte</translation>
     </message>
     <message>
         <source>Unable to save information.
@@ -153,143 +82,125 @@ Free up some space
 and try again.
 
 Quit anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan niet opslaan
+Maak ruimte en probeer het opnieuw.
+
+Toch stoppen?</translation>
+    </message>
+    <message>
+        <source>All</source>
+        <translation>Alle</translation>
+    </message>
+    <message>
+        <source>Unfiled</source>
+        <translation>Ongeklassificeerd</translation>
+    </message>
+    <message>
+        <source>Import vCard</source>
+        <translation>Importeer vCard</translation>
+    </message>
+    <message>
+        <source>Close Find</source>
+        <translation>Sluit Vind</translation>
+    </message>
+    <message>
+        <source>Save all Data</source>
+        <translation>Sla alles op</translation>
+    </message>
+    <message>
+        <source>Config</source>
+        <translation>Configureer</translation>
     </message>
     <message>
         <source>Not Found</source>
-        <translation type="unfinished"></translation>
+        <translation>Niet gevonden</translation>
+    </message>
+    <message>
+        <source>List</source>
+        <translation>Lijst</translation>
+    </message>
+    <message>
+        <source>Cards</source>
+        <translation type="unfinished">Kaartjes</translation>
+    </message>
+    <message>
+        <source>Card</source>
+        <translation type="unfinished">Kaart</translation>
+    </message>
+    <message>
+        <source>Start Search</source>
+        <translation>Start zoeken</translation>
+    </message>
+    <message>
+        <source>Right file type ?</source>
+        <translation type="unfinished">Juist file type?</translation>
+    </message>
+    <message>
+        <source>&amp;Yes</source>
+        <translation>&amp;Ja</translation>
+    </message>
+    <message>
+        <source>&amp;No</source>
+        <translation>&amp;Nee</translation>
     </message>
     <message>
         <source>Unable to find a contact for this 
  search pattern!</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan niets vinden dat voldoet
+ aan de zoekterm!</translation>
     </message>
     <message>
-        <source>Cards</source>
-        <translation type="unfinished"></translation>
+        <source>The selected file 
+ does not end with &quot;.vcf&quot;.
+ Do you really want to open it?</source>
+        <translation>Het geselecteerde bestand 
+ eindigt niet op &quot;.vcf&quot;.
+ Wilt u het alsnog openen?</translation>
     </message>
     <message>
-        <source>All</source>
-        <translation type="unfinished"></translation>
+        <source>Add Contact?</source>
+        <translation>Contact toevoegen?</translation>
     </message>
     <message>
-        <source>Unfiled</source>
-        <translation type="unfinished"></translation>
+        <source>Do you really want add contact for 
+%1?</source>
+        <translation>Wilt U inderdaad een contact
+toevoegen voor %1?</translation>
+    </message>
+    <message>
+        <source>&amp;All Yes</source>
+        <translation>&amp; Ja op alles</translation>
     </message>
 </context>
 <context>
     <name>ConfigDlg_Base</name>
     <message>
-        <source>Configuration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click on tab to select one</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Misc</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Search Settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Query Style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Settings for the search query style</source>
-        <translation type="unfinished"></translation>
+        <translation>Verzoekstijl</translation>
     </message>
     <message>
         <source>Use Regular Expressions</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Search widget expects regular expressions if selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik reguliere expressies</translation>
     </message>
     <message>
         <source>Use Wildcards (*,?)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Search widget just expects simple wildcards</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik jokertekens (*,?)</translation>
     </message>
     <message>
         <source>Case Sensitive</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>If selected, search differs between upper and lower chars</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Font</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Small</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Font size for list- and card view</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Normal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Large</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tool-/Menubar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fixed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Switch to fixed menu-/toolbars after restarting application !</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Movable</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Switch to moveable menu-/toolbars after restarting application !</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoofdlettergevoelig</translation>
     </message>
     <message>
         <source>Mail</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fontsettings for list and card view</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mail</translation>
     </message>
     <message>
         <source>Prefer QT-Mail </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use Sharp&apos;s mail application if available</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik QT-Mail</translation>
     </message>
     <message>
         <source>Prefer Opie-Mail</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use OPIE mail if installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik Opie-Mail</translation>
     </message>
     <message>
         <source>Notice: QT-Mail is just 
@@ -299,43 +210,107 @@ is provided free !</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Misc</source>
+        <translation>Divers</translation>
+    </message>
+    <message>
+        <source>Search Settings</source>
+        <translation>Zoekopties</translation>
+    </message>
+    <message>
+        <source>Font</source>
+        <translation>Lettertype</translation>
+    </message>
+    <message>
+        <source>Small</source>
+        <translation>Klein</translation>
+    </message>
+    <message>
+        <source>Normal</source>
+        <translation>Normaal</translation>
+    </message>
+    <message>
+        <source>Large</source>
+        <translation>Groot</translation>
+    </message>
+    <message>
         <source>Order</source>
-        <translation type="unfinished"></translation>
+        <translation>Volgorde</translation>
     </message>
     <message>
         <source>Select Contact Order:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies contactvolgorde:</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Move selected attribute one line up</source>
-        <translation type="unfinished"></translation>
+        <translation>Omhoog</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Move selected attribute one line down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>List of all available attributes</source>
-        <translation type="unfinished"></translation>
+        <translation>Omlaag</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add selected attribute from list below to the upper list</source>
-        <translation type="unfinished"></translation>
+        <translation>Voeg toe</translation>
     </message>
     <message>
         <source>Remove</source>
+        <translation>Verwijder</translation>
+    </message>
+    <message>
+        <source>Configuration</source>
+        <translation>Configuratie</translation>
+    </message>
+    <message>
+        <source>Click on tab to select one</source>
+        <translation type="unfinished">Klik op tab om te selekteren</translation>
+    </message>
+    <message>
+        <source>Settings for the search query style</source>
+        <translation type="unfinished">Opties voor de zoekstijl</translation>
+    </message>
+    <message>
+        <source>Search widget expects regular expressions if selected</source>
+        <translation>Zoekelement verwacht reguliere expressies als die zijn geselecteerd</translation>
+    </message>
+    <message>
+        <source>Search widget just expects simple wildcards</source>
+        <translation>Zoekelement verwacht alleen jokertekens</translation>
+    </message>
+    <message>
+        <source>If selected, search differs between upper and lower chars</source>
+        <translation>Indien geselecteerd, hoofdlettergevoelig</translation>
+    </message>
+    <message>
+        <source>Font size for list- and card view</source>
+        <translation>Fontgrootte voor lijst- en kaartweergave</translation>
+    </message>
+    <message>
+        <source>Fontsettings for list and card view</source>
+        <translation>Fontsettings voor lijst- en kaartweergave</translation>
+    </message>
+    <message>
+        <source>Use Sharp&apos;s mail application if available</source>
+        <translation>Gebruik Sharp&apos;s mailprogramma indien beschikbaar</translation>
+    </message>
+    <message>
+        <source>Use OPIE mail if installed</source>
+        <translation>Gebruik Opie mail indien geinstalleerd</translation>
+    </message>
+    <message>
+        <source>Move selected attribute one line up</source>
+        <translation>Verplaats geselecteerd kenmerk een plaats omhoog</translation>
+    </message>
+    <message>
+        <source>Move selected attribute one line down</source>
+        <translation>Verplaats geselecteerd kenmerk een plaats omlaag</translation>
+    </message>
+    <message>
+        <source>List of all available attributes</source>
+        <translation type="unfinished">Lijst van alle mogelijke kenmerken</translation>
+    </message>
+    <message>
+        <source>Add selected attribute from list below to the upper list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -350,172 +325,192 @@ is provided free !</source>
 <context>
     <name>ContactEditor</name>
     <message>
-        <source>Full Name...</source>
-        <translation type="unfinished"></translation>
+        <source>First Name</source>
+        <translation>Voornaam</translation>
     </message>
     <message>
-        <source>Press to enter last- middle and firstname</source>
-        <translation type="unfinished"></translation>
+        <source>Middle Name</source>
+        <translation>Tussenvoegsel</translation>
     </message>
     <message>
-        <source>Enter fullname directly ! If you have a lastname with multiple words ( for instance &quot;de la Guerra&quot;), please write &lt;lastname&gt;,&lt;firstnames&gt; like this: &quot;de la Guerra, Carlos Pedro&quot;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Job Title</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The jobtitle..</source>
-        <translation type="unfinished"></translation>
+        <source>Last Name</source>
+        <translation>Achternaam</translation>
     </message>
     <message>
         <source>Suffix</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Something like &quot;jr.&quot;..</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Organization</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The working place of the contact</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Press to select attribute to change</source>
-        <translation type="unfinished"></translation>
+        <translation>Toevoeging</translation>
     </message>
     <message>
         <source>File As</source>
-        <translation type="unfinished"></translation>
+        <translation>Sla op als</translation>
     </message>
     <message>
-        <source>Press to select how to store the name (and howto show it in the listview)</source>
-        <translation type="unfinished"></translation>
+        <source>Gender</source>
+        <translation>Geslacht</translation>
     </message>
     <message>
-        <source>Category</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Notes...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Business</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Home</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Address</source>
-        <translation type="unfinished"></translation>
+        <source>Job Title</source>
+        <translation>Functie</translation>
     </message>
     <message>
         <source>City</source>
-        <translation type="unfinished"></translation>
+        <translation>Woonplaats</translation>
     </message>
     <message>
         <source>State</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Zip Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Provincie</translation>
     </message>
     <message>
         <source>Country</source>
-        <translation type="unfinished"></translation>
+        <translation>Land</translation>
+    </message>
+    <message>
+        <source>Full Name...</source>
+        <translation>Volledige naam...</translation>
+    </message>
+    <message>
+        <source>Organization</source>
+        <translation>Organisatie</translation>
+    </message>
+    <message>
+        <source>Category</source>
+        <translation>Categorie</translation>
+    </message>
+    <message>
+        <source>Notes...</source>
+        <translation>Notities</translation>
+    </message>
+    <message>
+        <source>General</source>
+        <translation>Algemeen</translation>
+    </message>
+    <message>
+        <source>Business</source>
+        <translation>Werk</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation>Priv√©</translation>
+    </message>
+    <message>
+        <source>Address</source>
+        <translation>Adres</translation>
+    </message>
+    <message>
+        <source>Zip Code</source>
+        <translation>Postcode</translation>
     </message>
     <message>
         <source>United States</source>
-        <translation type="unfinished"></translation>
+        <translation>Verenigde Staten</translation>
     </message>
     <message>
         <source>United Kingdom</source>
-        <translation type="unfinished"></translation>
+        <translation>Verenigd Koninkrijk</translation>
     </message>
     <message>
-        <source>Afghanistan</source>
-        <translation type="unfinished"></translation>
+        <source>Japan</source>
+        <translation>Japan</translation>
+    </message>
+    <message>
+        <source>France</source>
+        <translation>Frankrijk</translation>
+    </message>
+    <message>
+        <source>Germany</source>
+        <translation>Duitsland</translation>
+    </message>
+    <message>
+        <source>Norway</source>
+        <translation>Noorwegen</translation>
+    </message>
+    <message>
+        <source>Canada</source>
+        <translation>Canada</translation>
+    </message>
+    <message>
+        <source>Male</source>
+        <translation>Man</translation>
+    </message>
+    <message>
+        <source>Female</source>
+        <translation>Vrouw</translation>
+    </message>
+    <message>
+        <source>Details</source>
+        <translation>Details</translation>
+    </message>
+    <message>
+        <source>Enter Note</source>
+        <translation>Maak notitie</translation>
+    </message>
+    <message>
+        <source>Edit Name</source>
+        <translation>Wijzig naam</translation>
+    </message>
+    <message>
+        <source>Contacts</source>
+        <translation>Contacten</translation>
     </message>
     <message>
         <source>Albania</source>
-        <translation type="unfinished"></translation>
+        <translation>Albani√´</translation>
     </message>
     <message>
         <source>Algeria</source>
-        <translation type="unfinished"></translation>
+        <translation>Algerije</translation>
     </message>
     <message>
         <source>American Samoa</source>
-        <translation type="unfinished"></translation>
+        <translation>Amerikaans Samoa</translation>
     </message>
     <message>
         <source>Andorra</source>
-        <translation type="unfinished"></translation>
+        <translation>Andorra</translation>
     </message>
     <message>
         <source>Angola</source>
-        <translation type="unfinished"></translation>
+        <translation>Angola</translation>
     </message>
     <message>
         <source>Anguilla</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Antarctica</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Argentina</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Armenia</source>
-        <translation type="unfinished"></translation>
+        <translation>Argentini√´</translation>
     </message>
     <message>
         <source>Aruba</source>
-        <translation type="unfinished"></translation>
+        <translation>Aruba</translation>
     </message>
     <message>
         <source>Australia</source>
-        <translation type="unfinished"></translation>
+        <translation>Australi√´</translation>
     </message>
     <message>
         <source>Austria</source>
-        <translation type="unfinished"></translation>
+        <translation>Oostenrijk</translation>
     </message>
     <message>
         <source>Azerbaijan</source>
-        <translation type="unfinished"></translation>
+        <translation>Azerbeidzjan</translation>
     </message>
     <message>
         <source>Bahamas</source>
-        <translation type="unfinished"></translation>
+        <translation>Bahama's</translation>
     </message>
     <message>
         <source>Bahrain</source>
-        <translation type="unfinished"></translation>
+        <translation>Bahrein</translation>
     </message>
     <message>
         <source>Bangladesh</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Bangladesh</translation>
     </message>
     <message>
         <source>Barbados</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Barbados</translation>
     </message>
     <message>
         <source>Belarus</source>
@@ -523,31 +518,27 @@ is provided free !</source>
     </message>
     <message>
         <source>Belgium</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Belgi√´</translation>
     </message>
     <message>
         <source>Belize</source>
-        <translation type="unfinished"></translation>
+        <translation>Belize</translation>
     </message>
     <message>
         <source>Benin</source>
-        <translation type="unfinished"></translation>
+        <translation>Benin</translation>
     </message>
     <message>
         <source>Bermuda</source>
-        <translation type="unfinished"></translation>
+        <translation>Bermuda's</translation>
     </message>
     <message>
         <source>Bhutan</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bolivia</source>
-        <translation type="unfinished"></translation>
+        <translation>Bhutan</translation>
     </message>
     <message>
         <source>Botswana</source>
-        <translation type="unfinished"></translation>
+        <translation>Botswana</translation>
     </message>
     <message>
         <source>Bouvet Island</source>
@@ -555,7 +546,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Brazil</source>
-        <translation type="unfinished"></translation>
+        <translation>Brazili√´</translation>
     </message>
     <message>
         <source>Brunei Darussalam</source>
@@ -563,35 +554,27 @@ is provided free !</source>
     </message>
     <message>
         <source>Bulgaria</source>
-        <translation type="unfinished"></translation>
+        <translation>Bulgarije</translation>
     </message>
     <message>
         <source>Burkina Faso</source>
-        <translation type="unfinished"></translation>
+        <translation>Burkina Faso</translation>
     </message>
     <message>
         <source>Burundi</source>
-        <translation type="unfinished"></translation>
+        <translation>Burundi</translation>
     </message>
     <message>
         <source>Cambodia</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cameroon</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Canada</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambodja</translation>
     </message>
     <message>
         <source>Cape Verde</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaapverdische Eilanden</translation>
     </message>
     <message>
         <source>Cayman Islands</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaaiman Eilanden</translation>
     </message>
     <message>
         <source>Chad</source>
@@ -599,11 +582,11 @@ is provided free !</source>
     </message>
     <message>
         <source>Chile</source>
-        <translation type="unfinished"></translation>
+        <translation>Chili</translation>
     </message>
     <message>
         <source>China</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">China</translation>
     </message>
     <message>
         <source>Christmas Island</source>
@@ -611,7 +594,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Colombia</source>
-        <translation type="unfinished"></translation>
+        <translation>Colombia</translation>
     </message>
     <message>
         <source>Comoros</source>
@@ -619,7 +602,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Congo</source>
-        <translation type="unfinished"></translation>
+        <translation>Congo</translation>
     </message>
     <message>
         <source>Cook Island</source>
@@ -627,19 +610,19 @@ is provided free !</source>
     </message>
     <message>
         <source>Costa Rica</source>
-        <translation type="unfinished"></translation>
+        <translation>Costa Rica</translation>
     </message>
     <message>
         <source>Cote d&apos;Ivoire</source>
-        <translation type="unfinished"></translation>
+        <translation>Ivoorkust</translation>
     </message>
     <message>
         <source>Croatia</source>
-        <translation type="unfinished"></translation>
+        <translation>Kroati√´</translation>
     </message>
     <message>
         <source>Cuba</source>
-        <translation type="unfinished"></translation>
+        <translation>Cuba</translation>
     </message>
     <message>
         <source>Cyprus</source>
@@ -647,15 +630,15 @@ is provided free !</source>
     </message>
     <message>
         <source>Czech Republic</source>
-        <translation type="unfinished"></translation>
+        <translation>Tsjechische Republiek</translation>
     </message>
     <message>
         <source>Denmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Denemarken</translation>
     </message>
     <message>
         <source>Djibouti</source>
-        <translation type="unfinished"></translation>
+        <translation>Djibouti</translation>
     </message>
     <message>
         <source>Dominica</source>
@@ -663,23 +646,23 @@ is provided free !</source>
     </message>
     <message>
         <source>Dominican Republic</source>
-        <translation type="unfinished"></translation>
+        <translation>Dominicaanse Republiek</translation>
     </message>
     <message>
         <source>East Timor</source>
-        <translation type="unfinished"></translation>
+        <translation>Oost Timor</translation>
     </message>
     <message>
         <source>Ecuador</source>
-        <translation type="unfinished"></translation>
+        <translation>Ecuador</translation>
     </message>
     <message>
         <source>Egypt</source>
-        <translation type="unfinished"></translation>
+        <translation>Egypte</translation>
     </message>
     <message>
         <source>El Salvador</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">El Salvador</translation>
     </message>
     <message>
         <source>Equatorial Guinea</source>
@@ -687,19 +670,19 @@ is provided free !</source>
     </message>
     <message>
         <source>Eritrea</source>
-        <translation type="unfinished"></translation>
+        <translation>Eritrea</translation>
     </message>
     <message>
         <source>Estonia</source>
-        <translation type="unfinished"></translation>
+        <translation>Estland</translation>
     </message>
     <message>
         <source>Ethiopia</source>
-        <translation type="unfinished"></translation>
+        <translation>Ethiopi√´</translation>
     </message>
     <message>
         <source>Falkland Islands</source>
-        <translation type="unfinished"></translation>
+        <translation>Falkland Eilanden</translation>
     </message>
     <message>
         <source>Faroe Islands</source>
@@ -707,63 +690,47 @@ is provided free !</source>
     </message>
     <message>
         <source>Fiji</source>
-        <translation type="unfinished"></translation>
+        <translation>Fiji</translation>
     </message>
     <message>
         <source>Finland</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>France</source>
-        <translation type="unfinished"></translation>
+        <translation>Finland</translation>
     </message>
     <message>
         <source>French Guiana</source>
-        <translation type="unfinished"></translation>
+        <translation>Frans Guyana</translation>
     </message>
     <message>
         <source>French Polynesia</source>
-        <translation type="unfinished"></translation>
+        <translation>Frans Polynesi√´</translation>
     </message>
     <message>
         <source>Gabon</source>
-        <translation type="unfinished"></translation>
+        <translation>Gabon</translation>
     </message>
     <message>
         <source>Gambia</source>
-        <translation type="unfinished"></translation>
+        <translation>Gambia</translation>
     </message>
     <message>
         <source>Georgia</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Germany</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ghana</source>
-        <translation type="unfinished"></translation>
+        <translation>Greorgi√´</translation>
     </message>
     <message>
         <source>Gibraltar</source>
-        <translation type="unfinished"></translation>
+        <translation>Gibraltar</translation>
     </message>
     <message>
         <source>Greece</source>
-        <translation type="unfinished"></translation>
+        <translation>Griekenland</translation>
     </message>
     <message>
         <source>Greenland</source>
-        <translation type="unfinished"></translation>
+        <translation>Groenland</translation>
     </message>
     <message>
         <source>Grenada</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Guadeloupe</source>
-        <translation type="unfinished"></translation>
+        <translation>Grenada</translation>
     </message>
     <message>
         <source>Guam</source>
@@ -771,23 +738,19 @@ is provided free !</source>
     </message>
     <message>
         <source>Guatemala</source>
-        <translation type="unfinished"></translation>
+        <translation>Guatemala</translation>
     </message>
     <message>
         <source>Guinea</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Guinea-Bissau</source>
-        <translation type="unfinished"></translation>
+        <translation>Guinee</translation>
     </message>
     <message>
         <source>Guyana</source>
-        <translation type="unfinished"></translation>
+        <translation>Guyana</translation>
     </message>
     <message>
         <source>Haiti</source>
-        <translation type="unfinished"></translation>
+        <translation>Ha√Øti</translation>
     </message>
     <message>
         <source>Holy See</source>
@@ -795,79 +758,59 @@ is provided free !</source>
     </message>
     <message>
         <source>Honduras</source>
-        <translation type="unfinished"></translation>
+        <translation>Honduras</translation>
     </message>
     <message>
         <source>Hong Kong</source>
-        <translation type="unfinished"></translation>
+        <translation>Hong Kong</translation>
     </message>
     <message>
         <source>Hungary</source>
-        <translation type="unfinished"></translation>
+        <translation>Hongarije</translation>
     </message>
     <message>
         <source>Iceland</source>
-        <translation type="unfinished"></translation>
+        <translation>IJsland</translation>
     </message>
     <message>
         <source>India</source>
-        <translation type="unfinished"></translation>
+        <translation>India</translation>
     </message>
     <message>
         <source>Indonesia</source>
-        <translation type="unfinished"></translation>
+        <translation>Indonesi√´</translation>
     </message>
     <message>
         <source>Ireland</source>
-        <translation type="unfinished"></translation>
+        <translation>Ierland</translation>
     </message>
     <message>
         <source>Israel</source>
-        <translation type="unfinished"></translation>
+        <translation>Isra√´l</translation>
     </message>
     <message>
         <source>Italy</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Jamaica</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Japan</source>
-        <translation type="unfinished"></translation>
+        <translation>Itali√´</translation>
     </message>
     <message>
         <source>Jordan</source>
-        <translation type="unfinished"></translation>
+        <translation>Jordani√´</translation>
     </message>
     <message>
         <source>Kazakhstan</source>
-        <translation type="unfinished"></translation>
+        <translation>Kazachstan</translation>
     </message>
     <message>
         <source>Kenya</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Kiribati</source>
-        <translation type="unfinished"></translation>
+        <translation>Kenia</translation>
     </message>
     <message>
         <source>Korea</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Kuwait</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Kyrgyzstan</source>
-        <translation type="unfinished"></translation>
+        <translation>Korea</translation>
     </message>
     <message>
         <source>Laos</source>
-        <translation type="unfinished"></translation>
+        <translation>Laos</translation>
     </message>
     <message>
         <source>Latvia</source>
@@ -875,7 +818,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Lebanon</source>
-        <translation type="unfinished"></translation>
+        <translation>Libanon</translation>
     </message>
     <message>
         <source>Lesotho</source>
@@ -883,27 +826,27 @@ is provided free !</source>
     </message>
     <message>
         <source>Liberia</source>
-        <translation type="unfinished"></translation>
+        <translation>Liberia</translation>
     </message>
     <message>
         <source>Liechtenstein</source>
-        <translation type="unfinished"></translation>
+        <translation>Liechtenstein</translation>
     </message>
     <message>
         <source>Lithuania</source>
-        <translation type="unfinished"></translation>
+        <translation>Litouwen</translation>
     </message>
     <message>
         <source>Luxembourg</source>
-        <translation type="unfinished"></translation>
+        <translation>Luxemburg</translation>
     </message>
     <message>
         <source>Macau</source>
-        <translation type="unfinished"></translation>
+        <translation>Macau</translation>
     </message>
     <message>
         <source>Macedonia</source>
-        <translation type="unfinished"></translation>
+        <translation>Macedoni√´</translation>
     </message>
     <message>
         <source>Madagascar</source>
@@ -1022,10 +965,6 @@ is provided free !</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Norway</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Oman</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1035,10 +974,6 @@ is provided free !</source>
     </message>
     <message>
         <source>Palau</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Palestinian Sovereign Areas</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1059,10 +994,6 @@ is provided free !</source>
     </message>
     <message>
         <source>Philippines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pitcairn Islands</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1250,10 +1181,6 @@ is provided free !</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Vietnam</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Virgin Islands</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1282,223 +1209,271 @@ is provided free !</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Delete</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Anniversary</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Gender</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Male</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Female</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Details</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter Note</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>First Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Middle Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Last Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Contacts</source>
+        <source>Kuwait</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Afghanistan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Antarctica</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Armenia</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bolivia</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cameroon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ghana</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Guadeloupe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Guinea-Bissau</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jamaica</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kiribati</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kyrgyzstan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Palestinian Sovereign Areas</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pitcairn Islands</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vietnam</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press to enter last- middle and firstname</source>
+        <translation>Druk hier om volledige naam in te vullen</translation>
+    </message>
+    <message>
+        <source>Enter fullname directly ! If you have a lastname with multiple words ( for instance &quot;de la Guerra&quot;), please write &lt;lastname&gt;,&lt;firstnames&gt; like this: &quot;de la Guerra, Carlos Pedro&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The jobtitle..</source>
+        <translation>De functienaam..</translation>
+    </message>
+    <message>
+        <source>Something like &quot;jr.&quot;..</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The working place of the contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press to select attribute to change</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press to select how to store the name (and howto show it in the listview)</source>
+        <translation>Druk hier om te selecteren hoe de naam opgeslagen(en weergegeven in de lijst) moet worden</translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
-        <source>Name Title</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>First Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Middle Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Last Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Suffix</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File As</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Job Title</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Department</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Company</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Business Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>Telefoon werk</translation>
     </message>
     <message>
         <source>Business Fax</source>
-        <translation type="unfinished"></translation>
+        <translation>Fax werk</translation>
     </message>
     <message>
         <source>Business Mobile</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mobiel werk</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard email</translation>
     </message>
     <message>
         <source>Emails</source>
-        <translation type="unfinished"></translation>
+        <translation>Emails</translation>
     </message>
     <message>
         <source>Home Phone</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Telefoon priv√©</translation>
     </message>
     <message>
         <source>Home Fax</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fax priv√©</translation>
     </message>
     <message>
         <source>Home Mobile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Business Street</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Business City</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Business State</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Business Zip</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Business Country</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Business Pager</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Business WebPage</source>
-        <translation type="unfinished"></translation>
+        <translation>Mobiel priv√©</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation type="unfinished"></translation>
+        <translation>Kantoor</translation>
     </message>
     <message>
         <source>Profession</source>
-        <translation type="unfinished"></translation>
+        <translation>Beroep</translation>
     </message>
     <message>
         <source>Assistant</source>
-        <translation type="unfinished"></translation>
+        <translation>Assistent</translation>
     </message>
     <message>
         <source>Manager</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Home Street</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Home City</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Home State</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Home Zip</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Home Country</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Home Web Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Manager</translation>
     </message>
     <message>
         <source>Spouse</source>
-        <translation type="unfinished"></translation>
+        <translation>Echtgeno(o)t(e)</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Geslacht</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Verjaardag</translation>
     </message>
     <message>
         <source>Anniversary</source>
-        <translation type="unfinished"></translation>
+        <translation>Jaardag</translation>
     </message>
     <message>
         <source>Nickname</source>
-        <translation type="unfinished"></translation>
+        <translation>Bijnaam</translation>
     </message>
     <message>
         <source>Children</source>
-        <translation type="unfinished"></translation>
+        <translation>Kinderen</translation>
+    </message>
+    <message>
+        <source>Name Title</source>
+        <translation>Titel</translation>
+    </message>
+    <message>
+        <source>First Name</source>
+        <translation>Voornaam</translation>
+    </message>
+    <message>
+        <source>Middle Name</source>
+        <translation type="unfinished">Tussenvoegsel</translation>
+    </message>
+    <message>
+        <source>Last Name</source>
+        <translation>Achternaam</translation>
+    </message>
+    <message>
+        <source>Suffix</source>
+        <translation>Achtervoegsel</translation>
+    </message>
+    <message>
+        <source>File As</source>
+        <translation>Sla op als</translation>
+    </message>
+    <message>
+        <source>Job Title</source>
+        <translation>Functie</translation>
+    </message>
+    <message>
+        <source>Department</source>
+        <translation>Afdeling</translation>
+    </message>
+    <message>
+        <source>Company</source>
+        <translation>Bedrijf</translation>
+    </message>
+    <message>
+        <source>Business Street</source>
+        <translation type="unfinished">Bedrijf adres</translation>
+    </message>
+    <message>
+        <source>Business City</source>
+        <translation>Bedrijf woonplaats</translation>
+    </message>
+    <message>
+        <source>Business State</source>
+        <translation>Bedrijf provincie</translation>
+    </message>
+    <message>
+        <source>Business Zip</source>
+        <translation>Bedrijf Postcode</translation>
+    </message>
+    <message>
+        <source>Business Country</source>
+        <translation>Bedrijf land</translation>
+    </message>
+    <message>
+        <source>Business Pager</source>
+        <translation>Bedijf pieper</translation>
+    </message>
+    <message>
+        <source>Business WebPage</source>
+        <translation>Bedrijf website</translation>
+    </message>
+    <message>
+        <source>Home Street</source>
+        <translation>Priv√© adres</translation>
+    </message>
+    <message>
+        <source>Home City</source>
+        <translation>Priv√© woonplaats</translation>
+    </message>
+    <message>
+        <source>Home State</source>
+        <translation>Priv√© provincie</translation>
+    </message>
+    <message>
+        <source>Home Zip</source>
+        <translation>Priv√© postcode</translation>
+    </message>
+    <message>
+        <source>Home Country</source>
+        <translation>Priv√© land</translation>
+    </message>
+    <message>
+        <source>Home Web Page</source>
+        <translation>Priv√© website</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notities</translation>
     </message>
 </context>
 </TS>
