@@ -356,7 +356,7 @@ RecBody IMAPwrapper::fetchBody(const RecMail&mail)
             searchBodyText(mail,body_desc->bd_data.bd_body_1part,body);
         } else if (body_desc->bd_type==MAILIMAP_BODY_MPART) {
             qDebug("Mulitpart mail");
-            searchBodyText(mail,body_desc->bd_data.bd_body_mpart,body,0);
+            searchBodyText(mail,body_desc->bd_data.bd_body_mpart,body);
         }
     } else {
         qDebug("error fetching body: %s",m_imap->imap_response);
@@ -490,27 +490,114 @@ QStringList IMAPwrapper::address_list_to_stringlist(clist*list)
     return l;
 }
 
-void IMAPwrapper::searchBodyText(const RecMail&mail,mailimap_body_type_mpart*mailDescription,RecBody&target_body,int current_recursion)
+QString IMAPwrapper::fetchPart(const RecMail&mail,QValueList<int>&path,bool internal_call)
+{
+    QString body("");
+    const char*mb;
+    int err;
+    mailimap_fetch_type *fetchType;
+    mailimap_set *set;
+    clistcell*current,*cur;
+
+    login();
+    if (!m_imap) {
+        return body;
+    }
+    if (!internal_call) {
+        mb = mail.getMbox().latin1();
+        /* select mailbox READONLY for operations */
+        err = mailimap_examine( m_imap, (char*)mb);
+        if ( err != MAILIMAP_NO_ERROR ) {
+            qDebug("error selecting mailbox: %s",m_imap->imap_response);
+            return body;
+        }
+    }
+    set = mailimap_set_new_single(mail.getNumber());
+    clist*id_list=clist_new();
+    for (unsigned j=0; j < path.count();++j) {
+        uint32_t * p_id = (uint32_t *)malloc(sizeof(*p_id));
+        *p_id = path[j];
+        clist_append(id_list,p_id);
+    }
+    mailimap_section_part * section_part =  mailimap_section_part_new(id_list);
+    mailimap_section_spec * section_spec =  mailimap_section_spec_new(MAILIMAP_SECTION_SPEC_SECTION_PART, NULL, section_part, NULL);
+    mailimap_section * section = mailimap_section_new(section_spec);
+    mailimap_fetch_att * fetch_att = mailimap_fetch_att_new_body_section(section);
+    
+    fetchType = mailimap_fetch_type_new_fetch_att(fetch_att);
+    
+    clist*result = clist_new();
+    
+    err = mailimap_fetch( m_imap, set, fetchType, &result );
+    mailimap_set_free( set );
+    mailimap_fetch_type_free( fetchType );
+    
+    if (err == MAILIMAP_NO_ERROR && (current=clist_begin(result)) ) {
+        mailimap_msg_att * msg_att;
+        msg_att = (mailimap_msg_att*)current->data;
+        mailimap_msg_att_item*msg_att_item;
+        for(cur = clist_begin(msg_att->att_list) ; cur != NULL ; cur = clist_next(cur)) {
+            msg_att_item = (mailimap_msg_att_item*)clist_content(cur);
+            if (msg_att_item->att_type == MAILIMAP_MSG_ATT_ITEM_STATIC) {
+                if (msg_att_item->att_data.att_static->att_type == MAILIMAP_MSG_ATT_BODY_SECTION) {
+                    char*text = msg_att_item->att_data.att_static->att_data.att_body_section->sec_body_part;
+                    msg_att_item->att_data.att_static->att_data.att_body_section->sec_body_part = 0L;
+                    if (text) {
+                        body = QString(text);
+                        free(text);
+                    } else {
+                        body = "";
+                    }
+                }
+            }
+        }
+         
+    } else {
+        qDebug("error fetching text: %s",m_imap->imap_response);
+    }
+    mailimap_fetch_list_free(result);
+    return body;
+}
+
+void IMAPwrapper::searchBodyText(const RecMail&mail,mailimap_body_type_mpart*mailDescription,RecBody&target_body,int current_recursion,QValueList<int>recList)
 {
     /* current_recursion is for avoiding ugly mails which has a to deep body-structure */
-    if (!mailDescription||current_recursion==2) {
+    if (!mailDescription||current_recursion==10) {
         return;
     }
-    qDebug("Mediatype: %s",mailDescription->bd_media_subtype);
     clistcell*current;
     mailimap_body*current_body;
+    unsigned int count = 0;
     for (current=clist_begin(mailDescription->bd_list);current!=0;current=clist_next(current)) {
+        /* the point in the message */
+        ++count;
         current_body = (mailimap_body*)current->data;
         if (current_body->bd_type==MAILIMAP_BODY_MPART) {
-            searchBodyText(mail,current_body->bd_data.bd_body_mpart,target_body,current_recursion+1);
+            QValueList<int>clist = recList;
+            clist.append(count);
+            searchBodyText(mail,current_body->bd_data.bd_body_mpart,target_body,current_recursion+1,clist);
         } else if (current_body->bd_type==MAILIMAP_BODY_1PART){
             RecPart currentPart;
             fillSinglePart(currentPart,current_body->bd_data.bd_body_1part);
-            target_body.addPart(currentPart);
+            QValueList<int>clist = recList;    
+            clist.append(count);
+            /* important: Check for is NULL 'cause a body can be empty! */
+            if (currentPart.Type()=="text" && target_body.Bodytext().isNull() ) {
+                QString body_text = fetchPart(mail,clist,true);
+                target_body.setBodytext(body_text);
+                target_body.setType(currentPart.Type());
+                target_body.setSubtype(currentPart.Subtype());
+            } else {
+                QString id("");
+                for (unsigned int j = 0; j < clist.count();++j) {
+                    id+=(j>0?".":"");
+                    id+=QString("%1").arg(clist[j]);
+                }
+                qDebug("ID= %s",id.latin1());
+                currentPart.setIdentifier(id);
+                target_body.addPart(currentPart);
+            }
         }
-    }
-    if (current_recursion==0) {
-        
     }
 }
 
@@ -589,14 +676,6 @@ void IMAPwrapper::fillSingleBasicPart(RecPart&target_part,mailimap_body_type_bas
 void IMAPwrapper::fillBodyFields(RecPart&target_part,mailimap_body_fields*which)
 {
     if (!which) return;
-    if (which->bd_id) {
-        qDebug("Part ID = %s",which->bd_id);
-        target_part.setIdentifier(which->bd_id);
-    } else {
-        qDebug("ID empty");
-        target_part.setIdentifier("");
-    }
-
     clistcell*cur;
     mailimap_single_body_fld_param*param;
     for (cur = clist_begin(which->bd_parameter->pa_list);cur!=NULL;cur=clist_next(cur)) {
