@@ -1891,7 +1891,7 @@ bool SIMpad::suspend ( ) // Must override because SIMpad does NOT have apm
 	::gettimeofday ( &tvs, 0 );
 
 	::sync ( ); // flush fs caches
-	res = ( ::system ( "echo > /proc/sys/pm/suspend" ) == 0 ); //TODO make better :)
+	res = ( ::system ( "cat /dev/fb/0 >/tmp/.buffer; echo > /proc/sys/pm/suspend; cat /tmp/.buffer >/dev/fb/0" ) == 0 ); //TODO make better :)
 
 	return res;
 }
@@ -1913,10 +1913,8 @@ bool SIMpad::setDisplayStatus ( bool on )
 
 	QString cmdline = QString().sprintf( "echo %s > /proc/cs3", on ? "0xd41a" : "0xd40a" ); //TODO make better :)
 
-	if (( fd = ::open ( "/dev/fb0", O_RDWR )) >= 0 ) {
-		res = ( ::system( (const char*) cmdline ) == 0 );
-		::close ( fd );
-	}
+	res = ( ::system( (const char*) cmdline ) == 0 );
+
 	return res;
 }
 
@@ -1929,8 +1927,8 @@ bool SIMpad::setDisplayBrightness ( int bright )
 
 	if ( bright > 255 )
 		bright = 255;
-	if ( bright < 0 )
-		bright = 0;
+	if ( bright < 1 )
+		return setDisplayStatus( false );
 
 	if (( fd = ::open ( SIMPAD_BACKLIGHT_CONTROL, O_WRONLY )) >= 0 ) {
 		int value = 255 - bright;
@@ -1948,16 +1946,7 @@ bool SIMpad::setDisplayBrightness ( int bright )
 
 int SIMpad::displayBrightnessResolution ( ) const
 {
-	switch ( model ( )) {
-		case Model_SIMpad_CL4:
-		case Model_SIMpad_SL4:
-		case Model_SIMpad_SLC:
-		case Model_SIMpad_TSinus:
-			return 255; //TODO find out if this is save
-
-		default:
-			return 2;
-	}
+	return 255; // All SIMpad models share the same display
 }
 
 /**************************************************
