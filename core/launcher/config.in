@@ -1,4 +1,7 @@
   config LAUNCHER
-    boolean "opie-taskbar (program launcher qpe for Opie)"
+    boolean "Opie-taskbar (program launcher qpe for Opie) "
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI && LIBOPIE2SECURITY && LIBQRSYNC
+    comment "Launcher needs a libqpe, libopie2core, libopiei2ui, libiopie2security and libqrsync"
+    depends !(( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI && LIBOPIE2SECURITY && LIBQRSYNC)
+
