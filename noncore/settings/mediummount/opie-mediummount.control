@@ -1,0 +1,10 @@
+Files: bin/mediummount apps/Settings/mediummount.desktop pics/mediummount/*
+Priority: optional
+Section: opie/settings
+Maintainer: Holger Freyther <zecke@handhelds.org>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION.1
+Depends: opie-base ($QPE_VERSION)
+License: GPL
+Description: Configure app for the medium mounter
+ Configure app for the medium mounter
