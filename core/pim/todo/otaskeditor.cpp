@@ -64,7 +64,7 @@ void OTaskEditor::init() {
     m_tab->addTab( m_overView, "todo/info", tr("Information") );
 
     m_stat = new TaskEditorStatus( m_tab );
-    m_tab->addTab( m_stat, "TodoList", tr("Status") );
+    m_tab->addTab( m_stat, "todo/TodoList", tr("Status") );
 
     m_alarm = new TaskEditorAlarms( m_tab );
     m_tab->addTab( m_alarm, "todo/alarm", tr("Alarms") );
