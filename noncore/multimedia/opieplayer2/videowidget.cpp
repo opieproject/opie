@@ -327,11 +327,11 @@ void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
                 switch(i) {
 
                 case VideoPlay: {
-                    if( mediaPlayerState->isPaused ) {
+                    if( mediaPlayerState->paused() ) {
                         setToggleButton( i, FALSE );
                         mediaPlayerState->setPaused( FALSE );
                         return;
-                    } else if( !mediaPlayerState->isPaused ) {
+                    } else if( !mediaPlayerState->paused() ) {
                         setToggleButton( i, TRUE );
                         mediaPlayerState->setPaused( TRUE );
                         return;

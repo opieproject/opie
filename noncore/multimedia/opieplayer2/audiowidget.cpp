@@ -431,10 +431,10 @@ void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
                 qDebug("mouseEvent %d", i);
                 switch (i) {
                 case AudioPlay:
-                    if( mediaPlayerState->isPaused ) {
+                    if( mediaPlayerState->paused() ) {
                         mediaPlayerState->setPaused( FALSE );
                         return;
-                    } else if( !mediaPlayerState->isPaused ) {
+                    } else if( !mediaPlayerState->paused() ) {
                         mediaPlayerState->setPaused( TRUE );
                         return;
                     }

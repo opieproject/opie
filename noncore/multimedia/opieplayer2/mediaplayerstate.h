@@ -50,9 +50,6 @@ public:
     MediaPlayerState( QObject *parent, const char *name );
     ~MediaPlayerState();
 
-    bool isPaused;
-    bool isPlaying;
-    bool isStoped;
     bool streaming();
     bool seekable();
     bool fullscreen();
@@ -130,6 +127,9 @@ private:
     bool isLooping;
     bool isShuffled;
     bool usePlaylist;
+    bool isPaused;
+    bool isPlaying;
+    bool isStoped;
     long curPosition;
     long curLength;
     char curView;
