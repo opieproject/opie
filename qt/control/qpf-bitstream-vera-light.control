@@ -1,11 +1,10 @@
-Package: qpf-bitstream-vera-light
+Package: qpf-bitstream-vera-small
 Files: $QTDIR/lib/fonts/vera_{80,100,120}_{50,50i,75,75i}*
 Version: 1.10-4
 Priority: optional
 Section: base
 Depends: qte-fonts-common
 Provides: qpf-bitstream-vera
-Replaces: qpf-bitstream-vera-full
 Maintainer: Chris Larson <kergoth@handhelds.org>
 Architecture: all
 Description: Bitstream Vera Fonts - small sizes - QPF format
