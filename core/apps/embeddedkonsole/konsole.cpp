@@ -12,11 +12,11 @@
 /* kvt, which is copyright (c) 1996 by Matthias Ettrich <ettrich@kde.org> */
 /*                                                                        */
 /* ---------------------------------------------------------------------- */
-/*									      */
+/*                        */
 /* Ported Konsole to Qt/Embedded                                              */
-/*									      */
+/*                        */
 /* Copyright (C) 2000 by John Ryland <jryland@trolltech.com>                  */
-/*									      */
+/*                        */
 /* -------------------------------------------------------------------------- */
 
 #include <qpe/resource.h>
@@ -41,6 +41,8 @@
 #include <qtabwidget.h>
 #include <qtabbar.h>
 #include <qpe/config.h>
+#include <qstringlist.h>
+#include <qpalette.h>
 
 #include <sys/wait.h>
 #include <stdio.h>
@@ -54,25 +56,25 @@ class EKNumTabBar : public QTabBar {
 public:
     void numberTabs()
     {
-	// Yes, it really is this messy. QTabWidget needs functions
-	// that provide acces to tabs in a sequential way.
-	int m=INT_MIN;
-	for (int i=0; i<count(); i++) {
-	    QTab* left=0;
-	    QListIterator<QTab> it(*tabList());
-	    int x=INT_MAX;
-	    for( QTab* t; (t=it.current()); ++it ) {
-		int tx = t->rect().x();
-		if ( tx<x && tx>m ) {
-		    x = tx;
-		    left = t;
-		}
-	    }
-	    if ( left ) {
-		left->setText(QString::number(i+1));
-		m = left->rect().x();
-	    }
-	}
+  // Yes, it really is this messy. QTabWidget needs functions
+  // that provide acces to tabs in a sequential way.
+  int m=INT_MIN;
+  for (int i=0; i<count(); i++) {
+      QTab* left=0;
+      QListIterator<QTab> it(*tabList());
+      int x=INT_MAX;
+      for( QTab* t; (t=it.current()); ++it ) {
+    int tx = t->rect().x();
+    if ( tx<x && tx>m ) {
+        x = tx;
+        left = t;
+    }
+      }
+      if ( left ) {
+    left->setText(QString::number(i+1));
+    m = left->rect().x();
+      }
+  }
     }
 };
 
@@ -84,14 +86,14 @@ public:
 
     void addTab(QWidget* w)
     {
-	QTab* t = new QTab(QString::number(tabBar()->count()+1));
-	QTabWidget::addTab(w,t);
+  QTab* t = new QTab(QString::number(tabBar()->count()+1));
+  QTabWidget::addTab(w,t);
     }
 
     void removeTab(QWidget* w)
     {
-	removePage(w);
-	((EKNumTabBar*)tabBar())->numberTabs();
+  removePage(w);
+  ((EKNumTabBar*)tabBar())->numberTabs();
     }
 };
 
@@ -99,39 +101,34 @@ public:
 // file of the user
 static const char *commonCmds[] =
 {
-    "ls ",
-    //"ls -la ",
+    "ls ", // I left this here, cause it looks better than the first alpha
+    "cardctl eject",
+    "cat ",
     "cd ",
-    "pwd",
-    //"cat",
-    //"less ",
-    //"vi ",
-    //"man ",
-    "echo ",
-    "set ",
-    //"ps",
-    "ps aux",
-    //"tar",
-    //"tar -zxf",
-    "grep ",
-    //"grep -i",
-    //"mkdir",
+    "chmod ",
     "cp ",
+    "dc ",
+    "df ",
+    "dmesg",
+    "echo ",
+    "find ",
+    "free",
+    "grep ",
+    "ifconfig ",
+    "ipkg ",
+    "mkdir ",
     "mv ",
+    "nc localhost 7776",
+    "nc localhost 7777",
+    "nslookup ",
+    "ping ",
+    "ps aux",
+    "pwd ",
     "rm ",
     "rmdir ",
-    //"chmod",
-    //"su",
-//    "top",
-    //"find",
-    //"make",
-    //"tail",
-    "cardctl eject",
-    "ifconfig ",
-//    "iwconfig eth0 ",
-    "nc localhost 7777",
-    "nc localhost 7776",
-    //"mount /dev/hda1",
+    "route ",
+    "set ",
+    "traceroute",
 
 /*
     "gzip",
@@ -186,7 +183,7 @@ void Konsole::init(const char* _pgm, QStrList & _args)
 
   Config cfg("Konsole");
   cfg.setGroup("Konsole");
-
+  QString tmp;
   // initialize the list of allowed fonts ///////////////////////////////////
   cfont = cfg.readNumEntry("FontID", 1);
   QFont f = QFont("Micro", 4, QFont::Normal);
@@ -203,11 +200,12 @@ void Konsole::init(const char* _pgm, QStrList & _args)
 
   // create terminal emulation framework ////////////////////////////////////
   nsessions = 0;
+
   tab = new EKNumTabWidget(this);
-  tab->setTabPosition(QTabWidget::Bottom);
+
   connect(tab, SIGNAL(currentChanged(QWidget*)), this, SLOT(switchSession(QWidget*)));
 
-  // create terminal toolbar ////////////////////////////////////////////////
+     // create terminal toolbar ////////////////////////////////////////////////
   setToolBarsMovable( FALSE );
   QPEToolBar *menuToolBar = new QPEToolBar( this );
   menuToolBar->setHorizontalStretchable( TRUE );
@@ -221,9 +219,50 @@ void Konsole::init(const char* _pgm, QStrList & _args)
   }
   fontChanged(cfont);
 
+  configMenu = new QPopupMenu( this);
+  colorMenu = new QPopupMenu( this);
+
+  bool listHidden;
+  cfg.setGroup("Menubar");
+  if( cfg.readEntry("Hidden","FALSE") == "TRUE")  {
+      configMenu->insertItem("Show command list");
+      listHidden=TRUE;
+  } else {
+      configMenu->insertItem("Hide command list");
+      listHidden=FALSE;
+  }
+
+  cfg.setGroup("Tabs");
+  tmp=cfg.readEntry("Position","Bottom");
+  if(tmp=="Top") {
+      tab->setTabPosition(QTabWidget::Top);
+      configMenu->insertItem("Tabs on Bottom");
+  } else {
+      tab->setTabPosition(QTabWidget::Bottom);
+      configMenu->insertItem("Tabs on Top");
+  }
+  configMenu->insertSeparator(2);
+
+  colorMenu->insertItem("Green on Black");
+  colorMenu->insertItem("Black on White");
+  colorMenu->insertItem("White on Black");
+  colorMenu->insertItem("Black on Transparent");
+  colorMenu->insertItem("Black on Red");
+  colorMenu->insertItem("Red on Black");
+  colorMenu->insertItem("Green on Yellow");
+  colorMenu->insertItem("Blue on Magenta");
+  colorMenu->insertItem("Magenta on Blue");
+  colorMenu->insertItem("Cyan on White");
+  colorMenu->insertItem("White on Cyan");
+  colorMenu->insertItem("Blue on Black");
+  configMenu->insertItem("Colors",colorMenu);
+
   connect( fontList, SIGNAL( activated(int) ), this, SLOT( fontChanged(int) ));
+  connect( configMenu, SIGNAL( activated(int) ), this, SLOT( configMenuSelected(int) ));
+  connect( colorMenu, SIGNAL( activated(int) ), this, SLOT( colorMenuSelected(int) ));
 
   menuBar->insertItem( tr("Font"), fontList );
+  menuBar->insertItem( tr("Options"), configMenu );
 
   QPEToolBar *toolbar = new QPEToolBar( this );
 
@@ -250,17 +289,29 @@ void Konsole::init(const char* _pgm, QStrList & _args)
   a = new QAction( tr("Down"), Resource::loadPixmap( "down" ), QString::null, 0, this, 0 );
   connect( a, SIGNAL( activated() ), this, SLOT( hitDown() ) ); a->addTo( toolbar );
 */
-  
-  QPEToolBar *secondToolBar = new QPEToolBar( this );
+
+  secondToolBar = new QPEToolBar( this );
   secondToolBar->setHorizontalStretchable( TRUE );
 
-  QComboBox *commonCombo = new QComboBox( secondToolBar );
-//  commonCombo->setEditable( TRUE );
-  for (int i = 0; commonCmds[i] != NULL; i++)
-    commonCombo->insertItem( commonCmds[i], i );
+  commonCombo = new QComboBox( secondToolBar );
+
+  if( listHidden) 
+      secondToolBar->hide();
+  configMenu->insertItem( "Edit Command List");
+
+  cfg.setGroup("Commands");
+  commonCombo->setInsertionPolicy(QComboBox::AtCurrent);
+
+  for (int i = 0; commonCmds[i] != NULL; i++) {
+      commonCombo->insertItem( commonCmds[i], i );
+      tmp = cfg.readEntry( QString::number(i),"");
+      if(tmp != "")
+          commonCombo->changeItem( tmp,i );
+  }
+
   connect( commonCombo, SIGNAL( activated(int) ), this, SLOT( enterCommand(int) ));
 
-  // create applications /////////////////////////////////////////////////////
+      // create applications /////////////////////////////////////////////////////
   setCentralWidget(tab);
 
   // load keymaps ////////////////////////////////////////////////////////////
@@ -278,6 +329,7 @@ void Konsole::init(const char* _pgm, QStrList & _args)
   QSize currentSize = size();
   if (currentSize != size())
      defaultSize = size();
+
 }
 
 void Konsole::show()
@@ -296,7 +348,7 @@ void Konsole::initSession(const char*, QStrList &)
 Konsole::~Konsole()
 {
     while (nsessions > 0) {
-	    doneSession(getTe()->currentSession, 0);
+      doneSession(getTe()->currentSession, 0);
     }
 
   Config cfg("Konsole");
@@ -309,24 +361,29 @@ void Konsole::fontChanged(int f)
     VTFont* font = fonts.at(f);
     if (font != 0) {
         for(uint i = 0; i < fonts.count(); i++) {
-	    fontList->setItemChecked(i, (i == (uint) f) ? TRUE : FALSE);
-    }
+            fontList->setItemChecked(i, (i == (uint) f) ? TRUE : FALSE);
+        }
 
-	cfont = f;
+        cfont = f;
 
         TEWidget* te = getTe();
-	if (te != 0) {
-	    te->setVTFont(font->getFont());
-	}
+        if (te != 0) {
+            te->setVTFont(font->getFont());
+        }
     }
 }
+
 
 void Konsole::enterCommand(int c)
 {
     TEWidget* te = getTe();
     if (te != 0) {
-    QString text = commonCmds[c];
-    te->emitText(text);
+        if(!commonCombo->editable()) {
+            QString text = commonCombo->text(c); //commonCmds[c];
+            te->emitText(text);
+        } else {
+            changeCommand( commonCombo->text(c), c);            
+        }
     }
 }
 
@@ -390,8 +447,8 @@ QSize Konsole::calcSize(int columns, int lines) {
     QSize size = te->calcSize(columns, lines);
     return size;
     } else {
-	QSize size;
-	return size;
+  QSize size;
+  return size;
     }
 }
 
@@ -467,26 +524,28 @@ void Konsole::doneSession(TESession*, int )
     delete te;
     nsessions--;
   }
-  
+
   if (nsessions == 0) {
   close();
   }
 }
 
-
 void Konsole::newSession() {
-  TEWidget* te = new TEWidget(tab);
-  te->setBackgroundMode(PaletteBase);
-  te->setVTFont(fonts.at(cfont)->getFont());
-  tab->addTab(te);
-  TESession* se = new TESession(this, te, se_pgm, se_args, "xterm");
-  te->currentSession = se;
-  connect( se, SIGNAL(done(TESession*,int)), this, SLOT(doneSession(TESession*,int)) );
-  se->run();
-  se->setConnect(TRUE);
-  se->setHistory(b_scroll);
-  tab->setCurrentPage(nsessions);
-  nsessions++;
+    if(nsessions < 15) {    // seems to be something weird about 16 tabs on the Zaurus.... memory?
+        TEWidget* te = new TEWidget(tab);
+//  te->setBackgroundMode(PaletteBase); //we want transparent!!
+    te->setVTFont(fonts.at(cfont)->getFont());
+    tab->addTab(te);
+    TESession* se = new TESession(this, te, se_pgm, se_args, "xterm");
+    te->currentSession = se;
+    connect( se, SIGNAL(done(TESession*,int)), this, SLOT(doneSession(TESession*,int)) );
+    se->run();
+    se->setConnect(TRUE);
+    se->setHistory(b_scroll);
+    tab->setCurrentPage(nsessions);
+    nsessions++;
+    setColor();
+    }
 }
 
 TEWidget* Konsole::getTe() {
@@ -495,8 +554,8 @@ TEWidget* Konsole::getTe() {
   } else {
     return 0;
   }
- }
- 
+}
+
 void Konsole::switchSession(QWidget* w) {
   TEWidget* te = (TEWidget *) w;
 
@@ -509,4 +568,195 @@ void Konsole::switchSession(QWidget* w) {
       cfont = i;
     }
   }
+}
+
+/// -------------------------------   some new stuff by L.J. Potter
+void Konsole::colorMenuSelected(int iD)
+{ // this is NOT pretty, elegant or anything else besides functional
+//        QString temp;
+//        temp.sprintf("%d", iD);
+//      qDebug(temp);
+    TEWidget* te = getTe();
+    Config cfg("Konsole");
+    cfg.setGroup("Colors");
+    QColor foreground;
+    QColor background;
+    colorMenu->setItemChecked(lastSelectedMenu,FALSE);
+    ColorEntry m_table[TABLE_COLORS];
+    const ColorEntry * defaultCt=te->getdefaultColorTable();
+      /////////// fore back
+    int i;
+    if(iD==-8) { // default default
+        for (i = 0; i < TABLE_COLORS; i++)  {
+            m_table[i].color = defaultCt[i].color;
+            if(i==1 || i == 11)
+                m_table[i].transparent=1;
+            cfg.writeEntry("Schema","8");
+            colorMenu->setItemChecked(-8,TRUE);
+        }
+    } else {
+        if(iD==-5) { // green black
+            foreground.setRgb(0x18,255,0x18);
+            background.setRgb(0x00,0x00,0x00);
+            cfg.writeEntry("Schema","5");
+            colorMenu->setItemChecked(-5,TRUE);
+        }
+        if(iD==-6) { // black white
+            foreground.setRgb(0x00,0x00,0x00);
+            background.setRgb(0xFF,0xFF,0xFF);
+            cfg.writeEntry("Schema","6");
+            colorMenu->setItemChecked(-6,TRUE);
+        }
+        if(iD==-7) { // white black
+            foreground.setRgb(0xFF,0xFF,0xFF);
+            background.setRgb(0x00,0x00,0x00);
+            cfg.writeEntry("Schema","7");
+            colorMenu->setItemChecked(-7,TRUE);
+        }
+        if(iD==-9) {// Black, Red
+            foreground.setRgb(0x00,0x00,0x00);
+            background.setRgb(0xB2,0x18,0x18);
+            cfg.writeEntry("Schema","9");
+            colorMenu->setItemChecked(-9,TRUE);
+        }
+        if(iD==-10) {// Red, Black
+            foreground.setRgb(230,31,31); //0xB2,0x18,0x18
+            background.setRgb(0x00,0x00,0x00);
+            cfg.writeEntry("Schema","10");
+            colorMenu->setItemChecked(-10,TRUE);
+        }
+        if(iD==-11) {// Green, Yellow - is ugly
+//            foreground.setRgb(0x18,0xB2,0x18);
+            foreground.setRgb(36,139,10);
+//            background.setRgb(0xB2,0x68,0x18);
+            background.setRgb(255,255,0);
+            cfg.writeEntry("Schema","11");
+            colorMenu->setItemChecked(-11,TRUE);
+        }
+        if(iD==-12) {// Blue,  Magenta
+            foreground.setRgb(0x18,0xB2,0xB2);
+            background.setRgb(0x18,0x18,0xB2);
+            cfg.writeEntry("Schema","12");
+            colorMenu->setItemChecked(-12,TRUE);
+        }
+        if(iD==-13) {// Magenta, Blue
+            foreground.setRgb(0x18,0x18,0xB2);
+            background.setRgb(0x18,0xB2,0xB2);
+            cfg.writeEntry("Schema","13");
+            colorMenu->setItemChecked(-13,TRUE);
+        }
+        if(iD==-14) {// Cyan,  White
+            foreground.setRgb(0x18,0xB2,0xB2);
+            background.setRgb(0xFF,0xFF,0xFF);
+            cfg.writeEntry("Schema","14");
+            colorMenu->setItemChecked(-14,TRUE);
+        }
+        if(iD==-15) {// White, Cyan
+            background.setRgb(0x18,0xB2,0xB2);
+            foreground.setRgb(0xFF,0xFF,0xFF);
+            cfg.writeEntry("Schema","15");
+            colorMenu->setItemChecked(-15,TRUE);
+        }
+        if(iD==-16) {// Black, Blue
+            background.setRgb(0x00,0x00,0x00);
+            foreground.setRgb(0x18,0xB2,0xB2);
+            cfg.writeEntry("Schema","16");
+            colorMenu->setItemChecked(-16,TRUE);
+        }
+
+        for (i = 0; i < TABLE_COLORS; i++)  {
+            if(i==0 || i == 10) {
+                m_table[i].color = foreground;
+            }
+            else if(i==1 || i == 11) {
+                m_table[i].color = background; m_table[i].transparent=0;
+            }
+            else
+                m_table[i].color = defaultCt[i].color;
+        }
+    }
+    lastSelectedMenu = iD;
+    te->setColorTable(m_table);
+//    update();
+}
+
+void Konsole::configMenuSelected(int iD)
+{
+//      QString temp;
+//      temp.sprintf("%d",iD);
+//      qDebug(temp);
+    TEWidget* te = getTe();
+    Config cfg("Konsole");
+    cfg.setGroup("Menubar");
+    if( iD  == -2) {
+        if(!secondToolBar->isHidden()) {
+            secondToolBar->hide();
+            configMenu->changeItem( iD,"Show Command List");
+            cfg.writeEntry("Hidden","TRUE");
+            configMenu->setItemEnabled(-20 ,FALSE);
+        } else {
+            secondToolBar->show();
+            configMenu->changeItem( iD,"Hide Command List");
+            cfg.writeEntry("Hidden","FALSE");
+            configMenu->setItemEnabled(-20 ,TRUE);
+
+            if(cfg.readEntry("EditEnabled","FALSE")=="TRUE") {
+                configMenu->setItemChecked(-16,TRUE);
+                commonCombo->setEditable( TRUE );
+            } else {
+                configMenu->setItemChecked(-20,FALSE);
+                commonCombo->setEditable( FALSE );
+            }
+        }
+    }
+    if( iD  == -3) {
+        cfg.setGroup("Tabs");
+        QString tmp=cfg.readEntry("Position","Top");
+
+        if(tmp=="Top") {
+            tab->setTabPosition(QTabWidget::Bottom);
+            configMenu->changeItem( iD,"Tabs on Top");
+            cfg.writeEntry("Position","Bottom");
+        } else {
+            tab->setTabPosition(QTabWidget::Top);
+            configMenu->changeItem( iD,"Tabs on Bottom");
+            cfg.writeEntry("Position","Top");
+        }
+    }
+    if( iD  == -20) {
+        cfg.setGroup("Commands");
+//        qDebug("enableCommandEdit");
+        if( !configMenu->isItemChecked(iD) ) {
+            commonCombo->setEditable( TRUE );
+            configMenu->setItemChecked(iD,TRUE);
+            commonCombo->setCurrentItem(0);
+            cfg.writeEntry("EditEnabled","TRUE");
+        } else {
+            commonCombo->setEditable( FALSE );
+            configMenu->setItemChecked(iD,FALSE);
+            cfg.writeEntry("EditEnabled","FALSE");
+            commonCombo->setFocusPolicy(QWidget::NoFocus);
+            te->setFocus();
+        }
+    }
+}
+
+void Konsole::changeCommand(const QString &text, int c)
+{
+    Config cfg("Konsole");
+    cfg.setGroup("Commands");
+    if(commonCmds[c] != text) {
+        cfg.writeEntry(QString::number(c),text);
+        commonCombo->clearEdit();
+        commonCombo->setCurrentItem(c);        
+    }
+}
+
+void Konsole::setColor()
+{
+    Config cfg("Konsole");
+    cfg.setGroup("Colors");
+    int scheme = cfg.readNumEntry("Schema",1); 
+    if(scheme != 1) colorMenuSelected( -scheme); 
+
 }

@@ -9,13 +9,12 @@
 /* This file is part of Konsole - an X terminal for KDE                    */
 /*                                                                         */
 /* ----------------------------------------------------------------------- */
-/*									      */
+/*                        */
 /* Ported Konsole to Qt/Embedded                                              */
-/*									      */
+/*                        */
 /* Copyright (C) 2000 by John Ryland <jryland@trolltech.com>                  */
-/*									      */
+/*                        */
 /* -------------------------------------------------------------------------- */
-
 #ifndef TE_WIDGET_H
 #define TE_WIDGET_H
 
@@ -52,6 +51,7 @@ public:
     QColor getDefaultBackColor();
 
     const ColorEntry* getColorTable() const;
+    const ColorEntry* getdefaultColorTable() const;
     void              setColorTable(const ColorEntry table[]);
 
     void setScrollbarLocation(int loc);
