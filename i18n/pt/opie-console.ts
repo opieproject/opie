@@ -15,43 +15,43 @@
     </message>
     <message>
         <source>Init string </source>
-        <translation type="unfinished"></translation>
+        <translation>String de Inicialização</translation>
     </message>
     <message>
         <source>Reset string </source>
-        <translation type="unfinished"></translation>
+        <translation>Limpar String</translation>
     </message>
     <message>
         <source>Dialing prefix #1 </source>
-        <translation type="unfinished"></translation>
+        <translation>Prefixo de ligação #1</translation>
     </message>
     <message>
         <source>Dialing suffix #1 </source>
-        <translation type="unfinished"></translation>
+        <translation>Sufixo de ligação #1</translation>
     </message>
     <message>
         <source>Dialing prefix #2 </source>
-        <translation type="unfinished"></translation>
+        <translation>Prefixo de ligação #2</translation>
     </message>
     <message>
         <source>Dialing suffix #2 </source>
-        <translation type="unfinished"></translation>
+        <translation>Sufixo de ligação #2</translation>
     </message>
     <message>
         <source>Dialing prefix #3 </source>
-        <translation type="unfinished"></translation>
+        <translation>Prefixo de ligação #3</translation>
     </message>
     <message>
         <source>Dialing suffix #3 </source>
-        <translation type="unfinished"></translation>
+        <translation>Sufixo de ligação #3</translation>
     </message>
     <message>
         <source>Connect string </source>
-        <translation type="unfinished"></translation>
+        <translation>String de ligação</translation>
     </message>
     <message>
         <source>Hang-up string </source>
-        <translation type="unfinished"></translation>
+        <translation>String para desligar</translation>
     </message>
     <message>
         <source>Dial time </source>
@@ -63,7 +63,7 @@
     </message>
     <message>
         <source>Number of tries </source>
-        <translation type="unfinished"></translation>
+        <translation>Número de tentativas</translation>
     </message>
     <message>
         <source>DTR drop time (0=no) </source>
@@ -71,7 +71,7 @@
     </message>
     <message>
         <source>Auto bps detect </source>
-        <translation type="unfinished"></translation>
+        <translation>Deteção automática de velocidade</translation>
     </message>
     <message>
         <source>No</source>
@@ -105,11 +105,11 @@
     <name>ConfigDialog</name>
     <message>
         <source>Edit Connection Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar perfil de Ligação</translation>
     </message>
     <message>
         <source>New Connection</source>
-        <translation type="unfinished">Nova Ligação</translation>
+        <translation>Nova Ligação</translation>
     </message>
 </context>
 <context>
@@ -120,7 +120,7 @@
     </message>
     <message>
         <source>Profile Name</source>
-        <translation type="unfinished">Nome do </translation>
+        <translation>Nome do Perfil</translation>
     </message>
     <message>
         <source>&amp;Add</source>
@@ -139,11 +139,11 @@
     <name>ConsoleConfigWidget</name>
     <message>
         <source>Command to execute</source>
-        <translation type="unfinished"></translation>
+        <translation>Comando a executar</translation>
     </message>
     <message>
         <source>Environment Variables</source>
-        <translation type="unfinished"></translation>
+        <translation>Variáveis de Ambiente</translation>
     </message>
     <message>
         <source>Name</source>
@@ -174,11 +174,11 @@
     <name>DialDialog</name>
     <message>
         <source>Enter number</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduza o número</translation>
     </message>
     <message>
         <source>Enter the number you want to dial. When finished, press ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduza o número a marcar. No fim, escolha Ok</translation>
     </message>
 </context>
 <context>
@@ -189,7 +189,7 @@
     </message>
     <message>
         <source>Terminal Emulation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Emulação de Terminal:</translation>
     </message>
     <message>
         <source>IO Layer:</source>
@@ -225,7 +225,7 @@
     </message>
     <message>
         <source>Micro</source>
-        <translation type="unfinished">Micro</translation>
+        <translation>Micro</translation>
     </message>
     <message>
         <source>Small</source>
@@ -240,7 +240,7 @@
     <name>FileReceive</name>
     <message>
         <source>Could not start</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nã</translation>
     </message>
 </context>
 <context>
@@ -418,7 +418,7 @@
     </message>
     <message>
         <source>Full screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Ecrâ Todo</translation>
     </message>
     <message>
         <source>Save history</source>
@@ -493,11 +493,11 @@
     </message>
     <message>
         <source>AT commands</source>
-        <translation type="unfinished"></translation>
+        <translation>Comandos AT</translation>
     </message>
     <message>
         <source>Enter number</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduza número</translation>
     </message>
 </context>
 <context>
@@ -527,14 +527,14 @@
     </message>
     <message>
         <source>New Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Novo Perfil</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Opie Console</source>
-        <translation type="unfinished"></translation>
+        <translation>Consola Opie </translation>
     </message>
     <message>
         <source>Failed</source>
@@ -554,7 +554,7 @@
     </message>
     <message>
         <source>Transfer mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Modo de transferência</translation>
     </message>
     <message>
         <source>Send</source>
@@ -626,7 +626,7 @@
     </message>
     <message>
         <source>Operation not supported.</source>
-        <translation type="unfinished"></translation>
+        <translation>Operação não suportada.</translation>
     </message>
     <message>
         <source>Transfer could not be started.</source>

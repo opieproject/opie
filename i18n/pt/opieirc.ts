@@ -3,7 +3,7 @@
     <name>IRCChannelTab</name>
     <message>
         <source>Talking on channel</source>
-        <translation type="unfinished"></translation>
+        <translation>A falar no canal</translation>
     </message>
     <message>
         <source>Channel discussion</source>
@@ -15,46 +15,46 @@
     </message>
     <message>
         <source>CTCP</source>
-        <translation type="unfinished"></translation>
+        <translation>CTCP</translation>
     </message>
     <message>
         <source>Query</source>
-        <translation type="unfinished"></translation>
+        <translation>Query</translation>
     </message>
     <message>
         <source>Ping</source>
-        <translation type="unfinished"></translation>
+        <translation>Ping</translation>
     </message>
     <message>
         <source>Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Versão</translation>
     </message>
     <message>
         <source>Whois</source>
-        <translation type="unfinished"></translation>
+        <translation>Whois</translation>
     </message>
     <message>
         <source>Disconnected</source>
-        <translation type="unfinished"></translation>
+        <translation>Desligado</translation>
     </message>
 </context>
 <context>
     <name>IRCConnection</name>
     <message>
         <source>Connected, logging in ..</source>
-        <translation type="unfinished"></translation>
+        <translation>Ligado, a autenticar..</translation>
     </message>
     <message>
         <source>Successfully logged in.</source>
-        <translation type="unfinished"></translation>
+        <translation>Autenticado.</translation>
     </message>
     <message>
         <source>Socket error : </source>
-        <translation type="unfinished"></translation>
+        <translation>Erro na ligação:</translation>
     </message>
     <message>
         <source>Connection closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Ligação terminada</translation>
     </message>
 </context>
 <context>
@@ -97,7 +97,7 @@
     </message>
     <message>
         <source> changed topic to </source>
-        <translation type="unfinished"></translation>
+        <translation>tópico alterado para</translation>
     </message>
     <message>
         <source>Unknown channel topic - desynchronized?</source>
@@ -105,11 +105,11 @@
     </message>
     <message>
         <source>Received a CTCP PING from </source>
-        <translation type="unfinished"></translation>
+        <translation>Recebido um CTCP PING de</translation>
     </message>
     <message>
         <source>Received a CTCP VERSION from </source>
-        <translation type="unfinished"></translation>
+        <translation>Recebido um VERSÃO CTCP  de</translation>
     </message>
     <message>
         <source>CTCP ACTION with unknown person - Desynchronized?</source>
@@ -145,15 +145,15 @@
     </message>
     <message>
         <source>You were kicked from </source>
-        <translation type="unfinished"></translation>
+        <translation>Foi expulsado de</translation>
     </message>
     <message>
         <source> by </source>
-        <translation type="unfinished"></translation>
+        <translation>por</translation>
     </message>
     <message>
         <source> was kicked from </source>
-        <translation type="unfinished"></translation>
+        <translation>foi expulsado de</translation>
     </message>
     <message>
         <source>Unknown person kick - desynchronized?</source>
@@ -169,7 +169,7 @@
     </message>
     <message>
         <source>You joined channel </source>
-        <translation type="unfinished"></translation>
+        <translation>Entrou no canal</translation>
     </message>
     <message>
         <source>Nickname is in use, please reconnect with a different nickname</source>
@@ -177,7 +177,7 @@
     </message>
     <message>
         <source>No such nickname</source>
-        <translation type="unfinished"></translation>
+        <translation>Alcunha desconhecida</translation>
     </message>
     <message>
         <source>Received unhandled numeric command: %1</source>
@@ -193,15 +193,15 @@
     </message>
     <message>
         <source>%1 joined channel %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 entrou no canal %2</translation>
     </message>
     <message>
         <source>You left channel %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Saíu do canal %1</translation>
     </message>
     <message>
         <source>%1 left channel %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 saíu do canal %2</translation>
     </message>
     <message>
         <source>Channel message with unknown channel %1</source>
@@ -209,26 +209,26 @@
     </message>
     <message>
         <source>You are now known as %1</source>
-        <translation type="unfinished"></translation>
+        <translation>A sua alcunha mudou para %1</translation>
     </message>
     <message>
         <source>%1 is now known as %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 mudou a alcunha para %2</translation>
     </message>
     <message>
         <source>%1 has quit (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 saíu (%2)</translation>
     </message>
 </context>
 <context>
     <name>IRCQueryTab</name>
     <message>
         <source>Talking to </source>
-        <translation type="unfinished"></translation>
+        <translation>A falar em</translation>
     </message>
     <message>
         <source>Private discussion</source>
-        <translation type="unfinished"></translation>
+        <translation>Conversa privada</translation>
     </message>
     <message>
         <source>Type your text here in order to send a message to the other person</source>
@@ -236,14 +236,14 @@
     </message>
     <message>
         <source>Disconnected</source>
-        <translation type="unfinished"></translation>
+        <translation>Desligado</translation>
     </message>
 </context>
 <context>
     <name>IRCServerEditor</name>
     <message>
         <source>Profile name :</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome do perfil:</translation>
     </message>
     <message>
         <source>The name of this server profile in the overview</source>
@@ -251,7 +251,7 @@
     </message>
     <message>
         <source>Hostname :</source>
-        <translation type="unfinished"></translation>
+        <translation>Servidor:</translation>
     </message>
     <message>
         <source>The server to connect to - can be any valid host name or IP address</source>
@@ -259,7 +259,7 @@
     </message>
     <message>
         <source>Port :</source>
-        <translation type="unfinished"></translation>
+        <translation>Porta:</translation>
     </message>
     <message>
         <source>The server port to connect to. Usually 6667</source>
@@ -267,7 +267,7 @@
     </message>
     <message>
         <source>Nickname :</source>
-        <translation type="unfinished"></translation>
+        <translation>Alcunha:</translation>
     </message>
     <message>
         <source>Your nick name on the IRC network</source>
@@ -275,7 +275,7 @@
     </message>
     <message>
         <source>Realname :</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome:</translation>
     </message>
     <message>
         <source>Your real name</source>
@@ -283,7 +283,7 @@
     </message>
     <message>
         <source>Password :</source>
-        <translation type="unfinished"></translation>
+        <translation>Palavra Chave:</translation>
     </message>
     <message>
         <source>Password to connect to the server (if required)</source>
@@ -291,7 +291,7 @@
     </message>
     <message>
         <source>Channels :</source>
-        <translation type="unfinished"></translation>
+        <translation>Canais:</translation>
     </message>
     <message>
         <source>Comma-Separated list of all channels you would like to join automatically</source>
@@ -299,11 +299,11 @@
     </message>
     <message>
         <source>Edit server information</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar informação do servidor</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro</translation>
     </message>
     <message>
         <source>Profile name required</source>
@@ -348,15 +348,15 @@ comma separated list of channel
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Apagar</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar</translation>
     </message>
     <message>
         <source>Delete the currently selected server profile</source>
@@ -398,11 +398,11 @@ comma separated list of channel
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>Geral</translation>
     </message>
     <message>
         <source>Background color :</source>
-        <translation type="unfinished"></translation>
+        <translation>Cor do fundo:</translation>
     </message>
     <message>
         <source>Background color to be used in chats</source>
@@ -410,7 +410,7 @@ comma separated list of channel
     </message>
     <message>
         <source>Normal text color :</source>
-        <translation type="unfinished"></translation>
+        <translation>Cor do texto:</translation>
     </message>
     <message>
         <source>Text color to be used in chats</source>
@@ -418,7 +418,7 @@ comma separated list of channel
     </message>
     <message>
         <source>Error color :</source>
-        <translation type="unfinished"></translation>
+        <translation>Cor dos erros:</translation>
     </message>
     <message>
         <source>Text color to be used to display errors</source>
@@ -450,7 +450,7 @@ comma separated list of channel
     </message>
     <message>
         <source>Notifications :</source>
-        <translation type="unfinished"></translation>
+        <translation>Notificações:</translation>
     </message>
     <message>
         <source>Text color to be used to display notifications</source>
@@ -458,11 +458,11 @@ comma separated list of channel
     </message>
     <message>
         <source>Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Cores</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurações</translation>
     </message>
 </context>
 <context>
@@ -477,14 +477,14 @@ comma separated list of channel
     </message>
     <message>
         <source>Close this tab</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">F</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>IRC Client</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliente IRC</translation>
     </message>
     <message>
         <source>Server connections, channels, queries and other things will be placed here</source>
@@ -492,11 +492,11 @@ comma separated list of channel
     </message>
     <message>
         <source>IRC</source>
-        <translation type="unfinished"></translation>
+        <translation>IRC</translation>
     </message>
     <message>
         <source>New connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Nova ligação</translation>
     </message>
     <message>
         <source>Create a new connection to an IRC server</source>
@@ -504,7 +504,7 @@ comma separated list of channel
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurações</translation>
     </message>
     <message>
         <source>Configure OpieIRC&apos;s behavior and appearance</source>

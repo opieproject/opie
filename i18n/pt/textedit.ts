@@ -3,266 +3,269 @@
     <name>TextEdit</name>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Novo</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Gravar</translation>
     </message>
     <message>
         <source>Save As</source>
-        <translation type="unfinished"></translation>
+        <translation>Gravar Como</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation type="unfinished"></translation>
+        <translation>Cortar</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>Colar</translation>
     </message>
     <message>
         <source>Find...</source>
-        <translation type="unfinished"></translation>
+        <translation>Procurar...</translation>
     </message>
     <message>
         <source>Zoom in</source>
-        <translation type="unfinished"></translation>
+        <translation>Aumentar Tamanho</translation>
     </message>
     <message>
         <source>Zoom out</source>
-        <translation type="unfinished"></translation>
+        <translation>Reduzir Tamanho</translation>
     </message>
     <message>
         <source>Wrap lines</source>
-        <translation type="unfinished"></translation>
+        <translation>Quebrar linhas</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Fonte</translation>
     </message>
     <message>
         <source>Start with new file</source>
-        <translation type="unfinished"></translation>
+        <translation>Iniciar com um ficheiro novo</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Ficheiro</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Ver</translation>
     </message>
     <message>
         <source>Find Next</source>
-        <translation type="unfinished"></translation>
+        <translation>Procurar Próximo</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Fechar Procurar</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Apagar</translation>
     </message>
     <message>
         <source>Text Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Editor de Texto</translation>
     </message>
     <message>
         <source>.desktop File</source>
-        <translation type="unfinished"></translation>
+        <translation>Ficheiro .desktop</translation>
     </message>
     <message>
         <source>Linked Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Documento Real</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Tudo</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Texto</translation>
     </message>
     <message>
         <source>Insert Time and Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Insira Hora e Data</translation>
     </message>
     <message>
         <source>Advanced Features</source>
-        <translation type="unfinished"></translation>
+        <translation>Funcionalidades Avançadas</translation>
     </message>
     <message>
         <source>Prompt on Exit</source>
-        <translation type="unfinished"></translation>
+        <translation>Avisar ao Sair</translation>
     </message>
     <message>
         <source>Always open linked file</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir sempre o ficheiro real</translation>
     </message>
     <message>
         <source>File Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Permissões do Ficheiro</translation>
     </message>
     <message>
         <source>Search Bar Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Barra de Procura Aberta</translation>
     </message>
     <message>
         <source>Goto Line...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ir para Linha...</translation>
     </message>
     <message>
         <source>Auto Save 5 min.</source>
-        <translation type="unfinished"></translation>
+        <translation>Gravar Automaticamente a cada 5 min.</translation>
     </message>
     <message>
         <source>Text Editor has detected&lt;BR&gt;you selected a &lt;B&gt;.desktop&lt;/B&gt;file.&lt;BR&gt;Open&lt;B&gt;.desktop&lt;/B&gt; file or &lt;B&gt;linked&lt;/B&gt; file?</source>
-        <translation type="unfinished"></translation>
+        <translation>Foi detectado um ficheiro &lt;b&gt;.desktop&lt;/b&gt;. Deseja abrir este ficheiro ou o ficheiro real para onde ele aponta?</translation>
     </message>
     <message>
         <source>Text Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar Texto</translation>
     </message>
     <message>
         <source>Write Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Falhou a Escrita do Ficheiro</translation>
     </message>
     <message>
         <source>Unnamed</source>
-        <translation type="unfinished"></translation>
+        <translation>SemNome</translation>
     </message>
     <message>
         <source>Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Permissões</translation>
     </message>
     <message>
         <source>Choose font</source>
-        <translation type="unfinished"></translation>
+        <translation>Escolha fonte</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Sim</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Não</translation>
     </message>
     <message>
         <source>Text Edit is copyright&lt;BR&gt;2000 Trolltech AS, and&lt;BR&gt;2002 by &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;and is licensed under the GPL</source>
-        <translation type="unfinished"></translation>
+        <translation>Editor de Texto - Copyright 2000 Trolltech AS e 2002 L. J. Potter (llornkcor@handhelds.org) e licenciado sob a licença GPL</translation>
     </message>
     <message>
         <source>Textedit</source>
-        <translation type="unfinished"></translation>
+        <translation>EditorTexto</translation>
     </message>
     <message>
         <source>Textedit detected
 you have unsaved changes
 Go ahead and save?
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Foram detectadas
+alterações. Deseja
+gravá-las ?</translation>
     </message>
     <message>
         <source>Don&apos;t Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Não Gravar</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Cancelar</translation>
     </message>
     <message>
         <source>Not enough lines</source>
-        <translation type="unfinished"></translation>
+        <translation>Sem linhas suficientes</translation>
     </message>
     <message>
         <source>%1 - Text Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - Editor de Texto</translation>
     </message>
     <message>
         <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
 from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Tem a certeza que quer apagar o ficheiro do disco ?
+Esta operação é &lt;b&gt;irreversível!&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
     <name>filePermissions</name>
     <message>
         <source>Set File Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Alterar permissões do Ficheiro</translation>
     </message>
     <message>
         <source>Set file permissions for:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alterar permissões para:</translation>
     </message>
     <message>
         <source>owner</source>
-        <translation type="unfinished"></translation>
+        <translation>utilizador</translation>
     </message>
     <message>
         <source>group</source>
-        <translation type="unfinished"></translation>
+        <translation>grupo</translation>
     </message>
     <message>
         <source>others</source>
-        <translation type="unfinished"></translation>
+        <translation>outros</translation>
     </message>
     <message>
         <source>Owner</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilizador</translation>
     </message>
     <message>
         <source>Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Grupo</translation>
     </message>
     <message>
         <source>read</source>
-        <translation type="unfinished"></translation>
+        <translation>leitura</translation>
     </message>
     <message>
         <source>write</source>
-        <translation type="unfinished"></translation>
+        <translation>escrita</translation>
     </message>
     <message>
         <source>execute</source>
-        <translation type="unfinished"></translation>
+        <translation>execução</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Atenção</translation>
     </message>
     <message>
         <source>Error- no user</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro - sem utilizador</translation>
     </message>
     <message>
         <source>Error- no  group</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro - sem grupo</translation>
     </message>
     <message>
         <source>Error setting ownership or group</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro ao alterar o utilizador ou o grupo</translation>
     </message>
     <message>
         <source>Error setting mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro ao alterar as permissões</translation>
     </message>
     <message>
         <source>File Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Permissões do Ficheiro</translation>
     </message>
 </context>
 </TS>

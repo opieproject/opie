@@ -3,43 +3,43 @@
     <name>Checkbook</name>
     <message>
         <source>Checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Despesas</translation>
     </message>
     <message>
         <source>New checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Nova despesa</translation>
     </message>
     <message>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info</translation>
     </message>
     <message>
         <source>Transactions</source>
-        <translation type="unfinished"></translation>
+        <translation>Transações</translation>
     </message>
     <message>
         <source>Charts</source>
-        <translation type="unfinished"></translation>
+        <translation>Gráficos</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome:</translation>
     </message>
     <message>
         <source>Enter name of checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduza o nome da despesa aqui.</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo:</translation>
     </message>
     <message>
         <source>Select type of checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Escolha o tipo de despesa aqui.</translation>
     </message>
     <message>
         <source>Savings</source>
-        <translation type="unfinished"></translation>
+        <translation>Poupanças</translation>
     </message>
     <message>
         <source>Checking</source>
@@ -59,27 +59,27 @@
     </message>
     <message>
         <source>Other</source>
-        <translation type="unfinished"></translation>
+        <translation>Outro</translation>
     </message>
     <message>
         <source>Bank:</source>
-        <translation type="unfinished"></translation>
+        <translation>Banco:</translation>
     </message>
     <message>
         <source>Enter name of the bank for this checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduza o nome do banco para esta despesa.</translation>
     </message>
     <message>
         <source>Account number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Número de Conta:</translation>
     </message>
     <message>
         <source>Enter account number for this checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduza o número de conta para esta despesa.</translation>
     </message>
     <message>
         <source>PIN number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Número PIN:</translation>
     </message>
     <message>
         <source>Enter PIN number for this checkbook here.</source>
@@ -95,7 +95,7 @@
     </message>
     <message>
         <source>Notes:</source>
-        <translation type="unfinished"></translation>
+        <translation>Notas:</translation>
     </message>
     <message>
         <source>Enter any additional information for this checkbook here.</source>
@@ -117,19 +117,19 @@ To sort entries by a specific field, click on the column name.</source>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Data</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Descrição</translation>
     </message>
     <message>
         <source>Amount</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Novo</translation>
     </message>
     <message>
         <source>Click here to add a new transaction.</source>
@@ -137,7 +137,7 @@ To sort entries by a specific field, click on the column name.</source>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar</translation>
     </message>
     <message>
         <source>Select a transaction and then click here to edit it.</source>
@@ -145,7 +145,7 @@ To sort entries by a specific field, click on the column name.</source>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Apagar</translation>
     </message>
     <message>
         <source>Select a checkbook and then click here to delete it.</source>
@@ -165,11 +165,11 @@ To sort entries by a specific field, click on the column name.</source>
     </message>
     <message>
         <source>Withdrawals by category</source>
-        <translation type="unfinished"></translation>
+        <translation>Levantamentos por categoria</translation>
     </message>
     <message>
         <source>Deposits by category</source>
-        <translation type="unfinished"></translation>
+        <translation>Depósitos por categoria</translation>
     </message>
     <message>
         <source>Draw</source>
@@ -185,11 +185,11 @@ To sort entries by a specific field, click on the column name.</source>
     </message>
     <message>
         <source>Delete transaction</source>
-        <translation type="unfinished"></translation>
+        <translation>Apagar transação</translation>
     </message>
     <message>
         <source>Password protect</source>
-        <translation type="unfinished"></translation>
+        <translation>Proteger por palavra chave</translation>
     </message>
     <message>
         <source>Click here to enable/disable password protection of this checkbook.</source>
@@ -209,7 +209,7 @@ To sort entries by a specific field, click on the column name.</source>
     </message>
     <message>
         <source>Confirm password</source>
-        <translation type="unfinished"></translation>
+        <translation>Confirme palavra chave</translation>
     </message>
     <message>
         <source>Please confirm your password:</source>
@@ -224,11 +224,11 @@ To sort entries by a specific field, click on the column name.</source>
     <name>Configuration</name>
     <message>
         <source>Configure Checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar Despesas</translation>
     </message>
     <message>
         <source>Enter currency symbol:</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduza o símbolo monetário:</translation>
     </message>
     <message>
         <source>Enter your local currency symbol here.</source>
@@ -256,11 +256,11 @@ protected</source>
     <name>MainWindow</name>
     <message>
         <source>Checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Despesas</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Novo</translation>
     </message>
     <message>
         <source>Click here to create a new checkbook.
@@ -270,7 +270,7 @@ You also can select New from the Checkbook menu.</source>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar</translation>
     </message>
     <message>
         <source>Select a checkbook and then click here to edit it.
@@ -280,7 +280,7 @@ You also can select Edit from the Checkbook menu, or click and hold on a checkbo
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Apagar</translation>
     </message>
     <message>
         <source>Select a checkbook and then click here delete it.
@@ -298,7 +298,7 @@ You also can select Delete from the Checkbook menu.</source>
     </message>
     <message>
         <source>Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar</translation>
     </message>
     <message>
         <source>Click here to configure this app.</source>
@@ -306,7 +306,7 @@ You also can select Delete from the Checkbook menu.</source>
     </message>
     <message>
         <source>Checkbook Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome da Despesa</translation>
     </message>
     <message>
         <source>Balance</source>
@@ -325,11 +325,11 @@ You also can select Delete from the Checkbook menu.</source>
     <name>Transaction</name>
     <message>
         <source>Transaction for </source>
-        <translation type="unfinished"></translation>
+        <translation>Transação para</translation>
     </message>
     <message>
         <source>Withdrawal</source>
-        <translation type="unfinished"></translation>
+        <translation>Levantamento</translation>
     </message>
     <message>
         <source>Select whether the transaction is a withdrawal or deposit here.</source>
@@ -337,11 +337,11 @@ You also can select Delete from the Checkbook menu.</source>
     </message>
     <message>
         <source>Deposit</source>
-        <translation type="unfinished"></translation>
+        <translation>Depósito</translation>
     </message>
     <message>
         <source>Date:</source>
-        <translation type="unfinished"></translation>
+        <translation>Data:</translation>
     </message>
     <message>
         <source>Select date of transaction here.</source>
@@ -349,7 +349,7 @@ You also can select Delete from the Checkbook menu.</source>
     </message>
     <message>
         <source>Number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Número:</translation>
     </message>
     <message>
         <source>Enter check number here.</source>
@@ -357,7 +357,7 @@ You also can select Delete from the Checkbook menu.</source>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Descrição:</translation>
     </message>
     <message>
         <source>Enter description of transaction here.</source>
@@ -365,7 +365,7 @@ You also can select Delete from the Checkbook menu.</source>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation>Categoria:</translation>
     </message>
     <message>
         <source>Select transaction category here.</source>
@@ -373,7 +373,7 @@ You also can select Delete from the Checkbook menu.</source>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo:</translation>
     </message>
     <message>
         <source>Select transaction type here.
@@ -383,7 +383,7 @@ The options available vary based on whether the transaction is a deposit or with
     </message>
     <message>
         <source>Amount:</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor:</translation>
     </message>
     <message>
         <source>Enter the amount of transaction here.
@@ -393,7 +393,7 @@ The value entered should always be positive.</source>
     </message>
     <message>
         <source>Fee:</source>
-        <translation type="unfinished"></translation>
+        <translation>Taxa:</translation>
     </message>
     <message>
         <source>Enter any fee amount assoiciated with this transaction.
@@ -403,7 +403,7 @@ The value entered should always be positive.</source>
     </message>
     <message>
         <source>Notes:</source>
-        <translation type="unfinished"></translation>
+        <translation>Notas:</translation>
     </message>
     <message>
         <source>Enter any additional information for this transaction here.</source>
@@ -411,59 +411,59 @@ The value entered should always be positive.</source>
     </message>
     <message>
         <source>Automobile</source>
-        <translation type="unfinished"></translation>
+        <translation>Automóvel</translation>
     </message>
     <message>
         <source>Bills</source>
-        <translation type="unfinished"></translation>
+        <translation>Contas</translation>
     </message>
     <message>
         <source>CDs</source>
-        <translation type="unfinished"></translation>
+        <translation>CDs</translation>
     </message>
     <message>
         <source>Clothing</source>
-        <translation type="unfinished"></translation>
+        <translation>Roupa</translation>
     </message>
     <message>
         <source>Computer</source>
-        <translation type="unfinished"></translation>
+        <translation>Informática</translation>
     </message>
     <message>
         <source>DVDs</source>
-        <translation type="unfinished"></translation>
+        <translation>DVDs</translation>
     </message>
     <message>
         <source>Eletronics</source>
-        <translation type="unfinished"></translation>
+        <translation>Electrónica</translation>
     </message>
     <message>
         <source>Entertainment</source>
-        <translation type="unfinished"></translation>
+        <translation>Entretenimento</translation>
     </message>
     <message>
         <source>Food</source>
-        <translation type="unfinished"></translation>
+        <translation>Comida</translation>
     </message>
     <message>
         <source>Gasoline</source>
-        <translation type="unfinished"></translation>
+        <translation>Combustível</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation type="unfinished"></translation>
+        <translation>Vários</translation>
     </message>
     <message>
         <source>Movies</source>
-        <translation type="unfinished"></translation>
+        <translation>Filmes</translation>
     </message>
     <message>
         <source>Rent</source>
-        <translation type="unfinished"></translation>
+        <translation>Rendas</translation>
     </message>
     <message>
         <source>Travel</source>
-        <translation type="unfinished"></translation>
+        <translation>Viagens</translation>
     </message>
     <message>
         <source>Debit Charge</source>
@@ -471,15 +471,15 @@ The value entered should always be positive.</source>
     </message>
     <message>
         <source>Written Check</source>
-        <translation type="unfinished"></translation>
+        <translation>Cheque</translation>
     </message>
     <message>
         <source>Transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Transferência</translation>
     </message>
     <message>
         <source>Credit Card</source>
-        <translation type="unfinished"></translation>
+        <translation>Cartão de Crédito</translation>
     </message>
     <message>
         <source>Work</source>
@@ -491,15 +491,15 @@ The value entered should always be positive.</source>
     </message>
     <message>
         <source>Misc. Credit</source>
-        <translation type="unfinished"></translation>
+        <translation>Créditos Diversos</translation>
     </message>
     <message>
         <source>Automatic Payment</source>
-        <translation type="unfinished"></translation>
+        <translation>Pagamento Automático</translation>
     </message>
     <message>
         <source>Cash</source>
-        <translation type="unfinished"></translation>
+        <translation>Dinheiro</translation>
     </message>
 </context>
 </TS>

@@ -38,11 +38,11 @@
     </message>
     <message>
         <source>&lt;Nothing&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;Nenhum&gt;</translation>
     </message>
     <message>
         <source>Open file</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir ficheiro</translation>
     </message>
     <message>
         <source>Autoscroll</source>
@@ -50,15 +50,15 @@
     </message>
     <message>
         <source>Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Atalho</translation>
     </message>
     <message>
         <source>Annotate</source>
-        <translation type="unfinished">Anotar</translation>
+        <translation>Anotar</translation>
     </message>
     <message>
         <source>Fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation>Ecrâ Todo</translation>
     </message>
     <message>
         <source>Zoom in</source>
@@ -70,7 +70,7 @@
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished">Voltar</translation>
+        <translation>Voltar</translation>
     </message>
     <message>
         <source>Forward</source>
@@ -78,31 +78,31 @@
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished">Início</translation>
+        <translation>Início</translation>
     </message>
     <message>
         <source>Page up</source>
-        <translation type="unfinished"></translation>
+        <translation>Página Anterior</translation>
     </message>
     <message>
         <source>Page down</source>
-        <translation type="unfinished"></translation>
+        <translation>Página Seguinte</translation>
     </message>
     <message>
         <source>Line up</source>
-        <translation type="unfinished"></translation>
+        <translation>Linha Acima</translation>
     </message>
     <message>
         <source>Line down</source>
-        <translation type="unfinished"></translation>
+        <translation>Linha Abaixo</translation>
     </message>
     <message>
         <source>Beginning</source>
-        <translation type="unfinished"></translation>
+        <translation>Início</translation>
     </message>
     <message>
         <source>End</source>
-        <translation type="unfinished"></translation>
+        <translation>Fim</translation>
     </message>
     <message>
         <source>Escape Button</source>
@@ -118,19 +118,19 @@
     </message>
     <message>
         <source>Left Arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>Seta Esquerda</translation>
     </message>
     <message>
         <source>Right Arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>Seta Direita</translation>
     </message>
     <message>
         <source>Down Arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>Seta Baixo</translation>
     </message>
     <message>
         <source>Up Arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>Seta Cima</translation>
     </message>
 </context>
 <context>
@@ -145,7 +145,7 @@
     </message>
     <message>
         <source>Delete Bookmarks</source>
-        <translation type="unfinished">Apagar</translation>
+        <translation>Apagar Atalhos</translation>
     </message>
     <message>
         <source>Delete Configuration</source>
@@ -221,7 +221,7 @@ Touch</source>
     </message>
     <message>
         <source>Dictionary</source>
-        <translation type="unfinished">Dicionário</translation>
+        <translation>Dicionário</translation>
     </message>
     <message>
         <source>Swap Tap
@@ -269,7 +269,7 @@ Actions</source>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Texto</translation>
     </message>
 </context>
 <context>
@@ -315,7 +315,7 @@ Leading</source>
     <name>CMarkBarPrefs</name>
     <message>
         <source>Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Atalho</translation>
     </message>
     <message>
         <source>Annotate</source>
@@ -323,7 +323,7 @@ Leading</source>
     </message>
     <message>
         <source>Goto</source>
-        <translation type="unfinished">Ir Para</translation>
+        <translation>Ir Para</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -479,7 +479,7 @@ Leading</source>
     <name>CPrefs</name>
     <message>
         <source>OpieReader Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurações do OpieReader</translation>
     </message>
     <message>
         <source>Layout</source>
@@ -506,7 +506,7 @@ Leading</source>
     <name>CURLDialog</name>
     <message>
         <source>Save URL</source>
-        <translation type="unfinished"></translation>
+        <translation>Gravar URL</translation>
     </message>
     <message>
         <source>Clipboard</source>
@@ -525,7 +525,7 @@ Leading</source>
     <name>CViewBarPrefs</name>
     <message>
         <source>Fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation>Ecrâ Todo</translation>
     </message>
     <message>
         <source>Zoom In</source>
@@ -537,7 +537,7 @@ Leading</source>
     </message>
     <message>
         <source>Set Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Mudar Fonte</translation>
     </message>
     <message>
         <source>Encoding</source>
@@ -564,7 +564,7 @@ Leading</source>
     </message>
     <message>
         <source>Fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation>Ecrâ Todo</translation>
     </message>
     <message>
         <source>Navigation</source>
@@ -612,7 +612,7 @@ Leading</source>
     </message>
     <message>
         <source>Set Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Mudar Fonte</translation>
     </message>
     <message>
         <source>Annotate</source>
@@ -752,11 +752,11 @@ Leading</source>
     </message>
     <message>
         <source>Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Atalho</translation>
     </message>
     <message>
         <source>Reader</source>
-        <translation type="unfinished"></translation>
+        <translation>Leitor</translation>
     </message>
 </context>
 <context>

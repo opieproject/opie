@@ -22,7 +22,7 @@
     <name>AccountEditorBase</name>
     <message>
         <source>Account Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Editor de Contas</translation>
     </message>
     <message>
         <source>Server</source>
@@ -30,15 +30,15 @@
     </message>
     <message>
         <source>&lt;b&gt;Port:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Porta:</translation>
     </message>
     <message>
         <source>&lt;b&gt;IMAP:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;IMAP:</translation>
     </message>
     <message>
         <source>[--]</source>
-        <translation type="unfinished"></translation>
+        <translation>[--]</translation>
     </message>
     <message>
         <source>&lt;b&gt;SMTP:</source>
@@ -82,7 +82,7 @@
     </message>
     <message>
         <source>Reply-To</source>
-        <translation type="unfinished"></translation>
+        <translation>Responder-A</translation>
     </message>
     <message>
         <source>&lt;b&gt;Signature:</source>
@@ -90,7 +90,7 @@
     </message>
     <message>
         <source>SSL</source>
-        <translation type="unfinished"></translation>
+        <translation>SSL</translation>
     </message>
     <message>
         <source>IMAP</source>
@@ -98,7 +98,7 @@
     </message>
     <message>
         <source>Use SSL</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar SSL</translation>
     </message>
     <message>
         <source>993</source>
@@ -163,7 +163,7 @@
     </message>
     <message>
         <source>&lt;div align=center&gt;Description</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;div align=&quot;center&quot;&gt;Descrição</translation>
     </message>
     <message>
         <source>&lt;p&gt;You have to specify a recipient.&lt;br&gt;(eg: foo@bar.org)&lt;/p&gt;</source>
@@ -175,7 +175,7 @@
     </message>
     <message>
         <source>Success</source>
-        <translation type="unfinished"></translation>
+        <translation>Sucesso</translation>
     </message>
     <message>
         <source>&lt;p&gt;The mail was queued successfully.&lt;/p&gt;&lt;p&gt;The queue contains </source>
@@ -183,19 +183,19 @@
     </message>
     <message>
         <source> mails.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>emails.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;font color=#ff0000&gt;Error occoured during sending.&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;font color=&quot;#ff0000&quot;&gt;Erro ao enviar.&lt;/font&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;%1&lt;/p</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;%1&lt;/p</translation>
     </message>
     <message>
         <source>&lt;p&gt;The mail was sent successfully.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Email enviado com sucesso.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;The queued mails </source>
@@ -203,22 +203,22 @@
     </message>
     <message>
         <source> of </source>
-        <translation type="unfinished"></translation>
+        <translation>de</translation>
     </message>
 </context>
 <context>
     <name>ComposerBase</name>
     <message>
         <source>Compose Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Compôr Mensagem</translation>
     </message>
     <message>
         <source>Mail</source>
-        <translation type="unfinished">Correio</translation>
+        <translation>EMail</translation>
     </message>
     <message>
         <source>Send the mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviar o EMail</translation>
     </message>
     <message>
         <source>Queue the mail</source>
@@ -226,11 +226,11 @@
     </message>
     <message>
         <source>Attach a file</source>
-        <translation type="unfinished"></translation>
+        <translation>Anexar um ficheiro</translation>
     </message>
     <message>
         <source>Addressbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Contactos</translation>
     </message>
     <message>
         <source>From</source>
@@ -238,7 +238,7 @@
     </message>
     <message>
         <source>Reply</source>
-        <translation type="unfinished"></translation>
+        <translation>Responder</translation>
     </message>
     <message>
         <source>To</source>
@@ -246,11 +246,11 @@
     </message>
     <message>
         <source>Cc</source>
-        <translation type="unfinished">Cc</translation>
+        <translation>Cc</translation>
     </message>
     <message>
         <source>Bcc</source>
-        <translation type="unfinished">Bcc</translation>
+        <translation>Bcc</translation>
     </message>
     <message>
         <source>Subj.</source>
@@ -274,11 +274,11 @@
     </message>
     <message>
         <source>Add an Attachement</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar um Anexo</translation>
     </message>
     <message>
         <source>Remove Attachement</source>
-        <translation type="unfinished"></translation>
+        <translation>Remover um Anexo</translation>
     </message>
     <message>
         <source>Name</source>
@@ -290,11 +290,11 @@
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Mudar o Nome</translation>
     </message>
     <message>
         <source>Change Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Mudar a Descrição</translation>
     </message>
     <message>
         <source>Remove</source>
@@ -317,7 +317,7 @@
     </message>
     <message>
         <source>Question</source>
-        <translation type="unfinished"></translation>
+        <translation>Questão</translation>
     </message>
     <message>
         <source>&lt;p&gt;Do you relly want to delete the selected account?&lt;/p&gt;</source>
@@ -352,7 +352,7 @@
     </message>
     <message>
         <source>[Hidden]</source>
-        <translation type="unfinished"></translation>
+        <translation>[Escondido]</translation>
     </message>
     <message>
         <source>New</source>
@@ -360,11 +360,11 @@
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>Geral</translation>
     </message>
     <message>
         <source>Mail notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Notificação de EMail</translation>
     </message>
     <message>
         <source>Blink LED</source>
@@ -376,15 +376,15 @@
     </message>
     <message>
         <source>&lt;b&gt;Check&amp;nbsp;every</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Verificar&amp;nbsp;todos</translation>
     </message>
     <message>
         <source> min</source>
-        <translation type="unfinished"></translation>
+        <translation>min</translation>
     </message>
     <message>
         <source>Disable mail notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Desligar notificação de email</translation>
     </message>
     <message>
         <source>&lt;p&gt;&lt;b&gt;Mail version %1&lt;/b&gt;&lt;hr&gt;
@@ -434,7 +434,7 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>Question</source>
-        <translation type="unfinished"></translation>
+        <translation>Questão</translation>
     </message>
     <message>
         <source>&lt;p&gt;Do you really want to delete &lt;pre&gt;%1&lt;/pre&gt;?</source>
@@ -450,7 +450,7 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>Foldername</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome da Pasta</translation>
     </message>
     <message>
         <source>&lt;p&gt;Please enter the name of the new folder.&lt;/p&gt;</source>
@@ -458,35 +458,35 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>Looking up host...</source>
-        <translation type="unfinished"></translation>
+        <translation>A procurar o servidor...</translation>
     </message>
     <message>
         <source>Host found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Servidor encontrado.</translation>
     </message>
     <message>
         <source>Connected to host.</source>
-        <translation type="unfinished"></translation>
+        <translation>A ligar ao servidor.</translation>
     </message>
     <message>
         <source>&lt;p&gt;The IMAP connection was refused.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;A ligação IMAP foi recusada.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;The host was not found.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;O servidor não foi encontrado.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;There was an error while reading from the socket.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Houve um erro ao ler dados da ligação.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Login failed. Check your password/username.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Falhou a autenticação. Verifique a conta e/ou a password.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unknown error was encountered.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Ocorreu um erro desconhecido.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Disconnected.</source>
@@ -494,7 +494,7 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>Login successfull!</source>
-        <translation type="unfinished"></translation>
+        <translation>Autenticado!</translation>
     </message>
     <message>
         <source>&lt;p&gt;Login failed. Go away.&lt;/p&gt;</source>
@@ -510,7 +510,7 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>Deletion successfull!</source>
-        <translation type="unfinished"></translation>
+        <translation>Remoção bem sucedida!</translation>
     </message>
     <message>
         <source>&lt;p&gt;Delete failed. (Server said: %1)&lt;/p&gt;</source>
@@ -518,7 +518,7 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>Folder created. Rescanning...</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasta criada. A actualizar...</translation>
     </message>
     <message>
         <source>&lt;p&gt;The folder could not be created. (Server said: %1)&lt;/p&gt;</source>
@@ -581,11 +581,11 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>Mailbox contained no mails.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sem emails nesta pasta.</translation>
     </message>
     <message>
         <source>Getting mail headers...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">A</translation>
     </message>
     <message>
         <source>Error</source>
@@ -601,7 +601,7 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>Stopped</source>
-        <translation type="unfinished"></translation>
+        <translation>Parado</translation>
     </message>
     <message>
         <source>Got all mail headers.</source>
@@ -609,14 +609,14 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>&lt;font color=#ff0000&gt;Couldn&apos;t fetch mail.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;font color=&quot;#ff0000&quot;&gt;Não foi poss</translation>
     </message>
 </context>
 <context>
     <name>MainWindowBase</name>
     <message>
         <source>E-Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>EMail</translation>
     </message>
     <message>
         <source>Mail</source>
@@ -628,7 +628,7 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>Compose new mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Compôr novo email</translation>
     </message>
     <message>
         <source>Send queued mails</source>
@@ -636,11 +636,11 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>Show/hide folders</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar/esconder pastas</translation>
     </message>
     <message>
         <source>Search mails</source>
-        <translation type="unfinished"></translation>
+        <translation>Procurar correio</translation>
     </message>
     <message>
         <source>Configuration</source>
@@ -651,7 +651,7 @@ Visit http://www.lisa.de/ for Information.
     <name>OpenDiagBase</name>
     <message>
         <source>Open file...</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir ficheiro...</translation>
     </message>
     <message>
         <source> Stop </source>
@@ -659,35 +659,35 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>&lt;b&gt;%1&lt;/b&gt; kB of &lt;b&gt;%2&lt;/b&gt; kB at &lt;b&gt;%3&lt;/b&gt; kB/s</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;%1&lt;/b&gt;KB de &lt;b&gt;%2&lt;/b&gt;KB em &lt;b&gt;%3&lt;/b&gt;KB/s</translation>
     </message>
     <message>
         <source>[Icon]</source>
-        <translation type="unfinished"></translation>
+        <translation>[Icone]</translation>
     </message>
     <message>
         <source>&lt;i&gt;application/v-card</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;application/v-card</translation>
     </message>
     <message>
         <source>Open using an application</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir com a aplicação</translation>
     </message>
     <message>
         <source>Save to disk</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Gra</translation>
     </message>
     <message>
         <source>Display</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar</translation>
     </message>
     <message>
         <source>Save to</source>
-        <translation type="unfinished"></translation>
+        <translation>Gravar em</translation>
     </message>
     <message>
         <source>RAM</source>
-        <translation type="unfinished"></translation>
+        <translation>RAM</translation>
     </message>
     <message>
         <source>CF</source>
@@ -710,7 +710,7 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>Inbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Caixa de Entrada</translation>
     </message>
     <message>
         <source>(no from)</source>
@@ -788,7 +788,7 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>Results</source>
-        <translation type="unfinished"></translation>
+        <translation>Resultados</translation>
     </message>
     <message>
         <source>&lt;p&gt;No mails match your criteria.&lt;/p&gt;</source>
@@ -807,15 +807,15 @@ Visit http://www.lisa.de/ for Information.
     <name>SearchDiagBase</name>
     <message>
         <source>Mail Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Procura de Correio</translation>
     </message>
     <message>
         <source>&lt;b&gt;Search&amp;nbsp;in:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Procurar&amp;nbsp;em:</translation>
     </message>
     <message>
         <source>&lt;b&gt;For:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Por:</translation>
     </message>
 </context>
 <context>
@@ -826,27 +826,27 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>(no subject)</source>
-        <translation type="unfinished">(sem assunto)</translation>
+        <translation>(sem assunto)</translation>
     </message>
     <message>
         <source>(no from)</source>
-        <translation type="unfinished">(sem de)</translation>
+        <translation>(sem originador)</translation>
     </message>
     <message>
         <source>(no recipient)</source>
-        <translation type="unfinished"></translation>
+        <translation>(sem destinatário)</translation>
     </message>
     <message>
         <source>&lt;b&gt;Cc:&lt;/b&gt; %1&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Cc:&lt;/b&gt; %1&lt;br&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Bcc:&lt;/b&gt; %1&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Bcc:&lt;/b&gt; %1&lt;br&gt;</translation>
     </message>
     <message>
         <source>(no date)</source>
-        <translation type="unfinished">(sem data)</translation>
+        <translation>(sem data)</translation>
     </message>
     <message>
         <source>Getting mail body from server. Please wait...</source>
@@ -854,7 +854,7 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Erro</translation>
+        <translation>Erro</translation>
     </message>
     <message>
         <source>&lt;p&gt;The mail body is not yet downloaded, so you cannot reply yet.</source>
@@ -877,7 +877,7 @@ Visit http://www.lisa.de/ for Information.
     <name>ViewMailBase</name>
     <message>
         <source>E-Mail by %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Correio de %1</translation>
     </message>
     <message>
         <source>Mail</source>
@@ -885,15 +885,15 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>Reply</source>
-        <translation type="unfinished"></translation>
+        <translation>Responder</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation>Re-encaminhar</translation>
+        <translation>Reencaminhar</translation>
     </message>
     <message>
         <source>Attachments</source>
-        <translation type="unfinished"></translation>
+        <translation>Anexos</translation>
     </message>
     <message>
         <source>Delete Mail</source>

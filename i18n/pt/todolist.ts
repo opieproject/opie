@@ -3,34 +3,34 @@
     <name>MainWindow</name>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h1&gt;Alarme em %1&lt;/h1&gt;&lt;br&gt;</translation>
     </message>
 </context>
 <context>
     <name>OTaskEditor</name>
     <message>
         <source>Alarms</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarmes</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Informação</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Estado</translation>
     </message>
     <message>
         <source>Recurrence</source>
-        <translation type="unfinished"></translation>
+        <translation>Recorrência</translation>
     </message>
     <message>
         <source>Task Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Editor de Tarefas</translation>
     </message>
 </context>
 <context>
@@ -41,15 +41,15 @@
     </message>
     <message>
         <source>Edit Task</source>
-        <translation type="unfinished">Editar Tarefa</translation>
+        <translation>Editar Tarefa</translation>
     </message>
     <message>
         <source>silent</source>
-        <translation type="unfinished"></translation>
+        <translation>silêncio</translation>
     </message>
     <message>
         <source>loud</source>
-        <translation type="unfinished"></translation>
+        <translation>alto</translation>
     </message>
     <message>
         <source>Opie Todolist</source>
@@ -60,11 +60,11 @@
     <name>QWidget</name>
     <message>
         <source>New from template</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Novo </translation>
     </message>
     <message>
         <source>New Task</source>
-        <translation type="unfinished">Nova Tarefa</translation>
+        <translation>Nova Tarefa</translation>
     </message>
     <message>
         <source>Click here to create a new task.</source>
@@ -72,7 +72,7 @@
     </message>
     <message>
         <source>Edit Task</source>
-        <translation type="unfinished">Editar Tarefa</translation>
+        <translation>Editar Tarefa</translation>
     </message>
     <message>
         <source>Click here to modify the current task.</source>
@@ -80,11 +80,11 @@
     </message>
     <message>
         <source>View Task</source>
-        <translation type="unfinished">Ver Tarefa</translation>
+        <translation>Ver Tarefa</translation>
     </message>
     <message>
         <source>Delete...</source>
-        <translation type="unfinished">Apagar...</translation>
+        <translation>Apagar...</translation>
     </message>
     <message>
         <source>Click here to remove the current task.</source>
@@ -92,7 +92,7 @@
     </message>
     <message>
         <source>Delete all...</source>
-        <translation type="unfinished">Apagar Todas...</translation>
+        <translation>Apagar Todas...</translation>
     </message>
     <message>
         <source>Delete completed</source>
@@ -100,7 +100,7 @@
     </message>
     <message>
         <source>Beam</source>
-        <translation type="unfinished">Irradiar</translation>
+        <translation>Irradiar</translation>
     </message>
     <message>
         <source>Click here to send the current task to another device.</source>
@@ -108,7 +108,7 @@
     </message>
     <message>
         <source>Find</source>
-        <translation type="unfinished">Procurar</translation>
+        <translation>Procurar</translation>
     </message>
     <message>
         <source>Show completed tasks</source>
@@ -132,11 +132,11 @@
     </message>
     <message>
         <source>Category</source>
-        <translation type="unfinished">Categoria</translation>
+        <translation>Categoria</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Opções</translation>
+        <translation>Opções</translation>
     </message>
     <message>
         <source>QuickEdit</source>
@@ -154,11 +154,11 @@ The list displays the following information:
     </message>
     <message>
         <source>All Categories</source>
-        <translation type="unfinished">Todas as Categoria</translation>
+        <translation>Todas as Categorias</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation type="unfinished">Sem espaço</translation>
+        <translation>Sem espaço</translation>
     </message>
     <message>
         <source>Todo was unable
@@ -171,7 +171,7 @@ Quit Anyway?</source>
     </message>
     <message>
         <source>Todo</source>
-        <translation type="unfinished">Tarefa</translation>
+        <translation>Tarefa</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
@@ -179,15 +179,15 @@ Quit Anyway?</source>
     </message>
     <message>
         <source>all tasks?</source>
-        <translation type="unfinished"></translation>
+        <translation>todas as tarefas?</translation>
     </message>
     <message>
         <source>all completed tasks?</source>
-        <translation type="unfinished"></translation>
+        <translation>todas as tarefas completadas?</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished">Vazio</translation>
+        <translation>Vazio</translation>
     </message>
     <message>
         <source>&lt;P&gt;%1 new tasks arrived.&lt;p&gt;Would you like to add them to your Todolist?</source>
@@ -195,35 +195,35 @@ Quit Anyway?</source>
     </message>
     <message>
         <source>New Tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Novas Tarefas</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished">Duplicar</translation>
+        <translation>Duplicar</translation>
     </message>
     <message>
         <source>C.</source>
-        <translation type="unfinished">C.</translation>
+        <translation>C.</translation>
     </message>
     <message>
         <source>Priority</source>
-        <translation type="unfinished"></translation>
+        <translation>Prioridade</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished">Descrição</translation>
+        <translation>Descrição</translation>
     </message>
     <message>
         <source>Deadline</source>
-        <translation type="unfinished">Limite</translation>
+        <translation>Data Limite</translation>
     </message>
     <message>
         <source>Configure Templates</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Configurar </translation>
     </message>
     <message>
         <source>Priority:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prioridade:</translation>
     </message>
     <message>
         <source>Template Editor</source>
@@ -231,23 +231,23 @@ Quit Anyway?</source>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Remover</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome</translation>
     </message>
     <message>
         <source>New Template %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Novo</translation>
     </message>
     <message>
         <source>Click here to set the priority of new task.
@@ -267,7 +267,7 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>More</source>
-        <translation type="unfinished"></translation>
+        <translation>Mais</translation>
     </message>
     <message>
         <source>Click here to enter additional information for new task.
@@ -291,7 +291,7 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <source>Click here to reset new task information.
@@ -318,45 +318,45 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Nada</translation>
     </message>
     <message>
         <source>%1 day(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 dia(s)</translation>
     </message>
 </context>
 <context>
     <name>TaskEditorAlarms</name>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Novo</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Apagar</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Data</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Hora</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo</translation>
     </message>
 </context>
 <context>
     <name>TaskEditorOverView</name>
     <message>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Descrição:</translation>
     </message>
     <message>
         <source>Enter brief description of the task here.</source>
@@ -364,7 +364,7 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>Complete </source>
-        <translation type="unfinished"></translation>
+        <translation>Completa</translation>
     </message>
     <message>
         <source>Work on </source>
@@ -376,7 +376,7 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>Organize </source>
-        <translation type="unfinished"></translation>
+        <translation>Organizar</translation>
     </message>
     <message>
         <source>Get </source>
@@ -384,23 +384,23 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>Update </source>
-        <translation type="unfinished"></translation>
+        <translation>Actualizar</translation>
     </message>
     <message>
         <source>Create </source>
-        <translation type="unfinished"></translation>
+        <translation>Criar</translation>
     </message>
     <message>
         <source>Plan </source>
-        <translation type="unfinished"></translation>
+        <translation>Plano</translation>
     </message>
     <message>
         <source>Call </source>
-        <translation type="unfinished"></translation>
+        <translation>Chamada</translation>
     </message>
     <message>
         <source>Mail </source>
-        <translation type="unfinished"></translation>
+        <translation>EMail</translation>
     </message>
     <message>
         <source>Select priority of task here.</source>
@@ -408,27 +408,27 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>Very High</source>
-        <translation type="unfinished"></translation>
+        <translation>Muito Alta</translation>
     </message>
     <message>
         <source>High</source>
-        <translation type="unfinished"></translation>
+        <translation>Alta</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Normal</translation>
     </message>
     <message>
         <source>Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Baixa</translation>
     </message>
     <message>
         <source>Very Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Muito Baixa</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation>Categoria:</translation>
     </message>
     <message>
         <source>Select category to organize this task with.</source>
@@ -436,7 +436,7 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>Recurring task</source>
-        <translation type="unfinished"></translation>
+        <translation>Tarefa recorrente</translation>
     </message>
     <message>
         <source>Click here if task happens on a regular basis.  If selected, frequency can be set on the Recurrence tab.</source>
@@ -448,18 +448,18 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>Todo List</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista de Tarefas</translation>
     </message>
     <message>
         <source>Summary:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sumário:</translation>
     </message>
 </context>
 <context>
     <name>TaskEditorStatus</name>
     <message>
         <source>Status:</source>
-        <translation type="unfinished"></translation>
+        <translation>Estado:</translation>
     </message>
     <message>
         <source>Click here to set the current status of this task.</source>
@@ -471,19 +471,19 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>Postponed</source>
-        <translation type="unfinished"></translation>
+        <translation>Adiada</translation>
     </message>
     <message>
         <source>Finished</source>
-        <translation type="unfinished"></translation>
+        <translation>Terminada</translation>
     </message>
     <message>
         <source>Not started</source>
-        <translation type="unfinished"></translation>
+        <translation>Por Iniciar</translation>
     </message>
     <message>
         <source>Progress:</source>
-        <translation type="unfinished"></translation>
+        <translation>Progresso:</translation>
     </message>
     <message>
         <source>Select progress made on this task here.</source>
@@ -491,31 +491,31 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>0 %</source>
-        <translation type="unfinished"></translation>
+        <translation>0%</translation>
     </message>
     <message>
         <source>20 %</source>
-        <translation type="unfinished"></translation>
+        <translation>20%</translation>
     </message>
     <message>
         <source>40 %</source>
-        <translation type="unfinished"></translation>
+        <translation>40%</translation>
     </message>
     <message>
         <source>60 %</source>
-        <translation type="unfinished"></translation>
+        <translation>60%</translation>
     </message>
     <message>
         <source>80 %</source>
-        <translation type="unfinished"></translation>
+        <translation>80%</translation>
     </message>
     <message>
         <source>100 %</source>
-        <translation type="unfinished"></translation>
+        <translation>100%</translation>
     </message>
     <message>
         <source>Start Date:</source>
-        <translation type="unfinished"></translation>
+        <translation>Data Início:</translation>
     </message>
     <message>
         <source>Click here to set the date this task was started.</source>
@@ -523,7 +523,7 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>Due Date:</source>
-        <translation type="unfinished"></translation>
+        <translation>Data Limite:</translation>
     </message>
     <message>
         <source>Click here to set the date this task needs to be completed by.</source>
@@ -531,7 +531,7 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>Completed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Terminada:</translation>
     </message>
     <message>
         <source>Click here to mark this task as completed.</source>
@@ -551,19 +551,19 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>Nothing</source>
-        <translation type="unfinished"></translation>
+        <translation>Nada</translation>
     </message>
     <message>
         <source>Responsible</source>
-        <translation type="unfinished"></translation>
+        <translation>Responsável</translation>
     </message>
     <message>
         <source>Done By</source>
-        <translation type="unfinished"></translation>
+        <translation>Feito Por</translation>
     </message>
     <message>
         <source>Coordinating</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Corde</translation>
     </message>
     <message>
         <source>Maintainer:</source>
