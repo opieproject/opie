@@ -22,7 +22,7 @@
 #include <kaboutdata.h>
 #include <klocale.h>
 #elif defined( QPE_PORT )
-#include <qpe/qpeapplication.h>
+#include <opie2/oapplicationfactory.h>
 #endif
 
 #include "kpacman.h"
@@ -40,27 +40,4 @@ static KCmdLineOptions options[] =
 };
 #endif
 
-int main(int argc, char *argv[])
-{
-#if defined( KDE2_PORT )
-  KAboutData aboutData( "kpacman", I18N_NOOP("Kpacman"),
-    VERSION, description, KAboutData::License_GPL,
-    "(c) 2002, Jörg Thönnissen", 0, 0, "joe@dsite.de");
-  aboutData.addAuthor("Jörg Thönnissen",0, "joe@dsite.de");
-  KCmdLineArgs::init( argc, argv, &aboutData );
-  KCmdLineArgs::addCmdLineOptions( options ); // Add our own options.
-  KApplication a;
-#elif defined( QPE_PORT )
-  QPEApplication a( argc, argv );
-#endif
-  Kpacman *kpacman = new Kpacman( NULL, "Kpacman" );
-  a.setMainWidget(kpacman);
-#if defined( KDE2_PORT )
-  a.setTopWidget(kpacman);
-  kpacman->show();
-#elif defined( QPE_PORT )
-  kpacman->showMaximized();
-#endif
-
-  return a.exec();
-}
+OPIE_EXPORT_APP( Opie::Core::OApplicationFactory<Kpacman> )

@@ -13,8 +13,8 @@
 #endif
 
 
-Kpacman::Kpacman(QWidget *parent, const char *name)
-        : KTMainWindow(parent, name)
+Kpacman::Kpacman(QWidget *parent, const char *name, WFlags fl)
+        : KTMainWindow(parent, name,fl)
 {
     schemesPopup = new QList<QPopupMenu>;
     schemesPopup->setAutoDelete(TRUE);

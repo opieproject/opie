@@ -1,5 +1,4 @@
-TEMPLATE	= app
-CONFIG		= qt warn_on 
+CONFIG		= qt quick-app
 HEADERS		= kpacmanwidget.h \
 		    referee.h \
 		    status.h \
@@ -33,7 +32,6 @@ SOURCES		= kpacmanwidget.cpp \
 INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe -lopiecore2
-DESTDIR         = $(OPIEDIR)/bin
 TARGET		= kpacman
 
 include ( $(OPIEDIR)/include.pro )
