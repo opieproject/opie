@@ -36,10 +36,13 @@ endchoice
 
 config SPECFILE
   string
-  default "linux-generic-g++" if TARGET_X86
-  default "linux-sharp-g++" if TARGET_SHARP
+  default "qws/linux-generic-g++" if TARGET_X86 && (! X11)
+  default "linux-g++" if TARGET_X86 && X11
+  default "qws/linux-sharp-g++" if TARGET_SHARP && (! X11)
+  default "linux-g++" if TARGET_SHARP && X11
 #  default "linux-oz-g++" if TARGET_OZ
-  default "linux-ipaq-g++" if TARGET_IPAQ
+  default "qws/linux-ipaq-g++" if TARGET_IPAQ && (! X11)
+  default "linux-g++" if TARGET_IPAQ && X11
 
 config CUSTOMFILE
   string
