@@ -119,6 +119,7 @@ public:
       qWarning("could not load" );
     }
     delete root;
+    qWarning("returning" );
     return m_todos;
   }
 };
@@ -128,7 +129,8 @@ public:
 ToDoDB::ToDoDB(const QString &fileName = QString::null, ToDoResource *res ){
     m_fileName = fileName;
     if( fileName.isEmpty() && res == 0 ){
-	m_fileName = Global::applicationFileName("todolist","todolist.xml");;
+	m_fileName = Global::applicationFileName("todolist","todolist.xml");
+	res = new FileToDoResource();
 	//qWarning("%s", m_fileName.latin1() );
     }else if(res == 0 ){ // let's create a ToDoResource for xml
       res = new FileToDoResource();
