@@ -41,7 +41,7 @@ INTERFACES     = logindialogui.ui \
               sendmailprogressui.ui
 
 INCLUDEPATH += $(OPIEDIR)/include
-LIBS        += -lqpe -letpan -lssl -lcrypto
+LIBS        += -lqpe -letpan
 
 contains( $(CONFIG_TARGET_MACOSX), y ){
     LIBS    += -liconv
