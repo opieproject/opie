@@ -17,7 +17,8 @@
 ** not clear to you.
 **
 **********************************************************************/
-
+/* Show Deadline was added by Stefan Eilers (se, eilers.stefan@epost.de)
+ */
 #include "todotable.h"
 
 #include <opie/tododb.h>
@@ -37,6 +38,8 @@
 
 #include <errno.h>
 #include <stdlib.h>
+
+#include <stdio.h>
 
 
 
@@ -164,12 +167,13 @@ TodoTable::TodoTable( QWidget *parent, const char *name )
 // #ifdef QT_QTABLE_NOHEADER_CONSTRUCTOR
 //     : QTable( 0, 3, parent, name, TRUE ),
 // #else
-    : QTable( 0, 3, parent, name ),
+    : QTable( 0, 4, parent, name ),
 // #endif
       showComp( true ),
       enablePainting( true ),
       mCat( 0 ),
-      currFindRow( -2 )
+      currFindRow( -2 ),
+      showDeadl( true)
 {
     mCat.load( categoryFileName() );
     setSorting( TRUE );
@@ -177,11 +181,23 @@ TodoTable::TodoTable( QWidget *parent, const char *name )
     setColumnStretchable( 2, TRUE );
     setColumnWidth( 0, 20 );
     setColumnWidth( 1, 35 );
+
     setLeftMargin( 0 );
     verticalHeader()->hide();
     horizontalHeader()->setLabel( 0, tr( "C." ) );
     horizontalHeader()->setLabel( 1, tr( "Prior." ) );
     horizontalHeader()->setLabel( 2, tr( "Description" ) );
+
+    setColumnStretchable( 3, FALSE );
+    setColumnWidth( 3, 20 );
+    horizontalHeader()->setLabel( 3, tr( "Deadline" ) );    
+
+    if (showDeadl){
+      showColumn (3);
+    }else{
+      hideColumn (3);
+    }
+
     connect( this, SIGNAL( clicked( int, int, int, const QPoint & ) ),
 	     this, SLOT( slotClicked( int, int, int, const QPoint & ) ) );
     connect( this, SIGNAL( pressed( int, int, int, const QPoint & ) ),
@@ -234,6 +250,11 @@ void TodoTable::slotClicked( int row, int col, int, const QPoint &pos )
 	    menuTimer->stop();
 //            emit signalEdit();
             break;
+        case 3: /* added 20.01.2k2 by se */
+            // may as well edit it...
+	    menuTimer->stop();
+            emit signalEdit();
+            break;
     }
 }
 
@@ -265,6 +286,8 @@ void TodoTable::internalAddEntries( QList<ToDoEvent> &list )
 
 ToDoEvent TodoTable::currentEntry() const
 {
+  printf ("in currentEntry\n");
+
     QTableItem *i = item( currentRow(), 0 );
     if ( !i || rowHeight( currentRow() ) <= 0 )
         return ToDoEvent();
@@ -353,6 +376,15 @@ void TodoTable::updateVisible()
 	return;
     
 //     qDebug("--> updateVisible!");
+
+    /* added 20.01.2k2 by se */
+    if (showDeadl){
+      showColumn (3);
+      adjustColumn(3);
+    }else{
+      hideColumn (3);
+      adjustColumn(2);
+    }
 
     int visible = 0;
     int id = mCat.id( "Todo List", showCat );
@@ -455,7 +487,7 @@ void TodoTable::slotCheckPriority(int row, int col )
 }
 
 
-void TodoTable::updateJournal( const ToDoEvent &todo, journal_action action, int row )
+void TodoTable::updateJournal( const ToDoEvent &/*todo*/, journal_action action, int row )
 {
     QFile f( journalFileName() );
     if ( !f.open(IO_WriteOnly|IO_Append) )
@@ -508,6 +540,20 @@ void TodoTable::journalFreeReplaceEntry( const ToDoEvent &todo, int row )
 		it.key()->setChecked( todo.isCompleted() );
 		static_cast<ComboItem*>(item(row, 1))->setText( QString::number(todo.priority()) );
 		item( row, 2 )->setText( strTodo );
+
+		/* added 20.01.2k2 by se */
+		if (showDeadl){
+		  if (todo.hasDate()){ 
+		    QDate *today = new QDate (QDate::currentDate());
+		    if (today){
+		      item (row, 3)->setText (tr ("%1").arg(today->daysTo(todo.date())));
+		      delete (today);
+		    }
+		  }else{
+		    item (row, 3)->setText ("n.d.");
+		  }
+		}
+
 		*(*it) = todo;
 	    }
 	}
@@ -518,6 +564,20 @@ void TodoTable::journalFreeReplaceEntry( const ToDoEvent &todo, int row )
 	static_cast<CheckItem*>(item(row, 0))->setChecked( todo.isCompleted() );
 	static_cast<ComboItem*>(item(row, 1))->setText( QString::number(todo.priority()) );
 	item( row, 2 )->setText( strTodo );
+
+	/* added 20.01.2k2 by se */
+ 	if (showDeadl){
+	  if (todo.hasDate()){ 
+	    QDate *today = new QDate (QDate::currentDate());
+	    if (today){
+	      item (row, 3)->setText (tr ("%1").arg(today->daysTo(todo.date())));
+	      delete (today);
+	    }
+	  }else{
+	    item (row, 3)->setText ("n.d.");
+	  }
+ 	}
+
 	todoList.insert( static_cast<CheckItem*>(item(row,0)), new ToDoEvent(todo) );
     }
 }

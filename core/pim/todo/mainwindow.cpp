@@ -1,5 +1,7 @@
 /**********************************************************************
 ** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+   Copyright (C) 2002 zecke
+   Copyright (C) 2002 Stefan Eilers
 **
 ** This file is part of Qtopia Environment.
 **
@@ -107,6 +109,11 @@ TodoWindow::TodoWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
     config.setGroup( "View" );
     bool complete = config.readBoolEntry( "ShowComplete", true );
     table->setShowCompleted( complete );
+
+    /* added 20.01.2k2 by se */
+    bool showdeadline = config.readBoolEntry("ShowDeadLine", true);
+    table->setShowDeadline (showdeadline);
+
     QString category = config.readEntry( "Category", QString::null );
     table->setShowCategory( category );
 
@@ -174,6 +181,9 @@ TodoWindow::TodoWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
 
     completedAction = new QAction( QString::null, tr("Completed tasks"), 0, this, 0, TRUE );
 
+    /* added 20.01.2k2 by se */
+    showdeadlineAction = new QAction( QString::null, tr( "Show Deadline" ), 0, this, 0, TRUE );
+
     catMenu->setCheckable( true );
     populateCategories();
 
@@ -195,6 +205,7 @@ TodoWindow::TodoWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
     table->viewport()->setUpdatesEnabled( TRUE );
 
     connect( completedAction, SIGNAL( toggled(bool) ), this, SLOT( showCompleted(bool) ) );
+    connect( showdeadlineAction, SIGNAL( toggled(bool) ), this, SLOT( showDeadline(bool) ) );
     connect( catMenu, SIGNAL(activated(int)), this, SLOT(setCategory(int)) );
     connect( table, SIGNAL( currentChanged( int, int ) ),
              this, SLOT( currentEntryChanged( int, int ) ) );
@@ -351,6 +362,8 @@ void TodoWindow::populateCategories()
 
     completedAction->addTo( catMenu );
     completedAction->setOn( table->showCompleted() );
+    showdeadlineAction->addTo( catMenu );
+    showdeadlineAction->setOn( table->showDeadline() );
 
     int id, rememberId;
     id = 1;
@@ -402,6 +415,8 @@ void TodoWindow::closeEvent( QCloseEvent *e )
 	config.setGroup( "View" );
 	config.writeEntry( "ShowComplete", table->showCompleted() );
 	config.writeEntry( "Category", table->showCategory() );
+	/* added 20.01.2k2 by se */
+	config.writeEntry( "ShowDeadLine", table->showDeadline());
     } else {
 	if ( QMessageBox::critical( this, tr("Out of space"),
 				    tr("Todo was unable\n"
@@ -472,4 +487,12 @@ void TodoWindow::beamDone( Ir *ir )
 {
     delete ir;
     unlink( beamfile );
+}
+
+/* added 20.01.2k2 by se */
+void TodoWindow::showDeadline( bool s )
+{
+    table->setPaintingEnabled( false );
+    table->setShowDeadline( s );
+    table->setPaintingEnabled( true );
 }

@@ -98,6 +98,10 @@ public:
     void setShowCompleted( bool sc ) { showComp = sc; updateVisible(); }
     bool showCompleted() const { return showComp; }
 
+    /* added 20.01.2k2 by se */
+    void setShowDeadline (bool sd) {showDeadl = sd; updateVisible();}
+    bool showDeadline() const { return showDeadl;}
+
     void setShowCategory( const QString &c ) { showCat = c; updateVisible(); }
     const QString &showCategory() const { return showCat; }
     int showCategoryId() const;
@@ -159,6 +163,9 @@ private:
     bool enablePainting;
     Categories mCat;
     int currFindRow;
+
+    /* added 20.01.2k2 by se */
+    bool showDeadl;
 };
 
 
@@ -174,9 +181,24 @@ inline void TodoTable::insertIntoTable( ToDoEvent *todo, int row )
     QTableItem *ti = new TodoTextItem( this, todo->description().left(40).simplifyWhiteSpace() );
     ti->setReplaceable( false );
 
+    /* added 20.01.2k2 by se */
+    QTableItem *dl = NULL;
+    if (todo->hasDate()){ 
+	    QDate *today = new QDate (QDate::currentDate());
+	    if (today){
+		    dl = new TodoTextItem (this, tr ("%1").
+					   arg(today->daysTo(todo->date())));
+		    delete (today);
+	    }
+    }else{
+	    dl = new TodoTextItem (this,"n.d.");
+    }
+    setItem( row, 3, dl);
+    
     setItem( row, 0, chk );
     setItem( row, 1, cmb );
     setItem( row, 2, ti );
+
 
     todoList.insert( chk, todo );
 }

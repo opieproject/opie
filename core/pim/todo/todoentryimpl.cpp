@@ -48,7 +48,7 @@ NewTaskDialog::NewTaskDialog( const ToDoEvent& task, QWidget *parent,
       todo( task )
 {
     qWarning("setting category" );
-    todo.setCategory( task.category() );
+    todo.setCategories( task.allCategories() );
     if ( todo.hasDate() )
 	date = todo.date();
     else
@@ -128,10 +128,10 @@ ToDoEvent NewTaskDialog::todoEntry()
   qWarning("todoEntry::category()" );
   if ( comboCategory->currentCategory() != -1 ) {
     QArray<int> arr = comboCategory->currentCategories();
-    int id = arr[0];
-    qWarning("id 0: %d",id );
-    todo.setCategory( Qtopia::Record::idsToString( arr ) );
+    QStringList list;
+    list = QStringList::split(";", Qtopia::Record::idsToString( arr )) ;
     qWarning("saving category");
+    todo.setCategories( list );
   }
   todo.setPriority( comboPriority->currentItem() + 1 );
   todo.setCompleted( checkCompleted->isChecked() );

@@ -47,6 +47,10 @@ protected slots:
     void slotEdit();
     void slotShowPopup( const QPoint & );
     void showCompleted( bool );
+
+    /* added 20.01.2k2 by se */
+    void showDeadline( bool );
+    
     void currentEntryChanged( int r, int c );
     void setCategory( int );
     void slotFind();
@@ -64,8 +68,9 @@ private:
     TodoTable *table;
     QAction *editAction,
 	    *deleteAction,
-	*findAction,
-	* completedAction;
+	    *findAction,
+	    * completedAction,
+	    *showdeadlineAction ;
     QPopupMenu *contextMenu, *catMenu;
 
     bool syncing;
