@@ -39,6 +39,7 @@
 #include <opie2/odevice.h>
 #include <opie2/ofiledialog.h>
 #include <opie2/otabwidget.h>
+#include <opie2/odebug.h>
 
 #include <qpe/config.h>
 #include <qpe/global.h>
@@ -832,7 +833,8 @@ public:
         setText ( it-> pattern ( ));
         setGeometry ( x, y, w, h );
 
-        qDebug ( "ExEdit: [%s] at %d,%d %d,%d", it->text(2).latin1(),x,y,w,h);
+        odebug << "ExEdit: [" << it->text(2).latin1() << "] at "
+               << x << "," << y << " " << w << "," << h << oendl;
 
         m_out = true;
 

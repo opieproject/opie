@@ -54,7 +54,7 @@ WLANImp::WLANImp( QWidget* parent, const char* name, Interface *i, bool modal, W
   // Check sanity - the existance of the wireless-tools if-pre-up script
   QFile file(QString(PREUP));
   if (file.exists()) {
-    owarn << QString("WLANImp: Unable to open /etc/network/if-pre-up.d/wireless-tools") << oendl; 
+    owarn << QString("WLANImp: Unable to open /etc/network/if-pre-up.d/wireless-tools") << oendl;
   }
 
   connect( rescanButton, SIGNAL( clicked() ), this, SLOT( rescanNeighbourhood() ) );
@@ -235,7 +235,7 @@ void WLANImp::writeOpts() {
     }
     bool error = false;
 
-    odebug << "setting wlan interface " << interfaces->getInterfaceName( error ).latin1() << "" << oendl; 
+    odebug << "setting wlan interface " << interfaces->getInterfaceName( error ).latin1() << "" << oendl;
 
     if (error)  QMessageBox::warning(0,"Inface not set","should not happen!!!");
 
@@ -309,7 +309,7 @@ void WLANImp::writeOpts() {
 void WLANImp::rescanNeighbourhood()
 {
     QString name = interface->getInterfaceName();
-    odebug << "rescanNeighbourhood via '" << name << "'" << oendl; 
+    odebug << "rescanNeighbourhood via '" << name << "'" << oendl;
 
     OWirelessNetworkInterface* wiface = static_cast<OWirelessNetworkInterface*>( ONetwork::instance()->interface( name ) );
     assert( wiface );
@@ -332,12 +332,12 @@ void WLANImp::rescanNeighbourhood()
     }
     if ( devicetype.isEmpty() )
     {
-        owarn << "rescanNeighbourhood(): couldn't guess device type :(" << oendl; 
+        owarn << "rescanNeighbourhood(): couldn't guess device type :(" << oendl;
         return;
     }
     else
     {
-        odebug << "rescanNeighbourhood(): device type seems to be '" << devicetype << "'" << oendl; 
+        odebug << "rescanNeighbourhood(): device type seems to be '" << devicetype << "'" << oendl;
     }
 
     // configure interface to receive 802.11 management frames
@@ -351,14 +351,14 @@ void WLANImp::rescanNeighbourhood()
     else if ( devicetype == "orinoco" ) wiface->setMonitoring( new OOrinocoMonitoringInterface( wiface, false ) );
     else
     {
-        odebug << "rescanNeighbourhood(): unsupported device type for monitoring :(" << oendl; 
+        odebug << "rescanNeighbourhood(): unsupported device type for monitoring :(" << oendl;
         return;
     }
 
     wiface->setMode( "monitor" );
     if ( wiface->mode() != "monitor" )
     {
-        owarn << "rescanNeighbourhood(): Unable to bring device into monitor mode (" << strerror( errno ) << ")." << oendl; 
+        owarn << "rescanNeighbourhood(): Unable to bring device into monitor mode (" << strerror( errno ) << ")." << oendl;
         return;
     }
 
@@ -367,7 +367,7 @@ void WLANImp::rescanNeighbourhood()
     cap->open( name );
     if ( !cap->isOpen() )
     {
-        owarn << "rescanNeighbourhood(): Unable to open libpcap (" << strerror( errno ) << ")." << oendl; 
+        owarn << "rescanNeighbourhood(): Unable to open libpcap (" << strerror( errno ) << ")." << oendl;
         return;
     }
 
@@ -400,15 +400,15 @@ void WLANImp::rescanNeighbourhood()
         wiface->setChannel( i );
         pb->setProgress( i );
         qApp->processEvents();
-        odebug << "rescanNeighbourhood(): listening on channel " << i << "..." << oendl; 
+        odebug << "rescanNeighbourhood(): listening on channel " << i << "..." << oendl;
         OPacket* p = cap->next( 1000 );
         if ( !p )
         {
-            odebug << "rescanNeighbourhood(): nothing received on channel " << i << "" << oendl; 
+            odebug << "rescanNeighbourhood(): nothing received on channel " << i << "" << oendl;
         }
         else
         {
-            odebug << "rescanNeighbourhood(): TADAA - something came in on channel " << i << "" << oendl; 
+            odebug << "rescanNeighbourhood(): TADAA - something came in on channel " << i << "" << oendl;
             handlePacket( p );
         }
     }
@@ -441,7 +441,7 @@ void WLANImp::handlePacket( OPacket* p )
         }
         else
         {
-            owarn << "handlePacket(): invalid frame [possibly noise] detected!" << oendl; 
+            owarn << "handlePacket(): invalid frame [possibly noise] detected!" << oendl;
             return;
         }
 
@@ -458,9 +458,8 @@ void WLANImp::handlePacket( OPacket* p )
 void WLANImp::displayFoundNetwork( const QString& mode, int channel, const QString& ssid, const OMacAddress& mac )
 {
 
-    qDebug( "found network: <%s>, chn %d, ssid '%s', mac '%s'", (const char*) mode, channel,
-                                                                (const char*) ssid,
-                                                                (const char*) mac.toString() );
+    odebug << "found network: <" << (const char*) mode << ">, chn " << channel
+           << ", ssid '" << (const char*) ssid << "', mac '" << (const char*) mac.toString() << "'" << oendl;
 
     QListViewItemIterator it( netView );
     while ( it.current() && it.current()->text( col_ssid ) != ssid ) ++it;
