@@ -40,7 +40,7 @@ MLogWindow::MLogWindow( QWidget * parent, const char * name, WFlags f )
 void MLogWindow::log( QString text )
 {
     QTime time = QTime::currentTime();
-    QString line = QString( "[%1] %2\n" ).arg(time.toString() ).arg( text );
+    QString line = QString( "[%1] %2" ).arg(time.toString() ).arg( text );
     ledit->insertLine( line );
     odebug << line << oendl;
 }

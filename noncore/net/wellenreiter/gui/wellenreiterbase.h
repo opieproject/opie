@@ -71,6 +71,8 @@ protected:
     QPixmap* ani3;
     QPixmap* ani4;
 
+private slots:
+    virtual void slotTabChanged( QWidget* ) = 0;
 
 };
 
