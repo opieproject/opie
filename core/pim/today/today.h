@@ -18,6 +18,8 @@
 #ifndef TODAY_H
 #define TODAY_H
 
+#include <qscrollview.h>
+#include <qvbox.h>
 
 #include <qpe/qlibrary.h>
 
@@ -37,6 +39,7 @@ class Today : public TodayBase {
   public:
     Today( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     ~Today();
+    static QString appName() { return QString::fromLatin1("today"); }
 
 private slots:
     void startConfig();
@@ -50,6 +53,8 @@ private:
     void setOwnerField(QString &string);
     void loadPlugins();
     void draw();
+    void reinitialize();
+
     void setRefreshTimer( int );
 
 private slots:
@@ -59,6 +64,12 @@ private slots:
     TodayConfig *conf;
     QStringList m_excludeApplets;
     QStringList m_allApplets;
+
+    QScrollView *m_sv;
+    QWidget* m_big_box;
+    QVBoxLayout *m_bblayout;
+
+   
 
     QTimer *m_refreshTimer;
 
