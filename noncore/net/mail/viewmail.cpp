@@ -148,6 +148,7 @@ for (unsigned int i = 0; i < body.Parts().count();++i) {
     if (parentItem) {
         curItem=new AttachItem(parentItem,curItem,type,desc,filename,fsize,i,body.Parts()[i].Positionlist());
         attachments->setRootIsDecorated(true);
+        curItem = parentItem;
     } else {
         curItem=new AttachItem(attachments,curItem,type,desc,filename,fsize,i,body.Parts()[i].Positionlist());
     }
@@ -246,7 +247,7 @@ ViewMail::ViewMail( QWidget *parent, const char *name, WFlags fl)
         connect( attachments,  SIGNAL( clicked ( QListViewItem *, const QPoint & , int ) ), SLOT( slotItemClicked(  QListViewItem *,  const QPoint & , int ) ) );
 
         readConfig();
-
+    attachments->setSorting(-1);
 }
 
 void ViewMail::readConfig() {
