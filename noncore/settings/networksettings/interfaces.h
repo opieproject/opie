@@ -23,7 +23,8 @@ class Interfaces {
 
 public:
   Interfaces(QString useInterfacesFile = "/etc/network/interfaces");
-
+  QStringList getInterfaceList();
+  
   bool isAuto(QString interface);
   bool setAuto(QString interface, bool setAuto);
   

@@ -2,6 +2,8 @@
 #include "addconnectionimp.h"
 #include "interfaceinformationimp.h"
 #include "interfacesetupimp.h"
+#include "interfaces.h"
+
 #include "module.h"
 
 #include "kprocess.h"
@@ -332,6 +334,23 @@ void MainWindowImp::jobDone(KProcess *process){
   }
   file.close();
   QFile::remove(fileName);
+  if(threads.count() == 0){
+    Interfaces i;
+    QStringList list = i.getInterfaceList();
+    QMap<QString, Interface*>::Iterator it;
+    for ( QStringList::Iterator ni = list.begin(); ni != list.end(); ++ni ) {
+      for( it = interfaceNames.begin(); it != interfaceNames.end(); ++it ){
+        if(it.key() == (*ni)){
+          Interface *i = new Interface(*ni, false);
+	  i->setAttached(false);
+	  i->setHardwareName(QString("Disconnected (%1)").arg(*ni));
+	  i->setInterfaceName(*ni);
+	  interfaceNames.insert(i->getInterfaceName(), i);
+	  updateInterface(i);
+	}
+      }
+    }
+  }
 } 
 
 /**
@@ -366,6 +385,9 @@ void MainWindowImp::updateInterface(Interface *i){
     typeName = "irda";
   if(i->getInterfaceName().contains("wlan"))
     typeName = "wlan";
+  
+  if(!i->isAttached())
+    typeName = "connect_no";
   // Actually try to use the Module
   if(i->getModuleOwner() != NULL)
     typeName = i->getModuleOwner()->getPixmapName(i);

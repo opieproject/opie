@@ -5,3 +5,4 @@
 [x] Wlanmodule isnt writing out wireless.opts
 [ ] Need a means of bringing an interface up and down (calling
     out ifup/ifdown) from the gui.
+    -Ben- Click information, then click up or down... :-D

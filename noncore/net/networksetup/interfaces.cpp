@@ -40,10 +40,34 @@ Interfaces::Interfaces(QString useInterfacesFile){
   currentMapping = interfaces.end();
 }
 
+
+/**
+ * Get a list of all interfaces in the interface file.  Usefull for
+ * hardware that is not currently connected such as an 802.11b card 
+ * not plugged in, but configured for when it is plugged in.
+ * @return Return string list of interfaces.
+ **/ 
+QStringList Interfaces::getInterfaceList(){
+  QStringList list;
+  for ( QStringList::Iterator it = interfaces.begin(); it != interfaces.end(); ++it ) {
+    QString line = (*it).simplifyWhiteSpace();
+    if(line.contains(IFACE)){
+      line = line.mid(QString(IFACE).length() +1, line.length());
+      line = line.simplifyWhiteSpace();
+      int findSpace = line.find(" ");
+      if( findSpace >= 0){
+        line = line.mid(0, findSpace);
+        list.append(line);
+      }
+    }
+  }
+  return list;
+}
+
 /**
  * Find out if interface is in an "auto" group or not.
  *  Report any duplicates such as eth0 being in two differnt auto's 
- * @param 
+ * @param interface interface to check to see if it is on or not.
  * @return true is interface is in auto
  */ 
 bool Interfaces::isAuto(QString interface){
