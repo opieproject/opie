@@ -314,6 +314,7 @@ tempDir=/tmp/`basename $self`.$$
 mkdir -p $tempDir
 if [ $? != 0 ]; then
     echo "$self: cannot create $tempDir, exiting..."
+    rm -rf $tempDir
     exit 1
 fi
 
@@ -331,6 +332,7 @@ createFileList $ctrldir/control.new ipkgFileList
 
 if [ "$?" != "0" ]; then
     echo "$self: ERROR: missing files, not building $control"
+    rm -rf $tempDir
     exit 1
 fi
 
