@@ -52,12 +52,8 @@ IRCMessage::IRCMessage(QString line) {
     /* Is this a CTCP command */
     if ((m_command == "PRIVMSG" || m_command == "NOTICE") && m_trailing.length()>0 && m_trailing.left(1) == QChar(1)) {
         m_ctcp = TRUE;
-        if (m_command == "PRIVMSG") {
-	    m_ctcpRequest = TRUE;
-        }
-        else {
-            m_ctcpRequest = FALSE;
-        }
+	
+        m_ctcpRequest = (m_command == "PRIVMSG");
         
         /* Strip CTCP \001 characters */
         m_allParameters = m_allParameters.replace(QRegExp(QChar(1)), "");
@@ -85,12 +81,16 @@ IRCMessage::IRCMessage(QString line) {
     odebug << "Prefix: " << m_prefix << oendl;
     odebug << "Command: " << m_command << oendl;
     odebug << "Allparameters: " << m_allParameters << oendl;
+    
     for (unsigned int i=0; i<m_parameters.count(); i++) {
         odebug << "Parameter " << i << ":" << m_parameters[i] << oendl;
     }
-    odebug << "CTCP Command: " << m_ctcpCommand << oendl;
-    odebug << "CTCP Destination: " << m_ctcpDestination << oendl;
-    odebug << "CTCP param  count is: " << m_parameters.count() << oendl;
+    
+    if(m_ctcp) {
+        odebug << "CTCP " << (m_ctcpRequest? "Request" : "Reply")  << ": " << m_ctcpCommand << oendl;
+        odebug << "CTCP Destination: " << m_ctcpDestination << oendl;
+        odebug << "CTCP param count is: " << m_parameters.count() << oendl;
+    }
     
 }
 
