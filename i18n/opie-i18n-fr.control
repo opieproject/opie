@@ -1,4 +1,4 @@
-Files: i18n/fr/.directory i18n/fr/*.qm
+Files: i18n/fr/.directory i18n/fr/*.qm etc/dict/dawg.fr
 Priority: optional
 Section: opie/i18n
 Maintainer: Carstem Niehaus <cniehaus@kde.org>
