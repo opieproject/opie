@@ -113,6 +113,7 @@ $(OPIEDIR)/stamp-headers :
 	( cd include/opie2 && ln -sf ../../libopie2/opiepim/*.h .; )
 	( cd include/opie2 && ln -sf ../../libopie2/opiepim/core/*.h .; )
 	( cd include/opie2 && ln -sf ../../libopie2/opiepim/core/backends/*.h .; )
+	( cd include/opie2 && ln -sf ../../libopie2/opiepim/ui/*.h .; )
 	( cd include/opie2 && ln -sf ../../libopie2/opieui/*.h .; )
 	( cd include/opie2 && ln -sf ../../libopie2/opieui/fileselector/*.h .; )
 	( cd include/opie2 && ln -sf ../../libopie2/opieui/big-screen/*.h .; )
