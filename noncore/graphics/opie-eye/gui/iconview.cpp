@@ -93,7 +93,7 @@ PIconView::PIconView( QWidget* wid, Config* cfg )
     : QVBox( wid ), m_cfg( cfg )
 {
     {
-        QCopEnvelope( "QPE/Application/opie-eye_slave", "foo()" );
+//        QCopEnvelope( "QPE/Application/opie-eye_slave", "foo()" );
     }
     m_path = QDir::homeDirPath();
 
@@ -145,6 +145,10 @@ void PIconView::slotChangeDir(const QString& path) {
     m_view->clear();
     addFolders( lister->folders() );
     addFiles( lister->files() );
+
+    // Also invalidate the cache. We can't cancel the operations anyway
+    g_stringPix.clear();
+    g_stringInf.clear();
 
     // looks ugly
     static_cast<QMainWindow*>(parent())->setCaption( QObject::tr("%1 - O View", "Name of the dir").arg( m_path ) );

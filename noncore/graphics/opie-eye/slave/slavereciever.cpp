@@ -31,8 +31,13 @@ QDataStream & operator >> (QDataStream & str, bool & b)
 QDataStream &operator<<( QDataStream& s, const PixmapInfo& inf) {
     return s << inf.file << inf.pixmap << inf.width << inf.height;
 }
+
+/*
+ * GUI sends no QPIxmap!!!
+ */
 QDataStream &operator>>( QDataStream& s, PixmapInfo& inf ) {
-    s >> inf.file >> inf.pixmap >> inf.width >> inf.height;
+    s >> inf.file >> inf.width >> inf.height;
+    qWarning( "Recieved %s %d %d", inf.file.latin1(), inf.width, inf.height );
     return s;
 }
 QDataStream &operator<<( QDataStream& s, const ImageInfo& i) {

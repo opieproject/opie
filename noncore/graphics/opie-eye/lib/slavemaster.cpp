@@ -18,8 +18,13 @@ QDataStream & operator >> (QDataStream & str, bool & b)
   b = bool(l);
   return str;
 }
+
+/*
+ * ! We don't put a Pixmap in!!!!
+ */
 QDataStream &operator<<( QDataStream& s, const PixmapInfo& inf) {
-    return s << inf.file << inf.pixmap << inf.width << inf.height;
+    qWarning( "Image request is %s %d %d", inf.file.latin1(), inf.width, inf.height );
+    return s << inf.file  << inf.width << inf.height;
 }
 QDataStream &operator>>( QDataStream& s, PixmapInfo& inf ) {
     s >> inf.file >> inf.pixmap >> inf.width >> inf.height;
