@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>249</width>
+            <width>245</width>
             <height>276</height>
         </rect>
     </property>
@@ -21,27 +21,9 @@
     </property>
     <widget>
         <class>QComboBox</class>
-        <item>
-            <property>
-                <name>text</name>
-                <string>Helium</string>
-            </property>
-        </item>
-        <item>
-            <property>
-                <name>text</name>
-                <string>Carbon</string>
-            </property>
-        </item>
-        <item>
-            <property>
-                <name>text</name>
-                <string>Oxygen</string>
-            </property>
-        </item>
         <property stdset="1">
             <name>name</name>
-            <cstring>ComboBox2</cstring>
+            <cstring>dataCombo</cstring>
         </property>
         <property stdset="1">
             <name>geometry</name>
@@ -70,7 +52,7 @@
         </property>
         <property stdset="1">
             <name>numRows</name>
-            <number>6</number>
+            <number>8</number>
         </property>
         <property stdset="1">
             <name>numCols</name>

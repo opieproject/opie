@@ -17,4 +17,10 @@ class dataWidgetUI : public dataWidget
 	
     public:
 		dataWidgetUI();
+
+    private:
+        void createTableLayout();
+
+    private slots:
+        void slotShowData(int);
 };
