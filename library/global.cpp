@@ -564,6 +564,9 @@ void Global::invoke(const QString &c)
     // see if the application is already running
     // XXX should lock file /tmp/qcop-msg-ap
     if ( QCopChannel::isRegistered( ("QPE/Application/" + ap).latin1() ) ) {
+	// If the channel is already register, the app is already running, so show it.
+	{ QCopEnvelope env( ("QPE/Application/" + ap).latin1(), "raise()" ); }
+                
 	QCopEnvelope e("QPE/System", "notBusy(QString)" );
 	e << ap;
 	return;
