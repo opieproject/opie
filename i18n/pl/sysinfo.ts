@@ -3,58 +3,58 @@
     <name>FileSysInfo</name>
     <message>
         <source>CF</source>
-        <translation type="unfinished"></translation>
+        <translation>CF</translation>
     </message>
     <message>
         <source>This graph represents how much memory is currently used on this Compact Flash memory card.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ten wykres reprezentuje aktualne uzycie pamieci na tej karcie Compact Flash.</translation>
     </message>
     <message>
         <source>Ha</source>
-        <translation type="unfinished"></translation>
+        <translation>Ha</translation>
     </message>
     <message>
         <source>This graph represents how much storage is currently used on this hard drive.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ten wykres reprezentuje aktualne uzycie pamieci na tym twardym dysku.</translation>
     </message>
     <message>
         <source>SD</source>
-        <translation type="unfinished"></translation>
+        <translation>SD</translation>
     </message>
     <message>
         <source>This graph represents how much memory is currently used on this Secure Digital memory card.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ten wykres reprezentuje aktualne uzycie pamieci na tej karcie Secure Digital.</translation>
     </message>
     <message>
         <source>SC</source>
-        <translation type="unfinished"></translation>
+        <translation>SC</translation>
     </message>
     <message>
         <source>In</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">In</translation>
     </message>
     <message>
         <source>This graph represents how much memory is currently used of the built-in memory (i.e. Flash memory) on this handheld device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ten wykres reprezentuje aktualne uzycie pamieci w pamieci wbudowanej tego urzadzenia (np. pamieci Flash).</translation>
     </message>
     <message>
         <source>RA</source>
-        <translation type="unfinished"></translation>
+        <translation>RA</translation>
     </message>
     <message>
         <source>This graph represents how much memory is currently used of the temporary RAM disk.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ten wykres reprezentuje aktualne uzycie pamieci na tymczasowym RAM-dysku.</translation>
     </message>
 </context>
 <context>
     <name>LoadInfo</name>
     <message>
         <source>Application CPU usage (%)</source>
-        <translation>Aplikacje CPU (%)</translation>
+        <translation>Uzycie procesora przez aplikacje (%)</translation>
     </message>
     <message>
         <source>System CPU usage (%)</source>
-        <translation>System CPU (%)</translation>
+        <translation>Uzycie procesora przez system (%)</translation>
     </message>
     <message>
         <source>Type: </source>
@@ -62,14 +62,14 @@
     </message>
     <message>
         <source>This page shows how much this device&apos;s processor is being used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ta strona prezentuje obciazenie procesora tego urzadzenia.</translation>
     </message>
 </context>
 <context>
     <name>MemoryInfo</name>
     <message>
         <source>Used (%1 kB)</source>
-        <translation>Uzywane (%1 kB)</translation>
+        <translation>Uzywana (%1 kB)</translation>
     </message>
     <message>
         <source>Buffers (%1 kB)</source>
@@ -81,11 +81,11 @@
     </message>
     <message>
         <source>Free (%1 kB)</source>
-        <translation>Wolne (%1 kB)</translation>
+        <translation>Wolna (%1 kB)</translation>
     </message>
     <message>
         <source>Total Memory: %1 kB</source>
-        <translation>Calkowita: %1 kB</translation>
+        <translation>Calkowita Pamiec: %1 kB</translation>
     </message>
     <message>
         <source>This page shows how memory (i.e. RAM) is being allocated on your handheld device.
@@ -95,82 +95,90 @@ Memory is categorized as follows:
 2. Buffers - temporary storage used to improve performance
 3. Cached - information that has recently been used, but has not been freed yet.
 4. Free - memory not currently used by Opie or any running applications.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ta strona prezentuje alokacje pamieci (np. RAM) na Twoim urzadzeniu.
+Pamiec jest podzielona na kategorie:
+
+1. Uzywana - pamiec uzywana przez Opie i inne dzialajace aplikacje.
+2. Bufory - tymczasowa przestrzen uzywana do poprawienia wydajnosci.
+3. Podreczna - informacje, ktore zostaly juz uzyte, ale nie zostaly jeszcze zwolnione.
+4. Wolna - pamiec nie bedaca aktualnie w uzyciu przez zadne aplikacje.</translation>
     </message>
 </context>
 <context>
     <name>ModulesInfo</name>
     <message>
         <source>Module</source>
-        <translation type="unfinished"></translation>
+        <translation>Modul</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozmiar</translation>
     </message>
     <message>
         <source>Use#</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzyty#</translation>
     </message>
     <message>
         <source>This is a list of all the kernel modules currently loaded on this handheld device.
 
 Click and hold on a module to see additional information about the module, or to unload it.</source>
-        <translation type="unfinished"></translation>
+        <translation>To jest lista wszystkich aktualnie zaladowanych modulow jadra.
+
+Kliknij i przytrzymaj na module aby zobaczyc wiecej informacji na jego temat lub wy go usunac z pamieci.</translation>
     </message>
     <message>
         <source>Select a command here and then click the Send button to the right to send the command to module selected above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybierz tu polecenie i kliknij przycisk Wyslij po prawej zeby wyslac polecenie do wybranego powyzej modulu.</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished">Wyslane</translation>
+        <translation>Wyslij</translation>
     </message>
     <message>
         <source>Click here to send the selected command to the module selected above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij tu zeby wyslac wybrane polecenie do wybranego powyzej modulu.</translation>
     </message>
     <message>
         <source>This area shows detailed information about this module.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ten obszar prezentuje szczegolowe informacje o tym module.</translation>
     </message>
     <message>
         <source>Used by</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzywany przez</translation>
     </message>
     <message>
         <source>You really want to execute %1 for this module?</source>
-        <translation type="unfinished"></translation>
+        <translation>Czy na pewno chcesz wykonac %1 na tym module?</translation>
     </message>
 </context>
 <context>
     <name>MountInfo</name>
     <message>
         <source>Used (%1 kB)</source>
-        <translation>Uzywane (%1 kB)</translation>
+        <translation>Zajete (%1 kB)</translation>
     </message>
     <message>
         <source>Available (%1 kB)</source>
-        <translation>Dostepne (%1 kB)</translation>
+        <translation>Wolne (%1 kB)</translation>
     </message>
     <message>
         <source> : %1 kB</source>
-        <translation type="unfinished"></translation>
+        <translation>: %1 kB</translation>
     </message>
 </context>
 <context>
     <name>ProcessInfo</name>
     <message>
         <source>PID</source>
-        <translation type="unfinished"></translation>
+        <translation>PID</translation>
     </message>
     <message>
         <source>Command</source>
-        <translation>Komenda</translation>
+        <translation>polecenie</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Status</translation>
     </message>
     <message>
         <source>Time</source>
@@ -180,27 +188,29 @@ Click and hold on a module to see additional information about the module, or to
         <source>This is a list of all the processes on this handheld device.
 
 Click and hold on a process to see additional information about the process, or to send a signal to it.</source>
-        <translation type="unfinished"></translation>
+        <translation>To jest lista wszystkich procesow dzialajacych na tym urzadzeniu.
+
+Kliknij i przytrzymaj na procesie by zobaczyc dodatkowe informacje o nim lub by wyslac do niego sygnal.</translation>
     </message>
     <message>
         <source>Select a signal here and then click the Send button to the right to send to this process.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybierz tu sygnal i kliknij przycisk Wyslij po prawej by go wyslac do procesu.</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished">Wyslane</translation>
+        <translation>Wyslij</translation>
     </message>
     <message>
         <source>Click here to send the selected signal to this process.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij tu by wyslac wybrany sygnal do tego procesu.</translation>
     </message>
     <message>
         <source>This area shows detailed information about this process.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ten obszar prezentuje szczegolowe informacje o tym procesie.</translation>
     </message>
     <message>
         <source>You really want to send %1 to this process?</source>
-        <translation type="unfinished"></translation>
+        <translation>Czy na pewno chcesz wyslac %1 do tego procesu?</translation>
     </message>
 </context>
 <context>
@@ -219,7 +229,7 @@ Click and hold on a process to see additional information about the process, or 
     </message>
     <message>
         <source>CPU</source>
-        <translation type="unfinished"></translation>
+        <translation>Procesor</translation>
     </message>
     <message>
         <source>Process</source>
@@ -231,18 +241,18 @@ Click and hold on a process to see additional information about the process, or 
     </message>
     <message>
         <source>Modules</source>
-        <translation type="unfinished"></translation>
+        <translation>Moduly</translation>
     </message>
 </context>
 <context>
     <name>VersionInfo</name>
     <message>
         <source>&lt;b&gt;Linux Kernel&lt;/b&gt;&lt;p&gt;Version: </source>
-        <translation>&lt;b&gt;Linux Kernel&lt;/b&gt;&lt;p&gt;Wersja: </translation>
+        <translation>&lt;b&gt;Jadro Linuksa&lt;/b&gt;&lt;p&gt;Wersja: </translation>
     </message>
     <message>
         <source>Compiled by: </source>
-        <translation>Kompilowana przez: </translation>
+        <translation>Kompilowane przez: </translation>
     </message>
     <message>
         <source>&lt;b&gt;Opie&lt;/b&gt;&lt;p&gt;Version: </source>
@@ -250,23 +260,23 @@ Click and hold on a process to see additional information about the process, or 
     </message>
     <message>
         <source>Built on: </source>
-        <translation>Utworzona: </translation>
+        <translation>Zbudowane na: </translation>
     </message>
     <message>
         <source>&lt;p&gt;Version: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Wersja:</translation>
     </message>
     <message>
         <source>&lt;p&gt;Model: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Model:</translation>
     </message>
     <message>
         <source>&lt;p&gt;Vendor: </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;p&gt;Sprzedawca:</translation>
     </message>
     <message>
         <source>This page shows the current versions of Opie, the Linux kernel and distribution running on this handheld device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ta strona prezentuje aktualne wersje Opie, jadra Linuksa i dystrybucji dzialajacych na tym urzadzeniu.</translation>
     </message>
 </context>
 </TS>
