@@ -1,0 +1,9 @@
+Files: bin/drawpad apps/Applications/drawpad.desktop pics/drawpad.png pics/drawpad
+Package: opie-drawpad
+Priority: optional
+Section: opie/applications
+Maintainer: leseb <prudhomme@laposte.net>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base ($QPE_VERSION)
+Description: A drawing program
