@@ -163,80 +163,81 @@
     <name>Ipkg</name>
     <message>
         <source>Dealing with package %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Trattamento pacchetto %1</translation>
     </message>
     <message>
         <source>Removing symbolic links...
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Rimozione link simbolici...
+</translation>
     </message>
     <message>
         <source>Creating symbolic links for %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Creazione link simbolici per %1.</translation>
     </message>
     <message>
         <source>Creating symbolic links for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Creazione link simbolici per %1</translation>
     </message>
     <message>
         <source>Finished</source>
-        <translation type="unfinished"></translation>
+        <translation>Terminato</translation>
     </message>
     <message>
         <source>Removing status entry...</source>
-        <translation type="unfinished"></translation>
+        <translation>Rimozione valore stato...</translation>
     </message>
     <message>
         <source>status file - </source>
-        <translation type="unfinished"></translation>
+        <translation>file di stato - </translation>
     </message>
     <message>
         <source>package - </source>
-        <translation type="unfinished"></translation>
+        <translation>pacchetto - </translation>
     </message>
     <message>
         <source>Couldn&apos;t open status file - </source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile aprire file di stato - </translation>
     </message>
     <message>
         <source>Couldn&apos;t create tempory status file - </source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile creare file di stato temporaneo - </translation>
     </message>
     <message>
         <source>Couldn&apos;t start ipkg process</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile avviare processo ipkg</translation>
     </message>
     <message>
         <source>Could not open :</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile aprire :</translation>
     </message>
     <message>
         <source>Creating directory </source>
-        <translation type="unfinished"></translation>
+        <translation>Creazione directory </translation>
     </message>
     <message>
         <source>Linked %1 to %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Creato link da %1 a %2</translation>
     </message>
     <message>
         <source>Failed to link %1 to %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Creazione link da %1 a %2 fallita</translation>
     </message>
     <message>
         <source>Removed %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminato %1</translation>
     </message>
     <message>
         <source>Failed to remove %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile eliminare %1</translation>
     </message>
     <message>
         <source>Removed </source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminato </translation>
     </message>
     <message>
         <source>Failed to remove </source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile eliminare </translation>
     </message>
 </context>
 <context>
@@ -592,19 +593,20 @@ Sei sicuro?
     <message>
         <source>
               inst version - %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+              versione inst - %1</translation>
     </message>
     <message>
         <source>Version string is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>La stringa della versione è vuota.</translation>
     </message>
     <message>
         <source>Epoch in version is not number.</source>
-        <translation type="unfinished"></translation>
+        <translation>Il valore nella versione non è un numero.</translation>
     </message>
     <message>
         <source>Nothing after colon in version number.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nessun carattere dopo i due punti nel numero di versione.</translation>
     </message>
 </context>
 <context>

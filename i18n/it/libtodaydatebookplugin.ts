@@ -12,7 +12,7 @@
     </message>
     <message>
         <source>All day</source>
-        <translation type="unfinished"></translation>
+        <translation>Tutto il giorno</translation>
     </message>
 </context>
 <context>
@@ -82,51 +82,51 @@ mostrati?</translation>
     </message>
     <message>
         <source>Show location</source>
-        <translation type="unfinished">Mostra luogo</translation>
+        <translation>Mostra luogo</translation>
     </message>
     <message>
         <source>Check this if the location of an appointment should be shown for each one</source>
-        <translation type="unfinished">Spunta se deve essere mostrato per ognuno il luogo di un appuntamento</translation>
+        <translation>Spunta se deve essere mostrato per ognuno il luogo di un appuntamento</translation>
     </message>
     <message>
         <source>Show notes</source>
-        <translation type="unfinished">Mostra note</translation>
+        <translation>Nostra note</translation>
     </message>
     <message>
         <source>Check this if the note attached to an appointment should be shown for each one</source>
-        <translation type="unfinished">Spunta se deve essere mostrata per ognuno la nota associata ad un appuntamento</translation>
+        <translation>Spunta se deve essere mostrata per ognuno la nota associata ad un appuntamento</translation>
     </message>
     <message>
         <source>Show only later appointments</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra solo appuntamenti successivi</translation>
     </message>
     <message>
         <source>Check this if only appointments later then current time should be shown</source>
-        <translation type="unfinished">Spunta se devono essere mostrati solo gli appuntamenti dopo l&apos;orario corrente</translation>
+        <translation>Spunta se devono essere mostrati solo i successivi appuntamenti</translation>
     </message>
     <message>
         <source>Show time in extra line</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra orario in linee extra</translation>
     </message>
     <message>
         <source>How many appointments should be shown maximal. In chronical order</source>
-        <translation type="unfinished">Quanti appuntamenti devono essere mostrati al massimo. In ordine cronologico</translation>
+        <translation>Quanti appuntamenti devono essere mostrati al massimo. In ordine cronologico</translation>
     </message>
     <message>
         <source>How many appointment should be shown?</source>
-        <translation type="unfinished"></translation>
+        <translation>Quanti appuntamenti devono essere mostrati?</translation>
     </message>
     <message>
         <source>only today</source>
-        <translation type="unfinished">solo oggi</translation>
+        <translation>solo oggi</translation>
     </message>
     <message>
         <source>How many more days should be in the range</source>
-        <translation type="unfinished">Quanti altri giorni devono essere nel campo</translation>
+        <translation>Quanti altri giorni devono essere nel campo</translation>
     </message>
     <message>
         <source>How many more days</source>
-        <translation type="unfinished">Quanti altri giorni</translation>
+        <translation>Quanti altri giorni</translation>
     </message>
 </context>
 <context>
