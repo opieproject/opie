@@ -470,7 +470,8 @@ void Keyboard::resetState()
  * cursor after inputing korean chars, otherwise it will eat up and replace
  * the char before the cursor you move to. fix that
  *
- * make a kor/eng swaping key
+ * make backspace delete one single char, not the whole thing if still 
+ * editing.
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
  *
@@ -770,8 +771,7 @@ Keys::Keys() {
 
     Config config("locale");
     config.setGroup( "Language" );
-    QString l = config.readEntry( "Language" );
-    if(l.isEmpty()) l = "en";
+    QString l = config.readEntry( "Language" , "en" );
 
     QString key_map = QPEApplication::qpeDir() + "/share/multikey/" 
             + /* l // testing korean for now */ 
