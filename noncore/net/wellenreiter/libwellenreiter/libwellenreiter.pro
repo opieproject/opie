@@ -1,8 +1,8 @@
 TEMPLATE = lib
 CONFIG = warn_on debug
-VERSION = 0.1
-HEADERS = source/cardmode.hh source/log.hh source/proto.hh source/sniff.hh source/sock.hh
-SOURCES = source/cardmode.cc source/log.cc source/proto.cc source/sniff.cc source/sock.cc
+VERSION = 0.2
+HEADERS = source/cardmode.hh source/wl_log.hh source/wl_proto.hh source/sniff.hh source/wl_sock.hh
+SOURCES = source/cardmode.cc source/wl_log.cc source/wl_proto.cc source/sniff.cc source/wl_sock.cc
 
 LIBS =
 TMAKE_CFLAGS += -D__UNIX__
