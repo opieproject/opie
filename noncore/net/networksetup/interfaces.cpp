@@ -51,7 +51,7 @@ QStringList Interfaces::getInterfaceList(){
   QStringList list;
   for ( QStringList::Iterator it = interfaces.begin(); it != interfaces.end(); ++it ) {
     QString line = (*it).simplifyWhiteSpace();
-    if(line.contains(IFACE)){
+    if(line.contains(IFACE) && line.at(0) != '#'){
       line = line.mid(QString(IFACE).length() +1, line.length());
       line = line.simplifyWhiteSpace();
       int findSpace = line.find(" ");
@@ -457,7 +457,7 @@ bool Interfaces::setStanza(QString stanza, QString option, QStringList::Iterator
   iterator = interfaces.end();
   for ( QStringList::Iterator it = interfaces.begin(); it != interfaces.end(); ++it ) {
     QString line = (*it).simplifyWhiteSpace();
-    if(line.contains(stanza) && line.contains(option)){
+    if(line.contains(stanza) && line.contains(option) && line.at(0) != '#'){
       uint point = line.find(option);
       bool valid = true;
       if(point > 0){
@@ -503,7 +503,7 @@ bool Interfaces::setOption(QStringList::Iterator start, QString option, QString 
       found = true;
       break;
     }
-    if((*it).contains(option) && it != start){
+    if((*it).contains(option) && it != start && (*it).at(0) != '#'){
       // Found it in stanza so replace it.
       if(found)
         qDebug(QString("Interfaces: Set Options found more then one value for option: %1 in stanza: %1").arg(option).arg((*start)).latin1());
@@ -534,7 +534,7 @@ bool Interfaces::removeOption(QStringList::Iterator start, QString option, QStri
       // got to the end without finding it
       break;
     }
-    if((*it).contains(option) && (*it).contains(value) &&it != start){
+    if((*it).contains(option) && (*it).contains(value) && it != start && (*it).at(0) != '#'){
       // Found it in stanza so replace it.
       if(found)
         qDebug(QString("Interfaces: Set Options found more then one value for option: %1 in stanza: %1").arg(option).arg((*start)).latin1());
@@ -587,7 +587,7 @@ QString Interfaces::getOption(QStringList::Iterator start, QString option, bool 
     if(((*it).contains(IFACE) || (*it).contains(MAPPING) || (*it).contains(AUTO))  && it != start){
       break;
     }
-    if((*it).contains(option)){
+    if((*it).contains(option) && (*it).at(0) != '#'){
       if(found)
         qDebug(QString("Interfaces: Get Options found more then one value: %1 for option: %2 in stanza %3").arg((*it)).arg(option).arg((*start)).latin1());
       found = true;

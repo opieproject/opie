@@ -232,7 +232,7 @@ void MainWindowImp::configureClicked(){
   if(i->getModuleOwner()){
     i->getModuleOwner()->setProfile(currentProfile);
     QTabWidget *tabWidget = NULL;
-    QWidget *moduleConfigure = i->getModuleOwner()->configure(&tabWidget);
+    QWidget *moduleConfigure = i->getModuleOwner()->configure(i, &tabWidget);
     if(moduleConfigure != NULL){
       if(tabWidget != NULL){
 	InterfaceSetupImp *configure = new InterfaceSetupImp(tabWidget, "InterfaceSetupImp", i, true);
@@ -278,7 +278,7 @@ void MainWindowImp::informationClicked(){
 	  
   if(i->getModuleOwner()){
     QTabWidget *tabWidget = NULL;
-    QWidget *moduleInformation = i->getModuleOwner()->information(&tabWidget);
+    QWidget *moduleInformation = i->getModuleOwner()->information(i, &tabWidget);
     if(moduleInformation != NULL){
       if(tabWidget != NULL){
 	InterfaceInformationImp *information = new InterfaceInformationImp(tabWidget, "InterfaceSetupImp", i, true);

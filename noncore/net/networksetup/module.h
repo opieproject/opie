@@ -29,7 +29,7 @@ public:
    * @param Interface* can be used in determining the icon.
    * @return QString the icon name (minus .png, .gif etc) 
    */ 
-  virtual QString getPixmapName(Interface* i) = 0;
+  virtual QString getPixmapName(Interface *) = 0;
 
   /**
    * Check to see if the interface i is owned by this module.
@@ -40,17 +40,19 @@ public:
   
   /**
    * Create, set tabWiget and return the WLANConfigure Module
+   * @param Interface *i the interface to configure.
    * @param tabWidget a pointer to the tab widget that this configure has.
    * @return QWidget* pointer to the tab widget in this modules configure.
    */
-  virtual QWidget *configure(QTabWidget **){ return NULL; } ;
+  virtual QWidget *configure(Interface *, QTabWidget **){ return NULL; } ;
   
   /**
    * Create, set tabWiget and return the Information Module
+   * @param Interface *i the interface to get info on.
    * @param tabWidget a pointer to the tab widget that this information has.
    * @return QWidget* pointer to the tab widget in this modules info.
    */
-  virtual QWidget *information(QTabWidget **){ return NULL; };
+  virtual QWidget *information(Interface *, QTabWidget **){ return NULL; };
   
   /**
    * Get all active (up or down) interfaces
