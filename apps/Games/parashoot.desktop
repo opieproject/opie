@@ -1,7 +1,7 @@
 [Desktop Entry]
 Comment=A Parachute Attack Game
 Exec=parashoot
-Icon=ParaShoot
+Icon=parashoot/ParaShoot
 Type=Application
 Name=ParaShoot
 Name[no]=Fallskjerm
