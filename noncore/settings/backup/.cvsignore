@@ -1,4 +1,6 @@
 Makefile*
 backuprestorebase.cpp
 backuprestorebase.h
-moc_*
+errordialog.cpp
+errordialog.h
+.moc
