@@ -382,6 +382,7 @@ void OFileViewFileListView::connectSlots() {
 void OFileViewFileListView::slotCurrentChanged( QListViewItem* item) {
     if (!item)
         return;
+#if 0
 
     OFileSelectorItem *sel = static_cast<OFileSelectorItem*>(item);
 
@@ -389,6 +390,7 @@ void OFileViewFileListView::slotCurrentChanged( QListViewItem* item) {
         selector()->m_lneEdit->setText( sel->text(1) );
         // if in fileselector mode we will emit selected
         if ( selector()->mode() == OFileSelector::FileSelector ) {
+            qWarning("slot Current Changed");
             QStringList str = QStringList::split("->", sel->text(1) );
             QString path = sel->directory() + "/" + str[0].stripWhiteSpace();
             emit selector()->fileSelected( path );
@@ -396,6 +398,7 @@ void OFileViewFileListView::slotCurrentChanged( QListViewItem* item) {
             emit selector()->fileSelected( lnk );
         }
     }
+#endif
 }
 void OFileViewFileListView::slotClicked(int button , QListViewItem* item, const QPoint&, int ) {
     if (!item || ( button != Qt::LeftButton) )
@@ -408,6 +411,7 @@ void OFileViewFileListView::slotClicked(int button , QListViewItem* item, const 
             m_currentDir = sel->directory() + "/" + str[0].stripWhiteSpace();
             reread( m_all );
         }else { // file
+            qWarning("slot Clicked");
             selector()->m_lneEdit->setText( str[0].stripWhiteSpace() );
             QString path = sel->directory() + "/" + str[0].stripWhiteSpace();
             emit selector()->fileSelected( path );
