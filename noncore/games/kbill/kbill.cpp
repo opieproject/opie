@@ -28,24 +28,24 @@
 #include "Strings.h"
 
 KBill::KBill() : QMainWindow() {
-	setCaption("kBill");
+	setCaption(tr("kBill"));
 	file = new QPopupMenu();
-	file->insertItem(("New game"), this, SLOT(NewGame()));
-	pauseid = file->insertItem(("Pause game"), this, SLOT(Pause()));
+	file->insertItem(tr("New game"), this, SLOT(NewGame()));
+	pauseid = file->insertItem(tr("Pause game"), this, SLOT(Pause()));
 	//these are dissabled until I fix them
-	//file->insertItem(("Warp to level..."), this, SLOT(WarpTo()));
-	//file->insertItem(("View high scores"), this, SLOT(ViewHighScores()));
+	//file->insertItem(tr("Warp to level..."), this, SLOT(WarpTo()));
+	//file->insertItem(tr("View high scores"), this, SLOT(ViewHighScores()));
 	
 
 	help = new QPopupMenu();
-	help->insertItem(("Story of kBill"), this, SLOT(Story()));
-	help->insertItem(("Rules"), this, SLOT(Rules()));
+	help->insertItem(tr("Story of kBill"), this, SLOT(Story()));
+	help->insertItem(tr("Rules"), this, SLOT(Rules()));
 
 
 	menu = new QMenuBar(this);
-	menu->insertItem(("&File"), file);
+	menu->insertItem(tr("&File"), file);
 	menu->insertSeparator();
-	menu->insertItem(("&Help"), help);
+	menu->insertItem(tr("&Help"), help);
 
 	field = new Field(this);
 	//setView(field);
@@ -85,13 +85,13 @@ void KBill::NewGame() {
 
 void KBill::Pause() {
  	field->stopTimer();
-	QMessageBox::message(("Pause Game"), (pausestr), 0);
+	QMessageBox::message(tr("Pause Game"), tr(pausestr), 0);
  	field->startTimer();
 }
 
 void KBill::WarpTo() {
 /* 	field->stopTimer();
- 	InputBox b(this, 0, "Warp To Level", warpstr);
+ 	InputBox b(this, 0, "Warp To Level", tr(warpstr));
  	bool status  = b.exec() == 1;
  	field->startTimer();
  	if (status) {
@@ -112,8 +112,8 @@ void KBill::ViewHighScores() {
 void KBill::Story() {
 	field->stopTimer();
  	HelpDialog *stryDialog = new HelpDialog(this,"helpdialog",1);
- 	QString stryString = "<b>The Story</b><p>Yet again, the fate of the world rests in your hands!  An evil computer hacker, known only by his handle 'Bill', has created the ultimate computer virus.  A virus so powerful that it has the power to transmute an ordinary computer into a toaster oven.  (oooh!) 'Bill' has cloned himself into a billion-jillion micro-Bills.  Their sole purpose is to deliver the nefarious virus, which has been cleverly diguised as a popular operating system. As System Administrator and Exterminator, your job is to keep Bill from succeeding at his task.";
- 	stryDialog->setCaption("The story of KBill");
+ 	QString stryString = tr("<b>The Story</b><p>Yet again, the fate of the world rests in your hands!  An evil computer hacker, known only by his handle 'Bill', has created the ultimate computer virus.  A virus so powerful that it has the power to transmute an ordinary computer into a toaster oven.  (oooh!) 'Bill' has cloned himself into a billion-jillion micro-Bills.  Their sole purpose is to deliver the nefarious virus, which has been cleverly diguised as a popular operating system. As System Administrator and Exterminator, your job is to keep Bill from succeeding at his task.");
+ 	stryDialog->setCaption(tr("The story of KBill"));
  	stryDialog->TextBrowser1->setText(stryString);
  	stryDialog->resize(200,200);
  	stryDialog->show();
@@ -123,8 +123,8 @@ void KBill::Story() {
 void KBill::Rules() {
  	field->stopTimer();
 	HelpDialog *rulesDialog = new HelpDialog(this,"helpdialog",1);
- 	rulesDialog->setCaption("The rules of KBill");
-	QString rulesStr = "<b>The Rules</b><p>kBill has been painstakingly designed and researched in order to make it as easy to use for the whole family as it is for little Sally. Years - nay - days of beta testing and consulting with the cheapest of human interface designers have resulted in a game that is easy to use, yet nothing at all like a Macintosh.<p><UL><LI>Whack the Bills (click)</LI><LI>Restart the computer (click)</LI><LI>Pick up stolen OSes & return (drag) them to their respective computers</LI><LI>Drag the bucket to extinguish sparks</LI><LI>Scoring is based on total uptime, with bonuses for killing Bills.</LI></UL><P>As for the rest, you can probably work it out for yourself.  We did, so it can't be too hard";
+ 	rulesDialog->setCaption(tr("The rules of KBill"));
+	QString rulesStr = tr("<b>The Rules</b><p>kBill has been painstakingly designed and researched in order to make it as easy to use for the whole family as it is for little Sally. Years - nay - days of beta testing and consulting with the cheapest of human interface designers have resulted in a game that is easy to use, yet nothing at all like a Macintosh.<p><UL><LI>Whack the Bills (click)</LI><LI>Restart the computer (click)</LI><LI>Pick up stolen OSes & return (drag) them to their respective computers</LI><LI>Drag the bucket to extinguish sparks</LI><LI>Scoring is based on total uptime, with bonuses for killing Bills.</LI></UL><P>As for the rest, you can probably work it out for yourself.  We did, so it can't be too hard");
  	rulesDialog->TextBrowser1->setText(rulesStr);
  	rulesDialog->resize(200,200);
  	rulesDialog->show(); 	

@@ -71,13 +71,13 @@ void UI::popup_dialog (int dialog) {
 	kill_timer();
 	switch (dialog) {
 	case Game::ENDGAME:
-			QMessageBox::message(("Endgame"), (endgamestr));
+			QMessageBox::message(("Endgame"), QT_TR_NOOP(endgamestr));
 			break;
 	case Game::HIGHSCORE:
 		//	QMessageBox::message(("HighScore"), highscorestr);
 			break;
 	case Game::ENTERNAME: {
-			InputBox b(main, 0, ("Enter Name"), (enternamestr));
+			InputBox b(main, 0, ("Enter Name"), QT_TR_NOOP(enternamestr));
 			bool state = b.exec() == 2;
 		  char str[20], *nl;
 	    strcpy(str, b.getText());
@@ -171,5 +171,5 @@ void UI::update_hsbox(char *str) {
 }
 
 void UI::update_scorebox(int level, int score) {
-	scorestr.sprintf ("%s %d:\n%s: %d", ("After Level"), level, ("Your score"), score);
+	scorestr.sprintf ("%s %d:\n%s: %d", QT_TR_NOOP("After Level"), level, QT_TR_NOOP("Your score"), score);
 }
