@@ -22,7 +22,7 @@ AdressSearch::AdressSearch(QListView* parent, QString name):
 	SearchGroup(parent, name)
 {
 	_contacts = 0;
-	QIconSet is = Resource::loadIconSet( "addressbook/AddressBookSmall" );
+        QIconSet is = Resource::loadIconSet( "addressbook/AddressBook" );
 	setPixmap( 0, is.pixmap( QIconSet::Large, true ) );
 
 

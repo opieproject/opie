@@ -183,6 +183,8 @@ void MainWindow::makeMenu()
   LabelEnterText = new QLabel( searchBar, "Label" );
   LabelEnterText->setAutoMask( FALSE );
   LabelEnterText->setText( tr( "Search for: " ) );
+  LabelEnterText->setFrameStyle( QFrame::NoFrame );
+  LabelEnterText->setBackgroundMode( PaletteButton );
 
   addToolBar( searchBar, "Search", QMainWindow::Top, TRUE );
   QLineEdit *searchEdit = new QLineEdit( searchBar, "seachEdit" );

@@ -21,7 +21,7 @@
 AppLnkSearch::AppLnkSearch(QListView* parent, QString name): SearchGroup(parent, name)
 {
 	_apps = 0;
-	QIconSet is = Resource::loadIconSet( "osearch/applicationsSmall" );
+        QIconSet is = Resource::loadIconSet( "osearch/applications" );
 	//QIconSet is = Resource::loadIconSet( "AppsIcon" );
 	setPixmap( 0, is.pixmap( QIconSet::Large, true ) );
 }

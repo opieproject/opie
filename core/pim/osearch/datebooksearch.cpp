@@ -28,7 +28,7 @@
 DatebookSearch::DatebookSearch(QListView* parent, QString name)
 : SearchGroup(parent, name), _dates(0), _popupMenu(0)
 {
-	QIconSet is = Resource::loadIconSet( "datebook/DateBookSmall" );
+	QIconSet is = Resource::loadIconSet( "datebook/DateBook" );
 	setPixmap( 0, is.pixmap( QIconSet::Large, true ) );
 	actionShowPastEvents = new QAction( QObject::tr("Show past events"),QString::null,  0, 0, 0, true );
 	actionSearchInDates = new QAction( QObject::tr("Search in dates"),QString::null,  0, 0, 0, true );

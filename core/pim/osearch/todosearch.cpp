@@ -25,7 +25,7 @@ TodoSearch::TodoSearch(QListView* parent, QString name)
 {
 //	AppLnkSet als(QPEApplication::qpeDir());
 //	setPixmap( 0, als.findExec("todolist")->pixmap() );
-	QIconSet is = Resource::loadIconSet( "todo/TodoListSmall" );
+        QIconSet is = Resource::loadIconSet( "todo/TodoList" );
 	setPixmap( 0, is.pixmap( QIconSet::Large, true ) );
 	actionShowCompleted = new QAction( QObject::tr("Show completed tasks"),QString::null,  0, 0, 0, true );
 	Config cfg( "osearch", Config::User );
