@@ -14,6 +14,7 @@
 #define QTOPIA_INTERNAL_FSLP // to get access to fileproperties
 #define QT_QWS_OPIE
 
+//#include <opie/otabwidget.h>
 #include <qpe/ir.h>
 
 #include <qvariant.h>
@@ -25,6 +26,7 @@
 #include <qpoint.h>
 #include <qtimer.h>
 
+class OTabWidget;
 class QVBoxLayout;
 class QHBoxLayout;
 class QGridLayout;
@@ -53,7 +55,8 @@ public:
     AdvancedFm();
     ~AdvancedFm();
 
-    QTabWidget *TabWidget;
+    OTabWidget *TabWidget;
+//    QTabWidget *TabWidget;
     QWidget *tab, *tab_2, *tab_3;
     QListView *Local_View, *Remote_View;
 

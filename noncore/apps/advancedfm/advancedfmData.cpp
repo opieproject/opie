@@ -11,6 +11,7 @@
  ***************************************************************************/
 #include "advancedfm.h"
 
+#include <opie/otabwidget.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/qpemenubar.h>
 #include <qpe/qpetoolbar.h>
@@ -22,7 +23,6 @@
 #include <qpopupmenu.h>
 #include <qtabwidget.h>
 #include <qtoolbutton.h>
-#include <qtabwidget.h>
 #include <qlineedit.h>
 #include <qlistview.h>
 
@@ -108,7 +108,8 @@ void AdvancedFm::init() {
   layout->addMultiCellWidget( currentPathCombo, 1, 1, 0, 7);
 
 
-  TabWidget = new QTabWidget( this, "TabWidget" );
+  TabWidget = new OTabWidget( this, "TabWidget",/* OTabWidget::Global | */OTabWidget::IconTab);
+//  TabWidget = new QTabWidget( this, "TabWidget" );
   layout->addMultiCellWidget( TabWidget, 2, 2, 0, 7);
 
   tab = new QWidget( TabWidget, "tab" );
@@ -130,7 +131,8 @@ void AdvancedFm::init() {
 
   tabLayout->addWidget( Local_View, 0, 0 );
 
-  TabWidget->insertTab( tab, tr("1"));
+  TabWidget->addTab( tab,"advancedfm/smFileBrowser.png", tr("1"));
+//  TabWidget->insertTab( tab, tr("1"));
 
   tab_2 = new QWidget( TabWidget, "tab_2" );
   tabLayout_2 = new QGridLayout( tab_2 );
@@ -152,8 +154,8 @@ void AdvancedFm::init() {
 
   tabLayout_2->addWidget( Remote_View, 0, 0 );
 
-
-  TabWidget->insertTab( tab_2, tr( "2"));
+  TabWidget->addTab( tab_2, "advancedfm/smFileBrowser.png",tr( "2"));
+//  TabWidget->insertTab( tab_2, tr( "2"));
 
   /*     tab_3 = new QWidget( TabWidget, "tab_3" );
          tabLayout_3 = new QGridLayout( tab_3 );
@@ -199,7 +201,7 @@ void AdvancedFm::init() {
 
   filterStr="*";
   b=FALSE;
-
+  TabWidget->setCurrentTab(0);
    
 }
 

@@ -7,7 +7,7 @@ REQUIRES=medium-config
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 DESTDIR = $(OPIEDIR)/bin
-LIBS            += -lqpe
+LIBS            += -lqpe -lopie
 
 TRANSLATIONS = ../../../i18n/de/advancedfm.ts \
    ../../../i18n/en/advancedfm.ts \

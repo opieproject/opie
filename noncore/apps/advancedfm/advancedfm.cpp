@@ -12,6 +12,7 @@
 #define DEVELOPERS_VERSION
 #include "advancedfm.h"
 
+  #include <opie/otabwidget.h>
 //  #include <opie/ofileselector.h>
 //  #include <opie/ofiledialog.h>
 
@@ -87,7 +88,8 @@ void AdvancedFm::cleanUp() {
 }
 
 void AdvancedFm::tabChanged(QWidget *) {
-  if (TabWidget->currentPageIndex() == 0) {
+  if (TabWidget->getCurrentTab() == 0) {
+//  if (TabWidget->currentPageIndex() == 0) {
     currentPathCombo->lineEdit()->setText( currentDir.canonicalPath());
     viewMenu->setItemChecked(viewMenu->idAt(0),TRUE);
     viewMenu->setItemChecked(viewMenu->idAt(1),FALSE);
@@ -96,7 +98,9 @@ void AdvancedFm::tabChanged(QWidget *) {
              +checkDiskSpace((const QString &) currentDir.canonicalPath())+" kB free" );
     
   }
-  if (TabWidget->currentPageIndex() == 1) {
+  if (TabWidget->getCurrentTab() == 1) {
+  
+//  if (TabWidget->currentPageIndex() == 1) {
     currentPathCombo->lineEdit()->setText( currentRemoteDir.canonicalPath());
     viewMenu->setItemChecked(viewMenu->idAt(1),TRUE);
     viewMenu->setItemChecked(viewMenu->idAt(0),FALSE);
@@ -414,12 +418,12 @@ void AdvancedFm::remoteListPressed( int mouse, QListViewItem*, const QPoint&, in
 
 
 void AdvancedFm::switchToLocalTab() {
-  TabWidget->setCurrentPage(0);
+  TabWidget->setCurrentTab(0);
   Local_View->setFocus();
 }
 
 void AdvancedFm::switchToRemoteTab() {
-  TabWidget->setCurrentPage(1);
+  TabWidget->setCurrentTab(1);
   Remote_View->setFocus();
 }
 
@@ -432,7 +436,8 @@ void AdvancedFm::writeConfig() {
 }
 
 void  AdvancedFm::currentPathComboChanged() {
-  if (TabWidget->currentPageIndex() == 0) {
+  if (TabWidget->getCurrentTab() == 0) {
+//  if (TabWidget->currentPageIndex() == 0) {
     if(QDir( currentPathCombo->lineEdit()->text()).exists()) {
       currentDir.setPath( currentPathCombo->lineEdit()->text() );
       populateLocalView();
@@ -440,7 +445,8 @@ void  AdvancedFm::currentPathComboChanged() {
       QMessageBox::message(tr("Note"),tr("That directory does not exist"));
     }
   }
-  if (TabWidget->currentPageIndex() == 0) {
+  if (TabWidget->getCurrentTab() == 0) {
+//  if (TabWidget->currentPageIndex() == 0) {
     if(QDir( currentPathCombo->lineEdit()->text()).exists()) {
       currentRemoteDir.setPath( currentPathCombo->lineEdit()->text() );
       populateRemoteView();
@@ -452,7 +458,8 @@ void  AdvancedFm::currentPathComboChanged() {
 
 void  AdvancedFm::fillCombo(const QString &currentPath) {
 
-  if (TabWidget->currentPageIndex() == 0) {
+  if (TabWidget->getCurrentTab() == 0) {
+//  if (TabWidget->currentPageIndex() == 0) {
     currentPathCombo->lineEdit()->setText( currentPath);
     if( localDirPathStringList.grep(currentPath,TRUE).isEmpty() ) {
       currentPathCombo->clear();
@@ -470,7 +477,8 @@ void  AdvancedFm::fillCombo(const QString &currentPath) {
 }
 
 void AdvancedFm::currentPathComboActivated(const QString & currentPath) {
-  if (TabWidget->currentPageIndex() == 0) {
+  if (TabWidget->getCurrentTab() == 0) {
+//  if (TabWidget->currentPageIndex() == 0) {
     chdir( currentPath.latin1() );
     currentDir.cd( currentPath, TRUE);
     populateLocalView();
@@ -485,7 +493,8 @@ void AdvancedFm::currentPathComboActivated(const QString & currentPath) {
 
 QStringList AdvancedFm::getPath() {
   QStringList strList;
-  if (TabWidget->currentPageIndex() == 0) {
+  if (TabWidget->getCurrentTab() == 0) {
+//  if (TabWidget->currentPageIndex() == 0) {
     QList<QListViewItem> * getSelectedItems( QListView * Local_View );
     QListViewItemIterator it( Local_View );
     for ( ; it.current(); ++it ) {
@@ -512,7 +521,8 @@ QStringList AdvancedFm::getPath() {
 void AdvancedFm::homeButtonPushed() {
   QString current = QDir::homeDirPath();
   chdir( current.latin1() );
-  if (TabWidget->currentPageIndex() == 0) {
+  if (TabWidget->getCurrentTab() == 0) {
+//  if (TabWidget->currentPageIndex() == 0) {
     currentDir.cd(  current, TRUE);
     populateLocalView();
   } else {
@@ -525,7 +535,9 @@ void AdvancedFm::homeButtonPushed() {
 void AdvancedFm::docButtonPushed() {
   QString current = QPEApplication::documentDir();
   chdir( current.latin1() );
-  if (TabWidget->currentPageIndex() == 0) {
+
+    if (TabWidget->getCurrentTab() == 0) {
+//if (TabWidget->currentPageIndex() == 0) {
     currentDir.cd( current, TRUE);
     populateLocalView();
   } else {
@@ -538,7 +550,8 @@ void AdvancedFm::docButtonPushed() {
 void AdvancedFm::SDButtonPushed() {
     QString current = "/mnt/card";// this can change so fix
   chdir( current.latin1() );
-  if (TabWidget->currentPageIndex() == 0) {
+  if (TabWidget->getCurrentTab() == 0) {
+//  if (TabWidget->currentPageIndex() == 0) {
     currentDir.cd( current, TRUE);
     populateLocalView();
   } else {
@@ -557,7 +570,8 @@ void AdvancedFm::CFButtonPushed() {
         current = "/mnt/hda"; //ipaq
      
     chdir( current.latin1() );
-    if (TabWidget->currentPageIndex() == 0) {
+  if (TabWidget->getCurrentTab() == 0) {
+//    if (TabWidget->currentPageIndex() == 0) {
         currentDir.cd( current, TRUE);
         populateLocalView();
     } else {
@@ -645,7 +659,8 @@ void AdvancedFm::keyReleaseEvent( QKeyEvent *e) {
 void AdvancedFm::QPEButtonPushed() {
   QString current = QPEApplication::qpeDir();
   chdir( current.latin1() );
-  if (TabWidget->currentPageIndex() == 0) {
+  if (TabWidget->getCurrentTab() == 0) {
+//  if (TabWidget->currentPageIndex() == 0) {
     currentDir.cd( current, TRUE);
     populateLocalView();
   } else {
@@ -717,7 +732,8 @@ void AdvancedFm::showFileMenu() {
 
     QString curApp;
     bool isLocalView = false;
-    if (TabWidget->currentPageIndex() == 0) {
+  if (TabWidget->getCurrentTab() == 0) {
+//    if (TabWidget->currentPageIndex() == 0) {
         isLocalView = TRUE;
         curApp = Local_View->currentItem()->text(0);
     }   else {
@@ -730,8 +746,11 @@ void AdvancedFm::showFileMenu() {
      QPopupMenu *m = new QPopupMenu(0);
      QPopupMenu *n = new QPopupMenu(0);
      //    QPopupMenu *o = new QPopupMenu(0);
-     m->insertItem(  tr( "Show Hidden Files" ), this,  SLOT( showMenuHidden() ));
-    
+  if (TabWidget->getCurrentTab() == 0) 
+     m->insertItem(  tr( "Show Hidden Files" ), this,  SLOT( showHidden() ));
+  else
+     m->insertItem(  tr( "Show Hidden Files" ), this,  SLOT( showRemoteHidden() ));
+      
      if ( QFileInfo(fi).isDir() ) {
        m->insertSeparator();
        m->insertItem( tr( "Change Directory" ), this, SLOT( doLocalCd() ));
@@ -829,7 +848,8 @@ void AdvancedFm::addToDocs() {
     QStringList strListPaths = getPath();
     if( strListPaths.count() > 0) {
         QString curFile;
-        if (TabWidget->currentPageIndex() == 0) {
+  if (TabWidget->getCurrentTab() == 0) {
+//        if (TabWidget->currentPageIndex() == 0) {
             for ( QStringList::Iterator it = strListPaths.begin(); it != strListPaths.end(); ++it ) {
                 curFile = currentDir.canonicalPath()+"/"+(*it);
                 qDebug(curFile);

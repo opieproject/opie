@@ -14,6 +14,8 @@
 #include "output.h"
 #include "filePermissions.h"
 
+#include <opie/otabwidget.h>
+
 #include <qpe/lnkproperties.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/qpemenubar.h>
@@ -53,10 +55,24 @@ void AdvancedFm::doRemoteCd() {
 }
 
 void AdvancedFm::showMenuHidden() {
-    if(TabWidget->currentPageIndex() == 0)
-        showHidden();
-    else
-        showRemoteHidden();
+  if (b) {
+    currentDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
+    currentRemoteDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
+    fileMenu->setItemChecked( fileMenu->idAt(0),TRUE);
+//    b=FALSE;
+
+  }  else {
+    currentDir.setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
+    currentRemoteDir.setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
+    fileMenu->setItemChecked( fileMenu->idAt(0),FALSE);
+//    b=TRUE;
+  }
+  populateLocalView();
+  populateRemoteView();
+//     if(TabWidget->getCurrentTab() == 0)
+//         showHidden();
+//     else
+//         showRemoteHidden();
 //    if(b) qDebug("<<<<<<<<<<<<<<<<<<<<<<<<<<<< true");
     if(b) b = false; else b = true;
 }
@@ -64,12 +80,12 @@ void AdvancedFm::showMenuHidden() {
 void AdvancedFm::showHidden() {
   if (b) {
     currentDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
-    fileMenu->setItemChecked( fileMenu->idAt(0),TRUE);
+//     fileMenu->setItemChecked( fileMenu->idAt(0),TRUE);
 //    b=FALSE;
 
   }  else {
     currentDir.setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
-    fileMenu->setItemChecked( fileMenu->idAt(0),FALSE);
+//     fileMenu->setItemChecked( fileMenu->idAt(0),FALSE);
 //    b=TRUE;
   }
   populateLocalView();
@@ -89,7 +105,7 @@ void AdvancedFm::showRemoteHidden() {
 
 void AdvancedFm::runThis() {
   QString fs;
-  if (TabWidget->currentPageIndex() == 0) {
+  if (TabWidget->getCurrentTab() == 0) {
     QString curFile = Local_View->currentItem()->text(0);
     if(curFile != "../") {
 
@@ -141,7 +157,7 @@ void AdvancedFm::runThis() {
 }
 
 void AdvancedFm::runText() {
-  if (TabWidget->currentPageIndex() == 0) {
+  if (TabWidget->getCurrentTab() == 0) {
     QString curFile = Local_View->currentItem()->text(0);
     if(curFile != "../") {
       curFile =  currentDir.canonicalPath()+"/"+curFile;
@@ -323,7 +339,7 @@ void AdvancedFm::filePerms() {
   QStringList curFileList = getPath();
   QString filePath;
 
-  if (TabWidget->currentPageIndex() == 0) {
+  if (TabWidget->getCurrentTab() == 0) {
     filePath = currentDir.canonicalPath()+"/";
   } else {
     filePath= currentRemoteDir.canonicalPath()+"/";
@@ -337,7 +353,7 @@ void AdvancedFm::filePerms() {
     if( filePerm)
       delete  filePerm;
   }
-  if (TabWidget->currentPageIndex() == 0) {
+  if (TabWidget->getCurrentTab() == 0) {
     populateLocalView();
   } else {
     populateRemoteView();
@@ -350,7 +366,7 @@ void AdvancedFm::doProperties() {
   QStringList curFileList = getPath();
   
   QString filePath;
-  if (TabWidget->currentPageIndex() == 0) {
+  if (TabWidget->getCurrentTab() == 0) {
     filePath = currentDir.canonicalPath()+"/";
   } else {
     filePath= currentRemoteDir.canonicalPath()+"/";
@@ -369,7 +385,7 @@ void AdvancedFm::doProperties() {
 }
 
 void AdvancedFm::upDir() {
-  if (TabWidget->currentPageIndex() == 0) {
+  if (TabWidget->getCurrentTab() == 0) {
     QString current = currentDir.canonicalPath();
     QDir dir(current);
     dir.cdUp();
@@ -395,7 +411,7 @@ void AdvancedFm::copy() {
   QStringList curFileList = getPath();
   if( curFileList.count() > 0) {
     QString curFile, item, destFile;
-    if (TabWidget->currentPageIndex() == 0) {
+    if (TabWidget->getCurrentTab() == 0) {
       for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
           item=(*it);
 
@@ -427,7 +443,7 @@ void AdvancedFm::copy() {
         }
       }
       populateRemoteView();
-      TabWidget->setCurrentPage(1);
+      TabWidget->setCurrentTab(1);
 
     } else {
       for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
@@ -463,7 +479,7 @@ void AdvancedFm::copy() {
         }
       }
       populateLocalView();
-      TabWidget->setCurrentPage(0);
+      TabWidget->setCurrentTab(0);
     }
 
   }
@@ -475,7 +491,7 @@ void AdvancedFm::copyAs() {
   QStringList curFileList = getPath();
   QString curFile;
   InputDialog *fileDlg;
-  if (TabWidget->currentPageIndex() == 0) {
+  if (TabWidget->getCurrentTab() == 0) {
     qDebug("tab 1");
     for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
       QString destFile;
@@ -512,7 +528,7 @@ void AdvancedFm::copyAs() {
 
     }
     populateRemoteView();
-    TabWidget->setCurrentPage(1);
+    TabWidget->setCurrentTab(1);
 
   } else {
     for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
@@ -552,7 +568,7 @@ void AdvancedFm::copyAs() {
 
     }
     populateLocalView();
-    TabWidget->setCurrentPage(0);
+    TabWidget->setCurrentTab(0);
   }
 }
 
@@ -562,7 +578,7 @@ void AdvancedFm::copySameDir() {
   QString curFile, item, destFile;
   InputDialog *fileDlg;
 
-  if (TabWidget->currentPageIndex() == 0) {
+  if (TabWidget->getCurrentTab() == 0) {
 
     for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
         item=(*it);
@@ -649,7 +665,7 @@ void AdvancedFm::move() {
   if( curFileList.count() > 0) {
     QString curFile, destFile, item;
 
-    if (TabWidget->currentPageIndex() == 0) {
+    if (TabWidget->getCurrentTab() == 0) {
 
       for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
           item=(*it);
@@ -678,7 +694,7 @@ void AdvancedFm::move() {
         }
       }
 
-      TabWidget->setCurrentPage(1);
+      TabWidget->setCurrentTab(1);
 
     } else { //view 2
 
@@ -708,7 +724,7 @@ void AdvancedFm::move() {
           } else
             QFile::remove( curFile);
         }
-        TabWidget->setCurrentPage(0);
+        TabWidget->setCurrentTab(0);
       }
     }
     populateRemoteView();
@@ -749,7 +765,7 @@ bool AdvancedFm::copyFile( const QString & dest, const QString & src ) {
 
 void AdvancedFm::runCommand() {
   QString curFile;
-  if (TabWidget->currentPageIndex() == 0) {
+  if (TabWidget->getCurrentTab() == 0) {
     if( Local_View->currentItem())
       curFile = currentDir.canonicalPath() +"/"+ Local_View->currentItem()->text(0);
   } else {
@@ -795,7 +811,7 @@ void AdvancedFm::runCommand() {
 
 void AdvancedFm::runCommandStd() {
   QString curFile;
-  if (TabWidget->currentPageIndex() == 0) {
+  if (TabWidget->getCurrentTab() == 0) {
     if( Local_View->currentItem())
       curFile = currentDir.canonicalPath() +"/"+  Local_View->currentItem()->text(0);
   } else {
@@ -818,7 +834,7 @@ void AdvancedFm::runCommandStd() {
 
 void AdvancedFm::fileStatus() {
   QString curFile;
-  if (TabWidget->currentPageIndex() == 0) {
+  if (TabWidget->getCurrentTab() == 0) {
     curFile = Local_View->currentItem()->text(0);
   } else {
     curFile = Remote_View->currentItem()->text(0);
@@ -850,7 +866,7 @@ void AdvancedFm::fileStatus() {
 }
 
 void AdvancedFm::mkDir() {
-  if (TabWidget->currentPageIndex() == 0)
+  if (TabWidget->getCurrentTab() == 0)
     localMakDir();
   else
     remoteMakDir();
@@ -858,7 +874,7 @@ void AdvancedFm::mkDir() {
 }
 
 void AdvancedFm::rn() {
-  if (TabWidget->currentPageIndex() == 0)
+  if (TabWidget->getCurrentTab() == 0)
     localRename();
   else
     remoteRename();
@@ -866,7 +882,7 @@ void AdvancedFm::rn() {
 }
 
 void AdvancedFm::del() {
-  if (TabWidget->currentPageIndex() == 0)
+  if (TabWidget->getCurrentTab() == 0)
     localDelete();
   else
     remoteDelete();
@@ -877,7 +893,7 @@ void AdvancedFm::mkSym() {
   QStringList curFileList = getPath();
   if( curFileList.count() > 0) {
 
-    if (TabWidget->currentPageIndex() == 0) {
+    if (TabWidget->getCurrentTab() == 0) {
       for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
 
         QString destName = currentRemoteDir.canonicalPath()+"/"+(*it);
@@ -889,7 +905,7 @@ void AdvancedFm::mkSym() {
         system(cmd.latin1() );
       }
       populateRemoteView();
-      TabWidget->setCurrentPage(1);
+      TabWidget->setCurrentTab(1);
     } else {
       for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
 
@@ -903,7 +919,7 @@ void AdvancedFm::mkSym() {
         system(cmd.latin1() );
       }
       populateLocalView();
-      TabWidget->setCurrentPage(0);
+      TabWidget->setCurrentTab(0);
     }
   }
 }
@@ -916,7 +932,7 @@ void AdvancedFm::doBeam() {
     QStringList curFileList = getPath();
     if( curFileList.count() > 0) {
 
-      if (TabWidget->currentPageIndex() == 0) {
+      if (TabWidget->getCurrentTab() == 0) {
         for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
 
           QString curFile =  currentDir.canonicalPath()+"/"+(*it);
