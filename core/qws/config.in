@@ -1,7 +1,7 @@
   config QWS
     boolean "Minimal QWS Server"
     default "n"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && EXPERIMENTAL
 
 # menu "Advanced QWS Server Config"
 #   config QWS_QCOP
