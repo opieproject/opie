@@ -351,8 +351,8 @@ void WLANImp::rescanNeighbourhood()
         return;
     }
 
-    wiface->setMonitorMode( true );
-    if ( !wiface->monitorMode() )
+    wiface->setMode( "monitor" );
+    if ( wiface->mode() != "monitor" )
     {
         qWarning( "rescanNeighbourhood(): Unable to bring device into monitor mode (%s).", strerror( errno ) );
         return;
@@ -410,8 +410,8 @@ void WLANImp::rescanNeighbourhood()
     }
 
     cap->close();
-    wiface->setMonitorMode( false );
-    wiface->setPromiscuousMode( true );
+    wiface->setMode( "managed" ); // TODO: use previous mode
+    wiface->setPromiscuousMode( false );
 
     splash->hide();
     delete splash;
