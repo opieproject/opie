@@ -54,7 +54,7 @@ private:
     QMap<QString,QCheckListItem*> m_applets;
 
     int m_autoStart;
-    QString m_autoStartTimer;
+    int m_autoStartTimer;
     QStringList m_excludeApplets;
     bool m_applets_changed;
 

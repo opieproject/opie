@@ -104,12 +104,11 @@ TodayConfig::TodayConfig( QWidget* parent, const char* name, bool modal, WFlags 
 void TodayConfig::setAutoStart() {
     Config cfg( "today" );
     cfg.setGroup( "Autostart" );
-    int autostart = cfg.readNumEntry( "autostart", 1 );
-    if ( autostart ) {
+    if ( m_autoStart ) {
         QCopEnvelope e( "QPE/System", "autoStart(QString,QString,QString)" );
         e << QString( "add" );
         e << QString( "today" );
-        e << m_autoStartTimer;
+        e << QString("%1").arg( m_autoStartTimer );
     } else {
         QCopEnvelope e( "QPE/System", "autoStart(QString,QString)" );
         e << QString( "remove" );
@@ -125,8 +124,8 @@ void TodayConfig::readConfig() {
     cfg.setGroup( "Autostart" );
     m_autoStart = cfg.readNumEntry( "autostart", 1 );
     CheckBoxAuto->setChecked( m_autoStart );
-    m_autoStartTimer = cfg.readEntry( "autostartdelay", "0" );
-    SpinBoxTime->setValue( m_autoStartTimer.toInt() );
+    m_autoStartTimer = cfg.readNumEntry( "autostartdelay", 0 );
+    SpinBoxTime->setValue( m_autoStartTimer );
 
     cfg.setGroup( "Plugins" );
     m_excludeApplets = cfg.readListEntry( "ExcludeApplets", ',' );
@@ -168,7 +167,10 @@ void TodayConfig::writeConfig() {
     m_autoStart = CheckBoxAuto->isChecked();
     cfg.writeEntry( "autostart",  m_autoStart );
     m_autoStartTimer = SpinBoxTime->value();
-    cfg.readEntry( "autostartdelay", m_autoStartTimer );
+    cfg.writeEntry( "autostartdelay", m_autoStartTimer );
+
+    // set autostart settings
+    setAutoStart();
 }
 
 
