@@ -16,8 +16,10 @@ OPIE* OPIE::self() {
     return m_self;
 }
 QStringList OPIE::languageList( const QString& _opieDir )const {
+#if 0
+    return QStringList::split(':',QString(::getenv("OPIE_CREATE_LANGS")));
+#else
     QString opieDi = opieDir( _opieDir );
-
     QStringList langs;
     QDir dir( opieDi + "/i18n/");
     if (!dir.exists() ) return langs;
@@ -31,6 +33,7 @@ QStringList OPIE::languageList( const QString& _opieDir )const {
 
 
     return langs;
+#endif    
 }
 QString OPIE::opieDir( const QString& _opieDir ) const{
     if (!_opieDir.isEmpty() ) return _opieDir;

@@ -1,5 +1,5 @@
 TEMPLATE	= app
-CONFIG		+= qt warn_on console
+CONFIG		+= qt warn_on console thread
 HEADERS		= ../shared/metatranslator.h \
 		  ../shared/proparser.h \
 		  ../shared/opie.h

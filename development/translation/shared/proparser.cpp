@@ -135,6 +135,7 @@ QMap<QString, QString> proFileTagMap( const QString& text, const QString& opieDi
 		if ( tagMap.contains(invocation) )
 		    after = tagMap[invocation];
 		(*it).replace( i, len, after );
+		i += after.length();
 	    }
 	}
     }
