@@ -105,8 +105,9 @@ bool Ipkg :: runIpkg( )
         cmd += " " + package;
     cmd += " 2>&1";
 
-    
-    emit outputText( QString( "Dealing with package " ) + package );
+
+    if ( package != "" )
+        emit outputText( QString( "Dealing with package " ) + package );
 
     qApp->processEvents();
 

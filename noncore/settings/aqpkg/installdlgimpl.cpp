@@ -97,16 +97,13 @@ InstallDlgImpl::InstallDlgImpl( vector<InstallData> &packageList, DataManager *d
 	}
 
 	output->setText( remove + install + upgrade );
-
-    connect( &ipkg, SIGNAL(outputText(const QString &)), this, SLOT(displayText(const QString &)));
 }
 
-InstallDlgImpl::InstallDlgImpl( QWidget *parent, const char *name, bool modal, WFlags fl )
+InstallDlgImpl::InstallDlgImpl( Ipkg *ipkg, QString initialText, QWidget *parent, const char *name, bool modal, WFlags fl )
     : InstallDlg( parent, name, modal, fl )
 {
-    upgradePackages = true;
-    output->setText( "Upgrading installed packages" );
-    connect( &ipkg, SIGNAL(outputText(const QString &)), this, SLOT(displayText(const QString &)));
+    pIpkg = ipkg;
+    output->setText( initialText );
 }
 
 
@@ -155,14 +152,12 @@ void InstallDlgImpl :: installSelected()
 
 	btnInstall->setEnabled( false );
 
-    if ( upgradePackages )
+    if ( pIpkg )
     {
         output->setText( "" );
         
-        Ipkg ipkg;
-        connect( &ipkg, SIGNAL(outputText(const QString &)), this, SLOT(displayText(const QString &)));
-        ipkg.setOption( "upgrade" );
-        ipkg.runIpkg();
+        connect( pIpkg, SIGNAL(outputText(const QString &)), this, SLOT(displayText(const QString &)));
+        pIpkg->runIpkg();
     }
     else
     {
@@ -181,47 +176,52 @@ void InstallDlgImpl :: installSelected()
         cfg.writeEntry( "dest", dest );
 #endif
 
+        pIpkg = new Ipkg;
+        connect( pIpkg, SIGNAL(outputText(const QString &)), this, SLOT(displayText(const QString &)));
+        
         // First run through the remove list, then the install list then the upgrade list
     	vector<InstallData>::iterator it;
-        ipkg.setOption( "remove" );
+        pIpkg->setOption( "remove" );
         for ( it = removeList.begin() ; it != removeList.end() ; ++it )
         {
-            ipkg.setDestination( it->destination->getDestinationName() );
-            ipkg.setDestinationDir( it->destination->getDestinationPath() );
-            ipkg.setPackage( it->packageName );
+            pIpkg->setDestination( it->destination->getDestinationName() );
+            pIpkg->setDestinationDir( it->destination->getDestinationPath() );
+            pIpkg->setPackage( it->packageName );
 
             int tmpFlags = flags;
             if ( it->destination->linkToRoot() )
                 tmpFlags |= MAKE_LINKS;
             
-            ipkg.setFlags( tmpFlags );
-            ipkg.runIpkg();
+            pIpkg->setFlags( tmpFlags );
+            pIpkg->runIpkg();
         }
 
-        ipkg.setOption( "install" );
-        ipkg.setDestination( dest );
-        ipkg.setDestinationDir( destDir );
-        ipkg.setFlags( instFlags );
+        pIpkg->setOption( "install" );
+        pIpkg->setDestination( dest );
+        pIpkg->setDestinationDir( destDir );
+        pIpkg->setFlags( instFlags );
         for ( it = installList.begin() ; it != installList.end() ; ++it )
         {
-            ipkg.setPackage( it->packageName );
-            ipkg.runIpkg();
+            pIpkg->setPackage( it->packageName );
+            pIpkg->runIpkg();
         }
 
         flags |= FORCE_REINSTALL;
-        ipkg.setOption( "reinstall" );
+        pIpkg->setOption( "reinstall" );
         for ( it = updateList.begin() ; it != updateList.end() ; ++it )
         {
-            ipkg.setDestination( it->destination->getDestinationName() );
-            ipkg.setDestinationDir( it->destination->getDestinationPath() );
-            ipkg.setPackage( it->packageName );
+            pIpkg->setDestination( it->destination->getDestinationName() );
+            pIpkg->setDestinationDir( it->destination->getDestinationPath() );
+            pIpkg->setPackage( it->packageName );
 
             int tmpFlags = flags;
             if ( it->destination->linkToRoot() && it->recreateLinks )
                 tmpFlags |= MAKE_LINKS;
-            ipkg.setFlags( tmpFlags );
-            ipkg.runIpkg();
+            pIpkg->setFlags( tmpFlags );
+            pIpkg->runIpkg();
         }
+
+        delete pIpkg;
     }
 
 	btnInstall->setEnabled( true );

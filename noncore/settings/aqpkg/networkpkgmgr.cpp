@@ -268,28 +268,26 @@ void NetworkPackageManager :: updateServer()
 
     // Update the current server
     // Display dialog
-    ProgressDlg *dlg = new ProgressDlg( this );
-    QString status = "Updating package lists...";
-    dlg->show();
-    dlg->setText( status );
+//  ProgressDlg *progDlg = new ProgressDlg( this );
+//  QString status = "Updating package lists...";
+//  progDlg->show();
+//  progDlg->setText( status );
 
     // Disable buttons to stop silly people clicking lots on them :)
 
     // First, write out ipkg_conf file so that ipkg can use it
     dataMgr->writeOutIpkgConf();
 
-    QString option = "update";
-    QString dummy = "";
     Ipkg ipkg;
-    connect( &ipkg, SIGNAL(outputText(const QString &)), this, SLOT(displayText(const QString &)));
-    ipkg.setOption( option );
+    ipkg.setOption( "update" );
 
-    ipkg.runIpkg( );
+    InstallDlgImpl dlg( &ipkg, "Refreshing server package lists", this, "Upgrade", true );
+    dlg.showDlg();
 
     // Reload data
     dataMgr->reloadServerData( serversList->currentText() );
     serverSelected(-1);
-    delete dlg;
+//  delete progDlg;
 }
 
 void NetworkPackageManager :: upgradePackages()
@@ -309,7 +307,10 @@ void NetworkPackageManager :: upgradePackages()
         dataMgr->writeOutIpkgConf();
 
         // Now run upgrade
-        InstallDlgImpl dlg( this, "Upgrade", true );
+        Ipkg ipkg;
+        ipkg.setOption( "upgrade" );
+        
+        InstallDlgImpl dlg( &ipkg, "Upgrading installed packages", this, "Upgrade", true );
         dlg.showDlg();
 
         // Reload data
