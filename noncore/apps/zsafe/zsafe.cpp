@@ -4,7 +4,7 @@
 **
 ** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: zsafe.cpp,v 1.7 2003-08-14 07:10:23 zcarsten Exp $
+** $Id: zsafe.cpp,v 1.8 2003-08-20 16:57:52 zcarsten Exp $
 **
 ** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 **
@@ -387,7 +387,8 @@ static const char* const general_data[] = {
  *  TRUE to construct a modal dialog.
  */
 ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
-    : QDialog( parent, name, modal, fl )
+    : QDialog( parent, name, modal, fl ),  
+      Edit(0l), Delete(0l), Find(0l), New(0l), ListView(0l)
 {
     IsCut = false;
     IsCopy = false;
@@ -397,7 +398,12 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
     cfgFile=QDir::homeDirPath();
     cfgFile += "/.zsafe.cfg";
     // set the icon path
+#ifdef NO_OPIE
     QString qpedir ((const char *)getenv("QPEDIR"));
+#else
+    QString qpedir ((const char *)getenv("OPIEDIR"));
+#endif
+
 #ifdef DESKTOP
     iconPath = QDir::homeDirPath() + "/pics/";
 #else
@@ -509,15 +515,11 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
           exitZs (1);
        }
     }
-// #ifndef WIN32
-    // QString d2("Documents/application/zsafe");
-// #else
-	QString d2(QDir::homeDirPath() + "/Documents/application/zsafe");
-// #endif
+	 QString d2(QDir::homeDirPath() + "/Documents/application/zsafe");
     QDir pd2(d2);
     if (!pd2.exists())
     {
-       QDir pd2("Documents/application");
+       QDir pd2(QDir::homeDirPath() + "Documents/application");
        if (!pd2.mkdir("zsafe", FALSE))
        {
           QMessageBox::critical( 0, tr("ZSafe"),
@@ -3647,13 +3649,15 @@ void ZSafe::resizeEvent ( QResizeEvent * )
    DeskW = this->width();
    DeskH = this->height();
 #endif
-   qWarning( QString("Width : %1").arg(DeskW), 2000 );
-   qWarning( QString("Height: %1").arg(DeskH), 2000 );
 
-   New->setGeometry   ( QRect( DeskW-84, 2, 20, 20 ) ); 
-   Edit->setGeometry  ( QRect( DeskW-64, 2, 20, 20 ) ); 
-   Delete->setGeometry( QRect( DeskW-44, 2, 20, 20 ) ); 
-   Find->setGeometry  ( QRect( DeskW-24, 2, 20, 20 ) ); 
+   if (New)
+      New->setGeometry   ( QRect( DeskW-84, 2, 20, 20 ) ); 
+   if (Edit)
+      Edit->setGeometry  ( QRect( DeskW-64, 2, 20, 20 ) ); 
+   if (Delete)
+      Delete->setGeometry( QRect( DeskW-44, 2, 20, 20 ) ); 
+   if (Find)
+      Find->setGeometry  ( QRect( DeskW-24, 2, 20, 20 ) ); 
 }
 
 void ZSafe::slotRaiseTimer()
