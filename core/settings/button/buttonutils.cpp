@@ -101,19 +101,27 @@ void ButtonUtils::insertActions ( QListViewItem *here )
 
 void ButtonUtils::insertAppLnks ( QListViewItem *here )
 {
-	QStringList types = m_apps-> types ( );
+	QStringList types = m_apps-> types ( );   
+	QListViewItem *typeitem [types. count ( )];
    
+   	int i = 0;
 	for ( QStringList::Iterator it = types. begin ( ); it != types. end ( ); ++it ) {
 		QListViewItem *item = new QListViewItem ( here, m_apps-> typeName ( *it ));
 		item-> setPixmap ( 0, m_apps-> typePixmap ( *it ));
-		
-		for ( QListIterator <AppLnk> appit ( m_apps-> children ( )); *appit; ++appit ) {
-			AppLnk *l = *appit;
-			
+	
+		typeitem [i++] = item;	
+	}	
+	
+	for ( QListIterator <AppLnk> appit ( m_apps-> children ( )); *appit; ++appit ) {
+		AppLnk *l = *appit;
+	
+		int i = 0;
+		for ( QStringList::Iterator it = types. begin ( ); it != types. end ( ); ++it ) {		
 			if ( l-> type ( ) == *it ) {
-				QListViewItem *sub = new QListViewItem ( item, l-> name ( ), QString ( "QPE/Application/" ) + l-> exec ( ), "raise()" );
+				QListViewItem *sub = new QListViewItem ( typeitem [i], l-> name ( ), QString ( "QPE/Application/" ) + l-> exec ( ), "raise()" );
 				sub-> setPixmap ( 0, l-> pixmap ( ));
 			}
-		}		
+			i++;
+		}	
 	}                                  
 }

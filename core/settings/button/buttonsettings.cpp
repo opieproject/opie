@@ -60,6 +60,7 @@ ButtonSettings::ButtonSettings ( )
 	: QDialog ( 0, "ButtonSettings", false, WStyle_ContextHelp )
 {
 	const QValueList <ODeviceButton> &buttons = ODevice::inst ( )-> buttons ( );
+	(void) ButtonUtils::inst ( ); // initialise
 
 	setCaption ( tr( "Button Settings" ));
 
@@ -133,6 +134,7 @@ ButtonSettings::ButtonSettings ( )
 	toplay-> addStretch ( 10 );
 
 	m_last_button = 0;
+	m_lock = false;
 	
 	m_timer = new QTimer ( this );
 	connect ( m_timer, SIGNAL( timeout ( )), this, SLOT( keyTimeout ( )));
@@ -208,6 +210,10 @@ void ButtonSettings::edit ( buttoninfo *bi, bool hold )
 {
 	qDebug ( "remap %s for %s", hold ? "hold" : "press", bi-> m_button-> userText ( ). latin1 ( )); 	
 	
+	if ( m_lock )
+		return;
+	m_lock = true;
+	
 	RemapDlg *d = new RemapDlg ( bi-> m_button, hold, this );
 
 	d-> showMaximized ( );	
@@ -227,6 +233,8 @@ void ButtonSettings::edit ( buttoninfo *bi, bool hold )
 	}
 		
 	delete d;
+	
+	m_lock = false;
 }
 
 void ButtonSettings::accept ( )

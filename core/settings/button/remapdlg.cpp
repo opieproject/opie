@@ -1,6 +1,7 @@
 #include <qlistview.h>
 #include <qlabel.h>
 #include <qcombobox.h>
+#include <qtimer.h>
 
 #include "remapdlg.h"
 #include "buttonutils.h"
@@ -46,6 +47,11 @@ RemapDlg::RemapDlg ( const Opie::ODeviceButton *b, bool hold, QWidget *parent, c
 	: RemapDlgBase ( parent, name, true, WStyle_ContextHelp )
 {
 	setCaption ( tr( "%1 %2", "(hold|press) buttoname" ). arg( hold ? tr( "Held" ) : tr( "Pressed" )). arg ( b-> userText ( )));
+
+	m_current = 0;
+	
+	static const char * const def_channels [] = { "QPE/Application/", "QPE/Launcher", "QPE/System", "QPE/TaskBar", "QPE/", 0 };
+	w_channel-> insertStrList ((const char **) def_channels );
 	
 	m_msg = hold ? b-> heldAction ( ) : b-> pressedAction ( );
 	m_msg_preset = hold ? b-> factoryPresetHeldAction ( ) : b-> factoryPresetPressedAction ( );
@@ -59,21 +65,28 @@ RemapDlg::RemapDlg ( const Opie::ODeviceButton *b, bool hold, QWidget *parent, c
 	ButtonUtils::inst ( )-> insertActions ( it );
 	it-> setOpen ( true );
 	
-	it = new NoSortItem ( w_list, 4, tr( "Show" ));	
-	ButtonUtils::inst ( )-> insertAppLnks ( it );
+	m_map_show = new NoSortItem ( w_list, 4, tr( "Show" ));	
 	
 	m_current = m_map_custom;
 	w_list-> setCurrentItem ( m_current );
 	
-	static const char * const def_channels [] = {
-		"QPE/Application/", "QPE/Launcher", "QPE/System", "QPE/TaskBar", "QPE/", 0
-	};
-	
-	w_channel-> insertStrList ((const char **) def_channels );
+	QTimer::singleShot ( 0, this, SLOT( delayedInit ( )));
 }
 
 RemapDlg::~RemapDlg ( )
 {
+}
+
+void RemapDlg::delayedInit ( )
+{
+	bool b = w_list-> viewport ( )-> isUpdatesEnabled ( );
+	w_list-> viewport ( )-> setUpdatesEnabled ( false );
+	
+	ButtonUtils::inst ( )-> insertAppLnks ( m_map_show );
+	
+	w_list-> viewport ( )-> setUpdatesEnabled ( b );
+	
+	m_map_show-> repaint ( );
 }
 
 void RemapDlg::itemChanged ( QListViewItem *it )

@@ -67,6 +67,7 @@ private:
 	buttoninfo *m_last_button;
 
 	QList <buttoninfo> m_infos;
+	bool m_lock;
 };
 
 #endif

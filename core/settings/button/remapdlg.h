@@ -20,6 +20,9 @@ public:
 public slots:
 	virtual void itemChanged ( QListViewItem * );
 	virtual void textChanged ( const QString & );
+	
+private slots:
+	void delayedInit ( );
 
 private:
 	Opie::OQCopMessage m_msg;
@@ -30,6 +33,7 @@ private:
 	QListViewItem *m_map_none;
 	QListViewItem *m_map_preset;
 	QListViewItem *m_map_custom;
+	QListViewItem *m_map_show;
 };
 
 #endif
