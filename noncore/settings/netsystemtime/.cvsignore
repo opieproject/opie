@@ -3,3 +3,5 @@ moc_*
 Makefile*
 netbase.h
 netbase.cpp
+ntpbase.cpp
+ntpbase.h
