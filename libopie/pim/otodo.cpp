@@ -14,6 +14,8 @@
 
 #include "opimstate.h"
 #include "orecur.h"
+#include "opimmaintainer.h"
+
 #include "otodo.h"
 
 
@@ -33,6 +35,7 @@ struct OTodo::OTodoData : public QShared {
     QDateTime alarmDateTime;
     OPimState state;
     ORecur recur;
+    OPimMaintainer maintainer;
 };
 
 OTodo::OTodo(const OTodo &event )
@@ -153,6 +156,9 @@ OPimState OTodo::state()const {
 ORecur OTodo::recurrence()const {
     return data->recur;
 }
+OPimMaintainer OTodo::maintainer()const {
+    return data->maintainer;
+}
 void OTodo::setCompleted( bool completed )
 {
     changeOrModify();
@@ -201,6 +207,10 @@ void OTodo::setState( const OPimState& state ) {
 void OTodo::setRecurrence( const ORecur& rec) {
     changeOrModify();
     data->recur = rec;
+}
+void OTodo::setMaintainer( const OPimMaintainer& pim ) {
+    changeOrModify();
+    data->maintainer = pim;
 }
 bool OTodo::isOverdue( )
 {
@@ -321,6 +331,8 @@ bool OTodo::operator==(const OTodo &toDoEvent )const
         return false;
     if ( data->alarmDateTime != toDoEvent.data->alarmDateTime )
 	return false;
+    if ( data->maintainer    != toDoEvent.data->maintainer )
+        return false;
 
     return OPimRecord::operator==( toDoEvent );
 }
@@ -358,7 +370,7 @@ QMap<int, QString> OTodo::toMap() const {
     map.insert( DateMonth, QString::number( data->date.month() ) );
     map.insert( DateYear, QString::number( data->date.year() ) );
     map.insert( Progress, QString::number( data->prog ) );
-    map.insert( CrossReference, crossToString() );
+//    map.insert( CrossReference, crossToString() );
     map.insert( HasAlarmDateTime,  QString::number( data->hasAlarmDateTime ) );
     map.insert( AlarmDateTime, data->alarmDateTime.toString() );
 
@@ -382,6 +394,11 @@ void OTodo::changeOrModify() {
         data = d2;
     }
 }
+// WATCHOUT
+/*
+ * if you add something to the Data struct
+ * be sure to copy it here
+ */
 void OTodo::copy( OTodoData* src, OTodoData* dest ) {
     dest->date = src->date;
     dest->isCompleted = src->isCompleted;
@@ -395,6 +412,7 @@ void OTodo::copy( OTodoData* src, OTodoData* dest ) {
     dest->alarmDateTime = src->alarmDateTime;
     dest->state = src->state;
     dest->recur = src->recur;
+    dest->maintainer = src->maintainer;
 }
 QString OTodo::type() const {
     return QString::fromLatin1("OTodo");

@@ -6,6 +6,8 @@ OPimXRefManager::OPimXRefManager() {
 OPimXRefManager::OPimXRefManager( const OPimXRefManager& ref) {
     m_list = ref.m_list;
 }
+OPimXRefManager::~OPimXRefManager() {
+}
 OPimXRefManager &OPimXRefManager::operator=( const OPimXRefManager& ref) {
     m_list = ref.m_list;
     return *this;

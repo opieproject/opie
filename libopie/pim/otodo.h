@@ -18,6 +18,7 @@
 
 class OPimState;
 class ORecur;
+class OPimMaintainer;
 class OTodo : public  OPimRecord  {
 public:
     typedef QValueList<OTodo> ValueList;
@@ -128,6 +129,11 @@ public:
     ORecur recurrence()const;
 
     /**
+     * the Maintainer of this OTodo
+     */
+    OPimMaintainer maintainer()const;
+
+    /**
      * The description of the todo
      */
     QString description()const;
@@ -202,6 +208,12 @@ public:
      * @param state State what the todo should take
      */
     void setState( const OPimState& state);
+
+    /**
+     * set the Maintainer Mode
+     */
+    void setMaintainer( const OPimMaintainer& );
+
     bool isOverdue();
 
 
