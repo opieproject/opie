@@ -449,69 +449,85 @@ QSizePolicy AnalogClock::sizePolicy() const
 void AnalogClock::drawContents( QPainter *p )
 {
 	QRect r = contentsRect();
-	QPoint center( r.x() + r.width() / 2, r.y() + r.height() / 2 );
+	QRect fr;
 
-	QPoint l1( r.x() + r.width() / 2, r.y() + 2 );
-	QPoint l2( r.x() + r.width() / 2, r.y() + 8 );
+	if ( r. width ( ) > r. height ( ))
+		fr. setRect (( r. width ( ) - r. height ( )) / 2, r. y ( ), r. height ( ), r. height ( ));
+	else
+		fr. setRect ( r. x ( ), ( r. height ( ) - r. width ( )) / 2, r. width ( ), r. width ( ));
+			
+	QPoint center = fr. center ( ); // ( fr.x() + fr.width() / 2, fr.y() + fr.height() / 2 );
+	QPoint l1 ( center. x ( ), fr. y ( ) + 2 );
+	QPoint l2 ( center. x ( ), fr. y ( ) + 8 );
 
-	QPoint h1( r.x() + r.width() / 2, r.y() + r.height() / 4 );
-	QPoint h2( r.x() + r.width() / 2, r.y() + r.height() / 2 );
 
-	QPoint m1( r.x() + r.width() / 2, r.y() + r.height() / 8 );
-	QPoint m2( r.x() + r.width() / 2, r.y() + r.height() / 2 );
-
-	QPoint s1( r.x() + r.width() / 2, r.y() + 8 );
-	QPoint s2( r.x() + r.width() / 2, r.y() + r.height() / 2 );
-
-	QColor color( clear ? backgroundColor() : black );
-	QTime time = clear ? prevTime : currTime;
 
 	if ( clear ) {
-		erase( rect() );
-		return ;
-	}
+		erase ( r );
+		p-> setPen ( NoPen );
+		p-> setBrush ( colorGroup ( ). color ( QColorGroup::Base ));
+		p-> drawEllipse ( fr );
+		p-> setBrush ( NoBrush );	
 
-	if ( !clear ) {
 		// draw ticks
-		p->setPen( QPen( color, 1 ) );
+		p->setPen( QPen( colorGroup ( ). color ( QColorGroup::Text ), 1 ) );
 		for ( int i = 0; i < 12; i++ )
 			p->drawLine( rotate( center, l1, i * 30 ), rotate( center, l2, i * 30 ) );
 	}
+	else {
+		drawPointers ( p, fr, colorGroup ( ). color ( QColorGroup::Base ), prevTime, &currTime );
+	}
+	
+	drawPointers ( p, fr, colorGroup ( ). color ( QColorGroup::Text ), currTime );
+	
+	prevTime = currTime;
+}
 
-	if ( !clear || prevTime.minute() != currTime.minute() ||
-	        prevTime.hour() != currTime.hour() ) {
+void AnalogClock::drawPointers ( QPainter *p, const QRect &r, const QColor &c, const QTime &t, const QTime *t2 )
+{
+	QPoint center( r.x() + r.width() / 2, r.y() + r.height() / 2 );
+
+	QPoint h1( center. x ( ), r. y ( ) + r. height ( ) / 4 );
+	QPoint h2( center. x ( ), center. y ( ) );
+
+	QPoint m1( center. x ( ), r.y() + r.height() / 8 );
+	QPoint m2( center. x ( ), center. y ( ) );
+
+	QPoint s1( center. x ( ), r. y ( ) + 8 );
+	QPoint s2( center. x ( ), center. y ( ) );
+
+
+	if ( !t2 || ( t. minute ( ) != t2-> minute ( ) || t. hour ( ) != t2-> hour ( ))) {
 		// draw hour pointer
-		h1 = rotate( center, h1, 30 * ( time.hour() % 12 ) + time.minute() / 2 );
-		h2 = rotate( center, h2, 30 * ( time.hour() % 12 ) + time.minute() / 2 );
-		p->setPen( QPen( color, 3 ) );
-		p->drawLine( h1, h2 );
+		h1 = rotate( center, h1, 30 * ( t.hour() % 12 ) + t.minute() / 2 );
+		h2 = rotate( center, h2, 30 * ( t.hour() % 12 ) + t.minute() / 2 );
+		p-> setPen ( QPen ( c, 3 ));
+		p-> drawLine ( h1, h2 );
 	}
 
-	if ( !clear || prevTime.minute() != currTime.minute() ) {
+	if ( !t2 || ( t. minute ( ) != t2-> minute ( ))) {
 		// draw minute pointer
-		m1 = rotate( center, m1, time.minute() * 6 );
-		m2 = rotate( center, m2, time.minute() * 6 );
-		p->setPen( QPen( color, 2 ) );
-		p->drawLine( m1, m2 );
+		m1 = rotate( center, m1, t.minute() * 6 );
+		m2 = rotate( center, m2, t.minute() * 6 );
+		p-> setPen ( QPen ( c, 2 ));
+		p-> drawLine ( m1, m2 );
 	}
 
-	// draw second pointer
-	s1 = rotate( center, s1, time.second() * 6 );
-	s2 = rotate( center, s2, time.second() * 6 );
-	p->setPen( QPen( color, 1 ) );
-	p->drawLine( s1, s2 );
-
-	if ( !clear )
-		prevTime = currTime;
+	if ( !t2 || ( t. second ( ) != t2-> second ( ))) {
+		// draw second pointer
+		s1 = rotate( center, s1, t.second() * 6 );
+		s2 = rotate( center, s2, t.second() * 6 );
+		p-> setPen ( QPen ( c, 1 ));
+		p-> drawLine ( s1, s2 );
+	}
 }
 
 void AnalogClock::display( const QTime& t )
 {
 	currTime = t;
-	clear = true;
-	repaint( false );
 	clear = false;
 	repaint( false );
+	clear = true;
 }
 
 QPoint AnalogClock::rotate( QPoint c, QPoint p, int a )

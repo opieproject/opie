@@ -36,7 +36,7 @@ class AnalogClock : public QFrame
 
 public:
     AnalogClock( QWidget * parent = 0, const char * name = 0 )
-  : QFrame( parent, name ), clear(false) {}
+  : QFrame( parent, name ), clear(true) {}
 
     QSizePolicy sizePolicy() const;
 
@@ -47,6 +47,7 @@ protected:
 
 private:
     QPoint rotate( QPoint center, QPoint p, int angle );
+    void drawPointers ( QPainter *, const QRect &r, const QColor &c, const QTime &t, const QTime *t2 = 0 );
 
     QTime currTime;
     QTime prevTime;
