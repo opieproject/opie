@@ -2,6 +2,7 @@
 # order is: row qcode unicode length blah
 #
 # please don't write anything between a key definition and it's xpm (excpet for spaces)
+title = English JumpX Layout
 
 1 0x1000    0       3 # and you can write whatever you want after the last element
 

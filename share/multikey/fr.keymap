@@ -2,6 +2,7 @@
 # order is: row qcode unicode length blah
 #
 # please don't write anything between a key definition and it's xpm (excpet for spaces)
+title = French
 
 1 0x1000    0       2 # and you can write whatever you want after the last element
     "9 9 2 1"
