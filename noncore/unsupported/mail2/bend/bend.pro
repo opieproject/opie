@@ -5,7 +5,7 @@ HEADERS		+=	bend.h \
 SOURCES		+=	bend.cpp \
 			bendimpl.cpp
 INCLUDEPATH	+=	$(OPIEDIR)/include ../libmail
-LIBS		+=	-lmail -lqpe
+LIBS		+=	-lcoremail -lqpe
 TARGET		=	bend
 DESTDIR		+=	$(OPIEDIR)/plugins/applets/
 

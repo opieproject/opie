@@ -47,6 +47,7 @@ public:
 
 	void hide();
 	void exec();
+    static QString appName() { return QString::fromLatin1("mail"); }
 
 protected:
 //	void fillList(IMAPResponseBODYSTRUCTURE &structure);

@@ -40,7 +40,7 @@ INTERFACES	= 	accounteditorbase.ui \
 		  	renamebase.ui \
 		  	searchdiagbase.ui
 INCLUDEPATH    += 	$(OPIEDIR)/include libmail
-LIBS           += 	-lmail -lqpe -lopie
+LIBS           += 	-lcoremail -lqpe -lopie
 TARGET		= 	mail 
 
 TRANSLATIONS = ../../i18n/de/mail.ts \
