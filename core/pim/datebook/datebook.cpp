@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.1.1.2 2002-01-31 17:03:39 kergoth Exp $
+** $Id: datebook.cpp,v 1.2 2002-02-15 20:02:50 harlekin Exp $
 **
 **********************************************************************/
 
@@ -112,6 +112,11 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
     connect( a, SIGNAL( activated() ), this, SLOT( fileNew() ) );
     a->addTo( sub_bar );
 
+    a = new QAction( tr( "Today" ), Resource::loadPixmap( "to_day" ),  QString::null, 0, g, 0 );
+    connect( a, SIGNAL( activated() ), this, SLOT( slotToday() ) );
+    a->addTo( sub_bar );
+    a->addTo( view );
+   
     a = new QAction( tr( "Day" ), Resource::loadPixmap( "day" ), QString::null, 0, g, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( viewDay() ) );
     a->addTo( sub_bar );
@@ -135,10 +140,6 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
     a = new QAction( tr( "Find" ), Resource::loadPixmap( "mag" ), QString::null, 0, g, 0 );
     connect( a, SIGNAL(activated()), this, SLOT(slotFind()) );
     a->addTo( sub_bar );
-
-    a = new QAction( tr( "Today" ), QString::null, 0, 0 );
-    connect( a, SIGNAL( activated() ), this, SLOT( slotToday() ) );
-    a->addTo( view );
 
     a = new QAction( tr( "Alarm and Start Time..." ), QString::null, 0, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( slotSettings() ) );
@@ -258,7 +259,7 @@ QString DateBook::checkEvent(const Event &e)
 QDate DateBook::currentDate()
 {
     QDate d = QDate::currentDate();
-
+    
     if ( dayView && views->visibleWidget() == dayView ) {
 	d = dayView->date();
     } else if ( weekView && views->visibleWidget() == weekView ) {
