@@ -48,6 +48,8 @@ struct TodayPlugin {
 
 static QValueList<TodayPlugin> pluginList;
 
+static  QMap<QString, TodayPlugin> tempList;
+
 Today::Today( QWidget* parent,  const char* name, WFlags fl )
     : TodayBase( parent, name, fl ) {
 
@@ -66,7 +68,22 @@ Today::Today( QWidget* parent,  const char* name, WFlags fl )
     m_refreshTimer = new QTimer( this );
     connect( m_refreshTimer, SIGNAL( timeout() ), this, SLOT( refresh() ) );
     m_refreshTimer->start( 15000 );
-    //init();
+    m_big_box = 0L;
+
+
+    layout = new QVBoxLayout( this );
+    layout->addWidget( Frame );
+    layout->addWidget( OwnerField );
+
+    m_sv = new QScrollView( this );
+    m_sv->setResizePolicy( QScrollView::AutoOneFit );
+    m_sv->setHScrollBarMode( QScrollView::AlwaysOff );
+    m_sv->setFrameShape( QFrame::NoFrame );
+
+    layout->addWidget( m_sv );
+    layout->setStretchFactor( m_sv,4 );
+
+    qApp->processEvents();
     loadPlugins();
     showMaximized();
 }
@@ -132,15 +149,11 @@ void Today::init() {
     cfg.setGroup( "General" );
     m_iconSize = cfg.readNumEntry( "IconSize", 18 );
     m_hideBanner = cfg.readNumEntry( "HideBanner", 0 );
-    setRefreshTimer(  cfg.readNumEntry( "checkinterval", 15000 ) );
+    setRefreshTimer( cfg.readNumEntry( "checkinterval", 15000 ) );
 
     // set the date in top label
     QDate date = QDate::currentDate();
-    DateLabel->setText( QString( "<font color=#FFFFFF>" + TimeString::longDateString( date ) + "</font>" ) );
-
-    if ( layout ) {
-      delete layout;
-    }
+    DateLabel->setText( QString( "<font color=#FFFFFF>" +  TimeString::longDateString( date )  + "</font>" ) );
 
     if ( m_hideBanner )  {
         Opiezilla->hide();
@@ -150,9 +163,13 @@ void Today::init() {
         TodayLabel->show();
     }
 
-    layout = new QVBoxLayout( this );
-    layout->addWidget( Frame );
-    layout->addWidget( OwnerField );
+    if ( m_big_box ) {
+        delete m_big_box;
+    }
+
+    m_big_box = new QWidget( m_sv->viewport() );
+    m_sv->addChild( m_big_box );
+    m_bblayout = new QVBoxLayout ( m_big_box );
 }
 
 /**
@@ -161,6 +178,7 @@ void Today::init() {
 void Today::loadPlugins() {
 
     init();
+
     QValueList<TodayPlugin>::Iterator tit;
     if ( !pluginList.isEmpty() ) {
         for ( tit = pluginList.begin(); tit != pluginList.end(); ++tit ) {
@@ -184,9 +202,7 @@ void Today::loadPlugins() {
     QStringList list = dir.entryList();
     QStringList::Iterator it;
 
-    qWarning("Found: %d entries !", list.count() );
-
-    QMap<QString, TodayPlugin> tempList;
+    //   QMap<QString, TodayPlugin> tempList;
 
     for ( it = list.begin(); it != list.end(); ++it ) {
         QInterfacePtr<TodayPluginInterface> iface;
@@ -222,6 +238,7 @@ void Today::loadPlugins() {
                 }
             }
 
+
             // find out if plugins should be shown
             if ( m_excludeApplets.grep( *it ).isEmpty() ) {
                 plugin.active = true;
@@ -233,7 +250,7 @@ void Today::loadPlugins() {
             plugin.excludeRefresh = plugin.guiPart->excludeFromRefresh();
 
             // package the whole thing into a qwidget so it can be shown and hidden
-            plugin.guiBox = new QWidget( this );
+            plugin.guiBox = new QWidget( m_big_box );
             QHBoxLayout *boxLayout = new QHBoxLayout( plugin.guiBox );
             QPixmap plugPix;
             plugPix.convertFromImage( Resource::loadImage( plugin.guiPart->pixmapNameWidget() ).smoothScale( m_iconSize, m_iconSize ), 0 );
@@ -242,39 +259,33 @@ void Today::loadPlugins() {
             QWhatsThis::add( plugIcon, tr("Click here to launch the associated app") );
             plugIcon->setName( plugin.guiPart->appName() );
             connect( plugIcon, SIGNAL( clicked() ), this, SLOT( startApplication() ) );
-            // a scrollview for each plugin
-            QScrollView* sv = new QScrollView( plugin.guiBox );
-            QWidget *plugWidget = plugin.guiPart->widget( sv->viewport() );
-            // not sure if that is good .-)
-            sv->setMinimumHeight( 12 );
-            sv->setResizePolicy( QScrollView::AutoOneFit );
-            sv->setHScrollBarMode( QScrollView::AlwaysOff );
-            sv->setFrameShape( QFrame::NoFrame );
-            sv->addChild( plugWidget );
-            // make sure the icon is on the top alligned
+
+            QWidget *plugWidget = plugin.guiPart->widget( plugin.guiBox );
             boxLayout->addWidget( plugIcon, 0, AlignTop );
-            boxLayout->addWidget( sv, 0, AlignTop );
+            boxLayout->addWidget( plugWidget, 0, AlignTop );
             boxLayout->setStretchFactor( plugIcon, 1 );
-            boxLayout->setStretchFactor( sv, 9 );
-            // "prebuffer" it in one more list, to get the sorting done
+            boxLayout->setStretchFactor( plugWidget, 9 );
+
+           // "prebuffer" it in one more list, to get the sorting done
             tempList.insert( plugin.name, plugin );
 
             // on first start the list is off course empty
             if ( m_allApplets.isEmpty() ) {
-                layout->addWidget( plugin.guiBox );
                 pluginList.append( plugin );
+                m_bblayout->addWidget( plugin.guiBox );
             }
 
             // if plugin is not yet in the list, add it to the layout too
             else if ( !m_allApplets.contains( plugin.name ) ) {
-                layout->addWidget( plugin.guiBox );
                 pluginList.append( plugin );
             }
         } else {
             qDebug( "could not recognize %s", QString( path + "/" + *it ).latin1() );
             delete lib;
         }
+
     }
+
 
     if ( !m_allApplets.isEmpty() ) {
         TodayPlugin tempPlugin;
@@ -283,13 +294,16 @@ void Today::loadPlugins() {
         for( stringit = m_allApplets.begin(); stringit !=  m_allApplets.end(); ++stringit ) {
             tempPlugin = ( tempList.find( *stringit ) ).data();
             if ( !( (tempPlugin.name).isEmpty() ) ) {
-                layout->addWidget( tempPlugin.guiBox );
                 pluginList.append( tempPlugin );
+                m_bblayout->addWidget( tempPlugin.guiBox );
             }
         }
     }
+    m_bblayout->addStretch( 2 );
     draw();
 }
+
+
 
 
 /**
@@ -324,7 +338,7 @@ void Today::draw() {
         noPluginsActive->setText( tr( "No plugins activated" ) );
         layout->addWidget( noPluginsActive );
     }
-    layout->addStretch(0);
+    repaint();
 }
 
 
@@ -364,14 +378,75 @@ void Today::startConfig() {
               confWidget = configWidgetList.next() ) {
             confWidget->writeConfig();
         }
-        loadPlugins();
+
+        // make the plugins to reinitialize ( reread its configs )
+        reinitialize();
+        draw();
+
     } else {
         // since refresh is not called in that case , reconnect the signal
-      m_refreshTimer->start( 15000 ); // get the config value in here later
-      connect( m_refreshTimer, SIGNAL( timeout() ), this, SLOT( refresh() ) );
+        m_refreshTimer->start( 15000 ); // get the config value in here later
+        connect( m_refreshTimer, SIGNAL( timeout() ), this, SLOT( refresh() ) );
     }
 }
 
+
+
+void Today::reinitialize()  {
+
+    Config cfg( "today" );
+    cfg.setGroup( "Plugins" );
+    m_excludeApplets = cfg.readListEntry( "ExcludeApplets", ',' );
+    m_allApplets = cfg.readListEntry( "AllApplets", ',' );
+
+    /* reinitialize all plugins */
+    QValueList<TodayPlugin>::Iterator it;
+    for ( it = pluginList.begin(); it != pluginList.end(); ++it ) {
+        if ( !(*it).excludeRefresh ) {
+            (*it).guiPart->reinitialize();
+            qDebug( "reinit" );
+        }
+
+        /* check if plugins is still to be shown */
+        if ( m_excludeApplets.grep( (*it).name ).isEmpty() ) {
+            (*it).active = true;
+        } else {
+            (*it).active = false;
+        }
+
+    }
+
+    cfg.setGroup( "General" );
+    m_iconSize = cfg.readNumEntry( "IconSize", 18 );
+    m_hideBanner = cfg.readNumEntry( "HideBanner", 0 );
+    setRefreshTimer( cfg.readNumEntry( "checkinterval", 15000 ) );
+
+    // set the date in top label
+    QDate date = QDate::currentDate();
+    DateLabel->setText( QString( "<font color=#FFFFFF>" +  TimeString::longDateString( date )  + "</font>" ) );
+
+    if ( m_hideBanner )  {
+        Opiezilla->hide();
+        TodayLabel->hide();
+    } else {
+        Opiezilla->show();
+        TodayLabel->show();
+    }
+
+    delete m_bblayout;
+    m_bblayout = new QVBoxLayout( m_big_box );
+    TodayPlugin tempPlugin;
+    QStringList::Iterator stringit;
+
+    for( stringit = m_allApplets.begin(); stringit !=  m_allApplets.end(); ++stringit ) {
+        tempPlugin = ( tempList.find( *stringit ) ).data();
+        if ( !( (tempPlugin.name).isEmpty() ) ) {
+            m_bblayout->addWidget( tempPlugin.guiBox );
+        }
+    }
+    m_bblayout->addStretch( 2 );
+
+}
 
 /**
  * Refresh for the view. Reload all applets
@@ -379,17 +454,18 @@ void Today::startConfig() {
  */
 void Today::refresh() {
 
-    init();
-
     QValueList<TodayPlugin>::Iterator it;
     for ( it = pluginList.begin(); it != pluginList.end(); ++it ) {
         if ( !(*it).excludeRefresh ) {
             (*it).guiPart->refresh();
-            layout->addWidget( (*it).guiBox );
             qDebug( "refresh" );
         }
     }
-    layout->addStretch(0);
+
+    DateLabel->setText( QString( "<font color=#FFFFFF>" +  TimeString::longDateString( QDate::currentDate() )  + "</font>" ) );
+
+    updateGeometry();
+    repaint();
 }
 
 void Today::startApplication() {
