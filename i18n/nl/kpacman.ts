@@ -7,11 +7,11 @@
     </message>
     <message>
         <source>Defaults</source>
-        <translation>Standaardinstell</translation>
+        <translation>Standaardinstellingen</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Cancel</translation>
+        <translation>Annuleer</translation>
     </message>
     <message>
         <source>Change Direction Keys</source>
@@ -148,7 +148,7 @@ of is in een onbekend formaat.</translation>
     </message>
     <message>
         <source>NICKNAME</source>
-        <translation>SCHUILNAAM</translation>
+        <translation>BIJNAAM</translation>
     </message>
     <message>
         <source>-SHADOW</source>
@@ -228,10 +228,6 @@ of is in een onbekend formaat.</translation>
     <message>
         <source>@YY@/@MM@/@DD@</source>
         <translation>@YY@/@MM@/@DD@</translation>
-    </message>
-    <message>
-        <source>                          </source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
