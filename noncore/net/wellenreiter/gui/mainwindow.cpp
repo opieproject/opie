@@ -25,10 +25,14 @@
 #include <qdatastream.h>
 #include <qfile.h>
 #include <qfileinfo.h>
+#include <qlabel.h>
+#include <qlayout.h>
+#include <qlineedit.h>
 #include <qiconset.h>
 #include <qmenubar.h>
 #include <qmessagebox.h>
 #include <qpopupmenu.h>
+#include <qpushbutton.h>
 #include <qstatusbar.h>
 #include <qtextstream.h>
 #include <qtoolbutton.h>
@@ -87,8 +91,8 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
     uploadButton->setAutoRaise( true );
     #endif
     uploadButton->setIconSet( Resource::loadIconSet( "up" ) );
-    //uploadButton->setEnabled( false );
-    uploadButton->setEnabled( true );
+    uploadButton->setEnabled( false );
+    //uploadButton->setEnabled( true ); // DEBUGGING
     connect( uploadButton, SIGNAL( clicked() ), this, SLOT( uploadSession() ) );
 
     // setup menu bar
@@ -376,6 +380,38 @@ static const char* CAP_hostname = "www.vanille.de";
 
 void WellenreiterMainWindow::uploadSession()
 {
+    QLineEdit* from;
+    QLineEdit* location;
+    QLineEdit* comments;
+    QPushButton* accept;
+    QPushButton* reject;
+
+    QDialog* d = new QDialog( 0, "session upload", true );
+    d->setCaption( tr( "Upload Session" ) );
+    QGridLayout* g = new QGridLayout( d, 4, 2, 3 );
+    g->addWidget( new QLabel( tr( "From: " ), d ), 0, 0 );
+    g->addWidget( from = new QLineEdit( d ), 0, 1 );
+    g->addWidget( new QLabel( tr( "Location: " ), d ), 1, 0 );
+    g->addWidget( location = new QLineEdit( d ), 1, 1 );
+    g->addWidget( new QLabel( tr( "Comments: " ), d ), 2, 0 );
+    g->addWidget( comments = new QLineEdit( d ), 2, 1 );
+    g->addWidget( accept = new QPushButton( tr( "&Ok" ), d ), 3, 0 );
+    g->addWidget( reject = new QPushButton( tr( "&Cancel" ), d ), 3, 1 );
+    accept->setDefault( true );
+    accept->setAutoDefault( true );
+    from->setText( "WL II User" );
+    location->setText( "WL II Location" );
+    comments->setText( "No Comments." );
+    connect( accept, SIGNAL( clicked() ), d, SLOT( accept() ) );
+    connect( reject, SIGNAL( clicked() ), d, SLOT( reject() ) );
+    int result = d->exec();
+
+    if ( !result )
+    {
+        qDebug( "Session upload cancelled :(" );
+        return;
+    }
+
     qDebug( "Starting upload..." );
 
     struct sockaddr_in raddr;
@@ -388,14 +424,14 @@ void WellenreiterMainWindow::uploadSession()
     {
         if ( !QFile::exists( "/var/log/dump.wellenreiter" ) )
         {
-            qDebug( "no file to upload!" );
+            QMessageBox::warning( 0, tr( "Error" ), tr( "<p>Logfile doesn't exist</p>") );
             return;
         }
 
         QFile f( "/var/log/dump.wellenreiter" );
         if ( !f.open( IO_ReadOnly ) )
         {
-            qDebug( "can't open file!" );
+            QMessageBox::warning( 0, tr( "Error" ), tr( "<p>Can't open Logfile</p>") );
             return;
         }
 
@@ -435,15 +471,15 @@ void WellenreiterMainWindow::uploadSession()
                 "-----------------------------97267758015830030481215568065\r\n"
                 "Content-Disposition: form-data; name=\"Name\"\r\n"
                 "\r\n"
-                "Anonymous Wellenreiter II User\r\n"
+                "%1\r\n"
                 "-----------------------------97267758015830030481215568065\r\n"
                 "Content-Disposition: form-data; name=\"Location\"\r\n"
                 "\r\n"
-                "Anonymous Wellenreiter II Location\r\n"
+                "%2\r\n"
                 "-----------------------------97267758015830030481215568065\r\n"
                 "Content-Disposition: form-data; name=\"Comments\"\r\n"
                 "\r\n"
-                "Anonymous Wellenreiter II Comments\r\n"
+                "%3\r\n"
                 "-----------------------------97267758015830030481215568065\r\n"
                 "Content-Disposition: form-data; name=\"upfile\"; filename=\"/var/log/dump.wellenreiter\"\r\n"
                 "Content-Type: application/octet-stream\r\n"
@@ -451,6 +487,10 @@ void WellenreiterMainWindow::uploadSession()
 
                 preambel = ""
                 "\r\n-----------------------------97267758015830030481215568065--\r\n";
+
+                content = content.arg( from->text().isEmpty() ? QString( "Anonymous Wellenreiter II User" ) : from->text() );
+                content = content.arg( location->text().isEmpty() ? QString( "Anonymous Wellenreiter II Location" ) : location->text() );
+                content = content.arg( comments->text().isEmpty() ? QString( "Anonymous Wellenreiter II Comments" ) : comments->text() );
 
                 header = header.arg( QString::number( content.length() + f.size() + preambel.length() ) );
 
@@ -489,8 +529,10 @@ void WellenreiterMainWindow::uploadSession()
         ::close ( sock );
     }
     if ( ok )
-    QMessageBox::information ( 0, tr( "Success" ), QString ( "<p>%1</p>" ). arg( tr( "Capture Dump was uploaded to %1" )).arg ( CAP_hostname ));
+    QMessageBox::information( 0, tr( "Success" ),
+                              QString ( "<p>%1</p>" ).arg( tr( "Capture Dump was uploaded to %1" ) ).arg( CAP_hostname ) );
     else
-    QMessageBox::warning ( 0, tr( "Error" ), QString ( "<p>%1</p>" ). arg ( tr( "Connection to %1 failed." )). arg ( CAP_hostname ));
+    QMessageBox::warning( 0, tr( "Error" ),
+                          QString ( "<p>%1</p>" ).arg ( tr( "Connection to %1 failed" ) ).arg( CAP_hostname ) );
 }
 
