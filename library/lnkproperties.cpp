@@ -26,6 +26,7 @@
 #include "lnkpropertiesbase_p.h"
 #include "ir.h"
 
+#include <qpe/qpeapplication.h>
 #include <qpe/applnk.h>
 #include <qpe/global.h>
 #include <qpe/categorywidget.h>
@@ -50,6 +51,7 @@
 #include <qsize.h>
 #include <qcombobox.h>
 #include <qregexp.h>
+#include <qbuttongroup.h>
 
 #include <stdlib.h>
 
@@ -85,7 +87,9 @@ LnkProperties::LnkProperties( AppLnk* l, QWidget* parent )
 
 	d->docname->setReadOnly( FALSE );
 	d->preload->hide();
-	d->spacer->hide();
+	d->rotate->hide();
+	d->rotateButtons->hide();
+	d->labelspacer->hide();
 
 	// ### THIS MUST GO, FIX WIERD BUG in QLAYOUT
 	d->categoryEdit->kludge();
@@ -110,6 +114,13 @@ LnkProperties::LnkProperties( AppLnk* l, QWidget* parent )
 
 	if ( l->property("CanFastload") == "0" )
 	    d->preload->hide();
+	if ( !l->property("Rotation"). isEmpty ()) {
+	    d->rotate->setChecked ( true );
+	    d->rotateButtons->setButton(((QPEApplication::defaultRotation()+l->rotation().toInt())%360)/90);
+	}
+	else {
+	    d->rotateButtons->setEnabled(false);
+	}
 
 	Config cfg("Launcher");
 	cfg.setGroup("Preload");
@@ -275,12 +286,28 @@ void LnkProperties::done(int ok)
 		changed = TRUE;
 	    }
 	}
+	if ( !d->rotate->isHidden()) {
+	    QString newrot;
+	
+	    if (d->rotate->isChecked()) {
+		int rot=0;
+		for(; rot<4; rot++) {
+		    if (d->rotateButtons->find(rot)->isOn())
+		        break;
+		}
+		newrot = QString::number((QPEApplication::defaultRotation()+rot*90)%360);
+	    }
+	    if (newrot !=lnk->rotation()) {
+		lnk->setRotation(newrot);
+		changed = TRUE;
+	    }
+	}
 	if ( d->preload->isHidden() && d->locationCombo->currentItem() != currentLocation ) {
 	    moveLnk();
 	} else if ( changed ) {
 	    lnk->writeLink();
 	}
-
+	
 	if ( !d->preload->isHidden() ) {
 	    Config cfg("Launcher");
 	    cfg.setGroup("Preload");

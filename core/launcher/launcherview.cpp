@@ -490,10 +490,9 @@ bool LauncherIconView::removeLink(const QString& linkfile)
     DocLnk dl(linkfile);
     while (item) {
 	l = item->appLnk();
-	if (  l->linkFileKnown() && l->linkFile() == linkfile
-		|| l->fileKnown() && (
-		    l->file() == linkfile
-		    || dl.isValid() && dl.file() == l->file() ) ) {
+	if ( ( l->linkFileKnown() && ( l->linkFile() == linkfile ))
+	  || ( l->fileKnown() && ( l->file() == linkfile ))
+	  || ( dl.fileKnown() && l->fileKnown() && ( dl.file() == l->file() )) ) {
 	    delete item;
 	    did = TRUE;
 	}
@@ -502,9 +501,9 @@ bool LauncherIconView::removeLink(const QString& linkfile)
     QListIterator<AppLnk> it(hidden);
     while ((l=it.current())) {
 	++it;
-	if ( l->linkFileKnown() && l->linkFile() == linkfile
-		|| l->file() == linkfile
-		|| dl.isValid() && dl.file() == l->file() ) {
+	if ( ( l->linkFileKnown() && ( l->linkFile() == linkfile ))
+	  || ( l->file() == linkfile )
+	  || ( dl.fileKnown() && ( dl.file() == l->file() )) ) {
 	    hidden.removeRef(l);
 	   did = TRUE;
 	}

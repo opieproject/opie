@@ -372,7 +372,10 @@ AppLnk::AppLnk( const QString &file )
 	    mMimeTypeIcons = config.readListEntry( "MimeTypeIcons", ';' );
 	    mLinkFile = file;
 	    mFile = config.readEntry("File", QString::null);
-	    if ( mFile[0] != '/' ) {
+	    if ( !mExec. isEmpty ( )) {
+		mFile = QString::null;
+	    }
+	    else if ( mFile[0] != '/' ) {
 		int slash = file.findRev('/');
 		if ( slash >= 0 ) {
 		    mFile = file.left(slash) + '/' + mFile;
@@ -520,7 +523,7 @@ QString AppLnk::type() const
 */
 QString AppLnk::file() const
 {
-    if ( mFile.isNull() ) {
+    if ( mExec.isEmpty ( ) && mFile.isNull() ) {
 	AppLnk* that = (AppLnk*)this;
 	QString ext = MimeType(mType).extension();
 	if ( !ext.isEmpty() )
@@ -529,6 +532,7 @@ QString AppLnk::file() const
 	    that->mFile =
 		mLinkFile.right(8)==".desktop" // 8 = strlen(".desktop")
 		    ? mLinkFile.left(mLinkFile.length()-8) : mLinkFile;
+	qDebug("mFile now == %s", mFile.latin1());
 	} else if ( mType.contains('/') ) {
 	    that->mFile =
 		QString(getenv("HOME"))+"/Documents/"+mType+"/"+safeFileName(that->mName);
@@ -697,6 +701,18 @@ void AppLnk::setExec( const QString& exec )
     mExec = exec;
 }
 
+#if 0 // this was inlined for better BC
+/*!
+  Sets the Rotation property to \a rot.
+
+  \sa rotation()
+*/
+void AppLnk::setRotation ( const QString &rot )
+{
+	mRotation = rot;
+}
+#endif
+
 /*!
   Sets the Name property to \a docname.
 
@@ -835,6 +851,10 @@ void AppLnk::storeLink() const
     config.writeEntry("Name",mName);
     if ( !mIconFile.isNull() ) config.writeEntry("Icon",mIconFile);
     config.writeEntry("Type",type());
+    if(!rotation().isEmpty())
+	config.writeEntry("Rotation",rotation());
+    else
+	config.removeEntry("Rotation");    
     if ( !mComment.isNull() ) config.writeEntry("Comment",mComment);
     QString f = file();
     int i = 0;
