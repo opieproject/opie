@@ -120,7 +120,7 @@
     </message>
     <message>
         <source>Change Directory</source>
-        <translation type="obsolete">Verzeichnis wechseln</translation>
+        <translation type="unfinished">Verzeichnis wechseln</translation>
     </message>
     <message>
         <source>Execute</source>
@@ -204,6 +204,10 @@ and is licensed by the GPL</source>
     <message>
         <source>Add To Documents</source>
         <translation>Zu den Dokumenten hinzufügen</translation>
+    </message>
+    <message>
+        <source>Actions</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

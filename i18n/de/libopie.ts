@@ -3,159 +3,226 @@
     <name>ColorPopupMenu</name>
     <message>
         <source>More</source>
-        <translation>Mehr</translation>
+        <translation type="obsolete">Mehr</translation>
     </message>
     <message>
         <source>More...</source>
-        <translation>Mehr...</translation>
+        <translation type="obsolete">Mehr...</translation>
     </message>
 </context>
 <context>
     <name>OColorDialog</name>
     <message>
-        <source>Hue:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sat:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Val:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Red:</source>
-        <translation>Rot:</translation>
+        <translation type="obsolete">Rot:</translation>
     </message>
     <message>
         <source>Green:</source>
-        <translation>Grün:</translation>
+        <translation type="obsolete">Grün:</translation>
     </message>
     <message>
         <source>Blue:</source>
-        <translation>Blau:</translation>
+        <translation type="obsolete">Blau:</translation>
     </message>
     <message>
         <source>Alpha channel:</source>
-        <translation>Alphakanal:</translation>
+        <translation type="obsolete">Alphakanal:</translation>
     </message>
     <message>
         <source>Select color</source>
-        <translation>Farbe auswählen</translation>
+        <translation type="obsolete">Farbe auswählen</translation>
     </message>
 </context>
 <context>
     <name>OFileDialog</name>
     <message>
-        <source>FileDialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Open</source>
-        <translation>Laden</translation>
+        <translation type="obsolete">Laden</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Speichern</translation>
+        <translation type="obsolete">Speichern</translation>
     </message>
 </context>
 <context>
     <name>OFileSelector</name>
     <message>
         <source>Documents</source>
-        <translation>Dokumente</translation>
+        <translation type="obsolete">Dokumente</translation>
     </message>
     <message>
         <source>Files</source>
-        <translation>Dateien</translation>
+        <translation type="obsolete">Dateien</translation>
     </message>
     <message>
         <source>All Files</source>
-        <translation>Alle Dateien</translation>
+        <translation type="obsolete">Alle Dateien</translation>
     </message>
     <message>
         <source>All</source>
-        <translation>Alle</translation>
+        <translation type="obsolete">Alle</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation>Name:</translation>
+        <translation type="obsolete">Name:</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>&amp;Speichern</translation>
+        <translation type="obsolete">&amp;Speichern</translation>
     </message>
     <message>
         <source>C&amp;ancel</source>
-        <translation>A&amp;bbrechen</translation>
+        <translation type="obsolete">A&amp;bbrechen</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation type="obsolete">Name</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Größe</translation>
+        <translation type="obsolete">Größe</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation>Datum</translation>
+        <translation type="obsolete">Datum</translation>
     </message>
     <message>
         <source>Mime Type</source>
-        <translation>Mime Type</translation>
+        <translation type="obsolete">Mime Type</translation>
     </message>
     <message>
         <source>Ser Permission</source>
-        <translation>Rechte setzen</translation>
+        <translation type="obsolete">Rechte setzen</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation type="obsolete">Löschen</translation>
     </message>
     <message>
         <source>Do you really want to delete
 </source>
-        <translation>Wollen Sie wirklich löschen
+        <translation type="obsolete">Wollen Sie wirklich löschen
 </translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Ja</translation>
+        <translation type="obsolete">Ja</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>Nein</translation>
+        <translation type="obsolete">Nein</translation>
     </message>
 </context>
 <context>
     <name>OFontMenu</name>
     <message>
         <source>Large</source>
-        <translation>Groß</translation>
+        <translation type="obsolete">Groß</translation>
     </message>
     <message>
         <source>Medium</source>
-        <translation>Mittel</translation>
+        <translation type="obsolete">Mittel</translation>
     </message>
     <message>
         <source>Small</source>
-        <translation>Klein</translation>
+        <translation type="obsolete">Klein</translation>
     </message>
 </context>
 <context>
     <name>OFontSelector</name>
     <message>
-        <source>Style</source>
+        <source>Size</source>
+        <translation type="obsolete">Größe</translation>
+    </message>
+</context>
+<context>
+    <name>ORecurranceBase</name>
+    <message>
+        <source>Repeating Event </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Size</source>
-        <translation type="unfinished">Größe</translation>
+        <source>None</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
+        <source>Day</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Week</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Month</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Year</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Every:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Frequency</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End On:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No End Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Repeat On</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fri</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sun</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Every</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Var1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Var 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WeekVar</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -182,27 +249,27 @@
     <name>QObject</name>
     <message>
         <source>Summary:</source>
-        <translation>Zusammenfassung:</translation>
+        <translation type="obsolete">Zusammenfassung:</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation>Beschreibung:</translation>
+        <translation type="obsolete">Beschreibung:</translation>
     </message>
     <message>
         <source>Priority:</source>
-        <translation>Priorität:</translation>
+        <translation type="obsolete">Priorität:</translation>
     </message>
     <message>
         <source>Progress:</source>
-        <translation>Fortschritt:</translation>
+        <translation type="obsolete">Fortschritt:</translation>
     </message>
     <message>
         <source>Deadline:</source>
-        <translation>fällig bis:</translation>
+        <translation type="obsolete">fällig bis:</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation>Kategoie:</translation>
+        <translation type="obsolete">Kategoie:</translation>
     </message>
 </context>
 </TS>

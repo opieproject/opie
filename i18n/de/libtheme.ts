@@ -7,11 +7,6 @@
         <comment>name</comment>
         <translation type="obsolete">Schema</translation>
     </message>
-    <message>
-        <source>KDE2 theme compatible style engine</source>
-        <comment>description</comment>
-        <translation type="obsolete"></translation>
-    </message>
 </context>
 <context>
     <name>Styles</name>

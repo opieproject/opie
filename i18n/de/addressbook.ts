@@ -112,11 +112,11 @@
     </message>
     <message>
         <source>Arrange Edit Fields</source>
-        <translation>Eingabefelderordnung ändern</translation>
+        <translation type="obsolete">Eingabefelderordnung ändern</translation>
     </message>
     <message>
         <source>Out of Space</source>
-        <translation>Nicht genügend Speicherplatz vorhanden</translation>
+        <translation type="obsolete">Nicht genügend Speicherplatz vorhanden</translation>
     </message>
     <message>
         <source>There is not enough space to create
@@ -124,7 +124,7 @@ neccessary startup files.
 
 Free up some space before
 entering data!</source>
-        <translation>Nicht genug Speicherplatz, um
+        <translation type="obsolete">Nicht genug Speicherplatz, um
 notwendige Dateien zu erstellen.
 
 Bitte sorgen sie für mehr
@@ -186,39 +186,39 @@ Dennoch beenden?</translation>
     </message>
     <message>
         <source>Name Title</source>
-        <translation>Name Anrede</translation>
+        <translation type="obsolete">Name Anrede</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation>Notizen</translation>
+        <translation type="obsolete">Notizen</translation>
     </message>
     <message>
         <source>Work</source>
-        <translation>Geschäftlich</translation>
+        <translation type="obsolete">Geschäftlich</translation>
     </message>
     <message>
         <source>Mb</source>
-        <translation type="unfinished">Mb</translation>
+        <translation type="obsolete">Mb</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation>Vorname</translation>
+        <translation type="obsolete">Vorname</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation>Nachname</translation>
+        <translation type="obsolete">Nachname</translation>
     </message>
     <message>
         <source>File As</source>
-        <translation>Speichern unter</translation>
+        <translation type="obsolete">Speichern unter</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation>E-Mail</translation>
+        <translation type="obsolete">E-Mail</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation>Geschlecht</translation>
+        <translation type="obsolete">Geschlecht</translation>
     </message>
     <message>
         <source>All</source>
@@ -227,6 +227,124 @@ Dennoch beenden?</translation>
     <message>
         <source>Unfiled</source>
         <translation>nicht eingeteilt</translation>
+    </message>
+    <message>
+        <source>Find Next</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close Find</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save all Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Config</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OContacts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not Found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to find a contact for this</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>search pattern !</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End of list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End of list. Wrap around now.. !</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Phone Book</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Company Book</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Email Book</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cards</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ConfigDlg_Base</name>
+    <message>
+        <source>MyDialog1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Query Style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use Regular Expressions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use Wildcards (*,?)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Case Sensitive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Signal Wrap Around</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Prefer QT-Mail </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Prefer Opie-Mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notice: QT-Mail is just 
+provided in the SHARP 
+default ROM. Opie-Mail 
+is provided free !</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -277,7 +395,7 @@ Dennoch beenden?</translation>
     </message>
     <message>
         <source>Name Title</source>
-        <translation>Name Anrede</translation>
+        <translation type="obsolete">Name Anrede</translation>
     </message>
     <message>
         <source>First Name</source>
@@ -317,51 +435,51 @@ Dennoch beenden?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation>Notizen</translation>
+        <translation type="obsolete">Notizen</translation>
     </message>
     <message>
         <source>Groups</source>
-        <translation>Gruppen</translation>
+        <translation type="obsolete">Gruppen</translation>
     </message>
     <message>
         <source>Business Street</source>
-        <translation>Strasse, geschäftlich</translation>
+        <translation type="obsolete">Strasse, geschäftlich</translation>
     </message>
     <message>
         <source>Home Street</source>
-        <translation>Straße, privat</translation>
+        <translation type="obsolete">Straße, privat</translation>
     </message>
     <message>
         <source>Business City</source>
-        <translation>Stadt, geschäftlich</translation>
+        <translation type="obsolete">Stadt, geschäftlich</translation>
     </message>
     <message>
         <source>Business State</source>
-        <translation>Staat, geschäftlich</translation>
+        <translation type="obsolete">Staat, geschäftlich</translation>
     </message>
     <message>
         <source>Business Zip</source>
-        <translation>Postleitzahl, geschäftlich</translation>
+        <translation type="obsolete">Postleitzahl, geschäftlich</translation>
     </message>
     <message>
         <source>Business Country</source>
-        <translation>Bundesland, geschäftlich</translation>
+        <translation type="obsolete">Bundesland, geschäftlich</translation>
     </message>
     <message>
         <source>Home City</source>
-        <translation>Stadt, privat</translation>
+        <translation type="obsolete">Stadt, privat</translation>
     </message>
     <message>
         <source>Home State</source>
-        <translation>Staat, privat</translation>
+        <translation type="obsolete">Staat, privat</translation>
     </message>
     <message>
         <source>Home Zip</source>
-        <translation>Postleitzahl, privat</translation>
+        <translation type="obsolete">Postleitzahl, privat</translation>
     </message>
     <message>
         <source>Home Country</source>
-        <translation>Bundesland, privat</translation>
+        <translation type="obsolete">Bundesland, privat</translation>
     </message>
     <message>
         <source>Full Name...</source>
@@ -1301,23 +1419,23 @@ Dennoch beenden?</translation>
     </message>
     <message>
         <source>Work Phone</source>
-        <translation>Tel., geschäftlich</translation>
+        <translation type="obsolete">Tel., geschäftlich</translation>
     </message>
     <message>
         <source>Work Fax</source>
-        <translation>Fax, geschläftlich</translation>
+        <translation type="obsolete">Fax, geschläftlich</translation>
     </message>
     <message>
         <source>work Mobile</source>
-        <translation>Handy, geschäftlich</translation>
+        <translation type="obsolete">Handy, geschäftlich</translation>
     </message>
     <message>
         <source>Work Pager</source>
-        <translation>Pager, geschäftlich</translation>
+        <translation type="obsolete">Pager, geschäftlich</translation>
     </message>
     <message>
         <source>Work Web Page</source>
-        <translation>Internetseite, geschäftlich</translation>
+        <translation type="obsolete">Internetseite, geschäftlich</translation>
     </message>
     <message>
         <source>Contacts</source>
@@ -1325,7 +1443,7 @@ Dennoch beenden?</translation>
     </message>
     <message>
         <source>Work Mobile</source>
-        <translation>Handy, geschäftlich</translation>
+        <translation type="obsolete">Handy, geschäftlich</translation>
     </message>
     <message>
         <source>Kuwait</source>
@@ -1333,6 +1451,10 @@ Dennoch beenden?</translation>
     </message>
     <message>
         <source>Kyrgystan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

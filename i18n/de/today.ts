@@ -46,6 +46,10 @@
         <source>No plugins activated</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Click here to launch the associated app</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TodayBase</name>
@@ -55,10 +59,14 @@
     </message>
     <message>
         <source>Today</source>
-        <translation type="obsolete">Heute</translation>
+        <translation type="unfinished">Heute</translation>
     </message>
     <message>
-        <source>Today&#xb2;</source>
+        <source>Today by Maximilian Rei&#xdf;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to get to the config dialog</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -97,6 +105,42 @@ resume?
     <message>
         <source>Misc</source>
         <translation type="unfinished">Verschiedenes</translation>
+    </message>
+    <message>
+        <source>Check a checkbox to activate/deactivate a plugin ore use the arrow buttons on the right to change the appearance order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check this if today should be autostarted on resume.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Icon size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set the icon size in pixel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>How often should Today refresh itself</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> sec</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>never</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
