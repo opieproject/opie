@@ -28,6 +28,7 @@ public:
     QList<int> replayList;
     QListIterator<int> *replayIt;
     bool replay;
+    QString replayFile;
 
 	int blockWidth;
 	int blockHeight;
@@ -112,6 +113,8 @@ public:
 	void keyPressEvent( QKeyEvent *e );
 	void keyReleaseEvent( QKeyEvent *e );
     void saveScore();
+    void saveReplay();
+    void loadReplay();
 
 private slots:
 	void run();
