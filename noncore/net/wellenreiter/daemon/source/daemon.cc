@@ -1,19 +1,17 @@
 /*
  * Startup functions of wellenreiter
  *
- * $Id: daemon.cc,v 1.2 2002-11-13 21:57:18 mjm Exp $
+ * $Id: daemon.cc,v 1.3 2002-11-22 23:41:17 mjm Exp $
  */
 
 #include "config.hh"
 #include "daemon.hh"
-#include "log.hh"
-#include "sendgui.hh"
-#include "getgui.hh"
 
 /* Main function of wellenreiterd */
 int main(int argc, char **argv)
 {
-  int sock, maxfd;
+  int sock, maxfd, guiport=GUIPORT;
+  char guihost[]="127.0.0.1";
   struct sockaddr_in *cliaddr;
   socklen_t len=sizeof(struct sockaddr);
   char buffer[128];
@@ -23,15 +21,17 @@ int main(int argc, char **argv)
   fprintf(stderr, "wellenreiterd %s\n\n", VERSION);
 
   /* Setup socket for incoming commands */
-  if(!commsock(&sock))
-    return 0;
-
-  log_info("Set up socket '%d' for GUI communication", sock);
+  if((sock=commsock(DAEMONADDR, DAEMONPORT)) < 0)
+  {
+    wl_logerr("Cannot setup socket");
+    exit(-1);
+  }
+  wl_loginfo("Set up socket '%d' for GUI communication", sock);
 
   FD_ZERO(&rset);
 
   /* Start main loop */
-  log_info("Starting main loop");
+  wl_loginfo("Starting main loop");
   while(1)
   {
 
@@ -40,7 +40,7 @@ int main(int argc, char **argv)
     maxfd=sock+fileno(fp)+1;
     if(select(maxfd, &rset, NULL, NULL, NULL) < 0)
     {
-      log_err("Error calling select: %s", strerror(errno));
+      wl_logerr("Error calling select: %s", strerror(errno));
       break;
     }     
 
@@ -50,13 +50,13 @@ int main(int argc, char **argv)
       memset(buffer, 0, sizeof(buffer));
       if(recvfrom(sock, buffer, sizeof(buffer)-1, 0, (struct sockaddr *)cliaddr, &len) < 0)
       {
-	 log_err("Cannot read from socket: %s", strerror(errno));
+	 wl_logerr("Cannot read from socket: %s", strerror(errno));
 	 break;
       }
-      log_info("Received command from '%s': %s", inet_ntoa(cliaddr->sin_addr), buffer); 
+      wl_loginfo("Received command from '%s': %s", inet_ntoa(cliaddr->sin_addr), buffer); 
 
       /* Pass string to analyze function */
-      commstring(buffer);
+      //      sendcomm(guihost, guiport, buffer);
 
     }
 
@@ -66,18 +66,16 @@ int main(int argc, char **argv)
       memset(buffer, 0, sizeof(buffer));
       if(fgets(buffer, sizeof(buffer) - 1, fp) == NULL)
       {
-	 log_err("Cannot read from stdin: %s", strerror(errno));
+	 wl_logerr("Cannot read from stdin: %s", strerror(errno));
 	 break;
       }
-      log_info("Sending command to '%s': %s", GUIADDR, buffer);
+      wl_loginfo("Sending command to '%s': %s", GUIADDR, buffer);
 
       /* Send string to GUI */
-      sendgui("%d: %s", 1234, buffer);
+      sendcomm(guihost, guiport, "%d: %s", 1234, buffer);
 
     }
-
   }
-
   close(sock);
-  return 0;
+  exit(0);
 }
