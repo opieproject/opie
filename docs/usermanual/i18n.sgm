@@ -36,11 +36,17 @@
 		CVS is a tool which the developers and most translators use to get the source
 		of &opie;.  If you already have an anonymous account for the &opie;-cvs you
 		should go to <filename class='directory'>OPIEDIR/i18n</filename> and do 
-		<programlisting>cvs up</programlisting>.  If there is already a translation for the language you would like to
+		
+		<programlisting>cvs up</programlisting>
+		
+		If there is already a translation for the language you would like to
 		translate you will see the language code in that directory.  For example,
 		for german this is <programlisting>de</programlisting> and for danish it is
-		<programlisting>da</programlisting>.  If not, you should contact the coordinator
-		<personname><firstname>Carsten</firstname><surname>Niehaus</surname></personname>
+		
+		<programlisting>da</programlisting>
+		
+		If not, you should contact the coordinator
+		<personname><firstname>Carsten</firstname> <surname>Niehaus</surname></personname>
 		so that everything will be set up for your language.
 	</para>
 </section> 
@@ -100,15 +106,18 @@
 		the english text which appears if there is no translation yet. In the first
 		case this is <quote>New</quote>.  The next row is where the translated string
 		would be.  The first two messages are already translated, the third is
-		not.  This is marked by the <programlisting>type="unfinished"</programlisting>.
+		not.  This is marked by the 
+		
+		<programlisting>type="unfinished"</programlisting>
+		
 	</para> 
 	<para>
 		If you choose to use an editor like VIM instead of the prefered tool
 		-Linguist- you have to remove that mark and add the translated string
-		between the two <programlisting>translation</programlisting>-tags.
+		between the two translation-tags.
 	</para>
 	<para>
-		It might happen that you see <programlisting>type="obsolete"</programlisting> in a
+		It might happen that you see <emphasis>type="obsolete"</emphasis> in a
 		.ts-file. You should not translate these stings as they do no longer appear in the
 		application. The translationcoordinator removes those strings from time to time. In
 		Linguist those strings are grey and not translatable.
