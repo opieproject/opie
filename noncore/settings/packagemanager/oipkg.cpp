@@ -153,7 +153,14 @@ void OIpkg::setConfigItems( OConfItemList *configList )
 
                 switch ( item->type() )
                 {
-                    case OConfItem::Source : confLine.append( "src " ); break;
+                    case OConfItem::Source :
+                    {
+                        if ( item->features().contains( "Compressed" ) )
+                            confLine.append( "src/gz " );
+                        else
+                            confLine.append( "src " );
+                    }
+                    break;
                     case OConfItem::Destination : confLine.append( "dest " ); break;
                     case OConfItem::Option : confLine.append( "option " ); break;
                     case OConfItem::Arch : confLine.append( "arch " ); break;
@@ -508,8 +515,14 @@ void OIpkg::loadConfiguration()
                         // Type
                         QString typeStr = line.left( pos );
                         OConfItem::Type type;
+                        QString features;
                         if ( typeStr == "src" || typeStr == "#src" )
                             type = OConfItem::Source;
+                        else if ( typeStr == "src/gz" || typeStr == "#src/gz" )
+                        {
+                            type = OConfItem::Source;
+                            features = "Compressed";
+                        }
                         else if ( typeStr == "dest" || typeStr == "#dest" )
                             type = OConfItem::Destination;
                         else if ( typeStr == "option" || typeStr == "#option" )
@@ -533,7 +546,7 @@ void OIpkg::loadConfiguration()
                         bool active = !line.startsWith( "#" );
 
                         // Add to list
-                        m_confInfo->append( new OConfItem( type, name, value, active ) );
+                        m_confInfo->append( new OConfItem( type, name, value, features, active ) );
                     }
                 }
             }

@@ -101,7 +101,8 @@ void OIpkgConfigDlg::accept()
         }
         else
             m_configs->append( new OConfItem( OConfItem::Option, "http_proxy",
-                               m_proxyHttpServer->text(), m_proxyHttpActive->isChecked() ) );
+                               m_proxyHttpServer->text(), QString::null,
+                               m_proxyHttpActive->isChecked() ) );
 
         confItem = findConfItem( OConfItem::Option, "ftp_proxy" );
         if ( confItem )
@@ -111,7 +112,8 @@ void OIpkgConfigDlg::accept()
         }
         else
             m_configs->append( new OConfItem( OConfItem::Option, "ftp_proxy",
-                               m_proxyFtpServer->text(), m_proxyFtpActive->isChecked() ) );
+                               m_proxyFtpServer->text(), QString::null,
+                               m_proxyFtpActive->isChecked() ) );
 
         confItem = findConfItem( OConfItem::Option, "proxy_username" );
         if ( confItem )
@@ -535,9 +537,10 @@ void OIpkgConfigDlg::slotServerUpdate()
     }
     else
     {
-        // Add new destination to configuration list
-        m_configs->append( new OConfItem( OConfItem::Source, newName,
-                           m_serverLocation->text(), m_serverActive->isChecked() ) );
+        // Add new server to configuration list
+        // TODO - support src/gz
+        m_configs->append( new OConfItem( OConfItem::Source, newName, m_serverLocation->text(),
+                           QString::null, m_serverActive->isChecked() ) );
         m_configs->sort();
 
         m_serverList->insertItem( newName );
@@ -630,7 +633,7 @@ void OIpkgConfigDlg::slotDestUpdate()
     {
         // Add new destination to configuration list
         m_configs->append( new OConfItem( OConfItem::Destination, newName,
-                           m_destLocation->text(), m_destActive->isChecked() ) );
+                           m_destLocation->text(), QString::null, m_destActive->isChecked() ) );
         m_configs->sort();
 
         m_destList->insertItem( newName );

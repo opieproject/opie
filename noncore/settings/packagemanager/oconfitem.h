@@ -41,22 +41,26 @@ public:
     enum Type { Source, Destination, Option, Arch, NotDefined };
 
     OConfItem( Type type = NotDefined, const QString &name = QString::null,
-               const QString &value = QString::null, bool active = true );
+               const QString &value = QString::null, const QString &features = QString::null,
+               bool active = true );
 
     Type           type()     { return m_type; }
     const QString &name()     { return m_name; }
     const QString &value()    { return m_value; }
+    const QString &features() { return m_features; }
     bool           active()   { return m_active; }
 
-    void setType( Type type )             { m_type = type; }
-    void setName( const QString &name )   { m_name = name; }
-    void setValue( const QString &value ) { m_value = value; }
-    void setActive( bool active )         { m_active = active; }
+    void setType( Type type )                   { m_type = type; }
+    void setName( const QString &name )         { m_name = name; }
+    void setValue( const QString &value )       { m_value = value; }
+    void setFeatures( const QString &features ) { m_features = features; }
+    void setActive( bool active )               { m_active = active; }
 
 private:
     Type    m_type;     // Type of configuration item
     QString m_name;     // Name of item
     QString m_value;    // Value of item
+    QString m_features; // Comma-deliminated list of features this item supports
     bool    m_active;   // Indicates whether item is currently active
 };
 
