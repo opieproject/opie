@@ -518,8 +518,8 @@ void PlayListWidget::addToSelection( QListViewItem *it) {
                   if( dit.current()->name() == it->text(0)) {
                       if(QFileInfo( dit.current()->file()).exists()) {
                           d->selectedFiles->addToSelection(  **dit );
-                          qDebug("blah "+ dit.current()->name());
-                          d->selectedFiles->setSelectedItem( dit.current()->name());
+//                          qDebug("blah "+ dit.current()->name());
+//                          d->selectedFiles->setSelectedItem( dit.current()->name());
                       }
                   }
               }
@@ -532,8 +532,8 @@ void PlayListWidget::addToSelection( QListViewItem *it) {
                   if( dit.current()->name() == it->text(0)) {
                       if( QFileInfo( dit.current()->file()).exists() ) {
                           d->selectedFiles->addToSelection(  **dit );
-                          qDebug("blah "+ dit.current()->name());
-                          d->selectedFiles->setSelectedItem( dit.current()->name());
+//                          qDebug("blah "+ dit.current()->name());
+//                          d->selectedFiles->setSelectedItem( dit.current()->name());
                       }
                   }
               }
@@ -752,7 +752,7 @@ void PlayListWidget::openFile() {
 
             d->selectedFiles->addToSelection(  lnk );
             writeCurrentM3u();
-            d->selectedFiles->setSelectedItem( lnk->name());
+            d->selectedFiles->setSelectedItem( lnk.name());
         }
         else if( filename.right( 3) == "m3u" ) {
             readm3u( filename );
