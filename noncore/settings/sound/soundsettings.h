@@ -27,15 +27,18 @@
 class SoundSettings : public SoundSettingsBase
 { 
 Q_OBJECT
-	
+  
 public:
  SoundSettings( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
   
 protected:
  void accept();
  void reject();
+ void updateStorageCombo();
   
 private slots:
+ void setLocation(const QString &);
+    
  void setVolume(int);
  void setMic(int); 
 

@@ -11,8 +11,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>286</width>
-            <height>338</height>
+            <width>255</width>
+            <height>301</height>
         </rect>
     </property>
     <property stdset="1">
@@ -34,190 +34,19 @@
             <name>spacing</name>
             <number>6</number>
         </property>
-        <widget row="0"  column="1" >
-            <class>QLayoutWidget</class>
-            <property stdset="1">
-                <name>name</name>
-                <cstring>Layout9</cstring>
-            </property>
-            <vbox>
-                <property stdset="1">
-                    <name>margin</name>
-                    <number>0</number>
-                </property>
-                <property stdset="1">
-                    <name>spacing</name>
-                    <number>6</number>
-                </property>
-                <widget>
-                    <class>QLayoutWidget</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>Layout8</cstring>
-                    </property>
-                    <vbox>
-                        <property stdset="1">
-                            <name>margin</name>
-                            <number>0</number>
-                        </property>
-                        <property stdset="1">
-                            <name>spacing</name>
-                            <number>6</number>
-                        </property>
-                        <widget>
-                            <class>QGroupBox</class>
-                            <property stdset="1">
-                                <name>name</name>
-                                <cstring>GroupBox1</cstring>
-                            </property>
-                            <property stdset="1">
-                                <name>title</name>
-                                <string>Vmemo</string>
-                            </property>
-                            <grid>
-                                <property stdset="1">
-                                    <name>margin</name>
-                                    <number>11</number>
-                                </property>
-                                <property stdset="1">
-                                    <name>spacing</name>
-                                    <number>6</number>
-                                </property>
-                                <widget row="0"  column="0" >
-                                    <class>QLayoutWidget</class>
-                                    <property stdset="1">
-                                        <name>name</name>
-                                        <cstring>Layout15</cstring>
-                                    </property>
-                                    <vbox>
-                                        <property stdset="1">
-                                            <name>margin</name>
-                                            <number>0</number>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>spacing</name>
-                                            <number>6</number>
-                                        </property>
-                                        <widget>
-                                            <class>QLabel</class>
-                                            <property stdset="1">
-                                                <name>name</name>
-                                                <cstring>sampleRateLabel</cstring>
-                                            </property>
-                                            <property stdset="1">
-                                                <name>text</name>
-                                                <string>Sample Rate</string>
-                                            </property>
-                                        </widget>
-                                        <widget>
-                                            <class>QComboBox</class>
-                                            <item>
-                                                <property>
-                                                    <name>text</name>
-                                                    <string>11025</string>
-                                                </property>
-                                            </item>
-                                            <item>
-                                                <property>
-                                                    <name>text</name>
-                                                    <string>22050</string>
-                                                </property>
-                                            </item>
-                                            <item>
-                                                <property>
-                                                    <name>text</name>
-                                                    <string>32000</string>
-                                                </property>
-                                            </item>
-                                            <item>
-                                                <property>
-                                                    <name>text</name>
-                                                    <string>44100</string>
-                                                </property>
-                                            </item>
-                                            <property stdset="1">
-                                                <name>name</name>
-                                                <cstring>sampleRate</cstring>
-                                            </property>
-                                        </widget>
-                                        <widget>
-                                            <class>QCheckBox</class>
-                                            <property stdset="1">
-                                                <name>name</name>
-                                                <cstring>stereoCheckBox</cstring>
-                                            </property>
-                                            <property stdset="1">
-                                                <name>text</name>
-                                                <string>Stereo</string>
-                                            </property>
-                                        </widget>
-                                        <widget>
-                                            <class>QCheckBox</class>
-                                            <property stdset="1">
-                                                <name>name</name>
-                                                <cstring>sixteenBitCheckBox</cstring>
-                                            </property>
-                                            <property stdset="1">
-                                                <name>text</name>
-                                                <string>16 bit</string>
-                                            </property>
-                                        </widget>
-                                    </vbox>
-                                </widget>
-                            </grid>
-                        </widget>
-                        <widget>
-                            <class>QCheckBox</class>
-                            <property stdset="1">
-                                <name>name</name>
-                                <cstring>touchsound</cstring>
-                            </property>
-                            <property stdset="1">
-                                <name>text</name>
-                                <string>Screen sounds</string>
-                            </property>
-                        </widget>
-                        <widget>
-                            <class>QCheckBox</class>
-                            <property stdset="1">
-                                <name>name</name>
-                                <cstring>keysound</cstring>
-                            </property>
-                            <property stdset="1">
-                                <name>text</name>
-                                <string>Keyboard sounds</string>
-                            </property>
-                        </widget>
-                    </vbox>
-                </widget>
-                <spacer>
-                    <property>
-                        <name>name</name>
-                        <cstring>Spacer10</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>orientation</name>
-                        <enum>Vertical</enum>
-                    </property>
-                    <property stdset="1">
-                        <name>sizeType</name>
-                        <enum>Expanding</enum>
-                    </property>
-                    <property>
-                        <name>sizeHint</name>
-                        <size>
-                            <width>20</width>
-                            <height>20</height>
-                        </size>
-                    </property>
-                </spacer>
-            </vbox>
-        </widget>
         <widget row="0"  column="0" >
             <class>QGroupBox</class>
             <property stdset="1">
                 <name>name</name>
                 <cstring>GroupBox3</cstring>
+            </property>
+            <property stdset="1">
+                <name>frameShape</name>
+                <enum>Box</enum>
+            </property>
+            <property stdset="1">
+                <name>frameShadow</name>
+                <enum>Sunken</enum>
             </property>
             <property stdset="1">
                 <name>title</name>
@@ -613,6 +442,196 @@
                         </widget>
                     </vbox>
                 </widget>
+            </vbox>
+        </widget>
+        <widget row="0"  column="1" >
+            <class>QLayoutWidget</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Layout12</cstring>
+            </property>
+            <vbox>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>0</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>6</number>
+                </property>
+                <widget>
+                    <class>QGroupBox</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>GroupBox1</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>title</name>
+                        <string>Vmemo</string>
+                    </property>
+                    <widget>
+                        <class>QLayoutWidget</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>Layout11</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>geometry</name>
+                            <rect>
+                                <x>5</x>
+                                <y>16</y>
+                                <width>96</width>
+                                <height>169</height>
+                            </rect>
+                        </property>
+                        <vbox>
+                            <property stdset="1">
+                                <name>margin</name>
+                                <number>0</number>
+                            </property>
+                            <property stdset="1">
+                                <name>spacing</name>
+                                <number>6</number>
+                            </property>
+                            <widget>
+                                <class>QLabel</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>sampleRateLabel</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Sample Rate</string>
+                                </property>
+                            </widget>
+                            <widget>
+                                <class>QComboBox</class>
+                                <item>
+                                    <property>
+                                        <name>text</name>
+                                        <string>11025</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property>
+                                        <name>text</name>
+                                        <string>22050</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property>
+                                        <name>text</name>
+                                        <string>32000</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property>
+                                        <name>text</name>
+                                        <string>44100</string>
+                                    </property>
+                                </item>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>sampleRate</cstring>
+                                </property>
+                            </widget>
+                            <widget>
+                                <class>QCheckBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>stereoCheckBox</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Stereo</string>
+                                </property>
+                            </widget>
+                            <widget>
+                                <class>QCheckBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>sixteenBitCheckBox</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>16 bit</string>
+                                </property>
+                            </widget>
+                            <widget>
+                                <class>QCheckBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>AlertCheckBox</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Visual Alerts</string>
+                                </property>
+                            </widget>
+                            <widget>
+                                <class>QLabel</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>TextLabel1</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Location</string>
+                                </property>
+                            </widget>
+                            <widget>
+                                <class>QComboBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>LocationComboBox</cstring>
+                                </property>
+                            </widget>
+                        </vbox>
+                    </widget>
+                </widget>
+                <widget>
+                    <class>QCheckBox</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>touchsound</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Screen sounds</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QCheckBox</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>keysound</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Keyboard sounds</string>
+                    </property>
+                </widget>
+                <spacer>
+                    <property>
+                        <name>name</name>
+                        <cstring>Spacer10</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>orientation</name>
+                        <enum>Vertical</enum>
+                    </property>
+                    <property stdset="1">
+                        <name>sizeType</name>
+                        <enum>Expanding</enum>
+                    </property>
+                    <property>
+                        <name>sizeHint</name>
+                        <size>
+                            <width>20</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
             </vbox>
         </widget>
     </grid>

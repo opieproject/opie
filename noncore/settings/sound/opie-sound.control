@@ -1,7 +1,7 @@
 Files: bin/sound apps/Settings/Sound.desktop
 Priority: optional
 Section: opie/settings
-Maintainer: Warwick Allison <warwick@trolltech.com>
+Maintainer: L.J. Potter
 Architecture: arm
 Arch: iPAQ
 Version: $QPE_VERSION-$SUB_VERSION.2

@@ -21,6 +21,8 @@
 
 #include <qpe/config.h>
 #include <qpe/qcopenvelope_qws.h>
+#include <qpe/storage.h>
+
 #include <qapplication.h>
 #include <qslider.h>
 #include <qcheckbox.h>
@@ -39,7 +41,7 @@ SoundSettings::SoundSettings( QWidget* parent,  const char* name, WFlags fl )
     keysound->setChecked(config.readBoolEntry("Key"));
 
     config.setGroup("Record");
-    int rate=config.readNumEntry("SampleRate", 11025);
+    int rate=config.readNumEntry("SampleRate", 22050);
     if(rate == 11025)
         sampleRate->setCurrentItem(0);
     else if(rate == 22050)
@@ -49,34 +51,38 @@ SoundSettings::SoundSettings( QWidget* parent,  const char* name, WFlags fl )
     else if(rate==44100)
         sampleRate->setCurrentItem(2);
 
-  stereoCheckBox->setChecked(config.readNumEntry("Stereo", 0));
-  sixteenBitCheckBox->setChecked(config.readNumEntry("SixteenBit", 1));
+    stereoCheckBox->setChecked(config.readNumEntry("Stereo", 0));
+    sixteenBitCheckBox->setChecked(config.readNumEntry("SixteenBit", 1));
 
+    updateStorageCombo();
     connect(volume, SIGNAL(valueChanged(int)), this, SLOT(setVolume(int)));
     connect(mic, SIGNAL(valueChanged(int)), this, SLOT(setMic(int)));
     connect(qApp, SIGNAL( volumeChanged(bool) ), this, SLOT( volumeChanged(bool) ) );
-  connect(qApp, SIGNAL( micChanged(bool) ), this, SLOT ( micChanged(bool) ) );
+    connect(qApp, SIGNAL( micChanged(bool) ), this, SLOT ( micChanged(bool) ) );
+    connect( LocationComboBox,SIGNAL(activated(const QString &)),this,SLOT( setLocation(const QString &)));
+//     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
 }
 
 void SoundSettings::reject()
 {
     Config config( "Sound" );
     config.setGroup( "System" );
-    setVolume(100-config.readNumEntry("Volume"));
-  setMic(100-config.readNumEntry("Mic"));
 
-  config.setGroup("Record");
-    int rate=config.readNumEntry("SampleRate", 11025);
-    if(rate == 11025)
-        sampleRate->setCurrentItem(0);
-    else if(rate == 22050)
-        sampleRate->setCurrentItem(1);
-    else if(rate == 32000)
-        sampleRate->setCurrentItem(2);
-    else if(rate==44100)
-        sampleRate->setCurrentItem(3);
-  stereoCheckBox->setChecked(config.readNumEntry("Stereo", 0));
-  sixteenBitCheckBox->setChecked(config.readNumEntry("SixteenBit", 0));
+    setVolume(100-config.readNumEntry("Volume"));
+    setMic(100-config.readNumEntry("Mic"));
+
+//   config.setGroup("Record");
+//     int rate=config.readNumEntry("SampleRate", 11025);
+//     if(rate == 11025)
+//         sampleRate->setCurrentItem(0);
+//     else if(rate == 22050)
+//         sampleRate->setCurrentItem(1);
+//     else if(rate == 32000)
+//         sampleRate->setCurrentItem(2);
+//     else if(rate==44100)
+//         sampleRate->setCurrentItem(3);
+//   stereoCheckBox->setChecked(config.readNumEntry("Stereo", 0));
+//   sixteenBitCheckBox->setChecked(config.readNumEntry("SixteenBit", 0));
 
     QDialog::reject();
 }
@@ -91,12 +97,12 @@ void SoundSettings::accept()
     config.writeEntry("Key",keysound->isChecked());
 
     setVolume(volume->value());
-  setMic(mic->value());
+    setMic(mic->value());
 
-  config.setGroup("Record");
-  config.writeEntry("SampleRate",sampleRate->currentText());
-  config.writeEntry("Stereo",stereoCheckBox->isChecked());
-  config.writeEntry("SixteenBit",sixteenBitCheckBox->isChecked());
+    config.setGroup("Record");
+    config.writeEntry("SampleRate",sampleRate->currentText());
+    config.writeEntry("Stereo",stereoCheckBox->isChecked());
+    config.writeEntry("SixteenBit",sixteenBitCheckBox->isChecked());
   
     QDialog::accept();
 }
@@ -133,4 +139,28 @@ void SoundSettings::micChanged( bool )
   Config config( "Sound" );
   config.setGroup( "System" );
   mic->setValue(100-config.readNumEntry("Mic"));
+}
+
+void SoundSettings::updateStorageCombo() {
+
+   StorageInfo storageInfo;
+   QString sName, sPath;
+   QStringList list;
+   const QList<FileSystem> &fs = storageInfo.fileSystems();
+    QListIterator<FileSystem> it ( fs );
+        for( ; it.current(); ++it ){
+            const QString name = (*it)->name();
+            const QString path = (*it)->path();
+            qDebug("storage name "+name +" storage path is "+path);
+            list << name + ": " +path;
+//             if(dit.current()->file().find(path) != -1 ) storage=name;
+        }
+        LocationComboBox->insertStringList(list);
+}
+
+void SoundSettings::setLocation(const QString & string) {
+   Config config( "Sound" );
+   config.setGroup( "System" );
+   config.writeEntry("RecLocation",string);
+
 }

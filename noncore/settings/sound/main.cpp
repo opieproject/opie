@@ -26,11 +26,8 @@
 int main(int argc, char** argv)
 {
     QPEApplication a(argc,argv);
-
     SoundSettings dlg;
-
     a.showMainWidget(&dlg);
-
     return a.exec();
 }
 
