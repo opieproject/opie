@@ -42,12 +42,18 @@ LauncherClock::LauncherClock( QWidget *parent ) : QLabel( parent )
     connect( qApp, SIGNAL( timeChanged() ), this, SLOT( updateTime( ) ) );
     connect( qApp, SIGNAL( clockChanged( bool ) ),
 	     this, SLOT( slotClockChanged( bool ) ) );
-    Config config( "qpe" );
-    config.setGroup( "Time" );
-    ampmFormat = config.readBoolEntry( "AMPM", TRUE );
+    readConfig();
     timerId = 0;
     timerEvent( 0 );
     show();
+}
+
+void LauncherClock::readConfig() {
+    Config config( "qpe" );
+    config.setGroup( "Time" );
+    ampmFormat = config.readBoolEntry( "AMPM", TRUE );
+    config.setGroup( "Date" );
+    format = config.readNumEntry("ClockApplet",0);
 }
 
 void LauncherClock::mouseReleaseEvent( QMouseEvent * )
@@ -84,14 +90,23 @@ void LauncherClock::changeTime( void )
 	    hour = 12;
 	if (hour > 12)
 	    hour -= 12;
-	s.sprintf( "%2d%c%02d %s", hour, ':', tm.minute(), (tm.hour() >= 12) ? "PM" : "AM" );
+	s.sprintf( "%2d:%02d %s", hour, tm.minute(), 
+		   (tm.hour() >= 12) ? "PM" : "AM" );
     } else
-	s.sprintf( "%2d%c%02d", tm.hour(), ':', tm.minute() );
-    setText( s );
+	s.sprintf( "%2d:%02d", tm.hour(), tm.minute() );
+
+    if (format==1) {
+	QDate dm = QDate::currentDate();
+	QString d;
+	d.sprintf("%d/%d ", dm.day(), dm.month());
+	setText( d+s );
+    } else {
+	setText( s );
+    }
 }
 
 void LauncherClock::slotClockChanged( bool pm )
 {
-    ampmFormat = pm;
+    readConfig();
     updateTime();
 }

@@ -38,8 +38,10 @@ protected:
     void mouseReleaseEvent( QMouseEvent * );
     void timerEvent( QTimerEvent * );
     void changeTime( void );
+    void readConfig();
     bool ampmFormat;
     int timerId;
+    int format;
 };
 
 
