@@ -16,6 +16,7 @@
 
 class QLabel;
 class OxydataTable;
+class QTableItem;
 
 /*
  * A OxydataWidget shows all known data of an element. It can 
@@ -59,6 +60,9 @@ class OxydataTable : public QTable
         OxydataTable( int numRows, int numCols,
                             QWidget *parent = 0, const char *name = 0 );
 
+        virtual int alignment() const;
+//        virtual QTableItem *item(  int row, int col ) const;
+
     protected:
         /*
          * This method is reimplemented form QTable. It implements the colourisation
@@ -66,5 +70,12 @@ class OxydataTable : public QTable
          */
         virtual void paintCell( QPainter *p, int row, int col, const QRect &cr, bool selected );
 };
+
+//X class OxydataQTI : QTableItem
+//X {
+//X     Q_OBJECT
+//X 
+//X     public:
+//X         OxydataQTI( 
 
 #endif

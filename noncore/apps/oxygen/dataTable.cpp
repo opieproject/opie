@@ -1,4 +1,12 @@
 /***************************************************************************
+   application:             : Oxygen
+
+   begin                    : September 2002
+   copyright                : ( C ) 2002 by Carsten Niehaus
+   email                    : cniehaus@handhelds.org
+ **************************************************************************/
+
+/***************************************************************************
  *                                                                         *
  * This program is free software; you can redistribute it and/or modify    *
  * it under the terms of the GNU General Public License as published by    *
@@ -19,18 +27,23 @@
 OxydataWidget::OxydataWidget(QWidget *parent) : QWidget(parent)
 {
     QGridLayout *qgrid = new QGridLayout( this, 2,1 );
+    
     QHBox *hbox = new QHBox( this );
     left = new QLabel( hbox );
     middle = new QLabel( hbox );
     right = new QLabel( hbox );
     
-    DataTable = new OxydataTable( 9,2, this );
-
+    right->setAlignment( AlignRight );
+    middle->setAlignment( AlignHCenter );
+    
     QFont bf;
     bf.setBold( true );
     bf.setPointSize( bf.pointSize()+2 );
     middle->setFont( bf );
 
+    DataTable = new OxydataTable( 9,2, this );
+    DataTable->setColumnWidth ( 1 , 118 );
+    DataTable->setColumnWidth ( 0 , 118 );
     setTable();
 
     qgrid->addWidget( hbox,0,0 );    
@@ -80,6 +93,13 @@ OxydataTable::OxydataTable(int numRows, int numCols, QWidget *parent,
     this->setTopMargin( 0 );
     this->setLeftMargin( 0 );
 }
+
+int OxydataTable::alignment() const
+{
+    return AlignLeft | AlignVCenter;
+};
+
+
 
 void OxydataTable::paintCell(  QPainter *p, int row, int col, const QRect &cr, bool selected)
 {

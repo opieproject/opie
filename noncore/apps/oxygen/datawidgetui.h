@@ -1,3 +1,14 @@
+#ifndef DATAWIDGETUI_H
+#define DATAWIDGETUI_H
+
+
+/***************************************************************************
+   application:             : Oxygen
+
+   begin                    : September 2002
+   copyright                : ( C ) 2002 by Carsten Niehaus
+   email                    : cniehaus@handhelds.org
+ **************************************************************************/
 
 /***************************************************************************
  *                                                                         *
@@ -7,9 +18,13 @@
  * ( at your option ) any later version.                                   *
  *                                                                         *
  **************************************************************************/
-#include "dataTable.h"
+
+
+class OxydataWidget;
+class OxydataTable;
 
 class QComboBox;
+#include <qwidget.h>
 
 class dataWidgetUI : public QWidget
 {
@@ -23,3 +38,4 @@ class dataWidgetUI : public QWidget
         QComboBox *dataCombo;
         OxydataWidget *oxyDW;
 };
+#endif
