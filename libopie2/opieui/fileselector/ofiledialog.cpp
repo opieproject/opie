@@ -98,16 +98,12 @@ OFileDialog::OFileDialog(const QString &caption,
                          const QMap<QString,QStringList>& mimetypes )
         : QDialog( wid, "OFileDialog", true )
 {
-    //  QVBoxLayout *lay = new QVBoxLayout(this);
-    //showMaximized();
     QVBoxLayout *lay = new QVBoxLayout(this );
     file = new OFileSelector(this , mode, selector,
                              dirName, fileName,
                              mimetypes );
     lay->addWidget( file );
 
-    //lay->addWidget( file );
-    //showFullScreen();
     setCaption( caption.isEmpty() ? tr("FileDialog") : caption );
     connect(file, SIGNAL(fileSelected(const QString&) ),
             this, SLOT(slotFileSelected(const QString&) ) );
