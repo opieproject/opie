@@ -174,12 +174,21 @@ void DateBookDayView::setRowStyle( int style )
 
 void DateBookDayView::contentsMouseReleaseEvent( QMouseEvent *e )
 {
-	int y=e->y();
-	int diff=y%(this->rowHeight(0));
-	int hour=y/this->rowHeight(0);
-	quickLineEdit=new DateBookDayViewQuickLineEdit(QDateTime(currDate,QTime(hour,0,0,0)),QDateTime(currDate,QTime(hour,59,0,0)),this->viewport(),"quickedit");
+	int sh=99,eh=-1;
+
+	for(int i=0;i<this->numSelections();i++) {
+		QTableSelection sel = this->selection( i );
+		sh = QMIN(sh,sel.topRow());
+		eh = QMAX(sh,sel.bottomRow()+1);
+	}
+	if (sh > 23 || eh < 1) {
+		sh=8;
+		eh=9;
+	}
+
+	quickLineEdit=new DateBookDayViewQuickLineEdit(QDateTime(currDate,QTime(sh,0,0,0)),QDateTime(currDate,QTime(eh,0,0,0)),this->viewport(),"quickedit");
 	quickLineEdit->setGeometry(0,0,this->columnWidth(0)-1,this->rowHeight(0));
-	this->moveChild(quickLineEdit,0,y-diff);
+	this->moveChild(quickLineEdit,0,sh*this->rowHeight(0));
 	quickLineEdit->setFocus();
 	quickLineEdit->show();
 }
