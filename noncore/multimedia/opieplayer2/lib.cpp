@@ -9,7 +9,9 @@
 #include "lib.h"
 
 
-
+extern "C" {
+vo_driver_t* init_video_out_plugin( config_values_t* conf, void* video);
+}
 
 using namespace XINE;
 
@@ -44,6 +46,8 @@ Lib::Lib() {
     m_xine = xine_init( m_videoOutput,
                       m_audioOutput,
                       m_config );
+    // test loading
+    m_videoOutput = ::init_video_out_plugin( m_config, NULL );		     
 }
 
 Lib::~Lib() {
@@ -65,6 +69,7 @@ int Lib::majorVersion() {
 int Lib::minorVersion() {
     return xine_get_minor_version();
 };
+
 int Lib::subVersion() {
     return xine_get_sub_version();
 }
