@@ -1709,7 +1709,7 @@ void QTReaderApp::setfont()
     m_fontVisible = true;
 }
 
-void QTReaderApp::setfontHelper(const QString& lcn, int size = 0)
+void QTReaderApp::setfontHelper(const QString& lcn, int size)
 {
     if (size == 0) size = reader->m_fontControl.currentsize();
     QFont f(lcn, 10 /*, QFont::Bold*/);

@@ -105,7 +105,7 @@ void CDrawBuffer::truncate(int n)
     (*this)[n] = 0;
 }
 
-int CDrawBuffer::width(int numchars = -1)
+int CDrawBuffer::width(int numchars)
 {
     int currentx = 0, end = 0;
     QString text = toQString(data());

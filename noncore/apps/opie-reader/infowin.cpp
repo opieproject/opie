@@ -2,7 +2,7 @@
 #include "version.h"
 #include <stdio.h>
 
-infowin::infowin( QWidget *parent=0, const char *name=0, WFlags f = 0) :
+infowin::infowin( QWidget *parent, const char *name, WFlags f) :
     QWidget(parent, name, f)
 {
     grid = new QGridLayout(this, 6, 2);
