@@ -38,11 +38,14 @@ DatebookPluginWidget::DatebookPluginWidget( QWidget *parent,  const char* name)
     }
     db = new DateBookDB;
 
+
     if ( m_layoutDates )  {
         delete m_layoutDates;
     }
     m_layoutDates = new QVBoxLayout( this );
     m_layoutDates->setAutoAdd( true );
+
+    m_eventsList.setAutoDelete( true );
 
     readConfig();
     getDates();
@@ -69,6 +72,7 @@ void DatebookPluginWidget::refresh()  {
     for ( ev = m_eventsList.first(); ev != 0; ev = m_eventsList.next() )  {
         delete ev;
     }
+    m_eventsList.clear();
     getDates();
 }
 
@@ -78,25 +82,22 @@ void DatebookPluginWidget::refresh()  {
 void DatebookPluginWidget::getDates() {
 
     QDate date = QDate::currentDate();
-
     QValueList<EffectiveEvent> list = db->getEffectiveEvents( date, date.addDays( m_moreDays )  );
     qBubbleSort( list );
-    //Config config( "qpe" );
-    int count=0;
+    int count = 0;
 
+    qDebug( QString("List count %1" ).arg(list.count() ) );
     if ( list.count() > 0 ) {
 
-        for ( QValueList<EffectiveEvent>::ConstIterator it = list.begin(); it != list.end(); ++it ) {
+        for ( QValueList<EffectiveEvent>::ConstIterator it = list.begin(); it  != list.end(); ++it ) {
 
             if ( count <= m_max_lines_meet ) {
-                QTime time = QTime::currentTime();
-
                 if ( !m_onlyLater ) {
                     count++;
                     DateBookEvent *l = new DateBookEvent( *it, this, m_show_location, m_show_notes );
                     m_eventsList.append( l );
                     QObject::connect ( l, SIGNAL( editEvent( const Event & ) ), l, SLOT( editEventSlot( const Event & ) ) );
-                } else if ( ( time.toString() <= TimeString::dateString( (*it).event().end() ) ) ) {
+                } else if ( QDateTime::currentDateTime()  <= (*it).event().end() ) {
                     count++;
                     // show only later appointments
                     DateBookEvent *l = new DateBookEvent( *it, this, m_show_location, m_show_notes );
