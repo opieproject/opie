@@ -55,6 +55,9 @@
 #include <qtextstream.h>
 #include <qpopupmenu.h>
 
+#include <opie/owait.h>
+
+
 #include "launcherview.h"
 #include "launcher.h"
 #include "syncdialog.h"
@@ -360,6 +363,7 @@ void CategoryTabWidget::updateLink(const QString& linkfile)
 {
     int i=0;
     LauncherView* view;
+    qApp->processEvents();
     while ((view = (LauncherView*)stack->widget(i++))) {
 	if ( view->removeLink(linkfile) )
 	    break;
@@ -728,6 +732,13 @@ void Launcher::updateMimeTypes(AppLnkSet* folder)
  */
 void Launcher::loadDocs() // ok here comes a hack belonging to Global::
 {
+
+    OWait *owait = new OWait();
+    Global::statusMessage( tr( "Finding documents" ) );
+
+    owait->show();
+    qApp->processEvents();
+
     delete docsFolder;
     docsFolder = new DocLnkSet;
 
@@ -788,8 +799,10 @@ void Launcher::loadDocs() // ok here comes a hack belonging to Global::
 	  cfg.writeEntry("timestamp", newStamp ); //just write a new timestamp
 	  // we need to scan the list now. Hopefully the cache will be there
 	  // read the mimetypes from the config and search for documents
-	  QStringList mimetypes = configToMime( &cfg);
-	  tmp = new DocLnkSet( (*it)->path(), mimetypes.join(";")  );
+ 	  QStringList mimetypes = configToMime( &cfg);
+                  qApp->processEvents();
+                  Global::statusMessage( tr( "Searching documents" ) );
+  	  tmp = new DocLnkSet( (*it)->path(), mimetypes.join(";")  );
 	  docsFolder->appendFrom( *tmp );
 	  delete tmp;
 
@@ -803,8 +816,10 @@ void Launcher::loadDocs() // ok here comes a hack belonging to Global::
 	      cfg.setGroup("main");
 	      cfg.writeEntry("timestamp", newStamp );
 	      cfg.write();
-	      tmp = new DocLnkSet( (*it)->path(), medium.mimeTypes().join(";" ) );
-	      docsFolder->appendFrom( *tmp );
+
+              qApp->processEvents();
+              tmp = new DocLnkSet( (*it)->path(), medium.mimeTypes().join(";" ) );
+      	      docsFolder->appendFrom( *tmp );
 	      delete tmp;
 	    }// no else
 	    /** c1) */
@@ -814,7 +829,10 @@ void Launcher::loadDocs() // ok here comes a hack belonging to Global::
 	    cfg.setGroup("main" );
 	    bool check = cfg.readBoolEntry("autocheck", true );
 	    if( check ){ // find the documents
-	      tmp = new DocLnkSet( (*it)->path(), configToMime(&cfg ).join(";") );
+
+                      qApp->processEvents();
+                      Global::statusMessage( tr( "Searching documents" ) );
+                      tmp = new DocLnkSet( (*it)->path(), configToMime(&cfg ).join(";") );
 	      docsFolder->appendFrom( *tmp );
 	      delete tmp;
 	    }
@@ -823,6 +841,8 @@ void Launcher::loadDocs() // ok here comes a hack belonging to Global::
        }
     }
     m_timeStamp = newStamp;
+    owait->hide();
+    delete owait;
 }
 
 void Launcher::updateTabs()
@@ -1104,7 +1124,10 @@ void Launcher::systemMessage( const QCString &msg, const QByteArray &data)
     } else if ( msg == "getAllDocLinks()" ) {
 	loadDocs();
 
-	QString contents;
+                // directly show updated docs in document tab
+                updateDocs();
+
+                QString contents;
 
 //	Categories cats;
 	for ( QListIterator<DocLnk> it( docsFolder->children() ); it.current(); ++it ) {
