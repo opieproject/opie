@@ -593,6 +593,12 @@ int OWirelessNetworkInterface::channel() const
 
 void OWirelessNetworkInterface::setChannel( int c ) const
 {
+    if ( c )
+    {
+        qWarning( "OWirelessNetworkInterface::setChannel( 0 ) called - fix your application!" );
+        return;
+    }
+
     if ( !_mon )
     {
         memset( &_iwr, 0, sizeof( struct iwreq ) );
@@ -939,7 +945,7 @@ void OWlanNGMonitoringInterface::setChannel( int c )
     QString prism = _prismHeader ? "true" : "false";
     QString cmd;
     cmd.sprintf( "$(which wlanctl-ng) %s lnxreq_wlansniff channel=%d enable=%s prismheader=%s",
-                 (const char*) _if->name(), c+1, (const char*) enable, (const char*) prism );
+                 (const char*) _if->name(), c, (const char*) enable, (const char*) prism );
     system( cmd );
 }
 
@@ -1015,8 +1021,10 @@ void OOrinocoMonitoringInterface::setEnabled( bool b )
 {
     // IW_MODE_MONITOR was introduced in Wireless Extensions Version 15
     // Wireless Extensions < Version 15 need iwpriv commandos for monitoring
+    // However, as of recent orinoco drivers, IW_MODE_MONITOR is still not supported
 
-    #if WIRELESS_EXT > 14
+    #if 0
+    //#if WIRELESS_EXT > 14
     if ( b )
         _if->setMode( "monitor" );  // IW_MODE_MONITOR doesn't support prism header
     else

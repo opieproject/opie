@@ -336,6 +336,8 @@ class OWirelessNetworkInterface : public ONetworkInterface
     /**
      * Setting the @a channel of the interface changes the radio frequency (RF)
      * of the corresponding wireless network device.
+     * @note Common channel range is within [1-14]. A value of 0 is not allowed.
+     * @see channels()
      */
     virtual void setChannel( int channel ) const;
     /**
