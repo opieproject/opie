@@ -1,9 +1,0 @@
-Files: plugins/inputmethods/libqunikeyboard.so*
-Priority: optional
-Section: qpe/inputmethods
-Maintainer: Warwick Allison <warwick@trolltech.com>
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
-Description: Unicode input method
- Basic unicode input method for the Opie environment.

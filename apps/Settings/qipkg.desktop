@@ -1,8 +1,0 @@
-[Desktop Entry]
-Type=Application
-Exec=qipkg
-MimeType=application/ipkg
-Icon=Ipkg
-Name=Add/Remove Software
-Name[hu]=Csomag- kezelõ
-Name[de]=Software
