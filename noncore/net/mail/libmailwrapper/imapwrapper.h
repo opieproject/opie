@@ -7,6 +7,7 @@
 struct mailimap;
 struct mailimap_body_type_1part;
 struct mailimap_body_type_text;
+struct mailimap_msg_att;
 class RecMail;
 class RecBody;
 
