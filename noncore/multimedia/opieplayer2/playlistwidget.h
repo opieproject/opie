@@ -40,6 +40,7 @@
 #include <qpe/fileselector.h>
 #include <qpushbutton.h>
 #include <qpopupmenu.h>
+#include <qpe/qcopenvelope_qws.h>
 
 #include "playlistwidgetgui.h"
 
@@ -87,6 +88,7 @@ public slots:
     void writeDefaultPlaylist( );
     QString currentFileListPathName() const;
 protected:
+   QCopChannel * channel;
     void keyReleaseEvent( QKeyEvent *e);
 
 signals:
@@ -102,6 +104,7 @@ private:
     bool inFileListMode() const;
 
 private slots:
+    void qcopReceive(const QCString&, const QByteArray&);
     void populateSkinsMenu();
     void skinsMenuActivated(int);
     void pmViewActivated(int);

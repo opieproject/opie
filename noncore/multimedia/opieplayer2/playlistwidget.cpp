@@ -148,6 +148,11 @@ PlayListWidget::PlayListWidget( MediaPlayerState &mediaPlayerState, QWidget* par
     populateSkinsMenu();
     initializeStates();
 
+    channel = new QCopChannel( "QPE/Application/opieplayer2", this );
+    connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
+        this, SLOT( qcopReceive(const QCString&, const QByteArray&)) );
+
+
     cfg.setGroup("PlayList");
     QString currentPlaylist = cfg.readEntry( "CurrentPlaylist", "default");
     loadList(DocLnk(  currentPlaylist ) );
@@ -913,4 +918,48 @@ PlayListWidget::Entry PlayListWidget::currentEntry() const
 
 QString PlayListWidget::currentFileListPathName() const {
     return currentFileListView->currentItem()->text( 3 );
+}
+
+
+void PlayListWidget::qcopReceive(const QCString &msg, const QByteArray &data) {
+   qDebug("qcop message "+msg );
+   QDataStream stream ( data, IO_ReadOnly );
+   if ( msg == "play()" ) { //plays current selection
+      btnPlay( true);
+   } else if ( msg == "stop()" ) {
+      mediaPlayerState.setPlaying( false);
+   } else if ( msg == "togglePause()" ) {
+      mediaPlayerState.togglePaused();
+   } else if ( msg == "next()" ) { //select next in list
+      mediaPlayerState.setNext();      
+   } else if ( msg == "prev()" ) { //select previous in list
+      mediaPlayerState.setPrev();      
+   } else if ( msg == "toggleLooping()" ) { //loop or not loop
+      mediaPlayerState.toggleLooping();
+   } else if ( msg == "toggleShuffled()" ) { //shuffled or not shuffled
+      mediaPlayerState.toggleShuffled();
+   } else if ( msg == "volUp()" ) { //volume more
+//       emit moreClicked();
+//       emit moreReleased();
+   } else if ( msg == "volDown()" ) { //volume less
+//       emit lessClicked();
+//       emit lessReleased();
+   } else if ( msg == "play(QString)" ) { //play this now
+      QString file;
+      stream >> file;
+      setDocument( (const QString &) file);
+   } else if ( msg == "add(QString)" ) { //add to playlist
+      QString file;
+      stream >> file;
+      QFileInfo fileInfo(file);
+      DocLnk lnk;
+      lnk.setName( fileInfo.baseName() ); //sets name
+      lnk.setFile( file ); //sets file name
+      addToSelection( lnk );
+   } else if ( msg == "rem(QString)" ) { //remove from playlist
+      QString file;
+      stream >> file;
+
+   }
+   
 }
