@@ -311,7 +311,7 @@ bool VMemo::startRecording() {
   date = TimeString::dateString( QDateTime::currentDateTime(),false,true);
   date.replace(QRegExp("'"),"");
   date.replace(QRegExp(" "),"_");
-  date.replace(QRegExp(":"),".");
+  date.replace(QRegExp(":"),"-");
   date.replace(QRegExp(","),"");
 
   QString fName;
