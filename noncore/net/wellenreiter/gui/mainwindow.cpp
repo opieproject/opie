@@ -37,6 +37,7 @@
 #include <opie/ofiledialog.h>
 #else
 #include "resource.h"
+#include <qapplication.h>
 #include <qfiledialog.h>
 #endif
 
