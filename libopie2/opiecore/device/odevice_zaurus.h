@@ -94,8 +94,6 @@ class Zaurus : public ODevice
     virtual void initButtons();
 
   public:
-    virtual bool setSoftSuspend( bool soft );
-
     virtual bool setDisplayBrightness( int b );
     virtual bool setDisplayStatus( bool on );
     virtual int displayBrightnessResolution() const;

@@ -158,9 +158,6 @@ int initApplication( int argc, char ** argv )
         return 0;
     }
 
-#ifndef Q_OS_MACX
-    ODevice::inst()->setSoftSuspend( true );
-#endif
     {
         QCopEnvelope e("QPE/System", "setBacklight(int)" );
         e << -3; // Forced on
@@ -195,10 +192,6 @@ int initApplication( int argc, char ** argv )
     odebug << "removing server object..." << oendl;
     delete s;
 
-#ifndef Q_OS_MACX
-    ODevice::inst()->setSoftSuspend( false );
-#endif
-    
     odebug << "returning from qpe/initapplication..." << oendl;
     return rv;
 }

@@ -47,8 +47,6 @@ class iPAQ : public ODevice, public QWSServer::KeyboardFilter
     virtual void initButtons();
 
   public:
-    virtual bool setSoftSuspend( bool soft );
-
     virtual bool setDisplayBrightness( int b );
     virtual int displayBrightnessResolution() const;
 

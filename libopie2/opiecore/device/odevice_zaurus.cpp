@@ -380,43 +380,6 @@ bool Zaurus::setLedState( OLed which, OLedState st )
     return false;
 }
 
-bool Zaurus::setSoftSuspend ( bool soft )
-{
-    if (!m_embedix) {
-        /* non-Embedix kernels dont have kernel autosuspend */
-        return ODevice::setSoftSuspend( soft );
-    }
-
-    bool res = false;
-    int fd;
-
-    if ((( fd = ::open ( "/dev/apm_bios", O_RDWR )) >= 0 ) ||
-        (( fd = ::open ( "/dev/misc/apm_bios",O_RDWR )) >= 0 )) {
-
-        int sources = ::ioctl( fd, APM_IOCGEVTSRC, 0 ); // get current event sources
-
-        if ( sources >= 0 ) {
-            if ( soft )
-                sources &= ~APM_EVT_POWER_BUTTON;
-            else
-                sources |= APM_EVT_POWER_BUTTON;
-
-            if ( ::ioctl( fd, APM_IOCSEVTSRC, sources ) >= 0 ) // set new event sources
-                res = true;
-            else
-                perror ( "APM_IOCGEVTSRC" );
-        }
-        else
-            perror ( "APM_IOCGEVTSRC" );
-
-        ::close( fd );
-    }
-    else
-        perror( "/dev/apm_bios or /dev/misc/apm_bios" );
-
-    return res;
-}
-
 int Zaurus::displayBrightnessResolution() const
 {
     int res = 1;
@@ -540,9 +503,7 @@ bool Zaurus::suspend()
 Transformation Zaurus::rotation() const
 {
     Transformation rot;
-    int handle = 0;
-    int retval = 0;
-
+    
     switch ( d->m_model ) {
         case Model_Zaurus_SLC3000: // fallthrough
         case Model_Zaurus_SLC7x0:
@@ -566,8 +527,7 @@ Transformation Zaurus::rotation() const
 ODirection Zaurus::direction() const
 {
     ODirection dir;
-    int handle = 0;
-    int retval = 0;
+    
     switch ( d->m_model ) {
         case Model_Zaurus_SLC3000: // fallthrough
         case Model_Zaurus_SLC7x0:

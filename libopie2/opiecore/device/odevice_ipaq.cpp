@@ -336,27 +336,6 @@ void iPAQ::playAlarmSound()
 #endif
 }
 
-
-bool iPAQ::setSoftSuspend ( bool soft )
-{
-    bool res = false;
-    int fd;
-
-    if (( fd = ::open ( "/proc/sys/ts/suspend_button_mode", O_WRONLY )) >= 0 ) {
-        if ( ::write ( fd, soft ? "1" : "0", 1 ) == 1 )
-            res = true;
-        else
-            ::perror ( "write to /proc/sys/ts/suspend_button_mode" );
-
-        ::close ( fd );
-    }
-    else
-        ::perror ( "/proc/sys/ts/suspend_button_mode" );
-
-    return res;
-}
-
-
 bool iPAQ::setDisplayBrightness ( int bright )
 {
     bool res = false;

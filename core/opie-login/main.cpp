@@ -192,8 +192,7 @@ int main ( int argc, char **argv )
 			if ( autolog && !userExited ) {
 
                 QWSServer::setDesktopBackground( QImage() );
-                ODevice::inst ( )-> setDisplayStatus ( true );
-                ODevice::inst ( )-> setSoftSuspend ( false );
+                ODevice::inst()->setDisplayStatus( true );
                 LoginApplication *app = new LoginApplication ( argc, argv, ppid );
                 LoginApplication::setLoginAs ( autolog );
 
@@ -335,8 +334,6 @@ int login_main ( int argc, char **argv, pid_t ppid )
 	app-> setFont ( QFont ( "Helvetica", 10 ));
 	app-> setStyle ( new QPEStyle ( ));
 
-	ODevice::inst ( )-> setSoftSuspend ( true );
-
 	if ( QWSServer::mouseHandler() &&
              QWSServer::mouseHandler() ->inherits("QCalibratedMouseHandler") ) {
 		if ( !QFile::exists ( "/etc/pointercal" )) {
@@ -360,8 +357,6 @@ int login_main ( int argc, char **argv, pid_t ppid )
 	lw-> show ( );
 
 	int rc = app-> exec ( );
-
-	ODevice::inst ( )-> setSoftSuspend ( false );
 
 	if ( app-> loginAs ( )) {
 		if ( app-> changeIdentity ( )) {

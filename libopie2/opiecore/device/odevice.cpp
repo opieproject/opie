@@ -254,11 +254,6 @@ ODevice::~ODevice()
     delete d;
 }
 
-bool ODevice::setSoftSuspend ( bool /*soft*/ )
-{
-    return false;
-}
-
 //#include <linux/apm_bios.h>
 
 #define APM_IOC_SUSPEND          OD_IO( 'A', 2 )

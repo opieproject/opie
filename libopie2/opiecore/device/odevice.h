@@ -255,8 +255,6 @@ public:
     virtual ODirection direction() const;
 
     // system
-
-    virtual bool setSoftSuspend ( bool on );
     virtual bool suspend();
 
     virtual bool setDisplayStatus ( bool on );

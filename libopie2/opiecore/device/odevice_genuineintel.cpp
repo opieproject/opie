@@ -160,12 +160,6 @@ void GenuineIntel::playAlarmSound()
 }
 
 
-bool GenuineIntel::setSoftSuspend ( bool )
-{
-    return false;
-}
-
-
 bool GenuineIntel::setDisplayBrightness ( int )
 {
     return false;
