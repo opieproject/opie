@@ -104,8 +104,8 @@ bool WLANImp::writeConfig()
  */
 void WLANImp::accept()
 {
-    if ( writeConfig() )
-		QDialog::accept();
+  if ( writeConfig() )
+    QDialog::accept();
 }
 
 void WLANImp::done ( int r )

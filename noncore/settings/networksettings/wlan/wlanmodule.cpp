@@ -35,8 +35,8 @@ bool WLANModule::isOwner(Interface *i){
  * @return QWidget* pointer to the tab widget in this modules configure.
  */ 
 QWidget *WLANModule::configure(QTabWidget **tabWidget){
-  Config cfg("wireless");
-  WLANImp *wlanconfig = new WLANImp(cfg);
+  Config *cfg = new Config("wireless");
+  WLANImp *wlanconfig = new WLANImp(*cfg);
   (*tabWidget) = wlanconfig->tabWidget;
   return wlanconfig;
 }
