@@ -139,7 +139,7 @@ QWidget( parent, name, f ), scaledWidth( 0 ), scaledHeight( 0 ) {
     setLength( mediaPlayerState->length() );
     setPosition( mediaPlayerState->position() );
     setFullscreen( mediaPlayerState->fullscreen() );
-    setPaused( mediaPlayerState->paused() );
+//    setPaused( mediaPlayerState->paused() );
     setPlaying( mediaPlayerState->playing() );
 }
 

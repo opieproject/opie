@@ -63,7 +63,6 @@ public slots:
     void updateSlider( long, long );
     void sliderPressed( );
     void sliderReleased( );
-    void setPaused( bool b);
     void setPlaying( bool b);
     void setFullscreen( bool b );
     void makeVisible();
