@@ -3,67 +3,68 @@
     <name>Clock</name>
     <message>
         <source>Snooze</source>
-        <translation type="unfinished"></translation>
+        <translation>Dremež</translation>
     </message>
     <message>
         <source>Clock</source>
-        <translation type="unfinished"></translation>
+        <translation>Ura</translation>
     </message>
     <message>
         <source>Stopwatch</source>
-        <translation type="unfinished"></translation>
+        <translation>Štoparica</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Start</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Ponastavi</translation>
     </message>
     <message>
         <source>Set Alarm</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavi alarm</translation>
     </message>
     <message>
         <source>Alarm On</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarm vključen</translation>
     </message>
     <message>
         <source>Alarm Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarm izključen</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Stop</translation>
     </message>
 </context>
 <context>
     <name>Set_Alarm</name>
     <message>
         <source>Set Alarm</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavi alarm</translation>
     </message>
     <message>
         <source>Hour</source>
-        <translation type="unfinished"></translation>
+        <translation>Ura</translation>
     </message>
     <message>
         <source>Minute</source>
-        <translation type="unfinished"></translation>
+        <translation>Minuta</translation>
     </message>
     <message>
         <source>AM</source>
-        <translation type="unfinished"></translation>
+        <translation>AM</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation type="unfinished"></translation>
+        <translation>PM</translation>
     </message>
     <message>
         <source>Snooze Delay
 (minutes)</source>
-        <translation type="unfinished"></translation>
+        <translation>Zakasnitev dremeža
+(minut)</translation>
     </message>
 </context>
 </TS>
