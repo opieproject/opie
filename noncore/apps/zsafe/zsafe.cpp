@@ -4,7 +4,7 @@
 **
 ** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: zsafe.cpp,v 1.2 2003-07-31 16:28:04 zcarsten Exp $
+** $Id: zsafe.cpp,v 1.3 2003-08-01 07:01:38 zcarsten Exp $
 **
 ** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 **
@@ -2792,6 +2792,48 @@ void ZSafe::setCategoryDialogFields(CategoryDialog *dialog)
    dialog->Field4->setText(getFieldLabel (selectedItem, "4", tr("Comment")));
    dialog->Field5->setText(getFieldLabel (selectedItem, "5", tr("Field 4")));
    dialog->Field6->setText(getFieldLabel (selectedItem, "6", tr("Field 5")));
+
+   QString icon;
+   Category *cat= categories.find (selectedItem->text(0));
+   if (cat)
+   {
+      icon = cat->getIconName();
+   }
+
+#ifdef DESKTOP
+	QDir d(iconPath);
+#else
+	QDir d(QPEApplication::qpeDir() + "/pics/");
+#endif
+	d.setFilter( QDir::Files);
+
+	const QFileInfoList *list = d.entryInfoList();
+	int i=0;
+	QFileInfoListIterator it( *list );      // create list iterator
+	QFileInfo *fi;                          // pointer for traversing
+   if (icon.isEmpty() || icon.isNull())
+   {
+      dialog->IconField->setCurrentItem(0);
+   }
+   else
+   {
+		while ( (fi=it.current()) ) 
+      { // for each file...
+			QString fileName = fi->fileName();
+			if(fileName.right(4) == ".png")
+                        {
+			fileName = fileName.mid(0,fileName.length()-4);
+
+			if(fileName+".png"==icon) 
+         {
+            dialog->IconField->setCurrentItem(i+1);
+            break;
+         }
+			   ++i;
+			}
+			++it;
+		}
+	}
 }
 
 void ZSafe::setCategoryDialogFields(CategoryDialog *dialog, QString category)
@@ -2802,6 +2844,48 @@ void ZSafe::setCategoryDialogFields(CategoryDialog *dialog, QString category)
    dialog->Field4->setText(getFieldLabel (category, "4", tr("Comment")));
    dialog->Field5->setText(getFieldLabel (category, "5", tr("Field 4")));
    dialog->Field6->setText(getFieldLabel (category, "6", tr("Field 5")));
+
+   QString icon;
+   Category *cat= categories.find (category);
+   if (cat)
+   {
+      icon = cat->getIconName();
+   }
+
+#ifdef DESKTOP
+	QDir d(iconPath);
+#else
+	QDir d(QPEApplication::qpeDir() + "/pics/");
+#endif
+	d.setFilter( QDir::Files);
+
+	const QFileInfoList *list = d.entryInfoList();
+	int i=0;
+	QFileInfoListIterator it( *list );      // create list iterator
+	QFileInfo *fi;                          // pointer for traversing
+   if (icon.isEmpty() || icon.isNull())
+   {
+      dialog->IconField->setCurrentItem(0);
+   }
+   else
+   {
+		while ( (fi=it.current()) ) 
+      { // for each file...
+			QString fileName = fi->fileName();
+			if(fileName.right(4) == ".png")
+                        {
+			fileName = fileName.mid(0,fileName.length()-4);
+
+			if(fileName+".png"==icon) 
+         {
+            dialog->IconField->setCurrentItem(i+1);
+            break;
+         }
+			   ++i;
+			}
+			++it;
+		}
+	}
 }
 
 void ZSafe::saveCategoryDialogFields(CategoryDialog *dialog)
