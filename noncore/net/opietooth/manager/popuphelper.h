@@ -6,7 +6,7 @@
 #include <qpopupmenu.h>
 #include <qmap.h>
 
-#include <services.h>
+#include "../include/services.h"
 
 namespace OpieTooth {
     typedef QPopupMenu* (*popupFactory)(const Services&, BTDeviceItem*);

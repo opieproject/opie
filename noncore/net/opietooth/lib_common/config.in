@@ -1,0 +1,4 @@
+  config LIBOPIETOOTH_COMMON
+    boolean "libopietooth_common"
+    default "n"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && OPIETOOTH

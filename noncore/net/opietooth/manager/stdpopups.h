@@ -5,7 +5,7 @@
 #include <qlistview.h>
 #include <qpopupmenu.h>
 
-#include <services.h>
+#include "../include/services.h"
 
 #include "btdeviceitem.h"
 

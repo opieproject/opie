@@ -18,8 +18,9 @@
 
 #include "bticonloader.h"
 
-#include <remotedevice.h>
-#include <manager.h>
+#include "remotedevice.h"
+#include "manager_base.h"
+#include "plugin_interface.h"
 
 class QVBox;
 class QHBoxLayout;
@@ -59,7 +60,9 @@ namespace OpieTooth {
         void setInfo();
 
         PopupHelper m_popHelper;
-        Manager *m_localDevice;
+
+	OpieToothPlugin m_plugin;
+        Manager_Base* m_localDevice;
         QMap<QString,BTDeviceItem*> m_deviceList;
 
         void deviceActive( const RemoteDevice &device );

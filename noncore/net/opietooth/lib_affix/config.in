@@ -1,0 +1,4 @@
+  config LIBOPIETOOTH_AFFIX
+    boolean "libopietooth_affix"
+    default "n"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && OPIETOOTH

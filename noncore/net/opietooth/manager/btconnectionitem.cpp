@@ -1,4 +1,4 @@
-#include <connection.h>
+#include "connection.h"
 #include "btconnectionitem.h"
 
 using namespace OpieTooth;

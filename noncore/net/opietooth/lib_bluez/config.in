@@ -1,0 +1,4 @@
+  config LIBOPIETOOTH_BLUEZ
+    boolean "libopietooth_bluez"
+    default "y"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && OPIETOOTH

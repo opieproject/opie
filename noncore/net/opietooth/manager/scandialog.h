@@ -21,7 +21,9 @@
 #include <qdialog.h>
 #include <qlist.h>
 
-#include <remotedevice.h>
+#include "remotedevice.h"
+#include "manager_base.h"
+
 class QVBoxLayout;
 class QGridLayout;
 class QLabel;
@@ -40,7 +42,7 @@ class Device;
         Q_OBJECT
 
     public:
-        ScanDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+        ScanDialog( Manager_Base* manager, QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
         ~ScanDialog();
 
     private: 
@@ -63,7 +65,7 @@ class Device;
     private:
         bool m_search:1;
         void emitToManager();
-        Manager *localDevice;
+        Manager_Base* localDevice;
         int progressStat;
 
     signals:

@@ -28,18 +28,18 @@
 #include <qprogressbar.h>
 #include <qlist.h>
 
-#include <manager.h>
-#include <device.h>
+#include "manager_base.h"
+#include "device.h"
 
 
 namespace OpieTooth {
 
-#include <remotedevice.h>
+#include "../include/remotedevice.h"
 
 /**
  */
-    ScanDialog::ScanDialog( QWidget* parent,  const char* name, bool modal, WFlags fl )
-        : QDialog( parent, name, modal, fl ) {
+    ScanDialog::ScanDialog( Manager_Base* manager, QWidget* parent,  const char* name, bool modal, WFlags fl )
+        : QDialog( parent, name, modal, fl ), localDevice( manager ) {
 
         setCaption( tr( "Scan for devices" ) );
 
@@ -63,7 +63,7 @@ namespace OpieTooth {
         Layout11->addWidget( progress );
         Layout11->addWidget( StartStopButton );
 
-        localDevice = new Manager( "hci0" );
+        // localDevice = new Manager( "hci0" );
 
         connect( StartStopButton, SIGNAL( clicked() ), this, SLOT( startSearch() ) );
         connect( localDevice, SIGNAL( foundDevices( const QString& , RemoteDevice::ValueList ) ),

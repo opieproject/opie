@@ -44,12 +44,12 @@ DunPopup::~DunPopup() {
 
 void DunPopup::slotConnect() {
 
-    m_dunconnection = new StartDunConnection( m_item->mac() );
-    m_dunconnection->start();
+//     m_dunconnection = new StartDunConnection( m_item->mac() );
+//     m_dunconnection->start();
 }
 
 void DunPopup::slotDisconnect()  {
-    m_dunconnection->stop();
+//     m_dunconnection->stop();
 }
 
 

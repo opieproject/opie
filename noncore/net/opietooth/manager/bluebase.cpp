@@ -21,8 +21,9 @@
 #include "devicehandler.h"
 #include "btconnectionitem.h"
 
-#include <remotedevice.h>
-#include <services.h>
+#include "remotedevice.h"
+#include "services.h"
+#include "plugin_interface.h"
 
 #include <stdlib.h>
 
@@ -55,7 +56,18 @@ using namespace OpieTooth;
 BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
     : BluetoothBase( parent, name, fl ) {
 
-    m_localDevice = new Manager( "hci0" );
+	m_plugin = LibOpieTooth_Factory().library();
+	if ( m_plugin.library() )
+		m_localDevice = m_plugin.pluginInterfacePtr() -> manager();
+	else{
+		m_localDevice = 0l;
+		QMessageBox::critical( 0, "BlueTooth Manager",
+                           QString("I was unable to load a bluetooth\n ") +
+                           "plugin to access the hardware !\n\n"+
+                           "Either the plugin was not accessable\n"
+                           "due topermission problems,\nor it is not installed !\n" );
+		exit (-1);
+	}
 
     connect( PushButton2,  SIGNAL( clicked() ), this, SLOT(startScan() ) );
     connect( configApplyButton, SIGNAL(clicked() ), this, SLOT(applyConfigChanges() ) );
@@ -568,7 +580,7 @@ void BlueBase::deviceActive( const QString& device, bool connected  ) {
  * Open the "scan for devices"  dialog
  */
 void BlueBase::startScan() {
-    ScanDialog *scan = new ScanDialog( this, "ScanDialog",
+    ScanDialog *scan = new ScanDialog( m_localDevice, this, "ScanDialog",
                                        true, WDestructiveClose );
     QObject::connect( scan, SIGNAL( selectedDevices( const QValueList<RemoteDevice>& ) ),
                       this, SLOT( addSearchedDevices( const QValueList<RemoteDevice>& ) ) );

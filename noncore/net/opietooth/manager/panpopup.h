@@ -4,7 +4,7 @@
 #include <qpopupmenu.h>
 #include <qaction.h>
 
-#include <startpanconnection.h>
+/* #include <startpanconnection.h> */
 
 #include "btdeviceitem.h"
 
@@ -21,7 +21,7 @@ namespace OpieTooth {
 
     private:
         QAction* m_push;
-	OpieTooth::StartPanConnection* m_panconnection;
+/* 	OpieTooth::StartPanConnection* m_panconnection; */
 	OpieTooth::BTDeviceItem *m_item;
     private slots:
         void slotConnect();

@@ -16,11 +16,11 @@ extern "C" {
         return  new OpieTooth::ObexPopup();
     }
     QPopupMenu* newPanPopup( const OpieTooth::Services& service,  OpieTooth::BTDeviceItem* item ) {
-        return new OpieTooth::PanPopup( item );
+	    return 0; /* new OpieTooth::PanPopup( item ); */
     }
 
     QPopupMenu* newDunPopup( const OpieTooth::Services& service,  OpieTooth::BTDeviceItem* item ) {
-        return new OpieTooth::DunPopup( item );
+	    return 0; /* new OpieTooth::DunPopup( item ); */
     }
 }
 

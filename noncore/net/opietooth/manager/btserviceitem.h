@@ -3,7 +3,7 @@
 #ifndef OPIE_TOOTH_BT_SERVICE_ITEM
 #define OPIE_TOOTH_BT_SERVICE_ITEM
 
-#include <services.h>
+#include "../include/services.h"
 
 #include "btlistitem.h"
 

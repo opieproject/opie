@@ -8,7 +8,9 @@ HEADERS         = btconnectionitem.h btdeviceitem.h \
 		  hciconfwrapper.h bticonloader.h \
 		  pppdialog.h obexdialog.h \
 		  devicehandler.h rfcpopup.h obexpopup.h \
-		  rfcommhelper.h panpopup.h dunpopup.h
+		  rfcommhelper.h 
+#                  panpopup.h \
+#                  dunpopup.h 
 		  
 SOURCES         = btconnectionitem.cpp btdeviceitem.cpp \ 
 	          btserviceitem.cpp stdpopups.cpp \
@@ -18,11 +20,13 @@ SOURCES         = btconnectionitem.cpp btdeviceitem.cpp \
 		  bticonloader.cpp pppdialog.cpp \
 		  obexdialog.cpp devicehandler.cpp \
 		  rfcpopup.cpp obexpopup.cpp \
-		  rfcommhelper.cpp panpopup.cpp dunpopup.cpp
-INCLUDEPATH     += $(OPIEDIR)/include
-INCLUDEPATH     += $(OPIEDIR)/noncore/net/opietooth/lib
+		  rfcommhelper.cpp 
+#                  panpopup.cpp \
+#                  dunpopup.cpp
+INCLUDEPATH     += $(OPIEDIR)/include ../include
+INCLUDEPATH     += $(OPIEDIR)/noncore/net/opietooth/include
 DEPENDPATH      += $(OPIEDIR)/include
-LIBS            += -lqpe -lopietooth -lopie
+LIBS            += -lqpe -lopie -lopietooth_common
 INTERFACES      = bluetoothbase.ui  devicedialog.ui  
 DESTDIR         = $(OPIEDIR)/bin
 TARGET          = bluetooth-manager

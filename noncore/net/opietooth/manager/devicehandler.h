@@ -4,7 +4,7 @@
 
 #include <qvaluelist.h>
 
-#include <remotedevice.h>
+#include "../include/remotedevice.h"
 
 namespace OpieTooth {
     /**

@@ -3,7 +3,7 @@
 #define OPIE_TOOTH_BT_DEVICE_ITEM
 
 
-#include <remotedevice.h>
+#include "../include/remotedevice.h"
 #include "btlistitem.h"
 
 namespace OpieTooth {

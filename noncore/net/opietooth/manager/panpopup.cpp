@@ -44,12 +44,12 @@ PanPopup::~PanPopup() {
 
 void PanPopup::slotConnect() {
 
-    m_panconnection = new StartPanConnection( m_item->mac() );
-    m_panconnection->start();
+//     m_panconnection = new StartPanConnection( m_item->mac() );
+//     m_panconnection->start();
 }
 
 void PanPopup::slotDisconnect()  {
-    m_panconnection->stop();
+//     m_panconnection->stop();
 }
 
 

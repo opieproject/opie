@@ -1,0 +1,4 @@
+General Information:
+====================
+This directory contains the parts of the Library "libOpieTooth" which
+are independent to the used bluetooth stack..
