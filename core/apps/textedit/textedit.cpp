@@ -642,20 +642,34 @@ void TextEdit::newFile( const DocLnk &f )
 
 void TextEdit::openFile( const QString &f )
 {
-
+    qDebug("filename is "+ f);
+    QString filer;
 //    bFromDocView = TRUE;
+    if(f.find(".desktop",0,TRUE)) {
+        switch ( QMessageBox::warning(this,tr("Text Editor"),
+                                      tr("Text Editor has detected\n you selected a .desktop file.\nOpen .desktop file or linked file?"),
+                                      tr(".desktop File"),tr("Link"),0,0,1) ) {
+          case 0:
+              filer = f;
+              break;
+          case 1:
+              DocLnk sf(f);
+              filer = sf.file();
+              break;
+        }
+    }       
     DocLnk nf;
     nf.setType("text/plain");
-    nf.setFile(f);
-    currentFileName=f;
+    nf.setFile(filer);
+    currentFileName=filer;
     QFileInfo fi( currentFileName);
     nf.setName(fi.baseName());
-    qDebug("openFile string"+currentFileName);
+    qDebug("openFile string "+currentFileName);
 
     openFile(nf);
     showEditTools();
       // Show filename in caption
-    QString name = f;
+    QString name = filer;
     int sep = name.findRev( '/' );
     if ( sep > 0 )
         name = name.mid( sep+1 );
@@ -857,12 +871,7 @@ void TextEdit::updateCaption( const QString &name )
 void TextEdit::setDocument(const QString& fileref)
 {
     bFromDocView = TRUE;
-    if(fileref.find(".desktop",0,TRUE) == -1) {
-        openFile(fileref);
-    } else {
-        qDebug("is desktop file");
-        openFile(DocLnk(fileref));
-    }
+    openFile(fileref);
     editor->setEdited(TRUE);
     edited1=FALSE;
     edited=TRUE;
