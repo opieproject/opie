@@ -19,7 +19,6 @@ int main( int argc, char** argv )
             OWirelessNetworkInterface* iface = static_cast<OWirelessNetworkInterface*>( it.current() );
             qDebug( "DEMO: '%s' seems to feature the wireless extensions.", (const char*) iface->name() );
             qDebug( "DEMO: Current SSID is '%s'", (const char*) iface->SSID() );
-            qDebug( "DEMO: Current NickName is '%s'", (const char*) iface->nickName() );
             qDebug( "DEMO: Antenna is tuned to '%f', that is channel %d", iface->frequency(), iface->channel() );
 
             //if ( iface->mode() == OWirelessNetworkInterface::adhoc )
@@ -27,7 +26,23 @@ int main( int argc, char** argv )
                 qDebug( "DEMO: Associated AP has MAC Address '%s'", (const char*) iface->associatedAP() );
             //}
 
-            // try to set monitor mode
+            // nickname
+            qDebug( "DEMO: Current NickName is '%s'", (const char*) iface->nickName() );
+            iface->setNickName( "MyNickName" );
+            if ( iface->nickName() != "MyNickName" )
+                qDebug( "DEMO: Warning! Can't change nickname" );
+            else
+                qDebug( "DEMO: Nickname change successful." );
+
+            // operation mode
+            qDebug( "DEMO: Current OperationMode is '%s'", (const char*) iface->mode() );
+            iface->setMode( "adhoc" );
+            if ( iface->mode() != "adhoc" )
+                qDebug( "DEMO: Warning! Can't change operation mode" );
+            else
+                qDebug( "DEMO: Operation Mode change successful." );
+
+            iface->setMode( "managed" );
 
             /*
 
@@ -37,8 +52,6 @@ int main( int argc, char** argv )
 
             // now the real deal
             iface->setPrivate( "monitor", 2, 2, 3 );
-
-            */
 
             // trying to set hw address to 12:34:56:AB:CD:EF
 

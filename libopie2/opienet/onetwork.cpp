@@ -42,6 +42,7 @@
 
 /* UNIX */
 
+#include <assert.h>
 #include <arpa/inet.h>
 #include <cerrno>
 #include <cstring>
@@ -639,6 +640,48 @@ OChannelHopper* OWirelessNetworkInterface::channelHopper() const
 }
 
 
+void OWirelessNetworkInterface::setMode( const QString& mode )
+{
+    if ( mode == "auto" )            _iwr.u.mode = IW_MODE_AUTO;
+    else if ( mode == "adhoc" )      _iwr.u.mode = IW_MODE_ADHOC;
+    else if ( mode == "managed" )    _iwr.u.mode = IW_MODE_INFRA;
+    else if ( mode == "master" )     _iwr.u.mode = IW_MODE_MASTER;
+    else if ( mode == "repeater" )   _iwr.u.mode = IW_MODE_REPEAT;
+    else if ( mode == "secondary" )  _iwr.u.mode = IW_MODE_SECOND;
+    #if WIRELESS_EXT > 14
+    else if ( mode == "monitor" )    _iwr.u.mode = IW_MODE_MONITOR;
+    #endif
+    else
+    {
+        qDebug( "ONetwork: Warning! Invalid IEEE 802.11 mode '%s' specified.", (const char*) mode );
+        return;
+    }
+    wioctl( SIOCSIWMODE );
+}
+
+
+QString OWirelessNetworkInterface::mode() const
+{
+    if ( !wioctl( SIOCGIWMODE ) )
+    {
+        return "<unknown>";
+    }
+    switch ( _iwr.u.mode )
+    {
+        case IW_MODE_AUTO: return "auto";
+        case IW_MODE_ADHOC: return "adhoc";
+        case IW_MODE_INFRA: return "managed";
+        case IW_MODE_MASTER: return "master";
+        case IW_MODE_REPEAT: return "repeater";
+        case IW_MODE_SECOND: return "secondary";
+        #if WIRELESS_EXT > 14
+        case IW_MODE_MONITOR: return "monitor";
+        #endif
+        default: assert( 0 ); // shouldn't happen
+    }
+}
+
+
 void OWirelessNetworkInterface::setMonitorMode( bool b )
 {
     if ( _mon )
@@ -653,6 +696,14 @@ bool OWirelessNetworkInterface::monitorMode() const
     qDebug( "dataLinkType = %d", dataLinkType() );
     return ( dataLinkType() == ARPHRD_IEEE80211 || dataLinkType() == 802 );
     // 802 is the header type for PRISM - Linux support for this is pending...
+}
+
+
+void OWirelessNetworkInterface::setNickName( const QString& nickname )
+{
+    _iwr.u.essid.pointer = const_cast<char*>( (const char*) nickname );
+    _iwr.u.essid.length = nickname.length();
+    wioctl( SIOCSIWNICKN );
 }
 
 

@@ -34,6 +34,10 @@
 #ifndef ONETWORK_H
 #define ONETWORK_H
 
+/* OPIE */
+
+#include <opie2/onetutils.h>
+
 /* QT */
 
 #include <qvaluelist.h>
@@ -41,10 +45,6 @@
 #include <qmap.h>
 #include <qobject.h>
 #include <qhostaddress.h>
-
-/* OPIE */
-
-#include <opie2/onetutils.h>
 
 #ifndef IFNAMSIZ
 #define IFNAMSIZ 16
@@ -100,12 +100,12 @@ class ONetwork : public QObject
      */
     InterfaceIterator iterator() const;
     /**
-     * @returns true, if the @p interface supports the wireless extension protocol.
+     * @returns true, if the @a interface supports the wireless extension protocol.
      */
      // FIXME QString? -zecke
     bool isWirelessInterface( const char* interface ) const;
     /**
-     * @returns a pointer to the @ref ONetworkInterface object for the specified @p interface or 0, if not found
+     * @returns a pointer to the @ref ONetworkInterface object for the specified @a interface or 0, if not found
      * @see ONetworkInterface
      */
      // FIXME: const QString& is prefered over QString!!! -zecke
@@ -198,7 +198,7 @@ class ONetworkInterface : public QObject
     /**
      * @returns the IPv4 address associated with the interface.
      */
-    QString ipV4Address() const;
+    QString ipV4Address() const; //TODO: make this return an OHostAddress
     /**
      * Associate the MAC address @a addr with the interface.
      * @note It can be necessary to shut down the interface prior to calling this method.
@@ -216,7 +216,7 @@ class ONetworkInterface : public QObject
     /**
      * @returns the IPv4 netmask associated with the interface.
      */
-    QString ipV4Netmask() const;
+    QString ipV4Netmask() const; //TODO: make this return an OHostAddress
     /**
      * @returns the data link type currently associated with the interface.
      * @see #include <net/if_arp.h> for possible values.
@@ -317,8 +317,6 @@ class OWirelessNetworkInterface : public ONetworkInterface
     friend class OPrivateIOCTL;
 
   public:
-    enum Mode { AdHoc, Managed, Monitor };
-
     /**
      * Constructor.
      */
@@ -346,11 +344,18 @@ class OWirelessNetworkInterface : public ONetworkInterface
      * @note European devices usually have 14 channels, while American typically feature 11 channels.
      */
     virtual int channels() const;
-    //virtual double frequency(int) const;
-
-    virtual void setMode( Mode ) {}; //FIXME: Implement and document this
-    virtual bool mode() const {}; //FIXME: Implement and document this
-
+    /**
+     * Set the IEEE 802.11 operation @a mode.
+     * Valid values are <ul><li>adhoc<li>managed<li>monitor<li>master
+     * @warning Not all drivers support the all modes.
+     * @note You might have to change the SSID to get the operation mode change into effect.
+     */
+    virtual void setMode( const QString& mode );
+    /**
+     * @returns the current IEEE 802.11 operation mode.
+     * Possible values are <ul><li>adhoc<li>managed<li>monitor<li>master or <li>unknown
+     */
+    virtual QString mode() const;
     /**
      * Setting the monitor mode on a wireless network interface enables
      * listening to IEEE 802.11 data and management frames which normally
@@ -362,11 +367,11 @@ class OWirelessNetworkInterface : public ONetworkInterface
      * the proper @ref OMonitoringInterface to be associated with the interface.
      * @see OMonitoringInterface
      */
-    virtual void setMonitorMode( bool );
+    virtual void setMonitorMode( bool ); //FIXME: ==> setMode( "monitor" );
     /**
      * @returns true if the device is listening in IEEE 802.11 monitor mode
      */
-    virtual bool monitorMode() const;
+    virtual bool monitorMode() const;  //FIXME: ==> mode()
     /**
      * Set the channel hopping @a interval. An @a interval of 0 disables channel hopping.
      * @see OChannelHopper
@@ -383,7 +388,7 @@ class OWirelessNetworkInterface : public ONetworkInterface
     /**
      * Set the station @a nickname.
      */
-    virtual void setNickName( const QString& nickname ) {}; //FIXME: Implement this
+    virtual void setNickName( const QString& nickname );
     /**
      * @returns the current station nickname.
      */
@@ -400,9 +405,20 @@ class OWirelessNetworkInterface : public ONetworkInterface
     virtual void getPrivate( const QString& command ); //FIXME: Implement and document this
 
     virtual bool isAssociated() const {}; //FIXME: Implement and document this
-    virtual QString associatedAP() const; //FIXME: Implement and document this
-
-    virtual void setSSID( const QString& );
+    /**
+     * @returns the MAC address of the Access Point if the
+     * device is in infrastructure mode. @returns a (more or less random) CELL
+     * address if the device is in adhoc mode.
+     */
+    virtual QString associatedAP() const;
+    /**
+     * Set the @a ssid (Service Set ID) string. This is used to decide
+     * which network to associate with (use "any" to let the driver decide).
+     */
+    virtual void setSSID( const QString& ssid );
+    /**
+     * @returns the current SSID (Service Set ID).
+     */
     virtual QString SSID() const;
 
   protected:
