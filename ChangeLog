@@ -11,10 +11,13 @@
 	* n.a. - Removed hard coded font sizes in a couple of inputmethods (mickeyl)
 	* n.a. - Removed MediumDlg appearing prior to FirstUsage wizard (i.e. calibration) (mickeyl)
 	* #1525 - Hopefully fixed double alarms and not removing alarms set with the Clock application (zecke)
+	* #1533 - Security Owner Dialog (shown in case of unsuccessfull authentiacation) wasn't able 
+	          to display information in non latin1 encoding (zecke)
 
 	Internal
 	--------
 	* Added the Qtopia 1.7 SDK macros for quick-apps to easa compilation of 3rd party apps against our headers (mickeyl)
+	* Make Opie compileable with Qt2.3.10 (ar)
 
 2004-11-26	Opie 1.1.8
 
