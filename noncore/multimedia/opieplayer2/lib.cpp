@@ -93,7 +93,7 @@ Lib::Lib(XineVideoWidget* widget) {
         printf("!0\n" );
         resize ( m_wid-> size ( ));
         ::null_set_mode( m_videoOutput, qt_screen->depth(), qt_screen->pixelType() );
-        m_wid-> setImage ( new QImage ( Resource::loadImage("") ) );
+        m_wid-> setLogo ( new QImage ( Resource::loadImage("")));
         m_wid->repaint();
     }
     null_display_handler( m_videoOutput,
@@ -226,9 +226,7 @@ void Lib::drawFrame( uint8_t* frame,  int width,  int height,  int bytes ) {
         qWarning("not showing video now");
         return;
     }
-//    qWarning("called draw frame %d %d",  width,  height);
+//    qWarning( "called draw frame %d %d", width, height );
 
-    m_wid->setImage( frame, width, height, bytes );
-//    m_wid->repaint(false);
-
+    m_wid-> setVideoFrame ( frame, width, height, bytes );
 }
