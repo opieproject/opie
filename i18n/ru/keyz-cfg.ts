@@ -3,7 +3,7 @@
     <name>CfgDlg</name>
     <message>
         <source>keyz configurator</source>
-        <translation type="unfinished"></translation>
+        <translation>Конфигуратор keyz</translation>
     </message>
 </context>
 </TS>

@@ -884,7 +884,7 @@ Free some memory and try again.</source>
     </message>
     <message>
         <source>Please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста подождите...</translation>
     </message>
 </context>
 <context>

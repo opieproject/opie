@@ -128,7 +128,7 @@
     </message>
     <message>
         <source>Select Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать каталог</translation>
     </message>
 </context>
 <context>
@@ -1001,11 +1001,11 @@ and </source>
     </message>
     <message>
         <source>Directories</source>
-        <translation type="unfinished"></translation>
+        <translation>Каталоги</translation>
     </message>
     <message>
         <source>All Directories</source>
-        <translation type="unfinished"></translation>
+        <translation>Все каталоги</translation>
     </message>
 </context>
 </TS>
