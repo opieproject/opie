@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<project name="OPIE" company="OPIE" manager="Holger Freyther" phase="fixing bugs" project-start="20030518T000000Z" mrproject-version="2" calendar="1">
+  <properties>
+    <property name="cost" type="cost" owner="resource" label="Cost" description="standard cost for a resource"/>
+  </properties>
+  <phases>
+    <phase name="fixing bugs"/>
+    <phase name="prepare release"/>
+  </phases>
+  <calendars>
+    <day-types>
+      <day-type id="0" name="Arbeitstag" description="Ein Vorgabe-Arbeitstag"/>
+      <day-type id="1" name="Kein Arbeitstag" description="Ein Vorgabetag, an dem nicht gearbeitet wird"/>
+      <day-type id="2" name="Basis verwenden" description="Tag aus dem Basis-Kalender verwenden"/>
+    </day-types>
+    <calendar id="1" name="Default">
+      <default-week mon="0" tue="0" wed="0" thu="0" fri="0" sat="1" sun="1"/>
+      <overridden-day-types>
+        <overridden-day-type id="0">
+          <interval start="0800" end="1200"/>
+          <interval start="1300" end="1700"/>
+        </overridden-day-type>
+      </overridden-day-types>
+      <days/>
+    </calendar>
+  </calendars>
+  <tasks>
+    <task id="1" name="Todo" note="" work="864000" start="20030518T000000Z" end="20030528T000000Z" percent-complete="0" type="normal" scheduling="fixed-work">
+      <task id="2" name="General showstoppers" note="" work="864000" start="20030518T000000Z" end="20030528T000000Z" percent-complete="0" type="normal" scheduling="fixed-work">
+        <task id="3" name="Majority of apps lack HTML documentation" note="" work="864000" start="20030518T000000Z" end="20030528T000000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="4" name="class OFileDialog" note="" work="576000" start="20030518T000000Z" end="20030524T160000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="5" name="Package Manager again broken?" note="" work="576000" start="20030518T000000Z" end="20030524T160000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="6" name="Syncing with QD hope TT helps here" note="" work="575100" start="20030518T000000Z" end="20030524T154500Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="7" name="No PPP Network Plugin ( Usability )" note="" work="576000" start="20030518T000000Z" end="20030524T160000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="8" name="Documents Tab" note="" work="576000" start="20030518T000000Z" end="20030524T160000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="9" name="Datebook Settings Dialog layout bugs" note="" work="576000" start="20030518T000000Z" end="20030524T160000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="10" name="What mail application to use?" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="11" name="What about our opie-bigapps dumpyard? make it compile?" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="12" name="Include osearch ( fairly easy )" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+      </task>
+      <task id="13" name="improve i18n/docu" note="" work="1728000" start="20030518T000000Z" end="20030607T000000Z" percent-complete="0" type="normal" scheduling="fixed-work">
+        <task id="14" name="use i18n/xx with every app" note="" work="864000" start="20030518T000000Z" end="20030528T000000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="15" name="check if the coreapps work in !en-langages" note="" work="864000" start="20030518T000000Z" end="20030528T000000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="16" name="translate the .desktop-files" note="" work="864000" start="20030518T000000Z" end="20030528T000000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="17" name="update/write documentation" note="" work="864000" start="20030518T000000Z" end="20030528T000000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+      </task>
+    </task>
+    <task id="18" name="OPIE beta1" note="" work="288000" start="20030601T000000Z" end="20030604T080000Z" percent-complete="0" type="normal" scheduling="fixed-work">
+      <constraint type="start-no-earlier-than" time="20030601T000000Z"/>
+    </task>
+    <task id="19" name="OPIE beta 2" note="" work="266400" start="20030614T000000Z" end="20030617T020000Z" percent-complete="0" type="normal" scheduling="fixed-work">
+      <predecessors>
+        <predecessor id="1" predecessor-id="18" type="FS"/>
+      </predecessors>
+      <task id="20" name="decide which lang. will be released" note="" work="288000" start="20030614T000000Z" end="20030617T080000Z" percent-complete="0" type="normal" scheduling="fixed-work">
+        <constraint type="start-no-earlier-than" time="20030614T000000Z"/>
+      </task>
+    </task>
+    <task id="21" name="OPIE rc1" note="" work="144000" start="20030627T170000Z" end="20030629T090000Z" percent-complete="0" type="normal" scheduling="fixed-work">
+      <predecessors>
+        <predecessor id="1" predecessor-id="1" type="FS"/>
+        <predecessor id="1" predecessor-id="20" type="FS"/>
+        <predecessor id="1" predecessor-id="19" type="FS"/>
+      </predecessors>
+      <task id="22" name="test final images" note="" work="144000" start="20030627T170000Z" end="20030629T090000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+      <task id="23" name="write Announcement" note="Sonntag, 18.05.2003, 16:14&#10;" work="144000" start="20030627T170000Z" end="20030629T090000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+      <task id="24" name="update Webpages" note="" work="144000" start="20030627T170000Z" end="20030629T090000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+    </task>
+    <task id="25" name="OPIE 1.0" note="" work="45000" start="20030704T170000Z" end="20030705T053000Z" percent-complete="0" type="normal" scheduling="fixed-work">
+      <predecessors>
+        <predecessor id="1" predecessor-id="21" type="FS"/>
+      </predecessors>
+    </task>
+  </tasks>
+  <resource-groups default_group="2">
+    <group id="1" name="opie-i18n" admin-name="Carsten Niehaus" admin-phone="" admin-email="cniehaus@handhelds.org"/>
+    <group id="2" name="opie-core" admin-name="Holger Freyther" admin-phone="" admin-email="freyther@handhelds.org"/>
+  </resource-groups>
+  <resources>
+    <resource group="1" id="1" name="Carsten Niehaus" type="1" units="0" email="cniehaus@handhelds.org" note="" std-rate="0">
+      <properties>
+        <property name="cost" value=""/>
+      </properties>
+    </resource>
+    <resource group="2" id="2" name="Holger Freyther" type="1" units="0" email="freyther@kde.org" note="" std-rate="0">
+      <properties>
+        <property name="cost" value=""/>
+      </properties>
+    </resource>
+  </resources>
+  <allocations>
+    <allocation task-id="14" resource-id="1" units="100"/>
+    <allocation task-id="13" resource-id="1" units="100"/>
+    <allocation task-id="15" resource-id="1" units="100"/>
+    <allocation task-id="16" resource-id="1" units="100"/>
+    <allocation task-id="13" resource-id="2" units="100"/>
+    <allocation task-id="6" resource-id="2" units="100"/>
+  </allocations>
+</project>
