@@ -363,7 +363,7 @@ void NotesControl::load() {
     if(!loaded) {
         Config cfg("Notes");
         cfg.setGroup("Docs");
-        QString lastDoc=cfg.readEntry( "LastDoc","");
+        QString lastDoc=cfg.readEntry( "LastDoc","notes");
         DocLnk nf;
         nf.setType("text/plain");
         nf.setFile(lastDoc);
@@ -388,7 +388,7 @@ void NotesControl::load(const QString & file) {
         DocLnk nf;
         nf.setType("text/plain");
         nf.setFile( temp);
-
+        if(!temp.isEmpty())
         loadDoc(nf);
         loaded=true;
     }
