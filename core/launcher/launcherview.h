@@ -37,8 +37,6 @@ class QWidgetStack;
 class MenuButton;
 class QComboBox;
 
-
-
 enum BusyIndicatorType {
     BIT_Normal = 0,
     BIT_Animated
@@ -82,7 +80,7 @@ public:
 
     void setViewFont( const QFont & );
     void clearViewFont();
-    
+
     void setColNumber( int );
 
     void relayout(void);
@@ -199,7 +197,7 @@ public:
     }
 
     void setColNumber( int );
-    
+
     void drawBackground( QPainter *p, const QRect &r );
     void setItemTextPos( ItemTextPos pos );
     void hideOrShowItems(bool resort);
@@ -250,6 +248,7 @@ private:
     BusyIndicatorType busyType;
     QTimer m_eyeTimer;
     int numColumns;
+    bool staticBackground;
 };
 
 #endif // LAUNCHERVIEW_H

@@ -292,6 +292,14 @@ LauncherIconView::LauncherIconView( QWidget* parent, const char* name )
     ike = FALSE;
     calculateGrid( Bottom );
     connect(&m_eyeTimer,SIGNAL(timeout()),this,SLOT(stopEyeTimer()));
+    Config config( "Launcher" );
+    config.setGroup( "GUI" );
+    staticBackground = config.readEntry( "StaticBackground", false );
+    if ( staticBackground )
+    {
+        setStaticBackground( true );
+        verticalScrollBar()->setTracking( false );
+    }
 }
 
 LauncherIconView::~LauncherIconView()
@@ -354,17 +362,26 @@ void LauncherIconView::setItemTextPos( ItemTextPos pos )
 
 void LauncherIconView::drawBackground( QPainter *p, const QRect &r )
 {
-    if ( !bgPixmap.isNull() ) {
-        p->drawTiledPixmap( r, bgPixmap,
-                QPoint( (r.x() + contentsX()) % bgPixmap.width(),
-                (r.y() + contentsY()) % bgPixmap.height() ) );
-    } else {
+    if ( bgPixmap.isNull() )
+    {
         p->fillRect( r, bgColor );
+    }
+    else
+    {
+        if ( staticBackground )
+        {
+            p->drawPixmap( r.x(), r.y(), bgPixmap, r.x(), r.y(), r.width(), r.height() );
+        }
+        else
+        {
+            p->drawTiledPixmap( r, bgPixmap, QPoint( (r.x() + contentsX()) % bgPixmap.width(),
+                                                     (r.y() + contentsY()) % bgPixmap.height() ) );
+        }
     }
 }
 
 void LauncherIconView::addCatsAndMimes(AppLnk* app)
-    {
+{
     //  QStringList c = app->categories();
     //  for (QStringList::ConstIterator cit=c.begin(); cit!=c.end(); ++cit) {
     //      cats.replace(*cit,(void*)1);
