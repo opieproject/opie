@@ -93,7 +93,8 @@ QIMPenSetup::QIMPenSetup( QIMPenProfile *p, QWidget *parent,
 
     QVBoxLayout *vb = new QVBoxLayout( this );
 
-#if 0
+#define MULTIPROFILE
+#ifdef MULTIPROFILE
     profileList.setAutoDelete( true );
     QHBoxLayout *hb = new QHBoxLayout( vb );
     hb->setMargin( 6 );
@@ -103,10 +104,11 @@ QIMPenSetup::QIMPenSetup( QIMPenProfile *p, QWidget *parent,
     connect( profileCombo, SIGNAL(activated(const QString &)),
 	     this, SLOT(selectProfile(const QString &)) );
     hb->addWidget( profileCombo );
-    loadProfiles();
 #else
     profileList.append( profile );
 #endif
+
+    qWarning("profiles: %d", profileList.count());
     
     QTabWidget *tw = new QTabWidget( this );
     vb->addWidget( tw );
@@ -130,6 +132,10 @@ QIMPenSetup::QIMPenSetup( QIMPenProfile *p, QWidget *parent,
 
     edit = new QIMPenEdit( p, tw );
     tw->addTab( edit, tr("Customize") );
+#ifdef MULTIPROFILE
+    loadProfiles();
+#endif
+
 }
 
 void QIMPenSetup::loadProfiles()
@@ -145,6 +151,7 @@ void QIMPenSetup::loadProfiles()
 	if ( p->name() == profile->name() ) {
 	    profileCombo->setCurrentItem( profileCombo->count()-1 );
 	    profile = p;
+	    edit->setProfile( profile );
 	}
     }
 }
@@ -563,6 +570,7 @@ void QIMPenEdit::addChar()
 
 	// User characters override all matching system characters.
 	// Copy and mark deleted identical system characters.
+
 	QIMPenCharIterator it(currentSet->characters() );
 	QIMPenChar *sc = 0;
 	while ( (sc = it.current()) != 0 ) {
