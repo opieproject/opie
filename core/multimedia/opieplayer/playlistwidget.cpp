@@ -497,6 +497,8 @@ void PlayListWidget::setDocument(const QString& fileref) {
 
 
 void PlayListWidget::setActiveWindow() {
+        qDebug("SETTING active window");
+
       // When we get raised we need to ensure that it switches views
     char origView = mediaPlayerState->view();
     mediaPlayerState->setView( 'l' ); // invalidate
@@ -956,15 +958,11 @@ void PlayListWidget::listDelete() {
           break;
       case 1:
       {
-          file = audioView->selectedItem()->text(0);
-//           Global::findDocuments(&files, "audio/*");
-//           AppLnkSet appFiles;
-          QListIterator<DocLnk> dit( files.children() );
-          for ( ; dit.current(); ++dit ) {
-              if( dit.current()->name() == file) {
-//                  qDebug(file);
-                  LnkProperties prop( dit.current() );
-//  connect(&prop, SIGNAL(select(const AppLnk *)), this, SLOT(externalSelected(const AppLnk *)));
+          file = audioView->currentItem()->text(0);
+          QListIterator<DocLnk> Pdit( files.children() );
+          for ( ; Pdit.current(); ++Pdit ) {
+              if( Pdit.current()->name() == file) {
+                  LnkProperties prop( Pdit.current() );
                   prop.showMaximized();
                   prop.exec();
               }
@@ -1079,10 +1077,6 @@ void PlayListWidget::openFile() {
 // http://205.188.234.129:8030
 // http://66.28.68.70:8000
 //        filename.replace(QRegExp("%20")," ");
-        if(filename.find(" ",0,TRUE) != -1 || filename.find("%20",0,TRUE) != -1) {
-            QMessageBox::message("Note","Spaces in urls are not allowed.");
-            return;
-        } else {
             qDebug("Selected filename is "+filename);
             if(filename.right(3) == "m3u")
                 readm3u( filename);
@@ -1106,7 +1100,6 @@ void PlayListWidget::openFile() {
 //     if(fileDlg2)
 //         delete fileDlg2;
             }
-        }
     }
     if(fileDlg)
         delete fileDlg;
@@ -1230,10 +1223,8 @@ void PlayListWidget::readm3u(const QString &filename) {
         while ( !t.atEnd()) {
 //        Lview->insertLine(t.readLine(),-1);
             s=t.readLine();
-            if(s.find(" ",0,TRUE) != -1 || s.find("%20",0,TRUE) != -1) {
-                QMessageBox::message("Note","Spaces in urls are not allowed.");
-            } 
-            else if(s.find("#",0,TRUE) == -1) {
+
+            if(s.find("#",0,TRUE) == -1) {
                 if(s.find(" ",0,TRUE) == -1)  { // not sure if this is neede since cf uses vfat
                     if(s.left(2) == "E:" || s.left(2) == "P:") {
                         s=s.right(s.length()-2);
