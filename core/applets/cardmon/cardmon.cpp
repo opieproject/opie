@@ -159,13 +159,11 @@ void CardMonitor::mousePressEvent( QMouseEvent * ) {
 void CardMonitor::cardMessage( const QCString &msg, const QByteArray & ) {
     if ( msg == "stabChanged()" ) {
        // qDebug("Pcmcia: stabchanged");
-        if ( getStatusPcmcia() ) {
-            repaint( FALSE );
+            getStatusPcmcia();
         }
     } else if ( msg == "mtabChanged()" ) {
         qDebug("CARDMONAPPLET: mtabchanged");
-        if ( getStatusSd() ) {
-            repaint( FALSE );
+            getStatusSd();
         }
     }
 }
