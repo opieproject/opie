@@ -30,6 +30,8 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <signal.h>
+#include <sys/stat.h>
+#include <sys/wait.h>
 
 #ifdef USEPAM
 extern "C" {
@@ -158,6 +160,10 @@ bool LoginApplication::changeIdentity ( )
 	if ( !pw )
 		return false;
 
+	// we are still root at this point - try to run the pre-session script
+	if ( !runRootScript ( "OPIEDIR", "share/opie-login/pre-session", s_username ))
+		qWarning ( "failed to run $OPIEDIR/share/opie-login/pre-session" );
+
 	bool fail = false;
 	fail |= ( ::initgroups ( pw-> pw_name, pw-> pw_gid ));
 	::endgrent ( );
@@ -177,16 +183,70 @@ bool LoginApplication::changeIdentity ( )
 
 bool LoginApplication::login ( )
 {
-	char *opie = ::getenv ( "OPIEDIR" );
-	char *arg = new char [::strlen ( opie ) + 8 + 1];
-
-	::strcpy ( arg, opie );
-	::strcat ( arg, "/bin/qpe" );
-
-	// start qpe via a login shell
-	::execl ( "/bin/sh", "-sh", "-c", arg, 0 );
-
+	execUserScript ( "HOME", ".opie-session" );
+	execUserScript ( "OPIEDIR", "share/opie-login/opie-session" );
+	execUserScript ( "OPIEDIR", "bin/qpe" );
+	
+	qWarning ( "failed to start an Opie session" );
 	return false;
+}
+
+void LoginApplication::logout ( )
+{
+	// we are now root again - try to run the post-session script
+	if ( !runRootScript ( "OPIEDIR", "share/opie-login/post-session" ))
+		qWarning ( "failed to run $OPIEDIR/scripts/post-session" );	
+}
+
+
+static char *buildarg ( const char *base, const char *script )
+{
+	const char *dir = base ? ::getenv ( base ) : "/";
+	char *arg = new char [::strlen ( dir ) + ::strlen ( script ) + 2];
+
+	::strcpy ( arg, dir );
+	::strcat ( arg, "/" );
+	::strcat ( arg, script );
+
+	return arg;
+}
+
+bool LoginApplication::runRootScript ( const char *base, const char *script, const char *param )
+{
+	bool res = false;
+	char *arg = buildarg ( base, script );
+
+	struct stat st;
+	if (( ::stat ( arg, &st ) == 0 ) && ( st. st_uid == 0 )) {
+		pid_t child = ::fork ( );	
+		
+		if ( child == 0 ) {
+			::execl ( "/bin/sh", "-sh", arg, param, 0 );
+			::_exit ( -1 );
+		}
+		else if ( child > 0 ) {
+			int status = 0;
+		
+			while ( ::waitpid ( child, &status, 0 ) < 0 ) { }
+			res = ( WIFEXITED( status )) && ( WEXITSTATUS( status ) == 0 );
+		}
+	}
+		
+	delete [] arg;
+	return res;
+}
+
+void LoginApplication::execUserScript ( const char *base, const char *script )
+{
+	char *arg = buildarg ( base, script );
+
+	struct stat st;
+	if ( ::stat ( arg, &st ) == 0 ) {
+		if ( st. st_mode & S_IXUSR )
+			::execl ( "/bin/sh", "-sh", "-c", arg, 0 );
+		else
+			::execl ( "/bin/sh", "-sh", arg, 0 );
+	}
 }
 
 const char *LoginApplication::loginAs ( )

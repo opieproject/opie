@@ -62,6 +62,7 @@ using namespace Opie;
 
 int login_main ( int argc, char **argv, pid_t ppid );
 void sigterm ( int sig );
+void sigint ( int sig );
 void exit_closelog ( );
 
 static struct option long_options [] = {
@@ -73,7 +74,6 @@ static struct option long_options [] = {
 int main ( int argc, char **argv )
 {
 	pid_t ppid = ::getpid ( );
-
 
 	if ( ::geteuid ( ) != 0 ) {
 		::fprintf ( stderr, "%s can only be executed by root. (or chmod +s)", argv [0] );
@@ -104,7 +104,8 @@ int main ( int argc, char **argv )
 	::setpgid ( 0, 0 );
 	::setsid ( );
 
-	::signal ( SIGTERM, sigterm );
+	::signal ( SIGTERM, sigterm );	
+	::signal ( SIGINT, sigterm );
 
 	::openlog ( "opie-login", LOG_CONS, LOG_AUTHPRIV );
 	::atexit ( exit_closelog );
@@ -121,6 +122,8 @@ int main ( int argc, char **argv )
 			time_t started = ::time ( 0 );
 
 			while ( ::waitpid ( child, &status, 0 ) < 0 ) { }
+
+			LoginApplication::logout ( );
 
 			if (( ::time ( 0 ) - started ) < 3 ) {
 				if ( autolog ) {
@@ -148,6 +151,8 @@ int main ( int argc, char **argv )
 			}
 			if ( killedbysig ) {  // qpe was killed by an uncaught signal
 				qApp = 0;
+				
+				::syslog ( LOG_ERR, "Opie was killed by a signal #%d", killedbysig );
 
 				QWSServer::setDesktopBackground ( QImage ( ));
 				QApplication *app = new QApplication ( argc, argv, QApplication::GuiServer );
@@ -303,12 +308,15 @@ private:
 };
 
 
+namespace Opie { extern int force_appearance; }  // HACK to get around the force-style setting
 
 
 int login_main ( int argc, char **argv, pid_t ppid )
 {
 	QWSServer::setDesktopBackground( QImage() );
 	LoginApplication *app = new LoginApplication ( argc, argv, ppid );
+
+	Opie::force_appearance = 0;
 
 	app-> setFont ( QFont ( "Helvetica", 10 ));
 	app-> setStyle ( new QPEStyle ( ));

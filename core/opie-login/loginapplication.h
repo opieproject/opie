@@ -28,8 +28,8 @@
 #ifndef __OPIE_LOGINAPPLICATION_H__
 #define __OPIE_LOGINAPPLICATION_H__
 
+#include <sys/types.h>
 #include <qstringlist.h>
-
 #include <qpe/qpeapplication.h>
 
 #ifdef USEPAM
@@ -48,10 +48,14 @@ public:
 
 	static bool changeIdentity ( );
 	static bool login ( );
+	static void logout ( );
 
 	static QStringList allUsers ( );
 
 	void quitToConsole ( );
+
+	static bool runRootScript ( const char *base, const char *script, const char *param = 0 );
+	static void execUserScript ( const char *base, const char *script );
 
 private:
 	static const char *s_username;
