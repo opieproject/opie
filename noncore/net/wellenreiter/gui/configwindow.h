@@ -18,6 +18,10 @@
 
 #include "configbase.h"
 #include <qmap.h>
+#include <qcombobox.h>
+#include <qstring.h>
+
+class WellenreiterConfigWindow;
 
 class WellenreiterConfigWindow : public WellenreiterConfigBase
 {
@@ -26,9 +30,13 @@ class WellenreiterConfigWindow : public WellenreiterConfigBase
     WellenreiterConfigWindow( QWidget * parent = 0, const char * name = "WellenreiterConfigWindow", WFlags f = 0 );
     int daemonDeviceType();
     int daemonHopInterval();
+    const QString soundOnNetwork() const { return netSound->currentText(); };
+    const QString soundOnBeacon() const { return beaconSound->currentText(); };
+    static WellenreiterConfigWindow* instance() { return _instance; };
 
   protected:
     QMap<QString, int> _devicetype;
+    static WellenreiterConfigWindow* _instance;
 
 };
 

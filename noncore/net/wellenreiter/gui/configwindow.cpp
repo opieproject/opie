@@ -17,14 +17,18 @@
 #include "configwindow.h"
 
 /* QT */
-#include <qmap.h>
 #include <qcombobox.h>
+#include <qfile.h>
+#include <qlayout.h>
+#include <qmap.h>
 #include <qpushbutton.h>
 #include <qspinbox.h>
-#include <qlayout.h>
+#include <qtextstream.h>
 
 /* OPIE */
 #include <opie2/onetwork.h>
+
+WellenreiterConfigWindow* WellenreiterConfigWindow::_instance = 0;
 
 WellenreiterConfigWindow::WellenreiterConfigWindow( QWidget * parent, const char * name, WFlags f )
            :WellenreiterConfigBase( parent, name, true, f )
@@ -45,12 +49,36 @@ WellenreiterConfigWindow::WellenreiterConfigWindow( QWidget * parent, const char
         ++it;
     }
 
+    // try to guess device type
+    QFile m( "/proc/modules" );
+    if ( m.open( IO_ReadOnly ) )
+    {
+        int devicetype(0);
+        QString line;
+        QTextStream modules( &m );
+        while( !modules.atEnd() && !devicetype )
+        {
+            modules >> line;
+            if ( line.contains( "cisco" ) ) devicetype = 1;
+            else if ( line.contains( "wlan" ) ) devicetype = 2;
+            else if ( line.contains( "hostap" ) ) devicetype = 3;
+            else if ( line.contains( "orinoco" ) ) devicetype = 4;
+        }
+        if ( devicetype )
+        {
+            deviceType->setCurrentItem( devicetype );
+            qDebug( "Wellenreiter: guessed device type to be %d", devicetype );
+        }
+    }
+
     #ifdef Q_WS_X11 // We're on X11: adding an Ok-Button for the Dialog here
     QPushButton* okButton = new QPushButton( "ok", this );
     okButton->show();
     Layout5_2->addWidget( okButton ); //FIXME: rename this in configbase.ui
     connect( okButton, SIGNAL( clicked() ), this, SLOT( accept() ) );
     #endif
+
+    WellenreiterConfigWindow::_instance = this;
 };
 
 int WellenreiterConfigWindow::daemonDeviceType()

@@ -110,9 +110,6 @@ void Wellenreiter::setConfigWindow( WellenreiterConfigWindow* cw )
 
 void Wellenreiter::receivePacket(OPacket* p)
 {
-    logwindow->log( "(d) Received data from daemon" );
-    //TODO
-
     // check if we received a beacon frame
     // static_cast is justified here
     OWaveLanManagementPacket* beacon = static_cast<OWaveLanManagementPacket*>( p->child( "802.11 Management" ) );
@@ -163,19 +160,10 @@ void Wellenreiter::startStopClicked()
         // switch off promisc flag
         iface->setPromiscuousMode( false );
 
-        //TODO: Display "please wait..." (use owait?)
-
-        /*
-
-        QString cmdline;
-        cmdline.sprintf( "ifdown %s; sleep 1; ifup %s", (const char*) interface, (const char*) interface, (const char*) interface );
-        system( cmdline ); //FIXME: Use OProcess
-
-        */
+        system( "cardctl reset; sleep 1; dhclient; udhcpc" ); //FIXME: Use OProcess
 
         // message the user
-
-        //QMessageBox::information( this, "Wellenreiter II", "Your wireless card\nshould now be usable again." );
+        QMessageBox::information( this, "Wellenreiter II", "Your wireless card\nshould now be usable again." );
     }
 
     else

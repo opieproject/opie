@@ -11,8 +11,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>212</width>
-            <height>267</height>
+            <width>220</width>
+            <height>306</height>
         </rect>
     </property>
     <property stdset="1">
@@ -28,7 +28,7 @@
     <vbox>
         <property stdset="1">
             <name>margin</name>
-            <number>4</number>
+            <number>3</number>
         </property>
         <property stdset="1">
             <name>spacing</name>
@@ -325,91 +325,136 @@
             </hbox>
         </widget>
         <widget>
+            <class>QCheckBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>groupNetworks</cstring>
+            </property>
+            <property stdset="1">
+                <name>enabled</name>
+                <bool>false</bool>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Group Detected Networks</string>
+            </property>
+        </widget>
+        <widget>
+            <class>QCheckBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>enableActivity</cstring>
+            </property>
+            <property stdset="1">
+                <name>enabled</name>
+                <bool>false</bool>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Enable Activity Display</string>
+            </property>
+        </widget>
+        <widget>
             <class>QLayoutWidget</class>
             <property stdset="1">
                 <name>name</name>
                 <cstring>Layout5</cstring>
             </property>
-            <property>
-                <name>layoutSpacing</name>
-            </property>
-            <vbox>
+            <grid>
                 <property stdset="1">
                     <name>margin</name>
                     <number>0</number>
                 </property>
                 <property stdset="1">
                     <name>spacing</name>
-                    <number>-1</number>
+                    <number>6</number>
                 </property>
-                <widget>
-                    <class>QCheckBox</class>
+                <widget row="0"  column="1" >
+                    <class>QLabel</class>
                     <property stdset="1">
                         <name>name</name>
-                        <cstring>groupNetworks</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>enabled</name>
-                        <bool>false</bool>
+                        <cstring>TextLabel1</cstring>
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>Group Detected Networks</string>
+                        <string>sound on new net</string>
                     </property>
                 </widget>
-                <widget>
-                    <class>QCheckBox</class>
+                <widget row="1"  column="0" >
+                    <class>QComboBox</class>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>Ignore</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>Touch</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>Key</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>Alarm</string>
+                        </property>
+                    </item>
                     <property stdset="1">
                         <name>name</name>
-                        <cstring>enableActivity</cstring>
+                        <cstring>beaconSound</cstring>
                     </property>
+                </widget>
+                <widget row="0"  column="0" >
+                    <class>QComboBox</class>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>Ignore</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>Touch</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>Key</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>Alarm</string>
+                        </property>
+                    </item>
                     <property stdset="1">
-                        <name>enabled</name>
-                        <bool>false</bool>
+                        <name>name</name>
+                        <cstring>netSound</cstring>
+                    </property>
+                </widget>
+                <widget row="1"  column="1" >
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>TextLabel1_3</cstring>
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>Enable Activity Display</string>
+                        <string>sound on beacon</string>
                     </property>
                 </widget>
-                <widget>
-                    <class>QCheckBox</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>beepOnFound</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>enabled</name>
-                        <bool>false</bool>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>Beep on new network</string>
-                    </property>
-                </widget>
-            </vbox>
+            </grid>
         </widget>
-        <spacer>
-            <property>
-                <name>name</name>
-                <cstring>Spacer2</cstring>
-            </property>
-            <property stdset="1">
-                <name>orientation</name>
-                <enum>Vertical</enum>
-            </property>
-            <property stdset="1">
-                <name>sizeType</name>
-                <enum>Expanding</enum>
-            </property>
-            <property>
-                <name>sizeHint</name>
-                <size>
-                    <width>20</width>
-                    <height>20</height>
-                </size>
-            </property>
-        </spacer>
     </vbox>
 </widget>
 </UI>

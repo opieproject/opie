@@ -14,11 +14,17 @@
 **********************************************************************/
 
 #include "scanlist.h"
+#include "configwindow.h"
 
 #include <assert.h>
 #include "manufacturers.h"
 #include <qdatetime.h>
 #include <qtextstream.h>
+
+#ifdef QWS
+#include <opie/odevice.h>
+using namespace Opie;
+#endif
 
 MScanListView::MScanListView( QWidget* parent, const char* name )
               :OListView( parent, name ), _manufacturerdb( 0 )
@@ -142,7 +148,6 @@ void MScanListView::addNewItem( QString type, QString essid, QString macaddr, bo
     else
     {
         s.sprintf( "(i) new network: '%s'", (const char*) essid );
-
         network = new MScanListItem( this, "networks", essid, QString::null, 0, 0, 0 );
     }
 
@@ -192,6 +197,8 @@ MScanListItem::MScanListItem( QListView* parent, QString type, QString essid, QS
                 _channel( channel ), _signal( signal ), _beacons( 0 )
 {
     qDebug( "creating scanlist item" );
+    if ( WellenreiterConfigWindow::instance() && type == "networks" )
+        playSound( WellenreiterConfigWindow::instance()->soundOnNetwork() );
     decorateItem( type, essid, macaddr, wep, channel, signal );
 }
 
@@ -271,10 +278,23 @@ void MScanListItem::decorateItem( QString type, QString essid, QString macaddr, 
     _signal = 0;
 }
 
+
 void MScanListItem::setManufacturer( const QString& manufacturer )
 {
     setText( col_manuf, manufacturer );
 }
+
+
+void MScanListItem::playSound( const QString& sound ) const
+{
+    #ifdef QWS
+    if ( sound == "Ignore" ) return;
+    else if ( sound == "Touch" ) ODevice::inst()->touchSound();
+    else if ( sound == "Key" ) ODevice::inst()->keySound();
+    else if ( sound == "Alarm" ) ODevice::inst()->alarmSound();
+    #endif
+}
+
 
 void MScanListItem::receivedBeacon()
 {
@@ -284,5 +304,7 @@ void MScanListItem::receivedBeacon()
     #endif
     setText( col_sig, QString::number( _beacons ) );
     setText( col_lastseen, QTime::currentTime().toString() );
+    if ( WellenreiterConfigWindow::instance() )
+        playSound( WellenreiterConfigWindow::instance()->soundOnBeacon() );
 }
 
