@@ -144,10 +144,6 @@
         <translation>Déplacer</translation>
     </message>
     <message>
-        <source>Rescan</source>
-        <translation type="obsolete">Rafraichir</translation>
-    </message>
-    <message>
         <source>File Info</source>
         <translation>Information sur le fichier</translation>
     </message>

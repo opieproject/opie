@@ -129,16 +129,6 @@
         <translation>DialogPisave</translation>
     </message>
     <message>
-        <source>Do you really want
-to delete the current file
-from the disk?
-This is irreversable!!</source>
-        <translation type="obsolete">Ali res želite
-izbrisati trenutno
-datoteko iz diska?
-To se ne da preklicati!!</translation>
-    </message>
-    <message>
         <source>Yes</source>
         <translation>Da</translation>
     </message>
@@ -149,14 +139,6 @@ To se ne da preklicati!!</translation>
     <message>
         <source>About</source>
         <translation>O</translation>
-    </message>
-    <message>
-        <source>Text Editor has detected
- you selected a .desktop file.
-Open .desktop file or linked file?</source>
-        <translation type="obsolete">Urejevalnik besedil je zaznal,
-da ste izbrali .desktop datoteko.
-Odprem .desktop datoteko ali povezano datoteko?</translation>
     </message>
     <message>
         <source>.desktop File</source>
@@ -245,10 +227,6 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
     <message>
         <source>execute</source>
         <translation>izvrši</translation>
-    </message>
-    <message>
-        <source>filePermissions</source>
-        <translation type="obsolete">Pravicedatoteke</translation>
     </message>
     <message>
         <source>Warning</source>

@@ -130,16 +130,6 @@
         <translation>글꼴</translation>
     </message>
     <message>
-        <source>Do you really want
-to delete the current file
-from the disk?
-This is irreversable!!</source>
-        <translation type="obsolete">정말로 이 파일을
-디스크에서 지우고
-시프신가요?
-되돌릴수 없어요!</translation>
-    </message>
-    <message>
         <source>Yes</source>
         <translation>예</translation>
     </message>
@@ -150,14 +140,6 @@ This is irreversable!!</source>
     <message>
         <source>About</source>
         <translation>정보</translation>
-    </message>
-    <message>
-        <source>Text Editor has detected
- you selected a .desktop file.
-Open .desktop file or linked file?</source>
-        <translation type="obsolete">.desktop 파일을 
-선택한것을 발견했습니다.
-.desktop 파일 아니면 링크되어있는 파일을 열까요?</translation>
     </message>
     <message>
         <source>.desktop File</source>
@@ -246,10 +228,6 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
     <message>
         <source>execute</source>
         <translation>실행</translation>
-    </message>
-    <message>
-        <source>filePermissions</source>
-        <translation type="obsolete">파일권한</translation>
     </message>
     <message>
         <source>Warning</source>

@@ -143,10 +143,6 @@
         <translation>Mover</translation>
     </message>
     <message>
-        <source>Rescan</source>
-        <translation type="obsolete">Re-Lêr</translation>
-    </message>
-    <message>
         <source>File Info</source>
         <translation type="unfinished"></translation>
     </message>

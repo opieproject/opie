@@ -141,29 +141,12 @@
         <translation>Über</translation>
     </message>
     <message>
-        <source>Text Editor has detected
- you selected a .desktop file.
-Open .desktop file or linked file?</source>
-        <translation type="obsolete">Texteditor hat festgestellt, 
-dass Sie eine .desktop-Datei
-ausgewählt haben. Wollen
-Sie diese oder die Verknüpfung
-editieren?</translation>
-    </message>
-    <message>
         <source>.desktop File</source>
         <translation>.desktop-Datei</translation>
     </message>
     <message>
         <source>Linked Document</source>
         <translation>Verknüpfung</translation>
-    </message>
-    <message>
-        <source>Do you really want
-to delete the current file
-from the disk?
-This is irreversable!!</source>
-        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>All</source>
@@ -244,10 +227,6 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
     <message>
         <source>execute</source>
         <translation>ausführen</translation>
-    </message>
-    <message>
-        <source>filePermissions</source>
-        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Warning</source>

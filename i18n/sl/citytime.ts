@@ -24,54 +24,6 @@
         <source>City Time</source>
         <translation>Mestni čas</translation>
     </message>
-    <message>
-        <source>&lt;location 4&gt;</source>
-        <translation type="obsolete">&lt;lokacija 4&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;CITY 6 TIME&gt;</source>
-        <translation type="obsolete">&lt;MESTO 6 ČAS&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;location 5&gt;</source>
-        <translation type="obsolete">&lt;lokacija 5&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;location 2&gt;</source>
-        <translation type="obsolete">&lt;lokacija 2&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;location 6&gt;</source>
-        <translation type="obsolete">&lt;lokacija 6&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;CITY 5 TIME&gt;</source>
-        <translation type="obsolete">&lt;MESTO 5 ČAS&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;CITY 2 TIME&gt;</source>
-        <translation type="obsolete">&lt;MESTO 2 ČAS&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;CITY 1 TIME&gt;</source>
-        <translation type="obsolete">&lt;MESTO 1 ČAS&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;location 3&gt;</source>
-        <translation type="obsolete">&lt;lokacija 3&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;location 1&gt;</source>
-        <translation type="obsolete">&lt;lokacija 1&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;CITY 3 TIME&gt;</source>
-        <translation type="obsolete">&lt;MESTO 3 ČAS&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;CITY 4 TIME&gt;</source>
-        <translation type="obsolete">&lt;MESTO 4 ČAS&gt;</translation>
-    </message>
 </context>
 <context>
     <name>ZoneMap</name>

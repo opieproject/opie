@@ -103,14 +103,6 @@ na ta račun, prosim poizkusite kasneje.</translation>
         <translation>Cel zaslon</translation>
     </message>
     <message>
-        <source>Settings</source>
-        <translation>Nastavitve</translation>
-    </message>
-    <message>
-        <source>Connect...</source>
-        <translation>Poveži...</translation>
-    </message>
-    <message>
         <source>Disconnect</source>
         <translation>Prekini povezavo</translation>
     </message>
@@ -130,75 +122,119 @@ na ta račun, prosim poizkusite kasneje.</translation>
         <source>Connection closed</source>
         <translation>Povezava prekinjena</translation>
     </message>
+    <message>
+        <source>New Connection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Bookmark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Bookmark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send Contrl-Alt-Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
-    <name>KVNCConnectDlg</name>
+    <name>KVNCBookmarkDlgBase</name>
     <message>
-        <source>Connect to VNC server</source>
-        <translation>Prijavite se v VNC strežnik</translation>
+        <source>Bookmarks</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>KVNCConnDlgBase</name>
+    <message>
+        <source>VNC Viewer Connection</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Host Name:</source>
-        <translation>Ime gostitelja:</translation>
+        <source>Server</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Display Number:</source>
-        <translation>Številka prikazovalnika:</translation>
+        <source>Show Password</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation>Geslo:</translation>
-    </message>
-</context>
-<context>
-    <name>VncOptionsBase</name>
-    <message>
-        <source>VNC Viewer Options</source>
-        <translation>Možnosti</translation>
+        <translation type="unfinished">Geslo:</translation>
     </message>
     <message>
-        <source>Data Encoding</source>
-        <translation>Kodiranje podatkov</translation>
+        <source>Bookmark Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Host Name:</source>
+        <translation type="unfinished">Ime gostitelja:</translation>
+    </message>
+    <message>
+        <source>Display Number:</source>
+        <translation type="unfinished">Številka prikazovalnika:</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Check for screen updates every:</source>
-        <translation>Posodobi zaslon vsakih:</translation>
+        <translation type="unfinished">Posodobi zaslon vsakih:</translation>
     </message>
     <message>
         <source>Milliseconds</source>
-        <translation>Milisekund</translation>
+        <translation type="unfinished">Milisekund</translation>
     </message>
     <message>
         <source>Request 8-bit session</source>
-        <translation>Zahtevaj 8-bitno sejo</translation>
+        <translation type="unfinished">Zahtevaj 8-bitno sejo</translation>
     </message>
     <message>
         <source>Raise on bell</source>
-        <translation>Vstani na zvonec</translation>
+        <translation type="unfinished">Vstani na zvonec</translation>
     </message>
     <message>
         <source>Request shared session</source>
-        <translation>Zahtevaj deljeno sejo</translation>
+        <translation type="unfinished">Zahtevaj deljeno sejo</translation>
     </message>
     <message>
-        <source>Connection</source>
-        <translation>Povezava</translation>
+        <source>1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scale Factor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Encodings</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Hextile encoding</source>
-        <translation>Hextile kodiranje</translation>
+        <translation type="unfinished">Hextile kodiranje</translation>
     </message>
     <message>
         <source>CoRRE encoding</source>
-        <translation>CoRRE kodiranje</translation>
+        <translation type="unfinished">CoRRE kodiranje</translation>
     </message>
     <message>
         <source>RRE encoding</source>
-        <translation>RRE kodiranje</translation>
+        <translation type="unfinished">RRE kodiranje</translation>
     </message>
     <message>
         <source>Copy rectangle encoding</source>
-        <translation>Kopiraj pravokotno kodiranje</translation>
+        <translation type="unfinished">Kopiraj pravokotno kodiranje</translation>
     </message>
 </context>
 </TS>

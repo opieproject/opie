@@ -84,10 +84,6 @@
         <translation>A rápida raposa castanha salta sobre o cão molenga</translation>
     </message>
     <message>
-        <source>Apply</source>
-        <translation type="obsolete">Aplicar</translation>
-    </message>
-    <message>
         <source>Restart</source>
         <translation>Reiniciar</translation>
     </message>

@@ -3,34 +3,6 @@
 <context>
     <name>CardMonitor</name>
     <message>
-        <source>Eject card</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>CardMonitor</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Card eject failed!</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Eject SD/ MMC card</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Eject %1 (0)</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Eject %1 (1)</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>CF/PCMCIA card eject failed!</source>
         <translation>Echec de l&apos;éjection de la carte CF/PCMCIA !</translation>
     </message>

@@ -2,10 +2,6 @@
 <context>
     <name>LightSettingsBase</name>
     <message>
-        <source>Light Settings</source>
-        <translation type="obsolete">Ustawienia podswietlania</translation>
-    </message>
-    <message>
         <source>Adjust to environment</source>
         <translation>Wyrownaj do srodowiska</translation>
     </message>

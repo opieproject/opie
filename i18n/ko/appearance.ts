@@ -84,10 +84,6 @@
 가나다라마바사</translation>
     </message>
     <message>
-        <source>Apply</source>
-        <translation type="obsolete">적용</translation>
-    </message>
-    <message>
         <source>Restart</source>
         <translation>재시작</translation>
     </message>

@@ -39,13 +39,6 @@
     </message>
 </context>
 <context>
-    <name>InputMethods</name>
-    <message>
-        <source>Handwriting</source>
-        <translation type="obsolete"></translation>
-    </message>
-</context>
-<context>
     <name>QIMPenEdit</name>
     <message>
         <source>New...</source>

@@ -52,40 +52,8 @@
         <translation> - Przegladarka obrazow</translation>
     </message>
     <message>
-        <source>Loading image...</source>
-        <translation type="obsolete">Laduje obraz</translation>
-    </message>
-    <message>
-        <source>Could not load image</source>
-        <translation type="obsolete">Nie moge zaladowac obrazu</translation>
-    </message>
-    <message>
-        <source>No image - select Open from File menu.</source>
-        <translation type="obsolete">Brak obrazu - wybierz Otworz z menu Plik</translation>
-    </message>
-    <message>
-        <source>, %1/%2 colors</source>
-        <translation type="obsolete">, %1/%2 kolorow</translation>
-    </message>
-    <message>
-        <source>, %1 colors</source>
-        <translation type="obsolete">, %1 kolorow</translation>
-    </message>
-    <message>
         <source> True color</source>
         <translation> Pelny kolor</translation>
-    </message>
-    <message>
-        <source>, %1 alpha levels</source>
-        <translation type="obsolete"> %1 poziomow alfa</translation>
-    </message>
-    <message>
-        <source>, 8-bit alpha channel</source>
-        <translation type="obsolete"> 8-bit kanal alfa</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>View</source>

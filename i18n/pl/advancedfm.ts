@@ -143,10 +143,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Rescan</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>File Info</source>
         <translation type="unfinished"></translation>
     </message>

@@ -233,10 +233,6 @@
         <translation>Libreta direcciones</translation>
     </message>
     <message>
-        <source>Abort sending</source>
-        <translation type="obsolete">Cancelar envío</translation>
-    </message>
-    <message>
         <source>From</source>
         <translation>De</translation>
     </message>

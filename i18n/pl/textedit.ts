@@ -129,15 +129,6 @@
         <translation>WyborCzcionki</translation>
     </message>
     <message>
-        <source>Do you really want
-to delete the current file
-from the disk?
-This is irreversable!!</source>
-        <translation type="obsolete">Czy naprawde
-chcesz usunac ten plikz dysku?
-To jest nieodwracalne!</translation>
-    </message>
-    <message>
         <source>Yes</source>
         <translation>Tak</translation>
     </message>
@@ -148,12 +139,6 @@ To jest nieodwracalne!</translation>
     <message>
         <source>About</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text Editor has detected
- you selected a .desktop file.
-Open .desktop file or linked file?</source>
-        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>.desktop File</source>
@@ -203,10 +188,6 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
 </context>
 <context>
     <name>filePermissions</name>
-    <message>
-        <source>filePermissions</source>
-        <translation type="obsolete">UprawnieniaPlikow</translation>
-    </message>
     <message>
         <source>Set File Permissions</source>
         <translation>Ustaw uprawnienia</translation>

@@ -52,40 +52,8 @@
         <translation>- Pregledovalnik slik</translation>
     </message>
     <message>
-        <source>Loading image...</source>
-        <translation type="obsolete">Nalagam sliko...</translation>
-    </message>
-    <message>
-        <source>Could not load image</source>
-        <translation type="obsolete">Ne uspem naložiti slike</translation>
-    </message>
-    <message>
-        <source>No image - select Open from File menu.</source>
-        <translation type="obsolete">Ni slike - izberite Odpri iz Datoteka menuja.</translation>
-    </message>
-    <message>
-        <source>, %1/%2 colors</source>
-        <translation type="obsolete">, %1/%2 barv</translation>
-    </message>
-    <message>
-        <source>, %1 colors</source>
-        <translation type="obsolete">, %1 barv</translation>
-    </message>
-    <message>
         <source> True color</source>
         <translation>Resnične barve</translation>
-    </message>
-    <message>
-        <source>, %1 alpha levels</source>
-        <translation type="obsolete">, %1 alfa stopnje</translation>
-    </message>
-    <message>
-        <source>, 8-bit alpha channel</source>
-        <translation type="obsolete">, 8-bit alfa kanal</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="obsolete">Uredi</translation>
     </message>
     <message>
         <source>View</source>

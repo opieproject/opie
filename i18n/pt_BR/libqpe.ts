@@ -724,10 +724,6 @@ tente novamente.</translation>
         <translation>Disco Rígido</translation>
     </message>
     <message>
-        <source>Ram FS</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>Internal Memory</source>
         <translation type="unfinished"></translation>
     </message>

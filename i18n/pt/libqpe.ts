@@ -714,10 +714,6 @@ Free some memory and try again.</source>
         <translation>Armazenamento Interno</translation>
     </message>
     <message>
-        <source>Ram FS</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>Internal Memory</source>
         <translation type="unfinished"></translation>
     </message>

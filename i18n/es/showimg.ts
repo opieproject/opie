@@ -52,40 +52,8 @@
         <translation> - Visor de imágenes</translation>
     </message>
     <message>
-        <source>Loading image...</source>
-        <translation type="obsolete">Cargando imangen...</translation>
-    </message>
-    <message>
-        <source>Could not load image</source>
-        <translation type="obsolete">No puedo cargar imangen</translation>
-    </message>
-    <message>
-        <source>No image - select Open from File menu.</source>
-        <translation type="obsolete">Sin imagen - selecione Abrir del menú Fichero.</translation>
-    </message>
-    <message>
-        <source>, %1/%2 colors</source>
-        <translation type="obsolete">, %1/%2 colores</translation>
-    </message>
-    <message>
-        <source>, %1 colors</source>
-        <translation type="obsolete">, %1 colores</translation>
-    </message>
-    <message>
         <source> True color</source>
         <translation>Color verdadero</translation>
-    </message>
-    <message>
-        <source>, %1 alpha levels</source>
-        <translation type="obsolete">, %1 niveles alpha</translation>
-    </message>
-    <message>
-        <source>, 8-bit alpha channel</source>
-        <translation type="obsolete">, canal alpha de 8-bit</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="obsolete">Editar</translation>
     </message>
     <message>
         <source>View</source>

@@ -99,14 +99,6 @@ to this account, please try later.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Connect...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Disconnect</source>
         <translation type="unfinished"></translation>
     </message>
@@ -126,11 +118,50 @@ to this account, please try later.</source>
         <source>Connection closed</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>New Connection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Bookmark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Bookmark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send Contrl-Alt-Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
-    <name>KVNCConnectDlg</name>
+    <name>KVNCBookmarkDlgBase</name>
     <message>
-        <source>Connect to VNC server</source>
+        <source>Bookmarks</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>KVNCConnDlgBase</name>
+    <message>
+        <source>VNC Viewer Connection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Password:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bookmark Name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -142,18 +173,7 @@ to this account, please try later.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Password:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>VncOptionsBase</name>
-    <message>
-        <source>VNC Viewer Options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Data Encoding</source>
+        <source>Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -177,7 +197,23 @@ to this account, please try later.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Connection</source>
+        <source>1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scale Factor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Encodings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

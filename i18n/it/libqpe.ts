@@ -719,10 +719,6 @@ riprovare.</translation>
         <translation>Hard Disk SCSI</translation>
     </message>
     <message>
-        <source>Ram FS</source>
-        <translation type="obsolete">Ram FS</translation>
-    </message>
-    <message>
         <source>Internal Storage</source>
         <translation>Memoria Interna</translation>
     </message>

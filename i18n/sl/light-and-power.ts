@@ -2,10 +2,6 @@
 <context>
     <name>LightSettingsBase</name>
     <message>
-        <source>Light Settings</source>
-        <translation type="obsolete">Nastavitve osvetlitve</translation>
-    </message>
-    <message>
         <source>Adjust to environment</source>
         <translation>Prilagodi okolju</translation>
     </message>

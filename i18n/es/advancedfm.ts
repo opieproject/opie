@@ -144,10 +144,6 @@
         <translation>Mover</translation>
     </message>
     <message>
-        <source>Rescan</source>
-        <translation type="obsolete">Actualizar</translation>
-    </message>
-    <message>
         <source>File Info</source>
         <translation>Info fichero</translation>
     </message>

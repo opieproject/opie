@@ -84,10 +84,6 @@
         <translation>El Rápido Zorro Marrón Saltó Sobre El Perro Perezoso</translation>
     </message>
     <message>
-        <source>Apply</source>
-        <translation type="obsolete">Aplicar</translation>
-    </message>
-    <message>
         <source>Restart</source>
         <translation>Reiniciar</translation>
     </message>

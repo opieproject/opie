@@ -52,40 +52,8 @@
         <translation>- Bildbetrachter</translation>
     </message>
     <message>
-        <source>Loading image...</source>
-        <translation type="obsolete">Das Bild wird geladen...</translation>
-    </message>
-    <message>
-        <source>Could not load image</source>
-        <translation type="obsolete">Das Bild konnte nicht geladen werden</translation>
-    </message>
-    <message>
-        <source>No image - select Open from File menu.</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>, %1/%2 colors</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>, %1 colors</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source> True color</source>
         <translation>Echtfarben</translation>
-    </message>
-    <message>
-        <source>, %1 alpha levels</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>, 8-bit alpha channel</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>View</source>

@@ -231,30 +231,6 @@ Quitter ?</translation>
 <context>
     <name>ContactEditor</name>
     <message>
-        <source>Fax</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Phone</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>IM</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Mobile</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Page</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Pager</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>Default Email</source>
         <translation>Email par défaut</translation>
     </message>
@@ -307,28 +283,12 @@ Quitter ?</translation>
         <translation>Groupes</translation>
     </message>
     <message>
-        <source>Street</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Street 2</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>P.O. Box</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>City</source>
         <translation>Ville</translation>
     </message>
     <message>
         <source>State</source>
         <translation>Département</translation>
-    </message>
-    <message>
-        <source>Zip</source>
-        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Country</source>
@@ -817,14 +777,6 @@ Quitter ?</translation>
     <message>
         <source>Korea</source>
         <translation>Corée</translation>
-    </message>
-    <message>
-        <source>Kuait</source>
-        <translation type="obsolete">Koweit</translation>
-    </message>
-    <message>
-        <source>Kyrgyztan</source>
-        <translation type="obsolete">Kyrgyztan</translation>
     </message>
     <message>
         <source>Laos</source>

@@ -6,10 +6,6 @@
         <translation>Teclas de Aplicación</translation>
     </message>
     <message>
-        <source>Calender</source>
-        <translation type="obsolete">Calendario</translation>
-    </message>
-    <message>
         <source>Address Book</source>
         <translation>Contactos</translation>
     </message>

@@ -84,10 +84,6 @@
         <translation>Hitra lisica skoči čez lenega psa</translation>
     </message>
     <message>
-        <source>Apply</source>
-        <translation type="obsolete">Uveljavi</translation>
-    </message>
-    <message>
         <source>Restart</source>
         <translation>Ponovno zaženi</translation>
     </message>

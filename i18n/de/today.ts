@@ -35,10 +35,6 @@
         <translation>Bitte füllen Sie die Visitenkarte aus</translation>
     </message>
     <message>
-        <source>No more  today</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>No more appointments today</source>
         <translation>Heute keine Termine mehr</translation>
     </message>

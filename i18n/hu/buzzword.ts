@@ -10,10 +10,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;About</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>&amp;Game</source>
         <translation type="unfinished"></translation>
     </message>

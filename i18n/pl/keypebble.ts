@@ -99,14 +99,6 @@ to this account, please try later.</source>
         <translation>Caly ekran</translation>
     </message>
     <message>
-        <source>Settings</source>
-        <translation>Ustawienia</translation>
-    </message>
-    <message>
-        <source>Connect...</source>
-        <translation>Lacze...</translation>
-    </message>
-    <message>
         <source>Disconnect</source>
         <translation>Rozlaczono</translation>
     </message>
@@ -126,47 +118,75 @@ to this account, please try later.</source>
         <source>Connection closed</source>
         <translation>Polaczenie zamkniete</translation>
     </message>
+    <message>
+        <source>New Connection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Bookmark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Bookmark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send Contrl-Alt-Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
-    <name>KVNCConnectDlg</name>
+    <name>KVNCBookmarkDlgBase</name>
     <message>
-        <source>Connect to VNC server</source>
-        <translation>Polacz do serwera VNC</translation>
+        <source>Bookmarks</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>KVNCConnDlgBase</name>
+    <message>
+        <source>VNC Viewer Connection</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Host Name:</source>
-        <translation>Nazwa serwera:</translation>
+        <source>Server</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Display Number:</source>
-        <translation>Numer pulpitu:</translation>
+        <source>Show Password</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation>Haslo:</translation>
-    </message>
-</context>
-<context>
-    <name>VncOptionsBase</name>
-    <message>
-        <source>VNC Viewer Options</source>
-        <translation>Opcje klienta VNC</translation>
+        <translation type="unfinished">Haslo:</translation>
     </message>
     <message>
-        <source>Data Encoding</source>
-        <translation>Dekodowanie danych</translation>
+        <source>Bookmark Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Host Name:</source>
+        <translation type="unfinished">Nazwa serwera:</translation>
+    </message>
+    <message>
+        <source>Display Number:</source>
+        <translation type="unfinished">Numer pulpitu:</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Check for screen updates every:</source>
-        <translation>Sprawdz zmiany na pulpicie co:</translation>
+        <translation type="unfinished">Sprawdz zmiany na pulpicie co:</translation>
     </message>
     <message>
         <source>Milliseconds</source>
-        <translation>Milisekund</translation>
+        <translation type="unfinished">Milisekund</translation>
     </message>
     <message>
         <source>Request 8-bit session</source>
-        <translation>Zarzadaj 8-bit sesji</translation>
+        <translation type="unfinished">Zarzadaj 8-bit sesji</translation>
     </message>
     <message>
         <source>Raise on bell</source>
@@ -174,11 +194,27 @@ to this account, please try later.</source>
     </message>
     <message>
         <source>Request shared session</source>
-        <translation>Zarzadaj wspoldzielonej sesji</translation>
+        <translation type="unfinished">Zarzadaj wspoldzielonej sesji</translation>
     </message>
     <message>
-        <source>Connection</source>
-        <translation>Polaczenie</translation>
+        <source>1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scale Factor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Encodings</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Hextile encoding</source>

@@ -6,10 +6,6 @@
         <translation>Nastavi programsko tipko</translation>
     </message>
     <message>
-        <source>Calender</source>
-        <translation type="obsolete">Koledar</translation>
-    </message>
-    <message>
         <source>Address Book</source>
         <translation>Knjiga naslovov</translation>
     </message>

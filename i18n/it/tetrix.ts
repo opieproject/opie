@@ -2,10 +2,6 @@
 <context>
     <name>QTetrix</name>
     <message>
-        <source>QTetrix</source>
-        <translation type="obsolete">QTetrix</translation>
-    </message>
-    <message>
         <source>Next</source>
         <translation>Successivo</translation>
     </message>

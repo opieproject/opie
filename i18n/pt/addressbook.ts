@@ -778,14 +778,6 @@ Sair na mesma?</translation>
         <translation>Coreia</translation>
     </message>
     <message>
-        <source>Kuait</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Kyrgyztan</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>Laos</source>
         <translation type="unfinished"></translation>
     </message>

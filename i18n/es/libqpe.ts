@@ -723,10 +723,6 @@ Libere memoria e intételo de nuevo.</translation>
         <translation>Almacenamiento interno</translation>
     </message>
     <message>
-        <source>Ram FS</source>
-        <translation type="obsolete">Ram FS</translation>
-    </message>
-    <message>
         <source>Internal Memory</source>
         <translation type="unfinished"></translation>
     </message>

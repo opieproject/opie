@@ -11,10 +11,6 @@
         <translation type="unfinished">Conservação de enegria</translation>
     </message>
     <message>
-        <source>Light Settings</source>
-        <translation type="obsolete">Configuração de iluminação</translation>
-    </message>
-    <message>
         <source>&lt;blockquote&gt;The brighter the screen light, the more battery power is used.&lt;/blockquote&gt;</source>
         <translation type="unfinished">&lt;blockquote&gt;Quanto mais clara a luz mais bateria será usada.&lt;/blockquote&gt;</translation>
     </message>

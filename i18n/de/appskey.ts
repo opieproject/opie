@@ -6,10 +6,6 @@
         <translation>Anwendungstasten festlegen</translation>
     </message>
     <message>
-        <source>Calender</source>
-        <translation type="obsolete">Kalender</translation>
-    </message>
-    <message>
         <source>Address Book</source>
         <translation>Addressbuch</translation>
     </message>

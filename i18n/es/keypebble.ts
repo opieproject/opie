@@ -103,14 +103,6 @@ Por favor, inténtelo más tarde.</translation>
         <translation>Pantalla completa</translation>
     </message>
     <message>
-        <source>Settings</source>
-        <translation>Configuración</translation>
-    </message>
-    <message>
-        <source>Connect...</source>
-        <translation>Conectar...</translation>
-    </message>
-    <message>
         <source>Disconnect</source>
         <translation>Desconectar</translation>
     </message>
@@ -130,75 +122,119 @@ Por favor, inténtelo más tarde.</translation>
         <source>Connection closed</source>
         <translation>Conexión cerrada</translation>
     </message>
+    <message>
+        <source>New Connection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Bookmark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Bookmark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send Contrl-Alt-Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
-    <name>KVNCConnectDlg</name>
+    <name>KVNCBookmarkDlgBase</name>
     <message>
-        <source>Connect to VNC server</source>
-        <translation>Conectar a servidor VNC</translation>
+        <source>Bookmarks</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>KVNCConnDlgBase</name>
+    <message>
+        <source>VNC Viewer Connection</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Host Name:</source>
-        <translation>Nombre máquina:</translation>
+        <source>Server</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Display Number:</source>
-        <translation>Número pantalla:</translation>
+        <source>Show Password</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation>Contraseña:</translation>
-    </message>
-</context>
-<context>
-    <name>VncOptionsBase</name>
-    <message>
-        <source>VNC Viewer Options</source>
-        <translation>Opciones Visor VNC</translation>
+        <translation type="unfinished">Contraseña:</translation>
     </message>
     <message>
-        <source>Data Encoding</source>
-        <translation>Codificación datos</translation>
+        <source>Bookmark Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Host Name:</source>
+        <translation type="unfinished">Nombre máquina:</translation>
+    </message>
+    <message>
+        <source>Display Number:</source>
+        <translation type="unfinished">Número pantalla:</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Check for screen updates every:</source>
-        <translation>Comprobar pantalla cada:</translation>
+        <translation type="unfinished">Comprobar pantalla cada:</translation>
     </message>
     <message>
         <source>Milliseconds</source>
-        <translation>Milisegundos</translation>
+        <translation type="unfinished">Milisegundos</translation>
     </message>
     <message>
         <source>Request 8-bit session</source>
-        <translation>Solicitar sesión 8 bits</translation>
+        <translation type="unfinished">Solicitar sesión 8 bits</translation>
     </message>
     <message>
         <source>Raise on bell</source>
-        <translation>Modo escucha</translation>
+        <translation type="unfinished">Modo escucha</translation>
     </message>
     <message>
         <source>Request shared session</source>
-        <translation>Solicitar sesión compartida</translation>
+        <translation type="unfinished">Solicitar sesión compartida</translation>
     </message>
     <message>
-        <source>Connection</source>
-        <translation>Conexión</translation>
+        <source>1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scale Factor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Encodings</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Hextile encoding</source>
-        <translation>Codificación Hextile</translation>
+        <translation type="unfinished">Codificación Hextile</translation>
     </message>
     <message>
         <source>CoRRE encoding</source>
-        <translation>Codificación CoRRE</translation>
+        <translation type="unfinished">Codificación CoRRE</translation>
     </message>
     <message>
         <source>RRE encoding</source>
-        <translation>Codificación RRE</translation>
+        <translation type="unfinished">Codificación RRE</translation>
     </message>
     <message>
         <source>Copy rectangle encoding</source>
-        <translation>Codificación copiar rectángulo</translation>
+        <translation type="unfinished">Codificación copiar rectángulo</translation>
     </message>
 </context>
 </TS>

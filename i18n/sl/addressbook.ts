@@ -778,14 +778,6 @@ Izhod?</translation>
         <translation>Korea</translation>
     </message>
     <message>
-        <source>Kuait</source>
-        <translation type="obsolete">Kuvajt</translation>
-    </message>
-    <message>
-        <source>Kyrgyztan</source>
-        <translation type="obsolete">Kyrgyztan</translation>
-    </message>
-    <message>
         <source>Laos</source>
         <translation>Laos</translation>
     </message>

@@ -83,10 +83,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Apply</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>Restart</source>
         <translation type="unfinished"></translation>
     </message>

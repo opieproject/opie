@@ -233,10 +233,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Abort sending</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>From</source>
         <translation>De</translation>
     </message>

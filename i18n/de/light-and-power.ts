@@ -2,10 +2,6 @@
 <context>
     <name>LightSettingsBase</name>
     <message>
-        <source>Light Settings</source>
-        <translation type="obsolete">Helligkeitseinstellungen</translation>
-    </message>
-    <message>
         <source>Adjust to environment</source>
         <translation type="unfinished"></translation>
     </message>

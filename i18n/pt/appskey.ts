@@ -6,10 +6,6 @@
         <translation>Botões</translation>
     </message>
     <message>
-        <source>Calender</source>
-        <translation type="obsolete">Calendário</translation>
-    </message>
-    <message>
         <source>Address Book</source>
         <translation>Endereços</translation>
     </message>

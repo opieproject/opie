@@ -96,10 +96,6 @@ nesta conta. Por favor tente mais tarde.</translation>
 <context>
     <name>KVNC</name>
     <message>
-        <source>Connect...</source>
-        <translation>Conectar...</translation>
-    </message>
-    <message>
         <source>Connected to remote host</source>
         <translation>Conectado ao computador remoto</translation>
     </message>
@@ -124,35 +120,111 @@ nesta conta. Por favor tente mais tarde.</translation>
         <translation>Desconectar</translation>
     </message>
     <message>
-        <source>Settings</source>
-        <translation>Configurações</translation>
-    </message>
-    <message>
         <source>Connection closed</source>
         <translation>Conexão fechada</translation>
     </message>
-</context>
-<context>
-    <name>KVNCConnectDlg</name>
     <message>
-        <source>Host Name:</source>
-        <translation>Nome do Computador:</translation>
+        <source>New Connection</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Connect to VNC server</source>
-        <translation>Conectar a um servidor VNC</translation>
+        <source>Open Bookmark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Bookmark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send Contrl-Alt-Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>KVNCBookmarkDlgBase</name>
+    <message>
+        <source>Bookmarks</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>KVNCConnDlgBase</name>
+    <message>
+        <source>VNC Viewer Connection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Password</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation>Senha:</translation>
+        <translation type="unfinished">Senha:</translation>
+    </message>
+    <message>
+        <source>Bookmark Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Host Name:</source>
+        <translation type="unfinished">Nome do Computador:</translation>
     </message>
     <message>
         <source>Display Number:</source>
-        <translation>Número da Tela:</translation>
+        <translation type="unfinished">Número da Tela:</translation>
     </message>
-</context>
-<context>
-    <name>VncOptionsBase</name>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check for screen updates every:</source>
+        <translation type="unfinished">Verificar atualizações da tela a cada:</translation>
+    </message>
+    <message>
+        <source>Milliseconds</source>
+        <translation type="unfinished">Milisegundos</translation>
+    </message>
+    <message>
+        <source>Request 8-bit session</source>
+        <translation type="unfinished">Requisitar sessão 8-bits</translation>
+    </message>
+    <message>
+        <source>Raise on bell</source>
+        <translation type="unfinished">Trazer para frente com campainha</translation>
+    </message>
+    <message>
+        <source>Request shared session</source>
+        <translation type="unfinished">Requisitar sessão compartilhada</translation>
+    </message>
+    <message>
+        <source>1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scale Factor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Encodings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hextile encoding</source>
+        <translation type="unfinished">Codificação Hextile</translation>
+    </message>
     <message>
         <source>CoRRE encoding</source>
         <translation type="unfinished">Codificação CoRRE</translation>
@@ -162,44 +234,8 @@ nesta conta. Por favor tente mais tarde.</translation>
         <translation type="unfinished">RRE encoding</translation>
     </message>
     <message>
-        <source>Connection</source>
-        <translation type="unfinished">Conexão</translation>
-    </message>
-    <message>
         <source>Copy rectangle encoding</source>
         <translation type="unfinished">Codificação copia de retângulo</translation>
-    </message>
-    <message>
-        <source>Request 8-bit session</source>
-        <translation type="unfinished">Requisitar sessão 8-bits</translation>
-    </message>
-    <message>
-        <source>VNC Viewer Options</source>
-        <translation type="unfinished">Opções do VNC Viewer</translation>
-    </message>
-    <message>
-        <source>Request shared session</source>
-        <translation type="unfinished">Requisitar sessão compartilhada</translation>
-    </message>
-    <message>
-        <source>Milliseconds</source>
-        <translation type="unfinished">Milisegundos</translation>
-    </message>
-    <message>
-        <source>Data Encoding</source>
-        <translation type="unfinished">Codificação dos dados</translation>
-    </message>
-    <message>
-        <source>Check for screen updates every:</source>
-        <translation type="unfinished">Verificar atualizações da tela a cada:</translation>
-    </message>
-    <message>
-        <source>Raise on bell</source>
-        <translation type="unfinished">Trazer para frente com campainha</translation>
-    </message>
-    <message>
-        <source>Hextile encoding</source>
-        <translation type="unfinished">Codificação Hextile</translation>
     </message>
 </context>
 </TS>

@@ -10,10 +10,6 @@
         <translation>&amp;Neues Spiel</translation>
     </message>
     <message>
-        <source>&amp;About</source>
-        <translation type="obsolete">&amp;Über</translation>
-    </message>
-    <message>
         <source>&amp;Game</source>
         <translation>&amp;Spiel</translation>
     </message>

@@ -144,10 +144,6 @@
         <translation>Prestavi</translation>
     </message>
     <message>
-        <source>Rescan</source>
-        <translation type="obsolete">Preglej</translation>
-    </message>
-    <message>
         <source>File Info</source>
         <translation>Informacije o datoteki</translation>
     </message>

@@ -83,10 +83,6 @@
         <translation>Falsches Üben von Xylophonmusik quält jeden größeren Zwerg</translation>
     </message>
     <message>
-        <source>Apply</source>
-        <translation type="obsolete">Anwenden</translation>
-    </message>
-    <message>
         <source>Restart</source>
         <translation>Neustart</translation>
     </message>

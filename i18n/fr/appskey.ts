@@ -7,10 +7,6 @@
         <translation>Définir les touches du PDA</translation>
     </message>
     <message>
-        <source>Calender</source>
-        <translation type="obsolete">Calendrier</translation>
-    </message>
-    <message>
         <source>Address Book</source>
         <translation>Carnet d&apos;adresses</translation>
     </message>

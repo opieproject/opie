@@ -27,14 +27,6 @@
         <translation>Définir l&apos;alarme</translation>
     </message>
     <message>
-        <source>Alarm On</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Alarm Off</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>Stop</source>
         <translation>Arréter</translation>
     </message>

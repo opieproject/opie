@@ -233,10 +233,6 @@
         <translation>Imenik</translation>
     </message>
     <message>
-        <source>Abort sending</source>
-        <translation type="obsolete">Prekini pošiljanje</translation>
-    </message>
-    <message>
         <source>From</source>
         <translation>Od</translation>
     </message>

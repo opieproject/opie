@@ -6,10 +6,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Calender</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>Address Book</source>
         <translation type="unfinished"></translation>
     </message>

@@ -3,80 +3,12 @@
 <context>
     <name>KCheckers</name>
     <message>
-        <source>New</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Quit</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Beginner</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Novice</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Average</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Good</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Expert</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Master</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>English Rules</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Russian Rules</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Marble Board</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Wooden Board</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>What&apos;s This</source>
         <translation>Qu&apos;est-ce que c&apos;est </translation>
     </message>
     <message>
-        <source>About KCheckers</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>About &amp;Qt</source>
         <translation>A propos de &amp;Qt</translation>
-    </message>
-    <message>
-        <source>Game</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Skill</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Help</source>
-        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Go!</source>

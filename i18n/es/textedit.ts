@@ -121,14 +121,6 @@
         <translation>Editor Textos</translation>
     </message>
     <message>
-        <source>Text Editor has detected
- you selected a .desktop file.
-Open .desktop file or linked file?</source>
-        <translation type="obsolete">El Editor de Texto ha detectado
-que ha seleccionado un .desktop
-¿Abrir el .desktop o su enlace?</translation>
-    </message>
-    <message>
         <source>.desktop File</source>
         <translation>Fichero .desktop</translation>
     </message>
@@ -147,15 +139,6 @@ que ha seleccionado un .desktop
     <message>
         <source>FontDialog</source>
         <translation>DiálogoLetras</translation>
-    </message>
-    <message>
-        <source>Do you really want
-to delete the current file
-from the disk?
-This is irreversable!!</source>
-        <translation type="obsolete">¿Seguro que quiere borrar
-el fichero actual del disco?
-¡Esto es irreversible!</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -205,10 +188,6 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
 </context>
 <context>
     <name>filePermissions</name>
-    <message>
-        <source>filePermissions</source>
-        <translation type="obsolete">Permisos fichero</translation>
-    </message>
     <message>
         <source>Set File Permissions</source>
         <translation>Fijar permisos fichero</translation>

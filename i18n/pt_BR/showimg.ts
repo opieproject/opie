@@ -25,36 +25,8 @@
         <translation>Visualizador de Imagens</translation>
     </message>
     <message>
-        <source>No image - select Open from File menu.</source>
-        <translation type="obsolete">Sem imagem - selecione Abrir no menu Arquivo.</translation>
-    </message>
-    <message>
-        <source>, %1 alpha levels</source>
-        <translation type="obsolete">, %1 níveis alfa</translation>
-    </message>
-    <message>
-        <source>, %1/%2 colors</source>
-        <translation type="obsolete">, %1%2 cores</translation>
-    </message>
-    <message>
-        <source>, 8-bit alpha channel</source>
-        <translation type="obsolete">, canal alfa de 8 bits</translation>
-    </message>
-    <message>
-        <source>Could not load image</source>
-        <translation type="obsolete">Não foi possível carregar imagem</translation>
-    </message>
-    <message>
-        <source>, %1 colors</source>
-        <translation type="obsolete">, %1 cores</translation>
-    </message>
-    <message>
         <source> True color</source>
         <translation>Cores reais</translation>
-    </message>
-    <message>
-        <source>Loading image...</source>
-        <translation type="obsolete">Carregando imagem...</translation>
     </message>
     <message>
         <source>Vertical flip</source>
@@ -83,10 +55,6 @@
     <message>
         <source> - Image Viewer</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>View</source>
