@@ -597,8 +597,10 @@ DateBookDayWidget::DateBookDayWidget( const EffectiveEvent &e,
 	where = strNote.find( "<", where );
     }
 
-    text = "<b>" + strDesc + "</b><br>" + "<i>"
-           + strCat + "</i><br>";
+    text = "<b>" + strDesc + "</b><br>" + "<i>";
+    if ( !strCat.isEmpty() )  {
+    text += strCat + "</i><br>";
+    }
     if (ev.event().type() == Event::Normal )
         setEventText( text );
     else
@@ -615,8 +617,9 @@ DateBookDayWidget::DateBookDayWidget( const EffectiveEvent &e,
     int rh = dateBook->dayView()->rowHeight(0);
     y = y*rh/60;
     h = h*rh/60;
-    if ( h < 3 )
+    if ( h < 3 )  {
         h = 3;
+    }
     geom.setY( y );
     geom.setHeight( h );
     geom.setX( 0 );
@@ -628,7 +631,7 @@ void DateBookDayWidget::setAllDayText( QString &text ) {
 }
 void DateBookDayWidget::setEventText( QString& text ) {
     bool whichClock = dateBook->dayView()->whichClock();
-    text += "<b>" + tr("Start") + "</b>: ";
+    text += "<b>" + tr("Time") + "</b>: ";
     if ( ev.startDate() != ev.date() ) {
 	// multi-day event.  Show start date
 	text += TimeString::longDateString( ev.startDate() );
@@ -637,7 +640,7 @@ void DateBookDayWidget::setEventText( QString& text ) {
 	text += TimeString::timeString( ev.start(), whichClock, FALSE );
     }
 
-    text += "<br><b>" + tr("End") + "</b>: ";
+    text += "<b>" + tr(" - ") + "</b>";
     if ( ev.endDate() != ev.date() ) {
 	// multi-day event.  Show end date
 	text += TimeString::longDateString( ev.endDate() );
