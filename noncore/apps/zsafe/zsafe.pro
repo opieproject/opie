@@ -1,19 +1,22 @@
-TEMPLATE	= app
-#CONFIG		= qt warn_on debug
-CONFIG		= qt warn_on release
-HEADERS         = zsafe.h krc2.h category.h categorylist.h zlistview.h \
-                  scqtfiledlg.h 
-SOURCES         = main.cpp zsafe.cpp krc2.cpp category.cpp \
-                  categorylist.cpp zlistview.cpp shadedlistitem.cpp\
-                  scqtfileedit.cpp scqtfileedit.moc.cpp \
-                  scqtfiledlg.cpp
-INCLUDEPATH	+= $(QPEDIR)/include
+TEMPLATE	    = app
+CONFIG		 = qt warn_on release
+DESTDIR      = $(OPIEDIR)/bin
+HEADERS      = zsafe.h krc2.h category.h categorylist.h zlistview.h \
+               scqtfiledlg.h 
+SOURCES      = main.cpp zsafe.cpp krc2.cpp category.cpp \
+               categorylist.cpp zlistview.cpp shadedlistitem.cpp\
+               scqtfileedit.cpp scqtfileedit.moc.cpp \
+               scqtfiledlg.cpp
+INTERFACES	 = newdialog.ui searchdialog.ui passworddialog.ui categorydialog.ui 
+INTERFACES  += infoform.ui wait.ui
+
+INCLUDEPATH	+= $(OPIEDIR)/include
 INCLUDEPATH	+= .
-DEPENDPATH	+= $(QPEDIR)/include
+INCLUDEPATH	+= $(OPIEDIR)/noncore/apps/zsafe
+DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe
-#INTERFACES	= newdialog.ui searchdialog.ui passworddialog.ui categorydialog.ui scqtfiledlg.ui
-INTERFACES	= newdialog.ui searchdialog.ui passworddialog.ui categorydialog.ui 
-INTERFACES      += infoform.ui wait.ui
-TARGET		= zsafe
-#DESTDIR        = ../bin
-TRANSLATIONS    = i18n/de/zsafe.ts
+TARGET		 = zsafe
+TRANSLATIONS = $(OPIEDIR)/noncore/apps/zsafe/i18n/de/zsafe.ts
+
+#include ( $(OPIEDIR)/include.pro )
+
