@@ -1,0 +1,10 @@
+Package: opie-zsame
+Files: plugins/application/libzsame.so* bin/zsame apps/Games/zsame.desktop pics/zsame
+Priority: optional
+Section: opie/games
+Maintainer: Holger 'Zecke' Freyther <zecke@handhelds.org>
+Architecture: arm
+Depends: task-opie-minimal
+Description: ZSame
+ A game for the Opie environment.
+Version: $QPE_VERSION$EXTRAVERSION
