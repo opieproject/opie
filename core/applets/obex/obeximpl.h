@@ -4,6 +4,8 @@
 
 #include <qobject.h>
 #include "../obexinterface.h"
+#include "obexdlg.h"
+#include "obexinc.h"
 #include <qpe/qcopenvelope_qws.h>
 
 namespace OpieObex {
@@ -19,7 +21,10 @@ namespace OpieObex {
     ulong ref;
     Obex* m_obex; // obex lib
     QCopChannel *m_chan;
+    ObexDlg *m_sendgui;
+    ObexInc *m_recvgui;
    private slots:
+     void slotCancelSend();
      void slotMessage( const QCString&, const QByteArray& );
    /*   void slotError(int );
    void slotCurrentTry( unsigned int );

@@ -1,0 +1,6 @@
+Makefile
+moc*
+obexdlg.cpp
+obexdlg.h
+obexinc.cpp
+obexinc.h

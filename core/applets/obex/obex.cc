@@ -1,19 +1,20 @@
 
 #include <qapplication.h>
-
+#include <qmessagebox.h>
+#include <qpe/qcopenvelope_qws.h>
 #include <opie/oprocess.h>
 #include "obex.h"
 
 using namespace  OpieObex;
 
-Obex::Obex( QObject *parent, const char* name ) 
+Obex::Obex( QObject *parent, const char* name )
   : QObject(parent, name )
 {
   m_rec = 0;
   m_send=0;
   m_count = 0;
 };
-Obex::~Obex() { 
+Obex::~Obex() {
   delete m_rec;
   delete m_send;
 }
@@ -24,10 +25,10 @@ void Obex::receive()  {
    // connect to the necessary slots
    connect(m_rec,  SIGNAL(processExited(OProcess*) ),
 	   this,  SLOT(slotExited(OProcess*) ) );
-   
+
    connect(m_rec,  SIGNAL(receivedStdout(OProcess*, char*,  int ) ),
 	   this,  SLOT(slotStdOut(OProcess*, char*, int) ) );
-   
+
    if(!m_rec->start(OProcess::NotifyOnExit, OProcess::AllOutput) ) {
      qWarning("could not start :(");
      emit done( false );
@@ -49,11 +50,11 @@ void Obex::sendNow(){
   m_send = new OProcess();
   *m_send << "irobex_palm3";
   *m_send << m_file;
-  
+
   // connect to slots Exited and and StdOut
   connect(m_send,  SIGNAL(processExited(OProcess*) ),
 	  this, SLOT(slotExited(OProcess*)) );
-  connect(m_send,  SIGNAL(receivedStdout(OProcess*, char*,  int )), 
+  connect(m_send,  SIGNAL(receivedStdout(OProcess*, char*,  int )),
 	  this, SLOT(slotStdOut(OProcess*, char*, int) ) );
   // now start it
   if (!m_send->start(/*OProcess::NotifyOnExit,  OProcess::AllOutput*/ ) ) {
@@ -91,6 +92,7 @@ void Obex::recieved() {
   };
   delete m_rec;
 }
+
 void Obex::sendEnd() {
   if (m_send->normalExit() ) {
     if ( m_send->exitStatus() == 0 ) {

@@ -12,7 +12,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>208</width>
+            <width>204</width>
             <height>246</height>
         </rect>
     </property>
@@ -228,6 +228,27 @@
         <property>
             <name>name</name>
             <cstring>Spacer11</cstring>
+        </property>
+        <property stdset="1">
+            <name>orientation</name>
+            <enum>Vertical</enum>
+        </property>
+        <property stdset="1">
+            <name>sizeType</name>
+            <enum>Expanding</enum>
+        </property>
+        <property>
+            <name>sizeHint</name>
+            <size>
+                <width>20</width>
+                <height>20</height>
+            </size>
+        </property>
+    </spacer>
+    <spacer>
+        <property>
+            <name>name</name>
+            <cstring>Spacer18</cstring>
         </property>
         <property stdset="1">
             <name>orientation</name>
