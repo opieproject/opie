@@ -7,7 +7,7 @@
 class Device : public QObject {
     Q_OBJECT
 public:
-    Device( QObject * parent=0, const char * dspStr=0, const char * mixerStr=0, bool record=false );
+    Device( QObject * parent, const char * dspStr, const char * mixerStr, bool record );
     ~Device() {};
     bool closeDevice( bool);
     int getChannels();

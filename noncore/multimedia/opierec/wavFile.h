@@ -27,8 +27,8 @@ typedef struct {
 class WavFile : public QObject {
 Q_OBJECT
 public:
-    WavFile( QObject * parent=0,const QString &fileName=0, bool newFile=true, int sampleRate = 0,
-             int channels = 0, int resolution = 0, int format=0);
+    WavFile( QObject * parent,const QString &fileName, bool newFile, int sampleRate,
+             int channels , int resolution, int format);
  ~WavFile();
     wavhdr hdr;
     bool adjustHeaders(int fd, int total);

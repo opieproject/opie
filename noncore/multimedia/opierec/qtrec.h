@@ -56,7 +56,7 @@ class QtRec : public QWidget
    Q_OBJECT
 
 public:
-   QtRec( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
+   QtRec( QWidget* parent, const char* name, WFlags fl );
    ~QtRec();
    QSlider *OutputSlider,*InputSlider;
 
