@@ -200,7 +200,7 @@ bool deviceTab( const char *device) {
 }
 
 /*!
- * @fn hasCf()
+ * @fn static bool StorageInfo::hasCf()
  * @brief returns whether device has Cf mounted
  *
  */
@@ -210,7 +210,7 @@ bool StorageInfo::hasCf()
 }
 
 /*!
- * @fn hasSd()
+ * @fn static bool StorageInfo::hasSd()
  * @brief returns whether device has SD mounted
  *
  */
@@ -220,7 +220,7 @@ bool StorageInfo::hasSd()
 }
 
 /*!
- * @fn hasMmc()
+ * @fn static bool StorageInfo::hasMmc()
  * @brief reutrns whether device has mmc mounted
  *
  */

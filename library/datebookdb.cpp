@@ -71,7 +71,7 @@ bool nextOccurance(const Event &e, const QDate &from, QDateTime &next)
     int dayOfWeek = 0;
     int firstOfWeek = 0;
     int weekOfMonth;
-    
+
 
     if (e.repeatPattern().hasEndDate && e.repeatPattern().endDate() < from)
 	return FALSE;
@@ -461,7 +461,7 @@ QValueList<EffectiveEvent> DateBookDB::getEffectiveEvents( const QDate &from,
 	      dtEnd;
 
     for (it = eventList.begin(); it != eventList.end(); ++it ) {
-	if (!(*it).isValidUid()) 
+	if (!(*it).isValidUid())
 	    (*it).assignUid(); // FIXME: Hack to restore cleared uids
 
         dtTmp = (*it).start(TRUE);
@@ -506,7 +506,7 @@ QValueList<EffectiveEvent> DateBookDB::getEffectiveEvents( const QDate &from,
     // check for repeating events...
     QDateTime repeat;
     for ( it = repeatEvents.begin(); it != repeatEvents.end(); ++it ) {
-	if (!(*it).isValidUid()) 
+	if (!(*it).isValidUid())
 	    (*it).assignUid(); // FIXME: Hack to restore cleared uids
 
 	/* create a false end date, to short circuit on hard
@@ -623,7 +623,7 @@ void DateBookDB::editEvent( const Event &old, Event &editedEv )
     if ( old.hasAlarm() )
 	delEventAlarm( old );
     if ( oldHadRepeat ) {
-	if ( editedEv.hasRepeat() ) { // This mean that origRepeat was run above and 
+	if ( editedEv.hasRepeat() ) { // This mean that origRepeat was run above and
  	                              // orig is initialized
 	    // assumption, when someone edits a repeating event, they
 	    // want to change them all, maybe not perfect, but it works
@@ -672,7 +672,7 @@ void DateBookDB::removeJFEvent( const Event&ev )
 // also handles journaling...
 void DateBookDB::loadFile( const QString &strFile )
 {
-    
+
     QFile f( strFile );
     if ( !f.open( IO_ReadOnly ) )
 	return;
@@ -723,7 +723,7 @@ void DateBookDB::loadFile( const QString &strFile )
     dict.insert( "actionkey", new int(FActionKey) );
     dict.insert( "actionorig", new int (FJournalOrigHadRepeat) );
 
-    
+
     QByteArray ba = f.readAll();
     char* dt = ba.data();
     int len = ba.size();

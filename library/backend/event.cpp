@@ -167,13 +167,13 @@ Qtopia::UidGen Event::sUidGen( Qtopia::UidGen::Qtopia );
 */
 
 /*!
-  \fn QDateTime Event::start() const
+  \fn QDateTime Event::start(bool) const
 
   Returns the start date and time of the first occurance of the event.
 */
 
 /*!
-  \fn QDateTime Event::end() const
+  \fn QDateTime Event::end(bool) const
 
   Returns the end date and time of the first occurance of the event.
 */

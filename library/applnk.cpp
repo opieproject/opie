@@ -332,7 +332,23 @@ const QArray<int>& AppLnk::categories() const
 
   Returns TRUE if this AppLnk is valid; otherwise returns FALSE.
 */
+/*!
+  \fn bool AppLnk::fileKnown() const
 
+  If the with the AppLnk associated file is not equal to QString::null
+*/
+/*!
+  \fn bool AppLnk::linkFileKnown()const
+
+  The filename of the AppLnk
+
+*/
+/*!
+  \fn void AppLnk::setRotation( const QString& )
+
+  The default rotation of the associated application. This
+  function is included inline for binary compatible issues
+*/
 /*!
   Creates an invalid AppLnk.
 

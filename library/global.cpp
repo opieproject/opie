@@ -110,7 +110,7 @@ StartingAppList::StartingAppList( QObject *parent, const char* name )
 #if QT_VERSION >= 232 && defined(QWS)
     connect( qwsServer, SIGNAL( newChannel(const QString&)),
 	     this, SLOT( handleNewChannel(const QString&)) );
-#endif	     
+#endif
     dict.setAutoDelete( TRUE );
 }
 
@@ -388,7 +388,7 @@ void Global::createDocDir()
 */
 void Global::statusMessage(const QString& message)
 {
-#if!defined(QT_NO_COP)
+#if !defined(QT_NO_COP)
     QCopEnvelope e( "QPE/TaskBar", "message(QString)" );
     e << message;
 #endif
@@ -561,7 +561,7 @@ void Global::invoke(const QString &c)
     if ( QCopChannel::isRegistered( ("QPE/Application/" + ap).latin1() ) ) {
 	// If the channel is already register, the app is already running, so show it.
 	{ QCopEnvelope env( ("QPE/Application/" + ap).latin1(), "raise()" ); }
-                
+
 	QCopEnvelope e("QPE/System", "notBusy(QString)" );
 	e << ap;
 	return;
@@ -604,14 +604,14 @@ void Global::invoke(const QString &c)
 	quickexecv( libexe.utf8().data(), (const char **)args );
     } else
 #endif
-    {           
-        bool success = false; 
+    {
+        bool success = false;
         int pfd [2];
         if ( ::pipe ( pfd ) < 0 )
             pfd [0] = pfd [1] = -1;
-    
+
         pid_t pid = ::fork ( );
-        
+
         if ( pid == 0 ) { // child
             for ( int fd = 3; fd < 100; fd++ ) {
                 if ( fd != pfd [1] )
@@ -622,20 +622,20 @@ void Global::invoke(const QString &c)
             // Closing of fd[1] indicates that the execvp succeeded!
             if ( pfd [1] >= 0 )
                 ::fcntl ( pfd [1], F_SETFD, FD_CLOEXEC );
-             
+
             // Try bindir first, so that foo/bar works too
             ::execv ( qpeDir ( ) + "/bin/" + args [0], (char * const *) args );
             ::execvp ( args [0], (char * const *) args );
-            
+
             char resultByte = 1;
             if ( pfd [1] >= 0 )
                 ::write ( pfd [1], &resultByte, 1 );
-            ::_exit ( -1 );                         
+            ::_exit ( -1 );
         }
         else if ( pid > 0 ) {
             success = true;
-        
-            if ( pfd [1] >= 0 ) 
+
+            if ( pfd [1] >= 0 )
                 ::close ( pfd [1] );
             if ( pfd [0] >= 0 ) {
                 while ( true ) {
@@ -647,13 +647,13 @@ void Global::invoke(const QString &c)
                     }
                     if (( n == -1 ) && (( errno == ECHILD ) || ( errno == EINTR )))
                         continue;
-                        
+
                     break; // success
                 }
                 ::close ( pfd [0] );
             }
         }
-        if ( success )    
+        if ( success )
             StartingAppList::add( list[0] );
         else
             QMessageBox::warning( 0, "Error", "Could not start the application " + c, "Ok", 0, 0, 0, 1 );

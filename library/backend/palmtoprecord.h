@@ -32,9 +32,21 @@ QPC_TEMPLATEEXTERN template class QPC_EXPORT QMap<QString, QString>;
 #endif
 
 class QRegExp;
+/**
+ * @short Qtopia namespace
+ * The namespace of Qtopia
+ */
 namespace Qtopia {
 
 class RecordPrivate;
+/**
+ * @short The base class of all Records
+ *
+ * The base class for Records in Qtopia
+ * @see Task
+ * @see Event
+ * @see Contact
+ */
 class QPC_EXPORT Record
 {
 public:

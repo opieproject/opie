@@ -487,7 +487,7 @@ QString Categories::displaySingle( const QString &app,
 	    break;
 	}
     }
-    else r = strs.first(); 	
+    else r = strs.first();
     return r;
 }
 
@@ -848,11 +848,6 @@ void CheckedListView::setChecked( const QStringList &checked )
  */
 
 
-/*! \fn  QStringList Categories::labels( const QString & app, const QArray<int> &catids ) const
-
-  Returns list of labels associated with the application and catids
-*/
-
 /*! \fn QStringList Categories::globalCategories() const
 
   Returns list of all global category labels
@@ -877,7 +872,7 @@ void CheckedListView::setChecked( const QStringList &checked )
   \a cats is a const reference to this object
   \a appname is the CategoryGroup application name that the category was added to or QString::null if it was global
   \a uid is the unique identifier associated with the added category
-*/	
+*/
 
 /*! \fn void Categories::categoryRemoved( const Categories &cats, const QString &appname,
   int uid)

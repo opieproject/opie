@@ -85,7 +85,7 @@ private:
     static Qtopia::UidGen sUidGen;
 };
 
-/** Map from application name to categories */
+/* Map from application name to categories */
 class QPC_EXPORT Categories : public QObject
 {
     Q_OBJECT

@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.43 2003-04-10 15:09:57 harlekin Exp $
+** $Id: qpeapplication.cpp,v 1.44 2003-04-16 10:57:59 zecke Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -450,7 +450,7 @@ static void setTreble( int t = 0, int percent = -1 )
 */
 
 /*!
-    \fn void QPEApplication::dateFormatChanged()
+    \fn void QPEApplication::dateFormatChanged(DateFormat)
 
     This signal is emitted whenever the date format is changed.
 */
@@ -1767,6 +1767,7 @@ void operator delete[]( void* p, size_t /*size*/ )
 {
 	free( p );
 }
+
 
 void operator delete( void* p )
 {

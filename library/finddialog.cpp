@@ -28,6 +28,13 @@
 #include <qlayout.h>
 #include <qpushbutton.h>
 
+/*!
+  \class FindDialog finddialog.h
+  \brief A simple FindDialog
+
+  A find dialog. FIXME!!!!
+
+*/
 FindDialog::FindDialog( const QString &appName, QWidget *parent,
                         const char *name, bool modal )
     : QDialog( parent, name, modal )
