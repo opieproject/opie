@@ -188,38 +188,37 @@ void ComposeMail::accept()
     qDebug( "Sending Mail with " +
             smtpAccounts.at( smtpAccountBox->currentItem() )->getAccountName() );
 #endif
-    Mail mail;
+    Opie::osmart_pointer<Mail> mail=new Mail;
 
     SMTPaccount *smtp = smtpAccounts.at( smtpAccountBox->currentItem() );
-    mail.setMail(fromBox->currentText());
+    mail->setMail(fromBox->currentText());
 
     if ( !toLine->text().isEmpty() ) {
-        mail.setTo( toLine->text() );
+        mail->setTo( toLine->text() );
     } else {
         QMessageBox::warning(0,tr("Sending mail"),
             tr("No Receiver spezified" ) );
         return;
     }
-    mail.setName(senderNameEdit->text());
-    mail.setCC( ccLine->text() );
-    mail.setBCC( bccLine->text() );
-    mail.setReply( replyLine->text() );
-    mail.setSubject( subjectLine->text() );
+    mail->setName(senderNameEdit->text());
+    mail->setCC( ccLine->text() );
+    mail->setBCC( bccLine->text() );
+    mail->setReply( replyLine->text() );
+    mail->setSubject( subjectLine->text() );
     if (!m_replyid.isEmpty()) {
         QStringList ids;
         ids.append(m_replyid);
-        mail.setInreply(ids);
+        mail->setInreply(ids);
     }
     QString txt = message->text();
     if ( !sigMultiLine->text().isEmpty() ) {
         txt.append( "\n--\n" );
         txt.append( sigMultiLine->text() );
     }
-    qDebug(txt);
-    mail.setMessage( txt );
+    mail->setMessage( txt );
     AttachViewItem *it = (AttachViewItem *) attList->firstChild();
     while ( it != NULL ) {
-        mail.addAttachment( it->getAttachment() );
+        mail->addAttachment( it->getAttachment() );
         it = (AttachViewItem *) it->nextSibling();
     }
 
@@ -237,18 +236,18 @@ void ComposeMail::reject()
                                      tr("No"),QString::null,0,1);
 
     if (yesno == 0) {
-        Mail mail;
-        mail.setMail(fromBox->currentText());
-        mail.setTo( toLine->text() );
-        mail.setName(senderNameEdit->text());
-        mail.setCC( ccLine->text() );
-        mail.setBCC( bccLine->text() );
-        mail.setReply( replyLine->text() );
-        mail.setSubject( subjectLine->text() );
+        Opie::osmart_pointer<Mail> mail=new Mail();
+        mail->setMail(fromBox->currentText());
+        mail->setTo( toLine->text() );
+        mail->setName(senderNameEdit->text());
+        mail->setCC( ccLine->text() );
+        mail->setBCC( bccLine->text() );
+        mail->setReply( replyLine->text() );
+        mail->setSubject( subjectLine->text() );
         if (!m_replyid.isEmpty()) {
             QStringList ids;
             ids.append(m_replyid);
-            mail.setInreply(ids);
+            mail->setInreply(ids);
         }
         QString txt = message->text();
         if ( !sigMultiLine->text().isEmpty() ) {
@@ -256,7 +255,7 @@ void ComposeMail::reject()
             txt.append( sigMultiLine->text() );
         }
         qDebug(txt);
-        mail.setMessage( txt );
+        mail->setMessage( txt );
         
         /* only use the default drafts folder name! */
         Storemail wrapper(AbstractMail::draftFolder());
