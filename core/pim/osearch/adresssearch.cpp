@@ -48,7 +48,7 @@ int AdressSearch::search()
 {
 	ORecordList<OContact> results = _contacts->matchRegexp(_search);
 	for (uint i = 0; i < results.count(); i++) {
-		new ContactItem( this, new OContact( results[i] ));
+		(void)new ContactItem( this, new OContact( results[i] ));
 	}
 	return results.count();
 }

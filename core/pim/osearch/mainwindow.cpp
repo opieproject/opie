@@ -19,10 +19,12 @@
 #include <qlabel.h>
 #include <qfile.h>
 #include <qhbuttongroup.h>
+#include <qhbox.h>
 #include <qpushbutton.h>
 #include <qintdict.h>
 #include <qlayout.h>
 #include <qlineedit.h>
+#include <qsignalmapper.h>
 #include <qtextbrowser.h>
 #include <qregexp.h>
 #include <qwhatsthis.h>
@@ -71,15 +73,14 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
   richEdit->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
   detailsLayout->addWidget( richEdit );
 
-  buttonGroupActions = new QHButtonGroup( this );
-  buttonGroupActions->hide();
+  buttonBox = new QHBox( mainFrame, "Button Box" );
+
   _buttonCount = 0;
 
-  buttonLayout = new QHBoxLayout( detailsFrame );
-  detailsLayout->addLayout( buttonLayout );
-
   mainLayout->addWidget( detailsFrame );
+  mainLayout->addWidget( buttonBox );
   detailsFrame->hide();
+  buttonBox->hide();
 
   searches.append( new AppLnkSearch( resultsList, tr("applications") ) );
   searches.append( new DocLnkSearch( resultsList, tr("documents") ) );
@@ -96,7 +97,10 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
   connect(searchTimer, SIGNAL(timeout()), SLOT(searchStringChanged()));
   connect(resultsList, SIGNAL(pressed(QListViewItem*)), SLOT(setCurrent(QListViewItem*)));
   connect(resultsList, SIGNAL(clicked(QListViewItem*)), SLOT(stopTimer(QListViewItem*)));
-  connect(buttonGroupActions, SIGNAL(clicked(int)), SLOT( slotAction(int) ) );
+
+  signalMapper = new QSignalMapper( this );
+
+  connect(signalMapper, SIGNAL(mapped(int)), SLOT( slotAction(int) ) );
 
   makeMenu();
 
@@ -183,22 +187,29 @@ void MainWindow::setCurrent(QListViewItem *item)
 		QIntDict<QString> acts = res->actions();
 		QButton *button;
 		for (uint i = 0; i < acts.count(); i++){
-			button = buttonGroupActions->find( i );
+			button = buttonMap[i];
 			if (!button) {
-				button = new QPushButton( detailsFrame );
-				buttonLayout->addWidget( button, 0 );
-				buttonGroupActions->insert( button, i);
+			    qWarning(" no button for %s", (*acts[i]).latin1() );
+			    button = new QPushButton( buttonBox );
+			    buttonMap.insert( i,  button );
+                            signalMapper->setMapping(button, i );
+                            connect(button, SIGNAL(clicked() ), signalMapper, SLOT(map() ) );
 			}
 			button->setText( *acts[i] );
 			button->show();
 		}
 		for (uint i = acts.count(); i < _buttonCount; i++){
-			button = buttonGroupActions->find( i );
+			button = buttonMap[i];
 			if (button) button->hide();
 		}
 		_buttonCount = acts.count();
 		detailsFrame->show();
-	}else detailsFrame->hide();
+                buttonBox->show();
+
+	}else {
+            detailsFrame->hide();
+            buttonBox->hide();
+        }
 	popupTimer->start( 300, true );
 }
 
@@ -253,14 +264,14 @@ void MainWindow::searchAll()
 
 void MainWindow::slotAction( int act )
 {
-	if (_currentItem->rtti() == OListViewItem::Result){
+	if ( _currentItem && _currentItem->rtti() == OListViewItem::Result){
 		ResultItem *res = (ResultItem*)_currentItem;
 //		ResultItem *res = dynamic_cast<ResultItem*>(item);
 		res->action(act);
 	}
 }
 
-void MainWindow::optionChanged(int i)
+void MainWindow::optionChanged(int )
 {
 	searchStringChanged();
 }
