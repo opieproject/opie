@@ -270,17 +270,17 @@ OpieFtp::OpieFtp( QWidget* parent, const char* name, WFlags fl)
     connect( serverListView, SIGNAL( highlighted( const QString &)),
              this,SLOT( serverListClicked( const QString &) ) );
 
-    connectServerBtn = new QPushButton( "Connect", tab_3 , "ConnectButton" );
+    connectServerBtn = new QPushButton( tr("Connect"), tab_3 , "ConnectButton" );
     tabLayout_3->addMultiCellWidget( connectServerBtn, 6, 6, 0, 1);
     connectServerBtn->setToggleButton(TRUE);
     connect(connectServerBtn,SIGNAL( toggled( bool)),SLOT( connectorBtnToggled(bool) ));
 
-    newServerButton= new QPushButton( "Add", tab_3 , "NewServerButton" );
+    newServerButton= new QPushButton( tr("Add"), tab_3 , "NewServerButton" );
     tabLayout_3->addMultiCellWidget( newServerButton, 6, 6, 2, 2);
     connect( newServerButton,SIGNAL( clicked()),SLOT( NewServer() ));
 
     QPushButton *deleteServerBtn;
-    deleteServerBtn = new QPushButton( "Delete", tab_3 , "OpenButton" );
+    deleteServerBtn = new QPushButton( tr("Delete"), tab_3 , "OpenButton" );
     tabLayout_3->addMultiCellWidget( deleteServerBtn, 6, 6, 3, 3);
 
     connect(deleteServerBtn,SIGNAL(clicked()),SLOT(deleteServer()));
