@@ -97,7 +97,8 @@ void MediaPlayer::setPlaying( bool play ) {
   mediaPlayerState->setPlaying( FALSE );
   return;
     }
-    if ( !QFile::exists( currentFile->file() ) ) {
+
+    if ( ((currentFile->file()).left(4) != "http") && !QFile::exists( currentFile->file() ) ) {
   QMessageBox::critical( 0, tr( "File not found"), tr( "The following file was not found: <i>" ) + currentFile->file() + "</i>" );
   mediaPlayerState->setPlaying( FALSE );
   return;
@@ -134,14 +135,14 @@ void MediaPlayer::prev() {
     else if ( mediaPlayerState->looping() ) {
         if ( playList->last() )
       play();
-    } else 
+    } else
   mediaPlayerState->setList();
 }
 
 
 void MediaPlayer::next() {
-    if ( playList->next() ) 
-  play(); 
+    if ( playList->next() )
+  play();
     else if ( mediaPlayerState->looping() ) {
         if ( playList->first() )
       play();
@@ -170,9 +171,9 @@ void MediaPlayer::stopChangingVolume() {
 
 
 void MediaPlayer::timerEvent( QTimerEvent * ) {
-    if ( volumeDirection == +1 ) 
+    if ( volumeDirection == +1 )
   AudioDevice::increaseVolume();
-    else if ( volumeDirection == -1 ) 
+    else if ( volumeDirection == -1 )
         AudioDevice::decreaseVolume();
 }
 
