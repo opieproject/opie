@@ -8,13 +8,13 @@ static const char * VPNNeeds[] =
     };
 
 static const char * VPNProvides[] = 
-    { "connection",
+    { "NetworkSetup",
       0
     };
 /**
  * Constructor, find all of the possible interfaces
  */
-VPNNetNode::VPNNetNode() : ANetNode(tr("VPN Connection")) {
+VPNNetNode::VPNNetNode() : ANetNode(tr("VPN NetworkSetup")) {
 }
 
 /**
@@ -25,7 +25,7 @@ VPNNetNode::~VPNNetNode(){
 
 const QString VPNNetNode::nodeDescription(){
       return tr("\
-<p>Configure private IP connection.</p>\
+<p>Configure private IP NetworkSetup.</p>\
 <p>Defines Secure tunnels over non secure IP sessions</p>\
 "
 );

@@ -13,7 +13,7 @@ using namespace Opie::Core;
 #include <qobject.h>
 #include <stdio.h>
 
-class NodeCollection;
+class NetworkSetup;
 class ANetNodeInstance;
 class QFile;
 
@@ -66,13 +66,13 @@ public :
             DstAddress() {
         }
 
-        NodeCollection * assignedConnection()
+        NetworkSetup * assignedToNetworkSetup()
           { return Collection; }
 
-        void assignConnection( NodeCollection * NNI )
+        void assignToNetworkSetup( NetworkSetup * NNI )
           { Collection = NNI; }
 
-        NodeCollection * Collection;    // connection taking care of me
+        NetworkSetup * Collection;    // networkSetup taking care of me
         QString Name;                   // name of interface
         int     CardType;               // type of card
         QString MACAddress;             // MAC address

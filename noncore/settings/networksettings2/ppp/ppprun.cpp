@@ -13,7 +13,7 @@ State_t PPPRun::detectState( void ) {
     return Off;
 }
 
-QString PPPRun::setMyState( NodeCollection * NC, Action_t A, bool ) { 
+QString PPPRun::setMyState( NetworkSetup * , Action_t , bool ) { 
     return QString();
 }
 
@@ -34,7 +34,7 @@ bool PPPRun::isMyPPPUp( void ) {
           Run->IsPointToPoint 
         ) {
         // this is a LAN card
-        if( Run->assignedConnection() == netNode()->connection() ) {
+        if( Run->assignedToNetworkSetup() == netNode()->networkSetup() ) {
           // assigned to us
           return 1;
         } 

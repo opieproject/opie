@@ -9,7 +9,7 @@ public :
       bool Automatic;
       // if started up automatically, ask user for confirmation
       bool Confirm;
-      // Do not bring this connection up
+      // Do not bring this networkSetup up
       bool Disabled;
       bool TriggerVPN;
 } ; 

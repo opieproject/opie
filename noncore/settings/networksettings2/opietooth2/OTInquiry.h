@@ -38,7 +38,7 @@ class OTHCISocket;
  * inquiry(). Inquiry results are signalled as soon as they arrive,
  * so the information can be displayed before the whole inquiry
  * process is finished.
- * Still no connections should be set up before
+ * Still no networkSetups should be set up before
  * the finished() signal was sent (hmm, is this always true..?)
  */
 

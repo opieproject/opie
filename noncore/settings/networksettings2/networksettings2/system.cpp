@@ -453,13 +453,13 @@ void System::probeInterfaces( void ) {
 
 InterfaceInfo * System::findInterface( const QString & N ) {
       InterfaceInfo * Run;
-      // has PAN connection UP interface ?
+      // has PAN NetworkSetup UP interface ?
       for( QDictIterator<InterfaceInfo> It(ProbedInterfaces);
            It.current();
            ++It ) {
         Run = It.current();
         if( N == Run->Name ) {
-          // this PAN connection is up
+          // this PAN NetworkSetup is up
           return Run;
         }
       }

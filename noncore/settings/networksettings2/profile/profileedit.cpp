@@ -14,9 +14,13 @@ ProfileEdit::ProfileEdit( QWidget * Parent, ANetNodeInstance * TNNI ) :
       ProfileGUI( Parent ), RefreshTimer(this) {
       InterfaceInfo * II;
 
+      II = TNNI->networkSetup()->assignedInterface();
+      Log(( "Interface %p %p %p: %d\n", II, 
+            TNNI, TNNI->networkSetup(), (II) ? II->IsUp : 0 ));
+
       NNI = TNNI;
       Dev = NNI->runtime()->device();
-      if( ( II = NNI->connection()->assignedInterface() ) ) {
+      if( ( II = NNI->networkSetup()->assignedInterface() ) ) {
 
         Refresh_CB->setEnabled( TRUE );
         Snd_GB->setEnabled( TRUE );
@@ -77,7 +81,7 @@ bool ProfileEdit::commit( ProfileData & Data ) {
 }
 
 void ProfileEdit::SLOT_Refresh( void ) {
-    InterfaceInfo * II = NNI->connection()->assignedInterface();
+    InterfaceInfo * II = NNI->networkSetup()->assignedInterface();
     NSResources->system().refreshStatistics( *II );
     RcvBytes_LBL->setText( II->RcvBytes );
     SndBytes_LBL->setText( II->SndBytes );

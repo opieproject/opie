@@ -7,13 +7,13 @@ class MyCheckListItem : public QCheckListItem {
 
 public :
 
-      MyCheckListItem( NodeCollection * N, QListView * V );
+      MyCheckListItem( NetworkSetup * N, QListView * V );
 
-      NodeCollection * NC;
+      NetworkSetup * NC;
 
 };
 
-MyCheckListItem::MyCheckListItem( NodeCollection * N, QListView * V ):
+MyCheckListItem::MyCheckListItem( NetworkSetup * N, QListView * V ):
                 QCheckListItem( V, N->name() ) {
       NC = N;
 }
@@ -25,8 +25,8 @@ ActivateVPN::ActivateVPN( const QString & I ) :
     VPN_LV->clear();
     VPN_LV->header()->hide();
 
-    // find all connections that want to be triggered by this interface
-    for( QDictIterator<NodeCollection> it(NSResources->connections());
+    // find all NetworkSetups that want to be triggered by this interface
+    for( QDictIterator<NetworkSetup> it(NSResources->networkSetups());
          it.current();
          ++it ) {
       if( it.current()->triggeredBy( I ) ) {

@@ -1,10 +1,10 @@
 <!DOCTYPE UI><UI>
-<class>EditConnectionGUI</class>
+<class>EditNetworkSetupGUI</class>
 <widget>
     <class>QDialog</class>
     <property stdset="1">
         <name>name</name>
-        <cstring>EditConnectionGUI</cstring>
+        <cstring>EditNetworkSetupGUI</cstring>
     </property>
     <property stdset="1">
         <name>geometry</name>
@@ -117,7 +117,7 @@
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
-                                    <string>Connection profile</string>
+                                    <string>NetworkSetup profile</string>
                                 </property>
                                 <property stdset="1">
                                     <name>alignment</name>
@@ -378,13 +378,13 @@
     <connection>
         <sender>Nodes_LV</sender>
         <signal>clicked(QListViewItem*)</signal>
-        <receiver>EditConnectionGUI</receiver>
+        <receiver>EditNetworkSetupGUI</receiver>
         <slot>SLOT_SelectNode( QListViewItem *)</slot>
     </connection>
     <connection>
         <sender>AutoCollapse_CB</sender>
         <signal>toggled(bool)</signal>
-        <receiver>EditConnectionGUI</receiver>
+        <receiver>EditNetworkSetupGUI</receiver>
         <slot>SLOT_AutoCollapse( bool)</slot>
     </connection>
     <connection>
@@ -396,7 +396,7 @@
     <connection>
         <sender>Tab_TB</sender>
         <signal>selected(const QString&amp;)</signal>
-        <receiver>EditConnectionGUI</receiver>
+        <receiver>EditNetworkSetupGUI</receiver>
         <slot>SLOT_AlterTab( const QString &amp; )</slot>
     </connection>
     <slot access="public">SLOT_AlterTab( const QString &amp; )</slot>

@@ -4,21 +4,20 @@
 #include "networkrun.h"
 
 State_t NetworkRun::detectState( void ) { 
-    InterfaceInfo * II = nodeCollection()->assignedInterface();
+    InterfaceInfo * II = networkSetup()->assignedInterface();
 
-    Log(( "Interface %p %p : %d\n", II, nodeCollection(), (II) ? II->IsUp : 0 ));
     if( II && II->IsUp ) {
       // device has assigned interface
       return IsUp;
     }
 
     // had no interface or interface is no longer up -> release
-    nodeCollection()->assignInterface( 0 );
+    networkSetup()->assignInterface( 0 );
 
     return Unknown;
 }
 
-QString NetworkRun::setMyState( NodeCollection * NC, Action_t A, bool ) { 
+QString NetworkRun::setMyState( NetworkSetup * NC, Action_t A, bool ) { 
     // we handle UP and DOWN
     InterfaceInfo * II = NC->assignedInterface();
 
@@ -40,7 +39,7 @@ QString NetworkRun::setMyState( NodeCollection * NC, Action_t A, bool ) {
 
     SL << QString().sprintf( "%s=A%ld%s",
                         II->Name.latin1(), 
-                        nodeCollection()->number(),
+                        networkSetup()->number(),
                         II->Name.latin1() );
 
     if( ! NSResources->system().runAsRoot( SL ) ) {

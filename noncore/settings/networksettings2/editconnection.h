@@ -10,17 +10,17 @@ class QListViewItem;
 class NetNodeLVI;
 class QCloseEvent;
 
-class EditConnection : public EditConnectionGUI {
+class EditNetworkSetup : public EditNetworkSetupGUI {
 
       Q_OBJECT
 
 public :
 
-      EditConnection( QWidget * P );
+      EditNetworkSetup( QWidget * P );
 
       ANetNodeInstance * netNodeInstance( void );
-      void setConnection( NodeCollection * NC );
-      NodeCollection * connection( void );
+      void setNetworkSetup( NetworkSetup * NC );
+      NetworkSetup * networkSetup( void );
 
 public slots :
 
@@ -31,7 +31,7 @@ public slots :
 
 private :
 
-      NodeCollection * getTmpCollection( void );
+      NetworkSetup * getTmpCollection( void );
       void updateGUI( QListViewItem * it, ANetNode * NN );
       void buildFullTree( void );
       void buildSubTree( QListViewItem * Parent, ANetNode * NN );
@@ -40,9 +40,9 @@ private :
 
       bool haveCompleteConfig( QListViewItem * it );
       QPtrDict<ANetNode> * Mapping;
-      NodeCollection * SelectedNodes;
+      NetworkSetup * SelectedNodes;
       bool           TmpIsValid;
-      NodeCollection TmpCollection;
+      NetworkSetup TmpCollection;
 
       static bool AutoCollapse;
 

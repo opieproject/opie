@@ -117,14 +117,14 @@ short ANetwork::generateFile( SystemFile &SF,
       if( Data.UseDHCP ) {
         SF << "iface " 
            << "A" 
-           << connection()->number() 
+           << networkSetup()->number() 
            << NIC 
            << " inet dhcp" 
            << endl;
         SF << "  up echo \"" 
            << NIC 
            << "\" > /tmp/profile-" 
-           << connection()->number() 
+           << networkSetup()->number() 
            << ".up" 
            << endl;
         if( Data.SendHostname ) {
@@ -134,24 +134,24 @@ short ANetwork::generateFile( SystemFile &SF,
         }
 
         SF << "  down rm -f /tmp/profile-" 
-           << connection()->number() 
+           << networkSetup()->number() 
            << ".up"
            << endl;
       } else {
         SF << "iface " 
            << "A" 
-           << connection()->number() 
+           << networkSetup()->number() 
            << NIC 
            << " inet static" 
            << endl;
         SF << "  up echo \"" 
            << NIC 
            << "\" > /tmp/profile-" 
-           << connection()->number() 
+           << networkSetup()->number() 
            << ".up" 
            << endl;
         SF << "  down rm -f /tmp/profile-" 
-           << connection()->number() 
+           << networkSetup()->number() 
            << ".up" 
            << endl;
         SF << "  address   " 
@@ -211,7 +211,7 @@ short ANetwork::generateFile( SystemFile &SF,
     }
 
     // embed other info in it
-    rvd = connection()->getToplevel()->generateFileEmbedded( SF, DevNr );
+    rvd = networkSetup()->getToplevel()->generateFileEmbedded( SF, DevNr );
 
     return (rvd == 2 || rvl == 2 ) ? 2 :
            (rvd == 0 || rvl == 0 ) ? 0 : 1;

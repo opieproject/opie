@@ -14,14 +14,14 @@ static const char * PPPNeeds[] =
     };
 
 static const char * PPPProvides[] = 
-    { "connection", 
+    { "NetworkSetup", 
       0
     };
 
 /**
  * Constructor, find all of the possible interfaces
  */
-PPPNetNode::PPPNetNode() : ANetNode(tr("PPP Connection")) {
+PPPNetNode::PPPNetNode() : ANetNode(tr("PPP NetworkSetup")) {
 
       NSResources->addSystemFile( 
         "pap-secrets", "/etc/ppp/pap-secrets", 0 );

@@ -713,7 +713,7 @@ long OTDriver::getLinkQuality( const OTDeviceAddress & Addr ) {
       cr->type = ACL_LINK;
 
       if (ioctl( fd(), HCIGETCONNINFO, (unsigned long) cr) < 0) {
-        odebug << "Get connection info failed" << oendl;
+        odebug << "Get NetworkSetup info failed" << oendl;
         free(cr);
         return 0;
       }
@@ -731,7 +731,7 @@ long OTDriver::getLinkQuality( const OTDeviceAddress & Addr ) {
       rq.rlen   = GET_LINK_QUALITY_RP_SIZE;
 
       if (hci_send_req( fd(), &rq, 100) < 0) {
-         odebug << "Get connection info failed" << oendl;
+         odebug << "Get NetworkSetup info failed" << oendl;
          return 0;
       }
 

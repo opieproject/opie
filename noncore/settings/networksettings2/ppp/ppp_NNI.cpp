@@ -149,11 +149,11 @@ void APPP::commit( void ) {
 bool APPP::openFile( SystemFile & SF ) {
       if( SF.name() == "peers" ) {
         SF.setPath( removeSpaces( 
-            QString( "/tmp/ppp/peers/" ) + connection()->name() ) );
+            QString( "/tmp/ppp/peers/" ) + networkSetup()->name() ) );
         return 1;
       } else if ( SF.name() == "chatscripts" ) {
         SF.setPath( removeSpaces( 
-            QString( "/tmp/chatscripts/" ) + connection()->name() ) );
+            QString( "/tmp/chatscripts/" ) + networkSetup()->name() ) );
         return 1;
       }
       return 0;
@@ -170,7 +170,7 @@ short APPP::generateFile( SystemFile & SF, long DevNr ) {
 
       if( Data.Auth.Mode == 1 && Data.Auth.PCEMode == 0 ) {
         SF << "# secrets for " 
-           << connection()->name().latin1() 
+           << networkSetup()->name().latin1() 
            << endl;
         SF << Data.Auth.Client 
            << " " 
@@ -179,7 +179,7 @@ short APPP::generateFile( SystemFile & SF, long DevNr ) {
            << Data.Auth.Secret
            << endl;
         rvl = 0;
-        rvd = connection()->getToplevel()->generateFileEmbedded( 
+        rvd = networkSetup()->getToplevel()->generateFileEmbedded( 
                 SF, DevNr );
       }
     } else if( SF.name() == "chap-secrets" ) {
@@ -187,7 +187,7 @@ short APPP::generateFile( SystemFile & SF, long DevNr ) {
       if( Data.Auth.Mode == 1 && Data.Auth.PCEMode != 0 ) {
         // used for both EAP and Chap
         SF << "# secrets for "
-           << connection()->name().latin1() 
+           << networkSetup()->name().latin1() 
            << endl;
         SF << Data.Auth.Client 
            << " " 
@@ -197,7 +197,7 @@ short APPP::generateFile( SystemFile & SF, long DevNr ) {
            << endl;
 
         rvl = 0;
-        rvd = connection()->getToplevel()->generateFileEmbedded( 
+        rvd = networkSetup()->getToplevel()->generateFileEmbedded( 
             SF, DevNr );
       }
     } else if ( SF.name() == "peers" ) {
@@ -221,12 +221,12 @@ short APPP::generateFile( SystemFile & SF, long DevNr ) {
 
       // insert other data here
       rvl = 0;
-      rvd = connection()->getToplevel()->generateFileEmbedded(
+      rvd = networkSetup()->getToplevel()->generateFileEmbedded(
             SF, DevNr );
     } else if ( SF.name() == "chatscripts" ) {
       Log(("Generate PPP for %s\n", SF.name().latin1() ));
       rvl = 0;
-      rvd = connection()->getToplevel()->generateFileEmbedded(
+      rvd = networkSetup()->getToplevel()->generateFileEmbedded(
             SF, DevNr );
     }
 

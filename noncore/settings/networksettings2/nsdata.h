@@ -19,7 +19,7 @@ public :
       inline void setModified( bool M ) 
         { ForceModified = M; }
 
-      QList<NodeCollection> collectPossible( const QString & Interface );
+      QList<NetworkSetup> collectPossible( const QString & Interface );
       // return TRUE if we need gui to decide
       bool canStart( const QString & Interface );
       // return TRUE if there are vpns that could be triggered
@@ -28,7 +28,7 @@ public :
 
 private :
 
-      QList<NodeCollection> collectTriggered( const QString &Interface );
+      QList<NetworkSetup> collectTriggered( const QString &Interface );
       bool ForceModified;
 
       // collect strings in config file nobody wants

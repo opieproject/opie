@@ -25,7 +25,7 @@
 TheNSResources * _NSResources = 0;
 
 TheNSResources::TheNSResources( void ) : NodeTypeNameMap(),
-        ConnectionsMap(), DanglingConnectionsMap() {
+        NetworkSetupsMap(), DanglingNetworkSetupsMap() {
 
     _NSResources = this;
 
@@ -80,12 +80,12 @@ TheNSResources::TheNSResources( void ) : NodeTypeNameMap(),
          tr( "<p>Devices that can handle IP packets</p>" ) );
     addNodeType( "line", tr( "Character device" ),
          tr( "<p>Devices that can handle single bytes</p>" ) );
-    addNodeType( "connection", tr( "IP Connection" ),
-         tr( "<p>Nodes that provide working IP connections</p>" ) );
-    addNodeType( "fullsetup", tr( "Connection Profile" ),
-         tr( "<p>Fully configured connection profile</p>" ) );
-    addNodeType( "GPRS", tr( "Connection to GPRS device" ),
-         tr( "<p>Connection to a GPRS capable device</p>" ) );
+    addNodeType( "NetworkSetup", tr( "IP NetworkSetup" ),
+         tr( "<p>Nodes that provide working IP NetworkSetups</p>" ) );
+    addNodeType( "fullsetup", tr( "NetworkSetup Profile" ),
+         tr( "<p>Fully configured NetworkSetup profile</p>" ) );
+    addNodeType( "GPRS", tr( "NetworkSetup to GPRS device" ),
+         tr( "<p>NetworkSetup to a GPRS capable device</p>" ) );
 
     // get access to the system
     TheSystem = new System();
@@ -201,12 +201,12 @@ void TheNSResources::findAvailableNetNodes( void ){
 
 }
 
-// used to find unique connection number
-int TheNSResources::assignConnectionNumber( void ) {
+// used to find unique NetworkSetup number
+int TheNSResources::assignNetworkSetupNumber( void ) {
       bool found = 1;
       for( int trial = 0; ; trial ++ ) {
         found = 1; 
-        for( QDictIterator<NodeCollection> it(ConnectionsMap);
+        for( QDictIterator<NetworkSetup> it(NetworkSetupsMap);
              it.current();
              ++it ) {
           if( it.current()->number() == trial ) {
@@ -245,14 +245,14 @@ const QString & TheNSResources::netNode2Description( const char * s ) {
     return NodeTypeDescriptionMap[s];
 }
 
-void TheNSResources::addConnection( NodeCollection * NC, bool Dangling ) {
+void TheNSResources::addNetworkSetup( NetworkSetup * NC, bool Dangling ) {
       ANetNodeInstance * NNI;
-      Log(( "Add Connection %s, Dangling %d\n",
+      Log(( "Add NetworkSetup %s, Dangling %d\n",
           NC->name().latin1(), Dangling ));
       if( Dangling ) {
-        DanglingConnectionsMap.insert( NC->name(), NC );
+        DanglingNetworkSetupsMap.insert( NC->name(), NC );
       } else {
-        ConnectionsMap.insert( NC->name(), NC );
+        NetworkSetupsMap.insert( NC->name(), NC );
       }
 
       // add (new) nodes to NodeList
@@ -267,31 +267,31 @@ void TheNSResources::addConnection( NodeCollection * NC, bool Dangling ) {
       }
 }
 
-void TheNSResources::removeConnection( const QString & N ) {
-      NodeCollection * NC = findConnection( N );
+void TheNSResources::removeNetworkSetup( const QString & N ) {
+      NetworkSetup * NC = findNetworkSetup( N );
       if( ! NC )
         return;
 
-      // delete netnodes in this connection
+      // delete netnodes in this NetworkSetup
       ANetNodeInstance * NNI;
       for( NNI = NC->first(); NNI != 0; NNI = NC->next() ) {
         removeNodeInstance( NNI->name() );
       }
-      if( ConnectionsMap.find( N ) ) {
-        ConnectionsMap.remove( N ); 
+      if( NetworkSetupsMap.find( N ) ) {
+        NetworkSetupsMap.remove( N ); 
       } else {
-        DanglingConnectionsMap.remove( N ); 
+        DanglingNetworkSetupsMap.remove( N ); 
       }
 
 }
 
-// dangling connections are filtered out
-NodeCollection * TheNSResources::findConnection( const QString & S ) {
-      return ConnectionsMap[ S ];
+// dangling NetworkSetups are filtered out
+NetworkSetup * TheNSResources::findNetworkSetup( const QString & S ) {
+      return NetworkSetupsMap[ S ];
 }
 
-NodeCollection *  TheNSResources::getConnection( int nr ) {
-      for( QDictIterator<NodeCollection> it(ConnectionsMap);
+NetworkSetup *  TheNSResources::getNetworkSetup( int nr ) {
+      for( QDictIterator<NetworkSetup> it(NetworkSetupsMap);
            it.current();
            ++it ) {
         if( it.current()->number() == nr ) {
@@ -301,17 +301,17 @@ NodeCollection *  TheNSResources::getConnection( int nr ) {
       return 0;
 }
 /*
-void TheNSResources::renumberConnections( void ) {
-      Name2Connection_t & M = NSResources->connections();
-      NodeCollection * NC;
+void TheNSResources::renumberNetworkSetups( void ) {
+      Name2NetworkSetup_t & M = NSResources->NetworkSetups();
+      NetworkSetup * NC;
 
-      // for all connections
-      NodeCollection::resetMaxNr();
-      for( QDictIterator<NodeCollection> it(M);
+      // for all NetworkSetups
+      NetworkSetup::resetMaxNr();
+      for( QDictIterator<NetworkSetup> it(M);
            it.current();
            ++it ) {
         NC = it.current();
-        NC->setNumber( NC->maxConnectionNumber()+1 );
+        NC->setNumber( NC->maxNetworkSetupNumber()+1 );
         NC->setModified( 1 );
       }
 }

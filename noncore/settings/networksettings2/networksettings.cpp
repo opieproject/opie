@@ -64,10 +64,10 @@ NetworkSettings::NetworkSettings( QWidget *parent,
              SIGNAL(rightButtonPressed(QListBoxItem*,const QPoint&)),
              this, SLOT(SLOT_EditNode(QListBoxItem*)) );
 
-    { Name2Connection_t & M = NSResources->connections();
-      NodeCollection * NC;
-      // for all connections
-      for( QDictIterator<NodeCollection> it(M);
+    { Name2NetworkSetup_t & M = NSResources->networkSetups();
+      NetworkSetup * NC;
+      // for all NetworkSetups
+      for( QDictIterator<NetworkSetup> it(M);
            it.current();
            ++it ) {
         NC = it.current();
@@ -81,7 +81,7 @@ NetworkSettings::NetworkSettings( QWidget *parent,
     }
 
     // if no profiles -> auto popup editing
-    if( NSResources->connections().count() == 0 ) {
+    if( NSResources->networkSetups().count() == 0 ) {
       QTimer::singleShot( 100, this, SLOT(SLOT_AddNode() ) );
     }
 
@@ -136,10 +136,10 @@ void NetworkSettings::SLOT_RefreshStates( void ) {
     QListBoxItem * LBI = Profiles_LB->item( Profiles_LB->currentItem() ); // remember
 
     if( LBI ) {
-      NodeCollection * NC;
+      NetworkSetup * NC;
       NSResources->system().probeInterfaces();
       // update current selection only
-      NC = NSResources->findConnection( LBI->text() );
+      NC = NSResources->findNetworkSetup( LBI->text() );
       if( NC ) {
         State_t OldS = NC->state();
         State_t NewS = NC->state(1);
@@ -152,10 +152,10 @@ void NetworkSettings::SLOT_RefreshStates( void ) {
 
     /* -> LATER !!
     bool is;
-    NodeCollection * NC;
+    NetworkSetup * NC;
 
     for( unsigned int i = 0; i < Profiles_LB->count() ; i ++ ) {
-      NC = NSResources->findConnection( Profiles_LB->text(i) );
+      NC = NSResources->findNetworkSetup( Profiles_LB->text(i) );
       if( NC ) {
         State_t OldS = NC->state();
         State_t NewS = NC->state(1);
@@ -190,7 +190,7 @@ void NetworkSettings::SLOT_DeleteNode( void ) {
           tr( "Removing profile" ),
           tr( "Remove selected profile ?" ), 
           1, 0 ) == 1 ) {
-      NSResources->removeConnection( LBI->text() );
+      NSResources->removeNetworkSetup( LBI->text() );
       delete LBI;
       NSD.setModified( 1 );
     }
@@ -199,15 +199,15 @@ void NetworkSettings::SLOT_DeleteNode( void ) {
 void NetworkSettings::SLOT_EditNode( QListBoxItem * LBI ) {
     QString OldName = "";
 
-    EditConnection EC( this );
+    EditNetworkSetup EC( this );
 
     if( LBI ) {
-      NodeCollection * NC = NSResources->findConnection( LBI->text() );
+      NetworkSetup * NC = NSResources->findNetworkSetup( LBI->text() );
       if( ! NC ) {
         return;
       }
       OldName = NC->name();
-      EC.setConnection( NC );
+      EC.setNetworkSetup( NC );
     }
 
     EC.showMaximized();
@@ -218,12 +218,12 @@ void NetworkSettings::SLOT_EditNode( QListBoxItem * LBI ) {
     while( 1 ) {
       if( EC.exec() == QDialog::Accepted ) {
         // toplevel item -> store
-        NodeCollection * NC = EC.connection();
+        NetworkSetup * NC = EC.networkSetup();
         if( NC->isModified() ) {
           if( LBI ) {
             if( NC->name() != OldName ) {
               // find if new name is free
-              NodeCollection * LCN = NSResources->findConnection(
+              NetworkSetup * LCN = NSResources->findNetworkSetup(
                     NC->name() );
               if( LCN ) {
                 QMessageBox::warning(
@@ -234,8 +234,8 @@ void NetworkSettings::SLOT_EditNode( QListBoxItem * LBI ) {
                 continue; // restart exec
               } // else new name
               // new name -> remove item
-              NSResources->removeConnection( OldName );
-              NSResources->addConnection( NC, 0 );
+              NSResources->removeNetworkSetup( OldName );
+              NSResources->addNetworkSetup( NC, 0 );
             } // else not changed
 
             // must add it here since change will trigger event
@@ -246,17 +246,17 @@ void NetworkSettings::SLOT_EditNode( QListBoxItem * LBI ) {
           } else {
             // new item
             int ci = Profiles_LB->count();
-            NSResources->addConnection( NC, 0 );
-            NC->setNumber( NSResources->assignConnectionNumber() );
+            NSResources->addNetworkSetup( NC, 0 );
+            NC->setNumber( NSResources->assignNetworkSetupNumber() );
             Profiles_LB->insertItem( NC->devicePixmap(), NC->name() );
             Profiles_LB->setSelected( ci, TRUE );
           }
           updateProfileState( LBI );
         }
       } else {
-        // cancelled : reset connection 
+        // cancelled : reset NetworkSetup 
         if( LBI ) {
-          NodeCollection * NC = NSResources->findConnection( LBI->text() );
+          NetworkSetup * NC = NSResources->findNetworkSetup( LBI->text() );
           NC->reassign();
         }
       }
@@ -270,7 +270,7 @@ void NetworkSettings::SLOT_ShowNode( QListBoxItem * LBI ) {
     if( LBI == 0 ) 
       return;
 
-    NodeCollection * NC = NSResources->findConnection( LBI->text() );
+    NetworkSetup * NC = NSResources->findNetworkSetup( LBI->text() );
 
     if( NC->description().isEmpty() ) {
       Description_LBL->setText( tr( "<<No description>>" ) );
@@ -353,7 +353,7 @@ void NetworkSettings::SLOT_Disable( bool T ) {
     if ( ! LBI ) 
       return;
 
-    NodeCollection * NC = NSResources->findConnection( LBI->text() );
+    NetworkSetup * NC = NSResources->findNetworkSetup( LBI->text() );
 
     Log(( "Prepare to %sable\n", (T) ? "en" : "dis" ));
     Msg = NC->setState( (T) ? Disable : Enable );
@@ -382,8 +382,8 @@ void NetworkSettings::SLOT_Up( void ) {
     if ( ! LBI ) 
       return;
 
-    NodeCollection * NC = 
-        NSResources->findConnection( LBI->text() );
+    NetworkSetup * NC = 
+        NSResources->findNetworkSetup( LBI->text() );
 
     switch( NC->state() ) {
       case Disabled : // cannot modify this state
@@ -438,8 +438,8 @@ void NetworkSettings::SLOT_Down( void ) {
     if ( ! LBI ) 
       return;
 
-    NodeCollection * NC = 
-        NSResources->findConnection( LBI->text() );
+    NetworkSetup * NC = 
+        NSResources->findNetworkSetup( LBI->text() );
 
     switch( NC->state() ) {
       case Disabled : // cannot modify this state

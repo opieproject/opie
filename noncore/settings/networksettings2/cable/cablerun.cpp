@@ -13,7 +13,7 @@ State_t CableRun::detectState( void ) {
       return Available;
 }
 
-QString CableRun::setMyState( NodeCollection *, Action_t , bool ) { 
+QString CableRun::setMyState( NetworkSetup *, Action_t , bool ) { 
       return QString();
 }
 

@@ -62,9 +62,9 @@ OTGateway::OTGateway( void ) : QObject( 0, "OTGateway" ),
       // load all peers we have ever seen
       loadKnownPeers();
 
-      // iterate over drivers and find active connections
+      // iterate over drivers and find active NetworkSetups
       // adding/updating peers
-      loadActiveConnections();
+      loadActiveNetworkSetups();
 
       // check every 4 seconds the state of BT
       timerEvent(0);
@@ -375,8 +375,8 @@ const char * OTGateway::deviceTypeToName( int cls ) {
     return "unknown";
 }
 
-PANConnectionVector OTGateway::getPANConnections( void ) {
-        PANConnectionVector V;
+PANNetworkSetupVector OTGateway::getPANNetworkSetups( void ) {
+        PANNetworkSetupVector V;
 
         struct bnep_connlist_req req;
         struct bnep_conninfo ci[48];
@@ -392,7 +392,7 @@ PANConnectionVector OTGateway::getPANConnections( void ) {
         req.cnum = 48;
         req.ci   = ci;
         if (ioctl(ctl, BNEPGETCONNLIST, &req)) {
-          odebug << "Failed to get connection list" << oendl;
+          odebug << "Failed to get NetworkSetup list" << oendl;
           ::close( ctl );
           return V;
         }
@@ -401,7 +401,7 @@ PANConnectionVector OTGateway::getPANConnections( void ) {
           V.resize( V.size() + 1 );
           if( ci[i].role == BNEP_SVC_PANU ) {
             // we are the client
-            V.insert( V.size()-1, new OTPANConnection(
+            V.insert( V.size()-1, new OTPANNetworkSetup(
                             ci[i].device,
                             batostr((bdaddr_t *) ci[i].dst)
                           ) );
@@ -510,7 +510,7 @@ bool OTGateway::removeLinkKey( unsigned int Index ) {
 }
 
 #define MAXCONNECTIONS 10
-void OTGateway::loadActiveConnections( void ) {
+void OTGateway::loadActiveNetworkSetups( void ) {
 
         struct hci_conn_list_req *cl;
         struct hci_conn_info *ci;
@@ -532,13 +532,13 @@ void OTGateway::loadActiveConnections( void ) {
             continue;
           }
 
-          // driver is up -> check connections
+          // driver is up -> check NetworkSetups
           cl->dev_id = AllDrivers[i]->devId();
           cl->conn_num = MAXCONNECTIONS;
           ci = cl->conn_info;
 
           if (ioctl( getSocket(), HCIGETCONNLIST, (void *) cl)) {
-            emit error( tr("Can't get connection list") );
+            emit error( tr("Can't get NetworkSetup list") );
             break;
           }
 
@@ -753,7 +753,7 @@ int OTGateway::releaseRFCommDevice( int devnr ) {
       dr = di;
       for (i = 0; i < dl->dev_num; i++, dr++) {
         if( dr->id == devnr ) {
-          // still in connection list 
+          // still in NetworkSetup list 
           struct rfcomm_dev_req req;
           int err;
 

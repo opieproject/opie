@@ -40,7 +40,7 @@ public :
 
 typedef QDict<ANetNode>  Name2NetNode_t;
 typedef QDict<ANetNodeInstance > Name2Instance_t;
-typedef QDict<NodeCollection> Name2Connection_t;
+typedef QDict<NetworkSetup> Name2NetworkSetup_t;
 typedef QDict<SystemFile> Name2SystemFile_t;
 
 class TheNSResources {
@@ -56,7 +56,7 @@ public :
     System & system()
       { return *TheSystem; }
 
-    int assignConnectionNumber(void);
+    int assignNetworkSetupNumber(void);
     QPixmap getPixmap( const QString & Name );
 
     Name2NetNode_t & netNodes( void ) 
@@ -103,14 +103,14 @@ public :
     const QString & netNode2Name( const char * Type );
     const QString & netNode2Description( const char * Type );
 
-    void addConnection( NodeCollection * NC, bool Dangling );
-    void removeConnection( const QString & N );
-    NodeCollection * findConnection( const QString & N );
-    NodeCollection * getConnection( int nr );
-    Name2Connection_t & connections( void )
-      { return ConnectionsMap; }
-    Name2Connection_t & danglingConnections( void )
-      { return DanglingConnectionsMap; }
+    void addNetworkSetup( NetworkSetup * NC, bool Dangling );
+    void removeNetworkSetup( const QString & N );
+    NetworkSetup * findNetworkSetup( const QString & N );
+    NetworkSetup * getNetworkSetup( int nr );
+    Name2NetworkSetup_t & networkSetups( void )
+      { return NetworkSetupsMap; }
+    Name2NetworkSetup_t & danglingNetworkSetups( void )
+      { return DanglingNetworkSetupsMap; }
 
     inline bool userKnown( void )
       { return CurrentUser.known(); }
@@ -126,11 +126,11 @@ private :
 
     QMap< QString, QString>   NodeTypeNameMap;
     QMap< QString, QString>   NodeTypeDescriptionMap;
-    // list of connections that are valid
-    Name2Connection_t         ConnectionsMap;
-    // list of connection configurations that are not valid
+    // list of networkSetups that are valid
+    Name2NetworkSetup_t         NetworkSetupsMap;
+    // list of networkSetup configurations that are not valid
     // e.g. because plugins are missing
-    Name2Connection_t         DanglingConnectionsMap;
+    Name2NetworkSetup_t         DanglingNetworkSetupsMap;
     System *                  TheSystem;
     Name2SystemFile_t         SystemFiles;
 

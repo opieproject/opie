@@ -50,14 +50,14 @@ NetworkSettingsData::NetworkSettingsData( void ) {
         // read the interface store int 'up'
         F->setName( D.path() + "/" + (*it) );
         if( F->open( IO_ReadOnly ) ) {
-          NodeCollection * NC;
+          NetworkSetup * NC;
           interfacename = TS.readLine();
           F->close();
 
           Log(( "Assign interface %s to Profile nr %d\n", 
                 interfacename.latin1(), profilenr ));
 
-          NC = NSResources->getConnection( profilenr );
+          NC = NSResources->getNetworkSetup( profilenr );
           if( NC ) {
             NC->assignInterface( 
                 NSResources->system().findInterface( interfacename ) );
@@ -99,7 +99,7 @@ void NetworkSettingsData::loadSettings( void ) {
            [NETNODETYPE] 
            Entries ...
            <EMPTYLINE>
-           [connection] 
+           [NetworkSetup] 
            Name=Name
            Node=Name
            <EMPTYLINE>
@@ -116,11 +116,11 @@ void NetworkSettingsData::loadSettings( void ) {
           continue;
         }
 
-        if( S == "connection" ) {
-          // load connections -> collections of nodes
+        if( S == "NetworkSetup" ) {
+          // load NetworkSetups -> collections of nodes
           bool Dangling;
-          NodeCollection * NC = new NodeCollection( TS, Dangling );
-          NSResources->addConnection( NC, Dangling );
+          NetworkSetup * NC = new NetworkSetup( TS, Dangling );
+          NSResources->addNetworkSetup( NC, Dangling );
         } else {
           ANetNode * NN = 0;
           ANetNodeInstance* NNI = 0;
@@ -251,26 +251,26 @@ QString NetworkSettingsData::saveSettings( void ) {
       }
     }
 
-    // good connections
-    { Name2Connection_t & M = NSResources->connections();
+    // good NetworkSetups
+    { Name2NetworkSetup_t & M = NSResources->networkSetups();
 
-      // for all connections
-      for( QDictIterator<NodeCollection> it(M);
+      // for all NetworkSetups
+      for( QDictIterator<NetworkSetup> it(M);
            it.current();
            ++it ) {
-        TS << "[connection]" << endl;
+        TS << "[NetworkSetup]" << endl;
         it.current()->save(TS);
       }
     }
 
-    // save dangling connections
-    { Name2Connection_t & M = NSResources->danglingConnections();
+    // save dangling NetworkSetups
+    { Name2NetworkSetup_t & M = NSResources->danglingNetworkSetups();
 
-      // for all connections
-      for( QDictIterator<NodeCollection> it(M);
+      // for all NetworkSetups
+      for( QDictIterator<NetworkSetup> it(M);
            it.current();
            ++it ) {
-        TS << "[connection]" << endl;
+        TS << "[NetworkSetup]" << endl;
         it.current()->save(TS);
       }
     }
@@ -283,7 +283,7 @@ QString NetworkSettingsData::saveSettings( void ) {
     //
 
 
-    for( QDictIterator<NodeCollection> it(NSResources->connections());
+    for( QDictIterator<NetworkSetup> it(NSResources->networkSetups());
          it.current();
          ++it ) {
       it.current()->setModified( 0 );
@@ -295,8 +295,8 @@ QString NetworkSettingsData::saveSettings( void ) {
 QString NetworkSettingsData::generateSettings( void ) {
     QString S = "";
     Name2SystemFile_t & SFM = NSResources->systemFiles();
-    Name2Connection_t & M = NSResources->connections();
-    NodeCollection * NC;
+    Name2NetworkSetup_t & M = NSResources->networkSetups();
+    NetworkSetup * NC;
     ANetNodeInstance * NNI;
     ANetNodeInstance * FirstWithData;
     RuntimeInfo * CurDev;
@@ -428,7 +428,7 @@ QString NetworkSettingsData::generateSettings( void ) {
         nniit.current()->setDone(0);
       }
 
-      for( QDictIterator<NodeCollection> ncit(M);
+      for( QDictIterator<NetworkSetup> ncit(M);
            ncit.current();
            ++ncit ) {
         ncit.current()->setDone(0);
@@ -488,8 +488,8 @@ QString NetworkSettingsData::generateSettings( void ) {
         return S;
       }
 
-      // find connections that want to write to this file
-      for( QDictIterator<NodeCollection> ncit(M);
+      // find NetworkSetups that want to write to this file
+      for( QDictIterator<NetworkSetup> ncit(M);
            ncit.current();
            ++ncit ) {
 
@@ -505,12 +505,12 @@ QString NetworkSettingsData::generateSettings( void ) {
           continue;
         }
 
-        Log(("Generating %s for connection %s\n",
+        Log(("Generating %s for NetworkSetup %s\n",
               SF->name().latin1(), NC->name().latin1() ));
         // find highest item that wants to write data to this file
         FirstWithData = NC->firstWithDataForFile( *SF );
 
-        // find device on which this connection works
+        // find device on which this NetworkSetup works
         CurDev = NC->device();
         // class of that node
         CurDevNN = CurDev->netNode()->nodeClass();
@@ -571,8 +571,8 @@ QString NetworkSettingsData::generateSettings( void ) {
         }
 
         // generate profile specific info
-        // for all nodeconnections that work on the same device
-        for( QDictIterator<NodeCollection> ncit2(M);
+        // for all nodeNetworkSetups that work on the same device
+        for( QDictIterator<NetworkSetup> ncit2(M);
              ncit2.current();
              ++ncit2 ) {
 
@@ -581,7 +581,7 @@ QString NetworkSettingsData::generateSettings( void ) {
             continue;
           }
 
-          Log(("Connection %s of family %s\n", 
+          Log(("NetworkSetup %s of family %s\n", 
                 ncit2.current()->name().latin1(), 
                 CurDev->name() ));
           // generate 
@@ -645,15 +645,15 @@ QString NetworkSettingsData::generateSettings( void ) {
     return S;
 }
 
-QList<NodeCollection> NetworkSettingsData::collectPossible( 
+QList<NetworkSetup> NetworkSettingsData::collectPossible( 
                     const QString & Interface ) {
-    // collect connections that can work on top of this interface
-    NodeCollection * NC;
-    QList<NodeCollection> PossibleConnections;
-    Name2Connection_t & M = NSResources->connections();
+    // collect NetworkSetups that can work on top of this interface
+    NetworkSetup * NC;
+    QList<NetworkSetup> PossibleNetworkSetups;
+    Name2NetworkSetup_t & M = NSResources->networkSetups();
 
-    // for all connections
-    for( QDictIterator<NodeCollection> it(M);
+    // for all NetworkSetups
+    for( QDictIterator<NetworkSetup> it(M);
          it.current();
          ++it ) {
       NC = it.current();
@@ -664,10 +664,10 @@ QList<NodeCollection> NetworkSettingsData::collectPossible(
         ) {
         Log( ( "Append %s for %s\n", 
               NC->name().latin1(), Interface.latin1() ));
-        PossibleConnections.append( NC );
+        PossibleNetworkSetups.append( NC );
       }
     }
-    return PossibleConnections;
+    return PossibleNetworkSetups;
 }
 
 
@@ -679,18 +679,18 @@ QList<NodeCollection> NetworkSettingsData::collectPossible(
 
 bool NetworkSettingsData::canStart( const QString & Interface ) {
     // load situation
-    NodeCollection * NC = 0;
-    QList<NodeCollection> PossibleConnections;
+    NetworkSetup * NC = 0;
+    QList<NetworkSetup> PossibleNetworkSetups;
 
-    PossibleConnections = collectPossible( Interface );
+    PossibleNetworkSetups = collectPossible( Interface );
 
     Log( ( "for %s : Possiblilies %d\n", 
-        Interface.latin1(), PossibleConnections.count() ));
-    switch( PossibleConnections.count() ) {
-      case 0 : // no connections
+        Interface.latin1(), PossibleNetworkSetups.count() ));
+    switch( PossibleNetworkSetups.count() ) {
+      case 0 : // no NetworkSetups
         break;
-      case 1 : // one connection
-        NC = PossibleConnections.first();
+      case 1 : // one NetworkSetup
+        NC = PossibleNetworkSetups.first();
         break;
       default : // need to ask user ?
         return 1;
@@ -736,7 +736,7 @@ bool NetworkSettingsData::isModified( void ) {
     if( ForceModified )
       return 1;
 
-    for( QDictIterator<NodeCollection> it(NSResources->connections());
+    for( QDictIterator<NetworkSetup> it(NSResources->networkSetups());
          it.current();
          ++it ) {
       if( it.current()->isModified() ) {
@@ -748,7 +748,7 @@ bool NetworkSettingsData::isModified( void ) {
 
 bool NetworkSettingsData::couldBeTriggered( const QString & Interface ) {
     // load situation
-    QList<NodeCollection> PossibleTriggered;
+    QList<NetworkSetup> PossibleTriggered;
 
     PossibleTriggered = collectTriggered( Interface );
 
@@ -758,17 +758,17 @@ bool NetworkSettingsData::couldBeTriggered( const QString & Interface ) {
     return ( PossibleTriggered.count() ) ? 1 : 0;
 }
 
-QList<NodeCollection> NetworkSettingsData::collectTriggered( 
+QList<NetworkSetup> NetworkSettingsData::collectTriggered( 
                       const QString & Interface ) {
 
-    // collect connections that could be triggered by this interface
-    NodeCollection * NC;
-    QList<NodeCollection> PossibleTriggered;
+    // collect NetworkSetups that could be triggered by this interface
+    NetworkSetup * NC;
+    QList<NetworkSetup> PossibleTriggered;
 
-    // for all connections
-    Name2Connection_t & M = NSResources->connections();
+    // for all NetworkSetups
+    Name2NetworkSetup_t & M = NSResources->networkSetups();
 
-    for( QDictIterator<NodeCollection> it(M);
+    for( QDictIterator<NetworkSetup> it(M);
          it.current();
          ++it ) {
       NC = it.current();

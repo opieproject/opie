@@ -9,7 +9,7 @@ ActivateProfile::ActivateProfile( const char * Interface ) :
 
     DeviceName_LBL->setText( Interface );
     Profiles_LB->clear();
-    for( NodeCollection * NC = Possible.first();
+    for( NetworkSetup * NC = Possible.first();
          NC;
          NC = Possible.next() ) {
       Profiles_LB->insertItem( NC->devicePixmap(), 

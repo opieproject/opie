@@ -122,7 +122,7 @@ short AGPRSDevice::generateFile( SystemFile & SF,
       SF << "noauth" << oendl;
       SF << "user " << Data.User << oendl;
       SF << "connect \"/usr/sbin/chat -s -v -f /etc/chatscripts/" 
-         << removeSpaces( connection()->name() ) 
+         << removeSpaces( networkSetup()->name() ) 
          << "\"" 
          << oendl;
       SF << "ipcp-accept-local" << oendl;
@@ -135,7 +135,7 @@ short AGPRSDevice::generateFile( SystemFile & SF,
       }
       if( Data.Debug ) {
         SF << "logfile /tmp/" 
-           << removeSpaces( connection()->name() ) 
+           << removeSpaces( networkSetup()->name() ) 
            << oendl;
         for( int i = 0; i < Data.Debug; i ++ ) {
           SF << "debug" << oendl;
@@ -146,9 +146,9 @@ short AGPRSDevice::generateFile( SystemFile & SF,
       SF << "lcp-echo-interval 0" << oendl;
       SF << "lcp-echo-failure 0" << oendl;
       SF << "usepeerdns" << oendl;
-      SF << "linkname " << removeSpaces( connection()->name() ) << oendl;
+      SF << "linkname " << removeSpaces( networkSetup()->name() ) << oendl;
       SF << "nopersist" << oendl;
-      SF << "ipparam " << removeSpaces( connection()->name() ) <<oendl;
+      SF << "ipparam " << removeSpaces( networkSetup()->name() ) <<oendl;
       SF << "maxfail 1" << oendl;
       return 0;
     } else if( SF.name() == "extra" ) {
@@ -192,7 +192,7 @@ short AGPRSDevice::generateFile( SystemFile & SF,
         SF << "nameserver "
            << Data.DNS1
            << " # profile "
-           << removeSpaces( connection()->name() )
+           << removeSpaces( networkSetup()->name() )
            <<oendl;
       }
 
@@ -200,7 +200,7 @@ short AGPRSDevice::generateFile( SystemFile & SF,
         SF << "nameserver "
            << Data.DNS2
            << " # profile "
-           << removeSpaces( connection()->name() )
+           << removeSpaces( networkSetup()->name() )
            <<oendl;
       }
     }
@@ -211,19 +211,19 @@ bool AGPRSDevice::openFile( SystemFile & SF ) {
     if( SF.name() == "peers" ) {
       SF.setPath( 
           QString( "/etc/ppp/peers/" ) + 
-              removeSpaces( connection()->name() )
+              removeSpaces( networkSetup()->name() )
           );
       return 1;
     } else if ( SF.name() == "chatscripts" ) {
       SF.setPath( 
           QString( "/etc/chatscripts/" ) + 
-              removeSpaces( connection()->name() )
+              removeSpaces( networkSetup()->name() )
           );
       return 1;
     } else if ( SF.name() == "extra" ) {
       SF.setPath( 
           QString( "/etc/ppp/" ) + 
-              removeSpaces( connection()->name() ) + ".fixed"
+              removeSpaces( networkSetup()->name() ) + ".fixed"
           );
       return 1;
     }

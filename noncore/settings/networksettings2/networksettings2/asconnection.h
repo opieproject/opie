@@ -4,12 +4,12 @@
 #include <resources.h>
 
 // pure virtual (component oriented) interface of any
-// plugin that offers a connection
-class AsConnection : public RuntimeInfo {
+// plugin that offers a networkSetup
+class AsNetworkSetup : public RuntimeInfo {
 
 public :
 
-    AsConnection( ANetNodeInstance * NNI ) :
+    AsNetworkSetup( ANetNodeInstance * NNI ) :
         RuntimeInfo( NNI ) { 
     }
 

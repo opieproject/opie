@@ -15,5 +15,5 @@ public :
 private :
 
       NetworkSettingsData NSD;
-      QList<NodeCollection> Possible;
+      QList<NetworkSetup> Possible;
 };

@@ -20,7 +20,7 @@ public :
 
 protected :
 
-      QString setMyState( NodeCollection * , Action_t, bool )
+      QString setMyState( NetworkSetup * , Action_t, bool )
         { return QString(); }
 };
 

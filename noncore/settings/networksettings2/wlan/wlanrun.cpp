@@ -11,7 +11,7 @@ State_t WLanRun::detectState( void ) {
     // available : card found and assigned to us or free
     // up : card found and assigned to us and up
 
-    NodeCollection * NC = nodeCollection();
+    NetworkSetup * NC = networkSetup();
     QString S = QString( "/tmp/profile-%1.up" ).arg(NC->number());
     System & Sys = NSResources->system();
     InterfaceInfo * Run;
@@ -70,7 +70,7 @@ State_t WLanRun::detectState( void ) {
 
 }
 
-QString WLanRun::setMyState( NodeCollection * , Action_t , bool ) {
+QString WLanRun::setMyState( NetworkSetup * , Action_t , bool ) {
 
     // we only handle activate and deactivate
     return QString();
@@ -94,10 +94,10 @@ InterfaceInfo * WLanRun::getInterface( void ) {
           )
         ) {
         // this is a LAN card
-        if( Run->assignedConnection() == netNode()->connection() ) {
+        if( Run->assignedToNetworkSetup() == netNode()->networkSetup() ) {
           // assigned to us
           return Run;
-        } else if( Run->assignedConnection() == 0 ) {
+        } else if( Run->assignedToNetworkSetup() == 0 ) {
           // free
           best = Run;
         }

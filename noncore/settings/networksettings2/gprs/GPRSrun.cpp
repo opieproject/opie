@@ -11,7 +11,7 @@ State_t GPRSRun::detectState( void ) {
 
       // is pppd still running ?
       // is rfcomm still active
-      NodeCollection * NC = nodeCollection();
+      NetworkSetup * NC = networkSetup();
       InterfaceInfo * I = NC->assignedInterface();
 
       QDir D("/var/run");
@@ -62,7 +62,7 @@ State_t GPRSRun::detectState( void ) {
       return Unknown;
 }
 
-QString GPRSRun::setMyState( NodeCollection * NC, Action_t A , bool ) { 
+QString GPRSRun::setMyState( NetworkSetup * NC, Action_t A , bool ) { 
 
     if( A == Up ) {
       // start ppp on deviceFile

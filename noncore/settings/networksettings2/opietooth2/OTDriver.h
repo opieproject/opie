@@ -12,7 +12,7 @@
 #define OTDRIVER_H
 
 /*
- * This class handles the connection with the BlueZ libraries, implements
+ * This class handles the networkSetup with the BlueZ libraries, implements
  * most of the bluetooth-related functions and owns the KBTDevice class
  * that is a single local bluetooth device representation.
  * It is used as a Singleton pattern thru the getDefaultConnector() method.
@@ -118,7 +118,7 @@ public:
 
       /*
        * Returns the file descriptor for the local
-       * connection to this device
+       * networkSetup to this device
        */
       int fd() const 
           { return Fd; };

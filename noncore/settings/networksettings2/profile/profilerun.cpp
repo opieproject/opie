@@ -3,13 +3,17 @@
 #include "profilerun.h"
 
 State_t ProfileRun::detectState( void ) { 
+    InterfaceInfo * II = networkSetup()->assignedInterface();
+
+    Log(( "Interface %p %p %p: %d\n", II, 
+            netNode(), netNode()->networkSetup(), (II) ? II->IsUp : 0 ));
     if( Data->Disabled ) {
       return Disabled;
     } 
     return Unknown;
 }
 
-QString ProfileRun::setMyState( NodeCollection * NC, Action_t A, bool ) { 
+QString ProfileRun::setMyState( NetworkSetup * NC, Action_t A, bool ) { 
     odebug << "Profile " << Data->Disabled << oendl;
     if( A == Disable ) {
       if( ! Data->Disabled ) {

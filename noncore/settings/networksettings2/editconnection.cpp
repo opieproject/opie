@@ -85,10 +85,10 @@ void MyQListViewItem::paintCell( QPainter *p, const QColorGroup &cg,
 //
 //
 
-bool EditConnection::AutoCollapse = 1;
+bool EditNetworkSetup::AutoCollapse = 1;
 
-EditConnection::EditConnection( QWidget* parent ) :
-      EditConnectionGUI( parent, 0, TRUE ), TmpCollection() {
+EditNetworkSetup::EditNetworkSetup( QWidget* parent ) :
+      EditNetworkSetupGUI( parent, 0, TRUE ), TmpCollection() {
 
       Tab_TB->setTabEnabled( Setup_FRM, FALSE );
       Setup_FRM->setEnabled( FALSE );
@@ -105,7 +105,7 @@ EditConnection::EditConnection( QWidget* parent ) :
       buildFullTree();
 }
 
-NodeCollection * EditConnection::getTmpCollection( void ) {
+NetworkSetup * EditNetworkSetup::getTmpCollection( void ) {
 
       if( TmpIsValid ) 
         // content is stil OK
@@ -119,7 +119,9 @@ NodeCollection * EditConnection::getTmpCollection( void ) {
           delete it.current();
         }
       }
+
       TmpCollection.clear();
+      TmpCollection.copyFrom( *SelectedNodes );
 
       // update content
       QListViewItem * it = Nodes_LV->firstChild();
@@ -193,8 +195,8 @@ NodeCollection * EditConnection::getTmpCollection( void ) {
       return &(TmpCollection);
 }
 
-// pass a connection NodeCollection to be edited
-void EditConnection::setConnection( NodeCollection * NC ) {
+// pass a NetworkSetup NetworkSetup to be edited
+void EditNetworkSetup::setNetworkSetup( NetworkSetup * NC ) {
       ANetNodeInstance * NNI;
       ANetNode * NN;
 
@@ -243,8 +245,8 @@ void EditConnection::setConnection( NodeCollection * NC ) {
             // probably INCOMPATIBEL collection OR Missing plugin
             QMessageBox::warning(
                 0, 
-                tr( "Error presentig Connection" ),
-                tr( "<p>Old connection or missing plugin \"<i>%1</i>\"</p>" ).
+                tr( "Error presentig NetworkSetup" ),
+                tr( "<p>Old NetworkSetup or missing plugin \"<i>%1</i>\"</p>" ).
                     arg(NNI->nodeClass()->name()) );
             return;
           }
@@ -258,14 +260,14 @@ void EditConnection::setConnection( NodeCollection * NC ) {
             if( NNI ) {
               QMessageBox::warning(
                   0, 
-                  tr( "Error presentig Connection" ),
-                  tr( "<p>Old connection or missing plugin \"<i>%1</i>\"</p>" ).
+                  tr( "Error presentig NetworkSetup" ),
+                  tr( "<p>Old NetworkSetup or missing plugin \"<i>%1</i>\"</p>" ).
                       arg(NNI->nodeClass()->name()) );
             } else {
               QMessageBox::warning(
                   0, 
-                  tr( "Error presentig Connection" ),
-                  tr( "<p>Missing connection\"<i>%1</i>\"</p>" ).
+                  tr( "Error presentig NetworkSetup" ),
+                  tr( "<p>Missing NetworkSetup\"<i>%1</i>\"</p>" ).
                       arg(it->text(0)) );
             }
             return;
@@ -276,11 +278,11 @@ void EditConnection::setConnection( NodeCollection * NC ) {
 }
 
 // get result of editing (either new OR updated collection
-NodeCollection * EditConnection::connection( void ) {
+NetworkSetup * EditNetworkSetup::networkSetup( void ) {
 
       if( SelectedNodes == 0 ) {
         // new collection 
-        SelectedNodes = new NodeCollection;
+        SelectedNodes = new NetworkSetup;
       }
 
       // clean out old entries
@@ -305,7 +307,7 @@ NodeCollection * EditConnection::connection( void ) {
 }
 
 // Build device tree -> start 
-void EditConnection::buildFullTree( void ) {
+void EditNetworkSetup::buildFullTree( void ) {
     ANetNode * NN;
 
     // toplevel item
@@ -319,7 +321,7 @@ void EditConnection::buildFullTree( void ) {
     Nodes_LV->setSelected( TheTop, TRUE );
 
     // find all Nodes that are toplevel nodes -> ie provide
-    // TCP/IP Connection
+    // TCP/IP NetworkSetup
     for( QDictIterator<ANetNode> Iter(NSResources->netNodes());
          Iter.current();
          ++Iter ) {
@@ -342,7 +344,7 @@ void EditConnection::buildFullTree( void ) {
 }
 
 // Build device tree -> help function 
-void EditConnection::buildSubTree( QListViewItem * it, ANetNode *NN ) {
+void EditNetworkSetup::buildSubTree( QListViewItem * it, ANetNode *NN ) {
     ANetNode::NetNodeList & NNL = NN->alternatives();
 
     if( NNL.size() > 1 ) {
@@ -378,11 +380,11 @@ void EditConnection::buildSubTree( QListViewItem * it, ANetNode *NN ) {
 }
 
 // Clicked ok OK button
-void EditConnection::accept( void ) {
+void EditNetworkSetup::accept( void ) {
     if( ! haveCompleteConfig( 0 ) || Name_LE->text().isEmpty() ) {
       QMessageBox::warning(
           0, 
-          tr( "Closing Connection Setup" ),
+          tr( "Closing NetworkSetup Setup" ),
           tr( "Definition not complete or no name" ) );
       return;
     }
@@ -418,12 +420,12 @@ void EditConnection::accept( void ) {
 }
 
 // triggered by CB
-void EditConnection::SLOT_AutoCollapse( bool b ) {
+void EditNetworkSetup::SLOT_AutoCollapse( bool b ) {
     AutoCollapse = b;
 }
 
 // clicked on node in tree -> update GUI
-void EditConnection::SLOT_SelectNode( QListViewItem * it ) {
+void EditNetworkSetup::SLOT_SelectNode( QListViewItem * it ) {
     ANetNode * NN;
     if( it == 0 || it->depth() == 0 ) {
       Description_LBL->setText( 
@@ -465,7 +467,7 @@ void EditConnection::SLOT_SelectNode( QListViewItem * it ) {
 }
 
 // cliecked on TAB to go to setup
-void EditConnection::SLOT_AlterTab( const QString & S ) {
+void EditNetworkSetup::SLOT_AlterTab( const QString & S ) {
     if( S == tr( "Setup" ) && Setup_FRM->isEnabled() ) {
       // switched to setup -> update CB and populate ws with
       // forms for devices
@@ -514,7 +516,7 @@ void EditConnection::SLOT_AlterTab( const QString & S ) {
 }
 
 // update visual feedback of selection state
-void EditConnection::updateGUI( QListViewItem * it, ANetNode * NN ) {
+void EditNetworkSetup::updateGUI( QListViewItem * it, ANetNode * NN ) {
 
     bool HCC = haveCompleteConfig( it );
     Tab_TB->setTabEnabled( Setup_FRM, HCC );
@@ -540,7 +542,7 @@ void EditConnection::updateGUI( QListViewItem * it, ANetNode * NN ) {
                     (NN->alternatives().size() > 1) );
 }
 
-void EditConnection::disableTree( QListViewItem * it, bool Mode ) {
+void EditNetworkSetup::disableTree( QListViewItem * it, bool Mode ) {
     while( it ) {
       // disable sbl's chidren
       it->setSelectable( Mode );
@@ -552,7 +554,7 @@ void EditConnection::disableTree( QListViewItem * it, bool Mode ) {
 }
 
 // pah : ParentHasAlternatives
-void EditConnection::enablePath( QListViewItem * it, bool pha ) {
+void EditNetworkSetup::enablePath( QListViewItem * it, bool pha ) {
     while( it ) {
       ANetNode * NN;
       NN = (*Mapping)[it];
@@ -589,7 +591,7 @@ void EditConnection::enablePath( QListViewItem * it, bool pha ) {
 }
 
 // do we have a complete configuration (all needs are provided for ?)
-bool EditConnection::haveCompleteConfig( QListViewItem * it ) {
+bool EditNetworkSetup::haveCompleteConfig( QListViewItem * it ) {
 
     // check if all below this level is selected
     it = ( it ) ?it : Nodes_LV->firstChild();

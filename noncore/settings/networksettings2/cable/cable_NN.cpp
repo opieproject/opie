@@ -15,7 +15,7 @@ static const char * CableProvides[] =
 /**
  * Constructor, find all of the possible interfaces
  */
-CableNetNode::CableNetNode() : ANetNode(tr("Cable Connection")) {
+CableNetNode::CableNetNode() : ANetNode(tr("Cable NetworkSetup")) {
 }
 
 /**

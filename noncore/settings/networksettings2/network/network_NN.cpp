@@ -12,7 +12,7 @@ static const char * NetworkNeeds[] =
     };
 
 static const char * NetworkProvides[] = 
-    { "connection",
+    { "NetworkSetup",
       0
     };
 

@@ -22,11 +22,11 @@ public :
 
 protected :
 
-      QString setMyState( NodeCollection * , Action_t, bool );
+      QString setMyState( NetworkSetup * , Action_t, bool );
 
 private :
 
-      bool hasFreePANConnection( bool Grab = 0 );
+      bool hasFreePANNetworkSetup( bool Grab = 0 );
 
       BluetoothBNEPData &         Data;
       Opietooth2::OTGateway *     OT;

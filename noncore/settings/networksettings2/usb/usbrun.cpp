@@ -10,7 +10,7 @@ State_t USBRun::detectState( void ) {
     // available : card found and assigned to us or free
     // up : card found and assigned to us and up
 
-    NodeCollection * NC = nodeCollection();
+    NetworkSetup * NC = networkSetup();
     QString S = QString( "/tmp/profile-%1.up" ).arg(NC->number());
     System & Sys = NSResources->system();
     InterfaceInfo * Run;
@@ -61,7 +61,7 @@ State_t USBRun::detectState( void ) {
     return Unavailable;
 }
 
-QString USBRun::setMyState( NodeCollection * NC, Action_t A, bool ) {
+QString USBRun::setMyState( NetworkSetup * NC, Action_t, bool ) {
 
     InterfaceInfo * I = getInterface();
 
@@ -97,11 +97,11 @@ InterfaceInfo * USBRun::getInterface( void ) {
           Run->CardType == ARPHRD_ETHER
         ) {
         // this is a USB card
-        if( Run->assignedConnection() == netNode()->connection() ) {
+        if( Run->assignedToNetworkSetup() == netNode()->networkSetup() ) {
           // assigned to us
           return Run;
         } else if( ! Run->IsUp &&
-                   Run->assignedConnection() == 0 ) {
+                   Run->assignedToNetworkSetup() == 0 ) {
           // free
           best = Run;
         } // UP or not assigned to us

@@ -15,7 +15,7 @@
 // difference feature interfaces
 class AsDevice;
 class AsLine;
-class AsConnection;
+class AsNetworkSetup;
 class AsFullSetup;
 
 // needed for plugin creation function
@@ -23,7 +23,7 @@ class AsFullSetup;
 
 class ANetNode;
 class ANetNodeInstance;
-class NodeCollection;
+class NetworkSetup;
 class QTextStream;
 class RuntimeInfo;
 class InterfaceInfo;
@@ -39,20 +39,20 @@ typedef enum State {
     Unchecked = 0,
     // if we cannot determine the state
     Unknown = 1,
-    // if connection cannot be established e.g. because
+    // if networkSetup cannot be established e.g. because
     // the hardware is not available
     Unavailable = 2,
-    // if the connection cannot be establishec but NOT
+    // if the networkSetup cannot be establishec but NOT
     // because it is physically impossible but because
     // it has been disabled for FUNCTIONAL reasons
     Disabled = 3,
-    // if connection is available to is currently down
+    // if networkSetup is available to is currently down
     // i.e. the corresponding hardware is not activated
     Off = 4,
-    // if connection is available to be used (i.e. the
+    // if networkSetup is available to be used (i.e. the
     // devices if fully ready to be used
     Available = 5,
-    // if connection is being used
+    // if networkSetup is being used
     IsUp = 6
 } State_t;
 
@@ -65,9 +65,9 @@ typedef enum Action {
     Activate = 2,
     // bring the hardware down -> to off
     Deactivate = 3,
-    // bring the connection up -> to IsUp
+    // bring the networkSetup up -> to IsUp
     Up = 4,
-    // bring the connection down -> to Available
+    // bring the networkSetup down -> to Available
     Down = 5
 } Action_t;
 
@@ -91,7 +91,7 @@ public:
     inline void setDone( int D ) 
       { Done = D; }
 
-    // does this Node provide a Connection
+    // does this Node provide a NetworkSetup
     bool isToplevel( void );
 
     // set the value of an attribute
@@ -245,10 +245,10 @@ public:
     inline const char ** needs( void )
       { return NodeType->needs(); }
 
-    inline void setConnection( NodeCollection * NC ) 
-      { Connection = NC; }
-    inline NodeCollection * connection( void ) 
-      { return Connection; }
+    inline void setNetworkSetup( NetworkSetup * NC ) 
+      { TheNetworkSetup = NC; }
+    inline NetworkSetup * networkSetup( void ) 
+      { return TheNetworkSetup; }
 
     //
     //
@@ -315,8 +315,8 @@ protected :
     virtual void saveSpecificAttribute( QTextStream & ) = 0;
 
     ANetNode * NodeType;
-    // connection to which this node belongs to
-    NodeCollection * Connection;
+    // networkSetup to which this node belongs to
+    NetworkSetup * TheNetworkSetup;
     QString   Description;
     bool      IsModified;
     // true if this nodeinstance was just created (and not
@@ -378,7 +378,7 @@ public :
 
       //
       //
-      // methods to be overloaded by connection capable
+      // methods to be overloaded by networkSetup capable
       // runtimes
       //
       //
@@ -475,12 +475,12 @@ public :
       inline ANetNodeInstance * netNode() 
         { return NNI; }
 
-      inline NodeCollection * nodeCollection() 
-        { return NNI->connection(); }
+      inline NetworkSetup * networkSetup() 
+        { return NNI->networkSetup(); }
 
       virtual State_t detectState( void ) = 0;
       // public API to set the state
-      virtual QString setState( NodeCollection * NC, 
+      virtual QString setState( NetworkSetup * NC, 
                                 Action_t A, 
                                 bool Force = 0 );
 
@@ -497,21 +497,24 @@ signals :
 protected :
 
       // set state of this node (private API)
-      virtual QString setMyState( NodeCollection * NC, 
+      virtual QString setMyState( NetworkSetup * NC, 
                                 Action_t A, 
                                 bool Force = 0 ) = 0;
 
-      // connection this runtime info belongs to
+      // networkSetup this runtime info belongs to
       ANetNodeInstance * NNI;
 };
 
-class NodeCollection : public QList<ANetNodeInstance> {
+class NetworkSetup : public QList<ANetNodeInstance> {
 
 public :
 
-      NodeCollection( void );
-      NodeCollection( QTextStream & TS, bool & Dangling );
-      ~NodeCollection( void );
+      NetworkSetup( void );
+      NetworkSetup( QTextStream & TS, bool & Dangling );
+      ~NetworkSetup( void );
+
+      // copy settings from NC to this 
+      void copyFrom( const NetworkSetup & NC );
 
       inline int done( void ) 
         { return Done; }
@@ -543,15 +546,15 @@ public :
 
       // assign the interface to this device
       inline void assignInterface( InterfaceInfo * NI ) {
-        if( NI == 0 ) {
-          if( AssignedInterface ) {
-            AssignedInterface->assignConnection( 0 );
-          }
+        // cleanup previous
+        if( AssignedInterface ) {
+          AssignedInterface->assignToNetworkSetup( 0 );
+        }
+        if( NI ) {
+          // assign new
+          NI->assignToNetworkSetup( this );
         }
         AssignedInterface = NI;
-        if( AssignedInterface ) {
-          AssignedInterface->assignConnection( this );
-        }
       }
 
       inline RuntimeInfo * device() {
@@ -577,7 +580,7 @@ public :
 
       void append( ANetNodeInstance * NNI );
 
-      // makes sure that all items in the connection point to 
+      // makes sure that all items in the networkSetup point to 
       // that connectoin
       void reassign( void );
 
@@ -619,7 +622,7 @@ private :
 
       long Number;
 
-      // state of this connection
+      // state of this networkSetup
       State_t CurrentState;
 
       QString Name;

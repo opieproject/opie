@@ -20,7 +20,7 @@ WLanEdit::WLanEdit( QWidget * Parent, ANetNodeInstance * TNNI ) :
       NNI = TNNI;
       Dev = NNI->runtime()->device();
       WE = 0;
-      if( ( II = NNI->connection()->assignedInterface() ) ) {
+      if( ( II = NNI->networkSetup()->assignedInterface() ) ) {
         // show data
         WE = new WExtensions( II->Name );
 

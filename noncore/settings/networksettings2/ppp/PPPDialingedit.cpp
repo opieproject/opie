@@ -16,9 +16,8 @@ QString PPPDialingEdit::acceptable( void ) {
     return QString();
 }
 
-bool PPPDialingEdit::commit( PPPData & D ) {
-    bool SM;
-    return SM;
+bool PPPDialingEdit::commit( PPPData & ) {
+    return true;
 }
 
 void PPPDialingEdit::showData( PPPData & D ) {

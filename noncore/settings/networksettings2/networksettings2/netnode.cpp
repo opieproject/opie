@@ -125,7 +125,7 @@ void ANetNodeInstance::saveAttributes( QTextStream & TS ) {
 }
 
 ANetNodeInstance * ANetNodeInstance::nextNode( void ) {
-    return connection()->findNext( this );
+    return networkSetup()->findNext( this );
 }
 
 //
@@ -134,7 +134,7 @@ ANetNodeInstance * ANetNodeInstance::nextNode( void ) {
 //
 //
 
-NodeCollection::NodeCollection( void ) : QList<ANetNodeInstance>() {
+NetworkSetup::NetworkSetup( void ) : QList<ANetNodeInstance>() {
     IsModified = 0;
     Index = -1;
     Name="";
@@ -145,7 +145,7 @@ NodeCollection::NodeCollection( void ) : QList<ANetNodeInstance>() {
     Done = 0;
 }
 
-NodeCollection::NodeCollection( QTextStream & TS, bool & Dangling ) :
+NetworkSetup::NetworkSetup( QTextStream & TS, bool & Dangling ) :
       QList<ANetNodeInstance>() {
     long idx;
     QString S, A, N;
@@ -187,7 +187,7 @@ NodeCollection::NodeCollection( QTextStream & TS, bool & Dangling ) :
           append( NNI );
         } else {
           // could not find a node type -> collection invalid
-          Log(( "Node %s missing -> connection dangling\n", 
+          Log(( "Node %s missing -> NetworkSetup dangling\n", 
                       N.latin1() ));
           // create placeholder for this dangling NNI
           NNI = new ErrorNNI( N );
@@ -200,20 +200,20 @@ NodeCollection::NodeCollection( QTextStream & TS, bool & Dangling ) :
           Name.latin1(), count() ));
 }
 
-NodeCollection::~NodeCollection( void ) {
+NetworkSetup::~NetworkSetup( void ) {
 }
 
-const QString & NodeCollection::description( void ) {
+const QString & NetworkSetup::description( void ) {
     ANetNodeInstance * NNI = getToplevel();
     return (NNI) ? NNI->runtime()->description() : Name;
 }
 
-void NodeCollection::append( ANetNodeInstance * NNI ) {
-    NNI->setConnection( this );
+void NetworkSetup::append( ANetNodeInstance * NNI ) {
+    NNI->setNetworkSetup( this );
     QList<ANetNodeInstance>::append( NNI );
 }
 
-void NodeCollection::save( QTextStream & TS ) {
+void NetworkSetup::save( QTextStream & TS ) {
 
     TS << "name=" << quote( Name ) << endl;
     TS << "number=" << number() << endl;
@@ -228,7 +228,7 @@ void NodeCollection::save( QTextStream & TS ) {
     IsNew = 0;
 }
 
-ANetNodeInstance * NodeCollection::getToplevel( void ) {
+ANetNodeInstance * NetworkSetup::getToplevel( void ) {
     ANetNodeInstance * NNI = 0;
     for( QListIterator<ANetNodeInstance> it(*this); 
          it.current();
@@ -241,7 +241,7 @@ ANetNodeInstance * NodeCollection::getToplevel( void ) {
     return 0;
 }
 
-ANetNodeInstance * NodeCollection::findByName( const QString & S ) {
+ANetNodeInstance * NetworkSetup::findByName( const QString & S ) {
     ANetNodeInstance * NNI = 0;
     for( QListIterator<ANetNodeInstance> it(*this); 
          it.current();
@@ -254,7 +254,7 @@ ANetNodeInstance * NodeCollection::findByName( const QString & S ) {
     return 0;
 }
 
-ANetNodeInstance * NodeCollection::findNext( ANetNodeInstance * NNI ) {
+ANetNodeInstance * NetworkSetup::findNext( ANetNodeInstance * NNI ) {
     ANetNodeInstance * NNNI;
 
     if( ! NNI )
@@ -272,7 +272,7 @@ ANetNodeInstance * NodeCollection::findNext( ANetNodeInstance * NNI ) {
     return 0; // no more next
 }
 
-int NodeCollection::compareItems( QCollection::Item I1, 
+int NetworkSetup::compareItems( QCollection::Item I1, 
                                   QCollection::Item I2 ) {
     ANetNodeInstance * NNI1, * NNI2;
     NNI1 = (ANetNodeInstance *)I1;
@@ -290,7 +290,7 @@ static char * State2PixmapTbl[] = {
     "connected" // up 
 };
 
-QPixmap NodeCollection::devicePixmap( void ) {
+QPixmap NetworkSetup::devicePixmap( void ) {
     QPixmap pm = NSResources->getPixmap(
             getToplevel()->nextNode()->pixmapName()+"-large");
 
@@ -308,11 +308,11 @@ QPixmap NodeCollection::devicePixmap( void ) {
     return pm;
 }
 
-QPixmap NodeCollection::statePixmap( State_t S) {
+QPixmap NetworkSetup::statePixmap( State_t S) {
     return NSResources->getPixmap( State2PixmapTbl[S] );
 }
 
-QString NodeCollection::stateName( State_t S) {
+QString NetworkSetup::stateName( State_t S) {
     switch( S ) {
       case Unknown :
         return qApp->translate( "networksettings2", "Unknown");
@@ -333,23 +333,23 @@ QString NodeCollection::stateName( State_t S) {
     return QString("");
 }
 
-void NodeCollection::reassign( void ) {
+void NetworkSetup::reassign( void ) {
     for( QListIterator<ANetNodeInstance> it(*this); 
          it.current();
          ++it ) {
-      it.current()->setConnection( this );
+      it.current()->setNetworkSetup( this );
     }
 }
 
-const QStringList & NodeCollection::triggers() {
+const QStringList & NetworkSetup::triggers() {
     return getToplevel()->runtime()->triggers();
 }
 
-bool NodeCollection::hasDataForFile( SystemFile & S ) {
+bool NetworkSetup::hasDataForFile( SystemFile & S ) {
     return ( firstWithDataForFile( S ) != 0 );
 }
 
-ANetNodeInstance * NodeCollection::firstWithDataForFile( SystemFile & S ) {
+ANetNodeInstance * NetworkSetup::firstWithDataForFile( SystemFile & S ) {
     for( QListIterator<ANetNodeInstance> it(*this); 
          it.current();
          ++it ) {
@@ -360,14 +360,14 @@ ANetNodeInstance * NodeCollection::firstWithDataForFile( SystemFile & S ) {
     return 0;
 }
 
-State_t NodeCollection::state( bool Update ) {
+State_t NetworkSetup::state( bool Update ) {
     State_t NodeState;
 
     if( CurrentState == Unchecked || Update ) {
       // collect states of all nodes until with get the 'higest'
       // state possible
 
-      Log(( "Connection %s state %s\n", 
+      Log(( "NetworkSetup %s state %s\n", 
                 Name.latin1(), StateName[CurrentState] ));
 
       CurrentState = Unknown;
@@ -395,7 +395,7 @@ State_t NodeCollection::state( bool Update ) {
     return CurrentState;
 }
 
-QString NodeCollection::setState( Action_t A, bool Force ) {
+QString NetworkSetup::setState( Action_t A, bool Force ) {
 
     QString msg;
     Action_t Actions[10];
@@ -492,13 +492,22 @@ QString NodeCollection::setState( Action_t A, bool Force ) {
     return QString();
 }
 
+void NetworkSetup::copyFrom( const NetworkSetup & N ) {
+    Number = N.Number;
+    CurrentState = N.CurrentState;
+    Name = N.Name;
+    IsNew = N.IsNew;
+    Index = N.Index;
+    AssignedInterface = N.AssignedInterface;
+}
+
 //
 //
 // RuntimeInfo
 //
 //
 
-QString RuntimeInfo::setState( NodeCollection * NC, 
+QString RuntimeInfo::setState( NetworkSetup * NC, 
                                Action_t A, 
                                bool Force ) {
     QString M;

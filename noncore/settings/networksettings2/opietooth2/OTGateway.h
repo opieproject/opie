@@ -17,11 +17,11 @@ class OTDriver;
 class OTDevice;
 class OTPeer;
 class OTInquiry;
-class OTPANConnection;
+class OTPANNetworkSetup;
 class OTLinkKey;
 
 typedef QVector<OTPeer> PeerVector;
-typedef QVector<OTPANConnection> PANConnectionVector;
+typedef QVector<OTPANNetworkSetup> PANNetworkSetupVector;
 typedef QArray<OTLinkKey> LinkKeyArray;
 
 class OTLinkKey {
@@ -43,11 +43,11 @@ public :
     OTDeviceAddress To;
 };
 
-class OTPANConnection {
+class OTPANNetworkSetup {
 
 public :
 
-    OTPANConnection( const QString & Dev, const QString & CT ) {
+    OTPANNetworkSetup( const QString & Dev, const QString & CT ) {
       Device = Dev;
       ConnectedTo = CT;
     }
@@ -92,7 +92,7 @@ public :
         { return AllDrivers.count() == 0 ? 0 : AllDrivers[nr]; }
       void updateDrivers();
 
-      PANConnectionVector getPANConnections();
+      PANNetworkSetupVector getPANNetworkSetups();
 
       // scan neighbourhood using device
       void scanNeighbourhood( OTDriver * D = 0 );
@@ -173,7 +173,7 @@ protected :
 
 private :
 
-      void loadActiveConnections( void );
+      void loadActiveNetworkSetups( void );
       void loadKnownPeers( void );
       void saveKnownPeers( void );
       bool isConnectedTo( int devid,

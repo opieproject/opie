@@ -20,7 +20,7 @@ State_t BluetoothRFCOMMRun::detectState( void ) {
         OT = OTGateway::getOTGateway();
       }
 
-      if( deviceNrOfConnection() >= 0 ) {
+      if( deviceNrOfNetworkSetup() >= 0 ) {
         return Available;
       }
 
@@ -31,7 +31,7 @@ State_t BluetoothRFCOMMRun::detectState( void ) {
       return ( OT->isEnabled() ) ? Off : Unavailable;
 }
 
-QString BluetoothRFCOMMRun::setMyState( NodeCollection *, 
+QString BluetoothRFCOMMRun::setMyState( NetworkSetup *, 
                                       Action_t A, 
                                       bool ) {
 
@@ -70,7 +70,7 @@ QString BluetoothRFCOMMRun::setMyState( NodeCollection *,
       if( A == Deactivate ) {
         if( DeviceNr >= 0 ) {
           if( OT->releaseRFCommDevice( DeviceNr ) ) {
-           return QString( "Cannot release RFCOMM connection" );
+           return QString( "Cannot release RFCOMM NetworkSetup" );
           }
           DeviceNr = -1;
         }
@@ -131,15 +131,15 @@ RFCOMMChannel * BluetoothRFCOMMRun::getChannel( void ) {
 }
 
 QString BluetoothRFCOMMRun::deviceFile( void ) {
-    if( deviceNrOfConnection() >= 0 ) {
+    if( deviceNrOfNetworkSetup() >= 0 ) {
       OTDevice * OTD = OT->getOTDevice();
-      // there is a connection
+      // there is a NetworkSetup
       return OTD->getRFCommDevicePattern().arg(DeviceNr);
     }
     return QString();
 }
 
-int BluetoothRFCOMMRun::deviceNrOfConnection( void ) {
+int BluetoothRFCOMMRun::deviceNrOfNetworkSetup( void ) {
 
     if( ! OT ) {
       OT = OTGateway::getOTGateway();
