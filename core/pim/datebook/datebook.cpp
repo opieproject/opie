@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.10 2002-06-17 15:57:13 zecke Exp $
+** $Id: datebook.cpp,v 1.11 2002-06-23 18:18:27 zecke Exp $
 **
 **********************************************************************/
 
@@ -80,6 +80,8 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
       aPreset( FALSE ),
       presetTime( -1 ),
       startTime( 8 ), // an acceptable default
+      rowStyle( 0 ),
+      bJumpToCurTime(FALSE),
       syncing(FALSE),
       inSearch(FALSE),
       alarmCounter(0)
@@ -249,6 +251,8 @@ void DateBook::slotSettings()
     DateBookSettings frmSettings( ampm, this );
     frmSettings.setStartTime( startTime );
     frmSettings.setAlarmPreset( aPreset, presetTime );
+    frmSettings.setJumpToCurTime( bJumpToCurTime );
+    frmSettings.setRowStyle( rowStyle );
 #if defined (Q_WS_QWS) || defined(_WS_QWS_)
     frmSettings.showMaximized();
 #endif
@@ -257,8 +261,12 @@ void DateBook::slotSettings()
 	aPreset = frmSettings.alarmPreset();
 	presetTime = frmSettings.presetTime();
 	startTime = frmSettings.startTime();
+	bJumpToCurTime = frmSettings.jumpToCurTime();
+	rowStyle = frmSettings.rowStyle();
 	if ( dayView )
 	    dayView->setStartViewTime( startTime );
+	    dayView->setJumpToCurTime( bJumpToCurTime );
+	    dayView->setRowStyle( rowStyle );
 	if ( weekView )
 	    weekView->setStartViewTime( startTime );
 	saveSettings();
@@ -453,6 +461,8 @@ void DateBook::initDay()
 	dayView = new DateBookDay( ampm, onMonday, db, views, "day view" );
 	views->addWidget( dayView, DAY );
 	dayView->setStartViewTime( startTime );
+	dayView->setJumpToCurTime( bJumpToCurTime );
+	dayView->setRowStyle( rowStyle );
 	connect( this, SIGNAL( newEvent() ),
 		 dayView, SLOT( redraw() ) );
 	connect( dayView, SIGNAL( newEvent() ),
@@ -547,6 +557,8 @@ void DateBook::loadSettings()
 	startTime = config.readNumEntry("startviewtime", 8);
 	aPreset = config.readBoolEntry("alarmpreset");
 	presetTime = config.readNumEntry("presettime");
+	bJumpToCurTime = config.readBoolEntry("jumptocurtime");
+	rowStyle = config.readNumEntry("rowstyle");
     }
 }
 
@@ -558,6 +570,8 @@ void DateBook::saveSettings()
     configDB.writeEntry("startviewtime",startTime);
     configDB.writeEntry("alarmpreset",aPreset);
     configDB.writeEntry("presettime",presetTime);
+    configDB.writeEntry("jumptocurtime", bJumpToCurTime);
+    configDB.writeEntry("rowstyle", rowStyle);
 }
 
 void DateBook::newDefaultView(QAction *a) {

@@ -114,6 +114,8 @@ private:
     bool aPreset;    // have everything set to alarm?
     int presetTime;  // the standard time for the alarm
     int startTime;
+    int rowStyle;
+    bool bJumpToCurTime; //should jump to current time in dayview?
     bool ampm;
     bool onMonday;
 

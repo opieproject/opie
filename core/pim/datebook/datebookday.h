@@ -40,6 +40,8 @@ class DateBookDayView : public QTable
 public:
     DateBookDayView( bool hourClock, QWidget *parent, const char *name );
     bool whichClock() const;
+    
+    void setRowStyle( int style );
 
 public slots:
     void moveUp();
@@ -149,6 +151,8 @@ public:
     int startViewTime() const;
     void setSelectedWidget( DateBookDayWidget * );
     DateBookDayWidget * getSelectedWidget( void );
+    void setJumpToCurTime( bool bJump );
+    void setRowStyle( int style );
 
 public slots:
     void setDate( int y, int m, int d );
@@ -181,6 +185,8 @@ private:
     DateBookDB *db;
     WidgetListClass widgetList;	//reimplemented QList for sorting widgets by height
     int startTime;
+    bool jumpToCurTime;	//should we jump to current time in dayview?
+    int rowStyle;
     DateBookDayWidget *selectedWidget; //actual selected widget (obviously)
     DateBookDayTimeMarker *timeMarker;	//marker for current time
 };

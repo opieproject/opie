@@ -60,7 +60,7 @@ DateBookDayView::DateBookDayView( bool whichClock, QWidget *parent,
     for ( row = 0; row < numRows(); row++ ) {
 	tmp = new QTableItem( this, QTableItem::Never, QString::null);
 	setItem( row, 0, tmp );
-	setRowHeight( row, 40);
+	//setRowHeight( row, 40);
     }
     initHeader();
     QObject::connect( qApp, SIGNAL(clockChanged(bool)),
@@ -159,6 +159,13 @@ void DateBookDayView::keyPressEvent( QKeyEvent *e )
     }
 }
 
+void DateBookDayView::setRowStyle( int style )
+{
+	if (style<0) style = 0;
+
+	for (int i=0; i<numRows(); i++)
+		setRowHeight(i, style*10+20);
+}
 
 //===========================================================================
 
@@ -174,6 +181,7 @@ DateBookDay::DateBookDay( bool ampm, bool startOnMonday,
     header = new DateBookDayHeader( startOnMonday, this, "day header" );
     header->setDate( currDate.year(), currDate.month(), currDate.day() );
     view = new DateBookDayView( ampm, this, "day view" );
+
     connect( header, SIGNAL( dateChanged( int, int, int ) ),
              this, SLOT( dateChanged( int, int, int ) ) );
     connect( view, SIGNAL( sigColWidthChanged() ),
@@ -193,6 +201,18 @@ DateBookDay::DateBookDay( bool ampm, bool startOnMonday,
 
     timeMarker =  new DateBookDayTimeMarker( this );
     timeMarker->setTime( QTime::currentTime() );
+    rowStyle = -1; // initialize with bogus values
+}
+
+void DateBookDay::setJumpToCurTime( bool bJump )
+{
+	jumpToCurTime = bJump;
+}
+
+void DateBookDay::setRowStyle( int style )
+{
+	if (rowStyle != style) view->setRowStyle( style );
+	rowStyle = style;
 }
 
 void DateBookDay::updateView( void )
@@ -257,14 +277,20 @@ void DateBookDay::dateChanged( int y, int m, int d )
     relayoutPage();
     dayView()->clearSelection();
     QTableSelection ts;
-    ts.init( startTime, 0 );
-    ts.expandTo( startTime, 0 );
+
+    if (jumpToCurTime && this->date() == QDate::currentDate())
+    {
+    	ts.init( QTime::currentTime().hour(), 0);
+	ts.expandTo( QTime::currentTime().hour(), 0);
+    } else
+    {
+	ts.init( startTime, 0 );
+	ts.expandTo( startTime, 0 );
+    }
+
     dayView()->addSelection( ts );
 
     selectedWidget = 0;
-
-    if (this->date() == QDate::currentDate())
-    	timeMarker->show(); else timeMarker->hide();
 
 }
 
@@ -399,7 +425,10 @@ void DateBookDay::relayoutPage( bool fromResize )
 	    w->setGeometry( geom );
 	}
 
-	view->setContentsPos( 0, startTime * view->rowHeight(0) );
+	if (jumpToCurTime && this->date() == QDate::currentDate())
+		view->setContentsPos( 0, QTime::currentTime().hour() * view->rowHeight(0) ); //set listview to current hour
+	else
+		view->setContentsPos( 0, startTime * view->rowHeight(0) );
 
 
     } else {
@@ -444,11 +473,18 @@ void DateBookDay::relayoutPage( bool fromResize )
 		w->setGeometry( geom );
 	    }
 	}
-	view->setContentsPos( 0, startTime * view->rowHeight(0) );
+
+	if (jumpToCurTime && this->date() == QDate::currentDate())
+		view->setContentsPos( 0, QTime::currentTime().hour() * view->rowHeight(0) ); //set listview to current hour
+	else
+		view->setContentsPos( 0, startTime * view->rowHeight(0) );
     }
 
     timeMarker->setTime( QTime::currentTime() );	//display timeMarker
     timeMarker->raise();				//on top of all widgets
+     if (this->date() == QDate::currentDate())		//only show timeMarker on current day
+    	timeMarker->show(); else timeMarker->hide();
+
     setUpdatesEnabled( TRUE );
     return;
 }
@@ -479,8 +515,17 @@ void DateBookDay::setStartViewTime( int startHere )
     startTime = startHere;
     dayView()->clearSelection();
     QTableSelection ts;
-    ts.init( startTime, 0 );
-    ts.expandTo( startTime, 0 );
+
+    if (jumpToCurTime && this->date() == QDate::currentDate())	//this should probably be in datebook.cpp where it's called?
+    {
+    	ts.init( QTime::currentTime().hour(), 0);
+	ts.expandTo( QTime::currentTime().hour(), 0);
+    } else
+    {
+	ts.init( startTime, 0 );
+	ts.expandTo( startTime, 0 );
+    }
+
     dayView()->addSelection( ts );
 }
 

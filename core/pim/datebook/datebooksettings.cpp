@@ -133,3 +133,23 @@ void DateBookSettings::slotChangeClock( bool whichClock )
     init();
     setStartTime( saveMe );
 }
+
+void DateBookSettings::setJumpToCurTime( bool bJump )
+{
+	chkJumpToCurTime->setChecked( bJump );
+}
+
+bool DateBookSettings::jumpToCurTime() const
+{
+	return chkJumpToCurTime->isChecked();
+}
+
+void DateBookSettings::setRowStyle( int style )
+{
+	comboRowStyle->setCurrentItem( style );
+}
+
+int DateBookSettings::rowStyle() const
+{
+	return comboRowStyle->currentItem();
+}

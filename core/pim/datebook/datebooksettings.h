@@ -35,7 +35,12 @@ public:
     int presetTime() const;
     void setAlarmType( int alarmType );
     int alarmType() const;
-
+    
+    void setJumpToCurTime( bool bJump );
+    bool jumpToCurTime() const;
+    void setRowStyle( int style );
+    int rowStyle() const;
+    
 private slots:
     void slot12Hour( int );
     void slotChangeClock( bool );

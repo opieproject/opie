@@ -18,7 +18,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebooksettingsbase.ui,v 1.1 2002-01-25 22:14:28 kergoth Exp $
+** $Id: datebooksettingsbase.ui,v 1.2 2002-06-23 18:18:27 zecke Exp $
 **
 **********************************************************************</comment>
 <widget>
@@ -32,7 +32,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>232</width>
+            <width>220</width>
             <height>290</height>
         </rect>
     </property>
@@ -46,16 +46,16 @@
     <property>
         <name>layoutSpacing</name>
     </property>
-    <vbox>
+    <grid>
         <property stdset="1">
             <name>margin</name>
-            <number>5</number>
+            <number>11</number>
         </property>
         <property stdset="1">
             <name>spacing</name>
-            <number>1</number>
+            <number>6</number>
         </property>
-        <widget>
+        <widget row="0"  column="0" >
             <class>QGroupBox</class>
             <property stdset="1">
                 <name>name</name>
@@ -73,65 +73,102 @@
                 <name>title</name>
                 <string>Start viewing events</string>
             </property>
-            <vbox>
+            <widget>
+                <class>QLayoutWidget</class>
                 <property stdset="1">
-                    <name>margin</name>
-                    <number>11</number>
+                    <name>name</name>
+                    <cstring>Layout6</cstring>
                 </property>
                 <property stdset="1">
-                    <name>spacing</name>
-                    <number>6</number>
+                    <name>geometry</name>
+                    <rect>
+                        <x>3</x>
+                        <y>21</y>
+                        <width>210</width>
+                        <height>53</height>
+                    </rect>
                 </property>
-                <widget>
-                    <class>QLayoutWidget</class>
+                <grid>
                     <property stdset="1">
-                        <name>name</name>
-                        <cstring>Layout1</cstring>
+                        <name>margin</name>
+                        <number>0</number>
                     </property>
-                    <hbox>
-                        <property stdset="1">
-                            <name>margin</name>
-                            <number>0</number>
+                    <property stdset="1">
+                        <name>spacing</name>
+                        <number>6</number>
+                    </property>
+                    <spacer row="1"  column="0" >
+                        <property>
+                            <name>name</name>
+                            <cstring>Spacer1</cstring>
                         </property>
                         <property stdset="1">
-                            <name>spacing</name>
-                            <number>6</number>
+                            <name>orientation</name>
+                            <enum>Vertical</enum>
                         </property>
-                        <widget>
-                            <class>QLabel</class>
+                        <property stdset="1">
+                            <name>sizeType</name>
+                            <enum>Expanding</enum>
+                        </property>
+                        <property>
+                            <name>sizeHint</name>
+                            <size>
+                                <width>20</width>
+                                <height>20</height>
+                            </size>
+                        </property>
+                    </spacer>
+                    <widget row="0"  column="0" >
+                        <class>QLayoutWidget</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>Layout1</cstring>
+                        </property>
+                        <hbox>
                             <property stdset="1">
-                                <name>name</name>
-                                <cstring>lblStartTime</cstring>
+                                <name>margin</name>
+                                <number>0</number>
                             </property>
                             <property stdset="1">
-                                <name>text</name>
-                                <string>Start Time:</string>
+                                <name>spacing</name>
+                                <number>6</number>
                             </property>
-                        </widget>
-                        <widget>
-                            <class>QSpinBox</class>
-                            <property stdset="1">
-                                <name>name</name>
-                                <cstring>spinStart</cstring>
-                            </property>
-                            <property stdset="1">
-                                <name>suffix</name>
-                                <string>:00</string>
-                            </property>
-                            <property stdset="1">
-                                <name>wrapping</name>
-                                <bool>true</bool>
-                            </property>
-                            <property stdset="1">
-                                <name>maxValue</name>
-                                <number>23</number>
-                            </property>
-                        </widget>
-                    </hbox>
-                </widget>
-            </vbox>
+                            <widget>
+                                <class>QLabel</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>lblStartTime</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Start Time:</string>
+                                </property>
+                            </widget>
+                            <widget>
+                                <class>QSpinBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>spinStart</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>suffix</name>
+                                    <string>:00</string>
+                                </property>
+                                <property stdset="1">
+                                    <name>wrapping</name>
+                                    <bool>true</bool>
+                                </property>
+                                <property stdset="1">
+                                    <name>maxValue</name>
+                                    <number>23</number>
+                                </property>
+                            </widget>
+                        </hbox>
+                    </widget>
+                </grid>
+            </widget>
         </widget>
-        <widget>
+        <widget row="1"  column="0" >
             <class>QGroupBox</class>
             <property stdset="1">
                 <name>name</name>
@@ -141,77 +178,207 @@
                 <name>title</name>
                 <string>Alarm Settings</string>
             </property>
-            <vbox>
+            <widget>
+                <class>QLayoutWidget</class>
                 <property stdset="1">
-                    <name>margin</name>
-                    <number>11</number>
+                    <name>name</name>
+                    <cstring>Layout4</cstring>
                 </property>
                 <property stdset="1">
-                    <name>spacing</name>
-                    <number>6</number>
+                    <name>geometry</name>
+                    <rect>
+                        <x>10</x>
+                        <y>20</y>
+                        <width>200</width>
+                        <height>53</height>
+                    </rect>
                 </property>
-                <widget>
-                    <class>QLayoutWidget</class>
+                <grid>
                     <property stdset="1">
-                        <name>name</name>
-                        <cstring>Layout6</cstring>
+                        <name>margin</name>
+                        <number>0</number>
                     </property>
-                    <hbox>
-                        <property stdset="1">
-                            <name>margin</name>
-                            <number>0</number>
+                    <property stdset="1">
+                        <name>spacing</name>
+                        <number>6</number>
+                    </property>
+                    <spacer row="1"  column="0" >
+                        <property>
+                            <name>name</name>
+                            <cstring>Spacer2</cstring>
                         </property>
                         <property stdset="1">
-                            <name>spacing</name>
-                            <number>6</number>
+                            <name>orientation</name>
+                            <enum>Vertical</enum>
                         </property>
-                        <widget>
-                            <class>QCheckBox</class>
+                        <property stdset="1">
+                            <name>sizeType</name>
+                            <enum>Expanding</enum>
+                        </property>
+                        <property>
+                            <name>sizeHint</name>
+                            <size>
+                                <width>20</width>
+                                <height>20</height>
+                            </size>
+                        </property>
+                    </spacer>
+                    <widget row="0"  column="0" >
+                        <class>QLayoutWidget</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>Layout6</cstring>
+                        </property>
+                        <hbox>
                             <property stdset="1">
-                                <name>name</name>
-                                <cstring>chkAlarmPreset</cstring>
-                            </property>
-                            <property stdset="1">
-                                <name>text</name>
-                                <string>Alarm Preset</string>
-                            </property>
-                        </widget>
-                        <widget>
-                            <class>QSpinBox</class>
-                            <property stdset="1">
-                                <name>name</name>
-                                <cstring>spinPreset</cstring>
-                            </property>
-                            <property stdset="1">
-                                <name>enabled</name>
-                                <bool>false</bool>
-                            </property>
-                            <property stdset="1">
-                                <name>suffix</name>
-                                <string> minutes</string>
-                            </property>
-                            <property stdset="1">
-                                <name>maxValue</name>
-                                <number>180</number>
-                            </property>
-                            <property stdset="1">
-                                <name>minValue</name>
+                                <name>margin</name>
                                 <number>0</number>
                             </property>
                             <property stdset="1">
-                                <name>lineStep</name>
-                                <number>5</number>
+                                <name>spacing</name>
+                                <number>6</number>
                             </property>
-                            <property stdset="1">
-                                <name>value</name>
-                                <number>5</number>
-                            </property>
-                        </widget>
-                    </hbox>
-                </widget>
-            </vbox>
+                            <widget>
+                                <class>QCheckBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>chkAlarmPreset</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Alarm Preset</string>
+                                </property>
+                            </widget>
+                            <widget>
+                                <class>QSpinBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>spinPreset</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>enabled</name>
+                                    <bool>false</bool>
+                                </property>
+                                <property stdset="1">
+                                    <name>suffix</name>
+                                    <string> minutes</string>
+                                </property>
+                                <property stdset="1">
+                                    <name>maxValue</name>
+                                    <number>180</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>minValue</name>
+                                    <number>0</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>lineStep</name>
+                                    <number>5</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>value</name>
+                                    <number>5</number>
+                                </property>
+                            </widget>
+                        </hbox>
+                    </widget>
+                </grid>
+            </widget>
         </widget>
-    </vbox>
+        <widget row="2"  column="0" >
+            <class>QGroupBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>fraMisc</cstring>
+            </property>
+            <property stdset="1">
+                <name>title</name>
+                <string>Misc</string>
+            </property>
+            <widget>
+                <class>QLayoutWidget</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>Layout5</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>10</x>
+                        <y>40</y>
+                        <width>170</width>
+                        <height>24</height>
+                    </rect>
+                </property>
+                <hbox>
+                    <property stdset="1">
+                        <name>margin</name>
+                        <number>0</number>
+                    </property>
+                    <property stdset="1">
+                        <name>spacing</name>
+                        <number>6</number>
+                    </property>
+                    <widget>
+                        <class>QLabel</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>TextLabel1</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Row style:</string>
+                        </property>
+                    </widget>
+                    <widget>
+                        <class>QComboBox</class>
+                        <item>
+                            <property>
+                                <name>text</name>
+                                <string>Default</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property>
+                                <name>text</name>
+                                <string>Medium</string>
+                            </property>
+                        </item>
+                        <item>
+                            <property>
+                                <name>text</name>
+                                <string>Large</string>
+                            </property>
+                        </item>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>comboRowStyle</cstring>
+                        </property>
+                    </widget>
+                </hbox>
+            </widget>
+            <widget>
+                <class>QCheckBox</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>chkJumpToCurTime</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>10</x>
+                        <y>20</y>
+                        <width>200</width>
+                        <height>20</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>text</name>
+                    <string>Jump to current time (dayview)</string>
+                </property>
+            </widget>
+        </widget>
+    </grid>
 </widget>
 <connections>
     <connection>

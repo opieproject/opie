@@ -20,14 +20,14 @@
 #include <qstyle.h>
 #include <qtoolbutton.h>
 #include <qvbox.h>
-#include <qsizepolicy.h> 
-#include <qabstractlayout.h> 
+#include <qsizepolicy.h>
+#include <qabstractlayout.h>
 #include <qtl.h>
 
 bool calcWeek(const QDate &d, int &week, int &year,
 	      bool startOnMonday = false);
 
-DateBookWeekLstHeader::DateBookWeekLstHeader(bool onM, QWidget* parent,  
+DateBookWeekLstHeader::DateBookWeekLstHeader(bool /*onM*/, QWidget* parent,
 					     const char* name, WFlags fl)
     : DateBookWeekLstHeaderBase(parent, name, fl)
 {
@@ -54,12 +54,12 @@ void DateBookWeekLstHeader::setDate(const QDate &d) {
     int year,week;
     calcWeek(d,week,year,onMonday);
     labelWeek->setText("W: " + QString::number(week));
-	
+
     QDate start=date;
     QDate stop=start.addDays(6);
-    labelDate->setText( QString::number(start.day()) + " " + 
+    labelDate->setText( QString::number(start.day()) + " " +
 			start.monthName(start.month()) + " - " +
-			QString::number(stop.day()) + " " + 
+			QString::number(stop.day()) + " " +
 			start.monthName(stop.month()) );
     emit dateChanged(year,week);
 }
@@ -92,9 +92,9 @@ void DateBookWeekLstHeader::prevWeek() {
 }
 
 DateBookWeekLstDayHdr::DateBookWeekLstDayHdr(const QDate &d, bool onM,
-					     QWidget* parent, 
-					     const char* name, 
-					     WFlags fl ) 
+					     QWidget* parent,
+					     const char* name,
+					     WFlags fl )
     : DateBookWeekLstDayHdrBase(parent, name, fl) {
 
     date=d;
@@ -102,7 +102,7 @@ DateBookWeekLstDayHdr::DateBookWeekLstDayHdr(const QDate &d, bool onM,
     static const char *wdays="MTWTFSS";
     char day=wdays[d.dayOfWeek()-1];
 
-    label->setText( QString(QChar(day)) + " " + 
+    label->setText( QString(QChar(day)) + " " +
 		    QString::number(d.day()) );
     add->setText("+");
 
@@ -110,7 +110,7 @@ DateBookWeekLstDayHdr::DateBookWeekLstDayHdr(const QDate &d, bool onM,
 	QPalette pal=label->palette();
 	pal.setColor(QColorGroup::Foreground, QColor(0,0,255));
 	label->setPalette(pal);
-	
+
 	/*
 	  QFont f=label->font();
 	  f.setItalic(true);
@@ -139,9 +139,9 @@ void DateBookWeekLstDayHdr::newEvent() {
 
     emit addEvent(start,stop,"");
 }
-DateBookWeekLstEvent::DateBookWeekLstEvent(const EffectiveEvent &ev, 
-					   QWidget* parent, 
-					   const char* name, 
+DateBookWeekLstEvent::DateBookWeekLstEvent(const EffectiveEvent &ev,
+					   QWidget* parent,
+					   const char* name,
 					   WFlags fl) :
     OClickableLabel(parent,name,fl),
     event(ev)
@@ -165,9 +165,9 @@ void DateBookWeekLstEvent::editMe() {
 }
 
 
-DateBookWeekLstView::DateBookWeekLstView(QValueList<EffectiveEvent> &ev, 
+DateBookWeekLstView::DateBookWeekLstView(QValueList<EffectiveEvent> &ev,
 					 const QDate &d, bool onM,
-					 QWidget* parent,  
+					 QWidget* parent,
 					 const char* name, WFlags fl)
     : QWidget( parent, name, fl )
 {
@@ -176,13 +176,13 @@ DateBookWeekLstView::DateBookWeekLstView(QValueList<EffectiveEvent> &ev,
     setSizePolicy(QSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding));
 
     QVBoxLayout *layout = new QVBoxLayout( this );
-	
+
     qBubbleSort(ev);
     QValueListIterator<EffectiveEvent> it;
     it=ev.begin();
 
     int dayOrder[7];
-    if (onMonday) 
+    if (onMonday)
 	for (int d=0; d<7; d++) dayOrder[d]=d+1;
     else {
 	for (int d=0; d<7; d++) dayOrder[d]=d;
@@ -193,16 +193,16 @@ DateBookWeekLstView::DateBookWeekLstView(QValueList<EffectiveEvent> &ev,
 	// Header
 	DateBookWeekLstDayHdr *hdr=new DateBookWeekLstDayHdr(d.addDays(i),
 							     onMonday,this);
-	connect(hdr, SIGNAL(showDate(int,int,int)), 
+	connect(hdr, SIGNAL(showDate(int,int,int)),
 		this, SIGNAL(showDate(int,int,int)));
-	connect(hdr, SIGNAL(addEvent(const QDateTime &, 
+	connect(hdr, SIGNAL(addEvent(const QDateTime &,
 				     const QDateTime &,
-				     const QString &)), 
-		this, SIGNAL(addEvent(const QDateTime &, 
+				     const QString &)),
+		this, SIGNAL(addEvent(const QDateTime &,
 				      const QDateTime &,
 				      const QString &)));
 	layout->addWidget(hdr);
-		
+
 	// Events
 	while ( (*it).date().dayOfWeek() == dayOrder[i] && it!=ev.end() ) {
 	    DateBookWeekLstEvent *l=new DateBookWeekLstEvent(*it,this);
@@ -211,17 +211,17 @@ DateBookWeekLstView::DateBookWeekLstView(QValueList<EffectiveEvent> &ev,
 		     this, SIGNAL(editEvent(const Event &)));
 	    it++;
 	}
-	
+
 	layout->addItem(new QSpacerItem(1,1, QSizePolicy::Minimum, QSizePolicy::Expanding));
     }
 }
 DateBookWeekLstView::~DateBookWeekLstView(){}
 void DateBookWeekLstView::keyPressEvent(QKeyEvent *e) {e->ignore();}
 
-DateBookWeekLstDblView::DateBookWeekLstDblView(QValueList<EffectiveEvent> &ev1, 
-					       QValueList<EffectiveEvent> &ev2, 
+DateBookWeekLstDblView::DateBookWeekLstDblView(QValueList<EffectiveEvent> &ev1,
+					       QValueList<EffectiveEvent> &ev2,
 					       QDate &d, bool onM,
-					       QWidget* parent,  
+					       QWidget* parent,
 					       const char* name, WFlags fl)
     : QWidget( parent, name, fl )
 {
@@ -251,8 +251,8 @@ DateBookWeekLstDblView::DateBookWeekLstDblView(QValueList<EffectiveEvent> &ev1,
 				   const QString &)));
 }
 
-DateBookWeekLst::DateBookWeekLst( bool ap, bool onM, DateBookDB *newDB, 
-				  QWidget *parent, 
+DateBookWeekLst::DateBookWeekLst( bool ap, bool onM, DateBookDB *newDB,
+				  QWidget *parent,
 				  const char *name )
     : QWidget( parent, name ),
       db( newDB ),
@@ -266,10 +266,10 @@ DateBookWeekLst::DateBookWeekLst( bool ap, bool onM, DateBookDB *newDB,
 
     header=new DateBookWeekLstHeader(onM, this);
     layout->addWidget( header );
-    connect(header, SIGNAL(dateChanged(int,int)), 
+    connect(header, SIGNAL(dateChanged(int,int)),
 	    this, SLOT(dateChanged(int,int)));
     connect(header, SIGNAL(setDbl(bool)),
-	    this, SLOT(setDbl(bool))); 
+	    this, SLOT(setDbl(bool)));
 
     scroll=new QScrollView(this);
     //scroll->setVScrollBarMode(QScrollView::AlwaysOn);
@@ -310,7 +310,7 @@ QDate DateBookWeekLst::date() const {
     if (!onMonday)
 	if (dow==7) dow=1;
 	else dow++;
-	
+
     d=d.addDays( (_week-1)*7 - dow + 1 );
     return d;
 }
