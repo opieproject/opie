@@ -176,7 +176,7 @@ void ListEdit::fixTypes(int iColumn)
 
     // create map of entries
     if( !_typeTable->childCount() ) return;
-    ColMap **colMap=new (ColMap *)[_typeTable->childCount()];
+    ColMap **colMap=new ColMap *[_typeTable->childCount()];
     QListViewItem *cur=_typeTable->firstChild();
     ColList lst;
     for(int i=0; i<_typeTable->childCount(); i++) {
