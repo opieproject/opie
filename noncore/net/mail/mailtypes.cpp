@@ -70,11 +70,8 @@ const QStringList& RecMail::Bcc()const
 RecPart::RecPart()
     : m_type(""),m_subtype(""),m_identifier(""),m_encoding(""),m_lines(0)
 {
-}
-
-RecPart::RecPart(const QString&identifier,const QString&type,const QString&subtype,const QString&encoding,unsigned int lines)
-    : m_type(type),m_subtype(subtype),m_identifier(identifier),m_encoding(encoding),m_lines(lines)
-{
+    m_Parameters.clear();
+    m_poslist.clear();
 }
 
 RecPart::~RecPart()
@@ -131,8 +128,43 @@ void RecPart::setEncoding(const QString&encoding)
     m_encoding = encoding;
 }
 
+void RecPart::setParameters(const part_plist_t&list)
+{
+    m_Parameters = list;
+}
+
+const part_plist_t& RecPart::Parameters()const
+{
+    return m_Parameters;
+}
+
+void RecPart::addParameter(const QString&key,const QString&value)
+{
+    m_Parameters[key]=value;
+}
+
+const QString RecPart::searchParamter(const QString&key)const
+{
+    QString value("");
+    part_plist_t::ConstIterator it = m_Parameters.find(key);
+    if (it != m_Parameters.end()) {
+        value = it.data();
+    }
+    return value;
+}
+
+void RecPart::setPositionlist(const QValueList<int>&poslist)
+{
+    m_poslist = poslist;
+}
+
+const QValueList<int>& RecPart::Positionlist()const
+{
+    return m_poslist;
+}
+
 RecBody::RecBody()
-    : m_BodyText(),m_PartsList()
+    : m_BodyText(),m_PartsList(),m_description()
 {
     m_PartsList.setAutoDelete(true);
 }
@@ -168,22 +200,12 @@ void RecBody::addPart(const RecPart& part)
     m_PartsList.append(p);
 }
 
-void RecBody::setType(const QString&type)
+void RecBody::setDescription(const RecPart&des)
 {
-    m_type = type;
+    m_description = des;
 }
 
-const QString& RecBody::Type()const
+const RecPart& RecBody::Description()const
 {
-    return m_type;
-}
-
-void RecBody::setSubtype(const QString&type)
-{
-    m_subtype = type;
-}
-
-const QString& RecBody::Subtype()const
-{
-    return m_subtype;
+    return m_description;
 }

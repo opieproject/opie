@@ -12,6 +12,8 @@
 #include <qbitarray.h>
 #include <qstring.h>
 #include <qstringlist.h>
+#include <qmap.h>
+#include <qvaluelist.h>
 
 /* a class to describe mails in a mailbox */
 /* Attention!
@@ -68,14 +70,19 @@ protected:
     void copy_old(const RecMail&old);
 };
 
+typedef QMap<QString,QString> part_plist_t;
+
 class RecPart
 {
 protected:
     QString m_type,m_subtype,m_identifier,m_encoding;
     unsigned int m_lines;
+    part_plist_t m_Parameters;
+    /* describes the position in the mail */
+    QValueList<int> m_poslist;
+
 public:
     RecPart();
-    RecPart(const QString&identifier,const QString&type="",const QString&subtype="",const QString&encoding="BASE64",unsigned int lines=0);
     virtual ~RecPart();
     
     const QString&Type()const;
@@ -88,24 +95,30 @@ public:
     void setEncoding(const QString&encoding);
     void setLines(unsigned int lines);
     const unsigned int Lines()const;
+    
+    void setParameters(const part_plist_t&list);
+    const part_plist_t&Parameters()const;
+    void addParameter(const QString&key,const QString&value);
+    const QString searchParamter(const QString&key)const;
+    void setPositionlist(const QValueList<int>&poslist);
+    const QValueList<int>& Positionlist()const;
 };
 
 class RecBody
 {
 protected:
-    QString m_BodyText,m_type,m_subtype;
+    QString m_BodyText;
     QList<RecPart> m_PartsList;
+    RecPart m_description;
 
 public:
     RecBody();
     virtual ~RecBody();
     void setBodytext(const QString&);
     const QString& Bodytext()const;
-    void setType(const QString&);
-    const QString&Type()const;
-    void setSubtype(const QString&);
-    const QString&Subtype()const;
 
+    void setDescription(const RecPart&des);
+    const RecPart& Description()const;
     
     void setParts(const QList<RecPart>&parts);
     const QList<RecPart>& Parts()const;
