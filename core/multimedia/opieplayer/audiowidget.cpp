@@ -17,16 +17,9 @@
 ** not clear to you.
 **
 **********************************************************************/
-#include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
 #include <qpe/config.h>
 
-#include <qwidget.h>
-#include <qpixmap.h>
-#include <qbutton.h>
-#include <qpainter.h>
-#include <qframe.h>
-#include <qlayout.h>
 #include <qdir.h>
 #include "audiowidget.h"
 #include "mediaplayerstate.h"

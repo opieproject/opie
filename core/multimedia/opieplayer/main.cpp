@@ -17,7 +17,6 @@
 ** not clear to you.
 **
 **********************************************************************/
-#include <qpe/qpeapplication.h>
 #include "mediaplayerstate.h"
 #include "playlistwidget.h"
 #include "audiowidget.h"

@@ -25,7 +25,7 @@
 #include <qimage.h>
 #include <qheader.h>
 #include <qlistview.h>
-#include <qlist.h>
+#include <qptrlist.h>
 #include <qpixmap.h>
 
 #include "playlistselection.h"

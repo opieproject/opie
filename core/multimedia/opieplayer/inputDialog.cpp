@@ -5,10 +5,7 @@
 #include <opie/ofiledialog.h>
 
 #include <qlineedit.h>
-#include <qlayout.h>
-#include <qvariant.h>
 #include <qpushbutton.h>
-#include <qwhatsthis.h>
 
 InputDialog::InputDialog( QWidget* parent,  const char* name, bool modal, WFlags fl )
     : QDialog( parent, name, modal, fl ) {
