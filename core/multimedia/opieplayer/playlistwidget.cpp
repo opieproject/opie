@@ -853,7 +853,8 @@ void PlayListWidget::btnPlay(bool b) {
       case 0:
       {
           qDebug("here we are");
-          if( d->selectedFiles->current()->file().find(" ",0,TRUE) != -1 || d->selectedFiles->current()->file().find("%20",0,TRUE) != -1) {
+          if( d->selectedFiles->current()->file().find(" ",0,TRUE) != -1
+              || d->selectedFiles->current()->file().find("%20",0,TRUE) != -1) {
               QMessageBox::message("Note","You are trying to play\na malformed url.");
         
           } else { 
@@ -1233,6 +1234,7 @@ void PlayListWidget::readm3u(const QString &filename) {
                         lnk.setName( name);
                         s=s.replace( QRegExp("\\"),"/");
                         lnk.setFile( s);
+                        lnk.writeLink();
 //                         lnk.setIcon(opieplayer/MPEGPlayer);
                         qDebug("add "+name);
                          d->selectedFiles->addToSelection( lnk);
@@ -1240,13 +1242,21 @@ void PlayListWidget::readm3u(const QString &filename) {
 
                         s.replace(QRegExp("%20")," ");
                          DocLnk lnk( s);
-                         QString name = s.right( s.length() - 7);
+                          QString name;
+                         if(name.left(4)=="http")
+                             name = s.right( s.length() - 7);
+                         else
+                             name=s;
 //                         name = name.right(name.length()-name.findRev("\\",-1,TRUE)-1);
                          lnk.setName(name);
-                         lnk.setFile( s+"/");
+                         if(s.at(s.length()-4) == '.')
+                             lnk.setFile( s);
+                         else
+                             lnk.setFile( s+"/");
 //                         lnk.setFile( filename);
 //                         lnk.setComment( s+"/");
                          lnk.setType("audio/x-mpegurl");
+                        lnk.writeLink();
 //                          lnk.setIcon( "opieplayer/MPEGPlayer");
 //                          qDebug("add "+s);
                        d->selectedFiles->addToSelection( lnk);
