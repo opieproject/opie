@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>VTApplet</name>
     <message>
@@ -7,7 +8,7 @@
     </message>
     <message>
         <source>Terminal</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 </TS>

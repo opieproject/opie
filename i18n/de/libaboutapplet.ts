@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>AboutApplet</name>
     <message>
@@ -131,7 +132,7 @@ Keine Gruppe, Firma oder Organisation kontrolliert den Opie Quellcode. Jeder ist
     </message>
     <message>
         <source>&lt;center&gt;&lt;b&gt;The Open Palmtop Integrated Environment V1.1.6&lt;/b&gt;&lt;/center&gt;</source>
-        <translation type="unfinished">&lt;center&gt;&lt;b&gt;Das Open Palmtop Integrated Environment V1.1.6&lt;/b&gt;&lt;/center&gt;</translation>
+        <translation>&lt;center&gt;&lt;b&gt;Das Open Palmtop Integrated Environment V1.1.6&lt;/b&gt;&lt;/center&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;
@@ -145,7 +146,7 @@ Keine Gruppe, Firma oder Organisation kontrolliert den Opie Quellcode. Jeder ist
 &lt;b&gt;Andreas &apos;ar&apos; Richter&lt;/b&gt; (ar@handhelds.org)&lt;br/&gt;
 &lt;b&gt;Dan &apos;drw&apos; Williams&lt;/b&gt; (drw@handhelds.org)&lt;/tt&gt;&lt;br/&gt;
 &lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 </TS>

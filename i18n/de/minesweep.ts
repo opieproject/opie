@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>MineSweep</name>
     <message>
@@ -31,7 +32,7 @@
     </message>
     <message>
         <source>Mine Sweep</source>
-        <translation type="unfinished"></translation>
+        <translation>Mine Sweep</translation>
     </message>
 </context>
 </TS>

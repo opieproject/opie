@@ -1,13 +1,14 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>CameraMainWindow</name>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 </TS>

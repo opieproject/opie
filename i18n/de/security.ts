@@ -326,7 +326,11 @@ The entry &quot;All&quot; will allow *any* IP to connect.
 The entry &quot;None&quot; will *deny* any connection.  
 
 If unsure, select &quot;Any&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählen sie einen Netzbereich oder geben Sie einen neuen ein
+
+Die Auswahlliste bestimmt den Netzbereich für welchen der PDA Verbindungen akzeptiert.
+
+</translation>
     </message>
     <message>
         <source>Delete Entry</source>
@@ -339,7 +343,9 @@ If you press this button, the currently selected net range will be deleted from 
 
 If you hit this button in error, the button &quot;Restore Defaults&quot; will restore
 the list to the state it has been when you initially booted your Zaurus.</source>
-        <translation type="unfinished"></translation>
+        <translation>Löschen des ausgewählten Netzbereiches
+
+Mit diesem Knopf wird der gerade ausgewählte Netzbereich gelöscht.</translation>
     </message>
     <message>
         <source>Restore Defaults</source>
@@ -350,7 +356,8 @@ the list to the state it has been when you initially booted your Zaurus.</source
 to the defaults.
 
 Beware that all manually entered net ranges will be lost!</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieser Knopf stellt die Vorgabe-Netzliste wieder her, alle manuell
+geänderten Daten gehen dabei verloren!</translation>
     </message>
     <message>
         <source>Select your sync software</source>
@@ -373,7 +380,7 @@ Beware that all manually entered net ranges will be lost!</source>
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    IntelliSync will disable the password check but you&apos;ll be prompted to accept the connection.
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Opie1.0 will be compatible with QtopiaDesktop, MultiSync and KitchenSync
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Qtopia1.7 will alter the way data is send to the client and will not work with older clients.
-<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    </source>
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/></source>
         <translation type="unfinished"></translation>
     </message>
 </context>

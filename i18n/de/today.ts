@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>Today</name>
     <message>
@@ -32,11 +33,11 @@ Programm zu starten</translation>
     </message>
     <message>
         <source>Today Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Today Fehler</translation>
     </message>
     <message>
         <source>&lt;qt&gt;The plugin &apos;%1&apos; caused Today to crash. It could be that the plugin is not properly installed.&lt;br&gt;Today tries to continue loading plugins.&lt;/qt&gt;</source>
-        <translation type="unfinished">&lt;qt&gt;Das Today Modul &apos;%1&apos; verursachte beim letzten Laden einen Absturz. Stellen Sie sicher, dass das Modul richtig installiert ist. Today fährt fort und probiert Module zu läden.</translation>
+        <translation>&lt;qt&gt;Das Today Modul &apos;%1&apos; verursachte beim letzten Laden einen Absturz. Stellen Sie sicher, dass das Modul richtig installiert ist. Today fährt fort und probiert Module zu laden.&lt;/qt&gt;</translation>
     </message>
 </context>
 <context>

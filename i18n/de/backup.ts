@@ -109,23 +109,23 @@
     </message>
     <message>
         <source>Locations</source>
-        <translation type="unfinished"></translation>
+        <translation>Quellen</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Hinzufügen</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Entfernen</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichern</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>

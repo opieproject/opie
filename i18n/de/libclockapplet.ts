@@ -13,15 +13,15 @@
     </message>
     <message>
         <source>Set time...</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeit einstellen...</translation>
     </message>
     <message>
         <source>Clock..</source>
-        <translation type="unfinished"></translation>
+        <translation>Uhr..</translation>
     </message>
     <message>
         <source>Alarm...</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarm...</translation>
     </message>
 </context>
 </TS>
