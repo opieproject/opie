@@ -35,6 +35,8 @@
 #include <qwidgetstack.h>
 #include <qaction.h>
 #include <qtimer.h>
+#include <qvbox.h>
+#include <qlineedit.h>
 
 #include <qpe/applnk.h>
 #include <qpe/config.h>
@@ -44,6 +46,7 @@
 
 #include <opie/otodoaccessvcal.h>
 
+#include "quickeditimpl.h"
 #include "todotemplatemanager.h"
 #include "templateeditor.h"
 #include "todoentryimpl.h"
@@ -198,8 +201,15 @@ void MainWindow::initConfig() {
     m_overdue = config.readBoolEntry("ShowOverDue", TRUE );
 }
 void MainWindow::initUI() {
-    m_stack = new QWidgetStack(this,  "main stack");
-    setCentralWidget( m_stack );
+    m_mainBox = new QVBox(this, "main box ");
+    m_curQuick = new QuickEditImpl(this, m_mainBox );
+    m_curQuick->signal()->connect( this, SLOT(slotQuickEntered() ) );
+    m_quickEdit.append( m_curQuick );
+
+
+
+    m_stack = new QWidgetStack(m_mainBox,  "main stack");
+    setCentralWidget( m_mainBox );
 
     setToolBarsMovable( FALSE );
 
@@ -224,7 +234,7 @@ void MainWindow::initUI() {
             this, SLOT(slotNewFromTemplate(int) ) );
 }
 void MainWindow::initViews() {
-    TableView* tableView = new TableView( this, this );
+    TableView* tableView = new TableView( this, m_stack );
     m_stack->addWidget( tableView,  m_counter++ );
     m_views.append( tableView );
     m_curView = tableView;
@@ -680,4 +690,17 @@ void MainWindow::updateList() {
 void MainWindow::setReadAhead( uint count ) {
     if (m_todoMgr.todoDB() )
         m_todoMgr.todoDB()->setReadAhead( count );
+}
+void MainWindow::slotQuickEntered() {
+    qWarning("entered");
+    OTodo todo = quickEditor()->todo();
+    if (todo.isEmpty() )
+        return;
+
+    m_todoMgr.add( todo );
+    currentView()->addEvent( todo );
+    raiseCurrentView();
+}
+QuickEditBase* MainWindow::quickEditor() {
+    return m_curQuick;
 }

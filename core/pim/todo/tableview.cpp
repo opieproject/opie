@@ -126,8 +126,10 @@ void TableView::showOverDue( bool ) {
 }
 
 void TableView::updateView( ) {
+    qWarning("update view");
     m_row = false;
-    startTimer( 2000 );
+    static int id;
+    id = startTimer(2000 );
     /* FIXME we want one page to be read!
      *
      * Calculate that screensize
@@ -148,6 +150,8 @@ void TableView::updateView( ) {
     QTime t;
     t.start();
     setNumRows( it.count() );
+    if ( it.count() == 0 )
+        killTimer(id);
     int elc = time.elapsed();
     qWarning("Adding took %d", elc/1000 );
     setUpdatesEnabled( true );
@@ -162,13 +166,12 @@ void TableView::setTodo( int, const OTodo&) {
     sort();
 
     /* repaint */
-    QTable::update();
+    repaint();
 }
 void TableView::addEvent( const OTodo&) {
-    sort();
 
     /* fix problems of not showing the 'Haken' */
-    QTable::repaint();
+    updateView();
 }
 /*
  * find the event
@@ -428,6 +431,9 @@ void TableView::slotPriority() {
  *
  */
 void TableView::timerEvent( QTimerEvent* ev ) {
+    if (sorted().count() == 0 )
+        return;
+
     int row = currentRow();
     qWarning("TimerEvent %d", row);
     if ( m_row ) {

@@ -37,6 +37,7 @@
 
 #include "smalltodo.h"
 #include "todoview.h"
+#include "quickedit.h"
 #include "todomanager.h"
 
 class QPopupMenu;
@@ -45,7 +46,7 @@ class QToolBar;
 class QAction;
 class QWidgetStack;
 class Ir;
-
+class QVBox;
 
 namespace Todo {
     typedef TodoView View;
@@ -53,6 +54,7 @@ namespace Todo {
     class Editor;
     class TodoShow;
     class TemplateEditor;
+    struct QuickEditBase;
 
     class MainWindow : public QMainWindow {
         Q_OBJECT
@@ -83,12 +85,14 @@ namespace Todo {
         QString currentCategory()const;
         int currentCatId();
         TemplateManager* templateManager();
+        QuickEditBase* quickEditor();
 
         void updateTodo( const OTodo& );
         void populateTemplates();
         Editor* currentEditor();
         void setReadAhead(uint count );
 private slots:
+        void slotQuickEntered();
         void populateCategories();
         void slotReload();
         void slotFlush();
@@ -109,6 +113,7 @@ private slots:
         void raiseCurrentView();
         ViewBase* currentView();
         ViewBase* m_curView;
+        QuickEditBase* m_curQuick;
         Editor* m_curEdit;
         TodoShow* currentShow();
         TodoShow* m_curShow;
@@ -133,6 +138,13 @@ private slots:
             *m_options,
             *m_view,
             *m_template;
+        /* box with two rows
+         * top will be the quick edit
+         * this will bite my ass once
+         * we want to have all parts
+         * exchangeable
+         */
+        QVBox* m_mainBox;
 
         bool m_syncing:1;
         bool m_deadline:1;
@@ -141,8 +153,10 @@ private slots:
         TodoManager m_todoMgr;
         QString m_curCat;
         QList<ViewBase> m_views;
+        QList<QuickEditBase> m_quickEdit;
         uint m_counter;
         TemplateManager* m_tempManager;
+
 
      private slots:
         void slotShow(int);
