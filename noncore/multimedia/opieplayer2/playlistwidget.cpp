@@ -56,7 +56,8 @@
 #include <assert.h>
 
 PlayListWidget::PlayListWidget( MediaPlayerState &mediaPlayerState, QWidget* parent, const char* name )
-    : PlayListWidgetGui( mediaPlayerState, parent, name ) {
+    : PlayListWidgetGui( mediaPlayerState, parent, name ) , currentFileListView( 0 ) 
+{
 
     d->tbAddToList =  new ToolButton( bar, tr( "Add to Playlist" ),
                                       "opieplayer2/add_to_playlist",
@@ -477,8 +478,7 @@ void PlayListWidget::loadList( const DocLnk & lnk) {
 void PlayListWidget::addSelected() {
   assert( inFileListMode() );
 
-  QListView *fileListView = currentFileListView();
-  QListViewItemIterator it( fileListView );
+  QListViewItemIterator it( currentFileListView );
   for ( ; it.current(); ++it )
       if ( it.current()->isSelected() ) {
           QString filename = it.current()->text(3);
@@ -490,7 +490,7 @@ void PlayListWidget::addSelected() {
           d->selectedFiles->addToSelection( lnk );
       }
 
-  fileListView->clearSelection();
+  currentFileListView->clearSelection();
 
   tabWidget->setCurrentPage( 0 );
   writeCurrentM3u();
@@ -542,6 +542,8 @@ void PlayListWidget::tabChanged(QWidget *) {
     disconnect( videoView, SIGNAL( itemsSelected( bool ) ),
                 d->tbPlay, SLOT( setEnabled( bool ) ) );
 
+    currentFileListView = 0;
+
     switch ( currentTab() ) {
     case CurrentPlayList:
     {
@@ -568,6 +570,8 @@ void PlayListWidget::tabChanged(QWidget *) {
                  d->tbPlay, SLOT( setEnabled( bool ) ) );
 
         d->tbPlay->setEnabled( audioView->hasSelection() );
+
+        currentFileListView = audioView;
     }
     break;
     case VideoFiles:
@@ -583,6 +587,8 @@ void PlayListWidget::tabChanged(QWidget *) {
                  d->tbPlay, SLOT( setEnabled( bool ) ) );
 
         d->tbPlay->setEnabled( videoView->hasSelection() );
+
+        currentFileListView = videoView;
     }
     break;
     case PlayLists:
@@ -623,16 +629,6 @@ void PlayListWidget::deletePlaylist() {
 
 void PlayListWidget::playSelected() {
     btnPlay( TRUE);
-}
-
-QListView *PlayListWidget::currentFileListView() const
-{
-    switch ( currentTab() ) {
-        case AudioFiles: return audioView;
-        case VideoFiles: return videoView;
-        default: assert( false );
-    }
-    return 0;
 }
 
 bool PlayListWidget::inFileListMode() const
@@ -1009,5 +1005,5 @@ PlayListWidget::Entry PlayListWidget::currentEntry() const
 }
 
 QString PlayListWidget::currentFileListPathName() const {
-    return currentFileListView()->currentItem()->text( 3 );
+    return currentFileListView->currentItem()->text( 3 );
 }

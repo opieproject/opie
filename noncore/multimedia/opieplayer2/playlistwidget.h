@@ -98,8 +98,6 @@ private:
     void readPls(const QString &);
     void initializeStates();
 
-    QListView *currentFileListView() const;
-
     bool inFileListMode() const;
 
 private slots:
@@ -133,6 +131,7 @@ private:
     bool insanityBool;
     QString setDocFileRef, currentPlayList;
     int selected;
+    QListView *currentFileListView;
 };
 
 #endif // PLAY_LIST_WIDGET_H
