@@ -46,20 +46,16 @@ protected:
   virtual void mousePressEvent(QMouseEvent*);
   void paint();
 private:
-		//bool status;
-  int tracks;
-//  VUPara para;    //  dialogs.h
+  int tracks, colorScheme;
   float resoFactor;
   int x,y,sx,sy,dx,dy,ox,oy;
   float peak[4], hold[4];
   int i_peak[4], i_hold[4];
   int holdTime[4];
 
-    // VUMeterDialog *dia;
-  QPixmap *buffer, *warning; /// ?
+  QPixmap *buffer, *warning;
   QPopupMenu *vuProp;
   QColor color[37];
-
 };
 
 
