@@ -754,6 +754,12 @@ void PhaseStyle::drawComboButton( QPainter * p, int x, int y,
     p->setPen(g.buttonText() );
 }
 
+void PhaseStyle::tabbarMetrics( const QTabBar* t, int &hframe, int &vframe,  int& ov ) {
+    QCommonStyle::tabbarMetrics( t, hframe, vframe, ov );
+    hframe -= 2;
+    vframe += 1;
+}
+
 
 void PhaseStyle::drawTab(QPainter* painter, const QTabBar* bar, QTab* tab,
                          bool selected ) {

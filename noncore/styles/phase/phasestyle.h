@@ -121,6 +121,7 @@ public:
                  bool selected );
     void drawTabMask( QPainter*, const QTabBar*, QTab*,
                       bool );
+    void tabbarMetrics( const QTabBar* t, int &hframe, int &vframe, int &overlap);
 
     /* tool button */
     void drawToolButton ( QPainter * p, int x, int y,
