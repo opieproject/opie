@@ -12,11 +12,11 @@
 /* kvt, which is copyright (c) 1996 by Matthias Ettrich <ettrich@kde.org> */
 /*                                                                        */
 /* ---------------------------------------------------------------------- */
-/*									      */
+/*                        */
 /* Ported Konsole to Qt/Embedded                                              */
-/*									      */
+/*                        */
 /* Copyright (C) 2000 by John Ryland <jryland@trolltech.com>                  */
-/*									      */
+/*                        */
 /* -------------------------------------------------------------------------- */
 
 #include "konsole.h"
@@ -37,6 +37,9 @@ int main(int argc, char* argv[])
 
   QPEApplication a( argc, argv );
 
+  QPEApplication::grabKeyboard(); // for CTRL and ALT
+
+  qDebug("keyboard grabbed");
 #ifdef FAKE_CTRL_AND_ALT
     qDebug("Fake Ctrl and Alt defined");
   QPEApplication::grabKeyboard(); // for CTRL and ALT
