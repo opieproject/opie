@@ -26,13 +26,13 @@ EmulationWidget::EmulationWidget( const Profile& config, QWidget *parent, const 
 	f_width = fm.maxWidth();
 	f_ascent = fm.ascent();
 
-	// give reasonable defaults to m_columns, m_lines
-	calcGeometry();
-	
 	// initialize scrollbar related vars
 	m_scrollbar = new QScrollBar( this );
 	m_scrollbar->setCursor( arrowCursor );
 
+	// give reasonable defaults to m_columns, m_lines
+	calcGeometry();
+	
 	// load config
 	reloadConfig( config );
 	
