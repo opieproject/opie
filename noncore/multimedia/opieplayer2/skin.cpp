@@ -23,6 +23,9 @@
 #include "skin.h"
 #include "singleton.h"
 
+#include <qcache.h>
+#include <qmap.h>
+
 #include <qpe/resource.h>
 #include <qpe/config.h>
 
@@ -44,14 +47,16 @@ class SkinCache : public Singleton<SkinCache>
 public:
     SkinCache();
 
-    QImage loadImage( const QString &name );
+    SkinData *lookupAndTake( const QString &skinPath, const QString &fileNameInfix );
+
+    void store( const QString &skinPath, const QString &fileNameInfix, SkinData *data );
 
 private:
-    typedef QDict<QImage> ImageCache;
+    typedef QCache<SkinData> DataCache;
+    typedef QCache<QPixmap> BackgroundPixmapCache;
 
-    ImageCache m_cache;
-
-    ThreadUtil::Mutex m_cacheGuard;
+    DataCache m_cache;
+    BackgroundPixmapCache m_backgroundPixmapCache;
 };
 
 Skin::Skin( const QString &name, const QString &fileNameInfix )
@@ -68,13 +73,13 @@ Skin::Skin( const QString &fileNameInfix )
 
 Skin::~Skin()
 {
-    delete d;
+    SkinCache::self().store( m_skinPath, m_fileNameInfix, d );
 }
 
 void Skin::init( const QString &name )
 {
     m_skinPath = "opieplayer2/skins/" + name;
-    d = new SkinData;
+    d = SkinCache::self().lookupAndTake( m_skinPath, m_fileNameInfix );
 }
 
 void Skin::preload( const MediaWidget::SkinButtonInfo *skinButtonInfo, uint buttonCount )
@@ -161,22 +166,16 @@ QImage Skin::loadImage( const QString &fileName )
 
 SkinCache::SkinCache()
 {
-    m_cache.setAutoDelete( true );
 }
 
-QImage SkinCache::loadImage( const QString &name )
+SkinData *SkinCache::lookupAndTake( const QString &skinPath, const QString &fileNameInfix )
 {
-    ThreadUtil::AutoLock lock( m_cacheGuard );
+    return new SkinData;
+}
 
-    QImage *image = m_cache.find( name );
-    if ( image ) {
-        qDebug( "cache hit for %s", name.ascii() );
-        return *image;
-    }
-
-    image = new QImage( Resource::findPixmap( name ) );
-    m_cache.insert( name, image );
-    return *image;
+void SkinCache::store( const QString &skinPath, const QString &fileNameInfix, SkinData *data )
+{
+    delete data;
 }
 
 SkinLoader::SkinLoader()

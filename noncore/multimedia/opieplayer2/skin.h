@@ -25,8 +25,6 @@
 
 #include <qstring.h>
 #include <qimage.h>
-#include <qmap.h>
-#include <qdict.h>
 
 #include "mediawidget.h"
 #include "threadutil.h"
