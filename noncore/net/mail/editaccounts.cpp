@@ -517,7 +517,7 @@ void NNTPconfig::slotGetNG() {
        	   QCheckListItem *item;
     	   item = new QCheckListItem( ListViewGroups, ( QString )group->grp_name, QCheckListItem::CheckBox );
                  if ( subscribedGroups.contains( ( QString )group->grp_name ) >= 1 ) {
-                      item->setSelected( true );
+                      item->setOn( true );
                 }
        }
 }
@@ -557,14 +557,17 @@ void NNTPconfig::save()
     data->setPassword( passLine->text() );
 
    QListViewItemIterator list_it( ListViewGroups );
-   for ( ; list_it.current(); ++list_it ) {
+
        QStringList groupList;
-       if ( list_it.current()->isSelected() ) {
+   for ( ; list_it.current(); ++list_it ) {
+
+       if ( ( (QCheckListItem*)list_it.current() )->isOn() ) {
           qDebug(list_it.current()->text(0) );
           groupList.append(  list_it.current()->text(0) );
       }
-      data->setGroups( groupList );
+
   }
+      data->setGroups( groupList );
 }
 
 void NNTPconfig::accept()

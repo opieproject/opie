@@ -124,7 +124,7 @@ void NNTPwrapper::login()
 
     user = pass = 0;
 
-    if ( account->getUser().isEmpty() || account->getPassword().isEmpty() ) {
+    if ( ( account->getUser().isEmpty() || account->getPassword().isEmpty() ) && account->getLogin() ) {
         LoginDialog login( account->getUser(), account->getPassword(), NULL, 0, true );
         login.show();
         if ( QDialog::Accepted == login.exec() ) {
