@@ -7,4 +7,4 @@ Section: opie/settings
 Maintainer: gonz <gonz@directbox.com>
 Architecture: arm
 License: GPL
-Description: frontend to mount/unmount filesystems
+Description: Opie shell apps
