@@ -39,21 +39,31 @@
 #include <qpe/resource.h>
 #include <qpe/config.h>
 
+#include <remotedevice.h>
+
 
 namespace OpieTooth {
 
-
-    #include <remotedevice.h>
 
     BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
         : BluetoothBase( parent, name, fl ) {
 
 
-        QObject::connect( (QObject*) PushButton2,  SIGNAL( clicked() ), this, SLOT(startScan()));
-        QObject::connect((QObject*)configApplyButton, SIGNAL(clicked() ), this, SLOT(applyConfigChanges()));
+        QObject::connect( (QObject*)PushButton2,  SIGNAL( clicked() ), this, SLOT(startScan() ) );
+        QObject::connect( (QObject*)configApplyButton, SIGNAL(clicked() ), this, SLOT(applyConfigChanges() ) );
+        QObject::connect( (QObject*)ListView2, SIGNAL(  expanded( QListViewItem * item ) ),
+                          this, SLOT( addServicesToDevice( QListViewItem * item ) ) );
+        QObject::connect( (QObject*)ListView2, SIGNAL( clicked( QListViewItem * )),
+                          this, SLOT( startServiceActionClicked( QListViewItem * item ) ) );
+
+        //
+        //      QObject::connect( (QObject*) Manager, SIGNAL (foundServices( const QString& device, Services::ValueList ), this () ) );
+
+        //Load all icons needed
 
 
-
+        QPixmap offPix = Resource::loadPixmap( "editdelete" );
+        QPixmap onPix = Resource::loadPixmap( "installed" );
 
         QPalette pal = this->palette();
         QColor col = pal.color(QPalette::Active, QColorGroup::Background);
@@ -67,11 +77,28 @@ namespace OpieTooth {
 
         readConfig();
         initGui();
+
+
+        //TESTING
+
+        ListView2->setRootIsDecorated(true);
+
+        QListViewItem *topLV = new QListViewItem( ListView2, "Harlekins Dongle" , "yes");
+        topLV->setPixmap(0, offPix);
+        (void) new QListViewItem( topLV, "on" );
+        (void) new QListViewItem( topLV, "off"  );
+
+        QListViewItem *topLV2 = new QListViewItem( ListView2, "Siemens S45" , "no" );
+        topLV2->setPixmap(0, onPix);
+        (void) new QListViewItem( topLV2, "on"  );
+        (void) new QListViewItem( topLV2, "off" );
+
     }
 
-/**
- * Reads all options from the config file
- */
+
+    /**
+     * Reads all options from the config file
+     */
     void BlueBase::readConfig() {
 
         Config cfg("bluetoothmanager");
@@ -87,15 +114,14 @@ namespace OpieTooth {
 
     }
 
-/**
- * Writes all options to the config file
- */
+    /**
+     * Writes all options to the config file
+     */
     void BlueBase::writeConfig() {
 
 
         Config cfg("bluetoothmanager");
         cfg.setGroup("bluezsettings");
-
 
         cfg.writeEntry("name", deviceName);
         cfg.writeEntryCrypt("passkey", defaultPasskey);
@@ -106,9 +132,27 @@ namespace OpieTooth {
 }
 
 
-/**
- * Set up the gui
- */
+    /*
+     * Read the list of allready known devices
+     *
+     */
+    void BlueBase::readSavedDevices() {
+
+    }
+
+    /*
+     * Read the list of allready known devices
+     *
+     */
+    void BlueBase::writeSavedDevices() {
+
+
+    }
+
+
+    /**
+     * Set up the gui
+     */
     void BlueBase::initGui() {
 
         StatusLabel->setText(getStatus()); // maybe move it to getStatus()
@@ -119,23 +163,29 @@ namespace OpieTooth {
         inquiryscanCheckBox->setChecked(enableInquiryscan);
         deviceNameLine->setText(deviceName);
         passkeyLine->setText(defaultPasskey);
+        // set info tab
+        setInfo();
 }
 
 
-/**
- * Get the status informations and returns it
- * @return QString the status informations gathered
- */
+    /**
+     * Get the status informations and returns it
+     * @return QString the status informations gathered
+     */
     QString BlueBase::getStatus(){
 
-        return ("manger.h need also a status method");
+        QString infoString = tr("<b>Device name : </b> Ipaq" );
+        infoString += QString("<br><b>" + tr("MAC adress: ") +"</b> No idea");
+        infoString += QString("<br><b>" + tr("Class") + "</b> PDA");
+
+        return (infoString);
 
     }
 
 
-/**
- * Read the current values from the gui and invoke writeConfig()
- */
+    /**
+     * Read the current values from the gui and invoke writeConfig()
+     */
     void BlueBase::applyConfigChanges() {
 
         deviceName =  deviceNameLine->text();
@@ -155,6 +205,10 @@ namespace OpieTooth {
 }
 
 
+    /*
+     * Add fresh found devices from scan dialog to the listing
+     *
+     */
     void BlueBase::addSearchedDevices( QList<RemoteDevice> &newDevices ) {
 
         QListViewItem * deviceItem;
@@ -165,16 +219,61 @@ namespace OpieTooth {
 
 
             RemoteDevice *dev = it.current();
-            deviceItem = new QListViewItem( ListView4, dev->name() );
+            deviceItem = new QListViewItem( ListView2, dev->name() );
+
+            if (deviceActive( dev ) ) {
+                deviceItem->setPixmap(0, onPix);
+            } else {
+                deviceItem->setPixmap(0, offPix);
+            }
+
             deviceItem->setText(1, dev->mac() );
         }
     }
 
 
-/**
- * Open the "scan for devices"  dialog
- */
+    /*
+     * Action that is toggled on entrys on click
+     */
+    void BlueBase::startServiceActionClicked( QListViewItem * item ) {
+
+
+    }
+
+    /*
+     * Action that are toggled on hold (mostly QPopups i guess)
+     */
+    void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & point, int column) {
+
+
+    }
+
+    /*
+     * Search and display avail. services for a device (on expand from device listing)
+     *
+     */
+    void BlueBase::addServicesToDevice( QListViewItem * item ) {
+        // row of mac adress
+        RemoteDevice *device = new RemoteDevice(item->text(1),  item->text(0));
+        //dann nen manager und darauf dann searchServises, das liefert nen signal, das wieder connected
+        // werden  muss.
+
+        // delete
+    }
+
+    /*
+     * Find out if a device can  currently be reached
+     */
+    bool BlueBase::deviceActive( RemoteDevice *device ) {
+
+        return true;
+    }
+
+    /**
+     * Open the "scan for devices"  dialog
+     */
     void BlueBase::startScan() {
+
         ScanDialog *scan = new ScanDialog( this, "", true);
         QObject::connect((QObject*)scan, SIGNAL( selectedDevices(QList<RemoteDevice>&) ),
                          this, SLOT( addSearchedDevices(QList<RemoteDevice>& ) ));
@@ -182,9 +281,14 @@ namespace OpieTooth {
         scan->showMaximized();
     }
 
-/**
- * Decontructor
- */
+
+    void BlueBase::setInfo() {
+        StatusLabel->setText(getStatus());
+    }
+
+    /**
+     * Decontructor
+     */
     BlueBase::~BlueBase(){
     }
 

@@ -91,20 +91,6 @@
                 <column>
                     <property>
                         <name>text</name>
-                        <string>Active</string>
-                    </property>
-                    <property>
-                        <name>clickable</name>
-                        <bool>true</bool>
-                    </property>
-                    <property>
-                        <name>resizeable</name>
-                        <bool>true</bool>
-                    </property>
-                </column>
-                <column>
-                    <property>
-                        <name>text</name>
                         <string>Device Name</string>
                     </property>
                     <property>
@@ -119,7 +105,7 @@
                 <column>
                     <property>
                         <name>text</name>
-                        <string>Type</string>
+                        <string>Online</string>
                     </property>
                     <property>
                         <name>clickable</name>

@@ -7,6 +7,7 @@
 #include <qscrollview.h>
 #include <qsplitter.h>
 #include <qlist.h>
+#include <qpixmap.h>
 
 #include "bluetoothbase.h"
 
@@ -20,6 +21,7 @@ class QLabel;
 class QPushButton;
 class QTabWidget;
 class QCheckBox;
+
 
 namespace OpieTooth {
 
@@ -41,9 +43,13 @@ namespace OpieTooth {
     private:
 	void readConfig();
 	void writeConfig();
+        void readSavedDevices();
+        void writeSavedDevices();
 	QString getStatus();
 	void initGui();
+        void setInfo();
 
+        bool deviceActive( RemoteDevice *device );
 
 	QString deviceName;
 	QString defaultPasskey;
@@ -52,8 +58,14 @@ namespace OpieTooth {
 	int enablePagescan;
 	int enableInquiryscan;
 
+        QPixmap offPix;
+        QPixmap onPix;
+
 	private slots:
         void addSearchedDevices( QList<RemoteDevice> &newDevices );
+        void addServicesToDevice( QListViewItem * item );
+        void startServiceActionClicked( QListViewItem * item );
+        void startServiceActionHold( QListViewItem * item, const QPoint & point, int column);
       	void applyConfigChanges();
 
     };
