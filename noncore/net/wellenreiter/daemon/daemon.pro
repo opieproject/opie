@@ -9,6 +9,7 @@ DEPENDPATH      += $(OPIEDIR)/include
 LIBS            += -lpcap -lpthread -L$(OPIEDIR)/lib -lwellenreiter
 INTERFACES      = 
 TARGET          = wellenreiterd
+DEFINES         += DEBUG
 
 
 

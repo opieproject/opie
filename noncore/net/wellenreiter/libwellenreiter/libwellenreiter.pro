@@ -6,7 +6,7 @@ SOURCES = source/cardmode.cc source/wl_log.cc source/wl_proto.cc source/sniff.cc
 
 LIBS = -lpcap
 TMAKE_CFLAGS += -D__UNIX__
-
+DEFINES += DEBUG
 DESTDIR = $(OPIEDIR)/lib
 TARGET = wellenreiter
 

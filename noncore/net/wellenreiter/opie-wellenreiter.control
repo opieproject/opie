@@ -1,4 +1,4 @@
-Files: bin/wellenreiter bin/wellenreiterd bin/orinoco_hopper pics/wellenreiter apps/Applications/wellenreiter.desktop $OPIEDIR/lib/libwellenreiter.*
+Files: bin/wellenreiter bin/wellenreiterd share/wellenreiter pics/wellenreiter apps/Applications/wellenreiter.desktop $OPIEDIR/lib/libwellenreiter.*
 Priority: optional
 Section: opie/applications
 Maintainer: Michael Lauer <mickeyl@handhelds.org> 
