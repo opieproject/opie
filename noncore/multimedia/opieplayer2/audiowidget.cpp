@@ -61,7 +61,7 @@ struct MediaButton {
 };
 
 //Layout information for the audioButtons (and if it is a toggle button or not)
-MediaButton audioButtons[] = {
+MediaWidget::Button audioButtons[] = {
    { TRUE,  FALSE, FALSE }, // play
    { FALSE, FALSE, FALSE }, // stop
    { FALSE, FALSE, FALSE }, // next
@@ -86,7 +86,7 @@ void changeTextColor( QWidget * w) {
    w->setPalette( p );
 }
 
-const int numButtons = (sizeof(audioButtons)/sizeof(MediaButton));
+const int numButtons = (sizeof(audioButtons)/sizeof(MediaWidget::Button));
 
 }
 

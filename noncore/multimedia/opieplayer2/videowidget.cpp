@@ -59,12 +59,7 @@ namespace
 const int xo = 2; // movable x offset
 const int yo = 0; // movable y offset
 
-
-struct MediaButton {
-    bool isToggle, isHeld, isDown;
-};
-
-MediaButton videoButtons[] = {
+MediaWidget::Button videoButtons[] = {
     { FALSE, FALSE, FALSE }, // stop
     { TRUE, FALSE, FALSE }, // play
     { FALSE, FALSE, FALSE }, // previous
@@ -78,7 +73,7 @@ const char * const skinV_mask_file_names[7] = {
 "stop","play","back","fwd","up","down","full"
 };
 
-const int numVButtons = (sizeof(videoButtons)/sizeof(MediaButton));
+const int numVButtons = (sizeof(videoButtons)/sizeof(MediaWidget::Button));
 
 }
 
