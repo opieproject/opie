@@ -1,5 +1,5 @@
 Package: opie-confeditor
-Files: bin/confedit apps/Settings/confedit.desktop pics/confedit/confedit.png
+Files: bin/confedit apps/Settings/confedit.desktop pics/confedit/confedit.png plugins/application/libconfedit.so*
 Priority: optional
 Section: opie/settings
 Maintainer: Patrick S. Vogt <tille@handhelds.org>
