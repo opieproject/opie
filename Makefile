@@ -24,7 +24,7 @@ PLAYER = core/multimedia/opieplayer/libmpeg3 \
 	core/multimedia/opieplayer/libmad \
 	core/multimedia/opieplayer/wavplugin 
 
-COMPONENTS=$(LOCALCOMPONENTS) $(INPUTCOMPONENTS) $(APPLETS) $(MAIL) $(PLAYER)	
+COMPONENTS=$(LOCALCOMPONENTS) $(INPUTCOMPONENTS) $(APPLETS) $(MAIL) # $(PLAYER)	
 
 
 PIMAPPS = core/pim/addressbook core/pim/datebook \
