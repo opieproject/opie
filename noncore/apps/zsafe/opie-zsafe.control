@@ -1,0 +1,9 @@
+Package: opie-zsafe
+Files: bin/zsafe apps/Applications/zsafe.desktop pics/zsafe/*.png
+Priority: optional
+Section: applications
+Version: $QPE_VERSION$EXTRAVERSION
+Architecture: arm
+Depends: task-opie-minimal
+Maintainer: Carsten Schneider <zcarsten@gmx.net>
+Description: This password manager program for Opie.
