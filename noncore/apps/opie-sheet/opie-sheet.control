@@ -1,5 +1,6 @@
 Package: opie-sheet
-Files: plugins/application/libsheetqt.so* bin/sheetqt apps/Applications/opie-sheet.desktop help/en/html/sheetqt.html pics/opie-sheet/*.png
+Files: plugins/application/libopie-sheet.so* bin/opie-sheet apps/Applications/opie-sheet.desktop help/en/html/sheetqt.html 
+pics/opie-sheet/*.png
 Priority: optional
 Section: opie/applications
 Maintainer: Serdar Ozler <sozler@sitebest.com>

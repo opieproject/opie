@@ -4,6 +4,6 @@ SOURCES        = main.cpp mainwindow.cpp sheet.cpp cellformat.cpp finddlg.cpp nu
 INCLUDEPATH    += $(OPIEDIR)/include
 DEPENDPATH    += $(OPIEDIR)/include
 LIBS            += -lqpe -lopiecore2
-TARGET        = sheetqt
+TARGET        = opie-sheet
 
 include ( $(OPIEDIR)/include.pro )
