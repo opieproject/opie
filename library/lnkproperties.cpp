@@ -44,6 +44,7 @@
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qfile.h>
+#include <qdir.h>
 #include <qfileinfo.h>
 #include <qmessagebox.h>
 #include <qsize.h>
@@ -247,6 +248,39 @@ void LnkProperties::beamLnk()
     ir.send( doc, doc.comment() );
 }
 
+static bool createMimedir(const QString&base,const QString&mimetype)
+{
+    int pos = 0;
+    int stage = 0;
+	if (base.length()==0) return FALSE;
+    QString _tname = base+"/Documents";
+    QDir _dir(_tname+"/"+mimetype);
+    if (_dir.exists()) return TRUE;
+    pos = mimetype.find("/");
+    _dir.setPath(_tname);
+    while (stage<2) {
+        if (!_dir.exists()) {
+            if (!_dir.mkdir(_tname)) {
+                qDebug( QString("Creation of dir %1 failed\n").arg(_tname));
+                return FALSE;
+	        }
+        }
+        switch(stage) {
+        case 0:
+            _tname+="/"+mimetype.left(pos);
+            break;
+        case 1:
+            _tname+="/"+mimetype.right(pos-1);
+            break;
+        default:
+            break;
+        }
+        _dir.setPath(_tname);
+        ++stage;
+    }
+    return TRUE;
+}
+
 bool LnkProperties::copyFile( DocLnk &newdoc )
 {
     const char *linkExtn = ".desktop";
@@ -258,8 +292,12 @@ bool LnkProperties::copyFile( DocLnk &newdoc )
     QString safename = newdoc.name();
     safename.replace(QRegExp("/"),"_");
 
-     QString fn = locations[ d->locationCombo->currentItem() ]
-		  + "/Documents/" + newdoc.type() + "/" + safename;
+    QString fn = locations[ d->locationCombo->currentItem() ]
+		  + "/Documents/" + newdoc.type();
+    if (!createMimedir(locations[ d->locationCombo->currentItem() ],newdoc.type())) {
+        return FALSE;
+    }
+    fn+="/"+safename;
     if ( QFile::exists(fn + fileExtn) || QFile::exists(fn + linkExtn) ) {
 	int n=1;
 	QString nn = fn + "_" + QString::number(n);
