@@ -578,8 +578,8 @@ int LibMadPlugin::audioSamples( int ) {
       return 0;
    int samples = (d->input.fileLength / (d->frame.header.bitrate/8)) * d->frame.header.samplerate;
 
-   //   qDebug( "LibMadPlugin::audioSamples: %i * %i * 8 / %i", (int)d->input.fileLength,
-   //           (int)d->frame.header.samplerate, (int)d->frame.header.bitrate );
+   //   odebug << "LibMadPlugin::audioSamples: " << (int)d->input.fileLength
+   //          << " * " << (int)d->frame.header.samplerate << " * 8 / " << (int)d->frame.header.bitrate << oendl;
    //   odebug << "LibMadPlugin::audioSamples: " << samples << "" << oendl;
 
    return samples;
