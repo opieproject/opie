@@ -60,10 +60,14 @@ public:
     QString currentRemoteDir;
     QString filterStr;
     QListViewItem * item;
-    QPushButton *connectServerBtn;
+    QPushButton *connectServerBtn, *cdUpButton, *homeButton, *docButton;
     bool b;
     int currentServerConfig;
 protected slots:
+    void upDir();
+    void homeButtonPushed();
+    void docButtonPushed();
+ 
     void serverComboEdited(const QString & );
     void showLocalMenu( QListViewItem *);
     void showRemoteMenu( QListViewItem *);
