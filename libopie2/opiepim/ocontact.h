@@ -215,7 +215,6 @@ public:
     QString emails() const { return find( Qtopia::Emails ); }
     static int rtti();
 
-
 private:
     // The XML-Backend needs some access to the private functions
     friend class OContactAccessBackend_XML;

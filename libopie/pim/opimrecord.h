@@ -75,8 +75,16 @@ public:
     /**
      * matches the Records the regular expression?
      */
-    virtual bool match( const QString &regexp ) const {return match(QRegExp(regexp));};
-    virtual bool match( const QRegExp &regexp ) const = 0;
+    virtual bool match( const QString &regexp ) const
+	{setLastHitField( -1 );
+            return Qtopia::Record::match(QRegExp(regexp));};
+
+    /**
+     * if implemented this function returns which item has been
+     * last hit by the match() function.
+     * or -1 if not implemented or no hit has occured
+     */
+    int lastHitField()const;
 
     /**
      * converts the internal structure to a map
@@ -121,6 +129,9 @@ public:
     virtual bool saveToStream( QDataStream& stream )const;
 
 protected:
+    // need to be const cause it is called from const methods
+    mutable int m_lastHit;
+    void setLastHitField( int lastHit )const;
     Qtopia::UidGen &uidGen();
 //    QString crossToString()const;
 
