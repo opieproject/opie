@@ -4,14 +4,14 @@ Information about porting Opie to MacOS-X (eilers)
 Credits:
 --------
 
-Special thanks to Andreas Junghans (webmaster@lucid-cake.net) for its patches for qt-X11 (2.3.2), 
+Special thanks to Andreas Junghans (webmaster@lucid-cake.net) providing patches for qt-X11 (2.3.2), 
 QT/E (2.3.5) and qtopia (1.6.1).
-Without them, I wouldn't be able to provide the port for OPIE to MacOS-X that fast..
+Without them, I wasn't able to provide the port for OPIE to MacOS-X that fast..
 Thanks to Juergen Graf to debug this very generic README ! 
 
 Status:
 -------
-This work is done, do provide a development platform for Apple-Users! Please do not expect that you
+Aim of this work is to provide a development platform for Apple-Users! Please do not expect that you
 could create a productive Opie system for the Mac with it !!
 
 The basic system works quite well. But a lot of applications and plugins,
@@ -35,12 +35,6 @@ libopie/pim/otimezone.cpp:
 Accessing of "setenv(...)" on Mac caused bus-errors. 
 Workaround/Fix: Unknown
 Current-State: setenv() was just commented out. Thus the related functions may behave wrong! 
-
-library/filemanager.cpp:
-The sendfile() function is not available in MacOSX. Therefore a workaround must be implemented.
-Workaround/Fix: Unknown. The function is available in the header files, but disabled by a 
-"#ifdef SENDFILE" .. and not implemented int the c-library.
-If it will be supported, it should activate itself automatically by the "#ifdef"..
 
 
 How to compile Opie for MacOS-X:
@@ -165,4 +159,4 @@ If you don't add "plugin" you will get a shared library which is not loadable
 
 For problems, help and flames, feel free to contact me at
 
-eilers.stefan@epost.de
+stefan@eilers-online.net
