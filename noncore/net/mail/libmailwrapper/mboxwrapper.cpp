@@ -4,6 +4,7 @@
 #include <libetpan/libetpan.h>
 #include <libetpan/mailstorage.h>
 #include <qdir.h>
+#include <stdlib.h>
 
 MBOXwrapper::MBOXwrapper(const QString & mbox_dir)
     : Genericwrapper(),MBOXPath(mbox_dir)
@@ -23,15 +24,19 @@ void MBOXwrapper::listMessages(const QString & mailbox, QList<RecMail> &target )
     mailstorage*storage = mailstorage_new(NULL);
     QString p = MBOXPath+"/";
     p+=mailbox;
+    char*fname = 0;
 
-    int r = mbox_mailstorage_init(storage,strdup(p.latin1()),0,0,0);
+    fname = strdup(p.latin1());
+
+    int r = mbox_mailstorage_init(storage,fname,0,0,0);
     mailfolder*folder;
-    folder = mailfolder_new( storage,strdup(p.latin1()),NULL);   
+    folder = mailfolder_new( storage,fname,NULL);   
     r = mailfolder_connect(folder);
     if (r != MAIL_NO_ERROR) {
         qDebug("Error initializing mbox");
         mailfolder_free(folder);
         mailstorage_free(storage);
+        free(fname);
         return;
     }
     mailmessage_list * env_list = 0;
@@ -40,6 +45,7 @@ void MBOXwrapper::listMessages(const QString & mailbox, QList<RecMail> &target )
         qDebug("Error message list");
         mailfolder_free(folder);
         mailstorage_free(storage);
+        free(fname);
         return;
     }
     r = mailsession_get_envelopes_list(folder->fld_session, env_list);
@@ -50,6 +56,7 @@ void MBOXwrapper::listMessages(const QString & mailbox, QList<RecMail> &target )
         }
         mailfolder_free(folder);
         mailstorage_free(storage);
+        free(fname);
         return;
     }
     mailimf_references * refs;
@@ -103,6 +110,7 @@ void MBOXwrapper::listMessages(const QString & mailbox, QList<RecMail> &target )
     mailfolder_disconnect(folder);
     mailfolder_free(folder);
     mailstorage_free(storage);
+    free(fname);
 }
 
 QList<Folder>* MBOXwrapper::listFolders()

@@ -191,9 +191,9 @@ RecMail *Genericwrapper::parseHeader( const char *header )
     int err = MAILIMF_NO_ERROR;
     size_t curTok = 0;
     RecMail *mail = new RecMail();
-    mailimf_fields *fields;
-    mailimf_references * refs;
-    mailimf_keywords*keys;
+    mailimf_fields *fields = 0;
+    mailimf_references * refs = 0;
+    mailimf_keywords*keys = 0;
     QString status;
     QString value;
     QBitArray mFlags(7);

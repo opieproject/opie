@@ -55,7 +55,7 @@ QString IMAPFolder::decodeFolderName( const QString &name )
   unsigned long ucs4, utf16, bitbuf;
   unsigned char base64[256], utf8[6];
   unsigned long srcPtr = 0;
-  QCString dst;
+  QCString dst = "";
   QCString src = name.ascii();
 
   /* initialize modified base64 decoding table */

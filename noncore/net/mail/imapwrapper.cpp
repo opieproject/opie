@@ -94,13 +94,13 @@ void IMAPwrapper::logout()
 
 void IMAPwrapper::listMessages(const QString&mailbox,QList<RecMail> &target )
 {
-    const char *mb;
+    const char *mb = 0;
     int err = MAILIMAP_NO_ERROR;
-    clist *result;
+    clist *result = 0;
     clistcell *current;
 //    mailimap_fetch_att *fetchAtt,*fetchAttFlags,*fetchAttDate,*fetchAttSize;
-    mailimap_fetch_type *fetchType;
-    mailimap_set *set;
+    mailimap_fetch_type *fetchType = 0;
+    mailimap_set *set = 0;
 
     mb = mailbox.latin1();
     login();
@@ -121,7 +121,6 @@ void IMAPwrapper::listMessages(const QString&mailbox,QList<RecMail> &target )
         return;
     }
 
-    result = clist_new();
     /* the range has to start at 1!!! not with 0!!!! */
     set = mailimap_set_new_interval( 1, last );
     fetchType = mailimap_fetch_type_new_fetch_att_list_empty();
@@ -137,7 +136,6 @@ void IMAPwrapper::listMessages(const QString&mailbox,QList<RecMail> &target )
     QString date,subject,from;
 
     if ( err == MAILIMAP_NO_ERROR ) {
-        
         mailimap_msg_att * msg_att;
         int i = 0;
         for (current = clist_begin(result); current != 0; current=clist_next(current)) {
@@ -154,7 +152,7 @@ void IMAPwrapper::listMessages(const QString&mailbox,QList<RecMail> &target )
     } else {
         qDebug("Error fetching headers: %s",m_imap->imap_response);
     }
-    mailimap_fetch_list_free(result);
+    if (result) mailimap_fetch_list_free(result);
 }
 
 QList<Folder>* IMAPwrapper::listFolders()

@@ -441,7 +441,9 @@ char *SMTPwrapper::getFrom( mailimf_field *ffrom)
 
 char *SMTPwrapper::getFrom( mailmime *mail )
 {
+    /* no need to delete - its just a pointer to structure content */
     mailimf_field *ffrom = 0;
+    char*f = 0;
     ffrom = getField( mail->mm_data.mm_message.mm_fields, MAILIMF_FIELD_FROM );
     return getFrom(ffrom);
 }
@@ -563,6 +565,9 @@ void SMTPwrapper::smtpSend( mailmime *mail,bool later, SMTPaccount *smtp )
     from = getFrom( mail );
     rcpts = createRcptList( mail->mm_data.mm_message.mm_fields );
     smtpSend(from,rcpts,data,size,smtp);
+    if (data) {free(data);}
+    if (from) {free(from);}
+    if (rcpts) smtp_address_list_free( rcpts );
 }
 
 int SMTPwrapper::smtpSend(char*from,clist*rcpts,char*data,size_t size, SMTPaccount *smtp )
@@ -630,10 +635,7 @@ free_con_session:
 free_mem_session:
     mailsmtp_free( session );
 free_mem:
-    if (rcpts) smtp_address_list_free( rcpts );
-    if (data) free( data );
     if (server) free( server );
-    if (from) free( from );
     if ( smtp->getLogin() ) {
         free( user );
         free( pass );
@@ -652,7 +654,6 @@ void SMTPwrapper::sendMail(const Mail&mail,bool later )
         qDebug( "sendMail: error creating mime mail" );
     } else {
         sendProgress = new progressMailSend();
-//        sendProgress->showMaximized();
         sendProgress->show();
         sendProgress->setMaxMails(1);
         smtpSend( mimeMail,later,smtp);
@@ -673,6 +674,7 @@ int SMTPwrapper::sendQueuedMail(MBOXwrapper*wrap,SMTPaccount*smtp,RecMail*which)
     mailimf_field*ffrom = 0;
     clist *rcpts = 0;
     char*from = 0;
+    int res = 0;
 
     wrap->fetchRawBody(*which,&data,&length);
     if (!data) return 0;
@@ -689,9 +691,22 @@ int SMTPwrapper::sendQueuedMail(MBOXwrapper*wrap,SMTPaccount*smtp,RecMail*which)
 
     qDebug("Size: %i vs. %i",length,strlen(data));
     if (rcpts && from) {
-        return smtpSend(from,rcpts,data,strlen(data),smtp );
+        res = smtpSend(from,rcpts,data,length,smtp );
     }
-    return 0;
+    if (fields) {
+        mailimf_fields_free(fields);
+        fields = 0;
+    }
+    if (data) {
+        free(data);
+    }    
+    if (from) {
+        free(from);
+    }
+    if (rcpts) {
+        smtp_address_list_free( rcpts );
+    }
+    return res;
 }
 
 /* this is a special fun */
@@ -717,9 +732,8 @@ bool SMTPwrapper::flushOutbox(SMTPaccount*smtp)
     }
     mailsToSend.setAutoDelete(false);
     sendProgress = new progressMailSend();
-//        sendProgress->showMaximized();
-   sendProgress->show();
-   sendProgress->setMaxMails(mailsToSend.count());
+    sendProgress->show();
+    sendProgress->setMaxMails(mailsToSend.count());
 
     while (mailsToSend.count()>0) {
         if (sendQueuedMail(wrap,smtp,mailsToSend.at(0))==0) {
@@ -740,5 +754,4 @@ bool SMTPwrapper::flushOutbox(SMTPaccount*smtp)
     mailsToSend.setAutoDelete(true);
     delete wrap;
     return returnValue;
-
 }
