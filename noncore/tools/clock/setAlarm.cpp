@@ -4,7 +4,7 @@
 //       Created: Wed Mar 13 19:47:24 2002
 //      copyright            : (C) 2002 by ljp
 //      email                : ljp@llornkcor.com
-// 
+//
 ***************************************************************************
    *   This program is free software; you can redistribute it and/or modify  *
    *   it under the terms of the GNU General Public License as published by  *
@@ -14,8 +14,8 @@
 
 #include "setAlarm.h"
 
-#include <opie/ofileselector.h>
-#include <opie/ofiledialog.h>
+#include <opie2/ofileselector.h>
+#include <opie2/ofiledialog.h>
 
 #include <qpe/config.h>
 #include <qpe/qpeapplication.h>
@@ -37,13 +37,13 @@ Set_Alarm::Set_Alarm( QWidget* parent,  const char* name, bool modal, WFlags fl 
 {
     if ( !name )
   setName( "Set_Alarm" );
-    resize( 240, 101 ); 
+    resize( 240, 101 );
     setMaximumSize( QSize( 240, 320 ) );
     move(0,45);
     setCaption( tr( "Set Alarm" ) );
     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
 
-    Set_AlarmLayout = new QGridLayout( this ); 
+    Set_AlarmLayout = new QGridLayout( this );
     Set_AlarmLayout->setSpacing( 6 );
     Set_AlarmLayout->setMargin( 11 );
 
@@ -76,7 +76,7 @@ Set_Alarm::Set_Alarm( QWidget* parent,  const char* name, bool modal, WFlags fl 
     Minute_Slider->setPageStep( 1);
     Minute_Slider->setOrientation( QSlider::Horizontal );
     connect(Minute_Slider, SIGNAL(  valueChanged(int)),this,SLOT(slotChangeMinute(int)));
-    
+
     Set_AlarmLayout->addMultiCellWidget( Minute_Slider, 2, 2, 1, 2 );
 
     Minute_LCDNumber = new QLCDNumber( this, "Minute_LCDNumber" );
@@ -90,14 +90,14 @@ Set_Alarm::Set_Alarm( QWidget* parent,  const char* name, bool modal, WFlags fl 
     Am_RadioButton->setText( tr( "AM" ) );
     Am_RadioButton->setChecked(TRUE);
     connect( Am_RadioButton, SIGNAL(toggled(bool)),this,SLOT( amButtonToggled(bool)));
-    
+
     Set_AlarmLayout->addMultiCellWidget( Am_RadioButton, 0, 1, 3, 4 );
 
 
     Pm_RadioButton = new QRadioButton( this, "Pm_RadioButton" );
     Pm_RadioButton->setText( tr( "PM" ) );
     connect( Pm_RadioButton, SIGNAL(toggled(bool)),this,SLOT( pmButtonToggled(bool)));
-    
+
     Set_AlarmLayout->addMultiCellWidget(Pm_RadioButton, 1, 2, 3, 4 );
 
     useMp3Check = new QCheckBox ( tr( "mp3 alarm" ), this );
@@ -137,14 +137,14 @@ Set_Alarm::Set_Alarm( QWidget* parent,  const char* name, bool modal, WFlags fl 
     if(ampm) {
         Hour_Slider->setMaxValue( 12);
         Hour_Slider->setMinValue( 1);
-        
+
         if( i_alarmHour > 12) {
             i_alarmHour = i_alarmHour - 12;
             Pm_RadioButton->setChecked(TRUE);
         }
         else if ( i_alarmHour == 0 ) {
-          i_alarmHour = 12; 
-        } 
+          i_alarmHour = 12;
+        }
         Hour_Slider->setValue( i_alarmHour );
         Minute_Slider->setValue( alarmMinute.toInt(&ok,10) );
         SnoozeSlider->setValue( snoozeTime.toInt(&ok,10) );
@@ -158,7 +158,7 @@ Set_Alarm::Set_Alarm( QWidget* parent,  const char* name, bool modal, WFlags fl 
         Pm_RadioButton->hide();
     }
     if( config.readBoolEntry("mp3Alarm") )
-        useMp3Check->setChecked(true);        
+        useMp3Check->setChecked(true);
 
     // signals and slots connections
     connect(useMp3Check,SIGNAL(toggled(bool)),this,SLOT(slotChangemp3CkeckBox(bool)));
@@ -209,8 +209,8 @@ void Set_Alarm::slotChangemp3CkeckBox(bool b) {
         QStringList text;
         text << "audio/*";
         map.insert(tr("Audio"), text );
-        QString str = OFileDialog::getOpenFileName( 2,"/", QString::null, map);//,"", "*", this );
-//        QString str = OFileDialog::getOpenFileName( 2,"/");//,"", "*", this );
+        QString str = Opie::OFileDialog::getOpenFileName( 2,"/", QString::null, map);//,"", "*", this );
+//        QString str = Opie::OFileDialog::getOpenFileName( 2,"/");//,"", "*", this );
         if(!str.isEmpty() ) {
             qDebug(str);
             config.writeEntry("mp3Alarm",1);

@@ -4,7 +4,7 @@ SOURCES   = clock.cpp setAlarm.cpp \
       main.cpp
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
-LIBS            += -lqpe -lopie -lpthread
+LIBS            += -lqpe -lopiecore2 -lopieui2 -lpthread
 TARGET    = clock
 
 include ( $(OPIEDIR)/include.pro )
