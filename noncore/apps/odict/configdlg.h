@@ -7,6 +7,11 @@
  *                                                                         *
  **************************************************************************/
 
+class QWidget;
+class OTabWidget;
+class QListView;
+class QPushButton;
+
 #include <qdialog.h>
 
 
@@ -15,5 +20,18 @@ class ConfigDlg : public QDialog
 	Q_OBJECT
 	
     public:
-		ConfigDlg(QWidget *parent, const char *name);
+		ConfigDlg(QWidget *parent, const char *name, bool modal=FALSE );
+
+		void writeEntries();
+
+	private:
+		OTabWidget *tab;
+		QWidget *settings_tab, *search_tab;
+		QListView *list;
+		QPushButton *new_button, *change_button, *delete_button;
+
+	private slots:
+		void slotNewMethod();
+		void slotChangeMethod();
+		void slotDeleteMethod();
 };

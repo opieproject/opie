@@ -7,38 +7,23 @@
  *                                                                         *
  **************************************************************************/
 
-#include <qmainwindow.h>
-
-class QPopupMenu;
-class QMenuBar;
-class QHBox;
+class QWidget;
+class OTabWidget;
+class QListView;
 class QPushButton;
-class QLineEdit;
-class QAction;
-class QActionGroup;
+class QLabel;
+class QString;
 
-class ODict : public QMainWindow
+#include <qdialog.h>
+
+
+class SearchMethodDlg : public QDialog
 {
 	Q_OBJECT
 	
     public:
-		ODict();
+		SearchMethodDlg(QWidget *parent, const char *name, bool modal=FALSE );
 
-	private:
-		QPopupMenu *help, *settings, *parameter, *error_tol_menu;
-		QMenuBar *menu;
-		QHBox *hbox;
-		QLineEdit *query_le;
-		QPushButton *ok_button;
+		QString itemName;
 
-		QAction *setting_a, *setting_b;
-		
-		void setupMenus();
-	
-	private slots:
-		void slotDisplayAbout();
-		void slotStartQuery();
-		void slotSetErrorcount( int );
-		void slotSettings();
-		void slotSetParameter( int );
 };

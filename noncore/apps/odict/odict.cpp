@@ -58,6 +58,28 @@ void ODict::slotStartQuery()
 	QString querystring = query_le->text();
 }
 
+
+void ODict::slotSetErrorcount( int count )
+{
+	count = 1;
+}
+
+void ODict::slotSettings()
+{
+	ConfigDlg dlg( this, "Config" , true);
+	if ( dlg.exec() == QDialog::Accepted )
+		dlg.writeEntries();
+	else qDebug( "abgebrochen" );
+}
+
+void ODict::slotSetParameter( int /*count*/ )
+{
+//X 	if ( int == 0 )
+//X 	if ( int == 1 )
+//X 	if ( int == 2 )
+//X 	else qWarning( "ERROR" );
+}
+
 void ODict::setupMenus()
 {
 	menu = new QMenuBar( this );
@@ -67,8 +89,6 @@ void ODict::setupMenus()
 	connect( setting_a, SIGNAL( activated() ), this, SLOT( slotSettings() ) );
 	setting_a->addTo( settings );
 	setting_b = new QAction(tr(  "Searchmethods" ), Resource::loadPixmap(  "today/config" ), QString::null, 0, this, 0 );
-	connect( setting_b, SIGNAL( activated() ), this, SLOT( slotSearchMethods() ) );
-	setting_b->addTo( settings );
 	
 	parameter = new QPopupMenu( menu );
 	connect(  parameter, SIGNAL( activated( int ) ), this, SLOT( slotSetParameter( int ) ) );
@@ -95,23 +115,3 @@ void ODict::setupMenus()
 	menu->insertItem( tr( "Parameter" ) , parameter );
 	menu->insertItem( tr( "Help" ) , help );
 }
-
-void ODict::slotSetErrorcount( int count )
-{
-}
-
-void ODict::slotSettings()
-{
-	ConfigDlg *dlg = new ConfigDlg( this, "Config" );
-}
-
-void ODict::slotSetParameter( int count )
-{
-//X 	if ( int == 0 )
-//X 	if ( int == 1 )
-//X 	if ( int == 2 )
-//X 	else qWarning( "ERROR" );
-}
-
-void ODict::slotSearchMethods(){}
-

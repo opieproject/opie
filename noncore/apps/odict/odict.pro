@@ -1,14 +1,16 @@
 TEMPLATE	= app
 CONFIG		= qt warn_on release
 HEADERS		= odict.h \
+				searchmethoddlg.h \
 				configdlg.h
 
 SOURCES		= main.cpp \
 		  odict.cpp \
+		  searchmethoddlg.cpp \
 		  configdlg.cpp
 INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
-LIBS		+= -lqpe -lstdc++
+LIBS		+= -lqpe -lstdc++ -lopie
 TARGET 		= odict
 DESTDIR		= $(OPIEDIR)/bin
 
