@@ -526,6 +526,7 @@ void OKeyConfigManager::save() {
         m_conf->writeEntry((*it).configKey()+"key", pair.keycode()  );
         m_conf->writeEntry((*it).configKey()+"mod", pair.modifier() );
     }
+    m_conf->write();
 }
 
 /**
