@@ -2,7 +2,7 @@
  * opiealarm.c
  *
  *  This program is for extracting the event time/date out
- *  of /etc/resumeat and setting the RTC alarm to that time/date.
+ *  of /var/run/resumeat and setting the RTC alarm to that time/date.
  *  It is designed to run via a script just before the iPAQ
  *  is suspended and right after the iPAQ resumes operation.
  * 
@@ -371,7 +371,7 @@ int resume ( int resuspend )
 			
 				remove_pidfile ( );
 			
-				// no need for system() since this process is no longer usefull anyway				
+				// no need for system() since this process is no longer usefull anyway
 				execv ( "/opt/QtPalmtop/bin/qcop", argv );
 				
 				perror ( "exec for qcop failed" );
