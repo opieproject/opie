@@ -1,0 +1,26 @@
+How to use the new build system
+===============================
+
+WARNING: This buildsystem is currently under construction. Therefore
+	 it may create more problems than solutions .. ;)
+
+But if you have problems with the old one, you may use the new which
+is much more advanced:
+
+First of all set you shell-variables to the correct settings 
+( as you need for the old build system )
+
+Then do the following:
+
+cd $OPIEDIR
+make clean
+ln -s Makefile.test GNUmakefile
+cp def-configs/opie .config
+make menuconfig
+
+Now you can move through the menu and select or deselect anything..
+Exit and save the configuration and enter "make" to create opie...
+
+Have fun with it !
+
+Ciao, Stefan
