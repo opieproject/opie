@@ -1,49 +1,63 @@
 Stuff todo until OPIE 1.0 :
+===========================
 
 Feature requests:
-
+-----------------
 - Dial by mobile phone by tapping the number.. 
   (Maybe using gsmtool. And we may
 	add a library class for this)
 - dial with dtmfdial incase it's installed and there's no mobile
 - 3rd column for 2. Contact
+- Implementing additional Views (Phonebook, ...)
 
 Known Bugs:
-- Contact-Editor is temporarely reanabled. Wait for replacement.
+-----------
+- If in Cardview and a category change removes all entries: 
+	There are already entries in Cardview after up/down
 - OK-Key does not switch from Detailview (ablable) to Listview
 
 Bugs but not in addressbook:
+-----------------------------
 - VCARD: Import of Anniversary does not work correctly (currently disabled)
 - VCARD: If umlaut (äöüß) in address, the parser gets confused..
 
 
 Urgent:
-
+--------
 Important:
+- Contact-Editor is temporarely reanabled. Wait for replacement.
+- Redesign of Contacteditor
+- Store last settings of combo-boxes
+- Name order selected in "contacteditor" not used in list view.
+
+- There should be some icons for List and Cardview
+
+- After search (Started with Return): KeyFocus should be on Tabelle
+- Searchwidget closed: Selected user is jumping
+- Wenn suchen beendet, dann dauert das Tabellenupdate (was überhaupt überflüssig ist)
+	zu lange..
 
 - Smarter handling of "Cancel" and klicking on exit:
 	User of the old Addressbook always closing addressbook accidentely.. :(
+- Add "Do you really want to close app" Box ?
 
-- Add "Do you really want to close app" Box.
-- Redesign of Contacteditor
-- Store last settings of combo-boxes
+- IRDA Receive: Contact is added, but start of editor with new entry expected..
 
-- Name order selected in "contacteditor" not used in list view.
 - Overview window cleanup needed..
 - Reload if contacts were changed externally
 - "What's this" should be added (Deleyed after Feature Freeze)
 
 Less important:
-
--  The picker (alphabetical sort widget) should be
+---------------
+- The picker (alphabetical sort widget) should be
    placed verticaly or horizontally (configurable)
-- Finishing of new View functions (List, Phonebook...)
 - Find a smart solution for activating/deactivating the "send email" event
 
 Should be Fixed (not absolute sure, need further validation):
-
+-------------------------------------------------------------
 
 Fixed:
+-------
 - Syncing: abtable not reloaded after sync.
 - Find widget should be replaced by something like 
   qpdf has.
