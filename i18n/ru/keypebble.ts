@@ -136,7 +136,7 @@ to this account, please try later.</source>
     </message>
     <message>
         <source>Send Contrl-Alt-Delete</source>
-        <translation>Послать Contrl-Alt-Delete</translation>
+        <translation>Послать Ctrl-Alt-Del</translation>
     </message>
     <message>
         <source>Next Click is Double Click</source>
@@ -144,7 +144,7 @@ to this account, please try later.</source>
     </message>
     <message>
         <source>Next Click is Right Click</source>
-        <translation>Следующий щелчок - правый</translation>
+        <translation>Следующий щелчок - правая кнопка</translation>
     </message>
 </context>
 <context>
@@ -202,7 +202,7 @@ to this account, please try later.</source>
     </message>
     <message>
         <source>Request 8-bit session</source>
-        <translation>Запрашивать 8-битные сеанс</translation>
+        <translation>Запрашивать 8-битный сеанс</translation>
     </message>
     <message>
         <source>Raise on bell</source>
@@ -210,7 +210,7 @@ to this account, please try later.</source>
     </message>
     <message>
         <source>Request shared session</source>
-        <translation>Запрашивать совместные сеанс</translation>
+        <translation>Запрашивать совместный сеанс</translation>
     </message>
     <message>
         <source>1</source>
