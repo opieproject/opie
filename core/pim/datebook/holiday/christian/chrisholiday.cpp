@@ -82,6 +82,7 @@ void ChrisHoliday::calc_easter()
   _days[d].append(QObject::tr("Eastersunday","holidays"));
   _days[d.addDays(49)].append(QObject::tr("Whitsunday","holidays"));
   _days[d.addDays(50)].append(QObject::tr("Whitmonday","holidays"));
+  _days[d.addDays(39)].append(QObject::tr("Ascension Day","holidays"));
   _days[d.addDays(-46)].append(QObject::tr("Ash Wednesday","holidays"));
   _days[d.addDays(60)].append(QObject::tr("Corpus Christi","holidays"));
 }

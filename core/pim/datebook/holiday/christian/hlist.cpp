@@ -11,7 +11,7 @@ const QStringList HList::entries(const QDate&aDate)const
         }
     } else if (aDate.month()==1) {
         if (aDate.day()==1) {
-            ret.append(QObject::tr("New year","holidays"));
+            ret.append(QObject::tr("New Year","holidays"));
         }
     }
     return ret;
