@@ -30,16 +30,19 @@
 
 #include "omanufacturerdb.h"
 
-/* OPIE CORE */
+#define OPIE_IMPROVE_GUI_LATENCY 1
+
+/* OPIE */
 #include <opie2/odebug.h>
+#ifdef OPIE_IMPROVE_GUI_LATENCY
+#include <qpe/global.h>
+#endif
 
 /* QT */
 #include <qapplication.h>
 #include <qstring.h>
 #include <qfile.h>
 #include <qtextstream.h>
-
-#define OPIE_IMPROVE_GUI_LATENCY 1
 
 OManufacturerDB* OManufacturerDB::_instance = 0;
 
@@ -56,6 +59,9 @@ OManufacturerDB* OManufacturerDB::instance()
 
 OManufacturerDB::OManufacturerDB()
 {
+    #ifdef OPIE_IMPROVE_GUI_LATENCY
+    Global::statusMessage( "Reading Manufacturers..." );
+    #endif
     QString filename( "/etc/manufacturers" );
     odebug << "OManufacturerDB: trying to read " << filename << oendl;
     if ( !QFile::exists( filename ) )
@@ -104,6 +110,9 @@ OManufacturerDB::OManufacturerDB()
             #endif
         }
         odebug << "OManufacturerDB: manufacturer list completed." << oendl;
+        #ifdef OPIE_IMPROVE_GUI_LATENCY
+        Global::statusMessage( "Manufacturers Complete..." );
+        #endif
     }
 }
 
