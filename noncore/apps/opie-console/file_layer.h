@@ -21,6 +21,26 @@ public:
         Undefined,
         Incomplete
     };
+    enum Features {
+        Append = 0,
+        Twostop = 1,
+        Escape = 2,
+        Rename = 4,
+        FullPath = 8,
+        SendIfNewer = 16,
+        SendIfLonger = 32,
+        Resume = 64
+
+    };
+    enum Mode {
+        Ascii = 0,
+        Binary
+    };
+    enum BlockSize {
+        Block_1k,
+        Block_4k,
+        Block_8k
+    };
     /**
      *the io layer to be used
      */
@@ -28,6 +48,11 @@ public:
     virtual ~FileTransferLayer();
 
 public slots:
+
+    virtual void sendFile( const QString& file,
+                           Mode mode, BlockSize blk,
+                           Features feat ) {};
+
     /**
      * send a file over the layer
      */
