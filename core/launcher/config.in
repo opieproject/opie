@@ -2,15 +2,3 @@
     boolean "opie-taskbar (program launcher qpe for Opie)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI && LIBQRSYNC
-
-if LAUNCHER
-  config PRELOAD
-    boolean
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2UI && LAUNCHER
-
-  config LAUNCHER_CORE
-    boolean
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2UI && LAUNCHER && PRELOAD
-endif
