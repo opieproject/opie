@@ -375,7 +375,7 @@ void MScanListView::addService( const QString& name, const OMacAddress& macaddr,
 
             // never seen that - add new item
 
-            MScanListItem* item = new MScanListItem( it.current(), "service", "N/A", false, -1, -1 );
+            MScanListItem* item = new MScanListItem( it.current(), "service", "N/A", " ", false, -1, -1 );
             item->setText( col_essid, name );
 
             return;

@@ -256,11 +256,14 @@ void Wellenreiter::handleIPData( OPacket* p, OIPPacket* ip, OMacAddress& source,
         qDebug( "Received DHCP '%s' packet", (const char*) dhcp->type() );
         if ( dhcp->type() == "OFFER" )
         {
-            qDebug( "ADDSERVICE: '%s' ('%s') seems to be a DHCP server.", (const char*) source.toString(), (const char*) dhcp->serverAddress().toString() );
-            //netView()->addNewItem( "station", "<wired>", from, false, -1, 0, GpsLocation( 0, 0 ) );
-
+            qDebug( "DHCP: '%s' ('%s') seems to be a DHCP server.", (const char*) source.toString(), (const char*) dhcp->serverAddress().toString() );
             netView()->identify( source, dhcp->serverAddress().toString() );
             netView()->addService( "DHCP", source, dhcp->serverAddress().toString() );
+        }
+        else if ( dhcp->type() == "ACK" )
+        {
+            qDebug( "DHCP: '%s' ('%s') accepted the offered DHCP address.", (const char*) dhcp->clientMacAddress().toString(), (const char*) dhcp->yourAddress().toString() );
+            netView()->identify( dhcp->clientMacAddress(), dhcp->yourAddress().toString() );
         }
     }
 }
