@@ -25,8 +25,13 @@ configs += $(TOPDIR)/core/applets/config.in $(TOPDIR)/core/apps/config.in $(TOPD
  
 all : $(TOPDIR)/.config
 
+#
+# The IPK creation is a very slow process. If you want to only create some
+# IPKs, e.g. the ones in library, then do
+#	make ipks IPK_START=library
+# and then only the *.control files in this directory will be processed
 ipks: $(OPIEDIR)/scripts/subst $(OPIEDIR)/scripts/filesubst FORCE $(TOPDIR)/.config
-	@find $(OPIEDIR)/ -type f -name \*.control | ( for ctrl in `cat`; do \
+	@find $(OPIEDIR)/$(IPK_START) -type f -name \*.control | ( for ctrl in `cat`; do \
 		prerm=`echo $$ctrl|sed -e 's,\.control$$,.prerm,'`; \
 		preinst=`echo $$ctrl|sed -e 's,\.control$$,.preinst,'`; \
 		postrm=`echo $$ctrl|sed -e 's,\.control$$,.postrm,'`; \
@@ -53,8 +58,8 @@ $(TOPDIR)/.config: $(TOPDIR)/.depends.cfgs $(configs)
 	$(call descend,scripts/kconfig,conf)
 	@if [ ! -e $@ ]; then \
 		cp $(TOPDIR)/def-configs/opie $@; \
-	fi;
-	@$(MAKE) -C scripts/kconfig conf;
+	fi
+	@$(MAKE) -C scripts/kconfig conf
 	./scripts/kconfig/conf -s ./config.in
 
 # config rules must have the $(configs) var defined
@@ -109,13 +114,13 @@ endif
 
 SUBDIRS = $(subdir-y)
 
-all clean install ipk: $(SUBDIRS) 
+all clean install ipk: $(SUBDIRS)
 
 lupdate lrelease:
-	@for i in $(SUBDIRS); do $(MAKE) -C $$i $@; done;
+	@for i in $(SUBDIRS); do $(MAKE) -C $$i $@; done
 
 opie-lupdate opie-lrelease:
-	@for i in $(SUBDIRS); do $(MAKE) -C $$i $@; done;
+	@for i in $(SUBDIRS); do $(MAKE) -C $$i $@; done
 
 $(subdir-y) : $(if $(CONFIG_LIBQPE),$(QTDIR)/stamp-headers $(OPIEDIR)/stamp-headers) \
 	$(if $(CONFIG_LIBQPE-X11),$(QTDIR)/stamp-headers-x11 $(OPIEDIR)/stamp-headers-x11 ) \
