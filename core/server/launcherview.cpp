@@ -62,10 +62,6 @@ public:
     int ref;
 };
 
-enum BusyIndicatorType {
-	BIT_Normal = 0,
-	BIT_Blinking
-};
 
 static QMap<QString,BgPixmap*> *bgCache = 0;
 
@@ -97,12 +93,15 @@ public:
 
     virtual int compare ( QIconViewItem * i ) const;
     void paintItem( QPainter *p, const QColorGroup &cg );
+
+    void setBusyIndicatorType ( BusyIndicatorType t ) { busyType = t; }
 protected:
     bool isBigIcon;
     int iteration;
     AppLnk* app;
 private:
     void paintAnimatedIcon( QPainter *p );
+    BusyIndicatorType busyType;
 };
 
 
@@ -147,8 +146,8 @@ public:
     }
 
     void updateCategoriesAndMimeTypes();
-
-    void doAutoScroll()
+    void setBusyIndicatorType ( BusyIndicatorType t ) { busyType = t; }
+     void doAutoScroll()
     {
 	// We don't want rubberbanding (yet)
     }
@@ -176,10 +175,13 @@ public:
 	if ( bsy != c ) {
 	    LauncherItem *oldBusy = bsy;
 	    bsy = c;
-	    if ( oldBusy )
+	    if ( oldBusy )  {
 		oldBusy->resetIcon();
-	    if ( bsy )
+                    }
+	    if ( bsy )   {
+                                bsy->setBusyIndicatorType( busyType ) ;
 		bsy->animateIcon();
+                    }
 	}
     }
 
@@ -363,6 +365,7 @@ private:
 #ifdef USE_ANIMATED_BUSY_ICON_OVERLAY
     QPixmap busyPix;
 #endif
+  BusyIndicatorType busyType;
 };
 
 
@@ -374,7 +377,10 @@ void LauncherView::setBusy(bool on)
 }
 
 void LauncherView::setBusyIndicatorType( const QString& type ) {
-    /* ### FIXME */
+    if ( type. lower ( ) == "animated" )
+	icons->setBusyIndicatorType(  BIT_Animated  ) ;
+    else
+	icons->setBusyIndicatorType(  BIT_Normal  ) ;
 }
 
 LauncherItem::LauncherItem( QIconView *parent, AppLnk *applnk, bool bigIcon )
@@ -420,6 +426,8 @@ void LauncherItem::paintItem( QPainter *p, const QColorGroup &cg )
 	liv->setItemTextBackground( oldBrush );
 }
 
+
+
 void LauncherItem::paintAnimatedIcon( QPainter *p )
 {
     LauncherIconView* liv = (LauncherIconView*)iconView();
@@ -440,8 +448,10 @@ void LauncherItem::paintAnimatedIcon( QPainter *p )
     liv->drawBackground( &p2, QRect(x1,y1,w,h+4) );
     int bounceY = 2;
 #ifdef BOUNCE_BUSY_ICON
-    bounceY = 4 - ((iteration+2)%8);
-    bounceY = bounceY < 0 ? -bounceY : bounceY;
+    if ( busyType == BIT_Animated ) {
+       bounceY = 4 - ((iteration+2)%8);
+       bounceY = bounceY < 0 ? -bounceY : bounceY;
+    }
 #endif
     p2.drawPixmap( x1, y1 + bounceY, *pixmap() );
 #ifdef USE_ANIMATED_BUSY_ICON_OVERLAY

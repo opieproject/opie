@@ -81,8 +81,8 @@ TabsSettings::TabsSettings ( QWidget *parent, const char *name )
                 m_bigbusy = new QCheckBox( tr( "Enable big busy indicator" ),  this );
                 lay-> addMultiCellWidget ( m_bigbusy, 5, 5, 0, 1 );
 
-	m_busyblink = new QCheckBox ( tr( "Enable blinking busy indicator" ), this );
-	lay-> addMultiCellWidget ( m_busyblink, 6, 6, 0, 1 );
+	m_busyani = new QCheckBox ( tr( "Enable animated busy indicator" ), this );
+	lay-> addMultiCellWidget ( m_busyani, 6, 6, 0, 1 );
 
 	p1-> setEnabled ( false );
 	p3-> setEnabled ( false );
@@ -94,7 +94,7 @@ TabsSettings::TabsSettings ( QWidget *parent, const char *name )
 	QWhatsThis::add ( p2, tr( "Opens a new dialog to customize the select Tab." ));
 	QWhatsThis::add ( p3, tr( "Deletes a Tab from the Launcher." ) + QString ( "<center><br><i>not yet implemented</i><br>Please use the tabmanager</center>." ));
         	QWhatsThis::add ( m_bigbusy, tr( "Activate this, if you want a big busy indicator in the middle of the screen instead of the one in taskbar." ));
-	QWhatsThis::add ( m_busyblink, tr( "Activate this, if you want a blinking busy indicator for starting applications in the Launcher." ));
+	QWhatsThis::add ( m_busyani, tr( "Activate this, if you want an animatedbusy indicator for starting applications in the Launcher." ));
 }
 
 void TabsSettings::init ( )
@@ -120,7 +120,7 @@ void TabsSettings::init ( )
 	readTabSettings ( cfg );
 
 	cfg. setGroup ( "GUI" );
-	m_busyblink-> setChecked ( cfg. readEntry ( "BusyType" ). lower ( ) == "blink" );
+	m_busyani-> setChecked ( cfg. readEntry ( "BusyType" ). lower ( ) == "animated" );
                 m_bigbusy->setChecked(  cfg. readBoolEntry ( "BigBusy" )  );
 }
 
@@ -264,7 +264,7 @@ void TabsSettings::accept ( )
 		tc. m_changed = false;
 	}
 	cfg. setGroup ( "GUI" );
-	QString busytype = QString ( m_busyblink-> isChecked ( ) ? "blink" : "" );
+	QString busytype = QString ( m_busyani-> isChecked ( ) ? "Animated" : "" );
 	cfg. writeEntry ( "BusyType", busytype );
 
         	cfg. writeEntry ( "BigBusy", m_bigbusy->isChecked( ) );
