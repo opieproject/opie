@@ -42,7 +42,7 @@
     </message>
     <message>
         <source>Weight:</source>
-        <translation>Masse:</translation>
+        <translation type="obsolete">Masse:</translation>
     </message>
     <message>
         <source>Block</source>
@@ -83,6 +83,10 @@
     <message>
         <source>%1 g/cm^3</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>Weight</source>
+        <translation>Masse</translation>
     </message>
 </context>
 <context>
