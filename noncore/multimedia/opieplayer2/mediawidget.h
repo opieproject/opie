@@ -30,6 +30,7 @@
 #include "playlistwidget.h"
 
 #include <vector>
+#include <memory>
 
 class MediaWidget : public QWidget
 {
@@ -51,7 +52,13 @@ public:
         QPixmap pixUp;
         QPixmap pixDown;
     };
+#if defined( _CC_GNU_ )
+    // use that allocator to avoid the default allocator that on gcc2 requires libstdc++ because
+    // in the BAD_ALLOC macro it uses std::cerr and friends :-(
+    typedef std::vector<Button, std::__allocator<Button, std::__new_alloc> > ButtonVector;
+#else
     typedef std::vector<Button> ButtonVector;
+#endif
 
     struct SkinButtonInfo
     {
@@ -59,9 +66,6 @@ public:
         const char *fileName;
         ButtonType type;
     };
-
-    typedef std::vector<QBitmap> MaskVector;
-    typedef std::vector<QPixmap> PixmapVector;
 
     MediaWidget( PlayListWidget &_playList, MediaPlayerState &_mediaPlayerState, QWidget *parent = 0, const char *name = 0 );
     virtual ~MediaWidget();
