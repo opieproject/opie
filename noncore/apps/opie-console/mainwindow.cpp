@@ -410,12 +410,19 @@ void MainWindow::slotTerminate() {
     /* FIXME move to the next session */
 }
 
+
+
+
+
+
 void MainWindow::slotQuickLaunch()  {
     Profile prof = manager()->profile(  "default"   );
     if ( prof.name() == "default"  )  {
         create( prof );
     } else {
-        QMessageBox::warning(this, tr("Failure"),tr("please configure one profile named \"default\""));
+        Profile newProf =  Profile( "default",  "console", "default" ,  0, 3,  0 );
+        newProf.setAutoConnect( true );
+        create( newProf );
     }
 
 }
