@@ -35,7 +35,7 @@ class QLabel;
 
 class CLayoutPrefs : public QWidget
 { 
-
+    Q_OBJECT
 public:
 
     friend class CPrefs;
@@ -56,7 +56,7 @@ public:
 
 class CLayoutPrefs2 : public QWidget
 { 
-
+    Q_OBJECT
 public:
 
     friend class CPrefs;
@@ -99,7 +99,7 @@ protected:
 */
 class CMiscPrefs : public QWidget
 { 
-
+    Q_OBJECT
 public:
 
     friend class CPrefs;
@@ -113,6 +113,7 @@ public:
 
 class CButtonPrefs : public QWidget
 { 
+    Q_OBJECT
 #ifdef USECOMBO
     void populate(QComboBox*);
 #else
@@ -135,7 +136,7 @@ public:
 
 class CInterPrefs : public QWidget
 { 
-
+    Q_OBJECT
 public:
 
     friend class CPrefs;

@@ -171,7 +171,7 @@ class CIndBarPrefs : public QWidget
 
 class CMiscBarPrefs : public QWidget
 { 
-
+    Q_OBJECT
 public:
 
     CMiscBarPrefs( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
