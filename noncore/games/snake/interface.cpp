@@ -33,7 +33,7 @@ SnakeGame::SnakeGame(QWidget* parent, const char* name, WFlags f) :
     canvas(232, 258)
 {
     setCaption( tr("Snake") );
-    QPixmap bg = Resource::loadPixmap("grass");
+    QPixmap bg = Resource::loadPixmap("snake/grass");
     canvas.setBackgroundPixmap(bg);
     canvas.setUpdatePeriod(100);
     snake = 0;
