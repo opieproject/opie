@@ -1,0 +1,8 @@
+Files: share/tinykate/syntax/latex.xml share/tinykate/syntax/postscript.xml share/tinykate/syntax/sgml.xml
+Priority: optional
+Section: opie/applications
+Maintainer: Opie Team <opie@handhelds.org>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base ($QPE_VERSION), opie-tinykate
+Description: Syntax Highlighting Patterns for document oriented languages for TinyKate

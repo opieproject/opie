@@ -1,0 +1,8 @@
+Files: share/tinykate/syntax/cs.xml share/tinykate/syntax/bash.xml share/tinykate/syntax/changelog.xml share/tinykate/syntax/desktop.xml share/tinykate/syntax/diff.xml share/tinykate/syntax/mab.xml share/tinykate/syntax/makefile.xml share/tinykate/syntax/rpmspec.xml share/tinykate/syntax/sml.xml share/tinykate/syntax/winehq.xml 
+Priority: optional
+Section: opie/applications
+Maintainer: Opie Team <opie@handhelds.org>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base ($QPE_VERSION), opie-tinykate
+Description: Syntax Highlighting Patterns for UNIX/Linux specific files for TinyKate

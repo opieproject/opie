@@ -1,0 +1,8 @@
+Files: share/tinykate/syntax/c.xml share/tinykate/syntax/cpp.xml share/tinykate/syntax/gnuassembler.xml share/tinykate/syntax/kbasic.xml share/tinykate/syntax/pascal.xml share/tinykate/syntax/perl.xml share/tinykate/syntax/php.xml share/tinykate/syntax/python.xml share/tinykate/syntax/ruby.xml share/tinykate/syntax/sql.xml share/tinykate/syntax/tcl.xml share/tinykate/syntax/xml.xml share/tinykate/syntax/xmldebug.xml
+Priority: optional
+Section: opie/applications
+Maintainer: Opie Team <opie@handhelds.org>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base ($QPE_VERSION), opie-tinykate
+Description: Syntax Highlighting Patterns for for common programming languages for TinyKate
