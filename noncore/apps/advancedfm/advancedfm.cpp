@@ -295,7 +295,7 @@ void AdvancedFm::populateLocalView()
 //         qDebug("Symlink detected "+symLink);
             QFileInfo sym( symLink);
             fileS.sprintf( "%10li", sym.size() );
-            fileL.sprintf( "%s ->  %s",  sym.fileName().data(),sym.absFilePath().data() );
+            fileL.sprintf( "%s ->  %s",  fi->fileName().data(),sym.absFilePath().data() );
             fileDate = sym.lastModified().toString();
         } else {
             fileS.sprintf( "%10li", fi->size() );
@@ -416,7 +416,7 @@ void AdvancedFm::populateRemoteView()
 //         qDebug("Symlink detected "+symLink);
             QFileInfo sym( symLink);
             fileS.sprintf( "%10li", sym.size() );
-            fileL.sprintf( "%s ->  %s",  sym.fileName().data(),sym.absFilePath().data() );
+            fileL.sprintf( "%s ->  %s",  fi->fileName().data(),sym.absFilePath().data() );
             fileDate = sym.lastModified().toString();
         } else {
 //        qDebug("Not a dir: "+currentDir.canonicalPath()+fileL);
@@ -440,10 +440,9 @@ void AdvancedFm::populateRemoteView()
                 else
                     pm= Resource::loadPixmap( "folder" );
 //                 item->setPixmap( 0,pm );
-             } else if( (fileInfo.permission( QFileInfo::ExeUser)
-                         | fileInfo.permission( QFileInfo::ExeGroup)
-                        | fileInfo.permission( QFileInfo::ExeOther)) & fs.find("vfat",0,TRUE) == -1) {
-                     pm = Resource::loadPixmap( "exec");
+            } else if( (fileInfo.permission( QFileInfo::ExeUser)
+                     | fileInfo.permission( QFileInfo::ExeGroup)
+                       | fileInfo.permission( QFileInfo::ExeOther)) & fs.find("vfat",0,TRUE) == -1) {
 /////                }  else if(fileInfo.isExecutable()){ //is exec <<<< BROKEN!!
                   pm = Resource::loadPixmap( "exec");
 //                     item->setPixmap( 0,pm);
@@ -1347,10 +1346,10 @@ void AdvancedFm::runCommand() {
      QString curFile;
      if (TabWidget->currentPageIndex() == 0) {
          if( Local_View->currentItem())
-         curFile = currentDir.canonicalPath() + Local_View->currentItem()->text(0);
+         curFile = currentDir.canonicalPath() +"/"+ Local_View->currentItem()->text(0);
      } else {
          if(Remote_View->currentItem())
-         curFile = currentRemoteDir.canonicalPath() + Remote_View->currentItem()->text(0);
+         curFile = currentRemoteDir.canonicalPath() + "/"+Remote_View->currentItem()->text(0);
      }
     
     InputDialog *fileDlg;
