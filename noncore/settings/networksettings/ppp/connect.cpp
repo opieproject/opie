@@ -828,7 +828,10 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
       // Close the tty. This prevents the QTimer::singleShot() in
       // Modem::readtty() from re-enabling the socket notifier.
       // The port is still held open by the helper process.
-      _ifaceppp->modem()->closetty();
+
+      /* Er, there _is_ not QTimer::singleShot() in Modem::readtty(),
+	 and closing the thing prevents pppd from using it later. */
+      //_ifaceppp->modem()->closetty();
 
       killTimer( main_timer_ID );
 
