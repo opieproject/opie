@@ -1,3 +1,22 @@
+/*
+ * Copyright (c) 2002 Michael R. Crawford <mike@tuxnami.org>
+ *
+ * This file is an add-on for the OPIE Palmtop Environment
+ *
+ * This file may be distributed and/or modified under the terms of the
+ * GNU General Public License version 2 as published by the Free Software
+ * Foundation and appearing in the file LICENSE.GPL included in the pacakaging
+ * of this file.
+ *
+ * This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
+ * WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ *
+ * This is a rewrite of the abeditor.h file, modified to provide a more
+ * intuitive interface to TrollTech's original Address Book editor.  This
+ * is made to operate exactly in interface with the exception of name.
+ *
+ */
 
 #include "contacteditor.h"
 #include "addresspicker.h"
