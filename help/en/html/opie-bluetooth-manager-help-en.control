@@ -3,7 +3,7 @@ Files: help/en/html/bluetooth-manager.html help/en/html/bluetooth-manager
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
-Architecture: arm
+Architecture: all
 Depends: opie-bluetooth-manager
 License: GPL
 Description: Bluetooth-manager help files (English)

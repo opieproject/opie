@@ -3,7 +3,7 @@ Files: help/en/html/vmemo.html
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: ljp <llornkcor@handhelds.org>
-Architecture: arm
+Architecture: all
 Depends: opie-vmemo
 License: GPL
 Description: Opie Vmemo voice recording help files (English)

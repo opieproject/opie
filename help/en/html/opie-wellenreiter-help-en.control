@@ -3,7 +3,7 @@ Files: help/en/html/wellenreiter.html
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Michael 'Mickey' Lauer <mickeyl@handhelds.org>
-Architecture: arm
+Architecture: all
 Depends: opie-wellenreiter
 License: GPL
 Description: Opie Wellenreiter help files (English)

@@ -3,7 +3,7 @@ Files: help/en/html/advancedfm.html
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: ljp <llornkcor@handhelds.org>
-Architecture: arm
+Architecture: all
 Depends: opie-advancedfm
 License: GPL
 Description: Opie Advanced file manager help files (English)

@@ -3,7 +3,7 @@ Files: help/en/html/opie-console.html help/en/html/opie-console/*
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
-Architecture: arm
+Architecture: all
 Depends: opie-console
 License: GPL
 Description: Opie terminal app help files (English)
