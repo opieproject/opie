@@ -34,7 +34,7 @@
 
 
 class QAction;
-class QPEToolBar;
+class QToolBar;
 class QMenuBar;
 class QPopupMenu;
 class QWidgetStack;
@@ -248,8 +248,8 @@ private:
     QImage image;           // the loaded image
     QPixmap pm;         // the converted pixmap
     QPixmap pmScaled;       // the scaled pixmap
-    QPEToolBar  *toolBar;
-    QPEToolBar  *iconToolBar;
+    QToolBar  *toolBar;
+    QToolBar  *iconToolBar;
     QMenuBar  *menuBar;
     QMenuBar  *current;
 

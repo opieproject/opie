@@ -25,7 +25,7 @@
 #include <qpe/config.h>
 
 #include <qpe/qpetoolbar.h>
-#include <qpe/qpemenubar.h>
+#include <qmenubar.h>
 #include <qpopupmenu.h>
 #include <qpushbutton.h>
 #include <qlcdnumber.h>
@@ -243,7 +243,7 @@ MineSweep::MineSweep( QWidget* parent, const char* name, WFlags f )
     setCaption( tr("Mine Hunt") );
     setIcon( Resource::loadPixmap( "minesweep_icon" ) );
 
-    QPEToolBar *toolBar = new QPEToolBar( this );
+    QToolBar *toolBar = new QToolBar( this );
     toolBar->setHorizontalStretchable( TRUE );
 
     QMenuBar *menuBar = new QMenuBar( toolBar );

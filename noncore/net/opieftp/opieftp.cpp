@@ -19,7 +19,7 @@ extern "C" {
 
 #include "inputDialog.h"
 
-#include <qpe/qpemenubar.h>
+#include <qmenubar.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
 #include <qpe/config.h>
@@ -69,7 +69,7 @@ OpieFtp::OpieFtp( QWidget* parent, const char* name, WFlags fl)
     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
 
     QMenuBar *menuBar = new QMenuBar(this);
-//     QPEToolBar *menuBar = new QPEToolBar(this);
+//     QToolBar *menuBar = new QToolBar(this);
 //     menuBar->setHorizontalStretchable( TRUE );
 
     QWMatrix matrix;

@@ -134,7 +134,7 @@ WordGame::WordGame( QWidget* parent, const char* name, WFlags fl ) :
     vbox = new QVBox(this);
 
     setCentralWidget(vbox);
-    toolbar = new QPEToolBar(this);
+    toolbar = new QToolBar(this);
     addToolBar(toolbar, Bottom);
     reset = new QToolButton(Resource::loadPixmap("back"), tr("Back"), "", this, SLOT(resetTurn()), toolbar);
     done = new QToolButton(Resource::loadPixmap("done"), tr("Done"), "", this, SLOT(endTurn()), toolbar);

@@ -36,7 +36,7 @@
 #include <qpe/applnk.h>
 #include <qpe/config.h>
 #include <qpe/global.h>
-#include <qpe/qpemenubar.h>
+#include <qmenubar.h>
 #include <qpe/qpetoolbar.h>
 #include <qpe/resource.h>
 
@@ -64,7 +64,7 @@ DrawPad::DrawPad(QWidget* parent, const char* name,  WFlags fl )
 
     setToolBarsMovable(false);
 
-    QPEToolBar* menuToolBar = new QPEToolBar(this);
+    QToolBar* menuToolBar = new QToolBar(this);
     QMenuBar* menuBar = new QMenuBar(menuToolBar);
 
     QPopupMenu* toolsPopupMenu = new QPopupMenu(menuBar);
@@ -103,7 +103,7 @@ DrawPad::DrawPad(QWidget* parent, const char* name,  WFlags fl )
 
     // init page toolbar
 
-    QPEToolBar* pageToolBar = new QPEToolBar(this);
+    QToolBar* pageToolBar = new QToolBar(this);
 
     QAction* newPageAction = new QAction(tr("New Page"), Resource::loadPixmap("new"), QString::null, 0, this);
     connect(newPageAction, SIGNAL(activated()), this, SLOT(newPage()));
@@ -120,12 +120,12 @@ DrawPad::DrawPad(QWidget* parent, const char* name,  WFlags fl )
     deletePageAction->addTo(pageToolBar);
     deletePageAction->setWhatsThis( tr( "Click here to remove the current sheet." ) );
 
-    QPEToolBar* emptyToolBar = new QPEToolBar(this);
+    QToolBar* emptyToolBar = new QToolBar(this);
     emptyToolBar->setHorizontalStretchable(true);
 
     // init navigation toolbar
 
-    QPEToolBar* navigationToolBar = new QPEToolBar(this);
+    QToolBar* navigationToolBar = new QToolBar(this);
 
     m_pUndoAction = new QAction(tr("Undo"), Resource::loadIconSet("undo"), QString::null, 0, this);
     connect(m_pUndoAction, SIGNAL(activated()), m_pDrawPadCanvas, SLOT(undo()));
@@ -159,7 +159,7 @@ DrawPad::DrawPad(QWidget* parent, const char* name,  WFlags fl )
 
     // init draw mode toolbar
 
-    QPEToolBar* drawModeToolBar = new QPEToolBar(this);
+    QToolBar* drawModeToolBar = new QToolBar(this);
 
     m_pLineToolButton = new QToolButton(drawModeToolBar);
     m_pLineToolButton->setToggleButton(true);
@@ -236,13 +236,13 @@ DrawPad::DrawPad(QWidget* parent, const char* name,  WFlags fl )
     setEllipseTool();
     setPointTool();
 
-    emptyToolBar = new QPEToolBar(this);
+    emptyToolBar = new QToolBar(this);
     emptyToolBar->setHorizontalStretchable(true);
     emptyToolBar->addSeparator();
 
     // init draw parameters toolbar
 
-    QPEToolBar* drawParametersToolBar = new QPEToolBar(this);
+    QToolBar* drawParametersToolBar = new QToolBar(this);
 
     m_pPenWidthSpinBox = new QSpinBox(1, 9, 1, drawParametersToolBar);
     connect(m_pPenWidthSpinBox, SIGNAL(valueChanged(int)), this, SLOT(changePenWidth(int)));

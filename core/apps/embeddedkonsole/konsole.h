@@ -30,7 +30,7 @@
 #include <qintdict.h>
 #include <qptrdict.h>
 #include <qtabwidget.h>
-#include <qpe/qpetoolbar.h>
+#include <qtoolbar.h>
 #include <qcombobox.h>
 #include <qcolor.h>
 
@@ -51,7 +51,7 @@ public:
   Konsole(QWidget* parent = 0, const char* name = 0, WFlags fl = 0);
   ~Konsole();
   void setColLin(int columns, int lines);
-  QPEToolBar *secondToolBar;
+  QToolBar *secondToolBar;
   void show();
   void setColor();
   int lastSelectedMenu;

@@ -22,7 +22,7 @@
 #include <qclipboard.h>
 #include <qwidgetstack.h>
 #ifdef USEQPE
-#include <qpe/qpemenubar.h>
+#include <qmenubar.h>
 #include <qpe/qpetoolbar.h>
 #endif
 #include <qmenubar.h>
@@ -254,8 +254,8 @@ QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
     setIcon( QPixmap (PICDIR  "uqtreader.png") );
 #endif /* USEQPE */
 
-//    QPEToolBar *bar = new QPEToolBar( this );
-//    menubar = new QPEToolBar( this );
+//    QToolBar *bar = new QToolBar( this );
+//    menubar = new QToolBar( this );
 #ifdef USEQPE
   Config config( APPDIR );
 #else

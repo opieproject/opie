@@ -45,7 +45,7 @@ ParaShoot::ParaShoot(QWidget* parent, const char* name, WFlags f) :
 
     setToolBarsMovable( FALSE );
 
-    QPEToolBar* toolbar = new QPEToolBar(this);
+    QToolBar* toolbar = new QToolBar(this);
     toolbar->setHorizontalStretchable( TRUE );
 
     setCaption( tr("ParaShoot") );

@@ -34,7 +34,7 @@
 class ContactEditor;
 class AbLabel;
 class AbTable;
-class QPEToolBar;
+class QToolBar;
 class QPopupMenu;
 class QToolButton;
 class QDialog;
@@ -104,7 +104,7 @@ private:
 	void populateCategories();
 
 	QPopupMenu *catMenu;
-	QPEToolBar *listTools;
+	QToolBar *listTools;
 	QToolButton *deleteButton;
 	enum Panes { paneList=0, paneView, paneEdit };
 	ContactEditor *abEditor;

@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.28 2003-12-07 13:51:03 mickeyl Exp $
+** $Id: datebook.cpp,v 1.29 2003-12-07 14:06:22 mickeyl Exp $
 **
 **********************************************************************/
 
@@ -41,7 +41,7 @@
 #include <qpe/resource.h>
 #include <qpe/sound.h>
 #include <qpe/timestring.h>
-#include <qpe/qpetoolbar.h>
+#include <qtoolbar.h>
 #include <qpe/tzselect.h>
 #include <qpe/xmlreader.h>
 
@@ -100,7 +100,7 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
 	weekLstView = 0;
 	monthView = 0;
 
-//    QPEToolBar *bar = new QPEToolBar( this );
+//    QToolBar *bar = new QToolBar( this );
 //    bar->setHorizontalStretchable( TRUE );
 
 //    QMenuBar *mb = new QMenuBar( bar );
@@ -109,7 +109,7 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
 //    QPopupMenu *view = new QPopupMenu( this );
 //    mb->insertItem( tr( "View" ), view );
 
-	QPEToolBar *sub_bar = new QPEToolBar(this);
+	QToolBar *sub_bar = new QToolBar(this);
 	sub_bar->setHorizontalStretchable(TRUE);
 
 	QActionGroup *g = new QActionGroup( this );

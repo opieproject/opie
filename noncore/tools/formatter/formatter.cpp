@@ -10,7 +10,7 @@
 #include "inputDialog.h"
 #include "output.h"
 
-#include <qpe/qpemenubar.h>
+#include <qmenubar.h>
 #include <qpe/qpetoolbar.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>

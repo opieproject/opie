@@ -6,7 +6,7 @@
 class QAction;
 class OpenDiag;
 class QListView;
-class QPEToolBar;
+class QToolBar;
 class QTextBrowser;
 class QMenuBar;
 class QPopupMenu;
@@ -21,7 +21,7 @@ public:
 protected:
 	QAction *reply, *forward, *attachbutton, *deleteMail;
 	QListView *attachments;
-	QPEToolBar *toolbar;
+	QToolBar *toolbar;
 	QTextBrowser *browser;
 	OpenDiag *openDiag;
  	QMenuBar *menubar;

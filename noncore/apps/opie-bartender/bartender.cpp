@@ -18,7 +18,7 @@
 #include "bac.h"
 
 #include <qpe/qpetoolbar.h>
-#include <qpe/qpemenubar.h>
+#include <qmenubar.h>
 #include <opie/colorpopupmenu.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
@@ -63,7 +63,7 @@ Bartender::Bartender( QWidget* parent,  const char* name, WFlags fl )
 
     setCaption( tr( "Bartender" ) );
 
-    ToolBar1 = new QPEToolBar( this, "ToolBar1" );
+    ToolBar1 = new QToolBar( this, "ToolBar1" );
     ToolBar1->setFixedHeight(22);
     layout->addMultiCellWidget( ToolBar1, 0, 0, 0, 4 );
 

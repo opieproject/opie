@@ -26,7 +26,7 @@
 #include <qpainter.h>
 #include <qpixmap.h>
 #include <qpe/qpetoolbar.h>
-#include <qpe/qpemenubar.h>
+#include <qmenubar.h>
 #include <qpopupmenu.h>
 #include <qaction.h>
 #include <qapplication.h> //processEvents()
@@ -58,7 +58,7 @@ GoMainWidget::GoMainWidget( QWidget *parent, const char* name) :
     GoWidget *go = new GoWidget(this);
 
     setCentralWidget(go);
-    toolbar = new QPEToolBar(this);
+    toolbar = new QToolBar(this);
     toolbar->setHorizontalStretchable( TRUE );
     addToolBar(toolbar);
 

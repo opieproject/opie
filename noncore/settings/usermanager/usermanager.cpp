@@ -34,7 +34,7 @@ UserConfig::UserConfig(QWidget* parent, const char* name, WFlags fl) : QMainWind
 	accounts->open();	// This actually loads the files /etc/passwd & /etc/group into memory.
 
 	// Create the toolbar.
-	QPEToolBar *toolbar = new QPEToolBar(this,"Toolbar");
+	QToolBar *toolbar = new QToolBar(this,"Toolbar");
 	toolbar->setHorizontalStretchable(1); // Is there any other way to get the toolbar to stretch of the full screen!?
 	adduserToolButton = new QToolButton(Resource::loadPixmap("usermanager/adduser"),"Add User",0,this,SLOT(addUser()),toolbar,"Add User");
 	edituserToolButton = new QToolButton(Resource::loadPixmap("usermanager/edituser"),"Edit User",0,this,SLOT(editUser()),toolbar,"Edit User");

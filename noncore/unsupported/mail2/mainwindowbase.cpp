@@ -5,7 +5,7 @@
 #include <qvbox.h>
 
 #include <qpe/qpetoolbar.h>
-#include <qpe/qpemenubar.h>
+#include <qmenubar.h>
 #include <qpe/resource.h>
 
 #include "mainwindowbase.h"
@@ -19,7 +19,7 @@ MainWindowBase::MainWindowBase(QWidget *parent, const char *name, WFlags fl)
 	setCaption(tr("E-Mail"));
 	setToolBarsMovable(false);
 
-	toolbar = new QPEToolBar(this);
+	toolbar = new QToolBar(this);
 	menubar = new QMenuBar( toolbar );
 	mailmenu = new QPopupMenu( menubar );
 	servermenu = new QPopupMenu( menubar );

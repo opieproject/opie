@@ -33,7 +33,7 @@
 #include <qpixmap.h>
 #include <qpopupmenu.h>
 #include <qmenubar.h>
-#include <qpe/qpetoolbar.h>
+#include <qtoolbar.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qtoolbutton.h>
 #include <qiconset.h>
@@ -82,11 +82,11 @@ void HelpBrowser::init( const QString& _home )
     if ( !_home.isEmpty() )
 	browser->setSource( _home );
 
-    QPEToolBar* toolbar = new QPEToolBar( this );
+    QToolBar* toolbar = new QToolBar( this );
     toolbar->setHorizontalStretchable( TRUE );
     QMenuBar *menu = new QMenuBar( toolbar );
 
-    toolbar = new QPEToolBar( this );
+    toolbar = new QToolBar( this );
     // addToolBar( toolbar, "Toolbar");
 
     QPopupMenu* go = new QPopupMenu( this );

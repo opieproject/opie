@@ -30,7 +30,7 @@
 #include <qpopupmenu.h>
 #include <qmessagebox.h>
 #include <qpe/qpetoolbar.h>
-#include <qpe/qpemenubar.h>
+#include <qmenubar.h>
 #include <qstringlist.h>
 #include <qapplication.h>
 
@@ -48,7 +48,7 @@ FifteenMainWindow::FifteenMainWindow(QWidget *parent, const char* name)
   PiecesTable *table = new PiecesTable( vbox );
   setCentralWidget(vbox);
 
-  QPEToolBar *toolbar = new QPEToolBar(this);
+  QToolBar *toolbar = new QToolBar(this);
   toolbar->setHorizontalStretchable( TRUE );
   addToolBar(toolbar);
 

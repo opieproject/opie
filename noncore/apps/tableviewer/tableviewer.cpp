@@ -33,7 +33,7 @@
 #include <qpe/qpetoolbar.h>
 
 /* QTE includes */
-#include <qpe/qpemenubar.h>
+#include <qmenubar.h>
 #include <qpe/qpetoolbar.h>
 #include <qpopupmenu.h>
 #include <qapplication.h>
@@ -92,7 +92,7 @@ TableViewerWindow::TableViewerWindow(QWidget *parent, const char *name, WFlags f
     QVBoxLayout *main_layout = new QVBoxLayout;
 
     /* Build tool bar */
-    navigation = new QPEToolBar(this, "navigation");
+    navigation = new QToolBar(this, "navigation");
     QToolButton *newItemButton = new QToolButton(
       QIconSet(Resource::loadPixmap("new")), "New Item", QString::null,
       this, SLOT(newItemSlot()), navigation, "New Item");

@@ -22,7 +22,7 @@ class QHBoxLayout;
 class QGridLayout; 
 class QListView;
 class QListViewItem;
-class QPEToolBar;
+class QToolBar;
 
 class Bartender : public QMainWindow
 { 
@@ -32,7 +32,7 @@ public:
     Bartender( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     ~Bartender();
 
-    QPEToolBar* ToolBar1;
+    QToolBar* ToolBar1;
     QListView* DrinkView;
     QFile dbFile;
 public slots:

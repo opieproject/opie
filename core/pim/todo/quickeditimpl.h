@@ -3,14 +3,14 @@
 
 #include <qpixmap.h>
 
-#include <qpe/qpetoolbar.h>
+#include <qtoolbar.h>
 
 #include "quickedit.h"
 
 class QLineEdit;
 class QLabel;
 
-class QuickEditImpl : public QPEToolBar, public Todo::QuickEdit {
+class QuickEditImpl : public QToolBar, public Todo::QuickEdit {
     Q_OBJECT
 public:
     QuickEditImpl( QWidget* parent,  bool visible);

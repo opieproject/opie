@@ -22,7 +22,7 @@
 #include <qclipboard.h>
 #include <qpe/qpetoolbar.h>
 #include <qtoolbutton.h>
-#include <qpe/qpemenubar.h>
+#include <qmenubar.h>
 #include <qpopupmenu.h>
 #include <qwidgetstack.h>
 #include <qtimer.h>

@@ -19,7 +19,7 @@
 #include <qpopupmenu.h>
 #include "editwidget.h"
 
-class QPEToolBar;
+class QToolBar;
 class ListViewItemConfFile;
 class ListViewConfDir;
 class ListViewItemConf;

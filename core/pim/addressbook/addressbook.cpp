@@ -36,7 +36,7 @@
 #include <qpe/ir.h>
 #include <qpe/qpemessagebox.h>
 #include <qpe/qcopenvelope_qws.h>
-#include <qpe/qpetoolbar.h>
+#include <qtoolbar.h>
 #include <qmenubar.h>
 // #include <qtoolbar.h>
 // #include <qmenubar.h>
@@ -90,7 +90,7 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	setToolBarsMovable( !m_config.fixedBars() );
 	setRightJustification( true );
 
-	QPEToolBar *bar = new QPEToolBar( this );
+	QToolBar *bar = new QToolBar( this );
 	bar->setHorizontalStretchable( TRUE );
 
 	QMenuBar *mbList = new QMenuBar( bar  );
@@ -106,7 +106,7 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	mbList->insertItem( tr("View"), catMenu );
 
 	// Create Toolbar
-	listTools = new QPEToolBar( this, "list operations" );
+	listTools = new QToolBar( this, "list operations" );
 	listTools->setHorizontalStretchable( true );
 	addToolBar( listTools );
 	moveToolBar( listTools, m_config.getToolBarPos() );

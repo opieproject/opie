@@ -18,7 +18,7 @@
 #include <qpe/applnk.h>
 #include <qpe/fileselector.h>
 #include <qmenubar.h>
-#include <qpe/qpetoolbar.h>
+#include <qtoolbar.h>
 #include <qmainwindow.h>
 #include <qaction.h>
 #include <qlineedit.h>
@@ -41,7 +41,7 @@ class MainWindow: public QMainWindow
   // QPE objects
   DocLnk* currentDoc;
   QMenuBar *menu;
-  QPEToolBar *toolbarFunctions, *toolbarEdit, *toolbarStandard;
+  QToolBar *toolbarFunctions, *toolbarEdit, *toolbarStandard;
   FileSelector *fileSelector;
 
   // QT objects

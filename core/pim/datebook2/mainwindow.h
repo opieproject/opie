@@ -13,7 +13,7 @@
 class QAction;
 class QWidgetStack;
 class QPopupMenu;
-class QPEToolBar;
+class QToolBar;
 namespace Datebook {
     class BookManager;
     class Show;
@@ -62,7 +62,7 @@ namespace Datebook {
         void add( const OPimRecord& );
 
     private:
-        QPEToolBar* toolbar();
+        QToolBar* toolbar();
         QPopupMenu* viewMenu();
         QPopupMenu* settingsMenu();
         QPopupMenu* templateMenu();
@@ -91,7 +91,7 @@ namespace Datebook {
     private:
         QList<View> m_view; // the Views.. not autoDelete
         QWidgetStack* m_stack;
-        QPEToolBar *m_toolBar;
+        QToolBar *m_toolBar;
         QPopupMenu* m_popView;
         QPopupMenu* m_popSetting;
         QPopupMenu* m_popTemplate;

@@ -463,7 +463,7 @@ void MainWindow::initMenu()
 
 void MainWindow::initStandardToolbar()
 {
-  toolbarStandard=new QPEToolBar(this);
+  toolbarStandard=new QToolBar(this);
   toolbarStandard->setHorizontalStretchable(TRUE);
   moveToolBar(toolbarStandard, Top);
 
@@ -478,7 +478,7 @@ void MainWindow::initStandardToolbar()
 
 void MainWindow::initFunctionsToolbar()
 {
-  toolbarFunctions=new QPEToolBar(this);
+  toolbarFunctions=new QToolBar(this);
   toolbarFunctions->setHorizontalStretchable(TRUE);
   moveToolBar(toolbarFunctions, Bottom);
 
@@ -500,7 +500,7 @@ void MainWindow::initFunctionsToolbar()
 
 void MainWindow::initEditToolbar()
 {
-  toolbarEdit=new QPEToolBar(this);
+  toolbarEdit=new QToolBar(this);
   toolbarEdit->setHorizontalStretchable(TRUE);
   moveToolBar(toolbarEdit, Bottom);
 

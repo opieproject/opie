@@ -4,7 +4,7 @@
 #include "playlistselection.h"
 #include <qstring.h>
 #include <qpe/config.h>
-#include <qpe/qpetoolbar.h>
+#include <qtoolbar.h>
 #include <qwidget.h>
 #include <qmenubar.h>
 #include <qpe/resource.h>

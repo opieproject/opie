@@ -6,7 +6,7 @@
 #include <qpopupmenu.h>
 
 #include <qpe/qpetoolbar.h>
-#include <qpe/qpemenubar.h>
+#include <qmenubar.h>
 #include <qpe/resource.h>
 
 #include "viewmailbase.h"
@@ -18,7 +18,7 @@ ViewMailBase::ViewMailBase(QWidget *parent, const char *name, WFlags fl)
 	setCaption(tr("E-Mail by %1"));
 	setToolBarsMovable(false);
 
-	toolbar = new QPEToolBar(this);
+	toolbar = new QToolBar(this);
   menubar = new QMenuBar( toolbar );
   mailmenu = new QPopupMenu( menubar );
   menubar->insertItem( tr( "Mail" ), mailmenu );

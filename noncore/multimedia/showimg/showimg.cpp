@@ -36,7 +36,7 @@
 #include <qpe/applnk.h>
 #include <qfileinfo.h>
 #include <math.h>
-#include <qpe/qpemenubar.h>
+#include <qmenubar.h>
 #include <qwidgetstack.h>
 #include <qpe/qpetoolbar.h>
 #include <qaction.h>
@@ -228,7 +228,7 @@ ImageViewer::ImageViewer( QWidget *parent, const char *name, int wFlags )
 
     setToolBarsMovable( FALSE );
 
-    toolBar = new QPEToolBar( this );
+    toolBar = new QToolBar( this );
     toolBar->setHorizontalStretchable( TRUE );
 
     menuBar = new QMenuBar( toolBar );
@@ -314,7 +314,7 @@ ImageViewer::ImageViewer( QWidget *parent, const char *name, int wFlags )
     imageList = fileSelector->fileList();
     slideAction->setEnabled( imageList.count() != 0);
 
-    iconToolBar = new QPEToolBar(this);
+    iconToolBar = new QToolBar(this);
 
     QAction *a;
 

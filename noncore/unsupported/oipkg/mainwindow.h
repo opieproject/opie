@@ -28,7 +28,7 @@
 #include "packagelistview.h"
 
 class QComboBox;
-class QPEToolBar;
+class QToolBar;
 class QLineEdit;
 class PackageListItem;
 class QCopChannel;
@@ -89,18 +89,18 @@ private:
   QAction *runAction;
   QAction *updateAction;
   QAction *findAction;
-  QPEToolBar *findBar;
+  QToolBar *findBar;
   QLineEdit *findEdit;
   QAction *searchAction;
   QAction *searchCommit;
-  QPEToolBar *searchBar;
+  QToolBar *searchBar;
   QLineEdit *searchEdit;
   QAction *sectionAction;
-  QPEToolBar *sectionBar;
+  QToolBar *sectionBar;
   QComboBox *section;
   QComboBox *subsection;
   QAction *destAction;
-  QPEToolBar *destBar;
+  QToolBar *destBar;
   QComboBox *destination;
   QCheckBox* CheckBoxLink;
 };

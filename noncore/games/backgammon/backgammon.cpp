@@ -15,7 +15,7 @@
 #include <qmainwindow.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
-#include <qpe/qpemenubar.h>
+#include <qmenubar.h>
 #include <qpe/resource.h>
 
 #include <stdlib.h>

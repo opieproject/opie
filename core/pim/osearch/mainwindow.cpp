@@ -32,7 +32,7 @@
 #include <qpe/qpemessagebox.h>
 #include <qpe/resource.h>
 #include <qpe/config.h>
-#include <qpe/qpetoolbar.h>
+#include <qtoolbar.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
 #include <qpe/global.h>
@@ -113,8 +113,8 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
 
 void MainWindow::makeMenu()
 {
-   QPEToolBar *toolBar = new QPEToolBar( this );
-   QPEToolBar *searchBar = new QPEToolBar(this);
+   QToolBar *toolBar = new QToolBar( this );
+   QToolBar *searchBar = new QToolBar(this);
    QMenuBar *menuBar = new QMenuBar( toolBar );
    QPopupMenu *searchMenu = new QPopupMenu( menuBar );
 //   QPopupMenu *viewMenu = new QPopupMenu( menuBar );

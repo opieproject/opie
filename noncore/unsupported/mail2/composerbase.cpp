@@ -8,7 +8,7 @@
 #include <qvbox.h>
 
 #include <qpe/qpetoolbar.h>
-#include <qpe/qpemenubar.h>
+#include <qmenubar.h>
 #include <qpe/resource.h>
 
 #include "mailstatusbar.h"
@@ -21,7 +21,7 @@ ComposerBase::ComposerBase(QWidget *parent, const char *name, WFlags fl)
 	setCaption(tr("Compose Message"));
 	setToolBarsMovable(false);
 
-	toolbar = new QPEToolBar(this);
+	toolbar = new QToolBar(this);
 	menubar = new QMenuBar( toolbar );
 	mailmenu = new QPopupMenu( menubar );
 	menubar->insertItem( tr( "Mail" ), mailmenu );
@@ -125,7 +125,7 @@ ComposerBase::ComposerBase(QWidget *parent, const char *name, WFlags fl)
 	attachWindow->setToolBarsMovable(false);
 	attachWindow->hide();
 
-	attachToolbar = new QPEToolBar(attachWindow);
+	attachToolbar = new QToolBar(attachWindow);
 	attachToolbar->setVerticalStretchable(true);
 	
 	addattach = new QAction(tr("Add an Attachement"), QIconSet(Resource::loadPixmap("mail/newmail")), 0, 0, this);

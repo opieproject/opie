@@ -9,7 +9,7 @@
 #include <qpe/qpeapplication.h>
 #include <qpe/ir.h>
 #include <qmenubar.h>
-#include <qpe/qpetoolbar.h>
+#include <qtoolbar.h>
 #include <qpe/qpemessagebox.h>
 #include <qpe/resource.h>
 
@@ -90,7 +90,7 @@ void MainWindow::initUI() {
     m_stack = new QWidgetStack( this );
     setCentralWidget( m_stack );
 
-    m_toolBar = new QPEToolBar( this );
+    m_toolBar = new QToolBar( this );
     m_toolBar->setHorizontalStretchable( TRUE );
 
     QMenuBar* mb = new QMenuBar( m_toolBar );

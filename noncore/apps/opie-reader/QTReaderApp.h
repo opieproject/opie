@@ -44,7 +44,7 @@ class QToolButton;
 class QPopupMenu;
 class QToolBar;
 #ifdef USEQPE
-class QPEToolBar;
+class QToolBar;
 class QMenuBar;
 #endif
 class CBkmkSelector;
@@ -380,7 +380,7 @@ private slots:
     QWidgetStack *editorStack;
     QTReader* reader;
     QComboBox* m_fontSelector;
-//    QPEToolBar /* *menu,*/ *fileBar;
+//    QToolBar /* *menu,*/ *fileBar;
     QToolBar *menubar, *fileBar, *navBar, *viewBar, *markBar;
 #ifdef USEQPE
     QMenuBar *mb;

@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: helpwindow.cpp,v 1.3 2003-08-09 16:51:16 kergoth Exp $
+** $Id: helpwindow.cpp,v 1.4 2003-12-07 14:06:28 mickeyl Exp $
 **
 ** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
 **
@@ -36,7 +36,7 @@ HelpWindow::HelpWindow( const QString& home_, const QString& _path, QWidget* par
 
     if ( !home_.isEmpty() )
         browser->setSource( home_ );
-    QPEToolBar *toolbar = new QPEToolBar( this );
+    QToolBar *toolbar = new QToolBar( this );
 
     QAction *a = new QAction( tr( "Backward" ), Resource::loadPixmap( "back" ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), browser, SLOT( backward() ) );

@@ -11,7 +11,7 @@
 
 
 QuickEditImpl::QuickEditImpl( QWidget* parent, bool visible )
-    : QPEToolBar( (QMainWindow *)parent ), Todo::QuickEdit( (Todo::MainWindow *)parent ) {
+    : QToolBar( (QMainWindow *)parent ), Todo::QuickEdit( (Todo::MainWindow *)parent ) {
     setHorizontalStretchable( TRUE );
 
     // Load priority icons

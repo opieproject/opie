@@ -22,7 +22,7 @@
 #include <qpopupmenu.h>
 
 class QAction;
-class QPEToolBar;
+class QToolBar;
 class QHBox;
 class QVBoxLayout;
 class QTextView;

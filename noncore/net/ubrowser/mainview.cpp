@@ -24,7 +24,7 @@ MainView::MainView(QWidget *parent, const char *name, WFlags fl) : QMainWindow(p
 	
 	setToolBarsMovable( false );
 
-	QPEToolBar *toolbar = new QPEToolBar(this, "toolbar");
+	QToolBar *toolbar = new QToolBar(this, "toolbar");
 	back = new QToolButton(Resource::loadPixmap("ubrowser/back"), 0, 0, 0, 0, toolbar, "back");
 	forward = new QToolButton(Resource::loadPixmap("ubrowser/forward"), 0, 0, 0, 0, toolbar, "forward");
 	home = new QToolButton(Resource::loadPixmap("ubrowser/home"), 0, 0, 0, 0, toolbar, "home");

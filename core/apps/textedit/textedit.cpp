@@ -27,7 +27,7 @@
 #include <qpe/config.h>
 #include <qpe/qpeapplication.h>
 #include <qmenubar.h>
-#include <qpe/qpetoolbar.h>
+#include <qtoolbar.h>
 #include <qpe/qcopenvelope_qws.h>
 
 #include <qpoint.h>
@@ -182,7 +182,7 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
 
     setIcon( Resource::loadPixmap( "TextEditor" ) );
 
-    QPEToolBar *bar = new QPEToolBar( this );
+    QToolBar *bar = new QToolBar( this );
     bar->setHorizontalStretchable( true );
     menu = bar;
 
@@ -193,7 +193,7 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
 
     font = new QPopupMenu( this );
 
-    bar = new QPEToolBar( this );
+    bar = new QToolBar( this );
     editBar = bar;
 
     QAction *a = new QAction( tr( "New" ), Resource::loadPixmap( "new" ),
@@ -332,7 +332,7 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     mb->insertItem( tr( "Edit" ), edit );
     mb->insertItem( tr( "View" ), font );
 
-    searchBar = new QPEToolBar(this);
+    searchBar = new QToolBar(this);
     addToolBar( searchBar,  "Search", QMainWindow::Top, true );
 
     searchBar->setHorizontalStretchable( true );

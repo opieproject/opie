@@ -31,7 +31,7 @@ class QProgressBar;
 class QSpinBox;
 class QTabWidget;
 class QWidget;
-class QPEToolBar;
+class QToolBar;
 class QMenuBar;
 class QPopupMenu;
 class QFile;

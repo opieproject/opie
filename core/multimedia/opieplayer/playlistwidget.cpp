@@ -22,7 +22,7 @@
 #include <qpe/qcopenvelope_qws.h>
 
 #include <qmenubar.h>
-#include <qpe/qpetoolbar.h>
+#include <qtoolbar.h>
 #include <qpe/fileselector.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/lnkproperties.h>
@@ -154,14 +154,14 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     setToolBarsMovable( FALSE );
 
       // Create Toolbar
-    QPEToolBar *toolbar = new QPEToolBar( this );
+    QToolBar *toolbar = new QToolBar( this );
     toolbar->setHorizontalStretchable( TRUE );
 
       // Create Menubar
     QMenuBar *menu = new QMenuBar( toolbar );
     menu->setMargin( 0 );
 
-    QPEToolBar *bar = new QPEToolBar( this );
+    QToolBar *bar = new QToolBar( this );
     bar->setLabel( tr( "Play Operations" ) );
 //      d->tbPlayCurList =  new ToolButton( bar, tr( "play List" ), "opieplayer/play_current_list",
 //                                        this , SLOT( addSelected()) );

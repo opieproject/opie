@@ -1,4 +1,4 @@
-#include <qpe/qpemenubar.h>
+#include <qmenubar.h>
 #include <qpe/resource.h>
 #include <qpe/config.h>
 #include <qpopupmenu.h>

@@ -36,7 +36,7 @@
 #include <qpe/config.h>
 #include <qpe/global.h>
 #include <qpe/qpeapplication.h>
-#include <qpe/qpemenubar.h>
+#include <qmenubar.h>
 #include <qpe/qpemessagebox.h>
 #include <qpe/qpetoolbar.h>
 #include <qpe/resource.h>
@@ -64,13 +64,13 @@ MainWindow::MainWindow( QWidget* parent, const char* name, WFlags fl )
 	// Build menu and tool bars
 	setToolBarsMovable( FALSE );
 
-	QPEToolBar *bar = new QPEToolBar( this );
+	QToolBar *bar = new QToolBar( this );
 	bar->setHorizontalStretchable( TRUE );
 	QMenuBar *mb = new QMenuBar( bar );
 	mb->setMargin( 0 );
 	QPopupMenu *popup = new QPopupMenu( this );
 
-	bar = new QPEToolBar( this );
+	bar = new QToolBar( this );
 	QAction *a = new QAction( tr( "New" ), Resource::loadPixmap( "new" ), QString::null, 0, this, 0 );
 	a->setWhatsThis( tr( "Click here to create a new checkbook.\n\nYou also can select New from the Checkbook menu." ) );
 	connect( a, SIGNAL( activated() ), this, SLOT( slotNew() ) );

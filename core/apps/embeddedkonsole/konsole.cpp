@@ -28,7 +28,7 @@
 #include <qdragobject.h>
 #include <qobjectlist.h>
 #include <qtoolbutton.h>
-#include <qpe/qpetoolbar.h>
+#include <qtoolbar.h>
 #include <qpushbutton.h>
 #include <qfontdialog.h>
 #include <qglobal.h>
@@ -282,7 +282,7 @@ void Konsole::init(const char* _pgm, QStrList & _args)
 
      // create terminal toolbar ////////////////////////////////////////////////
   setToolBarsMovable( FALSE );
-  QPEToolBar *menuToolBar = new QPEToolBar( this );
+  QToolBar *menuToolBar = new QToolBar( this );
   menuToolBar->setHorizontalStretchable( TRUE );
 
   QMenuBar *menuBar = new QMenuBar( menuToolBar );
@@ -351,7 +351,7 @@ void Konsole::init(const char* _pgm, QStrList & _args)
 
   menuBar->insertItem( tr("Options"), configMenu );
 
-  QPEToolBar *toolbar = new QPEToolBar( this );
+  QToolBar *toolbar = new QToolBar( this );
 
   QAction *a;
 
@@ -377,7 +377,7 @@ void Konsole::init(const char* _pgm, QStrList & _args)
   connect( a, SIGNAL( activated() ), this, SLOT( hitDown() ) ); a->addTo( toolbar );
 */
 
-  secondToolBar = new QPEToolBar( this );
+  secondToolBar = new QToolBar( this );
   secondToolBar->setHorizontalStretchable( TRUE );
 
   commonCombo = new QComboBox( secondToolBar );

@@ -6,7 +6,7 @@
 class ServerConnection;
 class MailStatusBar;
 class FolderWidget;
-class QPEToolBar;
+class QToolBar;
 class QMenuBar;
 class QPopupMenu;
 class MailTable;
@@ -26,7 +26,7 @@ protected:
 	ServerConnection *serverConnection;
 	MailStatusBar *status;
 	FolderWidget *folderView;
-	QPEToolBar *toolbar;
+	QToolBar *toolbar;
  	QMenuBar *menubar;
 	QPopupMenu *mailmenu, *servermenu;
 	MailTable *mailView;

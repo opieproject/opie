@@ -16,7 +16,7 @@
 #include <qpopupmenu.h>                       
 #include <qtoolbutton.h>
 
-#include <qpe/qpetoolbar.h>
+#include <qtoolbar.h>
 
 #include "userdialog.h"
 #include "groupdialog.h"

@@ -17,7 +17,7 @@
 #include <qpe/qpemessagebox.h>
 #include <qpe/resource.h>
 #include <qpe/config.h>
-#include <qpe/qpetoolbar.h>
+#include <qtoolbar.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qaction.h>
 #include <qmessagebox.h>
@@ -82,7 +82,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
 void MainWindow::makeMenu()
 {
 
-  QPEToolBar *toolBar = new QPEToolBar( this );
+  QToolBar *toolBar = new QToolBar( this );
   QMenuBar *menuBar = new QMenuBar( toolBar );
   QPopupMenu *srvMenu = new QPopupMenu( menuBar );
   QPopupMenu *viewMenu = new QPopupMenu( menuBar );
@@ -142,7 +142,7 @@ void MainWindow::makeMenu()
   QAction *a;
 
   // SECTIONS
-	sectionBar = new QPEToolBar( this );
+	sectionBar = new QToolBar( this );
  	addToolBar( sectionBar,  "Section", QMainWindow::Top, TRUE );
   sectionBar->setHorizontalStretchable( true );
   QLabel *label = new QLabel( sectionBar, "section" );
@@ -169,7 +169,7 @@ void MainWindow::makeMenu()
 // 	sectionBar->setStretchableWidget( section );
 
   //FIND
-  findBar = new QPEToolBar(this);
+  findBar = new QToolBar(this);
   addToolBar( findBar,  "Filter", QMainWindow::Top, TRUE );
   label = new QLabel( tr("Filter: "), findBar );
 //  label->setBackgroundMode( PaletteForeground );
@@ -190,7 +190,7 @@ void MainWindow::makeMenu()
   findAction->addTo( viewMenu );
 
   //SEARCH
-  searchBar = new QPEToolBar(this);
+  searchBar = new QToolBar(this);
   addToolBar( searchBar,  "Search", QMainWindow::Top, TRUE );
   label = new QLabel( tr("Search: "), searchBar );
 //  label->setBackgroundMode( PaletteForeground );
@@ -214,7 +214,7 @@ void MainWindow::makeMenu()
   searchAction->addTo( viewMenu );
 
   //DEST
-  destBar = new QPEToolBar(this);
+  destBar = new QToolBar(this);
   addToolBar( destBar,  "Destination", QMainWindow::Top, TRUE );
   label = new QLabel( tr("Destination: "), destBar );
 //  label->setBackgroundMode( PaletteForeground );

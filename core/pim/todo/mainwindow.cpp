@@ -212,7 +212,7 @@ void MainWindow::initActions() {
     m_bar->insertItem( QWidget::tr("Options"), m_options );
 
     m_curQuick = new QuickEditImpl( this, m_quicktask );
-    addToolBar( (QPEToolBar *)m_curQuick->widget(), QWidget::tr( "QuickEdit" ), QMainWindow::Top, TRUE );
+    addToolBar( (QToolBar *)m_curQuick->widget(), QWidget::tr( "QuickEdit" ), QMainWindow::Top, TRUE );
     m_curQuick->signal()->connect( this, SLOT(slotQuickEntered() ) );
 
 }

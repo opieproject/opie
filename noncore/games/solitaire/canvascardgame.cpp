@@ -27,7 +27,7 @@
 #include <qpe/config.h>
 
 #include <qmainwindow.h>
-#include <qpe/qpemenubar.h>
+#include <qmenubar.h>
 #include <qpainter.h>
 #include <qgfx_qws.h>
 

@@ -214,7 +214,7 @@ MindBreaker::MindBreaker( QWidget *parent, const char *name, int wFlags )
     
     setToolBarsMovable( FALSE );
 
-    QPEToolBar *tb = new QPEToolBar(this);
+    QToolBar *tb = new QToolBar(this);
     tb->setHorizontalStretchable( TRUE );
 
     QPixmap newicon = Resource::loadPixmap("new");

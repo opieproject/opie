@@ -3,7 +3,7 @@
 #include <qpixmap.h>
 #include <qdom.h>
 #include <qaction.h>
-#include <qpe/qpemenubar.h>
+#include <qmenubar.h>
 #include <qstatusbar.h>
 #include <qpopupmenu.h>
 #include <qpushbutton.h>
