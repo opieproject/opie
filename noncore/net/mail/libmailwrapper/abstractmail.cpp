@@ -31,6 +31,24 @@ AbstractMail* AbstractMail::getWrapper(const QString&a,const QString&name)
     return new MHwrapper(a,name);
 }
 
+AbstractMail* AbstractMail::getWrapper(Account*a)
+{
+    if (!a) return 0;
+    switch (a->getType()) {
+        case MAILLIB::A_IMAP:
+            return new IMAPwrapper((IMAPaccount*)a);
+            break;
+        case MAILLIB::A_POP3:
+            return new POP3wrapper((POP3account*)a);
+            break;
+        case MAILLIB::A_NNTP:
+            return new NNTPwrapper((NNTPaccount*)a);
+            break;
+        default:
+            return 0;
+    }
+}
+
 encodedString* AbstractMail::decode_String(const encodedString*text,const QString&enc)
 {
     qDebug("Decode string start");
@@ -103,6 +121,11 @@ QString AbstractMail::defaultLocalfolder()
     QString f = getenv( "HOME" );
     f += "/Applications/opiemail/localmail";
     return f;
+}
+
+QString AbstractMail::draftFolder()
+{
+    return QString("Drafts");
 }
 
 /* temporary - will be removed when implemented in all classes */

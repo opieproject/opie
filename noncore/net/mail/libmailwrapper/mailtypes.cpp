@@ -36,6 +36,7 @@ void RecMail::copy_old(const RecMail&old)
     wrapper = old.wrapper;
     in_reply_to = old.in_reply_to;
     references = old.references;
+    replyto = old.replyto;
 }
 
 void RecMail::init()

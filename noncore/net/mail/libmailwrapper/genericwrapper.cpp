@@ -450,11 +450,19 @@ void Genericwrapper::parseList(QList<RecMail> &target,mailsession*session,const 
             qDebug("Msgid == %s",mail->Msgid().latin1());
         }
 
+        if (single_fields.fld_reply_to) {
+            QStringList t = parseAddressList(single_fields.fld_reply_to->rt_addr_list);
+            if (t.count()>0) {
+                mail->setReplyto(t[0]);
+            }
+        }
+#if 0
         refs = single_fields.fld_references;
         if (refs && refs->mid_list && clist_count(refs->mid_list)) {
             char * text = (char*)refs->mid_list->first->data;
             mail->setReplyto(QString(text));
         }
+#endif
         if (single_fields.fld_in_reply_to && single_fields.fld_in_reply_to->mid_list &&
                 clist_count(single_fields.fld_in_reply_to->mid_list)) {
             mail->setInreply(parseInreplies(single_fields.fld_in_reply_to));

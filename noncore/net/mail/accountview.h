@@ -23,6 +23,7 @@ public:
     virtual void populate( QList<Account> list );
     virtual RecBody fetchBody(const RecMail&aMail);
     virtual void downloadMails(Folder*fromFolder,AbstractMail*fromWrapper);
+    virtual bool currentisDraft();
 
 public slots:
     virtual void refreshAll();

@@ -168,3 +168,10 @@ void AccountView::downloadMails(Folder*fromFolder,AbstractMail*fromWrapper)
     fromWrapper->mvcpAllMails(fromFolder,targetFolder,targetMail,sels.moveMails());
     refreshCurrent();
 }
+
+bool AccountView::currentisDraft()
+{
+    AccountViewItem *view = static_cast<AccountViewItem *>(currentItem());
+    if (!view) return false;
+    return view->isDraftfolder();
+}

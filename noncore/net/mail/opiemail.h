@@ -30,6 +30,7 @@ protected slots:
     virtual void refreshMailView(QList<RecMail>*);
     virtual void mailLeftClicked( int, QListViewItem *,const QPoint&,int  );
     virtual void slotMoveCopyMail();
+    virtual void reEditMail();
 
 private:
     Settings *settings;

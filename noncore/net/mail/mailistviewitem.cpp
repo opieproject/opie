@@ -1,4 +1,5 @@
 #include "mailistviewitem.h"
+#include <libmailwrapper/abstractmail.h>
 #include <qtextstream.h>
 #include <qpe/resource.h>
 
@@ -62,4 +63,10 @@ void MailListViewItem::storeData(const RecMail&data)
 const RecMail& MailListViewItem::data()const
 {
     return mail_data;
+}
+
+MAILLIB::ATYPE MailListViewItem::wrapperType()
+{
+    if (!mail_data.Wrapper()) return MAILLIB::A_UNDEFINED;
+    return mail_data.Wrapper()->getType();
 }

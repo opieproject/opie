@@ -13,25 +13,29 @@
 
 class AddressPicker : public AddressPickerUI
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
-	AddressPicker( QWidget *parent = 0, const char *name = 0, bool modal = false, WFlags flags = 0 );
-	static QString getNames();
+    AddressPicker( QWidget *parent = 0, const char *name = 0, bool modal = false, WFlags flags = 0 );
+    static QString getNames();
 
 protected:
-	QString selectedNames;
-	void accept();
+    QString selectedNames;
+    void accept();
 
 };
 
+class RecMail;
 
 class ComposeMail : public ComposeMailUI
 {
     Q_OBJECT
-    
+
 public:
     ComposeMail( Settings *s, QWidget *parent = 0, const char *name = 0, bool modal = false, WFlags flags = 0 );
+    virtual ~ComposeMail();
+
+    void reEditMail(const RecMail&current);
 
 public slots:
     void slotAdjustColumns();
@@ -43,7 +47,8 @@ public slots:
 
 protected slots:
     void accept();
-    
+    void reject();
+
 private slots:
     void fillValues( int current );
     void pickAddress( QLineEdit *line );
@@ -62,12 +67,12 @@ protected:
 
 class AttachViewItem : public QListViewItem
 {
-public:	
+public:
     AttachViewItem( QListView *parent, Attachment *att );
-	Attachment *getAttachment() { return attachment; }
+    Attachment *getAttachment() { return attachment; }
 
 private:
-	Attachment *attachment;
+    Attachment *attachment;
 
 };
 

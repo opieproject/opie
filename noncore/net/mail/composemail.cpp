@@ -9,6 +9,9 @@
 #include "composemail.h"
 
 #include <libmailwrapper/smtpwrapper.h>
+#include <libmailwrapper/storemail.h>
+#include <libmailwrapper/abstractmail.h>
+#include <libmailwrapper/mailtypes.h>
 
 ComposeMail::ComposeMail( Settings *s, QWidget *parent, const char *name, bool modal, WFlags flags )
     : ComposeMailUI( parent, name, modal, flags )
@@ -124,7 +127,7 @@ void ComposeMail::pickAddressReply()
     pickAddress( replyLine );
 }
 
-void ComposeMail::fillValues( int current )
+void ComposeMail::fillValues( int )
 {
 #if 0
     SMTPaccount *smtp = smtpAccounts.at( current );
@@ -185,26 +188,27 @@ void ComposeMail::accept()
     qDebug( "Sending Mail with " +
             smtpAccounts.at( smtpAccountBox->currentItem() )->getAccountName() );
 #endif
-    Mail *mail = new Mail();
+    Mail mail;
 
     SMTPaccount *smtp = smtpAccounts.at( smtpAccountBox->currentItem() );
-    mail->setMail(fromBox->currentText());
+    mail.setMail(fromBox->currentText());
 
     if ( !toLine->text().isEmpty() ) {
-        mail->setTo( toLine->text() );
+        mail.setTo( toLine->text() );
     } else {
-        qDebug( "No Reciever spezified -> returning" );
+        QMessageBox::warning(0,tr("Sending mail"),
+            tr("No Receiver spezified" ) );
         return;
     }
-    mail->setName(senderNameEdit->text());
-    mail->setCC( ccLine->text() );
-    mail->setBCC( bccLine->text() );
-    mail->setReply( replyLine->text() );
-    mail->setSubject( subjectLine->text() );
+    mail.setName(senderNameEdit->text());
+    mail.setCC( ccLine->text() );
+    mail.setBCC( bccLine->text() );
+    mail.setReply( replyLine->text() );
+    mail.setSubject( subjectLine->text() );
     if (!m_replyid.isEmpty()) {
         QStringList ids;
         ids.append(m_replyid);
-        mail->setInreply(ids);
+        mail.setInreply(ids);
     }
     QString txt = message->text();
     if ( !sigMultiLine->text().isEmpty() ) {
@@ -212,17 +216,75 @@ void ComposeMail::accept()
         txt.append( sigMultiLine->text() );
     }
     qDebug(txt);
-    mail->setMessage( txt );
+    mail.setMessage( txt );
     AttachViewItem *it = (AttachViewItem *) attList->firstChild();
     while ( it != NULL ) {
-        mail->addAttachment( it->getAttachment() );
+        mail.addAttachment( it->getAttachment() );
         it = (AttachViewItem *) it->nextSibling();
     }
 
     SMTPwrapper wrapper( smtp );
-    wrapper.sendMail( *mail,checkBoxLater->isChecked() );
+    wrapper.sendMail( mail,checkBoxLater->isChecked() );
 
     QDialog::accept();
+}
+
+void ComposeMail::reject()
+{
+    int yesno = QMessageBox::warning(0,tr("Store message"),
+                                     tr("Store message into drafts?"),
+                                     tr("Yes"),
+                                     tr("No"),QString::null,0,1);
+
+    if (yesno == 0) {
+        Mail mail;
+        mail.setMail(fromBox->currentText());
+        mail.setTo( toLine->text() );
+        mail.setName(senderNameEdit->text());
+        mail.setCC( ccLine->text() );
+        mail.setBCC( bccLine->text() );
+        mail.setReply( replyLine->text() );
+        mail.setSubject( subjectLine->text() );
+        if (!m_replyid.isEmpty()) {
+            QStringList ids;
+            ids.append(m_replyid);
+            mail.setInreply(ids);
+        }
+        QString txt = message->text();
+        if ( !sigMultiLine->text().isEmpty() ) {
+            txt.append( "\n--\n" );
+            txt.append( sigMultiLine->text() );
+        }
+        qDebug(txt);
+        mail.setMessage( txt );
+        
+        /* only use the default drafts folder name! */
+        Storemail wrapper(AbstractMail::draftFolder());
+        wrapper.storeMail(mail);
+        
+        AttachViewItem *it = (AttachViewItem *) attList->firstChild();
+        /* attachments we will ignore! */
+        if ( it != NULL ) {
+            QMessageBox::warning(0,tr("Store message"),
+                tr("<center>Attachments will not be stored in \"Draft\" folder</center>"));
+        }
+    }
+    QDialog::reject();
+}
+
+ComposeMail::~ComposeMail()
+{
+}
+
+void ComposeMail::reEditMail(const RecMail&current)
+{
+    RecMail data = current;
+    message->setText(data.Wrapper()->fetchBody(current).Bodytext());
+    subjectLine->setText( data.getSubject());
+    toLine->setText(data.To().join(","));
+    ccLine->setText(data.CC().join(","));
+    bccLine->setText(data.Bcc().join(","));
+    replyLine->setText(data.Replyto());
 }
 
 AttachViewItem::AttachViewItem( QListView *parent, Attachment *att )

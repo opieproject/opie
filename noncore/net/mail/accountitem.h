@@ -30,6 +30,7 @@ public:
     virtual void contextMenuSelected(int){}
     virtual AccountView*accountView();
     virtual bool matchName(const QString&name)const;
+    virtual bool isDraftfolder();
 
 protected:
     AccountViewItem*findSubItem(const QString&path,AccountViewItem*start=0);
@@ -193,6 +194,7 @@ public:
     virtual QPopupMenu * getContextMenu();
     virtual void contextMenuSelected(int);
     virtual Folder*getFolder();
+    virtual bool isDraftfolder();
 
 protected:
     void downloadMails();

@@ -6,7 +6,7 @@
 #include <qlayout.h>
 
 NNTPGroupsDlg::NNTPGroupsDlg(NNTPaccount *account,QWidget * parent, const char * name)
-    : QDialog(parent,name,true)
+    : QDialog(parent,name,true,WStyle_ContextHelp)
 {
     setCaption(tr("Subscribed newsgroups"));
     m_Account = account;

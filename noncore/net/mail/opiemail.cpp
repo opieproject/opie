@@ -177,7 +177,7 @@ void OpieMail::slotDeleteMail()
 void OpieMail::mailHold(int button, QListViewItem *item,const QPoint&,int  )
 {
     if (!mailView->currentItem()) return;
-    RecMail mail = ((MailListViewItem*)mailView->currentItem() )->data();
+    MAILLIB::ATYPE mailtype = ((MailListViewItem*)mailView->currentItem() )->wrapperType();
     /* just the RIGHT button - or hold on pda */
     if (button!=2) {return;}
     qDebug("Event right/hold");
@@ -185,10 +185,13 @@ void OpieMail::mailHold(int button, QListViewItem *item,const QPoint&,int  )
     QPopupMenu *m = new QPopupMenu(0);
     if (m)
     {
-        if (mail.Wrapper()->getType()==MAILLIB::A_NNTP) {
+        if (mailtype==MAILLIB::A_NNTP) {
             m->insertItem(tr("Read this posting"),this,SLOT(displayMail()));
 //            m->insertItem(tr("Copy this posting"),this,SLOT(slotMoveCopyMail()));
         } else {
+            if (folderView->currentisDraft()) {
+                m->insertItem(tr("Edit this mail"),this,SLOT(reEditMail()));
+            }
             m->insertItem(tr("Read this mail"),this,SLOT(displayMail()));
             m->insertItem(tr("Delete this mail"),this,SLOT(slotDeleteMail()));
             m->insertItem(tr("Copy/Move this mail"),this,SLOT(slotMoveCopyMail()));
@@ -231,7 +234,11 @@ void OpieMail::mailLeftClicked(int button, QListViewItem *item,const QPoint&,int
     /* just LEFT button - or tap with stylus on pda */
     if (button!=1) return;
     if (!item) return;
-    displayMail();
+    if (folderView->currentisDraft()) {
+        reEditMail();
+    } else {
+        displayMail();
+    }
 }
 
 void OpieMail::slotMoveCopyMail()
@@ -258,4 +265,14 @@ void OpieMail::slotMoveCopyMail()
     }
     mail.Wrapper()->mvcpMail(mail,targetFolder,targetMail,sels.moveMails());
     folderView->refreshCurrent();
+}
+
+void OpieMail::reEditMail()
+{
+    if (!mailView->currentItem()) return;
+    
+    ComposeMail compose( settings, this, 0, true , WStyle_ContextHelp );
+    compose.reEditMail(((MailListViewItem*)mailView->currentItem() )->data());
+    compose.slotAdjustColumns();
+    QPEApplication::execDialog( &compose );
 }

@@ -913,9 +913,9 @@ void MHfolderItem::initName()
     else if (bName.lower() == "inbox")
     {
         setPixmap( 0, PIXMAP_INBOXFOLDER);
-    }
-    else
-    {
+    } else if (bName.lower() == "drafts") {
+        setPixmap(0, Resource::loadPixmap("inline/edit"));
+    } else {
         setPixmap( 0, PIXMAP_MBOXFOLDER );
     }
     setText( 0, bName );
@@ -1023,6 +1023,12 @@ void MHfolderItem::contextMenuSelected(int which)
     }
 }
 
+bool MHfolderItem::isDraftfolder()
+{
+    if (folder && folder->getName()==AbstractMail::defaultLocalfolder()+"/"+AbstractMail::draftFolder()) return true;
+    return false;
+}
+
 /**
  * Generic stuff
  */
@@ -1126,4 +1132,9 @@ AccountViewItem*AccountViewItem::findSubItem(const QString&path,AccountViewItem*
         pitem=(AccountViewItem*)pitem->nextSibling();
     }
     return pitem;
+}
+
+bool AccountViewItem::isDraftfolder()
+{
+    return false;
 }

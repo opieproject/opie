@@ -40,23 +40,25 @@ public:
     virtual void mvcpAllMails(Folder*fromFolder,const QString&targetFolder,AbstractMail*targetWrapper,bool moveit);
     virtual void mvcpMail(const RecMail&mail,const QString&targetFolder,AbstractMail*targetWrapper,bool moveit);
 
-    virtual void cleanMimeCache(){};    
+    virtual void cleanMimeCache(){};
     /* mail box methods */
     /* parameter is the box to create.
-     * if the implementing subclass has prefixes, 
+     * if the implementing subclass has prefixes,
      * them has to be appended automatic.
      */
     virtual int createMbox(const QString&,const Folder*parentfolder=0,const QString& delemiter="/",bool getsubfolder=false);
     virtual void logout()=0;
-    
+
     static AbstractMail* getWrapper(IMAPaccount *a);
     static AbstractMail* getWrapper(POP3account *a);
     static AbstractMail* getWrapper(NNTPaccount *a);
     /* mbox only! */
     static AbstractMail* getWrapper(const QString&a,const QString&name="Local Folders");
+    static AbstractMail* getWrapper(Account*a);
 
     static QString defaultLocalfolder();
-    
+    static QString draftFolder();
+
     virtual MAILLIB::ATYPE getType()const=0;
     virtual const QString&getName()const=0;
 
