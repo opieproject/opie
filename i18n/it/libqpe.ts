@@ -772,31 +772,31 @@ riprovare.</translation>
     </message>
     <message>
         <source>Click to close this window, discarding changes.</source>
-        <translation type="unfinished">Premi per chiudere questa finestra, abbandonando le modifiche effettuate.</translation>
+        <translation>Premi per chiudere questa finestra, abbandonando le modifiche effettuate.</translation>
     </message>
     <message>
         <source>Click to close this window.</source>
-        <translation type="unfinished">Premi per chiudere questa finestra.</translation>
+        <translation>Premi per chiudere questa finestra.</translation>
     </message>
     <message>
         <source>Click to close this window and apply changes.</source>
-        <translation type="unfinished">Premi per chiudere questa finestra e salvare le modifiche effettuate.</translation>
+        <translation>Premi per chiudere questa finestra e salvare le modifiche effettuate.</translation>
     </message>
     <message>
         <source>Click to make this window moveable.</source>
-        <translation type="unfinished">Premi per spostare la finestra.</translation>
+        <translation>Premi per spostare la finestra.</translation>
     </message>
     <message>
         <source>Click to make this window use all available screen area.</source>
-        <translation type="unfinished">Premi per ingrandire al massimo questa finestra.</translation>
+        <translation>Premi per ingrandire al massimo questa finestra.</translation>
     </message>
     <message>
         <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
-        <translation type="unfinished">&lt;Qt&gt;La guida completa non è disponibile per questa applicazione, è comunque presente la guida base.&lt;p&gt;Per usare la guida:&lt;p&gt;&lt;ol&gt;&lt;li&gt;tieni premuto il tasto di aiuto.&lt;li&gt;quando apparirà &lt;b&gt;Cos&apos;è...&lt;/b&gt;, premi un qualunque tasto.&lt;/ol&gt;&lt;/Qt&gt;</translation>
+        <translation>&lt;Qt&gt;La guida completa non è disponibile per questa applicazione, è comunque presente la guida base.&lt;p&gt;Per usare la guida:&lt;p&gt;&lt;ol&gt;&lt;li&gt;tieni premuto il tasto di aiuto.&lt;li&gt;quando apparirà &lt;b&gt;Cos&apos;è...&lt;/b&gt;, premi un qualunque tasto.&lt;/ol&gt;&lt;/Qt&gt;</translation>
     </message>
     <message>
         <source>What&apos;s this...</source>
-        <translation type="unfinished">Cos&apos;è...</translation>
+        <translation>Cos&apos;è...</translation>
     </message>
 </context>
 <context>
