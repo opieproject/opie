@@ -529,7 +529,6 @@ void IMAPwrapper::traverseBody(const RecMail&mail,mailimap_body*body,RecBody&tar
     if (!body || current_recursion>=10) {
         return;
     }
-    ++current_count;
     switch (body->bd_type) {
     case MAILIMAP_BODY_1PART:
     {
@@ -552,6 +551,9 @@ void IMAPwrapper::traverseBody(const RecMail&mail,mailimap_body*body,RecBody&tar
             QString body_text = fetchTextPart(mail,countlist,true,currentPart.Encoding());
             target_body.setDescription(currentPart);
             target_body.setBodytext(body_text);
+            if (countlist.count()>1) {
+                target_body.addPart(currentPart);
+            }
         } else {
             target_body.addPart(currentPart);
         }
@@ -562,13 +564,31 @@ void IMAPwrapper::traverseBody(const RecMail&mail,mailimap_body*body,RecBody&tar
     break;
     case MAILIMAP_BODY_MPART:
     {
+        QValueList<int>countlist = recList;
         clistcell*current=0;
         mailimap_body*current_body=0;
-        unsigned int ccount = current_count-1;
+        unsigned int ccount = 1;
         mailimap_body_type_mpart*mailDescription = body->bd_data.bd_body_mpart;
         for (current=clist_begin(mailDescription->bd_list);current!=0;current=clist_next(current)) {
             current_body = (mailimap_body*)current->data;
-            traverseBody(mail,current_body,target_body,current_recursion+1,recList,ccount);
+            if (current_body->bd_type==MAILIMAP_BODY_MPART) {
+                RecPart targetPart;
+                targetPart.setType("multipart");
+                fillMultiPart(targetPart,mailDescription);
+                countlist.append(current_count);
+                targetPart.setPositionlist(countlist);
+                target_body.addPart(targetPart);
+                QString id("");
+                for (unsigned int j = 0; j < countlist.count();++j) {
+                    id+=(j>0?" ":"");
+                    id+=QString("%1").arg(countlist[j]);
+                }
+                qDebug("ID(mpart) = %s",id.latin1());
+            }
+            traverseBody(mail,current_body,target_body,current_recursion+1,countlist,ccount);
+            if (current_body->bd_type==MAILIMAP_BODY_MPART) {
+                countlist = recList;
+            }
             ++ccount;
         }
     }
@@ -607,6 +627,7 @@ void IMAPwrapper::fillSingleTextPart(RecPart&target_part,mailimap_body_type_text
     }
     QString sub;
     sub = which->bd_media_text;
+    qDebug("Type= text/%s",which->bd_media_text);
     target_part.setSubtype(sub.lower());
     target_part.setLines(which->bd_lines);
     fillBodyFields(target_part,which->bd_fields);
@@ -622,6 +643,22 @@ void IMAPwrapper::fillSingleMsgPart(RecPart&target_part,mailimap_body_type_msg*w
     /* we set this type to text/plain */
     target_part.setLines(which->bd_lines);
     fillBodyFields(target_part,which->bd_fields);    
+}
+
+void IMAPwrapper::fillMultiPart(RecPart&target_part,mailimap_body_type_mpart*which)
+{       
+    if (!which) return;
+    target_part.setSubtype(which->bd_media_subtype);
+    if (which->bd_ext_mpart && which->bd_ext_mpart->bd_parameter && which->bd_ext_mpart->bd_parameter->pa_list) {
+        clistcell*cur = 0;
+        mailimap_single_body_fld_param*param=0;
+        for (cur = clist_begin(which->bd_ext_mpart->bd_parameter->pa_list);cur!=NULL;cur=clist_next(cur)) {
+            param = (mailimap_single_body_fld_param*)cur->data;
+            if (param) {
+                target_part.addParameter(QString(param->pa_name).lower(),QString(param->pa_value));
+            }
+        }        
+    }
 }
 
 void IMAPwrapper::fillSingleBasicPart(RecPart&target_part,mailimap_body_type_basic*which)

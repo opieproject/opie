@@ -52,7 +52,8 @@ protected:
     void fillSingleTextPart(RecPart&target_part,mailimap_body_type_text*which);
     void fillSingleBasicPart(RecPart&target_part,mailimap_body_type_basic*which);
     void fillSingleMsgPart(RecPart&target_part,mailimap_body_type_msg*which);
-    void traverseBody(const RecMail&mail,mailimap_body*body,RecBody&target_body,int current_recursion,QValueList<int>recList,int current_count=0);
+    void fillMultiPart(RecPart&target_part,mailimap_body_type_mpart*which);
+    void traverseBody(const RecMail&mail,mailimap_body*body,RecBody&target_body,int current_recursion,QValueList<int>recList,int current_count=1);
     
     /* just helpers */
     static void fillBodyFields(RecPart&target_part,mailimap_body_fields*which);
