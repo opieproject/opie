@@ -129,6 +129,8 @@ void LnkProperties::unlinkLnk()
     if ( QPEMessageBox::confirmDelete( this, tr("Delete"), lnk->name() ) ) {
         if ( QFile::exists(lnk->file()) )
             lnk->removeFiles();
+        else
+            QMessageBox::warning( this, tr("Delete"), tr("File does not exist.") );
         if ( QFile::exists(lnk->file()) ) {
             QMessageBox::warning( this, tr("Delete"), tr("File deletion failed.") );
         } else {
