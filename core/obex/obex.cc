@@ -69,6 +69,7 @@ void Obex::sendNow(){
     qWarning("sendNow");
     if ( m_count >= 25 ) { // could not send
         emit error(-1 );
+        emit sent(false);
         return;
     }
     // OProcess inititialisation
@@ -130,7 +131,7 @@ void Obex::sendEnd() {
       delete m_send;
       m_send=0;
       qWarning("done" );
-      emit sent();
+      emit sent(true);
     }else if (m_send->exitStatus() == 255 ) { // it failed maybe the other side wasn't ready
       // let's try it again
       delete m_send;

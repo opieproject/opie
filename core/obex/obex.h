@@ -46,8 +46,7 @@ namespace OpieObex {
       /**
        * signal sent The file got beamed to the remote location
        */
-      void sent();
-      // private slots
+      void sent(bool);
       void done(bool);
 
   private:

@@ -176,8 +176,8 @@ bool IrdaApplet::setIrdaReceiveStatus ( bool d )
 
 void IrdaApplet::showDiscovered ( )
 {
-	static Sound snd_found ( "irdaapplet/irdaon" );
-	static Sound snd_lost ( "irdaapplet/irdaoff" );
+//	static Sound snd_found ( "irdaapplet/irdaon" );
+//	static Sound snd_lost ( "irdaapplet/irdaoff" );
 
 	QFile discovery ( "/proc/net/irda/discovery" );
 
@@ -206,7 +206,7 @@ void IrdaApplet::showDiscovered ( )
 
 				if ( !m_devices. contains ( deviceAddr )) {
 					popup ( tr( "Found:" ) + " " + discoveredDevice );
-					snd_found. play ( );
+					//snd_found. play ( );
 					qcopsend = true;
 				}
 				m_devices. replace ( deviceAddr, discoveredDevice );
@@ -218,7 +218,7 @@ void IrdaApplet::showDiscovered ( )
 
 			if ( it. data ( ). left ( 3 ) == "+++" ) {
 				popup ( tr( "Lost:" ) + " " + it. data ( ). mid ( 3 ));
-				snd_lost. play ( );
+				//snd_lost. play ( );
 
 				QMap <QString, QString>::Iterator tmp = it;
 				tmp++;
