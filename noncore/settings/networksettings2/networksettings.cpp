@@ -44,11 +44,11 @@ NetworkSettings::NetworkSettings( QWidget *parent,
     QHBoxLayout * H = new QHBoxLayout( 0 );
     V->addStretch(1);
     V->addLayout( H );
-    Leds[0] = new OLedBox( red, LED_Frm );
+    Leds[0] = new Opie::Ui::OLedBox( red, LED_Frm );
     H->addWidget( Leds[0], 0, Qt::AlignVCenter );
-    Leds[1] = new OLedBox( red, LED_Frm );
+    Leds[1] = new Opie::Ui::OLedBox( red, LED_Frm );
     H->addWidget( Leds[1], 0, Qt::AlignVCenter );
-    Leds[2] = new OLedBox( red, LED_Frm );
+    Leds[2] = new Opie::Ui::OLedBox( red, LED_Frm );
     H->addWidget( Leds[2], 0, Qt::AlignVCenter );
     V->addStretch(1);
 

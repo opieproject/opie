@@ -7,7 +7,16 @@ class ANetNodeInstance;
 class QTimer;
 class QListBoxItem;
 class QEvent;
-class OLedBox;
+
+namespace Opie { 
+
+  namespace Ui { 
+
+    class OLedBox; 
+
+  };
+
+};
 
 class NetworkSettings : public NetworkSettingsGUI {
 
@@ -55,5 +64,5 @@ private :
           (3) up : present active and connected
 
       */
-      OLedBox * Leds[3];
+      Opie::Ui::OLedBox * Leds[3];
 };
