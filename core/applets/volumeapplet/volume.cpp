@@ -45,6 +45,8 @@
 
 #include "oledbox.h"
 
+using namespace Opie;
+
 #define RATE_TIMER_INTERVAL 100 
 // Ten times per second is fine (RATE_TIMER_INTERVAL 100).  A shorter time
 // results in "hanging" buttons on the iPAQ due to quite high CPU consumption.
@@ -186,8 +188,10 @@ VolumeControl::VolumeControl ( VolumeApplet *icon, bool /*showMic*/, QWidget *pa
   bool has_wav_alarm = true;
   
   switch ( ODevice::inst ( )-> model ( )) { // we need to add other devices eventually
-    case OMODEL_Zaurus_SL5000:
+    case Model_Zaurus_SL5000:
       has_wav_alarm = false; //poor guys probably feeling left out...
+      break;
+    default:
       break;
   }
   
@@ -457,7 +461,7 @@ void VolumeControl::readConfig ( bool force )
 }
 
 
-void VolumeControl::volumeChanged ( bool nowMuted )
+void VolumeControl::volumeChanged ( bool /*nowMuted*/ )
 {
   int prevVol = m_vol_percent;
   bool prevMute = m_vol_muted;
