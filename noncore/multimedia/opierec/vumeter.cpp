@@ -28,23 +28,18 @@ VUMeter::VUMeter(QWidget *parent, const char *name, const int tr)
    }
 
    readConf();
-
-//  QColor c;
-//  c.setHsv( (x * 255)/w, 255, 255 );// rainbow effect
-//  c.setRgb( 255, 0, 255);
-//  p.setPen(c);
-
+   
    //rainbow effect
-   if( colorScheme = 0 ) {
+   if( colorScheme == 0 ) {
       for( i = 0; i < para.leds; i++) color[i] = green;
       color[0] = color[1] = red;
       color[2] = color[3] = color[4] = color[5] = yellow;
    } else {
       int j = para.leds - 4;
       for( i = 0; i < para.leds; i++) {
-         int i16 = (j);// & 15;
+         int i16 = (j);
          color[i] = QColor(( 15 - i16) * 16, 255, 255, QColor::Hsv);
-         owarn << color[i].name() << oendl;
+//         owarn << color[i].name() << oendl;
          j--;
       }
    }
@@ -61,7 +56,7 @@ VUMeter::~VUMeter(){
 }
 
 void VUMeter::update(){
-   qWarning("vumeter update");
+//   qWarning("vumeter update");
    vuTimer->start(para.update, FALSE);
    if (para.onOff) {
       disconnect(vuTimer, SIGNAL(timeout()), this , SLOT(timeSlot()));
@@ -222,9 +217,7 @@ void VUMeter::readConf() {
    para.leds = config.readNumEntry("LEDs", 20);
    para.resoFactor = pow(2, para.reso / 6.0);
 
-   colorScheme = config.readNumEntry("colorScheme", 0);
-//   update();
-//   dia->updatePara();
+   colorScheme = config.readNumEntry("colorScheme", 1);
 }
 
 
