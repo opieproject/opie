@@ -7,5 +7,5 @@ Architecture: arm
 Version: 1.8.5-$SUB_VERSION
 Depends: libqpe1, libopiecore2, libopieui2
 Provides: libopiesecurity2
-Recommends: opie-multiauth-bluepingplugin | opie-multiauth-dummyplugin | opie-multiauth-noticeplugin | opie-multiauth-pinplugin
+Recommends: opie-multiauth-bluepingplugin | opie-multiauth-dummyplugin | opie-multiauth-noticeplugin | opie-multiauth-pinplugin, opie-security
 Description: Opie library 2.0 security
