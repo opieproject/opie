@@ -131,8 +131,7 @@ QColor EmulationHandler::foreColor(int col) {
         break;
     case Profile::Orange:
         qWarning("Foreground orange");
-        // FIXME needs better color here
-        co = Qt::darkYellow;
+        co.setRgb( 231, 184, 98 );
         break;
     }
 
