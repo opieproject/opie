@@ -1338,8 +1338,13 @@ void PlayListWidget::readPls(const QString &filename) {
                 lnk.setName( name);
                 if(s.at(s.length()-4) == '.')
                     lnk.setFile( s);
-                else
-                    lnk.setFile( s+"/");
+                else {
+                 if( name.right(1).find('/') == -1)
+                   s+="/";
+                   //                  if(s.right(1) != '/')
+                    lnk.setFile( s);
+
+                }
                 lnk.setType("audio/x-mpegurl");
 
                 qDebug("DocLnk add "+name);
