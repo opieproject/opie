@@ -26,7 +26,7 @@
 #include <qtimer.h>
 
 
-BatteryMeter::BatteryMeter( QWidget *parent = 0 )
+BatteryMeter::BatteryMeter( QWidget *parent )
     : QWidget( parent ), charging(false)
 {
     ps = new PowerStatus;
