@@ -46,6 +46,8 @@
 
 #include "../document/katedocument.h"
 #include "kateviewdialog.h"
+#include <opie/ofontselector.h>
+
 
 SearchDialog::SearchDialog( QWidget *parent, QStringList &searchFor, QStringList &replaceWith, int flags )
   : KDialogBase( parent, 0L, true, i18n( "Find Text" ), Ok | Cancel, Ok )
@@ -525,13 +527,28 @@ FontConfig::FontConfig( QWidget *parent, char *name )
 {
     // sizemanagment
   QGridLayout *grid = new QGridLayout( this, 1, 1 );
-#if 0
-  m_fontchooser = new KFontChooser ( this );
-  m_fontchooser->enableColumn(KFontChooser::StyleList, false);
-  grid->addWidget( m_fontchooser, 0, 0);
+//     QString familyStr = cfg. readEntry ( "FontFamily", "Helvetica" );
+//     QString styleStr = cfg. readEntry ( "FontStyle", "Regular" );
+//     int size = cfg. readNumEntry ( "FontSize", 10 );
+//  OFontSelector *m_fontselect;
 
-  connect (m_fontchooser, SIGNAL (fontSelected( const QFont & )), this, SLOT (slotFontSelected( const QFont & )));
-#endif
+    m_fontselect = new OFontSelector ( false, this, "FontTab" );
+//    m_fontselect-> setSelectedFont ( familyStr, styleStr, size );
+//   QWhatsThis::add( m_fontselect,
+//   tr( "Select the desired name, style and size of the default font applications will use." ) );
+
+    connect( m_fontselect, SIGNAL( fontSelected ( const QFont & )),
+             this, SLOT( slotFontSelected( const QFont & )));
+   grid->addWidget(  m_fontselect, 0, 0);
+
+    
+// #if 0
+//   m_fontchooser = new KFontChooser ( this );
+//   m_fontchooser->enableColumn(KFontChooser::StyleList, false);
+//   grid->addWidget( m_fontchooser, 0, 0);
+
+//   connect (m_fontchooser, SIGNAL (fontSelected( const QFont & )), this, SLOT (slotFontSelected( const QFont & )));
+// #endif
 }
 
 FontConfig::~FontConfig()
@@ -540,10 +557,10 @@ FontConfig::~FontConfig()
 
 void FontConfig::setFont ( const QFont &font )
 {
-#if 0
-  m_fontchooser->setFont (font);
+//#if 0
+m_fontselect->setFont (font);
   myFont = font;
-#endif
+//#endif
 }
 
 void FontConfig::slotFontSelected( const QFont &font )

@@ -2346,7 +2346,7 @@ void KateView::configDialog()
     hlPage->saveData();
   }
 
-  delete kd;
+//  delete kd;
 
 #endif
 }
