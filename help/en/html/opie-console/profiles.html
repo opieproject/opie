@@ -6,42 +6,44 @@
 
   <body>
     <h1>Profile Editing</h1>
-    <p>There are two ways to create a Connection by either using 'New Connection'
+    <p>There are two ways to create a Connection, either using 'New Connection'
        ( <img src="new.png"> ) or to use a previously saved profile.
       Both ways involve the usage of the Profile Dialog.<br>
-      <p>The dialog is divided into four tabs Profile, Connection, Terminal and
-      Special.<br>
-      <P><B>Profile</b> - In profile you need to set a Profile name below
-      the equally named label. <br>
-      <P><B>Connection</b>  - Then you need to choose a Connection type. 
-      In this version Opie Console supports a legacy console called 
-      'local console', a Serial and a Modem connection mode.
-      Depending on this choice the second tab will have a different GUI.
-      <a href="#con">More below.</a><br>
-      <P><B>Terminal</b> - Here you may select a terminal emulation
-      widget.<br>
-      <P>The last item on this page is a option to automatically
-	connect on creation.<br>
-      <br><br>
-      <a name="con"></a><p> The Connection Tab depends on the Connection
-      Type used.<br>
-      For local console there is no option available.<br>
+      <p>The Profile Editor dialog is divided into four tabs, 
+      <a href="#profile">Profile</a>, <a href="#connection">Connection</a>, 
+      <a href="#terminal">Terminal</a> and <a href="#keys">Special Keys</a>.<br>
+
+      <P><B><a name="profile">Profile</a></b> - In Profile you need to set a
+      Profile name and select a connection type. So far, opie-console supports
+      a 'local console', a Serial and a Modem connection type. You may also
+      choose for this profile to auto connect after loading by checking the box
+      at the bottom.<br>
+
+      <P><B><a name="connection">Connection</a></b>  - According to the type of
+      connection you selected in the previous tab, the options here will vary.
+      For local console there is no option available.
       Modem and Serial share most of the configuration. You can select
       a device to use, the speed, the flow control and the parity. On top
       of that Modem let's you choose a number to dial and  to configure
       a set of AT commands.<br>
-      <br><br>
-      <p>The Terminal Tab let's you choose a Terminal Type, a color scheme,
-      the font.<br>
-      <br><br>
-      <p>The fourth tab is there to configure the additional software keys for 
-      a connection.<br>
-      <br><br>
 
-      <P>Clicking the OK button on the top right position accepts this dialog
-      and the profile will be used.
+      <P><B><a name="terminal">Terminal</a></b> - The Terminal Tab lets you
+      choose a Terminal Type, a color scheme, and the font size.<br><p>
+      
+      <b><a name="keys">Special Keys</a></b> - The fourth tab is there to
+      customize the drop-down software keyboard for each profile. You can
+      select how many rows and columns you want on your keyboard. To edit a
+      key, tap on the key and select a label, enter the Q Keycode and the
+      Unicode Value. Click <a href="opie-console/fkeyboard.html">here</a> for
+      more information about these values.
+
+      <br>
+      <P>Clicking the OK button on the top right corner saves this profile
+      and loads the profile for use.
 
       
+      <!-- this shoudlnt really go here....
+
       <h2>Using the Profile Editor</h2>
       <p>The Configuration Dialog can be accessed by either clicking
       on the 'Connection' Menu and then 'Configure Profiles' or by the
@@ -49,5 +51,7 @@
       <p>The list view contains the already saved profiles. You can add
       , remove and modify profiles by selecting one and clicking the
       appropriate button.<br>
+
+      -->
   </body>
 </html>
