@@ -34,6 +34,7 @@
 #include <qpe/resource.h>
 
 #include <qaction.h>
+#include <qcursor.h>
 #include <qimage.h>
 #include <qfile.h>
 #include <qdir.h>
