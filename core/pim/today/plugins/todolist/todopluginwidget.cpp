@@ -63,12 +63,12 @@ void TodolistPluginWidget::readConfig() {
     m_maxCharClip =  cfg.readNumEntry( "maxcharclip", 38 );
 }
 
-void TodolistPluginWidget:: refresh()  {
+void TodolistPluginWidget:: refresh() {
     todo->reload();
     getTodo();
 }
 
-void TodolistPluginWidget::reinitialize()  {
+void TodolistPluginWidget::reinitialize() {
     readConfig();
     todo->reload();
     getTodo();
@@ -86,7 +86,7 @@ void TodolistPluginWidget::getTodo() {
     int ammount = 0;
 
     // get overdue todos first
-    m_list = todo->overDue();
+    m_list = todo->sorted( true, 3, 2, 1);
 
     for ( m_it = m_list.begin(); m_it != m_list.end(); ++m_it ) {
         if (!(*m_it).isCompleted() && ( ammount < m_maxLinesTask ) ) {
