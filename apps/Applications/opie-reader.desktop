@@ -5,3 +5,4 @@ Icon=opie-reader/uqtreader
 Type=Application
 Name=Opie Reader (Unicode)
 CanFastLoad=1
+Name[es]=Lector Opie

@@ -4,4 +4,5 @@ Exec=chess
 Icon=chess/Chess
 Type=Application
 Name=Chess
-Name[pt]=Xadrês
+Name[pt]=XadrÃªs
+Name[es]=Ajedrez

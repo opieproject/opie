@@ -4,3 +4,4 @@ Exec=confedit
 Icon=confedit/confedit
 Type=Application
 Name=Conf File Editor
+Name[es]=Editor Configuración
