@@ -78,7 +78,7 @@ void RotateApplet::channelReceived( const QCString &msg, const QByteArray & data
             int action = cfg.readNumEntry( "CloseHingeAction", 0 );
             switch ( action )
             {
-                case 1: /* DISPLAY OFF */ ODevice::inst()->setDisplayStatus( false ); ODevice::inst()->setDisplayBrightness( 0 ); break;
+                case 1: /* DISPLAY OFF */ ODevice::inst()->setDisplayBrightness( 0 ); break;
                 case 2: /* SUSPEND */ ODevice::inst()->suspend(); break;
                 default: /* IGNORE */ break;
             }
