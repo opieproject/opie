@@ -1,6 +1,7 @@
 #include "function_keyboard.h"
 #include <qsizepolicy.h> 
 #include <qevent.h>
+#include <qwindowsystem_qws.h>
 #include <qapplication.h>
 
 FunctionKeyboard::FunctionKeyboard(QWidget *parent) : 
@@ -99,12 +100,16 @@ void FunctionKeyboard::mousePressEvent(QMouseEvent *e) {
 
     // emit that sucker!
     FKey k = keys["r" + QString::number(pressedRow) + "c" + QString::number(pressedCol)];
-    //QWSServer::sendKeyEvent(k.getU(), k.getQ(), 0, 1, 0);
-    //qwsServer->sendKeyEvent(k.getU(), k.getQ(), 0, 1, 0);
-    //qwsServer->sendKeyEvent(0x41, 0, 0, 1, 0);
+    emit keyPressed(k.getU(), k.getQ(), 0, 1, 0);
+    /*
+     *
+    QWSServer::sendKeyEvent(k.getU(), k.getQ(), 0, 1, 0);
+    qwsServer->sendKeyEvent(k.getU(), k.getQ(), 0, 1, 0);
+    qwsServer->sendKeyEvent(0x41, 0, 0, 1, 0);
 
     QKeyEvent ke(QEvent::KeyPress, k.getQ(), k.getU(), 0);
-    QApplication::sendEvent(this, &ke); 
+    QApplication::sendEvent((QObject *)parent, &ke); 
+    */
 
 }
 
@@ -117,10 +122,15 @@ void FunctionKeyboard::mouseReleaseEvent(QMouseEvent *) {
         paintKey(row, col);
 
         FKey k = keys["r" + QString::number(row) + "c" + QString::number(col)];
-        //QWSServer::sendKeyEvent(k.getU(), k.getQ(), 0, 0, 0);
-        //qwsServer->sendKeyEvent(k.getU(), k.getQ(), 0, 0, 0);
+        emit keyPressed(k.getU(), k.getQ(), 0, 0, 0);
+
+        /*
+        QWSServer::sendKeyEvent(k.getU(), k.getQ(), 0, 0, 0);
+        qwsServer->sendKeyEvent(k.getU(), k.getQ(), 0, 0, 0);
+
         QKeyEvent ke(QEvent::KeyRelease, k.getQ(), k.getU(), 0);
-        QApplication::sendEvent(this, &ke); 
+        QApplication::sendEvent((QObject *)parent, &ke); 
+        */
     }
 
 }

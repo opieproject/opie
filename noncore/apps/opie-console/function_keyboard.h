@@ -41,6 +41,10 @@ public:
 
     QSize sizeHint() const;
 
+signals:
+
+    void keyPressed(ushort, ushort, bool, bool, bool);
+
 private:
 
     // thie key for the map is the row/col
@@ -52,6 +56,8 @@ private:
     double keyWidth; // decimal point matters!
 
     int pressedRow, pressedCol;
+
+    QObject *parent;
 
 };
 
