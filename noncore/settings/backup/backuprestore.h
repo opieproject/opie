@@ -13,6 +13,7 @@ class BackupAndRestore : public BackupAndRestoreBase {
 Q_OBJECT
 	
 public:
+
   BackupAndRestore( QWidget* parent = 0, const char* name = 0);
   ~BackupAndRestore();
   

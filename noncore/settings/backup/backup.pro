@@ -6,7 +6,7 @@ SOURCES		= main.cpp backuprestore.cpp
 INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe
-INTERFACES	= backuprestorebase.ui
+INTERFACES	= backuprestorebase.ui errordialog.ui
 TARGET		= backup
 DESTDIR		= $(OPIEDIR)/bin
 
