@@ -9,6 +9,7 @@ Name[es]=Editor Configuración
 Comment[es]=Edite los ficheros ~/Settings/*.conf
 Name[fr]=Editeur de configuration
 Name[it]=Editor Configurazioni
+Comment[it]=Modifica file ~/Settings/*.conf
 Name[pt]=Editor Configurações
 Comment[pt]=Editor dos ficheiros ~/Settings/*.conf
 Name[pt_BR]=Editor Configurações
