@@ -74,7 +74,7 @@ OpieFtp::OpieFtp( )
     connectionMenu  = new QPopupMenu( this );
     localMenu  = new QPopupMenu( this );
     remoteMenu  = new QPopupMenu( this );
-  tabMenu = new QPopupMenu( this );
+    tabMenu = new QPopupMenu( this );
 
     layout->addMultiCellWidget( menuBar, 0, 0, 0, 3 );
 
@@ -83,7 +83,7 @@ OpieFtp::OpieFtp( )
     menuBar->insertItem( tr( "Remote" ), remoteMenu);
     menuBar->insertItem( tr( "View" ), tabMenu);
 
-  connectionMenu->insertItem( tr( "New" ), this,  SLOT( newConnection() ));
+    connectionMenu->insertItem( tr( "New" ), this,  SLOT( newConnection() ));
     connectionMenu->insertItem( tr( "Connect" ), this,  SLOT( connector() ));
     connectionMenu->insertItem( tr( "Disconnect" ), this,  SLOT( disConnector() ));
 
@@ -104,8 +104,9 @@ OpieFtp::OpieFtp( )
     tabMenu->insertItem( tr( "Switch to Local" ), this, SLOT( switchToLocalTab() ));
     tabMenu->insertItem( tr( "Switch to Remote" ), this, SLOT( switchToRemoteTab() ));
     tabMenu->insertItem( tr( "Switch to Config" ), this, SLOT( switchToConfigTab() ));
+    tabMenu->setCheckable(TRUE);
 
-  TabWidget = new QTabWidget( this, "TabWidget" );
+    TabWidget = new QTabWidget( this, "TabWidget" );
     layout->addMultiCellWidget( TabWidget, 1, 1, 0, 3 );
 
     TabWidget->setTabShape(QTabWidget::Triangular);
@@ -148,14 +149,14 @@ OpieFtp::OpieFtp( )
     Remote_View->setAllColumnsShowFocus(TRUE);
     QPEApplication::setStylusOperation( Remote_View->viewport(),QPEApplication::RightOnHold);
 
-  connect( Remote_View, SIGNAL( doubleClicked( QListViewItem*)),
+    connect( Remote_View, SIGNAL( doubleClicked( QListViewItem*)),
              this,SLOT( remoteListClicked(QListViewItem *)) );
     connect( Remote_View, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
              this,SLOT( RemoteListPressed(int, QListViewItem *, const QPoint&, int)) );
 
     tabLayout_2->addWidget( Remote_View, 0, 0 );
 
-  TabWidget->insertTab( tab_2, tr( "Remote" ) );
+    TabWidget->insertTab( tab_2, tr( "Remote" ) );
 
     tab_3 = new QWidget( TabWidget, "tab_3" );
     tabLayout_3 = new QGridLayout( tab_3 );
@@ -205,19 +206,19 @@ OpieFtp::OpieFtp( )
 
     TextLabel4 = new QLabel( tab_3, "TextLabel4" );
     TextLabel4->setText( tr( "Port" ) );
-  tabLayout_3->addMultiCellWidget( TextLabel4, 4, 4, 0, 1 );
+    tabLayout_3->addMultiCellWidget( TextLabel4, 4, 4, 0, 1 );
 
-  PortSpinBox = new QSpinBox( tab_3, "PortSpinBox" );
+    PortSpinBox = new QSpinBox( tab_3, "PortSpinBox" );
     PortSpinBox->setButtonSymbols( QSpinBox::UpDownArrows );
     PortSpinBox->setMaxValue(32786);
     PortSpinBox->setValue( 4242);
 //    PortSpinBox->setValue( 21);
-  tabLayout_3->addMultiCellWidget( PortSpinBox, 4, 4, 1, 1);
+    tabLayout_3->addMultiCellWidget( PortSpinBox, 4, 4, 1, 1);
 
     QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
     tabLayout_3->addItem( spacer, 5, 0 );
 
-  TabWidget->insertTab( tab_3, tr( "Config" ) );
+    TabWidget->insertTab( tab_3, tr( "Config" ) );
 
     connect(TabWidget,SIGNAL(currentChanged(QWidget *)),
             this,SLOT(tabChanged(QWidget*)));
@@ -228,7 +229,7 @@ OpieFtp::OpieFtp( )
     currentPathEdit = new QLineEdit( "/", this, "currentPathEdit" );
     layout->addMultiCellWidget( currentPathEdit, 3, 3, 0, 3 );
 
-  currentPathEdit->setText( currentDir.canonicalPath());
+    currentPathEdit->setText( currentDir.canonicalPath());
     connect( currentPathEdit,SIGNAL(returnPressed()),this,SLOT(currentPathEditChanged()));
 
     ProgressBar = new QProgressBar( this, "ProgressBar" );
@@ -260,11 +261,20 @@ void OpieFtp::tabChanged(QWidget *w)
 {
     if (TabWidget->currentPageIndex() == 0) {
             currentPathEdit->setText( currentDir.canonicalPath());
+            tabMenu->setItemChecked(tabMenu->idAt(0),TRUE);
+            tabMenu->setItemChecked(tabMenu->idAt(1),FALSE);
+            tabMenu->setItemChecked(tabMenu->idAt(2),FALSE);
     }
   if (TabWidget->currentPageIndex() == 1) {
             currentPathEdit->setText( currentRemoteDir );
+            tabMenu->setItemChecked(tabMenu->idAt(1),TRUE);
+            tabMenu->setItemChecked(tabMenu->idAt(0),FALSE);
+            tabMenu->setItemChecked(tabMenu->idAt(2),FALSE);
     }
   if (TabWidget->currentPageIndex() == 2) {
+            tabMenu->setItemChecked(tabMenu->idAt(2),TRUE);
+            tabMenu->setItemChecked(tabMenu->idAt(0),FALSE);
+            tabMenu->setItemChecked(tabMenu->idAt(1),FALSE);
     }
 }
 
@@ -853,15 +863,15 @@ void OpieFtp::currentPathEditChanged()
 
 void OpieFtp::switchToLocalTab()
 {
-TabWidget->setCurrentPage(0);
+    TabWidget->setCurrentPage(0);
 }
 
 void OpieFtp::switchToRemoteTab()
 {
-TabWidget->setCurrentPage(1);
+    TabWidget->setCurrentPage(1);
 }
 
 void OpieFtp::switchToConfigTab()
 {
-TabWidget->setCurrentPage(2);
+    TabWidget->setCurrentPage(2);
 }
