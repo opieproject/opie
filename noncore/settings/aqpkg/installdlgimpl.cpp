@@ -52,6 +52,10 @@ InstallDlgImpl::InstallDlgImpl( vector<QString> &packageList, DataManager *dataM
 
     // Output text is read only
     output->setReadOnly( true );
+	QFont f( "helvetica" );
+	f.setPointSize( 10 );
+	output->setFont( f );
+
 
     // setup destination data
     int defIndex = 0;
