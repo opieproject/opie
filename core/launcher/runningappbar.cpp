@@ -124,15 +124,6 @@ void RunningAppBar::removeTask(const AppLnk& appLnk)
 			qDebug("Removing %s from app list.", appLnk.name().latin1());
 			m_AppList.remove();
 
-			// grab the keyboard back, in case the app crashed/forgot
-
-			QPEApplication *qpeapp = (QPEApplication *) qApp;
-
-			if ( appLnk.exec() == qpeapp-> keyboardGrabbedBy ( )) {
-				qDebug ( "grabbing keyboard back from %s", appLnk.name().latin1());
-				qpeapp-> grabKeyboard ( );
-			}
-
 			delete target;
 		}
 	}

@@ -241,18 +241,19 @@ bool StartMenu::loadMenu( AppLnkSet *folder, QPopupMenu *menu )
 }
 
 
-void StartMenu::launch()
+void StartMenu::launch ( )
 {
-    int y = mapToGlobal( QPoint() ).y() - launchMenu->sizeHint().height();
+    int y = mapToGlobal ( QPoint ( )). y ( ) - launchMenu-> sizeHint ( ). height ( );
 
-    if ( launchMenu->isVisible() ) 
-        launchMenu->hide();
+    if ( launchMenu-> isVisible ( )) {
+        launchMenu-> hide ( );
+    }
     else {
-        QWidget *active = qApp->activeWindow();
-        if ( active && active->isPopup() )
-            active->close();
-            
-        launchMenu->popup( QPoint( 1, y ) );
+        QWidget *active = qApp-> activeWindow ( );
+        if ( active && active-> isPopup ( ))
+            active-> close ( );
+    
+        launchMenu-> popup ( QPoint ( 1, y ));
     }
 }
 

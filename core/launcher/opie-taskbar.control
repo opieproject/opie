@@ -1,4 +1,4 @@
-Files: bin/qpe apps/Settings/Calibrate.desktop pics/launcher plugins/applets/libsuspendapplet.so* plugins/applets/libhomeapplet.so* plugins/applets/liblogoutapplet.so*
+Files: bin/qpe apps/Settings/Calibrate.desktop pics/launcher pics/devicebuttons/*.png plugins/applets/libsuspendapplet.so* plugins/applets/libhomeapplet.so* plugins/applets/liblogoutapplet.so*
 Priority: required
 Section: opie/system
 Maintainer: Project Opie <opie@handhelds.org>

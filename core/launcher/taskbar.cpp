@@ -280,7 +280,7 @@ void TaskBar::receive( const QCString &msg, const QByteArray &data )
 		sysTray->addApplets();
 		sm->reloadApplets();
 	} else if ( msg == "soundAlarm()" ) {
-		Desktop::soundAlarm();
+		DesktopApplication::soundAlarm ( );
 	}
 	else if ( msg == "setLed(int,bool)" ) {
 		int led, status;
@@ -293,6 +293,16 @@ void TaskBar::receive( const QCString &msg, const QByteArray &data )
 			
 			ODevice::inst ( )-> setLedState ( l, status ? ( canblink ? Led_BlinkSlow : Led_On ) : Led_Off );
 		}
+	}
+	else if ( msg == "toggleMenu()" ) {
+		if ( sm-> launchMenu-> isVisible ( ))
+			sm-> launch ( );
+		else {
+			QCopEnvelope e ( "QPE/System", "toggleApplicationMenu()" );
+		}
+	}
+	else if ( msg == "toggleStartMenu()" ) {
+		sm-> launch ( );
 	}
 }
 

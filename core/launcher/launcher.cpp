@@ -1182,6 +1182,13 @@ void Launcher::launcherMessage( const QCString &msg, const QByteArray &data)
 	stream >> type;	
 	tabs->setBusyIndicatorType(type);
     }
+    else if ( msg == "home()" ) {
+	if ( isVisibleWindow( winId ( )))
+	   nextView ( );
+	else
+	   raise ( );
+    	
+    }
 }
 
 void Launcher::storageChanged()
