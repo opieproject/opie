@@ -1,0 +1,7 @@
+[Desktop Entry]
+Comment=Drink recipe lookup
+Exec=bartender
+File=bartender
+Icon=bartender/bartender.png
+Name=Opie-Bartender
+Type=Application
