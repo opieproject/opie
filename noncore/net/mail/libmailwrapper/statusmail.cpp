@@ -23,6 +23,9 @@ void StatusMail::initAccounts(QList<Account>&accounts)
     Account *it;
     folderStat currentStat;
     AbstractMail * current = 0;
+    currentPop3Stat.message_count=0;
+    currentPop3Stat.message_recent=0;
+    currentPop3Stat.message_unseen=0;
     for ( it = accounts.first(); it; it = accounts.next() ) {
         if ( it->getType().compare( "IMAP" ) == 0 ) {
             IMAPaccount*ima = static_cast<IMAPaccount *>(it);
@@ -68,11 +71,16 @@ void StatusMail::check_current_stat(folderStat&targetStat)
             currentImapStat.message_count+=currentStat.message_count;
         } else if (it->getType().lower()=="pop3") {
             currentPop3Stat.message_count+=currentStat.message_count;
+            qDebug("Pop3 count: %i",currentPop3Stat.message_count);
         }
     }
+    qDebug("Pop3 last: %i",lastPop3Stat.message_count);
     if (currentPop3Stat.message_count > lastPop3Stat.message_count) {
         currentPop3Stat.message_recent = currentPop3Stat.message_count - lastPop3Stat.message_count;
         currentPop3Stat.message_unseen = currentPop3Stat.message_recent;
+    } else {
+        lastPop3Stat.message_count = currentPop3Stat.message_count;
+        currentPop3Stat.message_recent = currentPop3Stat.message_unseen = 0;
     }
     targetStat = currentImapStat;
     targetStat.message_unseen+=currentPop3Stat.message_unseen;
