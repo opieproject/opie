@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.33 2002-12-10 23:11:22 sandman Exp $
+** $Id: qpeapplication.cpp,v 1.34 2002-12-13 19:37:59 harlekin Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -95,7 +95,7 @@ public:
 	QPEApplicationData() : presstimer( 0 ), presswidget( 0 ), kbgrabber( 0 ),
 			rightpressed( FALSE ),  kbregrab( FALSE ), notbusysent( FALSE ), preloaded( FALSE ),
 			forceshow( FALSE ), nomaximize( FALSE ), keep_running( TRUE ), qpe_main_widget( 0 )
-			
+
 	{
 		qcopq.setAutoDelete( TRUE );
 	}
@@ -127,7 +127,7 @@ public:
 	};
 	QWidget* qpe_main_widget;
 	QList<QCopRec> qcopq;
-	
+
 	void enqueueQCop( const QCString &ch, const QCString &msg,
 	                  const QByteArray &data )
 	{
@@ -178,7 +178,7 @@ public:
 		return TRUE;
 		  }
 		}
-		*/ 
+		*/
 		return FALSE;
 	}
 
@@ -330,24 +330,66 @@ static void setMic( int t = 0, int percent = -1 )
 }
 
 
+static void setBass( int t = 0, int percent = -1 )
+{
+	switch ( t ) {
+		case 0: {
+				Config cfg( "qpe" );
+				cfg.setGroup( "Volume" );
+				if ( percent < 0 )
+					percent = cfg.readNumEntry( "BassPercent", 50 );
+
+				int fd = 0;
+				int bass = percent;
+                                if ( ( fd = open( "/dev/mixer", O_RDWR ) ) >= 0 ) {
+					ioctl( fd, MIXER_WRITE( SOUND_MIXER_BASS ), &bass );
+					::close( fd );
+				}
+			}
+			break;
+	}
+}
+
+
+static void setTreble( int t = 0, int percent = -1 )
+{
+	switch ( t ) {
+		case 0: {
+				Config cfg( "qpe" );
+				cfg.setGroup( "Volume" );
+				if ( percent < 0 )
+					percent = cfg.readNumEntry( "TreblePercent", 50 );
+
+				int fd = 0;
+				int treble = percent;
+				if ( ( fd = open( "/dev/mixer", O_RDWR ) ) >= 0 ) {
+					ioctl( fd, MIXER_WRITE( SOUND_MIXER_TREBLE ), &treble );
+					::close( fd );
+				}
+			}
+			break;
+	}
+}
+
+
 /*!
   \class QPEApplication qpeapplication.h
   \brief The QPEApplication class implements various system services
     that are available to all Qtopia applications.
- 
+
   Simply by using QPEApplication instead of QApplication, a standard Qt
   application becomes a Qtopia application. It automatically follows
   style changes, quits and raises, and in the
   case of \link docwidget.html document-oriented\endlink applications,
   changes the currently displayed document in response to the environment.
- 
+
   To create a \link docwidget.html document-oriented\endlink
   application use showMainDocumentWidget(); to create a
   non-document-oriented application use showMainWidget(). The
   keepRunning() function indicates whether the application will
   continue running after it's processed the last \link qcop.html
   QCop\endlink message. This can be changed using setKeepRunning().
- 
+
   A variety of signals are emitted when certain events occur, for
   example, timeChanged(), clockChanged(), weekChanged(),
   dateFormatChanged() and volumeChanged(). If the application receives
@@ -358,7 +400,7 @@ static void setMic( int t = 0, int percent = -1 )
   signals, the application should save and reload any data
   files that are involved in synching. Most of these signals will initially
   be received and unfiltered through the appMessage() signal.
- 
+
   This class also provides a set of useful static functions. The
   qpeDir() and documentDir() functions return the respective paths.
   The grabKeyboard() and ungrabKeyboard() functions are used to
@@ -367,13 +409,13 @@ static void setMic( int t = 0, int percent = -1 )
   operation is set with setStylusOperation() and retrieved with
   stylusOperation(). There are also setInputMethodHint() and
   inputMethodHint() functions.
- 
+
   \ingroup qtopiaemb
 */
 
 /*!
   \fn void QPEApplication::clientMoused()
- 
+
   \internal
 */
 
@@ -385,7 +427,7 @@ static void setMic( int t = 0, int percent = -1 )
 
 /*!
   \fn void QPEApplication::clockChanged( bool ampm );
- 
+
   This signal is emitted when the user changes the clock's style. If
   \a ampm is TRUE, the user wants a 12-hour AM/PM clock, otherwise,
   they want a 24-hour clock.
@@ -393,14 +435,14 @@ static void setMic( int t = 0, int percent = -1 )
 
 /*!
     \fn void QPEApplication::volumeChanged( bool muted )
- 
+
     This signal is emitted whenever the mute state is changed. If \a
     muted is TRUE, then sound output has been muted.
 */
 
 /*!
     \fn void QPEApplication::weekChanged( bool startOnMonday )
- 
+
     This signal is emitted if the week start day is changed. If \a
     startOnMonday is TRUE then the first day of the week is Monday; if
     \a startOnMonday is FALSE then the first day of the week is
@@ -409,31 +451,31 @@ static void setMic( int t = 0, int percent = -1 )
 
 /*!
     \fn void QPEApplication::dateFormatChanged()
- 
+
     This signal is emitted whenever the date format is changed.
 */
 
 /*!
     \fn void QPEApplication::flush()
- 
+
     ###
 */
 
 /*!
   \fn void QPEApplication::reload()
- 
+
 */
 
 /*!
   \fn void QPEApplication::appMessage( const QCString& msg, const QByteArray& data )
- 
+
   This signal is emitted when a message is received on this
   application's QPE/Application/<i>appname</i> \link qcop.html
   QCop\endlink channel.
- 
+
   The slot to which you connect this signal uses \a msg and \a data
   in the following way:
- 
+
 \code
      void MyWidget::receive( const QCString& msg, const QByteArray& data )
      {
@@ -447,7 +489,7 @@ static void setMic( int t = 0, int percent = -1 )
        }
     }
 \endcode
- 
+
   \sa qcop.html
   Note that messages received here may be processed by qpe application
   and emitted as signals, such as flush() and reload().
@@ -456,7 +498,7 @@ static void setMic( int t = 0, int percent = -1 )
 /*!
   Constructs a QPEApplication just as you would construct
   a QApplication, passing \a argc, \a argv, and \a t.
- 
+
   For applications, \a t should be the default, GuiClient. Only
   the Qtopia server passes GuiServer.
 */
@@ -609,8 +651,8 @@ static void createInputMethodDict()
 /*!
   Returns the currently set hint to the system as to whether
   widget \a w has any use for text input methods.
- 
- 
+
+
   \sa setInputMethodHint() InputMethodHint
 */
 QPEApplication::InputMethodHint QPEApplication::inputMethodHint( QWidget * w )
@@ -622,7 +664,7 @@ QPEApplication::InputMethodHint QPEApplication::inputMethodHint( QWidget * w )
 
 /*!
   \enum QPEApplication::InputMethodHint
- 
+
   \value Normal the application sometimes needs text input (the default).
   \value AlwaysOff the application never needs text input.
   \value AlwaysOn the application always needs text input.
@@ -631,7 +673,7 @@ QPEApplication::InputMethodHint QPEApplication::inputMethodHint( QWidget * w )
 /*!
   Hints to the system that widget \a w has use for text input methods
   as specified by \a mode.
- 
+
   \sa inputMethodHint() InputMethodHint
 */
 void QPEApplication::setInputMethodHint( QWidget * w, InputMethodHint mode )
@@ -908,12 +950,12 @@ void QPEApplication::applyStyle()
 {
 	Config config( "qpe" );
 	config.setGroup( "Appearance" );
-	
+
 	// don't block ourselves ...
 	Opie::force_appearance = 0;
-		
+
 	static QString appname = Opie::binaryName ( );
-	
+
 	QStringList ex = config. readListEntry ( "NoStyle", ';' );
 	int nostyle = 0;
 	for ( QStringList::Iterator it = ex. begin ( ); it != ex. end ( ); ++it ) {
@@ -922,14 +964,14 @@ void QPEApplication::applyStyle()
 			break;
 		}
 	}
-	                                                
+
 	// Widget style
 	QString style = config.readEntry( "Style", "Light" );
-	
+
 	// don't set a custom style
 	if ( nostyle & Opie::Force_Style )
 		style = "Light";
-	
+
 	internalSetStyle ( style );
 
 	// Colors
@@ -954,13 +996,13 @@ void QPEApplication::applyStyle()
 
 	// Window Decoration
 	QString dec = config.readEntry( "Decoration", "Qtopia" );
-	
+
 	// don't set a custom deco
 	if ( nostyle & Opie::Force_Decoration )
 		dec = "";
-	
+
 	//qDebug ( "Setting Deco: %s -- old %s (%d)", dec.latin1(), d-> decorationName.latin1(), nostyle);
-	
+
 	if ( dec != d->decorationName ) {
 		qwsSetDecoration( new QPEDecoration( dec ) );
 		d->decorationName = dec;
@@ -970,14 +1012,14 @@ void QPEApplication::applyStyle()
 	QString ff = config.readEntry( "FontFamily", font().family() );
 	int fs = config.readNumEntry( "FontSize", font().pointSize() );
 
-	// don't set a custom font	
+	// don't set a custom font
 	if ( nostyle & Opie::Force_Font ) {
 		ff = "Helvetica";
 		fs = 10;
 	}
-	
+
 	setFont ( QFont ( ff, fs ), true );
-	
+
 	// revert to global blocking policy ...
 	Opie::force_appearance = config. readBoolEntry ( "ForceStyle", false ) ? Opie::Force_All : Opie::Force_None;
 	Opie::force_appearance &= ~nostyle;
@@ -1116,6 +1158,25 @@ void QPEApplication::systemMessage( const QCString& msg, const QByteArray& data 
 		setMic();
 		emit micChanged( micMuted );
 	}
+	else if ( msg == "setBass(int,int)" ) { // Added: 2002-12-13 by Maximilian Reiss <harlekin@handhelds.org>
+		int t, v;
+		stream >> t >> v;
+		setBass( t, v );
+	}
+	else if ( msg == "bassChange(bool)" ) { // Added: 2002-12-13 by Maximilian Reiss <harlekin@handhelds.org>
+	        setBass();
+	}
+    	else if ( msg == "setTreble(int,int)" ) { // Added: 2002-12-13 by Maximilian Reiss <harlekin@handhelds.org>
+		int t, v;
+		stream >> t >> v;
+		setTreble( t, v );
+	}
+	else if ( msg == "trebleChange(bool)" ) { // Added: 2002-12-13 by Maximilian Reiss <harlekin@handhelds.org>
+	        setTreble();
+	}
+
+
+
 #endif
 }
 
@@ -1229,7 +1290,7 @@ void QPEApplication::pidMessage( const QCString& msg, const QByteArray& data)
 /*!
   Sets widget \a mw as the mainWidget() and shows it. For small windows,
   consider passing TRUE for \a nomaximize rather than the default FALSE.
- 
+
   \sa showMainDocumentWidget()
 */
 void QPEApplication::showMainWidget( QWidget* mw, bool nomaximize )
@@ -1240,12 +1301,12 @@ void QPEApplication::showMainWidget( QWidget* mw, bool nomaximize )
 /*!
   Sets widget \a mw as the mainWidget() and shows it. For small windows,
   consider passing TRUE for \a nomaximize rather than the default FALSE.
- 
+
   This calls designates the application as
   a \link docwidget.html document-oriented\endlink application.
- 
+
   The \a mw widget \e must have this slot: setDocument(const QString&).
- 
+
   \sa showMainWidget()
 */
 void QPEApplication::showMainDocumentWidget( QWidget* mw, bool nomaximize )
@@ -1264,7 +1325,7 @@ void QPEApplication::showMainDocumentWidget( QWidget* mw, bool nomaximize )
   function while processing a \link qcop.html QCop\endlink message,
   after processing its outstanding \link qcop.html QCop\endlink
   messages the application will start 'properly' and show itself.
- 
+
   \sa keepRunning()
 */
 void QPEApplication::setKeepRunning()
@@ -1278,7 +1339,7 @@ void QPEApplication::setKeepRunning()
 /*!
   Returns TRUE if the application will quit after processing the
   current list of qcop messages; otherwise returns FALSE.
- 
+
   \sa setKeepRunning()
 */
 bool QPEApplication::keepRunning() const
@@ -1419,7 +1480,7 @@ static void createDict()
 
 /*!
   Returns the current StylusMode for widget \a w.
- 
+
   \sa setStylusOperation() StylusMode
 */
 QPEApplication::StylusMode QPEApplication::stylusOperation( QWidget* w )
@@ -1431,19 +1492,19 @@ QPEApplication::StylusMode QPEApplication::stylusOperation( QWidget* w )
 
 /*!
     \enum QPEApplication::StylusMode
- 
+
     \value LeftOnly the stylus only generates LeftButton
                        events (the default).
     \value RightOnHold the stylus generates RightButton events
                        if the user uses the press-and-hold gesture.
- 
+
     \sa setStylusOperation() stylusOperation()
 */
 
 /*!
   Causes widget \a w to receive mouse events according to the stylus
   \a mode.
- 
+
   \sa stylusOperation() StylusMode
 */
 void QPEApplication::setStylusOperation( QWidget * w, StylusMode mode )
@@ -1588,7 +1649,7 @@ void QPEApplication::ungrabKeyboard()
   the signals emitted are sent to this application instead. Some games
   programs take over the launch keys in this way to make interaction
   easier.
- 
+
   \sa ungrabKeyboard()
 */
 void QPEApplication::grabKeyboard()
