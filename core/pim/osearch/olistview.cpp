@@ -19,7 +19,7 @@ OListView::OListView(QWidget *parent, const char *name )
 
 	setRootIsDecorated( true );
 	addColumn(tr("Results"));
-
+	setSorting( -1 );
  	connect( this, SIGNAL(expanded(QListViewItem*)), SLOT(expand(QListViewItem*)));
 }
 

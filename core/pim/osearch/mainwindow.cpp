@@ -77,11 +77,11 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
   mainLayout->addWidget( detailsFrame );
   detailsFrame->hide();
 
-  searches.append( new AdressSearch( resultsList, tr("adressbook") ) );
-  searches.append( new TodoSearch( resultsList, tr("todo") ) );
-  searches.append( new DatebookSearch( resultsList, tr("datebook") ) );
   searches.append( new AppLnkSearch( resultsList, tr("applications") ) );
   searches.append( new DocLnkSearch( resultsList, tr("documents") ) );
+  searches.append( new TodoSearch( resultsList, tr("todo") ) );
+  searches.append( new DatebookSearch( resultsList, tr("datebook") ) );
+  searches.append( new AdressSearch( resultsList, tr("adressbook") ) );
 
   makeMenu();
   setCentralWidget( mainFrame );
@@ -124,6 +124,7 @@ void MainWindow::makeMenu()
 
   addToolBar( searchBar, "Search", QMainWindow::Top, TRUE );
   QLineEdit *searchEdit = new QLineEdit( searchBar, "seachEdit" );
+  searchEdit->setFocus();
   searchBar->setHorizontalStretchable( TRUE );
   searchBar->setStretchableWidget( searchEdit );
   SearchAllAction->addTo( searchBar );
