@@ -21,6 +21,7 @@
 #include "timestring.h"
 #include <qobject.h>
 #include <qpe/qpeapplication.h> //for qApp
+#include <qpe/calendar.h>
 #include "config.h"
 
 
@@ -181,7 +182,7 @@ QString DateFormat::wordDate(const QDate &d, int v) const
 		break;
 	    case 0x0002:
 		{
-		    QString monthName = d.monthName(d.month());
+		    QString monthName = Calendar::nameOfMonth(d.month());
 		    if (!(v & longWord)) {
 			monthName = monthName.left(3);
 		    }
