@@ -11,6 +11,7 @@
 #include <qlistview.h>
 #include <qheader.h>
 #include <qlabel.h>
+#include <qtabwidget.h> // in order to disable the profiles tab
 
 #include <qmessagebox.h>
 
@@ -58,6 +59,10 @@ MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(par
   connect(setCurrentProfileButton, SIGNAL(clicked()), this, SLOT(changeProfile()));
 
   connect(newProfile, SIGNAL(textChanged(const QString&)), this, SLOT(newProfileChanged(const QString&)));  
+
+  //FIXME: disable profiles for the moment:
+  tabWidget->setTabEnabled( tab, false );
+
   // Load connections.
   // /usr/local/kde/lib/libinterfaces.la
 #ifdef QWS 
