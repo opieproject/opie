@@ -79,6 +79,7 @@ void BatteryMeter::mouseReleaseEvent( QMouseEvent* /*e*/ ) {
             batteryView->setFrameStyle( QFrame::PopupPanel | QFrame::Raised );
         }
 
+        batteryView->UpdateBatteryStatus();
         QRect r(batteryView->pos(),batteryView->sizeHint());
         QPoint curPos = this->mapToGlobal ( rect().topLeft() );
 

@@ -17,15 +17,20 @@ using namespace Opie::Core;
 BatteryStatus::BatteryStatus( const PowerStatus *p, QWidget *parent, WFlags f )
 : QFrame( parent, 0, f), ps(p), bat2(false) {
 
-    jackPercent = 0;
-
-    if ( ODevice::inst ( )-> series ( ) == Model_iPAQ ) {
-        getProcApmStatusIpaq();
-    }
-    percent = ps->batteryPercentRemaining();
+	UpdateBatteryStatus();
 }
 
 BatteryStatus::~BatteryStatus() {}
+
+void BatteryStatus::UpdateBatteryStatus() {
+
+	jackPercent = 0;
+
+	if ( ODevice::inst ( )-> series ( ) == Model_iPAQ ) {
+		getProcApmStatusIpaq();
+	}
+	percent = ps->batteryPercentRemaining();
+}
 
 /*
  * Make use of the advanced apm interface of the ipaq

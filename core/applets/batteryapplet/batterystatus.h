@@ -30,7 +30,7 @@ class BatteryStatus : public QFrame
 public:
     BatteryStatus( const PowerStatus *s, QWidget *parent=0, WFlags f = 0 );
     ~BatteryStatus();
-
+    void BatteryStatus::UpdateBatteryStatus();
     void updatePercent( int );
     QSize sizeHint() const;
 protected:
