@@ -157,7 +157,6 @@ void IMAPwrapper::listMessages(const QString&mailbox,QList<RecMail> &target )
         Global::statusMessage(tr("Mailbox has no mails"));
         return;
     } else {
-        Global::statusMessage(tr("Mailbox has %1 mails").arg(last));
     }
 
     /* the range has to start at 1!!! not with 0!!!! */
@@ -188,6 +187,7 @@ void IMAPwrapper::listMessages(const QString&mailbox,QList<RecMail> &target )
                 target.append(m);
             }
         }
+        Global::statusMessage(tr("Mailbox has %1 mails").arg(target.count()));
     } else {
         Global::statusMessage(tr("Error fetching headers: %1").arg(m_imap->imap_response));
     }
