@@ -38,7 +38,9 @@
 #include <qpe/resource.h>
 #include <qpe/qpemessagebox.h>
 
+
 #include "todotemplatemanager.h"
+#include "templateeditor.h"
 #include "todoentryimpl.h"
 #include "tableview.h"
 
@@ -63,8 +65,12 @@ MainWindow::MainWindow( QWidget* parent,
     initActions();
     initEditor();
     initShow();
+    initTemplate();
 
     raiseCurrentView();
+}
+void MainWindow::initTemplate() {
+    m_curTempEd = new TemplateEditor( this, templateManager() );
 }
 void MainWindow::initActions() {
     QAction* a = new QAction( tr("New Task" ), Resource::loadPixmap( "new" ),
@@ -256,6 +262,7 @@ QPopupMenu* MainWindow::contextMenu( int uid ) {
     return menu;
 }
 QPopupMenu* MainWindow::options() {
+    qWarning("Options");
     return m_options;
 }
 QPopupMenu* MainWindow::edit() {
@@ -336,8 +343,31 @@ void MainWindow::closeEvent( QCloseEvent* e ) {
         config.writeEntry( "ShowOverDue", showOverDue() );
     }
 }
-void MainWindow::slotNewFromTemplate( int uid ) {
+/*
+ * slotNewFromTemplate
+ * We use the edit widget to do
+ * the config but we setUid(-1)
+ * to get a new uid
+ */
+/*
+ * first we get the name of the template
+ * then we will use the TemplateManager
+ */
+void MainWindow::slotNewFromTemplate( int id ) {
+    QString name = m_template->text( id );
 
+    ToDoEvent event = templateManager()->templateEvent( name );
+    event = currentEditor()->edit(this,
+                                  event );
+
+    if ( currentEditor()->accepted() ) {
+        /* assign new todo */
+        event.setUid( -1 );
+        currentView()->addEvent( event );
+        m_todoMgr.add( event );
+
+        populateCategories();
+    }
 }
 void MainWindow::slotNew() {
     if(m_syncing) {
@@ -565,6 +595,9 @@ void MainWindow::slotUpdate1( int uid, const SmallTodo& ev) {
 void MainWindow::updateTodo(  const ToDoEvent& ev) {
     m_todoMgr.update( ev.uid() , ev );
 }
+/* The view changed it's configuration
+ * update the view menu
+ */
 void MainWindow::slotUpdate3( QWidget* ) {
 
 }

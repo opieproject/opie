@@ -53,6 +53,7 @@ namespace Todo {
     class TemplateManager;
     class Editor;
     class TodoShow;
+    class TemplateEditor;
     class MainWindow : public QMainWindow {
         Q_OBJECT
     public:
@@ -96,6 +97,7 @@ private slots:
         void initViews();
         void initEditor();
         void initShow();
+        void initTemplate();
         void populateCategories();
         void raiseCurrentView();
         ViewBase* currentView();
@@ -104,6 +106,8 @@ private slots:
         Editor* m_curEdit;
         TodoShow* currentShow();
         TodoShow* m_curShow;
+        TemplateEditor* currentTemplateEditor();
+        TemplateEditor* m_curTempEd;
 
         QMenuBar* m_bar;
         QToolBar* m_tool;

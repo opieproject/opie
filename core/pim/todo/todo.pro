@@ -12,7 +12,8 @@ HEADERS	= smalltodo.h \
 	  todotemplatemanager.h \
 	  todoeditor.h \
 	  todoshow.h \
-	  textviewshow.h
+	  textviewshow.h \
+	  templateeditor.h
 
 SOURCES	= smalltodo.cpp \
           todomanager.cpp \
@@ -25,7 +26,8 @@ SOURCES	= smalltodo.cpp \
 	  todotemplatemanager.cpp \
 	  todoeditor.cpp   \
 	  todoshow.cpp \
-	  textviewshow.cpp
+	  textviewshow.cpp \
+	  templateeditor.cpp
 
 INTERFACES	= todoentry.ui
 TARGET		= todolist

@@ -26,6 +26,7 @@ namespace Todo {
         QMap<QString, ToDoEvent> m_templates;
 
 
+
     };
 };
 
