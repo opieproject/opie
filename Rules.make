@@ -53,6 +53,9 @@ endif
 ifeq ($(CONFIG_OPIE_NO_OVERRIDE_QT),y)
 	echo CONFIG += no-override >> $@
 endif
+ifeq ($(CONFIG_OPIELOGIN_USEPAM),y)
+	echo CONFIG += OPIELOGIN_USEPAM >> $@
+endif
 ifeq ($(CONFIG_LIBQPE_WITHROHFEEDBACK),y)
 	echo CONFIG += LIBQPE_WITHROHFEEDBACK >> $@
 endif
@@ -307,8 +310,7 @@ define descend
 endef
 
 define makefilegen
-	cd $(if $(1),$(shell dirname $(1))); $(TOPDIR)/qmake/qmake $(3) -o $(if $(1),$(shell basename $(1))) `cat $(OPIEDIR)/packages | grep "	\`echo $(1)|sed -e 's,/Makefile$$,,'\`	" | \
-		head -1 | awk '{print $$3}'`
+	cd $(if $(1),$(dir $(1))); $(TOPDIR)/qmake/qmake $(3) -o $(if $(1),$(notdir $(1))) $(word 3,$(shell grep -m 1 "[[:space:]]$(patsubst %/Makefile,%,$(1))[[:space:]]" $(OPIEDIR)/packages))
 endef
 
 define makecfg
