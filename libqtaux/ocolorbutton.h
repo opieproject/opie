@@ -54,6 +54,9 @@ public:
     virtual ~OColorButton ( );
 
     QColor color ( ) const;
+    
+protected:
+    void resizeEvent( QResizeEvent* );    
 
 signals:
     /**

@@ -61,11 +61,11 @@ OColorButton::OColorButton ( QWidget *parent, const QColor &color, const char *n
     //	setPopupDelay ( 0 );
     connect ( d-> m_menu, SIGNAL( colorSelected(const QColor&)), this, SLOT( updateColor(const QColor&)));
 
-    updateColor ( color );
 
     QSize s = sizeHint ( ) + QSize ( 12, 0 );
     setMinimumSize ( s );
     setMaximumSize ( s. width ( ) * 2, s. height ( ));
+    d->m_color = color;
 }
 
 /**
@@ -100,7 +100,7 @@ void OColorButton::updateColor ( const QColor &c )
 {
     d-> m_color = c;
 
-    QImage img ( 16, 16, 32 );
+    QImage img ( width()-14, height()-6, 32 );
     img. fill ( 0 );
 
     int r, g, b;
@@ -145,3 +145,11 @@ void OColorButton::updateColor ( const QColor &c )
     emit colorSelected ( c );
 }
 
+
+/**
+ * @internal
+ */
+void OColorButton::resizeEvent( QResizeEvent *ev ) {
+    QPushButton::resizeEvent( ev );
+    updateColor(d->m_color);
+}
