@@ -116,7 +116,9 @@ void MyPty::donePty()
     if (m_cpid) {
         qWarning("killing!!!");
 	kill(m_cpid, SIGHUP);
-	waitpid(m_cpid, &status, 0);
+	//waitpid(m_cpid, &status, 0);
+        delete m_sn_e;
+        m_sn_e = 0l;
     }
 
     m_cpid = 0;
@@ -186,9 +188,10 @@ int MyPty::run(const char* cmd, QStrList &, const char*, int)
 
     // parent - continue as a widget
     QSocketNotifier* sn_r = new QSocketNotifier(m_fd,QSocketNotifier::Read,this);
-//    QSocketNotifier* sn_e = new QSocketNotifier(m_fd,QSocketNotifier::Exception,this);
+    delete m_sn_e;
+    m_sn_e = new QSocketNotifier(m_fd,QSocketNotifier::Exception,this);
     connect(sn_r,SIGNAL(activated(int)),this,SLOT(readPty()));
-//    connect(sn_e,SIGNAL(activated(int)),this,SLOT(error()));
+    connect(m_sn_e,SIGNAL(activated(int)),this,SLOT(error()));
 
     return 0;
 }
@@ -232,6 +235,7 @@ int MyPty::openPty()
 */
 MyPty::MyPty(const Profile&) : m_cpid(0)
 {
+    m_sn_e = 0l;
   m_fd = openPty();
   ProcCtl* ctl = ProcCtl::self();
 }

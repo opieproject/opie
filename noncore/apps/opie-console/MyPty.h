@@ -28,6 +28,7 @@
 #include "io_layer.h"
 
 class Profile;
+class QSocketNotifier;
 class MyPty : public IOLayer
 {
     Q_OBJECT
@@ -90,6 +91,7 @@ private:
     char m_ttynam[16]; // "/dev/ttyxx" | "/dev/pts/########..."
     int m_fd;
     int m_cpid;
+    QSocketNotifier* m_sn_e;
 };
 
 #endif
