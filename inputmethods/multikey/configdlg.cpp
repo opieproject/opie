@@ -361,10 +361,7 @@ void ConfigDlg::closeEvent(QCloseEvent *) {
 
 void ConfigDlg::setMap(int index) {
 
-    if (index == 0) {
-        remove_button->setDisabled(true);
-    }
-    else if (default_maps.find(sw_maps[index-1]) != default_maps.end()) {
+    if (index == 0 || default_maps.find(sw_maps[index-1]) != default_maps.end()) {
         remove_button->setDisabled(true);
     } else {
         remove_button->setEnabled(true);
