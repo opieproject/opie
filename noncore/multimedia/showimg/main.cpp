@@ -22,12 +22,6 @@
 
 #include <qpe/qpeapplication.h>
 
-int main( int argc, char **argv )
-{
-    QPEApplication a( argc, argv );
-    
-    ImageViewer w(0, "new window", Qt::WResizeNoErase );
-    a.showMainDocumentWidget(&w);
+#include <opie/oapplicationfactory.h>
 
-    return a.exec();
-}
+OPIE_EXPORT_APP( OApplicationFactory<ImageViewer> )
