@@ -112,7 +112,7 @@ void ViewMail::slotItemClicked( QListViewItem * item , const QPoint & point, int
   if ( item->text( 0 ).left( 4 ) == "text" )  {
      menu->insertItem( tr( "Show Text" ), 1 );
   }
-  menu->insertItem( tr( "Save Attachemt" ),  0 );
+  menu->insertItem( tr( "Save Attachment" ),  0 );
   menu->insertSeparator(1);
 
   ret = menu->exec( point, 0 );
@@ -125,17 +125,18 @@ void ViewMail::slotItemClicked( QListViewItem * item , const QPoint & point, int
                   "/", item->text( 1 )  , types, 0 );
 
              if( !str.isEmpty() ) {
-               qDebug(  " first we will need a MIME wrapper" );
+               qDebug( "first we will need a MIME wrapper" );
              }
              }
         break ;
 
         case 1:
-             qDebug(  QString( "Test selected" ).arg(  ( ( AttachItem* )item )->Partnumber() )  );
              if (  ( ( AttachItem* )item )->Partnumber() == -1 ) {
                 setText();
              } else {
+                if (  m_recMail.Wrapper() != 0l )  { // make sure that there is a wrapper , even after delete or simular actions
                 browser->setText( m_recMail.Wrapper()->fetchPart( m_recMail, m_body.Parts()[ ( ( AttachItem* )item )->Partnumber() ] ) );
+                }
              }
         break;
  }

@@ -82,7 +82,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     layout->addWidget( folderView );
 
     mailView = new QListView( view );
-    mailView->addColumn( tr( "Status" ) );
+    mailView->addColumn( tr( "" ) );
     mailView->addColumn( tr( "Subject" ),QListView::Manual );
     mailView->addColumn( tr( "Sender" ),QListView::Manual );
     mailView->addColumn( tr( "Date" ));
@@ -100,7 +100,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
 
     connect(folderView,SIGNAL(refreshMailview(QList<RecMail>*)),this,SLOT(refreshMailView(QList<RecMail>*)));
 
-   QTimer::singleShot( 1000, this, SLOT(  slotAdjustColumns() ) );
+   QTimer::singleShot( 1000, this, SLOT( slotAdjustColumns() ) );
 }
 
 
