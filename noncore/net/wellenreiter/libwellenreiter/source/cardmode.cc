@@ -1,7 +1,7 @@
 /* 
  * Set card modes for sniffing
  *
- * $Id: cardmode.cc,v 1.8 2003-01-23 02:21:57 max Exp $
+ * $Id: cardmode.cc,v 1.9 2003-01-31 10:42:13 max Exp $
  */
 
 #include "cardmode.hh"
@@ -71,11 +71,63 @@ int card_into_monitormode (pcap_t **orighandle, char *device, int cardtype)
 /* Set card into promisc mode */
 int card_set_promisc_up (const char *device)
 {
-  char ifconfigcmd[48];
-  int retval=0;
-
-  snprintf(ifconfigcmd, sizeof(ifconfigcmd) - 1, SBIN_PATH, device);
-  retval = system(ifconfigcmd);
-
-  return (retval ? 0 : 1);
+    struct ifconf ifc;
+    struct ifreq ifr_x[50];
+    u_int i;
+    int sockfd, err;
+	err=0;
+	/* opening a socket for issuing the iocalls */
+	sockfd = socket(PF_INET, SOCK_DGRAM, IPPROTO_IP);
+ 
+    if (sockfd < 0) 
+    {
+    	/* In case of an error  - mjm proove that please*/
+        perror("socket");
+		return 1;
+    }
+	/* Define room for 50 interfaces */
+    ifc.ifc_len = 50 * sizeof(struct ifreq);
+    ifc.ifc_req = ifr_x;
+	/* Get the config of the interfaces */
+    err = ioctl(sockfd, SIOCGIFCONF, &ifc);
+    if (err == -1) return 1;       
+    
+    /* For each interface*/
+    for (i = 0; i < ifc.ifc_len / sizeof(struct ifreq); i++) 
+	{
+		/* To complete , should get the IP, if no is assigned, asign one */
+		/*err = ioctl(sockfd, SIOCGIFADDR, &ifr_x[i]);
+		if (err == -1) perror("SIOCGIFADDR: ");		
+		printf ("Address: %s\n",Sock_ntop_host(ifr_x[i].ifr_addr.sa_family,sizeof(ifr_x[i].ifr_addr.sa_family)));
+		*/
+		if(strncmp(ifr_x[i].ifr_name,device,5) == 0)
+		{
+			/* Get the flags */
+			err = ioctl(sockfd, SIOCGIFFLAGS, &ifr_x[i]);
+        	if (err == -1) 
+        	{
+        		perror("SIOCGIFFLAGS: ");
+        		return 1;
+        	}
+			/* Check if the Interface is UP and PROMISC */
+			if (ifr_x[i].ifr_flags & IFF_PROMISC && ifr_x[i].ifr_flags & IFF_UP)
+			{
+				/* only debug text */
+				printf ("%s is PROMISC and UP \n",ifr_x[i].ifr_name);
+			}
+			else
+			{
+				/* Set the promisc flag to the interface */
+				ifr_x[i].ifr_flags=ifr_x[i].ifr_flags+IFF_PROMISC;
+				err = ioctl(sockfd, SIOCSIFFLAGS, &ifr_x[i]);
+				if (err == -1) 
+				{
+					/* Could not set the interface into promisc mode */
+					perror("SIOCSIFFLAGS: ");
+				}
+			}
+		}
+      }
+        /* All is fine */
+        return 0;
 }

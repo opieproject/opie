@@ -1,4 +1,4 @@
-/* $Id: cardmode.hh,v 1.9 2003-01-23 02:21:57 max Exp $ */
+/* $Id: cardmode.hh,v 1.10 2003-01-31 10:42:13 max Exp $ */
 
 #ifndef CARDMODE_HH
 #define CARDMODE_HH
@@ -10,6 +10,9 @@
 #include <sys/time.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <sys/ioctl.h>
+#include <linux/if.h>
+
 
 extern "C"
 {
