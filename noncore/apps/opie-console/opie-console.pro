@@ -1,6 +1,4 @@
-TEMPLATE     = app
-CONFIG       += qt warn_on 
-DESTDIR      = $(OPIEDIR)/bin
+CONFIG       += qt warn_on quick-app
 HEADERS      = io_layer.h io_serial.h io_irda.h io_bt.h io_modem.h \
            file_layer.h filetransfer.h \
            metafactory.h \
