@@ -673,40 +673,82 @@ OChannelHopper* OWirelessNetworkInterface::channelHopper() const
 }
 
 
-void OWirelessNetworkInterface::setMode( const QString& mode )
+void OWirelessNetworkInterface::commit() const
 {
-    _iwr.u.mode = stringToMode( mode );
-    wioctl( SIOCSIWMODE );
+    wioctl( SIOCSIWCOMMIT );
+}
+
+
+void OWirelessNetworkInterface::setMode( const QString& newMode )
+{
+    #ifdef FINALIZE
+    QString currentMode = mode();
+    if ( currentMode == newMode ) return;
+    #endif
+
+    qDebug( "OWirelessNetworkInterface::setMode(): trying to set mode '%s' (%d)", (const char*) newMode, stringToMode( newMode ) );
+
+    _iwr.u.mode = stringToMode( newMode );
+
+    if ( _iwr.u.mode != IW_MODE_MONITOR )
+    {
+        // IWR.U.MODE WIRD DURCH ABFRAGE DES MODE HIER PLATTGEMACHT!!!!!!!!!!!!!!!!!!!!! DEPP!
+        _iwr.u.mode = stringToMode( newMode );
+        wioctl( SIOCSIWMODE );
+
+        // special iwpriv fallback for monitor mode (check if we're really out of monitor mode now)
+
+        if ( mode() == "monitor" )
+        {
+            qDebug( "OWirelessNetworkInterface::setMode(): SIOCSIWMODE not sufficient - trying fallback to iwpriv..." );
+            if ( _mon )
+                _mon->setEnabled( false );
+            else
+                qDebug( "ONetwork(): can't switch monitor mode without installed monitoring interface" );
+        }
+
+    }
+    else    // special iwpriv fallback for monitor mode
+    {
+        if ( wioctl( SIOCSIWMODE ) )
+        {
+            qDebug( "OWirelessNetworkInterface::setMode(): IW_MODE_MONITOR ok" );
+        }
+        else
+        {
+            qDebug( "OWirelessNetworkInterface::setMode(): SIOCSIWMODE not working - trying fallback to iwpriv..." );
+
+            if ( _mon )
+                _mon->setEnabled( true );
+            else
+                qDebug( "ONetwork(): can't switch monitor mode without installed monitoring interface" );
+        }
+    }
 }
 
 
 QString OWirelessNetworkInterface::mode() const
 {
+    memset( &_iwr, 0, sizeof( struct iwreq ) );
+
     if ( !wioctl( SIOCGIWMODE ) )
     {
         return "<unknown>";
     }
-    return modeToString( _iwr.u.mode );
-}
 
+    qDebug( "DEBUG: WE's idea of current mode seems to be '%s'", (const char*) modeToString( _iwr.u.mode ) );
 
-void OWirelessNetworkInterface::setMonitorMode( bool b )
-{
-    if ( _mon )
-        _mon->setEnabled( b );
+    // legacy compatible monitor mode check
+
+    if ( dataLinkType() == ARPHRD_IEEE80211 || dataLinkType() == 802 )
+    {
+        return "monitor";
+    }
     else
-        qDebug( "ONetwork(): can't switch monitor mode without installed monitoring interface" );
+    {
+        return modeToString( _iwr.u.mode );
+    }
 }
-
-
-bool OWirelessNetworkInterface::monitorMode() const
-{
-    qDebug( "dataLinkType = %d", dataLinkType() );
-    return ( dataLinkType() == ARPHRD_IEEE80211 || dataLinkType() == 802 );
-    //FIXME: 802 is the header type for PRISM - Linux support for this is pending...
-    //FIXME: What is 119, by the way?
-}
-
 
 void OWirelessNetworkInterface::setNickName( const QString& nickname )
 {
@@ -969,12 +1011,6 @@ void OMonitoringInterface::setChannel( int c )
 }
 
 
-bool OMonitoringInterface::enabled() const
-{
-    return _if->monitorMode();
-}
-
-
 void OMonitoringInterface::setEnabled( bool b )
 {
 }
@@ -1092,15 +1128,6 @@ OHostAPMonitoringInterface::~OHostAPMonitoringInterface()
 
 void OHostAPMonitoringInterface::setEnabled( bool b )
 {
-    // IW_MODE_MONITOR was introduced in Wireless Extensions Version 15
-    // Wireless Extensions < Version 15 need iwpriv commandos for monitoring
-
-    #if WIRELESS_EXT > 14
-    if ( b )
-        _if->setMode( "monitor" );  // IW_MODE_MONITOR doesn't support prism header
-    else
-        _if->setMode( "managed" );
-    #else
     int monitorCode = _prismHeader ? 1 : 2;
     if ( b )
     {
@@ -1110,7 +1137,6 @@ void OHostAPMonitoringInterface::setEnabled( bool b )
     {
         _if->setPrivate( "monitor", 1, 0 );
     }
-    #endif
 }
 
 
@@ -1149,13 +1175,6 @@ void OOrinocoMonitoringInterface::setEnabled( bool b )
     // Wireless Extensions < Version 15 need iwpriv commandos for monitoring
     // However, as of recent orinoco drivers, IW_MODE_MONITOR is still not supported
 
-    #if 0
-    //#if WIRELESS_EXT > 14
-    if ( b )
-        _if->setMode( "monitor" );  // IW_MODE_MONITOR doesn't support prism header
-    else
-        _if->setMode( "managed" );
-    #else
     if ( b )
     {
         setChannel( 1 );
@@ -1164,7 +1183,6 @@ void OOrinocoMonitoringInterface::setEnabled( bool b )
     {
         _if->setPrivate( "monitor", 2, 0, 0 );
     }
-    #endif
 }
 
 

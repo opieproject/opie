@@ -2,6 +2,8 @@
 #include <opie2/ostation.h>
 #include <opie2/omanufacturerdb.h>
 
+#include <unistd.h>
+
 int main( int argc, char** argv )
 {
     qDebug( "OPIE Network Demo" );
@@ -13,6 +15,7 @@ int main( int argc, char** argv )
     while ( it.current() )
     {
         qDebug( "DEMO: ONetwork contains Interface '%s'", (const char*) it.current()->name() );
+        qDebug( "DEMO: Datalink code is '%d'", it.current()->dataLinkType() );
         qDebug( "DEMO: MAC Address is '%s'", (const char*) it.current()->macAddress().toString() );
         qDebug( "DEMO: MAC Address is '%s'", (const char*) it.current()->macAddress().toString(true) );
         qDebug( "DEMO: MAC Manufacturer seems to be '%s'", (const char*) it.current()->macAddress().manufacturer() );
@@ -28,8 +31,10 @@ int main( int argc, char** argv )
 
             //if ( iface->mode() == OWirelessNetworkInterface::adhoc )
             //{
-                qDebug( "DEMO: Associated AP has MAC Address '%s'", (const char*) iface->associatedAP().toString() );
+                //qDebug( "DEMO: Associated AP has MAC Address '%s'", (const char*) iface->associatedAP().toString() );
             //}
+
+            /*
 
             // nickname
             qDebug( "DEMO: Current NickName is '%s'", (const char*) iface->nickName() );
@@ -38,6 +43,8 @@ int main( int argc, char** argv )
                 qDebug( "DEMO: Warning! Can't change nickname" );
             else
                 qDebug( "DEMO: Nickname change successful." );
+
+            /*
 
             // operation mode
             qDebug( "DEMO: Current OperationMode is '%s'", (const char*) iface->mode() );
@@ -56,6 +63,10 @@ int main( int argc, char** argv )
                 qDebug( "DEMO: RF channel change successful." );
 
             iface->setMode( "managed" );
+
+            */
+
+            /*
 
             // network scan
 
@@ -97,6 +108,30 @@ int main( int argc, char** argv )
 
             */
 
+            // monitor test
+
+            /*
+
+            qDebug( "DEMO: current interface mode is '%s'", (const char*) iface->mode() );
+            iface->setMode( "monitor" );
+            qDebug( "DEMO: current interface mode is '%s'", (const char*) iface->mode() );
+
+            sleep( 1 ); */
+
+            iface->setMode( "master" );
+
+            //sleep( 1 );
+            qDebug( "DEMO: current interface mode is '%s'", (const char*) iface->mode() );
+
+            /*iface->setMode( "adhoc" );
+            sleep( 1 );
+            qDebug( "DEMO: current interface mode is '%s'", (const char*) iface->mode() );
+            iface->setMode( "managed" );
+            sleep( 1 );
+            qDebug( "DEMO: current interface mode is '%s'", (const char*) iface->mode() );
+            iface->setMode( "master" );
+            sleep( 1 );
+            qDebug( "DEMO: current interface mode is '%s'", (const char*) iface->mode() );*/
 
         }
         ++it;

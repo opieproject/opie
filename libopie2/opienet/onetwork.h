@@ -349,9 +349,8 @@ class OWirelessNetworkInterface : public ONetworkInterface
     /**
      * @returns the current IEEE 802.11 operation mode.
      * Possible values are <ul><li>adhoc<li>managed<li>monitor<li>master or <li>unknown
-     */
-    virtual QString mode() const;
-    /**
+     *
+     * @note: Important note concerning the 'monitor' mode:
      * Setting the monitor mode on a wireless network interface enables
      * listening to IEEE 802.11 data and management frames which normally
      * are handled by the device firmware. This can be used to detect
@@ -362,11 +361,7 @@ class OWirelessNetworkInterface : public ONetworkInterface
      * the proper @ref OMonitoringInterface to be associated with the interface.
      * @see OMonitoringInterface
      */
-    virtual void setMonitorMode( bool ); //FIXME: ==> setMode( "monitor" ); Use IW_MONITOR first, if this doesn't work, then use iwpriv!
-    /**
-     * @returns true if the device is listening in IEEE 802.11 monitor mode
-     */
-    virtual bool monitorMode() const;  //FIXME: ==> mode()
+    virtual QString mode() const;
     /**
      * Set the channel hopping @a interval. An @a interval of 0 disables channel hopping.
      * @see OChannelHopper
@@ -422,6 +417,10 @@ class OWirelessNetworkInterface : public ONetworkInterface
      * @note: UNSTABLE API - UNDER CONSTRUCTION - DON'T USE!
      */
     virtual OStationList* scanNetwork();
+    /** @internal commit pending changes to the driver
+     *
+     */
+    void commit() const;
 
   protected:
     void buildInformation();
@@ -456,7 +455,6 @@ class OMonitoringInterface
 
   public:
     virtual void setEnabled( bool );
-    virtual bool enabled() const;
     virtual void setChannel( int );
 
     virtual QString name() const = 0;

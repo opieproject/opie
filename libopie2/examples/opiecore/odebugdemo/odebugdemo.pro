@@ -7,7 +7,6 @@ DEPENDPATH      += $(OPIEDIR)/include
 LIBS            += -lopiecore2
 TARGET          = odebugdemo
 
-MOC_DIR = moc
 OBJECTS_DIR = obj
 
 !contains( platform, x11 ) {
@@ -17,3 +16,5 @@ OBJECTS_DIR = obj
 contains( platform, x11 ) {
   LIBS        += -L$(OPIEDIR)/lib -Wl,-rpath,$(OPIEDIR)/lib 
 }
+
+MOC_DIR = moc
