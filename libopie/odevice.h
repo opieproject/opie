@@ -240,6 +240,8 @@ private slots:
 
 protected:
 	void reloadButtonMapping ( );
+        /*  ugly virtual hook */
+        virtual void virtual_hook( int id, void* data );
 };
 
 }

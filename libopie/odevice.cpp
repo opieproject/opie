@@ -785,7 +785,7 @@ const QStrList &ODevice::allowedCpuFrequencies ( ) const
 
 /**
  * Set desired CPU frequency
- * 
+ *
  * @param index index into d->m_cpu_frequencies of the frequency to be set
  */
 bool ODevice::setCurrentCpuFrequency(uint index)
@@ -920,7 +920,9 @@ void ODevice::remapHeldAction ( int button, const OQCopMessage &action )
 
 	QCopEnvelope ( "QPE/System", "deviceButtonMappingChanged()" );
 }
+void ODevice::virtual_hook( int id, void* data ) {
 
+}
 
 
 
