@@ -101,7 +101,7 @@ public:
     }
 
 public slots:
-    void modifierClicked( int modifier ) { (int)m ^= modifier; };
+    void modifierClicked( int modifier ) { m = static_cast<OFileNotificationType>( (int)m ^ int(modifier) ); };
     void addSingle() { addTrigger(); };
     void addMulti() { addTrigger( true ); };
 
