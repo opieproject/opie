@@ -190,7 +190,7 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
     connect( mediaPlayerState, SIGNAL( lengthChanged(long) ),  this, SLOT( setLength(long) ) );
     connect( mediaPlayerState, SIGNAL( viewChanged(char) ),    this, SLOT( setView(char) ) );
     connect( mediaPlayerState, SIGNAL( loopingToggled(bool) ), this, SLOT( setLooping(bool) ) );
-    connect( mediaPlayerState, SIGNAL( pausedToggled(bool) ),  this, SLOT( setPaused(bool) ) );
+//    connect( mediaPlayerState, SIGNAL( pausedToggled(bool) ),  this, SLOT( setPaused(bool) ) );
     connect( mediaPlayerState, SIGNAL( playingToggled(bool) ), this, SLOT( setPlaying(bool) ) );
 
     connect( this,  SIGNAL( forwardClicked() ), this, SLOT( skipFor() ) );
@@ -204,7 +204,7 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
     setLength( mediaPlayerState->length() );
     setPosition( mediaPlayerState->position() );
     setLooping( mediaPlayerState->fullscreen() );
-    setPaused( mediaPlayerState->paused() );
+//    setPaused( mediaPlayerState->paused() );
     setPlaying( mediaPlayerState->playing() );
 
 }
@@ -359,6 +359,7 @@ void AudioWidget::updateSlider( long i, long max ) {
 
 
 void AudioWidget::setToggleButton( int i, bool down ) {
+    qDebug("setToggleButton %d", i);
     if ( down != audioButtons[i].isDown ) {
         toggleButton( i );
     }
@@ -423,7 +424,6 @@ void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
             if ( isOnButton && !audioButtons[i].isHeld ) {
                 audioButtons[i].isHeld = TRUE;
                 toggleButton(i);
-
                 switch (i) {
                 case AudioVolumeUp:
                     emit moreClicked();
@@ -438,25 +438,25 @@ void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
                     emit backClicked();
                     return;
                 }
-            } else if ( !isOnButton && audioButtons[i].isHeld ) {
-                audioButtons[i].isHeld = FALSE;
-                toggleButton(i);
             }
+              else if ( !isOnButton && audioButtons[i].isHeld ) {
+                  audioButtons[i].isHeld = FALSE;
+                  toggleButton(i);
+              }
         } else {
             if ( audioButtons[i].isHeld ) {
                 audioButtons[i].isHeld = FALSE;
                 if ( !audioButtons[i].isToggle ) {
                     setToggleButton( i, FALSE );
-                    qDebug("button toggled3  %d",i);
                 }
                 switch (i) {
                 case AudioPlay:
                     if( mediaPlayerState->isPaused ) {
-                        setToggleButton( i, FALSE );
+//                          setToggleButton( i, FALSE );
                         mediaPlayerState->setPaused( FALSE );
                         return;
                     } else if( !mediaPlayerState->isPaused ) {
-                        setToggleButton( i, TRUE );
+//                            setToggleButton( i, TRUE );
                         mediaPlayerState->setPaused( TRUE );
                         return;
                     } else {
@@ -549,16 +549,16 @@ void AudioWidget::keyReleaseEvent( QKeyEvent *e)
       }
           break;
       case Key_Down:
-            toggleButton(6);
+//              toggleButton(6);
           emit lessClicked();
           emit lessReleased();
-          toggleButton(6);
+//          toggleButton(6);
           break;
       case Key_Up:
-           toggleButton(5);
+//             toggleButton(5);
            emit moreClicked();
            emit moreReleased();
-           toggleButton(5);
+//             toggleButton(5);
            break;
       case Key_Right:
 //            toggleButton(3);
