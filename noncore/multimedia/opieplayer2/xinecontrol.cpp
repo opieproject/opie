@@ -68,6 +68,8 @@ XineControl::~XineControl() {
 }
 
 void XineControl::play( const QString& fileName ) {
+    hasVideoChannel=FALSE;
+    hasAudioChannel=FALSE;
     m_fileName = fileName;
     libXine->play( fileName );
     mediaPlayerState->setPlaying( true );
@@ -81,8 +83,10 @@ void XineControl::play( const QString& fileName ) {
 
     if (whichGui == 'a') {
         libXine->setShowVideo( false );
+        hasAudioChannel=TRUE;
     } else {
         libXine->setShowVideo( true );
+        hasVideoChannel=TRUE;
     }
 
     // determine if slider is shown
@@ -192,5 +196,5 @@ void XineControl::seekTo( long second ) {
 }
 
 void XineControl::videoResized ( const QSize &s ) {
-	libXine-> resize ( s );
+  libXine-> resize ( s );
 }

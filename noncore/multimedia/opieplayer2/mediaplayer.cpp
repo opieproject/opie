@@ -11,6 +11,7 @@
 #include "mediaplayer.h"
 #include "playlistwidget.h"
 #include "audiowidget.h"
+#include "videowidget.h"
 #include "volumecontrol.h"
 
 #include "mediaplayerstate.h"
@@ -18,6 +19,7 @@
 
 
 extern AudioWidget *audioUI;
+extern VideoWidget *videoUI;
 extern PlayListWidget *playList;
 extern MediaPlayerState *mediaPlayerState;
 
@@ -42,6 +44,11 @@ MediaPlayer::MediaPlayer( QObject *parent, const char *name )
     connect( audioUI,  SIGNAL( moreReleased() ), this, SLOT( stopChangingVolume() ) );
     connect( audioUI,  SIGNAL( lessReleased() ), this, SLOT( stopChangingVolume() ) );
 
+    connect( videoUI,  SIGNAL( moreClicked() ), this, SLOT( startIncreasingVolume() ) );
+    connect( videoUI,  SIGNAL( lessClicked() ),  this, SLOT( startDecreasingVolume() ) );
+    connect( videoUI,  SIGNAL( moreReleased() ), this, SLOT( stopChangingVolume() ) );
+    connect( videoUI,  SIGNAL( lessReleased() ), this, SLOT( stopChangingVolume() ) );
+    
     volControl = new VolumeControl;
 
 }
@@ -151,9 +158,17 @@ void MediaPlayer::stopChangingVolume() {
     // Get rid of the on-screen display stuff
     drawnOnScreenDisplay = FALSE;
     onScreenDisplayVolume = 0;
-    int w = audioUI->width();
-    int h = audioUI->height();
-    audioUI->repaint( (w - 200) / 2, h - yoff, 200 + 9, 70, FALSE );
+    int w=0;
+    int h=0;
+    if( !xineControl->hasVideo()) {
+        w = audioUI->width();
+        h = audioUI->height();
+        audioUI->repaint( (w - 200) / 2, h - yoff, 200 + 9, 70, FALSE );
+    } else {
+        w = videoUI->width();
+        h = videoUI->height();
+        videoUI->repaint( (w - 200) / 2, h - yoff, 200 + 9, 70, FALSE );
+    }
 }
 
 
@@ -165,42 +180,71 @@ void MediaPlayer::timerEvent( QTimerEvent * ) {
     }
 
 
-    // TODO FIXME
+      // TODO FIXME
     int v;
     v = volControl->getVolume();
     v = v / 10;
 
-   if ( drawnOnScreenDisplay && onScreenDisplayVolume == v ) {
-       return;
-   }
-
-    int w = audioUI->width();
-    int h = audioUI->height();
-
-    if ( drawnOnScreenDisplay ) {
-        if ( onScreenDisplayVolume > v ) {
-            audioUI->repaint( (w - 200) / 2 + v * 20 + 0, h - yoff + 40, (onScreenDisplayVolume - v) * 20 + 9, 30, FALSE );
-        }
+    if ( drawnOnScreenDisplay && onScreenDisplayVolume == v ) {
+        return;
     }
 
-    drawnOnScreenDisplay = TRUE;
-    onScreenDisplayVolume = v;
+    int w=0; int h=0;
+    if( !xineControl->hasVideo()) {
+        w = audioUI->width();
+        h = audioUI->height();
 
-    QPainter p( audioUI );
-    p.setPen( QColor( 0x10, 0xD0, 0x10 ) );
-    p.setBrush( QColor( 0x10, 0xD0, 0x10 ) );
+        if ( drawnOnScreenDisplay ) {
+            if ( onScreenDisplayVolume > v ) {
+                audioUI->repaint( (w - 200) / 2 + v * 20 + 0, h - yoff + 40, (onScreenDisplayVolume - v) * 20 + 9, 30, FALSE );
+            }
+        }
+        drawnOnScreenDisplay = TRUE;
+        onScreenDisplayVolume = v;
+        QPainter p( audioUI );
+        p.setPen( QColor( 0x10, 0xD0, 0x10 ) );
+        p.setBrush( QColor( 0x10, 0xD0, 0x10 ) );
 
-    QFont f;
-    f.setPixelSize( 20 );
-    f.setBold( TRUE );
-    p.setFont( f );
-    p.drawText( (w - 200) / 2, h - yoff + 20, tr("Volume") );
+        QFont f;
+        f.setPixelSize( 20 );
+        f.setBold( TRUE );
+        p.setFont( f );
+        p.drawText( (w - 200) / 2, h - yoff + 20, tr("Volume") );
 
-    for ( unsigned int i = 0; i < 10; i++ ) {
-        if ( v > i ) {
-            p.drawRect( (w - 200) / 2 + i * 20 + 0, h - yoff + 40, 9, 30 );
-        } else {
-            p.drawRect( (w - 200) / 2 + i * 20 + 3, h - yoff + 50, 3, 10 );
+        for ( unsigned int i = 0; i < 10; i++ ) {
+            if ( v > i ) {
+                p.drawRect( (w - 200) / 2 + i * 20 + 0, h - yoff + 40, 9, 30 );
+            } else {
+                p.drawRect( (w - 200) / 2 + i * 20 + 3, h - yoff + 50, 3, 10 );
+            }
+        }
+    } else {
+        w = videoUI->width();
+        h = videoUI->height();
+
+        if ( drawnOnScreenDisplay ) {
+            if ( onScreenDisplayVolume > v ) {
+                videoUI->repaint( (w - 200) / 2 + v * 20 + 0, h - yoff + 40, (onScreenDisplayVolume - v) * 20 + 9, 30, FALSE );
+            }
+        }
+        drawnOnScreenDisplay = TRUE;
+        onScreenDisplayVolume = v;
+        QPainter p( videoUI );
+        p.setPen( QColor( 0x10, 0xD0, 0x10 ) );
+        p.setBrush( QColor( 0x10, 0xD0, 0x10 ) );
+
+        QFont f;
+        f.setPixelSize( 20 );
+        f.setBold( TRUE );
+        p.setFont( f );
+        p.drawText( (w - 200) / 2, h - yoff + 20, tr("Volume") );
+
+        for ( unsigned int i = 0; i < 10; i++ ) {
+            if ( v > i ) {
+                p.drawRect( (w - 200) / 2 + i * 20 + 0, h - yoff + 40, 9, 30 );
+            } else {
+                p.drawRect( (w - 200) / 2 + i * 20 + 3, h - yoff + 50, 3, 10 );
+            }
         }
     }
 }

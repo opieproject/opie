@@ -45,6 +45,9 @@ public:
     ~XineControl();
     int m_length;
 
+    bool hasVideo() const { return hasVideoChannel; }
+    bool hasAudio() const { return hasAudioChannel; }
+
 public slots:
     void play( const QString& fileName );
     void stop( bool );
@@ -65,6 +68,8 @@ private:
     long m_position;
     QString m_fileName;
     bool disabledSuspendScreenSaver;
+    bool hasVideoChannel;
+    bool hasAudioChannel;
 signals:
     void positionChanged( long );
 
