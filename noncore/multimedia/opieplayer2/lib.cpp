@@ -75,7 +75,7 @@ Lib::Lib(XineVideoWidget* widget) {
         ::null_set_gui_height(m_videoOutput,  m_wid->image()->height() );
         ::null_set_mode( m_videoOutput, qt_screen->depth(), qt_screen->pixelType() );
         m_bytes_per_pixel = ( qt_screen->depth() + 7 ) / 8;
-        QImage image = Resource::loadImage("SoundPlayer");
+        QImage image = Resource::loadImage("");
         image = image.smoothScale( m_wid->width(), m_wid->height() );
         QImage* img = new QImage( image );
         m_wid->setImage( img );
