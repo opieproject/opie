@@ -18,33 +18,33 @@
 # 20020517-2 - bugfixed fullscreen, added info about ifconfig
 # 20020517-1 - added about, fullscreen and icon
 
-OPIE_SH=/opt/QtPalmtop/bin/opie-sh
+OPIE_SH=$OPIEDIR/bin/opie-sh
 
 ######################################################################
 # subroutines
 
 about() {
-	( echo "<img src=/opt/QtPalmtop/pics/opie-sh-scripts/usbnetctrl.png>"
+	( echo "<img src=$OPIEDIR/pics/opie-sh-scripts/usbnetctrl.png>"
 	  echo "<h3>About</h3>"
 	  echo "This little App should make it easy for you to "
 	  echo "activate / deactivate the usbnet-driver (on ipaq)"
 	  echo "<p>"
 	  echo "To use it at first, you need to change the ifconfig"
-	  echo "line in /opt/QtPalmtop/bin/usbnetctrl.sh."
+	  echo "line in $OPIEDIR/bin/usbnetctrl.sh."
         )  | $OPIE_SH -t "usbnet control" -f  &
 	SCREENCLEAN=$!
 	sleep 1
 }
 
 startup() {
-	  ( echo "<img src=/opt/QtPalmtop/pics/opie-sh-scripts/usbnetctrl.png>"
+	  ( echo "<img src=$OPIEDIR/pics/opie-sh-scripts/usbnetctrl.png>"
 	    echo "<h3>usbnet up</h3>"
 	    modprobe usb-eth
 	    ) 2>&1 | $OPIE_SH -t Output -f
 	    
 	    $OPIE_SH -m -I -t "Usbnet Control" -M "Please connect the<br>ipaq to the cradle<br>and press OK"
 
-	 ( echo "<img src=/opt/QtPalmtop/pics/opie-sh-scripts/usbnetctrl.png>"
+	 ( echo "<img src=$OPIEDIR/pics/opie-sh-scripts/usbnetctrl.png>"
 	    echo "<h3>usbnet up</h3>"
 	    ifconfig usbf up 192.168.0.1 netmask 255.255.255.0  
 
@@ -55,7 +55,7 @@ startup() {
 }
 
 stopit() {
-	( echo "<img src=/opt/QtPalmtop/pics/opie-sh-scripts/usbnetctrl.png>"
+	( echo "<img src=$OPIEDIR/pics/opie-sh-scripts/usbnetctrl.png>"
 	  echo "<h3>usbnet down</h3>"
           ifconfig usbf down
 	  sleep 1

@@ -18,11 +18,11 @@
 # 20020517-1 - added icon, changed name in launcher
 #
 
-CFG=/opt/QtPalmtop/share/config/hostlist.cfg
+CFG=$OPIEDIR/share/config/hostlist.cfg
 OPIE_SH=opie-sh
 
 hostlist() {
-(	echo "<img src=/opt/QtPalmtop/pics/opie-sh-scripts/hostlist.png>"
+(	echo "<img src=$OPIEDIR/pics/opie-sh-scripts/hostlist.png>"
 	echo "<h3>Hostlist</h3><br>"
 	HOSTLIST=`cat $CFG | grep -v '#'`
 	for HOST in $HOSTLIST
@@ -46,7 +46,7 @@ cleanup() {
 }
 
 about() {
-	( echo "<img src=/opt/QtPalmtop/pics/opie-sh-scripts/hostlist.png>"
+	( echo "<img src=$OPIEDIR/pics/opie-sh-scripts/hostlist.png>"
 	  echo "<h3>About</h3>"
 	  echo "This little App should make it possible for you to "
 	  echo "check some hosts for availability."

@@ -17,14 +17,14 @@
 # 20020526-1a - initial release...
 #
 
-OPIE_SH=/opt/QtPalmtop/bin/opie-sh
+OPIE_SH=$OPIEDIR/bin/opie-sh
 INITPATH=/etc/init.d
 
 ######################################################################
 # subroutines
 
 about() {
-	( echo "<img src=/opt/QtPalmtop/pics/opie-sh-scripts/logviewer.png>"
+	( echo "<img src=$OPIEDIR/pics/opie-sh-scripts/logviewer.png>"
 	  echo "<h3>About</h3>"
 	  echo "This little App should make it possible for you to "
 	  echo "easily have a look at some of the syslogs. "
@@ -74,7 +74,7 @@ cat   /proc/kmsg  >/tmp/log.$$ &
 PID=$!
 sleep 2
 kill $PID
-( echo "<img src=/opt/QtPalmtop/pics/opie-sh-scripts/logviewer.png>"
+( echo "<img src=$OPIEDIR/pics/opie-sh-scripts/logviewer.png>"
   echo "<h3>/proc/kmsg</h3>"
   cat /tmp/log.$$
 ) | $OPIE_SH -t kmsg -f
@@ -87,7 +87,7 @@ cat   /proc/ksyms >/tmp/log.$$ &
 PID=$!
 sleep 2
 kill $PID
-( echo "<img src=/opt/QtPalmtop/pics/opie-sh-scripts/logviewer.png>"
+( echo "<img src=$OPIEDIR/pics/opie-sh-scripts/logviewer.png>"
   echo "<h3>/proc/ksyms</h3>"
   cat /tmp/log.$$
 ) | $OPIE_SH -t ksyms -f 

@@ -19,14 +19,14 @@
 # 20020517-1 - added about and fullscreen
 #
 
-OPIE_SH=/opt/QtPalmtop/bin/opie-sh
+OPIE_SH=$OPIEDIR/bin/opie-sh
 INITPATH=/etc/init.d
 
 ######################################################################
 # subroutines
 
 about() {
-	( echo "<img src=/opt/QtPalmtop/pics/opie-sh-scripts/service_manager.png>"
+	( echo "<img src=$OPIEDIR/pics/opie-sh-scripts/service_manager.png>"
 	  echo "<h3>About</h3>"
 	  echo "This little App should make it possible for you to "
 	  echo "easily start and stop services in /etc/init.d."
@@ -62,7 +62,7 @@ status_disclaimer() {
         # tell that init scripts are not too standard
         #
         cat | $OPIE_SH -f <<EOT
-<img src=/opt/QtPalmtop/pics/opie-sh-scripts/service_manager.png>
+<img src=$OPIEDIR/pics/opie-sh-scripts/service_manager.png>
 <h3>status has been disabled</h3>
 
         the status service has been disabled

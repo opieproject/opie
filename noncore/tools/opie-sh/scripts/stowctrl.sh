@@ -19,13 +19,13 @@
 # 20020517-2 - bugfixed fullscreen, added info about ifconfig
 # 20020517-1 - added about, fullscreen and icon
 
-OPIE_SH=/opt/QtPalmtop/bin/opie-sh
+OPIE_SH=$OPIEDIR/bin/opie-sh
 
 ######################################################################
 # subroutines
 
 about() {
-	( echo "<img src=/opt/QtPalmtop/pics/opie-sh-scripts/stowctrl.png>"
+	( echo "<img src=$OPIEDIR/pics/opie-sh-scripts/stowctrl.png>"
 	  echo "<h3>About</h3>"
 	  echo "This little App should make it easy for you to "
 	  echo "activate / deactivate the stowaway keyboard (on ipaq)"
@@ -36,7 +36,7 @@ about() {
 }
 
 startup() {
-	  echo "<img src=/opt/QtPalmtop/pics/opie-sh-scripts/stowctrl.png>" > /tmp/sout
+	  echo "<img src=$OPIEDIR/pics/opie-sh-scripts/stowctrl.png>" > /tmp/sout
 	    echo "<h3>stowaway up</h3>" >> /tmp/sout
 	modprobe h3600_stowaway >> /tmp/sout
 	cat /dev/stowaway &
@@ -46,7 +46,7 @@ startup() {
 }
 
 stopit() {
-	( echo "<img src=/opt/QtPalmtop/pics/opie-sh-scripts/stowctrl.png>"
+	( echo "<img src=$OPIEDIR/pics/opie-sh-scripts/stowctrl.png>"
 	  echo "<h3>stowaway down</h3>"
 	read THECAT < /tmp/stowcatpid
 	kill $THECAT

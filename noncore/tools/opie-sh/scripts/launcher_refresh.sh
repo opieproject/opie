@@ -14,10 +14,10 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 
-OPIE_SH=opie-sh
+OPIE_SH=$OPIEDIR/bin/opie-sh
 
 launcher_refresh() {
-(	echo "<img src=/opt/QtPalmtop/pics/opie-sh-scripts/launcher_refresh.png>"
+(	echo "<img src=$OPIEDIR/pics/opie-sh-scripts/launcher_refresh.png>"
 	echo "<h3>Refresh successful!</h3><br>"
 	echo the launcher has been refreshed.
 	echo
@@ -36,9 +36,9 @@ cleanup() {
 #
 # main
 
-/opt/QtPalmtop/bin/qcop QPE/TaskBar "reloadInputMethods()"
-#/opt/QtPalmtop/bin/qcop QPE/System "restart()"
-/opt/QtPalmtop/bin/qcop QPE/System "linkChanged(QString)"
+$OPIEDIR/bin/qcop QPE/TaskBar "reloadInputMethods()"
+#$OPIEDIR/bin/qcop QPE/System "restart()"
+$OPIEDIR/bin/qcop QPE/System "linkChanged(QString)"
 
 launcher_refresh
 cleanup

@@ -18,13 +18,13 @@
 # 20020519-1 - added icon to output
 # 20020517-1 - nicer fullscreen, added about, tried icon
 
-OPIE_SH=/opt/QtPalmtop/bin/opie-sh
+OPIE_SH=$OPIEDIR/bin/opie-sh
 
 ######################################################################
 # subroutines
 
 about() {
-	( echo "<img src=/opt/QtPalmtop/pics/opie-sh-scripts/killproc.png>"
+	( echo "<img src=$OPIEDIR/pics/opie-sh-scripts/killproc.png>"
 	  echo "<h3>About</h3>"
 	  echo "This little util sends the TERM signal "
 	  echo "to the specified process or process group. "
@@ -60,7 +60,7 @@ select_process
 PROCESS=`echo $PROCESS | cut -b -4`
 
 
-( echo "<img src=/opt/QtPalmtop/pics/opie-sh-scripts/killproc.png>"
+( echo "<img src=$OPIEDIR/pics/opie-sh-scripts/killproc.png>"
   echo "<h3>Output of kill $PROCESS</h3>"
   echo "<pre>"
   kill $PROCESS 2>&1

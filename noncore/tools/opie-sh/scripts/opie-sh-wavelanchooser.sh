@@ -19,10 +19,10 @@
 # 20020524-1 - initial working release planned
 #
 
-OPIE_SH=opie-sh
+OPIE_SH=$OPIEDIR/bin/opie-sh
 
 about() {
-	( echo "<img src=/opt/QtPalmtop/pics/opie-sh-scripts/qtwavelan.png>"
+	( echo "<img src=$OPIEDIR/pics/opie-sh-scripts/qtwavelan.png>"
 	  echo "<h3>About</h3>"
 	  echo "This little App is for changing the location setting"
 	  echo "for your wireless card. <br>"

@@ -22,13 +22,13 @@
 # 20020517-1 - nicer fullscreen, added about, tried icon
 #
 
-OPIE_SH=/opt/QtPalmtop/bin/opie-sh
+OPIE_SH=$OPIEDIR/bin/opie-sh
 
 ######################################################################
 # subroutines
 
 about() {
-	( echo "<img src=/opt/QtPalmtop/pics/opie-sh-scripts/fsmounter.png>"
+	( echo "<img src=$OPIEDIR/pics/opie-sh-scripts/fsmounter.png>"
 	  echo "<h3>About</h3>"
 	  echo "This little App should make it possible for you to "
 	  echo "easily mount and unmount filesystems from /etc/fstab"
@@ -39,7 +39,7 @@ about() {
 }
 
 beforemount() {
-        ( echo "<img src=/opt/QtPalmtop/pics/opie-sh-scripts/fsmounter.png>"
+        ( echo "<img src=$OPIEDIR/pics/opie-sh-scripts/fsmounter.png>"
           echo "<h3>mount or unmount $MOUNTPOINT ?</h3>"
 	  echo "<b>excerpt from MOUNT(8) manpage:</b><p>"
 	  echo "All  files accessible in a Unix system are arranged in one
@@ -100,7 +100,7 @@ if [ "$MOUNTPOINT" = "" ]
 then    echo "ugly error...." | $OPIE_SH -f ; cleanup
 fi
 
-( echo "<img src=/opt/QtPalmtop/pics/opie-sh-scripts/fsmounter.png>"
+( echo "<img src=$OPIEDIR/pics/opie-sh-scripts/fsmounter.png>"
   echo "<h3>Output of $ACTION $MOUNTPOINT :</h3>"
   echo "<pre>"
   $ACTION $MOUNTPOINT  2>&1

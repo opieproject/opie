@@ -17,8 +17,8 @@
 # 20020517-1 - added icon, changed name in launcher
 #
 
-CFG=/opt/QtPalmtop/share/config/rsyncme.cfg
-OPIE_SH=opie-sh
+CFG=$OPIEDIR/share/config/rsyncme.cfg
+OPIE_SH=$OPIEDIR/bin/opie-sh
 
 update_cfg() {
 	# check if dir is in CFG and if not add it
@@ -68,7 +68,7 @@ show_dirs() {
 }
 
 about() {
-	( echo "<img src=/opt/QtPalmtop/pics/opie-sh-scripts/rsyncme.png>"
+	( echo "<img src=$OPIEDIR/pics/opie-sh-scripts/rsyncme.png>"
 	  echo "<h3>About</h3>"
 	  echo "This little App should make it possible for you to "
 	  echo "easily choose the wanted options for an rsync process."

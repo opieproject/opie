@@ -17,12 +17,12 @@
 # 20020524-5 - bugfix
 # 20020524-1 - initial release
 
-OPIE_SH=/opt/QtPalmtop/bin/opie-sh
+OPIE_SH=$OPIEDIR/bin/opie-sh
 
 # there must be a better way to do this with sed, but i had no time
 # time to look into this yet...
 
-( echo "<img src=/opt/QtPalmtop/pics/opie-sh-scripts/fsmounter.png>"
+( echo "<img src=$OPIEDIR/pics/opie-sh-scripts/fsmounter.png>"
   echo "<h3>diskfree</h3> how much space is left ?<br>"
   echo "<p><table>"
 
