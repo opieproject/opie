@@ -73,8 +73,8 @@ static int deviceBitRates[] = { 8, 16, -1 };
 
 #else
 
-#define DSPSTROUT "/dev/dsp1"
-#define DSPSTRIN "/dev/dsp1"
+#define DSPSTROUT "/dev/dsp"
+#define DSPSTRIN "/dev/dsp"
 #define DSPSTRMIXERIN "/dev/mixer"
 #define DSPSTRMIXEROUT "/dev/mixer"
 
