@@ -72,6 +72,7 @@
 #include <errno.h>
 #include <sys/vfs.h>
 #include <mntent.h>
+#include <sys/utsname.h>
 
 AdvancedFm::AdvancedFm( )
   : QMainWindow( )
@@ -247,7 +248,18 @@ AdvancedFm::AdvancedFm( )
   */
          
   ///////////////
-     
+
+  struct utsname name; /* check for embedix kernel running on the zaurus*/
+  if (uname(&name) != -1) {
+      QString release=name.release;
+      if(release.find("embedix",0,TRUE) !=-1) {
+          zaurusDevice=TRUE;
+     } else {
+          zaurusDevice=FALSE;
+          sdButton->hide();
+      }
+  }
+  
   currentDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
   currentDir.setPath( QDir::currentDirPath());
 
@@ -1062,16 +1074,21 @@ void AdvancedFm::SDButtonPushed() {
 }
 
 void AdvancedFm::CFButtonPushed() {
-  QString current = "/mnt/cf";
-  chdir( current.latin1() );
-  if (TabWidget->currentPageIndex() == 0) {
-    currentDir.cd( current, TRUE);
-    populateLocalView();
-  } else {
-    currentRemoteDir.cd( current, TRUE);
-    populateRemoteView();
-  }
-  update();
+    QString current;
+    if(zaurusDevice)
+        current= "/mnt/cf";
+    else
+        current = "/mnt/hda";
+     
+    chdir( current.latin1() );
+    if (TabWidget->currentPageIndex() == 0) {
+        currentDir.cd( current, TRUE);
+        populateLocalView();
+    } else {
+        currentRemoteDir.cd( current, TRUE);
+        populateRemoteView();
+    }
+    update();
 
 }
 

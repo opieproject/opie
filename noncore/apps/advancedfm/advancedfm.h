@@ -105,6 +105,7 @@ protected slots:
   void switchToRemoteTab();
 
 protected:
+  bool zaurusDevice;
   QGridLayout *tabLayout, *tabLayout_2, *tabLayout_3;
   QStringList remoteDirPathStringList, localDirPathStringList;
 
