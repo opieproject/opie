@@ -27,6 +27,9 @@ class CurrentQPEUser {
 public :
         CurrentQPEUser() : UserName(), HomeDir(), EnvList() {}
 
+        inline bool known( void )
+          { return ! HomeDir.isEmpty() && ! UserName.isEmpty(); }
+
         QString        UserName;
         QString        HomeDir;
         int            Uid;
@@ -99,6 +102,8 @@ public :
     Name2Connection_t & connections( void )
       { return ConnectionsMap; }
 
+    inline bool userKnown( void )
+      { return CurrentUser.known(); }
     CurrentQPEUser & currentUser( void )
       { return CurrentUser; }
 

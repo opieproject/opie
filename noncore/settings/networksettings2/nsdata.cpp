@@ -15,6 +15,13 @@ NetworkSettingsData::NetworkSettingsData( void ) {
     // init global resources structure
     new TheNSResources();
 
+    if( ! NSResources->userKnown() ) {
+      Log(( "Cannot detect qpe user HOME=\"%s\" USER=\"%s\"\n",
+          NSResources->currentUser().HomeDir.latin1(),
+          NSResources->currentUser().UserName.latin1() ));
+      return;
+    }
+
     CfgFile.sprintf( "%s/Settings/NS2.conf", 
           NSResources->currentUser().HomeDir.latin1() );
     Log(( "Cfg from %s\n", CfgFile.latin1() ));
@@ -539,7 +546,8 @@ bool NetworkSettingsData::canStart( const char * Interface ) {
 
     PossibleConnections = collectPossible( Interface );
 
-    Log( ( "Possiblilies %d\n", PossibleConnections.count() ));
+    Log( ( "for %s : Possiblilies %d\n", 
+        Interface, PossibleConnections.count() ));
     switch( PossibleConnections.count() ) {
       case 0 : // no connections
         break;
@@ -569,12 +577,14 @@ bool NetworkSettingsData::canStart( const char * Interface ) {
         case Available :
         case IsUp : // also called for 'ifdown'
           // device is ready -> done
+          Log(( "%s-c%d-allowed\n", Interface, NC->number() ));
           printf( "%s-c%d-allowed\n", Interface, NC->number() );
           return 0;
       }
     } 
 
     // if we come here no alternatives are possible
+    Log(( "%s-cnn-disallowed\n", Interface ));
     printf( "%s-cnn-disallowed\n", Interface );
     return 0;
 }

@@ -95,6 +95,7 @@ int main( int argc, char * argv[] ) {
                 MyArgv[2] = argv[1];
                 MyArgv[3] = NULL;
                 NSResources->system().execAsUser( S, MyArgv );
+                Log(("FAILED %s-cNN-allowed\n", argv[1] ));
                 // if we come here , failed
                 printf( "%s-cNN-disallowed", argv[1] );
               }
@@ -109,8 +110,11 @@ int main( int argc, char * argv[] ) {
           case ACT_PROMPT :
             { ActivateProfile AP(argv[1]);
               if( AP.exec() == QDialog::Accepted ) {
+                Log(("%s-c%ld-allowed\n", 
+                    argv[1], AP.selectedProfile() ));
                 printf( "%s-c%ld-allowed", argv[1], AP.selectedProfile() );
               } else {
+                Log(("%s-c%NN-disallowed\n", argv[1] ));
                 printf( "%s-cNN-disallowed", argv[1] );
               }
             }

@@ -294,20 +294,23 @@ typedef struct EnvVars {
 #define AnEV(x) x, sizeof(x)-1
 
 static EnvVar_t EV[] = {
-    // AnEV( "HOME=" ), -> SPECIAL
-    // AnEV( "LOGNAME=" ), -> SPECIAL
-    AnEV( "USER=" ),
-    AnEV( "LD_LIBRARY_PATH=" ),
-    AnEV( "PATH=" ),
-    AnEV( "QTDIR=" ),
-    AnEV( "OPIEDIR=" ),
-    AnEV( "SHELL=" ),
+    AnEV( "HOME" ),
+    AnEV( "LOGNAME" ),
+    AnEV( "USER" ),
+    AnEV( "LD_LIBRARY_PATH" ),
+    AnEV( "PATH" ),
+    AnEV( "QTDIR" ),
+    AnEV( "OPIEDIR" ),
+    AnEV( "SHELL" ),
     { NULL, 0 }
 };
 
 void TheNSResources::detectCurrentUser( void ) {
     // find current running qpe
     QString QPEEnvFile = "";
+
+    CurrentUser.UserName = "";
+    CurrentUser.HomeDir = "";
 
     if( getenv( "OPIEDIR" ) == 0 ) {
       // nothing known 
@@ -367,32 +370,27 @@ void TheNSResources::detectCurrentUser( void ) {
 
         // get env items out of list
         while( Data < DataEnd ) {
-          if( strncmp( Data, "LOGNAME=", 8 ) == 0 ) {
-            CurrentUser.UserName = Data+8;
-            CurrentUser.EnvList.resize( CurrentUser.EnvList.size()+1 );
-            CurrentUser.EnvList[CurrentUser.EnvList.size()-1] = 
-                strdup( Data );
-          } else if( strncmp( Data, "HOME=", 5 ) == 0 ) {
-            CurrentUser.HomeDir = Data+5;
-            CurrentUser.EnvList.resize( CurrentUser.EnvList.size()+1 );
-            CurrentUser.EnvList[CurrentUser.EnvList.size()-1] = 
-                strdup( Data );
-          } else {
-            EnvVar_t * Run = EV;
-            while( Run->Name ) {
-              if( strncmp( Data, Run->Name, Run->Len ) == 0 ) {
-                CurrentUser.EnvList.resize( CurrentUser.EnvList.size()+1 );
-                CurrentUser.EnvList[CurrentUser.EnvList.size()-1] = 
-                    strdup( Data );
-                // put OPIEDIR in env
-                if( strcmp( Run->Name, "OPIEDIR=" ) == 0 ) {
-                  putenv( CurrentUser.EnvList[CurrentUser.EnvList.size()-1] );
 
-                }
-                break;
+          EnvVar_t * Run = EV;
+          while( Run->Name ) {
+            if( strncmp( Data, Run->Name, Run->Len ) == 0 &&
+                Data[Run->Len] == '=' 
+              ) {
+              CurrentUser.EnvList.resize( CurrentUser.EnvList.size()+1 );
+              CurrentUser.EnvList[CurrentUser.EnvList.size()-1] = 
+                  strdup( Data );
+
+              if( strcmp( Run->Name, "OPIEDIR" ) == 0 ) {
+                // put OPIEDIR in env
+                putenv( CurrentUser.EnvList[CurrentUser.EnvList.size()-1] );
+              } else if( strcmp( Run->Name, "HOME" ) == 0 ) {
+                CurrentUser.HomeDir = Data+5;
+              } else if( strcmp( Run->Name, "LOGNAME" ) == 0 ) {
+                CurrentUser.UserName = Data+8;
               }
-              Run ++;
+              break;
             }
+            Run ++;
           }
 
           Data += strlen( Data )+1;
@@ -421,31 +419,30 @@ void TheNSResources::detectCurrentUser( void ) {
       }
 
     } else {
-      CurrentUser.UserName = getenv( "LOGNAME" );
-      CurrentUser.EnvList.resize( CurrentUser.EnvList.size()+1 );
-      CurrentUser.EnvList[CurrentUser.EnvList.size()-1] = 
-          strdup( CurrentUser.UserName );
+      char * X;
+      QString S;
 
-      CurrentUser.HomeDir = getenv( "HOME" );
-      CurrentUser.EnvList.resize( CurrentUser.EnvList.size()+1 );
-      CurrentUser.EnvList[CurrentUser.EnvList.size()-1] = 
-          strdup( CurrentUser.HomeDir );
+      EnvVar_t * Run = EV;
+      while( Run->Name ) {
 
-      CurrentUser.EnvList.resize( CurrentUser.EnvList.size()+1 );
-      CurrentUser.EnvList[CurrentUser.EnvList.size()-1] = getenv("USER");
-      CurrentUser.EnvList.resize( CurrentUser.EnvList.size()+1 );
-      CurrentUser.EnvList[CurrentUser.EnvList.size()-1] = getenv("LD_LIBRARY_PATH");
+        if( ( X = getenv( Run->Name ) ) ) {
+          Log(( "Env : %s = %s\n", Run->Name, X ));
 
-      CurrentUser.EnvList.resize( CurrentUser.EnvList.size()+1 );
-      CurrentUser.EnvList[CurrentUser.EnvList.size()-1] = getenv("PATH");
+          S.sprintf( "%s=%s", Run->Name, X );
+          CurrentUser.EnvList.resize( CurrentUser.EnvList.size()+1 );
+          CurrentUser.EnvList[CurrentUser.EnvList.size()-1] = 
+                strdup( S.latin1() );
 
-      CurrentUser.EnvList.resize( CurrentUser.EnvList.size()+1 );
-      CurrentUser.EnvList[CurrentUser.EnvList.size()-1] = getenv("QTDIR");
-
-      CurrentUser.EnvList.resize( CurrentUser.EnvList.size()+1 );
-      CurrentUser.EnvList[CurrentUser.EnvList.size()-1] = getenv("OPIEDIR");
-      CurrentUser.EnvList.resize( CurrentUser.EnvList.size()+1 );
-      CurrentUser.EnvList[CurrentUser.EnvList.size()-1] = getenv("SHELL");
+          if( strcmp( Run->Name, "LOGNAME" ) == 0 ) {
+            CurrentUser.UserName = X;
+          } else if( strcmp( Run->Name, "HOME" ) == 0 ) {
+            CurrentUser.HomeDir = X;
+          } // regulare env var
+        } else {
+          Log(("Could not determine %s\n", Run->Name ));
+        }
+        Run ++;
+      }
 
       CurrentUser.Uid = getuid();
       CurrentUser.Gid = getgid();

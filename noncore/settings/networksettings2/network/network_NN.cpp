@@ -1,3 +1,4 @@
+#include <qpe/qpeapplication.h>
 #include <asdevice.h>
 #include "network_NN.h"
 #include "network_NNI.h"
@@ -53,7 +54,9 @@ short NetworkNetNode::generateFile( const QString & ID,
         TS << "mapping " 
            << NIC 
            << endl;
-        TS << "  script networksettings2-request" 
+        TS << "  script "
+           << QPEApplication::qpeDir()
+           << "/bin/networksettings2-request" 
            << endl 
            << endl;
         return 0;
