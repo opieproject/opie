@@ -41,7 +41,7 @@ MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(par
 
   connect(newProfile, SIGNAL(textChanged(const QString&)), this, SLOT(newProfileChanged(const QString&)));  
   // Load connections.
-  loadModules(QDir::homeDirPath() + "/.networksetup/plugins");
+  loadModules(QPEApplication::qpeDir() + "/plugins/networksetup");
   getInterfaceList();
   connectionList->header()->hide();
 
