@@ -89,51 +89,19 @@ class OInputSystem : public QObject
 
 
 class OInputDevice : public QObject
-{  
-  public:
-    
-    enum Feature
-    {
-        Synchronous     = EV_SYN,
-        Keys            = EV_KEY,
-        Relative        = EV_REL,
-        Absolute        = EV_ABS,
-        Miscellaneous   = EV_MSC,
-        Leds            = EV_LED,
-        Sound           = EV_SND,
-        AutoRepeat      = EV_REP,
-        ForceFeedback   = EV_FF,
-        PowerManagement = EV_PWR,
-        ForceFeedbackStatus = EV_FF_STATUS,
-    };
-    
-    enum Bus
-    {
-        PCI             = BUS_PCI,
-        ISAPNP          = BUS_ISAPNP,
-        HIL             = BUS_HIL,
-        BLUETOOTH       = BUS_BLUETOOTH,
-        ISA             = BUS_ISA,
-        I8042           = BUS_I8042,
-        XTKBD           = BUS_XTKBD,
-        RS232           = BUS_RS232,
-        GAMEPORT        = BUS_GAMEPORT,
-        PARPORT         = BUS_PARPORT,
-        AMIGA           = BUS_AMIGA,
-        ADB             = BUS_ADB,
-        I2C             = BUS_I2C,
-        HOST            = BUS_HOST,
-    };
-  
+{    
   public:
     OInputDevice( QObject* parent, const char* name = 0 );
     ~OInputDevice();
+
+    #include "oinputsystemenums.h"    
     
   public:
     QString identity() const;
     QString path() const;
     QString uniq() const;
     bool    hasFeature( Feature ) const;
+    bool    isHeld( Key ) const;
     
   private:
     int _fd;

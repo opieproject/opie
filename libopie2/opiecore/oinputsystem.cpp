@@ -144,6 +144,7 @@ QString OInputDevice::uniq() const
     return buf;
 }
 
+
 bool OInputDevice::hasFeature( Feature bit ) const
 {
     BIT_MASK( features, EV_MAX );
@@ -154,3 +155,18 @@ bool OInputDevice::hasFeature( Feature bit ) const
         return BIT_TEST( features, bit );
 }
 
+
+bool OInputDevice::isHeld( Key bit ) const
+{
+    BIT_MASK( keys, KEY_MAX );
+
+    if( ioctl( _fd, EVIOCGKEY( sizeof(keys) ), keys ) < 0 )
+    {
+        perror( "EVIOCGKEY" );
+        return false;
+    }
+    else
+    {
+        return BIT_TEST( keys, bit );
+    }
+}
