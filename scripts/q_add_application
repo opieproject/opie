@@ -1,0 +1,49 @@
+#!/bin/sh
+#
+# Script to add a new application to the Qtopia Environment
+#
+# Copyright 1999-2000 Trolltech AS.  All rights reserved.
+#
+
+
+# load the helper functions
+. q_functions
+
+
+if [ $# -lt 2 ]
+then
+echo "Usage: q_add_application NewAppName NewAppsMainClassName [MenuItemName] [Description]"
+print_example_usage
+exit
+fi
+
+
+NEW_APP_NAME=$1
+NEW_CLASS_NAME=$2
+NEW_APP_MENU_NAME=$NEW_CLASS_NAME
+NEW_APP_DESCRIPTION=$NEW_CLASS_NAME
+[ $# -lt 3 ] || NEW_APP_MENU_NAME=$3
+[ $# -lt 4 ] || NEW_APP_DESCRIPTION=$4
+
+
+NEW_APP_FOLDER=$NEW_APP_NAME
+NEW_APP_PRO_FILE="$NEW_APP_NAME".pro
+NEW_APP_DESKTOP_FILE="$NEW_APP_NAME".desktop
+NEW_APP_ICON_FILE="$NEW_APP_NAME"_icon.xpm
+NEW_APP_MAIN_FILE=main.cpp
+NEW_CLASS_HEADER_FILE="$NEW_APP_NAME".h
+NEW_CLASS_SOURCE_FILE="$NEW_APP_NAME".cpp
+NEW_CLASS_HEADER_DEFINE=__`echo $NEW_APP_NAME | tr [a-z] [A-Z]`_H__
+
+
+[ -d $NEW_APP_FOLDER ] || mkdir $NEW_APP_FOLDER
+print_source_file  >> $NEW_APP_FOLDER/$NEW_CLASS_SOURCE_FILE
+print_header_file  >> $NEW_APP_FOLDER/$NEW_CLASS_HEADER_FILE
+print_main_file    >> $NEW_APP_FOLDER/$NEW_APP_MAIN_FILE
+print_pro_file     >> $NEW_APP_FOLDER/$NEW_APP_PRO_FILE
+print_desktop_file >> $NEW_APP_FOLDER/$NEW_APP_DESKTOP_FILE
+print_icon_file    >> $NEW_APP_FOLDER/$NEW_APP_ICON_FILE
+print_install_file >> $NEW_APP_FOLDER/install
+chmod u+x $NEW_APP_FOLDER/install
+
+

@@ -1,0 +1,64 @@
+# This is a Qt message file in .po format.  Each msgid starts with
+# a scope.  This scope should *NOT* be translated - eg. translating
+# from French to English, "Foo::Bar" would be translated to "Pub",
+# not "Foo::Pub".
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2001-03-07 18:29:23 EST\n"
+"PO-Revision-Date: YYYY-MM-DD\n"
+"Last-Translator: FULLNAME <EMAIL@ADDRESS>\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+
+#: minesweep.cpp:221
+msgid "MineSweep::About MineSweep"
+msgstr "Om Minesøk"
+
+#: minesweep.cpp:213
+msgid "MineSweep::Advanced"
+msgstr "Avansert"
+
+#: minesweep.cpp:212
+msgid "MineSweep::Beginner"
+msgstr "Nybegynner"
+
+#: minesweep.cpp:216
+msgid "MineSweep::Close"
+msgstr "Lukk"
+
+#: minesweep.cpp:214
+msgid "MineSweep::Expert"
+msgstr "Ekspert"
+
+#: minesweep.cpp:223
+msgid "MineSweep::Game"
+msgstr "Spill"
+
+#: minesweep.cpp:224
+msgid "MineSweep::Help"
+msgstr "Hjelp"
+
+#: minesweep.cpp:219
+msgid "MineSweep::Instructions"
+msgstr "Instruksjoner"
+
+#: minesweep.cpp:205
+msgid "MineSweep::Mine Sweep"
+msgstr "Minesøk"
+
+#: minesweep.cpp:340
+msgid "MineSweep::MineSweeper"
+msgstr "Minesøk"
+
+#: minesweep.cpp:317
+msgid "MineSweep::Press and hold to mark a mine"
+msgstr "Press og hold for å markere en mine"
+
+#: minesweep.cpp:164
+msgid "MineSweep::You exploded!"
+msgstr "Du eksploderte!"
+
+#: minesweep.cpp:156
+msgid "MineSweep::You won!"
+msgstr "Du vant!"
+

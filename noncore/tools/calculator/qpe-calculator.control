@@ -1,0 +1,10 @@
+Files: bin/calculator apps/Applications/calculator.desktop etc/unit_conversion.dat
+Priority: optional
+Section: qpe/applications
+Maintainer: Warwick Allison <warwick@trolltech.com>
+Architecture: arm
+Version: $QPE_VERSION-3
+Depends: qpe-base ($QPE_VERSION)
+Description: Calculator
+ A multi-function calculator for the Qtopia environment.
+ Includes units conversion.

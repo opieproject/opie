@@ -1,0 +1,632 @@
+<!DOCTYPE FILEBROWSER><FILEBROWSER>
+<entry>
+    <key>acroread</key>
+    <type>acroread application</type>
+    <pixmap>acroread.xpm</pixmap>
+    <appname>acroread</appname>
+</entry>
+<entry>
+    <key>c</key>
+    <type>text/c</type>
+    <pixmap>c_src.xpm</pixmap>
+    <appname>kedit</appname>
+</entry>
+<entry>
+    <key>cpp</key>
+    <type>text/cpp</type>
+    <pixmap>c_src.xpm</pixmap>
+    <appname>kedit</appname>
+</entry>
+<entry>
+    <key>gz</key>
+    <type>application/gz</type>
+    <pixmap>tgz.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>h</key>
+    <type>text/h</type>
+    <pixmap>h_src.xpm</pixmap>
+    <appname>kedit</appname>
+</entry>
+<entry>
+    <key>kab</key>
+    <type>kab application</type>
+    <pixmap>kab.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kabalone</key>
+    <type>kabalone application</type>
+    <pixmap>kabalone.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>karchie</key>
+    <type>karchie application</type>
+    <pixmap>karchie.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>karm</key>
+    <type>karm application</type>
+    <pixmap>karm.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kasteroids</key>
+    <type>kasteroids application</type>
+    <pixmap>kasteroids.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kautorun</key>
+    <type>kautorun application</type>
+    <pixmap>kautorun.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kbiff</key>
+    <type>kbiff application</type>
+    <pixmap>kbiff.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kblackbox</key>
+    <type>kblackbox application</type>
+    <pixmap>kblackbox.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kcalc</key>
+    <type>kcalc application</type>
+    <pixmap>kcalc.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kcmdevices</key>
+    <type>kcmdevices application</type>
+    <pixmap>kcmdevices.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kcmkpanel</key>
+    <type>kcmkpanel application</type>
+    <pixmap>kcmkpanel.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kcmkwm</key>
+    <type>kcmkwm application</type>
+    <pixmap>kcmkwm.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kcmmemory</key>
+    <type>kcmmemory application</type>
+    <pixmap>kcmmemory.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kcmpartitions</key>
+    <type>kcmpartitions application</type>
+    <pixmap>kcmpartitions.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kcmpci</key>
+    <type>kcmpci application</type>
+    <pixmap>kcmpci.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kcmprocessor</key>
+    <type>kcmprocessor application</type>
+    <pixmap>kcmprocessor.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kcmscsi</key>
+    <type>kcmscsi application</type>
+    <pixmap>kcmscsi.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kcmsound</key>
+    <type>kcmsound application</type>
+    <pixmap>kcmsound.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kcmsyssound</key>
+    <type>kcmsyssound application</type>
+    <pixmap>kcmsyssound.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kcmx</key>
+    <type>kcmx application</type>
+    <pixmap>kcmx.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kcontrol</key>
+    <type>kcontrol application</type>
+    <pixmap>kcontrol.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kdehelp</key>
+    <type>kdehelp application</type>
+    <pixmap>kdehelp.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kdevelop</key>
+    <type>kdevelop application</type>
+    <pixmap>kdevelop.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kdmconfig</key>
+    <type>kdmconfig application</type>
+    <pixmap>kdmconfig.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kdvi</key>
+    <type>kdvi application</type>
+    <pixmap>kdvi.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kedit</key>
+    <type>kedit application</type>
+    <pixmap>kedit.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kernel</key>
+    <type>kernel application</type>
+    <pixmap>kernel.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>keyboard</key>
+    <type>keyboard application</type>
+    <pixmap>keyboard.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kfax</key>
+    <type>kfax application</type>
+    <pixmap>kfax.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kfind</key>
+    <type>kfind application</type>
+    <pixmap>kfind.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kfloppy</key>
+    <type>kfloppy application</type>
+    <pixmap>kfloppy.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kfm</key>
+    <type>kfm application</type>
+    <pixmap>kfm.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kfm_fulltrash</key>
+    <type>kfm_fulltrash application</type>
+    <pixmap>kfm_fulltrash.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kfm_home</key>
+    <type>kfm_home application</type>
+    <pixmap>kfm_home.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kfm_refresh</key>
+    <type>kfm_refresh application</type>
+    <pixmap>kfm_refresh.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kfm_trash</key>
+    <type>kfm_trash application</type>
+    <pixmap>kfm_trash.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kfontmanager</key>
+    <type>kfontmanager application</type>
+    <pixmap>kfontmanager.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kfract</key>
+    <type>kfract application</type>
+    <pixmap>kfract.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kghostview</key>
+    <type>kghostview application</type>
+    <pixmap>kghostview.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>khexdit</key>
+    <type>khexdit application</type>
+    <pixmap>khexdit.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kiconedit</key>
+    <type>kiconedit application</type>
+    <pixmap>kiconedit.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kikbd</key>
+    <type>kikbd application</type>
+    <pixmap>kikbd.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>killustrator</key>
+    <type>killustrator application</type>
+    <pixmap>killustrator.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kisdn</key>
+    <type>kisdn application</type>
+    <pixmap>kisdn.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kjots</key>
+    <type>kjots application</type>
+    <pixmap>kjots.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>klipper</key>
+    <type>klipper application</type>
+    <pixmap>klipper.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kljettool</key>
+    <type>kljettool application</type>
+    <pixmap>kljettool.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>klpq</key>
+    <type>klpq application</type>
+    <pixmap>klpq.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>klyx</key>
+    <type>klyx application</type>
+    <pixmap>klyx.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kmahjongg</key>
+    <type>kmahjongg application</type>
+    <pixmap>kmahjongg.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kmail</key>
+    <type>kmail application</type>
+    <pixmap>kmail.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kmedia</key>
+    <type>kmedia application</type>
+    <pixmap>kmedia.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kmenuedit</key>
+    <type>kmenuedit application</type>
+    <pixmap>kmenuedit.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kmid</key>
+    <type>kmid application</type>
+    <pixmap>kmid.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kmidi</key>
+    <type>kmidi application</type>
+    <pixmap>kmidi.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kmines</key>
+    <type>kmines application</type>
+    <pixmap>kmines.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kmix</key>
+    <type>kmix application</type>
+    <pixmap>kmix.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kmoon</key>
+    <type>kmoon application</type>
+    <pixmap>kmoon.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>knotes</key>
+    <type>knotes application</type>
+    <pixmap>knotes.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>knu</key>
+    <type>knu application</type>
+    <pixmap>knu.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kodo</key>
+    <type>kodo application</type>
+    <pixmap>kodo.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>konquest</key>
+    <type>konquest application</type>
+    <pixmap>konquest.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>konsole</key>
+    <type>konsole application</type>
+    <pixmap>konsole.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>korganizer</key>
+    <type>korganizer application</type>
+    <pixmap>korganizer.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>korn</key>
+    <type>korn application</type>
+    <pixmap>korn.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kpackage</key>
+    <type>kpackage application</type>
+    <pixmap>kpackage.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kpaint</key>
+    <type>kpaint application</type>
+    <pixmap>kpaint.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kpat</key>
+    <type>kpat application</type>
+    <pixmap>kpat.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kpilot</key>
+    <type>kpilot application</type>
+    <pixmap>kpilot.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kpm</key>
+    <type>kpm application</type>
+    <pixmap>kpm.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kpoker</key>
+    <type>kpoker application</type>
+    <pixmap>kpoker.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kppp</key>
+    <type>kppp application</type>
+    <pixmap>kppp.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>krabber</key>
+    <type>krabber application</type>
+    <pixmap>krabber.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kreversi</key>
+    <type>kreversi application</type>
+    <pixmap>kreversi.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>krn</key>
+    <type>krn application</type>
+    <pixmap>krn.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>ksame</key>
+    <type>ksame application</type>
+    <pixmap>ksame.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kscd</key>
+    <type>kscd application</type>
+    <pixmap>kscd.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kscreensaver</key>
+    <type>kscreensaver application</type>
+    <pixmap>kscreensaver.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kshisen</key>
+    <type>kshisen application</type>
+    <pixmap>kshisen.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>ksirtet</key>
+    <type>ksirtet application</type>
+    <pixmap>ksirtet.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>ksmiletris</key>
+    <type>ksmiletris application</type>
+    <pixmap>ksmiletris.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>ksnake</key>
+    <type>ksnake application</type>
+    <pixmap>ksnake.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>ksnapshot</key>
+    <type>ksnapshot application</type>
+    <pixmap>ksnapshot.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>ksokoban</key>
+    <type>ksokoban application</type>
+    <pixmap>ksokoban.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>ksppp</key>
+    <type>ksppp application</type>
+    <pixmap>ksppp.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>ktb</key>
+    <type>ktb application</type>
+    <pixmap>ktb.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kthememgr</key>
+    <type>kthememgr application</type>
+    <pixmap>kthememgr.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>ktop</key>
+    <type>ktop application</type>
+    <pixmap>ktop.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kview</key>
+    <type>kview application</type>
+    <pixmap>kview.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kvt</key>
+    <type>kvt application</type>
+    <pixmap>kvt.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kwm</key>
+    <type>kwm application</type>
+    <pixmap>kwm.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kworldwatch</key>
+    <type>kworldwatch application</type>
+    <pixmap>kworldwatch.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>kwrite</key>
+    <type>kwrite application</type>
+    <pixmap>kwrite.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>pdf</key>
+    <type>application/pdf</type>
+    <pixmap>acroread.xpm</pixmap>
+    <appname>acroread</appname>
+</entry>
+<entry>
+    <key>rpm</key>
+    <type>application/rpm</type>
+    <pixmap>rpmfile.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>tgz</key>
+    <type>application/tgz</type>
+    <pixmap>tgz.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>txt</key>
+    <type>text/plain</type>
+    <pixmap>txt.xpm</pixmap>
+    <appname>kedit</appname>
+</entry>
+<entry>
+    <key>xmlt</key>
+    <type>text/xml-x-tableviewer</type>
+    <pixmap<txt.xpm</pixmap>
+    <appname>tableviewer</appname>
+</entry>
+<entry>
+    <key>wav</key>
+    <type>application/wav</type>
+    <pixmap>kcmsyssound.xpm</pixmap>
+    <appname></appname>
+</entry>
+<entry>
+    <key>xpm</key>
+    <type>image/xpm</type>
+    <pixmap>pixmap.xpm</pixmap>
+    <appname>kiconedit</appname>
+</entry>
+</FILEBROWSER>

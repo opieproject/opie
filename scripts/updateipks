@@ -1,0 +1,29 @@
+#!/bin/sh
+
+RHOST=qpe.sf.net
+RDIR=/home/groups/q/qp/qpe/htdocs/packages/ipaq/unstable/
+
+NEW=""
+rm -f *.ipk
+ssh $RHOST -C "cd $RDIR; ls *.ipk" >currentipks &
+./mkipks "$@"
+wait # for ssh
+
+for i in *.ipk
+do
+    if grep -q $i currentipks
+    then
+	rm $i
+    else
+	NEW="$NEW $i";
+    fi
+done
+
+if [ -n "$NEW" ]
+then
+    scp $NEW $RHOST:$RDIR
+    rm $NEW
+    ssh $RHOST -C "cd $RDIR; chmod g+w *.ipk; ./mkPackages"
+fi
+
+rm currentipks

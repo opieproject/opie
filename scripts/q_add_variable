@@ -1,0 +1,70 @@
+#!/bin/sh
+#
+# Script to add a new function to an existing class
+#
+# Copyright 1999-2000 Trolltech AS.  All rights reserved.
+#
+
+
+# load the helper functions
+. q_functions
+
+
+if [ $# -lt 3 ]
+then
+echo "Usage: q_add_variable AccessModifier: Type ExistingClassName::NewVariableName"
+print_example_usage
+exit
+fi
+
+
+ACCESS_MODIFIER=$1
+TYPE=$2
+EXISTING_CLASS_NAME=`echo $3 | cut -d ":" -f 1`
+NEW_VARIABLE_NAME=`echo $3 | cut -d ":" -f 3`
+
+
+EXISTING_CLASS_NAME_LOWER=`echo $EXISTING_CLASS_NAME | tr "[A-Z]" "[a-z]"`
+EXISTING_CLASS_HEADER_FILE="$EXISTING_CLASS_NAME_LOWER".h
+ORIGINAL_CLASS_HEADER_FILE="$EXISTING_CLASS_NAME_LOWER".h.orig
+
+
+function print_variable_definition
+{
+cat << END
+$ACCESS_MODIFIER
+    $TYPE $NEW_VARIABLE_NAME;
+END
+}
+
+
+function print_new_header_file
+{
+get_number_of_lines
+get_first_line_of_class_definition
+if [ -z "$LINE" ]
+then
+cat << END
+/*
+    No good, can't find $EXISTING_CLASS_NAME class definition anywhere.
+    You'll have to manually edit the header file to add the
+    following variable definition to the $EXISTING_CLASS_NAME class:
+
+END
+print_variable_definition
+echo -e "\n*/"
+cat $ORIGINAL_CLASS_HEADER_FILE
+else
+head -n $LINE $ORIGINAL_CLASS_HEADER_FILE
+print_variable_definition
+tail -n `expr $LINES - $LINE` $ORIGINAL_CLASS_HEADER_FILE
+fi
+}
+
+
+[ -f $EXISTING_CLASS_HEADER_FILE ] || { echo "file $EXISTING_CLASS_HEADER_FILE not found" ; exit ; }
+# Backup file
+mv $EXISTING_CLASS_HEADER_FILE $ORIGINAL_CLASS_HEADER_FILE
+print_new_header_file >> $EXISTING_CLASS_HEADER_FILE
+
+

@@ -1,0 +1,704 @@
+<!DOCTYPE UI><UI>
+<class>FormSimple</class>
+<widget>
+    <class>QWidget</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>FormSimple</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>73</x>
+            <y>0</y>
+            <width>240</width>
+            <height>320</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>sizePolicy</name>
+        <sizepolicy>
+            <hsizetype>4</hsizetype>
+            <vsizetype>4</vsizetype>
+        </sizepolicy>
+    </property>
+    <property stdset="1">
+        <name>maximumSize</name>
+        <size>
+            <width>240</width>
+            <height>320</height>
+        </size>
+    </property>
+    <property stdset="1">
+        <name>baseSize</name>
+        <size>
+            <width>240</width>
+            <height>240</height>
+        </size>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>Simple</string>
+    </property>
+    <grid>
+        <property stdset="1">
+            <name>margin</name>
+            <number>0</number>
+        </property>
+        <property stdset="1">
+            <name>spacing</name>
+            <number>0</number>
+        </property>
+        <widget row="4"  column="2" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>PBEval</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>4</hsizetype>
+                    <vsizetype>4</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>maximumSize</name>
+                <size>
+                    <width>160</width>
+                    <height>80</height>
+                </size>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>=</string>
+            </property>
+        </widget>
+        <widget row="2"  column="1" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>PB5</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>4</hsizetype>
+                    <vsizetype>4</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>maximumSize</name>
+                <size>
+                    <width>80</width>
+                    <height>80</height>
+                </size>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>5</string>
+            </property>
+        </widget>
+        <widget row="4"  column="0" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>PBDecimal</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>4</hsizetype>
+                    <vsizetype>4</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>maximumSize</name>
+                <size>
+                    <width>80</width>
+                    <height>80</height>
+                </size>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>.</string>
+            </property>
+        </widget>
+        <widget row="3"  column="2" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>PB3</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>4</hsizetype>
+                    <vsizetype>4</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>maximumSize</name>
+                <size>
+                    <width>80</width>
+                    <height>80</height>
+                </size>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>3</string>
+            </property>
+        </widget>
+        <widget row="3"  column="1" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>PB2</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>4</hsizetype>
+                    <vsizetype>4</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>maximumSize</name>
+                <size>
+                    <width>80</width>
+                    <height>80</height>
+                </size>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>2</string>
+            </property>
+        </widget>
+        <widget row="2"  column="0" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>PB4</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>4</hsizetype>
+                    <vsizetype>4</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>maximumSize</name>
+                <size>
+                    <width>80</width>
+                    <height>80</height>
+                </size>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>4</string>
+            </property>
+        </widget>
+        <widget row="2"  column="2" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>PB6</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>4</hsizetype>
+                    <vsizetype>4</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>maximumSize</name>
+                <size>
+                    <width>80</width>
+                    <height>80</height>
+                </size>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>6</string>
+            </property>
+        </widget>
+        <widget row="3"  column="3" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>PBMul</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>4</hsizetype>
+                    <vsizetype>4</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>maximumSize</name>
+                <size>
+                    <width>80</width>
+                    <height>80</height>
+                </size>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>*</string>
+            </property>
+        </widget>
+        <widget row="2"  column="3" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>PBSub</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>4</hsizetype>
+                    <vsizetype>4</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>maximumSize</name>
+                <size>
+                    <width>80</width>
+                    <height>80</height>
+                </size>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>-</string>
+            </property>
+        </widget>
+        <widget row="1"  column="3" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>PBAdd</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>4</hsizetype>
+                    <vsizetype>4</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>maximumSize</name>
+                <size>
+                    <width>80</width>
+                    <height>80</height>
+                </size>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>+</string>
+            </property>
+        </widget>
+        <widget row="1"  column="2" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>PB9</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>4</hsizetype>
+                    <vsizetype>4</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>maximumSize</name>
+                <size>
+                    <width>80</width>
+                    <height>80</height>
+                </size>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>9</string>
+            </property>
+        </widget>
+        <widget row="1"  column="0" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>PB7</cstring>
+            </property>
+            <property stdset="1">
+                <name>enabled</name>
+                <bool>true</bool>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>4</hsizetype>
+                    <vsizetype>4</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>maximumSize</name>
+                <size>
+                    <width>80</width>
+                    <height>80</height>
+                </size>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>7</string>
+            </property>
+        </widget>
+        <widget row="3"  column="0" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>PB1</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>4</hsizetype>
+                    <vsizetype>4</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>maximumSize</name>
+                <size>
+                    <width>80</width>
+                    <height>80</height>
+                </size>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>1</string>
+            </property>
+        </widget>
+        <widget row="4"  column="1" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>PB0</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>4</hsizetype>
+                    <vsizetype>4</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>maximumSize</name>
+                <size>
+                    <width>160</width>
+                    <height>80</height>
+                </size>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>0</string>
+            </property>
+        </widget>
+        <widget row="4"  column="3" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>PBDiv</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>4</hsizetype>
+                    <vsizetype>4</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>maximumSize</name>
+                <size>
+                    <width>80</width>
+                    <height>80</height>
+                </size>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>/</string>
+            </property>
+            <property stdset="1">
+                <name>autoRepeat</name>
+                <bool>true</bool>
+            </property>
+        </widget>
+        <widget row="1"  column="1" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>PB8</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>4</hsizetype>
+                    <vsizetype>4</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>maximumSize</name>
+                <size>
+                    <width>80</width>
+                    <height>80</height>
+                </size>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>8</string>
+            </property>
+        </widget>
+        <widget row="0"  column="0" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>PBMPlus</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>4</hsizetype>
+                    <vsizetype>4</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>maximumSize</name>
+                <size>
+                    <width>80</width>
+                    <height>80</height>
+                </size>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>M+</string>
+            </property>
+        </widget>
+        <widget row="0"  column="3" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>PBCE</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>4</hsizetype>
+                    <vsizetype>4</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>maximumSize</name>
+                <size>
+                    <width>80</width>
+                    <height>80</height>
+                </size>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>CE</string>
+            </property>
+        </widget>
+        <widget row="0"  column="2" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>PBMC</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>4</hsizetype>
+                    <vsizetype>4</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>maximumSize</name>
+                <size>
+                    <width>80</width>
+                    <height>80</height>
+                </size>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>MC</string>
+            </property>
+        </widget>
+        <widget row="0"  column="1" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>PBMR</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>4</hsizetype>
+                    <vsizetype>4</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>maximumSize</name>
+                <size>
+                    <width>80</width>
+                    <height>80</height>
+                </size>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>MR</string>
+            </property>
+        </widget>
+    </grid>
+</widget>
+<connections>
+    <connection>
+        <sender>PB0</sender>
+        <signal>clicked()</signal>
+        <receiver>FormSimple</receiver>
+        <slot>val0Clicked()</slot>
+    </connection>
+    <connection>
+        <sender>PB1</sender>
+        <signal>clicked()</signal>
+        <receiver>FormSimple</receiver>
+        <slot>val1Clicked()</slot>
+    </connection>
+    <connection>
+        <sender>PB2</sender>
+        <signal>clicked()</signal>
+        <receiver>FormSimple</receiver>
+        <slot>val2Clicked()</slot>
+    </connection>
+    <connection>
+        <sender>PB3</sender>
+        <signal>clicked()</signal>
+        <receiver>FormSimple</receiver>
+        <slot>val3Clicked()</slot>
+    </connection>
+    <connection>
+        <sender>PB4</sender>
+        <signal>clicked()</signal>
+        <receiver>FormSimple</receiver>
+        <slot>val4Clicked()</slot>
+    </connection>
+    <connection>
+        <sender>PB5</sender>
+        <signal>clicked()</signal>
+        <receiver>FormSimple</receiver>
+        <slot>val5Clicked()</slot>
+    </connection>
+    <connection>
+        <sender>PB6</sender>
+        <signal>clicked()</signal>
+        <receiver>FormSimple</receiver>
+        <slot>val6Clicked()</slot>
+    </connection>
+    <connection>
+        <sender>PB7</sender>
+        <signal>clicked()</signal>
+        <receiver>FormSimple</receiver>
+        <slot>val7Clicked()</slot>
+    </connection>
+    <connection>
+        <sender>PB8</sender>
+        <signal>clicked()</signal>
+        <receiver>FormSimple</receiver>
+        <slot>val8Clicked()</slot>
+    </connection>
+    <connection>
+        <sender>PB9</sender>
+        <signal>clicked()</signal>
+        <receiver>FormSimple</receiver>
+        <slot>val9Clicked()</slot>
+    </connection>
+    <connection>
+        <sender>PBSub</sender>
+        <signal>clicked()</signal>
+        <receiver>FormSimple</receiver>
+        <slot>subClicked()</slot>
+    </connection>
+    <connection>
+        <sender>PBMul</sender>
+        <signal>clicked()</signal>
+        <receiver>FormSimple</receiver>
+        <slot>mulClicked()</slot>
+    </connection>
+    <connection>
+        <sender>PBDiv</sender>
+        <signal>clicked()</signal>
+        <receiver>FormSimple</receiver>
+        <slot>divClicked()</slot>
+    </connection>
+    <connection>
+        <sender>PBDecimal</sender>
+        <signal>clicked()</signal>
+        <receiver>FormSimple</receiver>
+        <slot>decimalClicked()</slot>
+    </connection>
+    <connection>
+        <sender>PBEval</sender>
+        <signal>clicked()</signal>
+        <receiver>FormSimple</receiver>
+        <slot>evalClicked()</slot>
+    </connection>
+    <connection>
+        <sender>PBMC</sender>
+        <signal>clicked()</signal>
+        <receiver>FormSimple</receiver>
+        <slot>MCClicked()</slot>
+    </connection>
+    <connection>
+        <sender>PBMPlus</sender>
+        <signal>clicked()</signal>
+        <receiver>FormSimple</receiver>
+        <slot>MPlusClicked()</slot>
+    </connection>
+    <connection>
+        <sender>PBMR</sender>
+        <signal>clicked()</signal>
+        <receiver>FormSimple</receiver>
+        <slot>MRClicked()</slot>
+    </connection>
+    <connection>
+        <sender>PBAdd</sender>
+        <signal>clicked()</signal>
+        <receiver>FormSimple</receiver>
+        <slot>addClicked()</slot>
+    </connection>
+    <connection>
+        <sender>PBCE</sender>
+        <signal>clicked()</signal>
+        <receiver>FormSimple</receiver>
+        <slot>CEClicked()</slot>
+    </connection>
+    <slot access="public">CEClicked()</slot>
+    <slot access="public">MCClicked()</slot>
+    <slot access="public">MPlusClicked()</slot>
+    <slot access="public">MRClicked()</slot>
+    <slot access="public">addClicked()</slot>
+    <slot access="public">decimalClicked()</slot>
+    <slot access="public">divClicked()</slot>
+    <slot access="public">evalClicked()</slot>
+    <slot access="public">mulClicked()</slot>
+    <slot access="public">subClicked()</slot>
+    <slot access="public">val0Clicked()</slot>
+    <slot access="public">val1Clicked()</slot>
+    <slot access="public">val2Clicked()</slot>
+    <slot access="public">val3Clicked()</slot>
+    <slot access="public">val4Clicked()</slot>
+    <slot access="public">val5Clicked()</slot>
+    <slot access="public">val6Clicked()</slot>
+    <slot access="public">val7Clicked()</slot>
+    <slot access="public">val8Clicked()</slot>
+    <slot access="public">val9Clicked()</slot>
+</connections>
+</UI>

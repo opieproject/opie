@@ -1,0 +1,123 @@
+# This is a Qt message file in .po format.  Each msgid starts with
+# a scope.  This scope should *NOT* be translated - eg. translating
+# from French to English, "Foo::Bar" would be translated to "Pub",
+# not "Foo::Pub".
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2001-03-07 14:54:21 EST\n"
+"PO-Revision-Date: 2001-05-05\n"
+"Last-Translator: Oliver M. Bolzer <oliver@gol.com>\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+
+#: citytime.cpp:148
+msgid "CityTime::Restore Time Zone"
+msgstr "タイムゾーンを元に戻す"
+
+#: citytime.cpp:139
+msgid "CityTime::There was a problem setting timezone %1"
+msgstr "タイムゾーン %1 の設定中にエラーが発生しました。"
+
+#: citytime.cpp:149
+msgid "CityTime::"
+"There was a problem setting your timezone."
+"Your time may be wrong now..."
+msgstr "タイムゾーンの設定中にエラーが発生しました。"
+"時間が間違っている可能性があります..."
+
+#: citytime.cpp:138
+msgid "CityTime::Time Changing"
+msgstr "新しい時間の決定"
+
+#: citytimebase.cpp:53
+msgid "CityTimeBase::<CITY 1 TIME>"
+msgstr "<都市No.1の時間>"
+
+#: citytimebase.cpp:92
+msgid "CityTimeBase::<CITY 2 TIME>"
+msgstr "<都市No.2の時間 >"
+
+#: citytimebase.cpp:111
+msgid "CityTimeBase::<CITY 3 TIME>"
+msgstr "<都市No.3の時間>"
+
+#: citytimebase.cpp:102
+msgid "CityTimeBase::<CITY 4 TIME>"
+msgstr "<都市No.4の時間>"
+
+#: citytimebase.cpp:120
+msgid "CityTimeBase::<CITY 5 TIME>"
+msgstr "<都市No.5の時間>"
+
+#: citytimebase.cpp:72
+msgid "CityTimeBase::<location 1>"
+msgstr "<都市 No. 1>"
+
+#: citytimebase.cpp:149
+msgid "CityTimeBase::<location 2>"
+msgstr "<都市 No. 2>"
+
+#: citytimebase.cpp:34
+msgid "CityTimeBase::<location 3>"
+msgstr "<都市 No. 3>"
+
+#: citytimebase.cpp:158
+msgid "CityTimeBase::<location 4>"
+msgstr "<都市 No. 4>"
+
+#: citytimebase.cpp:139
+msgid "CityTimeBase::<location 5>"
+msgstr "<都市 No. 5>"
+
+#: citytimebase.cpp:20
+msgid "CityTimeBase::City Time"
+msgstr "世界時計"
+
+#: zonemap.cpp:413
+msgid "ZoneMap::<p>Couldn't load map: %1, exiting"
+msgstr "<p>%1の地図が見付かりません。終了します。"
+
+#: zonemap.cpp:166
+msgid "ZoneMap::<p>Unable to find any timezone information in %1 or %2"
+msgstr "<p>タイムゾーン情報が %1 および %2 で見付かりません。"
+
+#: zonemap.cpp:122
+msgid "ZoneMap::CITY"
+msgstr "都市"
+
+#: zonemap.cpp:412
+msgid "ZoneMap::Couldn't Find Map"
+msgstr "地図が見付かりません。"
+
+#: zonemap.cpp:546
+msgid "ZoneMap::Fri"
+msgstr "金"
+
+#: zonemap.cpp:542
+msgid "ZoneMap::Mon"
+msgstr "月"
+
+#: zonemap.cpp:547
+msgid "ZoneMap::Sat"
+msgstr "土"
+
+#: zonemap.cpp:548
+msgid "ZoneMap::Sun"
+msgstr "日"
+
+#: zonemap.cpp:545
+msgid "ZoneMap::Thu"
+msgstr "木"
+
+#: zonemap.cpp:543
+msgid "ZoneMap::Tue"
+msgstr "火"
+
+#: zonemap.cpp:165
+msgid "ZoneMap::Unable to Find Timezone Info"
+msgstr "タイムゾーン情報が見付かりません。"
+
+#: zonemap.cpp:544
+msgid "ZoneMap::Wed"
+msgstr "水"
+

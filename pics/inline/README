@@ -1,0 +1,2 @@
+Images here are converted to "inlinepics.h" and included in the libqpe, so they
+load much faster, and can be shared by multiple applications.

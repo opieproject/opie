@@ -1,0 +1,108 @@
+# This is a Qt message file in .po format.  Each msgid starts with
+# a scope.  This scope should *NOT* be translated - eg. translating
+# from French to English, "Foo::Bar" would be translated to "Pub",
+# not "Foo::Pub".
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2001-02-23 18:22:10 EST\n"
+"PO-Revision-Date: 2001-05-03\n"
+"Last-Translator: Oliver M. Bolzer <oliver@gol.com>\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+
+#: textedit.cpp:110
+msgid "TextEdit::Edit"
+msgstr "編集"
+
+#: textedit.cpp:109
+msgid "TextEdit::File"
+msgstr "ファイル"
+
+#: textedit.cpp:102
+msgid "TextEdit::Insert"
+msgstr "挿入"
+
+#: textedit.cpp:115
+msgid "TextEdit::Bold"
+msgstr "太字"
+
+#: textedit.cpp:191
+msgid "TextEdit::Bullet List"
+msgstr "リスト"
+
+#: textedit.cpp:140
+msgid "TextEdit::Center"
+msgstr "中央寄せ"
+
+#: textedit.cpp:170
+msgid "TextEdit::Close Find"
+msgstr "検索を閉じる"
+
+#: textedit.cpp:69
+msgid "TextEdit::Close"
+msgstr "閉じる"
+
+#: textedit.cpp:79
+msgid "TextEdit::Copy"
+msgstr "コピー"
+
+#: textedit.cpp:74
+msgid "TextEdit::Cut"
+msgstr "切り取り"
+
+#: textedit.cpp:194
+msgid "TextEdit::Enumerated List"
+msgstr "リスト"
+
+#: textedit.cpp:94
+msgid "TextEdit::Find Next"
+msgstr "次を検索"
+
+#: textedit.cpp:89
+msgid "TextEdit::Find..."
+msgstr "検索..."
+
+#: textedit.cpp:120
+msgid "TextEdit::Italic"
+msgstr "斜体"
+
+#: textedit.cpp:134
+msgid "TextEdit::Left"
+msgstr "左寄せ"
+
+#: textedit.cpp:61
+msgid "TextEdit::New"
+msgstr "新規作成"
+
+#: textedit.cpp:65
+msgid "TextEdit::Open"
+msgstr "開く"
+
+#: textedit.cpp:84
+msgid "TextEdit::Paste"
+msgstr "張り付け"
+
+#: textedit.cpp:145
+msgid "TextEdit::Right"
+msgstr "右寄せ"
+
+#: textedit.cpp:188
+msgid "TextEdit::Standard"
+msgstr "標準"
+
+#: textedit.cpp:104
+msgid "TextEdit::Table..."
+msgstr "表..."
+
+#: textedit.cpp:570
+msgid "TextEdit::Text Editor"
+msgstr "テキストエディタ"
+
+#: textedit.cpp:125
+msgid "TextEdit::Underline"
+msgstr "下線"
+
+#: textedit.cpp:569
+msgid "TextEdit::Unnamed"
+msgstr "名前無し"
+

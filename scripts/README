@@ -1,0 +1,26 @@
+
+These scripts are for convienence only.
+
+Use them at your own risk.
+
+Especially q_add_variable and q_add_function,
+however when used they should leave behind a backup copy of the
+header file it has tried to modify. Sometimes those two scripts
+find headers that it decides it can't parse and leaves it up to
+the user to edit them manually.
+
+But even still I would highly recommend backing up your files
+or using this in conjuction with some kind of CVS like system.
+
+The script to add a new application is the most useful script
+and creates a very basic QPE app from a template with most of
+the files you need.
+
+Currently these scripts don't integrate with a CVS system and
+add or edit the created/modified files with the repository, you
+have to do that manually, however I have started to make a few
+scripts that are generic repository accessing scripts that
+could be made to work with either p4 or cvs or something else.
+
+John
+

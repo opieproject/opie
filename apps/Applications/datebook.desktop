@@ -1,0 +1,9 @@
+[Desktop Entry]
+Comment=A Calendar and Scheduling Program
+Exec=datebook
+Icon=DateBook
+Type=Application
+Name=Calendar
+Name[no]=Avtalebok
+Name[de]=Termin kalender
+Name[hu]=Naptár

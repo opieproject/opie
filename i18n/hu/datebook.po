@@ -1,0 +1,424 @@
+# This is a Qt message file in .po format.  Each msgid starts with
+# a scope.  This scope should *NOT* be translated - eg. translating
+# from French to English, "Foo::Bar" would be translated to "Pub",
+# not "Foo::Pub".
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2001-06-24 17:46:13 CEST\n"
+"PO-Revision-Date: 2001-06-24\n"
+"Last-Translator: Szabó, Balázs <dlux@kapu.hu>\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+
+#: datebook.cpp:54
+msgid "DateBook::Close"
+msgstr "Bezár"
+
+#: datebook.cpp:34
+msgid "DateBook::Date Book"
+msgstr "Naptár"
+
+#: main.cpp:11
+msgid "DateBook::Datebook"
+msgstr "Naptár"
+
+#: datebook.cpp:63
+msgid "DateBook::Day"
+msgstr "Nap"
+
+#: datebook.cpp:209
+msgid "DateBook::Edit Event"
+msgstr "Esemény"
+
+#: datebook.cpp:86
+msgid "DateBook::File"
+msgstr "File"
+
+#: datebook.cpp:79
+msgid "DateBook::Month"
+msgstr "Hónap"
+
+#: datebook.cpp:49
+msgid "DateBook::New"
+msgstr "Új"
+
+#: datebook.cpp:87
+msgid "DateBook::View"
+msgstr "Nézet"
+
+#: datebook.cpp:72
+msgid "DateBook::Week"
+msgstr "Hét"
+
+#: datebookdayheader.cpp:279
+msgid "DateBookDayHeaderBase::"
+msgstr ""
+
+#: datebookdayheader.cpp:258
+msgid "DateBookDayHeaderBase::F"
+msgstr "P"
+
+#: datebookdayheader.cpp:208
+msgid "DateBookDayHeaderBase::Form1"
+msgstr "Ûrlap 1"
+
+#: datebookdayheader.cpp:261
+msgid "DateBookDayHeaderBase::Friday"
+msgstr "Péntek"
+
+#: datebookdayheader.cpp:221
+msgid "DateBookDayHeaderBase::Jan 02 00"
+msgstr "2000 Január 2"
+
+#: datebookdayheader.cpp:230
+msgid "DateBookDayHeaderBase::M"
+msgstr "H"
+
+#: datebookdayheader.cpp:233
+msgid "DateBookDayHeaderBase::Monday"
+msgstr "Hétfõ"
+
+#: datebookdayheader.cpp:272
+msgid "DateBookDayHeaderBase::S"
+msgstr "Sz"
+
+#: datebookdayheader.cpp:268
+msgid "DateBookDayHeaderBase::Saturday"
+msgstr "Szombat"
+
+#: datebookdayheader.cpp:275
+msgid "DateBookDayHeaderBase::Sunday"
+msgstr "Vasárnap"
+
+#: datebookdayheader.cpp:251
+msgid "DateBookDayHeaderBase::T"
+msgstr "Cs"
+
+#: datebookdayheader.cpp:254
+msgid "DateBookDayHeaderBase::Thursday"
+msgstr "Csütörtök"
+
+#: datebookdayheader.cpp:240
+msgid "DateBookDayHeaderBase::Tuesday"
+msgstr "Kedd"
+
+#: datebookdayheader.cpp:244
+msgid "DateBookDayHeaderBase::W"
+msgstr "Sz"
+
+#: datebookdayheader.cpp:247
+msgid "DateBookDayHeaderBase::Wednesday"
+msgstr "Szerda"
+
+#: datebookday.cpp:254
+msgid "DateBookDayWidget::Delete"
+msgstr "Törlés"
+
+#: datebookday.cpp:253
+msgid "DateBookDayWidget::Edit..."
+msgstr "Szerkesztés..."
+
+#: datebookweek.cpp:206
+msgid "DateBookWeekWidget::Delete"
+msgstr "Törlés"
+
+#: datebookweek.cpp:205
+msgid "DateBookWeekWidget::Edit..."
+msgstr "Szerkesztés..."
+
+#: dateentry.cpp:200
+msgid "DateEntryBase:: minutes"
+msgstr "Perc"
+
+#: dateentry.cpp:274
+msgid "DateEntryBase::"
+msgstr ""
+
+#: dateentry.cpp:195
+msgid "DateEntryBase::&Alarm"
+msgstr "&Riasztás"
+
+#: dateentry.cpp:99
+msgid "DateEntryBase::(Nothing)"
+msgstr "(Nincs)"
+
+#: dateentry.cpp:215
+msgid "DateEntryBase::00:00"
+msgstr "00:00"
+
+#: dateentry.cpp:216
+msgid "DateEntryBase::00:30"
+msgstr "00:30"
+
+#: dateentry.cpp:217
+msgid "DateEntryBase::01:00"
+msgstr "01:00"
+
+#: dateentry.cpp:218
+msgid "DateEntryBase::01:30"
+msgstr "01:30"
+
+#: dateentry.cpp:219
+msgid "DateEntryBase::02:00"
+msgstr "02:00"
+
+#: dateentry.cpp:220
+msgid "DateEntryBase::02:30"
+msgstr "02:30"
+
+#: dateentry.cpp:221
+msgid "DateEntryBase::03:00"
+msgstr "03:00"
+
+#: dateentry.cpp:222
+msgid "DateEntryBase::03:30"
+msgstr "03:30"
+
+#: dateentry.cpp:223
+msgid "DateEntryBase::04:00"
+msgstr "04:00"
+
+#: dateentry.cpp:224
+msgid "DateEntryBase::04:30"
+msgstr "04:30"
+
+#: dateentry.cpp:225
+msgid "DateEntryBase::05:00"
+msgstr "05:00"
+
+#: dateentry.cpp:226
+msgid "DateEntryBase::05:30"
+msgstr "05:30"
+
+#: dateentry.cpp:227
+msgid "DateEntryBase::06:00"
+msgstr "06:00"
+
+#: dateentry.cpp:228
+msgid "DateEntryBase::06:30"
+msgstr "06:30"
+
+#: dateentry.cpp:229
+msgid "DateEntryBase::07:00"
+msgstr "07:00"
+
+#: dateentry.cpp:230
+msgid "DateEntryBase::07:30"
+msgstr "07:30"
+
+#: dateentry.cpp:231
+msgid "DateEntryBase::08:00"
+msgstr "08:00"
+
+#: dateentry.cpp:232
+msgid "DateEntryBase::08:30"
+msgstr "08:30"
+
+#: dateentry.cpp:233
+msgid "DateEntryBase::09:00"
+msgstr "09:00"
+
+#: dateentry.cpp:234
+msgid "DateEntryBase::09:30"
+msgstr "09:30"
+
+#: dateentry.cpp:235
+msgid "DateEntryBase::10:00"
+msgstr "10:00"
+
+#: dateentry.cpp:236
+msgid "DateEntryBase::10:30"
+msgstr "10:30"
+
+#: dateentry.cpp:237
+msgid "DateEntryBase::11:00"
+msgstr "11:00"
+
+#: dateentry.cpp:238
+msgid "DateEntryBase::11:30"
+msgstr "11:30"
+
+#: dateentry.cpp:239
+msgid "DateEntryBase::12:00"
+msgstr "12:00"
+
+#: dateentry.cpp:240
+msgid "DateEntryBase::12:30"
+msgstr "12:30"
+
+#: dateentry.cpp:241
+msgid "DateEntryBase::13:00"
+msgstr "13:00"
+
+#: dateentry.cpp:242
+msgid "DateEntryBase::13:30"
+msgstr "13:30"
+
+#: dateentry.cpp:243
+msgid "DateEntryBase::14:00"
+msgstr "14:00"
+
+#: dateentry.cpp:244
+msgid "DateEntryBase::14:30"
+msgstr "14:30"
+
+#: dateentry.cpp:245
+msgid "DateEntryBase::15:00"
+msgstr "15:00"
+
+#: dateentry.cpp:246
+msgid "DateEntryBase::15:30"
+msgstr "15:30"
+
+#: dateentry.cpp:247
+msgid "DateEntryBase::16:00"
+msgstr "16:00"
+
+#: dateentry.cpp:248
+msgid "DateEntryBase::16:30"
+msgstr "16:30"
+
+#: dateentry.cpp:249
+msgid "DateEntryBase::17:00"
+msgstr "17:00"
+
+#: dateentry.cpp:250
+msgid "DateEntryBase::17:30"
+msgstr "17:30"
+
+#: dateentry.cpp:251
+msgid "DateEntryBase::18:00"
+msgstr "18:00"
+
+#: dateentry.cpp:252
+msgid "DateEntryBase::18:30"
+msgstr "18:30"
+
+#: dateentry.cpp:253
+msgid "DateEntryBase::19:00"
+msgstr "19:00"
+
+#: dateentry.cpp:254
+msgid "DateEntryBase::19:30"
+msgstr "19:30"
+
+#: dateentry.cpp:255
+msgid "DateEntryBase::20:00"
+msgstr "20:00"
+
+#: dateentry.cpp:256
+msgid "DateEntryBase::20:30"
+msgstr "20:30"
+
+#: dateentry.cpp:257
+msgid "DateEntryBase::21:00"
+msgstr "21:00"
+
+#: dateentry.cpp:258
+msgid "DateEntryBase::21:30"
+msgstr "21:30"
+
+#: dateentry.cpp:259
+msgid "DateEntryBase::22:00"
+msgstr "22:00"
+
+#: dateentry.cpp:260
+msgid "DateEntryBase::22:30"
+msgstr "22:30"
+
+#: dateentry.cpp:261
+msgid "DateEntryBase::23:00"
+msgstr "23:00"
+
+#: dateentry.cpp:262
+msgid "DateEntryBase::23:30"
+msgstr "23:30"
+
+#: dateentry.cpp:189
+msgid "DateEntryBase::<Edit Pattern...>"
+msgstr "<Szerkesztés...>"
+
+#: dateentry.cpp:110
+msgid "DateEntryBase::All Day"
+msgstr "Minden nap"
+
+#: dateentry.cpp:282
+msgid "DateEntryBase::Brisbane"
+msgstr "Brisbane"
+
+#: dateentry.cpp:71
+msgid "DateEntryBase::Category"
+msgstr "Kategória"
+
+#: dateentry.cpp:94
+msgid "DateEntryBase::Description:"
+msgstr "Leírás:"
+
+#: dateentry.cpp:84
+msgid "DateEntryBase::Dinner"
+msgstr "Vacsora"
+
+#: dateentry.cpp:210
+msgid "DateEntryBase::Ends"
+msgstr "Vége"
+
+#: dateentry.cpp:188
+msgid "DateEntryBase::Every Week"
+msgstr "Minden héten"
+
+#: dateentry.cpp:100
+msgid "DateEntryBase::Home"
+msgstr "Otthon"
+
+#: dateentry.cpp:294
+msgid "DateEntryBase::Jan 02 00"
+msgstr "2000 Január 2."
+
+#: dateentry.cpp:66
+msgid "DateEntryBase::Location"
+msgstr "Hely"
+
+#: dateentry.cpp:83
+msgid "DateEntryBase::Lunch"
+msgstr "Ebéd"
+
+#: dateentry.cpp:82
+msgid "DateEntryBase::Meeting"
+msgstr "Találkozó"
+
+#: dateentry.cpp:60
+msgid "DateEntryBase::New Event"
+msgstr "Új Esemény"
+
+#: dateentry.cpp:109
+msgid "DateEntryBase::Normal"
+msgstr "Egyszeri"
+
+#: dateentry.cpp:281
+msgid "DateEntryBase::Oslo"
+msgstr "Oslo"
+
+#: dateentry.cpp:183
+msgid "DateEntryBase::Repeat"
+msgstr "Ismétlõdõ"
+
+#: dateentry.cpp:283
+msgid "DateEntryBase::Santa Clara"
+msgstr "Santa Clara"
+
+#: dateentry.cpp:115
+msgid "DateEntryBase::Starts"
+msgstr "Kezdet"
+
+#: dateentry.cpp:269
+msgid "DateEntryBase::Time zone:"
+msgstr "Idõzóna:"
+
+#: dateentry.cpp:85
+msgid "DateEntryBase::Travel"
+msgstr "Utazás"
+
+#: dateentry.cpp:120
+msgid "DateEntryBase::Type"
+msgstr "Típus"
+

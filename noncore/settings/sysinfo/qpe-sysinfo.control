@@ -1,0 +1,9 @@
+Files: bin/sysinfo apps/Applications/sysinfo.desktop pics/qpe-logo.png pics/tux-logo.png
+Priority: optional
+Section: qpe/applications
+Maintainer: Warwick Allison <warwick@trolltech.com>
+Architecture: arm
+Version: $QPE_VERSION-3
+Depends: qpe-base ($QPE_VERSION)
+Description: System Information dialog
+ For the Qtopia environment.

@@ -1,0 +1,168 @@
+# This is a Qt message file in .po format.  Each msgid starts with
+# a scope.  This scope should *NOT* be translated - eg. translating
+# from French to English, "Foo::Bar" would be translated to "Pub",
+# not "Foo::Pub".
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2001-06-24 17:46:13 CEST\n"
+"PO-Revision-Date: 2001-06-24\n"
+"Last-Translator: Szabó, Balázs <dlux@kapu.hu>\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+
+#: filebrowser.cpp:612
+msgid "FileBrowser::&Dir"
+msgstr "&Könyvtár"
+
+#: filebrowser.cpp:615
+msgid "FileBrowser::&Sort"
+msgstr "&Rendezés"
+
+#: filebrowser.cpp:725
+msgid "FileBrowser::/"
+msgstr "/"
+
+#: filebrowser.cpp:625
+msgid "FileBrowser::Close"
+msgstr "Bezár"
+
+#: filebrowser.cpp:650
+msgid "FileBrowser::Copy"
+msgstr "Másolás"
+
+#: filebrowser.cpp:663
+msgid "FileBrowser::Cut"
+msgstr "Kivágás"
+
+#: filebrowser.cpp:597
+msgid "FileBrowser::File Browser"
+msgstr "File böngészõ"
+
+#: filebrowser.cpp:644
+msgid "FileBrowser::New folder"
+msgstr "Új mappa"
+
+#: filebrowser.cpp:638
+msgid "FileBrowser::Parent dir"
+msgstr "Szülõ könyvtár"
+
+#: filebrowser.cpp:656
+msgid "FileBrowser::Paste"
+msgstr "Beillesztés"
+
+#: filebrowser.cpp:632
+msgid "FileBrowser::Previous dir"
+msgstr "Elõzõ könyvtár"
+
+#: filebrowser.cpp:617
+msgid "FileBrowser::by &Date "
+msgstr "&Dátum szerint"
+
+#: filebrowser.cpp:616
+msgid "FileBrowser::by &Name "
+msgstr "&Név szerint"
+
+#: filebrowser.cpp:618
+msgid "FileBrowser::by &Size "
+msgstr "&Méret szerint"
+
+#: filebrowser.cpp:619
+msgid "FileBrowser::by &Type "
+msgstr "&Típus szerint"
+
+#: filebrowser.cpp:566
+msgid "FileView::&Copy"
+msgstr "&Másolás"
+
+#: filebrowser.cpp:570
+msgid "FileView::&Cut"
+msgstr "&Kivágás"
+
+#: filebrowser.cpp:395
+msgid "FileView::&No"
+msgstr "&Nem"
+
+#: filebrowser.cpp:500
+msgid "FileView::&Ok"
+msgstr "&OK"
+
+#: filebrowser.cpp:568
+msgid "FileView::&Paste"
+msgstr "&Beillesztés"
+
+#: filebrowser.cpp:555
+msgid "FileView::&Run"
+msgstr "&Futtatás"
+
+#: filebrowser.cpp:572
+msgid "FileView::&Select all"
+msgstr "&Mindet kijelöl"
+
+#: filebrowser.cpp:561
+msgid "FileView::&View as text"
+msgstr "M&egnéz"
+
+#: filebrowser.cpp:395
+msgid "FileView::&Yes"
+msgstr "&Igen"
+
+#: filebrowser.cpp:394
+msgid "FileView::Are you sure?"
+msgstr "Biztos vagy benne?"
+
+#: filebrowser.cpp:404
+msgid "FileView::Cut failed!"
+msgstr "Nem sikerült a kivágás!"
+
+#: filebrowser.cpp:404
+msgid "FileView::Cut"
+msgstr "Kivágás"
+
+#: filebrowser.cpp:573
+msgid "FileView::Dese&lect all"
+msgstr "Semm&it nem választ ki"
+
+#: filebrowser.cpp:425
+msgid "FileView::Folder creation failed!"
+msgstr "A könyvtár létrehozás sikertelen!"
+
+#: filebrowser.cpp:499
+msgid "FileView::Launch Application"
+msgstr "Alkalmazás indítása"
+
+#: filebrowser.cpp:500
+msgid "FileView::Launch failed!"
+msgstr "Alkalmazás indítása sikertelen!"
+
+#: filebrowser.cpp:424
+msgid "FileView::New folder"
+msgstr "Új mappa"
+
+#: filebrowser.cpp:321
+msgid "FileView::Paste failed!"
+msgstr "A beillesztés nem sikerült!"
+
+#: filebrowser.cpp:321
+msgid "FileView::Paste file"
+msgstr "Beillesztés fileba"
+
+#: filebrowser.cpp:564
+msgid "FileView::R&ename"
+msgstr "&Átnevezés"
+
+#: filebrowser.cpp:262
+msgid "FileView::Rename failed!"
+msgstr "Átnevezés sikertelen!"
+
+#: filebrowser.cpp:261
+msgid "FileView::Rename file"
+msgstr "Átnevezés"
+
+#: filebrowser.cpp:479
+msgid "FileView::Unable to open file!"
+msgstr "Nem tudom a filet megnyitni!"
+
+#: filebrowser.cpp:478
+msgid "FileView::View as text"
+msgstr "Megnéz"
+

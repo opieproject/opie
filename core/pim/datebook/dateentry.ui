@@ -1,0 +1,1095 @@
+<!DOCTYPE UI><UI>
+<class>DateEntryBase</class>
+<comment>*********************************************************************
+** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+**
+** This file is part of Qtopia Environment.
+**
+** This file may be distributed and/or modified under the terms of the
+** GNU General Public License version 2 as published by the Free Software
+** Foundation and appearing in the file LICENSE.GPL included in the
+** packaging of this file.
+**
+** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
+** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+**
+** See http://www.trolltech.com/gpl/ for GPL licensing information.
+**
+** Contact info@trolltech.com if any conditions of this licensing are
+** not clear to you.
+**
+** $Id: dateentry.ui,v 1.1 2002-01-25 22:14:29 kergoth Exp $
+**
+*********************************************************************</comment>
+<widget>
+    <class>QWidget</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>DateEntryBase</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>242</width>
+            <height>339</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>New Event</string>
+    </property>
+    <property>
+        <name>layoutMargin</name>
+    </property>
+    <property>
+        <name>layoutSpacing</name>
+    </property>
+    <grid>
+        <property stdset="1">
+            <name>margin</name>
+            <number>0</number>
+        </property>
+        <property stdset="1">
+            <name>spacing</name>
+            <number>0</number>
+        </property>
+        <widget row="1"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel2</cstring>
+            </property>
+            <property stdset="1">
+                <name>frameShape</name>
+                <enum>MShape</enum>
+            </property>
+            <property stdset="1">
+                <name>frameShadow</name>
+                <enum>MShadow</enum>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Location</string>
+            </property>
+        </widget>
+        <widget row="2"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel2_2</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Category</string>
+            </property>
+            <property>
+                <name>buddy</name>
+                <cstring>comboPriority</cstring>
+            </property>
+        </widget>
+        <widget row="0"  column="1"  rowspan="1"  colspan="3" >
+            <class>QComboBox</class>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>(None)</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>Meeting</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>Lunch</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>Dinner</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>Travel</string>
+                </property>
+            </item>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>comboDescription</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>7</hsizetype>
+                    <vsizetype>0</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>editable</name>
+                <bool>true</bool>
+            </property>
+            <property stdset="1">
+                <name>currentItem</name>
+                <number>0</number>
+            </property>
+            <property stdset="1">
+                <name>duplicatesEnabled</name>
+                <bool>false</bool>
+            </property>
+        </widget>
+        <widget row="0"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel1</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Description:</string>
+            </property>
+        </widget>
+        <widget row="1"  column="1"  rowspan="1"  colspan="3" >
+            <class>QComboBox</class>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>(Unknown)</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>Office</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>Home</string>
+                </property>
+            </item>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>comboLocation</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>7</hsizetype>
+                    <vsizetype>0</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>editable</name>
+                <bool>true</bool>
+            </property>
+            <property stdset="1">
+                <name>currentItem</name>
+                <number>0</number>
+            </property>
+            <property stdset="1">
+                <name>duplicatesEnabled</name>
+                <bool>false</bool>
+            </property>
+        </widget>
+        <widget row="2"  column="1"  rowspan="1"  colspan="3" >
+            <class>CategorySelect</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>comboCategory</cstring>
+            </property>
+        </widget>
+        <widget row="3"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel3</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Start</string>
+            </property>
+        </widget>
+        <widget row="3"  column="1" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>buttonStart</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Jan 02 00</string>
+            </property>
+        </widget>
+        <widget row="3"  column="2"  rowspan="1"  colspan="2" >
+            <class>QComboBox</class>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>00:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>00:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>01:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>01:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>02:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>02:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>03:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>03:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>04:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>04:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>05:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>05:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>06:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>06:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>07:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>07:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>08:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>08:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>09:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>09:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>10:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>10:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>11:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>11:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>12:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>12:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>13:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>13:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>14:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>14:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>15:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>15:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>16:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>16:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>17:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>17:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>18:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>18:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>19:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>19:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>20:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>20:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>21:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>21:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>22:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>22:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>23:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>23:30</string>
+                </property>
+            </item>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>comboStart</cstring>
+            </property>
+            <property stdset="1">
+                <name>editable</name>
+                <bool>true</bool>
+            </property>
+            <property stdset="1">
+                <name>duplicatesEnabled</name>
+                <bool>false</bool>
+            </property>
+        </widget>
+        <widget row="4"  column="1" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>buttonEnd</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Jan 02 00</string>
+            </property>
+        </widget>
+        <widget row="4"  column="2"  rowspan="1"  colspan="2" >
+            <class>QComboBox</class>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>00:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>00:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>01:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>01:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>02:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>02:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>03:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>03:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>04:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>04:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>05:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>05:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>06:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>06:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>07:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>07:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>08:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>08:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>09:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>09:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>10:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>10:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>11:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>11:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>12:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>12:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>13:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>13:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>14:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>14:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>15:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>15:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>16:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>16:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>17:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>17:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>18:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>18:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>19:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>19:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>20:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>20:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>21:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>21:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>22:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>22:30</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>23:00</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>23:30</string>
+                </property>
+            </item>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>comboEnd</cstring>
+            </property>
+            <property stdset="1">
+                <name>editable</name>
+                <bool>true</bool>
+            </property>
+            <property stdset="1">
+                <name>duplicatesEnabled</name>
+                <bool>false</bool>
+            </property>
+        </widget>
+        <widget row="4"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel3_2</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>End</string>
+            </property>
+        </widget>
+        <widget row="5"  column="0" >
+            <class>QCheckBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>checkAllDay</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>All day</string>
+            </property>
+        </widget>
+        <widget row="6"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel3_2_2</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Time zone:</string>
+            </property>
+        </widget>
+        <widget row="6"  column="1"  rowspan="1"  colspan="3" >
+            <class>TimeZoneSelector</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>timezone</cstring>
+            </property>
+        </widget>
+        <widget row="7"  column="0" >
+            <class>QCheckBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>checkAlarm</cstring>
+            </property>
+            <property stdset="1">
+                <name>enabled</name>
+                <bool>true</bool>
+            </property>
+            <property stdset="1">
+                <name>autoMask</name>
+                <bool>false</bool>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>&amp;Alarm</string>
+            </property>
+            <property stdset="1">
+                <name>checked</name>
+                <bool>false</bool>
+            </property>
+        </widget>
+        <widget row="7"  column="1"  rowspan="1"  colspan="2" >
+            <class>QSpinBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>spinAlarm</cstring>
+            </property>
+            <property stdset="1">
+                <name>enabled</name>
+                <bool>false</bool>
+            </property>
+            <property stdset="1">
+                <name>suffix</name>
+                <string> minutes</string>
+            </property>
+            <property stdset="1">
+                <name>maxValue</name>
+                <number>180</number>
+            </property>
+            <property stdset="1">
+                <name>minValue</name>
+                <number>0</number>
+            </property>
+            <property stdset="1">
+                <name>lineStep</name>
+                <number>5</number>
+            </property>
+            <property stdset="1">
+                <name>value</name>
+                <number>5</number>
+            </property>
+        </widget>
+        <widget row="7"  column="3" >
+            <class>QComboBox</class>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>Silent</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>Loud</string>
+                </property>
+            </item>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>comboSound</cstring>
+            </property>
+            <property stdset="1">
+                <name>enabled</name>
+                <bool>false</bool>
+            </property>
+        </widget>
+        <widget row="8"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>lblRepeat</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Repeat</string>
+            </property>
+        </widget>
+        <widget row="8"  column="1"  rowspan="1"  colspan="3" >
+            <class>QToolButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>cmdRepeat</cstring>
+            </property>
+            <property stdset="1">
+                <name>focusPolicy</name>
+                <enum>TabFocus</enum>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>No Repeat...</string>
+            </property>
+        </widget>
+        <widget row="9"  column="0"  rowspan="1"  colspan="4" >
+            <class>QMultiLineEdit</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>editNote</cstring>
+            </property>
+        </widget>
+    </grid>
+</widget>
+<customwidgets>
+    <customwidget>
+        <class>TimeZoneSelector</class>
+        <header location="global">qpe/tzselect.h</header>
+        <sizehint>
+            <width>21</width>
+            <height>10</height>
+        </sizehint>
+        <container>0</container>
+        <sizepolicy>
+            <hordata>7</hordata>
+            <verdata>1</verdata>
+        </sizepolicy>
+        <pixmap>image0</pixmap>
+    </customwidget>
+    <customwidget>
+        <class>CategorySelect</class>
+        <header location="global">qpe/categoryselect.h</header>
+        <sizehint>
+            <width>-1</width>
+            <height>-1</height>
+        </sizehint>
+        <container>0</container>
+        <sizepolicy>
+            <hordata>7</hordata>
+            <verdata>1</verdata>
+        </sizepolicy>
+        <pixmap>image1</pixmap>
+    </customwidget>
+</customwidgets>
+<images>
+    <image>
+        <name>image0</name>
+        <data format="XPM.GZ" length="45">789cd3d7528808f055d0d2e72a2e492cc94c5648ce482c52d04a29cdcdad8c8eb5ade6523250004143a55a6b2e0026630c4f</data>
+    </image>
+    <image>
+        <name>image1</name>
+        <data format="XPM.GZ" length="646">789c6dd2c10ac2300c00d07bbf2234b7229d1be245fc04c5a3201e4615f430059d0711ff5ddb2e6bb236ec90eed134cb5a19d8ef36602af5ecdbfeeac05dda0798d3abebde87e3faa374d3807fa0d633a52d38d8de6f679fe33fc776e196f53cd010188256a3600a292882096246517815ca99884606e18044a3a40d91824820924265a7923a2e8bcd05f33db1173e002913175f2a6be6d3294871a2d95fa00e8a94ee017b69d339d90df1e77c57ea072ede6758</data>
+    </image>
+</images>
+<connections>
+    <connection>
+        <sender>checkAlarm</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>spinAlarm</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>comboEnd</sender>
+        <signal>activated(const QString&amp;)</signal>
+        <receiver>DateEntryBase</receiver>
+        <slot>endTimeChanged( const QString &amp; )</slot>
+    </connection>
+    <connection>
+        <sender>cmdRepeat</sender>
+        <signal>clicked()</signal>
+        <receiver>DateEntryBase</receiver>
+        <slot>slotRepeat()</slot>
+    </connection>
+    <connection>
+        <sender>comboStart</sender>
+        <signal>activated(int)</signal>
+        <receiver>DateEntryBase</receiver>
+        <slot>startTimeChanged( int )</slot>
+    </connection>
+    <connection>
+        <sender>checkAllDay</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>comboEnd</receiver>
+        <slot>setDisabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>checkAlarm</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>comboSound</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>checkAllDay</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>comboStart</receiver>
+        <slot>setDisabled(bool)</slot>
+    </connection>
+    <slot access="public">endDateChanged( const QString &amp; )</slot>
+    <slot access="public">endDateChanged( int, int, int )</slot>
+    <slot access="public">endTimeChanged( const QString &amp; )</slot>
+    <slot access="public">slotRepeat()</slot>
+    <slot access="public">slotWait( int )</slot>
+    <slot access="public">startDateChanged( const QString &amp; )</slot>
+    <slot access="public">startDateChanged(int, int, int)</slot>
+    <slot access="public">startTimeChanged( int )</slot>
+    <slot access="public">typeChanged( const QString &amp; )</slot>
+    <slot access="public">tzexecute(void)</slot>
+</connections>
+</UI>

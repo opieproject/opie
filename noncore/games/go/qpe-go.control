@@ -1,0 +1,9 @@
+Files: bin/go apps/Games/go.desktop
+Priority: optional
+Section: qpe/games
+Maintainer: Warwick Allison <warwick@trolltech.com>
+Architecture: arm
+Version: $QPE_VERSION-3
+Depends: qpe-base ($QPE_VERSION)
+Description: The game of Go
+ A game for the Qtopia environment.

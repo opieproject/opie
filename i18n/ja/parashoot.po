@@ -1,0 +1,55 @@
+# This is a Qt message file in .po format.  Each msgid starts with
+# a scope.  This scope should *NOT* be translated - eg. translating
+# from French to English, "Foo::Bar" would be translated to "Pub",
+# not "Foo::Pub".
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2001-03-07 17:39:35 EST\n"
+"PO-Revision-Date: 2001-05-14\n"
+"Last-Translator: Oliver M. Bolzer <oliver@gol.com>\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+
+#: interface.cpp:128
+msgid "ParaShoot::"
+"       GAME OVER!\n"
+"       Your Score:  %1\n"
+" Parachuters Killed: %2 "
+msgstr ""
+"        GAME OVER!\n"
+"        スコア:  %1\n"
+"        抹殺数: %2 "
+
+
+#: interface.cpp:74
+msgid "ParaShoot::     Level: %1       Score: %2   "
+msgstr "     レベル: %1       スコア: %2   "
+
+#: interface.cpp:37
+msgid "ParaShoot::How To Play"
+msgstr "遊び方"
+
+#: interface.cpp:33
+msgid "ParaShoot::New Game"
+msgstr "新しいゲーム"
+
+#: interface.cpp:30
+msgid "ParaShoot::ParaShoot"
+msgstr "ParaShoot"
+
+#: interface.cpp:41
+msgid "ParaShoot::Quit"
+msgstr "終了"
+
+#: interface.cpp:233
+msgid "ParaShoot::"
+"You must defend your base\nfrom attack by suicide bombers!\n"
+"Use the arrow keys to aim\nthe cannon and press space to\n"
+"shoot the bombers parachuting\ntowards your base.\n"
+"Three successful attacks\nwill destroy the base completely.\n"
+"Beware of those suicide\nbombers travelling in helicopters!!"
+msgstr "基地を降下兵から守れ！\n"
+"カーソルで高射砲を操作してスペースで発射。\n"
+"3回も攻撃を受けると基地が破壊されてしまう\n"
+"のでヘリに注意！"
+

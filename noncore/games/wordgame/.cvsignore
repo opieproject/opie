@@ -1,0 +1,6 @@
+moc_*
+Makefile
+newgamebase.h
+rulesbase.h
+newgamebase.cpp
+rulesbase.cpp

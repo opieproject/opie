@@ -1,0 +1,25 @@
+<!DOCTYPE TS><TS>
+<context>
+    <name>Clock</name>
+    <message>
+        <source>Clock</source>
+        <translation>Uhr</translation>
+    </message>
+    <message>
+        <source>Stopwatch</source>
+        <translation>Stoppuhr</translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation>Start</translation>
+    </message>
+    <message>
+        <source>Reset</source>
+        <translation>Zurücksetzen</translation>
+    </message>
+    <message>
+        <source>Stop</source>
+        <translation>Stop</translation>
+    </message>
+</context>
+</TS>

@@ -1,0 +1,29 @@
+<!DOCTYPE TS><TS>
+<context>
+    <name>QTetrix</name>
+    <message>
+        <source>Next</source>
+        <translation>Weiter</translation>
+    </message>
+    <message>
+        <source>Level</source>
+        <translation>Level</translation>
+    </message>
+    <message>
+        <source>Score</source>
+        <translation>Punkte</translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation>Start</translation>
+    </message>
+    <message>
+        <source>Tetrix</source>
+        <translation>Tetrix</translation>
+    </message>
+    <message>
+        <source>Removed</source>
+        <translation>Entfernt</translation>
+    </message>
+</context>
+</TS>

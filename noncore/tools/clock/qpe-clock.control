@@ -1,0 +1,9 @@
+Files: bin/clock apps/Applications/clock.desktop
+Priority: optional
+Section: qpe/applications
+Maintainer: Warwick Allison <warwick@trolltech.com>
+Architecture: arm
+Version: $QPE_VERSION-3
+Depends: qpe-base ($QPE_VERSION)
+Description: Clock and stop-watch
+ A simple clock and stop-watch for the Qtopia environment.

@@ -1,0 +1,2256 @@
+Package: ae
+Priority: optional
+Section: editors
+Installed-Size: 144
+Debian-Maintainer: Dale Scheetz (Dwarf #1) <dwarf@polaris.net>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Version: 962-30
+Depends: libc6 (>= 2.2.1-2), slang1 (>> 1.3.0-0)
+Filename: ./ae_962-30_arm.ipk
+Size: 15635
+MD5Sum: 96f0a0a9e1c3edede3fbdd605fc4a2bb
+Description: Anthony's Editor -- a tiny full-screen editor
+ ae is a tiny full-screen text editor with both modal (vi-like)
+ and modeless (emacs-like) modes, determined by an ae.rc config file.
+
+Package: apmd
+Priority: extra
+Section: admin
+Installed-Size: 284
+Debian-Maintainer: Avery Pennarun <apenwarr@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Version: 3.0final-1
+Depends: libc6 (>= 2.1.2), xlib6g (>= 3.3-5), xlib6g (>= 3.3.6)
+Filename: ./apmd_3.0final-1_arm.ipk
+Size: 6863
+MD5Sum: 3dcb9b6ae51b923058f0a167c7dcb680
+Description: Utilities for Advanced Power Management (APM) on laptops
+ On laptop computers, the Advanced Power Management (APM) support
+ provides access to battery status information and may help you to
+ conserve battery power, depending on your laptop and the APM
+ implementation.  The apmd program also lets you run arbitrary programs
+ when APM events happen (for example, you can eject PCMCIA devices when
+ you suspend, or change hard drive timeouts when you connect the battery).
+ .
+ This package contains apmd(8), a daemon for logging and acting on APM
+ events, apm(1), a client that prints /proc/apm, xapm(1x), an X11 utility
+ that displays a little graph, on_ac_power(1), a program for shell scripts
+ to determine if wall power is connected, and tailf(1) which follows the
+ growth of a log file without writing to disk.
+ .
+ The Debian default kernel does *not* contain APM support, because it causes
+ problems on some computers.  So, you need to recompile your kernel
+ and enable APM support during configuration; the corresponding questions
+ are in the 'Character devices' section.
+ .
+
+Package: ash
+Essential: yes
+Priority: required
+Section: shells
+Installed-Size: 152
+Debian-Maintainer: Herbert Xu <herbert@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Version: 0.3.7-16
+Pre-Depends: libc6 (>= 2.2.1-2)
+Filename: ./ash_0.3.7-16_arm.ipk
+Size: 51495
+MD5Sum: 1d1f163c5655cee3c62c053b818aadb2
+Description: NetBSD /bin/sh
+ "ash" is a POSIX compliant shell that is much smaller than "bash".
+ We take advantage of that by making it the shell on the installation
+ root floppy, where space is at a premium.
+ .
+ It can be usefully installed as /bin/sh (because it executes scripts
+ somewhat faster than "bash"), or as the default shell either of root
+ or of a second user with a userid of 0 (because it depends on fewer
+ libraries, and is therefore less likely to be affected by an upgrade
+ problem or a disk failure).  It is also useful for checking that a
+ script uses only POSIX syntax.
+ .
+ "bash" is a better shell for most users, since it has some nice
+ features absent from "ash", and is a required part of the system.
+
+Package: bash
+Version: 2.03-6
+Section: base
+Priority: required
+Architecture: arm
+Pre-Depends: libc6 (>= 2.1.2), libncurses5
+Depends: base-files (>= 2.1.12)
+Installed-Size: 748
+Debian-Maintainer: Matthias Klose <doko@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Filename: ./bash_2.03-6_arm.ipk
+Size: 224887
+MD5Sum: 07f98861afc6d22427dd35700b342c68
+Description: The GNU Bourne Again SHell
+ Bash is an sh-compatible command language interpreter that executes
+ commands read from the standard input or from a file.  Bash also
+ incorporates useful features from the Korn and C shells (ksh and csh).
+ .
+ Bash is ultimately intended to be a conformant implementation of the
+ IEEE Posix Shell and Tools specification (IEEE Working Group 1003.2).
+
+Package: blackbox
+Priority: optional
+Version: 0.1
+Architecture: arm
+Maintainer: Alexander Guy <a7r@handhelds.org>
+Depends: libc6, xlibs, libfreetype6, libstdc++2.10-glibc2.2, libxft, libxrender
+Filename: ./blackbox_0.1_arm.ipk
+Size: 145909
+MD5Sum: 02648d34fdbe00260fcb692abc9e7705
+Description: blackbox window manager
+
+Package: checkers
+Priority: optional
+Version: 0.0
+Architecture: arm
+Maintainer: Carl Worth <cworth@handhelds.org>
+Depends: libc6, xlibs, libfreetype6, libstdc++2.10-glibc2.2, libfltk1
+Filename: ./checkers_0.0_arm.ipk
+Size: 20117
+MD5Sum: 45d08b5ead7c474711e77efcce6bff12
+Description: Play checkers against the computer
+
+Package: cpu-scale-2.4.3-rmk1-np2
+Priority: standard
+Version: 2.4.3rmk1np2
+Architecture: arm
+Maintainer: Carl Worth <cworth@handhelds.org>
+Depends: modutils
+Filename: ./cpu-scale-2.4.3-rmk1-np2_2.4.3rmk1np2_arm.ipk
+Size: 4068
+MD5Sum: d1b1f8bcfa511ef0a966b8435a61d69b
+Description: support for scaling the speed of the SA-1110 processor
+  This package contains a kernel module which will allow the speed of
+  the SA-1110 processor to be adjusted via /proc/scale
+
+Package: debianutils
+Essential: yes
+Priority: required
+Section: base
+Installed-Size: 172
+Debian-Maintainer: Guy Maor <maor@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Version: 1.15
+Replaces: miscutils, cron (<=3.0pl1-31), debian-utils, tetex-bin (<< 1.0.6-1.1)
+Pre-Depends: libc6 (>= 2.1.97)
+Conflicts: debian-utils
+Filename: ./debianutils_1.15_arm.ipk
+Size: 9430
+MD5Sum: ce83af3644fd050fcd97988dc7074184
+Description: Miscellaneous utilities specific to Debian.
+ Debianutils includes installkernel mkboot mktemp readlink run-parts savelog
+ sensible-editor sensible-pager tempfile which.
+
+Package: dev-files
+Essential: yes
+Version: 0.4
+Priority: required
+Architecture: arm
+Maintainer: Carl Worth <cworth@handhelds.org>
+Filename: ./dev-files_0.4_arm.ipk
+Size: 2880
+MD5Sum: d4848a628a22fe664f35da48a56e98f4
+Description: devices files for /dev directory
+  This package contains a collection of devices files for /dev. I'm
+  not sure who came up with the list -- I just grabbed it from
+  familiar v0.4 bleeding.  Perhaps we'll want to switch to devfs in
+  the kernel and eliminate this package?
+
+Package: diff
+Priority: optional
+Section: base
+Installed-Size: 276
+Debian-Maintainer: Santiago Vila <sanvila@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Version: 2.7-24
+Pre-Depends: libc6 (>= 2.2.1-2)
+Filename: ./diff_2.7-24_arm.ipk
+Size: 35043
+MD5Sum: b016146c47582743d57144d13d5cb14c
+Description: File comparison utilities
+ `diff' shows differences between two files, or each corresponding file
+ in two directories.
+ .
+ The set of differences produced by `diff' can be used to distribute
+ updates to text files (such as program source code) to other people.
+ This method is especially useful when the differences are small compared
+ to the complete files.  Given `diff' output, the `patch' program can
+ update, or "patch", a copy of the file.
+
+Package: dosfstools
+Priority: optional
+Section: otherosfs
+Installed-Size: 126
+Debian-Maintainer: Roman Hodek <roman@hodek.net>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Version: 2.8-1
+Replaces: mkdosfs
+Depends: libc6 (>= 2.2.1-2)
+Conflicts: mkdosfs
+Filename: ./dosfstools_2.8-1_arm.ipk
+Size: 14197
+MD5Sum: 8fe452f8337b43071f1fa9558b24ac0b
+Description: Utilities to create and check MS-DOS FAT filesystems
+ Inside of this package there are two utilities to create and to
+ check MS-DOS FAT filesystems on either harddisks or floppies under
+ Linux.  This version uses the enhanced boot sector/superblock
+ format of DOS 3.3+ as well as provides a default dummy boot sector
+ code.
+
+Package: e2fsprogs
+Priority: required
+Section: base
+Installed-Size: 584
+Debian-Maintainer: Yann Dirson <dirson@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Version: 1.19-4
+Replaces: e2fslibsg, ss2g, comerr2g
+Provides: libcomerr2, libss2, libext2fs2, libe2p2, libuuid1, e2fslibsg
+Pre-Depends: libc6 (>= 2.2.1-2)
+Suggests: gpart, parted
+Conflicts: e2fslibsg, dump (<< 0.4b4-4), quota (<< 1.55-8.1)
+Filename: ./e2fsprogs_1.19-4_arm.ipk
+Size: 135371
+MD5Sum: b61f3677ee894669d066d244969da387
+Description: The EXT2 file system utilities and libraries.
+ EXT2 stands for "Extended Filesystem", version 2. It's the main
+ filesystem type used for hard disks on Debian and other Linux systems.
+ .
+ This package contains programs for creating, checking, and maintaining EXT2
+ filesystems, and the generic `fsck' wrapper.
+
+Package: familiar-base
+Essential: yes
+Priority: required
+Version: 0.10
+Architecture: arm
+Maintainer: Alexander Guy <a7r@handhelds.org>
+Depends: sysvinit (>= 2.72)
+Pre-Depends: libc6 (>= 2.1.97)
+Filename: ./familiar-base_0.10_arm.ipk
+Size: 16749
+MD5Sum: f8da9c14594bbf9fd5350b5df072cfbd
+Description: essential files for a familiar installation
+  This package is a bit of a catch-all for files that need to be
+  installed with familiar, (I made this package from everything that
+  was still left over after I split off the rest of the files from
+  familiar v0.4 bleeding into their own packages) . Much of what it is
+  here is simply emty directories that must exist. Also, there are
+  some files here which may be created by scripts in Debian that we
+  are not yet runnging. There are probably several files here that
+  should move to other packages.
+
+Package: familiar-postinst
+Priority: optional
+Version: 0.1
+Architecture: arm
+Maintainer: Alexander Guy <a7r@handhelds.org>
+Depends: wget, ntpdate
+Filename: ./familiar-postinst_0.1_arm.ipk
+Size: 1022
+MD5Sum: f246e2efdcd8c798426e394426e327c1
+Description: A collection of shell scripts to do postinstall polishing.
+  These scripts download some of Microsoft's core True-Type Fonts,
+  as well as sync the handheld's time against a public NTP server.
+
+Package: fileutils
+Essential: yes
+Priority: required
+Section: base
+Installed-Size: 1892
+Debian-Maintainer: Michael Stone <mstone@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Version: 4.0.43-1
+Replaces: color-ls, util-linux (<= 2.7.1-1)
+Pre-Depends: libc6 (>= 2.2.1-2)
+Conflicts: color-ls
+Filename: ./fileutils_4.0.43-1_arm.ipk
+Size: 244849
+MD5Sum: 96584322c797c44b0dc2171973b406c3
+Description: GNU file management utilities.
+ The utilities: chgrp chmod chown cp dd df dir dircolors du install ln
+ ls mkdir mkfifo mknod mv rm rmdir shred touch vdir sync.
+
+Package: fscrib
+Priority: optional
+Version: 0.0
+Architecture: arm
+Maintainer: Carl Worth <cworth@handhelds.org>
+Depends: libc6, xlibs, libxaw7
+Filename: ./fscrib_0.0_arm.ipk
+Size: 120261
+MD5Sum: 916dd41f2ed4b0fe3b4ea08d3a80633e
+Description: Full-screen character recognition
+
+Package: fstroke
+Priority: optional
+Version: 0.2-fam1
+Architecture: arm
+Maintainer: Carl Worth <cworth@handhelds.org>
+Depends: libc6, xlibs, libxaw7
+Filename: ./fstroke_0.2-fam1_arm.ipk
+Size: 16248
+MD5Sum: f4fba9d28f724936cca622f374ce9347
+Description: Full-screen modeless character recognizer
+
+Package: ftp
+Version: 0.10-3.1
+Section: net
+Priority: standard
+Architecture: arm
+Depends: libc6 (>= 2.1.2), libncurses5, libreadline4 (>= 4.1)
+Replaces: netstd
+Installed-Size: 156
+Debian-Maintainer: Herbert Xu <herbert@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Filename: ./ftp_0.10-3.1_arm.ipk
+Size: 33962
+MD5Sum: d8c10c5d6d03be0b84964c885927e077
+Description: The FTP client.
+ ftp is the user interface to the ARPANET standard File Transfer Protocol.
+ The program allows a user to transfer files to and from a remote network
+ site.
+Source: netkit-ftp
+
+Package: gdk-imlib1
+Priority: optional
+Section: libs
+Installed-Size: 372
+Debian-Maintainer: Ossama Othman <ossama@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Source: imlib
+Version: 1.9.8.1-2
+Replaces: gdk-imlib-nonfree1, libgdk-imlib-nonfree1, libgdk-imlib1
+Provides: gdk-imlib, libgdk-imlib1
+Depends: imlib-base (>= 1.9.8.1-2), libc6 (>= 2.1.97), libglib1.2 (>= 1.2.0), libjpeg62, libpng2, libtiff3g, libungif3g (>= 3.0-2) | giflib3g (>= 3.0-5.2), zlib1g (>= 1:1.1.3)
+Suggests: imlib-progs, imagemagick, netpbm, libjpeg-progs
+Conflicts: gdk-imlib-nonfree1, libgdk-imlib-nonfree1, libgdk-imlib1
+Filename: ./gdk-imlib1_1.9.8.1-2_arm.ipk
+Size: 62912
+MD5Sum: 38e2feac77d8a95288de100ed3109454
+Description: Gdk-Imlib is an imaging library for use with gtk
+ Gdk-Imlib is a low-level gdk interface for gtk programmers.  It allows easier
+ access to many graphics formats and can write to them as well.
+
+Package: grep
+Essential: yes
+Priority: required
+Section: base
+Installed-Size: 488
+Debian-Maintainer: Wichert Akkerman <wakkerma@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Version: 2.4.2-1
+Provides: rgrep
+Pre-Depends: libc6 (>= 2.1.2)
+Conflicts: rgrep
+Filename: ./grep_2.4.2-1_arm.ipk
+Size: 119438
+MD5Sum: 67fa4cb756f951fda7b7a5d4da2ab523
+Description: GNU grep, egrep and fgrep.
+ The GNU family of grep utilities may be the "fastest grep in the west".
+ GNU grep is based on a fast lazy-state deterministic matcher (about
+ twice as fast as stock Unix egrep) hybridized with a Boyer-Moore-Gosper
+ search for a fixed string that eliminates impossible text from being
+ considered by the full regexp matcher without necessarily having to
+ look at every character. The result is typically many times faster
+ than Unix grep or egrep. (Regular expressions containing backreferencing
+ will run more slowly, however.)
+
+Package: gzip
+Essential: yes
+Priority: required
+Section: base
+Installed-Size: 130
+Debian-Maintainer: Bdale Garbee <bdale@gag.com>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Version: 1.2.4-33
+Depends: debianutils (>= 1.6)
+Pre-Depends: libc6 (>= 2.1)
+Filename: ./gzip_1.2.4-33_arm.ipk
+Size: 30103
+MD5Sum: e98844d058d1909781782abea0182887
+Description: The GNU compression utility.
+ This is the standard GNU file compression utility, which is also the default
+ compression tool for Debian.  It typically operates on files with names
+ ending in '.gz'.
+ .
+ This package can also decompress '.Z' files created with 'compress'.
+
+Package: h3600-utils
+Priority: standard
+Version: 0.4
+Architecture: arm
+Maintainer: Carl Worth <cworth@handhelds.org>
+Depends: libc6
+Filename: ./h3600-utils_0.4_arm.ipk
+Size: 2736
+MD5Sum: 5071017b84fb30c7ae33e3da97dfad80
+Description: utilities for controlling hardware on Compaq iPAQ H3600 series computers
+  This package contains programs for controlling the backlight (sic)
+  as well as the leds on the Compaq iPAQ H3600 series of handheld
+  computers.
+
+Package: hostname
+Essential: yes
+Priority: required
+Section: base
+Installed-Size: 37
+Debian-Maintainer: Adam Heath <doogie@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Version: 2.07
+Pre-Depends: libc6 (>= 2.1)
+Filename: ./hostname_2.07_arm.ipk
+Size: 5277
+MD5Sum: 2e3ed84ee965ed6bb7619b443b228d63
+Description: A utility to set/show the host name or domain name
+ The hostname command can be used to either set or display
+ the current host or domain name of the system. This name is
+ used by many of the networking programs to identify the machine.
+ The domain name is also used by NIS/YP.
+
+Package: ifupdown
+Priority: important
+Section: base
+Installed-Size: 168
+Debian-Maintainer: Anthony Towns <ajt@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Version: 0.6.4-3
+Replaces: netbase (<< 4.00)
+Depends: net-tools, libc6 (>= 2.1.2)
+Suggests: iproute
+Filename: ./ifupdown_0.6.4-3_arm.ipk
+Size: 11654
+MD5Sum: 7d60dcafa9a3526aca1fa566024e6e42
+Description: High level tools to configure network interfaces
+ This package provides the tools ifup and ifdown which may be used to
+ configure (or, respectively, deconfigure) network interfaces, based on
+ the file /etc/network/interfaces.
+
+Package: intimateboot
+Priority: optional
+Section: extras
+Installed-Size: 40960
+Debian-Maintainer: Nicolás Lichtmaier <nick@debian.org>
+Maintainer: James Conner <jim@secret.org.uk>
+Architecture: arm
+Version: 050301
+Depends: reiserfs-module (= 2.4.1-rmk1-np1 )
+Filename: ./intimateboot_050301_arm.ipk
+Size: 2518
+MD5Sum: 92532bfa8875aae0746d6901192b3cd2
+Description: This package provides the necessary boot scripts to optionally make the intimate distribution boot up. If a valid boot image for intimate is not found, then the system will boot Familiar from flash as normal. The package provides an additional linuxrc script, which may be run as an alternative to the normal one. It also provides devfs support via a small script. Booting via microdrive or NFS is supported, but you must preconfigure NFS paths etc before starting.  IMPORTANT : You will need to change the linuxargs in the bootloader after installing this package. This is done by entering...  'set linuxargs "noinited devfs=mount root=/dev/mtdblock3 init=/linuxrc.intimate console=ttySA0"' and 'params save' at the boot> prompt.
+
+
+Package: ion-nasty-hacks
+Priority: optional
+Version: 200102160-fam1
+Architecture: arm
+Maintainer: Carl Worth <cworth@handhelds.org>
+Depends: libc6, xlibs
+Filename: ./ion-nasty-hacks_200102160-fam1_arm.ipk
+Size: 58518
+MD5Sum: 79a39fcb686adf83942ad50ad32845f4
+Description: a text-editorish, keyboard/stylus friendly window manager
+
+Package: ipkg
+Essential: yes
+Priority: required
+Version: 0.4-fam1
+Architecture: all
+Maintainer: Carl Worth <cworth@handhelds.org>
+Depends: shellutils, textutils, sed, grep, gzip, tar, wget
+Filename: ./ipkg_0.4-fam1_all.ipk
+Size: 5306
+MD5Sum: 6502942cc864d29cf005925a168747cd
+Description: Lightweight package management system
+
+Package: irda-common
+Version: 0.9.14-3
+Section: misc
+Priority: optional
+Architecture: arm
+Depends: libc6 (>= 2.2.1-2)
+Conflicts: irda-utils
+Replaces: irda-utils
+Installed-Size: 100
+Debian-Maintainer: NOKUBI Takatsugu <knok@daionet.gr.jp>
+Maintainer: Alexander Guy <a7r@andern.org>
+Source: irda-utils
+Filename: ./irda-common_0.9.14-3_arm.ipk
+Size: 5259
+MD5Sum: d41a70d88dbf47b63bf601cbe176b121
+Description: IrDA management utilities
+ IrDA management utilities for Linux.
+ This package contains irmanager and irattach.
+
+Package: irda-modules-2.4.3-rmk2-np1
+Priority: extra
+Maintainer: Alexander Guy <a7r@andern.org>
+Depends: kernel-modules-2.4.3-rmk2-np1
+Version: fam3
+Architecture: arm
+Filename: ./irda-modules-2.4.3-rmk2-np1_fam3_arm.ipk
+Size: 194859
+MD5Sum: 7af6f1d272eb0cb135162fb9f9bb2c76
+Description: IrDA kernel modules
+  The entire suite of kernel modules required to use both SIR and FIR
+  IrDA.  This includes IrCOMM, and IrLAN support.
+
+Package: iv
+Essential: yes
+Priority: required
+Version: 0.0
+Architecture: arm
+Maintainer: Carl Worth <cworth@handhelds.org>
+Provides: vi
+Depends: libc6
+Filename: ./iv_0.0_arm.ipk
+Size: 8364
+MD5Sum: 9cf155930e6db23ddece8705df27d99d
+Description: Lightweight reimplementation of vi <attribution?>
+
+Package: kernel-modules-2.4.3-rmk2-np1
+Essential: yes
+Priority: required
+Version: fam3
+Architecture: arm
+Maintainer: Alexander Guy <a7r@andern.org>
+Depends: modutils
+Filename: ./kernel-modules-2.4.3-rmk2-np1_fam3_arm.ipk
+Size: 585458
+MD5Sum: 2cd52706ce0157337664414bc6e75943
+Description: kernel modules for kernel 2.4.3-rmk2-np1
+  This package contains almost all of the kernel modules that might be
+  useful within familiar. Eventually I would like to split many of
+  these modules off into their own packages that would have dependency
+  links from the programs that need them. For example, e2fsprogs could
+  depend on e2fs-kernel-modules or something like that. I have already
+  split off cpu-scale and the pcmcia modules into their own packages.
+
+Package: less
+Version: 346-7
+Section: text
+Priority: standard
+Architecture: arm
+Depends: libc6 (>= 2.1.2), libncurses5, debianutils (>= 1.8)
+Installed-Size: 163
+Debian-Maintainer: Thomas Schoepf <schoepf@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Filename: ./less_346-7_arm.ipk
+Size: 41734
+MD5Sum: 617280f25bba9c4b03e631af7cd969b2
+Description: A file pager program, similar to more(1)
+ Less is a program similar to more (1), but which allows backward
+ movement in the file as well as forward movement.  Also, less does not
+ have to read the entire input file before starting, so with large input
+ files it starts up faster than text editors like vi (1).  Less uses
+ termcap (or terminfo on some systems), so it can run on a variety of
+ terminals.  There is even limited support for hardcopy terminals.
+ .
+ Homepage: http://www.flash.net/~marknu/less/
+
+Package: libc6
+Priority: required
+Section: base
+Installed-Size: 13104
+Debian-Maintainer: Ben Collins <bcollins@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Source: glibc
+Version: 2.2.2-1
+Replaces: ldso (<= 1.9.11-9), timezone, timezones, gconv-modules, libtricks
+Provides: gconv-modules, glibc2.2
+Suggests: locales, glibc-doc
+Conflicts: libdb2 (= 2:2.7.7-2.1), timezone, timezones, gconv-modules, libtricks, libc6-doc
+Filename: ./libc6_2.2.2-1_arm.ipk
+Size: 1100492
+MD5Sum: 4944634b673b732d4a9fc8ec87a1447c
+Description: GNU C Library: Shared libraries and Timezone data
+ Contains the standard libraries that are used by nearly all programs on
+ the system. This package includes shared versions of the standard C library
+ and the standard math library, as well as many others.
+ Timezone data is also included.
+
+Package: libdb2
+Priority: optional
+Section: libs
+Installed-Size: 388
+Debian-Maintainer: Ben Collins <bcollins@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Source: db
+Version: 2:2.7.7-3
+Architecture: arm
+Replaces: libdb2.6, lib-bdb2
+Depends: libc6 (>= 2.2.1-2)
+Conflicts: lib-bdb2
+Filename: ./libdb2_2.7.7-3_arm.ipk
+Size: 138089
+MD5Sum: ed771a8cdf8225b98db3c61b39a05d07
+Description: The Berkeley database routines (run-time files).
+ libdb2 is a library for manipulating database files, developed at
+ Berkeley and extended by Sleepycat Software Inc.
+ This is the stable version, also commercially supported.
+ .
+ It supports three kinds of file formats:
+  * btree. A representation of a sorted, balanced tree structure.
+  * hashed. An extensible, dynamic hashing scheme.
+  * UNIX file oriented. A byte stream file with fixed or variable
+    length records.
+ Other core database services:
+  * page cache management for fast access, clean page allocation.
+  * lock with multiple reader/writer granularity.
+  * nested transaction support with logging and rollback recovery
+    (two phase commit).
+  * Large set of utility, to dump/load/restore data and examine log.
+
+Package: libfltk1
+Priority: optional
+Section: libs
+Installed-Size: 370
+Debian-Maintainer: Fabrizio Polacco <fpolacco@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Source: fltk
+Version: 1.0.9-1.1
+Depends: libc6 (>= 2.2.1-2), libgl1, libstdc++2.10-glibc2.2, xlibs (>= 4.0.1-11)
+Filename: ./libfltk1_1.0.9-1.1_arm.ipk
+Size: 186802
+MD5Sum: 59c552236fc0e89fd4fb7474d6fbfe0a
+Description: The Fast Light Toolkit, a GUI toolkit inspired by libForms
+ This is a very nice LGPL'd graphic user interface toolkit originally based on
+ libForms. Programs written using libForms will hopefully be ported to libfltk
+ in the future and will need this package to run.
+
+Package: libfreetype6
+Priority: optional
+Section: libs
+Installed-Size: 396
+Debian-Maintainer: Anthony Fok <foka@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Source: freetype
+Version: 2.0.1.20010317-1
+Replaces: freetype0, freetype1
+Depends: libc6 (>= 2.2.1-2)
+Suggests: libfreetype6-dev
+Conflicts: freetype
+Filename: ./libfreetype6_2.0.1.20010317-1_arm.ipk
+Size: 106977
+MD5Sum: 639030e1e406cc87c44db49a70de9f34
+Description: FreeType 2 font engine, shared library files.
+ The FreeType project is a team of volunteers who develop free,
+ portable and high-quality software solutions for digital typography.
+ They specifically target embedded systems and focus on bringing small,
+ efficient and ubiquitous products.
+ .
+ The FreeType 2 library is their new software font engine.  It has been
+ designed to provide the following important features:
+  * A universal and simple API to manage font files
+  * Support for several font formats through loadable modules
+  * High-quality anti-aliasing
+  * High portability & performance
+ .
+ Supported font formats include:
+  * TrueType files (.ttf) and collections (.ttc)
+  * Type 1 font files both in ASCII (.pfa) or binary (.pfb) format
+  * Type 1 Multiple Master fonts.  The FreeType 2 API also provides
+    routines to manage design instances easily
+  * Type 1 CID-keyed fonts
+  * OpenType/CFF (.otf) fonts
+  * CFF/Type 2 fonts
+  * Adobe CEF fonts (.cef), used to embed fonts in SVG documents with
+    the Adobe SVG viewer plugin.
+  * Windows FNT/FON bitmap fonts
+ .
+ This package contains the files needed to run programs that use the
+ FreeType 2 library.
+ .
+  Home Page: http://www.freetype.org/
+  Authors: David Turner   <david.turner@freetype.org>
+           Robert Wilhelm <robert.wilhelm@freetype.org>
+           Werner Lemberg <werner.lemberg@freetype.org>
+
+Package: libglade0
+Priority: optional
+Section: libs
+Installed-Size: 164
+Debian-Maintainer: Paolo Molaro <lupus@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Source: libglade
+Version: 0.16-2
+Depends: libc6 (>= 2.2.1-2), libglib1.2 (>= 1.2.0), libgtk1.2 (>= 1.2.8-3), libxml1, xlibs (>= 4.0.1-11), zlib1g (>= 1:1.1.3)
+Filename: ./libglade0_0.16-2_arm.ipk
+Size: 35028
+MD5Sum: 26211c69d51e1f8abd45022eaadb25b1
+Description: Library to load .glade files at runtime.
+ This library allows you to load user interfaces in your program, which are
+ stored externally.  This allows alteration of the interface without
+ recompilation of the program.
+ .
+ The interfaces can also be edited with GLADE.
+
+Package: libglib1.2
+Priority: optional
+Section: libs
+Installed-Size: 264
+Debian-Maintainer: Ben Gertzfield <che@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Source: glib1.2
+Version: 1.2.10-1
+Replaces: libgtk-doc
+Depends: libc6 (>= 2.2.1-2)
+Suggests: libgtk1.2
+Filename: ./libglib1.2_1.2.10-1_arm.ipk
+Size: 68147
+MD5Sum: 1fe1ad635bc78331c9e3ae27406ddc12
+Description: The GLib library of C routines
+ GLib is a library containing many useful C routines for things such
+ as trees, hashes, and lists. GLib was previously distributed with
+ the GTK+ toolkit, but has been split off as of the developers' version
+ 1.1.0.
+ .
+ You do not need to install this package if you have libgtk1 (note 1,
+ not 1.1 or 1.2) installed. libgtk1 included libglib in it. libgtk1.1
+ and libgtk1.2, however, do need libglib1.1 to be installed separately.
+
+Package: libgtk1.2
+Priority: optional
+Section: libs
+Installed-Size: 2184
+Debian-Maintainer: Ben Gertzfield <che@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Source: gtk+1.2
+Version: 1.2.10-1
+Replaces: libgtk1.1.5, libgtk1.1.6, libgtk1.1.9, libgtk1.1.11, libgtk1.1.12, libgtk1.1.13, libgtk1.1.14, libgtk1.1.15, libgtk1.1.16
+Depends: libc6 (>= 2.2.1-2), libglib1.2 (>= 1.2.0), xlibs (>= 4.0.1-11)
+Pre-Depends: dpkg (>= 1.6.8)
+Conflicts: libgtk-dev (<< 1:1.0.2)
+Filename: ./libgtk1.2_1.2.10-1_arm.ipk
+Size: 602094
+MD5Sum: b0ff676813a80f1017876b125bb9bad0
+Description: The GIMP Toolkit set of widgets for X
+ The GIMP Toolkit is a freely available set of widgets for X.
+ GTK is easy to use, and has been implemented in such projects as
+ The GNU Image Manipulation Program (The GIMP), GNOME, a GNU
+ desktop set of utilities for X, and gzilla, a GNU web-browser.
+
+Package: libjpeg62
+Priority: optional
+Section: libs
+Installed-Size: 204
+Debian-Maintainer: Mark Mickan <mmickan@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Source: libjpeg6b
+Version: 6b-1.3
+Replaces: libjpeg6b
+Provides: libjpeg6b
+Depends: libc6 (>= 2.2.1-2)
+Conflicts: libjpeg6b
+Filename: ./libjpeg62_6b-1.3_arm.ipk
+Size: 64434
+MD5Sum: 2cabfc091e7755c93a3d78b2dff48f0f
+Description: The Independent JPEG Group's JPEG runtime library [libc6]
+ This package contains the shared library.
+
+Package: libncurses5
+Version: 5.0-6.0potato1
+Section: base
+Priority: required
+Architecture: arm
+Depends: libc6 (>= 2.1.2), ncurses-base
+Installed-Size: 427
+Debian-Maintainer: Joel Klecker <ncurses-maint@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Filename: ./libncurses5_5.0-6.0potato1_arm.ipk
+Size: 101390
+MD5Sum: 6f1a19d05c5f8d312efb33e05318d714
+Description: Shared libraries for terminal handling
+ This package contains the shared libraries necessary to run programs
+ compiled with ncurses.
+Source: ncurses
+
+Package: libpam0g
+Priority: required
+Section: base
+Installed-Size: 152
+Debian-Maintainer: Sam Hartman <hartmans@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Source: pam
+Version: 0.72-21
+Replaces: libpam0g-util
+Depends: libc6 (>= 2.2.1-2), libpam-runtime
+Suggests: libpam-doc
+Conflicts: libpam0 (<= 0.56-2), libpam
+Filename: ./libpam0g_0.72-21_arm.ipk
+Size: 18191
+MD5Sum: 21196b782a3327aa39382825db2d64f1
+Description: Pluggable Authentication Modules library
+ Contains the C shared library for Linux-PAM, a suite of shared
+ libraries that enable the local system administrator to choose how
+ applications authenticate users.  In other words, without rewriting
+ or recompiling a PAM-aware application, it is possible to switch
+ between the authentication mechanism(s) it uses.  One may entirely
+ upgrade the local authentication system without touching the
+ applications themselves.
+
+Package: libpam-modules
+Priority: required
+Section: base
+Installed-Size: 472
+Debian-Maintainer: Sam Hartman <hartmans@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Source: pam
+Version: 0.72-21
+Replaces: libpam0g-util
+Provides: libpam-motd, libpam-mkhomedir
+Depends: libc6 (>= 2.2.1-2), libcap1, libdb3 (>= 3.2.9-1), libpam0g (>= 0.72-1)
+Conflicts: libpam0g-modules (= 0.66-1), libpam-motd, libpam-mkhomedir, suidmanager (<< 0.50)
+Filename: ./libpam-modules_0.72-21_arm.ipk
+Size: 20438
+MD5Sum: 23a98606804b0600dcc81ff26ad5772f
+Description: Pluggable Authentication Modules for PAM
+ This package completes the set of modules for PAM. It includes the
+ the pam_unix_*.so module as well as some specialty modules.
+
+Package: libpam-runtime
+Priority: required
+Section: base
+Installed-Size: 132
+Debian-Maintainer: Sam Hartman <hartmans@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Source: pam
+Version: 0.72-21
+Replaces: libpam0g-util, libpam0g-dev
+Conflicts: libpam0g-util, libpam0g (<< 0.66-0)
+Filename: ./libpam-runtime_0.72-21_arm.ipk
+Size: 2495
+MD5Sum: 183d85691a48163576f7b62e8cc43184
+Description: Runtime support for the PAM library
+ Contains the base setup for libpam
+
+Package: libpng2
+Priority: standard
+Section: libs
+Installed-Size: 288
+Debian-Maintainer: Philippe Troin <phil@fifi.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Source: libpng
+Version: 1.0.8-1
+Depends: libc6 (>= 2.1.2), libz1
+Filename: ./libpng2_1.0.8-1_arm.ipk
+Size: 74734
+MD5Sum: ef8044db7824d9e486c6d9fb1c677168
+Description: PNG library - runtime
+ libpng is a library implementing an interface for reading and writing
+ PNG (Portable Network Graphics) format files.
+ .
+ This library is more recent than libpng0g, and you should use it rather
+ than libpng0g (which is for legacy packages).
+
+Package: libpopt0
+Priority: important
+Section: base
+Installed-Size: 92
+Debian-Maintainer: Joseph Carter <knghtbrd@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Source: popt
+Version: 1.5-0.1
+Replaces: popt
+Depends: libc6 (>= 2.1.2)
+Conflicts: popt, libpopt-dev (<= 1.4-1)
+Filename: ./libpopt0_1.5-0.1_arm.ipk
+Size: 11129
+MD5Sum: 9a43286e1b181448f36a1939d4cea530
+Description: lib for parsing cmdline parameters
+ Popt was heavily influenced by the getopt() and getopt_long() functions,
+ but it allows more powerful argument expansion. It can parse arbitrary
+ argv[] style arrays and automatically set variables based on command
+ line arguments. It also allows command line arguments to be aliased via
+ configuration files and includes utility functions for parsing arbitrary
+ strings into argv[] arrays using shell-like rules.
+ .
+ This package contains the runtime library and locale data.
+
+Package: libreadline4
+Version: 4.1-1
+Section: base
+Priority: required
+Architecture: arm
+Depends: libc6 (>= 2.1.2), libncurses5
+Installed-Size: 260
+Debian-Maintainer: Matthias Klose <doko@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Filename: ./libreadline4_4.1-1_arm.ipk
+Size: 67959
+MD5Sum: bb6ad084c0b2b9b6251f43d5ddd2e28e
+Description: GNU readline and history libraries, run-time libraries.
+ The GNU readline library aids in the consistency of user interface
+ across discrete programs that need to provide a command line
+ interface.
+ .
+ The GNU history library provides a consistent user interface for
+ recalling lines of previously typed input.
+Source: readline4
+
+Package: libssl0.9.6
+Priority: optional
+Section: non-us/main
+Installed-Size: 1062
+Debian-Maintainer: Christoph Martin <christoph.martin@uni-mainz.de>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Source: openssl
+Version: 0.9.6a-1
+Replaces: libssl, libssl096
+Provides: libssl096
+Depends: libc6 (>= 2.2.1-2), libssl0.9.6
+Conflicts: ssleay (<< 0.9.2b), libssl, openssl (<< 0.9.6-2), libssl096, libssl096-dev (<< 0.9.6-2)
+Filename: ./libssl0.9.6_0.9.6a-1_arm.ipk
+Size: 309622
+MD5Sum: d1d6d8f48a48eb86f22e89f1a7f8dc06
+Description: SSL shared libraries
+ libssl and libcrypto shared libraries needed by programs like
+ apache-ssl, telnet-ssl and openssh.
+ .
+ It is part of the OpenSSL implementation of SSL.
+
+Package: libstdc++2.10-glibc2.2
+Priority: required
+Section: base
+Installed-Size: 328
+Debian-Maintainer: Debian GCC maintainers <gcc@packages.debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Source: gcc-2.95 (2.95.4.ds1-0.010407)
+Version: 1:2.95.4-0.010407
+Depends: libc6 (>= 2.2.1-2)
+Filename: ./libstdc++2.10-glibc2.2_2.95.4-0.010407_arm.ipk
+Size: 161222
+MD5Sum: 3d5c530f551cb14aaaccfcb2c221741f
+Description: The GNU stdc++ library
+ NOTE: This is not a final release, but taken from the CVS gcc-2_95-branch
+ (dated 20010407).
+ .
+ This package contains an additional runtime library for C++ programs
+ built with the GNU compiler.
+
+Package: libungif3g
+Priority: optional
+Section: graphics
+Installed-Size: 88
+Debian-Maintainer: Adam Heath <doogie@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Source: libungif
+Version: 3.0-3
+Replaces: giflib3g
+Provides: giflib3g
+Depends: libc6 (>= 2.1.2), xlib6g (>= 3.3.6)
+Conflicts: libgif3g, libgif2, giflib3g
+Filename: ./libungif3g_3.0-3_arm.ipk
+Size: 16148
+MD5Sum: 65985228c87656161d3bdcfb1771185e
+Description: shared library for GIF images (runtime lib)
+ This is a shared library for working with GIF images.
+ .
+ The libungif library is a specially modified version of giflib which
+ is free of the Unisys LZW patent.  It can read all GIFs, but only
+ write uncompressed GIFs.  If you need to be able to write compressed
+ GIFs, you can install the non-free giflib packages instead (which may
+ not be available on CD).
+
+Package: libwrap0
+Priority: important
+Section: base
+Installed-Size: 136
+Debian-Maintainer: Anthony Towns <ajt@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Source: tcp-wrappers
+Version: 7.6-7
+Depends: libc6 (>= 2.1.2)
+Recommends: tcpd
+Conflicts: netbase (<< 3.16-1)
+Filename: ./libwrap0_7.6-7_arm.ipk
+Size: 13202
+MD5Sum: 18fd9d5e2f2e30652ee460aa1e97a5b1
+Description: Wietse Venema's TCP wrappers library
+ Wietse Venema's network logger, also known as TCPD or LOG_TCP.
+ .
+ These programs log the client host name of incoming telnet,
+ ftp, rsh, rlogin, finger etc. requests. Security options are:
+ access control per host, domain and/or service; detection of
+ host name spoofing or host address spoofing; booby traps to
+ implement an early-warning system.
+
+Package: libxaw6
+Priority: optional
+Section: libs
+Installed-Size: 372
+Debian-Maintainer: Branden Robinson <branden@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Source: xfree86
+Version: 4.0.2-13
+Replaces: xlib6g (<< 4.0)
+Depends: libc6 (>= 2.2.1-2), xlibs (>= 4.0.1-11)
+Conflicts: xlib6g (<< 4.0)
+Filename: ./libxaw6_4.0.2-13_arm.ipk
+Size: 125255
+MD5Sum: e5b9dbfc091f69133156ae0c53e80f43
+Description: X Athena widget set library (version 6)
+ Xaw is a widget set based on the the Xt (X Toolkit Intrinsics) library.
+ It provides a set of graphical user-interface elements ("widgets") such as
+ menus, scrollbars, dialog boxes, text-input areas, and so forth.  The X
+ clients distributed with the X Window System itself, as well as many
+ others, use the Athena widget set.
+ .
+ The version of the Athena widgets in this package corresponds to the
+ X11R6.4 release of the X Window System.  XFree86 has made significant
+ enhancements to the Athena widget set; their version can be found in the
+ libxaw7 package.
+
+Package: libxaw7
+Priority: optional
+Section: libs
+Installed-Size: 484
+Debian-Maintainer: Branden Robinson <branden@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Source: xfree86
+Version: 4.0.2-13
+Depends: libc6 (>= 2.2.1-2), xlibs (>= 4.0.1-11)
+Filename: ./libxaw7_4.0.2-13_arm.ipk
+Size: 176321
+MD5Sum: 19b82bde7d895cf3227e5e5aa20c4222
+Description: X Athena widget set library
+ Xaw is a widget set based on the the Xt (X Toolkit Intrinsics) library.
+ It provides a set of graphical user-interface elements ("widgets") such as
+ menus, scrollbars, dialog boxes, text-input areas, and so forth.  The X
+ clients distributed with the X Window System itself, as well as many
+ others, use the Athena widget set.
+ .
+ XFree86 has made a number of major improvements to the Athena widget set,
+ resulting in version 7 -- this version features widgets customizable in
+ appearance and event handling (a.k.a. "themes"); an extensible image
+ loader (currently supports bitmaps, gradients, and pixmaps); numerous
+ enhancements to the Text widget, text source and text sink objects; and
+ multiple-column support in the SimpleMenu widget.
+ .
+ The older Athena widget library corresponding to version X11R6.4 of the X
+ Window System can be found in the libxaw6 package.
+
+Package: libxft
+Priority: optional
+Version: 0.0
+Architecture: arm
+Maintainer: Carl Worth <cworth@handhelds.org>
+Depends: libc6
+Filename: ./libxft_0.0_arm.ipk
+Size: 44433
+MD5Sum: 5c9660cd2b8f1317a6ce677b094708ff
+Description: libxft <needs better description here>
+
+Package: libxml1
+Priority: optional
+Section: libs
+Installed-Size: 480
+Debian-Maintainer: Fredrik Hallenberg <hallon@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Source: libxml
+Version: 1:1.8.11-1
+Replaces: libxml0
+Provides: libxml0
+Depends: libc6 (>= 2.1.97), zlib1g (>= 1:1.1.3)
+Conflicts: libxml0
+Filename: ./libxml1_1.8.11-1_arm.ipk
+Size: 122515
+MD5Sum: ffc5f30c0e229aec973ba2dedf8bf38a
+Description: GNOME XML library
+ XML is a metalanguage to let you design your own markup language.
+ A regular markup language defines a way to describe information in
+ a certain class of documents (eg HTML). XML lets you define your
+ own customized markup languages for many classes of document. It
+ can do this because it's written in SGML, the international standard
+ metalanguage for markup languages.
+
+Package: libxmltok1
+Priority: optional
+Section: libs
+Installed-Size: 176
+Debian-Maintainer: Ardo van Rangelrooij <ardo@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Source: libxmltok
+Version: 1.1-5
+Depends: libc6 (>= 2.1.97)
+Filename: ./libxmltok1_1.1-5_arm.ipk
+Size: 36765
+MD5Sum: 2669363932f3538598690504e8bd843b
+Description: XML Parser Toolkit, runtime libraries
+ Libraries for XML parsing in C, which contains the shared libraries,
+ libxmltok and libxmlparser.  These libraries are being used, for
+ instance, for XML support to Netscape 5 and the Perl module,
+ XML::Parser.
+ .
+ Author:   James Clark <jjc@jclark.com>
+ Homepage: http://www.jclark.com/xml/expat.html
+
+Package: libxrender
+Priority: optional
+Version: 0.0
+Architecture: arm
+Maintainer: Carl Worth <cworth@handhelds.org>
+Depends: libc6
+Filename: ./libxrender_0.0_arm.ipk
+Size: 7748
+MD5Sum: ddc4cf38278e868247db1daf82d3390d
+Description: X rendering extension
+
+Package: loadmeter
+Priority: optional
+Version: 0.0
+Architecture: arm
+Maintainer: Carl Worth <cworth@handhelds.org>
+Depends: libc6, xlibs
+Filename: ./loadmeter_0.0_arm.ipk
+Size: 17294
+MD5Sum: 68863f7c94238b4902722e9555a40f52
+Description: graphical CPU load montitoring
+
+Package: login
+Essential: yes
+Priority: required
+Section: base
+Installed-Size: 312
+Debian-Maintainer: Ben Collins <bcollins@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Source: shadow
+Version: 20000902-3.1
+Replaces: shadow-login, shadow-passwd, shellutils (<< 2.0-2)
+Depends: libpam-modules (>= 0.72-5)
+Pre-Depends: libc6 (>= 2.2.1-2), libpam0g (>= 0.72-1)
+Conflicts: shadow-login, pam-apps, secure-su, suidregister (<< 0.50)
+Filename: ./login_20000902-3.1_arm.ipk
+Size: 24402
+MD5Sum: 7817225e43bb8e999f89c58152d23de4
+Description: System login tools
+ These tools are required to be able to login and use your system. The
+ login program invokes you user shell and enables command execution. The
+ newgrp program is used to change your effective group ID (useful for
+ workgroup type situations). The su program allows changing your effective
+ user ID (useful being able to execute commands as another user).
+ .
+ Also supplies a logout daemon that can place limits on when, from where,
+ and for how long certain users can login to the system.
+
+Package: lrzsz
+Essential: yes
+Priority: required
+Section: comm
+Installed-Size: 264
+Debian-Maintainer: Josip Rodin <jrodin@jagor.srce.hr>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Version: 0.12.21-4
+Depends: libc6 (>= 2.2.1-2)
+Suggests: minicom
+Filename: ./lrzsz_0.12.21-4_arm.ipk
+Size: 64893
+MD5Sum: 6f1a0ea3c0bc986b96c916192fe318ab
+Description: Tools for zmodem/xmodem/ymodem file transfer
+ Lrzsz is a cosmetically modified zmodem/ymodem/xmodem package built
+ from the public-domain version of Chuck Forsberg's rzsz package.
+ .
+ These programs use error correcting protocols ({z,x,y}modem) to send
+ (sz, sx, sb) and receive (rz, rx, rb) files over a dial-in serial port
+ from a variety of programs running under various operating systems.
+
+Package: madplay
+Priority: optional
+Version: 0.0
+Architecture: arm
+Maintainer: Carl Worth <cworth@handhelds.org>
+Depends: libc6
+Filename: ./madplay_0.0_arm.ipk
+Size: 70830
+MD5Sum: 5ff68a920d656af9c8aaefaa1362a0f1
+Description: Fast, high-quality, fixed-point MP3 player
+
+Package: mingle
+Priority: optional
+Version: 0.1
+Architecture: arm
+Maintainer: Gareth J. Greenaway <gareth@wiked.org>
+Depends: python
+Filename: ./mingle_0.1_arm.ipk
+Size: 51136
+MD5Sum: 5954457eb75f93c38f941d283ea05f50
+Description: Mingle contact manager illustrating the use of the Familiar Framework project. 
+
+Package: mixer
+Priority: optional
+Version: 0.0
+Architecture: arm
+Maintainer: Carl Worth <cworth@handhelds.org>
+Depends: libc6, xlibs
+Filename: ./mixer_0.0_arm.ipk
+Size: 8729
+MD5Sum: 50d2997c142037603450e53c6af14bf6
+Description: control audio levels graphically
+
+Package: modutils
+Priority: required
+Section: base
+Installed-Size: 564
+Debian-Maintainer: Wichert Akkerman <wakkerma@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Version: 2.4.2-1
+Replaces: manpages (<=1.15-3)
+Depends: libc6 (>= 2.1.97), sysvinit (>=2.71-2)
+Suggests: ksymoops
+Filename: ./modutils_2.4.2-1_arm.ipk
+Size: 113605
+MD5Sum: 8046533303655791c7c1a16f76224346
+Description: Linux module utilities.
+ These utilities are intended to make a Linux modular kernel
+ manageable for all users, administrators and distribution
+ maintainers.
+Origin: debian
+Bugs: debbugs://bugs.debian.org/
+
+Package: mount
+Essential: yes
+Priority: required
+Section: base
+Installed-Size: 228
+Debian-Maintainer: Adrian Bunk <bunk@fs.tum.de>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Source: util-linux
+Version: 2.11b-2
+Pre-Depends: libc6 (>= 2.2.1-2)
+Filename: ./mount_2.11b-2_arm.ipk
+Size: 41072
+MD5Sum: ddc0df15fb6d3aac711d0a77172df6c2
+Description: Tools for mounting and manipulating filesystems.
+ This package provides the mount(8), umount(8), swapon(8),
+ swapoff(8), and losetup(8) commands.
+
+Package: ncurses-base
+Priority: required
+Section: base
+Installed-Size: 222
+Debian-Maintainer: Daniel Jacobowitz <ncurses-maint@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: all
+Source: ncurses
+Version: 5.2.20010318-1
+Replaces: ncurses-term
+Provides: ncurses-runtime
+Conflicts: ncurses, ncurses-runtime
+Filename: ./ncurses-base_5.2.20010318-1_all.ipk
+Size: 8901
+MD5Sum: 67746347774792cff7d97adf0ff4c272
+Description: Descriptions of common terminal types
+ This package contains what should be a reasonable subset of terminal
+ definitions, including: ansi, dumb, linux, rxvt, screen, sun, vt100,
+ vt102, vt220, vt52, and xterm.
+
+Package: netbase
+Priority: important
+Section: base
+Installed-Size: 110
+Debian-Maintainer: Anthony Towns <ajt@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: all
+Version: 4.05
+Depends: net-tools | iproute, ifupdown, ipchains | ipfwadm | iptables, netkit-inetd, tcpd, netkit-ping | iputils-ping
+Suggests: debconf, ipmasqadm | ipautofw | iptables, portmap, netkit-rpc
+Conflicts: xinetd (<= 2.2.1-8), netstd (<< 3.00), nfs-user-server (<< 2.2beta47-9), nis (<= 3.6-2), rstatd (<= 3.03-3), rwalld (<= 0.16-1), rusersd (<= 0.17-1), ugidd (<< 2.2beta47-9)
+Filename: ./netbase_4.05_all.ipk
+Size: 9502
+MD5Sum: 029f1dffa57f6b23f97b08b5262dfc38
+Description: Basic TCP/IP networking system
+ This package provides the necessary infrastructure for basic TCP/IP based
+ networking.
+
+Package: netcat
+Priority: optional
+Section: net
+Installed-Size: 228
+Debian-Maintainer: Decklin Foster <decklin@red-bean.com>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Version: 1.10-17
+Depends: libc6 (>= 2.2.1-2)
+Filename: ./netcat_1.10-17_arm.ipk
+Size: 12265
+MD5Sum: 14101b949ee963abb64de99130725c6f
+Description: TCP/IP swiss army knife
+ A simple Unix utility which reads and writes data across network
+ connections using TCP or UDP protocol.  It is designed to be a reliable
+ "back-end" tool that can be used directly or easily driven by other
+ programs and scripts. At the same time it is a feature-rich network
+ debugging and exploration tool, since it can create almost any kind of
+ connection you would need and has several interesting built-in
+ capabilities.
+
+Package: netkit-ping
+Priority: important
+Section: net
+Installed-Size: 84
+Debian-Maintainer: Anthony Towns <ajt@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Source: netkit-base
+Version: 0.10-6.1
+Replaces: netbase (<< 4.00)
+Provides: ping
+Depends: libc6 (>= 2.2.1-2)
+Conflicts: ping
+Filename: ./netkit-ping_0.10-6.1_arm.ipk
+Size: 10418
+MD5Sum: cdf51bd27a0e95867f1ee7ab7c328192
+Description: The ping utility from netkit
+ The ping command sends ICMP ECHO_REQUEST packets to a host in order to
+ test if the host is reachable via the network.
+
+Package: net-tools
+Priority: important
+Section: net
+Installed-Size: 676
+Debian-Maintainer: Bernd Eckenfels <ecki@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Version: 1.59-1
+Replaces: netbase (<< 4.00)
+Depends: libc6 (>= 2.2.1-2)
+Filename: ./net-tools_1.59-1_arm.ipk
+Size: 100555
+MD5Sum: 5f8cd79e32b953142faed78f46dd5625
+Description: The NET-3 networking toolkit
+ This package includes the important tools for controlling the network
+ subsystem of the Linux kernel.  This includes arp, ifconfig, netstat,
+ rarp, nameif and route.  Additionally, this package contains utilities
+ relating to particular network hardware types (plipconfig, slattach) and
+ advanced aspects of IP configuration (iptunnel, ipmaddr).
+ .
+ In the upstream package 'hostname' and friends are included. Those are
+ not installed by this package, since there is a special "hostname*.deb".
+
+Package: ntpdate
+Priority: optional
+Section: net
+Installed-Size: 132
+Debian-Maintainer: Bdale Garbee <bdale@gag.com>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Source: ntp
+Version: 1:4.0.99g-3
+Replaces: ntp (<< 4.0.98a),xntp,xntp3
+Depends: libc6 (>= 2.2.1-2)
+Suggests: ntp
+Conflicts: ntp (<< 4.0.98a),chrony
+Filename: ./ntpdate_4.0.99g-3_arm.ipk
+Size: 22995
+MD5Sum: 628963690db28b96a036356abcee8860
+Description: The ntpdate client for setting system time from NTP servers.
+ The ntpdate client allows a system's clock to be set to match the time
+ obtained by communicating with one or more servers running the NTP protocol.
+ .
+ The use of ntpdate is optional if you're running the ntp package, it can help
+ a system obtain lock if it starts with a time that's pretty close by using
+ ntpdate before starting the daemon.
+ .
+ The ntpdate client by itself is useful for occasionally setting the time on
+ machines that are not on the net full-time, such as laptops.
+
+Package: pcmcia-cs
+Priority: extra
+Version: 0.0-fam3
+Architecture: arm
+Maintainer: Carl Worth <cworth@handhelds.org>
+Depends: libc6 (>= 2.2.1-2), modutils, psmisc
+Suggests: pcmcia-modules, xlibs (>= 4.0.1-11)
+Filename: ./pcmcia-cs_0.0-fam3_arm.ipk
+Size: 57178
+MD5Sum: 123d19e3199f7598e6517efe6e2a2080
+Description: PCMCIA Card Services for Linux.
+ NOTE: I couldn't find this package in Debian/arm so I just grabbed
+ the control file from my Debian/i386 and combined it with the
+ pcmcia-cs bits from familiar v0.4 bleeding. A better solution would
+ be to rebuild the real .deb from the pcmcia-cs source.
+ .
+ PCMCIA cards are commonly used in laptops to provide expanded
+ capabilities, such as modems, increased memory, etc.  Some desktop PCs
+ can accept PCMCIA cards as well, although this is rare.
+ .
+ Card Services for Linux is a complete PCMCIA support package.  It
+ includes a set of client drivers for specific cards, and a card
+ manager daemon that can respond to card insertion and removal events,
+ loading and unloading drivers on demand.  It supports ``hot swapping''
+ of PCMCIA cards, so cards can be inserted and ejected at any time.
+ .
+ The actual kernel modules required for this package are contained in
+ the pcmcia-modules-<kernel version> package, where <kernel version> is
+ the version of the kernel for which the modules have been compiled.
+
+Package: pcmcia-modules-2.4.3-rmk2-np1
+Priority: extra
+Maintainer: Alexander Guy <a7r@andern.org>
+Depends: kernel-modules-2.4.3-rmk2-np1, pcmcia-cs
+Version: fam3
+Architecture: arm
+Filename: ./pcmcia-modules-2.4.3-rmk2-np1_fam3_arm.ipk
+Size: 111546
+MD5Sum: 95da695ec0792cdb70b86aaf5eb48e7c
+Description: PCMCIA kernel modules
+ The full collection of PCMCIA kernel modules from pcmcia-cs. Install
+ this if you will be plugging any Compact Flash or PCMCIA cards into
+ your computer.
+ .
+ We may want to split these up into many fine-grained packages.
+
+Package: ppp
+Priority: standard
+Section: base
+Installed-Size: 764
+Debian-Maintainer: Michael Beattie <mjb@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Version: 2.4.0f-1
+Replaces: ppp-pam
+Depends: libc6 (>= 2.1.2), libpam0g, libpam-modules, netbase, sysvinit (>= 2.75-4)
+Suggests: debconf
+Conflicts: ppp-pam
+Filename: ./ppp_2.4.0f-1_arm.ipk
+Size: 96430
+MD5Sum: 2bd0da8e83b6d609a4a5dc498564ce06
+Description: Point-to-Point Protocol (PPP) daemon.
+ The Point-to-Point Protocol (PPP) provides a standard way to transmit
+ datagrams over a serial link, as well as a standard way for the machines
+ at either end of the link (the "peers") to negotiate various optional
+ characteristics of the link.  Using PPP, a serial link can be used to
+ transmit Internet Protocol (IP) datagrams, allowing TCP/IP connections
+ between the peers.
+ .
+ This package contains pppd with PAM support built-in, so `ppp-pam'
+ package is obsolete.
+
+Package: procps
+Priority: required
+Section: base
+Installed-Size: 484
+Debian-Maintainer: Craig Small <csmall@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Version: 1:2.0.7-4
+Replaces: watch, bsdutils (<< 2.9x-1)
+Provides: watch
+Depends: libc6 (>= 2.2.1-2), libncurses5
+Recommends: psmisc
+Conflicts: watch, libproc-dev (<< 1:1.2.6-2), w-bassman (<< 1.0-3), procps-nonfree, pgrep (<< 3.3-5)
+Filename: ./procps_2.0.7-4_arm.ipk
+Size: 46669
+MD5Sum: 374592eb63c1100ebded8c4129954cc3
+Description: The /proc file system utilities.
+ These are utilities to browse the /proc filesystem, which is not a real file
+ system but a way for the kernel to provide information about the status of
+ entries in its process table. (e.g. running, stopped or "zombie")
+ Both command line and full screen utilities are provided. Ncurses is needed
+ for the full screen utilities.
+
+Package: pump
+Priority: optional
+Section: base
+Installed-Size: 144
+Debian-Maintainer: Steve Dunham <dunham@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Version: 0.8.3-3
+Replaces: pump-udeb
+Depends: libc6 (>= 2.1.97)
+Conflicts: dhcpcd, dhcpcd-sv, pump-udeb
+Filename: ./pump_0.8.3-3_arm.ipk
+Size: 25830
+MD5Sum: 1f0b17323498f46c111531b03df1153d
+Description: Simple DHCP/BOOTP client.
+ This is the DHCP/BOOTP client written by RedHat.
+
+Package: pyditor
+Priority: optional
+Version: 0.0
+Architecture: arm
+Maintainer: Carl Worth <cworth@handhelds.org>
+Depends: python
+Filename: ./pyditor_0.0_arm.ipk
+Size: 1444
+MD5Sum: c7209f99c5036c9ece32918905086cc5
+Description: python-based text editor
+
+Package: python
+Priority: optional
+Version: 0.0
+Architecture: arm
+Maintainer: Carl Worth <cworth@handhelds.org>
+Depends: libc6, libdb2
+Filename: ./python_0.0_arm.ipk
+Size: 834371
+MD5Sum: 30aaff82d29a7ed787f7d288c8743794
+Description: python of course <needs real description>
+
+Package: qiv
+Priority: extra
+Section: graphics
+Installed-Size: 86
+Debian-Maintainer: Mitch Blevins <mblevin@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Version: 1.6-1
+Depends: gdk-imlib1 (>= 1.9.8.1-2), libc6 (>= 2.1.97), libglib1.2 (>= 1.2.0), libgtk1.2 (>= 1.2.8-3), xlibs (>= 4.0.1-11)
+Filename: ./qiv_1.6-1_arm.ipk
+Size: 15767
+MD5Sum: 877b1dc63c32b1f468a20a7ade4818f5
+Description: a quick image viewer for X
+ Quick Image Viewer (qiv) is a very small and pretty fast GDK/Imlib
+ image viewer.  Features include zoom, maxpect, scale down, fullscreen,
+ brightness/contrast/gamma correction, slideshow, flip,
+ horizontal/vertical, rotate left/right, delete (move to .qiv-trash/),
+ jump to image x, jump forward/backward x images, filename filter and
+ you can use qiv to set your X11-Desktop background.
+
+Package: reiserfs-module
+Priority: optional
+Section: kernel
+Installed-Size: 249337
+Debian-Maintainer: Nicolás Lichtmaier <nick@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Version: 2.4.3-rmk2-np1
+Depends: kernel (= 2.4.3-rmk2-np1)
+Filename: ./reiserfs-module_2.4.3-rmk2-np1_arm.ipk
+Size: 106059
+MD5Sum: f1975bedcc503d1ee66a9e627350b813
+Description: Reiserfs is a journaling filesystem. This is the kernel module for it. 
+
+Package: rsync
+Priority: optional
+Section: net
+Installed-Size: 280
+Debian-Maintainer: Philip Hands <phil@hands.com>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Version: 2.4.6-1
+Depends: libc6 (>= 2.1.2)
+Suggests: ssh
+Filename: ./rsync_2.4.6-1_arm.ipk
+Size: 74003
+MD5Sum: ce2d8f8672994f93bb03c38919fdb504
+Description: fast remote file copy program (like rcp)
+ rsync is a program that allows files to be copied to and from remote
+ machines in much the same way as rcp.  It has many more options than
+ rcp, and  uses the  rsync remote-update protocol to greatly speedup
+ file transfers when the destination file already exists.
+ .
+ The rsync remote-update protocol allows rsync to transfer just the
+ differences between two sets of files across the network link.
+
+Package: rxvt
+Priority: optional
+Section: x11
+Installed-Size: 580
+Debian-Maintainer: Brian Mays <brian@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Version: 1:2.6.3-8-fam1
+Provides: x-terminal-emulator
+Depends: libc6 (>= 2.1.97), xlibs (>= 4.0.1-11), base-passwd (>= 2.0.3.4)
+Conflicts: suidmanager (<< 0.50)
+Filename: ./rxvt_2.6.3-8-fam1_arm.ipk
+Size: 40759
+MD5Sum: e514f9093a45e8a95db37123a193b974
+Description: VT102 terminal emulator for the X Window System
+ Rxvt is an 8-bit clean, color xterm replacement that uses significantly
+ less memory than a conventional xterm, mostly since it doesn't support
+ toolkit configurability or Tek graphics, but also since features can
+ be removed at compile-time to reflect your needs.
+ .
+ The distribution also includes rclock, the smaller/better xclock
+ replacement with appointment scheduling and xbiff functionality.
+
+Package: rxvt-aa
+Priority: optional
+Section: x11
+Installed-Size: 580
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Version: 1:2.6.3-8
+Provides: x-terminal-emulator
+Depends: libc6 (>= 2.1.97), xlibs (>= 4.0.1-11), base-passwd (>= 2.0.3.4), libxft, libxrender
+Conflicts: suidmanager (<< 0.50)
+Filename: ./rxvt-aa_2.6.3-8_arm.ipk
+Size: 42018
+MD5Sum: c042c85c082d043aa5a58d4c62c67b70
+Description: rxvt with support for anti-aliased fonts
+ This package proves an rxvt terminal with support for anti-aliased fonts.
+ .
+ Rxvt is an 8-bit clean, color xterm replacement that uses significantly
+ less memory than a conventional xterm, mostly since it doesn't support
+ toolkit configurability or Tek graphics, but also since features can
+ be removed at compile-time to reflect your needs.
+ .
+ The distribution also includes rclock, the smaller/better xclock
+ replacement with appointment scheduling and xbiff functionality.
+
+Package: screen
+Priority: optional
+Version: 3.9.8
+Architecture: arm
+Maintainer: Brian Kearns <bdkearns@bdkearns.net>
+Depends: ncurses-base, libncurses5, libc6
+Filename: ./screen_3.9.8_arm.ipk
+Size: 134749
+MD5Sum: 80b9bb7de6b30ecdeadc04f0bcda875a
+Description: Console manager
+
+Package: script-test
+Priority: optional
+Version: 0.0
+Architecture: all
+Maintainer: Carl Worth <cworth@handhelds.org>
+Depends:
+Filename: ./script-test_0.0_all.ipk
+Size: 820
+MD5Sum: ea6b272ff25bb69482a9907492b316a0
+Description: Empty test for ipkg script support
+
+Package: sed
+Priority: required
+Section: base
+Installed-Size: 180
+Debian-Maintainer: Wichert Akkerman <wakkerma@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Version: 3.02-6
+Pre-Depends: libc6 (>= 2.1.2)
+Filename: ./sed_3.02-6_arm.ipk
+Size: 12338
+MD5Sum: c893daf6fef70813b566db8ed8c06950
+Description: The GNU sed stream editor.
+ sed reads the specified files or the standard input if no
+ files are specified, makes editing changes according to a
+ list of commands, and writes the results to the standard
+ output.
+
+Package: shellutils
+Essential: yes
+Priority: required
+Section: base
+Installed-Size: 2152
+Debian-Maintainer: Michael Stone <mstone@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Version: 2.0.11-5
+Replaces: bsdutils (<= 3.0-2), util-linux (<< 2.9e-0.1)
+Pre-Depends: libc6 (>= 2.2.1-2), login | hurd
+Conflicts: login (<< 19990827-1)
+Filename: ./shellutils_2.0.11-5_arm.ipk
+Size: 123564
+MD5Sum: a9a70a1fd2e2057ed43e5a069d521d0d
+Description: The GNU shell programming utilities.
+ The utilities: basename chroot date dirname echo env expr factor false groups
+ hostid id logname nice nohup pathchk pinky printenv printf pwd seq sleep stty
+ tee test true tty uname users who whoami yes.
+
+Package: slang1
+Priority: optional
+Section: libs
+Installed-Size: 456
+Debian-Maintainer: Jim Mintha <jmintha@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Source: slang
+Version: 1.4.4-1
+Depends: libc6 (>= 2.2.1-2)
+Filename: ./slang1_1.4.4-1_arm.ipk
+Size: 159766
+MD5Sum: 775f054fdda315ef73afc9399612a7ad
+Description: The S-Lang programming library - runtime version.
+ S-Lang is a C programmer's library that includes routines for the rapid
+ development of sophisticated, user friendly, multi-platform applications.
+ .
+ This package contains only the shared library libslang.so.* and copyright
+ information. It is only necessary for programs that use this library (such
+ as jed and slrn). If you plan on doing development with S-Lang, you will
+ need the companion -dev package as well.
+
+
+Package: ssh
+Priority: optional
+Section: non-US
+Installed-Size: 1020
+Debian-Maintainer: Philip Hands <phil@hands.com>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Source: openssh
+Version: 1:2.5.2p2-2
+Depends: libc6 (>= 2.2.1-2), libpam0g (>= 0.72-1), libssl0.9.6, libwrap0, zlib1g (>= 1:1.1.3), libpam-modules (>= 0.72-9), libwrap0 (>= 7.6-1.1)
+Suggests: ssh-askpass, debconf, xbase-clients, dpkg (>= 1.8.3.1)
+Conflicts: ssh-nonfree, ssh-socks, ssh2, debconf (<< 0.2.17), debconf-tiny (<< 0.2.17), sftp, rsh-client (<< 0.16.1-1)
+Filename: ./ssh_2.5.2p2-2_arm.ipk
+Size: 210692
+MD5Sum: 1fe9ccb1693d36d4388758f73f041d9b
+Description: Secure rlogin/rsh/rcp replacement (OpenSSH)
+ OpenSSH is derived from OpenBSD's version of ssh, which was in turn
+ derived from ssh code from before the time when ssh's license was
+ changed to be non-free.
+ Ssh (Secure Shell) is a program for logging into a remote machine
+ and for executing commands on a remote machine.
+ It provides secure encrypted communications between two untrusted
+ hosts over an insecure network.  X11 connections and arbitrary TCP/IP
+ ports can also be forwarded over the secure channel.
+ It is intended as a replacement for rlogin, rsh and rcp, and can be
+ used to provide rdist, and rsync with a secure communication channel.
+ .
+ --------------------------------------------------------------------
+ .
+ This software may be freely imported into the United States; however,
+ the United States Government may consider re-exporting it a criminal
+ offense.  Thus, if you are outside the US, please retrieve this
+ software from outside the US.
+ In some countries, particularly Russia, Iraq, Pakistan, and France, it
+ may be illegal to use any encryption at all without a special permit.
+
+Package: stowaway-h3600
+Priority: optional
+Version: 1.0
+Architecture: arm
+Maintainer: Carl Worth <cworth@handhelds.org>
+Depends: libc6
+Filename: ./stowaway-h3600_1.0_arm.ipk
+Size: 15470
+MD5Sum: 67c0f14bf6a5e523ed7a95b6fca02a79
+Description: Support for the iPAQ H3600 series Stowaway keyboard
+
+Package: sysset
+Priority: optional
+Version: 0.0
+Architecture: arm
+Maintainer: Carl Worth <cworth@handhelds.org>
+Depends: python
+Filename: ./sysset_0.0_arm.ipk
+Size: 2878
+MD5Sum: 5124d246b5b7da481874f97fb86c859f
+Description: python utility for configuring system settings
+
+Package: sysvinit
+Essential: yes
+Priority: required
+Section: base
+Installed-Size: 207
+Debian-Maintainer: Miquel van Smoorenburg <miquels@cistron.nl>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Version: 2.78-4
+Replaces: last, bsdutils (<=2.0-2)
+Depends: dpkg (>= 1.4.0.21), mount (>= 2.7i-1), util-linux (>= 2.9t-2), e2fsprogs (>= 1.15-1)
+Pre-Depends: libc6 (>= 2.1.2)
+Conflicts: last, file-rc (<= 0.4.2), kbd (<< 0.95-2), mdutils (<< 0.35-9)
+Filename: ./sysvinit_2.78-4_arm.ipk
+Size: 43771
+MD5Sum: ebf719f849e02d9bdfd66f54e129398e
+Description: System-V like init.
+ Init is the first program to run after your system is booted, and
+ continues to run as process number 1 until your system halts. Init's
+ job is to start other programs that are essential to the operation of
+ your system. All processes are descended from init. For more information,
+ see the manual page init(8).
+
+Package: tar
+Essential: yes
+Priority: required
+Section: base
+Installed-Size: 1064
+Debian-Maintainer: Bdale Garbee <bdale@gag.com>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Version: 1.13.19-1
+Pre-Depends: libc6 (>= 2.1.97)
+Suggests: bzip2
+Filename: ./tar_1.13.19-1_arm.ipk
+Size: 67084
+MD5Sum: 4f93d22d8645b86b6fb49c375254045e
+Description: GNU tar
+ Tar is a program for packaging a set of files as a single archive in tar
+ format.  The function it performs is conceptually similar to cpio, and to
+ things like pkzip in the DOS world.  It is heavily used by the Debian package
+ management system, and is useful for performing system backups and exchanging
+ sets of files with others.
+
+Package: task-bootstrap
+Priority: optional
+Version: 0.6
+Architecture: arm
+Maintainer: Alexander Guy <a7r@handhelds.org>
+Depends: ssh, ppp, pcmcia-modules-2.4.3-rmk2-np1, wireless-tools, pump
+Filename: ./task-bootstrap_0.6_arm.ipk
+Size: 693
+MD5Sum: 1dc75245df83987c0cb26f1953d2e9ec
+Description: Everything you might need to bootstrap a minimal ipkg system.
+
+Package: task-familiar-complete
+Priority: optional
+Version: 0.5
+Architecture: arm
+Maintainer: Carl Worth <cworth@handhelds.org>
+Depends: apmd, checkers, cpu-scale-2.4.3-rmk2-np1, dosfstools, fscrib, h3600-utils, libglade0, libpopt0, libxaw6, libxml1, libxmltok1, loadmeter, ncurses-base, netcat, ntpdate, pcmcia-modules-2.4.3-rmk2-np1, procps, ppp, pump, pyditor, qiv, rsync, ssh, sysset, xvkbd, task-mp3-player, task-games, task-wireless, task-x
+Filename: ./task-familiar-complete_0.5_arm.ipk
+Size: 808
+MD5Sum: f117049d5863f2e70d9903f9bc83475e
+Description: Task package for a complete familiar system
+
+Package: task-games
+Priority: optional
+Version: 0.0
+Architecture: arm
+Maintainer: Carl Worth <cworth@handhelds.org>
+Depends: checkers
+Filename: ./task-games_0.0_arm.ipk
+Size: 994
+MD5Sum: 48f5a22131a2f4aada009620b1242438
+Description: Task package for a complete familiar system
+
+Package: task-mp3-player
+Priority: optional
+Version: 0.0
+Architecture: arm
+Maintainer: Carl Worth <cworth@handhelds.org>
+Depends: madplay, mixer
+Filename: ./task-mp3-player_0.0_arm.ipk
+Size: 667
+MD5Sum: aa5f5c85ccb22af9c4f6f677522df9e7
+Description: Task package for a complete familiar system
+
+Package: task-wireless
+Priority: optional
+Version: 0.1
+Architecture: arm
+Maintainer: Carl Worth <cworth@handhelds.org>
+Depends: wireless-tools, pcmcia-modules-2.4.3-rmk2-np1
+Filename: ./task-wireless_0.1_arm.ipk
+Size: 639
+MD5Sum: 988d6d2960bf165b5ed324dbfb85d674
+Description: Task package for wireless networking
+
+Package: task-x
+Priority: optional
+Version: 0.0
+Architecture: arm
+Maintainer: Carl Worth <cworth@handhelds.org>
+Depends: xserver-tiny-h3600, xbase-clients, xfonts-base, xfonts-75dpi, xfonts-ttf, blackbox, rxvt-aa, xcalibrate
+Filename: ./task-x_0.0_arm.ipk
+Size: 739
+MD5Sum: 78d7c74c9fdac90f3b58fba7231a4ff8
+Description: Task package for a basic X system
+
+Package: textutils
+Essential: yes
+Priority: required
+Section: base
+Installed-Size: 1550
+Debian-Maintainer: Herbert Xu <herbert@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Version: 2.0-3
+Replaces: bsdmainutils (<= 4.5.2), ptx
+Provides: ptx
+Pre-Depends: libc6 (>= 2.1.2)
+Conflicts: ptx
+Filename: ./textutils_2.0-3_arm.ipk
+Size: 156555
+MD5Sum: fbdac4eb344aea6287461bc8dc613add
+Description: The GNU text file processing utilities.
+ The utilities: cat cksum comm csplit cut expand fmt fold head join md5sum
+ nl od paste pr ptx sort split sum tac tail tr tsort unexpand uniq wc.
+
+Package: urlget
+Priority: optional
+Version: 0.3
+Architecture: arm
+Maintainer: Carl Worth <cworth@handhelds.org>
+Depends: libc6, netbase
+Filename: ./urlget_0.3_arm.ipk
+Size: 2613
+MD5Sum: 271ae2fbfd1e691d2b19d24ba1c01648
+Description: Tiny package for retrieving files via HTTP
+
+Package: util-linux
+Essential: yes
+Priority: required
+Section: base
+Installed-Size: 840
+Debian-Maintainer: Adrian Bunk <bunk@fs.tum.de>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Version: 2.11b-2-fam2
+Replaces: miscutils, setterm, getty, fdisk
+Pre-Depends: libc6 (>= 2.2.1-2), libncurses5 (>= 5.2.20010310-1) 
+Recommends: util-linux-locales
+Suggests: kbd | console-tools
+Conflicts: setterm, getty, fdisk, kbd (<< 1.05-3), console-tools (<< 1:0.2.3-21)
+Filename: ./util-linux_2.11b-2-fam2_arm.ipk
+Size: 9771
+MD5Sum: e1abcd568a156976ac95eff239dbb091
+Description: Miscellaneous system utilities.
+ A mixed bag of system utilities: arch chkdupexe cfdisk cytune dmesg
+ fdisk fsck.minix getty getopt hwclock ipcrm ipcs mcookie mkfs mkfs.minix
+ mkswap more namei pivot_root raw rdev setterm setsid tunelp whereis.
+
+Package: wget
+Priority: optional
+Section: web
+Installed-Size: 1272
+Debian-Maintainer: Nicolás Lichtmaier <nick@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Version: 1.6-2
+Depends: libc6 (>= 2.2.1-2), netbase
+Filename: ./wget_1.6-2_arm.ipk
+Size: 62824
+MD5Sum: bbc13feb01f63a86cb6a542bf629cc77
+Description: utility to retrieve files from the WWW via HTTP and FTP
+ Wget [formerly known as Geturl] is a freely available network utility
+ to retrieve files from the World Wide Web using HTTP and FTP, the two
+ most widely used Internet protocols.  It works non-interactively, thus
+ enabling work in the background, after having logged off.
+ .
+ The recursive retrieval of HTML pages, as well as FTP sites is
+ supported -- you can use Wget to make mirrors of archives and home
+ pages, or traverse the web like a WWW robot (Wget understands
+ /robots.txt).
+
+Package: wireless-tools
+Priority: optional
+Section: net
+Installed-Size: 120
+Debian-Maintainer: Björn Andersson <bjorn@lifix.fi>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Version: 20-1.1
+Depends: libc6 (>= 2.2.1-2)
+Filename: ./wireless-tools_20-1.1_arm.ipk
+Size: 17032
+MD5Sum: 695142d573351ca6e8ddffcfc77fa195
+Description: Tools for manipulating Linux Wireless Extensions
+ This package contains the Wireless tools, used to manipulate
+ the Linux Wireless Extensions. The Wireless Extension is an interface
+ allowing you to set Wireless LAN specific parameters and get the
+ specific stats.
+ .
+ The tools in this package only work with kernel versions 2.2.14
+ and above, and 2.3.24 and above.
+
+Package: xbase-clients
+Priority: optional
+Section: x11
+Installed-Size: 3916
+Debian-Maintainer: Branden Robinson <branden@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Source: xfree86
+Version: 4.0.2-13
+Replaces: xbase (<< 3.3.2.3a-2), xf86setup (<< 3.3.2.3a-9), xserver-common (<< 4.0), xmodmap, xcontrib, xpm4g-dev, xpm-bin, xsm
+Provides: xmodmap, xcontrib, xpm-bin, xsm
+Depends: debconf (>= 0.3.83), cpp, libc6 (>= 2.2.1-2), libfreetype6, libgl1, libncurses5 (>= 5.2.20010310-1), libxaw7 (>= 4.0.1-1), xlibs (>= 4.0.1-11)
+Conflicts: xbase (<< 3.3.2.3a-2), xserver-common (<< 3.3.2.3a-9), xmodmap, xaw-wrappers (<< 0.90), xfonts-100dpi (<< 3.3.3.1-3), xfonts-75dpi (<< 3.3.3.1-3), xfonts-base (<< 3.3.3.1-3), xfonts-cyrillic (<< 3.3.3.1-3), xfonts-scalable (<< 3.3.3.1-3), xfnt100 (<= 3.3.2.3a-1), xfnt75 (<= 3.3.2.3a-1), xfntbase (<= 3.3.2.3a-1), xfntcyr (<= 3.3.2.3a-1), xfntscl (<= 3.3.2.3a-1), xdm (<< 4.0), xsm, xcontrib, xpm4g-dev, xpm-bin
+Filename: ./xbase-clients_4.0.2-13_arm.ipk
+Size: 205512
+MD5Sum: 60ff8d6dfa873abf4c0d611fff7d268c
+Description: miscellaneous X clients
+ An X client is a program that interfaces with an X server (almost always
+ via the X libraries), and thus with some input and output hardware like a
+ graphics card, monitor, keyboard, and pointing device (such as a mouse).
+ .
+ This package provides a miscellaneous assortment of several dozen X
+ clients that ship with the X Window System, including:
+  - startx and xinit, which initialize X sessions from the command line;
+  - xauth, a tool for controlling access to the X session;
+  - xedit, a text editor;
+  - xbiff, a tool which tells you when you have new email;
+  - xcalc, a scientific calculator desktop accessory;
+  - xclipboard, a tool to manage cut-and-pasted text selections;
+  - xcutsel, which exchanges selection and cut buffer contents;
+  - xconsole, which monitors system console messages;
+  - xditview, a viewer for ditroff output;
+  - xeyes, a demo program in which a pair of eyes track the pointer;
+  - xfd, a tool that displays all the glyphs in a given X font;
+  - xfontsel, a tool for browsing and selecting X fonts;
+  - xhost, a very dangerous program that you should never use;
+  - xkill, a tool for terminating misbehaving X clients;
+  - xload, a monitor for the system load average;
+  - xlogo, a demo program that displays the X logo;
+  - xmag, which magnifies parts of the X screen;
+  - xman, a manual page browser;
+  - xmessage, a tool to display message or dialog boxes;
+  - xrefresh, a tool that forces a redraw of the X screen;
+  - xsetroot, a tool for tailoring the appearance of the root window;
+  - xvidtune, a tool for customizing X server modelines for your monitor;
+  - xwd, a utility for taking window dumps ("screenshots") of the X session;
+  - xwud, a viewer for window dumps created by xwd;
+  - oclock and xclock, graphical clocks;
+  - beforelight, a screen saver;
+  - bitmap, a monochrome bitmap file editor;
+  - bmtoa, a tool that converts a monochrome bitmap to ASCII text;
+  - cxpm and sxpm, tools for checking and viewing X pixmap files;
+  - iceauth, a tool for manipulating ICE protocol authorization records;
+  - xset, a tool for setting miscellaneous X server parameters;
+  - xmodmap, a utility for modifying keymaps and pointer button mappings in X;
+  - xsetmode and xsetpointer, tools for handling X Input devices;
+  - setxkbmap, xkbbell, xkbcomp, xkbevd, xkbprint, xkbvleds, and xkbwatch,
+    tools for managing the X keyboard extension (XKB);
+  - xsm, a session manager for X sessions;
+  - smproxy, a session manager proxy for X clients that do not use the X
+    session manager protocol;
+  - xgamma, a tool for querying and setting a monitor's gamma correction;
+  - appres, editres, listres, viewres, and xrdb, which query and update the
+    X resource database;
+  - Xmark, x11perf, x11perfcomp, and xieperf, tools for benchmarking
+    graphical operations under the X Window System;
+  - fstobdf, which retrieves a font in BDF format from an X font server;
+  - xcmsdb, a device color characteristic utility for the X Color Management
+    System;
+  - xstdcmap, a utility to selectively define standard colormap properties;
+  - xev, an X event displayer;
+  - xfindproxy, a tool to locate X proxy services;
+  - xlsatoms, which lists interned atoms defined on an X server;
+  - xlsclients, which lists client applications running on an X display;
+  - xlsfonts, a server font list displayer;
+  - xprop, a property displayer for X;
+  - xdpyinfo, a display information utility for X;
+  - xwininfo, a window information utility for X;
+  - glxinfo, a GLX extension information utility for X;
+  - xvinfo, an Xv extension information utility for X;
+  - ico, an X graphics demo using an animated polyhedron;
+  - dga, a demo program for the DGA extension; and
+  - xgc, an (unfinished) X graphics demo program.
+
+Package: xcalibrate
+Priority: optional
+Version: 0.0
+Architecture: arm
+Maintainer: Carl Worth <cworth@handhelds.org>
+Depends: libc6, xlibs
+Filename: ./xcalibrate_0.0_arm.ipk
+Size: 6641
+MD5Sum: 1ff1b7f86d9ee3c4f9d261d6c69059be
+Description: calibrate the iPAQ H3600 touch screen for X
+
+Package: xfonts-75dpi
+Priority: optional
+Section: x11
+Installed-Size: 2912
+Debian-Maintainer: Branden Robinson <branden@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: all
+Source: xfree86
+Version: 4.0.2-13
+Replaces: xfnt75
+Provides: xfnt75
+Depends: xutils
+Suggests: xfs | xserver
+Conflicts: xfnt75, xbase-clients (<< 4.0)
+Filename: ./xfonts-75dpi_4.0.2-13_all.ipk
+Size: 173134
+MD5Sum: b99622fecd62b08624fd4c0977b61cfd
+Description: 75 dpi fonts for X
+ xfonts-75dpi provides a set of bitmapped fonts at 75 dots per inch.  In most
+ cases it is desirable to have the X font server (xfs) and/or an X server
+ installed to make the fonts available to X clients.
+ .
+ This package and xfonts-100dpi provide the same set of fonts, rendered at
+ different resolutions; only one or the other is necessary, but both may be
+ installed.  xfonts-75dpi may be more suitable for small monitors and/or small
+ screen resolutions (under 1024x768).
+ .
+ This package requires the xutils package to prepare the font directories
+ for use by an X server or X font server.
+
+Package: xfonts-base
+Priority: optional
+Section: x11
+Installed-Size: 7724
+Debian-Maintainer: Branden Robinson <branden@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: all
+Source: xfree86
+Version: 4.0.2-13
+Replaces: xfntbase, xfonts-cjk
+Provides: xfntbase, xfonts-cjk
+Depends: xutils
+Suggests: xfs, xserver
+Conflicts: xfntbase, xfonts-cjk, xbase-clients (<< 4.0)
+Filename: ./xfonts-base_4.0.2-13_all.ipk
+Size: 24879
+MD5Sum: 26837af24947d47947962450480e9258
+Description: standard fonts for X
+ xfonts-base provides a standard set of low-resolution bitmapped fonts.  In
+ most cases it is desirable to have the X font server (xfs) and/or an X server
+ installed to make the fonts available to X clients.
+ .
+ If you are not using a remote font server, you must install this package if
+ you are installing an X server.  It contains fonts without which X servers
+ will not work.
+ .
+ This package also provides a set of files that can be used by the X or
+ fonts server to transcode fonts from one encoding to another (e.g., KOI8-R
+ to ISO-8859-5).
+ .
+ This package requires the xutils package to prepare the font directories
+ for use by an X server or X font server.
+
+Package: xfonts-ttf
+Priority: optional
+Version: 0.0
+Architecture: all
+Maintainer: Carl Worth <cworth@handhelds.org>
+Depends: xutils
+Filename: ./xfonts-ttf_0.0_all.ipk
+Size: 15567
+MD5Sum: ec6912955eda9edf873f892677fae523
+Description: free TrueType fonts to be used within X
+
+Package: xlibs
+Priority: optional
+Section: libs
+Installed-Size: 4306
+Debian-Maintainer: Branden Robinson <branden@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Source: xfree86
+Version: 4.0.2-13
+Replaces: xlib, xbase (<< 3.3.2.3a-2), xlib6 (<< 3.3.2.3-2), xbase-clients (<< 4.0), xlib6g (<< 4.0), xlib6g-dev (<< 4.0), xpm4g, fvwm-common, xcontrib
+Provides: libxpm4
+Depends: xfree86-common (>> 4.0), libc6 (>= 2.2.1-2), xlibs (>= 4.0.1-11)
+Conflicts: xlib, xlib6 (<< 3.3.2.3-2), xlib6g (<< 4.0), xlib6g-dev (<< 4.0), xbase-clients (<< 4.0), xpm4g
+Filename: ./xlibs_4.0.2-13_arm.ipk
+Size: 820973
+MD5Sum: ad9b6742385277d8cf63cfcdde41d4dc
+Description: X Window System client libraries
+ NOTE: I really want to break this package up into lots of little
+ packages for familiar, (mainly so we can dump things like Xt if no
+ binaries depend on them). - Carl Worth <cworth@handhelds.org>
+ .
+ The X libraries are an interface between X client programs and the
+ hardware-oriented X servers, and consist of routines to read input from the
+ keyboard and pointer, draw on the screen, etc., in an abstract manner that is
+ independent of the particular characteristics of the hardware.  The X
+ libraries, and the programs that use them, communicate with X servers by
+ means of the X protocol.
+ .
+ libX11 (a.k.a. Xlib) provides the low-level functionality, dealing mostly
+ with the wire protocol and in terms of basic operations such as opening and
+ closing the X protocol connection, creating graphics contexts, drawing
+ graphics primitives such as lines, arcs, and glyphs, handling events, and so
+ forth.
+ .
+ libXpm, the X pixmap library, is a set of routines used to store and retrieve
+ X pixmaps (a data structure comprising a rectangular array of pixels) from
+ files; the xpm file format is an extension of the monochrome bitmap file
+ format in the X11 specification.  (Traditionally, libXpm was maintained and
+ distributed separately from the X Window System, but XFree86 has absorbed
+ this library).
+ .
+ libXt, the X Toolkit Instrinsics, is an abstract widget library upon which
+ graphical widget libraries (such as Athena and LessTif) may be developed; the
+ Intrinsics provide a number of useful interfaces to X conventions and
+ protocols, in many cases reducing a long series of Xlib calls to just a
+ couple of Xt calls.
+ .
+ libXmu is a set of miscellaneous utility functions useful to client
+ programmers.
+ .
+ The remainder of the libraries in this package implement the client side
+ of various X protocol extensions:
+  - libICE, the Inter-Client Exchange extension;
+  - libPEX5, PEX, a 3D graphics extension now superseded by Mesa/OpenGL;
+  - libSM, the Session Management extension;
+  - libXIE, the X Image Extension;
+  - libXext, a collection of several commonly-used extensions;
+  - libXi, the X Input extension;
+  - libXp, the X Printing extension; and
+  - libXtst, the X Testing extension.
+ .
+ xlibs also contains the XKB keyboard parameter files, locale data, and a set
+ of bitmap and pixmap image files commonly used by X clients.
+
+Package: xserver-tiny-h3600
+Priority: optional
+Version: 0.2
+Architecture: arm
+Maintainer: Alexander Guy <a7r@handhelds.org>
+Depends: libc6, zlib1g, h3600-utils
+Filename: ./xserver-tiny-h3600_0.2_arm.ipk
+Size: 405916
+MD5Sum: dbbc661d81cec5a8ac402ebbfd682c4d
+Description: X server for the iPAQ H3600 display and touchscreen.
+
+Package: xvkbd
+Priority: optional
+Version: 0.0
+Architecture: arm
+Maintainer: Carl Worth <cworth@handhelds.org>
+Depends: libc6, xlibs, libxaw6
+Filename: ./xvkbd_0.0_arm.ipk
+Size: 13591
+MD5Sum: 45cd39eebf02283965268bbba5436528
+Description: On-screen virtual keyboard for X
+
+Package: zlib1g
+Priority: standard
+Section: libs
+Installed-Size: 144
+Debian-Maintainer: Mark Brown <broonie@debian.org>
+Maintainer: Carl Worth <cworth@handhelds.org>
+Architecture: arm
+Source: zlib
+Version: 1:1.1.3-14
+Provides: libz1
+Depends: libc6 (>= 2.2.1-2)
+Conflicts: zlib1 (<= 1:1.0.4-7)
+Filename: ./zlib1g_1.1.3-14_arm.ipk
+Size: 28970
+MD5Sum: c7f98957d73220efb3e39ec75ac09c23
+Description: compression library - runtime
+ zlib is a library implementing the deflate compression method found
+ in gzip and pkzip.  This package includes the shared library.
+

@@ -1,0 +1,10 @@
+TEMPLATE	= app
+CONFIG		+= qt warn_on release
+DESTDIR		= ../../bin
+HEADERS		= soundsettings.h
+SOURCES		= soundsettings.cpp main.cpp
+INTERFACES	= soundsettingsbase.ui
+INCLUDEPATH += $(QPEDIR)/include
+DEPENDPATH	+= ../$(QPEDIR)/include
+LIBS            += -lqpe
+TARGET		= sound

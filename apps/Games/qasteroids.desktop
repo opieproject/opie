@@ -1,0 +1,8 @@
+[Desktop Entry]
+Comment=Shoot the rocks
+Exec=qasteroids
+Icon=Asteroids
+Type=Application
+Name=Asteroids
+Name[hu]=Asteroids
+Name[de]=Asteroiden

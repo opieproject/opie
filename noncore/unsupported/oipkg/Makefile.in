@@ -1,0 +1,203 @@
+#############################################################################
+
+####### Compiler, tools and options
+
+CXX	=	$(SYSCONF_CXX) $(QT_CXX_MT)
+CXXFLAGS=	$(SYSCONF_CXXFLAGS_QT) $(SYSCONF_CXXFLAGS)
+CC	=	$(SYSCONF_CC) $(QT_C_MT)
+CFLAGS	=	$(SYSCONF_CFLAGS)
+INCPATH =	-I$(QPEDIR)/include
+LFLAGS	=	$(SYSCONF_LFLAGS_QT) $(SYSCONF_RPATH_QT) $(SYSCONF_LFLAGS) $(QT_LFLAGS_MT)
+LIBS	=	$(SUBLIBS) -lqpe $(SYSCONF_LIBS_QT) $(SYSCONF_LIBS) $(SYSCONF_LIBS_QTAPP)
+MOC	=	$(SYSCONF_MOC)
+UIC	=	$(SYSCONF_UIC)
+
+####### Target
+
+DESTDIR = $(QPEDIR)/bin/
+VER_MAJ = 1
+VER_MIN = 0
+VER_PATCH = 0
+TARGET	= qipkg
+TARGET1 = lib$(TARGET).so.$(VER_MAJ)
+
+####### Files
+
+HEADERS =	packagemanager.h
+SOURCES =	packagemanager.cpp \
+		main.cpp
+OBJECTS =	packagemanager.o \
+		main.o \
+		packagemanagerbase.o \
+		pkdesc.o \
+		pkfind.o \
+		pksettings.o
+INTERFACES =    packagemanagerbase.ui \
+		pkdesc.ui \
+		pkfind.ui \
+		pksettings.ui
+UICDECLS =      packagemanagerbase.h \
+		pkdesc.h \
+		pkfind.h \
+		pksettings.h
+UICIMPLS =      packagemanagerbase.cpp \
+		pkdesc.cpp \
+		pkfind.cpp \
+		pksettings.cpp
+SRCMOC	=	moc_packagemanager.cpp \
+		moc_packagemanagerbase.cpp \
+		moc_pkdesc.cpp \
+		moc_pkfind.cpp \
+		moc_pksettings.cpp
+OBJMOC	=	moc_packagemanager.o \
+		moc_packagemanagerbase.o \
+		moc_pkdesc.o \
+		moc_pkfind.o \
+		moc_pksettings.o
+
+
+####### Implicit rules
+
+.SUFFIXES: .cpp .cxx .cc .C .c
+
+.cpp.o:
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
+
+.cxx.o:
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
+
+.cc.o:
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
+
+.C.o:
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
+
+.c.o:
+	$(CC) -c $(CFLAGS) $(INCPATH) -o $@ $<
+
+####### Build rules
+
+
+all: $(DESTDIR)$(TARGET)
+
+$(DESTDIR)$(TARGET): $(UICDECLS) $(OBJECTS) $(OBJMOC) $(SUBLIBS)
+	$(SYSCONF_LINK) $(LFLAGS) -o $(DESTDIR)$(TARGET) $(OBJECTS) $(OBJMOC) $(LIBS)
+
+moc: $(SRCMOC)
+
+tmake:
+	tmake qipkg.pro
+
+clean:
+	-rm -f $(OBJECTS) $(OBJMOC) $(SRCMOC) $(UICIMPLS) $(UICDECLS)
+	-rm -f *~ core
+	-rm -f allmoc.cpp
+
+####### Extension Modules
+
+listpromodules:
+	@echo 
+
+listallmodules:
+	@echo 
+
+listaddonpromodules:
+	@echo 
+
+listaddonentmodules:
+	@echo 
+
+
+REQUIRES=
+
+####### Sub-libraries
+
+
+###### Combined headers
+
+
+
+####### Compile
+
+packagemanager.o: packagemanager.cpp \
+		packagemanager.h \
+		packagemanagerbase.h \
+		pkdesc.h \
+		pkfind.h \
+		pksettings.h \
+		$(QPEDIR)/include/qpe/process.h \
+		$(QPEDIR)/include/qpe/resource.h \
+		$(QPEDIR)/include/qpe/stringutil.h \
+		$(QPEDIR)/include/qpe/qpeapplication.h \
+		$(QPEDIR)/include/qpe/qcopenvelope_qws.h \
+		$(QPEDIR)/include/qpe/applnk.h
+
+main.o: main.cpp \
+		packagemanager.h \
+		packagemanagerbase.h \
+		$(QPEDIR)/include/qpe/qpeapplication.h
+
+packagemanagerbase.h: packagemanagerbase.ui
+	$(UIC) packagemanagerbase.ui -o $(INTERFACE_DECL_PATH)/packagemanagerbase.h
+
+packagemanagerbase.cpp: packagemanagerbase.ui
+	$(UIC) packagemanagerbase.ui -i packagemanagerbase.h -o packagemanagerbase.cpp
+
+pkdesc.h: pkdesc.ui
+	$(UIC) pkdesc.ui -o $(INTERFACE_DECL_PATH)/pkdesc.h
+
+pkdesc.cpp: pkdesc.ui
+	$(UIC) pkdesc.ui -i pkdesc.h -o pkdesc.cpp
+
+pkfind.h: pkfind.ui
+	$(UIC) pkfind.ui -o $(INTERFACE_DECL_PATH)/pkfind.h
+
+pkfind.cpp: pkfind.ui
+	$(UIC) pkfind.ui -i pkfind.h -o pkfind.cpp
+
+pksettings.h: pksettings.ui
+	$(UIC) pksettings.ui -o $(INTERFACE_DECL_PATH)/pksettings.h
+
+pksettings.cpp: pksettings.ui
+	$(UIC) pksettings.ui -i pksettings.h -o pksettings.cpp
+
+packagemanagerbase.o: packagemanagerbase.cpp
+
+pkdesc.o: pkdesc.cpp
+
+pkfind.o: pkfind.cpp
+
+pksettings.o: pksettings.cpp
+
+moc_packagemanager.o: moc_packagemanager.cpp \
+		packagemanager.h \
+		packagemanagerbase.h
+
+moc_packagemanagerbase.o: moc_packagemanagerbase.cpp \
+		packagemanagerbase.h
+
+moc_pkdesc.o: moc_pkdesc.cpp \
+		pkdesc.h
+
+moc_pkfind.o: moc_pkfind.cpp \
+		pkfind.h
+
+moc_pksettings.o: moc_pksettings.cpp \
+		pksettings.h
+
+moc_packagemanager.cpp: packagemanager.h
+	$(MOC) packagemanager.h -o moc_packagemanager.cpp
+
+moc_packagemanagerbase.cpp: packagemanagerbase.h
+	$(MOC) packagemanagerbase.h -o moc_packagemanagerbase.cpp
+
+moc_pkdesc.cpp: pkdesc.h
+	$(MOC) pkdesc.h -o moc_pkdesc.cpp
+
+moc_pkfind.cpp: pkfind.h
+	$(MOC) pkfind.h -o moc_pkfind.cpp
+
+moc_pksettings.cpp: pksettings.h
+	$(MOC) pksettings.h -o moc_pksettings.cpp
+
+

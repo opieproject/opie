@@ -1,0 +1,36 @@
+#!/bin/sh
+#
+# Script to add a new class to an existing application
+#
+# Copyright 1999-2000 Trolltech AS.  All rights reserved.
+#
+
+
+# load the helper functions
+. q_functions
+
+
+if [ $# -lt 2 ]
+then
+echo "Usage: q_add_class ExistingAppName NewClassName"
+print_example_usage
+exit
+fi
+
+
+EXISTING_APP_NAME=$1
+NEW_CLASS_NAME=$2
+
+
+NEW_CLASS_NAME_LOWER=`echo $NEW_CLASS_NAME | tr [A-Z] [a-z]`
+NEW_CLASS_HEADER_FILE="$NEW_CLASS_NAME_LOWER".h
+NEW_CLASS_SOURCE_FILE="$NEW_CLASS_NAME_LOWER".cpp
+NEW_CLASS_HEADER_DEFINE=__`echo $NEW_CLASS_NAME | tr [a-z] [A-Z]`_H__
+EXISTING_PRO_FILE="$EXISTING_APP_NAME".pro
+
+
+print_source_file	>> $NEW_CLASS_SOURCE_FILE
+print_header_file	>> $NEW_CLASS_HEADER_FILE
+add_class_to_pro_file	>> $EXISTING_PRO_FILE
+
+

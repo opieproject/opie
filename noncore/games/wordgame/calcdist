@@ -1,0 +1,27 @@
+#!/usr/bin/perl
+
+# Usage:  cat dictionaries | grep -v '[^a-z]' | calcdist n score
+#
+#   Given a lot of words, find an appropriate distribution
+#   into n tiles with tile values proportional to the square root
+#   of the ratio of score to the tile's frequency.
+
+$n = shift;
+$score = shift;
+
+while (<>) {
+    chomp;
+    for $c ( split "", $_ ) {
+	$freq{$c}++;
+	$t++;
+    }
+}
+
+for $c ( sort { $freq{$a} <=> $freq{$b} } keys %freq ) {
+    #print "$c: $freq{$c}\n";
+    $need = int($freq{$c}*$n/$t+0.5) || 1;
+    $value = int(sqrt($score/($freq{$c}*$n/$t))+0.5) || 1;
+    $t -= $freq{$c};
+    $n -= $need;
+    print "$need $c $value\n";
+}

@@ -1,0 +1,102 @@
+#!/bin/sh
+
+USE_MMX=1
+USE_CSS=1
+LESS_OPT=
+PLATFORM_CFLAGS="-malign-loops=2 -malign-jumps=2 -malign-functions=2 -march=i486"
+DEBUG=
+OPTIMIZE=-O2
+OPTIMIZE_less=-O
+DEFINES=
+CC=gcc
+
+for ac_option
+do
+case "$ac_option" in
+	--fixed-point)
+		CC=g++
+		DEFINES="$DEFINES -DUSE_FIXED_POINT"
+		;;
+
+	--lessopt)
+		LESS_OPT=1
+		;;
+
+	--no-mmx)
+		USE_MMX=0
+		;;
+
+	--no-css)
+		USE_CSS=0
+		;;
+
+	--debug)
+		DEBUG=-g
+		;;
+
+	--gcc-prefix=*)
+		CROSS=${ac_option#--gcc-prefix=}
+		PLATFORM_CFLAGS=""
+		;;
+	-h | --help | -help)
+	cat << EOF
+Options:
+	--no-mmx           Compile libmpeg3 with no MMX support.
+	--no-css           Compile libmpeg3 with no CSS support.
+	--fixed-point      Compile libmpeg3 to use integers instead of floats.
+	--debug            Compile libmpeg3 with debug support.
+EOF
+		exit 0
+		;;
+
+	*)
+		;;
+esac
+done
+
+
+echo "Configuring libmpeg3"
+
+cat > global_config << EOF
+# DO NOT EDIT.  EDIT ./configure INSTEAD AND RERUN IT.
+EOF
+
+
+if test -z "$CFLAGS"; then
+	CF="$DEFINES $DEBUG -funroll-loops -fomit-frame-pointer $PLATFORM_CFLAGS"
+	echo >> global_config "CFLAGS = $CF $OPTIMIZE"
+	if test -z "$LESS_OPT"; then
+	    echo >> global_config "CFLAGS_lessopt = $CF $OPTIMIZE_less"
+	else
+	    echo >> global_config "CFLAGS_lessopt = $CF $OPTIMIZE_less"
+	fi
+fi
+
+cat >> global_config << EOF
+CC = ${CROSS}$CC
+AR = ${CROSS}ar
+NASM = nasm
+EOF
+
+if [ ${USE_CSS} = 1 ]; then
+cat >> global_config << EOF
+CFLAGS += -DHAVE_CSS
+EOF
+fi
+
+if [ ${USE_MMX} = 1 ]; then
+cat >> global_config << EOF
+CFLAGS += -DHAVE_MMX
+MMXOBJS = \
+	video/mmxidct.o \
+	video/reconmmx.o
+MMXOBJS2 = \
+	mmxidct.o \
+	reconmmx.o
+EOF
+fi
+
+
+
+
+echo "done"

@@ -1,0 +1,424 @@
+# This is a Qt message file in .po format.  Each msgid starts with
+# a scope.  This scope should *NOT* be translated - eg. translating
+# from French to English, "Foo::Bar" would be translated to "Pub",
+# not "Foo::Pub".
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2001-03-08 11:04:52 EST\n"
+"PO-Revision-Date: YYYY-MM-DD\n"
+"Last-Translator: FULLNAME <EMAIL@ADDRESS>\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+
+#: datebook.cpp:54
+msgid "DateBook::Close"
+msgstr "Lukk"
+
+#: datebook.cpp:34
+msgid "DateBook::Date Book"
+msgstr "Avtalebok"
+
+#: main.cpp:11
+msgid "DateBook::Datebook"
+msgstr "Avtalebok"
+
+#: datebook.cpp:63
+msgid "DateBook::Day"
+msgstr "Dag"
+
+#: datebook.cpp:209
+msgid "DateBook::Edit Event"
+msgstr "Rediger"
+
+#: datebook.cpp:86
+msgid "DateBook::File"
+msgstr "Fil"
+
+#: datebook.cpp:79
+msgid "DateBook::Month"
+msgstr "Måned"
+
+#: datebook.cpp:49
+msgid "DateBook::New"
+msgstr "Ny"
+
+#: datebook.cpp:87
+msgid "DateBook::View"
+msgstr "Vis"
+
+#: datebook.cpp:72
+msgid "DateBook::Week"
+msgstr "Uke"
+
+#: datebookdayheader.cpp:279
+msgid "DateBookDayHeaderBase::"
+msgstr ""
+
+#: datebookdayheader.cpp:258
+msgid "DateBookDayHeaderBase::F"
+msgstr "F"
+
+#: datebookdayheader.cpp:208
+msgid "DateBookDayHeaderBase::Form1"
+msgstr ""
+
+#: datebookdayheader.cpp:261
+msgid "DateBookDayHeaderBase::Friday"
+msgstr "Fredag"
+
+#: datebookdayheader.cpp:221
+msgid "DateBookDayHeaderBase::Jan 02 00"
+msgstr ""
+
+#: datebookdayheader.cpp:230
+msgid "DateBookDayHeaderBase::M"
+msgstr "M"
+
+#: datebookdayheader.cpp:233
+msgid "DateBookDayHeaderBase::Monday"
+msgstr "Mandag"
+
+#: datebookdayheader.cpp:272
+msgid "DateBookDayHeaderBase::S"
+msgstr "L"
+
+#: datebookdayheader.cpp:268
+msgid "DateBookDayHeaderBase::Saturday"
+msgstr "Lørdag"
+
+#: datebookdayheader.cpp:275
+msgid "DateBookDayHeaderBase::Sunday"
+msgstr "Søndag"
+
+#: datebookdayheader.cpp:251
+msgid "DateBookDayHeaderBase::T"
+msgstr "T"
+
+#: datebookdayheader.cpp:254
+msgid "DateBookDayHeaderBase::Thursday"
+msgstr "Torsdag"
+
+#: datebookdayheader.cpp:240
+msgid "DateBookDayHeaderBase::Tuesday"
+msgstr "Tirsdag"
+
+#: datebookdayheader.cpp:244
+msgid "DateBookDayHeaderBase::W"
+msgstr "O"
+
+#: datebookdayheader.cpp:247
+msgid "DateBookDayHeaderBase::Wednesday"
+msgstr "Onsdag"
+
+#: datebookday.cpp:254
+msgid "DateBookDayWidget::Delete"
+msgstr "Slett"
+
+#: datebookday.cpp:253
+msgid "DateBookDayWidget::Edit..."
+msgstr "Rediger..."
+
+#: datebookweek.cpp:206
+msgid "DateBookWeekWidget::Delete"
+msgstr "Slett"
+
+#: datebookweek.cpp:205
+msgid "DateBookWeekWidget::Edit..."
+msgstr "Rediger..."
+
+#: dateentry.cpp:200
+msgid "DateEntryBase:: minutes"
+msgstr "minutter"
+
+#: dateentry.cpp:274
+msgid "DateEntryBase::"
+msgstr ""
+
+#: dateentry.cpp:195
+msgid "DateEntryBase::&Alarm"
+msgstr "&Alarm"
+
+#: dateentry.cpp:99
+msgid "DateEntryBase::(Nothing)"
+msgstr "(Ingenting)"
+
+#: dateentry.cpp:215
+msgid "DateEntryBase::00:00"
+msgstr ""
+
+#: dateentry.cpp:216
+msgid "DateEntryBase::00:30"
+msgstr ""
+
+#: dateentry.cpp:217
+msgid "DateEntryBase::01:00"
+msgstr ""
+
+#: dateentry.cpp:218
+msgid "DateEntryBase::01:30"
+msgstr ""
+
+#: dateentry.cpp:219
+msgid "DateEntryBase::02:00"
+msgstr ""
+
+#: dateentry.cpp:220
+msgid "DateEntryBase::02:30"
+msgstr ""
+
+#: dateentry.cpp:221
+msgid "DateEntryBase::03:00"
+msgstr ""
+
+#: dateentry.cpp:222
+msgid "DateEntryBase::03:30"
+msgstr ""
+
+#: dateentry.cpp:223
+msgid "DateEntryBase::04:00"
+msgstr ""
+
+#: dateentry.cpp:224
+msgid "DateEntryBase::04:30"
+msgstr ""
+
+#: dateentry.cpp:225
+msgid "DateEntryBase::05:00"
+msgstr ""
+
+#: dateentry.cpp:226
+msgid "DateEntryBase::05:30"
+msgstr ""
+
+#: dateentry.cpp:227
+msgid "DateEntryBase::06:00"
+msgstr ""
+
+#: dateentry.cpp:228
+msgid "DateEntryBase::06:30"
+msgstr ""
+
+#: dateentry.cpp:229
+msgid "DateEntryBase::07:00"
+msgstr ""
+
+#: dateentry.cpp:230
+msgid "DateEntryBase::07:30"
+msgstr ""
+
+#: dateentry.cpp:231
+msgid "DateEntryBase::08:00"
+msgstr ""
+
+#: dateentry.cpp:232
+msgid "DateEntryBase::08:30"
+msgstr ""
+
+#: dateentry.cpp:233
+msgid "DateEntryBase::09:00"
+msgstr ""
+
+#: dateentry.cpp:234
+msgid "DateEntryBase::09:30"
+msgstr ""
+
+#: dateentry.cpp:235
+msgid "DateEntryBase::10:00"
+msgstr ""
+
+#: dateentry.cpp:236
+msgid "DateEntryBase::10:30"
+msgstr ""
+
+#: dateentry.cpp:237
+msgid "DateEntryBase::11:00"
+msgstr ""
+
+#: dateentry.cpp:238
+msgid "DateEntryBase::11:30"
+msgstr ""
+
+#: dateentry.cpp:239
+msgid "DateEntryBase::12:00"
+msgstr ""
+
+#: dateentry.cpp:240
+msgid "DateEntryBase::12:30"
+msgstr ""
+
+#: dateentry.cpp:241
+msgid "DateEntryBase::13:00"
+msgstr ""
+
+#: dateentry.cpp:242
+msgid "DateEntryBase::13:30"
+msgstr ""
+
+#: dateentry.cpp:243
+msgid "DateEntryBase::14:00"
+msgstr ""
+
+#: dateentry.cpp:244
+msgid "DateEntryBase::14:30"
+msgstr ""
+
+#: dateentry.cpp:245
+msgid "DateEntryBase::15:00"
+msgstr ""
+
+#: dateentry.cpp:246
+msgid "DateEntryBase::15:30"
+msgstr ""
+
+#: dateentry.cpp:247
+msgid "DateEntryBase::16:00"
+msgstr ""
+
+#: dateentry.cpp:248
+msgid "DateEntryBase::16:30"
+msgstr ""
+
+#: dateentry.cpp:249
+msgid "DateEntryBase::17:00"
+msgstr ""
+
+#: dateentry.cpp:250
+msgid "DateEntryBase::17:30"
+msgstr ""
+
+#: dateentry.cpp:251
+msgid "DateEntryBase::18:00"
+msgstr ""
+
+#: dateentry.cpp:252
+msgid "DateEntryBase::18:30"
+msgstr ""
+
+#: dateentry.cpp:253
+msgid "DateEntryBase::19:00"
+msgstr ""
+
+#: dateentry.cpp:254
+msgid "DateEntryBase::19:30"
+msgstr ""
+
+#: dateentry.cpp:255
+msgid "DateEntryBase::20:00"
+msgstr ""
+
+#: dateentry.cpp:256
+msgid "DateEntryBase::20:30"
+msgstr ""
+
+#: dateentry.cpp:257
+msgid "DateEntryBase::21:00"
+msgstr ""
+
+#: dateentry.cpp:258
+msgid "DateEntryBase::21:30"
+msgstr ""
+
+#: dateentry.cpp:259
+msgid "DateEntryBase::22:00"
+msgstr ""
+
+#: dateentry.cpp:260
+msgid "DateEntryBase::22:30"
+msgstr ""
+
+#: dateentry.cpp:261
+msgid "DateEntryBase::23:00"
+msgstr ""
+
+#: dateentry.cpp:262
+msgid "DateEntryBase::23:30"
+msgstr ""
+
+#: dateentry.cpp:189
+msgid "DateEntryBase::<Edit Pattern...>"
+msgstr "<Rediger mønster>"
+
+#: dateentry.cpp:110
+msgid "DateEntryBase::All Day"
+msgstr "Hele dagen"
+
+#: dateentry.cpp:282
+msgid "DateEntryBase::Brisbane"
+msgstr ""
+
+#: dateentry.cpp:71
+msgid "DateEntryBase::Category"
+msgstr "Kategori"
+
+#: dateentry.cpp:94
+msgid "DateEntryBase::Description:"
+msgstr "Beskrivelse:"
+
+#: dateentry.cpp:84
+msgid "DateEntryBase::Dinner"
+msgstr "Middag"
+
+#: dateentry.cpp:210
+msgid "DateEntryBase::Ends"
+msgstr "Slutter"
+
+#: dateentry.cpp:188
+msgid "DateEntryBase::Every Week"
+msgstr "Hver uke"
+
+#: dateentry.cpp:100
+msgid "DateEntryBase::Home"
+msgstr "Hjemme"
+
+#: dateentry.cpp:294
+msgid "DateEntryBase::Jan 02 00"
+msgstr ""
+
+#: dateentry.cpp:66
+msgid "DateEntryBase::Location"
+msgstr "Sted"
+
+#: dateentry.cpp:83
+msgid "DateEntryBase::Lunch"
+msgstr "Lunch"
+
+#: dateentry.cpp:82
+msgid "DateEntryBase::Meeting"
+msgstr "Møte"
+
+#: dateentry.cpp:60
+msgid "DateEntryBase::New Event"
+msgstr "Ny hendelse"
+
+#: dateentry.cpp:109
+msgid "DateEntryBase::Normal"
+msgstr "Normal"
+
+#: dateentry.cpp:281
+msgid "DateEntryBase::Oslo"
+msgstr ""
+
+#: dateentry.cpp:183
+msgid "DateEntryBase::Repeat"
+msgstr "Gjenta"
+
+#: dateentry.cpp:283
+msgid "DateEntryBase::Santa Clara"
+msgstr ""
+
+#: dateentry.cpp:115
+msgid "DateEntryBase::Starts"
+msgstr "Begynner"
+
+#: dateentry.cpp:269
+msgid "DateEntryBase::Time zone:"
+msgstr "Tidssone:"
+
+#: dateentry.cpp:85
+msgid "DateEntryBase::Travel"
+msgstr "Reise"
+
+#: dateentry.cpp:120
+msgid "DateEntryBase::Type"
+msgstr "Type"
+

@@ -1,0 +1,9 @@
+Files: bin/qcop
+Priority: required
+Section: qpe/system
+Maintainer: Martin Jones <mjones@trolltech.com>
+Architecture: arm
+Version: $QPE_VERSION-3
+Depends: qt-embedded (>=$QTE_VERSION)
+Description: Interprocess communication client
+ Interprocess communication client for the Qtopia environment.

@@ -1,0 +1,9 @@
+Files: i18n/en/.directory etc/dict/dawg
+Priority: optional
+Section: qpe/i18n
+Maintainer: Warwick Allison <warwick@trolltech.com>
+Architecture: arm
+Version: $QPE_VERSION-3
+Depends: qpe-base ($QPE_VERSION)
+Description: i18n: English
+ English dictionary for Qtopia environment.

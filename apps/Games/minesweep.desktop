@@ -1,0 +1,10 @@
+[Desktop Entry]
+Comment=Find the mines
+Exec=minesweep
+Icon=MineHunt
+Type=Application
+Name=Mine Hunt
+Name[no]=Minesøk
+Name[de]=Minenjagd
+Name[ja]=マインスィープ
+Name[hu]=Aknakeresõ

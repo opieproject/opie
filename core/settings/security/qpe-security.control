@@ -1,0 +1,9 @@
+Files: bin/security apps/Settings/Security.desktop
+Priority: optional
+Section: qpe/settings
+Maintainer: Warwick Allison <warwick@trolltech.com>
+Architecture: arm
+Version: $QPE_VERSION-3
+Depends: qpe-base ($QPE_VERSION)
+Description: Security settings dialog
+ For the Qtopia environment.

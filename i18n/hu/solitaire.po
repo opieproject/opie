@@ -1,0 +1,192 @@
+# This is a Qt message file in .po format.  Each msgid starts with
+# a scope.  This scope should *NOT* be translated - eg. translating
+# from French to English, "Foo::Bar" would be translated to "Pub",
+# not "Foo::Pub".
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2001-06-24 17:46:13 CEST\n"
+"PO-Revision-Date: 2001-06-24\n"
+"Last-Translator: Szabó, Balázs <dlux@kapu.hu>\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+
+#: solitaire.cpp:775
+msgid "CanvasCardWindow::&About"
+msgstr "&Névjegy"
+
+#: solitaire.cpp:768
+msgid "CanvasCardWindow::&Change Card Backs"
+msgstr "Kártyák hátának változtatása"
+
+#: solitaire.cpp:762
+msgid "CanvasCardWindow::&Close"
+msgstr "&Bezár"
+
+#: solitaire.cpp:763
+msgid "CanvasCardWindow::&File"
+msgstr "&File"
+
+#: solitaire.cpp:777
+msgid "CanvasCardWindow::&Help"
+msgstr "&Segítség"
+
+#: solitaire.cpp:760
+msgid "CanvasCardWindow::&New Game of Freecell"
+msgstr "Új Freecell játék"
+
+#: solitaire.cpp:759
+msgid "CanvasCardWindow::&New Game of Solitaire"
+msgstr "Új Passziánsz játék"
+
+# #: solitaire.cpp:760
+# msgid "CanvasCardWindow::&New Game of Freecell"
+# msgstr "Neues Freecell-Spiel"
+
+#: solitaire.cpp:770
+msgid "CanvasCardWindow::&Settings"
+msgstr "&Beállítások"
+
+#: solitaire.cpp:769
+msgid "CanvasCardWindow::&Snap On/Off"
+msgstr "&Mágnes Be/Ki"
+
+#: solitaire.cpp:829
+msgid "CanvasCardWindow::"
+"<h3>About Qt Card Games</h3>"
+"<p>"
+"These games were implemented<br>easily using Qt.<br>"
+"The canvas widget was used<br> as the basis"
+"on which<br>the playing area is drawn.<br>"
+"Each card is an object on the canvas,<br>as "
+"are the decorations.<br>All the animation is "
+"done by Qt."
+"<p>"
+msgstr "<h3>A kártyajátékokról...</h3>"
+"<p>"
+"Ezek a játékok Qt használatával<br>egyszerûen implementálhatóak voltak.<br>"
+"A canvas widgetet használtuk<br>, erre rajzoltuk a játékteret.<br>"
+"Minden kártya egy objektum a canvasen,<br> mint dekoráció.<br>"
+"Az animálásokat a Qt végzi."
+"<p>"
+
+
+#: solitaire.cpp:864
+msgid "CanvasCardWindow::"
+"<h3>Freecell</h3>"
+"<p>"
+"The object of the game is to stack all the<br>"
+"cards on the top right 4 piles from the Aces<br>"
+"to the Kings in suit. The rules are that<br>"
+"you can only move red cards of the next<br>"
+"lowest values on top of black cards, or<br>"
+"or black ones on to red ones in order.<br>"
+"You can move any card to the remaining<br>"
+"vacant freecells to help you move the cards."
+"<p>Good luck and enjoy playing Freecell!"
+"<p>"
+msgstr "<h3>Freecell</h3>"
+"<p>"
+"A játék célja, hogy a kártyákat a 4 jobb<br>"
+"felsõ helyre rakjuk az Ásztól a Királyig<br>"
+"sorban. A piros kártyákat csak az utána<br>"
+"következõ fekete kartyákra teheted,<br>"
+"illetve a feketét a pirosra. Annyi kártyát<br>"
+"mozgathatsz egyszerre, amennyit a<br>"
+"fennmaradó szabad helyek megengednek<br>"
+"<p>Sok szerencsét a Freecell játékhoz"
+"<p>"
+
+#: solitaire.cpp:850
+msgid "CanvasCardWindow::"
+"<h3>Solitaire</h3>"
+"<p>"
+"The object of the game is to stack all the<br>"
+"cards on the top piles from the Aces to<br>"
+"the Kings in suit. The rules are that you<br>"
+"can only move a red card of the next lowest<br>"
+"values on top of black cards in the lower<br>"
+"playing area, or a black on a red in order.<br>"
+"You can get new cards from the face down<br>"
+"stack to help you move the cards."
+"<p>Good luck and enjoy playing Solitaire!"
+"<p>"
+msgstr "<h3>Passziánsz</h3>"
+"<p>"
+"A játék célja, hogy a kártyákat a 4 jobb<br>"
+"felsõ helyre rakjuk az Ásztól a Királyig<br>"
+"sorban. Az alsó játéktérben a piros kártyákat<br>"
+"csak az utána következõ fekete kártyára teheted,<br>"
+"illetve a feketét a pirosra. A bal felsõ sarokban<br>"
+"található pakliból új kártyákat szerezhetsz, hogy<br>"
+"megkönnyítse a pakolást!<br>"
+"<p>Sok szerencsét a Passziánsz játékhoz"
+"<p>"
+
+#: solitaire.cpp:799
+msgid "CanvasCardWindow::About"
+msgstr "Névjegy"
+
+#: solitaire.cpp:791
+msgid "CanvasCardWindow::Change Card Backs"
+msgstr "Kártyák hátának változtatása"
+
+#: solitaire.cpp:793
+msgid "CanvasCardWindow::Change Cards Drawn"
+msgstr "Húzott kártyák számának változtatása"
+
+#: solitaire.cpp:785
+msgid "CanvasCardWindow::Close"
+msgstr "Bezár"
+
+#: solitaire.cpp:881
+msgid "CanvasCardWindow::Dismiss"
+msgstr "Bezár"
+
+#: solitaire.cpp:786
+msgid "CanvasCardWindow::File"
+msgstr "File"
+
+#: solitaire.cpp:691
+msgid "CanvasCardWindow::Freecell"
+msgstr "Freecell"
+
+#: solitaire.cpp:802
+msgid "CanvasCardWindow::Help"
+msgstr "Segítség"
+
+#: solitaire.cpp:783
+msgid "CanvasCardWindow::New Game of Freecell"
+msgstr "Új Freecell játék"
+
+#: solitaire.cpp:782
+msgid "CanvasCardWindow::New Game of Solitaire"
+msgstr "Új Passziánsz játék"
+
+# #: solitaire.cpp:783
+# msgid "CanvasCardWindow::New Game of Freecell"
+# msgstr "Neues Freecell-Spiel"
+
+#: solitaire.cpp:828
+msgid "CanvasCardWindow::Qt Card Game Example"
+msgstr "Qt Kártyajáték példa"
+
+#: solitaire.cpp:863
+msgid "CanvasCardWindow::Qt Freecell"
+msgstr "Qt Freecell"
+
+#: solitaire.cpp:889
+msgid "CanvasCardWindow::Qt Solitaire"
+msgstr "Qt Passziánsz"
+
+#: solitaire.cpp:794
+msgid "CanvasCardWindow::Settings"
+msgstr "Beállítások"
+
+#: solitaire.cpp:792
+msgid "CanvasCardWindow::Snap On/Off"
+msgstr "Mágnes be/ki"
+
+#: solitaire.cpp:677
+msgid "CanvasCardWindow::Solitaire"
+msgstr "Passziánsz"
+

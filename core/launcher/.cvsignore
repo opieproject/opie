@@ -1,0 +1,7 @@
+moc_*
+*.moc
+Makefile
+shutdown.cpp
+shutdown.h
+qimpenprefbase.h
+lnkpropertiesbase.h

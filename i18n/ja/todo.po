@@ -1,0 +1,148 @@
+# This is a Qt message file in .po format.  Each msgid starts with
+# a scope.  This scope should *NOT* be translated - eg. translating
+# from French to English, "Foo::Bar" would be translated to "Pub",
+# not "Foo::Pub".
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2001-03-07 14:58:06 EST\n"
+"PO-Revision-Date: 2001-05-14\n"
+"Last-Translator: Oliver M. Bolzer <oliver@gol.com>\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+
+#: todoentry.cpp:63
+msgid "NewTaskDialogBase::&Description:"
+msgstr "種類 (&D)"
+
+#: todoentry.cpp:86
+msgid "NewTaskDialogBase::&Done"
+msgstr "完了 (&D)"
+
+#: todoentry.cpp:40
+msgid "NewTaskDialogBase::&Priority:"
+msgstr "優先度 (&P)"
+
+#: todoentry.cpp:45
+msgid "NewTaskDialogBase::1 - Very High"
+msgstr "1 - 再優先"
+
+#: todoentry.cpp:46
+msgid "NewTaskDialogBase::2 - High"
+msgstr "2 - 高い"
+
+#: todoentry.cpp:47
+msgid "NewTaskDialogBase::3 - Normal"
+msgstr "3 - 普通"
+
+#: todoentry.cpp:48
+msgid "NewTaskDialogBase::4 - Low"
+msgstr "4 - 低い"
+
+#: todoentry.cpp:49
+msgid "NewTaskDialogBase::5 - Very Low"
+msgstr "5 - 最低"
+
+#: todoentry.cpp:68
+msgid "NewTaskDialogBase::<Nothing>"
+msgstr "<未分類>"
+
+#: todoentry.cpp:57
+msgid "NewTaskDialogBase::Business"
+msgstr "ビジネス"
+
+#: todoentry.cpp:35
+msgid "NewTaskDialogBase::C&ategory:"
+msgstr "カテゴリ(&a)"
+
+#: todoentry.cpp:90
+msgid "NewTaskDialogBase::D&ue"
+msgstr "期限 (&u)"
+
+#: todoentry.cpp:71
+msgid "NewTaskDialogBase::Dinner"
+msgstr "夕食"
+
+#: todoentry.cpp:119
+msgid "NewTaskDialogBase::Image"
+msgstr "画像"
+
+#: todoentry.cpp:94
+msgid "NewTaskDialogBase::Jan 02 2000"
+msgstr "2000年1月2日"
+
+#: todoentry.cpp:70
+msgid "NewTaskDialogBase::Lunch"
+msgstr "昼食"
+
+#: todoentry.cpp:69
+msgid "NewTaskDialogBase::Meeting"
+msgstr "会議"
+
+#: todoentry.cpp:25
+msgid "NewTaskDialogBase::New Task"
+msgstr "新規"
+
+#: todoentry.cpp:56
+msgid "NewTaskDialogBase::Private"
+msgstr "プライベート"
+
+#: todoentry.cpp:110
+msgid "NewTaskDialogBase::Text"
+msgstr "テキスト"
+
+#: todoentry.cpp:72
+msgid "NewTaskDialogBase::Travel"
+msgstr "旅行"
+
+#: todotable.cpp:124
+msgid "TodoTable::C."
+msgstr "了"
+
+#: todotable.cpp:126
+msgid "TodoTable::Description"
+msgstr "種類"
+
+#: todotable.cpp:125
+msgid "TodoTable::Prior."
+msgstr "優先度"
+
+#: mainwindow.cpp:140
+msgid "TodoWindow::<Nothing>"
+msgstr "<未分類>"
+
+#: mainwindow.cpp:47
+msgid "TodoWindow::Close"
+msgstr "閉じる"
+
+#: mainwindow.cpp:57
+msgid "TodoWindow::Delete"
+msgstr "削除"
+
+#: mainwindow.cpp:125
+msgid "TodoWindow::Edit Task"
+msgstr "編集"
+
+#: mainwindow.cpp:49
+msgid "TodoWindow::Edit"
+msgstr "編集"
+
+#: mainwindow.cpp:65
+msgid "TodoWindow::File"
+msgstr "ファイル"
+
+#: mainwindow.cpp:41
+msgid "TodoWindow::New Task"
+msgstr "進化"
+
+#: mainwindow.cpp:66
+msgid "TodoWindow::Task"
+msgstr "タスク"
+
+#: mainwindow.cpp:141
+msgid "TodoWindow::Todo"
+msgstr "ToDo"
+
+#: mainwindow.cpp:141
+msgid "TodoWindow::You haven't entered a description!"
+msgstr "説明が入力されていません。"
+

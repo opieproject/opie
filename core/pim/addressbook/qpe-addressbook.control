@@ -1,0 +1,9 @@
+Files: bin/addressbook apps/Applications/addressbook.desktop
+Priority: optional
+Section: qpe/applications
+Maintainer: Warwick Allison <warwick@trolltech.com>
+Architecture: arm
+Version: $QPE_VERSION-3
+Depends: qpe-base ($QPE_VERSION)
+Description: Contacts
+ A simple addressbook for the Qtopia environment.

@@ -1,0 +1,10 @@
+Files: 
+Priority: required
+Section: qpe/system
+Maintainer: Warwick Allison <warwick@trolltech.com>
+Architecture: arm
+Version: $QPE_VERSION-3
+Depends: qpe-qipkg qpe-base
+Description: Bootstrap Qtopia environment
+ A complete GUI environment for handhelds.
+ You will probably want to install one of the qpe-i18n-* packages.

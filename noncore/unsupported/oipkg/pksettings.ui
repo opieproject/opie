@@ -1,0 +1,176 @@
+<!DOCTYPE UI><UI>
+<class>PackageManagerSettings</class>
+<widget>
+    <class>QDialog</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>Form4</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>549</width>
+            <height>683</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>Package Servers</string>
+    </property>
+    <grid>
+        <property stdset="1">
+            <name>margin</name>
+            <number>11</number>
+        </property>
+        <property stdset="1">
+            <name>spacing</name>
+            <number>6</number>
+        </property>
+        <widget row="3"  column="0"  rowspan="1"  colspan="2" >
+            <class>QLayoutWidget</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Layout4</cstring>
+            </property>
+            <grid>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>0</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>6</number>
+                </property>
+                <widget row="0"  column="1" >
+                    <class>QLineEdit</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>servername</cstring>
+                    </property>
+                </widget>
+                <widget row="0"  column="0" >
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>TextLabel1_3</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Name:</string>
+                    </property>
+                </widget>
+                <widget row="1"  column="1" >
+                    <class>QLineEdit</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>serverurl</cstring>
+                    </property>
+                </widget>
+                <widget row="1"  column="0" >
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>TextLabel2_3</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>URL:</string>
+                    </property>
+                </widget>
+            </grid>
+        </widget>
+        <widget row="2"  column="0" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>newserver</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>New</string>
+            </property>
+            <property stdset="1">
+                <name>autoDefault</name>
+                <bool>false</bool>
+            </property>
+        </widget>
+        <widget row="2"  column="1" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>removeserver</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Remove</string>
+            </property>
+            <property stdset="1">
+                <name>autoDefault</name>
+                <bool>false</bool>
+            </property>
+        </widget>
+        <widget row="1"  column="0"  rowspan="1"  colspan="2" >
+            <class>QListBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>servers</cstring>
+            </property>
+            <property stdset="1">
+                <name>selectionMode</name>
+                <enum>Multi</enum>
+            </property>
+        </widget>
+        <widget row="0"  column="0"  rowspan="1"  colspan="2" >
+            <class>QLayoutWidget</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Layout2</cstring>
+            </property>
+            <hbox>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>0</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>6</number>
+                </property>
+                <widget>
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>Servers</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Servers</string>
+                    </property>
+                </widget>
+                <spacer>
+                    <property>
+                        <name>name</name>
+                        <cstring>Spacer2</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>orientation</name>
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property stdset="1">
+                        <name>sizeType</name>
+                        <enum>Expanding</enum>
+                    </property>
+                    <property>
+                        <name>sizeHint</name>
+                        <size>
+                            <width>20</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+            </hbox>
+        </widget>
+    </grid>
+</widget>
+</UI>

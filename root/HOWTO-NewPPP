@@ -1,0 +1,149 @@
+Qtopia now supports PPP connections to the handheld from both
+Linux and Windows systems. This means you can use all the usual
+TCP/IP software such as Telnet, SSH, FTP, and HTTP to communicate
+between the desktop and handheld. This facility is used in the
+synchronization framework.
+
+
+Creating a unattended PPP connection.
+
+On trying to create a connection between a Windows 2000 box and the IPaq, it
+was discovered that there was a strange issue with the Direct Connection 
+driver.  It caused problems on opening up a terminal to do the login.  
+Furthermore, scripting appeared to be broken, at least on Service Pack 2.  
+So we needed to come up with an alternate way to make a connection, not 
+involving a login.  
+
+On a direct cable connection, Windows 2000 sends CLIENT over the line, 
+expecting something from the server to be sent back before it will start its 
+PPP communication.  What follows is what are instructions for modifying the
+IPaq to accept Windows 2000 connections, Configuring Windows 2000 to connect
+to the IPaq, and the modifications that need to be done to a Linux machine
+to connect to the IPaq again.  I'll finish it off with a few known issues.
+
+Setting up the IPaq (Server).
+
+Setting up the IPaq is fairly painless.  Just install the ppp.ipk
+If that is not an option, here are the relevant changes you need to make.
+
+1. First back up these files: /etc/hosts, /etc/ppp/options, and /etc/inittab.
+2. Make you hosts file look like the following. Note that IPaq will be the
+   address of your device and desktop the IP of you machine.
+    #/etc/hosts
+    127.0.0.1       localhost familiar
+    192.168.1.101   ipaq
+    192.168.1.100   desktop
+3. Create a /etc/ppp/scripts directory.
+4. Add the file, winclient.chat, to /etc/ppp/scripts.  It will look like:
+    # /etc/ppp/options/winclient.chat
+    TIMEOUT 3600
+    CLIENT CLIENTSERVER\c
+5. Make your /etc/ppp/options file look like this, you may have
+   to replace the connect line with the proper chat location:
+    #/etc/ppp/options
+    connect '/usr/sbin/chat -v -s -f /etc/ppp/scripts/winclient.chat'
+    -detach
+    asyncmap 0
+    crtscts
+    local
+    lock
+    /dev/ttySA0
+    115200
+    ipaq:desktop
+6. Now you have to edit you /etc/inittab, since this is a fairly large file,
+   I will tell you what to change.  At the bottom of the file there is
+   probably a reference to a getty process that runs on the serial port that
+   looks something like this.
+    T0:23:respawn:/sbin/getty -L ttySA0 115200 vt100 
+   We want to pppd running on this port too, and we can't have getty running
+   at the same time.  So remove the above getty line and add these two lines.
+    T0:45:respawn:/sbin/getty -L ttySA0 115200 vt100
+    pd:23:respawn:/usr/sbin/pppd /dev/ttySA0 -detach
+   What this does is create a pppd process that will listen at run levels 2 and
+   3.  And a getty process at run levels 4 and 5.  This is an insurance method.
+   This way you can use the terminal in the Qtopia Environment and change 
+   the run level to run a getty on the serial console in case you would need
+   the it.
+7. Okay that's it, either have init re-read the file by running init q or
+   reboot the IPaq, which ever is more convenient.
+
+Setting Up the Windows 2000 (Client)
+ 
+Setting up the Windows 2000 connection is also fairly painless. Follow the steps
+below, it doesn't hurt to be in the Administrator group.  First we need to 
+make sure that Windows 2000 knows that you want a serial connection.  While the 
+New Connection Wizard will normally allow you to pick the correct port, 
+sometimes it won't.  To avoid problems, we'll install it ourselves.
+ 
+To install the "serial cradle"
+1. Load up the Control Panel (Select Settings*Control Panel from the Start Menu)
+2. Select Phones and Modems.
+3. Select the Modem Tab and then click the New... Button.
+4. In the Dialog that pops up, check the "Don't Detect I will select from 
+   a list" option.
+5. In the standard modem types group, select the Communications Cable Between
+   Two Computers.  Then click next.
+6. Select the COM port that your IPaq is connected to, then click Finish.
+
+Now the connection can be made.
+1.  Select Start*Settings*Network and Dial-Up Connections
+2.  Select "Make New Connection".  This fires up the New Connection Wizard.
+3.  In the wizard that shows up, select next to get past the introductory screen
+4.  Select "Connect Directly to Another Computer", then click "Next".
+5.  Select the COM port that your IPaq is connected to, then click "Next".
+6.  Enter a meaningful name for your newly created connection and then click
+    "Finish".
+7.  You will then be presented with a dialog asking for a user name and password
+    Just click cancel.
+8.  Right click on your new connection and select properties.
+9.  Click on the "Configure" button in the General tab.
+10. Choose the proper connection speed (in this case 115200)
+11. Uncheck the "Enable Hardware Flow Control" option.
+12. Close the Modem Configuration Dialog by clicking Ok
+13. In the Options Tab, uncheck the "Prompt for Name, Password, certificate, 
+    etc." option.
+14. In the Networking Tab, uncheck the "File and Printer Sharing for Microsoft
+    Networks" and "Client for Microsoft Networks" options.  In other words, only
+    the "Internet Protocol(TCP/IP)" should be checked.
+15. You are done, click "Ok".
+
+Select your new connection and it a progress dialog should show up, and soon your
+Windows 2000 machine and the IPaq are happily passing PPP frames back and 
+fourth.
+
+Setting up a Linux Box (Client)
+
+Since we've changed the way the IPaq deals with connections, we also need to
+change the way a Linux client would connect to the IPaq.  Basically, the options
+file needs to be changed. We also need to emulate Windows 2000's need to emit
+CLIENT at the beginning.  Here is the chat script for that, which I would 
+recommend putting in /etc/ppp/scripts as winserver.chat 
+    #/etc/ppp/scripts/winserver.chat
+    TIMEOUT 10
+    '' CLIENT\c
+
+Here is the new peers file for the Linux client.
+    #/etc/ppp/peers/ipaq
+    -detach
+    local
+    nocrtscts
+    lock
+    /dev/modem
+    connect '/usr/bin/chat -f /etc/ppp/scripts/winserver.chat'
+    115200
+Please note that /dev/modem is a symlink that whatever COM port your IPaq is
+on.  Replace it appropriately, or create the symlink yourself.  After that, you
+should be able to just type 'pppd call ipaq' and play happily with your IPaq.
+
+Known Issues:
+Here are a few known issues that aren't addressed in this document, several
+are on the shortcomings of the Windows 2000 Connection.
+* If your screen blanks out, pppd suspends itself and the Windows 2000 ppp
+  implementation will die, however when it awakens, pppd on the IPaq will
+  be fine and won't exit, making it impossible to run connect again.
+  The best workaround for this is to disable screen blanking by uncheck-ing
+  the "Blank after some inactivity" option in the Light Settings in Qt
+  Palmtop Settings tab. If this does happen to you, the path to least 
+  resistance is to reboot.
+* When the direct cable connection is enabled on Windows 2000, the routing table
+  is changed, effectively making it impossible to use the Internet.

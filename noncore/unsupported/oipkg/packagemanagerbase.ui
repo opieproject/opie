@@ -1,0 +1,268 @@
+<!DOCTYPE UI><UI>
+<class>PackageManagerBase</class>
+<widget>
+    <class>QWidget</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>Form1</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>257</width>
+            <height>290</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>Package Manager</string>
+    </property>
+    <property>
+        <name>layoutMargin</name>
+    </property>
+    <property>
+        <name>layoutSpacing</name>
+    </property>
+    <grid>
+        <property stdset="1">
+            <name>margin</name>
+            <number>3</number>
+        </property>
+        <property stdset="1">
+            <name>spacing</name>
+            <number>3</number>
+        </property>
+        <widget row="0"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel1</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Section:</string>
+            </property>
+        </widget>
+        <widget row="2"  column="0"  rowspan="1"  colspan="3" >
+            <class>QLayoutWidget</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Layout1</cstring>
+            </property>
+            <property>
+                <name>layoutSpacing</name>
+            </property>
+            <hbox>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>0</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>4</number>
+                </property>
+                <widget>
+                    <class>QToolButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>upgrade</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Upgrade all</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QToolButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>doit</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>7</hsizetype>
+                            <vsizetype>0</vsizetype>
+                        </sizepolicy>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Do it!</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QProgressBar</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>progress</cstring>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QToolButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>settings_btn</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string></string>
+                    </property>
+                    <property stdset="1">
+                        <name>pixmap</name>
+                        <pixmap>image0</pixmap>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QToolButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>find_btn</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string></string>
+                    </property>
+                    <property stdset="1">
+                        <name>pixmap</name>
+                        <pixmap>image1</pixmap>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QToolButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>info_btn</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string></string>
+                    </property>
+                    <property stdset="1">
+                        <name>pixmap</name>
+                        <pixmap>image2</pixmap>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+        <widget row="0"  column="2" >
+            <class>QComboBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>subsection</cstring>
+            </property>
+        </widget>
+        <widget row="0"  column="1" >
+            <class>QComboBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>section</cstring>
+            </property>
+        </widget>
+        <widget row="1"  column="0"  rowspan="1"  colspan="3" >
+            <class>QListView</class>
+            <column>
+                <property>
+                    <name>text</name>
+                    <string>Package</string>
+                </property>
+                <property>
+                    <name>clickable</name>
+                    <bool>true</bool>
+                </property>
+                <property>
+                    <name>resizeable</name>
+                    <bool>true</bool>
+                </property>
+            </column>
+            <column>
+                <property>
+                    <name>text</name>
+                    <string>Description</string>
+                </property>
+                <property>
+                    <name>clickable</name>
+                    <bool>true</bool>
+                </property>
+                <property>
+                    <name>resizeable</name>
+                    <bool>true</bool>
+                </property>
+            </column>
+            <column>
+                <property>
+                    <name>text</name>
+                    <string>Size</string>
+                </property>
+                <property>
+                    <name>clickable</name>
+                    <bool>true</bool>
+                </property>
+                <property>
+                    <name>resizeable</name>
+                    <bool>true</bool>
+                </property>
+            </column>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>list</cstring>
+            </property>
+            <property stdset="1">
+                <name>allColumnsShowFocus</name>
+                <bool>true</bool>
+            </property>
+        </widget>
+    </grid>
+</widget>
+<images>
+    <image>
+        <name>image0</name>
+        <data format="XPM.GZ" length="1897">789c5dd3c972db381006e0bb9f82e5beb9527fb88baca939387b9c7851363b49e50082a4e445966dc98b3c35ef3e602f4c3cd6e9d3df683420f8f94e7472b41fed3cdf5aadddfad4477eee6ea29df676b1d8fcfcf5f73f5bdb491a2559546751bafd6c6b7bba8e7c74b0bcec0660124031ff0d26cfaec2474c6aaf6e4757bcbe1e9cc4630e7162fd66a3a5be50e7ea925d9969aeae34ff31388dd3d081f373752ec66f4bfd2b766da61b732af547ea4aebdfa8bde4b41a9c2559acf907b3aebf505bbf4fec7a7433ba663b7396b0cfd495fa44adfbe3ed68599f9b33f1f7c17932d6bf16e7b1d64fd5364f6b96fde896edf24aeb63b3e6976add9feecdb9e4fd68c7ebbbc1456a392a711117fcd8b05417da9fefaf70a31bb3d66fd4b59ed79bb5ff5cdd6afddde0322d139defc12c392dd585e61bb3e60bb62b751e9c9a0b39dfcc5cca7ed7ea5a723a339762cb6d3e9e679295added70bb3e62bf144e7c737b3e62fcd938c9daaedbe0e464bff477633a9f57c4e5c59bf2f83ab2c58ea0fcd15f7a735bba96a9df7caacf564ae1a36bfa7dad7addc0f3d9a6bcf39ffffb9dc252e67f37d3bef3ab92ff07e4ddb383ddf9eba9379c0efd1173ed5fc585dfa82f7e3dfdfb7c12de7fc5edba22d6bd98fdf6bdbb5e1c2b99e7fdfaeec529defa3ba54bf63779dd379b3c17dd9757dc9fe2aee53cd3f8fe6f5b4cbeec3373dbb53f792233137b27e7fb4ccffdeace7bb1a2db9f5efe53cd3b57d407068e0d1a2432f196698e3146738c70516b8c41257b896df052bac718b3bdce3019b903c62172fe4cde1155ee30ddee21dde630f1ff011fb38d09e8738c2149fc2b77bf88c2ff81ab26f360b8ec31427f88e1f884396842cfd3d2732e428506212b2fd3fd7715aa12610910b49f2e7bae99a1af2d492474cddffd7514f331434a3399d3edd2f6467744e17b4a04b5ad2155d3fd9ef986e688515ade9364c7bf8f43ee92eacbda707dad023ed6efffbd7d67f2c679e40</data>
+    </image>
+    <image>
+        <name>image1</name>
+        <data format="XPM.GZ" length="1182">789c55d34b739b301007f0bb3f05636e9e0e0181304ca78724b6f3b4e3043b76d2e94148c28f183b7ec7e9f4bb97d52ea4151cf4fbaf249619386b58e37ed76a9cd5b63bb19b494b4ec5c66aa87d9e9f7efefaf1bb56f702abb8796c79f56fb5ba6349abb75a6a9827c5dc76cd008e8801726c18c105ec1225f205e8b965b583840b288901d2368c0a9ac58218211551225320733dc9ccde47a01f33c962200372e613ef91dce50cd82772e4aba1085cdfbc7b0fc91517c00130644184d52b64e88566ef3b918766b126c6589d5734d536304a632f0e804fc038682aacee0ca5283a017e0285145a48e0033265a9a9ce88213200a641445dad916535238a54018740c963afe9037da410d89547d4d8c60752869203af89027947d4d29cec1aaa983753e033326578540b592ebe45aa5099a34e40c59550e6abbb216ae4a5a12eab2ba466c88b923a041e892172020420df2a9abd53a2409e1335726ba8339699bd076288dc130572032c6ac4bc62065c1a662517c40ce938b64885908e1926513a9b4c67735125f6fc6db1c897ab775926729d2ff27c53fcd465924e8a607f387e548938eef3c3f6789a7d259fdbf3e9c565ab6d9749e7eafae6b675b7beef564f17bdf6faa1dd7f7c4acac4e988a2c1ee60f89c94493146e3d1cbabeb255f493192840dfde4dfa48806c1ff09644efdcff7da5f08a60ed0</data>
+    </image>
+    <image>
+        <name>image2</name>
+        <data format="XPM.GZ" length="702">789c7dd1c96ac3301006e0bb9f4224b75092d891b550fa082d3d164a0f238d27abb33a1ba5ef5ecfd89098868e7cd0f75b23c97834501fefaf6a304a0e1554f3a8e20cf66a80c7b2bc7e7ebd7c27bd54abfac9ac4a7b4f496fa8a27adbac0b9e633def8fa5986b66ea783067cccc672ef3cc0d53a77aac659f8310b4d3c03c330d98dc08fb2db1e19c692736b513e652186c6e0373d7d2378c4c37b1e864f1b1617d29e145189c77b2f8da121bae985efbd46be6b665de300863cdc88496be61c5840800c282197430417a17420c10907962c63c9a98334b214688f276cac4820773cf244319192609a5e48f74ea9fa40f21e27d52f016d3d92d99132d80086ec97255ae3744dbbb2ec4dd9e4abc4f0e441576926379c2ce5978be5cbbc9704b84dd1bc29f64d8f43cfcae9fe7e417c79f9e92</data>
+    </image>
+</images>
+<connections>
+    <connection>
+        <sender>settings_btn</sender>
+        <signal>clicked()</signal>
+        <receiver>Form1</receiver>
+        <slot>doSettings()</slot>
+    </connection>
+    <connection>
+        <sender>find_btn</sender>
+        <signal>clicked()</signal>
+        <receiver>Form1</receiver>
+        <slot>doFind()</slot>
+    </connection>
+    <connection>
+        <sender>info_btn</sender>
+        <signal>clicked()</signal>
+        <receiver>Form1</receiver>
+        <slot>doDetails()</slot>
+    </connection>
+    <connection>
+        <sender>list</sender>
+        <signal>doubleClicked(QListViewItem*)</signal>
+        <receiver>Form1</receiver>
+        <slot>doDetails()</slot>
+    </connection>
+    <connection>
+        <sender>upgrade</sender>
+        <signal>clicked()</signal>
+        <receiver>Form1</receiver>
+        <slot>doUpgrade()</slot>
+    </connection>
+    <slot access="public">doFind()</slot>
+    <slot access="public">doDetails()</slot>
+    <slot access="public">doSettings()</slot>
+    <slot access="public">doUpgrade()</slot>
+</connections>
+</UI>
