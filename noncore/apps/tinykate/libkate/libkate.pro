@@ -69,17 +69,10 @@ SOURCES     = microkde/kapplication.cpp \
               view/kateviewdialog.cpp \
               interfaces/interfaces.cpp
 INTERFACES  =
-INCLUDEPATH += $(OPIEDIR)/include \
-            $(OPIEDIR)/noncore/apps/tinykate/libkate \
-            $(OPIEDIR)/noncore/apps/tinykate/libkate/microkde \
-            $(OPIEDIR)/noncore/apps/tinykate/libkate/document \
-            $(OPIEDIR)/noncore/apps/tinykate/libkate/view \
-            $(OPIEDIR)/noncore/apps/tinykate/libkate/interfaces \
-            $(OPIEDIR)/noncore/apps/tinykate/libkate/ktexteditor \
-            $(OPIEDIR)/noncore/apps/tinykate/libkate/qt3back
+INCLUDEPATH += microkde document view interfaces ktexteditor qt3back
 DEPENDPATH  += $(OPIEDIR)/include
 LIBS        += -lqpe -lqtaux2 -lopiecore2 -lopieui2
-TARGET      = tinykate
+TARGET      = kate
 
 INCLUDEPATH += $(OPIEDIR)/include
 DESTDIR      = $(OPIEDIR)/lib$(PROJMAK)

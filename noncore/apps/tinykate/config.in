@@ -1,8 +1,6 @@
-source "noncore/apps/tinykate/libkate/config.in"
-
-  config TINYKATE
-    boolean "opie-tinykate (programmers editor Kate from KDE)"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI && LIBKATE
-    comment "opie-tinykate needs a libqpe, libopie2core, libopie2ui and libkate"
-    depends !(( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI && LIBKATE)
+config TINYKATE
+  boolean "opie-tinykate (programmers editor Kate from KDE)"
+  default "y"
+  depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI && LIBQTAUX
+  comment "opie-tinykate needs a libqpe, libopie2core, libopie2ui and libqtaux"
+  depends !(( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI && LIBQTAUX)
