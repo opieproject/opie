@@ -138,6 +138,7 @@ void NewTaskDialog::groupButtonClicked ()
 	if ( cd.exec() == QDialog::Accepted ){
 		selectedContacts = cd.selected ();
 		QValueListIterator<int> it;
+		todo.clearRelated("addressbook");
 		for( it = selectedContacts.begin(); it != selectedContacts.end(); ++it ){
 			printf ("Adding: %d\n", (*it));
 			todo.addRelated( "addressbook", (*it) );
