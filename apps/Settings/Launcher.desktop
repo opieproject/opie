@@ -4,5 +4,6 @@ Exec=launchersettings
 Icon=launchersettings/Launcher
 Name=Launcher
 Name[es]=Lanzador
+Name[fr]=Lanceur d'applications
 Comment=Launcher settings dialog
 Comment[es]=Configuración del lanzador de aplicaciones
