@@ -56,7 +56,7 @@ You probably want to chown these to a system user: " >&2
 	pkg=`required_field Package`
 	[ "$?" -ne 0 ] && PKG_ERROR=1
 
-	version=`required_field Version | sed 's/.*://;'`
+	version=`required_field Version | sed 's/Version://; s/^.://g;'`
 	[ "$?" -ne 0 ] && PKG_ERROR=1
 
 	arch=`required_field Architecture`
@@ -121,8 +121,9 @@ You probably want to chown these to a system user: " >&2
 # ipkg-build "main"
 ###
 ogargs=""
-usage="Usage: $0 [-o owner] [-g group] [-c] <pkg_directory> [<destination_directory>]"
-while getopts ":o:g:c" opt; do
+outer=ar
+usage="Usage: $0 [-c] [-o owner] [-g group] <pkg_directory> [<destination_directory>]"
+while getopts "cg:o:" opt; do
     case $opt in
 	o ) owner=$OPTARG
 	    ogargs="--owner=$owner"
@@ -130,8 +131,8 @@ while getopts ":o:g:c" opt; do
 	g ) group=$OPTARG
 	    ogargs="$ogargs --group=$group"
 	    ;;
-	c ) classic=1
-	    ;;
+        c ) outer=tar
+            ;;
 	\? ) 	echo $usage  >&2
 	esac
 done
@@ -186,11 +187,12 @@ echo "2.0" > $tmp_dir/debian-binary
 
 pkg_file=$dest_dir/${pkg}_${version}_${arch}.ipk
 here_dir=$PWD
+## tar -C $tmp_dir -czf $pkg_file ./debian-binary ./data.tar.gz ./control.tar.gz
 rm -f $pkg_file
-if [ -n "$classic" ]; then
-	tar -C $tmp_dir -czf $pkg_file ./debian-binary ./data.tar.gz ./control.tar.gz
+if [ "$outer" = "ar" ] ; then
+  cd $tmp_dir ; ar crf $here_dir/$pkg_file ./debian-binary ./data.tar.gz ./control.tar.gz
 else
-	cd $tmp_dir ; ar crf $here_dir/$pkg_file ./debian-binary ./data.tar.gz ./control.tar.gz
+  cd $tmp_dir ; tar -zcf $here_dir/$pkg_file ./debian-binary ./data.tar.gz ./control.tar.gz
 fi
 cd $here_dir
 rm $tmp_dir/debian-binary $tmp_dir/data.tar.gz $tmp_dir/control.tar.gz
