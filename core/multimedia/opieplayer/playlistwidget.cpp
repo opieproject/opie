@@ -418,7 +418,7 @@ void PlayListWidget::addToSelection( const DocLnk& lnk ) {
 //    qDebug("add");
     d->setDocumentUsed = FALSE;
     if ( mediaPlayerState->playlist() ) {
-        if(QFileInfo(lnk.file()).exists())
+        if(QFileInfo(lnk.file()).exists() || lnk.file().left(4) == "http" )
             d->selectedFiles->addToSelection( lnk );
     }
     else
