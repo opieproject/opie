@@ -3,11 +3,11 @@
     <name>SuspendApplet</name>
     <message>
         <source>Suspend shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Zkratka uspání</translation>
     </message>
     <message>
         <source>Suspend</source>
-        <translation type="unfinished"></translation>
+        <translation>Uspat</translation>
     </message>
 </context>
 </TS>

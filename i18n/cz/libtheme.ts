@@ -3,34 +3,34 @@
     <name>Styles</name>
     <message>
         <source>Themed style</source>
-        <translation type="unfinished"></translation>
+        <translation>Styl s tématy</translation>
     </message>
     <message>
         <source>KDE2 theme compatible style engine</source>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj na styly kompatibilní s KDE2 tématy</translation>
     </message>
 </context>
 <context>
     <name>ThemeSettings</name>
     <message>
         <source>Theme Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Styl tématu</translation>
     </message>
     <message>
         <source>Select the theme to be used</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte téma, které chcete používat</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Jméno</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Popis</translation>
     </message>
     <message>
         <source>[No theme]</source>
-        <translation type="unfinished"></translation>
+        <translation>[Bez tématu]</translation>
     </message>
 </context>
 </TS>

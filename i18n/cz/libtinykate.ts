@@ -3,574 +3,574 @@
     <name>ColorConfig</name>
     <message>
         <source>Background:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pozadí:</translation>
     </message>
     <message>
         <source>Selected:</source>
-        <translation type="unfinished"></translation>
+        <translation>Označené:</translation>
     </message>
     <message>
         <source>Sets the background color of the editing area</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastaví barvu pozadí upravované oblasti</translation>
     </message>
     <message>
         <source>Sets the background color of the selection. To set the text color for selected text, use the &amp;quot;&lt;b&gt;Configure Highlighting&lt;/b&gt;&amp;quot; dialog.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastaví barvu pozadí označeného bloku. Pro nastavení barvy označeného textu použijte dialog &amp;quot;&lt;b&gt;Konfigurace zvýrazňování&lt;/b&gt;&amp;quot;.</translation>
     </message>
 </context>
 <context>
     <name>EditConfigTab</name>
     <message>
         <source>&amp;Word wrap</source>
-        <translation type="unfinished"></translation>
+        <translation>Zalamovat &amp;slova</translation>
     </message>
     <message>
         <source>Replace &amp;tabs with spaces</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahrazovat &amp;tabulátory mezerami</translation>
     </message>
     <message>
         <source>&amp;Remove trailing spaces</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Odstranit koncové mezery</translation>
     </message>
     <message>
         <source>&amp;Auto brackets</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Automatické závorky</translation>
     </message>
     <message>
         <source>Group &amp;undos</source>
-        <translation type="unfinished"></translation>
+        <translation>Seskupovat kroky &amp;Zpět</translation>
     </message>
     <message>
         <source>&amp;Show tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zobrazovat tabulátory</translation>
     </message>
     <message>
         <source>Smart &amp;home</source>
-        <translation type="unfinished"></translation>
+        <translation>Chytré &amp;domů</translation>
     </message>
     <message>
         <source>&amp;Page up/down moves cursor</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Stránku nahoru/dolů posunuje kurzor</translation>
     </message>
     <message>
         <source>Wrap &amp;cursor</source>
-        <translation type="unfinished"></translation>
+        <translation>Zalamovat &amp;kurzor</translation>
     </message>
     <message>
         <source>Wrap Words At:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zalamovat slova na:</translation>
     </message>
     <message>
         <source>Tab/Indent Width:</source>
-        <translation type="unfinished"></translation>
+        <translation>Šířka tabulátoru/odsazení:</translation>
     </message>
     <message>
         <source>Undo steps:</source>
-        <translation type="unfinished"></translation>
+        <translation>Počet kroků Zpět:</translation>
     </message>
     <message>
         <source>Encoding:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kódování:</translation>
     </message>
     <message>
         <source>Word wrap is a feature that causes the editor to automatically start a new line of text and move (wrap) the cursor to the beginning of that new line. KateView will automatically start a new line of text when the current line reaches the length specified by the Wrap Words At: option.&lt;p&gt;&lt;b&gt;NOTE:&lt;b&gt; Word Wrap will not change existing lines or wrap them for easy reading as in some applications.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zalamování slov je funkce, která způsobí, že editor vytvoří automaticky novou řádku a přejde na její začátek. KateView vytvoří automaticky novou řádku, když dojde k dosažení délky specifikované nastavením Zalamovat slova na:.&lt;p&gt;&lt;b&gt;Poznámka:&lt;b&gt; Zalamování slov nezmění ani nezaláme existující řádky, jako je to v některých jiných aplikacích.</translation>
     </message>
     <message>
         <source>If the Word Wrap option is selected this entry determines the length (in characters) at which the editor will automatically start a new line.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jestliže je vybrána volba Zalamování slov, tak tato položka udává délku (ve znacích) za kterou editor automaticky přejde na nový řádek.</translation>
     </message>
     <message>
         <source>KateView will replace any tabs with the number of spaces indicated in the Tab Width: entry.</source>
-        <translation type="unfinished"></translation>
+        <translation>KateView nahradí všechny tabulátory mezerami, jejichž počet se nastaví v položce Šířka tabulátoru.</translation>
     </message>
     <message>
         <source>If the Replace Tabs By Spaces option is selected this entry determines the number of spaces with which the editor will automatically replace tabs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jestliže je vybrána položka Nahradit tabulátory mezerami, tak tato položka udává počet mezer, kterými editor automaticky nahradí tabulátory.</translation>
     </message>
     <message>
         <source>KateView will automatically eliminate extra spaces at the ends of lines of text.</source>
-        <translation type="unfinished"></translation>
+        <translation>KateView bude automaticky likvidovat více mezer na koncích řádek.</translation>
     </message>
     <message>
         <source>When the user types a left bracket ([,(, or {) KateView automatically enters the right bracket (}, ), or ]) to the right of the cursor.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jestliže uživatel napíše levou závorku ([,(, or {),  KateView automaticky vloží pravou závorku  (}, ), or ]) za kurzor.</translation>
     </message>
     <message>
         <source>Checking this will cause sequences of similar actions to be undone at once.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaškrtnutí položky způsobí, že sekvence podobných akcí nebude možné vrátit po jedné.</translation>
     </message>
     <message>
         <source>The editor will display a symbol to indicate the presence of a tab in the text.</source>
-        <translation type="unfinished"></translation>
+        <translation>Editor bude zobrazovat symbol znázorňující přítomnost tabulátoru v textu.</translation>
     </message>
     <message>
         <source>Not yet implemented.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ještě nebylo implementováno.</translation>
     </message>
     <message>
         <source>If this is selected, the insertion cursor will be moved to the first/last line when pressing the page up/down buttons.&lt;p&gt;If not selected, it will remain at it&apos;s relative position in the visible text.</source>
-        <translation type="unfinished"></translation>
+        <translation>Při vybrání této položky se bude kurzor přesunovat na první/poslední řádku po stisknutí tlačítek Strana nahoru/dolů.&lt;p&gt;Pokud položku nezvolíte, zůstane kurzor na své relativní pozici v textu.</translation>
     </message>
     <message>
         <source>Sets the number of undo/redo steps to record. More steps uses more memory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastaví počet kroků Zpět/Vpřed. Více kroků spotřebuje více paměti.</translation>
     </message>
     <message>
         <source>When on, moving the insertion cursor using the &lt;b&gt;Left&lt;/b&gt; and &lt;b&gt;Right&lt;/b&gt; keys will go on to previous/next line at beginning/end of the line, similar to most editors.&lt;p&gt;When off, the insertion cursor cannot be moved left of the line start, but it can be moved off the line end, which can be very handy for programmers.</source>
-        <translation type="unfinished"></translation>
+        <translation>Při zapnutí této položky se při použití kurzorových kláves &lt;b&gt;vlevo&lt;/b&gt; a &lt;b&gt;vpravo&lt;/b&gt; přejde na začátek předchozí/konec následující řádky, podobně jako v mnoha jiných editorech.&lt;p&gt;Při vypnuté položce se kurzor neposune doleva před začátek řádky, ale může se posunout doprava mimo řádek, coč může být velmi šikovné pro programátory.</translation>
     </message>
 </context>
 <context>
     <name>GotoLineDialog</name>
     <message>
         <source>Goto Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Jít na řádek</translation>
     </message>
     <message>
         <source>&amp;Goto Line:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Jít na řádek:</translation>
     </message>
 </context>
 <context>
     <name>HighlightDialog</name>
     <message>
         <source>Highlight Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavení zvýrazňování</translation>
     </message>
 </context>
 <context>
     <name>HighlightDialogPage</name>
     <message>
         <source>&amp;Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Výchozí</translation>
     </message>
     <message>
         <source>Default Item Styles</source>
-        <translation type="unfinished"></translation>
+        <translation>Výchozí styly položek</translation>
     </message>
     <message>
         <source>Item:</source>
-        <translation type="unfinished"></translation>
+        <translation>Položka:</translation>
     </message>
     <message>
         <source>&amp;Highlight Modes</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zvýrazňovací režimy</translation>
     </message>
     <message>
         <source>Config Select</source>
-        <translation type="unfinished"></translation>
+        <translation>Výběr konfigurace</translation>
     </message>
     <message>
         <source>Item Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Styl položky</translation>
     </message>
     <message>
         <source>Highlight Auto Select</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatický výběr zvýrazňování</translation>
     </message>
     <message>
         <source>Highlight:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvýrazňování:</translation>
     </message>
     <message>
         <source>File Extensions:</source>
-        <translation type="unfinished"></translation>
+        <translation>Přípony souborů:</translation>
     </message>
     <message>
         <source>Mime Types:</source>
-        <translation type="unfinished"></translation>
+        <translation>MIME typy:</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Výchozí</translation>
     </message>
 </context>
 <context>
     <name>HlEditDialog</name>
     <message>
         <source>Highlight Conditions</source>
-        <translation type="unfinished"></translation>
+        <translation>Okolnosti zvýrazňování</translation>
     </message>
     <message>
         <source>Syntax structure</source>
-        <translation type="unfinished"></translation>
+        <translation>Struktura syntaxe</translation>
     </message>
     <message>
         <source>New Context</source>
-        <translation type="unfinished"></translation>
+        <translation>Nový kontext</translation>
     </message>
     <message>
         <source>New Item</source>
-        <translation type="unfinished"></translation>
+        <translation>Nová položka</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Možnosti</translation>
     </message>
     <message>
         <source>Can&apos;t find template file</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze nalézt vzorový soubor</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Popis:</translation>
     </message>
     <message>
         <source>Attribute:</source>
-        <translation type="unfinished"></translation>
+        <translation>Atribut:</translation>
     </message>
     <message>
         <source>LineEnd:</source>
-        <translation type="unfinished"></translation>
+        <translation>Konec řádky:</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ:</translation>
     </message>
     <message>
         <source>Parameter:</source>
-        <translation type="unfinished"></translation>
+        <translation>Parametr:</translation>
     </message>
     <message>
         <source>Context switch:</source>
-        <translation type="unfinished"></translation>
+        <translation>Přepínač kontextu:</translation>
     </message>
     <message>
         <source>Delete this item</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat tuto položku</translation>
     </message>
 </context>
 <context>
     <name>HlManager</name>
     <message>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Normální</translation>
     </message>
     <message>
         <source>Keyword</source>
-        <translation type="unfinished"></translation>
+        <translation>Klíčové slovo</translation>
     </message>
     <message>
         <source>Data Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ dat</translation>
     </message>
     <message>
         <source>Decimal/Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Desítkový/hodnota</translation>
     </message>
     <message>
         <source>Base-N Integer</source>
-        <translation type="unfinished"></translation>
+        <translation>Celočíselný</translation>
     </message>
     <message>
         <source>Floating Point</source>
-        <translation type="unfinished"></translation>
+        <translation>Plovoucí čárka</translation>
     </message>
     <message>
         <source>Character</source>
-        <translation type="unfinished"></translation>
+        <translation>Znak</translation>
     </message>
     <message>
         <source>String</source>
-        <translation type="unfinished"></translation>
+        <translation>Řetězec</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation type="unfinished"></translation>
+        <translation>Komentář</translation>
     </message>
     <message>
         <source>Others</source>
-        <translation type="unfinished"></translation>
+        <translation>Ostatní</translation>
     </message>
 </context>
 <context>
     <name>IndentConfigTab</name>
     <message>
         <source>&amp;Auto Indent</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Automatické odsazování</translation>
     </message>
     <message>
         <source>Indent With &amp;Spaces</source>
-        <translation type="unfinished"></translation>
+        <translation>Odsazovat s &amp;mezerami</translation>
     </message>
     <message>
         <source>&amp;Backspace Key Indents</source>
-        <translation type="unfinished"></translation>
+        <translation>Klávesa &amp;Backspace odsazuje</translation>
     </message>
     <message>
         <source>&amp;Tab Key Indents</source>
-        <translation type="unfinished"></translation>
+        <translation>Klávesa &amp;Tab odsazuje</translation>
     </message>
     <message>
         <source>Keep Indent &amp;Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Zachovat Indent &amp;Profil</translation>
     </message>
     <message>
         <source>&amp;Keep Extra Spaces</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zachovat mezery na koncích</translation>
     </message>
     <message>
         <source>When &lt;b&gt;Auto indent&lt;/b&gt; is on, KateView will indent new lines to equal the indent on the previous line.&lt;p&gt;If the previous line is blank, the nearest line above with text is used</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokud je &lt;b&gt;Automatické odsazování&lt;/b&gt; zapnuté, KateView bude nové řádky odsazovat stejně jako předchozí.&lt;p&gt;Jestliže je předchozí řádek prázdný, použije se nejbližší vyšší řádek s textem</translation>
     </message>
     <message>
         <source>Check this if you want to indent with spaces rather than tabs.&lt;br&gt;A Tab will be converted to &lt;u&gt;Tab-width&lt;/u&gt; as set in the &lt;b&gt;edit&lt;/b&gt; options</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaškrtněte, pokud chcete odsazovat raději mezerami, než tabulátory.&lt;br&gt;Tabulátor bude překonvertován na &lt;u&gt;Šířku tabulátoru&lt;/u&gt; tak, jak je v nastavení &lt;b&gt;upravit&lt;/b&gt;</translation>
     </message>
     <message>
         <source>This allows the &lt;b&gt;backspace&lt;/b&gt; key to be used to indent.</source>
-        <translation type="unfinished"></translation>
+        <translation>Umožní použít klávesu &lt;b&gt;backspace&lt;/b&gt; pro odsazování.</translation>
     </message>
     <message>
         <source>This allows the &lt;b&gt;tab&lt;/b&gt; key to be used to indent.</source>
-        <translation type="unfinished"></translation>
+        <translation>Umožní použít klávesu &lt;b&gt;tab&lt;/b&gt; pro odsazování.</translation>
     </message>
     <message>
         <source>This retains current indentation settings for future documents.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zachová současné nastavení odsazování pro budoucí dokumenty.</translation>
     </message>
     <message>
         <source>Indentations of more than the selected number of spaces will not be shortened.</source>
-        <translation type="unfinished"></translation>
+        <translation>Odsazování nebudou zkracována více než vybraný počet mezer.</translation>
     </message>
 </context>
 <context>
     <name>KDialogBase</name>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Použít</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Storno</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Zavřít</translation>
     </message>
 </context>
 <context>
     <name>KLocale</name>
     <message>
         <source>pm</source>
-        <translation type="unfinished"></translation>
+        <translation>pm</translation>
     </message>
     <message>
         <source>am</source>
-        <translation type="unfinished"></translation>
+        <translation>am</translation>
     </message>
     <message>
         <source>concatenation of dates and time</source>
         <comment>%1 %2</comment>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2</translation>
     </message>
     <message>
         <source>Monday</source>
         <comment>Mon</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pondělí</translation>
     </message>
     <message>
         <source>Tuesday</source>
         <comment>Tue</comment>
-        <translation type="unfinished"></translation>
+        <translation>Úterý</translation>
     </message>
     <message>
         <source>Wednesday</source>
         <comment>Wed</comment>
-        <translation type="unfinished"></translation>
+        <translation>Středa</translation>
     </message>
     <message>
         <source>Thursday</source>
         <comment>Thu</comment>
-        <translation type="unfinished"></translation>
+        <translation>Čtvrtek</translation>
     </message>
     <message>
         <source>Friday</source>
         <comment>Fri</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pátek</translation>
     </message>
     <message>
         <source>Saturday</source>
         <comment>Sat</comment>
-        <translation type="unfinished"></translation>
+        <translation>Sobota</translation>
     </message>
     <message>
         <source>Sunday</source>
         <comment>Sun</comment>
-        <translation type="unfinished"></translation>
+        <translation>Neděle</translation>
     </message>
     <message>
         <source>Monday</source>
-        <translation type="unfinished"></translation>
+        <translation>Pondělí</translation>
     </message>
     <message>
         <source>Tuesday</source>
-        <translation type="unfinished"></translation>
+        <translation>Úterý</translation>
     </message>
     <message>
         <source>Wednesday</source>
-        <translation type="unfinished"></translation>
+        <translation>Středa</translation>
     </message>
     <message>
         <source>Thursday</source>
-        <translation type="unfinished"></translation>
+        <translation>Čtvrtek</translation>
     </message>
     <message>
         <source>Friday</source>
-        <translation type="unfinished"></translation>
+        <translation>Pátek</translation>
     </message>
     <message>
         <source>Saturday</source>
-        <translation type="unfinished"></translation>
+        <translation>Sobota</translation>
     </message>
     <message>
         <source>Sunday</source>
-        <translation type="unfinished"></translation>
+        <translation>Neděle</translation>
     </message>
     <message>
         <source>January</source>
         <comment>Jan</comment>
-        <translation type="unfinished"></translation>
+        <translation>Leden</translation>
     </message>
     <message>
         <source>February</source>
         <comment>Feb</comment>
-        <translation type="unfinished"></translation>
+        <translation>Únor</translation>
     </message>
     <message>
         <source>March</source>
         <comment>Mar</comment>
-        <translation type="unfinished"></translation>
+        <translation>Březen</translation>
     </message>
     <message>
         <source>April</source>
         <comment>Apr</comment>
-        <translation type="unfinished"></translation>
+        <translation>Duben</translation>
     </message>
     <message>
         <source>May short</source>
         <comment>May</comment>
-        <translation type="unfinished"></translation>
+        <translation>Květen</translation>
     </message>
     <message>
         <source>June</source>
         <comment>Jun</comment>
-        <translation type="unfinished"></translation>
+        <translation>Červen</translation>
     </message>
     <message>
         <source>July</source>
         <comment>Jul</comment>
-        <translation type="unfinished"></translation>
+        <translation>Červenec</translation>
     </message>
     <message>
         <source>August</source>
         <comment>Aug</comment>
-        <translation type="unfinished"></translation>
+        <translation>Srpen</translation>
     </message>
     <message>
         <source>September</source>
         <comment>Sep</comment>
-        <translation type="unfinished"></translation>
+        <translation>Září</translation>
     </message>
     <message>
         <source>October</source>
         <comment>Oct</comment>
-        <translation type="unfinished"></translation>
+        <translation>Říjen</translation>
     </message>
     <message>
         <source>November</source>
         <comment>Nov</comment>
-        <translation type="unfinished"></translation>
+        <translation>Listopad</translation>
     </message>
     <message>
         <source>December</source>
         <comment>Dec</comment>
-        <translation type="unfinished"></translation>
+        <translation>Prosinec</translation>
     </message>
     <message>
         <source>January</source>
-        <translation type="unfinished"></translation>
+        <translation>Leden</translation>
     </message>
     <message>
         <source>February</source>
-        <translation type="unfinished"></translation>
+        <translation>Únor</translation>
     </message>
     <message>
         <source>March</source>
-        <translation type="unfinished"></translation>
+        <translation>Březen</translation>
     </message>
     <message>
         <source>April</source>
-        <translation type="unfinished"></translation>
+        <translation>Duben</translation>
     </message>
     <message>
         <source>May long</source>
         <comment>May</comment>
-        <translation type="unfinished"></translation>
+        <translation>Květen</translation>
     </message>
     <message>
         <source>June</source>
-        <translation type="unfinished"></translation>
+        <translation>Červen</translation>
     </message>
     <message>
         <source>July</source>
-        <translation type="unfinished"></translation>
+        <translation>Červenec</translation>
     </message>
     <message>
         <source>August</source>
-        <translation type="unfinished"></translation>
+        <translation>Srpen</translation>
     </message>
     <message>
         <source>September</source>
-        <translation type="unfinished"></translation>
+        <translation>Září</translation>
     </message>
     <message>
         <source>October</source>
-        <translation type="unfinished"></translation>
+        <translation>Říjen</translation>
     </message>
     <message>
         <source>November</source>
-        <translation type="unfinished"></translation>
+        <translation>Listopad</translation>
     </message>
     <message>
         <source>December</source>
-        <translation type="unfinished"></translation>
+        <translation>Prosinec</translation>
     </message>
 </context>
 <context>
     <name>KMessageBox</name>
     <message>
         <source>Sorry</source>
-        <translation type="unfinished"></translation>
+        <translation>Lituji</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Varování</translation>
     </message>
     <message>
         <source>Question</source>
-        <translation type="unfinished"></translation>
+        <translation>Otázka</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Storno</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Informace</translation>
     </message>
 </context>
 <context>
@@ -580,205 +580,216 @@
 Do you want to reload it?
 
 If you cancel you will lose these changes next time you save this file</source>
-        <translation type="unfinished"></translation>
+        <translation>Soubor %1 byl na disku změněn.
+Chcete ho znovu nahrát?
+
+Jestliže dáte Storno, tak při dalším ukládání ztratíte tyto změny</translation>
     </message>
     <message>
         <source>File has changed on Disk</source>
-        <translation type="unfinished"></translation>
+        <translation>Soubor na disku byl změněn</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ano</translation>
     </message>
 </context>
 <context>
     <name>KateView</name>
     <message>
         <source>Undo/Redo &amp;History...</source>
-        <translation type="unfinished"></translation>
+        <translation>Zpět/Znovu &amp;Historie...</translation>
     </message>
     <message>
         <source>&amp;Configure Editor...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;konfigurovat editor...</translation>
     </message>
     <message>
         <source>&amp;Highlight Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Režim zvýrazňování</translation>
     </message>
     <message>
         <source>&amp;Deselect All</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Odoznačit vše</translation>
     </message>
     <message>
         <source>Invert &amp;Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Invertovat &amp;výběr</translation>
     </message>
     <message>
         <source>Increase Font Sizes</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvětšit velikosti písma</translation>
     </message>
     <message>
         <source>Decrease Font Sizes</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmenšit velikosti písma</translation>
     </message>
     <message>
         <source>Apply Word Wrap</source>
-        <translation type="unfinished"></translation>
+        <translation>Aplikovat zalamování slov</translation>
     </message>
     <message>
         <source>Editing Co&amp;mmand</source>
-        <translation type="unfinished"></translation>
+        <translation>Úprava &amp;příkazu</translation>
     </message>
     <message>
         <source>Toggle &amp;Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Přepnout &amp;Bookmarky</translation>
     </message>
     <message>
         <source>Clear Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat Bookmarky</translation>
     </message>
     <message>
         <source>&amp;Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Bookmarky</translation>
     </message>
     <message>
         <source>Show &amp;IconBorder</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit okraj &amp;ikon</translation>
     </message>
     <message>
         <source>&amp;Indent</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;odsazovat</translation>
     </message>
     <message>
         <source>&amp;Unindent</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Neodsazovat</translation>
     </message>
     <message>
         <source>&amp;Clean Indentation</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vymazat odsazování</translation>
     </message>
     <message>
         <source>C&amp;omment</source>
-        <translation type="unfinished"></translation>
+        <translation>K&amp;omentovat</translation>
     </message>
     <message>
         <source>Unco&amp;mment</source>
-        <translation type="unfinished"></translation>
+        <translation>Odko&amp;mentovat</translation>
     </message>
     <message>
         <source>&amp;Vertical Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vertikální výběr</translation>
     </message>
     <message>
         <source>&amp;End Of Line</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Konec řádky</translation>
     </message>
     <message>
         <source>Und&amp;o</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zpět</translation>
     </message>
     <message>
         <source>Re&amp;do</source>
-        <translation type="unfinished"></translation>
+        <translation>Z&amp;novu</translation>
     </message>
     <message>
         <source>The current Document has been modified.
 Would you like to save it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokument byl modifikován.
+Chcete ho uložit?</translation>
     </message>
     <message>
         <source>Could not save the document.
 Discard it and continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokument nelze uložit.
+Vyhodit ho a pokračovat?</translation>
     </message>
     <message>
         <source>&amp;Discard</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vyhodit</translation>
     </message>
     <message>
         <source>Undo/Redo History</source>
-        <translation type="unfinished"></translation>
+        <translation>Historie Zpět/Znovu</translation>
     </message>
     <message>
         <source>End of document reached.
 Continue from the beginning?</source>
-        <translation type="unfinished"></translation>
+        <translation>Byl dosažen konec dokumentu.
+Pokračovat od začátku?</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Hledat</translation>
     </message>
     <message>
         <source>Continue</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokračovat</translation>
     </message>
     <message>
         <source>Beginning of document reached.
 Continue from the end?</source>
-        <translation type="unfinished"></translation>
+        <translation>Byl dosažen začátek dokumentu.
+Pokračovat od konce?</translation>
     </message>
     <message>
         <source>Search string &apos;%1&apos; not found!</source>
-        <translation type="unfinished"></translation>
+        <translation>Hledaný řetězec &apos;%1&apos; nebyl nalezen!</translation>
     </message>
     <message>
         <source>%1 replacement(s) made</source>
-        <translation type="unfinished"></translation>
+        <translation>Bylo provedeno %1 nahrazení</translation>
     </message>
     <message>
         <source>Replace</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahradit</translation>
     </message>
     <message>
         <source>%1 replacement(s) made.
 End of document reached.
 Continue from the beginning?</source>
-        <translation type="unfinished"></translation>
+        <translation>Bylo provedeno %1 nahrazení.
+Byl dosažen konec dokumentu.
+Pokračovat od začátku?</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Stop</translation>
     </message>
     <message>
         <source>%1 replacement(s) made.
 Beginning of document reached.
 Continue from the end?</source>
-        <translation type="unfinished"></translation>
+        <translation>Bylo provedeno %1 nahrazení.
+Byl dosažen začátek dokumentu.
+Pokračovat od konce?</translation>
     </message>
     <message>
         <source>Configure Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurovat editor</translation>
     </message>
     <message>
         <source>Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Barvy</translation>
     </message>
     <message>
         <source>Fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>Písma</translation>
     </message>
     <message>
         <source>Indent</source>
-        <translation type="unfinished"></translation>
+        <translation>Odsazování</translation>
     </message>
     <message>
         <source>Select</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit</translation>
     </message>
     <message>
         <source>Highlighting</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvýrazňování</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Out of Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Nedostatek místa</translation>
     </message>
     <message>
         <source>There was a problem creating
@@ -787,185 +798,189 @@ for this program.
 
 Please free up some space and
 try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepodařilo se vytvořit konfiguraci
+pro tento program.
+
+Prosím nějaké místo a zkuste
+to znovu.</translation>
     </message>
 </context>
 <context>
     <name>ReplacePrompt</name>
     <message>
         <source>Replace Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahradit text</translation>
     </message>
     <message>
         <source>&amp;All</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vše</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ne</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ano</translation>
     </message>
     <message>
         <source>Replace this occurence?</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahradit tento výskyt?</translation>
     </message>
 </context>
 <context>
     <name>SearchDialog</name>
     <message>
         <source>Find Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Hledat text</translation>
     </message>
     <message>
         <source>&amp;Text To Find:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Text pro hledání:</translation>
     </message>
     <message>
         <source>Regular Expression</source>
-        <translation type="unfinished"></translation>
+        <translation>Regulární výraz</translation>
     </message>
     <message>
         <source>Replace Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahradit text</translation>
     </message>
     <message>
         <source>&amp;Replace With:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nahradit čím:</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Možnosti</translation>
     </message>
     <message>
         <source>C&amp;ase Sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Rozlišovat velikost</translation>
     </message>
     <message>
         <source>&amp;Whole Words Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Jen &amp;celá slova</translation>
     </message>
     <message>
         <source>&amp;From Beginning</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Od začátku</translation>
     </message>
     <message>
         <source>Find &amp;Backwards</source>
-        <translation type="unfinished"></translation>
+        <translation>Od &amp;konce</translation>
     </message>
     <message>
         <source>&amp;Selected Text</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Označený text</translation>
     </message>
     <message>
         <source>&amp;Prompt On Replace</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ptát se při nahrazování</translation>
     </message>
 </context>
 <context>
     <name>SelectConfigTab</name>
     <message>
         <source>&amp;Persistent Selections</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Trvalá označování</translation>
     </message>
     <message>
         <source>&amp;Overwrite Selections</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Přepsat označování</translation>
     </message>
     <message>
         <source>Mouse &amp;Autocopy</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Automaticky kopírovat myší</translation>
     </message>
     <message>
         <source>&amp;X11-like Single Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Označování jako v &amp;X11</translation>
     </message>
     <message>
         <source>&amp;Vertical Selections</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vertikální označování</translation>
     </message>
     <message>
         <source>&amp;Toggle Old</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Přepnout staré</translation>
     </message>
     <message>
         <source>Enabling this prevents key input or cursor movement by way of the arrow keys from causing the elimination of text selection.&lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; If the Overwrite Selections option is activated then any typed character input or paste operation will replace the selected text.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapnutím této položky zabráníte odstranění označení textu při vložení znaku, nebo posunutí kurzoru šipkami. &lt;p&gt;&lt;b&gt;Poznámka:&lt;/b&gt; Jestliže je zapnutá volba Přepsat označování, tak jakýkoliv zapsaný znak, nebo operace vkládání nahradí označený text.</translation>
     </message>
     <message>
         <source>When this is on, any keyed character input or paste operation will replace the selected text.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jestliže je volba zapnutá, tak jakýkoliv zapsaný znak, nebo operace vkládání nahradí označený text.</translation>
     </message>
     <message>
         <source>When this is on, any text selected with the mouse will be automatically copied to the clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jestliže je volba zapnutá, tak jakýkoliv text označený myší bude zkopírován do schránky.</translation>
     </message>
     <message>
         <source>Not implemented yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Není ještě implementováno.</translation>
     </message>
     <message>
         <source>Enabling this allows you to make vertical selections.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapnutím této položky vám bude umožněno provádět vertikální označování.</translation>
     </message>
     <message>
         <source>Not yet implemented.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ještě nebylo implementováno.</translation>
     </message>
 </context>
 <context>
     <name>StyleChanger</name>
     <message>
         <source>Normal:</source>
-        <translation type="unfinished"></translation>
+        <translation>Normální:</translation>
     </message>
     <message>
         <source>Selected:</source>
-        <translation type="unfinished"></translation>
+        <translation>Označený:</translation>
     </message>
     <message>
         <source>Bold</source>
-        <translation type="unfinished"></translation>
+        <translation>Tučně</translation>
     </message>
     <message>
         <source>Italic</source>
-        <translation type="unfinished"></translation>
+        <translation>Kurzíva</translation>
     </message>
 </context>
 <context>
     <name>SyntaxDocument</name>
     <message>
         <source>Can&apos;t open %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze otevřít %1</translation>
     </message>
     <message>
         <source>Other</source>
-        <translation type="unfinished"></translation>
+        <translation>Jiné</translation>
     </message>
 </context>
 <context>
     <name>UndoHistory</name>
     <message>
         <source>Undo List</source>
-        <translation type="unfinished"></translation>
+        <translation>Seznam Zpět</translation>
     </message>
     <message>
         <source>Redo List</source>
-        <translation type="unfinished"></translation>
+        <translation>Seznam Znovu</translation>
     </message>
     <message>
         <source>&amp;Undo</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zpět</translation>
     </message>
     <message>
         <source>&amp;Redo</source>
-        <translation type="unfinished"></translation>
+        <translation>Z&amp;novu</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Za&amp;vřít</translation>
     </message>
 </context>
 </TS>
