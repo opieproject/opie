@@ -561,8 +561,8 @@ bool AdvancedFm::copyFile( const QString & src, const QString & dest ) {
    srcFile.close();
    destFile.close();
     // Set file permissions
-  if( stat( (const char *) src, &status ) == 0 )  {
-      chmod( (const char *) dest, status.st_mode );
+  if( stat( QFile::encodeName(src), &status ) == 0 )  {
+      chmod( QFile::encodeName(dest), status.st_mode );
     }
 
   return success;
