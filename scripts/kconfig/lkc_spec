@@ -1,0 +1,250 @@
+1. General Structure
+
+The configuration file describes a series of menu entries. These menu
+entries are organized in a tree structure. The following statements
+start a new menu entry definition (and end a previous menu entry):
+- config
+- choice
+- comment
+- menu
+The following statements are control entries and also end the definition
+of a previous menu entry:
+- source
+- if
+
+2. Dependencies
+
+Every menu entry has dependencies, which define it's visibility in the
+menu structure. What makes these dependencies more difficult is that
+they use three states instead of two, that most programmers are familiar
+with. The additional 'mod' state is needed to describe drivers which
+are not compiled into the kernel, but are compiled as modules, which
+can be loaded at runtime. Nevertheless they should be straigthforward
+to use.
+Dependencies describe in first place the relation between configuration
+symbols and consequently between different parts of the kernel. To
+simplify the verification of the rule base, dependencies must be
+hierarchical, that means no recursive dependencies are allowed. The only
+possible non-hierarchical dependency are exclusions (aka choices), to
+cover typical uses during kernel configuration the semantic of choice
+statements has been extended (see the choice statement below).
+
+This allows to describe the following basic relationships:
+- initialization order of kernel subsystems. That means which other
+  subsystems are required (initialized and working), before a specific
+  subsystem can be initialized itself. This allows above requirement of
+  hierarchical dependencies.
+- mutual exclusions of kernel subsystems. This allows that only a single
+  of multiple possible subsystems is configured into the kernel.
+These are the same relationships, which are reasonably representable
+with cml1, but with this new config syntax it should be possible to
+easily add further relationships and other properties.
+
+The important usage of the dependency information is for generation of
+the menu structure. First it defines whether a symbol or statement is
+visible at all. If the dependency expression evaluates to 'n', the symbol
+is not visible (and is currently also not saved, this BTW corresponds to
+the behavior of xconfig, which is noted as a bug in Documentation/
+kbuild/config-language.txt, that didn't seem to be a problem so far, but
+that has to be considered).
+If a symbol is visible, it defines the possible input range for tristate
+symbols, if the dependency expression evaluates to 'm', a tristate symbol
+can only be set to 'n' or 'm', otherwise also 'y' is possible.
+Finally dependency information is also used to group symbols together.
+If a symbol entry is followed by other symbol entries which depends on
+the first one, the latter entries are associated with the first entry.
+The text config front end uses this information to automatically indent
+the entries, the qt interface creates further submenus. This can reduce
+the amount of explicit menu information required.
+
+syntax:
+
+This is the syntax of dependency expressions:
+
+<expr> ::= <symbol>				(1)
+           <symbol> '=' <symbol>		(2)
+           <symbol> '!=' <symbol>		(3)
+           '(' <expr> ')'			(4)
+           '!' <expr>				(5)
+           <expr> '||' <expr>			(6)
+           <expr> '&&' <expr>			(7)
+
+Expressions are listed in  decreasing order of precedence. An
+expression can have a value of 'n', 'm' or 'y' (or 0, 1, 2 respectively
+for calculations below).
+There are two type of symbols: constant and nonconstant symbols.
+Nonconstant symbols are the most common ones and are defined with the
+'config' statement. Nonconstant symbols consist entirely of alphanumeric
+characters or underscores.
+Constant symbols are only part of expressions. Constant symbols are
+always surrounded by single or double quotes. Within the quote any
+other character is allowed and the quotes can be escaped using '\'.
+Nonconstant symbols which are nowhere defined with 'config' are a
+special case, they behave like constant symbols, so that one can do
+"FOO=123", it usage should restricted to number values (this might
+be enforced later).
+
+expression syntax:
+
+(1) Convert the symbol into an expression. Boolean and tristate symbols
+    are simply converted into the respective expression values. All other
+    symbol types result in 'n'.
+(2) If the values of both symbols are equal, it returns 'y', otherwise 'n'.
+(3) If the values of both symbols are equal, it returns 'n', otherwise 'y'.
+(4) Returns the value of the expression. Used to override precedence.
+(5) Returns the result of (2-/expr/).
+(6) Returns the result of min(/expr/, /expr/).
+(7) Returns the result of max(/expr/, /expr/).
+
+3. "config"
+
+syntax:
+
+  "config" <symbol>
+  <config options>
+
+Defines a new config symbol. A symbol can be defined multiple times as
+long as the symbol type is always the same.
+
+config options:
+
+  "depends" <expr>
+
+defines the visibility and the input range of the config symbol.
+
+  "tristate" <prompt> "if" <expr>
+  "bool" <prompt> "if" <expr>
+  "int" <prompt> "if" <expr>
+  "hex" <prompt> "if" <expr>
+  "string" <prompt> "if" <expr>
+
+defines the type of the symbol and the prompt which is used to request a
+value from the user. Additional constraints for the visibility and the
+input range of the prompt can be defined after an "if" statement. The
+prompt and the "if" statement are optional, but an "if" statement
+without a prompt is not possible.
+
+  "prompt" <prompt> "if" <expr>
+
+same as above, but without defining the type of the symbol. This was
+generated by earlier versions of the converter and will likely
+disappear unless needed otherwise.
+
+  "default" <symbol> "if" <expr>
+
+defines a default value for the config symbol. Unless the config symbol
+was previously set by the user, it will set to this value. This means
+it will be used as default value for above input prompts or if no user
+prompt is visible the config symbol will be saved with this value. If
+multiple default statements are visible only the first is used.
+
+  "help"
+
+defines a help text for this statement. The end of the help text
+is determined by the level indentation, this means it ends at the first
+line which has a smaller indentation than the first line of the help text.
+
+4. "choice"
+
+syntax:
+
+  "choice"
+  <choice options>
+  <choice block>
+  "endchoice"
+
+defines a group of related config statements. There are two types of
+choice statements - bool and tristate.
+
+bool choice: allows only single config statement to be selected and
+set to "y".
+tristate choice: extends the bool choice by also allowing multiple
+config statement to be selected, but in this mode these will only be set
+"m". This can be used if multiple drivers for a single hardware exists
+and only a single driver can be compiled/loaded into the kernel, but all
+drivers can be compiled as modules.
+
+choice options:
+
+  "depends" <expr>
+
+defines the visibility and the input range of the choice.
+
+  "prompt" <prompt>
+
+defines the prompt which is presented to the user.
+
+  <optional>
+
+by default exactly one of the config statements of a bool choice has
+to be selected, this option allows that also no config statement has to
+be selected.
+
+  "default" <symbol>
+
+defines the default choice presented to the user. The prompt must be a
+one of symbols defined within this choice.
+
+  "help"
+
+defines a help text for this choice statement. The end of the help text
+is determined by the level indentation, this means it ends at the first
+line which has a smaller indentation than the first line of the help text.
+
+choice block:
+
+right now only config statements allowed. (It's possible to also allow
+other statements later.)
+
+5. "comment"
+
+syntax:
+
+  "comment" <prompt>
+  <comment options>
+
+defines the prompt which is displayed to the user during the
+configuration process and is also echoes it to the output files during
+output.
+
+comment options:
+
+  "depends" <expr>
+
+defines the visibility of the comment.
+
+6. "menu"
+
+syntax:
+
+  "menu" <prompt>
+  <menu options>
+  <menu block>
+  "endmenu"
+
+menu options:
+
+  "depends" <expr>
+
+defines the visibility of the menu.
+
+menu block:
+
+Any of the basic statements is allowed within a menu block.
+
+7. "if"
+
+syntax:
+
+  "if" <expr>
+  <if block>
+  "endif"
+
+8. "source"
+
+syntax:
+
+  "source" <prompt>
+
+reads the specified configuration file. this is done unconditionally,
+

@@ -1,0 +1,41 @@
+set -x
+#find \( -name "[Cc]onfig" -o -name "[Cc]onfig_*" \) -a ! -name "[Cc]onfig*.in" -a -type f -exec rm {} \;
+find -name "Kconfig*" -exec rm {} \;
+for a in alpha arm cris i386 ia64 m68k mips mips64 parisc ppc ppc64 s390 s390x sh sparc sparc64 um x86_64; do
+	$LKCSRC/lkcc $a >& log.$a
+	find -name "*.lkc" -exec mv {} {}-$a \;
+done
+set +x
+if false; then
+	#check differences between generated configs for archs
+	for c in `find -name "[cC]onfig.in"`; do
+		cn=`echo $c | sed 's,\(.*\)[cC]onfig\.in,\1Build.conf,'`
+		c1=''
+		for ca in $cn-*; do
+			if [ "$c1" = "" ]; then
+				echo "skip $ca"
+				c1=$ca
+			else
+				echo $ca
+				diff -u $c1 $ca
+			fi
+		done
+	done
+	exit 0
+fi
+rm *.lkc-*
+for a in alpha arm cris i386 ia64 m68k mips mips64 parisc ppc ppc64 s390 s390x sh sparc sparc64 um x86_64; do
+	for c in `find arch/$a -name "*.lkc-$a"`; do
+		cn=`echo $c | sed 's,\(.*\)\.lkc-.*,\1,'`
+		mv -v $c $cn
+	done
+done
+for c in `find -name "*.lkc-i386"`; do
+	cn=`echo $c | sed 's,\(.*\)\.lkc-.*,\1,'`
+	mv -v $c $cn
+	rm $cn.lkc-*
+done
+for c in `find -name "*.lkc-*"`; do
+	cn=`echo $c | sed 's,\(.*\)\.lkc-.*,\1,'`
+	mv -v $c $cn
+done

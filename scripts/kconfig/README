@@ -1,0 +1,17 @@
+This package requires flex, bison and qt to compile (actually it's
+possible without qt, but you'll miss most of the fun :) ).
+On most systems a simple 'make' should be enough, if you have qt
+installed in unusual location either set the QTDIR environment variable
+or issue 'make QTDIR=<path>'.
+
+'make install KERNELSRC=<path/to/linux/kernel> should be enough to
+install the package. The path must point to recent kernel sources,
+which will be converted to use this package. With 'make uninstall
+KERNELSRC=...' the package can be removed from the kernel again.
+
+lkc include a SWIG interface file. 'make ruby' builds a extension
+library for ruby in the .ruby dir.
+
+Have fun, Roman
+
+Please send all your comments to zippel@linux-m68k.org
