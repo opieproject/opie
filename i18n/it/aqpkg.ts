@@ -489,7 +489,7 @@ Sei sicuro?
     <name>QuestionDlg</name>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Elimina</translation>
+        <translation>Elimina</translation>
     </message>
 </context>
 <context>

@@ -8,23 +8,23 @@
     </message>
     <message>
         <source>new</source>
-        <translation type="unfinished"></translation>
+        <translation>nuovo</translation>
     </message>
     <message>
         <source>edit</source>
-        <translation type="unfinished"></translation>
+        <translation>modifica</translation>
     </message>
     <message>
         <source>delete</source>
-        <translation type="unfinished"></translation>
+        <translation>elimina</translation>
     </message>
     <message>
         <source>up</source>
-        <translation type="unfinished"></translation>
+        <translation>sù</translation>
     </message>
     <message>
         <source>down</source>
-        <translation type="unfinished"></translation>
+        <translation>giù</translation>
     </message>
 </context>
 <context>
