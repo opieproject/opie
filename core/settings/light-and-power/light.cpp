@@ -47,6 +47,7 @@
 
 #include <opie/odevice.h>
 
+using namespace Opie;
 
 LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags fl )
     : LightSettingsBase( parent, name, TRUE, fl )
