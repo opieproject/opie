@@ -5,19 +5,30 @@ export TOPDIR:=$(OPIEDIR)
 export QMAKESPECSDIR=$(OPIEDIR)/mkspecs
 export QMAKESPEC=$(QMAKESPECSDIR)/qws/linux-generic-g++
 
-all :
+# $(TOPDIR)/.config depends on .depends.cfgs, as it depends on $(configs)
+# in order to have a full set of config.in files.
+# .depends depends on $(TOPDIR)/.config
+# everything else depends on .depends, to ensure the dependencies are
+# intact.
+#
+# NOTE: The order in which things happen in this makefile is
+# 	-critical-. Do not rearrange this!
+ 
+all : $(TOPDIR)/.config
+
+$(TOPDIR)/.config : $(TOPDIR)/.depends.cfgs
+
+all menuconfig xconfig oldconfig config randconfig allyesconfig allnoconfig defconfig : $(TOPDIR)/.depends
 
 clean-configs : $(TOPDIR)/.depends
 	@echo "Wiping generated config.in files..."
 	@-rm -f $(configs)
 
--include $(TOPDIR)/.config
--include $(TOPDIR)/..config.cmd
--include $(TOPDIR)/.depends
+-include $(TOPDIR)/.depends.cfgs
 
-all : $(TOPDIR)/.depends $(configs) $(subdir-y)
+all menuconfig xconfig oldconfig config randconfig allyesconfig allnoconfig defconfig : $(configs)
 
-./.config: $(configs)
+$(TOPDIR)/.config: $(TOPDIR)/.depends.cfgs $(configs)
 	$(call descend,scripts/kconfig,conf)
 	@if [ ! -e $@ ]; then \
 		cp $(TOPDIR)/def-configs/opie $@; \
@@ -25,38 +36,47 @@ all : $(TOPDIR)/.depends $(configs) $(subdir-y)
 	@$(MAKE) -C scripts/kconfig conf;
 	./scripts/kconfig/conf -s ./config.in
 
-xconfig: $(configs)
+# config rules must have the $(configs) var defined
+# at the time that they run. we must ensure that .depends.cfgs
+# is built and included by the time we reach this point.
+	
+xconfig :
 	$(call descend,scripts/kconfig,qconf)
 	./scripts/kconfig/qconf ./config.in
 
-menuconfig: $(configs) scripts/lxdialog/lxdialog
+menuconfig : scripts/lxdialog/lxdialog
 	$(call descend,scripts/kconfig,mconf)
 	./scripts/kconfig/mconf ./config.in
 
-config: $(configs)
+config :
 	$(call descend,scripts/kconfig,conf)
 	./scripts/kconfig/conf ./config.in
  
-oldconfig: $(configs)
+oldconfig :
 	$(call descend,scripts/kconfig,conf)
 	./scripts/kconfig/conf -o ./config.in
  
-randconfig: $(configs)
+randconfig :
 	$(call descend,scripts/kconfig,conf)
 	./scripts/kconfig/conf -r ./config.in
  
-allyesconfig: $(configs)
+allyesconfig :
 	$(call descend,scripts/kconfig,conf)
 	./scripts/kconfig/conf -y ./config.in
  
-allnoconfig: $(configs)
+allnoconfig :
 	$(call descend,scripts/kconfig,conf)
 	./scripts/kconfig/conf -n ./config.in
  
-defconfig: $(configs)
+defconfig :
 	$(call descend,scripts/kconfig,conf)
 	./scripts/kconfig/conf -d ./config.in
 
 
-include $(TOPDIR)/Rules.make
+-include $(TOPDIR)/.config
+-include $(TOPDIR)/..config.cmd
+-include $(TOPDIR)/.depends
 
+all : $(subdir-y)
+	
+include $(TOPDIR)/Rules.make

@@ -3,7 +3,7 @@
 $(configs) :
 	$(call makecfg,$@)
 
-$(TOPDIR)/.depends : $(shell if [ -e $(TOPDIR)/config.in ]\; then echo $(TOPDIR)/config.in\; fi\;)
+$(TOPDIR)/.depends : $(shell if [ -e $(TOPDIR)/config.in ]\; then echo $(TOPDIR)/config.in\; fi\;) $(TOPDIR)/.config
 	@echo Generating dependency information...
 # add to subdir-y, and add descend rules
 	@cat $(TOPDIR)/packages | \
@@ -17,10 +17,12 @@ $(TOPDIR)/.depends : $(shell if [ -e $(TOPDIR)/config.in ]\; then echo $(TOPDIR)
 # interpackage dependency generation
 	@cat $(TOPDIR)/packages | \
 		$(TOPDIR)/scripts/deps.pl >> $(TOPDIR)/.depends
+
+$(TOPDIR)/.depends.cfgs:
 # generation of config.in files, and config.in interdependencies
 	@find $(TOPDIR)/ -name config.in | ( for cfg in `cat`; do dir=`dirname $$cfg`; name=`basename $$dir`; if [ ! -e $$dir/$$name.pro ]; then echo $$dir; fi; done; ) > dirs
-	@echo "configs += `echo \`cat dirs | sed -e's,^$(TOPDIR)/,$$(TOPDIR)/,g' -e's,$$,/config.in,g'\``" >> .depends
-	@cat dirs | ( for i in `cat`; do if [ "`cat dirs|grep $$i 2>/dev/null|wc -l`" -ne "1" ]; then deps=`cat dirs|grep $$i| grep -v "^$$i$$"|for i in \`cat|sed -e's,^$(TOPDIR)/,$$(TOPDIR)/,g'\`; do echo $$i/config.in; done`; echo `echo $$i/config.in|sed -e 's,^$(TOPDIR)/,$$(TOPDIR)/,'` : $$deps; fi; done ) >> $(TOPDIR)/.depends
+	@echo "configs += `echo \`cat dirs | sed -e's,^$(TOPDIR)/,$$(TOPDIR)/,g' -e's,$$,/config.in,g'\``" >> $@
+	@cat dirs | ( for i in `cat`; do if [ "`cat dirs|grep $$i 2>/dev/null|wc -l`" -ne "1" ]; then deps=`cat dirs|grep $$i| grep -v "^$$i$$"|for i in \`cat|sed -e's,^$(TOPDIR)/,$$(TOPDIR)/,g'\`; do echo $$i/config.in; done`; echo `echo $$i/config.in|sed -e 's,^$(TOPDIR)/,$$(TOPDIR)/,'` : $$deps; fi; done ) >> $@
 	@-rm -f dirs
 
 $(TOPDIR)/qmake/qmake :
