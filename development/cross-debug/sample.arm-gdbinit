@@ -1,0 +1,19 @@
+set solib-absolute-prefix /dev/null
+set solib-search-path /home/sandman/work/opie/lib:/opt/Embedix/tools/arm-linux/lib
+
+define rtz
+target remote zaurus:2345
+break main
+end
+
+define rt36
+target remote ipaq2:2345
+break main
+end
+
+
+define rt38
+target remote ipaq:2345
+break main
+end
+
