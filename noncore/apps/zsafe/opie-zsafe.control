@@ -6,4 +6,4 @@ Version: $QPE_VERSION$EXTRAVERSION
 Architecture: arm
 Depends: task-opie-minimal
 Maintainer: Carsten Schneider <zcarsten@gmx.net>
-Description: This password manager program for Opie.
+Description: This is a password manager program for Opie.
