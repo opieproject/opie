@@ -26,10 +26,8 @@ for i in `find . -name "*.pro"` ; do
 			echo "$i: $LANG already there" 
 		else 
 	 		echo "$i: Adding $LANG" 
-			perl -p -i.bak -e 's/^(TRANSLATIONS\s+)(([^+])?=)(.+?i18n\/)(.+?)(\/.+?)$/$1$2$4$5$6\n$1+=$4'$LANG'$6/' $i
+			perl -p -i.bak -e 's/^(TRANSLATIONS\s*\+?=\s*)(.+?i18n\/)(.+?)(\/.+?\.ts)(.*)$/$1$2$3$4 \\\n\t $2'$LANG'$4$5/' $i
 		fi
 	fi
 done
-
-
 
