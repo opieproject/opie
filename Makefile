@@ -35,7 +35,7 @@ APPS=$(LOCALAPPS) core/addressbook calculator clock datebook \
     settings/sound \
     settings/systemtime \
     solitaire spreadsheet tetrix textedit \
-    todo wordgame embeddedkonsole taskbar sysinfo \
+    todo wordgame embeddedkonsole launcher sysinfo \
     parashoot snake citytime showimg netsetup tableviewer \
     qipkg mindbreaker go qasteroids qcop fifteen keypebble  today opiemail/converter opiemail \
     noncore/tictac noncore/opieftp noncore/drawpad noncore/kcheckers
