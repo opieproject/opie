@@ -62,6 +62,8 @@ public:
     QString message();
     /* Return the message with all HTML code escaped (for example &lt; instead of '<') */
     QString htmlMessage();
+
+    static QString toHTML(QString message);
     void *getParam(int index);
 protected:
     IRCOutputType      m_type;

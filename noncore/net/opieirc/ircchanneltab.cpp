@@ -45,9 +45,11 @@ void IRCChannelTab::processCommand() {
                 /* Command mode */
                 m_parentTab->executeCommand(this, text);;
             } else {
+                if (text.startsWith("//"))
+                    text = text.right(text.length()-1);
                 if (session()->isSessionActive()) {
                     session()->sendMessage(m_channel, m_field->text());
-                    appendText("&lt;<font color=\"#dd0000\">"+m_parentTab->server()->nick()+"</font>&gt; "+m_field->text()+"<br>");
+                    appendText("&lt;<font color=\"#dd0000\">"+m_parentTab->server()->nick()+"</font>&gt; "+IRCOutput::toHTML(m_field->text())+"<br>");
                 }
             }
         } else {

@@ -59,6 +59,17 @@ void IRCServerTab::executeCommand(IRCTab *tab, QString line) {
         } else {
             tab->appendText("<font color=\"#ff0000\">Unknown channel format!</font><br>"); 
         }
+    } else if (command == "ME") {
+        QString text = IRCOutput::toHTML(line.right(line.length()-4));
+        if (text.length() > 0) {
+            if (tab->isA("IRCChannelTab")) {
+                tab->appendText("<font color=\"#cc0000\">*" + m_server.nick() + " " + text + "</font><br>");
+                m_session->sendAction(((IRCChannelTab *)tab)->channel(), text);
+            } else if (tab->isA("IRCQueryTab")) {
+            } else {
+                tab->appendText("<font color=\"#ff0000\">Invalid tab for this command</font><br>"); 
+            }
+        }
     } else {
         tab->appendText("<font color=\"#ff0000\">Unknown command</font><br>"); 
     }

@@ -14,7 +14,11 @@ QString IRCOutput::message() {
 }
 
 QString IRCOutput::htmlMessage() {
-    QString htmlMessage =m_message.replace(QRegExp("&"), "&amp;");
+    return toHTML(m_message);
+}
+
+QString IRCOutput::toHTML(QString message) {
+    QString htmlMessage =message.replace(QRegExp("&"), "&amp;");
     htmlMessage = htmlMessage.replace(QRegExp(">"), "&gt;");
     htmlMessage = htmlMessage.replace(QRegExp("<"), "&lt;");
     return htmlMessage;

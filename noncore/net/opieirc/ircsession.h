@@ -50,6 +50,8 @@ public:
 
     void sendMessage(IRCPerson *person, QString message);
     void sendMessage(IRCChannel *channel, QString message);
+    void sendAction(IRCPerson *person, QString message);
+    void sendAction(IRCChannel *channel, QString message);
     IRCChannel *getChannel(QString channelname);
     IRCPerson  *getPerson(QString nickname);
 protected:

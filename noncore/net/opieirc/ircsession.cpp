@@ -36,6 +36,14 @@ void IRCSession::sendMessage(IRCChannel *channel, QString message) {
     m_connection->sendLine("PRIVMSG " + channel->channelname() + " :" + message);
 }
 
+void IRCSession::sendAction(IRCChannel *channel, QString message) {
+    m_connection->sendLine("PRIVMSG " + channel->channelname() + " :\001ACTION " + message + "\001");
+}
+
+void IRCSession::sendAction(IRCPerson *person, QString message) {
+    m_connection->sendLine("PRIVMSG " + person->nick() + " :\001ACTION " + message + "\001");
+}
+
 bool IRCSession::isSessionActive() {
     return m_connection->isConnected(); 
 }
