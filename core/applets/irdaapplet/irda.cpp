@@ -56,7 +56,7 @@
 
 IrdaApplet::IrdaApplet( QWidget *parent, const char *name )
     : QWidget( parent, name ) {
-    setFixedHeight( 18 );
+    setFixedHeight( 14 );
     setFixedWidth( 14 );
     sockfd = socket(PF_INET, SOCK_DGRAM, IPPROTO_IP);
     irdaOnPixmap = Resource::loadPixmap( "irdaapplet/irdaon" );
@@ -66,10 +66,38 @@ IrdaApplet::IrdaApplet( QWidget *parent, const char *name )
     receiveActive = false;
     startTimer(5000);
     timerEvent(NULL);
+    popupMenu = 0;
+    devicesAvailable.setAutoDelete(TRUE);
 }
 
 IrdaApplet::~IrdaApplet() {
     close(sockfd);
+    if( popupMenu ) { delete popupMenu; }
+}
+
+void IrdaApplet::popup(QString message, QString icon="") {
+    if ( ! popupMenu ) {
+	popupMenu = new QPopupMenu();
+    }
+    popupMenu->clear();
+    if( icon == "" ) {
+	popupMenu->insertItem( message, 0 );
+    } else {
+	popupMenu->insertItem( QIconSet ( Resource::loadPixmap ( icon )),
+		message, 0 );
+    }
+
+    QPoint p = mapToGlobal ( QPoint ( 0, 0 ));
+    QSize s = popupMenu->sizeHint ( );
+    popupMenu->popup( QPoint (
+	p. x ( ) + ( width ( ) / 2 ) - ( s. width ( ) / 2 ),
+	p. y ( ) - s. height ( ) ), 0);
+
+    QTimer::singleShot( 2000, this, SLOT(popupTimeout()) );
+}
+
+void IrdaApplet::popupTimeout() {
+    popupMenu->hide();
 }
 
 int IrdaApplet::checkIrdaStatus() {
@@ -91,10 +119,13 @@ int IrdaApplet::setIrdaStatus(int c) {
     if (ioctl(sockfd, SIOCGIFFLAGS, &ifr))
         return -1;
 
-    if (c)
+    if (c) {
         ifr.ifr_flags |= IFF_UP;
-    else
+    } else {
+	setIrdaDiscoveryStatus(0);
+	setIrdaReceiveStatus(0);
         ifr.ifr_flags &= ~IFF_UP;
+    }
 
     if (ioctl(sockfd, SIOCSIFFLAGS, &ifr))
         return -1;
@@ -134,11 +165,31 @@ int IrdaApplet::setIrdaDiscoveryStatus(int d) {
     return 0;
 }
 
+int IrdaApplet::setIrdaReceiveStatus(int d) {
+    if(d) {
+        qWarning("Enable receive" );
+        QCopEnvelope e("QPE/Obex", "receive(int)" );
+        e << 1;
+        receiveActive = true;
+        receiveStateChanged = true;
+    } else {
+        qWarning("Disable receive" );
+        QCopEnvelope e("QPE/Obex", "receive(int)" );
+        e << 0;
+        receiveActive = false;
+        receiveStateChanged = true;
+    }
+    return 0;
+}
 
 void IrdaApplet::showDiscovered() {
     QFile discovery("/proc/net/irda/discovery");
 
     if (discovery.open(IO_ReadOnly) ) {
+	int qcopsend = FALSE;
+
+	QString discoveredDevice;
+	QString deviceAddr;
         QStringList list;
         // since it is /proc we _must_ use QTextStream
         QTextStream stream ( &discovery);
@@ -146,36 +197,69 @@ void IrdaApplet::showDiscovered() {
         streamIn = stream.read();
         list = QStringList::split("\n", streamIn);
 
+	QDictIterator<QString> it( devicesAvailable ); 
+	while ( it.current() ) {
+	    devicesAvailable.replace( it.currentKey(), new QString("+++" + *devicesAvailable[it.currentKey()]) );
+	    //qDebug("IrdaMon: " + it.currentKey());
+	    //qDebug("  =" + *devicesAvailable[it.currentKey()] );
+	    ++it;
+	}
+
         for(QStringList::Iterator line=list.begin(); line!=list.end(); line++) {
+	    qDebug( (*line) );
             if( (*line).startsWith("nickname:") ){
-                discoveredDevice  = (*line).mid(((*line).find(':'))+1,(*line).find(',')-(*line).find(':')-1);
-                qDebug(discoveredDevice);
+                discoveredDevice  = (*line).mid(((*line).find(':'))+2,(*line).find(',')-(*line).find(':')-2);
+                deviceAddr = (*line).mid( (*line).find( "daddr:" )+9, 8 );
+
+                qDebug(discoveredDevice + "(" + deviceAddr + ")");
+
+		if( ! devicesAvailable.find(deviceAddr) ) {
+		    popup( tr("Found:") + " " + discoveredDevice );
+		    qcopsend = TRUE;
+		}
+		devicesAvailable.replace( deviceAddr, new QString(discoveredDevice) );
+		//qDebug("IrdaMon: " + deviceAddr + "=" + *devicesAvailable[deviceAddr] );
             }
         }
-    }
 
+	it.toFirst();
+	while ( it.current() ) {
+	    qDebug("IrdaMon: delete " + it.currentKey() + "=" + *devicesAvailable[it.currentKey()] + "?");
+	    if ( (*it.current()).left(3) == "+++" ) {
+		popup( tr("Lost:") + " " + (*devicesAvailable[it.currentKey()]).mid(3) );
+		devicesAvailable.remove( it.currentKey() );
+	        qDebug("IrdaMon: delete " + it.currentKey() + "!");
+		qcopsend = TRUE;
+	    }
+	    ++it;
+	}
+	/* XXX if( qcopsend ) {
+	    QCopEnvelope e("QPE/Network", "irdaSend(bool)" );
+	    e << (devicesAvailable.count() > 0) ;
+	} */
+    }
 }
 
 void IrdaApplet::mousePressEvent( QMouseEvent *) {
     QPopupMenu *menu = new QPopupMenu();
     QString cmd;
     int ret=0;
-    showDiscovered();
 
     /* Refresh active state */
     timerEvent(NULL);
 
 //	menu->insertItem( tr("More..."), 4 );
 
-    menu->insertItem( tr("Discovered Device:"),  9);
+    if (irdaactive && devicesAvailable.count() > 0) {
+	menu->insertItem( tr("Discovered Device:"),  9);
 
-    if ( !discoveredDevice.isEmpty() ) {
-        menu->insertItem( discoveredDevice ,7 );
-    } else {
-        menu->insertItem( tr("None"), 8);
+	QDictIterator<QString> it( devicesAvailable );
+	while ( it.current() ) {
+	    menu->insertItem( *devicesAvailable[it.currentKey()]);
+	    ++it;
+	}
+	menu->insertSeparator();
     }
-
-    menu->insertSeparator();
 
     if (irdaactive) {
         menu->insertItem( tr("Disable IrDA"), 0 );
@@ -183,16 +267,18 @@ void IrdaApplet::mousePressEvent( QMouseEvent *) {
         menu->insertItem( tr("Enable IrDA"), 1 );
     }
 
-    if (irdaDiscoveryActive) {
-        menu->insertItem( tr("Disable Discovery"), 2 );
-    } else {
-        menu->insertItem( tr("Enable Discovery"), 3 );
-    }
+    if (irdaactive) {
+	if (irdaDiscoveryActive) {
+	    menu->insertItem( tr("Disable Discovery"), 2 );
+	} else {
+	    menu->insertItem( tr("Enable Discovery"), 3 );
+	}
 
-    if( receiveActive ){
-        menu->insertItem( tr("Disable Receive"), 5 );
-    } else {
-        menu->insertItem( tr("Enable Receive"), 4 );
+	if( receiveActive ){
+	    menu->insertItem( tr("Disable Receive"), 4 );
+	} else {
+	    menu->insertItem( tr("Enable Receive"), 5 );
+	}
     }
 
     QPoint p = mapToGlobal ( QPoint ( 0, 0 ));
@@ -201,7 +287,7 @@ void IrdaApplet::mousePressEvent( QMouseEvent *) {
 	p. x ( ) + ( width ( ) / 2 ) - ( s. width ( ) / 2 ), 
 	p. y ( ) - s. height ( ) ), 0);
 
-    qDebug("ret was %d\n", ret);
+    // qDebug("ret was %d\n", ret);
 
     switch(ret) {
     case 0:
@@ -221,20 +307,12 @@ void IrdaApplet::mousePressEvent( QMouseEvent *) {
         timerEvent(NULL); // NULL is undefined in c++ use 0 or 0l
         break;
     case 4: { // enable receive
-        qWarning("Enable receive" );
-        QCopEnvelope e("QPE/Obex", "receive(int)" );
-        e << 1;
-        receiveActive = true;
-        receiveStateChanged = true;
+	setIrdaReceiveStatus(0);
         timerEvent(NULL);
         break;
     }
     case 5: { // disable receive
-        qWarning("Disable receive" );
-        QCopEnvelope e("QPE/Obex", "receive(int)" );
-        e << 0;
-        receiveActive = false;
-        receiveStateChanged = true;
+	setIrdaReceiveStatus(1);
         timerEvent(NULL);
         break;
     }
@@ -258,6 +336,11 @@ void IrdaApplet::timerEvent( QTimerEvent * ) {
     irdaactive = checkIrdaStatus();
     irdaDiscoveryActive = checkIrdaDiscoveryStatus();
 
+    
+    if (irdaDiscoveryActive) {
+	showDiscovered();
+    }
+
     if ((irdaactive != oldactive) || (irdaDiscoveryActive != olddiscovery) || receiveUpdate ) {
         paintEvent(NULL);
     }
@@ -270,15 +353,15 @@ void IrdaApplet::paintEvent( QPaintEvent* ) {
 
     p.eraseRect ( 0, 0, this->width(), this->height() );
     if (irdaactive > 0) {
-        p.drawPixmap( 0, 1,  irdaOnPixmap );
+        p.drawPixmap( 0, 0,  irdaOnPixmap );
     } else {
-        p.drawPixmap( 0, 1,  irdaOffPixmap );
+        p.drawPixmap( 0, 0,  irdaOffPixmap );
     }
 
     if (irdaDiscoveryActive > 0) {
-        p.drawPixmap( 0, 1,  irdaDiscoveryOnPixmap );
+        p.drawPixmap( 0, 0,  irdaDiscoveryOnPixmap );
     }
     if (receiveActive) {
-        p.drawPixmap( 0, 1, receiveActivePixmap);
+        p.drawPixmap( 0, 0, receiveActivePixmap);
     }
 }

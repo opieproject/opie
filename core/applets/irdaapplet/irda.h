@@ -23,7 +23,8 @@
 #include <qguardedptr.h>
 #include <qtimer.h>
 #include <qfile.h>
-
+#include <qpopupmenu.h>
+#include <qdict.h>
 
 class IrdaApplet : public QWidget
 {
@@ -42,24 +43,26 @@ private:
     int setIrdaStatus(int);
     int checkIrdaDiscoveryStatus();
     int setIrdaDiscoveryStatus(int);
+    int setIrdaReceiveStatus(int);
     void showDiscovered();
     int sockfd;
+
+private slots:
+    void popupTimeout();
 
 private:
     QPixmap irdaOnPixmap;
     QPixmap irdaOffPixmap;
     QPixmap irdaDiscoveryOnPixmap;
     QPixmap receiveActivePixmap;
-    QString discoveredDevice;
     int irdaactive; // bool and bitfields later bool irdaactive :1 ;
     int irdaDiscoveryActive;
     bool receiveActive : 1;
     bool receiveStateChanged;
-private slots:
-
-
+    QPopupMenu *popupMenu;
+    void popup(QString message, QString icon="");
+    QDict<QString> devicesAvailable;
 };
 
 
 #endif // __SCREENSHOT_APPLET_H__
-
