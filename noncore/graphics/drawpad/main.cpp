@@ -19,8 +19,10 @@ int main(int argc, char **argv)
 {
     QPEApplication a(argc, argv);
 
-    DrawPad mw;
-    a.showMainWidget(&mw);
-
+    DrawPad *mw = new DrawPad();;
+    a.showMainWidget(mw );
+    
+    
     return a.exec();
+    delete mw;
 }
