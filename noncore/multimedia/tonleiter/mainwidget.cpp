@@ -17,12 +17,29 @@ MainWidget::MainWidget(QWidget* parent,const char* name,WFlags f)
     mainlayout->addWidget(menuwidget);
 
     fretboard=new Graph::FretBoard(data,mainwidget);
+    connect(fretboard,SIGNAL(pressed()),this,SLOT(fretboardPressed()));
     mainlayout->addWidget(fretboard);
+
+    showmenu=true;
 
 }
 //****************************************************************************
 MainWidget::~MainWidget()
 {
+}
+//****************************************************************************
+void MainWidget::fretboardPressed()
+{
+    if(showmenu)
+    {
+        menuwidget->hide();
+        showmenu=false;
+    }
+    else
+    {
+        menuwidget->show();
+        showmenu=true;
+    }
 }
 //****************************************************************************
 //****************************************************************************

@@ -76,9 +76,18 @@ int Instrument::string(int id)
 //****************************************************************************
 int Instrument::noOfOctaves()
 {
-    int lowest=strings[0];
-    int highest=strings[strings.count()-1]+frets;
-    return (int) ceil((highest-lowest)/12.0);
+    return (int) ceil((highestNote()-lowestNote())/12.0);
+}
+//****************************************************************************
+int Instrument::lowestNote()
+{
+    return strings[0];
+
+}
+//****************************************************************************
+int Instrument::highestNote()
+{
+    return strings[strings.count()-1]+frets;
 }
 //****************************************************************************
 //****************************************************************************

@@ -14,9 +14,12 @@ private:
     Data::TonleiterData* data;
     Menu::MenuWidget* menuwidget;
     Graph::FretBoard* fretboard;
+    bool showmenu;
 public:
     MainWidget(QWidget* parent=0,const char* name="MainWidget",WFlags f=0);
     virtual ~MainWidget();
+private slots:
+    void fretboardPressed();
 };
 
 #endif //TONLEITER_MAINWIDGET_H

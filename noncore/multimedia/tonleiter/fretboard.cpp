@@ -53,6 +53,12 @@ void Graph::FretBoard::resizeEvent(QResizeEvent* re)
     Q_UNUSED(re);
 }
 //****************************************************************************
+void Graph::FretBoard::mouseReleaseEvent(QMouseEvent* me)
+{
+    Q_UNUSED(me);
+    emit pressed();
+}
+//****************************************************************************
 void Graph::FretBoard::paintBoard(QPainter* p)
 {
     //debug
@@ -121,9 +127,7 @@ void Graph::FretBoard::paintScale(QPainter* p)
     int dotsize=10;
     int scaleid=data->getCurrentScaleID();
     Scale scale=data->getScale(scaleid);
-
-    int colorstart=255%inst.noOfOctaves();
-    int colorintervall=(255-colorstart)/inst.noOfOctaves();
+    int baseoctave=Note::octaveOfBaseNote(data->getCurrentBaseNote(),inst.lowestNote());
 
     for(int s=0;s<inst.noOfStrings();s++)
     {
@@ -136,13 +140,36 @@ void Graph::FretBoard::paintScale(QPainter* p)
             {
                 int x=(int)(fretdist*f)+xmin;
 
-                int octave=Note::octaveOfBaseNote(data->getCurrentBaseNote(),note);
-                if(octave>5) octave=5;
-                p->setPen(QColor(255,0,0));
-                int c=colorstart+octave*colorintervall;
-                QColor dotcolor(c,c,255);
-                p->setBrush(dotcolor);
+                //no more than six octaves can be visualised (there is a zero octave)
+                int octave=Note::octaveOfBaseNote(data->getCurrentBaseNote(),note)-baseoctave;
+                if(octave<0)
+                    qDebug("%d,%d",octave,baseoctave);
+                if(octave>5)
+                {
+                    qDebug("octave out of range");
+                    octave=5;
+                }
 
+                p->setPen(QColor(255,0,0));
+                int c= ( (note-12*baseoctave) - (12*octave+data->getCurrentBaseNote()) )*15;
+                if(c<0 || c>255)
+                    qDebug("%d = %d - ( %d + %d)",c,note,12*octave,data->getCurrentBaseNote());
+                QColor dotcolor(255,255,255);
+
+                if(octave==0)
+                    dotcolor=QColor(c,c,255);
+                else if(octave==1)
+                    dotcolor=QColor(c,255,c);
+                else if(octave==2)
+                    dotcolor=QColor(255,c,c);
+                else if(octave==3)
+                    dotcolor=QColor(255,255,c);
+                else if(octave==4)
+                    dotcolor=QColor(255,c,255);
+                else
+                    dotcolor=QColor(c,255,255);
+
+                p->setBrush(dotcolor);
                 p->drawEllipse(x-dotsize/2,y-dotsize/2,dotsize,dotsize);
 
                 if(data->isDrawNames())

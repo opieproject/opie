@@ -27,6 +27,7 @@ namespace Menu
         QComboBox* boxInst;
         QSpinBox* stringBox;
 
+        QScrollView* scrollview;
         QVBox* stringwidget;
 
         //this is a QPtrList !!

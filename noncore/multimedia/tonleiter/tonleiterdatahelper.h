@@ -32,6 +32,8 @@ namespace Data
         QString instName();
         int string(int id);
         int noOfOctaves();
+        int lowestNote();
+        int highestNote();
     };
 
     class Scale

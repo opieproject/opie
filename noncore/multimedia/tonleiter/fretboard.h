@@ -41,11 +41,14 @@ namespace Graph
     public:
         FretBoard(TonleiterData* data,QWidget* parent,const char* name="FretBoard",WFlags f=0);
         virtual ~FretBoard();
+    signals:
+        void pressed();
     private slots:
         void dataChange();
     private:
         void paintEvent(QPaintEvent* pe);
         void resizeEvent(QResizeEvent* re);
+        void mouseReleaseEvent(QMouseEvent* me);
         void paintBoard(QPainter* p);
         void paintFrets(QPainter* p);
         void paintStrings(QPainter* p);

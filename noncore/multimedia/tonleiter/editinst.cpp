@@ -38,7 +38,7 @@ Menu::InstEditDialog::InstEditDialog(TonleiterData* data,QWidget* parent,const c
     QPushButton* addhighButton=new QPushButton(tr("Add High String"),this,"addhighButton");
     masterlayout->addWidget(addhighButton);
 
-    QScrollView* scrollview=new QScrollView(this);
+    scrollview=new QScrollView(this);
     scrollview->setVScrollBarMode(QScrollView::AlwaysOn);
     scrollview->setHScrollBarMode(QScrollView::AlwaysOff);
     stringwidget=new QVBox(scrollview->viewport());
@@ -46,7 +46,6 @@ Menu::InstEditDialog::InstEditDialog(TonleiterData* data,QWidget* parent,const c
     stringwidget->setSpacing(10);
     scrollview->addChild(stringwidget);
     scrollview->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding,QSizePolicy::Maximum));
-    //scrollview->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding,QSizePolicy::MinimumExpanding));
     masterlayout->addWidget(scrollview);
 
     loadInstrument();
@@ -92,12 +91,15 @@ void Menu::InstEditDialog::deleteString(int id)
 //****************************************************************************
 void Menu::InstEditDialog::saveInstrument()
 {
+    //auto delete is set to true so widgets _should_ be deleted
     stringlist.clear();
 }
 //****************************************************************************
 void Menu::InstEditDialog::loadInstrument()
 {
+    stringlist.clear();
     Instrument inst=data->getInstrument(instid);
+    qDebug("load Instrument : %d strings",inst.noOfStrings());
     for(uint s=0;s<inst.noOfStrings();s++)
     {
         stringlist.append(new EditStringWidget(inst.string(s),stringwidget));
