@@ -196,6 +196,7 @@ void ViewMail::setBody(const RecBodyP&body )
 void ViewMail::slotShowHtml( bool state )
 {
     m_showHtml = state;
+    m_lasttextpart=-2;
     setMainText();
 }
 
@@ -331,6 +332,7 @@ void ViewMail::setMail(const RecMailP&mail )
     m_mail2[2] = mail->Bcc();
 
     setCaption(tr("E-Mail by %1").arg( m_mail[0] ) );
+    m_lasttextpart=-2;
     setMainText();
 }
 
