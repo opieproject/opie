@@ -32,7 +32,7 @@ PIMAPPS = core/pim/addressbook core/pim/datebook \
 
 COREAPPS = core/apps/filebrowser core/apps/helpbrowser \
 	core/apps/textedit core/apps/embeddedkonsole \
-	core/launcher core/apps/sysinfo \
+	core/launcher  \
 	core/apps/oipkg core/apps/qcop
 
 COREMULTIMEDIA = core/multimedia/opieplayer
@@ -62,7 +62,8 @@ GAMES = noncore/games/minesweep noncore/games/solitaire \
 	noncore/games/kbill
 
 NONAPPS = noncore/apps/opie-sheet noncore/apps/tableviewer \
-	noncore/apps/opie-reader noncore/apps/checkbook
+	noncore/apps/opie-reader noncore/apps/checkbook \
+	noncore/apps/sysinfo \
 	
 NONNET = noncore/net/netsetup noncore/net/opieftp \
 	noncore/mail
