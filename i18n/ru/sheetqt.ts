@@ -3,501 +3,501 @@
     <name>CellFormat</name>
     <message>
         <source>&amp;Borders</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Границы</translation>
     </message>
     <message>
         <source>Back&amp;ground</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Фон</translation>
     </message>
     <message>
         <source>&amp;Font</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Шрифт</translation>
     </message>
     <message>
         <source>&amp;Alignment</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Выравнивание</translation>
     </message>
     <message>
         <source>&amp;Width:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ширина:</translation>
     </message>
     <message>
         <source>&amp;Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Цвет:</translation>
     </message>
     <message>
         <source>&amp;Default Borders</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Границы по умолчанию</translation>
     </message>
     <message>
         <source>&amp;Style:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Стиль:</translation>
     </message>
     <message>
         <source>&amp;Default Background</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Фон по умолчанию</translation>
     </message>
     <message>
         <source>&amp;Font:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Шрифт:</translation>
     </message>
     <message>
         <source>&amp;Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Размер:</translation>
     </message>
     <message>
         <source>&amp;Bold</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Жирный</translation>
     </message>
     <message>
         <source>&amp;Italic</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Курсив</translation>
     </message>
     <message>
         <source>&amp;Default Font</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Шрифт по умолчанию</translation>
     </message>
     <message>
         <source>&amp;Vertical:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Вертикальный:</translation>
     </message>
     <message>
         <source>&amp;Horizontal:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Горизонтальный:</translation>
     </message>
     <message>
         <source>&amp;Word Wrap</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Перенос строки</translation>
     </message>
     <message>
         <source>&amp;Default Alignment</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Выравнивание по умолчанию</translation>
     </message>
     <message>
         <source>Format Cells</source>
-        <translation type="unfinished"></translation>
+        <translation>Форматировать ячейки</translation>
     </message>
     <message>
         <source>Opie Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Opie Лист</translation>
     </message>
 </context>
 <context>
     <name>FindDialog</name>
     <message>
         <source>&amp;Find &amp;&amp; Replace</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Найти и заменить</translation>
     </message>
     <message>
         <source>&amp;Options</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Параметры</translation>
     </message>
     <message>
         <source>&amp;Search for:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Искать:</translation>
     </message>
     <message>
         <source>&amp;Replace with:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Заменить на:</translation>
     </message>
     <message>
         <source>&amp;Type</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Тип</translation>
     </message>
     <message>
         <source>&amp;Find</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Найти</translation>
     </message>
     <message>
         <source>&amp;Replace</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Заменить</translation>
     </message>
     <message>
         <source>Replace &amp;all</source>
-        <translation type="unfinished"></translation>
+        <translation>Заменить &amp;все</translation>
     </message>
     <message>
         <source>Match &amp;case</source>
-        <translation type="unfinished"></translation>
+        <translation>Учитывать &amp;регистр</translation>
     </message>
     <message>
         <source>Current &amp;selection only</source>
-        <translation type="unfinished"></translation>
+        <translation>Только &amp;выделенное</translation>
     </message>
     <message>
         <source>&amp;Entire cell</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Всю ячейку</translation>
     </message>
     <message>
         <source>Find &amp; Replace</source>
-        <translation type="unfinished"></translation>
+        <translation>Найти и заменить</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>Opie Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Opie Лист</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка</translation>
     </message>
     <message>
         <source>Inconsistency error!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка несоответствия!</translation>
     </message>
     <message>
         <source>File cannot be saved!</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно сохранить файл!</translation>
     </message>
     <message>
         <source>File cannot be opened!</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно открыть файл!</translation>
     </message>
     <message>
         <source>Invalid file format!</source>
-        <translation type="unfinished"></translation>
+        <translation>Недопустимый формат файла!</translation>
     </message>
     <message>
         <source>Save File</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить файл</translation>
     </message>
     <message>
         <source>Do you want to save the current file?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы хотите сохранить этот файл?</translation>
     </message>
     <message>
         <source>&amp;File Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Имя файла:</translation>
     </message>
     <message>
         <source>UnnamedFile</source>
-        <translation type="unfinished"></translation>
+        <translation>БезымянныйФайл</translation>
     </message>
     <message>
         <source>New File</source>
-        <translation type="unfinished"></translation>
+        <translation>Новый файл</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Новый</translation>
     </message>
     <message>
         <source>Open File</source>
-        <translation type="unfinished"></translation>
+        <translation>Открыть Файл</translation>
     </message>
     <message>
         <source>&amp;Open</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Открыть</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Сохранить</translation>
     </message>
     <message>
         <source>Save File As</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить файл как</translation>
     </message>
     <message>
         <source>Save &amp;As</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить &amp;как</translation>
     </message>
     <message>
         <source>Accept</source>
-        <translation type="unfinished"></translation>
+        <translation>Принять</translation>
     </message>
     <message>
         <source>&amp;Accept</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Принять</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Отменить</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Отменить</translation>
     </message>
     <message>
         <source>Cell Selector</source>
-        <translation type="unfinished"></translation>
+        <translation>Селектор ячеек</translation>
     </message>
     <message>
         <source>Cell &amp;Selector</source>
-        <translation type="unfinished"></translation>
+        <translation>Селектор &amp;Ячеек</translation>
     </message>
     <message>
         <source>Cut Cells</source>
-        <translation type="unfinished"></translation>
+        <translation>Вырезать ячейки</translation>
     </message>
     <message>
         <source>Cu&amp;t</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы&amp;резать</translation>
     </message>
     <message>
         <source>Copy Cells</source>
-        <translation type="unfinished"></translation>
+        <translation>Копировать ячейки</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Копировать</translation>
     </message>
     <message>
         <source>Paste Cells</source>
-        <translation type="unfinished"></translation>
+        <translation>Вставить ячейки</translation>
     </message>
     <message>
         <source>&amp;Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Вставить</translation>
     </message>
     <message>
         <source>Paste Contents</source>
-        <translation type="unfinished"></translation>
+        <translation>Вставить содержимое</translation>
     </message>
     <message>
         <source>Paste Cont&amp;ents</source>
-        <translation type="unfinished"></translation>
+        <translation>Вставить содер&amp;жимое</translation>
     </message>
     <message>
         <source>Clear Cells</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистить ячейки</translation>
     </message>
     <message>
         <source>C&amp;lear</source>
-        <translation type="unfinished"></translation>
+        <translation>О&amp;чистить</translation>
     </message>
     <message>
         <source>Insert Cells</source>
-        <translation type="unfinished"></translation>
+        <translation>Вставить ячейки</translation>
     </message>
     <message>
         <source>C&amp;ells</source>
-        <translation type="unfinished"></translation>
+        <translation>Я&amp;чейки</translation>
     </message>
     <message>
         <source>Insert Rows</source>
-        <translation type="unfinished"></translation>
+        <translation>Вставить строки</translation>
     </message>
     <message>
         <source>&amp;Rows</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Строки</translation>
     </message>
     <message>
         <source>Insert Columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Вставить столбцы</translation>
     </message>
     <message>
         <source>&amp;Columns</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Столбцы</translation>
     </message>
     <message>
         <source>Add Sheets</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить листы</translation>
     </message>
     <message>
         <source>&amp;Sheets</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Листы</translation>
     </message>
     <message>
         <source>Cells</source>
-        <translation type="unfinished"></translation>
+        <translation>Ячейки</translation>
     </message>
     <message>
         <source>&amp;Cells</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ячейки</translation>
     </message>
     <message>
         <source>Row Height</source>
-        <translation type="unfinished"></translation>
+        <translation>Высота строки</translation>
     </message>
     <message>
         <source>H&amp;eight</source>
-        <translation type="unfinished"></translation>
+        <translation>В&amp;ысота</translation>
     </message>
     <message>
         <source>Adjust Row</source>
-        <translation type="unfinished"></translation>
+        <translation>Выровнять строку</translation>
     </message>
     <message>
         <source>&amp;Adjust</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Выровнять</translation>
     </message>
     <message>
         <source>Show Row</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать строку</translation>
     </message>
     <message>
         <source>&amp;Show</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Показать</translation>
     </message>
     <message>
         <source>Hide Row</source>
-        <translation type="unfinished"></translation>
+        <translation>Спрятать строку</translation>
     </message>
     <message>
         <source>&amp;Hide</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Спрятать</translation>
     </message>
     <message>
         <source>Column Width</source>
-        <translation type="unfinished"></translation>
+        <translation>Ширина столбца</translation>
     </message>
     <message>
         <source>&amp;Width</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ширина</translation>
     </message>
     <message>
         <source>Adjust Column</source>
-        <translation type="unfinished"></translation>
+        <translation>Выровнять столбец</translation>
     </message>
     <message>
         <source>Show Column</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать столбец</translation>
     </message>
     <message>
         <source>Hide Column</source>
-        <translation type="unfinished"></translation>
+        <translation>Спрятать столбец</translation>
     </message>
     <message>
         <source>Rename Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Переименовать лист</translation>
     </message>
     <message>
         <source>&amp;Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Переименовать</translation>
     </message>
     <message>
         <source>Remove Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить лист</translation>
     </message>
     <message>
         <source>R&amp;emove</source>
-        <translation type="unfinished"></translation>
+        <translation>У&amp;далить</translation>
     </message>
     <message>
         <source>Sort Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Сортировать данные</translation>
     </message>
     <message>
         <source>&amp;Sort</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Сортировать</translation>
     </message>
     <message>
         <source>Find &amp;&amp; Replace</source>
-        <translation type="unfinished"></translation>
+        <translation>Найти и заменить</translation>
     </message>
     <message>
         <source>&amp;Find &amp;&amp; Replace</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Найти и заменить</translation>
     </message>
     <message>
         <source>Equal To</source>
-        <translation type="unfinished"></translation>
+        <translation>Равно</translation>
     </message>
     <message>
         <source>&amp;Equal To</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Равно</translation>
     </message>
     <message>
         <source>Addition</source>
-        <translation type="unfinished"></translation>
+        <translation>Сложение</translation>
     </message>
     <message>
         <source>&amp;Addition</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Сложение</translation>
     </message>
     <message>
         <source>Subtraction</source>
-        <translation type="unfinished"></translation>
+        <translation>Вычитание</translation>
     </message>
     <message>
         <source>&amp;Subtraction</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Вычитание</translation>
     </message>
     <message>
         <source>Multiplication</source>
-        <translation type="unfinished"></translation>
+        <translation>Умножение</translation>
     </message>
     <message>
         <source>&amp;Multiplication</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Умножение</translation>
     </message>
     <message>
         <source>Division</source>
-        <translation type="unfinished"></translation>
+        <translation>Деление</translation>
     </message>
     <message>
         <source>&amp;Division</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Деление</translation>
     </message>
     <message>
         <source>Open ParanthesistempCellData-&gt;row+row1, tempCellData-&gt;col+col1</source>
-        <translation type="unfinished"></translation>
+        <translation>Open ParanthesistempCellData-&gt;row+row1, tempCellData-&gt;col+col1</translation>
     </message>
     <message>
         <source>&amp;Open Paranthesis</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Открыть скобки</translation>
     </message>
     <message>
         <source>Close Paranthesis</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрыть скобки</translation>
     </message>
     <message>
         <source>&amp;Close Paranthesis</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Закрыть скобки</translation>
     </message>
     <message>
         <source>Comma</source>
-        <translation type="unfinished"></translation>
+        <translation>Запятая</translation>
     </message>
     <message>
         <source>&amp;Comma</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Запятая</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Файл</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Правка</translation>
     </message>
     <message>
         <source>&amp;Insert</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Вставить</translation>
     </message>
     <message>
         <source>&amp;Format</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Формат</translation>
     </message>
     <message>
         <source>&amp;Data</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Данные</translation>
     </message>
     <message>
         <source>&amp;Row</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Строка</translation>
     </message>
     <message>
         <source>Colum&amp;n</source>
-        <translation type="unfinished"></translation>
+        <translation>Стол&amp;бец</translation>
     </message>
     <message>
         <source>&amp;Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Лист</translation>
     </message>
     <message>
         <source>&amp;Function</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Функция</translation>
     </message>
     <message>
         <source>Functions</source>
-        <translation type="unfinished"></translation>
+        <translation>Функции</translation>
     </message>
     <message>
         <source>About Opie Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>О программе Opie Лист</translation>
     </message>
     <message>
         <source>Opie Sheet
@@ -511,513 +511,524 @@ Release Date: October 08, 2002
 This product is licensed under GPL. It is freely distributable. If you want to get the latest version and also the source code, please visit the web site.
 
 http://qtopia.sitebest.com</source>
-        <translation type="unfinished"></translation>
+        <translation>Opie Sheet
+Электронные таблицы для Opie
+QWDC Beta Победитель (как Sheet/Qt)
+
+Разработан: Serdar Ozler
+Версия 1.0.2
+Дата выхода: Октябрь 08, 2002
+Русский перевод: Андрей Паскаль, июнь 2003
+
+Это продукт лицензирован на условиях GPL. Распространяется свободно. Если вы хотите получить последнюю версию и исходный код, посетите сайт
+
+http://qtopia.sitebest.com</translation>
     </message>
     <message>
         <source>&amp;Number of rows:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Количество строк:</translation>
     </message>
     <message>
         <source>&amp;Number of columns:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Количество столбцов:</translation>
     </message>
     <message>
         <source>&amp;Number of sheets:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Количество листов:</translation>
     </message>
     <message>
         <source>Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Лист</translation>
     </message>
     <message>
         <source>&amp;Height of each row:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Высота каждой строки:</translation>
     </message>
     <message>
         <source>&amp;Width of each column:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ширина каждого столбца:</translation>
     </message>
     <message>
         <source>&amp;Sheet Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Имя листа:</translation>
     </message>
     <message>
         <source>There is only one sheet!</source>
-        <translation type="unfinished"></translation>
+        <translation>Есть только один лист!</translation>
     </message>
     <message>
         <source>Are you sure?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы уверены?</translation>
     </message>
     <message>
         <source>&amp;Type</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Тип</translation>
     </message>
     <message>
         <source>Shift cells &amp;down</source>
-        <translation type="unfinished"></translation>
+        <translation>Сдвинуть ячейки &amp;вниз</translation>
     </message>
     <message>
         <source>Shift cells &amp;right</source>
-        <translation type="unfinished"></translation>
+        <translation>Сдвинуть ячейки впр&amp;аво</translation>
     </message>
     <message>
         <source>Entire ro&amp;w</source>
-        <translation type="unfinished"></translation>
+        <translation>Всю стро&amp;ку</translation>
     </message>
     <message>
         <source>Entire &amp;column</source>
-        <translation type="unfinished"></translation>
+        <translation>Весь &amp;столбец</translation>
     </message>
     <message>
         <source>Import Excel file</source>
-        <translation type="unfinished"></translation>
+        <translation>Импорт файла Excel</translation>
     </message>
     <message>
         <source>Import E&amp;xcel file</source>
-        <translation type="unfinished"></translation>
+        <translation>Импорт файла E&amp;xcel</translation>
     </message>
     <message>
         <source>&amp;Simple</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Простой</translation>
     </message>
     <message>
         <source>ABS(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>ABS(x)</translation>
     </message>
     <message>
         <source>CEILING(x,acc)</source>
-        <translation type="unfinished"></translation>
+        <translation>CEILING(x,acc)</translation>
     </message>
     <message>
         <source>FACT(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>FACT(x)</translation>
     </message>
     <message>
         <source>FLOOR(x,acc)</source>
-        <translation type="unfinished"></translation>
+        <translation>FLOOR(x,acc)</translation>
     </message>
     <message>
         <source>INT(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>INT(x)</translation>
     </message>
     <message>
         <source>MOD(x,y)</source>
-        <translation type="unfinished"></translation>
+        <translation>MOD(x,y)</translation>
     </message>
     <message>
         <source>ROUND(x,digits)</source>
-        <translation type="unfinished"></translation>
+        <translation>ROUND(x,цифр)</translation>
     </message>
     <message>
         <source>SIGN(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>SIGN(x)</translation>
     </message>
     <message>
         <source>EXP(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>EXP(x)</translation>
     </message>
     <message>
         <source>LN(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>LN(x)</translation>
     </message>
     <message>
         <source>LOG(x,b)</source>
-        <translation type="unfinished"></translation>
+        <translation>LOG(x,b)</translation>
     </message>
     <message>
         <source>LOG10(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>LOG10(x)</translation>
     </message>
     <message>
         <source>POWER(x,y)</source>
-        <translation type="unfinished"></translation>
+        <translation>POWER(x,y)</translation>
     </message>
     <message>
         <source>SQRT(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>SQRT(x)</translation>
     </message>
     <message>
         <source>DEGREES(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>DEGREES(x)</translation>
     </message>
     <message>
         <source>RADIANS(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>RADIANS(x)</translation>
     </message>
     <message>
         <source>PI()</source>
-        <translation type="unfinished"></translation>
+        <translation>PI()</translation>
     </message>
     <message>
         <source>RAND()</source>
-        <translation type="unfinished"></translation>
+        <translation>RAND()</translation>
     </message>
     <message>
         <source>RANDBETWEEN(a,b)</source>
-        <translation type="unfinished"></translation>
+        <translation>RANDBETWEEN(a,b)</translation>
     </message>
     <message>
         <source>S&amp;tandard</source>
-        <translation type="unfinished"></translation>
+        <translation>С&amp;тандартные</translation>
     </message>
     <message>
         <source>AND(x1,x2)</source>
-        <translation type="unfinished"></translation>
+        <translation>AND(x1,x2)</translation>
     </message>
     <message>
         <source>NOT(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>NOT(x)</translation>
     </message>
     <message>
         <source>OR(x1,x2)</source>
-        <translation type="unfinished"></translation>
+        <translation>OR(x1,x2)</translation>
     </message>
     <message>
         <source>IF(compare,val1,val2)</source>
-        <translation type="unfinished"></translation>
+        <translation>IF(сравнить,знач1,знач2)</translation>
     </message>
     <message>
         <source>INDEX(range,index)</source>
-        <translation type="unfinished"></translation>
+        <translation>INDEX(область,индекс)</translation>
     </message>
     <message>
         <source>ISBLANK(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>ISBLANK(x)</translation>
     </message>
     <message>
         <source>ISNUMBER(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>ISNUMBER(x)</translation>
     </message>
     <message>
         <source>EVEN(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>EVEN(x)</translation>
     </message>
     <message>
         <source>ISEVEN(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>ISEVEN(x)</translation>
     </message>
     <message>
         <source>ODD(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>ODD(x)</translation>
     </message>
     <message>
         <source>ISODD(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>ISODD(x)</translation>
     </message>
     <message>
         <source>Logical-&amp;Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Логические-&amp;Информация</translation>
     </message>
     <message>
         <source>SIN(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>SIN(x)</translation>
     </message>
     <message>
         <source>COS(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>COS(x)</translation>
     </message>
     <message>
         <source>TAN(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>TAN(x)</translation>
     </message>
     <message>
         <source>ASIN(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>ASIN(x)</translation>
     </message>
     <message>
         <source>ACOS(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>ACOS(x)</translation>
     </message>
     <message>
         <source>ATAN(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>ATAN(x)</translation>
     </message>
     <message>
         <source>ATAN2(x,y)</source>
-        <translation type="unfinished"></translation>
+        <translation>ATAN2(x,y)</translation>
     </message>
     <message>
         <source>SINH(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>SINH(x)</translation>
     </message>
     <message>
         <source>COSH(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>COSH(x)</translation>
     </message>
     <message>
         <source>TANH(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>TANH(x)</translation>
     </message>
     <message>
         <source>ACOSH(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>ACOSH(x)</translation>
     </message>
     <message>
         <source>ASINH(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>ASINH(x)</translation>
     </message>
     <message>
         <source>ATANH(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>ATANH(x)</translation>
     </message>
     <message>
         <source>&amp;Trigonometric</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Тригонометрические</translation>
     </message>
     <message>
         <source>LEN(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>LEN(s)</translation>
     </message>
     <message>
         <source>LEFT(s,num)</source>
-        <translation type="unfinished"></translation>
+        <translation>LEFT(стр,номер)</translation>
     </message>
     <message>
         <source>RIGHT(s,num)</source>
-        <translation type="unfinished"></translation>
+        <translation>RIGHT(стр,номер)</translation>
     </message>
     <message>
         <source>MID(s,pos,len)</source>
-        <translation type="unfinished"></translation>
+        <translation>MID(стр,поз,длина)</translation>
     </message>
     <message>
         <source>CONCATENATE(s1,s2..)</source>
-        <translation type="unfinished"></translation>
+        <translation>CONCATENATE(стр1,стр2..)</translation>
     </message>
     <message>
         <source>EXACT(s1,s2)</source>
-        <translation type="unfinished"></translation>
+        <translation>EXACT(стр1,стр2)</translation>
     </message>
     <message>
         <source>FIND(what,where,pos)</source>
-        <translation type="unfinished"></translation>
+        <translation>FIND(что,где,поз)</translation>
     </message>
     <message>
         <source>REPLACE(s,pos,len,ns)</source>
-        <translation type="unfinished"></translation>
+        <translation>REPLACE(стр,поз,длин,нстр)</translation>
     </message>
     <message>
         <source>REPT(s,n)</source>
-        <translation type="unfinished"></translation>
+        <translation>REPT(стр,н)</translation>
     </message>
     <message>
         <source>UPPER(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>UPPER(стр)</translation>
     </message>
     <message>
         <source>LOWER(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>LOWER(стр)</translation>
     </message>
     <message>
         <source>&amp;Strings</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Строки</translation>
     </message>
     <message>
         <source>AVERAGE(range)</source>
-        <translation type="unfinished"></translation>
+        <translation>AVERAGE(область)</translation>
     </message>
     <message>
         <source>COUNT(range)</source>
-        <translation type="unfinished"></translation>
+        <translation>COUNT(область)</translation>
     </message>
     <message>
         <source>COUNTIF(range,eqls)</source>
-        <translation type="unfinished"></translation>
+        <translation>COUNTIF(область,равно)</translation>
     </message>
     <message>
         <source>MAX(range)</source>
-        <translation type="unfinished"></translation>
+        <translation>MAX(область)</translation>
     </message>
     <message>
         <source>MIN(range)</source>
-        <translation type="unfinished"></translation>
+        <translation>MIN(область)</translation>
     </message>
     <message>
         <source>SUM(range)</source>
-        <translation type="unfinished"></translation>
+        <translation>SUM(область)</translation>
     </message>
     <message>
         <source>SUMSQ(range)</source>
-        <translation type="unfinished"></translation>
+        <translation>SUMSQ(область)</translation>
     </message>
     <message>
         <source>VAR(range)</source>
-        <translation type="unfinished"></translation>
+        <translation>VAR(область)</translation>
     </message>
     <message>
         <source>VARP(range)</source>
-        <translation type="unfinished"></translation>
+        <translation>VARP(область)</translation>
     </message>
     <message>
         <source>STDEV(range)</source>
-        <translation type="unfinished"></translation>
+        <translation>STDEV(область)</translation>
     </message>
     <message>
         <source>STDEVP(range)</source>
-        <translation type="unfinished"></translation>
+        <translation>STDEVP(область)</translation>
     </message>
     <message>
         <source>SKEW(range)</source>
-        <translation type="unfinished"></translation>
+        <translation>SKEW(область)</translation>
     </message>
     <message>
         <source>KURT(range)</source>
-        <translation type="unfinished"></translation>
+        <translation>KURT(область)</translation>
     </message>
     <message>
         <source>Sta&amp;tistical</source>
-        <translation type="unfinished"></translation>
+        <translation>Ста&amp;тистические</translation>
     </message>
     <message>
         <source>BESSELI(x,n)</source>
-        <translation type="unfinished"></translation>
+        <translation>BESSELI(x,n)</translation>
     </message>
     <message>
         <source>BESSELJ(x,n)</source>
-        <translation type="unfinished"></translation>
+        <translation>BESSELJ(x,n)</translation>
     </message>
     <message>
         <source>BESSELK(x,n)</source>
-        <translation type="unfinished"></translation>
+        <translation>BESSELK(x,n)</translation>
     </message>
     <message>
         <source>BESSELY(x,n)</source>
-        <translation type="unfinished"></translation>
+        <translation>BESSELY(x,n)</translation>
     </message>
     <message>
         <source>BETAI(x,a,b)</source>
-        <translation type="unfinished"></translation>
+        <translation>BETAI(x,a,b)</translation>
     </message>
     <message>
         <source>ERF(a,b)</source>
-        <translation type="unfinished"></translation>
+        <translation>ERF(a,b)</translation>
     </message>
     <message>
         <source>ERFC(a,b)</source>
-        <translation type="unfinished"></translation>
+        <translation>ERFC(a,b)</translation>
     </message>
     <message>
         <source>GAMMALN(x)</source>
-        <translation type="unfinished"></translation>
+        <translation>GAMMALN(x)</translation>
     </message>
     <message>
         <source>GAMMAP(x,a)</source>
-        <translation type="unfinished"></translation>
+        <translation>GAMMAP(x,a)</translation>
     </message>
     <message>
         <source>GAMMAQ(x,a)</source>
-        <translation type="unfinished"></translation>
+        <translation>GAMMAQ(x,a)</translation>
     </message>
     <message>
         <source>Scienti&amp;fic</source>
-        <translation type="unfinished"></translation>
+        <translation>Нау&amp;чные</translation>
     </message>
     <message>
         <source>BETADIST(z,a,b,Q?)</source>
-        <translation type="unfinished"></translation>
+        <translation>BETADIST(z,a,b,Q?)</translation>
     </message>
     <message>
         <source>CHI2DIST(x,n,Q?)</source>
-        <translation type="unfinished"></translation>
+        <translation>CHI2DIST(x,n,Q?)</translation>
     </message>
     <message>
         <source>CHIDIST(x,n,Q?)</source>
-        <translation type="unfinished"></translation>
+        <translation>CHIDIST(x,n,Q?)</translation>
     </message>
     <message>
         <source>FDIST(z,deg1,deg2,Q?)</source>
-        <translation type="unfinished"></translation>
+        <translation>FDIST(z,град1,град2,Q?)</translation>
     </message>
     <message>
         <source>GAMMADIST(x,a,b,Q?)</source>
-        <translation type="unfinished"></translation>
+        <translation>GAMMADIST(x,a,b,Q?)</translation>
     </message>
     <message>
         <source>NORMALDIST(x,m,s,Q?)</source>
-        <translation type="unfinished"></translation>
+        <translation>NORMALDIST(x,m,s,Q?)</translation>
     </message>
     <message>
         <source>PHI(x,Q?)</source>
-        <translation type="unfinished"></translation>
+        <translation>PHI(x,Q?)</translation>
     </message>
     <message>
         <source>POISSON(x,n,Q?)</source>
-        <translation type="unfinished"></translation>
+        <translation>POISSON(x,n,Q?)</translation>
     </message>
     <message>
         <source>&amp;Distributions</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Распределение</translation>
     </message>
 </context>
 <context>
     <name>Sheet</name>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка</translation>
     </message>
     <message>
         <source>Search key not found!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ключ поиска не найден!</translation>
     </message>
 </context>
 <context>
     <name>SortDialog</name>
     <message>
         <source>&amp;Sort</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Сортировать</translation>
     </message>
     <message>
         <source>&amp;Options</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Параметры</translation>
     </message>
     <message>
         <source>&amp;Sort by</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Сортировать по</translation>
     </message>
     <message>
         <source>&amp;Then by</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Затем по</translation>
     </message>
     <message>
         <source>Then &amp;by</source>
-        <translation type="unfinished"></translation>
+        <translation>Затем &amp;по</translation>
     </message>
     <message>
         <source>&amp;Case Sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Учитывать регистр</translation>
     </message>
     <message>
         <source>&amp;Direction</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Направление</translation>
     </message>
     <message>
         <source>&amp;Top to bottom (rows)</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Сверху вниз (строки)</translation>
     </message>
     <message>
         <source>&amp;Left to right (columns)</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Слева направо (столбцы)</translation>
     </message>
     <message>
         <source>Sort</source>
-        <translation type="unfinished"></translation>
+        <translation>Сортировать</translation>
     </message>
     <message>
         <source>&amp;Ascending</source>
-        <translation type="unfinished"></translation>
+        <translation>По &amp;возрастанию</translation>
     </message>
     <message>
         <source>&amp;Descending</source>
-        <translation type="unfinished"></translation>
+        <translation>По &amp;убыванию</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка</translation>
     </message>
     <message>
         <source>One cell cannot be sorted!</source>
-        <translation type="unfinished"></translation>
+        <translation>Одну ячейку невозможно отсортировать!</translation>
     </message>
 </context>
 </TS>

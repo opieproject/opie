@@ -3,34 +3,34 @@
     <name>MainView</name>
     <message>
         <source>uBrowser</source>
-        <translation type="unfinished"></translation>
+        <translation>uБраузер</translation>
     </message>
     <message>
         <source> - uBrowser</source>
-        <translation type="unfinished"></translation>
+        <translation>- uБраузер</translation>
     </message>
     <message>
         <source>%1 - uBrowser</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - uБраузер</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Error!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка!</translation>
     </message>
     <message>
         <source>IP-Address not found</source>
-        <translation type="unfinished"></translation>
+        <translation>IP адрес не найден</translation>
     </message>
     <message>
         <source>Error creating socket</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка создания сокета</translation>
     </message>
     <message>
         <source>Error connecting to socket</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка соединения с сокетом</translation>
     </message>
 </context>
 </TS>
