@@ -61,14 +61,11 @@ void LauncherClock::readConfig() {
 void LauncherClock::mouseReleaseEvent( QMouseEvent * )
 {
 	QCString setTimeApp;
-	if (QFile::exists(QPEApplication::qpeDir()+"bin/netsystemtime"))
- 		setTimeApp="netsystemtime";
- 	else setTimeApp="systemtime";
+	setTimeApp="systemtime";
 	QCopEnvelope e("QPE/Application/"+setTimeApp, "setDocument(QString)");
-  QString lf = QString::null;
+	QString lf = QString::null;
 
 	e << lf;
-
 }
 
 
