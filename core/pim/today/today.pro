@@ -10,7 +10,6 @@ INTERFACES = todayconfigmiscbase.ui
 INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe -lopie
-INTERFACES	=
 TARGET		= today
 
 TRANSLATIONS = ../../../i18n/de/today.ts \
