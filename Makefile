@@ -9,11 +9,13 @@ COMPONENTS=$(LOCALCOMPONENTS) inputmethods/keyboard \
 	inputmethods/handwriting \
 	inputmethods/unikeyboard \
 	inputmethods/jumpx \
+	inputmethods/dvorak \
 	taskbar/batteryapplet \
 	taskbar/volumeapplet \
 	taskbar/clockapplet \
 	taskbar/netmonapplet \
 	taskbar/screenshotapplet \
+	taskbar/vmemo \
 	netsetup/dialup \
 	netsetup/lan \
 	mpegplayer/libmpeg3 \
@@ -32,7 +34,7 @@ APPS=$(LOCALAPPS) addressbook calculator clock datebook \
     settings/sound \
     settings/systemtime \
     solitaire spreadsheet tetrix textedit \
-    todo tux wordgame embeddedkonsole taskbar sysinfo \
+    todo wordgame embeddedkonsole taskbar sysinfo \
     parashoot snake citytime showimg netsetup \
     qipkg mindbreaker go qasteroids qcop fifteen keypebble  today 
 
