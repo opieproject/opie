@@ -7,6 +7,7 @@ class OProcess;
 class QString;
 class QTimer;
 class QSocket;
+class QCopChannel;
 
 class Ntp : public SetDateTime
 {
@@ -16,10 +17,13 @@ public:
     Ntp( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     ~Ntp();
 
+public slots:
+	void setDocument (const QString &);
 protected:
 		QDateTime predictedTime;
-
-
+    void makeChannel();
+protected slots:
+    void receive(const QCString &msg, const QByteArray &arg);
 private:
 		QString _ntpOutput;
    	float _shiftPerSec;
@@ -27,6 +31,7 @@ private:
     OProcess *ntpProcess;
     QTimer *ntpTimer;
     QSocket *ntpSock;
+    QCopChannel *channel;
 
    	float getTimeShift();
 	  void readLookups();

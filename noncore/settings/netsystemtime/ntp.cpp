@@ -18,6 +18,7 @@
 #include <qpe/timestring.h>
 #include <qpe/qpedialog.h>
 #include <qpe/datebookdb.h>
+#include <qpe/qcopenvelope_qws.h>
 #include <sys/time.h>
 #include <time.h>
 #include <stdlib.h>
@@ -41,6 +42,8 @@ Ntp::Ntp( QWidget* parent,  const char* name, WFlags fl )
 	SpinBoxMinLookupDelay->setValue( cfg.readNumEntry("minLookupDiff",41) );
 	SpinBoxNtpDelay->setValue( cfg.readNumEntry("ntpRefreshFreq",42) );
   ComboNtpSrv->setCurrentItem( cfg.readNumEntry("ntpServer", 0) );
+
+  makeChannel();
 
   ntpTimer = new QTimer(this);
 
@@ -215,14 +218,14 @@ void Ntp::readLookups()
   TableLookups->setColumnWidth( 2, cw );
   TableLookups->sortColumn(0, false, true );
  // TableLookups->setSorting( true );
+  _shiftPerSec = 0;
   for (int i=0; i < lookupCount; i++)
   {
 	  cfg.setGroup("lookup_"+QString::number(i));
    	last = cfg.readEntry("secsSinceLast",0).toFloat();
     shift = QString(cfg.readEntry("timeShift",0)).toFloat();
-//   	qDebug("%i last %f",i,last);
-//   	qDebug("%i shift %f",i,shift);
     shiftPerSec =  shift / last;
+   	qDebug("%i shift %f",i,shiftPerSec);
     _shiftPerSec += shiftPerSec;
 		TableLookups->setText( i,0,QString::number(shiftPerSec*60*60));
 		TableLookups->setText( i,2,QString::number(shift));
@@ -295,3 +298,28 @@ void Ntp::ntpOutPut(QString out)
   MultiLineEditntpOutPut->setCursorPosition(MultiLineEditntpOutPut->numLines() + 1,0,FALSE);
 }
 
+
+void Ntp::makeChannel()
+{   	
+	channel = new QCopChannel( "QPE/Application/netsystemtime", this );
+	connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
+		this, SLOT(receive(const QCString&, const QByteArray&)) );
+}
+
+
+
+void Ntp::receive(const QCString &msg, const QByteArray &arg)
+{
+	qDebug("QCop "+msg+" "+QCString(arg));
+	if ( msg == "open(QString)" )
+ 	{
+  //	qApp->exec();
+	}else{
+    	qDebug("Ntp::receive: Huh what do ya want");
+ 	}
+}
+
+void Ntp::setDocument(const QString &fileName)
+{
+
+}

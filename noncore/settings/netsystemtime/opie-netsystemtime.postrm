@@ -1,4 +1,0 @@
-#!/bin/sh -v
-
-cd $QPEDIR/bin/
-rm systemtime
