@@ -173,6 +173,7 @@ void PMainWindow::slotConfig() {
     if ( !m_info ) {
         reminfo = true;
         initInfo();
+        m_info->hide();
     }
     keyWid->insert( tr("Imageinfo Keyboard Actions"), m_info->manager() );
 
@@ -180,6 +181,7 @@ void PMainWindow::slotConfig() {
     if ( !m_disp ) {
         remdisp = true;
         initDisp();
+        m_disp->hide();
     }
     keyWid->insert( tr("Imageview Keyboard Actions"), m_disp->manager() );
 

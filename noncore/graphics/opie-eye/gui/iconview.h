@@ -95,6 +95,7 @@ private:
     QString m_path;
     bool m_updatet : 1;
     int m_mode;
+    bool m_internalReset:1;
 };
 
 #endif

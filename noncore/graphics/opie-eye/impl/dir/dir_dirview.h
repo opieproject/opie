@@ -16,6 +16,8 @@ struct Dir_DirView : public PDirView {
     PDirLister* dirLister()const;
 private:
     bool m_cfg : 1;
+    bool m_recursive:1;
+    int m_recursive_depth;
     mutable PDirLister* m_lister;
     mutable PInterfaceInfo *m_info;
 };

@@ -16,12 +16,17 @@ using namespace Opie::Core;
 #include <qdir.h>
 #include <qfileinfo.h>
 
-Dir_DirLister::Dir_DirLister( bool list )
+Dir_DirLister::Dir_DirLister( bool list,bool rec,int recdepth )
     : PDirLister( "dir_dir_lister" )
 {
     m_allFiles = list;
+    m_recursive = rec;
+    m_recDepth = recdepth;
+    if (m_recDepth<1) m_recDepth = 1;
+    if (m_recDepth>10) m_recDepth = 10;
     owarn << "All Files " << m_allFiles << "" << oendl;
     SlaveHelper::slaveConnectSignals( this );
+    m_Filter = (m_allFiles?"*":"*.jpg;*.jpeg;*.JPG;*.PNG;*.GIF;*.BMP;*.png;*.bmp;*.gif");
 }
 
 QString Dir_DirLister::defaultPath()const {
@@ -46,24 +51,38 @@ QStringList Dir_DirLister::folders()const {
     return m_currentDir.entryList( QDir::Dirs );
 }
 
-QStringList Dir_DirLister::files()const {
-    if ( m_allFiles )
-        return m_currentDir.entryList( QDir::Files );
-    else {
-        QStringList out;
-        QStringList list = m_currentDir.entryList(  QDir::Files | QDir::Readable );
-        for (QStringList::Iterator it = list.begin(); it != list.end();++it ) {
-            QFileInfo inf( *it );
-            QString ext = inf.extension(false).lower();
-            if( ext == QString::fromLatin1("jpg") ||
-                ext == QString::fromLatin1("jpeg" ) ||
-                ext == QString::fromLatin1("png" ) ||
-                ext == QString::fromLatin1("bmp" ) ||
-                ext == QString::fromLatin1("gif" ) )
-                out.append( *it );
-        }
-        return out;
+QStringList Dir_DirLister::recFiles(const QString&aPath,int currentDepth)const
+{
+    QStringList all;
+    if (currentDepth>m_recDepth) return all;
+
+    QString subPath;
+    subPath = aPath;
+    if (subPath.length()==0) {
+        subPath=".";
     }
+    QDir checkDir(currentPath()+"/"+aPath);
+
+    QStringList p = checkDir.entryList( QDir::Dirs );
+    all+=checkDir.entryList(m_Filter,QDir::Files|QDir::Readable);
+    QStringList tmp;
+    for (unsigned i = 0; i < p.count();++i) {
+        if (p[i]=="." || p[i]=="..") continue;
+        tmp =recFiles(subPath+"/"+p[i],currentDepth+1);
+        for (unsigned j = 0; j < tmp.count();++j) {
+            all.append(p[i]+"/"+tmp[j]);
+        }
+    }
+    return all;
+}
+
+QStringList Dir_DirLister::files()const
+{
+    if (m_recursive) {
+        odebug << "Startpfad: "<<m_currentDir.absPath()<<oendl;
+        return recFiles("",0);
+    }
+    return m_currentDir.entryList(m_Filter,QDir::Files|QDir::Readable);
 }
 
 void Dir_DirLister::deleteImage( const QString& fl) {

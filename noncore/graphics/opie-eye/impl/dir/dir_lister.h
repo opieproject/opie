@@ -13,7 +13,7 @@ class Config;
 class Dir_DirLister : public PDirLister {
     Q_OBJECT
 public:
-    Dir_DirLister( bool );
+    Dir_DirLister(bool,bool,int);
     virtual ~Dir_DirLister(){}
 
     QString defaultPath()const;
@@ -30,8 +30,16 @@ public:
     virtual QString nameToFname(const QString&name)const;
 
 private:
-    bool m_allFiles;
+    bool m_allFiles:1;
+    bool m_recursive:1;
+    int m_recDepth;
     QDir m_currentDir;
+    //! recursive listing.
+    /*!
+     * \param path this is the offset to the current path. eg. when currentDepth = 0 then it MUST empty
+     */
+    QStringList recFiles(const QString&path,int currentDepth)const;
+    QString m_Filter;
 };
 
 #endif

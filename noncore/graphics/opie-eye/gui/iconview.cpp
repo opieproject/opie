@@ -153,6 +153,7 @@ PIconView::PIconView( QWidget* wid, Opie::Core::OConfig* cfg )
     }
     m_path = QDir::homeDirPath();
     m_mode = 0;
+    m_internalReset = false;
 
     QHBox *hbox = new QHBox( this );
     QLabel* lbl = new QLabel( hbox );
@@ -363,7 +364,9 @@ void PIconView::loadViews() {
 }
 
 void PIconView::resetView() {
+    m_internalReset = true;
     slotViewChanged(m_views->currentItem());
+    m_internalReset = false;
 }
 
 /*
@@ -407,8 +410,11 @@ void PIconView::slotViewChanged( int i) {
             this, SLOT(slotEnd()) );
 
 
-    /*  reload now with default Path*/
-    m_path = lis->defaultPath();
+    /*  reload now with default Path
+     * but only if it isn't a reset like from setupdlg
+     */
+    if (!m_internalReset)
+        m_path = lis->defaultPath();
     QTimer::singleShot( 0,  this, SLOT(slotReloadDir()));
 }
 
