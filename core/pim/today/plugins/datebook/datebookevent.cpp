@@ -61,7 +61,6 @@ DateBookEvent::DateBookEvent(const EffectiveEvent &ev,
 
     if ( ( TimeString::timeString( QTime( (ev).event().start().time() ) ) == "00:00" )
          &&  ( TimeString::timeString( QTime( (ev).event().end().time() ) ) == "23:59" ) ) {
-        msg += timeSpacer;
         msg += tr ( "All day" );
     }  else {
         // start time of event
