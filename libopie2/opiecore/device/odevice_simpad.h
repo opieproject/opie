@@ -39,14 +39,13 @@ namespace Opie {
 namespace Core {
 namespace Internal {
 
-class SIMpad : public ODevice, public QWSServer::KeyboardFilter
+class SIMpad : public ODevice
 { 
   protected:
     virtual void init(const QString&);
     virtual void initButtons();
 
   public:
-    virtual bool setSoftSuspend( bool soft );
     virtual bool suspend();
 
     virtual bool setDisplayStatus( bool on );
@@ -60,8 +59,7 @@ class SIMpad : public ODevice, public QWSServer::KeyboardFilter
     virtual OLedState ledState( OLed led ) const;
     virtual bool setLedState( OLed led, OLedState st );
 
-  protected:
-    virtual bool filter( int unicode, int keycode, int modifiers, bool isPress, bool autoRepeat );
+protected:
     virtual void timerEvent( QTimerEvent *te );
 
     int m_power_timer;

@@ -146,11 +146,6 @@ void SIMpad::initButtons()
     if ( d->m_buttons )
         return;
 
-    if ( isQWS( ) ) {
-        addPreHandler(this);
-    }
-
-
     d->m_buttons = new QValueList <ODeviceButton>;
 
     for ( uint i = 0; i < ( sizeof( simpad_buttons ) / sizeof( s_button )); i++ ) {
@@ -193,8 +188,7 @@ void SIMpad::initButtons()
 #define SIMPAD_RESET_SIMCARD               0x8000
 
 //SIMpad touchscreen backlight strength control
-#define SIMPAD_BACKLIGHT_CONTROL "/proc/driver/mq200/registers/PWM_CONTROL"
-#define SIMPAD_BACKLIGHT_MASK    0x00a10044
+#define SIMPAD_BACKLIGHT_CONTROL "/proc/driver/mq200/backlight"
 
 
 /*
@@ -299,13 +293,6 @@ bool SIMpad::setLedState ( OLed l, OLedState st )
     return false;
 }
 
-
-bool SIMpad::filter ( int /*unicode*/, int /*keycode*/, int /*modifiers*/, bool /*isPress*/, bool /*autoRepeat*/ )
-{
-    //TODO
-    return false;
-}
-
 void SIMpad::timerEvent ( QTimerEvent * )
 {
     killTimer ( m_power_timer );
@@ -352,14 +339,6 @@ bool SIMpad::suspend() // Must override because SIMpad does NOT have apm
     return res;
 }
 
-
-bool SIMpad::setSoftSuspend ( bool soft )
-{
-    qDebug( "ODevice for SIMpad: UNHANDLED setSoftSuspend(%s)", soft? "on" : "off" );
-    return false;
-}
-
-
 bool SIMpad::setDisplayStatus ( bool on )
 {
     qDebug( "ODevice for SIMpad: setDisplayStatus(%s)", on? "on" : "off" );
@@ -380,13 +359,8 @@ bool SIMpad::setDisplayBrightness ( int bright )
         bright = 0;
 
     if (( fd = ::open ( SIMPAD_BACKLIGHT_CONTROL, O_WRONLY )) >= 0 ) {
-        int value = 255 - bright;
-        const int mask = SIMPAD_BACKLIGHT_MASK;
-        value = value << 8;
-        value += mask;
-        char writeCommand[100];
-        const int count = snprintf( writeCommand, sizeof(writeCommand), "0x%x\n", value );
-        res = ( ::write ( fd, writeCommand, count ) != -1 );
+        QCString str = QFile::encodeName( QString::number(bright));
+        res = ( ::write(fd, str, str.length()) != -1 );
         ::close ( fd );
     }
     return res;
