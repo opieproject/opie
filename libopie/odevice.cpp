@@ -592,10 +592,8 @@ void iPAQ::alarmSound ( )
 				volalarm = 100;
 			volalarm |= ( volalarm << 8 );
 
-			if (( volalarm & 0xff ) > ( vol & 0xff )) {
-				if ( ::ioctl ( fd, MIXER_WRITE( 0 ), &volalarm ) >= 0 )
-					vol_reset = true;
-			}
+			if ( ::ioctl ( fd, MIXER_WRITE( 0 ), &volalarm ) >= 0 )
+				vol_reset = true;
 		}
 	}
 
