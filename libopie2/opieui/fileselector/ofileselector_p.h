@@ -164,6 +164,7 @@ private slots:
     void slotCurrentChanged( QListViewItem* );
     void slotClicked(int, QListViewItem*, const QPoint&, int );
     void slotFSActivated(int);
+    void slotFSpressed();
 
 protected:
     OFileSelector* selector();
@@ -177,6 +178,7 @@ private:
     QStringList m_mimes; // used in compy mime
     QString m_currentDir;
     QToolButton *m_btnNew, *m_btnClose;
+    QToolButton *m_fsButton;
     void connectSlots();
     void addFile( QFileInfo* info, bool symlink = FALSE );
     void addDir ( QFileInfo* info, bool symlink = FALSE );

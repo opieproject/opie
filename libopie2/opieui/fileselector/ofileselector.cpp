@@ -67,8 +67,8 @@ namespace Internal {
  * base and ending, but only if base is not empty
  */
 static inline QString createNewPath(const QString& base, const QString &ending) {
-    return  base == QString::fromLatin1("/") ? 
-	    base + ending : base + "/" + ending;
+    return  base == QString::fromLatin1("/") ?
+        base + ending : base + "/" + ending;
 }
 
 
@@ -288,7 +288,7 @@ QString OFileSelectorItem::path()const
 QString OFileSelectorItem::key( int id, bool )const
 {
     QString ke;
-    
+
     /*
      * id = 0 ||id == 1 : Sort By Name but Directories at Top
      * id = 2           : Sort By Size: Prepend '0' to the key
@@ -307,7 +307,7 @@ QString OFileSelectorItem::key( int id, bool )const
         }
         return ke;
     }else if(id == 2) {
-	return text(2).rightJustify(20, '0');
+    return text(2).rightJustify(20, '0');
     }else
         return text( id );
 
@@ -363,6 +363,7 @@ OFileViewFileListView::OFileViewFileListView( QWidget* parent, const QString& st
     btn = new QToolButton( box );
     btn->setIconSet( Resource::loadIconSet("cardmon/pcmcia") );
 
+    m_fsButton = btn;
     /* let's fill device parts */
     QPopupMenu* pop = new QPopupMenu(this);
     connect(pop, SIGNAL( activated(int) ),
@@ -380,8 +381,7 @@ OFileViewFileListView::OFileViewFileListView( QWidget* parent, const QString& st
     }
     m_fsPop = pop;
 
-
-    btn->setPopup( pop );
+    connect(btn,SIGNAL(pressed()),this,SLOT(slotFSpressed()));
 
     lay->addWidget( box );
 
@@ -403,6 +403,12 @@ OFileViewFileListView::OFileViewFileListView( QWidget* parent, const QString& st
 
     lay->addWidget( m_view, 1000 );
     connectSlots();
+}
+
+void OFileViewFileListView::slotFSpressed()
+{
+    m_fsPop->exec(QPoint( QCursor::pos().x(), QCursor::pos().y()));
+    m_fsButton->setDown(false);
 }
 
 OFileViewFileListView::~OFileViewFileListView()
