@@ -52,6 +52,7 @@
 
 //only needed for the random play
 #include <stdlib.h>
+#include <assert.h>
 
 #include "audiowidget.h"
 #include "videowidget.h"
@@ -1143,6 +1144,17 @@ void PlayListWidget::skinsMenuActivated( int item ) {
 
 int PlayListWidget::whichList() {
     return tabWidget->currentPageIndex();
+}
+
+PlayListWidget::TabType PlayListWidget::currentTab() const
+{
+    static const TabType indexToTabType[ NumTabTypes ] =
+    { CurrentPlaylist, AudioFiles, VideoFiles, PlayLists };
+
+    int index = tabWidget->currentPageIndex();
+    assert( index < NumTabTypes && index >= 0 );
+
+    return indexToTabType[ index ];
 }
 
 QString PlayListWidget::currentFileListPathName() {
