@@ -1,4 +1,4 @@
-Files: bin/opieirc pics/opieirc apps/Applications/opieirc.desktop
+Files: bin/opieirc pics/opieirc apps/Applications/opieirc.desktop help/en/html/opieirc.html help/en/html/opieirc
 Priority: optional
 Section: Communications
 Maintainer: Wenzel Jakob <root@wazlaf.de>

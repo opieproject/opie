@@ -1,4 +1,5 @@
 #include <qhbox.h>
+#include <qwhatsthis.h>
 #include "ircquerytab.h"
 #include "ircservertab.h"
 
@@ -13,7 +14,9 @@ IRCQueryTab::IRCQueryTab(IRCPerson *person, IRCServerTab *parentTab, MainWindow 
     m_textview->setHScrollBarMode(QScrollView::AlwaysOff);
     m_textview->setVScrollBarMode(QScrollView::AlwaysOn);
     m_textview->setTextFormat(RichText);
+    QWhatsThis::add(m_textview, tr("Private discussion"));
     m_field = new IRCHistoryLineEdit(this);
+    QWhatsThis::add(m_field, tr("Type your text here in order to send a message to the other person"));
     m_layout->add(hbox);
     hbox->show();
     m_layout->add(m_field);

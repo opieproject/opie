@@ -1,5 +1,6 @@
 #include <qpe/config.h>
 #include <qtextstream.h>
+#include <qwhatsthis.h>
 #include "ircservertab.h"
 
 IRCServerTab::IRCServerTab(IRCServer server, MainWindow *mainWindow, QWidget *parent, const char *name, WFlags f) : IRCTab(parent, name, f) {
@@ -13,8 +14,10 @@ IRCServerTab::IRCServerTab(IRCServer server, MainWindow *mainWindow, QWidget *pa
     m_textview->setHScrollBarMode(QScrollView::AlwaysOff);
     m_textview->setVScrollBarMode(QScrollView::AlwaysOn);
     m_textview->setTextFormat(RichText);
+    QWhatsThis::add(m_textview, tr("Server messages"));
     m_layout->add(m_textview);
     m_field = new IRCHistoryLineEdit(this);
+    QWhatsThis::add(m_textview, tr("Type commands here. A list of available commands can be found inside the OpieIRC help"));
     m_layout->add(m_field);
     connect(m_field, SIGNAL(returnPressed()), this, SLOT(processCommand()));
     m_field->setFocus();

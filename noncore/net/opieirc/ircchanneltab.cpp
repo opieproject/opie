@@ -1,7 +1,7 @@
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
 #include <qcursor.h>
-#include <stdio.h>
+#include <qwhatsthis.h>
 #include <qhbox.h>
 #include "ircchanneltab.h"
 #include "ircservertab.h"
@@ -19,11 +19,13 @@ IRCChannelTab::IRCChannelTab(IRCChannel *channel, IRCServerTab *parentTab, MainW
     m_listButton = new QPushButton(">", m_textview);
     m_textview->setCornerWidget(m_listButton);
     m_textview->setTextFormat(RichText);
+    QWhatsThis::add(m_textview, tr("Channel discussion"));
     connect(m_listButton, SIGNAL(clicked()), this, SLOT(toggleList()));
     m_list = new IRCChannelList(m_channel, hbox);
     m_list->update();
     m_list->setMaximumWidth(LISTWIDTH);
     m_field = new IRCHistoryLineEdit(this);
+    QWhatsThis::add(m_field, tr("Type your message here to participate in the channel discussion"));
     m_popup = new QPopupMenu(m_list);
     m_lines = 0;
     /* Required so that embedded-style "right" clicks work */
