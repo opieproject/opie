@@ -130,7 +130,7 @@ next to a field for help</source>
     </message>
     <message>
         <source>deleted theme %1?</source>
-        <translation type="unfinished">удалить тему %1?</translation>
+        <translation>удалить тему %1?</translation>
     </message>
     <message>
         <source>OK</source>

@@ -265,7 +265,7 @@
     </message>
     <message>
         <source>points</source>
-        <translation type="unfinished"></translation>
+        <translation>пойнты</translation>
     </message>
     <message>
         <source>pt</source>
