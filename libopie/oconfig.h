@@ -41,7 +41,7 @@ class OConfig : public Config {
   OConfig( const QString &filename );
   ~OConfig();
   QString fileName() const;
-
+  void read( ) { Config::read(); };
 };
 
 #endif

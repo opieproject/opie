@@ -100,6 +100,7 @@ void MediumMountGui::writeConfig(bool autocheck) {
     mimeTypeList << ("null");
     }
   }
+  cfg.write();
 }
 
 void MediumMountGui::startGui() {

@@ -545,6 +545,7 @@ void Launcher::loadDocs() // ok here comes a hack belonging to Global::
 	    if( medium.exec()  ){ //ok
 	      // speicher
 	      qWarning("execed" );
+	      cfg.read();
 	      cfg.writeEntry("timestamp", newStamp );
 	    }
 	  }else{
