@@ -604,7 +604,7 @@ Launcher::Launcher( QWidget* parent, const char* name, WFlags fl )
 
     int stamp = uidgen.generate(); // this is our timestamp to see which devices we know
     //uidgen.store( stamp );
-    m_timeStamp = QString::number( stamp  );            
+    m_timeStamp = QString::number( stamp  );
 
     tabs = new CategoryTabWidget( this );
     tabs->setMaximumWidth( qApp->desktop()->width() );
@@ -979,11 +979,16 @@ void Launcher::systemMessage( const QCString &msg, const QByteArray &data)
             }
         } else {
         }
-    } else if ( msg == "sendVersionInfo()" ) {
+    }
+    /*
+     * QtopiaDesktop relies on the major number
+     * to start with 1. We're at 0.9
+     * so wee need to fake at least 1.4 to be able
+     * to sync with QtopiaDesktop1.6
+     */
+    else if ( msg == "sendVersionInfo()" ) {
 	QCopEnvelope e( "QPE/Desktop", "versionInfo(QString)" );
-	QString v = QPE_VERSION;
-	QStringList l = QStringList::split( '.', v );
-	QString v2 = l[0] + '.' + l[1];
+	QString v2 = QString::fromLatin1("1.4");
 	e << v2;
 	//qDebug("version %s\n", line.latin1());
     } else if ( msg == "sendCardInfo()" ) {
@@ -1050,7 +1055,7 @@ void Launcher::systemMessage( const QCString &msg, const QByteArray &data)
 	syncDialog->showMaximized();
 	syncDialog->whatLabel->setText( "<b>" + what + "</b>" );
 	connect( syncDialog->buttonCancel, SIGNAL( clicked() ),
-		 SLOT( cancelSync() ) );	
+		 SLOT( cancelSync() ) );
     } else if ( msg == "stopSync()") {
 	delete syncDialog; syncDialog = 0;
     } else if ( msg == "getAllDocLinks()" ) {
@@ -1093,7 +1098,7 @@ void Launcher::systemMessage( const QCString &msg, const QByteArray &data)
 	QCopEnvelope e( "QPE/Desktop", "docLinks(QString)" );
 	e << contents;
 #endif
-	
+
  	//qDebug( "================ \n\n%s\n\n===============",
 	//contents.latin1() );
 
