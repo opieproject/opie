@@ -1,6 +1,6 @@
 /*
                =.            This file is part of the OPIE Project
-             .=l.            Copyright (c)  2002 <>
+             .=l.            Copyright (c)  2002 <zecke>
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
 .> <`_,   >  .   <=          redistribute it and/or  modify it under
@@ -270,6 +270,7 @@ void TableView::slotClicked(int row, int col, int,
 void TableView::slotPressed(int row, int col, int,
                             const QPoint& point) {
 
+    qWarning("pressed row %d  col %d   x:%d+y:%d", row,col,point.x(),point.y() );
     m_prevP = point;
     /* TextColumn column */
     if ( col == 2 && cellGeometry( row, col ).contains( point ) )
@@ -496,18 +497,27 @@ void TableView::timerEvent( QTimerEvent* ev ) {
  * Then we check if they're some pixel horizontal away
  * if the distance between the two points is greater than
  * 8 we mark the underlying todo as completed and do a repaint
+ *
+ * BUG: When clicking on the Due column and it's scrollable
+ * the todo is marked as completed...
+ * REASON: QTable is doing auto scrolling which leads to a move
+ * in the x coordinate and this way it's able to pass the
+ * m_completeStrokeWidth criteria
+ * WORKAROUND: strike through needs to strike through the same
+ * row and two columns!
  */
 void TableView::contentsMouseReleaseEvent( QMouseEvent* e) {
     int row = rowAt(m_prevP.y());
-    if ( row == rowAt( e->y() ) && row != -1 ) {
-        if ( ::abs( m_prevP.x() - e->x() ) >=  m_completeStrokeWidth ) {
-            qWarning("current row %d", row );
+    int colOld = columnAt(m_prevP.x() );
+    int colNew = columnAt(e->x() );
+    qWarning("colNew: %d colOld: %d", colNew, colOld );
+    if ( row == rowAt( e->y() ) && row != -1 &&
+         colOld != colNew ) {
             OTodo todo = sorted()[row];
             todo.setCompleted( !todo.isCompleted() );
             TodoView::update( todo.uid(), todo );
             updateView();
             return;
-        }
     }
     QTable::contentsMouseReleaseEvent( e );
 }
