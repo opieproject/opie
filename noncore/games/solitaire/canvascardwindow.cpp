@@ -41,11 +41,11 @@ CanvasCardWindow::CanvasCardWindow(QWidget* parent, const char* name, WFlags f) 
     // Create Playing Area for Games
     if ( QPixmap::defaultDepth() < 12 ) {
 //      canvas.setBackgroundColor(QColor(0x51, 0x74, 0x6B));
-//	canvas.setBackgroundColor(QColor(0x20, 0xb0, 0x50));
-	canvas.setBackgroundColor(QColor(0x08, 0x98, 0x2D));
+//  canvas.setBackgroundColor(QColor(0x20, 0xb0, 0x50));
+  canvas.setBackgroundColor(QColor(0x08, 0x98, 0x2D));
     } else {
         QPixmap bg;
-	bg.convertFromImage( Resource::loadImage( "table_pattern" ), ThresholdDither );  
+  bg.convertFromImage( Resource::loadImage( "table_pattern" ), ThresholdDither );  
         canvas.setBackgroundPixmap(bg);
     }
 
@@ -102,6 +102,7 @@ CanvasCardWindow::CanvasCardWindow(QWidget* parent, const char* name, WFlags f) 
 
     drawId = settings->insertItem(tr("Turn One Card"), this, SLOT(drawnToggle()));
     menu->insertItem(tr("Settings"),settings);
+    settings->setCheckable(TRUE);
 
 #endif
 
@@ -111,47 +112,49 @@ CanvasCardWindow::CanvasCardWindow(QWidget* parent, const char* name, WFlags f) 
     cfg.setGroup( "GlobalSettings" );
     snapOn = cfg.readBoolEntry( "SnapOn", TRUE);
     settings->setItemChecked(snap_id, snapOn);
+
     gameType = cfg.readNumEntry( "GameType", -1 );
-    drawThree = cfg.readBoolEntry( "DrawThree", TRUE);
+    drawThree = cfg.readBoolEntry( "DrawThree", FALSE);
     if ( gameType == 0 ) {
-	cardGame = new PatienceCardGame( &canvas, snapOn, this );
-	cardGame->setNumberToDraw(drawThree ? 3 : 1);
-	setCaption(tr("Patience"));
-	setCentralWidget(cardGame);
-	cardGame->readConfig( cfg );
-	setCardBacks();
+  cardGame = new PatienceCardGame( &canvas, snapOn, this );
+  cardGame->setNumberToDraw(drawThree ? 3 : 1);
+  
+  setCaption(tr("Patience"));
+  setCentralWidget(cardGame);
+  cardGame->readConfig( cfg );
+  setCardBacks();
     } else if ( gameType == 1 ) {
-	cardGame = new FreecellCardGame( &canvas, snapOn, this );
-	setCaption(tr("Freecell"));
-	setCentralWidget(cardGame);
-	//cardGame->newGame(); // Until we know how to handle reading freecell config
-	cardGame->readConfig( cfg );
-	setCardBacks();
+  cardGame = new FreecellCardGame( &canvas, snapOn, this );
+  setCaption(tr("Freecell"));
+  setCentralWidget(cardGame);
+  //cardGame->newGame(); // Until we know how to handle reading freecell config
+  cardGame->readConfig( cfg );
+  setCardBacks();
     } else if ( gameType == 2 ) {
-	cardGame = new ChicaneCardGame( &canvas, snapOn, this );
-	cardGame->setNumberToDraw(1);
-	setCaption(tr("Chicane"));
-	setCentralWidget(cardGame);
-	cardGame->readConfig( cfg );
-	setCardBacks();
+  cardGame = new ChicaneCardGame( &canvas, snapOn, this );
+  cardGame->setNumberToDraw(1);
+  setCaption(tr("Chicane"));
+  setCentralWidget(cardGame);
+  cardGame->readConfig( cfg );
+  setCardBacks();
     } else if ( gameType == 3 ) {
-	cardGame = new HarpCardGame( &canvas, snapOn, this );
-	cardGame->setNumberToDraw(1);
-	setCaption(tr("Harp"));
-	setCentralWidget(cardGame);
-	cardGame->readConfig( cfg );
-	setCardBacks();
+  cardGame = new HarpCardGame( &canvas, snapOn, this );
+  cardGame->setNumberToDraw(1);
+  setCaption(tr("Harp"));
+  setCentralWidget(cardGame);
+  cardGame->readConfig( cfg );
+  setCardBacks();
     } else if ( gameType == 4 ) {
-	cardGame = new TeeclubCardGame( &canvas, snapOn, this );
-	cardGame->setNumberToDraw(1);
-	setCaption(tr("Teeclub"));
-	setCentralWidget(cardGame);
-	cardGame->readConfig( cfg );
-	setCardBacks();
+  cardGame = new TeeclubCardGame( &canvas, snapOn, this );
+  cardGame->setNumberToDraw(1);
+  setCaption(tr("Teeclub"));
+  setCentralWidget(cardGame);
+  cardGame->readConfig( cfg );
+  setCardBacks();
     } else {
-	// Probably there isn't a config file or it is broken
-	// Start a new game
-	initPatience();
+  // Probably there isn't a config file or it is broken
+  // Start a new game
+  initPatience();
     }
 
     updateDraw();
@@ -161,13 +164,14 @@ CanvasCardWindow::CanvasCardWindow(QWidget* parent, const char* name, WFlags f) 
 CanvasCardWindow::~CanvasCardWindow()
 {
     if (cardGame) {
-	Config cfg("Patience");
-	cfg.setGroup( "GlobalSettings" );
-	cfg.writeEntry( "GameType", gameType );
-	cfg.writeEntry( "SnapOn", snapOn );
-	cfg.writeEntry( "DrawThree", drawThree);
-	cardGame->writeConfig( cfg );
-	delete cardGame;
+  Config cfg("Patience");
+  cfg.setGroup( "GlobalSettings" );
+  cfg.writeEntry( "GameType", gameType );
+  cfg.writeEntry( "SnapOn", snapOn );
+  cfg.writeEntry( "DrawThree", drawThree);
+  cfg.write();
+  cardGame->writeConfig( cfg );
+  delete cardGame;
     }
 }
 
@@ -184,7 +188,7 @@ void CanvasCardWindow::initPatience()
 {
     // Create New Game 
     if ( cardGame )
-	delete cardGame;
+  delete cardGame;
     cardGame = new PatienceCardGame( &canvas, snapOn, this );
     cardGame->setNumberToDraw(drawThree ? 3 : 1);
     gameType = 0;
@@ -200,7 +204,7 @@ void CanvasCardWindow::initFreecell()
 {
     // Create New Game
     if ( cardGame ) {
-	delete cardGame;
+  delete cardGame;
     }
     cardGame = new FreecellCardGame( &canvas, snapOn, this );
     gameType = 1;
@@ -215,7 +219,7 @@ void CanvasCardWindow::initChicane()
 {
     // Create New Game
     if ( cardGame ) {
-	delete cardGame;
+  delete cardGame;
     }
     cardGame = new ChicaneCardGame( &canvas, snapOn, this );
     cardGame->setNumberToDraw(1);
@@ -230,7 +234,7 @@ void CanvasCardWindow::initHarp()
 {
     // Create New Game
     if ( cardGame ) {
-	delete cardGame;
+  delete cardGame;
     }
     cardGame = new HarpCardGame( &canvas, snapOn, this );
     cardGame->setNumberToDraw(1);
@@ -268,15 +272,21 @@ void CanvasCardWindow::snapToggle()
 
 void CanvasCardWindow::drawnToggle()
 {
+    drawThree=!drawThree;
+    Config cfg( "Patience" );
+    cfg.setGroup( "GlobalSettings" );
     cardGame->toggleCardsDrawn();
     updateDraw();
+    cfg.writeEntry( "DrawThree", drawThree);
+    cfg.write();
 }
 
 void CanvasCardWindow::updateDraw() {
-    if(cardGame->cardsDrawn() == 3) 
-	settings->changeItem(drawId, tr("Turn One Card"));
-    else 
-	settings->changeItem(drawId, tr("Turn Three Cards"));
+    if(cardGame->cardsDrawn() == 3){
+        settings->changeItem(drawId, tr("Turn One Card"));
+    }  else {
+        settings->changeItem(drawId, tr("Turn Three Cards"));
+    }
 }
 
 
@@ -285,8 +295,8 @@ void CanvasCardWindow::setCardBacks()
     QCanvasItemList l = canvas.allItems();
 
     for (QCanvasItemList::Iterator it = l.begin(); it != l.end(); ++it) {
-	if ( (*it)->rtti() == canvasCardId )
-	    ((CanvasCard *)(*it))->setCardBack( cardBack );
+  if ( (*it)->rtti() == canvasCardId )
+      ((CanvasCard *)(*it))->setCardBack( cardBack );
     }
 }
 
@@ -296,7 +306,7 @@ void CanvasCardWindow::changeCardBacks()
     cardBack++;
 
     if (cardBack == 5)
-	cardBack = 0;
+  cardBack = 0;
 
     setCardBacks();
 }

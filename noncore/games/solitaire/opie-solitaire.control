@@ -1,4 +1,4 @@
-Files: bin/patience apps/Games/patience.desktop pics/cards 
+Files: bin/patience apps/Games/patience.desktop pics/cards
 Priority: optional
 Section: opie/games
 Maintainer: Martin Imobersteg <imm@gmx.ch>
