@@ -4,7 +4,7 @@
     <name>OpieFtp</name>
     <message>
         <source>OpieFtp</source>
-        <translation>OpieFtp</translation>
+        <translation>Opie FTP</translation>
     </message>
     <message>
         <source>Connection</source>
@@ -12,31 +12,31 @@
     </message>
     <message>
         <source>Local</source>
-        <translation>Local</translation>
+        <translation>Locale</translation>
     </message>
     <message>
         <source>Remote</source>
-        <translation>Distant</translation>
+        <translation>Distante</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Vue</translation>
+        <translation>Action</translation>
     </message>
     <message>
         <source>New</source>
-        <translation>Nouveau</translation>
+        <translation>Nouvelle</translation>
     </message>
     <message>
         <source>Connect</source>
-        <translation>Se connecter</translation>
+        <translation>Se Connecter</translation>
     </message>
     <message>
         <source>Disconnect</source>
-        <translation>Se déconnecter</translation>
+        <translation>Se Déconnecter</translation>
     </message>
     <message>
         <source>Show Hidden Files</source>
-        <translation>Montrer Fichiers Cachés</translation>
+        <translation>Voir Fichiers Cachés</translation>
     </message>
     <message>
         <source>Upload</source>
@@ -52,7 +52,7 @@
     </message>
     <message>
         <source>Delete</source>
-        <translation>Effacer</translation>
+        <translation>Supprimer</translation>
     </message>
     <message>
         <source>Download</source>
@@ -60,15 +60,15 @@
     </message>
     <message>
         <source>Switch to Local</source>
-        <translation>Basculer sur Local</translation>
+        <translation>Onglet Connexion Locale</translation>
     </message>
     <message>
         <source>Switch to Remote</source>
-        <translation>Basculer sur Distant</translation>
+        <translation>Onglet Connexion Distante</translation>
     </message>
     <message>
         <source>Switch to Config</source>
-        <translation>Basculer sur la Config</translation>
+        <translation>Onglet Configuration</translation>
     </message>
     <message>
         <source>File</source>
@@ -100,7 +100,7 @@
     </message>
     <message>
         <source>Remote path</source>
-        <translation>Chemin distant</translation>
+        <translation>Répertoire distant</translation>
     </message>
     <message>
         <source>Port</source>
@@ -135,7 +135,7 @@
     <message>
         <source>Unable to log in
 </source>
-        <translation>Impossible de se &quot;loguer&quot; à 
+        <translation>Impossible de se loguer à 
 </translation>
     </message>
     <message>
@@ -203,7 +203,8 @@ Il doit être vide</translation>
     <message>
         <source>Unable to make directory
 </source>
-        <translation>Impossible de créer un répertoire</translation>
+        <translation>Impossible de créer le répertoire
+</translation>
     </message>
     <message>
         <source>Unable to remove directory
@@ -245,7 +246,7 @@ Il doit être vide</translation>
     </message>
     <message>
         <source>Sorry name already taken</source>
-        <translation>Désolé, nom déjà utilisé</translation>
+        <translation>Ce nom est déjà utilisé</translation>
     </message>
 </context>
 </TS>

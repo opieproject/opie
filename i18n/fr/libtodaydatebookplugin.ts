@@ -132,7 +132,7 @@ d&apos;évènements
     <name>QObject</name>
     <message>
         <source>Datebook plugin</source>
-        <translation>Module &quot;Agenda&quot;</translation>
+        <translation>Module Agenda</translation>
     </message>
     <message>
         <source>No more appointments today</source>
