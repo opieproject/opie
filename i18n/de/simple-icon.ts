@@ -3,12 +3,12 @@
     <name>Simple</name>
     <message>
         <source>My Simple Application</source>
-        <translation type="unfinished"></translation>
+        <translation>Meine einfache Anwendung</translation>
     </message>
     <message>
         <source>Fire</source>
         <comment>translatable fire string</comment>
-        <translation type="unfinished"></translation>
+        <translation>Feuer</translation>
     </message>
 </context>
 </TS>

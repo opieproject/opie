@@ -114,7 +114,7 @@ vom Server: </translation>
     </message>
     <message>
         <source>Retrieving time from network...</source>
-        <translation type="unfinished"></translation>
+        <translation>Hohle aktuelle Zeit vom Netzwerk...</translation>
     </message>
 </context>
 <context>

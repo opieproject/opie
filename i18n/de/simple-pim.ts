@@ -3,58 +3,58 @@
     <name>MainWindow</name>
     <message>
         <source>My MainWindow</source>
-        <translation type="unfinished"></translation>
+        <translation>Mein Hauptfenster</translation>
     </message>
     <message>
         <source>Todos</source>
-        <translation type="unfinished"></translation>
+        <translation>Todos</translation>
     </message>
     <message>
         <source>Events</source>
-        <translation type="unfinished"></translation>
+        <translation>Ereignisse</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Schließen</translation>
     </message>
     <message>
         <source>View Current</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige aktuelles</translation>
     </message>
     <message>
         <source>Views the current record</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige den aktuellen Satz</translation>
     </message>
     <message>
         <source>Choose Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Wähle Datum aus</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei</translation>
     </message>
     <message>
         <source>View Record</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige Satz</translation>
     </message>
 </context>
 <context>
     <name>PIMListView</name>
     <message>
         <source>Start </source>
-        <translation type="unfinished"></translation>
+        <translation>Start</translation>
     </message>
     <message>
         <source>End </source>
-        <translation type="unfinished"></translation>
+        <translation>Ende</translation>
     </message>
     <message>
         <source>Time </source>
-        <translation type="unfinished"></translation>
+        <translation>Zeit</translation>
     </message>
     <message>
         <source> This is an All-Day Event</source>
-        <translation type="unfinished"></translation>
+        <translation>Das ist ein Ganztags Ereignis</translation>
     </message>
 </context>
 </TS>
