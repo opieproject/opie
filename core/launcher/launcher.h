@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -20,6 +20,7 @@
 #ifndef LAUNCHER_H
 #define LAUNCHER_H
 
+#include <qpe/config.h>
 #include <qmainwindow.h>
 #include <qtabbar.h>
 #include <qstringlist.h>
@@ -60,6 +61,8 @@ public:
     void updateDocs(AppLnkSet* docFolder, const QList<FileSystem> &fs);
     void updateLink(const QString& linkfile);
     void setBusy(bool on);
+    QString getAllDocLinkInfo() const;
+    LauncherView *view( const QString &id );
 
 signals:
     void selected(const QString&);
@@ -70,7 +73,11 @@ public slots:
     void nextTab();
     void prevTab();
 
+protected slots:
+    void tabProperties();
+
 protected:
+    void setTabAppearance( const QString &id, Config &cfg );
     void paletteChange( const QPalette &p );
 
 private:
@@ -111,6 +118,7 @@ signals:
 private slots:
     void doMaximize();
     void systemMessage( const QCString &, const QByteArray &);
+    void launcherMessage( const QCString &, const QByteArray &);
     void storageChanged();
     void cancelSync();
 
@@ -132,6 +140,7 @@ private:
     bool in_lnk_props;
     bool got_lnk_change;
     QString lnk_change;
+
     QString m_timeStamp;
     Qtopia::UidGen uidgen;
 };

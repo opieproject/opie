@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -31,6 +31,7 @@ class LauncherIconView;
 class QIconView;
 class QIconViewItem;
 class MenuButton;
+class QComboBox;
 
 class LauncherView : public QVBox
 {
@@ -50,6 +51,20 @@ public:
 
     void setBusy(bool);
 
+    QString getAllDocLinkInfo() const;
+    enum ViewMode { Icon, List };
+    void setViewMode( ViewMode m );
+    ViewMode viewMode() const { return vmode; }
+
+    enum BackgroundType { Ruled, SolidColor, Image };
+    void setBackgroundType( BackgroundType t, const QString & );
+    BackgroundType backgroundType() const { return bgType; }
+
+    void setTextColor( const QColor & );
+    QColor textColor() const { return textCol; }
+
+    void setViewFont( const QFont & );
+
 public slots:
     void populate( AppLnkSet *folder, const QString& categoryfilter );
 
@@ -63,19 +78,25 @@ protected slots:
     void itemClicked( int, QIconViewItem * );
     void itemPressed( int, QIconViewItem * );
     void sortBy(int);
-    void showType(const QString&);
+    void showType(int);
     void showCategory( int );
     void resizeEvent(QResizeEvent *);
 
 protected:
     void internalPopulate( AppLnkSet *, const QString& categoryfilter );
+    void paletteChange( const QPalette & );
 
 private:
     static bool bsy;
     QWidget* tools;
     LauncherIconView* icons;
-    MenuButton *typemb;
+    QComboBox *typemb;
+    QStringList typelist;
     CategorySelect *catmb;
+    ViewMode vmode;
+    BackgroundType bgType;
+    QString bgName;
+    QColor textCol;
 };
 
 #endif // LAUNCHERVIEW_H
