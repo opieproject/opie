@@ -11,7 +11,7 @@
  ************************************************************************************/
 // copyright 2002 Jeremy Cowgar <jc@cowgar.com>
 /*
- * $Id: vmemo.cpp,v 1.43 2002-07-24 15:18:26 llornkcor Exp $
+ * $Id: vmemo.cpp,v 1.44 2002-07-26 01:14:13 llornkcor Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 extern "C" {
@@ -260,16 +260,18 @@ VMemo::~VMemo() {
 void VMemo::receive( const QCString &msg, const QByteArray &data ) {
   qDebug("receive");
   QDataStream stream( data, IO_ReadOnly );
+
   if (msg == "toggleRecord()")  {
-    if (recording) {
-      fromToggle = TRUE;
-      mouseReleaseEvent(NULL);
-//      stopRecording();
-    }  else {
-      fromToggle = TRUE;
-      //      mousePressEvent(NULL);
-      startRecording();
-    }
+
+      if (recording) {
+          fromToggle = TRUE;
+          mouseReleaseEvent(NULL);
+          stopRecording();
+      }  else {
+          fromToggle = TRUE;
+            //      mousePressEvent(NULL);
+          startRecording();
+      }
   }
 }
 
@@ -359,13 +361,13 @@ bool VMemo::startRecording() {
   fName = "vm_"+ dt.toString()+ ".wav";
   
   fileName+=fName;
-  qDebug("filename is "+fileName);
   // No spaces in the filename
   fileName.replace(QRegExp("'"),"");
   fileName.replace(QRegExp(" "),"_");
   fileName.replace(QRegExp(":"),".");
   fileName.replace(QRegExp(","),"");
   
+  qDebug("filename is "+fileName);
 // open tmp file here
   char *pointer;
   pointer=tmpnam(NULL); 
@@ -380,7 +382,7 @@ bool VMemo::startRecording() {
     ::close(dsp);
     return FALSE;
   }
-  record();
+  if( record() ) {
 
   QString cmd;
   cmd.sprintf("mv %s "+fileName, pointer);
@@ -398,8 +400,10 @@ bool VMemo::startRecording() {
   l.setType("audio/x-wav");
   l.setCategories(cats);
   l.writeLink();
-
   return TRUE;
+  } else
+      return FALSE;
+  
 }
 
 void VMemo::stopRecording() {
@@ -504,16 +508,17 @@ int VMemo::openWAV(const char *filename) {
   return 1;
 }
 
-void VMemo::record(void) {
-  int length=0, result, value;
+bool VMemo::record() {
+
+    int length=0, result, value;
   QString msg;
   msg.sprintf("Recording format %d", format);
   qDebug(msg);
   Config config("Vmemo");
   config.setGroup("Record");
   int sRate=config.readNumEntry("SizeLimit", 30);
-
-  t_timer->start( sRate * 1000+1000, TRUE);
+  if(sRate > 0)
+      t_timer->start( sRate * 1000+1000, TRUE);
 
 //    if(systemZaurus) {
 //    } else { // 16 bit only capabilities
@@ -537,8 +542,9 @@ void VMemo::record(void) {
           perror("recording error ");
 //          qDebug(currentFileName);
           QMessageBox::message(tr("Note"),tr("error recording"));
-          recording=FALSE;;
+          recording=FALSE;
           break;
+          return FALSE;
         }
 
         if(useADPCM) {
@@ -558,6 +564,8 @@ void VMemo::record(void) {
         recording=false;
         perror("dev/dsp's is a lookin' messy");
         QMessageBox::message("Vmemo"," Done1 recording\n"+ fileName);
+          break;
+          return FALSE;
       }
       //       printf("%d\r",length);
       //       fflush(stdout);
@@ -597,7 +605,7 @@ void VMemo::record(void) {
   QString foo = cfg.readEntry("Mute","TRUE");
   if(foo.find("TRUE",0,TRUE) != -1)
     QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << TRUE; //mute
-
+return TRUE;
 }
 
 int VMemo::setToggleButton(int tog) {

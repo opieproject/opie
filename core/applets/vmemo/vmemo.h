@@ -11,7 +11,7 @@
 *********************************************************************************************/
 
 /*
- * $Id: vmemo.h,v 1.12 2002-07-24 15:18:26 llornkcor Exp $
+ * $Id: vmemo.h,v 1.13 2002-07-26 01:14:13 llornkcor Exp $
  */
 
 #ifndef __VMEMO_H__
@@ -38,7 +38,7 @@ public:
   QTimer *t_timer;
 bool usingIcon, useADPCM;
 public slots:
-  void record();
+  bool record();
   void mousePressEvent( QMouseEvent * );
   void mouseReleaseEvent( QMouseEvent * );
   void receive( const QCString &msg, const QByteArray &data );
