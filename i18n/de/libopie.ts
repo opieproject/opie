@@ -101,10 +101,6 @@
 <context>
     <name>OColorPopupMenu</name>
     <message>
-        <source>More</source>
-        <translation>Mehr</translation>
-    </message>
-    <message>
         <source>More...</source>
         <translation>Mehr...</translation>
     </message>
@@ -410,13 +406,13 @@ und</translation>
         <source>Pick Time:</source>
         <translation>Zeit auswählen:</translation>
     </message>
+    <message>
+        <source>OTimePickerDialogBase</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
-    <message>
-        <source>Description:</source>
-        <translation type="obsolete">Beschreibung:</translation>
-    </message>
     <message>
         <source>Priority:</source>
         <translation>Priorität:</translation>
@@ -436,10 +432,6 @@ und</translation>
     <message>
         <source>Default Email: </source>
         <translation>Stand. EMail: </translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Work Address:&lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;Arbeitsadresse:&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Office: </source>
@@ -464,10 +456,6 @@ und</translation>
     <message>
         <source>Business Pager: </source>
         <translation>Geschäftspiepser: </translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Home Address:&lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;Privatadresse:&lt;/b&gt; </translation>
     </message>
     <message>
         <source>Home Web Page: </source>
@@ -548,10 +536,6 @@ und</translation>
     <message>
         <source>The %1 every </source>
         <translation>Den %1 jeden</translation>
-    </message>
-    <message>
-        <source>The %1 %1 of every</source>
-        <translation type="obsolete">Den %1 %1 of jeden</translation>
     </message>
     <message>
         <source>Every </source>
@@ -642,16 +626,16 @@ und</translation>
         <translation>Das ist ein mehrtägiger Termin</translation>
     </message>
     <message>
-        <source>&lt;br&gt;&lt;br&gt;&lt;b&gt;Work Address:&lt;/b&gt;</source>
-        <translation>&lt;br&gt;&lt;br&gt;&lt;b&gt;Arbeitsadresse:&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;br&gt;&lt;br&gt;&lt;b&gt;Home Address:&lt;/b&gt;</source>
-        <translation>&lt;br&gt;&lt;br&gt;&lt;b&gt;Privatadresse:&lt;/b&gt;</translation>
-    </message>
-    <message>
         <source>The %1 %2 of every</source>
         <translation>Den %1 %2 jedes</translation>
+    </message>
+    <message>
+        <source>&lt;br&gt;&lt;b&gt;Work Address:&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;br&gt;&lt;b&gt;Home Address:&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

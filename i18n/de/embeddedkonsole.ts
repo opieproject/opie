@@ -6,26 +6,6 @@
         <source>Command Selection</source>
         <translation>Befehlsauswahl</translation>
     </message>
-    <message>
-        <source>new</source>
-        <translation type="obsolete">Neu</translation>
-    </message>
-    <message>
-        <source>edit</source>
-        <translation type="obsolete">Bearbeiten</translation>
-    </message>
-    <message>
-        <source>delete</source>
-        <translation type="obsolete">Löschen</translation>
-    </message>
-    <message>
-        <source>up</source>
-        <translation type="obsolete">Hoch</translation>
-    </message>
-    <message>
-        <source>down</source>
-        <translation type="obsolete">Runter</translation>
-    </message>
 </context>
 <context>
     <name>CommandEditDialogBase</name>

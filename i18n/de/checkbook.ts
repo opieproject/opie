@@ -39,30 +39,6 @@
         <translation>Wählen Sie hier den Typ des Kontos.</translation>
     </message>
     <message>
-        <source>Savings</source>
-        <translation type="obsolete">Ersparnisse</translation>
-    </message>
-    <message>
-        <source>Checking</source>
-        <translation type="obsolete">Rechnung</translation>
-    </message>
-    <message>
-        <source>CD</source>
-        <translation type="obsolete">CD</translation>
-    </message>
-    <message>
-        <source>Money market</source>
-        <translation type="obsolete">Geldmarkt</translation>
-    </message>
-    <message>
-        <source>Mutual fund</source>
-        <translation type="obsolete">Rentenfond</translation>
-    </message>
-    <message>
-        <source>Other</source>
-        <translation type="obsolete">Andere</translation>
-    </message>
-    <message>
         <source>Bank:</source>
         <translation>Bank: </translation>
     </message>
@@ -101,14 +77,6 @@
     <message>
         <source>Enter any additional information for this checkbook here.</source>
         <translation>Geben Sie hier zusätzliche Notizen ein.</translation>
-    </message>
-    <message>
-        <source>Current balance: %10.00</source>
-        <translation type="obsolete">Momentaner Stand: %10.00</translation>
-    </message>
-    <message>
-        <source>This area shows the current balance in this checkbook.</source>
-        <translation type="obsolete">Dieser Bereich zeigt den aktuellen Kontostand an.</translation>
     </message>
     <message>
         <source>This is a listing of all transactions entered for this checkbook.
@@ -182,10 +150,6 @@ Um Einträge nach einem Feld zu sortieren klicken Sie auf den Spaltennamen.</tra
         <translation>Klicken Sie hier um den gewünschten Graphen zu erstellen.</translation>
     </message>
     <message>
-        <source>Current balance: %1%2</source>
-        <translation type="obsolete">Momentaner Stand: %1%2</translation>
-    </message>
-    <message>
         <source>Delete transaction</source>
         <translation>Transaktion löschen</translation>
     </message>
@@ -231,7 +195,7 @@ Um Einträge nach einem Feld zu sortieren klicken Sie auf den Spaltennamen.</tra
     </message>
     <message>
         <source>Entry Order</source>
-        <translation type="unfinished"></translation>
+        <translation>Eingabereihenfolge</translation>
     </message>
     <message>
         <source>Number</source>
@@ -331,15 +295,15 @@ protected</source>
     </message>
     <message>
         <source>Open last checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Öffne letzte Scheckbuch</translation>
     </message>
     <message>
         <source>Click here to select whether the last open checkbook will be opened at startup.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicken Sie hier, um das letzte Scheckbuch beim Programmstart zu öffnen.</translation>
     </message>
     <message>
         <source>Show last checkbook tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige das letzte Scheckbuch Tab</translation>
     </message>
     <message>
         <source>Click here to select whether the last tab in a checkbook should be displayed.</source>
@@ -648,62 +612,6 @@ Der Wer der Gebühr sollte immer positiv sein.</translation>
         <translation>Geben Sie heir weitere Informationen ein.</translation>
     </message>
     <message>
-        <source>Automobile</source>
-        <translation type="obsolete">Auto</translation>
-    </message>
-    <message>
-        <source>Bills</source>
-        <translation type="obsolete">Rechnungen</translation>
-    </message>
-    <message>
-        <source>CDs</source>
-        <translation type="obsolete">CDs</translation>
-    </message>
-    <message>
-        <source>Clothing</source>
-        <translation type="obsolete">Kleidung</translation>
-    </message>
-    <message>
-        <source>Computer</source>
-        <translation type="obsolete">Computer</translation>
-    </message>
-    <message>
-        <source>DVDs</source>
-        <translation type="obsolete">DVDs</translation>
-    </message>
-    <message>
-        <source>Eletronics</source>
-        <translation type="obsolete">Elektronik</translation>
-    </message>
-    <message>
-        <source>Entertainment</source>
-        <translation type="obsolete">Unterhaltung</translation>
-    </message>
-    <message>
-        <source>Food</source>
-        <translation type="obsolete">Essen</translation>
-    </message>
-    <message>
-        <source>Gasoline</source>
-        <translation type="obsolete">Benzin</translation>
-    </message>
-    <message>
-        <source>Misc</source>
-        <translation type="obsolete">Versch.</translation>
-    </message>
-    <message>
-        <source>Movies</source>
-        <translation type="obsolete">Filme</translation>
-    </message>
-    <message>
-        <source>Rent</source>
-        <translation type="obsolete">Miete</translation>
-    </message>
-    <message>
-        <source>Travel</source>
-        <translation type="obsolete">Reise</translation>
-    </message>
-    <message>
         <source>Debit Charge</source>
         <translation>Abzahlung</translation>
     </message>
@@ -720,28 +628,12 @@ Der Wer der Gebühr sollte immer positiv sein.</translation>
         <translation>Kreditkarte</translation>
     </message>
     <message>
-        <source>Work</source>
-        <translation type="obsolete">Arbeit</translation>
-    </message>
-    <message>
-        <source>Family Member</source>
-        <translation type="obsolete">Familienmitgiled</translation>
-    </message>
-    <message>
-        <source>Misc. Credit</source>
-        <translation type="obsolete">Kreditsache</translation>
-    </message>
-    <message>
         <source>Automatic Payment</source>
         <translation>Bankeinzug</translation>
     </message>
     <message>
         <source>Cash</source>
         <translation>Bar</translation>
-    </message>
-    <message>
-        <source>Electronics</source>
-        <translation type="obsolete">Elektronik</translation>
     </message>
 </context>
 </TS>

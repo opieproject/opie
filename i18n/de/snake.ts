@@ -23,10 +23,6 @@ zu fressen. Sie dürfen dabei weder die
 Wände noch Ihren Schwanz berühren.</translation>
     </message>
     <message>
-        <source>Press Any Key To Start</source>
-        <translation type="obsolete">Drücken Sie eine Taste, um zu starten</translation>
-    </message>
-    <message>
         <source>     Score :    %1   </source>
         <translation>Punkte: %1</translation>
     </message>
@@ -35,11 +31,6 @@ Wände noch Ihren Schwanz berühren.</translation>
  Your Score: %1</source>
         <translation>Erwischt! 
 Ihre Punktezahl: %1</translation>
-    </message>
-    <message>
-        <source>Press Any Key to Begin a New Game.</source>
-        <translation type="obsolete">Drücken Sie eine Taste, um ein neues
-Spiel zu beginnen.</translation>
     </message>
     <message>
         <source>Press any key to start</source>

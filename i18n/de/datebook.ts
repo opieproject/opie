@@ -366,14 +366,6 @@ Trozdem beenden?</translation>
     </message>
 </context>
 <context>
-    <name>DateBookWeekLstDayHdr</name>
-    <message>
-        <source>MTWTFSSM</source>
-        <comment>Week days</comment>
-        <translation type="obsolete">MDMDFSSM</translation>
-    </message>
-</context>
-<context>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>
@@ -396,41 +388,6 @@ Trozdem beenden?</translation>
     <message>
         <source>p</source>
         <translation>P</translation>
-    </message>
-    <message>
-        <source>Mo</source>
-        <comment>Monday</comment>
-        <translation type="obsolete">Mo</translation>
-    </message>
-    <message>
-        <source>Tu</source>
-        <comment>Tuesday</comment>
-        <translation type="obsolete">Di</translation>
-    </message>
-    <message>
-        <source>We</source>
-        <comment>Wednesday</comment>
-        <translation type="obsolete">Mi</translation>
-    </message>
-    <message>
-        <source>Th</source>
-        <comment>Thursday</comment>
-        <translation type="obsolete">Do</translation>
-    </message>
-    <message>
-        <source>Fr</source>
-        <comment>Friday</comment>
-        <translation type="obsolete">Fr</translation>
-    </message>
-    <message>
-        <source>Sa</source>
-        <comment>Saturday</comment>
-        <translation type="obsolete">Sa</translation>
-    </message>
-    <message>
-        <source>Su</source>
-        <comment>Sunday</comment>
-        <translation type="obsolete">So</translation>
     </message>
 </context>
 <context>
@@ -513,10 +470,6 @@ Trozdem beenden?</translation>
     <message>
         <source>Jan 02 00</source>
         <translation>Jan 02 00</translation>
-    </message>
-    <message>
-        <source>Start time</source>
-        <translation type="obsolete">Startzeit</translation>
     </message>
     <message>
         <source>All day</source>

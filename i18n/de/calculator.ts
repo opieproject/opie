@@ -125,10 +125,6 @@
 <context>
     <name>CalculatorImpl</name>
     <message>
-        <source>Calculator</source>
-        <translation>Taschenrechner</translation>
-    </message>
-    <message>
         <source>Standard</source>
         <translation>Standard</translation>
     </message>

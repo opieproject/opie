@@ -39,14 +39,6 @@
         <translation>Löschen</translation>
     </message>
     <message>
-        <source>Switch to Local</source>
-        <translation type="obsolete">Lokalansicht</translation>
-    </message>
-    <message>
-        <source>Switch to Remote</source>
-        <translation type="obsolete">Fernansicht</translation>
-    </message>
-    <message>
         <source>Size</source>
         <translation>Größe</translation>
     </message>
@@ -161,12 +153,6 @@
 </translation>
     </message>
     <message>
-        <source>to
-</source>
-        <translation>nach
-</translation>
-    </message>
-    <message>
         <source>Could not move
 </source>
         <translation>Nicht verschiebbar
@@ -217,10 +203,6 @@ Soll wirklich gelöscht werden?</translation>
     <message>
         <source>%1 exists. Ok to overwrite?</source>
         <translation>%1 existiert. Überschreiben?</translation>
-    </message>
-    <message>
-        <source>Could not copy %1 to %2</source>
-        <translation>%1 konnte nicht zu %2 kopiert werden</translation>
     </message>
     <message>
         <source>Advanced FileManager
@@ -285,6 +267,19 @@ and all it&apos;s contents ?</source>
     <message>
         <source>Not Yet Implemented</source>
         <translation>Noch nicht implementiert</translation>
+    </message>
+    <message>
+        <source>Could not copy 
+%1 
+to 
+%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+to
+</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

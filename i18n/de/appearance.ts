@@ -82,22 +82,6 @@
         <translation>Fortgeschritten</translation>
     </message>
     <message>
-        <source>Restart</source>
-        <translation>Neustart</translation>
-    </message>
-    <message>
-        <source>Do you want to restart %1 now?</source>
-        <translation>Wollen Sie %1 nun neu starten?</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation>Ja</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation>Nein</translation>
-    </message>
-    <message>
         <source>Save Scheme</source>
         <translation>Schema speichern</translation>
     </message>

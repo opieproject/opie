@@ -251,10 +251,6 @@ Mail has NOT been sent</source>
         <translation>Mail schreiben</translation>
     </message>
     <message>
-        <source>Examine mail</source>
-        <translation type="obsolete">Mail prüfen</translation>
-    </message>
-    <message>
         <source>Central view area</source>
         <translation>Zentrale Mailansicht</translation>
     </message>
@@ -327,10 +323,6 @@ Möchten Sie dies jetzt durchführen ?</translation>
     <message>
         <source>If you would like to send copies of your mail they can be entered here</source>
         <translation>Wenn Sie Kopien versenden möchten können Sie dies hier angeben</translation>
-    </message>
-    <message>
-        <source>This button opens the address selector with all mail adresses from your OPIE addressbook</source>
-        <translation type="obsolete">Dieser Schalter öffnet das Adressbuch mit allen Mailadressen Ihres OPIE Addressbuchs</translation>
     </message>
     <message>
         <source>Enter your mail text here</source>

@@ -94,10 +94,6 @@
         <translation>Fehler</translation>
     </message>
     <message>
-        <source>File does not exist !</source>
-        <translation type="obsolete">Datei existiert nicht !</translation>
-    </message>
-    <message>
         <source>File does not exist!</source>
         <translation>Datei existiert nicht!</translation>
     </message>

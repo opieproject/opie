@@ -64,22 +64,8 @@ kalibrieren.</translation>
         <translation>Das eingegebene Passwort ist nicht richtig.</translation>
     </message>
     <message>
-        <source>OPIE was terminated
-by an uncaught signal
-(%1)
-</source>
-        <translation type="obsolete">OPIE wurde durch
-ein nicht abgefangenes
-Signal beendet: %1
-</translation>
-    </message>
-    <message>
         <source>Failure</source>
         <translation>Fehlgeschlagen</translation>
-    </message>
-    <message>
-        <source>Could not start OPIE.</source>
-        <translation type="obsolete">OPIE konnte nicht gestartet werden.</translation>
     </message>
     <message>
         <source>Could not switch to new user identity</source>

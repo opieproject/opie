@@ -480,11 +480,6 @@ frei und versuchen Sie es noch einmal
         <translation>AM</translation>
     </message>
     <message>
-        <source>Are you sure you want to delete
- %1?</source>
-        <translation type="obsolete">Wollen Sie %1 wirklich entfernen ?</translation>
-    </message>
-    <message>
         <source>All</source>
         <translation>Alle</translation>
     </message>
