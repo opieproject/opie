@@ -1,60 +1,45 @@
 #!/bin/sh
+lang=`basename ${1} 2>/dev/null | tr -d '/'`
 
-#
-# Function:
-#   showStringStats <title> <file>
-#
-# Parameters:
-#   <title>   Title to be displayed.
-#   <file>    Name of file to be counted.
-#
-function showStringStats ()
-{
-	echo -n "$1: "
-	if [ -e "$2" ]; then
-		csTotal=`grep translation "$2" | wc -l`
-		csUnfinished=`grep translation "$2" | grep type=\"unfinished\" | wc -l`
-		echo ${csUnfinished}", that means `expr ${csUnfinished} \* 100 / ${csTotal}`% needs to be done."
-	else
-		echo "'$2' is missing. No stats available!"
-	fi
-}
-
-#
-# Main
-#
-arg=$1
-foo=$1
-if [ "x${arg}x" = "xx" ]; then
-	arg="."
-	foo="all"
+if [ "x${lang}x" = "xx" ]; then
+	echo "Usage: `basename ${0}` XX"
+	echo "       with XX as a languagecode or \"all\" for all languagecodes."
+	exit 1
+else
+	case "${lang}" in
+	"all")
+		clear
+		printf "\ni18n Statistics for ALL languagecode\n"
+		lang="."
+		;;
+	"unmaintained"|"xx"|"en")
+		echo "Specified languagecode not allowed."
+		exit 1
+		;;
+	*)
+		if [ ! -d "${lang}" ]; then
+			echo "Specified languagecode not avaiable."
+			exit 1
+		fi
+		clear
+		printf "\ni18n statistics for languagecode \"${lang}\"\n\n"
+		echo " .--------- Total strings"
+		echo " |   .----- Unfinished strings"
+		echo " |   |   .- Obsolete strings"
+		echo " |   |   |  File Name"
+		echo "--- --- --- -------------------------------------"
+		for file in `ls -1 ${1}/*.ts`; do
+			strs=`grep -c 'translation' ${file}`
+			unfi=`grep -c 'type=\"unfinished\"' ${file}`
+			obso=`grep -c 'type=\"obsolete\"' ${file}`
+			printf "%3s %3s %3s %s\n" "${strs}" "${unfi}" "${obso}" "${file}"
+		done
+		;;
+	esac
+	strs=`find ${lang} -path './unmaintained' -prune -o -path './en' -prune -o -path './xx' -prune -o -name "*.ts" -exec grep 'translation' {} \; | wc -l`
+	unfi=`find ${lang} -path './unmaintained' -prune -o -path './en' -prune -o -path './xx' -prune -o -name "*.ts" -exec grep 'type=\"unfinished\"' {} \; | wc -l`
+	obso=`find ${lang} -path './unmaintained' -prune -o -path './en' -prune -o -path './xx' -prune -o -name "*.ts" -exec grep 'type=\"obsolete\"' {} \; | wc -l`
+	printf "\n%12s %5s\n" "Total:" ${strs}
+	printf "%12s %5s %s\n" "Unfinished:" ${unfi} "[`expr \( ${strs} - ${unfi} \) \* 100 / ${strs}`% done]"
+	printf "%12s %5s %s\n\n" "Obsolete:" ${obso} "[`expr ${obso} \* 100 / ${strs}`%]"
 fi
-
-#
-# General figures
-#
-echo -e "Status of ${foo}:\n"
-
-echo -n "Number of strings: "
-strs=`find ${arg} -name "*.ts" -exec grep translation {} \; | wc -l`
-echo ${strs}
-
-echo -n "Unfinished: "
-unfi=`find ${arg} -name "*.ts" -exec grep translation {} \; | grep type=\"unfinished\" | wc -l`
-echo ${unfi}", that means `expr \( ${strs} - ${unfi} \) \* 100 / ${strs}`% are done."
-
-echo -n "Obsolete: "
-obso=`find ${arg} -name "*.ts" -exec grep translation {} \; | grep type=\"obsolete\" | wc -l`
-echo ${obso}" (`expr ${obso} \* 100 / ${strs}`%)"
-
-#
-# from here on we will only look at the core-parts. All numbers have to be 0% if
-# the specific language will be in the official release.
-#
-echo -e "\nCore:\n"
-
-showStringStats "Addressbook" "${arg}/addressbook.ts"
-showStringStats "Datebook" "${arg}/datebook.ts"
-showStringStats "libopie" "${arg}/libopie.ts"
-showStringStats "Today" "${arg}/today.ts"
-showStringStats "Todo" "${arg}/todolist.ts"
