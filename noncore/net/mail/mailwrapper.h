@@ -88,7 +88,9 @@ class IMAPFolder : public Folder
         IMAPFolder(const QString&name, const QString&sep, bool select=true,const QString&prefix="" );
         virtual bool may_select()const{return m_MaySelect;}
     private:
+		static QString decodeFolderName( const QString &name );
         bool m_MaySelect;
+
 };
 
 class MailWrapper : public QObject
