@@ -43,7 +43,7 @@ ConfigDlg::ConfigDlg( QWidget *parent, const char *name):
 
 void ConfigDlg::slotItemUp()
 {
-	owarn << "void ConfigDlg::slotItemUp()" << oendl;
+	odebug << "void ConfigDlg::slotItemUp()" << oendl;
 
 	int i = fieldListBox->currentItem();
 	if ( i > 0 ) {
@@ -57,7 +57,7 @@ void ConfigDlg::slotItemUp()
 
 void ConfigDlg::slotItemDown()
 {
-	owarn << "void ConfigDlg::slotItemDown()" << oendl;
+	odebug << "void ConfigDlg::slotItemDown()" << oendl;
 
 	int i = fieldListBox->currentItem();
 	if ( i < (int)fieldListBox->count() - 1 ) {
@@ -70,19 +70,19 @@ void ConfigDlg::slotItemDown()
 
 void ConfigDlg::slotItemAdd()
 {
-	owarn << "void ConfigDlg::slotItemAdd()" << oendl;
+	odebug << "void ConfigDlg::slotItemAdd()" << oendl;
 
 	int i = allFieldListBox->currentItem();
 	if ( i > 0 ) {
 		QString item = allFieldListBox->currentText();
-		owarn << "Adding " << item << oendl;
+		odebug << "Adding " << item << oendl;
 		fieldListBox->insertItem( item );
 	}
 }
 
 void ConfigDlg::slotItemRemove()
 {
-	owarn << "void ConfigDlg::slotItemRemove()" << oendl;
+	odebug << "void ConfigDlg::slotItemRemove()" << oendl;
 
 	int i = fieldListBox->currentItem();
 	if ( i > 0 ) {

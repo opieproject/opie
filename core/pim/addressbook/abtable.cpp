@@ -121,7 +121,7 @@ AbTable::AbTable( const QValueList<int> order, QWidget *parent, const char *name
 	  columnVisible( true ),
 	  countNested( 0 )
 {
-	//	owarn << "C'tor start" << oendl;
+	//	odebug << "C'tor start" << oendl;
 	setSelectionMode( NoSelection );
 	init();
 	setSorting( TRUE );
@@ -129,7 +129,7 @@ AbTable::AbTable( const QValueList<int> order, QWidget *parent, const char *name
 		 this, SLOT(itemClicked(int,int)) );
 
 	// contactList.clear();
-	//	owarn << "C'tor end" << oendl;
+	//	odebug << "C'tor end" << oendl;
 }
 
 AbTable::~AbTable()
@@ -151,7 +151,7 @@ void AbTable::init()
 
 void AbTable::setContacts( const Opie::OPimContactAccess::List& viewList )
 {
-	owarn << "AbTable::setContacts()" << oendl;
+	odebug << "AbTable::setContacts()" << oendl;
 
 	clear();
 	m_viewList = viewList;
@@ -183,13 +183,13 @@ void AbTable::setOrderedList( const QValueList<int> ordered )
 
 bool AbTable::selectContact( int UID )
 {
-	owarn << "AbTable::selectContact( " << UID << " )" << oendl;
+	odebug << "AbTable::selectContact( " << UID << " )" << oendl;
 	int rows = numRows();
 	Opie::OPimContact* foundContact = 0l;
 	bool found = false;
 
 	setPaintingEnabled( FALSE );
-	owarn << "Search start" << oendl;
+	odebug << "Search start" << oendl;
 	for ( int r = 0; r < rows; ++r ) {
 		if ( m_viewList.uidAt( r ) == UID ){
 			ensureCellVisible( r, 0 );
@@ -198,7 +198,7 @@ bool AbTable::selectContact( int UID )
 			break;
 		}
 	}
-	owarn << "Search end" << oendl;
+	odebug << "Search end" << oendl;
 
 	if ( !found ){
 		ensureCellVisible( 0,0 );
@@ -213,7 +213,7 @@ bool AbTable::selectContact( int UID )
 #if 0
 void AbTable::insertIntoTable( const Opie::OPimContact& cnt, int row )
 {
-	owarn << "void AbTable::insertIntoTable( const Opie::OPimContact& cnt, "
+	odebug << "void AbTable::insertIntoTable( const Opie::OPimContact& cnt, "
 					<< row << " )" << oendl;
 	QString strName;
 	ContactItem contactItem;
@@ -283,7 +283,7 @@ int AbTable::currentEntry_UID()
 
 void AbTable::clear()
 {
-	owarn << "void AbTable::clear()" << oendl;
+	odebug << "void AbTable::clear()" << oendl;
 	// contactList.clear();
 
 	setPaintingEnabled( FALSE );
@@ -334,7 +334,7 @@ void AbTable::keyPressEvent( QKeyEvent *e )
 	if ( key >= 'A' && key <= 'Z' )
 		moveTo( key );
 
-	//		owarn << "Received key .." << oendl;
+	//		odebug << "Received key .." << oendl;
 	switch( e->key() ) {
 	case Qt::Key_Space:
 	case Qt::Key_Return:
@@ -342,11 +342,11 @@ void AbTable::keyPressEvent( QKeyEvent *e )
 		emit signalSwitch();
 		break;
 // 	case Qt::Key_Up:
-// 		owarn << "a" << oendl;
+// 		odebug << "a" << oendl;
 // 		emit signalKeyUp();
 // 		break;
 // 	case Qt::Key_Down:
-// 		owarn << "b" << oendl;
+// 		odebug << "b" << oendl;
 // 		emit signalKeyDown();
 // 		break;
 	default:
@@ -357,7 +357,7 @@ void AbTable::keyPressEvent( QKeyEvent *e )
 
 void AbTable::moveTo( char c )
 {
-	owarn << "void AbTable::moveTo( char c ) NOT IMPLEMENTED !!" << oendl;
+	odebug << "void AbTable::moveTo( char c ) NOT IMPLEMENTED !!" << oendl;
 
 #if 0
 	int rows = numRows();
@@ -423,7 +423,7 @@ void AbTable::resizeRows() {
 
 void AbTable::realignTable()
 {
-	//	owarn << "void AbTable::realignTable()" << oendl;
+	//	odebug << "void AbTable::realignTable()" << oendl;
 
 	setPaintingEnabled( FALSE );
 
@@ -473,7 +473,7 @@ void QTable::paintEmptyArea( QPainter *p, int cx, int cy, int cw, int ch )
 
 void AbTable::fitColumns()
 {
-	owarn << "void AbTable::fitColumns()" << oendl;
+	odebug << "void AbTable::fitColumns()" << oendl;
 	int contentsWidth = visibleWidth() / 2;
 	// Fix to better value
 	// contentsWidth = 130;
@@ -485,7 +485,7 @@ void AbTable::fitColumns()
 		columnVisible = true;
 	}
 
-	//	owarn << "Width: " << contentsWidth << oendl;
+	//	odebug << "Width: " << contentsWidth << oendl;
 
 	setColumnWidth( 0, contentsWidth );
 	adjustColumn(1);
@@ -497,7 +497,7 @@ void AbTable::fitColumns()
 
 void AbTable::show()
 {
-	//	owarn << "void AbTable::show()" << oendl;
+	//	odebug << "void AbTable::show()" << oendl;
 	realignTable();
 	QTable::show();
 }
@@ -521,11 +521,11 @@ void AbTable::setChoiceNames( const QStringList& list)
 
 void AbTable::itemClicked(int,int col)
 {
-	//	owarn << "AbTable::itemClicked(int, col: " << col << ")" << oendl;
+	//	odebug << "AbTable::itemClicked(int, col: " << col << ")" << oendl;
 	if ( col == 2 ) {
 		return;
 	} else {
-		//	owarn << "Emitting signalSwitch()" << oendl;
+		//	odebug << "Emitting signalSwitch()" << oendl;
 		emit signalSwitch();
 	}
 }
@@ -562,7 +562,7 @@ QStringList AbTable::choiceSelection(int /*index*/) const
 
 void AbTable::updateVisible()
 {
-	//	owarn << "void AbTable::updateVisible()" << oendl;
+	//	odebug << "void AbTable::updateVisible()" << oendl;
 
 	int visible,
 		totalRows,
@@ -598,7 +598,7 @@ void AbTable::updateVisible()
 
 void AbTable::setPaintingEnabled( bool e )
 {
-	//	owarn << "IN void AbTable::setPaintingEnabled( " << e << " )->Nested: "
+	//	odebug << "IN void AbTable::setPaintingEnabled( " << e << " )->Nested: "
 	//						<< countNested << oendl;
 
 	if ( e ) {
@@ -615,12 +615,12 @@ void AbTable::setPaintingEnabled( bool e )
 		enablePainting = false;
 		setUpdatesEnabled( false );
 	}
-	//	owarn << "OUT void AbTable::setPaintingEnabled( " << e << " )->Nested: "
+	//	odebug << "OUT void AbTable::setPaintingEnabled( " << e << " )->Nested: "
 	//						<< countNested << oendl;
 }
 
 void AbTable::viewportPaintEvent( QPaintEvent* e ) {
-	//	owarn << "void AbTable::viewportPaintEvent( QPaintEvent* e ) -> "
+	//	odebug << "void AbTable::viewportPaintEvent( QPaintEvent* e ) -> "
 	//						<< enablePainting << oendl;
 	if ( enablePainting )
 		QTable::viewportPaintEvent( e );
@@ -631,7 +631,7 @@ void AbTable::paintCell(QPainter* p,  int row, int col, const QRect& cr, bool ) 
 
     p->save();
 
-	//	owarn << "Paint row: " << row << oendl;
+	//	odebug << "Paint row: " << row << oendl;
 
     Opie::OPimContact act_contact = m_viewList[row];
 

@@ -79,7 +79,7 @@ ContactEditor::~ContactEditor() {
 }
 
 void ContactEditor::init() {
-	owarn << "init() START" << oendl;
+	odebug << "init() START" << oendl;
 
 	uint i = 0;
 
@@ -688,7 +688,7 @@ void ContactEditor::init() {
 
 	setPersonalView ( m_personalView );
 
-	owarn << "init() END" << oendl;
+	odebug << "init() END" << oendl;
 }
 
 void ContactEditor::defaultEmailChanged(int i){
@@ -739,7 +739,7 @@ void ContactEditor::populateDefaultEmailCmb(){
 // be handled by something else..
 bool ContactEditor::cmbChooserChange( int index, QWidgetStack* inputStack, int widgetPos ) {
 	QString type = slChooserNames[index];
-	owarn << "ContactEditor::cmbChooserChange -> Type: " << type
+	odebug << "ContactEditor::cmbChooserChange -> Type: " << type
 						<< ", WidgetPos: " << widgetPos << oendl;
 
 	if ( !initializing )
@@ -747,7 +747,7 @@ bool ContactEditor::cmbChooserChange( int index, QWidgetStack* inputStack, int w
 
 	// Create and connect combobox for selecting the default email
         if ( type == "Default Email"){
-		owarn << "Choosing default-email (defaultEmailChooserPosition= "
+		odebug << "Choosing default-email (defaultEmailChooserPosition= "
 							<< defaultEmailChooserPosition << ") " << oendl;
 
 		// More than one default-email chooser is not allowed !
@@ -781,7 +781,7 @@ bool ContactEditor::cmbChooserChange( int index, QWidgetStack* inputStack, int w
 
 	} else {
 		// Something else was selected: Hide combo..
-		owarn << " Hiding default-email combo" << oendl;
+		odebug << " Hiding default-email combo" << oendl;
 		if ( defaultEmailChooserPosition == widgetPos ){
 			defaultEmailChooserPosition = -1;
 		}
@@ -847,7 +847,7 @@ void ContactEditor::chooserChange( const QString &textChanged, int index,
 						<< " )" << oendl;
 
         if ( type == "Default Email"){
-		owarn << "??? Wozu??: " << textChanged << oendl;
+		odebug << "??? Wozu??: " << textChanged << oendl;
 		defaultEmail = textChanged;
 
 		populateDefaultEmailCmb();
@@ -866,23 +866,23 @@ void ContactEditor::chooserChange( const QString &textChanged, int index,
 }
 
 void ContactEditor::slotChooser1Change( const QString &textChanged ) {
-	owarn << "ContactEditor::slotChooser1Change( " << textChanged << " )" << oendl;
+	odebug << "ContactEditor::slotChooser1Change( " << textChanged << " )" << oendl;
 	chooserChange( textChanged, cmbChooserField1->currentItem(), txtChooserField1, 1);
 }
 
 void ContactEditor::slotChooser2Change( const QString &textChanged ) {
-	owarn << "ContactEditor::slotChooser2Change( " << textChanged << " )" << oendl;
+	odebug << "ContactEditor::slotChooser2Change( " << textChanged << " )" << oendl;
 	chooserChange( textChanged, cmbChooserField2->currentItem(), txtChooserField2, 2);
 
 }
 
 void ContactEditor::slotChooser3Change( const QString &textChanged ) {
-	owarn << "ContactEditor::slotChooser3Change( " << textChanged << " )" << oendl;
+	odebug << "ContactEditor::slotChooser3Change( " << textChanged << " )" << oendl;
 	chooserChange( textChanged, cmbChooserField3->currentItem(), txtChooserField3, 3);
 }
 
 void ContactEditor::slotChooser4Change( const QString &textChanged ) {
-	owarn << "ContactEditor::slotChooser4Change( " << textChanged << " )" << oendl;
+	odebug << "ContactEditor::slotChooser4Change( " << textChanged << " )" << oendl;
 	chooserChange( textChanged, cmbChooserField4->currentItem(), txtChooserField4, 4);
 }
 
@@ -952,7 +952,7 @@ void ContactEditor::slotCountryChange( const QString &textChanged ) {
 
 
 void ContactEditor::slotCmbChooser1Change( int index ) {
-	owarn << "ContactEditor::slotCmbChooser1Change( " << index << " )" << oendl;
+	odebug << "ContactEditor::slotCmbChooser1Change( " << index << " )" << oendl;
 	if ( !cmbChooserChange( cmbChooserField1->currentItem(), m_widgetStack1, 1) ){
 
 		txtChooserField1->setText( slChooserValues[index] );
@@ -963,7 +963,7 @@ void ContactEditor::slotCmbChooser1Change( int index ) {
 }
 
 void ContactEditor::slotCmbChooser2Change( int index ) {
-	owarn << "ContactEditor::slotCmbChooser2Change( " << index << " )" << oendl;
+	odebug << "ContactEditor::slotCmbChooser2Change( " << index << " )" << oendl;
 
 	if ( !cmbChooserChange( cmbChooserField2->currentItem(), m_widgetStack2, 2) ){
 
@@ -974,7 +974,7 @@ void ContactEditor::slotCmbChooser2Change( int index ) {
 }
 
 void ContactEditor::slotCmbChooser3Change( int index ) {
-	owarn << "ContactEditor::slotCmbChooser3Change( " << index << " )" << oendl;
+	odebug << "ContactEditor::slotCmbChooser3Change( " << index << " )" << oendl;
 
 	if ( !cmbChooserChange( cmbChooserField3->currentItem(), m_widgetStack3, 3) ){
 
@@ -985,7 +985,7 @@ void ContactEditor::slotCmbChooser3Change( int index ) {
 }
 
 void ContactEditor::slotCmbChooser4Change( int index ) {
-	owarn << "ContactEditor::slotCmbChooser4Change( " << index << " )" << oendl;
+	odebug << "ContactEditor::slotCmbChooser4Change( " << index << " )" << oendl;
 
 	if ( !cmbChooserChange( cmbChooserField4->currentItem(), m_widgetStack4, 4) ){
 
@@ -1030,7 +1030,7 @@ void ContactEditor::slotAddressTypeChange( int index ) {
 
 void ContactEditor::slotFullNameChange( const QString &textChanged ) {
 
-	owarn << "ContactEditor::slotFullNameChange( " << textChanged << " )" << oendl;
+	odebug << "ContactEditor::slotFullNameChange( " << textChanged << " )" << oendl;
 
 	int index = cmbFileAs->currentItem();
 
@@ -1054,7 +1054,7 @@ void ContactEditor::slotSuffixChange( const QString& ) {
 }
 
 void ContactEditor::slotOrganizationChange( const QString &textChanged ){
-	owarn << "ContactEditor::slotOrganizationChange( " << textChanged << " )" << oendl;
+	odebug << "ContactEditor::slotOrganizationChange( " << textChanged << " )" << oendl;
 	// Special handling for storing Companies:
 	// If no Fullname is given, we store the Company-Name as lastname
 	// to handle it like a person..
@@ -1136,11 +1136,11 @@ QString ContactEditor::parseName( const QString fullName, int type ) {
 	int commapos;
 	bool haveLastName = false;
 
-	owarn << "Fullname: " << simplifiedName << oendl;
+	odebug << "Fullname: " << simplifiedName << oendl;
 
 	commapos = simplifiedName.find( ',', 0, TRUE);
 	if ( commapos >= 0 ) {
-		owarn << " Commapos: " << commapos << oendl;
+		odebug << " Commapos: " << commapos << oendl;
 
 		// A comma (",") separates the lastname from one or
 		// many first names. Thus, remove the lastname from the
@@ -1149,7 +1149,7 @@ QString ContactEditor::parseName( const QString fullName, int type ) {
 		strLastName = simplifiedName.left( commapos );
 		simplifiedName= simplifiedName.mid( commapos + 1 );
 		haveLastName = true;
-		owarn << "Fullname without ',': " << simplifiedName << oendl;
+		odebug << "Fullname without ',': " << simplifiedName << oendl;
 
 		// If we have any lastname, we should now split all first names.
 		// The first one will be the used as first, the rest as "middle names"
@@ -1183,10 +1183,10 @@ QString ContactEditor::parseName( const QString fullName, int type ) {
 	if ( strFirstName == strLastName )
 		strFirstName = "";
 
-	owarn << "strFirstName: " << strFirstName << oendl;
-	owarn << "strMiddletName: " << strMiddleName << oendl;
-	owarn << "strLastName: " << strLastName << oendl;
-	owarn << "strTitle: " << strTitle << oendl;
+	odebug << "strFirstName: " << strFirstName << oendl;
+	odebug << "strMiddletName: " << strMiddleName << oendl;
+	odebug << "strLastName: " << strLastName << oendl;
+	odebug << "strTitle: " << strTitle << oendl;
 
 	switch (type) {
 	case NAME_FL:
@@ -1329,7 +1329,7 @@ void ContactEditor::setEntry( const Opie::OPimContact &entry ) {
 	QListIterator<QLineEdit> itLE( listValue );
 	for ( it = slDynamicEntries.begin(); itLE.current()/* != slDynamicEntries.end()*/; ++it, ++itLE) {
 
-		owarn << " Filling dynamic Field: " << (*it) << oendl;
+		odebug << " Filling dynamic Field: " << (*it) << oendl;
 
 		if ( *it ==  "Department"  )
 			(*itLE)->setText( ent.department() );
@@ -1353,7 +1353,7 @@ void ContactEditor::setEntry( const Opie::OPimContact &entry ) {
 			(*itLE)->setText( ent.spouse() );
 
 		if ( *it == "Nickname" ){
-			owarn << "**** Nichname: " << ent.nickname() << oendl;
+			odebug << "**** Nichname: " << ent.nickname() << oendl;
 			(*itLE)->setText( ent.nickname() );
 		}
 
@@ -1586,8 +1586,8 @@ void ContactEditor::saveEntry() {
  			QString defaultmail;
 			parseEmailFrom( emails.join(","), defaultmail, allemail );
 			if ( defaultEmail.isEmpty() ){
-				owarn << "Default email was not set by user!" << oendl;
-				owarn << "Using first email in list: " << defaultmail << oendl;
+				odebug << "Default email was not set by user!" << oendl;
+				odebug << "Using first email in list: " << defaultmail << oendl;
 				ent.setDefaultEmail( defaultmail );
 			}
  			ent.setEmails( allemail );
@@ -1739,14 +1739,14 @@ void ContactEditor::slotBirthdayDateChanged( int year, int month, int day)
 
 void ContactEditor::slotRemoveBirthday()
 {
-	owarn << "void ContactEditor::slotRemoveBirthday()" << oendl;
+	odebug << "void ContactEditor::slotRemoveBirthday()" << oendl;
 	ent.setBirthday( QDate() );
 	updateDatePicker();
 }
 
 void ContactEditor::slotRemoveAnniversary()
 {
-	owarn << "void ContactEditor::slotRemoveAnniversary()" << oendl;
+	odebug << "void ContactEditor::slotRemoveAnniversary()" << oendl;
 	ent.setAnniversary( QDate() );
 	updateDatePicker();
 }

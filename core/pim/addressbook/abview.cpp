@@ -52,7 +52,7 @@ AbView::AbView ( QWidget* parent, const QValueList<int>& ordered ):
 	m_abTable( 0l ),
 	m_orderedFields( ordered )
 {
-	owarn << "AbView::c'tor" << oendl;
+	odebug << "AbView::c'tor" << oendl;
 	// Load default database and handle syncing myself.. !
 	m_contactdb = new Opie::OPimContactAccess ( "addressbook", 0l, 0l, false );
 	m_contactdb -> setReadAhead( 16 ); // Use ReadAhead-Cache if available
@@ -100,28 +100,28 @@ AbView::~AbView()
 
 void AbView::setView( Views view )
 {
-	owarn << "AbView::setView( Views view )" << oendl;
+	odebug << "AbView::setView( Views view )" << oendl;
  	m_curr_View = view;
  	load();
 }
 
 void AbView::addEntry( const Opie::OPimContact &newContact )
 {
-	owarn << "AbView::AddContact" << oendl;
+	odebug << "AbView::AddContact" << oendl;
 	m_contactdb->add ( newContact );
 	load();
 
 }
 void AbView::removeEntry( const int UID )
 {
-	owarn << "AbView;:RemoveContact" << oendl;
+	odebug << "AbView;:RemoveContact" << oendl;
 	m_contactdb->remove( UID );
 	load();
 }
 
 void AbView::replaceEntry( const Opie::OPimContact &contact )
 {
-	owarn << "AbView::ReplaceContact" << oendl;
+	odebug << "AbView::ReplaceContact" << oendl;
 	m_contactdb->replace( contact );
 	load();
 
@@ -145,14 +145,14 @@ Opie::OPimContact AbView::currentEntry()
 
 bool AbView::save()
 {
-	//	owarn << "AbView::Save data" << oendl;
+	//	odebug << "AbView::Save data" << oendl;
 
 	return m_contactdb->save();
 }
 
 void AbView::load()
 {
-	owarn << "AbView::Load data" << oendl;
+	odebug << "AbView::Load data" << oendl;
 
 	// Letter Search is stopped at this place
 	emit signalClearLetterPicker();
@@ -166,7 +166,7 @@ void AbView::load()
 			clearForCategory();
 	}
 
-	owarn << "Number of contacts: " << m_list.count() << oendl;
+	odebug << "Number of contacts: " << m_list.count() << oendl;
 
 	updateView( true );
 
@@ -174,7 +174,7 @@ void AbView::load()
 
 void AbView::reload()
 {
-	owarn << "AbView::::reload()" << oendl;
+	odebug << "AbView::::reload()" << oendl;
 
 	m_contactdb->reload();
 	load();
@@ -187,7 +187,7 @@ void AbView::clear()
 
 void AbView::setShowByCategory( const QString& cat )
 {
-	owarn << "AbView::setShowCategory( const QString& cat )" << oendl;
+	odebug << "AbView::setShowCategory( const QString& cat )" << oendl;
 
 	int intCat = 0;
 
@@ -199,7 +199,7 @@ void AbView::setShowByCategory( const QString& cat )
 
 	// Just do anything if we really change the category
 	if ( intCat != m_curr_category ){
-		//		owarn << "Categories: Selected " << cat << ".. Number: "
+		//		odebug << "Categories: Selected " << cat << ".. Number: "
 		//						<< m_curr_category << oendl;
 
 		m_curr_category = intCat;
@@ -212,10 +212,10 @@ void AbView::setShowByCategory( const QString& cat )
 
 void AbView::setShowToView( Views view )
 {
-	owarn << "void AbView::setShowToView( View " << view << " )" << oendl;
+	odebug << "void AbView::setShowToView( View " << view << " )" << oendl;
 
 	if ( m_curr_View != view ){
-		owarn << "Change the View (Category is: " << m_curr_category << ")" << oendl;
+		odebug << "Change the View (Category is: " << m_curr_category << ")" << oendl;
 		m_prev_View = m_curr_View;
 		m_curr_View = view;
 
@@ -226,7 +226,7 @@ void AbView::setShowToView( Views view )
 
 void AbView::setShowByLetter( char c, AbConfig::LPSearchMode mode )
 {
-	owarn << "void AbView::setShowByLetter( " << c << ", " << mode << " )" << oendl;
+	odebug << "void AbView::setShowByLetter( " << c << ", " << mode << " )" << oendl;
 
 	assert( mode < AbConfig::LASTELEMENT );
 
@@ -279,7 +279,7 @@ QString AbView::showCategory() const
 
 void AbView::showPersonal( bool personal )
 {
-	owarn << "void AbView::showPersonal( " << personal << " )" << oendl;
+	odebug << "void AbView::showPersonal( " << personal << " )" << oendl;
 
 	if ( personal ){
 
@@ -349,7 +349,7 @@ void AbView::slotDoFind( const QString &str, bool caseSensitive, bool useRegExp,
 		category = mCat.id("Contacts", cat );
 	}
 
-	//	owarn << "Find in Category " << category << oendl;
+	//	odebug << "Find in Category " << category << oendl;
 
 	QRegExp r( str );
 	r.setCaseSensitive( caseSensitive );
@@ -358,7 +358,7 @@ void AbView::slotDoFind( const QString &str, bool caseSensitive, bool useRegExp,
 	// Get all matching entries out of the database
 	m_list = m_contactdb->matchRegexp( r );
 
-	//	owarn << "Found: " << m_list.count() << oendl;
+	//	odebug << "Found: " << m_list.count() << oendl;
 	if ( m_list.count() == 0 ){
 		emit signalNotFound();
 		return;
@@ -382,16 +382,16 @@ void AbView::offSearch()
 }
 
 void AbView::slotSwitch(){
-	//	owarn << "AbView::slotSwitch()" << oendl;
+	//	odebug << "AbView::slotSwitch()" << oendl;
 
 	m_prev_View = m_curr_View;
 	switch ( (int) m_curr_View ){
 	case TableView:
-		owarn << "Switching to CardView" << oendl;
+		odebug << "Switching to CardView" << oendl;
 		m_curr_View = CardView;
 		break;
 	case CardView:
-		owarn << "Switching to TableView" << oendl;
+		odebug << "Switching to TableView" << oendl;
 		m_curr_View = TableView;
 		break;
 	}
@@ -410,7 +410,7 @@ void AbView::clearForCategory()
 	if ( m_curr_category != -1 ){
 		for ( it = allList.begin(); it != allList.end(); ++it ){
 			if ( !contactCompare( *it, m_curr_category ) ){
-				//owarn << "Removing " << (*it).uid() << oendl;
+				//odebug << "Removing " << (*it).uid() << oendl;
 				m_list.remove( (*it).uid() );
 			}
 		}
@@ -420,14 +420,14 @@ void AbView::clearForCategory()
 
 bool AbView::contactCompare( const Opie::OPimContact &cnt, int category )
 {
-	//	owarn << "bool AbView::contactCompare( const Opie::OPimContact &cnt, "
+	//	odebug << "bool AbView::contactCompare( const Opie::OPimContact &cnt, "
 	//					<< category << " )" << oendl;
 
 	bool returnMe;
 	QArray<int> cats;
 	cats = cnt.categories();
 
-	//	owarn << "Number of categories: " << cats.count() << oendl;
+	//	odebug << "Number of categories: " << cats.count() << oendl;
 
 	returnMe = false;
 	if ( cats.count() == 0 && category == 0 )
@@ -436,14 +436,14 @@ bool AbView::contactCompare( const Opie::OPimContact &cnt, int category )
 	else {
 		int i;
 		for ( i = 0; i < int(cats.count()); i++ ) {
-			//owarn << "Comparing " << cats[i] << " with " << category << oendl;
+			//odebug << "Comparing " << cats[i] << " with " << category << oendl;
 			if ( cats[i] == category ) {
 				returnMe = true;
 				break;
 			}
 		}
 	}
-	//	owarn << "Return: " << returnMe << oendl;
+	//	odebug << "Return: " << returnMe << oendl;
 	return returnMe;
 }
 
@@ -456,7 +456,7 @@ void AbView::updateListinViews()
 
 void  AbView::updateView( bool newdata )
 {
-	//	owarn << "AbView::updateView()" << oendl;
+	//	odebug << "AbView::updateView()" << oendl;
 
 	if ( m_viewStack -> visibleWidget() ){
 		m_viewStack -> visibleWidget() -> clearFocus();

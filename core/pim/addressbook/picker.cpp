@@ -239,7 +239,7 @@ void LetterPicker::clear()
 
 void LetterPicker::newLetter( char letter )
 {
-	owarn << "LetterClicked" << oendl;
+	odebug << "LetterClicked" << oendl;
 	emit letterClicked( letter );
 
 }

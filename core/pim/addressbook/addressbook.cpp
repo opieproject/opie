@@ -267,10 +267,10 @@ void AddressbookWindow::slotConfig()
 	ConfigDlg* dlg = new ConfigDlg( this, "Config" );
 	dlg -> setConfig( m_config );
 	if ( QPEApplication::execDialog( dlg ) ) {
-		owarn << "Config Dialog accepted!" << oendl;
+		odebug << "Config Dialog accepted!" << oendl;
 		m_config = dlg -> getConfig();
 		if ( m_curFontSize != m_config.fontSize() ){
-			owarn << "Font was changed!" << oendl;
+			odebug << "Font was changed!" << oendl;
 			m_curFontSize = m_config.fontSize();
 			emit slotSetFont( m_curFontSize );
 		}
@@ -283,7 +283,7 @@ void AddressbookWindow::slotConfig()
 
 void AddressbookWindow::slotSetFont( int size )
 {
-	owarn << "void AddressbookWindow::slotSetFont( " << size << " )" << oendl;
+	odebug << "void AddressbookWindow::slotSetFont( " << size << " )" << oendl;
 
 	if (size > 2 || size < 0)
 		size = 1;
@@ -325,10 +325,10 @@ void AddressbookWindow::importvCard() {
 }
 void AddressbookWindow::exportvCard()
 {
-	owarn << "void AddressbookWindow::exportvCard()" << oendl;
+	odebug << "void AddressbookWindow::exportvCard()" << oendl;
         QString filename = Opie::Ui::OFileDialog::getSaveFileName( 1,"/home/"); //,"", "*", this );
         if( !filename.isEmpty() &&  ( filename[filename.length()-1] != '/' ) ){
-		owarn << " Save to file " << filename << ", (" << filename.length()-1 << ")" << oendl;
+		odebug << " Save to file " << filename << ", (" << filename.length()-1 << ")" << oendl;
 		Opie::OPimContact curCont = m_abView->currentEntry();
 		if ( !curCont.isEmpty() ){
 			Opie::OPimContactAccessBackend* vcard_backend = new Opie::OPimContactAccessBackend_VCard( QString::null,
@@ -350,7 +350,7 @@ void AddressbookWindow::exportvCard()
 
 void AddressbookWindow::setDocument( const QString &filename )
 {
-	owarn << "void AddressbookWindow::setDocument( " << filename << " )" << oendl;
+	odebug << "void AddressbookWindow::setDocument( " << filename << " )" << oendl;
 
 	if ( filename.find(".vcf") != int(filename.length()) - 4 ){
 
@@ -362,10 +362,10 @@ void AddressbookWindow::setDocument( const QString &filename )
 						  0,      // Enter == button 0
 						  2 ) ) { // Escape == button 2
 		case 0:
-			owarn << "YES clicked" << oendl;
+			odebug << "YES clicked" << oendl;
 			break;
 		case 1:
-			owarn << "NO clicked" << oendl;
+			odebug << "NO clicked" << oendl;
 			return;
 			break;
 		}
@@ -375,7 +375,7 @@ void AddressbookWindow::setDocument( const QString &filename )
 									 filename );
 	Opie::OPimContactAccess* access = new Opie::OPimContactAccess ( "addressbook", QString::null , vcard_backend, true );
 	Opie::OPimContactAccess::List allList = access->allRecords();
-	owarn << "Found number of contacts in File: " << allList.count() << oendl;
+	odebug << "Found number of contacts in File: " << allList.count() << oendl;
 
 	if ( !allList.count() ) {
 		QMessageBox::information( this, "Import VCard",
@@ -386,7 +386,7 @@ void AddressbookWindow::setDocument( const QString &filename )
 	bool doAsk = true;
 	Opie::OPimContactAccess::List::Iterator it;
 	for ( it = allList.begin(); it != allList.end(); ++it ){
-		owarn << "Adding Contact from: " << (*it).fullName() << oendl;
+		odebug << "Adding Contact from: " << (*it).fullName() << oendl;
 		if ( doAsk ){
 			switch( QMessageBox::information( this, tr ( "Add Contact?" ),
 							  tr( "Do you really want add contact for \n%1?" )
@@ -395,14 +395,14 @@ void AddressbookWindow::setDocument( const QString &filename )
 							  0,      // Enter == button 0
 							  2 ) ) { // Escape == button 2
 			case 0:
-				owarn << "YES clicked" << oendl;
+				odebug << "YES clicked" << oendl;
 				m_abView->addEntry( *it );
 				break;
 			case 1:
-				owarn << "NO clicked" << oendl;
+				odebug << "NO clicked" << oendl;
 				break;
 			case 2:
-				owarn << "YesAll clicked" << oendl;
+				odebug << "YesAll clicked" << oendl;
 				doAsk = false;
 				break;
 			}
@@ -538,9 +538,9 @@ void AddressbookWindow::writeMail()
 	// Try to access the preferred. If not possible, try to
 	// switch to the other one..
 	if ( m_config.useQtMail() ){
-		owarn << "Accessing: " << (basepath + "/bin/qtmail") << oendl;
+		odebug << "Accessing: " << (basepath + "/bin/qtmail") << oendl;
 		if ( QFile::exists( basepath + "/bin/qtmail" ) ){
-			owarn << "QCop" << oendl;
+			odebug << "QCop" << oendl;
 			QCopEnvelope e("QPE/Application/qtmail", "writeMail(QString,QString)");
 			e << name << email;
 			return;
@@ -548,9 +548,9 @@ void AddressbookWindow::writeMail()
 			m_config.setUseOpieMail( true );
 	}
 	if ( m_config.useOpieMail() ){
-		owarn << "Accessing: " << (basepath + "/bin/opiemail") << oendl;
+		odebug << "Accessing: " << (basepath + "/bin/opiemail") << oendl;
 		if ( QFile::exists( basepath + "/bin/opiemail" ) ){
-			owarn << "QCop" << oendl;
+			odebug << "QCop" << oendl;
 			QCopEnvelope e("QPE/Application/opiemail", "writeMail(QString,QString)");
 			e << name << email;
 			return;
@@ -592,7 +592,7 @@ void AddressbookWindow::slotBeam()
 		beamFilename = beamfile;
 	}
 
-	owarn << "Beaming: " << beamFilename << oendl;
+	odebug << "Beaming: " << beamFilename << oendl;
 
 	Ir *ir = new Ir( this );
 	connect( ir, SIGNAL( done(Ir*) ), this, SLOT( beamDone(Ir*) ) );
@@ -639,7 +639,7 @@ static void parseName( const QString& name, QString *first, QString *middle,
 void AddressbookWindow::appMessage(const QCString &msg, const QByteArray &data)
 {
         bool needShow = FALSE;
-		owarn << "Receiving QCop-Call with message " << msg << oendl;
+		odebug << "Receiving QCop-Call with message " << msg << oendl;
 
 
 	if (msg == "editPersonal()") {
@@ -682,7 +682,7 @@ void AddressbookWindow::appMessage(const QCString &msg, const QByteArray &data)
 		int uid;
 		stream >> uid;
 
-		owarn << "Showing uid: " << uid << oendl;
+		odebug << "Showing uid: " << uid << oendl;
 
 		// Deactivate Personal View..
 		if ( actionPersonal->isOn() ){
@@ -762,7 +762,7 @@ void AddressbookWindow::editPersonal()
 	// Switch to personal view if not selected
 	// but take care of the menu, too
 	if ( ! actionPersonal->isOn() ){
-		owarn << "*** ++++" << oendl;
+		odebug << "*** ++++" << oendl;
 		actionPersonal->setOn( true );
 		slotPersonalView();
 	}
@@ -781,10 +781,10 @@ void AddressbookWindow::editPersonal()
 
 void AddressbookWindow::slotPersonalView()
 {
-	owarn << "slotPersonalView()" << oendl;
+	odebug << "slotPersonalView()" << oendl;
 	if (!actionPersonal->isOn()) {
 		// we just turned it off
-		owarn << "slotPersonalView()-> OFF" << oendl;
+		odebug << "slotPersonalView()-> OFF" << oendl;
 		setCaption( tr("Contacts") );
 		actionNew->setEnabled(TRUE);
 		actionTrash->setEnabled(TRUE);
@@ -797,7 +797,7 @@ void AddressbookWindow::slotPersonalView()
 		return;
 	}
 
-	owarn << "slotPersonalView()-> ON" << oendl;
+	odebug << "slotPersonalView()-> ON" << oendl;
 	// XXX need to disable some QActions.
 	actionNew->setEnabled(FALSE);
 	actionTrash->setEnabled(FALSE);
@@ -887,7 +887,7 @@ void AddressbookWindow::slotSave()
 
 void AddressbookWindow::slotNotFound()
 {
-	owarn << "Got not found signal!" << oendl;
+	odebug << "Got not found signal!" << oendl;
 	QMessageBox::information( this, tr( "Not Found" ),
 				 "<qt>" + tr( "Unable to find a contact for this search pattern!" ) + "</qt>" );
 
@@ -895,7 +895,7 @@ void AddressbookWindow::slotNotFound()
 }
 void AddressbookWindow::slotWrapAround()
 {
-	owarn << "Got wrap signal!" << oendl;
+	odebug << "Got wrap signal!" << oendl;
 // 	if ( doNotifyWrapAround )
 // 		QMessageBox::information( this, tr( "End of list" ),
 // 					  tr( "End of list. Wrap around now...!" ) + "\n" );
@@ -904,7 +904,7 @@ void AddressbookWindow::slotWrapAround()
 
 void AddressbookWindow::slotSetCategory( int c )
 {
-	owarn << "void AddressbookWindow::slotSetCategory( " << c << " ) from "
+	odebug << "void AddressbookWindow::slotSetCategory( " << c << " ) from "
 					<< catMenu->count() << oendl;
 
 	QString cat, book;
@@ -940,7 +940,7 @@ void AddressbookWindow::slotSetCategory( int c )
 				cat = QString::null;
 			}else if ( i == (unsigned int)catMenu->count() - 1 ){ // last menu option (seperator is counted, too) will be Unfiled
 				cat = "Unfiled";
-				owarn << "Unfiled selected!" << oendl;
+				odebug << "Unfiled selected!" << oendl;
 			}else{
 				cat = m_abView->categories()[i - 4];
 			}
@@ -963,7 +963,7 @@ void AddressbookWindow::slotSetCategory( int c )
 
 void AddressbookWindow::slotViewSwitched( int view )
 {
-	owarn << "void AddressbookWindow::slotViewSwitched( " << view << " )" << oendl;
+	odebug << "void AddressbookWindow::slotViewSwitched( " << view << " )" << oendl;
 	int menu = 0;
 
 	// Switch to selected view
