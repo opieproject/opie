@@ -82,7 +82,6 @@ OSplitter::OSplitter( Orientation orient, QWidget* parent, const char* name, WFl
  */
 OSplitter::~OSplitter()
 {
-    owarn << "Deleted Splitter" << oendl;
     m_splitter.setAutoDelete( true );
     m_splitter.clear();
 
@@ -210,10 +209,7 @@ void OSplitter::addWidget( QWidget* wid, const QString& icon, const QString& lab
 {
 #ifdef DEBUG
     if (!wid )
-    {
-        owarn << "Widget is not valid!" << oendl;
         return;
-    }
 #endif
     OSplitterContainer cont;
     cont.widget = wid;
@@ -367,9 +363,7 @@ void OSplitter::resizeEvent( QResizeEvent* res )
     /*
      *
      */
-    //    owarn << "Old size was width = " << res->oldSize().width() << " height = " << res->oldSize().height() << "" << oendl;
     bool mode = true;
-    owarn << "New size is  width = " << res->size().width() << " height = " << res->size().height() << "  " << name() << "" << oendl;
     if ( res->size().width() > m_size_policy &&
             m_orient == Horizontal )
     {
@@ -386,7 +380,6 @@ void OSplitter::resizeEvent( QResizeEvent* res )
     else if ( res->size().height() > m_size_policy &&
               m_orient == Vertical )
     {
-        owarn << "Changng to vbox " << name() << "" << oendl;
         changeVBox();
         mode = false;
     }
@@ -445,7 +438,6 @@ void OSplitter::changeTab()
         return;
     }
 
-    owarn << " New Tab Widget " << name() << "" << oendl;
     /*
      * and add all widgets this will reparent them
      * delete m_hbox set it to 0
@@ -472,7 +464,6 @@ void OSplitter::changeTab()
 
     for ( ContainerList::Iterator it = m_container.begin(); it != m_container.end(); ++it )
     {
-        owarn << "Widget is " << (*it).name << "" << oendl;
         addToTab( (*it) );
     }
 
@@ -505,7 +496,6 @@ void OSplitter::changeHBox()
         return;
     }
 
-    owarn << "new HBox " << name() << "" << oendl;
     m_hbox = new QHBox( this );
     commonChangeBox();
 }
@@ -518,7 +508,6 @@ void OSplitter::changeVBox()
         return;
     }
 
-    owarn << "New VBOX " << name() << "" << oendl;
     m_hbox = new QVBox( this );
 
     commonChangeBox();
@@ -533,14 +522,11 @@ void OSplitter::changeVBox()
  */
 void OSplitter::commonChangeBox()
 {
-    owarn << " Name of Splitters is " << name() << "" << oendl;
-
     for (ContainerList::Iterator it = m_container.begin(); it != m_container.end(); ++it )
     {
         /* only if parent tab.. m_tabWidgets gets deleted and would do that as well */
         if (m_parentTab )
             removeFromTab( (*it).widget );
-        owarn << "Adding to box " << (*it).name << "" << oendl;
         addToBox( (*it) );
     }
     for ( OSplitter* split = m_splitter.first(); split; split = m_splitter.next() )
@@ -560,7 +546,6 @@ void OSplitter::commonChangeBox()
         m_parentTab->addTab(m_hbox, iconName(), label() );
     else
     {
-        owarn << " setting Box geometry for " << name() << "" << oendl;
         m_hbox->setGeometry( frameRect() );
         m_hbox->show();
         delete m_tabWidget;

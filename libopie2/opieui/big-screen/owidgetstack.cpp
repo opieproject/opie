@@ -310,7 +310,6 @@ void OWidgetStack::hideWidget( QWidget* wid) {
 
 
 bool OWidgetStack::eventFilter( QObject* obj, QEvent* e) {
-    owarn << " " << obj->name() << " " << obj->className() << "" << oendl;
     if ( e->type() == QEvent::Resize ) {
         QResizeEvent *res = static_cast<QResizeEvent*>( e );
         QSize size = res->size();
