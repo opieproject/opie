@@ -2,6 +2,7 @@
 
 /* OPIE */
 #include <opie2/odebug.h>
+#include <opie2/okeyfilter.h>
 
 #include <stdio.h>
 
@@ -246,6 +247,8 @@ Keymap::Keymap():enabled(true), currentState(0), autoRepeatAction(0), repeater(t
 }
 
 Keymap::~Keymap() {
+    odebug << "removing keyboard filter for zkb"<<oendl;
+    Opie::Core::OKeyFilter::inst()->remHandler(this);
     QMap<QString, State*>::Iterator it;
     for(it = states.begin(); it != states.end(); ++it) {
         delete it.data();

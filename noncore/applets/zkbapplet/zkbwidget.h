@@ -13,27 +13,27 @@ class ZkbWidget : public QLabel {
 Q_OBJECT
 
 public:
-	ZkbWidget(QWidget* parent);
-	~ZkbWidget();
-	static int position();
+    ZkbWidget(QWidget* parent);
+    ~ZkbWidget();
+    static int position();
 
-	QSize sizeHint() const;
+    QSize sizeHint() const;
 
 protected:
-	QLabel* label;
-	Keymap* keymap;
-	QPopupMenu* labels;
-	QCopChannel* channel;
-	int w, h;
-	QPixmap disabled;
+    QLabel* label;
+    Keymap* keymap;
+    QPopupMenu* labels;
+    QCopChannel* channel;
+    int w, h;
+    QPixmap disabled;
 
-	bool loadKeymap();
-	void mouseReleaseEvent(QMouseEvent*);
+    bool loadKeymap();
+    void mouseReleaseEvent(QMouseEvent*);
 
 protected slots:
-	void stateChanged(const QString&);
-	void labelChanged(int id);
-	void signalReceived(const QCString& msg, const QByteArray& data);
-	void reload();
+    void stateChanged(const QString&);
+    void labelChanged(int id);
+    void signalReceived(const QCString& msg, const QByteArray& data);
+    void reload();
 };
 #endif
