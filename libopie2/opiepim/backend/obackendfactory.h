@@ -83,7 +83,7 @@ class OBackendFactory
 	 * @param database the type of the used database
          * @param appName The name of your application. It will be passed on to the backend.
          */
-	static T* create( OPimGlobal::PimType type, OPimGlobal::DatabaseStyle database, 
+	static T* create( OPimGlobal::PimType type, OPimGlobal::DatabaseStyle database,
 			  const QString& appName ){
 		qWarning("Selected backend for %d is: %d", type, database );
 		// If we should use the dafult database style, we have to request it
@@ -91,7 +91,7 @@ class OBackendFactory
 		if ( database == OPimGlobal::DEFAULT ){
 			used_database = defaultDB( type );
 		}
- 
+
 
 		switch ( type ){
 		case OPimGlobal::TODOLIST:
@@ -154,8 +154,8 @@ class OBackendFactory
 
 		Config config( "pimaccess" );
 		config.setGroup ( group_name );
-		QString db_String = config.readEntry( "usebackend" );
-		
+		QString db_String = config.readEntry( "usebackend", "xml" );
+
 		QAsciiDict<int> dictDbTypes( OPimGlobal::_END_DatabaseStyle );
 		dictDbTypes.setAutoDelete( TRUE );
 
@@ -192,15 +192,15 @@ class OBackendFactory
 
 		OPimGlobal::DatabaseStyle style = defaultDB( static_cast<OPimGlobal::PimType>( *backend_find ) );
 
-		qDebug( "OBackendFactory::Default -> Backend is %s, Database is %d", backendName.latin1(), 
+		qDebug( "OBackendFactory::Default -> Backend is %s, Database is %d", backendName.latin1(),
 			style );
-		
+
 		return create( (OPimGlobal::PimType) *backend_find, style, appName );
 
 	}
     private:
 	OBackendPrivate* d;
-	
+
 };
 
 }
