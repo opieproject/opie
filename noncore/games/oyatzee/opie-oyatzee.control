@@ -1,0 +1,11 @@
+Package: opie-oyatzee
+Files: bin/oyatzee apps/Games/oyatzee.desktop pics/oyatzee
+Priority: optional
+Section: opie/games
+Maintainer: Carsten Niehaus <cniehaus@handhelds.org>
+Architecture: arm
+Depends: task-opie-minimal
+Description: Yatzee-like game
+ A Yatzee game for the Opie environment.
+ Play against the computer or human opponents.
+Version: $QPE_VERSION$EXTRAVERSION
