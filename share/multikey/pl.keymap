@@ -9,6 +9,7 @@
 # v1.0 - national chars added and &sup2; &sup3;
 
 title = Polski programisty
+sw = PL
 
 1 0x1000    0       2 # and you can write whatever you want after the last element
 
