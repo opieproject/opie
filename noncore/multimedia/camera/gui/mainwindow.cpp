@@ -42,6 +42,8 @@
 #include <opie/ofiledialog.h>
 #include <opie/odevice.h>
 using namespace Opie;
+#include <opie2/oapplication.h>
+#include <opie2/oconfig.h>
 #include <opie2/odebug.h>
 
 #include <assert.h>
@@ -106,71 +108,102 @@ CameraMainWindow::CameraMainWindow( QWidget * parent, const char * name, WFlags 
 
 CameraMainWindow::~CameraMainWindow()
 {
+    // write back configuration
+    OConfigGroupSaver cgs( oApp->config(), "General" );
+    cgs.config()->writeEntry( "flip", flip );
+    cgs.config()->writeEntry( "quality", quality );
+    cgs.config()->writeEntry( "zoom", zoom );
+    cgs.config()->writeEntry( "captureX", captureX );
+    cgs.config()->writeEntry( "captureY", captureY );
+    cgs.config()->writeEntry( "captureFormat", captureFormat );
+    cgs.config()->writeEntry( "outputTo", outputTo );
+    cgs.config()->writeEntry( "prefix", prefix );
+    cgs.config()->writeEntry( "appendSettings", appendSettings );
 }
 
 
 void CameraMainWindow::init()
 {
-    // TODO: Save this stuff in config
-    flip = 'A'; // auto
-    quality = 50;
-    zoom = 1;
-    captureX = 480;
-    captureY = 640;
-    captureFormat = "JPEG";
-    outputTo = "Documents Folder";
-    prefix = "Untitled";
-    appendSettings = true;
+    // get values from configuration
+    OConfigGroupSaver cgs( oApp->config(), "General" );
+    flip = cgs.config()->readEntry( "flip", "A" );
+    quality = cgs.config()->readNumEntry( "quality", 50 );
+    zoom = cgs.config()->readNumEntry( "zoom", 1 );
+    captureX = cgs.config()->readNumEntry( "captureX", 480 );
+    captureY = cgs.config()->readNumEntry( "captureY", 640 );
+    captureFormat = cgs.config()->readEntry( "captureFormat", "JPEG" );
+    outputTo = cgs.config()->readEntry( "outputTo", "Documents Folder" );
+    prefix = cgs.config()->readEntry( "prefix", "Untitled" );
+    appendSettings = cgs.config()->readBoolEntry( "appendSettings", true );
 
+    // create action groups
+    QAction* a;
     resog = new QActionGroup( 0, "reso", true );
     resog->setToggleAction( true );
-    new QAction( " 64 x  48", 0, 0, resog, 0, true );
-    new QAction( "128 x  96", 0, 0, resog, 0, true );
-    new QAction( "192 x 144", 0, 0, resog, 0, true );
-    new QAction( "256 x 192", 0, 0, resog, 0, true );
-    new QAction( "320 x 240", 0, 0, resog, 0, true );
-    new QAction( "384 x 288", 0, 0, resog, 0, true );
-    new QAction( "448 x 336", 0, 0, resog, 0, true );
-    new QAction( "512 x 384", 0, 0, resog, 0, true );
-    new QAction( "576 x 432", 0, 0, resog, 0, true );
-    ( new QAction( "640 x 480", 0, 0, resog, 0, true ) )->setOn( true );
+    new QAction( " 64 x  48", 0, 0, resog, "64x48", true );
+    new QAction( "128 x  96", 0, 0, resog, "128x96", true );
+    new QAction( "192 x 144", 0, 0, resog, "192x144", true );
+    new QAction( "256 x 192", 0, 0, resog, "256x192", true );
+    new QAction( "320 x 240", 0, 0, resog, "320x240", true );
+    new QAction( "384 x 288", 0, 0, resog, "384x288", true );
+    new QAction( "448 x 336", 0, 0, resog, "448x336", true );
+    new QAction( "512 x 384", 0, 0, resog, "512x384", true );
+    new QAction( "576 x 432", 0, 0, resog, "576x432", true );
+    new QAction( "640 x 480", 0, 0, resog, "640x480", true );
+    a = (QAction*) resog->child( QString().sprintf( "%dx%d", captureX>captureY ? captureX:captureY, captureX>captureY ? captureY:captureX ) );
+    if ( a ) a->setOn( true );
+    else owarn << "can't set resolution" << oendl;
 
     qualityg = new QActionGroup( 0, "quality", true );
     qualityg->setToggleAction( true );
-    new QAction( "  0 (&minimal)", 0, 0, qualityg, 0, true );
-    new QAction( " 25 (&low)", 0, 0, qualityg, 0, true );
-    ( new QAction( " 50 (&good)", 0, 0, qualityg, 0, true ) )->setOn( true );
-    new QAction( " 75 (&better)", 0, 0, qualityg, 0, true );
-    new QAction( "100 (bes&t)", 0, 0, qualityg, 0, true );
+    new QAction( "  0 (&minimal)", 0, 0, qualityg, "0", true );
+    new QAction( " 25 (&low)", 0, 0, qualityg, "25", true );
+    new QAction( " 50 (&good)", 0, 0, qualityg, "50", true );
+    new QAction( " 75 (&better)", 0, 0, qualityg, "75", true );
+    new QAction( "100 (bes&t)", 0, 0, qualityg, "100", true );
+    a = (QAction*) qualityg->child( QString().sprintf( "%d", quality ) );
+    if ( a ) a->setOn( true );
+    else owarn << "can't set quality" << oendl;
 
     zoomg = new QActionGroup( 0, "zoom", true );
     zoomg->setToggleAction( true );
-    ( new QAction( "x 1", 0, 0, zoomg, 0, true ) )->setOn( true );
-    new QAction( "x 2", 0, 0, zoomg, 0, true );
+    new QAction( "x 1", 0, 0, zoomg, "1", true );
+    new QAction( "x 2", 0, 0, zoomg, "2", true );
+    a = (QAction*) zoomg->child( QString().sprintf( "%d", zoom ) );
+    if ( a ) a->setOn( true );
+    else owarn << "can't set zoom" << oendl;
 
     flipg = new QActionGroup( 0, "flip", true );
     flipg->setToggleAction( true );
-    ( new QAction( "Auto (recommended)", 0, 0, flipg, 0, true ) )->setOn( true );
-    new QAction( "0 (always off)", 0, 0, flipg, 0, true );
-    new QAction( "X (always horizontal)", 0, 0, flipg, 0, true );
-    new QAction( "Y (always vertical)", 0, 0, flipg, 0, true );
-    new QAction( "* (always both)", 0, 0, flipg, 0, true );
+    new QAction( "Auto (recommended)", 0, 0, flipg, "A", true );
+    new QAction( "0 (always off)", 0, 0, flipg, "0", true );
+    new QAction( "X (always horizontal)", 0, 0, flipg, "X", true );
+    new QAction( "Y (always vertical)", 0, 0, flipg, "Y", true );
+    new QAction( "* (always both)", 0, 0, flipg, "*", true );
+    a = (QAction*) flipg->child( QString().sprintf( "%s", (const char*) flip ) );
+    if ( a ) a->setOn( true );
+    else owarn << "can't set flip" << oendl;
 
     outputTog = new QActionGroup( 0, "output", true );
     outputTog->setToggleAction( true );
-    new QAction( "/tmp/", 0, 0, outputTog, 0, true );
-    new QAction( "/mnt/card/", 0, 0, outputTog, 0, true );
-    new QAction( "/mnt/cf/", 0, 0, outputTog, 0, true );
-    docfolder = new QAction( "Documents Folder", 0, 0, outputTog, 0, true );
-    docfolder->setOn( true );
-    custom = new QAction( "&Custom...", 0, 0, outputTog, 0, true );
+    new QAction( "/tmp/", 0, 0, outputTog, "/tmp/", true );
+    new QAction( "/mnt/card/", 0, 0, outputTog, "/mnt/card/", true );
+    new QAction( "/mnt/cf/", 0, 0, outputTog, "/mnt/cf/", true );
+    docfolder = new QAction( "Documents Folder", 0, 0, outputTog, "Documents Folder", true );
+    custom = new QAction( "&Custom...", 0, 0, outputTog, "custom", true ); //TODO: How to save custom!?
+    a = (QAction*) outputTog->child( QString().sprintf( "%s", (const char*) outputTo ) );
+    if ( a ) a->setOn( true );
+    else owarn << "can't set outputTo" << oendl;
 
     outputg = new QActionGroup( 0, "output", true );
     outputg->setToggleAction( true );
-    ( new QAction( "JPEG", 0, 0, outputg, 0, true ) )->setOn( true );
-    new QAction( "PNG", 0, 0, outputg, 0, true );
-    new QAction( "BMP", 0, 0, outputg, 0, true );
-    new QAction( "AVI", 0, 0, outputg, 0, true );
+    new QAction( "JPEG", 0, 0, outputg, "JPEG", true );
+    new QAction( "PNG", 0, 0, outputg, "PNG", true );
+    new QAction( "BMP", 0, 0, outputg, "BMP", true );
+    new QAction( "AVI", 0, 0, outputg, "AVI", true );
+    a = (QAction*) outputg->child( QString().sprintf( "%s", (const char*) captureFormat ) );
+    if ( a ) a->setOn( true );
+    else owarn << "can't set output format" << oendl;
 
     connect( resog, SIGNAL( selected(QAction*) ), this, SLOT( resoMenuItemClicked(QAction*) ) );
     connect( qualityg, SIGNAL( selected(QAction*) ), this, SLOT( qualityMenuItemClicked(QAction*) ) );
@@ -178,7 +211,6 @@ void CameraMainWindow::init()
     connect( flipg, SIGNAL( selected(QAction*) ), this, SLOT( flipMenuItemClicked(QAction*) ) );
     connect( outputTog, SIGNAL( selected(QAction*) ), this, SLOT( outputToMenuItemClicked(QAction*) ) );
     connect( outputg, SIGNAL( selected(QAction*) ), this, SLOT( outputMenuItemClicked(QAction*) ) );
-
 }
 
 
