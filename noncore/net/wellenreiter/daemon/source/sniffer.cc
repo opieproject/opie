@@ -3,7 +3,7 @@
  *  This works only with cisco wireless cards with an rfmon
  *  able driver and not with wifi stuff.
  *
- *  $Id: sniffer.cc,v 1.2 2002-11-23 20:12:57 max Exp $
+ *  $Id: sniffer.cc,v 1.4 2002-11-23 20:48:21 max Exp $
  */
 
 #include "config.hh"
@@ -24,8 +24,10 @@ int main(void)
 int start_sniffing (char * device)
 {
  
-	pcap_t *handletopcap;
-	char errbuf[PCAP_ERRBUF_SIZE];
+	pcap_t *handletopcap;		  /* The handle to the libpcap */
+	char errbuf[PCAP_ERRBUF_SIZE]; /* The errorbuffer of libpacap */
+	struct pcap_pkthdr header;     /* The packet header from pcap*/
+    const u_char *packet;          /* The actual packet content*/
 
 	/* opening the pcap for sniffing */
 	handletopcap = pcap_open_live(device, BUFSIZ, 1, 1000, errbuf);
@@ -34,7 +36,16 @@ int start_sniffing (char * device)
     	pcap_setnonblock(handletopcap, 1, errstr);
 	#endif
 	/*start scanning */
-	pcap_loop(handletopcap,-1,process_packets,NULL);
+//	pcap_loop(handletopcap,-1,process_packets,NULL);
+	/* Loope endless */
+	while(1)
+	{
+		/* Grab one single packet */
+ 	   packet = pcap_next(handletopcap, &header);
+
+		/* process the packet */
+		process_packets(NULL,&header,*&packet);		
+	}
 
 	printf("\nDone processing packets... wheew!\n");
 	return 1;
@@ -98,7 +109,6 @@ void process_packets(u_char *useless,const struct pcap_pkthdr* pkthdr,const u_ch
 				case ST_BEACON:
 					if (handle_beacon(fc, packet,pinfoptr) ==0)
 					{
-						printf ("\n\tOn network : %s",pinfoptr->ssid);
 						if (!strcmp(pinfoptr->desthwaddr,"ff:ff:ff:ff:ff:ff") == 0)
 						{
 							/* Every beacon must have the broadcast as destination
