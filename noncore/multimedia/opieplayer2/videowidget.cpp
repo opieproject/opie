@@ -144,8 +144,8 @@ QWidget( parent, name, f ), scaledWidth( 0 ), scaledHeight( 0 ) {
 
     setLength( mediaPlayerState->length() );
     setPosition( mediaPlayerState->position() );
-    setFullscreen( mediaPlayerState->fullscreen() );
-    setPlaying( mediaPlayerState->playing() );
+    setFullscreen( mediaPlayerState->isFullscreen() );
+    setPlaying( mediaPlayerState->isPlaying() );
 }
 
 
@@ -258,7 +258,7 @@ void VideoWidget::updateSlider( long i, long max ) {
     }
     int width = slider->width();
     int val = int((double)i * width / max);
-    if ( !mediaPlayerState->fullscreen() && !videoSliderBeingMoved ) {
+    if ( !mediaPlayerState->isFullscreen() && !videoSliderBeingMoved ) {
         if ( slider->value() != val ) {
             slider->setValue( val );
         }
@@ -327,11 +327,11 @@ void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
                 switch(i) {
 
                 case VideoPlay: {
-                    if( mediaPlayerState->paused() ) {
+                    if( mediaPlayerState->isPaused() ) {
                         setToggleButton( i, FALSE );
                         mediaPlayerState->setPaused( FALSE );
                         return;
-                    } else if( !mediaPlayerState->paused() ) {
+                    } else if( !mediaPlayerState->isPaused() ) {
                         setToggleButton( i, TRUE );
                         mediaPlayerState->setPaused( TRUE );
                         return;
@@ -357,7 +357,7 @@ void VideoWidget::mousePressEvent( QMouseEvent *event ) {
 }
 
 void VideoWidget::mouseReleaseEvent( QMouseEvent *event ) {
-    if ( mediaPlayerState->fullscreen() ) {
+    if ( mediaPlayerState->isFullscreen() ) {
         mediaPlayerState->setFullscreen( FALSE );
         makeVisible();
     }
@@ -376,7 +376,7 @@ void VideoWidget::showEvent( QShowEvent* ) {
  }
 
 void VideoWidget::makeVisible() {
-    if ( mediaPlayerState->fullscreen() ) {
+    if ( mediaPlayerState->isFullscreen() ) {
         setBackgroundMode( QWidget::NoBackground );
         showFullScreen();
         resize( qApp->desktop()->size() );
@@ -403,7 +403,7 @@ void VideoWidget::makeVisible() {
             videoFrame->setGeometry( QRect( 0, 30, 240, 170  ) );
         }
 
-        if ( !mediaPlayerState->seekable()  ) {
+        if ( !mediaPlayerState->isSeekable()  ) {
             if( !slider->isHidden()) {
                 slider->hide();
             }
@@ -427,7 +427,7 @@ void VideoWidget::makeVisible() {
 void VideoWidget::paintEvent( QPaintEvent * pe) {
     QPainter p( this );
 
-    if ( mediaPlayerState->fullscreen() ) {
+    if ( mediaPlayerState->isFullscreen() ) {
         // Clear the background
         p.setBrush( QBrush( Qt::black ) );
     } else {
@@ -474,7 +474,7 @@ void VideoWidget::keyReleaseEvent( QKeyEvent *e) {
       case Key_F13: //mail
           break;
       case Key_Space: {
-          if(mediaPlayerState->playing()) {
+          if(mediaPlayerState->isPlaying()) {
               mediaPlayerState->setPlaying(FALSE);
           } else {
               mediaPlayerState->setPlaying(TRUE);

@@ -176,9 +176,9 @@ PlayListWidget::~PlayListWidget() {
 
 
 void PlayListWidget::initializeStates() {
-    d->tbPlay->setOn( mediaPlayerState->playing() );
-    d->tbLoop->setOn( mediaPlayerState->looping() );
-    d->tbShuffle->setOn( mediaPlayerState->shuffled() );
+    d->tbPlay->setOn( mediaPlayerState->isPlaying() );
+    d->tbLoop->setOn( mediaPlayerState->isLooping() );
+    d->tbShuffle->setOn( mediaPlayerState->isShuffled() );
     setPlaylist( true );
 }
 
@@ -209,7 +209,7 @@ void PlayListWidget::writeDefaultPlaylist() {
 
 void PlayListWidget::addToSelection( const DocLnk& lnk ) {
     d->setDocumentUsed = FALSE;
-    if ( mediaPlayerState->playlist() ) {
+    if ( mediaPlayerState->isUsingPlaylist() ) {
         if( QFileInfo( lnk.file() ).exists() ||
             lnk.file().left(4) == "http" ) {
             d->selectedFiles->addToSelection( lnk );
@@ -428,7 +428,7 @@ const DocLnk *PlayListWidget::current() { // this is fugly
       case 0: //playlist
       {
 //      qDebug("playlist");
-          if ( mediaPlayerState->playlist() ) {
+          if ( mediaPlayerState->isUsingPlaylist() ) {
               return d->selectedFiles->current();
           } else if ( d->setDocumentUsed && d->current ) {
               return d->current;
@@ -443,8 +443,8 @@ const DocLnk *PlayListWidget::current() { // this is fugly
 
 
 bool PlayListWidget::prev() {
-    if ( mediaPlayerState->playlist() ) {
-        if ( mediaPlayerState->shuffled() ) {
+    if ( mediaPlayerState->isUsingPlaylist() ) {
+        if ( mediaPlayerState->isShuffled() ) {
             const DocLnk *cur = current();
             int j = 1 + (int)(97.0 * rand() / (RAND_MAX + 1.0));
             for ( int i = 0; i < j; i++ ) {
@@ -458,7 +458,7 @@ bool PlayListWidget::prev() {
             return TRUE;
         } else {
             if ( !d->selectedFiles->prev() ) {
-                if ( mediaPlayerState->looping() ) {
+                if ( mediaPlayerState->isLooping() ) {
                     return d->selectedFiles->last();
                 } else {
                     return FALSE;
@@ -467,19 +467,19 @@ bool PlayListWidget::prev() {
             return TRUE;
         }
     } else {
-        return mediaPlayerState->looping();
+        return mediaPlayerState->isLooping();
   }
 }
 
 
 bool PlayListWidget::next() {
 //qDebug("<<<<<<<<<<<<next()");
- if ( mediaPlayerState->playlist() ) {
-        if ( mediaPlayerState->shuffled() ) {
+ if ( mediaPlayerState->isUsingPlaylist() ) {
+        if ( mediaPlayerState->isShuffled() ) {
             return prev();
         } else {
             if ( !d->selectedFiles->next() ) {
-                if ( mediaPlayerState->looping() ) {
+                if ( mediaPlayerState->isLooping() ) {
                     return d->selectedFiles->first();
                 } else {
                     return FALSE;
@@ -488,24 +488,24 @@ bool PlayListWidget::next() {
             return TRUE;
         }
     } else {
-        return mediaPlayerState->looping();
+        return mediaPlayerState->isLooping();
     }
 }
 
 
 bool PlayListWidget::first() {
-    if ( mediaPlayerState->playlist() )
+    if ( mediaPlayerState->isUsingPlaylist() )
         return d->selectedFiles->first();
     else
-        return mediaPlayerState->looping();
+        return mediaPlayerState->isLooping();
 }
 
 
 bool PlayListWidget::last() {
-    if ( mediaPlayerState->playlist() )
+    if ( mediaPlayerState->isUsingPlaylist() )
         return d->selectedFiles->last();
     else
-        return mediaPlayerState->looping();
+        return mediaPlayerState->isLooping();
 }
 
 
@@ -1089,7 +1089,7 @@ void PlayListWidget::pmViewActivated(int index) {
     case -16:
     {
         mediaPlayerState->toggleFullscreen();
-        bool b=mediaPlayerState->fullscreen();
+        bool b=mediaPlayerState->isFullscreen();
         pmView->setItemChecked( index, b);
         Config cfg( "OpiePlayer" );
         cfg.writeEntry( "FullScreen", b );

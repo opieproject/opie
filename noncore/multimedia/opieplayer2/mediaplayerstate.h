@@ -50,16 +50,16 @@ public:
     MediaPlayerState( QObject *parent, const char *name );
     ~MediaPlayerState();
 
-    bool streaming() const;
-    bool seekable() const;
-    bool fullscreen() const;
-    bool scaled() const;
-    bool looping() const;
-    bool shuffled() const;
-    bool playlist() const;
-    bool paused() const;
-    bool playing() const;
-    bool stop() const;
+    bool isStreaming() const;
+    bool isSeekable() const;
+    bool isFullscreen() const;
+    bool isScaled() const;
+    bool isLooping() const;
+    bool isShuffled() const;
+    bool isUsingPlaylist() const;
+    bool isPaused() const;
+    bool isPlaying() const;
+    bool isStop() const;
     long position() const;
     long length() const;
     char view() const;
@@ -119,17 +119,17 @@ signals:
     void next();
 
 private:
-    bool isStreaming;
-    bool isSeekable;
-    bool isFullscreen;
-    bool isScaled;
-    bool isBlanked;
-    bool isLooping;
-    bool isShuffled;
+    bool streaming;
+    bool seekable;
+    bool fullscreen;
+    bool scaled;
+    bool blanked;
+    bool looping;
+    bool shuffled;
     bool usePlaylist;
-    bool isPaused;
-    bool isPlaying;
-    bool isStoped;
+    bool paused;
+    bool playing;
+    bool stoped;
     long curPosition;
     long curLength;
     char curView;

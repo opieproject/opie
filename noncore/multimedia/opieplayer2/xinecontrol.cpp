@@ -180,7 +180,7 @@ long XineControl::position() {
     mediaPlayerState->updatePosition( m_position );
     long emitPos = (long)m_position;
     emit positionChanged( emitPos );
-    if( mediaPlayerState->playing() ) {
+    if( mediaPlayerState->isPlaying() ) {
     // needs to be stopped the media is stopped
         QTimer::singleShot( 1000, this, SLOT( position() ) );
     }

@@ -173,9 +173,9 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
     // Intialise state
     setLength( mediaPlayerState->length() );
     setPosition( mediaPlayerState->position() );
-    setLooping( mediaPlayerState->fullscreen() );
+    setLooping( mediaPlayerState->isFullscreen() );
     //    setPaused( mediaPlayerState->paused() );
-    setPlaying( mediaPlayerState->playing() );
+    setPlaying( mediaPlayerState->isPlaying() );
 
 }
 
@@ -431,10 +431,10 @@ void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
                 qDebug("mouseEvent %d", i);
                 switch (i) {
                 case AudioPlay:
-                    if( mediaPlayerState->paused() ) {
+                    if( mediaPlayerState->isPaused() ) {
                         mediaPlayerState->setPaused( FALSE );
                         return;
-                    } else if( !mediaPlayerState->paused() ) {
+                    } else if( !mediaPlayerState->isPaused() ) {
                         mediaPlayerState->setPaused( TRUE );
                         return;
                     }
@@ -513,7 +513,7 @@ void AudioWidget::keyReleaseEvent( QKeyEvent *e) {
              mediaPlayerState->toggleBlank();
           break;
       case Key_Space: {
-          if(mediaPlayerState->playing()) {
+          if(mediaPlayerState->isPlaying()) {
               //                toggleButton(1);
               mediaPlayerState->setPlaying(FALSE);
               //                toggleButton(1);

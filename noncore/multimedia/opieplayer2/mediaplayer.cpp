@@ -74,7 +74,7 @@ MediaPlayer::~MediaPlayer() {
 }
 
 void MediaPlayer::pauseCheck( bool b ) {
-     if ( b && !mediaPlayerState->playing() ) {
+     if ( b && !mediaPlayerState->isPlaying() ) {
          mediaPlayerState->setPaused( FALSE );
      }
 }
@@ -89,7 +89,7 @@ void MediaPlayer::setPlaying( bool play ) {
         return;
     }
 
-    if ( mediaPlayerState->paused() ) {
+    if ( mediaPlayerState->isPaused() ) {
         mediaPlayerState->setPaused( FALSE );
         return;
     }
@@ -111,11 +111,11 @@ void MediaPlayer::setPlaying( bool play ) {
         // random and looping settings enabled causes problems here,
         // since there is no selected file in the playlist, but a selected file in the file list,
         // so we remember and shutoff
-        l = mediaPlayerState->looping();
+        l = mediaPlayerState->isLooping();
         if(l) {
             mediaPlayerState->setLooping( false );
         }
-        r = mediaPlayerState->shuffled();
+        r = mediaPlayerState->isShuffled();
         mediaPlayerState->setShuffled( false );
 
         fileName = playList->currentFileListPathName();
@@ -150,7 +150,7 @@ void MediaPlayer::prev() {
     if( playList->whichList() == 0 ) { //if using the playlist
         if ( playList->prev() ) {
             play();
-        } else if ( mediaPlayerState->looping() ) {
+        } else if ( mediaPlayerState->isLooping() ) {
             if ( playList->last() ) {
                 play();
             }
@@ -166,7 +166,7 @@ void MediaPlayer::next() {
     if(playList->whichList() == 0) { //if using the playlist
         if ( playList->next() ) {
             play();
-        } else if ( mediaPlayerState->looping() ) {
+        } else if ( mediaPlayerState->isLooping() ) {
             if ( playList->first() ) {
                 play();
             }

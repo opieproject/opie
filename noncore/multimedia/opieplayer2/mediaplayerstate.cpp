@@ -51,8 +51,8 @@ MediaPlayerState::MediaPlayerState( QObject *parent, const char *name )
         : QObject( parent, name ) {
     Config cfg( "OpiePlayer" );
     readConfig( cfg );
-    isStreaming = false;
-    isSeekable = true;
+    streaming = false;
+    seekable = true;
 }
 
 
@@ -62,16 +62,16 @@ MediaPlayerState::~MediaPlayerState() {
 
 void MediaPlayerState::readConfig( Config& cfg ) {
     cfg.setGroup("Options");
-    isFullscreen = cfg.readBoolEntry( "FullScreen" );
-    isScaled = cfg.readBoolEntry( "Scaling" );
-    isLooping = cfg.readBoolEntry( "Looping" );
-    isShuffled = cfg.readBoolEntry( "Shuffle" );
+    fullscreen = cfg.readBoolEntry( "FullScreen" );
+    scaled = cfg.readBoolEntry( "Scaling" );
+    looping = cfg.readBoolEntry( "Looping" );
+    shuffled = cfg.readBoolEntry( "Shuffle" );
     usePlaylist = cfg.readBoolEntry( "UsePlayList" );
     videoGamma = cfg.readNumEntry( "VideoGamma" );
     usePlaylist = TRUE;
-    isPlaying = FALSE;
-    isStreaming = FALSE;
-    isPaused = FALSE;
+    playing = FALSE;
+    streaming = FALSE;
+    paused = FALSE;
     curPosition = 0;
     curLength = 0;
     curView = 'l';
@@ -80,10 +80,10 @@ void MediaPlayerState::readConfig( Config& cfg ) {
 
 void MediaPlayerState::writeConfig( Config& cfg ) const {
     cfg.setGroup( "Options" );
-    cfg.writeEntry( "FullScreen", isFullscreen );
-    cfg.writeEntry( "Scaling", isScaled );
-    cfg.writeEntry( "Looping", isLooping );
-    cfg.writeEntry( "Shuffle", isShuffled );
+    cfg.writeEntry( "FullScreen", fullscreen );
+    cfg.writeEntry( "Scaling", scaled );
+    cfg.writeEntry( "Looping", looping );
+    cfg.writeEntry( "Shuffle", shuffled );
     cfg.writeEntry( "UsePlayList", usePlaylist );
     cfg.writeEntry( "VideoGamma",  videoGamma );
 }
@@ -92,45 +92,45 @@ void MediaPlayerState::writeConfig( Config& cfg ) const {
 // public stuff
 
 
-bool MediaPlayerState::streaming() const {
-    return isStreaming;
+bool MediaPlayerState::isStreaming() const {
+    return streaming;
 }
 
-bool MediaPlayerState::seekable() const {
-    return isSeekable;
+bool MediaPlayerState::isSeekable() const {
+    return seekable;
 }
 
-bool MediaPlayerState::fullscreen() const {
-    return isFullscreen;
+bool MediaPlayerState::isFullscreen() const {
+    return fullscreen;
 }
 
-bool MediaPlayerState::scaled() const {
-    return isScaled;
+bool MediaPlayerState::isScaled() const {
+    return scaled;
 }
 
-bool MediaPlayerState::looping() const {
-    return isLooping;
+bool MediaPlayerState::isLooping() const {
+    return looping;
 }
 
-bool MediaPlayerState::shuffled() const {
-    return isShuffled;
+bool MediaPlayerState::isShuffled() const {
+    return shuffled;
 }
 
 
-bool MediaPlayerState::playlist() const {
+bool MediaPlayerState::isUsingPlaylist() const {
     return usePlaylist;
 }
 
-bool MediaPlayerState::paused() const {
-    return isPaused;
+bool MediaPlayerState::isPaused() const {
+    return paused;
 }
 
-bool MediaPlayerState::playing() const {
-    return isPlaying;
+bool MediaPlayerState::isPlaying() const {
+    return playing;
 }
 
-bool MediaPlayerState::stop() const {
-    return isStoped;
+bool MediaPlayerState::isStop() const {
+    return stoped;
 }
 
 long MediaPlayerState::position() const {
@@ -148,10 +148,10 @@ char MediaPlayerState::view() const {
 // slots
 void MediaPlayerState::setIsStreaming( bool b ) {
 
-    if ( isStreaming == b ) {
+    if ( streaming == b ) {
         return;
     }
-    isStreaming = b;
+    streaming = b;
 }
 
 void MediaPlayerState::setIsSeekable( bool b ) {
@@ -159,50 +159,50 @@ void MediaPlayerState::setIsSeekable( bool b ) {
     //if ( isSeekable == b ) {
     //    return;
     // }
-    isSeekable = b;
+    seekable = b;
     emit isSeekableToggled(b);
 }
 
 
 void MediaPlayerState::setFullscreen( bool b ) {
-    if ( isFullscreen == b ) {
+    if ( fullscreen == b ) {
         return;
     }
-    isFullscreen = b;
+    fullscreen = b;
     emit fullscreenToggled(b);
 }
 
 
 void MediaPlayerState::setBlanked( bool b ) {
-    if ( isBlanked == b ) {
+    if ( blanked == b ) {
         return;
     }
-    isBlanked = b;
+    blanked = b;
     emit blankToggled(b);
 }
 
 
 void MediaPlayerState::setScaled( bool b ) {
-    if ( isScaled == b ) {
+    if ( scaled == b ) {
         return;
     }
-    isScaled = b;
+    scaled = b;
     emit scaledToggled(b);
 }
 
 void MediaPlayerState::setLooping( bool b ) {
-    if ( isLooping    == b ) {
+    if ( looping    == b ) {
         return;
     }
-    isLooping = b;
+    looping = b;
     emit loopingToggled(b);
 }
 
 void MediaPlayerState::setShuffled( bool b ) {
-    if ( isShuffled   == b ) {
+    if ( shuffled   == b ) {
         return;
     }
-    isShuffled = b;
+    shuffled = b;
     emit shuffledToggled(b);
 }
 
@@ -215,29 +215,29 @@ void MediaPlayerState::setPlaylist( bool b ) {
 }
 
 void MediaPlayerState::setPaused( bool b ) {
-      if ( isPaused  == b ) {
-          isPaused = FALSE;
+      if ( paused  == b ) {
+          paused = FALSE;
           emit pausedToggled(FALSE);
           return;
       }
-     isPaused = b;
+     paused = b;
      emit pausedToggled(b);
 }
 
 void MediaPlayerState::setPlaying( bool b ) {
-    if ( isPlaying  == b ) {
+    if ( playing  == b ) {
         return;
     }
-    isPlaying = b;
-    isStoped = !b;
+    playing = b;
+    stoped = !b;
     emit playingToggled(b);
 }
 
 void MediaPlayerState::setStop( bool b ) {
-    if ( isStoped  == b ) {
+    if ( stoped  == b ) {
         return;
     }
-    isStoped = b;
+    stoped = b;
     emit stopToggled(b);
 }
 
@@ -303,19 +303,19 @@ void MediaPlayerState::setAudio() {
 }
 
 void MediaPlayerState::toggleFullscreen() {
-    setFullscreen( !isFullscreen );
+    setFullscreen( !fullscreen );
 }
 
 void MediaPlayerState::toggleScaled() {
-    setScaled( !isScaled);
+    setScaled( !scaled);
 }
 
 void MediaPlayerState::toggleLooping() {
-    setLooping( !isLooping);
+    setLooping( !looping);
 }
 
 void MediaPlayerState::toggleShuffled() {
-    setShuffled( !isShuffled);
+    setShuffled( !shuffled);
 }
 
 void MediaPlayerState::togglePlaylist() {
@@ -323,15 +323,15 @@ void MediaPlayerState::togglePlaylist() {
 }
 
 void MediaPlayerState::togglePaused() {
-    setPaused( !isPaused);
+    setPaused( !paused);
 }
 
 void MediaPlayerState::togglePlaying() {
-    setPlaying( !isPlaying);
+    setPlaying( !playing);
 }
 
 void MediaPlayerState::toggleBlank() {
-    setBlanked( !isBlanked);
+    setBlanked( !blanked);
 }
 
 
