@@ -227,7 +227,6 @@ void SFCave :: setUp()
     dir = 1;
     thrust = 0;
 
-    int dist[] = { 100, 60, 40 };
     if ( CURRENT_GAME_TYPE == SFCAVE_GAME )
     {
         thrustUp = UpThrustVals[SFCAVE_GAME_TYPE][currentGameDifficulty];;
@@ -235,14 +234,12 @@ void SFCave :: setUp()
         maxUpThrust = MaxUpThrustVals[SFCAVE_GAME_TYPE][currentGameDifficulty];;
         maxDownThrust = MaxDownThrustVals[SFCAVE_GAME_TYPE][currentGameDifficulty];;
 
-        if ( currentCameDifficulty == DIFICULTY_EASY )
+        if ( currentGameDifficulty == DIFICULTY_EASY )
             gateDistance = 100;
-        else if ( currentCameDifficulty == DIFICULTY_EASY )
+        else if ( currentGameDifficulty == DIFICULTY_EASY )
             gateDistance = 60;
         else
             gateDistance = 40;
-            
-        printf( "GD = %d\n", gateDistance );
     }
     else if ( CURRENT_GAME_TYPE == GATES_GAME )
     {
@@ -791,11 +788,13 @@ void SFCave :: keyPressEvent( QKeyEvent *e )
             case Qt::Key_Up:
             case Qt::Key_F9:
             case Qt::Key_Space:
-                if ( !replay && !press )
+                if ( state == STATE_RUNNING && !replay && !press )
                 {
                     press = true;
                     replayList.append( new int( nrFrames ) );
                 }
+                else if ( state == STATE_CRASHED && e->key() == Key_Up )
+                    state = STATE_NEWGAME;
                 break;
             case Qt::Key_M:
             case Qt::Key_Return:
@@ -831,12 +830,10 @@ void SFCave :: keyReleaseEvent( QKeyEvent *e )
             case Qt::Key_F9:
             case Qt::Key_Space:
             case Qt::Key_Up:
-                if ( !replay && press )
-                {
-                    press = false;
-
+                press = false;
+                if ( state == STATE_RUNNING && !replay && press )
                     replayList.append( new int( nrFrames ) );
-                }
+
                 break;
 
             case Qt::Key_R:
