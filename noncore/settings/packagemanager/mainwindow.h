@@ -30,6 +30,10 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "opackagemanager.h"
+
+#include <qpe/config.h>
+
 #include <qlabel.h>
 #include <qlistview.h>
 #include <qmainwindow.h>
@@ -37,10 +41,6 @@
 #include <qprogressbar.h>
 #include <qtoolbar.h>
 #include <qwidgetstack.h>
-
-#include <qpe/config.h>
-
-#include "opackagemanager.h"
 
 class QAction;
 class QLineEdit;

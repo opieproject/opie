@@ -30,10 +30,10 @@
 #ifndef PACKAGEINFODLG_H
 #define PACKAGEINFODLG_H
 
+#include "opackage.h"
+
 #include <qmultilineedit.h>
 #include <qwidget.h>
-
-#include "opackage.h"
 
 class QPushButton;
 

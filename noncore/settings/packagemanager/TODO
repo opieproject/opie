@@ -2,7 +2,7 @@
 /*
 /*                       Opie - Package Manager
 /*                      ========================
-/*                           Version 0.3.0
+/*                           Version 0.4.0
 /*
 /*                A package management client for Opie
 /*
@@ -16,10 +16,9 @@
 =  Current release   =
 ======================
 
-1. Save configuration information (i.e. /etc/ipkg.conf)
-2. Link non-root destination apps
-3. Implement QCOP interface for installing, removing, etc.
-4. Redesign configuration dialog
+1. Link non-root destination apps
+2. Implement QCOP interface for installing, removing, etc.
+3. Redesign configuration dialog
 
 ======================
 =   Future releases  =

@@ -1,3 +1,12 @@
+2004-04-21 Dan Williams <drw@handhelds.org>
+
+    * Released version 0.4.0
+    * Added saving of ipkg configuration information
+    * Re-initialize ipkg when configuration information changes
+    * Added QWhatsThis for all UI controls
+    * Remove Location from OConfItem as it is not used/needed
+    * Re-ordered includes to follow Opie standards
+
 2004-02-13 Dan Williams <drw@handhelds.org>
 
     * Released version 0.3.0

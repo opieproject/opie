@@ -29,12 +29,12 @@
 
 #include "entrydlg.h"
 
+#include <qpe/qpeapplication.h>
+
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qlineedit.h>
 #include <qpushbutton.h>
-
-#include <qpe/qpeapplication.h>
 
 EntryDlg::EntryDlg( const QString &label, QWidget* parent, const char* name, bool modal )
     : QDialog( parent, name, modal )

@@ -32,13 +32,13 @@
 #ifndef OPACKAGEMANAGER_H
 #define OPACKAGEMANAGER_H
 
-#include <qdict.h>
-#include <qobject.h>
-#include <qstringlist.h>
+#include "oipkg.h"
 
 #include <qpe/config.h>
 
-#include "oipkg.h"
+#include <qdict.h>
+#include <qobject.h>
+#include <qstringlist.h>
 
 class OPackageManager : public QObject
 {

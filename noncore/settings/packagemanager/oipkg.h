@@ -32,16 +32,16 @@
 #ifndef OIPKG_H
 #define OIPKG_H
 
-extern "C" {
-#include <libipkg.h>
-};
-
-#include <qobject.h>
+#include "oconfitem.h"
+#include "opackage.h"
 
 #include <qpe/config.h>
 
-#include "oconfitem.h"
-#include "opackage.h"
+#include <qobject.h>
+
+extern "C" {
+#include <libipkg.h>
+};
 
 // Ipkg execution options (m_ipkgExecOptions)
 #define FORCE_DEPENDS                           0x0001

@@ -30,14 +30,14 @@
 #ifndef FILTERDLG_H
 #define FILTERDLG_H
 
+#include "opackagemanager.h"
+
 #include <qcheckbox.h>
 #include <qdialog.h>
 #include <qcombobox.h>
 #include <qlayout.h>
 #include <qlineedit.h>
 #include <qscrollview.h>
-
-#include "opackagemanager.h"
 
 class FilterDlg : public QDialog
 {

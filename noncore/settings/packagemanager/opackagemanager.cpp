@@ -29,12 +29,12 @@
 
 */
 
-#include <ctype.h>
+#include "opackagemanager.h"
+#include "oipkgconfigdlg.h"
 
 #include <qpe/qpeapplication.h>
 
-#include "opackagemanager.h"
-#include "oipkgconfigdlg.h"
+#include <ctype.h>
 
 OPackageManager::OPackageManager( Config *config, QObject *parent, const char *name )
     : QObject( parent, name )

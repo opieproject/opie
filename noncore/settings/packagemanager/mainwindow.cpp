@@ -27,6 +27,17 @@
 
 */
 
+#include "mainwindow.h"
+#include "installdlg.h"
+#include "filterdlg.h"
+#include "promptdlg.h"
+#include "entrydlg.h"
+#include "packageinfodlg.h"
+
+#include <qpe/qcopenvelope_qws.h>
+#include <qpe/qpeapplication.h>
+#include <qpe/resource.h>
+
 #include <qaction.h>
 #include <qdir.h>
 #include <qlayout.h>
@@ -37,17 +48,6 @@
 #include <qtimer.h>
 #include <qtoolbar.h>
 #include <qwhatsthis.h>
-
-#include <qpe/qcopenvelope_qws.h>
-#include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
-
-#include "mainwindow.h"
-#include "installdlg.h"
-#include "filterdlg.h"
-#include "promptdlg.h"
-#include "entrydlg.h"
-#include "packageinfodlg.h"
 
 MainWindow::MainWindow( QWidget *parent, const char *name, WFlags /*fl*/ )
     : QMainWindow( parent, name, WStyle_ContextHelp )

@@ -29,7 +29,11 @@
 
 #include "installdlg.h"
 
-#include <sys/vfs.h>
+#include <opie2/ofiledialog.h>
+
+#include <qpe/fileselector.h>
+#include <qpe/resource.h>
+#include <qpe/storage.h>
 
 #include <qapplication.h>
 #include <qcombobox.h>
@@ -41,15 +45,10 @@
 #include <qmultilineedit.h>
 #include <qpushbutton.h>
 
-#include <qpe/fileselector.h>
-#include <qpe/resource.h>
-#include <qpe/storage.h>
-
-#include <opie2/ofiledialog.h>
+#include <sys/vfs.h>
 
 #include "opackagemanager.h"
 
-using namespace Opie::Ui;
 InstallDlg::InstallDlg( QWidget *parent, OPackageManager *pm, const QString &caption, bool showDestInfo,
                         OPackage::Command command1, QStringList *packages1,
                         OPackage::Command command2, QStringList *packages2,
@@ -276,7 +275,7 @@ void InstallDlg::slotBtnOptions()
     text << "*";
     map.insert( tr( "All" ), text );
 
-    QString filename = OFileDialog::getSaveFileName( 2, "/", "ipkg-output", map );
+    QString filename = Opie::Ui::OFileDialog::getSaveFileName( 2, "/", "ipkg-output", map );
     if( !filename.isEmpty() )
     {
         QString currentFileName = QFileInfo( filename ).fileName();

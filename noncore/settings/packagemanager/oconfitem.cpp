@@ -31,10 +31,9 @@
 
 #include "oconfitem.h"
 
-OConfItem::OConfItem( const QString &location, Type type, const QString &name,
+OConfItem::OConfItem( Type type, const QString &name,
                       const QString &value, bool active )
-    : m_location( location )
-    , m_type( type )
+    : m_type( type )
     , m_name( name )
     , m_value( value )
     , m_active( active )

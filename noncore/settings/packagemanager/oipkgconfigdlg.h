@@ -33,10 +33,10 @@
 #ifndef OIPKGCONFIGDLG_H
 #define OIPKGCONFIGDLG_H
 
+#include <opie2/otabwidget.h>
+
 #include <qdialog.h>
 #include <qlayout.h>
-
-#include <opie2/otabwidget.h>
 
 #include "oipkg.h"
 
@@ -73,12 +73,12 @@ private:
     QString        m_destCurrName; // Name of currently selected destination in m_destList
 
     // UI controls
-    QVBoxLayout  m_layout;        // Main dialog layout control
-    Opie::Ui::OTabWidget   m_tabWidget;     // Main tab widget control
-    QWidget     *m_serverWidget;  // Widget containing server configuration controls
-    QWidget     *m_destWidget;    // Widget containing destination configuration controls
-    QWidget     *m_proxyWidget;   // Widget containing proxy configuration controls
-    QWidget     *m_optionsWidget; // Widget containing ipkg execution configuration controls
+    QVBoxLayout           m_layout;        // Main dialog layout control
+    Opie::Ui::OTabWidget  m_tabWidget;     // Main tab widget control
+    QWidget              *m_serverWidget;  // Widget containing server configuration controls
+    QWidget              *m_destWidget;    // Widget containing destination configuration controls
+    QWidget              *m_proxyWidget;   // Widget containing proxy configuration controls
+    QWidget              *m_optionsWidget; // Widget containing ipkg execution configuration controls
 
     // Server configuration UI controls
     QListBox   *m_serverList;     // Server list selection

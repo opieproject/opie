@@ -31,12 +31,11 @@
 
 #include "oipkg.h"
 
-#include <stdlib.h>
-#include <string.h>
-
 #include <qdir.h>
 #include <qfile.h>
 #include <qtextstream.h>
+
+#include <stdlib.h>
 
 const QString IPKG_CONF        = "/etc/ipkg.conf";      // Fully-qualified name of Ipkg primary configuration file
 const QString IPKG_CONF_DIR    = "/etc/ipkg";           // Directory of secondary Ipkg configuration files
@@ -529,7 +528,7 @@ void OIpkg::loadConfiguration()
                             bool active = !line.startsWith( "#" );
 
                             // Add to list
-                            m_confInfo->append( new OConfItem( absFile, type, name, value, active ) );
+                            m_confInfo->append( new OConfItem( type, name, value, active ) );
                         }
                     }
                 }

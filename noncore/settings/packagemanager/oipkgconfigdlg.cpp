@@ -31,6 +31,8 @@
 
 #include "oipkgconfigdlg.h"
 
+#include <qpe/resource.h>
+
 #include <qcheckbox.h>
 #include <qcombobox.h>
 #include <qgroupbox.h>
@@ -41,9 +43,6 @@
 #include <qscrollview.h>
 #include <qwhatsthis.h>
 
-#include <qpe/resource.h>
-
-using namespace Opie::Ui;
 OIpkgConfigDlg::OIpkgConfigDlg( OIpkg *ipkg, bool installOptions, QWidget *parent )
     : QDialog( parent, QString::null, true, WStyle_ContextHelp )
     , m_ipkg( ipkg )
@@ -101,7 +100,7 @@ void OIpkgConfigDlg::accept()
             confItem->setActive( m_proxyHttpActive->isChecked() );
         }
         else
-            m_configs->append( new OConfItem( QString::null, OConfItem::Option, "http_proxy",
+            m_configs->append( new OConfItem( OConfItem::Option, "http_proxy",
                                m_proxyHttpServer->text(), m_proxyHttpActive->isChecked() ) );
 
         confItem = findConfItem( OConfItem::Option, "ftp_proxy" );
@@ -111,21 +110,21 @@ void OIpkgConfigDlg::accept()
             confItem->setActive( m_proxyFtpActive->isChecked() );
         }
         else
-            m_configs->append( new OConfItem( QString::null, OConfItem::Option, "ftp_proxy",
+            m_configs->append( new OConfItem( OConfItem::Option, "ftp_proxy",
                                m_proxyFtpServer->text(), m_proxyFtpActive->isChecked() ) );
 
         confItem = findConfItem( OConfItem::Option, "proxy_username" );
         if ( confItem )
             confItem->setValue( m_proxyUsername->text() );
         else
-            m_configs->append( new OConfItem( QString::null, OConfItem::Option, "proxy_username",
+            m_configs->append( new OConfItem( OConfItem::Option, "proxy_username",
                                m_proxyUsername->text() ) );
 
         confItem = findConfItem( OConfItem::Option, "proxy_password" );
         if ( confItem )
             confItem->setValue( m_proxyPassword->text() );
         else
-            m_configs->append( new OConfItem( QString::null, OConfItem::Option, "proxy_password",
+            m_configs->append( new OConfItem( OConfItem::Option, "proxy_password",
                                m_proxyPassword->text() ) );
 
         m_ipkg->setConfigItems( m_configs );
@@ -532,7 +531,7 @@ void OIpkgConfigDlg::slotServerUpdate()
     else
     {
         // Add new destination to configuration list
-        m_configs->append( new OConfItem( QString::null, OConfItem::Source, newName,
+        m_configs->append( new OConfItem( OConfItem::Source, newName,
                            m_serverLocation->text(), m_serverActive->isChecked() ) );
         m_configs->sort();
 
@@ -618,7 +617,7 @@ void OIpkgConfigDlg::slotDestUpdate()
     else
     {
         // Add new destination to configuration list
-        m_configs->append( new OConfItem( QString::null, OConfItem::Destination, newName,
+        m_configs->append( new OConfItem( OConfItem::Destination, newName,
                            m_destLocation->text(), m_destActive->isChecked() ) );
         m_configs->sort();
 

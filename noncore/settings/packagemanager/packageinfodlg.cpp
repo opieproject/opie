@@ -31,14 +31,14 @@
 #include "opackage.h"
 #include "opackagemanager.h"
 
-#include <qlayout.h>
-#include <qpushbutton.h>
+#include <opie2/otabwidget.h>
 
 #include <qpe/resource.h>
 
-#include <opie2/otabwidget.h>
+#include <qlayout.h>
+#include <qpushbutton.h>
+#include <qwhatsthis.h>
 
-using namespace Opie::Ui;
 PackageInfoDlg::PackageInfoDlg( QWidget *parent, OPackageManager *pm, const QString &package )
     : QWidget( 0x0 )
     , m_packman( pm )
@@ -51,10 +51,11 @@ PackageInfoDlg::PackageInfoDlg( QWidget *parent, OPackageManager *pm, const QStr
 
     QVBoxLayout *layout = new QVBoxLayout( this, 4, 2 );
 
-    OTabWidget *tabWidget = new OTabWidget( this );
+    Opie::Ui::OTabWidget *tabWidget = new Opie::Ui::OTabWidget( this );
     layout->addWidget( tabWidget );
 
     // Information tab
+    QWhatsThis::add( &m_information, tr( "This area contains information about the package." ) );
     m_information.reparent( tabWidget, QPoint( 0, 0 ) );
     m_information.setReadOnly( true );
     tabWidget->addTab( &m_information, "UtilsIcon", tr( "Information" ) );
@@ -82,12 +83,14 @@ PackageInfoDlg::PackageInfoDlg( QWidget *parent, OPackageManager *pm, const QStr
     {
         QWidget *filesWidget = new QWidget( tabWidget );
         QVBoxLayout *filesLayout = new QVBoxLayout( filesWidget, 2, 2 );
+        QWhatsThis::add( &m_files, tr( "This area contains a list of files contained in this package." ) );
         m_files.reparent( filesWidget, QPoint( 0, 0 ) );
         m_files.setReadOnly( true );
         filesLayout->addWidget( &m_files );
 
         QPushButton *btn = new QPushButton( Resource::loadPixmap( "packagemanager/apply" ),
                                             tr( "Retrieve file list" ), filesWidget );
+        QWhatsThis::add( btn, tr( "Tap here to retrieve list of files contained in this package." ) );
         filesLayout->addWidget( btn );
         connect( btn, SIGNAL(clicked()), this, SLOT(slotBtnFileScan()) );
         tabWidget->addTab( filesWidget, "binary", tr( "File list" ) );

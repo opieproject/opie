@@ -29,12 +29,12 @@
 
 #include "promptdlg.h"
 
+#include <qpe/qpeapplication.h>
+
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qpushbutton.h>
 #include <qwidgetlist.h>
-
-#include <qpe/qpeapplication.h>
 
 PromptDlg::PromptDlg( const QString &caption, const QString &text, const QString &btn1, const QString &btn2,
                       QWidget *parent )
