@@ -4,14 +4,6 @@ DESTDIR     = $(OPIEDIR)/lib
 HEADERS     = oapplication.h            \
               oconfig.h                 \
               odebug.h                  \
-              odevice.h                 \
-              odevicebutton.h           \
-              odevice_ipaq.h            \
-              odevice_jornada.h         \
-              odevice_ramses.h          \
-              odevice_simpad.h          \
-              odevice_zaurus.h          \
-              odevice_yopy.h            \
               oglobal.h                 \
               oglobalsettings.h         \
               oprocess.h                \
@@ -21,28 +13,19 @@ HEADERS     = oapplication.h            \
 SOURCES     = oapplication.cpp          \
               oconfig.cpp               \
               odebug.cpp                \
-              odevice.cpp               \
-              odevicebutton.cpp         \
-              odevice_ipaq.cpp          \
-              odevice_jornada.cpp       \
-              odevice_ramses.cpp        \
-              odevice_simpad.cpp        \
-              odevice_zaurus.cpp        \
-              odevice_yopy.cpp          \
               oglobal.cpp               \
               oglobalsettings.cpp       \
               oprocess.cpp              \
               oprocctrl.cpp             \
               ostorageinfo.cpp
 
+include ( device/device.pro )
+
 INTERFACES  =
 TARGET      = opiecore2
-VERSION     = 1.8.3
+VERSION     = 1.8.5
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
-MOC_DIR     = moc
-OBJECTS_DIR = obj
-
 
 !contains( platform, x11 ) {
   LIBS        = -lqpe

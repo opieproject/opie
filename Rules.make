@@ -92,28 +92,34 @@ $(QTDIR)/stamp-headers-x11 :
 $(OPIEDIR)/stamp-headers :
 	@-rm -f $(OPIEDIR)/stamp-headers*
 	mkdir -p $(TOPDIR)/include/qpe \
-                 $(TOPDIR)/include/qtopia \
-		 $(TOPDIR)/include/opie \
-		 $(TOPDIR)/include/opie2 \
-                 $(TOPDIR)/include/qtopia/private 
+		$(TOPDIR)/include/qtopia \
+		$(TOPDIR)/include/opie \
+		$(TOPDIR)/include/opie2 \
+		$(TOPDIR)/include/qtopia/private
 	( cd include/qpe &&  rm -f *.h; ln -sf ../../library/*.h .; ln -sf ../../library/backend/*.h .; rm -f *_p.h; )
 	( cd include/qtopia && rm -f *.h; ln -sf ../../library/*.h .; )
 	( cd include/qtopia/private && rm -f *.h; ln -sf ../../../library/backend/*.h .; )
+	# libopie1
 	( cd include/opie &&  rm -f *.h; ln -sf ../../libopie/*.h .; rm -f *_p.h; )
 	( cd include/opie &&  ln -sf ../../libopie/pim/*.h .; )
-	( cd include/opie &&  ln -sf ../../libopie/big-screen/*.h .;   )
+	( cd include/opie &&  ln -sf ../../libopie/big-screen/*.h .; )
+	# libopie2
 	( cd include/opie2 && ln -sf ../../libopie2/opiecore/*.h .; )
+	( cd include/opie2 && ln -sf ../../libopie2/opiecore/device/*.h .; )
 	( cd include/opie2 && ln -sf ../../libopie2/opiemm/*.h .; )
 	( cd include/opie2 && ln -sf ../../libopie2/opiedb/*.h .; )
 	( cd include/opie2 && ln -sf ../../libopie2/opienet/*.h .; )
 	( cd include/opie2 && ln -sf ../../libopie2/opiepim/*.h .; )
 	( cd include/opie2 && ln -sf ../../libopie2/opieui/*.h .; )
-	( cd include/opie &&  ln -sf ../../libqtaux/pim/*.h .; )
+	( cd include/opie2 && ln -sf ../../libopie2/opieui/fileselector/*.h .; )
+	( cd include/opie2 && ln -sf ../../libopie2/opieui/big-screen/*.h .; )
+	( cd include/opie2 && ln -sf ../../libqtaux/*.h .; )
+	# all
 	( cd include/opie; for generatedHeader in `cd ../../libopie; ls *.ui | sed -e "s,\.ui,\.h,g"`; do \
 	ln -sf ../../libopie/$$generatedHeader $$generatedHeader; done )
 	ln -sf ../../library/custom.h $(TOPDIR)/include/qpe/custom.h
 	touch $@
-	
+
 $(OPIEDIR)/stamp-headers-x11 :
 	@-rm -f $(OPIEDIR)/stamp-headers*
 	mkdir -p $(TOPDIR)/include/qpe $(TOPDIR)/include/qtopia \
@@ -129,7 +135,7 @@ $(OPIEDIR)/stamp-headers-x11 :
 	ln -sf ../../library/custom.h $(TOPDIR)/include/qpe/custom.h
 	( cd include/qpe; ln -sf ../../x11/libqpe-x11/qpe/*.h .; )
 	touch $@
-	
+
 $(TOPDIR)/library/custom.h : $(TOPDIR)/.config
 	@-rm -f $@
 	@$(if $(patsubst "%",%,$(CONFIG_CUSTOMFILE)),\

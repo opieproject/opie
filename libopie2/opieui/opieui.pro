@@ -4,10 +4,6 @@ DESTDIR     = $(OPIEDIR)/lib
 HEADERS     = ocheckitem.h           \
               oclickablelabel.h      \
               odialog.h              \
-              ofileselector.h        \
-              ofileselector_p.h      \
-              ofiledialog.h          \
-              ofileview.h            \
               ofontselector.h        \
               oimageeffect.h         \
               olistview.h            \
@@ -28,8 +24,6 @@ HEADERS     = ocheckitem.h           \
 
 SOURCES     = ocheckitem.cpp         \
               oclickablelabel.cpp    \
-              ofileselector.cpp      \
-              ofiledialog.cpp        \
               ofontselector.cpp      \
               oimageeffect.cpp       \
               olistview.cpp          \
@@ -48,11 +42,12 @@ SOURCES     = ocheckitem.cpp         \
               oseparator.cpp
 
 include ( big-screen/big-screen.pro )
+include ( fileselector/fileselector.pro )
 
 INTERFACES  = otimepickerbase.ui
 
 TARGET      = opieui2
-VERSION     = 1.8.4
+VERSION     = 1.8.5
 
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
