@@ -106,7 +106,7 @@ void Ntp::slotRunNtp()
   	switch (
    	 QMessageBox::warning(this, tr("Run NTP?"),
      tr("You asked for a delay of ")+SpinBoxNtpDelay->text()+tr(" minutes, but only ")+
-     QString::number(_lookupDiff/60)+tr(" minutes elapsed since last loopup.")+
+     QString::number(_lookupDiff/60)+tr(" minutes elapsed since last lookup.")+
      "<br>"+tr("Rerun NTP?"),
      QMessageBox::Ok,QMessageBox::Cancel)
    	) {
