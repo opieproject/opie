@@ -73,7 +73,6 @@ CONFIG_LAUNCHER		core/launcher	server.pro
 CONFIG_LAUNCHER-SETTINGS	core/settings/launcher	launcher.pro
 CONFIG_LIBFFMPEG	core/multimedia/opieplayer/libffmpeg	libffmpeg.pro
 CONFIG_LIBFLASH	core/multimedia/opieplayer/libflash	libflash.pro
-CONFIG_LIBKATE  noncore/apps/tinykate/libkate libkate.pro
 CONFIG_LIBMAD	core/multimedia/opieplayer/libmad	libmad.pro
 CONFIG_LIBMAIL	noncore/unsupported/mail2/libmail	libmail.pro
 CONFIG_LIBMAILWRAPPER   noncore/net/mail/libmailwrapper  libmailwrapper.pro
