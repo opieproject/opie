@@ -7,7 +7,7 @@
 class Device : public QObject {
    Q_OBJECT
 public:
-   Device( QObject * parent=0, const char * dspStr=0, const char * mixerStr=0, bool record=0 );
+   Device( QObject * parent=0, bool record=0 );
    ~Device() {};
    bool closeDevice( bool);
    int getChannels();
@@ -36,7 +36,7 @@ public:
 
 private:
    int devRes, devCh, devRate, devForm, flags;
-   char *dspstr, *mixstr;
+   QString dspstr, mixstr;
    bool selectMicInput();
    int openDevice( int );
 private slots:

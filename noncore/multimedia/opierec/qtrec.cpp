@@ -3,7 +3,7 @@
  Created: Thu Jan 17 11:19:58 2002
  copyright 2002 by L.J. Potter <ljp@llornkcor.com>
 ****************************************************************************/
-#define DEV_VERSION
+//#define DEV_VERSION
 
 #include "pixmaps.h"
 #include "qtrec.h"
@@ -63,35 +63,6 @@ static int deviceSampleRates[6] = { 11025, 16000, 22050, 32000, 44100, -1 };
 static int deviceBitRates[] = { 8, 16, -1 };
 #endif
 
-#if defined(QT_QWS_SL5XXX)
-///#if defined(QT_QWS_EBX)
-
-#define DSPSTROUT "/dev/dsp"
-#define DSPSTRMIXEROUT "/dev/mixer"
-
-#ifdef SHARP
-#define DSPSTRIN "/dev/dsp1"
-#define DSPSTRMIXERIN "/dev/mixer1"
-#else
-#define DSPSTRIN "/dev/dsp"
-#define DSPSTRMIXERIN "/dev/mixer"
-#endif
-
-#else
-
-#ifdef QT_QWS_DEVFS
-#define DSPSTROUT "/dev/sound/dsp"
-#define DSPSTRIN "/dev/sound/dsp"
-#define DSPSTRMIXERIN "/dev/sound/mixer"
-#define DSPSTRMIXEROUT "/dev/sound/mixer"
-#else
-#define DSPSTROUT "/dev/dsp"
-#define DSPSTRIN "/dev/dsp"
-#define DSPSTRMIXERIN "/dev/mixer"
-#define DSPSTRMIXEROUT "/dev/mixer"
-#endif
-
-#endif
 
 //#define ZAURUS 0
 struct adpcm_state encoder_state;
@@ -193,8 +164,8 @@ void quickRec()
 								filePara.numberSamples = total;
 								timeSlider->setValue( total);
 
-         printf("%d, bytes %d,total %d\r",number, bytesWritten, total);
-         fflush(stdout);
+          printf("%d, bytes %d,total %d\r", number, bytesWritten, total);
+          fflush(stdout);
 
 				 filePara.numberOfRecordedSeconds = (float)total / (float)filePara.sampleRate * (float)2	/ filePara.channels;
 
@@ -243,8 +214,8 @@ void quickRec()
 
 								if( filePara.SecondsToRecord != 0)
 										timeSlider->setValue( total);
-         printf("%d, bytes %d,total %d\r",number,  bytesWritten , total);
-         fflush(stdout);
+          printf("%d, bytes %d,total %d\r",number,  bytesWritten , total);
+          fflush(stdout);
 
 								filePara.numberOfRecordedSeconds = (float)total / (float)filePara.sampleRate
 										/ (float)2/filePara.channels;
@@ -296,6 +267,7 @@ void quickRec()
 						}
 				} //end main loop
 		}
+		printf("\n");
 } /// END quickRec()
 
 
@@ -450,14 +422,7 @@ QtRec::QtRec( QWidget* parent,  const char* name, WFlags fl )
 		hwcfg.setGroup("Hardware");
 
 
-		soundDevice = new Device( this,
-															hwcfg.readEntry( "Audio",DSPSTROUT),
-															hwcfg.readEntry( "Mixer",DSPSTRMIXEROUT), false);
-//      soundDevice = new Device( this, hwcfg.readEntry( "Audio","hw:0"), hwcfg.readEntry( "Mixer","hw:0"), false);
-
-//     soundDevice->setDeviceFormat(AFMT_S16_LE);
-//     soundDevice->setDeviceChannels(1);
-//     soundDevice->setDeviceRate( 22050);
+		soundDevice = new Device( this, false); //open play
 
 		getInVol();
 		getOutVol();
@@ -504,7 +469,7 @@ void QtRec::init() {
 		QPixmap image6( ( const char** ) image6_data );
 
 		stopped = true;
-		setCaption( tr( "OpieRecord " ) + QString::number(VERSION) );
+		setCaption( tr( "OpieRecord " ));
 		QGridLayout *layout = new QGridLayout( this );
 		layout->setSpacing( 2);
 		layout->setMargin( 2);
@@ -576,21 +541,10 @@ void QtRec::init() {
 		layout1->addMultiCellWidget( ListView1, 2, 2, 0, 8);
 
 		ListView1->addColumn( tr( "Name" ) );
-//		ListView1->setColumnWidth( 0, 140);
 		ListView1->setSorting( 1, false);
 		ListView1->addColumn( tr( "Time" ) ); //in seconds
-//		ListView1->setColumnWidth( 1, -1);
-// 		ListView1->addColumn( tr("Location") );
-// 		ListView1->setColumnWidth( 2, -1);
-// 		ListView1->addColumn( tr("Date") );
-// 		ListView1->setColumnWidth( 3, -1);
 		ListView1->setColumnWidthMode(0, QListView::Maximum);
-//		ListView1->setColumnWidthMode(1, QListView::Maximum);
-
-// 		ListView1->setColumnWidthMode( 0, QListView::Manual);
  		ListView1->setColumnAlignment( 1, QListView::AlignCenter);
-// 		ListView1->setColumnAlignment( 2, QListView::AlignRight);
-// 		ListView1->setColumnAlignment( 3, QListView::AlignLeft);
 		ListView1->setAllColumnsShowFocus( true );
 		QPEApplication::setStylusOperation( ListView1->viewport(), QPEApplication::RightOnHold);
 
@@ -608,7 +562,6 @@ void QtRec::init() {
 
 		sampleRateComboBox = new QComboBox( false, sampleGroup, "SampleRateComboBox" );
 		sampleRateComboBox->setGeometry( QRect( 10, 20, 80, 25 ) );
-//#ifndef QT_QWS_EBX
 		QString s;
 		int z = 0;
 		while( deviceSampleRates[z] != -1) {
@@ -717,9 +670,7 @@ void QtRec::init() {
 
 		TabWidget->insertTab( tab_5, tr( "Volume" ) );
 
-
 		waveform = new Waveform( this, "waveform" );
-//   waveform->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)5, (QSizePolicy::SizeType)3, waveform->sizePolicy().hasHeightForWidth() ) );
 		waveform->setMinimumSize( QSize( 0, 50 ) );
 
 		layout->addMultiCellWidget( waveform, 8, 8, 0, 8);
@@ -727,7 +678,6 @@ void QtRec::init() {
 }
 
 void QtRec::initIconView() {
-		owarn << "initIconView" << oendl;
 		ListView1->clear();
 		Config cfg("OpieRec");
 		cfg.setGroup("Sounds");
@@ -735,7 +685,7 @@ void QtRec::initIconView() {
 		QPixmap image0( ( const char** ) image0_data );
 
 		int nFiles = cfg.readNumEntry("NumberofFiles",0);
-    owarn << "init number of files " << nFiles << "" << oendl;
+//    owarn << "init number of files " << nFiles << "" << oendl;
 
 		for(int i = 1; i <= nFiles; i++) {
 
@@ -752,7 +702,7 @@ void QtRec::initIconView() {
 				fileS = cfg.readEntry( filePath, "0" );// file length in seconds
 				mediaLocation = getStorage( filePath);
 				if( info.exists()) {
-						owarn << "new item " << temp << oendl;
+//						owarn << "new item " << temp << oendl;
 						item = new QListViewItem( ListView1, temp,  fileS /*,  mediaLocation, fileDate*/);
 						item->setPixmap( 0, image0);
 						if( currentFileName == filePath)
@@ -856,7 +806,7 @@ void QtRec::initConfig() {
 }
 
 void QtRec::stop() {
-		owarn << "STOP" << oendl;
+//		owarn << "STOP" << oendl;
 		setRecordButton(false);
 
 		if( !recording)
@@ -1061,10 +1011,6 @@ bool QtRec::setupAudio( bool b) {
 
 				stereo = filePara.channels;
 				flags = O_WRONLY;
-				Config hwcfg("OpieRec");
-				hwcfg.setGroup("Hardware");
-				dspString = hwcfg.readEntry( "Audio", DSPSTROUT);
-				mixerString = hwcfg.readEntry( "Mixer", DSPSTRMIXEROUT);
 				recording = false;
 		} else { // we want to record
 
@@ -1098,19 +1044,15 @@ bool QtRec::setupAudio( bool b) {
 //        filePara.sampleRate = sampleRateComboBox->currentText().toInt( &ok,10);//44100;
 				flags= O_RDWR;
 //        flags= O_RDONLY;
-				Config hwcfg("OpieRec");
-				hwcfg.setGroup("Hardware");
-				dspString = hwcfg.readEntry( "Audio", DSPSTRIN);
-				mixerString = hwcfg.readEntry( "Mixer", DSPSTRMIXERIN);
 				recording = true;
 		}
 
 			// if(soundDevice) delete soundDevice;
 		odebug << "<<<<<<<<<<<<<<<<<<<open dsp " << filePara.sampleRate << " " << filePara.channels << " " << sampleformat << "" << oendl;
-		owarn << "change waveform settings" << oendl;
+//		owarn << "change waveform settings" << oendl;
 		waveform->changeSettings( filePara.sampleRate, filePara.channels );
 
-		soundDevice = new Device( this, dspString, mixerString, b);
+		soundDevice = new Device( this, b); //open rec
 //    soundDevice->openDsp();
 		soundDevice->reset();
 
@@ -1281,13 +1223,13 @@ void QtRec::deleteSound() {
 		cfg.setGroup("Sounds");
 		if( ListView1->currentItem() == NULL)
 				return;
-#ifndef DEV_VERSION
-		switch ( QMessageBox::warning(this,tr("Delete"),
-																	tr("Do you really want to <font size=+2><B>DELETE</B></font>\nthe selected file?"),
-																	tr("Yes"),tr("No"),0,1,1) ) {
-			case 0:
-#endif
-			{
+// #ifndef DEV_VERSION
+// 		switch ( QMessageBox::warning(this,tr("Delete"),
+// 																	tr("Do you really want to <font size=+2><B>DELETE</B></font>\nthe selected file?"),
+// 																	tr("Yes"),tr("No"),0,1,1) ) {
+// 			case 0:
+// #endif
+			//		{
 					QString file = ListView1->currentItem()->text(0);
 					QString fileName;
 					fileName = cfg.readEntry( file, "");
@@ -1320,12 +1262,7 @@ void QtRec::deleteSound() {
 					ListView1->setSelected( ListView1->firstChild(), true);
 					initIconView();
 					update();
-			}
-#ifndef DEV_VERSION
-		};
-#endif
-		setCaption( tr( "OpieRecord " ) + QString::number(VERSION) );
-
+		setCaption( tr( "OpieRecord " ));
 }
 
 void QtRec::keyPressEvent( QKeyEvent *e) {
@@ -1443,6 +1380,7 @@ void  QtRec::keyReleaseEvent( QKeyEvent *e) {
 }
 
 void QtRec::endRecording() {
+		
 		monitoring = false;
 		recording = false;
 		stopped = true;
@@ -1503,6 +1441,8 @@ void QtRec::endRecording() {
 		timeSlider->setValue(0);
 		initIconView();
 		selectItemByName( currentFile);
+		setCaption( tr( "OpieRecord " ));
+		
 }
 
 void QtRec::endPlaying() {
@@ -1535,7 +1475,7 @@ void QtRec::endPlaying() {
 
     odebug << "track closed" << oendl;
 		killTimers();
-		owarn << "reset slider" << oendl;
+//		owarn << "reset slider" << oendl;
 		timeSlider->setValue(0);
 
 //      if(soundDevice) delete soundDevice;
@@ -1568,7 +1508,7 @@ bool QtRec::openPlayFile() {
 					//  if(!track.open(IO_ReadOnly)) {
 				QString errorMsg = (QString)strerror(errno);
 				monitoring = false;
-				setCaption( tr( "OpieRecord " ) + QString::number(VERSION) );
+				setCaption( tr( "OpieRecord " ));
 				QMessageBox::message(tr("Note"), tr("Could not open audio file.\n")
 														 + errorMsg + "\n" + currentFile);
 				return false;
@@ -1585,7 +1525,7 @@ bool QtRec::openPlayFile() {
 				odebug << "file " << filePara.fd << ", samples " << filePara.numberSamples << " " << filePara.sampleRate << "" << oendl;
 				int sec = (int) (( filePara.numberSamples / filePara.sampleRate) / filePara.channels) / ( filePara.channels*( filePara.resolution/8));
 
-				owarn << "seconds " << sec << "" << oendl;
+//				owarn << "seconds " << sec << "" << oendl;
 
 				timeSlider->setRange(0, filePara.numberSamples );
 		}
@@ -1602,7 +1542,7 @@ void QtRec::listPressed( int mouse, QListViewItem *item, const QPoint &, int ) {
 							cancelRename();
 
 					currentFile = item->text(0);
-					setCaption( "OpieRecord  " + currentFile);
+//					setCaption( "OpieRecord  " + currentFile);
 			}
 					break;
 			case 2:
@@ -1852,11 +1792,6 @@ void QtRec::timerEvent( QTimerEvent * ) {
 
 		odebug << "" << secCount << "" << oendl;
 		QString  timeString;
-#ifdef DEV_VERSION
-		QString msg;
-		msg.sprintf("%d, %d, %d", filePara.sampleRate, filePara.channels, filePara.resolution);
-		setCaption( msg +" ::  "+QString::number(secCount));
-#endif
 
 		timeString.sprintf("%d", secCount);
 //		timeLabel->setText( timeString + " seconds");

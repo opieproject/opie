@@ -44,7 +44,7 @@ void Waveform::changeSettings( int frequency, int channels )
    makePixmap();
 //   owarn << "change waveform " << frequency << ", " << channels << "" << oendl; 
    samplesPerPixel = frequency * channels / (5 * windowSize);
-   owarn << "Waveform::changeSettings " << samplesPerPixel << "" << oendl; 
+//   owarn << "Waveform::changeSettings " << samplesPerPixel << "" << oendl; 
    if ( !samplesPerPixel )
       samplesPerPixel = 1;
    currentValue = 0;
