@@ -1,4 +1,0 @@
-  config CHESS
-    boolean "chess"
-    default "n"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -2,7 +2,7 @@ CONFIG_APPSKEY	noncore/settings/appskey	appskey.pro
 CONFIG_BINARY	noncore/tools/calc2/binary	binary.pro
 CONFIG_CALC2	noncore/tools/calc2	calc2.pro
 CONFIG_CALIBRATE	core/apps/calibrate	calibrate.pro
-CONFIG_CHESS	noncore/games/chess	chess.pro
+CONFIG_CHESS	noncore/unsupported/chess	chess.pro
 CONFIG_CONVERTER	noncore/unsupported/opiemail/converter	converter.pro
 CONFIG_DIALUP	noncore/unsupported/netsetup/dialup	dialup.pro
 CONFIG_DICTIONARY	noncore/apps/dictionary	dictionary.pro
