@@ -49,22 +49,6 @@
 
 class QPixmap;
 
-namespace {
-
-enum AudioButtons {
-    AudioPlay=0,
-    AudioStop,
-    AudioNext,
-    AudioPrevious,
-    AudioVolumeUp,
-    AudioVolumeDown,
-    AudioLoop,
-    AudioPlayList,
-    AudioForward,
-    AudioBack
-};
-};
-
 class AudioWidget : public MediaWidget {
     Q_OBJECT
 public:
@@ -75,24 +59,20 @@ public slots:
     void updateSlider( long, long );
     void sliderPressed( );
     void sliderReleased( );
-    void setLooping( bool b) { setToggleButton( AudioLoop, b ); }
+    void setLooping( bool b) { setToggleButton( Loop, b ); }
     void setPosition( long );
     void setSeekable( bool );
 
 public:
     virtual void setLength( long );
-    virtual void setPlaying( bool b) { setToggleButton( AudioPlay, b ); }
+    virtual void setPlaying( bool b) { setToggleButton( Play, b ); }
     virtual void setDisplayType( MediaPlayerState::DisplayType displayType );
 
 signals:
     void moreClicked();
     void lessClicked();
-    void moreReleased();
-    void lessReleased();
     void forwardClicked();
     void backClicked();
-    void forwardReleased();
-    void backReleased();
     void sliderMoved(long);
 
 protected:

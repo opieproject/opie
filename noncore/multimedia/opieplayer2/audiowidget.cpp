@@ -50,8 +50,6 @@
 #include "mediaplayerstate.h"
 #include "playlistwidget.h"
 
-extern PlayListWidget *playList;
-
 static const int xo = -2; // movable x offset
 static const int yo = 22; // movable y offset
 
@@ -393,16 +391,16 @@ void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
                 audioButtons[i].isHeld = TRUE;
                 toggleButton(i);
                 switch (i) {
-                case AudioVolumeUp:
+                case VolumeUp:
                     emit moreClicked();
                     return;
-                case AudioVolumeDown:
+                case VolumeDown:
                     emit lessClicked();
                     return;
-                case AudioForward:
+                case Forward:
                     emit forwardClicked();
                     return;
-                case AudioBack:
+                case Back:
                     emit backClicked();
                     return;
                 }
@@ -417,25 +415,7 @@ void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
                     setToggleButton( i, FALSE );
                 }
                 qDebug("mouseEvent %d", i);
-                switch (i) {
-                case AudioPlay:
-                    if( mediaPlayerState.isPaused() ) {
-                        mediaPlayerState.setPaused( FALSE );
-                        return;
-                    } else if( !mediaPlayerState.isPaused() ) {
-                        mediaPlayerState.setPaused( TRUE );
-                        return;
-                    }
-                case AudioStop:       mediaPlayerState.setPlaying(FALSE); return;
-		case AudioNext:       if( playList->currentTab() == PlayListWidget::CurrentPlayList ) mediaPlayerState.setNext(); return;
-		case AudioPrevious:   if( playList->currentTab() == PlayListWidget::CurrentPlayList ) mediaPlayerState.setPrev(); return;
-                case AudioLoop:       mediaPlayerState.setLooping(audioButtons[i].isDown); return;
-                case AudioVolumeUp:   emit moreReleased(); return;
-                case AudioVolumeDown: emit lessReleased(); return;
-                case AudioPlayList:   mediaPlayerState.setList();  return;
-                case AudioForward:    emit forwardReleased(); return;
-                case AudioBack:       emit backReleased(); return;
-                }
+                handleCommand( static_cast<Command>( i ), audioButtons[ i ].isDown );
             }
         }
     }

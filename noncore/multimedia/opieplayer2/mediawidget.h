@@ -28,6 +28,8 @@ class MediaWidget : public QWidget
 {
     Q_OBJECT
 public:
+    enum Command { Play = 0, Stop, Next, Previous, VolumeUp, VolumeDown, Loop, PlayList, Forward, Back };
+
     MediaWidget( MediaPlayerState &_mediaPlayerState, QWidget *parent = 0, const char *name = 0 );
     virtual ~MediaWidget();
 
@@ -36,7 +38,15 @@ public slots:
     virtual void setLength( long length ) = 0;
     virtual void setPlaying( bool playing ) = 0;
 
+signals:
+    void moreReleased();
+    void lessReleased();
+    void forwardReleased();
+    void backReleased();
+
 protected:
+    void handleCommand( Command command, bool buttonDown );
+
     MediaPlayerState &mediaPlayerState;
 };
 

@@ -19,8 +19,9 @@
 
 
 #include "mediawidget.h"
+#include "playlistwidget.h"
 
-extern MediaPlayerState *mediaPlayerState;
+extern PlayListWidget *playList;
 
 MediaWidget::MediaWidget( MediaPlayerState &_mediaPlayerState, QWidget *parent, const char *name )
     : QWidget( parent, name ), mediaPlayerState( _mediaPlayerState )
@@ -35,6 +36,22 @@ MediaWidget::MediaWidget( MediaPlayerState &_mediaPlayerState, QWidget *parent, 
 
 MediaWidget::~MediaWidget()
 {
+}
+
+void MediaWidget::handleCommand( Command command, bool buttonDown )
+{
+    switch ( command ) {
+        case Play:       mediaPlayerState.togglePaused();
+        case Stop:       mediaPlayerState.setPlaying(FALSE); return;
+        case Next:       if( playList->currentTab() == PlayListWidget::CurrentPlayList ) mediaPlayerState.setNext(); return;
+        case Previous:   if( playList->currentTab() == PlayListWidget::CurrentPlayList ) mediaPlayerState.setPrev(); return;
+        case Loop:       mediaPlayerState.setLooping( buttonDown ); return;
+        case VolumeUp:   emit moreReleased(); return;
+        case VolumeDown: emit lessReleased(); return;
+        case PlayList:   mediaPlayerState.setList();  return;
+        case Forward:    emit forwardReleased(); return;
+        case Back:       emit backReleased(); return;
+    }
 }
 
 /* vim: et sw=4 ts=4
