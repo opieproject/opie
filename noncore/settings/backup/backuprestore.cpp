@@ -1,4 +1,10 @@
+
 #include "backuprestore.h"
+#include "output.h"
+
+#include <qapplication.h>
+#include <qmultilineedit.h>
+
 #include <qdir.h>
 #include <qfile.h>
 #include <qfileinfo.h>
@@ -12,6 +18,12 @@
 #include <qlist.h>
 #include <stdlib.h>
 #include <qregexp.h>
+
+#include <errno.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/stat.h>
+#include <dirent.h>
 
 #define HEADER_NAME 0
 #define HEADER_BACKUP 1
@@ -165,6 +177,7 @@ void BackupAndRestore::backupPressed(){
     return;   
   }
 
+  setCaption(tr("Backup and Restore... working..."));
   QString outputFile = backupLocations[storeToLocation->currentText()];
 
   QDateTime time = QDateTime::currentDateTime();
@@ -177,16 +190,26 @@ void BackupAndRestore::backupPressed(){
     outputFile = t + QString("%1").arg(c);
     c++;
   }
+
+  qDebug(QString("system(\"tar -c %1 | gzip > %2\")").arg(backupFiles).arg(outputFile).latin1());
   outputFile += EXTENSION;
-  qDebug("system(\"tar -c %1 | gzip > %2\").arg(backupFiles).arg(outputFile).latin1())");
-  int r = system(QString("tar -c %1 | gzip > %2").arg(backupFiles).arg(outputFile).latin1() );
-  if(r != 0){
-    QMessageBox::critical(this, "Message", "Backup Failed.",QString("Ok") );
-    return;   
-  }
-  else{
-    QMessageBox::critical(this, "Message", "Backup Successfull.",QString("Ok") );
-  }
+
+   int r = system( QString("tar -c %1 | gzip > %2").arg(backupFiles).arg(outputFile).latin1() );
+
+
+
+   if(r != 0){
+    perror("Error: ");
+    QString errorMsg="Error\n"+(QString)strerror(errno);
+
+     QMessageBox::critical(this, "Message", "Backup Failed.\n"+errorMsg, QString("Ok") );
+     return;   
+   }
+   else{
+     QMessageBox::critical(this, "Message", "Backup Successfull.",QString("Ok") );
+     
+   }
+   setCaption(tr("Backup and Restore"));
 }
 
 /***
