@@ -65,7 +65,6 @@ CONFIG_KCHECKERS	noncore/games/kcheckers	kcheckers.pro
 CONFIG_KEYBOARD	inputmethods/keyboard	keyboard.pro
 CONFIG_KEYPEBBLE	noncore/comm/keypebble	keypebble.pro
 CONFIG_KEYVIEW	development/keyview	keyview.pro
-CONFIG_KEYZCFG  noncore/apps/keyz-cfg  keyz-cfg.pro
 CONFIG_KJUMPX	inputmethods/kjumpx	kjumpx.pro
 CONFIG_KPACMAN	noncore/games/kpacman	kpacman.pro
 CONFIG_LANGUAGE	noncore/settings/language	language.pro
