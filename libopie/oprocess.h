@@ -24,7 +24,7 @@
 //
 //  (C) Christian Czezatke
 //  e9025461@student.tuwien.ac.at
-//  Ported by Holger Freyther
+//  Ported by Holger Freyther to the Open Palmtop Integrated Environment
 //
 
 #ifndef __kprocess_h__
@@ -748,7 +748,7 @@ class KShellProcessPrivate;
 *   @short A class derived from @ref OProcess to start child
 *   	processes through a shell.
 *   @author Christian Czezakte <e9025461@student.tuwien.ac.at>
-*   @version $Id: oprocess.h,v 1.1 2002-06-10 09:20:39 tille Exp $
+*   @version $Id: oprocess.h,v 1.2 2002-06-16 16:34:10 zecke Exp $
 */
 class KShellProcess: public OProcess
 {

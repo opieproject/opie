@@ -21,6 +21,7 @@ ToDoEvent::ToDoEvent(bool completed, int priority,
                      const QStringList &category,
                      const QString& summary,
                      const QString &description,
+                     ushort progress,
                      bool hasDate, QDate date, int uid )
 {
     m_date = date;
@@ -29,6 +30,7 @@ ToDoEvent::ToDoEvent(bool completed, int priority,
     m_priority = priority;
     m_category = category;
     m_sum = summary;
+    m_prog = progress;
     m_desc = Qtopia::simplifyMultiLineSpace(description );
     if (uid == -1 ) {
 	Qtopia::UidGen *uidgen = new Qtopia::UidGen();
@@ -77,6 +79,10 @@ QString ToDoEvent::extra(const QString& )const
 QString ToDoEvent::summary() const
 {
     return m_sum;
+}
+ushort ToDoEvent::progress() const
+{
+    return m_prog;
 }
 void ToDoEvent::insertCategory(const QString &str )
 {
@@ -139,7 +145,10 @@ bool ToDoEvent::isOverdue( )
 	return QDate::currentDate() > m_date;
     return false;
 }
-
+void ToDoEvent::setProgress(ushort progress )
+{
+    m_prog = progress;
+}
 /*!
   Returns a richt text string
 */
@@ -153,10 +162,12 @@ QString ToDoEvent::richText() const
     text += "<b>" + QObject::tr( "Summary:") + "</b><br>";
     text += Qtopia::escapeString(summary() ).replace(QRegExp( "[\n]"),  "<br>" ) + "<br>";
     text += "<b>" + QObject::tr( "Description:" ) + "</b><br>";
-    text += Qtopia::escapeString(description() ).replace(QRegExp( "[\n]"), "<br>" ) + "<br>";
+    text += Qtopia::escapeString(description() ).replace(QRegExp( "[\n]"), "<br>" ) + "<br><br><br>";
   }
   text += "<b>" + QObject::tr( "Priority:") +" </b>"
-    +  QString::number( priority() ) + "<br>";
+    +  QString::number( priority() ) + " <br>";
+  text += "<b>" + QObject::tr( "Progress:") + " </b>"
+          + QString::number( progress() ) + " %<br>";
   if (hasDate() ){
     text += "<b>" + QObject::tr( "Deadline:") + " </b>";
     text += date().toString();
@@ -186,7 +197,7 @@ QString ToDoEvent::richText() const
 
 bool ToDoEvent::operator<( const ToDoEvent &toDoEvent )const{
     if( !hasDate() && !toDoEvent.hasDate() ) return true;
-    if( !hasDate() && toDoEvent.hasDate() ) return true;
+    if( !hasDate() && toDoEvent.hasDate() ) return false;
     if( hasDate() && toDoEvent.hasDate() ){
 	if( date() == toDoEvent.date() ){ // let's the priority decide
 	    return priority() < toDoEvent.priority();
@@ -238,6 +249,7 @@ bool ToDoEvent::operator>=(const ToDoEvent &toDoEvent )const
 bool ToDoEvent::operator==(const ToDoEvent &toDoEvent )const
 {
     if( m_priority == toDoEvent.m_priority &&
+        m_priority == toDoEvent.m_prog &&
         m_isCompleted == toDoEvent.m_isCompleted &&
         m_hasDate == toDoEvent.m_hasDate &&
         m_date == toDoEvent.m_date &&
@@ -257,6 +269,7 @@ ToDoEvent &ToDoEvent::operator=(const ToDoEvent &item )
     m_desc = item.m_desc;
     m_uid = item.m_uid;
     m_sum = item.m_sum;
+    m_prog = item.m_prog;
     return *this;
 }
 

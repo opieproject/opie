@@ -24,6 +24,7 @@ public:
 	map.insert( "Completed", QString::number((int)(*it).isCompleted() ) );
 	map.insert( "HasDate", QString::number((int)(*it).hasDate() ) );
 	map.insert( "Priority", QString::number( (*it).priority() ) );
+        map.insert( "Progress", QString::number( (*it).progress() ) );
         map.insert( "Summary", (*it).summary() );
 	QArray<int> arrat = (*it).categories();
 	QString attr;
@@ -82,6 +83,13 @@ public:
 	dummy = element->attribute("Completed" );
 	dumInt = dummy.toInt(&ok );
 	if(ok ) event.setCompleted( dumInt == 0 ? false : true );
+        // progress
+        dummy = element->attribute("Progress" );
+        {
+            ushort dumShort = dummy.toUShort(&ok);
+            event.setProgress( dumShort );
+
+        }
 	// hasDate
 	dummy = element->attribute("HasDate" );
 	dumInt = dummy.toInt(&ok );

@@ -26,6 +26,7 @@ class ToDoEvent {
 	       const QStringList &category = QStringList(),
 	       const QString &summary = QString::null ,
                const QString &description = QString::null,
+               ushort progress = 0,
 	       bool hasDate = false, QDate date = QDate::currentDate(), int uid = -1 );
     /* Copy c'tor
 
@@ -47,6 +48,10 @@ class ToDoEvent {
     **/
     int priority()const ;
 
+    /**
+     * progress as ushort 0, 20, 40, 60, 80 or 100%
+     */
+    ushort progress() const;
     /*
       All category numbers as QString in a List
     **/
@@ -115,6 +120,11 @@ class ToDoEvent {
     void setPriority(int priority );
 
     /**
+     * Set the progress.
+     */
+    void setProgress( ushort progress );
+
+    /**
      * set the end date
      */
     void setDate( QDate date );
@@ -145,6 +155,7 @@ class ToDoEvent {
     QString m_sum;
     QMap<QString, QString> m_extra;
     int m_uid;
+    ushort m_prog;
 };
 
 
