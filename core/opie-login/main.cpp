@@ -323,14 +323,14 @@ int login_main ( int argc, char **argv, pid_t ppid )
 
 	ODevice::inst ( )-> setSoftSuspend ( true );
 
-#if defined(QT_QWS_CASSIOPEIA) || defined(QT_QWS_IPAQ) || defined(QT_QWS_SL5XXX)
-	if ( !QFile::exists ( "/etc/pointercal" )) {
-		// Make sure calibration widget starts on top.
-		Calibrate *cal = new Calibrate;
-		cal-> exec ( );
-		delete cal;
+	if ( QWSServer::mouseHandler() ->inherits("QCalibratedMouseHandler") ) {
+		if ( !QFile::exists ( "/etc/pointercal" )) {
+			// Make sure calibration widget starts on top.
+			Calibrate *cal = new Calibrate;
+			cal-> exec ( );
+			delete cal;
+		}
 	}
-#endif
 
 	LoginScreenSaver *saver = new LoginScreenSaver;
 

@@ -102,14 +102,14 @@ int initApplication( int argc, char ** argv )
     (void)new SysFileMonitor(d);
     Network::createServer(d);
 
-#if defined(QT_QWS_CASSIOPEIA) || defined(QT_QWS_IPAQ) || defined(QT_QWS_SL5XXX)
-    if ( !QFile::exists( "/etc/pointercal" ) ) {
-	// Make sure calibration widget starts on top.
-	Calibrate *cal = new Calibrate;
-	cal->exec();
-	delete cal;
+    if ( QWSServer::mouseHandler() ->inherits("QCalibratedMouseHandler") ) {
+	if ( !QFile::exists( "/etc/pointercal" ) ) {
+	    // Make sure calibration widget starts on top.
+	    Calibrate *cal = new Calibrate;
+	    cal->exec();
+	    delete cal;
+	}
     }
-#endif
 
     d->show();
 
