@@ -16,15 +16,16 @@
 #include "openetext.h"
 #include "editTitle.h"
 
-#include <qfileinfo.h>
+/* OPIE */
+#include <opie2/ofiledialog.h>
 #include <qpe/applnk.h>
+#include <qpe/config.h>
 #include <qpe/qpeapplication.h>
+using namespace Opie::Ui;
 
 #include <stdlib.h>
 #include <qtextstream.h>
-#include <qpe/config.h>
-
-#include <opie/ofiledialog.h>
+#include <qfileinfo.h>
 
 #if defined(_WS_WIN_)
 #include <windows.h>
@@ -149,13 +150,13 @@ OpenFileButton->setDown(TRUE);
 //          }
 
         if( filer.right(4) == ".txt"
-						|| filer.right(4) == ".TXT"
-						|| filer.right(4) == ".etx"
-						|| filer.right(4) == ".ETX"
-						|| filer.right(4) == ".etx"
-						|| filer.right(4) == ".ETX"
-						|| filer.right(4) == ".zip"
-						|| filer.right(4) == ".ZIP" ) {
+                        || filer.right(4) == ".TXT"
+                        || filer.right(4) == ".etx"
+                        || filer.right(4) == ".ETX"
+                        || filer.right(4) == ".etx"
+                        || filer.right(4) == ".ETX"
+                        || filer.right(4) == ".zip"
+                        || filer.right(4) == ".ZIP" ) {
             QFileInfo zipFile( filer);
             QString s_fileName = zipFile.fileName();
             QString cmd;
@@ -178,10 +179,10 @@ OpenFileButton->setDown(TRUE);
 //  qDebug("Filename is now "+fileName);
             }
         } else
-						fileName = str;
-				
+                        fileName = str;
+
         FindTitle(fileName);
-				
+
         QFileInfo fi( fileName);
         name_file = fi.fileName();
         name_file = name_file.left(name_file.length() - 4);
@@ -224,7 +225,7 @@ bool OpenEtext::FindTitle( QString filename)
         //        int Titlenumber=0;
 
     if ( indexLib.open( IO_ReadOnly) ) {
-				qDebug("file opened successfully");
+                qDebug("file opened successfully");
         QTextStream indexStream( &indexLib );
         QString target = "Project Gutenberg Etext of";
         QString target2 = "Project Gutenberg Etext";
@@ -264,8 +265,8 @@ bool OpenEtext::FindTitle( QString filename)
 //                qDebug("Found the title 4 and it is %s", title.latin1());
             }
         } //endof file
-				indexLib.close();
-				
+                indexLib.close();
+
         if( !findCheck || title.length() < 2) {
             qDebug("Trying hard to find title from GUTINDEX.ALL");
             title = titleFromLibrary( filename);

@@ -1,4 +1,6 @@
-  config OPIE-GUTENBROWSER
+  config GUTENBROWSER
     boolean "gutenbrowser - Gutenberg Project etext reader and selector"
     default "n"
-    depends ( LIBQPE || LIBQPE-X11 ) && FTPLIB
+    depends ( LIBQPE || LIBQPE-X11 ) && FTPLIB && LIBOPIE2CORE && LIBOPIE2UI
+    comment "gutenbrowser needs a libqpe, ftplib, libopie2core and libopie2ui"
+    depends !(( LIBQPE || LIBQPE-X11 ) && FTPLIB && LIBOPIE2CORE && LIBOPIE2UI)

@@ -1,6 +1,5 @@
 TEMPLATE  = app
-CONFIG    += qt warn_on release quick-app
-#CONFIG    += qt warn_on release qpp
+CONFIG    += qt warn_on quick-app
 HEADERS   = LibraryDialog.h \
           SearchDialog.h \
           SearchResults.h \
@@ -11,7 +10,7 @@ HEADERS   = LibraryDialog.h \
           fontDialog.h \
           optionsDialog.h \
           helpwindow.h \
-          output.h \    
+          output.h \
           NetworkDialog.h \
           gutenbrowser.h \
           resource.h
@@ -32,7 +31,7 @@ SOURCES   =  LibraryDialog.cpp \
           helpwindow.cpp \
           output.cpp \
           NetworkDialog.cpp \
-          gutenbrowserData.cpp \      
+          gutenbrowserData.cpp \
           gutenbrowser.cpp \
           main.cpp
 TARGET    = gutenbrowser
@@ -40,6 +39,6 @@ TARGET    = gutenbrowser
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 DESTDIR = $(OPIEDIR)/bin
-LIBS   += -lqpe -lpthread -lftplib -lopie
+LIBS   += -lqpe -lpthread -lftplib -lopiecore2 -lopieui2
 
 include ( $(OPIEDIR)/include.pro )

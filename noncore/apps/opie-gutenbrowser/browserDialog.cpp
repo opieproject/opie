@@ -8,12 +8,15 @@ copyright 2001 by L.J. Potter ljp@llornkcor.com
 #include "optionsDialog.h"
 //#include "fileBrowser.h"
 
+/* OPIE */
+#include <opie2/ofiledialog.h>
+using namespace Opie::Ui;
+
+/* QT */
 #include <qlabel.h>
 #include <qlistbox.h>
 #include <qpushbutton.h>
 #include <qlayout.h>
-
-#include <opie/ofiledialog.h>
 
 void optionsDialog::BrowserDlg( )
 {
@@ -71,7 +74,7 @@ void optionsDialog::BrowseSelected() {
 }
 
 void optionsDialog::setHttp(int index) {
-    Config config("Gutenbrowser");    
+    Config config("Gutenbrowser");
     config.setGroup( "HttpServer" );
     qDebug("writing http server");
     if( index== 0) {
