@@ -22,7 +22,7 @@
 
 
 ScreenshotAppletImpl::ScreenshotAppletImpl()
-    : screenshot(0), ref(0)
+    : screenshot(0)
 {
 }
 

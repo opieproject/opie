@@ -15,5 +15,4 @@ public:
 
 private:
     CardMonitor *cardMonitor;
-    ulong ref;
 };

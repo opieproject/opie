@@ -42,7 +42,7 @@ static char *restart_xpm[] = {
 "                "};
 
 RestartApplet::RestartApplet ( )
-  : QObject ( 0, "RestartApplet" ), ref ( 0 )
+  : QObject ( 0, "RestartApplet" )
 {
 }
 

@@ -22,7 +22,7 @@
 
 
 ClockAppletImpl::ClockAppletImpl()
-    : clock(0), ref(0)
+    : clock(0)
 {
 }
 

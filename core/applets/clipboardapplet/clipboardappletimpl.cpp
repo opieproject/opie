@@ -22,7 +22,7 @@
 
 
 ClipboardAppletImpl::ClipboardAppletImpl()
-    : clipboard(0), ref(0)
+    : clipboard(0)
 {
 }
 

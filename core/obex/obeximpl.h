@@ -13,7 +13,6 @@ namespace OpieObex {
         Q_REFCOUNT
 
     private:
-        ulong ref;
         ObexHandler *m_handler;
 
     };

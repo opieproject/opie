@@ -40,7 +40,6 @@ public:
 
 private:
     IrdaApplet *irda;
-    ulong ref;
 };
 
 #endif

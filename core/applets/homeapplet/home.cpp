@@ -9,7 +9,7 @@
 
 
 HomeApplet::HomeApplet ( )
-	: QObject ( 0, "HomeApplet" ), ref ( 0 )
+	: QObject ( 0, "HomeApplet" )
 {
 }
 

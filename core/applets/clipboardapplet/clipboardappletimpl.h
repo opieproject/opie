@@ -38,7 +38,6 @@ public:
 
 private:
     ClipboardApplet *clipboard;
-    ulong ref;
 };
 
 #endif

@@ -22,7 +22,7 @@
 
 
 RestartAppletImpl::RestartAppletImpl()
-    : restart(0), ref(0)
+    : restart(0)
 {
 }
 

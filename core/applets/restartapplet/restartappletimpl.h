@@ -38,7 +38,6 @@ public:
 
 private:
     RestartApplet *restart;
-    ulong ref;
 };
 
 #endif

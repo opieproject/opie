@@ -11,7 +11,7 @@
 *********************************************************************************************/
 
 /*
- * $Id: vmemoimpl.h,v 1.1 2002-02-14 01:39:21 llornkcor Exp $
+ * $Id: vmemoimpl.h,v 1.2 2004-02-05 16:58:07 zecke Exp $
  */
 
 #ifndef __VMEMOIMPLAPPLETIMPL_H__
@@ -35,7 +35,6 @@ public:
 
 private:
     VMemo *vmemo;
-    ulong ref;
 };
 
 #endif

@@ -12,7 +12,7 @@
 
 
 LogoutApplet::LogoutApplet ( )
-	: QObject ( 0, "LogoutApplet" ), ref ( 0 )
+	: QObject ( 0, "LogoutApplet" )
 {
 }
 

@@ -38,7 +38,6 @@ public:
 
 private:
     VolumeApplet *volume;
-    ulong ref;
 };
 
 #endif

@@ -9,7 +9,7 @@
 
 
 SuspendApplet::SuspendApplet ( )
-	: QObject ( 0, "SuspendApplet" ), ref ( 0 )
+	: QObject ( 0, "SuspendApplet" )
 {
 }
 

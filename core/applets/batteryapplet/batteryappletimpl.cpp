@@ -22,7 +22,7 @@
 
 
 BatteryAppletImpl::BatteryAppletImpl()
-    : battery(0), ref(0)
+    : battery(0)
 {
 }
 

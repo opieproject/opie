@@ -22,7 +22,7 @@
 
 
 IrdaAppletImpl::IrdaAppletImpl()
-    : irda(0), ref(0)
+    : irda(0)
 {
 }
 

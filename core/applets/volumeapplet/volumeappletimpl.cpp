@@ -23,7 +23,7 @@
 #include <qpe/config.h>
 
 VolumeAppletImpl::VolumeAppletImpl()
-    : volume(0), ref(0)
+    : volume(0)
 {
 }
 

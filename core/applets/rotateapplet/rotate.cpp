@@ -47,7 +47,7 @@ using namespace Opie;
 #include <time.h>
 
 RotateApplet::RotateApplet()
-             :QObject( 0, "RotateApplet" ), ref( 0 ), m_flipped( false )
+             :QObject( 0, "RotateApplet" ), m_flipped( false )
 {
 
 #if !defined(QT_NO_COP)

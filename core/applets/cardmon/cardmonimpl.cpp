@@ -3,7 +3,7 @@
 
 
 CardMonitorImpl::CardMonitorImpl()
-    : cardMonitor(0), ref(0) {
+    : cardMonitor(0) {
 }
 
 CardMonitorImpl::~CardMonitorImpl() {

@@ -15,7 +15,7 @@
 #include "multikeyappletimpl.h"
 
 MultikeyAppletImpl::MultikeyAppletImpl()
-    : kbd(0), ref(0)
+    : kbd(0)
 {
 }
 

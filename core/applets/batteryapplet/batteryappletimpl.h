@@ -38,7 +38,6 @@ public:
 
 private:
     BatteryMeter *battery;
-    ulong ref;
 };
 
 #endif

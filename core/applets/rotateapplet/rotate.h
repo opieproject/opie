@@ -64,8 +64,7 @@ private slots:
     void channelReceived( const QCString &msg, const QByteArray & data );
 
 private:
-    ulong ref;
-    bool m_flipped;
+    bool m_flipped : 1;
 
 };
 

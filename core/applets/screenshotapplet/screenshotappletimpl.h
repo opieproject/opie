@@ -38,7 +38,6 @@ public:
 
 private:
     ScreenshotApplet *screenshot;
-    ulong ref;
 };
 
 #endif

@@ -11,7 +11,7 @@
  *********************************************************************************************/
 
 /*
- * $Id: vmemoimpl.cpp,v 1.3 2004-01-27 18:48:11 zecke Exp $
+ * $Id: vmemoimpl.cpp,v 1.4 2004-02-05 16:58:07 zecke Exp $
  */
 
 #include "vmemo.h"
@@ -19,7 +19,7 @@
 
 
 VMemoAppletImpl::VMemoAppletImpl()
-        : vmemo(0), ref(0)
+        : vmemo(0)
 {
 }
 

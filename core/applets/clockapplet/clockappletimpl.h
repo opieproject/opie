@@ -40,7 +40,6 @@ public:
 
 private:
     LauncherClock *clock;
-    ulong ref;
 };
 
 #endif

@@ -30,8 +30,6 @@ public:
     
     virtual void activated ( );
 
-private:
-    ulong ref;
 };
 
 #endif
