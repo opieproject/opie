@@ -151,7 +151,7 @@ void TableView::setTodos( OTodoAccess::List::Iterator it,
     viewport()->setUpdatesEnabled( false );
     clear();
     QString currentCat = todoWindow()->currentCategory();
-    bool showCompleted = todoWindow()->currentCatId();
+    bool showCompleted = todoWindow()->showCompleted();
     bool showOverDue   = todoWindow()->showOverDue();
     qWarning( "Current Category:" + todoWindow()->currentCategory() );
     int id = todoWindow()->currentCatId();
@@ -168,6 +168,7 @@ void TableView::setTodos( OTodoAccess::List::Iterator it,
         }
         /* the item is completed but we shouldn't show it */
         if ( !showCompleted && todo.isCompleted() ) {
+            qWarning("isCompleted ");
             continue;
         }
         /* the item is not overdue but we should only show overdue */
