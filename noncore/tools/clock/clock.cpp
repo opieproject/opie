@@ -123,11 +123,11 @@ Clock::Clock( QWidget * parent, const char * name, WFlags f )
     grp->insert( reset );
 
     alarmOffBtn = new QPushButton ( controls );
-    alarmOffBtn->setMaximumSize(60,30);
+//    alarmOffBtn->setMaximumSize(60,30);
     gl->addWidget( alarmOffBtn, 0, 2 );
 
     alarmBtn = new QPushButton ( controls );
-    alarmBtn->setMaximumSize(60,30);
+      //  alarmBtn->setMaximumSize(60,30);
     gl->addWidget( alarmBtn, 1, 2 );
     alarmBtn->setText( tr( "Set Alarm" ) );
 
