@@ -1,4 +1,4 @@
-/* $Id: cardmode.hh,v 1.17 2003-02-12 01:03:29 max Exp $ */
+/* $Id: cardmode.hh,v 1.18 2003-02-18 09:31:47 max Exp $ */
 
 #ifndef CARDMODE_HH
 #define CARDMODE_HH
@@ -48,7 +48,8 @@ extern "C"
 /* Prototypes */
 int card_check_rfmon_datalink (const char *device);
 int card_into_monitormode (pcap_t **, const char *, int);
-int card_set_promisc_up (const char *);
+int card_set_promisc_up (const char *device);
+int card_remove_promisc (const char *device);
 int card_set_channel (const char *device, int channel,int cardtype); 
 int iw_get_range_info(int skfd, const char * ifname,  struct iw_range * range);
 double iw_freq2float(iw_freq * in);

@@ -1,7 +1,7 @@
 /* 
  * Set card modes for sniffing
  *
- * $Id: cardmode.cc,v 1.23 2003-02-16 20:05:29 max Exp $
+ * $Id: cardmode.cc,v 1.24 2003-02-18 09:31:47 max Exp $
  */
 
 #include "cardmode.hh"
@@ -199,6 +199,76 @@ int card_set_promisc_up (const char *device)
         return 0;
     }
 }
+
+/* Remove card from promisc mode */
+int card_remove_promisc (const char *device)
+{
+    int err;
+    /* First generate a socket to use with iocalls */
+    int fd = socket(AF_INET, SOCK_DGRAM, 0);
+    if (fd < 0)
+    {
+        /* In case of an error */
+        perror("socket");
+        return 0;
+    }
+
+    /* Fill an empty an interface structure with the right flags (UP and Promsic) */
+    struct ifreq ifr;
+/*    strncpy(ifr.ifr_name, device,10);
+    ifr.ifr_flags = IFF_UP + IFF_PROMISC;
+    err = ioctl(fd, SIOCSIFFLAGS, &ifr);
+    if (err < 0)
+    {
+    	perror("Could not access the interface, ");
+    	close(fd);
+        return 0;
+    }
+  */  
+    /* Get the flags from the interface*/
+    strncpy(ifr.ifr_name, device,10);
+    err = ioctl(fd, SIOCGIFFLAGS, &ifr);
+    if (err < 0)
+    {
+        perror("Could not access the interface, ");
+    	close(fd);
+        return 0;
+    }
+	/* Remove the IFF_PROMISC flag */
+    ifr.ifr_flags = ifr.ifr_flags - IFF_PROMISC;
+    /*Set the new flags to the interface*/
+    err = ioctl(fd, SIOCSIFFLAGS, &ifr);
+    if (err < 0)
+    {
+    	perror("Could not access the interface, ");
+    	close(fd);
+        return 0;
+    }
+
+	/* Get the flags again to check if IFF_PROMISC is removed */
+    err = ioctl(fd, SIOCGIFFLAGS, &ifr);
+    if (err < 0)
+    {
+        perror("Could not access the interface, ");
+    	close(fd);
+        return 0;
+    }
+    if(ifr.ifr_flags && IFF_PROMISC)
+    {
+		wl_logerr("Could not remove the promisc flag on %d", device);
+		close(fd);
+        return 0;
+    }
+    else
+    {
+	    /* Successfully removed the promisc flags */		
+    	close(fd);
+        return 1;
+    }
+}
+
+
+
 
 /* Set channel (Wireless frequency) of the device */
 int card_set_channel (const char *device, int channel, int cardtype)
