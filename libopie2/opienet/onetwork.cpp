@@ -119,7 +119,7 @@ void ONetwork::synchronize()
 }
 
 
-short ONetwork::wirelessExtensionVersion()
+short ONetwork::wirelessExtensionCompileVersion()
 {
     return WIRELESS_EXT;
 }
@@ -382,7 +382,7 @@ OChannelHopper::OChannelHopper( OWirelessNetworkInterface* iface )
                :QObject( 0, "Mickey's funky hopper" ),
                _iface( iface ), _interval( 0 ), _tid( 0 )
 {
-    int _maxChannel = iface->channels()+1;
+    int _maxChannel = iface->channels();
     // generate fancy hopping sequence honoring the device capabilities
     if ( _maxChannel >=  1 ) _channels.append(  1 );
     if ( _maxChannel >=  7 ) _channels.append(  7 );
@@ -399,7 +399,6 @@ OChannelHopper::OChannelHopper( OWirelessNetworkInterface* iface )
     if ( _maxChannel >=  6 ) _channels.append(  6 );
     if ( _maxChannel >= 12 ) _channels.append( 12 );
     _channel = _channels.begin();
-
 }
 
 
@@ -561,6 +560,7 @@ void OWirelessNetworkInterface::buildInformation()
         for ( int i = 0; i < range.num_frequency; ++i )
         {
             int freq = (int) ( double( range.freq[i].m ) * pow( 10.0, range.freq[i].e ) / 1000000.0 );
+            odebug << "OWirelessNetworkInterface::buildInformation: Adding frequency " << freq << " as channel " << i+1 << oendl;
             _channels.insert( freq, i+1 );
         }
     }
@@ -568,6 +568,12 @@ void OWirelessNetworkInterface::buildInformation()
     memcpy( &_range, buffer, sizeof( struct iw_range ) );
     odebug << "OWirelessNetworkInterface::buildInformation(): Information block constructed." << oendl;
     free(buffer);
+}
+
+
+short OWirelessNetworkInterface::wirelessExtensionDriverVersion() const
+{
+    return _range.we_version_compiled;
 }
 
 

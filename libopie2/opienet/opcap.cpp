@@ -58,9 +58,9 @@ OPacket::OPacket( int datalink, packetheaderstruct header, const unsigned char* 
         :QObject( parent, "Generic" ), _hdr( header ), _data( 0 )
 {
 
-    _data = new unsigned char[sizeof data];
+    _data = new unsigned char[ header.len ];
     assert( _data );
-    memcpy( const_cast<unsigned char*>(_data), data, sizeof data );
+    memcpy( const_cast<unsigned char*>(_data), data, header.len );
     // We have to copy the data structure here, because the 'data' pointer handed by libpcap
     // points to an internal region which is reused by lipcap.
     odebug << "OPacket: Length = " << header.len << ", Caplen = " << header.caplen << oendl;

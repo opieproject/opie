@@ -125,7 +125,7 @@ class ONetwork : public QObject
     /**
      * @returns the wireless extension version used at compile time.
      **/
-    static short wirelessExtensionVersion();
+    static short wirelessExtensionCompileVersion();
 
   protected:
     ONetwork();
@@ -451,8 +451,12 @@ class OWirelessNetworkInterface : public ONetworkInterface
      * In other modes the result is driver dependent.
      */
     virtual int signalStrength() const;
-    /** @internal commit pending changes to the driver
-     *
+    /**
+     * @returns the wireless extension version used by the interface driver.
+     **/
+    short wirelessExtensionDriverVersion() const;
+    /**
+     * @internal commit pending changes to the driver
      */
     void commit() const;
 
