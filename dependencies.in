@@ -35,7 +35,7 @@
     depends LIBSQLITE_DEP
 
   config LIBXINE_DEP
-    boolean "Have libxine 1.0 beta11"
+    boolean "Have libxine >= 1.0rc6"
     default "n"
 
   config LIBXINE_LIB_DIR
