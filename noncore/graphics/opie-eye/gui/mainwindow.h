@@ -44,6 +44,7 @@ public slots:
     void slotScaleToggled(bool);
     void slotZoomerToggled(bool);
     void setDocument( const QString& );
+    virtual void slotToggleFullScreen();
 
 protected:
     void raiseIconView();

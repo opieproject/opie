@@ -13,6 +13,7 @@ ImageView::ImageView(Opie::Core::OConfig *cfg, QWidget* parent, const char* name
 {
     m_viewManager = 0;
     m_cfg = cfg;
+    m_isFullScreen = false;
     initKeys();
 }
 
@@ -45,19 +46,14 @@ void ImageView::initKeys()
     lst.append( Opie::Core::OKeyPair::rightArrowKey() );
     lst.append( Opie::Core::OKeyPair(Qt::Key_N,0));
     lst.append( Opie::Core::OKeyPair(Qt::Key_P,0));
+    lst.append( Opie::Core::OKeyPair(Qt::Key_F,0));
 
     m_viewManager = new Opie::Core::OKeyConfigManager(m_cfg, "image_view_keys",
                                                     lst, false,this, "image_view_keys" );
     m_viewManager->addKeyConfig( Opie::Core::OKeyConfigItem(tr("View Image Info"), "imageviewinfo",
                                                 Resource::loadPixmap("1to1"), ViewInfo,
-                                                Opie::Core::OKeyPair(Qt::Key_I,Qt::ShiftButton),
+                                                Opie::Core::OKeyPair(Qt::Key_I,0),
                                                 this, SLOT(slotShowImageInfo())));
-#if 0
-   m_viewManager->addKeyConfig( Opie::Core::OKeyConfigItem(tr("Next image"), "nextimage",
-                                                Resource::loadPixmap("next"), ViewInfo,
-                                                Opie::Core::OKeyPair(Qt::Key_N,0),
-                                                this, SLOT(slotDispNext())));
-#endif
     m_viewManager->handleWidget( this );
     m_viewManager->load();
 }
@@ -69,6 +65,7 @@ void ImageView::keyReleaseEvent(QKeyEvent * e)
     }
     if (e->key()==Qt::Key_N) slotDispNext();
     if (e->key()==Qt::Key_P) slotDispPrev();
+    if (e->key()==Qt::Key_F) emit toggleFullScreen();
 }
 
 void ImageView::slotDispNext()

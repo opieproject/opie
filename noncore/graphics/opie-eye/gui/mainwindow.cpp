@@ -279,9 +279,35 @@ void PMainWindow::initDisp() {
         m_disp->setAutoScale(autoScale);
         m_disp->setAutoRotate(autoRotate);
         m_disp->setShowZoomer(zoomerOn);
+        m_disp->setBackgroundColor(white);
         connect(m_disp,SIGNAL(dispImageInfo(const QString&)),this,SLOT(slotShowInfo(const QString&)));
         connect(m_disp,SIGNAL(dispNext()),m_view,SLOT(slotShowNext()));
         connect(m_disp,SIGNAL(dispPrev()),m_view,SLOT(slotShowPrev()));
+        connect(m_disp,SIGNAL(toggleFullScreen()),this,SLOT(slotToggleFullScreen()));
+    }
+}
+
+void PMainWindow::slotToggleFullScreen()
+{
+    odebug << "Toggle full " << oendl;
+    if (!m_disp) return;
+    bool current = !m_disp->fullScreen();
+    m_disp->setFullScreen(current);
+    odebug << "Current = " << current << oendl;
+    if (current) {
+        odebug << "full" << oendl;
+        m_disp->setBackgroundColor(black);
+        m_disp->reparent(0,QPoint(0,0));
+        m_disp->resize(qApp->desktop()->width(), qApp->desktop()->height());
+        m_disp->showFullScreen();
+    } else {
+        odebug << "window" << oendl;
+        m_disp->setBackgroundColor(white);
+        m_stack->addWidget(m_disp,ImageDisplay);
+        m_stack->raiseWidget(m_disp);
+        if (m_stack->mode() != Opie::Ui::OWidgetStack::SmallScreen) {
+            m_disp->resize(m_disp->minimumSize());
+        }
     }
 }
 

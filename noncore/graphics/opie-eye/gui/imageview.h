@@ -15,23 +15,29 @@ class ImageView:public Opie::MM::OImageScrollView
     Q_OBJECT
 
     enum ActionIds {
-        ViewInfo
+        ViewInfo,
+        FullScreen
     };
 
 public:
     ImageView(Opie::Core::OConfig *cfg, QWidget* parent, const char* name = 0, WFlags fl = 0 );
     virtual ~ImageView();
     Opie::Core::OKeyConfigManager* manager();
+    void setFullScreen(bool how){m_isFullScreen = how;}
+    bool fullScreen(){return m_isFullScreen;}
 
 signals:
     void dispImageInfo(const QString&);
     void dispNext();
     void dispPrev();
+    void toggleFullScreen();
 
 protected:
     Opie::Core::OConfig * m_cfg;
     Opie::Core::OKeyConfigManager*m_viewManager;
     void initKeys();
+    bool m_isFullScreen:1;
+
 protected slots:
     virtual void slotShowImageInfo();
     virtual void slotDispNext();
