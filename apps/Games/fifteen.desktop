@@ -1,6 +1,5 @@
 [Desktop Entry]
 Comment=Fifteen Pieces Strategy Game
-Comment[es]=Juego de estrategia de las 15 piezas
 Exec=fifteen
 Icon=fifteen/Fifteen
 Type=Application
@@ -8,6 +7,7 @@ Name=Fifteen Pieces
 Name[pt]=Puzzle
 Name[es]=Quince Piezas
 Name[it]=Gioco del 15
-Name[de]=Fnfzehn
+Name[de]=Fünfzehn
 Name[zh_TW]=Fifteen Pieces
-Name[ko]=십오 조각
+Name[ko]=ì­ì€ ì¡°ê°
+Comment[es]=Juego de estrategia de las 15 piezas

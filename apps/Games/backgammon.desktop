@@ -4,3 +4,4 @@ Exec=backgammon
 Icon=backgammon/backgammon
 Type=Application
 Name=BackGammon
+Name[de]=Backgammon
