@@ -60,9 +60,9 @@ namespace {
     QByteArray array = file.readAll();
     QStringList list = QStringList::split('\n', QString( array ) );
     for(QStringList::Iterator it = list.begin(); it != list.end(); ++it ){
-      if( (*it).startsWith("autocheck = 0" ) ){
+      if( (*it).startsWith("check = 0" ) ){
 	return false;
-      }else if( (*it).startsWith("autocheck = 1" ) ){
+      }else if( (*it).startsWith("check = 1" ) ){
 	return true;
       }
     }
