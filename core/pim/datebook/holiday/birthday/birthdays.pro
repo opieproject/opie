@@ -14,7 +14,7 @@ DEPENDPATH      += $(OPIEDIR)/include \
 
 LIBS+= -lqpe -lopiecore2 -lopieui2 -lopiepim2
 
-DESTDIR = $(OPIEDIR)/plugins/datebook/holiday
+DESTDIR = $(OPIEDIR)/plugins/holidays
 TARGET = birthdayplugin
 
 include( $(OPIEDIR)/include.pro )
