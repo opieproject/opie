@@ -377,7 +377,7 @@ todos os dispositivos!</translation>
     </message>
     <message>
         <source>File As</source>
-        <translation>Ficheiro Como</translation>
+        <translation>Arquivar Como</translation>
     </message>
     <message>
         <source>Gender</source>
@@ -549,7 +549,7 @@ todos os dispositivos!</translation>
     </message>
     <message>
         <source>Belarus</source>
-        <translation>Belarus</translation>
+        <translation>Bielorússia</translation>
     </message>
     <message>
         <source>Belgium</source>
@@ -569,7 +569,7 @@ todos os dispositivos!</translation>
     </message>
     <message>
         <source>Bhutan</source>
-        <translation>Bhutam</translation>
+        <translation>Bhutão</translation>
     </message>
     <message>
         <source>Botswana</source>
@@ -649,7 +649,7 @@ todos os dispositivos!</translation>
     </message>
     <message>
         <source>Cote d&apos;Ivoire</source>
-        <translation>Cote d&apos;Ivoire</translation>
+        <translation>Costa do Marfim</translation>
     </message>
     <message>
         <source>Croatia</source>
@@ -705,7 +705,7 @@ todos os dispositivos!</translation>
     </message>
     <message>
         <source>Eritrea</source>
-        <translation>Eritrea</translation>
+        <translation>Eritreia</translation>
     </message>
     <message>
         <source>Estonia</source>
@@ -717,7 +717,7 @@ todos os dispositivos!</translation>
     </message>
     <message>
         <source>Falkland Islands</source>
-        <translation>Ilhas Falkland</translation>
+        <translation>Ilhas Malvinas</translation>
     </message>
     <message>
         <source>Faroe Islands</source>
@@ -789,7 +789,7 @@ todos os dispositivos!</translation>
     </message>
     <message>
         <source>Holy See</source>
-        <translation>Holy See</translation>
+        <translation>Santa Sé</translation>
     </message>
     <message>
         <source>Honduras</source>
@@ -853,7 +853,7 @@ todos os dispositivos!</translation>
     </message>
     <message>
         <source>Lebanon</source>
-        <translation>Lebanon</translation>
+        <translation>Líbano</translation>
     </message>
     <message>
         <source>Lesotho</source>
@@ -909,7 +909,7 @@ todos os dispositivos!</translation>
     </message>
     <message>
         <source>Martinique</source>
-        <translation>Martinique</translation>
+        <translation>Martinica</translation>
     </message>
     <message>
         <source>Mauritania</source>
@@ -917,7 +917,7 @@ todos os dispositivos!</translation>
     </message>
     <message>
         <source>Mauritius</source>
-        <translation>Mauritius</translation>
+        <translation>Mauricías</translation>
     </message>
     <message>
         <source>Mayotte</source>
@@ -933,7 +933,7 @@ todos os dispositivos!</translation>
     </message>
     <message>
         <source>Moldova</source>
-        <translation>Moldova</translation>
+        <translation>Moldávia</translation>
     </message>
     <message>
         <source>Monaco</source>
@@ -1061,7 +1061,7 @@ todos os dispositivos!</translation>
     </message>
     <message>
         <source>Rwanda</source>
-        <translation>Ruânda</translation>
+        <translation>Ruanda</translation>
     </message>
     <message>
         <source>Saint Lucia</source>
@@ -1089,7 +1089,7 @@ todos os dispositivos!</translation>
     </message>
     <message>
         <source>Sierra Leone</source>
-        <translation>Serra Leona</translation>
+        <translation>Serra Leoa</translation>
     </message>
     <message>
         <source>Singapore</source>
@@ -1121,7 +1121,7 @@ todos os dispositivos!</translation>
     </message>
     <message>
         <source>Sri Lanka</source>
-        <translation>Siri Lanca</translation>
+        <translation>Sri Lanca</translation>
     </message>
     <message>
         <source>St. Helena</source>
@@ -1137,7 +1137,7 @@ todos os dispositivos!</translation>
     </message>
     <message>
         <source>Swaziland</source>
-        <translation>Swaziland</translation>
+        <translation>Swazilandia</translation>
     </message>
     <message>
         <source>Sweden</source>
@@ -1153,7 +1153,7 @@ todos os dispositivos!</translation>
     </message>
     <message>
         <source>Tajikistan</source>
-        <translation>Tajikstan</translation>
+        <translation>Tajikistão</translation>
     </message>
     <message>
         <source>Tanzania</source>
@@ -1217,7 +1217,7 @@ todos os dispositivos!</translation>
     </message>
     <message>
         <source>Virgin Islands</source>
-        <translation>Ilhas Virgem</translation>
+        <translation>Ilhas Virgens</translation>
     </message>
     <message>
         <source>Western Sahara</source>
@@ -1301,11 +1301,11 @@ todos os dispositivos!</translation>
     </message>
     <message>
         <source>Kyrgyzstan</source>
-        <translation>Kyrgyzstão</translation>
+        <translation>Kyrgyzistão</translation>
     </message>
     <message>
         <source>Palestinian Sovereign Areas</source>
-        <translation>Territórios Ocupados Palestinianos</translation>
+        <translation>Territórios Soberanos Palestinianos</translation>
     </message>
     <message>
         <source>Pitcairn Islands</source>
@@ -1317,7 +1317,7 @@ todos os dispositivos!</translation>
     </message>
     <message>
         <source>Press to enter last- middle and firstname</source>
-        <translation>Escolha para introduzir o ultimo, do meio e primeiro nome</translation>
+        <translation>Prima enter para aceitar o último, do meio e primeiro nome</translation>
     </message>
     <message>
         <source>Enter fullname directly ! If you have a lastname with multiple words ( for instance &quot;de la Guerra&quot;), please write &lt;lastname&gt;,&lt;firstnames&gt; like this: &quot;de la Guerra, Carlos Pedro&quot;</source>
@@ -1345,7 +1345,7 @@ todos os dispositivos!</translation>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>

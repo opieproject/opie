@@ -91,7 +91,7 @@
     </message>
     <message>
         <source>Advancedfm Beam out</source>
-        <translation>Irradiar</translation>
+        <translation>Enviar por Infravermelhos</translation>
     </message>
     <message>
         <source>Ir sent.</source>
@@ -139,7 +139,7 @@
     </message>
     <message>
         <source>Beam File</source>
-        <translation>Irradiar Ficheiro</translation>
+        <translation>Enviar Ficheiro (IR)</translation>
     </message>
     <message>
         <source>Copy Same Dir</source>
@@ -299,7 +299,10 @@ e os seus conteúdos?</translation>
 %1 
 to 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível copiar
+%1
+para
+%2</translation>
     </message>
 </context>
 <context>
