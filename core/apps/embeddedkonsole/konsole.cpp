@@ -768,7 +768,7 @@ void Konsole::colorMenuSelected(int iD)
 // Custom
             qDebug("do custom");
             if(fromMenu) {
-            ColorPopupMenu* penColorPopupMenu = new ColorPopupMenu(Qt::black, this, "foreground color");
+            OColorPopupMenu* penColorPopupMenu = new OColorPopupMenu(Qt::black, this, "foreground color");
             connect(penColorPopupMenu, SIGNAL(colorSelected(const QColor&)), this,
                     SLOT(changeForegroundColor(const QColor&)));
             penColorPopupMenu->exec();
@@ -1020,7 +1020,7 @@ void Konsole::changeForegroundColor(const QColor &color) {
 qDebug("do other dialog");
 #ifdef QT_QWS_OPIE
 
- ColorPopupMenu* penColorPopupMenu2 = new ColorPopupMenu(Qt::black, this,"background color");
+ OColorPopupMenu* penColorPopupMenu2 = new OColorPopupMenu(Qt::black, this,"background color");
     connect(penColorPopupMenu2, SIGNAL(colorSelected(const QColor&)), this,
             SLOT(changeBackgroundColor(const QColor&)));
    penColorPopupMenu2->exec();
