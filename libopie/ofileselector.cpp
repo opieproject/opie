@@ -435,6 +435,7 @@ void OFileViewFileListView::addFile( QFileInfo* info, bool symlink ) {
         pix = pixer.xForm( matrix );
     }
     dir = info->dirPath( true );
+    locked = false;
     if ( symlink )
         name = info->fileName() + " -> " + info->dirPath() + "/" + info->readLink();
     else{
