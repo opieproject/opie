@@ -9,31 +9,24 @@ Feature requests:
 
 
 Urgent:
-- View -> unfiled shows everything (as "all" does)
 
 Important:
 
-- Redesign of the structure of abtable into abview, abtableview, ... 
 - Redesign of Contacteditor
+- Store last settings of combo-boxes
 
-- What should happen if the import of birthday/anniversary fails ?
+- Abtable: Configure Contact column (internally already available, 
+	need configuration)
 - Name order selected in "contacteditor" not used in list view.
 - Overview window cleanup needed..
-- Cursor keys should work in detail-view (ablabel)
-  -> Ablabel should be removed and Abtable should be increased with
-	different views (as started by darwin zins)..
-- Store last settings of combo-boxes
 - Finishing of new View functions (List, Phonebook...)
 - Reload if contacts were changed externally
-- "What's this" should be added
+- "What's this" should be added (Deleyed after Feature Freeze)
 
 Less important:
 
 -  The picker (alphabetical sort widget) should be
    placed verticaly or horizontally (configurable)
-- Use advanced database functions in abtable to decrease
-  memory footprint and to make everything more easy !
-	(abtable should store Iterator for selected Category)
 
 Should be Fixed (not absolute sure, need further validation):
 
@@ -53,3 +46,9 @@ Fixed:
 - contacteditor: Birthday, annyversary, ... : Use Dateselector
 - The names of the countries are sorted by there english names, only..
   Even if they are translated.. :S
+- Cursor keys should work in detail-view (ablabel)
+  -> Ablabel should be removed and Abtable should be increased with
+	different views (as started by darwin zins)..
+- Use advanced database functions in abtable to decrease
+  memory footprint and to make everything more easy !
+	(abtable should store Iterator for selected Category)
