@@ -1,0 +1,169 @@
+Index: table/qtable.cpp
+===================================================================
+RCS file: /home/ich/cvs/TT/qt/src/table/qtable.cpp,v
+retrieving revision 1.1.1.1
+diff -u -r1.1.1.1 qtable.cpp
+--- table/qtable.cpp	17 Aug 2003 14:22:32 -0000	1.1.1.1
++++ table/qtable.cpp	29 Aug 2003 13:59:56 -0000
+@@ -500,7 +500,7 @@
+ 
+     if ( rw == -1 || cl == -1 )
+ 	return;
+-	
++
+     int rrow = rw;
+     int rcol = cl;
+     if ( rowspan > 1 || colspan > 1 ) {
+@@ -1190,7 +1190,7 @@
+ 
+ 	if ( rowh == 0 )
+ 	    continue;
+-	
++
+ 	// Go through the columns in row r
+ 	// if we know from where to where, go through [colfirst, collast],
+ 	// else go through all of them
+@@ -1204,7 +1204,7 @@
+ 
+ 	    if ( colw == 0 )
+ 		continue;
+-	
++
+ 	    QTableItem *itm = item( r, c );
+ 	    if ( itm &&
+ 		 ( itm->colSpan() > 1 || itm->rowSpan() > 1 ) ) {
+@@ -2345,6 +2345,7 @@
+ {
+     if ( inUpdateGeometries )
+ 	return;
++
+     inUpdateGeometries = TRUE;
+     QSize ts = tableSize();
+     if ( topHeader->offset() &&
+@@ -2354,9 +2355,13 @@
+ 	 ts.height() < leftHeader->offset() + leftHeader->height() )
+ 	verticalScrollBar()->setValue( ts.height() - leftHeader->height() );
+ 
+-    leftHeader->setGeometry( frameWidth(), topMargin() + frameWidth(),
++    /*
++     * for the scrollbar on the left side simply using framewidth is
++     * not enough cause this would overdraw the scrollbar
++     */
++    leftHeader->setGeometry( frameWidth()+ frameRect().left(), topMargin() + frameWidth(),
+ 			     leftMargin(), visibleHeight() );
+-    topHeader->setGeometry( leftMargin() + frameWidth(), frameWidth(),
++    topHeader->setGeometry( leftMargin() + frameWidth() + frameRect().left(), frameWidth(),
+ 			    visibleWidth(), topMargin() );
+     inUpdateGeometries = FALSE;
+ }
+Index: widgets/qscrollview.cpp
+===================================================================
+RCS file: /home/ich/cvs/TT/qt/src/widgets/qscrollview.cpp,v
+retrieving revision 1.1.1.2
+diff -u -r1.1.1.2 qscrollview.cpp
+--- widgets/qscrollview.cpp	17 Aug 2003 14:24:04 -0000	1.1.1.2
++++ widgets/qscrollview.cpp	29 Aug 2003 14:03:13 -0000
+@@ -786,45 +786,56 @@
+ 
+     // Position the scrollbars, viewport, and corner widget.
+     int bottom;
++#ifdef QT_FOR_LEFT_HAND
++    static bool left = true;
++#else
++    static bool left = false;
++#endif
++    int xoffset = ( left && ( showv || cornerWidget() ) ) ? vsbExt : 0;
++    int xpos    =   left ? 0 : w-vsbExt;
++    xpos    =  (style() == WindowsStyle) && left ? xpos + fw : xpos - fw;
++    int ypos    = tmarg;
++    ypos        = (style() == WindowsStyle) ? ypos +fw : 0;
+     if ( showh ) {
+ 	int right = ( showv || cornerWidget() ) ? w-vsbExt : w;
+ 	if ( style() == WindowsStyle )
+-            setHBarGeometry(d->hbar, fw, h-hsbExt-fw,
++            setHBarGeometry(d->hbar, fw + xoffset , h-hsbExt-fw,
+                             right-fw-fw, hsbExt );
+ 	else
+-            setHBarGeometry(d->hbar, 0, h-hsbExt, right,
++            setHBarGeometry(d->hbar, 0+  xoffset, h-hsbExt, right,
+                             hsbExt );
+ 	bottom=h-hsbExt;
+     } else {
+         bottom=h;
+     }
+     if ( showv ) {
+-	clipper()->setGeometry( lmarg, tmarg,
++	clipper()->setGeometry( lmarg + xoffset, tmarg,
+                                 w-vsbExt-lmarg-rmarg,
+                                 bottom-tmarg-bmarg );
+ 	d->viewportResized( w-vsbExt-lmarg-rmarg, bottom-tmarg-bmarg );
+-	if ( style() == WindowsStyle )
+-	    changeFrameRect(QRect(0, 0, w, h) );
+-	else
+-	    changeFrameRect(QRect(0, 0, w-vsbExt, bottom));
++	if ( style() == WindowsStyle ) {
++	    changeFrameRect(QRect(xoffset, 0, w, h) );
++	}else{
++	    changeFrameRect(QRect(xoffset, 0, w-vsbExt, bottom));
++        }
+ 	if (cornerWidget()) {
+ 	    if ( style() == WindowsStyle )
+-                setVBarGeometry( d->vbar, w-vsbExt-fw,
+-                                 fw, vsbExt,
+-                                 h-hsbExt-fw-fw );
++                setVBarGeometry( d->vbar, xpos,
++                                 ypos, vsbExt,
++                                 bottom-fw-ypos );
+ 	    else
+-                setVBarGeometry( d->vbar, w-vsbExt, 0,
++                setVBarGeometry( d->vbar, xpos, ypos,
+                                  vsbExt,
+-                                 h-hsbExt );
++                                 bottom-ypos );
+ 	}
+ 	else {
+ 	    if ( style() == WindowsStyle )
+-                setVBarGeometry( d->vbar, w-vsbExt-fw,
+-                                 fw, vsbExt,
+-                                 bottom-fw-fw );
++                setVBarGeometry( d->vbar, xpos,
++                                 ypos, vsbExt,
++                                 bottom-fw-ypos );
+ 	    else
+-                setVBarGeometry( d->vbar, w-vsbExt, 0,
+-                                 vsbExt, bottom );
++                setVBarGeometry( d->vbar, xpos, ypos,
++                                 vsbExt, bottom-ypos );
+ 	}
+     } else {
+ 	if ( style() == WindowsStyle )
+@@ -837,12 +848,12 @@
+     }
+     if ( d->corner ) {
+ 	if ( style() == WindowsStyle )
+-            d->corner->setGeometry( w-vsbExt-fw,
++            d->corner->setGeometry( xpos,
+                                     h-hsbExt-fw,
+                                     vsbExt,
+                                     hsbExt );
+ 	else
+-            d->corner->setGeometry( w-vsbExt,
++            d->corner->setGeometry( xpos,
+                                     h-hsbExt,
+                                     vsbExt,
+                                     hsbExt );
+@@ -2058,12 +2069,12 @@
+ void QScrollView::changeFrameRect(const QRect& r)
+ {
+     QRect oldr = frameRect();
+-    if (oldr != r) {
++       if (oldr != r) {
+ 	QRect cr = contentsRect();
+ 	QRegion fr( frameRect() );
+ 	fr = fr.subtract( contentsRect() );
+ 	setFrameRect( r );
+-	if ( isVisible() ) {
++        if ( isVisible() ) {
+ 	    cr = cr.intersect( contentsRect() );
+ 	    fr = fr.unite( frameRect() );
+ 	    fr = fr.subtract( cr );
