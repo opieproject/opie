@@ -3,6 +3,7 @@
 
 #include "imapwrapper.h"
 #include "mailtypes.h"
+#include "logindialog.h"
 #include <libetpan/mailimap.h>
 
 IMAPwrapper::IMAPwrapper( IMAPaccount *a )
@@ -36,8 +37,22 @@ void IMAPwrapper::login()
     }
     server = account->getServer().latin1();
     port = account->getPort().toUInt();
-    user = account->getUser().latin1();
-    pass = account->getPassword().latin1();
+	if ( account->getUser().isEmpty() || account->getPassword().isEmpty() ) {
+	  LoginDialog login( account->getUser(), account->getPassword(), NULL, 0, true );
+	  login.show();
+	  if ( QDialog::Accepted == login.exec() ) {
+		// ok
+		user = strdup( login.getUser().latin1() );
+		pass = strdup( login.getPassword().latin1() );
+	  } else {
+		// cancel
+		qDebug( "IMAP: Login canceled" );
+		return;
+	  }
+	} else {
+	  user = account->getUser().latin1();
+	  pass = account->getPassword().latin1();
+	}
 
     m_imap = mailimap_new( 20, &imap_progress );
     /* connect */

@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include "pop3wrapper.h"
 #include "mailtypes.h"
+#include "logindialog.h"
 #include <libetpan/mailpop3.h>
 #include <libetpan/mailmime.h>
 #include <libetpan/data_message_driver.h>
@@ -357,8 +358,23 @@ void POP3wrapper::login()
 
     server = account->getServer().latin1();
     port = account->getPort().toUInt();
-    user = account->getUser().latin1();
-    pass = account->getPassword().latin1();
+
+	if ( account->getUser().isEmpty() || account->getPassword().isEmpty() ) {
+	  LoginDialog login( account->getUser(), account->getPassword(), NULL, 0, true );
+	  login.show();
+	  if ( QDialog::Accepted == login.exec() ) {
+		// ok
+		user = strdup( login.getUser().latin1() );
+		pass = strdup( login.getPassword().latin1() );
+	  } else {
+		// cancel
+		qDebug( "POP3: Login canceled" );
+		return;
+	  }
+	} else {
+	  user = account->getUser().latin1();
+	  pass = account->getPassword().latin1();
+	}
 
     m_pop3 = mailpop3_new( 200, &pop3_progress );
 
