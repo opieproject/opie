@@ -127,6 +127,10 @@ do
 		    BASE=$(dirname /$ff)
 		;; root/*)
 		    BASE=$(dirname ${ff#root})
+		;; lib/*)
+		    BASE=$(dirname /opt/QtPalmtop/$ff)
+		;; $OPIEDIR/lib/*)
+		    BASE=$(dirname /opt/QtPalmtop/${ff#$OPIEDIR/})
 		;; *)
 		    # For SHARP ROM compatibility. Should change to Qtopia.
 		    BASE=/opt/QtPalmtop/$(dirname $ff)
