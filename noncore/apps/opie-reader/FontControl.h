@@ -105,7 +105,7 @@ class FontControl
 		uint best = 0;
 		for (it = sizes.begin(); it != sizes.end(); it++)
 		{
-		    m_fontsizes[i] = (*it)/10;
+		    m_fontsizes[i] = (*it);
 		    if (abs(tgt-m_fontsizes[i]) < abs(tgt-m_fontsizes[best]))
 		    {
 			best = i;
