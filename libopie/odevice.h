@@ -78,6 +78,7 @@ public:
 	QString systemString ( );
 	OSystem system ( );
 
+	QString systemVersionString ( );
 
 // input / output
 

@@ -37,6 +37,8 @@ public:
 	QString m_systemstr;
 	OSystem m_system;
 	
+	QString m_sysverstr;
+	
 	OLedState m_leds [4]; // just for convenience ...
 };
 
@@ -99,6 +101,7 @@ ODevice::ODevice ( )
 	d-> m_vendor = OVENDOR_Unknown;
 	d-> m_systemstr = "Unkown";
 	d-> m_system = OSYSTEM_Unknown;
+	d-> m_sysverstr = "0.0";
 }
 
 void ODevice::init ( )
@@ -138,6 +141,11 @@ QString ODevice::systemString ( )
 OSystem ODevice::system ( )
 {
 	return d-> m_system;
+}
+
+QString ODevice::systemVersionString ( )
+{
+	return d-> m_sysverstr;
 }
 
 void ODevice::alarmSound ( )
@@ -226,9 +234,15 @@ void ODeviceIPAQ::init ( )
 		f. close ( );
 	}
 
-	if ( QFile::exists ( "/etc/familiar-version" )) {
+	f. setName ( "/etc/familiar-version" );
+	if ( f. open ( IO_ReadOnly )) { 
 		d-> m_systemstr = "Familiar";
 		d-> m_system = OSYSTEM_Familiar;
+		
+		QTextStream ts ( &f );
+		d-> m_sysverstr = ts. readLine ( ). mid ( 10 );
+		
+		f. close ( );
 	}
 
 	d-> m_leds [0] = OLED_Off;
