@@ -438,6 +438,9 @@ void PIconView::addFiles(  const QStringList& lst) {
         if (m_mode==3) {
             _iv->setTextOnly(true);
             _iv->setPixmap(QPixmap());
+
+
+
         } else {
             if (m_pix) _iv->setPixmap(*m_pix);
         }
@@ -457,6 +460,22 @@ void PIconView::slotClicked(QIconViewItem* _it) {
         slotChangeDir( it->path() );
     else // view image
         slotShowImage();
+}
+
+/*
+ * Return was pressed. which is triggered by the keydown
+ * handler. The problem is that the key up will be handled
+ * by the ImageDisplayer and goes to the next image
+ */
+void PIconView::slotRetrun( QIconViewItem *_it ) {
+    if(!_it )
+        return;
+
+    IconViewItem* it = static_cast<IconViewItem*>(_it);
+    if( it->isDir() )
+        slotChangeDir( it->path() );
+    else
+        QTimer::singleShot(0, this, SLOT(slotShowImage()) );
 }
 
 /*

@@ -76,6 +76,7 @@ private slots:
     void addFolders(  const QStringList& );
     void addFiles( const QStringList& );
     void slotClicked(QIconViewItem* );
+    void slotRetrun(QIconViewItem* );
 
 /**/
     void slotThumbInfo(const QString&, const QString&);
