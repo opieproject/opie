@@ -1,6 +1,4 @@
 Makefile*
-install.cpp
-install.h
 instoptions.cpp
 instoptions.h
 moc*

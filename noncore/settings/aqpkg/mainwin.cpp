@@ -45,6 +45,7 @@
 #include "global.h"
 #include "helpwindow.h"
 #include "inputdlg.h"
+#include "ipkg.h"
 #include "installdlgimpl.h"
 #include "letterpushbutton.h"
 #include "mainwin.h"
@@ -88,9 +89,6 @@ MainWindow :: MainWindow()
     jumpBar->setStretchableWidget( w );
     
     QGridLayout *layout = new QGridLayout( w );
-    //QVBoxLayout *vbox = new QVBoxLayout( w, 0, -1 );
-    //QHBoxLayout *hbox3 = new QHBoxLayout( vbox, -1 );
-    //QHBoxLayout *hbox4 = new QHBoxLayout( vbox, -1 );
 
     char text[2];
     text[1] = '\0';
@@ -100,12 +98,6 @@ MainWindow :: MainWindow()
         LetterPushButton *b = new LetterPushButton( text, w );
         connect( b, SIGNAL( released( QString ) ), this, SLOT( letterPushed( QString ) ) );
         layout->addWidget( b, i / 13, i % 13);
-/*
-        if ( i < 13 )
-            hbox3->addWidget( b );
-        else
-            hbox4->addWidget( b );
-*/
     }
     
     QAction *a = new QAction( QString::null, Resource::loadPixmap( "close" ), QString::null, 0, w, 0 );
@@ -798,13 +790,13 @@ void MainWindow :: updateServer()
     // First, write out ipkg_conf file so that ipkg can use it
     mgr->writeOutIpkgConf();
 
-    Ipkg ipkg;
-    ipkg.setOption( "update" );
+    Ipkg *ipkg = new Ipkg;
+    ipkg->setOption( "update" );
 
-    InstallDlgImpl dlg( &ipkg, tr( "Refreshing server package lists" ), this, tr( "Upgrade" ), true );
-    dlg.showDlg();
-
-    reloadData();
+    InstallDlgImpl *dlg = new InstallDlgImpl( ipkg, tr( "Refreshing server package lists" ),
+                                              tr( "Update lists" ) );
+    connect( dlg, SIGNAL( reloadData( InstallDlgImpl * ) ), this, SLOT( reloadData( InstallDlgImpl * ) ) );
+    dlg->showMaximized();
     
 //  delete progDlg;
 }
@@ -827,16 +819,17 @@ void MainWindow :: upgradePackages()
         mgr->writeOutIpkgConf();
 
         // Now run upgrade
-        Ipkg ipkg;
-        ipkg.setOption( "upgrade" );
-        
-        InstallDlgImpl dlg( &ipkg, tr( "Upgrading installed packages" ), this, tr( "Upgrade" ), true );
-        dlg.showDlg();
+        Ipkg *ipkg = new Ipkg;
+        ipkg->setOption( "upgrade" );
 
-        reloadData();
+        InstallDlgImpl *dlg = new InstallDlgImpl( ipkg, tr( "Upgrading installed packages" ),
+                                                  tr ( "Upgrade" ) );
+        connect( dlg, SIGNAL( reloadData( InstallDlgImpl * ) ), this, SLOT( reloadData( InstallDlgImpl * ) ) );
+        dlg->showMaximized();
     }
 }
-                                                       void MainWindow :: downloadPackage()
+
+void MainWindow :: downloadPackage()
 {
     bool doUpdate = true;
     if ( downloadEnabled )
@@ -898,7 +891,7 @@ void MainWindow :: upgradePackages()
 
     if ( doUpdate )
     {
-        reloadData();
+        reloadData( 0x0 );
     }
 }
 
@@ -970,17 +963,9 @@ void MainWindow :: downloadRemotePackage()
     vector<InstallData> workingPackages;
     workingPackages.push_back( item );
 
-    InstallDlgImpl dlg2( workingPackages, mgr, this, "Install", true );
-    dlg2.showDlg();
-
-    reloadData();
-    
-#ifdef QWS
-    // Finally let the main system update itself
-    QCopEnvelope e("QPE/System", "linkChanged(QString)");
-    QString lf = QString::null;
-    e << lf;
-#endif
+    InstallDlgImpl *dlg = new InstallDlgImpl( workingPackages, mgr, tr( "Download" ) );
+    connect( dlg, SIGNAL( reloadData( InstallDlgImpl * ) ), this, SLOT( reloadData( InstallDlgImpl * ) ) );
+    dlg->showMaximized();
 }
 
 
@@ -1016,17 +1001,9 @@ void MainWindow :: applyChanges()
     }
     
     // do the stuff
-    InstallDlgImpl dlg( workingPackages, mgr, this, "Install", true );
-    dlg.showDlg();
-
-    reloadData();
-    
-#ifdef QWS
-    // Finally let the main system update itself
-    QCopEnvelope e("QPE/System", "linkChanged(QString)");
-    QString lf = QString::null;
-    e << lf;
-#endif
+    InstallDlgImpl *dlg = new InstallDlgImpl( workingPackages, mgr, tr( "Apply changes" ) );
+    connect( dlg, SIGNAL( reloadData( InstallDlgImpl * ) ), this, SLOT( reloadData( InstallDlgImpl * ) ) );
+    dlg->showMaximized();
 }
 
 // decide what to do - either remove, upgrade or install
@@ -1150,11 +1127,28 @@ InstallData MainWindow :: dealWithItem( QCheckListItem *item )
     }
 }
 
-void MainWindow :: reloadData()
+void MainWindow :: reloadData( InstallDlgImpl *dlg )
 {
     stack->raiseWidget( progressWindow );
+    
+    if ( dlg )
+    {
+        dlg->close();
+        delete dlg;
+    }
+    
     mgr->reloadServerData();
     serverSelected( -1, FALSE );
+    
+#ifdef QWS
+    m_status->setText( tr( "Updating Launcher..." ) );
+    
+    // Finally let the main system update itself
+    QCopEnvelope e("QPE/System", "linkChanged(QString)");
+    QString lf = QString::null;
+    e << lf;
+#endif
+    
     stack->raiseWidget( networkPkgWindow );
 }
 

@@ -20,10 +20,17 @@
 #include <vector>
 using namespace std;
 
+#include <qwidget.h>
 #include <qstring.h>
 
-#include "ipkg.h"
-#include "install.h"
+class QComboBox;
+class QLabel;
+class QMultiLineEdit;
+class QPushButton;
+
+class DataManager;
+class Destination;
+class Ipkg;
 
 class InstallData
 {
@@ -34,16 +41,15 @@ public:
     bool recreateLinks;
 };
 
-class InstallDlgImpl : public InstallDlg
+class InstallDlgImpl : public QWidget
 {
+    Q_OBJECT
 public:
-    InstallDlgImpl( vector<InstallData> &packageList, DataManager *dataManager, QWidget * parent = 0, const char* name = 0, bool modal = false, WFlags fl = 0 );
-    InstallDlgImpl( Ipkg *ipkg, QString initialText, QWidget * parent = 0, const char* name = 0, bool modal = false, WFlags fl = 0 );
+    InstallDlgImpl( vector<InstallData> &packageList, DataManager *dataManager, const char *title = 0 );
+    InstallDlgImpl( Ipkg *ipkg, QString initialText, const char *title = 0 );
     ~InstallDlgImpl();
 
-	bool showDlg();
 	bool upgradeServer( QString &server );
-
 
 protected:
 
@@ -55,11 +61,23 @@ private:
     int flags;
     Ipkg *pIpkg;
     bool upgradePackages;
+    
+    QComboBox      *destination;
+    QPushButton    *btnInstall;
+    QPushButton    *btnOptions;
+    QMultiLineEdit *output;
+    QLabel         *txtAvailableSpace;
 
-	bool runIpkg( QString &option, const QString& package, const QString& dest, int flags );
+    void init( bool );
+    
+    bool runIpkg( QString &option, const QString& package, const QString& dest, int flags );
 
-	void optionsSelected();
-	void installSelected();
+signals:
+    void reloadData( InstallDlgImpl * );
+        
+public slots:
+    void optionsSelected();
+    void installSelected();
     void displayText(const QString &text );
     void displayAvailableSpace( const QString &text);
 };

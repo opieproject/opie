@@ -23,6 +23,7 @@
 
 class DataManager;
 class InstallData;
+class InstallDlgImpl;
 
 class QAction;
 class QCheckListItem;
@@ -92,7 +93,6 @@ private:
     void downloadSelectedPackages();
     void downloadRemotePackage();
     InstallData dealWithItem( QCheckListItem *item );
-    void reloadData();
     
     // Progress widget
     QWidget      *progressWindow;
@@ -121,6 +121,7 @@ public slots:
     void raiseProgressWidget();
     void enableUpgrade( bool );
     void enableDownload( bool );
+    void reloadData( InstallDlgImpl * );
 
 private slots:
     void init();

@@ -33,7 +33,6 @@ SOURCES		= mainwin.cpp \
 		  version.cpp \
 		  categoryfilterimpl.cpp
 INTERFACES	= settings.ui \
-		  install.ui \
 		  instoptions.ui \
 		  categoryfilter.ui
 TARGET		= aqpkg
