@@ -32,6 +32,17 @@
 #include <vector>
 #include <memory>
 
+namespace
+{
+    struct simpleAndStupidAllocator
+    {
+        static void *allocate( size_t amount )
+        { return ::operator new( amount ); }
+        static void deallocate( void *p, size_t )
+        { ::operator delete( p ); }
+    };
+}
+
 class MediaWidget : public QWidget
 {
     Q_OBJECT
@@ -55,7 +66,7 @@ public:
 #if defined( _CC_GNU_ )
     // use that allocator to avoid the default allocator that on gcc2 requires libstdc++ because
     // in the BAD_ALLOC macro it uses std::cerr and friends :-(
-    typedef std::vector<Button, std::__allocator<Button, std::__new_alloc> > ButtonVector;
+    typedef std::vector<Button, std::__allocator<Button, simpleAndStupidAllocator> > ButtonVector;
 #else
     typedef std::vector<Button> ButtonVector;
 #endif
