@@ -147,7 +147,7 @@ void AudioWidget::setLength( long max ) {
 void AudioWidget::setDisplayType( MediaPlayerState::DisplayType mediaType ) {
     if ( mediaType == MediaPlayerState::Audio ) {
         // startTimer( 150 );
-        QPEApplication::showDialog( this );
+        QPEApplication::showWidget( this );
         return;
     }
 
