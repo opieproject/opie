@@ -1,4 +1,4 @@
-/* $Id: daemon.hh,v 1.6 2002-12-27 16:57:37 mjm Exp $ */
+/* $Id: daemon.hh,v 1.7 2002-12-31 12:38:28 mjm Exp $ */
 
 #ifndef DAEMON_HH
 #define DAEMON_HH
@@ -15,6 +15,7 @@
 
 #include <libwellenreiter/source/wl_sock.hh>
 #include <libwellenreiter/source/wl_log.hh>
+#include <libwellenreiter/source/wl_types.hh>
 #include <libwellenreiter/source/wl_proto.hh>
 #include <libwellenreiter/source/cardmode.hh>
 #include <libwellenreiter/source/sniff.hh>
