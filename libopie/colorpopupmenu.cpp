@@ -137,9 +137,12 @@ OColorPopupMenu::OColorPopupMenu( const QColor& color, QWidget* parent, const ch
 
     insertItem( colorPanel );
     insertSeparator();
+    insertItem(tr("More"),this,SLOT( moreColorClicked()));
+    /*
     QAction* chooseColorAction = new QAction( tr( "More" ), tr( "More..." ), 0, colorPanel, "More" );
     connect( chooseColorAction, SIGNAL( activated() ), this, SLOT( moreColorClicked() ) );
     chooseColorAction->addTo( this );
+    */
     activateItemAt( 0 );
 }
 
