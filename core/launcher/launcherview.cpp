@@ -105,7 +105,9 @@ public:
 	    if ( bsy ) {
 	    	busytimer = startTimer ( 150 );
 	    	busystate = 50;
-	    	startTimer ( 0 );
+		// not sure what this startTimer is for, maybe i am just to tired. But 
+		// currently that causes 100% cpuload on app launch
+		//startTimer ( 0 );
 	    }
 	    else
 		killTimer ( busytimer );
