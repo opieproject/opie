@@ -986,20 +986,18 @@ void PlayListWidget::openFile() {
     qDebug(filename);
     DocLnk lnk;
     QString name =  filename.right(filename.length()-filename.find("http://")-7);
+    qDebug(name);
     lnk.setName( name); //sets file name
 //    lnk.setComment();
     lnk.setFile(filename); //sets File property
 // problem is, the launcher sees this as a broken link and does not display it :(
-
     lnk.setType("audio/x-mpegurl");
     lnk.setExec("opieplayer");
     lnk.setIcon("opieplayer/MPEGPlayer");
-    QString cmd="touch "+QPEApplication::documentDir()+"audio/x-mpegurl/"+name;
-    system( cmd.latin1());
-//    d->selectedFiles->addToSelection(  **dit );
 
     if(!lnk.writeLink()) 
         qDebug("Writing doclink did not work");
+     d->selectedFiles->addToSelection(  lnk);
     if(fileDlg)
     delete fileDlg;
 }
