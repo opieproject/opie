@@ -21,15 +21,15 @@ IrServer::IrServer( QObject *parent, const char *name )
     QStringList::Iterator it;
     for ( it = list.begin(); it != list.end(); ++it ) {
 	QLibrary *trylib = new QLibrary( path + *it );
-	qDebug("trying lib %s", (path + (*it)).latin1() );
+	//qDebug("trying lib %s", (path + (*it)).latin1() );
 	if ( trylib->queryInterface( IID_ObexInterface, (QUnknownInterface**)&iface ) == QS_OK ) {
 	    lib = trylib;
-	    qDebug("found obex lib" );
+	    //qDebug("found obex lib" );
 	    QString lang = getenv( "LANG" );
 	    QTranslator * trans = new QTranslator(qApp);
 	    QString type = (*it).left( (*it).find(".") );
 	    QString tfn = QPEApplication::qpeDir()+"/i18n/"+lang+"/"+type+".qm";
-	    qDebug("tr fpr obex: %s", tfn.latin1() );
+	    //qDebug("tr fpr obex: %s", tfn.latin1() );
 	    if ( trans->load( tfn ))
 		qApp->installTranslator( trans );
 	    else

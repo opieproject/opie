@@ -805,7 +805,6 @@ void LauncherView::setBackgroundType( BackgroundType t, const QString &val )
 		(*bgCache)[bgName]->ref++;
 		icons->setBackgroundPixmap( (*bgCache)[bgName]->pm );
 	    } else {
-		qDebug( "Loading image: %s", val.latin1() );
 		QPixmap bg( Resource::loadPixmap( val ) );
 		if ( bg.isNull() ) {
 		    QImageIO imgio;
