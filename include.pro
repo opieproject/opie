@@ -6,6 +6,7 @@ prefix = $(OPIEDIR)
 
 contains( CONFIG, quick-app-lib ) {
     TEMPLATE = lib
+    CONFIG += plugin  # "plugin" will be removed automatically later if not MacOSX ! (eilers)
     DESTDIR  = $(OPIEDIR)/plugins/application
     DEFINES += OPIE_APP_INTERFACE
     !contains( TARGET, launcher ) {
