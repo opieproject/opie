@@ -1,10 +1,19 @@
 <chapter><title>What is &opie;?</title>
+
+<figure><title>&opie; logo</title>
+<mediaobject>
+  <imageobject>
+    <imagedata fileref="logo-small.png">
+  </imageobject>
+</mediaobject>
+</figure>
+
 <para>
-&opie; is a GUI (Graphical User Interface) for the Linux operating system (and
+<ulink url="http://opie.handhelds.org">&opie;</ulink> is a GUI (Graphical User Interface) for the Linux operating system (and
 might work on other OSes as well).  It was originally designed for handheld
 computers (such as the Compaq/HP &ipaq; and the Sharp &zaurus;), but could
-probably function well in other environments requiring a light GUI, such as an
-old laptop, or an internet kiosk.  It is based upon &qt;/Embedded from Trolltech,
+function well in other environments requiring a light GUI, such as an
+old laptop, or an internet kiosk.  It is based upon <ulink url="http://www.trolltech.com/products/embedded/index.html">&qt;/Embedded from Trolltech</ulink>,
 which is in turn a graphical environment designed for embedded applications,
 based upon the &qt; toolkit.
 </para>

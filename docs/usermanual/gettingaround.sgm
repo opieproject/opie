@@ -14,9 +14,8 @@ Once the screen has been calibrated, &opie; will now start up.  If the opie-logi
 package is installed (which is installed with the default installation), a screen
 will appear requiring a person to log in before any applications can be accessed.
 The standard &opie; installation currently requires the user to log in as the
-'root' user in order for all functions to work correctly. Refer to the Familiar
-website (http://familiar.handhelds.org) for the default password for the version
-installed.
+'root' user in order for all functions to work correctly. Refer to the <ulink url="http://familiar.handhelds.org/#faqs">Familiar
+FAQ</ulink> for the default password for the version installed.
 </para>
 
 <para>
@@ -25,8 +24,7 @@ rebooted however, &opie; will start automatically. To install and remove
 applications, the "Packages" application (located on the Settings tab) or the
 command line ipkg application can be used. There are several task-opie packages
 which allow the installation of whole categories (e.g. games, PIM, settings, etc.)
-of software at once. It also might be helpful to install either opie-embeddedkonsole
-or opie-console first to allow access a command line from within &opie;.
+of software at once.
 </para>
 </section>
 
