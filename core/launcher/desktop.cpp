@@ -740,7 +740,6 @@ void DesktopApplication::shutdown()
 
 void DesktopApplication::shutdown( ShutdownImpl::Type t )
 {
-	char *path[] = { "/sbin", "/usr/sbin", 0 };
 	char *opt = 0;
 
 	switch ( t ) {
@@ -751,8 +750,9 @@ void DesktopApplication::shutdown( ShutdownImpl::Type t )
 			if ( opt == 0 )
 				opt = "-r";
 
-			if ( execle( "shutdown", "shutdown", opt, "now", ( void* ) 0, path ) < 0 )
-				::syslog ( LOG_ERR, "Erroring execing shutdown\n" );
+			if ( execl( "/sbin/shutdown", "shutdown", opt, "now", ( void* ) 0) < 0 )
+				perror("shutdown");
+//				::syslog ( LOG_ERR, "Erroring execing shutdown\n" );
 
 			break;
 		case ShutdownImpl::RestartDesktop:
