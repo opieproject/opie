@@ -7,7 +7,6 @@
 
 #include <lib/imagecache.h>
 #include <gui/imageinfoui.h>
-#include <gui/imagescrollview.h>
 
 #include <iface/dirview.h>
 #include <iface/dirlister.h>
@@ -15,6 +14,7 @@
 #include <opie2/oconfig.h>
 #include <opie2/okeyconfigwidget.h>
 #include <opie2/odebug.h>
+#include <opie2/oimagescrollview.h>
 
 #include <qpe/resource.h>
 #include <qpe/qpemessagebox.h>
