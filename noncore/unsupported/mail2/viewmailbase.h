@@ -8,6 +8,8 @@ class OpenDiag;
 class QListView;
 class QPEToolBar;
 class QTextBrowser;
+class QPEMenuBar;
+class QPopupMenu;
 
 class ViewMailBase : public QMainWindow
 {
@@ -22,6 +24,8 @@ protected:
 	QPEToolBar *toolbar;
 	QTextBrowser *browser;
 	OpenDiag *openDiag;
+ 	QPEMenuBar *menubar;
+  QPopupMenu *mailmenu;
 
 protected slots:
 	void slotChangeAttachview(bool state);

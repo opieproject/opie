@@ -3,8 +3,10 @@
 #include <qaction.h>
 #include <qlabel.h>
 #include <qvbox.h>
+#include <qpopupmenu.h>
 
 #include <qpe/qpetoolbar.h>
+#include <qpe/qpemenubar.h>
 #include <qpe/resource.h>
 
 #include "viewmailbase.h"
@@ -17,25 +19,33 @@ ViewMailBase::ViewMailBase(QWidget *parent, const char *name, WFlags fl)
 	setToolBarsMovable(false);
 
 	toolbar = new QPEToolBar(this);
+  menubar = new QPEMenuBar( toolbar );
+  mailmenu = new QPopupMenu( menubar );
+  menubar->insertItem( tr( "Mail" ), mailmenu );
+
 	toolbar->setHorizontalStretchable(true);
 	addToolBar(toolbar);
-
-	reply = new QAction(tr("Reply"), QIconSet(Resource::loadPixmap("mail/reply")), 0, 0, this);
-	reply->addTo(toolbar);
-
-	forward = new QAction(tr("Forward"), QIconSet(Resource::loadPixmap("mail/forward")), 0, 0, this);
-	forward->addTo(toolbar);
-
-	attachbutton = new QAction(tr("Attachments"), QIconSet(Resource::loadPixmap("mail/attach")), 0, 0, this, 0, true);
-	attachbutton->addTo(toolbar);
-	connect(attachbutton, SIGNAL(toggled(bool)), SLOT(slotChangeAttachview(bool)));
-
-	deleteMail = new QAction(tr("Delete Mail"), QIconSet(Resource::loadPixmap("mail/delete")), 0, 0, this);
-	deleteMail->addTo(toolbar);
 
 	QLabel *spacer = new QLabel(toolbar);
 	spacer->setBackgroundMode(QWidget::PaletteButton);
 	toolbar->setStretchableWidget(spacer);
+
+	reply = new QAction(tr("Reply"), QIconSet(Resource::loadPixmap("mail/reply")), 0, 0, this);
+	reply->addTo(toolbar);
+ 	reply->addTo(mailmenu);
+
+	forward = new QAction(tr("Forward"), QIconSet(Resource::loadPixmap("mail/forward")), 0, 0, this);
+	forward->addTo(toolbar);
+	forward->addTo(mailmenu);
+
+	attachbutton = new QAction(tr("Attachments"), QIconSet(Resource::loadPixmap("mail/attach")), 0, 0, this, 0, true);
+	attachbutton->addTo(toolbar);
+	attachbutton->addTo(mailmenu);
+	connect(attachbutton, SIGNAL(toggled(bool)), SLOT(slotChangeAttachview(bool)));
+
+	deleteMail = new QAction(tr("Delete Mail"), QIconSet(Resource::loadPixmap("mail/delete")), 0, 0, this);
+	deleteMail->addTo(toolbar);
+	deleteMail->addTo(mailmenu);
 
 	QVBox *view = new QVBox(this);
 	setCentralWidget(view);
