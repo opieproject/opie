@@ -309,7 +309,7 @@ void QPEManager::whatsThisTimeout()
 static QImage *okImage( int th )
 {
     static QImage *i = 0;
-    if ( !i || i->height() != th ) {
+    if ( !i || ::abs( i->height()-th ) > 4 ) {
 	delete i;
 	i = new QImage(scaleButton(Resource::loadImage("OKButton"),th));
     }
@@ -319,7 +319,7 @@ static QImage *okImage( int th )
 static QImage *closeImage( int th )
 {
     static QImage *i = 0;
-    if ( !i || i->height() != th ) {
+    if ( !i || ::abs( i->height()-th ) > 4 ) {
 	delete i;
 	i = new QImage(scaleButton(Resource::loadImage("CloseButton"),th));
     }
@@ -329,7 +329,7 @@ static QImage *closeImage( int th )
 static QImage *helpImage( int th )
 {
     static QImage *i = 0;
-    if ( !i || i->height() != th ) {
+    if ( !i || ::abs( i->height()-th ) > 4 ) {
 	delete i;
 	i = new QImage(scaleButton(Resource::loadImage("HelpButton"),th));
     }
@@ -339,7 +339,7 @@ static QImage *helpImage( int th )
 static QImage *maximizeImage( int th )
 {
     static QImage *i = 0;
-    if ( !i || i->height() != th ) {
+    if ( !i || ::abs( i->height()-th ) > 4 ) {
 	delete i;
 	i = new QImage(scaleButton(Resource::loadImage("MaximizeButton"),th));
     }
