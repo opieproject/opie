@@ -1,7 +1,7 @@
 Files: i18n/es/.directory i18n/es/*.qm etc/dict/dawg.es
 Priority: optional
 Section: opie/i18n
-Maintainer: JosÈ Luis Fern·ndez Barros <fbarros@handhelds.org>
+Maintainer: Jos√© Luis Fern√°dez Barros <fbarros@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
