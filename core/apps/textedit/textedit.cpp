@@ -165,10 +165,10 @@ public:
             setTableFlags( Tbl_vScrollBar | Tbl_autoHScrollBar );
         }
 
-    //public slots:
     void find( const QString &txt, bool caseSensitive,
                             bool backwards );
-    /*
+//public slots:
+      /*
 signals:
     void notFound();
     void searchWrapped();
@@ -240,7 +240,8 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     : QMainWindow( parent, name, f ), bFromDocView( FALSE )
 {
     doc = 0;
-
+    edited=FALSE;
+    edited1=FALSE;
     setToolBarsMovable( FALSE );
 
     setIcon( Resource::loadPixmap( "TextEditor" ) );
@@ -400,6 +401,7 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     editor = new QpeEditor( editorStack );
     editor->setFrameStyle( QFrame::Panel | QFrame::Sunken );
     editorStack->addWidget( editor, get_unique_id() );
+    connect( editor, SIGNAL( textChanged() ), this, SLOT( editorChanged() ) );
 
     resize( 200, 300 );
 
@@ -556,7 +558,10 @@ void TextEdit::newFileOpen()
         }
     }
     delete browseForFiles;
-    editor->setEdited( true );
+    editor->setEdited( FALSE);
+    edited1=FALSE;
+    edited=FALSE;
+    setCaption(caption().right(caption().length()-1));
 }
 
 #if 0
@@ -684,7 +689,11 @@ void TextEdit::openFile( const DocLnk &f )
   delete doc;
     doc = new DocLnk(f);
     editor->setText(txt);
-    editor->setEdited( false);
+    editor->setEdited( FALSE);
+    edited1=FALSE;
+    edited=FALSE;
+    setCaption(caption().right(caption().length()-1));
+
     qDebug("openFile doclnk "+currentFileName);
     doc->setName(currentFileName);
     updateCaption();
@@ -731,7 +740,11 @@ bool TextEdit::save()
             if ( !fm.saveFile( *doc, rt ) ) {
                 return false;
             }
-            editor->setEdited( false );
+            editor->setEdited( FALSE);
+            edited1=FALSE;
+            edited=FALSE;
+            setCaption(caption().right(caption().length()-1));
+
 
             chmod( file.latin1(), mode);
         }
@@ -813,12 +826,17 @@ bool TextEdit::saveAs()
                 filePermissions *filePerm;
                 filePerm = new filePermissions(this, "Permissions",true,0,(const QString &)fileNm);
                 filePerm->exec();
-                editor->setEdited( false );
+
                 if( filePerm)
                     delete  filePerm;
             }
         }
     }
+    editor->setEdited( FALSE);
+    edited1=FALSE;
+    edited=FALSE;
+    if(caption().left(1)=="*")
+    setCaption(caption().right(caption().length()-1));
 
     if(fileSaveDlg)
         delete fileSaveDlg;
@@ -937,4 +955,12 @@ void TextEdit::changeStartConfig( bool b ) {
         cfg.writeEntry("startNew","FALSE");
     }
     update();
+}
+
+void TextEdit::editorChanged() { 
+    if(editor->edited() && edited && !edited1) {
+        setCaption( "*"+caption());
+        edited1=TRUE;
+    }
+    edited=TRUE;
 }

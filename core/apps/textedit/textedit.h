@@ -54,8 +54,11 @@ public:
     ~TextEdit();
  QPopupMenu *font;
     QAction *nStart;
+    bool edited, edited1;
     void openFile( const QString & );
-
+public slots:
+    void editorChanged();
+        
 protected:
     void closeEvent( QCloseEvent *e );
 
