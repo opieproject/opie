@@ -81,18 +81,6 @@ union kthemeKey{
 	unsigned int cacheKey;
 };
 
-class MyConfig : public Config
-{
-public:
-	MyConfig ( const QString &f, Domain d ) : Config ( f, d )
-	{ }
-
-	bool hasGroup ( const QString &gname ) const
-	{
-		QMap< QString, ConfigGroup>::ConstIterator it = groups. find ( gname );
-		return ( it != groups.end() );
-	}
-};
 
 void OThemeBase::generateBorderPix( int i )
 {
@@ -272,7 +260,7 @@ void OThemeBase::readConfig( Qt::GUIStyle /*style*/ )
 	
 		configFileName = cfg. readEntry ( "Theme", "default" );
 	}
-	MyConfig config( configFilePath + "/themes/" + configFileName + ".themerc" , Config::File );
+	Config config( configFilePath + "/themes/" + configFileName + ".themerc" , Config::File );
 
 //	printf ( "Opened config file: %s\n", ( configFilePath + "/themes/" + configFileName + ".themerc" ). ascii());
 
