@@ -71,8 +71,10 @@ void EmailHandler::sendMail(QList<Email> *mailList)
 {
   Email *currentMail;
   QString temp;
-  QString userName = mailAccount.name;
-  userName += " <" + mailAccount.emailAddress + ">";
+  QString userName = QString::null;
+  // not supported by ALL SMTP servers in the MAIL From field
+  // userName = "\""+mailAccount.name+"\"";
+  userName += "<" + mailAccount.emailAddress + ">";
   
   for (currentMail = mailList->first(); currentMail != 0;
       currentMail = mailList->next()) {
@@ -442,10 +444,13 @@ int EmailHandler::encodeMime(Email *mail)
   
   QString fileName, fileType, contentType, newBody, boundary;
   Enclosure *ePtr;
+  QString userName;
   
-  QString userName = mailAccount.name;
-  if (userName.length()>0)  //only embrace it if there is a user name
-    userName += " <" + mailAccount.emailAddress + ">";
+  if ( ! mailAccount.name.isEmpty() ) {
+    userName = "\"" + mailAccount.name + "\" <" + mailAccount.emailAddress + ">";
+  } else {
+    userName = "<" + mailAccount.emailAddress + ">";
+  }
   
   //add standard headers
   newBody = "From: " + userName + "\r\nTo: ";
