@@ -156,16 +156,7 @@ static bool triggerAtd( bool writeHWClock = FALSE )
 {
     QFile trigger(QString(atdir) + "trigger");
     if ( trigger.open(IO_WriteOnly|IO_Raw) ) {
-
-	const char* data =
-#ifdef QT_QWS_SHARP
-	//custom atd only writes HW Clock if we write a 'W'
-	    ( writeHWClock ) ? "W\n" :
-#endif
-	    data = "\n";
-	int len = strlen(data);
-	int total_written = trigger.writeBlock(data,len);
-	if ( total_written != len ) {
+	if ( trigger.writeBlock("\n",2) != 2 ) {
 	    QMessageBox::critical( 0, QObject::tr( "Out of Space" ),
 				   QObject::tr( "Unable to schedule alarm.\nFree some memory and try again." ) );
 	    trigger.close();
