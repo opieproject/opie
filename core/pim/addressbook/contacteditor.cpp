@@ -647,8 +647,9 @@ void ContactEditor::init() {
 void ContactEditor::defaultEmailChanged(int i){
 	qDebug("defaultEmailChanged");
 
-	int index = cmbChooserField1->currentItem();
-	slChooserValues[index] = cmbDefaultEmail->text(i);
+	// was sollte das ? (se)
+// 	int index = cmbChooserField1->currentItem();
+// 	slChooserValues[index] = cmbDefaultEmail->text(i);
 
 	defaultEmail = cmbDefaultEmail->text(i);
 	qDebug ("Changed to: %s", defaultEmail.latin1());
@@ -899,7 +900,6 @@ void ContactEditor::slotCountryChange( const QString &textChanged ) {
 
 void ContactEditor::slotCmbChooser1Change( int index ) {
 	qWarning("ContactEditor::slotCmbChooser1Change( %d )", index);
-
 	if ( !cmbChooserChange( cmbChooserField1->currentItem(), txtChooserField1, 1) ){
 
 		txtChooserField1->setText( slChooserValues[index] );
@@ -1482,6 +1482,7 @@ void ContactEditor::updateDatePicker()
 }
 
 void ContactEditor::saveEntry() {
+
 
 	if ( useFullName ) {
 		txtFirstName->setText( parseName( txtFullName->text(), NAME_F ) );
