@@ -1,24 +1,27 @@
-#include <stdlib.h>
-#include "pop3wrapper.h"
-#include "mailtypes.h"
+#include "nntpwrapper.h"
 #include "logindialog.h"
-#include <libetpan/libetpan.h>
-#include <qpe/global.h>
-#include <qfile.h>
-//#include <qstring.h>
+#include "mailtypes.h"
 
-/* we don't fetch messages larger than 5 MB */
+#include <qfile.h>
+
+#include <stdlib.h>
+
+#include <libetpan/libetpan.h>
+#include <libetpan/nntpdriver.h>
+
+
+
 #define HARD_MSG_SIZE_LIMIT 5242880
 
-POP3wrapper::POP3wrapper( POP3account *a )
+NNTPwrapper::NNTPwrapper( NNTPaccount *a )
 : Genericwrapper() {
     account = a;
-    m_pop3 = NULL;
+    m_nntp = NULL;
     msgTempName = a->getFileName()+"_msg_cache";
     last_msg_id = 0;
 }
 
-POP3wrapper::~POP3wrapper() {
+NNTPwrapper::~NNTPwrapper() {
     logout();
     QFile msg_cache(msgTempName);
     if (msg_cache.exists()) {
@@ -26,17 +29,18 @@ POP3wrapper::~POP3wrapper() {
     }
 }
 
-void POP3wrapper::pop3_progress( size_t current, size_t maximum ) {
-    qDebug( "POP3: %i of %i", current, maximum );
+void NNTPwrapper::nntp_progress( size_t current, size_t maximum ) {
+    qDebug( "NNTP: %i of %i", current, maximum );
 }
 
-RecBody POP3wrapper::fetchBody( const RecMail &mail ) {
-    int err = MAILPOP3_NO_ERROR;
+
+RecBody NNTPwrapper::fetchBody( const RecMail &mail ) {
+    int err = NEWSNNTP_NO_ERROR;
     char *message = 0;
     size_t length = 0;
 
     login();
-    if ( !m_pop3 ) {
+    if ( !m_nntp ) {
         return RecBody();
     }
 
@@ -57,7 +61,7 @@ RecBody POP3wrapper::fetchBody( const RecMail &mail ) {
         }
         msg_cache.open(IO_ReadWrite|IO_Truncate);
         last_msg_id = mail.getNumber();
-        err = mailsession_get_message(m_pop3->sto_session, mail.getNumber(), &mailmsg);
+        err = mailsession_get_message(m_nntp->sto_session, mail.getNumber(), &mailmsg);
         err = mailmessage_fetch(mailmsg,&message,&length);
         msg_cache.writeBlock(message,length);
     } else {
@@ -93,28 +97,28 @@ RecBody POP3wrapper::fetchBody( const RecMail &mail ) {
     return body;
 }
 
-void POP3wrapper::listMessages(const QString &, QList<RecMail> &target )
+
+void NNTPwrapper::listMessages(const QString &, QList<RecMail> &target )
 {
     login();
-    if (!m_pop3)
+    if (!m_nntp)
         return;
     uint32_t res_messages,res_recent,res_unseen;
-    mailsession_status_folder(m_pop3->sto_session,"INBOX",&res_messages,&res_recent,&res_unseen);
-    parseList(target,m_pop3->sto_session,"INBOX");
-    Global::statusMessage( tr("Mailbox contains %1 mail(s)").arg(res_messages));
+    mailsession_status_folder(m_nntp->sto_session,"INBOX",&res_messages,&res_recent,&res_unseen);
+    parseList(target,m_nntp->sto_session,"INBOX");
 }
 
-void POP3wrapper::login()
+void NNTPwrapper::login()
 {
     if (account->getOffline())
         return;
     /* we'll hold the line */
-    if ( m_pop3 != NULL )
+    if ( m_nntp != NULL )
         return;
 
     const char *server, *user, *pass;
     uint16_t port;
-    int err = MAILPOP3_NO_ERROR;
+    int err = NEWSNNTP_NO_ERROR;
 
     server = account->getServer().latin1();
     port = account->getPort().toUInt();
@@ -128,7 +132,7 @@ void POP3wrapper::login()
             pass = login.getPassword().latin1();
         } else {
             // cancel
-            qDebug( "POP3: Login canceled" );
+            qDebug( "NNTP: Login canceled" );
             return;
         }
     } else {
@@ -138,7 +142,7 @@ void POP3wrapper::login()
 
     //  bool ssl = account->getSSL();
 
-    m_pop3=mailstorage_new(NULL);
+    m_nntp=mailstorage_new(NULL);
 
     int conntypeset = account->ConnectionType();
     int conntype = 0;
@@ -152,91 +156,67 @@ void POP3wrapper::login()
         conntype = CONNECTION_TYPE_TRY_STARTTLS;
     }
 
-    //(ssl?CONNECTION_TYPE_TLS:CONNECTION_TYPE_PLAIN);
-
-    pop3_mailstorage_init(m_pop3,(char*)server, port, NULL, conntype, POP3_AUTH_TYPE_PLAIN,
+    nntp_mailstorage_init(m_nntp,(char*)server, port, NULL, conntype, NNTP_AUTH_TYPE_PLAIN,
                           (char*)user,(char*)pass,0,0,0);
 
+    err = mailstorage_connect(m_nntp);
 
-    err = mailstorage_connect(m_pop3);
-    if (err != MAIL_NO_ERROR) {
+    if (err != NEWSNNTP_NO_ERROR) {
         qDebug( QString( "FEHLERNUMMER %1" ).arg(  err ) );
-        Global::statusMessage(tr("Error initializing folder"));
-        mailstorage_free(m_pop3);
-        m_pop3 = 0;
+     //   Global::statusMessage(tr("Error initializing folder"));
+        mailstorage_free(m_nntp);
+        m_nntp = 0;
     }
 }
 
-void POP3wrapper::logout()
+void NNTPwrapper::logout()
 {
-    int err = MAILPOP3_NO_ERROR;
-    if ( m_pop3 == NULL )
+    int err = NEWSNNTP_NO_ERROR;
+    if ( m_nntp == NULL )
         return;
-    mailstorage_free(m_pop3);
-    m_pop3 = 0;
+    mailstorage_free(m_nntp);
+    m_nntp = 0;
 }
 
-
-QList<Folder>* POP3wrapper::listFolders() {
+QList<Folder>* NNTPwrapper::listFolders() {
     QList<Folder> * folders = new QList<Folder>();
     folders->setAutoDelete( false );
-    Folder*inb=new Folder("INBOX","/");
-    folders->append(inb);
+    clist *result = 0;
+
+   // int err =
+//    if ( err == _NO_ERROR ) {
+//        current = result->first;
+//        for ( current=clist_begin(result);current!=NULL;current=clist_next(current)) {
+
+
+//    Folder*inb=new Folder("INBOX","/");
+
+
+//    folders->append(inb);
     return folders;
 }
 
-void POP3wrapper::deleteMail(const RecMail&mail) {
-    login();
-    if (!m_pop3)
-        return;
-    int err = mailsession_remove_message(m_pop3->sto_session,mail.getNumber());
-    if (err != MAIL_NO_ERROR) {
-        Global::statusMessage(tr("error deleting mail"));
-    }
-}
 
-void POP3wrapper::answeredMail(const RecMail&) {}
+void NNTPwrapper::answeredMail(const RecMail&) {}
 
-int POP3wrapper::deleteAllMail(const Folder*) {
-    login();
-    if (!m_pop3)
-        return 0;
-    int res = 1;
-
-    uint32_t result = 0;
-    int err = mailsession_messages_number(m_pop3->sto_session,NULL,&result);
-    if (err != MAIL_NO_ERROR) {
-        Global::statusMessage(tr("Error getting folder info"));
-        return 0;
-    }
-    for (unsigned int i = 0; i < result; ++i) {
-        err = mailsession_remove_message(m_pop3->sto_session,i+1);
-        if (err != MAIL_NO_ERROR) {
-            Global::statusMessage(tr("Error deleting mail %1").arg(i+1));
-            res=0;
-        }
-        break;
-    }
-    return res;
-}
-
-void POP3wrapper::statusFolder(folderStat&target_stat,const QString&) {
+void NNTPwrapper::statusFolder(folderStat&target_stat,const QString&) {
     login();
     target_stat.message_count = 0;
     target_stat.message_unseen = 0;
     target_stat.message_recent = 0;
-    if (!m_pop3)
+    if (!m_nntp)
         return;
-    int r = mailsession_status_folder(m_pop3->sto_session,0,&target_stat.message_count,
+    int r = mailsession_status_folder(m_nntp->sto_session,0,&target_stat.message_count,
                                       &target_stat.message_recent,&target_stat.message_unseen);
 }
 
-encodedString* POP3wrapper::fetchRawBody(const RecMail&mail) {
+
+encodedString* NNTPwrapper::fetchRawBody(const RecMail&mail) {
     char*target=0;
     size_t length=0;
     encodedString*res = 0;
     mailmessage * mailmsg = 0;
-    int err = mailsession_get_message(m_pop3->sto_session, mail.getNumber(), &mailmsg);
+    int err = mailsession_get_message(m_nntp->sto_session, mail.getNumber(), &mailmsg);
     err = mailmessage_fetch(mailmsg,&target,&length);
     if (mailmsg)
         mailmessage_free(mailmsg);
@@ -246,10 +226,16 @@ encodedString* POP3wrapper::fetchRawBody(const RecMail&mail) {
     return res;
 }
 
-const QString&POP3wrapper::getType()const {
+const QString&NNTPwrapper::getType()const {
     return account->getType();
 }
 
-const QString&POP3wrapper::getName()const{
+const QString&NNTPwrapper::getName()const{
     return account->getAccountName();
+}
+
+void NNTPwrapper::deleteMail(const RecMail&mail) {
+}
+
+int NNTPwrapper::deleteAllMail(const Folder*) {
 }

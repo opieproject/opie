@@ -1,6 +1,7 @@
 #include "abstractmail.h"
 #include "imapwrapper.h"
 #include "pop3wrapper.h"
+#include "nntpwrapper.h"
 #include "mhwrapper.h"
 #include "mboxwrapper.h"
 #include "mailtypes.h"
@@ -20,6 +21,11 @@ AbstractMail* AbstractMail::getWrapper(IMAPaccount *a)
 AbstractMail* AbstractMail::getWrapper(POP3account *a)
 {
     return new POP3wrapper(a);
+}
+
+AbstractMail* AbstractMail::getWrapper(NNTPaccount *a)
+{
+    return new NNTPwrapper(a);
 }
 
 AbstractMail* AbstractMail::getWrapper(const QString&a,const QString&name)
@@ -48,7 +54,7 @@ encodedString* AbstractMail::decode_String(const encodedString*text,const QStrin
 
     int err = mailmime_part_parse(text->Content(),text->Length(),&index,mimetype,
     &result_text,&target_length);
-    
+
     encodedString* result = new encodedString();
     if (err == MAILIMF_NO_ERROR) {
         result->setContent(result_text,target_length);
@@ -61,7 +67,7 @@ QString AbstractMail::convert_String(const char*text)
 {
     size_t index = 0;
     char*res = 0;
-   
+
     /* attention - doesn't work with arm systems! */
     int err = mailmime_encoded_phrase_parse("iso-8859-1",
         text, strlen(text),&index, "iso-8859-1",&res);

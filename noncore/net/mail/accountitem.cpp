@@ -209,6 +209,196 @@ void POP3folderItem::contextMenuSelected(int which)
 }
 
 /**
+ * NNTP Account stuff
+ */
+NNTPviewItem::NNTPviewItem( NNTPaccount *a, AccountView *parent )
+        : AccountViewItem( parent )
+{
+    account = a;
+    wrapper = AbstractMail::getWrapper( account );
+    //FIXME
+    SETPIX(PIXMAP_POP3FOLDER);
+#if 0
+    if (!account->getOffline())
+    {
+        setPixmap( 0,  );
+    }
+    else
+    {
+        setPixmap( 0, PIXMAP_OFFLINE );
+    }
+#endif
+    setText( 0, account->getAccountName() );
+    setOpen( true );
+}
+
+NNTPviewItem::~NNTPviewItem()
+{
+    delete wrapper;
+}
+
+AbstractMail *NNTPviewItem::getWrapper()
+{
+    return wrapper;
+}
+
+void NNTPviewItem::refresh( QList<RecMail> & )
+{
+    refresh();
+}
+
+void NNTPviewItem::refresh()
+{
+    if (account->getOffline()) return;
+    QList<Folder> *folders = wrapper->listFolders();
+    QListViewItem *child = firstChild();
+    while ( child )
+    {
+        QListViewItem *tmp = child;
+        child = child->nextSibling();
+        delete tmp;
+    }
+    Folder *it;
+    QListViewItem*item = 0;
+    for ( it = folders->first(); it; it = folders->next() )
+    {
+        item = new NNTPfolderItem( it, this , item );
+        item->setSelectable(it->may_select());
+    }
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    folders->setAutoDelete(false);
+    delete folders;
+}
+
+RecBody NNTPviewItem::fetchBody( const RecMail &mail )
+{
+    qDebug( "NNTP fetchBody" );
+    return wrapper->fetchBody( mail );
+}
+
+QPopupMenu * NNTPviewItem::getContextMenu()
+{
+    QPopupMenu *m = new QPopupMenu(0);
+    if (m)
+    {
+        if (!account->getOffline())
+        {
+            m->insertItem(QObject::tr("Disconnect",contextName),0);
+            m->insertItem(QObject::tr("Set offline",contextName),1);
+        }
+        else
+        {
+            m->insertItem(QObject::tr("Set online",contextName),1);
+        }
+    }
+    return m;
+}
+
+void NNTPviewItem::disconnect()
+{
+    QListViewItem *child = firstChild();
+    while ( child )
+    {
+        QListViewItem *tmp = child;
+        child = child->nextSibling();
+        delete tmp;
+    }
+    wrapper->logout();
+}
+
+void NNTPviewItem::setOnOffline()
+{
+    if (!account->getOffline())
+    {
+        disconnect();
+    }
+    account->setOffline(!account->getOffline());
+    account->save();
+   //FIXME
+    SETPIX(PIXMAP_POP3FOLDER);
+    refresh();
+}
+
+void NNTPviewItem::contextMenuSelected(int which)
+{
+    switch (which)
+    {
+    case 0:
+        disconnect();
+        break;
+    case 1:
+        setOnOffline();
+        break;
+    }
+}
+
+NNTPfolderItem::~NNTPfolderItem()
+{}
+
+NNTPfolderItem::NNTPfolderItem( Folder *folderInit, NNTPviewItem *parent , QListViewItem*after  )
+        : AccountViewItem( parent,after )
+{
+    folder = folderInit;
+    nntp = parent;
+    if (folder->getDisplayName().lower()!="inbox")
+    {
+        setPixmap( 0, PIXMAP_POP3FOLDER );
+    }
+    else
+    {
+        setPixmap( 0, PIXMAP_INBOXFOLDER);
+    }
+    setText( 0, folder->getDisplayName() );
+}
+
+void NNTPfolderItem::refresh(QList<RecMail>&target)
+{
+    if (folder->may_select())
+        nntp->getWrapper()->listMessages( folder->getName(),target );
+}
+
+RecBody NNTPfolderItem::fetchBody(const RecMail&aMail)
+{
+    return nntp->getWrapper()->fetchBody(aMail);
+}
+
+QPopupMenu * NNTPfolderItem::getContextMenu()
+{
+    QPopupMenu *m = new QPopupMenu(0);
+    if (m)
+    {
+        m->insertItem(QObject::tr("Refresh header list",contextName),0);
+        m->insertItem(QObject::tr("Move/Copie all mails",contextName),1);
+    }
+    return m;
+}
+
+void NNTPfolderItem::downloadMails()
+{
+    AccountView*bl = nntp->accountView();
+    if (!bl) return;
+    bl->downloadMails(folder,nntp->getWrapper());
+}
+
+void NNTPfolderItem::contextMenuSelected(int which)
+{
+    AccountView * view = (AccountView*)listView();
+    switch (which)
+    {
+    case 0:
+        /* must be 'cause pop3 lists are cached */
+        nntp->getWrapper()->logout();
+        view->refreshCurrent();
+        break;
+    case 1:
+        downloadMails();
+        break;
+    default:
+        break;
+    }
+}
+
+/**
  * IMAP Account stuff
  */
 IMAPviewItem::IMAPviewItem( IMAPaccount *a, AccountView *parent )

@@ -11,6 +11,7 @@ class QPopupMenu;
 class Selectstore;
 class AccountView;
 class POP3account;
+class NNTPaccount;
 class IMAPaccount;
 class AbstractMail;
 class Folder;
@@ -75,6 +76,45 @@ protected:
     void downloadMails();
     POP3viewItem *pop3;
 };
+
+
+class NNTPviewItem : public AccountViewItem
+{
+
+public:
+    NNTPviewItem( NNTPaccount *a, AccountView *parent );
+    virtual ~NNTPviewItem();
+    virtual void refresh( QList<RecMail> &target );
+    virtual RecBody fetchBody( const RecMail &mail );
+    AbstractMail *getWrapper();
+    virtual QPopupMenu * getContextMenu();
+    virtual void contextMenuSelected(int);
+
+protected:
+    NNTPaccount *account;
+    virtual void refresh();
+    AbstractMail *wrapper;
+    void disconnect();
+    void setOnOffline();
+};
+
+class NNTPfolderItem : public AccountViewItem
+{
+
+public:
+    NNTPfolderItem( Folder *folder, NNTPviewItem *parent , QListViewItem*after  );
+    virtual ~NNTPfolderItem();
+    virtual void refresh(QList<RecMail>&);
+    virtual RecBody fetchBody(const RecMail&);
+    virtual QPopupMenu * getContextMenu();
+    virtual void contextMenuSelected(int);
+
+protected:
+    void downloadMails();
+    NNTPviewItem *nntp;
+};
+
+
 
 class IMAPviewItem : public AccountViewItem
 {

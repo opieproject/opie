@@ -49,6 +49,7 @@ public:
     
     static AbstractMail* getWrapper(IMAPaccount *a);
     static AbstractMail* getWrapper(POP3account *a);
+    static AbstractMail* getWrapper(NNTPaccount *a);
     /* mbox only! */
     static AbstractMail* getWrapper(const QString&a,const QString&name="Local Folders");
 

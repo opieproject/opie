@@ -75,7 +75,14 @@ void AccountView::populate( QList<Account> list )
             /* must not be hold 'cause it isn't required */
             (void) new POP3viewItem( pop3, this );
         }
-    }
+         else if ( it->getType().compare( "NNTP" ) == 0 )
+        {
+            NNTPaccount *nntp = static_cast<NNTPaccount *>(it);
+            qDebug( "added NNTP " + nntp->getAccountName() );
+            /* must not be hold 'cause it isn't required */
+            (void) new NNTPviewItem( nntp, this );
+       }
+     }
 }
 
 void AccountView::refresh(QListViewItem *item)
