@@ -469,72 +469,72 @@ void OIpkg::loadConfiguration()
         confDir.setNameFilter( "*.conf" );
         confDir.setFilter( QDir::Files );
         confFiles = confDir.entryList( "*.conf", QDir::Files );
-        confFiles << IPKG_CONF;
+    }
+    confFiles << IPKG_CONF;
 
-        QStringList::Iterator lastFile = confFiles.end();
-        for ( QStringList::Iterator it = confFiles.begin(); it != lastFile; ++it )
+    QStringList::Iterator lastFile = confFiles.end();
+    for ( QStringList::Iterator it = confFiles.begin(); it != lastFile; ++it )
+    {
+        // Create absolute file path if necessary
+        QString absFile = (*it);
+        if ( !absFile.startsWith( "/" ) )
+            absFile.prepend( QString( IPKG_CONF_DIR ) + "/" );
+
+        // Read in file
+        QFile f( absFile );
+        if ( f.open( IO_ReadOnly ) )
         {
-            // Create absolute file path if necessary
-            QString absFile = (*it);
-            if ( !absFile.startsWith( "/" ) )
-                absFile.prepend( QString( IPKG_CONF_DIR ) + "/" );
-
-            // Read in file
-            QFile f( absFile );
-            if ( f.open( IO_ReadOnly ) )
+            QTextStream s( &f );
+            while ( !s.eof() )
             {
-                QTextStream s( &f );
-                while ( !s.eof() )
+
+                QString line = s.readLine().simplifyWhiteSpace();
+
+                // Parse line and save info to the conf options list
+                if ( !line.isEmpty() )
                 {
-
-                    QString line = s.readLine().simplifyWhiteSpace();
-
-                    // Parse line and save info to the conf options list
-                    if ( !line.isEmpty() )
+                    if ( !line.startsWith( "#" ) ||
+                            line.startsWith( "#src" ) ||
+                            line.startsWith( "#dest" ) ||
+                            line.startsWith( "#arch" ) ||
+                            line.startsWith( "#option" ) )
                     {
-                        if ( !line.startsWith( "#" ) ||
-                             line.startsWith( "#src" ) ||
-                             line.startsWith( "#dest" ) ||
-                             line.startsWith( "#arch" ) ||
-                             line.startsWith( "#option" ) )
-                        {
-                            int pos = line.find( ' ', 1 );
+                        int pos = line.find( ' ', 1 );
 
-                            // Type
-                            QString typeStr = line.left( pos );
-                            OConfItem::Type type;
-                            if ( typeStr == "src" || typeStr == "#src" )
-                                type = OConfItem::Source;
-                            else if ( typeStr == "dest" || typeStr == "#dest" )
-                                type = OConfItem::Destination;
-                            else if ( typeStr == "option" || typeStr == "#option" )
-                                type = OConfItem::Option;
-                            else if ( typeStr == "arch" || typeStr == "#arch" )
-                                type = OConfItem::Arch;
-                            else
-                                type = OConfItem::NotDefined;
-                            ++pos;
-                            int endpos = line.find( ' ', pos );
+                        // Type
+                        QString typeStr = line.left( pos );
+                        OConfItem::Type type;
+                        if ( typeStr == "src" || typeStr == "#src" )
+                            type = OConfItem::Source;
+                        else if ( typeStr == "dest" || typeStr == "#dest" )
+                            type = OConfItem::Destination;
+                        else if ( typeStr == "option" || typeStr == "#option" )
+                            type = OConfItem::Option;
+                        else if ( typeStr == "arch" || typeStr == "#arch" )
+                            type = OConfItem::Arch;
+                        else
+                            type = OConfItem::NotDefined;
+                        ++pos;
+                        int endpos = line.find( ' ', pos );
 
-                            // Name
-                            QString name = line.mid( pos, endpos - pos );
+                        // Name
+                        QString name = line.mid( pos, endpos - pos );
 
-                            // Value
-                            QString value = "";
-                            if ( endpos > -1 )
-                                value = line.right( line.length() - endpos - 1 );
+                        // Value
+                        QString value = "";
+                        if ( endpos > -1 )
+                            value = line.right( line.length() - endpos - 1 );
 
-                            // Active
-                            bool active = !line.startsWith( "#" );
+                        // Active
+                        bool active = !line.startsWith( "#" );
 
-                            // Add to list
-                            m_confInfo->append( new OConfItem( type, name, value, active ) );
-                        }
+                        // Add to list
+                        m_confInfo->append( new OConfItem( type, name, value, active ) );
                     }
                 }
-
-                f.close();
             }
+
+            f.close();
         }
     }
 
