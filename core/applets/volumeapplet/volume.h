@@ -22,85 +22,101 @@
 #define __VOLUME_APPLET_H__
 
 
-#include <qwidget.h>
 #include <qframe.h>
-#include <qpixmap.h>
-#include <qguardedptr.h>
-#include <qtimer.h>
 
+class QPixmap;
+class QTimer;
 class QSlider;
 class QCheckBox;
+class QButton;
+class OLedBox;
 
-class VolumeControl : public QFrame
-{
-    Q_OBJECT
-public:
-    VolumeControl( bool showMic=FALSE, QWidget *parent=0, const char *name=0 );
+class VolumeApplet;
 
+class VolumeControl : public QFrame {
+	Q_OBJECT
+	
 public:
-    QSlider *slider;
-    QSlider *mic;
-    QCheckBox *muteBox;
-    QCheckBox *alarmSound;
-    QCheckBox *screentaps;
-    QCheckBox *keyclicks;
+	VolumeControl ( VolumeApplet *icon, bool showMic = false, QWidget *parent=0, const char *name=0 );
+
+	bool volMuted ( ) const;
+	int volPercent ( ) const;
+
+	virtual void show ( bool showmic );
+
+protected:
+	virtual void keyPressEvent ( QKeyEvent * e );
+	
+protected slots:
+	void volumeChanged ( bool muted );
+	void micChanged ( bool muted );
+	
+private slots:
+	void volMoved ( int percent );
+	void micMoved ( int percent );
+	void alarmMoved ( int percent );
+	
+	void volMuteToggled ( bool );
+	void micMuteToggled ( bool );
+	void alarmSoundToggled ( bool );
+	void keyClickToggled ( bool );
+	void screenTapToggled ( bool ); 
+
+	void buttonChanged ( );
+	void rateTimerDone ( );
+	
+private:
+	void readConfig ( bool force = false );
+
+	enum eUpdate {
+		UPD_None,
+		UPD_Vol,
+		UPD_Mic
+	};
+	void writeConfigEntry ( const char *entry, int val, eUpdate upd );
 
 
 private:
-    QPushButton *upButton;
-    QPushButton *downButton;
-    QTimer *rateTimer;
-    
-    void keyPressEvent( QKeyEvent * );
-    void createView(bool showMic = FALSE);
-private slots:
-    void ButtonChanged();
-    void rateTimerDone();
-    
+	QSlider *volSlider;
+	QSlider *micSlider;
+	QSlider *alarmSlider;
+	OLedBox *volLed;
+	OLedBox *micLed;
+	OLedBox *alarmLed;
+	
+	QCheckBox *alarmBox;
+	QCheckBox *tapBox;
+	QCheckBox *keyBox;
+	QPushButton *upButton;
+	QPushButton *downButton;
+	QTimer *rateTimer;
+
+	int  m_vol_percent;
+	int  m_mic_percent;
+	int  m_alarm_percent;
+	bool m_vol_muted;
+	bool m_mic_muted;	
+	bool m_snd_alarm;
+	bool m_snd_touch;
+	bool m_snd_key;
+
+	VolumeApplet *m_icon;	
 };
 
-class VolumeApplet : public QWidget
-{
-    Q_OBJECT
+class VolumeApplet : public QWidget {
+	Q_OBJECT
+
 public:
-    VolumeApplet( QWidget *parent = 0, const char *name=0 );
-    ~VolumeApplet();
-    bool isMute( ) { return muted; }
-    int percent( ) { return volumePercent; }
+	VolumeApplet ( QWidget *parent = 0, const char *name=0 );
+	~VolumeApplet ( );
 
-public slots:
-    void volumeChanged( bool muted );
-    void micChanged( bool muted );
-    void sliderMoved( int percent );
-    void mute( bool );
-
-    void micMoved( int percent );
-    void setVolume( int percent );
-    void setMic( int percent );
-
-    void showVolControl(bool showMic = FALSE);
-    void advVolControl();
-
+protected:
+	virtual void mousePressEvent ( QMouseEvent * );
+	virtual void paintEvent ( QPaintEvent* );
+	
 private:
-    int volumePercent, micPercent;
-    bool muted, micMuted;
-    QPixmap volumePixmap;
-    QTimer *advancedTimer;
-
-    void readSystemVolume();
-    void writeSystemVolume();
-    void mousePressEvent( QMouseEvent * );
-    void paintEvent( QPaintEvent* );
-
-    void readSystemMic();
-    void keyPressEvent ( QKeyEvent * e );
-    void mouseReleaseEvent( QMouseEvent *);
-    void writeSystemMic();
-
-protected slots:
-    void alarmSoundCheckToggled(bool);
-    void keyclicksCheckToggled(bool);
-    void screentapsCheckToggled(bool); 
+	QPixmap *      m_pixmap;
+	VolumeControl *m_dialog;
 };
 
 

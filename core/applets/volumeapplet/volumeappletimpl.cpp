@@ -29,41 +29,32 @@ VolumeAppletImpl::VolumeAppletImpl()
 
 VolumeAppletImpl::~VolumeAppletImpl()
 {
-    delete volume;
+	delete volume;
 }
 
 QWidget *VolumeAppletImpl::applet( QWidget *parent )
 {
-    if ( !volume )
-  volume = new VolumeApplet( parent );
-
-    Config cfg("qpe");
-    cfg.setGroup("Volume");
-    QString foo = cfg.readEntry("Mute","TRUE");
-    bool muted;
-    if(foo.find("TRUE",0,TRUE) != -1)
-        muted = TRUE;
-    else muted = FALSE;
-    QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << muted; //mute
-    return volume;
+	if ( !volume )
+		volume = new VolumeApplet( parent );
+	return volume;
 }
 
 int VolumeAppletImpl::position() const
 {
-    return 6;
+	return 6;
 }
 
 QRESULT VolumeAppletImpl::queryInterface( const QUuid &uuid, QUnknownInterface **iface )
 {
-    *iface = 0;
-    if ( uuid == IID_QUnknown )
-  *iface = this;
-    else if ( uuid == IID_TaskbarApplet )
-  *iface = this;
+	*iface = 0;
+	if ( uuid == IID_QUnknown )
+		*iface = this;
+	else if ( uuid == IID_TaskbarApplet )
+		*iface = this;
 
-    if ( *iface )
-  (*iface)->addRef();
-    return QS_OK;
+	if ( *iface )
+		(*iface)->addRef();
+	return QS_OK;
 }
 
 Q_EXPORT_INTERFACE()

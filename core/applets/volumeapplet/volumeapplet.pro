@@ -1,7 +1,7 @@
 TEMPLATE	= lib
 CONFIG		+= qt warn_on release
-HEADERS	=   volume.h volumeappletimpl.h
-SOURCES	=   volume.cpp volumeappletimpl.cpp
+HEADERS	=   volume.h volumeappletimpl.h oledbox.h
+SOURCES	=   volume.cpp volumeappletimpl.cpp oledbox.cpp
 TARGET		= volumeapplet
 DESTDIR		= $(OPIEDIR)/plugins/applets
 INCLUDEPATH += $(OPIEDIR)/include
