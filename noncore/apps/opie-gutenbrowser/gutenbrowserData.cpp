@@ -14,6 +14,7 @@
 
 //#include "gutenbrowserData.h"
 #include "gutenbrowser.h"
+#include "multiline_ex.h"
 
 /* OPIE */
 #include <opie2/odebug.h>
@@ -61,7 +62,7 @@ void Gutenbrowser::initConfig() {
 // #endif
 
     }
-      //    odebug << "init file is " << iniFile << "" << oendl;
+      qDebug("init file is " + iniFile );;
 
 #ifdef Q_WS_QWS
     useSplitter=FALSE;
@@ -151,9 +152,9 @@ void Gutenbrowser::initConfig() {
     qExit=config.readEntry("queryExit","TRUE");
     if(qExit=="TRUE") {
         b_queryExit=TRUE;
-//    odebug << "Please query before leaving the library." << oendl;
+qDebug("lease query before leaving the library.");;
     } else {
-//    odebug << "Please DO NOT query before leaving the library." << oendl;
+			qDebug("Please DO NOT query before leaving the library.");
         b_queryExit=FALSE;
     }
 // bookmarks
@@ -165,7 +166,7 @@ void Gutenbrowser::initConfig() {
 
 void Gutenbrowser::initMenuBar()
 {
-//    odebug << "Starting menu init." << oendl;
+	qDebug("Starting menu init.");
       // menuBar entry fileMenu
     menubar = new QPEMenuBar(this);
 
@@ -211,11 +212,10 @@ void Gutenbrowser::initMenuBar()
 
 void Gutenbrowser::initButtonBar()
 {
-//odebug << "Starting buttonbar init." << oendl;
+	qDebug("Starting buttonbar init.");
 
     OpenButton = new QPushButton( this, "OpenButton" );
     OpenButton->setFocusPolicy( QWidget::TabFocus );
-
     LibraryButton = new QPushButton( this, "LibraryButton" );
     LibraryButton->setFocusPolicy( QWidget::TabFocus );
 
@@ -245,7 +245,6 @@ void Gutenbrowser::initButtonBar()
     dictionaryButton->setFocusPolicy( QWidget::TabFocus );
 
     InfoBar = new QPushButton( this, "Info_Bar" );
-//    odebug << "Infobar" << oendl;
 //    if(!useSplitter) {
 
     buttonsHidden=FALSE;
@@ -262,12 +261,12 @@ void Gutenbrowser::initButtonBar()
 
     topLayout->setSpacing(0);
     topLayout->addLayout( buttons2,0);
-
 }
 
 /* STATUSBAR*/
 void Gutenbrowser::initStatusBar()
 {
+	qDebug("statusbar");
 // #ifndef Q_WS_QWS
 
 //     statusBar = new QStatusBar( this, "Status Bar");
@@ -280,12 +279,11 @@ void Gutenbrowser::initView()
       // set the main widget here
 //        QFont defaultFont( "charter", 10, 50, 0 );
     Lview = new MultiLine_Ex(this);
-
     Config cfg("Gutenbrowser");
     cfg.setGroup("Font");
 
     FontDatabase fdb;
-    QFont defaultFont=Lview->font();
+    QFont defaultFont = Lview->font();
     QFontInfo fontInfo(defaultFont);
 
     QString family = cfg.readEntry("Family", fontInfo.family());
@@ -295,10 +293,10 @@ void Gutenbrowser::initView()
 
     defaultFont = fdb.font(family,style,i_size,charSet);
 
-    QString italic=cfg.readEntry("Italic","FALSE");
+    QString italic = cfg.readEntry("Italic","FALSE");
     if(italic=="TRUE") {
-        odebug << "Set Italic font" << oendl;
-        defaultFont = fdb.font(family,"Regular",i_size,charSet); //workaround
+        qDebug("Set Italic font");;
+        defaultFont = fdb.font( family, "Regular", i_size,charSet); //workaround
         defaultFont.setItalic(TRUE);
     }
 
@@ -312,7 +310,7 @@ void Gutenbrowser::initView()
         useWrap=true;
     } else {
         Lview->setWordWrap(QMultiLineEdit::NoWrap);
-        useWrap=false;
+        useWrap = false;
     }
     mainList = new QListBox(this,"mainlist");
 
@@ -329,4 +327,5 @@ void Gutenbrowser::initView()
         Lview->hide();
 
     topLayout->addLayout( edits, 0);
+		qDebug("end initView");
 }
