@@ -55,6 +55,7 @@ public:
   virtual void restart();
 
 protected:
+  bool callProcess( const QStringList& name );
   // Interface information
   QString hardwareName;
   Module *moduleOwner;

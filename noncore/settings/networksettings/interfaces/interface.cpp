@@ -1,12 +1,17 @@
 /**
  * $Author: zecke $
- * $Date: 2004-04-06 08:00:49 $
+ * $Date: 2004-12-20 22:29:08 $
  */
 
 #include "interface.h"
 
 #include <opie2/odebug.h>
+#include <opie2/oprocess.h>
+#include <opie2/owait.h>
 
+#include <qpe/global.h>
+
+#include <qapplication.h>
 #include <qdatetime.h>
 #include <qfile.h>
 #include <qdir.h>
@@ -14,6 +19,8 @@
 #include <qtextstream.h>
 
 #define IFCONFIG "/sbin/ifconfig"
+#define IF_UP   "/sbin/ifup"
+#define IF_DOWN "/sbin/ifdown"
 #define DHCP_INFO_DIR "/etc/dhcpc"
 
 #include <stdio.h>
@@ -66,6 +73,29 @@ void Interface::setModuleOwner(Module *owner){
 };
 
 
+bool Interface::callProcess( const QStringList& names ) {
+    Opie::Ui::OWait *owait = new Opie::Ui::OWait();
+    Global::statusMessage( tr( "Restarting interface" ) );
+
+    owait->show();
+    qApp->processEvents();
+
+    Opie::Core::OProcess restart;
+    restart << names;
+    if ( !restart.start(Opie::Core::OProcess::Block,
+                        Opie::Core::OProcess::NoCommunication ) ) {
+        owarn << "unable to spawn command" << names << oendl;
+        return false;
+    }
+    owait->hide();
+    delete owait;
+
+    if ( restart.normalExit() || restart.exitStatus() != 0 )
+        return false;
+
+    return true;
+}
+
 /**
  * Try to start the interface.
  */
@@ -76,9 +106,11 @@ void Interface::start(){
     return;
   }
 
-  int ret = system(QString("%1 %2 up").arg(IFCONFIG).arg(this->name()).latin1());
-  // See if it was successful...
-  if(ret != 0){
+  /* prepare command and call it */
+  QStringList lst;
+  lst << IF_UP;
+  lst << name();
+  if ( !callProcess(lst) ) {
     emit (updateMessage("Starting interface failed"));
     return;
   }
@@ -98,8 +130,12 @@ void Interface::stop(){
     return;
   }
 
-  int ret = system(QString("%1 %2 down").arg(IFCONFIG).arg(this->name()).latin1());
-  if(ret != 0){
+  QStringList lst;
+  lst << IF_DOWN;
+  lst << name();
+
+  /* prepare command and call it */
+  if( !callProcess( lst ) ){
     emit (updateMessage("Stopping interface failed"));
     return;
   }
