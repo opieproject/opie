@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/applets
 Maintainer: L.J. Potter <lpotter@trolltech.com>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION.1
+Version: $QPE_VERSION$EXTRAVERSION
 Depends: task-opie-minimal
 Description: Restart Applet
  A simple taskbar applet to restart the Opie environment
