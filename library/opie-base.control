@@ -6,7 +6,7 @@ Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION.2
 Provides: qpe-base
 Conflicts: qpe-base
-Depends: qt-embedded (>=$QTE_VERSION), opie-qcop, opie-taskbar, opie-sounds, apmd, opie-pics, libopie
+Depends: qt-embedded (>=$QTE_VERSION), opie-qcop, opie-taskbar, opie-sounds, apmd, opie-pics, libopie, timezones
 Description: Base Opie environment
  A complete GUI environment for handhelds.
  You will probably want to install one of the opie-i18n-* packages.
