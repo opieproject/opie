@@ -1,7 +1,4 @@
-menu "batteryapplet"
-
   config BATTERYAPPLET
     boolean "batteryapplet"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
-endmenu
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && TARGET_SHARP
