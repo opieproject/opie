@@ -62,6 +62,8 @@ static const int magic_daily = 2292922;
 static const int magic_countdown = 2292923;
 static const int magic_snooze = 2292924;
 static const int magic_playmp = 2292925;
+static const char ALARM_CLOCK_CHANNEL [] = "QPE/Application/clock";
+static const char ALARM_CLOCK_MESSAGE [] = "alarm(QDateTime,int)";
 
 #include <math.h>
 #include <unistd.h>
@@ -127,15 +129,15 @@ AlarmDlg::checkSnooze(void)
     //
     // Ensure we have only one snooze alarm.
     //
-    AlarmServer::deleteAlarm(QDateTime(), "QPE/Application/clock",
-	"alarm(QDateTime,int)", magic_snooze);
+    AlarmServer::deleteAlarm(QDateTime(), ALARM_CLOCK_CHANNEL,
+	ALARM_CLOCK_MESSAGE, magic_snooze);
 
     if (snoozeTime->value() > 0) {
 	QDateTime wake = QDateTime::currentDateTime();
 	wake = wake.addSecs(snoozeTime->value() * 60); // snoozeTime in minutes
 
-	AlarmServer::addAlarm(wake, "QPE/Application/clock",
-	    "alarm(QDateTime,int)", magic_snooze);
+	AlarmServer::addAlarm(wake, ALARM_CLOCK_CHANNEL,
+	    ALARM_CLOCK_MESSAGE, magic_snooze);
     }
     accept();
 }
@@ -571,7 +573,7 @@ void Clock::enableDaily( bool )
 
 void Clock::appMessage( const QCString &msg, const QByteArray &data )
 {
-    if ( msg == "alarm(QDateTime,int)" ) {
+    if ( msg == ALARM_CLOCK_MESSAGE ) {
 	QDataStream ds(data,IO_ReadOnly);
 	QDateTime when;
 	int t;
@@ -716,9 +718,7 @@ void Clock::applyDailyAlarm()
     config.writeEntry( "Minute", minute );
 
     bool enableDaily = dailyEnabled->isChecked();
-    bool wasSound    = config.readEntry( "SoundEnabled" );
     bool isSound     = sndCheck->isChecked();
-    int oldMagic = wasSound ? magic_playmp : magic_daily;
     int  isMagic =  isSound ? magic_playmp : magic_daily;
     config.writeEntry( "Enabled", enableDaily );
     config.writeEntry( "SoundEnabled", isSound );
@@ -735,13 +735,18 @@ void Clock::applyDailyAlarm()
     }
     config.writeEntry( "ExcludeDays", exclDays );
 
-    /* try to delete both */
-    AlarmServer::deleteAlarm(QDateTime(), "QPE/Application/clock",
-                             "alarm(QDateTime,int)", oldMagic);
+    /* try to delete all  */
+    AlarmServer::deleteAlarm(QDateTime(), ALARM_CLOCK_CHANNEL,
+                             ALARM_CLOCK_MESSAGE, magic_daily);
+    AlarmServer::deleteAlarm(QDateTime(), ALARM_CLOCK_CHANNEL,
+			     ALARM_CLOCK_MESSAGE, magic_playmp );
+    AlarmServer::deleteAlarm(QDateTime(), ALARM_CLOCK_CHANNEL,
+			     ALARM_CLOCK_MESSAGE, magic_snooze);
+    
     if ( enableDaily && exclCount < 7 ) {
 	QDateTime when = nextAlarm( hour, minute );
-	AlarmServer::addAlarm(when, "QPE/Application/clock",
-			    "alarm(QDateTime,int)", isMagic);
+	AlarmServer::addAlarm(when, ALARM_CLOCK_CHANNEL,
+			    ALARM_CLOCK_MESSAGE, isMagic);
     }
 }
 
