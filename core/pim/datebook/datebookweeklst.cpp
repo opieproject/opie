@@ -384,13 +384,13 @@ QDate DateBookWeekLst::weekDate() const
 
 void DateBookWeekLst::getEvents() {
     QDate start = weekDate(); //date();
-    QDate stop = start.addDays(7);
+    QDate stop = start.addDays(6);
     QValueList<EffectiveEvent> el = db->getEffectiveEvents(start, stop);
 
     if (view) delete view;
     if (dbl) {
-        QDate start2=start.addDays(8);
-        stop=start2.addDays(7);
+        QDate start2=start.addDays(7);
+        stop=start2.addDays(6);
         QValueList<EffectiveEvent> el2 = db->getEffectiveEvents(start2, stop);
         view=new DateBookWeekLstDblView(el,el2,start,bStartOnMonday,scroll);
     } else {
