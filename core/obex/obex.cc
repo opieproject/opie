@@ -74,8 +74,10 @@ void Obex::sendNow(){
     }
     // OProcess inititialisation
     m_send = new OProcess();
+    m_send->setWorkingDirectory( QFileInfo(m_file).dirPath(true) );
+
     *m_send << "irobex_palm3";
-    *m_send << QFile::encodeName(m_file);
+    *m_send << QFile::encodeName(QFileInfo(m_file).fileName());
 
     // connect to slots Exited and and StdOut
     connect(m_send,  SIGNAL(processExited(Opie::Core::OProcess*) ),
