@@ -34,7 +34,9 @@ QRESULT TodolistPluginImpl::queryInterface( const QUuid & uuid,  QUnknownInterfa
     *iface = 0;
     if ( ( uuid == IID_QUnknown ) || ( uuid == IID_TodayPluginInterface ) )  {
         *iface = this, (*iface)->addRef();
-    }
+    }else
+	return QS_FALSE;
+	
     return QS_OK;
 
 }
