@@ -1405,7 +1405,7 @@ void PlayListWidget::populateSkinsMenu() {
 }
 
 void PlayListWidget::skinsMenuActivated( int item ) {
-   for( int i = defaultSkinIndex; i > defaultSkinIndex - skinsMenu->count(); i-- ) {
+   for( int i = defaultSkinIndex; i > defaultSkinIndex - static_cast<int>(skinsMenu->count()); i-- ) {
       skinsMenu->setItemChecked( i, FALSE );
    }
    skinsMenu->setItemChecked( item, TRUE );
