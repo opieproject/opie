@@ -18,6 +18,8 @@
 
 #include "today.h"
 
+#include <opie2/odebug.h>
+
 #include <qpe/config.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/resource.h>
@@ -188,7 +190,7 @@ void Today::loadPlugins() {
 
     QString path = QPEApplication::qpeDir() + "/plugins/today";
 #ifdef Q_OS_MACX
-    qWarning("Searching for Plugins in: %s", path.latin1());
+	Opie::Core::owarn << "Searching for Plugins in: " << path << oendl;
     QDir dir( path, "lib*.dylib" );
 #else
     QDir dir( path, "lib*.so" );
@@ -203,10 +205,10 @@ void Today::loadPlugins() {
         QInterfacePtr<TodayPluginInterface> iface;
         QLibrary *lib = new QLibrary( path + "/" + *it );
 
-	qDebug( "querying: %s", QString( path + "/" + *it ).latin1() );
+		Opie::Core::odebug << "querying: " << path + "/" + *it << oendl;
         if ( lib->queryInterface( IID_TodayPluginInterface, (QUnknownInterface**)&iface ) == QS_OK ) {
-	    qDebug( "accepted: %s", QString( path + "/" + *it ).latin1() );
-            qDebug( QString(*it) );
+			Opie::Core::odebug << "accepted: " << path + "/" + *it << oendl;
+			Opie::Core::odebug << *it << oendl;
 
             TodayPlugin plugin;
             plugin.library = lib;
@@ -220,7 +222,7 @@ void Today::loadPlugins() {
             config.setGroup("Language");
             lang = config.readEntry( "Language", "en" );
 
-            qDebug( "Languages: " + lang );
+			Opie::Core::odebug << "Languages: " << lang << oendl;
             QTranslator * trans = new QTranslator( qApp );
             QString tfn = QPEApplication::qpeDir()+"/i18n/" + lang + "/" + type + ".qm";
             if ( trans->load( tfn ) )  {
@@ -271,7 +273,7 @@ void Today::loadPlugins() {
                 pluginList.append( plugin );
             }
         } else {
-            qDebug( "could not recognize %s", QString( path + "/" + *it ).latin1() );
+			Opie::Core::odebug << "could not recognize " << path + "/" + *it << oendl;
             delete lib;
         }
 
@@ -315,10 +317,10 @@ void Today::draw() {
 	plugin = pluginList[i];
 
         if ( plugin.active ) {
-            //   qDebug( plugin.name + " is ACTIVE " );
+			//Opie::Core::odebug << plugin.name << " is ACTIVE " << oendl;
             plugin.guiBox->show();
         } else {
-            //  qDebug( plugin.name + " is INACTIVE" );
+			//Opie::Core::odebug << plugin.name << " is INACTIVE " << oendl;
             plugin.guiBox->hide();
         }
         count++;
@@ -395,7 +397,7 @@ void Today::reinitialize()  {
     for ( it = pluginList.begin(); it != pluginList.end(); ++it ) {
         if ( !(*it).excludeRefresh ) {
             (*it).guiPart->reinitialize();
-            qDebug( "reinit" );
+			Opie::Core::odebug << "reinit" << oendl;
         }
 
         /* check if plugins is still to be shown */
@@ -449,7 +451,7 @@ void Today::refresh() {
     for ( it = pluginList.begin(); it != pluginList.end(); ++it ) {
         if ( !(*it).excludeRefresh ) {
             (*it).guiPart->refresh();
-            qDebug( "refresh" );
+			Opie::Core::odebug << "refresh" << oendl;
         }
     }
 
