@@ -60,6 +60,7 @@ protected:
     Settings *settings;
     
     int sendQueuedMail(AbstractMail*wrap,SMTPaccount*smtp,RecMail*which);
+    void storeFailedMail(const char*data,unsigned int size, const char*failuremessage);
 
     int m_queuedMail;
     static const char* USER_AGENT;

@@ -6,6 +6,7 @@
 #include <string.h>
 #include <qdir.h>
 #include <qt.h>
+#include <qmessagebox.h>
 
 #include <qpe/config.h>
 #include <qpe/qcopenvelope_qws.h>
@@ -554,6 +555,17 @@ void SMTPwrapper::smtpSend( mailmime *mail,bool later, SMTPaccount *smtp ) {
         smtp_address_list_free( rcpts );
 }
 
+void SMTPwrapper::storeFailedMail(const char*data,unsigned int size, const char*failuremessage)
+{
+    if (data) {
+        storeMail(data,size,"Sendfailed");
+    }
+    if (failuremessage) {
+        QMessageBox::critical(0,tr("Error sending mail"),
+            tr("<center>%1</center>").arg(failuremessage));
+    }
+}
+
 int SMTPwrapper::smtpSend(char*from,clist*rcpts,const char*data,size_t size, SMTPaccount *smtp ) {
     const char *server, *user, *pass;
     bool ssl;
@@ -589,12 +601,14 @@ int SMTPwrapper::smtpSend(char*from,clist*rcpts,const char*data,size_t size, SMT
     }
     if ( err != MAILSMTP_NO_ERROR ) {
         qDebug("Error init connection");
+        storeFailedMail(data,size,mailsmtpError(err));
         result = 0;
         goto free_mem_session;
     }
 
     err = mailsmtp_init( session );
     if ( err != MAILSMTP_NO_ERROR ) {
+        storeFailedMail(data,size,mailsmtpError(err));
         result = 0;
         goto free_con_session;
     }
@@ -621,15 +635,23 @@ int SMTPwrapper::smtpSend(char*from,clist*rcpts,const char*data,size_t size, SMT
         }
         qDebug( "session->auth: %i", session->auth);
         err = mailsmtp_auth( session, (char*)user, (char*)pass );
-        if ( err == MAILSMTP_NO_ERROR )
+        if ( err == MAILSMTP_NO_ERROR ) {
             qDebug("auth ok");
+        } else {
+            storeFailedMail(data,size,tr("Authentification failed"));
+            result = 0;
+            goto free_con_session;
+        }
         qDebug( "Done auth!" );
     } else {
         qDebug("SMTP without auth");
+        result = 0;
+        goto free_con_session;
     }
 
     err = mailsmtp_send( session, from, rcpts, data, size );
     if ( err != MAILSMTP_NO_ERROR ) {
+        storeFailedMail(data,size,mailsmtpError(err));
         qDebug("Error sending mail: %s",mailsmtpError(err).latin1());
         result = 0;
         goto free_con_session;
