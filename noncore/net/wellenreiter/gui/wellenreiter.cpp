@@ -347,6 +347,15 @@ void Wellenreiter::stopClicked()
     sniffing = false;
     emit( stoppedSniffing() );
 
+    #ifdef QWS
+    if ( WellenreiterConfigWindow::instance()->disablePM->isChecked() )
+    {
+        QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::Enable;
+    }
+    #else
+        #warning FIXME: setScreenSaverMode is not operational on the X11 build
+    #endif
+
     // print out statistics
     for( QMap<QString,int>::ConstIterator it = pcap->statistics().begin(); it != pcap->statistics().end(); ++it )
        statwindow->updateCounter( it.key(), it.data() );
@@ -474,6 +483,16 @@ void Wellenreiter::startClicked()
 
     logwindow->log( "(i) Started Scanning." );
     sniffing = true;
+
+    #ifdef QWS
+    if ( WellenreiterConfigWindow::instance()->disablePM->isChecked() )
+    {
+        QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::Disable;
+    }
+    #else
+        #warning FIXME: setScreenSaverMode is not operational on the X11 build
+    #endif
+
     emit( startedSniffing() );
     if ( cardtype != DEVTYPE_FILE ) channelHopped( 6 ); // set title
     else
