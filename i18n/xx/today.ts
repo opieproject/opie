@@ -111,11 +111,11 @@ resume?
     </message>
     <message>
         <source>Today Config</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Tiny Banner</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
 </context>
 </TS>

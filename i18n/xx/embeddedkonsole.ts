@@ -7,23 +7,23 @@
     </message>
     <message>
         <source>new</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>edit</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>delete</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>up</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>down</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>

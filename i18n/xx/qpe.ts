@@ -172,7 +172,7 @@ Please charge the back-up battery.</source>
     <name>QObject</name>
     <message>
         <source>Battery Status</source>
-        <translation type="unfinished">FOO</translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>

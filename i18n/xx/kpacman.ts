@@ -203,7 +203,7 @@ or is of an unknown format.</source>
     </message>
     <message>
         <source>                          </source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>

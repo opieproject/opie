@@ -3,47 +3,47 @@
     <name>FileSysInfo</name>
     <message>
         <source>CF</source>
-        <translation type="unfinished">FOO</translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>This graph represents how much memory is currently used on this Compact Flash memory card.</source>
-        <translation type="unfinished">FOO</translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Ha</source>
-        <translation type="unfinished">FOO</translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>This graph represents how much storage is currently used on this hard drive.</source>
-        <translation type="unfinished">FOO</translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>SD</source>
-        <translation type="unfinished">FOO</translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>This graph represents how much memory is currently used on this Secure Digital memory card.</source>
-        <translation type="unfinished">FOO</translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>SC</source>
-        <translation type="unfinished">FOO</translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>In</source>
-        <translation type="unfinished">FOO</translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>This graph represents how much memory is currently used of the built-in memory (i.e. Flash memory) on this handheld device.</source>
-        <translation type="unfinished">FOO</translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>RA</source>
-        <translation type="unfinished">FOO</translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>This graph represents how much memory is currently used of the temporary RAM disk.</source>
-        <translation type="unfinished">FOO</translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>

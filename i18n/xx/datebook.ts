@@ -212,7 +212,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Calendar</source>
-        <translation type="unfinished">FOO</translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>
@@ -311,23 +311,23 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Location:</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation type="unfinished">FOO</translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished">FOO</translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>
@@ -341,7 +341,7 @@ Quit anyway?</source>
     <name>DateBookWeekHeader</name>
     <message>
         <source>w</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>
@@ -355,7 +355,7 @@ Quit anyway?</source>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>
@@ -378,37 +378,37 @@ Quit anyway?</source>
     <message>
         <source>Mo</source>
         <comment>Monday</comment>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Tu</source>
         <comment>Tuesday</comment>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>We</source>
         <comment>Wednesday</comment>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Th</source>
         <comment>Thursday</comment>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Fr</source>
         <comment>Friday</comment>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Sa</source>
         <comment>Saturday</comment>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Su</source>
         <comment>Sunday</comment>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>

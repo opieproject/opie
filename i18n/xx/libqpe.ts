@@ -761,31 +761,31 @@ Free some memory and try again.</source>
     </message>
     <message>
         <source>Click to close this window, discarding changes.</source>
-        <translation type="unfinished">FOO</translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Click to close this window.</source>
-        <translation type="unfinished">FOO</translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Click to close this window and apply changes.</source>
-        <translation type="unfinished">FOO</translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Click to make this window moveable.</source>
-        <translation type="unfinished">FOO</translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Click to make this window use all available screen area.</source>
-        <translation type="unfinished">FOO</translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
-        <translation type="unfinished">FOO</translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>What&apos;s this...</source>
-        <translation type="unfinished">FOO</translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>

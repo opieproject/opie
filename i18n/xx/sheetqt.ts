@@ -711,7 +711,7 @@ http://qtopia.sitebest.com</source>
     </message>
     <message>
         <source>Sheets</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>

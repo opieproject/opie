@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>attach...</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>
@@ -137,34 +137,34 @@
     </message>
     <message>
         <source>Main operation toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>getMail</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>select account</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Click to download mail via all available accounts.
  Press and hold to select the desired account.</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">FOO</translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>No account associated</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>There is no active account 
 associated to this mail
  it can not be downloaded</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>
@@ -201,17 +201,17 @@ Mail has NOT been sent</source>
     </message>
     <message>
         <source>Central view area</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Mail not downloaded</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>The mail you have clicked 
 has not been downloaded yet.
  Would you like to do it now ?</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>
@@ -254,45 +254,45 @@ viewed by double clicking the entry.
 blue attachment icon shows whether this 
 mailhas attachments.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>This is the outbox view.
 It keeps the queued mails to send which can be 
 reviewed by double clicking the entry.</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>The mail subject should be entered here</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Recipients can be entered here</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>If you would like to send copies of your mail they can be entered here</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>This button opens the address selector with all mail adresses from your OPIE addressbook</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Enter your mail text here</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Choose the recipients from this list</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Queue your mail by clicking here</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>This is an overview about all attachments in the mail</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>
@@ -327,61 +327,61 @@ reviewed by double clicking the entry.</source>
     </message>
     <message>
         <source>Download</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Click here to download the selected mail</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Read the previous mail in the list</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Read the next mail in the list</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Click here to add attachments to your mail</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>The mail view has 2 modes:
 &lt;LI&gt;&lt;B&gt;RichText&lt;/B&gt; shows the mail as HTML with reach features (no standard line breaks)&lt;/LI&gt;&lt;LI&gt;&lt;B&gt;Plain&lt;/B&gt; shows the mail as standard plain text&lt;/LI&gt;Click here to switch between those view modes</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>reply</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>reply to mail</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Click here to reply to the selected mail
 Press and hold for more options.</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Reply all</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Click here to reply to the selected mail to CC: addresses also</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Click here to forward the selected mail</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Click here to remove the selected mail</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>
@@ -415,7 +415,7 @@ Press and hold for more options.</source>
     </message>
     <message>
         <source>Click here to install the attachment to your Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>
@@ -454,78 +454,78 @@ Press and hold for more options.</source>
     </message>
     <message>
         <source>Attachment</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Click here to attach files to your mail</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>This button puts your mail in the send queue</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Click here to create a new mail</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>No recipient</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Send mail to whom?</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>OK
 </source>
-        <translation type="unfinished">FOO</translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Incorrect recipient separator</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Recipients must be separated by ;
 and be valid emailaddresses</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Incorrect carbon copy separator</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>CC Recipients must be separated by ;
 and be valid emailaddresses</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Re: </source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source> wrote on </source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>======forwarded message from </source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source> starts======
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>FWD: </source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>======end of forwarded message======
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
 </context>
 </TS>

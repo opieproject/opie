@@ -269,7 +269,7 @@ all the pages?</source>
     </message>
     <message>
         <source>All Images</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>
@@ -288,7 +288,7 @@ all the pages?</source>
     </message>
     <message>
         <source>All images</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>

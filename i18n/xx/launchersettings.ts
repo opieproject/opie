@@ -41,15 +41,15 @@
     <name>QObject</name>
     <message>
         <source>Sample 1</source>
-        <translation type="unfinished">FOO</translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Sample 2</source>
-        <translation type="unfinished">FOO</translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Sample 3</source>
-        <translation type="unfinished">FOO</translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>

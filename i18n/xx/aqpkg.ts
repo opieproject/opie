@@ -468,7 +468,7 @@ Are you sure?
     <name>QuestionDlg</name>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">FOO</translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>
