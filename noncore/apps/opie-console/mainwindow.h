@@ -59,7 +59,9 @@ private slots:
     void slotProfile(int);
 	void slotTransfer();
     void slotOpenKeb(bool);
-
+    void slotRecordScript();
+    void slotSaveScript();
+    void slotRunScript();
 private:
     void initUI();
     void populateProfiles();
@@ -88,12 +90,16 @@ private:
     QPopupMenu* m_console;
     QPopupMenu* m_settings;
     QPopupMenu* m_sessionsPop;
+    QPopupMenu* m_scripts;
     QAction* m_connect;
     QAction* m_disconnect;
     QAction* m_terminate;
 	QAction* m_transfer;
     QAction* m_setProfiles;
     QAction* m_openKeys;
+    QAction* m_recordScript;
+    QAction* m_saveScript;
+    QAction* m_runScript;
 
     FunctionKeyboard *m_kb;
 };

@@ -30,7 +30,7 @@ HEADERS      = io_layer.h io_serial.h io_irda.h io_bt.h\
 	       btconfigwidget.h modemconfigwidget.h \
 	       atconfigdialog.h dialdialog.h \  
                emulation_widget.h procctl.h \
-           function_keyboard.h
+           function_keyboard.h script.h
 
 SOURCES      = io_layer.cpp io_serial.cpp io_irda.cpp io_bt.cpp \
 	       file_layer.cpp filetransfer.cpp \
@@ -58,7 +58,7 @@ SOURCES      = io_layer.cpp io_serial.cpp io_irda.cpp io_bt.cpp \
 	       btconfigwidget.cpp modemconfigwidget.cpp \ 
 	       atconfigdialog.cpp dialdialog.cpp \
 	       emulation_widget.cpp default.cpp  procctl.cpp \
-           function_keyboard.cpp
+           function_keyboard.cpp script.cpp
 
 INTERFACES   = configurebase.ui editbase.ui
 INCLUDEPATH += $(OPIEDIR)/include

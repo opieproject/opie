@@ -5,7 +5,7 @@
 #include <qpopupmenu.h>
 #include <qtoolbar.h>
 #include <qpe/resource.h>
-
+#include <opie/ofiledialog.h>
 
 #include "profileeditordialog.h"
 #include "configdialog.h"
@@ -17,6 +17,7 @@
 #include "tabwidget.h"
 #include "transferdialog.h"
 #include "function_keyboard.h"
+#include "script.h"
 
 MainWindow::MainWindow() {
     m_factory = new MetaFactory();
@@ -38,6 +39,7 @@ void MainWindow::initUI() {
 
     m_bar = new QMenuBar( m_tool );
     m_console = new QPopupMenu( this );
+    m_scripts = new QPopupMenu( this );
     m_sessionsPop= new QPopupMenu( this );
     m_settings = new QPopupMenu( this );
 
@@ -106,6 +108,21 @@ void MainWindow::initUI() {
              this, SLOT(slotConfigure() ) );
 
     /*
+     * script actions
+     */
+    m_recordScript = new QAction(tr("Record Script"), QString::null, 0, this, 0);
+    m_recordScript->addTo(m_scripts);
+    connect(m_recordScript, SIGNAL(activated()), this, SLOT(slotRecordScript()));
+    
+    m_saveScript = new QAction(tr("Save Script"), QString::null, 0, this, 0);
+    m_saveScript->addTo(m_scripts);
+    connect(m_saveScript, SIGNAL(activated()), this, SLOT(slotSaveScript()));
+    
+    m_runScript = new QAction(tr("Run Script"), QString::null, 0, this, 0);
+    m_runScript->addTo(m_scripts);
+    connect(m_runScript, SIGNAL(activated()), this, SLOT(slotRunScript()));
+
+    /*
      * action that open/closes the keyboard
      */
     m_openKeys = new QAction (tr("Open Keyboard..."), 
@@ -126,6 +143,9 @@ void MainWindow::initUI() {
     /* insert the connection menu */
     m_bar->insertItem( tr("Connection"), m_console );
 
+    /* the scripts menu */
+    m_bar->insertItem( tr("Scripts"), m_scripts );
+    
     /* the settings menu */
     m_bar->insertItem( tr("Settings"), m_settings );
 
@@ -186,6 +206,40 @@ void MainWindow::slotNew() {
 
     if ( ret == QDialog::Accepted ) {
         create( dlg.profile() );
+    }
+}
+
+void MainWindow::slotRecordScript() {
+    if (currentSession()) {
+        currentSession()->emulationLayer()->startRecording();
+    }
+}
+
+void MainWindow::slotSaveScript() {
+    if (currentSession() && currentSession()->emulationLayer()->isRecording()) {
+        MimeTypes types;
+        QStringList script;
+        script << "text/plain";
+        types.insert("Script", script);
+        QString filename = OFileDialog::getSaveFileName(2, "/", QString::null, types);
+        if (!filename.isEmpty()) {
+            currentSession()->emulationLayer()->script()->saveTo(filename);
+            currentSession()->emulationLayer()->clearScript();
+        }
+    }
+}
+
+void MainWindow::slotRunScript() {
+    if (currentSession()) {
+        MimeTypes types;
+        QStringList script;
+        script << "text/plain";
+        types.insert("Script", script);
+        QString filename = OFileDialog::getOpenFileName(2, "/", QString::null, types);
+        if (!filename.isEmpty()) {
+            Script script(DocLnk(filename).file());
+            currentSession()->emulationLayer()->runScript(&script);
+        }
     }
 }
 
