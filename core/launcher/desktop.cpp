@@ -176,8 +176,10 @@ public:
   }
   void restore()
   {
-    if ( !m_lcd_status )     // We must have turned it off
+    if ( !m_lcd_status ) {    // We must have turned it off
       ODevice::inst ( ) -> setDisplayStatus ( true );
+      m_lcd_status = true;
+    }
 
     setBacklight ( -3 );
   }
@@ -303,6 +305,14 @@ public:
     m_backlight_bright = bright;
   }
 
+  void setDisplayState ( bool on )
+  {
+    if ( m_lcd_status != on ) {
+      ODevice::inst ( ) -> setDisplayStatus ( on );
+      m_lcd_status = on;
+    }
+  }
+
 private:
   int m_disable_suspend;
   bool m_enable_dim;
@@ -377,12 +387,6 @@ void DesktopApplication::desktopMessage( const QCString &msg, const QByteArray &
     qWarning( "KeyRegisterReceived: %i, %s, %s", k, ( const char* ) c, ( const char * ) m );
     keyRegisterList.append( QCopKeyRegister( k, c, m ) );
   }
-  else if ( msg == "suspend()" ) {
-    emit power();
-  }
-  else if ( msg == "home()" ) {
-  qpedesktop-> home ( ); 
-  }
 #endif
 }
 
@@ -411,6 +415,14 @@ void DesktopApplication::systemMessage( const QCString & msg, const QByteArray &
     int mode;
     stream >> mode;
     m_screensaver-> setMode ( mode );
+  }
+  else if ( msg == "setDisplayState(int)" ) {
+  	int state;
+  	stream >> state;
+  	m_screensaver-> setDisplayState ( state != 0 );
+  }
+  else if ( msg == "suspend()" ) {
+    emit power();
   }
 #endif
 }
@@ -628,6 +640,8 @@ Desktop::Desktop() :
   connect( qApp, SIGNAL( volumeChanged( bool ) ), this, SLOT( rereadVolumes() ) );
 
   qApp->installEventFilter( this );
+  
+  qApp-> setMainWidget ( launcher );
 }
 
 void Desktop::show()
