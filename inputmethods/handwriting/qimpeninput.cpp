@@ -254,6 +254,7 @@ void QIMPenInput::loadProfiles()
 	}
     }
 
+
     Config config( "handwriting" );
     config.setGroup( "Settings" );
     QString prof = config.readEntry( "Profile", "Default" );
@@ -270,8 +271,10 @@ void QIMPenInput::selectProfile( const QString &name )
 	}
     }
 
-    if ( !it.current() )
-	return;
+    if ( !it.current() ) {
+        qWarning("No profile selected!\n");
+	    return;
+    }
 
     pw->clearCharSets();
     baseSets.clear();

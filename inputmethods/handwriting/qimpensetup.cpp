@@ -93,7 +93,7 @@ QIMPenSetup::QIMPenSetup( QIMPenProfile *p, QWidget *parent,
 
     QVBoxLayout *vb = new QVBoxLayout( this );
 
-#if 0
+#if 1
     profileList.setAutoDelete( true );
     QHBoxLayout *hb = new QHBoxLayout( vb );
     hb->setMargin( 6 );
