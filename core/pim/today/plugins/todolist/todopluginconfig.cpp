@@ -1,7 +1,7 @@
 /*
  * todopluginconfig.cpp
  *
- * copyright   : (c) 2002 by Maximilian Reiﬂ
+ * copyright   : (c) 2002, 2003 by Maximilian Reiﬂ
  * email       : harlekin@handhelds.org
  *
  */
@@ -20,7 +20,6 @@
 
 #include <qlayout.h>
 #include <qhbox.h>
-#include <qtoolbutton.h>
 #include <qlabel.h>
 #include <qwhatsthis.h>
 

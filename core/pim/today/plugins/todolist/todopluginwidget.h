@@ -1,7 +1,7 @@
 /*
  * todopluginwidget.h
  *
- * copyright   : (c) 2002 by Maximilian Reiﬂ
+ * copyright   : (c) 2002, 2003 by Maximilian Reiﬂ
  * email       : harlekin@handhelds.org
  *
  */
@@ -17,11 +17,8 @@
 #ifndef TODOLIST_PLUGIN_WIDGET_H
 #define TODOLIST_PLUGIN_WIDGET_H
 
-#include <qstring.h>
-#include <qwidget.h>
 #include <qlayout.h>
 
-#include <opie/otodo.h>
 #include <opie/otodoaccess.h>
 #include <opie/oclickablelabel.h>
 

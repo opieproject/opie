@@ -1,7 +1,7 @@
 /*
  * todopluginconfig.h
  *
- * copyright   : (c) 2002 by Maximilian Reiﬂ
+ * copyright   : (c) 2002, 2003 by Maximilian Reiﬂ
  * email       : harlekin@handhelds.org
  *
  */
@@ -17,7 +17,7 @@
 #ifndef TODOLIST_PLUGIN_CONFIG_H
 #define TODOLIST_PLUGIN_CONFIG_H
 
-#include <qwidget.h>
+//#include <qwidget.h>
 #include <qspinbox.h>
 
 #include <opie/todayconfigwidget.h>

@@ -1,7 +1,7 @@
 /*
  * todopluginwidget.cpp
  *
- * copyright   : (c) 2002 by Maximilian Reiﬂ
+ * copyright   : (c) 2002, 2003 by Maximilian Reiﬂ
  * email       : harlekin@handhelds.org
  *
  */
@@ -16,15 +16,7 @@
 
 #include "todopluginwidget.h"
 
-#include <qvaluelist.h>
-#include <qtl.h>
-#include <qstring.h>
-#include <qscrollview.h>
-#include <qobject.h>
-#include <qlayout.h>
-
 #include <qpe/config.h>
-#include <qpe/timestring.h>
 #include <qpe/qcopenvelope_qws.h>
 
 TodolistPluginWidget::TodolistPluginWidget( QWidget *parent,  const char* name )
@@ -45,7 +37,6 @@ TodolistPluginWidget::TodolistPluginWidget( QWidget *parent,  const char* name )
     }
     layoutTodo = new QVBoxLayout( this );
     layoutTodo->setAutoAdd( true );
-
 
     if ( todoLabel )  {
         delete todoLabel;
