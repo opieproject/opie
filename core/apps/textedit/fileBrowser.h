@@ -48,8 +48,6 @@ public:
     fileBrowser( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 ,const QString filter=0);
     ~fileBrowser();
 
-    void setFileView( int );
-
     QPushButton *buttonOk, *buttonCancel, *homeButton, *docButton, *hideButton, *cdUpButton;
     QListView* ListView;
 
@@ -71,6 +69,8 @@ private:
     QRegExp tf;
     QStringList getMimeTypes();
     void fillCombo( const QString&);
+    void setFileView( int );
+
 private slots:
     void populateList();
     void homeButtonPushed();
