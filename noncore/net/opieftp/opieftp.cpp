@@ -333,7 +333,7 @@ void OpieFtp::connectorBtnToggled(bool On)
 void OpieFtp::connector()
 {
     QCopEnvelope ( "QPE/System", "busy()" );
-    qApp->processEvents();
+//    qApp->processEvents();
     currentRemoteDir=remotePath->text();
     if(ServerComboBox->currentText().isEmpty()) {
         QMessageBox::warning(this,tr("Ftp"),tr("Please set the server info"),tr("Ok"),0,0);
@@ -394,7 +394,7 @@ void OpieFtp::localUpload()
 {
     int fsz;
     QCopEnvelope ( "QPE/System", "busy()" );
-    qApp->processEvents();
+//     qApp->processEvents();
     QString strItem = Local_View->currentItem()->text(0);
     QString localFile = currentDir.canonicalPath()+"/"+strItem;
     QString remoteFile= currentRemoteDir+strItem;
@@ -436,9 +436,9 @@ void OpieFtp::nullifyCallBack()
 
 void OpieFtp::remoteDownload()
 {
+//    qApp->processEvents();
     int fsz;
     QCopEnvelope ( "QPE/System", "busy()" );
-    qApp->processEvents();
     QString strItem = Remote_View->currentItem()->text(0);
 //      strItem=strItem.right(strItem.length()-1);
 
