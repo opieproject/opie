@@ -8,7 +8,8 @@ HEADERS	= addressbook.h \
                   ofloatbar.h \
                   configdlg.h \
                   abconfig.h \
-                  abview.h
+                  abview.h \
+		  namelineedit.h
 SOURCES	= main.cpp \
 		  addressbook.cpp \
 		  contacteditor.cpp \
@@ -17,7 +18,8 @@ SOURCES	= main.cpp \
 		  picker.cpp \
                   configdlg.cpp \
                   abconfig.cpp \
-                  abview.cpp
+                  abview.cpp \
+		  namelineedit.cpp
 
 INTERFACES	= configdlg_base.ui
 TARGET		= addressbook

@@ -20,6 +20,7 @@
  */
 
 #include "contacteditor.h"
+#include "namelineedit.h"
 
 #include <opie2/odebug.h>
 #include <opie2/opimcontact.h>
@@ -141,7 +142,7 @@ void ContactEditor::init() {
 	btnFullName = new QPushButton( tr( "Full Name..." ), container );
 	QWhatsThis::add( btnFullName, tr( "Press to enter last- middle and firstname" ) );
 	gl->addWidget( btnFullName, 0, 0 );
-	txtFullName = new QLineEdit( container );
+        txtFullName = new ABOOK::NameLineEdit( container );
 	QWhatsThis::add( txtFullName, tr( "Enter fullname directly ! If you have a lastname with multiple words ( for instance \"de la Guerra\"), please write <lastname>,<firstnames> like this: \"de la Guerra, Carlos Pedro\"" ) );
 	gl->addWidget( txtFullName, 0, 1 );
 
@@ -613,17 +614,17 @@ void ContactEditor::init() {
 
 	l = new QLabel( tr("First Name"), dlgName );
 	gl->addWidget( l, 0, 0 );
-	txtFirstName = new QLineEdit( dlgName );
+        txtFirstName = new ABOOK::NameLineEdit( dlgName );
 	gl->addWidget( txtFirstName, 0, 1 );
 
 	l = new QLabel( tr("Middle Name"), dlgName );
 	gl->addWidget( l, 1, 0 );
-	txtMiddleName = new QLineEdit( dlgName );
+        txtMiddleName = new ABOOK::NameLineEdit( dlgName );
 	gl->addWidget( txtMiddleName, 1, 1 );
 
 	l = new QLabel( tr("Last Name"), dlgName );
 	gl->addWidget( l, 2, 0 );
-	txtLastName = new QLineEdit( dlgName );
+        txtLastName = new ABOOK::NameLineEdit( dlgName );
 	gl->addWidget( txtLastName, 2, 1 );
 
 // 	l = new QLabel( tr("Suffix"), dlgName );
