@@ -1,30 +1,31 @@
-
 /*
-               =.            This file is part of the OPIE Project
-             .=l.            Copyright (C) 2002,2003 Holger Freyther <zecke@handhelds.org>
-           .>+-=
- _;:,     .>    :=|.         This library is free software; you can
-.> <`_,   >  .   <=          redistribute it and/or  modify it under
-:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
-.="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.
-    .i_,=:_.      -<s.       This library is distributed in the hope that
-     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
-    : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=       =       ;      Library General Public License for more
-++=   -.     .`     .:       details.
- :     =  ...= . :.=-
- -.   .:....=;==+<;          You should have received a copy of the GNU
-  -_. . .   )=.  =           Library General Public License along with
-    --        :-=`           this library; see the file COPYING.LIB.
+ Â  Â  Â  Â  Â  Â  Â  Â              This file is part of the Opie Project
+
+                             Copyright (C) 2002,2003 Holger Freyther <zecke@handhelds.org>
+              =.
+            .=l.
+Â  Â  Â  Â  Â  Â .>+-=
+Â _;:, Â  Â  .> Â  Â :=|.         This program is free software; you can
+.> <`_, Â  > Â . Â  <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.-- Â  :           the terms of the GNU Library General Public
+.="- .-=="i, Â  Â  .._         License as published by the Free Software
+Â - . Â  .-<_> Â  Â  .<>         Foundation; either version 2 of the License,
+Â  Â  Â ._= =} Â  Â  Â  :          or (at your option) any later version.
+Â  Â  .%`+i> Â  Â  Â  _;_.
+Â  Â  .i_,=:_. Â  Â  Â -<s.       This program is distributed in the hope that
+Â  Â  Â + Â . Â -:. Â  Â  Â  =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : .. Â  Â .:, Â  Â  . . .    without even the implied warranty of
+Â  Â  =_ Â  Â  Â  Â + Â  Â  =;=|`    MERCHANTABILITY or FITNESS FOR A
+Â  _.=:. Â  Â  Â  : Â  Â :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.= Â  Â  Â  = Â  Â  Â  ;      Library General Public License for more
+++= Â  -. Â  Â  .` Â  Â  .:       details.
+    : Â  Â  = Â ...= . :.=-
+Â -. Â  .:....=;==+<;          You should have received a copy of the GNU
+Â  -_. . . Â  )=. Â =           Library General Public License along with
+Â  Â  -- Â  Â  Â  Â :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
-
 */
 
 /* hacky but we need to get FileSelector::filter */
@@ -35,12 +36,12 @@
 #include "ofileselector_p.h"
 
 /* OPIE */
-#include <opie2/ofileselector.h>
 #include <opie2/odebug.h>
+#include <opie2/ofileselector.h>
+#include <opie2/oresource.h>
 
 #include <qpe/qpeapplication.h>
 #include <qpe/mimetype.h>
-#include <qpe/resource.h>
 #include <qpe/storage.h>
 
 /* QT */
@@ -334,47 +335,40 @@ OFileViewFileListView::OFileViewFileListView( QWidget* parent, const QString& st
     box->setBackgroundMode( PaletteButton );
     box->setSpacing( 0 );
 
-    QPixmap pic;
     QToolButton *btn = new QToolButton( box );
     btn->setUsesBigPixmap( true );
-    pic.convertFromImage( Resource::loadImage( "up" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-    btn->setPixmap( pic );
+    btn->setPixmap( Opie::Core::OResource::loadPixmap( "up", Opie::Core::OResource::SmallIcon ) );
     connect(btn, SIGNAL(clicked() ),
             this, SLOT( cdUP() ) );
 
     btn = new QToolButton( box );
     btn->setUsesBigPixmap( true );
-    pic.convertFromImage( Resource::loadImage( "home" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-    btn->setPixmap( pic );
+    btn->setPixmap( Opie::Core::OResource::loadPixmap( "home", Opie::Core::OResource::SmallIcon ) );
     connect(btn, SIGNAL(clicked() ),
             this, SLOT( cdHome() ) );
 
     btn = new QToolButton( box );
     btn->setUsesBigPixmap( true );
-    pic.convertFromImage( Resource::loadImage( "DocsIcon" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-    btn->setPixmap( pic );
+    btn->setPixmap( Opie::Core::OResource::loadPixmap( "DocsIcon", Opie::Core::OResource::SmallIcon ) );
     connect(btn, SIGNAL(clicked() ),
             this, SLOT(cdDoc() ) );
 
     m_btnNew = new QToolButton( box );
     m_btnNew->setUsesBigPixmap( true );
-    pic.convertFromImage( Resource::loadImage( "new" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-    m_btnNew->setPixmap( pic );
+    m_btnNew->setPixmap( Opie::Core::OResource::loadPixmap( "new", Opie::Core::OResource::SmallIcon ) );
     connect(m_btnNew, SIGNAL(clicked() ),
             this, SLOT(slotNew() ) );
 
 
     m_btnClose = new QToolButton( box );
     m_btnClose->setUsesBigPixmap( true );
-    pic.convertFromImage( Resource::loadImage( "close" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-    m_btnClose->setPixmap( pic );
+    m_btnClose->setPixmap( Opie::Core::OResource::loadPixmap( "close", Opie::Core::OResource::SmallIcon ) );
     connect(m_btnClose, SIGNAL(clicked() ),
             selector(), SIGNAL(closeMe() ) );
 
     btn = new QToolButton( box );
     btn->setUsesBigPixmap( true );
-    pic.convertFromImage( Resource::loadImage( "cardmon/pcmcia" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-    btn->setPixmap( pic );
+    btn->setPixmap( Opie::Core::OResource::loadPixmap( "cardmon/pcmcia", Opie::Core::OResource::SmallIcon ) );
 
     m_fsButton = btn;
     /* let's fill device parts */
@@ -639,7 +633,7 @@ void OFileViewFileListView::addFile( QFileInfo* info, bool symlink )
     if ( pix.isNull() )
     {
         QWMatrix matrix;
-        QPixmap pixer(Resource::loadPixmap("UnknownDocument") );
+        QPixmap pixer( Opie::Core::OResource::loadPixmap( "UnknownDocument" ) );
         matrix.scale( .4, .4 );
         pix = pixer.xForm( matrix );
     }
@@ -653,7 +647,8 @@ void OFileViewFileListView::addFile( QFileInfo* info, bool symlink )
         if ( ( (selector()->mode() == OFileSelector::Open)&& !info->isReadable() ) ||
                 ( (selector()->mode() == OFileSelector::Save)&& !info->isWritable() ) )
         {
-            locked = true; pix = Resource::loadPixmap("locked");
+            locked = true;
+            pix = Opie::Core::OResource::loadPixmap( "locked" );
         }
     }
     (void)new OFileSelectorItem( m_view, pix, name,
@@ -670,12 +665,12 @@ void OFileViewFileListView::addDir( QFileInfo* info, bool symlink )
     {
         locked = true;
         if ( symlink )
-            pix = Resource::loadPixmap( "opie/symlink" );
+            pix = Opie::Core::OResource::loadPixmap( "opie/symlink" );
         else
-            pix = Resource::loadPixmap( "lockedfolder" );
+            pix = Opie::Core::OResource::loadPixmap( "lockedfolder" );
     }
     else
-        pix = symlink ? Resource::loadPixmap( "opie/symlink") : Resource::loadPixmap("folder");
+        pix = symlink ? Opie::Core::OResource::loadPixmap( "opie/symlink" ) : Opie::Core::OResource::loadPixmap( "folder" );
 
     name = symlink ? info->fileName() + " -> " + createNewPath(info->dirPath(true),info->readLink()) :
            info->fileName();

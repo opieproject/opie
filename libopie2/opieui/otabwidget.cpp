@@ -1,41 +1,41 @@
 /*
-                    This file is part of the Opie Project
+                             This file is part of the Opie Project
 
-                      Copyright (c)  2002, 2005 Dan Williams <drw@handhelds.org>
+                             Copyright (C) 2002, 2005 Dan Williams <drw@handhelds.org>
               =.
             .=l.
-     .>+-=
-_;:,   .>  :=|.         This program is free software; you can
-.> <`_,  > .  <=          redistribute it and/or  modify it under
-:`=1 )Y*s>-.--  :           the terms of the GNU Library General Public
-.="- .-=="i,   .._         License as published by the Free Software
-- .  .-<_>   .<>         Foundation; either version 2 of the License,
-  ._= =}    :          or (at your option) any later version.
-  .%`+i>    _;_.
-  .i_,=:_.   -<s.       This program is distributed in the hope that
-  + . -:.    =       it will be useful,  but WITHOUT ANY WARRANTY;
-  : ..  .:,   . . .    without even the implied warranty of
-  =_    +   =;=|`    MERCHANTABILITY or FITNESS FOR A
- _.=:.    :  :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=    =    ;      Library General Public License for more
-++=  -.   .`   .:       details.
-:   = ...= . :.=-
--.  .:....=;==+<;          You should have received a copy of the GNU
- -_. . .  )=. =           Library General Public License along with
-  --    :-=`           this library; see the file COPYING.LIB.
+           .>+-=
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+    :     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
-
 */
 
 #include <opie2/otabwidget.h>
 
 /* OPIE */
+#include <opie2/oresource.h>
+#include <opie2/otabbar.h>
+
 #include <qpe/applnk.h>
 #include <qpe/config.h>
-#include <qpe/resource.h>
-#include <opie2/otabbar.h>
 
 /* QT */
 #include <qcombobox.h>
@@ -97,7 +97,7 @@ void OTabWidget::addTab( QWidget *child, const QString &icon, const QString &lab
         if ( m_tabBarStyle == IconTab )
         {
             tab->label = QString::null;
-            tab->iconset = new QIconSet( loadSmooth( icon ) );
+            tab->iconset = new QIconSet( Opie::Core::OResource::loadPixmap( icon, Opie::Core::OResource::SmallIcon ) );
         }
         else
             tab->label = label;
@@ -108,7 +108,7 @@ void OTabWidget::addTab( QWidget *child, const QString &icon, const QString &lab
     {
         // Insert entry (with icon if necessary) into drop down list
         if ( m_tabBarStyle == IconList )
-            m_tabList->insertItem( loadSmooth( icon ), label, -1 );
+            m_tabList->insertItem( Opie::Core::OResource::loadPixmap( icon, Opie::Core::OResource::SmallIcon ), label, -1 );
         else
             m_tabList->insertItem( label );
     }
@@ -180,7 +180,7 @@ void OTabWidget::changeTab( QWidget *widget, const QString &iconset, const QStri
 
     if ( currtab && currtab->control() == widget )
     {
-        QPixmap icon( loadSmooth( iconset ) );
+        QPixmap icon( Opie::Core::OResource::loadPixmap( iconset, Opie::Core::OResource::SmallIcon ) );
 
         if ( m_usingTabs )
         {
@@ -298,7 +298,7 @@ void OTabWidget::setTabStyle( TabStyle s )
             if ( m_tabBarStyle == IconTab )
             {
                 tab->label = QString::null;
-                tab->iconset = new QIconSet( loadSmooth( tabinfo->icon() ) );
+                tab->iconset = new QIconSet( Opie::Core::OResource::loadPixmap( tabinfo->icon(), Opie::Core::OResource::SmallIcon ) );
             }
             else
                 tab->label = tabinfo->label();
@@ -318,7 +318,8 @@ void OTabWidget::setTabStyle( TabStyle s )
         for (  OTabInfo *tabinfo = m_tabs.first(); tabinfo; tabinfo = m_tabs.next() )
         {
             if ( m_tabBarStyle == IconList )
-                m_tabList->insertItem( loadSmooth( tabinfo->icon() ), tabinfo->label() );
+                m_tabList->insertItem( Opie::Core::OResource::loadPixmap( tabinfo->icon(), Opie::Core::OResource::SmallIcon ),
+                                       tabinfo->label() );
             else
                 m_tabList->insertItem( tabinfo->label() );
         }
@@ -363,13 +364,6 @@ void OTabWidget::slotTabListSelected( int index )
     OTabInfo *newtab = m_tabs.at( index );
     if ( newtab )
         selectTab( newtab );
-}
-
-QPixmap OTabWidget::loadSmooth( const QString &name )
-{
-    QPixmap p;
-    p.convertFromImage( Resource::loadImage( name ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-    return p;
 }
 
 void OTabWidget::selectTab( OTabInfo *tab )
