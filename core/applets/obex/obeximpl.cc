@@ -133,14 +133,14 @@ void ObexImpl::slotReceivedFile( const QString &fileName ) {
     m_recvgui->PixmapLabel->setPixmap( lnk.pixmap() );
     m_recvgui->AppLabel->setText( "<b>" + exec + "<b>" );
     m_recvgui->FileLabel->setText( lnk.name() );
-    m_recvgui->showMaximized();
-    if( m_recvgui->exec() != -1 ) {
+    // m_recvgui->showMaximized();
+    //   if( m_recvgui->exec() == 0 ) {
          QCString str= "QPE/Application/";
          str += exec.latin1();
          qWarning("channel %s", str.data() );
          QCopEnvelope e(str ,  "setDocument(QString)" );
          e << fileName;
-    }
+         //}
 }
 
 
