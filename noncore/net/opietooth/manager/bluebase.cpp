@@ -20,6 +20,7 @@
 #include "hciconfwrapper.h"
 #include "devicehandler.h"
 #include "btconnectionitem.h"
+#include "rfcommassigndialogimpl.h"
 
 #include <remotedevice.h>
 #include <services.h>
@@ -59,7 +60,9 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
 
     connect( PushButton2,  SIGNAL( clicked() ), this, SLOT(startScan() ) );
     connect( configApplyButton, SIGNAL(clicked() ), this, SLOT(applyConfigChanges() ) );
-    // not good since lib is async
+
+    connect( rfcommBindButton,  SIGNAL( clicked() ),  this,  SLOT( rfcommDialog() ) );
+// not good since lib is async
     //       connect( ListView2, SIGNAL( expanded ( QListViewItem* ) ),
     //                  this, SLOT( addServicesToDevice( QListViewItem * ) ) );
     connect( ListView2, SIGNAL( clicked( QListViewItem* )),
@@ -222,7 +225,7 @@ void BlueBase::initGui() {
 QString BlueBase::status()const{
     QString infoString = tr( "<b>Device name : </b> Ipaq" );
     infoString += QString( "<br><b>" + tr( "MAC adress: " ) +"</b> No idea" );
-    infoString += QString( "<br><b>" + tr( "Class" ) + "</b> PDA" );
+    infoString += QString(  "<br><b>" + tr( "Class" ) + "</b> PDA" );
 
     return (infoString);
 }
@@ -242,6 +245,20 @@ void BlueBase::applyConfigChanges() {
     writeConfig();
 
     QMessageBox::information( this, tr("Test") , tr("Changes were applied.") );
+}
+
+/**
+ * Launch Rfcomm Bind dialog
+ *
+ */
+void BlueBase::rfcommDialog() {
+    RfcommAssignDialog rfcommAssign ( this, "RfcommAssignDialog", true, WStyle_ContextHelp  );
+
+    rfcommAssign.showMaximized();
+
+    if ( rfcommAssign.exec() == QDialog::Accepted )  {
+        rfcommAssign.saveConfig();
+    }
 }
 
 /**

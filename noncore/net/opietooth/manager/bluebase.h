@@ -46,7 +46,8 @@ namespace OpieTooth {
 
     private slots:
         void startScan();
-
+    
+    
     private:
         bool find( const RemoteDevice& device );
 	void readConfig();
@@ -89,6 +90,7 @@ namespace OpieTooth {
         void applyConfigChanges();
 	void addSignalStrength();
 	void addSignalStrength( const QString& mac, const QString& strengh );
+	void rfcommDialog();
 
     };
 
