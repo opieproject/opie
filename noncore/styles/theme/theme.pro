@@ -13,7 +13,7 @@ HEADERS     = ogfxeffect.h \
               plugin.h
 
                
-LIBS       += -lqpe
+LIBS       += -lqpe -lopiecore2
 INCLUDEPATH += $(OPIEDIR)/include
 DESTDIR      = $(OPIEDIR)/plugins/styles
 TARGET       = theme
