@@ -1,28 +1,27 @@
 /*
-                             This file is part of the Opie Project
-                             Copyright (C) 2003 Michael 'Mickey' Lauer <mickey@Vanille.de>
-                             Copyright (C) 2004 Holger 'zecke' Freyther <zecke@handhelds.org>
-              =.
+                             This file is part of the Opie Project
+                             Copyright (C) 2003 Michael 'Mickey' Lauer <mickey@Vanille.de>
+              =.             Copyright (C) 2004 Holger 'zecke' Freyther <zecke@handhelds.org>
             .=l.
-           .>+-=
- _;:,     .>    :=|.         This program is free software; you can
-.> <`_,   >  .   <=          redistribute it and/or  modify it under
-:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
-.="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.
-    .i_,=:_.      -<s.       This program is distributed in the hope that
-     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
-    : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=       =       ;      Library General Public License for more
-++=   -.     .`     .:       details.
- :     =  ...= . :.=-
- -.   .:....=;==+<;          You should have received a copy of the GNU
-  -_. . .   )=.  =           Library General Public License along with
-    --        :-=`           this library; see the file COPYING.LIB.
+           .>+-=
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+ :     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
@@ -32,6 +31,13 @@
 
 #include <qfile.h>
 #include <qtextstream.h>
+#include <qdir.h>
+#include <qpe/mimetype.h>
+#include <qpe/qpeapplication.h>
+#include <qpe/storage.h>
+
+#include <unistd.h>
+#include <sys/types.h>
 
 static const char Base64EncMap[64] =
 {
@@ -67,6 +73,7 @@ static char Base64DecMap[128] =
 
 
 OConfig* OGlobal::_config = 0;
+OConfig* OGlobal::_qpe_config = 0;
 
 OConfig* OGlobal::config()
 {
@@ -302,4 +309,103 @@ QByteArray OGlobal::decodeBase64( const QByteArray& in) {
       out.resize(len);
 
     return out;
+}
+
+bool OGlobal::isAppLnkFileName( const QString& str )
+{
+    if (str.length()==0||str.at(str.length()-1)==QDir::separator()) return false;
+    return str.startsWith(MimeType::appsFolderName()+QDir::separator());
+}
+
+/* ToDo:
+ * This fun should check the document-path value for the mounted media
+ * which has to be implemented later. this moment we just check for a
+ * mounted media name.
+ */
+bool OGlobal::isDocumentFileName( const QString& file )
+{
+    if (file.length()==0||file.at(file.length()-1)==QDir::separator()) return false;
+    if (file.startsWith(QPEApplication::documentDir()+QDir::separator())) return true;
+    StorageInfo si;
+    QList< FileSystem > fl =  si.fileSystems();
+    FileSystem*fs;
+    for (fs = fl.first();fs!=0;fs=fl.next()) {
+        if (fs->isRemovable()&&file.startsWith(fs->name()+QDir::separator()))
+            return true;
+    }
+    if (file.startsWith(homeDirPath())+"/Documents/") return true;
+    return false;
+}
+
+QString OGlobal::tempDirPath()
+{
+    static QString defstring="/tmp";
+    char * tmpp = 0;
+    if ( (tmpp=getenv("TEMP"))) {
+        return tmpp;
+    }
+    return defstring;
+}
+
+QString OGlobal::homeDirPath()
+{
+    char * tmpp = getenv("HOME");
+    return (tmpp?tmpp:"/");
+}
+
+bool OGlobal::weekStartsOnMonday()
+{
+    OConfig*conf=OGlobal::qpe_config();
+    if (!conf)return false;
+    conf->setGroup("Time");
+    return conf->readBoolEntry("MONDAY",true);
+}
+
+void OGlobal::setWeekStartsOnMonday( bool what)
+{
+    OConfig*conf=OGlobal::qpe_config();
+    if (!conf)return;
+    conf->setGroup("Time");
+    return conf->writeEntry("MONDAY",what);
+}
+
+bool OGlobal::useAMPM()
+{
+    OConfig*conf=OGlobal::qpe_config();
+    if (!conf)return false;
+    conf->setGroup("Time");
+    return conf->readBoolEntry("AMPM",false);
+}
+
+void OGlobal::setUseAMPM( bool what)
+{
+    OConfig*conf=OGlobal::qpe_config();
+    if (!conf)return;
+    conf->setGroup("Time");
+    return conf->writeEntry("AMPM",what);
+}
+
+OConfig* OGlobal::qpe_config()
+{
+    if ( !OGlobal::_qpe_config ) {
+        OGlobal::_qpe_config = new OConfig( "qpe" );
+    }
+    return OGlobal::_qpe_config;
+}
+
+bool OGlobal::truncateFile( QFile &f, off_t size )
+{
+    /* or should we let enlarge Files? then remove this
+       f.size()< part! - Alwin
+    */
+    if (!f.exists()||f.size()<(unsigned)size) return false;
+    bool closeit=false;
+    if (!f.isOpen()) {
+        closeit=true;
+        f.open(IO_Raw | IO_ReadWrite | IO_Append);
+    }
+    if (!f.isOpen()) { return false; }
+    int r = ftruncate(f.handle(),size);
+    if (closeit) f.close();
+    return r==0;
 }
