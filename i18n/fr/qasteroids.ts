@@ -1,39 +1,42 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>KAstTopLevel</name>
     <message>
         <source>Asteroids</source>
-        <translation type="unfinished"></translation>
+        <translation>Astéroîdes</translation>
     </message>
     <message>
         <source>Score</source>
-        <translation type="unfinished"></translation>
+        <translation>Score</translation>
     </message>
     <message>
         <source>Level</source>
-        <translation type="unfinished"></translation>
+        <translation>Niveau</translation>
     </message>
     <message>
         <source>Ships</source>
-        <translation type="unfinished"></translation>
+        <translation>Vaisseaux</translation>
     </message>
     <message>
         <source>Fuel</source>
-        <translation type="unfinished"></translation>
+        <translation>Fuel</translation>
     </message>
     <message>
         <source>Press Calendar to start playing</source>
-        <translation type="unfinished"></translation>
+        <translation>Presser le boutton &quot;Calendrier&quot; pour démarrer le jeu</translation>
     </message>
     <message>
         <source>Ship Destroyed.
 Press Contacts/Home key.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vaisseau détruit.
+Pressez le boutton &quot;Contacts&quot;.</translation>
     </message>
     <message>
         <source>Game Over.
 Press Calendar for a new game.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fin de partie.
+Pressez le boutton &quot;Calendrier&quot; pour démarrer un nouveau jeu.</translation>
     </message>
 </context>
 </TS>

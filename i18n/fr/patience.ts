@@ -1,21 +1,22 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>CanvasCardWindow</name>
     <message>
         <source>Patience</source>
-        <translation type="unfinished"></translation>
+        <translation>Patience</translation>
     </message>
     <message>
         <source>Freecell</source>
-        <translation type="unfinished"></translation>
+        <translation>Freecell</translation>
     </message>
     <message>
         <source>&amp;Game</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Jeu</translation>
     </message>
     <message>
         <source>&amp;Change Card Backs</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Changer le dos des cartes</translation>
     </message>
     <message>
         <source>&amp;Snap To Position</source>
@@ -23,23 +24,23 @@
     </message>
     <message>
         <source>&amp;Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Options</translation>
     </message>
     <message>
         <source>&amp;About</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">A &amp;Propos</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Aide</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation type="unfinished"></translation>
+        <translation>Jouer</translation>
     </message>
     <message>
         <source>Change Card Backs</source>
-        <translation type="unfinished"></translation>
+        <translation>Changer le dos des cartes</translation>
     </message>
     <message>
         <source>Snap To Position</source>
@@ -47,27 +48,27 @@
     </message>
     <message>
         <source>Turn One Card</source>
-        <translation type="unfinished"></translation>
+        <translation>Retourner une carte</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Options</translation>
     </message>
     <message>
         <source>Turn Three Cards</source>
-        <translation type="unfinished"></translation>
+        <translation>Retourner 3 cartes</translation>
     </message>
     <message>
         <source>Chicane</source>
-        <translation type="unfinished"></translation>
+        <translation>Chicane</translation>
     </message>
     <message>
         <source>Harp</source>
-        <translation type="unfinished"></translation>
+        <translation>Harp</translation>
     </message>
     <message>
         <source>Teeclub</source>
-        <translation type="unfinished"></translation>
+        <translation>Teeclub</translation>
     </message>
 </context>
 </TS>
