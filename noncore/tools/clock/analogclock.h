@@ -28,6 +28,7 @@ class AnalogClock : public QFrame
     Q_OBJECT
 public:
     AnalogClock( QWidget *parent=0, const char *name=0 );
+    ~AnalogClock();
 
     QSizePolicy sizePolicy() const;
 
@@ -42,7 +43,7 @@ private:
 
     QTime currTime;
     QTime prevTime;
-    bool clear;
+    QPixmap *_pixmap;
 };
 
 #endif

@@ -20,18 +20,29 @@
 
 #include "analogclock.h"
 
+#include <qtopia/global.h>
+
 #include <qlayout.h>
 #include <qpainter.h>
-#include <qtopia/global.h>
+#include <qpixmap.h>
+
 
 #include <math.h>
 
 const double deg2rad = 0.017453292519943295769;	// pi/180
 
 AnalogClock::AnalogClock( QWidget *parent, const char *name )
-    : QFrame( parent, name ), clear(false)
+    : QFrame( parent, name )
 {
     setMinimumSize(50,50);
+
+    /* initial the buffer pixmap */
+    QRect r = contentsRect();
+    _pixmap = new QPixmap( r.width(), r.height() );
+}
+
+AnalogClock::~AnalogClock() {
+    delete _pixmap;
 }
 
 QSizePolicy AnalogClock::sizePolicy() const
@@ -39,15 +50,12 @@ QSizePolicy AnalogClock::sizePolicy() const
     return QSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
 }
 
-void AnalogClock::drawContents( QPainter *p )
+void AnalogClock::drawContents( QPainter * )
 {
-#if !defined(NO_DEBUG)
-    static bool first = true;
-    if ( first ) {
-//	QTOPIA_PROFILE("first paint event");
-	first = false;
-    }
-#endif
+    /* no need to draw... */
+    if ( !isVisible() )
+        return;
+
 
     QRect r = contentsRect();
 
@@ -55,6 +63,15 @@ void AnalogClock::drawContents( QPainter *p )
 	r.setY( (r.height() - r.width())/2 );
 	r.setHeight( r.width() );
     }
+
+    /* resize the buffer */
+    if ( r.width()  != _pixmap->width() ||
+         r.height() != _pixmap->height() )
+        _pixmap->resize( r.width(), r.height() );
+
+    QPainter p;
+    p.begin( _pixmap );
+
 
     QPoint center( r.x() + r.width() / 2, r.y() + r.height() / 2 );
 
@@ -74,52 +91,50 @@ void AnalogClock::drawContents( QPainter *p )
     QPoint s1( r.x() + r.width() / 2, r.y() + 8 );
     QPoint s2( r.x() + r.width() / 2, r.y() + r.height() / 2 );
 
-    QColor color( clear ? backgroundColor() : black );
-    QTime time = clear ? prevTime : currTime;
+    /* fill the pixmap */
+    _pixmap->fill( this, 0, 0 );
 
-    if ( clear && prevTime.secsTo(currTime) > 1 ) {
-	p->eraseRect( rect() );
-	return;
-    }
 
-    if ( !clear ) {
-	// draw ticks
-	p->setPen( QPen( color, w_tick ) );
-	for ( int i = 0; i < 12; i++ )
-	    p->drawLine( rotate( center, l1, i * 30 ), rotate( center, l2, i * 30 ) );
-    }
+    // draw ticks
+    QColor color = black;
+    p.setPen( QPen( color, w_tick ) );
+    for ( int i = 0; i < 12; i++ )
+        p.drawLine( rotate( center, l1, i * 30 ), rotate( center, l2, i * 30 ) );
 
-    if ( !clear || prevTime.minute() != currTime.minute() ||
-	    prevTime.hour() != currTime.hour() ) {
-	// draw hour pointer
-	h1 = rotate( center, h1, 30 * ( time.hour() % 12 ) + time.minute() / 2 );
-	h2 = rotate( center, h2, 30 * ( time.hour() % 12 ) + time.minute() / 2 );
-	p->setPen( color );
-	p->setBrush( color );
-	drawHand( p, h1, h2 );
-    }
 
-    if ( !clear || prevTime.minute() != currTime.minute() ) {
-	// draw minute pointer
-	m1 = rotate( center, m1, time.minute() * 6 );
-	m2 = rotate( center, m2, time.minute() * 6 );
-	p->setPen( color );
-	p->setBrush( color );
-	drawHand( p, m1, m2 );
-    }
+    // draw hour pointer
+    h1 = rotate( center, h1, 30 * ( currTime.hour() % 12 ) + currTime.minute() / 2 );
+    h2 = rotate( center, h2, 30 * ( currTime.hour() % 12 ) + currTime.minute() / 2 );
+    p.setPen( color );
+    p.setBrush( color  );
+    drawHand( &p, h1, h2 );
+
+
+    // draw minute pointer
+    m1 = rotate( center, m1, currTime.minute() * 6 );
+    m2 = rotate( center, m2, currTime.minute() * 6 );
+    p.setPen( color );
+    p.setBrush( color );
+    drawHand( &p, m1, m2 );
 
     // draw second pointer
-    s1 = rotate( center, s1, time.second() * 6 );
-    s2 = rotate( center, s2, time.second() * 6 );
-    p->setPen( QPen( color, w_sec ) );
-    p->drawLine( s1, s2 );
+    s1 = rotate( center, s1, currTime.second() * 6 );
+    s2 = rotate( center, s2, currTime.second() * 6 );
+    p.setPen( QPen( color, w_sec ) );
+    p.drawLine( s1, s2 );
 
     // cap
-    p->setBrush(color);
-    p->drawEllipse( center.x()-w_hour/2, center.y()-w_hour/2, w_hour, w_hour );
+    p.setBrush(color);
+    p.drawEllipse( center.x()-w_hour/2, center.y()-w_hour/2, w_hour, w_hour );
 
-    if ( !clear )
-	prevTime = currTime;
+    prevTime = currTime;
+
+    p.end();
+
+    p.begin( this );
+    p.drawPixmap( 0, 0, *_pixmap );
+
+    /* leave */
 }
 
 // Dijkstra's bisection algorithm to find the square root as an integer.
@@ -186,9 +201,6 @@ void AnalogClock::drawHand( QPainter *p, QPoint p1, QPoint p2 )
 void AnalogClock::display( const QTime& t )
 {
     currTime = t;
-    clear = true;
-    repaint( false );
-    clear = false;
     repaint( false );
 }
 
