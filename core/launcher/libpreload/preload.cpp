@@ -5,6 +5,7 @@
 
 #include <qwsdecoration_qws.h>
 #include <qcommonstyle.h>
+
 //#include <qapplication.h>
 //#include <qfont.h>
 
@@ -20,11 +21,11 @@ class QFont;
 
 
 typedef void ( *qapp_setstyle_t ) ( QStyle * );
-typedef void ( *qapp_setdeco_t ) ( QApplication *, QWSDecoration * ); 
+typedef void ( *qapp_setdeco_t ) ( QWSDecoration * ); 
 typedef void ( *qapp_setfont_t ) ( const QFont &, bool, const char * ); 
 
 
-static bool *opie_block_style_p = 0;
+static int *opie_block_style_p = 0;
 
 extern "C" {
 
@@ -46,12 +47,10 @@ extern void setStyle__12QApplicationP6QStyle ( QStyle *style )
 		qsetstyle = (qapp_setstyle_t) resolve_symbol ( "setStyle__12QApplicationP6QStyle" );
 
 	if ( !opie_block_style_p )
-		opie_block_style_p = (bool *) resolve_symbol ( "opie_block_style" );
+		opie_block_style_p = (int *) resolve_symbol ( "opie_block_style" );
 	
-	if ( !qsetstyle || ( opie_block_style_p && *opie_block_style_p )) {
+	if ( !qsetstyle || ( opie_block_style_p && ( *opie_block_style_p & 0x01 )))
 		delete style;
-		return;
-	}
 	else
 		( *qsetstyle ) ( style );
 }
@@ -64,14 +63,14 @@ extern void setFont__12QApplicationRC5QFontbPCc ( const QFont &fnt, bool informW
 		qsetfont = (qapp_setfont_t) resolve_symbol ( "setFont__12QApplicationRC5QFontbPCc" );
 
 	if ( !opie_block_style_p )
-		opie_block_style_p = (bool *) resolve_symbol ( "opie_block_style" );
+		opie_block_style_p = (int *) resolve_symbol ( "opie_block_style" );
 	
-	if ( qsetfont && !( opie_block_style_p && *opie_block_style_p ))
+	if ( qsetfont && !( opie_block_style_p && ( *opie_block_style_p & 0x02 )))
 		( *qsetfont ) ( fnt, informWidgets, className );
 }
 	
 
-extern void qwsSetDecoration__12QApplicationP13QWSDecoration ( QApplication *app, QWSDecoration *deco )
+extern void qwsSetDecoration__12QApplicationP13QWSDecoration ( QWSDecoration *deco )
 {
 	static qapp_setdeco_t qsetdeco = 0;
 
@@ -79,14 +78,12 @@ extern void qwsSetDecoration__12QApplicationP13QWSDecoration ( QApplication *app
 		qsetdeco = (qapp_setdeco_t) resolve_symbol ( "qwsSetDecoration__12QApplicationP13QWSDecoration" );
 
 	if ( !opie_block_style_p )
-		opie_block_style_p = (bool *) resolve_symbol ( "opie_block_style" );
+		opie_block_style_p = (int *) resolve_symbol ( "opie_block_style" );
 	
-	if ( !qsetdeco || ( opie_block_style_p && *opie_block_style_p )) {
+	if ( !qsetdeco || ( opie_block_style_p && ( *opie_block_style_p & 0x04 )))
 		delete deco;
-		return;
-	}
 	else
-		( *qsetdeco ) ( app, deco );
+		( *qsetdeco ) ( deco );
 }
 
 }
