@@ -445,73 +445,79 @@ void AdvancedFm::moveTimer() {
 
 void AdvancedFm::move() {
 
-  QStringList curFileList = getPath();
-  if( curFileList.count() > 0) {
-      QString curFile, destFile, item;
+		QStringList curFileList = getPath();
+		if( curFileList.count() > 0) {
+				QString curFile, destFile, item;
 
-      QDir *thisDir = CurrentDir();
-      QDir *thatDir = OtherDir();
-      for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
-          item=(*it);
-          QString destFile =  thatDir->canonicalPath();
+				QDir *thisDir = CurrentDir();
+				QDir *thatDir = OtherDir();
+				for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
+						item=(*it);
+						QString destFile =  thatDir->canonicalPath();
 
-          if(destFile.right(1).find("/",0,TRUE) == -1)
-            destFile+="/";
-          destFile += item;
+						if(destFile.right(1).find("/",0,TRUE) == -1)
+								destFile+="/";
+						destFile += item;
 //          odebug << "Destination file is "+destFile << oendl; 
 
-          curFile = thisDir->canonicalPath();
-          if(curFile.right(1).find("/",0,TRUE) == -1)
-                            curFile +="/";
-          curFile+= item;
-//          odebug << "CurrentFile file is " + curFile << oendl; 
+						curFile = thisDir->canonicalPath();
+						if(curFile.right(1).find("/",0,TRUE) == -1)
+								curFile +="/";
+						curFile+= item;
+//           odebug << "CurrentFile file is " + curFile << oendl; 
 
-          if(QFileInfo(curFile).isDir()) {
-                            moveDirectory( curFile, destFile );
-                            rePopulate();
-                            return;
-          }
-					QFile f( curFile);
-          if( f.exists()) {
-                            if( !copyFile(  curFile, destFile) )  {
-                                    QMessageBox::message(tr("Note"),tr("Could not move\n")+curFile);
-                                    return;
-              } else
-									QFile::remove(curFile);
-          }
-            }
-
-  }
-	rePopulate();
+						if(QFileInfo(curFile).isDir()) {
+								moveDirectory( curFile, destFile );
+								rePopulate();
+								return;
+						}
+						QFile f( destFile);
+						if( f.exists()) {
+								switch ( QMessageBox::warning(this,tr("File Exists!"),
+																							tr("<p>%1 already  exists. Ok to overwrite?</P>").arg(destFile),
+																							tr("Yes"),tr("No"),0,0,1)) {
+									case 1:
+											return;
+											break;
+								};
+								if( !copyFile( curFile, destFile) )  {
+										QMessageBox::message(tr("Note"),tr("<p>Could not move %1</p>").arg(curFile));
+										return;
+								} else
+										QFile::remove(curFile);
+						}
+				}
+		}
+		rePopulate();
 //	setOtherTabCurrent();
 }
 
 bool AdvancedFm::moveDirectory( const QString & src, const QString & dest ) {
-        int err = 0;
-        if( copyDirectory( src, dest ) ) {      QString cmd = "rm -rf " + src;
-        err = system((const char*)cmd);
-        } else
-                err = -1;
+		int err = 0;
+		if( copyDirectory( src, dest ) ) {
+				QString cmd = "rm -rf " + src;
+				err = system((const char*)cmd);
+		} else
+				err = -1;
 
-        if(err!=0) {
-                QMessageBox::message(tr("Note"),tr("Could not move\n") + src);
-                return false;
-        }
-        return true;
+		if(err!=0) {
+				QMessageBox::message(tr("Note"),tr("Could not move\n") + src);
+				return false;
+		}
+		return true;
 }
 
 bool AdvancedFm::copyDirectory( const QString & src, const QString & dest ) {
 
-        QString    cmd = "/bin/cp -fpR " + src + " " + dest;
+		QString cmd = "/bin/cp -fpR " + src + " " + dest;
     owarn << cmd << oendl; 
-        int    err = system( (const char *) cmd );
-        if ( err != 0 ) {
-                QMessageBox::message("AdvancedFm",
-                                                         tr( "Could not copy \n%1 \nto \n%2").arg( src ).arg( dest ) );
-                return false;
-        }
+		int    err = system( (const char *) cmd );
+		if ( err != 0 ) {
+				QMessageBox::message("AdvancedFm", tr( "Could not copy \n%1 \nto \n%2").arg( src ).arg( dest ) );
+				return false;
+		}
 
-        return true;
+		return true;
 }
 
 
