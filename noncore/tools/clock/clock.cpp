@@ -80,7 +80,7 @@ Clock::Clock( QWidget * parent, const char * name, WFlags f )
     lcd->setSizePolicy( QSizePolicy( QSizePolicy::Minimum, QSizePolicy::Minimum ) );
     lcd->setFixedHeight( 23 );
 
-    ampmLabel = new QLabel( "PM", hb );
+    ampmLabel = new QLabel( tr("PM"), hb );
     ampmLabel->setFont( QFont( "Helvetica", 14, QFont::Bold ) );
     ampmLabel->setSizePolicy( QSizePolicy( QSizePolicy::Minimum, QSizePolicy::Preferred ) );
     ampmLabel->setAlignment( AlignLeft | AlignBottom );
