@@ -2,7 +2,6 @@ CONFIG_ABOUTAPPLET	core/applets/aboutapplet	aboutapplet.pro
 CONFIG_ADDRESSBOOK	core/pim/addressbook	addressbook.pro
 CONFIG_ADVANCEDFM	noncore/apps/advancedfm	advancedfm.pro
 CONFIG_APPEARANCE2	noncore/settings/appearance2	appearance2.pro
-CONFIG_APPLET_EXAMPLE   examples/applet example.pro
 CONFIG_APPSKEY	noncore/settings/appskey	appskey.pro
 CONFIG_AQPKG	noncore/settings/aqpkg	aqpkg.pro
 CONFIG_AUTOROTATEAPPLET	noncore/applets/autorotateapplet	autorotateapplet.pro
@@ -42,7 +41,8 @@ CONFIG_DRAWPAD	noncore/graphics/drawpad	drawpad.pro
 CONFIG_DVORAK	inputmethods/dvorak	dvorak.pro
 CONFIG_EMBEDDEDKONSOLE	core/apps/embeddedkonsole	embeddedkonsole.pro
 CONFIG_EUROCONV		noncore/tools/euroconv/ euroconv.pro
-CONFIG_EXAMPLE_BOARD    examples/inputmethod    example.pro
+CONFIG_EXAMPLE_APPLET	examples/applet	applet.pro
+CONFIG_EXAMPLE_BOARD    examples/inputmethod    inputmethod.pro
 CONFIG_EXAMPLE_LIBOPIE2CORE	examples/opiecore       opiecore.pro
 CONFIG_EXAMPLE_LIBOPIE2DB	examples/opiedb opiedb.pro
 CONFIG_EXAMPLE_LIBOPIE2MM	examples/opiemm opiemm.pro
@@ -51,7 +51,7 @@ CONFIG_EXAMPLE_LIBOPIE2PIM	examples/opiepim        opiepim.pro
 CONFIG_EXAMPLE_LIBOPIE2SECURITY	examples/opiesecurity opiesecurity.pro
 CONFIG_EXAMPLE_LIBOPIE2UI	examples/opieui	opieui.pro
 CONFIG_EXAMPLE_MENU     examples/menuapplet menuapplet.pro
-CONFIG_EXAMPLE_VPN      examples/networksettings        example.pro
+CONFIG_EXAMPLE_VPN      examples/networksettings        networksettings.pro
 CONFIG_FIFTEEN	noncore/games/fifteen	fifteen.pro
 CONFIG_FILEBROWSER	noncore/unsupported/filebrowser	filebrowser.pro
 CONFIG_FLAT	noncore/styles/flat	flat.pro
@@ -109,7 +109,7 @@ CONFIG_LOGOUTAPPLET	core/applets/logoutapplet	logoutapplet.pro
 CONFIG_MAIL3		noncore/net/mail		mail.pro
 CONFIG_MAILAPPLET     noncore/net/mail/taskbarapplet  taskbarapplet.pro
 CONFIG_MAILIT		noncore/unsupported/mailit		mailit.pro
-CONFIG_MAIN_TAB_EXAMPLE examples/main-tab       example.pro
+CONFIG_MAIN_TAB_EXAMPLE examples/main-tab       main-tab.pro
 CONFIG_MEDIUMMOUNT	noncore/settings/mediummount	mediummount.pro
 CONFIG_MEMORYAPPLET	noncore/applets/memoryapplet	memoryapplet.pro
 CONFIG_METAL	noncore/styles/metal	metal.pro
@@ -195,11 +195,11 @@ CONFIG_MULTIAUTH_DEMO core/settings/security/demo	multiauth.pro
 CONFIG_SFCAVE	noncore/games/sfcave	sfcave.pro
 CONFIG_SFCAVE-SDL	noncore/games/sfcave-sdl	sfcave-sdl.pro
 CONFIG_SHOWIMG	noncore/multimedia/showimg	showimg.pro
-CONFIG_SIMPLE_EXAMPLE   examples/simple example.pro
-CONFIG_SIMPLE_ICON      examples/simple-icon    example.pro
-CONFIG_SIMPLE_MAIN      examples/simple-main    example.pro
+CONFIG_SIMPLE_EXAMPLE   examples/simple simple.pro
+CONFIG_SIMPLE_ICON      examples/simple-icon    simple-icon.pro
+CONFIG_SIMPLE_MAIN      examples/simple-main    simple.main.pro
 CONFIG_SIMPLE	noncore/tools/calc2/simple	simple.pro
-CONFIG_SIMPLE_PIM       examples/simple-pim     example.pro
+CONFIG_SIMPLE_PIM       examples/simple-pim     simple-pim.pro
 CONFIG_SINGLE	single	single.pro
 CONFIG_SNAKE	noncore/games/snake	snake.pro
 CONFIG_SOLITAIRE	noncore/games/solitaire	solitaire.pro
@@ -221,7 +221,7 @@ CONFIG_TINYKATE noncore/apps/tinykate	tinykate.pro
 CONFIG_TODAY_ADDRESSBOOK core/pim/today/plugins/addressbook addressbook.pro
 CONFIG_TODAY	core/pim/today	today.pro
 CONFIG_TODAY_DATEBOOK	core/pim/today/plugins/datebook	datebook.pro
-CONFIG_TODAY_EXAMPLE    examples/todayplugin    example.pro
+CONFIG_TODAY_EXAMPLE    examples/todayplugin    todayplugin.pro
 CONFIG_TODAY_FORTUNE	noncore/todayplugins/fortune	fortune.pro
 CONFIG_TODAY_MAIL	core/pim/today/plugins/mail	mail.pro
 CONFIG_TODAY_STOCKTICKERLIB	noncore/todayplugins/stockticker/stocktickerlib	stocktickerlib.pro
