@@ -39,10 +39,6 @@ _;:,   .>  :=|.         This program is free software; you can
 
 #include <qobject.h>
 
-extern "C" {
-#include <libipkg.h>
-};
-
 // Ipkg execution options (m_ipkgExecOptions)
 #define FORCE_DEPENDS                           0x0001
 #define FORCE_REMOVE                            0x0002
@@ -79,7 +75,7 @@ public:
 
     OConfItem    *findConfItem( OConfItem::Type type = OConfItem::NotDefined,
                                 const QString &name = QString::null );
-    
+
     bool executeCommand( OPackage::Command command = OPackage::NotDefined,
                          const QStringList &parameters = QStringList(),
                          const QString &destination = QString::null,
@@ -94,7 +90,6 @@ public:
 
 private:
     Config        *m_config;            // Pointer to application configuration file
-    args_t         m_ipkgArgs;          // libipkg configuration arguments
     OConfItemList *m_confInfo;          // Contains info from all Ipkg configuration files
     int            m_ipkgExecOptions;   // Bit-mapped flags for Ipkg execution options
     int            m_ipkgExecVerbosity; // Ipkg execution verbosity level

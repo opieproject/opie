@@ -38,6 +38,11 @@ _;:,   .>  :=|.         This program is free software; you can
 #include <stdlib.h>
 #include <unistd.h>
 
+extern "C" {
+#include <libipkg.h>
+};
+args_t m_ipkgArgs; // libipkg configuration arguments
+
 const QString IPKG_CONF        = "/etc/ipkg.conf";      // Fully-qualified name of Ipkg primary configuration file
 const QString IPKG_CONF_DIR    = "/etc/ipkg";           // Directory of secondary Ipkg configuration files
 const QString IPKG_PKG_PATH    = "/usr/lib/ipkg/lists"; // Directory containing server package lists
