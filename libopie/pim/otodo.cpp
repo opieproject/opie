@@ -105,13 +105,17 @@ OTodo::OTodo(bool completed, int priority,
 bool OTodo::match( const QRegExp &regExp )const
 {
   if( QString::number( data->priority ).find( regExp ) != -1 ){
-    return true;
+      setLastHitField( Priority );
+      return true;
   }else if( data->hasDate && data->date.toString().find( regExp) != -1 ){
-    return true;
+      setLastHitField( HasDate );
+      return true;
   }else if(data->desc.find( regExp ) != -1 ){
-    return true;
+        setLastHitField( Description );
+        return true;
   }else if(data->sum.find( regExp ) != -1 ) {
-    return true;
+        setLastHitField( Summary );
+        return true;
   }
   return false;
 }

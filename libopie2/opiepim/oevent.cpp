@@ -212,16 +212,26 @@ QString OEvent::timeZone()const {
     return data->timezone;
 }
 bool OEvent::match( const QRegExp& re )const {
-    if ( re.match( data->description ) != -1 )
+    if ( re.match( data->description ) != -1 ){
+        setLastHitField( DatebookDescription );
         return true;
-    if ( re.match( data->note ) != -1 )
+    }
+    if ( re.match( data->note ) != -1 ){
+        setLastHitField( Note );
         return true;
-    if ( re.match( data->location ) != -1 )
+    }
+    if ( re.match( data->location ) != -1 ){
+        setLastHitField( Location );
         return true;
-    if ( re.match( data->start.toString() ) != -1 )
+    }
+    if ( re.match( data->start.toString() ) != -1 ){
+        setLastHitField( StartDateTime );
         return true;
-    if ( re.match( data->end.toString() ) != -1 )
+    }
+    if ( re.match( data->end.toString() ) != -1 ){
+        setLastHitField( EndDateTime );
         return true;
+    }
     return false;
 }
 QString OEvent::toRichText()const {
