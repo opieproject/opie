@@ -143,12 +143,12 @@ void EmailClient::init()
 
   bar = new QToolBar(this);
 
-  getMailButton = new QAction(tr("Get all mail"), QPixmap("getmail.xpm"), QString::null, 0, this, 0);
+  getMailButton = new QAction(tr("Get all mail"), Resource::loadPixmap("mailit/getmail"), QString::null, 0, this, 0);
   connect(getMailButton, SIGNAL(activated()), this, SLOT(getAllNewMail()) );
   getMailButton->addTo(bar);
   getMailButton->addTo(mail);
   
-  sendMailButton = new QAction(tr("Send mail"), QPixmap("sendmail.xpm"), QString::null, 0, this, 0);
+  sendMailButton = new QAction(tr("Send mail"), Resource::loadPixmap("mailit/sendmail"), QString::null, 0, this, 0);
   connect(sendMailButton, SIGNAL(activated()), this, SLOT(sendQuedMail()) );
   sendMailButton->addTo(bar);
   sendMailButton->addTo(mail);
