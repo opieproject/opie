@@ -69,6 +69,14 @@ void SysTray::clearApplets()
 {
 #ifndef QT_NO_COMPONENTS
 
+    /*
+     * Note on clearing. SOme applets delete their
+     * applets themselves some don't do it
+     * and on restart this can crash. If we delete it
+     * here we might end up in a double deletion. We could
+     * use QGuardedPtr but that would be one QOBject
+     * for every applet more but only useful for restart
+     */
     QValueList<TaskbarApplet>::Iterator mit;
     for ( mit = appletList.begin(); mit != appletList.end(); ++mit ) {
         (*mit).iface->release();

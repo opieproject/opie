@@ -27,6 +27,7 @@
 
 #include <qframe.h>
 #include <qvaluelist.h>
+#include <qguardedptr.h>
 
 class QHBoxLayout;
 class QLibrary;

@@ -723,9 +723,28 @@ void ServerApplication::shutdown( ShutdownImpl::Type t )
 void ServerApplication::restart()
 {
     if ( allowRestart ) {
+
+        /*
+         * Applets and restart is a problem. Some applets delete
+         * their widgets even if ownership gets transfered to the
+         * parent (Systray ) but deleting the applet may be unsafe
+         * as well ( double deletion ). Some have topLevel widgets
+         * and when we dlclose and then delete the widget we will
+         * crash and an crash during restart is not nice
+         */
+#ifdef ALL_APPLETS_ON_THIS_WORLD_ARE_FIXED
+        /* same as above */
+        emit aboutToQuit();
 	prepareForTermination(TRUE);
 	doRestart = TRUE;
 	quit();
+#else
+        prepareForTermination( true );
+        for ( int fd = 3; fd < 100; fd++ )
+		close( fd );
+        execl( ( qpeDir() + "/bin/qpe" ).latin1(), "qpe", 0 );
+        exit( 1 );
+#endif
     }
 }
 
