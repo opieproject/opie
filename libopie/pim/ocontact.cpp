@@ -1152,7 +1152,7 @@ static VObject *createVObject( const OContact &c )
 
     safeAddPropValue( vcard, "X-Qtopia-Spouse", c.spouse() );
     safeAddPropValue( vcard, "X-Qtopia-Gender", c.gender() );
-    safeAddPropValue( vcard, "X-Qtopia-Anniversary", TimeConversion::toString( c.anniversary() ) );
+    // safeAddPropValue( vcard, "X-Qtopia-Anniversary", TimeConversion::toString( c.anniversary() ) ); :SX
     safeAddPropValue( vcard, "X-Qtopia-Nickname", c.nickname() );
     safeAddPropValue( vcard, "X-Qtopia-Children", c.children() );
 
@@ -1231,6 +1231,7 @@ static OContact parseVObject( VObject *obj )
 		VObject *o = nextVObject( &nit );
 		QCString name = vObjectName( o );
 		QString value = vObjectStringZValue( o );
+
 		if ( name == VCHomeProp )
 		    work = FALSE;
 		else if ( name == VCWorkProp )
@@ -1380,7 +1381,7 @@ static OContact parseVObject( VObject *obj )
 	    c.setGender( value );
 	}
 	else if ( name == "X-Qtopia-Anniversary" ) {
-	    c.setAnniversary( TimeConversion::fromString( value ) );
+// 	    c.setAnniversary( TimeConversion::fromString( value ) ); :SX
 	}
 	else if ( name == "X-Qtopia-Nickname" ) {
 	    c.setNickname( value );
