@@ -1,0 +1,116 @@
+#!/usr/bin/env python
+"""
+This skript creates a help skeleton for a certain application
+(C) Michael 'Mickey' Lauer who did this even if he had a lot of other stuff to do... THANKS
+"""
+
+import os
+import sys
+
+COUNTRYCODES = "da de en fr nl pl hu no pt it pt_BR ja sl zh_CN es ko zh_TW".split()
+OPIEDIR = os.environ["OPIEDIR"]
+
+#Package: opie-appskey-help-en
+#Files: help/en/html/opie-appskey.html
+#Priority: optional
+#Section: opie/onlinedoc
+#Maintainer: ljp <llornkcor@handhelds.org>
+#Architecture: arm
+#Version: $QPE_VERSION-$SUB_VERSION
+#Depends: opie-appskey
+#License: GPL
+#Description: Application Key help files (english)
+
+def doit( name, cc ):
+    """Create a help skeleton corresponding to a package described by a desktop file."""
+
+    desktop = {}
+    for line in file( name ):
+        try:
+            key, value = line.split( '=' )
+        except ValueError:
+            pass
+        else:
+            desktop[key.strip()] = value.strip()
+
+    try:
+        application = desktop["Exec"]
+    except:
+        fail( "No Exec given in .desktop file" )
+
+    print "Generating help skeleton for application '%s'..." % application
+    helpdirname = "%s/help/%s/html" % ( OPIEDIR, cc )
+    helpappdirname = "%s/%s" % ( helpdirname, application )
+    makecontrol( helpdirname, application, cc, desktop )
+    makedir( helpappdirname )
+    makehtml( helpdirname, application, cc, desktop )
+
+#------------------------------------------------------#
+def makehtml( directory, application, cc, desktop ):
+    """Creates the help template file."""
+
+    helpfilename = "%s/%s.html" % ( directory, application )
+    print "Creating help file '%s'" % helpfilename
+    h = file( helpfilename, "w" )
+    print >> h, """<html> <head> <title>%s</title> </head>
+<body>
+  <center><h1>%s</h1></center>
+  <hr>
+</body>
+</html>
+""" % ( application, application )
+
+#------------------------------------------------------#
+def makecontrol( directory, application, cc, desktop ):
+    """Creates the .control file."""
+
+    controlfilename = "%s/opie-%s-help-%s.control" % ( directory, application, cc )
+    print "Creating control file '%s'" % controlfilename
+    c = file( controlfilename, "w" )
+    print >> c, "Package: opie-%s-help-%s" % ( application, cc )
+    print >> c, "Files: help/%s/html/%s.html help/%s/html/%s" % ( cc, application, cc, application )
+    print >> c, "Priority: optional"
+    print >> c, "Section: opie/onlinedoc"
+    print >> c, "Maintainer: %s" % desktop.get( "Maintainer", "Team Opie <opie@handhelds.org>" )
+    print >> c, "Version: $QPE_VERSION-$SUB_VERSION"
+    print >> c, "Depends: opie-%s" % application
+    print >> c, "License: GPL"
+    print >> c, "Description: %s help files (%s)" % ( application, cc )
+
+#------------------------------------------------------#
+def makedir( name ):
+    """Creates a directory."""
+
+    print "Creating directory '%s'" % name
+    if not os.path.exists( name ): os.mkdir( name )
+
+#------------------------------------------------------#
+def fail( reason ):
+    """Fails with a reason."""
+    print reason
+    sys.exit( -1 )
+
+#------------------------------------------------------#
+def checkUsage( args ):
+    """Checks calling syntax."""
+
+    if len( args ) < 2:
+        fail( """
+Usage: %s <application>.desktop [countrycode]
+
+If no countrycode is given, defaults to 'en'
+If countrycode 'all' is given, generates skeletons
+for all known countrycodes: %s""" % ( args[0], ", ".join( COUNTRYCODES ) ) )
+
+#------------------------------------------------------#
+
+if __name__ == "__main__":
+    checkUsage( sys.argv )
+
+    if len ( sys.argv ) == 2:
+        doit( sys.argv[1], "en" )
+    elif len( sys.argv ) == 3:
+        if sys.argv[2] == "all":
+            [ doit( sys.argv[1], x ) for x in split() ]
+        else:
+            doit( sys.argv[1], sys.argv[2] )

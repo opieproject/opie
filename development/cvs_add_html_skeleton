@@ -1,0 +1,5 @@
+#!/bin/sh
+
+echo "Adding HTML files for $1 to CVS"
+
+cvs add help/en/html/$1 help/en/html/$1.html help/en/html/opie-$1-help-en.control

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE features SYSTEM "opie.dtd">
+
+<!--
+
+This file serves as central repository of planned KDE features. It's parsed by
+the PHP scripts in "features.inc" which are used by "kde-3.2-features.html" to
+generate HTML versions for the web.
+
+If you plan to add a feature to KDE please add it to this file. A feature can
+have one of three status types: "todo", "inprogress", "done". Please update
+the status from time to time. For a release there shouldn't be any features
+with other states than "done". If you can't complete a feature for a release
+please move the feature to the next release. The "target" attribute specifies
+for which release the feature should be finished. At the moment only the value
+"3.2" is evaluated, but we will add pages showing the features for later
+versions as needed.
+
+Each feature consists of a summary giving a short description what the feature is
+about and one or more responsible persons.
+
+A draft for a DTD of the features file can be found in "kde-features.dtd". Use
+"xmllint -valid -noout kde-features.xml" to validate the xml file against the
+DTD. If there are errors in the XML document they will be shown, if not the
+command will not output anything.
+
+If you have questions or comments please post them to the mailing list or contact
+Cornelius Schumacher <schumacher@kde.org>.
+
+-->
+
+<features>
+<category name="Documentation">
+      <feature status="todo" target="1.0">
+		  <summary>Fix this file</summary>
+		  <responsible name="Carsten Niehaus" email="cniehaus@handhelds.org" />
+      </feature>
+	  <feature status="done" target="1.0">
+        <summary>add this file</summary>
+        <responsible name="Carsten Niehaus" email="cniehaus@handhelds.org" />
+      </feature>
+      <feature status="todo" target="1.0">
+        <summary>Datebook Recurrence Dialog not fully translated/translatable</summary>
+      </feature>      
+  </category>
+<category name="UI Bugs">
+    <feature>
+	
+    </feature>
+</category>
+<category name="HTML Documentation">
+    <feature status="todo" target="1.0">
+	<summary>A hell lot of Documentation is missing. Check help/en/html</summary>
+    </feature>
+    <feature status="todo" target="1.0">
+	<summary>OSearch DOCU does refer to settings.html which should be osearch/settings.html</summary>
+    </feature>
+</category>
+</features>

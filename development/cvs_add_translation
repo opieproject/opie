@@ -1,0 +1,16 @@
+#!/bin/sh
+
+foo=""
+
+for i in i18n/??; 
+do 
+	foo="$foo  $i/$1"
+	
+done
+for i in i18n/??_??; 
+do 
+	foo="$foo  $i/$1"
+	
+done
+
+cvs add $foo
