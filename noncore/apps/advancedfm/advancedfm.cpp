@@ -12,6 +12,7 @@
 #define DEVELOPERS_VERSION
 #include "advancedfm.h"
 
+#include <opie2/odebug.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
 #include <qpe/mimetype.h>
@@ -42,13 +43,21 @@ AdvancedFm::AdvancedFm(QWidget *,const char*, WFlags )
 
    unknownXpm = Resource::loadImage(  "UnknownDocument" ).smoothScale( AppLnk::smallIconSize(),  AppLnk::smallIconSize() );
 
-   initConnections();
-   whichTab=1;
-   rePopulate();
-   currentPathCombo->setFocus();
-   channel = new QCopChannel( "QPE/Application/advancedfm", this );
-   connect( channel, SIGNAL(received(const QCString&,const QByteArray&)),
-            this, SLOT( qcopReceive(const QCString&,const QByteArray&)) );
+	 initConnections();
+
+	 whichTab = 1;
+		 populateView();
+//	 rePopulate();
+//	 currentPathCombo->setFocus();
+	 channel = new QCopChannel( "QPE/Application/advancedfm", this );
+	 connect( channel, SIGNAL(received(const QCString&,const QByteArray&)),
+						this, SLOT( qcopReceive(const QCString&,const QByteArray&)) );
+
+// 	 if( CurrentView() == Local_View)
+// 			 qDebug("LOCAL VIEW");
+// 					 else
+// 							 qDebug("REMOTE VIEW");
+	 switchToLocalTab();	 
 }
 
 AdvancedFm::~AdvancedFm() {
@@ -66,12 +75,17 @@ void AdvancedFm::cleanUp() {
       file.remove();
 }
 
-void AdvancedFm::tabChanged(QWidget *) {
-//   owarn << "tab changed" << oendl;
-   QString path = CurrentDir()->canonicalPath();
+void AdvancedFm::tabChanged(QWidget *wd) {
+		if(wd == tab)
+				odebug << "LOCAL VIEW SHOWN"<< oendl;
+		else if(wd == tab_2)
+				odebug<< "REMOTE VIEW SHOWN"<< oendl;
+
+		QString path = CurrentDir()->canonicalPath();
    currentPathCombo->lineEdit()->setText( path );
 
-   if(whichTab == 1) {
+	 if ( TabWidget->currentWidget() == tab) {
+//   if(whichTab == 1) {
       viewMenu->setItemChecked(viewMenu->idAt(0), true);
       viewMenu->setItemChecked(viewMenu->idAt(1), false);
    } else {
@@ -84,18 +98,22 @@ void AdvancedFm::tabChanged(QWidget *) {
    setCaption(tr("AdvancedFm :: ")+fs+" :: "
               +checkDiskSpace( (const QString &) path )+ tr(" kB free") );
    chdir( path.latin1());
+   if( wd == Local_View) {
+      Remote_View->clearFocus();
+   } else {
+      Local_View->clearFocus();
+   }
+	 
 }
 
 
 void AdvancedFm::populateView() {
 
-// owarn << "PopulateView" << oendl;
         QPixmap pm;
         QListView *thisView = CurrentView();
         QDir *thisDir = CurrentDir();
         QString path = thisDir->canonicalPath();
 
-//owarn << "path is "+path << oendl;
         thisView->clear();
         thisDir->setSorting(/* QDir::Size*/ /*| QDir::Reversed | */QDir::DirsFirst);
         thisDir->setMatchAllDirs(TRUE);
@@ -215,8 +233,13 @@ void AdvancedFm::rePopulate() {
 }
 
 void AdvancedFm::ListClicked(QListViewItem *selectedItem) {
-//owarn << "listclicked" << oendl;
-   if(selectedItem) {
+	 if ( TabWidget->currentWidget() == tab)
+			 qDebug("XXXXXXXXXXXXXXXXXXXXXXXX ListClicked local");
+	 else
+			 qDebug("XXXXXXXXXXXXXXXXXXXXXXXX ListClicked remote");
+			 
+
+			 if(selectedItem) {
       QString strItem=selectedItem->text(0);
 //      owarn << strItem << oendl;
       QString strSize=selectedItem->text(1);
@@ -246,7 +269,7 @@ void AdvancedFm::ListClicked(QListViewItem *selectedItem) {
 }
 
 void AdvancedFm::ListPressed( int mouse, QListViewItem *item, const QPoint& , int ) {
-   dealWithSchmooSchmaa( item->listView());
+		Q_UNUSED(item);
    switch (mouse) {
    case 1:
    {
@@ -255,18 +278,20 @@ void AdvancedFm::ListPressed( int mouse, QListViewItem *item, const QPoint& , in
       }
    }
    break;
+//    case 2:
+//       menuTimer.start( 50, TRUE );
+//       break;
    };
 }
 
 
 void AdvancedFm::switchToLocalTab() {
-//owarn << "switch to local view" << oendl;
    TabWidget->setCurrentWidget(0);
    Local_View->setFocus();
+	 
 }
 
 void AdvancedFm::switchToRemoteTab() {
-//owarn << "switch to local view" << oendl;
    TabWidget->setCurrentWidget(1);
    Remote_View->setFocus();
 }
@@ -290,7 +315,8 @@ void  AdvancedFm::currentPathComboChanged() {
 
 void  AdvancedFm::fillCombo(const QString &currentPath) {
 
-   if ( whichTab == 1) {
+	 if ( TabWidget->currentWidget() == tab) {
+//   if ( whichTab == 1) {
       currentPathCombo->lineEdit()->setText( currentPath);
       if( localDirPathStringList.grep( currentPath,TRUE).isEmpty() ) {
          currentPathCombo->clear();
@@ -757,6 +783,11 @@ void AdvancedFm::gotoCustomDir(const QString &dir) {
 
 QDir *AdvancedFm::CurrentDir() {
 
+	 if ( TabWidget->currentWidget() == tab)
+			 qDebug("CurrentTab is Local");
+	 else
+			 qDebug("CurrentTab is Remote");
+			 
    if ( whichTab == 1) {
       return &currentDir;
    } else {
@@ -765,6 +796,7 @@ QDir *AdvancedFm::CurrentDir() {
 }
 
 QDir *AdvancedFm::OtherDir() {
+//	 if ( TabWidget->currentWidget() == tab) {
    if ( whichTab == 1) {
       return &currentRemoteDir;
    } else {
@@ -773,8 +805,11 @@ QDir *AdvancedFm::OtherDir() {
 }
 
 QListView * AdvancedFm::CurrentView() {
+		if ( TabWidget->currentWidget() == tab) 
+      odebug << "CurrentView local" << oendl;
+		
+//	 if ( TabWidget->currentWidget() == tab) {
    if ( whichTab == 1) {
-//      owarn << "CurrentView Tab 1" << oendl;
       return Local_View;
    } else {
 //      owarn << "CurrentView Tab 2" << oendl;
@@ -790,7 +825,7 @@ QListView * AdvancedFm::OtherView() {
 }
 
 void AdvancedFm::setOtherTabCurrent() {
-//   owarn << "setOtherTabCurrent() " << whichTab << "" << oendl;
+		qDebug("setOtherTabCurrent() %d",whichTab);
    if ( whichTab == 1) {
       TabWidget->setCurrentWidget(1);
    } else {
@@ -817,7 +852,7 @@ void AdvancedFm::setDocument(const QString &file) {
 }
 
 void AdvancedFm::gotoDirectory(const QString &file) {
-//   owarn << "goto dir "+file << oendl;
+   qDebug("goto dir "+file);
    QString curDir = file;
    QDir *thisDir = CurrentDir();
    if(QDir( curDir).exists() )  {
@@ -855,15 +890,6 @@ void AdvancedFm::findFile(const QString &fileName) {
 void AdvancedFm::slotSwitchMenu(int ) {
 //   odebug << "Switch " << item << "" << oendl;
    //   viewMenu->setItemChecked(item, true);
-}
-
-void AdvancedFm::dealWithSchmooSchmaa(QWidget *w) {
-   tabChanged( w);
-   if( w == Local_View) {
-      Remote_View->clearFocus();
-   } else {
-      Local_View->clearFocus();
-   }
 }
 
 void AdvancedFm::navigateToSelected() {

@@ -5,7 +5,7 @@ SOURCES   = advancedfm.cpp advancedfmData.cpp advancedfmMenu.cpp filePermissions
 TARGET    = advancedfm
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
-LIBS        += -lqpe -lopiecore2 -lopieui2
+LIBS        += -lqpe -lqte -lopiecore2 -lopieui2
 
 !contains(CONFIG,quick-app) {
  DESTDIR = $(OPIEDIR)/bin

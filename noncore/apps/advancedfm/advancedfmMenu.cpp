@@ -334,7 +334,6 @@ void AdvancedFm::copy() {
 }
 
 void AdvancedFm::copyAs() {
-   qApp->processEvents();
 
    QStringList curFileList = getPath();
    QString curFile, item;
@@ -378,8 +377,10 @@ void AdvancedFm::copyAs() {
       delete fileDlg;
 
    }
-            rePopulate();
-            setOtherTabCurrent();
+	 rePopulate();
+	 setOtherTabCurrent();
+   qApp->processEvents();
+
 }
 
 void AdvancedFm::copySameDir() {
@@ -753,12 +754,13 @@ bool AdvancedFm::eventFilter( QObject * o, QEvent * e ) {
     }
    if ( o->inherits( "QListView" ) ) {
        if ( e->type() == QEvent::FocusIn ) {
-          if( o == Local_View) { //keep track of which view
-             whichTab=1;
-          }
-          else {
-             whichTab=2;
-          }
+           if( o == Local_View) { //keep track of which view
+ 							qDebug("local view");
+              whichTab = 1;
+           } else {
+              whichTab = 2;
+ 						 qDebug("remote view");
+           }
        }
        OtherView()->setSelected( OtherView()->currentItem(), FALSE );//make sure there's correct selection
      }

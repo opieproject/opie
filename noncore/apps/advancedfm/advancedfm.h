@@ -129,9 +129,9 @@ protected:
    QListView *CurrentView();
    QListView *OtherView();
    void setOtherTabCurrent();
-   void dealWithSchmooSchmaa(QWidget *);
 
 protected slots:
+
    void openSearch();
    void dirMenuSelected(int);
    void showFileMenu();   
@@ -156,6 +156,7 @@ protected slots:
    bool copyDirectory( const QString & , const QString & );
 //   void navigateToSelected();
    bool moveDirectory( const QString & , const QString & );
+	 
 //   void slotSwitchtoLocal(int);
 
 private:
