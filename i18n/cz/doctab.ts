@@ -1,38 +1,32 @@
-<!DOCTYPE TS><TS>
-<context>
+<!DOCTYPE TS>
+<TS>
+  <context>
     <name>DocTabSettingsBase</name>
     <message>
-        <source>DocTab Settings</source>
-        <translation>Nastavení záložky Dokumenty</translation>
+      <source>DocTab Settings</source>
+      <translation>Nastavení záložky Dokumenty</translation>
     </message>
     <message>
-        <source>&lt;b&gt;Do you want a Documents Tab?&lt;/b&gt;&lt;p&gt;
-(Note that such a tab scans &lt;i&gt;all&lt;/i&gt; documents
-on &lt;i&gt;all&lt;/i&gt; external media, which can be quite
-slow and annyoing...)</source>
-        <translation type="obsolete">&lt;b&gt;Opravdu chcete záložku Dokumenty?&lt;/b&gt;&lt;p&gt;
-(Program prohledává &lt;i&gt;všechny&lt;/i&gt; dokumenty
-na &lt;i&gt;všech&lt;/i&gt; externích médiích, což může být dost
-pomalé a otravné...)</translation>
+      <source>Enable the DocTab</source>
+      <translation>Zapnout záložku Dokumenty</translation>
     </message>
     <message>
-        <source>Enable the DocTab</source>
-        <translation>Zapnout záložku Dokumenty</translation>
+      <source>Yes, please!</source>
+      <translation>Ano, prosím!</translation>
     </message>
     <message>
-        <source>Yes, please!</source>
-        <translation>Ano, prosím!</translation>
+      <source>No, thanks.</source>
+      <translation>Ne, děkuji.</translation>
     </message>
     <message>
-        <source>No, thanks.</source>
-        <translation>Ne, děkuji.</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Do you want a Documents Tab?&lt;/b&gt;&lt;p&gt;
-(Note that such a tab scans &lt;i&gt;all&lt;/i&gt; documents
-on &lt;i&gt;all&lt;/i&gt; external media, which can be quite
+      <source>&lt;b>Do you want a Documents Tab?&lt;/b>&lt;p>
+(Note that such a tab scans &lt;i>all&lt;/i> documents
+on &lt;i>all&lt;/i> external media, which can be quite
 slow and annoying...)</source>
-        <translation type="unfinished"></translation>
+      <translation>&lt;b>Opravdu chcete záložku Dokumenty?&lt;/b>&lt;p>
+(Tato záložka prohledá &lt;i>všechny&lt;/i> dokumenty
+na &lt;i>všech&lt;/i> externích médiích, což může být značně
+pomalé a nepříjemné...)</translation>
     </message>
-</context>
+  </context>
 </TS>
