@@ -95,7 +95,7 @@ void MediaPlayer::setPlaying( bool play ) {
     }
 
     QString tickerText, time, fileName;
-    if( playList->whichList() == 0 ) { //check for filelist
+    if( playList->currentTab() == PlayListWidget::CurrentPlayList ) { //check for filelist
         const DocLnk *playListCurrent = playList->current();
         if ( playListCurrent != NULL ) {
             currentFile = playListCurrent;
@@ -147,7 +147,7 @@ void MediaPlayer::setPlaying( bool play ) {
 
 
 void MediaPlayer::prev() {
-    if( playList->whichList() == 0 ) { //if using the playlist
+    if( playList->currentTab() == PlayListWidget::CurrentPlayList ) { //if using the playlist
         if ( playList->prev() ) {
             play();
         } else if ( mediaPlayerState->isLooping() ) {
@@ -163,7 +163,7 @@ void MediaPlayer::prev() {
 
 void MediaPlayer::next() {
 
-    if(playList->whichList() == 0) { //if using the playlist
+    if(playList->currentTab() == PlayListWidget::CurrentPlayList) { //if using the playlist
         if ( playList->next() ) {
             play();
         } else if ( mediaPlayerState->isLooping() ) {
