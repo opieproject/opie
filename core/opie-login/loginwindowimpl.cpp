@@ -24,7 +24,7 @@
                              Boston, MA 02111-1307, USA.
 
 */
-
+#include <qpe/version.h>
 #include <qapplication.h>
 #include <qpushbutton.h>
 #include <qlayout.h>
@@ -78,16 +78,23 @@ LoginWindowImpl::LoginWindowImpl ( ) : LoginWindow ( 0, "LOGIN-WINDOW", WStyle_C
 	m_password-> setFocus ( );
 
 	m_user-> insertStringList ( lApp-> allUsers ( ));
-
-	QTimer::singleShot ( 0, this, SLOT( showIM ( )));
+	
+	//there is no point in displaying the IM for a zaurus
+	if (ODevice::inst ( )-> series ( ) != Model_Zaurus){	
+		QTimer::singleShot ( 0, this, SLOT( showIM ( )));
+	}	
 
 	QString opiedir = ::getenv ( "OPIEDIR" );
 	QPixmap bgpix ( opiedir + "/pics/launcher/opie-background.jpg" );
 
-	if ( !bgpix. isNull ( ))
+	if ( !bgpix. isNull ( )) {
 		setBackgroundPixmap ( bgpix );
-
-	m_caption-> setText ( m_caption-> text ( ) + tr( "<center>%1 %2</center>" ). arg ( ODevice::inst ( )-> systemString ( )). arg ( ODevice::inst ( )-> systemVersionString ( )));
+		m_caption-> setBackgroundPixmap ( bgpix);
+		TextLabel1-> setBackgroundPixmap ( bgpix);
+		TextLabel2-> setBackgroundPixmap ( bgpix);
+	}	
+	
+	m_caption-> setText ( tr("<center>Welcome to OPIE %1</center><center>& %2 %3</center>"). arg(QPE_VERSION). arg ( ODevice::inst ( )-> systemString ( )). arg ( ODevice::inst ( )-> systemVersionString ( )));
 
 	Config cfg ( "opie-login" );
 	cfg. setGroup ( "General" );

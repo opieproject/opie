@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>460</width>
+            <width>456</width>
             <height>341</height>
         </rect>
     </property>
@@ -72,13 +72,13 @@
                         <name>font</name>
                         <font>
                             <family>helvetica</family>
-                            <pointsize>18</pointsize>
+                            <pointsize>36</pointsize>
                             <bold>1</bold>
                         </font>
                     </property>
                     <property stdset="1">
                         <name>autoMask</name>
-                        <bool>true</bool>
+                        <bool>false</bool>
                     </property>
                     <property stdset="1">
                         <name>backgroundOrigin</name>
@@ -138,7 +138,7 @@
                             </property>
                             <property stdset="1">
                                 <name>autoMask</name>
-                                <bool>true</bool>
+                                <bool>false</bool>
                             </property>
                             <property stdset="1">
                                 <name>backgroundOrigin</name>
@@ -230,7 +230,7 @@
                             </property>
                             <property stdset="1">
                                 <name>autoMask</name>
-                                <bool>true</bool>
+                                <bool>false</bool>
                             </property>
                             <property stdset="1">
                                 <name>backgroundOrigin</name>
