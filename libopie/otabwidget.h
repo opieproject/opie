@@ -256,7 +256,7 @@ private:
 
 signals:
 /**
- * @fn currentChanegd( QWidget *widget )
+ * @fn currentChanged( QWidget *widget )
  * @brief This signal is emitted whenever the widget has changed.
  *
  * @param widget Pointer to new current widget.
