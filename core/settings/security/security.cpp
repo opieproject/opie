@@ -30,7 +30,6 @@
 #include <qcombobox.h>
 #include <qmessagebox.h>
 #include <qfile.h>
-#include <qlistview.h>
 #include <qtextstream.h>
 
     Security::Security( QWidget* parent,  const char* name, WFlags fl )

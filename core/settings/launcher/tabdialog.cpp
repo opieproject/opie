@@ -26,8 +26,6 @@
 */
 
 #include <qpe/resource.h>
-#include <qpe/config.h>
-#include <qpe/applnk.h>
 
 #include <qlayout.h>
 #include <qvbox.h>
@@ -37,7 +35,6 @@
 #include <qlabel.h>
 #include <qradiobutton.h>
 #include <qbuttongroup.h>
-#include <qpushbutton.h>
 #include <qwhatsthis.h>
 #include <qcheckbox.h>
 

@@ -36,7 +36,6 @@
 
 #include <qdir.h>
 #include <qlistview.h>
-#include <qcheckbox.h>
 #include <qheader.h>
 #include <qlayout.h>
 #include <qlabel.h>

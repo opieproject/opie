@@ -27,7 +27,6 @@
 
 #include "tabssettings.h"
 
-#include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
 #include <qpe/applnk.h>
 #include <qpe/mimetype.h>

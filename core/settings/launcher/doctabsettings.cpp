@@ -29,10 +29,7 @@
 #include "doctabsettings.h"
 
 #include <qpe/config.h>
-#include <qpe/qlibrary.h>
-#include <qpe/qpeapplication.h>
 
-#include <qspinbox.h>
 #include <qcheckbox.h>
 #include <qlayout.h>
 #include <qlabel.h>

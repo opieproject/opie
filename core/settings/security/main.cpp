@@ -18,9 +18,6 @@
 **
 **********************************************************************/
 
-#include <qpe/qpeapplication.h>
-#include <qpe/qcopenvelope_qws.h>
-#include <qpe/global.h>
 
 #include "security.h"
 

@@ -27,7 +27,6 @@
 */
 
 #include <qlayout.h>
-#include <qapplication.h>
 
 #include <opie/otabwidget.h>
 
