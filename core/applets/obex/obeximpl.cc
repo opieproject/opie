@@ -130,9 +130,9 @@ void ObexImpl::slotReceivedFile( const QString &fileName ) {
         }
     } // now prompt and then add it
 
-    m_recvgui->PixmapLabel->setPixmap(lnk.pixmap());
-    m_recvgui->AppLabel->setText(lnk.name());
-    m_recvgui->FileLabel->setText(fileName);
+    m_recvgui->PixmapLabel->setPixmap( lnk.pixmap() );
+    m_recvgui->AppLabel->setText( "<b>" + exec + "<b>" );
+    m_recvgui->FileLabel->setText( lnk.name() );
     m_recvgui->showMaximized();
     if( m_recvgui->exec() != -1 ) {
          QCString str= "QPE/Application/";
@@ -141,12 +141,10 @@ void ObexImpl::slotReceivedFile( const QString &fileName ) {
          QCopEnvelope e(str ,  "setDocument(QString)" );
          e << fileName;
     }
-
 }
 
 
 
-Q_EXPORT_INTERFACE()
-{
+Q_EXPORT_INTERFACE() {
     Q_CREATE_INSTANCE( ObexImpl )
 }
