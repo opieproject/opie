@@ -18,14 +18,41 @@
 
 #include <assert.h>
 
+#include "manufacturers.h"
+
 MScanListView::MScanListView( QWidget* parent, const char* name )
-              :QListView( parent, name )
+              :QListView( parent, name ), _manufacturerdb( 0 )
 {
+
+    setFrameShape( QListView::StyledPanel );
+    setFrameShadow( QListView::Sunken );
+    
+    addColumn( tr( "Net/Station" ) );
+    setColumnAlignment( 0, AlignLeft || AlignVCenter );
+    addColumn( tr( "B" ) );
+    setColumnAlignment( 1, AlignCenter );
+    addColumn( tr( "AP" ) );
+    setColumnAlignment( 2, AlignCenter );
+    addColumn( tr( "Chn" ) );
+    setColumnAlignment( 3, AlignCenter );
+    addColumn( tr( "W" ) );
+    setColumnAlignment( 4, AlignCenter );
+    addColumn( tr( "T" ) );
+    setColumnAlignment( 5, AlignCenter );
+    addColumn( tr( "Manufacturer" ) );
+    setColumnAlignment( 6, AlignCenter );
+    setRootIsDecorated( true );
+    setAllColumnsShowFocus( true );
 };
     
 MScanListView::~MScanListView()
 {
 };
+
+void MScanListView::setManufacturerDB( ManufacturerDB* manufacturerdb )
+{
+    _manufacturerdb = manufacturerdb;
+}
 
 void MScanListView::addNewItem( QString type, QString essid, QString macaddr, bool wep, int channel, int signal )
 {
@@ -84,7 +111,10 @@ void MScanListView::addNewItem( QString type, QString essid, QString macaddr, bo
         if ( item )
         {
             // we have already seen this item, it's a dupe
+            #ifdef DEBUG
             qDebug( "%s is a dupe - ignoring...", (const char*) macaddr );
+            #endif
+            item->receivedBeacon();
             return;
         }
     }
@@ -102,7 +132,9 @@ void MScanListView::addNewItem( QString type, QString essid, QString macaddr, bo
     
     qDebug( "inserting new station %s", (const char*) macaddr );
     
-    new MScanListItem( network, type, "", macaddr, wep, channel, signal ); 
+    MScanListItem* station = new MScanListItem( network, type, "", macaddr, wep, channel, signal );
+    if ( _manufacturerdb )
+        station->setManufacturer( _manufacturerdb->lookup( macaddr ) );
 
     if ( type == "managed" )
     {

@@ -30,10 +30,13 @@ const int col_ap = 2;
 const int col_channel = 3;
 const int col_wep = 4;
 const int col_traffic = 5;
+const int col_manuf = 6;
 
 MScanListItem::MScanListItem( QListView* parent, QString type, QString essid, QString macaddr,
                               bool wep, int channel, int signal )
-               :QListViewItem( parent, essid, QString::null, macaddr, QString::null, QString::null )
+               :QListViewItem( parent, essid, QString::null, macaddr, QString::null, QString::null ),
+                _type( type ), _essid( essid ), _macaddr( macaddr ), _wep( wep ),
+                _channel( channel ), _signal( signal ), _beacons( 0 )
 {
     qDebug( "creating scanlist item" );
     decorateItem( type, essid, macaddr, wep, channel, signal );
@@ -77,3 +80,17 @@ void MScanListItem::decorateItem( QString type, QString essid, QString macaddr, 
 
 }
 
+void MScanListItem::setManufacturer( const QString& manufacturer )
+{
+    setText( col_manuf, manufacturer );
+}
+
+void MScanListItem::receivedBeacon()
+{
+    _beacons++;
+    #ifdef DEBUG
+    qDebug( "MScanListItem %s: received beacon #%d", (const char*) _macaddr, _beacons );
+    #endif
+    setText( col_sig, QString::number( _beacons ) );
+}
+    

@@ -25,7 +25,7 @@ class ManufacturerDB
   
     ManufacturerDB( const QString& filename );
     virtual ~ManufacturerDB();
-    QString lookup( const QString& macaddr );
+    const QString& lookup( const QString& macaddr ) const;
     
   private:
   

@@ -40,7 +40,9 @@ ManufacturerDB::ManufacturerDB( const QString& filename )
             s >> addr;
             s.skipWhiteSpace(); 
             manu = s.readLine();
+            #ifdef DEBUG
             qDebug( "ManufacturerDB: read pair %s, %s", (const char*) addr, (const char*) manu );
+            #endif
             manufacturers.insert( addr, manu );
             
         }
@@ -52,7 +54,7 @@ ManufacturerDB::~ManufacturerDB()
 {
 }
 
-QString ManufacturerDB::lookup( const QString& macaddr )
+const QString& ManufacturerDB::lookup( const QString& macaddr ) const
 {
     return manufacturers[macaddr.upper().left(8)];
 }

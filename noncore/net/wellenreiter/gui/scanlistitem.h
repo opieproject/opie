@@ -57,10 +57,12 @@ class MScanListItem: public QListViewItem
     bool wep() { return _wep; };
     int channel() { return _channel; };
     int signal() { return _signal; };
-    int received() { return _received; };
+    int beacons() { return _beacons; };
     
     void setSignal( int signal ) { /* TODO */ };
-    void incReceived() { _received++; };
+    void receivedBeacon();
+    
+    void setManufacturer( const QString& manufacturer );
       
   private:
     QString _type;
@@ -69,7 +71,7 @@ class MScanListItem: public QListViewItem
     bool _wep;
     int _channel;
     int _signal;
-    int _received;
+    int _beacons;
     
 };
 

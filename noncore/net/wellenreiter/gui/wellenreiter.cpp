@@ -24,6 +24,7 @@
 // Qtopia
 
 #ifdef QWS
+#include <qpe/qpeapplication.h>
 #include <qpe/global.h>
 #endif
 
@@ -55,12 +56,13 @@ using namespace Opie;
 
 #include "manufacturers.h"
 
+#include <daemon/source/config.hh>
+#include <libwellenreiter/source/wl_types.hh>
 #include <libwellenreiter/source/wl_sock.hh>
 #include <libwellenreiter/source/wl_proto.hh>
-#include <daemon/source/config.hh>
 
 Wellenreiter::Wellenreiter( QWidget* parent, const char* name, WFlags fl )
-    : WellenreiterBase( parent, name, fl ), daemonRunning( false )
+    : WellenreiterBase( parent, name, fl ), daemonRunning( false ), manufacturerdb( 0 )
 {
 
     //
@@ -69,7 +71,7 @@ Wellenreiter::Wellenreiter( QWidget* parent, const char* name, WFlags fl )
     
     QString manufile;
     #ifdef QWS
-    manufile.sprintf( "%s/share/wellenreiter/manufacturers.dat", (const char*) qApp.qpeDir() );
+    manufile.sprintf( "%s/share/wellenreiter/manufacturers.dat", (const char*) QPEApplication::qpeDir() );
     #else
     manufile.sprintf( "/home/mickey/work/opie/share/wellenreiter/manufacturers.dat" );
     #endif
@@ -92,7 +94,8 @@ Wellenreiter::Wellenreiter( QWidget* parent, const char* name, WFlags fl )
     // setup socket for daemon communication, register socket notifier
     //
 
-    daemon_fd = wl_setupsock( GUIADDR, GUIPORT );
+    // struct sockaddr_in sockaddr;
+    daemon_fd = wl_setupsock( GUIADDR, GUIPORT, sockaddr );
     if ( daemon_fd == -1 )
     {
         logwindow->log( "(E) Couldn't get file descriptor for commsocket." );
@@ -111,6 +114,9 @@ Wellenreiter::Wellenreiter( QWidget* parent, const char* name, WFlags fl )
     connect( button, SIGNAL( clicked() ), this, SLOT( buttonClicked() ) );
     button->setEnabled( false );
     netview->setColumnWidthMode( 1, QListView::Manual );
+    
+    if ( manufacturerdb )
+        netview->setManufacturerDB( manufacturerdb );
         
 }
 
@@ -127,17 +133,24 @@ void Wellenreiter::handleMessage()
 
     qDebug( "received message from daemon." );
 
-    char buffer[10000];
-    memset( &buffer, 0, sizeof( buffer ) );
+    /*char buffer[10000];
+    memset( &buffer, 0, sizeof( buffer ) );*/
+    
+    char buffer[WL_SOCKBUF];
 
     // int result = #wl_recv( &daemon_fd, (char*) &buffer, sizeof(buffer) );
+    
+    /*
     
     struct sockaddr from;
     socklen_t len;
     
     int result = recvfrom( daemon_fd, &buffer, 8192, MSG_WAITALL, &from, &len );
-    
     qDebug( "received %d from recv [%d bytes]", result, len );
+    
+    */
+    
+    int result = wl_recv( &daemon_fd, sockaddr, (char*) &buffer, WL_SOCKBUF );
         
     if ( result == -1 )
     {

@@ -23,6 +23,22 @@
 using namespace Opie;
 #endif
 
+// ugly... not here!
+
+#include <assert.h>
+#include <errno.h>
+#include <unistd.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <daemon/source/config.hh>
+#include <libwellenreiter/source/wl_types.hh>
+#include <libwellenreiter/source/wl_sock.hh>
+#include <libwellenreiter/source/wl_proto.hh>
+
+
 class QTimerEvent;
 class QPixmap;
 class ManufacturerDB;
@@ -51,9 +67,12 @@ private:
     void handleMessage();
 
     ManufacturerDB* manufacturerdb;
+    struct sockaddr_in sockaddr;
         
     //void readConfig();
     //void writeConfig();
 };
+
+
 
 #endif
