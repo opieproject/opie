@@ -48,6 +48,8 @@ private slots:
     void clearPage();
     void deletePage();
 
+    void slotAppMessage( const QCString&, const QByteArray& );
+
     void setPointTool();
     void setLineTool();
     void setRectangleTool();

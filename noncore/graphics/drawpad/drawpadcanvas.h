@@ -23,7 +23,7 @@ class DrawPad;
 class Page;
 
 class DrawPadCanvas : public QScrollView
-{ 
+{
     Q_OBJECT
 
 public:
@@ -36,6 +36,7 @@ public:
 
     void importPage(const QString& fileName);
     void exportPage(uint fromPage, uint toPage, const QString& name, const QString& format);
+    void importPixmap( const QPixmap& );
 
     bool goPreviousPageEnabled();
     bool goNextPageEnabled();
@@ -56,7 +57,7 @@ public slots:
     void deletePage();
     void movePageUp();
     void movePageDown();
-    
+
     void undo();
     void redo();
 

@@ -54,6 +54,8 @@ DrawPad::DrawPad(QWidget* parent, const char* name,  WFlags /*fl*/ )
     : QMainWindow(parent, name, WStyle_ContextHelp)
 {
     // init members
+    connect( qApp, SIGNAL(appMessage(const QCString&, const QByteArray&)),
+             this, SLOT(slotAppMessage(const QCString&, const QByteArray&)) );
 
     m_pDrawPadCanvas = new DrawPadCanvas(this, this);
 
@@ -662,4 +664,21 @@ void DrawPad::saveConfig()
     config.writeEntry("PenWidth", (int)m_pen.width());
     config.writeEntry("PenColor", m_pen.color().name());
     config.writeEntry("BrushColor", m_brush.color().name());
+}
+
+
+/*
+ * Import a  Thumbnail from SCAP or similiar
+ */
+void DrawPad::slotAppMessage( const QCString& str, const QByteArray& ar ) {
+    QDataStream stream(ar, IO_ReadOnly );
+    /*
+     * import the pixmap
+     */
+    if ( str == "importPixmap(QPixmap)" ) {
+        QPixmap pix;
+        stream >> pix;;
+        m_pDrawPadCanvas->importPixmap( pix );
+        QPEApplication::setKeepRunning();
+    }
 }

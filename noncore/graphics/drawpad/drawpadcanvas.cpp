@@ -180,7 +180,7 @@ void DrawPadCanvas::load(QIODevice* ioDevice)
     m_pages = drawPadCanvasXmlHandler.pages();
 
     if (m_pages.isEmpty()) {
-        m_pages.append(new Page("",         
+        m_pages.append(new Page("",
 		clipper()->width()+(verticalScrollBar()->isVisible()?verticalScrollBar()->width():0),
 	        clipper()->height()+(horizontalScrollBar()->isVisible()?horizontalScrollBar()->height():0)));
         m_pages.current()->pixmap()->fill(Qt::white);
@@ -194,7 +194,7 @@ void DrawPadCanvas::load(QIODevice* ioDevice)
 
 void DrawPadCanvas::initialPage()
 {
-    m_pages.append(new Page("", 
+    m_pages.append(new Page("",
 	clipper()->width()+(verticalScrollBar()->isVisible()?verticalScrollBar()->width():0),
 	clipper()->height()+(horizontalScrollBar()->isVisible()?horizontalScrollBar()->height():0)));
 	//236, 232)); no more fixed sizes
@@ -260,6 +260,18 @@ void DrawPadCanvas::importPage(const QString& fileName)
     m_pages.insert(m_pages.at() + 1, importedPage);
 
     resizeContents(m_pages.current()->pixmap()->width(), m_pages.current()->pixmap()->height());
+    viewport()->update();
+
+    emit pagesChanged();
+}
+
+void DrawPadCanvas::importPixmap( const QPixmap& pix ) {
+    Page* importedPage = new Page();
+
+    (*importedPage->pixmap()) = pix;
+    m_pages.insert(m_pages.at()+1, importedPage );
+    resizeContents(m_pages.current()->pixmap()->width(),
+                   m_pages.current()->pixmap()->height() );
     viewport()->update();
 
     emit pagesChanged();
@@ -353,7 +365,7 @@ void DrawPadCanvas::deleteAll()
 {
     m_pages.clear();
 
-    m_pages.append(new Page("",         
+    m_pages.append(new Page("",
 	clipper()->width()+(verticalScrollBar()->isVisible()?verticalScrollBar()->width():0),
         clipper()->height()+(horizontalScrollBar()->isVisible()?horizontalScrollBar()->height():0)));
 
@@ -389,7 +401,7 @@ void DrawPadCanvas::deletePage()
     m_pages.remove(m_pages.current());
 
     if (m_pages.isEmpty()) {
-        m_pages.append(new Page("",         
+        m_pages.append(new Page("",
 		clipper()->width()+(verticalScrollBar()->isVisible()?verticalScrollBar()->width():0),
 	        clipper()->height()+(horizontalScrollBar()->isVisible()?horizontalScrollBar()->height():0)));
 
