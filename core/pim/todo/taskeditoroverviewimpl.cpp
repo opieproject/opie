@@ -7,6 +7,8 @@
 #include <qpe/categoryselect.h>
 #include <qpe/timestring.h>
 
+#include <opie/orecur.h>
+
 #include "taskeditoroverviewimpl.h"
 
 /*
@@ -20,7 +22,7 @@ TaskEditorOverViewImpl::TaskEditorOverViewImpl( QWidget* parent, const char* nam
 TaskEditorOverViewImpl::~TaskEditorOverViewImpl() {
 }
 void TaskEditorOverViewImpl::load( const OTodo& todo) {
-      /*
+    /*
      * now that we're 'preloaded' we
      * need to disable the buttons
      * holding the dat
@@ -29,16 +31,31 @@ void TaskEditorOverViewImpl::load( const OTodo& todo) {
     btnComp-> setEnabled( FALSE );
     btnStart->setEnabled( FALSE );
 
-
+    /*
+     * get some basic dateinfos for now
+     */
     QDate date = QDate::currentDate();
     QString str = TimeString::longDateString( date );
 
-    emit recurranceEnabled( FALSE );
-    ckbStart->setChecked( FALSE );
-    btnStart->setText( str );
+    CheckBox7->setChecked( todo.recurrence().doesRecur() );
+    emit recurranceEnabled( todo.recurrence().doesRecur() );
 
-    ckbComp->setChecked( FALSE );
-    btnComp->setText( str );
+
+    ckbStart->setChecked( todo.hasStartDate() );
+    btnStart->setEnabled( todo.hasStartDate() );
+    if ( todo.hasStartDate() ) {
+        m_start = todo.startDate();
+        btnStart->setText( TimeString::longDateString( m_start ) );
+    } else
+        btnStart->setText( str );
+
+    ckbComp->setChecked( todo.hasCompletedDate() );
+    btnComp->setEnabled( todo.hasCompletedDate() );
+    if ( todo.hasCompletedDate() ) {
+        m_comp = todo.completedDate();
+        btnComp->setText( TimeString::longDateString( m_comp ) );
+    }else
+        btnComp->setText( str );
 
     cmbProgress->setCurrentItem( todo.progress()/20 );
     cmbSum->insertItem( todo.summary(), 0 );
@@ -47,6 +64,7 @@ void TaskEditorOverViewImpl::load( const OTodo& todo) {
     ckbDue->setChecked( todo.hasDueDate() );
     btnDue->setText( TimeString::longDateString( todo.dueDate() ) );
     btnDue->setEnabled( todo.hasDueDate() );
+    m_due = todo.dueDate();
 
     cmbPrio->setCurrentItem( todo.priority() -1 );
     ckbCompleted->setChecked( todo.isCompleted() );
@@ -55,12 +73,31 @@ void TaskEditorOverViewImpl::load( const OTodo& todo) {
 
 }
 void TaskEditorOverViewImpl::save( OTodo& to) {
-    qWarning("save it now");
+    /* a invalid date */
+    QDate inval;
+    /* save our info back */
+
+    /* due date */
     if ( ckbDue->isChecked() ) {
         to.setDueDate( m_due );
         to.setHasDueDate( true );
     }else
         to.setHasDueDate( false );
+
+    /* start date */
+    if ( ckbStart->isChecked() ) {
+        to.setStartDate( m_start );
+    }else
+        to.setStartDate( inval );
+
+    /* comp date */
+    if ( ckbComp->isChecked() ) {
+        qWarning("completed checked");
+        to.setCompletedDate( m_comp );
+    }else
+        to.setCompletedDate( inval );
+
+
     if ( comboCategory->currentCategory() != -1 ) {
         QArray<int> arr = comboCategory->currentCategories();
         to.setCategories( arr );
@@ -136,11 +173,13 @@ void TaskEditorOverViewImpl::slotStartChanged(int y, int m, int d) {
 }
 void TaskEditorOverViewImpl::slotDueChecked() {
     btnDue->setEnabled( ckbDue->isChecked() );
+    emit dueDateChanged( m_due );
     qWarning("slotDueChecked");
 }
 void TaskEditorOverViewImpl::slotDueChanged(int y, int m, int d ) {
     m_due.setYMD(y, m, d );
     btnDue->setText( TimeString::longDateString( m_due ) );
+    emit dueDateChanged( m_due );
 }
 void TaskEditorOverViewImpl::slotCompletedChecked() {
     btnComp->setEnabled( ckbComp->isChecked() );

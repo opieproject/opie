@@ -40,49 +40,12 @@
 
 
 namespace Todo {
-
-    /**
-     * According to tronical it's not possible
-     * to have Q_OBJECT in a template at all
-     * so this is a hack widget not meant
-     * to be public
-     */
-    class InternQtHack : public QObject {
-        Q_OBJECT
-    public:
-        InternQtHack() : QObject() {};
-        void emitShow(int uid) { emit showTodo(uid);  }
-        void emitEdit(int uid) { emit edit(uid ); }
-        void emitUpdate( int uid,
-                         const SmallTodo& to) {
-            emit update(uid, to );
-        }
-        void emitUpdate( int uid,
-                         const OTodo& ev ){
-            emit update(uid, ev );
-        }
-        void emitRemove( int uid ) {
-            emit remove( uid );
-        }
-        void emitUpdate( QWidget* wid ) {
-            emit update( wid );
-        }
-    signals:
-        void showTodo(int uid );
-        void edit(int uid );
-        void update( int uid, const Todo::SmallTodo& );
-        void update( int uid, const OTodo& );
-        /* sorry you need to cast */;
-        void update( QWidget* wid );
-        void remove( int uid );
-
-    };
     class MainWindow;
 
     /**
      * due to inheretince problems we need this base class
      */
-    class ViewBase {
+    struct ViewBase {
     public:
         virtual QWidget* widget() = 0;
         virtual QString type()const = 0;
@@ -102,16 +65,7 @@ namespace Todo {
         virtual void setShowDeadline( bool ) = 0;
         virtual void setShowCategory( const QString& = QString::null ) = 0;
         virtual void clear() = 0;
-/*        virtual QArray<int> completed() = 0; */
         virtual void newDay() = 0;
-
-        virtual void connectShow( QObject*, const char* ) = 0;
-        virtual void connectEdit( QObject*, const char* ) = 0;
-        virtual void connectUpdateSmall( QObject*, const char* ) = 0;
-        virtual void connectUpdateBig( QObject*, const char* ) = 0;
-        virtual void connectUpdateView( QObject*, const char*) = 0;
-        virtual void connectRemove( QObject*, const char* ) = 0;
-
     };
 
     /**
@@ -138,21 +92,6 @@ namespace Todo {
          */
         virtual ~TodoView();
 
-        /* connect to the show signal */
-        void connectShow(QObject* obj,
-                         const char* slot );
-
-        /* connect to edit */
-        void connectEdit( QObject* obj,
-                          const char* slot );
-        void connectUpdateSmall( QObject* obj,
-                                 const char* slot );
-        void connectUpdateBig( QObject* obj,
-                               const char* slot ) ;
-        void connectUpdateView( QObject* obj,
-                                const char* slot );
-        void connectRemove( QObject* obj,
-                            const char* slot );
     protected:
         MainWindow* todoWindow();
         OTodo event(int uid );
@@ -164,20 +103,17 @@ namespace Todo {
         void setAscending( bool );
 
         /*
-          These things needs to be implemented
-          in a implementation
-    signals:
-        */
-    protected:
-        void showTodo( int uid ) { hack->emitShow(uid); }
-        void edit( int uid ) { hack->emitEdit(uid); }
+         * These things needs to be implemented
+         * in a implementation
+         */
+        void showTodo( int uid );
+        void edit( int uid );
         void update(int uid, const SmallTodo& to );
         void update(int uid, const OTodo& ev);
-        void remove( int uid ) {
-            hack->emitRemove( uid );
-        }
+        void remove( int uid );
+        void complete( int uid );
+        void complete( const OTodo& ev );
     private:
-        InternQtHack* hack;
         MainWindow *m_main;
         OTodoAccess::List m_sort;
         bool m_asc : 1;

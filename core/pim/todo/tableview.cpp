@@ -35,6 +35,8 @@
 
 #include <qpe/config.h>
 
+#include <opie/orecur.h>
+
 #include "mainwindow.h"
 //#include "tableitems.h"
 #include "tableview.h"
@@ -120,7 +122,7 @@ TableView::~TableView() {
 
 }
 void TableView::slotShowMenu() {
-    QPopupMenu *menu = todoWindow()->contextMenu( current() );
+    QPopupMenu *menu = todoWindow()->contextMenu( current(), sorted()[currentRow()].recurrence().doesRecur() );
     menu->exec(QCursor::pos() );
     delete menu;
 }
@@ -129,11 +131,12 @@ QString TableView::type() const {
 }
 int TableView::current() {
     int uid = sorted().uidAt(currentRow() );
-    qWarning("uid %d", uid );
+
     return uid;
 }
 QString TableView::currentRepresentation() {
-    return text( currentRow(), 2);
+    OTodo to = sorted()[currentRow()];
+    return to.summary().isEmpty() ? to.description().left(20) : to.summary() ;
 }
 /* show overdue */
 void TableView::showOverDue( bool ) {
@@ -145,7 +148,7 @@ void TableView::updateView( ) {
     qWarning("update view");
     m_row = false;
     static int id;
-    id = startTimer(2000 );
+    id = startTimer(4000 );
     /* FIXME we want one page to be read!
      *
      * Calculate that screensize
@@ -242,10 +245,7 @@ void TableView::slotClicked(int row, int col, int,
               x <= ( w - BoxSize ) / 2 + BoxSize &&
               y >= ( h - BoxSize ) / 2 &&
               y <= ( h - BoxSize ) / 2 + BoxSize ) {
-             OTodo todo = sorted()[row];
-             todo.setCompleted( !todo.isCompleted() );
-             TodoView::update( todo.uid(), todo );
-             updateView();
+             TodoView::complete(sorted()[row] );
          }
     }
         break;
@@ -369,7 +369,7 @@ void TableView::paintCell(QPainter* p,  int row, int col, const QRect& cr, bool 
         // description field
     {
         QString text = task.summary().isEmpty() ?
-                       task.description() :
+                       task.description().left(20) :
                        task.summary();
         p->drawText(2,2 + fm.ascent(), text);
     }
@@ -462,7 +462,7 @@ void TableView::slotPriority() {
  *
  */
 void TableView::timerEvent( QTimerEvent* ev ) {
-    qWarning("sorted %d", sorted().count() );
+//    qWarning("sorted %d", sorted().count() );
     if (sorted().count() == 0 )
         return;
 
@@ -513,11 +513,8 @@ void TableView::contentsMouseReleaseEvent( QMouseEvent* e) {
     qWarning("colNew: %d colOld: %d", colNew, colOld );
     if ( row == rowAt( e->y() ) && row != -1 &&
          colOld != colNew ) {
-            OTodo todo = sorted()[row];
-            todo.setCompleted( !todo.isCompleted() );
-            TodoView::update( todo.uid(), todo );
-            updateView();
-            return;
+        TodoView::complete( sorted()[row] );
+        return;
     }
     QTable::contentsMouseReleaseEvent( e );
 }

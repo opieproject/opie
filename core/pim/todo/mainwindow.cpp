@@ -44,6 +44,7 @@
 #include <qpe/resource.h>
 #include <qpe/qpemessagebox.h>
 
+#include <opie/orecur.h>
 #include <opie/otodoaccessvcal.h>
 
 #include "quickeditimpl.h"
@@ -59,7 +60,9 @@
 using namespace Todo;
 
 MainWindow::MainWindow( QWidget* parent,
-                        const char* name ) {
+                        const char* name )
+    : OPimMainWindow("Todolist")
+{
 
     m_syncing = false;
     m_counter = 0;
@@ -177,13 +180,10 @@ void MainWindow::initActions() {
     /* initialize the view menu */
     a = new QAction( QString::null, tr("Show only over due"),
                      0, this, 0, TRUE );
-    a->addTo( m_view );
+    a->addTo( m_options );
     a->setOn( showOverDue() );
     connect(a, SIGNAL(toggled(bool)),
             this, SLOT(slotShowDue(bool) ) );
-    m_view->insertSeparator();
-
-    m_bar->insertItem( tr("View"), m_view );
 
     /* templates */
     m_edit->insertItem(tr("New from template"), m_template,
@@ -220,7 +220,6 @@ void MainWindow::initUI() {
     /** QPopupMenu */
     m_edit = new QPopupMenu( this );
     m_options = new QPopupMenu( this );
-    m_view = new QPopupMenu( this );
     m_catMenu = new QPopupMenu( this );
     m_template = new QPopupMenu( this );
 
@@ -254,23 +253,25 @@ MainWindow::~MainWindow() {
     delete templateManager();
 }
 void MainWindow::connectBase( ViewBase* base) {
-    base->connectShow( this, SLOT(slotShow(int) ) );
-    base->connectEdit( this, SLOT(slotEdit(int) ) );
-    base->connectUpdateSmall( this,
-                              SLOT(slotUpate1(int, const Todo::SmallTodo&)  ));
-    base->connectUpdateBig( this,
-                            SLOT(slotUpate2(int, const OTodo& ) ) );
-    base->connectUpdateView( this, SLOT(slotUpdate3( QWidget* ) ) ) ;
-    base->connectRemove(&m_todoMgr,
-                        SLOT(remove(int)) );
+    // once templates and signals mix we'll use it again
 }
-QPopupMenu* MainWindow::contextMenu( int uid ) {
+QPopupMenu* MainWindow::contextMenu( int , bool recur ) {
     QPopupMenu* menu = new QPopupMenu();
 
     m_editAction->addTo( menu );
     m_deleteAction->addTo( menu );
     m_duplicateAction->addTo( menu );
+
     menu->insertSeparator();
+
+    /*
+     * if this event recurs we allow
+     * to detach it.
+     * remove all
+     */
+    if ( recur ) {
+        ; // FIXME
+    }
 
     return menu;
 }
@@ -280,9 +281,6 @@ QPopupMenu* MainWindow::options() {
 }
 QPopupMenu* MainWindow::edit() {
     return m_edit;
-}
-QPopupMenu* MainWindow::view() {
-    return m_view;
 }
 QToolBar* MainWindow::toolbar() {
     return m_tool;
@@ -413,28 +411,7 @@ void MainWindow::slotNewFromTemplate( int id ) {
     }
 }
 void MainWindow::slotNew() {
-    if(m_syncing) {
-	QMessageBox::warning(this, tr("Todo"),
-			     tr("Can not edit data, currently syncing"));
-	return;
-    }
-
-
-    OTodo todo = currentEditor()->newTodo( currentCatId(),
-                                             this );
-
-    if ( currentEditor()->accepted() ) {
-	//todo.assignUid();
-        m_todoMgr.add( todo );
-        currentView()->addEvent( todo );
-
-
-        // I'm afraid we must call this every time now, otherwise
-        // spend expensive time comparing all these strings...
-        // but only call if we changed something -zecke
-        populateCategories();
-    }
-    raiseCurrentView( );
+    create();
 }
 void MainWindow::slotDuplicate() {
     if(m_syncing) {
@@ -474,7 +451,6 @@ void MainWindow::slotDeleteAll() {
         return;
     }
 
-  //QString strName = table->text( table->currentRow(), 2 ).left( 30 );
 
     if ( !QPEMessageBox::confirmDelete( this, tr( "Todo" ), tr("all tasks?") ) )
         return;
@@ -494,8 +470,8 @@ void MainWindow::slotDeleteCompleted() {
     if ( !QPEMessageBox::confirmDelete( this, tr( "Todo" ), tr("all completed tasks?") ) )
         return;
 
-    // FIXME
-    //m_todoMgr.remove( currentView()->completed() );
+
+    m_todoMgr.removeCompleted();
     currentView()->updateView( );
 }
 void MainWindow::slotFind() {
@@ -552,18 +528,7 @@ void MainWindow::setDocument( const QString& fi) {
 
 static const char *beamfile = "/tmp/opie-todo.vcs";
 void MainWindow::slotBeam() {
-    ::unlink( beamfile );
-    OTodo todo = event( currentView()->current() );
-    OTodoAccessVCal* cal = new OTodoAccessVCal(QString::fromLatin1(beamfile) );
-    OTodoAccess acc( cal );
-    acc.load();
-    acc.add( todo );
-    acc.save();
-    Ir* ir = new Ir(this );
-    connect(ir, SIGNAL(done(Ir*) ),
-            this, SLOT(beamDone(Ir*) ) );
-    ir->send( beamfile, todo.summary(), "text/x-vCalendar" );
-
+    beam( currentView()->current() );
 }
 void MainWindow::beamDone( Ir* ir) {
     delete ir;
@@ -703,4 +668,138 @@ void MainWindow::slotQuickEntered() {
 }
 QuickEditBase* MainWindow::quickEditor() {
     return m_curQuick;
+}
+void MainWindow::slotComplete( int uid ) {
+    slotComplete( event(uid) );
+}
+void MainWindow::slotComplete( const OTodo& todo ) {
+    OTodo to = todo;
+    to.setCompleted( !to.isCompleted() );
+    to.setCompletedDate( QDate::currentDate() );
+
+    /*
+     * if the item does recur
+     * we need to spin it off
+     * and update the items duedate to the next
+     * possible recurrance of this item...
+     * the spinned off one will loose the
+     */
+    if ( to.recurrence().doesRecur() && to.isCompleted() ) {
+        OTodo to2( to );
+
+        /* the spinned off one won't recur anymore */
+        to.setRecurrence( ORecur() );
+
+        ORecur rec = to2.recurrence();
+        rec.setStart( to.dueDate() );
+        to2.setRecurrence( rec );
+        /*
+         * if there is a next occurence
+         * from the duedate of the last recurrance
+         */
+        QDate date;
+        if ( to2.recurrence().nextOcurrence( to2.dueDate().addDays(1), date ) ) {
+            QDate inval;
+            /* generate a new uid for the old record */
+            to.setUid( 1 );
+
+            /* add the old one cause it has a new UID here cause it was spin off */
+            m_todoMgr.add( to );
+
+            /*
+             * update the due date
+             * start date
+             * and complete date
+             */
+            to2.setDueDate( date );
+            to2.setStartDate( inval );
+            to2.setCompletedDate( inval );
+            to2.setCompleted( false );
+            updateTodo( to2 );
+        }else
+            updateTodo( to );
+    }else
+        updateTodo( to );
+
+    currentView()->updateView();
+    raiseCurrentView();
+}
+void MainWindow::flush() {
+    slotFlush();
+}
+void MainWindow::reload() {
+    slotReload();
+}
+int MainWindow::create() {
+    int uid = 0;
+    if(m_syncing) {
+	QMessageBox::warning(this, tr("Todo"),
+			     tr("Can not edit data, currently syncing"));
+	return uid;
+    }
+
+
+    OTodo todo = currentEditor()->newTodo( currentCatId(),
+                                           this );
+
+    if ( currentEditor()->accepted() ) {
+	//todo.assignUid();
+        uid = todo.uid();
+        m_todoMgr.add( todo );
+        currentView()->addEvent( todo );
+
+
+        // I'm afraid we must call this every time now, otherwise
+        // spend expensive time comparing all these strings...
+        // but only call if we changed something -zecke
+        populateCategories();
+    }
+    raiseCurrentView( );
+
+    return uid;
+}
+/* delete it silently... */
+bool MainWindow::remove( int uid ) {
+    if (m_syncing) return false;
+
+    return m_todoMgr.remove( uid );
+}
+void MainWindow::beam( int uid, int ) {
+    ::unlink( beamfile );
+    OTodo todo = event( uid );
+    OTodoAccessVCal* cal = new OTodoAccessVCal(QString::fromLatin1(beamfile) );
+    OTodoAccess acc( cal );
+    acc.load();
+    acc.add( todo );
+    acc.save();
+    Ir* ir = new Ir(this );
+    connect(ir, SIGNAL(done(Ir*) ),
+            this, SLOT(beamDone(Ir*) ) );
+    ir->send( beamfile, todo.summary(), "text/x-vCalendar" );
+}
+void MainWindow::show( int uid ) {
+    slotShow( uid );
+}
+void MainWindow::edit( int uid ) {
+    slotEdit( uid );
+}
+void MainWindow::add( const OPimRecord& rec) {
+    if ( rec.rtti() != OTodo::rtti() ) return;
+
+    const OTodo& todo = static_cast<const OTodo&>(rec);
+
+    m_todoMgr.add(todo );
+    currentView()->addEvent( todo );
+
+
+    // I'm afraid we must call this every time now, otherwise
+    // spend expensive time comparing all these strings...
+    // but only call if we changed something -zecke
+    populateCategories();
+}
+/* todo does not have the QDataStream<< and >> operators implemented :(
+ * FIXME
+ */
+OPimRecord* MainWindow::record( int rtti, const QByteArray& ) {
+    return 0l;
 }

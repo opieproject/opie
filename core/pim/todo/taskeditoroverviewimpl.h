@@ -20,6 +20,7 @@ public:
     void save( OTodo& );
 signals:
     void recurranceEnabled( bool );
+    void dueDateChanged( const QDate& date );
 
 private:
     void init();

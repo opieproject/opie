@@ -85,11 +85,14 @@ void TodoManager::update( int, const SmallTodo& ) {
 void TodoManager::update( int, const OTodo& ev) {
     m_db->replace( ev );
 }
-void TodoManager::remove( int uid ) {
-    m_db->remove( uid );
+bool TodoManager::remove( int uid ) {
+    return m_db->remove( uid );
 }
 void TodoManager::removeAll() {
     m_db->clear();
+}
+void TodoManager::removeCompleted() {
+    m_db->removeAllCompleted();
 }
 void TodoManager::save() {
     m_db->save();

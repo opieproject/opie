@@ -30,10 +30,10 @@
 #define TODO_MAIN_WINDOW_H
 
 #include <qlist.h>
-#include <qmainwindow.h>
 
 #include <opie/otodoaccess.h>
 #include <opie/otodo.h>
+#include <opie/opimmainwindow.h>
 
 #include "smalltodo.h"
 #include "todoview.h"
@@ -56,18 +56,18 @@ namespace Todo {
     class TemplateEditor;
     struct QuickEditBase;
 
-    class MainWindow : public QMainWindow {
+    class MainWindow : public OPimMainWindow {
         Q_OBJECT
+        friend class TodoView; // avoid QObject here....
     public:
         MainWindow( QWidget *parent = 0,
                     const char* name = 0 );
         ~MainWindow();
 
         /** return a context menu for an OTodo */
-        QPopupMenu* contextMenu(int uid );
+        QPopupMenu* contextMenu(int uid, bool doesRecur = FALSE );
         QPopupMenu* options();
         QPopupMenu* edit();
-        QPopupMenu* view();
         QToolBar*   toolbar();
 
 
@@ -136,7 +136,6 @@ private slots:
         QPopupMenu* m_catMenu,
             *m_edit,
             *m_options,
-            *m_view,
             *m_template;
         /* box with two rows
          * top will be the quick edit
@@ -161,11 +160,13 @@ private slots:
      private slots:
         void slotShow(int);
         void slotEdit(int);
-private slots:
         void slotUpdate3( QWidget* );
+        void slotComplete( int uid );
+        void slotComplete( const OTodo& ev );
         void slotNewFromTemplate(int id );
         void slotNew();
         void slotDuplicate();
+
         void slotDelete();
         void slotDeleteAll();
         void slotDeleteCompleted();
@@ -185,6 +186,17 @@ private slots:
         void beamDone( Ir* );
         void slotShowDetails();
         void slotShowDue( bool );
+        /* reimplementation from opimmainwindow */
+    protected slots:
+        void flush();
+        void reload();
+        int create();
+        bool remove( int uid );
+        void beam(int uid, int transport = IrDa );
+        void show( int uid );
+        void edit( int uid );
+        void add( const OPimRecord& );
+        OPimRecord* record( int rtti, const QByteArray& );
     };
 };
 

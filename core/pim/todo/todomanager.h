@@ -82,8 +82,13 @@ namespace Todo {
         void add( const OTodo& );
         void update( int uid,  const SmallTodo& );
         void update( int uid, const OTodo& );
-        void remove( int uid );
+        bool remove( int uid );
         void remove( const QArray<int>& );
+
+        /**
+         * remove all completed
+         */
+        void removeCompleted();
         void removeAll();
         void reload();
         void save();
