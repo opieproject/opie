@@ -53,6 +53,9 @@ public:
 protected:
     int testString( const QString&, const QString& )const;
     int testDate( const QDate&, const QDate& )const;
+    int testTime( const QTime&, const QTime& )const;
+    int testDateTime( const QDateTime& left,
+		      const QDateTime& right )const;
 protected:
     bool sortAscending()const;
     int  sortOrder()const;
@@ -120,6 +123,7 @@ inline int OPimSortVector<T>::testString( const QString& left,
     return QString::compare( left, right );
 }
 
+
 template<class T>
 inline int OPimSortVector<T>::testDate( const QDate& left,
                                         const QDate& right )const {
@@ -132,6 +136,36 @@ inline int OPimSortVector<T>::testDate( const QDate& left,
 
     return ret;
 }
+
+template<class T>
+inline int OPimSortVector<T>::testTime( const QTime& left,
+                                        const QTime& right )const {
+    int ret = 0;
+    if ( !left .isValid() ) ret++;
+    if ( !right.isValid() ) ret--;
+
+    if ( left.isValid() && right.isValid() ){
+	    ret += left < right ? -1 : 1;    
+    }
+
+    return ret;
+}
+
+template<class T>
+inline int OPimSortVector<T>::testDateTime( const QDateTime& left,
+                                        const QDateTime& right )const {
+    int ret = 0;
+    if ( !left .isValid() ) ret++;
+    if ( !right.isValid() ) ret--;
+
+    if ( left.isValid() && right.isValid() ){
+	    ret += left < right ? -1 : 1;    
+    }
+
+    return ret;
+
+}
+
 }
 }
 

@@ -1,6 +1,7 @@
 /*
                              This file is part of the Opie Project
-                             Copyright (C) The Main Author <main-author@whereever.org>
+                             Copyright (C) Holger Freyther <freyther@handhelds.org>
+                             Copyright (C) Stefan Eilers <stefan@eilers-online.net>
               =.             Copyright (C) The Opie Team <opie-devel@handhelds.org>
             .=l.
            .>+-=

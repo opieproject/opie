@@ -33,6 +33,7 @@
 namespace Opie {
 namespace Internal {
 
+namespace{
 inline QString string( const OPimTodo& todo) {
     return  todo.summary().isEmpty() ?
         todo.description().left(20 ) :
@@ -69,6 +70,7 @@ inline int deadline( const OPimTodo& t1, const OPimTodo& t2) {
     return ret;
 }
 
+}
 
 OPimTodoSortVector::OPimTodoSortVector( uint size, bool asc, int sort )
     : OPimSortVector<OPimTodo>( size, asc, sort )

@@ -28,9 +28,11 @@
 */
 #include <qtl.h>
 
+#include <opie2/odebug.h>
 #include <opie2/opimrecurrence.h>
-
+#include <opie2/odatebookaccess.h>
 #include <opie2/odatebookaccessbackend.h>
+#include <opie2/private/opimeventsortvector.h>
 
 using namespace Opie;
 
@@ -144,8 +146,58 @@ UIDArray ODateBookAccessBackend::queryByExample( const UIDArray& uidlist, const 
     return UIDArray();
 }
 
-UIDArray ODateBookAccessBackend::sorted( const UIDArray&, bool asc, int, int, const QArray<int>& )const {
-    return UIDArray();
+UIDArray ODateBookAccessBackend::sorted( const UIDArray& ar, bool asc, int sortOrder, int filter, const QArray<int>& categories )const {
+    odebug << "Using Unaccelerated ODateBookAccessBackend sorted Implementation" << oendl;
+
+    Internal::OPimEventSortVector vector( ar.count(), asc, sortOrder );
+    int item = 0;
+
+    for ( uint i = 0; i < ar.count(); ++i ){
+	    OPimEvent event = find( ar[i], ar, i, Frontend::Forward );
+	    if ( event.isEmpty() ) 
+		    continue;
+
+	    bool catPassed = true;
+	    if ( filter & ODateBookAccess::FilterCategory ){
+		    catPassed = false;
+		    // Filter Categories
+		    for ( uint cat_idx = 0; cat_idx < categories.count(); ++cat_idx ){
+			    int cat = categories[cat_idx];
+			    if ( cat == -1 || cat == 0 ){
+				    // Unfiled. Check next category if list is not empty.
+				    // Else: take it as we will not filter unfiled events..
+				    if ( !event.categories().isEmpty() )
+					    continue;
+				    else 
+					    catPassed = true;
+			    } else {
+				    if ( !event.categories().contains( cat ) )
+					    continue;
+				    else{
+					    catPassed = true;
+					    break;
+				    }
+			    }
+		    }
+	    }
+
+	    // Continue to next event if the category filter removed this item
+	    if ( !catPassed )
+		    continue;
+	    
+	    vector.insert( item++, event );
+    }
+
+    // Now sort the vector and return the list of UID's
+    vector.resize( item );
+    vector.sort();
+
+    UIDArray array( vector.count() );
+    for ( uint i= 0; i < vector.count(); i++ )
+        array[i] = vector.uidAt( i );
+
+    return array;
+    
 }
 
 OPimBackendOccurrence::List ODateBookAccessBackend::filterOccurrences( const OPimBackendOccurrence::List dayList,

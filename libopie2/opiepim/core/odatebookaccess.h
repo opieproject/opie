@@ -46,6 +46,31 @@ namespace Opie {
  */
 class ODateBookAccess : public OPimAccessTemplate<OPimEvent> {
 public:
+    /**
+     * Filter for sorted()
+     * @see SortFilterBase in OPimBase
+     */
+    enum SortFilter {
+	    
+    };
+
+    /**
+     * Sort order for sorted()
+     * @see SortOrderBase in OPimBase
+     */
+    enum SortOrder {
+	    SortDescription = SortCustom,
+	    SortLocation,
+	    SortNote,
+	    SortStartTime,
+	    SortEndTime,
+	    SortStartDate,
+	    SortEndDate,
+	    SortStartDateTime,
+	    SortEndDateTime,
+	    SortAlarmDateTime,
+    };
+
     ODateBookAccess( ODateBookAccessBackend* = 0l, enum Access acc = Random );
     ~ODateBookAccess();
 

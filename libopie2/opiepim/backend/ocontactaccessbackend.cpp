@@ -1,6 +1,7 @@
 /*
                              This file is part of the Opie Project
-                             Copyright (C) 2004 Holger Freyther <freyther@handhelds.org>
+                             Copyright (C) Holger Freyther <freyther@handhelds.org>
+			     Copyright (C) Stefan Eilers <stefan@eilers-online.net> 
               =.             Copyright (C) The Opie Team <opie-devel@handhelds.org>
             .=l.
            .>+-=
@@ -237,7 +238,7 @@ bool OPimContactAccessBackend::hasQuerySettings (uint querySettings) const
 
 
 UIDArray OPimContactAccessBackend::sorted( const UIDArray& ar, bool asc, int sortOrder,
-                                  int filter, const QArray<int>& categories)const {
+                                  int filter, const QArray<int>& categories )const {
     odebug << "Using Unaccelerated OPimContactAccessBackend sorted Implementation" << oendl;
 
     Internal::OPimContactSortVector vector(ar.count(), asc, sortOrder );
