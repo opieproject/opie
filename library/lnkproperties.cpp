@@ -37,6 +37,7 @@
 #include <qpe/config.h>
 #include <qpe/storage.h>
 #include <qpe/qpemessagebox.h>
+#include <qpe/mimetype.h>
 
 #include <qlineedit.h>
 #include <qtoolbutton.h>
@@ -275,6 +276,8 @@ void LnkProperties::done(int ok)
 {
     if ( ok ) {
 	bool changed=FALSE;
+	bool reloadMime=FALSE;
+	
 	if ( lnk->name() != d->docname->text() ) {
 	    lnk->setName(d->docname->text());
 	    changed=TRUE;
@@ -300,6 +303,7 @@ void LnkProperties::done(int ok)
 	    if ( newrot != lnk->rotation() ) {
 		lnk-> setRotation(newrot);
 		changed = TRUE;
+		reloadMime = TRUE;
 	    }
 	}
 	if ( d->preload->isHidden() && d->locationCombo->currentItem() != currentLocation ) {
@@ -330,6 +334,8 @@ void LnkProperties::done(int ok)
 		cfg.writeEntry("Apps",apps,',');
 	    }
 	}
+	if ( reloadMime )
+	    MimeType::updateApplications ( );
     }
     QDialog::done( ok );
 }
