@@ -63,7 +63,7 @@ public:
     void setBusy(bool on);
     QString getAllDocLinkInfo() const;
     LauncherView *view( const QString &id );
-
+    void setBusyIndicatorType ( const QString &type );
 signals:
     void selected(const QString&);
     void clicked(const AppLnk*);

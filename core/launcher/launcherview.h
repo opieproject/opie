@@ -65,6 +65,8 @@ public:
 
     void setViewFont( const QFont & );
 
+    void setBusyIndicatorType ( const QString &type );
+
 public slots:
     void populate( AppLnkSet *folder, const QString& categoryfilter );
 
@@ -97,6 +99,7 @@ private:
     BackgroundType bgType;
     QString bgName;
     QColor textCol;
+    int busyType;
 };
 
 #endif // LAUNCHERVIEW_H

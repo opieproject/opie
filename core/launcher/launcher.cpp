@@ -247,6 +247,9 @@ void CategoryTabWidget::initializeCategories(AppLnkSet* rootFolder,
 
     ((LauncherView*)stack->widget(0))->setFocus();
 
+    cfg. setGroup ( "GUI" );
+    setBusyIndicatorType ( cfg. readEntry ( "BusyType", QString::null ));
+
     categoryBar->show();
     stack->show();
 }
@@ -369,6 +372,12 @@ LauncherView *CategoryTabWidget::view( const QString &id )
 {
     int idx = ids.findIndex( id );
     return (LauncherView *)stack->widget(idx);
+}
+
+void CategoryTabWidget::setBusyIndicatorType ( const QString &type )
+{
+	for ( QStringList::Iterator it = ids. begin ( ); it != ids. end ( ); ++it )
+		view ( *it )-> setBusyIndicatorType ( type );
 }
 
 //===========================================================================
@@ -1166,6 +1175,11 @@ void Launcher::launcherMessage( const QCString &msg, const QByteArray &data)
 	if ( tabs->view(id) )
 	    tabs->view(id)->setViewFont( QFont(fam, size, weight, italic!=0) );
 	qDebug( "setFont: %s, %d, %d, %d", fam.latin1(), size, weight, italic );
+    }
+    else if ( msg == "setBusyIndicatorType(QString)" ) {
+	QString type;
+	stream >> type;	
+	tabs->setBusyIndicatorType(type);
     }
 }
 

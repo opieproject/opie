@@ -52,6 +52,11 @@ public:
     int ref;
 };
 
+enum BusyIndicatorType {
+	BIT_Normal = 0,
+	BIT_Blinking
+};
+
 static QMap<QString,BgPixmap*> *bgCache = 0;
 
 class LauncherIconView : public QIconView {
@@ -82,6 +87,8 @@ public:
 	}
 #endif
     }
+    
+    void setBusyIndicatorType ( BusyIndicatorType t ) { busyType = t; }
 
     QPixmap* busyPixmap() const { return (QPixmap*)&bpm[::abs(busystate)]; }
     QIconViewItem* busyItem() const { return bsy; }
@@ -97,7 +104,6 @@ public:
     void setBusy(bool on)
     {
 	QIconViewItem *c = on ? currentItem() : 0;
-	qDebug ( "set busy %d -> %s", on, c ? c-> text ().latin1() : "(null)" );
 	
 	if ( bsy != c ) {
 	    QIconViewItem *oldbsy = bsy;
@@ -136,11 +142,15 @@ public:
 
 		    bpm [i].convertFromImage( img );
 		}
-	    	busystate = 0;	
-	    	if ( busytimer )
-	    	    killTimer ( busytimer );
-	    	timerEvent ( 0 );
-	    	busytimer = startTimer ( 200 );
+		if ( busyType == BIT_Blinking ) {
+		    busystate = 0;	
+		    if ( busytimer )
+			killTimer ( busytimer );
+		    busytimer = startTimer ( 200 );
+		}
+		else
+		    busystate = 3;
+		timerEvent ( 0 );
 	    }
 	    else {
 		killTimer ( busytimer );
@@ -337,6 +347,7 @@ private:
     QColor bgColor;
     int busytimer;
     int busystate;
+    BusyIndicatorType busyType;
 };
 
 
@@ -913,3 +924,11 @@ void LauncherView::paletteChange( const QPalette &p )
     icons->setPalette( QPalette(cg,cg,cg) );
 }
 
+
+void LauncherView::setBusyIndicatorType ( const QString &type )
+{
+    if ( type. lower ( ) == "blink" )
+	icons-> setBusyIndicatorType ( BIT_Blinking );
+    else
+	icons-> setBusyIndicatorType ( BIT_Normal );
+}
