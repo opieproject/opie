@@ -48,11 +48,12 @@
 #include "frame.h"
 #include "lib.h"
 
+
 typedef void (*display_xine_frame_t) (void *user_data, uint8_t* frame,
 				      int  width, int height,int bytes );
 
 extern "C" {
-    xine_vo_driver_t* init_video_out_plugin( xine_cfg_entry_t* conf, void* video);
+    xine_vo_driver_t* init_video_out_plugin( xine_t *xine, void* video, display_xine_frame_t, void * );
     int null_is_showing_video( const xine_vo_driver_t* self );
     void null_set_show_video( const xine_vo_driver_t* self, int show );
     int null_is_fullscreen( const xine_vo_driver_t* self );
@@ -94,13 +95,13 @@ Lib::Lib( XineVideoWidget* widget ) {
     // allocate oss for sound
     // and fb for framebuffer
     m_audioOutput = xine_open_audio_driver( m_xine,  "oss", NULL );
-    m_videoOutput = ::init_video_out_plugin( m_config, NULL );
+    m_videoOutput = ::init_video_out_plugin( m_xine, NULL, xine_display_frame, this );
 
 
 //xine_open_video_driver( m_xine,  NULL,  XINE_VISUAL_TYPE_FB,  NULL);
 
 
-    null_display_handler( m_videoOutput, xine_display_frame, this );
+//    null_display_handler( m_videoOutput, xine_display_frame, this );
 
     m_stream = xine_stream_new (m_xine,  m_audioOutput,  m_videoOutput );
 

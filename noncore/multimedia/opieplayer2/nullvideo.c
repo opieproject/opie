@@ -59,7 +59,7 @@ typedef void (*display_xine_frame_t) (void *user_data, uint8_t* frame,
 typedef struct null_driver_s null_driver_t;
 
 struct null_driver_s {
-  xine_vo_driver_t     vo_driver;
+  vo_driver_t     vo_driver;
 
   uint32_t             m_capabilities;
   int                  m_show_video;
@@ -107,7 +107,7 @@ struct opie_frame_s {
   null_driver_t     *output;
 };
 
-static uint32_t null_get_capabilities( xine_vo_driver_t *self ){   
+static uint32_t null_get_capabilities( vo_driver_t *self ){   
   null_driver_t* this = (null_driver_t*)self;
   return this->m_capabilities;
 }
@@ -163,7 +163,7 @@ static void null_frame_dispose( vo_frame_t* vo_img){
 
 /* end take care of frames*/
 
-static vo_frame_t* null_alloc_frame( xine_vo_driver_t* self ){    
+static vo_frame_t* null_alloc_frame( vo_driver_t* self ){    
 
   null_driver_t* this = (null_driver_t*)self;
   opie_frame_t* frame;
@@ -195,7 +195,7 @@ static vo_frame_t* null_alloc_frame( xine_vo_driver_t* self ){
   return (vo_frame_t*) frame;
 }
 
-static void null_update_frame_format( xine_vo_driver_t* self, vo_frame_t* img,
+static void null_update_frame_format( vo_driver_t* self, vo_frame_t* img,
               uint32_t width, uint32_t height,
               int ratio_code,  int format, int flags ){
   null_driver_t* this = (null_driver_t*) self;
@@ -338,7 +338,7 @@ static void null_update_frame_format( xine_vo_driver_t* self, vo_frame_t* img,
   }    
 }
 
-static void null_display_frame( xine_vo_driver_t* self, vo_frame_t *frame_gen ){   
+static void null_display_frame( vo_driver_t* self, vo_frame_t *frame_gen ){   
   null_driver_t* this = (null_driver_t*) self;
   opie_frame_t* frame = (opie_frame_t*)frame_gen;
   display_xine_frame_t display = this->frameDis;
@@ -381,7 +381,7 @@ static void null_overlay_clut_yuv2rgb (null_driver_t  *this,
   }
 }
 
-static void null_overlay_blend ( xine_vo_driver_t *this_gen, vo_frame_t *frame_gen, vo_overlay_t *overlay) {
+static void null_overlay_blend ( vo_driver_t *this_gen, vo_frame_t *frame_gen, vo_overlay_t *overlay) {
   null_driver_t  *this = (null_driver_t *) this_gen;
   opie_frame_t   *frame = (opie_frame_t *) frame_gen;
 
@@ -418,45 +418,45 @@ static void null_overlay_blend ( xine_vo_driver_t *this_gen, vo_frame_t *frame_g
 }
 
 
-static int null_get_property( xine_vo_driver_t* self,
+static int null_get_property( vo_driver_t* self,
             int property ){
   return 0;
 }
-static int null_set_property( xine_vo_driver_t* self,
+static int null_set_property( vo_driver_t* self,
             int property,
             int value ){
   return value;
 }
-static void null_get_property_min_max( xine_vo_driver_t* self,
+static void null_get_property_min_max( vo_driver_t* self,
                int property, int *min,
                int *max ){
   *max = 0;
   *min = 0;
 }
-static int null_gui_data_exchange( xine_vo_driver_t* self,
+static int null_gui_data_exchange( vo_driver_t* self,
            int data_type,
            void *data ){
   return 0;
 }
 
-static void null_dispose ( xine_vo_driver_t* self ){
+static void null_dispose ( vo_driver_t* self ){
   null_driver_t* this = (null_driver_t*)self;
   free ( this );
 }
-static int null_redraw_needed( xine_vo_driver_t* self ){
+static int null_redraw_needed( vo_driver_t* self ){
   return 0;
 }
                
 
-xine_vo_driver_t* init_video_out_plugin( config_values_t* conf,
-           void* video ){
+xine_vo_driver_t* init_video_out_plugin( xine_t *xine,
+           void* video, display_xine_frame_t frameDisplayFunc, void *userData ){
   null_driver_t *vo;
   vo = (null_driver_t*)malloc( sizeof(null_driver_t ) );
 
   /* memset? */
   memset(vo,0, sizeof(null_driver_t ) );
 
-  vo_scale_init (&vo->sc, 0, 0);
+  vo_scale_init (&vo->sc, 0, 0, xine->config);
 
   vo->sc.gui_pixel_aspect = 1.0;
 
@@ -487,7 +487,11 @@ xine_vo_driver_t* init_video_out_plugin( config_values_t* conf,
   vo->yuv2rgb_factory = yuv2rgb_factory_init (MODE_16_RGB, vo->yuv2rgb_swap, 
                 vo->yuv2rgb_cmap);
 
-  return ( xine_vo_driver_t*) vo;
+  vo->caller = userData;
+  vo->frameDis = frameDisplayFunc;
+
+  /* return ( vo_driver_t*) vo; */
+  return vo_new_port( xine, ( vo_driver_t* )vo );
 }
 
 #if 0
@@ -512,42 +516,42 @@ vo_info_t *get_video_out_plugin_info(){
  *
  */
 int null_is_showing_video( xine_vo_driver_t* self ){
-  null_driver_t* this = (null_driver_t*)self;
+  null_driver_t* this = (null_driver_t*)self->driver;
   return this->m_show_video;
 }
 void null_set_show_video( xine_vo_driver_t* self, int show ) {
-  ((null_driver_t*)self)->m_show_video = show;
+  ((null_driver_t*)self->driver)->m_show_video = show;
 }
 
 int null_is_fullscreen( xine_vo_driver_t* self ){
-  return ((null_driver_t*)self)->m_video_fullscreen;
+  return ((null_driver_t*)self->driver)->m_video_fullscreen;
 }
 void null_set_fullscreen( xine_vo_driver_t* self, int screen ){
-  ((null_driver_t*)self)->m_video_fullscreen = screen;
+  ((null_driver_t*)self->driver)->m_video_fullscreen = screen;
 }
 int null_is_scaling( xine_vo_driver_t* self ){
-  return ((null_driver_t*)self)->m_is_scaling;
+  return ((null_driver_t*)self->driver)->m_is_scaling;
 }
 
-void null_set_videoGamma(  xine_vo_driver_t* self , int value ) {
-  ((null_driver_t*) self) ->yuv2rgb_gamma = value;
-  ((null_driver_t*) self) ->yuv2rgb_factory->set_gamma( ((null_driver_t*) self) ->yuv2rgb_factory, value );
+void null_set_videoGamma( xine_vo_driver_t* self , int value ) {
+  ((null_driver_t*) self->driver) ->yuv2rgb_gamma = value;
+  ((null_driver_t*) self->driver) ->yuv2rgb_factory->set_gamma( ((null_driver_t*) self) ->yuv2rgb_factory, value );
 }
 
 void null_set_scaling( xine_vo_driver_t* self, int scale ) {
-  ((null_driver_t*)self)->m_is_scaling = scale;
+  ((null_driver_t*)self->driver)->m_is_scaling = scale;
 }
      
 void null_set_gui_width( xine_vo_driver_t* self, int width ) {
-  ((null_driver_t*)self)->gui_width = width;
+  ((null_driver_t*)self->driver)->gui_width = width;
 }
 void null_set_gui_height( xine_vo_driver_t* self, int height ) {
-  ((null_driver_t*)self)->gui_height = height;
+  ((null_driver_t*)self->driver)->gui_height = height;
 }
 
 
 void null_set_mode( xine_vo_driver_t* self, int depth,  int rgb  ) {
-  null_driver_t* this = (null_driver_t*)self;
+  null_driver_t* this = (null_driver_t*)self->driver;
     
   this->bytes_per_pixel = (depth + 7 ) / 8;
   this->bpp = this->bytes_per_pixel * 8;
@@ -603,7 +607,7 @@ void null_set_mode( xine_vo_driver_t* self, int depth,  int rgb  ) {
 
 void null_display_handler( xine_vo_driver_t* self, display_xine_frame_t t, 
          void* user_data ) {
-  null_driver_t* this = (null_driver_t*) self;
+  null_driver_t* this = (null_driver_t*) self->driver;
   this->caller = user_data;
   this->frameDis = t;
 }
