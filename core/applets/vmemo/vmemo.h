@@ -11,7 +11,7 @@
 *********************************************************************************************/
 
 /*
- * $Id: vmemo.h,v 1.2 2002-02-14 02:13:20 llornkcor Exp $
+ * $Id: vmemo.h,v 1.3 2002-02-15 15:47:21 jeremy Exp $
  */
 
 #ifndef __VMEMO_H__
@@ -21,6 +21,7 @@
 #include <qpixmap.h>
 #include <qpe/applnk.h>
 #include <qfile.h>
+#include <qpe/qcopenvelope_qws.h>
 
 class VMemo : public QWidget
 {
@@ -29,10 +30,12 @@ public:
   VMemo( QWidget *parent, const char *name = NULL);
   ~VMemo();
   QFile track;  
+
 public slots:
   void record();
   void mousePressEvent( QMouseEvent * );
   void mouseReleaseEvent( QMouseEvent * );
+  void receive( const QCString &msg, const QByteArray &data );
 
 private:
  void paintEvent( QPaintEvent* );
@@ -41,6 +44,7 @@ private:
   int openWAV(const char *filename);
 
   QPixmap vmemoPixmap;
+  QCopChannel *myChannel;
   bool systemZaurus;
   int dsp, wav, rate, speed, channels, format, resolution;
   bool recording;
