@@ -88,7 +88,7 @@ void Sheet::slotCellChanged(int row, int col)
   if (!cellData) cellData=createCellData(row, col);
   if (cellData) cellData->data=text(row, col);
   for (cellData=sheetData.first(); cellData; cellData=sheetData.next())
-    setText(cellData->row, cellData->col, dataParser(cellData->data));
+    setText(cellData->row, cellData->col, dataParser(findCellName(cellData->row, cellData->col), cellData->data));
   emit sheetModified();
 }
 
@@ -102,8 +102,8 @@ void Sheet::swapCells(int row1, int col1, int row2, int col2)
     QString tempData(cellData1->data);
     cellData1->data=cellData2->data;
     cellData2->data=tempData;
-    setText(cellData1->row, cellData1->col, dataParser(cellData1->data));
-    setText(cellData2->row, cellData2->col, dataParser(cellData2->data));
+    setText(cellData1->row, cellData1->col, dataParser(findCellName(cellData1->row, cellData1->col), cellData1->data));
+    setText(cellData2->row, cellData2->col, dataParser(findCellName(cellData2->row, cellData2->col), cellData2->data));
     emit sheetModified();
   }
 }
@@ -166,7 +166,7 @@ double Sheet::calculateVariable(const QString &variable)
   if (ok) return tempResult;
 
   int row, col;
-  return (findRowColumn(variable, &row, &col, TRUE) ? text(row, col).toDouble() : 0);
+  return (findRowColumn(variable, &row, &col, TRUE) ? dataParser(variable, text(row, col)).toDouble() : 0);
 }
 
 double Sheet::functionSum(const QString &param1, const QString &param2)
@@ -420,11 +420,13 @@ QString Sheet::dataParserHelper(const QString &data)
   return tempElement;
 }
 
-QString Sheet::dataParser(const QString &data)
+QString Sheet::dataParser(const QString &cell, const QString &data)
 {
   QString strippedData(data);
   strippedData.replace(QRegExp("\\s"), "");
   if (strippedData.isEmpty() || strippedData[0]!='=') return data;
+  if (listDataParser.find(cell)!=listDataParser.end()) return "0";
+  listDataParser.append(cell);
   strippedData=dataParserHelper(strippedData.remove(0, 1).upper().replace(QRegExp(":"), ","));
 
   int i=0;
@@ -435,6 +437,7 @@ QString Sheet::dataParser(const QString &data)
     tempParameter=getParameter(strippedData, ++i);
   }
   while (!tempParameter.isNull());
+  listDataParser.remove(cell);
   return result.mid(1);
 }
 
@@ -539,12 +542,17 @@ void Sheet::viewportMouseReleaseEvent(QMouseEvent *e)
     removeSelection(selectionNo);
     selectionNo=-1;
     if (oldSelection.topRow()==oldSelection.bottomRow() && oldSelection.leftCol()==oldSelection.rightCol())
-      emit cellClicked(getHeaderString(oldSelection.leftCol()+1)+QString::number(oldSelection.topRow()+1));
+      emit cellClicked(findCellName(oldSelection.topRow(), oldSelection.leftCol()));
     else
-      emit cellClicked(getHeaderString(oldSelection.leftCol()+1)+QString::number(oldSelection.topRow()+1)+','+getHeaderString(oldSelection.rightCol()+1)+QString::number(oldSelection.bottomRow()+1));
+      emit cellClicked(findCellName(oldSelection.topRow(), oldSelection.leftCol())+','+findCellName(oldSelection.bottomRow(), oldSelection.rightCol()));
   }
   else
     QTable::contentsMouseReleaseEvent(&ce);
+}
+
+QString Sheet::findCellName(int row, int col)
+{
+  return (getHeaderString(col+1)+QString::number(row+1));
 }
 
 void Sheet::copySheetData(QList<typeCellData> *destSheetData)
@@ -576,7 +584,7 @@ void Sheet::setSheetData(QList<typeCellData> *srcSheetData)
     newCellData=new typeCellData;
     *newCellData=*tempCellData;
     sheetData.append(newCellData);
-    setText(newCellData->row, newCellData->col, dataParser(newCellData->data));
+    setText(newCellData->row, newCellData->col, dataParser(findCellName(newCellData->row, newCellData->col), newCellData->data));
   }
   emit sheetModified();
 }
@@ -756,7 +764,7 @@ void Sheet::editPaste(bool onlyContents)
         cellData->row+=row1;
         cellData->col+=col1;
       }
-      setText(cellData->row, cellData->col, dataParser(cellData->data));
+      setText(cellData->row, cellData->col, dataParser(findCellName(cellData->row, cellData->col), cellData->data));
       emit sheetModified();
     }
   }
@@ -779,7 +787,7 @@ void Sheet::insertRows(int no, bool allColumns)
     if (tempCellData->row>=row && (allColumns || tempCellData->col==col))
     {
       updateCell(tempCellData->row-no, tempCellData->col);
-      setText(tempCellData->row, tempCellData->col, dataParser(tempCellData->data));
+      setText(tempCellData->row, tempCellData->col, dataParser(findCellName(tempCellData->row, tempCellData->col), tempCellData->data));
     }
  emit sheetModified();
 }
@@ -805,7 +813,7 @@ void Sheet::insertColumns(int no, bool allRows)
     if (tempCellData->col>=col && (allRows || tempCellData->row==row))
     {
       updateCell(tempCellData->row, tempCellData->col-no);
-      setText(tempCellData->row, tempCellData->col, dataParser(tempCellData->data));
+      setText(tempCellData->row, tempCellData->col, dataParser(findCellName(tempCellData->row, tempCellData->col), tempCellData->data));
     }
   emit sheetModified();
 }
@@ -832,7 +840,7 @@ void Sheet::dataFindReplace(const QString &findStr, const QString &replaceStr, b
         if (replace)
         {
           tempCellData->data=cellItem->text().replace(QRegExp(findStr, matchCase), replaceStr);
-          setText(tempCellData->row, tempCellData->col, dataParser(tempCellData->data));
+          setText(tempCellData->row, tempCellData->col, dataParser(findCellName(tempCellData->row, tempCellData->col), tempCellData->data));
         }
         if (!replace || !replaceAll) break;
       }

@@ -3,7 +3,7 @@ Priority: optional
 Section: opie/applications
 Maintainer: Serdar Ozler <sozler@sitebest.com>
 Architecture: arm
-Version: 1.0.1
+Version: 1.0.2
 Depends: opie-base ($QPE_VERSION)
 License: Public Domain
 Description: Opie Sheet

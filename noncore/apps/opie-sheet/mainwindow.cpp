@@ -195,6 +195,7 @@ void MainWindow::selectorFileNew(const DocLnk &lnkDoc)
   if (documentModified && saveCurrentFile()==QMessageBox::Cancel) return;
   if (currentDoc) delete currentDoc;
   currentDoc = new DocLnk(lnkDoc);
+  editData->clear();
   listSheets.clear();
   comboSheets->clear();
 
@@ -533,7 +534,7 @@ void MainWindow::slotHelpAbout()
   dialogAbout.resize(width()-40, height()-80);
   dialogAbout.setCaption(tr("About Opie Sheet"));
 
-  QLabel label(tr("Opie Sheet\nSpreadsheet Software for Opie\nQWDC Beta Winner (as Sheet/Qt)\n\nDeveloped by: Serdar Ozler\nRelease 1.0.1\nRelease Date: July 04, 2002\n\nThis product is licensed under GPL. It is freely distributable. If you want to get the latest version and also the source code, please visit the web site.\n\nhttp://qtopia.sitebest.com"), &dialogAbout);
+  QLabel label(tr("Opie Sheet\nSpreadsheet Software for Opie\nQWDC Beta Winner (as Sheet/Qt)\n\nDeveloped by: Serdar Ozler\nRelease 1.0.2\nRelease Date: October 08, 2002\n\nThis product is licensed under GPL. It is freely distributable. If you want to get the latest version and also the source code, please visit the web site.\n\nhttp://qtopia.sitebest.com"), &dialogAbout);
   label.setGeometry(dialogAbout.rect());
   label.setAlignment(Qt::AlignCenter | Qt::WordBreak);
 

@@ -47,17 +47,19 @@ class Sheet: public QTable
   // QT objects
   QList<typeCellData> sheetData, clipboardData;
   QString pressedCell, releasedCell, sheetName;
+  QStringList listDataParser;
 
   // Private functions
   int getOperatorPriority(char oper);
   bool findRowColumn(const QString &variable, int *row, int *col, bool giveError=FALSE);
+  QString findCellName(int row, int col);
   bool findRange(const QString &variable1, const QString &variable2, int *row1, int *col1, int *row2, int *col2);
   double calculateVariable(const QString &variable);
   double calculateFunction(const QString &function, const QString &parameters);
   QChar popCharStack(QStack<QChar> *stackChars);
   QString popStringStack(QStack<QString> *stackStrings);
   QString getParameter(const QString &parameters, int paramNo, bool giveError=FALSE, const QString funcName="");
-  QString dataParser(const QString &data);
+  QString dataParser(const QString &cell, const QString &data);
   QString dataParserHelper(const QString &data);
   typeCellData *createCellData(int row, int col);
   typeCellData *findCellData(int row, int col);

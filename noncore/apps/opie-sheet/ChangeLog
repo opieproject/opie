@@ -1,6 +1,15 @@
+October 08, 2002
+
+	* Release 1.0.2 (by thufir)
+	- Fixed bug #250 (exhibiting re-calculation error in multi-level calculation). (by thufir)
+
+October 06, 2002
+
+	- Fixed data edit box clear problem. (by thufir)
+
 October 05, 2002
 
-	- Fixed bug #252. (by thufir)
+	- Fixed bug #252 (starting up in 'mouse button' mode). (by thufir)
 
 August 31, 2002
 
