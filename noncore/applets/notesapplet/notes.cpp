@@ -79,8 +79,8 @@ static char * notes_xpm[] = {
 "       .        "};
 
 
-NotesControl::NotesControl( QWidget *parent, const char *name )
-        : QFrame( parent, name,/* WDestructiveClose | */WStyle_StaysOnTop )
+NotesControl::NotesControl( QWidget *, const char * )
+        : QVBox( 0, "NotesControl",/* WDestructiveClose | */WStyle_StaysOnTop )
 //        : QFrame( parent, name, WDestructiveClose | WStyle_StaysOnTop | WType_Popup )
 {
     QDir d( QDir::homeDirPath()+"/notes");
@@ -91,19 +91,19 @@ NotesControl::NotesControl( QWidget *parent, const char *name )
     }
     Config cfg("Notes");
      cfg.setGroup("Options");
-     showMax = cfg.readBoolEntry("ShowMax", false); 
+     showMax = cfg.readBoolEntry("ShowMax", false);
 
      setFrameStyle( QFrame::PopupPanel | QFrame::Raised );
     loaded=false;
     edited=false;
     doPopulate=true;
     isNew=false;
-    QVBoxLayout *vbox = new QVBoxLayout( this,0, -1, "Vlayout" );
-    QHBoxLayout *hbox = new QHBoxLayout( this, 0, -1, "HLayout" );
+    QVBox *vbox = new QVBox( this, "Vlayout" );
+    QHBox  *hbox = new QHBox( this, "HLayout" );
 
-    view = new QMultiLineEdit(this, "OpieNotesView");
+    view = new QMultiLineEdit(vbox, "OpieNotesView");
 
-    box = new QListBox(this, "OpieNotesBox");
+    box = new QListBox(vbox, "OpieNotesBox");
 
     QPEApplication::setStylusOperation( box->viewport(),QPEApplication::RightOnHold);
 
@@ -112,24 +112,22 @@ NotesControl::NotesControl( QWidget *parent, const char *name )
     vbox->setMargin( 6 );
     vbox->setSpacing( 3 );
 
-    vbox->addWidget( view);
-    vbox->addWidget( box);
+
 
     setFocusPolicy(QWidget::StrongFocus);
 
-    newButton= new QPushButton( this, "newButton" );
+    newButton= new QPushButton( hbox, "newButton" );
     newButton->setText(tr("New"));
-    hbox->addWidget( newButton);
 
-    saveButton= new QPushButton( this, "saveButton" );
+
+    saveButton= new QPushButton( hbox, "saveButton" );
     saveButton->setText(tr("Save"));
-    hbox->addWidget( saveButton);
 
-    deleteButton= new QPushButton( this, "deleteButton" );
+
+    deleteButton= new QPushButton( hbox, "deleteButton" );
     deleteButton->setText(tr("Delete"));
-    hbox->addWidget( deleteButton);
-    
-    vbox->addItem(hbox);
+
+
 
     connect( box, SIGNAL( mouseButtonPressed( int, QListBoxItem *, const QPoint&)),
              this,SLOT( boxPressed(int, QListBoxItem *, const QPoint&)) );
@@ -147,7 +145,7 @@ NotesControl::NotesControl( QWidget *parent, const char *name )
     populateBox();
     load();
     setCaption("Notes");
-      //  parent->setFocus();    
+      //  parent->setFocus();
 }
 
 void NotesControl::slotSaveButton() {
@@ -159,7 +157,7 @@ void NotesControl::slotDeleteButtonClicked() {
     switch ( QMessageBox::warning(this,tr("Delete?")
                                   ,tr("Do you really want to<BR><B> delete</B> this note ?")
                                   ,tr("Yes"),tr("No"),0,1,1) ) {
-      case 0: 
+      case 0:
           slotDeleteButton();
           break;
     };
@@ -199,11 +197,11 @@ void NotesControl::slotDeleteButton() {
 
                 QFile f( fi);
                 if( !f.remove()) qDebug(".desktop file not removed");
-                
+
             }
         }
         view->clear();
-        
+
         populateBox();
     }
 }
@@ -335,8 +333,8 @@ void NotesControl::save() {
                 populateBox();
         }
     cfg.writeEntry( "LastDoc",oldDocName );
-    cfg.write();    
-        
+    cfg.write();
+
     }
 }
 
@@ -468,6 +466,7 @@ NotesApplet::NotesApplet( QWidget *parent, const char *name )
 }
 
 NotesApplet::~NotesApplet() {
+    delete vc;
 }
 
 void NotesApplet::mousePressEvent( QMouseEvent *) {
