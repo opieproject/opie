@@ -24,7 +24,7 @@ QPE_VERSION=$VERSION_MAJ.$VERSION_MIN.$VERSION_PAT
 
 ARCH=arm
 STRIP=arm-linux-strip
-STRIP_FILES="*Advanced RISC Machines ARM*not stripped"
+STRIP_FILES="*ARM*not stripped"
 
 TDIR=/tmp/ipk$$
 DATADIR=$TDIR/data
