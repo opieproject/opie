@@ -9,3 +9,4 @@ Packages
 config.in
 include
 moc_*
+stamp-headers
