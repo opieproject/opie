@@ -52,6 +52,7 @@ MainWindow::MainWindow(QWidget *parent, const char *name, WFlags) : QMainWindow(
     populateProfiles();
     populateScripts();
 }
+
 void MainWindow::initUI() {
     setToolBarsMovable( FALSE  );
 
@@ -119,11 +120,18 @@ void MainWindow::initUI() {
 
     m_console->insertSeparator();
 
+    m_quickLaunch = new QAction( tr("QuickLaunch"),  Resource::loadPixmap("console/konsole_mini"),  QString::null,  0,  this, 0 );
+    m_quickLaunch->addTo( m_icons );
+    connect( m_quickLaunch,  SIGNAL( activated() ),
+             this,  SLOT( slotQuickLaunch() ) );
+
     m_transfer = new QAction( tr("Transfer file..."), Resource::loadPixmap("pass") , QString::null,
                     0, this, 0  );
     m_transfer->addTo( m_console );
     connect(m_transfer, SIGNAL(activated() ),
             this, SLOT(slotTransfer() ) );
+
+
 
     /*
      * immediate change of line wrap policy
@@ -402,6 +410,16 @@ void MainWindow::slotTerminate() {
     /* FIXME move to the next session */
 }
 
+void MainWindow::slotQuickLaunch()  {
+    Profile prof = manager()->profile(  "default"   );
+    if ( prof.name() == "default"  )  {
+        create( prof );
+    } else {
+        QMessageBox::warning(this, tr("Failure"),tr("please configure one profile named \"default\""));
+    }
+
+}
+
 void MainWindow::slotConfigure() {
     ConfigDialog conf( manager()->all(), factory() );
     conf.showMaximized();
@@ -459,6 +477,9 @@ void MainWindow::slotProfile( int id) {
     Profile prof = manager()->profile( m_sessionsPop->text( id)  );
     create( prof );
 }
+
+
+
 void MainWindow::create( const Profile& prof ) {
 	if(m_curSession)
 		if(m_curSession->transferDialog()) m_curSession->transferDialog()->hide();

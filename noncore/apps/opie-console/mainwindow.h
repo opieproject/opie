@@ -67,6 +67,7 @@ private slots:
     void slotSaveScript();
     void slotRunScript(int);
     void slotFullscreen();
+    void slotQuickLaunch();
     void slotWrap();
     void slotSessionChanged( Session* );
     void slotKeyReceived(FKey, ushort, ushort, bool);
@@ -113,6 +114,7 @@ private:
     QPopupMenu* m_scripts;
     QAction* m_connect;
     QAction* m_disconnect;
+    QAction* m_quickLaunch;
     QAction* m_terminate;
     QAction* m_transfer;
     QAction* m_setProfiles;
