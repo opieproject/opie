@@ -196,7 +196,13 @@ void Today::loadPlugins() {
             plugin.name = QString(*it);
 
             QString type = (*it).left( (*it).find(".") );
-            QStringList langs = Global::languageList();
+
+            // grr, sharp rom does not know Global::languageList();
+            //            QStringList langs = Global::languageList();
+            QString tfn = QPEApplication::qpeDir() + "/i18n/";
+            QDir langDir = tfn;
+            QStringList langs = langDir.entryList("*", QDir::Dirs );
+
             for (QStringList::ConstIterator lit = langs.begin(); lit!=langs.end(); ++lit) {
                 QString lang = *lit;
                 qDebug( "Languages: " + lang );
