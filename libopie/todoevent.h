@@ -31,12 +31,13 @@ public:
         DateYear,
         Progress,
         CrossReference,
-	HasAlarmDateTime,
-	AlarmDateTime
+        HasAlarmDateTime,
+        AlarmDateTime
     };
  public:
     // priorities from Very low to very high
-    enum TaskPriority { VERYHIGH=1, HIGH, NORMAL, LOW, VERYLOW };
+    enum TaskPriority { VeryHigh=1,  High,  Normal,  Low, VeryLow };
+
     /* Constructs a new ToDoEvent
        @param completed Is the TodoEvent completed
        @param priority What is the priority of this ToDoEvent
@@ -47,7 +48,7 @@ public:
        @param date what is the deadline?
        @param uid what is the UUID of this Event
     **/
-    ToDoEvent( bool completed = false, int priority = NORMAL,
+    ToDoEvent( bool completed = false, int priority = Normal,
 	       const QStringList &category = QStringList(),
 	       const QString &summary = QString::null ,
                const QString &description = QString::null,
@@ -226,24 +227,27 @@ public:
     void setUid(int id);
     bool operator<(const ToDoEvent &toDoEvent )const;
     bool operator<=(const ToDoEvent &toDoEvent )const;
-    bool operator!=(const ToDoEvent &toDoEvent )const { return !(*this == toDoEvent); };
+    bool operator!=(const ToDoEvent &toDoEvent )const;
     bool operator>(const ToDoEvent &toDoEvent )const;
     bool operator>=(const ToDoEvent &toDoEvent)const;
     bool operator==(const ToDoEvent &toDoEvent )const;
     ToDoEvent &operator=(const ToDoEvent &toDoEvent );
 
  private:
-    QString crossToString()const;
-    void deref();
     class ToDoEventPrivate;
     struct ToDoEventData;
-    ToDoEventData *data;
+    QString crossToString()const;
+    void deref();
     void changeOrModify();
     void copy( ToDoEventData* src,  ToDoEventData* dest );
     ToDoEventPrivate *d;
+    ToDoEventData *data;
 
     static Qtopia::UidGen m_gen;
 };
+    inline bool ToDoEvent::operator!=(const ToDoEvent &toDoEvent )const {
+        return !(*this == toDoEvent);
+    }
 };
 
 #endif
