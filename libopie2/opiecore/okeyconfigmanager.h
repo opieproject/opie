@@ -136,23 +136,30 @@ private:
  * the event filter and get a signal.
  * You need to load and save yourself!
  *
+ * Again if you want to extend it and I missed a virtual, tell me so I can improve (zecke@handhelds.org)
+ *
  * @since 1.1.2
  */
 class OKeyConfigManager : public QObject {
     Q_OBJECT
     typedef QMap<int, OKeyConfigItem::List> OKeyMapConfigPrivate;
 public:
+    enum EventMask {
+        MaskPressed = 0x1,
+        MaskReleased = 0x2,
+    };
+
     OKeyConfigManager(Opie::Core::OConfig *conf = 0,
                       const QString& group = QString::null,
                       const OKeyPair::List &block = OKeyPair::List(),
                       bool grabkeyboard = false, QObject * par = 0,
                       const char* name = 0      );
-    ~OKeyConfigManager();
+    virtual ~OKeyConfigManager();
 
-    void load();
-    void save();
+    virtual void load();
+    virtual void save();
 
-    OKeyConfigItem handleKeyEvent( QKeyEvent* );
+    virtual OKeyConfigItem handleKeyEvent( QKeyEvent* );
     int            handleKeyEventId( QKeyEvent* );
 
     void addKeyConfig( const OKeyConfigItem& );
@@ -211,10 +218,6 @@ public:
 
     OKeyConfigItem::List keyConfigList()const;
 
-    enum EventMask {
-        MaskPressed = 0x1,
-        MaskReleased = 0x2,
-    };
 signals:
     /**
      * The Signals are triggered on KeyPress and KeyRelease!
