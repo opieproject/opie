@@ -1,4 +1,4 @@
-CONFIG		= qt warn_on release
+CONFIG		= qt warn_on 
 HEADERS		= Aportis.h \
                   Bkmks.h \
                   BuffDoc.h \

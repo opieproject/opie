@@ -1,5 +1,5 @@
 TEMPLATE        = lib
-CONFIG          += qte warn_on debug
+CONFIG          += qte warn_on 
 
 HEADERS         = qcolordialog.h       \
                   qsplitter.h          \

@@ -1,5 +1,5 @@
 TEMPLATE  = lib
-CONFIG    += qt plugin warn_on release
+CONFIG    += qt plugin warn_on 
 HEADERS =   restart.h
 SOURCES =   restart.cpp
 TARGET    = restartapplet

@@ -1,5 +1,5 @@
-#CONFIG		= qt warn_on release quick-app
-CONFIG		= qt warn_on debug  quick-app
+#CONFIG		= qt warn_on  quick-app
+CONFIG		= qt warn_on   quick-app
 HEADERS	= addressbook.h \
                   contacteditor.h \
 		  ablabel.h \

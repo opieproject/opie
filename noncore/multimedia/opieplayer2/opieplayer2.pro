@@ -1,4 +1,4 @@
-CONFIG    = qt warn_on release quick-app
+CONFIG    = qt warn_on  quick-app
 HEADERS   = playlistselection.h mediaplayerstate.h xinecontrol.h \
    	    videowidget.h audiowidget.h playlistwidget.h om3u.h mediaplayer.h inputDialog.h \
             frame.h lib.h xinevideowidget.h volumecontrol.h playlistwidgetgui.h\

@@ -1,6 +1,6 @@
 TEMPLATE  = app
-CONFIG    += qt warn_on release quick-app
-# CONFIG    += qt warn_on release
+CONFIG    += qt warn_on  quick-app
+# CONFIG    += qt warn_on 
 HEADERS   = advancedfm.h filePermissions.h output.h
 SOURCES   = advancedfm.cpp advancedfmData.cpp advancedfmMenu.cpp filePermissions.cpp output.cpp main.cpp
 TARGET    = advancedfm

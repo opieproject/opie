@@ -1,5 +1,5 @@
 
-CONFIG        += qt warn on release quick-app
+CONFIG        += qt warn on  quick-app
 
 
 HEADERS    =    qcleanuphandler.h \

@@ -1,5 +1,5 @@
 TEMPLATE      =  lib
-CONFIG        += qt plugin warn_on release
+CONFIG        += qt plugin warn_on 
 HEADERS       =  bluezapplet.h bluezappletimpl.h
 SOURCES       =  bluezapplet.cpp bluezappletimpl.cpp
 TARGET        =  bluetoothapplet

@@ -1,4 +1,4 @@
-CONFIG          += qt warn_on release quick-app
+CONFIG          += qt warn_on  quick-app
 HEADERS		= d3des.h \
 		  krfbbuffer.h \
 		  krfbcanvas.h \

@@ -1,4 +1,4 @@
-CONFIG    = qt warn_on release quick-app
+CONFIG    = qt warn_on  quick-app
 HEADERS   = appearance.h editScheme.h sample.h
 SOURCES   = appearance.cpp editScheme.cpp main.cpp sample.cpp
 INCLUDEPATH += $(OPIEDIR)/include

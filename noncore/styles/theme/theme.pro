@@ -1,5 +1,5 @@
 TEMPLATE    =  lib
-CONFIG       = qt plugin embedded debug warn_on
+CONFIG       = qt plugin embedded  warn_on
 SOURCES     =  ogfxeffect.cpp \
                othemestyle.cpp \
                othemebase.cpp \

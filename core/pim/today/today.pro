@@ -1,4 +1,4 @@
-CONFIG		+= qt warn on release quick-app
+CONFIG		+= qt warn on  quick-app
 
 HEADERS		= today.h todaybase.h todayconfig.h
 SOURCES		= today.cpp todaybase.cpp todayconfig.cpp main.cpp

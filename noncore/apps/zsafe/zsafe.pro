@@ -1,5 +1,5 @@
 TEMPLATE        = app
-CONFIG         = qt warn_on release
+CONFIG         = qt warn_on 
 DESTDIR      = $(OPIEDIR)/bin
 HEADERS      = zsafe.h krc2.h category.h categorylist.h zlistview.h \
                scqtfiledlg.h

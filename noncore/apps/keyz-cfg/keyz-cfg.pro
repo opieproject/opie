@@ -1,6 +1,6 @@
 TEMPLATE        = app
 DESTDIR         = $(OPIEDIR)/bin
-CONFIG		= qt warn_on release
+CONFIG		= qt warn_on 
 HEADERS		= zkb.h \
 				zkbcfg.h \
 				zkbnames.h \

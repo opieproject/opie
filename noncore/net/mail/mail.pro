@@ -1,4 +1,4 @@
-CONFIG        += qt warn_on debug quick-app
+CONFIG        += qt warn_on  quick-app
 
 HEADERS         = defines.h \
                editaccounts.h \

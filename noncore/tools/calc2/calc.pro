@@ -1,5 +1,5 @@
 TEMPLATE = app
-CONFIG += qt release
+CONFIG += qt 
 # Input
 HEADERS += calc.h plugininterface.h instruction.h engine.h stdinstructions.h
 SOURCES += calc.cpp main.cpp engine.cpp

@@ -1,4 +1,4 @@
-CONFIG        += qt warn_on release quick-app
+CONFIG        += qt warn_on  quick-app
 HEADERS        = settings.h
 SOURCES        = language.cpp main.cpp
 INTERFACES    = languagesettingsbase.ui

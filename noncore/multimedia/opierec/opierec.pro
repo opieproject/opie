@@ -1,6 +1,6 @@
-#CONFIG   = qt qtopia warn_on release pdaudio
-CONFIG   = qt warn_on release opie
-#CONFIG    = qt warn_on release quick-app
+#CONFIG   = qt qtopia warn_on  pdaudio
+CONFIG   = qt warn_on  opie
+#CONFIG    = qt warn_on  quick-app
 HEADERS   = adpcm.h \
 	pixmaps.h \
 	helpwindow.h \

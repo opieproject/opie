@@ -1,5 +1,5 @@
 TEMPLATE  = app
-CONFIG    = qt warn_on release
+CONFIG    = qt warn_on 
 HEADERS   = inputDialog.h helpwindow.h
 SOURCES   = inputDialog.cpp helpwindow.cpp main.cpp
 INTERFACES  =

@@ -1,6 +1,6 @@
 TEMPLATE	=	lib
-CONFIG		+=	qt warn_on debug
-#CONFIG		+=	qt warn_on release
+CONFIG		+=	qt warn_on 
+#CONFIG		+=	qt warn_on 
 HEADERS		=	configfile.h \
 			defines.h \
 			imapbase.h \

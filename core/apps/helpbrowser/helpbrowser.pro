@@ -1,4 +1,4 @@
-CONFIG    += qt warn_on release quick-app
+CONFIG    += qt warn_on  quick-app
 HEADERS		= helpbrowser.h magictextbrowser.h
 SOURCES		= helpbrowser.cpp magictextbrowser.cpp \
 		  main.cpp

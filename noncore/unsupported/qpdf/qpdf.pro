@@ -1,5 +1,5 @@
 TEMPLATE    =  app
-CONFIG      *= qt embedded release warn_off
+CONFIG      *= qt embedded  warn_off
 CONFIG      -= warn_on
 SOURCES     =  xpdf/Array.cc \
                xpdf/BuiltinFont.cc \

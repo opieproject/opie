@@ -1,4 +1,4 @@
-CONFIG   = qt warn_on debug quick-app
+CONFIG   = qt warn_on  quick-app
 HEADERS   = mainwindowimp.h addconnectionimp.h defaultmodule.h  module.h
 SOURCES   = main.cpp mainwindowimp.cpp addconnectionimp.cpp
 INCLUDEPATH += $(OPIEDIR)/include interfaces/ .

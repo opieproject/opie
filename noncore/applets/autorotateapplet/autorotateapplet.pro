@@ -1,5 +1,5 @@
 TEMPLATE      = lib
-CONFIG        += qt plugin warn_on release
+CONFIG        += qt plugin warn_on 
 HEADERS       = autorotate.h
 SOURCES       = autorotate.cpp
 TARGET        = autorotateapplet

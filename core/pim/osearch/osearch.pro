@@ -1,4 +1,4 @@
-CONFIG += qt release warn_on quick-app
+CONFIG += qt  warn_on quick-app
 SOURCES += main.cpp \
            mainwindow.cpp \
            olistview.cpp \

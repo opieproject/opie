@@ -1,4 +1,4 @@
-CONFIG    += qt warn_on release quick-app
+CONFIG    += qt warn_on  quick-app
 HEADERS = textedit.h filePermissions.h
 SOURCES = main.cpp textedit.cpp filePermissions.cpp
 INCLUDEPATH += $(OPIEDIR)/include

@@ -1,5 +1,5 @@
 TEMPLATE    = lib
-CONFIG      += qt plugin warn_on release
+CONFIG      += qt plugin warn_on 
 HEADERS     = zkbwidget.h \
             ../../apps/keyz-cfg/zkbcfg.h  \
             ../../apps/keyz-cfg/zkbnames.h  \

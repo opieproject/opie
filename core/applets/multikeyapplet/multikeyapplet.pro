@@ -1,5 +1,5 @@
 TEMPLATE	= lib
-CONFIG		+= qt plugin warn_on release
+CONFIG		+= qt plugin warn_on 
 HEADERS	=   multikey.h
 SOURCES	=   multikey.cpp
 TARGET		= multikeyapplet

@@ -3,7 +3,7 @@ QMAKE_CFLAGS += $(if $(CONFIG_TARGET_X86),-DHAVE_CSS) \
 	$(if $(CONFIG_TARGET_SHARP),-DUSE_FIXED_POINT)
 QMAKE_CC = $(CXX)
 TEMPLATE  =   lib
-CONFIG    +=  qt warn_on release
+CONFIG    +=  qt warn_on 
 HEADERS   =   libmpeg3plugin.h   libmpeg3pluginimpl.h
 SOURCES   =   libmpeg3plugin.cpp libmpeg3pluginimpl.cpp \
         bitstream.c \

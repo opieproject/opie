@@ -1,6 +1,6 @@
 DESTDIR         = $(OPIEDIR)/bin
 TEMPLATE        = app
-CONFIG          += qt warn_on debug
+CONFIG          += qt warn_on 
 
 HEADERS         = previewwidget.h \
                   mainwindow.h

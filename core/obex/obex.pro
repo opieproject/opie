@@ -1,5 +1,5 @@
 TEMPLATE	= lib
-CONFIG		+= qt warn_on release
+CONFIG		+= qt warn_on 
 HEADERS	=   obex.h obexhandler.h obexsend.h receiver.h obeximpl.h
 SOURCES	=   obex.cc obexsend.cpp obexhandler.cpp receiver.cpp obeximpl.cpp
 TARGET		= opieobex

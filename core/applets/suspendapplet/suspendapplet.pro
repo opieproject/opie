@@ -1,5 +1,5 @@
 TEMPLATE      = lib
-CONFIG       += qt plugin warn_on release
+CONFIG       += qt plugin warn_on 
 HEADERS       = suspend.h
 SOURCES       = suspend.cpp
 TARGET        = suspendapplet

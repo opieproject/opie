@@ -1,7 +1,7 @@
 TEMPLATE    = app
 DESTDIR         = $(OPIEDIR)/bin/
-#CONFIG        = qt warn_on debug
-CONFIG        = qt warn_on release quick-app
+#CONFIG        = qt warn_on 
+CONFIG        = qt warn_on  quick-app
 HEADERS        = mediumwidget.h mediumglobal.h mainwindow.h
 SOURCES        = main.cpp mediumwidget.cc mediumglobal.cc mainwindow.cc
 INCLUDEPATH    += $(OPIEDIR)/include

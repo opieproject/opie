@@ -1,5 +1,5 @@
 TEMPLATE  = lib
-CONFIG    += qt plugin warn_on release
+CONFIG    += qt plugin warn_on 
 HEADERS   = screenshot.h inputDialog.h
 SOURCES   = screenshot.cpp inputDialog.cpp
 TARGET    = screenshotapplet

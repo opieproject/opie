@@ -1,5 +1,5 @@
 TEMPLATE			=app
-CONFIG				+=qt warn_on release
+CONFIG				+=qt warn_on 
 DESTDIR				=$(OPIEDIR)/bin
 HEADERS				=mbox.h fviewer.h inputdialog.h
 SOURCES				=opie-sh.cpp mbox.cpp fviewer.cpp inputdialog.cpp

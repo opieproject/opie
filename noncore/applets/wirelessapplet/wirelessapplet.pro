@@ -1,5 +1,5 @@
 TEMPLATE     = lib
-CONFIG      += qt plugin warn_on release
+CONFIG      += qt plugin warn_on 
 HEADERS      = wireless.h mgraph.h advancedconfig.h
 SOURCES      = wireless.cpp mgraph.cpp advancedconfig.cpp
 INTERFACES   = advancedconfigbase.ui

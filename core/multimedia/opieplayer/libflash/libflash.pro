@@ -1,5 +1,5 @@
 TEMPLATE	=   lib
-CONFIG		+=  qt warn_on release
+CONFIG		+=  qt warn_on 
 HEADERS		=   libflashplugin.h   libflashpluginimpl.h
 SOURCES		=   libflashplugin.cpp libflashpluginimpl.cpp \
 		    adpcm.cc character.cc flash.cc graphic16.cc matrix.cc script.cc \

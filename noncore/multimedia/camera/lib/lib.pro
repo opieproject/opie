@@ -1,6 +1,6 @@
 DESTDIR         = $(OPIEDIR)/lib
 TEMPLATE        = lib
-CONFIG          += qt warn_on debug
+CONFIG          += qt warn_on 
 
 HEADERS         = avi.h \
                   imageio.h \

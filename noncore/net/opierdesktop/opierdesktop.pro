@@ -1,6 +1,6 @@
 TEMPLATE        = app
 DESTDIR         = $(OPIEDIR)/bin
-CONFIG          = qt warn_on debug
+CONFIG          = qt warn_on 
 
 HEADERS += constants.h orders.h parse.h proto.h qtwin.h rdesktop.h types.h
 SOURCES += bitmap.cpp \

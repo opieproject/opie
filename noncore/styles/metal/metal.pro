@@ -1,5 +1,5 @@
 TEMPLATE    =  lib
-CONFIG       = qt plugin embedded release warn_on
+CONFIG       = qt plugin embedded  warn_on
 SOURCES     =  metal.cpp plugin.cpp
                
 HEADERS     =  metal.h plugin.h

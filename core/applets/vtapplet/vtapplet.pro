@@ -1,5 +1,5 @@
 TEMPLATE      = lib
-CONFIG       += qt warn_on release
+CONFIG       += qt warn_on 
 HEADERS       = vt.h
 SOURCES       = vt.cpp
 TARGET        = vtapplet

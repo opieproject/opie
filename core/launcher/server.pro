@@ -1,6 +1,6 @@
 TEMPLATE	= app
 
-CONFIG		+= qtopia warn_on release
+CONFIG		+= qtopia warn_on 
 
 DESTDIR		= $$(OPIEDIR)/bin
 

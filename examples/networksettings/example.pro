@@ -1,8 +1,8 @@
 #TEMPLATE        = app
 #
 TEMPLATE        = lib
-#CONFIG          += qt plugin warn_on release
-CONFIG		+= qt plugin warn_on debug
+#CONFIG          += qt plugin warn_on 
+CONFIG		+= qt plugin warn_on 
 DESTDIR         = $(OPIEDIR)/plugins/networksettings
 HEADERS		= exampleiface.h examplemodule.h 
 SOURCES		= exampleiface.cpp examplemodule.cpp

@@ -1,5 +1,5 @@
 TEMPLATE    = lib
-CONFIG      += qt plugin warn_on release
+CONFIG      += qt plugin warn_on 
 HEADERS     = ../../settings/sysinfo/graph.h \
             ../../settings/sysinfo/load.h  \
             ../../settings/sysinfo/memory.h  \

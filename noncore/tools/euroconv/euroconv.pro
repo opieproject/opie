@@ -1,4 +1,4 @@
-CONFIG		= qt warn_on release quick-app
+CONFIG		= qt warn_on  quick-app
 HEADERS		= calcdisplay.h    \
                 calckeypad.h
 SOURCES		= calcdisplay.cpp  \

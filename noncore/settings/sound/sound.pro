@@ -1,4 +1,4 @@
-CONFIG    += qt warn_on release quick-app
+CONFIG    += qt warn_on  quick-app
 HEADERS   = soundsettings.h soundsettingsbase.h
 SOURCES   = soundsettings.cpp soundsettingsbase.cpp main.cpp
 #INTERFACES = soundsettingsbase.ui

@@ -1,6 +1,6 @@
 TEMPLATE = lib
 CONFIG -= moc
-CONFIG += qt release
+CONFIG += qt 
 
 # Input
 HEADERS = exampleplugin.h examplepluginimpl.h examplepluginwidget.h

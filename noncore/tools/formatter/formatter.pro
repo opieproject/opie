@@ -1,4 +1,4 @@
-CONFIG    += qt warn_on release quick-app
+CONFIG    += qt warn_on  quick-app
 HEADERS   = formatter.h inputDialog.h output.h
 SOURCES   = formatter.cpp inputDialog.cpp output.cpp main.cpp
 TARGET    = formatter

@@ -1,4 +1,4 @@
-CONFIG		+= qt warn on release quick-app
+CONFIG		+= qt warn on  quick-app
 
 HEADERS		= qlinphone.h mainwindow.h linphoneconfig.h
 SOURCES		= qlinphone.cpp mainwindow.cpp linphoneconfig.cpp main.cpp

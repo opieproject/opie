@@ -1,5 +1,5 @@
 TEMPLATE    = lib
-CONFIG      += qt warn_on debug
+CONFIG      += qt warn_on 
 DESTDIR     = $(OPIEDIR)/lib
 HEADERS     = 802_11_user.h       \
               dhcp.h              \

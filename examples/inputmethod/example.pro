@@ -1,5 +1,5 @@
 TEMPLATE	= lib
-CONFIG		+= qt plugin warn_on release
+CONFIG		+= qt plugin warn_on 
 HEADERS	=   exampleboardimpl.h
 SOURCES	=   exampleboardimpl.cpp
 TARGET		= example_board

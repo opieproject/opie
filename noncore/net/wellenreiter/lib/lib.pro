@@ -1,6 +1,6 @@
 DESTDIR         = $(OPIEDIR)/output/lib
 TEMPLATE        = lib
-CONFIG          = qt warn_on debug
+CONFIG          = qt warn_on 
 
 HEADERS         = ../libopie2/opiecore/odebug.h \
                   ../libopie2/opieui/olistview.h \

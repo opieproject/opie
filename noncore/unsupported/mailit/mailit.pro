@@ -1,5 +1,5 @@
 TARGET = mailit
-CONFIG    = qt warn_on release quick-app
+CONFIG    = qt warn_on  quick-app
 HEADERS   = emailclient.h \
       emailhandler.h \
       emaillistitem.h \

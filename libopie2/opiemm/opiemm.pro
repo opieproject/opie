@@ -1,5 +1,5 @@
 TEMPLATE    = lib
-CONFIG      += qt warn_on debug
+CONFIG      += qt warn_on 
 DESTDIR     = $(OPIEDIR)/lib
 HEADERS     = osoundsystem.h
 SOURCES     = osoundsystem.cpp

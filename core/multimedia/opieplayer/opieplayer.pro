@@ -1,6 +1,6 @@
 TEMPLATE  = app
-CONFIG    = qt warn_on release
-#release
+CONFIG    = qt warn_on 
+#
 DESTDIR   = $(OPIEDIR)/bin
 HEADERS   = loopcontrol.h mediaplayerplugininterface.h \
 	playlistselection.h mediaplayerstate.h \

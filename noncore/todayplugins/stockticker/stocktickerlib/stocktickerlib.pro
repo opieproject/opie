@@ -1,6 +1,6 @@
 TEMPLATE = lib
 CONFIG -= moc
-CONFIG += qt plugin release
+CONFIG += qt plugin 
 
 HEADERS = stocktickerplugin.h stocktickerpluginimpl.h stocktickerpluginwidget.h stocktickerconfig.h \
       ../libstocks/csv.h \

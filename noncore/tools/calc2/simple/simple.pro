@@ -1,6 +1,6 @@
 #TEMPLATE = lib
 #CONFIG -= moc
-#CONFIG += qt release
+#CONFIG += qt 
 ## Input
 #INTERFACES += simple.ui
 #HEADERS = simpleimpl.h  simplefactory.h stdinstructions.h

@@ -1,5 +1,5 @@
 TEMPLATE  =   lib
-CONFIG    +=  qt warn_on release
+CONFIG    +=  qt warn_on 
 HEADERS   =   libtremorplugin.h libtremorinimpl.h
 SOURCES         =   libtremorplugin.cpp libtremorpluginimpl.cpp
 TARGET    =   tremorplugin

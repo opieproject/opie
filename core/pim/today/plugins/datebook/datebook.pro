@@ -1,6 +1,6 @@
 TEMPLATE = lib
 CONFIG -= moc
-CONFIG += qt plugin release
+CONFIG += qt plugin 
 # Input
 HEADERS = datebookplugin.h datebookpluginimpl.h datebookpluginconfig.h \
 	datebookevent.h datebookpluginwidget.h

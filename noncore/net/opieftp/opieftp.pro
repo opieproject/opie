@@ -1,5 +1,5 @@
-#CONFIG    += qt warn_on release quick-app
-CONFIG    += qt warn_on release 
+#CONFIG    += qt warn_on  quick-app
+CONFIG    += qt warn_on  
 HEADERS   = opieftp.h inputDialog.h
 SOURCES   = opieftp.cpp inputDialog.cpp main.cpp
 TARGET    = opieftp

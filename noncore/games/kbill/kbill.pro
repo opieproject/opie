@@ -1,5 +1,5 @@
 TEMPLATE 	= app
-CONFIG		= qt warn_on release
+CONFIG		= qt warn_on 
 HEADERS 	= kbill.h field.h Bucket.h Cable.h Computer.h Game.h Horde.h \
 Library.h MCursor.h Monster.h Network.h Picture.h Spark.h Strings.h \
 UI.h  objects.h inputbox.h

@@ -1,5 +1,5 @@
 TEMPLATE	= lib
-CONFIG		+= qt plugin warn_on release
+CONFIG		+= qt plugin warn_on 
 HEADERS	=   battery.h batterystatus.h
 SOURCES	=   battery.cpp batterystatus.cpp
 TARGET		= batteryapplet

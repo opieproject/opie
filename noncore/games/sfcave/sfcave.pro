@@ -1,5 +1,5 @@
 TEMPLATE	= app
-CONFIG		+= qt warn_on release
+CONFIG		+= qt warn_on 
 DESTDIR		= $(OPIEDIR)/bin
 SOURCES 	= sfcave.cpp helpwindow.cpp random.cpp
 HEADERS 	= sfcave.h helpwindow.h random.h

@@ -1,5 +1,5 @@
 TEMPLATE	= lib
-CONFIG		= qt warn_on release
+CONFIG		= qt warn_on 
 
 TARGET		= oapp
 VERSION		= 1.0.0

@@ -1,6 +1,6 @@
 TEMPLATE	= app
-#CONFIG		= qt warn_on debug
-CONFIG		= qt warn_on release
+#CONFIG		= qt warn_on 
+CONFIG		= qt warn_on 
 #TMAKE_CXXFLAGS	+= 
 HEADERS		= kpacmanwidget.h \
 		    referee.h \

@@ -1,5 +1,5 @@
 TEMPLATE      = lib
-CONFIG       += qt plugn warn_on release
+CONFIG       += qt plugn warn_on 
 HEADERS       = example.h
 SOURCES       = example.cpp
 TARGET        = example_applet
