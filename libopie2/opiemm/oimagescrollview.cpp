@@ -157,7 +157,7 @@ void OImageScrollView::init()
     connect(this,SIGNAL(viewportSizeChanged(const QSize&)),
             _zoomer, SLOT(setViewPortSize(const QSize&)) );
 
-    viewport()->setBackgroundColor(white);
+    setBackgroundColor(white);
     setFocusPolicy(QWidget::StrongFocus);
     setImageScaledLoaded(false);
     setImageIsJpeg(false);
@@ -351,7 +351,7 @@ void OImageScrollView::generateImage()
         if (AutoRotate()) r = Rotate90;
     }
 
-
+    int twidth,theight;
     odebug << " r = " << r << oendl;
     if (AutoScale() && (_original_data.width()>width() || _original_data.height() > height()) ) {
         if (!_image_data.size().isValid()||width()>_image_data.width()||height()>_image_data.height()) {
@@ -363,7 +363,6 @@ void OImageScrollView::generateImage()
             }
         }
         rescaleImage(width(),height());
-        resizeContents(_image_data.width(),_image_data.height());
     }  else if (!FirstResizeDone()||r!=m_last_rot||_image_data.width()==0) {
         if (r==Rotate0) {
             _image_data = _original_data;
@@ -371,9 +370,10 @@ void OImageScrollView::generateImage()
             rotate_into_data(r);
         }
         m_last_rot = r;
-        resizeContents(_image_data.width(),_image_data.height());
     }
     _pdata.convertFromImage(_image_data);
+    twidth = _image_data.width();
+    theight = _image_data.height();
 
     /*
      * update the zoomer
@@ -381,6 +381,7 @@ void OImageScrollView::generateImage()
     check_zoomer();
     emit imageSizeChanged( _image_data.size() );
     rescaleImage( 128, 128 );
+    resizeContents(twidth,theight);
     /*
      * move scrollbar
      */
@@ -393,6 +394,9 @@ void OImageScrollView::generateImage()
      * invalidate
      */
     _image_data=QImage();
+    if (isVisible()) {
+        updateContents(contentsX(),contentsY(),width(),height());
+    }
 }
 
 void OImageScrollView::resizeEvent(QResizeEvent * e)
@@ -437,7 +441,7 @@ void OImageScrollView::drawContents(QPainter * p, int clipx, int clipy, int clip
     bool erase = false;
 
     if (!_pdata.size().isValid()) {
-        p->fillRect(clipx,clipy,clipw,cliph,white);
+        p->fillRect(clipx,clipy,clipw,cliph, backgroundColor());
         return;
     }
     if (w>_pdata.width()) {
@@ -455,7 +459,7 @@ void OImageScrollView::drawContents(QPainter * p, int clipx, int clipy, int clip
         y = _pdata.height()-h;
     }
     if (erase||_original_data.hasAlphaBuffer()) {
-        p->fillRect(clipx,clipy,clipw,cliph,white);
+        p->fillRect(clipx,clipy,clipw,cliph, backgroundColor());
     }
     p->drawPixmap(clipx,clipy,_pdata,x,y,w,h);
 }
