@@ -98,14 +98,17 @@ private slots:
     void slotChangeCols(int);
     void slotChangeIcon(int);
     void slotChangeLabelText(const QString &);
+    void slotChangeQCode(const QString &);
+    void slotChangeUnicode(const QString &);
 
 private:
 
+    QString selectedHandle;
     ushort selectedRow, selectedCol;
 
     FunctionKeyboard *kb;
     QSpinBox *m_rowBox, *m_colBox;
-    QComboBox *m_labels, *m_qvalues;
+    QComboBox *m_labels, *m_qvalues, *m_uniValues;
 
 };
 
