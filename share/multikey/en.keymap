@@ -49,7 +49,7 @@ title = English
         "........."
 
 
-2 0         0x9     3 # tab char, but why doesnt this work...?
+2 0x1001    0x9     3 # tab char, but why doesnt this work...?
 
 
         "11 9 2 1"
