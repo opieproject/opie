@@ -1149,7 +1149,7 @@ int PlayListWidget::whichList() {
 PlayListWidget::TabType PlayListWidget::currentTab() const
 {
     static const TabType indexToTabType[ NumTabTypes ] =
-    { CurrentPlaylist, AudioFiles, VideoFiles, PlayLists };
+    { CurrentPlayList, AudioFiles, VideoFiles, PlayLists };
 
     int index = tabWidget->currentPageIndex();
     assert( index < NumTabTypes && index >= 0 );
