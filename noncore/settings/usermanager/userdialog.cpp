@@ -11,7 +11,7 @@
 #include "passwd.h"
 
 /* OPIE */
-#include <opie/odevice.h>
+#include <opie2/odevice.h>
 #include <qpe/qpeapplication.h>
 
 /* QT */
@@ -49,7 +49,7 @@ UserDialog::UserDialog(int viewmode, QWidget* parent, const char* name, bool mod
     {
         accounts->splitGroupEntry(*it);
         if(accounts->gr_name.find(QRegExp("^#"),0))
-        {	// Skip commented lines.
+        {    // Skip commented lines.
             new QCheckListItem(groupsListView,accounts->gr_name,QCheckListItem::CheckBox);
             groupComboBox->insertItem(accounts->gr_name);
         }
@@ -79,8 +79,8 @@ void UserDialog::setupTab1()
     picturePushButton = new QPushButton(tabpage,"Label");
     picturePushButton->setMinimumSize(48,48);
     picturePushButton->setMaximumSize(48,48);
-    picturePushButton->setPixmap(Resource::loadPixmap("usermanager/usericon"));	// Load default usericon.
-    connect(picturePushButton,SIGNAL(clicked()),this,SLOT(clickedPicture()));	// Clicking the picture should invoke pictureselector.
+    picturePushButton->setPixmap(Resource::loadPixmap("usermanager/usericon"));    // Load default usericon.
+    connect(picturePushButton,SIGNAL(clicked()),this,SLOT(clickedPicture()));    // Clicking the picture should invoke pictureselector.
 
     // Login
     QLabel *loginLabel=new QLabel(tabpage,"Login: ");
@@ -200,7 +200,7 @@ void UserDialog::setupTab2()
 
 /**
  * Static function that creates the userinfo dialog.
- * The user will be prompted to add a user. 
+ * The user will be prompted to add a user.
  *
  * @param uid This is a suggested available UID.
  * @param gid This is a suggested available GID.
@@ -217,8 +217,8 @@ bool UserDialog::addUser(int uid, int gid)
     // viewmode is a workaround for a bug in qte-2.3.4 that gives bus error on manipulating adduserDialog's widgets here.
     UserDialog *adduserDialog=new UserDialog(VIEWMODE_NEW);
     adduserDialog->setCaption(tr("Add User"));
-    adduserDialog->userID=uid;	// Set next available UID as default uid.
-    adduserDialog->groupID=gid;	// Set next available GID as default gid.
+    adduserDialog->userID=uid;    // Set next available UID as default uid.
+    adduserDialog->groupID=gid;    // Set next available GID as default gid.
     // Insert default group into groupComboBox
     adduserDialog->groupComboBox->insertItem("<create new group>",0);
     adduserDialog->uidLineEdit->setText(QString::number(uid));
@@ -271,7 +271,7 @@ bool UserDialog::addUser(int uid, int gid)
             d.mkdir("/opt/QtPalmtop/pics/users");
         }
         QString filename="/opt/QtPalmtop/pics/users/"+accounts->pw_name+".png";
-        //		adduserDialog->userImage=adduserDialog->userImage.smoothScale(48,48);
+        //        adduserDialog->userImage=adduserDialog->userImage.smoothScale(48,48);
         adduserDialog->userImage.save(filename,"PNG");
     }
 
@@ -284,7 +284,7 @@ bool UserDialog::addUser(int uid, int gid)
         command_cp.sprintf("cp -a /etc/skel/* %s/",accounts->pw_dir.latin1());
         system(command_cp);
 
-        command_cp.sprintf("cp -a /etc/skel/.[!.]* %s/",accounts->pw_dir.latin1());	// Bug in busybox, ".*" includes parent directory, does this work as a workaround?
+        command_cp.sprintf("cp -a /etc/skel/.[!.]* %s/",accounts->pw_dir.latin1());    // Bug in busybox, ".*" includes parent directory, does this work as a workaround?
         system(command_cp);
 
         command_chown.sprintf("chown -R %d:%d %s",accounts->pw_uid,accounts->pw_gid,accounts->pw_dir.latin1());
@@ -305,9 +305,9 @@ bool UserDialog::addUser(int uid, int gid)
 bool UserDialog::delUser(const char *username)
 {
     if((accounts->findUser(username)))
-    {	// Does that user exist?
+    {    // Does that user exist?
         if(!(accounts->delUser(username)))
-        {	// Delete the user.
+        {    // Delete the user.
             QMessageBox::information(0,"Ooops!","Something went wrong\nUnable to delete user: "+QString(username)+".");
         }
     }
@@ -332,11 +332,11 @@ bool UserDialog::editUser(const char *username)
 {
     int invalid_group=0;
     // viewmode is a workaround for a bug in qte-2.3.4 that gives bus error on manipulating edituserDialog's widgets here.
-    UserDialog *edituserDialog=new UserDialog(VIEWMODE_EDIT);	// Create Dialog
+    UserDialog *edituserDialog=new UserDialog(VIEWMODE_EDIT);    // Create Dialog
     edituserDialog->setCaption(tr("Edit User"));
-    accounts->findUser(username);	// Locate user in database and fill variables in 'accounts' object.
+    accounts->findUser(username);    // Locate user in database and fill variables in 'accounts' object.
     if(!(accounts->findGroup(accounts->pw_gid)))
-    {	// Locate the user's primary group, and fill group variables in 'accounts' object.
+    {    // Locate the user's primary group, and fill group variables in 'accounts' object.
         invalid_group=1;
     }
     // Fill widgets with userinfo.
@@ -369,40 +369,40 @@ bool UserDialog::editUser(const char *username)
     // Select the groups in the listview, to which the user belongs.
     QCheckListItem *temp;
     // BAH!!! QRegExp in qt2 sucks... or maybe I do... can't figure out how to check for EITHER end of input ($) OR a comma, so here we do two different QRegExps instead.
-    QRegExp userRegExp(QString("[:,]%1$").arg(username));	// The end of line variant.
-    QStringList tempList=accounts->groupStringList.grep(userRegExp);	// Find all entries in the group database, that the user is a member of.
+    QRegExp userRegExp(QString("[:,]%1$").arg(username));    // The end of line variant.
+    QStringList tempList=accounts->groupStringList.grep(userRegExp);    // Find all entries in the group database, that the user is a member of.
     for(QStringList::Iterator it=tempList.begin(); it!=tempList.end(); ++it)
-    {	// Iterate over all of them.
+    {    // Iterate over all of them.
         qWarning(*it);
-        QListViewItemIterator lvit( edituserDialog->groupsListView );	// Compare to all groups.
+        QListViewItemIterator lvit( edituserDialog->groupsListView );    // Compare to all groups.
         for ( ; lvit.current(); ++lvit )
         {
             if(lvit.current()->text(0)==(*it).left((*it).find(":")))
             {
                 temp=(QCheckListItem*)lvit.current();
-                temp->setOn(true);	// If we find a line with that groupname, select it.;
+                temp->setOn(true);    // If we find a line with that groupname, select it.;
             }
         }
     }
-    userRegExp=QRegExp(QString("[:,]%1,").arg(username));	// And the other one. (not end of line.)
-    tempList=accounts->groupStringList.grep(userRegExp);	// Find all entries in the group database, that the user is a member of.
+    userRegExp=QRegExp(QString("[:,]%1,").arg(username));    // And the other one. (not end of line.)
+    tempList=accounts->groupStringList.grep(userRegExp);    // Find all entries in the group database, that the user is a member of.
     for(QStringList::Iterator it=tempList.begin(); it!=tempList.end(); ++it)
-    {	// Iterate over all of them.
+    {    // Iterate over all of them.
         qWarning(*it);
-        QListViewItemIterator lvit( edituserDialog->groupsListView );	// Compare to all groups.
+        QListViewItemIterator lvit( edituserDialog->groupsListView );    // Compare to all groups.
         for ( ; lvit.current(); ++lvit )
         {
             if(lvit.current()->text(0)==(*it).left((*it).find(":")))
             {
                 temp=(QCheckListItem*)lvit.current();
-                temp->setOn(true);	// If we find a line with that groupname, select it.;
+                temp->setOn(true);    // If we find a line with that groupname, select it.;
             }
         }
     }
 
-    if(!(edituserDialog->exec())) return false;	// SHOW THE DIALOG!
+    if(!(edituserDialog->exec())) return false;    // SHOW THE DIALOG!
 
-    accounts->findUser(username);	// Fill user variables in 'acccounts' object.
+    accounts->findUser(username);    // Fill user variables in 'acccounts' object.
     accounts->pw_name=edituserDialog->loginLineEdit->text();
     // Has the password been changed ? Make a new "crypt":ed password.
     if(edituserDialog->passwordLineEdit->text()!="........") accounts->pw_passwd=crypt(edituserDialog->passwordLineEdit->text(), accounts->crypt_make_salt());
@@ -410,8 +410,8 @@ bool UserDialog::editUser(const char *username)
     // Set all variables in accounts object, that will be used when calling 'updateUser()'
     accounts->pw_uid=edituserDialog->uidLineEdit->text().toInt();
     if(accounts->findGroup(edituserDialog->groupComboBox->currentText()))
-    {	// Fill all group variables in 'accounts' object.
-        accounts->pw_gid=accounts->gr_gid;	// Only do this if the group is a valid group (ie. "<Undefined group>"), otherwise keep the old group.
+    {    // Fill all group variables in 'accounts' object.
+        accounts->pw_gid=accounts->gr_gid;    // Only do this if the group is a valid group (ie. "<Undefined group>"), otherwise keep the old group.
     }
     accounts->pw_gecos=edituserDialog->gecosLineEdit->text();
     accounts->pw_shell=edituserDialog->shellComboBox->currentText();
@@ -442,7 +442,7 @@ bool UserDialog::editUser(const char *username)
             d.mkdir("/opt/QtPalmtop/pics/users");
         }
         QString filename="/opt/QtPalmtop/pics/users/"+accounts->pw_name+".png";
-        //		edituserDialog->userImage=edituserDialog->userImage.smoothScale(48,48);
+        //        edituserDialog->userImage=edituserDialog->userImage.smoothScale(48,48);
         edituserDialog->userImage.save(filename,"PNG");
     }
     return true;
@@ -479,7 +479,7 @@ void UserDialog::clickedPicture()
         }
         else
         {
-            //			userImage=userImage.smoothScale(48,48);
+            //            userImage=userImage.smoothScale(48,48);
             QPixmap *picture;
             picture=(QPixmap *)picturePushButton->pixmap();
             picture->convertFromImage(userImage,0);

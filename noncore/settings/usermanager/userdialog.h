@@ -20,48 +20,48 @@
 
 #include <qpe/resource.h>
 
-#include <opie/ofiledialog.h>
+#include <opie2/ofiledialog.h>
 
-class UserDialog : public QDialog 
+class UserDialog : public QDialog
 {
-	Q_OBJECT
+    Q_OBJECT
 private:
-	QTabWidget *myTabWidget;
-	QPushButton *picturePushButton;
-	QLineEdit *loginLineEdit;
-	QLineEdit *uidLineEdit;
-	QLineEdit *gecosLineEdit;
-	QLineEdit *passwordLineEdit;
-	QComboBox *shellComboBox;
-	QComboBox *groupComboBox;
-	QLabel *skelLabel;
-	QCheckBox *skelCheckBox;
-	QListView *groupsListView;
-	
-	QStringList groupMembers;
-	QString pictureLocation;
-	QImage userImage;
-	int groupID;
-	int userID;
-	int vm;
-	enum VIEWMODE {
-		VIEWMODE_NEW,
-		VIEWMODE_EDIT
-	};
-		
-	void setupTab1(void);
-	void setupTab2(void);
-	void accept(void);
+    QTabWidget *myTabWidget;
+    QPushButton *picturePushButton;
+    QLineEdit *loginLineEdit;
+    QLineEdit *uidLineEdit;
+    QLineEdit *gecosLineEdit;
+    QLineEdit *passwordLineEdit;
+    QComboBox *shellComboBox;
+    QComboBox *groupComboBox;
+    QLabel *skelLabel;
+    QCheckBox *skelCheckBox;
+    QListView *groupsListView;
+
+    QStringList groupMembers;
+    QString pictureLocation;
+    QImage userImage;
+    int groupID;
+    int userID;
+    int vm;
+    enum VIEWMODE {
+        VIEWMODE_NEW,
+        VIEWMODE_EDIT
+    };
+
+    void setupTab1(void);
+    void setupTab2(void);
+    void accept(void);
 
 private slots:
-	void clickedPicture(void);
+    void clickedPicture(void);
 
 public:
-	UserDialog( int viewmode=VIEWMODE_NEW, QWidget* parent = 0, const char* name = 0, bool modal=true, WFlags fl = 0 );
-	~UserDialog();
-	static bool addUser(int uid, int gid);
-	static bool editUser(const char *username);
-	static bool delUser(const char *username);
+    UserDialog( int viewmode=VIEWMODE_NEW, QWidget* parent = 0, const char* name = 0, bool modal=true, WFlags fl = 0 );
+    ~UserDialog();
+    static bool addUser(int uid, int gid);
+    static bool editUser(const char *username);
+    static bool delUser(const char *username);
 };
 
 #endif

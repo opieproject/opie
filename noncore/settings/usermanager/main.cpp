@@ -8,7 +8,7 @@
  ***************************************************************************/
 
 #include "usermanager.h"
-#include <qpe/qpeapplication.h>
-#include <opie/oapplicationfactory.h>
+
+#include <opie2/oapplicationfactory.h>
 
 OPIE_EXPORT_APP( OApplicationFactory<UserConfig> )
