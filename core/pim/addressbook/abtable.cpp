@@ -124,7 +124,8 @@ AbTable::AbTable( const QValueList<int> order, QWidget *parent, const char *name
 	//	odebug << "C'tor start" << oendl;
 	setSelectionMode( NoSelection );
 	init();
-	setSorting( TRUE );
+	setSorting( false ); // The table should not sort by itself!
+
 	connect( this, SIGNAL(clicked(int,int,int,const QPoint&)),
 		 this, SLOT(itemClicked(int,int)) );
 
@@ -156,17 +157,10 @@ void AbTable::setContacts( const Opie::OPimContactAccess::List& viewList )
 	clear();
 	m_viewList = viewList;
 
-	setSorting( false );
 	setPaintingEnabled( FALSE );
 
 	setNumRows( m_viewList.count() );
-//	int row = 0;
-// 	for ( it = m_viewList.begin(); it != m_viewList.end(); ++it )
-// 		insertIntoTable( *it, row++ );
 
-// 	setSorting( true );
-
-// 	resort();
 
 	updateVisible();
 
@@ -208,65 +202,22 @@ bool AbTable::selectContact( int UID )
 	return true;
 }
 
-#if 0
-void AbTable::insertIntoTable( const Opie::OPimContact& cnt, int row )
-{
-	odebug << "void AbTable::insertIntoTable( const Opie::OPimContact& cnt, "
-					<< row << " )" << oendl;
-	QString strName;
-	ContactItem contactItem;
-
-	strName = findContactName( cnt );
-	contactItem = findContactContact( cnt, row );
-
-	AbTableItem *ati;
-	ati = new AbTableItem( this, QTableItem::Never, strName, contactItem.value );
-	contactList.insert( ati, cnt );
-	setItem( row, 0, ati );
-	ati = new AbTableItem( this, QTableItem::Never, contactItem.value, strName);
-	if ( !contactItem.icon.isNull() )
-		ati->setPixmap( contactItem.icon );
-	setItem( row, 1, ati );
-
-	//### cannot do this; table only has two columns at this point
-	//    setItem( row, 2, new AbPickItem( this ) );
-
-}
-#endif
-
 
 void AbTable::columnClicked( int col )
 {
-	if ( !sorting() )
-		return;
+	odebug << "columClicked(" << col << ")" << oendl;
 
-	if ( lastSortCol == -1 )
-		lastSortCol = col;
-
-	if ( col == lastSortCol ) {
+	if ( col == 0 ){
+		odebug << "Change sort order: " << asc << oendl;
 		asc = !asc;
-	} else {
-		lastSortCol = col;
-		asc = TRUE;
+		emit signalSortOrderChanged( asc );
 	}
-	//QMessageBox::information( this, "resort", "columnClicked" );
-	resort();
 }
 
 void AbTable::resort()
 {
 	owarn << "void AbTable::resort() NOT POSSIBLE !!" << oendl;
-#if 0
-	setPaintingEnabled( FALSE );
-	if ( sorting() ) {
-		if ( lastSortCol == -1 )
-			lastSortCol = 0;
-		sortColumn( lastSortCol, asc, TRUE );
-		//QMessageBox::information( this, "resort", "resort" );
-		updateVisible();
-	}
-	setPaintingEnabled( TRUE );
-#endif
+
 }
 
 Opie::OPimContact AbTable::currentEntry()
@@ -357,36 +308,6 @@ void AbTable::moveTo( char /*c*/ )
 {
 	odebug << "void AbTable::moveTo( char c ) NOT IMPLEMENTED !!" << oendl;
 
-#if 0
-	int rows = numRows();
-	QString value;
-	AbTableItem *abi;
-	int r;
-	if ( asc ) {
-		r = 0;
-		while ( r < rows-1) {
-			abi = static_cast<AbTableItem*>( item(r, 0) );
-			QChar first = abi->key()[0];
-			//### is there a bug in QChar to char comparison???
-			if ( first.row() || first.cell() >= c )
-				break;
-			r++;
-		}
-	} else {
-		//### should probably disable reverse sorting instead
-		r = rows - 1;
-		while ( r > 0 ) {
-			abi = static_cast<AbTableItem*>( item(r, 0) );
-			QChar first = abi->key()[0];
-			//### is there a bug in QChar to char comparison???
-			if ( first.row() || first.cell() >= c )
-				break;
-			r--;
-		}
-	}
-	setCurrentCell( r, currentColumn() );
-
-#endif
 }
 
 #if 0

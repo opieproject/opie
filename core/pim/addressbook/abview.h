@@ -58,6 +58,7 @@ public slots:
     void slotDoFind( const QString &str, bool caseSensitive, bool useRegExp,
 		     bool backwards, QString category = QString::null );
     void slotSwitch();
+    void slotSetSortOrder( bool order );
 
 private:
     void updateListinViews();
@@ -70,6 +71,7 @@ private:
     Categories mCat;
     bool m_inSearch;
     bool m_inPersonal;
+    bool m_sortOrder;
     int m_curr_category;
     Views m_curr_View;
     Views m_prev_View;

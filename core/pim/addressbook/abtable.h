@@ -120,6 +120,7 @@ signals:
     void signalEditor();
     void signalKeyDown();
     void signalKeyUp();
+    void signalSortOrderChanged( bool order );
 
 protected:
     virtual void keyPressEvent( QKeyEvent *e );

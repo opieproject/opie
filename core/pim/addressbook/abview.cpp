@@ -42,6 +42,7 @@ AbView::AbView ( QWidget* parent, const QValueList<int>& ordered ):
 	mCat(0),
 	m_inSearch( false ),
 	m_inPersonal( false ),
+	m_sortOrder( true ),
 	m_curr_category( 0 ),
 	m_curr_View( TableView ),
 	m_prev_View( TableView ),
@@ -80,6 +81,8 @@ AbView::AbView ( QWidget* parent, const QValueList<int>& ordered ):
 	// Connect views to me
 	connect ( m_abTable, SIGNAL( signalSwitch(void) ),
 		  this, SLOT( slotSwitch(void) ) );
+	connect ( m_abTable, SIGNAL( signalSortOrderChanged( bool ) ),
+		  this, SLOT( slotSetSortOrder( bool ) ) );
 	connect ( m_ablabel, SIGNAL( signalOkPressed(void) ),
 		  this, SLOT( slotSwitch(void) ) );
 
@@ -161,15 +164,15 @@ void AbView::load()
 	
 	if ( m_curr_category == -1 ) {
 		// Show just unfiled contacts
-		m_list = m_contactdb->sorted( true, Opie::OPimContactAccess::SortFileAsName, 
+		m_list = m_contactdb->sorted( m_sortOrder, Opie::OPimContactAccess::SortFileAsName, 
 					      Opie::OPimContactAccess::DoNotShowWithCategory, 0 );
 	} else	if ( m_curr_category == 0 ){
 		// Just show all contacts
-		m_list = m_contactdb->sorted( true, Opie::OPimContactAccess::SortFileAsName, 
+		m_list = m_contactdb->sorted( m_sortOrder, Opie::OPimContactAccess::SortFileAsName, 
 					      Opie::OPimBase::FilterOff, 0 );
 	} else {
 		// Show contacts with given categories
-		m_list = m_contactdb->sorted( true, Opie::OPimContactAccess::SortFileAsName, 
+		m_list = m_contactdb->sorted( m_sortOrder, Opie::OPimContactAccess::SortFileAsName, 
 					      Opie::OPimBase::FilterCategory, m_curr_category );
 	}
 
@@ -414,6 +417,11 @@ void AbView::slotSwitch(){
 	}
 	updateView();
 
+}
+
+void AbView::slotSetSortOrder( bool order ){
+	m_sortOrder = order;
+	reload();
 }
 
 // END: Slots
