@@ -226,6 +226,46 @@ inténtelo de nuevo.
         <source>Import vCard</source>
         <translation>Importar vCard</translation>
     </message>
+    <message>
+        <source>Find Next</source>
+        <translation>Buscar siguiente</translation>
+    </message>
+    <message>
+        <source>Close Find</source>
+        <translation>Cerrar busqueda</translation>
+    </message>
+    <message>
+        <source>Save all Data</source>
+        <translation>Guardar datos</translation>
+    </message>
+    <message>
+        <source>Config</source>
+        <translation>Configurar</translation>
+    </message>
+    <message>
+        <source>OContacts</source>
+        <translation>Contactos</translation>
+    </message>
+    <message>
+        <source>List</source>
+        <translation>Lista</translation>
+    </message>
+    <message>
+        <source>Phone Book</source>
+        <translation>Agenda telefónica</translation>
+    </message>
+    <message>
+        <source>Company Book</source>
+        <translation>Agenda de la empresas</translation>
+    </message>
+    <message>
+        <source>Email Book</source>
+        <translation>Agenda de correo-e</translation>
+    </message>
+    <message>
+        <source>Cards</source>
+        <translation>Tarjetas</translation>
+    </message>
 </context>
 <context>
     <name>ContactEditor</name>
@@ -247,11 +287,11 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Middle Name</source>
-        <translation>2º nombre</translation>
+        <translation>1º apellido</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation>Apellidos</translation>
+        <translation>2º apellido</translation>
     </message>
     <message>
         <source>Suffix</source>
@@ -443,7 +483,7 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Bahrain</source>
-        <translation type="unfinished"></translation>
+        <translation>Bahrain</translation>
     </message>
     <message>
         <source>Bangladesh</source>
@@ -455,7 +495,7 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Belarus</source>
-        <translation type="unfinished"></translation>
+        <translation>Belarus</translation>
     </message>
     <message>
         <source>Belgium</source>
@@ -487,7 +527,7 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Bouvet Island</source>
-        <translation type="unfinished"></translation>
+        <translation>Isla Bouvet</translation>
     </message>
     <message>
         <source>Brazil</source>
@@ -495,7 +535,7 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Brunei Darussalam</source>
-        <translation type="unfinished"></translation>
+        <translation>Brunei Darusalam</translation>
     </message>
     <message>
         <source>Bulgaria</source>
@@ -511,11 +551,11 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Cambodia</source>
-        <translation type="unfinished"></translation>
+        <translation>Camboya</translation>
     </message>
     <message>
         <source>Camaroon</source>
-        <translation type="unfinished"></translation>
+        <translation>Camerun</translation>
     </message>
     <message>
         <source>Cape Verde</source>
@@ -539,7 +579,7 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Christmas Island</source>
-        <translation type="unfinished"></translation>
+        <translation>Isla de Navidad</translation>
     </message>
     <message>
         <source>Colombia</source>
@@ -555,7 +595,7 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Cook Island</source>
-        <translation type="unfinished"></translation>
+        <translation>Isla Cook</translation>
     </message>
     <message>
         <source>Costa Rica</source>
@@ -563,7 +603,7 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Cote d&apos;Ivoire</source>
-        <translation type="unfinished"></translation>
+        <translation>Costa d&apos;Ivoire</translation>
     </message>
     <message>
         <source>Croatia</source>
@@ -587,11 +627,11 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Djibouti</source>
-        <translation type="unfinished"></translation>
+        <translation>Djibouti</translation>
     </message>
     <message>
         <source>Dominica</source>
-        <translation type="unfinished"></translation>
+        <translation>Dominica</translation>
     </message>
     <message>
         <source>Dominican Republic</source>
@@ -631,11 +671,11 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Falkland Islands</source>
-        <translation type="unfinished"></translation>
+        <translation>Isla Falkland</translation>
     </message>
     <message>
         <source>Faroe Islands</source>
-        <translation type="unfinished"></translation>
+        <translation>Islas Feroes</translation>
     </message>
     <message>
         <source>Fiji</source>
@@ -667,7 +707,7 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Gahna</source>
-        <translation type="unfinished"></translation>
+        <translation>Gahna</translation>
     </message>
     <message>
         <source>Gibraltar</source>
@@ -691,7 +731,7 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Guam</source>
-        <translation type="unfinished"></translation>
+        <translation>Guam</translation>
     </message>
     <message>
         <source>Guatemala</source>
@@ -715,7 +755,7 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Holy See</source>
-        <translation type="unfinished"></translation>
+        <translation>El Vaticano</translation>
     </message>
     <message>
         <source>Honduras</source>
@@ -763,7 +803,7 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Kazakhstan</source>
-        <translation type="unfinished"></translation>
+        <translation>Kazakhstan</translation>
     </message>
     <message>
         <source>Kenya</source>
@@ -771,7 +811,7 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Kribati</source>
-        <translation type="unfinished"></translation>
+        <translation>Kribati</translation>
     </message>
     <message>
         <source>Korea</source>
@@ -783,15 +823,15 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Latvia</source>
-        <translation type="unfinished"></translation>
+        <translation>Latvia</translation>
     </message>
     <message>
         <source>Lebanon</source>
-        <translation type="unfinished"></translation>
+        <translation>Lebanon</translation>
     </message>
     <message>
         <source>Lesotho</source>
-        <translation type="unfinished"></translation>
+        <translation>Lesotho</translation>
     </message>
     <message>
         <source>Liberia</source>
@@ -855,7 +895,7 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Mayotte</source>
-        <translation type="unfinished"></translation>
+        <translation>Mayote</translation>
     </message>
     <message>
         <source>Mexico</source>
@@ -879,7 +919,7 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Montserrat</source>
-        <translation type="unfinished"></translation>
+        <translation>Monserrat</translation>
     </message>
     <message>
         <source>Morocco</source>
@@ -891,7 +931,7 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Myanmar</source>
-        <translation type="unfinished"></translation>
+        <translation>Myanmar</translation>
     </message>
     <message>
         <source>Namibia</source>
@@ -899,7 +939,7 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Nauru</source>
-        <translation type="unfinished"></translation>
+        <translation>Nauru</translation>
     </message>
     <message>
         <source>Nepal</source>
@@ -923,7 +963,7 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Niger</source>
-        <translation type="unfinished"></translation>
+        <translation>Niger</translation>
     </message>
     <message>
         <source>Nigeria</source>
@@ -931,7 +971,7 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Niue</source>
-        <translation type="unfinished"></translation>
+        <translation>Niue</translation>
     </message>
     <message>
         <source>Oman</source>
@@ -943,7 +983,7 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Palau</source>
-        <translation type="unfinished"></translation>
+        <translation>Palau</translation>
     </message>
     <message>
         <source>Palestinian Territory</source>
@@ -971,7 +1011,7 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Pitcairn</source>
-        <translation type="unfinished"></translation>
+        <translation>Pitcairn</translation>
     </message>
     <message>
         <source>Poland</source>
@@ -987,7 +1027,7 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Qatar</source>
-        <translation type="unfinished"></translation>
+        <translation>Qatar</translation>
     </message>
     <message>
         <source>Reunion</source>
@@ -1075,11 +1115,11 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Suriname</source>
-        <translation type="unfinished"></translation>
+        <translation>Suriname</translation>
     </message>
     <message>
         <source>Swaziland</source>
-        <translation type="unfinished"></translation>
+        <translation>Swazilandia</translation>
     </message>
     <message>
         <source>Sweden</source>
@@ -1095,7 +1135,7 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Tajikistan</source>
-        <translation type="unfinished"></translation>
+        <translation>Tajikistan</translation>
     </message>
     <message>
         <source>Tanzania</source>
@@ -1111,11 +1151,11 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Tokelau</source>
-        <translation type="unfinished"></translation>
+        <translation>Tokelau</translation>
     </message>
     <message>
         <source>Tonga</source>
-        <translation type="unfinished"></translation>
+        <translation>Tonga</translation>
     </message>
     <message>
         <source>Tunisia</source>
@@ -1127,11 +1167,11 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Turkmenistan</source>
-        <translation type="unfinished"></translation>
+        <translation>Turkmenistan</translation>
     </message>
     <message>
         <source>Tuvalu</source>
-        <translation type="unfinished"></translation>
+        <translation>Tuvalu</translation>
     </message>
     <message>
         <source>Uganda</source>
@@ -1147,11 +1187,11 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Uzbekistan</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzbekistan</translation>
     </message>
     <message>
         <source>Vanuatu</source>
-        <translation type="unfinished"></translation>
+        <translation>Vanuatu</translation>
     </message>
     <message>
         <source>Venezuela</source>
@@ -1331,7 +1371,7 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Kyrgystan</source>
-        <translation type="unfinished"></translation>
+        <translation>Kyrgystan</translation>
     </message>
 </context>
 </TS>

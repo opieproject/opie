@@ -121,7 +121,7 @@
     </message>
     <message>
         <source>Change Directory</source>
-        <translation type="obsolete">Cambiar directorio</translation>
+        <translation>Cambiar directorio</translation>
     </message>
     <message>
         <source>Execute</source>
@@ -209,6 +209,10 @@ and is licensed by the GPL
     <message>
         <source>Add To Documents</source>
         <translation>Añadir a Documentos</translation>
+    </message>
+    <message>
+        <source>Actions</source>
+        <translation>Acciones</translation>
     </message>
 </context>
 <context>

@@ -243,6 +243,38 @@
     </message>
 </context>
 <context>
+    <name>QCheckMainMenu</name>
+    <message>
+        <source>Delete Account</source>
+        <translation>Borrar cuenta</translation>
+    </message>
+    <message>
+        <source>Really delete the
+</source>
+        <translation>¿Borrar realmente la</translation>
+    </message>
+    <message>
+        <source> account?</source>
+        <translation>cuenta?</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation>Si</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation>No</translation>
+    </message>
+    <message>
+        <source>Checkbook</source>
+        <translation>Chequera</translation>
+    </message>
+    <message>
+        <source>Could not remove account</source>
+        <translation>No pude borrar la cuenta</translation>
+    </message>
+</context>
+<context>
     <name>QCheckNameBase</name>
     <message>
         <source>Check Book Name</source>
@@ -265,7 +297,7 @@
     <name>QCheckViewBase</name>
     <message>
         <source>Account Transactions</source>
-        <translation>Transaccines contables</translation>
+        <translation>Transacciones contables</translation>
     </message>
     <message>
         <source>$0.00</source>

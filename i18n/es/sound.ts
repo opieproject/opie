@@ -54,7 +54,7 @@
     </message>
     <message>
         <source>Key_Escape</source>
-        <translation type="obsolete">Tecla_Escape</translation>
+        <translation>Tecla_Escape</translation>
     </message>
     <message>
         <source>Key_Space</source>

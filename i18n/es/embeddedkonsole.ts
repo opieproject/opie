@@ -14,7 +14,7 @@
     </message>
     <message>
         <source>&lt;B&gt;Commands&lt;/B&gt;:</source>
-        <translation>&lt;B&gt;Lista de comandos&lt;/B&gt;:</translation>
+        <translation>&lt;B&gt;Comandos&lt;/B&gt;:</translation>
     </message>
     <message>
         <source>&lt;B&gt;Suggested Commands&lt;/B&gt;:</source>

@@ -747,6 +747,27 @@ http://qtopia.sitebest.com</translation>
         <source>Entire &amp;column</source>
         <translation>Toda la &amp;columna</translation>
     </message>
+    <message>
+        <source>Opie Sheet
+Spreadsheet Software for Opie
+QWDC Beta Winner (as Sheet/Qt)
+
+Developed by: Serdar Ozler
+Release 1.0.2
+Release Date: October 08, 2002
+
+This product is licensed under GPL. It is freely distributable. If you want to get the latest version and also the source code, please visit the web site.
+
+http://qtopia.sitebest.com</source>
+        <translation>Opie Sheet
+Hoja de cálculo para Opie
+QWDC Beta Winner (como Sheet/Qt)
+
+Desarrollado por: Serdar Ozler
+Versión 1.0.2
+Fecha: 08 de octubre de 2002
+</translation>
+    </message>
 </context>
 <context>
     <name>Sheet</name>

@@ -50,7 +50,7 @@
     </message>
     <message>
         <source>&lt;b&gt;Pass:</source>
-        <translation>&lt;b&gt;Calve:</translation>
+        <translation>&lt;b&gt;Clave:</translation>
     </message>
     <message>
         <source>Identity</source>
@@ -340,7 +340,7 @@
     </message>
     <message>
         <source>Accounts</source>
-        <translation>Cuantas</translation>
+        <translation>Cuentas</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -376,11 +376,11 @@
     </message>
     <message>
         <source>&lt;b&gt;Check&amp;nbsp;every</source>
-        <translation>&lt;b&gt;Comprobar&amp;tal cada</translation>
+        <translation>&lt;b&gt;Comprobar&amp;nbsp;cada</translation>
     </message>
     <message>
         <source> min</source>
-        <translation>min</translation>
+        <translation> min</translation>
     </message>
     <message>
         <source>Disable mail notification</source>
@@ -393,7 +393,8 @@ Visit http://www.lisa.de/ for Information.
                             </source>
         <translation>&lt;p&gt;&lt;b&gt;Mail(Correo) versión %1&lt;/b&gt;&lt;hr&gt;
 Patrocinado y programado por LISAsystems&lt;br&gt;
-Visite http://www.lisa.de/ para informarse.</translation>
+Visite http://www.lisa.de/ para informarse.
+                            </translation>
     </message>
 </context>
 <context>
@@ -657,7 +658,7 @@ Visite http://www.lisa.de/ para informarse.</translation>
     </message>
     <message>
         <source> Stop </source>
-        <translation>Parar</translation>
+        <translation> Parar </translation>
     </message>
     <message>
         <source>&lt;b&gt;%1&lt;/b&gt; kB of &lt;b&gt;%2&lt;/b&gt; kB at &lt;b&gt;%3&lt;/b&gt; kB/s</source>
@@ -813,7 +814,7 @@ Visite http://www.lisa.de/ para informarse.</translation>
     </message>
     <message>
         <source>&lt;b&gt;Search&amp;nbsp;in:</source>
-        <translation>&lt;b&gt;Búsqueda&amp;tal en:</translation>
+        <translation>&lt;b&gt;Búsqueda&amp;nbsp;en:</translation>
     </message>
     <message>
         <source>&lt;b&gt;For:</source>

@@ -50,7 +50,7 @@
     </message>
     <message>
         <source>&amp;Start</source>
-        <translation>&amp;Empazar</translation>
+        <translation>&amp;Empezar</translation>
     </message>
 </context>
 <context>

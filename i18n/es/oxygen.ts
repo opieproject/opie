@@ -3,15 +3,15 @@
     <name>CalcDlg</name>
     <message>
         <source>Calculations</source>
-        <translation type="obsolete">Cálculos</translation>
+        <translation>Cálculos</translation>
     </message>
     <message>
         <source>Molweight</source>
-        <translation type="obsolete">Peso molecular</translation>
+        <translation>Peso molecular</translation>
     </message>
     <message>
         <source>Formula:</source>
-        <translation type="obsolete">Fórmula:</translation>
+        <translation>Fórmula:</translation>
     </message>
     <message>
         <source>Calculate</source>
@@ -23,15 +23,15 @@
     </message>
     <message>
         <source>Result:</source>
-        <translation type="obsolete">Resultado:</translation>
+        <translation>Resultado:</translation>
     </message>
     <message>
         <source>Elemental composition (%):</source>
-        <translation type="obsolete">Composición elemental (%):</translation>
+        <translation>Composición elemental (%):</translation>
     </message>
     <message>
         <source>Nernst</source>
-        <translation type="obsolete">Nernst</translation>
+        <translation>Nernst</translation>
     </message>
     <message>
         <source>Form1</source>

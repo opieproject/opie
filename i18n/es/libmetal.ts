@@ -4,12 +4,12 @@
     <message>
         <source>Metal</source>
         <comment>name</comment>
-        <translation type="obsolete">Metal</translation>
+        <translation>Metal</translation>
     </message>
     <message>
         <source>Metal style</source>
         <comment>description</comment>
-        <translation type="obsolete">Estilo Metal</translation>
+        <translation>Estilo Metálico</translation>
     </message>
 </context>
 <context>

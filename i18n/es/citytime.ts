@@ -24,6 +24,10 @@
         <source>City Time</source>
         <translation>Hora Mundial</translation>
     </message>
+    <message>
+        <source>Click on one of the set cities to replace it</source>
+        <translation>Pulse en una ciudad seleccionada para reemplazarla</translation>
+    </message>
 </context>
 <context>
     <name>ZoneMap</name>
@@ -46,6 +50,18 @@
     <message>
         <source>&lt;p&gt;Couldn&apos;t load map: %1, exiting</source>
         <translation>&lt;p&gt;No puedo cargar mapa: %1, saliendo</translation>
+    </message>
+    <message>
+        <source>Continent</source>
+        <translation>Continente</translation>
+    </message>
+    <message>
+        <source>Select a continent/country here, then select a city</source>
+        <translation>Seleccione continente/pais, luego ciudad</translation>
+    </message>
+    <message>
+        <source>City</source>
+        <translation>Ciudad</translation>
     </message>
 </context>
 </TS>
