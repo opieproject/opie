@@ -18,7 +18,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: dateentry.ui,v 1.7 2003-04-13 23:14:23 umopapisdn Exp $
+** $Id: dateentry.ui,v 1.7.6.1 2003-09-19 15:40:10 eilers Exp $
 **
 *********************************************************************</comment>
 <widget>
@@ -32,8 +32,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>242</width>
-            <height>339</height>
+            <width>260</width>
+            <height>257</height>
         </rect>
     </property>
     <property stdset="1">
@@ -201,7 +201,7 @@
                 <cstring>comboCategory</cstring>
             </property>
         </widget>
-        <widget row="3"  column="0" rowspan="2">
+        <widget row="3"  column="0"  rowspan="2"  colspan="1" >
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
@@ -219,8 +219,11 @@
                 <cstring>buttonStart</cstring>
             </property>
             <property stdset="1">
-                <name>text</name>
-                <string>Jan 02 00</string>
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>3</hsizetype>
+                    <vsizetype>0</vsizetype>
+                </sizepolicy>
             </property>
             <property stdset="1">
                 <name>minimumSize</name>
@@ -232,12 +235,16 @@
             <property stdset="1">
                 <name>maximumSize</name>
                 <size>
-                    <width>70</width>
+                    <width>400</width>
                     <height>32767</height>
                 </size>
             </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Jan 02 00</string>
+            </property>
         </widget>
-        <widget row="4"  column="1"  rowspan="1"  colspan="1" >
+        <widget row="4"  column="1" >
             <class>QLineEdit</class>
             <property stdset="1">
                 <name>name</name>
@@ -286,23 +293,25 @@
                 </size>
             </property>
         </spacer>
-
-	<widget row="5"  column="1" colspan="3">
-	    <class>OTimePicker</class>
+        <widget row="5"  column="1"  rowspan="1"  colspan="3" >
+            <class>OTimePicker</class>
             <property stdset="1">
                 <name>name</name>
                 <cstring>timePickerStart</cstring>
             </property>
- 	</widget>
-        <widget row="3"  column="3" colspan="1">
+        </widget>
+        <widget row="3"  column="3" >
             <class>QPushButton</class>
             <property stdset="1">
                 <name>name</name>
                 <cstring>buttonEnd</cstring>
             </property>
             <property stdset="1">
-                <name>text</name>
-                <string>Jan 02 00</string>
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>3</hsizetype>
+                    <vsizetype>0</vsizetype>
+                </sizepolicy>
             </property>
             <property stdset="1">
                 <name>minimumSize</name>
@@ -314,12 +323,21 @@
             <property stdset="1">
                 <name>maximumSize</name>
                 <size>
-                    <width>70</width>
+                    <width>400</width>
                     <height>32767</height>
                 </size>
             </property>
+            <property stdset="1">
+                <name>font</name>
+                <font>
+                </font>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Jan 02 00</string>
+            </property>
         </widget>
-        <widget row="4"  column="3" colspan="1">
+        <widget row="4"  column="3" >
             <class>QLineEdit</class>
             <property stdset="1">
                 <name>name</name>
@@ -482,19 +500,19 @@
                 <cstring>cmdRepeat</cstring>
             </property>
             <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>7</hsizetype>
+                    <vsizetype>0</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
                 <name>focusPolicy</name>
                 <enum>TabFocus</enum>
             </property>
             <property stdset="1">
                 <name>text</name>
                 <string>No Repeat...</string>
-            </property>
-            <property stdset="1">
-                <name>sizePolicy</name>
-                <sizepolicy>
-                    <hsizetype>7</hsizetype>
-                    <vsizetype>0</vsizetype>
-                </sizepolicy>
             </property>
         </widget>
         <widget row="10"  column="0"  rowspan="1"  colspan="4" >
