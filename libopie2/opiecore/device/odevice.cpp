@@ -90,6 +90,7 @@ ODevice *ODevice::inst()
     static ODevice *dev = 0;
 
     // rewrite this to only use /proc/cpuinfo or so
+    QString cpu_info;
 
     if ( !dev )
     {
@@ -104,6 +105,7 @@ ODevice *ODevice::inst()
                 if ( line.startsWith( "Hardware" ) )
                 {
                     qDebug( "ODevice() - found '%s'", (const char*) line );
+                    cpu_info = line;
                     if ( line.contains( "sharp", false ) ) dev = new Internal::Zaurus();
                     else if ( line.contains( "ipaq", false ) ) dev = new Internal::iPAQ();
                     else if ( line.contains( "simpad", false ) ) dev = new Internal::SIMpad();
@@ -119,7 +121,7 @@ ODevice *ODevice::inst()
             qWarning( "ODevice() - can't open '%s' - unknown hardware - using default.", PATH_PROC_CPUINFO );
         }
         if ( !dev ) dev = new ODevice();
-        dev->init();
+        dev->init(cpu_info);
     }
     return dev;
 }
@@ -150,7 +152,7 @@ void ODevice::systemMessage ( const QCString &msg, const QByteArray & )
     }
 }
 
-void ODevice::init()
+void ODevice::init(const QString&)
 {
 }
 

@@ -60,7 +60,8 @@ enum OModel {
     Model_iPAQ_H37xx    = ( Model_iPAQ | 0x000004 ),
     Model_iPAQ_H38xx    = ( Model_iPAQ | 0x000008 ),
     Model_iPAQ_H39xx    = ( Model_iPAQ | 0x000010 ),
-    Model_iPAQ_H5xxx    = ( Model_iPAQ | 0x000011 ),
+    Model_iPAQ_H5xxx    = ( Model_iPAQ | 0x000020 ),
+    Model_iPAQ_H22xx    = ( Model_iPAQ | 0x000040 ),
 
     Model_Jornada       = ( 6 << 24 ),
     Model_Jornada_56x   = ( Model_Jornada | 0x000001 ),
@@ -160,7 +161,7 @@ enum OHingeStatus {
     CASE_UNKNOWN = 1,
 };
 
-/* default button for qvfb or such 
+/* default button for qvfb or such
  * see odevice.cpp for details.
  * hint: manage a user defined button for qvfb?
  * alwin
@@ -195,7 +196,7 @@ private:
 
 protected:
     ODevice();
-    virtual void init();
+    virtual void init(const QString&);
     virtual void initButtons();
     static void sendSuspendmsg();
 

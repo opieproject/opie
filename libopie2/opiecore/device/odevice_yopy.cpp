@@ -71,7 +71,7 @@ struct yopy_button yopy_buttons [] = {
         "buttonsettings", "raise()" },
 };
 
-void Yopy::init()
+void Yopy::init(const QString&)
 {
     d->m_vendorstr = "G.Mate";
     d->m_vendor = Vendor_GMate;

@@ -114,53 +114,51 @@ struct i_button ipaq_buttons [] = {
     "sound", "raise()" },
 };
 
-void iPAQ::init()
+void iPAQ::init(const QString& model)
 {
     d->m_vendorstr = "HP";
     d->m_vendor = Vendor_HP;
 
-    QFile f ( "/proc/hal/model" );
+    d->m_modelstr = model.mid(model.findRev('H'));
 
-    if ( f. open ( IO_ReadOnly )) {
-        QTextStream ts ( &f );
+    if ( d->m_modelstr == "H3100" )
+        d->m_model = Model_iPAQ_H31xx;
+    else if ( d->m_modelstr == "H3600" )
+        d->m_model = Model_iPAQ_H36xx;
+    else if ( d->m_modelstr == "H3700" )
+        d->m_model = Model_iPAQ_H37xx;
+    else if ( d->m_modelstr == "H3800" )
+        d->m_model = Model_iPAQ_H38xx;
+    else if ( d->m_modelstr == "H3900" )
+        d->m_model = Model_iPAQ_H39xx;
+    else if ( d->m_modelstr == "H5400" )
+        d->m_model = Model_iPAQ_H5xxx;
+    else if ( d->m_modelstr == "H2200" )
+        d->m_model = Model_iPAQ_H22xx;
+    else
+        d->m_model = Model_Unknown;
 
-        d->m_modelstr = "H" + ts. readLine();
 
-        if ( d->m_modelstr == "H3100" )
-            d->m_model = Model_iPAQ_H31xx;
-        else if ( d->m_modelstr == "H3600" )
-            d->m_model = Model_iPAQ_H36xx;
-        else if ( d->m_modelstr == "H3700" )
-            d->m_model = Model_iPAQ_H37xx;
-        else if ( d->m_modelstr == "H3800" )
-            d->m_model = Model_iPAQ_H38xx;
-        else if ( d->m_modelstr == "H3900" )
-            d->m_model = Model_iPAQ_H39xx;
-        else if ( d->m_modelstr == "H5400" )
-            d->m_model = Model_iPAQ_H5xxx;
-        else
-            d->m_model = Model_Unknown;
-
-        f. close();
-    }
 
     switch ( d->m_model ) {
         case Model_iPAQ_H31xx:
         case Model_iPAQ_H38xx:
             d->m_rotation = Rot90;
             break;
+        case Model_iPAQ_H5xxx:
+        case Model_iPAQ_H22xx:
+            d->m_rotation = Rot0;
+            break;
         case Model_iPAQ_H36xx:
         case Model_iPAQ_H37xx:
         case Model_iPAQ_H39xx:
-
         default:
             d->m_rotation = Rot270;
             break;
-        case Model_iPAQ_H5xxx:
-            d->m_rotation = Rot0;
+
         }
 
-    f. setName ( "/etc/familiar-version" );
+    QFile f( "/etc/familiar-version" );
     if ( f. open ( IO_ReadOnly )) {
         d->m_systemstr = "Familiar";
         d->m_system = System_Familiar;

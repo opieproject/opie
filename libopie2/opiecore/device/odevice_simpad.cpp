@@ -112,7 +112,7 @@ struct s_button simpad_buttons [] = {
     */
 };
 
-void SIMpad::init()
+void SIMpad::init(const QString&)
 {
     d->m_vendorstr = "SIEMENS";
     d->m_vendor = Vendor_SIEMENS;

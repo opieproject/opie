@@ -39,7 +39,7 @@ class Jornada : public ODevice
 {
 
   protected:
-    virtual void init();
+    virtual void init(const QString&);
 
   public:
     virtual bool setSoftSuspend ( bool soft );

@@ -39,7 +39,7 @@ class Yopy : public ODevice
 {
   protected:
 
-    virtual void init();
+    virtual void init(const QString&);
     virtual void initButtons();
 
   public:

@@ -41,7 +41,7 @@ namespace Internal {
 class Ramses : public ODevice, public QWSServer::KeyboardFilter
 {
   protected:
-    virtual void init();
+    virtual void init(const QString&);
 
   public:
     virtual bool setSoftSuspend( bool soft );

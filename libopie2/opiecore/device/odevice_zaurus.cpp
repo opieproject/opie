@@ -115,7 +115,7 @@ struct z_button z_buttons_c700 [] = {
 //
 //       Comments? - mickeyl.
 
-void Zaurus::init()
+void Zaurus::init(const QString&)
 {
     d->m_vendorstr = "Sharp";
     d->m_vendor = Vendor_Sharp;

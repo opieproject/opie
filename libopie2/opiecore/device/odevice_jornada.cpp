@@ -79,7 +79,7 @@ typedef struct {
 
 using namespace Opie::Core::Internal;
 
-void Jornada::init()
+void Jornada::init(const QString&)
 {
     d->m_vendorstr = "HP";
     d->m_vendor = Vendor_HP;

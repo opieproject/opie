@@ -42,7 +42,7 @@ namespace Internal {
 class SIMpad : public ODevice, public QWSServer::KeyboardFilter
 {
   protected:
-    virtual void init();
+    virtual void init(const QString&);
     virtual void initButtons();
 
   public:

@@ -69,7 +69,7 @@ struct r_button ramses_buttons [] = {
     "buttonsettings", "raise()" },
 };
 
-void Ramses::init()
+void Ramses::init(const QString&)
 {
     d->m_vendorstr = "M und N";
     d->m_vendor = Vendor_MundN;
