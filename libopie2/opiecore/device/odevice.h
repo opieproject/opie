@@ -93,6 +93,7 @@ enum OModel {
 
     Model_Ramses_All    = ( Model_Ramses | 0xffffff ),
     Model_Ramses_MNCI   = ( Model_Ramses | 0x000001 ),
+    Model_Ramses_MNCIRX = ( Model_Ramses | 0x000002 ),
 
     Model_Yopy          = ( 5 << 24 ),
 
@@ -261,7 +262,7 @@ public:
 
     // don't add new virtual methods, use this:
     //  /*virtual */ void boo(int i ) { return virtual_hook(1,&i); };
-    // and in your subclass do do overwrite
+    // and in your subclass do overwrite
     //  protected virtual int virtual_hook(int, void *)
     // which is defined below
 
