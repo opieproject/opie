@@ -110,8 +110,8 @@ void UserDialog::setupTab1() {
 	skelLabel->setText("Copy /etc/skel: ");
 	skelCheckBox=new QCheckBox(tabpage);
 	skelCheckBox->setChecked(true);
-	skelLabel->setDisabled(true);
-	skelCheckBox->setDisabled(true);
+//	skelLabel->setDisabled(true);
+//	skelCheckBox->setDisabled(true);
 	
 	// Widget layout
 	QHBoxLayout *hlayout=new QHBoxLayout(-1,"hlayout");
@@ -243,6 +243,22 @@ bool UserDialog::addUser(int uid, int gid) {
 //		adduserDialog->userImage=adduserDialog->userImage.smoothScale(48,48);
 		adduserDialog->userImage.save(filename,"PNG");
 	}
+	
+	// Should we copy the skeleton homedirectory /etc/skel to the user's homedirectory?
+	accounts->findUser(adduserDialog->loginLineEdit->text());
+	if(adduserDialog->skelCheckBox->isChecked()) {
+		QString command_cp;
+		QString command_chown;
+		command_cp.sprintf("cp -a /etc/skel/* %s/",accounts->pw_dir.latin1());
+		system(command_cp);
+		
+		command_cp.sprintf("cp -a /etc/skel/.[!.]* %s/",accounts->pw_dir.latin1());	// Bug in busybox, ".*" includes parent directory, does this work as a workaround?
+		system(command_cp);
+		
+		command_chown.sprintf("chown -R %d:%d %s",accounts->pw_uid,accounts->pw_gid,accounts->pw_dir.latin1());
+		system(command_chown);
+	}
+	
 	return true;
 }
 
