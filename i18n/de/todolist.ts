@@ -109,7 +109,7 @@
     </message>
     <message>
         <source>Deadline</source>
-        <translation></translation>
+        <translation>fällig in</translation>
     </message>
 </context>
 <context>
@@ -181,7 +181,7 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>Show Deadline</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Data</source>

@@ -159,7 +159,7 @@ Trozdem beenden?</translation>
     <name>DateBookDayView</name>
     <message>
         <source>:00p</source>
-        <translation type="unfinished">Jahre</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -378,11 +378,11 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>Start Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Startzeit</translation>
     </message>
     <message>
         <source>End Time</source>
-        <translation type="unfinished"></translation>
+        <translation>endet um</translation>
     </message>
 </context>
 <context>
@@ -469,11 +469,11 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>Start - End </source>
-        <translation type="unfinished"></translation>
+        <translation>Start - Ende</translation>
     </message>
     <message>
         <source>Note...</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen...</translation>
     </message>
 </context>
 <context>

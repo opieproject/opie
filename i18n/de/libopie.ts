@@ -132,14 +132,33 @@
     <name>OFontMenu</name>
     <message>
         <source>Large</source>
-        <translation type="unfinished"></translation>
+        <translation>Groß</translation>
     </message>
     <message>
         <source>Medium</source>
-        <translation type="unfinished"></translation>
+        <translation>Mittel</translation>
     </message>
     <message>
         <source>Small</source>
+        <translation>Klein</translation>
+    </message>
+</context>
+<context>
+    <name>OTimePickerDialogBase</name>
+    <message>
+        <source>TimePicker</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pick Time:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
