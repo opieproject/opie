@@ -13,7 +13,7 @@ all: $(DESTDIR)/opiealarm $(DESTDIR)/opieatd
 
 $(DESTDIR)/opiealarm: opiealarm.c
 	$(CC) $(CFLAGS) opiealarm.c -o $(DESTDIR)/opiealarm $(LDFLAGS)
-	$(STRIP) -s $(DESTDIR)/opiealarm
+	$(STRIP) --strip-all $(DESTDIR)/opiealarm
 	chmod u+s $(DESTDIR)/opiealarm
 	chown root $(DESTDIR)/opiealarm 2>/dev/null || echo -e "\nopiealarm must be owned by root to work correctly.\n"
 

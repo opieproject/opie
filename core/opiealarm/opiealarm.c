@@ -243,7 +243,7 @@ int suspend ( int fix_rtc )
 		
 	// get RTC time
 	memset ( &rtc, 0, sizeof ( struct tm ));
-	if ( ioctl ( fd, RTC_ALM_SET, &rtc ) < 0 )
+	if ( ioctl ( fd, RTC_RD_TIME, &rtc ) < 0 )
 		error_msg_and_die ( 1, "ioctl RTC_RD_TIME" );		
 	rtct = mktime ( &rtc );
 
