@@ -559,8 +559,11 @@ OPluginItem::List OGenericPluginLoader::plugins( const QString& _dir, bool sorte
     if ( sorted ) {
         QStringList pos =  cfg.readListEntry( "Positions", '.' );
         QStringList::Iterator it = pos.begin();
-        while ( it != pos.end() )
-            positionMap.insert(  *it++, (*it++).toInt() );
+        QString tmp; int i;
+        while ( it != pos.end() ) {
+            tmp = *it++; i = (*it++).toInt();
+            positionMap.insert(  tmp, i );
+        }
 
     }
 
@@ -584,6 +587,7 @@ OPluginItem::List OGenericPluginLoader::plugins( const QString& _dir, bool sorte
             continue;
         else if ( sorted )
             item.setPosition( positionMap[str] );
+
 
         lst.append( item );
     }
@@ -834,6 +838,9 @@ void OPluginManager::save() {
 
         if ( !item.isEnabled() )
             excluded[path].append( item.name() );
+        if ( !excluded.contains( path ) )
+            excluded[path] = QString::null;
+
     }
 
 /*
