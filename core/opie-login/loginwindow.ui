@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>456</width>
+            <width>452</width>
             <height>341</height>
         </rect>
     </property>
@@ -72,7 +72,7 @@
                         <name>font</name>
                         <font>
                             <family>helvetica</family>
-                            <pointsize>36</pointsize>
+                            <pointsize>18</pointsize>
                             <bold>1</bold>
                         </font>
                     </property>
