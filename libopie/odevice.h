@@ -181,6 +181,8 @@ public:
 	virtual bool setDisplayStatus ( bool on );
 	virtual bool setDisplayBrightness ( int brightness );
 	virtual int displayBrightnessResolution ( ) const;
+	virtual bool setDisplayContrast ( int contrast );
+	virtual int displayContrastResolution ( ) const;
 
 // input / output
         //FIXME playAlarmSound and al might be better -zecke
