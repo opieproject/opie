@@ -139,7 +139,7 @@ QString  BatteryStatus::statusText() const {
             text = tr("Charging");
         }
     } else if ( ps->batteryPercentAccurate() ) {
-    text.sprintf( tr("Percentage battery remaining") + ": %i%%", percent );
+        text.sprintf( tr("Remaining Power") + ": %i%%", percent );
     } else {
         text = tr("Battery status: ");
         switch ( ps->batteryStatus() ) {
@@ -163,21 +163,21 @@ QString  BatteryStatus::statusText() const {
     if ( ps->acStatus() == PowerStatus::Backup )
     text +=  "\n"  +  tr("On backup power");
     else if ( ps->acStatus() == PowerStatus::Online )
-        text +=  "\n"  + tr("Power on-line");
-        else if ( ps->acStatus() == PowerStatus::Offline )
-            text +=  "\n"  +  tr("External power disconnected");
+    text +=  "\n"  + tr("Power on-line");
+    else if ( ps->acStatus() == PowerStatus::Offline )
+    text +=  "\n"  +  tr("External power disconnected");
 
-            if ( ps->batteryTimeRemaining() >= 0 ) {
-                text += "\n" + QString().sprintf(  tr("Battery time remaining") + ": %im %02is",
-                                                       ps->batteryTimeRemaining() / 60, ps->batteryTimeRemaining() % 60 );
-                }
+    if ( ps->batteryTimeRemaining() >= 0 ) {
+        text += "\n" + QString().sprintf(  tr("Remaining Time") + ": %im %02is",
+              ps->batteryTimeRemaining() / 60, ps->batteryTimeRemaining() % 60 );
+    }
     return text;
 }
 
 QString  BatteryStatus::statusTextIpaq() const {
     QString text;
-    text +=  tr("Percentage battery remaining: ") + perc2 + " " + jackStatus;
-    text += "\n"  + tr("Battery time remaining: ") + sec2;
+    text +=  tr("Remaining Power: ") + perc2 + " " + jackStatus;
+    text += "\n"  + tr("Remaining Time: ") + sec2;
     return text;
 }
 
