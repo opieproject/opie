@@ -11,9 +11,16 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>277</width>
-            <height>340</height>
+            <width>355</width>
+            <height>418</height>
         </rect>
+    </property>
+    <property stdset="1">
+        <name>sizePolicy</name>
+        <sizepolicy>
+            <hsizetype>3</hsizetype>
+            <vsizetype>3</vsizetype>
+        </sizepolicy>
     </property>
     <property stdset="1">
         <name>caption</name>
@@ -199,12 +206,48 @@
                 <grid>
                     <property stdset="1">
                         <name>margin</name>
-                        <number>6</number>
+                        <number>11</number>
                     </property>
                     <property stdset="1">
                         <name>spacing</name>
-                        <number>4</number>
+                        <number>6</number>
                     </property>
+                    <widget row="4"  column="2"  rowspan="1"  colspan="3" >
+                        <class>QPushButton</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>PushButtonQuery</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>sizePolicy</name>
+                            <sizepolicy>
+                                <hsizetype>3</hsizetype>
+                                <vsizetype>0</vsizetype>
+                            </sizepolicy>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Query Modem</string>
+                        </property>
+                    </widget>
+                    <widget row="4"  column="1" >
+                        <class>QComboBox</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>ComboBoxDevice</cstring>
+                        </property>
+                    </widget>
+                    <widget row="4"  column="0" >
+                        <class>QLabel</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>TextLabel1_6</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Device</string>
+                        </property>
+                    </widget>
                     <widget row="0"  column="0" >
                         <class>QLabel</class>
                         <property stdset="1">
@@ -216,7 +259,7 @@
                             <string>AT-dial</string>
                         </property>
                     </widget>
-                    <widget row="0"  column="1"  rowspan="1"  colspan="3" >
+                    <widget row="0"  column="1"  rowspan="1"  colspan="4" >
                         <class>QComboBox</class>
                         <item>
                             <property>
@@ -238,6 +281,10 @@
                             <name>editable</name>
                             <bool>true</bool>
                         </property>
+                        <property stdset="1">
+                            <name>currentItem</name>
+                            <number>0</number>
+                        </property>
                     </widget>
                     <widget row="1"  column="0" >
                         <class>QLabel</class>
@@ -250,7 +297,7 @@
                             <string>Speed</string>
                         </property>
                     </widget>
-                    <widget row="1"  column="1"  rowspan="1"  colspan="3" >
+                    <widget row="1"  column="1"  rowspan="1"  colspan="4" >
                         <class>QComboBox</class>
                         <item>
                             <property>
@@ -297,7 +344,7 @@
                             <number>5</number>
                         </property>
                     </widget>
-                    <widget row="3"  column="1" >
+                    <widget row="3"  column="1"  rowspan="1"  colspan="2" >
                         <class>QSlider</class>
                         <property stdset="1">
                             <name>name</name>
@@ -331,7 +378,7 @@
                             <string>Wait time</string>
                         </property>
                     </widget>
-                    <widget row="3"  column="2" >
+                    <widget row="3"  column="3" >
                         <class>QLabel</class>
                         <property stdset="1">
                             <name>name</name>
@@ -356,7 +403,7 @@
                             <name>hAlign</name>
                         </property>
                     </widget>
-                    <widget row="3"  column="3" >
+                    <widget row="3"  column="4" >
                         <class>QLabel</class>
                         <property stdset="1">
                             <name>name</name>
@@ -378,7 +425,7 @@
                             <string>Flow control</string>
                         </property>
                     </widget>
-                    <widget row="2"  column="1"  rowspan="1"  colspan="3" >
+                    <widget row="2"  column="1"  rowspan="1"  colspan="4" >
                         <class>QCheckBox</class>
                         <property stdset="1">
                             <name>name</name>
@@ -393,7 +440,7 @@
                             <bool>true</bool>
                         </property>
                     </widget>
-                    <spacer row="4"  column="1" >
+                    <spacer row="5"  column="1" >
                         <property>
                             <name>name</name>
                             <cstring>Spacer5</cstring>
@@ -414,11 +461,18 @@
                             </size>
                         </property>
                     </spacer>
-                    <widget row="5"  column="0"  rowspan="1"  colspan="4" >
+                    <widget row="6"  column="0"  rowspan="1"  colspan="5" >
                         <class>QButtonGroup</class>
                         <property stdset="1">
                             <name>name</name>
                             <cstring>dialmode</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>sizePolicy</name>
+                            <sizepolicy>
+                                <hsizetype>3</hsizetype>
+                                <vsizetype>5</vsizetype>
+                            </sizepolicy>
                         </property>
                         <property stdset="1">
                             <name>title</name>

@@ -1,12 +1,12 @@
 #ifndef PPP_MODULE_H
 #define PPP_MODULE_H
-
+ 
 #include "module.h"
 
 class PPPModule : Module {
 
 signals:
-  void updateInterface(Interface *i);
+    void updateInterface(Interface *i);
 	
 public:
   PPPModule();
@@ -17,7 +17,7 @@ public:
   virtual QWidget *configure(Interface *i);
   virtual QWidget *information(Interface *i);
   virtual QList<Interface> getInterfaces();
-  virtual void possibleNewInterfaces(QMap<QString, QString> &){};
+  virtual void possibleNewInterfaces(QMap<QString, QString> &);
   virtual Interface *addNewInterface(const QString &name);
   virtual bool remove(Interface* i);
   virtual QString getPixmapName(Interface* i);
