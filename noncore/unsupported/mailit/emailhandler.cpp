@@ -175,8 +175,10 @@ bool EmailHandler::parse(const QString &in, const QString &lineShift, Email *mai
   if ((body.at(body.length()-2) == '.') && (body.at(body.length()-3) == '\n'))
       body.truncate(body.length()-2);
   
-  TextParser p(header, lineShift);
-  
+  //  TextParser p(header, lineShift);
+  TextParser * lp = new TextParser(header, lineShift);
+#define p (*lp)
+
   if ((pos = p.find("FROM",':', 0, TRUE)) != -1) {
     pos++;
     if (p.separatorAt(pos) == ' ') {
@@ -270,6 +272,7 @@ bool EmailHandler::parse(const QString &in, const QString &lineShift, Email *mai
     if (boundary == "") {     //fooled by Mime-Version
       mail->body = body;
       mail->bodyPlain = body;
+     delete lp;
       return mail;
     }
     
@@ -338,6 +341,7 @@ bool EmailHandler::parse(const QString &in, const QString &lineShift, Email *mai
     mail->bodyPlain = body;
     mail->body = body;
   }
+  delete lp;
   return TRUE;
 }
 
