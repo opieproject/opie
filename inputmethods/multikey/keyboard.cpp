@@ -290,8 +290,8 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
                        this, SLOT(togglePickboard(bool)));
                connect(configdlg, SIGNAL(setMapToDefault()), 
                        this, SLOT(setMapToDefault()));
-               connect(configdlg, SIGNAL(setMapToFile(int)), 
-                       this, SLOT(setMapToFile(int)));
+               connect(configdlg, SIGNAL(setMapToFile(QString)), 
+                       this, SLOT(setMapToFile(QString)));
                configdlg->showMaximized();
                configdlg->show();
                configdlg->raise();
@@ -519,7 +519,7 @@ void Keyboard::setMapToDefault() {
     /* save change to multikey config file */
     config = new Config("multikey");
     config->setGroup ("keymaps");
-    config->writeEntry ("current", -1); // default closed
+    config->writeEntry ("current", key_map); // default closed
     delete config;
 
     delete keys;
@@ -529,23 +529,20 @@ void Keyboard::setMapToDefault() {
     repaint(FALSE);
 }
 
-void Keyboard::setMapToFile(int index) {
+void Keyboard::setMapToFile(QString map) {
 
     /* save change to multikey config file */
     Config *config = new Config("multikey");
     config->setGroup ("keymaps");
-    config->writeEntry ("current", index); // default closed
+    config->writeEntry ("current", map); // default closed
 
-
-    /* now you have to retrieve the map */
-    QStringList maps = config->readListEntry("maps", QChar('|'));
     delete config;
 
     delete keys;
-    if (index < 0 || (int)maps.count() <= index) 
-        keys = new Keys();
+    if (QFile(map).exists()) 
+        keys = new Keys(map);
     else 
-        keys = new Keys(maps[index]);
+        keys = new Keys();
 
     repaint(FALSE);
 
@@ -859,30 +856,22 @@ Keys::Keys() {
 
     Config *config = new Config ("multikey");
     config->setGroup( "keymaps" );
-    QStringList maps = config->readListEntry ("maps", QChar('|'));
-
-    int index = config->readNumEntry( "current", -1 );
+    QString map = config->readEntry( "current" );
     delete config;
 
-    QString key_map;
-
-    if (index < 0 || (int)maps.count() <= index) {
+    if (map.isNull() || !(QFile(map).exists())) {
 
         Config *config = new Config("locale");
         config->setGroup( "Language" );
         QString l = config->readEntry( "Language" , "en" );
         delete config;
     
-        key_map = QPEApplication::qpeDir() + "/share/multikey/" 
+        map = QPEApplication::qpeDir() + "/share/multikey/" 
                 + l + ".keymap";
 
-    } else {
+    } 
 
-        key_map = maps[index];
-    }
-
-
-    setKeysFromFile(key_map);
+    setKeysFromFile(map);
 }
 
 Keys::Keys(const char * filename) {

@@ -17,19 +17,23 @@ public:
 signals:
     void pickboardToggled(bool on_off);
     void setMapToDefault();
-    void setMapToFile(int index);
+    void setMapToFile(QString map);
 
 private slots:
     void pickTog();
     void setMap(int index);
     void addMap();
-    void removeMap(int index);
+    void removeMap();
 
 private:
     QCheckBox *pick_button;
     QListBox *keymaps;
     QPushButton *add_button;
     QPushButton *remove_button;
+
+
+    QStringList default_maps; // the maps in your share/multikey/ dir
+    QStringList custom_maps; // maps you added with the 'add' button
 
 };
 

@@ -6,6 +6,8 @@
  *
  */
 
+#include <iostream.h>
+
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
 
@@ -22,7 +24,8 @@
 #include <qlistbox.h>
 #include <qstringlist.h>
 #include <opie/ofiledialog.h>
-#include <iostream.h>
+#include <qdir.h>
+#include <qfileinfo.h>
 #include "configdlg.h"
 #include "keyboard.h"
 
@@ -30,6 +33,8 @@ ConfigDlg::ConfigDlg () : QTabWidget ()
 {
     setCaption( tr("Multikey Configuration") );
     Config config ("multikey");
+    config.setGroup("keymaps");
+    QString current_map = config.readEntry("current", 0);
 
     /*
      * 'general config' tab
@@ -46,17 +51,45 @@ ConfigDlg::ConfigDlg () : QTabWidget ()
 
     QString cur(tr("Current Language"));
     keymaps->insertItem(cur);
+    keymaps->setSelected(0, true);
+    
+    QDir map_dir(QPEApplication::qpeDir() + "/share/multikey", "*.keymap");
+    default_maps = map_dir.entryList(); // so i can access it in other places
 
-    config.setGroup ("keymaps");
-    QStringList maps = config.readListEntry("maps", QChar('|'));
+    for (uint i = 0; i <map_dir.count(); i++) {
 
-    for (unsigned int i = 0; i < maps.count(); i++) {
+        keymaps->insertItem(map_dir.absPath() + "/" + map_dir[i]);
+        if (map_dir.absPath() + "/" + map_dir[i] == current_map) {
 
-        keymaps->insertItem(maps[i]);
+            keymaps->setSelected(i + 1, true);
+        }
+
+    } 
+
+    custom_maps = config.readListEntry("maps", QChar('|'));
+
+    for (uint i = 0; i < custom_maps.count(); i++) {
+
+        if (map_dir.exists(QFileInfo(custom_maps[i]).fileName(), false) 
+                        || !QFile::exists(custom_maps[i])) {
+
+            custom_maps.remove(custom_maps.at(i));
+
+            // remove it from the list too
+            config.writeEntry("maps", custom_maps.join("|"));
+
+
+        } else {
+
+            keymaps->insertItem(custom_maps[i]);
+            if (custom_maps[i] == current_map) {
+
+                keymaps->setSelected(map_dir.count() + i + 1, true);
+            }
+        }
     }
 
     // have to "+1" because the "current language" listItem... remember?
-    keymaps->setSelected(config.readNumEntry("current", 0) + 1, true);
 
     connect(keymaps, SIGNAL(highlighted(int)), SLOT(setMap(int)));
 
@@ -71,6 +104,7 @@ ConfigDlg::ConfigDlg () : QTabWidget ()
 
     remove_button = new QPushButton(tr("Remove"), add_remove_grid);
     remove_button->setFlat((bool)1);
+    connect(remove_button, SIGNAL(clicked()), SLOT(removeMap()));
 
     pick_button = new QCheckBox(tr("Pickboard"), gen_box);
 
@@ -126,37 +160,60 @@ void ConfigDlg::pickTog() {
 /* 
  * the index is kinda screwy, because in the config file, index 0 is just the
  * first element in the QStringList, but here it's the "Current Language"
- * listItem. therefor you have to minus one to the index before you access
- * it from the config file. 
+ * listItem. therefor you have to minus one to the index before you access it.
  *
- * and later on, the "current language" setting should be -1 in the config file
  */
 
 void ConfigDlg::setMap(int index) {
 
     if (index == 0) {
 
-        if (remove_button->isEnabled())
-            remove_button->setDisabled(true);
+        remove_button->setDisabled(true);
 
         emit setMapToDefault();
     }
-    else {
+    else if ((uint)index <= default_maps.count()) {
 
-        if (!remove_button->isEnabled()) 
-            remove_button->setEnabled(true);
+        remove_button->setDisabled(true);
 
-        emit setMapToFile(index - 1);
+    } else {
+
+        remove_button->setEnabled(true);
+
+        emit setMapToFile(keymaps->text(index));
     }
 }
 
 void ConfigDlg::addMap() {
 
-    QString map = OFileDialog::getOpenFileName(2, QPEApplication::qpeDir() + "/share/multikey");
-    cout << "added file " << map << "!\n";
+    QString map = OFileDialog::getOpenFileName(1, QDir::home().absPath());
+    Config config ("multikey");
+    config.setGroup("keymaps");
+    QStringList maps = config.readListEntry("maps", QChar('|'));
+    maps.append(map);
+    keymaps->insertItem(map);
+    keymaps->setSelected(keymaps->count() - 1, true);
+
+
+    config.writeEntry("maps", maps.join("|"));
+    config.writeEntry("current", map);
 
 }
 
-void ConfigDlg::removeMap(int index) {
+void ConfigDlg::removeMap() {
 
+    cout << "removing : " << custom_maps[keymaps->currentItem() - default_maps.count() - 1] << "\n";
+    cout << "currentItem : " << keymaps->currentItem() << "\n";
+
+    // move selection up one
+    keymaps->setSelected(keymaps->currentItem() - 1, true);
+    // delete the next selected item cus you just moved it up
+    keymaps->removeItem(keymaps->currentItem() + 1);
+
+    custom_maps.remove(custom_maps[keymaps->currentItem() - default_maps.count()]);
+
+    // write the changes
+    Config config ("multikey");
+    config.setGroup("keymaps");
+    config.writeEntry("maps", custom_maps.join("|"));
 }
