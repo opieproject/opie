@@ -1,64 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE language SYSTEM "language.dtd">
-<language name="C++" version="1.01" kateversion="2.0" section="Sources" extensions="*.cxx;*.cpp;*.cc;*.C;*.h" mimetype="text/x-c++src;text/x-c++hdr;text/x-chdr;text/x-c++src">
+<language name="C" version="1.00" kateversion="2.0" section="Sources" extensions="*.c;*.C;*.h" mimetype="text/x-c++src;text/x-chdr;text/x-csrc">
   <highlighting>
     <list name="keywords">
-      <item> class </item>
-      <item> false </item>
-      <item> friend </item>
-      <item> inline </item>
-      <item> namespace </item>
-      <item> new </item>
-      <item> delete </item>
-	  <item> operator </item>
-      <item> private </item>
-      <item> protected </item>
-      <item> public </item>
-      <item> reinterpret_cast </item>
-      <item> static_cast </item>
-	  <item> dynamic_cast</item>
-      <item> explicit </item>
-      <item> template </item>
-      <item> this </item>
-      <item> throw </item>
-      <item> true </item>
-      <item> try </item>
-      <item> catch </item>
-      <item> typeid </item>
-      <item> typename </item>
-      <item> using </item>
-      <item> virtual </item>
-      <item> and_eq </item>
-      <item> and </item>
-      <item> bitand </item>
-      <item> bitor </item>
-      <item> compl </item>
-      <item> not_eq </item>
-      <item> not </item>
-      <item> or_eq </item>
-      <item> or </item>
-      <item> xor_eq </item>
-      <item> xor </item>
-      <item> bad_cast </item>
-      <item> bad_typeid </item>
-      <item> except </item>
-      <item> finally </item>
-      <item> type_info </item>
-      <item> xalloc </item>
-      <item> Q_EXPORT </item>
-      <item> Q_OBJECT </item>
-      <item> K_DCOP </item>
-      <item> SLOT </item>
-      <item> SIGNAL </item>
-      <item> slots </item>
-      <item> signals </item>
-      <item> Q_PROPERTY </item>
-      <item> Q_ENUMS </item>
-      <item> Q_SETS </item>
-      <item> Q_OVERRIDE </item>
-      <item> Q_CLASSINFO </item>
-      <item> TRUE </item>
-      <item> FALSE </item>
       <item> break </item>
       <item> case </item>
       <item> continue </item>
@@ -77,13 +21,8 @@
       <item> typedef </item>
       <item> union </item>
       <item> while </item>
-      <item> connect </item>
     </list>
     <list name="types">
-      <item> bool </item>
-      <item> wchar_t </item>
-      <item> mutable </item>
-      <item> uint </item>
       <item> auto </item>
       <item> char </item>
       <item> const </item>
@@ -98,21 +37,11 @@
       <item> unsigned </item>
       <item> void </item>
       <item> volatile </item>
-      <item> int16_t </item>
-      <item> int32_t </item>
-      <item> int8_t </item>
-      <item> int64_t </item>
-      <item> uint16_t </item>
-      <item> uint32_t </item>
-      <item> uint8_t </item>
-      <item> uint64_t </item>
     </list>
     <contexts>
-      <context attribute="0" lineEndContext="#stay" name="Normal">
-	<RegExpr attribute="3" context="#stay" String="//BEGIN.*$" beginRegion="Region1"/>
-	<RegExpr attribute="3" context="#stay" String="//END.*$" endRegion="Region1"/>
-        <keyword attribute="1" context="#stay" String="keywords" />
-        <keyword attribute="2" context="#stay" String="types" />
+      <context attribute="0" lineEndContext="#stay">
+        <keyword attribute="1" context="#stay" String="keywords"/>
+        <keyword attribute="2" context="#stay" String="types"/>
         <Float attribute="6" context="#stay">
           <AnyChar String="fF" attribute="6" context="#stay"/>
         </Float>
@@ -129,39 +58,37 @@
           <StringDetect attribute="3" context="#stay" String="L" insensitive="TRUE"/>
         </Int>
         <HlCChar attribute="7" context="#stay"/>
-        <DetectChar attribute="8" context="String" char="&quot;"/>
-        <Detect2Chars attribute="10" context="Commentar 1" char="/" char1="/"/>
-        <Detect2Chars attribute="10" context="Commentar 2" char="/" char1="*" beginRegion="Comment"/>
-	<DetectChar attribute="0" context="#stay" char="{" beginRegion="Brace1" />
-	<DetectChar attribute="0" context="#stay" char="}" endRegion="Brace1" />
+        <DetectChar attribute="8" context="1" char="&quot;"/>
+        <Detect2Chars attribute="10" context="2" char="/" char1="/"/>
+        <Detect2Chars attribute="10" context="3" char="/" char1="*"/>
         <AnyChar attribute="11" context="#stay" String="!%&amp;()+,-&lt;=&gt;?[]^{|}~"/>
         <StringDetect attribute="12" context="8" String="#if 0" insensitive="FALSE"/>
         <RegExpr attribute="12" context="4" String="#"/>
       </context>
-      <context attribute="8" lineEndContext="#pop" name="String">
+      <context attribute="8" lineEndContext="#pop">
         <LineContinue attribute="8" context="#stay"/>
         <HlCStringChar attribute="9" context="#stay"/>
         <DetectChar attribute="8" context="#pop" char="&quot;"/>
       </context>
-      <context attribute="10" lineEndContext="#pop" name="Commentar 1">
+      <context attribute="10" lineEndContext="#pop">
         <RegExpr attribute="3" context="#stay" String="(FIXME|TODO)" />
       </context>
-      <context attribute="10" lineEndContext="#stay" name="Commentar 2">
+      <context attribute="10" lineEndContext="#stay">
+        <Detect2Chars attribute="10" context="#pop" char="*" char1="/"/>
         <RegExpr attribute="3" context="#stay" String="(FIXME|TODO)" />
-        <Detect2Chars attribute="10" context="#pop" char="*" char1="/" endRegion="Comment"/>
       </context>
-      <context attribute="12" lineEndContext="#pop" name="Preprocessor">
+      <context attribute="12" lineEndContext="#pop">
         <LineContinue attribute="12" context="#stay"/>
         <RangeDetect attribute="13" context="#stay" char="&quot;" char1="&quot;"/>
         <RangeDetect attribute="13" context="#stay" char="&lt;" char1="&gt;"/>
-        <Detect2Chars attribute="10" context="Commentar 1" char="/" char1="/"/>
-        <Detect2Chars attribute="10" context="Commentar/Preprocessor" char="/" char1="*"/>
+        <Detect2Chars attribute="10" context="2" char="/" char1="/"/>
+        <Detect2Chars attribute="10" context="5" char="/" char1="*"/>
       </context>
-      <context attribute="10" lineEndContext="#stay" name="Commentar/Preprocessor">
+      <context attribute="10" lineEndContext="#stay">
         <Detect2Chars attribute="10" context="#pop" char="*" char1="/" />
       </context>
-      <context attribute="0" lineEndContext="1" name="Some Context"/>
-      <context attribute="0" lineEndContext="4" name="Some Context2"/>
+      <context attribute="0" lineEndContext="#pop" />
+      <context attribute="0" lineEndContext="#pop" />
       <context attribute="10" lineEndContext="#stay">
           <RegExpr attribute="3" context="#stay" String="(FIXME|TODO)" />
 	  <RegExpr attribute="10" context="9" String="#if" />
@@ -171,7 +98,7 @@
       <context attribute="10" lineEndContext="#stay">
 	  <RegExpr attribute="10" context="9" String="#if" />
           <RegExpr attribute="10" context="#pop" String="#endif" />
-      </context>
+      </context>	
     </contexts>
     <itemDatas>
       <itemData name="Normal Text" defStyleNum="dsNormal"/>
@@ -192,7 +119,6 @@
   </highlighting>
   <general>
     <comments>
-      <comment name="singleLine" start="//" />
       <comment name="multiLine" start="/*" end="*/" />
     </comments>
     <keywords casesensitive="1" />
