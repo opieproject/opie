@@ -55,6 +55,8 @@ private slots:
 	void volMoved ( int percent );
 	void micMoved ( int percent );
 	void alarmMoved ( int percent );
+	void bassMoved( int percent );
+	void trebleMoved( int percent );
 	
 	void volMuteToggled ( bool );
 	void micMuteToggled ( bool );
@@ -71,13 +73,17 @@ private:
 	enum eUpdate {
 		UPD_None,
 		UPD_Vol,
-		UPD_Mic
+		UPD_Mic,
+		UPD_Bass,
+		UPD_Treble
 	};
 	void writeConfigEntry ( const char *entry, int val, eUpdate upd );
 
 
 private:
 	QSlider *volSlider;
+	QSlider *bassSlider;
+	QSlider *trebleSlider;
 	QSlider *micSlider;
 	QSlider *alarmSlider;
 	OLedBox *volLed;
@@ -94,6 +100,8 @@ private:
 	int  m_vol_percent;
 	int  m_mic_percent;
 	int  m_alarm_percent;
+	int  m_bass_percent;
+	int  m_treble_percent;
 	bool m_vol_muted;
 	bool m_mic_muted;	
 	bool m_snd_alarm;
