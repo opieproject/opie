@@ -65,6 +65,7 @@ public slots:
 private:
     bool createLinks;
     bool aborted;
+    bool error;
     QString option;
     QString package;
     QString destination;

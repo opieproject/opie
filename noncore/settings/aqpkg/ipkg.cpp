@@ -57,6 +57,7 @@ Ipkg :: ~Ipkg()
 // dir is the directory to run ipkg in (defaults to "")
 bool Ipkg :: runIpkg( )
 {
+    error = false;
     bool ret = false;
     QStringList commands;
 
@@ -167,12 +168,6 @@ bool Ipkg :: runIpkg( )
     }
 
     delete dependantPackages;
-
-    // Finally, if we are removing a package, remove its entry from the <destdir>/usr/lib/ipkg/status file
-    // to workaround an ipkg bug which stops reinstall to a different location
-    if ( option == "remove" )
-        removeStatusEntry();
-
 
     emit outputText( "Finished" );
     emit outputText( "" );
@@ -340,10 +335,16 @@ void Ipkg::commandStderr(OProcess*, char *buffer, int buflen)
     lineStr=lineStr.left( buflen );
     emit outputText( lineStr );
     buffer[0] = '\0';
+    error = true;
 }
 
 void Ipkg::processFinished()
 {
+    // Finally, if we are removing a package, remove its entry from the <destdir>/usr/lib/ipkg/status file
+    // to workaround an ipkg bug which stops reinstall to a different location
+    if ( !error && option == "remove" )
+        removeStatusEntry();
+    
     delete proc;
     proc = 0;
     finished = true;
