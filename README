@@ -1,4 +1,4 @@
-How to use the new build system
+1. How to use the new build system
 ===============================
 There's a great document at:
 
@@ -8,45 +8,37 @@ and the API is at:
 http://handhelds.org/~zecke/apidocs/index.html
 
 
-You will need qvfb, designer, and uic from a qt-x11-2.3.2 package. 
+You will need qvfb, designer, and uic from a qt-x11-2.3.2 package.
 That means you must download and configure/make it.
 wget ftp://ftp.trolltech.com/qt/source/qt-x11-2.3.2.tar.gz
 
 
-Qt embedded is available at: 
+The recommended version of Qt embedded is qt-embedded-2.3.7
+
+You can get it from:
 ftp://ftp.trolltech.com/qt/source/qt-embedded-2.3.7.tar.bz2
-or in that directory.
+Other version will found in that directory.
+
 
 Set QTDIR to point to your qt/embedded source tree, such as:
 
 export QTDIR=/opt/qt-2.3.7
 
-Then you need to do 
+Then you need to do
 export OPIEDIR=`pwd`
-or 
+or
 export OPIEDIR=~/projects/sources/opie
 or where ever you placed Opie sources.
 
 and then do:
 export LD_LIBRARY_PATH=$OPIEDIR/lib:$QTDIR/lib:$LD_LIBRARY_PATH
 
-You will want to apply the patches in the $OPIEDIR/qt directory to qt-embedded-2.3.7
+You will want to apply the patches in the $OPIEDIR/qt directory to qt-embedded
 *NOTE* You can skip the qte234-for-opie091-simpad.patch
-patch, unless you are compiling for simpad. 
+patch, unless you are compiling for simpad.
 
-qte234-for-opie091-gfxraster.patch
-qte234-for-opie091-listview.patch
-qte234-for-opie091-override.patch
-qte234-for-opie091-qtoolbutton.patch
-qte234-for-opie091-setpalette.patch
-qte234-for-opie091-sigsegv.patch
-qte234-for-opie091-style.patch
-qte234-for-opie091-unpolish.patch
+cd $QTDIR; cat $OPIEDIR/qt/qte<version>*.patch | patch -p0
 
-cd $QTDIR; cat $OPIEDIR/qt/qte234*.patch | patch -p0
-
-OR just apply the one
-cd $QTDIR; cat $OPIEDIR/qt/qte237-all.patch | patch -p0
 
 
 
@@ -81,7 +73,7 @@ configure_make;
 
 ------------------- end script
 
-Once you have these compiled, be sure to set the PATH to ensure your (cross)compiler 
+Once you have these compiled, be sure to set the PATH to ensure your (cross)compiler
 is available.
 
 Then do the following in the opie source tree:
@@ -100,6 +92,30 @@ make clean-configs
 is a useful one.
 
 
-
 Ciao, Stefan
 and ljp <lpotter@trolltech.com>
+
+
+2. Used Libraries
+================
+
+The following Libraries are used in Opie.
+For a successfull build you must install these librarys and headers.
+The versions are known-good versions. If you successfully try newer ones,
+commit a new README or send mail to opie-devel@handhelds.org
+
+* libsdl 1.2
+  http://www.libsdl.org/download-1.2.php
+
+* libxine 1.0 beta 11
+  http://prdownloads.sourceforge.net/xine/
+
+* libpcap 0.7.2
+  http://www.tcpdump.org/release/
+
+* libetpan 0.30 + patch (in CVS)
+  http://prdownloads.sourceforge.net/libetpan/
+
+* libsqlite 2.8.6
+  http://www.sqlite.org/download.html
+
