@@ -3,99 +3,100 @@
     <name>Security</name>
     <message>
         <source>Set passcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Nouveau code</translation>
     </message>
     <message>
         <source>Change passcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Changer le code</translation>
     </message>
     <message>
         <source>Enter passcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrez le code secret</translation>
     </message>
     <message>
         <source>Passcode incorrect</source>
-        <translation type="unfinished"></translation>
+        <translation>Code incorrect</translation>
     </message>
     <message>
         <source>The passcode entered is incorrect.
 Access denied</source>
-        <translation type="unfinished"></translation>
+        <translation>Le code secret est incorrect.
+Accès refusé</translation>
     </message>
     <message>
         <source>Any</source>
-        <translation type="unfinished"></translation>
+        <translation>Tous</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Sans</translation>
     </message>
     <message>
         <source>Enter new passcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrez le nouveau code</translation>
     </message>
     <message>
         <source>Re-enter new passcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Réentrez le code</translation>
     </message>
 </context>
 <context>
     <name>SecurityBase</name>
     <message>
         <source>Security Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres de Sécurité</translation>
     </message>
     <message>
         <source>Change passcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Changer le code</translation>
     </message>
     <message>
         <source>Clear passcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Effacer le code</translation>
     </message>
     <message>
         <source>Require pass code at power-on</source>
-        <translation type="unfinished"></translation>
+        <translation>Demander le code secret au démarrage</translation>
     </message>
     <message>
         <source>Sync</source>
-        <translation type="unfinished"></translation>
+        <translation>Synchronisation</translation>
     </message>
     <message>
         <source>Accept sync from network:</source>
-        <translation type="unfinished"></translation>
+        <translation>Accepter la synchronisation par réseau de :</translation>
     </message>
     <message>
         <source>192.168.0.0/16</source>
-        <translation type="unfinished"></translation>
+        <translation>192.168.0.0/16</translation>
     </message>
     <message>
         <source>172.16.0.0/12</source>
-        <translation type="unfinished"></translation>
+        <translation>172.16.0.0/12</translation>
     </message>
     <message>
         <source>10.0.0.0/8</source>
-        <translation type="unfinished"></translation>
+        <translation>10.0.0.0/8</translation>
     </message>
     <message>
         <source>Any</source>
-        <translation type="unfinished"></translation>
+        <translation>Tous</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun</translation>
     </message>
     <message>
         <source>&lt;P&gt;Pass code protection provides a minimal level of protection from casual access to this device.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Le code secret permet un niveau de protection minimal pour l&apos;accès à votre organiseur.</translation>
     </message>
     <message>
         <source>192.168.129.0/24 (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>192.168.129.0/24 (par défaut)</translation>
     </message>
     <message>
         <source>192.168.1.0/24</source>
-        <translation type="unfinished"></translation>
+        <translation>192.168.1.0/24</translation>
     </message>
 </context>
 </TS>

@@ -15,7 +15,7 @@
     <name>MediumGlobalWidget</name>
     <message>
         <source>Enable medium checking</source>
-        <translation>Authoriser la vérification du support</translation>
+        <translation>Autoriser la vérification du support</translation>
     </message>
     <message>
         <source>Use global settings</source>
@@ -43,11 +43,11 @@
     </message>
     <message>
         <source>Video</source>
-        <translation>Video</translation>
+        <translation>Vidéo</translation>
     </message>
     <message>
         <source>If a medium gets inserted into this device Opie tries to search the medium for Documents. On large mediums this can take some time. You can choose if Opie should scan for Documents globally or on a per medium level. You&apos;re also able to reconfigure each medium.</source>
-        <translation>Si un support est inséré dans le périphérique, Opie tente une recherche de Documents sur ce support. Sur des supports à grande capacité, cela peut prendre un certain temps. Vous pouvez choisir comment Opie parcourt le support à la recherche de Documents, de manière globle ou par type. Vous pouvez aussi reconfigurer chaque support.</translation>
+        <translation>Si un support est inséré dans l&apos;appareil, Opie tente une recherche de Documents sur ce support. Sur des supports à grande capacité, cela peut prendre un certain temps. Vous pouvez choisir comment Opie parcourt le support à la recherche de Documents, de manière globale ou par type. Vous pouvez aussi reconfigurer chaque support.</translation>
     </message>
 </context>
 <context>
@@ -74,7 +74,7 @@
     </message>
     <message>
         <source>Video</source>
-        <translation>Video</translation>
+        <translation>Vidéo</translation>
     </message>
     <message>
         <source>Limit search to:</source>

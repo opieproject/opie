@@ -4,30 +4,30 @@
     <name>CityTime</name>
     <message>
         <source>Time Changing</source>
-        <translation>Changement d&apos;horaire</translation>
+        <translation>Changement d&apos;heure</translation>
     </message>
     <message>
         <source>There was a problem setting timezone %1</source>
-        <translation>Il a eu un problème dans la mise en place de la zone de temps %1</translation>
+        <translation>Il a eu un problème dans la mise en place de la zone horaire %1</translation>
     </message>
     <message>
         <source>Restore Time Zone</source>
-        <translation>Restaurer la zone de temps</translation>
+        <translation>Restaurer la zone horaire</translation>
     </message>
     <message>
         <source>There was a problem setting your timezone.Your time may be wrong now...</source>
-        <translation>Il a eu un problème dans la mise en place de la zone de temps. Votre horloge n&apos;est sans doute pas bonne...</translation>
+        <translation>Il y a eu un problème dans la mise en place de la zone horaire. Votre horloge est sûrement fausse maintenant ...</translation>
     </message>
 </context>
 <context>
     <name>CityTimeBase</name>
     <message>
         <source>City Time</source>
-        <translation>City Time</translation>
+        <translation>Zone Horaire</translation>
     </message>
     <message>
         <source>Click on one of the set cities to replace it</source>
-        <translation>Cliquer sur une des villes définies pour la remplacer</translation>
+        <translation>Cliquez sur une des villes définies pour la remplacer</translation>
     </message>
 </context>
 <context>
@@ -38,11 +38,11 @@
     </message>
     <message>
         <source>Unable to Find Timezone Info</source>
-        <translation>Impossible de trouver les informations des zones de temps</translation>
+        <translation>Impossible de trouver les informations de zone horaire</translation>
     </message>
     <message>
         <source>&lt;p&gt;Unable to find any timezone information in %1</source>
-        <translation>&lt;p&gt;Impossible de trouver les informations de zones de temps dans %1</translation>
+        <translation>&lt;p&gt;Impossible de trouver les informations de zone horaire dans %1</translation>
     </message>
     <message>
         <source>Couldn&apos;t Find Map</source>
@@ -50,7 +50,7 @@
     </message>
     <message>
         <source>&lt;p&gt;Couldn&apos;t load map: %1, exiting</source>
-        <translation>&lt;p&gt;Impossible de charger la carte : %1, sortie de l&apos;application</translation>
+        <translation>&lt;p&gt;Impossible de charger la carte : %1, quitte l&apos;application</translation>
     </message>
     <message>
         <source>Continent</source>
@@ -58,7 +58,7 @@
     </message>
     <message>
         <source>Select a continent/country here, then select a city</source>
-        <translation>Sélectionner un(e) continent/ville ici, puis sélectionner une ville</translation>
+        <translation>Sélectionnez un continent ou pays ici, puis sélectionner une ville</translation>
     </message>
     <message>
         <source>City</source>

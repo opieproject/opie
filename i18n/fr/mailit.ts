@@ -3,141 +3,142 @@
     <name>AddAtt</name>
     <message>
         <source>Attached</source>
-        <translation type="unfinished"></translation>
+        <translation>Joint</translation>
     </message>
     <message>
         <source>File type</source>
-        <translation type="unfinished"></translation>
+        <translation>Type de fichier</translation>
     </message>
     <message>
         <source>Attatch...</source>
-        <translation type="unfinished"></translation>
+        <translation>Joindre ...</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Enlever</translation>
     </message>
 </context>
 <context>
     <name>EditAccount</name>
     <message>
         <source>Edit Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer compte</translation>
     </message>
     <message>
         <source>Create new Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Créer un nouveau compte</translation>
     </message>
     <message>
         <source>Account name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom compte</translation>
     </message>
     <message>
         <source>Your name</source>
-        <translation type="unfinished"></translation>
+        <translation>Votre nom</translation>
     </message>
     <message>
         <source>Email</source>
-        <translation type="unfinished"></translation>
+        <translation>Adresse Mél</translation>
     </message>
     <message>
         <source>POP username</source>
-        <translation type="unfinished"></translation>
+        <translation>Login POP</translation>
     </message>
     <message>
         <source>POP password</source>
-        <translation type="unfinished"></translation>
+        <translation>Passe POP</translation>
     </message>
     <message>
         <source>POP server</source>
-        <translation type="unfinished"></translation>
+        <translation>Serveur POP</translation>
     </message>
     <message>
         <source>SMTP server</source>
-        <translation type="unfinished"></translation>
+        <translation>Serveur SMTP</translation>
     </message>
     <message>
         <source>Synchronize</source>
-        <translation type="unfinished"></translation>
+        <translation>Synchroniser</translation>
     </message>
     <message>
         <source>Mail Size (k)</source>
-        <translation type="unfinished"></translation>
+        <translation>Taille messages (k)</translation>
     </message>
 </context>
 <context>
     <name>EmailClient</name>
     <message>
         <source>Idle</source>
-        <translation type="unfinished"></translation>
+        <translation>Inactif</translation>
     </message>
     <message>
         <source>&amp;Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Messages</translation>
     </message>
     <message>
         <source>Accounts</source>
-        <translation type="unfinished"></translation>
+        <translation>Comptes</translation>
     </message>
     <message>
         <source>Get Mail in</source>
-        <translation type="unfinished"></translation>
+        <translation>Recevoir les messages dans</translation>
     </message>
     <message>
         <source>Edit account</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer un compte</translation>
     </message>
     <message>
         <source>Delete account</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer un compte</translation>
     </message>
     <message>
         <source>Get all mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Recevoir tous les messages</translation>
     </message>
     <message>
         <source>Send mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Envoyer les messages</translation>
     </message>
     <message>
         <source>Compose</source>
-        <translation type="unfinished"></translation>
+        <translation>Composer un message</translation>
     </message>
     <message>
         <source>Cancel transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuler le tansfert</translation>
     </message>
     <message>
         <source>From</source>
-        <translation type="unfinished"></translation>
+        <translation>De</translation>
     </message>
     <message>
         <source>Subject</source>
-        <translation type="unfinished"></translation>
+        <translation>Sujet</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Date</translation>
     </message>
     <message>
         <source>Inbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Boîte de réception</translation>
     </message>
     <message>
         <source>To</source>
-        <translation type="unfinished"></translation>
+        <translation>A</translation>
     </message>
     <message>
         <source>Outbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Messages envoyés</translation>
     </message>
     <message>
         <source>No account selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas de compte sélectionné</translation>
     </message>
     <message>
         <source>You must create an account</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous devez d&apos;abord 
+créer un compte !</translation>
     </message>
 </context>
 <context>
@@ -145,171 +146,173 @@
     <message>
         <source>Could not locate all files in 
 mail with subject: </source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de trouver tous 
+les fichiers du message intitulé :</translation>
     </message>
     <message>
         <source>
 Mail has NOT been sent</source>
-        <translation type="unfinished"></translation>
+        <translation>Le message n&apos;a pas été envoyé</translation>
     </message>
     <message>
         <source>Attachment error</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur de pièce jointe</translation>
     </message>
     <message>
         <source>OK
 </source>
-        <translation type="unfinished"></translation>
+        <translation>OK
+</translation>
     </message>
 </context>
 <context>
     <name>MailItWindow</name>
     <message>
         <source>Write mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Composer un message</translation>
     </message>
     <message>
         <source>Examine mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Lire un message</translation>
     </message>
 </context>
 <context>
     <name>PopClient</name>
     <message>
         <source>Connection established</source>
-        <translation type="unfinished"></translation>
+        <translation>Connection établie</translation>
     </message>
     <message>
         <source>Error Occured</source>
-        <translation type="unfinished"></translation>
+        <translation>Une erreur s&apos;est produite</translation>
     </message>
     <message>
         <source>Retrieving </source>
-        <translation type="unfinished"></translation>
+        <translation>Réception en cours</translation>
     </message>
     <message>
         <source>Previous message </source>
-        <translation type="unfinished"></translation>
+        <translation>Message précédent</translation>
     </message>
     <message>
         <source>Completing message </source>
-        <translation type="unfinished"></translation>
+        <translation>Fin du transfert en cours</translation>
     </message>
     <message>
         <source>No new Messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas de nouveau message</translation>
     </message>
     <message>
         <source> new messages</source>
-        <translation type="unfinished"></translation>
+        <translation>nouveaux messages</translation>
     </message>
     <message>
         <source>No new messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas de nouveaux messages</translation>
     </message>
 </context>
 <context>
     <name>ReadMail</name>
     <message>
         <source>&amp;View</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Voir</translation>
     </message>
     <message>
         <source>&amp;Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Message</translation>
     </message>
     <message>
         <source>Reply</source>
-        <translation type="unfinished"></translation>
+        <translation>Répondre</translation>
     </message>
     <message>
         <source>Previous</source>
-        <translation type="unfinished"></translation>
+        <translation>Précédent</translation>
     </message>
     <message>
         <source>Next</source>
-        <translation type="unfinished"></translation>
+        <translation>Suivant</translation>
     </message>
     <message>
         <source>Attatchments</source>
-        <translation type="unfinished"></translation>
+        <translation>Pièces jointes</translation>
     </message>
     <message>
         <source>Text Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Format de texte</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer</translation>
     </message>
 </context>
 <context>
     <name>SmtpClient</name>
     <message>
         <source>DNS lookup</source>
-        <translation type="unfinished"></translation>
+        <translation>Recherche du DNS</translation>
     </message>
     <message>
         <source>Connection established</source>
-        <translation type="unfinished"></translation>
+        <translation>Connection établie</translation>
     </message>
     <message>
         <source>Sending: </source>
-        <translation type="unfinished"></translation>
+        <translation>Envoyer :</translation>
     </message>
     <message>
         <source>Sent </source>
-        <translation type="unfinished"></translation>
+        <translation>Envoyé(s)</translation>
     </message>
     <message>
         <source> messages</source>
-        <translation type="unfinished"></translation>
+        <translation>messages</translation>
     </message>
 </context>
 <context>
     <name>ViewAtt</name>
     <message>
         <source>Install</source>
-        <translation type="unfinished"></translation>
+        <translation>Installer</translation>
     </message>
 </context>
 <context>
     <name>WriteMail</name>
     <message>
         <source>&amp;Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Message</translation>
     </message>
     <message>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ajouter</translation>
     </message>
     <message>
         <source>Attatchment</source>
-        <translation type="unfinished"></translation>
+        <translation>Pièce jointe</translation>
     </message>
     <message>
         <source>Enque mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Mettre en file d&apos;attente</translation>
     </message>
     <message>
         <source>New mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Nouveau message</translation>
     </message>
     <message>
         <source>To:</source>
-        <translation type="unfinished"></translation>
+        <translation>A :</translation>
     </message>
     <message>
         <source>CC:</source>
-        <translation type="unfinished"></translation>
+        <translation>Cc :</translation>
     </message>
     <message>
         <source>Subject:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sujet :</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
 </context>
 </TS>

@@ -12,15 +12,15 @@
     </message>
     <message>
         <source>Icon:</source>
-        <translation>Icone:</translation>
+        <translation>Icône:</translation>
     </message>
     <message>
         <source>Exec:</source>
-        <translation>Exec:</translation>
+        <translation>Executable:</translation>
     </message>
     <message>
         <source>Comment:</source>
-        <translation>Commantaire:</translation>
+        <translation>Commentaire:</translation>
     </message>
 </context>
 <context>
@@ -32,8 +32,8 @@
     <message>
         <source>Can&apos;t remove with applications
 still in the group.</source>
-        <translation>Impossible d&apos;effacer avec des applications
-encore dans le groupe.</translation>
+        <translation>Impossible d&apos;effacer un groupe
+qui contient encore des applications.</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -61,7 +61,7 @@ encore dans le groupe.</translation>
     </message>
     <message>
         <source>Gathering icons...</source>
-        <translation type="unfinished"></translation>
+        <translation>Rassemble les icônes ...</translation>
     </message>
     <message>
         <source>Application</source>
@@ -72,11 +72,11 @@ encore dans le groupe.</translation>
     <name>TabManagerBase</name>
     <message>
         <source>Tab Manager</source>
-        <translation>Gestion des onglets</translation>
+        <translation>Gestion des Onglets</translation>
     </message>
     <message>
         <source>Hierarchy</source>
-        <translation>Hierarchie</translation>
+        <translation>Hiérarchie</translation>
     </message>
 </context>
 <context>

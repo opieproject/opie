@@ -4,7 +4,7 @@
     <name>ButtonSettings</name>
     <message>
         <source>Button Settings</source>
-        <translation>Définition des bouttons</translation>
+        <translation>Définition des Boutons</translation>
     </message>
     <message>
         <source>&lt;center&gt;Press or hold the button you want to remap.&lt;/center&gt;</source>
@@ -44,19 +44,19 @@
     </message>
     <message>
         <source>&lt;nobr&gt;Ignored&lt;/nobr&gt;</source>
-        <translation>&lt;nobr&gt;Ignoré&lt;/nobr&gt;</translation>
+        <translation>Ignoré</translation>
     </message>
     <message>
         <source>&lt;nobr&gt;Show &lt;b&gt;%1&lt;/b&gt;&lt;/nobr&gt;</source>
-        <translation>&lt;nobr&gt;Montrer&lt;/nobr&gt;</translation>
+        <translation>Montrer</translation>
     </message>
     <message>
         <source>&lt;nobr&gt;Call &lt;b&gt;%1&lt;/b&gt;: &lt;i&gt;%2&lt;/i&gt;&lt;/nobr&gt;</source>
-        <translation>&lt;nobr&gt;Appeler&lt;b&gt;%1&lt;/b&gt;: &lt;i&gt;%2&lt;/i&gt;&lt;/nobr&gt;</translation>
+        <translation>Appeler&lt;b&gt;%1&lt;/b&gt;: &lt;i&gt;%2&lt;/i&gt;</translation>
     </message>
     <message>
         <source>&lt;nobr&gt;Call &lt;b&gt;%1&lt;/b&gt; &lt;i&gt;%2&lt;/i&gt;&lt;/nobr&gt;</source>
-        <translation>&lt;nobr&gt;Appeler&lt;b&gt;%1&lt;/b&gt; &lt;i&gt;%2&lt;/i&gt;&lt;/nobr&gt;</translation>
+        <translation>Appeler&lt;b&gt;%1&lt;/b&gt; &lt;i&gt;%2&lt;/i&gt;</translation>
     </message>
 </context>
 <context>

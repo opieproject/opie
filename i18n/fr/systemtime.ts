@@ -43,7 +43,7 @@
     </message>
     <message>
         <source>Set predicted time: </source>
-        <translation>Définir la prévision de l&apos;heure:</translation>
+        <translation>Prévision de l&apos;heure:</translation>
     </message>
     <message>
         <source>Could not connect to server </source>
@@ -51,7 +51,7 @@
     </message>
     <message>
         <source>Predict</source>
-        <translation>Prév</translation>
+        <translation>Prévoir</translation>
     </message>
     <message>
         <source>NTP</source>
@@ -71,17 +71,16 @@
     </message>
     <message>
         <source>Error while getting time form network!</source>
-        <translation>Erreur lors de l&apos;optention de l&apos;heure par le réseau!</translation>
+        <translation>Erreur lors de l&apos;obtention de l&apos;heure par le réseau !</translation>
     </message>
     <message>
         <source>Error while getting time form
  server</source>
-        <translation>Erreur lors de l&apos;obtention de l&apos;heure
-à partir du serveur</translation>
+        <translation>Lancer NTP ?</translation>
     </message>
     <message>
         <source>You asked for a delay of %1 minutes, but only %2 minutes elapsed since last lookup. &lt;br&gt; Rerun NTP?</source>
-        <translation>Vous avez demandé un délai de %1, mais seulement %2 minute(s) se sont écoulée(s).&lt;br&gt; Relancer NTP?</translation>
+        <translation>Vous avez demandé un délai de %1, mais seulement %2 minute(s) se sont écoulée(s).&lt;br&gt; Relancer NTP ?</translation>
     </message>
 </context>
 <context>
@@ -160,113 +159,113 @@
     </message>
     <message>
         <source>a new NTP lookup will be used to predict the time.</source>
-        <translation type="unfinished"></translation>
+        <translation>un nouvel appel à NTP sera utilisé pour prédire l&apos;heure.</translation>
     </message>
     <message>
         <source>Set time</source>
-        <translation type="unfinished"></translation>
+        <translation>Régler l&apos;heure</translation>
     </message>
     <message>
         <source>Main</source>
-        <translation type="unfinished"></translation>
+        <translation>Principal</translation>
     </message>
     <message>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>Manuel</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres</translation>
     </message>
     <message>
         <source>Predict</source>
-        <translation type="unfinished"></translation>
+        <translation>Prévoir</translation>
     </message>
     <message>
         <source>NTP</source>
-        <translation type="unfinished"></translation>
+        <translation>NTP</translation>
     </message>
     <message>
         <source>Advanced settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres avancés</translation>
     </message>
 </context>
 <context>
     <name>SetDateTime</name>
     <message>
         <source>Time Zone</source>
-        <translation type="unfinished"></translation>
+        <translation>Zone</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Date</translation>
     </message>
     <message>
         <source>Time format</source>
-        <translation type="unfinished"></translation>
+        <translation>Format d&apos;heure</translation>
     </message>
     <message>
         <source>24 hour</source>
-        <translation type="unfinished"></translation>
+        <translation>24H</translation>
     </message>
     <message>
         <source>12 hour</source>
-        <translation type="unfinished"></translation>
+        <translation>12H</translation>
     </message>
     <message>
         <source>Weeks start on</source>
-        <translation type="unfinished"></translation>
+        <translation>Début semaine</translation>
     </message>
     <message>
         <source>Sunday</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimanche</translation>
     </message>
     <message>
         <source>Monday</source>
-        <translation type="unfinished"></translation>
+        <translation>Lundi</translation>
     </message>
     <message>
         <source>Date format</source>
-        <translation type="unfinished"></translation>
+        <translation>Format de date</translation>
     </message>
     <message>
         <source>Applet format</source>
-        <translation type="unfinished"></translation>
+        <translation>Affichage barre</translation>
     </message>
     <message>
         <source>hh:mm</source>
-        <translation type="unfinished"></translation>
+        <translation>hh:mm</translation>
     </message>
     <message>
         <source>D/M hh:mm</source>
-        <translation type="unfinished"></translation>
+        <translation>J/M hh:mm</translation>
     </message>
     <message>
         <source>M/D hh:mm</source>
-        <translation type="unfinished"></translation>
+        <translation>M/J hh:mm</translation>
     </message>
     <message>
         <source>System Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres Horaires</translation>
     </message>
 </context>
 <context>
     <name>SetTime</name>
     <message>
         <source>Hour</source>
-        <translation type="unfinished"></translation>
+        <translation>H.</translation>
     </message>
     <message>
         <source>Minute</source>
-        <translation type="unfinished"></translation>
+        <translation>Min.</translation>
     </message>
     <message>
         <source>AM</source>
-        <translation type="unfinished"></translation>
+        <translation>am</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation type="unfinished"></translation>
+        <translation>pm</translation>
     </message>
 </context>
 </TS>
