@@ -212,15 +212,15 @@ QString OEvent::timeZone()const {
     return data->timezone;
 }
 bool OEvent::match( const QRegExp& re )const {
-    if (data->description.contains( re )  )
+    if ( re.match( data->description ) != -1 )
         return true;
-    if ( data->note.contains( re )  )
+    if ( re.match( data->note ) != -1 )
         return true;
-    if ( data->location.contains( re )  )
+    if ( re.match( data->location ) != -1 )
         return true;
-    if ( data->start.toString().contains( re )  )
+    if ( re.match( data->start.toString() ) != -1 )
         return true;
-    if ( data->end.toString().contains( re )  )
+    if ( re.match( data->end.toString() ) != -1 )
         return true;
     return false;
 }
