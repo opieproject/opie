@@ -17,9 +17,9 @@
 #ifndef SERVER_H
 #define SERVER_H
 
+#include <qlist.h>
 #include <qstring.h>
 
-#include <vector>
 using namespace std;
 
 #include "package.h"
@@ -35,14 +35,14 @@ public:
 
     void cleanUp();
 
-    void readStatusFile( vector<Destination> &v );
+    void readStatusFile( QList<Destination> &v );
     void readLocalIpks( Server *local );
     void readPackageFile( Server *local = 0, bool clearAll = true, bool installedToRoot= false, Destination *dest = 0 );
     void buildLocalPackages( Server *local );
     Package *getPackage( const char *name );
     Package *getPackage( QString &name );
     QString toString();
-    vector<Package> &getPackageList();
+    QList<Package> &getPackageList();
     bool isServerActive() { return active; }
     
     void setServerName( const QString &name ) { serverName = name; }
@@ -60,7 +60,7 @@ private:
   bool active;
 
 
-  vector<Package> packageList;
+  QList<Package> packageList;
 };
 
 #endif

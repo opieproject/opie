@@ -92,7 +92,7 @@ private:
     bool filterByCategory( bool val );
     void downloadSelectedPackages();
     void downloadRemotePackage();
-    InstallData dealWithItem( QCheckListItem *item );
+    InstallData *dealWithItem( QCheckListItem *item );
     
     // Progress widget
     QWidget      *progressWindow;

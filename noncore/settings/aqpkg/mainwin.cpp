@@ -543,24 +543,28 @@ void MainWindow :: updateProgress( int progress )
 
 void MainWindow :: updateData()
 {
-    m_progress->setTotalSteps( mgr->getServerList().size() );
+    m_progress->setTotalSteps( mgr->getServerList().count() );
     
     serversList->clear();
     packagesList->clear();
 
-    vector<Server>::iterator it;
     int activeItem = -1;
-    int i;
+    int i = 0;
     QString serverName;
-    for ( i = 0, it = mgr->getServerList().begin() ; it != mgr->getServerList().end() ; ++it, ++i )
+    
+    QListIterator<Server> it( mgr->getServerList() );
+    Server *server;
+    
+    for ( ; it.current(); ++it, ++i )
     {
-        serverName = it->getServerName();
+        server = it.current();
+        serverName = server->getServerName();
         m_status->setText( tr( "Building server list:\n\t%1" ).arg( serverName ) );
         m_progress->setProgress( i );
         qApp->processEvents();
         
 //        cout << "Adding " << it->getServerName() << " to combobox" << endl;
-        if ( !it->isServerActive() )
+        if ( !server->isServerActive() )
         {
 //            cout << serverName << " is not active" << endl;
             i--;
@@ -592,20 +596,20 @@ void MainWindow :: serverSelected( int, bool raiseProgress )
     QString serverName = serversList->currentText();
     currentlySelectedServer = serverName;
 
-    vector<Server>::iterator s = mgr->getServer( serverName );
+    Server *s = mgr->getServer( serverName );
 
-    vector<Package> &list = s->getPackageList();
-    vector<Package>::iterator it;
+    QList<Package> &list = s->getPackageList();
+    QListIterator<Package> it( list );
     
     // Display progress widget while loading list
-    bool doProgress = ( list.size() > 200 );
+    bool doProgress = ( list.count() > 200 );
     if ( doProgress )
     {
         if ( raiseProgress )
         {
             stack->raiseWidget( progressWindow );
         }
-        m_progress->setTotalSteps( list.size() );
+        m_progress->setTotalSteps( list.count() );
         m_status->setText( tr( "Building package list for:\n\t%1" ).arg( serverName ) );
     }
 
@@ -619,7 +623,8 @@ void MainWindow :: serverSelected( int, bool raiseProgress )
 #endif
 
     int i = 0;
-    for ( it = list.begin() ; it != list.end() ; ++it )
+    Package *package;
+    for ( ; it.current(); ++it )
     {
         // Update progress after every 100th package (arbitrary value, seems to give good balance)
         i++;
@@ -633,43 +638,46 @@ void MainWindow :: serverSelected( int, bool raiseProgress )
         }
         
         QString text = "";
+        
+        package = it.current();
 
         // Apply show only uninstalled packages filter
-        if ( showUninstalledPkgs && it->isInstalled() )
+        if ( showUninstalledPkgs && package->isInstalled() )
             continue;
 
         // Apply show only installed packages filter
-        if ( showInstalledPkgs && !it->isInstalled() )
+        if ( showInstalledPkgs && !package->isInstalled() )
             continue;
 
         // Apply show only new installed packages filter
         if ( showUpgradedPkgs )
         {
-            if ( !it->isInstalled() ||
-                 compareVersions( it->getInstalledVersion(), it->getVersion() ) != 1 )
+            if ( !package->isInstalled() ||
+                 compareVersions( package->getInstalledVersion(), package->getVersion() ) != 1 )
                 continue;
         }
 
         // Apply the section filter
         if ( categoryFilterEnabled && categoryFilter != "" )
         {
-            if ( it->getSection() == "" || categoryFilter.find( it->getSection().lower() ) == -1 )
+            if ( package->getSection() == "" || categoryFilter.find( package->getSection().lower() ) == -1 )
                 continue;
         }
 
         // If the local server, only display installed packages
-        if ( serverName == LOCAL_SERVER && !it->isInstalled() )
+        if ( serverName == LOCAL_SERVER && !package->isInstalled() )
             continue;
 
 
-        QCheckListItem *item = new QCheckListItem( packagesList, it->getPackageName(), QCheckListItem::CheckBox );
+        QCheckListItem *item = new QCheckListItem( packagesList, package->getPackageName(),
+                                                   QCheckListItem::CheckBox );
         
-        if ( it->isInstalled() )
+        if ( package->isInstalled() )
         {
             // If a different version of package is available, show update available icon
             // Otherwise, show installed icon
-            if ( it->getVersion() != it->getInstalledVersion() &&
-                 compareVersions( it->getInstalledVersion(), it->getVersion() ) == 1)
+            if ( package->getVersion() != package->getInstalledVersion() &&
+                 compareVersions( package->getInstalledVersion(), package->getVersion() ) == 1)
             {
 
                 item->setPixmap( 0, updatedIcon );
@@ -680,15 +688,15 @@ void MainWindow :: serverSelected( int, bool raiseProgress )
             }
             
             QString destName = "";
-            if ( it->getLocalPackage() )
+            if ( package->getLocalPackage() )
             {
-                if ( it->getLocalPackage()->getInstalledTo() )
-                    destName = it->getLocalPackage()->getInstalledTo()->getDestinationName();
+                if ( package->getLocalPackage()->getInstalledTo() )
+                    destName = package->getLocalPackage()->getInstalledTo()->getDestinationName();
             }
             else
             {
-                if ( it->getInstalledTo() )
-                    destName = it->getInstalledTo()->getDestinationName();
+                if ( package->getInstalledTo() )
+                    destName = package->getInstalledTo()->getDestinationName();
             }
             if ( destName != "" )
                 new QCheckListItem( item, QString( tr( "Installed To - %1" ).arg( destName ) ) );
@@ -698,26 +706,26 @@ void MainWindow :: serverSelected( int, bool raiseProgress )
             item->setPixmap( 0, nullIcon );
         }
         
-        if ( !it->isPackageStoredLocally() )
+        if ( !package->isPackageStoredLocally() )
         {
-            new QCheckListItem( item, QString( tr( "Description - %1" ).arg( it->getDescription() ) ) );
-            new QCheckListItem( item, QString( tr( "Size - %1" ).arg( it->getPackageSize() ) ) );
-            new QCheckListItem( item, QString( tr( "Section - %1" ).arg( it->getSection() ) ) );
+            new QCheckListItem( item, QString( tr( "Description - %1" ).arg( package->getDescription() ) ) );
+            new QCheckListItem( item, QString( tr( "Size - %1" ).arg( package->getPackageSize() ) ) );
+            new QCheckListItem( item, QString( tr( "Section - %1" ).arg( package->getSection() ) ) );
                     }
         else
-            new QCheckListItem( item, QString( tr( "Filename - %1" ).arg( it->getFilename() ) ) );
+            new QCheckListItem( item, QString( tr( "Filename - %1" ).arg( package->getFilename() ) ) );
         
 		if ( serverName == LOCAL_SERVER )
 		{
-        	new QCheckListItem( item, QString( tr( "V. Installed - %1" ).arg( it->getVersion() ) ) );
+        	new QCheckListItem( item, QString( tr( "V. Installed - %1" ).arg( package->getVersion() ) ) );
 		}
 		else
 		{
-        	new QCheckListItem( item, QString( tr( "V. Available - %1" ).arg( it->getVersion() ) ) );
-        	if ( it->getLocalPackage() )
+        	new QCheckListItem( item, QString( tr( "V. Available - %1" ).arg( package->getVersion() ) ) );
+        	if ( package->getLocalPackage() )
         	{
-				if ( it->isInstalled() )
-	            	new QCheckListItem( item, QString( tr( "V. Installed - %1" ).arg( it->getInstalledVersion() ) ) );
+				if ( package->isInstalled() )
+	            	new QCheckListItem( item, QString( tr( "V. Installed - %1" ).arg( package->getInstalledVersion() ) ) );
 			}
 		}
 
@@ -755,7 +763,7 @@ void MainWindow :: searchForPackage( const QString &text )
     {
 //        cout << "searching for " << text << endl;
         // look through package list for text startng at current position
-        vector<InstallData> workingPackages;
+//        vector<InstallData> workingPackages;
         QCheckListItem *start = (QCheckListItem *)packagesList->currentItem();
 //        if ( start != 0 )
 //            start = (QCheckListItem *)start->nextSibling();
@@ -957,11 +965,12 @@ void MainWindow :: downloadRemotePackage()
     // grab details from dialog
 //    QString package = dlg.getPackageLocation();
 
-    InstallData item;
-    item.option = "I";
-    item.packageName = package;
-    vector<InstallData> workingPackages;
-    workingPackages.push_back( item );
+    InstallData *item = new InstallData();
+    item->option = "I";
+    item->packageName = package;
+    QList<InstallData> workingPackages;
+    workingPackages.setAutoDelete( TRUE );
+    workingPackages.append( item );
 
     InstallDlgImpl *dlg = new InstallDlgImpl( workingPackages, mgr, tr( "Download" ) );
     connect( dlg, SIGNAL( reloadData( InstallDlgImpl * ) ), this, SLOT( reloadData( InstallDlgImpl * ) ) );
@@ -979,19 +988,19 @@ void MainWindow :: applyChanges()
     // Now for each selected item
     // deal with it
 
-    vector<InstallData> workingPackages;
+    QList<InstallData> workingPackages;
+    workingPackages.setAutoDelete( TRUE );
     for ( QCheckListItem *item = (QCheckListItem *)packagesList->firstChild();
           item != 0 ;
           item = (QCheckListItem *)item->nextSibling() )
     {
         if ( item->isOn() )
         {
-            InstallData data = dealWithItem( item );
-            workingPackages.push_back( data );
+            workingPackages.append( dealWithItem( item ) );
 		}
     }
 
-    if ( workingPackages.size() == 0 )
+    if ( workingPackages.count() == 0 )
     {
         // Nothing to do
         QMessageBox::information( this, tr( "Nothing to do" ),
@@ -1011,12 +1020,12 @@ void MainWindow :: applyChanges()
 //    If not installed - install
 //    If installed and different version available - upgrade
 //    If installed and version up to date - remove
-InstallData MainWindow :: dealWithItem( QCheckListItem *item )
+InstallData *MainWindow :: dealWithItem( QCheckListItem *item )
 {
     QString name = item->text();
 
     // Get package
-    vector<Server>::iterator s = mgr->getServer( serversList->currentText() );
+    Server *s = mgr->getServer( serversList->currentText() );
     Package *p = s->getPackage( name );
 
     // If the package has a filename then it is a local file
@@ -1027,29 +1036,29 @@ InstallData MainWindow :: dealWithItem( QCheckListItem *item )
     QString dest = "root";
     if ( !p->isInstalled() )
     {
-        InstallData item;
-        item.option = "I";
-        item.packageName = name;
-        return item;
+        InstallData *newitem = new InstallData();;
+        newitem->option = "I";
+        newitem->packageName = name;
+        return newitem;
     }
     else
     {
-        InstallData item;
-        item.option = "D";
+        InstallData *newitem = new InstallData();;
+        newitem->option = "D";
         if ( !p->isPackageStoredLocally() )
-            item.packageName = p->getInstalledPackageName();
+            newitem->packageName = p->getInstalledPackageName();
         else
-            item.packageName = name;
+            newitem->packageName = name;
         
         if ( p->getInstalledTo() )
         {
-            item.destination = p->getInstalledTo();
+            newitem->destination = p->getInstalledTo();
 //            cout << "dest - " << p->getInstalledTo()->getDestinationName() << endl;
 //            cout << "dest - " << p->getInstalledTo()->getDestinationPath() << endl;
         }
         else
         {
-            item.destination = p->getLocalPackage()->getInstalledTo();
+            newitem->destination = p->getLocalPackage()->getInstalledTo();
         }
 
         // Now see if version is newer or not
@@ -1066,7 +1075,7 @@ InstallData MainWindow :: dealWithItem( QCheckListItem *item )
         else if ( val == -1 )
         {
             // Version available is older - remove only
-            item.option = "D";
+            newitem->option = "D";
         }
         else
         {
@@ -1102,28 +1111,28 @@ InstallData MainWindow :: dealWithItem( QCheckListItem *item )
                 {
                     case 0: // Try again or Enter
                         // option 0 = Remove
-                        item.option = "D";
+                        newitem->option = "D";
                         break;
                     case 1: // Quit or Escape
-                        item.option = secondOption;
+                        newitem->option = secondOption;
                         break;
                 }
             }
             else
             {
-//                item.option = stickyOption;
+//                newitem->option = stickyOption;
             }
         }
 
         
         // Check if we are reinstalling the same version
-        if ( item.option != "R" )
-           item.recreateLinks = true;
+        if ( newitem->option != "R" )
+           newitem->recreateLinks = true;
         else
-           item.recreateLinks = false;
+           newitem->recreateLinks = false;
 
         // User hit cancel (on dlg - assume remove)
-        return item;
+        return newitem;
     }
 }
 

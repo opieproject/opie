@@ -59,17 +59,19 @@ void Server :: cleanUp()
     packageList.clear();
 }
 
-void Server :: readStatusFile(  vector<Destination> &destList )
+void Server :: readStatusFile(  QList<Destination> &destList )
 {
     cleanUp();
 
-    vector<Destination>::iterator dit;
+    Destination *dest;
+    QListIterator<Destination> dit( destList );
     bool rootRead = false;
-    for ( dit = destList.begin() ; dit != destList.end() ; ++dit )
+    for ( ; dit.current(); ++dit )
     {
+        dest = dit.current();
         bool installingToRoot = false;
         
-        QString path = dit->getDestinationPath();
+        QString path = dest->getDestinationPath();
         if ( path.right( 1 ) != "/" )
             path += "/";
             
@@ -80,7 +82,7 @@ void Server :: readStatusFile(  vector<Destination> &destList )
         }   
         
         packageFile = path + "usr/lib/ipkg/status";
-        readPackageFile( 0, false, installingToRoot, &( *dit ) );
+        readPackageFile( 0, false, installingToRoot, &( *dest ) );
     }
 
     // Ensure that the root status file is read
@@ -115,12 +117,12 @@ void Server :: readLocalIpks( Server *local )
         // Changed to display the filename (excluding the path)
         QString packageName = Utils::getFilenameFromIpkFilename( file );
         QString ver = Utils::getPackageVersionFromIpkFilename( file );
-        packageList.push_back( Package( packageName ) );
-        packageList.back().setVersion( ver );
-        packageList.back().setFilename( file );
-        packageList.back().setPackageStoredLocally( true );
-        
-	}
+        Package *package = new Package( packageName );
+        package->setVersion( ver );
+        package->setFilename( file );
+        package->setPackageStoredLocally( true );
+        packageList.append( package );
+    }
 #else
 	QString names[] = { "advancedfm_0.9.1-20020811_arm.ipk", "libopie_0.9.1-20020811_arm.ipk", "libopieobex_0.9.1-20020811.1_arm.ipk", "opie-addressbook_0.9.1-20020811_arm.ipk" };
 	for ( int i = 0 ; i < 4 ; ++i )
@@ -180,10 +182,10 @@ void Server :: readPackageFile( Server *local, bool clearAll, bool installingToR
             currPackage = getPackage( value );
             if ( !currPackage )
             {
-    			packageList.push_back( Package( value ) );
-	    		currPackage = &(packageList.back());
+                Package *package = new Package( value );
+                packageList.append( package );
+                currPackage = package;
                 currPackage->setInstalledTo( dest );
-
                 if ( installingToRoot )
                     currPackage->setInstalledToRoot( true );
             }
@@ -239,32 +241,35 @@ void Server :: readPackageFile( Server *local, bool clearAll, bool installingToR
 
 void Server :: buildLocalPackages( Server *local )
 {
-    for ( unsigned int i = 0 ; i < packageList.size() ; ++i )
+    Package *curr;
+    QListIterator<Package> it( packageList );
+    for ( ; it.current(); ++it )
     {
-		QString name = packageList[i].getPackageName();
+        curr = it.current();
+        QString name = curr->getPackageName();
 
         // If the package name is an ipk name, then convert the filename to a package name
         if ( name.find( ".ipk" ) != -1 )
-            name = Utils::getPackageNameFromIpkFilename( packageList[i].getFilename() );
+            name = Utils::getPackageNameFromIpkFilename( curr->getFilename() );
 
         if ( local )
         {
             Package *p = local->getPackage( name );
-            packageList[i].setLocalPackage( p );
+            curr->setLocalPackage( p );
             if ( p )
             {
                 // Set some default stuff like size and things
-                if ( p->getInstalledVersion() == packageList[i].getVersion() )
+                if ( p->getInstalledVersion() == curr->getVersion() )
                 {
-                    p->setPackageSize( packageList[i].getPackageSize() );
-                    p->setSection( packageList[i].getSection() );
-                    p->setDescription( packageList[i].getDescription() );
+                    p->setPackageSize( curr->getPackageSize() );
+                    p->setSection( curr->getSection() );
+                    p->setDescription( curr->getDescription() );
                 }
             }
             
         }
         else
-            packageList[i].setLocalPackage( 0 );
+            curr->setLocalPackage( 0 );
     }
 
 }
@@ -278,29 +283,31 @@ Package *Server :: getPackage( const char *name )
 {
     Package *ret = 0;
 
-    for ( unsigned int i = 0 ; i < packageList.size() && ret == 0; ++i )
+    QListIterator<Package> it( packageList );
+    for ( ; it.current(); ++it )
     {
-		if ( packageList[i].getPackageName() == name )
-			ret = &packageList[i];
-	}
+		if ( it.current()->getPackageName() == name )
+			ret = it.current();
+    }
 
     return ret;
 }
 
 QString Server :: toString()
 {
-    QString ret = "Server\n   name - " + serverName +
-                       "\n   url - " + serverUrl +
-                       "\n";
-
-    for ( unsigned int i = 0 ; i < packageList.size() ; ++i )
-        ret += "\n   " + packageList[i].toString();
+    QString ret = QString( "Server\n   name - %1\n   url - %2\n" ).arg( serverName ).arg( serverUrl );
+                       
+    QListIterator<Package> it( packageList );
+    for ( ; it.current(); ++it )
+    {
+        ret.append( QString( "\n   %1" ).arg( it.current()->toString() ) );
+    }
 
 
     return ret;
 }
 
-vector<Package> &Server::getPackageList()
+QList<Package> &Server::getPackageList()
 {
     return packageList;
 }

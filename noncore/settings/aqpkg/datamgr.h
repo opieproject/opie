@@ -21,6 +21,7 @@
 #include <map>
 using namespace std;
 
+#include <qlist.h>
 #include <qobject.h>
 #include <qstring.h>
 
@@ -45,12 +46,12 @@ public:
     void setActiveServer( const QString &act )      { activeServer = act; }
     QString &getActiveServer( )      				{ return activeServer; }
 
-    Server *getLocalServer()    					{ return &( *getServer( LOCAL_SERVER ) ); }
-    vector<Server> &getServerList()   				{ return serverList; }
-    vector<Server>::iterator getServer( const char *name );
+    Server *getLocalServer()    					{ return ( getServer( LOCAL_SERVER ) ); }
+    QList<Server> &getServerList()   				{ return serverList; }
+    Server *getServer( const char *name );
 
-    vector<Destination> &getDestinationList()  		{ return destList; }
-    vector<Destination>::iterator getDestination( const char *name );
+    QList<Destination> &getDestinationList()  		{ return destList; }
+    Destination *getDestination( const char *name );
 
     void loadServers();
     void reloadServerData( );
@@ -86,8 +87,8 @@ private:
     bool httpProxyEnabled;
     bool ftpProxyEnabled;
 
-    vector<Server> serverList;
-    vector<Destination> destList;
+    QList<Server> serverList;
+    QList<Destination> destList;
 
 signals:
     void progressSetSteps( int );

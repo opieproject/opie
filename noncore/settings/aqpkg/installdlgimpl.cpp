@@ -41,7 +41,7 @@
 #include "utils.h"
 #include "global.h"
 
-InstallDlgImpl::InstallDlgImpl( vector<InstallData> &packageList, DataManager *dataManager, const char *title )
+InstallDlgImpl::InstallDlgImpl( QList<InstallData> &packageList, DataManager *dataManager, const char *title )
     : QWidget( 0, 0, 0 )
 {
     setCaption( title );
@@ -50,7 +50,6 @@ InstallDlgImpl::InstallDlgImpl( vector<InstallData> &packageList, DataManager *d
     pIpkg = 0;
     upgradePackages = false;
     dataMgr = dataManager;
-    vector<Destination>::iterator dit;
 
     QString defaultDest = "root";
 #ifdef QWS
@@ -74,45 +73,52 @@ InstallDlgImpl::InstallDlgImpl( vector<InstallData> &packageList, DataManager *d
     // setup destination data
     int defIndex = 0;
     int i;
-    for ( i = 0 , dit = dataMgr->getDestinationList().begin() ; dit != dataMgr->getDestinationList().end() ; ++dit, ++i )
+    QListIterator<Destination> dit( dataMgr->getDestinationList() );
+    for ( i = 0; dit.current(); ++dit, ++i )
     {
-        destination->insertItem( dit->getDestinationName() );
-        if ( dit->getDestinationName() == defaultDest )
+        destination->insertItem( dit.current()->getDestinationName() );
+        if ( dit.current()->getDestinationName() == defaultDest )
             defIndex = i;
     }
 
     destination->setCurrentItem( defIndex );
 
-	vector<InstallData>::iterator it;
+	QListIterator<InstallData> it( packageList );
 	// setup package data
 	QString remove = tr( "Remove\n" );
 	QString install = tr( "Install\n" );
 	QString upgrade = tr( "Upgrade\n" );
-	for ( it = packageList.begin() ; it != packageList.end() ; ++it )
+	for ( ; it.current(); ++it )
 	{
-		InstallData item = *it;
-		if ( item.option == "I" )
+		InstallData *item = it.current();
+		InstallData *newitem = new InstallData();
+        
+        newitem->option = item->option;
+        newitem->packageName = item->packageName;
+        newitem->destination = item->destination;
+        newitem->recreateLinks = item->recreateLinks;
+        
+        if ( item->option == "I" )
 		{
-			installList.push_back( item );
-			install.append( QString( "   %1\n" ).arg( item.packageName ) );
+			installList.append( newitem );
+			install.append( QString( "   %1\n" ).arg( item->packageName ) );
 		}
-		else if ( item.option == "D" )
+		else if ( item->option == "D" )
 		{
-			removeList.push_back( item );
-			remove.append( QString( "   %1\n" ).arg( item.packageName ) );
+			removeList.append( newitem );
+			remove.append( QString( "   %1\n" ).arg( item->packageName ) );
 		}
-		else if ( item.option == "U" || item.option == "R" )
+		else if ( item->option == "U" || item->option == "R" )
 		{
-            updateList.push_back( item );
+            updateList.append( newitem );
             QString type;
-            if ( item.option == "R" )
+            if ( item->option == "R" )
                 type = tr( "(ReInstall)" );
             else
                 type = tr( "(Upgrade)" );
-            upgrade.append( QString( "   %1 %2\n" ).arg( item.packageName ).arg( type ) );
+            upgrade.append( QString( "   %1 %2\n" ).arg( item->packageName ).arg( type ) );
         }
     }
-
     output->setText( QString( "%1\n%2\n%3\n" ).arg( remove ).arg( install ).arg( upgrade ) );
 
     displayAvailableSpace( destination->currentText() );
@@ -213,7 +219,7 @@ void InstallDlgImpl :: installSelected()
         emit reloadData( this );
         return;
     }
-
+    
     // Disable buttons
     btnOptions->setEnabled( false );
 //    btnInstall->setEnabled( false );
@@ -229,7 +235,7 @@ void InstallDlgImpl :: installSelected()
     else
     {
         output->setText( "" );
-        vector<Destination>::iterator d = dataMgr->getDestination( destination->currentText() );
+        Destination *d = dataMgr->getDestination( destination->currentText() );
         QString dest = d->getDestinationName();
         QString destDir = d->getDestinationPath();
         int instFlags = flags;
@@ -247,16 +253,18 @@ void InstallDlgImpl :: installSelected()
         connect( pIpkg, SIGNAL(outputText(const QString &)), this, SLOT(displayText(const QString &)));
 
         // First run through the remove list, then the install list then the upgrade list
-        vector<InstallData>::iterator it;
         pIpkg->setOption( "remove" );
-        for ( it = removeList.begin() ; it != removeList.end() ; ++it )
+        QListIterator<InstallData> it( removeList );
+        InstallData *idata;
+        for ( ; it.current(); ++it )
         {
-            pIpkg->setDestination( it->destination->getDestinationName() );
-            pIpkg->setDestinationDir( it->destination->getDestinationPath() );
-            pIpkg->setPackage( it->packageName );
+            idata = it.current();
+            pIpkg->setDestination( idata->destination->getDestinationName() );
+            pIpkg->setDestinationDir( idata->destination->getDestinationPath() );
+            pIpkg->setPackage( idata->packageName );
 
             int tmpFlags = flags;
-            if ( it->destination->linkToRoot() )
+            if ( idata->destination->linkToRoot() )
                 tmpFlags |= MAKE_LINKS;
             
             pIpkg->setFlags( tmpFlags );
@@ -267,25 +275,28 @@ void InstallDlgImpl :: installSelected()
         pIpkg->setDestination( dest );
         pIpkg->setDestinationDir( destDir );
         pIpkg->setFlags( instFlags );
-        for ( it = installList.begin() ; it != installList.end() ; ++it )
+        QListIterator<InstallData> it2( installList );
+        for ( ; it2.current(); ++it2 )
         {
-            pIpkg->setPackage( it->packageName );
+            pIpkg->setPackage( it2.current()->packageName );
             pIpkg->runIpkg();
         }
 
         flags |= FORCE_REINSTALL;
-        for ( it = updateList.begin() ; it != updateList.end() ; ++it )
+        QListIterator<InstallData> it3( updateList );
+        for ( ; it3.current() ; ++it3 )
         {
-            if ( it->option == "R" )
+            idata = it3.current();
+            if ( idata->option == "R" )
                 pIpkg->setOption( "reinstall" );
             else
                 pIpkg->setOption( "upgrade" );
-            pIpkg->setDestination( it->destination->getDestinationName() );
-            pIpkg->setDestinationDir( it->destination->getDestinationPath() );
-            pIpkg->setPackage( it->packageName );
+            pIpkg->setDestination( idata->destination->getDestinationName() );
+            pIpkg->setDestinationDir( idata->destination->getDestinationPath() );
+            pIpkg->setPackage( idata->packageName );
 
             int tmpFlags = flags;
-            if ( it->destination->linkToRoot() && it->recreateLinks )
+            if ( idata->destination->linkToRoot() && idata->recreateLinks )
                 tmpFlags |= MAKE_LINKS;
             pIpkg->setFlags( tmpFlags );
             pIpkg->runIpkg();
@@ -307,7 +318,6 @@ void InstallDlgImpl :: installSelected()
 
 void InstallDlgImpl :: displayText(const QString &text )
 {
-    //output->setText( QString( "%1\n%2" ).arg( output->text() ).arg( text ) );
     QString newtext = QString( "%1\n%2" ).arg( output->text() ).arg( text );
     output->setText( newtext );
     output->setCursorPosition( output->numLines(), 0 );
@@ -316,7 +326,7 @@ void InstallDlgImpl :: displayText(const QString &text )
 
 void InstallDlgImpl :: displayAvailableSpace( const QString &text )
 {
-    vector<Destination>::iterator d = dataMgr->getDestination( text );
+    Destination *d = dataMgr->getDestination( text );
     QString destDir = d->getDestinationPath();
 
     long blockSize = 0;

@@ -254,20 +254,22 @@ QWidget *SettingsImpl :: initProxyTab()
 void SettingsImpl :: setupData()
 {
     // add servers
-    vector<Server>::iterator it;
-    for ( it = dataMgr->getServerList().begin() ; it != dataMgr->getServerList().end() ; ++it )
+    QString serverName;
+    QListIterator<Server> it( dataMgr->getServerList() );
+    for ( ; it.current(); ++it )
 	{
-        if ( it->getServerName() == LOCAL_SERVER || it->getServerName() == LOCAL_IPKGS )
+        serverName = it.current()->getServerName();
+        if ( serverName == LOCAL_SERVER || serverName == LOCAL_IPKGS )
             continue;
 
-        servers->insertItem( it->getServerName() );
+        servers->insertItem( serverName );
 	}
 
 
     // add destinations
-    vector<Destination>::iterator it2;
-    for ( it2 = dataMgr->getDestinationList().begin() ; it2 != dataMgr->getDestinationList().end() ; ++it2 )
-        destinations->insertItem( it2->getDestinationName() );
+    QListIterator<Destination> it2( dataMgr->getDestinationList() );
+    for ( ; it2.current(); ++it2 )
+        destinations->insertItem( it2.current()->getDestinationName() );
     
     // setup proxy tab
     txtHttpProxy->setText( dataMgr->getHttpProxy() );
@@ -283,7 +285,7 @@ void SettingsImpl :: setupData()
 void SettingsImpl :: editServer( int sel )
 {
     currentSelectedServer = sel;
-    vector<Server>::iterator s = dataMgr->getServer( servers->currentText() );
+    Server *s = dataMgr->getServer( servers->currentText() );
     serverName = s->getServerName();
     servername->setText( s->getServerName() );
     serverurl->setText( s->getServerUrl() );
@@ -302,8 +304,8 @@ void SettingsImpl :: newServer()
 void SettingsImpl :: removeServer()
 {
     changed = true;
-    vector<Server>::iterator s = dataMgr->getServer( servers->currentText() );
-    dataMgr->getServerList().erase( s );
+    Server *s = dataMgr->getServer( servers->currentText() );
+    dataMgr->getServerList().removeRef( s );
     servers->removeItem( currentSelectedServer );
 }
 
@@ -314,7 +316,7 @@ void SettingsImpl :: changeServerDetails()
 	QString newName = servername->text();
 	if ( !newserver )
 	{
-		vector<Server>::iterator s = dataMgr->getServer( servers->currentText() );
+		Server *s = dataMgr->getServer( servers->currentText() );
 
 		// Update url
 		s->setServerUrl( serverurl->text() );
@@ -338,8 +340,8 @@ void SettingsImpl :: changeServerDetails()
 	else
 	{
         Server s( newName, serverurl->text() );
-        dataMgr->getServerList().push_back( Server( newName, serverurl->text() ) );
-        dataMgr->getServerList().end()->setActive( active->isChecked() );
+        dataMgr->getServerList().append( new Server( newName, serverurl->text() ) );
+        dataMgr->getServerList().last()->setActive( active->isChecked() );
 		servers->insertItem( newName );
 		servers->setCurrentItem( servers->count() );
 		newserver = false;
@@ -351,7 +353,7 @@ void SettingsImpl :: changeServerDetails()
 void SettingsImpl :: editDestination( int sel )
 {
 	currentSelectedDestination = sel;
-    vector<Destination>::iterator d = dataMgr->getDestination( destinations->currentText() );
+    Destination *d = dataMgr->getDestination( destinations->currentText() );
     destinationName = d->getDestinationName();
     destinationname->setText( d->getDestinationName() );
     destinationurl->setText( d->getDestinationPath() );
@@ -370,8 +372,8 @@ void SettingsImpl :: newDestination()
 void SettingsImpl :: removeDestination()
 {
     changed = true;
-    vector<Destination>::iterator d = dataMgr->getDestination( destinations->currentText() );
-    dataMgr->getDestinationList().erase( d );
+    Destination *d = dataMgr->getDestination( destinations->currentText() );
+    dataMgr->getDestinationList().removeRef( d );
 	destinations->removeItem( currentSelectedDestination );
 }
 
@@ -387,7 +389,7 @@ void SettingsImpl :: changeDestinationDetails()
     QString newName = destinationname->text();
 	if ( !newdestination )
 	{
-		vector<Destination>::iterator d = dataMgr->getDestination( destinations->currentText() );
+		Destination *d = dataMgr->getDestination( destinations->currentText() );
 
 		// Update url
 		d->setDestinationPath( destinationurl->text() );
@@ -411,7 +413,7 @@ void SettingsImpl :: changeDestinationDetails()
 	}
 	else
 	{
-		dataMgr->getDestinationList().push_back( Destination( newName, destinationurl->text() ) );
+		dataMgr->getDestinationList().append( new Destination( newName, destinationurl->text() ) );
 		destinations->insertItem( newName );
 		destinations->setCurrentItem( destinations->count() );
 		newdestination = false;

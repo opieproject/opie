@@ -37,46 +37,43 @@ DataManager::DataManager()
 {
     activeServer = "";
     availableCategories = "#";
+    
+    serverList.setAutoDelete( TRUE );
+    destList.setAutoDelete( TRUE );
 }
 
 DataManager::~DataManager()
 {
 }
 
-vector<Server>::iterator DataManager :: getServer( const char *name )
+Server *DataManager :: getServer( const char *name )
 {
-    vector<Server>::iterator it = serverList.begin();
-    while ( it != serverList.end() )
+    QListIterator<Server> it( serverList );
+    while ( it.current() && it.current()->getServerName() != name )
     {
-		if ( it->getServerName() == name )
-			return it;
-
 		++it;
 	}
 
-	return serverList.end();
+	return it.current();
 }
 
-vector<Destination>::iterator DataManager :: getDestination( const char *name )
+Destination *DataManager :: getDestination( const char *name )
 {
-	vector<Destination>::iterator it = destList.begin();
-    while ( it != destList.end() )
+    QListIterator<Destination> it( destList );
+    while ( it.current() && it.current()->getDestinationName() != name )
     {
-		if ( it->getDestinationName() == name )
-			return it;
-
 		++it;
 	}
 
-	return destList.end();
+	return it.current();
 }
 
 void DataManager :: loadServers()
 {
     // First add our local server - not really a server but
     // the local config (which packages are installed)
-    serverList.push_back( Server( LOCAL_SERVER, "" ) );
-    serverList.push_back( Server( LOCAL_IPKGS, "" ) );
+    serverList.append( new Server( LOCAL_SERVER, "" ) );
+    serverList.append( new Server( LOCAL_IPKGS, "" ) );
 
 #ifdef QWS
     Config cfg( "aqpkg" );
@@ -109,13 +106,13 @@ void DataManager :: loadServers()
                 // is next.
                 // Should Handle #src, # src, src, and combinations of
                 sscanf( lineStr, "%*[^r]%*[^ ] %s %s", alias, url );
-                Server s( alias, url );
+                Server *s = new Server( alias, url );
                 if ( lineStr.startsWith( "src" ) )
-                    s.setActive( true );
+                    s->setActive( true );
                 else
-                    s.setActive( false );
+                    s->setActive( false );
 
-                serverList.push_back( s );
+                serverList.append( s );
 
             }
             else if ( lineStr.startsWith( "dest" ) )
@@ -123,16 +120,16 @@ void DataManager :: loadServers()
                 char alias[20];
                 char path[50];
                 sscanf( lineStr, "%*[^ ] %s %s", alias, path );
-                Destination d( alias, path );
+                Destination *d = new Destination( alias, path );
                 bool linkToRoot = true;
 #ifdef QWS
                 QString key = alias;
                 key += "_linkToRoot";
                 linkToRoot = cfg.readBoolEntry( key, true );
 #endif
-                d.linkToRoot( linkToRoot );
+                d->linkToRoot( linkToRoot );
                 
-                destList.push_back( d );
+                destList.append( d );
             }
             else if ( lineStr.startsWith( "option" ) || lineStr.startsWith( "#option" ) )
             {
@@ -169,15 +166,18 @@ void DataManager :: loadServers()
 
 void DataManager :: reloadServerData( )
 {
-    emit progressSetSteps( serverList.size() );
+    emit progressSetSteps( serverList.count() );
     emit progressSetMessage( tr( "Reading configuration..." ) );
 
-    vector<Server>::iterator it = serverList.begin();
     QString serverName;
     int i = 0;
-    for ( it = serverList.begin() ; it != serverList.end() ; ++it )
+    
+    Server *server;
+    QListIterator<Server> it( serverList );
+    for ( ; it.current(); ++it )
     {
-        serverName = it->getServerName();
+        server = it.current();
+        serverName = server->getServerName();
         i++;
         emit progressUpdate( i );
         qApp->processEvents();
@@ -188,11 +188,11 @@ void DataManager :: reloadServerData( )
     	// we've set up
     	// The other servers files hold the contents of the server package list
     	if ( serverName == LOCAL_SERVER )
-        	it->readStatusFile( destList );
+        	server->readStatusFile( destList );
     	else if ( serverName == LOCAL_IPKGS )
-            it->readLocalIpks( &( *getServer( LOCAL_SERVER ) ) );
+            server->readLocalIpks( getServer( LOCAL_SERVER ) );
     	else
-            it->readPackageFile( &( *getServer( LOCAL_SERVER ) ) );     
+            server->readPackageFile( getServer( LOCAL_SERVER ) );     
 	}
 }
 
@@ -217,31 +217,33 @@ void DataManager :: writeOutIpkgConf()
     out << "# that exists on the target system." << endl << endl;
     
     // Write out servers
-    vector<Server>::iterator it = serverList.begin();
-    while ( it != serverList.end() )
+    Server *server;
+    QListIterator<Server> it( serverList );
+    while ( it.current() )
     {
-        QString alias = it->getServerName();
+        server = it.current();
+        QString alias = server->getServerName();
         // Don't write out local as its a dummy
         if ( alias != LOCAL_SERVER && alias != LOCAL_IPKGS )
         {
-            QString url = it->getServerUrl();;
+            QString url = server->getServerUrl();;
 
-            if ( !it->isServerActive() )
+            if ( !server->isServerActive() )
                 out << "#";
             out << "src " << alias << " " << url << endl;
         }
 
-        it++;
+        ++it;
     }
 
     out << endl;
 
     // Write out destinations
-    vector<Destination>::iterator it2 = destList.begin();
-    while ( it2 != destList.end() )
+    QListIterator<Destination> it2( destList );
+    while ( it2.current() )
     {
-        out << "dest " << it2->getDestinationName() << " " << it2->getDestinationPath() << endl;
-        it2++;
+        out << "dest " << it2.current()->getDestinationName() << " " << it2.current()->getDestinationPath() << endl;
+        ++it2;
     }
 
     out << endl;

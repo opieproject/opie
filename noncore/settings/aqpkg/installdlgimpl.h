@@ -17,11 +17,11 @@
 #ifndef INSTALLDLGIMPL_H
 #define INSTALLDLGIMPL_H
 
-#include <vector>
 using namespace std;
 
-#include <qwidget.h>
+#include <qlist.h>
 #include <qstring.h>
+#include <qwidget.h>
 
 class QComboBox;
 class QLabel;
@@ -45,7 +45,7 @@ class InstallDlgImpl : public QWidget
 {
     Q_OBJECT
 public:
-    InstallDlgImpl( vector<InstallData> &packageList, DataManager *dataManager, const char *title = 0 );
+    InstallDlgImpl( QList<InstallData> &packageList, DataManager *dataManager, const char *title = 0 );
     InstallDlgImpl( Ipkg *ipkg, QString initialText, const char *title = 0 );
     ~InstallDlgImpl();
 
@@ -55,9 +55,9 @@ protected:
 
 private:
     DataManager *dataMgr;
-	vector<InstallData> installList;
-	vector<InstallData> removeList;
-	vector<InstallData> updateList;
+	QList<InstallData> installList;
+	QList<InstallData> removeList;
+	QList<InstallData> updateList;
     int flags;
     Ipkg *pIpkg;
     bool upgradePackages;
