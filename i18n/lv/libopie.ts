@@ -3,43 +3,43 @@
     <name>Button</name>
     <message>
         <source>Calendar Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Kalendāra Poga</translation>
     </message>
     <message>
         <source>Contacts Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Adresu Poga</translation>
     </message>
     <message>
         <source>Menu Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Izvēlnes Poga</translation>
     </message>
     <message>
         <source>Mail Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasta Poga</translation>
     </message>
     <message>
         <source>Home Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Mājas Poga</translation>
     </message>
     <message>
         <source>Record Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Ieraksta Poga</translation>
     </message>
     <message>
         <source>Display Rotate</source>
-        <translation type="unfinished"></translation>
+        <translation>Attēla Poga</translation>
     </message>
     <message>
         <source>Lower+Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Zemākā+Uz Augšu</translation>
     </message>
     <message>
         <source>Lower+Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Zemākā+Uz Leju</translation>
     </message>
     <message>
         <source>Lower+Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Zemākā+Pa Labi</translation>
     </message>
     <message>
         <source>Lower+Left</source>
