@@ -5,4 +5,5 @@ Maintainer: Project Opie <opie@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION.3
 Depends: opie-base
+Replaces: opie-rotation
 Description: Launcher for Opie
