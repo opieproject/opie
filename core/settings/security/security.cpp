@@ -34,7 +34,7 @@
 #include <qtextstream.h>
 
     Security::Security( QWidget* parent,  const char* name, WFlags fl )
-: SecurityBase( parent, name, TRUE, fl )
+: SecurityBase( parent, name, TRUE, WStyle_ContextHelp )
 {
     valid=FALSE;
     Config cfg("Security");
@@ -44,14 +44,14 @@
     cfg.setGroup("Sync");
     int auth_peer = cfg.readNumEntry("auth_peer",0xc0a88100);//new default 192.168.129.0/24
     int auth_peer_bits = cfg.readNumEntry("auth_peer_bits",24);
-    selectNet(auth_peer,auth_peer_bits);
+    selectNet(auth_peer,auth_peer_bits,TRUE);
+  
     connect(syncnet, SIGNAL(textChanged(const QString&)),
             this, SLOT(setSyncNet(const QString&)));
 
     cfg.setGroup("Sync");
     QString sa = cfg.readEntry("syncapp","Qtopia");
 
-    //There must be a better way to do that...
     for (int i=0; i<syncapp->count(); i++) {
         if ( syncapp->text(i) == sa ) {
            syncapp->setCurrentItem(i);       	    
@@ -86,12 +86,18 @@
     cfg.setGroup("SyncMode");
     int mode = cfg.readNumEntry("Mode",2); // Default to Sharp
     syncModeCombo->setCurrentItem( mode - 1 );
+    
+    //since nobody knows what this is and it doesn't do anything, i'll hide it # CoreDump
+    // is this work-in-progress or can it be removed?
+    syncModeCombo->hide();
 
     connect(autologinToggle, SIGNAL(toggled(bool)), this, SLOT(toggleAutoLogin(bool)));
     connect(userlist, SIGNAL(activated(int)), this, SLOT(changeLoginName(int)));
     connect(changepasscode,SIGNAL(clicked()), this, SLOT(changePassCode()));
     connect(clearpasscode,SIGNAL(clicked()), this, SLOT(clearPassCode()));
     connect(syncapp,SIGNAL(activated(int)), this, SLOT(changeSyncApp()));
+    connect(restoredefaults,SIGNAL(clicked()), this, SLOT(restoreDefaults()));    
+    connect(deleteentry,SIGNAL(clicked()), this, SLOT(deleteListEntry()));
     
     loadUsers();
     updateGUI();
@@ -104,6 +110,40 @@ Security::~Security()
 {
 }
 
+void Security::deleteListEntry() 
+{
+    syncnet->removeItem(syncnet->currentItem());
+}
+
+void Security::restoreDefaults()
+{		
+    QMessageBox unrecbox(
+    tr("Attention"),
+    tr(	"<p>All user-defined net ranges will be lost."),
+    QMessageBox::Warning,
+    QMessageBox::Cancel, QMessageBox::Yes, QMessageBox::NoButton,
+    0, QString::null, TRUE, WStyle_StaysOnTop);
+    unrecbox.setButtonText(QMessageBox::Cancel, tr("Cancel"));
+    unrecbox.setButtonText(QMessageBox::Yes, tr("Ok"));
+
+    if ( unrecbox.exec() == QMessageBox::Yes)	
+    {
+        syncnet->clear();
+        insertDefaultRanges();
+    }	
+}
+
+void Security::insertDefaultRanges()
+{    
+    syncnet->insertItem( tr( "192.168.129.0/24" ) );
+    syncnet->insertItem( tr( "192.168.1.0/24" ) );
+    syncnet->insertItem( tr( "192.168.0.0/16" ) );
+    syncnet->insertItem( tr( "172.16.0.0/12" ) );
+    syncnet->insertItem( tr( "10.0.0.0/8" ) );
+    syncnet->insertItem( tr( "1.0.0.0/8" ) );
+    syncnet->insertItem( tr( "Any" ) );
+    syncnet->insertItem( tr( "None" ) );
+}
 
 void Security::updateGUI()
 {
@@ -158,7 +198,7 @@ void Security::done(int r)
     close();
 }
 
-void Security::selectNet(int auth_peer,int auth_peer_bits)
+void Security::selectNet(int auth_peer,int auth_peer_bits, bool update)
 {
     QString sn;
     if ( auth_peer_bits == 0 && auth_peer == 0 ) {
@@ -173,6 +213,44 @@ void Security::selectNet(int auth_peer,int auth_peer_bits)
             + QString::number((auth_peer>>0)&0xff) + "/"
             + QString::number(auth_peer_bits);
     }
+
+    //insert user-defined list of netranges upon start
+    if (update) {
+	//User selected/active netrange first
+	syncnet->insertItem( tr( sn ) );
+
+	Config cfg("Security");
+	cfg.setGroup("Sync");
+
+	//set up defaults if needed, if someone manually deletes net0 he'll get a suprise hehe
+	QString test = cfg.readEntry("net0","");
+	if (test.isEmpty()) {
+            insertDefaultRanges();
+	} else {
+            // 10 ought to be enough for everybody... :)
+            // If you need more, don't forget to edit applySecurity() as well
+            bool already_there=FALSE;
+            for (int i=0; i<10; i++) {
+                QString target, netrange;
+                target.sprintf("net%d", i);
+                netrange = cfg.readEntry(target,"");
+                if (! netrange.isEmpty()){
+                    //make sure we have no "twin" entries
+                    for (int i=0; i<syncnet->count(); i++) {
+                        if ( syncnet->text(i) == netrange ) {
+                            already_there=TRUE;      	    
+                        }
+                    }
+                    if (! already_there) {
+                        syncnet->insertItem( tr( netrange ) );
+                    } else {
+                        already_there=FALSE;
+                    }		
+                }	
+            }
+        }	
+    } 
+     
     for (int i=0; i<syncnet->count(); i++) {
         if ( syncnet->text(i).left(sn.length()) == sn ) {
             syncnet->setCurrentItem(i);
@@ -242,7 +320,7 @@ void Security::setSyncNet(const QString& sn)
 {
     int auth_peer,auth_peer_bits;
     parseNet(sn,auth_peer,auth_peer_bits);
-    selectNet(auth_peer,auth_peer_bits);
+    selectNet(auth_peer,auth_peer_bits,FALSE);
 }
 
 void Security::applySecurity()
@@ -257,8 +335,18 @@ void Security::applySecurity()
         int auth_peer_bits;
         QString sn = syncnet->currentText();
         parseNet(sn,auth_peer,auth_peer_bits);
+       
+        //this is the *selected* (active) net range
         cfg.writeEntry("auth_peer",auth_peer);
-        cfg.writeEntry("auth_peer_bits",auth_peer_bits);	
+        cfg.writeEntry("auth_peer_bits",auth_peer_bits);
+	
+	//write back all other net ranges in *cleartext*
+	for (int i=0; i<10; i++) {
+		QString target;
+		target.sprintf("net%d", i);
+        	cfg.writeEntry(target,syncnet->text(i));
+	}
+		
         cfg.writeEntry("syncapp",syncapp->currentText());
 	
         /*
