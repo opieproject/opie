@@ -24,9 +24,9 @@
 #include <qcopchannel_qws.h>
 #include <qpainter.h>
 #include <qmessagebox.h>
-#include <qpopupmenu.h>
 #include <qfile.h>
 #include <qtextstream.h>
+#include <qtimer.h>
 
 #include <stdio.h>
 #include <unistd.h>
@@ -54,9 +54,37 @@ CardMonitor::CardMonitor( QWidget *parent ) : QWidget( parent ),
     getStatusPcmcia(TRUE);
     getStatusSd(TRUE);
     repaint(FALSE);
+    popUpMenu = 0;
+    popUpMenuTimer = 0;
 }
 
 CardMonitor::~CardMonitor() {
+}
+
+void CardMonitor::popUp(QString message) {
+    if ( ! popUpMenu ) {
+	popUpMenu = new QPopupMenu();
+    }
+    popUpMenu->clear();
+    popUpMenu->insertItem( message, 0 );
+
+    QPoint p = mapToGlobal ( QPoint ( 0, 0 ));
+    QSize s = popUpMenu->sizeHint ( );
+    popUpMenu->popup( QPoint (
+	p. x ( ) + ( width ( ) / 2 ) - ( s. width ( ) / 2 ),
+	p. y ( ) - s. height ( ) ), 0);
+
+    if ( ! popUpMenuTimer ) {
+	popUpMenuTimer = new QTimer( this );
+        connect( popUpMenuTimer, SIGNAL(timeout()), this, SLOT(popUpTimeout()) );
+    }
+    timerEvent(0);
+    popUpMenuTimer->start( 2000 );
+}
+
+void CardMonitor::popUpTimeout() {
+    popUpMenu->hide();
+    popUpMenuTimer->stop();
 }
 
 void CardMonitor::mousePressEvent( QMouseEvent * ) {
@@ -88,24 +116,21 @@ void CardMonitor::mousePressEvent( QMouseEvent * ) {
 	err = system( (const char *) cmd );
 	if ( ( err == 127 ) || ( err < 0 ) ) {
 	    qDebug("Could not execute `/sbin/cardctl eject 0'! err=%d", err);
-	    QMessageBox::warning( this, tr("CardMonitor"), tr("CF/PCMCIA card eject failed!"),
-	    			  tr("&OK") );
+	    popUp( tr("CF/PCMCIA card eject failed!"));
 	} 
     } else if ( opt == 0 ) {
         cmd = "/etc/sdcontrol compeject";
         err = system( (const char *) cmd );
         if ( ( err != 0 ) ) {
             qDebug("Could not execute `/etc/sdcontrol comeject'! err=%d", err);
-            QMessageBox::warning( this, tr("CardMonitor"), tr("SD/MMC card eject failed!"),
-                                  tr("&OK") );
+            popUp( tr("SD/MMC card eject failed!"));
 	} 
     } else if ( opt == 2 ) {
         cmd = "/sbin/cardctl eject 1";
         err = system( (const char *) cmd );
 	if ( ( err == 127 ) || ( err < 0 ) ) {
 	    qDebug("Could not execute `/sbin/cardctl eject 1'! err=%d", err);
-	    QMessageBox::warning( this, tr("CardMonitor"), tr("CF/PCMCIA card eject failed!"),
-	    			  tr("&OK") );
+	    popUp( tr("CF/PCMCIA card eject failed!"));
 	} 
     }
 
@@ -201,8 +226,7 @@ bool CardMonitor::getStatusPcmcia( int showPopUp = FALSE ) {
 	    else { text += tr("Ejected: "); }
 	    text += cardInPcmcia1Name;
 	}
-	QMessageBox::warning( this, tr("CardMonitor"), text,
-	    			  tr("&OK") );
+	popUp( text );
     }
 
     f.close();
@@ -233,8 +257,7 @@ bool CardMonitor::getStatusSd( int showPopUp = FALSE ) {
 	QString text = "";
 	if(cardInSd) { text += "SD Inserted"; }
 	else { text += "SD Removed"; }
-	QMessageBox::warning( this, tr("CardMonitor"), text,
-	    			  tr("&OK") );
+	popUp( text );
     }
 
 #else
