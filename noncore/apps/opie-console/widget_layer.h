@@ -34,6 +34,7 @@
 
 
 
+unsigned short vt100_graphics[32];
 
 class WidgetLayer : public QFrame
 { Q_OBJECT
