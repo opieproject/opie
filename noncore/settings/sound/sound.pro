@@ -4,7 +4,7 @@ SOURCES   = soundsettings.cpp soundsettingsbase.cpp main.cpp
 #INTERFACES = soundsettingsbase.ui
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
-LIBS            += -lqpe
+LIBS            += -lqpe -lopiecore2
 TARGET    = sound
 
 include ( $(OPIEDIR)/include.pro )

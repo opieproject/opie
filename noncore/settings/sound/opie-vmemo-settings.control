@@ -6,7 +6,7 @@ Maintainer: L.J. Potter <lpotter@trolltech.com>
 Architecture: arm
 Arch: iPAQ
 Conflicts: opie-sound
-Depends: task-opie-minimal
+Depends: task-opie-minimal, liopiecore2
 Description: Sound settings dialog
  For the Opie environment.
 Version: $QPE_VERSION$EXTRAVERSION
