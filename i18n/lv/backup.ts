@@ -3,114 +3,115 @@
     <name>BackupAndRestore</name>
     <message>
         <source>Backup and Restore... working...</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopēšana un Atjaunošana... strādāju...</translation>
     </message>
     <message>
         <source>Error from System:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Sistēmas kļūda:
+</translation>
     </message>
     <message>
         <source>Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Ziņa</translation>
     </message>
     <message>
         <source>Backup Failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopēšana Neizdevās!</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Labi</translation>
     </message>
     <message>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Detaļas</translation>
     </message>
     <message>
         <source>Backup and Restore.. Failed !!</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopēšana un Atjaunošana.. Neizdevās !!</translation>
     </message>
     <message>
         <source>Backup and Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopēšana un Atjaunošana</translation>
     </message>
     <message>
         <source>Please select something to restore.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lūdzu norādiet kaut ko atjaunošanai.</translation>
     </message>
     <message>
         <source>Restore Failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Atjaunošana Neizdevās.</translation>
     </message>
     <message>
         <source>Unable to open File: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevaru atvērt failu: %1</translation>
     </message>
     <message>
         <source>Backup Successful.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopēšana Pabeigta.</translation>
     </message>
     <message>
         <source>Restore Successful.</source>
-        <translation type="unfinished"></translation>
+        <translation>Atjaunošana Pabeigta.</translation>
     </message>
 </context>
 <context>
     <name>BackupAndRestoreBase</name>
     <message>
         <source>Backup And Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopēšana un Atjaunošana</translation>
     </message>
     <message>
         <source>Backup</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopēšana</translation>
     </message>
     <message>
         <source>Save To</source>
-        <translation type="unfinished"></translation>
+        <translation>Saglabāt Uz</translation>
     </message>
     <message>
         <source>&amp;Backup</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Kopēšana</translation>
     </message>
     <message>
         <source>Applications</source>
-        <translation type="unfinished"></translation>
+        <translation>Aplikācijas</translation>
     </message>
     <message>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Atjaunot</translation>
     </message>
     <message>
         <source>Column 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kolonna 1</translation>
     </message>
     <message>
         <source>&amp;Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Atjaunot</translation>
     </message>
     <message>
         <source>Select Source</source>
-        <translation type="unfinished"></translation>
+        <translation>Izvēlaties Avotu</translation>
     </message>
     <message>
         <source>Update Filelist</source>
-        <translation type="unfinished"></translation>
+        <translation>Atjaunot Failusarakstu</translation>
     </message>
 </context>
 <context>
     <name>ErrorDialog</name>
     <message>
         <source>Error Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Kļūdas Info</translation>
     </message>
     <message>
         <source>Error Message:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kļūdas Paziņojums:</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Labi</translation>
     </message>
 </context>
 </TS>
