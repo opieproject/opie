@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: tictac.cpp,v 1.1 2002-03-05 03:48:46 bipolar Exp $
+** $Id: tictac.cpp,v 1.2 2002-04-14 12:17:36 cniehaus Exp $
 **
 ** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
 **
@@ -316,16 +316,16 @@ TicTacToe::TicTacToe( int boardSize, QWidget *parent, const char *name )
     // connect its clicked() signals to the buttonClicked() slot
 
     whoStarts = new QComboBox( this );
-    whoStarts->insertItem( "Computer starts" );
-    whoStarts->insertItem( "Human starts" );
+    whoStarts->insertItem( tr( "Computer starts" ) );
+    whoStarts->insertItem( tr( "Human starts" ) );
     l->addWidget( whoStarts );
 
     // Create the push buttons and connect their clicked() signals
     // to this right slots.
 
-    newGame = new QPushButton( "Play!", this );
+    newGame = new QPushButton( tr( "Play!" ), this );
     connect( newGame, SIGNAL(clicked()), SLOT(newGameClicked()) );
-    quit = new QPushButton( "Quit", this );
+    quit = new QPushButton( tr( "Quit" ), this );
     connect( quit, SIGNAL(clicked()), qApp, SLOT(quit()) );
     QHBoxLayout * b = new QHBoxLayout;
     l->addLayout( b );
