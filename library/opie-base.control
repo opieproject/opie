@@ -1,7 +1,7 @@
 Files: etc/qimpen etc/colors etc/init.d/qpe etc/rc2.d/S98qpe bin/qpe-reorgfiles $QTDIR/lib/libqpe.so.$VERSION_MAJ.$VERSION_MIN.$VERSION_PAT $QTDIR/lib/libqpe.so.$VERSION_MAJ.$VERSION_MIN $QTDIR/lib/libqpe.so.$VERSION_MAJ apps/__7separator.desktop apps/__9quit.desktop apps/*/.directory etc/mime.types apps/Settings/quit.desktop
 Priority: required
 Section: opie/system
-Maintainer: Warwick Allison <warwick@trolltech.com>
+Maintainer:  Project Opie <opie@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION.1
 Depends: qt-embedded (>=$QTE_VERSION), opie-qcop, opie-taskbar, opie-sounds, apmd, qpe2uschedule, qpe-pics, libopie
