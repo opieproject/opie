@@ -21,6 +21,7 @@ using namespace std;
 
 #include <unistd.h>
 #include <stdlib.h>
+#include <linux/limits.h>
 
 #ifdef QWS
 #include <qpe/qpeapplication.h>
