@@ -1,22 +1,22 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
-**
-** This file is part of Qtopia Environment.
-**
-** This file may be distributed and/or modified under the terms of the
-** GNU General Public License version 2 as published by the Free Software
-** Foundation and appearing in the file LICENSE.GPL included in the
-** packaging of this file.
-**
-** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
-** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
-**
-** See http://www.trolltech.com/gpl/ for GPL licensing information.
-**
-** Contact info@trolltech.com if any conditions of this licensing are
-** not clear to you.
-**
-**********************************************************************/
+ ** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+ **
+ ** This file is part of Qtopia Environment.
+ **
+ ** This file may be distributed and/or modified under the terms of the
+ ** GNU General Public License version 2 as published by the Free Software
+ ** Foundation and appearing in the file LICENSE.GPL included in the
+ ** packaging of this file.
+ **
+ ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
+ ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+ **
+ ** See http://www.trolltech.com/gpl/ for GPL licensing information.
+ **
+ ** Contact info@trolltech.com if any conditions of this licensing are
+ ** not clear to you.
+ **
+ **********************************************************************/
 #include <qpe/qpeapplication.h>
 #include <qpe/qlibrary.h>
 #include <qpe/config.h>
@@ -41,7 +41,7 @@
 
 
 MediaPlayerState::MediaPlayerState( QObject *parent, const char *name )
-    : QObject( parent, name ), decoder( NULL ), libmpeg3decoder( NULL ) {
+        : QObject( parent, name ), decoder( NULL ), libmpeg3decoder( NULL ) {
     Config cfg( "OpiePlayer" );
     readConfig( cfg );
     loadPlugins();
@@ -106,7 +106,7 @@ MediaPlayerDecoder *MediaPlayerState::newDecoder( const QString& file ) {
     if(file.left(4)=="http")
         isStreaming = TRUE;
     else
-      isStreaming = FALSE;  
+        isStreaming = FALSE;  
     return decoder = tmpDecoder; 
 }
 
@@ -131,9 +131,9 @@ void MediaPlayerState::loadPlugins() {
 #ifndef QT_NO_COMPONENT
     QValueList<MediaPlayerPlugin>::Iterator mit;
     for ( mit = pluginList.begin(); mit != pluginList.end(); ++mit ) {
-  (*mit).iface->release();
-  (*mit).library->unload();
-  delete (*mit).library;
+        (*mit).iface->release();
+        (*mit).library->unload();
+        delete (*mit).library;
     }
     pluginList.clear();
 
@@ -142,28 +142,28 @@ void MediaPlayerState::loadPlugins() {
     QStringList list = dir.entryList();
     QStringList::Iterator it;
     for ( it = list.begin(); it != list.end(); ++it ) {
-  MediaPlayerPluginInterface *iface = 0;
-  QLibrary *lib = new QLibrary( path + "/" + *it );
+        MediaPlayerPluginInterface *iface = 0;
+        QLibrary *lib = new QLibrary( path + "/" + *it );
 //   qDebug( "querying: %s", QString( path + "/" + *it ).latin1() );
 
-  if ( lib->queryInterface( IID_MediaPlayerPlugin, (QUnknownInterface**)&iface ) == QS_OK ) {
+        if ( lib->queryInterface( IID_MediaPlayerPlugin, (QUnknownInterface**)&iface ) == QS_OK ) {
 
 //       qDebug( "loading: %s", QString( path + "/" + *it ).latin1() );
 
-      MediaPlayerPlugin plugin;
-      plugin.library = lib;
-      plugin.iface = iface;
-      plugin.decoder = plugin.iface->decoder();
-      plugin.encoder = plugin.iface->encoder();
-      pluginList.append( plugin );
+            MediaPlayerPlugin plugin;
+            plugin.library = lib;
+            plugin.iface = iface;
+            plugin.decoder = plugin.iface->decoder();
+            plugin.encoder = plugin.iface->encoder();
+            pluginList.append( plugin );
 
-      // ### hack to get true sample count
-      if ( plugin.decoder->pluginName() == QString("LibMpeg3Plugin") )
-    libmpeg3decoder = plugin.decoder;
+              // ### hack to get true sample count
+            if ( plugin.decoder->pluginName() == QString("LibMpeg3Plugin") )
+                libmpeg3decoder = plugin.decoder;
 
-  } else {
-      delete lib;
-  }
+        } else {
+            delete lib;
+        }
     }
 #else
     pluginList.clear();
@@ -188,8 +188,8 @@ void MediaPlayerState::loadPlugins() {
 #endif
 
     if ( pluginList.count() ) 
-  MediaPlayerDebug(( "%i decoders found", pluginList.count() ));
+        MediaPlayerDebug(( "%i decoders found", pluginList.count() ));
     else
-  MediaPlayerDebug(( "No decoders found" ));
+        MediaPlayerDebug(( "No decoders found" ));
 }
 

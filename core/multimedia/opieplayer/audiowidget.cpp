@@ -143,6 +143,7 @@ void AudioWidget::sliderReleased() {
 
 
 void AudioWidget::setPosition( long i ) {
+//    qDebug("set position %d",i);
     updateSlider( i, mediaPlayerState->length() );
 }
 
@@ -153,7 +154,6 @@ void AudioWidget::setLength( long max ) {
 
 
 void AudioWidget::setView( char view ) {
-
     if (mediaPlayerState->isStreaming) {
         if( !slider->isHidden()) slider->hide();
         disconnect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );

@@ -62,6 +62,7 @@ MediaPlayer::MediaPlayer( QObject *parent, const char *name )
 
 
 MediaPlayer::~MediaPlayer() {
+
 }
 
 

@@ -157,7 +157,6 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     tbDeletePlaylist = new QPushButton( Resource::loadIconSet("trash"),"",bar,"close");
     tbDeletePlaylist->setFlat(TRUE);
     tbDeletePlaylist->setFixedSize(20,20);
-    connect(tbDeletePlaylist,(SIGNAL(released())),SLOT( deletePlaylist()));
     
     d->tbAddToList =  new ToolButton( bar, tr( "Add to Playlist" ), "opieplayer/add_to_playlist",
                                       this , SLOT(addSelected()) );
@@ -190,10 +189,8 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     menu->insertItem( tr( "View" ), pmView );
 
     fullScreenButton = new QAction(tr("Full Screen"), Resource::loadPixmap("fullscreen"), QString::null, 0, this, 0);
-    connect( fullScreenButton, SIGNAL(activated()), mediaPlayerState, SLOT(toggleFullscreen()) );
     fullScreenButton->addTo(pmView);
     scaleButton = new QAction(tr("Scale"), Resource::loadPixmap("opieplayer/scale"), QString::null, 0, this, 0);
-    connect( scaleButton, SIGNAL(activated()), mediaPlayerState, SLOT(toggleScaled()) );
     scaleButton->addTo(pmView);
 
     QVBox *vbox5 = new QVBox( this ); vbox5->setBackgroundMode( PaletteButton );
@@ -224,8 +221,6 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
 
     QPEApplication::setStylusOperation( d->selectedFiles->viewport(),QPEApplication::RightOnHold);
 
-    connect( d->selectedFiles, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
-                   this,SLOT( playlistViewPressed(int, QListViewItem *, const QPoint&, int)) );
 
           
      QVBox *stretch1 = new QVBox( vbox1 ); stretch1->setBackgroundMode( PaletteButton ); // add stretch
@@ -251,11 +246,6 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     tabWidget->insertTab(aTab,tr("Audio"));
 
     QPEApplication::setStylusOperation( audioView->viewport(),QPEApplication::RightOnHold);
-    connect( audioView, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
-             this,SLOT( viewPressed(int, QListViewItem *, const QPoint&, int)) );
-    
-    connect( audioView, SIGNAL( returnPressed( QListViewItem *)),
-             this,SLOT( playIt( QListViewItem *)) );
 
 //    audioView
 //     populateAudioView();
@@ -277,11 +267,6 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
 
     QPEApplication::setStylusOperation( videoView->viewport(),QPEApplication::RightOnHold);
 
-    connect( videoView, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
-             this,SLOT( viewPressed(int, QListViewItem *, const QPoint&, int)) );
-    connect( videoView, SIGNAL( returnPressed( QListViewItem *)),
-             this,SLOT( playIt( QListViewItem *)) );
-
     tabWidget->insertTab( vTab,tr("Video"));
 //  populateVideoView();
 
@@ -292,7 +277,6 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     playLists->setMinimumSize(233,260);
     tabWidget->insertTab(LTab,tr("Lists"));
 
-    connect( playLists, SIGNAL( fileSelected( const DocLnk &) ), this, SLOT( loadList( const DocLnk & ) ) );
 //      connect( playLists, SIGNAL( newSelected( const DocLnk &) ), this, SLOT( newFile( const DocLnk & ) ) );
 
 // add the library area
@@ -305,10 +289,30 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
 //    connect( audioView, SIGNAL( clicked( QListViewItem *) ), this, SLOT( fauxPlay( QListViewItem *) ) );
 //    connect( videoView, SIGNAL( clicked( QListViewItem *) ), this, SLOT( fauxPlay( QListViewItem *) ) );
 
-   connect( audioView, SIGNAL( doubleClicked( QListViewItem *) ), this, SLOT( addToSelection( QListViewItem *) ) );
+    connect(tbDeletePlaylist,(SIGNAL(released())),SLOT( deletePlaylist()));
+    connect( fullScreenButton, SIGNAL(activated()), mediaPlayerState, SLOT(toggleFullscreen()) );
+    connect( scaleButton, SIGNAL(activated()), mediaPlayerState, SLOT(toggleScaled()) );
+    connect( d->selectedFiles, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
+                   this,SLOT( playlistViewPressed(int, QListViewItem *, const QPoint&, int)) );
+
+    connect( audioView, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
+             this,SLOT( viewPressed(int, QListViewItem *, const QPoint&, int)) );
+    
+    connect( audioView, SIGNAL( returnPressed( QListViewItem *)),
+             this,SLOT( playIt( QListViewItem *)) );
+    connect( audioView, SIGNAL( doubleClicked( QListViewItem *) ), this, SLOT( addToSelection( QListViewItem *) ) );
+
+    connect( videoView, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
+             this,SLOT( viewPressed(int, QListViewItem *, const QPoint&, int)) );
+    connect( videoView, SIGNAL( returnPressed( QListViewItem *)),
+             this,SLOT( playIt( QListViewItem *)) );
    connect( videoView, SIGNAL( doubleClicked( QListViewItem *) ), this, SLOT( addToSelection( QListViewItem *) ) );
 
+    connect( playLists, SIGNAL( fileSelected( const DocLnk &) ), this, SLOT( loadList( const DocLnk & ) ) );
+
+
    connect( tabWidget, SIGNAL (currentChanged(QWidget*)),this,SLOT(tabChanged(QWidget*)));
+
    connect( mediaPlayerState, SIGNAL( playingToggled( bool ) ),    d->tbPlay,    SLOT( setOn( bool ) ) );
    connect( mediaPlayerState, SIGNAL( loopingToggled( bool ) ),    d->tbLoop,    SLOT( setOn( bool ) ) );
    connect( mediaPlayerState, SIGNAL( shuffledToggled( bool ) ),   d->tbShuffle, SLOT( setOn( bool ) ) );
@@ -752,7 +756,9 @@ void PlayListWidget::removeSelected() {
 
 void PlayListWidget::playIt( QListViewItem *it) {
 //   d->setDocumentUsed = FALSE;
-        mediaPlayerState->setPlaying(FALSE);
+//  mediaPlayerState->curPosition =0;
+ qDebug("playIt");
+    mediaPlayerState->setPlaying(FALSE);
         mediaPlayerState->setPlaying(TRUE);
         d->selectedFiles->unSelect();
 }
@@ -835,6 +841,7 @@ void PlayListWidget::btnPlay(bool b) {
     switch ( tabWidget->currentPageIndex()) {
       case 0:
       {
+
           mediaPlayerState->setPlaying(b);
       }
       break;
