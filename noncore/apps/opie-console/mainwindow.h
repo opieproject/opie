@@ -11,6 +11,9 @@
  * it's also the dispatcher between the different
  * actions supported by the gui
  */
+class QToolBar;
+class QMenuBar;
+class QAction;
 class MetaFactory;
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -36,6 +39,7 @@ public:
     QList<Session> sessions();
 
 private:
+    void initUI();
     /**
      * the current session
      */
@@ -50,6 +54,16 @@ private:
      * the metafactory
      */
     MetaFactory* m_factory;
+
+    QToolBar* m_tool;
+    QMenuBar* m_bar;
+    QPopupMenu* m_console;
+    QPopupMenu* m_settings;
+    QPopupMenu* m_newsession;
+    QAction* m_connect;
+    QAction* m_disconnect;
+    QAction* m_terminate;
+    QAction* m_set;
 
 };
 

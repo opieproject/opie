@@ -1,14 +1,16 @@
 #include <qpe/qpeapplication.h>
 
-#include <mainwindow.h>
+#include "mainwindow.h"
 
 int main(int argc, char **argv) {
     QPEApplication app( argc, argv );
-    MainWindow* mw = new MainWindow();
-    app.setMainWidget( mw );
-    
+
+    MainWindow mw;
+    mw.setCaption(QObject::tr("Opie console") );
+    app.showMainWidget( &mw );
+
     app.exec();
-    
-    delete mw;
+
+
     return 0;
 }
