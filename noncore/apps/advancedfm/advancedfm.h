@@ -55,11 +55,7 @@ class AdvancedFm : public QMainWindow
     Q_OBJECT
 public:
     static QString appName() { return QString::fromLatin1("advancedfm"); }
-#ifdef NOQUICKLAUNCH
-   AdvancedFm();
-#else
    AdvancedFm(QWidget *p = 0, const char* name = 0, WFlags fl = 0);
-#endif
    ~AdvancedFm();
 protected slots:
    void slotSwitchMenu(int);
@@ -138,8 +134,7 @@ protected:
 protected slots:
    void openSearch();
    void dirMenuSelected(int);
-   void showFileMenu();
-   void cancelMenuTimer();
+   void showFileMenu();   
    void homeButtonPushed();
    void docButtonPushed();
    void SDButtonPushed();
@@ -166,7 +161,6 @@ protected slots:
 private:
    MenuButton *menuButton;
    QString oldName;
-   QTimer menuTimer;
    void startProcess(const QString &);
    bool eventFilter( QObject * , QEvent * );
    void cancelRename();

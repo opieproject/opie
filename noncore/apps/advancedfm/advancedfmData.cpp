@@ -161,7 +161,7 @@ void AdvancedFm::init() {
 	 Local_View->setFocusPolicy(StrongFocus);
 	 Local_View->installEventFilter( this );
 
-	 QPEApplication::setStylusOperation( Local_View->viewport(),QPEApplication::RightOnHold);
+	 QPEApplication::setStylusOperation( Local_View->viewport() , QPEApplication::RightOnHold);
 
 	 tabLayout->addWidget( Local_View, 0, 0 );
 
@@ -185,7 +185,7 @@ void AdvancedFm::init() {
 	 Remote_View->setFocusPolicy(StrongFocus);
 	 Remote_View->installEventFilter( this );
 
-	 QPEApplication::setStylusOperation( Remote_View->viewport(),QPEApplication::RightOnHold);
+	 QPEApplication::setStylusOperation( Remote_View->viewport(), QPEApplication::RightOnHold);
 
 	 tabLayout_2->addWidget( Remote_View, 0, 0 );
 
@@ -223,11 +223,11 @@ void AdvancedFm::init() {
 
 
 	 if( !StorageInfo::hasSd() || !StorageInfo::hasMmc()) {
-			odebug << "not have sd" << oendl; 
+			odebug << "not have sd" << oendl;
 			sdButton->hide();
 	 }
 	 if( !StorageInfo::hasCf() ) {
-			odebug << "not have cf" << oendl; 
+			odebug << "not have cf" << oendl;
 			cfButton->hide();
 	 }
 	 currentDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
@@ -273,8 +273,6 @@ void AdvancedFm::initConnections()
   connect( Local_View, SIGNAL( mouseButtonPressed(int,QListViewItem*,const QPoint&,int)),
            this,SLOT( ListPressed(int,QListViewItem*,const QPoint&,int)) );
 
-  connect( Local_View, SIGNAL( selectionChanged() ), SLOT( cancelMenuTimer() ) );
-
   connect( Remote_View, SIGNAL( clicked(QListViewItem*)),
            this,SLOT( ListClicked(QListViewItem*)) );
   connect( Remote_View, SIGNAL( mouseButtonPressed(int,QListViewItem*,const QPoint&,int)),
@@ -283,7 +281,10 @@ void AdvancedFm::initConnections()
   connect( TabWidget,SIGNAL(currentChanged(QWidget*)),
           this,SLOT(tabChanged(QWidget*)));
 
-  connect( &menuTimer, SIGNAL( timeout() ), SLOT( showFileMenu() ) );
+  connect( Remote_View, SIGNAL(rightButtonPressed(QListViewItem*, const QPoint&, int)),
+           this, SLOT(showFileMenu()));
+  connect( Local_View, SIGNAL(rightButtonPressed(QListViewItem*, const QPoint&,int)),
+           this, SLOT(showFileMenu()));
 
   connect( menuButton, SIGNAL( selected(const QString&)), SLOT(gotoCustomDir(const QString&)));
 //  connect( menuButton, SIGNAL( selected(int)), SLOT( dirMenuSelected(int)));

@@ -1,7 +1,5 @@
 
 /***************************************************************************
-using namespace Opie::Core;
-using namespace Opie::Core;
                           main.cpp  -  description
                              -------------------
     begin                : March 10, 2002
