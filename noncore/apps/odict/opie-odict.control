@@ -1,0 +1,9 @@
+Files: bin/odict apps/Applications/odict.desktop pics/odict/odict.png
+Priority: optional
+Section: applications
+Maintainer: Carsten Niehaus <cniehaus@handhelds.org>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base ($QPE_VERSION)
+Description: Dictionarylookupprogram
+ Look up words :)
