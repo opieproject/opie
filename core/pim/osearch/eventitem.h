@@ -15,7 +15,9 @@
 
 #include "resultitem.h"
 
-class OEvent;
+#include <opie2/opimevent.h>
+
+using namespace Opie;
 
 /**
 @author Patrick S. Vogt
@@ -23,7 +25,7 @@ class OEvent;
 class EventItem : public ResultItem
 {
 public:
-    EventItem(OListViewItem* parent, OEvent *event);
+    EventItem(OListViewItem* parent, OPimEvent *event);
 
     ~EventItem();
 
@@ -33,7 +35,7 @@ public:
 
 private:
     void setIcon();
-    OEvent *_event;
+    OPimEvent *_event;
 
 };
 

@@ -10,17 +10,20 @@
 
 #include "olistview.h"
 #include "olistviewitem.h"
-#include <qmessagebox.h>
+
 #include <qpe/qpeapplication.h>
+
+#include <qmessagebox.h>
+
 
 OListView::OListView(QWidget *parent, const char *name )
   : QListView(parent,name)
 {
 
-	setRootIsDecorated( true );	
+	setRootIsDecorated( true );
 	addColumn(tr("Results"),qApp->desktop()->width() - 9 );
 	//setColumnWidthMode(0, Manual);
-	
+
 	setSorting( -1 );
  	connect( this, SIGNAL(expanded(QListViewItem*)), SLOT(expand(QListViewItem*)));
 }

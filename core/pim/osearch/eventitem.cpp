@@ -12,14 +12,14 @@
 //
 #include "eventitem.h"
 
-#include <qdatetime.h>
-#include <qpixmap.h>
+
 #include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
-//#include <qwhatsthis.h>
-#include <opie/oevent.h>
 
-EventItem::EventItem(OListViewItem* parent, OEvent *event)
+#include <qdatetime.h>
+#include <qpixmap.h>
+
+EventItem::EventItem(OListViewItem* parent, OPimEvent *event)
  : ResultItem(parent)
 {
 	_event = event;

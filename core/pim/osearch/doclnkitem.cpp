@@ -13,10 +13,11 @@
 #include "doclnkitem.h"
 
 #include <qpe/applnk.h>
+#include <qpe/qcopenvelope_qws.h>
+
 #include <qfile.h>
 #include <qtextstream.h>
 #include <qfileinfo.h>
-#include <qpe/qcopenvelope_qws.h>
 
 DocLnkItem::DocLnkItem(OListViewItem* parent, DocLnk *app)
 	: ResultItem(parent)

@@ -12,12 +12,14 @@
 //
 #include "todoitem.h"
 
-#include <opie/otodo.h>
-#include <qpixmap.h>
+
 #include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
 
-TodoItem::TodoItem(OListViewItem* parent, OTodo *todo)
+#include <qpixmap.h>
+
+
+TodoItem::TodoItem(OListViewItem* parent, OPimTodo *todo)
 : ResultItem(parent)
 {
 	_todo = todo;
@@ -61,16 +63,16 @@ void TodoItem::setIcon()
 	case -1:
 		icon = Resource::loadPixmap( "reset" );
 		break;
-	case OTodo::Description:
+	case OPimTodo::Description:
 		icon = Resource::loadPixmap( "txt" );
 		break;
- 	case OTodo::Summary:
+ 	case OPimTodo::Summary:
 		icon = Resource::loadPixmap( "osearch/summary" );
  		break;
-	case OTodo::Priority:
+	case OPimTodo::Priority:
 		icon = Resource::loadPixmap( "todo/priority1" );
  		break;
- 	case OTodo::HasDate:
+ 	case OPimTodo::HasDate:
 		icon = Resource::loadPixmap( "osearch/clock" );
  		break;
 	default:

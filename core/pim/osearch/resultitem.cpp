@@ -12,10 +12,8 @@
 //
 #include "resultitem.h"
 
+
 #include <qmessagebox.h>
-
-#include <opie/otodo.h>
-
 
 ResultItem::ResultItem(OListViewItem* parent)
 : OListViewItem(parent)

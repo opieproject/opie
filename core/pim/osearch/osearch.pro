@@ -35,5 +35,5 @@ TARGET	= osearch
 
 INCLUDEPATH = $(OPIEDIR)/include
 DEPENDPATH += $(OPIEDIR)/include
-LIBS += -lqpe -lopie
+LIBS += -lqpe -lopiecore2 -lopiepim2 -lopieui2
 include ( $(OPIEDIR)/include.pro )

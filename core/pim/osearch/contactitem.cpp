@@ -12,12 +12,13 @@
 //
 #include "contactitem.h"
 
-#include <qpixmap.h>
-#include <opie/ocontact.h>
 #include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
 
-ContactItem::ContactItem(OListViewItem* parent, OContact *contact)
+#include <qpixmap.h>
+
+
+ContactItem::ContactItem(OListViewItem* parent, OPimContact *contact)
 : ResultItem(parent)
 {
 	_contact = contact;

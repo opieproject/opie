@@ -11,19 +11,23 @@
 //
 //
 
+
+#include "doclnkitem.h"
+#include "doclnksearch.h"
+
+#include <opie2/owait.h>
+
+#include <qpe/applnk.h>
+#include <qpe/config.h>
+#include <qpe/resource.h>
+#include <qpe/qpeapplication.h>
+
 #include <qaction.h>
 #include <qfile.h>
 #include <qiconset.h>
 #include <qpopupmenu.h>
 #include <qtextstream.h>
-#include <qpe/applnk.h>
-#include <qpe/config.h>
-#include <qpe/resource.h>
-#include <qpe/qpeapplication.h>
-#include <opie/owait.h>
 
-#include "doclnkitem.h"
-#include "doclnksearch.h"
 
 DocLnkSearch::DocLnkSearch(QListView* parent, QString name)
 : AppLnkSearch(parent, name), _popupMenu(0)

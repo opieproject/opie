@@ -15,8 +15,12 @@
 
 #include "searchgroup.h"
 
-class OTodoAccess;
+#include <opie2/otodoaccess.h>
+#include <opie2/opimtodo.h>
+
 class QAction;
+
+using namespace Opie;
 
 /**
 @author Patrick S. Vogt
@@ -35,7 +39,7 @@ protected:
 	virtual void insertItem( void* );
 
 private:
-    OTodoAccess *_todos;
+    OPimTodoAccess *_todos;
     QAction *actionShowCompleted;
     QPopupMenu *_popupMenu;
 };

@@ -1,5 +1,3 @@
-//
-//
 // C++ Interface: $MODULE$
 //
 // Description:
@@ -14,8 +12,10 @@
 #define ADRESSSEARCH_H
 
 #include "searchgroup.h"
+#include <opie2/ocontactaccess.h>
 
-class OContactAccess;
+using namespace Opie;
+
 
 /**
 @author Patrick S. Vogt
@@ -32,7 +32,7 @@ protected:
 	virtual void insertItem( void* );
 
 private:
-    OContactAccess *_contacts;
+    OPimContactAccess *_contacts;
 };
 
 #endif

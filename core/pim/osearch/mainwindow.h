@@ -16,7 +16,6 @@
 #include <qdialog.h>
 #include <qaction.h>
 #include <qlist.h>
-
 #include <qmap.h>
 #include <qtimer.h>
 #include <qpopupmenu.h>

@@ -2,7 +2,7 @@
 //
 // C++ Implementation: $MODULE$
 //
-// Description: 
+// Description:
 //
 //
 // Author: Patrick S. Vogt <tille@handhelds.org>, (C) 2003
@@ -11,18 +11,21 @@
 //
 //
 #include "datebooksearch.h"
-
 #include "eventitem.h"
+
+#include <opie2/opimevent.h>
+#include <opie2/opimrecurrence.h>
+
 
 #include <qpe/resource.h>
 #include <qpe/config.h>
-#include <opie/oevent.h>
-#include <opie/orecur.h>
-#include <opie/odatebookaccess.h>
+
 #include <qiconset.h>
 #include <qaction.h>
 #include <qdatetime.h>
 #include <qpopupmenu.h>
+
+
 
 DatebookSearch::DatebookSearch(QListView* parent, QString name)
 : SearchGroup(parent, name), _dates(0), _popupMenu(0)
@@ -59,15 +62,15 @@ void DatebookSearch::load()
 
 int DatebookSearch::search()
 {
-	ORecordList<OEvent> results = _dates->matchRegexp(_search);
+	OPimRecordList<OPimEvent> results = _dates->matchRegexp(_search);
 	for (uint i = 0; i < results.count(); i++)
-		insertItem( new OEvent( results[i] ) );
+		insertItem( new OPimEvent( results[i] ) );
 	return _resultCount;
 }
 
 void DatebookSearch::insertItem( void *rec )
 {
-	OEvent *ev = (OEvent*)rec;
+	OPimEvent *ev = (OPimEvent*)rec;
 	if ( !actionShowPastEvents->isOn() &&
 	      ev->endDateTime() < QDateTime::currentDateTime() &&
 	      !ev->recurrence().doesRecur()

@@ -11,15 +11,15 @@
 //
 //
 #include "todosearch.h"
+#include "todoitem.h"
 
-#include <opie/otodoaccess.h>
-#include <opie/otodo.h>
 #include <qpe/resource.h>
 #include <qpe/config.h>
+
 #include <qiconset.h>
 #include <qaction.h>
 #include <qpopupmenu.h>
-#include "todoitem.h"
+
 
 TodoSearch::TodoSearch(QListView* parent, QString name)
 : SearchGroup(parent, name), _todos(0), _popupMenu(0)
@@ -49,21 +49,21 @@ TodoSearch::~TodoSearch()
 
 void TodoSearch::load()
 {
-	 _todos = new OTodoAccess();
+	 _todos = new OPimTodoAccess();
 	 _todos->load();
 }
 
 int TodoSearch::search()
 {
-	ORecordList<OTodo> results = _todos->matchRegexp(_search);
+	OPimRecordList<OPimTodo> results = _todos->matchRegexp(_search);
 	for (uint i = 0; i < results.count(); i++)
-		insertItem( new OTodo( results[i] ));
+		insertItem( new OPimTodo( results[i] ));
 	return _resultCount;
 }
 
 void TodoSearch::insertItem( void *rec )
 {
-	OTodo *todo = (OTodo*)rec;
+	OPimTodo *todo = (OPimTodo*)rec;
 	if (!actionShowCompleted->isOn() &&
 		todo->isCompleted() ) return;
 	(void)new TodoItem( this, todo );

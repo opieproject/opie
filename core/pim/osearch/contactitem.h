@@ -13,9 +13,12 @@
 #ifndef CONTACTITEM_H
 #define CONTACTITEM_H
 
+#include <opie2/opimrecord.h>
+#include <opie2/opimcontact.h>
+
 #include "resultitem.h"
 
-class OContact;
+using namespace Opie;
 
 /**
 @author Patrick S. Vogt
@@ -23,7 +26,7 @@ class OContact;
 class ContactItem : public ResultItem
 {
 public:
-    ContactItem(OListViewItem* parent, OContact *contact);
+    ContactItem(OListViewItem* parent, OPimContact *contact);
 
     ~ContactItem();
 
@@ -34,7 +37,7 @@ public:
 
 private:
 	void setIcon();
-	OContact *_contact;
+	OPimContact *_contact;
 
 };
 

@@ -11,23 +11,22 @@
 //
 //
 #include "adresssearch.h"
+#include "contactitem.h"
+
+#include <qpe/resource.h>
 
 #include <qstring.h>
 #include <qiconset.h>
 //#include <qwhatsthis.h>
-#include <qpe/resource.h>
-#include <opie/ocontactaccess.h>
-
-#include "contactitem.h"
 
 AdressSearch::AdressSearch(QListView* parent, QString name):
 	SearchGroup(parent, name)
 {
 	_contacts = 0;
-	QIconSet is = Resource::loadIconSet( "addressbook/AddressBookSmall" );	
+	QIconSet is = Resource::loadIconSet( "addressbook/AddressBookSmall" );
 	setPixmap( 0, is.pixmap( QIconSet::Large, true ) );
-	
-	
+
+
 //	QWhatsThis::add( this, QObject::tr("Search the addressbook") );
 /*	QPixmap pix = Resource::loadPixmap( "addressbook/AddressBook" );
 	QImage img = pix.convertToImage();
@@ -44,14 +43,14 @@ AdressSearch::~AdressSearch()
 
 void AdressSearch::load()
 {
-	_contacts = new OContactAccess("osearch");
+	_contacts = new OPimContactAccess("osearch");
 }
 
 int AdressSearch::search()
 {
-	ORecordList<OContact> results = _contacts->matchRegexp(_search);
+	OPimRecordList<OPimContact> results = _contacts->matchRegexp(_search);
 	for (uint i = 0; i < results.count(); i++) {
-		(void)new ContactItem( this, new OContact( results[i] ));
+		(void)new ContactItem( this, new OPimContact( results[i] ));
 	}
 	return results.count();
 }

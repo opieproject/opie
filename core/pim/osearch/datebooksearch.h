@@ -14,8 +14,10 @@
 #define DATEBOOKSEARCH_H
 
 #include "searchgroup.h"
+#include <opie2/odatebookaccess.h>
 
-class ODateBookAccess;
+using namespace Opie;
+
 class QAction;
 
 /**

@@ -13,9 +13,9 @@
 #ifndef RESULTITEM_H
 #define RESULTITEM_H
 
-#include <qintdict.h>
-
 #include "olistviewitem.h"
+
+#include <qintdict.h>
 
 /**
 @author Patrick S. Vogt

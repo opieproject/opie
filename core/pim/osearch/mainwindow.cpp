@@ -10,7 +10,27 @@
 // (c) 2002 Patrick S. Vogt <tille@handhelds.org>
 
 
+#include "olistview.h"
+#include "olistviewitem.h"
+#include "resultitem.h"
+#include "adresssearch.h"
+#include "todosearch.h"
+#include "datebooksearch.h"
+#include "applnksearch.h"
+#include "doclnksearch.h"
+#include "mainwindow.h"
 
+#include <opie2/owait.h>
+
+#include <qpe/qpemessagebox.h>
+#include <qpe/resource.h>
+#include <qpe/config.h>
+
+#include <qpe/qpeapplication.h>
+#include <qpe/config.h>
+#include <qpe/global.h>
+
+#include <qtoolbar.h>
 #include <qaction.h>
 #include <qmessagebox.h>
 #include <qpopupmenu.h>
@@ -29,26 +49,10 @@
 #include <qregexp.h>
 #include <qwhatsthis.h>
 #include <qmenubar.h>
-#include <qpe/qpemessagebox.h>
-#include <qpe/resource.h>
-#include <qpe/config.h>
-#include <qtoolbar.h>
-#include <qpe/qpeapplication.h>
-#include <qpe/config.h>
-#include <qpe/global.h>
-#include <opie/owait.h>
 
-#include "olistview.h"
-#include "olistviewitem.h"
-#include "resultitem.h"
-#include "adresssearch.h"
-#include "todosearch.h"
-#include "datebooksearch.h"
-#include "applnksearch.h"
-#include "doclnksearch.h"
-#include "mainwindow.h"
 
-static const char* const image1_data[] = { 
+
+static const char* const image1_data[] = {
 "14 14 3 1",
 ". c None",
 "# c #000000",
@@ -178,25 +182,25 @@ void MainWindow::makeMenu()
   LabelEnterText = new QLabel( searchBar, "Label" );
   LabelEnterText->setAutoMask( FALSE );
   LabelEnterText->setText( tr( "Search for: " ) );
-  
+
   addToolBar( searchBar, "Search", QMainWindow::Top, TRUE );
   QLineEdit *searchEdit = new QLineEdit( searchBar, "seachEdit" );
   QWhatsThis::add( searchEdit, tr("Enter your search terms here") );
   searchEdit->setFocus();
   searchBar->setHorizontalStretchable( TRUE );
   searchBar->setStretchableWidget( searchEdit );
-  
+
   //Search button
   SearchAllAction->addTo( searchBar );
-  
+
   //image ripped of off opie-login/loginwindow.cpp
   QPixmap image1( ( const char** ) image1_data );
-  
+
   //Clear text
   ClearSearchText = new QToolButton( searchBar, "ClearSearchText");
   ClearSearchText->setText( tr( "" ) );
   ClearSearchText->setPixmap( image1 );
-  
+
   connect( searchEdit, SIGNAL( textChanged( const QString & ) ),this, SLOT( setSearch( const QString & ) ) );
   connect( ClearSearchText, SIGNAL( clicked() ), searchEdit, SLOT( clear() ) );
 

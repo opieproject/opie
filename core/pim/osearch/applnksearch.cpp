@@ -11,14 +11,13 @@
 //
 //
 #include "applnksearch.h"
+#include "applnkitem.h"
 
 #include <qpe/applnk.h>
 #include <qpe/qpeapplication.h>
-#include <qiconset.h>
 #include <qpe/resource.h>
 
-#include "applnkitem.h"
-
+#include <qiconset.h>
 
 AppLnkSearch::AppLnkSearch(QListView* parent, QString name): SearchGroup(parent, name)
 {
@@ -43,16 +42,16 @@ void AppLnkSearch::load()
 int AppLnkSearch::search()
 {
 	QList<AppLnk> appList = _apps->children();
-	
+
 	for ( AppLnk *app = appList.first(); app != 0; app = appList.next() ){
 		if ( (_search.match( app->name() ) != -1)
 		    || (_search.match(app->comment()) != -1)
-		    || (_search.match(app->exec()) != -1) ) {	    
+		    || (_search.match(app->exec()) != -1) ) {
 			insertItem( app );
 		}else
 		if (searchFile( app ))
-			insertItem( app );		
-		qApp->processEvents( 100 );		
+			insertItem( app );
+		qApp->processEvents( 100 );
 	}
 	return _resultCount;
 }
