@@ -1,6 +1,6 @@
 #include <qmessagebox.h>
 #include <qheader.h>
-#include <sqlite.h>
+#include <sqlite3.h>
 
 #include "budgetdisplay.h"
 #include "budget.h"

@@ -3,7 +3,7 @@
 
 #include <qlistview.h>
 #include <qstring.h>
-#include <sqlite.h>
+#include <sqlite3.h>
 #include <qdatetime.h>
 
 #include "preferences.h"
@@ -43,7 +43,7 @@ class Transfer
 
     private:
 
-      sqlite *db;
+      sqlite3 *db;
   };
 
 #endif
