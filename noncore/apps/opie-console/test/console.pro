@@ -10,6 +10,6 @@ SOURCES      = ../io_layer.cpp ../io_serial.cpp \
 INTERFACES   = sender.ui
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
-LIBS        += -lqpe -lopie 
+LIBS        += -lqpe -lopie
 TARGET       = test
 

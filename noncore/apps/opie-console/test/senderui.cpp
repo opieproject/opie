@@ -61,7 +61,7 @@ void SenderUI::got(const QByteArray& ar) {
 
 void SenderUI::fileTransComplete() {
 
-    qWarning("file transfer compete");
+    qWarning("file transfer complete");
 }
 void SenderUI::send() {
 
