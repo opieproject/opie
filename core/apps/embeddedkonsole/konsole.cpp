@@ -122,6 +122,7 @@ static const char *commonCmds[] =
     "mv ",
     "nc localhost 7776",
     "nc localhost 7777",
+    "netstat ",
     "nslookup ",
     "ping ",
     "ps aux",
