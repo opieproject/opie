@@ -10,7 +10,7 @@ INTERFACES = helpdialog.ui
 TARGET 		= kbill
 INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
-LIBS		+= -lqpe
+LIBS		+= -lqpe -lstdc++
 DESTDIR 	=  $(OPIEDIR)/bin
 
 TRANSLATIONS = ../../../i18n/de/kbill.ts \

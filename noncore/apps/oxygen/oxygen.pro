@@ -20,7 +20,7 @@ SOURCES		= main.cpp \
           datawidgetui.cpp
 INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
-LIBS		+= -lqpe
+LIBS		+= -lqpe -lstdc++
 INTERFACES	= calcdlg.ui 
 TARGET 		= oxygen
 DESTDIR		= $(OPIEDIR)/bin

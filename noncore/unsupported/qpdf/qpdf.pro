@@ -49,7 +49,7 @@ INCLUDEPATH += . \
                ../goo \ 
                goo
                
-LIBS        += -L $(OPIEDIR)/lib -lqpe -lopie
+LIBS        += -L $(OPIEDIR)/lib -lqpe -lopie -lstdc++
 DESTDIR      = $(OPIEDIR)/bin
 TARGET       = qpdf
 
