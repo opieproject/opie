@@ -7,7 +7,7 @@
 /**
  * Constructor
  */ 
-AddConnectionImp::AddConnectionImp(QWidget *parent=0, const char *name=0, WFlags f=0):AddConnection(parent, name, f){
+AddConnectionImp::AddConnectionImp(QWidget *parent, const char *name, WFlags f):AddConnection(parent, name, f){
   connect(registeredServicesList, SIGNAL(selectionChanged()), this, SLOT(changed()));
   registeredServicesList->header()->hide();
 };
