@@ -48,7 +48,7 @@ class OPimAccessTemplatePrivate;
  * interface or you want to implement
  * your own Access lib
  * Just create a OPimRecord and inherit from
- * the plugins
+ * the templates
  */
 
 template <class T = OPimRecord >
@@ -101,12 +101,12 @@ public:
      * you can iterate over them
      */
     virtual List allRecords()const;
- 
-     /** 
+
+     /**
      * return a List of records
      * that match the regex
      */
-    virtual List matchRegexp(  const QRegExp &r ) const;   
+    virtual List matchRegexp(  const QRegExp &r ) const;
 
     /**
      * queryByExample.
@@ -138,10 +138,10 @@ public:
      */
     virtual bool add( const T& t ) ;
     bool add( const OPimRecord& );
-    // Needed for real generic access (eilers) 
-    // Info: Take this if  you are working with OPimRecord, which is a generic base class, and 
+    // Needed for real generic access (eilers)
+    // Info: Take this if  you are working with OPimRecord, which is a generic base class, and
     //       you need to add it into any database, you cannot generate a reference to
-    //       it and casting may be not approriate, too. 
+    //       it and casting may be not approriate, too.
     //       But take care that the accessing database is compatible to the real type of OPimRecord !!
     bool add( const OPimRecord* );
 
