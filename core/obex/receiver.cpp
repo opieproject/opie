@@ -176,6 +176,10 @@ void OtherHandler::deny() {
 }
 QString OtherHandler::targetName( const QString& file ) {
     QFileInfo info( file );
+
+    /* $HOME needs to be set!!!! */
+    Global::createDocDir();
+
     QString newFile = QPEApplication::documentDir()+ "/"+ info.baseName();
     QString newFileBase = newFile;
 
