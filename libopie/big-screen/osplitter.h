@@ -42,6 +42,12 @@ class OTabWidget;
 class QHBox;
 //template class QValueList<Opie::OSplitterContainer>;
 
+/*
+ * TODO
+ * -check API docu
+ * -one more example
+ * -allow inserting at a position
+ */
 
 /**
  *
@@ -102,8 +108,8 @@ signals:
      */
     void sizeChanged( bool b, Orientation ori);
 public:
-//    QSize sizeHint()const;
-//    QSize minimumSizeHint()const;
+    QSize sizeHint()const;
+    QSize minimumSizeHint()const;
 
 protected:
     void resizeEvent( QResizeEvent* );

@@ -76,6 +76,7 @@ OSplitter::OSplitter( Orientation orient, QWidget* parent, const char* name, WFl
  * @see addWidget
  */
 OSplitter::~OSplitter() {
+    qWarning("Deleted Splitter");
     m_splitter.setAutoDelete( true );
     m_splitter.clear();
 
@@ -154,7 +155,7 @@ void OSplitter::addWidget( OSplitter* split ) {
      * set tab widget
      */
     if (m_tabWidget )
-        split->setTabWidget( m_tabWidget );
+        setTabWidget( m_parentTab );
     else{
         Opie::OSplitterContainer con;
         con.widget =split;
@@ -306,13 +307,14 @@ QWidget* OSplitter::currentWidget() const{
     return 0l;
 }
 
-#if 0
+
 /**
  * @reimplented for internal reasons
  * returns the sizeHint of one of its sub widgets
  */
 QSize OSplitter::sizeHint()const {
-    return QSize(10, 10);
+    if (m_parentTab )
+        return QFrame::sizeHint();
 
     if (m_hbox )
         return m_hbox->sizeHint();
@@ -321,9 +323,14 @@ QSize OSplitter::sizeHint()const {
 }
 
 QSize OSplitter::minimumSizeHint()const {
-    return QSize(10, 10 );
+    if (m_parentTab )
+        return QFrame::minimumSizeHint();
+    if (m_hbox)
+        return m_hbox->sizeHint();
+    else
+        return m_tabWidget->sizeHint();
 }
-#endif
+
 
 /**
  * @reimplemented for internal reasons
@@ -335,7 +342,7 @@ void OSplitter::resizeEvent( QResizeEvent* res ) {
      */
 //    qWarning("Old size was width = %d height = %d", res->oldSize().width(), res->oldSize().height() );
     bool mode = true;
-    qWarning("New size is  width = %d height = %d", res->size().width(), res->size().height() );
+    qWarning("New size is  width = %d height = %d  %s", res->size().width(), res->size().height(), name() );
     if ( res->size().width() > m_size_policy &&
          m_orient == Horizontal ) {
         changeHBox();
@@ -346,7 +353,8 @@ void OSplitter::resizeEvent( QResizeEvent* res ) {
                 m_orient == Vertical ) ) {
         changeTab();
     }else if ( res->size().height() > m_size_policy &&
-               m_size_policy == Vertical ) {
+               m_orient == Vertical ) {
+        qWarning("Changng to vbox %s", name() );
         changeVBox();
         mode = false;
     }
@@ -398,7 +406,7 @@ void OSplitter::changeTab() {
         return;
     }
 
-    qWarning(" New Tab Widget ");
+    qWarning(" New Tab Widget %s", name() );
     /*
      * and add all widgets this will reparent them
      * delete m_hbox set it to 0
@@ -407,7 +415,12 @@ void OSplitter::changeTab() {
     OTabWidget *tab;
     if ( m_parentTab ) {
         tab = m_parentTab;
-        tab->removePage( this );
+        /* expensive but needed cause we're called from setTabWidget and resizeEvent*/
+        if (!m_container.isEmpty() ) {
+            ContainerList::Iterator it = m_container.begin();
+            for (; it != m_container.end(); ++it )
+                m_parentTab->removePage( (*it).widget );
+        }
     }else
         tab = m_tabWidget = new OTabWidget( this );
 
@@ -419,8 +432,10 @@ void OSplitter::changeTab() {
         addToTab( (*it) );
     }
 
-    for ( OSplitter* split = m_splitter.first(); split; split = m_splitter.next() )
+    for ( OSplitter* split = m_splitter.first(); split; split = m_splitter.next() ) {
+        split->reparent(this, 0, QPoint(0, 0) );
         split->setTabWidget( tab );
+    }
 
 
     delete m_hbox;
@@ -443,7 +458,7 @@ void OSplitter::changeHBox() {
         return;
     }
 
-    qWarning("new HBox");
+    qWarning("new HBox %s", name() );
     m_hbox = new QHBox( this );
     commonChangeBox();
 }
@@ -454,7 +469,7 @@ void OSplitter::changeVBox() {
         return;
     }
 
-    qWarning("New VBOX");
+    qWarning("New VBOX %s", name() );
     m_hbox = new QVBox( this );
 
     commonChangeBox();
@@ -468,6 +483,7 @@ void OSplitter::changeVBox() {
  * it is recursive as well due the call to setTabWidget
  */
 void OSplitter::commonChangeBox() {
+    qWarning(" Name of Splitters is %s", name() );
 
     for (ContainerList::Iterator it = m_container.begin(); it != m_container.end(); ++it ) {
         /* only if parent tab.. m_tabWidgets gets deleted and would do that as well */
@@ -481,14 +497,17 @@ void OSplitter::commonChangeBox() {
         split->setTabWidget( 0 );
         Opie::OSplitterContainer con;
         con.widget = split;
+//        con.widget = split->m_tabWidget ? static_cast<QWidget*>(split->m_tabWidget)
+//                     : static_cast<QWidget*>(split->m_hbox);
         addToBox( con );
     }
 
 
 
     if (m_parentTab )
-        m_parentTab->addTab(this, iconName(), label() );
+        m_parentTab->addTab(m_hbox, iconName(), label() );
     else {
+        qWarning(" setting Box geometry for %s", name() );
         m_hbox->setGeometry( frameRect() );
         m_hbox->show();
         delete m_tabWidget;
@@ -503,7 +522,7 @@ void OSplitter::setTabWidget( OTabWidget* wid) {
     /* clean up cause m_parentTab will not be available for us */
     if ( m_parentTab ) {
         if (m_hbox )
-            m_parentTab->removePage( this );
+            m_parentTab->removePage( m_hbox );
         else if (!m_container.isEmpty() ){
             ContainerList::Iterator it = m_container.begin();
             for ( ; it != m_container.end(); ++it )
@@ -526,8 +545,10 @@ void OSplitter::setTabWidget( OTabWidget* wid) {
         changeVBox();
 
     /* our own crap is added and children from change* */
-    delete tab;
-    delete box;
+    if (m_parentTab ) {
+        delete tab;
+        delete box;
+    }
 }
 
 
@@ -552,7 +573,7 @@ bool OSplitter::layoutMode()const {
          m_orient == Horizontal ) {
         return false;
     }else if ( size().height() > m_size_policy &&
-               m_size_policy == Vertical ) {
+               m_orient == Vertical ) {
         return false;
     }
 
