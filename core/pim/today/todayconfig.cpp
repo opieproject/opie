@@ -1,11 +1,22 @@
-/****************************************************************************
-** Form implementation generated from reading ui file 'todayconfig.ui'
-**
-** Created: Thu Feb 14 15:04:33 2002
-**      by:  The User Interface Compiler (uic)
-**
-** WARNING! All changes made in this file will be lost!
-****************************************************************************/
+/*
+ * todayconfig.cpp
+ *
+ * ---------------------
+ *
+ * begin       : Sun 10 17:20:00 CEST 2002
+ * copyright   : (c) 2002 by Maximilian Reiﬂ
+ * email       : max.reiss@gmx.de
+ *
+ */
+/***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ ***************************************************************************/
+
 #include "todayconfig.h"
 
 #include <qcheckbox.h>
@@ -16,20 +27,12 @@
 #include <qwidget.h>
 #include <qlayout.h>
 #include <qvariant.h>
-#include <qwhatsthis.h>
+//#include <qwhatsthis.h>
 
-/*
- *  Constructs a todayconfig which is a child of 'parent', with the
- *  name 'name' and widget flags set to 'f'
- *
- *  The dialog will by default be modeless, unless you set 'modal' to
- *  TRUE to construct a modal dialog.
- */
 todayconfig::todayconfig( QWidget* parent,  const char* name, bool modal, WFlags fl )
-    : QDialog( parent, name, modal, fl )
-{
+    : QDialog( parent, name, modal, fl ) {
   if ( !name )
-    setName( "todayconfig" );
+      setName( "todayconfig" );
   resize( 175, 232 );
   setCaption( tr( "Today config" ) );
 
@@ -120,7 +123,6 @@ todayconfig::todayconfig( QWidget* parent,  const char* name, bool modal, WFlags
   SpinBox7 = new QSpinBox( Frame14, "SpinBox7" );
   SpinBox7->setGeometry( QRect( 115, 20, 58, 25 ) );
   SpinBox7->setMaxValue( 80 );
-  SpinBox7->setValue( 30 );
 
   TextLabel2 = new QLabel( Frame14, "AutoStart" );
   TextLabel2->setGeometry( QRect( 20, 60, 100, 45 ) );
@@ -132,15 +134,18 @@ todayconfig::todayconfig( QWidget* parent,  const char* name, bool modal, WFlags
   CheckBoxAuto = new QCheckBox (Frame14, "CheckBoxAuto" );
   CheckBoxAuto->setGeometry( QRect( 158, 60, 27, 21 ) );
 
+  TimeLabel = new QLabel( Frame14, "TimeLabel" );
+  TimeLabel->setGeometry( QRect ( 20, 120, 120, 45 ) );
+  TimeLabel->setText( tr( "Activate the  \n"
+                          "autostart after how\n"
+                          "many minutes?" ) );
+  SpinBoxTime = new QSpinBox( Frame14, "TimeSpinner");
+  SpinBoxTime->setGeometry( QRect( 115,  120,  58, 25 ) );
+
   TabWidget3->insertTab( tab_3, tr( "Misc" ) );
 
 }
 
-/*
- *  Destroys the object and frees any allocated resources
- */
-todayconfig::~todayconfig()
-{
-    // no need to delete child widgets, Qt does it all for us
+todayconfig::~todayconfig() {
 }
 

@@ -97,7 +97,7 @@ namespace {
       tmpMime = cfg->readBoolEntry("text", true );
       if(tmpMime )
 	mimes.append("text//*");
-   
+
       tmpMime = cfg->readBoolEntry("video", true );
       if(tmpMime )
 	mimes.append("video//*" );
@@ -549,10 +549,10 @@ void Launcher::loadDocs() // ok here comes a hack belonging to Global::
     delete tmp;
     // find out wich filesystems are new in this round
     // We will do this by having a timestamp inside each mountpoint
-    // if the current timestamp doesn't match this is a new file system and 
+    // if the current timestamp doesn't match this is a new file system and
     // come up with our MediumMountGui :) let the hacking begin
     int stamp = uidgen.generate();
-    
+
     QString newStamp = QString::number( stamp ); // generates newtime Stamp
     StorageInfo storage;
     const QList<FileSystem> &fileSystems = storage.fileSystems();
@@ -591,7 +591,7 @@ void Launcher::loadDocs() // ok here comes a hack belonging to Global::
 	      delete tmp;
 	    }
 	  }
-	} 
+	}
        }
     }
     m_timeStamp = newStamp;
@@ -687,7 +687,7 @@ void Launcher::systemMessage( const QCString &msg, const QByteArray &data)
       MRUList::removeTask( app );
     }else if ( msg == "linkChanged(QString)" ) {
       QString link;
-      stream >> link;  
+      stream >> link;
   if ( in_lnk_props ) {
       got_lnk_change = TRUE;
       lnk_change = link;
@@ -741,34 +741,48 @@ void Launcher::systemMessage( const QCString &msg, const QByteArray &data)
   // register an app for autostart
   // if clear is send the list is cleared.
     } else if ( msg == "autoStart(QString)" ) {
-      QString appName;
-      stream >> appName;
-      Config cfg( "autostart" );
-      cfg.setGroup( "AutoStart" );
-      if ( appName.compare("clear") == 0){
-  cfg.writeEntry("Apps", "");
-      }
+        QString appName;
+        stream >> appName;
+        Config cfg( "autostart" );
+        cfg.setGroup( "AutoStart" );
+        if ( appName.compare("clear") == 0){
+            cfg.writeEntry("Apps", "");
+        }
     } else if ( msg == "autoStart(QString,QString)" ) {
-      QString modifier, appName;
-      stream >> modifier >> appName;
-      Config cfg( "autostart" );
-      cfg.setGroup( "AutoStart" );
-      if ( modifier.compare("add") == 0 ){
-  // only add it appname is entered
-  if (!appName.isEmpty()) {
-    cfg.writeEntry("Apps", appName);
-  }
-      } else if (modifier.compare("remove") == 0 ) {
-  // need to change for multiple entries
-  // actually remove is right now simular to clear, but in future there 
-  // should be multiple apps in autostart possible.
-  QString checkName;
-  checkName = cfg.readEntry("Apps", "");
-  if (checkName == appName) {
-    cfg.writeEntry("Apps", "");
-  }
-      }
-    } else if ( msg == "sendCardInfo()" ) {
+        QString modifier, appName;
+        stream >> modifier >> appName;
+        Config cfg( "autostart" );
+        cfg.setGroup( "AutoStart" );
+        if ( modifier.compare("add") == 0 ){
+            // only add if appname is entered
+            if (!appName.isEmpty()) {
+                cfg.writeEntry("Apps", appName);
+            }
+        } else if (modifier.compare("remove") == 0 ) {
+            // need to change for multiple entries
+            // actually remove is right now simular to clear, but in future there
+            // should be multiple apps in autostart possible.
+            QString checkName;
+            checkName = cfg.readEntry("Apps", "");
+            if (checkName == appName) {
+                cfg.writeEntry("Apps", "");
+            }
+        }
+        // case the autostart feature should be delayed
+    } else if ( msg == "autoStart(QString, QString, QString)") {
+         QString modifier, appName, delay;
+         stream >> modifier >> appName >> delay;
+        Config cfg( "autostart" );
+        cfg.setGroup( "AutoStart" );
+        if ( modifier.compare("add") == 0 ){
+            // only add it appname is entered
+            if (!appName.isEmpty()) {
+                cfg.writeEntry("Apps", appName);
+                cfg.writeEntry("Delay", delay);
+            }
+        } else {
+        }
+   } else if ( msg == "sendCardInfo()" ) {
         QCopEnvelope e( "QPE/Desktop", "cardInfo(QString)" );
         const QList<FileSystem> &fs = storage->fileSystems();
   QListIterator<FileSystem> it ( fs );
@@ -823,7 +837,7 @@ void Launcher::systemMessage( const QCString &msg, const QByteArray &data)
   syncDialog->showMaximized();
   syncDialog->whatLabel->setText( "<b>" + what + "</b>" );
   connect( syncDialog->buttonCancel, SIGNAL( clicked() ),
-     SLOT( cancelSync() ) );  
+     SLOT( cancelSync() ) );
     }
     else if ( msg == "stopSync()") {
   delete syncDialog; syncDialog = 0;
@@ -862,7 +876,7 @@ void Launcher::systemMessage( const QCString &msg, const QByteArray &data)
   //qDebug( "sending length %d", contents.length() );
   QCopEnvelope e( "QPE/Desktop", "docLinks(QString)" );
   e << contents;
-  
+
   qDebug( "================ \n\n%s\n\n===============",
   contents.latin1() );
 

@@ -27,6 +27,7 @@
 #include <qpe/qpeapplication.h>
 
 #include <qwidget.h>
+#include <qdatetime.h>
 
 class Background;
 class Launcher;
@@ -126,6 +127,7 @@ private:
     TransferServer *transferServer;
     PackageSlave *packageSlave;
 
+    QDateTime suspendTime;
     bool keyclick,touchclick;
 };
 

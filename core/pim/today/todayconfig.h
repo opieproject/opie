@@ -1,19 +1,29 @@
-/****************************************************************************
-** Form interface generated from reading ui file 'todayconfig.ui'
-**
-** Created: Thu Feb 14 15:04:33 2002
-**      by:  The User Interface Compiler (uic)
-**
-** WARNING! All changes made in this file will be lost!
-****************************************************************************/
+/*
+ * todayconfig.h
+ *
+ * ---------------------
+ *
+ * begin       : Sun 10 17:20:00 CEST 2002
+ * copyright   : (c) 2002 by Maximilian Reiﬂ
+ * email       : max.reiss@gmx.de
+ *
+ */
+/***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ ***************************************************************************/
 #ifndef TODAYCONFIG_H
 #define TODAYCONFIG_H
 
 #include <qvariant.h>
 #include <qdialog.h>
-//class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+//class QVBoxLayout;
+class QHBoxLayout;
+class QGridLayout;
 class QCheckBox;
 class QFrame;
 class QLabel;
@@ -21,8 +31,7 @@ class QSpinBox;
 class QTabWidget;
 class QWidget;
 
-class todayconfig : public QDialog
-{ 
+class todayconfig : public QDialog {
     Q_OBJECT
 
 public:
@@ -49,7 +58,9 @@ public:
     QFrame* Frame14;
     QLabel* TextLabel1;
     QSpinBox* SpinBox7;
+    QLabel* TimeLabel;
+    QSpinBox* SpinBoxTime;
 
 };
 
-#endif // TODAYCONFIG_H
+#endif

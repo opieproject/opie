@@ -22,7 +22,7 @@
 #include <qpe/timestring.h>
 #include <qpe/config.h>
 #include <qpe/qcopenvelope_qws.h>
-#include <qpe/qprocess.h>
+//#include <qpe/qprocess.h>
 #include <qpe/resource.h>
 #include <qpe/contact.h>
 #include <qpe/global.h>
@@ -38,7 +38,7 @@
 #include <qlabel.h>
 #include <qtimer.h>
 #include <qpixmap.h>
-#include <qfileinfo.h>
+//#include <qfileinfo.h>
 #include <qlayout.h>
 #include <qtl.h>
 
@@ -55,6 +55,7 @@ int SHOW_NOTES;
 int ONLY_LATER;
 int AUTOSTART;
 int NEW_START=1;
+QString AUTOSTART_TIMER;
 
 /*
  *  Constructs a Example which is a child of 'parent', with the
@@ -126,15 +127,17 @@ void Today::setOwnerField(QString &message) {
  * If registered against that today ist started on each resume.
  */
 void Today::autoStart() {
-  Config cfg("today");
-  cfg.setGroup("Autostart");
-  AUTOSTART = cfg.readNumEntry("autostart",1);
+    // Config cfg("today");
+    //cfg.setGroup("Autostart");
+    //AUTOSTART = cfg.readNumEntry("autostart",1);
+
   if (AUTOSTART) {
-    QCopEnvelope e("QPE/System", "autoStart(QString,QString)");
+    QCopEnvelope e("QPE/System", "autoStart(QString, QString, QString)");
     e << QString("add");
     e << QString("today");
+    e << AUTOSTART_TIMER;
   } else {
-    QCopEnvelope e("QPE/System", "autoStart(QString,QString)");
+    QCopEnvelope e("QPE/System", "autoStart(QString, QString)");
     e << QString("remove");
     e << QString("today");
   }
@@ -212,6 +215,10 @@ void Today::init() {
   // should only later appointments be shown or all for the current day.
   ONLY_LATER = cfg.readNumEntry("onlylater",1);
 
+  cfg.setGroup("Autostart");
+  AUTOSTART = cfg.readNumEntry("autostart",1);
+  AUTOSTART_TIMER = cfg.readEntry("autostartdelay", "0");
+
   //db = new DateBookDB;
 }
 
@@ -240,6 +247,8 @@ void Today::startConfig() {
   conf->CheckBox3->setChecked(ONLY_LATER);
   // if today should be autostarted
   conf->CheckBoxAuto->setChecked(AUTOSTART);
+  // autostart only if device has been suspended for X minutes
+  conf->SpinBoxTime->setValue( AUTOSTART_TIMER.toInt() );
 
   conf->exec();
 
@@ -249,7 +258,8 @@ void Today::startConfig() {
   int notes = conf->CheckBox2->isChecked();
   int maxcharclip = conf->SpinBox7->value();
   int onlylater = conf->CheckBox3->isChecked();
-  int autostart =conf->CheckBoxAuto->isChecked();
+  int autostart = conf->CheckBoxAuto->isChecked();
+  int autostartdelay = conf->SpinBoxTime->value();
 
   cfg.writeEntry("maxlinestask",maxlinestask);
   cfg.writeEntry("maxcharclip", maxcharclip);
@@ -259,6 +269,7 @@ void Today::startConfig() {
   cfg.writeEntry("onlylater", onlylater);
   cfg.setGroup("Autostart");
   cfg.writeEntry("autostart", autostart);
+  cfg.writeEntry("autostartdelay", autostartdelay);
 
   // sync it to "disk"
   cfg.write();

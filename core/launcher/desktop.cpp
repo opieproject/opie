@@ -35,6 +35,7 @@
 #include <qpe/password.h>
 #include <qpe/config.h>
 #include <qpe/power.h>
+#include <qpe/timeconversion.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/global.h>
 #ifdef QT_QWS_CUSTOM
@@ -56,7 +57,7 @@ class QCopKeyRegister
 {
 public:
   QCopKeyRegister() : keyCode(0) { }
-  QCopKeyRegister(int k, const QString &c, const QString &m) 
+  QCopKeyRegister(int k, const QString &c, const QString &m)
   : keyCode(k), channel(c), message(m) { }
 
   int getKeyCode() const { return keyCode; }
@@ -168,14 +169,14 @@ void DesktopApplication::receive( const QCString &msg, const QByteArray &data )
     stream >> k;
     stream >> c;
     stream >> m;
-    
+
     qWarning("KeyRegisterRecieved: %i, %s, %s", k, (const char*)c, (const char *)m);
     keyRegisterList.append(QCopKeyRegister(k,c,m));
-  } 
+  }
   else if (msg == "suspend()"){
     emit power();
   }
-  
+
 }
 
 enum MemState { Unknown, VeryLow, Low, Normal } memstate=Unknown;
@@ -277,7 +278,7 @@ bool DesktopApplication::qwsEventFilter( QWSEvent *e )
       }
     }
     }
-  
+
     return QPEApplication::qwsEventFilter( e );
 }
 #endif
@@ -547,14 +548,21 @@ void Desktop::raiseEmail()
 }
 
 // autoStarts apps on resume and start
-void Desktop::execAutoStart()
-{
-  QString appName;
-  Config cfg( "autostart" );
-  cfg.setGroup( "AutoStart" );
-  appName = cfg.readEntry("Apps", "");
-  QCopEnvelope e("QPE/System", "execute(QString)");
-  e << QString(appName);
+void Desktop::execAutoStart() {
+    QString appName;
+    int delay;
+    QDateTime now = QDateTime::currentDateTime();
+    Config cfg( "autostart" );
+    cfg.setGroup( "AutoStart" );
+    appName = cfg.readEntry("Apps", "");
+    delay = (cfg.readEntry("Delay", "0" )).toInt();
+    // If the time between suspend and resume was longer then the
+    // value saved as delay, start the app
+    if ( suspendTime.secsTo(now) >= (delay*60) ) {
+        QCopEnvelope e("QPE/System", "execute(QString)");
+        e << QString(appName);
+    } else {
+    }
 }
 
 #if defined(QPE_HAVE_TOGGLELIGHT)
@@ -593,13 +601,14 @@ void Desktop::togglePower()
 {
   bool wasloggedin = loggedin;
   loggedin=0;
+  suspendTime = QDateTime::currentDateTime();
   darkScreen();
   if ( wasloggedin )
     blankScreen();
-  
+
   system("apm --suspend");
-  
-  
+
+
 
   QWSServer::screenSaverActivate( FALSE );
   {
