@@ -11,7 +11,7 @@ class MailApplet : public QButton {
 	Q_OBJECT
 
 public:
-	MailApplet(QWidget *parent = 0, const char  *name = 0, WFlags fl = 0);
+	MailApplet( QWidget *parent = 0, const char  *name = 0, WFlags fl = 0 );
 
 protected:
 	void drawButton(QPainter *);

@@ -68,8 +68,36 @@ void MailApplet::slotCheck() {
 		m_intervalMs = newIntervalMs;
 	}
 
+        int newMails = 0;
+
+       	if ( true ) {
+		ODevice *device = ODevice::inst();
+		if ( isHidden() ) show();
+		if ( m_config->readBoolEntry( "BlinkLed", true ) ) {
+			if ( !device-> ledList ( ).isEmpty( ) ) {
+				OLed led = ( device->ledList( ).contains( Led_Mail ) ) ? Led_Mail : device->ledList( ) [0];
+					device->setLedState( led, device->ledStateList( led ).contains( Led_BlinkSlow ) ? Led_BlinkSlow : Led_On );
+			}
+		}
+		if ( m_config->readBoolEntry( "PlaySound", false ) )
+			device->alarmSound();
+
+        Config cfg( "mail" );
+        cfg.setGroup( "Status" );
+        cfg.writeEntry( "NewMails", newMails ); // todo
+
+    QCopEnvelope env( "QPE/Pim", "newMails(int)" );
+    env << newMails;
+
+	} else {
+		ODevice *device = ODevice::inst();
+		if ( !isHidden() ) hide();
+		if ( !device-> ledList( ).isEmpty( ) ) {
+			OLed led = ( device->ledList( ).contains( Led_Mail ) ) ? Led_Mail : device->ledList( ) [0];
+				device->setLedState( led, Led_Off );
+		}
+	}
+
         // go trough accounts and check here
-        // depending on result show or hide
         // also trigger qcop call and save status to config
-        // get led to blink
 }

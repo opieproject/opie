@@ -36,7 +36,8 @@ INTERFACES     = editaccountsui.ui \
                composemailui.ui \
                settingsdialogui.ui \
                statuswidgetui.ui \
-               newmaildirui.ui
+               newmaildirui.ui 
+	
 
 INCLUDEPATH += $(OPIEDIR)/include
 
