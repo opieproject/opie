@@ -6,10 +6,7 @@
    Btw. did i mention that i hate C?
    
    To compile use:
-   gcc wlan-sniffer.c -o wlan-sniffer -lpcap
-
-	use it like this:
-		wlan-sniffer interface
+   gcc sniffer.c -o wlan-sniffer -lpcap
 
 */
 #include "sniffer.h"
@@ -215,7 +212,7 @@ void process_packets(u_char *useless,const struct pcap_pkthdr* pkthdr,const u_ch
 							return;
 						}
 							   
-						/* Decoding successfull of beacon frame */
+						/* Here should be the infos to the gui issued */
 						if (pinfoptr->cap_ESS == 1 &&pinfoptr->cap_IBSS ==0)
 						{
 							printf ("\nHave found an accesspoint:");
