@@ -3,6 +3,7 @@
 #include <qpe/resource.h>
 #include <qpe/config.h>
 #include <qpe/qcopenvelope_qws.h>
+#include <qfileinfo.h>
 
 #include <qmainwindow.h>
 #include <qmessagebox.h>
@@ -75,8 +76,8 @@ void MediaPlayer::pauseCheck( bool b ) {
 }
 
 void MediaPlayer::play() {
-        mediaPlayerState->setPlaying( FALSE );
-        mediaPlayerState->setPlaying( TRUE );
+    mediaPlayerState->setPlaying( FALSE );
+    mediaPlayerState->setPlaying( TRUE );
 }
 
 void MediaPlayer::setPlaying( bool play ) {
@@ -84,56 +85,85 @@ void MediaPlayer::setPlaying( bool play ) {
         return;
     }
 
-     if ( mediaPlayerState->paused() ) {
-         mediaPlayerState->setPaused( FALSE );
-         return;
-     }
-
-    const DocLnk *playListCurrent = playList->current();
-    if ( playListCurrent != NULL ) {
-        currentFile = playListCurrent;
+    if ( mediaPlayerState->paused() ) {
+        mediaPlayerState->setPaused( FALSE );
+        return;
     }
 
-    xineControl->play( currentFile->file() );
+    QString tickerText, time, fileName;
+    if( playList->whichList() == 0 ) { //check for filelist
+        const DocLnk *playListCurrent = playList->current();
+        if ( playListCurrent != NULL ) {
+            currentFile = playListCurrent;
+        }
+        xineControl->play( currentFile->file() );
+        fileName = currentFile->name();
+        long seconds =  mediaPlayerState->length();//
+        time.sprintf("%li:%02i", seconds/60, (int)seconds%60 );
+        qDebug(time);
+        
+    } else { //if playing in file list.. play in a different way
+          // random and looping settings enabled causes problems here,
+          // since there is no selected file in the playlist, but a selected file in the file list,
+          // so we remember and shutoff
+        l = mediaPlayerState->looping();
+        if(l)
+            mediaPlayerState->setLooping( false );
+        r = mediaPlayerState->shuffled();
+        mediaPlayerState->setShuffled(false);
+        
+        fileName = playList->currentFileListPathName();
+        xineControl->play( fileName);
+        long seconds =  mediaPlayerState->length();//
+        time.sprintf("%li:%02i", seconds/60, (int)seconds%60 );
+        qDebug(time);
+        if( fileName.left(4) != "http" )
+            fileName = QFileInfo( fileName).baseName();
 
-    long seconds =  mediaPlayerState->length();//
-    QString time; time.sprintf("%li:%02i", seconds/60, (int)seconds%60 );
-    qDebug(time);
-
-    QString tickerText;
-    if( currentFile->file().left(4) == "http" )
-     tickerText= tr( " File: " ) + currentFile->name();
-    else
-    tickerText = tr( " File: " ) + currentFile->name() + tr(", Length: ") + time;
-
-    audioUI->setTickerText( currentFile->file( ) );
-
+    }
+        if( fileName.left(4) == "http" )
+            tickerText= tr( " File: " ) + fileName;
+        else
+            tickerText = tr( " File: " ) + fileName + tr(", Length: ") + time;
+    audioUI->setTickerText( tickerText );
 }
 
 
 void MediaPlayer::prev() {
-    if ( playList->prev() ) {
-        play();
-    } else if ( mediaPlayerState->looping() ) {
-        if ( playList->last() ) {
+    if(playList->whichList() == 0) { //if using the playlist
+        if ( playList->prev() ) {
             play();
+        } else if ( mediaPlayerState->looping() ) {
+            if ( playList->last() ) {
+                play();
+            }
+        } else {
+            mediaPlayerState->setList();
         }
-    } else {
-        mediaPlayerState->setList();
     }
 }
 
 
 void MediaPlayer::next() {
-    if ( playList->next() ) {
-        play();
-    } else if ( mediaPlayerState->looping() ) {
-        if ( playList->first() ) {
+
+    if(playList->whichList() == 0) { //if using the playlist
+        if ( playList->next() ) {
             play();
+        } else if ( mediaPlayerState->looping() ) {
+            if ( playList->first() ) {
+                play();
+            }
+        } else {
+            mediaPlayerState->setList();
         }
-    } else {
-        mediaPlayerState->setList();
+    } else { //if playing from file list, let's just stop
+        qDebug("<<<<<<<<<<<<<<<<<stop for filelists");
+        mediaPlayerState->setPlaying(false);
+        mediaPlayerState->setView('l');
+        if(l) mediaPlayerState->setLooping(l);
+        if(r) mediaPlayerState->setShuffled(r);
     }
+    qApp->processEvents();
 }
 
 

@@ -155,6 +155,7 @@ PlayListWidgetGui::PlayListWidgetGui( QWidget* parent, const char* name, WFlags 
     audioView->addColumn( tr( "Title" ), 140 );
     audioView->addColumn( tr( "Size" ),  -1 );
     audioView->addColumn( tr( "Media" ), -1 );
+    audioView->addColumn( tr( "Path" ), 0 );
     audioView->setColumnAlignment( 1, Qt::AlignRight );
     audioView->setColumnAlignment( 2, Qt::AlignRight );
     audioView->setAllColumnsShowFocus( TRUE );
@@ -176,6 +177,7 @@ PlayListWidgetGui::PlayListWidgetGui( QWidget* parent, const char* name, WFlags 
     videoView->addColumn( tr( "Title" ), 140);
     videoView->addColumn( tr( "Size" ), -1 );
     videoView->addColumn(tr( "Media" ), -1 );
+    videoView->addColumn(tr( "Path" ), 0 );
     videoView->setColumnAlignment( 1, Qt::AlignRight );
     videoView->setColumnAlignment( 2, Qt::AlignRight );
     videoView->setAllColumnsShowFocus( TRUE );

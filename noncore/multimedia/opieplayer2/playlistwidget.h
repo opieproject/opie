@@ -66,6 +66,7 @@ public:
     const DocLnk *current();
     void useSelectedDocument();
     int selected;
+    int whichList();
 
 public slots:
     bool first();
@@ -73,7 +74,7 @@ public slots:
     bool next();
     bool prev();
     void writeConfig( Config& cfg ) const;
-
+    QString currentFileListPathName();
 protected:
     void keyReleaseEvent( QKeyEvent *e);
 

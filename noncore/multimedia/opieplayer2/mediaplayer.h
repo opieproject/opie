@@ -17,7 +17,6 @@ class MediaPlayer : public QObject {
 public:
     MediaPlayer( QObject *parent, const char *name );
     ~MediaPlayer();
-
 private slots:
     void setPlaying( bool );
     void pauseCheck( bool );
@@ -34,7 +33,7 @@ protected:
     void timerEvent( QTimerEvent *e );
     void keyReleaseEvent( QKeyEvent *e);
 private:
-    bool isBlanked;
+    bool isBlanked, l, r;
     int fd;
     int     volumeDirection;
     const DocLnk  *currentFile;

@@ -25,6 +25,7 @@ InputDialog::InputDialog( QWidget* parent,  const char* name, bool modal, WFlags
     connect( browserButton, SIGNAL(released()),this,SLOT(browse()));
     LineEdit1 = new QLineEdit( this, "LineEdit1" );
     LineEdit1->setGeometry( QRect( 4, 10, 190, 22 ) );
+    LineEdit1->setFocus();
 }
 /*
  * return the current text(input)

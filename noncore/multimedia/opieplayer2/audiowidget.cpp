@@ -453,6 +453,7 @@ void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
                 if ( !audioButtons[i].isToggle ) {
                     setToggleButton( i, FALSE );
                 }
+                qDebug("mouseEvent %d", i);
                 switch (i) {
                 case AudioPlay:
                     if( mediaPlayerState->isPaused ) {
