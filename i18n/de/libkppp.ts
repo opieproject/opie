@@ -139,7 +139,7 @@ zu wollen ?</translation>
     <name>AuthWidget</name>
     <message>
         <source>Authentication: </source>
-        <translation type="unfinished">Authentisierung</translation>
+        <translation>Authentisierung:</translation>
     </message>
     <message>
         <source>Script-based</source>
@@ -234,7 +234,7 @@ niemand anders Zugang dazu erhält !
     <name>DNSWidget</name>
     <message>
         <source>Domain name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Domain Name:</translation>
     </message>
     <message>
         <source>If you enter a domain name here, this domain
@@ -245,23 +245,30 @@ restored.
 
 If you leave this field blank, no changes are
 made to the domain name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wenn Sie einen Domainnamen hier angeben
+wird dieser Domainname für Ihren Computer 
+verwendet  während Sie verbunden sind.
+Wird die Verbindung beendet wird der 
+Originalname Ihres Computer wieder eingestellt.
+
+Lassen Sie dieses Feld leer wenn keine Änderung
+Ihres Domainnamens notwendig ist.</translation>
     </message>
     <message>
         <source>Configuration:</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguration:</translation>
     </message>
     <message>
         <source>Automatic</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatisch</translation>
     </message>
     <message>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>Manuell</translation>
     </message>
     <message>
         <source>DNS IP address:</source>
-        <translation type="unfinished"></translation>
+        <translation>DNS IP Addresse:</translation>
     </message>
     <message>
         <source>&lt;p&gt;Allows you to specify a new DNS server to be
@@ -271,40 +278,52 @@ removed again.
 
 To add a DNS server, type in the IP address of
 the DNS server here and click on &lt;b&gt;Add&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Ermöglicht die Angabe eines DNS-server der
+verwendet wird solange die Verbindung steht. Wird die 
+Verbindung beendet  wird auch der DNS-Eintrag wieder 
+entfernt.
+
+Um einen DNS hinzuzufügen geben Sie eine IP-Adresse
+des DNS an und klicken Sie &lt;b&gt;Hinzu&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Hinzu</translation>
     </message>
     <message>
         <source>Click this button to add the DNS server
 specified in the field above. The entry
 will then be added to the list below</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicken Sie diesen Schalter um den DNS
+aus dem obigen Feld hinzuzufügen.
+Der Eintrag wird zur unteren Liste gefügt</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Entfernen</translation>
     </message>
     <message>
         <source>Click this button to remove the selected DNS
 server entry from the list below</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicken Sie diesen Schalter um den gewählten DNS
+aus der Liste zu entfernen</translation>
     </message>
     <message>
         <source>DNS address list:</source>
-        <translation type="unfinished"></translation>
+        <translation>DNS Adressliste: </translation>
     </message>
     <message>
         <source>&lt;p&gt;This shows all defined DNS servers to use
 while you are connected. Use the &lt;b&gt;Add&lt;/b&gt; and
 &lt;b&gt;Remove&lt;/b&gt; buttons to modify the list</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Dies zeigt alle definierten DNS die verwendet
+werden während Sie verbunden sind. Benutzen Sie 
+die Schalter &lt;b&gt;Hinzu&lt;/b&gt; und &lt;b&gt;Entfernen&lt;/b&gt; um 
+die Liste zu verändern</translation>
     </message>
     <message>
         <source>Disable DNS servers during connection</source>
-        <translation type="unfinished"></translation>
+        <translation>DNS deaktivieren während einer Verbindung</translation>
     </message>
     <message>
         <source>&lt;p&gt;When this option is selected, all DNS
@@ -316,7 +335,14 @@ closed, the servers will be re-enabled
 Typically, there is no reason to use this
 option, but it may become useful under 
 some circumstances.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt; Ist diese Option aktiviert werden alle
+SND aus der &lt;tt&gt;/etc/resolv.conf&lt;/tt&gt; temporär deaktiviert
+während die Wählverbindung aufgebaut ist. Nach  
+Verbindungsende werden die Server wieder reaktiviert.
+
+Typischerweise gibt es keinen Grund diese Option
+zu verwenden, dennoch kann es unter Umständen
+sinnvoll sein.</translation>
     </message>
 </context>
 <context>
