@@ -22,6 +22,9 @@
 #include "dateentryimpl.h"
 #include "repeatentry.h"
 
+#include <opie2/odebug.h>
+#include <opie2/otimepicker.h>
+
 #include <qpe/qpeapplication.h>
 #include <qpe/categoryselect.h>
 #include <qpe/datebookmonth.h>
@@ -30,7 +33,6 @@
 #include <qlineedit.h>
 #include <qspinbox.h>
 
-#include <opie2/otimepicker.h>
 #include "onoteedit.h"
 
 #include <stdlib.h>
@@ -429,7 +431,7 @@ Event DateEntry::event()
     QDateTime end( endDate, endTime );
     time_t start_utc, end_utc;
 
-//    qDebug( "tz: %s", timezone->currentZone().latin1() );
+//	Opie::Core::odebug << "tz: " << timezone->currentZone() << oendl;
 
     // get real timezone
     QString realTZ;
@@ -437,7 +439,7 @@ Event DateEntry::event()
 
     // set timezone
     if ( setenv( "TZ", timezone->currentZone(), true ) != 0 )
-	qWarning( "There was a problem setting the timezone." );
+	Opie::Core::owarn << "There was a problem setting the timezone." << oendl;
 
     // convert to UTC based on selected TZ (calling tzset internally)
     start_utc = TimeConversion::toUTC( start );
@@ -447,7 +449,7 @@ Event DateEntry::event()
     unsetenv( "TZ" );
     if ( !realTZ.isNull() )
         if ( setenv( "TZ", realTZ, true ) != 0 )
-	    qWarning( "There was a problem setting the timezone." );
+			Opie::Core::owarn << "There was a problem setting the timezone." << oendl;
 
     // convert UTC to local time (calling tzset internally)
     ev.setStart( TimeConversion::fromUTC( start_utc ) );

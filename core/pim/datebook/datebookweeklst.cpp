@@ -1,8 +1,9 @@
 #include "namespace_hack.h"
 #include "datebookweeklst.h"
 
-
 #include "datebook.h"
+
+#include <opie2/odebug.h>
 
 #include <qpe/datebookmonth.h>
 #include <qpe/config.h>
@@ -159,7 +160,7 @@ DateBookWeekLstEvent::DateBookWeekLstEvent(const EffectiveEvent &ev,
 	// old values... lastday = "__|__", middle="   |---", Firstday="00:00",
 	QString s,start,middle,end,day;
 
-	qDebug("weeklistviewconfig=%d",weeklistviewconfig);
+	Opie::Core::odebug << "weeklistviewconfig=" << weeklistviewconfig << oendl;
 	if(weeklistviewconfig==NONE) {	// No times displayed.
 //		start.sprintf("%.2d:%.2d-",ev.start().hour(),ev.start().minute());
 //		middle.sprintf("<--->");
@@ -208,7 +209,7 @@ DateBookWeekLstView::DateBookWeekLstView(QValueList<EffectiveEvent> &ev,
 	Config config("DateBook");
 	config.setGroup("Main");
 	int weeklistviewconfig=config.readNumEntry("weeklistviewconfig", NORMAL);
-	qDebug("Read weeklistviewconfig: %d",weeklistviewconfig);
+	Opie::Core::odebug << "weeklistviewconfig: " << weeklistviewconfig << oendl;
 
 	bStartOnMonday=onM;
 	setPalette(white);

@@ -19,6 +19,9 @@
 **********************************************************************/
 #include "datebookweekheaderimpl.h"
 #include "datebookweek.h"
+
+#include <opie2/odebug.h>
+
 #include <qpe/resource.h>
 #include <qpe/datebookmonth.h>
 
@@ -66,22 +69,22 @@ void DateBookWeekHeader::pickDate()
 
 void DateBookWeekHeader::nextMonth()
 {
-	qWarning("nextMonth() " );
+	Opie::Core::owarn << "nextMonth()" << oendl;
 	setDate(date.addDays(28));
 }
 void DateBookWeekHeader::prevMonth()
 {
-	qWarning("prevMonth() " );
+	Opie::Core::owarn << "prevMonth()" << oendl;
 	setDate(date.addDays(-28));
 }
 void DateBookWeekHeader::nextWeek()
 {
-	qWarning("nextWeek() " );
+	Opie::Core::owarn << "nextWeek()" << oendl;
 	setDate(date.addDays(7));
 }
 void DateBookWeekHeader::prevWeek()
 {
-	qWarning("prevWeek() ");
+	Opie::Core::owarn << "prevWeek()" << oendl;
 	setDate(date.addDays(-7));
 }
 

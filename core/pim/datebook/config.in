@@ -1,4 +1,4 @@
   config DATEBOOK
     boolean "opie-datebook (a datebook/appointment manager)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2UI
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI && LIBOPIE2PIM

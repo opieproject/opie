@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.34 2004-03-02 12:14:19 alwin Exp $
+** $Id: datebook.cpp,v 1.35 2004-04-02 21:00:39 drw Exp $
 **
 **********************************************************************/
 
@@ -29,6 +29,8 @@
 #include "datebookweeklst.h"
 #include "dateentryimpl.h"
 
+#include <opie2/odebug.h>
+
 #include <qpe/datebookmonth.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
@@ -37,7 +39,6 @@
 #include <qpe/qpemessagebox.h>
 #include <qpe/resource.h>
 #include <qpe/sound.h>
-#include <qtoolbar.h>
 #include <qpe/tzselect.h>
 
 #include <qaction.h>
@@ -46,6 +47,7 @@
 #include <qmessagebox.h>
 #include <qtimer.h>
 #include <qtl.h>
+#include <qtoolbar.h>
 #include <qwidgetstack.h>
 
 #include <sys/stat.h>
@@ -70,7 +72,7 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
 	QTime t;
 	t.start();
 	db = new DateBookDBHack;
-	qDebug("loading db t=%d", t.elapsed() );
+	Opie::Core::odebug << "loading db t=" << t.elapsed() << oendl;
 	loadSettings();
 	setCaption( tr("Calendar") );
 	setIcon( Resource::loadPixmap( "datebook_icon" ) );
@@ -174,7 +176,7 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
 #endif
 #endif
 
-	qDebug("done t=%d", t.elapsed() );
+	Opie::Core::odebug << "done t=" << t.elapsed() << oendl;
 
         connect( qApp, SIGNAL( flush() ), this, SLOT( flush() ) );
         connect( qApp, SIGNAL( reload()), this, SLOT( reload() ) );
@@ -900,7 +902,7 @@ static const char * beamfile = "/tmp/obex/event.vcs";
 
 void DateBook::beamEvent( const Event &e )
 {
-    qDebug("trying to beamn");
+	Opie::Core::odebug << "trying to beam" << oendl;
     unlink( beamfile ); // delete if exists
     mkdir("/tmp/obex/", 0755);
     Event::writeVCalendar( beamfile, e );
