@@ -7,15 +7,15 @@
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Niezdefiniowane</translation>
+        <translation>Nieprzydzielone</translation>
     </message>
     <message>
         <source> (multi.)</source>
-        <translation type="unfinished"></translation>
+        <translation>(kilka)</translation>
     </message>
     <message>
         <source>Business</source>
-        <translation>Biznes</translation>
+        <translation>Służbowe</translation>
     </message>
     <message>
         <source>Personal</source>
@@ -26,7 +26,7 @@
     <name>CategoryCombo</name>
     <message>
         <source> (Multi.)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Kilka)</translation>
     </message>
 </context>
 <context>
@@ -56,11 +56,11 @@
     </message>
     <message>
         <source>Application</source>
-        <translation>Aplikacje</translation>
+        <translation>Aplikacja</translation>
     </message>
     <message>
         <source>Categories Go Here</source>
-        <translation>Kategorie sa tu</translation>
+        <translation>Tu są kategorie</translation>
     </message>
     <message>
         <source>Add</source>
@@ -72,23 +72,23 @@
     </message>
     <message>
         <source>Check the categories this document belongs to.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaznacz kategorie, do których należy ten dokument.</translation>
     </message>
     <message>
         <source>Enter a new category here.  Press &lt;b&gt;Add&lt;/b&gt; to add it to the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wpisz tu nową kategorię. Wciśnij &lt;b&gt;Dodaj&lt;/b&gt; by dodać ją do listy.</translation>
     </message>
     <message>
         <source>Enter a new category to the left and press to add it to the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wpisz nową kategorię po lewej i wciśnij by ją dodać do listy.</translation>
     </message>
     <message>
         <source>Press to delete the highlighted category.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wciśnij by usunąć podświetloną kategorię.</translation>
     </message>
     <message>
         <source>Check to make this property available to all applications.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaznacz aby udostępnić tą właściwość wszystkim aplikacjom.</translation>
     </message>
 </context>
 <context>
@@ -106,7 +106,7 @@
     <name>CategorySelect</name>
     <message>
         <source>Error</source>
-        <translation>Blad</translation>
+        <translation>Błąd</translation>
     </message>
     <message>
         <source>Sorry, another application is
@@ -127,50 +127,50 @@ edytuje kategorie.</translation>
     <name>DateBookMonthHeader</name>
     <message>
         <source>Show January in the selected year</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaż Styczeń wybranego roku</translation>
     </message>
     <message>
         <source>Show the previous month</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaż poprzedni miesiąc</translation>
     </message>
     <message>
         <source>Show the next month</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaż następny miesiąc</translation>
     </message>
     <message>
         <source>Show December in the selected year</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaż Grudzień wybranego roku</translation>
     </message>
 </context>
 <context>
     <name>FileSelector</name>
     <message>
         <source>Close the File Selector</source>
-        <translation>Zamknij wybor plikow</translation>
+        <translation>Zamknij wybór plików</translation>
     </message>
     <message>
         <source>Show documents of this type</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaż dokumenty tego pliku</translation>
     </message>
     <message>
         <source>Document View</source>
-        <translation type="unfinished">Widok dokumentu</translation>
+        <translation>Widok dokumentu</translation>
     </message>
     <message>
         <source>Show documents in this category</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaż dokumenty tej kategorii</translation>
     </message>
     <message>
         <source>Click to select a document from the list</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij aby wybrać dokument z listy</translation>
     </message>
     <message>
         <source>, or select &lt;b&gt;New Document&lt;/b&gt; to create a new document.</source>
-        <translation type="unfinished"></translation>
+        <translation>, albo wybierz &lt;b&gt;Nowy dokument&lt;/b&gt; aby stworzyć nowy dokument.</translation>
     </message>
     <message>
         <source>&lt;br&gt;&lt;br&gt;Click and hold for document properties.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;&lt;br&gt;Kliknij i przytrzymaj by zobaczyć właściwości dokumentu.</translation>
     </message>
 </context>
 <context>
@@ -184,37 +184,37 @@ edytuje kategorie.</translation>
     <name>FindDialog</name>
     <message>
         <source>Find</source>
-        <translation type="unfinished">Znajdz</translation>
+        <translation>Znajdź</translation>
     </message>
 </context>
 <context>
     <name>FindWidget</name>
     <message>
         <source>String Not Found.</source>
-        <translation>Brak tekstu.</translation>
+        <translation>Tekst nie został znaleziony.</translation>
     </message>
     <message>
         <source>End reached, starting at beginning</source>
-        <translation type="unfinished"></translation>
+        <translation>Osiągnąłem koniec, zaczynam od początku</translation>
     </message>
 </context>
 <context>
     <name>FindWidgetBase</name>
     <message>
         <source>Find</source>
-        <translation>Znajdz</translation>
+        <translation>Znajdź</translation>
     </message>
     <message>
         <source>Find what:</source>
-        <translation>Co szukac:</translation>
+        <translation>Czego szukać:</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation>kategoria:</translation>
+        <translation>Kategoria:</translation>
     </message>
     <message>
         <source>Start Search at:</source>
-        <translation>Zacznij szukac od:</translation>
+        <translation>Zacznij szukać od:</translation>
     </message>
     <message>
         <source>Dec 02 01</source>
@@ -222,7 +222,7 @@ edytuje kategorie.</translation>
     </message>
     <message>
         <source>Case Sensitive</source>
-        <translation>Rozrozniaj wielkosc</translation>
+        <translation>Rozróżniaj wielkość liter</translation>
     </message>
     <message>
         <source>Search Backwards</source>
@@ -237,15 +237,15 @@ edytuje kategorie.</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Usun</translation>
+        <translation>Usuń</translation>
     </message>
     <message>
         <source>File deletion failed.</source>
-        <translation>Usuwanie nie powiodlo sie.</translation>
+        <translation>Usunięcie pliku nie udało się.</translation>
     </message>
     <message>
         <source>Copy of </source>
-        <translation>Kopia z </translation>
+        <translation>Kopia</translation>
     </message>
     <message>
         <source>Duplicate</source>
@@ -253,30 +253,30 @@ edytuje kategorie.</translation>
     </message>
     <message>
         <source>File copy failed.</source>
-        <translation>Blad kopiowania.</translation>
+        <translation>Skopiowanie pliku nie udało się.</translation>
     </message>
     <message>
         <source>Details</source>
-        <translation>Szczegoly</translation>
+        <translation>Szczegóły</translation>
     </message>
     <message>
         <source>Moving Document failed.</source>
-        <translation>Blad przenoszenia dokumentu.</translation>
+        <translation>Przeniesienie pliku nie udało się.</translation>
     </message>
     <message>
         <source>Hard Disk</source>
-        <translation type="unfinished"></translation>
+        <translation>Dysk twardy</translation>
     </message>
     <message>
         <source>Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Właściwości</translation>
     </message>
 </context>
 <context>
     <name>LnkPropertiesBase</name>
     <message>
         <source>Details</source>
-        <translation>Szczegoly</translation>
+        <translation>Szczegóły</translation>
     </message>
     <message>
         <source>Comment:</source>
@@ -296,11 +296,11 @@ edytuje kategorie.</translation>
     </message>
     <message>
         <source>Fast load (consumes memory)</source>
-        <translation>Szybkie ladowanie (wykorzystuje pamiec)</translation>
+        <translation>Szybkie ładowanie (zajmuje pamięć)</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Usun</translation>
+        <translation>Usuń</translation>
     </message>
     <message>
         <source>Copy</source>
@@ -308,104 +308,104 @@ edytuje kategorie.</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation type="unfinished"></translation>
+        <translation>Emituj</translation>
     </message>
     <message>
         <source>The media the document resides on.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nośnik, na którym znajduje się dokument.</translation>
     </message>
     <message>
         <source>The name of this document.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nazwa tego dokumentu.</translation>
     </message>
     <message>
         <source>Preload this application so that it is available instantly.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ładuj aplikację do pamięci by była szybko dostępna.</translation>
     </message>
     <message>
         <source>Delete this document.</source>
-        <translation type="unfinished"></translation>
+        <translation>Usuń ten dokument.</translation>
     </message>
     <message>
         <source>Make a copy of this document.</source>
-        <translation type="unfinished"></translation>
+        <translation>Twórz kopię tego dokumentu.</translation>
     </message>
     <message>
         <source>Beam this document to another device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Emituj ten dokument do innego urządzenia.</translation>
     </message>
     <message>
         <source>Use custom rotation</source>
-        <translation type="unfinished"></translation>
+        <translation>Używaj rotacji użytkownika</translation>
     </message>
 </context>
 <context>
     <name>OwnerDlg</name>
     <message>
         <source>Owner Information</source>
-        <translation>informacje wlasciciela</translation>
+        <translation>Informacje o właścicielu</translation>
     </message>
 </context>
 <context>
     <name>PasswordBase</name>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation>2</translation>
     </message>
     <message>
         <source>3</source>
-        <translation type="unfinished"></translation>
+        <translation>3</translation>
     </message>
     <message>
         <source>4</source>
-        <translation type="unfinished"></translation>
+        <translation>4</translation>
     </message>
     <message>
         <source>5</source>
-        <translation type="unfinished"></translation>
+        <translation>5</translation>
     </message>
     <message>
         <source>6</source>
-        <translation type="unfinished"></translation>
+        <translation>6</translation>
     </message>
     <message>
         <source>7</source>
-        <translation type="unfinished"></translation>
+        <translation>7</translation>
     </message>
     <message>
         <source>8</source>
-        <translation type="unfinished"></translation>
+        <translation>8</translation>
     </message>
     <message>
         <source>9</source>
-        <translation type="unfinished"></translation>
+        <translation>9</translation>
     </message>
     <message>
         <source>0</source>
-        <translation type="unfinished"></translation>
+        <translation>0</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Enter passcode</source>
-        <translation>Wprowadz haslo</translation>
+        <translation>Podaj hasło</translation>
     </message>
 </context>
 <context>
     <name>QMessageBox</name>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Tak</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie</translation>
     </message>
 </context>
 <context>
@@ -425,42 +425,42 @@ try again.</source>
 Informacji Konfiguracyjnych
 dla tego programu.
 
-Zwolnij wiecej pamieci i
-sprobuj ponownie.</translation>
+Zwolnij więcej pamięci i
+spróbuj ponownie.</translation>
     </message>
     <message>
         <source>Unable to create start up files
 Please free up some space
 before entering data</source>
-        <translation>Nie moge utworzyc plikow startowych
-Prosze zrob wiecej miejsca
-w pamieci</translation>
+        <translation>Nie można utworzyć plików startowych
+Zrób więcej miejsca w pamięci
+przed wprowadzeniem danych</translation>
     </message>
     <message>
         <source>Unable to schedule alarm.
 Free some memory and try again.</source>
-        <translation>Nie moge uruchomic alarmu
-Zwolnij wiecej pamieci</translation>
+        <translation>Nie można ustawić alarmu
+Zwolnij więcej pamięci i spróbuj ponownie.</translation>
     </message>
     <message>
         <source>D</source>
-        <translation type="unfinished"></translation>
+        <translation>D</translation>
     </message>
     <message>
         <source>M</source>
-        <translation type="unfinished"></translation>
+        <translation>M</translation>
     </message>
     <message>
         <source>Y</source>
-        <translation type="unfinished"></translation>
+        <translation>R</translation>
     </message>
     <message>
         <source>day</source>
-        <translation>dzien</translation>
+        <translation>dzień</translation>
     </message>
     <message>
         <source>month</source>
-        <translation>miesiac</translation>
+        <translation>miesiąc</translation>
     </message>
     <message>
         <source>year</source>
@@ -468,11 +468,11 @@ Zwolnij wiecej pamieci</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation type="unfinished"></translation>
+        <translation>PM</translation>
     </message>
     <message>
         <source>AM</source>
-        <translation type="unfinished"></translation>
+        <translation>AM</translation>
     </message>
     <message>
         <source>Are you sure you want to delete
@@ -490,7 +490,7 @@ Zwolnij wiecej pamieci</translation>
     </message>
     <message>
         <source>&lt;b&gt;Work Address:&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Adres do pracy:&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Adres służbowy:&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Home Address:&lt;/b&gt;</source>
@@ -502,23 +502,23 @@ Zwolnij wiecej pamieci</translation>
     </message>
     <message>
         <source>Home Phone: </source>
-        <translation>Domowy telefon: </translation>
+        <translation>Tel. dom: </translation>
     </message>
     <message>
         <source>Home Fax: </source>
-        <translation>Domowy faks: </translation>
+        <translation>Faks dom: </translation>
     </message>
     <message>
         <source>Home Mobile: </source>
-        <translation>Domowa komorka: </translation>
+        <translation>Tel. kom. dom: </translation>
     </message>
     <message>
         <source>Home Web Page: </source>
-        <translation>Domowe WWW: </translation>
+        <translation>WWW dom: </translation>
     </message>
     <message>
         <source>Business Web Page: </source>
-        <translation>Biznesowe WWW:</translation>
+        <translation>WWW firma:</translation>
     </message>
     <message>
         <source>Office: </source>
@@ -526,35 +526,35 @@ Zwolnij wiecej pamieci</translation>
     </message>
     <message>
         <source>Business Phone: </source>
-        <translation>Biznesowy telefon: </translation>
+        <translation>Tel. firma: </translation>
     </message>
     <message>
         <source>Business Fax: </source>
-        <translation>Biznesowy faks: </translation>
+        <translation>Faks firma: </translation>
     </message>
     <message>
         <source>Business Mobile: </source>
-        <translation>Biznesowa komorka: </translation>
+        <translation>Tel. kom. firma: </translation>
     </message>
     <message>
         <source>Business Pager: </source>
-        <translation>Biznasowy pager: </translation>
+        <translation>Pager firma: </translation>
     </message>
     <message>
         <source>Profession: </source>
-        <translation>Zawod: </translation>
+        <translation>Zawód: </translation>
     </message>
     <message>
         <source>Assistant: </source>
-        <translation>Asystent</translation>
+        <translation>Asystent:</translation>
     </message>
     <message>
         <source>Manager: </source>
-        <translation>Manager: </translation>
+        <translation>Menadźer: </translation>
     </message>
     <message>
         <source>Male</source>
-        <translation>Mezczyzna</translation>
+        <translation>Mężczyzna</translation>
     </message>
     <message>
         <source>Female</source>
@@ -562,19 +562,19 @@ Zwolnij wiecej pamieci</translation>
     </message>
     <message>
         <source>Gender: </source>
-        <translation>Plec: </translation>
+        <translation>Płeć: </translation>
     </message>
     <message>
         <source>Spouse: </source>
-        <translation type="unfinished"></translation>
+        <translation>Partner:</translation>
     </message>
     <message>
         <source>Birthday: </source>
-        <translation>Urodzony: </translation>
+        <translation>Urodziny: </translation>
     </message>
     <message>
         <source>Anniversary: </source>
-        <translation type="unfinished"></translation>
+        <translation>Pocznica:</translation>
     </message>
     <message>
         <source>Nickname: </source>
@@ -582,15 +582,15 @@ Zwolnij wiecej pamieci</translation>
     </message>
     <message>
         <source>Name Title</source>
-        <translation>Tytul</translation>
+        <translation>Tytuł</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation>Imie</translation>
+        <translation>Imię</translation>
     </message>
     <message>
         <source>Middle Name</source>
-        <translation>Drugie imie</translation>
+        <translation>Drugie imię</translation>
     </message>
     <message>
         <source>Last Name</source>
@@ -598,19 +598,19 @@ Zwolnij wiecej pamieci</translation>
     </message>
     <message>
         <source>Suffix</source>
-        <translation>Tytul</translation>
+        <translation>Przyrostek</translation>
     </message>
     <message>
         <source>File As</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapisz jako</translation>
     </message>
     <message>
         <source>Job Title</source>
-        <translation>Nazwa zawodu</translation>
+        <translation>Tytuł służbowy</translation>
     </message>
     <message>
         <source>Department</source>
-        <translation>Wydzial</translation>
+        <translation>Wydział</translation>
     </message>
     <message>
         <source>Company</source>
@@ -618,63 +618,63 @@ Zwolnij wiecej pamieci</translation>
     </message>
     <message>
         <source>Business Phone</source>
-        <translation>Biznasowy telefon</translation>
+        <translation>Tel. firma</translation>
     </message>
     <message>
         <source>Business Fax</source>
-        <translation>Biznasowy faks</translation>
+        <translation>Faks firma</translation>
     </message>
     <message>
         <source>Business Mobile</source>
-        <translation>Biznasowa komorka</translation>
+        <translation>Tel. kom. firma</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation>Domyslny e-mail</translation>
+        <translation>Domyślny e-mail</translation>
     </message>
     <message>
         <source>Emails</source>
-        <translation>E-maile</translation>
+        <translation>Adresy e-mail</translation>
     </message>
     <message>
         <source>Home Phone</source>
-        <translation>Domowy telefon</translation>
+        <translation>Tel. dom</translation>
     </message>
     <message>
         <source>Home Fax</source>
-        <translation>Domowy faks</translation>
+        <translation>Faks dom</translation>
     </message>
     <message>
         <source>Home Mobile</source>
-        <translation>Domowa komorka</translation>
+        <translation>Tel. kom. dom</translation>
     </message>
     <message>
         <source>Business Street</source>
-        <translation>Biznes ulica</translation>
+        <translation>Ulica firma</translation>
     </message>
     <message>
         <source>Business City</source>
-        <translation>Biznes miasto</translation>
+        <translation>Miasto firma</translation>
     </message>
     <message>
         <source>Business State</source>
-        <translation>Biznes wojewodztwo</translation>
+        <translation>Region firma</translation>
     </message>
     <message>
         <source>Business Zip</source>
-        <translation>Biznes kod pocztowy</translation>
+        <translation>Kod poczt. firma</translation>
     </message>
     <message>
         <source>Business Country</source>
-        <translation>Biznes Panstwo</translation>
+        <translation>Kraj firma</translation>
     </message>
     <message>
         <source>Business Pager</source>
-        <translation>Biznes pager</translation>
+        <translation>Pager firma</translation>
     </message>
     <message>
         <source>Business WebPage</source>
-        <translation>Biznes WWW</translation>
+        <translation>WWW firma</translation>
     </message>
     <message>
         <source>Office</source>
@@ -682,7 +682,7 @@ Zwolnij wiecej pamieci</translation>
     </message>
     <message>
         <source>Profession</source>
-        <translation>Zawod</translation>
+        <translation>Zawód</translation>
     </message>
     <message>
         <source>Assistant</source>
@@ -690,39 +690,39 @@ Zwolnij wiecej pamieci</translation>
     </message>
     <message>
         <source>Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Menadżer</translation>
     </message>
     <message>
         <source>Home Street</source>
-        <translation>Dom ulica</translation>
+        <translation>Ulica dom</translation>
     </message>
     <message>
         <source>Home City</source>
-        <translation>Dom miasto</translation>
+        <translation>Miasto dom</translation>
     </message>
     <message>
         <source>Home State</source>
-        <translation>Dom wojewodztwo</translation>
+        <translation>Region dom</translation>
     </message>
     <message>
         <source>Home Zip</source>
-        <translation>Dom kod pocztowy</translation>
+        <translation>Kod poczt. dom</translation>
     </message>
     <message>
         <source>Home Country</source>
-        <translation>Dom Panstwo&gt;</translation>
+        <translation>Kraj dom</translation>
     </message>
     <message>
         <source>Home Web Page</source>
-        <translation>Dom WWW</translation>
+        <translation>WWW dom</translation>
     </message>
     <message>
         <source>Spouse</source>
-        <translation>malzonek</translation>
+        <translation>Partner</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation>Plec</translation>
+        <translation>Płeć</translation>
     </message>
     <message>
         <source>Birthday</source>
@@ -742,7 +742,7 @@ Zwolnij wiecej pamieci</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation>Notatka</translation>
+        <translation>Notatki</translation>
     </message>
     <message>
         <source>Groups</source>
@@ -750,116 +750,117 @@ Zwolnij wiecej pamieci</translation>
     </message>
     <message>
         <source>New Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Nowy dokument</translation>
     </message>
     <message>
         <source>Mon</source>
-        <translation type="unfinished">Pon</translation>
+        <translation>Pon</translation>
     </message>
     <message>
         <source>Tue</source>
-        <translation type="unfinished">Wto</translation>
+        <translation>Wto</translation>
     </message>
     <message>
         <source>Wed</source>
-        <translation type="unfinished">Sro</translation>
+        <translation>Śro</translation>
     </message>
     <message>
         <source>Thu</source>
-        <translation type="unfinished">Czw</translation>
+        <translation>Czw</translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation type="unfinished">Pia</translation>
+        <translation>Pią</translation>
     </message>
     <message>
         <source>Sat</source>
-        <translation type="unfinished">Sob</translation>
+        <translation>Sob</translation>
     </message>
     <message>
         <source>Sun</source>
-        <translation type="unfinished">Nie</translation>
+        <translation>Nie</translation>
     </message>
     <message>
         <source>Click to close this window, discarding changes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij aby zamknąć to okno porzucając zmiany.</translation>
     </message>
     <message>
         <source>Click to close this window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij aby zamknąć to okno.</translation>
     </message>
     <message>
         <source>Click to close this window and apply changes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij aby zamknąć to okno akceptując zmiany.</translation>
     </message>
     <message>
         <source>Click to make this window moveable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij aby zmienić okno w przesuwane.</translation>
     </message>
     <message>
         <source>Click to make this window use all available screen area.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij aby rozszerzyć okno na całą dostępną przestrzeń.</translation>
     </message>
     <message>
         <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;Ot&gt;Wyczerpująca pomoc dla tej aplikcji jest niedostępna, ale jest pomoc kontekstowa.&lt;p&gt;Aby jej użyć:&lt;p&gt;&lt;ol&gt;&lt;li&gt;kliknij i przytrzymaj przycisk pomocy.&lt;li&gt;gdy tytuł okna zmieni się na &lt;b&gt;Co to jest...&lt;/b&gt;, kliknij na dowolny element.&lt;/ol&gt;&lt;/Ot&gt;</translation>
     </message>
     <message>
         <source>What&apos;s this...</source>
-        <translation type="unfinished"></translation>
+        <translation>Co to jest...</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Are you sure you want to delete
  %1?&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Czy na pewno chcesz usunąć
+%1?&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Jan</source>
-        <translation type="unfinished"></translation>
+        <translation>Sty</translation>
     </message>
     <message>
         <source>Feb</source>
-        <translation type="unfinished"></translation>
+        <translation>Lut</translation>
     </message>
     <message>
         <source>Mar</source>
-        <translation type="unfinished"></translation>
+        <translation>Mar</translation>
     </message>
     <message>
         <source>Apr</source>
-        <translation type="unfinished"></translation>
+        <translation>Kwi</translation>
     </message>
     <message>
         <source>May</source>
-        <translation type="unfinished"></translation>
+        <translation>Maj</translation>
     </message>
     <message>
         <source>Jun</source>
-        <translation type="unfinished"></translation>
+        <translation>Cze</translation>
     </message>
     <message>
         <source>Jul</source>
-        <translation type="unfinished"></translation>
+        <translation>Lip</translation>
     </message>
     <message>
         <source>Aug</source>
-        <translation type="unfinished"></translation>
+        <translation>Sie</translation>
     </message>
     <message>
         <source>Sep</source>
-        <translation type="unfinished"></translation>
+        <translation>Wrz</translation>
     </message>
     <message>
         <source>Oct</source>
-        <translation type="unfinished"></translation>
+        <translation>Paź</translation>
     </message>
     <message>
         <source>Nov</source>
-        <translation type="unfinished"></translation>
+        <translation>Lis</translation>
     </message>
     <message>
         <source>Dec</source>
-        <translation type="unfinished"></translation>
+        <translation>Gru</translation>
     </message>
     <message>
         <source>Error</source>
@@ -870,57 +871,58 @@ Zwolnij wiecej pamieci</translation>
     <name>QPEApplication</name>
     <message>
         <source>%1 document</source>
-        <translation type="unfinished"></translation>
+        <translation>dokument %1</translation>
     </message>
 </context>
 <context>
     <name>StorageInfo</name>
     <message>
         <source>CF Card</source>
-        <translation type="unfinished"></translation>
+        <translation>Karta CF</translation>
     </message>
     <message>
         <source>Hard Disk</source>
-        <translation type="unfinished"></translation>
+        <translation>Dysk twardy</translation>
     </message>
     <message>
         <source>SD Card</source>
-        <translation type="unfinished"></translation>
+        <translation>Karta SD</translation>
     </message>
     <message>
         <source>SCSI Hard Disk</source>
-        <translation type="unfinished"></translation>
+        <translation>Dysk twardy SCSI</translation>
     </message>
     <message>
         <source>Internal Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Nośnik wewnętrzny</translation>
     </message>
     <message>
         <source>Internal Memory</source>
-        <translation type="unfinished"></translation>
+        <translation>Pamięć wewnętrzna</translation>
     </message>
     <message>
         <source>MMC Card</source>
-        <translation type="unfinished"></translation>
+        <translation>Karta MMC</translation>
     </message>
 </context>
 <context>
     <name>TZCombo</name>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Brak</translation>
     </message>
 </context>
 <context>
     <name>TimeZoneSelector</name>
     <message>
         <source>citytime executable not found</source>
-        <translation type="unfinished"></translation>
+        <translation>nie znaleziono programu citytime</translation>
     </message>
     <message>
         <source>In order to choose the time zones,
 please install citytime.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aby móc wybierać strefy czasowe
+zainstaluj program citytime.</translation>
     </message>
 </context>
 <context>
@@ -932,28 +934,29 @@ please install citytime.</source>
     <message>
         <source>Unable to schedule alarm.
 Please free up space and try again</source>
-        <translation>Nie moge ustawic alarmu.
-Zwolnij wiecej miejsca w pamieci</translation>
+        <translation>Nie mogę ustawić alarmu.
+Zwolnij więcej miejsca w pamięci 
+i spróbuj ponownie</translation>
     </message>
 </context>
 <context>
     <name>TypeCombo</name>
     <message>
         <source>%1 files</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 plików</translation>
     </message>
     <message>
         <source>%1 %2</source>
         <comment>minor mimetype / major mimetype</comment>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2</translation>
     </message>
     <message>
         <source>All %1 files</source>
-        <translation type="unfinished"></translation>
+        <translation>Wszystkie %1 plików</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished"></translation>
+        <translation>Wszystkie pliki</translation>
     </message>
 </context>
 </TS>
