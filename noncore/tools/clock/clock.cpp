@@ -519,7 +519,9 @@ void Clock::timerEvent( QTimerEvent *e )
 
 AnalogClock::AnalogClock(QWidget * parent, const char * name) : QFrame( parent, name ), clear(true)
 {
-  bg = Resource::loadPixmap("clock/bg");
+		QWidget *d = QApplication::desktop();
+		if(d->width() <= 240)
+		bg = Resource::loadPixmap("clock/bg");
 }
 
 QSizePolicy AnalogClock::sizePolicy() const
