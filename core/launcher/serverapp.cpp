@@ -705,6 +705,8 @@ void ServerApplication::shutdown()
     connect( sd, SIGNAL(shutdown(ShutdownImpl::Type)),
 	     this, SLOT(shutdown(ShutdownImpl::Type)) );
     QPEApplication::showWidget( sd );
+	sd->move(0,0);
+
 }
 
 void ServerApplication::shutdown( ShutdownImpl::Type t )
