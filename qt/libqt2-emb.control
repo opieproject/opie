@@ -3,7 +3,7 @@ Priority: required
 Section: opie/system
 Maintainer: Robert Griebl <sandman@handhelds.org>
 Architecture: arm
-Version: $QTE_VERSION-$QTE_REVISION
+Version: 1:$QTE_VERSION-$QTE_REVISION
 Depends: libjpeg62, libpng3, zlib1g
 Provides: qt-embedded
 Replaces: qt-embedded
