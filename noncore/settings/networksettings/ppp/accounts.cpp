@@ -1,7 +1,7 @@
 /*
  *           kPPP: A pppd front end for the KDE project
  *
- * $Id: accounts.cpp,v 1.8 2003-06-10 13:46:02 harlekin Exp $
+ * $Id: accounts.cpp,v 1.9 2003-06-12 16:27:32 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -182,7 +182,9 @@ void AccountWidget::deleteaccount() {
   QString s = tr("Are you sure you want to delete\nthe account \"%1\"?")
     .arg(accountlist_l->text(accountlist_l->currentItem()));
 
-  if(QMessageBox::warning(this, s, tr("Confirm")) != QMessageBox::Yes)
+  if(QMessageBox::warning(this,tr("Confirm"),s,
+                          QMessageBox::Yes,QMessageBox::No
+                          ) != QMessageBox::Yes)
     return;
 
   if(_pppdata->deleteAccount(accountlist_l->text(accountlist_l->currentItem())))
