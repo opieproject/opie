@@ -18,7 +18,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebookdayheader.ui,v 1.1 2002-01-25 22:14:28 kergoth Exp $
+** $Id: datebookdayheader.ui,v 1.2 2002-04-15 14:29:26 hakan Exp $
 **
 **********************************************************************/</comment>
 <widget>
@@ -35,10 +35,6 @@
             <width>249</width>
             <height>26</height>
         </rect>
-    </property>
-    <property stdset="1">
-        <name>caption</name>
-        <string>Form1</string>
     </property>
     <property>
         <name>layoutMargin</name>
