@@ -75,6 +75,9 @@ menuconfig : scripts/lxdialog/lxdialog
 	$(call descend,scripts/kconfig,mconf)
 	./scripts/kconfig/mconf ./config.in
 
+scripts/lxdialog/lxdialog:
+	make -C scripts/lxdialog
+
 config :
 	$(call descend,scripts/kconfig,conf)
 	./scripts/kconfig/conf ./config.in
