@@ -12,3 +12,4 @@ passwordbase_p.cpp
 passwordbase_p.h
 proxiesbase_p.cpp
 proxiesbase_p.h
+libqpe.so*
