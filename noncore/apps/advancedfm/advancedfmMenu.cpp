@@ -199,8 +199,24 @@ void AdvancedFm::remoteMakDir() {
 
 void AdvancedFm::localDelete() {
   QStringList curFileList = getPath();
-  if(curFileList.count() > 0) {
-    QString myFile;
+  bool doMsg=true;
+  int count=curFileList.count();
+  if( count > 0) {
+      if(count > 1 ){
+          QString msg;
+          msg=tr("Really delete\n%1 files?").arg(count);
+          switch ( QMessageBox::warning(this,tr("Delete"),msg
+                                        ,tr("Yes"),tr("No"),0,0,1) ) {
+            case 0:
+                doMsg=false;
+                break;
+            case 1:
+                return;
+                break;
+          };
+      }
+
+      QString myFile;
     for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
       myFile = (*it);
       if( myFile.find(" -> ",0,TRUE) != -1)
@@ -211,7 +227,7 @@ void AdvancedFm::localDelete() {
         f+="/";
       f+=myFile;
       if(QDir(f).exists() && !QFileInfo(f).isSymLink() ) {
-        switch ( QMessageBox::warning(this,tr("Delete"),tr("Do you really want to delete\n")+f+
+        switch ( QMessageBox::warning(this,tr("Delete Directory?"),tr("Really delete\n")+f+
                                       "\nand all it's contents ?"
                                       ,tr("Yes"),tr("No"),0,0,1) ) {
         case 0: {
@@ -227,72 +243,88 @@ void AdvancedFm::localDelete() {
         };
 
       } else {
-        switch ( QMessageBox::warning(this,tr("Delete"),tr("Do you really want to delete\n")+f
+          if(doMsg) {
+        switch ( QMessageBox::warning(this,tr("Delete"),tr("Really delete\n")+f
                  +" ?",tr("Yes"),tr("No"),0,0,1) ) {
-        case 0: {
-          QString cmd="rm "+f;
-          QFile file(f);
-          file.remove();
-          //                   system( cmd.latin1());
-          populateLocalView();
-        }
-          break;
-        case 1:
-          // exit
-          break;
+          case 1:
+              return;
+              break;
         };
+          }
+        QString cmd="rm "+f;
+        QFile file(f);
+        if(QFileInfo(myFile).fileName().find("../",0,TRUE)==-1)
+            file.remove();
+          //                   system( cmd.latin1());
       }
     }
   }
+  populateLocalView();
 }
 
 void AdvancedFm::remoteDelete() {
-  QStringList curFileList = getPath();
-  if( curFileList.count() > 0) {
-    QString myFile;
-
-    for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
-      myFile = (*it);
-      if(myFile.find(" -> ",0,TRUE) != -1)
-        myFile = myFile.left(myFile.find(" -> ",0,TRUE));
-      QString f = currentRemoteDir.canonicalPath();
-      if(f.right(1).find("/",0,TRUE) == -1)
-        f+="/";
-      f+=myFile;
-      if(QDir(f).exists() && !QFileInfo(f).isSymLink()  ) {
-        switch ( QMessageBox::warning(this,tr("Delete"),tr("Do you really want to delete\n")+f+
-                 "\nand all it's contents ?",
-                 tr("Yes"),tr("No"),0,0,1) ) {
-        case 0: {
-          f=f.left(f.length()-1);
-          QString cmd="rm -rf "+f;
-          system( cmd.latin1());
-          populateRemoteView();
+    QStringList curFileList = getPath();
+    bool doMsg=true;
+    int count=curFileList.count();
+    if( count > 0) {
+        if(count > 1 ){
+            QString msg;
+            msg=tr("Really delete\n%1 files?").arg(count);
+            switch ( QMessageBox::warning(this,tr("Delete"),msg
+                                          ,tr("Yes"),tr("No"),0,0,1) ) {
+              case 0:
+                  doMsg=false;
+                  break;
+              case 1:
+                  return;
+                  break;
+            };
         }
-          break;
-        case 1:
-          // exit
-          break;
-        };
 
-      } else {
-        switch ( QMessageBox::warning(this,tr("Delete"),tr("Do you really want to delete\n")+f
-                 +" ?",tr("Yes"),tr("No"),0,0,1) ) {
-        case 0: {
-          QString cmd="rm "+f;
-          QFile file(f);
-          file.remove();
-          //                   system( cmd.latin1());
-          populateRemoteView();
+        QString myFile;
+
+        for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
+            myFile = (*it);
+            if(myFile.find(" -> ",0,TRUE) != -1)
+                myFile = myFile.left(myFile.find(" -> ",0,TRUE));
+            QString f = currentRemoteDir.canonicalPath();
+            if(f.right(1).find("/",0,TRUE) == -1)
+                f+="/";
+            f+=myFile;
+            if(QDir(f).exists() && !QFileInfo(f).isSymLink()  ) {
+                switch ( QMessageBox::warning(this,tr("Delete Directory"),tr("Really delete\n")+f+
+                                              "\nand all it's contents ?",
+                                              tr("Yes"),tr("No"),0,0,1) ) {
+                  case 0: {
+                      f=f.left(f.length()-1);
+                      QString cmd="rm -rf "+f;
+                      system( cmd.latin1());
+                      populateRemoteView();
+                  }
+                      break;
+                  case 1:
+                        // exit
+                      break;
+                };
+
+            } else {
+                if(doMsg) {
+                    switch ( QMessageBox::warning(this,tr("Delete"),tr("Really delete\n")+f
+                                                  +" ?",tr("Yes"),tr("No"),0,0,1) ) {
+                      case 1:
+                          return;
+                          break;
+                    };
+                }
+                QString cmd="rm "+f;
+                QFile file(f);
+                if(QFileInfo(myFile).fileName().find("../",0,TRUE)==-1)
+                    file.remove();
+                  //                   system( cmd.latin1());
+            }
         }
-          break;
-        case 1:
-          // exit
-          break;
-        };
-      }
     }
-  }
+    populateRemoteView();
 }
 
 void AdvancedFm::localRename() {
@@ -409,12 +441,27 @@ void AdvancedFm::upDir() {
 void AdvancedFm::copy() {
   qApp->processEvents();
   QStringList curFileList = getPath();
-  if( curFileList.count() > 0) {
+    bool doMsg=true;
+    int count=curFileList.count();
+    if( count > 0) {
+        if(count > 1 ){
+            QString msg;
+            msg=tr("Really copy\n%1 files?").arg(count);
+            switch ( QMessageBox::warning(this,tr("Delete"),msg
+                                          ,tr("Yes"),tr("No"),0,0,1) ) {
+              case 0:
+                  doMsg=false;
+                  break;
+              case 1:
+                  return;
+                  break;
+            };
+        }
+
     QString curFile, item, destFile;
     if (TabWidget->getCurrentTab() == 0) {
-      for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
+        for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
           item=(*it);
-
           if(item.find("->",0,TRUE)) //symlink
               item = item.left(item.find("->",0,TRUE));
 
@@ -426,19 +473,19 @@ void AdvancedFm::copy() {
 
           QFile f(destFile);
           if( f.exists()) {
-              switch ( QMessageBox::warning(this,tr("Delete"),
-                       destFile+tr(" already exists\nDo you really want to delete it?"),
-                       tr("Yes"),tr("No"),0,0,1) ) {
-          case 0: 
-            f.remove();
-            break;
-          case 1:
-            return;
-            break;
-          };
-        }
-        if(!copyFile(destFile, curFile) ) {
-          QMessageBox::message("AdvancedFm","Could not copy\n"+curFile +"to\n"+destFile);
+              if(doMsg) {
+                  switch ( QMessageBox::warning(this,tr("File Exists!"),
+                            item+tr("\nexists. Ok to overwrite?"),
+                             tr("Yes"),tr("No"),0,0,1) ) {
+                    case 1:
+                        return;
+                        break;
+                  };
+              }
+              f.remove();                 
+          }
+          if(!copyFile(destFile, curFile) ) {
+              QMessageBox::message("AdvancedFm","Could not copy\n"+curFile +"to\n"+destFile);
           return;
         }
       }
@@ -448,7 +495,6 @@ void AdvancedFm::copy() {
     } else {
       for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
           item= (*it);
-
           if(item.find("->",0,TRUE)) //symlink
               item = item.left(item.find("->",0,TRUE));
 
@@ -460,16 +506,14 @@ void AdvancedFm::copy() {
 
           QFile f(destFile);
           if( f.exists()) {
-              switch ( QMessageBox::warning(this,tr("Delete"),
-                   destFile+tr(" already exists\nDo you really want to delete it?"),
+              switch ( QMessageBox::warning(this,tr("File Exists!"),
+                   item+tr("\nexists. Ok to overwrite?"),
                    tr("Yes"),tr("No"),0,0,1) ) {
-          case 0: 
-            f.remove();
-            break;
           case 1:
             return;
             break;
           };
+            f.remove();
         }
         if(!copyFile(destFile, curFile) ) {
           QMessageBox::message("AdvancedFm",tr("Could not copy\n")
@@ -507,8 +551,8 @@ void AdvancedFm::copyAs() {
 
         QFile f(destFile);
         if( f.exists()) {
-          switch (QMessageBox::warning(this,tr("Delete"),
-                  destFile+tr(" already exists\nDo you really want to delete it?"),
+          switch (QMessageBox::warning(this,tr("File Exists!"),
+                  item+tr("\nexists. Ok to overwrite?"),
                   tr("Yes"),tr("No"),0,0,1) ) {
           case 0: 
             f.remove();
@@ -546,8 +590,8 @@ void AdvancedFm::copyAs() {
 
         QFile f( destFile);
         if( f.exists()) {
-          switch ( QMessageBox::warning(this,tr("Delete"),
-                   destFile+tr(" already exists\nDo you really want to delete it?"),
+          switch ( QMessageBox::warning(this,tr("File Exists!"),
+                   item+tr("\nexists. Ok to overwrite?"),
                    tr("Yes"),tr("No"),0,0,1) ) {
           case 0: 
             f.remove();
@@ -961,4 +1005,14 @@ void AdvancedFm::doBeam() {
 void AdvancedFm::fileBeamFinished( Ir *) {
   QMessageBox::message( tr("Advancedfm Beam out"), tr("Ir sent.") ,tr("Ok") );
 
+}
+
+void AdvancedFm::selectAll() {
+    if (TabWidget->getCurrentTab() == 0) {
+        Local_View->selectAll(true);
+        Local_View->setSelected( Local_View->firstChild(),false);
+    } else {
+        Remote_View->selectAll(true);
+        Remote_View->setSelected( Remote_View->firstChild(),false);
+    }
 }

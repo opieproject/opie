@@ -87,6 +87,7 @@ void AdvancedFm::init() {
   fileMenu->insertItem( tr( "Run Command" ), this, SLOT( runCommandStd() ));
   fileMenu->insertItem( tr( "Run Command with Output" ), this, SLOT( runCommand() ));
   fileMenu->insertSeparator();
+  fileMenu->insertItem( tr( "Select All" ), this, SLOT( selectAll() ));
   fileMenu->insertItem( tr( "Add To Documents" ), this, SLOT( addToDocs() ));
   fileMenu->insertItem( tr( "Delete" ), this, SLOT( del() ));
   fileMenu->setCheckable(TRUE);
