@@ -72,56 +72,7 @@ static void cleanup()
 
 static void refreshTimeZoneConfig()
 {
-    /* ### FIXME timezone handling */
-#if 0
-   // We need to help WorldTime in setting up its configuration for
-   //   the current translation
-    // BEGIN no tr
-    const char *defaultTz[] = {
-	"America/New_York",
-	"America/Los_Angeles",
-	"Europe/Oslo",
-	"Asia/Tokyo",
-	"Asia/Hong_Kong",
-	"Australia/Brisbane",
-	0
-    };
-    // END no tr
-
-    TimeZone curZone;
-    QString zoneID;
-    int zoneIndex;
-    Config cfg = Config( "WorldTime" );
-    cfg.setGroup( "TimeZones" );
-    if (!cfg.hasKey( "Zone0" )){
-	// We have no existing timezones use the defaults which are untranslated strings
-	QString currTz = TimeZone::current().id();
-	QStringList zoneDefaults;
-	zoneDefaults.append( currTz );
-	for ( int i = 0; defaultTz[i] && zoneDefaults.count() < 6; i++ ) {
-	    if ( defaultTz[i] != currTz )
-		zoneDefaults.append( defaultTz[i] );
-	}
-	zoneIndex = 0;
-	for (QStringList::Iterator it = zoneDefaults.begin(); it != zoneDefaults.end() ; ++it){
-	    cfg.writeEntry( "Zone" + QString::number( zoneIndex ) , *it);
-	    zoneIndex++;
-	}
-    }
-    // We have an existing list of timezones refresh the
-    //  translations of TimeZone name
-    zoneIndex = 0;
-    while (cfg.hasKey( "Zone"+ QString::number( zoneIndex ))){
-	zoneID = cfg.readEntry( "Zone" + QString::number( zoneIndex ));
-	curZone = TimeZone( zoneID );
-	if ( !curZone.isValid() ){
-        odebug << "initEnvironment() Invalid TimeZone " << zoneID << "" << oendl;
-	    break;
-	}
-	cfg.writeEntry( "ZoneName" + QString::number( zoneIndex ), curZone.city() );
-	zoneIndex++;
-    }
-#endif
+    /* ### FIXME timezone handling for qtopia */
 }
 
 void initEnvironment()
@@ -149,11 +100,6 @@ void initEnvironment()
     setenv( "LANG", lang, 1 );
     config.writeEntry("Language", lang);
     config.write();
-
-#if 0
-     setenv( "QWS_SIZE", "240x320", 0 );
-#endif
-
 
 
      QString env(getenv("QWS_DISPLAY"));

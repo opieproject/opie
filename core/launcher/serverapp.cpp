@@ -516,34 +516,6 @@ void ServerApplication::login(bool at_poweron)
 #include <time.h>
 #endif
 
-#if 0
-static bool blanked=FALSE;
-
-static void blankScreen()
-{
-#ifdef QWS
-    QWidget w(0, 0, Qt::WStyle_Customize | Qt::WStyle_NoBorder | Qt::WStyle_Tool | Qt::WStyle_StaysOnTop | Qt::WPaintUnclipped);
-    w.resize( qt_screen->width(), qt_screen->height() );
-    w.move(0, 0);
-
-    QPainter p(&w);
-    p.fillRect(w.rect(), QBrush(QColor(255,255,255)) );
-    p.end();
-    w.repaint();
-
-    blanked = TRUE;
-#endif
-}
-
-static void darkScreen()
-{
-    /* ### Screen blanking ODevice */
-#if 0
-    qpe_setBacklight(0); // force off
-#endif
-}
-#endif
-
 namespace {
     void execAutoStart(const QDateTime& suspendTime ) {
         QString appName;
