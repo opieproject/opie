@@ -1,7 +1,6 @@
 /**********************************************************************
 ** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
-**
-** This file is part of the Qtopia Environment.
+** Copyright (C) 2003-2005 The Opie Team <opie-devel@handhelds.org>
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -10,12 +9,6 @@
 **
 ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
 ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
-**
-** See http://www.trolltech.com/gpl/ for GPL licensing information.
-**
-** Contact info@trolltech.com if any conditions of this licensing are
-** not clear to you.
-**
 **********************************************************************/
 
 #ifndef QTOPIA_INTERNAL_FILEOPERATIONS
@@ -53,11 +46,12 @@ using namespace Opie::Core;
 #include <stdlib.h>
 #include <stdio.h>
 #include <signal.h>
-#ifndef Q_OS_WIN32
 #include <unistd.h>
-#else
-#include <process.h>
-#endif
+#include <errno.h>
+#include <string.h>
+
+void create_pidfile();
+void remove_pidfile();
 
 static void cleanup()
 {
@@ -70,50 +64,41 @@ static void cleanup()
     }
 }
 
-static void refreshTimeZoneConfig()
-{
-    /* ### FIXME timezone handling for qtopia */
-}
-
 void initEnvironment()
 {
-#ifdef Q_OS_WIN32
-    // Config file requires HOME dir which uses QDir which needs the winver
-    qt_init_winver();
-#endif
     Config config("locale");
     config.setGroup( "Location" );
     QString tz = config.readEntry( "Timezone", getenv("TZ") ).stripWhiteSpace();
 
-    // if not timezone set, pick New York
-    if (tz.isNull() || tz.isEmpty())
-    tz = "America/New_York";
-
+    // timezone
+    if (tz.isNull() || tz.isEmpty()) tz = "America/New_York";
     setenv( "TZ", tz, 1 );
     config.writeEntry( "Timezone", tz);
 
+    // language
     config.setGroup( "Language" );
     QString lang = config.readEntry( "Language", getenv("LANG") ).stripWhiteSpace();
-    if( lang.isNull() || lang.isEmpty())
-    lang = "en_US";
-
+    if( lang.isNull() || lang.isEmpty()) lang = "en_US";
     setenv( "LANG", lang, 1 );
     config.writeEntry("Language", lang);
     config.write();
 
+    // rotation
+    int t = ODevice::inst()->rotation();
+    odebug << "ODevice reports transformation to be " << t << oendl;
+    
+    QString env( getenv("QWS_DISPLAY") );
+    if ( env.isEmpty() )
+    {
+            int rot = ODevice::inst()->rotation() * 90;
+            QString qws_display = QString("Transformed:Rot%1:0").arg(rot);
+            odebug << "setting QWS_DISPLAY to '" << qws_display << "'" << oendl;
+            setenv("QWS_DISPLAY", (const char*) qws_display, 1);
+    }
+    else
+        odebug << "QWS_DISPLAY already set as '" << env << "' - overriding ODevice transformation" << oendl;
 
-     QString env(getenv("QWS_DISPLAY"));
-     if (env.contains("Transformed")) {
-         int rot;
-         // transformed driver default rotation is controlled by the hardware.
-         Config config("qpe");
-         config.setGroup( "Rotation" );
-         if ( ( rot = config.readNumEntry( "Rot", -1 ) ) == -1 )
-             rot = ODevice::inst ( )-> rotation ( ) * 90;
-
-         setenv("QWS_DISPLAY", QString("Transformed:Rot%1:0").arg(rot), 1);
-         QPEApplication::defaultRotation ( ); /* to ensure deforient matches reality */
-     }
+    QPEApplication::defaultRotation(); /* to ensure deforient matches reality */   
 }
 
 static void initKeyboard()
@@ -159,85 +144,89 @@ static bool firstUse()
 int initApplication( int argc, char ** argv )
 {
     cleanup();
-
-
     initEnvironment();
 
-    //Don't flicker at startup:
 #ifdef QWS
     QWSServer::setDesktopBackground( QImage() );
 #endif
     ServerApplication a( argc, argv, QApplication::GuiServer );
-
-    refreshTimeZoneConfig();
-
     initKeyboard();
 
-    // Don't use first use under Windows
-    if ( firstUse() ) {
-    a.restart();
-    return 0;
+    if ( firstUse() )
+    {
+        a.restart();
+        return 0;
     }
 
-    ODevice::inst ( )-> setSoftSuspend ( true );
-
+#ifndef Q_OS_MACX
+    ODevice::inst()->setSoftSuspend( true );
+#endif
     {
         QCopEnvelope e("QPE/System", "setBacklight(int)" );
-    e << -3; // Forced on
+        e << -3; // Forced on
     }
 
     AlarmServer::initialize();
-
-
-
     Server *s = new Server();
-
-    (void)new SysFileMonitor(s);
+    new SysFileMonitor(s);
 #ifdef QWS
     Network::createServer(s);
 #endif
-
     s->show();
 
-    /* THE ARM rtc has problem holdings the time on reset */
-    if ( QDate::currentDate ( ). year ( ) < 2000 ) {
-        if ( QMessageBox::information ( 0, ServerApplication::tr( "Information" ), ServerApplication::tr( "<p>The system date doesn't seem to be valid.\n(%1)</p><p>Do you want to correct the clock ?</p>" ). arg( TimeString::dateString ( QDate::currentDate ( ))), QMessageBox::Yes, QMessageBox::No ) == QMessageBox::Yes ) {
-            QCopEnvelope e ( "QPE/Application/systemtime", "setDocument(QString)" );
-            e << QString ( );
-        }
+#if 0   
+    if ( QDate::currentDate().year() < 2005 )
+    {
+        if ( QMessageBox::information ( 0, ServerApplication::tr( "Information" ),
+             ServerApplication::tr( "<p>The system date doesn't seem to be valid.\n(%1)</p><p>Do you want to correct the clock ?</p>" )
+                               .arg( TimeString::dateString( QDate::currentDate())), QMessageBox::Yes, QMessageBox::No ) == QMessageBox::Yes )
+            {
+                QCopEnvelope e ( "QPE/Application/systemtime", "setDocument(QString)" );
+                e << QString ( );
+            }
     }
+#endif
 
-    int rv =  a.exec();
-
-    odebug << "exiting..." << oendl;
+    create_pidfile();
+    odebug << "--> mainloop in" << oendl;
+    int rv = a.exec();
+    odebug << "<-- mainloop out" << oendl;
+    remove_pidfile();          
+    odebug << "removing server object..." << oendl;
     delete s;
 
 #ifndef Q_OS_MACX
     ODevice::inst()->setSoftSuspend( false );
 #endif
-
+    
+    odebug << "returning from qpe/initapplication..." << oendl;
     return rv;
 }
 
 static const char *pidfile_path = "/var/run/opie.pid";
 
-void create_pidfile ( )
+void create_pidfile()
 {
     FILE *f;
 
-    if (( f = ::fopen ( pidfile_path, "w" ))) {
-        ::fprintf ( f, "%d", getpid ( ));
-        ::fclose ( f );
+    if (( f = ::fopen( pidfile_path, "w" ))) {
+        ::fprintf( f, "%d", getpid ( ));
+        ::fclose( f );
+    }
+    else
+    {
+        odebug << "couldn't create pidfile: " << strerror( errno ) << oendl;
     }
 }
 
-void remove_pidfile ( )
+void remove_pidfile()
 {
-    ::unlink ( pidfile_path );
+    ::unlink( pidfile_path );
 }
 
-void handle_sigterm ( int /* sig */ )
+void handle_sigterm( int sig )
 {
+    qDebug( "D'oh! QPE Server process got SIGNAL %d. Trying to exit gracefully...", sig );
     ::signal( SIGCHLD, SIG_IGN );
     ::signal( SIGSEGV, SIG_IGN );
     ::signal( SIGBUS, SIG_IGN );
@@ -259,7 +248,6 @@ int main( int argc, char ** argv )
     ::setpgid( 0, 0 );
 
     ::atexit( remove_pidfile );
-    create_pidfile();
 
     int retVal = initApplication( argc, argv );
 
