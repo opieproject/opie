@@ -14,11 +14,14 @@
  *       with our version of libqpe
  *
  * =====================================================================
- * Version: $Id: ocontactdb.cpp,v 1.1.2.11 2002-07-21 15:21:26 eilers Exp $
+ * Version: $Id: ocontactdb.cpp,v 1.1.2.12 2002-07-24 07:01:58 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb.cpp,v $
- * Revision 1.1.2.11  2002-07-21 15:21:26  eilers
+ * Revision 1.1.2.12  2002-07-24 07:01:58  eilers
+ * Some minor changes. Fixed search query bug
+ *
+ * Revision 1.1.2.11  2002/07/21 15:21:26  eilers
  * Some interface changes and minor bugfixes...
  * The search interface is able to use wildcards, regular expressions and
  * ignore cases... I love the Trolltech cClasslibrary ! :)
@@ -228,7 +231,7 @@ namespace {
 					 */
 					/* Just compare fields which are not empty in the query object */
 					if ( !query.field(i).isEmpty() ){
-						switch (settings){
+						switch ( settings & ~query_IgnoreCase ){
 						case query_RegExp:{
 							QRegExp expr ( query.field(i), 
 								       !(settings & query_IgnoreCase), false );

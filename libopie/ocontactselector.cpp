@@ -12,11 +12,14 @@
  * =====================================================================
  * ToDo: There is a lot todo.. It is currently very simplistic..
  * =====================================================================
- * Version: $Id: ocontactselector.cpp,v 1.1.2.6 2002-07-13 17:19:20 eilers Exp $
+ * Version: $Id: ocontactselector.cpp,v 1.1.2.7 2002-07-24 07:01:58 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactselector.cpp,v $
- * Revision 1.1.2.6  2002-07-13 17:19:20  eilers
+ * Revision 1.1.2.7  2002-07-24 07:01:58  eilers
+ * Some minor changes. Fixed search query bug
+ *
+ * Revision 1.1.2.6  2002/07/13 17:19:20  eilers
  * Added signal handling:
  * The database will be informed if it is changed externally and if flush() or
  * reload() signals sent. The application which is using the database may
@@ -232,8 +235,8 @@ void OContactSelector::setSelected (const QValueList<int> &selectedList)
 }
 
 
-OContactSelectorDialog::OContactSelectorDialog( QWidget* , WFlags fl )
-	: QDialog (0 , tr ("Select Group Members"), true , fl)
+OContactSelectorDialog::OContactSelectorDialog( QWidget* parent, WFlags fl )
+	: QDialog (parent , tr ("Select Group Members"), true , fl)
 {
 	// resize( 240, 321 );
         QVBoxLayout* vb = new QVBoxLayout(this,1);
