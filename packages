@@ -56,7 +56,7 @@ CONFIG_KJUMPX	inputmethods/kjumpx	kjumpx.pro
 CONFIG_KPACMAN	noncore/games/kpacman	kpacman.pro
 CONFIG_LANGUAGE	noncore/settings/language	language.pro
 CONFIG_LAUNCHER-SETTINGS	core/settings/launcher	launcher.pro
-CONFIG_LAUNCHER_CORE	core/launcher	launcher.pro
+CONFIG_LAUNCHER_CORE	core/launcher	server.pro
 CONFIG_LIBFFMPEG	core/multimedia/opieplayer/libffmpeg	libffmpeg.pro
 CONFIG_LIBFLASH	core/multimedia/opieplayer/libflash	libflash.pro
 CONFIG_LIBKATE  noncore/apps/tinykate/libkate libkate.pro
