@@ -115,6 +115,7 @@ contains( CONFTEST, y ){
   }
 }
 else {
+
 QMAKE_LFLAGS += -Wl,-rpath-link,$$prefix/lib
 # I am not sure whether it is a good idea to change the way plugins is build
 # on linux. Therefore I remove the "plugin" term, which is needed by MacOS-X
