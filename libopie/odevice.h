@@ -26,7 +26,7 @@
 
 #include <opie/odevicebutton.h>
 
-enum Transformation { None, Rot90, Rot180, Rot270 }; /* from qgfxtransformed_qws.cpp */
+#include <qpe/qpeapplication.h> /* for Transformation enum.. */
 
 class ODeviceData;
 
