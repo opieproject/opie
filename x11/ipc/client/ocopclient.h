@@ -20,7 +20,11 @@ class OCOPPacket;
 class OCOPClient : public QObject{
     Q_OBJECT
 public:
-
+    /*
+     * this is  the static
+     * OCopClient
+     */
+    static OCOPClient* self();
     /**
      * Occasionally I decide to start a Server from here
      */
@@ -56,6 +60,7 @@ private:
     int m_socket;
     int m_tries;
 
+    static OCOPClient*  m_self;
 };
 
 #endif

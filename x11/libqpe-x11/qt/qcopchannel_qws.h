@@ -3,6 +3,7 @@
 
 #include <qobject.h>
 #include <qcstring.h>
+#include <qlist.h>
 
 class OCOPClient;
 class QCopChannel : public QObject {
@@ -20,6 +21,7 @@ public:
                       const QByteArray& );
     static bool sendLocally( const QCString& chan, const QCString& msg,
                              const QByteArray& data );
+    void receive( const QCString& msg, const QByteArray& ar );
 
 signals:
     void received( const QCString& msg, const QByteArray& );
@@ -29,7 +31,7 @@ private slots:
 
 private:
     void init();
-    OCOPClient* m_client;
+    static QList<QCopChannel> *m_list;
     /* the channel */
     QCString m_chan;
     class Private;

@@ -14,6 +14,15 @@
 
 #include "ocopclient.h"
 
+OCOPClient* OCOPClient::m_self = 0;
+
+OCOPClient*  OCOPClient::self() {
+    if (!m_self ) {
+        m_self = new OCOPClient();
+    }
+    return m_self;
+}
+
 OCOPClient::OCOPClient( const QString& path, QObject* obj )
     : QObject( obj )
 {

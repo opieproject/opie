@@ -214,7 +214,7 @@ void OCopServer::registerClient( int fd ) {
 void OCopServer::deregisterClient(int fd ) {
     QMap<int, OCOPClient>::Iterator it = m_clients.find( fd );
     if (it != m_clients.end() ) {
-        OCOPClient client = (*it);
+        OCOPClient client = it.data();
         delete client.notify;
         m_clients.remove(fd );
         close(fd );
@@ -227,23 +227,36 @@ void OCopServer::deregisterClient(int fd ) {
          * if count becomes 0 remove the channel
          * otherwise replace QArray<int>
          */
-        QMap<QCString, QValueList<int> >::Iterator it;
-        for ( it = m_channels.begin(); it != m_channels.end(); ++it ) {
+        QMap<QCString, QValueList<int> >::Iterator it2;
+    repeatIt:
+        for ( it2 = m_channels.begin(); it2 != m_channels.end(); ++it2 ) {
             /*
              * The channel contains this fd
              */
-            if ( it.data().contains( fd ) ) {
-                QValueList<int> array = it.data();
+            qWarning("Channel %s", it2.key().data() );
+            if ( it2.data().contains( fd ) ) {
+                qWarning("contains");
+                QValueList<int> array = it2.data();
 
                 /*
                  * remove channel or just replace
                  */
                 if ( array.count() == 1 ) {
+                    qWarning("Invalidate!");
                     /* is the list now invalidatet? */
-                    m_channels.remove( it );
+                    m_channels.remove( it2 );
+                    /* That is the first go to of my life
+                     * but Iterator remove( Iterator )
+                     * does not exist
+                     * it2 = --it2;
+                     * does not work reliable too
+                     * so the only way is to reiterate :(
+                     */
+                    goto repeatIt;
                 }else{
+                    qWarning("removing");
                     array.remove( fd );
-                    it = m_channels.replace( it.key(), array );
+                    it2 = m_channels.replace( it2.key(), array );
                 }
             }
         } // off all channels
