@@ -132,6 +132,8 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
         modelPixmap += "ipaq3600";
     else if ( model >= Model_SIMpad_CL4 && model <= Model_SIMpad_TSinus )
         modelPixmap += "simpad";
+    else if ( model == Model_Jornada_56x )
+        modelPixmap += "jornada56x";
     else
         modelPixmap += "pda";
 
