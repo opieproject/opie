@@ -58,6 +58,18 @@ namespace Opie
 class OFileViewInterface;
 class OFileViewFileListView;
 
+
+/**
+ * @short a dropin replacement for the FileSelector
+ *
+ * This class is first used insert the OFileDialog.
+ * It supports multiple view and mimetype filtering for now.
+ *
+ * @see OFileDialog
+ * @see FileSelector
+ * @author zecke
+ * @version 0.1
+ */
 class OFileSelector : public QWidget
 {
     Q_OBJECT
@@ -65,8 +77,20 @@ class OFileSelector : public QWidget
     friend class Opie::OFileViewFileListView;
 
 public:
+    /**
+     * The Mode of the Fileselector
+     * Open = Open A File
+     * Save = Save a File
+     * FILESELECTOR = As A GUI in a screen to select a file
+     */
     enum Mode { Open=1, Save=2, FileSelector=4, OPEN=1, SAVE=2, FILESELECTOR=4 };
     //    enum OldMode { OPEN=1, SAVE=2, FILESELECTOR = 4 };
+    /**
+     * Normal       = The old FileSelector
+     * Extended     = Dir View
+     * ExtendedAll  = Dir View with all hidden files
+     * Default      = What the vendor considers best
+     */
     enum Selector { Normal = 0, Extended=1,  ExtendedAll =2, Default=3,  NORMAL=0,EXTENDED=1, EXTENDED_ALL =2, DEFAULT=3 };
     //    enum OldSelector { NORMAL = 0, EXTENDED =1, EXTENDED_ALL = 2};
 
@@ -94,17 +118,51 @@ public:
     int mode()const;
     int selector()const;
 
-
+    /**
+     * Set the Icon visible
+     * @param b Show or Hide the New Button
+     */
     void setNewVisible( bool b );
+
+    /**
+     * Set the Icon visible
+     */
     void setCloseVisible( bool b );
+
+    /**
+     * Set the Name Line visible
+     */
     void setNameVisible( bool b );
 
 signals:
+   /**
+    * dirSelected is emitted whenever changed into a different dir
+    */
     void dirSelected( const QString& );
+
+   /**
+    * fileSelected  is emitted when a file is selected
+    * it uses a DocLnk as parameter
+    */
     void fileSelected( const DocLnk& );
+
+    /**
+     * fileSelected is emitted when a file is selected
+     * the complete path is a parameter
+     */
     void fileSelected( const QString& );
+
+    /**
+     * Create a new File with a DocLnk
+     */
     void newSelected( const DocLnk& );
+
     void closeMe();
+
+   /**
+    * Ok is emitted on a Qt::Key_Return or Q::Key_Enter
+    * in the line edit
+    */
     void ok();
     void cancel();
 

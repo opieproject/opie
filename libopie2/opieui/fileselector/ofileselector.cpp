@@ -811,6 +811,35 @@ void OFileViewFileSystem::activate( const QString& str)
 }
 
 /* Selector */
+/**
+ * @short new and complete c'tor
+ *
+ * Create a OFileSelector to let the user select a file. It can
+ * either be used to open a file, select a save name in a dir or
+ * as a dropin for the FileSelector.
+ *
+ * <pre>
+ *  QMap<QString, QStringList> mimeTypes;
+ *  QStringList types;
+ *  types << "text@slash* ";
+ *  types << "audio@slash*";
+ *  mimeTypes.insert( tr("Audio and Text"), types );
+ *  mimeTypes.insert( tr("All"), "*@slash*);
+ *
+ *  now you could create your fileselector
+ * </pre>
+ *
+ *
+ * @param parent the parent of this widget
+ * @param mode The mode from the enum Mode (Open,Save,FILESELECTOR)
+ * @param sel The  selector to be used
+ * @param dirName The name of the dir to start int
+ * @param fileName The fileName placed in the fileselector lineedit
+ * @param mimetypes The MimeType map of used mimetypes
+ * @param showNew Show a New Button. Most likely to be used in the FileSelector view.
+ * @param showClose Show a Close Button. Most likely to be used in FileSelector view.
+ *
+ */
 OFileSelector::OFileSelector( QWidget* parent, int mode, int sel,
                               const QString& dirName, const QString& fileName,
                               const MimeTypes& mimetypes,
@@ -852,6 +881,10 @@ OFileSelector::OFileSelector( QWidget* parent, int mode, int sel,
 
 }
 
+
+/**
+ * This a convience c'tor to just substitute the use of FileSelector
+ */
 OFileSelector::OFileSelector( const QString& mimeFilter, QWidget* parent, const char* name,
                               bool showNew, bool showClose )
         : QWidget( parent, name )
@@ -958,41 +991,73 @@ void OFileSelector::initViews()
     m_views.insert( QObject::tr("All Files"), in );
 }
 
+/**
+ * d'tor
+ */
 OFileSelector::~OFileSelector()
 {
 }
 
+
+
+/**
+ * Convience function for the fileselector
+ * make sure to delete the DocLnk
+ *
+ * @see DocLnk
+ * @todo remove in ODP
+ */
 const DocLnk* OFileSelector::selected()
 {
     DocLnk* lnk = new DocLnk( currentView()->selectedDocument() );
     return lnk;
 }
 
+/**
+ *
+ * @return the name of the selected file
+ */
 QString OFileSelector::selectedName()const
 {
     return currentView()->selectedName();
 }
 
+
+/**
+ * @return the selected path
+ */
 QString OFileSelector::selectedPath()const
 {
     return currentView()->selectedPath();
 }
 
+/**
+ * @return the directory name
+ */
 QString OFileSelector::directory()const
 {
     return currentView()->directory();
 }
 
+/**
+ * @return a DocLnk for the selected document
+ */
 DocLnk OFileSelector::selectedDocument()const
 {
     return currentView()->selectedDocument();
 }
 
+/**
+ * @return the number of items for the current view
+ */
 int OFileSelector::fileCount()const
 {
     return currentView()->fileCount();
 }
 
+/**
+ * @return  reparse the file content
+ */
 void OFileSelector::reread()
 {
     return currentView()->reread();
@@ -1018,11 +1083,18 @@ MimeTypes OFileSelector::mimeTypes()const
     return m_mimeType;
 }
 
+/**
+ * @return the Mode of the OFileSelector
+ */
 int OFileSelector::mode()const
 {
     return m_mode;
 }
 
+
+/**
+ * @return the Selector of the OFileSelector
+ */
 int OFileSelector::selector()const
 {
     return m_selector;
