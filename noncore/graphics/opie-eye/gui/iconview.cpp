@@ -196,6 +196,7 @@ PIconView::PIconView( QWidget* wid, Opie::Core::OConfig* cfg )
     m_iconsize = 32;
     m_internalReset = false;
     m_customWidget = 0;
+    m_setDocCalled = false;
 
     m_hbox = new QHBox( this );
     QLabel* lbl = new QLabel( m_hbox );
@@ -212,10 +213,7 @@ PIconView::PIconView( QWidget* wid, Opie::Core::OConfig* cfg )
     m_view->setArrangement( QIconView::LeftToRight );
 
     m_mode = m_cfg->readNumEntry("ListViewMode", 1);
-    QString lastView = m_cfg->readEntry("LastView","");
-
     if (m_mode < 1 || m_mode>3) m_mode = 1;
-
     m_view->setItemTextPos( QIconView::Right );
     if (m_mode >1) {
         m_view->setResizeMode(QIconView::Adjust);
@@ -227,24 +225,13 @@ PIconView::PIconView( QWidget* wid, Opie::Core::OConfig* cfg )
     if (m_iconsize>64)m_iconsize = 64;
 
     calculateGrid();
-
     initKeys();
-
     loadViews();
-    int cc=0;
-    for (; cc<m_views->count();++cc) {
-        if (m_views->text(cc)==lastView) {
-            break;
-        }
-    }
-    if (cc<m_views->count()) {
-        m_views->setCurrentItem(cc);
-        slotViewChanged(cc);
-    } else {
-        slotViewChanged(m_views->currentItem());
-    }
-    connect( m_views, SIGNAL(activated(int)),
-             this, SLOT(slotViewChanged(int)) );
+}
+
+void PIconView::setDoccalled(bool how)
+{
+    m_setDocCalled = how;
 }
 
 /*
@@ -441,6 +428,30 @@ void PIconView::resetView() {
     m_internalReset = false;
 }
 
+void PIconView::polish()
+{
+    odebug << "===\n"
+            << "PIconView::polish()\n"
+            << "====" << oendl;
+    QVBox::polish();
+
+    QString lastView = m_cfg->readEntry("LastView","");
+    int cc=0;
+    for (; cc<m_views->count();++cc) {
+        if (m_views->text(cc)==lastView) {
+            break;
+        }
+    }
+    if (cc<m_views->count()) {
+        m_views->setCurrentItem(cc);
+        slotViewChanged(cc);
+    } else {
+        slotViewChanged(m_views->currentItem());
+    }
+    connect( m_views, SIGNAL(activated(int)),
+             this, SLOT(slotViewChanged(int)) );
+}
+
 /*
  *swicth view reloadDir and connect signals
  */
@@ -529,15 +540,20 @@ void PIconView::addFiles(  const QStringList& lst) {
     if (!m_path.isEmpty()) {
         pre = m_path+"/";
     }
+    QString s = "";
+    int pos;
     for (it=lst.begin(); it!= lst.end(); ++it ) {
-         m_pix = PPixmapCache::self()->cachedImage( pre+(*it), m_iconsize, m_iconsize );
-        _iv = new IconViewItem( m_view, pre+(*it), (*it),m_iconsize );
+        s = (*it);
+        pos = s.find(char(0));
+        m_pix = PPixmapCache::self()->cachedImage( pre+(*it), m_iconsize, m_iconsize );
+        if (pos>-1) {
+            _iv = new IconViewItem( m_view, s.mid(pos+1), s.left(pos),m_iconsize );
+        } else {
+            _iv = new IconViewItem( m_view, pre+(*it), (*it),m_iconsize );
+        }
         if (m_mode==3) {
             _iv->setTextOnly(true);
             _iv->setPixmap(QPixmap());
-
-
-
         } else {
             if (m_pix) _iv->setPixmap(*m_pix);
         }

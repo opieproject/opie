@@ -39,6 +39,7 @@ public:
     virtual void enableFullscreen();
     void stopSlide();
     void setMenuActions(QActionGroup*hGroup,QActionGroup*nextprevGroup, QActionGroup*disptypeGroup);
+    void setCloseIfHide(bool);
 
 signals:
     void dispImageInfo(const QString&);
@@ -61,6 +62,7 @@ protected:
     int m_slideValue;
     virtual void focusInEvent ( QFocusEvent * );
     QActionGroup *m_gDisplayType,*m_gPrevNext,*m_hGroup;
+    bool closeIfHide:1;
 
 public slots:
     virtual void hide();

@@ -58,6 +58,7 @@ public slots:
     void setDocument( const QString& );
     virtual void slotToggleFullScreen();
     virtual void slotFullScreenToggled(bool);
+    virtual void polish();
 
 protected slots:
     void raiseIconView();
@@ -80,6 +81,8 @@ private:
     imageinfo *m_info;
     ImageView *m_disp;
     bool autoSave;
+    bool m_setDocCalled:1;
+    bool m_polishDone:1;
     QToolButton*fsButton;
     QToolBar *toolBar;
     QPopupMenu *fileMenu,*dispMenu,*fsMenu,*listviewMenu,*settingsMenu;

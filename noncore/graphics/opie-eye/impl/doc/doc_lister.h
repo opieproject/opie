@@ -14,12 +14,13 @@
 
 class Config;
 class AppLnk;
+class QCopChannel;
 
 class Doc_DirLister : public PDirLister {
     Q_OBJECT
 public:
     Doc_DirLister();
-    virtual ~Doc_DirLister(){}
+    virtual ~Doc_DirLister();
 
     QString defaultPath()const;
     QString setStartPath( const QString& );
@@ -37,9 +38,8 @@ public:
     QWidget* widget(QWidget*parent);
 
 private:
-    QMap<QString,QString> m_namemap,m_filemap;
     int m_catFilter;
-    bool matchCat(const AppLnk* app);
+    bool matchCat(const AppLnk* app)const;
     bool m_docreads;
     DocLnkSet m_ds;
 
@@ -48,6 +48,8 @@ protected slots:
     virtual void slotThumbInfo(const QString&, const QString&);
     virtual void slotThumbNail(const QString&, const QPixmap&);
     virtual void showCategory(int);
+    void systemMsg(const QCString &, const QByteArray &);
+    QCopChannel *syschannel;
 };
 
 #endif

@@ -11,6 +11,7 @@
 #include <qpe/config.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/applnk.h>
+#include <opie2/oglobal.h>
 
 #include <qtopia/private/categories.h>
 #include <qtopia/categoryselect.h>
@@ -20,6 +21,7 @@ using namespace Opie::Core;
 /* QT */
 #include <qdir.h>
 #include <qfileinfo.h>
+#include <qtopia/qcopenvelope_qws.h>
 
 Doc_DirLister::Doc_DirLister()
     : PDirLister( "doc_dir_lister" )
@@ -35,17 +37,21 @@ Doc_DirLister::Doc_DirLister()
              this, SLOT(slotFullInfo(const QString&, const QString&)) );
     connect( master, SIGNAL(sig_thumbNail(const QString&, const QPixmap&)),
              this, SLOT(slotThumbNail(const QString&, const QPixmap&)) );
-
-    m_namemap.clear();
-    m_filemap.clear();
     m_docreads = false;
+    syschannel = new QCopChannel("QPE/System", this);
+    connect(syschannel, SIGNAL(received(const QCString&,const QByteArray&)),
+        this, SLOT(systemMsg(const QCString&,const QByteArray&)) );
+}
+
+Doc_DirLister::~Doc_DirLister()
+{
 }
 
 QString Doc_DirLister::defaultPath()const {
     return QString::null;
 }
 
-bool Doc_DirLister::matchCat(const AppLnk* app)
+bool Doc_DirLister::matchCat(const AppLnk* app)const
 {
     if (!app) return false;
     if (m_catFilter==0 || app->categories().contains(m_catFilter) || m_catFilter == -1 && app->categories().count() == 0 ) {
@@ -56,23 +62,16 @@ bool Doc_DirLister::matchCat(const AppLnk* app)
 
 QString Doc_DirLister::setStartPath(const QString&) {
     static const QString Mtype_str("image/jpeg;image/gif;image/bmp;image/png");
-    if (m_namemap.isEmpty()) {
-        if (!m_docreads) {
-            Global::findDocuments(&m_ds,Mtype_str);
-            m_docreads = true;
-        }
-        QListIterator<DocLnk> dit(m_ds.children());
-        for( ; dit.current(); ++dit) {
-            if (!matchCat((*dit))) continue;
-            m_namemap[(*dit)->name()]=(*dit)->file();
-            m_filemap[(*dit)->file()]=(*dit)->name();
-        }
+    if (!m_docreads) {
+        Global::findDocuments(&m_ds,Mtype_str);
+        m_docreads = true;
     }
     return QString::null;
 }
 
-QString Doc_DirLister::currentPath()const {
-      return QString::null;
+QString Doc_DirLister::currentPath()const
+{
+    return QString::null;
 }
 
 
@@ -82,9 +81,13 @@ QStringList Doc_DirLister::folders()const {
 
 QStringList Doc_DirLister::files()const {
     QStringList out;
-    QMap<QString,QString>::ConstIterator it;
-    for (it = m_namemap.begin();it != m_namemap.end();++it) {
-        out.append(it.key());
+    QListIterator<DocLnk> dit(m_ds.children());
+    for( ; dit.current(); ++dit) {
+        if (!matchCat((*dit))) continue;
+        QString s = (*dit)->name();
+        s+=char(0);
+        s+=(*dit)->file();
+        out.append(s);
     }
     return out;
 }
@@ -93,71 +96,42 @@ void Doc_DirLister::deleteImage( const QString& )
 {
 }
 
-void Doc_DirLister::thumbNail( const QString& str, int w, int h) {
-    if (m_namemap.find(str)==m_namemap.end()) {
-        return;
-    }
-    QString fname = m_namemap[str];
-    SlaveMaster::self()->thumbNail( fname, w, h );
+void Doc_DirLister::thumbNail( const QString& str, int w, int h)
+{
+    SlaveMaster::self()->thumbNail( str, w, h );
 }
 
-QImage Doc_DirLister::image( const QString& str, Factor f, int m) {
-    if (m_namemap.find(str)==m_namemap.end()) {
-        return QImage();
-    }
-    QString fname = m_namemap[str];
-    return SlaveMaster::self()->image( fname, f, m );
+QImage Doc_DirLister::image( const QString& str, Factor f, int m)
+{
+    return SlaveMaster::self()->image(str, f, m );
 }
 
 void Doc_DirLister::imageInfo( const QString& str) {
-    if (m_namemap.find(str)==m_namemap.end()) {
-        return;
-    }
-    QString fname = m_namemap[str];
-    SlaveMaster::self()->thumbInfo( fname );
+    SlaveMaster::self()->thumbInfo( str );
 }
 
 void Doc_DirLister::fullImageInfo( const QString& str) {
-    if (m_namemap.find(str)==m_namemap.end()) {
-        return;
-    }
-    QString fname = m_namemap[str];
-    SlaveMaster::self()->imageInfo( fname );
+    SlaveMaster::self()->imageInfo(str);
 }
 
 void Doc_DirLister::slotFullInfo(const QString&f, const QString&t)
 {
-    if (m_filemap.find(f)==m_filemap.end()) {
-        return;
-    }
-    QString name = m_filemap[f];
-    emit sig_fullInfo(name, t);
+    emit sig_fullInfo(f, t);
 }
 
 void Doc_DirLister::slotThumbInfo(const QString&f, const QString&t)
 {
-    if (m_filemap.find(f)==m_filemap.end()) {
-        return;
-    }
-    QString name = m_filemap[f];
-    emit sig_thumbInfo(name, t);
+    emit sig_thumbInfo(f, t);
 }
 
 void Doc_DirLister::slotThumbNail(const QString&f, const QPixmap&p)
 {
-    if (m_filemap.find(f)==m_filemap.end()) {
-        return;
-    }
-    QString name = m_filemap[f];
-    emit sig_thumbNail(name, p);
+    emit sig_thumbNail(f, p);
 }
 
 QString Doc_DirLister::nameToFname(const QString&name)const
 {
-    if (m_namemap.find(name)==m_namemap.end()) {
-        return QString::null;
-    }
-    return m_namemap[name];
+    return name;
 }
 
 QString Doc_DirLister::dirUp( const QString& p ) const{
@@ -182,7 +156,46 @@ QWidget* Doc_DirLister::widget(QWidget*parent)
 void Doc_DirLister::showCategory(int which)
 {
     m_catFilter = which==-2?0:which;
-    m_namemap.clear();
     setStartPath("");
     emit sig_reloadDir();
+}
+
+void Doc_DirLister::systemMsg(const QCString &msg, const QByteArray &data)
+{
+    if ( msg != "linkChanged(QString)"||!m_docreads) {
+        return;
+    }
+    QString link;
+    QDataStream stream( data, IO_ReadOnly );
+    stream >> link;
+    odebug << "Doc_DirLister systemMsg -> linkchanged( " << link << " )" << oendl;
+    if ( link.isNull() || OGlobal::isAppLnkFileName(link) ) {
+        return;
+    }
+    QListIterator<DocLnk> dit(m_ds.children());
+    bool must_reload = false;
+    bool found = false;
+    while ( dit.current() ) {
+        DocLnk *doc = dit.current();
+        ++dit;
+        if (doc->linkFile() == link) {
+            found = true;
+            DocLnk* dl = new DocLnk(link);
+            if (dl->fileKnown()) {
+                // changing
+                m_ds.add(dl);
+            } else {
+                delete dl;
+            }
+            if (matchCat(doc) || matchCat(dl)) {
+                must_reload = true;
+            }
+            m_ds.remove( doc ); // remove old link from docLnkSet
+            delete doc;
+        }
+    }
+    if (must_reload) {
+        setStartPath("");
+        emit sig_reloadDir();
+    }
 }

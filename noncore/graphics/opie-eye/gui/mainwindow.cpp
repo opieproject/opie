@@ -46,6 +46,8 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
     m_cfg = new Opie::Core::OConfig("opie-eye");
     m_cfg->setGroup("main" );
     readConfig();
+    m_setDocCalled = false;
+    m_polishDone = false;
 
     m_storage = new StorageInfo();
     connect(m_storage, SIGNAL(disksChanged() ),
@@ -419,11 +421,13 @@ void PMainWindow::closeEvent( QCloseEvent* ev ) {
      * return from view
      * or properly quit
      */
-    if ( m_stack->visibleWidget() == m_info ||
-         m_stack->visibleWidget() == m_disp ) {
-        ev->ignore();
-        raiseIconView();
-        return;
+    if (!m_setDocCalled) {
+        if ( m_stack->visibleWidget() == m_info ||
+             m_stack->visibleWidget() == m_disp ) {
+            ev->ignore();
+            raiseIconView();
+            return;
+        }
     }
     if (m_disp && m_disp->fullScreen()) {
         /* otherwise opie-eye crashes in bigscreen mode! */
@@ -436,16 +440,16 @@ void PMainWindow::closeEvent( QCloseEvent* ev ) {
 
 void PMainWindow::setDocument( const QString& showImg )
 {
-    bool first_start = m_disp==0;
-
     QString file = showImg;
     DocLnk lnk(showImg);
     if (lnk.isValid() )
         file = lnk.file();
     slotDisplay( file );
-    if (first_start && m_aFullScreen->isOn()) {
+#if 0
+    if (!m_polishDone) {
         QTimer::singleShot(0,this,SLOT(check_view_fullscreen()));
     }
+#endif
 }
 
 void PMainWindow::check_view_fullscreen()
@@ -689,17 +693,13 @@ void PMainWindow::listviewselected(QAction*which)
 {
     if (!which || which->isOn()==false) return;
     int val = 1;
-//    QString name;
 
     if (which==m_aDirName) {
         val = 3;
-//        name = "opie-eye/opie-eye-textview";
     } else if (which==m_aDirShort) {
         val = 2;
-//        name = "opie-eye/opie-eye-thumbonly";
     } else if (which==m_aDirLong) {
         val = 1;
-//        name = "opie-eye/opie-eye-thumb";
     }
     emit changeListMode(val);
 }
@@ -707,4 +707,27 @@ void PMainWindow::listviewselected(QAction*which)
 void PMainWindow::readConfig()
 {
     autoSave =m_cfg->readBoolEntry("savestatus",true);
+}
+
+void PMainWindow::polish()
+{
+    if (m_disp) {
+        odebug << "======================\n"
+               << "Called via setdocument\n"
+               << "======================" << oendl;
+        m_setDocCalled = true;
+        m_view->setDoccalled(true);
+        m_disp->setCloseIfHide(true);
+    } else {
+        m_setDocCalled = false;
+        m_view->setDoccalled(false);
+    }
+    m_polishDone = true;
+    QMainWindow::polish();
+    if (m_setDocCalled) {
+        if (m_aFullScreen->isOn()) {
+            QTimer::singleShot(0,this,SLOT(check_view_fullscreen()));
+        } else if (m_stack->mode() != Opie::Ui::OWidgetStack::SmallScreen) {
+        }
+    }
 }

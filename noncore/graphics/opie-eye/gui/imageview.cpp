@@ -27,6 +27,7 @@ ImageView::ImageView(Opie::Core::OConfig *cfg, QWidget* parent, const char* name
     m_gDisplayType = 0;
     m_gPrevNext = 0;
     m_hGroup = 0;
+    closeIfHide = false;
 }
 
 void ImageView::setMenuActions(QActionGroup*hGroup,QActionGroup*nextprevGroup, QActionGroup*disptypeGroup)
@@ -152,7 +153,19 @@ void ImageView::keyReleaseEvent(QKeyEvent * e)
     if (!e || e->state()!=0) {
         return;
     }
-    if (e->key()==Qt::Key_Escape && fullScreen()) emit hideMe();
+    if (e->key()==Qt::Key_Escape) {
+        if (fullScreen()) {
+            emit hideMe();
+        }
+        if (closeIfHide) {
+            QTimer::singleShot(0, qApp, SLOT(closeAllWindows()));
+        }
+    }
+}
+
+void ImageView::setCloseIfHide(bool how)
+{
+    closeIfHide = how;
 }
 
 void ImageView::slotShowImageInfo()

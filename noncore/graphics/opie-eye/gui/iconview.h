@@ -35,6 +35,8 @@ public:
     void resetView();
     Opie::Core::OKeyConfigManager* manager();
 
+    void setDoccalled(bool);
+
 signals:
     void sig_showInfo( const QString& );
     void sig_display(const QString&);
@@ -45,6 +47,7 @@ public slots:
     virtual void slotShowPrev();
     virtual void slotShowLast();
     virtual bool slotShowFirst();
+    virtual void polish();
 
 protected:
     void resizeEvent( QResizeEvent* );
@@ -56,6 +59,7 @@ private:
     QString prevFileName(bool &isDir)const;
     void loadViews();
     void calculateGrid(QResizeEvent*e = 0);
+    bool m_setDocCalled:1;
 
 private slots:
     void slotDirUp();
