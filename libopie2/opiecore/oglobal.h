@@ -81,7 +81,17 @@ public:
      *  File operations provided by OGlobal
      */
     //@{
+    /** the content of TEMP
+     * reads the environment variable TEMP and returns the content. 
+     * if not set returns "/tmp"
+     * @return a string containing a dir without trailing slash!
+     */
     static QString tempDirPath();
+    /** the content of HOME
+     * reads the environment variable HOME and returns the content. 
+     * if not set returns "/"
+     * @return a string containing a dir without trailing slash!
+     */
     static QString homeDirPath();
     static QString tempFileName( const QString& );
     static bool renameFile( const QString& from, const QString& to );
