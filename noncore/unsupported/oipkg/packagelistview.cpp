@@ -113,6 +113,7 @@ void PackageListView::display()
 void PackageListView::addList( QString n, PackageList* pl)
 {
   PackageLists.insert(n, pl);
-  ListViewItemOipkg *item = new ListViewItemOipkg(this,n,ListViewItemOipkg::Feed);
-  rootItems.insert(n, item);
+  rootItems.insert(n, static_cast<ListViewItemOipkg*>(pl));
+//  ListViewItemOipkg *item = new ListViewItemOipkg(this,n,ListViewItemOipkg::Feed);
+//  rootItems.insert(n, item);
 }

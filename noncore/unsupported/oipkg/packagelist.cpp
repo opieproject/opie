@@ -19,8 +19,8 @@
 static QDict<OipkgPackage>  *packageListAll;
 static int packageListAllRefCount = 0;
 
-PackageList::PackageList(QObject *parent, const char *name)
-  : QObject(parent,name), packageIter( packageList )
+PackageList::PackageList(QListView *parent, QString name)
+  : ListViewItemOipkg(parent,name,Feed), packageIter( packageList )
 {
   empty=true;
   if (!packageListAll) packageListAll = new QDict<OipkgPackage>();
@@ -31,13 +31,6 @@ PackageList::PackageList(QObject *parent, const char *name)
   *ss << "All";
   aktSection = "All";
   aktSubSection = "All";
-}
-
-PackageList::PackageList( PackageManagerSettings* s, QObject *parent, const char *name)
-  : QObject(parent,name), packageIter( packageList )
-{
-  settings = s;
-  PackageList(parent, name);
 }
 
 PackageList::~PackageList()

@@ -14,15 +14,15 @@
 #include "package.h"
 #include "pksettings.h"
 #include "debug.h"
+#include "listviewitemoipkg.h"
 
-class PackageList : public QObject
+class PackageList : public ListViewItemOipkg
 {
-  Q_OBJECT
+Q_OBJECT
 public:
 //	static QString all = QObject::tr("All");
 
-  PackageList (QObject *parent=0, const char *name=0);
-  PackageList( PackageManagerSettings *s, QObject *parent=0, const char *name=0);
+  PackageList (QListView *parent, QString name=0);
  	virtual ~PackageList();
   void insertPackage( OipkgPackage* );
   OipkgPackage* find( QString );

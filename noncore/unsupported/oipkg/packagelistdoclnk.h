@@ -17,9 +17,10 @@ class DocLnkSet;
 
 class PackageListDocLnk : public PackageList
 {
+Q_OBJECT
 public:
-	PackageListDocLnk(QObject *parent=0, const char *name=0);
-	PackageListDocLnk( PackageManagerSettings *s, QObject *parent=0, const char *name=0);
+	PackageListDocLnk(QListView *parent, QString name);
+//	PackageListDocLnk( PackageManagerSettings *s, QObject *parent=0, const char *name=0);
 	virtual ~PackageListDocLnk();
 public slots:
   void update();

@@ -16,9 +16,9 @@
 #include "debug.h"
 
 class PackageListRemote : public PackageList  {
+Q_OBJECT
 public:
-	PackageListRemote();
-	PackageListRemote( PackageManagerSettings* s);
+	PackageListRemote(QListView *parent, QString name);
 	virtual ~PackageListRemote();
   void query(QString);
 public slots:

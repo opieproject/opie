@@ -14,8 +14,8 @@
 #include <qstringlist.h>
 #include "packagelistlocal.h"
 
-PackageListLocal::PackageListLocal()
-	: PackageList()
+PackageListLocal::PackageListLocal(QListView *parent, QString name)
+	: PackageList(parent, name)
 {
 	Config cfg( "oipkg", Config::User );
 	cfg.setGroup( "Common" );
@@ -30,11 +30,6 @@ PackageListLocal::PackageListLocal()
   }
 }
 
-PackageListLocal::PackageListLocal(PackageManagerSettings* s)
-	: PackageList(s)
-{
-	PackageListLocal();
-}
 
 PackageListLocal::~PackageListLocal()
 {

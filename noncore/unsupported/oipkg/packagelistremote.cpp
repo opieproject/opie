@@ -15,14 +15,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-PackageListRemote::PackageListRemote(PackageManagerSettings* s)
-	: PackageList(s)
-{
-	PackageListRemote();
-}
 
-PackageListRemote::PackageListRemote()
-	: PackageList()
+PackageListRemote::PackageListRemote(QListView *parent, QString name)
+	: PackageList(parent,name)
 {
 }
 

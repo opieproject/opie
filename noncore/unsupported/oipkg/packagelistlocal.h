@@ -20,9 +20,9 @@
 #endif
 
 class PackageListLocal : public PackageList  {
+Q_OBJECT
 public:
-	PackageListLocal();
-	PackageListLocal( PackageManagerSettings* );
+	PackageListLocal(QListView *parent, QString name);
 	virtual ~PackageListLocal();
 
 public slots:

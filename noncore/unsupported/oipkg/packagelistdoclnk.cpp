@@ -16,13 +16,13 @@
 #include "package.h"
 #include "pksettings.h"
 
-PackageListDocLnk::PackageListDocLnk(PackageManagerSettings* s, QObject *parent, const char *name)
-	: PackageList(s)
-{
-	PackageListDocLnk(parent, name);
-}
+//PackageListDocLnk::PackageListDocLnk(PackageManagerSettings* s, QObject *parent, const char *name)
+//	: PackageList(s)
+//{
+//	PackageListDocLnk(parent, name);
+//}
 
-PackageListDocLnk::PackageListDocLnk(QObject *parent, const char *name)
+PackageListDocLnk::PackageListDocLnk(QListView *parent, QString name)
 	: PackageList(parent, name)
 {
 	Config cfg( "oipkg", Config::User );
