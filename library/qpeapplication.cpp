@@ -1126,9 +1126,6 @@ bool QPEApplication::qwsEventFilter( QWSEvent * e )
 					d->rejectIt();
 					return TRUE;
 				}
-				else if ( strcmp( argv() [ 0 ], "embeddedkonsole" ) != 0 ) {
-					active->close();
-				}
 			}
 		}
 		else if ( ke->simpleData.keycode >= Qt::Key_F1 && ke->simpleData.keycode <= Qt::Key_F29 ) {
@@ -2151,7 +2148,7 @@ int QPEApplication::exec()
 */
 void QPEApplication::tryQuit()
 {
-	if ( activeModalWidget() || strcmp( argv() [ 0 ], "embeddedkonsole" ) == 0 )
+	if ( activeModalWidget() )
 		return ; // Inside modal loop or konsole. Too hard to save state.
 #ifndef QT_NO_COP
 
