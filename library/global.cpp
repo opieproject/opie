@@ -106,11 +106,11 @@ StartingAppList* StartingAppList::appl = 0;
 StartingAppList::StartingAppList( QObject *parent, const char* name )
     :QObject( parent, name )
 {
-#if QT_VERSION >= 232 && !defined(QT_NO_COP)
+#if QT_VERSION >= 232 && defined(QWS)
     connect( qwsServer, SIGNAL( newChannel(const QString&)),
 	     this, SLOT( handleNewChannel(const QString&)) );
+#endif	     
     dict.setAutoDelete( TRUE );
-#endif
 }
 
 void StartingAppList::add( const QString& name )
