@@ -154,6 +154,7 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     populateSkinsMenu();
     initializeStates();
 
+    cfg.setGroup("PlayList");
     QString currentPlaylist = cfg.readEntry( "CurrentPlaylist", "" );
     loadList(DocLnk(  currentPlaylist ) );
     setCaption( tr( "OpiePlayer: " ) + currentPlaylist );
@@ -484,7 +485,7 @@ bool PlayListWidget::last() {
 
 void PlayListWidget::loadList( const DocLnk & lnk) {
     QString name = lnk.name();
-    //    qDebug("<<<<<<<<<<<<<<<<<<<<<<<<currentList is "+name);
+  qDebug("<<<<<<<<<<<<<<<<<<<<<<<<currentList is "+name);
 
     if( name.length()>0) {
         setCaption("OpiePlayer: "+name);
