@@ -47,14 +47,6 @@
 #include <qstylefactory.h>
 #endif
 
-#if defined(QT_QWS_IPAQ) || defined(QT_QWS_EBX)
-#include <unistd.h>
-#include <linux/fb.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <sys/ioctl.h>
-#endif
 #include <stdlib.h>
 
 
