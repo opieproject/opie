@@ -73,8 +73,8 @@ MainWindow::MainWindow( QWidget *parent , const char *name,  bool modal, WFlags 
     mainWidget->addTab( predictTab = new PredictTabWidget( mainWidget ), "netsystemtime/predicttab", tr( "Predict" ) );
     Config config( "ntp" );
     config.setGroup( "settings" );
-    slotDisplayNTPTab( config.readBoolEntry( "displayNtpTab", FALSE ) );
-    slotDisplayPredictTab( config.readBoolEntry( "displayPredictTab", FALSE ) );
+    slotDisplayNTPTab( config.readBoolEntry( "displayNtpTab", false ) );
+    slotDisplayPredictTab( config.readBoolEntry( "displayPredictTab", false ) );
 
     mainWidget->setCurrentTab( tr( "Time" ) );
     layout->addWidget( mainWidget );
@@ -128,10 +128,10 @@ void MainWindow::accept()
     }
 
     // Update the systemtime
-    timeTab->saveSettings( TRUE );
+    timeTab->saveSettings( true );
 
     // Save format options
-    formatTab->saveSettings( TRUE );
+    formatTab->saveSettings( true );
 
     // Save settings options
     settingsTab->saveSettings();
@@ -151,10 +151,10 @@ void MainWindow::accept()
 void MainWindow::reject()
 {
     // Reset time settings
-    timeTab->saveSettings( FALSE );
+    timeTab->saveSettings( false );
 
     // Send notifications but do not save settings
-    formatTab->saveSettings( FALSE );
+    formatTab->saveSettings( false );
 
     // Exit app
     qApp->quit();
@@ -185,10 +185,10 @@ void MainWindow::runNTP()
         QString output = tr( "Running:\nntpdate " );
         output.append( srv );
         ntpTab->addNtpOutput( output );
+        ntpTab->setNTPBtnEnabled( false );
     }
 
     // Disable set time buttons & change app caption to indicate time update is happening
-    ntpTab->setNTPBtnEnabled( false );
     timeTab->setNTPBtnEnabled( false );
     setCaption( tr( "Retrieving time from network..." ) );
 
@@ -210,10 +210,12 @@ void MainWindow::runNTP()
     {
         QMessageBox::critical( this, tr( "Error" ), tr( "Error while getting time from network." ) );
         if ( ntpTabEnabled )
+        {
             ntpTab->addNtpOutput( tr( "Error while executing ntpdate" ) );
+            ntpTab->setNTPBtnEnabled( true );
+        }
 
         // Re-enable set time buttons & change app caption to indicate time update is happening
-        ntpTab->setNTPBtnEnabled( true );
         timeTab->setNTPBtnEnabled( true );
         setCaption( tr( "SystemTime" ) );
     }
@@ -279,13 +281,13 @@ void MainWindow::slotDisplayPredictTab( bool display )
 
 void MainWindow::slotGetNTPTime()
 {
-    ntpInteractive = TRUE;
+    ntpInteractive = true;
     runNTP();
 }
 
 void MainWindow::slotTimerGetNTPTime()
 {
-    ntpInteractive = FALSE;
+    ntpInteractive = false;
     runNTP();
 }
 
@@ -309,7 +311,8 @@ void MainWindow::slotNtpFinished( OProcess *p )
     QDateTime dt = QDateTime::currentDateTime();
 
     // Re-enable set time buttons & change app caption to indicate time update is happening
-    ntpTab->setNTPBtnEnabled( true );
+    if ( ntpTabEnabled )
+        ntpTab->setNTPBtnEnabled( true );
     timeTab->setNTPBtnEnabled( true );
     setCaption( tr( "SystemTime" ) );
 
@@ -334,7 +337,7 @@ void MainWindow::slotNtpFinished( OProcess *p )
     config.setGroup( "lookups" );
     int lastLookup = config.readNumEntry( "time", 0 );
     int lookupCount = config.readNumEntry( "count", 0 );
-    bool lastNtp = config.readBoolEntry( "lastNtp", FALSE );
+    bool lastNtp = config.readBoolEntry( "lastNtp", false );
     int time = TimeConversion::toUTC( QDateTime::currentDateTime() );
     config.writeEntry( "time", time );
 
@@ -371,7 +374,7 @@ void MainWindow::slotNtpFinished( OProcess *p )
         config.writeEntry( "timeShift", QString::number( timeShift ) );
         config.setGroup( "lookups" );
         config.writeEntry( "count", lookupCount );
-        config.writeEntry( "lastNtp", TRUE );
+        config.writeEntry( "lastNtp", true );
     }
 }
 
