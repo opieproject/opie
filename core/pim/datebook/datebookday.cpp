@@ -91,7 +91,7 @@ void DateBookDayView::initHeader()
 	// It seems as if the header has a bug. It does not resize
 	// correct horizontally if it is used vertical..
 	// Thus, we do it manually..
-	verticalHeader()->setMinimumWidth( preferredWidth );
+	setLeftMargin( preferredWidth );
 }
 
 void DateBookDayView::slotDateChanged( int y, int m, int d )
