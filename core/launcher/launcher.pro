@@ -9,7 +9,6 @@ HEADERS		= background.h \
 		  appicons.h \
 		  taskbar.h \
 		  sidething.h \
-		  mrulist.h \
 		  runningappbar.h \
 		  stabmon.h \
 		  inputmethods.h \
@@ -51,7 +50,6 @@ SOURCES		= background.cpp \
 		  appicons.cpp \
 		  taskbar.cpp \
 		  sidething.cpp \
-		  mrulist.cpp \
  	          runningappbar.cpp \
 		  stabmon.cpp \
 		  inputmethods.cpp \

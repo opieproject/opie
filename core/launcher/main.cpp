@@ -242,7 +242,7 @@ void handle_sigterm ( int /* sig */ )
 
 int main( int argc, char ** argv )
 {
-    ::signal( SIGCHLD, SIG_IGN );
+    ::signal ( SIGCHLD, SIG_IGN );
 
 	::signal ( SIGTERM, handle_sigterm );
 	::signal ( SIGINT, handle_sigterm );

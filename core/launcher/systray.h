@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -43,12 +43,15 @@ class SysTray : public QFrame {
 public:
     SysTray( QWidget *parent );
 
+    void clearApplets();
+    void addApplets();
+
+protected:
+    void timerEvent(QTimerEvent* e);
+
+private:
     void loadApplets();
-
-private:
-    void positionApplet( const TaskbarApplet &a );
-
-private:
+    int safety_tid;
     QHBoxLayout *layout;
     QValueList<TaskbarApplet> appletList;
 };

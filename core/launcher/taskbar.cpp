@@ -20,7 +20,6 @@
 
 #include "startmenu.h"
 #include "inputmethods.h"
-#include "mrulist.h"
 #include "runningappbar.h"
 #include "systray.h"
 #include "calibrate.h"
@@ -273,7 +272,8 @@ void TaskBar::receive( const QCString &msg, const QByteArray &data )
 	} else if ( msg == "reloadInputMethods()" ) {
 		inputMethods->loadInputMethods();
 	} else if ( msg == "reloadApplets()" ) {
-		sysTray->loadApplets();
+		sysTray->clearApplets();
+		sysTray->addApplets();
 	} else if ( msg == "soundAlarm()" ) {
 		Desktop::soundAlarm();
 	}
