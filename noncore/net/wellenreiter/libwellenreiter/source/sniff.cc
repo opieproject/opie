@@ -1,16 +1,17 @@
 /* 
  *  rfmon mode sniffer
  *
- *  $Id: sniff.cc,v 1.1 2002-11-27 22:34:42 mjm Exp $
+ *  $Id: sniff.cc,v 1.2 2002-12-04 19:51:24 mjm Exp $
  */
 
 #include "sniff.hh"
 #include "ieee802_11.hh"
 #include "extract.hh"
 #include "log.hh"
+#include "proto.hh"
 
 /* Main function, checks packets */
-void process_packets(const struct pcap_pkthdr *pkthdr, const unsigned char *packet)
+void process_packets(const struct pcap_pkthdr *pkthdr, const unsigned char *packet, char *guihost, int guiport)
 {
   unsigned int caplen = pkthdr->caplen;
   unsigned int length = pkthdr->len;
@@ -20,6 +21,10 @@ void process_packets(const struct pcap_pkthdr *pkthdr, const unsigned char *pack
   /* pinfo holds all interresting information for us */
   struct packetinfo pinfo;
   struct packetinfo *pinfoptr;
+
+  /* wl_network_t will finally be set and send to the ui */
+  wl_network_t wl_net;
+
   pinfoptr=&pinfo;
   
   pinfoptr->isvalid = 0;
@@ -92,28 +97,34 @@ void process_packets(const struct pcap_pkthdr *pkthdr, const unsigned char *pack
 
 	      /* Here should be the infos to the gui issued */
 	      if (pinfoptr->cap_ESS == 1 &&pinfoptr->cap_IBSS ==0)
-	      {
-		  printf ("\nHave found an accesspoint:");
+		{
+		  wl_loginfo("Found an access point");
+		  wl_net.net_type=1;
 		}
 	      else if(pinfoptr->cap_ESS == 0 && pinfoptr->cap_IBSS == 1) 
 		{
-		  printf ("\nHave found an AD-HOC station:");
-		  
+		  wl_loginfo("Found an ad-hoc network");
+		  wl_net.net_type=2;
 		}
 	      if (strcmp (pinfoptr->ssid,NONBROADCASTING) ==0)
 		{
-		  printf ("\n\tOn a non-broadcasting network");
+		  wl_loginfo("Net is a non-broadcasting network");
 		}
 	      else
 		{
-		  printf ("\n\tOn network : %s",pinfoptr->ssid);
+		  wl_loginfo("SSID is: %s", pinfoptr->ssid);
+		  //		  wl_net.bssid=pinfoptr->ssid;
 		}
-	      printf ("\n\tLen SSID   : %d",pinfoptr->ssid_len);
-	      printf ("\n\tOn Channel : %d",pinfoptr->channel);
-	      printf ("\n\tEncryption : %s", pinfoptr->cap_WEP ? "ON" : "OFF");
-	      printf ("\n\tMacaddress : %s",pinfoptr->sndhwaddr);
-	      printf ("\n\tBssid      : %s",pinfoptr->bssid);
-	      printf ("\n\tDest	   : %s\n",pinfoptr->desthwaddr);
+
+	      wl_net.ssid_len=pinfoptr->ssid_len;
+	      wl_net.channel=pinfoptr->channel;
+	      wl_net.wep=pinfoptr->cap_WEP;
+	      memcpy(wl_net.mac, pinfoptr->sndhwaddr, sizeof(wl_net.mac));;
+	      memcpy(wl_net.bssid, pinfoptr->ssid, sizeof(wl_net.bssid));
+
+	      //	      printf ("\n\tDest	   : %s\n",pinfoptr->desthwaddr);
+	      send_network_found((char *)guihost, guiport, &wl_net);
+	      wl_loginfo("Sent network to GUI '%s:%d'", guihost, guiport);
 	    }
 	  break;	
 	default:
@@ -205,9 +216,9 @@ int handle_beacon(u_int16_t fc, const u_char *p,struct packetinfo *ppinfo)
 	      memcpy(&(pbody.ssid.ssid),p+offset,pbody.ssid.length); offset += pbody.ssid.length;
 	      pbody.ssid.ssid[pbody.ssid.length]='\0';
 	      if (strcmp((char *)pbody.ssid.ssid,"")==0)
-	   	  ppinfo->ssid = NONBROADCASTING;
+		memcpy(ppinfo->ssid, NONBROADCASTING, sizeof(ppinfo->ssid));
 	      else
-		  ppinfo->ssid = (char *)pbody.ssid.ssid;
+		  memcpy(ppinfo->ssid, pbody.ssid.ssid, sizeof(ppinfo->ssid));
 	      ppinfo->ssid_len = pbody.ssid.length;
 	  }
 	  break;

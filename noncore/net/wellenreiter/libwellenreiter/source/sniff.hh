@@ -1,4 +1,4 @@
-/* $Id: sniff.hh,v 1.1 2002-11-27 22:34:42 mjm Exp $ */
+/* $Id: sniff.hh,v 1.2 2002-12-04 19:51:24 mjm Exp $ */
 
 #ifndef SNIFF_HH
 #define SNIFF_HH
@@ -27,14 +27,14 @@ struct packetinfo
   int cap_IBSS;
   int cap_ESS;
   int channel;
-  char bssid[sizeof("00:00:00:00:00:00")];
-  char desthwaddr[sizeof("00:00:00:00:00:00")];
-  char sndhwaddr[sizeof("00:00:00:00:00:00")];
-  char *ssid;	
+  char bssid[sizeof("00:00:00:00:00:00") + 1];
+  char desthwaddr[sizeof("00:00:00:00:00:00") + 1];
+  char sndhwaddr[sizeof("00:00:00:00:00:00") + 1];
+  char ssid[128];
   int ssid_len;
 };
 
-void process_packets(const struct pcap_pkthdr* pkthdr,const u_char* packet);
+void process_packets(const struct pcap_pkthdr* pkthdr,const u_char* packet, char *, int);
 int decode_80211b_hdr(const u_char *p,struct packetinfo *ppinfo);
 void etheraddr_string(register const u_char *ep,char * text);
 int handle_beacon(u_int16_t fc, const u_char *p,struct packetinfo *ppinfo);
