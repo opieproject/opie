@@ -230,7 +230,7 @@ void StockTickerPluginWidget::init() {
 
     QHBoxLayout* layout = new QHBoxLayout( this );
     stocktickerTicker = new OTicker(this);
-    stocktickerTicker->setMinimumHeight(15);
+//    stocktickerTicker->setMinimumHeight(15);
     connect( stocktickerTicker, SIGNAL( mousePressed()), this, SLOT( checkConnection() ));
     layout->addWidget( stocktickerTicker);
     wasError = true;
@@ -251,27 +251,6 @@ void StockTickerPluginWidget::doStocks() {
 //    pthread_join(thread1,NULL);
 //    getStocks( symbollist.latin1() );
 }
-
-//void StockTickerPluginWidget::DefProxy(void) {
-//     char *proxy;
-//     libstocks_return_code error;
-
-//       /* Proxy support */
-//       /* Checks for "http_proxy" environment variable */
-//     proxy = getenv("http_proxy");
-//     if(proxy) {
-//           /* printf("proxy set\n"); */
-//         error = set_proxy(proxy);
-//         if (error) {
-// //             printf("Proxy error (%d)\n", error);
-//           QString tempString;
-//             tempString.sprintf("Proxy error (%d)\n", error);
-//             output = tempString;
-//             return;
-// //             exit(1);
-//         }
-//     }
-//}
 
 void StockTickerPluginWidget::timerEvent( QTimerEvent *e ) {
     killTimer(e->timerId());
