@@ -23,31 +23,26 @@
 #include <qtimer.h>
 #include <qfile.h>
 #include <qdir.h>
-#include <qmessagebox.h>
-
-#include <sys/types.h>
-#include <signal.h>
 
 #include "processinfo.h"
+#include "processdetail.h"
 
 ProcessInfo::ProcessInfo( QWidget* parent,  const char* name, WFlags fl )
     : QWidget( parent, name, fl )
 {
-    QVBoxLayout *vb = new QVBoxLayout( this, 5 );
+    QVBoxLayout *layout = new QVBoxLayout( this, 5 );
 
     ProcessView = new QListView( this, "ProcessView" );
     int colnum = ProcessView->addColumn( tr( "PID" ) );
     ProcessView->setColumnAlignment( colnum, Qt::AlignRight );
     colnum = ProcessView->addColumn( tr( "Command" ),96 );
-    ProcessView->setColumnAlignment( colnum, Qt::AlignRight );
     colnum = ProcessView->addColumn( tr( "Status" ) );
-    ProcessView->setColumnAlignment( colnum, Qt::AlignRight );
     colnum = ProcessView->addColumn( tr( "Time" ) );
     ProcessView->setColumnAlignment( colnum, Qt::AlignRight );
     ProcessView->setAllColumnsShowFocus( TRUE );
     connect( ProcessView, SIGNAL( doubleClicked(QListViewItem *) ), this, SLOT( viewProcess(QListViewItem *) ) );
 
-    vb->addWidget( ProcessView );
+    layout->addWidget( ProcessView );
 
     QTimer *t = new QTimer( this );
     connect( t, SIGNAL( timeout() ), this, SLOT( updateData() ) );
@@ -119,21 +114,24 @@ void ProcessInfo::updateData()
 
 void ProcessInfo::viewProcess(QListViewItem *process)
 {
-    QString pid= process->text(0);
+    QString pid= process->text(0).stripWhiteSpace();
     QString command = process->text(1);
-    switch( QMessageBox::information( this, (tr("Kill Process?")),
-                                      (tr("You really want to kill\n"+command+" PID: "+pid+"?")),
-                                      (tr("Yes")), (tr("No")), 0 )){
-        case 0: // Yes clicked,
+    ProcessDetail *processdtl = new ProcessDetail( this, 0, TRUE, 0);
+    processdtl->setCaption( pid + " - " + command );
+    processdtl->pid = pid.toUInt();
+    processdtl->ProcessView->setTextFormat( RichText );
+    FILE *statfile = fopen( ( QString ) ( "/proc/" + pid + "/status"), "r");
+    if ( statfile )
+    {
+        char line[81];
+        fgets( line, 81, statfile );
+        processdtl->ProcessView->setText( line );
+        while ( fgets( line, 81, statfile ) )
         {
-            bool ok;
-            pid_t child=pid.toInt(&ok,10);
-            if((kill(child,SIGKILL)) < 0)
-                perror("kill:SIGKILL");
-        }   
-            break;
-        case 1: // Cancel
-            break;
-    };
-//printf("Double click for PID: %s\n", process->text(0).stripWhiteSpace().latin1());
+            processdtl->ProcessView->append( line );
+        }
+        fclose( statfile );
+    }
+
+    processdtl->showMaximized();
 }
