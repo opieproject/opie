@@ -1,6 +1,7 @@
 #include "function_keyboard.h"
 #include <qsizepolicy.h> 
-#include <qwindowsystem_qws.h>
+#include <qevent.h>
+#include <qapplication.h>
 
 FunctionKeyboard::FunctionKeyboard(QWidget *parent) : 
     QFrame(parent), numRows(1), numCols(11), 
@@ -92,7 +93,7 @@ void FunctionKeyboard::paintKey(int row, int col) {
 void FunctionKeyboard::mousePressEvent(QMouseEvent *e) {
 
     pressedRow = e->y() / keyHeight;
-    pressedCol = e->x() / keyWidth;
+    pressedCol = (int) (e->x() / keyWidth);
 
     paintKey(pressedRow, pressedCol);
 
@@ -101,6 +102,10 @@ void FunctionKeyboard::mousePressEvent(QMouseEvent *e) {
     //QWSServer::sendKeyEvent(k.getU(), k.getQ(), 0, 1, 0);
     //qwsServer->sendKeyEvent(k.getU(), k.getQ(), 0, 1, 0);
     //qwsServer->sendKeyEvent(0x41, 0, 0, 1, 0);
+
+    QKeyEvent ke(QEvent::KeyPress, k.getQ(), k.getU(), 0);
+    QApplication::sendEvent(this, &ke); 
+
 }
 
 void FunctionKeyboard::mouseReleaseEvent(QMouseEvent *) {
@@ -114,6 +119,8 @@ void FunctionKeyboard::mouseReleaseEvent(QMouseEvent *) {
         FKey k = keys["r" + QString::number(row) + "c" + QString::number(col)];
         //QWSServer::sendKeyEvent(k.getU(), k.getQ(), 0, 0, 0);
         //qwsServer->sendKeyEvent(k.getU(), k.getQ(), 0, 0, 0);
+        QKeyEvent ke(QEvent::KeyRelease, k.getQ(), k.getU(), 0);
+        QApplication::sendEvent(this, &ke); 
     }
 
 }
