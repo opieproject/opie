@@ -6,7 +6,7 @@
 #include <qmessagebox.h>
 #include <stdlib.h>
 #include <qpe/global.h>
-#include <opie/oprocess.h>
+#include <opie2/oprocess.h>
 
 const QString MHwrapper::wrapperType="MH";
 

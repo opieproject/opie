@@ -9,7 +9,7 @@
 
 #include <qpe/config.h>
 
-#include <opie/ofiledialog.h>
+#include <opie2/ofiledialog.h>
 
 #include <libmailwrapper/settings.h>
 #include "composemail.h"
@@ -198,7 +198,7 @@ void ViewMail::slotItemClicked( QListViewItem * item , const QPoint & point, int
         case 0:
              { MimeTypes types;
              types.insert( "all", "*" );
-             QString str = OFileDialog::getSaveFileName( 1,
+             QString str = Opie::OFileDialog::getSaveFileName( 1,
                   "/", item->text( 2 )  , types, 0 );
 
              if( !str.isEmpty() ) {

@@ -5,7 +5,7 @@ HEADERS		+=	mailapplet.h \
 SOURCES		+=	mailapplet.cpp \
 			mailappletimpl.cpp 
 INCLUDEPATH += $(OPIEDIR)/include $(OPIEDIR)/noncore/net/mail
-LIBS		+=	-lmailwrapper -lqpe -lopie
+LIBS		+=	-lmailwrapper -lqpe -lopiecore2
 TARGET		=	mailapplet
 DESTDIR		+=	$(OPIEDIR)/plugins/applets/
 

@@ -6,7 +6,7 @@
 #include <qpe/config.h>
 #include <qpe/applnk.h>
 
-#include <opie/odevice.h>
+#include <opie2/odevice.h>
 
 #include <libmailwrapper/settings.h>
 
@@ -116,7 +116,7 @@ void MailApplet::slotCheck() {
             }
         }
         if ( m_config->readBoolEntry( "PlaySound", false ) )
-            device->alarmSound();
+            device->playAlarmSound();
 
         Config cfg( "mail" );
         cfg.setGroup( "Status" );

@@ -1,6 +1,6 @@
 #include <qt.h>
 
-#include <opie/ofiledialog.h>
+#include <opie2/ofiledialog.h>
 #include <qpe/resource.h>
 #include <qpe/config.h>
 #include <qpe/global.h>
@@ -163,7 +163,7 @@ void ComposeMail::slotAdjustColumns()
 
 void ComposeMail::addAttachment()
 {
-    DocLnk lnk = OFileDialog::getOpenFileName( 1, "/" );
+    DocLnk lnk = Opie::OFileDialog::getOpenFileName( 1, "/" );
     if ( !lnk.name().isEmpty() ) {
         Attachment *att = new Attachment( lnk );
         (void) new AttachViewItem( attList, att );
