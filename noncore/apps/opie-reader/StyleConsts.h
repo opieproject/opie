@@ -4,6 +4,7 @@
 typedef unsigned short StyleType;
 
 #include <stdlib.h>
+#include <string.h>
 #include <qglobal.h>
 class QPixmap;
 
