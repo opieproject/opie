@@ -40,12 +40,15 @@ OFileDialog::OFileDialog(const QString &caption,
 			 const QStringList &mimetypes )
   : QDialog( wid, "OFileDialog", true )
 {
-  QVBoxLayout *lay = new QVBoxLayout(this);
-  
-  file = new OFileSelector(0 , mode, selector,
+  //  QVBoxLayout *lay = new QVBoxLayout(this);
+  //showMaximized();
+  QVBoxLayout *lay = new QVBoxLayout(this );
+  file = new OFileSelector(this , mode, selector,
 			   dirName, fileName,
 			   mimetypes );
   lay->addWidget( file );
+
+  //lay->addWidget( file );
   //showFullScreen();
   setCaption( caption.isEmpty() ? tr("FileDialog") : caption );
   connect(file, SIGNAL(fileSelected(const QString&) ),
@@ -53,7 +56,8 @@ OFileDialog::OFileDialog(const QString &caption,
 
   connect(file, SIGNAL(dirSelected(const QString &) ),
 	  this, SLOT(slotDirSelected(const QString &) ) );
-  showMaximized();
+
+  
   file->setYesCancelVisible( false );  // relayout
 }
 QString OFileDialog::mimetype()const
@@ -78,6 +82,7 @@ QString OFileDialog::getOpenFileName(int selector,
   QString ret;
   OFileDialog dlg( caption.isEmpty() ? tr("Open") : caption,
 		   wid, OFileSelector::OPEN, selector, startDir, file, mimes);
+  dlg.showMaximized();
   if( dlg.exec() )
     ret = dlg.fileName();
 
@@ -93,6 +98,7 @@ QString OFileDialog::getSaveFileName(int selector,
   QString ret;
   OFileDialog dlg( caption.isEmpty() ? tr("Save") : caption,
 		   wid, OFileSelector::SAVE, selector, startDir, file, mimes);
+  dlg.showMaximized();
   if( dlg.exec() )
     ret = dlg.fileName();
 

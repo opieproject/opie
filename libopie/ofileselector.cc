@@ -79,8 +79,8 @@ namespace {
 OFileSelector::OFileSelector(QWidget *wid, int mode, int selector, const QString &dirName,
 			     const QString &fileName, const QStringList &mimetypes ) : QWidget( wid )
 {
-
-  resize(wid->width(),wid->height());
+  if(wid!=0)
+    resize(wid->width(),wid->height());
   m_selector = selector;
   m_currentDir = dirName;
   m_name = fileName;
@@ -194,6 +194,7 @@ void OFileSelector::init()
     m_lay->addWidget(m_stack );
     m_stack->raiseWidget(NORMAL );
     connect(m_select, SIGNAL(fileSelected( const DocLnk &) ), this, SLOT(slotFileBridgeSelected(const DocLnk &) ) );
+    m_pseudoLayout = 0l;
   }else {
     initializeListView();
   }
@@ -595,7 +596,8 @@ void OFileSelector::slotViewCheck(const QString &view ){
       delete m_location;
       delete m_up;
       delete m_pseudo;
-      delete m_pseudoLayout;
+      if(m_pseudoLayout!=0 )
+	delete m_pseudoLayout;
     }
     m_View = 0;
     m_boxToolbar = 0;
@@ -624,20 +626,7 @@ void OFileSelector::slotViewCheck(const QString &view ){
     delete m_View;
     m_View = 0;
 
-    delete m_boxToolbar;
-    delete m_homeButton;
-    delete m_docButton;
-    delete m_location;
-    delete m_up;
-    delete m_pseudo;
-    delete m_pseudoLayout;
-    m_boxToolbar = 0;
-    m_homeButton = 0;
-    m_docButton = 0;
-    m_location = 0;
-    m_up = 0;
-    m_pseudo = 0;
-    m_pseudoLayout = 0;
+    
 
     m_selector = EXTENDED;
     // create the ListView or IconView
@@ -650,20 +639,6 @@ void OFileSelector::slotViewCheck(const QString &view ){
     m_select = 0;
     delete m_View;
     m_View = 0;
-    delete m_boxToolbar;
-    delete m_homeButton;
-    delete m_docButton;
-    delete m_location;
-    delete m_up;
-    delete m_pseudo;
-    delete m_pseudoLayout;
-    m_boxToolbar = 0;
-    m_homeButton = 0;
-    m_docButton = 0;
-    m_location = 0;
-    m_up = 0;
-    m_pseudo = 0;
-    m_pseudoLayout = 0;
 
     m_selector = EXTENDED_ALL;
     initializeListView();
@@ -701,7 +676,8 @@ void OFileSelector::initializeListView()
   delete m_location;
   delete m_up;
   delete m_pseudo;
-  delete m_pseudoLayout;
+  if(m_pseudoLayout!=0 ) // why did you overload malloc
+    delete m_pseudoLayout;
   m_boxToolbar = 0;
   m_homeButton = 0;
   m_docButton = 0;
