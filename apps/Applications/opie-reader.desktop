@@ -1,6 +1,6 @@
 [Desktop Entry]
 Comment=An E-Text Reader
-Exec=uqtreader
+Exec=reader
 Icon=opie-reader/uqtreader
 Type=Application
 Name=Opie Reader (Unicode)
