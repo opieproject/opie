@@ -3,159 +3,172 @@
     <name>FormatterApp</name>
     <message>
         <source>Formatter</source>
-        <translation type="unfinished"></translation>
+        <translation>formatter</translation>
     </message>
     <message>
         <source>Storage Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Opslagsoort</translation>
     </message>
     <message>
         <source>File Systems</source>
-        <translation type="unfinished"></translation>
+        <translation>Filesystemen</translation>
     </message>
     <message>
         <source>Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Formatteer</translation>
     </message>
     <message>
         <source>Main</source>
-        <translation type="unfinished"></translation>
+        <translation>Startpunt</translation>
     </message>
     <message>
         <source>CAUTION:
 Changing parameters on this 
 page may cause your system 
 to stop functioning properly!!</source>
-        <translation type="unfinished"></translation>
+        <translation>WAARSCHUWING:
+Het veranderen van opties op
+deze pagina kan ervoor zorgen
+dat uw system niet meer goed
+functioneert!!</translation>
     </message>
     <message>
         <source>Edit fstab</source>
-        <translation type="unfinished"></translation>
+        <translation>Wijzig fstab</translation>
     </message>
     <message>
         <source>Check Disk</source>
-        <translation type="unfinished"></translation>
+        <translation>Controleer Disk</translation>
     </message>
     <message>
         <source>Device</source>
-        <translation type="unfinished"></translation>
+        <translation>Apparaat</translation>
     </message>
     <message>
         <source>Mount Point</source>
-        <translation type="unfinished"></translation>
+        <translation>Mount punt</translation>
     </message>
     <message>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Geavanceerd</translation>
     </message>
     <message>
         <source>Format?!?</source>
-        <translation type="unfinished"></translation>
+        <translation>Formatteren?!?</translation>
     </message>
     <message>
         <source>Really format
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Echt Formatteren
+</translation>
     </message>
     <message>
         <source>
 with </source>
-        <translation type="unfinished"></translation>
+        <translation>
+met</translation>
     </message>
     <message>
         <source> filesystem?!?
 You will loose all data!!</source>
-        <translation type="unfinished"></translation>
+        <translation>bestandssysteem?!?
+Alle data zal verloren gaan!!</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nee</translation>
     </message>
     <message>
         <source>Could not format.
 Unknown type</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan niet formatteren.
+Onbekend type</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Formatter Output</source>
-        <translation type="unfinished"></translation>
+        <translation>Formatteer uitvoer</translation>
     </message>
     <message>
         <source>Trying to umount.</source>
-        <translation type="unfinished"></translation>
+        <translation>Probeer te umounten.</translation>
     </message>
     <message>
         <source>umount failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>umount mislukt!</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>Could not umount.
 Device is busy!</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan niet umounten.
+Apparaat is bezig!</translation>
     </message>
     <message>
         <source>Trying to format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Probeer te formatteren.</translation>
     </message>
     <message>
         <source>No such device!</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit apparaat bestaat niet!</translation>
     </message>
     <message>
         <source>
 has been successfully formatted.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+is succcesvol geformatteerd.</translation>
     </message>
     <message>
         <source>Trying to mount.</source>
-        <translation type="unfinished"></translation>
+        <translation>Probeer te mounten.</translation>
     </message>
     <message>
         <source>Card mount failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaart mount mislukt!</translation>
     </message>
     <message>
         <source>
 has been successfully mounted.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+is sucsesvol gemount.</translation>
     </message>
     <message>
         <source>You can now close the output window.</source>
-        <translation type="unfinished"></translation>
+        <translation>U kunt nu het uitvoerscherm sluiten.</translation>
     </message>
     <message>
         <source>Internal</source>
-        <translation type="unfinished"></translation>
+        <translation>Intern</translation>
     </message>
     <message>
         <source>Storage Type : </source>
-        <translation type="unfinished"></translation>
+        <translation>Opslagsoort :</translation>
     </message>
     <message>
         <source>Total: %1 kB ( %d mB)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Totaal %1 kB (%d mB)
+</translation>
     </message>
     <message>
         <source>Used: %1 kB ( %d mB)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruikt: %1 ( %d mB)
+</translation>
     </message>
     <message>
         <source>Available: %1 kB ( %d mB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Beschikbaar: %1 kB (%d mB)</translation>
     </message>
 </context>
 </TS>

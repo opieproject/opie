@@ -3,245 +3,245 @@
     <name>FileBrowser</name>
     <message>
         <source>File Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>File Manager</translation>
     </message>
     <message>
         <source>Dir</source>
-        <translation type="unfinished"></translation>
+        <translation>Dir</translation>
     </message>
     <message>
         <source>Sort</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorteer</translation>
     </message>
     <message>
         <source>by Name </source>
-        <translation type="unfinished"></translation>
+        <translation>op Naam</translation>
     </message>
     <message>
         <source>by Size </source>
-        <translation type="unfinished"></translation>
+        <translation>op Grootte</translation>
     </message>
     <message>
         <source>by Date </source>
-        <translation type="unfinished"></translation>
+        <translation>op Datum</translation>
     </message>
     <message>
         <source>by Type </source>
-        <translation type="unfinished"></translation>
+        <translation>op Type</translation>
     </message>
     <message>
         <source>Ascending</source>
-        <translation type="unfinished"></translation>
+        <translation>Neer</translation>
     </message>
     <message>
         <source>Hidden</source>
-        <translation type="unfinished"></translation>
+        <translation>Verborgen</translation>
     </message>
     <message>
         <source>Symlinks</source>
-        <translation type="unfinished"></translation>
+        <translation>Symlinks</translation>
     </message>
     <message>
         <source>Thumbnails</source>
-        <translation type="unfinished"></translation>
+        <translation>Miniaturen</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Weergave</translation>
     </message>
     <message>
         <source>Previous dir</source>
-        <translation type="unfinished"></translation>
+        <translation>Voorgaande Map</translation>
     </message>
     <message>
         <source>Parent dir</source>
-        <translation type="unfinished"></translation>
+        <translation>Hogere Map</translation>
     </message>
     <message>
         <source>New folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuwe Map</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation type="unfinished"></translation>
+        <translation>Knip</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopieer</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>Plak</translation>
     </message>
     <message>
         <source>/</source>
-        <translation type="unfinished"></translation>
+        <translation>/</translation>
     </message>
 </context>
 <context>
     <name>FileView</name>
     <message>
         <source>File Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>File Manager</translation>
     </message>
     <message>
         <source>Can&apos;t show /dev/ directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan /dev/ map niet weergeven.</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>Rename file</source>
-        <translation type="unfinished"></translation>
+        <translation>Hernoem bestand</translation>
     </message>
     <message>
         <source>Rename failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Hernoemen mislukt!</translation>
     </message>
     <message>
         <source>Paste file</source>
-        <translation type="unfinished"></translation>
+        <translation>Plak bestand</translation>
     </message>
     <message>
         <source>Paste failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Plakken misluktHernoemen mislukt!</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Cut file</source>
-        <translation type="unfinished"></translation>
+        <translation>Knip bestand</translation>
     </message>
     <message>
         <source>Cut failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Knippen mislukt!</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder</translation>
     </message>
     <message>
         <source>Are you sure?</source>
-        <translation type="unfinished"></translation>
+        <translation>Bent u zeker?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nee</translation>
     </message>
     <message>
         <source>Delete failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijderen mislukt!</translation>
     </message>
     <message>
         <source>New folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuwe map</translation>
     </message>
     <message>
         <source>Folder creation failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Map maken mislukt!</translation>
     </message>
     <message>
         <source>Launch Application</source>
-        <translation type="unfinished"></translation>
+        <translation>Start Programma</translation>
     </message>
     <message>
         <source>Launch failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Starten Mislukt!</translation>
     </message>
     <message>
         <source>Add to Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Voeg toe aan Documenten</translation>
     </message>
     <message>
         <source>Run</source>
-        <translation type="unfinished"></translation>
+        <translation>Start</translation>
     </message>
     <message>
         <source>View as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Belijk als tekst</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Hernoem</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation type="unfinished"></translation>
+        <translation>Knip</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopieer</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>Plak</translation>
     </message>
     <message>
         <source>Change Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Verander Rechten</translation>
     </message>
     <message>
         <source>Select all</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer alles</translation>
     </message>
     <message>
         <source>Deselect all</source>
-        <translation type="unfinished"></translation>
+        <translation>De-selecteer alles</translation>
     </message>
     <message>
         <source>Change permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Verander rechten</translation>
     </message>
 </context>
 <context>
     <name>filePermissions</name>
     <message>
         <source>Set File Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Stel Bestandsrechten in</translation>
     </message>
     <message>
         <source>Set file permissions for:</source>
-        <translation type="unfinished"></translation>
+        <translation>Stel Bestandsrechten in voor:</translation>
     </message>
     <message>
         <source>owner</source>
-        <translation type="unfinished"></translation>
+        <translation>eigenaar</translation>
     </message>
     <message>
         <source>group</source>
-        <translation type="unfinished"></translation>
+        <translation>groep</translation>
     </message>
     <message>
         <source>others</source>
-        <translation type="unfinished"></translation>
+        <translation>anderen</translation>
     </message>
     <message>
         <source>Owner</source>
-        <translation type="unfinished"></translation>
+        <translation>Eigenaar</translation>
     </message>
     <message>
         <source>Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Groep</translation>
     </message>
     <message>
         <source>read</source>
-        <translation type="unfinished"></translation>
+        <translation>lees</translation>
     </message>
     <message>
         <source>write</source>
-        <translation type="unfinished"></translation>
+        <translation>schrijf</translation>
     </message>
     <message>
         <source>execute</source>
-        <translation type="unfinished"></translation>
+        <translation>uitvoeren</translation>
     </message>
 </context>
 </TS>

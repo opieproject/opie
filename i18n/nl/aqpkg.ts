@@ -269,11 +269,11 @@
     </message>
     <message>
         <source>Quick Jump keypad</source>
-        <translation type="unfinished"></translation>
+        <translation>Snelzoek toetsenblok</translation>
     </message>
     <message>
         <source>Click here to display/hide keypad to allow quick movement through the package list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier om het toetsenblok te verbergen/weergeven om snel navigeren door de pakketlijst toe te staan.</translation>
     </message>
     <message>
         <source>View</source>
@@ -281,11 +281,11 @@
     </message>
     <message>
         <source>Click here to hide the find toolbar.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier om de &quot;Vind&quot; balk te verbergen.</translation>
     </message>
     <message>
         <source>Servers:</source>
-        <translation type="unfinished"></translation>
+        <translation>Servers:</translation>
     </message>
     <message>
         <source>Click here to select a package feed.</source>
@@ -303,7 +303,13 @@ A blue dot next to the package name indicates that the package is currently inst
 A blue dot with a star indicates that a newer version of the package is available from the server feed.
 
 Click inside the box at the left to select a package.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit is een lijst van alle paketten die beschikbaar zijn bij de geselecteerde serverlokatie.
+
+Een blauw bolletje geeft weer dat het pakket al geinstalleerd is.
+
+Een blauw bolletje met een ster erin geeft aan dat er een nieuwere versie aanwezig is op de server.
+
+Klik in het vierkantje links om het pakket te selecteren. </translation>
     </message>
     <message>
         <source>Remove</source>
@@ -316,12 +322,14 @@ Click inside the box at the left to select a package.</source>
     <message>
         <source>Building server list:
 <byte value="x9"/>%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Bouw serverlijst op van:
+%1</translation>
     </message>
     <message>
         <source>Building package list for:
 <byte value="x9"/>%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Bouw pakettenlijst op van:
+ %1</translation>
     </message>
     <message>
         <source>Installed To - %1</source>
@@ -345,15 +353,15 @@ Click inside the box at the left to select a package.</source>
     </message>
     <message>
         <source>V. Installed - %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Geinstalleerde versie - %1</translation>
     </message>
     <message>
         <source>V. Available - %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Beschikbare Versie - %1</translation>
     </message>
     <message>
         <source>Refreshing server package lists</source>
-        <translation type="unfinished"></translation>
+        <translation>Ververs pakketlijsten van server</translation>
     </message>
     <message>
         <source>WARNING: Upgrading while
@@ -362,7 +370,11 @@ is NOT recommended!
 
 Are you sure?
 </source>
-        <translation type="unfinished"></translation>
+        <translation>WAARSCHUWING: Vernieuwen
+terwijl Opie/Qtopia loopt
+is niet aanbevolen!
+
+Weet je het zeker?</translation>
     </message>
     <message>
         <source>Warning</source>
@@ -400,7 +412,7 @@ wilt verwijderen?</translation>
     </message>
     <message>
         <source>Install Remote Package</source>
-        <translation type="unfinished"></translation>
+        <translation>Installeer programma van server</translation>
     </message>
     <message>
         <source>Enter package location</source>
@@ -453,7 +465,7 @@ verwijderen of vernieuwen?</translation>
     </message>
     <message>
         <source>Updating Launcher...</source>
-        <translation type="unfinished"></translation>
+        <translation>Updaten van Startbalk...</translation>
     </message>
 </context>
 <context>
@@ -464,11 +476,11 @@ verwijderen of vernieuwen?</translation>
     </message>
     <message>
         <source>Servers</source>
-        <translation type="unfinished"></translation>
+        <translation>Servers</translation>
     </message>
     <message>
         <source>Destinations</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestemmingen</translation>
     </message>
     <message>
         <source>Proxies</source>
@@ -484,7 +496,7 @@ verwijderen of vernieuwen?</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Server</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -496,7 +508,7 @@ verwijderen of vernieuwen?</translation>
     </message>
     <message>
         <source>Active Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Actieve Server</translation>
     </message>
     <message>
         <source>Update</source>

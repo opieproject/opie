@@ -3,215 +3,215 @@
     <name>CommandEditDialog</name>
     <message>
         <source>Command Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Commandoselectie</translation>
     </message>
 </context>
 <context>
     <name>CommandEditDialogBase</name>
     <message>
         <source>Commands</source>
-        <translation type="unfinished"></translation>
+        <translation>Commando&apos;s</translation>
     </message>
     <message>
         <source>&lt;B&gt;Commands&lt;/B&gt;:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;B&gt;Commando&apos;s&lt;/B&gt;:</translation>
     </message>
     <message>
         <source>&lt;B&gt;Suggested Commands&lt;/B&gt;:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;B&gt;Gesuggereedre Commando&apos;s&lt;/B&gt;:</translation>
     </message>
 </context>
 <context>
     <name>Konsole</name>
     <message>
         <source>Terminal</source>
-        <translation type="unfinished"></translation>
+        <translation>Terminal</translation>
     </message>
     <message>
         <source>Micro</source>
-        <translation type="unfinished"></translation>
+        <translation>Heel klein</translation>
     </message>
     <message>
         <source>Small Fixed</source>
-        <translation type="unfinished"></translation>
+        <translation>Klein Vast</translation>
     </message>
     <message>
         <source>Medium Fixed</source>
-        <translation type="unfinished"></translation>
+        <translation>Middel Vast</translation>
     </message>
     <message>
         <source>Command List</source>
-        <translation type="unfinished"></translation>
+        <translation>Commandolijst</translation>
     </message>
     <message>
         <source>Show command list</source>
-        <translation type="unfinished"></translation>
+        <translation>Geef commandolijst weer</translation>
     </message>
     <message>
         <source>Hide command list</source>
-        <translation type="unfinished"></translation>
+        <translation>Verberg commandolijst</translation>
     </message>
     <message>
         <source>Tabs on Bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabs onderaan</translation>
     </message>
     <message>
         <source>Tabs on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabs bovenaan</translation>
     </message>
     <message>
         <source>Green on Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Groen op Zwart</translation>
     </message>
     <message>
         <source>Black on White</source>
-        <translation type="unfinished"></translation>
+        <translation>Zwart op Wit</translation>
     </message>
     <message>
         <source>White on Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Wit op Zwart</translation>
     </message>
     <message>
         <source>Black on Transparent</source>
-        <translation type="unfinished"></translation>
+        <translation>Zwart op transparant</translation>
     </message>
     <message>
         <source>Black on Red</source>
-        <translation type="unfinished"></translation>
+        <translation>Zwart op Rood</translation>
     </message>
     <message>
         <source>Red on Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Rood op Zwart</translation>
     </message>
     <message>
         <source>Green on Yellow</source>
-        <translation type="unfinished"></translation>
+        <translation>Groen op Geel</translation>
     </message>
     <message>
         <source>Blue on Magenta</source>
-        <translation type="unfinished"></translation>
+        <translation>Blauw op Magenta</translation>
     </message>
     <message>
         <source>Magenta on Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Magenta op Blauw</translation>
     </message>
     <message>
         <source>Cyan on White</source>
-        <translation type="unfinished"></translation>
+        <translation>Cyaan op Wit</translation>
     </message>
     <message>
         <source>White on Cyan</source>
-        <translation type="unfinished"></translation>
+        <translation>Wit op Cyaan</translation>
     </message>
     <message>
         <source>Blue on Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Blauw op Zwart</translation>
     </message>
     <message>
         <source>Amber on Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Amber op Zwart</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Aangepast</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Lettertype</translation>
     </message>
     <message>
         <source>Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Kleuren</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opties</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw</translation>
     </message>
     <message>
         <source>Enter</source>
-        <translation type="unfinished"></translation>
+        <translation>Voer in</translation>
     </message>
     <message>
         <source>Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Spatie</translation>
     </message>
     <message>
         <source>Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Tab</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Omhoog</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Omlaag</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>Plak</translation>
     </message>
     <message>
         <source>Quick Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Snelverandering</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Verander</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen</translation>
     </message>
     <message>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Links</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechts</translation>
     </message>
     <message>
         <source>ScrollBar</source>
-        <translation type="unfinished"></translation>
+        <translation>Schuifbalk</translation>
     </message>
     <message>
         <source>Wrap</source>
-        <translation type="unfinished"></translation>
+        <translation>Breek af</translation>
     </message>
     <message>
         <source>Use Beep</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik piep</translation>
     </message>
     <message>
         <source>Show Command List</source>
-        <translation type="unfinished"></translation>
+        <translation>Laat commandolijst zien</translation>
     </message>
     <message>
         <source>Hide Command List</source>
-        <translation type="unfinished"></translation>
+        <translation>Verberg commandolijst</translation>
     </message>
 </context>
 <context>
     <name>PlayListSelection</name>
     <message>
         <source>Command Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Commandoselectie</translation>
     </message>
 </context>
 <context>
     <name>editCommandBase</name>
     <message>
         <source>Add command</source>
-        <translation type="unfinished"></translation>
+        <translation>Voeg commando toe</translation>
     </message>
     <message>
         <source>Enter command to add:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vul toe te voegen commando in:</translation>
     </message>
 </context>
 </TS>

@@ -3,59 +3,59 @@
     <name>ButtonSettings</name>
     <message>
         <source>Button Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Knopinstellingen</translation>
     </message>
     <message>
         <source>&lt;center&gt;Press or hold the button you want to remap.&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;Druk de knop in of houd hem ingedrukt die je opnieuw wilt instellen. &lt;/center&gt;</translation>
     </message>
     <message>
         <source>Press:</source>
-        <translation type="unfinished"></translation>
+        <translation>Druk in:</translation>
     </message>
     <message>
         <source>Hold:</source>
-        <translation type="unfinished"></translation>
+        <translation>Houd ingedrukt:</translation>
     </message>
     <message>
         <source>Beam VCard</source>
-        <translation type="unfinished"></translation>
+        <translation>Stuur VCard via IR</translation>
     </message>
     <message>
         <source>Send eMail</source>
-        <translation type="unfinished"></translation>
+        <translation>Stuur eMail</translation>
     </message>
     <message>
         <source>Toggle Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu aan/uit</translation>
     </message>
     <message>
         <source>Toggle O-Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>O-Menu aan/uit</translation>
     </message>
     <message>
         <source>Show Desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>Geef bureaublad weer</translation>
     </message>
     <message>
         <source>Toggle Recording</source>
-        <translation type="unfinished"></translation>
+        <translation>Opname aan/uit</translation>
     </message>
     <message>
         <source>&lt;nobr&gt;Ignored&lt;/nobr&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;nobr&gt;Genegeerd&lt;/nobr&gt;</translation>
     </message>
     <message>
         <source>&lt;nobr&gt;Show &lt;b&gt;%1&lt;/b&gt;&lt;/nobr&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;nobr&gt;Geef &lt;b&gt;%1&lt;/b&gt; weer&lt;/nobr&gt;</translation>
     </message>
     <message>
         <source>&lt;nobr&gt;Call &lt;b&gt;%1&lt;/b&gt;: &lt;i&gt;%2&lt;/i&gt;&lt;/nobr&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;nobr&gt;Roep aan &lt;b&gt;%1&lt;/b&gt;: &lt;i&gt;%2&lt;/i&gt;&lt;/nobr&gt;</translation>
     </message>
     <message>
         <source>&lt;nobr&gt;Call &lt;b&gt;%1&lt;/b&gt; &lt;i&gt;%2&lt;/i&gt;&lt;/nobr&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;nobr&gt;Roep aan &lt;b&gt;%1&lt;/b&gt; &lt;i&gt;%2&lt;/i&gt;&lt;/nobr&gt;</translation>
     </message>
 </context>
 <context>
@@ -63,50 +63,52 @@
     <message>
         <source>%1 %2</source>
         <comment>(hold|press) buttoname</comment>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2
+
+Ingehouden/Ingedrukt Knopnaam</translation>
     </message>
     <message>
         <source>Held</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingehouden</translation>
     </message>
     <message>
         <source>Pressed</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingedrukt</translation>
     </message>
     <message>
         <source>No mapping</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen associatie</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Aangepast</translation>
     </message>
     <message>
         <source>Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Akties</translation>
     </message>
     <message>
         <source>Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Geef weer</translation>
     </message>
 </context>
 <context>
     <name>RemapDlgBase</name>
     <message>
         <source>Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktie</translation>
     </message>
     <message>
         <source>Channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Kanaal</translation>
     </message>
     <message>
         <source>Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Bericht</translation>
     </message>
 </context>
 </TS>

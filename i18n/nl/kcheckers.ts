@@ -3,127 +3,127 @@
     <name>KCheckers</name>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nieuw</translation>
     </message>
     <message>
         <source>&amp;Undo Move</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zet Terug</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Stop</translation>
     </message>
     <message>
         <source>&amp;Beginner</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Starter</translation>
     </message>
     <message>
         <source>&amp;Novice</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Beginner</translation>
     </message>
     <message>
         <source>&amp;Average</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Gemiddeld</translation>
     </message>
     <message>
         <source>&amp;Good</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Goed</translation>
     </message>
     <message>
         <source>&amp;Expert</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Expert</translation>
     </message>
     <message>
         <source>&amp;Master</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Meester</translation>
     </message>
     <message>
         <source>&amp;Show Numeration</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Geef nummering weer</translation>
     </message>
     <message>
         <source>&amp;English Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Engelse regels</translation>
     </message>
     <message>
         <source>&amp;Russian Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Russische regels</translation>
     </message>
     <message>
         <source>&amp;Green Board</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Groen Bord</translation>
     </message>
     <message>
         <source>&amp;Marble Board</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Marmer Bord</translation>
     </message>
     <message>
         <source>&amp;Wooden Board</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Houten Bord</translation>
     </message>
     <message>
         <source>What&apos;s This</source>
-        <translation type="unfinished"></translation>
+        <translation>Wat is dit</translation>
     </message>
     <message>
         <source>&amp;Rules of Play</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Regels</translation>
     </message>
     <message>
         <source>&amp;About KCheckers</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;over KSchaak</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
-        <translation type="unfinished"></translation>
+        <translation>Over &amp;Qt</translation>
     </message>
     <message>
         <source>&amp;Game</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Spel</translation>
     </message>
     <message>
         <source>&amp;Skill</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Kunde</translation>
     </message>
     <message>
         <source>&amp;Options</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Opties</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Help</translation>
     </message>
     <message>
         <source> New Game </source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw Spel</translation>
     </message>
     <message>
         <source> Undo Move </source>
-        <translation type="unfinished"></translation>
+        <translation>Zet Terug</translation>
     </message>
     <message>
         <source> Rules of Play </source>
-        <translation type="unfinished"></translation>
+        <translation>Spelregels</translation>
     </message>
     <message>
         <source>Go!</source>
-        <translation type="unfinished"></translation>
+        <translation>Start!</translation>
     </message>
     <message>
         <source>Congratulation! You have won!</source>
-        <translation type="unfinished"></translation>
+        <translation>Gefeliciteerd! U heeft gewonnen!</translation>
     </message>
     <message>
         <source>Please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Wachten a.u.b...</translation>
     </message>
     <message>
         <source>You have lost. Game over.</source>
-        <translation type="unfinished"></translation>
+        <translation>U heeft verloren. Game Over.</translation>
     </message>
     <message>
         <source>Incorrect course.</source>
-        <translation type="unfinished"></translation>
+        <translation>Foute zet.</translation>
     </message>
 </context>
 </TS>
