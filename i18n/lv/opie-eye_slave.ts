@@ -378,26 +378,30 @@
     <message>
         <source>Dimensions: %1 x %2
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Dimensijas: %1 x %2
+</translation>
     </message>
     <message>
         <source>Size: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Izmērs: %1
+</translation>
     </message>
     <message>
         <source>Compressed size: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Saspiests izmērs: %1</translation>
     </message>
     <message>
         <source>used colors: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>pielietotās krāsas: %1
+</translation>
     </message>
     <message>
         <source>Resolution: %1 x %2
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Izšķirtspēja: %1 x %2
+</translation>
     </message>
 </context>
 </TS>
