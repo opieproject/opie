@@ -51,6 +51,7 @@
 #include <qmessagebox.h>
 #include <qlabel.h>
 #include <qtimer.h>
+#include <qfile.h>
 
 #include "loginapplication.h"
 #include "loginwindowimpl.h"
