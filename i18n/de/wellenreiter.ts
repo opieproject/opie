@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>MScanListView</name>
     <message>
@@ -7,23 +8,23 @@
     </message>
     <message>
         <source>#</source>
-        <translation type="unfinished"></translation>
+        <translation>#</translation>
     </message>
     <message>
         <source>MAC</source>
-        <translation type="unfinished"></translation>
+        <translation>MAC</translation>
     </message>
     <message>
         <source>Chn</source>
-        <translation type="unfinished"></translation>
+        <translation>Chn</translation>
     </message>
     <message>
         <source>W</source>
-        <translation type="unfinished"></translation>
+        <translation>W</translation>
     </message>
     <message>
         <source>T</source>
-        <translation type="unfinished"></translation>
+        <translation>T</translation>
     </message>
     <message>
         <source>Manufacturer</source>
@@ -126,7 +127,13 @@ Martin J. Muench&lt;br&gt;
 Michael Lauer&lt;br&gt;&lt;hr&gt;
 &lt;b&gt;www.remote-exploit.org&lt;/b&gt;
 &lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p align=center&gt;(new line)
+&lt;hr&gt;(new line)
+Max Moser&lt;br&gt;(new line)
+Martin J. Muench&lt;br&gt;(new line)
+Michael Lauer&lt;br&gt;&lt;hr&gt;(new line)
+&lt;b&gt;www.remote-exploit.org&lt;/b&gt;(new line)
+&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Nets</source>
@@ -138,15 +145,15 @@ Michael Lauer&lt;br&gt;&lt;hr&gt;
     </message>
     <message>
         <source>Log</source>
-        <translation type="unfinished">Log</translation>
+        <translation>Log</translation>
     </message>
     <message>
         <source>Hex</source>
-        <translation type="unfinished"></translation>
+        <translation>Hex</translation>
     </message>
     <message>
         <source>Stat</source>
-        <translation type="unfinished"></translation>
+        <translation>Stat</translation>
     </message>
     <message>
         <source>About</source>
@@ -161,11 +168,11 @@ Michael Lauer&lt;br&gt;&lt;hr&gt;
     <name>WellenreiterConfigBase</name>
     <message>
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation>Form1</translation>
     </message>
     <message>
         <source>Sniffer</source>
-        <translation type="unfinished"></translation>
+        <translation>Sniffer</translation>
     </message>
     <message>
         <source>Choose the interface used for sniffing.</source>
@@ -173,31 +180,31 @@ Michael Lauer&lt;br&gt;&lt;hr&gt;
     </message>
     <message>
         <source>&lt;select&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;auswählen&gt;</translation>
     </message>
     <message>
         <source>cisco</source>
-        <translation type="unfinished"></translation>
+        <translation>cisco</translation>
     </message>
     <message>
         <source>wlan-ng</source>
-        <translation type="unfinished"></translation>
+        <translation>wlan-ng</translation>
     </message>
     <message>
         <source>hostap</source>
-        <translation type="unfinished"></translation>
+        <translation>hostap</translation>
     </message>
     <message>
         <source>orinoco</source>
-        <translation type="unfinished"></translation>
+        <translation>orinoco</translation>
     </message>
     <message>
         <source>&lt;manual&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;manual&gt;</translation>
     </message>
     <message>
         <source>&lt;file&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;file&gt;</translation>
     </message>
     <message>
         <source>Choose the type of driver used for sniffing.</source>
@@ -205,7 +212,7 @@ Michael Lauer&lt;br&gt;&lt;hr&gt;
     </message>
     <message>
         <source> ms</source>
-        <translation type="unfinished"></translation>
+        <translation>ms</translation>
     </message>
     <message>
         <source>Choose the channel hop interval.</source>
@@ -229,7 +236,7 @@ Michael Lauer&lt;br&gt;&lt;hr&gt;
     </message>
     <message>
         <source>44:44:44:44:44:44</source>
-        <translation type="unfinished"></translation>
+        <translation>44:44:44:44:44:44</translation>
     </message>
     <message>
         <source>Active Scanning (caution!)</source>
@@ -241,19 +248,19 @@ Michael Lauer&lt;br&gt;&lt;hr&gt;
     </message>
     <message>
         <source>Ignore</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorieren</translation>
     </message>
     <message>
         <source>Touch</source>
-        <translation type="unfinished"></translation>
+        <translation>Touch</translation>
     </message>
     <message>
         <source>Key</source>
-        <translation type="unfinished"></translation>
+        <translation>Schlüssel</translation>
     </message>
     <message>
         <source>Alarm</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarm</translation>
     </message>
     <message>
         <source>sound on beacon</source>
@@ -265,15 +272,15 @@ Michael Lauer&lt;br&gt;&lt;hr&gt;
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>GUI</source>
-        <translation type="unfinished"></translation>
+        <translation>GUI</translation>
     </message>
     <message>
         <source>CaptureFile:</source>
-        <translation type="unfinished"></translation>
+        <translation>Capture-Datei:</translation>
     </message>
 </context>
 <context>
@@ -284,11 +291,11 @@ Michael Lauer&lt;br&gt;&lt;hr&gt;
     </message>
     <message>
         <source>&amp;Text Log...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Text Log...</translation>
     </message>
     <message>
         <source>&amp;Hex Log...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Hex Log...</translation>
     </message>
     <message>
         <source>&amp;New</source>
@@ -312,11 +319,11 @@ Michael Lauer&lt;br&gt;&lt;hr&gt;
     </message>
     <message>
         <source>&amp;Start</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Start</translation>
     </message>
     <message>
         <source>Sto&amp;p</source>
-        <translation type="unfinished"></translation>
+        <translation>Sto&amp;p</translation>
     </message>
     <message>
         <source>&amp;Add something</source>
@@ -332,11 +339,11 @@ Michael Lauer&lt;br&gt;&lt;hr&gt;
     </message>
     <message>
         <source>&amp;Sniffer</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Sniffer</translation>
     </message>
     <message>
         <source>&amp;Demo</source>
-        <translation type="unfinished">&amp;Demo</translation>
+        <translation>&amp;Demo</translation>
     </message>
     <message>
         <source>Ready.</source>

@@ -273,7 +273,7 @@ wirklich löschen?</translation>
     </message>
     <message>
         <source>All Images</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Bilder</translation>
     </message>
 </context>
 <context>
@@ -292,7 +292,7 @@ wirklich löschen?</translation>
     </message>
     <message>
         <source>All images</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Bilder</translation>
     </message>
 </context>
 <context>

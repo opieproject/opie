@@ -486,7 +486,7 @@ löschen oder aktualisieren ?</translation>
     <name>QuestionDlg</name>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Löschen</translation>
+        <translation>Löschen</translation>
     </message>
 </context>
 <context>

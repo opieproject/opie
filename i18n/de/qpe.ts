@@ -178,7 +178,7 @@ Soll es nach neuen Dokumenten durchsucht werden ?</translation>
     <name>QObject</name>
     <message>
         <source>Battery Status</source>
-        <translation type="unfinished">Batteriestatus</translation>
+        <translation>Batteriestatus</translation>
     </message>
 </context>
 <context>

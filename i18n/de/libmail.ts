@@ -67,27 +67,27 @@
     </message>
     <message>
         <source>SMTP&gt; HELO *</source>
-        <translation type="unfinished"></translation>
+        <translation>SMTP&gt; HELO *</translation>
     </message>
     <message>
         <source>SMTP&gt; MAIL FROM: *</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>SMTP&gt; RCPT TO: *</source>
-        <translation type="unfinished"></translation>
+        <translation>SMTP&gt; RCPT TO: *</translation>
     </message>
     <message>
         <source>SMTP&gt; DATA</source>
-        <translation type="unfinished"></translation>
+        <translation>SMTP&gt; DATA</translation>
     </message>
     <message>
         <source>SMTP&gt; Sending data...</source>
-        <translation type="unfinished"></translation>
+        <translation>SMTP&gt; Versende Daten...</translation>
     </message>
     <message>
         <source>SMTP&gt; QUIT (Done)</source>
-        <translation type="unfinished"></translation>
+        <translation>SMTP&gt; QUIT (Done)</translation>
     </message>
     <message>
         <source>The server returned an error. This is the message:&lt;br&gt;%1</source>
@@ -95,7 +95,7 @@
     </message>
     <message>
         <source>SMTP &lt; %3</source>
-        <translation type="unfinished"></translation>
+        <translation>SMTP &lt; %3</translation>
     </message>
 </context>
 </TS>
