@@ -1,4 +1,4 @@
-/* $Id: daemon.hh,v 1.5 2002-12-16 17:59:21 mjm Exp $ */
+/* $Id: daemon.hh,v 1.6 2002-12-27 16:57:37 mjm Exp $ */
 
 #ifndef DAEMON_HH
 #define DAEMON_HH
@@ -13,11 +13,11 @@
 #include <unistd.h>
 #include <errno.h>
 
-#include "../../libwellenreiter/source/sock.hh"
-#include "../../libwellenreiter/source/log.hh"
-#include "../../libwellenreiter/source/proto.hh"
-#include "../../libwellenreiter/source/cardmode.hh"
-#include "../../libwellenreiter/source/sniff.hh"
+#include <libwellenreiter/source/wl_sock.hh>
+#include <libwellenreiter/source/wl_log.hh>
+#include <libwellenreiter/source/wl_proto.hh>
+#include <libwellenreiter/source/cardmode.hh>
+#include <libwellenreiter/source/sniff.hh>
 
 void usage(void);
 

@@ -1,7 +1,7 @@
 /*
  * Startup functions of wellenreiter
  *
- * $Id: daemon.cc,v 1.12 2002-12-16 18:25:36 mickeyl Exp $
+ * $Id: daemon.cc,v 1.13 2002-12-27 16:57:37 mjm Exp $
  */
 
 #include "config.hh"
@@ -11,7 +11,7 @@
 int main(int argc, char **argv)
 {
   int sock, maxfd, retval, card_type;
-  char buffer[128], sniffer_device[6];
+  char buffer[128], sniffer_device[5];
   struct pcap_pkthdr header;
   pcap_t *handletopcap;
   const unsigned char *packet;
@@ -54,16 +54,17 @@ int main(int argc, char **argv)
     /* getting the datalink type */
     retval = pcap_datalink(handletopcap);
     if (retval != DLT_IEEE802_11) /* Rawmode is IEEE802_11 */
-      {
-	wl_loginfo("Interface %s does not work in the correct 802.11 raw mode", sniffer_device);
+    {
+	wl_loginfo("Interface %s does not work in the correct 802.11 raw mode", 
+		   sniffer_device);
 	pcap_close(handletopcap);
 	return 0;
-      }
+    }
     wl_loginfo("Your successfully listen on %s in 802.11 raw mode", sniffer_device);
     ////////////////////////////////////////
  
   /* Setup socket for incoming commands */
-  if((sock=commsock(DAEMONADDR, DAEMONPORT)) < 0)
+  if((sock=wl_setupsock(DAEMONADDR, DAEMONPORT)) < 0)
   {
     wl_logerr("Cannot setup socket");
     exit(-1);
@@ -91,7 +92,7 @@ int main(int argc, char **argv)
     if(FD_ISSET(sock, &rset))
     {
       /* Receive data from socket */
-      if((retval=recvcomm(&sock, buffer, sizeof(buffer))) < 0)
+      if((retval=wl_recv(&sock, buffer, sizeof(buffer))) < 0)
       {
 	wl_logerr("Error trying to read: %s", strerror(errno));
 	break;
@@ -111,7 +112,7 @@ int main(int argc, char **argv)
 	      wl_logerr("Received unknown command: %d", retval);
 	      break;
 	}
-      } 
+      }
     } /* FD_ISSET */
 
     /* Check pcap lib for packets */
@@ -126,7 +127,7 @@ int main(int argc, char **argv)
     }
 
   } /* while(1) */
-
+  
   close(sock);
   exit(0);
 }
