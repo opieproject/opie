@@ -84,6 +84,7 @@ namespace {
         FExceptions
     };
     inline void save( const OEvent& ev, QString& buf ) {
+        qWarning("Saving %d %s", ev.uid(), ev.description().latin1() );
         buf += " description=\"" + Qtopia::escapeString(ev.description() ) + "\"";
         if (!ev.location().isEmpty() )
             buf += " location=\"" + Qtopia::escapeString(ev.location() ) + "\"";
@@ -125,6 +126,7 @@ namespace {
             buf += "None";
         else
             buf += ev.timeZone();
+        buf += "\"";
 
         if (ev.parent() != 0 ) {
             buf += " recparent=\""+QString::number(ev.parent() )+"\"";
@@ -434,7 +436,6 @@ bool ODateBookAccessBackend_XML::loadFile() {
         }
         /* time to finalize */
         finalizeRecord( ev );
-        add( ev );
         delete rec;
     }
     ::munmap(map_addr, attribute.st_size );
@@ -451,8 +452,10 @@ void ODateBookAccessBackend_XML::finalizeRecord( OEvent& ev ) {
         ev.setTimeZone( "UTC"); // make sure it is really utc
     }else {
         /* to current date time */
+        qWarning(" Start is %d", start );
         OTimeZone zone( ev.timeZone().isEmpty() ? OTimeZone::current() : ev.timeZone() );
         QDateTime date = zone.toDateTime( start );
+        qWarning(" Start is %s", date.toString().latin1() );
         ev.setStartDateTime( zone.toDateTime( date, OTimeZone::current() ) );
 
         date = zone.toDateTime( end );
@@ -473,8 +476,10 @@ void ODateBookAccessBackend_XML::finalizeRecord( OEvent& ev ) {
         ev.notifiers().add( al );
     }
     if ( m_raw.contains( ev.uid() ) || m_rep.contains( ev.uid() ) ) {
+        qWarning("already contains assign uid");
         ev.setUid( 1 );
     }
+    qWarning("addind %d %s", ev.uid(), ev.description().latin1() );
     if ( ev.hasRecurrence() )
         m_rep.insert( ev.uid(), ev );
     else

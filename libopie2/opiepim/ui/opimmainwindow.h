@@ -46,7 +46,7 @@ protected slots:
     /** remove a record with UID == uid */
     virtual bool remove( int uid ) = 0;
     /** beam the record with UID = uid */
-    virtual void beam( int uid ,  int transport = IrDa) = 0;
+    virtual void beam( int uid ) = 0;
 
     /** show the record with UID == uid */
     virtual void show( int uid ) = 0;
