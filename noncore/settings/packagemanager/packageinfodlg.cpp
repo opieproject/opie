@@ -28,6 +28,8 @@
 */
 
 #include "packageinfodlg.h"
+#include "opackage.h"
+#include "opackagemanager.h"
 
 #include <qlayout.h>
 #include <qpushbutton.h>
@@ -46,37 +48,93 @@ PackageInfoDlg::PackageInfoDlg( QWidget *parent, OPackageManager *pm, const QStr
     if ( parent )
         parent->setCaption( package );
 
-    QVBoxLayout *layout = new QVBoxLayout( this, 4, 0 );
+    QVBoxLayout *layout = new QVBoxLayout( this, 4, 2 );
 
     OTabWidget *tabWidget = new OTabWidget( this );
     layout->addWidget( tabWidget );
-
-    QPushButton *btn = new QPushButton( Resource::loadPixmap( "enter" ), tr( "Close" ), this );
-    layout->addWidget( btn );
-    connect( btn, SIGNAL(clicked()), this, SLOT(slotBtnClose()) );
 
     // Information tab
     m_information.reparent( tabWidget, QPoint( 0, 0 ) );
     m_information.setReadOnly( true );
     tabWidget->addTab( &m_information, "UtilsIcon", tr( "Information" ) );
 
-    // Files tab
-    QWidget *filesWidget = new QWidget( tabWidget );
-    QVBoxLayout *filesLayout = new QVBoxLayout( filesWidget, 4, 0 );
-    m_files.reparent( filesWidget, QPoint( 0, 0 ) );
-    m_files.setReadOnly( true );
-    filesLayout->addWidget( &m_files );
+    // Retrive package information
+    m_package = m_packman->findPackage( package );
+    if ( !m_package )
+    {
+        m_information.setText( tr( "Unable to retrieve package information." ) );
+        return;
+    }
 
-    btn = new QPushButton( Resource::loadPixmap( "packagemanager/apply" ), tr( "Retrieve file list" ),
-                           filesWidget );
-    filesLayout->addWidget( btn );
-// TODO    connect( btn, SIGNAL(clicked()), this, SLOT(slotFileScan()) );
-    tabWidget->addTab( filesWidget, "binary", tr( "Files" ) );
+    // Display package information
+    if ( !m_package->information().isNull() )
+        m_information.setText( m_package->information() );
+    else
+    {
+        // Package information is not cached, retrieve it
+        QStringList list( package );
+        m_packman->executeCommand( OPackage::Info, &list, QString::null, this, SLOT(slotInfo(char*)), true );
+    }
 
-    tabWidget->setCurrentTab( tr( "Information" ) );
+    // Files tab (display only if package is installed)
+    if ( !m_package->versionInstalled().isNull() )
+    {
+        QWidget *filesWidget = new QWidget( tabWidget );
+        QVBoxLayout *filesLayout = new QVBoxLayout( filesWidget, 2, 2 );
+        m_files.reparent( filesWidget, QPoint( 0, 0 ) );
+        m_files.setReadOnly( true );
+        filesLayout->addWidget( &m_files );
+
+        QPushButton *btn = new QPushButton( Resource::loadPixmap( "packagemanager/apply" ),
+                                            tr( "Retrieve file list" ), filesWidget );
+        filesLayout->addWidget( btn );
+        connect( btn, SIGNAL(clicked()), this, SLOT(slotBtnFileScan()) );
+        tabWidget->addTab( filesWidget, "binary", tr( "File list" ) );
+
+        tabWidget->setCurrentTab( tr( "Information" ) );
+
+        // If file list is already cached, display
+        if ( !m_package->files().isNull() )
+            m_files.setText( m_package->files() );
+    }
+    else
+        m_files.hide();
 }
 
-void PackageInfoDlg::slotBtnClose()
+PackageInfoDlg::~PackageInfoDlg()
 {
-    emit closeInfoDlg();
+    if ( !m_package )
+        return;
+
+    // Cache package information
+    if ( !m_information.text().isNull() )
+        m_package->setInformation( m_information.text() );
+
+    // Cache package file list
+    if ( !m_files.text().isNull() )
+        m_package->setFiles( m_files.text() );
+}
+
+void PackageInfoDlg::slotBtnFileScan()
+{
+    m_files.clear();
+
+    QStringList list( m_package->name() );
+    m_packman->executeCommand( OPackage::Files, &list, QString::null, this, SLOT(slotFiles(char*)), true );
+}
+
+void PackageInfoDlg::slotInfo( char *info )
+{
+    m_information.append( info );
+}
+
+void PackageInfoDlg::slotFiles( char *filelist )
+{
+    QString str = filelist;
+
+    // Skip first line of output ("Package xxx is installed...")
+    if ( str.startsWith( "Package " ) )
+        str = str.right( str.length() - str.find( '\n' ) - 1 );
+
+    m_files.append( str );
 }

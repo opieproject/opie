@@ -32,12 +32,15 @@
 #include "opackage.h"
 
 OPackage::OPackage( const QString &name, const QString &version, const QString &versionInstalled,
-                    const QString &source, const QString &destination, const QString &category )
+                    const QString &source, const QString &destination, const QString &category,
+                    const QString &information, const QString &files )
     : m_name( name )
     , m_version( version )
     , m_versionInstalled( versionInstalled )
     , m_source( source )
     , m_destination( destination )
     , m_category( category )
+    , m_information( information )
+    , m_files( files )
 {
 }

@@ -1,3 +1,8 @@
+2004-mm-dd Dan Williams <drw@handhelds.org>
+
+	* Package information dialog implemented
+	* What's This app icon enabled
+
 2004-01-23 Dan Williams <drw@handhelds.org>
 
 	* Added package download functionality

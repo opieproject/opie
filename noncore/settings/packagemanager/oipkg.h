@@ -82,7 +82,9 @@ public:
                          const char *slotOutput = 0x0, bool rawOutput = true );
     void abortCommand();
 
-    void ipkgOutput( char *msg );
+    void ipkgMessage( char *msg );
+    void ipkgStatus( char *status );
+    void ipkgList( char *filelist );
 
 private:
     Config        *m_config;            // Pointer to application configuration file
@@ -95,7 +97,9 @@ private:
     OConfItemList *filterConfItems( OConfItem::Type typefilter = OConfItem::NotDefined );
 
 signals:
-    void execOutput( char *msg );
+    void signalIpkgMessage( char *msg );
+    void signalIpkgStatus( char *status );
+    void signalIpkgList( char *filelist );
 };
 
 #endif

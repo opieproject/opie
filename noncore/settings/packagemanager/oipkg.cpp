@@ -31,6 +31,7 @@
 
 #include "oipkg.h"
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -46,15 +47,31 @@ const QString IPKG_STATUS_PATH = "usr/lib/ipkg/status"; // Destination status fi
 
 OIpkg *oipkg;
 
-int fIpkgMessage( ipkg_conf_t */*conf*/, message_level_t /*level*/, char *msg )
+// Ipkg callback functions
+
+int fsignalIpkgMessage( ipkg_conf_t */*conf*/, message_level_t /*level*/, char *msg )
 {
-    oipkg->ipkgOutput( msg );
+    oipkg->ipkgMessage( msg );
     return 0;
 }
 
-char* fIpkgResponse( char */*question*/ )
+char *fIpkgResponse( char */*question*/ )
 {
     return 0x0;
+}
+
+int fIpkgStatus( char */*name*/, int /*status*/, char *desc, void */*userdata*/ )
+{
+    oipkg->ipkgStatus( desc );
+    return 0;
+}
+
+int fIpkgFiles( char */*name*/, char *desc, char */*version*/, pkg_state_status_t /*status*/,
+                void */*userdata*/ )
+{
+printf( "*****List*****\n%s\n", desc );
+    oipkg->ipkgList( desc );
+    return 0;
 }
 
 OIpkg::OIpkg( Config *config, QObject *parent, const char *name )
@@ -67,7 +84,7 @@ OIpkg::OIpkg( Config *config, QObject *parent, const char *name )
     oipkg = this;
 
     // Initialize libipkg
-    if ( ipkg_init( &fIpkgMessage, &fIpkgResponse, &m_ipkgArgs ) )
+    if ( ipkg_init( &fsignalIpkgMessage, &fIpkgResponse, &m_ipkgArgs ) )
         QMessageBox::critical( 0, tr( "OIpkg" ), tr( "Error initialing libipkg" ) );
 
     // Default ipkg run-time arguments
@@ -297,23 +314,31 @@ bool OIpkg::executeCommand( OPackage::Command command, QStringList *parameters, 
         m_ipkgArgs.dest = 0x0;
 
     // Connect output signal to widget
+
     if ( rawOutput )
     {
-        if ( slotOutput )
-            connect( this, SIGNAL(execOutput(char *)), receiver, slotOutput );
+//        if ( slotOutput )
+//            connect( this, SIGNAL(signalIpkgMessage(char *)), receiver, slotOutput );
     }
     else
     {
-        // TODO - connect to local slot and parse output before emitting execOutput
+        // TODO - connect to local slot and parse output before emitting signalIpkgMessage
     }
 
     switch( command )
     {
-        case OPackage::Update : ipkg_lists_update( &m_ipkgArgs );
+        case OPackage::Update : {
+                connect( this, SIGNAL(signalIpkgMessage(char *)), receiver, slotOutput );
+                ipkg_lists_update( &m_ipkgArgs );
+            };
             break;
-        case OPackage::Upgrade : ipkg_packages_upgrade( &m_ipkgArgs );
+        case OPackage::Upgrade : {
+                connect( this, SIGNAL(signalIpkgMessage(char *)), receiver, slotOutput );
+                ipkg_packages_upgrade( &m_ipkgArgs );
+            };
             break;
         case OPackage::Install : {
+                connect( this, SIGNAL(signalIpkgMessage(char *)), receiver, slotOutput );
                 for ( QStringList::Iterator it = parameters->begin(); it != parameters->end(); ++it )
                 {
                     ipkg_packages_install( &m_ipkgArgs, (*it) );
@@ -321,6 +346,7 @@ bool OIpkg::executeCommand( OPackage::Command command, QStringList *parameters, 
             };
             break;
         case OPackage::Remove : {
+                connect( this, SIGNAL(signalIpkgMessage(char *)), receiver, slotOutput );
                 for ( QStringList::Iterator it = parameters->begin(); it != parameters->end(); ++it )
                 {
                     ipkg_packages_remove( &m_ipkgArgs, (*it), true );
@@ -328,10 +354,21 @@ bool OIpkg::executeCommand( OPackage::Command command, QStringList *parameters, 
             };
             break;
         case OPackage::Download : {
+                connect( this, SIGNAL(signalIpkgMessage(char *)), receiver, slotOutput );
                 for ( QStringList::Iterator it = parameters->begin(); it != parameters->end(); ++it )
                 {
                     ipkg_packages_download( &m_ipkgArgs, (*it) );
                 }
+            };
+            break;
+        case OPackage::Info : {
+                connect( this, SIGNAL(signalIpkgStatus(char *)), receiver, slotOutput );
+                ipkg_packages_info( &m_ipkgArgs, (*parameters->begin()), &fIpkgStatus, 0x0 );
+            };
+            break;
+        case OPackage::Files : {
+                connect( this, SIGNAL(signalIpkgList(char *)), receiver, slotOutput );
+                ipkg_package_files( &m_ipkgArgs, (*parameters->begin()), &fIpkgFiles, 0x0 );
             };
             break;
         default : break;
@@ -340,9 +377,19 @@ bool OIpkg::executeCommand( OPackage::Command command, QStringList *parameters, 
     return true;
 }
 
-void OIpkg::ipkgOutput( char *msg )
+void OIpkg::ipkgMessage( char *msg )
 {
-    emit execOutput( msg );
+    emit signalIpkgMessage( msg );
+}
+
+void OIpkg::ipkgStatus( char *status )
+{
+    emit signalIpkgStatus( status );
+}
+
+void OIpkg::ipkgList( char *filelist )
+{
+    emit signalIpkgList( filelist );
 }
 
 void OIpkg::loadConfiguration()

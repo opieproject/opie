@@ -39,6 +39,7 @@
 
 class QPushButton;
 
+class OPackage;
 class OPackageManager;
 
 class PackageInfoDlg : public QWidget
@@ -47,19 +48,20 @@ class PackageInfoDlg : public QWidget
 
 public:
     PackageInfoDlg( QWidget *parent = 0x0, OPackageManager *pm = 0x0, const QString &package = QString::null );
+    ~PackageInfoDlg();
 
 private:
     OPackageManager *m_packman;     // Pointer to application instance of package manager
+    OPackage        *m_package;     // Pointer to package to display information for
 
     // UI controls
     QMultiLineEdit   m_information; // Multi-line edit to display package information
     QMultiLineEdit   m_files;       // Multi-line edit to display package file list
 
 private slots:
-    void slotBtnClose();
-
-signals:
-    void closeInfoDlg();
+    void slotBtnFileScan();
+    void slotInfo( char *info );
+    void slotFiles( char *filelist );
 };
 
 #endif

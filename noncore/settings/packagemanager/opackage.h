@@ -40,10 +40,11 @@ class OPackage
 public:
     enum Command { Install, Remove, Update, Upgrade, Download, Info, Files, Version, NotDefined };
 
-    OPackage( const QString &name = 0x0,
-              const QString &version = 0x0, const QString &versionInstalled = 0x0,
-              const QString &source = 0x0, const QString &destination = 0x0,
-              const QString &category = "misc" );
+    OPackage( const QString &name= QString::null,
+              const QString &version= QString::null, const QString &versionInstalled= QString::null,
+              const QString &source= QString::null, const QString &destination= QString::null,
+              const QString &category = "misc", const QString &information = QString::null,
+              const QString &files = QString::null );
 
     const QString &name()             { return m_name; }
     const QString &version()          { return m_version; }
@@ -51,6 +52,8 @@ public:
     const QString &source()           { return m_source; }
     const QString &destination()      { return m_destination; }
     const QString &category()         { return m_category; }
+    const QString &information()      { return m_information; }
+    const QString &files()            { return m_files; }
 
     void setName( const QString &name )                { m_name = name; }
     void setVersion( const QString &version )          { m_version = version; }
@@ -58,6 +61,8 @@ public:
     void setSource( const QString &source )            { m_source = source; }
     void setDestination( const QString &destination )  { m_destination = destination; }
     void setCategory( const QString &category )        { m_category = category; }
+    void setInformation( const QString &information )  { m_information = information; }
+    void setFiles( const QString &files )              { m_files = files; }
 
 private:
     QString m_name;             // Name of item
@@ -66,6 +71,8 @@ private:
     QString m_source;           // Source feed of available version
     QString m_destination;      // Location item is installed to, null if not installed
     QString m_category;         // Item category
+    QString m_information;      // Package information
+    QString m_files;            // File list information
 };
 
 typedef QList<OPackage>         OPackageList;

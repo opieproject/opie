@@ -49,8 +49,8 @@
 #include "entrydlg.h"
 #include "packageinfodlg.h"
 
-MainWindow::MainWindow( QWidget *parent, const char *name, WFlags fl )
-    : QMainWindow( parent, name, fl || WStyle_ContextHelp )
+MainWindow::MainWindow( QWidget *parent, const char *name, WFlags /*fl*/ )
+    : QMainWindow( parent, name, WStyle_ContextHelp )
     , m_config( "packman" )
     , m_packman( &m_config, this )
     , m_menuBar( this )
@@ -675,7 +675,6 @@ void MainWindow::slotDisplayPackageInfo( QListViewItem *packageItem )
 
     // Create package manager output widget
     PackageInfoDlg *dlg = new PackageInfoDlg( this, &m_packman, packageName );
-    connect( dlg, SIGNAL(closeInfoDlg()), this, SLOT(slotCloseDlg()) );
 
     // Display widget
     m_widgetStack.addWidget( dlg, 3 );
