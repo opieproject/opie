@@ -19,6 +19,7 @@
 #include <qpe/fileselector.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/menubutton.h>
+#include <qpe/mimetype.h>
 
 #include <qdict.h>
 #include <qwidgetstack.h>
@@ -118,7 +119,7 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
     connect( ListView, SIGNAL( clicked( QListViewItem*)), SLOT(listClicked(QListViewItem *)) );
 
     FileStack->addWidget( ListView, get_unique_id() );
-    mimeType="text/*";
+mimeType="text/*";
     fileSelector = new FileSelector( mimeType, FileStack, "fileselector" , FALSE, FALSE); //buggy
 //    connect( fileSelector, SIGNAL( closeMe() ), this, SLOT( showEditTools() ) );
 //    connect( fileSelector, SIGNAL( newSelected( const DocLnk &) ), this, SLOT( newFile( const DocLnk & ) ) );
@@ -194,30 +195,36 @@ void fileBrowser::populateList()
             }
         }
         if(fileL !="./") {
-        item= new QListViewItem( ListView,fileL,fileS , fileDate);
-         QPixmap pm;
-         pm= Resource::loadPixmap( "folder" );
+            item= new QListViewItem( ListView,fileL,fileS , fileDate);
+            QPixmap pm;
          
-         if(isDir || fileL.find("/",0,TRUE) != -1) {
-             if( !QDir( fi->filePath() ).isReadable())
-                  pm = Resource::loadPixmap( "lockedfolder" );
-             item->setPixmap( 0,pm );
-         } else {
-             if( !fi->isReadable() )
-                   pm = Resource::loadPixmap( "locked" );
-             else
-                 pm =  Resource::loadPixmap( "fileopen" );
-             item->setPixmap( 0,pm);
-         }
-         if(  fileL.find("->",0,TRUE) != -1) {
-               // overlay link image
-             QPixmap lnk = Resource::loadPixmap( "symlink" );
-             QPainter painter( &pm );
-             painter.drawPixmap( pm.width()-lnk.width(), pm.height()-lnk.height(), lnk );
-             pm.setMask( pm.createHeuristicMask( FALSE ) );
-         item->setPixmap( 0, pm);
+            if(isDir || fileL.find("/",0,TRUE) != -1) {
+                if( !QDir( fi->filePath() ).isReadable()) 
+                    pm = Resource::loadPixmap( "lockedfolder" );
+                else 
+                    pm= Resource::loadPixmap( "folder" );
+                item->setPixmap( 0,pm );
+            } else {
+                if( !fi->isReadable() )
+                    pm = Resource::loadPixmap( "locked" );
+                else {
+                    MimeType mt(fi->filePath());
+                    pm=mt.pixmap();
+                    if(pm.isNull())
+                        pm =  Resource::loadPixmap( "UnknownDocument-14" );
+                    item->setPixmap( 0,pm);
+                }
+            }
+            if(  fileL.find("->",0,TRUE) != -1) {
+                  // overlay link image
+                pm= Resource::loadPixmap( "folder" );
+                QPixmap lnk = Resource::loadPixmap( "symlink" );
+                QPainter painter( &pm );
+                painter.drawPixmap( pm.width()-lnk.width(), pm.height()-lnk.height(), lnk );
+                pm.setMask( pm.createHeuristicMask( FALSE ) );
+                item->setPixmap( 0, pm);
+            }
         }
-    }
         isDir=FALSE;
         ++it;
     }
