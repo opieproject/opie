@@ -280,7 +280,7 @@ void WellenreiterConfigWindow::load()
 
     prismHeader->setChecked( c->readBoolEntry( "prism", false ) );
     hopChannels->setChecked( c->readBoolEntry( "hop", true ) );
-    hopInterval->setValue( c->readNumEntry( "interval", 100 ) );
+    hopInterval->setValue( c->readNumEntry( "interval", 250 ) );
     adaptiveHopping->setChecked( c->readBoolEntry( "adaptive", true ) );
 
     c->setGroup( "Capture" );
