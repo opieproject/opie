@@ -57,9 +57,9 @@ protected:
     FVPrivate<T> *fvp;
 
     Iterator fastat( uint i ) {
-        uint num=count();
-        if (i>=num) {return end();}
-        if (fvp->curpos<0) { fvp->curpos=0; fvp->curit=begin(); }
+        uint num=this->count();
+        if (i>=num) {return this->end();}
+        if (fvp->curpos<0) { fvp->curpos=0; fvp->curit=this->begin(); }
         uint curpos=(uint) fvp->curpos;
         Iterator curit(fvp->curit.node);
         if (curpos==i) return curit;
@@ -70,9 +70,9 @@ protected:
         if (((uint)diff < i) && ((uint)diff < num-i)) { // start from current node
                 forward=i > (uint)curpos;
         } else if (i < num - i) { // start from first node
-                curit=begin(); diff=i; forward=TRUE;
+                curit=this->begin(); diff=i; forward=TRUE;
         } else {                  // start from last node
-                curit=fromLast(); diff=num - i - 1;
+                curit=this->fromLast(); diff=num - i - 1;
                 if (diff<0) diff=0;
                 forward=FALSE;
         }
@@ -85,9 +85,9 @@ protected:
         return curit;
     }
     ConstIterator fastat( uint i ) const {
-        uint num=count();
-        if (i>=num) {return end();}
-        if (fvp->curpos<0) { fvp->curpos=0; fvp->curit=begin(); }
+        uint num=this->count();
+        if (i>=num) {return this->end();}
+        if (fvp->curpos<0) { fvp->curpos=0; fvp->curit=this->begin(); }
         uint curpos=(uint) fvp->curpos;
         ConstIterator curit=fvp->curit;
         if (curpos==i) return curit;
@@ -98,9 +98,9 @@ protected:
         if (((uint)diff < i) && ((uint)diff < num-i)) { // start from current node
                 forward=i > (uint)curpos;
         } else if (i < num - i) { // start from first node
-                curit=begin(); diff=i; forward=TRUE;
+                curit=this->begin(); diff=i; forward=TRUE;
         } else {                  // start from last node
-                curit=fromLast(); diff=num - i - 1;
+                curit=this->fromLast(); diff=num - i - 1;
                 if (diff<0) diff=0;
                 forward=FALSE;
         }
@@ -138,9 +138,9 @@ public:
       fvp->curpos=-1; QValueList<T>::remove( x );
     }
 
-    T& operator[] ( uint i ) { detach(); return fastat(i); }
+    T& operator[] ( uint i ) { this->detach(); return fastat(i); }
     const T& operator[] ( uint i ) const { return *fastat(i); }
-    Iterator at( uint i ) { detach(); return fastat(i); }
+    Iterator at( uint i ) { this->detach(); return fastat(i); }
     ConstIterator at( uint i ) const { return ConstIterator( fastat(i) ); }
 };
 
