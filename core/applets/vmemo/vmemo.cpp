@@ -11,7 +11,7 @@
  ************************************************************************************/
 // copyright 2002 Jeremy Cowgar <jc@cowgar.com>
 /*
- * $Id: vmemo.cpp,v 1.44 2002-07-26 01:14:13 llornkcor Exp $
+ * $Id: vmemo.cpp,v 1.45 2002-07-29 12:18:47 llornkcor Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 extern "C" {
@@ -482,6 +482,7 @@ int VMemo::openWAV(const char *filename) {
   }
 
   wav=track.handle();
+  useADPCM = vmCfg.readBoolEntry("use_ADPCM", 0);
   
   WaveHeader wh;
 
@@ -531,6 +532,7 @@ bool VMemo::record() {
     signed short sound[1024], monoBuffer[1024];
     char abuf[bufsize/2];
     short sbuf[bufsize];
+    useADPCM = vmCfg.readBoolEntry("use_ADPCM", 0);
 
     while(recording)  {
 
@@ -573,7 +575,6 @@ bool VMemo::record() {
     }
     //  qDebug("file has length of %d lasting %d seconds",
     //         length, (( length / speed) / channels) / 2 );
-    // medialplayer states wrong length in secs
     //  }
 
   //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<//
