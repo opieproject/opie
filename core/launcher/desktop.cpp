@@ -171,7 +171,11 @@ void DesktopApplication::receive( const QCString &msg, const QByteArray &data )
 	  
 	  qWarning("KeyRegisterRecieved: %i, %s, %s", k, (const char*)c, (const char *)m);
 	  keyRegisterList.append(QCopKeyRegister(k,c,m));
-	}
+	} 
+  else if (msg == "suspend()"){
+    emit power();
+  }
+  
 }
 
 enum MemState { Unknown, VeryLow, Low, Normal } memstate=Unknown;
