@@ -40,8 +40,8 @@ HEADERS		= background.h \
 	../../rsync/util.h \
 	../../rsync/whole.h \
 	../../rsync/config_rsync.h \
-	../../rsync/qrsync.h
-#		  quicklauncher.h \
+	../../rsync/qrsync.h \
+		  quicklauncher.h 
 SOURCES		= background.cpp \
 		  desktop.cpp \
 		  mediummountgui.cpp \
