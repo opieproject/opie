@@ -22,7 +22,7 @@
 #include "addresssettings.h"
 
 #include <qpe/config.h>
-#include <qpe/contact.h>
+#include <opie/ocontact.h>
 
 #include <qfile.h>
 #include <qlistbox.h>
@@ -41,7 +41,7 @@ AddressSettings::~AddressSettings()
 
 void AddressSettings::init()
 {
-    QStringList slFields = Contact::trfields();
+    QStringList slFields = OContact::trfields();
     // Make this match what is in initFields
     slFields.remove( tr("Name Title") );
     slFields.remove( tr("First Name") );

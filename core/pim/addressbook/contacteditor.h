@@ -55,13 +55,10 @@ class ContactEditor : public QDialog {
 
 	public:
 		ContactEditor(	const OContact &entry,
-				const QValueList<int> *newOrderedValues,
-				QStringList *slNewOrdered,
 				QWidget *parent = 0,
 				const char *name = 0,
 				WFlags fl = 0 );
 		~ContactEditor();
-		void loadFields();
 		void setNameFocus();
 		void setPersonalView( bool personal = true );
 		OContact entry() const { return ent; }
@@ -76,10 +73,10 @@ class ContactEditor : public QDialog {
 
 	private:
 		void init();
-		void initMap();
 		void saveEntry();
 		bool isEmpty();
 		void cleanupFields();
+		void updateDatePicker();
 		QString parseName( QString fullName, int type );
 	private slots:
 		void slotChooser1Change( const QString &textChanged );
@@ -101,9 +98,12 @@ class ContactEditor : public QDialog {
 		void slotFullNameChange( const QString &textChanged );
 		void slotAnniversaryDateChanged( int year, int month, int day);
 		void slotBirthdayDateChanged( int year, int month, int day);
+		void slotRemoveBirthday();
+		void slotRemoveAnniversary();
 
 	private:
-		bool useFullName, hasGender, hasTitle, hasCompany, hasNotes, hasStreet, hasStreet2, hasPOBox, hasCity, hasState, hasZip, hasCountry;
+		bool useFullName;
+		//		bool hasGender, hasTitle, hasCompany, hasNotes, hasStreet, hasStreet2, hasPOBox, hasCity, hasState, hasZip, hasCountry;
 
 		OContact ent;
 
@@ -112,9 +112,9 @@ class ContactEditor : public QDialog {
 
 		QList<QLineEdit> listValue;
 		QList<QLabel> listName;
-		const QValueList<int> *orderedValues;
-		QStringList slOrdered;
+
 		QStringList slDynamicEntries;
+		QStringList trlDynamicEntries;
 
 		bool m_personalView;
 

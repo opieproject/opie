@@ -1,24 +1,40 @@
 #include "abview.h"
 
+#include <qlayout.h>
+
+#include <qpe/global.h>
+
+#include <opie/ocontactaccessbackend_vcard.h>
+
+
 // Is defined in LibQPE
 extern QString categoryFileName();
 
-#include <qlayout.h>
+QString addressbookPersonalVCardName()
+{
+	QString filename = Global::applicationFileName("addressbook",
+						       "businesscard.vcf");
+	return filename;
+}
 
-AbView::AbView ( QWidget* parent, const QValueList<int>& ordered, const QStringList& slOrderedFields ):
+
+AbView::AbView ( QWidget* parent, const QValueList<int>& ordered ):
 	QWidget(parent),
 	mCat(0),
 	m_inSearch( false ),
-	m_curr_category( 0 ),
+	m_inPersonal( false ),
+	m_curr_category( -1 ),
 	m_curr_View( TableView ),
 	m_prev_View( TableView ),
 	m_curr_Contact ( 0 ),
-	m_contactdb ( "addressbook", 0l, 0l, false ), // Handle syncing myself.. !
+	m_contactdb ( 0l ),
+	m_storedDB ( 0l ),
 	m_viewStack( 0l ),
 	m_abTable( 0l ),
-	m_orderedFields( ordered ),
-	m_slOrderedFields( slOrderedFields )
+	m_orderedFields( ordered )
 {
+	// Load default database and handle syncing myself.. !
+	m_contactdb = new OContactAccess ( "addressbook", 0l, 0l, false ),
 	mCat.load( categoryFileName() );
 
 	// Create Layout and put WidgetStack into it.
@@ -28,7 +44,7 @@ AbView::AbView ( QWidget* parent, const QValueList<int>& ordered, const QStringL
 	
 	// Creat TableView
  	QVBox* tableBox = new QVBox( m_viewStack );
- 	m_abTable = new AbTable( &m_orderedFields, tableBox, "table" );
+ 	m_abTable = new AbTable( m_orderedFields, tableBox, "table" );
 	m_abTable->setCurrentCell( 0, 0 );
 	m_abTable->setFocus();
 
@@ -49,6 +65,18 @@ AbView::AbView ( QWidget* parent, const QValueList<int>& ordered, const QStringL
 	load();
 }
 
+AbView::~AbView()
+{
+	m_contactdb -> save();
+	delete m_contactdb;
+
+	if ( m_storedDB ){
+		m_storedDB -> save();
+		delete m_storedDB;
+	}
+}
+
+
 void AbView::setView( Views view )
 {
 	qWarning("AbView::setView( Views view )");
@@ -59,21 +87,21 @@ void AbView::setView( Views view )
 void AbView::addEntry( const OContact &newContact )
 {
 	qWarning("abview:AddContact");
-	m_contactdb.add ( newContact );
+	m_contactdb->add ( newContact );
 	load();
 	
 }
 void AbView::removeEntry( const int UID )
 {
 	qWarning("abview:RemoveContact");
-	m_contactdb.remove( UID );
+	m_contactdb->remove( UID );
 	load();
 }
 
 void AbView::replaceEntry( const OContact &contact )
 {
 	qWarning("abview:ReplaceContact");
-	m_contactdb.replace( contact );
+	m_contactdb->replace( contact );
 	load();
 
 }
@@ -95,17 +123,22 @@ bool AbView::save()
 {
 	qWarning("abView:Save data");
 
-	return m_contactdb.save();
+	return m_contactdb->save();
 }
 
-// :SX Add: Just load for specific Category
 void AbView::load()
 {
 	qWarning("abView:Load data");
 	
-	m_list = m_contactdb.allRecords();
+	if ( m_inPersonal )
+		m_list = m_contactdb->allRecords();
+	else
+		m_list = m_contactdb->sorted( true, 0, 0, 0 );
+
 	clearForCategory();
-	m_curr_Contact = 0;
+
+	// Feed all views with new lists
+	updateListinViews();
 	
 	qWarning ("Number of contacts: %d", m_list.count());
 
@@ -115,7 +148,9 @@ void AbView::load()
 
 void AbView::reload()
 {
-	m_contactdb.reload();
+	qWarning( "void AbView::reload()" );
+
+	m_contactdb->reload();
 	load();
 }
 
@@ -127,18 +162,43 @@ void AbView::clear()
 void AbView::setShowByCategory( Views view, const QString& cat )
 {
 	qWarning("AbView::setShowCategory( Views view, const QString& cat )");
-	m_curr_View = view;
 
-	emit signalClearLetterPicker();
+// 	if ( view == PersonalView ){
+// 		if ( ! m_inPersonal )
+// 			showPersonal( true );
+		
+// 	}else{
+// 		if  ( m_inPersonal )
+// 			showPersonal( false );
 
-	if ( !cat.isNull() ) 
-		m_curr_category = mCat.id("Contacts", cat );
+// 			m_curr_View = view;
+// 	}
+
+	int intCat = 0;
+
+	// All (cat == NULL) will be stored as -1
+	if ( cat.isNull() )
+		intCat = -1;
 	else
-		m_curr_category = -1; // Set to all
+		intCat = mCat.id("Contacts", cat );
 
-	qWarning ("Categories: Selected %s.. Number: %d", cat.latin1(), m_curr_category);
+	// If we just change the view, we don't have to reload any data..
+	// This speeds up a lot of things !
+	if ( intCat == m_curr_category ){
+		qWarning ("Just change the View (Category is: %d)", m_curr_category);
+		m_prev_View = m_curr_View;
+		m_curr_View = view;
 
-	load();
+		updateView();
+	}else{
+		qWarning ("Categories: Selected %s.. Number: %d", cat.latin1(), m_curr_category);
+
+		m_curr_View = view;
+		m_curr_category = intCat;
+		emit signalClearLetterPicker();
+		
+		load();
+	}
 
 }
 void AbView::setShowByLetter( char c )
@@ -150,22 +210,63 @@ void AbView::setShowByLetter( char c )
 		return;
 	}else{
 		query.setLastName( QString("%1*").arg(c) );
-		m_list = m_contactdb.queryByExample( query, OContactAccess::WildCards );
+		m_list = m_contactdb->queryByExample( query, OContactAccess::WildCards );
 		clearForCategory();
 		m_curr_Contact = 0;
 	}
 	updateView();
 }
 
+void AbView::setListOrder( const QValueList<int>& ordered )
+{
+	m_orderedFields = ordered;
+	updateView();
+}
+
+
 QString AbView::showCategory() const 
 {
 	return mCat.label( "Contacts", m_curr_category );
 }
 
-void AbView::showContact( const OContact& cnt )
+void AbView::showPersonal( bool personal )
 {
-	qWarning ("void AbView::showContact( const OContact& cnt )");
-	// :SX
+	qWarning ("void AbView::showPersonal( %d )", personal);
+
+	if ( personal ){
+
+		if ( m_inPersonal )
+			return;
+
+		// Now switch to vCard Backend and load data.
+		// The current default backend will be stored
+		// to avoid unneeded load/stores.
+		m_storedDB = m_contactdb;
+
+		OContactAccessBackend* vcard_backend = new OContactAccessBackend_VCard( QString::null, 
+									  addressbookPersonalVCardName() );
+		m_contactdb = new OContactAccess ( "addressbook", QString::null , vcard_backend, true );
+
+		m_inPersonal = true;
+		m_curr_View = CardView;
+		
+	}else{
+
+		if ( !m_inPersonal )
+			return;
+
+		// Remove vCard Backend and restore default
+		m_contactdb->save();
+		delete m_contactdb;
+
+		m_contactdb = m_storedDB;
+		m_storedDB = 0l;
+
+		m_curr_View = TableView;
+		m_inPersonal = false;
+		
+	}
+	load();
 }
 
 QStringList AbView::categories() 
@@ -180,8 +281,11 @@ void AbView::slotDoFind( const QString &str, bool caseSensitive, bool useRegExp,
 			 bool , QString cat = QString::null )
 {
 	qWarning( "void AbView::slotDoFind" );
-	// Use the current Category if nothing else selected
 
+	// We reloading the data: Deselect Letterpicker
+	emit signalClearLetterPicker();
+
+	// Use the current Category if nothing else selected
 	int category = 0;
 
 	if ( cat.isEmpty() )
@@ -197,7 +301,7 @@ void AbView::slotDoFind( const QString &str, bool caseSensitive, bool useRegExp,
 	r.setWildcard( !useRegExp );
 	
 	// Get all matching entries out of the database
-	m_list = m_contactdb.matchRegexp( r );
+	m_list = m_contactdb->matchRegexp( r );
 
 	qWarning( "found: %d", m_list.count() );
 	if ( m_list.count() == 0 ){
@@ -245,16 +349,17 @@ void AbView::clearForCategory()
 {
 	OContactAccess::List::Iterator it;
 	// Now remove all contacts with wrong category if any category selected
-	// This algorithm is a litte bit ineffective
+
+	OContactAccess::List allList = m_list;
 	if ( m_curr_category != -1 ){
-		for ( it = m_list.begin(); it != m_list.end(); ++it ){
+		for ( it = allList.begin(); it != allList.end(); ++it ){
 			if ( !contactCompare( *it, m_curr_category ) ){ 
 				qWarning("Removing %d", (*it).uid());
 				m_list.remove( (*it).uid() );
-				it = m_list.begin();
 			}
 		}
 	}
+
 }
 
 bool AbView::contactCompare( const OContact &cnt, int category )
@@ -268,7 +373,8 @@ bool AbView::contactCompare( const OContact &cnt, int category )
 	qWarning ("Number of categories: %d", cats.count() );
 
 	returnMe = false;
-	if ( cats.count() == 0  )
+	if ( cats.count() == 0 && category == 0 )
+		// Contacts with no category will just shown on "All" and "Unfiled"
 		returnMe = true;
 	else {
 		int i;
@@ -284,6 +390,13 @@ bool AbView::contactCompare( const OContact &cnt, int category )
 	return returnMe;
 }
 
+// In Some rare cases we have to update all lists..
+void AbView::updateListinViews()
+{
+		m_abTable -> setContacts( m_list );
+		m_ablabel -> setContacts( m_list );
+}
+
 void  AbView::updateView()
 {
 	qWarning("AbView::updateView()");
@@ -293,7 +406,7 @@ void  AbView::updateView()
 	}
 
 	// If we switching the view, we have to store some information
-	if ( m_prev_View != m_curr_View ){
+	if ( m_list.count() ){
 		switch ( (int) m_prev_View ) {
 		case TableView:
 			m_curr_Contact = m_abTable -> currentEntry_UID();
@@ -302,25 +415,26 @@ void  AbView::updateView()
 			m_curr_Contact = m_ablabel -> currentEntry_UID();
 			break;
 		}
-	}
+		emit signalViewSwitched ( (int) m_curr_View );
+	}else
+		m_curr_Contact = 0;
 	
 	m_prev_View = m_curr_View;
 
 	// Switch to new View
 	switch ( (int) m_curr_View ) {
 	case TableView:
+		m_abTable -> setChoiceSelection( m_orderedFields );
 		m_abTable -> setContacts( m_list );
 		if ( m_curr_Contact != 0 )
 			m_abTable -> selectContact ( m_curr_Contact );
 		m_abTable -> setFocus();
-		emit signalViewSwitched ( (int) m_curr_View );
 		break;
 	case CardView:
 		m_ablabel -> setContacts( m_list );
 		if ( m_curr_Contact != 0 )
 			m_ablabel -> selectContact( m_curr_Contact );
 		m_ablabel -> setFocus();
-		emit signalViewSwitched ( (int) m_curr_View );
 		break;
 	}
 	

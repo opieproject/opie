@@ -1,24 +1,29 @@
 TEMPLATE	= app
-CONFIG		= qt warn_on release
+#CONFIG		= qt warn_on release
+CONFIG		= qt warn_on debug
 DESTDIR		= $(OPIEDIR)/bin
 HEADERS	= addressbook.h \
                   contacteditor.h \
+                  ocontactfields.h \
 		  ablabel.h \
 		  abtable.h \
-		  addresssettings.h \
 		  picker.h \
                   ofloatbar.h \
-                  configdlg.h
+                  configdlg.h \
+                  abconfig.h \
+                  abview.h
 SOURCES	= main.cpp \
 		  addressbook.cpp \
 		  contacteditor.cpp \
+                  ocontactfields.cpp \
 		  ablabel.cpp \
 		  abtable.cpp \
-		  addresssettings.cpp \
 		  picker.cpp \
-                  configdlg.cpp
+                  configdlg.cpp \
+                  abconfig.cpp \
+                  abview.cpp
 
-INTERFACES	= addresssettingsbase.ui configdlg_base.ui
+INTERFACES	= configdlg_base.ui
 TARGET		= addressbook
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include

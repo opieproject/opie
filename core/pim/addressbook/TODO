@@ -1,41 +1,64 @@
 Stuff todo until OPIE 1.0 :
+===========================
 
-----> This main branch ist currently stable enough for
-----> snapshots.. To avoid corrupted snapshots, we currently
-----> working on a different branch..
-----> YOU FIND THE CURRENT WORK IN THE BRANCH "GO_FOR_OPIE_1_0"
+Feature requests:
+-----------------
+- Dial by mobile phone by tapping the number.. 
+  (Maybe using gsmtool. And we may
+	add a library class for this)
+- dial with dtmfdial incase it's installed and there's no mobile
+- 3rd column for 2. Contact
+- Implementing additional Views (Phonebook, ...)
+- Birthday & Anniversary Reminder
+- Plugin for Today for Birthdays and Anniversaries
 
+Known Bugs:
+-----------
+- OK-Key does not switch from Detailview (ablable) to Listview
 
-Pending bugfixes from previous work:
+Bugs but not in addressbook:
+-----------------------------
+- VCARD: Import of Anniversary does not work correctly (currently disabled)
+- VCARD: If umlaut (äöüß) in address, the parser gets confused..
+
 
 Urgent:
+--------
+- Contact-Editor is temporarely reanabled. Wait for replacement.
+- Redesign of Contacteditor
+- Store last settings of combo-boxes
+- Name order selected in "contacteditor" not used in list view.
+- Category is on the wrong position after changing to personal and back to normal
+	( Temporarily workaround: Category is never deactivated.. :S )
 
 
 Important:
+----------
 
-- Name order selected in "contacteditor" not used in list view.
+- After search (Started with Return): KeyFocus should be on Tabelle
+- Searchwidget closed: Selected user is jumping
+- Wenn suchen beendet, dann dauert das Tabellenupdate (was überhaupt überflüssig ist)
+	zu lange..
 
-- Overview window cleanup needed..
-- Cursor keys should work in detail-view (ablabel)
-  -> Ablabel should be removed and Abtable should be increased with
-	different views (as started by darwin zins)..
-- Store last settings of combo-boxes
-- Finishing of new View functions (List, Phonebook...)
-- Reload if contacts were changed externally
-- "What's this" should be added
+- Store position and state of toolbar
+
+- IRDA Receive: Contact is added, but start of editor with new entry expected..
+- "What's this" should be added (Deleyed after Feature Freeze)
 
 Less important:
-
--  The picker (alphabetical sort widget) should be
+---------------
+- Reload if contacts were changed externally
+- Overview window cleanup needed..
+- The picker (alphabetical sort widget) should be
    placed verticaly or horizontally (configurable)
-- Use advanced database functions in abtable to decrease
-  memory footprint and to make everything more easy !
-	(abtable should store Iterator for selected Category)
+- Find a smart solution for activating/deactivating the "send email" event
 
 Should be Fixed (not absolute sure, need further validation):
+-------------------------------------------------------------
 
 
 Fixed:
+-------
 - Syncing: abtable not reloaded after sync.
 - Find widget should be replaced by something like 
   qpdf has.
@@ -50,3 +73,21 @@ Fixed:
 - contacteditor: Birthday, annyversary, ... : Use Dateselector
 - The names of the countries are sorted by there english names, only..
   Even if they are translated.. :S
+- Cursor keys should work in detail-view (ablabel)
+  -> Ablabel should be removed and Abtable should be increased with
+	different views (as started by darwin zins)..
+- Use advanced database functions in abtable to decrease
+  memory footprint and to make everything more easy !
+	(abtable should store Iterator for selected Category)
+- Abtable: Configure Contact column (internally already available, 
+	need configuration)
+- Select of primary contact (see #274 on mantis)
+- Category-select does not work completely: "Unfiled" is always in listview ..
+- Return from Contacteditor: Category resettet to all
+- Personal Details not working
+- If category changed, the letterpicker should be resetted
+- There should be some icons for List and Cardview
+- If in Cardview and a category change removes all entries: 
+	There are already entries in Cardview after up/down
+- Personal Details: Anniversary zeigt Fantasie-Werte
+- Unfiled shown just in Category "All" and "Unfiled". 

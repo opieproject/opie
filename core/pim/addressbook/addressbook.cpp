@@ -22,22 +22,27 @@
 
 #include "contacteditor.h"
 #include "ablabel.h"
+#include "abview.h"
 #include "abtable.h"
-#include "addresssettings.h"
+// #include "addresssettings.h"
 #include "addressbook.h"
 
 
 #include <opie/ofileselector.h>
 #include <opie/ofiledialog.h>
-#include <qpe/qpeapplication.h>
-#include <qpe/config.h>
 #include <opie/ocontact.h>
+#include <opie/ocontactaccessbackend_vcard.h>
 
-#include <qpe/global.h>
 #include <qpe/resource.h>
 #include <qpe/ir.h>
 #include <qpe/qpemessagebox.h>
 #include <qpe/qcopenvelope_qws.h>
+#include <qpe/qpetoolbar.h>
+#include <qpe/qpemenubar.h>
+// #include <qtoolbar.h>
+// #include <qmenubar.h>
+#include <qpe/qpeapplication.h>
+#include <qpe/config.h>
 
 #include <qaction.h>
 #include <qdialog.h>
@@ -45,14 +50,13 @@
 #include <qfile.h>
 #include <qimage.h>
 #include <qlayout.h>
-#include <qpe/qpemenubar.h>
 #include <qmessagebox.h>
 #include <qpixmap.h>
 #include <qpopupmenu.h>
-#include <qpe/qpetoolbar.h>
 #include <qstringlist.h>
 #include <qtoolbutton.h>
 #include <qwhatsthis.h>
+#include <qdatetime.h>
 
 #include <stdlib.h>
 #include <sys/stat.h>
@@ -60,65 +64,59 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-#include <qdatetime.h>
 
 #include "picker.h"
 #include "configdlg.h"
 
-static QString addressbookPersonalVCardName()
-{
-	QString filename = Global::applicationFileName("addressbook",
-						       "businesscard.vcf");
-	return filename;
-}
-
+extern QString addressbookPersonalVCardName();
 
 AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 				      WFlags f )
 	: QMainWindow( parent, name, f ),
-	  abEditor(0),
-	  useRegExp(false),
-	  doNotifyWrapAround(true),
-	  caseSensitive(false),
-	  m_useQtMail(true),
-	  m_useOpieMail(false),
-	  bAbEditFirstTime(TRUE),
-	  syncing(FALSE)
+	  catMenu (0l),
+	  abEditor(0l),
+	  syncing(FALSE),
+	  m_tableViewButton(0l),
+	  m_cardViewButton(0l)
 {
 	isLoading = true;
 
-	// Read Config settings
-	Config cfg("AddressBook");
-	cfg.setGroup("Search");
-	useRegExp = cfg.readBoolEntry( "useRegExp" );
-	caseSensitive = cfg.readBoolEntry( "caseSensitive" );
-	doNotifyWrapAround = cfg.readBoolEntry( "doNotifyWrapAround" );
-	cfg.setGroup("Mail");
-	m_useQtMail = cfg.readBoolEntry( "useQtMail", true );
-	m_useOpieMail=cfg.readBoolEntry( "useOpieMail" );
-	
+	m_config.load();
 
-	initFields();
-	
 	setCaption( tr("Contacts") );
 	setIcon( Resource::loadPixmap( "AddressBook" ) );
+
+	// Settings for Main Menu
+	setToolBarsMovable( true  );
+	setRightJustification( true );
 	
-	setToolBarsMovable( FALSE );
+	// Create Toolbar
+	listTools = new QPEToolBar( this, "list operations" );
+	listTools->setHorizontalStretchable( true );
+	addToolBar( listTools );
+	moveToolBar( listTools, m_config.getToolBarPos() );
 	
-	// Create Toolbars
-	
-	QPEToolBar *bar = new QPEToolBar( this );
-	bar->setHorizontalStretchable( TRUE );
-	
-	QPEMenuBar *mbList = new QPEMenuBar( bar );
+	QPEMenuBar *mbList = new QPEMenuBar( this  );
 	mbList->setMargin( 0 );
 	
-	QPopupMenu *edit = new QPopupMenu( this );
+	QPopupMenu *edit = new QPopupMenu( mbList );
 	mbList->insertItem( tr( "Contact" ), edit );
 	
-	listTools = new QPEToolBar( this, "list operations" );
 	
-	
+	// View Icons
+	m_tableViewButton  = new QAction( tr( "List" ), Resource::loadPixmap( "datebook/weeklst" ),  
+					  QString::null, 0, this, 0 );
+	connect( m_tableViewButton, SIGNAL( activated() ), this, SLOT( slotListView() ) );
+	m_tableViewButton->setToggleAction( true );
+	m_tableViewButton->addTo( listTools );
+	m_cardViewButton = new QAction( tr( "Card" ), Resource::loadPixmap( "day" ),  QString::null, 0, this, 0 );
+	connect( m_cardViewButton, SIGNAL( activated() ), this, SLOT( slotCardView() ) );
+	m_cardViewButton->setToggleAction( true );
+	m_cardViewButton->addTo( listTools );
+
+	listTools->addSeparator();
+
+	// Other Buttons
 	QAction *a = new QAction( tr( "New" ), Resource::loadPixmap( "new" ), QString::null,
 				  0, this, 0 );
 	actionNew = a;
@@ -161,14 +159,16 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	searchBar->setHorizontalStretchable( TRUE );
 	searchBar->hide();
 	searchEdit = new QLineEdit( searchBar, "searchEdit" );
-//      QFont f("unifont", 16 /*, QFont::Bold*/);
-//      searchEdit->setFont( f );
+
+// 	QFont f("unifont", 16 /*, QFont::Bold*/);
+// 	searchEdit->setFont( f );
+
 	searchBar->setStretchableWidget( searchEdit );
 	connect( searchEdit, SIGNAL( returnPressed( ) ),
 		 this, SLOT( slotFind( ) ) );
 
-	a = new QAction( tr( "Find Next" ), Resource::loadPixmap( "next" ), QString::null, 0, this, 0 );
-	connect( a, SIGNAL( activated() ), this, SLOT( slotFindNext() ) );
+	a = new QAction( tr( "Start Search" ), Resource::loadPixmap( "enter" ), QString::null, 0, this, 0 );
+	connect( a, SIGNAL( activated() ), this, SLOT( slotFind() ) );
 	a->addTo( searchBar );
 
 	a = new QAction( tr( "Close Find" ), Resource::loadPixmap( "close" ), QString::null, 0, this, 0 );
@@ -183,8 +183,6 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	a->addTo( edit );
 	a->addTo( listTools );
 	
-	
-	
 	if ( Ir::supported() ) {
 		a = new QAction( tr ("Beam Entry" ), Resource::loadPixmap( "beam" ), QString::null,
 				 0, this, 0 );
@@ -196,7 +194,7 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	
 	edit->insertSeparator();
 	
-	a = new QAction( tr("Import vCard"), QString::null, 0, 0, 0, TRUE );
+	a = new QAction( tr("Import vCard"), QString::null, 0, 0);
 	actionPersonal = a;
 	connect( a, SIGNAL( activated() ), this, SLOT( importvCard() ) );
 	a->addTo( edit );
@@ -208,11 +206,6 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	connect( a, SIGNAL( activated() ), this, SLOT( slotPersonalView() ) );
 	a->addTo( edit );
 	
-	// Do we need this function ? (se)	
-// 	a = new QAction( tr( "Arrange Edit Fields"), QString::null, 0, 0 );
-// 	connect( a, SIGNAL( activated() ), this, SLOT( slotSettings() ) );
-// 	a->addTo( edit );
-
 
 #ifdef __DEBUG_RELEASE
 	// Remove this function for public Release ! This is only
@@ -228,55 +221,41 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 
 	// Create Views
 	listContainer = new QWidget( this );
-	
 	QVBoxLayout *vb = new QVBoxLayout( listContainer );
 	
-	abList = new AbTable( &orderedFields, listContainer, "table" );
-	vb->addWidget(abList);
+ 	m_abView = new AbView( listContainer, m_config.orderList() );
+ 	vb->addWidget( m_abView );
 	// abList->setHScrollBarMode( QScrollView::AlwaysOff );
-	connect( abList, SIGNAL( empty( bool ) ), this, SLOT( listIsEmpty( bool ) ) );
-	connect( abList, SIGNAL( details() ), this, SLOT( slotListView() ) );
-	connect( abList, SIGNAL( currentChanged(int,int) ), this, SLOT( slotUpdateToolbar() ) );
-	connect( abList, SIGNAL( signalSearchNext() ), this, SLOT( slotFindNext() ) );
-	connect( abList, SIGNAL( signalSearchBackward() ), this, SLOT( slotFindPrevious() ) );
+	connect( m_abView, SIGNAL( signalViewSwitched ( int ) ), 
+		 this, SLOT( slotViewSwitched( int ) ) );
+
 	
-	// Maybe we should react on Wraparound and notfound ?
-	QObject::connect( abList, SIGNAL(signalNotFound()), this, SLOT(slotNotFound()) );
-	QObject::connect( abList, SIGNAL(signalWrapAround()), this, SLOT(slotWrapAround()) );
+	QObject::connect( m_abView, SIGNAL(signalNotFound()), this, SLOT(slotNotFound()) );
 	
-	mView = 0;
+	m_abView->load();
 	
-	abList->load();
-	
+	// Letter Picker
 	pLabel = new LetterPicker( listContainer );
 	connect(pLabel, SIGNAL(letterClicked(char)), this, SLOT(slotSetLetter(char)));
-	vb->addWidget(pLabel);
+	connect(m_abView, SIGNAL( signalClearLetterPicker() ), pLabel, SLOT( clear() ) );
+
+	vb->addWidget( pLabel );
+
+	// Category Menu
 	catMenu = new QPopupMenu( this );
 	catMenu->setCheckable( TRUE );
 	connect( catMenu, SIGNAL(activated(int)), this, SLOT(slotSetCategory(int)) );
 	populateCategories();
-	
 	mbList->insertItem( tr("View"), catMenu );
-	// setCentralWidget( listContainer );
 	
-	fontMenu = new QPopupMenu(this);
-	fontMenu->setCheckable( true );
-	connect( fontMenu, SIGNAL(activated(int)), this, SLOT(slotSetFont(int)));
+ 	defaultFont = new QFont( m_abView->font() );
+ 	slotSetFont(m_config.fontSize());
+	m_curFontSize = m_config.fontSize();
 	
-	fontMenu->insertItem(tr( "Small" ), 0);
-	fontMenu->insertItem(tr( "Normal" ), 1);
-	fontMenu->insertItem(tr( "Large" ), 2);
-	
-	defaultFont = new QFont( abList->font() );
-	
-	slotSetFont(startFontSize);
-	
-	mbList->insertItem( tr("Font"), fontMenu);
 	setCentralWidget(listContainer);
 	
 	//    qDebug("adressbook contrsuction: t=%d", t.elapsed() );
 
-	abList->setCurrentCell( 0, 0 );
 	
 	isLoading = false;
 }
@@ -285,61 +264,52 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 void AddressbookWindow::slotConfig()
 {
 	ConfigDlg* dlg = new ConfigDlg( this, "Config" );
-	dlg -> setUseRegExp ( useRegExp );
-	dlg -> setBeCaseSensitive( caseSensitive );
-	dlg -> setSignalWrapAround( doNotifyWrapAround );
-	dlg -> setQtMail ( m_useQtMail );
-	dlg -> setOpieMail ( m_useOpieMail );
+	dlg -> setConfig( m_config );
 	dlg -> showMaximized();
 	if ( dlg -> exec() ) {
 		qWarning ("Config Dialog accepted !");
-		useRegExp = dlg -> useRegExp();
-		caseSensitive = dlg -> beCaseSensitive();
-		doNotifyWrapAround = dlg -> signalWrapAround();
-		m_useQtMail = dlg -> useQtMail();
-		m_useOpieMail= dlg -> useOpieMail();
+		m_config = dlg -> getConfig();
+		if ( m_curFontSize != m_config.fontSize() ){
+			qWarning("Font was changed!");
+			m_curFontSize = m_config.fontSize();
+			emit slotSetFont( m_curFontSize );
+		}
+		m_abView -> setListOrder( m_config.orderList() );
 	}
 
 	delete dlg;
 }
 
 
-void AddressbookWindow::slotSetFont( int size ) {
+void AddressbookWindow::slotSetFont( int size ) 
+{
+	qWarning("void AddressbookWindow::slotSetFont( %d )", size);
 	
 	if (size > 2 || size < 0)
 		size = 1;
 	
-	startFontSize = size;
+	m_config.setFontSize( size );
 	
 	QFont *currentFont;
 	
 	switch (size) {
 	case 0:
-		fontMenu->setItemChecked(0, true);
-		fontMenu->setItemChecked(1, false);
-		fontMenu->setItemChecked(2, false);
-		abList->setFont( QFont( defaultFont->family(), defaultFont->pointSize() - 2 ) );
-		currentFont = new QFont (abList->font());
-		// abList->resizeRows(currentFont->pixelSize() + 7);
-		abList->resizeRows();
+		m_abView->setFont( QFont( defaultFont->family(), defaultFont->pointSize() - 2 ) );
+		currentFont = new QFont (m_abView->font());
+		// abList->resizeRows(currentFont->pixelSize() + 7); :SX
+		// abList->resizeRows();
 		break;
 	case 1:
-		fontMenu->setItemChecked(0, false);
-		fontMenu->setItemChecked(1, true);
-		fontMenu->setItemChecked(2, false);
-		abList->setFont( *defaultFont );
-		currentFont = new QFont (abList->font());
-		// abList->resizeRows(currentFont->pixelSize() + 7);
-		abList->resizeRows();
+ 		m_abView->setFont( *defaultFont );
+ 		currentFont = new QFont (m_abView->font());
+// 		// abList->resizeRows(currentFont->pixelSize() + 7);
+// 		abList->resizeRows();
 		break;
 	case 2:
-		fontMenu->setItemChecked(0, false);
-		fontMenu->setItemChecked(1, false);
-		fontMenu->setItemChecked(2, true);
-		abList->setFont( QFont( defaultFont->family(), defaultFont->pointSize() + 2 ) );
-		currentFont = new QFont (abList->font());
-		//abList->resizeRows(currentFont->pixelSize() + 7);
-		abList->resizeRows();
+ 		m_abView->setFont( QFont( defaultFont->family(), defaultFont->pointSize() + 2 ) );
+ 		currentFont = new QFont (m_abView->font());
+// 		//abList->resizeRows(currentFont->pixelSize() + 7);
+// 		abList->resizeRows();
 		break;
 	}
 }
@@ -348,98 +318,77 @@ void AddressbookWindow::slotSetFont( int size ) {
 
 void AddressbookWindow::importvCard() {
         QString str = OFileDialog::getOpenFileName( 1,"/");//,"", "*", this );
-        if(!str.isEmpty() )
+        if(!str.isEmpty() ){
 		setDocument((const QString&) str );
+	}
 	
 }
 
 void AddressbookWindow::setDocument( const QString &filename )
 {
-	if ( filename.find(".vcf") != int(filename.length()) - 4 ) 
-		return;
-	
-	QValueList<OContact> cl = OContact::readVCard( filename );
-	for( QValueList<OContact>::Iterator it = cl.begin(); it != cl.end(); ++it ) {
-		//  QString msg = tr("You received a vCard for\n%1.\nDo You want to add it to your\naddressbook?")
-		//          .arg( (*it).fullName() );
-		//  if ( QMessageBox::information( this, tr("received contact"), msg, QMessageBox::Ok, QMessageBox::Cancel ) ==
-		//       QMessageBox::Ok ) {
-		abList->addEntry( *it );
-		//  }
+	qWarning( "void AddressbookWindow::setDocument( %s )", filename.latin1() );
+
+	if ( filename.find(".vcf") != int(filename.length()) - 4 ){ 
+
+
+
+		switch( QMessageBox::information( this, tr ( "Right file type ?" ),
+						  tr( "The selected File" ) + ( "\n" ) +
+						  tr ("does not end with \".vcf\" ") + ( "\n" ) +
+						  tr ( "Do you really want to open it?" ),
+						  tr( "&Yes" ), tr( "&No" ), QString::null,
+						  0,      // Enter == button 0
+						  2 ) ) { // Escape == button 2
+		case 0: 
+			qWarning("YES clicked");
+			break;
+		case 1: 
+			qWarning("NO clicked");
+			return;
+			break;
+		}
+	}
+
+	OContactAccessBackend* vcard_backend = new OContactAccessBackend_VCard( QString::null, 
+									 filename );
+	OContactAccess* access = new OContactAccess ( "addressbook", QString::null , vcard_backend, true );
+	OContactAccess::List allList = access->allRecords();
+
+	OContactAccess::List::Iterator it;
+	for ( it = allList.begin(); it != allList.end(); ++it ){
+		m_abView->addEntry( *it );
 	}
 	
+	delete access;
 }
 
 void AddressbookWindow::resizeEvent( QResizeEvent *e )
 {
 	QMainWindow::resizeEvent( e );
 	
-	if ( centralWidget() == listContainer  )
-		showList();
-	else if ( centralWidget() == mView )
-		showView();
+
 }
 
 AddressbookWindow::~AddressbookWindow()
 {
-	Config cfg("AddressBook");
-	cfg.setGroup("Font");
-	cfg.writeEntry("fontSize", startFontSize);
-
-	cfg.setGroup("Search");
-	cfg.writeEntry("useRegExp", useRegExp);
-	cfg.writeEntry("caseSensitive", caseSensitive);
-	cfg.writeEntry("doNotifyWrapAround", doNotifyWrapAround);
-	cfg.setGroup("Mail");
-	cfg.writeEntry( "useQtMail", m_useQtMail );
-	cfg.writeEntry( "useOpieMail", m_useOpieMail);
+	ToolBarDock dock;
+	int dummy;
+	bool bDummy;
+	getLocation ( listTools, dock, dummy, bDummy, dummy );
+	m_config.setToolBarDock( dock );
+	m_config.save();
 }
 
 void AddressbookWindow::slotUpdateToolbar()
 {
-	OContact ce = abList->currentEntry();
+ 	OContact ce = m_abView->currentEntry();
 	actionMail->setEnabled( !ce.defaultEmail().isEmpty() );
-}
-
-void AddressbookWindow::showList()
-{
-	bool visiblemView;
-	
- 	visiblemView = false;
-	if ( mView ) {
-		mView->hide();
-		visiblemView = true;
-	}
-	setCentralWidget( listContainer );
-	listContainer->show();
-	// update our focues... (or use a stack widget!);
-	abList->setFocus();
-	
- 	// This makes sure we are scrolled all the way to the left
- 	abList->setContentsPos( 0, abList->contentsY() );
-	
- 	//if ( visiblemView && abList->showBook() == "Cards" ) 
- 	//	abList->setShowCategory( abList->showBook(), abList->showCategory() );
-
-}
-
-void AddressbookWindow::showView()
-{
-	if ( abList->numRows() > 0 ) {
-		listContainer->hide();
-		setCentralWidget( abView() );
-		mView->show();
-		mView->setFocus();
-	}
 }
 
 void AddressbookWindow::slotListNew()
 {
 	OContact cnt;
 	if( !syncing ) {
-		if ( abEditor )
-			abEditor->setEntry( cnt );
-		abView()->init( cnt );
 		editEntry( NewEntry );
 	} else {
 		QMessageBox::warning(this, tr("OContacts"),
@@ -447,17 +396,17 @@ void AddressbookWindow::slotListNew()
 	}
 }
 
-void AddressbookWindow::slotListView()
-{
-	abView()->init( abList->currentEntry() );
-	mView->sync();
-	showView();
-}
+// void AddressbookWindow::slotListView()
+// {
+// 	m_abView -> init( abList->currentEntry() );
+// 	// :SX mView->sync();
+// 	//:SX	showView();
+// }
 
 void AddressbookWindow::slotListDelete()
 {
 	if(!syncing) {
-		OContact tmpEntry = abList->currentEntry();
+		OContact tmpEntry = m_abView ->currentEntry();
 		
 		// get a name, do the best we can...
 		QString strName = tmpEntry.fullName();
@@ -470,8 +419,7 @@ void AddressbookWindow::slotListDelete()
 		
 		if ( QPEMessageBox::confirmDelete( this, tr( "Contacts" ),
 						   strName ) ) {
-			abList->deleteCurrentEntry();
-			showList();
+			m_abView->removeEntry( tmpEntry.uid() );
 		}
 	} else {
 		QMessageBox::warning( this, tr("Contacts"),
@@ -479,9 +427,32 @@ void AddressbookWindow::slotListDelete()
 	}
 }
 
+void AddressbookWindow::slotFindOpen()
+{
+	searchBar->show();
+	m_abView -> inSearch();
+	searchEdit->setFocus();
+}
+void AddressbookWindow::slotFindClose()
+{
+	searchBar->hide();
+	m_abView -> offSearch();
+	// m_abView->setFocus();
+}
+
+
+void AddressbookWindow::slotFind()
+{
+	m_abView->slotDoFind( searchEdit->text(), m_config.beCaseSensitive(), m_config.useRegExp(), false);
+	
+	searchEdit->clearFocus();
+	// m_abView->setFocus();
+	
+}
+
 void AddressbookWindow::slotViewBack()
 {
-	showList();
+	// :SX showList();
 }
 
 void AddressbookWindow::slotViewEdit()
@@ -490,8 +461,6 @@ void AddressbookWindow::slotViewEdit()
 		if (actionPersonal->isOn()) {
 			editPersonal();
 		} else {
-			if ( !bAbEditFirstTime )
-				abEditor->setEntry( abList->currentEntry() );
 			editEntry( EditEntry );
 		}
 	} else {
@@ -504,7 +473,7 @@ void AddressbookWindow::slotViewEdit()
 
 void AddressbookWindow::writeMail()
 {
-	OContact c = abList->currentEntry();
+	OContact c = m_abView -> currentEntry();
 	QString name = c.fileAs();
 	QString email = c.defaultEmail();
 
@@ -516,7 +485,7 @@ void AddressbookWindow::writeMail()
 
 	// Try to access the preferred. If not possible, try to 
 	// switch to the other one.. 
-	if ( m_useQtMail ){
+	if ( m_config.useQtMail() ){
 		qWarning ("Accessing: %s", (basepath + "/bin/qtmail").latin1());
 	        if ( QFile::exists( basepath + "/bin/qtmail" ) ){
 			qWarning ("QCop");
@@ -524,9 +493,9 @@ void AddressbookWindow::writeMail()
 			e << name << email;
 			return;
 		} else
-			m_useOpieMail = true;
+			m_config.setUseOpieMail( true );
 	}
-	if ( m_useOpieMail ){
+	if ( m_config.useOpieMail() ){
 		qWarning ("Accessing: %s", (basepath + "/bin/mail").latin1());
 		if ( QFile::exists( basepath + "/bin/mail" ) ){
 			qWarning ("QCop");
@@ -534,7 +503,7 @@ void AddressbookWindow::writeMail()
 			e << name << email;
 			return;
 		} else
-			m_useQtMail = true;
+			m_config.setUseQtMail( true );
 	}
 
 }
@@ -549,14 +518,29 @@ void AddressbookWindow::slotBeam()
 		filename = addressbookPersonalVCardName();
 		if (!QFile::exists(filename))
 			return; // can't beam a non-existent file
-		c = OContact::readVCard( filename )[0];
+		OContactAccessBackend* vcard_backend = new OContactAccessBackend_VCard( QString::null, 
+											filename );
+		OContactAccess* access = new OContactAccess ( "addressbook", QString::null , vcard_backend, true );
+		OContactAccess::List allList = access->allRecords();
+		OContactAccess::List::Iterator it = allList.begin();  // Just take first
+		c = *it;
+
+		delete access;
 	} else {
 		unlink( beamfile ); // delete if exists
-		c = abList->currentEntry();
 		mkdir("/tmp/obex/", 0755);
-		OContact::writeVCard( beamfile, c );
+		c = m_abView -> currentEntry();
+		OContactAccessBackend* vcard_backend = new OContactAccessBackend_VCard( QString::null, 
+											beamfile );
+		OContactAccess* access = new OContactAccess ( "addressbook", QString::null , vcard_backend, true );
+		access->add( c );
+		access->save();
+		delete access;
+
 		filename = beamfile;
 	}
+
+
 	Ir *ir = new Ir( this );
 	connect( ir, SIGNAL( done( Ir * ) ), this, SLOT( beamDone( Ir * ) ) );
 	QString description = c.fullName();
@@ -621,15 +605,10 @@ void AddressbookWindow::appMessage(const QCString &msg, const QByteArray &data)
 		cnt.setDefaultEmail( email );
 		cnt.setFileAs();
 		
-		if ( bAbEditFirstTime ) {
-			abEditor = new ContactEditor( cnt, &orderedFields, &slOrderedFields,
-						      this, "editor" );
-			bAbEditFirstTime = FALSE;
-		} else {
-			abEditor->setEntry( cnt );
-		}
-		abView()->init( cnt );
-		editEntry( NewEntry );
+		m_abView -> addEntry( cnt );
+		
+		// :SXm_abView()->init( cnt );
+		editEntry( EditEntry );
 		
 		
 		
@@ -666,86 +645,16 @@ void AddressbookWindow::appMessage(const QCString &msg, const QByteArray &data)
 	
 }
 
-void AddressbookWindow::editPersonal()
-{
-	QString filename = addressbookPersonalVCardName();
-	OContact me;
-	if (QFile::exists(filename))
-		me = OContact::readVCard( filename )[0];
-	if (bAbEditFirstTime) {
-		qWarning("Editing personal data");
-		abEditor = new ContactEditor( me, &orderedFields, &slOrderedFields,
-					      this, "editor" );
-		// don't create a new editor every time
-		bAbEditFirstTime = FALSE;
-	} else{
-		abEditor->setEntry( me );
-	}
-
-	abEditor->setPersonalView( true );
-	
-	abEditor->setCaption(tr("Edit My Personal Details"));
-	abEditor->showMaximized();
-	
-	// fix the foxus...
-	abEditor->setNameFocus();
-	if ( abEditor->exec() ) {
-		setFocus();
-		OContact new_personal = abEditor->entry();
-		QString fname = addressbookPersonalVCardName();
-		OContact::writeVCard( fname, new_personal );
-		abView()->init(new_personal);
-		abView()->sync();
-	}
-	abEditor->setCaption( tr("Edit Address") );
-	abEditor->setPersonalView( false );
-}
-
-void AddressbookWindow::slotPersonalView()
-{
-	if (!actionPersonal->isOn()) {
-		// we just turned it off
-		setCaption( tr("Contacts") );
-		actionNew->setEnabled(TRUE);
-		actionTrash->setEnabled(TRUE);
-		actionFind->setEnabled(TRUE);
-		slotUpdateToolbar(); // maybe some of the above could be moved there
-		showList();
-		return;
-	}
-	
-	// XXX need to disable some QActions.
-	actionNew->setEnabled(FALSE);
-	actionTrash->setEnabled(FALSE);
-#ifndef MAKE_FOR_SHARP_ROM
-	actionFind->setEnabled(FALSE);
-#endif
-	actionMail->setEnabled(FALSE);
-	
-	setCaption( tr("Contacts - My Personal Details") );
-	QString filename = addressbookPersonalVCardName();
-	OContact me;
-	if (QFile::exists(filename))
-		me = OContact::readVCard( filename )[0];
-	
-	abView()->init( me );
-	abView()->sync();
-	listContainer->hide();
-	setCentralWidget( abView() );
-	mView->show();
-	mView->setFocus();
-}
-
 void AddressbookWindow::editEntry( EntryMode entryMode )
 {
 	OContact entry;
-	if ( bAbEditFirstTime ) {
-		abEditor = new ContactEditor( entry, &orderedFields, &slOrderedFields,
-					      this, "editor" );
-		bAbEditFirstTime = FALSE;
-		if ( entryMode == EditEntry )
-			abEditor->setEntry( abList->currentEntry() );
+	if ( !abEditor ) {
+		abEditor = new ContactEditor( entry, this, "editor" );
 	}
+	if ( entryMode == EditEntry )
+		abEditor->setEntry( m_abView -> currentEntry() );
+	else if ( entryMode == NewEntry )
+		abEditor->setEntry( entry );
 	// other things may chane the caption.
 	abEditor->setCaption( tr("Edit Address") );
 	
@@ -759,17 +668,63 @@ void AddressbookWindow::editEntry( EntryMode entryMode )
 		if ( entryMode == NewEntry ) {
 			OContact insertEntry = abEditor->entry();
 			insertEntry.assignUid();
-			abList->addEntry( insertEntry );
+			m_abView -> addEntry( insertEntry );
 		} else {
-			OContact replaceEntry = abEditor->entry();
-			if ( !replaceEntry.isValidUid() )
-				replaceEntry.assignUid();
-			abList->replaceCurrentEntry( replaceEntry );
+			OContact replEntry = abEditor->entry();
+
+			if ( !replEntry.isValidUid() )
+				replEntry.assignUid();
+
+			m_abView -> replaceEntry( replEntry );
 		}
 	}
-	populateCategories();
-	showList();
+	// populateCategories();
+
 }
+
+void AddressbookWindow::editPersonal()
+{
+	OContact entry;
+	if ( !abEditor ) {
+		abEditor = new ContactEditor( entry, this, "editor" );
+	}
+
+ 	abEditor->setCaption(tr("Edit My Personal Details"));
+ 	abEditor->setPersonalView( true );
+	editEntry( EditEntry );
+ 	abEditor->setPersonalView( false );
+
+}
+
+
+void AddressbookWindow::slotPersonalView()
+{
+	if (!actionPersonal->isOn()) {
+		// we just turned it off
+		setCaption( tr("Contacts") );
+		actionNew->setEnabled(TRUE);
+		actionTrash->setEnabled(TRUE);
+		actionFind->setEnabled(TRUE);
+		actionMail->setEnabled(TRUE);
+		// slotUpdateToolbar();
+
+		m_abView->showPersonal( false );
+		
+		return;
+	}
+	
+	// XXX need to disable some QActions.
+	actionNew->setEnabled(FALSE);
+	actionTrash->setEnabled(FALSE);
+	actionFind->setEnabled(FALSE);
+	actionMail->setEnabled(FALSE);
+	
+	setCaption( tr("Contacts - My Personal Details") );
+
+	m_abView->showPersonal( true );
+	
+}
+
 
 void AddressbookWindow::listIsEmpty( bool empty )
 {
@@ -781,30 +736,19 @@ void AddressbookWindow::listIsEmpty( bool empty )
 void AddressbookWindow::reload()
 {
 	syncing = FALSE;
-	abList->clear();
-	abList->reload();
+	m_abView->clear();
+	m_abView->reload();
 }
 
 void AddressbookWindow::flush()
 {
 	syncing = TRUE;
-	abList->save();
+	m_abView->save();
 }
 
 
 void AddressbookWindow::closeEvent( QCloseEvent *e )
 {
-	if ( centralWidget() == mView ) {
-		if (actionPersonal->isOn()) {
-			// pretend we clicked it off
-			actionPersonal->setOn(FALSE);
-			slotPersonalView();
-		} else {
-			showList();
-		}
-		e->ignore();
-		return;
-	}
 	
 	if(syncing) {
 		/* shouldn't we save, I hear you say? well its already been set
@@ -828,7 +772,7 @@ void AddressbookWindow::closeEvent( QCloseEvent *e )
 
 bool AddressbookWindow::save()
 {
-	if ( !abList->save() ) {
+	if ( !m_abView->save() ) {
 		if ( QMessageBox::critical( 0, tr( "Out of space" ),
 					    tr("Unable to save information.\n"
 					       "Free up some space\n"
@@ -851,173 +795,6 @@ void AddressbookWindow::slotSave()
 }
 #endif
 
-void AddressbookWindow::slotSettings()
-{
-	AddressSettings frmSettings( this );
-#if defined(Q_WS_QWS) || defined(_WS_QWS_)
-	frmSettings.showMaximized();
-#endif
-	
-	if ( frmSettings.exec() ) {
-		allFields.clear();
-		orderedFields.clear();
-		slOrderedFields.clear();
-		initFields();
-		if ( abEditor )
-			abEditor->loadFields();
-		abList->refresh();
-	}
-}
-
-
-void AddressbookWindow::initFields()
-{
-	// we really don't need the things from the configuration, anymore
-	// only thing that is important are the important categories.  So,
-	// Call the contact functions that correspond to these old functions...
-	
-	QStringList xmlFields = OContact::fields();
-	QStringList visibleFields = OContact::untrfields();
-	// QStringList trFields = OContact::trfields();
-
-	xmlFields.remove( "Title" );
-	visibleFields.remove( "Name Title" );
-	visibleFields.remove( "Notes" );
-	
-	int i, version;
-	Config cfg( "AddressBook" );
-	QString zn;
-	
-	// ### Write a function to keep this from happening again...
-	QStringList::ConstIterator it;
-	for ( i = 0, it = xmlFields.begin(); it != xmlFields.end(); ++it, i++ ) {
-		allFields.append( i + 3 );
-	}
-	
-	cfg.setGroup( "Version" );
-	version = cfg.readNumEntry( "version" );
-	i = 0;
-	startFontSize = 1;
-	
-	if ( version >= ADDRESSVERSION ) {
-		
-		cfg.setGroup( "ImportantCategory" );
-		
-		zn = cfg.readEntry( "Category" + QString::number(i), QString::null );
-		while ( !zn.isNull() ) {
-			if ( zn.contains( "Work" ) || zn.contains( "Mb" ) ) {
-				slOrderedFields.clear();
-				break;
-			}
-			slOrderedFields.append( zn );
-			zn = cfg.readEntry( "Category" + QString::number(++i), QString::null );
-		}
-		cfg.setGroup( "Font" );
-		startFontSize = cfg.readNumEntry( "fontSize", 1 );
-		
-		
-	} else {
-		QString str;
-		str = getenv("HOME");
-		str += "/Settings/AddressBook.conf";
-		QFile::remove( str );
-	}
-	
-	if ( slOrderedFields.count() > 0 ) {
-		for( QStringList::ConstIterator it = slOrderedFields.begin();
-		     it != slOrderedFields.end(); ++it ) {
-			QValueList<int>::ConstIterator itVl;
-			QStringList::ConstIterator itVis;
-			itVl = allFields.begin();
-			for ( itVis = visibleFields.begin();
-			      itVis != visibleFields.end() && itVl != allFields.end();
-			      ++itVis, ++itVl ) {
-				if ( *it == *itVis && itVl != allFields.end() ) {
-					orderedFields.append( *itVl );
-				}
-			}
-		}
-	} else {
-		QValueList<int>::ConstIterator it;
-		for ( it = allFields.begin(); it != allFields.end(); ++it )
-			orderedFields.append( *it );
-		
-		slOrderedFields = visibleFields;
-		orderedFields.remove( Qtopia::AddressUid );
-		orderedFields.remove( Qtopia::Title );
-		orderedFields.remove( Qtopia::Groups );
-		orderedFields.remove( Qtopia::AddressCategory );
-		orderedFields.remove( Qtopia::FirstName );
-		orderedFields.remove( Qtopia::LastName );
-		orderedFields.remove( Qtopia::DefaultEmail );
-		orderedFields.remove( Qtopia::FileAs );
-		orderedFields.remove( Qtopia::Notes );
-		orderedFields.remove( Qtopia::Gender );
-		slOrderedFields.remove( "Name Title" );
-		slOrderedFields.remove( "First Name" );
-		slOrderedFields.remove( "Last Name" );
-		slOrderedFields.remove( "File As" );
-		slOrderedFields.remove( "Default Email" );
-		slOrderedFields.remove( "Notes" );
-		slOrderedFields.remove( "Gender" );
-		
-	}
-}
-
-
-AbLabel *AddressbookWindow::abView()
-{
-	if ( !mView ) {
-		mView = new AbLabel( this, "viewer" );
-		mView->init( OContact()  );
-		connect( mView, SIGNAL( okPressed() ), this, SLOT( slotListView() ) );
-	}
-	return mView;
-}
-
-void AddressbookWindow::slotFindOpen()
-{
-	searchBar->show();
-	abList -> inSearch();
-	searchEdit->setFocus();
-}
-void AddressbookWindow::slotFindClose()
-{
-	searchBar->hide();
-	abList -> offSearch();
-	abList->setFocus();
-}
-void AddressbookWindow::slotFindNext()
-{
-	if ( centralWidget() == abView() )
-		showList();
-
-	abList->slotDoFind( searchEdit->text(), caseSensitive, useRegExp, false);
-	
-	searchEdit->clearFocus();
-	abList->setFocus();
-	if ( abList->numSelections() )
-		abList->clearSelection();
-
-}
-void AddressbookWindow::slotFindPrevious()
-{
-	if ( centralWidget() == abView() )
-		showList();
-
-	abList->slotDoFind( searchEdit->text(), caseSensitive, useRegExp, true);
-	
-	if ( abList->numSelections() )
-		abList->clearSelection();
-
-}
-
-void AddressbookWindow::slotFind()
-{
-	
-	abList->clearFindRow();
-	slotFindNext();
-}
 
 void AddressbookWindow::slotNotFound()
 {
@@ -1031,60 +808,113 @@ void AddressbookWindow::slotNotFound()
 void AddressbookWindow::slotWrapAround()
 {
 	qWarning("Got wrap signal !");
-	if ( doNotifyWrapAround )
-		QMessageBox::information( this, tr( "End of list" ),
-					  tr( "End of list. Wrap around now.. !" ) + "\n" );
+// 	if ( doNotifyWrapAround )
+// 		QMessageBox::information( this, tr( "End of list" ),
+// 					  tr( "End of list. Wrap around now.. !" ) + "\n" );
 		
 }
 
 void AddressbookWindow::slotSetCategory( int c )
 {
+	qWarning( "void AddressbookWindow::slotSetCategory( %d ) from %d", c, catMenu->count() );
 	
 	QString cat, book;
+	AbView::Views  view = AbView::TableView;
 	
 	if ( c <= 0 )
 		return;
 	
-	// Set checkItem for selected one
-	for ( unsigned int i = 1; i < catMenu->count(); i++ )
-		catMenu->setItemChecked( i, c == (int)i );
+	// Checkmark Book Menu Item Selected 
+	if ( c < 3 )
+		for ( unsigned int i = 1; i < 3; i++ )
+			catMenu->setItemChecked( i, c == (int)i );
+	// Checkmark Category Menu Item Selected 
+	else
+		for ( unsigned int i = 3; i < catMenu->count(); i++ )
+			catMenu->setItemChecked( i, c == (int)i );
 	
 	for ( unsigned int i = 1; i < catMenu->count(); i++ ) {
 		if (catMenu->isItemChecked( i )) {
-			if ( i == 1 ) // default List view
+			if ( i == 1 ){ // default List view
 				book = QString::null;
-			else if ( i == 2 )
-				book = "Phone";
-			else if ( i == 3 )
-				book = "Company";
-			else if ( i == 4 )
-				book = "Email";
-			else if ( i == 5 )
-				book = "Cards";
-			else if ( i == 6 ) // default All Categories
+				view = AbView::TableView;
+			}else if ( i == 2 ){
+				book = tr( "Cards" );
+				view = AbView::CardView;
+// 			}else if ( i == 3 ){
+// 				book = tr( "Personal" );
+// 				view = AbView:: PersonalView;
+			}else if ( i == 3 ){ // default All Categories
 				cat = QString::null;
-			else if ( i == (unsigned int)catMenu->count() ) // last menu option will be Unfiled
+			}else if ( i == (unsigned int)catMenu->count() - 1 ){ // last menu option (seperator is counted, too) will be Unfiled
 				cat = "Unfiled";
-			else
-				cat = abList->categories()[i - 7];
+				qWarning ("Unfiled selected!!!");
+			}else{
+				cat = m_abView->categories()[i - 4];
+			}
 		}
 	}
 	
-	abList->setShowCategory( book, cat );
-	
+	slotViewSwitched( view );
+
+	m_abView -> setShowByCategory( view, cat );
+
 	if ( book.isEmpty() )
 		book = "List";
 	if ( cat.isEmpty() )
 		cat = "All";
 	
-	setCaption( tr( "Contacts" ) + " - " + tr( book ) + " - " + tr( cat ) );
+	setCaption( tr( "Contacts" ) + " - " + book + " - " + tr( cat ) );
+}
+
+void AddressbookWindow::slotViewSwitched( int view )
+{
+	qWarning( "void AddressbookWindow::slotViewSwitched( %d )", view );
+	int menu = 0;
+	switch ( view ){
+	case AbView::TableView:
+		menu = 1;
+		m_tableViewButton->setOn(true);
+		m_cardViewButton->setOn(false);
+		break;
+	case AbView::CardView:
+		menu = 2;
+		m_tableViewButton->setOn(false);
+		m_cardViewButton->setOn(true);
+		break;
+// 	case AbView::PersonalView:
+// 		menu = 3;
+// 		break;
+// 	case AbView::CompanyBook:
+// 		menu = 3;
+// 		break;
+// 	case AbView::EmailBook:
+// 		menu = 4;
+// 		break;
+	}
+	for ( unsigned int i = 1; i < 3; i++ ){
+		if ( catMenu )
+			catMenu->setItemChecked( i, menu == (int)i );
+	}
+}
+
+
+void AddressbookWindow::slotListView()
+{
+	emit slotSetCategory( AbView::TableView +1 );
+}
+
+void AddressbookWindow::slotCardView()
+{
+	emit slotSetCategory( AbView::CardView +1 );
 }
 
 void AddressbookWindow::slotSetLetter( char c ) {
 	
-	abList->setShowByLetter( c );
+ 	m_abView->setShowByLetter( c );
 	
 }
+
 
 void AddressbookWindow::populateCategories()
 {
@@ -1094,38 +924,37 @@ void AddressbookWindow::populateCategories()
 	id = 1;
 	rememberId = 0;
 	
-	catMenu->insertItem( tr( "List" ), id++ );
-	catMenu->insertItem( tr( "Phone Book" ), id++ );
-	catMenu->insertItem( tr( "Company Book" ), id++ );
-	catMenu->insertItem( tr( "Email Book" ), id++ );
-	catMenu->insertItem( tr( "Cards" ), id++ );
+	catMenu->insertItem( Resource::loadPixmap( "datebook/weeklst" ), tr( "List" ), id++ );
+	catMenu->insertItem( Resource::loadPixmap( "day" ), tr( "Cards" ), id++ );
+// 	catMenu->insertItem( tr( "Personal" ), id++ );
 	catMenu->insertSeparator();
 	
 	catMenu->insertItem( tr( "All" ), id++ );
-	QStringList categories = abList->categories();
+	QStringList categories = m_abView->categories();
 	categories.append( tr( "Unfiled" ) );
 	for ( QStringList::Iterator it = categories.begin();
 	      it != categories.end(); ++it ) {
 		catMenu->insertItem( *it, id );
-		if ( *it == abList->showCategory() )
+		if ( *it == m_abView -> showCategory() )
 			rememberId = id;
 		++id;
 	}
 
-	if ( abList->showBook().isEmpty() ) {
-		catMenu->setItemChecked( 1, true );
-	} else if ( abList->showBook() == "Phone" ) {
-		catMenu->setItemChecked( 2, true );
-	} else if ( abList->showBook() == "Company" ) {
-		catMenu->setItemChecked( 3, true );
-	} else if ( abList->showBook() == "Email" ) {
-		catMenu->setItemChecked( 4, true );
-	} else if ( abList->showBook() == "Cards" ) {
-		catMenu->setItemChecked( 5, true );
-	}
+	// :SX
+// 	if ( abList->showBook().isEmpty() ) {
+// 		catMenu->setItemChecked( 1, true );
+// 	} else if ( abList->showBook() == "Phone" ) {
+// 		catMenu->setItemChecked( 2, true );
+// 	} else if ( abList->showBook() == "Company" ) {
+// 		catMenu->setItemChecked( 3, true );
+// 	} else if ( abList->showBook() == "Email" ) {
+// 		catMenu->setItemChecked( 4, true );
+// 	} else if ( abList->showBook() == "Cards" ) {
+// 		catMenu->setItemChecked( 5, true );
+// 	}
 	
-	if ( abList->showCategory().isEmpty() ) {
-		slotSetCategory( 6 );
+	if ( m_abView -> showCategory().isEmpty() ) {
+		slotSetCategory( 3 );
 	}
 	else {
 		slotSetCategory( rememberId );

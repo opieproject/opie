@@ -28,6 +28,8 @@
 #include <qstringlist.h>
 #include <qlineedit.h>
 #include "ofloatbar.h"
+#include "abview.h"
+#include "abconfig.h"
 
 class ContactEditor;
 class AbLabel;
@@ -44,14 +46,14 @@ class AddressbookWindow: public QMainWindow
 {
 	Q_OBJECT
 public:
+	enum EntryMode { NewEntry=0, EditEntry };
+
 	AddressbookWindow( QWidget *parent = 0, const char *name = 0, WFlags f = 0 );
 	~AddressbookWindow();
 
 protected:
 	void resizeEvent( QResizeEvent * e );
-	void showList();
-	void showView();
-	enum EntryMode { NewEntry=0, EditEntry };
+
 	void editPersonal();
 	void editEntry( EntryMode );
 	void closeEvent( QCloseEvent *e );
@@ -62,8 +64,6 @@ public slots:
 	void reload();
 	void appMessage(const QCString &, const QByteArray &);
 	void setDocument( const QString & );
-	void slotFindNext();
-	void slotFindPrevious();
 #ifdef __DEBUG_RELEASE
 	void slotSave();
 #endif
@@ -71,13 +71,13 @@ public slots:
 private slots:
 	void importvCard();
 	void slotListNew();
-	void slotListView();
+/* 	void slotListView(); */
 	void slotListDelete();
 	void slotViewBack();
 	void slotViewEdit();
 	void slotPersonalView();
 	void listIsEmpty( bool );
-	void slotSettings();
+/*  	void slotSettings();  */
 	void writeMail();
 	void slotBeam();
 	void beamDone( Ir * );
@@ -92,45 +92,46 @@ private slots:
 	void slotNotFound();
 	void slotWrapAround();
 
+	void slotViewSwitched( int );
+	void slotListView();
+	void slotCardView();
+
 	void slotConfig();
 
 private:
-	void initFields();  // inititialize our fields...
-	AbLabel *abView();
+	//	void initFields();  // inititialize our fields...
+	// AbLabel *abView();
 	void populateCategories();
 
-	QPopupMenu *catMenu, *fontMenu;
+	QPopupMenu *catMenu;
 	QPEToolBar *listTools;
 	QToolButton *deleteButton;
-	QValueList<int> allFields, orderedFields;
-	QStringList slOrderedFields;
+	//	QValueList<int> allFields, orderedFields;
+	//	QStringList slOrderedFields;
 	enum Panes { paneList=0, paneView, paneEdit };
 	ContactEditor *abEditor;
-	AbLabel *mView;
 	LetterPicker *pLabel;
-	AbTable *abList;
+	AbView* m_abView;
 	QWidget *listContainer;
 
 	// Searching stuff
 	OFloatBar* searchBar;
 	QLineEdit* searchEdit;
-	bool useRegExp;
-	bool doNotifyWrapAround;
-	bool caseSensitive;
-
-	bool m_useQtMail;
-	bool m_useOpieMail;
 
 	QAction *actionNew, *actionEdit, *actionTrash, *actionFind, *actionBeam, *actionPersonal, *actionMail;
 
-	bool bAbEditFirstTime;
 	int viewMargin;
 
 	bool syncing;
 	QFont *defaultFont;
-	int startFontSize;
+	int m_curFontSize;
 
 	bool isLoading;
+
+	AbConfig m_config;
+
+	QAction* m_tableViewButton;
+	QAction* m_cardViewButton;
 };
 
 #endif

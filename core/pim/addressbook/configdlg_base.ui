@@ -12,9 +12,16 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>244</width>
-            <height>298</height>
+            <width>276</width>
+            <height>327</height>
         </rect>
+    </property>
+    <property stdset="1">
+        <name>sizePolicy</name>
+        <sizepolicy>
+            <hsizetype>5</hsizetype>
+            <vsizetype>5</vsizetype>
+        </sizepolicy>
     </property>
     <property stdset="1">
         <name>caption</name>
@@ -24,10 +31,13 @@
         <name>sizeGripEnabled</name>
         <bool>true</bool>
     </property>
+    <property>
+        <name>layoutMargin</name>
+    </property>
     <vbox>
         <property stdset="1">
             <name>margin</name>
-            <number>11</number>
+            <number>1</number>
         </property>
         <property stdset="1">
             <name>spacing</name>
@@ -39,8 +49,18 @@
                 <name>name</name>
                 <cstring>configDlg_base</cstring>
             </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>7</hsizetype>
+                    <vsizetype>7</vsizetype>
+                </sizepolicy>
+            </property>
             <property>
                 <name>layoutMargin</name>
+            </property>
+            <property>
+                <name>layoutSpacing</name>
             </property>
             <widget>
                 <class>QWidget</class>
@@ -50,7 +70,7 @@
                 </property>
                 <attribute>
                     <name>title</name>
-                    <string>Search</string>
+                    <string>Misc</string>
                 </attribute>
                 <vbox>
                     <property stdset="1">
@@ -62,16 +82,95 @@
                         <number>6</number>
                     </property>
                     <widget>
-                        <class>QButtonGroup</class>
+                        <class>QGroupBox</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>ButtonGroup1</cstring>
+                            <cstring>GroupBox2</cstring>
                         </property>
                         <property stdset="1">
                             <name>title</name>
-                            <string>Query Style</string>
+                            <string>Search Settings</string>
                         </property>
                         <vbox>
+                            <property stdset="1">
+                                <name>margin</name>
+                                <number>11</number>
+                            </property>
+                            <property stdset="1">
+                                <name>spacing</name>
+                                <number>6</number>
+                            </property>
+                            <widget>
+                                <class>QButtonGroup</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>ButtonGroup1</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>title</name>
+                                    <string>Query Style</string>
+                                </property>
+                                <vbox>
+                                    <property stdset="1">
+                                        <name>margin</name>
+                                        <number>11</number>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>spacing</name>
+                                        <number>6</number>
+                                    </property>
+                                    <widget>
+                                        <class>QRadioButton</class>
+                                        <property stdset="1">
+                                            <name>name</name>
+                                            <cstring>m_useRegExp</cstring>
+                                        </property>
+                                        <property stdset="1">
+                                            <name>text</name>
+                                            <string>Use Regular Expressions</string>
+                                        </property>
+                                    </widget>
+                                    <widget>
+                                        <class>QRadioButton</class>
+                                        <property stdset="1">
+                                            <name>name</name>
+                                            <cstring>m_useWildCard</cstring>
+                                        </property>
+                                        <property stdset="1">
+                                            <name>text</name>
+                                            <string>Use Wildcards (*,?)</string>
+                                        </property>
+                                        <property stdset="1">
+                                            <name>checked</name>
+                                            <bool>true</bool>
+                                        </property>
+                                    </widget>
+                                </vbox>
+                            </widget>
+                            <widget>
+                                <class>QCheckBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>m_useCaseSensitive</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Case Sensitive</string>
+                                </property>
+                            </widget>
+                        </vbox>
+                    </widget>
+                    <widget>
+                        <class>QButtonGroup</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>ButtonGroup3</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>title</name>
+                            <string>Font</string>
+                        </property>
+                        <hbox>
                             <property stdset="1">
                                 <name>margin</name>
                                 <number>11</number>
@@ -84,51 +183,40 @@
                                 <class>QRadioButton</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>m_useRegExp</cstring>
+                                    <cstring>m_smallFont</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
-                                    <string>Use Regular Expressions</string>
+                                    <string>Small</string>
                                 </property>
                             </widget>
                             <widget>
                                 <class>QRadioButton</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>m_useWildCard</cstring>
+                                    <cstring>m_normalFont</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
-                                    <string>Use Wildcards (*,?)</string>
+                                    <string>Normal</string>
                                 </property>
                                 <property stdset="1">
                                     <name>checked</name>
                                     <bool>true</bool>
                                 </property>
                             </widget>
-                        </vbox>
-                    </widget>
-                    <widget>
-                        <class>QCheckBox</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>m_useCaseSensitive</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>text</name>
-                            <string>Case Sensitive</string>
-                        </property>
-                    </widget>
-                    <widget>
-                        <class>QCheckBox</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>m_signalWrapAround</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>text</name>
-                            <string>Signal Wrap Around</string>
-                        </property>
+                            <widget>
+                                <class>QRadioButton</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>m_largeFont</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Large</string>
+                                </property>
+                            </widget>
+                        </hbox>
                     </widget>
                     <spacer>
                         <property>
@@ -256,82 +344,204 @@ is provided free !</string>
                     </spacer>
                 </vbox>
             </widget>
-        </widget>
-        <widget>
-            <class>QLayoutWidget</class>
-            <property stdset="1">
-                <name>name</name>
-                <cstring>Layout1</cstring>
-            </property>
-            <hbox>
+            <widget>
+                <class>QWidget</class>
                 <property stdset="1">
-                    <name>margin</name>
-                    <number>0</number>
+                    <name>name</name>
+                    <cstring>tab</cstring>
                 </property>
-                <property stdset="1">
-                    <name>spacing</name>
-                    <number>6</number>
-                </property>
-                <widget>
-                    <class>QPushButton</class>
+                <attribute>
+                    <name>title</name>
+                    <string>Order</string>
+                </attribute>
+                <vbox>
                     <property stdset="1">
-                        <name>name</name>
-                        <cstring>buttonOk</cstring>
+                        <name>margin</name>
+                        <number>-1</number>
                     </property>
                     <property stdset="1">
-                        <name>text</name>
-                        <string>&amp;OK</string>
+                        <name>spacing</name>
+                        <number>-1</number>
                     </property>
-                    <property stdset="1">
-                        <name>autoDefault</name>
-                        <bool>true</bool>
-                    </property>
-                    <property stdset="1">
-                        <name>default</name>
-                        <bool>true</bool>
-                    </property>
-                </widget>
-                <widget>
-                    <class>QPushButton</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>buttonCancel</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>&amp;Cancel</string>
-                    </property>
-                    <property stdset="1">
-                        <name>autoDefault</name>
-                        <bool>true</bool>
-                    </property>
-                </widget>
-            </hbox>
+                    <widget>
+                        <class>QGroupBox</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>GroupBox9</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>title</name>
+                            <string>Select Contact Order:</string>
+                        </property>
+                        <grid>
+                            <property stdset="1">
+                                <name>margin</name>
+                                <number>11</number>
+                            </property>
+                            <property stdset="1">
+                                <name>spacing</name>
+                                <number>6</number>
+                            </property>
+                            <widget row="0"  column="2" >
+                                <class>QPushButton</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>m_upButton</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>sizePolicy</name>
+                                    <sizepolicy>
+                                        <hsizetype>1</hsizetype>
+                                        <vsizetype>0</vsizetype>
+                                    </sizepolicy>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Up</string>
+                                </property>
+                                <property stdset="1">
+                                    <name>autoRepeat</name>
+                                    <bool>true</bool>
+                                </property>
+                            </widget>
+                            <widget row="1"  column="2" >
+                                <class>QPushButton</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>m_downButton</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>sizePolicy</name>
+                                    <sizepolicy>
+                                        <hsizetype>1</hsizetype>
+                                        <vsizetype>0</vsizetype>
+                                    </sizepolicy>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Down</string>
+                                </property>
+                                <property stdset="1">
+                                    <name>autoRepeat</name>
+                                    <bool>true</bool>
+                                </property>
+                            </widget>
+                            <widget row="4"  column="0"  rowspan="1"  colspan="2" >
+                                <class>QListBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>allFieldListBox</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>sizePolicy</name>
+                                    <sizepolicy>
+                                        <hsizetype>7</hsizetype>
+                                        <vsizetype>7</vsizetype>
+                                    </sizepolicy>
+                                </property>
+                            </widget>
+                            <widget row="3"  column="0" >
+                                <class>QPushButton</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>m_addButton</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>sizePolicy</name>
+                                    <sizepolicy>
+                                        <hsizetype>1</hsizetype>
+                                        <vsizetype>0</vsizetype>
+                                    </sizepolicy>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Add</string>
+                                </property>
+                            </widget>
+                            <widget row="3"  column="1" >
+                                <class>QPushButton</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>m_removeButton</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>sizePolicy</name>
+                                    <sizepolicy>
+                                        <hsizetype>1</hsizetype>
+                                        <vsizetype>0</vsizetype>
+                                    </sizepolicy>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Remove</string>
+                                </property>
+                            </widget>
+                            <spacer row="2"  column="2" >
+                                <property>
+                                    <name>name</name>
+                                    <cstring>Spacer23</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>orientation</name>
+                                    <enum>Vertical</enum>
+                                </property>
+                                <property stdset="1">
+                                    <name>sizeType</name>
+                                    <enum>Expanding</enum>
+                                </property>
+                                <property>
+                                    <name>sizeHint</name>
+                                    <size>
+                                        <width>20</width>
+                                        <height>20</height>
+                                    </size>
+                                </property>
+                            </spacer>
+                            <spacer row="3"  column="2"  rowspan="2"  colspan="1" >
+                                <property>
+                                    <name>name</name>
+                                    <cstring>Spacer2_2</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>orientation</name>
+                                    <enum>Vertical</enum>
+                                </property>
+                                <property stdset="1">
+                                    <name>sizeType</name>
+                                    <enum>Expanding</enum>
+                                </property>
+                                <property>
+                                    <name>sizeHint</name>
+                                    <size>
+                                        <width>20</width>
+                                        <height>20</height>
+                                    </size>
+                                </property>
+                            </spacer>
+                            <widget row="0"  column="0"  rowspan="3"  colspan="2" >
+                                <class>QListBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>fieldListBox</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>sizePolicy</name>
+                                    <sizepolicy>
+                                        <hsizetype>7</hsizetype>
+                                        <vsizetype>7</vsizetype>
+                                    </sizepolicy>
+                                </property>
+                            </widget>
+                        </grid>
+                    </widget>
+                </vbox>
+            </widget>
         </widget>
     </vbox>
 </widget>
-<connections>
-    <connection>
-        <sender>buttonOk</sender>
-        <signal>clicked()</signal>
-        <receiver>Configuration</receiver>
-        <slot>accept()</slot>
-    </connection>
-    <connection>
-        <sender>buttonCancel</sender>
-        <signal>clicked()</signal>
-        <receiver>Configuration</receiver>
-        <slot>reject()</slot>
-    </connection>
-</connections>
 <tabstops>
     <tabstop>configDlg_base</tabstop>
-    <tabstop>m_useWildCard</tabstop>
-    <tabstop>m_useCaseSensitive</tabstop>
-    <tabstop>m_signalWrapAround</tabstop>
     <tabstop>m_useQtMail</tabstop>
     <tabstop>m_useOpieMail</tabstop>
-    <tabstop>buttonOk</tabstop>
-    <tabstop>buttonCancel</tabstop>
 </tabstops>
 </UI>
