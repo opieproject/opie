@@ -1082,7 +1082,7 @@ QDataStream &operator>>( QDataStream &s, DataElem &d)
     int i;
     int size;
     TVVariant t;
-    int index = 0;
+    Q_UINT16 index = 0;
 
     s >> size; /* redundent data but makes streaming easier */
     if (size != d.getNumFields()) {
@@ -1091,7 +1091,7 @@ QDataStream &operator>>( QDataStream &s, DataElem &d)
     }
 
     for(i = 0; i < size; i++) {
-        s >> (Q_UINT16)index;
+        s >> index;
         s >> t;
         d.setField(index, t);
     }
