@@ -120,6 +120,8 @@ private:
     bool syncing;
     bool inSearch;
 
+	int alarmCounter;
+
     QString checkEvent(const Event &);
 };
 

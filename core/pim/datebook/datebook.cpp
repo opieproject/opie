@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.8 2002-05-09 11:58:33 dwmw2 Exp $
+** $Id: datebook.cpp,v 1.9 2002-06-09 23:42:42 sandman Exp $
 **
 **********************************************************************/
 
@@ -81,7 +81,8 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
       presetTime( -1 ),
       startTime( 8 ), // an acceptable default
       syncing(FALSE),
-      inSearch(FALSE)
+      inSearch(FALSE),
+      alarmCounter(0)
 {
     QTime t;
     t.start();
@@ -614,6 +615,7 @@ void DateBook::appMessage(const QCString& msg, const QByteArray& data)
 	    if ( found ) {
 		if ( bSound ) {
 		    Sound::soundAlarm();
+		    alarmCounter = 0;
 		    stopTimer = startTimer( 5000 );
 		}
 
@@ -683,14 +685,12 @@ void DateBook::flush()
 
 void DateBook::timerEvent( QTimerEvent *e )
 {
-    static int stop = 0;
-    if ( stop < 10 ) {
+    if ( alarmCounter < 10 ) {
+	alarmCounter++;
 	Sound::soundAlarm();
-	stop++;
-    } else {
-	stop = 0;
+    } 
+    else
 	killTimer( e->timerId() );
-    }
 }
 
 void DateBook::changeClock( bool newClock )
