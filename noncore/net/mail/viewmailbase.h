@@ -29,6 +29,7 @@ protected:
 
 protected slots:
 	void slotChangeAttachview(bool state);
+    virtual void keyPressEvent ( QKeyEvent * e );
 
 
 };

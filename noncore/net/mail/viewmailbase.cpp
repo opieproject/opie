@@ -79,4 +79,12 @@ void ViewMailBase::slotChangeAttachview(bool state)
 	else attachments->hide();
 }
 
-
+void ViewMailBase::keyPressEvent ( QKeyEvent * e )
+{
+    if( e->key()==Qt::Key_Escape ) {
+        close();
+        e->accept();
+        return;
+    }
+    QWidget::keyPressEvent(e);
+}
