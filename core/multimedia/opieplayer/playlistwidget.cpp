@@ -18,7 +18,6 @@
 **
 **********************************************************************/
 // code added by L. J. Potter Sat 03-02-2002 06:17:54
-
 #include <qpe/qpemenubar.h>
 #include <qpe/qpetoolbar.h>
 #include <qpe/fileselector.h>
@@ -256,6 +255,7 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     playLists = new FileSelector( "playlist/plain", LTab, "fileselector" , FALSE, FALSE); //buggy
     playLists->setMinimumSize(233,260);;
     tabWidget->insertTab(LTab,"Lists");
+
     connect( playLists, SIGNAL( fileSelected( const DocLnk &) ), this, SLOT( loadList( const DocLnk & ) ) );
 //      connect( playLists, SIGNAL( newSelected( const DocLnk &) ), this, SLOT( newFile( const DocLnk & ) ) );
 
@@ -264,10 +264,10 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
    QPEApplication::setStylusOperation( this, QPEApplication::RightOnHold );
 
 
-   connect( audioView, SIGNAL( rightButtonClicked( QListViewItem *, const QPoint &, int)),
-            this, SLOT( fauxPlay( QListViewItem *) ) );
-   connect( videoView, SIGNAL( rightButtonClicked( QListViewItem *, const QPoint &, int)),
-            this, SLOT( fauxPlay( QListViewItem *)) );
+//     connect( audioView, SIGNAL( rightButtonClicked( QListViewItem *, const QPoint &, int)),
+//              this, SLOT( fauxPlay( QListViewItem *) ) );
+//     connect( videoView, SIGNAL( rightButtonClicked( QListViewItem *, const QPoint &, int)),
+//              this, SLOT( fauxPlay( QListViewItem *)) );
 
 //    connect( audioView, SIGNAL( clicked( QListViewItem *) ), this, SLOT( fauxPlay( QListViewItem *) ) );
 //    connect( videoView, SIGNAL( clicked( QListViewItem *) ), this, SLOT( fauxPlay( QListViewItem *) ) );
@@ -288,7 +288,11 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
 
     Config cfg( "MediaPlayer" );
     readConfig( cfg );
-
+    QString currentPlaylist = cfg.readEntry("CurrentPlaylist","");
+//    qDebug("currentList is "+currentPlaylist);
+    loadList(DocLnk( currentPlaylist));
+    setCaption("OpiePlayer: "+ currentPlaylist );
+    
     initializeStates();
 }
 
@@ -296,6 +300,7 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
 PlayListWidget::~PlayListWidget() {
     Config cfg( "MediaPlayer" );
     writeConfig( cfg );
+     
 
     if ( d->current )
   delete d->current;
@@ -312,9 +317,8 @@ void PlayListWidget::initializeStates() {
 //     d->tbScale->setOn( mediaPlayerState->scaled() );
 //     d->tbScale->setEnabled( mediaPlayerState->fullscreen() );
 //    setPlaylist( mediaPlayerState->playlist() );
-        setPlaylist( true);
-        d->selectedFiles->first();
-
+     setPlaylist( true);
+     d->selectedFiles->first();
 }
 
 
@@ -372,7 +376,7 @@ void PlayListWidget::writeConfig( Config& cfg ) const {
 
 
 void PlayListWidget::addToSelection( const DocLnk& lnk ) {
-    qDebug("add");
+//    qDebug("add");
     d->setDocumentUsed = FALSE;
     if ( mediaPlayerState->playlist() )
         d->selectedFiles->addToSelection( lnk );
@@ -419,6 +423,7 @@ void PlayListWidget::setDocument(const QString& fileref) {
         QMessageBox::critical( 0, tr( "Invalid File" ), tr( "There was a problem in getting the file." ) );
         return;
     }
+//    qDebug("setDocument");
     if(fileref.find("playlist",0,TRUE) == -1) {
     addToSelection( DocLnk( fileref ) );
     d->setDocumentUsed = TRUE;
@@ -533,13 +538,22 @@ void PlayListWidget::saveList() {
 
     QString filename;
     InputDialog *fileDlg;
-    fileDlg=new InputDialog(this,"Save Playlist",TRUE, 0);
+    fileDlg = new InputDialog(this,"Save Playlist",TRUE, 0);
     fileDlg->exec();
     if( fileDlg->result() == 1 ) {
+    if ( d->current )
+        delete d->current;
         filename = fileDlg->LineEdit1->text();//+".playlist";
-        qDebug("saving playlist "+filename+".playlist");
+//        qDebug("saving playlist "+filename+".playlist");
         Config cfg( filename +".playlist");
         writeConfig( cfg );
+        if( playLists->selected()->name() == filename) {
+//            qDebug("same name so delete lnk");
+            QFile().remove(playLists->selected()->file());
+            QFile().remove(playLists->selected()->linkFile());
+            playLists->reread();
+        }
+            
         DocLnk lnk;
 //        lnk.setComment( "");
         lnk.setFile(QDir::homeDirPath()+"/Settings/"+filename+".playlist.conf"); //sets File property
@@ -548,8 +562,11 @@ void PlayListWidget::saveList() {
         lnk.setName( filename); //sets file name
         if(!lnk.writeLink())
             qDebug("Writing doclink did not work");
-    }
-
+      }
+        Config config( "MediaPlayer" );
+        config.writeEntry("CurrentPlaylist",filename);
+        setCaption("OpiePlayer: "+filename);
+        d->selectedFiles->first();
     if(fileDlg)
         delete fileDlg;
 
@@ -557,12 +574,19 @@ void PlayListWidget::saveList() {
 
 
 void PlayListWidget::loadList( const DocLnk & lnk) {
-    qDebug("load list "+ lnk.name()+".playlist");
-    clearList();
-    Config cfg( lnk.name()+".playlist");
-    readConfig(cfg);
-    tabWidget->setCurrentPage(0);
-    setCaption("OpiePlayer: "+lnk.name());
+    QString name= lnk.name();
+//    qDebug("currentList is "+name);
+    if( name.length()>1) {
+        setCaption("OpiePlayer: "+name);
+//    qDebug("load list "+ name+".playlist");
+        clearList();
+        Config cfg( name+".playlist");
+        readConfig(cfg);
+        tabWidget->setCurrentPage(0);
+        Config config( "MediaPlayer" );
+        config.writeEntry("CurrentPlaylist", name);
+        d->selectedFiles->first();
+    }
 }
 
 
