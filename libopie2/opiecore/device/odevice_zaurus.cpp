@@ -36,6 +36,7 @@
 #include <qwindowsystem_qws.h>
 
 /* OPIE */
+#include <opie2/oinputsystem.h>
 #include <qpe/config.h>
 #include <qpe/resource.h>
 #include <qpe/sound.h>
@@ -100,7 +101,16 @@ struct z_button z_buttons_c700 [] = {
     "devicebuttons/z_mail",
     "opiemail", "raise()",
     "opiemail", "newMail()" },
-    { Qt::Key_F14, QT_TRANSLATE_NOOP("Button", "Display Rotate"),
+
+    { Qt::Key_F15, QT_TRANSLATE_NOOP("Button", "Display Rotate"),
+    "devicebuttons/z_hinge",
+    "QPE/Rotation", "rotateDefault()",
+    "QPE/Dummy", "doNothing()" },
+    { Qt::Key_F16, QT_TRANSLATE_NOOP("Button", "Display Rotate"),
+    "devicebuttons/z_hinge",
+    "QPE/Rotation", "rotateDefault()",
+    "QPE/Dummy", "doNothing()" },
+    { Qt::Key_F17, QT_TRANSLATE_NOOP("Button", "Display Rotate"),
     "devicebuttons/z_hinge",
     "QPE/Rotation", "rotateDefault()",
     "QPE/Dummy", "doNothing()" },
@@ -507,7 +517,7 @@ bool Zaurus::suspend()
 Transformation Zaurus::rotation() const
 {
     Transformation rot;
-    
+
     switch ( d->m_model ) {
         case Model_Zaurus_SLC3000: // fallthrough
         case Model_Zaurus_SLC7x0: {
@@ -532,7 +542,7 @@ Transformation Zaurus::rotation() const
 ODirection Zaurus::direction() const
 {
     ODirection dir;
-    
+
     switch ( d->m_model ) {
         case Model_Zaurus_SLC3000: // fallthrough
         case Model_Zaurus_SLC7x0: {
@@ -587,7 +597,12 @@ OHingeStatus Zaurus::readHingeSensor() const
     }
     else
     {
-        qDebug( "Zaurus::readHingeSensor: ODevice handling for non-embedix kernels not yet implemented" );
+        // corgi keyboard is event source 0 in OZ kernel 2.6
+        OInputDevice* keyboard = OInputSystem::instance()->device( "event0" );
+        if ( keyboard && keyboard->isHeld( OInputDevice::Key_KP0 ) ) return CASE_LANDSCAPE;
+        else if ( keyboard && keyboard->isHeld( OInputDevice::Key_KP1 ) ) return CASE_PORTRAIT;
+        else if ( keyboard && keyboard->isHeld( OInputDevice::Key_KP2 ) ) return CASE_CLOSED;
+        qWarning("Zaurus::readHingeSensor() - couldn't compute hinge status!" );
         return CASE_UNKNOWN;
     }
 }
