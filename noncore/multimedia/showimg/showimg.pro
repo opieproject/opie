@@ -7,7 +7,6 @@ TARGET          = showimg
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
 LIBS            += -lqpe -lopie
-REQUIRES        = showimg
 
 TRANSLATIONS = ../../../i18n/de/showimg.ts \
    ../../../i18n/en/showimg.ts \

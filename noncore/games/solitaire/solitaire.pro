@@ -13,8 +13,6 @@ INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe
 
-REQUIRES	= patience
-
 TRANSLATIONS = ../../../i18n/de/patience.ts \
 	 ../../../i18n/en/patience.ts \
 	 ../../../i18n/es/patience.ts \
