@@ -18,6 +18,7 @@ APPLETS= core/applets/batteryapplet core/applets/batteryapplet-ipaq \
 	core/applets/screenshotapplet core/applets/clipboardapplet \
 	core/applets/cardmon core/applets/obex \
 	core/applets/vmemo \
+	noncore/net/networksetup/interfaces \
 	noncore/net/networksetup/wlan \
 	noncore/applets/wirelessapplet noncore/applets/notesapplet
 
@@ -84,7 +85,7 @@ NONAPPS = noncore/apps/opie-sheet noncore/apps/tableviewer \
  	noncore/apps/sysinfo noncore/net/opieirc noncore/apps/aqpkg \
  	noncore/apps/opie-console 
 	
-NONNET = noncore/net/networksetup/interfaces noncore/net/networksetup \
+NONNET = noncore/net/networksetup \
 	noncore/net/opieftp \
 	noncore/mail
 
