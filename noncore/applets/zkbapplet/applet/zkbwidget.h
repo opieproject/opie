@@ -17,8 +17,6 @@ public:
     ~ZkbWidget();
     static int position();
 
-    QSize sizeHint() const;
-
 protected:
     QLabel* label;
     Keymap* keymap;

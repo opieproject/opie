@@ -124,7 +124,7 @@ void CfgDlg::accept() {
 	cfile->setAutorepeatPeriod(ap->value());
 
 	CfgParser p;
-	p.save(QPEApplication::qpeDir()+"share/zkb/zkb.xml", *cfile);
+        p.save(Global::applicationFileName("zkb", "zkb.xml" ), *cfile);
 	QCopEnvelope("QPE/zkb", "reload()");
 
 	QDialog::accept();

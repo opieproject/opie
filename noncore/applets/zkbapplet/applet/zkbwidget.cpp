@@ -29,10 +29,8 @@ ZkbWidget::ZkbWidget(QWidget* parent)
 
 ZkbWidget::~ZkbWidget()
 {
-    if (keymap != 0) {
-        delete keymap;
-        keymap = 0;
-    }
+    delete keymap;
+    keymap = 0;
 }
 
 int ZkbWidget::position()
@@ -41,13 +39,11 @@ int ZkbWidget::position()
 }
 
 bool ZkbWidget::loadKeymap() {
-    ZkbConfig c(QPEApplication::qpeDir()+"share/zkb");
+    ZkbConfig c(Global::applicationFileName("zkb", QString::null) );
     QFontMetrics fm(font());
 
-    if (keymap != 0) {
-        delete keymap;
-        keymap = 0;
-    }
+    delete keymap;
+    keymap = 0;
 
     Keymap* km = new Keymap();
 
@@ -96,10 +92,6 @@ bool ZkbWidget::loadKeymap() {
         show();
     }
     return true;
-}
-
-QSize ZkbWidget::sizeHint() const {
-    return QSize(AppLnk::smallIconSize(),AppLnk::smallIconSize());
 }
 
 void ZkbWidget::stateChanged(const QString& s) {

@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <qpe/qpeapplication.h>
+#include <qpe/global.h>
+
 #include <qlayout.h>
 #include <qmainwindow.h>
 
@@ -9,7 +11,7 @@ int main( int argc, char **argv ) {
 	QPEApplication app(argc, argv);
 	CfgFile cfile;
 	CfgParser cp;
-	cp.load(QPEApplication::qpeDir()+"share/zkb/zkb.xml", cfile);
+        cp.load(Global::applicationFileName("zkb", "zkb.xml"), cfile);
 
 
 	CfgDlg c(0, &cfile, &app, true);

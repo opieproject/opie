@@ -2,6 +2,7 @@
 
 /* OPIE */
 #include <opie2/odebug.h>
+#include <opie2/oapplication.h>
 using namespace Opie::Core;
 
 /* QT */
@@ -15,33 +16,41 @@ ZkbConfig::~ZkbConfig() {
 }
 
 bool ZkbConfig::load(const QString& file, Keymap& keymap, const QString& prefix) {
-	bool ret;
-	QFile f(path+"/"+file);
-	QFileInfo fi(f);
+    bool ret;
+    QFile *f = new QFile(path+"/"+file);
+    QFileInfo fi(*f);
 
-	odebug << "start loading file=" << file.utf8() << "\n" << oendl; 
-	if (includedFiles.find(fi.absFilePath()) != includedFiles.end()) {
-		return false;
-	}
+    /* Try */
+    if ( !fi.exists() && !path.contains( QPEApplication::qpeDir()) ) {
+        delete f;
+        f  = new QFile( QPEApplication::qpeDir() + "share/zkb/" + file );
+        fi = QFileInfo( *f );
+    }
 
-	includedFiles.insert(fi.absFilePath(), 1);
-	QXmlInputSource is(f);
-	QXmlSimpleReader reader;
-	ZkbHandler h(*this, keymap, prefix);
+    odebug << "start loading file=" << file << "\n" << oendl;
+    if (includedFiles.find(fi.absFilePath()) != includedFiles.end()) {
+        return false;
+    }
 
-	reader.setContentHandler(&h);
-	reader.setErrorHandler(this);
-	ret = reader.parse(is);
-	includedFiles.remove(fi.absFilePath());
+    includedFiles.insert(fi.absFilePath(), 1);
+    QXmlInputSource is(*f);
+    QXmlSimpleReader reader;
+    ZkbHandler h(*this, keymap, prefix);
 
-	odebug << "end loading file=" << file.utf8() << ": status=" << err.utf8() << oendl;
-	return ret;
+    reader.setContentHandler(&h);
+    reader.setErrorHandler(this);
+    ret = reader.parse(is);
+    includedFiles.remove(fi.absFilePath());
+
+    odebug << "end loading file=" << file << ": status=" << err << oendl;
+    delete f;
+    return ret;
 }
 
 bool ZkbConfig::warning(const QXmlParseException& e) {
 	QString tmp;
 
-	tmp.sprintf("%d: warning: %s\n", e.lineNumber(), 
+	tmp.sprintf("%d: warning: %s\n", e.lineNumber(),
 		(const char*) e.message().utf8());
 
 	err += tmp;
@@ -52,7 +61,7 @@ bool ZkbConfig::warning(const QXmlParseException& e) {
 bool ZkbConfig::error(const QXmlParseException& e) {
 	QString tmp;
 
-	tmp.sprintf("%d: error: %s\n", e.lineNumber(), 
+	tmp.sprintf("%d: error: %s\n", e.lineNumber(),
 		(const char*) e.message().utf8());
 
 	err += tmp;
@@ -63,7 +72,7 @@ bool ZkbConfig::error(const QXmlParseException& e) {
 bool ZkbConfig::fatalError(const QXmlParseException& e) {
 	QString tmp;
 
-	tmp.sprintf("%d: fatal error: %s\n", e.lineNumber(), 
+	tmp.sprintf("%d: fatal error: %s\n", e.lineNumber(),
 		(const char*) e.message().utf8());
 
 	err += tmp;
@@ -76,7 +85,7 @@ QString ZkbConfig::errorString() {
 }
 
 // Implementation of ZkbHandler
-ZkbHandler::ZkbHandler(ZkbConfig& z, Keymap& k, const QString& p):zkc(z), keymap(k), 
+ZkbHandler::ZkbHandler(ZkbConfig& z, Keymap& k, const QString& p):zkc(z), keymap(k),
 	prefix(p), ardelay(-1), arperiod(-1), currentState(0), currentAction(0) {
 }
 
@@ -90,7 +99,7 @@ bool ZkbHandler::startKeymapElement(int ard, int arp, const QString&) {
 	return true;
 }
 
-bool ZkbHandler::startIncludeElement(const QString& file, 
+bool ZkbHandler::startIncludeElement(const QString& file,
 	const QString& pref) {
 
 	QString p = prefix;
@@ -98,7 +107,7 @@ bool ZkbHandler::startIncludeElement(const QString& file,
 	if (!pref.isNull()) {
 		p += pref + ":";
 	}
-		
+
 
 	bool ret = zkc.load(file, keymap, p);
 	if (!ret) {
@@ -108,7 +117,7 @@ bool ZkbHandler::startIncludeElement(const QString& file,
 	return ret;
 }
 
-bool ZkbHandler::startLabelElement(const QString& label, 
+bool ZkbHandler::startLabelElement(const QString& label,
 	const QString& state) {
 
 	if (!keymap.addLabel(label, prefix + state)) {
@@ -119,20 +128,20 @@ bool ZkbHandler::startLabelElement(const QString& label,
 	return true;
 }
 
-bool ZkbHandler::startStateElement(const QString& name, 
+bool ZkbHandler::startStateElement(const QString& name,
 	const QString& parentName, bool dflt) {
 
 	currentStateName = prefix + name;
 	currentState = keymap.getStateByName(currentStateName);
 
-//	odebug << "state name=" << currentStateName.utf8() << "\n" << oendl; 
+//	odebug << "state name=" << currentStateName.utf8() << "\n" << oendl;
 
 	State* parent = 0;
 	if (!parentName.isEmpty()) {
 		QString pn = prefix + parentName;
 		parent = keymap.getStateByName(pn);
 		if (parent == 0) {
-			err = currentStateName + 
+			err = currentStateName +
 				": undefined parent state: " + pn;
 			return false;
 		}
@@ -167,7 +176,7 @@ bool ZkbHandler::startMapElement(int keycode, bool pressed) {
 	return true;
 }
 
-bool ZkbHandler::startEventElement(int keycode, int unicode, int modifiers, 
+bool ZkbHandler::startEventElement(int keycode, int unicode, int modifiers,
 	bool pressed, bool autorepeat) {
 
 	currentAction->setEvent(true);
@@ -200,7 +209,7 @@ bool ZkbHandler::endKeymapElement() {
 	if (arperiod > 0) {
 		keymap.setAutorepeatPeriod(arperiod);
 	}
-	
+
 	return true;
 }
 
