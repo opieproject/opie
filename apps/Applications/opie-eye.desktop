@@ -1,5 +1,6 @@
 [Desktop Entry]
 Exec=opie-eye
+MimeType=image/jpeg;image/png;image/gif;image/bmp
 File=Unknown
 Icon=opie-eye/opie-eye
 Type=Application
