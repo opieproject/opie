@@ -743,6 +743,7 @@ bool TextEdit::save()
             editor->setEdited( FALSE);
             edited1=FALSE;
             edited=FALSE;
+            if(caption().left(1)=="*")
             setCaption(caption().right(caption().length()-1));
 
 
@@ -832,9 +833,9 @@ bool TextEdit::saveAs()
             }
         }
     }
-    editor->setEdited( FALSE);
+    editor->setEdited(TRUE);
     edited1=FALSE;
-    edited=FALSE;
+    edited=TRUE;
     if(caption().left(1)=="*")
     setCaption(caption().right(caption().length()-1));
 
