@@ -263,8 +263,8 @@ private:
 
 
 
-TabDialog::TabDialog ( const QPixmap *tabicon, const QString &tabname, TabConfig &tc, QWidget *parent, const char *name, bool modal, WFlags fl ) 
-	: QDialog ( parent, name, modal, fl | WStyle_ContextHelp ), m_tc ( tc )
+TabDialog::TabDialog ( const QPixmap *tabicon, const QString &tabname, TabConfig &tc, QWidget *parent, const char *dname, bool modal, WFlags fl ) 
+	: QDialog ( parent, dname, modal, fl | WStyle_ContextHelp ), m_tc ( tc )
 {
 	setCaption ( tr( "Edit Tab" ));
 	
