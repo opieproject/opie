@@ -39,7 +39,8 @@
 
 #ifdef QWS
 #include <qpe/resource.h>
-#include <opie/ofiledialog.h>
+#include <opie2/ofiledialog.h>
+using namespace Opie;
 #else
 #include "resource.h"
 #include <qapplication.h>

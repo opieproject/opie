@@ -35,7 +35,8 @@
 
 #ifdef QWS
 #include <qpe/resource.h>
-#include <opie/otabwidget.h>
+#include <opie2/otabwidget.h>
+using namespace Opie;
 #else
 #include "resource.h"
 #include <qtabwidget.h>

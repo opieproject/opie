@@ -31,7 +31,8 @@ class MStatWindow;
 class MGraphWindow;
 
 #ifdef QWS
-class OTabWidget;
+#include <opie2/otabwidget.h>
+using namespace Opie;
 #else
 class QTabWidget;
 #endif

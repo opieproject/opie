@@ -242,6 +242,7 @@ void MScanListView::addIfNotExisting( MScanListItem* network, const OMacAddress&
 
 void MScanListView::WDStraffic( const OMacAddress& from, const OMacAddress& to, const OMacAddress& viaFrom, const OMacAddress& viaTo )
 {
+    qDebug( "WDSTraffic: %s and %s seem to form a WDS", (const char*) viaFrom.toString(), (const char*) viaTo.toString() );
     QString s;
     MScanListItem* network;
 

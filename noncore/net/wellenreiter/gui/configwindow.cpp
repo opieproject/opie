@@ -22,7 +22,7 @@
 #ifdef QWS
 #include <opie2/oapplication.h>
 #include <opie2/oconfig.h>
-#include <opie/odevice.h>
+#include <opie2/odevice.h>
 using namespace Opie;
 #endif
 
