@@ -5,7 +5,7 @@ SOURCES         = olistviewdemo.cpp \
                   main.cpp
 INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
-LIBS            += -lopieui2 -lopiecore2
+LIBS            += -lopieui2 -lopiecore2 -lqpe
 TARGET          = olistviewdemo
 MOC_DIR     = moc
 OBJECTS_DIR = obj
