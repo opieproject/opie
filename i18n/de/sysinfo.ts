@@ -3,38 +3,38 @@
     <name>LoadInfo</name>
     <message>
         <source>Application CPU usage (%)</source>
-        <translation type="unfinished"></translation>
+        <translation>CPU-Auslastung für Anwendungen (%)</translation>
     </message>
     <message>
         <source>System CPU usage (%)</source>
-        <translation type="unfinished"></translation>
+        <translation>Systemauslastung (%)</translation>
     </message>
     <message>
         <source>Type: </source>
-        <translation type="unfinished"></translation>
+        <translation>Typ:</translation>
     </message>
 </context>
 <context>
     <name>MemoryInfo</name>
     <message>
         <source>Used (%1 kB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Genutzt Speicher (% 1 kB)</translation>
     </message>
     <message>
         <source>Buffers (%1 kB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Gepuffert Speicher (% 1 kB)</translation>
     </message>
     <message>
         <source>Cached (%1 kB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Gecached (% 1 kB)</translation>
     </message>
     <message>
         <source>Free (%1 kB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Freier Speicher (% 1 kB)</translation>
     </message>
     <message>
         <source>Total Memory: %1 kB</source>
-        <translation type="unfinished"></translation>
+        <translation>Gesamter Spicher: % 1 kB</translation>
     </message>
 </context>
 <context>
@@ -45,41 +45,41 @@
     </message>
     <message>
         <source>Used (%1 kB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Genutzt (% 1 kB)</translation>
     </message>
     <message>
         <source>Available (%1 kB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Verfügar (% 1 kB)</translation>
     </message>
     <message>
         <source> : %1 kB</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>ProcessDetail</name>
     <message>
         <source>Send</source>
-        <translation type="unfinished"></translation>
+        <translation>Senden</translation>
     </message>
 </context>
 <context>
     <name>ProcessInfo</name>
     <message>
         <source>PID</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Command</source>
-        <translation type="unfinished"></translation>
+        <translation>Befehl</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeit</translation>
     </message>
 </context>
 <context>
@@ -90,7 +90,7 @@
     </message>
     <message>
         <source>Hard Disk</source>
-        <translation type="unfinished"></translation>
+        <translation>Festplatte</translation>
     </message>
     <message>
         <source>SD Card</source>
@@ -98,7 +98,7 @@
     </message>
     <message>
         <source>SCSI Hard Disk</source>
-        <translation type="unfinished"></translation>
+        <translation>SCSI-Festplatte</translation>
     </message>
     <message>
         <source>Internal Storage</source>
@@ -106,34 +106,34 @@
     </message>
     <message>
         <source>Int. Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Interner Speichermedium</translation>
     </message>
 </context>
 <context>
     <name>SystemInfo</name>
     <message>
         <source>System Info</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Memory</source>
-        <translation type="unfinished"></translation>
+        <translation>Speicher</translation>
     </message>
     <message>
         <source>Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichermedium</translation>
     </message>
     <message>
         <source>CPU</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Process</source>
-        <translation type="unfinished"></translation>
+        <translation>Prozess</translation>
     </message>
     <message>
         <source>Version</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -144,7 +144,7 @@
     </message>
     <message>
         <source>Compiled by: </source>
-        <translation type="unfinished"></translation>
+        <translation>Kompiliert bei:</translation>
     </message>
     <message>
         <source>&lt;b&gt;Opie&lt;/b&gt;&lt;p&gt;Version: </source>
@@ -152,7 +152,7 @@
     </message>
     <message>
         <source>Built on: </source>
-        <translation type="unfinished"></translation>
+        <translation>Geschrieben am:</translation>
     </message>
 </context>
 </TS>

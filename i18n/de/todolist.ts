@@ -77,7 +77,7 @@
     </message>
     <message>
         <source>Deadline</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -165,7 +165,7 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>Show Deadline</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Data</source>
