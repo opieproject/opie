@@ -143,7 +143,6 @@ void Ipkg :: runIpkg()
     dependantPackages->setAutoDelete( true );
 
     executeIpkgCommand( commands, option );
-
 }
 
 void Ipkg :: createSymLinks()
@@ -274,6 +273,64 @@ void Ipkg :: removeStatusEntry()
     rename( outStatusFile, statusFile );
  }
 
+int Ipkg :: executeIpkgLinkCommand( QStringList *cmd )
+{
+    // If one is already running - should never be but just to be safe
+    if ( proc )
+    {
+        delete proc;
+        proc = 0;
+    }
+
+    // OK we're gonna use OProcess to run this thing
+    proc = new OProcess();
+    aborted = false;
+
+    // Connect up our slots
+    connect(proc, SIGNAL(processExited(Opie::Core::OProcess*)),
+            this, SLOT( linkProcessFinished()));
+    connect(proc, SIGNAL(receivedStdout(Opie::Core::OProcess*,char*,int)),
+            this, SLOT(linkCommandStdout(Opie::Core::OProcess*,char*,int)));
+
+     *proc << *cmd;
+
+    if(!proc->start(OProcess::NotifyOnExit, OProcess::All))
+    {
+        emit outputText( tr("Couldn't start ipkg-link process" ) );
+    }
+}
+
+void Ipkg::linkProcessFinished()
+{
+    // Report that the link process succeeded/failed
+
+    if ( error )
+        emit outputText( tr("Symbolic linking failed!\n") );
+    else
+        emit outputText( tr("Symbolic linking succeeded.\n") );
+
+    delete proc;
+    proc = 0;
+    finished = true;
+}
+
+void Ipkg::linkCommandStdout(OProcess*, char *buffer, int buflen)
+{
+    QString lineStr = buffer;
+    if ( lineStr[buflen-1] == '\n' )
+        buflen --;
+    lineStr = lineStr.left( buflen );
+    emit outputText( lineStr );
+
+    if ( lineStr.find( " not found." ) != -1 )
+    {
+        // Capture ipkg-link errors
+        error = true;
+    }
+
+    buffer[0] = '\0';
+}
+
 int Ipkg :: executeIpkgCommand( QStringList &cmd, const QString /*option*/ )
 {
     // If one is already running - should never be but just to be safe
@@ -383,13 +440,40 @@ void Ipkg :: linkPackage( const QString &packFileName, const QString &dest, cons
     if ( dest == "root" || dest == "/" )
         return;
 
+    if( option == "remove" || option == "reinstall" || option == "upgrade" )
+    {
+        QStringList commands;
+
+        if ( runtimeDir != "" )
+        {
+            commands << "cd ";
+            commands << runtimeDir;
+            commands << ";";
+        }
+        commands << "ipkg-link" << "remove" << packFileName;
+        executeIpkgLinkCommand( &commands );
+    }
+
+    if( option == "install" || option == "reinstall" || option == "upgrade" )
+    {
+        QStringList commands;
+        if ( runtimeDir != "" )
+        {
+            commands << "cd ";
+            commands << runtimeDir;
+            commands << ";";
+        }
+        commands << "ipkg-link" << "add" << packFileName;
+        executeIpkgLinkCommand( &commands );
+    }
+/*
     qApp->processEvents();
     QStringList *fileList = getList( packFileName, destDir );
     qApp->processEvents();
     processFileList( fileList, destDir );
-    delete fileList;
+    delete fileList;*/
 }
-
+/*
 QStringList* Ipkg :: getList( const QString &packageFilename, const QString &destDir )
 {
     QString packageFileDir = destDir;
@@ -519,3 +603,4 @@ void Ipkg :: processLinkDir( const QString &file, const QString &destDir, const 
         }
     }
 }
+*/

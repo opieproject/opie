@@ -70,8 +70,10 @@ signals:
     void ipkgFinished();
 
 public slots:
+    void linkCommandStdout(Opie::Core::OProcess*, char *buffer, int buflen);
     void commandStdout(Opie::Core::OProcess*, char *buffer, int buflen);
     void commandStderr(Opie::Core::OProcess*, char *buffer, int buflen);
+    void linkProcessFinished();
     void processFinished();
     void abort();
 
@@ -92,6 +94,7 @@ private:
 
     QList<QString> *dependantPackages;
 
+    int executeIpkgLinkCommand( QStringList *cmd );
     int executeIpkgCommand( QStringList &cmd, const QString option );
     void removeStatusEntry();
     void linkPackage( const QString &packFileName, const QString &dest, const QString &destDir );
