@@ -307,9 +307,9 @@ void PlayListWidget::setDocument( const QString& fileref ) {
         addToSelection( DocLnk( fileref ) );
         d->setDocumentUsed = TRUE;
         mediaPlayerState->setPlaying( FALSE );
-        qApp->processEvents();
+//        qApp->processEvents();
         mediaPlayerState->setPlaying( TRUE );
-        qApp->processEvents();
+//        qApp->processEvents();
         setCaption( tr("OpiePlayer") );
     }
 }
@@ -613,7 +613,7 @@ void PlayListWidget::tabChanged(QWidget *) {
 void PlayListWidget::btnPlay(bool b) {
 //    mediaPlayerState->setPlaying(false);
     mediaPlayerState->setPlaying(b);
-    qApp->processEvents();
+//    qApp->processEvents();
     insanityBool=FALSE;
 //   switch ( whichList()) {
 //   case 0:
