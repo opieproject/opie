@@ -67,10 +67,98 @@ struct Q_EXPORT QLibraryInterface : public QUnknownInterface
 	i->queryInterface( IID_QUnknown, &iface );      \
 	return iface;
 
+template <class T>
+class QInterfacePtr
+{
+public:
+    QInterfacePtr():iface(0){}
+
+    QInterfacePtr( T* i) {
+	if ( (iface = i) )
+	    iface->addRef();
+    }
+
+    QInterfacePtr(const QInterfacePtr<T> &p) {
+	if ( (iface = p.iface) )
+	    iface->addRef();
+    }
+
+    ~QInterfacePtr() {
+	if ( iface )
+	    iface->release();
+    }
+
+    QInterfacePtr<T> &operator=(const QInterfacePtr<T> &p) {
+	if ( iface != p.iface ) {
+	    if ( iface )
+		iface->release();
+	    if ( (iface = p.iface) )
+		iface->addRef();
+	}
+	return *this;
+    }
+
+    QInterfacePtr<T> &operator=(T* i) {
+	if (iface != i ) {
+	    if ( iface )
+		iface->release();
+	    if ( (iface = i) )
+		iface->addRef();
+	}
+	return *this;
+    }
+
+    bool operator==( const QInterfacePtr<T> &p ) const { return iface == p.iface; }
+
+    bool operator!= ( const QInterfacePtr<T>& p ) const {  return !( *this == p ); }
+
+    bool isNull() const { return !iface; }
+
+    T* operator->() const { return iface; }
+
+    T& operator*() const { return *iface; }
+
+    operator T*() const { return iface; }
+
+    QUnknownInterface** operator &() const {
+	if( iface )
+	    iface->release();
+	return (QUnknownInterface**)&iface;
+    }
+
+    T** operator &() {
+	if ( iface )
+	    iface->release();
+	return &iface;
+    }
+
+private:
+    T* iface;
+};
+
+
+// internal class that wraps an initialized ulong
+struct Q_EXPORT QtULong
+{
+    QtULong() : ref( 0 ) { }
+    operator unsigned long () const { return ref; }
+    unsigned long& operator++() { return ++ref; }
+    unsigned long operator++( int ) { return ref++; }
+    unsigned long& operator--() { return --ref; }
+    unsigned long operator--( int ) { return ref--; }
+
+    unsigned long ref;
+};
+
 #define Q_EXPORT_INTERFACE() \
 	extern "C" QUnknownInterface* ucm_instantiate()
 
-#define Q_REFCOUNT  ulong addRef() {return ref++;}ulong release() {if(!--ref){delete this;return 0;}return ref;}
+#define Q_REFCOUNT \
+private:          \
+    QtULong qtrefcount;   \
+public:          \
+    ulong addRef() {return qtrefcount++;} \
+    ulong release() {if(!--qtrefcount){delete this;return 0;}return qtrefcount;}
 
 #else // QT_NO_COMPONENT
 
