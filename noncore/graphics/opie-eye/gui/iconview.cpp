@@ -96,10 +96,6 @@ namespace {
     {
         m_iconsize = a_iconsize;
         if ( isDir ) {
-            if (_dirPix && _dirPix->width()!=m_iconsize) {
-                delete _dirPix;
-                _dirPix = 0;
-            }
             if (!_dirPix ) {
                 _dirPix = new QPixmap( Resource::loadPixmap("advancedfm/FileBrowser"));
             }
@@ -113,10 +109,6 @@ namespace {
 
     inline void IconViewItem::check_pix()const
     {
-        if (_cpyPix && _cpyPix->width()!=m_iconsize) {
-            delete _cpyPix;
-            _cpyPix = 0;
-        }
         if (_dirPix && _dirPix->width()>m_iconsize) {
             QPixmap*Pix = new QPixmap(*_dirPix);
             Pix->resize(m_iconsize,m_iconsize);
@@ -423,9 +415,21 @@ void PIconView::resetView() {
     g_stringPix.clear();
     g_stringInf.clear();
     if (m_mode>1) {
+        int osize = m_iconsize;
         m_iconsize = m_cfg->readNumEntry("iconsize", 32);
         if (m_iconsize<12)m_iconsize = 12;
         if (m_iconsize>64)m_iconsize = 64;
+        if (osize != m_iconsize) {
+            if (_dirPix){
+                delete _dirPix;
+                _dirPix = 0;
+            }
+            if (_cpyPix){
+                delete _cpyPix;
+                _cpyPix = 0;
+            }
+            calculateGrid();
+        }
     } else {
         m_iconsize = 64;
     }
@@ -807,7 +811,14 @@ void PIconView::slotChangeMode( int mode ) {
             if (m_iconsize<12)m_iconsize = 12;
             if (m_iconsize>64)m_iconsize = 64;
         }
-
+        if (_dirPix){
+            delete _dirPix;
+            _dirPix = 0;
+        }
+        if (_cpyPix){
+            delete _cpyPix;
+            _cpyPix = 0;
+        }
         calculateGrid();
         slotReloadDir();
     }
@@ -842,24 +853,29 @@ void PIconView::calculateGrid(QResizeEvent* re)
         pos = QIconView::Right;
         break;
     }
+    int cache = 0;
     m_view->setItemTextPos( pos );
     switch (m_mode) {
         case 2:
+            m_view->setSpacing(2);
             m_view->setGridX(m_iconsize);
             m_view->setGridY(-1);
-            PPixmapCache::self()->setMaxImages(40);
+            cache = (int)((double)64/(double)m_iconsize*40.0);
+            odebug << "cache size: " << cache << oendl;
+            PPixmapCache::self()->setMaxImages(cache);
             break;
         case 3:
+            m_view->setSpacing(10);
             m_view->setGridX( fontMetrics().width("testimage.jpg")+20);
             m_view->setGridY(8);
             PPixmapCache::self()->setMaxImages(2);
             break;
         case 1:
         default:
+            m_view->setSpacing(10);
             m_view->setGridX( viewerWidth-3*m_view->spacing());
             m_view->setGridY( fontMetrics().height()*2+40 );
             PPixmapCache::self()->setMaxImages(20);
             break;
     }
-    m_view->setSpacing(10);
 }
