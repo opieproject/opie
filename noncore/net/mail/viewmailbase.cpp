@@ -44,7 +44,7 @@ ViewMailBase::ViewMailBase(QWidget *parent, const char *name, WFlags fl)
 	connect(attachbutton, SIGNAL(toggled(bool)), SLOT(slotChangeAttachview(bool)));
 
 
-        showHtml = new QAction( tr( "Show Html" ), QIconSet( Resource::loadPixmap( "mail/attach" ) ), 0, 0, this, 0, true );
+        showHtml = new QAction( tr( "Show Html" ), QIconSet( Resource::loadPixmap( "mail/html" ) ), 0, 0, this, 0, true );
         showHtml->addTo( toolbar );
         showHtml->addTo( mailmenu );
 
