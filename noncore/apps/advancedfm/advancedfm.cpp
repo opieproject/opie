@@ -535,7 +535,10 @@ void AdvancedFm::localListClicked(QListViewItem *selectedItem)
             } else {
                 strItem=QDir::cleanDirPath(currentDir.canonicalPath()+"/"+strItem);
                 if( QFile::exists(strItem ) ) {
-//                 qDebug("upload "+strItem);
+                 qDebug("clicked item "+strItem);
+    DocLnk doc( strItem, FALSE );
+    doc.execute();
+    //    Local_View->clearSelection();
                 }
             } //end not symlink
             chdir(strItem.latin1());
@@ -573,7 +576,10 @@ void AdvancedFm::remoteListClicked(QListViewItem *selectedItem)
             } else {
                 strItem=QDir::cleanDirPath( currentRemoteDir.canonicalPath()+"/"+strItem);
                 if( QFile::exists(strItem ) ) {
-//                 qDebug("upload "+strItem);
+                 qDebug("clicked item "+strItem);
+    DocLnk doc( strItem, FALSE );
+    doc.execute();
+    //    Remote_View->clearSelection();
                 }
             } //end not symlink
             chdir(strItem.latin1());
@@ -661,7 +667,7 @@ void AdvancedFm::showLocalMenu(QListViewItem * item)
         if( /*item->text(0).right(1) == "/" ||*/ item->text(0).find("/",0,TRUE) !=-1)
             m.insertItem( tr( "Change Directory" ), this, SLOT( doLocalCd() ));
         else
-            m.insertItem( tr( "Open" ), this, SLOT( runThis() ));
+            m.insertItem( tr( "Open / Execute" ), this, SLOT( runThis() ));
         m.insertItem( tr( "Open as Text" ), this, SLOT( runText() ));
         m.insertItem( tr( "Make Directory" ), this, SLOT( localMakDir() ));
         m.insertItem( tr( "Make Symlink" ), this, SLOT( mkSym() ));
@@ -697,7 +703,7 @@ void AdvancedFm::showRemoteMenu(QListViewItem * item)
         if( /*item->text(0).right(1) == "/" ||*/ item->text(0).find("/",0,TRUE) !=-1)
             m.insertItem( tr( "Change Directory" ), this, SLOT( doRemoteCd() ));
         else
-            m.insertItem( tr( "Open" ), this, SLOT( runThis() ));
+            m.insertItem( tr( "Open / Execute" ), this, SLOT( runThis() ));
         m.insertItem( tr( "Open as Text" ), this, SLOT( runText() ));
         m.insertItem( tr( "Make Directory" ), this, SLOT( remoteMakDir() ));
         m.insertItem( tr( "Make Symlink" ), this, SLOT( mkSym() ));
@@ -1037,6 +1043,13 @@ void AdvancedFm::filePerms() {
         if( filePerm)
             delete  filePerm;
     }
+    if (TabWidget->currentPageIndex() == 0) {
+        populateLocalView();
+    } else {
+        populateRemoteView();
+    }
+
+    
 }
 
 void AdvancedFm::doProperties() {
@@ -1402,10 +1415,10 @@ void AdvancedFm::runCommandStd() {
     QString curFile;
     if (TabWidget->currentPageIndex() == 0) {
         if( Local_View->currentItem())
-            curFile = currentDir.canonicalPath() + Local_View->currentItem()->text(0);
+            curFile = currentDir.canonicalPath() +"/"+  Local_View->currentItem()->text(0);
     } else {
         if(Remote_View->currentItem())
-            curFile = currentRemoteDir.canonicalPath() + Remote_View->currentItem()->text(0);
+            curFile = currentRemoteDir.canonicalPath() +"/"+  Remote_View->currentItem()->text(0);
     }
     
     InputDialog *fileDlg;
@@ -1556,7 +1569,9 @@ void AdvancedFm::mkSym() {
         for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
 
             QString destName = currentRemoteDir.canonicalPath()+"/"+(*it);
+            if(destName.right(1) == "/") destName = destName.left( destName.length() -1);
             QString curFile =  currentDir.canonicalPath()+"/"+(*it);
+            if( curFile.right(1) == "/") curFile = curFile.left( curFile.length() -1);
             cmd = "ln -s "+curFile+" "+destName;
             qDebug(cmd);
             system(cmd.latin1() );
@@ -1567,7 +1582,9 @@ void AdvancedFm::mkSym() {
         for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
 
             QString destName = currentDir.canonicalPath()+"/"+(*it);
+            if(destName.right(1) == "/") destName = destName.left( destName.length() -1);
             QString curFile =  currentRemoteDir.canonicalPath()+"/"+(*it);
+            if( curFile.right(1) == "/") curFile = curFile.left( curFile.length() -1);
 
             cmd = "ln -s "+curFile+" "+destName;
             qDebug(cmd);
