@@ -33,7 +33,7 @@
     <name>Gutenbrowser</name>
     <message>
         <source>Gutenbrowser Output</source>
-        <translation>Вывод Гутенбраузера</translation>
+        <translation type="obsolete">Вывод Гутенбраузера</translation>
     </message>
     <message>
         <source>Running wget</source>
@@ -100,6 +100,10 @@ or select an ftp site?
     <message>
         <source>Please install unzip in your PATH</source>
         <translation>Пожалуйста установите unzip в вашем PATH</translation>
+    </message>
+    <message>
+        <source>Downloading Gutenberg Index....</source>
+        <translation type="unfinished">Скачиваю Гутенберг индекс...</translation>
     </message>
 </context>
 <context>
@@ -241,7 +245,7 @@ http://www.trolltech.com
     </message>
     <message>
         <source>&lt;p&gt;Error opening local library index:&lt;/P&gt; </source>
-        <translation>&lt;p&gt;Не могу открыть локальный библиотечный индекс:&lt;/p&gt; </translation>
+        <translation type="obsolete">&lt;p&gt;Не могу открыть локальный библиотечный индекс:&lt;/p&gt; </translation>
     </message>
     <message>
         <source>Library Search</source>
@@ -312,6 +316,14 @@ http://www.trolltech.com
     <message>
         <source>Close</source>
         <translation>Закрыть</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Error opening library index file. Please download a new one.&lt;/P&gt; </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>   </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

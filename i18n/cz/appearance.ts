@@ -71,43 +71,43 @@ Klikněte sem pro výběr požadovaného schéma.</translation>
     </message>
     <message>
         <source>Force styling for all applications.</source>
-        <translation>Vynutit stylování pro všechny aplikace.</translation>
+        <translation type="obsolete">Vynutit stylování pro všechny aplikace.</translation>
     </message>
     <message>
         <source>Click here to allow all applications to use global appearance settings.</source>
-        <translation>Klikněte sem pro umožnení všem aplikacím používat globální nastavení vzhledu.</translation>
+        <translation type="obsolete">Klikněte sem pro umožnení všem aplikacím používat globální nastavení vzhledu.</translation>
     </message>
     <message>
         <source>Disable styling for these applications ( &lt;b&gt;*&lt;/b&gt; can be used as a wildcard):</source>
-        <translation>Vypnout styl pro tylo aplikace ( &lt;b&gt;*&lt;/b&gt; může být použito jako wildcard):</translation>
+        <translation type="obsolete">Vypnout styl pro tylo aplikace ( &lt;b&gt;*&lt;/b&gt; může být použito jako wildcard):</translation>
     </message>
     <message>
         <source>If some applications do not display correctly with the global appearance settings, certain features can be turned off for that application.
 
 This area allows you to select an application and which settings you wish to disable.</source>
-        <translation>Jestliže se některé aplikace nezobrazují korektně s globálním nastavením vzhledu, můžou se určité vlastnosti vypnout pro tuto aplikaci. 
+        <translation type="obsolete">Jestliže se některé aplikace nezobrazují korektně s globálním nastavením vzhledu, můžou se určité vlastnosti vypnout pro tuto aplikaci. 
 
 Tato oblast vám umožní vybrat aplikaci a nastavení, která si přejete vypnout.</translation>
     </message>
     <message>
         <source>Binary file(s)</source>
-        <translation>Binární soubor(y)</translation>
+        <translation type="obsolete">Binární soubor(y)</translation>
     </message>
     <message>
         <source>Click here to add an application to the list above.</source>
-        <translation>Klikněte pro přidání aplikace do seznamu nahoře.</translation>
+        <translation type="obsolete">Klikněte pro přidání aplikace do seznamu nahoře.</translation>
     </message>
     <message>
         <source>Click here to delete the currently selected application.</source>
-        <translation>Klikněte pro vymazání aktuálně vybrané aplikace.</translation>
+        <translation type="obsolete">Klikněte pro vymazání aktuálně vybrané aplikace.</translation>
     </message>
     <message>
         <source>Click here to move the currently selected application up in the list.</source>
-        <translation>Klikněte pro přesunutí aktuálně vybrané aplikace nahoru v seznamu.</translation>
+        <translation type="obsolete">Klikněte pro přesunutí aktuálně vybrané aplikace nahoru v seznamu.</translation>
     </message>
     <message>
         <source>Click here to move the currently selected application down in the list.</source>
-        <translation>Klikněte pro přesunutí aktuálně vybrané aplikace dolů v seznamu.</translation>
+        <translation type="obsolete">Klikněte pro přesunutí aktuálně vybrané aplikace dolů v seznamu.</translation>
     </message>
     <message>
         <source>Tab style:</source>
@@ -213,7 +213,15 @@ Tato oblast vám umožní vybrat aplikaci a nastavení, která si přejete vypno
     </message>
     <message>
         <source>&lt;new&gt;</source>
-        <translation>&lt;nový&gt;</translation>
+        <translation type="obsolete">&lt;nový&gt;</translation>
+    </message>
+    <message>
+        <source>Show Scrollbars on the left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to display scrollbars on the left side instead of the right.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -374,6 +374,25 @@ longa que o intervalo entre repetições.</translation>
     </message>
 </context>
 <context>
+    <name>DateBookWeekLstEvent</name>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>Duplicate</source>
+        <translation type="unfinished">Duplicar</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Apagar</translation>
+    </message>
+    <message>
+        <source>Beam</source>
+        <translation type="unfinished">Enviar</translation>
+    </message>
+</context>
+<context>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>

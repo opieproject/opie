@@ -113,6 +113,10 @@ ntpdate</translation>
         <source>Could not connect to server </source>
         <translation>Неможе да се поврзе со сервер</translation>
     </message>
+    <message>
+        <source>Retrieving time from network...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NTPTabWidget</name>

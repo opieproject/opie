@@ -3,7 +3,7 @@
     <name>Calculator</name>
     <message>
         <source>Experimental Calculator</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>M+</source>
@@ -120,6 +120,10 @@
     <message>
         <source>2</source>
         <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Calculator</source>
+        <translation type="unfinished">FOO</translation>
     </message>
 </context>
 <context>

@@ -120,16 +120,16 @@ scheda non è stata riconosciuta</translation>
     <message>
         <source>Do you really want to &lt;font size=+2&gt;&lt;B&gt;DELETE&lt;/B&gt;&lt;/font&gt;
 the selected file?</source>
-        <translation>Vuoi veramente &lt;font size=+2&gt;&lt;B&gt;CANCELLARE&lt;/B&gt;&lt;/font&gt;
+        <translation type="obsolete">Vuoi veramente &lt;font size=+2&gt;&lt;B&gt;CANCELLARE&lt;/B&gt;&lt;/font&gt;
 il file selezionato?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Sì</translation>
+        <translation type="obsolete">Sì</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>No</translation>
+        <translation type="obsolete">No</translation>
     </message>
     <message>
         <source>Error</source>
@@ -145,7 +145,7 @@ il file selezionato?</translation>
     </message>
     <message>
         <source>Please select file to  play</source>
-        <translation>Seleziona il file da riprodurre</translation>
+        <translation type="obsolete">Seleziona il file da riprodurre</translation>
     </message>
     <message>
         <source>Note</source>
@@ -219,6 +219,10 @@ il file selezionato?</translation>
     </message>
     <message>
         <source>Stereo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please select file to play</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

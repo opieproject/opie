@@ -87,16 +87,16 @@ or a card isn&apos;t being recognized</source>
     <message>
         <source>Do you really want to &lt;font size=+2&gt;&lt;B&gt;DELETE&lt;/B&gt;&lt;/font&gt;
 the selected file?</source>
-        <translation>Вы действительно хотите &lt;font size=+2&gt;&lt;B&gt;УДАЛИТЬ&lt;/B&gt;&lt;/font&gt;
+        <translation type="obsolete">Вы действительно хотите &lt;font size=+2&gt;&lt;B&gt;УДАЛИТЬ&lt;/B&gt;&lt;/font&gt;
 выбранный файл?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Да</translation>
+        <translation type="obsolete">Да</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>Нет</translation>
+        <translation type="obsolete">Нет</translation>
     </message>
     <message>
         <source>Error</source>
@@ -112,7 +112,7 @@ the selected file?</source>
     </message>
     <message>
         <source>Please select file to  play</source>
-        <translation>Пожалуйста выберите файл для проигрывания</translation>
+        <translation type="obsolete">Пожалуйста выберите файл для проигрывания</translation>
     </message>
     <message>
         <source>Note</source>
@@ -187,6 +187,10 @@ the selected file?</source>
     <message>
         <source>Stereo</source>
         <translation>Стерео</translation>
+    </message>
+    <message>
+        <source>Please select file to play</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

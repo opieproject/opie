@@ -123,16 +123,16 @@ nelze rozpoznat kartu</translation>
     <message>
         <source>Do you really want to &lt;font size=+2&gt;&lt;B&gt;DELETE&lt;/B&gt;&lt;/font&gt;
 the selected file?</source>
-        <translation>Opravdu chcete &lt;font size=+2&gt;&lt;B&gt;SMAZAT&lt;/B&gt;&lt;/font&gt;
+        <translation type="obsolete">Opravdu chcete &lt;font size=+2&gt;&lt;B&gt;SMAZAT&lt;/B&gt;&lt;/font&gt;
 vybraný soubor?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Ano</translation>
+        <translation type="obsolete">Ano</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>Ne</translation>
+        <translation type="obsolete">Ne</translation>
     </message>
     <message>
         <source>Error</source>
@@ -148,7 +148,7 @@ vybraný soubor?</translation>
     </message>
     <message>
         <source>Please select file to  play</source>
-        <translation>Vyberte soubor pro přehrání</translation>
+        <translation type="obsolete">Vyberte soubor pro přehrání</translation>
     </message>
     <message>
         <source>Note</source>
@@ -187,6 +187,10 @@ vybraný soubor?</translation>
     <message>
         <source>Stereo</source>
         <translation>Stereo</translation>
+    </message>
+    <message>
+        <source>Please select file to play</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -15,6 +15,13 @@
     </message>
 </context>
 <context>
+    <name>AbView</name>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished">Не е внесено</translation>
+    </message>
+</context>
+<context>
     <name>AddressbookWindow</name>
     <message>
         <source>Contacts</source>
@@ -22,71 +29,71 @@
     </message>
     <message>
         <source>Contact</source>
-        <translation>Контакт</translation>
+        <translation type="obsolete">Контакт</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Преглед</translation>
+        <translation type="obsolete">Преглед</translation>
     </message>
     <message>
         <source>List</source>
-        <translation>Листа</translation>
+        <translation type="obsolete">Листа</translation>
     </message>
     <message>
         <source>Card</source>
-        <translation>Катичка</translation>
+        <translation type="obsolete">Катичка</translation>
     </message>
     <message>
         <source>New</source>
-        <translation>Ново</translation>
+        <translation type="obsolete">Ново</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Уреди</translation>
+        <translation type="obsolete">Уреди</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Избриши</translation>
+        <translation type="obsolete">Избриши</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>Пронајди</translation>
+        <translation type="obsolete">Пронајди</translation>
     </message>
     <message>
         <source>Start Search</source>
-        <translation>Започни Пребарување</translation>
+        <translation type="obsolete">Започни Пребарување</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation>Затвори Пребарување</translation>
+        <translation type="obsolete">Затвори Пребарување</translation>
     </message>
     <message>
         <source>Write Mail To</source>
-        <translation>Напиши е-порака до</translation>
+        <translation type="obsolete">Напиши е-порака до</translation>
     </message>
     <message>
         <source>Beam Entry</source>
-        <translation>Пренеси запис</translation>
+        <translation type="obsolete">Пренеси запис</translation>
     </message>
     <message>
         <source>Import vCard</source>
-        <translation>Вметни вКаричка</translation>
+        <translation type="obsolete">Вметни вКаричка</translation>
     </message>
     <message>
         <source>Export vCard</source>
-        <translation>Извези вКаричка</translation>
+        <translation type="obsolete">Извези вКаричка</translation>
     </message>
     <message>
         <source>My Personal Details</source>
-        <translation>Мои лични детали</translation>
+        <translation type="obsolete">Мои лични детали</translation>
     </message>
     <message>
         <source>Save all Data</source>
-        <translation>Сними ги сите податоци</translation>
+        <translation type="obsolete">Сними ги сите податоци</translation>
     </message>
     <message>
         <source>Config</source>
-        <translation>Конфигурација</translation>
+        <translation type="obsolete">Конфигурација</translation>
     </message>
     <message>
         <source>You have to select a contact !</source>
@@ -136,7 +143,7 @@
     </message>
     <message>
         <source>Edit Address</source>
-        <translation>Уреди Адреса</translation>
+        <translation type="obsolete">Уреди Адреса</translation>
     </message>
     <message>
         <source>Edit My Personal Details</source>
@@ -173,7 +180,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Cards</source>
-        <translation>Катички</translation>
+        <translation type="obsolete">Катички</translation>
     </message>
     <message>
         <source>All</source>
@@ -181,7 +188,11 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Не е внесено</translation>
+        <translation type="obsolete">Не е внесено</translation>
+    </message>
+    <message>
+        <source>Edit Contact</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1345,6 +1356,41 @@ SHARP основниот ROM.
     </message>
     <message>
         <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Opie</name>
+    <message>
+        <source>Contact</source>
+        <translation type="unfinished">Контакт</translation>
+    </message>
+    <message>
+        <source>Contacts</source>
+        <translation type="unfinished">Контакти</translation>
+    </message>
+    <message>
+        <source>Start Search</source>
+        <translation type="unfinished">Започни Пребарување</translation>
+    </message>
+    <message>
+        <source>Write Mail To</source>
+        <translation type="unfinished">Напиши е-порака до</translation>
+    </message>
+    <message>
+        <source>Import vCard</source>
+        <translation type="unfinished">Вметни вКаричка</translation>
+    </message>
+    <message>
+        <source>Export vCard</source>
+        <translation type="unfinished">Извези вКаричка</translation>
+    </message>
+    <message>
+        <source>My Personal Details</source>
+        <translation type="unfinished">Мои лични детали</translation>
+    </message>
+    <message>
+        <source>Show quick search bar</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -374,6 +374,25 @@ Afslut alligevel?</translation>
     </message>
 </context>
 <context>
+    <name>DateBookWeekLstEvent</name>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Rediger</translation>
+    </message>
+    <message>
+        <source>Duplicate</source>
+        <translation type="unfinished">Kopier</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Slet</translation>
+    </message>
+    <message>
+        <source>Beam</source>
+        <translation type="unfinished">Send</translation>
+    </message>
+</context>
+<context>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>

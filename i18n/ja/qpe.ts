@@ -368,11 +368,6 @@ immediately.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;p&gt;
-These termination options are provided primarily for use while developing and testing the Opie system. In a normal environment, these concepts are unnecessary.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>

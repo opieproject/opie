@@ -15,6 +15,13 @@
     </message>
 </context>
 <context>
+    <name>AbView</name>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished">Neierakstīts</translation>
+    </message>
+</context>
+<context>
     <name>AddressbookWindow</name>
     <message>
         <source>Contacts</source>
@@ -22,71 +29,71 @@
     </message>
     <message>
         <source>Contact</source>
-        <translation>Vizītkarte</translation>
+        <translation type="obsolete">Vizītkarte</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Skats</translation>
+        <translation type="obsolete">Skats</translation>
     </message>
     <message>
         <source>List</source>
-        <translation>Saraksts</translation>
+        <translation type="obsolete">Saraksts</translation>
     </message>
     <message>
         <source>Card</source>
-        <translation>Karte</translation>
+        <translation type="obsolete">Karte</translation>
     </message>
     <message>
         <source>New</source>
-        <translation>Jauns</translation>
+        <translation type="obsolete">Jauns</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Labot</translation>
+        <translation type="obsolete">Labot</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Dzēst</translation>
+        <translation type="obsolete">Dzēst</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>Meklēt</translation>
+        <translation type="obsolete">Meklēt</translation>
     </message>
     <message>
         <source>Start Search</source>
-        <translation>Sākt Meklēšanu</translation>
+        <translation type="obsolete">Sākt Meklēšanu</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation>Aizvērt Meklēšanu</translation>
+        <translation type="obsolete">Aizvērt Meklēšanu</translation>
     </message>
     <message>
         <source>Write Mail To</source>
-        <translation>Rakstīt E-pastu Uz</translation>
+        <translation type="obsolete">Rakstīt E-pastu Uz</translation>
     </message>
     <message>
         <source>Beam Entry</source>
-        <translation>Nosūtīt Ierakstu</translation>
+        <translation type="obsolete">Nosūtīt Ierakstu</translation>
     </message>
     <message>
         <source>Import vCard</source>
-        <translation>Importēt vKarti</translation>
+        <translation type="obsolete">Importēt vKarti</translation>
     </message>
     <message>
         <source>Export vCard</source>
-        <translation>Eksportēt vKarti</translation>
+        <translation type="obsolete">Eksportēt vKarti</translation>
     </message>
     <message>
         <source>My Personal Details</source>
-        <translation>Informācija par Mani</translation>
+        <translation type="obsolete">Informācija par Mani</translation>
     </message>
     <message>
         <source>Save all Data</source>
-        <translation>Saglabāt visus Datus</translation>
+        <translation type="obsolete">Saglabāt visus Datus</translation>
     </message>
     <message>
         <source>Config</source>
-        <translation>Konfigurācija</translation>
+        <translation type="obsolete">Konfigurācija</translation>
     </message>
     <message>
         <source>You have to select a contact !</source>
@@ -136,7 +143,7 @@ Vai tiešām vēlaties to atvērt?</translation>
     </message>
     <message>
         <source>Edit Address</source>
-        <translation>Labot Adresi</translation>
+        <translation type="obsolete">Labot Adresi</translation>
     </message>
     <message>
         <source>Edit My Personal Details</source>
@@ -172,7 +179,7 @@ Vai pārtraukt?</translation>
     </message>
     <message>
         <source>Cards</source>
-        <translation>Kartes</translation>
+        <translation type="obsolete">Kartes</translation>
     </message>
     <message>
         <source>All</source>
@@ -180,7 +187,11 @@ Vai pārtraukt?</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Neierakstīts</translation>
+        <translation type="obsolete">Neierakstīts</translation>
+    </message>
+    <message>
+        <source>Edit Contact</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1345,6 +1356,41 @@ ir par brīvu !</translation>
     <message>
         <source></source>
         <translation></translation>
+    </message>
+</context>
+<context>
+    <name>Opie</name>
+    <message>
+        <source>Contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contacts</source>
+        <translation type="unfinished">Kontakti</translation>
+    </message>
+    <message>
+        <source>Start Search</source>
+        <translation type="unfinished">Sākt Meklēšanu</translation>
+    </message>
+    <message>
+        <source>Write Mail To</source>
+        <translation type="unfinished">Rakstīt E-pastu Uz</translation>
+    </message>
+    <message>
+        <source>Import vCard</source>
+        <translation type="unfinished">Importēt vKarti</translation>
+    </message>
+    <message>
+        <source>Export vCard</source>
+        <translation type="unfinished">Eksportēt vKarti</translation>
+    </message>
+    <message>
+        <source>My Personal Details</source>
+        <translation type="unfinished">Informācija par Mani</translation>
+    </message>
+    <message>
+        <source>Show quick search bar</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

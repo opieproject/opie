@@ -15,77 +15,16 @@
     </message>
 </context>
 <context>
+    <name>AbView</name>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AddressbookWindow</name>
     <message>
         <source>Contacts</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Contact</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>List</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Card</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Find</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Start Search</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Close Find</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Write Mail To</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Beam Entry</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Import vCard</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Export vCard</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>My Personal Details</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save all Data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Config</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -132,10 +71,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit Address</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Edit My Personal Details</source>
         <translation type="unfinished"></translation>
     </message>
@@ -164,15 +99,11 @@ Quit anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cards</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unfiled</source>
+        <source>Edit Contact</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1334,6 +1265,41 @@ is provided free !</source>
     </message>
     <message>
         <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Opie</name>
+    <message>
+        <source>Contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contacts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Write Mail To</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import vCard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export vCard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>My Personal Details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show quick search bar</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

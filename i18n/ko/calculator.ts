@@ -2,10 +2,6 @@
 <context>
     <name>Calculator</name>
     <message>
-        <source>Experimental Calculator</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>M+</source>
         <translation type="unfinished"></translation>
     </message>
@@ -119,6 +115,10 @@
     </message>
     <message>
         <source>2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculator</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

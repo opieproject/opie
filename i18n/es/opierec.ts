@@ -119,16 +119,16 @@ no ha sido reconocida</translation>
     <message>
         <source>Do you really want to &lt;font size=+2&gt;&lt;B&gt;DELETE&lt;/B&gt;&lt;/font&gt;
 the selected file?</source>
-        <translation>¿Seguro que quiere &lt;font size=+2&gt;&lt;B&gt;borrar&lt;/B&gt;&lt;/font&gt;
+        <translation type="obsolete">¿Seguro que quiere &lt;font size=+2&gt;&lt;B&gt;borrar&lt;/B&gt;&lt;/font&gt;
 el fichero seleccionado?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Sí</translation>
+        <translation type="obsolete">Sí</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>No</translation>
+        <translation type="obsolete">No</translation>
     </message>
     <message>
         <source>Error</source>
@@ -144,7 +144,7 @@ el fichero seleccionado?</translation>
     </message>
     <message>
         <source>Please select file to  play</source>
-        <translation>Por favor, seleccione el fichero a reproducir</translation>
+        <translation type="obsolete">Por favor, seleccione el fichero a reproducir</translation>
     </message>
     <message>
         <source>Note</source>
@@ -218,6 +218,10 @@ el fichero seleccionado?</translation>
     </message>
     <message>
         <source>Stereo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please select file to play</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

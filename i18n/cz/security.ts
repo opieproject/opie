@@ -124,7 +124,7 @@ Můžete vybrat pouze nakonfigurované uživatele.</translation>
     </message>
     <message>
         <source>To be able to protect your PDA with one or more authentication plugins (for example, a simple PIN authentication), you must install at least one &lt;em&gt;opie-multiauth-*&lt;/em&gt; package! Once you have done that, you will be able to configure your PDA protection here.</source>
-        <translation>Pro ochranu vašeho PDA jedním, nebo více pluginy (např. jednoduché ověření PINem), musíte nainstalovat alespoň jeden &lt;em&gt;opie-multiauth-*&lt;/em&gt; balíček! Až to uděláte, budete zde schopni nakonfigurovat ochranu vašeho PDA.</translation>
+        <translation type="obsolete">Pro ochranu vašeho PDA jedním, nebo více pluginy (např. jednoduché ověření PINem), musíte nainstalovat alespoň jeden &lt;em&gt;opie-multiauth-*&lt;/em&gt; balíček! Až to uděláte, budete zde schopni nakonfigurovat ochranu vašeho PDA.</translation>
     </message>
     <message>
         <source>Locking</source>
@@ -137,6 +137,10 @@ Můžete vybrat pouze nakonfigurované uživatele.</translation>
     <message>
         <source>OK</source>
         <translation>OK</translation>
+    </message>
+    <message>
+        <source>To be able to protect your PDA with one or more authentication plugins (for example, a simple PIN authentication), you must install at least one &lt;em&gt;opie-securityplugin-*&lt;/em&gt; package! Once you have done that, you will be able to configure your PDA protection here.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -315,12 +319,19 @@ Uvědomte si ale, že všechny zadané rozsahy budou ztraceny!</translation>
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Opie1.0 will be compatible with QtopiaDesktop, MultiSync and KitchenSync
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Qtopia1.7 will alter the way data is send to the client and will not work with older clients.
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/></source>
-        <translation>Vyzkoušejte synchronizační protokoly pro různá zařízení.
+        <translation type="obsolete">Vyzkoušejte synchronizační protokoly pro různá zařízení.
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    IntelliSync vypne ověření heslem, ale budete dotázáni na akceptování spojení.
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Opie1.0 bude kompatibilní s QtopiaDesktop, MultiSync a KitchenSync.
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Qtopia1.7 změní způsob, jak jsou data posílána klientovi a nebude pracovat se staršími klienty.
-<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>
-</translation>
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/></translation>
+    </message>
+    <message>
+        <source>Alter the Sync Protocol to tweak for the different devices.
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    IntelliSync will disable the password check but you&apos;ll be prompted to accept the connection.
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Opie1.0 will be compatible with QtopiaDesktop, MultiSync and KitchenSync
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Qtopia1.7 will alter the way data is send to the client and will not work with older clients.
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

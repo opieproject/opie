@@ -72,43 +72,43 @@ Premi qui per selezionare uno schema disponibile.</translation>
     </message>
     <message>
         <source>Force styling for all applications.</source>
-        <translation>Forza lo stile per tutte le applicazioni.</translation>
+        <translation type="obsolete">Forza lo stile per tutte le applicazioni.</translation>
     </message>
     <message>
         <source>Click here to allow all applications to use global appearance settings.</source>
-        <translation>Premi qui per permettere a tutte le applicazioni di poter utilizzare le impostazioni globali.</translation>
+        <translation type="obsolete">Premi qui per permettere a tutte le applicazioni di poter utilizzare le impostazioni globali.</translation>
     </message>
     <message>
         <source>Disable styling for these applications ( &lt;b&gt;*&lt;/b&gt; can be used as a wildcard):</source>
-        <translation>Disabilita lo stile per queste applicazioni (&lt;b&gt;*&lt;/b&gt; può essere utilizzato come una wildcard):</translation>
+        <translation type="obsolete">Disabilita lo stile per queste applicazioni (&lt;b&gt;*&lt;/b&gt; può essere utilizzato come una wildcard):</translation>
     </message>
     <message>
         <source>If some applications do not display correctly with the global appearance settings, certain features can be turned off for that application.
 
 This area allows you to select an application and which settings you wish to disable.</source>
-        <translation>Se alcune applicazioni non vengono visualizzate correttamente con le impostazioni globali, si possono disabilitare alcune impostazioni per quell&apos;applicazione.
+        <translation type="obsolete">Se alcune applicazioni non vengono visualizzate correttamente con le impostazioni globali, si possono disabilitare alcune impostazioni per quell&apos;applicazione.
 
 Quest&apos;area permette di selezionare un&apos;applicazione e quali impostazioni si vuole disabilitare.</translation>
     </message>
     <message>
         <source>Binary file(s)</source>
-        <translation>File Binari</translation>
+        <translation type="obsolete">File Binari</translation>
     </message>
     <message>
         <source>Click here to add an application to the list above.</source>
-        <translation>Premi qui per aggiungere un&apos;applicazione nella lista superiore.</translation>
+        <translation type="obsolete">Premi qui per aggiungere un&apos;applicazione nella lista superiore.</translation>
     </message>
     <message>
         <source>Click here to delete the currently selected application.</source>
-        <translation>Premi qui per eliminare l&apos;applicazione selezionata.</translation>
+        <translation type="obsolete">Premi qui per eliminare l&apos;applicazione selezionata.</translation>
     </message>
     <message>
         <source>Click here to move the currently selected application up in the list.</source>
-        <translation>Premi qui per spostare sù nella lista l&apos;applicazione selezionata.</translation>
+        <translation type="obsolete">Premi qui per spostare sù nella lista l&apos;applicazione selezionata.</translation>
     </message>
     <message>
         <source>Click here to move the currently selected application down in the list.</source>
-        <translation>Premi qui per spostare giù nella lista l&apos;applicazione selezionata.</translation>
+        <translation type="obsolete">Premi qui per spostare giù nella lista l&apos;applicazione selezionata.</translation>
     </message>
     <message>
         <source>Tab style:</source>
@@ -230,7 +230,15 @@ Quest&apos;area permette di selezionare un&apos;applicazione e quali impostazion
     </message>
     <message>
         <source>&lt;new&gt;</source>
-        <translation>&lt;nuovo&gt;</translation>
+        <translation type="obsolete">&lt;nuovo&gt;</translation>
+    </message>
+    <message>
+        <source>Show Scrollbars on the left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to display scrollbars on the left side instead of the right.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

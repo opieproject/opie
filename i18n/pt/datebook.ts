@@ -373,6 +373,25 @@ Sair na mesma?</translation>
     </message>
 </context>
 <context>
+    <name>DateBookWeekLstEvent</name>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editar</translation>
+    </message>
+    <message>
+        <source>Duplicate</source>
+        <translation type="unfinished">Duplicado</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Apagar</translation>
+    </message>
+    <message>
+        <source>Beam</source>
+        <translation type="unfinished">Irradiar</translation>
+    </message>
+</context>
+<context>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>

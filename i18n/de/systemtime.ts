@@ -112,6 +112,10 @@ vom Server: </translation>
         <source>Could not connect to server </source>
         <translation>Keine Verbindung zum Server</translation>
     </message>
+    <message>
+        <source>Retrieving time from network...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NTPTabWidget</name>

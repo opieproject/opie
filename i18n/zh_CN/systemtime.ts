@@ -110,6 +110,10 @@ ntpdate </source>
         <source>Could not connect to server </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Retrieving time from network...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NTPTabWidget</name>

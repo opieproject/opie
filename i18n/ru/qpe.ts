@@ -395,7 +395,7 @@ immediately.</source>
     <message>
         <source>&lt;p&gt;
 These termination options are provided primarily for use while developing and testing the Opie system. In a normal environment, these concepts are unnecessary.</source>
-        <translation>&lt;p&gt;
+        <translation type="obsolete">&lt;p&gt;
 Функции завершения сеанса предназначены для разработки и тестирования Opie. При нормальной работе эти функции не нужны.</translation>
     </message>
     <message>

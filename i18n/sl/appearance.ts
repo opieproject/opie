@@ -23,15 +23,15 @@
     </message>
     <message>
         <source>Force styling for all applications.</source>
-        <translation>Prisili uporabo stilov v vseh programih.</translation>
+        <translation type="obsolete">Prisili uporabo stilov v vseh programih.</translation>
     </message>
     <message>
         <source>Disable styling for these applications ( &lt;b&gt;*&lt;/b&gt; can be used as a wildcard):</source>
-        <translation>Izključi stile za naslednje programe ( &lt;b&gt;*&lt;/b&gt; je lahko uporabljena kot vse):</translation>
+        <translation type="obsolete">Izključi stile za naslednje programe ( &lt;b&gt;*&lt;/b&gt; je lahko uporabljena kot vse):</translation>
     </message>
     <message>
         <source>Binary file(s)</source>
-        <translation>Binarna datoteka</translation>
+        <translation type="obsolete">Binarna datoteka</translation>
     </message>
     <message>
         <source>Tab style:</source>
@@ -119,7 +119,7 @@
     </message>
     <message>
         <source>&lt;new&gt;</source>
-        <translation>&lt;nova&gt;</translation>
+        <translation type="obsolete">&lt;nova&gt;</translation>
     </message>
     <message>
         <source>Styles control the way items such as buttons and scroll bars appear in all applications.
@@ -171,31 +171,31 @@ Kliknite tu, da izberete željeno shemo.</translation>
     </message>
     <message>
         <source>Click here to allow all applications to use global appearance settings.</source>
-        <translation>Kliknite tu, da dovolite vsem programom, da uporabljajo globalne nastavitve izgleda.</translation>
+        <translation type="obsolete">Kliknite tu, da dovolite vsem programom, da uporabljajo globalne nastavitve izgleda.</translation>
     </message>
     <message>
         <source>If some applications do not display correctly with the global appearance settings, certain features can be turned off for that application.
 
 This area allows you to select an application and which settings you wish to disable.</source>
-        <translation>Če v katerem od programov ni prikaz pravilen z uporabo globalnih nastavitev izgleda, se lahko nekatere značilnosti izklopijo za ta program.
+        <translation type="obsolete">Če v katerem od programov ni prikaz pravilen z uporabo globalnih nastavitev izgleda, se lahko nekatere značilnosti izklopijo za ta program.
 
 Ta prostor vam omogoča, da izberete program in katere nastavitve želite onemogočiti.</translation>
     </message>
     <message>
         <source>Click here to add an application to the list above.</source>
-        <translation>Kliknite tu, da dodate program v gornji seznam.</translation>
+        <translation type="obsolete">Kliknite tu, da dodate program v gornji seznam.</translation>
     </message>
     <message>
         <source>Click here to delete the currently selected application.</source>
-        <translation>Kliknite tu, da izbrišete trenutno izbran program.</translation>
+        <translation type="obsolete">Kliknite tu, da izbrišete trenutno izbran program.</translation>
     </message>
     <message>
         <source>Click here to move the currently selected application up in the list.</source>
-        <translation>Kliknite tu, da premaknete trenutno izbran program gor po seznamu.</translation>
+        <translation type="obsolete">Kliknite tu, da premaknete trenutno izbran program gor po seznamu.</translation>
     </message>
     <message>
         <source>Click here to move the currently selected application down in the list.</source>
-        <translation>Kliknite tu, da premaknete trenutno izbran program dol po seznamu.</translation>
+        <translation type="obsolete">Kliknite tu, da premaknete trenutno izbran program dol po seznamu.</translation>
     </message>
     <message>
         <source>Click here to select a desired style for tabbed dialogs (such as this application). The styles available are:
@@ -230,6 +230,14 @@ Ta prostor vam omogoča, da izberete program in katere nastavitve želite onemog
     <message>
         <source>Rotation direction:</source>
         <translation>Orientacija smeri:</translation>
+    </message>
+    <message>
+        <source>Show Scrollbars on the left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to display scrollbars on the left side instead of the right.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

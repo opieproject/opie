@@ -59,7 +59,7 @@
     </message>
     <message>
         <source>Display Rotate</source>
-        <translation>Rotēt Displeju</translation>
+        <translation type="obsolete">Rotēt Displeju</translation>
     </message>
     <message>
         <source>Action Button</source>
@@ -76,6 +76,18 @@
     <message>
         <source>Todo Button</source>
         <translation>Darbi Poga</translation>
+    </message>
+    <message>
+        <source>Hinge1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hinge2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hinge3</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

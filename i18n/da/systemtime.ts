@@ -112,6 +112,10 @@ server:</translation>
         <source>%1 seconds</source>
         <translation>%1 sekunder</translation>
     </message>
+    <message>
+        <source>Retrieving time from network...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NTPTabWidget</name>

@@ -533,10 +533,6 @@ Tap inside the box at the left to select a package.  Tap and hold to view packag
         <translation type="unfinished">Force Overwrite</translation>
     </message>
     <message>
-        <source>Information Level</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Errors only</source>
         <translation type="unfinished"></translation>
     </message>
@@ -618,6 +614,22 @@ Tap inside the box at the left to select a package.  Tap and hold to view packag
     </message>
     <message>
         <source>Select information level for Ipkg.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Information level:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Package source lists directory:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter the directory where package source feed information is stored.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap here to select the directory where package source feed information is stored.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

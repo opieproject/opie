@@ -99,16 +99,16 @@ vai arī karte nav atpazīta</translation>
     <message>
         <source>Do you really want to &lt;font size=+2&gt;&lt;B&gt;DELETE&lt;/B&gt;&lt;/font&gt;
 the selected file?</source>
-        <translation>Vai tiešām vēlaties &lt;font size=+2&gt;&lt;B&gt;DZĒST&lt;/B&gt;&lt;/font&gt;
+        <translation type="obsolete">Vai tiešām vēlaties &lt;font size=+2&gt;&lt;B&gt;DZĒST&lt;/B&gt;&lt;/font&gt;
 izvēlēto failu?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Jā</translation>
+        <translation type="obsolete">Jā</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>Nē</translation>
+        <translation type="obsolete">Nē</translation>
     </message>
     <message>
         <source>Error</source>
@@ -124,7 +124,7 @@ izvēlēto failu?</translation>
     </message>
     <message>
         <source>Please select file to  play</source>
-        <translation>Lūdzu izvēlaties failu  spēlēšanai</translation>
+        <translation type="obsolete">Lūdzu izvēlaties failu  spēlēšanai</translation>
     </message>
     <message>
         <source>Note</source>
@@ -163,6 +163,10 @@ izvēlēto failu?</translation>
     <message>
         <source>Stereo</source>
         <translation>Stereo</translation>
+    </message>
+    <message>
+        <source>Please select file to play</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

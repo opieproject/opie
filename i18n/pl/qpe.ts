@@ -395,7 +395,7 @@ tą aplikację.</translation>
     <message>
         <source>&lt;p&gt;
 These termination options are provided primarily for use while developing and testing the Opie system. In a normal environment, these concepts are unnecessary.</source>
-        <translation>&lt;p&gt;
+        <translation type="obsolete">&lt;p&gt;
 Te opcje zamykające zostały pierwotnie dodane do użytku deweloperów i dla testów Opie. W normalnym środowisku ich używanie nie jest konieczne.</translation>
     </message>
     <message>

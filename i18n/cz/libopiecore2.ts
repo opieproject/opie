@@ -59,7 +59,7 @@
     </message>
     <message>
         <source>Display Rotate</source>
-        <translation>Rotace displeje</translation>
+        <translation type="obsolete">Rotace displeje</translation>
     </message>
     <message>
         <source>Action Button</source>
@@ -76,6 +76,18 @@
     <message>
         <source>Todo Button</source>
         <translation>Tlačítko Todo</translation>
+    </message>
+    <message>
+        <source>Hinge1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hinge2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hinge3</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

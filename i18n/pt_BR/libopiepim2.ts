@@ -609,19 +609,7 @@ e</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Click here to view all items.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to view items belonging to %1.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Unfiled</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to view all unfiled items.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -669,14 +657,6 @@ e</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Find</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to search for an item.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Configure</source>
         <translation type="unfinished"></translation>
     </message>
@@ -685,19 +665,7 @@ e</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Filter</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to filter the items displayed.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Filter Settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to modify the current filter settings.</source>
+        <source>Click here to filter items by category.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

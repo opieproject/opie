@@ -15,6 +15,13 @@
     </message>
 </context>
 <context>
+    <name>AbView</name>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished">Vazio</translation>
+    </message>
+</context>
+<context>
     <name>AddressbookWindow</name>
     <message>
         <source>Contacts</source>
@@ -22,39 +29,39 @@
     </message>
     <message>
         <source>Contact</source>
-        <translation>Contacto</translation>
+        <translation type="obsolete">Contacto</translation>
     </message>
     <message>
         <source>New</source>
-        <translation>Novo</translation>
+        <translation type="obsolete">Novo</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Editar</translation>
+        <translation type="obsolete">Editar</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Apagar</translation>
+        <translation type="obsolete">Apagar</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>Procurar</translation>
+        <translation type="obsolete">Procurar</translation>
     </message>
     <message>
         <source>Write Mail To</source>
-        <translation>Enviar EMail</translation>
+        <translation type="obsolete">Enviar EMail</translation>
     </message>
     <message>
         <source>Beam Entry</source>
-        <translation>Irradiar Entrada</translation>
+        <translation type="obsolete">Irradiar Entrada</translation>
     </message>
     <message>
         <source>My Personal Details</source>
-        <translation>Meus Dados</translation>
+        <translation type="obsolete">Meus Dados</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Ver</translation>
+        <translation type="obsolete">Ver</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
@@ -66,7 +73,7 @@
     </message>
     <message>
         <source>Edit Address</source>
-        <translation>Editar Endereço</translation>
+        <translation type="obsolete">Editar Endereço</translation>
     </message>
     <message>
         <source>Contacts - My Personal Details</source>
@@ -94,23 +101,23 @@ Sair na mesma?</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Vazio</translation>
+        <translation type="obsolete">Vazio</translation>
     </message>
     <message>
         <source>Import vCard</source>
-        <translation>Importar cartão de visita</translation>
+        <translation type="obsolete">Importar cartão de visita</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation>Fechar Procura</translation>
+        <translation type="obsolete">Fechar Procura</translation>
     </message>
     <message>
         <source>Save all Data</source>
-        <translation>Gravar todos os Dados</translation>
+        <translation type="obsolete">Gravar todos os Dados</translation>
     </message>
     <message>
         <source>Config</source>
-        <translation>Configuração</translation>
+        <translation type="obsolete">Configuração</translation>
     </message>
     <message>
         <source>Not Found</source>
@@ -118,19 +125,19 @@ Sair na mesma?</translation>
     </message>
     <message>
         <source>List</source>
-        <translation>Lista</translation>
+        <translation type="obsolete">Lista</translation>
     </message>
     <message>
         <source>Cards</source>
-        <translation>Cartões</translation>
+        <translation type="obsolete">Cartões</translation>
     </message>
     <message>
         <source>Card</source>
-        <translation>Cartão</translation>
+        <translation type="obsolete">Cartão</translation>
     </message>
     <message>
         <source>Start Search</source>
-        <translation>Iniciar Procura</translation>
+        <translation type="obsolete">Iniciar Procura</translation>
     </message>
     <message>
         <source>Right file type ?</source>
@@ -172,7 +179,7 @@ contacto para %1?</translation>
     </message>
     <message>
         <source>Export vCard</source>
-        <translation>Exportar vCard</translation>
+        <translation type="obsolete">Exportar vCard</translation>
     </message>
     <message>
         <source>You have to select a contact !</source>
@@ -181,6 +188,10 @@ contacto para %1?</translation>
     <message>
         <source>You have to set a filename !</source>
         <translation>Tem de selecionar um nome de ficheiro!</translation>
+    </message>
+    <message>
+        <source>Edit Contact</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1346,6 +1357,41 @@ todos os dispositivos!</translation>
     <message>
         <source></source>
         <translation></translation>
+    </message>
+</context>
+<context>
+    <name>Opie</name>
+    <message>
+        <source>Contact</source>
+        <translation type="unfinished">Contacto</translation>
+    </message>
+    <message>
+        <source>Contacts</source>
+        <translation type="unfinished">Contactos</translation>
+    </message>
+    <message>
+        <source>Start Search</source>
+        <translation type="unfinished">Iniciar Procura</translation>
+    </message>
+    <message>
+        <source>Write Mail To</source>
+        <translation type="unfinished">Enviar EMail</translation>
+    </message>
+    <message>
+        <source>Import vCard</source>
+        <translation type="unfinished">Importar cartão de visita</translation>
+    </message>
+    <message>
+        <source>Export vCard</source>
+        <translation type="unfinished">Exportar vCard</translation>
+    </message>
+    <message>
+        <source>My Personal Details</source>
+        <translation type="unfinished">Meus Dados</translation>
+    </message>
+    <message>
+        <source>Show quick search bar</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

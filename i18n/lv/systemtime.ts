@@ -112,6 +112,10 @@ servera:</translation>
         <source>Could not connect to server </source>
         <translation>Nevaru savienoties ar serveri</translation>
     </message>
+    <message>
+        <source>Retrieving time from network...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NTPTabWidget</name>

@@ -23,15 +23,15 @@
     </message>
     <message>
         <source>Force styling for all applications.</source>
-        <translation>Применять стиль для всех программ.</translation>
+        <translation type="obsolete">Применять стиль для всех программ.</translation>
     </message>
     <message>
         <source>Disable styling for these applications ( &lt;b&gt;*&lt;/b&gt; can be used as a wildcard):</source>
-        <translation>Запретить стиль для программ (&lt;b&gt;*&lt;/b&gt; может использоваться как шаблон):</translation>
+        <translation type="obsolete">Запретить стиль для программ (&lt;b&gt;*&lt;/b&gt; может использоваться как шаблон):</translation>
     </message>
     <message>
         <source>Binary file(s)</source>
-        <translation>Исп. файл(ы)</translation>
+        <translation type="obsolete">Исп. файл(ы)</translation>
     </message>
     <message>
         <source>Tab style:</source>
@@ -119,7 +119,7 @@
     </message>
     <message>
         <source>&lt;new&gt;</source>
-        <translation>&lt;нов.&gt;</translation>
+        <translation type="obsolete">&lt;нов.&gt;</translation>
     </message>
     <message>
         <source>Styles control the way items such as buttons and scroll bars appear in all applications.
@@ -171,31 +171,31 @@ Click here to select an available scheme.</source>
     </message>
     <message>
         <source>Click here to allow all applications to use global appearance settings.</source>
-        <translation>Щелкните, чтобы разрешить всем программам использовать глобальные установки.</translation>
+        <translation type="obsolete">Щелкните, чтобы разрешить всем программам использовать глобальные установки.</translation>
     </message>
     <message>
         <source>If some applications do not display correctly with the global appearance settings, certain features can be turned off for that application.
 
 This area allows you to select an application and which settings you wish to disable.</source>
-        <translation>Если глобальные установки не действуют на некоторые программы, возможно, они запрещены для этих программ.
+        <translation type="obsolete">Если глобальные установки не действуют на некоторые программы, возможно, они запрещены для этих программ.
 
 Выберите программу, для которых Вы хотите запретить глобальные установки.</translation>
     </message>
     <message>
         <source>Click here to add an application to the list above.</source>
-        <translation>Щелкните, чтобы добавить программу из списка.</translation>
+        <translation type="obsolete">Щелкните, чтобы добавить программу из списка.</translation>
     </message>
     <message>
         <source>Click here to delete the currently selected application.</source>
-        <translation>Щелкните, чтобы удалить выбранную программу.</translation>
+        <translation type="obsolete">Щелкните, чтобы удалить выбранную программу.</translation>
     </message>
     <message>
         <source>Click here to move the currently selected application up in the list.</source>
-        <translation>Щелкните для перемещения вверх по списку.</translation>
+        <translation type="obsolete">Щелкните для перемещения вверх по списку.</translation>
     </message>
     <message>
         <source>Click here to move the currently selected application down in the list.</source>
-        <translation>Щелкните для перемещения вниз по списку.</translation>
+        <translation type="obsolete">Щелкните для перемещения вниз по списку.</translation>
     </message>
     <message>
         <source>Click here to select a desired style for tabbed dialogs (such as this application). The styles available are:
@@ -230,6 +230,14 @@ This area allows you to select an application and which settings you wish to dis
     <message>
         <source>Rotation direction:</source>
         <translation>Направление поворота:</translation>
+    </message>
+    <message>
+        <source>Show Scrollbars on the left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to display scrollbars on the left side instead of the right.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

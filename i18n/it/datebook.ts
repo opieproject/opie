@@ -374,6 +374,25 @@ Uscire comunque?</translation>
     </message>
 </context>
 <context>
+    <name>DateBookWeekLstEvent</name>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Modifica</translation>
+    </message>
+    <message>
+        <source>Duplicate</source>
+        <translation type="unfinished">Copia</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Elimina</translation>
+    </message>
+    <message>
+        <source>Beam</source>
+        <translation type="unfinished">Trasmetti via IrDA</translation>
+    </message>
+</context>
+<context>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>

@@ -1,24 +1,22 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>WLAN</name>
+    <name>AWLan</name>
     <message>
-        <source>Wireless Configuration</source>
+        <source>&lt;UseHostName&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>WLAN</name>
+</context>
+<context>
+    <name>WLanGUI</name>
+    <message>
+        <source>Form1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>any</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SSID</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Infrastructure</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -34,11 +32,23 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Specify &amp;Access Point</source>
+        <source>ESS-ID</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;UseHostName&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Specify Access Point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -46,15 +56,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Specify &amp;Channel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rescan Neighbourhood</source>
+        <source>SSID</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Chn</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -74,6 +84,10 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Key &amp;4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Key &amp;2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -82,42 +96,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Key &amp;4</source>
+        <source>Accept Non-Encrypted packets</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Non-encrypted Packets</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Accept</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Reject</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>WlanInfo</name>
-    <message>
-        <source>Interface Information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>802.11b</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Channel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ESSID</source>
+        <source>State</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -125,7 +108,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>ESSID</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>AP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Channel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -133,7 +124,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Quality</source>
+        <source>Freq</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Link Quality</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -141,8 +136,30 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Quality</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Signal</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Live feed </source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>WLanNetNode</name>
+    <message>
+        <source>WLan Device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Configure Wi/Fi or WLan network cards.&lt;/p&gt;&lt;p&gt;Defines Wireless options for those cards&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>WlanInfo</name>
 </context>
 </TS>

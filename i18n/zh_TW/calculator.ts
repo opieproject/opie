@@ -3,7 +3,7 @@
     <name>Calculator</name>
     <message>
         <source>Experimental Calculator</source>
-        <translation>實驗用計算機</translation>
+        <translation type="obsolete">實驗用計算機</translation>
     </message>
     <message>
         <source>M+</source>
@@ -120,6 +120,10 @@
     <message>
         <source>2</source>
         <translation>2</translation>
+    </message>
+    <message>
+        <source>Calculator</source>
+        <translation type="unfinished">計算機</translation>
     </message>
 </context>
 <context>

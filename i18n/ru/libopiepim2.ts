@@ -600,11 +600,11 @@ and </source>
     </message>
     <message>
         <source>Click here to view all items.</source>
-        <translation>Нажмите, чтобы увидеть все записи.</translation>
+        <translation type="obsolete">Нажмите, чтобы увидеть все записи.</translation>
     </message>
     <message>
         <source>Click here to view items belonging to %1.</source>
-        <translation>Нажмите, чтобы увидеть все записи, принадлежащие %1.</translation>
+        <translation type="obsolete">Нажмите, чтобы увидеть все записи, принадлежащие %1.</translation>
     </message>
     <message>
         <source>Unfiled</source>
@@ -612,7 +612,7 @@ and </source>
     </message>
     <message>
         <source>Click here to view all unfiled items.</source>
-        <translation type="unfinished">Нажмите, чтобы увидеть все несохраненные записи.</translation>
+        <translation type="obsolete">Нажмите, чтобы увидеть все несохраненные записи.</translation>
     </message>
     <message>
         <source>View</source>
@@ -660,11 +660,11 @@ and </source>
     </message>
     <message>
         <source>Find</source>
-        <translation>Найти</translation>
+        <translation type="obsolete">Найти</translation>
     </message>
     <message>
         <source>Click here to search for an item.</source>
-        <translation>Нажмите для поиска записи.</translation>
+        <translation type="obsolete">Нажмите для поиска записи.</translation>
     </message>
     <message>
         <source>Configure</source>
@@ -676,19 +676,23 @@ and </source>
     </message>
     <message>
         <source>Filter</source>
-        <translation>Фильтр</translation>
+        <translation type="obsolete">Фильтр</translation>
     </message>
     <message>
         <source>Click here to filter the items displayed.</source>
-        <translation>Нажмите, чтобы отфильтровать отображаемые записи.</translation>
+        <translation type="obsolete">Нажмите, чтобы отфильтровать отображаемые записи.</translation>
     </message>
     <message>
         <source>Filter Settings</source>
-        <translation>Настройки фильтра</translation>
+        <translation type="obsolete">Настройки фильтра</translation>
     </message>
     <message>
         <source>Click here to modify the current filter settings.</source>
-        <translation>Нажмите, чтобы изменить настройки текущего фильтра.</translation>
+        <translation type="obsolete">Нажмите, чтобы изменить настройки текущего фильтра.</translation>
+    </message>
+    <message>
+        <source>Click here to filter items by category.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

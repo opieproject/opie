@@ -112,6 +112,10 @@ ze serveru:</translation>
         <source>Could not connect to server </source>
         <translation>Nelze se připojit k serveru</translation>
     </message>
+    <message>
+        <source>Retrieving time from network...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NTPTabWidget</name>

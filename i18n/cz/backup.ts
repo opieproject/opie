@@ -62,6 +62,26 @@
         <source>Restore Backup...</source>
         <translation>Obnovuji zálohu...</translation>
     </message>
+    <message>
+        <source>&lt;qt&gt;%1&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restore</source>
+        <translation type="unfinished">Obnovit</translation>
+    </message>
+    <message>
+        <source>Would you really overwrite your local data?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>BackupAndRestoreBase</name>
@@ -115,11 +135,11 @@
     </message>
     <message>
         <source>Save</source>
-        <translation>Uložit</translation>
+        <translation type="obsolete">Uložit</translation>
     </message>
     <message>
         <source>...</source>
-        <translation>...</translation>
+        <translation type="obsolete">...</translation>
     </message>
     <message>
         <source>Destination</source>
@@ -127,15 +147,15 @@
     </message>
     <message>
         <source>Type</source>
-        <translation>Typ</translation>
+        <translation type="obsolete">Typ</translation>
     </message>
     <message>
         <source>User Data (Configuration + PIM)</source>
-        <translation>Uživatelská data (Konfigurace + PIM)</translation>
+        <translation type="obsolete">Uživatelská data (Konfigurace + PIM)</translation>
     </message>
     <message>
         <source>Full Backup (Root File System)</source>
-        <translation>Kompletní záloha (Systém souborů root)</translation>
+        <translation type="obsolete">Kompletní záloha (Systém souborů root)</translation>
     </message>
 </context>
 <context>

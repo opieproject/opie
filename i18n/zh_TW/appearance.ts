@@ -23,15 +23,15 @@
     </message>
     <message>
         <source>Force styling for all applications.</source>
-        <translation>強制將樣式套用到所有的應用程式.</translation>
+        <translation type="obsolete">強制將樣式套用到所有的應用程式.</translation>
     </message>
     <message>
         <source>Disable styling for these applications ( &lt;b&gt;*&lt;/b&gt; can be used as a wildcard):</source>
-        <translation>停用這些應用程式的樣式(可以用 &lt;b&gt;*&lt;/b&gt; 當作萬用字元):</translation>
+        <translation type="obsolete">停用這些應用程式的樣式(可以用 &lt;b&gt;*&lt;/b&gt; 當作萬用字元):</translation>
     </message>
     <message>
         <source>Binary file(s)</source>
-        <translation>二元檔</translation>
+        <translation type="obsolete">二元檔</translation>
     </message>
     <message>
         <source>Tab style:</source>
@@ -119,7 +119,7 @@
     </message>
     <message>
         <source>&lt;new&gt;</source>
-        <translation>&lt;新增&gt;</translation>
+        <translation type="obsolete">&lt;新增&gt;</translation>
     </message>
     <message>
         <source>Styles control the way items such as buttons and scroll bars appear in all applications.
@@ -171,31 +171,31 @@ Click here to select an available scheme.</source>
     </message>
     <message>
         <source>Click here to allow all applications to use global appearance settings.</source>
-        <translation>按這裡讓所有的應用程式使用全域外觀設定值.</translation>
+        <translation type="obsolete">按這裡讓所有的應用程式使用全域外觀設定值.</translation>
     </message>
     <message>
         <source>If some applications do not display correctly with the global appearance settings, certain features can be turned off for that application.
 
 This area allows you to select an application and which settings you wish to disable.</source>
-        <translation>如果某些應用程式無法正確地以全域外觀設定值顯示, 您可以關閉用於該應用程式的某些功能.
+        <translation type="obsolete">如果某些應用程式無法正確地以全域外觀設定值顯示, 您可以關閉用於該應用程式的某些功能.
 
 這個區域允許您選擇要那些程式停用設定值.</translation>
     </message>
     <message>
         <source>Click here to add an application to the list above.</source>
-        <translation>按這裡來將應用程式加入上面的清單.</translation>
+        <translation type="obsolete">按這裡來將應用程式加入上面的清單.</translation>
     </message>
     <message>
         <source>Click here to delete the currently selected application.</source>
-        <translation>按這裡以刪除目前選擇的應用程式.</translation>
+        <translation type="obsolete">按這裡以刪除目前選擇的應用程式.</translation>
     </message>
     <message>
         <source>Click here to move the currently selected application up in the list.</source>
-        <translation>按這裡讓目前選擇的應用程式在清單中向上移動.</translation>
+        <translation type="obsolete">按這裡讓目前選擇的應用程式在清單中向上移動.</translation>
     </message>
     <message>
         <source>Click here to move the currently selected application down in the list.</source>
-        <translation>按這裡讓目前選擇的應用程式在清單中向下移動.</translation>
+        <translation type="obsolete">按這裡讓目前選擇的應用程式在清單中向下移動.</translation>
     </message>
     <message>
         <source>Click here to select a desired style for tabbed dialogs (such as this application). The styles available are:
@@ -229,6 +229,14 @@ This area allows you to select an application and which settings you wish to dis
     </message>
     <message>
         <source>Appearance Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Scrollbars on the left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to display scrollbars on the left side instead of the right.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

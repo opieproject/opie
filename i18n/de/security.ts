@@ -117,7 +117,7 @@ Login einzustellen.</translation>
     </message>
     <message>
         <source>To be able to protect your PDA with one or more authentication plugins (for example, a simple PIN authentication), you must install at least one &lt;em&gt;opie-multiauth-*&lt;/em&gt; package! Once you have done that, you will be able to configure your PDA protection here.</source>
-        <translation>Es muss mindestens ein &lt;em&gt;opie-mutliauth-*&lt;/em Paket installiert sein um den PDA schützen zu können.</translation>
+        <translation type="obsolete">Es muss mindestens ein &lt;em&gt;opie-mutliauth-*&lt;/em Paket installiert sein um den PDA schützen zu können.</translation>
     </message>
     <message>
         <source>Locking</source>
@@ -130,6 +130,10 @@ Login einzustellen.</translation>
     <message>
         <source>OK</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>To be able to protect your PDA with one or more authentication plugins (for example, a simple PIN authentication), you must install at least one &lt;em&gt;opie-securityplugin-*&lt;/em&gt; package! Once you have done that, you will be able to configure your PDA protection here.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -428,7 +432,7 @@ geänderten Daten gehen dabei verloren!</translation>
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    IntelliSync will disable the password check but you&apos;ll be prompted to accept the connection.
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Opie1.0 will be compatible with QtopiaDesktop, MultiSync and KitchenSync
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Qtopia1.7 will alter the way data is send to the client and will not work with older clients.
-<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/></source>
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    </source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -373,6 +373,25 @@ Mégis kilép?</translation>
     </message>
 </context>
 <context>
+    <name>DateBookWeekLstEvent</name>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Szerkeszt</translation>
+    </message>
+    <message>
+        <source>Duplicate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Töröl</translation>
+    </message>
+    <message>
+        <source>Beam</source>
+        <translation type="unfinished">Átsugároz</translation>
+    </message>
+</context>
+<context>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>

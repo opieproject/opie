@@ -15,6 +15,13 @@
     </message>
 </context>
 <context>
+    <name>AbView</name>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished">Без категории</translation>
+    </message>
+</context>
+<context>
     <name>AddressbookWindow</name>
     <message>
         <source>Contacts</source>
@@ -22,67 +29,67 @@
     </message>
     <message>
         <source>Contact</source>
-        <translation>Контакт</translation>
+        <translation type="obsolete">Контакт</translation>
     </message>
     <message>
         <source>List</source>
-        <translation>Список</translation>
+        <translation type="obsolete">Список</translation>
     </message>
     <message>
         <source>Card</source>
-        <translation>Карта</translation>
+        <translation type="obsolete">Карта</translation>
     </message>
     <message>
         <source>New</source>
-        <translation>Новый</translation>
+        <translation type="obsolete">Новый</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Редактировать</translation>
+        <translation type="obsolete">Редактировать</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Удалить</translation>
+        <translation type="obsolete">Удалить</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>Поиск</translation>
+        <translation type="obsolete">Поиск</translation>
     </message>
     <message>
         <source>Start Search</source>
-        <translation>Начать поиск</translation>
+        <translation type="obsolete">Начать поиск</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation>Закрыть</translation>
+        <translation type="obsolete">Закрыть</translation>
     </message>
     <message>
         <source>Write Mail To</source>
-        <translation>Написать письмо</translation>
+        <translation type="obsolete">Написать письмо</translation>
     </message>
     <message>
         <source>Beam Entry</source>
-        <translation>Отправить</translation>
+        <translation type="obsolete">Отправить</translation>
     </message>
     <message>
         <source>Import vCard</source>
-        <translation>Импорт vCard</translation>
+        <translation type="obsolete">Импорт vCard</translation>
     </message>
     <message>
         <source>My Personal Details</source>
-        <translation>Сведения обо мне</translation>
+        <translation type="obsolete">Сведения обо мне</translation>
     </message>
     <message>
         <source>Save all Data</source>
-        <translation>Записать все</translation>
+        <translation type="obsolete">Записать все</translation>
     </message>
     <message>
         <source>Config</source>
-        <translation>Конфигурация</translation>
+        <translation type="obsolete">Конфигурация</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Просмотр</translation>
+        <translation type="obsolete">Просмотр</translation>
     </message>
     <message>
         <source>Right file type ?</source>
@@ -124,7 +131,7 @@
     </message>
     <message>
         <source>Edit Address</source>
-        <translation>Редактировать адрес</translation>
+        <translation type="obsolete">Редактировать адрес</translation>
     </message>
     <message>
         <source>Edit My Personal Details</source>
@@ -159,7 +166,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Cards</source>
-        <translation>Карточки</translation>
+        <translation type="obsolete">Карточки</translation>
     </message>
     <message>
         <source>All</source>
@@ -167,11 +174,11 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Без категории</translation>
+        <translation type="obsolete">Без категории</translation>
     </message>
     <message>
         <source>Export vCard</source>
-        <translation>Экспорт vCard</translation>
+        <translation type="obsolete">Экспорт vCard</translation>
     </message>
     <message>
         <source>You have to select a contact !</source>
@@ -180,6 +187,10 @@ Quit anyway?</source>
     <message>
         <source>You have to set a filename !</source>
         <translation>Вы должны задать имя файла !</translation>
+    </message>
+    <message>
+        <source>Edit Contact</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1343,6 +1354,41 @@ Opie-Mail - свободная программа!</translation>
     <message>
         <source></source>
         <translation></translation>
+    </message>
+</context>
+<context>
+    <name>Opie</name>
+    <message>
+        <source>Contact</source>
+        <translation type="unfinished">Контакт</translation>
+    </message>
+    <message>
+        <source>Contacts</source>
+        <translation type="unfinished">Контакты</translation>
+    </message>
+    <message>
+        <source>Start Search</source>
+        <translation type="unfinished">Начать поиск</translation>
+    </message>
+    <message>
+        <source>Write Mail To</source>
+        <translation type="unfinished">Написать письмо</translation>
+    </message>
+    <message>
+        <source>Import vCard</source>
+        <translation type="unfinished">Импорт vCard</translation>
+    </message>
+    <message>
+        <source>Export vCard</source>
+        <translation type="unfinished">Экспорт vCard</translation>
+    </message>
+    <message>
+        <source>My Personal Details</source>
+        <translation type="unfinished">Сведения обо мне</translation>
+    </message>
+    <message>
+        <source>Show quick search bar</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

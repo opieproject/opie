@@ -375,6 +375,25 @@ Weekdagen</translation>
     </message>
 </context>
 <context>
+    <name>DateBookWeekLstEvent</name>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Wijzig</translation>
+    </message>
+    <message>
+        <source>Duplicate</source>
+        <translation type="unfinished">Dupliceer</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Verwijder</translation>
+    </message>
+    <message>
+        <source>Beam</source>
+        <translation type="unfinished">Verstuur</translation>
+    </message>
+</context>
+<context>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>

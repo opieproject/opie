@@ -123,10 +123,6 @@ Możesz wybrać tylko skonfigurowanego użytkownika.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>To be able to protect your PDA with one or more authentication plugins (for example, a simple PIN authentication), you must install at least one &lt;em&gt;opie-multiauth-*&lt;/em&gt; package! Once you have done that, you will be able to configure your PDA protection here.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Locking</source>
         <translation type="unfinished"></translation>
     </message>
@@ -136,6 +132,10 @@ Możesz wybrać tylko skonfigurowanego użytkownika.</translation>
     </message>
     <message>
         <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To be able to protect your PDA with one or more authentication plugins (for example, a simple PIN authentication), you must install at least one &lt;em&gt;opie-securityplugin-*&lt;/em&gt; package! Once you have done that, you will be able to configure your PDA protection here.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

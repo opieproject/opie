@@ -71,44 +71,44 @@ Click here to select an available scheme.</source>
     </message>
     <message>
         <source>Force styling for all applications.</source>
-        <translation>Форсирај стилизирање на сите апликации.</translation>
+        <translation type="obsolete">Форсирај стилизирање на сите апликации.</translation>
     </message>
     <message>
         <source>Click here to allow all applications to use global appearance settings.</source>
-        <translation>Кликни овде за да се дозволи сите апликации да ги користат глобалните подесувања на изгледот.</translation>
+        <translation type="obsolete">Кликни овде за да се дозволи сите апликации да ги користат глобалните подесувања на изгледот.</translation>
     </message>
     <message>
         <source>Disable styling for these applications ( &lt;b&gt;*&lt;/b&gt; can be used as a wildcard):</source>
-        <translation>Исклучи стилизирање на овие апликации (&lt;b&gt;*&lt;/b&gt; може да се користат како специјални знаци):</translation>
+        <translation type="obsolete">Исклучи стилизирање на овие апликации (&lt;b&gt;*&lt;/b&gt; може да се користат како специјални знаци):</translation>
     </message>
     <message>
         <source>If some applications do not display correctly with the global appearance settings, certain features can be turned off for that application.
 
 This area allows you to select an application and which settings you wish to disable.</source>
-        <translation>Доколку некои апликации не се прикажуваат правилно со глобалните подесувања на изглед, одредни 
+        <translation type="obsolete">Доколку некои апликации не се прикажуваат правилно со глобалните подесувања на изглед, одредни 
 опции може да бидат исклучени за таа апликација
 
 Овој дел дозволува да се избере аплкација чии подесувања треба да се исклучат.</translation>
     </message>
     <message>
         <source>Binary file(s)</source>
-        <translation>Бинарна датотека/и</translation>
+        <translation type="obsolete">Бинарна датотека/и</translation>
     </message>
     <message>
         <source>Click here to add an application to the list above.</source>
-        <translation>Кликни овде за да се додаде апликација на листата погоре.</translation>
+        <translation type="obsolete">Кликни овде за да се додаде апликација на листата погоре.</translation>
     </message>
     <message>
         <source>Click here to delete the currently selected application.</source>
-        <translation>Кликни овде за да избрише избраната апликација.</translation>
+        <translation type="obsolete">Кликни овде за да избрише избраната апликација.</translation>
     </message>
     <message>
         <source>Click here to move the currently selected application up in the list.</source>
-        <translation>Кликни овде за да се премести избраната апликација погоре во листата.</translation>
+        <translation type="obsolete">Кликни овде за да се премести избраната апликација погоре во листата.</translation>
     </message>
     <message>
         <source>Click here to move the currently selected application down in the list.</source>
-        <translation>Кликни овде за да се премести избраната апликација подоле во листата.</translation>
+        <translation type="obsolete">Кликни овде за да се премести избраната апликација подоле во листата.</translation>
     </message>
     <message>
         <source>Tab style:</source>
@@ -230,7 +230,15 @@ This area allows you to select an application and which settings you wish to dis
     </message>
     <message>
         <source>&lt;new&gt;</source>
-        <translation>&lt;ново&gt;</translation>
+        <translation type="obsolete">&lt;ново&gt;</translation>
+    </message>
+    <message>
+        <source>Show Scrollbars on the left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to display scrollbars on the left side instead of the right.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

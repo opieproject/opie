@@ -15,6 +15,13 @@
     </message>
 </context>
 <context>
+    <name>AbView</name>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished">Ikke-arkiverede</translation>
+    </message>
+</context>
+<context>
     <name>AddressbookWindow</name>
     <message>
         <source>Contacts</source>
@@ -22,67 +29,67 @@
     </message>
     <message>
         <source>Contact</source>
-        <translation>Kontakt</translation>
+        <translation type="obsolete">Kontakt</translation>
     </message>
     <message>
         <source>List</source>
-        <translation>Liste</translation>
+        <translation type="obsolete">Liste</translation>
     </message>
     <message>
         <source>Card</source>
-        <translation>Kort</translation>
+        <translation type="obsolete">Kort</translation>
     </message>
     <message>
         <source>New</source>
-        <translation>Ny</translation>
+        <translation type="obsolete">Ny</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Rediger</translation>
+        <translation type="obsolete">Rediger</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Slet</translation>
+        <translation type="obsolete">Slet</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>Find</translation>
+        <translation type="obsolete">Find</translation>
     </message>
     <message>
         <source>Start Search</source>
-        <translation>Start søgning</translation>
+        <translation type="obsolete">Start søgning</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation>Luk find</translation>
+        <translation type="obsolete">Luk find</translation>
     </message>
     <message>
         <source>Write Mail To</source>
-        <translation>Skriv mail til</translation>
+        <translation type="obsolete">Skriv mail til</translation>
     </message>
     <message>
         <source>Beam Entry</source>
-        <translation>Send kontakt</translation>
+        <translation type="obsolete">Send kontakt</translation>
     </message>
     <message>
         <source>Import vCard</source>
-        <translation>Importer vCard</translation>
+        <translation type="obsolete">Importer vCard</translation>
     </message>
     <message>
         <source>My Personal Details</source>
-        <translation>Mine personlige detaljer</translation>
+        <translation type="obsolete">Mine personlige detaljer</translation>
     </message>
     <message>
         <source>Save all Data</source>
-        <translation>Gem alle data</translation>
+        <translation type="obsolete">Gem alle data</translation>
     </message>
     <message>
         <source>Config</source>
-        <translation>Indstilling</translation>
+        <translation type="obsolete">Indstilling</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Vis</translation>
+        <translation type="obsolete">Vis</translation>
     </message>
     <message>
         <source>Right file type ?</source>
@@ -123,7 +130,7 @@
     </message>
     <message>
         <source>Edit Address</source>
-        <translation>Rediger adresse</translation>
+        <translation type="obsolete">Rediger adresse</translation>
     </message>
     <message>
         <source>Edit My Personal Details</source>
@@ -160,7 +167,7 @@ dette søge mønster!</translation>
     </message>
     <message>
         <source>Cards</source>
-        <translation>Kort</translation>
+        <translation type="obsolete">Kort</translation>
     </message>
     <message>
         <source>All</source>
@@ -168,11 +175,11 @@ dette søge mønster!</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Ikke-arkiverede</translation>
+        <translation type="obsolete">Ikke-arkiverede</translation>
     </message>
     <message>
         <source>Export vCard</source>
-        <translation>Eksporter vCard</translation>
+        <translation type="obsolete">Eksporter vCard</translation>
     </message>
     <message>
         <source>You have to select a contact !</source>
@@ -181,6 +188,10 @@ dette søge mønster!</translation>
     <message>
         <source>You have to set a filename !</source>
         <translation>Du skal angive et filnavn!</translation>
+    </message>
+    <message>
+        <source>Edit Contact</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1344,6 +1355,41 @@ Opie-Mail fås gratis!</translation>
     </message>
     <message>
         <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Opie</name>
+    <message>
+        <source>Contact</source>
+        <translation type="unfinished">Kontakt</translation>
+    </message>
+    <message>
+        <source>Contacts</source>
+        <translation type="unfinished">Kontakter</translation>
+    </message>
+    <message>
+        <source>Start Search</source>
+        <translation type="unfinished">Start søgning</translation>
+    </message>
+    <message>
+        <source>Write Mail To</source>
+        <translation type="unfinished">Skriv mail til</translation>
+    </message>
+    <message>
+        <source>Import vCard</source>
+        <translation type="unfinished">Importer vCard</translation>
+    </message>
+    <message>
+        <source>Export vCard</source>
+        <translation type="unfinished">Eksporter vCard</translation>
+    </message>
+    <message>
+        <source>My Personal Details</source>
+        <translation type="unfinished">Mine personlige detaljer</translation>
+    </message>
+    <message>
+        <source>Show quick search bar</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

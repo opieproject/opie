@@ -226,11 +226,11 @@ and </source>
     </message>
     <message>
         <source>Click here to view all items.</source>
-        <translation>Klikněte pro zobrazení všech položek.</translation>
+        <translation type="obsolete">Klikněte pro zobrazení všech položek.</translation>
     </message>
     <message>
         <source>Click here to view items belonging to %1.</source>
-        <translation>Klikněte pro zobrazení položek patřících k %1.</translation>
+        <translation type="obsolete">Klikněte pro zobrazení položek patřících k %1.</translation>
     </message>
     <message>
         <source>Unfiled</source>
@@ -238,7 +238,7 @@ and </source>
     </message>
     <message>
         <source>Click here to view all unfiled items.</source>
-        <translation>Klikněte pro zobrazení všech nezařazených položek.</translation>
+        <translation type="obsolete">Klikněte pro zobrazení všech nezařazených položek.</translation>
     </message>
     <message>
         <source>View</source>
@@ -286,11 +286,11 @@ and </source>
     </message>
     <message>
         <source>Find</source>
-        <translation>Hledat</translation>
+        <translation type="obsolete">Hledat</translation>
     </message>
     <message>
         <source>Click here to search for an item.</source>
-        <translation>Klkněte pro hledání položky.</translation>
+        <translation type="obsolete">Klkněte pro hledání položky.</translation>
     </message>
     <message>
         <source>Configure</source>
@@ -302,19 +302,23 @@ and </source>
     </message>
     <message>
         <source>Filter</source>
-        <translation>Filtrovat</translation>
+        <translation type="obsolete">Filtrovat</translation>
     </message>
     <message>
         <source>Click here to filter the items displayed.</source>
-        <translation>Klikněte pro filtrování zobrazených položek.</translation>
+        <translation type="obsolete">Klikněte pro filtrování zobrazených položek.</translation>
     </message>
     <message>
         <source>Filter Settings</source>
-        <translation>Nastavení filtru</translation>
+        <translation type="obsolete">Nastavení filtru</translation>
     </message>
     <message>
         <source>Click here to modify the current filter settings.</source>
-        <translation>Klikněte pro změnu aktuálního nastavení filtru.</translation>
+        <translation type="obsolete">Klikněte pro změnu aktuálního nastavení filtru.</translation>
+    </message>
+    <message>
+        <source>Click here to filter items by category.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

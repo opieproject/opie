@@ -209,35 +209,49 @@
     </message>
     <message>
         <source>Could not open :</source>
-        <translation>Öffnen fehlgeschlagen: </translation>
+        <translation type="obsolete">Öffnen fehlgeschlagen: </translation>
     </message>
     <message>
         <source>Creating directory </source>
-        <translation>Erstellung Verzeichnis </translation>
+        <translation type="obsolete">Erstellung Verzeichnis </translation>
     </message>
     <message>
         <source>Linked %1 to %2</source>
-        <translation>Verlinkung von %1 mit %2</translation>
+        <translation type="obsolete">Verlinkung von %1 mit %2</translation>
     </message>
     <message>
         <source>Failed to link %1 to %2</source>
-        <translation>Verlinkung von %1 mit %2 fehlgeschlage</translation>
+        <translation type="obsolete">Verlinkung von %1 mit %2 fehlgeschlage</translation>
     </message>
     <message>
         <source>Removed %1</source>
-        <translation>%1 gelöscht</translation>
+        <translation type="obsolete">%1 gelöscht</translation>
     </message>
     <message>
         <source>Failed to remove %1</source>
-        <translation>Löschen %1 fehlgeschlagen</translation>
+        <translation type="obsolete">Löschen %1 fehlgeschlagen</translation>
     </message>
     <message>
         <source>Removed </source>
-        <translation>Gelöscht </translation>
+        <translation type="obsolete">Gelöscht </translation>
     </message>
     <message>
         <source>Failed to remove </source>
-        <translation>Löschen fehlgeschlagen </translation>
+        <translation type="obsolete">Löschen fehlgeschlagen </translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t start ipkg-link process</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Symbolic linking failed!
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Symbolic linking succeeded.
+</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

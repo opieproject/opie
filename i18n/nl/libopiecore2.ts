@@ -59,7 +59,7 @@
     </message>
     <message>
         <source>Display Rotate</source>
-        <translation>Geef rotatie weer</translation>
+        <translation type="obsolete">Geef rotatie weer</translation>
     </message>
     <message>
         <source>Action Button</source>
@@ -75,6 +75,18 @@
     </message>
     <message>
         <source>Todo Button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hinge1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hinge2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hinge3</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -15,6 +15,13 @@
     </message>
 </context>
 <context>
+    <name>AbView</name>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished">Nieprzydzielone</translation>
+    </message>
+</context>
+<context>
     <name>AddressbookWindow</name>
     <message>
         <source>Contacts</source>
@@ -22,39 +29,39 @@
     </message>
     <message>
         <source>Contact</source>
-        <translation>Kontakt</translation>
+        <translation type="obsolete">Kontakt</translation>
     </message>
     <message>
         <source>New</source>
-        <translation>Nowy</translation>
+        <translation type="obsolete">Nowy</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Edytuj</translation>
+        <translation type="obsolete">Edytuj</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Usuń</translation>
+        <translation type="obsolete">Usuń</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>Znajdź</translation>
+        <translation type="obsolete">Znajdź</translation>
     </message>
     <message>
         <source>Write Mail To</source>
-        <translation>Napisz e-mail do</translation>
+        <translation type="obsolete">Napisz e-mail do</translation>
     </message>
     <message>
         <source>Beam Entry</source>
-        <translation>Emituj wpis</translation>
+        <translation type="obsolete">Emituj wpis</translation>
     </message>
     <message>
         <source>My Personal Details</source>
-        <translation>Moje dane osobiste</translation>
+        <translation type="obsolete">Moje dane osobiste</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Widok</translation>
+        <translation type="obsolete">Widok</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
@@ -66,7 +73,7 @@
     </message>
     <message>
         <source>Edit Address</source>
-        <translation>Edycja adresu</translation>
+        <translation type="obsolete">Edycja adresu</translation>
     </message>
     <message>
         <source>Contacts - My Personal Details</source>
@@ -94,23 +101,23 @@ Zakończyć?</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Nieprzydzielone</translation>
+        <translation type="obsolete">Nieprzydzielone</translation>
     </message>
     <message>
         <source>Import vCard</source>
-        <translation>Importuj wizytówkę (vCard)</translation>
+        <translation type="obsolete">Importuj wizytówkę (vCard)</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation>Zamknij eyszukiwarkę</translation>
+        <translation type="obsolete">Zamknij eyszukiwarkę</translation>
     </message>
     <message>
         <source>Save all Data</source>
-        <translation>Zapisz wszystkie dane</translation>
+        <translation type="obsolete">Zapisz wszystkie dane</translation>
     </message>
     <message>
         <source>Config</source>
-        <translation>Konfiguruj</translation>
+        <translation type="obsolete">Konfiguruj</translation>
     </message>
     <message>
         <source>Not Found</source>
@@ -118,19 +125,19 @@ Zakończyć?</translation>
     </message>
     <message>
         <source>List</source>
-        <translation>Lista</translation>
+        <translation type="obsolete">Lista</translation>
     </message>
     <message>
         <source>Cards</source>
-        <translation>Wizytówki</translation>
+        <translation type="obsolete">Wizytówki</translation>
     </message>
     <message>
         <source>Card</source>
-        <translation>Wizytówka</translation>
+        <translation type="obsolete">Wizytówka</translation>
     </message>
     <message>
         <source>Start Search</source>
-        <translation>Szukaj</translation>
+        <translation type="obsolete">Szukaj</translation>
     </message>
     <message>
         <source>Right file type ?</source>
@@ -173,7 +180,7 @@ Czy na pewno chcesz go otworzyć?</translation>
     </message>
     <message>
         <source>Export vCard</source>
-        <translation>Eksportuj wizytówkę (vCard)</translation>
+        <translation type="obsolete">Eksportuj wizytówkę (vCard)</translation>
     </message>
     <message>
         <source>You have to select a contact !</source>
@@ -182,6 +189,10 @@ Czy na pewno chcesz go otworzyć?</translation>
     <message>
         <source>You have to set a filename !</source>
         <translation>Musisz podać nazwę pliku!</translation>
+    </message>
+    <message>
+        <source>Edit Contact</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1345,6 +1356,41 @@ dostępny za darmo!</translation>
     </message>
     <message>
         <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Opie</name>
+    <message>
+        <source>Contact</source>
+        <translation type="unfinished">Kontakt</translation>
+    </message>
+    <message>
+        <source>Contacts</source>
+        <translation type="unfinished">Kontakty</translation>
+    </message>
+    <message>
+        <source>Start Search</source>
+        <translation type="unfinished">Szukaj</translation>
+    </message>
+    <message>
+        <source>Write Mail To</source>
+        <translation type="unfinished">Napisz e-mail do</translation>
+    </message>
+    <message>
+        <source>Import vCard</source>
+        <translation type="unfinished">Importuj wizytówkę (vCard)</translation>
+    </message>
+    <message>
+        <source>Export vCard</source>
+        <translation type="unfinished">Eksportuj wizytówkę (vCard)</translation>
+    </message>
+    <message>
+        <source>My Personal Details</source>
+        <translation type="unfinished">Moje dane osobiste</translation>
+    </message>
+    <message>
+        <source>Show quick search bar</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

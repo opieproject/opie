@@ -15,6 +15,13 @@
     </message>
 </context>
 <context>
+    <name>AbView</name>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished">Brez</translation>
+    </message>
+</context>
+<context>
     <name>AddressbookWindow</name>
     <message>
         <source>Contacts</source>
@@ -22,39 +29,39 @@
     </message>
     <message>
         <source>Contact</source>
-        <translation>Stik</translation>
+        <translation type="obsolete">Stik</translation>
     </message>
     <message>
         <source>New</source>
-        <translation>Nov</translation>
+        <translation type="obsolete">Nov</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Uredi</translation>
+        <translation type="obsolete">Uredi</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Izbriši</translation>
+        <translation type="obsolete">Izbriši</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>Najdi</translation>
+        <translation type="obsolete">Najdi</translation>
     </message>
     <message>
         <source>Write Mail To</source>
-        <translation>Pošlji epošto</translation>
+        <translation type="obsolete">Pošlji epošto</translation>
     </message>
     <message>
         <source>Beam Entry</source>
-        <translation>Prežarči vnos</translation>
+        <translation type="obsolete">Prežarči vnos</translation>
     </message>
     <message>
         <source>My Personal Details</source>
-        <translation>Moje osebne podrobnosti</translation>
+        <translation type="obsolete">Moje osebne podrobnosti</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Pogled</translation>
+        <translation type="obsolete">Pogled</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
@@ -66,7 +73,7 @@
     </message>
     <message>
         <source>Edit Address</source>
-        <translation>Uredi naslov</translation>
+        <translation type="obsolete">Uredi naslov</translation>
     </message>
     <message>
         <source>Contacts - My Personal Details</source>
@@ -94,23 +101,23 @@ Izhod?</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Brez</translation>
+        <translation type="obsolete">Brez</translation>
     </message>
     <message>
         <source>Import vCard</source>
-        <translation>Uvozi vCard</translation>
+        <translation type="obsolete">Uvozi vCard</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation>Zapri iskalnik</translation>
+        <translation type="obsolete">Zapri iskalnik</translation>
     </message>
     <message>
         <source>Save all Data</source>
-        <translation>Shrani vse podatke</translation>
+        <translation type="obsolete">Shrani vse podatke</translation>
     </message>
     <message>
         <source>Config</source>
-        <translation>Natavitve</translation>
+        <translation type="obsolete">Natavitve</translation>
     </message>
     <message>
         <source>Not Found</source>
@@ -118,19 +125,19 @@ Izhod?</translation>
     </message>
     <message>
         <source>List</source>
-        <translation>Seznam</translation>
+        <translation type="obsolete">Seznam</translation>
     </message>
     <message>
         <source>Cards</source>
-        <translation>Kartice</translation>
+        <translation type="obsolete">Kartice</translation>
     </message>
     <message>
         <source>Card</source>
-        <translation>Kartica</translation>
+        <translation type="obsolete">Kartica</translation>
     </message>
     <message>
         <source>Start Search</source>
-        <translation>Začni iskanje</translation>
+        <translation type="obsolete">Začni iskanje</translation>
     </message>
     <message>
         <source>Right file type ?</source>
@@ -173,7 +180,7 @@ Ali jo res želite odpreti?</translation>
     </message>
     <message>
         <source>Export vCard</source>
-        <translation>Izvozi vCard</translation>
+        <translation type="obsolete">Izvozi vCard</translation>
     </message>
     <message>
         <source>You have to select a contact !</source>
@@ -182,6 +189,10 @@ Ali jo res želite odpreti?</translation>
     <message>
         <source>You have to set a filename !</source>
         <translation>Morate nastaviti ime datoteke !</translation>
+    </message>
+    <message>
+        <source>Edit Contact</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1345,6 +1356,41 @@ je zastonj!</translation>
     </message>
     <message>
         <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Opie</name>
+    <message>
+        <source>Contact</source>
+        <translation type="unfinished">Stik</translation>
+    </message>
+    <message>
+        <source>Contacts</source>
+        <translation type="unfinished">Stiki</translation>
+    </message>
+    <message>
+        <source>Start Search</source>
+        <translation type="unfinished">Začni iskanje</translation>
+    </message>
+    <message>
+        <source>Write Mail To</source>
+        <translation type="unfinished">Pošlji epošto</translation>
+    </message>
+    <message>
+        <source>Import vCard</source>
+        <translation type="unfinished">Uvozi vCard</translation>
+    </message>
+    <message>
+        <source>Export vCard</source>
+        <translation type="unfinished">Izvozi vCard</translation>
+    </message>
+    <message>
+        <source>My Personal Details</source>
+        <translation type="unfinished">Moje osebne podrobnosti</translation>
+    </message>
+    <message>
+        <source>Show quick search bar</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

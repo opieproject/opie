@@ -119,16 +119,16 @@ votre carte n&apos;est pas reconnue</translation>
     <message>
         <source>Do you really want to &lt;font size=+2&gt;&lt;B&gt;DELETE&lt;/B&gt;&lt;/font&gt;
 the selected file?</source>
-        <translation>Confirmez vous &lt;font size=+2&gt;&lt;B&gt;la suppression&lt;/B&gt;&lt;/font&gt;
+        <translation type="obsolete">Confirmez vous &lt;font size=+2&gt;&lt;B&gt;la suppression&lt;/B&gt;&lt;/font&gt;
 des fichiers sélectionnés ?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Oui</translation>
+        <translation type="obsolete">Oui</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>Non</translation>
+        <translation type="obsolete">Non</translation>
     </message>
     <message>
         <source>Error</source>
@@ -144,7 +144,7 @@ des fichiers sélectionnés ?</translation>
     </message>
     <message>
         <source>Please select file to  play</source>
-        <translation>Veuillez sélectionner un fichier à jouer</translation>
+        <translation type="obsolete">Veuillez sélectionner un fichier à jouer</translation>
     </message>
     <message>
         <source>Note</source>
@@ -222,6 +222,10 @@ des fichiers sélectionnés ?</translation>
     </message>
     <message>
         <source>Stereo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please select file to play</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

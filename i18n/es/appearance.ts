@@ -23,15 +23,15 @@
     </message>
     <message>
         <source>Force styling for all applications.</source>
-        <translation>Forzar estilo en todas las aplicaciones.</translation>
+        <translation type="obsolete">Forzar estilo en todas las aplicaciones.</translation>
     </message>
     <message>
         <source>Disable styling for these applications ( &lt;b&gt;*&lt;/b&gt; can be used as a wildcard):</source>
-        <translation>Desactivar estilo en estas aplicaciones (puede usarse el comodín &lt;b&gt;*&lt;/b&gt;):</translation>
+        <translation type="obsolete">Desactivar estilo en estas aplicaciones (puede usarse el comodín &lt;b&gt;*&lt;/b&gt;):</translation>
     </message>
     <message>
         <source>Binary file(s)</source>
-        <translation>Ficheros binarios</translation>
+        <translation type="obsolete">Ficheros binarios</translation>
     </message>
     <message>
         <source>Tab style:</source>
@@ -119,7 +119,7 @@
     </message>
     <message>
         <source>&lt;new&gt;</source>
-        <translation>&lt;nuevo&gt;</translation>
+        <translation type="obsolete">&lt;nuevo&gt;</translation>
     </message>
     <message>
         <source>Styles control the way items such as buttons and scroll bars appear in all applications.
@@ -171,31 +171,31 @@ Pulse aquí para seleccionar un esquema disponible.</translation>
     </message>
     <message>
         <source>Click here to allow all applications to use global appearance settings.</source>
-        <translation>Pulse aquí para permitir que todas las aplicaciones usen la configuración de apariencia global.</translation>
+        <translation type="obsolete">Pulse aquí para permitir que todas las aplicaciones usen la configuración de apariencia global.</translation>
     </message>
     <message>
         <source>If some applications do not display correctly with the global appearance settings, certain features can be turned off for that application.
 
 This area allows you to select an application and which settings you wish to disable.</source>
-        <translation>Si algunas aplicaciones no se ven bien con la configuración de apariencia global, algunas características pueden desaparecer.
+        <translation type="obsolete">Si algunas aplicaciones no se ven bien con la configuración de apariencia global, algunas características pueden desaparecer.
 
 Esta área le permite seleccionar un aplicación y qué funciones desea deshabilitar.</translation>
     </message>
     <message>
         <source>Click here to add an application to the list above.</source>
-        <translation>Pulse aquí para añadir una aplicación de la lista superior.</translation>
+        <translation type="obsolete">Pulse aquí para añadir una aplicación de la lista superior.</translation>
     </message>
     <message>
         <source>Click here to delete the currently selected application.</source>
-        <translation>Pulse aquí para borrar la aplicación seleccionada actualmente.</translation>
+        <translation type="obsolete">Pulse aquí para borrar la aplicación seleccionada actualmente.</translation>
     </message>
     <message>
         <source>Click here to move the currently selected application up in the list.</source>
-        <translation>Pulse aquí para subir la aplicación seleccionada en la lista.</translation>
+        <translation type="obsolete">Pulse aquí para subir la aplicación seleccionada en la lista.</translation>
     </message>
     <message>
         <source>Click here to move the currently selected application down in the list.</source>
-        <translation>Pulse aquí para bajar la aplicación seleccionada en la lista.</translation>
+        <translation type="obsolete">Pulse aquí para bajar la aplicación seleccionada en la lista.</translation>
     </message>
     <message>
         <source>Click here to select a desired style for tabbed dialogs (such as this application). The styles available are:
@@ -230,6 +230,14 @@ Esta área le permite seleccionar un aplicación y qué funciones desea deshabil
     <message>
         <source>Rotation direction:</source>
         <translation>Dirección de rotación:</translation>
+    </message>
+    <message>
+        <source>Show Scrollbars on the left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to display scrollbars on the left side instead of the right.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

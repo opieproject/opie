@@ -517,7 +517,7 @@ immediately.</source>
     <message>
         <source>&lt;p&gt;
 These termination options are provided primarily for use while developing and testing the Opie system. In a normal environment, these concepts are unnecessary.</source>
-        <translation type="unfinished">&lt;p&gt;
+        <translation type="obsolete">&lt;p&gt;
 Ezeka bezárási lehetőségek elsősorban az Opie fejlesztése és tesztelése céljából vannak. Egy normális környezetben ezek feleslegesek.</translation>
     </message>
     <message>

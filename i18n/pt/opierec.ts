@@ -118,15 +118,15 @@ espaço livre</translation>
     <message>
         <source>Do you really want to &lt;font size=+2&gt;&lt;B&gt;DELETE&lt;/B&gt;&lt;/font&gt;
 the selected file?</source>
-        <translation>Tem a certeza que quer apagar o ficheiro seleccionado?</translation>
+        <translation type="obsolete">Tem a certeza que quer apagar o ficheiro seleccionado?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Sim</translation>
+        <translation type="obsolete">Sim</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>Não</translation>
+        <translation type="obsolete">Não</translation>
     </message>
     <message>
         <source>Error</source>
@@ -142,7 +142,7 @@ the selected file?</source>
     </message>
     <message>
         <source>Please select file to  play</source>
-        <translation>Escolha o ficheiro a tocar</translation>
+        <translation type="obsolete">Escolha o ficheiro a tocar</translation>
     </message>
     <message>
         <source>Note</source>
@@ -216,6 +216,10 @@ the selected file?</source>
     </message>
     <message>
         <source>Stereo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please select file to play</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -374,6 +374,25 @@ Trozdem beenden?</translation>
     </message>
 </context>
 <context>
+    <name>DateBookWeekLstEvent</name>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Editieren</translation>
+    </message>
+    <message>
+        <source>Duplicate</source>
+        <translation type="unfinished">Duplizieren</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Löschen</translation>
+    </message>
+    <message>
+        <source>Beam</source>
+        <translation type="unfinished">Senden</translation>
+    </message>
+</context>
+<context>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>

@@ -72,6 +72,26 @@
         <source>Restore Backup...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&lt;qt&gt;%1&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restore</source>
+        <translation type="unfinished">Wiederherstellen</translation>
+    </message>
+    <message>
+        <source>Would you really overwrite your local data?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>BackupAndRestoreBase</name>
@@ -129,26 +149,14 @@
     </message>
     <message>
         <source>Save</source>
-        <translation>Speichern</translation>
+        <translation type="obsolete">Speichern</translation>
     </message>
     <message>
         <source>...</source>
-        <translation>...</translation>
+        <translation type="obsolete">...</translation>
     </message>
     <message>
         <source>Destination</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>User Data (Configuration + PIM)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Full Backup (Root File System)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

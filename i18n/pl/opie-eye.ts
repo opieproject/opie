@@ -84,15 +84,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>the Image %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Start slideshow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>the Image</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -202,6 +202,10 @@
         <source>Listview mode</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Dont show seperate windows</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
@@ -248,6 +252,14 @@
     </message>
     <message>
         <source>Error no Camera Dir found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Are you sure you want to delete %1&lt;br&gt; %2?&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Confirm Deletion</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

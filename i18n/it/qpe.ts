@@ -526,7 +526,7 @@ immediately.</source>
     <message>
         <source>&lt;p&gt;
 These termination options are provided primarily for use while developing and testing the Opie system. In a normal environment, these concepts are unnecessary.</source>
-        <translation type="unfinished">&lt;p&gt;
+        <translation type="obsolete">&lt;p&gt;
 Queste opzioni di chiusura sono state inserite principalmente per sviluppo e test di Opie. Per un uso normale, queste opzioni non sono necessarie.</translation>
     </message>
     <message>

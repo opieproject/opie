@@ -16,6 +16,13 @@
     </message>
 </context>
 <context>
+    <name>AbView</name>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished">Non classée</translation>
+    </message>
+</context>
+<context>
     <name>AddressbookWindow</name>
     <message>
         <source>Contacts</source>
@@ -23,39 +30,39 @@
     </message>
     <message>
         <source>Contact</source>
-        <translation>Contact</translation>
+        <translation type="obsolete">Contact</translation>
     </message>
     <message>
         <source>New</source>
-        <translation>Nouveau</translation>
+        <translation type="obsolete">Nouveau</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Editer</translation>
+        <translation type="obsolete">Editer</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Supprimer</translation>
+        <translation type="obsolete">Supprimer</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>Rechercher</translation>
+        <translation type="obsolete">Rechercher</translation>
     </message>
     <message>
         <source>Write Mail To</source>
-        <translation>Ecrire un e-mail à</translation>
+        <translation type="obsolete">Ecrire un e-mail à</translation>
     </message>
     <message>
         <source>Beam Entry</source>
-        <translation>Transmettre entrée</translation>
+        <translation type="obsolete">Transmettre entrée</translation>
     </message>
     <message>
         <source>My Personal Details</source>
-        <translation>Informations personnelles</translation>
+        <translation type="obsolete">Informations personnelles</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Vue</translation>
+        <translation type="obsolete">Vue</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
@@ -68,7 +75,7 @@ synchronisation en cours</translation>
     </message>
     <message>
         <source>Edit Address</source>
-        <translation>Editer contact</translation>
+        <translation type="obsolete">Editer contact</translation>
     </message>
     <message>
         <source>Contacts - My Personal Details</source>
@@ -96,23 +103,23 @@ Quitter tout de même ?</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Non classée</translation>
+        <translation type="obsolete">Non classée</translation>
     </message>
     <message>
         <source>Import vCard</source>
-        <translation>Importer vCard</translation>
+        <translation type="obsolete">Importer vCard</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation>Fermer recherche</translation>
+        <translation type="obsolete">Fermer recherche</translation>
     </message>
     <message>
         <source>Save all Data</source>
-        <translation>Enregistrer toutes les données</translation>
+        <translation type="obsolete">Enregistrer toutes les données</translation>
     </message>
     <message>
         <source>Config</source>
-        <translation>Préférences</translation>
+        <translation type="obsolete">Préférences</translation>
     </message>
     <message>
         <source>Not Found</source>
@@ -120,19 +127,19 @@ Quitter tout de même ?</translation>
     </message>
     <message>
         <source>List</source>
-        <translation>Liste</translation>
+        <translation type="obsolete">Liste</translation>
     </message>
     <message>
         <source>Cards</source>
-        <translation>Fiches</translation>
+        <translation type="obsolete">Fiches</translation>
     </message>
     <message>
         <source>Card</source>
-        <translation>Fiche</translation>
+        <translation type="obsolete">Fiche</translation>
     </message>
     <message>
         <source>Start Search</source>
-        <translation>Démarrer recherche</translation>
+        <translation type="obsolete">Démarrer recherche</translation>
     </message>
     <message>
         <source>Right file type ?</source>
@@ -177,7 +184,7 @@ ajouter un contact pour&lt;br&gt;
     </message>
     <message>
         <source>Export vCard</source>
-        <translation>Exporter vCard</translation>
+        <translation type="obsolete">Exporter vCard</translation>
     </message>
     <message>
         <source>You have to select a contact !</source>
@@ -192,6 +199,10 @@ un nom de fichier !</translation>
     <message>
         <source>Unable to find a contact for this search pattern!</source>
         <translation>Aucun contact trouvé !</translation>
+    </message>
+    <message>
+        <source>Edit Contact</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1355,6 +1366,41 @@ founi gratuitement !</translation>
     <message>
         <source></source>
         <translation></translation>
+    </message>
+</context>
+<context>
+    <name>Opie</name>
+    <message>
+        <source>Contact</source>
+        <translation type="unfinished">Contact</translation>
+    </message>
+    <message>
+        <source>Contacts</source>
+        <translation type="unfinished">Contacts</translation>
+    </message>
+    <message>
+        <source>Start Search</source>
+        <translation type="unfinished">Démarrer recherche</translation>
+    </message>
+    <message>
+        <source>Write Mail To</source>
+        <translation type="unfinished">Ecrire un e-mail à</translation>
+    </message>
+    <message>
+        <source>Import vCard</source>
+        <translation type="unfinished">Importer vCard</translation>
+    </message>
+    <message>
+        <source>Export vCard</source>
+        <translation type="unfinished">Exporter vCard</translation>
+    </message>
+    <message>
+        <source>My Personal Details</source>
+        <translation type="unfinished">Informations personnelles</translation>
+    </message>
+    <message>
+        <source>Show quick search bar</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

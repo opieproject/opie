@@ -16,6 +16,13 @@
     </message>
 </context>
 <context>
+    <name>AbView</name>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished">Não Preenchido</translation>
+    </message>
+</context>
+<context>
     <name>AddressbookWindow</name>
     <message>
         <source>All</source>
@@ -23,19 +30,19 @@
     </message>
     <message>
         <source>New</source>
-        <translation>Novo</translation>
+        <translation type="obsolete">Novo</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Edit</translation>
+        <translation type="obsolete">Edit</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>Localizar</translation>
+        <translation type="obsolete">Localizar</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Ver</translation>
+        <translation type="obsolete">Ver</translation>
     </message>
     <message>
         <source>Edit My Personal Details</source>
@@ -43,7 +50,7 @@
     </message>
     <message>
         <source>Edit Address</source>
-        <translation>Editar Endereço</translation>
+        <translation type="obsolete">Editar Endereço</translation>
     </message>
     <message>
         <source>Unable to save information.
@@ -59,11 +66,11 @@ Sair assim mesmo?</translation>
     </message>
     <message>
         <source>My Personal Details</source>
-        <translation>Meus Detalhes Pessoais</translation>
+        <translation type="obsolete">Meus Detalhes Pessoais</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Apagar</translation>
+        <translation type="obsolete">Apagar</translation>
     </message>
     <message>
         <source>Contacts</source>
@@ -75,11 +82,11 @@ Sair assim mesmo?</translation>
     </message>
     <message>
         <source>Contact</source>
-        <translation>Contato</translation>
+        <translation type="obsolete">Contato</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Não Preenchido</translation>
+        <translation type="obsolete">Não Preenchido</translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -87,11 +94,11 @@ Sair assim mesmo?</translation>
     </message>
     <message>
         <source>Write Mail To</source>
-        <translation>Escrever E-mail Para</translation>
+        <translation type="obsolete">Escrever E-mail Para</translation>
     </message>
     <message>
         <source>Beam Entry</source>
-        <translation>Enviar Registro</translation>
+        <translation type="obsolete">Enviar Registro</translation>
     </message>
     <message>
         <source>Contacts - My Personal Details</source>
@@ -99,19 +106,19 @@ Sair assim mesmo?</translation>
     </message>
     <message>
         <source>Import vCard</source>
-        <translation>Importar vCard</translation>
+        <translation type="obsolete">Importar vCard</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation>Fechar Busca</translation>
+        <translation type="obsolete">Fechar Busca</translation>
     </message>
     <message>
         <source>Save all Data</source>
-        <translation>Salvar Tudo</translation>
+        <translation type="obsolete">Salvar Tudo</translation>
     </message>
     <message>
         <source>Config</source>
-        <translation>Configuração</translation>
+        <translation type="obsolete">Configuração</translation>
     </message>
     <message>
         <source>Not Found</source>
@@ -119,19 +126,19 @@ Sair assim mesmo?</translation>
     </message>
     <message>
         <source>List</source>
-        <translation>Lista</translation>
+        <translation type="obsolete">Lista</translation>
     </message>
     <message>
         <source>Cards</source>
-        <translation>Cartões</translation>
+        <translation type="obsolete">Cartões</translation>
     </message>
     <message>
         <source>Card</source>
-        <translation>Cartão</translation>
+        <translation type="obsolete">Cartão</translation>
     </message>
     <message>
         <source>Start Search</source>
-        <translation>Iniciar Busca</translation>
+        <translation type="obsolete">Iniciar Busca</translation>
     </message>
     <message>
         <source>Right file type ?</source>
@@ -173,7 +180,7 @@ Deseja mesmo abrí-lo?</translation>
     </message>
     <message>
         <source>Export vCard</source>
-        <translation>Exportar vCard</translation>
+        <translation type="obsolete">Exportar vCard</translation>
     </message>
     <message>
         <source>You have to select a contact !</source>
@@ -182,6 +189,10 @@ Deseja mesmo abrí-lo?</translation>
     <message>
         <source>You have to set a filename !</source>
         <translation>Você deve especificar um nome de arquivo !</translation>
+    </message>
+    <message>
+        <source>Edit Contact</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1346,6 +1357,41 @@ fornecido livremente !</translation>
     <message>
         <source></source>
         <translation></translation>
+    </message>
+</context>
+<context>
+    <name>Opie</name>
+    <message>
+        <source>Contact</source>
+        <translation type="unfinished">Contato</translation>
+    </message>
+    <message>
+        <source>Contacts</source>
+        <translation type="unfinished">Contatos</translation>
+    </message>
+    <message>
+        <source>Start Search</source>
+        <translation type="unfinished">Iniciar Busca</translation>
+    </message>
+    <message>
+        <source>Write Mail To</source>
+        <translation type="unfinished">Escrever E-mail Para</translation>
+    </message>
+    <message>
+        <source>Import vCard</source>
+        <translation type="unfinished">Importar vCard</translation>
+    </message>
+    <message>
+        <source>Export vCard</source>
+        <translation type="unfinished">Exportar vCard</translation>
+    </message>
+    <message>
+        <source>My Personal Details</source>
+        <translation type="unfinished">Meus Detalhes Pessoais</translation>
+    </message>
+    <message>
+        <source>Show quick search bar</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

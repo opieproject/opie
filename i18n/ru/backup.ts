@@ -70,6 +70,26 @@
         <source>Restore Backup...</source>
         <translation>Восстанавливаю...</translation>
     </message>
+    <message>
+        <source>&lt;qt&gt;%1&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restore</source>
+        <translation type="unfinished">Восстановить</translation>
+    </message>
+    <message>
+        <source>Would you really overwrite your local data?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>BackupAndRestoreBase</name>
@@ -127,11 +147,11 @@
     </message>
     <message>
         <source>Save</source>
-        <translation>Сохранить</translation>
+        <translation type="obsolete">Сохранить</translation>
     </message>
     <message>
         <source>...</source>
-        <translation>...</translation>
+        <translation type="obsolete">...</translation>
     </message>
     <message>
         <source>Destination</source>
@@ -139,15 +159,15 @@
     </message>
     <message>
         <source>Type</source>
-        <translation>Тип</translation>
+        <translation type="obsolete">Тип</translation>
     </message>
     <message>
         <source>User Data (Configuration + PIM)</source>
-        <translation>Данные пользователя (конфигурация + PIM)</translation>
+        <translation type="obsolete">Данные пользователя (конфигурация + PIM)</translation>
     </message>
     <message>
         <source>Full Backup (Root File System)</source>
-        <translation>Полный архив (корневая файловая система)</translation>
+        <translation type="obsolete">Полный архив (корневая файловая система)</translation>
     </message>
 </context>
 <context>

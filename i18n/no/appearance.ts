@@ -71,43 +71,43 @@ Klikk her for å velge et tilgjengelig fargesystem.</translation>
     </message>
     <message>
         <source>Force styling for all applications.</source>
-        <translation>Påfør stilen på alle applikasjoner.</translation>
+        <translation type="obsolete">Påfør stilen på alle applikasjoner.</translation>
     </message>
     <message>
         <source>Click here to allow all applications to use global appearance settings.</source>
-        <translation>Klikk her for å tillate alle applikasjoner å bruke globale visningsinnstillinger.</translation>
+        <translation type="obsolete">Klikk her for å tillate alle applikasjoner å bruke globale visningsinnstillinger.</translation>
     </message>
     <message>
         <source>Disable styling for these applications ( &lt;b&gt;*&lt;/b&gt; can be used as a wildcard):</source>
-        <translation>Slå av stil for disse applikasjoner (&lt;b&gt;*&lt;/b&gt; kan bli brukt som wildcard):</translation>
+        <translation type="obsolete">Slå av stil for disse applikasjoner (&lt;b&gt;*&lt;/b&gt; kan bli brukt som wildcard):</translation>
     </message>
     <message>
         <source>If some applications do not display correctly with the global appearance settings, certain features can be turned off for that application.
 
 This area allows you to select an application and which settings you wish to disable.</source>
-        <translation>Om noen applikasjoner ikke vises korrekt med globale visningsinnstillinger, kan visse funksjoner skues av for disse applikasjonene.
+        <translation type="obsolete">Om noen applikasjoner ikke vises korrekt med globale visningsinnstillinger, kan visse funksjoner skues av for disse applikasjonene.
 
 Dette området tillater deg å velge en applikasjon og hvilke innstillinger du vil slå av.</translation>
     </message>
     <message>
         <source>Binary file(s)</source>
-        <translation>Binær fil(er)</translation>
+        <translation type="obsolete">Binær fil(er)</translation>
     </message>
     <message>
         <source>Click here to add an application to the list above.</source>
-        <translation>Klikk her for å legge til en applikasjon på listen ovenfor.</translation>
+        <translation type="obsolete">Klikk her for å legge til en applikasjon på listen ovenfor.</translation>
     </message>
     <message>
         <source>Click here to delete the currently selected application.</source>
-        <translation>Klikk her for å slette den nåværende valgte applikasjon.</translation>
+        <translation type="obsolete">Klikk her for å slette den nåværende valgte applikasjon.</translation>
     </message>
     <message>
         <source>Click here to move the currently selected application up in the list.</source>
-        <translation>Klikk her for å flytte den nåværende valgte applikasjon opp på listen.</translation>
+        <translation type="obsolete">Klikk her for å flytte den nåværende valgte applikasjon opp på listen.</translation>
     </message>
     <message>
         <source>Click here to move the currently selected application down in the list.</source>
-        <translation>Klikk her for å flytte den nåværende valgte applikasjon ned på listen.</translation>
+        <translation type="obsolete">Klikk her for å flytte den nåværende valgte applikasjon ned på listen.</translation>
     </message>
     <message>
         <source>Tab style:</source>
@@ -229,7 +229,15 @@ Dette området tillater deg å velge en applikasjon og hvilke innstillinger du v
     </message>
     <message>
         <source>&lt;new&gt;</source>
-        <translation>&lt;ny&gt;</translation>
+        <translation type="obsolete">&lt;ny&gt;</translation>
+    </message>
+    <message>
+        <source>Show Scrollbars on the left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to display scrollbars on the left side instead of the right.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

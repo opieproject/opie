@@ -16,6 +16,13 @@
     </message>
 </context>
 <context>
+    <name>AbView</name>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished">Vuota</translation>
+    </message>
+</context>
+<context>
     <name>AddressbookWindow</name>
     <message>
         <source>Contacts</source>
@@ -23,43 +30,43 @@
     </message>
     <message>
         <source>Contact</source>
-        <translation>Contatto</translation>
+        <translation type="obsolete">Contatto</translation>
     </message>
     <message>
         <source>New</source>
-        <translation>Nuovo</translation>
+        <translation type="obsolete">Nuovo</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Modifica</translation>
+        <translation type="obsolete">Modifica</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Cancella</translation>
+        <translation type="obsolete">Cancella</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>Trova</translation>
+        <translation type="obsolete">Trova</translation>
     </message>
     <message>
         <source>Write Mail To</source>
-        <translation>Scrivi Email A</translation>
+        <translation type="obsolete">Scrivi Email A</translation>
     </message>
     <message>
         <source>Beam Entry</source>
-        <translation>Trasmetti via IrDA</translation>
+        <translation type="obsolete">Trasmetti via IrDA</translation>
     </message>
     <message>
         <source>Import vCard</source>
-        <translation>Importa vCard</translation>
+        <translation type="obsolete">Importa vCard</translation>
     </message>
     <message>
         <source>My Personal Details</source>
-        <translation>Informazioni Personali</translation>
+        <translation type="obsolete">Informazioni Personali</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Vista</translation>
+        <translation type="obsolete">Vista</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
@@ -71,7 +78,7 @@
     </message>
     <message>
         <source>Edit Address</source>
-        <translation>Modifica Dati</translation>
+        <translation type="obsolete">Modifica Dati</translation>
     </message>
     <message>
         <source>Contacts - My Personal Details</source>
@@ -99,27 +106,27 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Vuota</translation>
+        <translation type="obsolete">Vuota</translation>
     </message>
     <message>
         <source>List</source>
-        <translation>Lista</translation>
+        <translation type="obsolete">Lista</translation>
     </message>
     <message>
         <source>Cards</source>
-        <translation>Cartellini</translation>
+        <translation type="obsolete">Cartellini</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation>Chiudi Trova</translation>
+        <translation type="obsolete">Chiudi Trova</translation>
     </message>
     <message>
         <source>Save all Data</source>
-        <translation>Salva tutti i Dati</translation>
+        <translation type="obsolete">Salva tutti i Dati</translation>
     </message>
     <message>
         <source>Config</source>
-        <translation>Configurazione</translation>
+        <translation type="obsolete">Configurazione</translation>
     </message>
     <message>
         <source>Not Found</source>
@@ -127,11 +134,11 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>Card</source>
-        <translation>Cartellino</translation>
+        <translation type="obsolete">Cartellino</translation>
     </message>
     <message>
         <source>Start Search</source>
-        <translation>Inizia Ricerca</translation>
+        <translation type="obsolete">Inizia Ricerca</translation>
     </message>
     <message>
         <source>Right file type ?</source>
@@ -174,7 +181,7 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>Export vCard</source>
-        <translation>Esporta vCard</translation>
+        <translation type="obsolete">Esporta vCard</translation>
     </message>
     <message>
         <source>You have to select a contact !</source>
@@ -183,6 +190,10 @@ Uscire comunque?</translation>
     <message>
         <source>You have to set a filename !</source>
         <translation>Devi impostare un nome file !</translation>
+    </message>
+    <message>
+        <source>Edit Contact</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1346,6 +1357,41 @@ rilasciato gratuitamente!</translation>
     </message>
     <message>
         <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Opie</name>
+    <message>
+        <source>Contact</source>
+        <translation type="unfinished">Contatto</translation>
+    </message>
+    <message>
+        <source>Contacts</source>
+        <translation type="unfinished">Contatti</translation>
+    </message>
+    <message>
+        <source>Start Search</source>
+        <translation type="unfinished">Inizia Ricerca</translation>
+    </message>
+    <message>
+        <source>Write Mail To</source>
+        <translation type="unfinished">Scrivi Email A</translation>
+    </message>
+    <message>
+        <source>Import vCard</source>
+        <translation type="unfinished">Importa vCard</translation>
+    </message>
+    <message>
+        <source>Export vCard</source>
+        <translation type="unfinished">Esporta vCard</translation>
+    </message>
+    <message>
+        <source>My Personal Details</source>
+        <translation type="unfinished">Informazioni Personali</translation>
+    </message>
+    <message>
+        <source>Show quick search bar</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -85,7 +85,7 @@
     </message>
     <message>
         <source>the Image %1</source>
-        <translation>Obrázek %1</translation>
+        <translation type="obsolete">Obrázek %1</translation>
     </message>
     <message>
         <source>Image</source>
@@ -94,6 +94,10 @@
     <message>
         <source>Start slideshow</source>
         <translation>Spustit slideshow</translation>
+    </message>
+    <message>
+        <source>the Image</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -206,6 +210,10 @@
         <source>Listview mode</source>
         <translation>Režim zobrazení seznamu</translation>
     </message>
+    <message>
+        <source>Dont show seperate windows</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
@@ -261,6 +269,14 @@
     <message>
         <source>Error no Camera Dir found</source>
         <translation>Chyba, adresář s foťákem neexistuje</translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Are you sure you want to delete %1&lt;br&gt; %2?&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Confirm Deletion</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

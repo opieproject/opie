@@ -15,6 +15,13 @@
     </message>
 </context>
 <context>
+    <name>AbView</name>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished">Iktatatlan</translation>
+    </message>
+</context>
+<context>
     <name>AddressbookWindow</name>
     <message>
         <source>Contacts</source>
@@ -22,39 +29,39 @@
     </message>
     <message>
         <source>Contact</source>
-        <translation>Kapcsolat</translation>
+        <translation type="obsolete">Kapcsolat</translation>
     </message>
     <message>
         <source>New</source>
-        <translation>Új</translation>
+        <translation type="obsolete">Új</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Szerkeszt</translation>
+        <translation type="obsolete">Szerkeszt</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Töröl</translation>
+        <translation type="obsolete">Töröl</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>Keres</translation>
+        <translation type="obsolete">Keres</translation>
     </message>
     <message>
         <source>Write Mail To</source>
-        <translation>Levelet küld</translation>
+        <translation type="obsolete">Levelet küld</translation>
     </message>
     <message>
         <source>Beam Entry</source>
-        <translation>Bejegyzést átsugároz</translation>
+        <translation type="obsolete">Bejegyzést átsugároz</translation>
     </message>
     <message>
         <source>My Personal Details</source>
-        <translation>Személyes adataim</translation>
+        <translation type="obsolete">Személyes adataim</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Nézet</translation>
+        <translation type="obsolete">Nézet</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
@@ -66,7 +73,7 @@
     </message>
     <message>
         <source>Edit Address</source>
-        <translation>Cím szerkesztése</translation>
+        <translation type="obsolete">Cím szerkesztése</translation>
     </message>
     <message>
         <source>Contacts - My Personal Details</source>
@@ -94,23 +101,23 @@ Mégis kilép?</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Iktatatlan</translation>
+        <translation type="obsolete">Iktatatlan</translation>
     </message>
     <message>
         <source>Import vCard</source>
-        <translation>vCard importálása</translation>
+        <translation type="obsolete">vCard importálása</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation>Keresés bezárása</translation>
+        <translation type="obsolete">Keresés bezárása</translation>
     </message>
     <message>
         <source>Save all Data</source>
-        <translation>Minden adat mentése</translation>
+        <translation type="obsolete">Minden adat mentése</translation>
     </message>
     <message>
         <source>Config</source>
-        <translation>Beállítás</translation>
+        <translation type="obsolete">Beállítás</translation>
     </message>
     <message>
         <source>Not Found</source>
@@ -118,19 +125,19 @@ Mégis kilép?</translation>
     </message>
     <message>
         <source>List</source>
-        <translation>Lista</translation>
+        <translation type="obsolete">Lista</translation>
     </message>
     <message>
         <source>Cards</source>
-        <translation>Névjegyek</translation>
+        <translation type="obsolete">Névjegyek</translation>
     </message>
     <message>
         <source>Card</source>
-        <translation>Névjegy</translation>
+        <translation type="obsolete">Névjegy</translation>
     </message>
     <message>
         <source>Start Search</source>
-        <translation>Keresés indítása</translation>
+        <translation type="obsolete">Keresés indítása</translation>
     </message>
     <message>
         <source>Right file type ?</source>
@@ -172,7 +179,7 @@ Tényleg meg akarja nyitni?</translation>
     </message>
     <message>
         <source>Export vCard</source>
-        <translation>vCard exportálása</translation>
+        <translation type="obsolete">vCard exportálása</translation>
     </message>
     <message>
         <source>You have to select a contact !</source>
@@ -181,6 +188,10 @@ Tényleg meg akarja nyitni?</translation>
     <message>
         <source>You have to set a filename !</source>
         <translation>Meg kell adnia egy fájlnevet !</translation>
+    </message>
+    <message>
+        <source>Edit Contact</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1341,6 +1352,41 @@ ingyenesen elérhető !</translation>
     <message>
         <source>Press to select how to store the name (and howto show it in the listview)</source>
         <translation>Kattintson ide a tárolási (és a lista nézetben megjelenített) forma kiválasztásához</translation>
+    </message>
+</context>
+<context>
+    <name>Opie</name>
+    <message>
+        <source>Contact</source>
+        <translation type="unfinished">Kapcsolat</translation>
+    </message>
+    <message>
+        <source>Contacts</source>
+        <translation type="unfinished">Kapcsolatok</translation>
+    </message>
+    <message>
+        <source>Start Search</source>
+        <translation type="unfinished">Keresés indítása</translation>
+    </message>
+    <message>
+        <source>Write Mail To</source>
+        <translation type="unfinished">Levelet küld</translation>
+    </message>
+    <message>
+        <source>Import vCard</source>
+        <translation type="unfinished">vCard importálása</translation>
+    </message>
+    <message>
+        <source>Export vCard</source>
+        <translation type="unfinished">vCard exportálása</translation>
+    </message>
+    <message>
+        <source>My Personal Details</source>
+        <translation type="unfinished">Személyes adataim</translation>
+    </message>
+    <message>
+        <source>Show quick search bar</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

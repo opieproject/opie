@@ -71,6 +71,26 @@
         <source>Restore Backup...</source>
         <translation>Restaurando...</translation>
     </message>
+    <message>
+        <source>&lt;qt&gt;%1&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restore</source>
+        <translation type="unfinished">Restaurar</translation>
+    </message>
+    <message>
+        <source>Would you really overwrite your local data?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>BackupAndRestoreBase</name>
@@ -128,11 +148,11 @@
     </message>
     <message>
         <source>Save</source>
-        <translation>Guardar</translation>
+        <translation type="obsolete">Guardar</translation>
     </message>
     <message>
         <source>...</source>
-        <translation>...</translation>
+        <translation type="obsolete">...</translation>
     </message>
     <message>
         <source>Destination</source>
@@ -140,15 +160,15 @@
     </message>
     <message>
         <source>Type</source>
-        <translation>Tipo</translation>
+        <translation type="obsolete">Tipo</translation>
     </message>
     <message>
         <source>User Data (Configuration + PIM)</source>
-        <translation>Datos de Usuario (Configuración + PIM)</translation>
+        <translation type="obsolete">Datos de Usuario (Configuración + PIM)</translation>
     </message>
     <message>
         <source>Full Backup (Root File System)</source>
-        <translation>Copia Completa (Sistema de Ficheros Raíz)</translation>
+        <translation type="obsolete">Copia Completa (Sistema de Ficheros Raíz)</translation>
     </message>
 </context>
 <context>

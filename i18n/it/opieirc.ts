@@ -1,6 +1,65 @@
 <!DOCTYPE TS><TS>
 <defaultcodec>iso8859-1</defaultcodec>
 <context>
+    <name>DCCProgress</name>
+    <message>
+        <source>Receiving file %1 from %2...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Successfully received %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Aborted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Peer Aborted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Timeout</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DCCTransferTab</name>
+    <message>
+        <source>DCC Transfers in Progress</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There are transfers in progress. &lt;br&gt;If you close this tab, they will be canceled.&lt;br&gt;Do you want to close it anyway?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Don&apos;t Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DCC Transfer from %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 is trying to send you the file %2
+(%3 bytes)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Accept</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Reject</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>IRCChannelTab</name>
     <message>
         <source>Talking on channel</source>
@@ -329,7 +388,19 @@ Real name: %4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Malformed DCC request from </source>
+        <source>Received a CTCP PING reply from %1: %2 seconds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Received a CTCP PING request from %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Malformed DCC request from %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save As</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

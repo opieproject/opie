@@ -536,7 +536,7 @@ direct afsluiten.</translation>
     <message>
         <source>&lt;p&gt;
 These termination options are provided primarily for use while developing and testing the Opie system. In a normal environment, these concepts are unnecessary.</source>
-        <translation>&lt;p&gt;
+        <translation type="obsolete">&lt;p&gt;
 Deze afsluitopties worden voornamelijk voor gebruik tijdens ontwikkeling en tests van het Opie systeem. In een normale omgeving zijn deze opties niet nodig.</translation>
     </message>
     <message>

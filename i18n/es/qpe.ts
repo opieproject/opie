@@ -529,7 +529,7 @@ immediately.</source>
     <message>
         <source>&lt;p&gt;
 These termination options are provided primarily for use while developing and testing the Opie system. In a normal environment, these concepts are unnecessary.</source>
-        <translation type="unfinished">&lt;p&gt;
+        <translation type="obsolete">&lt;p&gt;
 Estas opciones de terminación se usan principalmente en las pruebas y desarrollo del sistema Opie. En un entorno normal, estos conceptos son innecesarios.</translation>
     </message>
     <message>

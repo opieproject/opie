@@ -15,6 +15,13 @@
     </message>
 </context>
 <context>
+    <name>AbView</name>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished">Ongeklassificeerd</translation>
+    </message>
+</context>
+<context>
     <name>AddressbookWindow</name>
     <message>
         <source>Contacts</source>
@@ -22,39 +29,39 @@
     </message>
     <message>
         <source>Contact</source>
-        <translation>Contact</translation>
+        <translation type="obsolete">Contact</translation>
     </message>
     <message>
         <source>New</source>
-        <translation>Nieuw</translation>
+        <translation type="obsolete">Nieuw</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Wijzig</translation>
+        <translation type="obsolete">Wijzig</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Verwijder</translation>
+        <translation type="obsolete">Verwijder</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>Vind</translation>
+        <translation type="obsolete">Vind</translation>
     </message>
     <message>
         <source>Write Mail To</source>
-        <translation>Schrijf mail aan</translation>
+        <translation type="obsolete">Schrijf mail aan</translation>
     </message>
     <message>
         <source>Beam Entry</source>
-        <translation>Stuur via IR</translation>
+        <translation type="obsolete">Stuur via IR</translation>
     </message>
     <message>
         <source>My Personal Details</source>
-        <translation>Mijn persoonlijke gegevens</translation>
+        <translation type="obsolete">Mijn persoonlijke gegevens</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Bekijk</translation>
+        <translation type="obsolete">Bekijk</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
@@ -66,7 +73,7 @@
     </message>
     <message>
         <source>Edit Address</source>
-        <translation>Wijzig adres</translation>
+        <translation type="obsolete">Wijzig adres</translation>
     </message>
     <message>
         <source>Contacts - My Personal Details</source>
@@ -93,23 +100,23 @@ Toch stoppen?</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Ongeklassificeerd</translation>
+        <translation type="obsolete">Ongeklassificeerd</translation>
     </message>
     <message>
         <source>Import vCard</source>
-        <translation>Importeer vCard</translation>
+        <translation type="obsolete">Importeer vCard</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation>Sluit Vind</translation>
+        <translation type="obsolete">Sluit Vind</translation>
     </message>
     <message>
         <source>Save all Data</source>
-        <translation>Sla alles op</translation>
+        <translation type="obsolete">Sla alles op</translation>
     </message>
     <message>
         <source>Config</source>
-        <translation>Configureer</translation>
+        <translation type="obsolete">Configureer</translation>
     </message>
     <message>
         <source>Not Found</source>
@@ -117,19 +124,19 @@ Toch stoppen?</translation>
     </message>
     <message>
         <source>List</source>
-        <translation>Lijst</translation>
+        <translation type="obsolete">Lijst</translation>
     </message>
     <message>
         <source>Cards</source>
-        <translation>Kaartjes</translation>
+        <translation type="obsolete">Kaartjes</translation>
     </message>
     <message>
         <source>Card</source>
-        <translation>Kaart</translation>
+        <translation type="obsolete">Kaart</translation>
     </message>
     <message>
         <source>Start Search</source>
-        <translation>Start zoeken</translation>
+        <translation type="obsolete">Start zoeken</translation>
     </message>
     <message>
         <source>Right file type ?</source>
@@ -173,7 +180,7 @@ toevoegen voor %1?</translation>
     </message>
     <message>
         <source>Export vCard</source>
-        <translation>Exporteer vCard</translation>
+        <translation type="obsolete">Exporteer vCard</translation>
     </message>
     <message>
         <source>You have to select a contact !</source>
@@ -186,6 +193,10 @@ toevoegen voor %1?</translation>
     <message>
         <source>Unable to find a contact for this search pattern!</source>
         <translation>Kan geen kontakt vinden met dit zoekpatroon!</translation>
+    </message>
+    <message>
+        <source>Edit Contact</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1351,6 +1362,41 @@ geleverd!</translation>
     <message>
         <source></source>
         <translation></translation>
+    </message>
+</context>
+<context>
+    <name>Opie</name>
+    <message>
+        <source>Contact</source>
+        <translation type="unfinished">Contact</translation>
+    </message>
+    <message>
+        <source>Contacts</source>
+        <translation type="unfinished">Contacten</translation>
+    </message>
+    <message>
+        <source>Start Search</source>
+        <translation type="unfinished">Start zoeken</translation>
+    </message>
+    <message>
+        <source>Write Mail To</source>
+        <translation type="unfinished">Schrijf mail aan</translation>
+    </message>
+    <message>
+        <source>Import vCard</source>
+        <translation type="unfinished">Importeer vCard</translation>
+    </message>
+    <message>
+        <source>Export vCard</source>
+        <translation type="unfinished">Exporteer vCard</translation>
+    </message>
+    <message>
+        <source>My Personal Details</source>
+        <translation type="unfinished">Mijn persoonlijke gegevens</translation>
+    </message>
+    <message>
+        <source>Show quick search bar</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

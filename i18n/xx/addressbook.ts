@@ -15,6 +15,13 @@
     </message>
 </context>
 <context>
+    <name>AbView</name>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished">FOO</translation>
+    </message>
+</context>
+<context>
     <name>AddressbookWindow</name>
     <message>
         <source>Contacts</source>
@@ -22,67 +29,67 @@
     </message>
     <message>
         <source>Contact</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>List</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Card</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>New</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Start Search</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Write Mail To</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Beam Entry</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Import vCard</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>My Personal Details</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Save all Data</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Config</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Right file type ?</source>
@@ -121,7 +128,7 @@
     </message>
     <message>
         <source>Edit Address</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Edit My Personal Details</source>
@@ -153,7 +160,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Cards</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>All</source>
@@ -161,11 +168,11 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Export vCard</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>You have to select a contact !</source>
@@ -174,6 +181,10 @@ Quit anyway?</source>
     <message>
         <source>You have to set a filename !</source>
         <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Edit Contact</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1334,6 +1345,41 @@ is provided free !</source>
     </message>
     <message>
         <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Opie</name>
+    <message>
+        <source>Contact</source>
+        <translation type="unfinished">FOO</translation>
+    </message>
+    <message>
+        <source>Contacts</source>
+        <translation type="unfinished">FOO</translation>
+    </message>
+    <message>
+        <source>Start Search</source>
+        <translation type="unfinished">FOO</translation>
+    </message>
+    <message>
+        <source>Write Mail To</source>
+        <translation type="unfinished">FOO</translation>
+    </message>
+    <message>
+        <source>Import vCard</source>
+        <translation type="unfinished">FOO</translation>
+    </message>
+    <message>
+        <source>Export vCard</source>
+        <translation type="unfinished">FOO</translation>
+    </message>
+    <message>
+        <source>My Personal Details</source>
+        <translation type="unfinished">FOO</translation>
+    </message>
+    <message>
+        <source>Show quick search bar</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

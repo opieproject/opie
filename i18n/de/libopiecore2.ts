@@ -60,7 +60,7 @@
     </message>
     <message>
         <source>Display Rotate</source>
-        <translation>Bildschirm rotieren</translation>
+        <translation type="obsolete">Bildschirm rotieren</translation>
     </message>
     <message>
         <source>Action Button</source>
@@ -77,6 +77,18 @@
     <message>
         <source>Todo Button</source>
         <translation>Todo-Button</translation>
+    </message>
+    <message>
+        <source>Hinge1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hinge2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hinge3</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

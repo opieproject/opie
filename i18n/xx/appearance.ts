@@ -23,15 +23,15 @@
     </message>
     <message>
         <source>Force styling for all applications.</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Disable styling for these applications ( &lt;b&gt;*&lt;/b&gt; can be used as a wildcard):</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Binary file(s)</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Tab style:</source>
@@ -119,7 +119,7 @@
     </message>
     <message>
         <source>&lt;new&gt;</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Styles control the way items such as buttons and scroll bars appear in all applications.
@@ -163,29 +163,29 @@ Click here to select an available scheme.</source>
     </message>
     <message>
         <source>Click here to allow all applications to use global appearance settings.</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>If some applications do not display correctly with the global appearance settings, certain features can be turned off for that application.
 
 This area allows you to select an application and which settings you wish to disable.</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Click here to add an application to the list above.</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Click here to delete the currently selected application.</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Click here to move the currently selected application up in the list.</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Click here to move the currently selected application down in the list.</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Click here to select a desired style for tabbed dialogs (such as this application). The styles available are:
@@ -215,6 +215,14 @@ This area allows you to select an application and which settings you wish to dis
     <message>
         <source>Rotation direction:</source>
         <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Show Scrollbars on the left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to display scrollbars on the left side instead of the right.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

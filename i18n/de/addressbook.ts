@@ -15,6 +15,13 @@
     </message>
 </context>
 <context>
+    <name>AbView</name>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished">nicht zugewiesen</translation>
+    </message>
+</context>
+<context>
     <name>AddressbookWindow</name>
     <message>
         <source>Contacts</source>
@@ -22,43 +29,43 @@
     </message>
     <message>
         <source>Contact</source>
-        <translation>Kontakt</translation>
+        <translation type="obsolete">Kontakt</translation>
     </message>
     <message>
         <source>New</source>
-        <translation>Neu</translation>
+        <translation type="obsolete">Neu</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Ändern</translation>
+        <translation type="obsolete">Ändern</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation type="obsolete">Löschen</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>Suchen</translation>
+        <translation type="obsolete">Suchen</translation>
     </message>
     <message>
         <source>Write Mail To</source>
-        <translation>E-Mail schreiben an</translation>
+        <translation type="obsolete">E-Mail schreiben an</translation>
     </message>
     <message>
         <source>Beam Entry</source>
-        <translation>Eintrag versenden</translation>
+        <translation type="obsolete">Eintrag versenden</translation>
     </message>
     <message>
         <source>Import vCard</source>
-        <translation>vCard importieren</translation>
+        <translation type="obsolete">vCard importieren</translation>
     </message>
     <message>
         <source>My Personal Details</source>
-        <translation>Persönliche Daten</translation>
+        <translation type="obsolete">Persönliche Daten</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Ansicht</translation>
+        <translation type="obsolete">Ansicht</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
@@ -70,7 +77,7 @@
     </message>
     <message>
         <source>Edit Address</source>
-        <translation>Adresse ändern</translation>
+        <translation type="obsolete">Adresse ändern</translation>
     </message>
     <message>
         <source>Contacts - My Personal Details</source>
@@ -99,19 +106,19 @@ Dennoch beenden?</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>nicht zugewiesen</translation>
+        <translation type="obsolete">nicht zugewiesen</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation>Suche schließen</translation>
+        <translation type="obsolete">Suche schließen</translation>
     </message>
     <message>
         <source>Save all Data</source>
-        <translation>Daten speichern</translation>
+        <translation type="obsolete">Daten speichern</translation>
     </message>
     <message>
         <source>Config</source>
-        <translation>Einstellungen</translation>
+        <translation type="obsolete">Einstellungen</translation>
     </message>
     <message>
         <source>Not Found</source>
@@ -119,19 +126,19 @@ Dennoch beenden?</translation>
     </message>
     <message>
         <source>List</source>
-        <translation>Liste</translation>
+        <translation type="obsolete">Liste</translation>
     </message>
     <message>
         <source>Cards</source>
-        <translation>Karten</translation>
+        <translation type="obsolete">Karten</translation>
     </message>
     <message>
         <source>Card</source>
-        <translation>Karte</translation>
+        <translation type="obsolete">Karte</translation>
     </message>
     <message>
         <source>Start Search</source>
-        <translation>Suche starten</translation>
+        <translation type="obsolete">Suche starten</translation>
     </message>
     <message>
         <source>Right file type ?</source>
@@ -173,7 +180,7 @@ hinzufügen?</translation>
     </message>
     <message>
         <source>Export vCard</source>
-        <translation>vCard exportieren</translation>
+        <translation type="obsolete">vCard exportieren</translation>
     </message>
     <message>
         <source>You have to select a contact !</source>
@@ -182,6 +189,10 @@ hinzufügen?</translation>
     <message>
         <source>You have to set a filename !</source>
         <translation>Sie müssen einen Dateinamen angeben !</translation>
+    </message>
+    <message>
+        <source>Edit Contact</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1347,6 +1358,41 @@ wird nach dem Neustart der Anwendung aktiv!</translation>
     <message>
         <source></source>
         <translation></translation>
+    </message>
+</context>
+<context>
+    <name>Opie</name>
+    <message>
+        <source>Contact</source>
+        <translation type="unfinished">Kontakt</translation>
+    </message>
+    <message>
+        <source>Contacts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start Search</source>
+        <translation type="unfinished">Suche starten</translation>
+    </message>
+    <message>
+        <source>Write Mail To</source>
+        <translation type="unfinished">E-Mail schreiben an</translation>
+    </message>
+    <message>
+        <source>Import vCard</source>
+        <translation type="unfinished">vCard importieren</translation>
+    </message>
+    <message>
+        <source>Export vCard</source>
+        <translation type="unfinished">vCard exportieren</translation>
+    </message>
+    <message>
+        <source>My Personal Details</source>
+        <translation type="unfinished">Persönliche Daten</translation>
+    </message>
+    <message>
+        <source>Show quick search bar</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

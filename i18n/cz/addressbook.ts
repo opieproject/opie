@@ -15,6 +15,13 @@
     </message>
 </context>
 <context>
+    <name>AbView</name>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished">Nevyplněné</translation>
+    </message>
+</context>
+<context>
     <name>AddressbookWindow</name>
     <message>
         <source>Contacts</source>
@@ -22,71 +29,71 @@
     </message>
     <message>
         <source>Contact</source>
-        <translation>Kontakt</translation>
+        <translation type="obsolete">Kontakt</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Zobrazit</translation>
+        <translation type="obsolete">Zobrazit</translation>
     </message>
     <message>
         <source>List</source>
-        <translation>Seznam</translation>
+        <translation type="obsolete">Seznam</translation>
     </message>
     <message>
         <source>Card</source>
-        <translation>Karta</translation>
+        <translation type="obsolete">Karta</translation>
     </message>
     <message>
         <source>New</source>
-        <translation>Nový</translation>
+        <translation type="obsolete">Nový</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Upravit</translation>
+        <translation type="obsolete">Upravit</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Smazat</translation>
+        <translation type="obsolete">Smazat</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>Hledat</translation>
+        <translation type="obsolete">Hledat</translation>
     </message>
     <message>
         <source>Start Search</source>
-        <translation>Spustit hledání</translation>
+        <translation type="obsolete">Spustit hledání</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation>Zavřít hledání</translation>
+        <translation type="obsolete">Zavřít hledání</translation>
     </message>
     <message>
         <source>Write Mail To</source>
-        <translation>Napsat Mail pro</translation>
+        <translation type="obsolete">Napsat Mail pro</translation>
     </message>
     <message>
         <source>Beam Entry</source>
-        <translation>Odeslat položku</translation>
+        <translation type="obsolete">Odeslat položku</translation>
     </message>
     <message>
         <source>Import vCard</source>
-        <translation>Importovat vCard</translation>
+        <translation type="obsolete">Importovat vCard</translation>
     </message>
     <message>
         <source>Export vCard</source>
-        <translation>Exportovat vCard</translation>
+        <translation type="obsolete">Exportovat vCard</translation>
     </message>
     <message>
         <source>My Personal Details</source>
-        <translation>Moje osobní detaily</translation>
+        <translation type="obsolete">Moje osobní detaily</translation>
     </message>
     <message>
         <source>Save all Data</source>
-        <translation>Uložit všechna data</translation>
+        <translation type="obsolete">Uložit všechna data</translation>
     </message>
     <message>
         <source>Config</source>
-        <translation>Konfigurace</translation>
+        <translation type="obsolete">Konfigurace</translation>
     </message>
     <message>
         <source>You have to select a contact !</source>
@@ -136,7 +143,7 @@ Opravdu ho chcete otevřít?</translation>
     </message>
     <message>
         <source>Edit Address</source>
-        <translation>Upravit adresu</translation>
+        <translation type="obsolete">Upravit adresu</translation>
     </message>
     <message>
         <source>Edit My Personal Details</source>
@@ -172,7 +179,7 @@ Chcete přesto skončit?</translation>
     </message>
     <message>
         <source>Cards</source>
-        <translation>Karty</translation>
+        <translation type="obsolete">Karty</translation>
     </message>
     <message>
         <source>All</source>
@@ -180,7 +187,11 @@ Chcete přesto skončit?</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Nevyplněné</translation>
+        <translation type="obsolete">Nevyplněné</translation>
+    </message>
+    <message>
+        <source>Edit Contact</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1346,6 +1357,41 @@ je poskytován zdarma!
     <message>
         <source></source>
         <translation></translation>
+    </message>
+</context>
+<context>
+    <name>Opie</name>
+    <message>
+        <source>Contact</source>
+        <translation type="unfinished">Kontakt</translation>
+    </message>
+    <message>
+        <source>Contacts</source>
+        <translation type="unfinished">Kontakty</translation>
+    </message>
+    <message>
+        <source>Start Search</source>
+        <translation type="unfinished">Spustit hledání</translation>
+    </message>
+    <message>
+        <source>Write Mail To</source>
+        <translation type="unfinished">Napsat Mail pro</translation>
+    </message>
+    <message>
+        <source>Import vCard</source>
+        <translation type="unfinished">Importovat vCard</translation>
+    </message>
+    <message>
+        <source>Export vCard</source>
+        <translation type="unfinished">Exportovat vCard</translation>
+    </message>
+    <message>
+        <source>My Personal Details</source>
+        <translation type="unfinished">Moje osobní detaily</translation>
+    </message>
+    <message>
+        <source>Show quick search bar</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

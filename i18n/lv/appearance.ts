@@ -71,43 +71,43 @@ Klikšķiniet šeit lai izvēlētos pieejamo shēmu.</translation>
     </message>
     <message>
         <source>Force styling for all applications.</source>
-        <translation>Piespiedu stils priekš visām aplikācijām.</translation>
+        <translation type="obsolete">Piespiedu stils priekš visām aplikācijām.</translation>
     </message>
     <message>
         <source>Click here to allow all applications to use global appearance settings.</source>
-        <translation>Klikšķiniet šeit lai atļautu visām aplikācijām lietot globālos izskata uzstādījumus.</translation>
+        <translation type="obsolete">Klikšķiniet šeit lai atļautu visām aplikācijām lietot globālos izskata uzstādījumus.</translation>
     </message>
     <message>
         <source>Disable styling for these applications ( &lt;b&gt;*&lt;/b&gt; can be used as a wildcard):</source>
-        <translation>Noliegt stilošanu šīm aplikācijām (&lt;b&gt;*&lt;/b&gt; var tikt lietots kā noklusējums):</translation>
+        <translation type="obsolete">Noliegt stilošanu šīm aplikācijām (&lt;b&gt;*&lt;/b&gt; var tikt lietots kā noklusējums):</translation>
     </message>
     <message>
         <source>If some applications do not display correctly with the global appearance settings, certain features can be turned off for that application.
 
 This area allows you to select an application and which settings you wish to disable.</source>
-        <translation>Ja kāda aplikācija ar globāliem izskata uzstādījumiem netiek attēlota korekti, dažas iespējas var tikt izslēgtas šīm aplikācijām.
+        <translation type="obsolete">Ja kāda aplikācija ar globāliem izskata uzstādījumiem netiek attēlota korekti, dažas iespējas var tikt izslēgtas šīm aplikācijām.
 
 Šis lauks atļauj jums iezīmēt aplikācijas un kurus uzstādījumus vēlaties noliegt.</translation>
     </message>
     <message>
         <source>Binary file(s)</source>
-        <translation>Binārais fails(i)</translation>
+        <translation type="obsolete">Binārais fails(i)</translation>
     </message>
     <message>
         <source>Click here to add an application to the list above.</source>
-        <translation>Klikšķiniet šeit lai pievienotu aplikāciju sarakstam zemāk.</translation>
+        <translation type="obsolete">Klikšķiniet šeit lai pievienotu aplikāciju sarakstam zemāk.</translation>
     </message>
     <message>
         <source>Click here to delete the currently selected application.</source>
-        <translation>Klikšķiniet šeit lai dzēstu tekošo iezīmēto aplikāciju.</translation>
+        <translation type="obsolete">Klikšķiniet šeit lai dzēstu tekošo iezīmēto aplikāciju.</translation>
     </message>
     <message>
         <source>Click here to move the currently selected application up in the list.</source>
-        <translation>Klikšķiniet šeit lai pārvietotu tekošo iezīmēto aplikāciju sarakstā uz augšu.</translation>
+        <translation type="obsolete">Klikšķiniet šeit lai pārvietotu tekošo iezīmēto aplikāciju sarakstā uz augšu.</translation>
     </message>
     <message>
         <source>Click here to move the currently selected application down in the list.</source>
-        <translation>Klikšķiniet šeit lai pārvietotu tekošo iezīmēto aplikāciju sarakstā uz leju.</translation>
+        <translation type="obsolete">Klikšķiniet šeit lai pārvietotu tekošo iezīmēto aplikāciju sarakstā uz leju.</translation>
     </message>
     <message>
         <source>Tab style:</source>
@@ -213,7 +213,15 @@ This area allows you to select an application and which settings you wish to dis
     </message>
     <message>
         <source>&lt;new&gt;</source>
-        <translation>&lt;jauns&gt;</translation>
+        <translation type="obsolete">&lt;jauns&gt;</translation>
+    </message>
+    <message>
+        <source>Show Scrollbars on the left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to display scrollbars on the left side instead of the right.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

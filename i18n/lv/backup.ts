@@ -63,6 +63,26 @@
         <source>Restore Backup...</source>
         <translation>Atjaunojam Saglabāto...</translation>
     </message>
+    <message>
+        <source>&lt;qt&gt;%1&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restore</source>
+        <translation type="unfinished">Atjaunot</translation>
+    </message>
+    <message>
+        <source>Would you really overwrite your local data?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>BackupAndRestoreBase</name>
@@ -120,11 +140,11 @@
     </message>
     <message>
         <source>Save</source>
-        <translation>Saglabāt</translation>
+        <translation type="obsolete">Saglabāt</translation>
     </message>
     <message>
         <source>...</source>
-        <translation>...</translation>
+        <translation type="obsolete">...</translation>
     </message>
     <message>
         <source>Destination</source>
@@ -132,15 +152,15 @@
     </message>
     <message>
         <source>Type</source>
-        <translation>Tips</translation>
+        <translation type="obsolete">Tips</translation>
     </message>
     <message>
         <source>User Data (Configuration + PIM)</source>
-        <translation>Lieotāja Dati (Konfigurācija + PIM)</translation>
+        <translation type="obsolete">Lieotāja Dati (Konfigurācija + PIM)</translation>
     </message>
     <message>
         <source>Full Backup (Root File System)</source>
-        <translation>Pilna Saglabāšana (Root Failu Sistēma)</translation>
+        <translation type="obsolete">Pilna Saglabāšana (Root Failu Sistēma)</translation>
     </message>
 </context>
 <context>

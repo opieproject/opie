@@ -3,7 +3,7 @@
     <name>Calculator</name>
     <message>
         <source>Experimental Calculator</source>
-        <translation>Експериментален Калкулатор</translation>
+        <translation type="obsolete">Експериментален Калкулатор</translation>
     </message>
     <message>
         <source>M+</source>
@@ -121,6 +121,10 @@
     <message>
         <source>2</source>
         <translation>2</translation>
+    </message>
+    <message>
+        <source>Calculator</source>
+        <translation type="unfinished">Калкулатор</translation>
     </message>
 </context>
 <context>

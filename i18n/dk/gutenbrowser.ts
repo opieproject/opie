@@ -32,10 +32,6 @@
 <context>
     <name>Gutenbrowser</name>
     <message>
-        <source>Gutenbrowser Output</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Running wget</source>
         <translation type="unfinished"></translation>
     </message>
@@ -96,6 +92,10 @@ or select an ftp site?
     </message>
     <message>
         <source>Please install unzip in your PATH</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Downloading Gutenberg Index....</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -229,10 +229,6 @@ http://www.trolltech.com
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;p&gt;Error opening local library index:&lt;/P&gt; </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Library Search</source>
         <translation type="unfinished"></translation>
     </message>
@@ -299,6 +295,10 @@ http://www.trolltech.com
     </message>
     <message>
         <source>Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Error opening library index file. Please download a new one.&lt;/P&gt; </source>
         <translation type="unfinished"></translation>
     </message>
     <message>

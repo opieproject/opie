@@ -119,16 +119,16 @@ kaart wordt niet herkend</translation>
     <message>
         <source>Do you really want to &lt;font size=+2&gt;&lt;B&gt;DELETE&lt;/B&gt;&lt;/font&gt;
 the selected file?</source>
-        <translation>Wil je het geselecteerde bestand
+        <translation type="obsolete">Wil je het geselecteerde bestand
 echt &lt;font size=+2&gt;&lt;B&gt;VERWIJDEREN&lt;/B&gt;&lt;/font&gt;?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Ja</translation>
+        <translation type="obsolete">Ja</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>Nee</translation>
+        <translation type="obsolete">Nee</translation>
     </message>
     <message>
         <source>Error</source>
@@ -144,7 +144,7 @@ echt &lt;font size=+2&gt;&lt;B&gt;VERWIJDEREN&lt;/B&gt;&lt;/font&gt;?</translati
     </message>
     <message>
         <source>Please select file to  play</source>
-        <translation>Kies een bestand om af te spelen</translation>
+        <translation type="obsolete">Kies een bestand om af te spelen</translation>
     </message>
     <message>
         <source>Note</source>
@@ -221,6 +221,10 @@ echt &lt;font size=+2&gt;&lt;B&gt;VERWIJDEREN&lt;/B&gt;&lt;/font&gt;?</translati
     </message>
     <message>
         <source>Stereo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please select file to play</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

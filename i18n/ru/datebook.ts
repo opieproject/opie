@@ -373,6 +373,25 @@ Quit anyway?</source>
     </message>
 </context>
 <context>
+    <name>DateBookWeekLstEvent</name>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Редактировать</translation>
+    </message>
+    <message>
+        <source>Duplicate</source>
+        <translation type="unfinished">Сдублировать</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Удалить</translation>
+    </message>
+    <message>
+        <source>Beam</source>
+        <translation type="unfinished">Отправить</translation>
+    </message>
+</context>
+<context>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>

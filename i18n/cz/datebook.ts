@@ -373,6 +373,25 @@ Chcete přesto skončit?</translation>
     </message>
 </context>
 <context>
+    <name>DateBookWeekLstEvent</name>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Upravit</translation>
+    </message>
+    <message>
+        <source>Duplicate</source>
+        <translation type="unfinished">Duplikovat</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Smazat</translation>
+    </message>
+    <message>
+        <source>Beam</source>
+        <translation type="unfinished">Poslat</translation>
+    </message>
+</context>
+<context>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>

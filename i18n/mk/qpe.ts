@@ -527,7 +527,7 @@ immediately.</source>
     <message>
         <source>&lt;p&gt;
 These termination options are provided primarily for use while developing and testing the Opie system. In a normal environment, these concepts are unnecessary.</source>
-        <translation type="unfinished">&lt;p&gt;
+        <translation type="obsolete">&lt;p&gt;
 Овие иоции за гасење се наменети за користење за време на развој и тестирање на Опие системот. Во нормална околина, овие концепти се непотребни.</translation>
     </message>
     <message>

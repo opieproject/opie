@@ -15,6 +15,13 @@
     </message>
 </context>
 <context>
+    <name>AbView</name>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished">未歸檔</translation>
+    </message>
+</context>
+<context>
     <name>AddressbookWindow</name>
     <message>
         <source>Contacts</source>
@@ -22,39 +29,35 @@
     </message>
     <message>
         <source>Contact</source>
-        <translation>聯絡人</translation>
+        <translation type="obsolete">聯絡人</translation>
     </message>
     <message>
         <source>New</source>
-        <translation>新增</translation>
+        <translation type="obsolete">新增</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>編輯</translation>
+        <translation type="obsolete">編輯</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>刪除</translation>
+        <translation type="obsolete">刪除</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>搜尋</translation>
+        <translation type="obsolete">搜尋</translation>
     </message>
     <message>
         <source>Write Mail To</source>
-        <translation>寫電郵給</translation>
+        <translation type="obsolete">寫電郵給</translation>
     </message>
     <message>
         <source>Beam Entry</source>
-        <translation>傳送項目</translation>
+        <translation type="obsolete">傳送項目</translation>
     </message>
     <message>
         <source>My Personal Details</source>
-        <translation>個人資料</translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation></translation>
+        <translation type="obsolete">個人資料</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
@@ -66,7 +69,7 @@
     </message>
     <message>
         <source>Edit Address</source>
-        <translation>編輯地址</translation>
+        <translation type="obsolete">編輯地址</translation>
     </message>
     <message>
         <source>Contacts - My Personal Details</source>
@@ -93,23 +96,23 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>未歸檔</translation>
+        <translation type="obsolete">未歸檔</translation>
     </message>
     <message>
         <source>Import vCard</source>
-        <translation>輸入 cVard</translation>
+        <translation type="obsolete">輸入 cVard</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation>關閉搜尋</translation>
+        <translation type="obsolete">關閉搜尋</translation>
     </message>
     <message>
         <source>Save all Data</source>
-        <translation>儲存所有資料</translation>
+        <translation type="obsolete">儲存所有資料</translation>
     </message>
     <message>
         <source>Config</source>
-        <translation>設定</translation>
+        <translation type="obsolete">設定</translation>
     </message>
     <message>
         <source>Not Found</source>
@@ -117,19 +120,19 @@ Quit anyway?</source>
     </message>
     <message>
         <source>List</source>
-        <translation>列出</translation>
+        <translation type="obsolete">列出</translation>
     </message>
     <message>
         <source>Cards</source>
-        <translation>名片</translation>
+        <translation type="obsolete">名片</translation>
     </message>
     <message>
         <source>Card</source>
-        <translation>名片</translation>
+        <translation type="obsolete">名片</translation>
     </message>
     <message>
         <source>Start Search</source>
-        <translation>開始搜尋</translation>
+        <translation type="obsolete">開始搜尋</translation>
     </message>
     <message>
         <source>Right file type ?</source>
@@ -167,15 +170,15 @@ Quit anyway?</source>
         <translation>&amp;全部都是</translation>
     </message>
     <message>
-        <source>Export vCard</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>You have to select a contact !</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>You have to set a filename !</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Contact</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1337,6 +1340,41 @@ is provided free !</source>
     </message>
     <message>
         <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Opie</name>
+    <message>
+        <source>Contact</source>
+        <translation type="unfinished">聯絡人</translation>
+    </message>
+    <message>
+        <source>Contacts</source>
+        <translation type="unfinished">聯絡人</translation>
+    </message>
+    <message>
+        <source>Start Search</source>
+        <translation type="unfinished">開始搜尋</translation>
+    </message>
+    <message>
+        <source>Write Mail To</source>
+        <translation type="unfinished">寫電郵給</translation>
+    </message>
+    <message>
+        <source>Import vCard</source>
+        <translation type="unfinished">輸入 cVard</translation>
+    </message>
+    <message>
+        <source>Export vCard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>My Personal Details</source>
+        <translation type="unfinished">個人資料</translation>
+    </message>
+    <message>
+        <source>Show quick search bar</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -374,6 +374,25 @@ Izhod?</translation>
     </message>
 </context>
 <context>
+    <name>DateBookWeekLstEvent</name>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Uredi</translation>
+    </message>
+    <message>
+        <source>Duplicate</source>
+        <translation type="unfinished">Podvoji</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Izbriši</translation>
+    </message>
+    <message>
+        <source>Beam</source>
+        <translation type="unfinished">Prežarči</translation>
+    </message>
+</context>
+<context>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>

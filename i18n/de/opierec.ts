@@ -120,16 +120,16 @@ wurde nicht erkannt</translation>
     <message>
         <source>Do you really want to &lt;font size=+2&gt;&lt;B&gt;DELETE&lt;/B&gt;&lt;/font&gt;
 the selected file?</source>
-        <translation>Wollen Sie wirklich die ausgewählte
+        <translation type="obsolete">Wollen Sie wirklich die ausgewählte
 Datei &lt;font size=+2&gt;&lt;B&gt;LÖSCHEN&lt;/B&gt;&lt;/font&gt;?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Ja</translation>
+        <translation type="obsolete">Ja</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>Nein</translation>
+        <translation type="obsolete">Nein</translation>
     </message>
     <message>
         <source>Error</source>
@@ -145,7 +145,7 @@ Datei &lt;font size=+2&gt;&lt;B&gt;LÖSCHEN&lt;/B&gt;&lt;/font&gt;?</translation
     </message>
     <message>
         <source>Please select file to  play</source>
-        <translation>Bitte zu spielende Datei auswählen</translation>
+        <translation type="obsolete">Bitte zu spielende Datei auswählen</translation>
     </message>
     <message>
         <source>Note</source>
@@ -223,6 +223,10 @@ Datei &lt;font size=+2&gt;&lt;B&gt;LÖSCHEN&lt;/B&gt;&lt;/font&gt;?</translation
     </message>
     <message>
         <source>Stereo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please select file to play</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

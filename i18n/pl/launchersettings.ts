@@ -267,6 +267,14 @@
         <source>Activate this, if you want an animatedbusy indicator for starting applications in the Launcher.</source>
         <translation>Aktywuj jeśli chcesz wyświetlać animowany wskaźnik zajętości dla startujących aplikacji.</translation>
     </message>
+    <message>
+        <source>Enable static background pixmap</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Activate this, if you want the background pixmap not to scroll with the icons.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TaskbarSettings</name>

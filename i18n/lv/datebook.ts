@@ -374,6 +374,26 @@ Labot</translation>
     </message>
 </context>
 <context>
+    <name>DateBookWeekLstEvent</name>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">
+Labot</translation>
+    </message>
+    <message>
+        <source>Duplicate</source>
+        <translation type="unfinished">Duplicēt</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Dzēst</translation>
+    </message>
+    <message>
+        <source>Beam</source>
+        <translation type="unfinished">Bīmot</translation>
+    </message>
+</context>
+<context>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>
