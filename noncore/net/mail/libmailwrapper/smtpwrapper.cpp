@@ -81,7 +81,36 @@ mailimf_address_list *SMTPwrapper::parseAddresses(const QString&addr )
 
     addresses = mailimf_address_list_new_empty();
 
-    QStringList list = QStringList::split( ',', addr );
+    bool literal_open = false;
+    unsigned int startpos = 0;
+    QStringList list;
+    QString s;
+    unsigned int i = 0;
+    for (; i < addr.length();++i) {
+        switch (addr[i]) {
+        case '\"':
+            literal_open = !literal_open;
+            break;
+        case ',':
+            if (!literal_open) {
+                s = addr.mid(startpos,i-startpos);
+                if (!s.isEmpty()) {
+                    list.append(s);
+                    qDebug("Appended %s",s.latin1());
+                }
+                // !!!! this is a MUST BE!
+                startpos = ++i;
+            }
+            break;
+        default:
+            break;
+        }
+    }
+    s = addr.mid(startpos,i-startpos);
+    if (!s.isEmpty()) {
+       list.append(s);
+       qDebug("Appended %s",s.latin1());
+    }
     QStringList::Iterator it;
     for ( it = list.begin(); it != list.end(); it++ ) {
         char *str = strdup( (*it).latin1() );
@@ -91,10 +120,9 @@ mailimf_address_list *SMTPwrapper::parseAddresses(const QString&addr )
             qDebug( *it );
             free( str );
         } else {
-            qDebug( "Parse success! :)" );
+            qDebug( "Parse success! %s",(*it).latin1());
         }
     }
-
     return addresses;
 }
 
@@ -625,7 +653,10 @@ int SMTPwrapper::smtpSend(char*from,clist*rcpts,char*data,size_t size, SMTPaccou
     }
 
     err = mailsmtp_send( session, from, rcpts, data, size );
-    if ( err != MAILSMTP_NO_ERROR ) {result = 0; goto free_con_session;}
+    if ( err != MAILSMTP_NO_ERROR ) {
+        qDebug("Error sending mail: %s",mailsmtpError(err).latin1());
+        result = 0; goto free_con_session;
+    }
 
     qDebug( "Mail sent." );
     storeMail(data,size,"Sent");
