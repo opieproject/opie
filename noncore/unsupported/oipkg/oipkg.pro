@@ -18,7 +18,6 @@ SOURCES		= main.cpp \
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe 
-LIBS            += -ljpeg
 INTERFACES	= pkdesc.ui \
 		pkfind.ui \
 		runwindow.ui \
