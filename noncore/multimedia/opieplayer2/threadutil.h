@@ -85,6 +85,7 @@ namespace ThreadUtil
     {
     public:
         struct Data;
+        friend struct Data;
 
         Thread();
         virtual ~Thread();
