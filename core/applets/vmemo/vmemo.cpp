@@ -11,7 +11,7 @@
 ************************************************************************************/
 
 /*
- * $Id: vmemo.cpp,v 1.6 2002-02-15 02:40:16 llornkcor Exp $
+ * $Id: vmemo.cpp,v 1.7 2002-02-15 03:04:38 llornkcor Exp $
  */
 
 #include <sys/utsname.h>
@@ -306,19 +306,19 @@ int VMemo::openWAV(const char *filename)
 
   WaveHeader wh;
 
-  wh.main_chunk = RIFF;// RIFF
-  wh.length=0;     /* filelen */
-  wh.chunk_type = WAVE;//WAVE
-  wh.sub_chunk  = FMT;// fmt
-  wh.sc_len     = 16;// format length = 16
-  wh.format     = PCM_CODE;// PCM
-  wh.modus      = channels;// channels
-  wh.sample_fq  = speed;//samplerate
-  wh.byte_p_sec = speed * channels *  resolution/8;// av bytes per second
-  wh.byte_p_spl = channels * (resolution / 8);  //block align
-  wh.bit_p_spl  = resolution;//bits per sample 8, or 16
+  wh.main_chunk = RIFF;
+  wh.length=0; 
+  wh.chunk_type = WAVE;
+  wh.sub_chunk  = FMT;
+  wh.sc_len     = 16;
+  wh.format     = PCM_CODE;
+  wh.modus      = channels;
+  wh.sample_fq  = speed;
+  wh.byte_p_sec = speed * channels *  resolution/8;
+  wh.byte_p_spl = channels * (resolution / 8); 
+  wh.bit_p_spl  = resolution;
   wh.data_chunk = DATA;
-  wh.data_length= 0; // <---
+  wh.data_length= 0; 
 //    qDebug("Write header channels %d, speed %d, b/s %d, blockalign %d, bitrate %d"
 //           , wh.modus, wh.sample_fq, wh.byte_p_sec, wh.byte_p_spl, wh.bit_p_spl );
   write (wav, &wh, sizeof(WaveHeader));
@@ -356,7 +356,7 @@ void VMemo::record(void)
 //  qDebug("File length %d, samplecount %d", value, length);
   track.close();
 
-  if( ioctl( dsp, SNDCTL_DSP_RESET,0) == -1)// ); //tell driver to stop for a while
+  if( ioctl( dsp, SNDCTL_DSP_RESET,0) == -1)
   perror("ioctl(\"SNDCTL_DSP_RESET\")");
   ::close(dsp);
 
