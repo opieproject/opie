@@ -64,6 +64,7 @@ protected slots:
   void del();
   void rn();
   void populateView();
+  void rePopulate();
   void showHidden();
   void showMenuHidden();
   void writeConfig();
@@ -120,7 +121,7 @@ protected:
   QString checkDiskSpace(const QString &);
   QString dealWithSymName(const QString &);
   QDir *CurrentDir();
-  QDir *OtherDir(); 
+  QDir *OtherDir();
   QListView *CurrentView();
   QListView *OtherView();
   void setOtherTabCurrent();

@@ -68,8 +68,7 @@ void AdvancedFm::showMenuHidden()
 			fileMenu->setItemChecked( fileMenu->idAt(0),FALSE);
 //    b=TRUE;
 		}
-  populateView();
-//  populateRemoteView();
+  rePopulate();
 //    if(b) qDebug("<<<<<<<<<<<<<<<<<<<<<<<<<<<< true");
     if(b) b = false; else b = true;
 }
@@ -91,7 +90,7 @@ void AdvancedFm::showHidden()
 //     fileMenu->setItemChecked( fileMenu->idAt(0),FALSE);
 //    b=TRUE;
 		}
-  populateView();
+  rePopulate();
 }
 
 QString AdvancedFm::dealWithSymName(const QString &fileName)

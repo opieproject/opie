@@ -74,10 +74,8 @@ AdvancedFm::AdvancedFm( )
 	renameBox = 0;
 
 	initConnections();
-	TabWidget->setCurrentTab(1);
-	populateView();
-	TabWidget->setCurrentTab(0);
-	populateView();
+	whichTab=1;
+	rePopulate();
 	currentPathCombo->setFocus();
 }
 
@@ -117,7 +115,6 @@ void AdvancedFm::tabChanged(QWidget *w)
 	setCaption("AdvancedFm :: "+fs+" :: "
 						 +checkDiskSpace( (const QString &) path )+ " kB free" );
 	chdir( path.latin1());
-//2	populateView();
 }
 
 
@@ -243,6 +240,18 @@ void AdvancedFm::populateView()
   fillCombo( (const QString &) path );
 }
 
+void AdvancedFm::rePopulate()
+{
+	int tmpTab = whichTab;
+	qDebug("%d", tmpTab);
+
+	for(int i =1; i < 3; i++)
+		{
+			TabWidget->setCurrentTab(i - 1);
+			populateView();
+		}
+	TabWidget->setCurrentTab( tmpTab - 1);
+}
 
 void AdvancedFm::ListClicked(QListViewItem *selectedItem)
 {
