@@ -8,11 +8,14 @@
 # CONFIG_TARGET_X86 is not set
 CONFIG_TARGET_MACOSX=y
 # CONFIG_TARGET_SHARP is not set
+# CONFIG_TARGET_C700 is not set
 # CONFIG_TARGET_IPAQ is not set
 # CONFIG_TARGET_RAMSES is not set
 # CONFIG_TARGET_SIMPAD is not set
 # CONFIG_TARGET_YOPY is not set
 # CONFIG_OPTIMIZE is not set
+# CONFIG_THREADED is not set
+# CONFIG_STATIC is not set
 CONFIG_DEBUG=y
 CONFIG_QUICK_LAUNCH=y
 CONFIG_QUICKLAUNCH_PATH="/Users/stefan/Developer/opie/bin/quicklauncher"
@@ -23,14 +26,28 @@ CONFIG_EXPERIMENTAL=y
 # Configuration
 #
 # CONFIG_OPIE_NO_OVERRIDE_QT is not set
+# CONFIG_OPIE_NO_ERASERECT_FIX is not set
 # CONFIG_OPIE_NO_BUILTIN_SHUTDOWN is not set
 # CONFIG_OPIE_NO_BUILTIN_CALIBRATE is not set
 CONFIG_OPIE_SOUND_FRAGMENT_SHIFT="16"
 # CONFIG_USE_REALTIME_AUDIO_THREAD is not set
-# CONFIG_OPIE_HIGH_RES_SMALL_PHY is not set
+CONFIG_USE_FILE_NOTIFICATION=y
 # CONFIG_OPIE_NEW_ALLOC is not set
+# CONFIG_OPIE_TASKBAR_LOCK_KEY_STATE is not set
 # CONFIG_OPIE_NO_SOUND_PCM_READ_BITS is not set
-CONFIG_OPIE_WE_VERSION="15"
+
+#
+# Dependencies
+#
+# CONFIG_LIBETPAN_DEP is not set
+# CONFIG_LIBPCAP_DEP is not set
+CONFIG_LIBSQLITE_DEP=y
+CONFIG_LIBSQLITE_LIB_DIR="/usr/local/lib"
+CONFIG_LIBSQLITE_INC_DIR=""
+# CONFIG_LIBXINE_DEP is not set
+# CONFIG_LIBIPK_DEP is not set
+# CONFIG_LIBSDL_DEP is not set
+# CONFIG_LIBSWORD_DEP is not set
 
 #
 # Base
@@ -44,11 +61,15 @@ CONFIG_LIBOPIE=y
 #
 CONFIG_LIBOPIE2CORE=y
 CONFIG_LIBOPIE2DB=y
-# CONFIG_LIBOPIE2NET is not set
+
+#
+# libopie2net needs a libqpe and libopie2core
+#
 CONFIG_LIBOPIE2PIM=y
 CONFIG_SQL_PIM_BACKEND=y
 CONFIG_LIBOPIE2UI=y
 # CONFIG_LIBOPIE2MM is not set
+# CONFIG_LIBOPIE2SECURITY is not set
 
 #
 # the examples need a libqpe, libopie2core, libopie2db, libopie2net, libopie2pim, libopie2ui and libopie2mm
@@ -58,12 +79,10 @@ CONFIG_LIBOPIE2UI=y
 # 
 #
 CONFIG_LIBQTAUX=y
+CONFIG_LIBQRSYNC=y
 # CONFIG_OPIE-LOGIN is not set
 # CONFIG_OPIEALARM is not set
 CONFIG_QUICKLAUNCHER=y
-CONFIG_LAUNCHER=y
-CONFIG_PRELOAD=y
-CONFIG_LAUNCHER_CORE=y
 # CONFIG_SYMLINKER is not set
 
 #
@@ -73,6 +92,7 @@ CONFIG_LAUNCHER_CORE=y
 #
 # Applets
 #
+CONFIG_ABOUTAPPLET=y
 CONFIG_BATTERYAPPLET=y
 # CONFIG_CARDMON is not set
 CONFIG_CLIPBOARDAPPLET=y
@@ -80,7 +100,6 @@ CONFIG_CLOCKAPPLET=y
 CONFIG_HOMEAPPLET=y
 # CONFIG_IRDAAPPLET is not set
 # CONFIG_LOGOUTAPPLET is not set
-# CONFIG_OBEXAPPLET is not set
 # CONFIG_OBEX is not set
 # CONFIG_RESTARTAPPLET is not set
 # CONFIG_ROTATEAPPLET is not set
@@ -117,7 +136,7 @@ CONFIG_OPIE-WRITE=y
 CONFIG_OXYGEN=y
 # CONFIG_QASHMONEY is not set
 CONFIG_TABLEVIEWER=y
-# CONFIG_LIBKATE is not set
+# CONFIG_TINYKATE is not set
 # CONFIG_ZSAFE is not set
 
 #
@@ -131,7 +150,14 @@ CONFIG_TABLEVIEWER=y
 # Net
 #
 # CONFIG_FTPLIB is not set
-# CONFIG_LIBMAILWRAPPER is not set
+
+#
+# opie-mail3 needs a libqpe, libopie2core, libopie2pim and the libmailwrapper
+#
+
+#
+# mailapplet needs a libqpe, libopie2core and the libmailwrapper
+#
 # CONFIG_OPIEIRC is not set
 # CONFIG_OPIE-RDESKTOP is not set
 # CONFIG_OPIETOOTH is not set
@@ -158,7 +184,6 @@ CONFIG_TABLEVIEWER=y
 # CONFIG_PARASHOOT is not set
 # CONFIG_QASTEROIDS is not set
 # CONFIG_SFCAVE is not set
-# CONFIG_SFCAVE-SDL is not set
 # CONFIG_SNAKE is not set
 # CONFIG_SOLITAIRE is not set
 # CONFIG_TETRIX is not set
@@ -172,7 +197,6 @@ CONFIG_TABLEVIEWER=y
 CONFIG_DRAWPAD=y
 # CONFIG_OPIEPLAYER is not set
 # CONFIG_CAMERA is not set
-# CONFIG_OPIEPLAYER2 is not set
 # CONFIG_OPIEREC is not set
 # CONFIG_SHOWIMG is not set
 # CONFIG_TONLEITER is not set
@@ -209,7 +233,7 @@ CONFIG_TODAY=y
 CONFIG_TODO=y
 
 #
-# Today Plugins
+# Today Plugins ---
 #
 # CONFIG_TODAY_FORTUNE is not set
 # CONFIG_TODAY_STOCKTICKER is not set
@@ -229,7 +253,6 @@ CONFIG_BUTTON-SETTINGS=y
 CONFIG_CITYTIME=y
 CONFIG_LAUNCHER-SETTINGS=y
 # CONFIG_LIGHT-AND-POWER is not set
-CONFIG_SECURITY=y
 CONFIG_APPEARANCE2=y
 # CONFIG_AQPKG is not set
 CONFIG_BACKUP=y
@@ -237,6 +260,7 @@ CONFIG_DOCTAB=y
 CONFIG_LANGUAGE=y
 # CONFIG_MEDIUMMOUNT is not set
 # CONFIG_NETSYSTEMTIME is not set
+# CONFIG_INTERFACES is not set
 # CONFIG_SOUND is not set
 # CONFIG_SSHKEYS is not set
 CONFIG_SYSINFO=y
@@ -248,11 +272,19 @@ CONFIG_TABMANAGER=y
 #
 
 #
+# Decorations ---
+#
+
+#
 # Decorations
 #
 CONFIG_DECO_FLAT=y
 CONFIG_DECO_LIQUID=y
 CONFIG_DECO_POLISHED=y
+
+#
+# Styles ---
+#
 
 #
 # Styles
@@ -271,6 +303,7 @@ CONFIG_CLOCK=y
 CONFIG_EUROCONV=y
 # CONFIG_FORMATTER is not set
 CONFIG_OPIE-SH=y
+CONFIG_PIMCONVERTER=y
 # CONFIG_REMOTE is not set
 
 #
