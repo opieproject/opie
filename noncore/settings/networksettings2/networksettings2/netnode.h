@@ -121,10 +121,15 @@ public:
     // for all NNI of this node class and the data generated
     // by each of the NNI needs to be put in one file
     //
+    // the function can return a set of folders that should
+    // be created (or perhaps already exist) prior to opening 
+    // the file
+    //
     // if this is the case the file should be (re)opened in append
     // return 0 if file cannot be opened
     virtual bool openFile( SystemFile &SF,
-                             ANetNodeInstance * NNI );
+                           ANetNodeInstance * NNI,
+                           QStringList & PathToCreate );
 
     // generate instance independent stuff
     // 0 : data output, 1 no data, 2 error
@@ -259,7 +264,8 @@ public:
 
 
     // open proper file identified by S
-    virtual bool openFile( SystemFile & ) 
+    virtual bool openFile( SystemFile &,
+                           QStringList & )
       { return 0; }
 
     // check if this node (or sub nodes) have data for this file

@@ -1,12 +1,24 @@
 #include <qapplication.h>
 #include <resources.h>
+
+#include <OTPeer.h>
 #include <OTDevice.h>
 #include <OTGateway.h>
+#include <Opietooth.h>
+
+#include <qlistbox.h>
+#include <qframe.h>
+#include <qlabel.h>
+#include <qlayout.h>
+#include <qdialog.h>
+
 #include "bluetoothRFCOMMrun.h"
 
 using Opietooth2::OTGateway;
 using Opietooth2::OTDevice;
 using Opietooth2::OTDeviceAddress;
+using Opietooth2::OTScan;
+using Opietooth2::OTPeer;
 
 BluetoothRFCOMMRun::~BluetoothRFCOMMRun( void ) {
       if( OT ) {
@@ -55,6 +67,9 @@ QString BluetoothRFCOMMRun::setMyState( NetworkSetup *,
             << Ch->BDAddress
             << QString().setNum( Ch->Channel );
  
+          // no longer needed
+          delete Ch;
+
           if( Sys.runAsRoot( S ) ) {
             return QString( "Error starting %1").arg(S.join(" "));
           }
@@ -78,12 +93,6 @@ QString BluetoothRFCOMMRun::setMyState( NetworkSetup *,
       return QString();
 }
 
-#include <qlistbox.h>
-#include <qframe.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qdialog.h>
-
 RFCOMMChannel * BluetoothRFCOMMRun::getChannel( void ) {
 
     if( Data->Devices.count() == 1 ) {
@@ -92,6 +101,22 @@ RFCOMMChannel * BluetoothRFCOMMRun::getChannel( void ) {
     }
 
     RFCOMMChannel * Ch = 0;
+
+    if( Data->Devices.count() == 0 ) {
+      OTPeer * Peer;
+      int Channel;
+
+      if( OTScan::getDevice( Peer, Channel, OT ) == QDialog::Accepted ) {
+        Ch = new RFCOMMChannel;
+        Ch->BDAddress = Peer->address().toString();
+        Ch->Name = Peer->name();
+        Ch->Channel = Channel;
+        return Ch;
+      }
+      
+      return 0;
+    }
+
     QDialog * Dlg = new QDialog( qApp->mainWidget(), 0, TRUE );
     QVBoxLayout * V = new QVBoxLayout( Dlg );
 
@@ -120,7 +145,10 @@ RFCOMMChannel * BluetoothRFCOMMRun::getChannel( void ) {
       for( i = 0; i < Data->Devices.count(); i ++ ) {
         if( LB->isSelected(i) ) {
           odebug << "Selected " << Data->Devices[i]->Name << oendl;
-          Ch = Data->Devices[i];
+          Ch = new RFCOMMChannel;
+          Ch->BDAddress = Data->Devices[i]->BDAddress;
+          Ch->Name = Data->Devices[i]->Name;
+          Ch->Channel = Data->Devices[i]->Channel;
           break;
         }
       }

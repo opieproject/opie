@@ -29,6 +29,7 @@ public :
 private :
 
       QList<NetworkSetup> collectTriggered( const QString &Interface );
+      bool createPath( const QStringList & SL );
       bool ForceModified;
 
       // collect strings in config file nobody wants

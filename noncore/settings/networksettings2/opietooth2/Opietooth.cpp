@@ -184,7 +184,6 @@ void OTSniffing::SLOT_Trace( bool Run ) {
 }
 
 void OTSniffing::SLOT_Show( const QString & S ) {
-      printf( "%s\n", S.latin1() );
       Output_TV->setText( Output_TV->text() + S + "\n" );
 
       QScrollBar *scroll = Output_TV->verticalScrollBar();
@@ -377,6 +376,7 @@ OTScan::OTScan( QWidget * parent, OTIcons * _IC ) :
                 OTScanGUI( parent ), Filter() {
 
       OT = OTGateway::getOTGateway();
+
       Icons = (_IC ) ? _IC : new OTIcons();
       MyIcons = (_IC == 0 );
       DetectedPeers_LV->header()->hide();
@@ -443,6 +443,14 @@ int OTScan::getDevice( OTPeer *& Peer,
                        QWidget* Parent ) {
       bool IsUp = 0;
       unsigned int i;
+
+      if( ! OT->isEnabled() ) {
+        QMessageBox::warning( 0,
+            tr("Scanning problem"),
+            tr("Bluetooth not enabled" )
+        );
+        return QDialog::Rejected;
+      }
 
       // check if bluetooth is up
       OTDriverList & DL = OT->getDriverList();

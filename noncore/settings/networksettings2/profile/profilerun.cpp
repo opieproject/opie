@@ -3,10 +3,9 @@
 #include "profilerun.h"
 
 State_t ProfileRun::detectState( void ) { 
-    InterfaceInfo * II = networkSetup()->assignedInterface();
 
-    Log(( "Interface %p %p %p: %d\n", II, 
-            netNode(), netNode()->networkSetup(), (II) ? II->IsUp : 0 ));
+    Log(( "Profile %sabled\n", (Data->Disabled) ? "dis" : "en" ));
+
     if( Data->Disabled ) {
       return Disabled;
     } 

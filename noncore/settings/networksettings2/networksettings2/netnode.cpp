@@ -89,8 +89,9 @@ bool ANetNode::isToplevel( void ) {
 }
 
 bool ANetNode::openFile( SystemFile & SF, 
-                            ANetNodeInstance * NNI ) {
-    return (NNI ) ? NNI->openFile( SF ) : 0 ;
+                         ANetNodeInstance * NNI,
+                         QStringList & SL ) {
+    return (NNI ) ? NNI->openFile( SF, SL ) : 0 ;
 }
 
 //
@@ -406,11 +407,13 @@ QString NetworkSetup::setState( Action_t A, bool Force ) {
 
     switch( A ) {
       case Disable :
+        /*
         if( CurrentState < Disabled ) {
           // disabled
           CurrentState = Disabled;
           return QString();
         }
+        */
 
         if( CurrentState == IsUp ) {
           Actions[NoOfActions++] = Down;

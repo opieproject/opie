@@ -146,12 +146,14 @@ void APPP::commit( void ) {
     }
 }
 
-bool APPP::openFile( SystemFile & SF ) {
+bool APPP::openFile( SystemFile & SF, QStringList & SL ) {
       if( SF.name() == "peers" ) {
+        SL << "/tmp/ppp" << "peers" ;
         SF.setPath( removeSpaces( 
             QString( "/tmp/ppp/peers/" ) + networkSetup()->name() ) );
         return 1;
       } else if ( SF.name() == "chatscripts" ) {
+        SL << "/tmp/chatscripts";
         SF.setPath( removeSpaces( 
             QString( "/tmp/chatscripts/" ) + networkSetup()->name() ) );
         return 1;

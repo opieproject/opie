@@ -24,7 +24,8 @@ public :
       QString acceptable( void );
       void commit( void );
 
-      virtual bool openFile( SystemFile & SF );
+      virtual bool openFile( SystemFile & SF,
+                             QStringList & SL );
 
       virtual void * data( void ) 
         { return (void *)&Data; }

@@ -251,7 +251,7 @@ void NetworkSettings::SLOT_EditNode( QListBoxItem * LBI ) {
             Profiles_LB->insertItem( NC->devicePixmap(), NC->name() );
             Profiles_LB->setSelected( ci, TRUE );
           }
-          updateProfileState( LBI );
+          SLOT_RefreshStates();
         }
       } else {
         // cancelled : reset NetworkSetup 

@@ -336,12 +336,23 @@ QString NetworkSettingsData::generateSettings( void ) {
 
             // open proper file
             { SystemFile SF( (*it) );
+              QStringList SL;
 
-              if( ! CurDevNN->openFile( SF, nniit.current()) ) {
+              if( ! CurDevNN->openFile( SF, nniit.current(), SL) ) {
                 // cannot open
                 S = qApp->translate( "NetworkSettings", 
-                  "<p>Cannot open proper file \"%1\" for node \"%2\"</p>" ).
-                    arg( (*it) ).arg( CurDevNN->name() );
+                  "<p>Cannot build proper file \"%1\" for node \"%2\"</p>" ).
+                    arg( (*it) ).
+                    arg( CurDevNN->name() );
+                return S;
+              }
+
+              if( ! createPath( SL ) ) {
+                S = qApp->translate( "NetworkSettings", 
+                  "<p>Cannot create path \"%1\" for proper file \"%2\" for node \"%3\"</p>" ).
+                    arg( SL.join("/") ).
+                    arg( (*it) ).
+                    arg( CurDevNN->name() );
                 return S;
               }
 
@@ -379,15 +390,26 @@ QString NetworkSettingsData::generateSettings( void ) {
 
           if( Generated ) {
             SystemFile SF( (*it) );
+            QStringList SL;
 
-            if( CurDevNN->openFile( SF, 0 ) &&
+            if( CurDevNN->openFile( SF, 0, SL ) &&
                 ! SF.path().isEmpty()
               ) {
+
+              if( ! createPath( SL ) ) {
+                S = qApp->translate( "NetworkSettings", 
+                  "<p>Cannot create path \"%1\" for proper file \"%2\" for node \"%3\"</p>" ).
+                    arg( SL.join("/") ).
+                    arg( (*it) ).
+                    arg( CurDevNN->name() );
+                return S;
+              }
 
               if( ! SF.open() ) {
                 S = qApp->translate( "NetworkSettings", 
                   "<p>Cannot open proper file \"%1\" for node \"%2\"</p>" ).
-                    arg( (*it) ).arg( CurDevNN->name() );
+                    arg( (*it) ).
+                    arg( CurDevNN->name() );
                 return S;
               }
 
@@ -785,3 +807,26 @@ QList<NetworkSetup> NetworkSettingsData::collectTriggered(
     return PossibleTriggered;
 }
 
+bool NetworkSettingsData::createPath( const QStringList & SL ) {
+
+    QDir D( SL[0] );
+
+    for ( QStringList::ConstIterator it = SL.begin(); 
+          it != SL.end(); 
+          ++it ) {
+
+      printf( "Create %s\n", (*it).latin1() );
+      if( it == SL.begin() )
+        continue;
+
+      if( ! D.exists( *it ) ) {
+        if( ! D.mkdir( *it ) ) {
+      printf( "Failed %s %s\n", D.path().latin1(), (*it).latin1() );
+          return 0;
+        }
+      }
+
+      D.cd( *it );
+    }
+    return 1;
+}

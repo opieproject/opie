@@ -25,7 +25,7 @@ public :
       virtual void * data( void ) 
         { return (void *)&Data; }
 
-      virtual bool openFile( SystemFile & Sf );
+      virtual bool openFile( SystemFile & Sf, QStringList &SL );
       short generateFile( SystemFile & TS,
                          long DevNr );
 
