@@ -17,11 +17,14 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccess.cpp,v 1.1 2002-09-27 17:11:44 eilers Exp $
+ * Version: $Id: ocontactaccess.cpp,v 1.2 2002-10-02 16:18:11 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccess.cpp,v $
- * Revision 1.1  2002-09-27 17:11:44  eilers
+ * Revision 1.2  2002-10-02 16:18:11  eilers
+ * debugged and seems to work almost perfectly ..
+ *
+ * Revision 1.1  2002/09/27 17:11:44  eilers
  * Added API for accessing the Contact-Database ! It is compiling, but
  * please do not expect that anything is working !
  * I will debug that stuff in the next time ..
@@ -61,7 +64,10 @@ OContactAccess::OContactAccess ( const QString appname, const QString filename,
         if( end == 0 ) {
 		end = new OContactAccessBackend_XML( appname, filename );
         }
+	// Set backend locally and in template
         m_backEnd = end;
+	OPimAccessTemplate<OContact>::setBackEnd (end);
+	
 
 	/* Connect signal of external db change to function */
 	QCopChannel *dbchannel = new QCopChannel( "QPE/PIM", this );
@@ -82,7 +88,7 @@ OContactAccess::~OContactAccess ()
 	 */
 	if ( m_changed ) 
 		save();
-	delete m_backEnd;
+	// delete m_backEnd; is done by template..
 }
 
 bool OContactAccess::load()
