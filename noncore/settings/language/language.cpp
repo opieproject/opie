@@ -96,8 +96,9 @@ void LanguageSettings::accept()
     Config c( "qpe" );
     c.setGroup( "Startup" );
     if ( ( c.readNumEntry( "FirstUse", 42 ) == 0 ) &&
-       ( QMessageBox::warning( this, "Language", "Attention, all windows will be closed\nby changing the language\n"
-                                                 "without saving the Data.\n\nGo on?", "Ok", "Cancel", 0, 0, 1 ) ) )
+       ( QMessageBox::warning( this, tr("Language"), tr("<qt>Attention, all windows will be closed by changing the language\n"
+                                                 "without saving the Data.<br><br>Go on?</qt>"), 1, 2) ) 
+	 == QMessageBox::Cancel )
                                                  return;
     applyLanguage();
     QDialog::accept();
