@@ -29,6 +29,7 @@ class GraphLegend;
 class FileSystem;
 class MountInfo;
 class QVBoxLayout;
+class QWidget;
 
 
 class StorageInfo : public QWidget
@@ -45,6 +46,7 @@ private:
     QDict<MountInfo> disks;
     QList<QFrame> lines;
     QVBoxLayout *vb;
+    QWidget *container;
 };
 
 class MountInfo : public QWidget

@@ -128,7 +128,7 @@ Load::Load( QWidget *parent, const char *name, WFlags f )
     timeout();
 }
 
-void Load::paintEvent( QPaintEvent *ev )
+void Load::paintEvent( QPaintEvent * )
 {
     QPainter p( this );
 

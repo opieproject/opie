@@ -20,6 +20,7 @@
 // additions copyright 2002 by L.J. Potter
 #include <qlabel.h>
 #include <qlayout.h>
+#include <qscrollview.h>
 #include <qtimer.h>
 #include <qwhatsthis.h>
 
@@ -35,8 +36,16 @@
 StorageInfo::StorageInfo( QWidget *parent, const char *name )
     : QWidget( parent, name )
 {
-    vb = 0;
-    disks.setAutoDelete(TRUE);
+	QVBoxLayout *tmpvb = new QVBoxLayout( this );
+	QScrollView *sv = new QScrollView( this );
+	tmpvb->addWidget( sv, 0, 0 );
+	sv->setResizePolicy( QScrollView::AutoOneFit );
+	sv->setFrameStyle( QFrame::NoFrame );
+	container = new QWidget( sv->viewport() );
+	sv->addChild( container );
+    vb = 0x0;
+
+	disks.setAutoDelete(TRUE);
     lines.setAutoDelete(TRUE);
     updateMounts();
     startTimer( 5000 );
@@ -84,10 +93,9 @@ void StorageInfo::updateMounts()
     if ( mntfp ) {
         while ( (me = getmntent( mntfp )) != 0 ) {
             QString fs = me->mnt_fsname;
-            qDebug(fs+" "+(QString)me->mnt_type);
             if ( fs.left(7)=="/dev/hd" || fs.left(7)=="/dev/sd"
                  || fs.left(8)=="/dev/mtd" || fs.left(9) == "/dev/mmcd"
-                 || fs.left(9) == "/dev/root" || fs.left(5) == "/ramfs") {
+                 || fs.left(9) == "/dev/root" || fs.left(5) == "/ramfs" || fs.left(5) == "tmpfs" ) {
                 n++;
                 curdisks.append(fs);
                 QString d = me->mnt_dir;
@@ -106,7 +114,7 @@ void StorageInfo::updateMounts()
         disks.clear();
         lines.clear();
         delete vb;
-        vb = new QVBoxLayout( this, n > 3 ? 1 : 5 );
+        vb = new QVBoxLayout( container/*, n > 3 ? 1 : 5*/ );
         bool frst=TRUE;
         QStringList::ConstIterator it=curdisks.begin();
         QStringList::ConstIterator fsit=curfs.begin();
@@ -115,14 +123,13 @@ void StorageInfo::updateMounts()
 
     for (; it!=curdisks.end(); ++it, ++fsit) {
             if ( !frst ) {
-                QFrame *f = new QFrame( this );
+                QFrame *f = new QFrame( container );
                 vb->addWidget(f);
                 f->setFrameStyle( QFrame::HLine | QFrame::Sunken );
                 lines.append(f);
                 f->show();
             } frst=FALSE;
             QString humanname=*it;
-//            qDebug(humanname);
             if ( isCF(humanname) )
                 humanname = tr( "CF Card: " );
             else if ( humanname == "/dev/hda1" )
@@ -141,13 +148,15 @@ void StorageInfo::updateMounts()
                 humanname = tr( "Int. Storage /dev/mtdblock " );
             else if ( humanname.left(9) == "/dev/root" )
                 humanname = tr( "Int. Storage " );
+            else if ( humanname.left(5) == "tmpfs" )
+                humanname = tr( "RAM disk" );
               // etc.
             humanname.append( *fsmount );
             humanname.append( " " );
             humanname.append( *fsTit );
             humanname.append( " " );
 
-            MountInfo* mi = new MountInfo( *fsit, humanname, this );
+            MountInfo* mi = new MountInfo( *fsit, humanname, container );
             vb->addWidget(mi);
             disks.insert(*fsit,mi);
             mi->show();
@@ -163,6 +172,8 @@ void StorageInfo::updateMounts()
                 QWhatsThis::add( mi, tr( "This graph represents how much storage is currently used on this hard drive." ) );
             else if ( tempstr == tr( "In" ) )
                 QWhatsThis::add( mi, tr( "This graph represents how much memory is currently used of the built-in memory (i.e. Flash memory) on this handheld device." ) );
+            else if ( tempstr == tr( "RA" ) )
+                QWhatsThis::add( mi, tr( "This graph represents how much memory is currently used of the temporary RAM disk." ) );
         }
         vb->addStretch();
     } else {
@@ -177,7 +188,6 @@ void StorageInfo::updateMounts()
 MountInfo::MountInfo( const QString &path, const QString &ttl, QWidget *parent, const char *name )
     : QWidget( parent, name ), title(ttl)
 {
-    qDebug("new path is "+path);
     fs = new FileSystem( path );
     QVBoxLayout *vb = new QVBoxLayout( this, 3 );
 

@@ -28,7 +28,7 @@
 #include "graph.h"
 #include "memory.h"
 
-MemoryInfo::MemoryInfo( QWidget *parent, const char *name, WFlags f )
+MemoryInfo::MemoryInfo( QWidget *parent, const char *name, WFlags )
     : QWidget( parent, name, WStyle_ContextHelp )
 {
     QVBoxLayout *vb = new QVBoxLayout( this, 5 );

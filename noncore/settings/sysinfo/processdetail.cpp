@@ -30,7 +30,7 @@
 #include <qtextview.h>
 #include <qwhatsthis.h>
 
-ProcessDetail::ProcessDetail( QWidget* parent,  const char* name, WFlags fl )
+ProcessDetail::ProcessDetail( QWidget* parent,  const char* name, WFlags )
     : QWidget( parent, name, WStyle_ContextHelp )
 {
     pid = 0;

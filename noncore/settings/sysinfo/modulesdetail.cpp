@@ -32,7 +32,7 @@
 #include <qtextview.h>
 #include <qwhatsthis.h>
 
-ModulesDetail::ModulesDetail( QWidget* parent,  const char* name, WFlags fl )
+ModulesDetail::ModulesDetail( QWidget* parent,  const char* name, WFlags )
     : QWidget( parent, name, WStyle_ContextHelp )
 {
     modname = "";
