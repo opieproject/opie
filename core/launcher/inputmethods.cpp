@@ -65,9 +65,9 @@ static const char * tri_xpm[]={
 "........."};
 
 static const int inputWidgetStyle = QWidget::WStyle_Customize | 
-				    QWidget::WStyle_Tool |
-				    QWidget::WStyle_StaysOnTop |
-				    QWidget::WGroupLeader;
+            QWidget::WStyle_Tool |
+            QWidget::WStyle_StaysOnTop |
+            QWidget::WGroupLeader;
 
 InputMethods::InputMethods( QWidget *parent ) :
     QWidget( parent, "InputMethods", WStyle_Tool | WStyle_Customize )
@@ -96,7 +96,7 @@ InputMethods::InputMethods( QWidget *parent ) :
     connect( kbdChoice, SIGNAL(clicked()), this, SLOT(chooseKbd()) );
 
     connect( (QPEApplication*)qApp, SIGNAL(clientMoused()),
-	    this, SLOT(resetStates()) );
+      this, SLOT(resetStates()) );
 
     loadInputMethods();
 }
@@ -106,9 +106,9 @@ InputMethods::~InputMethods()
 #ifndef SINGLE_APP
     QValueList<InputMethod>::Iterator mit;
     for ( mit = inputMethodList.begin(); mit != inputMethodList.end(); ++mit ) {
-	int i = (*mit).interface->release();
-	(*mit).library->unload();
-	delete (*mit).library;
+  int i = (*mit).interface->release();
+  (*mit).library->unload();
+  delete (*mit).library;
     }
 #endif
 }
@@ -129,27 +129,27 @@ void InputMethods::showInputMethod(const QString& name)
     QValueList<InputMethod>::Iterator it;
     InputMethod *im = 0;
     for ( it = inputMethodList.begin(); it != inputMethodList.end(); ++it, i++ ) {
-	if ( (*it).interface->name() == name ) {
-	    im = &(*it);
-	    break;
-	}
+  if ( (*it).interface->name() == name ) {
+      im = &(*it);
+      break;
+  }
     }
     if ( im )
-	chooseMethod(im);
+  chooseMethod(im);
 }
 
 void InputMethods::resetStates()
 {
     if ( method )
-	method->interface->resetState();
+  method->interface->resetState();
 }
 
 QRect InputMethods::inputRect() const
 {
     if ( !method || !method->widget->isVisible() )
-	return QRect();
+  return QRect();
     else
-	return method->widget->geometry();
+  return method->widget->geometry();
 }
 
 void InputMethods::loadInputMethods()
@@ -160,9 +160,9 @@ void InputMethods::loadInputMethods()
 
     QValueList<InputMethod>::Iterator mit;
     for ( mit = inputMethodList.begin(); mit != inputMethodList.end(); ++mit ) {
-	(*mit).interface->release();
-	(*mit).library->unload();
-	delete (*mit).library;
+  (*mit).interface->release();
+  (*mit).library->unload();
+  delete (*mit).library;
     }
     inputMethodList.clear();
 
@@ -171,30 +171,30 @@ void InputMethods::loadInputMethods()
     QStringList list = dir.entryList();
     QStringList::Iterator it;
     for ( it = list.begin(); it != list.end(); ++it ) {
-	InputMethodInterface *iface = 0;
-	QLibrary *lib = new QLibrary( path + "/" + *it );
-	if ( lib->queryInterface( IID_InputMethod, (QUnknownInterface**)&iface ) == QS_OK ) {
-	    InputMethod input;
-	    input.library = lib;
-	    input.interface = iface;
-	    input.widget = input.interface->inputMethod( 0, inputWidgetStyle );
-	    input.interface->onKeyPress( this, SLOT(sendKey(ushort,ushort,ushort,bool,bool)) );
-	    inputMethodList.append( input );
+  InputMethodInterface *iface = 0;
+  QLibrary *lib = new QLibrary( path + "/" + *it );
+  if ( lib->queryInterface( IID_InputMethod, (QUnknownInterface**)&iface ) == QS_OK ) {
+      InputMethod input;
+      input.library = lib;
+      input.interface = iface;
+      input.widget = input.interface->inputMethod( 0, inputWidgetStyle );
+      input.interface->onKeyPress( this, SLOT(sendKey(ushort,ushort,ushort,bool,bool)) );
+      inputMethodList.append( input );
 
-	    QString type = (*it).left( (*it).find(".") );
-	    QStringList langs = Global::languageList();
-	    for (QStringList::ConstIterator lit = langs.begin(); lit!=langs.end(); ++lit) {
-		QString lang = *lit;
-		QTranslator * trans = new QTranslator(qApp);
-		QString tfn = QPEApplication::qpeDir()+"/i18n/"+lang+"/"+type+".qm";
-		if ( trans->load( tfn ))
-		    qApp->installTranslator( trans );
-		else
-		    delete trans;
-	    }
-	} else {
-	    delete lib;
-	}
+      QString type = (*it).left( (*it).find(".") );
+      QStringList langs = Global::languageList();
+      for (QStringList::ConstIterator lit = langs.begin(); lit!=langs.end(); ++lit) {
+    QString lang = *lit;
+    QTranslator * trans = new QTranslator(qApp);
+    QString tfn = QPEApplication::qpeDir()+"/i18n/"+lang+"/"+type+".qm";
+    if ( trans->load( tfn ))
+        qApp->installTranslator( trans );
+    else
+        delete trans;
+      }
+  } else {
+      delete lib;
+  }
     }
 #else
     InputMethod input;
@@ -212,17 +212,31 @@ void InputMethods::loadInputMethods()
     inputMethodList.append( input );
 #endif
     if ( !inputMethodList.isEmpty() ) {
-	method = &inputMethodList[0];
-	kbdButton->setPixmap( *method->interface->icon() );
+        Config cfg("qpe");
+        cfg.setGroup("InputMethod");
+        QString curMethod = cfg.readEntry("current","");
+        if(curMethod.isEmpty()) {
+            method = &inputMethodList[0];
+        } else {
+            int i = 0;
+            QValueList<InputMethod>::Iterator it;
+            for ( it = inputMethodList.begin(); it != inputMethodList.end(); ++it, i++ ) {
+                if((*it).interface->name() == curMethod) {
+                    method = &inputMethodList[i];
+//                   qDebug(curMethod);
+                }
+            }
+        }
+        kbdButton->setPixmap( *method->interface->icon() );
     }
     if ( !inputMethodList.isEmpty() )
-	kbdButton->show();
+  kbdButton->show();
     else
-	kbdButton->hide();
+  kbdButton->hide();
     if ( inputMethodList.count() > 1 )
-	kbdChoice->show();
+  kbdChoice->show();
     else
-	kbdChoice->hide();
+  kbdChoice->hide();
 }
 
 void InputMethods::chooseKbd()
@@ -232,9 +246,9 @@ void InputMethods::chooseKbd()
     int i = 0;
     QValueList<InputMethod>::Iterator it;
     for ( it = inputMethodList.begin(); it != inputMethodList.end(); ++it, i++ ) {
-	pop.insertItem( (*it).interface->name(), i );
-	if ( method == &(*it) )
-	    pop.setItemChecked( i, TRUE );
+  pop.insertItem( (*it).interface->name(), i );
+  if ( method == &(*it) )
+      pop.setItemChecked( i, TRUE );
     }
 
     QPoint pt = mapToGlobal(kbdChoice->geometry().topRight());
@@ -243,7 +257,7 @@ void InputMethods::chooseKbd()
     pt.rx() -= s.width();
     i = pop.exec( pt );
     if ( i == -1 )
-	return;
+  return;
     InputMethod *im = &inputMethodList[i];
     chooseMethod(im);
 }
@@ -251,33 +265,36 @@ void InputMethods::chooseKbd()
 void InputMethods::chooseMethod(InputMethod* im)
 {
     if ( im != method ) {
-	if ( method && method->widget->isVisible() )
-	    method->widget->hide();
-	method = im;
-	kbdButton->setPixmap( *method->interface->icon() );
+        if ( method && method->widget->isVisible() )
+            method->widget->hide();
+        method = im;
+        Config cfg("qpe");
+        cfg.setGroup("InputMethod");
+        cfg.writeEntry("current",  method->interface->name());
+        kbdButton->setPixmap( *method->interface->icon() );
     }
     if ( !kbdButton->isOn() )
-	kbdButton->setOn( TRUE );
+  kbdButton->setOn( TRUE );
     else
-	showKbd( TRUE );
+  showKbd( TRUE );
 }
 
 
 void InputMethods::showKbd( bool on )
 {
     if ( !method )
-	return;
+  return;
 
     if ( on ) {
-	method->interface->resetState();
-	// HACK... Make the texteditor fit with all input methods
-	// Input methods should also never use more than about 40% of the screen
-	int height = QMIN( method->widget->sizeHint().height(), 134 );
-	method->widget->resize( qApp->desktop()->width(), height );
-	method->widget->move( 0, mapToGlobal( QPoint() ).y() - height );
-	method->widget->show();
+  method->interface->resetState();
+  // HACK... Make the texteditor fit with all input methods
+  // Input methods should also never use more than about 40% of the screen
+  int height = QMIN( method->widget->sizeHint().height(), 134 );
+  method->widget->resize( qApp->desktop()->width(), height );
+  method->widget->move( 0, mapToGlobal( QPoint() ).y() - height );
+  method->widget->show();
     } else {
-	method->widget->hide();
+  method->widget->hide();
     }
 
     emit inputToggled( on );
@@ -291,7 +308,7 @@ bool InputMethods::shown() const
 QString InputMethods::currentShown() const
 {
     return method && method->widget->isVisible()
-	? method->interface->name() : QString::null;
+  ? method->interface->name() : QString::null;
 }
 
 void InputMethods::sendKey( ushort unicode, ushort scancode, ushort mod, bool press, bool repeat )
