@@ -43,13 +43,12 @@ XineControl::XineControl( QObject *parent, const char *name )
     : QObject( parent, name ) {
     libXine = new XINE::Lib(videoUI->vidWidget() );
 
-	connect ( videoUI, SIGNAL( videoResized ( const QSize & )), this, SLOT( videoResized ( const QSize & )));
+    connect ( videoUI, SIGNAL( videoResized ( const QSize & )), this, SLOT( videoResized ( const QSize & )));
     connect( mediaPlayerState, SIGNAL( pausedToggled(bool) ),  this, SLOT( pause(bool) ) );
     connect( this, SIGNAL( positionChanged( long ) ), mediaPlayerState, SLOT( updatePosition( long ) ) );
     connect( mediaPlayerState, SIGNAL( playingToggled( bool ) ), this, SLOT( stop( bool ) ) );
     connect( mediaPlayerState, SIGNAL( fullscreenToggled( bool ) ), this, SLOT( setFullscreen( bool ) ) );
     connect( mediaPlayerState, SIGNAL( positionChanged( long ) ),  this,  SLOT( seekTo( long ) ) );
-
 }
 
 XineControl::~XineControl() {
@@ -93,10 +92,18 @@ void XineControl::stop( bool isSet ) {
     }
 }
 
+/**
+ * Pause playback
+ * @isSet
+ */
 void XineControl::pause( bool isSet) {
     libXine->pause();
 }
 
+
+/**
+ * get current time in playback
+ */
 long XineControl::currentTime() {
     // todo: jede sekunde überprüfen
     m_currentTime =  libXine->currentTime();
@@ -104,11 +111,19 @@ long XineControl::currentTime() {
     QTimer::singleShot( 1000, this, SLOT( currentTime() ) );
 }
 
+/**
+ * Set the length of the media file
+ */
 void  XineControl::length() {
     m_length = libXine->length();
     mediaPlayerState->setLength( m_length );
 }
 
+
+/**
+ * Reports the position the xine backend is at right now
+ * @return long the postion in seconds
+ */
 long XineControl::position() {
     m_position = ( currentTime()  );
     mediaPlayerState->updatePosition( m_position  );
@@ -121,17 +136,22 @@ long XineControl::position() {
     return m_position;
 }
 
+/**
+ * Set videoplayback to fullscreen
+ * @param isSet
+ */
 void XineControl::setFullscreen( bool isSet ) {
     libXine->showVideoFullScreen( isSet);
 }
 
+/**
+ * Seek to a position in the track
+ * @param second the second to jump to
+ */
 void XineControl::seekTo( long second ) {
-    qDebug("seek triggered!!");
     libXine->play( m_fileName , 0, (int)second );
 }
 
-
-void XineControl::videoResized ( const QSize &s )
-{
+void XineControl::videoResized ( const QSize &s ) {
 	libXine-> resize ( s );
 }
