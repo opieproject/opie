@@ -153,7 +153,7 @@ struct i_button {
  	"QPE/TaskBar", "toggleMenu()",
 	"QPE/TaskBar", "toggleStartMenu()" },
     { Model_iPAQ_H38xx | Model_iPAQ_H39xx,
-    Qt::Key_F11, QT_TRANSLATE_NOOP("Button", "Mail Button"), 
+    Qt::Key_F13, QT_TRANSLATE_NOOP("Button", "Mail Button"), 
 	"devicebuttons/ipaq_mail",
 	"mail", "raise()",
 	"mail", "newMail()" },
@@ -606,8 +606,6 @@ void iPAQ::init ( )
 		i_button *ib = ipaq_buttons + i;	
 		ODeviceButton b;
 		
-		qDebug ( "%d: %d", i, ib-> model );
-		
 		if (( ib-> model & d-> m_model ) == d-> m_model ) {		
 			b. setKeycode ( ib-> code );
 			b. setUserText ( qApp-> translate ( "Button", ib-> utext ));
@@ -616,8 +614,6 @@ void iPAQ::init ( )
 			b. setFactoryPresetHeldAction ( OQCopMessage ( makeChannel ( ib-> fheldservice ), ib-> fheldaction ));
                                         
 			d-> m_buttons. append ( b );
-			
-			qDebug ( "code: %d", ib-> code );
 		}
 	}
 	reloadButtonMapping ( );
@@ -754,7 +750,7 @@ bool iPAQ::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, b
 		}
 	}
 			
-	if ( newkeycode != keycode ) {
+k	if ( newkeycode != keycode ) {
 		if ( newkeycode != Key_unknown )
 			QWSServer::sendKeyEvent ( -1, newkeycode, modifiers, isPress, autoRepeat );
 		return true;

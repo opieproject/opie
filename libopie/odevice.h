@@ -83,7 +83,7 @@ enum OHardKey {
 	HardKey_Contacts  = Qt::Key_F10,
 	HardKey_Menu      = Qt::Key_F11,
 	HardKey_Home      = Qt::Key_F12,
-	HardKey_Mail      = Qt::Key_F14,
+	HardKey_Mail      = Qt::Key_F13,
 	HardKey_Record    = Qt::Key_F24,
 	HardKey_Suspend   = Qt::Key_F34,
 	HardKey_Backlight = Qt::Key_F35,
