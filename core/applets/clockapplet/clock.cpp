@@ -64,7 +64,6 @@ void LauncherClock::mouseReleaseEvent( QMouseEvent * )
 	if (QFile::exists(QPEApplication::qpeDir()+"bin/netsystemtime"))
  		setTimeApp="netsystemtime";
  	else setTimeApp="systemtime";
-  qDebug("app "+setTimeApp);
 	QCopEnvelope e("QPE/Application/"+setTimeApp, "setDocument(QString)");
   QString lf = QString::null;
 
