@@ -24,6 +24,10 @@
 
 #include "passwd.h"
 
+#include <opie/odevice.h>
+using namespace Opie;
+
+
 /**
  * UserDialog constructor. Setup the dialog, fill the groupComboBox & groupsListView with all groups.
  *
@@ -190,7 +194,8 @@ void UserDialog::setupTab2() {
 bool UserDialog::addUser(int uid, int gid) {
 	QCheckListItem *temp;
 	QFile ozTest;
-	int oz=ozTest.exists("/etc/oz_version");
+	int oz=false;
+	if(ODevice::inst()->system()==System_OpenZaurus) oz=true;
 	UserDialog *adduserDialog=new UserDialog();
 	adduserDialog->setCaption(tr("Add User"));
 	adduserDialog->userID=uid;	// Set next available UID as default uid.
