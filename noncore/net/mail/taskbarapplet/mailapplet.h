@@ -21,13 +21,13 @@ protected:
     void gotNewMail();
     void mouseReleaseEvent( QMouseEvent* );
     void paintEvent( QPaintEvent* );
+    static void ledOnOff(bool);
 
 protected slots:
     void startup();
     void slotCheck();
     void slotClicked();
 private:
-    Config *m_config;
     QTimer *m_intervalTimer;
     int m_intervalMs;
     StatusMail* m_statusMail;

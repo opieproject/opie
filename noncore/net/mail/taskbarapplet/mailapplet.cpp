@@ -20,11 +20,8 @@ using namespace Opie::Core;
 MailApplet::MailApplet( QWidget *parent )
 : QLabel( parent ) {
 
-    m_config = new Config( "mail" );
-    m_config->setGroup( "Applet" );
-
-    //setFixedWidth( AppLnk::smallIconSize() );
-    setFixedHeight( AppLnk::smallIconSize() );
+    setFixedHeight(AppLnk::smallIconSize());
+    setMinimumWidth(AppLnk::smallIconSize());
 
     hide();
 
@@ -38,19 +35,13 @@ MailApplet::MailApplet( QWidget *parent )
     blocking_action.sa_flags = 0;
     sigaction(SIGPIPE,&blocking_action,&temp_action);
 
-    if ( !m_config->readBoolEntry( "Disabled", false ) ) {
-        // delay 5 sec until the whole mail backend gets started .-)
-        QTimer::singleShot( 5000, this, SLOT( startup() ) );
-    }
-    repaint( true );
+    QTimer::singleShot( 5000, this, SLOT( startup() ) );
 }
 
 
 MailApplet::~MailApplet() {
     if ( m_statusMail )
         delete m_statusMail;
-    if ( m_config )
-        delete m_config;
 }
 
 void MailApplet::paintEvent( QPaintEvent*ev )
@@ -72,16 +63,14 @@ void MailApplet::mouseReleaseEvent( QMouseEvent* e ) {
     slotClicked();
 }
 
-void MailApplet::slotClicked() {
-    QCopEnvelope e( "QPE/System", "execute(QString)" );
-    e << QString( "opiemail" );
-
-    ODevice *device = ODevice::inst();
-    if ( !device-> ledList().isEmpty() ) {
-        OLed led = ( device->ledList().contains( Led_Mail ) ) ? Led_Mail : device->ledList()[0];
-
-        device->setLedState( led, Led_Off );
+void MailApplet::slotClicked()
+{
+    {
+        QCopEnvelope e( "QPE/System", "execute(QString)" );
+        e << QString( "opiemail" );
     }
+
+    ledOnOff(false);
     if (m_statusMail)
         m_statusMail->reset_status();
     hide();
@@ -101,19 +90,36 @@ void MailApplet::startup()
     connect( m_intervalTimer, SIGNAL( timeout() ), this, SLOT( slotCheck() ) );
 }
 
+void MailApplet::ledOnOff(bool how)
+{
+    ODevice *device = ODevice::inst();
+    if ( !device->ledList().isEmpty() ) {
+        OLed led = ( device->ledList().contains( Led_Mail ) ) ? Led_Mail : device->ledList()[0];
+        device->setLedState( led,  (how?(device->ledStateList( led ).contains( Led_BlinkSlow )?Led_BlinkSlow:Led_On):Led_Off) );
+    }
+}
+
 void MailApplet::slotCheck() {
     // Check wether the check interval has been changed.
     odebug << "MailApplet::slotCheck()" << oendl;
-    int newIntervalMs = m_config->readNumEntry( "CheckEvery", 5 ) * 60000;
+    Config m_config( "mail" );
+    m_config.setGroup( "Applet" );
+
+    int newIntervalMs = m_config.readNumEntry( "CheckEvery", 5 ) * 60000;
     if ( newIntervalMs != m_intervalMs ) {
         m_intervalTimer->changeInterval( newIntervalMs );
         m_intervalMs = newIntervalMs;
     }
-
-    if (m_statusMail == 0) {
+    if ( m_config.readBoolEntry( "Disabled", false ) ) {
+        hide();
+        ledOnOff(false);
+        odebug << "MailApplet::slotCheck() - disabled" << oendl;
         return;
     }
-
+    if (m_statusMail == 0) {
+        odebug << "MailApplet::slotCheck() - no mailhandle" << oendl;
+        return;
+    }
     folderStat stat;
     m_statusMail->check_current_stat( stat );
     int newMailsOld = m_newMails;
@@ -123,38 +129,27 @@ void MailApplet::slotCheck() {
         if (isHidden())
             show();
         if (newMailsOld != m_newMails) {
-            ODevice *device = ODevice::inst();
-            if ( m_config->readBoolEntry( "BlinkLed", true ) ) {
-                if ( !device->ledList().isEmpty() ) {
-                    OLed led = ( device->ledList().contains( Led_Mail ) ) ? Led_Mail : device->ledList()[0];
-                    device->setLedState( led, device->ledStateList( led ).contains( Led_BlinkSlow ) ? Led_BlinkSlow : Led_On );
-                }
+            if ( m_config.readBoolEntry( "BlinkLed", true ) ) {
+                ledOnOff(true);
             }
-            if ( m_config->readBoolEntry( "PlaySound", false ) )
-                device->playAlarmSound();
+            if ( m_config.readBoolEntry( "PlaySound", false ) )
+                ODevice::inst()->playAlarmSound();
+            m_config.setGroup( "Status" );
+            m_config.writeEntry( "newMails", m_newMails );
+            {
+                QCopEnvelope env( "QPE/Pim", "newMails(int)" );
+                env <<  m_newMails;
+            }
+            setText(QString::number( m_newMails ));
         }
-        Config cfg( "mail" );
-        cfg.setGroup( "Status" );
-        cfg.writeEntry( "newMails", m_newMails );
-        {
-            QCopEnvelope env( "QPE/Pim", "newMails(int)" );
-            env <<  m_newMails;
-        }
-        setText(QString::number( m_newMails ));
-//        repaint( true );
     } else {
         ODevice *device = ODevice::inst();
         if ( !isHidden() )
             hide();
-        if ( !device->ledList().isEmpty() ) {
-            OLed led = ( device->ledList().contains( Led_Mail ) ) ? Led_Mail : device->ledList()[0];
-            device->setLedState( led, Led_Off );
-        }
-
         if ( newMailsOld != m_newMails ) {
-            Config cfg( "mail" );
-            cfg.setGroup( "Status" );
-            cfg.writeEntry( "newMails", m_newMails );
+            ledOnOff(false);
+            m_config.setGroup( "Status" );
+            m_config.writeEntry( "newMails", m_newMails );
             QCopEnvelope env( "QPE/Pim", "newMails(int)" );
             env <<  m_newMails;
         }
