@@ -55,7 +55,6 @@ public:
 
 private:
     bool m_native;
-    int m_startupRot;
     ulong ref;
 };
 

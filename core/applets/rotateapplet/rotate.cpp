@@ -41,7 +41,6 @@ RotateApplet::RotateApplet ( )
 	: QObject ( 0, "RotateApplet" ), ref ( 0 )
 {
     m_native = true;
-    m_startupRot = QPEApplication::defaultRotation();
 }
 
 RotateApplet::~RotateApplet ( )
@@ -90,11 +89,12 @@ QPopupMenu *RotateApplet::popup ( QWidget * ) const
 
 void RotateApplet::activated ( )
 {
+    int currentRotation = QPEApplication::defaultRotation();
     int newRotation;
     if  ( m_native == true )  {
-        newRotation = m_startupRot + 90;
+        newRotation = currentRotation + 90;
     } else {
-        newRotation = m_startupRot;
+        newRotation = currentRotation - 90;
     }
     QCopEnvelope env( "QPE/System", "setCurrentRotation(int)" );
     env << newRotation;
