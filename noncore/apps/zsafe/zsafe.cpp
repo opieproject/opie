@@ -4,7 +4,7 @@
 **
 ** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: zsafe.cpp,v 1.21 2004-07-13 10:35:23 llornkcor Exp $
+** $Id: zsafe.cpp,v 1.22 2004-07-14 07:17:17 llornkcor Exp $
 **
 ** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 **
@@ -366,7 +366,7 @@ static const char* const general_data[] = {
 
 #ifdef DESKTOP
 #ifndef Q_WS_WIN
-       conf = new QSettings ();
+       conf = new QSettings();
        conf->insertSearchPath (QSettings::Unix, QDir::homeDirPath());
 #else
        conf = new QSettings (cfgFile);
@@ -493,9 +493,8 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
    setCaption( tr( "ZSafe" ) );
    QString zsafeAppDirPath = QDir::homeDirPath() + "/Documents/application/zsafe";
    QString filename = conf->readEntry(APP_KEY+"document");
-   if (filename.isEmpty() || filename.isNull())
+   if ( !QFileInfo(filename).exists() || !QDir(zsafeAppDirPath).exists() )
    {
-
     // check if the directory application exists, if not
     // create it
 // #ifndef Q_WS_WIN
@@ -506,10 +505,9 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
     QDir pd1(d1);
     if (!pd1.exists())
     {
-     
        QDir pd2(QDir::homeDirPath() + "/Documents");
 	   if (!pd2.exists()) {
-			QDir pd3(QDir::homeDirPath());
+				QDir pd3(QDir::homeDirPath());
 			if (!pd3.mkdir("Documents", FALSE)) {
 		   }
 	   }
@@ -545,7 +543,6 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
        }
    }
     
-    // set the default filename
     filename = zsafeAppDirPath + "/passwords.zsf";
 
     // save the current filename to the config file
@@ -1339,32 +1336,7 @@ void ZSafe::writeAllEntries()
    }
 
    // open the file dialog
-#ifndef DESKTOP
-#ifndef NO_OPIE
-   QMap<QString, QStringList> mimeTypes;
-   mimeTypes.insert(tr("All"), QStringList() );
-   mimeTypes.insert(tr("Text"), "text/*" );
-   QString fn = OFileDialog::getSaveFileName( OFileSelector::EXTENDED_ALL,
-                       QDir::homeDirPath() + "/Documents/application/zsafe",
-                       QString::null,
-                       mimeTypes,
-                       this,
-                       tr ("Export text file"));
-#else
-   QString fn = ScQtFileEdit::getSaveAsFileName(this,
-                       tr ("Export text file"),
-                       QDir::homeDirPath() + "/Documents/application/zsafe",
-                       "*.txt");
-#endif
-#else
-   QString fn = QFileDialog::getSaveFileName(
-                QDir::homeDirPath() + "/Documents/application/zsafe",
-                    "ZSafe (*.txt)",
-                    this,
-                    "ZSafe File Dialog"
-                    "Choose a text file" );
-#endif
-
+	 QString fn = zsaveDialog();
    // open the new document
    if (fn && fn.length() > 0 )
    {
@@ -1921,6 +1893,8 @@ void ZSafe::resume(int)
 
 bool ZSafe::openDocument(const char* _filename, const char* )
 {
+	QString name= _filename;
+	qWarning("openDocument "+name);
      int retval;
      char* entry[FIELD_SIZE];
 // #ifndef Q_WS_WIN
@@ -1970,7 +1944,21 @@ bool ZSafe::openDocument(const char* _filename, const char* )
            this->setCaption("ZSafe");
 #endif
            filename = "";
+           switch( QMessageBox::warning( this, tr("ZSafe"),
+                    tr("<P>You must create a new document first. Ok to create?</P>"),
+                    tr("&Yes"), tr("&No."),
+                    0
+                    ) )
+           {
+           case 1: // No
            return false;
+                 break;
+           case 0:  // Yes
+							 newDocument();
+					 return false;
+           break;
+           }
+					 
         }
 
 
@@ -3447,31 +3435,7 @@ void ZSafe::newDocument()
 {
 
     // open the file dialog
-#ifndef DESKTOP
-#ifndef NO_OPIE
-   QMap<QString, QStringList> mimeTypes;
-   mimeTypes.insert(tr("All"), QStringList() );
-   mimeTypes.insert(tr("ZSafe"), "zsafe/*" );
-   QString newFile = OFileDialog::getSaveFileName( OFileSelector::EXTENDED_ALL,
-                       QDir::homeDirPath() + "/Documents/application/zsafe",
-                       QString::null,
-                       mimeTypes,
-                       this,
-                       tr ("Create new ZSafe document"));
-#else
-   QString newFile = ScQtFileEdit::getSaveAsFileName(this,
-                       tr ("Create new ZSafe document"),
-                       QDir::homeDirPath() + "/Documents/application/zsafe",
-                       "*.zsf");
-#endif
-#else
-    QString newFile = QFileDialog::getSaveFileName(
-                QDir::homeDirPath() + "/Documents/application/zsafe",
-                    "ZSafe (*.zsf)",
-                    this,
-                    "ZSafe File Dialog"
-                    "Choose a ZSafe file" );
-#endif
+	 QString newFile = zsaveDialog();
 
     // open the new document
     if (newFile && newFile.length() > 0 )
@@ -3613,33 +3577,7 @@ void ZSafe::loadDocument()
 void ZSafe::saveDocumentAs()
 {
 
-#ifndef DESKTOP
-#ifndef NO_OPIE
-   QMap<QString, QStringList> mimeTypes;
-   mimeTypes.insert(tr("All"), QStringList() );
-   mimeTypes.insert(tr("ZSafe"), "zsafe/*" );
-   QString newFile = OFileDialog::getSaveFileName( OFileSelector::EXTENDED_ALL,
-                       QDir::homeDirPath() + "/Documents/application/zsafe",
-                       QString::null,
-                       mimeTypes,
-                       this,
-                       tr ("Save ZSafe document as.."));
-#else
-   QString newFile = ScQtFileEdit::getSaveAsFileName(this,
-                       tr ("Save ZSafe document as.."),
-                       QDir::homeDirPath() + "/Documents/application/zsafe",
-                       "*.zsf");
-#endif
-#else
-    // open the file dialog
-    QString newFile = QFileDialog::getSaveFileName(
-                QDir::homeDirPath() + "/Documents/application/zsafe",
-                    "ZSafe (*.zsf)",
-                    this,
-                    "ZSafe File Dialog"
-                    "Choose a ZSafe file" );
-#endif
-
+QString newFile = zsaveDialog();
     // open the new document
     if (newFile && newFile.length() > 0 )
     {
@@ -3853,6 +3791,8 @@ void ZSafe::setDocument(const QString& fileref)
      selectedItem = NULL;
 
      openDocument(filename);
+#else
+Q_UNUSED(fileref);
 #endif
 }
 
@@ -3904,3 +3844,32 @@ void  ZSafe::copyClip( const QString &text) {
 }
 
 
+QString ZSafe::zsaveDialog() {
+
+		QString fn;
+#ifndef DESKTOP
+#ifndef NO_OPIE
+   QMap<QString, QStringList> mimeTypes;
+   mimeTypes.insert(tr("All"), QStringList() );
+   mimeTypes.insert(tr("Text"), "text/*" );
+   fn = OFileDialog::getSaveFileName( OFileSelector::EXTENDED_ALL,
+                       QDir::homeDirPath() + "/Documents/application/zsafe",
+                       QString::null,
+                       mimeTypes,
+                       this,
+                       tr ("Export text file"));
+#else
+   fn = ScQtFileEdit::getSaveAsFileName(this,
+                       tr ("Export text file"),
+                       QDir::homeDirPath() + "/Documents/application/zsafe",
+                       "*.txt");
+#endif
+#else
+   fn = QFileDialog::getSaveFileName(
+                QDir::homeDirPath() + "/Documents/application/zsafe",
+                    "ZSafe (*.txt)",
+                    this,
+                    "ZSafe");
+#endif
+	 return fn;
+}

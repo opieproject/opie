@@ -5,7 +5,7 @@
 **
 ** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: zsafe.h,v 1.3 2004-07-10 01:04:49 llornkcor Exp $
+** $Id: zsafe.h,v 1.4 2004-07-14 07:17:17 llornkcor Exp $
 **
 ** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 **
@@ -153,6 +153,7 @@ public:
     void resume(int signum);
     void exitZs (int ec);
 
+		QString zsaveDialog();
 
 public slots:
     virtual void deletePwd();
