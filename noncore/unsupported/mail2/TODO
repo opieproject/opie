@@ -17,6 +17,7 @@ Security related:
  - GnuPG support. This will require a seperate gpg managing utility in
    the settings tab.
  - sMIME? maybe in the distant future.
+ - Integrated SSH tunneling.
 
 Mail management:
  - Header caching
