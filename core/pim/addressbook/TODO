@@ -38,6 +38,8 @@ ContactEditor:
 Important:
 ----------
 
+- If new contact is added (contacteditor closed): focus (table, card) to
+  this entry !
 - Implement a picker/combo for the default email.
 - After search (Started with Return): KeyFocus should be on Tabelle
 

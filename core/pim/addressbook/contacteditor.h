@@ -78,6 +78,7 @@ class ContactEditor : public QDialog {
 		void cleanupFields();
 		void updateDatePicker();
 		QString parseName( QString fullName, int type );
+		void chooserError( int index );
 	private slots:
 		void slotChooser1Change( const QString &textChanged );
 		void slotChooser2Change( const QString &textChanged );
@@ -106,6 +107,7 @@ class ContactEditor : public QDialog {
 		int defaultEmailChooserPosition;
 		void populateDefaultEmailCmb();
 		void chooserChange( const QString&, int , QLineEdit*, int );
+		bool cmbChooserChange( int , QLineEdit*, int );
 
 		bool useFullName;
 

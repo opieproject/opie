@@ -46,6 +46,7 @@
 #include <qhbox.h>
 #include <qaction.h>
 #include <qiconset.h> 
+#include <qmessagebox.h> 
 
 #include <assert.h>
 
@@ -644,73 +645,190 @@ void ContactEditor::init() {
 }
 
 void ContactEditor::defaultEmailChanged(int i){
-  qDebug("defaultEmailChanged");
+	qDebug("defaultEmailChanged");
+
 	int index = cmbChooserField1->currentItem();
 	slChooserValues[index] = cmbDefaultEmail->text(i);
+
+	defaultEmail = cmbDefaultEmail->text(i);
+	qDebug ("Changed to: %s", defaultEmail.latin1());
 
 }
 
 void ContactEditor::populateDefaultEmailCmb(){       
+
+	// if the default-email combo was not selected and therfore not created
+	// we get a lot of trouble.. Therfore create an invisible one..
+	if ( !cmbDefaultEmail ){
+		cmbDefaultEmail = new QComboBox(this);	
+		cmbDefaultEmail -> hide();
+	}
 	cmbDefaultEmail->clear();    
-	cmbDefaultEmail->insertStringList(emails);
+	cmbDefaultEmail->insertStringList( emails );
+	// cmbDefaultEmail->show();
+
+	// Select default email in combo..
+	bool found = false;
 	for ( int i = 0; i < cmbDefaultEmail->count(); i++){
-	  qDebug(" populateDefaultEmailCmb text >%s< defaultEmail >%s<",cmbDefaultEmail->text( i ).latin1(),defaultEmail.latin1());
-	  if ( cmbDefaultEmail->text( i ).stripWhiteSpace() == defaultEmail.stripWhiteSpace() ){
-	      cmbDefaultEmail->setCurrentItem( i );
-		qDebug("set");
+		qDebug(" populateDefaultEmailCmb text >%s< defaultEmail >%s<",
+		       cmbDefaultEmail->text( i ).latin1(), defaultEmail.latin1());
+
+		if ( cmbDefaultEmail->text( i ).stripWhiteSpace() == defaultEmail.stripWhiteSpace() ){
+			cmbDefaultEmail->setCurrentItem( i );
+			qDebug("set");
+			found = true;
 		}
+	}
+	
+	// If the current default email is not found in the list, we choose the
+	// first one..
+	if ( !found )
+		defaultEmail = cmbDefaultEmail->text(0);
+}
+
+// Called when any combobox was changed.
+// "true" returned if the change was chandled by this function, else it should
+// be handled by something else..
+bool ContactEditor::cmbChooserChange( int index, QLineEdit *inputWid, int widgetPos ) {
+	QString type = slChooserNames[index];
+	qWarning("ContactEditor::cmbChooserChange -> Type: %s", type.latin1() );
+
+	// Create and connect combobox for selecting the default email 
+        if ( type == "Default Email"){         
+		qWarning("Choosing default-email ");
+		
+		// More than one defaul-email chooser is not allowed !
+		if ( ( defaultEmailChooserPosition != -1 ) && 
+		     defaultEmailChooserPosition != widgetPos ){
+			chooserError( widgetPos );
+			return true;
+		}
+
+		if ( cmbDefaultEmail ){  
+			delete cmbDefaultEmail;
+			cmbDefaultEmail = 0l;
+		}
+		cmbDefaultEmail = new QComboBox(inputWid->parentWidget());	   
+		cmbDefaultEmail->setGeometry(inputWid->frameGeometry()); 
+		
+		connect( cmbDefaultEmail,SIGNAL( activated(int) ),
+			 SLOT( defaultEmailChanged(int) ) ); 
+
+		cmbDefaultEmail->clear();    
+		cmbDefaultEmail->insertStringList( emails );
+		cmbDefaultEmail->show();
+
+		defaultEmailChooserPosition = widgetPos;
+
+		// Set current default email
+		populateDefaultEmailCmb();
+
+		
+	} else {
+		// Something else was selected: Hide combo..
+		qWarning(" Hiding default-email combo" );
+		if ( defaultEmailChooserPosition == widgetPos ){
+			defaultEmailChooserPosition = -1;
+			if ( cmbDefaultEmail )
+				cmbDefaultEmail->hide();
+
+		} 
+
+		// Caller should initialize the responsible textfield, therefore
+		// "false" is returned
+		return false;
+	}
+
+	// Everything is worked off ..
+	return true;
+
+}
+
+// Currently accessed when we select default-email more than once !
+void ContactEditor::chooserError( int index )
+{
+	qWarning("ContactEditor::chooserError( %d )", index); 
+	QMessageBox::warning( this, "Chooser Error",
+			      "Multiple selection of this\n"
+			      "Item is not allowed !\n\n"
+			      "First deselect the previous one !",
+			      "&OK", 0, 0,
+			      0, 0 );
+
+	// Reset the selected Chooser. Unfortunately the chooser
+	// generates no signal, therfore we have to 
+	// call the cmbChooserChange function manually..
+	switch( index ){
+	case 1:
+		cmbChooserField1 -> setCurrentItem( 0 );
+		slotCmbChooser1Change( 0 );
+		break;
+	case 2: 
+		cmbChooserField2 -> setCurrentItem( 0 );
+		slotCmbChooser2Change( 0 );
+		break;
+	case 3: 
+		cmbChooserField3 -> setCurrentItem( 0 );
+		slotCmbChooser3Change( 0 );
+		break;
+	case 4: 
+		cmbChooserField4 -> setCurrentItem( 0 );
+		slotCmbChooser4Change( 0 );
+		break;
 	}
 }
 
-void ContactEditor::chooserChange( const QString &textChanged, int index, QLineEdit *inputWid, int widgetPos ) {
-	QString type = slChooserNames[index];
-	qDebug("ContactEditor::chooserChange( type=>%s<, textChanged=>%s< index=%i, widgetPos=%i",type.latin1(),textChanged.latin1(), index,  widgetPos );
-        if ( type == "Default Email"){         
-	  defaultEmail = textChanged;
-	  if (cmbDefaultEmail){  
-		  delete cmbDefaultEmail;
-		  cmbDefaultEmail = 0l;
-	  }
-	  cmbDefaultEmail = new QComboBox(inputWid->parentWidget());	   
-	  cmbDefaultEmail->setGeometry(inputWid->frameGeometry()); 
-	  cmbDefaultEmail->show();
-	  populateDefaultEmailCmb();
- 	  connect(cmbDefaultEmail,SIGNAL(activated(int)),
-		  SLOT(defaultEmailChanged(int))); 
-	  defaultEmailChooserPosition = widgetPos;
-        }else if (defaultEmailChooserPosition == widgetPos){
-	qDebug("cmbDefaultEmail->hide()");
-	  if (cmbDefaultEmail) cmbDefaultEmail->hide();
-	  widgetPos=-1;
-	}else if (type == "Emails"){
-	  qDebug("emails");
-	  QString de;
-	  emails = QStringList::split (",", textChanged );
+// Called when something was changed in a textfield (shouldn't it called textchanged? (se))
+void ContactEditor::chooserChange( const QString &textChanged, int index, 
+				   QLineEdit* , int widgetPos ) {
 
-	  if ( cmbDefaultEmail )
-		  populateDefaultEmailCmb();
+	QString type = slChooserNames[index];
+	qDebug("ContactEditor::chooserChange( type=>%s<, textChanged=>%s< index=%i, widgetPos=%i",
+	       type.latin1(),textChanged.latin1(), index,  widgetPos );
+
+        if ( type == "Default Email"){         
+		qWarning ("??? Wozu??: %s", textChanged.latin1());
+		defaultEmail = textChanged;
+
+		populateDefaultEmailCmb();
+
+        }else if (defaultEmailChooserPosition == widgetPos){
+		qDebug("cmbDefaultEmail->hide()");
+
+		if (cmbDefaultEmail) cmbDefaultEmail->hide();
+		widgetPos=-1;
+
+	}else if (type == "Emails"){
+		qDebug("emails");
+
+		QString de;
+		emails = QStringList::split (",", textChanged );
+
+		populateDefaultEmailCmb();
 	}
 	
-
-
 	slChooserValues[index] = textChanged;
 
 }
 
 void ContactEditor::slotChooser1Change( const QString &textChanged ) {
+	qWarning("ContactEditor::slotChooser1Change( %s )", textChanged.latin1());
 	chooserChange( textChanged, cmbChooserField1->currentItem(), txtChooserField1, 1);
 }
 
 void ContactEditor::slotChooser2Change( const QString &textChanged ) {
+	qWarning("ContactEditor::slotChooser2Change( %s )", textChanged.latin1());
 	chooserChange( textChanged, cmbChooserField2->currentItem(), txtChooserField2, 2);
 
 }
 
 void ContactEditor::slotChooser3Change( const QString &textChanged ) {
+	qWarning("ContactEditor::slotChooser3Change( %s )", textChanged.latin1());
 	chooserChange( textChanged, cmbChooserField3->currentItem(), txtChooserField3, 3);
 }
 
 void ContactEditor::slotChooser4Change( const QString &textChanged ) {
+	qWarning("ContactEditor::slotChooser4Change( %s )", textChanged.latin1());
 	chooserChange( textChanged, cmbChooserField4->currentItem(), txtChooserField4, 4);
 }
 
@@ -780,29 +898,48 @@ void ContactEditor::slotCountryChange( const QString &textChanged ) {
 
 
 void ContactEditor::slotCmbChooser1Change( int index ) {
+	qWarning("ContactEditor::slotCmbChooser1Change( %d )", index);
 
-	txtChooserField1->setText( slChooserValues[index] );
-        txtChooserField1->setFocus();
+	if ( !cmbChooserChange( cmbChooserField1->currentItem(), txtChooserField1, 1) ){
+
+		txtChooserField1->setText( slChooserValues[index] );
+		txtChooserField1->setFocus();
+
+	}
+
 }
 
 void ContactEditor::slotCmbChooser2Change( int index ) {
+	qWarning("ContactEditor::slotCmbChooser2Change( %d )", index);
 
-	txtChooserField2->setText( slChooserValues[index] );
-        txtChooserField2->setFocus();
+	if ( !cmbChooserChange( cmbChooserField2->currentItem(), txtChooserField2, 2) ){
+
+		txtChooserField2->setText( slChooserValues[index] );
+		txtChooserField2->setFocus();
+
+	}
 }
 
 void ContactEditor::slotCmbChooser3Change( int index ) {
+	qWarning("ContactEditor::slotCmbChooser3Change( %d )", index);
 
-	txtChooserField3->setText( slChooserValues[index] );
-        txtChooserField3->setFocus();
+	if ( !cmbChooserChange( cmbChooserField3->currentItem(), txtChooserField3, 3) ){
 
+		txtChooserField3->setText( slChooserValues[index] );
+		txtChooserField3->setFocus();
+
+	}
 }
 
 void ContactEditor::slotCmbChooser4Change( int index ) {
+	qWarning("ContactEditor::slotCmbChooser4Change( %d )", index);
 
-	txtChooserField4->setText( slChooserValues[index] );
-        txtChooserField4->setFocus();
+	if ( !cmbChooserChange( cmbChooserField4->currentItem(), txtChooserField4, 4) ){
 
+		txtChooserField4->setText( slChooserValues[index] );
+		txtChooserField4->setFocus();
+
+	}
 }
 
 void ContactEditor::slotAddressTypeChange( int index ) {
@@ -1448,14 +1585,17 @@ void ContactEditor::saveEntry() {
 		if ( *it == "Emails" ){
  			QString allemail;
  			QString defaultmail;
- 			parseEmailFrom( *itV, defaultmail, allemail );
- 			// ent.clearEmails();
-// 			ent.setDefaultEmail(  defaultmail );
+			parseEmailFrom( emails.join(","), defaultmail, allemail );
+			if ( defaultEmail.isEmpty() ){
+				qWarning("Default email was not set by user!");
+				qWarning("Using first email in list: %s", defaultmail.latin1());
+				ent.setDefaultEmail( defaultmail );
+			}
  			ent.setEmails( allemail );
 		}
 
 		if ( *it == "Default Email")
-		  ent.setDefaultEmail( *itV );
+			ent.setDefaultEmail( defaultEmail /* *itV */ );
 
 		if ( *it == "Home Phone" )
 			ent.setHomePhone( *itV );
