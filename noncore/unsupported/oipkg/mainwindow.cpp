@@ -38,7 +38,8 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
   settings = new PackageManagerSettings(this,0,TRUE);
   listViewPackages =  new PackageListView( this,"listViewPackages",settings );
   setCentralWidget( listViewPackages );
-
+  listViewPackages->addList( tr("local"), &packageList );
+  listViewPackages->addList( tr("ipkgfind"), &packageListSearch );
 //	wait = new QMessageBox(tr("oipkg"),tr("Please wait")//,QMessageBox::Information,QMessageBox::NoButton,QMessageBox::NoButton,QMessageBox::NoButton);
 //	wait = new QMessageBox(this);
 // 	wait->setText(tr("Please wait"));
@@ -280,26 +281,26 @@ void MainWindow::displayList()
 {
 //	wait->hide();
 	filterList();
-  listViewPackages->clear();
-  Package *pack = packageList.first();
-  PackageListItem *item;
-
-//  if (!rootLocal)
+  listViewPackages->display();
+////  if (!rootLocal)
+////  {
+//	QCheckListItem *rootLocal = new QCheckListItem(listViewPackages,tr("local"));
+//	QCheckListItem *rootSearch = new QCheckListItem(listViewPackages,tr("ipkgfind"));
+////  }
+//  listViewPackages->clear();
+//  Package *pack = packageList.first();
+//  PackageListItem *item;
+//  while( pack )
 //  {
-	QCheckListItem *rootLocal = new QCheckListItem(listViewPackages,tr("local"));
-	QCheckListItem *rootSearch = new QCheckListItem(listViewPackages,tr("ipkgfind"));
-//  }
-  while( pack )
-  {
-	 	item = new PackageListItem( rootLocal, pack, settings );				
-    pack = packageList.next();
-  }	
-  pack = packageListSearch.first();
-  while( pack )
-  {
-	 	item = new PackageListItem( rootSearch, pack, settings );				
-    pack = packageListSearch.next();
-  }	
+//	 	item = new PackageListItem( rootLocal, pack, settings );				
+//    pack = packageList.next();
+//  }	
+//  pack = packageListSearch.first();
+//  while( pack )
+//  {
+//	 	item = new PackageListItem( rootSearch, pack, settings );				
+//    pack = packageListSearch.next();
+//  }	
 }
 
 void MainWindow::sectionChanged()

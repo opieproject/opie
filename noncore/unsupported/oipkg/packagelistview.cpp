@@ -94,3 +94,39 @@ void PackageListView::toggleProcess()
   activePackage->toggleProcess() ;
   activePackageListItem->displayDetails();
 }
+
+void PackageListView::display()
+{
+	QDictIterator<PackageList> list( PackageLists );
+	PackageList *packlist;
+	Package *pack;
+  PackageListItem *item;
+  QCheckListItem *rootItem;
+  QListViewItem* it;
+  QListViewItem* itdel;
+	while ( list.current() ) {
+  	packlist = list.current();
+    rootItem = rootItems.find( list.currentKey() );
+    //rootItem->clear();
+    it=rootItem->firstChild();
+    while ( it )
+    {
+      itdel = it;
+      it    = it->nextSibling();
+			delete itdel;
+   	}
+    pack = packlist->first();
+  	while( pack )
+  	{
+	 		item = new PackageListItem( rootItem, pack, settings );				
+    	pack = packlist->next();
+  	}	
+		++list;
+  }
+}
+
+void PackageListView::addList( QString n, PackageList* pl)
+{
+	PackageLists.insert(n, pl);
+ 	rootItems.insert(n, new QCheckListItem(this,n));
+}
