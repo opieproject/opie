@@ -1,4 +1,4 @@
   config MULTIKEYAPPLET
-    boolean "opie-multikeyapplet (Applet to switch keyboard layout)"
+    boolean "opie-multikeyapplet (Applet to switch OnScreen keyboard layout)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && MULTIKEY

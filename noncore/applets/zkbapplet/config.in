@@ -1,4 +1,4 @@
   config ZKBAPPLET
-    boolean "zkbapplet (switch keyboard layout on the fly)"
+    boolean "zkbapplet (Switch hardware keyboard layout on the fly)"
     default "n"
     depends ( LIBQPE || LIBQPE-X11 ) && KEYZCFG
