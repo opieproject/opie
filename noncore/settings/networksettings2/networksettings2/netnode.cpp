@@ -21,7 +21,7 @@ QString & deQuote( QString & X ) {
 
       idx = 0;
       while( ( idx = X.find( '\\', idx ) ) >= 0 ) {
-        R = X[idx+1];
+        R = X.at( idx + 1 );
         X.replace( idx, 2, &R, 1 );
       }
       X = X.left( X.length()-1 );
