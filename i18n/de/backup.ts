@@ -58,11 +58,11 @@
     </message>
     <message>
         <source>Backup Successful.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sicherung erfolgreich.</translation>
     </message>
     <message>
         <source>Restore Successful.</source>
-        <translation type="unfinished"></translation>
+        <translation>Rückspielen erfolgreich.</translation>
     </message>
 </context>
 <context>

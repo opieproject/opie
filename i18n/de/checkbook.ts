@@ -231,7 +231,7 @@ Um Einträge nach einem Feld zu sortieren klicken Sie auf den Spaltennamen.</tra
     </message>
     <message>
         <source>Entry Order</source>
-        <translation type="unfinished"></translation>
+        <translation>Eintragsreihenfolge</translation>
     </message>
     <message>
         <source>Number</source>
@@ -331,23 +331,23 @@ protected</source>
     </message>
     <message>
         <source>Open last checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Letztes Konto öffnen</translation>
     </message>
     <message>
         <source>Click here to select whether the last open checkbook will be opened at startup.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier Klicken um auszuwählen, ob das letztbearbeitete Konto beim Start geöffnet werden soll.</translation>
     </message>
     <message>
         <source>Show last checkbook tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Letzten Kontoreiter anzeigen</translation>
     </message>
     <message>
         <source>Click here to select whether the last tab in a checkbook should be displayed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um auszuwählen, ob der letzte Reiter eines Kontos angezeigt werden soll.</translation>
     </message>
     <message>
         <source>Save new description as payee</source>
-        <translation type="unfinished"></translation>
+        <translation>Neue Beschreibung als Empfänger speichern</translation>
     </message>
     <message>
         <source>Click here to save new descriptions in the list of payess.</source>

@@ -1346,7 +1346,7 @@ wird nach dem Neustart der Anwendung aktiv!</translation>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>

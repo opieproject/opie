@@ -283,7 +283,10 @@ and all it&apos;s contents ?</source>
 %1 
 to 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1
+konnte nicht nach
+%2
+kopiert werden</translation>
     </message>
 </context>
 <context>

@@ -370,7 +370,7 @@ Trozdem beenden?</translation>
     <message>
         <source>MTWTFSSM</source>
         <comment>Week days</comment>
-        <translation type="unfinished">MDMDFSSM</translation>
+        <translation>MDMDFSSM</translation>
     </message>
 </context>
 <context>
@@ -516,7 +516,7 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>Start time</source>
-        <translation type="unfinished">Startzeit</translation>
+        <translation>Startzeit</translation>
     </message>
     <message>
         <source>All day</source>
