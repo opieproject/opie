@@ -22,12 +22,15 @@
 #include "qtetrix.h"
 
 #include <qpe/resource.h>
+#include <qpe/config.h>
 
 #include <qapplication.h>
 #include <qlabel.h>
 #include <qdatetime.h>
 #include <qlayout.h>
+#include <qstring.h>
 
+#include "ohighscoredlg.h"
 
 
 void drawTetrixButton( QPainter *p, int x, int y, int w, int h,
@@ -161,8 +164,12 @@ QTetrix::QTetrix( QWidget *parent, const char *name, WFlags f )
 
 void QTetrix::gameOver()
 {
+	OHighscore *hs = new OHighscore( showScore->text().toInt() , showLevel->text().toInt() );
+	if ( hs->isNewhighscore )
+		hs->insertData( hs->getName(), showScore->text().toInt() , showLevel->text().toInt() );
+	OHighscoreDialog hscdlg( hs, this, "OHighscoreDialog", true );
+	hscdlg.exec();
 }
-
 
 void QTetrix::quit()
 {
