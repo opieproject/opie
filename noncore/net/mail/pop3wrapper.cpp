@@ -46,15 +46,145 @@ void POP3wrapper::listMessages( QList<RecMail> &target )
     logout();
 }
 
-RecMail *POP3wrapper::parseHeader( const char *h )
+RecMail *POP3wrapper::parseHeader( const char *header )
 {
+    int err = MAILIMF_NO_ERROR;
+    size_t curTok;
     RecMail *mail = new RecMail();
-    QString header( h );
-
-    //TODO: parse header - maybe something like this is already implemented in libetpan?
-    mail->setSubject( "Blah blubb" );
-
+    mailimf_fields *fields;
+    
+    err = mailimf_fields_parse( (char *) header, strlen( header ), &curTok, &fields );
+    for ( clistiter *current = clist_begin( fields->list ); current != NULL; current = current->next ) {
+        mailimf_field *field = (mailimf_field *) current->data;
+        switch ( field->type ) {
+            case MAILIMF_FIELD_FROM:
+                mail->setFrom( *parseMailboxList( field->field.from->mb_list ) );
+                break;
+            case MAILIMF_FIELD_TO:
+                mail->setTo( *parseAddressList( field->field.to->addr_list ) );
+                break;
+            case MAILIMF_FIELD_CC:
+                mail->setCC( *parseAddressList( field->field.cc->addr_list ) );
+                break;
+            case MAILIMF_FIELD_BCC:
+                mail->setBcc( *parseAddressList( field->field.bcc->addr_list ) );
+                break;
+            case MAILIMF_FIELD_SUBJECT:
+                mail->setSubject( QString( field->field.subject->value ) );
+                break;
+            case MAILIMF_FIELD_ORIG_DATE:
+                mail->setDate( *parseDateTime( field->field.orig_date->date_time ) );
+                break;
+            default:
+                break;
+        }
+    }
+    
     return mail;
+}
+
+QString *POP3wrapper::parseDateTime( mailimf_date_time *date )
+{
+    char tmp[23];
+    
+    snprintf( tmp, 23,  "%02i.%02i.%04i %02i:%02i:%02i %+05i", 
+        date->day, date->month, date->year, date->hour, date->min, date->sec, date->zone );
+    
+    QString *result = new QString( tmp );
+
+    return result;
+}
+
+QString *POP3wrapper::parseAddressList( mailimf_address_list *list )
+{
+    QString *result = new QString( "" );
+
+    bool first = true;
+    for ( clistiter *current = clist_begin( list->list ); current != NULL; current = current->next ) {
+        mailimf_address *addr = (mailimf_address *) current->data;
+        
+        if ( !first ) {
+            result->append( "," );
+        } else {
+            first = false;
+        }
+
+        QString *tmp;
+        
+        switch ( addr->type ) {
+            case MAILIMF_ADDRESS_MAILBOX:
+                tmp = parseMailbox( addr->mailbox );
+                result->append( *tmp );
+                delete tmp;
+                break;
+            case MAILIMF_ADDRESS_GROUP:
+                tmp = parseGroup( addr->group );
+                result->append( *tmp );
+                delete tmp;
+                break;
+            default:
+                qDebug( "POP3: unkown mailimf address type" );
+                break;
+        }
+    }
+    
+    return result;
+}
+
+QString *POP3wrapper::parseGroup( mailimf_group *group )
+{
+    QString *result =  new QString( "" );
+
+    result->append( group->display_name );
+    result->append( ": " );
+
+    if ( group->mb_list != NULL ) {
+        QString *tmp = parseMailboxList( group->mb_list );
+        result->append( *tmp );
+        delete tmp;
+    }
+
+    result->append( ";" );
+    
+    return result;
+}
+
+QString *POP3wrapper::parseMailbox( mailimf_mailbox *box )
+{
+    QString *result =  new QString( "" );
+
+    if ( box->display_name == NULL ) {
+        result->append( box->addr_spec );
+    } else {
+        result->append( box->display_name );
+        result->append( " <" );
+        result->append( box->addr_spec );
+        result->append( ">" );
+    }
+        
+    return result;
+}
+
+QString *POP3wrapper::parseMailboxList( mailimf_mailbox_list *list )
+{
+    QString *result =  new QString( "" );
+
+    bool first = true;
+    for ( clistiter *current = clist_begin( list->list ); current != NULL; current = current->next ) {
+        mailimf_mailbox *box = (mailimf_mailbox *) current->data;
+
+        if ( !first ) {
+            result->append( "," );
+        } else {
+            first = false;
+        }
+       
+        QString *tmp = parseMailbox( box );
+        result->append( *tmp );
+        delete tmp;
+    }
+    
+    return result;
 }
 
 void POP3wrapper::login()

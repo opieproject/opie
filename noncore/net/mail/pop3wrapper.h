@@ -21,6 +21,11 @@ protected:
 
 private:
     RecMail *parseHeader( const char *header );
+    QString *parseMailboxList( mailimf_mailbox_list *list );
+    QString *parseMailbox( mailimf_mailbox *box );
+    QString *parseGroup( mailimf_group *group );
+    QString *parseAddressList( mailimf_address_list *list );
+    QString *parseDateTime( mailimf_date_time *date );
     POP3account *account;
     mailpop3 *m_pop3;
 
