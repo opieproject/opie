@@ -83,11 +83,17 @@ void NetworkPackageManager :: updateData()
 	serversList->clear();
     packagesList->clear();
 
+    
     vector<Server>::iterator it;
     int activeItem = -1;
     int i;
     for ( i = 0, it = dataMgr->getServerList().begin() ; it != dataMgr->getServerList().end() ; ++it, ++i )
     {
+        if ( !it->isServerActive() )
+        {
+            i--;
+            continue;
+        }
         serversList->insertItem( it->getServerName() );
         if ( it->getServerName() == currentlySelectedServer )
         	activeItem = i;
