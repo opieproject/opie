@@ -1,7 +1,6 @@
 #include <qdatetime.h>
 #include <qmessagebox.h>
 #include <qheader.h>
-#include <iostream.h>
 
 #include "accountdisplay.h"
 #include "newaccount.h"
@@ -270,7 +269,7 @@ void AccountDisplay::getTransferAccounts ( QListViewItem * item )
             // set the cleared integer if the checkbox is checked
             if ( td->clearedcheckbox->isChecked() == TRUE )
               cleared = 1;
-            cout << "Year from transferdialog = " << td->getYear() << endl;
+            qDebug("Year from transferdialog = %i",td->getYear());
             // add the transfer with a new date if its been edited or use the default date
             if ( td->getDateEdited () == TRUE )
               transfer->addTransfer ( firstaccountid, account->getParentAccountID ( firstaccountid ), secondaccountid, account->getParentAccountID ( secondaccountid ), td->getDay(), td->getMonth(), td->getYear(), td->amount->text().toFloat(), cleared );
