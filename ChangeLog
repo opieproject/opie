@@ -1,7 +1,8 @@
 2004-??-??	The Opie Team <opie@handhelds.org>
-
+        * Added Generic Keyconfig Widget (zecke)
+	* Improved Screenshotapplet and Drawpad integration. You can now open a screenshot in drawpad and take notes (zecke)
 	* Added new Bible reader app - opie-dagger (drw)
-	* Added a new Image Viewer. Work is ongoing (zecke)
+	* Added a new Image Viewer. Work is ongoing (zecke,alwin)
 	* Added namespace usage in libopie2 and everywhere (zecke,alwin)
 	* Enabled the possibility to pass command line arguments to applications (mickeyl)
 	* Added an about applet showing some credits and information about Opie (mickeyl)
