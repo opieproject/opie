@@ -10,3 +10,4 @@ config.in
 include
 moc_*
 stamp-headers
+.config.cmd
