@@ -3,10 +3,10 @@
 
 #include <qpe/global.h>
 
-#include <opie/osqldriver.h>
-#include <opie/osqlresult.h>
-#include <opie/osqlmanager.h>
-#include <opie/osqlquery.h>
+#include <opie2/osqldriver.h>
+#include <opie2/osqlresult.h>
+#include <opie2/osqlmanager.h>
+#include <opie2/osqlquery.h>
 
 #include "otodoaccesssql.h"
 
@@ -249,7 +249,7 @@ OTodoAccessBackendSQL::OTodoAccessBackendSQL( const QString& file )
     OSQLManager man;
     m_driver = man.standard();
     m_driver->setUrl(fi);
-    fillDict();
+    // fillDict();
 }
 
 OTodoAccessBackendSQL::~OTodoAccessBackendSQL(){
@@ -297,7 +297,7 @@ OTodo OTodoAccessBackendSQL::find( int uid, const QArray<int>& ints,
     // we try to cache CACHE items
     switch( dir ) {
         /* forward */
-    case 0:
+    case 0: // FIXME: Not a good style to use magic numbers here (eilers)
         for (uint i = cur; i < ints.count() && size < CACHE; i++ ) {
             qWarning("size %d %d", size,  ints[i] );
             search[size] = ints[i];
@@ -305,7 +305,7 @@ OTodo OTodoAccessBackendSQL::find( int uid, const QArray<int>& ints,
         }
         break;
         /* reverse */
-    case 1:
+    case 1: // FIXME: Not a good style to use magic numbers here (eilers)
         for (uint i = cur; i != 0 && size <  CACHE; i-- ) {
             search[size] = ints[i];
             size++;
@@ -381,6 +381,7 @@ QArray<int> OTodoAccessBackendSQL::sorted( bool asc, int sortOrder,
     /*
      * Sort Filter stuff
      * not that straight forward
+     * FIXME: Replace magic numbers
      *
      */
     /* Category */
@@ -492,6 +493,7 @@ void OTodoAccessBackendSQL::fillDict() {
     /* initialize dict */
     /*
      * UPDATE dict if you change anything!!!
+     * FIXME: Isn't this dict obsolete ? (eilers)
      */
     m_dict.setAutoDelete( TRUE );
     m_dict.insert("Categories" ,     new int(OTodo::Category)         );
@@ -505,10 +507,10 @@ void OTodoAccessBackendSQL::fillDict() {
     m_dict.insert("DateMonth" ,      new int(OTodo::DateMonth)        );
     m_dict.insert("DateYear" ,       new int(OTodo::DateYear)         );
     m_dict.insert("Progress" ,       new int(OTodo::Progress)         );
-    m_dict.insert("Completed",       new int(OTodo::Completed)        );
+    m_dict.insert("Completed",       new int(OTodo::Completed)        ); // Why twice ? (eilers)
     m_dict.insert("CrossReference",  new int(OTodo::CrossReference)   );
-    m_dict.insert("HasAlarmDateTime",new int(OTodo::HasAlarmDateTime) );
-    m_dict.insert("AlarmDateTime",   new int(OTodo::AlarmDateTime)    );
+//    m_dict.insert("HasAlarmDateTime",new int(OTodo::HasAlarmDateTime) ); // old stuff (eilers)
+//    m_dict.insert("AlarmDateTime",   new int(OTodo::AlarmDateTime)    ); // old stuff (eilers)
 }
 /*
  * need to be const so let's fool the
@@ -538,3 +540,54 @@ QArray<int> OTodoAccessBackendSQL::uids( const OSQLResult& res) const{
     return ints;
 }
 
+QArray<int> OTodoAccessBackendSQL::matchRegexp(  const QRegExp &r ) const
+{
+
+#warning OTodoAccessBackendSQL::matchRegexp() not implemented !!
+
+#if 0
+
+	Copied from xml-backend by not adapted to sql (eilers)
+
+	QArray<int> m_currentQuery( m_events.count() );
+	uint arraycounter = 0;
+
+
+
+        QMap<int, OTodo>::ConstIterator it;
+        for (it = m_events.begin(); it != m_events.end(); ++it ) {
+		if ( it.data().match( r ) )
+			m_currentQuery[arraycounter++] = it.data().uid();
+
+	}
+	// Shrink to fit..
+	m_currentQuery.resize(arraycounter);
+
+	return m_currentQuery;
+#endif
+	QArray<int> empty;
+	return empty;
+}
+QBitArray OTodoAccessBackendSQL::supports()const {
+
+	static QBitArray ar = sup();
+	return ar;
+}
+
+QBitArray OTodoAccessBackendSQL::sup() {
+
+	QBitArray ar( OTodo::CompletedDate + 1 );
+	ar.fill( true );
+	ar[OTodo::CrossReference] = false;
+	ar[OTodo::State ] = false;
+	ar[OTodo::Reminders] = false;
+	ar[OTodo::Notifiers] = false;
+	ar[OTodo::Maintainer] = false;
+	
+	return ar;
+}
+
+void OTodoAccessBackendSQL::removeAllCompleted(){
+#warning OTodoAccessBackendSQL::removeAllCompleted() not implemented !!
+
+}

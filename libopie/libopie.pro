@@ -21,6 +21,7 @@ HEADERS   = ofontmenu.h \
     pim/otodoaccessbackend.h \
     pim/oconversion.h \
     pim/ocontact.h \
+    pim/ocontactfields.h \
     pim/ocontactaccess.h \
     pim/ocontactaccessbackend.h \
     pim/ocontactaccessbackend_xml.h \
@@ -65,6 +66,7 @@ SOURCES   = ofontmenu.cc  \
              pim/otodoaccessxml.cpp \
              pim/oconversion.cpp \
              pim/ocontact.cpp \
+             pim/ocontactfields.cpp \
              pim/ocontactaccess.cpp \
              pim/ocontactaccessbackend_vcard.cpp \
              pim/ocontactaccessbackend_xml.cpp \
@@ -91,9 +93,22 @@ TARGET    = opie
 INCLUDEPATH += $(OPIEDIR)/include
 DESTDIR      = $(OPIEDIR)/lib$(PROJMAK)
 
+# The following is just for my Notebook ! 
+# It should never be committed !! (eilers)
+# QMAKE_CXXFLAGS        += -DQT_NO_SOUND
+
 LIBS += -lqpe
 
-# LIBS            += -lopiesql
+# Add SQL-Support if selected by config (eilers) 
+CONFTEST = $$system( echo $CONFIG_SQL_PIM_BACKEND )
+contains( CONFTEST, y ){
+
+DEFINES += __USE_SQL
+LIBS    += -lopiedb2 -lsqlite
+HEADERS += pim/otodoaccesssql.h pim/ocontactaccessbackend_sql.h
+SOURCES += pim/otodoaccesssql.cpp pim/ocontactaccessbackend_sql.cpp
+
+}
 
 INTERFACES      = otimepickerbase.ui orecurrancebase.ui
 TARGET          = opie

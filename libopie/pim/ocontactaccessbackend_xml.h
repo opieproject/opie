@@ -10,14 +10,20 @@
  *      version 2 of the License, or (at your option) any later version.
  * =====================================================================
  * ToDo: XML-Backend: Automatic reload if something was changed...
+ *       File Locking to protect against concurrent access
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_xml.h,v 1.14 2003-04-13 18:07:10 zecke Exp $
+ * Version: $Id: ocontactaccessbackend_xml.h,v 1.15 2003-09-22 14:31:16 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_xml.h,v $
- * Revision 1.14  2003-04-13 18:07:10  zecke
+ * Revision 1.15  2003-09-22 14:31:16  eilers
+ * Added first experimental incarnation of sql-backend for addressbook.
+ * Some modifications to be able to compile the todo sql-backend.
+ * A lot of changes fill follow...
+ *
+ * Revision 1.14  2003/04/13 18:07:10  zecke
  * More API doc
  * QString -> const QString&
  * QString = 0l -> QString::null

@@ -196,11 +196,6 @@ public:
     QString groups() const { return find( Qtopia::Groups ); }
     QStringList groupList() const;
 
-//     // custom
-//     const QString &customField( const QString &key )
-//         { return find( Custom- + key ); }
-
-
     QString toRichText() const;
     QMap<int, QString> toMap() const;
     QString field( int key ) const { return find( key ); }
@@ -209,19 +204,19 @@ public:
     void setUid( int i );
 
     QString toShortText()const;
-    QString OContact::type()const;
-    QMap<QString,QString> OContact::toExtraMap() const;
-    class QString OContact::recordField(int) const;
+    QString type()const;
+    class QString recordField(int) const;
 
     // Why private ? (eilers,se)
     QString emailSeparator() const { return " "; }
+
     // the emails should be seperated by a comma
     void setEmails( const QString &v );
     QString emails() const { return find( Qtopia::Emails ); }
     static int rtti();
 
 private:
-    // The XML-Backend needs some access to the private functions
+    // The XML Backend needs some access to the private functions
     friend class OContactAccessBackend_XML;
 
     void insert( int key, const QString &value );

@@ -9,15 +9,18 @@
  *      License as published by the Free Software Foundation; either
  *      version 2 of the License, or (at your option) any later version.
  * =====================================================================
- * ToDo: XML-Backend: Automatic reload if something was changed...
- *
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_xml.cpp,v 1.8 2003-08-30 15:28:26 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_xml.cpp,v 1.9 2003-09-22 14:31:16 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_xml.cpp,v $
- * Revision 1.8  2003-08-30 15:28:26  eilers
+ * Revision 1.9  2003-09-22 14:31:16  eilers
+ * Added first experimental incarnation of sql-backend for addressbook.
+ * Some modifications to be able to compile the todo sql-backend.
+ * A lot of changes fill follow...
+ *
+ * Revision 1.8  2003/08/30 15:28:26  eilers
  * Removed some unimportant debug output which causes slow down..
  *
  * Revision 1.7  2003/08/01 12:30:16  eilers

@@ -12,11 +12,16 @@
  * =====================================================================
  * ToDo: Use plugins
  * =====================================================================
- * Version: $Id: obackendfactory.h,v 1.7 2003-08-01 12:30:16 eilers Exp $
+ * Version: $Id: obackendfactory.h,v 1.8 2003-09-22 14:31:16 eilers Exp $
  * =====================================================================
  * History:
  * $Log: obackendfactory.h,v $
- * Revision 1.7  2003-08-01 12:30:16  eilers
+ * Revision 1.8  2003-09-22 14:31:16  eilers
+ * Added first experimental incarnation of sql-backend for addressbook.
+ * Some modifications to be able to compile the todo sql-backend.
+ * A lot of changes fill follow...
+ *
+ * Revision 1.7  2003/08/01 12:30:16  eilers
  * Merging changes from BRANCH_1_0 to HEAD
  *
  * Revision 1.6.4.1  2003/06/30 14:34:19  eilers
@@ -74,6 +79,7 @@
 
 #ifdef __USE_SQL
 #include "otodoaccesssql.h"
+#include "ocontactaccessbackend_sql.h"
 #endif
 
 class OBackendPrivate;
@@ -118,15 +124,14 @@ class OBackendFactory
 		config.setGroup ( backendName );
 		QString backend = config.readEntry( "usebackend" );
 
+		qWarning("Selected backend for %s is: %s", backendName.latin1(), backend.latin1() ); 
+
 		QAsciiDict<int> dict ( 3 );
 		dict.setAutoDelete ( TRUE );
 
 		dict.insert( "todo", new int (TODO) );
 		dict.insert( "contact", new int (CONTACT) );
                 dict.insert( "datebook", new int(DATE) );
-
-		qWarning ("TODO is: %d", TODO);
-		qWarning ("CONTACT is: %d", CONTACT);
 
                 int *find = dict[ backendName ];
                 if (!find ) return 0;
@@ -143,8 +148,13 @@ class OBackendFactory
 
 			return (T*) new OTodoAccessXML( appName );
 		case CONTACT:
+#ifdef __USE_SQL
+			if ( backend == "sql" )
+				return (T*) new OContactAccessBackend_SQL("");
+#else
 			if ( backend == "sql" )
 				qWarning ("OBackendFactory:: sql Backend not implemented! Using XML instead!");
+#endif
 
 			return (T*) new OContactAccessBackend_XML( appName );
 		case DATE:

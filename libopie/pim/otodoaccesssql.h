@@ -31,6 +31,11 @@ public:
                                 const QDate& end, bool includeNoDates );
     QArray<int> sorted(bool asc, int sortOrder, int sortFilter, int cat );
 
+    QBitArray supports()const;
+    QArray<int> matchRegexp(  const QRegExp &r ) const;
+    void removeAllCompleted();
+    
+
 private:
     void update()const;
     void fillDict();
@@ -39,6 +44,7 @@ private:
     inline OTodo todo( OSQLResultItem& )const;
     inline QArray<int> uids( const OSQLResult& )const;
     OTodo todo( int uid )const;
+    QBitArray sup();
 
     QAsciiDict<int> m_dict;
     OSQLDriver* m_driver;
