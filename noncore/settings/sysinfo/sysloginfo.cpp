@@ -22,7 +22,8 @@
 
 /* OPIE */
 #include <opie2/olistview.h>
-#include <qpe/qpeapplication.h>
+#include <opie2/oconfig.h>
+using namespace Opie::Core;
 using namespace Opie::Ui;
 
 /* QT */
@@ -66,7 +67,9 @@ SyslogInfo::SyslogInfo( QWidget* parent,  const char* name, WFlags fl )
 
     syslogview = new QTextView( this );
     syslogview->setTextFormat( PlainText );
-    syslogview->setFont( QFont( "Fixed" ) );
+    OConfig cfg( "qpe" );
+    cfg.setGroup( "Appearance" );
+    syslogview->setFont( QFont( "Fixed", cfg.readNumEntry( "FontSize", 10 ) ) );
     layout->addWidget( syslogview, 0, 0 );
     syslogview->setText( "..." );
 
