@@ -60,8 +60,9 @@ NetworkPackageManager::NetworkPackageManager( DataManager *dataManager, QWidget 
     initGui();
     setupConnections();
 
-    progressDlg = 0;
-    timerId = startTimer( 100 );
+    updateData();
+//    progressDlg = 0;
+//    timerId = startTimer( 100 );
 }
 
 NetworkPackageManager::~NetworkPackageManager()
@@ -104,6 +105,32 @@ void NetworkPackageManager :: updateData()
 	if ( activeItem != -1 )
 		serversList->setCurrentItem( activeItem );
     serverSelected( 0 );
+}
+
+void NetworkPackageManager :: selectLocalPackage( const QString &pkg )
+{
+    // First select local server
+    for ( int i = 0 ; i < serversList->count() ; ++i )
+    {
+        if ( serversList->text( i ) == LOCAL_IPKGS )
+        {
+            serversList->setCurrentItem( i );
+            break;
+        }
+    }
+    serverSelected( 0 );
+
+    // Now set the check box of the selected package
+    for ( QCheckListItem *item = (QCheckListItem *)packagesList->firstChild();
+          item != 0 ;
+          item = (QCheckListItem *)item->nextSibling() )
+    {
+        if ( item->text().startsWith( pkg ) )
+        {
+            item->setOn( true );
+            break;
+        }
+    }
 }
 
 

@@ -38,6 +38,7 @@ public:
     /** destructor */
     ~NetworkPackageManager();
 
+    void selectLocalPackage( const QString &pkg );
     void updateData();
 
 private:

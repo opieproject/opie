@@ -40,6 +40,7 @@ private:
 	NetworkPackageManager *networkPkgWindow;
 
 public slots:
+    void setDocument( const QString &doc );
     void displayHelp();
     void displayAbout();
     void displaySettings();

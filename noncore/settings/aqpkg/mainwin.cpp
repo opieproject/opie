@@ -24,6 +24,7 @@
 #include "networkpkgmgr.h"
 #include "settingsimpl.h"
 #include "helpwindow.h"
+#include "utils.h"
 #include "global.h"
 
 MainWindow :: MainWindow( QWidget *p, char *name )
@@ -63,6 +64,14 @@ MainWindow :: MainWindow( QWidget *p, char *name )
 MainWindow :: ~MainWindow()
 {
 	delete networkPkgWindow;
+}
+
+void MainWindow :: setDocument( const QString &doc )
+{
+    // Remove path from package
+    QString package = Utils::getPackageNameFromIpkFilename( doc );
+    cout << "Selecting package " << package << endl;
+    networkPkgWindow->selectLocalPackage( package );
 }
 
 void MainWindow :: displaySettings()
