@@ -6,7 +6,7 @@ January 7, 2004
 	-Added many functions that cover many computational topics rendering opie-sheet a computational tool-spreadsheet at last. (total 90 functions!)
 	-Maintained compatibility with the opie-fileformat.
 	-New icons.
-	-Found that the DataParser was not a real RPN compiler of the expressions. In fact it was returning faulty results in calculations, in both binary or unary operations. A1-A2-A3 was parsed as A1-(A2-A3). A1 was parsed as A1.
+	-Found that the DataParser was not a real RPN compiler of the expressions. In fact it was returning faulty results in calculations, in both binary or unary operations. A1-A2-A3 was parsed as A1-(A2-A3). -A1 was parsed as A1.
 	-Added new class "Expression" a general Parser for spreadsheet-expression. Imported from an old C# project of mine.
 	-Now can also parse <>=!%&^|"" in expressions.
 	-Added experimental Excel File format import!. The opie-sheet can import any excel file in BIFF7/BIFF8 format. These formats are used in Excel XP,2000,95. The Excel Importer class is in a good coding level.. BUT it is not complete. Only strings,numbers,formulas are imported. Not formatting rules. Not all the functions are converted in the functions of opie-sheet. Infact FEW functions are converted.
