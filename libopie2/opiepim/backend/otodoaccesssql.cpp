@@ -286,9 +286,9 @@ OTodo OTodoAccessBackendSQL::find(int uid ) const{
     return todo( m_driver->query(&query) );
 
 }
-#define CACHE 32
 OTodo OTodoAccessBackendSQL::find( int uid, const QArray<int>& ints,
                                    uint cur, Frontend::CacheDirection dir ) const{
+    int CACHE = readAhead();
     qWarning("searching for %d", uid );
     QArray<int> search( CACHE );
     uint size =0;

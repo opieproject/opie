@@ -83,6 +83,10 @@ public:
      */
     void setFrontend( Frontend* front );
 
+    /**
+     * set the read ahead count
+     */
+    void setReadAhead( uint count );
 protected:
     void cache( const T& t )const;
 
@@ -91,8 +95,11 @@ protected:
      */
     void setSaneCacheSize( int );
 
+    uint readAhead()const;
+
 private:
     Frontend* m_front;
+    uint m_read;
 
 };
 
@@ -123,5 +130,12 @@ T OPimAccessBackend<T>::find( int uid, const QArray<int>&,
                               uint, Frontend::CacheDirection )const {
     return find( uid );
 }
-
+template <class T>
+void OPimAccessBackend<T>::setReadAhead( uint count ) {
+    m_read = count;
+}
+template <class T>
+uint OPimAccessBackend<T>::readAhead()const {
+    return m_read;
+}
 #endif

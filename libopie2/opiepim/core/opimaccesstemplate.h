@@ -65,7 +65,7 @@ public:
     virtual List allRecords()const;
 
     /**
-     * queryByExample. 
+     * queryByExample.
      * @see otodoaccess, ocontactaccess
      */
     virtual List queryByExample( const T& t, int querySettings );
@@ -116,6 +116,7 @@ public:
      */
     virtual bool replace( const T& t) ;
 
+    void setReadAhead( uint count );
     /**
      * @internal
      */
@@ -250,5 +251,9 @@ void OPimAccessTemplate<T>::cache( const T& t ) const{
 template <class T>
 void OPimAccessTemplate<T>::setSaneCacheSize( int size ) {
     m_cache.setSize( size );
+}
+template <class T>
+void OPimAccessTemplate<T>::setReadAhead( uint count ) {
+    m_backEnd->setReadAhead( count );
 }
 #endif
