@@ -1,0 +1,9 @@
+Package: opie-background-sunset2
+Files: pics/backgrounds/sunset2002-background.jpg
+Priority: optional
+Section: opie/backgrounds
+Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
+Depends: task-opie-minimal
+Description: Background image for Opie. Tropical sunset.
+Version: $QPE_VERSION$EXTRAVERSION
