@@ -24,6 +24,11 @@
 <!ENTITY citytime SYSTEM "citytime.sgm">
 <!ENTITY textedit SYSTEM "textedit.sgm">
 <!ENTITY lightpower SYSTEM "lightpower.sgm">
+<!ENTITY reader SYSTEM "reader.sgm">
+<!ENTITY sheet SYSTEM "sheet.sgm">
+<!ENTITY write SYSTEM "write.sgm">
+<!ENTITY sysinfo SYSTEM "sysinfo.sgm">
+<!ENTITY tableviewer SYSTEM "tableviewer.sgm">
 
 <!--Now the real entities-->
 <!ENTITY opie "OPIE">
@@ -52,6 +57,11 @@
 &login;
 &citytime;
 &textedit;
+&reader;
+&sheet;
+&write;
+&sysinfo;
+&tableviewer;
 </part>
 <part><title>Settings</title>
 &software;
