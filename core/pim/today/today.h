@@ -24,10 +24,11 @@
 #include <qpe/datebookdb.h>
 #include <qpe/event.h>
 
+#include <opie/tododb.h>
+
 #include <qdatetime.h>
 #include <qlist.h> 
 
-#include "TodoItem.h"
 #include "todayconfig.h"
 #include "todaybase.h"
 #include "clickablelabel.h"
@@ -57,12 +58,12 @@ class Today : public TodayBase {
     bool checkIfModified();
     void setOwnerField();
     void setOwnerField(QString &string);
-    QList<TodoItem> loadTodo(const char *filename);
-private slots:
-    void channelReceived(const QCString &msg, const QByteArray & data);
-
+    private slots:
+      void channelReceived(const QCString &msg, const QByteArray & data);
+    
  private:
     DateBookDB *db;
+    ToDoDB *todo;
     todayconfig *conf;
     QWidget* AllDateBookEvents;
     //Config cfg;

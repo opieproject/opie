@@ -18,10 +18,7 @@
  ***************************************************************************/
 
 #include "today.h"
-#include "minidom.h"
-#include "TodoItem.h"
 
-#include <qpe/datebookdb.h>
 #include <qpe/timestring.h>
 #include <qpe/config.h>
 #include <qpe/qcopenvelope_qws.h> 
@@ -56,8 +53,8 @@ int SHOW_NOTES;
 // show only later dates
 int ONLY_LATER;
 int AUTOSTART;
-
 int NEW_START=1;
+
 /* 
  *  Constructs a Example which is a child of 'parent', with the 
  *  name 'name' and widget flags set to 'f' 
@@ -77,8 +74,10 @@ Today::Today( QWidget* parent,  const char* name, WFlags fl )
 #endif  
 #endif 
   
-  draw();
   setOwnerField();
+  todo = new ToDoDB;
+  getTodo();
+  draw();
   autoStart();
 }
 
@@ -144,9 +143,15 @@ void Today::draw() {
   init();
   getDates();
   getMail();
-  getTodo(); 
+ 
+  // if the todolist.xml file was not modified in between, do not parse it.
+  if (checkIfModified()) {
+    todo = new ToDoDB;
+    getTodo();
+  }
+  
   // how often refresh
-  QTimer::singleShot( 10*1000, this, SLOT(draw() ) );
+  QTimer::singleShot( 20*1000, this, SLOT(draw() ) );
 }
 
 /* 
@@ -182,9 +187,9 @@ void Today::init() {
   QDate date = QDate::currentDate();
   QString time = (tr( date.toString()) );
   
-  TextLabel1->setText(time);
+  TextLabel1->setText(QString("<font color=#FFFFFF>" + time + "</font>"));
   db = new DateBookDB;
-  
+   
   // read config
   Config cfg("today");
   cfg.setGroup("BaseConfig"); 
@@ -263,7 +268,7 @@ void Today::startConfig() {
  */
 void Today::getDates() {
   QDate date = QDate::currentDate();
-
+  
   if (AllDateBookEvents) delete AllDateBookEvents;
   AllDateBookEvents = new QWidget( );
   QVBoxLayout* layoutDates = new QVBoxLayout(AllDateBookEvents);
@@ -322,70 +327,6 @@ void Today::getDates() {
   AllDateBookEvents->show();
 }
   
-/*
- * Parse in the todolist.xml
- */
-QList<TodoItem> Today::loadTodo(const char *filename) {
-  DOM *todo;
-  ELE *tasks;
-  ELE **tasklist;
-  ATT **attlist;
-  int i, j;
-  char *description;
-  int completed;
-  int priority;
-  TodoItem *tmp;
-  QList<TodoItem> loadtodolist;
-  
-  todo = minidom_load(filename);
-  
-  tasks = todo->el;
-  tasks = tasks->el[0]; /*!DOCTYPE-quickhack*/
-  if(tasks) {
-    tasklist = tasks->el;
-    i = 0;
-    while((tasklist) && (tasklist[i])) {
-      attlist = tasklist[i]->at;
-      j = 0;
-      description = NULL;
-      priority = -1;
-      completed = -1;
-      while((attlist) && (attlist[j])) {
-  if(!attlist[j]->name) {
-    continue;
-  }
-  if(!strcmp(attlist[j]->name, "Description")) {
-    description = attlist[j]->value;
-  }
-  // get Completed tag (0 or 1)
-  if(!strcmp(attlist[j]->name, "Completed")) {
-    QString s = attlist[j]->name;
-    if(s == "Completed") {
-      completed = QString(attlist[j]->value).toInt();
-    }
-  }
-  // get Priority (1 to 5)
-  if(!strcmp(attlist[j]->name, "Priority")) {
-    QString s = attlist[j]->name;
-    if(s == "Priority") {
-      priority = QString(attlist[j]->value).toInt(); 
-    }
-  }
-  j++;
-      }
-      if(description) {
-  tmp = new TodoItem(description, completed, priority);
-  loadtodolist.append(tmp);
-      }
-      i++;
-    }
-  }
-
-  minidom_free(todo);
-  
-  return loadtodolist;
-}
-
 
 void Today::getMail() {
   Config cfg("opiemail");
@@ -406,35 +347,39 @@ void Today::getMail() {
  */
 void Today::getTodo() {
   
-  // if the todolist.xml file was not modified in between, do not parse it.
-  if (!checkIfModified() && !NEW_START) {
-    return;
-  }
-  // since it was the new start or the return from config dialog, set it to 0 again.
-  NEW_START=0;
-
   QString output;
   QString tmpout;
   int count = 0;
-  
-  QDir dir;
-  QString homedir = dir.homeDirPath (); 
-  // see if todolist.xml does exist.
-  QFile f(homedir +"/Applications/todolist/todolist.xml");
-  if ( f.exists() ) {
-    QList<TodoItem> todolist = loadTodo(homedir +"/Applications/todolist/todolist.xml");
-    
-    TodoItem *item;
-    for( item = todolist.first(); item; item = todolist.next()) {
-      if (!(item->getCompleted() == 1) ) {
-  count++;
-  if (count <= MAX_LINES_TASK) {
-    tmpout += "<b>- </b>" + QString(((item)->getDescription().mid(0, MAX_CHAR_CLIP) + ("<br>")));
+  int ammount = 0;
+
+  // get overdue todos first
+  QValueList<ToDoEvent> overDueList = todo->overDue();
+  qBubbleSort(overDueList);
+  for ( QValueList<ToDoEvent>::Iterator it=overDueList.begin();
+	it!=overDueList.end(); ++it ) {
+    if (!(*it).isCompleted() && ( ammount < MAX_LINES_TASK) ) {
+      tmpout += "<font color=#e00000><b>-" +((*it).description()).mid(0, MAX_CHAR_CLIP) + "</b></font><br>";
+      ammount++;
+    }
   }
+  
+  // get total number of still open todos
+  QValueList<ToDoEvent> open = todo->rawToDos();
+  qBubbleSort(open);
+  for ( QValueList<ToDoEvent>::Iterator it=open.begin();
+	it!=open.end(); ++it ) {
+    if (!(*it).isCompleted()){
+      count +=1;
+      // not the overdues, we allready got them, and not if we are 
+      // over the maxlines
+      if (!(*it).isOverdue() && ( ammount < MAX_LINES_TASK) ) {
+	tmpout += "<b>-</b>" + ((*it).description()).mid(0, MAX_CHAR_CLIP) + "<br>";
+	ammount++;
       }
     }
   }
   
+    
   if (count > 0) {
     if( count == 1 ) {
       output = tr("There is <b> 1</b> active task:  <br>" );
@@ -503,7 +448,7 @@ DateBookEvent::DateBookEvent(const EffectiveEvent &ev,
   ClickableLabel(parent,name,fl), event(ev) {
   
   QString msg;
-  QTime time = QTime::currentTime();
+  //QTime time = QTime::currentTime();
   
   if (!ONLY_LATER) {
     msg += "<B>" + (ev).description() + "</B>";
@@ -571,9 +516,6 @@ DateBookEventLater::DateBookEventLater(const EffectiveEvent &ev,
     }
   } 
   
-  // if (msg.isEmpty()) {
-  //  msg = tr("No more appointments today");
-  // }
   setText(msg);
   connect(this, SIGNAL(clicked()), this, SLOT(editMe()));
   setAlignment( int( QLabel::WordBreak | QLabel::AlignLeft ) );

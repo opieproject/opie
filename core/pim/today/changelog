@@ -1,3 +1,11 @@
+0.3.0
+
+* today uses now tododb from libopie. So major changes in the todo part:
+	- overdue items on top
+	- then sorted by date, then by priority
+* some cleanups
+* speed optimisations
+
 0.2.9
 
 * Many bugfixes.
