@@ -139,6 +139,7 @@ mkdir -p include/qpe
 
 mkdir -p include/opie
 ( cd include/opie &&  rm -f *.h; ln -s ../../libopie/*.h .; rm -f *_p.h; )
+( cd include/opie && ln -s ../../libsql/*.h . )
 
 echo Creating makefiles...
 
