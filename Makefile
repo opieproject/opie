@@ -51,7 +51,8 @@ NONCORETOOLS = noncore/tools/calculator noncore/tools/clock \
 	 noncore/tools/remote noncore/tools/opie-sh noncore/apps/advancedfm
 
 NONCORESTYLES = noncore/styles/liquid noncore/styles/liquid/settings \
-                noncore/styles/theme  noncore/styles/theme/settings
+                noncore/styles/theme  noncore/styles/theme/settings \
+		noncore/styles/metal
 
 GAMES = noncore/games/minesweep noncore/games/solitaire \
 	noncore/games/tetrix noncore/games/wordgame \
