@@ -51,9 +51,10 @@
 
 static inline void memcpy_rev ( void *dst, void *src, size_t len )
 {
-	((char *) src ) += len;
-
 	len >>= 1;
+
+	((char *) src ) += ( len << 1 );
+
 	while ( len-- )
 		*((short int *) dst )++ = *--((short int *) src );
 }
@@ -192,7 +193,7 @@ void XineVideoWidget::paintEvent ( QPaintEvent * )
 							// see above for an explanation of the different memcpys
 
 							switch ( rot ) {
-								case  0: memcpy ( dst + leftfill, src, framefill ); break;
+								case  0: memcpy ( dst + leftfill, src, framefill & ~1 ); break;
 								case  1: memcpy_step ( dst + leftfill, src, framefill, m_bytes_per_line_frame ); break;
 								case  2: memcpy_rev ( dst + leftfill, src, framefill ); break;
 								case  3: memcpy_step_rev ( dst + leftfill, src, framefill, m_bytes_per_line_frame ); break;
