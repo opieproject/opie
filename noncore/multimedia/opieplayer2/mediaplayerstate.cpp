@@ -85,6 +85,11 @@ void MediaPlayerState::writeConfig( Config& cfg ) const {
     cfg.writeEntry( "VideoGamma",  videoGamma );
 }
 
+MediaPlayerState::MediaType MediaPlayerState::mediaType() const
+{
+    return view() == 'a' ? MediaPlayerState::Audio : MediaPlayerState::Video;
+}
+
 // slots
 void MediaPlayerState::setIsStreaming( bool b ) {
     streaming = b;
@@ -203,6 +208,7 @@ void MediaPlayerState::setView( char v ) {
     }
     curView = v;
     emit viewChanged(v);
+    emit mediaTypeChanged( mediaType() );
 }
 
 void MediaPlayerState::setPrev(){
