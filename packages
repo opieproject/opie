@@ -85,6 +85,7 @@ CONFIG_LIBOPIE2NET	libopie2/opienet	opienet.pro
 CONFIG_LIBOPIE2PIM	libopie2/opiepim	opiepim.pro
 CONFIG_PIMCONVERTER     noncore/tools/pimconverter converter.pro
 CONFIG_LIBOPIE2UI	libopie2/opieui	opieui.pro
+CONFIG_LIBOPIE2SECURITY	libopie2/opiesecurity opiesecurity.pro
 CONFIG_LIBOPIE	libopie	libopie.pro
 CONFIG_LIBOPIE_PIM	libopie/pim	pim.pro
 CONFIG_LIBOPIETOOTH	noncore/net/opietooth/lib	lib.pro
