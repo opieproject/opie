@@ -59,6 +59,8 @@ QString SMTPwrapper::mailsmtpError( int errnum ) {
         return tr( "Data exceeds storage allocation" );
     case MAILSMTP_ERROR_IN_PROCESSING:
         return tr( "Error in processing" );
+    case MAILSMTP_ERROR_STARTTLS_NOT_SUPPORTED:
+        return tr( "Starttls not supported" );
         //      case MAILSMTP_ERROR_INSUFFISANT_SYSTEM_STORAGE:
         //        return tr( "Insufficient system storage" );
     case MAILSMTP_ERROR_MAILBOX_UNAVAILABLE:
@@ -565,6 +567,29 @@ void SMTPwrapper::storeFailedMail(const char*data,unsigned int size, const char*
     }
 }
 
+int SMTPwrapper::start_smtp_tls(mailsmtp *session)
+{
+    if (!session) {
+        return MAILSMTP_ERROR_IN_PROCESSING;
+    }
+    int err = mailesmtp_starttls(session);
+    if (err != MAILSMTP_NO_ERROR) return err;
+    mailstream_low * low;
+    mailstream_low * new_low;
+    low = mailstream_get_low(session->stream);
+    if (!low) {
+        return MAILSMTP_ERROR_IN_PROCESSING;
+    }
+    int fd = mailstream_low_get_fd(low);
+    if (fd > -1 && (new_low = mailstream_low_ssl_open(fd))!=0) {
+        mailstream_low_free(low);
+        mailstream_set_low(session->stream, new_low);
+    } else {
+        return MAILSMTP_ERROR_IN_PROCESSING;
+    }
+    return err;
+}
+
 int SMTPwrapper::smtpSend(char*from,clist*rcpts,const char*data,size_t size, SMTPaccount *smtp ) {
     const char *server, *user, *pass;
     bool ssl;
@@ -580,9 +605,14 @@ int SMTPwrapper::smtpSend(char*from,clist*rcpts,const char*data,size_t size, SMT
     // FIXME: currently only TLS and Plain work.
 
     ssl = false;
+    bool try_tls = true;
+    bool force_tls=false;
 
     if  ( smtp->ConnectionType() == 2 ) {
         ssl = true;
+        try_tls = false;
+    } else if (smtp->ConnectionType() == 1) {
+        force_tls = true;
     }
 
     port = smtp->getPort().toUInt();
@@ -608,12 +638,27 @@ int SMTPwrapper::smtpSend(char*from,clist*rcpts,const char*data,size_t size, SMT
         result = 0;
     }
 
+    /* switch to tls after init 'cause there it will send the ehlo */
     if (result) {
         err = mailsmtp_init( session );
         if (err != MAILSMTP_NO_ERROR) {
             result = 0;
             failuretext = tr("Error init SMTP connection: %1").arg(mailsmtpError(err));
         }
+    }
+
+    if (try_tls) {
+        err = start_smtp_tls(session);
+        if (err != MAILSMTP_NO_ERROR) {
+            try_tls = false;
+        } else {
+            err = mailesmtp_ehlo(session);
+        }
+    }
+
+    if (!try_tls && force_tls) {
+        result = 0;
+        failuretext = tr("Error init SMTP tls: %1").arg(mailsmtpError(err));
     }
 
     if (result==1 && smtp->getLogin() ) {
@@ -737,8 +782,11 @@ int SMTPwrapper::sendQueuedMail(AbstractMail*wrap,SMTPaccount*smtp,RecMail*which
 bool SMTPwrapper::flushOutbox(SMTPaccount*smtp) {
     bool returnValue = true;
 
-    if (!smtp)
+    qDebug("Sending the queue");
+    if (!smtp) {
+        qDebug("No smtp account given");
         return false;
+    }
 
     bool reset_user_value = false;
     QString localfolders = AbstractMail::defaultLocalfolder();
@@ -754,9 +802,10 @@ bool SMTPwrapper::flushOutbox(SMTPaccount*smtp) {
     wrap->listMessages(mbox,mailsToSend);
     if (mailsToSend.count()==0) {
         delete wrap;
+        qDebug("No mails to send");
         return false;
     }
-    
+
     oldPw = smtp->getPassword();
     oldUser = smtp->getUser();
     if (smtp->getLogin() && (smtp->getUser().isEmpty() || smtp->getPassword().isEmpty()) ) {
@@ -776,7 +825,7 @@ bool SMTPwrapper::flushOutbox(SMTPaccount*smtp) {
         }
     }
 
-    
+
     mailsToSend.setAutoDelete(false);
     sendProgress = new progressMailSend();
     sendProgress->show();
