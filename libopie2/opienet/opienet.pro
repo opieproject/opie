@@ -1,5 +1,5 @@
 TEMPLATE    = lib
-CONFIG      += qt warn_on 
+CONFIG      += qt warn_on
 DESTDIR     = $(OPIEDIR)/lib
 HEADERS     = 802_11_user.h       \
               dhcp.h              \
@@ -29,6 +29,12 @@ LIBS        += -lpcap
 }
 
 contains( platform, x11 ) {
-  LIBS        += -L$(OPIEDIR)/lib -Wl,-rpath,$(OPIEDIR)/lib 
+  LIBS        += -L$(OPIEDIR)/lib -Wl,-rpath,$(OPIEDIR)/lib
 }
 
+!isEmpty( LIBPCAP_INC_DIR ) {
+    INCLUDEPATH = $$LIBPCAP_INC_DIR $$INCLUDEPATH
+}
+!isEmpty( LIBPCAP_LIB_DIR ) {
+    LIBS = -L$$LIBPCAP_LIB_DIR $$LIBS
+}

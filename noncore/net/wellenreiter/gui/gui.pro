@@ -1,6 +1,6 @@
 DESTDIR         = $(OPIEDIR)/bin
 TEMPLATE        = app
-CONFIG          = qt warn_on 
+CONFIG          = qt warn_on
 
 HEADERS         = wellenreiterbase.h \
                   mainwindow.h \
@@ -47,3 +47,9 @@ contains( platform, x11 ) {
   DESTDIR = $(OPIEDIR)/output/bin
 }
 
+!isEmpty( LIBPCAP_INC_DIR ) {
+    INCLUDEPATH = $$LIBPCAP_INC_DIR $$INCLUDEPATH
+}
+!isEmpty( LIBPCAP_LIB_DIR ) {
+    LIBS = -L$$LIBPCAP_LIB_DIR $$LIBS
+}

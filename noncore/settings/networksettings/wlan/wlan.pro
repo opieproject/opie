@@ -1,5 +1,5 @@
 TEMPLATE        = lib
-CONFIG          += qt plugin warn_on 
+CONFIG          += qt plugin warn_on
 DESTDIR         = $(OPIEDIR)/plugins/networksettings
 HEADERS		= infoimp.h wlanmodule.h wextensions.h keyedit.h
 SOURCES		= infoimp.cpp wlanmodule.cpp wextensions.cpp keyedit.cpp
@@ -23,3 +23,10 @@ wirelessopts {
 }
 
 include ( $(OPIEDIR)/include.pro )
+
+!isEmpty( LIBPCAP_INC_DIR ) {
+    INCLUDEPATH = $$LIBPCAP_INC_DIR $$INCLUDEPATH
+}
+!isEmpty( LIBPCAP_LIB_DIR ) {
+    LIBS = -L$$LIBPCAP_LIB_DIR $$LIBS
+}
