@@ -93,8 +93,10 @@ using namespace OpieTooth;
         topLV2->setPixmap( 1, m_onPix );
 	Services s1;
 	s1.setServiceName( "Serial" );
+        s1.insertClassId(1, "BlueNic");
         (void) new BTServiceItem( topLV2, s1 );
 	s1.setServiceName( "BlueNic" );
+        s1.insertClassId(2, "Obex");
         (void) new BTServiceItem( topLV2, s1 );
 
         writeToHciConfig();
@@ -299,7 +301,8 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
         ret = menu->exec( point  , 0);
 
         switch(ret) {
-        case 0:
+        case -1:
+
             break;
         case 1:
             break;
@@ -313,23 +316,48 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
         }
         delete groups;
 
-    } else if ( ((BTListItem*)item)->type() == "service") {
+    }
+    /**
+     * We got service sensitive PopupMenus in our factory
+     * We will create one through the factory and will insert
+     * our Separator + ShowInfo into the menu or create a new
+     * one if the factory returns 0
+     * PopupMenu deletion is kind of weird.
+     * If escaped( -1 ) or any of our items were chosen we'll
+     * delete the PopupMenu otherwise it's the responsibility of
+     * the PopupMenu to delete itself
+     *
+     */
+    else if ( ((BTListItem*)item)->type() == "service") {
+        BTServiceItem* service = (BTServiceItem*)item;
+        QMap<int, QString> list = service->services().classIdList();
+        QMap<int, QString>::Iterator it = list.begin();
+        QPopupMenu *popup =0l;
+        if ( it != list.end() )
+            popup = m_popHelper.find( it.key(),
+                                      service->services(),
+                                      service->parent() );
 
-        menu->insertItem( tr("Test1:"),  0);
-        menu->insertItem( tr("connect"), 1);
-        menu->insertItem( tr("delete"),  2);
+        if ( popup == 0l ) {
+            qWarning("factory returned 0l");
+            popup = new QPopupMenu();
+        }
 
-        ret = menu->exec( point  , 0);
+        int test1 = popup->insertItem( tr("Test1:"),  0);
+        int con = popup->insertItem( tr("connect"), 1);
+        int del = popup->insertItem( tr("delete"),  2);
 
-        switch(ret) {
-        case 0:
-            break;
-        case 1:
-            break;
-        case 2:
-            // delete childs too
+        ret = popup->exec( point );
+
+        if ( ret == -1 )
+            delete popup;
+        else if ( ret == test1 )
+            delete popup;
+        else if ( ret == con )
+            delete popup;
+        else if ( ret == del ) {
+            // take item first? -zecke
             delete item;
-            break;
         }
     }
     delete menu;
