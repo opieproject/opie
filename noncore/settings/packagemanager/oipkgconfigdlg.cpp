@@ -91,7 +91,44 @@ void OIpkgConfigDlg::accept()
 {
     // Save server, destination and proxy configuration
     if ( !m_installOptions )
+    {
+        // Update proxy information before saving settings
+        OConfItem *confItem = findConfItem( OConfItem::Option, "http_proxy" );
+        if ( confItem )
+        {
+            confItem->setValue( m_proxyHttpServer->text() );
+            confItem->setActive( m_proxyHttpActive->isChecked() );
+        }
+        else
+            m_configs->append( new OConfItem( QString::null, OConfItem::Option, "http_proxy",
+                               m_proxyHttpServer->text(), m_proxyHttpActive->isChecked() ) );
+
+        confItem = findConfItem( OConfItem::Option, "ftp_proxy" );
+        if ( confItem )
+        {
+            confItem->setValue( m_proxyFtpServer->text() );
+            confItem->setActive( m_proxyFtpActive->isChecked() );
+        }
+        else
+            m_configs->append( new OConfItem( QString::null, OConfItem::Option, "ftp_proxy",
+                               m_proxyFtpServer->text(), m_proxyFtpActive->isChecked() ) );
+
+        confItem = findConfItem( OConfItem::Option, "proxy_username" );
+        if ( confItem )
+            confItem->setValue( m_proxyUsername->text() );
+        else
+            m_configs->append( new OConfItem( QString::null, OConfItem::Option, "proxy_username",
+                               m_proxyUsername->text() ) );
+
+        confItem = findConfItem( OConfItem::Option, "proxy_password" );
+        if ( confItem )
+            confItem->setValue( m_proxyPassword->text() );
+        else
+            m_configs->append( new OConfItem( QString::null, OConfItem::Option, "proxy_password",
+                               m_proxyPassword->text() ) );
+
         m_ipkg->setConfigItems( m_configs );
+    }
 
     // Save options configuration
     int options = 0;
