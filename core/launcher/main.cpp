@@ -50,21 +50,43 @@ using namespace Opie;
 
 void initEnvironment()
 {
-  Config config("locale");
-  config.setGroup( "Location" );
-  QString tz = config.readEntry( "Timezone", getenv("TZ") );
+    int rot;
+    Config config("locale");
+    
+    config.setGroup( "Location" );
+    QString tz = config.readEntry( "Timezone", getenv("TZ") );
 
   // if not timezone set, pick New York
-  if (tz.isNull())
-      tz = "America/New_York";
+    if (tz.isNull())
+        tz = "America/New_York";
 
-  setenv( "TZ", tz, 1 );
-  config.writeEntry( "Timezone", tz);
+    setenv( "TZ", tz, 1 );
+    config.writeEntry( "Timezone", tz);
 
-  config.setGroup( "Language" );
-  QString lang = config.readEntry( "Language", getenv("LANG") );
-  if ( !lang.isNull() )
-    setenv( "LANG", lang, 1 );
+    config.setGroup( "Language" );
+    QString lang = config.readEntry( "Language", getenv("LANG") );
+    if ( !lang.isNull() )
+        setenv( "LANG", lang, 1 );
+
+#if !defined(QT_QWS_CASSIOPEIA) && !defined(QT_QWS_IPAQ) && !defined(QT_QWS_SL5XXX)
+    setenv( "QWS_SIZE", "240x320", 0 );
+#endif
+
+    /*
+     * Rotation:
+     * 1. use env var if set
+     * 2. use saved default if set
+     * 3. use physical orientation (currently fails due to ODevice
+     *    using a QPixmap and therefore requiring a QApplication)
+     */
+    if ( ( rot = QPEApplication::defaultRotation ( ) ) == 0 ) {
+        Config config("qpe");
+        config.setGroup( "Rotation" );
+        if ( ( rot = config.readNumEntry( "Rot", -1 ) ) == -1 )
+            rot = ODevice::inst ( )-> rotation ( ) * 90;
+    }
+
+    setenv("QWS_DISPLAY", QString("Transformed:Rot%1:0").arg(rot), 1);
 }
 
 
@@ -72,20 +94,17 @@ int initApplication( int argc, char ** argv )
 {
     initEnvironment();
 
-#if !defined(QT_QWS_CASSIOPEIA) && !defined(QT_QWS_IPAQ) && !defined(QT_QWS_SL5XXX)
-    setenv( "QWS_SIZE", "240x320", 0 );
-#endif
-
     //Don't flicker at startup:
     QWSServer::setDesktopBackground( QImage() );
+
     DesktopApplication a( argc, argv, QApplication::GuiServer );
 
-	ODevice::inst ( )-> setSoftSuspend ( true );
+    ODevice::inst ( )-> setSoftSuspend ( true );
 
-	{ // init backlight
-	    QCopEnvelope e("QPE/System", "setBacklight(int)" );
-   	 e << -3; // Forced on
-	}
+    { // init backlight
+        QCopEnvelope e("QPE/System", "setBacklight(int)" );
+  	e << -3; // Forced on
+    }
 
     AlarmServer::initialize();
 
