@@ -402,14 +402,14 @@ DesktopApplication::DesktopApplication( int& argc, char **argv, Type appType )
     : QPEApplication( argc, argv, appType )
 {
 
-    //FIXME, need also a method for setting different timer ( changed runtime )
   m_timer = new QTimer( this );
-  connect( m_timer, SIGNAL( timeout() ), this, SLOT( psTimeout() ) );
-  Config cfg( "qpe" );
-  cfg.setGroup( "APM" );
-  m_timer->start( cfg.readNumEntry( "check_interval", 10000 ) );
-  m_powerVeryLow = cfg.readNumEntry( "power_verylow", 10 );
-  m_powerCritical = cfg.readNumEntry( "power_critical", 5 );
+  connect( m_timer, SIGNAL( timeout() ), this, SLOT( apmTimeout() ) );
+  Config cfg( "apm" );
+  cfg.setGroup( "Warnings" );
+  m_timer->start( 5000 );
+  //cfg.readNumEntry( "checkinterval", 10000 )
+  m_powerVeryLow = cfg.readNumEntry( "powerverylow", 10 );
+  m_powerCritical = cfg.readNumEntry( "powercritical", 5 );
   ps = new PowerStatus;
   pa = new DesktopPowerAlerter( 0 );
 
@@ -496,7 +496,7 @@ void DesktopApplication::reloadPowerWarnSettings() {
     Config cfg( "apm" );
     cfg.setGroup( "Warnings" );
 
-    m_timer->changeInterval( cfg.readNumEntry( "checkinterval", 10000 ) );
+    //  m_timer->changeInterval( cfg.readNumEntry( "checkinterval", 10000 ) );
     m_powerVeryLow = cfg.readNumEntry( "powerverylow", 10 );
     m_powerCritical = cfg.readNumEntry( "powervcritical", 5 );
 }
@@ -632,19 +632,18 @@ bool DesktopApplication::qwsEventFilter( QWSEvent *e )
 }
 #endif
 
-void DesktopApplication::psTimeout()
+void DesktopApplication::psTimeout( int batRemaining )
 {
-  qpedesktop->checkMemory(); // in case no events are being generated
-
   *ps = PowerStatusManager::readStatus();
 
+  // maybe now since its triggered by apm change there might be to few warnings
   // if ( ( ps->batteryStatus() == PowerStatus::VeryLow ) ) {
-   if ( ( ps->batteryPercentRemaining() == m_powerVeryLow ) ) {
+  if ( ( batRemaining == m_powerVeryLow ) ) {
        pa->alert( tr( "Battery is running very low." ), 6 );
   }
 
    // if ( ps->batteryStatus() == PowerStatus::Critical ) {
-   if ( ps->batteryPercentRemaining() == m_powerCritical ) {
+   if ( batRemaining == m_powerCritical ) {
        pa->alert( tr( "Battery level is critical!\n"
                       "Keep power off until power restored!" ), 1 );
   }
@@ -654,6 +653,18 @@ void DesktopApplication::psTimeout()
   }
 }
 
+void DesktopApplication::apmTimeout()
+{
+    qpedesktop->checkMemory(); // in case no events are being generated
+
+    *ps = PowerStatusManager::readStatus();
+
+    if ( m_currentPowerLevel != ps->batteryPercentRemaining() ) {
+        // not very nice, since psTimeout parses the again
+        m_currentPowerLevel = ps->batteryPercentRemaining();
+        psTimeout( m_currentPowerLevel );
+    }
+}
 
 void DesktopApplication::sendCard()
 {

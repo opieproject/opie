@@ -77,19 +77,20 @@ public slots:
 
 protected slots:
   void shutdown( ShutdownImpl::Type );
-  void psTimeout();
+  void psTimeout( int );
+  void apmTimeout();
   void sendCard();
 private:
-        void reloadPowerWarnSettings();
-	DesktopPowerAlerter *pa;
-	PowerStatus *ps;
-	QTimer *cardSendTimer;
-	QCopChannel *channel;
-	QPEScreenSaver *m_screensaver;
-        QTimer * m_timer;
-        int m_powerVeryLow;
-        int m_powerCritical;
-
+    void reloadPowerWarnSettings();
+    DesktopPowerAlerter *pa;
+    PowerStatus *ps;
+    QTimer *cardSendTimer;
+    QCopChannel *channel;
+    QPEScreenSaver *m_screensaver;
+    QTimer * m_timer;
+    int m_powerVeryLow;
+    int m_powerCritical;
+    int m_currentPowerLevel;
 };
 
 
