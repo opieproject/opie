@@ -211,3 +211,16 @@ CONFIG_ZKBAPPLET noncore/applets/zkbapplet zkbapplet.pro
 CONFIG_ZLINES		noncore/games/zlines		zlines.pro
 CONFIG_ZSAFE	noncore/apps/zsafe zsafe.pro
 CONFIG_ZSAME		noncore/games/zsame		zsame.pro
+CONFIG_NS2CORE	noncore/settings/networksettings2/networksettings2	networksettings2.pro
+CONFIG_NS2	noncore/settings/networksettings2	networksettings.pro
+CONFIG_NS2PROFILE	noncore/settings/networksettings2/profile	profile.pro
+CONFIG_NS2NETWORK	noncore/settings/networksettings2/network	network.pro
+CONFIG_NS2LANCARD	noncore/settings/networksettings2/lancard	lancard.pro
+CONFIG_NS2WLAN	noncore/settings/networksettings2/wlan	wlan.pro
+CONFIG_NS2PPP	noncore/settings/networksettings2/ppp	ppp.pro
+CONFIG_NS2CABLE	noncore/settings/networksettings2/cable	cable.pro
+CONFIG_NS2IRDA	noncore/settings/networksettings2/irda	irda.pro
+CONFIG_NS2VPN	noncore/settings/networksettings2/vpn	vpn.pro
+CONFIG_NS2BT	noncore/settings/networksettings2/bluetooth	bluetooth.pro
+CONFIG_NS2MODEM	noncore/settings/networksettings2/modem	modem.pro
+CONFIG_NS2USB	noncore/settings/networksettings2/usb	usb.pro
