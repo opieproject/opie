@@ -1067,6 +1067,39 @@ void QPEApplication::setDefaultRotation( int r )
 	}
 }
 
+#include <qgfx_qws.h>
+#include <qwindowsystem_qws.h>
+#include <qpixmapcache.h>
+
+extern void qws_clearLoadedFonts();
+
+inline void QPEApplication::setCurrentMode( int x, int y, int depth )
+{
+    // Reset the caches
+    qws_clearLoadedFonts();
+    QPixmapCache::clear();
+
+    // Change the screen mode
+    qt_screen->setMode(x, y, depth);
+
+    if ( qApp->type() == GuiServer ) {
+        // Reconfigure the GuiServer
+        qwsServer->beginDisplayReconfigure();
+        qwsServer->endDisplayReconfigure();
+
+        // Get all the running apps to reset
+        QCopEnvelope env( "QPE/System", "reset()" );
+    }
+}
+
+inline void QPEApplication::reset() {
+    // Reconnect to the screen
+    qt_screen->disconnect();
+    qt_screen->connect( QString::null );
+
+    // Redraw everything
+    applyStyle();
+}
 
 /*!
   \internal
@@ -1179,6 +1212,19 @@ void QPEApplication::systemMessage( const QCString& msg, const QByteArray& data 
 			stream >> r;
 			setDefaultRotation( r );
 		}
+	}
+	else if ( msg == "setCurrentMode(int,int,int)" ) { // Added: 2003-06-11 by Tim Ansell <mithro@mithis.net>
+            if ( type() == GuiServer ) {
+		int x, y, depth;
+		stream >> x;
+		stream >> y;
+		stream >> depth;
+		setCurrentMode( x, y, depth );
+            }
+ 	}
+	else if ( msg == "reset()" ) {
+            if ( type() != GuiServer )
+                reset();
 	}
 	else if ( msg == "setCurrentRotation(int)" ) {
 		int r;

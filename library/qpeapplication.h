@@ -48,9 +48,11 @@ public:
     static QString qpeDir();
     static QString documentDir();
     void applyStyle();
+    void reset();
     static int defaultRotation();
     static void setDefaultRotation(int r);
     static void setCurrentRotation(int r);
+    static void setCurrentMode(int x, int y, int depth );
     static void grabKeyboard();
     static void ungrabKeyboard();
 
