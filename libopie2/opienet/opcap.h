@@ -663,9 +663,9 @@ class OPacketCapturer : public QObject
      */
     bool open( const QString& interface );
     /**
-     * Open the packet capturer to capture packets in offline-mode from @a file.
+     * Open the packet capturer to capture packets in offline-mode from @a filename.
      */
-    bool open( const QFile& file );
+    bool openCaptureFile( const QString& filename );
     /**
      * Open a prerecorded tcpdump compatible capture file for use with @ref dump()
      */

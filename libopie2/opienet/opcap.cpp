@@ -1283,10 +1283,8 @@ bool OPacketCapturer::openDumpFile( const QString& filename )
 }
 
 
-bool OPacketCapturer::open( const QFile& file )
+bool OPacketCapturer::openCaptureFile( const QString& name )
 {
-    QString name = file.name();
-
     if ( _open )
     {
         close();
