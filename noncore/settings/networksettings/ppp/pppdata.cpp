@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdata.cpp,v 1.11.2.3 2003-07-28 14:17:45 tille Exp $
+ * $Id: pppdata.cpp,v 1.11.2.4 2003-07-29 14:38:51 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -90,9 +90,11 @@ void PPPData::save()
         key = it.key();
 //        qDebug("saving %s -> %s", key.latin1(), val.latin1() );
         keys = QStringList::split( "SEPARATOR", key );
-        qDebug("group >%s< key >%s< value >%s<", keys[0].latin1(), keys[1].latin1(), val.latin1() );
-        cfg.setGroup(keys[0]);
-        cfg.writeEntry(keys[1], val);
+        //qDebug("group >%s< key >%s< value >%s<", keys[0].latin1(), keys[1].latin1(), val.latin1() );
+        if(_deleted.find(keys[0])==_deleted.end()){
+            cfg.setGroup(keys[0]);
+            cfg.writeEntry(keys[1], val);
+        }
     }
     for( QMap<QString,int>::Iterator it = intEntries.begin();
          it != intEntries.end(); ++it ){
@@ -100,9 +102,11 @@ void PPPData::save()
         key = it.key();
 //        qDebug("saving %s -> %i", key.latin1(), val );
         keys = QStringList::split( "SEPARATOR", key );
-        qDebug("group >%s< key >%s< val %i", keys[0].latin1(), keys[1].latin1(), val );
-        cfg.setGroup(keys[0]);
-        cfg.writeEntry(keys[1], val);
+        //qDebug("group >%s< key >%s< val %i", keys[0].latin1(), keys[1].latin1(), val );
+        if(_deleted.find(keys[0])==_deleted.end()){
+            cfg.setGroup(keys[0]);
+            cfg.writeEntry(keys[1], val);
+        }
     }
     for( QMap<QString,QStringList>::Iterator it = listEntries.begin();
          it != listEntries.end(); ++it ){
@@ -111,9 +115,10 @@ void PPPData::save()
         QChar sep = sepEntries[key];
 //        qDebug("saving %s -> %s", key.latin1(), val.join(sep).latin1() );
         keys = QStringList::split( "SEPARATOR", key );
-        qDebug("group >%s< key >%s<values >%s<", keys[0].latin1(), keys[1].latin1(), val.join(sep).latin1()  );
-        cfg.setGroup(keys[0]);
-        cfg.writeEntry(keys[1], val, sep);
+        if(_deleted.find(keys[0])==_deleted.end()){
+            cfg.setGroup(keys[0]);
+            cfg.writeEntry(keys[1], val, sep);
+        }
     }
 }
 
@@ -726,8 +731,11 @@ bool PPPData::setAccount(const QString &aname) {
 
 bool PPPData::setAccountbyIndex(int i) {
   if(i >= 0 && i <= highcount) {
+    QString tmp;
+    tmp.sprintf("%s%i", ACCOUNT_GRP, i);
+    if (_deleted.find(tmp)!=_deleted.end()) return false;
     caccount = i;
-    cgroup.sprintf("%s%i", ACCOUNT_GRP, i);
+    cgroup = tmp;
     return true;
   }
   return false;
@@ -749,51 +757,12 @@ bool PPPData::isUniqueAccname(const QString &n) {
 
 
 bool PPPData::deleteAccount() {
-    //FIXME: PPPData::deleteAccount
-//   if(caccount < 0)
-     return false;
-
-//   QMap <QString, QString> map;
-//   QMap <QString, QString>::Iterator it;
-
-//   // set all entries of the current account to ""
-//   map = config->entryMap(cgroup);
-//   it = map.begin();
-//   while (it != map.end()) {
-//     config->writeEntry(it.key(), "");
-//     it++;
-//   }
-
-//   // shift the succeeding accounts
-//   for(int i = caccount+1; i <= highcount; i++) {
-//     setAccountbyIndex(i);
-//     map = config->entryMap(cgroup);
-//     it = map.begin();
-//     setAccountbyIndex(i-1);
-//     config->setGroup(cgroup);
-//     while (it != map.end()) {
-//       config->writeEntry(it.key(), *it);
-//       it++;
-//     }
-//   }
-
-//   // make sure the top account is cleared
-//   setAccountbyIndex(highcount);
-//   map = config->entryMap(cgroup);
-//   it = map.begin();
-//   config->setGroup(cgroup);
-//   while (it.key() != QString::null) {
-//     config->writeEntry(it.key(), "");
-//     it++;
-//   }
-
-//    highcount--;
-//    if(caccount > highcount)
-//      caccount = highcount;
-
-//   setAccountbyIndex(caccount);
-
-//   return true;
+    // FIXME: check if this account exists in a config...
+    Config cfg = PPPData::config();
+    cfg.setGroup(cgroup);
+    cfg.clearGroup();
+    _deleted << cgroup;
+    return false;
 }
 
 

@@ -2,7 +2,7 @@
  *
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdata.h,v 1.8.2.2 2003-07-26 23:35:05 tille Exp $
+ * $Id: pppdata.h,v 1.8.2.3 2003-07-29 14:38:51 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -427,7 +427,9 @@ private:
     int pppderror;                         // error encounterd running pppd
     int pppdVer, pppdMod, pppdPatch;       // pppd version
 
+
     QStringList phonelist;
+    QStringList _deleted;
     QMap<QString,QString> stringEntries;
     QMap<QString,int> intEntries;
     QMap<QString,QStringList> listEntries;

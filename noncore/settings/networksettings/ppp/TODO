@@ -2,3 +2,4 @@
 - impl. PPPData::copyaccount & PPPData::deleteAccount
 
 - check if the same interface device combination allready exists
+- check if a deketed account exists in a config and ask the user

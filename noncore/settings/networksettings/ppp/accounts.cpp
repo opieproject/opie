@@ -1,7 +1,7 @@
 /*
  *           kPPP: A pppd front end for the KDE project
  *
- * $Id: accounts.cpp,v 1.9.2.1 2003-07-15 15:29:08 tille Exp $
+ * $Id: accounts.cpp,v 1.9.2.2 2003-07-29 14:38:51 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -71,6 +71,7 @@ AccountWidget::AccountWidget( PPPData *pd, QWidget *parent, const char *name )
   copy_b = new QPushButton(tr("Co&py"), this);
   connect(copy_b, SIGNAL(clicked()), SLOT(copyaccount()));
   l1->addWidget(copy_b);
+  copy_b->setEnabled(false);
   QWhatsThis::add(copy_b,
 		  tr("Makes a copy of the selected account. All\n"
 		       "settings of the selected account are copied\n"
@@ -79,6 +80,7 @@ AccountWidget::AccountWidget( PPPData *pd, QWidget *parent, const char *name )
 
   delete_b = new QPushButton(tr("De&lete"), this);
   connect(delete_b, SIGNAL(clicked()), SLOT(deleteaccount()));
+  delete_b->setEnabled( false );
   l1->addWidget(delete_b);
   QWhatsThis::add(delete_b,
 		  tr("<p>Deletes the selected account\n\n"
@@ -110,9 +112,9 @@ AccountWidget::AccountWidget( PPPData *pd, QWidget *parent, const char *name )
 
 
 void AccountWidget::slotListBoxSelect(int idx) {
-  delete_b->setEnabled((bool)(idx != -1));
+//FIXME  delete_b->setEnabled((bool)(idx != -1));
   edit_b->setEnabled((bool)(idx != -1));
-  copy_b->setEnabled((bool)(idx != -1));
+//FIXME  copy_b->setEnabled((bool)(idx != -1));
   if(idx!=-1) {
       qDebug("setting account to %i", idx);
     QString account = _pppdata->accname();
@@ -191,7 +193,7 @@ void AccountWidget::deleteaccount() {
     accountlist_l->removeItem(accountlist_l->currentItem());
 
   emit resetaccounts();
-  _pppdata->save();
+//  _pppdata->save();
 
   slotListBoxSelect(accountlist_l->currentItem());
 
