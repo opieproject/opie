@@ -3,130 +3,135 @@
     <name>Edit_Title</name>
     <message>
         <source>Edit Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Правка названия</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Применить</translation>
     </message>
 </context>
 <context>
     <name>FontDialog</name>
     <message>
         <source>Font Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Диалог шрифтов</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Размер</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="unfinished"></translation>
+        <translation>А ещё хорошо уметь всем на зависть чётко и складно писать буквы и цифры!</translation>
     </message>
 </context>
 <context>
     <name>Gutenbrowser</name>
     <message>
         <source>Gutenbrowser Output</source>
-        <translation type="unfinished"></translation>
+        <translation>Вывод Гутенбраузера</translation>
     </message>
     <message>
         <source>Running wget</source>
-        <translation type="unfinished"></translation>
+        <translation>Запускаю wget</translation>
     </message>
     <message>
         <source>Download Library Index, or FTP sites?</source>
-        <translation type="unfinished"></translation>
+        <translation>Скачать библиотечный индекс или FTP сайтов?</translation>
     </message>
     <message>
         <source>Do you want to download the newest
 Project Gutenberg Library Index?
 or select an ftp site?
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Вы хотите скачать свежий библиотечный
+индекс Проекта Гутенберг?
+или выбрать FTP сайт?
+</translation>
     </message>
     <message>
         <source>&amp;Library Index</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Библиотечный индекс</translation>
     </message>
     <message>
         <source>&amp;Ftp Site</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;FTP сайт</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Отмена</translation>
     </message>
     <message>
         <source>Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Примечания</translation>
     </message>
     <message>
         <source>Etext Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Поиск е-текста</translation>
     </message>
     <message>
         <source>Please install unzip</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста установите unzip</translation>
     </message>
     <message>
         <source>Gutenberg Library</source>
-        <translation type="unfinished"></translation>
+        <translation>Библиотека Гутенберг</translation>
     </message>
     <message>
         <source>Gutenbrowser</source>
-        <translation type="unfinished"></translation>
+        <translation>Гутенбраузер</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Открыть</translation>
     </message>
     <message>
         <source>Search google.com</source>
-        <translation type="unfinished"></translation>
+        <translation>Искать на google.com</translation>
     </message>
     <message>
         <source>Edit Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Правка названия</translation>
     </message>
     <message>
         <source>Please install unzip in your PATH</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста установите unzip в вашем PATH</translation>
     </message>
 </context>
 <context>
     <name>HelpMe</name>
     <message>
         <source>Based on gutenbook.pl, available from http://www.gutenbook.org</source>
-        <translation type="unfinished"></translation>
+        <translation>Основан на gutenbook.pl, доступен на http://www.gutenbook.org</translation>
     </message>
     <message>
         <source>Much appreciation to Lee Burgess,</source>
-        <translation type="unfinished"></translation>
+        <translation>Выражаем признательность Lee Burgess</translation>
     </message>
     <message>
         <source>for the original idea and concept of gutenbook.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>за оригинальную идею и принцип гутенкниги.
+</translation>
     </message>
     <message>
         <source>A list of current Gutenberg ftp sites is at http://promo.net/pg/index.html
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Список текущих Гутенберг сайтов находится на http://promo.net/pg/index.html
+</translation>
     </message>
     <message>
         <source>For bug reports, comments or questions about Gutenbrowser, email</source>
-        <translation type="unfinished"></translation>
+        <translation>Отсылайте отчеты об ошибках, комментарии и вопросы о Гутенбраузере по адресу</translation>
     </message>
     <message>
         <source>ljp@llornkcor.com
 </source>
-        <translation type="unfinished"></translation>
+        <translation>ljp@llornkcor.com</translation>
     </message>
     <message>
         <source>
@@ -134,279 +139,282 @@ Made using Qt, Qt Embedded, and Qtopia, a cross platform development API
 http://www.trolltech.com
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+Написано с использованием Qt, Qt Embedded, и Qtopia, кросс-платформенного API
+http://www.trolltech.com
+
+</translation>
     </message>
     <message>
         <source>Arnold&apos;s Laws of Documentation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Законы документации Арнольда:</translation>
     </message>
     <message>
         <source>(1) If it should exist, it doesn&apos;t.</source>
-        <translation type="unfinished"></translation>
+        <translation>(1) Если она должна существовать, то ее нет.</translation>
     </message>
     <message>
         <source>(2) If it does exist, it&apos;s out of date.</source>
-        <translation type="unfinished"></translation>
+        <translation>(2) Если она существует, она уже устарела.</translation>
     </message>
     <message>
         <source>(3) Only documentation for</source>
-        <translation type="unfinished"></translation>
+        <translation>(3) Только документация для</translation>
     </message>
     <message>
         <source>useless programs transcends the</source>
-        <translation type="unfinished"></translation>
+        <translation>бесполезных программ избегает</translation>
     </message>
     <message>
         <source>first two laws.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>влияния первых двух законов.
+</translation>
     </message>
     <message>
         <source>Everything is temporary, anyway....
  :o)</source>
-        <translation type="unfinished"></translation>
+        <translation>В конце концов, ничто не вечно...
+:o)</translation>
     </message>
 </context>
 <context>
     <name>HelpWindow</name>
     <message>
         <source>&amp;Open File</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Открыть файл</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Закрыть</translation>
     </message>
     <message>
         <source>&amp;Backward</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Назад</translation>
     </message>
     <message>
         <source>&amp;Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Вперед</translation>
     </message>
     <message>
         <source>&amp;Home</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Домой</translation>
     </message>
     <message>
         <source>Add Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить закладку</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Файл</translation>
     </message>
     <message>
         <source>&amp;Go</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Перейти</translation>
     </message>
     <message>
         <source>History</source>
-        <translation type="unfinished"></translation>
+        <translation>История</translation>
     </message>
     <message>
         <source>Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Закладки</translation>
     </message>
     <message>
         <source>Backward</source>
-        <translation type="unfinished"></translation>
+        <translation>Назад</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Вперед</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Домой</translation>
     </message>
 </context>
 <context>
     <name>LibraryDialog</name>
     <message>
         <source>Library Index - using master pg index.</source>
-        <translation type="unfinished"></translation>
+        <translation>Библиотечный индекс - используется главный индекс проекта.</translation>
     </message>
     <message>
         <source>&lt;p&gt;Error opening local library index:&lt;/P&gt; </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Не могу открыть локальный библиотечный индекс:&lt;/p&gt; </translation>
     </message>
     <message>
         <source>Library Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Поиск по библиотеке</translation>
     </message>
     <message>
         <source>Downloading Gutenberg Index....</source>
-        <translation type="unfinished"></translation>
+        <translation>Скачиваю Гутенберг индекс...</translation>
     </message>
     <message>
         <source>Running wget</source>
-        <translation type="unfinished"></translation>
+        <translation>Запускаю wget</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Название</translation>
     </message>
     <message>
         <source>Author</source>
-        <translation type="unfinished"></translation>
+        <translation>Автор</translation>
     </message>
     <message>
         <source>Year</source>
-        <translation type="unfinished"></translation>
+        <translation>Год</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл</translation>
     </message>
     <message>
         <source>A-F</source>
-        <translation type="unfinished"></translation>
+        <translation>A-F</translation>
     </message>
     <message>
         <source>G-M</source>
-        <translation type="unfinished"></translation>
+        <translation>G-M</translation>
     </message>
     <message>
         <source>N-R</source>
-        <translation type="unfinished"></translation>
+        <translation>N-R</translation>
     </message>
     <message>
         <source>S-Z</source>
-        <translation type="unfinished"></translation>
+        <translation>S-Z</translation>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки</translation>
     </message>
     <message>
         <source>Open Automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Открывать автоматически</translation>
     </message>
     <message>
         <source>Last name first 
 (requires library restart)</source>
-        <translation type="unfinished"></translation>
+        <translation>Сначала фамилия 
+(необходим перезапуск библиотеки)</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Искать</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>   </source>
-        <translation type="unfinished"></translation>
+        <translation>Закрыть</translation>
     </message>
 </context>
 <context>
     <name>NetworkDialog</name>
     <message>
         <source>FTP Download</source>
-        <translation type="unfinished"></translation>
+        <translation>Закачка по FTP</translation>
     </message>
     <message>
         <source>Download should start shortly</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузка скоро должна начаться</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Отмена</translation>
     </message>
 </context>
 <context>
     <name>OpenEtext</name>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Все</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Текст</translation>
     </message>
     <message>
         <source>Remove Etext</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить е-текст</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Да</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Отмена</translation>
     </message>
 </context>
 <context>
     <name>SearchDialog</name>
     <message>
         <source>Sea&amp;rch</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Найти</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Отмена</translation>
     </message>
     <message>
         <source>Case Sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>Учет регистра</translation>
     </message>
 </context>
 <context>
     <name>SearchResultsDlg</name>
     <message>
         <source>Search Results</source>
-        <translation type="unfinished"></translation>
+        <translation>Результаты поиска</translation>
     </message>
     <message>
         <source>&amp;Download</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Скачать</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Отмена</translation>
     </message>
 </context>
 <context>
     <name>optionsDialog</name>
     <message>
         <source>Opera</source>
-        <translation type="unfinished"></translation>
+        <translation>Opera</translation>
     </message>
     <message>
         <source>Konqueror</source>
-        <translation type="unfinished"></translation>
+        <translation>Konqueror</translation>
     </message>
     <message>
         <source>wget</source>
-        <translation type="unfinished"></translation>
+        <translation>wget</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Все</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Текст</translation>
     </message>
     <message>
         <source>Downloading ftp sites....</source>
-        <translation type="unfinished"></translation>
+        <translation>Скачиваю список FTP сайтов...</translation>
     </message>
     <message>
         <source>Running wget</source>
-        <translation type="unfinished"></translation>
+        <translation>Запускаю wget</translation>
     </message>
     <message>
         <source>Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Примечания</translation>
     </message>
     <message>
         <source>ftpSiteDlg</source>
@@ -414,35 +422,35 @@ http://www.trolltech.com
     </message>
     <message>
         <source>List File not opened sucessfully.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не могу открыть файл списка.</translation>
     </message>
     <message>
         <source>File not opened sucessfully.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не смог открыть файл.</translation>
     </message>
     <message>
         <source>Main</source>
-        <translation type="unfinished"></translation>
+        <translation>Главные</translation>
     </message>
     <message>
         <source>FTP</source>
-        <translation type="unfinished"></translation>
+        <translation>FTP</translation>
     </message>
     <message>
         <source>http://sailor.gutenberg.org</source>
-        <translation type="unfinished"></translation>
+        <translation>http://sailor.gutenberg.org</translation>
     </message>
     <message>
         <source>http://www.prairienet.org/pg</source>
-        <translation type="unfinished"></translation>
+        <translation>http://www.prairienet.org/pg</translation>
     </message>
     <message>
         <source>HTTP</source>
-        <translation type="unfinished"></translation>
+        <translation>HTTP</translation>
     </message>
     <message>
         <source>Gutenbrowser Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки Гутенбраузера</translation>
     </message>
 </context>
 </TS>

@@ -86,7 +86,7 @@
     </message>
     <message>
         <source>Val:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ярк.:</translation>
     </message>
     <message>
         <source>Red:</source>

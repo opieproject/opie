@@ -3,165 +3,165 @@
     <name>CableEdit</name>
     <message>
         <source>Device filename needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Необходимо имя файла устройства</translation>
     </message>
 </context>
 <context>
     <name>CableGUI</name>
     <message>
         <source>Cable</source>
-        <translation type="unfinished"></translation>
+        <translation>Кабель</translation>
     </message>
     <message>
         <source>Lock file</source>
-        <translation type="unfinished"></translation>
+        <translation>Lock-файл</translation>
     </message>
     <message>
         <source>Device</source>
-        <translation type="unfinished"></translation>
+        <translation>Устройство</translation>
     </message>
     <message>
         <source>Serial settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки связи</translation>
     </message>
     <message>
         <source>2400</source>
-        <translation type="unfinished"></translation>
+        <translation>2400</translation>
     </message>
     <message>
         <source>9600</source>
-        <translation type="unfinished"></translation>
+        <translation>9600</translation>
     </message>
     <message>
         <source>19200</source>
-        <translation type="unfinished"></translation>
+        <translation>19200</translation>
     </message>
     <message>
         <source>38400</source>
-        <translation type="unfinished"></translation>
+        <translation>38400</translation>
     </message>
     <message>
         <source>57600</source>
-        <translation type="unfinished"></translation>
+        <translation>57600</translation>
     </message>
     <message>
         <source>115200</source>
-        <translation type="unfinished"></translation>
+        <translation>115200</translation>
     </message>
     <message>
         <source>230400</source>
-        <translation type="unfinished"></translation>
+        <translation>230400</translation>
     </message>
     <message>
         <source>460800</source>
-        <translation type="unfinished"></translation>
+        <translation>460800</translation>
     </message>
     <message>
         <source>500000</source>
-        <translation type="unfinished"></translation>
+        <translation>500000</translation>
     </message>
     <message>
         <source>921600</source>
-        <translation type="unfinished"></translation>
+        <translation>921600</translation>
     </message>
     <message>
         <source>1000000</source>
-        <translation type="unfinished"></translation>
+        <translation>1000000</translation>
     </message>
     <message>
         <source>1152000</source>
-        <translation type="unfinished"></translation>
+        <translation>1152000</translation>
     </message>
     <message>
         <source>1500000</source>
-        <translation type="unfinished"></translation>
+        <translation>1500000</translation>
     </message>
     <message>
         <source>2000000</source>
-        <translation type="unfinished"></translation>
+        <translation>2000000</translation>
     </message>
     <message>
         <source>2500000</source>
-        <translation type="unfinished"></translation>
+        <translation>2500000</translation>
     </message>
     <message>
         <source>3000000</source>
-        <translation type="unfinished"></translation>
+        <translation>3000000</translation>
     </message>
     <message>
         <source>3500000</source>
-        <translation type="unfinished"></translation>
+        <translation>3500000</translation>
     </message>
     <message>
         <source>4000000</source>
-        <translation type="unfinished"></translation>
+        <translation>4000000</translation>
     </message>
     <message>
         <source>Parity</source>
-        <translation type="unfinished"></translation>
+        <translation>Четность</translation>
     </message>
     <message>
         <source>Data bits</source>
-        <translation type="unfinished"></translation>
+        <translation>Биты данных</translation>
     </message>
     <message>
         <source>Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Скорость</translation>
     </message>
     <message>
         <source>Stop bits</source>
-        <translation type="unfinished"></translation>
+        <translation>Стоп-биты</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет</translation>
     </message>
     <message>
         <source>Even</source>
-        <translation type="unfinished"></translation>
+        <translation>Четные</translation>
     </message>
     <message>
         <source>Odd</source>
-        <translation type="unfinished"></translation>
+        <translation>Нечетные</translation>
     </message>
     <message>
         <source>Mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Метка</translation>
     </message>
     <message>
         <source>Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Пробел</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation>2</translation>
     </message>
     <message>
         <source>Flow control :</source>
-        <translation type="unfinished"></translation>
+        <translation>Контроль потока:</translation>
     </message>
     <message>
         <source>Hardware</source>
-        <translation type="unfinished"></translation>
+        <translation>Аппаратный</translation>
     </message>
     <message>
         <source>Software</source>
-        <translation type="unfinished"></translation>
+        <translation>Программный</translation>
     </message>
 </context>
 <context>
     <name>CableNetNode</name>
     <message>
         <source>Cable Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Кабельное соединение</translation>
     </message>
     <message>
         <source>&lt;p&gt;Sets up a wired serial or parallel.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Устанавливает последовательную или параллельную связь по кабелю.&lt;/p&gt;</translation>
     </message>
 </context>
 </TS>

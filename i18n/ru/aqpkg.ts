@@ -240,17 +240,19 @@
     </message>
     <message>
         <source>Couldn&apos;t start ipkg-link process</source>
-        <translation type="unfinished"></translation>
+        <translation>Не могу запустить ipkg-link</translation>
     </message>
     <message>
         <source>Symbolic linking failed!
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Не могу создать ссылки!
+</translation>
     </message>
     <message>
         <source>Symbolic linking succeeded.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Ссылки созданы.
+</translation>
     </message>
 </context>
 <context>

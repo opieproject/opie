@@ -3,216 +3,216 @@
     <name>PPPAuthEdit</name>
     <message>
         <source>Login send missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Отправить как логин отсутствует</translation>
     </message>
     <message>
         <source>Login expect missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Принять как логине отсутствует</translation>
     </message>
     <message>
         <source>Password send missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Послать как пароль отсутствует</translation>
     </message>
     <message>
         <source>Password expect missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Принять как пароль отсутствует</translation>
     </message>
     <message>
         <source>Pap/Chap/EAP client id missing</source>
-        <translation type="unfinished"></translation>
+        <translation>ID клиента Pap/Chap/EAP отсутствует</translation>
     </message>
     <message>
         <source>Pap/Chap/EAP server id missing</source>
-        <translation type="unfinished"></translation>
+        <translation>ID сервера Pap/Chap/EAP отсутствует</translation>
     </message>
     <message>
         <source>Pap/Chap/EAP secret id missing</source>
-        <translation type="unfinished"></translation>
+        <translation>ID секрета Pap/Chap/EAP отсутствует</translation>
     </message>
 </context>
 <context>
     <name>PPPAuthGUI</name>
     <message>
         <source>PPPAuth</source>
-        <translation type="unfinished"></translation>
+        <translation>PPPAут.</translation>
     </message>
     <message>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Логин</translation>
     </message>
     <message>
         <source>ogin:</source>
-        <translation type="unfinished"></translation>
+        <translation>ogin:</translation>
     </message>
     <message>
         <source>assword:</source>
-        <translation type="unfinished"></translation>
+        <translation>assword:</translation>
     </message>
     <message>
         <source>Pap</source>
-        <translation type="unfinished"></translation>
+        <translation>PAP</translation>
     </message>
     <message>
         <source>Chap</source>
-        <translation type="unfinished"></translation>
+        <translation>CHAP</translation>
     </message>
     <message>
         <source>EAP</source>
-        <translation type="unfinished"></translation>
+        <translation>EAP</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Сервер</translation>
     </message>
     <message>
         <source>Secret</source>
-        <translation type="unfinished"></translation>
+        <translation>Секрет</translation>
     </message>
     <message>
         <source>*</source>
-        <translation type="unfinished"></translation>
+        <translation>*</translation>
     </message>
     <message>
         <source>Client</source>
-        <translation type="unfinished"></translation>
+        <translation>Клиент</translation>
     </message>
     <message>
         <source>Terminal</source>
-        <translation type="unfinished"></translation>
+        <translation>Терминал</translation>
     </message>
 </context>
 <context>
     <name>PPPDNSEdit</name>
     <message>
         <source>Domainname needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Необходимо доменное имя</translation>
     </message>
     <message>
         <source>DNS Servers needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Необходимы DNS сервера</translation>
     </message>
 </context>
 <context>
     <name>PPPDNSGUI</name>
     <message>
         <source>PPPDNS</source>
-        <translation type="unfinished"></translation>
+        <translation>PPPDNS</translation>
     </message>
     <message>
         <source>Server assigned</source>
-        <translation type="unfinished"></translation>
+        <translation>Задан сервером</translation>
     </message>
     <message>
         <source>Fixed</source>
-        <translation type="unfinished"></translation>
+        <translation>Постоянный</translation>
     </message>
     <message>
         <source>DomainName</source>
-        <translation type="unfinished"></translation>
+        <translation>Доменное имя</translation>
     </message>
     <message>
         <source>Address</source>
-        <translation type="unfinished"></translation>
+        <translation>Адрес</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>List</source>
-        <translation type="unfinished"></translation>
+        <translation>Список</translation>
     </message>
 </context>
 <context>
     <name>PPPGUI</name>
     <message>
         <source>PPP</source>
-        <translation type="unfinished"></translation>
+        <translation>PPP</translation>
     </message>
     <message>
         <source>Authentication</source>
-        <translation type="unfinished"></translation>
+        <translation>Аутентификация</translation>
     </message>
     <message>
         <source>IP settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки IP</translation>
     </message>
     <message>
         <source>DNS Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки DNS</translation>
     </message>
 </context>
 <context>
     <name>PPPIPEdit</name>
     <message>
         <source>IPAddress needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Необходим IP адрес</translation>
     </message>
     <message>
         <source>IPAddress not valid</source>
-        <translation type="unfinished"></translation>
+        <translation>IP адрес неверен</translation>
     </message>
     <message>
         <source>Subnet mask needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Необходима маска подсети</translation>
     </message>
     <message>
         <source>Subnet mask not valid</source>
-        <translation type="unfinished"></translation>
+        <translation>Маска подсети неверна</translation>
     </message>
     <message>
         <source>Gateway address needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Необходим адрес шлюза</translation>
     </message>
     <message>
         <source>Gateway address not valid</source>
-        <translation type="unfinished"></translation>
+        <translation>Адрес шлюза неверен</translation>
     </message>
 </context>
 <context>
     <name>PPPIPGUI</name>
     <message>
         <source>PPPIP</source>
-        <translation type="unfinished"></translation>
+        <translation>PPPIP</translation>
     </message>
     <message>
         <source>IP</source>
-        <translation type="unfinished"></translation>
+        <translation>IP</translation>
     </message>
     <message>
         <source>Server assigned</source>
-        <translation type="unfinished"></translation>
+        <translation>Задан сервером</translation>
     </message>
     <message>
         <source>Fixed</source>
-        <translation type="unfinished"></translation>
+        <translation>Постоянный</translation>
     </message>
     <message>
         <source>Subnetmask</source>
-        <translation type="unfinished"></translation>
+        <translation>Маска подсети</translation>
     </message>
     <message>
         <source>Address</source>
-        <translation type="unfinished"></translation>
+        <translation>Адрес</translation>
     </message>
     <message>
         <source>Gateway</source>
-        <translation type="unfinished"></translation>
+        <translation>Шлюз</translation>
     </message>
     <message>
         <source>Set as default</source>
-        <translation type="unfinished"></translation>
+        <translation>Установить по умолчанию</translation>
     </message>
 </context>
 <context>
     <name>PPPNetNode</name>
     <message>
         <source>PPP Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>PPP соединение</translation>
     </message>
     <message>
         <source>&lt;p&gt;Sets up IP using PPP.&lt;/p&gt;&lt;p&gt;Use this for dialup devices or serial setups&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Устанавливает IP связь через PPP.&lt;/p&gt;&lt;p&gt;Используйте для телефонных модемов или последовательных линий&lt;/p&gt;</translation>
     </message>
 </context>
 </TS>

@@ -133,7 +133,7 @@ Visit &lt;i&gt;http://opie.handhelds.org&lt;/i&gt; for more information on the O
     </message>
     <message>
         <source>&lt;center&gt;&lt;b&gt;The Open Palmtop Integrated Environment V1.1.6&lt;/b&gt;&lt;/center&gt;</source>
-        <translation type="unfinished">&lt;center&gt;&lt;b&gt;The Open Palmtop Integrated Environment V1.1.6&lt;/b&gt;&lt;/center&gt;</translation>
+        <translation>&lt;center&gt;&lt;b&gt;The Open Palmtop Integrated Environment V1.1.6&lt;/b&gt;&lt;/center&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;
@@ -147,7 +147,17 @@ Visit &lt;i&gt;http://opie.handhelds.org&lt;/i&gt; for more information on the O
 &lt;b&gt;Andreas &apos;ar&apos; Richter&lt;/b&gt; (ar@handhelds.org)&lt;br/&gt;
 &lt;b&gt;Dan &apos;drw&apos; Williams&lt;/b&gt; (drw@handhelds.org)&lt;/tt&gt;&lt;br/&gt;
 &lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;
+&lt;b&gt;Rajko &apos;alwin&apos; Albrecht&lt;/b&gt; (alwin@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Stefan &apos;eilers&apos; Eilers&lt;/b&gt; (eilers@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Holger &apos;Zecke&apos; Freyther&lt;/b&gt; (zecke@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Chris &apos;Kergoth&apos; Larson&lt;/b&gt; (kergoth@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Michael &apos;Mickey&apos; Lauer&lt;/b&gt; (mickeyl@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Lorn &apos;ljp&apos; Potter&lt;/b&gt; (ljp@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Max &apos;Harlekin&apos; Reiss&lt;/b&gt; (harlekin@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Andreas &apos;ar&apos; Richter&lt;/b&gt; (ar@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Dan &apos;drw&apos; Williams&lt;/b&gt; (drw@handhelds.org)&lt;/tt&gt;&lt;br/&gt;
+&lt;/p&gt;</translation>
     </message>
 </context>
 </TS>
