@@ -157,6 +157,7 @@ void MainWindowImp::getAllInterfaces(){
   QStringList ifaces;
   QFile procFile(QString(_PROCNETDEV));
   int result;
+  Interface *i;
 
   if (! procFile.exists()) {
     struct ifreq ifrs[100];
@@ -187,7 +188,7 @@ void MainWindowImp::getAllInterfaces(){
 
   for (QStringList::Iterator it = ifaces.begin(); it != ifaces.end(); ++it) {
     int flags = 0, family;
-    Interface *i = NULL;
+    i = NULL;
 
     strcpy(ifr.ifr_name, (*it).latin1());
 
@@ -216,7 +217,23 @@ void MainWindowImp::getAllInterfaces(){
     qWarning("Adding interface %s to interfaceNames\n", ifr.ifr_name);
     interfaceNames.insert(i->getInterfaceName(), i);
     updateInterface(i);
-    connect(i, SIGNAL(updateInterface(Interface *)), this, SLOT(updateInterface(Interface *)));
+    connect(i, SIGNAL(updateInterface(Interface *)),
+            this, SLOT(updateInterface(Interface *)));
+  }
+  // now lets ask the plugins too ;)
+  QMap<Module*, QLibrary*>::Iterator it;
+  QList<Interface> ilist;
+  for( it = libraries.begin(); it != libraries.end(); ++it ){
+    if(it.key()){
+        ilist = it.key()->getInterfaces();
+        for( i = ilist.first(); i != 0; i = ilist.next() ){
+            qWarning("Adding interface %s to interfaceNames\n", i->getInterfaceName().latin1() );
+            interfaceNames.insert(i->getInterfaceName(), i);
+            updateInterface(i);
+            connect(i, SIGNAL(updateInterface(Interface *)),
+                    this, SLOT(updateInterface(Interface *)));
+        }
+    }
   }
 }
 
@@ -316,8 +333,7 @@ void MainWindowImp::addClicked(){
   QMap<Module*, QLibrary*>::Iterator it;
   QMap<QString, QString> list;
   QMap<QString, Module*> newInterfaceOwners;
-  //list.insert("USB (PPP) / (ADD_TEST)", "A dialup connection over the USB port");
-  //list.insert("IrDa (PPP) / (ADD_TEST)", "A dialup connection over the IdDa port");
+
   for( it = libraries.begin(); it != libraries.end(); ++it ){
     if(it.key()){
       (it.key())->possibleNewInterfaces(list);
