@@ -463,7 +463,7 @@ void PlayListWidget::addSelected() {
                   }
               }
           }
-          tabWidget->setCurrentPage(0);
+//          tabWidget->setCurrentPage(0);
           writeCurrentM3u();          
       }
           break;
@@ -483,7 +483,7 @@ void PlayListWidget::addSelected() {
                   }
               }
           }
-          tabWidget->setCurrentPage(0);
+//          tabWidget->setCurrentPage(0);
           writeCurrentM3u();          
       }
           break;
@@ -768,24 +768,30 @@ void PlayListWidget::readm3u( const QString &filename ) {
     DocLnk lnk;
     for ( QStringList::ConstIterator it = m3uList->begin(); it != m3uList->end(); ++it ) {
         s = *it;
-//        s.replace( QRegExp( "%20" )," " );
 //          qDebug("reading "+ s);
         if(s.left(4)=="http") {
-            lnk.setName( s ); //sets file name
-            lnk.setFile( s ); //sets file name
-            lnk.setIcon("opieplayer2/musicfile");
-        }
-           else {
-               if( QFileInfo( s ).exists() ) {
-             lnk.setName( QFileInfo(s).baseName());
-//              qDebug("set link "+s);
-          if(s.at(s.length()-4) == '.') //if regular file
-              lnk.setFile( s);
+          lnk.setName( s ); //sets file name
+          lnk.setIcon("opieplayer2/musicfile");
+          if(s.right(4) != '.' || s.right(5) != '.')
+            lnk.setFile( s+"/"); //if url with no extension
           else
-              lnk.setFile( s+"/"); //if url with no extension
-               }
-         }
-         d->selectedFiles->addToSelection( lnk );
+            lnk.setFile( s ); //sets file name
+            
+        }  else {
+          //               if( QFileInfo( s ).exists() ) {
+          lnk.setName( QFileInfo(s).baseName());
+          //                 if(s.right(4) == '.')   {//if regular file
+          if(s.left(1) != "/")  { 
+            //            qDebug("set link "+QFileInfo(filename).dirPath()+"/"+s);
+            lnk.setFile( QFileInfo(filename).dirPath()+"/"+s);
+            lnk.setIcon("SoundPlayer");
+          } else {
+            //            qDebug("set link2 "+s);
+            lnk.setFile( s);
+            lnk.setIcon("SoundPlayer");
+          }
+        }
+        d->selectedFiles->addToSelection( lnk );
     }
     Config config( "OpiePlayer" );
     config.setGroup( "PlayList" );
@@ -859,10 +865,8 @@ void PlayListWidget::writeCurrentM3u() {
   Om3u *m3uList;
   m3uList = new Om3u( currentPlaylist, IO_ReadWrite | IO_Truncate );
 
-  
-      qDebug( d->selectedFiles->current()->file());
   do {
-      qDebug( d->selectedFiles->current()->file());
+      qDebug( "writeCurrentM3u " +d->selectedFiles->current()->file());
     m3uList->add( d->selectedFiles->current()->file() );
   }
   while ( d->selectedFiles->next() );
