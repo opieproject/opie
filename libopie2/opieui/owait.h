@@ -1,30 +1,40 @@
-/*  This file is part of the OPIE libraries
-    Copyright (C) 2003 Maximilian Reiss  (harlekin@handhelds.org)
+/*
+† † † † † † † †              This file is part of the Opie Project
+† † † † † † †                Copyright (C) 2003 Maximilian Reiss <harlekin@handhelds.org>
+              =.
+            .=l.
+† † † † † †.>+-=
+†_;:, † † .> † †:=|.         This program is free software; you can
+.> <`_, † > †. † <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.-- † :           the terms of the GNU Library General Public
+.="- .-=="i, † † .._         License as published by the Free Software
+†- . † .-<_> † † .<>         Foundation; either version 2 of the License,
+† † †._= =} † † † :          or (at your option) any later version.
+† † .%`+i> † † † _;_.
+† † .i_,=:_. † † †-<s.       This program is distributed in the hope that
+† † †+ †. †-:. † † † =       it will be useful,  but WITHOUT ANY WARRANTY;
+† † : .. † †.:, † † . . .    without even the implied warranty of
+† † =_ † † † †+ † † =;=|`    MERCHANTABILITY or FITNESS FOR A
+† _.=:. † † † : † †:=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.= † † † = † † † ;      Library General Public License for more
+++= † -. † † .` † † .:       details.
+†: † † = †...= . :.=-
+†-. † .:....=;==+<;          You should have received a copy of the GNU
+† -_. . . † )=. †=           Library General Public License along with
+† † -- † † † †:-=`           this library; see the file COPYING.LIB.
+                             If not, write to the Free Software Foundation,
+                             Inc., 59 Temple Place - Suite 330,
+                             Boston, MA 02111-1307, USA.
 
-    This library is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Library General Public
-    License as published by the Free Software Foundation; either
-    version 2 of the License, or (at your option) any later version.
-
-    This library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Library General Public License for more details.
-
-    You should have received a copy of the GNU Library General Public License
-    along with this library; see the file COPYING.LIB.  If not, write to
-    the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-    Boston, MA 02111-1307, USA.
 */
 
+#ifndef OWAIT_H
+#define OWAIT_H
 
-
-#ifndef WAITPOPUP_H
-#define WAITPOPUP_H
-
+/* QT */
 #include <qdialog.h>
-#include <qpixmap.h>
 #include <qlabel.h>
+#include <qpixmap.h>
 #include <qtimer.h>
 
 /**
@@ -34,13 +44,12 @@
  * @see QDialog
  * @author Maximilian Reiﬂ
  */
-class OWait : public QDialog {
-
+class OWait : public QDialog
+{
     Q_OBJECT
 
-public:
-    // FIXME Wflags -zecke?
-    OWait(QWidget *parent=0,const char* name=0, bool dispIcon=TRUE);
+  public:
+    OWait( QWidget *parent = 0, const char* name = 0, bool dispIcon = TRUE );
     ~OWait();
 
     /**
@@ -55,14 +64,14 @@ public:
      */
     void setTimerLength( int length );
 
-    public slots:
+  public slots:
     /**
      * reimplemented for control reasons
      */
     void hide();
 
- private:
-    void timerEvent( QTimerEvent * ) ;
+  private:
+    void timerEvent( QTimerEvent * );
     void paintEvent( QPaintEvent * );
 
     QPixmap m_pix;

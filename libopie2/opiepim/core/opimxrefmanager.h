@@ -26,12 +26,15 @@
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
 */
-#ifndef OPIM_XREF_MANAGER_H
-#define OPIM_XREF_MANAGER_H
 
-#include <qstringlist.h>
+#ifndef OPIMXREFMANAGER_H
+#define OPIMXREFMANAGER_H
 
+/* OPIE */
 #include <opie2/opimxref.h>
+
+/* QT */
+#include <qstringlist.h>
 
 namespace Opie {
 /**

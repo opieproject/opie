@@ -27,11 +27,14 @@
                              Boston, MA 02111-1307, USA.
 */
 
-#ifndef OPIE_TIME_ZONE_H
-#define OPIE_TIME_ZONE_H
+#ifndef OTIMEZONE_H
+#define OTIMEZONE_H
 
-#include <time.h>
+/* QT */
 #include <qdatetime.h>
+
+/* STD */
+#include <time.h>
 
 namespace Opie
 {
@@ -42,6 +45,7 @@ namespace Opie
  * and time_t
  */
 class OTimeZone {
+
  public:
     typedef QString ZoneName;
     OTimeZone( const ZoneName&  = ZoneName::null );
@@ -91,7 +95,8 @@ class OTimeZone {
     static OTimeZone current();
     static OTimeZone utc();
 
-    QString timeZone()const;
+    QString timeZone() const;
+    
  private:
     ZoneName m_name;
     class Private;

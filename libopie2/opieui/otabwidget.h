@@ -1,7 +1,6 @@
 /*
-                            This file is part of the Opie Project
-
-                             Copyright (c)  2002 Dan Williams <williamsdr@acm.org>
+                             This file is part of the Opie Project
+                             Copyright (C) 2002 Dan Williams <williamsdr@acm.org>
               =.
             .=l.
            .>+-=
@@ -69,8 +68,8 @@ class OTabBar;
 class OTabWidget : public QWidget
 {
     Q_OBJECT
-public:
-
+  
+  public:
 /**
  * @enum TabStyle
  * @brief Defines how the widget selection control is displayed.
@@ -107,7 +106,6 @@ public:
  * Constructs a new OTabWidget control with parent and name.  The style and position parameters
  * determine how the widget selection control will be displayed.
  */
- // FIXME WFlags? -zecke
     OTabWidget( QWidget * = 0, const char * = 0, TabStyle = Global, TabPosition = Top );
 
 /**
@@ -262,7 +260,7 @@ private:
     void    setUpLayout();
 
 
-signals:
+  signals:
 /**
  * @fn currentChanegd( QWidget *widget )
  * @brief This signal is emitted whenever the widget has changed.
@@ -271,7 +269,7 @@ signals:
  */
     void currentChanged( QWidget * );
 
-private slots:
+  private slots:
 
 /**
  * @fn slotTabBarSelected( int id )

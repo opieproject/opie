@@ -26,13 +26,14 @@
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
 */
-#ifndef OPIE_TEMPLATE_BASE_H
-#define OPIE_TEMPLATE_BASE_H
+#ifndef OTEMPLATEBASE_H
+#define OTEMPLATEBASE_H
 
-#include <qarray.h>
-
+/* OPIE */
 #include <opie2/opimrecord.h>
 
+/* QT */
+#include <qarray.h>
 
 namespace Opie {
 /**

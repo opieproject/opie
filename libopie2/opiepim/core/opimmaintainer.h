@@ -26,9 +26,10 @@
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
 */
-#ifndef OPIE_PIM_MAINTAINER_H
-#define OPIE_PIM_MAINTAINER_H
+#ifndef OPIMMAINTAINER_H
+#define OPIMMAINTAINER_H
 
+/* QT */
 #include <qstring.h>
 
 namespace Opie {

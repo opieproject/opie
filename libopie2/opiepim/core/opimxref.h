@@ -27,13 +27,15 @@
                              Boston, MA 02111-1307, USA.
 */
 
-#ifndef OPIM_XREF_H
-#define OPIM_XREF_H
+#ifndef OPIMXREF_H
+#define OPIMXREF_H
 
+/* OPIE */
+#include <opie2/opimxrefpartner.h>
+
+/* QT */
 #include <qarray.h>
 #include <qvaluelist.h>
-
-#include <opie2/opimxrefpartner.h>
 
 namespace Opie {
 /**
@@ -41,7 +43,7 @@ namespace Opie {
  * two Cross Reference Partners
  */
 class OPimXRef {
-public:
+  public:
     typedef QValueList<OPimXRef> ValueList;
     enum Partners { One, Two };
     OPimXRef( const OPimXRefPartner& ONE, const OPimXRefPartner& );
@@ -52,14 +54,14 @@ public:
     OPimXRef &operator=( const OPimXRef& );
     bool operator==( const OPimXRef& );
 
-    OPimXRefPartner partner( enum Partners )const;
+    OPimXRefPartner partner( enum Partners ) const;
 
-    void setPartner( enum Partners,  const OPimXRefPartner& );
+    void setPartner( enum Partners, const OPimXRefPartner& );
 
-    bool containsString( const QString& service)const;
-    bool containsUid( int uid )const;
+    bool containsString( const QString& service) const;
+    bool containsUid( int uid ) const;
 
-private:
+  private:
     QArray<OPimXRefPartner> m_partners;
 
     class Private;

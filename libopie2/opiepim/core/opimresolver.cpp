@@ -26,15 +26,16 @@
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
 */
-#include <qcopchannel_qws.h>
 
+#include "opimresolver.h"
+
+/* OPIE */
+#include <opie2/ocontactaccess.h>
+#include <opie2/otodoaccess.h>
 #include <qpe/qcopenvelope_qws.h>
 
-#include <opie2/otodoaccess.h>
-#include <opie2/ocontactaccess.h>
-
-//#include "opimfactory.h"
-#include <opie2/opimresolver.h>
+/* QT */
+#include <qcopchannel_qws.h>
 
 namespace Opie {
 

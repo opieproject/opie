@@ -26,9 +26,10 @@
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
 */
-#ifndef OPIE_PIM_STATE_H
-#define OPIE_PIM_STATE_H
+#ifndef OPIMSTATE_H
+#define OPIMSTATE_H
 
+/* QT */
 #include <qstring.h>
 
 namespace Opie {
@@ -44,7 +45,8 @@ namespace Opie {
  * ;)
  */
 class OPimState {
-public:
+
+  public:
     enum State {
         Started = 0,
         Postponed,
@@ -60,7 +62,8 @@ public:
     OPimState &operator=( const OPimState& );
     void setState( int state);
     int state()const;
-private:
+    
+  private:
     void deref();
     inline void copyInternally();
 

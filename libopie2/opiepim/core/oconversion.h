@@ -27,11 +27,10 @@
                              Boston, MA 02111-1307, USA.
 */
 
-#ifndef __oconversion_h__
-#define __oconversion_h__
+#ifndef OCONVERSION_H
+#define OCONVERSION_H
 
-/* #include <time.h> */
-/* #include <sys/types.h> */
+/* QT */
 #include <qdatetime.h>
 
 namespace Opie {

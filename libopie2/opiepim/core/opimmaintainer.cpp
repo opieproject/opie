@@ -27,7 +27,7 @@
                              Boston, MA 02111-1307, USA.
 */
 
-#include <opie2/opimmaintainer.h>
+#include "opimmaintainer.h"
 
 namespace Opie {
 OPimMaintainer::OPimMaintainer( int mode, int uid )

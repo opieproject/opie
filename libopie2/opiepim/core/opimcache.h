@@ -26,12 +26,14 @@
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
 */
-#ifndef OPIE_PIM_CACHE_H
-#define OPIE_PIM_CACHE_H
+#ifndef OPIMCACHE_H
+#define OPIMCACHE_H
 
-#include <qintcache.h>
-
+/* OPIE */
 #include <opie2/opimrecord.h>
+
+/* QT */
+#include <qintcache.h>
 
 namespace Opie {
 class OPimCacheItemPrivate;

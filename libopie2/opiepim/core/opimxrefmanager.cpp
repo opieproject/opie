@@ -26,40 +26,49 @@
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
 */
-#include <opie2/opimxrefmanager.h>
+#include "opimxrefmanager.h"
 
 namespace Opie {
 
 OPimXRefManager::OPimXRefManager() {
 }
+
 OPimXRefManager::OPimXRefManager( const OPimXRefManager& ref) {
     m_list = ref.m_list;
 }
+
 OPimXRefManager::~OPimXRefManager() {
 }
+
 OPimXRefManager &OPimXRefManager::operator=( const OPimXRefManager& ref) {
     m_list = ref.m_list;
     return *this;
 }
+
 bool OPimXRefManager::operator==( const OPimXRefManager& /*ref*/) {
     //   if ( m_list == ref.m_list ) return true;
 
     return false;
 }
+
 void OPimXRefManager::add( const OPimXRef& ref) {
     m_list.append( ref );
 }
+
 void OPimXRefManager::remove( const OPimXRef& ref) {
     m_list.remove( ref );
 }
+
 void OPimXRefManager::replace( const OPimXRef& ref) {
     m_list.remove( ref );
     m_list.append( ref );
 }
+
 void OPimXRefManager::clear() {
     m_list.clear();
 }
-QStringList OPimXRefManager::apps()const {
+
+QStringList OPimXRefManager::apps() const {
     OPimXRef::ValueList::ConstIterator it;
     QStringList list;
 
@@ -73,10 +82,12 @@ QStringList OPimXRefManager::apps()const {
     }
     return list;
 }
-OPimXRef::ValueList OPimXRefManager::list()const {
+
+OPimXRef::ValueList OPimXRefManager::list() const {
     return m_list;
 }
-OPimXRef::ValueList OPimXRefManager::list( const QString& appName )const{
+
+OPimXRef::ValueList OPimXRefManager::list( const QString& appName ) const{
     OPimXRef::ValueList list;
     OPimXRef::ValueList::ConstIterator it;
 
@@ -87,7 +98,8 @@ OPimXRef::ValueList OPimXRefManager::list( const QString& appName )const{
 
     return list;
 }
-OPimXRef::ValueList OPimXRefManager::list( int uid )const {
+
+OPimXRef::ValueList OPimXRefManager::list( int uid ) const {
     OPimXRef::ValueList list;
     OPimXRef::ValueList::ConstIterator it;
 

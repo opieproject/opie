@@ -27,15 +27,16 @@
                              Boston, MA 02111-1307, USA.
 */
 
-#ifndef OPIE_RECUR_H
-#define OPIE_RECUR_H
+#ifndef ORECUR_H
+#define ORECUR_H
 
-#include <sys/types.h>
-
+/* QT */
 #include <qdatetime.h>
 #include <qvaluelist.h>
 #include <qmap.h>
 
+/* STD */
+#include <sys/types.h>
 
 namespace Opie {
 /**
@@ -43,14 +44,15 @@ namespace Opie {
  */
 
 class ORecur {
-public:
+
+  public:
     typedef QValueList<QDate> ExceptionList;
     enum RepeatType{ NoRepeat = -1, Daily, Weekly, MonthlyDay,
                      MonthlyDate, Yearly };
     enum Days { MON = 0x01, TUE = 0x02, WED = 0x04, THU = 0x08,
                 FRI = 0x10, SAT = 0x20, SUN = 0x40 };
     enum Fields{ RType = 0, RWeekdays, RPosition, RFreq, RHasEndDate, 
-		 EndDate, Created, Exceptions };
+                EndDate, Created, Exceptions };
 
     ORecur();
     ORecur( const QMap<int, QString>& map );
@@ -114,7 +116,8 @@ public:
 
     /* almost internal */
     QString toString()const;
-private:
+    
+  private:
     bool p_nextOccurrence( const QDate& from, QDate& next );
     void deref();
     inline void checkOrModify();

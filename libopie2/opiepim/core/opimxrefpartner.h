@@ -29,6 +29,7 @@
 #ifndef OPIM_XREF_PARTNER_H
 #define OPIM_XREF_PARTNER_H
 
+/* QT */
 #include <qstring.h>
 
 namespace Opie {
@@ -40,7 +41,8 @@ namespace Opie {
  * with one tableId( fieldId ) to another.
  */
 class OPimXRefPartner {
-public:
+
+  public:
     OPimXRefPartner( const QString& service = QString::null,
                      int uid = 0, int field = -1 );
     OPimXRefPartner( const OPimXRefPartner& );
@@ -56,7 +58,8 @@ public:
     void setService( const QString& service );
     void setUid( int uid );
     void setField( int field );
-private:
+    
+  private:
     QString m_app;
     int m_uid;
     int m_field;

@@ -26,13 +26,15 @@
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
 */
-#ifndef OPIE_PIM_RESOLVER
-#define OPIE_PIM_RESOLVER
+#ifndef OPIMRESOLVER_H
+#define OPIMRESOLVER_H
 
+/* OPIE */
+#include <opie2/otemplatebase.h>
+
+/* QT */
 #include <qstring.h>
 #include <qvaluelist.h>
-
-#include <opie2/otemplatebase.h>
 
 namespace Opie {
 /**
@@ -47,7 +49,8 @@ namespace Opie {
  * USING XML is a waste of memory!!!!!
  */
 class OPimResolver {
-public:
+  
+  public:
     enum BuiltIn { TodoList = 0,
                    DateBook,
                    AddressBook
@@ -100,7 +103,8 @@ public:
      */
     OPimBase* backend( const QString& service );
     OPimBase* backend( int rtti );
-private:
+    
+  private:
     OPimResolver();
     void loadData();
     inline bool isBuiltIn( const QString& )const;
