@@ -89,9 +89,9 @@ OpieFtp::OpieFtp( QWidget* parent, const char* name, WFlags fl)
     remoteMenu  = new QPopupMenu( this );
     tabMenu = new QPopupMenu( this );
 
-#if 0
+//#if 0
     layout->addMultiCellWidget( menuBar, 0, 0, 0, 2 );
-#endif
+//#endif
 
     menuBar->insertItem( tr( "Connection" ), connectionMenu);
 //      menuBar->insertItem( tr( "Local" ), localMenu);
