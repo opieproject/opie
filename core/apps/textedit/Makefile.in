@@ -23,16 +23,31 @@ TARGET1 = lib$(TARGET).so.$(VER_MAJ)
 
 ####### Files
 
-HEADERS =	textedit.h
+HEADERS =	textedit.h \
+		fileBrowser.h \
+		fontDialog.h \
+		fileSaver.h
 SOURCES =	main.cpp \
-		textedit.cpp
+		textedit.cpp \
+		fileBrowser.cpp \
+		fontDialog.cpp \
+		fileSaver.cpp
 OBJECTS =	main.o \
-		textedit.o
+		textedit.o \
+		fileBrowser.o \
+		fontDialog.o \
+		fileSaver.o
 INTERFACES =    
 UICDECLS =      
 UICIMPLS =      
-SRCMOC	=	moc_textedit.cpp
-OBJMOC	=	moc_textedit.o
+SRCMOC	=	moc_textedit.cpp \
+		moc_fileBrowser.cpp \
+		moc_fontDialog.cpp \
+		moc_fileSaver.cpp
+OBJMOC	=	moc_textedit.o \
+		moc_fileBrowser.o \
+		moc_fontDialog.o \
+		moc_fileSaver.o
 
 
 ####### Implicit rules
@@ -64,8 +79,10 @@ $(DESTDIR)$(TARGET): $(UICDECLS) $(OBJECTS) $(OBJMOC) $(SUBLIBS)
 
 moc: $(SRCMOC)
 
-tmake:
-	tmake textedit.pro
+tmake: Makefile.in
+
+Makefile.in: textedit.pro
+	tmake textedit.pro -o Makefile.in
 
 clean:
 	-rm -f $(OBJECTS) $(OBJMOC) $(SRCMOC) $(UICIMPLS) $(UICDECLS)
@@ -100,32 +117,73 @@ REQUIRES=
 
 main.o: main.cpp \
 		textedit.h \
-		$(OPIEDIR)/include/qpe/filemanager.h \
-		$(OPIEDIR)/include/qpe/qpeapplication.h \
-		$(OPIEDIR)/include/qpedecoration_qws.h \
-		$(OPIEDIR)/include/timestring.h
+		/home/mark/source/opie/include/qpe/filemanager.h \
+		/home/mark/source/opie/include/qpe/qpeapplication.h
 
 textedit.o: textedit.cpp \
 		textedit.h \
-		$(OPIEDIR)/include/qpe/filemanager.h \
-		$(OPIEDIR)/include/qpe/global.h \
-		$(OPIEDIR)/include/qpe/fileselector.h \
-		$(OPIEDIR)/include/filemanager.h \
-		$(OPIEDIR)/include/applnk.h \
-		$(OPIEDIR)/include/qpe/applnk.h \
-		$(OPIEDIR)/include/qpe/resource.h \
-		$(OPIEDIR)/include/qpe/config.h \
-		$(OPIEDIR)/include/qpe/qpeapplication.h \
-		$(OPIEDIR)/include/qpedecoration_qws.h \
-		$(OPIEDIR)/include/timestring.h \
-		$(OPIEDIR)/include/qpe/qpemenubar.h \
-		$(OPIEDIR)/include/qpe/qpetoolbar.h
+		/home/mark/source/opie/include/qpe/filemanager.h \
+		fileBrowser.h \
+		fileSaver.h \
+		fontDialog.h \
+		/home/mark/source/opie/include/qpe/fontdatabase.h \
+		/home/mark/source/opie/include/qpe/fontfactoryinterface.h \
+		/home/mark/source/opie/include/qpe/qcom.h \
+		/home/mark/source/opie/include/qpe/quuid.h \
+		/home/mark/source/opie/include/qpe/global.h \
+		/home/mark/source/opie/include/qpe/fileselector.h \
+		/home/mark/source/opie/include/qpe/applnk.h \
+		/home/mark/source/opie/include/qpe/resource.h \
+		/home/mark/source/opie/include/qpe/config.h \
+		/home/mark/source/opie/include/qpe/qpeapplication.h \
+		/home/mark/source/opie/include/qpe/qpemenubar.h \
+		/home/mark/source/opie/include/qpe/qpetoolbar.h
+
+fileBrowser.o: fileBrowser.cpp \
+		fileBrowser.h \
+		/home/mark/source/opie/include/qpe/config.h
+
+fontDialog.o: fontDialog.cpp \
+		fontDialog.h \
+		/home/mark/source/opie/include/qpe/fontdatabase.h \
+		/home/mark/source/opie/include/qpe/fontfactoryinterface.h \
+		/home/mark/source/opie/include/qpe/qcom.h \
+		/home/mark/source/opie/include/qpe/quuid.h \
+		/home/mark/source/opie/include/qpe/config.h \
+		/home/mark/source/opie/include/qpe/qpeapplication.h
+
+fileSaver.o: fileSaver.cpp \
+		fileSaver.h \
+		/home/mark/source/opie/include/qpe/config.h \
+		/home/mark/source/opie/include/qpe/qpeapplication.h
 
 moc_textedit.o: moc_textedit.cpp \
 		textedit.h \
-		$(OPIEDIR)/include/qpe/filemanager.h
+		/home/mark/source/opie/include/qpe/filemanager.h
+
+moc_fileBrowser.o: moc_fileBrowser.cpp \
+		fileBrowser.h
+
+moc_fontDialog.o: moc_fontDialog.cpp \
+		fontDialog.h \
+		/home/mark/source/opie/include/qpe/fontdatabase.h \
+		/home/mark/source/opie/include/qpe/fontfactoryinterface.h \
+		/home/mark/source/opie/include/qpe/qcom.h \
+		/home/mark/source/opie/include/qpe/quuid.h
+
+moc_fileSaver.o: moc_fileSaver.cpp \
+		fileSaver.h
 
 moc_textedit.cpp: textedit.h
 	$(MOC) textedit.h -o moc_textedit.cpp
+
+moc_fileBrowser.cpp: fileBrowser.h
+	$(MOC) fileBrowser.h -o moc_fileBrowser.cpp
+
+moc_fontDialog.cpp: fontDialog.h
+	$(MOC) fontDialog.h -o moc_fontDialog.cpp
+
+moc_fileSaver.cpp: fileSaver.h
+	$(MOC) fileSaver.h -o moc_fileSaver.cpp
 
 
