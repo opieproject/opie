@@ -71,16 +71,14 @@ void MediaWidget::loadDefaultSkin( const SkinButtonInfo *skinInfo, uint buttonCo
 {
     Config cfg( "OpiePlayer" );
     cfg.setGroup( "Options" );
-    QString skin = cfg.readEntry( "Skin","default" );
+    QString name = cfg.readEntry( "Skin","default" );
 
-    loadSkin( skinInfo, buttonCount, skin, fileNameInfix );
+    Skin skin( name, fileNameInfix );
+    loadSkin( skinInfo, buttonCount, skin );
 }
 
-void MediaWidget::loadSkin( const SkinButtonInfo *skinInfo, uint buttonCount, const QString &name, const QString &fileNameInfix )
+void MediaWidget::loadSkin( const SkinButtonInfo *skinInfo, uint buttonCount, const Skin &skin )
 {
-    Skin skin( name, fileNameInfix );
-
-    QString skinPath = "opieplayer2/skins/" + name;
     backgroundPixmap = skin.backgroundImage();
     buttonUpImage = skin.buttonUpImage();
     buttonDownImage = skin.buttonDownImage();
