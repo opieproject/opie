@@ -17,7 +17,7 @@ HEADERS   = ofontmenu.h \
     pim/opimaccesstemplate.h \
     pim/opimaccessbackend.h \
     pim/otodoaccess.h \
-    pim/otodacessbackend.h \
+    pim/otodoaccessbackend.h \
     pim/ocontact.h \
     pim/ocontactaccess.h \
     pim/ocontactaccessbackend.h \
