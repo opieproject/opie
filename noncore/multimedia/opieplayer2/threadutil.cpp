@@ -24,6 +24,7 @@
 #include <pthread.h>
 #include <assert.h>
 #include <unistd.h>
+#include <errno.h>
 
 using namespace ThreadUtil;
 
@@ -120,6 +121,104 @@ void WaitCondition::wakeOne()
 void WaitCondition::wakeAll()
 {
     pthread_cond_broadcast( &d->waitCondition );
+}
+
+struct Thread::Data
+{
+    Data() : isRunning( false ) 
+    {}
+
+    pthread_t self;
+    Mutex guard;
+    bool isRunning;
+
+    WaitCondition finishCondition;
+};
+
+extern "C"
+{
+
+void _threadutil_terminate_thread( void *arg )
+{
+    Thread *thr = ( Thread* )arg;
+
+    assert( thr );
+
+    AutoLock locker( thr->d->guard );
+    thr->d->isRunning = false;
+    thr->d->finishCondition.wakeAll();
+}
+
+void *_threadutil_start_thread( void *arg )
+{
+    Thread *thr = ( Thread* )arg;
+
+    pthread_cleanup_push( _threadutil_terminate_thread, thr );
+
+    thr->d->isRunning = true;
+    thr->run();
+
+    pthread_cleanup_pop( true );
+
+    Thread::exit();
+    return 0; // never reached
+}
+
+}
+
+Thread::Thread()
+    : d( new Data )
+{
+}
+
+Thread::~Thread()
+{
+    assert( d->isRunning == false );
+    delete d;
+}
+
+void Thread::start()
+{
+    AutoLock lock( d->guard );
+
+    if ( d->isRunning ) {
+        qDebug( "ThreadUtil::Thread::start() called for running thread." );
+        return;
+    }
+
+    pthread_attr_t attributes;
+    pthread_attr_init( &attributes );
+    pthread_attr_setscope( &attributes, PTHREAD_SCOPE_SYSTEM );
+    int err = pthread_create( &d->self, &attributes, _threadutil_start_thread, ( void* )this );
+    if ( err != 0 ) {
+        qDebug( "ThreadUtil::Thread::start() : can't create thread: %s", strerror( err ) );
+        pthread_attr_destroy( &attributes );
+        return;
+    }
+    pthread_attr_destroy( &attributes );
+}
+
+void Thread::terminate()
+{
+    AutoLock lock( d->guard );
+    if ( !d->isRunning )
+        return;
+
+    pthread_cancel( d->self );
+}
+
+bool Thread::wait()
+{
+    AutoLock lock( d->guard );
+    if ( !d->isRunning )
+        return true;
+
+    return d->finishCondition.wait( d->guard );
+}
+
+void Thread::exit()
+{
+    pthread_exit( 0 );
 }
 
 OnewayNotifier::OnewayNotifier()

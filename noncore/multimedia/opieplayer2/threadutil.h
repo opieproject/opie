@@ -26,6 +26,12 @@
 
 class QSocketNotifier;
 
+extern "C"
+{
+    void *_threadutil_start_thread( void* );
+    void _threadutil_terminate_thread( void* );
+}
+
 namespace ThreadUtil
 {
 
@@ -79,6 +85,28 @@ namespace ThreadUtil
 
         WaitCondition( const WaitCondition & );
         WaitCondition &operator=( const WaitCondition & );
+    };
+
+    class Thread
+    {
+        friend void *::_threadutil_start_thread( void* );
+        friend void ::_threadutil_terminate_thread( void* );
+    public:
+        Thread();
+        virtual ~Thread();
+
+        void start();
+        void terminate();
+
+        bool wait();
+
+        static void exit();
+    protected:
+        virtual void run() = 0;
+
+    private:
+        struct Data;
+        Data *d;
     };
 
     class OnewayNotifier : public QObject
