@@ -28,6 +28,8 @@ public:
 
 protected:
     QGridLayout* OutputLayout;
+protected slots:
+    void saveOutput();
 };
 
 #endif // OUTPUT_H

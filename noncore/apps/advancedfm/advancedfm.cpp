@@ -129,6 +129,8 @@ AdvancedFm::AdvancedFm( )
 
     viewMenu->insertItem( tr( "Switch to Local" ), this, SLOT( switchToLocalTab() ));
     viewMenu->insertItem( tr( "Switch to Remote" ), this, SLOT( switchToRemoteTab() ));
+    viewMenu->insertSeparator();
+    viewMenu->insertItem( tr( "About" ), this, SLOT( doAbout() ));
     viewMenu->setCheckable(TRUE);
 
     TabWidget = new QTabWidget( this, "TabWidget" );
@@ -142,9 +144,9 @@ AdvancedFm::AdvancedFm( )
     Local_View = new QListView( tab, "Local_View" );
 //    Local_View->setResizePolicy( QListView::AutoOneFit );
     Local_View->addColumn( tr("File"),140);
-    Local_View->addColumn( tr("Size"),-1);
-    Local_View->setColumnAlignment(1,QListView::AlignRight);
     Local_View->addColumn( tr("Date"),-1);
+    Local_View->setColumnAlignment(1,QListView::AlignRight);
+    Local_View->addColumn( tr("Size"),-1);
     Local_View->setColumnAlignment(2,QListView::AlignRight);
     Local_View->setAllColumnsShowFocus(TRUE);
 //     Local_View->setMultiSelection( TRUE );
@@ -167,9 +169,9 @@ AdvancedFm::AdvancedFm( )
 
     Remote_View = new QListView( tab_2, "Remote_View" );
     Remote_View->addColumn( tr("File"),140);
-    Remote_View->addColumn( tr("Size"),-1);
-    Remote_View->setColumnAlignment(1,QListView::AlignRight);
     Remote_View->addColumn( tr("Date"),-1);
+    Remote_View->setColumnAlignment(1,QListView::AlignRight);
+    Remote_View->addColumn( tr("Size"),-1);
     Remote_View->setColumnAlignment(2,QListView::AlignRight);
     Remote_View->setAllColumnsShowFocus(TRUE);
 //     Remote_View->setMultiSelection( TRUE );
@@ -299,7 +301,7 @@ void AdvancedFm::populateLocalView()
             }
         }
         if(fileL !="./" && fi->exists()) {
-            item= new QListViewItem( Local_View, fileL, fileS , fileDate);
+            item= new QListViewItem( Local_View, fileL , fileDate, fileS);
 
             if(isDir || fileL.find("/",0,TRUE) != -1) {
                 if( !QDir( fi->filePath() ).isReadable())
@@ -352,7 +354,7 @@ void AdvancedFm::populateLocalView()
 //                fileS.sprintf("%d,%d", devT,  devT);
                 fileDate.sprintf("%s", ctime( &buf.st_mtime));
                 if( fileL.find(".") == -1 ){
-                    item= new QListViewItem( Local_View, fileL, fileS, fileDate);
+                    item= new QListViewItem( Local_View, fileL, fileDate, fileS);
                     pm =  Resource::loadPixmap( "UnknownDocument-14" );
                     item->setPixmap( 0,pm);
                 }
@@ -406,7 +408,7 @@ void AdvancedFm::populateRemoteView()
             }
         }
         if(fileL !="./" && fi->exists()) {
-            item= new QListViewItem( Remote_View,fileL,fileS , fileDate);
+            item= new QListViewItem( Remote_View, fileL, fileDate, fileS);
             QPixmap pm;
 
             if(isDir || fileL.find("/",0,TRUE) != -1) {
@@ -457,7 +459,7 @@ void AdvancedFm::populateRemoteView()
                 fileS.sprintf("%d,%d", (int) (buf.st_dev>>8)&0xFF, (int) buf.st_dev &0xFF);
                 fileDate.sprintf("%s", ctime( &buf.st_mtime));
                 if( fileL.find(".") == -1 ){
-                    item= new QListViewItem( Remote_View, fileL, fileS, fileDate);
+                    item= new QListViewItem( Remote_View, fileL, fileDate, fileS);
                     pm =  Resource::loadPixmap( "UnknownDocument-14" );
                     item->setPixmap( 0,pm);
                 }
@@ -1097,8 +1099,8 @@ void AdvancedFm::move() {
 //    qDebug(curFile);
     QString destFile;
     if (TabWidget->currentPageIndex() == 0) {
-        QString destFile =  currentRemoteDir.canonicalPath()+Local_View->currentItem()->text(0);
-//        qDebug(destFile);
+        QString destFile =  currentRemoteDir.canonicalPath() + "/" + Local_View->currentItem()->text(0);
+        qDebug("Destination file is "+destFile);
 
         QFile f(destFile);
         if( f.exists())
@@ -1110,8 +1112,8 @@ void AdvancedFm::move() {
            QFile::remove(curFile);
         TabWidget->setCurrentPage(1);
     } else {
-        QString destFile = currentDir.canonicalPath()+destFile + Remote_View->currentItem()->text(0);
-//         qDebug(destFile);
+       QString destFile = currentDir.canonicalPath() + "/" + Remote_View->currentItem()->text(0);
+        qDebug("Destination file is "+destFile);
 
         QFile f(destFile);
         if( f.exists())
@@ -1196,15 +1198,13 @@ void AdvancedFm::runCommand() {
             return;
         } else {
             while ( fgets( line, sizeof line, fp)) {
-                outDlg->OutputEdit->append(line);
+                QString lineStr = line;
+                lineStr=lineStr.left(lineStr.length()-1);
+                outDlg->OutputEdit->append(lineStr);
                 outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
-                  
             }
-              
         }
-    
     }
-
 }
 
 void AdvancedFm::runCommandStd() {
@@ -1260,4 +1260,11 @@ void AdvancedFm::fileStatus() {
         }
               
     }
+}
+
+void AdvancedFm::doAbout() {
+    QMessageBox::message("AdvancedFm","Advanced FileManager\n"
+                         "is copyright 2002 by\n"
+                         "L.J.Potter<llornkcor@handhelds.org>\n"
+                         "and is licensed by the GPL");
 }

@@ -113,6 +113,7 @@ protected slots:
   bool copyFile( const QString & , const QString & );
   void move();
   void fileStatus();
+  void doAbout();
 };
 
 #endif // ADVANCEDFM_H
