@@ -1,0 +1,7 @@
+[Desktop Entry]
+Comment = An advanced file manager program
+Exec = advancedfm
+File = advancedfm
+Icon = FileBrowser
+Name = AdvancedFM
+Type = Application
