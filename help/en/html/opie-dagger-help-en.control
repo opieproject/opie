@@ -1,0 +1,10 @@
+Package: opie-dagger-help-en
+Files: help/en/html/dagger.html help/en/html/dagger/*
+Priority: optional
+Section: opie/onlinedoc
+Maintainer: Dan Williams (drw@handhelds.org)
+Architecture: all
+Depends: opie-dagger
+License: GPL
+Description: Dagger help files (English)
+Version: $QPE_VERSION$EXTRAVERSION
