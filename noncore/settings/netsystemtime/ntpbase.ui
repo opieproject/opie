@@ -1,7 +1,7 @@
 <!DOCTYPE UI><UI>
 <class>NtpBase</class>
 <widget>
-    <class>QWidget</class>
+    <class>QDialog</class>
     <property stdset="1">
         <name>name</name>
         <cstring>NtpBase</cstring>
@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>292</width>
+            <width>280</width>
             <height>337</height>
         </rect>
     </property>
@@ -46,6 +46,42 @@
             <property>
                 <name>layoutSpacing</name>
             </property>
+            <widget>
+                <class>QWidget</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>tabMain</cstring>
+                </property>
+                <attribute>
+                    <name>title</name>
+                    <string>Main</string>
+                </attribute>
+                <grid>
+                    <property stdset="1">
+                        <name>margin</name>
+                        <number>3</number>
+                    </property>
+                    <property stdset="1">
+                        <name>spacing</name>
+                        <number>3</number>
+                    </property>
+                    <widget row="0"  column="0" >
+                        <class>QFrame</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>FrameSystemTime</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>frameShape</name>
+                            <enum>StyledPanel</enum>
+                        </property>
+                        <property stdset="1">
+                            <name>frameShadow</name>
+                            <enum>Raised</enum>
+                        </property>
+                    </widget>
+                </grid>
+            </widget>
             <widget>
                 <class>QWidget</class>
                 <property stdset="1">
@@ -257,7 +293,7 @@
                 </property>
                 <attribute>
                     <name>title</name>
-                    <string>Auto Correction</string>
+                    <string>Auto</string>
                 </attribute>
                 <grid>
                     <property stdset="1">
@@ -361,11 +397,11 @@
                 <class>QWidget</class>
                 <property stdset="1">
                     <name>name</name>
-                    <cstring>TabDebug</cstring>
+                    <cstring>TabSettings</cstring>
                 </property>
                 <attribute>
                     <name>title</name>
-                    <string>Debug</string>
+                    <string>Settings</string>
                 </attribute>
                 <grid>
                     <property stdset="1">
@@ -374,20 +410,71 @@
                     </property>
                     <property stdset="1">
                         <name>spacing</name>
-                        <number>6</number>
+                        <number>3</number>
                     </property>
                     <widget row="0"  column="0" >
-                        <class>QMultiLineEdit</class>
+                        <class>QFrame</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>outPut</cstring>
+                            <cstring>FrameSettings</cstring>
                         </property>
                         <property stdset="1">
-                            <name>wordWrap</name>
-                            <enum>WidgetWidth</enum>
+                            <name>frameShape</name>
+                            <enum>StyledPanel</enum>
+                        </property>
+                        <property stdset="1">
+                            <name>frameShadow</name>
+                            <enum>Raised</enum>
                         </property>
                     </widget>
                 </grid>
+            </widget>
+            <widget>
+                <class>QWidget</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>tabSetTime</cstring>
+                </property>
+                <attribute>
+                    <name>title</name>
+                    <string>Manual</string>
+                </attribute>
+                <vbox>
+                    <property stdset="1">
+                        <name>margin</name>
+                        <number>2</number>
+                    </property>
+                    <property stdset="1">
+                        <name>spacing</name>
+                        <number>2</number>
+                    </property>
+                    <widget>
+                        <class>QFrame</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>FrameSetTime</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>frameShape</name>
+                            <enum>StyledPanel</enum>
+                        </property>
+                        <property stdset="1">
+                            <name>frameShadow</name>
+                            <enum>Raised</enum>
+                        </property>
+                    </widget>
+                    <widget>
+                        <class>QPushButton</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>PushButtonSetManualTime</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Set time</string>
+                        </property>
+                    </widget>
+                </vbox>
             </widget>
         </widget>
     </grid>

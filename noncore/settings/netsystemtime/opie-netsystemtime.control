@@ -1,6 +1,7 @@
 Files: bin/netsystemtime apps/Settings/ntpdatetime.desktop
 Priority: optional
 Section: opie/settings
+Depends: ntpdate
 Maintainer: Patrick S. Vogt <tille@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION

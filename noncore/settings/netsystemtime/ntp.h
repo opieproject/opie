@@ -1,6 +1,6 @@
 #ifndef NTP_H
 #define NTP_H
-#include "ntpbase.h"
+#include "settime.h"
 #include <qdatetime.h>
 #include <qtimer.h>
 
@@ -8,7 +8,7 @@ class OProcess;
 class QString;
 
 
-class Ntp : public NtpBase
+class Ntp : public SetDateTime
 {
     Q_OBJECT
 
@@ -17,6 +17,9 @@ public:
     ~Ntp();
 
     OProcess *ntpProcess;
+
+protected:
+    virtual void accept();
 
 private:
 		QString _ntpOutput;

@@ -18,7 +18,7 @@
 
 
 Ntp::Ntp( QWidget* parent,  const char* name, WFlags fl )
-    : NtpBase( parent, name, fl )
+    : SetDateTime( parent, name, fl )
 {
 	Config cfg("ntp",Config::User);
   cfg.setGroup("settings");
@@ -40,6 +40,11 @@ Ntp::Ntp( QWidget* parent,  const char* name, WFlags fl )
 
 Ntp::~Ntp()
 {
+
+}
+
+void Ntp::accept()
+{
 	Config cfg("ntp",Config::User);
   cfg.setGroup("settings");
   cfg.writeEntry("ntpServer", LineEditNtpServer->text());
@@ -54,7 +59,6 @@ void Ntp::slotRunNtp()
 	bool ret = ntpProcess->start(OProcess::NotifyOnExit,OProcess::AllOutput);
   if ( !ret ) {
      qDebug("Error while executing ntp");
-     outPut->append("\nError while executing\n\n");
   }
 }
 
@@ -65,7 +69,7 @@ void  Ntp::getNtpOutput(OProcess *proc, char *buffer, int buflen)
   lineStr=lineStr.left(buflen);
   if (lineStr!=lineStrOld)
   {
-	        outPut->append(lineStr);
+//	        outPut->append(lineStr);
          	_ntpOutput += lineStr;
   }
   lineStrOld = lineStr;
@@ -90,7 +94,7 @@ void  Ntp::ntpFinished(OProcess*)
    	cfg.writeEntry("count",lookupCount);
 	  cfg.setGroup("lookup_"+QString::number(lookupCount));
     _shiftPerSec =  timeShift / secsSinceLast;
-    float nextCorr = _maxOffset / _shiftPerSec;
+//    float nextCorr = _maxOffset / _shiftPerSec;
    	qDebug("secs since last lookup %i", secsSinceLast);qDebug("timeshift since last lookup %f", timeShift);qDebug("timeshift since per sec %f", _shiftPerSec);
 		cfg.writeEntry("secsSinceLast",secsSinceLast);
 		cfg.writeEntry("timeShift",QString::number(timeShift));
@@ -105,7 +109,6 @@ void Ntp::correctClock()
  	int lastTime = cfg.readNumEntry("time",0);
   int now = TimeConversion::toUTC( QDateTime::currentDateTime() );
   int corr = int((now - lastTime) * _shiftPerSec);
-	outPut->append( "time will be shifted by "+QString::number(corr)+ "secs");
   struct timeval myTv;
   myTv.tv_sec = TimeConversion::toUTC( QDateTime::currentDateTime().addSecs(corr) );
   myTv.tv_usec = 0;
@@ -173,8 +176,8 @@ void Ntp::preditctTime()
 	Config cfg("ntp",Config::User);
   cfg.setGroup("lookups");
  	int lastTime = cfg.readNumEntry("time",0);
+  setenv( "TZ", tz->currentZone(), 1 );
   int now = TimeConversion::toUTC( QDateTime::currentDateTime() );
   int corr = int((now - lastTime) * _shiftPerSec);
-	outPut->append( "time will be shifted by "+QString::number(corr)+ "secs");
  	TextLabelPredTime->setText(QDateTime::currentDateTime().addSecs(corr).toString());
 }
