@@ -1,11 +1,14 @@
 
 #include "backuprestore.h"
-//#include "output.h"
 #include "errordialog.h"
 
+/* OPIE */
+#include <opie2/ostorageinfo.h>
+#include <qpe/qpeapplication.h>
+
+/* QT */
 #include <qapplication.h>
 #include <qmultilineedit.h>
-
 #include <qdir.h>
 #include <qfile.h>
 #include <qfileinfo.h>
@@ -21,8 +24,8 @@
 #include <qregexp.h>
 #include <qtextstream.h>
 #include <qtextview.h>
-#include <opie2/ostorageinfo.h>
 
+/* STD */
 #include <errno.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -41,7 +44,6 @@ const QString tempFileName = "/tmp/backup.err";
 BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name,  WFlags fl)
         : BackupAndRestoreBase(parent, name,  fl)
 {
-    this->showMaximized();
     backupList->header()->hide();
     restoreList->header()->hide();
     connect(backupButton, SIGNAL(clicked()),
@@ -130,6 +132,7 @@ BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name,  WFlags f
             }
         }
     }
+    QPEApplication::showWidget( this );
 }
 
 BackupAndRestore::~BackupAndRestore()
@@ -287,8 +290,7 @@ void BackupAndRestore::backup()
             {
                 pErrDialog->m_textarea->setText( "Unable to open File: /tmp/backup.er" );
             }
-            pErrDialog->showMaximized();
-            pErrDialog->exec();
+            QPEApplication::execDialog( pErrDialog );
             delete pErrDialog;
             break;
         }
@@ -452,8 +454,7 @@ void BackupAndRestore::restore()
             {
                 pErrDialog->m_textarea->setText( tr( "Unable to open File: %1" ).arg( "/tmp/backup.er" ) );
             }
-            pErrDialog->showMaximized();
-            pErrDialog->exec();
+            QPEApplication::execDialog( pErrDialog );
             delete pErrDialog;
 
             setCaption(tr("Backup and Restore.. Failed !!"));

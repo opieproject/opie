@@ -24,13 +24,21 @@
     --        :-=`           Free Software Foundation, Inc.,
                              59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
-
+ 
 */
 
-#include <fstream>
-#include <algorithm>
-using namespace std;
+#include "settingsimpl.h"
+#include "global.h"
 
+/* OPIE */
+#include <opie/otabwidget.h>
+#ifdef QWS
+#include <qpe/config.h>
+#include <qpe/resource.h>
+#endif
+#include <qpe/qpeapplication.h>
+
+/* QT */
 #include <qcheckbox.h>
 #include <qgroupbox.h>
 #include <qlabel.h>
@@ -39,22 +47,16 @@ using namespace std;
 #include <qlistbox.h>
 #include <qpushbutton.h>
 
-#include <opie/otabwidget.h>
-
-#ifdef QWS
-#include <qpe/config.h>
-#include <qpe/resource.h>
-#endif
-
-#include "settingsimpl.h"
-
-#include "global.h"
+/* STD */
+#include <fstream>
+#include <algorithm>
+using namespace std;
 
 SettingsImpl :: SettingsImpl( DataManager *dataManager, QWidget * parent, const char* name, bool modal, WFlags fl )
-    : QDialog( parent, name, modal, fl )
+        : QDialog( parent, name, modal, fl )
 {
     setCaption( tr( "Configuration" ) );
-    
+
     // Setup layout to make everything pretty
     QVBoxLayout *layout = new QVBoxLayout( this );
     layout->setMargin( 2 );
@@ -68,7 +70,7 @@ SettingsImpl :: SettingsImpl( DataManager *dataManager, QWidget * parent, const 
     tabwidget->addTab( initDestinationTab(), "aqpkg/desttab", tr( "Destinations" ) );
     tabwidget->addTab( initProxyTab(), "aqpkg/proxytab", tr( "Proxies" ) );
     tabwidget->setCurrentTab( tr( "Servers" ) );
-    
+
     dataMgr = dataManager;
     setupData();
     changed = false;
@@ -78,18 +80,15 @@ SettingsImpl :: SettingsImpl( DataManager *dataManager, QWidget * parent, const 
 
 SettingsImpl :: ~SettingsImpl()
 {
-
 }
 
 bool SettingsImpl :: showDlg()
 {
-	showMaximized();
-	exec();
+    QPEApplication::execDialog( this );
+    if ( changed )
+        dataMgr->writeOutIpkgConf();
 
-	if ( changed )
-		dataMgr->writeOutIpkgConf();
-
-	return changed;
+    return changed;
 }
 
 QWidget *SettingsImpl :: initServerTab()
@@ -118,18 +117,18 @@ QWidget *SettingsImpl :: initServerTab()
     QPushButton *btn = new QPushButton( Resource::loadPixmap( "new" ), tr( "New" ), container );
     connect( btn, SIGNAL( clicked() ), this, SLOT( newServer() ) );
     layout->addWidget( btn, 1, 0 );
-    
+
     btn = new QPushButton( Resource::loadPixmap( "trash" ), tr( "Delete" ), container );
     connect( btn, SIGNAL( clicked() ), this, SLOT( removeServer() ) );
     layout->addWidget( btn, 1, 1 );
-    
+
     QGroupBox *grpbox = new QGroupBox( 0, Qt::Vertical, tr( "Server" ), container );
     grpbox->layout()->setSpacing( 2 );
     grpbox->layout()->setMargin( 4 );
     layout->addMultiCellWidget( grpbox, 2, 2, 0, 1 );
 
     QGridLayout *grplayout = new QGridLayout( grpbox->layout() );
-    
+
     QLabel *label = new QLabel( tr( "Name:" ), grpbox );
     grplayout->addWidget( label, 0, 0 );
     servername = new QLineEdit( grpbox );
@@ -142,11 +141,11 @@ QWidget *SettingsImpl :: initServerTab()
 
     active = new QCheckBox( tr( "Active Server" ), grpbox );
     grplayout->addMultiCellWidget( active, 2, 2, 0, 1 );
-    
+
     btn = new QPushButton( Resource::loadPixmap( "edit" ), tr( "Update" ), grpbox );
     connect( btn, SIGNAL( clicked() ), this, SLOT( changeServerDetails() ) );
     grplayout->addMultiCellWidget( btn, 3, 3, 0, 1 );
-    
+
     return control;
 }
 
@@ -176,18 +175,18 @@ QWidget *SettingsImpl :: initDestinationTab()
     QPushButton *btn = new QPushButton( Resource::loadPixmap( "new" ), tr( "New" ), container );
     connect( btn, SIGNAL( clicked() ), this, SLOT( newDestination() ) );
     layout->addWidget( btn, 1, 0 );
-    
+
     btn = new QPushButton( Resource::loadPixmap( "trash" ), tr( "Delete" ), container );
     connect( btn, SIGNAL( clicked() ), this, SLOT( removeDestination() ) );
     layout->addWidget( btn, 1, 1 );
-    
+
     QGroupBox *grpbox = new QGroupBox( 0, Qt::Vertical, tr( "Destination" ), container );
     grpbox->layout()->setSpacing( 2 );
     grpbox->layout()->setMargin( 4 );
     layout->addMultiCellWidget( grpbox, 2, 2, 0, 1 );
 
     QGridLayout *grplayout = new QGridLayout( grpbox->layout() );
-    
+
     QLabel *label = new QLabel( tr( "Name:" ), grpbox );
     grplayout->addWidget( label, 0, 0 );
     destinationname = new QLineEdit( grpbox );
@@ -200,11 +199,11 @@ QWidget *SettingsImpl :: initDestinationTab()
 
     linkToRoot = new QCheckBox( tr( "Link to root" ), grpbox );
     grplayout->addMultiCellWidget( linkToRoot, 2, 2, 0, 1 );
-    
+
     btn = new QPushButton( Resource::loadPixmap( "edit" ), tr( "Update" ), grpbox );
     connect( btn, SIGNAL( clicked() ), this, SLOT( changeDestinationDetails() ) );
     grplayout->addMultiCellWidget( btn, 3, 3, 0, 1 );
-    
+
     return control;
 }
 
@@ -235,7 +234,7 @@ QWidget *SettingsImpl :: initProxyTab()
     grplayout->addWidget( txtHttpProxy );
     chkHttpProxyEnabled = new QCheckBox( tr( "Enabled" ), grpbox );
     grplayout->addWidget( chkHttpProxyEnabled );
-    
+
     grpbox = new QGroupBox( 0, Qt::Vertical, tr( "FTP Proxy" ), container );
     grpbox->layout()->setSpacing( 2 );
     grpbox->layout()->setMargin( 4 );
@@ -245,7 +244,7 @@ QWidget *SettingsImpl :: initProxyTab()
     grplayout->addWidget( txtFtpProxy );
     chkFtpProxyEnabled = new QCheckBox( tr( "Enabled" ), grpbox );
     grplayout->addWidget( chkFtpProxyEnabled );
-    
+
     QLabel *label = new QLabel( tr( "Username:" ), container );
     layout->addWidget( label, 2, 0 );
     txtUsername = new QLineEdit( container );
@@ -259,7 +258,7 @@ QWidget *SettingsImpl :: initProxyTab()
     QPushButton *btn = new QPushButton( Resource::loadPixmap( "edit" ), tr( "Update" ), container );
     connect( btn, SIGNAL( clicked() ), this, SLOT( proxyApplyChanges() ) );
     layout->addMultiCellWidget( btn, 4, 4, 0, 1 );
-    
+
     return control;
 }
 
@@ -269,20 +268,20 @@ void SettingsImpl :: setupData()
     QString serverName;
     QListIterator<Server> it( dataMgr->getServerList() );
     for ( ; it.current(); ++it )
-	{
+    {
         serverName = it.current()->getServerName();
         if ( serverName == LOCAL_SERVER || serverName == LOCAL_IPKGS )
             continue;
 
         servers->insertItem( serverName );
-	}
+    }
 
 
     // add destinations
     QListIterator<Destination> it2( dataMgr->getDestinationList() );
     for ( ; it2.current(); ++it2 )
         destinations->insertItem( it2.current()->getDestinationName() );
-    
+
     // setup proxy tab
     txtHttpProxy->setText( dataMgr->getHttpProxy() );
     txtFtpProxy->setText( dataMgr->getFtpProxy() );
@@ -336,53 +335,53 @@ void SettingsImpl :: removeServer()
 
 void SettingsImpl :: changeServerDetails()
 {
-	changed = true;
+    changed = true;
 
-	QString newName = servername->text();
-	
-	// Convert any spaces to underscores
-	char *tmpStr = new char[newName.length() + 1];
-	for ( unsigned int i = 0 ; i < newName.length() ; ++i )
-	{
-		if ( newName[i] == ' ' )
-			tmpStr[i] = '_';
-		else
-			tmpStr[i] = newName[i].latin1();
-	}
-	tmpStr[newName.length()] = '\0';
-	
-	newName = tmpStr;
-	delete tmpStr;
-	
-	if ( !newserver )
-	{
-		Server *s = dataMgr->getServer( servers->currentText() );
-		if ( s )
-		{
-			// Update url
-			s->setServerUrl( serverurl->text() );
-			s->setActive( active->isChecked() );
+    QString newName = servername->text();
 
-			// Check if server name has changed, if it has then we need to replace the key in the map
-			if ( serverName != newName )
-			{
-				// Update server name
-				s->setServerName( newName );
-			}
-		
-			// Update list box
-			servers->changeItem( newName, currentSelectedServer );
-		}
-	}
-	else
-	{
+    // Convert any spaces to underscores
+    char *tmpStr = new char[newName.length() + 1];
+    for ( unsigned int i = 0 ; i < newName.length() ; ++i )
+    {
+        if ( newName[i] == ' ' )
+            tmpStr[i] = '_';
+        else
+            tmpStr[i] = newName[i].latin1();
+    }
+    tmpStr[newName.length()] = '\0';
+
+    newName = tmpStr;
+    delete tmpStr;
+
+    if ( !newserver )
+    {
+        Server *s = dataMgr->getServer( servers->currentText() );
+        if ( s )
+        {
+            // Update url
+            s->setServerUrl( serverurl->text() );
+            s->setActive( active->isChecked() );
+
+            // Check if server name has changed, if it has then we need to replace the key in the map
+            if ( serverName != newName )
+            {
+                // Update server name
+                s->setServerName( newName );
+            }
+
+            // Update list box
+            servers->changeItem( newName, currentSelectedServer );
+        }
+    }
+    else
+    {
         Server s( newName, serverurl->text() );
         dataMgr->getServerList().append( new Server( newName, serverurl->text() ) );
         dataMgr->getServerList().last()->setActive( active->isChecked() );
-		servers->insertItem( newName );
-		servers->setCurrentItem( servers->count() );
-		newserver = false;
-	}
+        servers->insertItem( newName );
+        servers->setCurrentItem( servers->count() );
+        newserver = false;
+    }
 }
 
 //------------------ Destinations tab ----------------------
@@ -409,10 +408,10 @@ void SettingsImpl :: editDestination( int sel )
 
 void SettingsImpl :: newDestination()
 {
-	newdestination = true;
-	destinationname->setText( "" );
-	destinationurl->setText( "" );
-	destinationname->setFocus();
+    newdestination = true;
+    destinationname->setText( "" );
+    destinationurl->setText( "" );
+    destinationname->setFocus();
     linkToRoot->setChecked( true );
 }
 
@@ -429,7 +428,7 @@ void SettingsImpl :: removeDestination()
 
 void SettingsImpl :: changeDestinationDetails()
 {
-	changed = true;
+    changed = true;
 
 #ifdef QWS
     Config cfg( "aqpkg" );
@@ -437,46 +436,48 @@ void SettingsImpl :: changeDestinationDetails()
 #endif
 
     QString newName = destinationname->text();
-	if ( !newdestination )
-	{
-		Destination *d = dataMgr->getDestination( destinations->currentText() );
-		if ( d )
-		{
-			// Update url
-			d->setDestinationPath( destinationurl->text() );
-        	d->linkToRoot( linkToRoot->isChecked() );
+    if ( !newdestination )
+    {
+        Destination *d = dataMgr->getDestination( destinations->currentText() );
+        if ( d )
+        {
+            // Update url
+            d->setDestinationPath( destinationurl->text() );
+            d->linkToRoot( linkToRoot->isChecked() );
 
-			// Check if server name has changed, if it has then we need to replace the key in the map
-			if ( destinationName != newName )
-			{
-				// Update server name
-				d->setDestinationName( newName );
+            // Check if server name has changed, if it has then we need to replace the key in the map
+            if ( destinationName != newName )
+            {
+                // Update server name
+                d->setDestinationName( newName );
 
-				// Update list box
-				destinations->changeItem( newName, currentSelectedDestination );
-			}
+                // Update list box
+                destinations->changeItem( newName, currentSelectedDestination );
+            }
 
 #ifdef QWS
-			QString key = newName;
-			key += "_linkToRoot";
-			int val = d->linkToRoot();
-			cfg.writeEntry( key, val );
-#endif      
-		}  
-	}
-	else
-	{
-		dataMgr->getDestinationList().append( new Destination( newName, destinationurl->text() ) );
-		destinations->insertItem( newName );
-		destinations->setCurrentItem( destinations->count() );
-		newdestination = false;
+            QString key = newName;
+            key += "_linkToRoot";
+            int val = d->linkToRoot();
+            cfg.writeEntry( key, val );
+#endif
+
+        }
+    }
+    else
+    {
+        dataMgr->getDestinationList().append( new Destination( newName, destinationurl->text() ) );
+        destinations->insertItem( newName );
+        destinations->setCurrentItem( destinations->count() );
+        newdestination = false;
 
 #ifdef QWS
         QString key = newName;
         key += "_linkToRoot";
         cfg.writeEntry( key, true );
 #endif
-	}
+
+    }
 }
 
 //------------------ Proxy tab ----------------------

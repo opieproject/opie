@@ -17,22 +17,25 @@
 **
 **********************************************************************/
 
+#include "processinfo.h"
+#include "detail.h"
+
+/* OPIE */
 #include <qpe/qpeapplication.h>
 
+/* QT */
 #include <qdir.h>
 #include <qlayout.h>
 #include <qmessagebox.h>
 #include <qtimer.h>
 #include <qwhatsthis.h>
 
+/* STD */
 #include <sys/types.h>
 #include <signal.h>
 
-#include "processinfo.h"
-#include "detail.h"
-
 ProcessInfo::ProcessInfo( QWidget* parent,  const char* name, WFlags fl )
-    : QWidget( parent, name, fl )
+        : QWidget( parent, name, fl )
 {
     QGridLayout *layout = new QGridLayout( this );
     layout->setSpacing( 4 );
@@ -49,10 +52,10 @@ ProcessInfo::ProcessInfo( QWidget* parent,  const char* name, WFlags fl )
     ProcessView->setAllColumnsShowFocus( TRUE );
     QPEApplication::setStylusOperation( ProcessView->viewport(), QPEApplication::RightOnHold );
     connect( ProcessView, SIGNAL( rightButtonPressed( QListViewItem *, const QPoint &, int ) ),
-            this, SLOT( viewProcess( QListViewItem * ) ) );
+             this, SLOT( viewProcess( QListViewItem * ) ) );
     layout->addMultiCellWidget( ProcessView, 0, 0, 0, 1 );
     QWhatsThis::add( ProcessView, tr( "This is a list of all the processes on this handheld device.\n\nClick and hold on a process to see additional information about the process, or to send a signal to it." ) );
-    
+
     SignalCB = new QComboBox( FALSE, this, "SignalCB" );
     SignalCB->insertItem( " 1: SIGHUP" );
     SignalCB->insertItem( " 2: SIGINT" );
@@ -86,15 +89,14 @@ ProcessInfo::ProcessInfo( QWidget* parent,  const char* name, WFlags fl )
 }
 
 ProcessInfo::~ProcessInfo()
-{
-}
+{}
 
 void ProcessInfo::updateData()
 {
     int pid, ppid, pgrp, session, tty, tpgid, utime, stime, cutime, cstime, counter, priority, starttime,
-       signal, blocked, sigignore, sigcatch;
+    signal, blocked, sigignore, sigcatch;
     uint flags, minflt, cminflt, majflt, cmajflt, timeout, itrealvalue, vsize, rss, rlim, startcode,
-         endcode, startstack, kstkesp, kstkeip, wchan;
+    endcode, startstack, kstkesp, kstkeip, wchan;
     char state;
     char comm[64];
 
@@ -104,7 +106,7 @@ void ProcessInfo::updateData()
     {
         selectedpid = curritem->text( 0 );
     }
-    
+
     ProcessView->clear();
 
     QListViewItem *newitem;
@@ -126,11 +128,11 @@ void ProcessInfo::updateData()
                 if ( procfile )
                 {
                     fscanf( procfile,
-                           "%d %s %c %d %d %d %d %d %u %u %u %u %u %d %d %d %d %d %d %u %u %d %u %u %u %u %u %u %u %u %d %d %d %d %u",
-                           &pid, comm, &state, &ppid, &pgrp, &session,&tty, &tpgid, &flags, &minflt, &cminflt,
-                           &majflt, &cmajflt, &utime, &stime, &cutime, &cstime, &counter, &priority, &timeout,
-                           &itrealvalue, &starttime, &vsize, &rss, &rlim, &startcode, &endcode, &startstack,
-                           &kstkesp, &kstkeip, &signal, &blocked, &sigignore, &sigcatch, &wchan );
+                            "%d %s %c %d %d %d %d %d %u %u %u %u %u %d %d %d %d %d %d %u %u %d %u %u %u %u %u %u %u %u %d %d %d %d %u",
+                            &pid, comm, &state, &ppid, &pgrp, &session,&tty, &tpgid, &flags, &minflt, &cminflt,
+                            &majflt, &cmajflt, &utime, &stime, &cutime, &cstime, &counter, &priority, &timeout,
+                            &itrealvalue, &starttime, &vsize, &rss, &rlim, &startcode, &endcode, &startstack,
+                            &kstkesp, &kstkeip, &signal, &blocked, &sigignore, &sigcatch, &wchan );
                     processnum = processnum.rightJustify( 5, ' ' );
                     QString processcmd = QString( comm ).replace( QRegExp( "[()]" ), "" );
                     QString processstatus = QChar(state);
@@ -155,26 +157,26 @@ void ProcessInfo::updateData()
 
 void ProcessInfo::slotSendClicked()
 {
-	QListViewItem *currprocess = ProcessView->currentItem();
-	if ( !currprocess )
-	{
-		return;
-	}
-	
-	QString capstr = tr( "Really want to send %1\nto this process?" ).arg( SignalCB->currentText() );
+    QListViewItem *currprocess = ProcessView->currentItem();
+    if ( !currprocess )
+    {
+        return;
+    }
 
-	
-	if ( QMessageBox::warning( this, currprocess->text( 1 ), capstr,
-		 QMessageBox::Yes | QMessageBox::Default, QMessageBox::No | QMessageBox::Escape ) == QMessageBox::Yes )
-	{
-		currprocess = ProcessView->currentItem();
-		if ( currprocess )
-		{
-			QString sigstr = SignalCB->currentText();
-			sigstr.truncate(2);
-			int sigid = sigstr.toUInt();
-			kill( currprocess->text( 0 ).stripWhiteSpace().toUInt(), sigid );
-		}
+    QString capstr = tr( "Really want to send %1\nto this process?" ).arg( SignalCB->currentText() );
+
+
+    if ( QMessageBox::warning( this, currprocess->text( 1 ), capstr,
+                               QMessageBox::Yes | QMessageBox::Default, QMessageBox::No | QMessageBox::Escape ) == QMessageBox::Yes )
+    {
+        currprocess = ProcessView->currentItem();
+        if ( currprocess )
+        {
+            QString sigstr = SignalCB->currentText();
+            sigstr.truncate(2);
+            int sigid = sigstr.toUInt();
+            kill( currprocess->text( 0 ).stripWhiteSpace().toUInt(), sigid );
+        }
     }
 
 }
@@ -196,5 +198,5 @@ void ProcessInfo::viewProcess( QListViewItem *process )
         }
         fclose( statfile );
     }
-    ProcessDtl->showMaximized();
+    QPEApplication::showWidget( ProcessDtl );
 }

@@ -27,25 +27,28 @@
 
 */
 
+#include "global.h"
+#include "instoptionsimpl.h"
+#include "ipkg.h"
+
+/* OPIE */
 #ifdef QWS
 #include <qpe/config.h>
 #endif
+#include <qpe/qpeapplication.h>
 
+/* QT */
 #include <qcheckbox.h>
 #include <qcombobox.h>
 #include <qgroupbox.h>
 #include <qlabel.h>
 #include <qlayout.h>
 
-#include "global.h"
-#include "instoptionsimpl.h"
-#include "ipkg.h"
-
 InstallOptionsDlgImpl::InstallOptionsDlgImpl( int flags, int verb, QWidget * parent, const char* name, bool modal, WFlags fl )
-    : QDialog( parent, name, modal, fl )
+        : QDialog( parent, name, modal, fl )
 {
     setCaption( tr( "Options" ) );
-    
+
     QVBoxLayout *layout = new QVBoxLayout( this );
     layout->setMargin( 2 );
     layout->setSpacing( 4 );
@@ -56,7 +59,7 @@ InstallOptionsDlgImpl::InstallOptionsDlgImpl( int flags, int verb, QWidget * par
     layout->addWidget( grpbox );
 
     QVBoxLayout *grplayout = new QVBoxLayout( grpbox->layout() );
-    
+
     forceDepends = new QCheckBox( tr( "Force Depends" ), grpbox );
     grplayout->addWidget( forceDepends );
 
@@ -71,7 +74,7 @@ InstallOptionsDlgImpl::InstallOptionsDlgImpl( int flags, int verb, QWidget * par
 
     QLabel *l = new QLabel( tr( "Information Level" ), grpbox );
     grplayout->addWidget( l );
-    
+
     verboseIpkg = new QComboBox( grpbox );
     verboseIpkg->insertItem( tr( "Errors only" ) );
     verboseIpkg->insertItem( tr( "Normal messages" ) );
@@ -79,29 +82,28 @@ InstallOptionsDlgImpl::InstallOptionsDlgImpl( int flags, int verb, QWidget * par
     verboseIpkg->insertItem( tr( "Troubleshooting output" ) );
     verboseIpkg->setCurrentItem( verb );
     grplayout->addWidget( verboseIpkg );
-    
-    grplayout->addItem( new QSpacerItem( 1, 1, QSizePolicy::Minimum, QSizePolicy::Expanding ) );
-    
-    if ( flags & FORCE_DEPENDS )
-    	forceDepends->setChecked( true );
-    if ( flags & FORCE_REINSTALL )
-    	forceReinstall->setChecked( true );
-    if ( flags & FORCE_REMOVE )
-    	forceRemove->setChecked( true );
-    if ( flags & FORCE_OVERWRITE )
-    	forceOverwrite->setChecked( true );
-//    if ( flags & VERBOSE_WGET )
-//    	verboseWget->setChecked( true );
-//    if ( flags & MAKE_LINKS )
-//    	makeLinks->setChecked( true );
 
-  	showMaximized();
+    grplayout->addItem( new QSpacerItem( 1, 1, QSizePolicy::Minimum, QSizePolicy::Expanding ) );
+
+    if ( flags & FORCE_DEPENDS )
+        forceDepends->setChecked( true );
+    if ( flags & FORCE_REINSTALL )
+        forceReinstall->setChecked( true );
+    if ( flags & FORCE_REMOVE )
+        forceRemove->setChecked( true );
+    if ( flags & FORCE_OVERWRITE )
+        forceOverwrite->setChecked( true );
+    //    if ( flags & VERBOSE_WGET )
+    //    	verboseWget->setChecked( true );
+    //    if ( flags & MAKE_LINKS )
+    //    	makeLinks->setChecked( true );
+
+    QPEApplication::showDialog( this );
 
 }
 
 InstallOptionsDlgImpl::~InstallOptionsDlgImpl()
-{
-}
+{}
 
 
 int InstallOptionsDlgImpl :: getFlags()

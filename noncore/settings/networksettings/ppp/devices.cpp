@@ -1,7 +1,7 @@
 /*
  *           kPPP: A pppd front end for the KDE project
  *
- * $Id: devices.cpp,v 1.2 2003-08-09 17:14:55 kergoth Exp $
+ * $Id: devices.cpp,v 1.3 2004-02-21 16:02:02 ar Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -24,25 +24,31 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <qdir.h>
-#include <stdlib.h>
-#include <qlayout.h>
-#include <qtabwidget.h>
-#include <qtabdialog.h>
-#include <qwhatsthis.h>
-#include <qmessagebox.h>
-
-#include <qapplication.h>
-#include <qbuttongroup.h>
-#include <qmessagebox.h>
-#include <qvgroupbox.h>
-
 #include "interfaceppp.h"
 #include "devices.h"
 #include "authwidget.h"
 #include "pppdata.h"
 #include "edit.h"
 #include "general.h"
+
+/* OPIE */
+#include <qpe/qpeapplication.h>
+
+/* QT */
+#include <qdir.h>
+#include <qlayout.h>
+#include <qtabwidget.h>
+#include <qtabdialog.h>
+#include <qwhatsthis.h>
+#include <qmessagebox.h>
+#include <qapplication.h>
+#include <qbuttongroup.h>
+#include <qmessagebox.h>
+#include <qvgroupbox.h>
+
+/* STD */
+#include <stdlib.h>
+
 
 void parseargs(char* buf, char** args);
 
@@ -191,8 +197,7 @@ int DevicesWidget::doTab(){
     bool ok = false;
 
     while (!ok){
-        dlg->showMaximized();
-        result = dlg->exec();
+        result = QPEApplication::execDialog( dlg );
         ok = true;
 
         if(result == QDialog::Accepted) {

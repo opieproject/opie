@@ -1,6 +1,6 @@
 /*
                              This file is part of the OPIE Project
-
+ 
                =.            Copyright (c)  2002 Andy Qua <andy.qua@blueyonder.co.uk>
              .=l.                                Dan Williams <drw@handhelds.org>
            .>+-=
@@ -27,16 +27,27 @@
 
 */
 
-#include <linux/limits.h>
-#include <unistd.h>
+#include "categoryfilterimpl.h"
+#include "datamgr.h"
+#include "global.h"
+#include "inputdlg.h"
+#include "ipkg.h"
+#include "installdlgimpl.h"
+#include "letterpushbutton.h"
+#include "mainwin.h"
+#include "packagewin.h"
+#include "settingsimpl.h"
+#include "utils.h"
 
+/* OPIE */
 #include <qpe/qcopenvelope_qws.h>
-#include <qmenubar.h>
 #include <qpe/qpeapplication.h>
-#include <qtoolbar.h>
 #include <qpe/config.h>
 #include <qpe/resource.h>
 
+/* QT */
+#include <qmenubar.h>
+#include <qtoolbar.h>
 #include <qaction.h>
 #include <qcombobox.h>
 #include <qfile.h>
@@ -52,22 +63,14 @@
 #include <qwhatsthis.h>
 #include <qwidgetstack.h>
 
-#include "categoryfilterimpl.h"
-#include "datamgr.h"
-#include "global.h"
-#include "inputdlg.h"
-#include "ipkg.h"
-#include "installdlgimpl.h"
-#include "letterpushbutton.h"
-#include "mainwin.h"
-#include "packagewin.h"
-#include "settingsimpl.h"
-#include "utils.h"
+/* STD */
+#include <linux/limits.h>
+#include <unistd.h>
 
 extern int compareVersions( const char *v1, const char *v2 );
 
 MainWindow :: MainWindow( QWidget* parent, const char* name, WFlags fl )
-	:	QMainWindow( parent, name, fl || WStyle_ContextHelp )
+        :	QMainWindow( parent, name, fl || WStyle_ContextHelp )
 {
     // Disable suspend mode
     QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::DisableSuspend;
@@ -239,7 +242,7 @@ MainWindow :: MainWindow( QWidget* parent, const char* name, WFlags fl )
 
 MainWindow :: ~MainWindow()
 {
-	delete mgr;
+    delete mgr;
 
     // Reenable suspend mode
     QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::Enable;
@@ -296,7 +299,7 @@ void MainWindow :: init()
     Config cfg( "aqpkg" );
     cfg.setGroup( "settings" );
     currentlySelectedServer = cfg.readEntry( "selectedServer", "local" );
-//    showJumpTo = cfg.readBoolEntry( "showJumpTo", "true" );
+    //    showJumpTo = cfg.readBoolEntry( "showJumpTo", "true" );
 
 #endif
 
@@ -337,8 +340,8 @@ void MainWindow :: setDocument( const QString &doc )
 
     // Now set the check box of the selected package
     for ( QCheckListItem *item = (QCheckListItem *)packagesList->firstChild();
-          item != 0 ;
-          item = (QCheckListItem *)item->nextSibling() )
+            item != 0 ;
+            item = (QCheckListItem *)item->nextSibling() )
     {
         if ( item->text().startsWith( package ) )
         {
@@ -354,7 +357,7 @@ void MainWindow :: displaySettings()
     if ( dlg->showDlg() )
     {
         stack->raiseWidget( progressWindow );
-    	updateData();
+        updateData();
         stack->raiseWidget( networkPkgWindow );
     }
     delete dlg;
@@ -582,12 +585,12 @@ void MainWindow :: updateData()
 
         serversList->insertItem( serverName );
         if ( serverName == currentlySelectedServer )
-        	activeItem = i;
-	}
+            activeItem = i;
+    }
 
-	// set selected server to be active server
-	if ( activeItem != -1 )
-		serversList->setCurrentItem( activeItem );
+    // set selected server to be active server
+    if ( activeItem != -1 )
+        serversList->setCurrentItem( activeItem );
     serverSelected( 0, FALSE );
 }
 
@@ -625,10 +628,10 @@ void MainWindow :: serverSelected( int, bool raiseProgress )
     packagesList->clear();
 
 #ifdef QWS
-        // read download directory from config file
-        Config cfg( "aqpkg" );
-        cfg.setGroup( "settings" );
-        cfg.writeEntry( "selectedServer", currentlySelectedServer );
+    // read download directory from config file
+    Config cfg( "aqpkg" );
+    cfg.setGroup( "settings" );
+    cfg.writeEntry( "selectedServer", currentlySelectedServer );
 #endif
 
     int i = 0;
@@ -678,7 +681,7 @@ void MainWindow :: serverSelected( int, bool raiseProgress )
 
 
         QCheckListItem *item = new QCheckListItem( packagesList, package->getPackageName(),
-                                                   QCheckListItem::CheckBox );
+                               QCheckListItem::CheckBox );
 
         if ( package->isInstalled() )
         {
@@ -738,7 +741,7 @@ void MainWindow :: searchForPackage( const QString &text )
             start = (QCheckListItem *)packagesList->firstChild();
 
         for ( QCheckListItem *item = start; item != 0 ;
-              item = (QCheckListItem *)item->nextSibling() )
+                item = (QCheckListItem *)item->nextSibling() )
         {
             if ( item->text().lower().find( text ) != -1 )
             {
@@ -766,13 +769,13 @@ void MainWindow :: updateServer()
     ipkg->setOption( "update" );
 
     InstallDlgImpl *dlg = new InstallDlgImpl( ipkg, tr( "Refreshing server package lists" ),
-                                              tr( "Update lists" ) );
+                          tr( "Update lists" ) );
     connect( dlg, SIGNAL( reloadData( InstallDlgImpl * ) ), this, SLOT( reloadData( InstallDlgImpl * ) ) );
-	reloadDocuments = FALSE;
+    reloadDocuments = FALSE;
     stack->addWidget( dlg, 3 );
     stack->raiseWidget( dlg );
 
-//  delete progDlg;
+    //  delete progDlg;
 }
 
 void MainWindow :: upgradePackages()
@@ -782,9 +785,9 @@ void MainWindow :: upgradePackages()
     // TODO - ODevice????
     QString text = tr( "WARNING: Upgrading while\nOpie/Qtopia is running\nis NOT recommended!\n\nAre you sure?\n" );
     QMessageBox warn( tr( "Warning" ), text, QMessageBox::Warning,
-                        QMessageBox::Yes,
-                        QMessageBox::No | QMessageBox::Escape | QMessageBox::Default ,
-                        0, this );
+                      QMessageBox::Yes,
+                      QMessageBox::No | QMessageBox::Escape | QMessageBox::Default ,
+                      0, this );
     warn.adjustSize();
 
     if ( warn.exec() == QMessageBox::Yes )
@@ -797,9 +800,9 @@ void MainWindow :: upgradePackages()
         ipkg->setOption( "upgrade" );
 
         InstallDlgImpl *dlg = new InstallDlgImpl( ipkg, tr( "Upgrading installed packages" ),
-                                                  tr ( "Upgrade" ) );
+                              tr ( "Upgrade" ) );
         connect( dlg, SIGNAL( reloadData( InstallDlgImpl * ) ), this, SLOT( reloadData( InstallDlgImpl * ) ) );
-		reloadDocuments = TRUE;
+        reloadDocuments = TRUE;
         stack->addWidget( dlg, 3 );
         stack->raiseWidget( dlg );
     }
@@ -815,8 +818,8 @@ void MainWindow :: downloadPackage()
         if ( serversList->currentText() != LOCAL_SERVER )
         {
             for ( QCheckListItem *item = (QCheckListItem *)packagesList->firstChild();
-                  item != 0 && !found;
-                  item = (QCheckListItem *)item->nextSibling() )
+                    item != 0 && !found;
+                    item = (QCheckListItem *)item->nextSibling() )
             {
                 if ( item->isOn() )
                     found = true;
@@ -836,8 +839,8 @@ void MainWindow :: downloadPackage()
     {
         doUpdate = false;
         for ( QCheckListItem *item = (QCheckListItem *)packagesList->firstChild();
-              item != 0 ;
-              item = (QCheckListItem *)item->nextSibling() )
+                item != 0 ;
+                item = (QCheckListItem *)item->nextSibling() )
         {
             if ( item->isOn() )
             {
@@ -855,7 +858,7 @@ void MainWindow :: downloadPackage()
                 QString msgtext;
                 msgtext = tr( "Are you sure you wish to delete\n%1?" ).arg( (const char *)p->getPackageName() );
                 if ( QMessageBox::information( this, tr( "Are you sure?" ),
-                                    msgtext, tr( "No" ), tr( "Yes" ) ) == 1 )
+                                               msgtext, tr( "No" ), tr( "Yes" ) ) == 1 )
                 {
                     doUpdate = true;
                     QFile f( p->getFilename() );
@@ -908,8 +911,8 @@ void MainWindow :: downloadSelectedPackages()
     ipkg.setOption( "download" );
     ipkg.setRuntimeDirectory( dir );
     for ( QCheckListItem *item = (QCheckListItem *)packagesList->firstChild();
-          item != 0 ;
-          item = (QCheckListItem *)item->nextSibling() )
+            item != 0 ;
+            item = (QCheckListItem *)item->nextSibling() )
     {
         if ( item->isOn() )
         {
@@ -926,12 +929,12 @@ void MainWindow :: downloadRemotePackage()
     QString package = InputDialog::getText( tr( "Install Remote Package" ), tr( "Enter package location" ), "http://", &ok, this );
     if ( !ok || package.isEmpty() )
         return;
-//    DownloadRemoteDlgImpl dlg( this, "Install", true );
-//    if ( dlg.exec() == QDialog::Rejected )
-//        return;
+    //    DownloadRemoteDlgImpl dlg( this, "Install", true );
+    //    if ( dlg.exec() == QDialog::Rejected )
+    //        return;
 
     // grab details from dialog
-//    QString package = dlg.getPackageLocation();
+    //    QString package = dlg.getPackageLocation();
 
     InstallData *item = new InstallData();
     item->option = "I";
@@ -942,7 +945,7 @@ void MainWindow :: downloadRemotePackage()
 
     InstallDlgImpl *dlg = new InstallDlgImpl( workingPackages, mgr, tr( "Download" ) );
     connect( dlg, SIGNAL( reloadData( InstallDlgImpl * ) ), this, SLOT( reloadData( InstallDlgImpl * ) ) );
-	reloadDocuments = TRUE;
+    reloadDocuments = TRUE;
     stack->addWidget( dlg, 3 );
     stack->raiseWidget( dlg );
 }
@@ -961,8 +964,8 @@ void MainWindow :: applyChanges()
     QList<InstallData> workingPackages;
     workingPackages.setAutoDelete( TRUE );
     for ( QCheckListItem *item = (QCheckListItem *)packagesList->firstChild();
-          item != 0 ;
-          item = (QCheckListItem *)item->nextSibling() )
+            item != 0 ;
+            item = (QCheckListItem *)item->nextSibling() )
     {
         if ( item->isOn() )
         {
@@ -971,14 +974,14 @@ void MainWindow :: applyChanges()
                 workingPackages.append( instdata );
             else
                 return;
-		}
+        }
     }
 
     if ( workingPackages.count() == 0 )
     {
         // Nothing to do
         QMessageBox::information( this, tr( "Nothing to do" ),
-                             tr( "No packages selected" ), tr( "OK" ) );
+                                  tr( "No packages selected" ), tr( "OK" ) );
 
         return;
     }
@@ -986,7 +989,7 @@ void MainWindow :: applyChanges()
     // do the stuff
     InstallDlgImpl *dlg = new InstallDlgImpl( workingPackages, mgr, tr( "Apply changes" ) );
     connect( dlg, SIGNAL( reloadData( InstallDlgImpl * ) ), this, SLOT( reloadData( InstallDlgImpl * ) ) );
-	reloadDocuments = TRUE;
+    reloadDocuments = TRUE;
     stack->addWidget( dlg, 3 );
     stack->raiseWidget( dlg );
 }
@@ -1024,7 +1027,7 @@ InstallData *MainWindow :: dealWithItem( QCheckListItem *item )
         // If local file, remove using package name, not filename
         if ( p->isPackageStoredLocally() )
             name = item->text();
-        
+
         if ( !p->isPackageStoredLocally() )
             newitem->packageName = p->getInstalledPackageName();
         else
@@ -1090,33 +1093,33 @@ InstallData *MainWindow :: dealWithItem( QCheckListItem *item )
                 QuestionDlg dlg( text, msgtext, secondButton );
                 switch( dlg.exec() )
                 {
-                    case 0: // Cancel
-                        delete newitem;
-                        return 0x0;
-                        break;
-                    case 1: // Remove
-                        newitem->option = "D";
-                        // If local file, remove using package name, not filename
-                        if ( p->isPackageStoredLocally() )
-                            name = item->text();
-                        break;
-                    case 2: // Reinstall or Upgrade
-                        newitem->option = secondOption;
-                        break;
+                case 0: // Cancel
+                    delete newitem;
+                    return 0x0;
+                    break;
+                case 1: // Remove
+                    newitem->option = "D";
+                    // If local file, remove using package name, not filename
+                    if ( p->isPackageStoredLocally() )
+                        name = item->text();
+                    break;
+                case 2: // Reinstall or Upgrade
+                    newitem->option = secondOption;
+                    break;
                 }
             }
             else
             {
-//                newitem->option = stickyOption;
+                //                newitem->option = stickyOption;
             }
         }
 
 
         // Check if we are reinstalling the same version
         if ( newitem->option != "R" )
-           newitem->recreateLinks = true;
+            newitem->recreateLinks = true;
         else
-           newitem->recreateLinks = false;
+            newitem->recreateLinks = false;
 
         // User hit cancel (on dlg - assume remove)
         return newitem;
@@ -1138,14 +1141,14 @@ void MainWindow :: reloadData( InstallDlgImpl *dlg )
 
 #ifdef QWS
     if ( reloadDocuments )
-	{
-		m_status->setText( tr( "Updating Launcher..." ) );
+    {
+        m_status->setText( tr( "Updating Launcher..." ) );
 
-		// Finally let the main system update itself
-		QCopEnvelope e("QPE/System", "linkChanged(QString)");
-		QString lf = QString::null;
-		e << lf;
-	}
+        // Finally let the main system update itself
+        QCopEnvelope e("QPE/System", "linkChanged(QString)");
+        QString lf = QString::null;
+        e << lf;
+    }
 #endif
 
     stack->raiseWidget( networkPkgWindow );
@@ -1181,18 +1184,19 @@ void MainWindow :: letterPushed( QString t )
         item = (QCheckListItem *)item->nextSibling();
         if ( !item )
             item = (QCheckListItem *)packagesList->firstChild();
-    } while ( item != start);
+    }
+    while ( item != start);
 }
 
 void MainWindow :: slotDisplayPackage( QListViewItem *item )
 {
     QString itemstr( ((QCheckListItem*)item)->text() );
     PackageWindow *p = new PackageWindow( mgr->getServer( serversList->currentText() )->getPackage( itemstr ) );
-    p->showMaximized();
+    QPEApplication::showWidget( p );
 }
 
 QuestionDlg::QuestionDlg( const QString &caption, const QString &text, const QString &secondbtn )
-    : QWidget( 0x0, 0x0, WType_Modal | WType_TopLevel | WStyle_Dialog )
+        : QWidget( 0x0, 0x0, WType_Modal | WType_TopLevel | WStyle_Dialog )
 {
     setCaption( caption );
     resize( 175, 100 );

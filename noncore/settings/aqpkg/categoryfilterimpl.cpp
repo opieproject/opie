@@ -27,18 +27,24 @@
 
 */
 
-#include <iostream>
-using namespace std;
+#include "categoryfilterimpl.h"
 
+/* OPIE */
+#include <qpe/qpeapplication.h>
+
+/* QT */
 #include <qgroupbox.h>
-#include <qlayout.h> 
+#include <qlayout.h>
 #include <qlistbox.h>
 #include <qstring.h>
 
-#include "categoryfilterimpl.h"
+/* STD */
+#include <iostream>
+using namespace std;
+
 
 CategoryFilterImpl :: CategoryFilterImpl(const QString &categories, const QString &selectedCategories, QWidget *parent, const char *name )
-    : QDialog( parent, name, true )
+        : QDialog( parent, name, true )
 {
     setCaption( tr( "Category Filter" ) );
 
@@ -52,11 +58,11 @@ CategoryFilterImpl :: CategoryFilterImpl(const QString &categories, const QStrin
     layout->addWidget( grpbox );
 
     QVBoxLayout *grplayout = new QVBoxLayout( grpbox->layout() );
-    
+
     lstCategories = new QListBox( grpbox );
     lstCategories->setSelectionMode( QListBox::Multi );
     grplayout->addWidget( lstCategories );
-    
+
     // Split up categories and add them to the listbox
     int start = 1;
 
@@ -76,16 +82,16 @@ CategoryFilterImpl :: CategoryFilterImpl(const QString &categories, const QStrin
         }
 
         start = end + 1;
-    } while ( start < (int)categories.length() );
+    }
+    while ( start < (int)categories.length() );
 
     lstCategories->sort( true );
 
-    showMaximized();
+    QPEApplication::showDialog( this );
 }
 
 CategoryFilterImpl :: ~CategoryFilterImpl()
-{
-}
+{}
 
 QString CategoryFilterImpl :: getSelectedFilter()
 {
