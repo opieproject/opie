@@ -2,6 +2,7 @@
 #ifndef todoevent_h
 #define todoevent_h
 
+#include <qregexp.h>
 #include <qstringlist.h>
 #include <qdatetime.h>
 
