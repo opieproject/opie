@@ -1,5 +1,5 @@
 TEMPLATE  = app
-CONFIG    = qt warn_on 
+CONFIG    += qte quick-app warn_on 
 HEADERS   = bartender.h newdrinks.h showdrinks.h inputDialog.h searchresults.h bac.h drinkdata.h
 SOURCES   = main.cpp bartender.cpp newdrinks.cpp showdrinks.cpp inputDialog.cpp searchresults.cpp bac.cpp drinkdata.cpp
 INCLUDEPATH += $(OPIEDIR)/include
