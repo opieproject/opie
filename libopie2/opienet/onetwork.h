@@ -45,16 +45,19 @@
 
 #include <opie2/onetutils.h>
 
-// ML: Yeah, I hate to include kernel headers, but it's necessary here
-// ML: Recent RedHat and MandrakePatches to the Kernel and WE broke something
-// ML: #include <net/if.h> e.g. conflicts with #include <linux/wireless.h>
-
 #ifndef IFNAMSIZ
 #define IFNAMSIZ 16
 #endif
 
-#include <linux/wireless.h>
+// ML: Yeah, I hate to include kernel headers, but it's necessary here
+// ML: Here comes an ugly hack to prevent <linux/wireless.h> including <linux/if.h>
+// ML: which conflicts with the user header <net/if.h>
+// ML: We really a user header for the Wireless Extensions, something like <net/wireless.h>
+// ML: I will drop Jean an mail on that subject
+
 #include <net/if.h>
+#define _LINUX_IF_H
+#include <linux/wireless.h>
 
 #ifndef SIOCIWFIRSTPRIV
 #define SIOCIWFIRSTPRIV SIOCDEVPRIVATE

@@ -52,7 +52,6 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <linux/sockios.h>
-#include <linux/wireless.h>
 
 using namespace std;
 
