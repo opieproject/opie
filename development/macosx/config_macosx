@@ -68,10 +68,10 @@ CONFIG_LIBOPIE2DB=y
 # libopie2net needs a libqpe, libopie2core and libpcap dependency
 #
 CONFIG_LIBOPIE2PIM=y
-# CONFIG_SQL_PIM_BACKEND is not set
+CONFIG_SQL_PIM_BACKEND=y
 CONFIG_LIBOPIE2UI=y
 # CONFIG_LIBOPIE2MM is not set
-# CONFIG_LIBOPIE2SECURITY is not set
+CONFIG_LIBOPIE2SECURITY=y
 
 #
 # the examples need a libqpe, libopie2core, libopie2db, libopie2net, libopie2pim, libopie2ui and libopie2mm
@@ -85,6 +85,7 @@ CONFIG_LIBQRSYNC=y
 # CONFIG_OPIE-LOGIN is not set
 # CONFIG_OPIEALARM is not set
 CONFIG_QUICKLAUNCHER=y
+CONFIG_LAUNCHER=y
 # CONFIG_SYMLINKER is not set
 
 #
@@ -101,6 +102,7 @@ CONFIG_CLIPBOARDAPPLET=y
 CONFIG_CLOCKAPPLET=y
 CONFIG_HOMEAPPLET=y
 # CONFIG_IRDAAPPLET is not set
+CONFIG_LOCKAPPLET=y
 # CONFIG_LOGOUTAPPLET is not set
 # CONFIG_RESTARTAPPLET is not set
 # CONFIG_ROTATEAPPLET is not set
@@ -111,7 +113,10 @@ CONFIG_HOMEAPPLET=y
 # CONFIG_VTAPPLET is not set
 # CONFIG_AUTOROTATEAPPLET is not set
 # CONFIG_BRIGHTNESSAPPLET is not set
-# CONFIG_MEMORYAPPLET is not set
+
+#
+# opie-memoryapplet needs a libqpe, libopie2ui and sysinfo
+#
 
 #
 # Network applet needs a libqpe and libopie2 (core, ui, net)
@@ -261,6 +266,8 @@ CONFIG_BUTTON-SETTINGS=y
 CONFIG_CITYTIME=y
 CONFIG_LAUNCHER-SETTINGS=y
 # CONFIG_LIGHT-AND-POWER is not set
+CONFIG_SECURITY=y
+# CONFIG_MULTIAUTH_DEMO is not set
 CONFIG_APPEARANCE2=y
 # CONFIG_AQPKG is not set
 CONFIG_BACKUP=y
@@ -272,9 +279,13 @@ CONFIG_LANGUAGE=y
 # CONFIG_NS2CORE is not set
 # CONFIG_SOUND is not set
 # CONFIG_SSHKEYS is not set
-CONFIG_SYSINFO=y
+# CONFIG_SYSINFO is not set
 CONFIG_TABMANAGER=y
 # CONFIG_USERMANAGER is not set
+CONFIG_MULTIAUTH_BLUEPING=y
+CONFIG_MULTIAUTH_DUMMY=y
+CONFIG_MULTIAUTH_NOTICE=y
+CONFIG_MULTIAUTH_PIN=y
 
 #
 # Theming
@@ -314,10 +325,7 @@ CONFIG_CLOCK=y
 CONFIG_EUROCONV=y
 # CONFIG_FORMATTER is not set
 CONFIG_OPIE-SH=y
-
-#
-# The pim converter needs libqpe, libopie2core, libopie2pim, libopie2db and SQL Backend for libopie2pim
-#
+CONFIG_PIMCONVERTER=y
 # CONFIG_PYQUICKLAUNCHER is not set
 # CONFIG_REMOTE is not set
 
