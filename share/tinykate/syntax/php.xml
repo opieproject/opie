@@ -1394,7 +1394,6 @@
 			<item> msql_dbname </item>
 			<item> msql_drop_db </item>
 			<item> msql_dropdb </item>
-			<item> </item>
 			<item>msql_error </item>
 			<item> msql_fetch_array </item>
 			<item> msql_fetch_field </item>
