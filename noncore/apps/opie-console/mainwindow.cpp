@@ -1,7 +1,5 @@
 #include <assert.h>
 
-
-
 #include <qaction.h>
 #include <qmenubar.h>
 #include <qlabel.h>
@@ -12,8 +10,8 @@
 #include <qwhatsthis.h>
 
 #include <qpe/resource.h>
-#include <opie/ofiledialog.h>
 
+#include <opie/ofiledialog.h>
 
 #include "keytrans.h"
 #include "profileeditordialog.h"
@@ -486,17 +484,21 @@ void MainWindow::slotSessionChanged( Session* ses ) {
 
 void MainWindow::slotFullscreen() {
 
+
+
     if ( m_isFullscreen ) {
-        ( m_curSession->widgetStack() )->reparent( m_consoleWindow, 0, QPoint(0,0), false );
+        ( m_curSession->widgetStack() )->reparent(  savedParentFullscreen, 0, QPoint(0,0), false );
         ( m_curSession->widgetStack() )->setFrameStyle( QFrame::Panel | QFrame::Sunken );
+
         setCentralWidget( m_consoleWindow );
         ( m_curSession->widgetStack() )->show();
         ( m_curSession->emulationHandler() )->cornerButton()->hide();
         disconnect( ( m_curSession->emulationHandler() )->cornerButton(), SIGNAL( pressed() ), this, SLOT( slotFullscreen() ) );
 
     } else {
+        savedParentFullscreen = ( m_curSession->widgetStack() )->parentWidget();
         ( m_curSession->widgetStack() )->setFrameStyle( QFrame::NoFrame );
-        ( m_curSession->widgetStack() )->reparent( 0,WStyle_Tool | WStyle_Customize | WStyle_StaysOnTop
+        ( m_curSession->widgetStack() )->reparent( 0, WStyle_Tool | WStyle_Customize | WStyle_StaysOnTop
                                                    , QPoint(0,0), false );
         ( m_curSession->widgetStack() )->resize( qApp->desktop()->width(), qApp->desktop()->height() );
         ( m_curSession->widgetStack() )->setFocus();
