@@ -124,117 +124,117 @@ Por favor, inténtelo más tarde.</translation>
     </message>
     <message>
         <source>New Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Nueva conexión</translation>
     </message>
     <message>
         <source>Open Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir marcador</translation>
     </message>
     <message>
         <source>Delete Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar marcador</translation>
     </message>
     <message>
         <source>Send Contrl-Alt-Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviar Ctrl+Alt+Borrar</translation>
     </message>
 </context>
 <context>
     <name>KVNCBookmarkDlgBase</name>
     <message>
         <source>Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Marcadores</translation>
     </message>
 </context>
 <context>
     <name>KVNCConnDlgBase</name>
     <message>
         <source>VNC Viewer Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Conexión Visor VNC</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Servidor</translation>
     </message>
     <message>
         <source>Show Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostar contraseña</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation type="unfinished">Contraseña:</translation>
+        <translation>Contraseña:</translation>
     </message>
     <message>
         <source>Bookmark Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre marcador:</translation>
     </message>
     <message>
         <source>Host Name:</source>
-        <translation type="unfinished">Nombre máquina:</translation>
+        <translation>Nombre máquina:</translation>
     </message>
     <message>
         <source>Display Number:</source>
-        <translation type="unfinished">Número pantalla:</translation>
+        <translation>Número pantalla:</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opciones</translation>
     </message>
     <message>
         <source>Check for screen updates every:</source>
-        <translation type="unfinished">Comprobar pantalla cada:</translation>
+        <translation>Comprobar pantalla cada:</translation>
     </message>
     <message>
         <source>Milliseconds</source>
-        <translation type="unfinished">Milisegundos</translation>
+        <translation>Milisegundos</translation>
     </message>
     <message>
         <source>Request 8-bit session</source>
-        <translation type="unfinished">Solicitar sesión 8 bits</translation>
+        <translation>Solicitar sesión 8 bits</translation>
     </message>
     <message>
         <source>Raise on bell</source>
-        <translation type="unfinished">Modo escucha</translation>
+        <translation>Modo escucha</translation>
     </message>
     <message>
         <source>Request shared session</source>
-        <translation type="unfinished">Solicitar sesión compartida</translation>
+        <translation>Solicitar sesión compartida</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation>2</translation>
     </message>
     <message>
         <source>4</source>
-        <translation type="unfinished"></translation>
+        <translation>4</translation>
     </message>
     <message>
         <source>Scale Factor</source>
-        <translation type="unfinished"></translation>
+        <translation>Factor de escala</translation>
     </message>
     <message>
         <source>Encodings</source>
-        <translation type="unfinished"></translation>
+        <translation>Codificaciones</translation>
     </message>
     <message>
         <source>Hextile encoding</source>
-        <translation type="unfinished">Codificación Hextile</translation>
+        <translation>Codificación Hextile</translation>
     </message>
     <message>
         <source>CoRRE encoding</source>
-        <translation type="unfinished">Codificación CoRRE</translation>
+        <translation>Codificación CoRRE</translation>
     </message>
     <message>
         <source>RRE encoding</source>
-        <translation type="unfinished">Codificación RRE</translation>
+        <translation>Codificación RRE</translation>
     </message>
     <message>
         <source>Copy rectangle encoding</source>
-        <translation type="unfinished">Codificación copiar rectángulo</translation>
+        <translation>Codificación copiar rectángulo</translation>
     </message>
 </context>
 </TS>

@@ -39,11 +39,11 @@
     </message>
     <message>
         <source>No plugins found</source>
-        <translation type="unfinished"></translation>
+        <translation>No encontré módulos</translation>
     </message>
     <message>
         <source>No plugins activated</source>
-        <translation type="unfinished"></translation>
+        <translation>Ningún módulo activado</translation>
     </message>
 </context>
 <context>
@@ -58,44 +58,46 @@
     </message>
     <message>
         <source>Today&#xb2;</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoy²</translation>
     </message>
 </context>
 <context>
     <name>TodayConfig</name>
     <message>
         <source>Today config</source>
-        <translation type="unfinished">Configuración de Hoy</translation>
+        <translation>Configuración de Hoy</translation>
     </message>
     <message>
         <source>Load which plugins in what order:</source>
-        <translation type="unfinished"></translation>
+        <translation>Cargar qué módulos en qué orden:</translation>
     </message>
     <message>
         <source>Move Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Mover arriba</translation>
     </message>
     <message>
         <source>Move Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Mover abajo</translation>
     </message>
     <message>
         <source>active/order</source>
-        <translation type="unfinished"></translation>
+        <translation>activa/orden</translation>
     </message>
     <message>
         <source>autostart on 
 resume?
  (Opie only)</source>
-        <translation type="unfinished"></translation>
+        <translation>arrancar al
+encender?
+(sólo Opie)</translation>
     </message>
     <message>
         <source>minutes inactive</source>
-        <translation type="unfinished"></translation>
+        <translation>minutos inactivo</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation type="unfinished">Varios</translation>
+        <translation>Varios</translation>
     </message>
 </context>
 <context>

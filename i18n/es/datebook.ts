@@ -717,15 +717,15 @@ y </translation>
     </message>
     <message>
         <source>Var1</source>
-        <translation type="unfinished">Var 1</translation>
+        <translation>Var 1</translation>
     </message>
     <message>
         <source>Var 2</source>
-        <translation type="unfinished">Var 2</translation>
+        <translation>Var 2</translation>
     </message>
     <message>
         <source>WeekVar</source>
-        <translation type="unfinished">Var semana</translation>
+        <translation>Var semana</translation>
     </message>
     <message>
         <source>months</source>
