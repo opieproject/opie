@@ -111,11 +111,7 @@ void Obex::slotExited(OProcess* proc ){
 }
 void Obex::slotStdOut(OProcess* proc, char* buf, int len){
     if ( proc == m_rec ) { // only receive
-        for (int i = 0; i < len; i++ ) {
-            printf("%c", buf[i] );
-        }
-        printf("\n");
-        QByteArray ar( len );
+        QByteArray ar( len  );
         memcpy( ar.data(), buf, len );
         qWarning("parsed: %s", ar.data() );
         m_outp.append( ar );
@@ -127,13 +123,6 @@ void Obex::received() {
       if ( m_rec->exitStatus() == 0 ) { // we got one
           QString filename = parseOut();
           qWarning("ACHTUNG %s", filename.latin1() );
-          if (filename.contains( 'ö' ) || filename.contains( 'ä' ) || filename.contains('ü' ) ) {
-              qWarning("renaming!!!!");
-              QFileInfo inf( filename );
-              QString newName = "/tmp/opie-obex." + inf.extension();
-              ::rename( QFile::encodeName( filename ).data(), newName );
-              qWarning("name is %s", QFile::encodeName( filename ).data() );
-          }
           emit receivedFile( filename );
       }
   }else{

@@ -10,6 +10,7 @@
 #include <qfileinfo.h>
 #include <qlabel.h>
 #include <qhbox.h>
+#include <qregexp.h>
 #include <qtextview.h>
 #include <qpushbutton.h>
 
@@ -76,13 +77,13 @@ void Receiver::tidyUp( QString& _file, const QString& ending) {
         return;
 
     (void)::strncat( foo, ending.latin1(), 4 );
-    _file = QString::fromUtf8( foo );
+    _file = QString::fromLatin1( foo );
     QString cmd = QString("sed -e \"s/^\\(X-MICROSOFT-BODYINK\\)\\;/\\1:/;\" < %2 > %2 ").arg( Global::shellQuote(file)).arg( Global::shellQuote(_file) );
-    qWarning("Executing: %s", cmd.utf8().data() );
-    (void)::system( cmd.utf8().data() );
+    qWarning("Executing: %s", cmd.latin1() );
+    (void)::system( cmd.latin1() );
 
     cmd = QString("rm %1").arg( Global::shellQuote(file) );
-    (void)::system( cmd.utf8().data() );
+    (void)::system( cmd.latin1() );
 }
 int Receiver::checkFile( QString& file ) {
     qWarning("check file!! %s", file.latin1() );
