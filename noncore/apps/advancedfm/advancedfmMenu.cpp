@@ -50,93 +50,93 @@ void AdvancedFm::doDirChange() {
 }
 
 void AdvancedFm::showMenuHidden() {
-  if (b) {
-      CurrentDir()->setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
-      OtherDir()->setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
-      fileMenu->setItemChecked( fileMenu->idAt(0),TRUE);
+		if (b) {
+				CurrentDir()->setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
+				OtherDir()->setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
+				fileMenu->setItemChecked( fileMenu->idAt(0),TRUE);
     } else {
-      CurrentDir()->setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
-      OtherDir()->setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
-      fileMenu->setItemChecked( fileMenu->idAt(0),FALSE);
+				CurrentDir()->setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
+				OtherDir()->setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
+				fileMenu->setItemChecked( fileMenu->idAt(0),FALSE);
     }
-     b = !b;
-         populateView();
+		b = !b;
+		populateView();
 }
 
 void AdvancedFm::showHidden() {
-  if (b) {
-      CurrentDir()->setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
-      OtherDir()->setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
+		if (b) {
+				CurrentDir()->setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
+				OtherDir()->setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
     }  else {
-      CurrentDir()->setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
-      OtherDir()->setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
+				CurrentDir()->setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
+				OtherDir()->setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
     }
-         populateView();
+		populateView();
 }
 
 QString AdvancedFm::dealWithSymName(const QString &fileName) {
-   QString strItem = fileName;
-   return  strItem.right( (strItem.length() - strItem.find("->",0,TRUE)) - 4);
+		QString strItem = fileName;
+		return  strItem.right( (strItem.length() - strItem.find("->",0,TRUE)) - 4);
 }
 
 void AdvancedFm::runThis() {
-   if( !CurrentView()->currentItem()) return;
-  QString fs;
-  QDir *thisDir = CurrentDir();
+		if( !CurrentView()->currentItem()) return;
+		QString fs;
+		QDir *thisDir = CurrentDir();
 
-  QString curFile = CurrentView()->currentItem()->text(0);
-  QString path = thisDir->canonicalPath();
+		QString curFile = CurrentView()->currentItem()->text(0);
+		QString path = thisDir->canonicalPath();
 
-  if( curFile.find("@",0,TRUE) !=-1 || curFile.find("->",0,TRUE) !=-1 )  //if symlink
+		if( curFile.find("@",0,TRUE) !=-1 || curFile.find("->",0,TRUE) !=-1 )  //if symlink
 
-    curFile = dealWithSymName((const QString&)curFile);
+				curFile = dealWithSymName((const QString&)curFile);
 
-  if(curFile != "../") {
+		if(curFile != "../") {
 
-      fs = getFileSystemType((const QString &) path);
-      QFileInfo fileInfo( path  + "/" + curFile);
+				fs = getFileSystemType((const QString &) path);
+				QFileInfo fileInfo( path  + "/" + curFile);
 //      odebug << fileInfo.owner() << oendl; 
 
-      if( (fileInfo.permission( QFileInfo::ExeUser)
-           | fileInfo.permission( QFileInfo::ExeGroup)
-           | fileInfo.permission( QFileInfo::ExeOther)) // & fs.find("vfat",0,TRUE) == -1) {
-          | fs == "vfat" && fileInfo.filePath().contains("/bin") ) {
-        QCopEnvelope e("QPE/System", "execute(QString)" );
-        e << curFile;
-      } else {
-          curFile =  path + "/" + curFile;
-          DocLnk nf(curFile);
-          QString execStr = nf.exec();
+				if( (fileInfo.permission( QFileInfo::ExeUser)
+						 | fileInfo.permission( QFileInfo::ExeGroup)
+						 | fileInfo.permission( QFileInfo::ExeOther)) // & fs.find("vfat",0,TRUE) == -1) {
+						| fs == "vfat" && fileInfo.filePath().contains("/bin") ) {
+						QCopEnvelope e("QPE/System", "execute(QString)" );
+						e << curFile;
+				} else {
+						curFile =  path + "/" + curFile;
+						DocLnk nf(curFile);
+						QString execStr = nf.exec();
 //          odebug << execStr << oendl; 
-          if( execStr.isEmpty() ) {
+						if( execStr.isEmpty() ) {
             } else {
-              nf.execute();
+								nf.execute();
             }
         }
     }
 }
 
 void AdvancedFm::runText() {
-   if( !CurrentView()->currentItem()) return;
-  QString curFile = CurrentView()->currentItem()->text(0);
-  if(curFile != "../") {
-      if( curFile.find("@",0,TRUE) !=-1 || curFile.find("->",0,TRUE) !=-1 )  //if symlink
-        curFile = dealWithSymName((const QString&)curFile);
-      curFile =  CurrentDir()->canonicalPath()+"/"+curFile;
-      QCopEnvelope e("QPE/Application/textedit", "setDocument(QString)" );
-      e << curFile;
+		if( !CurrentView()->currentItem()) return;
+		QString curFile = CurrentView()->currentItem()->text(0);
+		if(curFile != "../") {
+				if( curFile.find("@",0,TRUE) !=-1 || curFile.find("->",0,TRUE) !=-1 )  //if symlink
+						curFile = dealWithSymName((const QString&)curFile);
+				curFile =  CurrentDir()->canonicalPath()+"/"+curFile;
+				QCopEnvelope e("QPE/Application/textedit", "setDocument(QString)" );
+				e << curFile;
     }
 }
 
 void AdvancedFm::makeDir() {
-  InputDialog *fileDlg;
-  fileDlg = new InputDialog(this,tr("Make Directory"),TRUE, 0);
-  fileDlg->exec();
-  if( fileDlg->result() == 1 ) {
-      QDir *thisDir = CurrentDir();
-      QString  filename = fileDlg->LineEdit1->text();
-      thisDir->mkdir( thisDir->canonicalPath()+"/"+filename);
-  }
+		InputDialog *fileDlg;
+		fileDlg = new InputDialog(this,tr("Make Directory"),TRUE, 0);
+		fileDlg->exec();
+		if( fileDlg->result() == 1 ) {
+				QDir *thisDir = CurrentDir();
+				QString  filename = fileDlg->LineEdit1->text();
+				thisDir->mkdir( thisDir->canonicalPath()+"/"+filename);
+		}
     populateView();
 }
 
@@ -259,16 +259,10 @@ void AdvancedFm::doProperties() {
 }
 
 void AdvancedFm::upDir() {
-  QDir *thisDir = CurrentDir();
-  QString current = thisDir->canonicalPath();
-  QDir dir(current);
-  dir.cdUp();
-  current = dir.canonicalPath();
-  chdir( current.latin1() );
-  thisDir->cd(  current, TRUE);
 
-    populateView();
-  update();
+  QDir dir( CurrentDir()->canonicalPath());
+  dir.cdUp();
+	changeTo(dir.canonicalPath());
 }
 
 void AdvancedFm::copyTimer() {
@@ -276,63 +270,63 @@ void AdvancedFm::copyTimer() {
 }
 
 void AdvancedFm::copy() {
- QStringList curFileList = getPath();
+		QStringList curFileList = getPath();
 
-   QDir *thisDir = CurrentDir();
-   QDir *thatDir = OtherDir();
+		QDir *thisDir = CurrentDir();
+		QDir *thatDir = OtherDir();
 
-   bool doMsg=true;
-   int count=curFileList.count();
-   if( count > 0) {
-      if(count > 1 ){
-         QString msg;
-         msg=tr("<p>Really copy %1 files?</p>").arg(count);
-         switch ( QMessageBox::warning(this,tr("Copy"),msg
-                                       ,tr("Yes"),tr("No"),0,0,1) )
-         {
-         case 0:
-            doMsg=false;
-            break;
-         case 1:
-            return;
-            break;
-         };
-      }
+		bool doMsg = true;
+		int count = curFileList.count();
+		if( count > 0) {
+				if(count > 1 ){
+						QString msg;
+						msg=tr("<p>Really copy %1 files?</p>").arg(count);
+						switch ( QMessageBox::warning(this,tr("Copy"),msg
+																					,tr("Yes"),tr("No"),0,0,1) )
+							{
+								case 0:
+										doMsg=false;
+										break;
+								case 1:
+										return;
+										break;
+							};
+				}
 
-      QString curFile, item, destFile;
-      for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
-         item=(*it);
-         if(item.find("->",0,TRUE)) //symlink
-            item = item.left(item.find("->",0,TRUE));
+				QString curFile, item, destFile;
+				for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
+						item=(*it);
+						if(item.find("->",0,TRUE)) //symlink
+								item = item.left(item.find("->",0,TRUE));
 
-         curFile = thisDir->canonicalPath()+"/"+ item;
-         destFile = thatDir->canonicalPath()+"/"+ item;
+						curFile = thisDir->canonicalPath()+"/"+ item;
+						destFile = thatDir->canonicalPath()+"/"+ item;
 
 //          odebug << "Destination file is "+destFile << oendl; 
 //          odebug << "CurrentFile file is " + curFile << oendl; 
 
-         QFile f(destFile);
-         if( f.exists()) {
-            if(doMsg) {
-               switch ( QMessageBox::warning(this,tr("File Exists!"),
-                                             tr("<p>%1 already  exists. Ok to overwrite?</P>").arg(item),
-                                             tr("Yes"),tr("No"),0,0,1)) {
-               case 1:
-                  return;
-                  break;
-               };
-            }
-            f.remove();
-         }
+						QFile f(destFile);
+						if( f.exists()) {
+								if(doMsg) {
+										switch ( QMessageBox::warning(this,tr("File Exists!"),
+																									tr("<p>%1 already  exists. Ok to overwrite?</P>").arg(item),
+																									tr("Yes"),tr("No"),0,0,1)) {
+											case 1:
+													return;
+													break;
+										};
+								}
+								f.remove();
+						}
 
-         if( !copyFile( curFile, destFile) )  {
-            QMessageBox::message("AdvancedFm",
-                                 tr( "<P>Could not copy %1 to %2</P>").arg(curFile).arg(destFile));
-            return;
-         }
-      }
-			rePopulate();
-   }
+						if( !copyFile( curFile, destFile) )  {
+								QMessageBox::message("AdvancedFm",
+																		 tr( "<P>Could not copy %1 to %2</P>").arg(curFile).arg(destFile));
+								return;
+						}
+				}
+				rePopulate();
+		}
 }
 
 void AdvancedFm::copyAsTimer() {

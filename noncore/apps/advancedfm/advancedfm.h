@@ -153,7 +153,6 @@ protected slots:
    void move();
    void moveTimer();
 
-	 void currentPathComboActivated(const QString &);
    void fillCombo(const QString &);
    bool copyFile( const QString & , const QString & );
    void fileStatus();

@@ -255,7 +255,7 @@ void AdvancedFm::initConnections()
   connect( cdUpButton ,SIGNAL(released()), this,SLOT( upDir()) );
   connect( docButton,SIGNAL(released()), this,SLOT( docButtonPushed()) );
   connect( homeButton,SIGNAL(released()), this,SLOT( homeButtonPushed()) );
-  connect( currentPathCombo, SIGNAL( activated(const QString&) ), this, SLOT( currentPathComboActivated(const QString&) ) );
+  connect( currentPathCombo, SIGNAL( activated(const QString&) ), this, SLOT( changeTo(const QString&) ) );
 
   connect( currentPathCombo->lineEdit(),SIGNAL(returnPressed()), this,SLOT(currentPathComboChanged()));
 

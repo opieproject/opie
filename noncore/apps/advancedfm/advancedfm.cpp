@@ -321,13 +321,6 @@ void  AdvancedFm::fillCombo(const QString &currentPath) {
    }
 }
 
-void AdvancedFm::currentPathComboActivated(const QString & currentPath) {
-   chdir( currentPath.latin1() );
-   CurrentDir()->cd( currentPath, TRUE);
-   populateView();
-   update();
-}
-
 QStringList AdvancedFm::getPath() {
    QStringList strList;
    QListView *thisView=CurrentView();
