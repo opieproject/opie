@@ -14,7 +14,7 @@
 #include <qscrollview.h>
 #include <qsplitter.h>
 
-class QVBoxLayout; 
+class QVBox; 
 class QHBoxLayout; 
 class QGridLayout; 
 class QFrame;
@@ -32,10 +32,12 @@ public:
     //QScrollView* Frame4;
     QFrame* Frame4;
     QPushButton* DatesButton;
-    QLabel* DatesField;
+    //QLabel* DatesField;
     QLabel* Frame;
     QFrame* MailFrame;
     QLabel* TextLabel1;
+    QScrollView* sv1;
+    QVBox* DatesField;
     QFrame* Frame15;
     QLabel* TodoField;
     QLabel* MailField;

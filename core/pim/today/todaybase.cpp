@@ -51,6 +51,7 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
   pal.setColor(QPalette::Active, QColorGroup::Button, col);
   this->setPalette(pal);
 
+
   QWidget *d = QApplication::desktop();
   int w=d->width();                 
   int h=d->height();                
@@ -95,7 +96,8 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
   Frame4->setFrameStyle( QFrame::NoFrame );
   Frame4->setGeometry (QRect( 0, 0, this->width() , this->height()) ); 
   
-  QScrollView* sv1 = new QScrollView( Frame4 );
+  // QScrollView* sv1 = new QScrollView( Frame4 );
+  sv1 = new QScrollView( Frame4 );
   sv1->setResizePolicy(QScrollView::AutoOneFit);
   sv1->setHScrollBarMode( QScrollView::AlwaysOff );
   // need to find a better way!!!
@@ -109,13 +111,15 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
   DatesButton->setPixmap( datebook  );
   DatesButton->setFlat( TRUE );
 
-  DatesField = new QLabel( sv1->viewport(), "DatesField" );
-  sv1->addChild(DatesField);
-  DatesField->setText( tr( "No appointments today" ) );
-  DatesField->setAlignment( int( QLabel::AlignTop | QLabel::AlignLeft ) );
+  //DatesField = new QLabel( sv1->viewport(), "DatesField" );
+  //DatesField = new QVBox(sv1->viewport());
+  //QWidget *dummy = new QWidget(sv1->viewport());
+  //sv1->addChild(DatesField);
+  //DatesField->setText( tr( "No appointments today" ) );
+  // DatesField->setAlignment( int( QLabel::AlignTop | QLabel::AlignLeft ) );
 
 
- // --- mail section ---
+ // --- mail section ---)
   MailFrame = new QFrame( this ,"MailFrame" );
   MailFrame->setBackgroundOrigin( QScrollView::ParentOrigin );
   MailFrame->setGeometry (QRect( 0, 0, this->width() , 15) ); 

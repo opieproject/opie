@@ -39,10 +39,12 @@
 #include <qtimer.h>
 #include <qpixmap.h>
 #include <qfileinfo.h>
+#include <qlayout.h>
 
 //#include <iostream.h>
 //#include <unistd.h>
 #include <stdlib.h>
+
 
 
 int MAX_LINES_TASK;
@@ -53,6 +55,8 @@ int SHOW_NOTES;
 // show only later dates
 int ONLY_LATER;
 int AUTOSTART;
+
+int NEW_START=1;
 /* 
  *  Constructs a Example which is a child of 'parent', with the 
  *  name 'name' and widget flags set to 'f' 
@@ -68,7 +72,6 @@ Today::Today( QWidget* parent,  const char* name, WFlags fl )
   autoStart();
   draw();
 }
-
 
 void Today::autoStart() {
   Config cfg("today");
@@ -203,7 +206,10 @@ void Today::startConfig() {
  */
 void Today::getDates() {
   QDate date = QDate::currentDate();
-  QTime time = QTime::currentTime();
+  QWidget* AllDateBookEvents = new QWidget( );
+  QVBoxLayout* layoutDates = new QVBoxLayout(AllDateBookEvents);
+  //QTime time = QTime::currentTime();
+  
   QValueList<EffectiveEvent> list = db->getEffectiveEvents(date, date);
 
   Config config( "qpe" );
@@ -221,68 +227,25 @@ void Today::getDates() {
       count++;
       
       if ( count <= MAX_LINES_MEET ) {
-  //cout << time.toString() << endl;
-  //cout << TimeString::dateString((*it).event().end()) << endl;
-  
-  // decide if to get all day or only later appointments
-  if (!ONLY_LATER) {
-    msg += "<B>" + (*it).description() + "</B>";
-    if ( (*it).event().hasAlarm() ) {
-      msg += " <b>[with alarm]</b>";
-    }
-    // include location or not
-    if (SHOW_LOCATION == 1) {
-      msg += "<BR><i>" + (*it).location();
-      msg += "</i>";
-    }
-    
-    if ( (TimeString::timeString(QTime((*it).event().start().time()) ) == "00:00") &&  (TimeString::timeString(QTime((*it).event().end().time()) ) == "23:59") ) {
-      msg += "<br>All day";
-    }  else {
-      // start time of event
-      msg += "<br>" + TimeString::timeString(QTime((*it).event().start().time()) )
-        // end time of event
-        + "<b> - </b>" + TimeString::timeString(QTime((*it).event().end().time()) );
-    }
-    msg += "<BR>";
-    // include possible note or not
-    if (SHOW_NOTES == 1) {
-      msg += " <i>note</i>:" +((*it).notes()).mid(0, MAX_CHAR_CLIP) + "<br>";
-    }
-  } else if ((time.toString() <= TimeString::dateString((*it).event().end())) ) {
-    msg += "<B>" + (*it).description() + "</B>";
-    if ( (*it).event().hasAlarm() ) {
-      msg += " <b>[with alarm]</b>";
-    }
-    // include location or not
-    if (SHOW_LOCATION == 1) {
-      msg+= "<BR><i>" + (*it).location();
-      msg += "</i>";
-    }
-    
-    if ( (TimeString::timeString(QTime((*it).event().start().time()) ) == "00:00") &&  (TimeString::timeString(QTime((*it).event().end().time()) ) == "23:59") ) {
-      msg += "<br>All day";
-    } else {
-      // start time of event
-      msg += "<br>" + TimeString::timeString(QTime((*it).event().start().time()) )
-        // end time of event
-        + "<b> - </b>" + TimeString::timeString(QTime((*it).event().end().time()) );
-    }
-    msg += "<BR>";
-    // include possible note or not
-    if (SHOW_NOTES == 1) {
-      msg += " <i>note</i>:" +((*it).notes()).mid(0, MAX_CHAR_CLIP) + "<br>";
-    }
-  }
+	
+	
+	DateBookEvent *l=new DateBookEvent(*it, AllDateBookEvents);
+	layoutDates->addWidget(l);
+	connect (l, SIGNAL(editEvent(const Event &)),
+		 this, SIGNAL(editEvent(const Event &)));
       }
-    }
-    if (msg.isEmpty()) {
-      msg = tr("No more appointments today");
-    }
-    DatesField->setText(msg);
+ 
+   }	
+    layoutDates->addItem(new QSpacerItem(1,1, QSizePolicy::Minimum, QSizePolicy::Expanding));
+    sv1->addChild(AllDateBookEvents);
+    
+    //if (msg.isEmpty()) {
+    //    msg = tr("No more appointments today");
+    //}
+    //DatesField->setText(msg);
   }
 }
-
+  
 /*
  * Parse in the todolist.xml
  */
@@ -371,9 +334,10 @@ void Today::getMail() {
 void Today::getTodo() {
   
   // if the todolist.xml file was not modified in between, do not parse it.
-  if (!checkIfModified()) {
+  if (!checkIfModified() && !NEW_START) {
     return;
   }
+  NEW_START=0;
 
   QString output;
   QString tmpout;
@@ -441,3 +405,74 @@ void Today::startMail() {
 Today::~Today() {
   // no need to delete child widgets, Qt does it all for us
 }
+
+
+DateBookEvent::DateBookEvent(const EffectiveEvent &ev, 
+					   QWidget* parent = 0, 
+					   const char* name = 0, 
+					   WFlags fl = 0) :
+  ClickableLabel(parent,name,fl), event(ev) {
+  
+  QString msg;
+  QTime time = QTime::currentTime();
+  
+  if (!ONLY_LATER) {
+    msg += "<B>" + (ev).description() + "</B>";
+    if ( (ev).event().hasAlarm() ) {
+      msg += " <b>[with alarm]</b>";
+    }
+    // include location or not
+    if (SHOW_LOCATION == 1) {
+      msg += "<BR><i>" + (ev).location();
+      msg += "</i>";
+    }
+    
+    if ( (TimeString::timeString(QTime((ev).event().start().time()) ) == "00:00") &&  (TimeString::timeString(QTime((ev).event().end().time()) ) == "23:59") ) {
+      msg += "<br>All day";
+    }  else {
+      // start time of event
+      msg += "<br>" + TimeString::timeString(QTime((ev).event().start().time()) )
+        // end time of event
+        + "<b> - </b>" + TimeString::timeString(QTime((ev).event().end().time()) );
+    }
+    msg += "<BR>";
+    // include possible note or not
+    if (SHOW_NOTES == 1) {
+      msg += " <i>note</i>:" +((ev).notes()).mid(0, MAX_CHAR_CLIP) + "<br>";
+    }
+  } else if ((time.toString() <= TimeString::dateString((ev).event().end())) ) {
+    msg += "<B>" + (ev).description() + "</B>";
+    if ( (ev).event().hasAlarm() ) {
+      msg += " <b>[with alarm]</b>";
+    }
+    // include location or not
+    if (SHOW_LOCATION == 1) {
+      msg+= "<BR><i>" + (ev).location();
+      msg += "</i>";
+    }
+    
+    if ( (TimeString::timeString(QTime((ev).event().start().time()) ) == "00:00") &&  (TimeString::timeString(QTime((ev).event().end().time()) ) == "23:59") ) {
+      msg += "<br>All day";
+    } else {
+      // start time of event
+      msg += "<br>" + TimeString::timeString(QTime((ev).event().start().time()) )
+        // end time of event
+        + "<b> - </b>" + TimeString::timeString(QTime((ev).event().end().time()) );
+    }
+    // include possible note or not
+    if (SHOW_NOTES == 1) {
+      msg += "<br> <i>note</i>:" +((ev).notes()).mid(0, MAX_CHAR_CLIP) + "<br>";
+    }
+  }
+
+  setText(msg);
+  connect(this, SIGNAL(clicked()), this, SLOT(editMe()));
+  setAlignment( int( QLabel::WordBreak | QLabel::AlignLeft ) );
+}
+
+void DateBookEvent::editMe() {
+  emit editEvent(event.event());
+}
+
+
+

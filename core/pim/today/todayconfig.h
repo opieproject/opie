@@ -11,7 +11,7 @@
 
 #include <qvariant.h>
 #include <qdialog.h>
-class QVBoxLayout; 
+//class QVBoxLayout; 
 class QHBoxLayout; 
 class QGridLayout; 
 class QCheckBox;
