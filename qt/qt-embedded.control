@@ -3,7 +3,7 @@ Priority: required
 Section: opie/system
 Maintainer: Warwick Allison <warwick@trolltech.com>
 Architecture: arm
-Version: $QTE_VERSION-18
+Version: $QTE_VERSION-19
 Depends: libjpeg62
 Description: Qt/Embedded environment
  A complete windowing system and GUI toolkit for handhelds.
