@@ -79,7 +79,6 @@ namespace OpieTooth {
         readConfig();
         initGui();
 
-
         //TESTING
         ListView2->setRootIsDecorated(true);
 
@@ -134,12 +133,25 @@ namespace OpieTooth {
 
         QList<RemoteDevice> *loadedDevices = new QList<RemoteDevice>;
 
-        Config deviceListSave( QDir::homeDirPath() + "/Settings/bluetooth/devicelist.conf", Config::File );
+        QDir deviceListSave( QDir::homeDirPath() + "/Settings/bluetooth/");
+        // list of .conf files
+        QStringList devicesFileList = deviceListSave.entryList();
 
+        // cut .conf of to get the mac and also read the name entry in it.
 
-        //   RemoteDevice *currentDevice = RemoteDevice( ,  );
-        //loadedDevices->append( currentDevice );
+        for ( QStringList::Iterator it = devicesFileList.begin(); it != devicesFileList.end(); ++it ) {
 
+            QString name;
+            QString mac;
+            qDebug((*it).latin1() );
+            Config conf((*it));
+            conf.setGroup("Info");
+            name = conf.readEntry("name", "Error");
+            qDebug("MAC: " + mac);
+            qDebug("NAME: " + name);
+            RemoteDevice currentDevice = RemoteDevice( mac , name  );
+            loadedDevices->append( &currentDevice );
+        }
         addSearchedDevices( *loadedDevices );
     }
 
@@ -191,7 +203,6 @@ namespace OpieTooth {
         infoString += QString( "<br><b>" + tr( "Class" ) + "</b> PDA" );
 
         return (infoString);
-
     }
 
 
@@ -212,7 +223,6 @@ namespace OpieTooth {
         QMessageBox*  box = new QMessageBox( this, "Test" );
         box->setText( tr( "Changes applied" ) );
         box->show();
-
   // falls nötig hcid killhupen - die funktionalität adden
     }
 
@@ -261,7 +271,6 @@ namespace OpieTooth {
      */
     void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & point, int column ) {
 
-
     }
 
     /**
@@ -305,8 +314,6 @@ namespace OpieTooth {
 
         QValueList<OpieTooth::Services>::Iterator it2;
 
-
-
         QListViewItem * serviceItem;
 
         for( it2 = servicesList.begin(); it2 != servicesList.end(); ++it2 ) {
@@ -332,7 +339,6 @@ namespace OpieTooth {
     bool BlueBase::deviceActive( RemoteDevice *device ) {
 
         // search by mac
-        //
        localDevice->isAvailable( device->mac() );
 
         return true;
@@ -365,6 +371,5 @@ namespace OpieTooth {
     BlueBase::~BlueBase() {
         writeSavedDevices();
     }
-
 }
 
