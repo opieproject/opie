@@ -252,7 +252,7 @@ void BackupAndRestore::backup()
     qDebug( "Storing file: %s", outputFile.latin1() );
     outputFile += EXTENSION;
 
-    QString commandLine = QString( "cd %1 && (tar -X %1 -cz %2 -f %3 ) 2> %4" ).arg( QDir::homeDirPath() )
+    QString commandLine = QString( "cd %1 && (tar -X %1 -cz %2 Applications/backup/exclude -f %3 ) 2> %4" ).arg( QDir::homeDirPath() )
                           .arg( getExcludeFile() )
                           .arg( backupFiles )
                           .arg( outputFile.latin1() )
@@ -421,14 +421,32 @@ void BackupAndRestore::restore()
 
     qDebug( restoreFile );
 
-    QString commandLine = QString( "cd %1 && tar -zxf %2 2> %3" ).arg( QDir::homeDirPath() )
-                          .arg( restoreFile.latin1() )
-                          .arg( tempFileName.latin1() );
+    //check if backup file come from opie 1.0.x
 
-    qDebug( commandLine );
+    QString commandLine = QString( "tar -tzf %1 | grep Applications/backup/exclude" ).arg( restoreFile.latin1() );
 
     int r = system( commandLine );
 
+    QString startDir;
+
+    if( r != 0 ) //Applications/backup/exclude not found - old backup file
+    {
+        startDir = QString( "/" );
+    } else
+    {
+        startDir = QDir::homeDirPath();
+    }
+
+    //unpack backup file
+    commandLine = QString( "cd %1 && tar -zxf %2 2> %3" ).arg( startDir )
+                  .arg( restoreFile.latin1() )
+                  .arg( tempFileName.latin1() );
+
+    qDebug( commandLine );
+
+    r = system( commandLine );
+
+    //error handling
     if(r != 0)
     {
         QString errorMsg= tr( "Error from System:\n" ) + (QString)strerror( errno );
@@ -477,7 +495,6 @@ void BackupAndRestore::restore()
 
     setCaption(tr("Backup and Restore"));
 }
-
 
 /**
  * Check for exclude in Applications/backup
