@@ -1,13 +1,8 @@
 #!/usr/bin/make -f
-ifndef QTDIR
-$(error QTDIR not set)
-endif
 
-export OPIEDIR:=$(shell pwd)
-export TOPDIR:=$(OPIEDIR)
-export QMAKE:=$(OPIEDIR)/qmake/qmake
+export TOPDIR:=$(shell pwd)
 
-export QMAKESPECSDIR=$(OPIEDIR)/mkspecs
+include $(TOPDIR)/Vars.make
 
 noconfig_targets := xconfig menuconfig config oldconfig randconfig \
 		    defconfig allyesconfig allnoconfig allmodconfig \
@@ -26,6 +21,18 @@ configs += $(TOPDIR)/core/applets/config.in $(TOPDIR)/core/apps/config.in $(TOPD
  
 all : $(TOPDIR)/.config
 
+STRIP=arm-linux-strip
+
+ipks: $(OPIEDIR)/scripts/subst $(OPIEDIR)/scripts/filesubst FORCE
+	@find $(OPIEDIR)/ -type f -name \*.control | ( for ctrl in `cat`; do \
+		prerm=`echo $$ctrl|sed -e 's,\.control$$,.prerm,'`; \
+		preinst=`echo $$ctrl|sed -e 's,\.control$$,.preinst,'`; \
+		postrm=`echo $$ctrl|sed -e 's,\.control$$,.postrm,'`; \
+		postinst=`echo $$ctrl|sed -e 's,\.control$$,.postinst,'`; \
+		echo "Building ipk of $$ctrl"; \
+		cd $(OPIEDIR); $(OPIEDIR)/scripts/mkipkg --subst=$(OPIEDIR)/scripts/subst --filesubst=$(OPIEDIR)/scripts/filesubst --control=$$ctrl --prerm=$$prerm --preinst=$$preinst --postrm=$$postrm --postinst=$$postinst --strip=$(STRIP) $(OPIEDIR); \
+		done )
+
 $(TOPDIR)/.config : $(TOPDIR)/.depends.cfgs
 
 all menuconfig xconfig oldconfig config randconfig allyesconfig allnoconfig defconfig : $(TOPDIR)/.depends.cfgs
@@ -34,7 +41,9 @@ clean-configs :
 	@echo "Wiping generated config.in files..."
 	@-rm -f $(configs)
 
--include $(TOPDIR)/.depends.cfgs
+ifneq ($(wildcard $(TOPDIR)/.depends.cfgs),)
+    include $(TOPDIR)/.depends.cfgs
+endif
 
 all menuconfig xconfig oldconfig config randconfig allyesconfig allnoconfig defconfig : $(configs)
 
@@ -92,7 +101,6 @@ export include-config := 1
 
 -include $(TOPDIR)/.config
 -include $(TOPDIR)/.depends
-
 endif
 
 -include $(TOPDIR)/.config.cmd
