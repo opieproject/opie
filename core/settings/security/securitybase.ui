@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>321</width>
+            <width>305</width>
             <height>483</height>
         </rect>
     </property>
@@ -109,6 +109,12 @@
                                             <name>text</name>
                                             <string>Change passcode</string>
                                         </property>
+                                        <property>
+                                            <name>whatsThis</name>
+                                            <string>This button will let you change the security passcode.  
+
+Note: This is *not* the sync password.</string>
+                                        </property>
                                     </widget>
                                     <widget>
                                         <class>QPushButton</class>
@@ -119,6 +125,11 @@
                                         <property stdset="1">
                                             <name>text</name>
                                             <string>Clear passcode</string>
+                                        </property>
+                                        <property>
+                                            <name>whatsThis</name>
+                                            <string>Delete the current passcode.  
+You can enter a new one at any time.</string>
                                         </property>
                                     </widget>
                                 </hbox>
@@ -132,6 +143,10 @@
                                 <property stdset="1">
                                     <name>text</name>
                                     <string>Require pass code at power-on</string>
+                                </property>
+                                <property>
+                                    <name>whatsThis</name>
+                                    <string>If you enable this option, a passcode must be entered after every resume event of your Zaurus.</string>
                                 </property>
                             </widget>
                             <widget>
@@ -236,12 +251,25 @@
                                     <name>text</name>
                                     <string>Login Automatically</string>
                                 </property>
+                                <property>
+                                    <name>whatsThis</name>
+                                    <string>If you select this option, opie-login will automagically log you in with the user you have selected in the drop-down list.  
+
+For the Zaurus 5x00 this is always the user "root".</string>
+                                </property>
                             </widget>
                             <widget>
                                 <class>QComboBox</class>
                                 <property stdset="1">
                                     <name>name</name>
                                     <cstring>userlist</cstring>
+                                </property>
+                                <property>
+                                    <name>whatsThis</name>
+                                    <string>This drop-down list allows you to select the user for auto-login
+(if enabled above).  
+
+You can only select an actually configured user.</string>
                                 </property>
                             </widget>
                         </vbox>
@@ -279,7 +307,7 @@
                     <name>title</name>
                     <string>Sync</string>
                 </attribute>
-                <vbox>
+                <grid>
                     <property stdset="1">
                         <name>margin</name>
                         <number>11</number>
@@ -288,7 +316,28 @@
                         <name>spacing</name>
                         <number>6</number>
                     </property>
-                    <widget>
+                    <spacer row="1"  column="0" >
+                        <property>
+                            <name>name</name>
+                            <cstring>Spacer1</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>orientation</name>
+                            <enum>Vertical</enum>
+                        </property>
+                        <property stdset="1">
+                            <name>sizeType</name>
+                            <enum>Expanding</enum>
+                        </property>
+                        <property>
+                            <name>sizeHint</name>
+                            <size>
+                                <width>20</width>
+                                <height>20</height>
+                            </size>
+                        </property>
+                    </spacer>
+                    <widget row="0"  column="0" >
                         <class>QGroupBox</class>
                         <property stdset="1">
                             <name>name</name>
@@ -324,54 +373,6 @@
                             </widget>
                             <widget>
                                 <class>QComboBox</class>
-                                <item>
-                                    <property>
-                                        <name>text</name>
-                                        <string>192.168.129.0/24 (default)</string>
-                                    </property>
-                                </item>
-                                <item>
-                                    <property>
-                                        <name>text</name>
-                                        <string>192.168.1.0/24</string>
-                                    </property>
-                                </item>
-                                <item>
-                                    <property>
-                                        <name>text</name>
-                                        <string>192.168.0.0/16</string>
-                                    </property>
-                                </item>
-                                <item>
-                                    <property>
-                                        <name>text</name>
-                                        <string>172.16.0.0/12</string>
-                                    </property>
-                                </item>
-                                <item>
-                                    <property>
-                                        <name>text</name>
-                                        <string>10.0.0.0/8</string>
-                                    </property>
-                                </item>
-                                <item>
-                                    <property>
-                                        <name>text</name>
-                                        <string>1.0.0.0/8</string>
-                                    </property>
-                                </item>
-                                <item>
-                                    <property>
-                                        <name>text</name>
-                                        <string>Any</string>
-                                    </property>
-                                </item>
-                                <item>
-                                    <property>
-                                        <name>text</name>
-                                        <string>None</string>
-                                    </property>
-                                </item>
                                 <property stdset="1">
                                     <name>name</name>
                                     <cstring>syncnet</cstring>
@@ -380,6 +381,74 @@
                                     <name>editable</name>
                                     <bool>true</bool>
                                 </property>
+                                <property>
+                                    <name>whatsThis</name>
+                                    <string>Select a net-range or enter a new one.  
+
+This drop-down list lets you select a net range which is allowed to connect to your Zaurus.  
+
+For example, a net range of 192.168.1.0/24 will allow any machine with an IP between 192.168.1.1 and 192.168.1.254 to connect to (and sync with) your Zaurus.  
+
+The entry "All" will allow *any* IP to connect. 
+The entry "None" will *deny* any connection.  
+
+If unsure, select "Any".</string>
+                                </property>
+                            </widget>
+                            <widget>
+                                <class>QLayoutWidget</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>Layout4</cstring>
+                                </property>
+                                <hbox>
+                                    <property stdset="1">
+                                        <name>margin</name>
+                                        <number>0</number>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>spacing</name>
+                                        <number>6</number>
+                                    </property>
+                                    <widget>
+                                        <class>QPushButton</class>
+                                        <property stdset="1">
+                                            <name>name</name>
+                                            <cstring>deleteentry</cstring>
+                                        </property>
+                                        <property stdset="1">
+                                            <name>text</name>
+                                            <string>Delete Entry</string>
+                                        </property>
+                                        <property>
+                                            <name>whatsThis</name>
+                                            <string>Delete the selected net range from the list
+
+If you press this button, the currently selected net range will be deleted from the list of net ranges.
+
+If you hit this button in error, the button "Restore Defaults" will restore
+the list to the state it has been when you initially booted your Zaurus.</string>
+                                        </property>
+                                    </widget>
+                                    <widget>
+                                        <class>QPushButton</class>
+                                        <property stdset="1">
+                                            <name>name</name>
+                                            <cstring>restoredefaults</cstring>
+                                        </property>
+                                        <property stdset="1">
+                                            <name>text</name>
+                                            <string>Restore Defaults</string>
+                                        </property>
+                                        <property>
+                                            <name>whatsThis</name>
+                                            <string>This button will restore the list of net ranges
+to the defaults.
+
+Beware that all manually entered net ranges will be lost!</string>
+                                        </property>
+                                    </widget>
+                                </hbox>
                             </widget>
                             <widget>
                                 <class>QLabel</class>
@@ -410,31 +479,18 @@
                                     <name>name</name>
                                     <cstring>syncapp</cstring>
                                 </property>
+                                <property>
+                                    <name>whatsThis</name>
+                                    <string>This option changes the login behaviour of the internal FTP server.  
+
+If you have problems syncing, try the "IntelliSync" setting, which will accept any password you throw at the sync (FTP) port.  
+
+The default is Qtopia. It will let you log in with username "root" and password "Qtopia".   The password is CaSeSeNsItIvE.</string>
+                                </property>
                             </widget>
                         </vbox>
                     </widget>
-                    <spacer>
-                        <property>
-                            <name>name</name>
-                            <cstring>Spacer1</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>orientation</name>
-                            <enum>Vertical</enum>
-                        </property>
-                        <property stdset="1">
-                            <name>sizeType</name>
-                            <enum>Expanding</enum>
-                        </property>
-                        <property>
-                            <name>sizeHint</name>
-                            <size>
-                                <width>20</width>
-                                <height>20</height>
-                            </size>
-                        </property>
-                    </spacer>
-                </vbox>
+                </grid>
             </widget>
         </widget>
     </vbox>
