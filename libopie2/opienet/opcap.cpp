@@ -409,6 +409,36 @@ ODHCPPacket::ODHCPPacket( const unsigned char* end, const struct dhcp_packet* da
 
 {
     qDebug( "ODHCPPacket::ODHCPPacket(): decoding DHCP information..." );
+    qDebug( "DHCP opcode seems to be %02d - '%s'", _dhcphdr->op, isRequest() ? "REQUEST" : "REPLY" );
+    qDebug( "clientAddress: %s", (const char*) clientAddress().toString() );
+    qDebug( "  yourAddress: %s", (const char*) yourAddress().toString() );
+    qDebug( "serverAddress: %s", (const char*) serverAddress().toString() );
+    qDebug( " relayAddress: %s", (const char*) relayAddress().toString() );
+    qDebug( "parsing DHCP options..." );
+
+    _type = 0;
+
+    const unsigned char* option = &_dhcphdr->options[4];
+    char tag = -1;
+    char len = -1;
+
+    while ( ( tag = *option++ ) != -1 /* end of option field */ )
+    {
+        len = *option++;
+        qDebug( "recognized DHCP option #%d, length %d", tag, len );
+
+        if ( tag == DHO_DHCP_MESSAGE_TYPE )
+            _type = *option;
+
+        option += len;
+        if ( option >= end )
+        {
+            qWarning( "DHCP parsing ERROR: sanity check says the packet is at its end!" );
+            break;
+        }
+    }
+
+    qDebug( "DHCP type seems to be '%s'", (const char*) type() );
 }
 
 
@@ -416,6 +446,58 @@ ODHCPPacket::~ODHCPPacket()
 {
 }
 
+
+bool ODHCPPacket::isRequest() const
+{
+    return ( _dhcphdr->op == 01 );
+}
+
+
+bool ODHCPPacket::isReply() const
+{
+    return ( _dhcphdr->op == 02 );
+}
+
+
+QString ODHCPPacket::type() const
+{
+    switch ( _type )
+    {
+        case 1: return "DISCOVER";
+        case 2: return "OFFER";
+        case 3: return "REQUEST";
+        case 4: return "DECLINE";
+        case 5: return "ACK";
+        case 6: return "NAK";
+        case 7: return "RELEASE";
+        case 8: return "INFORM";
+        default: qWarning( "ODHCPPacket::type(): invalid DHCP type (%d) !", _dhcphdr->op ); return "<unknown>";
+    }
+}
+
+
+QHostAddress ODHCPPacket::clientAddress() const
+{
+    return EXTRACT_32BITS( &_dhcphdr->ciaddr );
+}
+
+
+QHostAddress ODHCPPacket::yourAddress() const
+{
+    return EXTRACT_32BITS( &_dhcphdr->yiaddr );
+}
+
+
+QHostAddress ODHCPPacket::serverAddress() const
+{
+    return EXTRACT_32BITS( &_dhcphdr->siaddr );
+}
+
+
+QHostAddress ODHCPPacket::relayAddress() const
+{
+    return EXTRACT_32BITS( &_dhcphdr->giaddr );
+}
 
 /*======================================================================================
  * OTCPPacket

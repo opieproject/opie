@@ -499,8 +499,18 @@ class ODHCPPacket : public QObject
     ODHCPPacket( const unsigned char*, const struct dhcp_packet*, QObject* parent = 0 );
     virtual ~ODHCPPacket();
 
+    QHostAddress clientAddress() const;
+    QHostAddress yourAddress() const;
+    QHostAddress serverAddress() const;
+    QHostAddress relayAddress() const;
+
+    bool isRequest() const;
+    bool isReply() const;
+    QString type() const;
+
   private:
     const struct dhcp_packet* _dhcphdr;
+    unsigned char _type;
 };
 
 /*======================================================================================
