@@ -513,6 +513,13 @@ void DateBookWeek::slotShowEvent( const EffectiveEvent &ev )
 // 	where = strCat.find( "<", where );
 //     }
 
+    QString strLocation = ev.location();
+    while ( where != -1 ) {
+	strLocation.remove( where, 1 );
+	strLocation.insert( where, "&#60;" );
+	where = strLocation.find( "<", where );
+    }
+
     QString strNote = ev.notes();
     where = strNote.find( "<" );
     while ( where != -1 ) {
@@ -521,8 +528,9 @@ void DateBookWeek::slotShowEvent( const EffectiveEvent &ev )
 	where = strNote.find( "<", where );
     }
 
-    QString str = "<b>" + strDesc + "</b><br>" + "<i>"
-                  + strCat + "</i>"
+    QString str = "<b>" + strDesc + "</b><br>"
+                  + strLocation + "<br>"
+                  + "<i>" + strCat + "</i>"
                   + "<br>" + TimeString::longDateString( ev.date() )
 	          + "<br>";
 
