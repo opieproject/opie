@@ -13,11 +13,15 @@
  * =====================================================================
  * ToDo: ...
  * =====================================================================
- * Version: $Id: ocontactdb.h,v 1.1.2.9 2002-07-14 13:41:30 eilers Exp $
+ * Version: $Id: ocontactdb.h,v 1.1.2.10 2002-07-14 13:50:08 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb.h,v $
- * Revision 1.1.2.9  2002-07-14 13:41:30  eilers
+ * Revision 1.1.2.10  2002-07-14 13:50:08  eilers
+ * Interface change... REMEMBER: The search function is currently totally
+ * untested !!
+ *
+ * Revision 1.1.2.9  2002/07/14 13:41:30  eilers
  * Some bugfixes,
  * Added interface for searching contacts in database, using "query by example"
  * like system
@@ -134,14 +138,14 @@ class OContactBackend {
 	 * a new contact-object and start query with this function.
 	 * All information will be connected by an "AND".
 	 * @param query The query form.
-	 * @return <i>true</i> if something was found.
+	 * @return <i>NULL</i> if nothing was found or the first contact.
 	 * @see nextFound()
 	 */
-	virtual bool queryByExample ( const Contact &query ) = 0;
+	virtual const Contact *queryByExample ( const Contact &query ) = 0;
 
 	/** Requests a contact which was selected by queryByExample().
 	 * Use this function to move through the list of selected contacts.
-	 * @return Pointer to next contact or <i>null</i> if list empty or no 
+	 * @return Pointer to next contact or <i>NULL</i> if list empty or no 
 	 * next element.
 	 * @see qeryByExample
 	 */
@@ -216,10 +220,10 @@ class OContactDB: public QObject
 	 * a new contact-object and start query with this function.
 	 * All information will be connected by an "AND".
 	 * @param query The query form.
-	 * @return <i>true</i> if something was found.
+	 * @return <i>NULL</i> if nothing was found or the first contact.
 	 * @see nextFound()
 	 */
-	bool queryByExample ( const Contact &query ); 
+	const Contact *queryByExample ( const Contact &query ); 
 
 	/** Requests a contact which was selected by queryByExample().
 	 * Use this function to move through the list of selected contacts.

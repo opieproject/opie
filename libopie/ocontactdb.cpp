@@ -14,11 +14,15 @@
  *       with our version of libqpe
  *
  * =====================================================================
- * Version: $Id: ocontactdb.cpp,v 1.1.2.8 2002-07-14 13:41:30 eilers Exp $
+ * Version: $Id: ocontactdb.cpp,v 1.1.2.9 2002-07-14 13:50:08 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb.cpp,v $
- * Revision 1.1.2.8  2002-07-14 13:41:30  eilers
+ * Revision 1.1.2.9  2002-07-14 13:50:08  eilers
+ * Interface change... REMEMBER: The search function is currently totally
+ * untested !!
+ *
+ * Revision 1.1.2.8  2002/07/14 13:41:30  eilers
  * Some bugfixes,
  * Added interface for searching contacts in database, using "query by example"
  * like system
@@ -202,7 +206,7 @@ namespace {
 			return ( false );
 		}
 		
-		bool queryByExample ( const Contact &query ){
+		const Contact *queryByExample ( const Contact &query ){
 			m_currentQuery.setAutoDelete( false );
 			m_currentQuery.clear();
 
@@ -228,9 +232,9 @@ namespace {
 			}
 			
 			/* Move to the top of the list and set this query valid */
-			m_currentQuery.first();
+			
 			m_queryValid = true;
-			return true;
+			return m_currentQuery.first();
 		}
 
 		const Contact *nextFound ()
@@ -586,7 +590,7 @@ QValueList<Contact> OContactDB::allContacts() const
 	return ( m_backEnd->allContacts() );
 }
 
-bool OContactDB::queryByExample ( const Contact &query )
+const Contact *OContactDB::queryByExample ( const Contact &query )
 {
 	return ( m_backEnd->queryByExample ( query ) );
 }
