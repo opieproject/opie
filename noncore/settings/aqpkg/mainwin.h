@@ -88,6 +88,7 @@ private:
     bool showInstalledPkgs;
     bool showUpgradedPkgs;
     bool downloadEnabled;
+	bool reloadDocuments;
 
     void initMainWidget();
     void updateData();

@@ -756,6 +756,7 @@ void MainWindow :: updateServer()
     InstallDlgImpl *dlg = new InstallDlgImpl( ipkg, tr( "Refreshing server package lists" ),
                                               tr( "Update lists" ) );
     connect( dlg, SIGNAL( reloadData( InstallDlgImpl * ) ), this, SLOT( reloadData( InstallDlgImpl * ) ) );
+	reloadDocuments = FALSE;
     stack->addWidget( dlg, 3 );
     stack->raiseWidget( dlg );
 
@@ -786,6 +787,7 @@ void MainWindow :: upgradePackages()
         InstallDlgImpl *dlg = new InstallDlgImpl( ipkg, tr( "Upgrading installed packages" ),
                                                   tr ( "Upgrade" ) );
         connect( dlg, SIGNAL( reloadData( InstallDlgImpl * ) ), this, SLOT( reloadData( InstallDlgImpl * ) ) );
+		reloadDocuments = TRUE;
         stack->addWidget( dlg, 3 );
         stack->raiseWidget( dlg );
     }
@@ -928,6 +930,7 @@ void MainWindow :: downloadRemotePackage()
 
     InstallDlgImpl *dlg = new InstallDlgImpl( workingPackages, mgr, tr( "Download" ) );
     connect( dlg, SIGNAL( reloadData( InstallDlgImpl * ) ), this, SLOT( reloadData( InstallDlgImpl * ) ) );
+	reloadDocuments = TRUE;
     stack->addWidget( dlg, 3 );
     stack->raiseWidget( dlg );
 }
@@ -967,6 +970,7 @@ void MainWindow :: applyChanges()
     // do the stuff
     InstallDlgImpl *dlg = new InstallDlgImpl( workingPackages, mgr, tr( "Apply changes" ) );
     connect( dlg, SIGNAL( reloadData( InstallDlgImpl * ) ), this, SLOT( reloadData( InstallDlgImpl * ) ) );
+	reloadDocuments = TRUE;
     stack->addWidget( dlg, 3 );
     stack->raiseWidget( dlg );
 }
@@ -1106,12 +1110,15 @@ void MainWindow :: reloadData( InstallDlgImpl *dlg )
     serverSelected( -1, FALSE );
 
 #ifdef QWS
-    m_status->setText( tr( "Updating Launcher..." ) );
+    if ( reloadDocuments )
+	{
+		m_status->setText( tr( "Updating Launcher..." ) );
 
-    // Finally let the main system update itself
-    QCopEnvelope e("QPE/System", "linkChanged(QString)");
-    QString lf = QString::null;
-    e << lf;
+		// Finally let the main system update itself
+		QCopEnvelope e("QPE/System", "linkChanged(QString)");
+		QString lf = QString::null;
+		e << lf;
+	}
 #endif
 
     stack->raiseWidget( networkPkgWindow );
