@@ -6,12 +6,14 @@
    - Attendees
    
 - OFileSelector
-   - DocLnk when not in Document Mode
+   - DocLnk when not in Document Mode ( and vice versa )
+   - MultipleDocuments
    - TreeView have a own OFileSelectorItem for this
    - IconView add a QIconView to the widgetstack
    - Move OFileSelectorItem to it's own files
    - add functions to access the member variables
    - debug
+   - new Dirs created inside the listview
    
 - Clickable labels?
    Harlekin you wanted them in the libs?

@@ -155,7 +155,8 @@ class OFileSelector : public QWidget {
   int selector()const { return m_selector; };
   void setSelector( int );
   
-
+  bool showPopup()const { return m_showPopup; };
+  void setShowPopup( bool pop ) { m_showPopup = pop; };
   void setPopupMenu( QPopupMenu * );
 
   void updateLay();
@@ -195,12 +196,14 @@ class OFileSelector : public QWidget {
  protected:
 
  private:
-int m_mode, m_selector;
+  int m_mode, m_selector;
   QComboBox *m_location, *m_mimeCheck, *m_viewCheck;
   QPushButton *m_homeButton, *m_docButton, *m_hideButton, *m_ok, *m_cancel;
   QPushButton  *m_reread, *m_up;
   QListView *m_View;
   QCheckBox *m_checkPerm;
+  QWidget *m_pseudo;
+  QVBoxLayout *m_pseudoLayout;
 
   QString m_currentDir;
   QString m_name;
@@ -230,6 +233,7 @@ int m_mode, m_selector;
   bool m_case:1;
   bool m_dir:1;
   bool m_files:1;
+  bool m_showPopup:1;
 
   // implementation todo
   virtual void addFile(const QString &mime, QFileInfo *info, bool symlink = FALSE );
@@ -262,6 +266,7 @@ private slots:
    virtual void slotRescan();
    virtual void slotRename();
    virtual void slotDelete();
+   virtual void cdUP();
 
 };
 

@@ -49,6 +49,7 @@
 #include <qpe/global.h>
 #include <qpe/mimetype.h>
 #include <qpe/resource.h>
+#include <qpe/storage.h>
 
 #include <unistd.h>
 #include <stdlib.h>
@@ -116,9 +117,13 @@ OFileSelector::OFileSelector(QWidget *wid, int mode, int selector, const QString
   m_mimeCheck = 0;
   m_viewCheck = 0;
 
+  m_pseudo = 0;
+  m_pseudoLayout = 0;
+
   m_dir = true;
   m_files = true;
   m_custom = 0;
+  m_showPopup = true;
 
   if(m_pixmaps == 0 ) // init the pixmaps
     initPics();
@@ -229,11 +234,19 @@ void OFileSelector::setToolbarVisible( bool show )
 {
   if ( m_shTool == show )
     return;
-  /*  if( show ){
-
-  }else {
-
-  }*/
+  if(!m_shTool ){
+    delete m_boxToolbar;
+    delete m_homeButton;
+    delete m_docButton;
+    delete m_location;
+    delete m_up;
+    m_boxToolbar = 0;
+    m_homeButton = 0;
+    m_docButton = 0;
+    m_location = 0;
+    m_up = 0;
+  };
+  updateLay();// overkill fix it
 }
 
 void OFileSelector::setPermissionBarVisible( bool show )
@@ -418,7 +431,25 @@ void OFileSelector::reparse()
   };
   QDir dir( m_currentDir );
   //dir.setFilter(-1 );
-  dir.setSorting(QDir::Name | QDir::DirsFirst | QDir::Reversed | QDir::IgnoreCase  );
+  int sort = QDir::Name | QDir::DirsFirst | QDir::Reversed;
+  if( m_case )
+    sort = QDir::IgnoreCase;
+  dir.setSorting( sort  );
+  
+  int filter;
+  /*  if( m_dir && !m_files)
+      filter |= QDir::Dirs;
+      else if( !m_dir && m_files )
+      filter |= QDir::Files;
+      else
+      filter |= QDir::All;
+  */
+  if( m_selector == EXTENDED_ALL )
+    filter = QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All;
+  else
+    filter = QDir::Files | QDir::Dirs | QDir::All;
+  dir.setFilter( filter );
+
   const QFileInfoList *list = dir.entryInfoList();
   QFileInfoListIterator it( *list );
   QFileInfo *fi;
@@ -554,9 +585,25 @@ void OFileSelector::slotViewCheck(const QString &view ){
   if( view == QString::fromLatin1("Documents") ){
     // get the mimetype now
     // check if we're the current widget and return
-    if( m_View != 0) // delete 0 shouldn't crash but it did :( 
+    if( m_View != 0) { // delete 0 shouldn't crash but it did :( 
       delete m_View;
+      delete m_boxToolbar;
+      delete m_homeButton;
+      delete m_docButton;
+      delete m_location;
+      delete m_up;
+      delete m_pseudo;
+      delete m_pseudoLayout;
+    }
     m_View = 0;
+    m_boxToolbar = 0;
+    m_homeButton = 0;
+    m_docButton = 0;
+    m_location = 0;
+    m_up = 0;
+    m_pseudo = 0;
+    m_pseudoLayout = 0;
+
     delete m_select;
     m_select = new FileSelector( currMime == "All" ? QString::null : currMime,
 				 m_stack,"fileselector", FALSE, FALSE );
@@ -574,6 +621,22 @@ void OFileSelector::slotViewCheck(const QString &view ){
     m_select = 0;
     delete m_View;
     m_View = 0;
+
+    delete m_boxToolbar;
+    delete m_homeButton;
+    delete m_docButton;
+    delete m_location;
+    delete m_up;
+    delete m_pseudo;
+    delete m_pseudoLayout;
+    m_boxToolbar = 0;
+    m_homeButton = 0;
+    m_docButton = 0;
+    m_location = 0;
+    m_up = 0;
+    m_pseudo = 0;
+    m_pseudoLayout = 0;
+
     m_selector = EXTENDED;
     // create the ListView or IconView
     initializeListView();
@@ -585,6 +648,21 @@ void OFileSelector::slotViewCheck(const QString &view ){
     m_select = 0;
     delete m_View;
     m_View = 0;
+    delete m_boxToolbar;
+    delete m_homeButton;
+    delete m_docButton;
+    delete m_location;
+    delete m_up;
+    delete m_pseudo;
+    delete m_pseudoLayout;
+    m_boxToolbar = 0;
+    m_homeButton = 0;
+    m_docButton = 0;
+    m_location = 0;
+    m_up = 0;
+    m_pseudo = 0;
+    m_pseudoLayout = 0;
+
     m_selector = EXTENDED_ALL;
     initializeListView();
     reparse();
@@ -611,10 +689,69 @@ void OFileSelector::updateMimes() // lets check which mode is active
   }
 };
 void OFileSelector::initializeListView()
-{
-  m_View = new QListView(m_stack, "Extended view" );
-  m_stack->addWidget( m_View, EXTENDED );
+{ 
+  // just to make sure but clean it up better FIXME
+  delete m_View;
+  m_View = 0;
+  delete m_boxToolbar;
+  delete m_homeButton;
+  delete m_docButton;
+  delete m_location;
+  delete m_up;
+  delete m_pseudo;
+  delete m_pseudoLayout;
+  m_boxToolbar = 0;
+  m_homeButton = 0;
+  m_docButton = 0;
+  m_location = 0;
+  m_up = 0;
+  m_pseudo = 0;
+  m_pseudoLayout = 0;
+  // time for the toolbar 
+  m_pseudo = new QWidget(m_stack, "Pseudo Widget");
+  m_pseudoLayout = new QVBoxLayout(m_pseudo );
+  if(m_shTool ){
+    m_boxToolbar = new QHBoxLayout( );
+    m_boxToolbar->setAutoAdd( true );
+    m_location = new QComboBox(m_pseudo );
+
+    m_up = new QPushButton(Resource::loadIconSet("up"),"", m_pseudo,"cdUpButton");
+    m_up->setMinimumSize( QSize( 20, 20 ) );
+    m_up->setMaximumSize( QSize( 20, 20 ) );
+    connect(m_up ,SIGNAL(clicked()),this,SLOT(cdUP()  ) );
+    m_up->setFlat(TRUE);
+
+    m_homeButton = new QPushButton(Resource::loadIconSet("home") , "", m_pseudo);
+    m_homeButton->setMinimumSize( QSize( 20, 20 ) );
+    m_homeButton->setMaximumSize( QSize( 20, 20 ) );
+    connect(m_homeButton,SIGNAL(clicked()),this,SLOT(slotHome() ) );
+    m_homeButton->setFlat(TRUE);
+
+    m_docButton = new QPushButton(Resource::loadIconSet("DocsIcon"),"", m_pseudo,"docsButton");
+    m_docButton->setMinimumSize( QSize( 20, 20 ) );
+    m_docButton->setMaximumSize( QSize( 20, 20 ) );
+    connect(m_homeButton,SIGNAL(clicked()),this,SLOT(slotDoc() ) );
+    m_docButton->setFlat(TRUE);
+
+    m_boxToolbar->addWidget(m_location );
+    m_boxToolbar->addWidget(m_up );
+    m_boxToolbar->addWidget(m_homeButton );
+    m_boxToolbar->addWidget(m_docButton );
+    m_pseudoLayout->addLayout(m_boxToolbar );
+    // lets fill the combobox
+    StorageInfo storage;
+    const QList<FileSystem> &fs = storage.fileSystems();
+    QListIterator<FileSystem> it ( fs );
+    for( ; it.current(); ++it ){
+      const QString disk = (*it)->name();
+      const QString path = (*it)->path();
+      m_location->insertItem(path+ "<-"+disk );
+    }
+  };
+  m_View = new QListView(m_pseudo, "Extended view" );
+  m_stack->addWidget( m_pseudo, EXTENDED );
   m_stack->raiseWidget( EXTENDED );
+  m_pseudoLayout->addWidget(m_View );
   QPEApplication::setStylusOperation( m_View->viewport(),QPEApplication::RightOnHold);
   // set up the stuff
   // Pixmap Name Date Size mime
@@ -635,6 +772,8 @@ void OFileSelector::initializeListView()
 	  this, SLOT(slotClicked( int, QListViewItem *, const QPoint &, int) ) );
   connect(m_View, SIGNAL(mouseButtonPressed(int, QListViewItem *, const QPoint &, int )), 
 	  this, SLOT(slotRightButton(int, QListViewItem *, const QPoint &, int  ) ) );
+
+ 
 };
 /* If a item is locked  depends on the mode
    if we're in OPEN !isReadable is locked
@@ -797,6 +936,9 @@ void OFileSelector::slotClicked( int button, QListViewItem *item, const QPoint &
 }
 void OFileSelector::slotRightButton(int button, QListViewItem *item, const QPoint &, int )
 {
+  if (item == 0 )
+    return;
+
   if( button != Qt::RightButton )
     return; 
   qWarning("right button" );
@@ -805,10 +947,19 @@ void OFileSelector::slotRightButton(int button, QListViewItem *item, const QPoin
 void OFileSelector::slotContextMenu(QListViewItem *item)
 {
   qWarning("context menu" );
+  if( item ==0 || !m_showPopup )
+    return;
+ 
   if( m_custom !=0){
     m_custom->exec();
   }else{
     QPopupMenu menu;
+    QAction up;
+    up.setText("cd up");
+    up.addTo( &menu );
+    connect(&up, SIGNAL(activated() ),
+	    this, SLOT(cdUP()  ) );
+
     QAction act;
     OFileSelectorItem *sel = (OFileSelectorItem*)item;
     if(sel->isDir() ){
@@ -825,20 +976,20 @@ void OFileSelector::slotContextMenu(QListViewItem *item)
     QAction rescan;
     rescan.setText( tr("Rescan")  );
     rescan.addTo( &menu );
-    connect(&act, SIGNAL(activated() ),
+    connect(&rescan, SIGNAL(activated() ),
 	    this, SLOT(slotRescan() ) );
 
     QAction rename;
     rename.setText( tr("Rename") );
     rename.addTo( &menu );
-    connect(&act, SIGNAL(activated() ),
+    connect(&rename, SIGNAL(activated() ),
 	    this, SLOT(slotRename() ) );
 
     menu.insertSeparator();
     QAction delItem;
     delItem.setText( tr("Delete")  );
     delItem.addTo(&menu );
-    connect(&act, SIGNAL(activated() ),
+    connect(&delItem, SIGNAL(activated() ),
 	    this, SLOT(slotDelete() ) );
 
     menu.exec(QCursor::pos() );
@@ -895,6 +1046,14 @@ void OFileSelector::slotDelete()
   delete sel;
 }
 
-
+void OFileSelector::cdUP()
+{
+  QDir dir( m_currentDir );
+  dir.cdUp();
+  if(dir.exists() ){
+    m_currentDir = dir.absPath();
+    reparse();
+  }
+}
 
 
