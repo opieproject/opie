@@ -30,6 +30,8 @@
 
 #include <zlib.h>
 
+const int PAGE_BACKUPS = 99;
+
 class DrawPadCanvasXmlHandler: public QXmlDefaultHandler
 {
 public:
@@ -372,7 +374,7 @@ void DrawPadCanvas::backupPage()
         m_pageBackups.removeLast();
     }
 
-    while (m_pageBackups.count() >= (5 + 1)) {
+    while (m_pageBackups.count() >= (PAGE_BACKUPS + 1)) {
         m_pageBackups.removeFirst();
     }
 
