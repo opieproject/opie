@@ -194,7 +194,7 @@ void Keyboard::drawKeyboard(QPainter &p, int row, int col)
         }
         else
             // center the image in the middle of the key
-            p.drawImage( x + (defaultKeyWidth * keyWidth - pix->width())/2, 
+            p.drawImage( x + (defaultKeyWidth * keyWidth - pix->width())/2 + 1, 
                           y + (keyHeight - pix->height())/2 + 1, 
                           *pix );
 
@@ -244,7 +244,7 @@ void Keyboard::drawKeyboard(QPainter &p, int row, int col)
             else {
                 // center the image in the middle of the key
                 pix->setColor(1, textcolor.rgb());
-                p.drawImage( x + (keyWidthPix - pix->width())/2, 
+                p.drawImage( x + (keyWidthPix - pix->width())/2 + 1, 
                               y + (keyHeight - pix->height())/2 + 1, 
                               QImage(*pix) );
             }
