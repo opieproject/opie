@@ -35,12 +35,15 @@ Multikey::Multikey(QWidget *parent) : QLabel(parent), popupMenu(this), current("
     lang = 0;
     QCopEnvelope e("MultiKey/Keyboard", "getmultikey()");
     setText("EN");
-    popupMenu.insertItem("EN", -1);
+    popupMenu.insertItem("EN", 0);
     show();
 }
 
 void Multikey::mousePressEvent(QMouseEvent *ev)
 {
+    if (!sw_maps.count())
+	return;
+
     if (ev->button() == RightButton) {
 
 	QPoint p = mapToGlobal(QPoint(0, 0));
@@ -61,6 +64,9 @@ void Multikey::mousePressEvent(QMouseEvent *ev)
 
 void Multikey::mouseReleaseEvent(QMouseEvent *ev)
 {
+    if (!sw_maps.count())
+	return;
+
     lang = lang < sw_maps.count()-1 ? lang+1 : 0;
     QCopEnvelope e("MultiKey/Keyboard", "setmultikey(QString)");
     //qDebug("Lang=%d, count=%d, lab=%s", lang, sw_maps.count(), labels[lang].ascii());
