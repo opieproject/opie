@@ -1,4 +1,4 @@
-  config OPIEMAIL
+  config OPIEMAIL2
     boolean "opiemail"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
