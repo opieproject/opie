@@ -50,7 +50,6 @@
 #include "playlistwidget.h"
 #include "mediaplayerstate.h"
 
-#include "fileBrowser.h"
 #include "inputDialog.h"
 
 #include <stdlib.h>
@@ -561,9 +560,9 @@ void PlayListWidget::saveList() {
 
 
 void PlayListWidget::loadList( const DocLnk & lnk) {
-
+    qDebug("load list "+ lnk.name()+".playlist");
     clearList();
-    Config cfg( lnk.file());
+    Config cfg( lnk.name()+".playlist");
     readConfig(cfg);
     tabWidget->setCurrentPage(0);
     setCaption("OpiePlayer: "+lnk.name());
