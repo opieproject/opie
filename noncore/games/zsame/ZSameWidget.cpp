@@ -21,17 +21,17 @@
 
 #include <stdio.h>
 
+#include <opie2/oapplicationfactory.h>
+
+#include <qpe/resource.h>
+
 #include <qtoolbar.h>
 #include <qmenubar.h>
-
 #include <qapplication.h>
 #include <qaction.h>
 #include <qmessagebox.h>
 
-#include <qpe/resource.h>
-#include <opie/oapplicationfactory.h>
 #include <kapplication.h>
-
 
 #include "ZSameWidget.h"
 
