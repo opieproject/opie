@@ -160,6 +160,8 @@ void ScreenshotControl::slotGrab() {
 
             if(fileName.find("/",0,TRUE)==-1) 
                 FileNamePath = QDir::homeDirPath()+"/Documents/image/png/"+fileName;
+            else
+                FileNamePath = fileName;
 //            qDebug(fileName);
             
         }
