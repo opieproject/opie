@@ -636,6 +636,7 @@ void PlayListWidget::tabChanged(QWidget *) {
             tbDeletePlaylist->show();
         }
         playLists->reread();
+        d->tbAddToList->setEnabled(FALSE);
     }
     break;
     };
