@@ -2,7 +2,7 @@
  * Copyright (C) 2002 Martin Imobersteg <imm@gmx.ch> 
  *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Library General Public
+ * modify it under the terms of the GNU General Public
  * License as published by the Free Software Foundation; either
  * version 2 of the License,Life or (at your option) any later version.
  *
@@ -86,7 +86,6 @@ BuzzWord::BuzzWord() : QMainWindow(0)
 	game->insertItem(tr("&New game"), this, SLOT(newGame()), Key_N );
 	game->insertSeparator();
 	game->insertItem(tr("&About"), this, SLOT(about()));
-	game->insertItem(tr("&Quit"), qApp, SLOT(quit()), Key_Q );
 	menu->insertItem( tr("&Game"), game );
 
 	gridVal = 4;
