@@ -101,7 +101,7 @@ AlarmDlg::AlarmDlg(QWidget *parent, const char *name, bool modal,
     AlarmDlgBase(parent, name, modal)
 {
     setCaption( tr("Clock") );
-    pixmap->setPixmap( Resource::loadPixmap("alarmbell") );
+    pixmap->setPixmap( Resource::loadPixmap("clock/alarmbell") );
     alarmDlgLabel->setText(txt);
 
     connect(snoozeTime, SIGNAL(valueChanged(int)), this,
