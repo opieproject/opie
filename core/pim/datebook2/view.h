@@ -13,13 +13,18 @@ namespace Datebook {
     class View {
     public:
         View( MainWindow* window,  QWidget* parent );
-        virtual ~View() = 0;
+        virtual ~View();
 
         static QDate dateFromWeek( int week, int year, bool startOnMonda );
         static bool calcWeek( const QDate& d, int &week, int &year, bool startOnMonday = false );
 
         virtual QPixmap pixmap()const = 0;
         virtual QString description()const = 0;
+
+        /**
+         * return the uid of the current item or 0
+         */
+        virtual int currentItem()const = 0;
 
         /**
          * loadConfig
@@ -30,8 +35,10 @@ namespace Datebook {
 
         /**
          * the current range
+         * @param src Where to write the start datetime
+         * @param dest Where to write the end datetime
          */
-        void currentRange( const QDateTime& src, const QDateTime& from);
+        virtual void currentRange( const QDateTime& src, const QDateTime& from) = 0;
 
         /**
          * the clock format changed
@@ -46,20 +53,21 @@ namespace Datebook {
 
         /**
          * show date in your view!!
+         * make the date visible in the current view
          */
         virtual void showDay( const QDate& date ) = 0;
 
         /**
          * return the widget
          */
-        virtual QWidget* widget();
+        virtual QWidget* widget() = 0;
 
         /**
          * the view needs an update!
          */
-        virtual void reschedule() = 0
+        virtual void reschedule() = 0;
     protected:
-        void popup( int );
+        void popup( int uid);
         QString toShortText(const OEffectiveEvent& eff)const;
         QString toText(const OEffectiveEvent& eff)const;
         virtual void doLoadConfig( Config* ) = 0;
@@ -114,8 +122,11 @@ namespace Datebook {
         /**
          * return related records for days
          */
-        QPtrList<OPimRecord> records( const QDate& on );
-        QPtrList<OPimRecord> records( const QDate& start, const QDate& to );
+        QList<OPimRecord> records( const QDate& on );
+        QList<OPimRecord> records( const QDate& start, const QDate& to );
+
+    private:
+        MainWindow* m_win;
     };
 }
 

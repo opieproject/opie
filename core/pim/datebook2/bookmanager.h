@@ -20,6 +20,7 @@ namespace Datebook {
 
         bool isLoaded()const;
         bool load();
+        void reload();
         bool save();
 
         OEvent event( int uid );
@@ -28,12 +29,16 @@ namespace Datebook {
         ODateBookAccess::List allRecords()const;
 
         void add( const OEvent& );
+        void add( const OPimRecord& );
         void update( const OEvent& );
         void remove( int uid );
         void remove( const QArray<int>& );
 
-        QPtrList<OPimRecord> records( const QDate& from,
+        QList<OPimRecord> records( const QDate& from,
                                       const QDate& to );
+
+    private:
+        ODateBookAccess* m_db;
     };
 }
 

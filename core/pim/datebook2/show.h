@@ -2,6 +2,7 @@
 #define OPIE_DATEBOOK_SHOW_H
 
 #include <qstring.h>
+#include <qtextview.h>
 
 #include <opie/oevent.h>
 
@@ -25,7 +26,7 @@ namespace Datebook {
         /**
          * show the OEvent
          */
-        void show(const OEvent& str);
+        virtual void show(const OEvent& str) = 0;
 
         /**
          * the Widget
@@ -37,6 +38,18 @@ namespace Datebook {
          * ask the mainwindow to hide
          */
         void  hideMe();
+
+    private:
+        MainWindow* m_win;
+    };
+    class TextShow : public QTextView {
+        Q_OBJECT
+    public:
+        TextShow( QWidget* parent, MainWindow* win );
+        ~TextShow();
+
+        QWidget* widget();
+        void show(const OEvent&);
 
     };
 }

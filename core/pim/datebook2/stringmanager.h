@@ -17,7 +17,7 @@ namespace Datebook {
         /**
          * baseName is used for storing
          */
-        StringManager(const QString& baseName);
+        StringManager(const QString& baseName = QString::null);
         ~StringManager();
 
         /**
@@ -26,8 +26,9 @@ namespace Datebook {
          */
         void add( const QString& );
     private:
-        void doLoad();
-        void doSave();
+        QString m_base;
+        bool doLoad();
+        bool doSave();
     };
 
     /**
@@ -36,8 +37,8 @@ namespace Datebook {
     class StringManagerDialog : public QDialog {
         Q_OBJECT
     public:
-        StringManagerDialog( const StringManager& );
-        ~StringManager();
+        StringManagerDialog( const StringManager&);
+        ~StringManagerDialog();
 
         StringManager manager()const;
     };
