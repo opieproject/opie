@@ -994,7 +994,7 @@ void ServerPI::timerEvent( QTimerEvent * )
 }
 
 
-ServerDTP::ServerDTP( QObject *parent = 0, const char* name = 0)
+ServerDTP::ServerDTP( QObject *parent, const char* name)
   : QSocket( parent, name ), mode( Idle ), createTargzProc( 0 ),
 retrieveTargzProc( 0 ), gzipProc( 0 )
 {

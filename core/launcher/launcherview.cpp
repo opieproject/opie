@@ -43,6 +43,7 @@
 #include <qtoolbutton.h>
 #include <qimage.h>
 
+#include <cstdlib>
 
 class BgPixmap
 {
@@ -90,7 +91,7 @@ public:
     
     void setBusyIndicatorType ( BusyIndicatorType t ) { busyType = t; }
 
-    QPixmap* busyPixmap() const { return (QPixmap*)&bpm[::abs(busystate)]; }
+    QPixmap* busyPixmap() const { return (QPixmap*)&bpm[abs(busystate)]; }
     QIconViewItem* busyItem() const { return bsy; }
     void setBigIcons( bool bi ) { bigIcns = bi; }
 
@@ -131,7 +132,7 @@ public:
 			count = img.numColors();
 		    }
 		    int rc, gc, bc;
-		    int bs = ::abs ( i * 10 ) + 25;
+		    int bs = abs ( i * 10 ) + 25;
 		    colorGroup().highlight().rgb( &rc, &gc, &bc );
 		    rc = rc * bs / 100;
 		    gc = gc * bs / 100;
