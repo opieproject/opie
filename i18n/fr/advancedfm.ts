@@ -291,19 +291,19 @@ et tout son contenu ?</translation>
     </message>
     <message>
         <source> kB free</source>
-        <translation type="unfinished"></translation>
+        <translation>Ko libre</translation>
     </message>
     <message>
         <source>Switch to View 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir Liste 1</translation>
     </message>
     <message>
         <source>Switch to View 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir Liste 2</translation>
     </message>
     <message>
         <source>Not Yet Implemented</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas Encore Implémenté</translation>
     </message>
 </context>
 <context>
@@ -399,7 +399,7 @@ Terminé
     </message>
     <message>
         <source>filePermissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Permissions Fichier</translation>
     </message>
 </context>
 </TS>
