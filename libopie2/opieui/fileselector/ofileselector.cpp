@@ -547,7 +547,7 @@ void OFileViewFileListView::slotCurrentChanged( QListViewItem* item)
         // if in fileselector mode we will emit selected
         if ( selector()->mode() == OFileSelector::FileSelector )
         {
-            owarn << "slot Current Changed" << oendl;
+            odebug << "slot Current Changed" << oendl;
             QStringList str = QStringList::split("->", sel->text(1) );
             QString path = sel->directory() + "/" + str[0].stripWhiteSpace();
             emit selector()->fileSelected( path );
@@ -575,7 +575,7 @@ void OFileViewFileListView::slotClicked(int button , QListViewItem* item, const 
         }
         else
         { // file
-            owarn << "slot Clicked" << oendl;
+            odebug << "slot Clicked" << oendl;
             selector()->m_lneEdit->setText( str[0].stripWhiteSpace() );
             QString path = sel->directory() + "/" + str[0].stripWhiteSpace();
             emit selector()->fileSelected( path );
