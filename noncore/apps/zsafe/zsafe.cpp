@@ -4,7 +4,7 @@
 **
 ** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: zsafe.cpp,v 1.18 2004-07-10 01:04:49 llornkcor Exp $
+** $Id: zsafe.cpp,v 1.19 2004-07-10 01:55:11 llornkcor Exp $
 **
 ** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 **
@@ -929,7 +929,11 @@ void ZSafe::findPwd()
        name = dialog->NameField->text();
        username = dialog->UsernameField->text();
        comment = dialog->CommentField->text();
-       owarn << name << oendl;
+#ifndef NO_OPIE
+			 owarn << name << oendl;
+#else
+       qWarning (name);			 
+#endif
     }
     else
     {
@@ -975,7 +979,9 @@ void ZSafe::findPwd()
          i != NULL;
          i = i->nextSibling())
     {
+#ifndef NO_OPIE
        owarn << i->text(0) << oendl;
+#endif
        i->setSelected(FALSE);
 
        // step through all subitems
@@ -989,7 +995,11 @@ void ZSafe::findPwd()
             si != NULL;
             si = si->nextSibling())
        {
+#ifndef NO_OPIE
           owarn << si->text(0) << oendl;
+#else
+					qWarning (si->text(0));
+#endif
           if (si->isSelected())
              si->setSelected(FALSE);
           // ListView->repaintItem(si);
@@ -1006,7 +1016,11 @@ void ZSafe::findPwd()
 
           if ((n && u && c ) && !found)
           {
+#ifndef NO_OPIE
              owarn << "Found" << oendl;
+#else
+             qWarning ("Found");
+#endif
              selectedItem = si;
              si->setSelected(TRUE);
              ListView->setCurrentItem(si);
@@ -1276,7 +1290,11 @@ void ZSafe::removeAsciiFile()
     QFile f( fn );
     if ( !f.remove() )
     {
+#ifndef NO_OPIE
         owarn << "Could not remove file " << fn << oendl;
+#else
+        qWarning( QString("Could not remove file %1").arg(fn),2000 );
+#endif
         QMessageBox::critical( 0, tr("ZSafe"),
                   tr("Could not remove text file.") );
         return;
@@ -1325,7 +1343,11 @@ void ZSafe::writeAllEntries()
    {
     QFile f( fn );
     if ( !f.open( IO_WriteOnly ) ) {
+#ifndef NO_OPIE
         owarn << "Could not write to file " << fn << oendl;
+#else
+        qWarning( QString("Could not write to file %1").arg(fn),2000 );
+#endif
         QMessageBox::critical( 0, "ZSafe",
                   QString("Could not export to text file.") );
         return;
@@ -1419,7 +1441,11 @@ void ZSafe::readAllEntries()
    QFile f( fn );
    if ( !f.open( IO_ReadOnly ) )
    {
+#ifndef NO_OPIE
       owarn << "Could not read file " << fn << oendl;
+#else
+      qWarning( QString("Could not read file %1").arg(fn), 2000 );
+#endif
       QMessageBox::critical( 0, "ZSafe",
                   QString("Could not import text file.") );
       return;
@@ -1448,8 +1474,12 @@ void ZSafe::readAllEntries()
       }
    }
 
+#ifndef NO_OPIE
    owarn << "ReadAllEntries(): " << oendl;
-
+#else
+   qWarning ("ReadAllEntries(): ");
+#endif
+	 
    QTextStream t(&f);
    while ( !t.eof() )
    {
@@ -1595,11 +1625,22 @@ void ZSafe::readAllEntries()
 #ifdef UNUSED
 void ZSafe::writeAllEntries()
 {
+   if (filename.isEmpty())
+   {
+       QMessageBox::critical( 0, tr("ZSafe"),
+         tr("<P>No document defined. You have to create a new document</P>"));
+       return;
+   }
+
     // open the file for writing
     QString fn = filename + ".txt";
     QFile f( fn );
     if ( !f.open( IO_WriteOnly ) ) {
+#ifndef NO_OPIE
         owarn << "Could not write to file " << fn << oendl;
+#else
+        qWarning( QString("Could not write to file %1").arg(fn), 2000 );
+#endif
         QMessageBox::critical( 0, tr("ZSafe"),
                   tr("Could not export to text file.") );
         return;
@@ -1652,7 +1693,11 @@ void ZSafe::readAllEntries()
    QFile f( fn );
    if ( !f.open( IO_ReadOnly ) )
    {
+#ifndef NO_OPIE
       owarn << "Could not read file " << fn << oendl;
+#else
+      qWarning( QString("Could not read file %1").arg(fn), 2000 );
+#endif
       QMessageBox::critical( 0, tr("ZSafe"),
                   tr("Could not import text file.") );
       return;
@@ -1681,8 +1726,11 @@ void ZSafe::readAllEntries()
       }
    }
 
+#ifndef NO_OPIE
    owarn << "ReadAllEntries(): " << oendl;
-
+#else
+   qWarning ("ReadAllEntries(): ");
+#endif
    QTextStream t(&f);
    while ( !t.eof() )
    {
@@ -1805,8 +1853,10 @@ void ZSafe::readAllEntries()
 
 void ZSafe::resume(int)
 {
+#ifndef NO_OPIE
    owarn << "Resume" << oendl;
-   // hide the main window
+#endif
+		 // hide the main window
 
    if ( !showpwd )
    {
@@ -1864,7 +1914,11 @@ bool ZSafe::openDocument(const char* _filename, const char* )
           getDocPassword(tr("Enter Password"));
        if (m_password.isEmpty() && validationFlag == 0)
            {
+#ifndef NO_OPIE
               owarn << "Wrong password" << oendl;
+#else
+              qWarning ("Wrong password");
+#endif
               QMessageBox::critical( 0, tr("ZSafe"),
                   tr("Wrong password.\n\nZSafe will now exit.") );
               exitZs (1);
@@ -1873,8 +1927,12 @@ bool ZSafe::openDocument(const char* _filename, const char* )
        retval = loadInit(_filename, m_password);
        if (retval != PWERR_GOOD)
            {
+#ifndef NO_OPIE
                 owarn << "Error loading Document" << oendl;
-        return false;
+#lese
+                qWarning ("Error loading Document");
+#endif
+								return false;
        }
         }
         else
@@ -2273,7 +2331,11 @@ bool ZSafe::saveDocument(const char* _filename,
        retval = saveEntry(entry);
            for (int z=0; z<i; z++) free(entry[z]);
            if (retval == PWERR_DATA) {
+#ifndef NO_OPIE
               owarn << "1: Error writing file, contents not saved" << oendl;
+#else
+              qWarning("1: Error writing file, contents not saved");
+#endif
               saveFinalize();
               return false;
            }
@@ -2317,7 +2379,11 @@ bool ZSafe::saveDocument(const char* _filename,
                   free(entry[z]);
               }
               if (retval == PWERR_DATA) {
+#ifndef NO_OPIE
                         owarn << "1: Error writing file, contents not saved" << oendl;
+#else
+                        qWarning("1: Error writing file, contents not saved");
+#endif
                         saveFinalize();
                         return false;
               }
@@ -2326,8 +2392,12 @@ bool ZSafe::saveDocument(const char* _filename,
         }
 
     if (saveFinalize() == PWERR_DATA) {
+#ifndef NO_OPIE
                 owarn << "2: Error writing file, contents not saved" << oendl;
-        return false;
+#else
+                qWarning("2: Error writing file, contents not saved");
+#endif
+								return false;
     } else {
 #ifndef DESKTOP
                 Global::statusMessage (tr("Password file saved."));
@@ -2347,8 +2417,10 @@ void ZSafe::setPasswordDialogDone()
 
 void ZSafe::getDocPassword(QString title)
 {
+#ifndef NO_OPIE
     owarn << "getDocPassword" << oendl;
-    // open the 'Password' dialog
+#endif
+			// open the 'Password' dialog
     PasswordForm *dialog = new PasswordForm(this, title, TRUE);
     newPwdDialog = dialog;
     newPwdDialogResult = false;
@@ -2529,8 +2601,10 @@ int ZSafe::saveFinalize(void)
 
 void ZSafe::quitMe ()
 {
+#ifndef NO_OPIE
     owarn << "QUIT..." << oendl;
-
+#endif
+		
     if (modified)
     {
       switch( QMessageBox::information( this, tr("ZSafe"),
@@ -2733,8 +2807,10 @@ void ZSafe::addCategory()
            category = dialog->CategoryField->currentText();
            icon = dialog->IconField->currentText()+".png";
 
+#ifndef NO_OPIE
            owarn << category << oendl;
-
+#endif
+					 
            QListViewItem *li = new ShadedListItem( 1, ListView );
            Category *c1 = new Category();
            c1->setCategoryName(category);
@@ -3207,8 +3283,12 @@ void ZSafe::editCategory()
 
            if (cat)
            {
+#ifndef NO_OPIE
               owarn << "Category found" << oendl;
-
+#else
+              qWarning("Category found");
+#endif
+							
               // if (!icon.isEmpty() && !icon.isNull())
               if (icon != "predefined.png")
               {
@@ -3241,7 +3321,11 @@ void ZSafe::editCategory()
               QListViewItem *catItem = cat->getListItem();
               if (catItem)
               {
+#ifndef NO_OPIE
                  owarn << category << oendl;
+#else
+								 qWarning (category);
+#endif
                  catItem->setText( 0, tr( category ) );
                  cat->setCategoryName (tr(category));
 
