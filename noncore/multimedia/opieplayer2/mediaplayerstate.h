@@ -119,17 +119,17 @@ signals:
     void next();
 
 private:
-    bool streaming;
-    bool seekable;
-    bool fullscreen;
-    bool scaled;
-    bool blanked;
-    bool looping;
-    bool shuffled;
-    bool usePlaylist;
-    bool paused;
-    bool playing;
-    bool stopped;
+    bool streaming : 1;
+    bool seekable : 1;
+    bool fullscreen: 1;
+    bool scaled : 1;
+    bool blanked : 1;
+    bool looping : 1;
+    bool shuffled : 1;
+    bool usePlaylist : 1;
+    bool paused : 1;
+    bool playing : 1;
+    bool stopped : 1;
     long curPosition;
     long curLength;
     char curView;
