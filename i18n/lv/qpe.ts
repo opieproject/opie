@@ -3,66 +3,66 @@
     <name>@default</name>
     <message>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Valoda</translation>
     </message>
     <message>
         <source>DocTab</source>
-        <translation type="unfinished"></translation>
+        <translation>DokumentuTabs</translation>
     </message>
     <message>
         <source>Time and Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Datums un Laiks</translation>
     </message>
     <message>
         <source>Personal Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Personas Informācija</translation>
     </message>
 </context>
 <context>
     <name>AppLauncher</name>
     <message>
         <source>Application Problem</source>
-        <translation type="unfinished"></translation>
+        <translation>Aplikācijas Problēma</translation>
     </message>
     <message>
         <source>&lt;p&gt;%1 is not responding.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;%1 neatbild.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Would you like to force the application to exit?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Vai vēlaties apstādināt aplikāciju piespiedu kārtā?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;&lt;p&gt;Fast loading has been disabled for this application.  Tap and hold the application icon to reenable it.&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;&lt;p&gt;Šai aplikācijai ir liegta ātrā ielāde.  Nospiediet un pieturiet aplikācijas ikonu, lai to atļautu.&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;&lt;b&gt;%1&lt;/b&gt; was terminated due to signal code %2&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;&lt;b&gt;%1&lt;/b&gt; tika pārtraukts ar signāla kodu %2&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Application terminated</source>
-        <translation type="unfinished"></translation>
+        <translation>Aplikācija pārtraukta</translation>
     </message>
     <message>
         <source>Application not found</source>
-        <translation type="unfinished"></translation>
+        <translation>Aplikācija nav atrasta</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Could not locate application &lt;b&gt;%1&lt;/b&gt;&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Nevaru atrast aplikāciju &lt;b&gt;%1&lt;/b&gt;&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Kļūda</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Could not find the application %1&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Nevaru atrast aplikāciju %1&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Labi</translation>
     </message>
 </context>
 <context>
@@ -70,132 +70,133 @@
     <message>
         <source>Touch the crosshairs firmly and
 accurately to calibrate your screen.</source>
-        <translation type="unfinished"></translation>
+        <translation>Atzīmējiet krustiņu un
+akurāti kalibrējiet ekrānu.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation type="unfinished"></translation>
+        <translation>Laipni lūgti Opie</translation>
     </message>
 </context>
 <context>
     <name>DesktopPowerAlerter</name>
     <message>
         <source>Battery Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Bateriju Statuss</translation>
     </message>
     <message>
         <source>Low Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>Tukšas Baterijas</translation>
     </message>
 </context>
 <context>
     <name>FirstUse</name>
     <message>
         <source>&lt;&lt; Back</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;&lt; Atpakaļ</translation>
     </message>
     <message>
         <source>Next &gt;&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Nākamais &gt;&gt;</translation>
     </message>
     <message>
         <source>Tap anywhere on the screen to continue.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nospiediet uz ekrāna lai sāktu.</translation>
     </message>
     <message>
         <source>Please wait, loading %1 settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lūdzu uzgaidiet, ielādēju %1 uzstādījumus.</translation>
     </message>
     <message>
         <source>Please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Lūdzu uzgaidiet...</translation>
     </message>
     <message>
         <source>FirstUseBackground</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Finish</source>
-        <translation type="unfinished"></translation>
+        <translation>Pabeigt</translation>
     </message>
 </context>
 <context>
     <name>InputMethods</name>
     <message>
         <source>Unicode</source>
-        <translation type="unfinished"></translation>
+        <translation>Unikods</translation>
     </message>
 </context>
 <context>
     <name>Launcher</name>
     <message>
         <source>Launcher</source>
-        <translation type="unfinished"></translation>
+        <translation>Palaidējs</translation>
     </message>
     <message>
         <source>Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokumenti</translation>
     </message>
     <message>
         <source> - Launcher</source>
-        <translation type="unfinished"></translation>
+        <translation>- Palaidējs</translation>
     </message>
     <message>
         <source>No application</source>
-        <translation type="unfinished"></translation>
+        <translation>Nav aplikācijas</translation>
     </message>
     <message>
         <source>&lt;p&gt;No application is defined for this document.&lt;p&gt;Type is %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Šim dokumentam nav definētas aplikācijas.&lt;p&gt;Tips ir %1.</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Labi</translation>
     </message>
     <message>
         <source>View as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Skatīt kā tekstu</translation>
     </message>
 </context>
 <context>
     <name>LauncherTabWidget</name>
     <message>
         <source>&lt;b&gt;Finding Documents...&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Meklēju Dokumentus...&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;The Documents Tab&lt;p&gt;has been disabled.&lt;p&gt;Use Settings-&gt;Launcher-&gt;DocTab&lt;p&gt;to reenable it.&lt;/b&gt;&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Dokumentu Tab&lt;p&gt;ir aizliegts.&lt;p&gt;Lai to atjaunotu izmantojiet Uzstādījumi-&gt;Palaidējs&gt;DokumentuTabs&lt;/b&gt;&lt;/center&gt;</translation>
     </message>
     <message>
         <source>Icon View</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikonu Skats</translation>
     </message>
     <message>
         <source>List View</source>
-        <translation type="unfinished"></translation>
+        <translation>Saraksta Skats</translation>
     </message>
 </context>
 <context>
     <name>LauncherView</name>
     <message>
         <source>All types</source>
-        <translation type="unfinished"></translation>
+        <translation>Visi tipi</translation>
     </message>
     <message>
         <source>Document View</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokumentu Skats</translation>
     </message>
 </context>
 <context>
     <name>Mediadlg</name>
     <message>
         <source>A new storage media detected:</source>
-        <translation type="unfinished"></translation>
+        <translation>Atrasts jauns krātuves veids:</translation>
     </message>
     <message>
         <source>What should I do with it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ko lai ar to dara?</translation>
     </message>
 </context>
 <context>
@@ -206,106 +207,107 @@ accurately to calibrate your screen.</source>
     </message>
     <message>
         <source>Which media files</source>
-        <translation type="unfinished"></translation>
+        <translation>Kurus mediju failus</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Visus</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Attēlu</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekstu</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Video</translation>
     </message>
     <message>
         <source>Limit search to:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ierobežot meklēšanu:</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Pievienot</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Izņemt</translation>
     </message>
     <message>
         <source>Scan whole media</source>
-        <translation type="unfinished"></translation>
+        <translation>Skanēt visu nesēju</translation>
     </message>
     <message>
         <source>Always check this medium</source>
-        <translation type="unfinished"></translation>
+        <translation>Vienmēr pārbaudīt šo nesēju</translation>
     </message>
 </context>
 <context>
     <name>SafeMode</name>
     <message>
         <source>Safe Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Drošais Režīms</translation>
     </message>
     <message>
         <source>Plugin Manager...</source>
-        <translation type="unfinished"></translation>
+        <translation>Spraudņu Menedžeris...</translation>
     </message>
     <message>
         <source>Restart Qtopia</source>
-        <translation type="unfinished"></translation>
+        <translation>Pārlaist Qtopia</translation>
     </message>
     <message>
         <source>Help...</source>
-        <translation type="unfinished"></translation>
+        <translation>Palīdzība...</translation>
     </message>
 </context>
 <context>
     <name>ServerApplication</name>
     <message>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Informācija</translation>
     </message>
     <message>
         <source>&lt;p&gt;The system date doesn&apos;t seem to be valid.
 (%1)&lt;/p&gt;&lt;p&gt;Do you want to correct the clock ?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Sistēmas datums šķiet nav pareizs.
+(%1)&lt;/p&gt;&lt;p&gt;Vai vēlaties mainīt pulksteņa uzstādījumus ?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>WARNING</source>
-        <translation type="unfinished"></translation>
+        <translation>UZMANĪBU</translation>
     </message>
     <message>
         <source>&lt;p&gt;The battery level is critical!&lt;p&gt;Keep power off until AC is restored</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Bateriju līmenis ir kritisks!&lt;p&gt;Izslēdziet līdz uzlādei</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Labi</translation>
     </message>
     <message>
         <source>The battery is running very low. </source>
-        <translation type="unfinished"></translation>
+        <translation>Baterija paliek tukša.</translation>
     </message>
     <message>
         <source>&lt;p&gt;The Back-up battery is very low&lt;p&gt;Please charge the back-up battery</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Rezerves baterija ir tukša&lt;p&gt;Lūdzu uzlādējiet papildus bateriju</translation>
     </message>
     <message>
         <source>business card</source>
-        <translation type="unfinished"></translation>
+        <translation>vizītkarte</translation>
     </message>
     <message>
         <source>Safe Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Drošais Režīms</translation>
     </message>
     <message>
         <source>&lt;P&gt;A system startup error occurred, and the system is now in Safe Mode. Plugins are not loaded in Safe Mode. You can use the Plugin Manager to disable plugins that cause system error.</source>
