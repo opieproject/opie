@@ -57,7 +57,7 @@ NONCORESETTINGS  =noncore/settings/language noncore/settings/rotation \
 	noncore/settings/tabmanager noncore/settings/appskey \
 	noncore/settings/netsystemtime noncore/settings/wlansetup \
 	noncore/settings/sshkeys noncore/settings/usermanager \
-	noncore/apps/backup
+	noncore/settings/backup
 
 NONCORETOOLS = noncore/tools/calculator noncore/tools/clock \
 	 noncore/tools/remote noncore/tools/opie-sh noncore/apps/advancedfm
