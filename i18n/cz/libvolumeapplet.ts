@@ -3,19 +3,19 @@
     <name>VolumeControl</name>
     <message>
         <source>Enable Sounds for:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapnout zvuky pro:</translation>
     </message>
     <message>
         <source>Screen Taps</source>
-        <translation type="unfinished"></translation>
+        <translation>Klepání na displej</translation>
     </message>
     <message>
         <source>Key Clicks</source>
-        <translation type="unfinished"></translation>
+        <translation>Stisk kláves</translation>
     </message>
     <message>
         <source>Alarm Sound</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvuk alarmu</translation>
     </message>
 </context>
 </TS>

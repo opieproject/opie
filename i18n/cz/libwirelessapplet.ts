@@ -3,27 +3,27 @@
     <name>AdvancedConfigBase</name>
     <message>
         <source>Advanced Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozšířené nastavení</translation>
     </message>
     <message>
         <source>Renew DHCP on changing</source>
-        <translation type="unfinished"></translation>
+        <translation>Při změně obnovit DHCP informace</translation>
     </message>
     <message>
         <source>Frequency</source>
-        <translation type="unfinished"></translation>
+        <translation>Frekvence</translation>
     </message>
     <message>
         <source>MODE</source>
-        <translation type="unfinished"></translation>
+        <translation>Režim</translation>
     </message>
     <message>
         <source>ESSID</source>
-        <translation type="unfinished"></translation>
+        <translation>ESSID</translation>
     </message>
     <message>
         <source>AccessPoint</source>
-        <translation type="unfinished"></translation>
+        <translation>AccessPoint</translation>
     </message>
 </context>
 </TS>
