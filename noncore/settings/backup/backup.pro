@@ -7,5 +7,5 @@ INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe
 INTERFACES	= backuprestorebase.ui
-TARGET		= backupandrestore
+TARGET		= backup
 DESTDIR		= $(OPIEDIR)/bin	
