@@ -69,7 +69,6 @@ public slots:
     void backToNormal();
     void setPosition( long );
     void setLength( long );
-    void setSeekable( bool );
     void setView( char );
 
 signals:

@@ -141,7 +141,6 @@ QWidget( parent, name, f ), scaledWidth( 0 ), scaledHeight( 0 ) {
     connect( mediaPlayerState, SIGNAL( lengthChanged(long) ),  this, SLOT( setLength(long) ) );
     connect( mediaPlayerState, SIGNAL( viewChanged(char) ),    this, SLOT( setView(char) ) );
     connect( mediaPlayerState, SIGNAL( playingToggled(bool) ), this, SLOT( setPlaying(bool) ) );
-    connect( mediaPlayerState, SIGNAL( isSeekableToggled( bool ) ), this, SLOT( setSeekable( bool ) ) );
 
     setLength( mediaPlayerState->length() );
     setPosition( mediaPlayerState->position() );
@@ -381,8 +380,14 @@ void VideoWidget::makeVisible() {
         setBackgroundMode( QWidget::NoBackground );
         showFullScreen();
         resize( qApp->desktop()->size() );
-        slider->hide();
         videoFrame-> setGeometry ( 0, 0, width ( ), height ( ));
+
+        slider->hide();
+        disconnect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
+        disconnect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
+        disconnect( slider, SIGNAL( sliderPressed() ), this, SLOT( sliderPressed() ) );
+        disconnect( slider, SIGNAL( sliderReleased() ), this, SLOT( sliderReleased() ) );
+
     } else {
         showNormal();
         showMaximized();
@@ -397,29 +402,26 @@ void VideoWidget::makeVisible() {
         } else {
             videoFrame->setGeometry( QRect( 0, 30, 240, 170  ) );
         }
-    }
-}
 
-
-void VideoWidget::setSeekable( bool isSeekable ) {
-
-    if ( !isSeekable || mediaPlayerState->fullscreen() ) {
-        qDebug("<<<<<<<<<<<<<<file is STREAMING>>>>>>>>>>>>>>>>>>>");
-        if( !slider->isHidden()) {
-            slider->hide();
+        if ( !mediaPlayerState->seekable()  ) {
+            if( !slider->isHidden()) {
+                slider->hide();
+            }
+            disconnect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
+            disconnect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
+            disconnect( slider, SIGNAL( sliderPressed() ), this, SLOT( sliderPressed() ) );
+            disconnect( slider, SIGNAL( sliderReleased() ), this, SLOT( sliderReleased() ) );
+        } else {
+            slider->show();
+            connect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
+            connect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
+            connect( slider, SIGNAL( sliderPressed() ), this, SLOT( sliderPressed() ) );
+            connect( slider, SIGNAL( sliderReleased() ), this, SLOT( sliderReleased() ) );
         }
-        disconnect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
-        disconnect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
-        disconnect( slider, SIGNAL( sliderPressed() ), this, SLOT( sliderPressed() ) );
-        disconnect( slider, SIGNAL( sliderReleased() ), this, SLOT( sliderReleased() ) );
-    } else {
-        slider->show();
-        connect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
-        connect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
-        connect( slider, SIGNAL( sliderPressed() ), this, SLOT( sliderPressed() ) );
-        connect( slider, SIGNAL( sliderReleased() ), this, SLOT( sliderReleased() ) );
     }
 }
+
+
 
 
 void VideoWidget::paintEvent( QPaintEvent * pe) {
@@ -453,7 +455,6 @@ void VideoWidget::paintEvent( QPaintEvent * pe) {
 void VideoWidget::closeEvent( QCloseEvent* ) {
     mediaPlayerState->setList();
 }
-
 
 
 void VideoWidget::keyReleaseEvent( QKeyEvent *e) {
@@ -510,11 +511,11 @@ XineVideoWidget* VideoWidget::vidWidget() {
 
 
 void VideoWidget::setFullscreen ( bool b ) {
-  setToggleButton( VideoFullscreen, b );
+    setToggleButton( VideoFullscreen, b );
 }
 
 
 void VideoWidget::setPlaying( bool b) {
-      setToggleButton( VideoPlay, b );
+    setToggleButton( VideoPlay, b );
 }
 
