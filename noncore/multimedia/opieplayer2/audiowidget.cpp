@@ -1,3 +1,35 @@
+/*
+                            This file is part of the Opie Project
+
+                             Copyright (c)  2002 Max Reiss <harlekin@handhelds.org>
+                             Copyright (c)  2002 L. Potter <ljp@llornkcor.com>
+                             Copyright (c)  2002 Holger Freyther <zecke@handhelds.org>
+              =.
+            .=l.
+           .>+-=
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+ :     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
+                             If not, write to the Free Software Foundation,
+                             Inc., 59 Temple Place - Suite 330,
+                             Boston, MA 02111-1307, USA.
+
+*/
 
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
@@ -161,6 +193,13 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
     connect( mediaPlayerState, SIGNAL( loopingToggled(bool) ), this, SLOT( setLooping(bool) ) );
     connect( mediaPlayerState, SIGNAL( pausedToggled(bool) ),  this, SLOT( setPaused(bool) ) );
     connect( mediaPlayerState, SIGNAL( playingToggled(bool) ), this, SLOT( setPlaying(bool) ) );
+
+    connect( this,  SIGNAL( forwardClicked() ), this, SLOT( skipFor() ) );
+    connect( this,  SIGNAL( backClicked() ),  this, SLOT( skipBack() ) );
+    connect( this,  SIGNAL( forwardReleased() ), this, SLOT( stopSkip() ) );
+    connect( this,  SIGNAL( backReleased() ), this, SLOT( stopSkip() ) );
+
+
 
     // Intialise state
     setLength( mediaPlayerState->length() );
@@ -341,7 +380,31 @@ void AudioWidget::paintButton( QPainter *p, int i ) {
 }
 
 
+void AudioWidget::skipFor() {
+    skipDirection = +1;
+    startTimer( 50 );
+    mediaPlayerState->setPosition(  mediaPlayerState->position() + 2 );
+}
+
+void AudioWidget::skipBack() {
+    skipDirection = -1;
+    startTimer( 50 );
+    mediaPlayerState->setPosition(  mediaPlayerState->position() - 2 );
+}
+
+
+
+void AudioWidget::stopSkip() {
+    killTimers();
+}
+
+
 void AudioWidget::timerEvent( QTimerEvent * ) {
+       if ( skipDirection == +1 ) {
+           mediaPlayerState->setPosition(  mediaPlayerState->position() + 2 );
+    }  else if ( skipDirection == -1 ) {
+        mediaPlayerState->setPosition(  mediaPlayerState->position() - 2 );
+    }
 }
 
 
@@ -363,13 +426,19 @@ void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
                 audioButtons[i].isHeld = TRUE;
                 toggleButton(i);
                 switch (i) {
-                  case AudioVolumeUp:
-                      qDebug("more clicked");
-                      emit moreClicked();
-                      return;
-                  case AudioVolumeDown:
-                      emit lessClicked();
-                      return;
+                case AudioVolumeUp:
+                    qDebug("more clicked");
+                    emit moreClicked();
+                    return;
+                case AudioVolumeDown:
+                    emit lessClicked();
+                    return;
+                case AudioForward:
+                    emit forwardClicked();
+                    return;
+                case AudioBack:
+                    emit backClicked();
+                    return;
                 }
             } else if ( !isOnButton && audioButtons[i].isHeld ) {
                 audioButtons[i].isHeld = FALSE;
@@ -380,18 +449,20 @@ void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
                 audioButtons[i].isHeld = FALSE;
                 if ( !audioButtons[i].isToggle ) {
                     setToggleButton( i, FALSE );
-                       qDebug("button toggled3  %d",i);
+                    qDebug("button toggled3  %d",i);
                 }
                 switch (i) {
-                  case AudioPlay:       mediaPlayerState->setPlaying(audioButtons[i].isDown); return;
-                  case AudioStop:       mediaPlayerState->setPlaying(FALSE); return;
-                  case AudioPause:      mediaPlayerState->setPaused( audioButtons[i].isDown); return;
-                  case AudioNext:       mediaPlayerState->setNext(); return;
-                  case AudioPrevious:   mediaPlayerState->setPrev(); return;
-                  case AudioLoop:       mediaPlayerState->setLooping(audioButtons[i].isDown); return;
-                  case AudioVolumeUp:   emit moreReleased(); return;
-                  case AudioVolumeDown: emit lessReleased(); return;
-                  case AudioPlayList:   mediaPlayerState->setList();  return;
+                case AudioPlay:       mediaPlayerState->setPlaying(audioButtons[i].isDown); return;
+                case AudioStop:       mediaPlayerState->setPlaying(FALSE); return;
+                case AudioPause:      mediaPlayerState->setPaused( audioButtons[i].isDown); return;
+                case AudioNext:       mediaPlayerState->setNext(); return;
+                case AudioPrevious:   mediaPlayerState->setPrev(); return;
+                case AudioLoop:       mediaPlayerState->setLooping(audioButtons[i].isDown); return;
+                case AudioVolumeUp:   emit moreReleased(); return;
+                case AudioVolumeDown: emit lessReleased(); return;
+                case AudioPlayList:   mediaPlayerState->setList();  return;
+                case AudioForward:    emit forwardReleased(); return;
+                case AudioBack:       emit backReleased(); return;
                 }
             }
         }
