@@ -77,6 +77,19 @@ public:
     QString key () const { return Qtopia::buildSortKey( text() ); }
 };
 
+class DueTextItem : public QTableItem
+{
+ public:
+  DueTextItem( QTable *t, ToDoEvent *ev );
+  QString key() const;
+  void setToDoEvent( const ToDoEvent *ev );
+  void paint( QPainter *p, const QColorGroup &cg, const QRect &cr, bool selected );
+ private:
+  int m_off;
+  bool m_hasDate:1;
+  bool m_completed:1;
+
+};
 
 
 enum journal_action { ACTION_ADD, ACTION_REMOVE, ACTION_REPLACE };
@@ -98,7 +111,6 @@ public:
     void setShowCompleted( bool sc ) { showComp = sc; updateVisible(); }
     bool showCompleted() const { return showComp; }
 
-    /* added 20.01.2k2 by se */
     void setShowDeadline (bool sd) {showDeadl = sd; updateVisible();}
     bool showDeadline() const { return showDeadl;}
 
@@ -163,9 +175,7 @@ private:
     bool enablePainting;
     Categories mCat;
     int currFindRow;
-
-    /* added 20.01.2k2 by se */
-    bool showDeadl;
+    bool showDeadl:1;
 };
 
 
@@ -181,19 +191,8 @@ inline void TodoTable::insertIntoTable( ToDoEvent *todo, int row )
     QTableItem *ti = new TodoTextItem( this, todo->description().left(40).simplifyWhiteSpace() );
     ti->setReplaceable( false );
 
-    /* added 20.01.2k2 by se */
-    QTableItem *dl = NULL;
-    if (todo->hasDate()){ 
-	    QDate *today = new QDate (QDate::currentDate());
-	    if (today){
-		    dl = new TodoTextItem (this, tr ("%1").
-					   arg(today->daysTo(todo->date())));
-		    delete (today);
-	    }
-    }else{
-	    dl = new TodoTextItem (this,"n.d.");
-    }
-    setItem( row, 3, dl);
+    DueTextItem *due = new DueTextItem(this, todo );
+    setItem( row, 3, due);
     
     setItem( row, 0, chk );
     setItem( row, 1, cmb );
@@ -205,9 +204,10 @@ inline void TodoTable::insertIntoTable( ToDoEvent *todo, int row )
 
 inline void TodoTable::realignTable( int row )
 {
-    QTableItem *ti1,
-	*ti2,
-	*ti3;
+  QTableItem *ti1,
+    *ti2,
+    *ti3,
+    *ti4;
     int totalRows = numRows();
     for ( int curr = row; curr < totalRows - 1; curr++ ) {
 	// this is bad, we must take the item out and then
@@ -217,12 +217,15 @@ inline void TodoTable::realignTable( int row )
 	ti1 = item( curr + 1, 0 );
 	ti2 = item( curr + 1, 1 );
 	ti3 = item( curr + 1, 2 );
+	ti4 = item( curr + 1, 3 );
 	takeItem( ti1 );
 	takeItem( ti2 );
 	takeItem( ti3 );
+	takeItem( ti4 );
 	setItem( curr, 0, ti1 );
 	setItem( curr, 1, ti2 );
 	setItem( curr, 2, ti3 );
+	setItem( curr, 3, ti4 );
     }
     setNumRows( totalRows - 1 );
 }

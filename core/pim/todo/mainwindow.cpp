@@ -110,7 +110,6 @@ TodoWindow::TodoWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
     bool complete = config.readBoolEntry( "ShowComplete", true );
     table->setShowCompleted( complete );
 
-    /* added 20.01.2k2 by se */
     bool showdeadline = config.readBoolEntry("ShowDeadLine", true);
     table->setShowDeadline (showdeadline);
 
@@ -181,7 +180,6 @@ TodoWindow::TodoWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
 
     completedAction = new QAction( QString::null, tr("Completed tasks"), 0, this, 0, TRUE );
 
-    /* added 20.01.2k2 by se */
     showdeadlineAction = new QAction( QString::null, tr( "Show Deadline" ), 0, this, 0, TRUE );
 
     catMenu->setCheckable( true );
@@ -364,7 +362,7 @@ void TodoWindow::populateCategories()
     completedAction->setOn( table->showCompleted() );
     showdeadlineAction->addTo( catMenu );
     showdeadlineAction->setOn( table->showDeadline() );
-
+    catMenu->insertSeparator();
     int id, rememberId;
     id = 1;
     catMenu->insertItem( tr( "All Categories" ), id++ );

@@ -160,9 +160,57 @@ QString ComboItem::text() const
 	return cb->currentText();
     return QTableItem::text();
 }
-
-
-
+DueTextItem::DueTextItem( QTable *t, ToDoEvent *ev )
+  : QTableItem(t, Never, QString::null )
+{
+  setToDoEvent( ev );
+}
+QString DueTextItem::key() const
+{
+  QString key;
+  if( m_hasDate ){
+    if(m_off == 0 ){
+      key.append("b");
+    }else if( m_off > 0 ){
+      key.append("c");
+    }else if( m_off < 0 ){
+      key.append("a");
+    }
+    key.append(QString::number(m_off ) );
+  }else{
+    key.append("d");
+  }
+  return key;
+}
+void DueTextItem::setToDoEvent( const ToDoEvent *ev )
+{
+  m_hasDate = ev->hasDate();
+  m_completed = ev->isCompleted();
+  if( ev->hasDate() ){
+    QDate today = QDate::currentDate();
+    m_off = today.daysTo(ev->date() );
+    setText( QString::number(m_off)  + " day(s) " );
+  }else{
+    setText("n.d." );
+    m_off = 0;
+  }
+}
+void DueTextItem::paint( QPainter *p, const QColorGroup &cg, const QRect &cr, bool selected )
+{
+  QColorGroup cg2(cg);
+  QColor text = cg.text();
+  if( m_hasDate && !m_completed ){
+    if( m_off < 0 ){
+      cg2.setColor(QColorGroup::Text, QColor(red ) );
+    }else if( m_off == 0 ){
+      cg2.setColor(QColorGroup::Text, QColor(yellow) ); // orange isn't predefined
+    }else if( m_off > 0){
+      cg2.setColor(QColorGroup::Text, QColor(green ) );
+    }
+  }
+  QTableItem::paint(p, cg2, cr, selected );
+  cg2.setColor(QColorGroup::Text, text );
+}
 TodoTable::TodoTable( QWidget *parent, const char *name )
 // #ifdef QT_QTABLE_NOHEADER_CONSTRUCTOR
 //     : QTable( 0, 3, parent, name, TRUE ),
@@ -247,13 +295,13 @@ void TodoTable::slotClicked( int row, int col, int, const QPoint &pos )
             break;
         case 2:
             // may as well edit it...
-	    menuTimer->stop();
+	  //	    menuTimer->stop();
 //            emit signalEdit();
-            break;
-        case 3: /* added 20.01.2k2 by se */
+	  // fall through
+        case 3: 
             // may as well edit it...
 	    menuTimer->stop();
-            emit signalEdit();
+	    // emit signalEdit();
             break;
     }
 }
@@ -368,16 +416,14 @@ void TodoTable::load( const QString &fn )
 //     QTable::sortColumn(1,TRUE,TRUE);
     QTable::sortColumn(0,TRUE,TRUE);
     setCurrentCell( 0, 2 );
+    setSorting(true );
 }
 
 void TodoTable::updateVisible()
 {
     if ( !isUpdatesEnabled() )
 	return;
-    
-//     qDebug("--> updateVisible!");
-
-    /* added 20.01.2k2 by se */
+  
     if (showDeadl){
       showColumn (3);
       adjustColumn(3);
@@ -400,7 +446,7 @@ void TodoTable::updateVisible()
 		if ( vlCats.count() > 0 )
 		    hide = true;
 	    } else {
-		// do some comparing, we have to reverse our idea here...
+		// do some comparing, we have to reverse our idea here... which idea - zecke
 		if ( !hide ) {
 		    hide = true;
 		    for ( uint it = 0; it < vlCats.count(); ++it ) {
@@ -466,13 +512,13 @@ void TodoTable::clear()
     setNumRows( 0 );
 }
 
-void TodoTable::sortColumn( int col, bool /*ascending*/, bool /*wholeRows*/ )
+void TodoTable::sortColumn( int col, bool ascending, bool /*wholeRows*/ )
 {
     // The default for wholeRows is false, however
     // for this todo table we want to exchange complete
     // rows when sorting. Also, we always want ascending, since
     // the values have a logical order.
-    QTable::sortColumn( col, TRUE, TRUE );
+    QTable::sortColumn( col, ascending, TRUE );
     updateVisible();
 }
 
@@ -497,7 +543,7 @@ void TodoTable::updateJournal( const ToDoEvent &/*todo*/, journal_action action,
     buf = "<Task";
     //    todo.save( buf );
     buf += " Action=\"" + QString::number( int(action) ) + "\"";
-    buf += " Row=\"" + QString::number( row ) + "\"";
+    buf += " Row=\"" + QString::number( row ) + "\""; // better write the id
     buf += "/>\n";
     str = buf.utf8();
     f.writeBlock( str.data(), str.length() );
@@ -541,17 +587,8 @@ void TodoTable::journalFreeReplaceEntry( const ToDoEvent &todo, int row )
 		static_cast<ComboItem*>(item(row, 1))->setText( QString::number(todo.priority()) );
 		item( row, 2 )->setText( strTodo );
 
-		/* added 20.01.2k2 by se */
 		if (showDeadl){
-		  if (todo.hasDate()){ 
-		    QDate *today = new QDate (QDate::currentDate());
-		    if (today){
-		      item (row, 3)->setText (tr ("%1").arg(today->daysTo(todo.date())));
-		      delete (today);
-		    }
-		  }else{
-		    item (row, 3)->setText ("n.d.");
-		  }
+		  static_cast<DueTextItem*>(item(row,3))->setToDoEvent(&todo );
 		}
 
 		*(*it) = todo;
@@ -565,17 +602,8 @@ void TodoTable::journalFreeReplaceEntry( const ToDoEvent &todo, int row )
 	static_cast<ComboItem*>(item(row, 1))->setText( QString::number(todo.priority()) );
 	item( row, 2 )->setText( strTodo );
 
-	/* added 20.01.2k2 by se */
  	if (showDeadl){
-	  if (todo.hasDate()){ 
-	    QDate *today = new QDate (QDate::currentDate());
-	    if (today){
-	      item (row, 3)->setText (tr ("%1").arg(today->daysTo(todo.date())));
-	      delete (today);
-	    }
-	  }else{
-	    item (row, 3)->setText ("n.d.");
-	  }
+	  static_cast<DueTextItem*>(item(row,3))->setToDoEvent(&todo );
  	}
 
 	todoList.insert( static_cast<CheckItem*>(item(row,0)), new ToDoEvent(todo) );
