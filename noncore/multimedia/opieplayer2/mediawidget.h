@@ -35,12 +35,13 @@ class MediaWidget : public QWidget
     Q_OBJECT
 public:
     enum Command { Play = 0, Stop, Next, Previous, VolumeUp, VolumeDown, Loop, PlayList, Forward, Back };
+    enum ButtonType { NormalButton, ToggleButton };
 
     struct Button
     {
-        Button() : isToggle( false ), isHeld( false ), isDown( false ) {}
+        Button() : buttonType( NormalButton ), isHeld( false ), isDown( false ) {}
 
-        bool isToggle : 1;
+        ButtonType buttonType : 1;
         bool isHeld : 1;
         bool isDown : 1;
     };

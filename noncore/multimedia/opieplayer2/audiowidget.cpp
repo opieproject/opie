@@ -75,12 +75,10 @@ AudioWidget::AudioWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
     MediaWidget( playList, mediaPlayerState, parent, name ), songInfo( this ), slider( Qt::Horizontal, this ),  time( this ),
     audioSliderBeingMoved( false )
 {
+    Button defaultButton;
 
-    Button defaultButton; 
-    defaultButton.isToggle = defaultButton.isHeld = defaultButton.isDown = false;
-    Button toggleButton;
-    toggleButton.isToggle = true;
-    toggleButton.isHeld = toggleButton.isDown = false;
+    Button toggleButton = defaultButton;
+    toggleButton.buttonType = ToggleButton;
 
     buttons.reserve( 10 );
     buttons.push_back( toggleButton ); // play
@@ -389,7 +387,7 @@ void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
         } else {
             if ( buttons[i].isHeld ) {
                 buttons[i].isHeld = FALSE;
-                if ( !buttons[i].isToggle ) {
+                if ( buttons[i].buttonType != ToggleButton ) {
                     setToggleButton( i, FALSE );
                 }
                 qDebug("mouseEvent %d", i);

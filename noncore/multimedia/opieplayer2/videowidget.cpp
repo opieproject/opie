@@ -71,10 +71,8 @@ VideoWidget::VideoWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
     setCaption( tr("OpiePlayer - Video") );
 
     Button defaultButton; 
-    defaultButton.isToggle = defaultButton.isHeld = defaultButton.isDown = false;
-    Button toggleButton;
-    toggleButton.isToggle = true;
-    toggleButton.isHeld = toggleButton.isDown = false;
+    Button toggleButton = defaultButton;
+    toggleButton.buttonType = ToggleButton;
 
     buttons.reserve( 7 );
     buttons.push_back( toggleButton ); // play
@@ -298,7 +296,7 @@ void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
 
             if ( buttons[i].isHeld ) {
                 buttons[i].isHeld = FALSE;
-                if ( !buttons[i].isToggle ) {
+                if ( buttons[i].buttonType != ToggleButton ) {
                     setToggleButton( i, FALSE );
                 }
 
