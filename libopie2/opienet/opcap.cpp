@@ -1,6 +1,6 @@
 /*
                              This file is part of the Opie Project
-                             Copyright (C) 2003 by Michael 'Mickey' Lauer <mickey@Vanille.de>
+                             Copyright (C) 2003-2004 by Michael 'Mickey' Lauer <mickey@Vanille.de>
               =.
             .=l.
            .>+-=
@@ -28,24 +28,24 @@
 
 */
 
+#include "udp_ports.h"
+#include "opcap.h"
+
 /* OPIE */
-#include <opie2/opcap.h>
 #include <opie2/odebug.h>
+using namespace Opie::Core;
 
 /* QT */
 #include <qapplication.h> // don't use oapplication here (will decrease reusability in other projects)
 #include <qsocketnotifier.h>
 #include <qobjectlist.h>
 
-/* SYSTEM */
+/* STD */
 #include <sys/time.h>
 #include <sys/types.h>
+#include <assert.h>
 #include <unistd.h>
-
-/* LOCAL */
-#include "udp_ports.h"
-
-using namespace Opie::Core;
+#include <string.h>
 
 namespace Opie {
 namespace Net  {
@@ -55,30 +55,32 @@ namespace Net  {
  *======================================================================================*/
 
 OPacket::OPacket( int datalink, packetheaderstruct header, const unsigned char* data, QObject* parent )
-        :QObject( parent, "Generic" ), _hdr( header ), _data( data )
+        :QObject( parent, "Generic" ), _hdr( header ), _data( 0 )
 {
-    //FIXME: Copy the data structure here, because it isn't persistent. Check that.
-    
-    qDebug( "OPacket::OPacket(): (Len %d, CapLen %d)" /*, ctime((const time_t*) header.ts.tv_sec)*/, header.len, header.caplen );
 
-    _end = (unsigned char*) data + header.len;
-    //qDebug( "OPacket::data @ %0x, end @ %0x", data, _end );
+    _data = new unsigned char[sizeof data];
+    assert( _data );
+    memcpy( const_cast<unsigned char*>(_data), data, sizeof data );
+    // We have to copy the data structure here, because the 'data' pointer handed by libpcap
+    // points to an internal region which is reused by lipcap.
+    odebug << "OPacket: Length = " << header.len << ", Caplen = " << header.caplen << oendl;
+    _end = (unsigned char*) _data + header.len;
 
     switch ( datalink )
     {
         case DLT_EN10MB:
             odebug << "OPacket::OPacket(): Received Packet. Datalink = ETHERNET" << oendl;
-            new OEthernetPacket( _end, (const struct ether_header*) data, this );
+            new OEthernetPacket( _end, (const struct ether_header*) _data, this );
             break;
 
         case DLT_IEEE802_11:
             odebug << "OPacket::OPacket(): Received Packet. Datalink = IEEE802.11" << oendl;
-            new OWaveLanPacket( _end, (const struct ieee_802_11_header*) data, this );
+            new OWaveLanPacket( _end, (const struct ieee_802_11_header*) _data, this );
             break;
 
         case DLT_PRISM_HEADER:
             odebug << "OPacket::OPacket(): Received Packet. Datalink = PRISM_HEADER" << oendl;
-            new OPrismHeaderPacket( _end, (const struct prism_hdr*) (unsigned char*) data, this );
+            new OPrismHeaderPacket( _end, (const struct prism_hdr*) (unsigned char*) _data, this );
             break;
 
         default:
@@ -89,7 +91,8 @@ OPacket::OPacket( int datalink, packetheaderstruct header, const unsigned char* 
 
 OPacket::~OPacket()
 {
-    qDebug( "OPacket::~OPacket( %s )", name() );
+    odebug << "~OPacket( " << name() << " )" << oendl;
+    delete _data;
 }
 
 
