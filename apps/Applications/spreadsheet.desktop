@@ -1,7 +1,7 @@
 [Desktop Entry]
 Comment=A Spread Sheet Program
 Comment[es]=Un programa de hoja de cálculo
-Exec=spreadsheet
+Exec=sheetqt
 Icon=Spreadsheet
 Type=Application
 MimeType=application/x-qpe-ss
