@@ -75,6 +75,8 @@ void POP3wrapper::listMessages(const QString &, QList<RecMail> &target )
     for (unsigned int i = 0; i < carray_count(messages);++i) {
         mailpop3_msg_info *info;
         err = mailpop3_get_msg_info(m_pop3,i+1,&info);
+        if (info->msg_deleted)
+            continue;
         err = mailpop3_header( m_pop3, info->msg_index, &header, &length );
         if ( err != MAILPOP3_NO_ERROR ) {
             qDebug( "POP3: error retrieving header msgid: %i", info->msg_index );
@@ -317,7 +319,7 @@ void POP3wrapper::logout()
 QList<Folder>* POP3wrapper::listFolders()
 {
     /* TODO: integrate MH directories 
-       but not vor version 0.1 ;)
+       but not before version 0.1 ;)
     */
     QList<Folder> * folders = new QList<Folder>();
     folders->setAutoDelete( false );
@@ -344,3 +346,4 @@ void POP3wrapper::deleteMail(const RecMail&mail)
 void POP3wrapper::answeredMail(const RecMail&)
 {
 }
+
