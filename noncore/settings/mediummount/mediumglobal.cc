@@ -26,7 +26,7 @@ MediumGlobalWidget::MediumGlobalWidget(QWidget *wid, const char *name )
 void MediumGlobalWidget::initGUI()
 {
   m_layout = new QVBoxLayout(this );
-  // m_layout->setMargin( 10 );
+   m_layout->setMargin( 4 );
   // m_layout->setSpacing( 10 );
 
 
@@ -61,7 +61,7 @@ void MediumGlobalWidget::initGUI()
 
   m_global = new QGroupBox( tr("Which media files"), m_frame );
   m_frameLay = new QGridLayout(m_global, 4, 3 );
-   m_frameLay->setMargin( 6 );
+   m_frameLay->setMargin( 10 );
 
   QSpacerItem *item2 = new QSpacerItem( 5, 8,
           QSizePolicy::Fixed,
@@ -84,8 +84,8 @@ void MediumGlobalWidget::initGUI()
   m_frameLay->addWidget( m_text,  1, 2 );
   m_frameLay->addWidget( m_video, 2, 2 );
 
-//  m_frameLay->addRowSpacing( 0, 8 );
-//  m_frameLay->addColSpacing( 1, 2 );
+  m_frameLay->addRowSpacing( 0, 8 );
+  m_frameLay->addColSpacing( 1, 2 );
 
   m_box->addWidget( m_global );
 
