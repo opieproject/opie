@@ -99,7 +99,7 @@ public:
     QString showBook() const;
 
 public slots:
-    void slotDoFind( const QString &str, bool caseSensitive, bool backwards,
+    void slotDoFind( const QString &str, bool caseSensitive, bool useRegExp, bool backwards,
                      QString category = QString::null );
 signals:
     void empty( bool );

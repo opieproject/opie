@@ -634,7 +634,7 @@ void QTable::paintEmptyArea( QPainter *p, int cx, int cy, int cw, int ch )
 //     return QMIN( pos/18, numRows()-1 );
 // }
 
-void AbTable::slotDoFind( const QString &findString, bool caseSensitive,
+void AbTable::slotDoFind( const QString &findString, bool caseSensitive, bool useRegExp,
                           bool backwards, QString cat /* int category */ )
 {
 	int category = 0;
@@ -656,6 +656,7 @@ void AbTable::slotDoFind( const QString &findString, bool caseSensitive,
 	AbTableItem *ati;
 	QRegExp r( findString );
 	r.setCaseSensitive( caseSensitive );
+	r.setWildcard( !useRegExp );
 	rows = numRows();
 	static bool wrapAround = true;
 	

@@ -944,7 +944,7 @@ void AddressbookWindow::slotFindNext()
 // 	QObject::connect( abList, SIGNAL(signalNotFound()), &frmFind, SLOT(slotNotFound()) );
 // 	QObject::connect( abList, SIGNAL(signalWrapAround()), &frmFind, SLOT(slotWrapAround()) );
 
-	abList->slotDoFind( searchEdit->text(), false, false);
+	abList->slotDoFind( searchEdit->text(), caseSensitive, useRegExp, false);
 	
 	
 	if ( abList->numSelections() )

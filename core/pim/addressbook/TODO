@@ -1,4 +1,4 @@
-Stuff todo:
+Stuff todo until OPIE 1.0 :
 
 Urgent:
 
@@ -6,26 +6,28 @@ Urgent:
 
 Important:
 
-- Finishing of new View functions (List, Phonebook...)
-- Reload if contacts were changed externally
+- Picker: Activated letter schould be more visible
 - "What's this" should be added
-- The names of the countries are sorted by there english names, only..
-  Even if they are translated.. :S
 - Store last settings of combo-boxes
 - Mail-Icon is missing
+- Finishing of new View functions (List, Phonebook...)
+- The names of the countries are sorted by there english names, only..
+  Even if they are translated.. :S
+- Reload if contacts were changed externally
 
 Less important:
 
-- Find widget should be replaced by something like 
-  qpdf has.
 -  The picker (alphabetical sort widget) should be
    placed verticaly or horizontally (configurable)
 - Use advanced database functions in abtable to decrease
   memory footprint and to make everything more easy !
 	(abtable should store Iterator for selected Category)
 
-Should be Fixed (not absolute sure, need validation):
+Should be Fixed (not absolute sure, need further validation):
 - "Nonenglish" translation bug has to be fixed.
 
 Fixed:
 - Syncing: abtable not reloaded after sync.
+- Find widget should be replaced by something like 
+  qpdf has.
+- Adding a configuration dialog
