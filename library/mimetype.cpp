@@ -111,6 +111,7 @@ public:
 MimeType::Private* MimeType::d=0;
 static QMap<QString,QString> *typeFor = 0;
 static QMap<QString,QStringList> *extFor = 0;
+static bool appsUpdated = FALSE;
 
 MimeType::Private& MimeType::data()
 {
@@ -271,6 +272,9 @@ void MimeType::clear()
 {
     delete d;
     d = 0;
+    delete typeFor; typeFor = 0;
+    delete extFor ; extFor  = 0;
+    appsUpdated = FALSE;
 }
 
 void MimeType::loadExtensions()
@@ -322,9 +326,8 @@ void MimeType::init( const QString& ext_or_id )
 	if ( i.isNull() )
 	    i = "application/octet-stream";
     }
-    static bool appsUpdated = FALSE;
+
     if ( !appsUpdated ) {
-	appsUpdated = TRUE;
 	updateApplications();
     }
 }
@@ -353,7 +356,8 @@ QString MimeType::appsFolderName()
 */
 void MimeType::updateApplications()
 {
-    clear();
+//    clear();
+    appsUpdated = true;
     AppLnkSet apps( appsFolderName() );
     updateApplications(&apps);
 }

@@ -1276,7 +1276,7 @@ DocLnkSet::DocLnkSet( const QString &directory, const QString& mimefilter ) :
 {
     QDir dir( directory );
     mFile = dir.dirName();
-    QDict<void> reference;
+    QDict<void> reference(1021);
 
     QStringList subFilter = QStringList::split(";", mimefilter);
     QValueList<QRegExp> mimeFilters;
