@@ -11,7 +11,7 @@
 ************************************************************************************/
 
 /*
- * $Id: vmemo.cpp,v 1.16 2002-03-26 02:10:09 llornkcor Exp $
+ * $Id: vmemo.cpp,v 1.17 2002-03-27 04:29:54 llornkcor Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 #include <sys/utsname.h>
@@ -70,68 +70,126 @@ int seq = 0;
 
 /* XPM */
 static char * vmemo_xpm[] = {
-"14 14 47 1",
+"16 16 102 2",
 "   c None",
-".  c #101010",
-"+  c #0D0D0D",
-"@  c #0B0B0B",
-"#  c #393939",
-"$  c #6C6C6C",
-"%  c #5D5D5D",
-"&  c #4E4E4E",
-"*  c #1C1C1C",
-"=  c #131313",
-"-  c #7B7B7B",
-";  c #303030",
-">  c #383838",
-",  c #3F3F3F",
-"'  c #343434",
-")  c #060606",
-"!  c #444444",
-"~  c #646464",
-"{  c #505050",
-"]  c #717171",
-"^  c #1B1B1B",
-"/  c #585858",
-"(  c #4C4C4C",
-"_  c #353535",
-":  c #0E0E0E",
-"<  c #080808",
-"[  c #262626",
-"}  c #121212",
-"|  c #7F7F7F",
-"1  c #464646",
-"2  c #0C0C0C",
-"3  c #727272",
-"4  c #292929",
-"5  c #656565",
-"6  c #565656",
-"7  c #434343",
-"8  c #272727",
-"9  c #0F0F0F",
-"0  c #3A3A3A",
-"a  c #090909",
-"b  c #535353",
-"c  c #545454",
-"d  c #494949",
-"e  c #7A7A7A",
-"f  c #202020",
-"g  c #3D3D3D",
-"h  c #1F1F1F",
-"         .+@  ",
-"        #$%&* ",
-"       =-;>,')",
-"       .$;!~,)",
-"        ;#{]!)",
-"        ^~/(_)",
-"       ./:@<[)",
-"  }.  .|]1;;2 ",
-" #-$;^/3&;;4@ ",
-".$;;#5:67;89  ",
-":%;0%&ab;8.   ",
-"@cd%e!fg49    ",
-" h0,!_;2@     ",
-"  )))))       "};
+".  c #60636A",
+"+  c #6E6E72",
+"@  c #68696E",
+"#  c #4D525C",
+"$  c #6B6C70",
+"%  c #E3E3E8",
+"&  c #EEEEF2",
+"*  c #EAEAEF",
+"=  c #CACAD0",
+"-  c #474A51",
+";  c #171819",
+">  c #9B9B9F",
+",  c #EBEBF0",
+"'  c #F4F4F7",
+")  c #F1F1F5",
+"!  c #DEDEE4",
+"~  c #57575C",
+"{  c #010101",
+"]  c #A2A2A6",
+"^  c #747477",
+"/  c #B5B5B8",
+"(  c #AEAEB2",
+"_  c #69696D",
+":  c #525256",
+"<  c #181C24",
+"[  c #97979B",
+"}  c #A7A7AC",
+"|  c #B0B0B4",
+"1  c #C8C8D1",
+"2  c #75757B",
+"3  c #46464A",
+"4  c #494A4F",
+"5  c #323234",
+"6  c #909095",
+"7  c #39393B",
+"8  c #757578",
+"9  c #87878E",
+"0  c #222224",
+"a  c #414144",
+"b  c #6A6A6E",
+"c  c #020C16",
+"d  c #6B6B6F",
+"e  c #68686D",
+"f  c #5B5B60",
+"g  c #8A8A8F",
+"h  c #6B6B6E",
+"i  c #ADADB2",
+"j  c #828289",
+"k  c #3E3E41",
+"l  c #CFCFD7",
+"m  c #4C4C50",
+"n  c #000000",
+"o  c #66666A",
+"p  c #505054",
+"q  c #838388",
+"r  c #A1A1A7",
+"s  c #A9A9AE",
+"t  c #A8A8B0",
+"u  c #5E5E63",
+"v  c #3A3A3E",
+"w  c #BDBDC6",
+"x  c #59595E",
+"y  c #76767C",
+"z  c #373738",
+"A  c #717174",
+"B  c #727278",
+"C  c #1C1C1E",
+"D  c #3C3C3F",
+"E  c #ADADB6",
+"F  c #54555A",
+"G  c #8B8C94",
+"H  c #5A5A5F",
+"I  c #BBBBC3",
+"J  c #C4C4CB",
+"K  c #909098",
+"L  c #737379",
+"M  c #343437",
+"N  c #8F8F98",
+"O  c #000407",
+"P  c #2D3137",
+"Q  c #B0B1BC",
+"R  c #3B3C40",
+"S  c #6E6E74",
+"T  c #95959C",
+"U  c #74747A",
+"V  c #1D1D1E",
+"W  c #91929A",
+"X  c #42444A",
+"Y  c #22282E",
+"Z  c #B0B2BC",
+"`  c #898A90",
+" . c #65656A",
+".. c #999AA2",
+"+. c #52535A",
+"@. c #151B21",
+"#. c #515257",
+"$. c #B5B5BE",
+"%. c #616167",
+"&. c #1A1D22",
+"*. c #000713",
+"=. c #1F1F21",
+"                                ",
+"            . + @ #             ",
+"          $ % & * = -           ",
+"        ; > , ' ) ! ~           ",
+"        { ] ^ / ( _ :           ",
+"        < [ } | 1 2 3           ",
+"      4 5 6 7 8 9 0 a b c       ",
+"    d e f g h i j 3 k l m n     ",
+"      o p q r s t u v w n       ",
+"      o x y z A B C D E n       ",
+"      F G H I J K L M N O       ",
+"      P Q R S T U V W X         ",
+"        Y Z ` b  ...+.          ",
+"          @.#.$.%.&.            ",
+"            *.B =.              ",
+"      n n n n n n n n n         "};
+
 
 VMemo::VMemo( QWidget *parent, const char *_name )
     : QWidget( parent, _name )
@@ -168,8 +226,7 @@ VMemo::~VMemo()
 void VMemo::receive( const QCString &msg, const QByteArray &data )
 {
   QDataStream stream( data, IO_ReadOnly );
-  if (msg == "toggleRecord()")
-  {
+  if (msg == "toggleRecord()")  {
     if (recording)
     mouseReleaseEvent(NULL);
     else
@@ -186,28 +243,35 @@ void VMemo::paintEvent( QPaintEvent* )
 void VMemo::mousePressEvent( QMouseEvent *me )
 {
   // just to be safe
-  if (recording)
-  {
-    recording = FALSE;
-    return;
-  }
+    if (recording) {
+        recording = FALSE;
+        return;
+    }
 
-  /* 
-   No mousePress/mouseRelease recording on the iPAQ. The REC button on the iPAQ calls these functions
-   mousePressEvent and mouseReleaseEvent with a NULL parameter.
-  */
-//        if (!systemZaurus && me != NULL)
-//        return;
-  
-  QSound::play(Resource::findSound("vmemob"));
-  qDebug("Start recording");
-  recording = TRUE;
-  if (openDSP() == -1)
-  {
-    QMessageBox::critical(0, "VMemo", "Could not open dsp device.", "Abort");
-    recording = FALSE;
-    return;
-  }
+      /* 
+         No mousePress/mouseRelease recording on the iPAQ. The REC button on the iPAQ calls these functions
+         mousePressEvent and mouseReleaseEvent with a NULL parameter.
+      */
+//     if (!systemZaurus && me != NULL)
+//         return;
+
+//     Config config( "Sound" );
+//     config.setGroup( "System" );
+//     useAlerts = config.readBoolEntry("Alert");
+
+//     if(useAlerts) {
+//         if( QMessageBox::warning(this,"VMemo","Really Record?","Yes","No",0,0,1) ==1)
+//             return;
+//     } else {
+    QSound::play(Resource::findSound("vmemob"));
+//     }
+    qDebug("Start recording");
+    recording = TRUE;
+    if (openDSP() == -1)  {
+        QMessageBox::critical(0, "VMemo", "Could not open dsp device.", "Abort");
+        recording = FALSE;
+        return;
+    }
   
   Config vmCfg("VMemo");
   vmCfg.setGroup("Defaults");
@@ -230,8 +294,7 @@ void VMemo::mousePressEvent( QMouseEvent *me )
   fileName.replace(QRegExp(":"),".");
   fileName.replace(QRegExp(","),"");
   
-  if(openWAV(fileName.latin1()) == -1)
-  {
+  if(openWAV(fileName.latin1()) == -1)  {
     QString err("Could not open the output file: ");
     err += fileName;
 
@@ -262,50 +325,50 @@ void VMemo::mouseReleaseEvent( QMouseEvent * )
 
 int VMemo::openDSP()
 {
-  Config cfg("Sound");
-  cfg.setGroup("Record");
+    Config cfg("Sound");
+    cfg.setGroup("Record");
   
-  speed = cfg.readNumEntry("SampleRate", 22050);
-  channels = cfg.readNumEntry("Stereo", 1) ? 2 : 1; // 1 = stereo(2), 0 = mono(1)
-  if (cfg.readNumEntry("SixteenBit", 1)==1)  {
-    format = AFMT_S16_LE;
-    resolution = 16;
-  }
-    else  {
-      format = AFMT_S8;
-      resolution = 8;
+    speed = cfg.readNumEntry("SampleRate", 22050);
+    channels = cfg.readNumEntry("Stereo", 1) ? 2 : 1; // 1 = stereo(2), 0 = mono(1)
+    if (cfg.readNumEntry("SixteenBit", 1)==1)  {
+        format = AFMT_S16_LE;
+        resolution = 16;
+    } else {
+        format = AFMT_S8;
+        resolution = 8;
     }
+  
 
-  if(systemZaurus) {
-    dsp = open("/dev/dsp1", O_RDWR); //Zaurus needs /dev/dsp1
-    channels=1; //zaurus has one input channel
-  }  else {
-  dsp = open("/dev/dsp", O_RDWR);
-  }
+    if(systemZaurus) {
+        dsp = open("/dev/dsp1", O_RDWR); //Zaurus needs /dev/dsp1
+        channels=1; //zaurus has one input channel
+    }  else {
+        dsp = open("/dev/dsp", O_RDWR);
+    }
   
-  if(dsp == -1)  {
-      perror("open(\"/dev/dsp\")");
-      return -1;
-  }
+    if(dsp == -1)  {
+        perror("open(\"/dev/dsp\")");
+        return -1;
+    }
   
-  if(ioctl(dsp, SNDCTL_DSP_SETFMT , &format)==-1)  {
-    perror("ioctl(\"SNDCTL_DSP_SETFMT\")");
-    return -1;
-  }
-  if(ioctl(dsp, SNDCTL_DSP_CHANNELS , &channels)==-1)  {
-    perror("ioctl(\"SNDCTL_DSP_CHANNELS\")");
-    return -1;
-  }
-  if(ioctl(dsp, SNDCTL_DSP_SPEED , &speed)==-1)  {
-    perror("ioctl(\"SNDCTL_DSP_SPEED\")");
-    return -1;
-  }
-  if(ioctl(dsp, SOUND_PCM_READ_RATE , &rate)==-1)  {
-    perror("ioctl(\"SOUND_PCM_READ_RATE\")");
-    return -1;
-  }
+    if(ioctl(dsp, SNDCTL_DSP_SETFMT , &format)==-1)  {
+        perror("ioctl(\"SNDCTL_DSP_SETFMT\")");
+        return -1;
+    }
+    if(ioctl(dsp, SNDCTL_DSP_CHANNELS , &channels)==-1)  {
+        perror("ioctl(\"SNDCTL_DSP_CHANNELS\")");
+        return -1;
+    }
+    if(ioctl(dsp, SNDCTL_DSP_SPEED , &speed)==-1)  {
+        perror("ioctl(\"SNDCTL_DSP_SPEED\")");
+        return -1;
+    }
+    if(ioctl(dsp, SOUND_PCM_READ_RATE , &rate)==-1)  {
+        perror("ioctl(\"SOUND_PCM_READ_RATE\")");
+        return -1;
+    }
   
-  return 1;
+    return 1;
 }
 
 int VMemo::openWAV(const char *filename)
@@ -344,77 +407,78 @@ void VMemo::record(void)
     qDebug("Recording");
 
     if(systemZaurus) {
-    signed short sound[512], monoBuffer[512];
+        signed short sound[512], monoBuffer[512];
+        if(format==AFMT_S16_LE)  {
+            while(recording)   {
+                result = read(dsp, sound, 512); // 8192
+                qApp->processEvents();
+                int j=0;
+                if(systemZaurus) {
+                    for (int i = 0; i < result; i++) { //since Z is mono do normally
+                        monoBuffer[i] = sound[i];
+                    }
+                    qApp->processEvents();
+                    length+=write(wav, monoBuffer, result);
+                } else { //ipaq /stereo inputs
+                    for (int i = 0; i < result; i+=2) {
+                        monoBuffer[j] = (sound[i]+sound[i+1])/2;
+                        j++;
+                    }
+                    qApp->processEvents();
+                    length+=write(wav, monoBuffer, result/2);
+                }
+                printf("%d\r",length);
+                fflush(stdout);
+            }
+        }  else { //AFMT_S8 
+// 8bit unsigned
+            unsigned short sound[512], monoBuffer[512];
+            while(recording)   {
+                result = read(dsp, sound, 512); // 8192
+                qApp->processEvents();
+                int j=0;
+                if(systemZaurus) {
+                      for (int i = 0; i < result; i++) { //since Z is mono do normally
+                          monoBuffer[i] = sound[i];
+                      }
+                      qApp->processEvents();
+                      length+=write(wav, monoBuffer, result);
+                  } else { //ipaq /stereo inputs
+                      for (int i = 0; i < result; i+=2) {
+                          monoBuffer[j] = (sound[i]+sound[i+1])/2;
+                          j++;
+                      }
+                      qApp->processEvents();
+                      length+=write(wav, monoBuffer, result/2);
+                  }
+                length += result;
+                printf("%d\r",length);
+                fflush(stdout);
 
-    if(format==AFMT_S16_LE)  {
-    while(recording)   {
-    result = read(dsp, sound, 512); // 8192
-    qApp->processEvents();
-    int j=0;
-    if(systemZaurus) {
-    for (int i = 0; i < result; i++) { //since Z is mono do normally
-    monoBuffer[i] = sound[i];
-    }
-    qApp->processEvents();
-    length+=write(wav, monoBuffer, result);
-    } else { //ipaq /stereo inputs
-    for (int i = 0; i < result; i+=2) {
-    monoBuffer[j] = (sound[i]+sound[i+1])/2;
-    j++;
-    }
-    qApp->processEvents();
-    length+=write(wav, monoBuffer, result/2);
-    }
-    printf("%d\r",length);
-    fflush(stdout);
-    }
-    }
-    else { //AFMT_S8 // don't try this yet.. as player doesn't understand 8bit unsigned
-    while(recording)
-    {
-    result = read(dsp, sound, 512); // 8192
-    qApp->processEvents();
-    int j=0;
-    if(systemZaurus) 
-    {
-    for (int i = 0; i < result; i++) { //since Z is mono do normally
-    monoBuffer[i] = sound[i];
-    }
-    qApp->processEvents();
-    length+=write(wav, monoBuffer, result);
-    } else { //ipaq /stereo inputs
-    for (int i = 0; i < result; i+=2) {
-    monoBuffer[j] = (sound[i]+sound[i+1])/2;
-    j++;
-    }
-    qApp->processEvents();
-    length+=write(wav, monoBuffer, result/2);
-    }
-    length += result;
-    printf("%d\r",length);
-    fflush(stdout);
+                qApp->processEvents();
+            }
 
-    qApp->processEvents();
-    }
-    }
+            qApp->processEvents();
+        }
 
     } else {
 
-    char sound[512]; //char is 8 bit
+        signed short sound[512], monoBuffer[512];
 
-    while(recording)
-    {
-    result = read(dsp, sound, 512); // 8192
-    qApp->processEvents();
+        while(recording)  {
+            result = read(dsp, sound, 512); // 8192
+            qApp->processEvents();
 
-    write(wav, sound, result);
-    length += result;
+            write(wav, sound, result);
+            length += result;
 
-    qApp->processEvents();
-    }
-    //  qDebug("file has length of %d lasting %d seconds",
-    //         length, (( length / speed) / channels) / 2 );
-    // medialplayer states wrong length in secs
+            qApp->processEvents();
+        }
+        printf("%d\r",length);
+        fflush(stdout);
+          //  qDebug("file has length of %d lasting %d seconds",
+          //         length, (( length / speed) / channels) / 2 );
+          // medialplayer states wrong length in secs
     }
 
     value = length+36;
@@ -425,10 +489,10 @@ void VMemo::record(void)
     track.close();
   
     if( ioctl( dsp, SNDCTL_DSP_RESET,0) == -1)
-    perror("ioctl(\"SNDCTL_DSP_RESET\")");
+        perror("ioctl(\"SNDCTL_DSP_RESET\")");
     ::close(dsp);
-    if(systemZaurus)
-    QMessageBox::message("Vmemo"," Done recording");
-  
-    QSound::play(Resource::findSound("vmemoe"));
+//     if(useAlerts) 
+//        QMessageBox::message("Vmemo"," Done recording");
+//     else
+        QSound::play(Resource::findSound("vmemoe"));
 }

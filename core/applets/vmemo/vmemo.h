@@ -11,7 +11,7 @@
 *********************************************************************************************/
 
 /*
- * $Id: vmemo.h,v 1.5 2002-02-15 21:10:04 jeremy Exp $
+ * $Id: vmemo.h,v 1.6 2002-03-27 04:29:54 llornkcor Exp $
  */
 
 #ifndef __VMEMO_H__
@@ -38,7 +38,8 @@ public slots:
   void receive( const QCString &msg, const QByteArray &data );
 
 private:
- void paintEvent( QPaintEvent* );
+  bool useAlerts;
+  void paintEvent( QPaintEvent* );
 
   int openDSP();
   int openWAV(const char *filename);
