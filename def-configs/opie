@@ -47,6 +47,18 @@ CONFIG_CALCULATOR=y
 #
 
 #
+# todayplugins
+#
+
+#
+# stockticker
+#
+CONFIG_TODAY_STOCKTICKER=y
+CONFIG_TODAY_STOCKTICKERSUB=y
+CONFIG_TODAY_STOCKTICKERLIB=y
+CONFIG_TODAY_FORTUNE=y
+
+#
 # styles
 #
 CONFIG_THEME=y
@@ -76,6 +88,10 @@ CONFIG_APPEARANCE2=y
 
 #
 # net
+#
+
+#
+# opietooth
 #
 CONFIG_OPIEIRC=y
 CONFIG_OPIEFTP=y
