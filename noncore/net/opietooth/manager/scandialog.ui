@@ -1,17 +1,17 @@
 <!DOCTYPE UI><UI>
-<class>Form3</class>
+<class>ScanDialog</class>
 <widget>
     <class>QDialog</class>
     <property stdset="1">
         <name>name</name>
-        <cstring>Form3</cstring>
+        <cstring>ScanDialog</cstring>
     </property>
     <property stdset="1">
         <name>geometry</name>
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>368</width>
+            <width>360</width>
             <height>392</height>
         </rect>
     </property>

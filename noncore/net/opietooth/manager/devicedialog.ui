@@ -1,17 +1,17 @@
 <!DOCTYPE UI><UI>
-<class>Form2</class>
+<class>DeviceDialog</class>
 <widget>
     <class>QDialog</class>
     <property stdset="1">
         <name>name</name>
-        <cstring>Form2</cstring>
+        <cstring>DeviceDialog</cstring>
     </property>
     <property stdset="1">
         <name>geometry</name>
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>592</width>
+            <width>584</width>
             <height>480</height>
         </rect>
     </property>
@@ -48,10 +48,10 @@
         <property stdset="1">
             <name>geometry</name>
             <rect>
-                <x>0</x>
-                <y>20</y>
+                <x>-10</x>
+                <y>0</y>
                 <width>240</width>
-                <height>290</height>
+                <height>320</height>
             </rect>
         </property>
         <widget>

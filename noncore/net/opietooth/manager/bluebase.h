@@ -31,6 +31,23 @@ protected:
         private slots:
     void startScan();
 
+ private:
+	void readConfig();
+	void writeConfig();
+	QString getStatus();
+	void initGui();
+
+	
+	QString deviceName;
+	QString defaultPasskey;
+	int useEncryption;
+	int enableAuthentification;
+	int enablePagescan;
+	int enableInquiryscan;	
+	
+	private slots:
+	
+      	void applyConfigChanges();
 
 };
 

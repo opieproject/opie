@@ -11,8 +11,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>596</width>
-            <height>480</height>
+            <width>228</width>
+            <height>320</height>
         </rect>
     </property>
     <property stdset="1">
@@ -44,33 +44,6 @@
                 <name>title</name>
                 <string>Devices</string>
             </attribute>
-            <widget>
-                <class>QPushButton</class>
-                <property stdset="1">
-                    <name>name</name>
-                    <cstring>PushButton2</cstring>
-                </property>
-                <property stdset="1">
-                    <name>geometry</name>
-                    <rect>
-                        <x>50</x>
-                        <y>260</y>
-                        <width>154</width>
-                        <height>31</height>
-                    </rect>
-                </property>
-                <property stdset="1">
-                    <name>sizePolicy</name>
-                    <sizepolicy>
-                        <hsizetype>0</hsizetype>
-                        <vsizetype>0</vsizetype>
-                    </sizepolicy>
-                </property>
-                <property stdset="1">
-                    <name>text</name>
-                    <string>Scan for Devices</string>
-                </property>
-            </widget>
             <spacer>
                 <property>
                     <name>name</name>
@@ -164,11 +137,38 @@
                 <property stdset="1">
                     <name>geometry</name>
                     <rect>
-                        <x>8</x>
-                        <y>3</y>
-                        <width>240</width>
-                        <height>140</height>
+                        <x>0</x>
+                        <y>0</y>
+                        <width>230</width>
+                        <height>230</height>
                     </rect>
+                </property>
+            </widget>
+            <widget>
+                <class>QPushButton</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>PushButton2</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>40</x>
+                        <y>231</y>
+                        <width>154</width>
+                        <height>30</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>sizePolicy</name>
+                    <sizepolicy>
+                        <hsizetype>0</hsizetype>
+                        <vsizetype>0</vsizetype>
+                    </sizepolicy>
+                </property>
+                <property stdset="1">
+                    <name>text</name>
+                    <string>Scan for Devices</string>
                 </property>
             </widget>
         </widget>
@@ -219,10 +219,10 @@
                 <property stdset="1">
                     <name>geometry</name>
                     <rect>
-                        <x>8</x>
-                        <y>3</y>
-                        <width>241</width>
-                        <height>301</height>
+                        <x>0</x>
+                        <y>0</y>
+                        <width>240</width>
+                        <height>240</height>
                     </rect>
                 </property>
             </widget>
@@ -241,14 +241,14 @@
                 <class>QLabel</class>
                 <property stdset="1">
                     <name>name</name>
-                    <cstring>TextLabel6</cstring>
+                    <cstring>deviceNameLabel</cstring>
                 </property>
                 <property stdset="1">
                     <name>geometry</name>
                     <rect>
                         <x>10</x>
-                        <y>20</y>
-                        <width>121</width>
+                        <y>10</y>
+                        <width>70</width>
                         <height>20</height>
                     </rect>
                 </property>
@@ -261,14 +261,14 @@
                 <class>QLabel</class>
                 <property stdset="1">
                     <name>name</name>
-                    <cstring>TextLabel7</cstring>
+                    <cstring>passkeyLabel</cstring>
                 </property>
                 <property stdset="1">
                     <name>geometry</name>
                     <rect>
                         <x>10</x>
                         <y>50</y>
-                        <width>120</width>
+                        <width>80</width>
                         <height>20</height>
                     </rect>
                 </property>
@@ -281,32 +281,20 @@
                 <class>QLineEdit</class>
                 <property stdset="1">
                     <name>name</name>
-                    <cstring>LineEdit4</cstring>
+                    <cstring>passkeyLine</cstring>
                 </property>
                 <property stdset="1">
                     <name>geometry</name>
                     <rect>
-                        <x>128</x>
+                        <x>98</x>
                         <y>53</y>
                         <width>120</width>
                         <height>22</height>
                     </rect>
                 </property>
-            </widget>
-            <widget>
-                <class>QLineEdit</class>
                 <property stdset="1">
-                    <name>name</name>
-                    <cstring>LineEdit5</cstring>
-                </property>
-                <property stdset="1">
-                    <name>geometry</name>
-                    <rect>
-                        <x>128</x>
-                        <y>13</y>
-                        <width>120</width>
-                        <height>22</height>
-                    </rect>
+                    <name>echoMode</name>
+                    <enum>Password</enum>
                 </property>
             </widget>
             <widget>
@@ -321,7 +309,7 @@
                         <x>10</x>
                         <y>100</y>
                         <width>188</width>
-                        <height>104</height>
+                        <height>120</height>
                     </rect>
                 </property>
                 <vbox>
@@ -337,7 +325,7 @@
                         <class>QCheckBox</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>CheckBox1</cstring>
+                            <cstring>authCheckBox</cstring>
                         </property>
                         <property stdset="1">
                             <name>text</name>
@@ -348,7 +336,7 @@
                         <class>QCheckBox</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>CheckBox2</cstring>
+                            <cstring>cryptCheckBox</cstring>
                         </property>
                         <property stdset="1">
                             <name>text</name>
@@ -359,7 +347,7 @@
                         <class>QCheckBox</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>CheckBox5</cstring>
+                            <cstring>pagescanCheckBox</cstring>
                         </property>
                         <property stdset="1">
                             <name>text</name>
@@ -370,7 +358,7 @@
                         <class>QCheckBox</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>CheckBox6</cstring>
+                            <cstring>inquiryscanCheckBox</cstring>
                         </property>
                         <property stdset="1">
                             <name>text</name>
@@ -378,6 +366,42 @@
                         </property>
                     </widget>
                 </vbox>
+            </widget>
+            <widget>
+                <class>QLineEdit</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>deviceNameLine</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>98</x>
+                        <y>13</y>
+                        <width>120</width>
+                        <height>22</height>
+                    </rect>
+                </property>
+            </widget>
+            <widget>
+                <class>QPushButton</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>configApplyButton</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>60</x>
+                        <y>230</y>
+                        <width>99</width>
+                        <height>32</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>text</name>
+                    <string>Apply</string>
+                </property>
             </widget>
         </widget>
         <widget>
@@ -394,15 +418,15 @@
                 <class>QLabel</class>
                 <property stdset="1">
                     <name>name</name>
-                    <cstring>StutusLabel</cstring>
+                    <cstring>StatusLabel</cstring>
                 </property>
                 <property stdset="1">
                     <name>geometry</name>
                     <rect>
                         <x>10</x>
                         <y>10</y>
-                        <width>240</width>
-                        <height>300</height>
+                        <width>220</width>
+                        <height>250</height>
                     </rect>
                 </property>
                 <property stdset="1">
