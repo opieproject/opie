@@ -65,6 +65,8 @@ protected:
 
     void handleCommand( Command command, bool buttonDown );
 
+    bool isOverButton( const QPoint &position, int buttonId ) const;
+
     MediaPlayerState &mediaPlayerState;
     PlayListWidget &playList;
 

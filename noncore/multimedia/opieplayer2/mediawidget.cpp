@@ -60,5 +60,13 @@ void MediaWidget::handleCommand( Command command, bool buttonDown )
     }
 }
 
+bool MediaWidget::isOverButton( const QPoint &position, int buttonId ) const
+{
+    return ( position.x() > 0 && position.y() > 0 && 
+             position.x() < buttonMask.width() && 
+             position.y() < buttonMask.height() && 
+             buttonMask.pixelIndex( position.x(), position.y() ) == buttonId + 1 );
+}
+
 /* vim: et sw=4 ts=4
  */

@@ -282,12 +282,7 @@ void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
     for ( unsigned int i = 0; i < buttons.size(); i++ ) {
         if ( event->state() == QMouseEvent::LeftButton ) {
             // The test to see if the mouse click is inside the button or not
-            int x = event->pos().x() - upperLeftOfButtonMask.x();
-            int y = event->pos().y() - upperLeftOfButtonMask.y();
-
-            bool isOnButton = ( x > 0 && y > 0 && x < buttonMask.width()
-                                && y < buttonMask.height()
-                                && buttonMask.pixelIndex( x, y ) == i + 1 );
+            bool isOnButton = isOverButton( event->pos() - upperLeftOfButtonMask, i );
 
             if ( isOnButton && !buttons[i].isHeld ) {
                 buttons[i].isHeld = TRUE;
