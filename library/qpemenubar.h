@@ -65,6 +65,8 @@ public:
 
 protected:
     virtual void keyPressEvent( QKeyEvent *e );
+    void activateItem( int index );
+    void goodbye();
 };
 
 #endif

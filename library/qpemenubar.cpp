@@ -306,3 +306,19 @@ void QPEMenuBar::keyPressEvent( QKeyEvent *e )
     QMenuBar::keyPressEvent( e );
 }
 
+
+void QPEMenuBar::activateItem( int index )
+{
+    activateItemAt( index );
+}
+
+void QPEMenuBar::goodbye()
+{
+    activateItemAt(-1);
+    for ( unsigned int i = 0; i < count(); i++ ) {
+        QMenuItem *mi = findItem( idAt(i) );
+        if ( mi->popup() ) {
+            mi->popup()->hide();
+        }
+    }
+}
