@@ -43,6 +43,11 @@ ViewMailBase::ViewMailBase(QWidget *parent, const char *name, WFlags fl)
 	attachbutton->addTo(mailmenu);
 	connect(attachbutton, SIGNAL(toggled(bool)), SLOT(slotChangeAttachview(bool)));
 
+
+        showHtml = new QAction( tr( "Show Html" ), QIconSet( Resource::loadPixmap( "mail/attach" ) ), 0, 0, this, 0, true );
+        showHtml->addTo( toolbar );
+        showHtml->addTo( mailmenu );
+
 	deleteMail = new QAction(tr("Delete Mail"), QIconSet(Resource::loadPixmap("mail/delete")), 0, 0, this);
 	deleteMail->addTo(toolbar);
 	deleteMail->addTo(mailmenu);

@@ -11,7 +11,7 @@ OpieMail::OpieMail( QWidget *parent, const char *name, WFlags flags )
 
     connect( composeMail, SIGNAL( activated() ), SLOT( slotComposeMail() ) );
     connect( sendQueued, SIGNAL( activated() ), SLOT( slotSendQueued() ) );
-    connect( searchMails, SIGNAL( activated() ), SLOT( slotSearchMails() ) );
+//    connect( searchMails, SIGNAL( activated() ), SLOT( slotSearchMails() ) );
     connect( editSettings, SIGNAL( activated() ), SLOT( slotEditSettings() ) );
     connect( editAccounts, SIGNAL( activated() ), SLOT( slotEditAccounts() ) );
 }

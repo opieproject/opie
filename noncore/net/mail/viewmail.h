@@ -42,14 +42,17 @@ protected slots:
         void setText();
         void slotItemClicked( QListViewItem * item , const QPoint & point, int c );
         void slotDeleteMail( );
-
+	void slotShowHtml( bool );
 
 private:
+	void readConfig();
+	
 	bool _inLoop;
 	QString m_mailHtml;
 	bool m_gotBody;
         RecBody m_body;
         RecMail m_recMail;
+	bool m_showHtml;
 
         // 0 from  1 subject  2 bodytext 3 date
         QMap <int,QString>  m_mail;

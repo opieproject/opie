@@ -9,6 +9,7 @@
 #include <qmenubar.h>
 
 #include "accountview.h"
+#include "statuswidget.h"
 
 class RecMail;
 
@@ -28,9 +29,11 @@ protected slots:
     virtual void displayMail(QListViewItem*);
     virtual void slotDeleteMail();
     void slotAdjustLayout();
+    void slotEditSettings();
     
 protected:
     QToolBar *toolBar;
+    StatusWidget *statusWidget;
     QMenuBar *menuBar;
     QPopupMenu *mailMenu, *settingsMenu;
     QAction *composeMail, *sendQueued, *showFolders, *searchMails, *deleteMails, 

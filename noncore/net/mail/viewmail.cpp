@@ -6,6 +6,8 @@
 #include <qfile.h>
 #include <qapplication.h>
 
+#include <qpe/config.h>
+
 #include <opie/ofiledialog.h>
 
 #include "settings.h"
@@ -109,6 +111,12 @@ for (unsigned int i = 0; i < body.Parts().count();++i) {
 }
 }
 
+
+void ViewMail::slotShowHtml( bool state ) {
+    m_showHtml = state;
+    setText();
+}
+
 void ViewMail::slotItemClicked( QListViewItem * item , const QPoint & point, int ) {
     if (!item )
         return;
@@ -164,18 +172,18 @@ void ViewMail::slotItemClicked( QListViewItem * item , const QPoint & point, int
 
 void ViewMail::setMail( RecMail mail ) {
 
-m_recMail = mail;
+    m_recMail = mail;
 
-m_mail[0] = mail.getFrom();
-m_mail[1] = mail.getSubject();
-m_mail[3] = mail.getDate();
-m_mail[4] = mail.Msgid();
+    m_mail[0] = mail.getFrom();
+    m_mail[1] = mail.getSubject();
+    m_mail[3] = mail.getDate();
+    m_mail[4] = mail.Msgid();
 
-m_mail2[0] = mail.To();
-m_mail2[1] = mail.CC();
-m_mail2[2] = mail.Bcc();
+    m_mail2[0] = mail.To();
+    m_mail2[1] = mail.CC();
+    m_mail2[2] = mail.Bcc();
 
-setText();
+    setText();
 }
 
 
@@ -186,48 +194,61 @@ ViewMail::ViewMail( QWidget *parent, const char *name, WFlags fl)
 	m_gotBody = false;
         deleted = false;
 
-	connect(reply, SIGNAL(activated()), SLOT(slotReply()));
-	connect(forward, SIGNAL(activated()), SLOT(slotForward()));
+	connect( reply, SIGNAL(activated()), SLOT(slotReply()));
+	connect( forward, SIGNAL(activated()), SLOT(slotForward()));
         connect( deleteMail, SIGNAL( activated() ),  SLOT( slotDeleteMail(  ) ) );
+        connect( showHtml, SIGNAL( toggled( bool ) ), SLOT( slotShowHtml( bool ) ) );
 
 	attachments->setEnabled(m_gotBody);
         connect( attachments,  SIGNAL( clicked ( QListViewItem *, const QPoint & , int ) ), SLOT( slotItemClicked(  QListViewItem *,  const QPoint & , int ) ) );
 
+        readConfig();
 
+}
+
+void ViewMail::readConfig() {
+    Config cfg( "mail" );
+    cfg.setGroup( "Settings" );
+    m_showHtml =  cfg.readBoolEntry( "showHtml", false );
+    showHtml->setOn( m_showHtml );
 }
 
 void ViewMail::setText()
 {
 
-  QString toString;
-  QString ccString;
-  QString bccString;
+    QString toString;
+    QString ccString;
+    QString bccString;
 
-  for ( QStringList::Iterator it = ( m_mail2[0] ).begin(); it != ( m_mail2[0] ).end(); ++it ) {
-                  toString += (*it);
-  }
-  for ( QStringList::Iterator it = ( m_mail2[1] ).begin(); it != ( m_mail2[1] ).end(); ++it ) {
-                  ccString += (*it);
-  }
-  for ( QStringList::Iterator it = ( m_mail2[2] ).begin(); it != ( m_mail2[2] ).end(); ++it ) {
-                  bccString += (*it);
-  }
+    for ( QStringList::Iterator it = ( m_mail2[0] ).begin(); it != ( m_mail2[0] ).end(); ++it ) {
+        toString += (*it);
+    }
+    for ( QStringList::Iterator it = ( m_mail2[1] ).begin(); it != ( m_mail2[1] ).end(); ++it ) {
+        ccString += (*it);
+    }
+    for ( QStringList::Iterator it = ( m_mail2[2] ).begin(); it != ( m_mail2[2] ).end(); ++it ) {
+        bccString += (*it);
+    }
 
- setCaption( caption().arg( m_mail[0] ) );
+    setCaption( caption().arg( m_mail[0] ) );
 
-     m_mailHtml = "<html><body>"
-                  "<table width=\"100%\" border=\"0\"><tr bgcolor=\"#FFDD76\"><td>"
-                  "<div align=left><b>" + deHtml( m_mail[1] ) + "</b></div>"
-                  "</td></tr><tr bgcolor=\"#EEEEE6\"><td>"
-               	  "<b>" + tr( "From" ) + ": </b><font color=#6C86C0>" + deHtml( m_mail[0] ) + "</font><br>"
-		  "<b>" + tr(  "To" ) + ": </b><font color=#6C86C0>" + deHtml( toString ) + "</font><br><b>" +
-		  tr( "Cc" ) + ": </b>" + deHtml( ccString ) + "<br>"
-            	  "<b>" + tr( "Date" ) + ": </b> " +  m_mail[3] +
-                  "</td></tr></table><font face=fixed>";
+    m_mailHtml = "<html><body>"
+                 "<table width=\"100%\" border=\"0\"><tr bgcolor=\"#FFDD76\"><td>"
+                 "<div align=left><b>" + deHtml( m_mail[1] ) + "</b></div>"
+                 "</td></tr><tr bgcolor=\"#EEEEE6\"><td>"
+                 "<b>" + tr( "From" ) + ": </b><font color=#6C86C0>" + deHtml( m_mail[0] ) + "</font><br>"
+                 "<b>" + tr(  "To" ) + ": </b><font color=#6C86C0>" + deHtml( toString ) + "</font><br><b>" +
+                 tr( "Cc" ) + ": </b>" + deHtml( ccString ) + "<br>"
+                 "<b>" + tr( "Date" ) + ": </b> " +  m_mail[3] +
+                 "</td></tr></table><font face=fixed>";
 
+    if ( !m_showHtml ) {
 	browser->setText( QString( m_mailHtml) + deHtml( m_mail[2] ) + "</font></html>" );
-        // remove later in favor of a real handling
-	m_gotBody = true;
+    } else {
+       	browser->setText( QString( m_mailHtml) + m_mail[2] + "</font></html>" );
+    }
+    // remove later in favor of a real handling
+    m_gotBody = true;
 }
 
 

@@ -11,9 +11,11 @@
 
 #include "defines.h"
 #include "mainwindow.h"
+#include "settingsdialog.h"
 #include "viewmail.h"
 #include "mailtypes.h"
 #include "mailistviewitem.h"
+
 
 MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     : QMainWindow( parent, name, flags )
@@ -45,10 +47,12 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     sendQueued->addTo( toolBar );
     sendQueued->addTo( mailMenu );
 
+    /*
     syncFolders = new QAction( tr( "Sync mailfolders" ), ICON_SYNC,
                                0, 0, this );
     syncFolders->addTo( toolBar );
     syncFolders->addTo( mailMenu );
+    */
 
     showFolders = new QAction( tr( "Show/Hide folders" ), ICON_SHOWFOLDERS,
                                0, 0, this, 0, true );
@@ -58,10 +62,12 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     connect(showFolders, SIGNAL( toggled( bool ) ),
             SLOT( slotShowFolders( bool ) ) );
 
-    searchMails = new QAction( tr( "Search mails" ), ICON_SEARCHMAILS,
+    /*
+      searchMails = new QAction( tr( "Search mails" ), ICON_SEARCHMAILS,
                                0, 0, this );
     searchMails->addTo( toolBar );
     searchMails->addTo( mailMenu );
+    */
 
     deleteMails = new QAction(tr("Delete Mail"), QIconSet(Resource::loadPixmap("mail/delete")), 0, 0, this);
     deleteMails->addTo( toolBar );
@@ -72,12 +78,14 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     editSettings = new QAction( tr( "Edit settings" ), ICON_EDITSETTINGS,
                                 0, 0, this );
     editSettings->addTo( settingsMenu );
+    connect( editSettings, SIGNAL( activated() ),
+             SLOT( slotEditSettings() ) );
 
     editAccounts = new QAction( tr( "Configure accounts" ), ICON_EDITACCOUNTS,
                                 0, 0, this );
     editAccounts->addTo( settingsMenu );
 
-    QWidget *view = new QWidget(  this );
+    QWidget *view = new QWidget( this );
     setCentralWidget( view );
 
     layout = new QBoxLayout ( view, QBoxLayout::LeftToRight );
@@ -99,9 +107,13 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     mailView->setAllColumnsShowFocus(true);
     mailView->setSorting(-1);
 
+    statusWidget = new StatusWidget( view );
+
     layout->addWidget( mailView );
+    layout->addWidget( statusWidget );
     layout->setStretchFactor( folderView, 1 );
     layout->setStretchFactor( mailView, 2 );
+
 
     slotAdjustLayout();
 
@@ -139,6 +151,12 @@ void MainWindow::slotAdjustColumns()
     mailView->setColumnWidth( 2, 80 );
     mailView->setColumnWidth( 3, 50 );
     mailView->setColumnWidth( 4, 50 );
+}
+
+void MainWindow::slotEditSettings() {
+    SettingsDialog settingsDialog( this,  0, true );
+    settingsDialog.showMaximized();
+    settingsDialog.exec();
 }
 
 void MainWindow::slotShowFolders( bool show )
@@ -179,7 +197,7 @@ void MainWindow::displayMail(QListViewItem*item)
     if (  readMail.deleted ) {
          folderView->refreshCurrent();
     } else {
-        ( (MailListViewItem*)item )->setPixmap( 0, Resource::loadPixmap( "mail/kmmsgunseen") );
+        ( (MailListViewItem*)item )->setPixmap( 0, Resource::loadPixmap( "") );
     }
 }
 
