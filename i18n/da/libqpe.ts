@@ -201,7 +201,7 @@ editing categories.</source>
     <name>FindWidgetBase</name>
     <message>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Find</translation>
     </message>
     <message>
         <source>Find what:</source>
@@ -408,7 +408,7 @@ editing categories.</source>
     </message>
     <message>
         <source>Out of Space</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ikke mere lagerplads</translation>
     </message>
     <message>
         <source>There was a problem creating

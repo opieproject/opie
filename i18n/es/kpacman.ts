@@ -264,7 +264,7 @@ Para usar un directorio o archivo diferente para las puntuaciones, especifíquel
     </message>
     <message>
         <source>                          </source>
-        <translation>                          </translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -15,12 +15,6 @@
     </message>
 </context>
 <context>
-    <name>AddressSettings</name>
-</context>
-<context>
-    <name>AddressSettingsBase</name>
-</context>
-<context>
     <name>AddressbookWindow</name>
     <message>
         <source>Contacts</source>

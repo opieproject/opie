@@ -54,10 +54,6 @@
         <translation> s/h</translation>
     </message>
     <message>
-        <source>Predicted time:</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>Get time from network</source>
         <translation>Obtener hora de la Red</translation>
     </message>
@@ -157,10 +153,6 @@ servidor</translation>
     <message>
         <source>NTP server to get the time from the network.</source>
         <translation>servidor NTP para obtener la hora de la Red.</translation>
-    </message>
-    <message>
-        <source>Advanced features</source>
-        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Wait for </source>

@@ -198,6 +198,10 @@
         <source>Use Beep</source>
         <translation>Timbre</translation>
     </message>
+    <message>
+        <source>Tabs on Top</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PlayListSelection</name>

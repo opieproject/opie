@@ -290,6 +290,13 @@ Trozdem beenden?</translation>
     </message>
 </context>
 <context>
+    <name>DateBookWeekLstHeader</name>
+    <message>
+        <source>W: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DateBookWeekLstHeaderBase</name>
     <message>
         <source>W: 00,00</source>
