@@ -1,7 +1,11 @@
+QMAKE_CFLAGS += $(if $(CONFIG_TARGET_X86),-DHAVE_MMX -DHAVE_CSS) \
+	$(if $(CONFIG_TARGET_IPAQ),-DUSE_FIXED_POINT) \
+	$(if $(CONFIG_TARGET_SHARP),-DUSE_FIXED_POINT)
+QMAKE_CC = $(CXX)
 TEMPLATE  =   lib
 CONFIG    +=  qt warn_on release
 HEADERS   =   libmpeg3plugin.h   libmpeg3pluginimpl.h
-SOURCES   =   libmpeg3plugin.cpp libmpeg3pluginimpl.cpp \
+SOURCES   =   $(if $(CONFIG_TARGET_X86),video/mmxidct.S video/reconmmx.s) libmpeg3plugin.cpp libmpeg3pluginimpl.cpp \
         bitstream.c \
         libmpeg3.c \
         mpeg3atrack.c \
@@ -35,7 +39,7 @@ SOURCES   =   libmpeg3plugin.cpp libmpeg3pluginimpl.cpp \
         video/slice.c \
         video/vlc.c
 TARGET    =   mpeg3plugin
-TMAKE_CC=g++
+TMAKE_CC=$(CXX)
 DESTDIR   =   $(OPIEDIR)/plugins/codecs
 INCLUDEPATH += $(OPIEDIR)/include ..
 DEPENDPATH      +=  ../$(OPIEDIR)/include ..
