@@ -248,7 +248,7 @@ private slots:
     void slotNoKey();
     void slotDefaultKey();
     void slotCustomKey();
-
+    void slotConfigure();
 
 private:
     void initUi();
@@ -259,6 +259,45 @@ private:
     QRadioButton *m_def, *m_cus, *m_none;
     QWidget* m_box;
     ChangeMode m_mode;
+    class Private;
+    Private *d;
+};
+
+
+/**
+ * This is a small dialog that allows you to
+ * capture a key sequence.
+ * If you want it to close after a key was captured you
+ * can use this code snippet.
+ *
+ * \code
+ *  OKeyChooserConfigDialog diag(0,0,true);
+ *  connect(&diag,SIGNAL(keyCaptured()),
+ *         this,SLOT(accept()));
+ *  if( QPEApplication::execDialog(&diag) == QDialog::Accept ){
+ *     take_the_key_and_do_something
+ *  }
+ *
+ * \endcode
+ *
+ */
+class OKeyChooserConfigDialog : public QDialog {
+    Q_OBJECT
+public:
+    OKeyChooserConfigDialog( QWidget* parent = 0, const char* name = 0, bool modal = false, WFlags fl = 0 );
+    ~OKeyChooserConfigDialog();
+
+    OKeyPair keyPair()const;
+
+protected:
+    void keyPressEvent( QKeyEvent* );
+    void keyReleaseEvent( QKeyEvent* );
+
+signals:
+    void keyCaptured();
+
+private:
+    OKeyPair m_keyPair;
     class Private;
     Private *d;
 };

@@ -361,6 +361,7 @@ bool OKeyConfigItem::isEmpty()const {
     if ( !m_def.isEmpty()  ) return false;
     if ( !m_key.isEmpty()  ) return false;
     if ( !m_text.isEmpty() ) return false;
+    if ( m_id != -1       ) return false;
 
     return true;
 }
@@ -369,14 +370,18 @@ bool OKeyConfigItem::isEmpty()const {
  * Check if the KeyPairs are the same
  */
 bool OKeyConfigItem::operator==( const OKeyConfigItem& conf ) {
-    if ( isEmpty() == conf.isEmpty() ) return true;
+/*    if ( isEmpty() == conf.isEmpty() ) return true;
     else if ( isEmpty() != conf.isEmpty() ) return false;
     else if ( !isEmpty()!= conf.isEmpty() ) return false;
+*/
 
     if ( m_id != conf.m_id )     return false;
+    if ( m_obj != conf.m_obj )   return false;
     if ( m_text != conf.m_text ) return false;
     if ( m_key != conf.m_key )   return false;
     if ( m_def != conf.m_def )   return false;
+
+
 
     return true;
 
@@ -505,10 +510,13 @@ void OKeyConfigManager::save() {
             continue;
         OKeyPair pair = (*it).keyPair();
         OKeyPair deft = (*it).defaultKeyPair();
-        /* don't write if it is the default setting */
+        /*
+         * don't write if it is the default setting
+         * FIXME allow to remove Keys
         if (  (pair.keycode() == deft.keycode()) &&
               (pair.modifier()== deft.modifier() ) )
             return;
+        */
 
         m_conf->writeEntry((*it).configKey()+"key", pair.keycode()  );
         m_conf->writeEntry((*it).configKey()+"mod", pair.modifier() );
@@ -547,9 +555,9 @@ OKeyConfigItem OKeyConfigManager::handleKeyEvent( QKeyEvent* e ) {
         if ( mod & 256 )
             new_mod |= Qt::ShiftButton;
         else if ( mod & 512 )
-            new_mod |= Qt::AltButton;
-        else if ( mod & 1024 )
             new_mod |= Qt::ControlButton;
+        else if ( mod & 1024 )
+            new_mod |= Qt::AltButton;
 
         mod = new_mod == 0? mod : new_mod;
     }
@@ -586,6 +594,7 @@ int OKeyConfigManager::handleKeyEventId( QKeyEvent* ev) {
  */
 void OKeyConfigManager::addKeyConfig( const OKeyConfigItem& item ) {
     m_keys.append( item );
+    qWarning( "m_keys count is now %d", m_keys.count() );
     delete m_map; m_map = 0;
 }
 
@@ -595,6 +604,7 @@ void OKeyConfigManager::addKeyConfig( const OKeyConfigItem& item ) {
  */
 void OKeyConfigManager::removeKeyConfig( const OKeyConfigItem& item ) {
     m_keys.remove( item );
+    qWarning( "m_keys count is now %d", m_keys.count() );
     delete m_map; m_map = 0;
 }
 
@@ -737,22 +747,29 @@ namespace Private {
         void setDefault();
 
         OKeyConfigItem& item();
+        OKeyConfigItem origItem()const;
         void setItem( const OKeyConfigItem& item );
+        void updateText();
 
         OKeyConfigManager *manager();
     private:
         OKeyConfigItem m_item;
+        OKeyConfigItem m_origItem;
         OKeyConfigManager* m_manager;
 
     };
 
     OKeyListViewItem::OKeyListViewItem( const OKeyConfigItem& item, OKeyConfigManager* man, OListViewItem* parent)
         : Opie::Ui::OListViewItem( parent ), m_manager( man )  {
+        m_origItem = item;
         setItem( item );
     }
     OKeyListViewItem::~OKeyListViewItem() {}
     OKeyConfigItem &OKeyListViewItem::item(){
         return m_item;
+    }
+    OKeyConfigItem  OKeyListViewItem::origItem() const{
+        return m_origItem;
     }
     OKeyConfigManager* OKeyListViewItem::manager() {
         return m_manager;
@@ -761,8 +778,15 @@ namespace Private {
         m_item = item;
         setPixmap( 0, m_item.pixmap() );
         setText  ( 1, m_item.text() );
-        setText  ( 2, keyToString( m_item.keyPair() ) );
-        setText  ( 3, keyToString( m_item.defaultKeyPair() ) );
+        m_item.keyPair().isEmpty() ? setText( 2, QObject::tr( "None" ) ) :
+                                     setText( 2, keyToString( m_item.keyPair() ) );
+
+        m_item.defaultKeyPair().isEmpty() ? setText( 3, QObject::tr( "None" ) ) :
+                                            setText  ( 3, keyToString( m_item.defaultKeyPair() ) );
+    }
+    void OKeyListViewItem::updateText() {
+        m_item.keyPair().isEmpty() ? setText( 2, QObject::tr( "None" ) ) :
+                                     setText( 2, keyToString( m_item.keyPair() ) );
     }
 
     QString keyToString( const OKeyPair& pair ) {
@@ -848,6 +872,7 @@ void OKeyConfigWidget::initUi() {
     m_view->addColumn( tr("Name","Name of the Action in the ListView Header" ) );
     m_view->addColumn( tr("Key" ) );
     m_view->addColumn( tr("Default Key" ) );
+    m_view->setRootIsDecorated( true );
     connect(m_view, SIGNAL(currentChanged(QListViewItem*)),
             this, SLOT(slotListViewItem(QListViewItem*)) );
 
@@ -897,8 +922,10 @@ void OKeyConfigWidget::initUi() {
     m_lbl= new QLabel( tr( "Default: " ), box );
     gridLay->addWidget( m_lbl, 2, 0 );
 
+    connect(m_btn, SIGNAL(clicked()),
+            this, SLOT(slotConfigure()));
 
-    m_box = gr;
+    m_box = box;
 }
 
 /**
@@ -949,6 +976,20 @@ void OKeyConfigWidget::load() {
  * If in Queue mode it'll just return
  */
 void OKeyConfigWidget::save() {
+    /*
+     * Iterate over all config items
+     */
+    QListViewItemIterator it( m_view );
+    while ( it.current() ) {
+        if (it.current()->parent() ) {
+            Opie::Ui::Private::OKeyListViewItem *item = static_cast<Opie::Ui::Private::OKeyListViewItem*>( it.current() );
+            OKeyConfigManager *man = item->manager();
+            man->removeKeyConfig( item->origItem() );
+            man->addKeyConfig( item->item() );
+        }
+        ++it;
+    }
+
 
 }
 
@@ -967,6 +1008,7 @@ void OKeyConfigWidget::slotListViewItem( QListViewItem* _item) {
         m_box->setEnabled( true );
         Opie::Ui::Private::OKeyListViewItem *item = static_cast<Opie::Ui::Private::OKeyListViewItem*>( _item );
         OKeyConfigItem keyItem= item->item();
+        m_lbl->setText(  tr("Default: " )+ item->text( 3 ) );
         if ( keyItem.keyPair().isEmpty() ) {
             m_none->setChecked( true );
             m_btn ->setEnabled( false );
@@ -988,7 +1030,7 @@ void OKeyConfigWidget::slotNoKey() {
     m_btn ->setEnabled( false );
     m_def ->setChecked( false );
 
-    if ( !m_view->currentItem() || m_view->currentItem()->parent() )
+    if ( !m_view->currentItem() || !m_view->currentItem()->parent() )
         return;
 
 
@@ -1000,6 +1042,7 @@ void OKeyConfigWidget::slotNoKey() {
     if ( m_mode == Imediate )
         item->manager()->removeKeyConfig( item->item() );
     item->item().setKeyPair( OKeyPair::emptyKey() );
+    item->updateText();
 
     if ( m_mode == Imediate )
         item->manager()->addKeyConfig( item->item() );
@@ -1007,13 +1050,12 @@ void OKeyConfigWidget::slotNoKey() {
 }
 
 void OKeyConfigWidget::slotDefaultKey() {
-    qWarning( "Slot Default Key" );
-    m_none->setChecked( true );
+    m_none->setChecked( false );
     m_cus ->setChecked( false );
     m_btn ->setEnabled( false );
-    m_def ->setChecked( false );
+    m_def ->setChecked( true );
 
-    if ( !m_view->currentItem() || m_view->currentItem()->parent() )
+    if ( !m_view->currentItem() || !m_view->currentItem()->parent() )
         return;
 
     Opie::Ui::Private::OKeyListViewItem *item =  static_cast<Opie::Ui::Private::OKeyListViewItem*>(m_view->currentItem());
@@ -1025,20 +1067,43 @@ void OKeyConfigWidget::slotDefaultKey() {
         item->manager()->removeKeyConfig( item->item() );
 
     item->item().setKeyPair( item->item().defaultKeyPair() );
+    item->updateText();
 
     if ( m_mode == Imediate )
         item->manager()->addKeyConfig( item->item() );
 }
 
 void OKeyConfigWidget::slotCustomKey() {
-    qWarning( "SlotCustom Key" );
     m_cus ->setChecked( true );
     m_btn ->setEnabled( true );
     m_def ->setChecked( false );
     m_none->setChecked( false );
 
-    if ( !m_view->currentItem() || m_view->currentItem()->parent() )
+    if ( !m_view->currentItem() || !m_view->currentItem()->parent() )
         return;
 
 }
 
+void OKeyConfigWidget::slotConfigure() {
+
+}
+
+
+OKeyChooserConfigDialog::OKeyChooserConfigDialog( QWidget* par, const char* nam,
+                                                  bool mod, WFlags fl )
+    : QDialog( par, nam, mod, fl ) {
+}
+
+OKeyChooserConfigDialog::~OKeyChooserConfigDialog() {
+}
+
+Opie::Ui::OKeyPair OKeyChooserConfigDialog::keyPair()const{
+}
+
+void OKeyChooserConfigDialog::keyPressEvent( QKeyEvent* ev ) {
+    ev->ignore();
+}
+
+void OKeyChooserConfigDialog::keyReleaseEvent( QKeyEvent* ev ) {
+    ev->ignore();
+}
