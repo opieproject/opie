@@ -1,0 +1,6 @@
+[Desktop Entry]
+Exec=gutenbrowser
+Icon=gutenbrowser/Gutenbrowser
+Type=Application
+Name=Gutenbrowser
+MimeType=text/*.gtn
