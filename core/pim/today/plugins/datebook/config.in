@@ -2,3 +2,7 @@
     boolean "datebook"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2UI && LIBOPIE2CORE
+
+    comment "opie-datebook-plugin requires libopie2ui and libopie2core"
+    depends !( LIBQPE || LIBQPE-X11 ) && LIBOPIE2UI && LIBOPIE2CORE
+
