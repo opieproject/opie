@@ -113,7 +113,7 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     hb3->setSpacing( 2 );
 
     QLabel *palmtopLogo3 = new QLabel( this );
-    QImage logo3 = Resource::loadImage( "SystemInfo" );
+    QImage logo3 = Resource::loadImage( "sysinfo/pda" );
     logo3 = logo3.smoothScale( 50, 55 );
     QPixmap logo3Pixmap;
     logo3Pixmap.convertFromImage( logo3 );
