@@ -226,7 +226,7 @@ the current page?</source>
     </message>
     <message>
         <source>Contents</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>White</source>
@@ -234,10 +234,22 @@ the current page?</source>
     </message>
     <message>
         <source>Foreground Color</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Background Color</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>Background</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pen Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Brush Color</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -37,6 +37,10 @@
         <source>Stop</source>
         <translation>Stop</translation>
     </message>
+    <message>
+        <source>PM</source>
+        <translation type="unfinished">PM</translation>
+    </message>
 </context>
 <context>
     <name>Set_Alarm</name>

@@ -74,6 +74,15 @@
         <source>Unable to delete current scheme.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Do you want to apply your changes?
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open File</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditScheme</name>
@@ -173,6 +182,36 @@
     </message>
     <message>
         <source>All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not rename</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want to delete
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> ?
+It must be empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

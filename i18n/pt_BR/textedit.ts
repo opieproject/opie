@@ -22,6 +22,10 @@
         <source>Font Style</source>
         <translation>Estilo da Fonte</translation>
     </message>
+    <message>
+        <source>FontDialog</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TextEdit</name>
@@ -117,6 +121,37 @@
         <source>Start with new file</source>
         <translation>Iniciar com novo arquivo</translation>
     </message>
+    <message>
+        <source>Font</source>
+        <translation type="unfinished">Fonte</translation>
+    </message>
+    <message>
+        <source>Save File As?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Permissions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FontDialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want
+to delete the current file
+from the disk?
+This is irreversable!!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>fileBrowser</name>
@@ -211,6 +246,30 @@
         <source>Set file permissions for:</source>
         <translation>Ajustar permissões de arquivo para:</translation>
     </message>
+    <message>
+        <source>filePermissions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error- no user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error- no  group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error setting ownership or group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error setting mode</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>fileSaver</name>
@@ -221,6 +280,18 @@
     <message>
         <source>Size</source>
         <translation>Tamanho</translation>
+    </message>
+    <message>
+        <source>fileSaver</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>set file permissions</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

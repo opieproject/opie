@@ -229,7 +229,7 @@ la page actuelle ?</translation>
     </message>
     <message>
         <source>Contents</source>
-        <translation>Contenu</translation>
+        <translation type="obsolete">Contenu</translation>
     </message>
     <message>
         <source>White</source>
@@ -237,11 +237,23 @@ la page actuelle ?</translation>
     </message>
     <message>
         <source>Foreground Color</source>
-        <translation>Couleur Avant Plan</translation>
+        <translation type="obsolete">Couleur Avant Plan</translation>
     </message>
     <message>
         <source>Background Color</source>
-        <translation>Couleur Arrière Plan</translation>
+        <translation type="obsolete">Couleur Arrière Plan</translation>
+    </message>
+    <message>
+        <source>Background</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pen Color</source>
+        <translation type="unfinished">Couleur Pinceau</translation>
+    </message>
+    <message>
+        <source>Brush Color</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

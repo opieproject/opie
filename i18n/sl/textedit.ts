@@ -21,6 +21,10 @@
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
         <translation>Hitra rjava lisica skače čez počasnega psa</translation>
     </message>
+    <message>
+        <source>FontDialog</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TextEdit</name>
@@ -111,6 +115,37 @@
     <message>
         <source>Unnamed</source>
         <translation>Neimenovano</translation>
+    </message>
+    <message>
+        <source>Font</source>
+        <translation type="unfinished">Pisava</translation>
+    </message>
+    <message>
+        <source>Save File As?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Permissions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FontDialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want
+to delete the current file
+from the disk?
+This is irreversable!!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -206,6 +241,30 @@
         <source>execute</source>
         <translation>izvrši</translation>
     </message>
+    <message>
+        <source>filePermissions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error- no user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error- no  group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error setting ownership or group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error setting mode</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>fileSaver</name>
@@ -216,6 +275,18 @@
     <message>
         <source>Size</source>
         <translation>Velikost</translation>
+    </message>
+    <message>
+        <source>fileSaver</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>set file permissions</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

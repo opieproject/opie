@@ -229,7 +229,7 @@ trenutno stran?</translation>
     </message>
     <message>
         <source>Contents</source>
-        <translation>Vsebina</translation>
+        <translation type="obsolete">Vsebina</translation>
     </message>
     <message>
         <source>White</source>
@@ -237,11 +237,23 @@ trenutno stran?</translation>
     </message>
     <message>
         <source>Foreground Color</source>
-        <translation>Prednja barva</translation>
+        <translation type="obsolete">Prednja barva</translation>
     </message>
     <message>
         <source>Background Color</source>
-        <translation>Barva ozadja</translation>
+        <translation type="obsolete">Barva ozadja</translation>
+    </message>
+    <message>
+        <source>Background</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pen Color</source>
+        <translation type="unfinished">Barva svinčnika</translation>
+    </message>
+    <message>
+        <source>Brush Color</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
