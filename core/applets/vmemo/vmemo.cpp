@@ -9,9 +9,8 @@
 ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 **
 ************************************************************************************/
-
 /*
- * $Id: vmemo.cpp,v 1.20 2002-04-24 23:47:05 llornkcor Exp $
+ * $Id: vmemo.cpp,v 1.21 2002-04-24 23:48:57 llornkcor Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 #include <sys/utsname.h>
