@@ -334,13 +334,18 @@ QString Interfaces::getInterfaceOption(const QString &option, bool &error){
 /**
  * Set a value for an option in the currently selected interface.  If option
  *  doesn't exist then it is added along with the value.
+ * If value isEmpty() then we will remove the option
+ *
  * @param option the options to set the value.
  * @param value the value that option should be set to.
  * @param error set to true if any error occurs, false otherwise.
  * @return QString the options value. QString::null if error == true
  */
 bool Interfaces::setInterfaceOption(const QString &option, const QString &value){
-    qDebug("iface >%s< option >%s< value >%s<", (*currentIface).latin1(), option.latin1(),value.latin1());
+    if( value.isEmpty() )
+	return removeInterfaceOption( option );
+	
+  qDebug("iface >%s< option >%s< value >%s<", (*currentIface).latin1(), option.latin1(),value.latin1());
   return setOption(currentIface, option, value);
 }
 
@@ -579,7 +584,8 @@ bool Interfaces::removeOption(const QStringList::Iterator &start, const QString 
       if(found)
         qDebug(QString("Interfaces: Set Options found more then one value for option: %1 in stanza: %1").arg(option).arg((*start)).latin1());
       found = true;
-      (*it) = "";
+      it = interfaces.remove( it ); // we really want to remove the line
+      --it; // we do ++it later in the head of the for loop
     }
   }
   return found;
