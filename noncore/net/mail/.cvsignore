@@ -18,3 +18,8 @@ selectmailtypeui.cpp
 selectmailtypeui.h
 smtpconfigui.cpp
 smtpconfigui.h
+settingsdialogui.cpp
+settingsdialogui.h
+statuswidgetui.cpp
+statuswidgetui.h
+
