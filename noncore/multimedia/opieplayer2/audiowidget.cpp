@@ -217,7 +217,7 @@ void AudioWidget::resizeEvent( QResizeEvent * ) {
     QPixmap pixUp = combineImageWithBackground( imgUp, pixBg, p );
     QPixmap pixDn = combineImageWithBackground( imgDn, pixBg, p );
 
-    for ( int i = 0; i < 10; i++ ) {
+    for ( uint i = 0; i < masks.size(); i++ ) {
         if ( !masks[i].isNull() ) {
             buttonPixUp[i] = maskPixToMask( pixUp, masks[i] );
             buttonPixDown[i] = maskPixToMask( pixDn, masks[i] );
