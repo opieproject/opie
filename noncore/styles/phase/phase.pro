@@ -9,7 +9,7 @@ HEADERS     =   bitmaps.h \
 LIBS        += -lqpe 
 INCLUDEPATH += $(OPIEDIR)/include
 DESTDIR      = $(OPIEDIR)/plugins/styles
-TARGET       = phase
+TARGET       = phasestyle
 VERSION      = 0.4.0
 
 include ( $(OPIEDIR)/include.pro )
