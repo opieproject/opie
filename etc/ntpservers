@@ -3,12 +3,12 @@ count = 6
 [0]
 name = time.fu-berlin.de
 [1]
-name = swisstime.ethz.ch
+name = time.ethz.ch
 [2]
 name = otc2.psu.edu
 [3]
 name = ice.mcc.ac.uk
 [4]
-name = bernina.ethz.ch
+name = ptbtime1.ptb.de
 [5]
-name = time.ethz.ch
+name = bernina.ethz.ch
