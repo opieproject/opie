@@ -154,7 +154,7 @@
     </message>
     <message>
         <source>Silicon</source>
-        <translation>Silikon</translation>
+        <translation>Silizium</translation>
     </message>
     <message>
         <source>Phosphorus</source>
