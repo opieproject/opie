@@ -32,12 +32,12 @@ SOURCES		= mainwin.cpp \
 		  server.cpp \
 		  helpwindow.cpp \
 		  letterpushbutton.cpp \
-		  inputdlg.cpp
+		  inputdlg.cpp \
+		  version.cpp
 INTERFACES	= settings.ui \
 		  install.ui \
 		  instoptions.ui
 TARGET		= aqpkg
-DESTDIR=$(OPIEDIR)/bin
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 LIBS        += -lqpe -lstdc++

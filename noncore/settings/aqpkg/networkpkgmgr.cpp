@@ -43,6 +43,8 @@ using namespace std;
 
 #include "global.h"
 
+extern int compareVersions( const char *v1, const char *v2 );
+
 NetworkPackageManager::NetworkPackageManager( DataManager *dataManager, QWidget *parent, const char *name)
   : QWidget(parent, name)
 {
@@ -232,7 +234,10 @@ void NetworkPackageManager :: serverSelected( int )
 
             // If a different version of package is available, postfix it with an *
             if ( it->getVersion() != it->getInstalledVersion() )
-            	text += "*";
+            {
+                if ( compareVersions( it->getInstalledVersion(), it->getVersion() ) == 1 )
+                    text += "*";
+            }
         }
 
         QCheckListItem *item = new QCheckListItem( packagesList, text, QCheckListItem::CheckBox );
@@ -533,37 +538,69 @@ InstallData NetworkPackageManager :: dealWithItem( QCheckListItem *item )
             item.destination = p->getLocalPackage()->getInstalledTo();
         }
 
-        // Sticky option not implemented yet, but will eventually allow
-        // the user to say something like 'remove all'
-        if ( stickyOption == "" )
+        // Now see if version is newer or not
+        int val = compareVersions( p->getInstalledVersion(), p->getVersion() );
+        if ( val == -2 )
         {
-            QString msgtext;
-            msgtext.sprintf( "Do you wish to remove or reinstall\n%s?", (const char *)name );
-            switch( QMessageBox::information( this, "Remove or ReInstall",
-                                msgtext, "Remove", "ReInstall" ) )
+            // Error - should handle
+        }
+        else if ( val == -1 )
+        {
+            // Version available is older - remove only
+            item.option = "R";
+        }
+        else
+        {
+            QString caption;
+            QString text;
+            QString secondButton;
+            QString secondOption;
+            if ( val == 0 )
             {
-                case 0: // Try again or Enter
-                    item.option = "D";
-                    break;
-                case 1: // Quit or Escape
-                    item.option = "U";
-                    break;
+                // Version available is the same - option to remove or reinstall
+                caption = "Do you wish to remove or reinstall\n%s?";
+                text = "Remove or ReInstall";
+                secondButton = "ReInstall";
+                secondOption = "R";
+            }
+            else if ( val == 1 )
+            {
+                // Version available is newer - option to remove or upgrade
+                caption = "Do you wish to remove or upgrade\n%s?";
+                text = "Remove or Upgrade";
+                secondButton = "Upgrade";
+                secondOption = "U";
+            }
+
+            // Sticky option not implemented yet, but will eventually allow
+            // the user to say something like 'remove all'
+            if ( stickyOption == "" )
+            {
+                QString msgtext;
+                msgtext.sprintf( caption, (const char *)name );
+                switch( QMessageBox::information( this, text,
+                                    msgtext, "Remove", secondButton ) )
+                {
+                    case 0: // Try again or Enter
+                        item.option = "D";
+                        break;
+                    case 1: // Quit or Escape
+                        item.option = secondOption;
+                        break;
+                }
+            }
+            else
+            {
+//                item.option = stickyOption;
             }
         }
-        else
-        {
-//            item.option = stickyOption;
-        }
+
         
         // Check if we are reinstalling the same version
-        if ( p->getVersion() != p->getInstalledVersion() )
+        if ( item.option != "R" )
            item.recreateLinks = true;
         else
-        {
-            if ( item.option == "U" )
-                item.option = "R";
            item.recreateLinks = false;
-        }
 
         // User hit cancel (on dlg - assume remove)
         return item;

@@ -92,7 +92,10 @@ InstallDlgImpl::InstallDlgImpl( vector<InstallData> &packageList, DataManager *d
 		else if ( item.option == "U" || item.option == "R" )
 		{
 			updateList.push_back( item );
-			upgrade += "   " + item.packageName + "\n";
+            QString type = " (Upgrade)";
+            if ( item.option == "R" )
+                type = " (ReInstall)";
+			upgrade += "   " + item.packageName + type + "\n";
 		}
 	}
 
