@@ -832,7 +832,7 @@ bool TextEdit::saveAs()
                 return false;
             }
 
-            if( useAdvancedFfeatures ) {
+            if( useAdvancedFeatures ) {
                 filePermissions *filePerm;
                 filePerm = new filePermissions(this, tr("Permissions"),true,0,(const QString &)fileNm);
                 filePerm->exec();
