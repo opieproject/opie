@@ -122,7 +122,7 @@ DateBookWeekLstDayHdr::DateBookWeekLstDayHdr(const QDate &d, bool /* onM */,
 
 	date=d;
 
-	static const QString wdays=tr("MTWTFSSM");
+	static const QString wdays=tr("MTWTFSSM",  "Week days");
 	char day=wdays[d.dayOfWeek()-1];
 
 	label->setText( QString(QObject::tr(QString(QChar(day)))) + " " +QString::number(d.day()) );
