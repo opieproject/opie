@@ -18,7 +18,7 @@
 */
 
 
-#include "xmltree.h"
+#include <opie/xmltree.h>
 
 #include <qxml.h>
 
