@@ -5,3 +5,17 @@
     comment "libopie2pim needs a libqpe and libopie2core and libopie2db"
     depends !(( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2DB)
 
+  config SQL_PIM_BACKEND
+    boolean "Enable SQL Backend for libopie2pim"
+    default n
+    help
+        This adds the SQL-Support, using SQLite. Which database is used
+        by the backends is defined by the file "pimaccess.conf" in the
+        directory "Settings".
+        There currently do exist to groups "[contact]" and "[todo]". You can
+        select the used backend by the variable "usebackend=<type>", where
+        <type> is "sql" or "xml". "xml" is the default !
+        Important: The SQLite-library "libsqlite.so" must be installed !
+    depends ( LIBOPIE2DB )
+    comment "SQL-Support needs libopie2db (and libsqlite)"
+    depends !( LIBOPIE2DB )
