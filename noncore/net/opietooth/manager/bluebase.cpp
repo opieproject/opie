@@ -48,15 +48,17 @@ namespace OpieTooth {
     BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
         : BluetoothBase( parent, name, fl ) {
 
+        localDevice = new Manager( "hci0" );
 
-        QObject::connect( (QObject*)PushButton2,  SIGNAL( clicked() ), this, SLOT(startScan() ) );
-        QObject::connect( (QObject*)configApplyButton, SIGNAL(clicked() ), this, SLOT(applyConfigChanges() ) );
-        QObject::connect( (QObject*)ListView2, SIGNAL(  expanded( QListViewItem * item ) ),
+        QObject::connect( PushButton2,  SIGNAL( clicked() ), this, SLOT(startScan() ) );
+        QObject::connect( configApplyButton, SIGNAL(clicked() ), this, SLOT(applyConfigChanges() ) );
+        QObject::connect( ListView2, SIGNAL(  expanded( QListViewItem * item ) ),
                           this, SLOT( addServicesToDevice( QListViewItem * item ) ) );
-        QObject::connect( (QObject*)ListView2, SIGNAL( clicked( QListViewItem * )),
+        QObject::connect( ListView2, SIGNAL( clicked( QListViewItem * )),
                           this, SLOT( startServiceActionClicked( QListViewItem * item ) ) );
+       connect( localDevice,  SIGNAL( foundServices( const QString& device, Services::ValueList ) ),
+                this, SLOT( addServicesToDevice( const QString& device, Services::ValueList ) ) );
 
-        //
         //      QObject::connect( (QObject*) Manager, SIGNAL (foundServices( const QString& device, Services::ValueList ), this () ) );
 
         //Load all icons needed
@@ -84,12 +86,12 @@ namespace OpieTooth {
         ListView2->setRootIsDecorated(true);
 
         QListViewItem *topLV = new QListViewItem( ListView2, "Harlekins Dongle" , "yes");
-        topLV->setPixmap(0, offPix);
+        topLV->setPixmap( 0, offPix );
         (void) new QListViewItem( topLV, "on" );
         (void) new QListViewItem( topLV, "off"  );
 
         QListViewItem *topLV2 = new QListViewItem( ListView2, "Siemens S45" , "no" );
-        topLV2->setPixmap(0, onPix);
+        topLV2->setPixmap( 0, onPix );
         (void) new QListViewItem( topLV2, "on"  );
         (void) new QListViewItem( topLV2, "off" );
 
@@ -101,16 +103,16 @@ namespace OpieTooth {
      */
     void BlueBase::readConfig() {
 
-        Config cfg("bluetoothmanager");
-        cfg.setGroup("bluezsettings");
+        Config cfg( "bluetoothmanager" );
+        cfg.setGroup( "bluezsettings" );
 
 
-        deviceName = cfg.readEntry("name", "No name"); // name the device should identify with
-        defaultPasskey = cfg.readEntryCrypt("passkey", ""); // <- hmm, look up how good the trolls did that, maybe too weak
-        useEncryption = cfg.readNumEntry("useEncryption", 1);
-        enableAuthentification = cfg.readNumEntry("enableAuthentification", 1);
-        enablePagescan = cfg.readNumEntry("enablePagescan",1);
-        enableInquiryscan = cfg.readNumEntry("enableInquiryscan", 1);
+        deviceName = cfg.readEntry( "name" , "No name" ); // name the device should identify with
+        defaultPasskey = cfg.readEntryCrypt( "passkey" , "" ); // <- hmm, look up how good the trolls did that, maybe too weak
+        useEncryption = cfg.readNumEntry( "useEncryption" , 1 );
+        enableAuthentification = cfg.readNumEntry( "enableAuthentification" , 1 );
+        enablePagescan = cfg.readNumEntry( "enablePagescan" , 1 );
+        enableInquiryscan = cfg.readNumEntry( "enableInquiryscan" , 1 );
 
     }
 
@@ -120,15 +122,15 @@ namespace OpieTooth {
     void BlueBase::writeConfig() {
 
 
-        Config cfg("bluetoothmanager");
-        cfg.setGroup("bluezsettings");
+        Config cfg( "bluetoothmanager" );
+        cfg.setGroup( "bluezsettings" );
 
-        cfg.writeEntry("name", deviceName);
-        cfg.writeEntryCrypt("passkey", defaultPasskey);
-        cfg.writeEntry("useEncryption", useEncryption);
-        cfg.writeEntry("enableAuthentification", enableAuthentification);
-        cfg.writeEntry("enablePagescan",enablePagescan);
-        cfg.writeEntry("enableInquiryscan", enableInquiryscan);
+        cfg.writeEntry( "name" , deviceName );
+        cfg.writeEntryCrypt( "passkey" , defaultPasskey );
+        cfg.writeEntry( "useEncryption" , useEncryption );
+        cfg.writeEntry( "enableAuthentification" , enableAuthentification );
+        cfg.writeEntry( "enablePagescan" , enablePagescan );
+        cfg.writeEntry( "enableInquiryscan" , enableInquiryscan );
 }
 
 
@@ -140,7 +142,7 @@ namespace OpieTooth {
 
         QList<RemoteDevice> *loadedDevices = new QList<RemoteDevice>;
 
-        Config deviceList( QDir::homeDirPath() + "/Settings/bluetooth/devicelist.conf", Config::File );
+        Config deviceListSave( QDir::homeDirPath() + "/Settings/bluetooth/devicelist.conf", Config::File );
 
 
         //   RemoteDevice *currentDevice = RemoteDevice( ,  );
@@ -157,20 +159,13 @@ namespace OpieTooth {
 
         QListViewItemIterator it( ListView2 );
 
-        // one top conf file with all decices (by mac adress)
-        Config deviceList( QDir::homeDirPath() + "/Settings/bluetooth/devicelist.conf", Config::File );
-
         for ( ; it.current(); ++it ) {
-
-            // MAC adress as group
-            deviceList.setGroup( it.current()->text(1) );
-            deviceList.writeEntry("inList",  1);
 
             // seperate config file for each device, to store more information in future.
 
-            Config conf( QDir::homeDirPath() + "/Settings/bluetooth/" + (it.current()->text(1)) + ".conf", Config::File );
-            conf.setGroup("Info");
-            conf.writeEntry("name", it.current()->text(0) );
+            Config conf( QDir::homeDirPath() + "/Settings/bluetooth/" + (it.current()->text(3)) + ".conf", Config::File );
+            conf.setGroup( "Info" );
+            conf.writeEntry( "name", it.current()->text(0) );
         }
     }
 
@@ -222,8 +217,8 @@ namespace OpieTooth {
 
         writeConfig();
 
-        QMessageBox*  box = new QMessageBox(this, "Test");
-        box->setText(tr("Changes applied"));
+        QMessageBox*  box = new QMessageBox( this, "Test" );
+        box->setText( tr( "Changes applied" ) );
         box->show();
 
   // falls nötig hcid killhupen - die funktionalität adden
@@ -238,21 +233,21 @@ namespace OpieTooth {
 
         QListViewItem * deviceItem;
 
-        QListIterator<RemoteDevice> it(newDevices);
+        QListIterator<RemoteDevice> it( newDevices );
 
-        for( ; it.current(); ++it ) {
+        for( ; it.current() ; ++it ) {
 
 
             RemoteDevice *dev = it.current();
             deviceItem = new QListViewItem( ListView2, dev->name() );
 
-            if (deviceActive( dev ) ) {
-                deviceItem->setPixmap(0, onPix);
+            if ( deviceActive( dev ) ) {
+                deviceItem->setPixmap( 1 , onPix );
             } else {
-                deviceItem->setPixmap(0, offPix);
+                deviceItem->setPixmap( 1, offPix );
             }
 
-            deviceItem->setText(1, dev->mac() );
+            deviceItem->setText( 3, dev->mac() );
         }
     }
 
@@ -268,7 +263,7 @@ namespace OpieTooth {
     /*
      * Action that are toggled on hold (mostly QPopups i guess)
      */
-    void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & point, int column) {
+    void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & point, int column ) {
 
 
     }
@@ -278,21 +273,60 @@ namespace OpieTooth {
      *
      */
     void BlueBase::addServicesToDevice( QListViewItem * item ) {
+
         // row of mac adress
-        RemoteDevice *device = new RemoteDevice(item->text(1),  item->text(0));
-        //dann nen manager und darauf dann searchServises, das liefert nen signal, das wieder connected
-        // werden  muss.
+        RemoteDevice *device = new RemoteDevice(item->text(3),  item->text(0));
+
+        deviceList.insert( item->text(3) ,  item );
+
+// and some time later I get a signal foundServices( const QString& device, Services::ValueList ); back
+        localDevice->searchServices( *device );
 
         // delete
     }
+
+
+    /**
+     * Overloaded. This one it the one that is connected to the foundServices signal
+     * @param device the mac address of the remote device
+     * @param servicesList the list with the service the device has.
+     */
+    void BlueBase::addServicesToDevice( const QString& device, Services::ValueList servicesList ) {
+
+        qDebug("fill services list");
+
+
+        QMap<QString,QListViewItem*>::Iterator it;
+
+        QListViewItem* deviceItem;
+
+        for( it = deviceList.begin(); it != deviceList.end(); ++it ) {
+            if (it.key() == device ) {
+                deviceItem = it.data();
+            }
+        }
+
+        QValueList<OpieTooth::Services>::Iterator it2;
+
+
+
+        QListViewItem * serviceItem;
+
+        for( it2 = servicesList.begin(); it2 != servicesList.end(); ++it2 ) {
+ it2.serviceName()
+            serviceItem = new QListViewItem( deviceItem  ,    it2.serviceName()       );
+        }
+
+    }
+
 
     /*
      * Find out if a device can  currently be reached
      */
     bool BlueBase::deviceActive( RemoteDevice *device ) {
-
         return true;
     }
+
 
     /**
      * Open the "scan for devices"  dialog
@@ -308,13 +342,13 @@ namespace OpieTooth {
 
 
     void BlueBase::setInfo() {
-        StatusLabel->setText(getStatus());
+        StatusLabel->setText( getStatus() );
     }
 
     /**
      * Decontructor
      */
-    BlueBase::~BlueBase(){
+    BlueBase::~BlueBase() {
         writeSavedDevices();
     }
 
