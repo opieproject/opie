@@ -172,9 +172,15 @@ bool SyncAuthentication::checkPassword( const QString& password )
     }
 
     // Second, check sync password...
-    if ( password.left(6) == "rootme" ) {
-          // fuckin TT gave us the wrong sync password.
-          // what a dumbassed password is rootme anyway.
+    QString pass = password.left(6);
+    /* old QtopiaDesktops are sending 
+     * rootme newer versions got a Qtopia
+     * prefixed. Qtopia prefix will suceed
+     * until the sync software syncs up
+     * FIXME
+     */
+    if ( pass == "rootme" || pass == "Qtopia") {
+          
   QString cpassword = QString::fromLocal8Bit( crypt( password.mid(8).local8Bit(), "qp" ) );
   Config cfg("Security");
   cfg.setGroup("Sync");
