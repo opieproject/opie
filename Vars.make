@@ -119,3 +119,7 @@ ifeq ($(STRIP),)
         STRIP=arm-linux-strip
     endif
 endif
+
+export CCACHE=$(shell which ccache 2>/dev/null)
+export DISTCC=$(shell which distcc 2>/dev/null)
+
