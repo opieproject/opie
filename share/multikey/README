@@ -35,6 +35,22 @@ just draw the xpm image in gimp or something, save it, open it in your text
 editor, cut off all the surrounding stuff and leave only the stuff between the
 " chars. place that after your key definition. not too hard, right?
 
+about shift and meta characters. to place chars in the shift map, the line
+should consist of two columns. the non-shifted char and the shifted char. for
+example. 
+
+0x36   0x46
+
+so, 0x36 shifted is 0x46. and for meta chars. the reason why you have this 
+feature is because of languages like german, where you can hold down the 
+meta-alt key and enter in other special characters. it's like having
+a second shift. to add chars to this map, you do the following.
+
+m 0x36  0x84
+
+and here, if you hold down the meta-alt and hit the 0x36 key, 0x84 would be
+input. get it?
+
 if you have problems, suggestions, or just want to tell me something, you can
 contact me at jake at asdfnews.org
 
