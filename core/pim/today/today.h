@@ -39,6 +39,7 @@ class Today : public TodayBase {
   public:
     Today( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     ~Today();
+    static QString appName() { return QString::fromLatin1("today"); }
 
 private slots:
     void startConfig();

@@ -1,7 +1,4 @@
-TEMPLATE = app
-#CONFIG		= qt warn_on 
-CONFIG -= moc
-CONFIG		+= qt release
+CONFIG		+= qt warn on release quick-app
 
 HEADERS		= today.h todaybase.h todayconfig.h
 SOURCES		= today.cpp todaybase.cpp todayconfig.cpp
