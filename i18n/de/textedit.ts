@@ -60,7 +60,7 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
     </message>
     <message>
         <source>Open</source>
-        <translation>Öffne</translation>
+        <translation>Öffnen</translation>
     </message>
     <message>
         <source>Save</source>
@@ -84,7 +84,7 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
     </message>
     <message>
         <source>Find...</source>
-        <translation>Finden...</translation>
+        <translation>Suchen...</translation>
     </message>
     <message>
         <source>Zoom in</source>
@@ -116,11 +116,11 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
     </message>
     <message>
         <source>Find Next</source>
-        <translation>Nächten finden</translation>
+        <translation>Nächsten suchen</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation>&quot;Finden&quot; schließen</translation>
+        <translation>&quot;Suchen&quot; schließen</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -168,7 +168,7 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
     </message>
     <message>
         <source>Always open linked file</source>
-        <translation>Immer das verlinkte File öffnen</translation>
+        <translation>Immer die verknüpfte Datei öffnen</translation>
     </message>
     <message>
         <source>File Permissions</source>
