@@ -32,7 +32,7 @@
 #include <opie/todovcalresource.h>
 
 #include "../library/backend/vobject_p.h"
-#include "../library/backend/timeconversion.h"
+#include "../library/timeconversion.h"
 #include "../library/backend/qfiledirect_p.h"
 
 static VObject *vobjByEvent( const ToDoEvent &event )
