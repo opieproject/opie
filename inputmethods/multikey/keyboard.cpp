@@ -33,6 +33,7 @@
 #include <ctype.h>
 #include <qfile.h>
 #include <qtextstream.h>
+#include <iostream.h>
 
 #include <sys/utsname.h>
 
@@ -43,18 +44,20 @@
 Keyboard::Keyboard(QWidget* parent, const char* _name, WFlags f) :
     QFrame(parent, _name, f),  shift(0), lock(0), ctrl(0),
     alt(0), useLargeKeys(TRUE), usePicks(0), pressedKeyRow(-1), pressedKeyCol(-1),
-    unicode(-1), qkeycode(0), modifiers(0), LANG("ko"), schar(0), mchar(0), echar(0),
+    unicode(-1), qkeycode(0), modifiers(0), schar(0), mchar(0), echar(0),
     configdlg(0)
 
 {
     // get the default font
-    Config qpeConfig( "qpe" );
-    qpeConfig.setGroup( "Appearance" );
-    QString familyStr = qpeConfig.readEntry( "FontFamily", "fixed" );
+    Config *config = new Config( "qpe" );
+    config->setGroup( "Appearance" );
+    QString familyStr = config->readEntry( "FontFamily", "fixed" );
+    delete config;
 
-    Config multiConfig ("multikey");
-    multiConfig.setGroup ("pickboard");
-    usePicks = multiConfig.readBoolEntry ("open", "0"); // default closed
+    config = new Config("multikey");
+    config->setGroup ("pickboard");
+    usePicks = config->readBoolEntry ("open", "0"); // default closed
+    delete config;
 
     setFont( QFont( familyStr, 8 ) );
 
@@ -68,9 +71,7 @@ Keyboard::Keyboard(QWidget* parent, const char* _name, WFlags f) :
 
     } else picks->hide();
 
-    Config config("locale");
-    config.setGroup( "Language" );
-    LANG = config.readEntry( "Language", "en" );
+    keys = new Keys();
 
     repeatTimer = new QTimer( this );
     connect( repeatTimer, SIGNAL(timeout()), this, SLOT(repeat()) );
@@ -158,25 +159,25 @@ void Keyboard::drawKeyboard(QPainter &p, int row, int col)
         int x = 0;
         for (int i = 0; i < col; i++) {
 
-            x += keys.width(row, i) * defaultKeyWidth;
+            x += keys->width(row, i) * defaultKeyWidth;
         }
         int y = (row - 1) * keyHeight + (usePicks ? picks->height() : 0);
 
-        int keyWidth = keys.width(row, col);
+        int keyWidth = keys->width(row, col);
 
         p.fillRect(x + 1, y + 1, 
                    keyWidth * defaultKeyWidth - 1, keyHeight - 1, 
-                   pressed || keys.pressed(row, col) ? keycolor_pressed : keycolor);
+                   pressed || keys->pressed(row, col) ? keycolor_pressed : keycolor);
 
-        QPixmap *pix = keys.pix(row,col);
+        QPixmap *pix = keys->pix(row,col);
 
-        ushort c = keys.uni(row, col);
+        ushort c = keys->uni(row, col);
 
         if (!pix) {
             p.setPen(textcolor);
             p.drawText(x, y, 
                defaultKeyWidth * keyWidth, keyHeight,
-               AlignCenter, ((shift || lock) && keys.shift(c)) ? (QChar)keys.shift(c) : (QChar)c);
+               AlignCenter, ((shift || lock) && keys->shift(c)) ? (QChar)keys->shift(c) : (QChar)c);
         }
         else
             // center the image in the middle of the key
@@ -202,25 +203,25 @@ void Keyboard::drawKeyboard(QPainter &p, int row, int col)
         p.setPen(keycolor_lines);
         p.drawLine(x, y, x + width(), y);
 
-        for (int col = 0; col < keys.numKeys(row); col++) {
+        for (int col = 0; col < keys->numKeys(row); col++) {
 
-            QPixmap *pix = keys.pix(row, col);
-            int keyWidth = keys.width(row, col);
+            QPixmap *pix = keys->pix(row, col);
+            int keyWidth = keys->width(row, col);
 
 
             int keyWidthPix = defaultKeyWidth * keyWidth;
 
-            if (keys.pressed(row, col)) 
+            if (keys->pressed(row, col)) 
                 p.fillRect(x+1, y+1, keyWidthPix - 1, 
                            keyHeight - 1, keycolor_pressed);
 
-            ushort c = keys.uni(row, col);
+            ushort c = keys->uni(row, col);
 
             if (!pix) {
                 p.setPen(textcolor);
                 p.drawText(x, y, 
                    keyWidthPix, keyHeight,
-                   AlignCenter, ((shift || lock) && keys.shift(c)) ? (QChar)keys.shift(c) : (QChar)c);
+                   AlignCenter, ((shift || lock) && keys->shift(c)) ? (QChar)keys->shift(c) : (QChar)c);
             }
             else {
                 // center the image in the middle of the key
@@ -253,14 +254,14 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
     // figure out the column
     int col = 0; 
     for (int w = 0; e->x() >= w; col++)
-        if (col < keys.numKeys(row)) // it segfaults if it trys to read past numKeys
-            w += keys.width(row,col) * defaultKeyWidth;
+        if (col < keys->numKeys(row)) // it segfaults if it trys to read past numKeys
+            w += keys->width(row,col) * defaultKeyWidth;
         else break;
 
     col --; // rewind one...
 
-    qkeycode = keys.qcode(row, col);
-    unicode = keys.uni(row, col);
+    qkeycode = keys->qcode(row, col);
+    unicode = keys->uni(row, col);
 
     // might need to repaint if two or more of the same keys.
     // should be faster if just paint one key even though multiple keys exist.
@@ -278,20 +279,24 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
                configdlg = new ConfigDlg ();
                connect(configdlg, SIGNAL(pickboardToggled(bool)), 
                        this, SLOT(togglePickboard(bool)));
+               connect(configdlg, SIGNAL(setMapToDefault()), 
+                       this, SLOT(setMapToDefault()));
+               connect(configdlg, SIGNAL(setMapToFile(QString)), 
+                       this, SLOT(setMapToFile(QString)));
                configdlg->showMaximized();
                configdlg->show();
                configdlg->raise();
             }
 
         } else if (qkeycode == Qt::Key_Control) {
-            ctrl = keys.pressedPtr(row, col);
+            ctrl = keys->pressedPtr(row, col);
             need_repaint = TRUE;
-            *ctrl = !keys.pressed(row, col);
+            *ctrl = !keys->pressed(row, col);
 
         } else if (qkeycode == Qt::Key_Alt) {
-            alt = keys.pressedPtr(row, col);
+            alt = keys->pressedPtr(row, col);
             need_repaint = TRUE;
-            *alt = !keys.pressed(row, col);
+            *alt = !keys->pressed(row, col);
 
         } else if (qkeycode == Qt::Key_Shift) {
             need_repaint = TRUE;
@@ -301,7 +306,7 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
                 shift = 0;
             }
             else {
-                shift = keys.pressedPtr(row, col);
+                shift = keys->pressedPtr(row, col);
                 *shift = 1;
                 if (lock) {
                     *lock = 0;
@@ -317,7 +322,7 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
                 lock = 0;
             }
             else {
-                lock = keys.pressedPtr(row, col);;
+                lock = keys->pressedPtr(row, col);;
                 *lock = 1;
                 if (shift) {
                     *shift = 0;
@@ -329,13 +334,13 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
 
     }
     else { // normal char
-        if ((shift || lock) && keys.shift(unicode)) {
-            unicode = keys.shift(unicode);
+        if ((shift || lock) && keys->shift(unicode)) {
+            unicode = keys->shift(unicode);
         }
     }
 
     // korean parsing
-    if (LANG == "ko") {
+    if (keys->lang == "ko") {
 
         unicode = parseKoreanInput(unicode);
     }
@@ -487,6 +492,46 @@ void Keyboard::togglePickboard(bool on_off)
      */
     QCopChannel::send ("QPE/TaskBar", "hideInputMethod()");
     QCopChannel::send ("QPE/TaskBar", "showInputMethod()");
+}
+
+/* Keyboard::setMapTo ... {{{1 */
+void Keyboard::setMapToDefault() {
+
+
+    /* load current locale language map */
+    Config *config = new Config("locale");
+    config->setGroup( "Language" );
+    QString l = config->readEntry( "Language" , "en" );
+    delete config;
+
+    QString key_map = QPEApplication::qpeDir() + "/share/multikey/" 
+            + l + ".keymap";
+
+    /* save change to multikey config file */
+    config = new Config("multikey");
+    config->setGroup ("keymaps");
+    config->writeEntry ("current", key_map); // default closed
+    delete config;
+
+    delete keys;
+    keys = new Keys(key_map);
+
+    // have to repaint the keyboard
+    repaint(FALSE);
+}
+
+void Keyboard::setMapToFile(QString file) {
+
+    /* save change to multikey config file */
+    Config *config = new Config("multikey");
+    config->setGroup ("keymaps");
+    config->writeEntry ("current", file); // default closed
+    delete config;
+
+    delete keys;
+    keys = new Keys(file);
+    repaint(FALSE);
+
 }
 
 /* korean input functions {{{1 
@@ -795,12 +840,23 @@ ushort Keyboard::constoe(const ushort c) {
 
 Keys::Keys() {
 
-    Config config("locale");
-    config.setGroup( "Language" );
-    QString l = config.readEntry( "Language" , "en" );
+    Config *config = new Config ("multikey");
+    config->setGroup( "keymaps" );
+    QString key_map = config->readEntry( "current" );
+    delete config;
 
-    QString key_map = QPEApplication::qpeDir() + "/share/multikey/" 
-            + l + ".keymap";
+    if (key_map.isNull()) {
+
+        Config *config = new Config("locale");
+        config->setGroup( "Language" );
+        QString l = config->readEntry( "Language" , "en" );
+        delete config;
+    
+        key_map = QPEApplication::qpeDir() + "/share/multikey/" 
+                + l + ".keymap";
+
+    }
+
 
     setKeysFromFile(key_map);
 }
@@ -830,6 +886,7 @@ void Keys::setKeysFromFile(const char * filename) {
         buf = t.readLine();
         while (buf) {
 
+            // key definition
             if (buf.contains(QRegExp("^\\d+\\s+[0-1a-fx]+", FALSE, FALSE))) { 
             // no $1 type referencing!!! this implementation of regexp sucks
 
@@ -875,6 +932,8 @@ void Keys::setKeysFromFile(const char * filename) {
                 }
                 setKey(row, qcode, unicode, width, xpm2pix);
             }
+
+            // shift map
             else if (buf.contains(QRegExp("^[0-9a-fx]+\\s+[0-9a-fx]+\\s*$", FALSE, FALSE))) {
 
                 QTextStream tmp (buf, IO_ReadOnly);
@@ -885,6 +944,25 @@ void Keys::setKeysFromFile(const char * filename) {
 
                 buf = t.readLine();
             }
+
+            // other variables like lang & title
+            else if (buf.contains(QRegExp("^\\s*[a-zA-Z]+\\s*=\\s*[a-zA-Z0-9/]+\\s*$", FALSE, FALSE))) {
+
+                QTextStream tmp (buf, IO_ReadOnly);
+                QString name, equals, value;
+
+                tmp >> name >> equals >> value;
+
+                if (name == "lang") {
+
+                    lang = value;
+
+                } 
+
+                cout << name << " = " << value << "\n";
+                buf = t.readLine();
+            }
+            // comments
             else if (buf.contains(QRegExp("^\\s*#"))) {
 
                 buf = t.readLine();

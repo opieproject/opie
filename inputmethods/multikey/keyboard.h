@@ -67,6 +67,8 @@ public:
     void    setKey(const int row, const int qcode, const ushort unicode, 
                     const int width, QPixmap *pix);
     void    setPressed(const int row, const int col, const bool pressed);
+    QString lang;
+    QString title;
 
 private:
 
@@ -108,6 +110,8 @@ signals:
 private slots:
     void repeat();
     void togglePickboard(bool on_off);
+    void setMapToDefault();
+    void setMapToFile(QString file);
     
 private:
     int getKey( int &w, int j = -1 );
@@ -136,8 +140,8 @@ private:
     int pressTid;
     bool pressed;
 
-    Keys keys;
-    QString LANG;
+    Keys *keys;
+
     /* for korean input */
     ushort schar, mchar, echar;
     ushort parseKoreanInput(ushort c);

@@ -40,10 +40,18 @@ ConfigDlg::ConfigDlg () : QTabWidget ()
 
     QGroupBox *map_group = new QGroupBox (2, Qt::Horizontal, tr("Keymap File"), gen_box);
 
-    QComboBox *combo = new QComboBox ((bool)0, map_group);
+    map_combo = new QComboBox ((bool)0, map_group);
+    map_combo->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed));
+
     QString cur(tr("Current Language"));
-    combo->insertItem(cur);
-    combo->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed));
+    map_combo->insertItem(cur);
+    connect(map_combo, SIGNAL(activated(int)), SLOT(setMap(int)));
+
+    QString ko(tr("/opt/opie/share/multikey/ko.keymap"));
+    map_combo->insertItem(ko);
+
+    QString en(tr("/opt/opie/share/multikey/en.keymap"));
+    map_combo->insertItem(en);
 
     QPushButton *button = new QPushButton(tr("Browse..."), map_group);
     button->setFlat((bool)1);
@@ -97,4 +105,16 @@ void ConfigDlg::pickTog() {
     config.writeEntry ("open", pick_button->isChecked()); // default closed
 
     emit pickboardToggled(pick_button->isChecked());
+}
+
+void ConfigDlg::setMap(int index) {
+
+    if (index == 0) {
+
+        emit setMapToDefault();
+    }
+    else {
+
+        emit setMapToFile(map_combo->text(index));
+    }
 }
