@@ -69,6 +69,7 @@ protected:
 /*     void contentsMousePressEvent( QMouseEvent * e ); */
 /*     void contentsMouseReleaseEvent( QMouseEvent * e ); */
 void keyReleaseEvent( QKeyEvent *e);
+void keyPressEvent( QKeyEvent *e);
 private:
     void doBlank();
     void doUnblank();
