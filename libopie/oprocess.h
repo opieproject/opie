@@ -187,7 +187,9 @@ public:
   /**
    * Constructor
    */
-  OProcess();
+  OProcess(QObject *parent = 0, const char *name = 0);
+  OProcess(const QString &arg0, QObject *parent = 0, const char *name = 0);
+  OProcess(const QStringList &args, QObject *parent = 0, const char *name = 0);
 
   /**
    *Destructor:
@@ -359,6 +361,8 @@ public:
    * the child process is no longer alive...
    **/
   bool writeStdin(const char *buffer, int buflen);
+
+  void flushStdin();
 
   /**
    * This causes the stdin file descriptor of the child process to be
@@ -731,72 +735,10 @@ private:
   OProcess( const OProcess& );
   OProcess& operator= ( const OProcess& );
 
-protected:
-  virtual void virtual_hook( int id, void* data );
 private:
+  void init ( );
+
   OProcessPrivate *d;
-};
-
-class KShellProcessPrivate;
-
-/**
-* @obsolete
-*
-* This class is obsolete. Use OProcess and OProcess::setUseShell(true)
-* instead.
-*
-*   @short A class derived from @ref OProcess to start child
-*   	processes through a shell.
-*   @author Christian Czezakte <e9025461@student.tuwien.ac.at>
-*   @version $Id: oprocess.h,v 1.2 2002-06-16 16:34:10 zecke Exp $
-*/
-class KShellProcess: public OProcess
-{
-  Q_OBJECT
-
-public:
-
-  /**
-   * Constructor
-   *
-   * By specifying the name of a shell (like "/bin/bash") you can override
-   * the mechanism for finding a valid shell as described in OProcess::searchShell()
-   */
-  KShellProcess(const char *shellname=0);
-
-  /**
-   * Destructor.
-   */
-  ~KShellProcess();
-
-  /**
-   * Starts up the process. -- For a detailed description
-   * have a look at the "start" member function and the detailed
-   * description of @ref OProcess .
-   */
-  virtual bool start(RunMode  runmode = NotifyOnExit,
-		  Communication comm = NoCommunication);
-
-  /**
-   * This function can be used to quote an argument string such that
-   * the shell processes it properly. This is e. g. necessary for
-   * user-provided file names which may contain spaces or quotes.
-   * It also prevents expansion of wild cards and environment variables.
-   */
-  static QString quote(const QString &arg);
-
-private:
-
-  QCString shell;
-
-  // Disallow assignment and copy-construction
-  KShellProcess( const KShellProcess& );
-  KShellProcess& operator= ( const KShellProcess& );
-
-protected:
-  virtual void virtual_hook( int id, void* data );
-private:
-  KShellProcessPrivate *d;
 };
 
 

@@ -1,6 +1,6 @@
 /*
 
-   $Id: oprocess.cpp,v 1.1 2002-06-11 08:34:39 tille Exp $
+   $Id: oprocess.cpp,v 1.2 2002-12-17 19:12:05 sandman Exp $
 
    This file is part of the KDE libraries
    Copyright (C) 1997 Christian Czezatke (e9025461@student.tuwien.ac.at)
@@ -94,22 +94,42 @@ public:
 };
 
 
-OProcess::OProcess()
-  : QObject(),
-    run_mode(NotifyOnExit),
-    runs(false),
-    pid_(0),
-    status(0),
-    keepPrivs(false),
-    innot(0),
-    outnot(0),
-    errnot(0),
-    communication(NoCommunication),
-    input_data(0),
-    input_sent(0),
-    input_total(0),
-    d(0)
+OProcess::OProcess(QObject *parent, const char *name)
+  : QObject(parent, name)
 {
+  init ( );
+}
+
+OProcess::OProcess(const QString &arg0, QObject *parent, const char *name)
+  : QObject(parent, name)
+{
+  init ( );
+  *this << arg0;
+}
+
+OProcess::OProcess(const QStringList &args, QObject *parent, const char *name)
+  : QObject(parent, name)
+{
+  init ( );
+  *this << args;
+}
+
+void OProcess::init ( )
+{
+  run_mode = NotifyOnExit;
+  runs = false;
+  pid_ = 0;
+  status = 0;
+  keepPrivs = false;
+  innot = 0;
+  outnot = 0;
+  errnot = 0;
+  communication = NoCommunication;
+  input_data = 0;
+  input_sent = 0;
+  input_total = 0;
+  d = 0;
+
   if (0 == OProcessController::theOProcessController) {
         (void) new OProcessController();
         CHECK_PTR(OProcessController::theOProcessController);
@@ -470,6 +490,20 @@ bool OProcess::writeStdin(const char *buffer, int buflen)
   } else
     rv = false;
   return rv;
+}
+
+void OProcess::flushStdin ( )
+{
+	if ( !input_data || ( input_sent == input_total ))
+		return;
+
+	int d1, d2;
+	
+	do {
+		d1 = input_total - input_sent;
+		slotSendData ( 0 );
+		d2 = input_total - input_sent;
+	} while ( d2 <= d1 );
 }
 
 void OProcess::suspend()
@@ -888,35 +922,5 @@ bool OProcess::isExecutable(const QCString &filename)
   return true;
 }
 
-void OProcess::virtual_hook( int, void* )
-{ /*BASE::virtual_hook( id, data );*/ }
 
 
-///////////////////////////
-// CC: Class KShellProcess
-///////////////////////////
-
-KShellProcess::KShellProcess(const char *shellname):
-  OProcess()
-{
-  setUseShell(true, shellname);
-}
-
-
-KShellProcess::~KShellProcess() {
-}
-
-QString KShellProcess::quote(const QString &arg)
-{
-    return OProcess::quote(arg);
-}
-
-bool KShellProcess::start(RunMode runmode, Communication comm)
-{
-  return OProcess::start(runmode, comm);
-}
-
-void KShellProcess::virtual_hook( int id, void* data )
-{ OProcess::virtual_hook( id, data ); }
-
-//#include "kprocess.moc"
