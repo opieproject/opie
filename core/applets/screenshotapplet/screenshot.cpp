@@ -493,9 +493,25 @@ void ScreenshotApplet::mousePressEvent( QMouseEvent *)
 {
   ScreenshotControl *sc = new ScreenshotControl ( );
   QPoint curPos = mapToGlobal ( QPoint ( 0, 0 ));
-  sc-> move ( curPos. x ( ) - ( sc-> sizeHint ( ). width ( ) - width ( )) / 2, 
-              curPos. y ( ) - sc-> sizeHint ( ). height ( ));
-  sc-> show ( );
+
+  // windowPosX is the windows position centered above the applets icon.
+  // If the icon is near the edge of the screen, the window would leave the visible area
+  // so we check the position against the screen width and correct the difference if needed
+  
+  int screenWidth = qApp->desktop()->width();
+  int windowPosX = curPos. x ( ) - ( sc-> sizeHint ( ). width ( ) - width ( )) / 2 ;
+  int ZwindowPosX, XwindowPosX;
+  
+  // the window would be placed beyond the screen wich doesn't look tooo good
+  if ( (windowPosX + sc-> sizeHint ( ). width ( )) > screenWidth ) {
+  	XwindowPosX = windowPosX + sc-> sizeHint ( ). width ( ) - screenWidth;
+	ZwindowPosX = windowPosX - XwindowPosX - 1;
+  } else {
+  	ZwindowPosX = windowPosX;
+  }
+  
+   sc-> move ( ZwindowPosX, curPos. y ( ) - sc-> sizeHint ( ). height ( ) );
+   sc-> show ( );
 }
 
 void ScreenshotApplet::paintEvent( QPaintEvent* )
