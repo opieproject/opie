@@ -11,7 +11,8 @@ HEADERS	= datebookday.h \
 	  noteentryimpl.h \
 	  onoteedit.h \
 	  datebookdayallday.h  \
-	  namespace_hack.h
+	  namespace_hack.h \
+          datebooktypes.h
 SOURCES	= main.cpp \
 	  datebookday.cpp \
 	  datebook.cpp \
