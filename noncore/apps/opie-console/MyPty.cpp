@@ -117,10 +117,13 @@ void MyPty::donePty()
 	kill(m_cpid, SIGHUP);
 	//waitpid(m_cpid, &status, 0);
         delete m_sn_e;
+        delete m_sn_r;
         m_sn_e = 0l;
+        m_sn_r = 0l;
     }
 
     m_cpid = 0;
+    m_fd = -1;
 //    emit done(status);
 }
 
@@ -185,10 +188,11 @@ int MyPty::run(const char* cmd, QStrList &, const char*, int)
     }
 
     // parent - continue as a widget
-    QSocketNotifier* sn_r = new QSocketNotifier(m_fd,QSocketNotifier::Read,this);
+    delete m_sn_r;
+    m_sn_r = new QSocketNotifier(m_fd,QSocketNotifier::Read,this);
     delete m_sn_e;
     m_sn_e = new QSocketNotifier(m_fd,QSocketNotifier::Exception,this);
-    connect(sn_r,SIGNAL(activated(int)),this,SLOT(readPty()));
+    connect(m_sn_r,SIGNAL(activated(int)),this,SLOT(readPty()));
     connect(m_sn_e,SIGNAL(activated(int)),this,SLOT(error()));
 
     return 0;
@@ -221,7 +225,7 @@ int MyPty::openPty()
 #endif
 
     if ( ptyfd < 0 ) {
-	qApp->exit(1);
+//	qApp->exit(1);
 	return -1;
     }
 
@@ -234,6 +238,7 @@ int MyPty::openPty()
 MyPty::MyPty(const Profile&) : m_cpid(0)
 {
     m_sn_e = 0l;
+    m_sn_r = 0l;
   m_fd = openPty();
   ProcCtl* ctl = ProcCtl::self();
 }
@@ -254,11 +259,15 @@ QString MyPty::name()const{
     return identifier();
 }
 bool MyPty::open() {
+    if (m_fd < 0)
+        m_fd = openPty();
+
     start();
     return true;
 }
 void MyPty::close() {
     donePty();
+    m_fd = openPty();
 }
 void MyPty::reload( const Profile& ) {
 
@@ -286,7 +295,6 @@ void MyPty::readPty()
 
   if (len == -1 || len == 0) {
      donePty();
-     delete sender();
      return;
   }
 
@@ -306,4 +314,11 @@ void MyPty::readPty()
 #endif
 
 }
+QBitArray MyPty::supports()const {
+    QBitArray ar(3);
+    ar[0] = 1;
+    ar[1] = 0;
+    ar[2] = 0;
 
+    return ar;
+}

@@ -11,6 +11,7 @@ TabWidget::~TabWidget() {
 }
 
 void TabWidget::add( Session* ses ) {
+    qWarning("session ses " + ses->name() );
     if ( !ses->widgetStack() ) return;
     //reparent( ses->widgetStack(), QPoint() );
     addTab( ses->widgetStack(), "console/konsole", ses->name() );

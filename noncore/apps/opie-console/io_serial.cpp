@@ -187,3 +187,10 @@ void IOSerial::closeRawIO(int fd) {
 
     ::close( fd );
 }
+QBitArray IOSerial::supports()const {
+    QBitArray ar(3);
+    ar[0] = ar[2] = 0;
+    ar[1] = 1;
+
+    return ar;
+}

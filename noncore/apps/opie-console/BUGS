@@ -1,0 +1,9 @@
+Ok we all know we write perfect code
+but sometimes the compiler produces bad code
+and we need to work around some compiler bugs!! -zecke
+
+MyPty is broken in some ways
+ if you do connect/disconnect/connect sh will be executed in the
+ process of opie-console.... funny aye?
+ 
+OTabWidget seems to give us problems too

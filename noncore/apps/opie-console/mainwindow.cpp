@@ -360,11 +360,12 @@ void MainWindow::slotClose() {
     if (!currentSession() )
         return;
 
+    Session* ses = currentSession();
+    qWarning("removing! currentSession %s", currentSession()->name().latin1() );
     tabWidget()->remove( currentSession() );
     /*it's autodelete */
-    m_sessions.remove( m_curSession );
-    m_curSession = m_sessions.first();
-    tabWidget()->setCurrent( m_curSession );
+    m_sessions.remove( ses );
+    qWarning("after remove!!");
 
     if (!currentSession() ) {
         m_connect->setEnabled( false );
@@ -395,7 +396,7 @@ void MainWindow::create( const Profile& prof ) {
 	{
 		QMessageBox::warning(this,
 			QObject::tr("Session failed"),
-			QObject::tr("Cannot open session: Not all components were found."));
+			QObject::tr("<qt>Cannot open session: Not all components were found.</qt>"));
 		//if(ses) delete ses;
 		return;
 	}
@@ -433,6 +434,7 @@ void MainWindow::slotOpenKeb(bool state) {
 
 }
 void MainWindow::slotSessionChanged( Session* ses ) {
+    qWarning("changed!");
     if ( ses ) {
         m_curSession = ses;
 

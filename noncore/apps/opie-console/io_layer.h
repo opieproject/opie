@@ -1,7 +1,10 @@
 #ifndef OPIE_IO_LAYER_H
 #define OPIE_IO_LAYER_H
 
+#include <qbitarray.h>
 #include <qobject.h>
+
+
 #include <qpe/config.h>
 
 #include "profile.h"
@@ -22,6 +25,11 @@ public:
         ClosedError =3,
         Terminate = 4
         /* add more errors here */
+    };
+    enum Feature {
+        AutoConnect = 0,
+        TransferFile =1,
+        Close =2
     };
     /**
      * a small c'tor
@@ -65,6 +73,11 @@ public:
      */
     virtual void closeRawIO(int);
 
+    /**
+     * What does the IOLayer support?
+     * Bits are related to features
+     */
+    virtual QBitArray supports()const = 0;
 
 signals:
     /**
@@ -79,6 +92,7 @@ signals:
      */
     virtual void error( int, const QString& );
 
+    virtual void closed();
 public slots:
     /**
      * send a QCString to the device

@@ -41,6 +41,7 @@ public:
 
     QString identifier()const;
     QString name()const;
+    QBitArray supports()const;
 
   public slots:
  /*!
@@ -92,6 +93,7 @@ private:
     int m_fd;
     int m_cpid;
     QSocketNotifier* m_sn_e;
+    QSocketNotifier* m_sn_r;
 };
 
 #endif

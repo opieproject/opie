@@ -36,6 +36,12 @@ IOLayer* Session::layer() {
 EmulationHandler* Session::emulationHandler() {
     return m_emu;
 }
+QWidget* Session::widget() {
+    if (!m_emu )
+        return 0l;
+
+    return m_emu->widget();
+}
 /*
 WidgetLayer* Session::emulationWidget() {
     return m_widLay;

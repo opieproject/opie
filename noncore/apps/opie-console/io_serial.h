@@ -37,9 +37,11 @@ public:
     QString name() const;
     int rawIO()const;
     void closeRawIO(int fd );
-signals:
+    QBitArray supports()const;
+/*signals:
     void received(const QByteArray &);
     void error(int, const QString &);
+*/
 public slots:
     void send(const QByteArray &);
     bool open();

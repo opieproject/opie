@@ -34,6 +34,7 @@ public:
      * semi modal == SessionModal
      */
     QWidgetStack* widgetStack();
+    QWidget* widget();
 
     /**
      * return the layer

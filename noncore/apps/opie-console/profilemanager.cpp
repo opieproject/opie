@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 #include <qfile.h>
+#include <qhbox.h>
 #include <qlayout.h>
 #include <qwidgetstack.h>
 
@@ -85,19 +86,11 @@ Session* ProfileManager::fromProfile( const Profile& prof,  QWidget* parent) {
 
     QWidgetStack *stack = new QWidgetStack( parent );
     session->setWidgetStack( stack );
-    QWidget* dummy = new QWidget( stack );
-    QHBoxLayout* lay = new QHBoxLayout( dummy );
-    stack->addWidget( dummy, 0 );
-    stack->raiseWidget( 0 );
+    QWidget* dummy = new QHBox( stack );
+    stack->raiseWidget( dummy );
+
     EmulationHandler* handler = new EmulationHandler(prof,dummy );
     session->setEmulationHandler( handler );
-    lay->addWidget( handler->widget() );
-//    WidgetLayer* wid = new EmulationWidget( prof, dummy );
-//    lay->addWidget( wid );
-
-//    session->setEmulationWidget( wid );
-//    session->setEmulationLayer( m_fact->newEmulationLayer( m_fact->external( prof.terminalName() ),
-//                                                        wid ) );
     session->connect();
 
     return session;
