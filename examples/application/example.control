@@ -1,0 +1,11 @@
+Files: bin/example apps/Applications/example.desktop pics/Example.png help/html/example.html
+Priority: optional
+Section: qpe/applications
+Maintainer: Your Name <you@your.domain.com>
+Architecture: arm
+Version: 1.0.0
+Depends: qpe-base ($QPE_VERSION)
+License: Public Domain
+Description: Example program
+ An example program for the Qtopia environment.
+ Does nothing interesting.

@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -17,8 +17,8 @@
 ** not clear to you.
 **
 **********************************************************************/
-#include <qgfx_qws.h>
 #include "patiencecardgame.h"
+#include "canvascardwindow.h"
 
 
 int highestZ = 0;
@@ -29,7 +29,7 @@ PatienceCardGame::PatienceCardGame(QCanvas *c, bool snap, QWidget *parent) : Can
     numberOfTimesThroughDeck = 0;
     highestZ = 0;
 
-    if ( qt_screen->deviceWidth() < 200 ) {
+    if ( smallFlag ) {
 	circleCross = new CanvasCircleOrCross( 7, 16, canvas() );
 	rectangle = new CanvasRoundRect(  30, 10, canvas() );
 
@@ -190,7 +190,7 @@ bool PatienceCardGame::mousePressCard( Card *card, QPoint p )
 	    faceUpDealingPile->addCardToTop(item);
 	    item->setCardPile( faceUpDealingPile );
 
-	    if ( qt_screen->deviceWidth() < 200 )
+	    if ( smallFlag )
 		item->flipTo( 30, (int)item->y() );
 	    else
 		item->flipTo( 35, (int)item->y() );
@@ -215,7 +215,7 @@ bool PatienceCardGame::mousePressCard( Card *card, QPoint p )
 		faceUpDealingPile->addCardToTop(item);
 		item->setCardPile( faceUpDealingPile );
 
-		if ( qt_screen->deviceWidth() < 200 )
+		if ( smallFlag )
 		    item->flipTo( 30, (int)item->y(), 8 * flipped );
 		else
 		    item->flipTo( 35, (int)item->y(), 8 * flipped );

@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -19,12 +19,12 @@
 **********************************************************************/
 #include <qpainter.h>
 #include <qcanvas.h>
-#include <qgfx_qws.h>
 #include "canvasshapes.h"
+#include "canvascardwindow.h"
 
 
 CanvasRoundRect::CanvasRoundRect(int x, int y, QCanvas *canvas) :
-	QCanvasRectangle( x, y, ( qt_screen->deviceWidth() < 200 ) ? 20 : 23, ( qt_screen->deviceWidth() < 200 ) ? 27 : 36, canvas)
+	QCanvasRectangle( x, y, ( smallFlag ) ? 20 : 23, ( smallFlag ) ? 27 : 36, canvas)
 {
     setZ(0);
     show();
@@ -40,7 +40,7 @@ void CanvasRoundRect::redraw()
 
 void CanvasRoundRect::drawShape(QPainter &p)
 {
-    if ( qt_screen->deviceWidth() < 200 )
+    if ( smallFlag )
 	p.drawRoundRect( (int)x() + 1, (int)y() + 1, 18, 25);
     else
 	p.drawRoundRect( (int)x(), (int)y(), 23, 36);
@@ -77,7 +77,7 @@ void CanvasCircleOrCross::setCross()
 
 void CanvasCircleOrCross::drawShape(QPainter &p)
 {
-    if ( qt_screen->deviceWidth() < 200 ) {
+    if ( smallFlag ) {
 	int x1 = (int)x(), y1 = (int)y();
 	// Green circle
 	if (circleShape == TRUE) {

@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -24,21 +24,26 @@
 
 #include <qpe/resource.h>
 
+#include <qapplication.h>
 #include <qmainwindow.h>
 #include <qpopupmenu.h>
 #include <qstyle.h>
+
+
+// Determines if we resize to mega small on really low res screens
+bool smallFlag = FALSE;
 
 
 CanvasCardWindow::CanvasCardWindow(QWidget* parent, const char* name, WFlags f) :
     QMainWindow(parent, name, f), canvas(230, 260), snapOn(TRUE), cardBack(4), gameType(0),
     cardGame(NULL)
 {
+    smallFlag = QApplication::desktop()->width() < 200;
+
     setIcon( Resource::loadPixmap( "cards" ) );
 
     // Create Playing Area for Games
     if ( QPixmap::defaultDepth() < 12 ) {
-//      canvas.setBackgroundColor(QColor(0x51, 0x74, 0x6B));
-//	canvas.setBackgroundColor(QColor(0x20, 0xb0, 0x50));
 	canvas.setBackgroundColor(QColor(0x08, 0x98, 0x2D));
     } else {
         QPixmap bg;

@@ -11,8 +11,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>290</width>
-            <height>443</height>
+            <width>229</width>
+            <height>222</height>
         </rect>
     </property>
     <property stdset="1">
@@ -25,20 +25,20 @@
     <property>
         <name>layoutSpacing</name>
     </property>
-    <vbox>
+    <grid>
         <property stdset="1">
             <name>margin</name>
-            <number>8</number>
+            <number>4</number>
         </property>
         <property stdset="1">
             <name>spacing</name>
-            <number>3</number>
+            <number>6</number>
         </property>
-        <widget>
+        <widget row="0"  column="0"  rowspan="1"  colspan="3" >
             <class>QGroupBox</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>GroupBox1</cstring>
+                <cstring>playersbox</cstring>
             </property>
             <property stdset="1">
                 <name>title</name>
@@ -50,200 +50,268 @@
             <property>
                 <name>layoutSpacing</name>
             </property>
-            <vbox>
+            <widget>
+                <class>QComboBox</class>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string></string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>AI3: Smart AI player</string>
+                    </property>
+                </item>
                 <property stdset="1">
-                    <name>margin</name>
-                    <number>7</number>
+                    <name>name</name>
+                    <cstring>player0</cstring>
                 </property>
                 <property stdset="1">
-                    <name>spacing</name>
-                    <number>2</number>
+                    <name>geometry</name>
+                    <rect>
+                        <x>10</x>
+                        <y>20</y>
+                        <width>80</width>
+                        <height>22</height>
+                    </rect>
                 </property>
-                <widget>
-                    <class>QComboBox</class>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string></string>
-                        </property>
-                    </item>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string>AI3: Smart AI player</string>
-                        </property>
-                    </item>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>player0</cstring>
+                <property stdset="1">
+                    <name>editable</name>
+                    <bool>true</bool>
+                </property>
+            </widget>
+            <widget>
+                <class>QComboBox</class>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string></string>
                     </property>
-                    <property stdset="1">
-                        <name>editable</name>
-                        <bool>true</bool>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>AI3: Smart AI player</string>
                     </property>
-                </widget>
-                <widget>
-                    <class>QComboBox</class>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string></string>
-                        </property>
-                    </item>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string>AI3: Smart AI player</string>
-                        </property>
-                    </item>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>player1</cstring>
+                </item>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>player1</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>20</x>
+                        <y>30</y>
+                        <width>100</width>
+                        <height>22</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>editable</name>
+                    <bool>true</bool>
+                </property>
+            </widget>
+            <widget>
+                <class>QComboBox</class>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string></string>
                     </property>
-                    <property stdset="1">
-                        <name>editable</name>
-                        <bool>true</bool>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>AI3: Smart AI player</string>
                     </property>
-                </widget>
-                <widget>
-                    <class>QComboBox</class>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string></string>
-                        </property>
-                    </item>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string>AI3: Smart AI player</string>
-                        </property>
-                    </item>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>player2</cstring>
+                </item>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>player2</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>30</x>
+                        <y>40</y>
+                        <width>90</width>
+                        <height>20</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>editable</name>
+                    <bool>true</bool>
+                </property>
+            </widget>
+            <widget>
+                <class>QComboBox</class>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string></string>
                     </property>
-                    <property stdset="1">
-                        <name>editable</name>
-                        <bool>true</bool>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>AI3: Smart AI player</string>
                     </property>
-                </widget>
-                <widget>
-                    <class>QComboBox</class>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string></string>
-                        </property>
-                    </item>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string>AI3: Smart AI player</string>
-                        </property>
-                    </item>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>player3</cstring>
+                </item>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>player3</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>40</x>
+                        <y>50</y>
+                        <width>100</width>
+                        <height>22</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>editable</name>
+                    <bool>true</bool>
+                </property>
+            </widget>
+            <widget>
+                <class>QComboBox</class>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string></string>
                     </property>
-                    <property stdset="1">
-                        <name>editable</name>
-                        <bool>true</bool>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>AI3: Smart AI player</string>
                     </property>
-                </widget>
-                <widget>
-                    <class>QComboBox</class>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string></string>
-                        </property>
-                    </item>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string>AI3: Smart AI player</string>
-                        </property>
-                    </item>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>player4</cstring>
+                </item>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>player4</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>50</x>
+                        <y>60</y>
+                        <width>120</width>
+                        <height>22</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>editable</name>
+                    <bool>true</bool>
+                </property>
+            </widget>
+            <widget>
+                <class>QComboBox</class>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string></string>
                     </property>
-                    <property stdset="1">
-                        <name>editable</name>
-                        <bool>true</bool>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>AI3: Smart AI player</string>
                     </property>
-                </widget>
-                <widget>
-                    <class>QComboBox</class>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string></string>
-                        </property>
-                    </item>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string>AI3: Smart AI player</string>
-                        </property>
-                    </item>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>player5</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>editable</name>
-                        <bool>true</bool>
-                    </property>
-                </widget>
-            </vbox>
+                </item>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>player5</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>60</x>
+                        <y>70</y>
+                        <width>110</width>
+                        <height>22</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>editable</name>
+                    <bool>true</bool>
+                </property>
+            </widget>
         </widget>
-        <widget>
-            <class>QGroupBox</class>
+        <widget row="3"  column="2" >
+            <class>QPushButton</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>GroupBox2</cstring>
+                <cstring>buttonOk</cstring>
             </property>
             <property stdset="1">
-                <name>title</name>
-                <string>Rules</string>
+                <name>text</name>
+                <string>&amp;Start</string>
             </property>
-            <property>
-                <name>layoutMargin</name>
+            <property stdset="1">
+                <name>autoDefault</name>
+                <bool>true</bool>
             </property>
-            <property>
-                <name>layoutSpacing</name>
+            <property stdset="1">
+                <name>default</name>
+                <bool>true</bool>
             </property>
-            <hbox>
-                <property stdset="1">
-                    <name>margin</name>
-                    <number>7</number>
-                </property>
-                <property stdset="1">
-                    <name>spacing</name>
-                    <number>2</number>
-                </property>
-                <widget>
-                    <class>QComboBox</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>rules</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>sizePolicy</name>
-                        <sizepolicy>
-                            <hsizetype>3</hsizetype>
-                            <vsizetype>0</vsizetype>
-                        </sizepolicy>
-                    </property>
-                </widget>
-            </hbox>
         </widget>
-        <spacer>
+        <spacer row="3"  column="0"  rowspan="1"  colspan="2" >
             <property>
                 <name>name</name>
-                <cstring>Spacer1</cstring>
+                <cstring>Spacer4</cstring>
+            </property>
+            <property stdset="1">
+                <name>orientation</name>
+                <enum>Horizontal</enum>
+            </property>
+            <property stdset="1">
+                <name>sizeType</name>
+                <enum>Expanding</enum>
+            </property>
+            <property>
+                <name>sizeHint</name>
+                <size>
+                    <width>20</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
+        <widget row="1"  column="2" >
+            <class>QComboBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>rules</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>3</hsizetype>
+                    <vsizetype>0</vsizetype>
+                </sizepolicy>
+            </property>
+        </widget>
+        <widget row="1"  column="1" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel1</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Rules:</string>
+            </property>
+        </widget>
+        <spacer row="2"  column="1" >
+            <property>
+                <name>name</name>
+                <cstring>Spacer6</cstring>
             </property>
             <property stdset="1">
                 <name>orientation</name>
@@ -260,6 +328,20 @@
                     <height>20</height>
                 </size>
             </property>
+        </spacer>
+        <spacer row="1"  column="0" >
+            <property>
+                <name>name</name>
+                <cstring>Spacer5</cstring>
+            </property>
+            <property stdset="1">
+                <name>orientation</name>
+                <enum>Horizontal</enum>
+            </property>
+            <property stdset="1">
+                <name>sizeType</name>
+                <enum>Expanding</enum>
+            </property>
             <property>
                 <name>sizeHint</name>
                 <size>
@@ -268,70 +350,6 @@
                 </size>
             </property>
         </spacer>
-        <widget>
-            <class>QLayoutWidget</class>
-            <property stdset="1">
-                <name>name</name>
-                <cstring>Layout1</cstring>
-            </property>
-            <hbox>
-                <property stdset="1">
-                    <name>margin</name>
-                    <number>0</number>
-                </property>
-                <property stdset="1">
-                    <name>spacing</name>
-                    <number>6</number>
-                </property>
-                <spacer>
-                    <property>
-                        <name>name</name>
-                        <cstring>Horizontal Spacing2</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>orientation</name>
-                        <enum>Horizontal</enum>
-                    </property>
-                    <property stdset="1">
-                        <name>sizeType</name>
-                        <enum>Expanding</enum>
-                    </property>
-                    <property>
-                        <name>sizeHint</name>
-                        <size>
-                            <width>20</width>
-                            <height>20</height>
-                        </size>
-                    </property>
-                    <property>
-                        <name>sizeHint</name>
-                        <size>
-                            <width>20</width>
-                            <height>20</height>
-                        </size>
-                    </property>
-                </spacer>
-                <widget>
-                    <class>QPushButton</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>buttonOk</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>&amp;Start</string>
-                    </property>
-                    <property stdset="1">
-                        <name>autoDefault</name>
-                        <bool>true</bool>
-                    </property>
-                    <property stdset="1">
-                        <name>default</name>
-                        <bool>true</bool>
-                    </property>
-                </widget>
-            </hbox>
-        </widget>
-    </vbox>
+    </grid>
 </widget>
 </UI>

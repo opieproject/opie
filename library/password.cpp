@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -27,7 +27,9 @@
 #include <qstring.h>
 #include <qapplication.h>
 #include <qfile.h>
+#ifdef QWS
 #include <qwindowsystem_qws.h>
+#endif
 
 #include <qdialog.h>
 
@@ -72,6 +74,16 @@ static QString qcrypt(const QString& k, const char *salt)
 PasswordDialog::PasswordDialog( QWidget* parent,  const char* name, WFlags fl )
     : PasswordBase( parent, name, fl )
 {
+    QRect desk = qApp->desktop()->geometry();
+
+    if ( desk.width() < 220 ) {
+	QFont f( font() );
+	f.setPointSize( 18 );
+	setFont( f );
+	f.setPointSize( 12 );
+	prompt->setFont( f );
+    }
+    
     button_0->installEventFilter( this );
     button_1->installEventFilter( this );
     button_2->installEventFilter( this );
