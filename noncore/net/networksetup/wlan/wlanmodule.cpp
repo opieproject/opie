@@ -141,7 +141,7 @@ QWidget *WLANModule::information(Interface *i, QTabWidget **tabWidget){
   if ( result == 0 )
     info->freqLabel->setText(QString("%1").arg((double( iwr.u.freq.m ) * pow( 10, iwr.u.freq.e ) / 1000000000)));
   else
-    info->freqLabel->setText("0");
+    info->freqLabel->setText("*** Unknown ***");
 
   /*
   // gather link quality from /proc/net/wireless
