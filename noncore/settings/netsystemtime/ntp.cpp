@@ -161,11 +161,12 @@ void  Ntp::ntpFinished(OProcess *p)
   {
 	  cfg.setGroup("lookup_"+QString::number(lookupCount));
 	  lookupCount++;
-   	cfg.writeEntry("count",lookupCount);
     _shiftPerSec =  timeShift / secsSinceLast;
    	qDebug("secs since last lookup %i", secsSinceLast);qDebug("timeshift since last lookup %f", timeShift);qDebug("timeshift since per sec %f", _shiftPerSec);
 		cfg.writeEntry("secsSinceLast",secsSinceLast);
 		cfg.writeEntry("timeShift",QString::number(timeShift));
+	  cfg.setGroup("lookups");
+   	cfg.writeEntry("count",lookupCount);
   	cfg.writeEntry("lastNtp",true);
   }
 }
