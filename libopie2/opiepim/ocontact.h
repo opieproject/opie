@@ -35,6 +35,15 @@ QPC_TEMPLATEEXTERN template class QPC_EXPORT QMap<int, QString>;
 #endif
 
 class ContactPrivate;  // Wozu ist das gut und wo ist das decrariert ? (se)
+		       /* Stefan das ist eine forward declaration
+		        * dann machst du in der private section
+			* ContactPrivate *d;
+			*
+			* und wenn du bei Opie1.1 was hinzufuegen moechtest
+			* packst du es in ContactPrivate damit Opie
+			* binaer kompatibel bleibt
+			* -zecke
+			*/
 class QPC_EXPORT OContact : public OPimRecord
 {
     friend class DataSet;
@@ -43,12 +52,18 @@ public:
     OContact( const QMap<int, QString> &fromMap );
     virtual ~OContact();
 
+    /* VCARD stuff should vanish! -zecke */
     static void writeVCard( const QString &filename, const QValueList<OContact> &contacts);
     static void writeVCard( const QString &filename, const OContact &c );
     static QValueList<OContact> readVCard( const QString &filename );
 
     enum journal_action { ACTION_ADD, ACTION_REMOVE, ACTION_REPLACE };
 
+    /* 
+     * do we need to inline them
+     * if yes do we need to inline them this way?
+     * -zecke
+     */
     void setTitle( const QString &v ) { replace( Qtopia::Title, v ); }
     void setFirstName( const QString &v ) { replace( Qtopia::FirstName, v ); }
     void setMiddleName( const QString &v ) { replace( Qtopia::MiddleName, v ); }
@@ -127,6 +142,11 @@ public:
     QStringList emailList() const;
 
     // home
+    /*
+     * OPimAddress address(enum Location)const;
+     * would be some how nicer...
+     *  -zecke
+     */
     QString homeStreet() const { return find( Qtopia::HomeStreet ); }
     QString homeCity() const { return find( Qtopia::HomeCity ); }
     QString homeState() const { return find( Qtopia::HomeState ); }
@@ -196,9 +216,11 @@ public:
 
 
     // journaling...
+    /* do we still need them? Stefan your backend takes care of these -zecke */
     void saveJournal( journal_action action, const QString &key = QString::null );
     void save( QString &buf ) const;
 
+    /* we shouldn't inline this one -zecke */
     void setUid( int i )
 { OPimRecord::setUid(i); replace( Qtopia::AddressUid , QString::number(i)); }
 
@@ -215,6 +237,10 @@ public:
 
 
 private:
+    /* I do not like friends ;)
+     * besides that I think we do not need them
+     * anymore -zecke
+     */
     friend class AbEditor;
     friend class AbTable;
     friend class AddressBookAccessPrivate;
