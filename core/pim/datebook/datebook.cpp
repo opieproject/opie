@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.23 2003-04-13 21:41:19 umopapisdn Exp $
+** $Id: datebook.cpp,v 1.24 2003-05-04 00:08:28 umopapisdn Exp $
 **
 **********************************************************************/
 
@@ -242,6 +242,20 @@ void DateBook::slotSettings()
 	frmSettings.comboDefaultView->setCurrentItem(defaultView-1);
 	frmSettings.comboWeekListView->setCurrentItem(weeklistviewconfig);
 
+	bool found=false;
+	for (int i=0; i<(frmSettings.comboLocation->count()); i++) {
+		if ( frmSettings.comboLocation->text(i) == defaultLocation ) {
+			frmSettings.comboLocation->setCurrentItem(i);
+			found=true;
+			break;
+		}
+	}
+	if(!found) {
+		frmSettings.comboLocation->insertItem(defaultLocation);
+		frmSettings.comboLocation->setCurrentItem(frmSettings.comboLocation->count()-1);
+	}
+	frmSettings.comboCategory->setCategories(defaultCategories,"Calendar", tr("Calendar"));
+
 #if defined (Q_WS_QWS) || defined(_WS_QWS_)
     frmSettings.showMaximized();
 #endif
@@ -255,6 +269,8 @@ void DateBook::slotSettings()
 		rowStyle = frmSettings.rowStyle();
 		defaultView=frmSettings.comboDefaultView->currentItem()+1;
 		weeklistviewconfig=frmSettings.comboWeekListView->currentItem();
+		defaultLocation=frmSettings.comboLocation->currentText();
+		defaultCategories=frmSettings.comboCategory->currentCategories();
 
 		if ( dayView ) {
 			dayView->setStartViewTime( startTime );
@@ -385,8 +401,10 @@ void DateBook::viewMonth() {
 
 void DateBook::insertEvent( const Event &e )
 {
-	qWarning("Adding Event!");
-	db->addEvent(e);
+	Event dupEvent=e;
+	dupEvent.setLocation(defaultLocation);
+	dupEvent.setCategories(defaultCategories);
+	db->addEvent(dupEvent);
 	emit newEvent();
 }
 
@@ -606,6 +624,15 @@ void DateBook::loadSettings()
 	rowStyle = config.readNumEntry("rowstyle");
 	defaultView = config.readNumEntry("defaultview",DAY);
 	weeklistviewconfig = config.readNumEntry("weeklistviewconfig",NORMAL);
+
+	defaultLocation=config.readEntry("defaultLocation");
+	QString tmpString=config.readEntry("defaultCategories");
+	QStringList tmpStringList=QStringList::split(",",tmpString);
+	defaultCategories.truncate(0);
+	for( QStringList::Iterator i=tmpStringList.begin(); i!=tmpStringList.end(); i++) {
+		defaultCategories.resize(defaultCategories.count()+1);
+		defaultCategories[defaultCategories.count()-1]=(*i).toInt();
+	}
 }
 
 void DateBook::saveSettings()
@@ -620,6 +647,13 @@ void DateBook::saveSettings()
 	configDB.writeEntry("rowstyle", rowStyle);
 	configDB.writeEntry("defaultview",defaultView);
 	configDB.writeEntry("weeklistviewconfig",weeklistviewconfig);
+
+	configDB.writeEntry("defaultLocation",defaultLocation);
+	QStringList tmpStringList;
+	for( uint i=0; i<defaultCategories.count(); i++) {
+		tmpStringList << QString::number(defaultCategories[i]);
+	}
+	configDB.writeEntry("defaultCategories",tmpStringList.join(","));
 }
 
 void DateBook::appMessage(const QCString& msg, const QByteArray& data)
@@ -825,48 +859,52 @@ void DateBook::slotNewEventFromKey( const QString &str )
     slotNewEntry(start, end, str);
 }
 void DateBook::slotNewEntry(const QDateTime &start, const QDateTime &end, const QString &str, const QString &location) {
-    // argh!  This really needs to be encapsulated in a class
-    // or function.
-    QDialog newDlg( this, 0, TRUE );
-    newDlg.setCaption( DateEntryBase::tr("New Event") );
-    DateEntry *e;
-    QVBoxLayout *vb = new QVBoxLayout( &newDlg );
-    QScrollView *sv = new QScrollView( &newDlg );
-    sv->setResizePolicy( QScrollView::AutoOneFit );
-    sv->setFrameStyle( QFrame::NoFrame );
-    sv->setHScrollBarMode( QScrollView::AlwaysOff );
-    vb->addWidget( sv );
+	// argh!  This really needs to be encapsulated in a class
+	// or function.
+	QDialog newDlg( this, 0, TRUE );
+	newDlg.setCaption( DateEntryBase::tr("New Event") );
+	DateEntry *e;
+	QVBoxLayout *vb = new QVBoxLayout( &newDlg );
+	QScrollView *sv = new QScrollView( &newDlg );
+	sv->setResizePolicy( QScrollView::AutoOneFit );
+	sv->setFrameStyle( QFrame::NoFrame );
+	sv->setHScrollBarMode( QScrollView::AlwaysOff );
+	vb->addWidget( sv );
 
-    Event ev;
-    ev.setDescription(  str );
-    // When the new gui comes in, change this...
+	Event ev;
+	ev.setDescription(  str );
+	// When the new gui comes in, change this...
 	if(location==0) {
-		ev.setLocation( tr("(Unknown)") );
+		if(defaultLocation.isEmpty()) {
+			ev.setLocation(tr("(Unknown)"));
+		} else {
+			ev.setLocation( defaultLocation );
+		}
 	} else {
 		ev.setLocation(location);
 	}
-    ev.setStart( start );
-    ev.setEnd( end );
+	ev.setCategories(defaultCategories);
+	ev.setStart( start );
+	ev.setEnd( end );
 
-    e = new DateEntry( onMonday, ev, ampm, &newDlg );
-    e->setAlarmEnabled( aPreset, presetTime, Event::Loud );
-    sv->addChild( e );
+	e = new DateEntry( onMonday, ev, ampm, &newDlg );
+	e->setAlarmEnabled( aPreset, presetTime, Event::Loud );
+	sv->addChild( e );
 #if defined(Q_WS_QWS) || defined(_WS_QWS_)
-    newDlg.showMaximized();
+	newDlg.showMaximized();
 #endif
-    while (newDlg.exec()) {
-	ev = e->event();
-	ev.assignUid();
-	QString error = checkEvent( ev );
-	if ( !error.isNull() ) {
-	    if ( QMessageBox::warning( this, tr("Error!"),
-				       error, tr("Fix it"), tr("Continue"), 0, 0, 1 ) == 0 )
-		continue;
+	while (newDlg.exec()) {
+		ev = e->event();
+		ev.assignUid();
+		QString error = checkEvent( ev );
+		if ( !error.isNull() ) {
+		if ( QMessageBox::warning( this, tr("Error!"), error, tr("Fix it"), tr("Continue"), 0, 0, 1 ) == 0 )
+			continue;
+		}
+		db->addEvent( ev );
+		emit newEvent();
+		break;
 	}
-	db->addEvent( ev );
-	emit newEvent();
-	break;
-    }
 }
 
 void DateBook::setDocument( const QString &filename )

@@ -108,25 +108,27 @@ private:
     void saveSettings();
 
 private:
-    DateBookDBHack *db;
-    QWidgetStack *views;
-    DateBookDay *dayView;
-    DateBookWeek *weekView;
-    DateBookMonth *monthView;
-    DateBookWeekLst *weekLstView;
-    QAction *dayAction, *weekAction, *weekLstAction, *monthAction;
+	DateBookDBHack *db;
+	QWidgetStack *views;
+	DateBookDay *dayView;
+	DateBookWeek *weekView;
+	DateBookMonth *monthView;
+	DateBookWeekLst *weekLstView;
+	QAction *dayAction, *weekAction, *weekLstAction, *monthAction;
 	int weeklistviewconfig;
-    bool aPreset;    // have everything set to alarm?
-    int presetTime;  // the standard time for the alarm
-    int startTime;
-    int rowStyle;
+	bool aPreset;    // have everything set to alarm?
+	int presetTime;  // the standard time for the alarm
+	int startTime;
+	int rowStyle;
 	int defaultView;
+	QArray<int> defaultCategories;
+	QString defaultLocation;
 	bool bJumpToCurTime; //should jump to current time in dayview?
-    bool ampm;
-    bool onMonday;
+	bool ampm;
+	bool onMonday;
 
-    bool syncing;
-    bool inSearch;
+	bool syncing;
+	bool inSearch;
 
 	int alarmCounter;
 

@@ -21,6 +21,7 @@
 #ifndef DATEBOOKSETTINGS_H
 #define DATEBOOKSETTINGS_H
 #include "datebooksettingsbase.h"
+#include <qpe/categoryselect.h>
 
 class DateBookSettings : public DateBookSettingsBase
 {
