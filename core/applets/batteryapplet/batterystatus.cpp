@@ -176,7 +176,7 @@ QString  BatteryStatus::statusTextIpaq() const {
     return text;
 }
 
-void BatteryStatus::paintEvent( QPaintEvent * ) {
+void BatteryStatus::paintEvent( QPaintEvent * ev ) {
 
     QPainter p( this );
 
@@ -238,6 +238,7 @@ void BatteryStatus::paintEvent( QPaintEvent * ) {
         p.setPen( black );
         p.drawText(15, 100, width() - 20, 20 , AlignVCenter,  jacketMsg);
     }
+    QFrame::paintEvent(ev);
 }
 
 QSize BatteryStatus::sizeHint() const {
