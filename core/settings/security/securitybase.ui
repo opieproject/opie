@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>329</width>
+            <width>321</width>
             <height>483</height>
         </rect>
     </property>
@@ -282,7 +282,7 @@
                 <vbox>
                     <property stdset="1">
                         <name>margin</name>
-                        <number>6</number>
+                        <number>11</number>
                     </property>
                     <property stdset="1">
                         <name>spacing</name>
@@ -379,6 +379,36 @@
                                 <property stdset="1">
                                     <name>editable</name>
                                     <bool>true</bool>
+                                </property>
+                            </widget>
+                            <widget>
+                                <class>QLabel</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>TextLabel2</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Select your sync software</string>
+                                </property>
+                            </widget>
+                            <widget>
+                                <class>QComboBox</class>
+                                <item>
+                                    <property>
+                                        <name>text</name>
+                                        <string>QTopia</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property>
+                                        <name>text</name>
+                                        <string>IntelliSync</string>
+                                    </property>
+                                </item>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>syncapp</cstring>
                                 </property>
                             </widget>
                         </vbox>

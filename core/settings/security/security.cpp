@@ -47,6 +47,16 @@
     connect(syncnet, SIGNAL(textChanged(const QString&)),
             this, SLOT(setSyncNet(const QString&)));
 
+    cfg.setGroup("Sync");
+    QString sa = cfg.readEntry("syncapp","Qtopia");
+
+    //There must be a better way to do that...
+    for (int i=0; i<syncapp->count(); i++) {
+        if ( syncapp->text(i) == sa ) {
+           syncapp->setCurrentItem(i);       	    
+        }
+    }  
+    
     /*
        cfg.setGroup("Remote");
        if ( telnetAvailable() )
@@ -62,7 +72,7 @@
 
     QString configFile = QPEApplication::qpeDir() + "/etc/opie-login.conf";
     Config loginCfg(configFile,Config::File);
-
+        
     loginCfg.setGroup("General");
     autoLoginName=loginCfg.readEntry("AutoLogin","");
 
@@ -77,7 +87,8 @@
     connect(userlist, SIGNAL(activated(int)), this, SLOT(changeLoginName(int)));
     connect(changepasscode,SIGNAL(clicked()), this, SLOT(changePassCode()));
     connect(clearpasscode,SIGNAL(clicked()), this, SLOT(clearPassCode()));
-
+    connect(syncapp,SIGNAL(activated(int)), this, SLOT(changeSyncApp()));
+    
     loadUsers();
     updateGUI();
 
@@ -100,8 +111,7 @@ void Security::updateGUI()
     clearpasscode->setEnabled( !empty );
 
     autologinToggle->setChecked(autoLogin);
-    userlist->setEnabled(autoLogin);
-
+    userlist->setEnabled(autoLogin);    
 }
 
 
@@ -238,7 +248,9 @@ void Security::applySecurity()
         QString sn = syncnet->currentText();
         parseNet(sn,auth_peer,auth_peer_bits);
         cfg.writeEntry("auth_peer",auth_peer);
-        cfg.writeEntry("auth_peer_bits",auth_peer_bits);
+        cfg.writeEntry("auth_peer_bits",auth_peer_bits);	
+        cfg.writeEntry("syncapp",syncapp->currentText());
+	
         /*
            cfg.setGroup("Remote");
            if ( telnetAvailable() )
@@ -260,6 +272,25 @@ void Security::applySecurity()
 
     }
 }
+void Security::changeSyncApp()
+{
+    // Don't say i didn't tell ya
+    if (syncapp->currentText() == "IntelliSync") {
+	    QMessageBox attn(
+		tr("WARNING"),
+		tr("<p>Selecting IntelliSync here will disable the FTP password."
+		    "<p>Every machine in your netrange will be able to sync with "
+		    "your Zaurus!"),
+		QMessageBox::Warning,
+		QMessageBox::Cancel, QMessageBox::NoButton, QMessageBox::NoButton,
+		0, QString::null, TRUE, WStyle_StaysOnTop);
+	    attn.setButtonText(QMessageBox::Cancel, tr("Ok"));
+	    attn.exec();
+    } 
+    updateGUI();
+}
+
+
 
 void Security::changeLoginName( int idx )
 {
