@@ -71,15 +71,10 @@ public:
 
     PlayListWidget( MediaPlayerState &mediaPlayerState, QWidget* parent=0, const char* name=0 );
     ~PlayListWidget();
-    DocLnkSet files;
-    DocLnkSet vFiles;
-    bool fromSetDocument;
-    bool insanityBool;
-    QString setDocFileRef, currentPlayList;
+
     // retrieve the current playlist entry (media file link)
     const DocLnk *current() const;
     void useSelectedDocument();
-    int selected;
     TabType currentTab() const;
 
     Entry currentEntry() const;
@@ -138,6 +133,13 @@ private slots:
     void playlistViewPressed( int, QListViewItem *, const QPoint&, int);
     void playSelected();
 
+private:
+    DocLnkSet files;
+    DocLnkSet vFiles;
+    bool fromSetDocument;
+    bool insanityBool;
+    QString setDocFileRef, currentPlayList;
+    int selected;
 };
 
 #endif // PLAY_LIST_WIDGET_H
