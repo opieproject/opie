@@ -5,6 +5,7 @@ Feature requests:
 - Dial by mobile phone by tapping the number.. 
   (Maybe using gsmtool. And we may
 	add a library class for this)
+- dial with dtmfdial incase it's installed and there's no mobile
 - 3rd column for 2. Contact
 
 Known Bugs:

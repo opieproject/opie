@@ -1,5 +1,6 @@
 TEMPLATE	= app
-CONFIG		= qt warn_on release
+#CONFIG		= qt warn_on release
+CONFIG		= qt warn_on debug
 DESTDIR		= $(OPIEDIR)/bin
 HEADERS	= addressbook.h \
                   contacteditor.h \

@@ -595,8 +595,7 @@ void AddressbookWindow::editEntry( EntryMode entryMode )
 {
 	OContact entry;
 	if ( !abEditor ) {
-		abEditor = new ContactEditor( entry, &orderedFields, &slOrderedFields,
-					      this, "editor" );
+		abEditor = new ContactEditor( entry, this, "editor" );
 	}
 	if ( entryMode == EditEntry )
 		abEditor->setEntry( m_abView -> currentEntry() );
@@ -637,8 +636,7 @@ void AddressbookWindow::editPersonal()
 		me = OContact::readVCard( filename )[0];
 	if ( !abEditor ) {
 		qWarning("Editing personal data");
-		abEditor = new ContactEditor( me, &orderedFields, &slOrderedFields,
-					      this, "editor" );
+		abEditor = new ContactEditor( me, this, "editor" );
 	} else{
 		abEditor->setEntry( me );
 	}
@@ -806,7 +804,7 @@ void AddressbookWindow::initFields()
 	visibleFields.remove( "Name Title" );
 	visibleFields.remove( "Notes" );
 	
-	int i, version;
+	int i;
 	Config cfg( "AddressBook" );
 	QString zn;
 	
