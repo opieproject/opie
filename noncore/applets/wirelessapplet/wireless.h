@@ -19,10 +19,7 @@
 #include <qframe.h>
 #include <qpixmap.h>
 
-class MNetwork;
-class MWirelessNetwork;
-class MNetworkInterface;
-class MWirelessNetworkInterface;
+class OWirelessNetworkInterface;
 class Y;
 class QLabel;
 class WirelessApplet;
@@ -89,12 +86,11 @@ class WirelessApplet : public QWidget
     int visualStyle;
     int timer;
 
-    MWirelessNetwork* network;
-    MNetworkInterface* interface;
+    OWirelessNetworkInterface* interface;
 
   private:
     const char** oldpixmap;
-    MWirelessNetworkInterface* oldiface;
+    OWirelessNetworkInterface* oldiface;
     int oldqualityH;
     int oldsignalH;
     int oldnoiseH;

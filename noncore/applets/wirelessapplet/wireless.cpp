@@ -24,6 +24,7 @@
 #include "nowireless.xpm"
 
 /* OPIE */
+#include <opie2/onetwork.h>
 #include <opie2/otaskbarapplet.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
@@ -207,22 +208,29 @@ void WirelessControl::writeConfigEntry( const char *entry, int val )
 
 WirelessApplet::WirelessApplet( QWidget *parent, const char *name )
         : QWidget( parent, name ), visualStyle( STYLE_ANTENNA ),
-        timer( 0 ), interface( 0 ),
-            rocESSID( false ), rocFREQ( false ), rocAP( false ), rocMODE( false )
+        timer( 0 ), interface( 0 ), oldiface( 0 ),
+        rocESSID( false ), rocFREQ( false ), rocAP( false ), rocMODE( false )
 {
     setFixedHeight( 18 );
     setFixedWidth( 14 );
-    network = new MWirelessNetwork();
     status = new WirelessControl( this, this, "wireless status" );
 }
 
 void WirelessApplet::checkInterface()
 {
-    interface = network->getFirstInterface();
+    interface = 0L;
+    ONetwork* net = ONetwork::instance();
+    ONetwork::InterfaceIterator it = net->iterator();
+
+    while ( it.current() && !it.current()->isWireless() ) ++it;
+
+    if ( it.current() && it.current()->isWireless() )
+        interface = static_cast<OWirelessNetworkInterface*>( it.current() );
+
     if ( interface )
     {
 #ifdef MDEBUG
-        qDebug( "WIFIAPPLET: using interface '%s'", ( const char* ) interface->getName() );
+        qDebug( "WIFIAPPLET: using interface '%s'", ( const char* ) interface->name() );
 #endif
 
     }
@@ -244,7 +252,7 @@ void WirelessApplet::renewDHCP()
     QString pidfile;
     if ( !interface )
         return ;
-    QString ifacename( interface->getName() );
+    QString ifacename( interface->name() );
 
     // At first we are trying dhcpcd
 
@@ -317,7 +325,9 @@ WirelessApplet::~WirelessApplet()
 
 void WirelessApplet::timerEvent( QTimerEvent* )
 {
-    MWirelessNetworkInterface * iface = ( MWirelessNetworkInterface* ) interface;
+    /*
+
+    OWirelessNetworkInterface* iface = interface;
 
     if ( iface )
     {
@@ -339,6 +349,8 @@ void WirelessApplet::timerEvent( QTimerEvent* )
             updatePopupWindow();
     }
     else checkInterface();
+
+    */
 }
 
 void WirelessApplet::mousePressEvent( QMouseEvent * )
@@ -351,7 +363,7 @@ void WirelessApplet::mousePressEvent( QMouseEvent * )
 
 bool WirelessApplet::mustRepaint()
 {
-    MWirelessNetworkInterface * iface = ( MWirelessNetworkInterface* ) interface;
+    OWirelessNetworkInterface* iface = interface;
 
     // check if there are enough changes to justify a (flickering) repaint
 
@@ -385,9 +397,9 @@ bool WirelessApplet::mustRepaint()
         return true;
     }
 
-    int noiseH = iface->noisePercent() * ( height() - 3 ) / 100;
-    int signalH = iface->signalPercent() * ( height() - 3 ) / 100;
-    int qualityH = iface->qualityPercent() * ( height() - 3 ) / 100;
+    int noiseH = 50; // iface->noisePercent() * ( height() - 3 ) / 100;
+    int signalH = iface->signalStrength() * ( height() - 3 ) / 100;
+    int qualityH = 50; // iface->qualityPercent() * ( height() - 3 ) / 100;
 
     if ( ( noiseH != oldnoiseH )
             || ( signalH != oldsignalH )
@@ -399,28 +411,28 @@ bool WirelessApplet::mustRepaint()
         return true;
     }
 
-    if ( rocESSID && ( oldESSID != iface->essid ) )
+    if ( rocESSID && ( oldESSID != iface->SSID() ) )
     {
 #ifdef MDEBUG
         qDebug( "WIFIAPPLET: ESSID has changed." );
 #endif
         renewDHCP();
     }
-    else if ( rocFREQ && ( oldFREQ != iface->freq ) )
+    else if ( rocFREQ && ( oldFREQ != iface->frequency() ) )
     {
 #ifdef MDEBUG
         qDebug( "WIFIAPPLET: FREQ has changed." );
 #endif
         renewDHCP();
     }
-    else if ( rocAP && ( oldAP != iface->APAddr ) )
+    else if ( rocAP && ( oldAP != iface->associatedAP().toString() ) )
     {
 #ifdef MDEBUG
         qDebug( "WIFIAPPLET: AP has changed." );
 #endif
         renewDHCP();
     }
-    else if ( rocMODE && ( oldMODE != iface->mode ) )
+    else if ( rocMODE && ( oldMODE != iface->mode() ) )
     {
 #ifdef MDEBUG
         qDebug( "WIFIAPPLET: MODE has changed." );
@@ -428,10 +440,10 @@ bool WirelessApplet::mustRepaint()
         renewDHCP();
     }
 
-    oldESSID = iface->essid;
-    oldMODE = iface->mode;
-    oldFREQ = iface->freq;
-    oldAP = iface->APAddr;
+    oldESSID = iface->SSID();
+    oldMODE = iface->mode();
+    oldFREQ = iface->frequency();
+    oldAP = iface->associatedAP().toString();
 
     return false;
 }

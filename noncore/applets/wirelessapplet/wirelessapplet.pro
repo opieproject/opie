@@ -7,7 +7,7 @@ TARGET       = wirelessapplet
 DESTDIR      = $(OPIEDIR)/plugins/applets
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
-LIBS        += -lqpe
+LIBS        += -lqpe -lopiecore2 -lopienet2
 VERSION      = 0.1.1
 
 include ( $(OPIEDIR)/include.pro )
