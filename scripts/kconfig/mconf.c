@@ -772,7 +772,7 @@ int main(int ac, char **av)
 		printf("\n\n"
 			"*** End of Opie configuration.\n"
 			"*** Check the top-level Makefile for additional configuration.\n"
-			"*** Next, you may run 'makee'.\n\n");
+			"*** Next, you may run 'make'.\n\n");
 	} else
 		printf("\n\nYour Opie  configuration changes were NOT saved.\n\n");
 
