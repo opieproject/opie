@@ -430,10 +430,8 @@ void Konsole::init(const char* _pgm, QStrList & _args)
                     printf("sizes[%d] = %d\n", i, sizes[i]);
                     size = sizes[i];
                 }
-#ifndef __i386__
                 // a hack, sizes on Z seem to be points*10
                 size /= 10;
-#endif
 
                 f = QFont(familyNames[j], size);
                 f.setFixedPitch(true);
