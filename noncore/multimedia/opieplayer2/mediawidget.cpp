@@ -1,5 +1,8 @@
 /*
    Copyright (C) 2002 Simon Hausmann <hausmann@kde.org>
+             (C) 2002 Max Reiss <harlekin@handhelds.org>
+             (C) 2002 L. Potter <ljp@llornkcor.com>
+             (C) 2002 Holger Freyther <zecke@handhelds.org>
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
