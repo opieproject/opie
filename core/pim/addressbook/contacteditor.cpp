@@ -26,6 +26,7 @@
 #include <qpe/qpeapplication.h>
 #include <qpe/qpedialog.h>
 #include <qpe/timeconversion.h>
+#include <opie/ocontact.h>
 
 #include <qcombobox.h>
 #include <qlabel.h>
@@ -60,8 +61,8 @@ ContactEditor::ContactEditor(	const OContact &entry,
 				const char *name,
 				WFlags fl )
 	: QDialog( parent, name, TRUE, fl ),
-	  orderedValues( newOrderedValues ),
-	  slOrdered( *slNewOrdered ),
+//	  orderedValues( newOrderedValues ),
+//	  slOrdered( *slNewOrdered ),
 	  m_personalView ( false )
 {
 
@@ -79,15 +80,6 @@ void ContactEditor::init() {
 	useFullName = TRUE;
 
 	int i = 0;
-/** SHut up and stop leaking
-	slHomeAddress = new QStringList;
-	slBusinessAddress = new QStringList;
-	slChooserNames = new QStringList;
-	slChooserValues = new QStringList;
-
-	slDynamicEntries = new QStringList;
-*/
-	//*slDynamicEntries = *slOrdered;
 
 	QStringList trlChooserNames;
 
@@ -109,6 +101,8 @@ void ContactEditor::init() {
 		hasZip = FALSE;
 		hasCountry = FALSE;
 
+
+		QStringList slOrdered = OContact::trfields();
 		QStringList::ConstIterator it = slOrdered.begin();
 
 		for ( i = 0; it != slOrdered.end(); i++, ++it ) {

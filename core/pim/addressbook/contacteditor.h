@@ -112,8 +112,8 @@ class ContactEditor : public QDialog {
 
 		QList<QLineEdit> listValue;
 		QList<QLabel> listName;
-		const QValueList<int> *orderedValues;
-		QStringList slOrdered;
+		//		const QValueList<int> *orderedValues;
+		//		QStringList slOrdered;
 		QStringList slDynamicEntries;
 
 		bool m_personalView;
