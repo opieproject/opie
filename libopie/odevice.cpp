@@ -408,6 +408,8 @@ void iPAQ::init ( )
 			d-> m_model = Model_iPAQ_H37xx;
 		else if ( d-> m_modelstr == "H3800" )
 			d-> m_model = Model_iPAQ_H38xx;
+		else if ( d-> m_modelstr == "H3900" )
+			d-> m_model = Model_iPAQ_H39xx;
 		else
 			d-> m_model = Model_Unknown;
 
@@ -655,17 +657,13 @@ bool iPAQ::setDisplayBrightness ( int bright )
 	bool res = false;
 	int fd;
 	
-	if ( bright > 255 )
-		bright = 255;
+	int maxbright = displayBrightnessResolution ( );
+	
+	if ( bright > maxbright )
+		bright = maxbright;
 	if ( bright < 0 )
 		bright = 0;
 
-	// 128 is the maximum if you want a decent lifetime for the LCD
-	
-	if ( bright > 1 ) 
-		bright = (int) ( 0.5 + ( ::pow ( 2, double( bright ) / 255.0 ) - 1 ) * 128.0 ); // logarithmic
-//	bright = ( bright + 1 ) / 2;
-	
 	if (( fd = ::open ( "/dev/touchscreen/0", O_WRONLY )) >= 0 ) {
 		FLITE_IN bl;
 		bl. mode = 1;
@@ -679,7 +677,19 @@ bool iPAQ::setDisplayBrightness ( int bright )
 
 int iPAQ::displayBrightnessResolution ( ) const
 {
-	return 256; // really 128, but logarithmic control is smoother this way
+	switch ( model ( )) {
+		case Model_iPAQ_H31xx:
+		case Model_iPAQ_H36xx:
+		case Model_iPAQ_H37xx:
+			return 128;  	// really 256, but >128 could damage the LCD
+			
+		case Model_iPAQ_H38xx:
+		case Model_iPAQ_H39xx:
+			return 64;
+		
+		default:
+			return 2;
+	}	
 }
 
 
@@ -957,10 +967,4 @@ int Zaurus::displayBrightnessResolution ( ) const
 	return 5;
 }
 
-//QValueList <int> Zaurus::keyList ( ) const
-//{
-//	QValueList <int> vl;
-//	vl << HardKey_Datebook << HardKey_Contacts << HardKey_Mail << HardKey_Menu << HardKey_Home << HardKey_Suspend << HardKey_Backlight;
-//	return vl;
-//}
 

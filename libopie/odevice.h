@@ -29,17 +29,21 @@ namespace Opie {
 
 enum OModel {
 	Model_Unknown,
+	
+	Model_Series_Mask   = 0xff000000,
 
-	Model_iPAQ = ( 1 << 16 ),
+	Model_iPAQ          = ( 1 << 24 ),
 
-	Model_iPAQ_H31xx = ( Model_iPAQ | 1 ),
-	Model_iPAQ_H36xx = ( Model_iPAQ | 2 ),
-	Model_iPAQ_H37xx = ( Model_iPAQ | 3 ),
-	Model_iPAQ_H38xx = ( Model_iPAQ | 4 ),
+	Model_iPAQ_All      = ( Model_iPAQ | 0xffffff ),
+	Model_iPAQ_H31xx    = ( Model_iPAQ | 0x000001 ),
+	Model_iPAQ_H36xx    = ( Model_iPAQ | 0x000002 ),
+	Model_iPAQ_H37xx    = ( Model_iPAQ | 0x000004 ),
+	Model_iPAQ_H38xx    = ( Model_iPAQ | 0x000008 ),
+	Model_iPAQ_H39xx    = ( Model_iPAQ | 0x000010 ),
 
-	Model_Zaurus = ( 2 << 16 ),
+	Model_Zaurus        = ( 2 << 24 ),
 
-	Model_Zaurus_SL5000 = ( Model_Zaurus | 1 ),
+	Model_Zaurus_SL5000 = ( Model_Zaurus | 0x000001 ),
 };
 
 enum OVendor {	
@@ -104,6 +108,7 @@ public:
 
 	QString modelString ( ) const; 
 	OModel model ( ) const;
+	inline OModel series ( ) const { return (OModel) ( model ( ) & Model_Series_Mask ); }
 	
 	QString vendorString ( ) const;
 	OVendor vendor ( ) const;
@@ -136,8 +141,6 @@ public:
 	virtual bool hasLightSensor ( ) const;
 	virtual int readLightSensor ( );
 	virtual int lightSensorResolution ( ) const;
-
-	//virtual QValueList <int> keyList ( ) const;
 };
 
 }
