@@ -55,37 +55,35 @@ namespace OpieTooth {
         bluezOffPixmap = Resource::loadPixmap( "bluetoothapplet/bluezoff" );
         //    bluezDiscoveryOnPixmap = Resource::loadPixmap( "bluetoothapplet/magglass" );
         startTimer(5000);
-        timerEvent(NULL);
+        btDevice = 0;
+
     }
 
     BluezApplet::~BluezApplet() {
     }
 
     int BluezApplet::checkBluezStatus() {
-      if (btDevice) {
-	if (btDevice->isLoaded() ) {
-	  return 1;
+        if (btDevice) {
+            if (btDevice->isLoaded() ) {
+                return 1;
+            } else {
+                return 0;
+            }
         } else {
             return 0;
         }
-      } else {
-	return 0;
-      }
     }
 
     int BluezApplet::setBluezStatus(int c) {
 
         if (c == 1) {
             btDevice = new Device("/dev/ttySB0", "csr" );
-            // system("hciattach /dev/ttySB0 csr");
-            //system("hcid");
         } else {
             if (btDevice) {
                 delete btDevice;
+                btDevice = 0;
             }
-            //system("killall hciattach");
-            //system("killall hcid");
-        }
+       }
         return 0;
     }
 
@@ -122,38 +120,34 @@ namespace OpieTooth {
         } else {
             menu->insertItem( tr("Enable discovery"), 4 );
         }
-        //menu->insertItem( tr("More..."), 7 )
+
 
         QPoint p = mapToGlobal( QPoint(1, -menu->sizeHint().height()-1) );
         ret = menu->exec(p, 0);
 
-        //    qDebug("ret was %d\n", ret);
-
         switch(ret) {
         case 0:
             setBluezStatus(0);
-            timerEvent(NULL);
             break;
         case 1:
             setBluezStatus(1);
-            timerEvent(NULL);
             break;
         case 2:
             // start bluetoothmanager
             launchManager();
-            timerEvent(NULL);
             break;
         case 3:
             setBluezDiscoveryStatus(0);
-            timerEvent(NULL);
             break;
         case 4:
             setBluezDiscoveryStatus(1);
-            timerEvent(NULL);
             break;
             //case 7:
             // With table of currently-detected devices.
         }
+
+        timerEvent(NULL);
+        delete signal;
         delete menu;
     }
 
