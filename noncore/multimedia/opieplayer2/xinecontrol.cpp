@@ -49,6 +49,7 @@ XineControl::XineControl( QObject *parent, const char *name )
     connect( mediaPlayerState, SIGNAL( playingToggled( bool ) ), this, SLOT( stop( bool ) ) );
     connect( mediaPlayerState, SIGNAL( fullscreenToggled( bool ) ), this, SLOT( setFullscreen( bool ) ) );
     connect( mediaPlayerState, SIGNAL( positionChanged( long ) ),  this,  SLOT( seekTo( long ) ) );
+    connect( libXine, SIGNAL( stopped() ),  this, SLOT( nextMedia() ) );
 }
 
 XineControl::~XineControl() {
@@ -75,16 +76,20 @@ void XineControl::play( const QString& fileName ) {
 
     // determine if slider is shown
     //    mediaPlayerState->setIsStreaming( mdetect.isStreaming( fileName ) );
-    mediaPlayerState->setIsStreaming( libXine->isSeekable() );
+    mediaPlayerState->setIsStreaming( !libXine->isSeekable() );
     // which gui (video / audio)
     mediaPlayerState->setView( whichGui );
     length();
     position();
 }
 
+void XineControl::nextMedia() {
+    mediaPlayerState->setNext();
+}
+
 void XineControl::stop( bool isSet ) {
     if ( !isSet) {
-        libXine->stop();
+        libXine->stop( );
         mediaPlayerState->setList();
         //mediaPlayerState->setPlaying( false );
     } else {

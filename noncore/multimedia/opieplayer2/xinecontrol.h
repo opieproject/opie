@@ -55,8 +55,8 @@ public slots:
     // get length of media file and set it
     void length();
     long position();
-
-	void videoResized ( const QSize &s );
+    void nextMedia();
+    void videoResized ( const QSize &s );
 
 private:
     XINE::Lib *libXine;
