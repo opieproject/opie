@@ -31,6 +31,7 @@
 
 /* OPIE */
 #include <opie2/opimrecord.h>
+#include <opie2/opimcache.h>
 
 /* QT */
 #include <qarray.h>
@@ -70,13 +71,15 @@ private:
 };
 /**
  * internal template base
- * T needs to implement the copy c'tor!!!
+ * Attention: T needs to implement the copy c'tor!!!
  */
 class OTemplateBasePrivate;
 template <class T = OPimRecord>
 class OTemplateBase : public OPimBase {
 public:
+    /** Look ahead direction of cache */ 
     enum CacheDirection { Forward=0, Reverse };
+
     OTemplateBase() {
     };
     virtual ~OTemplateBase() {
@@ -88,12 +91,23 @@ public:
      */
     virtual T find( int uid, const QArray<int>& items,
                     uint current, CacheDirection dir = Forward )const = 0;
+
+   /**
+    * Find in Cache..
+    * Returns empty object if nothing found.
+    */
+    virtual T cacheFind( int uid )const = 0;
+
+   /**
+    * Put element into Cache
+    */
     virtual void cache( const T& )const = 0;
     virtual void setSaneCacheSize( int ) = 0;
 
     OPimRecord* record()const;
     OPimRecord* record(int uid )const;
     static T* rec();
+
     
 private:
     OTemplateBasePrivate *d;    

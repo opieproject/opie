@@ -35,7 +35,6 @@
 #include <opie2/opimaccessbackend.h>
 #include <opie2/opimrecordlist.h>
 
-#include <opie2/opimcache.h>
 #include <opie2/opimtemplatebase.h>
 #include <opie2/odebug.h>
 
@@ -128,6 +127,7 @@ public:
     virtual T find( int uid, const QArray<int>&,
                     uint current, typename OTemplateBase<T>::CacheDirection dir = OTemplateBase<T>::Forward )const;
 
+
     /* invalidate cache here */
     /**
      * clears the backend and invalidates the backend
@@ -139,13 +139,15 @@ public:
      * @param t The item to add.
      * @return <i>true</i> if added successfully.
      */
-    virtual bool add( const T& t ) ;
+     virtual bool add( const T& t ) ;
+
     bool add( const OPimRecord& );
-    // Needed for real generic access (eilers)
-    // Info: Take this if  you are working with OPimRecord, which is a generic base class, and
-    //       you need to add it into any database, you cannot generate a reference to
-    //       it and casting may be not approriate, too.
-    //       But take care that the accessing database is compatible to the real type of OPimRecord !!
+    /** 
+     * Add an Opie PimRecord.
+     * Info: Take this if  you are working with OPimRecords and you need to add it into any database.
+     *       But take care that the accessing database is compatible to the real type of OPimRecord !! 
+     *       Otherwise this access will be rejected !
+     */
     bool add( const OPimRecord* );
 
 
@@ -176,6 +178,7 @@ public:
     /**
      * @internal
      */
+    virtual T cacheFind( int uid )const;
     void cache( const T& )const;
     void setSaneCacheSize( int );
 
@@ -192,6 +195,7 @@ protected:
      */
     BackEnd* backEnd();
     BackEnd* m_backEnd;
+
     Cache m_cache;
 
 private:
@@ -218,7 +222,7 @@ bool OPimAccessTemplate<T>::load() {
 }
 template <class T>
 bool OPimAccessTemplate<T>::reload() {
-    invalidateCache();  // zecke: I think this should be added (se)
+    invalidateCache();
     return m_backEnd->reload();
 }
 template <class T>
@@ -251,10 +255,22 @@ OPimAccessTemplate<T>::queryByExample( const T& t, int settings, const QDateTime
 }
 template <class T>
 T OPimAccessTemplate<T>::find( int uid ) const{
+    // First search in cache..
+    if ( m_cache.contains( uid ) )
+	    return m_cache.find( uid );
+
     T t = m_backEnd->find( uid );
     cache( t );
+
     return t;
 }
+
+template <class T>
+T OPimAccessTemplate<T>::cacheFind( int uid ) const
+{
+	return m_cache.find( uid );
+}
+
 template <class T>
 T OPimAccessTemplate<T>::find( int uid, const QArray<int>& ar,
                                uint current, typename OTemplateBase<T>::CacheDirection dir )const {
@@ -264,7 +280,7 @@ T OPimAccessTemplate<T>::find( int uid, const QArray<int>& ar,
      * avoid two finds in QCache...
      */
     // owarn << "find it now " << uid << oendl;
-    if (m_cache.contains( uid ) ) {
+    if ( m_cache.contains( uid ) ) {
         return m_cache.find( uid );
     }
 
@@ -284,12 +300,14 @@ bool OPimAccessTemplate<T>::add( const T& t ) {
 }
 
 template <class T>
-bool OPimAccessTemplate<T>::add( const OPimRecord& rec) {
+bool OPimAccessTemplate<T>::add( const OPimRecord& rec ) {
     /* same type */
     T tempInstance;
     if ( rec.rtti() == tempInstance.rtti() ) {
         const T& t = static_cast<const T&>(rec);
         return add(t);
+    } else {
+	owarn << "Adding not possible: Objecttype mismatch" << oendl;
     }
     return false;
 }
@@ -301,6 +319,8 @@ bool OPimAccessTemplate<T>::add( const OPimRecord* rec) {
     if ( rec -> rtti() == tempInstance.rtti() ) {
         const T* t = static_cast<const T*>(rec);
         return add( *t );
+    } else {
+	owarn << "Adding not possible: Objecttype mismatch" << oendl;
     }
     return false;
 }

@@ -96,7 +96,7 @@ public:
     virtual T find(int uid )const  = 0;
 
     virtual T find(int uid, const QArray<int>& items,
-                   uint current, typename Frontend::CacheDirection )const ;
+                   uint current, typename Frontend::CacheDirection ) const;
     /**
      * clear the back end
      */
@@ -128,7 +128,15 @@ public:
     void setReadAhead( uint count );
 protected:
     int access()const;
+
     void cache( const T& t )const;
+
+    /** 
+     * Returns the element with given uid out of the cache.
+     * Returns empty element if nothing was found.
+     * <b>Attention:</b> This just works if we have a frontend which contains the cache !
+     */
+    T cacheFind( int uid ) const;
 
     /**
      * use a prime number here!
@@ -161,17 +169,29 @@ void OPimAccessBackend<T>::setFrontend( Frontend* fr ) {
 }
 template <class T>
 void OPimAccessBackend<T>::cache( const T& t )const {
-    if (m_front )
+    if ( m_front )
         m_front->cache( t );
 }
+
+template <class T>
+T OPimAccessBackend<T>::cacheFind( int uid )const {
+	if ( ! m_front ){
+		qWarning ( "No frontend assigned ! Therefore we cannot access the cache to return the right element!" );
+		return T();
+	}
+
+	return m_front->cacheFind( uid );
+}
+
 template <class T>
 void OPimAccessBackend<T>::setSaneCacheSize( int size) {
-    if (m_front )
+    if ( m_front )
         m_front->setSaneCacheSize( size );
 }
 template <class T>
 T OPimAccessBackend<T>::find( int uid, const QArray<int>&,
-                              uint, typename Frontend::CacheDirection )const {
+                              uint, typename Frontend::CacheDirection ) const{
+    qDebug( "*** Lookahead feature not supported. Fallback to default find!" );
     return find( uid );
 }
 template <class T>

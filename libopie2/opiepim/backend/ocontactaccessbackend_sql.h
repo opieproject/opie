@@ -73,8 +73,7 @@ class OPimContactAccessBackend_SQL : public OPimContactAccessBackend {
 	QArray<int> allRecords() const;
 
 	OPimContact find ( int uid ) const;
-	// FIXME: Add lookahead-cache support !
-	//OPimContact find(int uid, const QArray<int>&, uint cur, Frontend::CacheDirection )const;
+	OPimContact find( int uid, const QArray<int>&, uint cur, Frontend::CacheDirection ) const; 
 
 	QArray<int> queryByExample ( const OPimContact &query, int settings, 
 				     const QDateTime& d );
@@ -98,6 +97,8 @@ class OPimContactAccessBackend_SQL : public OPimContactAccessBackend {
 	QArray<int> extractUids( Opie::DB::OSQLResult& res ) const;
 	QMap<int, QString>  requestNonCustom( int uid ) const;
 	QMap<QString, QString>  requestCustom( int uid ) const;
+	QMap<int, QString> fillNonCustomMap( const Opie::DB::OSQLResultItem& resultItem ) const;
+	OPimContact requestContactsAndCache( int uid, const QArray<int>& cachelist ) const;
 	void update();
 
  protected:

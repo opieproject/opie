@@ -300,28 +300,29 @@ namespace {
     FindQuery::~FindQuery() {
     }
     QString FindQuery::query()const{
-//      if ( m_uids.count() == 0 )
-        return single();
+	    if ( m_uids.count() == 0 )
+		    return single();
+	    else
+		    return multi();
     }
-    /*
-      else
-            return multi();
-            }
-        QString FindQuery::multi()const {
-        QString qu = "select uid, type, value from addressbook where";
-        for (uint i = 0; i < m_uids.count(); i++ ) {
-            qu += " UID = " + QString::number( m_uids[i] ) + " OR";
-        }
-        qu.remove( qu.length()-2, 2 ); // Hmmmm..
-        return qu;
-    }
-    */
-    QString FindQuery::single()const{
-        QString qu = "select *";
-        qu += " from addressbook where uid = " + QString::number(m_uid);
+        
+    QString FindQuery::multi()const {
+	    QString qu = "select * from addressbook where";
+	    for (uint i = 0; i < m_uids.count(); i++ ) {
+		    qu += " uid = " + QString::number( m_uids[i] ) + " OR";
+	    }
+	    qu.remove( qu.length()-2, 2 ); // Hmmmm..
 
-        // owarn << "find query: " << qu << "" << oendl;
-        return qu;
+	    odebug << "find query: " << qu << "" << oendl;
+	    return qu;
+    }
+
+    QString FindQuery::single()const{
+	    QString qu = "select *";
+	    qu += " from addressbook where uid = " + QString::number(m_uid);
+	    
+	    // owarn << "find query: " << qu << "" << oendl;
+	    return qu;
     }
 
 
@@ -473,7 +474,7 @@ bool OPimContactAccessBackend_SQL::replace ( const OPimContact &contact )
 
 OPimContact OPimContactAccessBackend_SQL::find ( int uid ) const
 {
-    odebug << "OPimContactAccessBackend_SQL::find()" << oendl;
+    odebug << "OPimContactAccessBackend_SQL::find(" << uid << ")" << oendl;
     QTime t;
     t.start();
 
@@ -484,6 +485,47 @@ OPimContact OPimContactAccessBackend_SQL::find ( int uid ) const
     return retContact;
 }
 
+OPimContact OPimContactAccessBackend_SQL::find( int uid, const QArray<int>& queryUids, uint current, Frontend::CacheDirection direction ) const
+{
+    odebug << "OPimContactAccessBackend_SQL::find( ..multi.. )" << oendl;
+    odebug << "searching for " << uid << "" << oendl;
+
+    QTime t;
+    t.start();
+	
+    uint numReadAhead = readAhead();
+    QArray<int> searchList( numReadAhead );
+ 
+    uint size =0;
+
+    // Build an array with all elements which should be requested and cached
+    // We will just request "numReadAhead" elements, starting from "current" position in
+    // the list of many uids !
+    switch( direction ) {
+        /* forward */
+    case Frontend::Forward:
+        for ( uint i = current; i < queryUids.count() && size < numReadAhead; i++ ) {
+            searchList[size] = queryUids[i];
+            size++;
+        }
+        break;
+        /* reverse */
+    case Frontend::Reverse:
+        for ( uint i = current; i != 0 && size <  numReadAhead; i-- ) {
+            searchList[size] = queryUids[i];
+            size++;
+        }
+        break;
+    }
+
+    //Shrink to real size..
+    searchList.resize( size );
+
+    OPimContact retContact( requestContactsAndCache( uid, searchList ) );
+
+    odebug << "OPimContactAccessBackend_SQL::find( ..multi.. ) needed: " << t.elapsed() << " ms" << oendl;
+    return retContact;
+}
 
 
 QArray<int> OPimContactAccessBackend_SQL::queryByExample ( const OPimContact &query, int settings, const QDateTime& qd )
@@ -768,8 +810,6 @@ QMap<int, QString>  OPimContactAccessBackend_SQL::requestNonCustom( int uid ) co
     QTime t;
     t.start();
 
-    QMap<int, QString> nonCustomMap;
-
     int t2needed = 0;
     int t3needed = 0;
     QTime t2;
@@ -780,8 +820,67 @@ QMap<int, QString>  OPimContactAccessBackend_SQL::requestNonCustom( int uid ) co
 
     OSQLResultItem resItem = res_noncustom.first();
 
+    QMap<int, QString> nonCustomMap;
     QTime t3;
     t3.start();
+    nonCustomMap = fillNonCustomMap( resItem );
+    t3needed = t3.elapsed();
+    
+
+    // odebug << "Adding UID: " << resItem.data( "uid" ) << "" << oendl;
+    odebug << "RequestNonCustom needed: insg.:" << t.elapsed() << " ms, query: " << t2needed
+           << " ms, mapping: " << t3needed << " ms" << oendl;
+
+    return nonCustomMap;
+}
+
+/* Returns contact requested by uid and fills cache with contacts requested by uids in the cachelist */ 
+OPimContact OPimContactAccessBackend_SQL::requestContactsAndCache( int uid, const QArray<int>& uidlist )const
+{
+	// We want to get all contacts with one query.
+	// We don't have to add the given uid to the uidlist, it is expected to be there already (see opimrecordlist.h).
+	// All contacts will be stored in the cache, afterwards the contact with the user id "uid" will be returned
+	// by using the cache..  
+	QArray<int> cachelist = uidlist;
+
+	odebug << "Reqest and cache" << cachelist.size() << "elements !" << oendl;
+
+	QTime t;
+	t.start();
+
+	int t2needed = 0;
+	int t3needed = 0;
+	QTime t2;
+	t2.start();
+	FindQuery query( cachelist );
+	OSQLResult res_noncustom = m_driver->query( &query );
+	t2needed = t2.elapsed();
+
+	QMap<int, QString> nonCustomMap;
+	QTime t3;
+	t3.start();
+	OSQLResultItem resItem = res_noncustom.first();
+	do {
+		OPimContact contact( fillNonCustomMap( resItem ) );
+		contact.setExtraMap( requestCustom( contact.uid() ) );
+		odebug << "Caching uid: " << contact.uid() << oendl;
+		cache( contact );
+		resItem = res_noncustom.next();
+	} while ( ! res_noncustom.atEnd() ); //atEnd() is true if we are past(!) the list !!
+	t3needed = t3.elapsed();
+    
+
+	// odebug << "Adding UID: " << resItem.data( "uid" ) << "" << oendl;
+	odebug << "RequestContactsAndCache needed: insg.:" << t.elapsed() << " ms, query: " << t2needed
+	       << " ms, mapping: " << t3needed << " ms" << oendl;
+	
+	return cacheFind( uid );
+}
+
+QMap<int, QString> OPimContactAccessBackend_SQL::fillNonCustomMap( const OSQLResultItem& resultItem ) const
+{
+    QMap<int, QString> nonCustomMap;
+
     // Now loop through all columns
     QStringList fieldList = OPimContactFields::untrfields( false );
     QMap<QString, int> translate = OPimContactFields::untrFieldsToId();
@@ -790,7 +889,7 @@ QMap<int, QString>  OPimContactAccessBackend_SQL::requestNonCustom( int uid ) co
         // corresponding id into the map..
 
         int id =  translate[*it];
-        QString value = resItem.data( (*it) );
+        QString value = resultItem.data( (*it) );
 
         // odebug << "Reading " << (*it) << "... found: " << value << "" << oendl;
 
@@ -816,16 +915,11 @@ QMap<int, QString>  OPimContactAccessBackend_SQL::requestNonCustom( int uid ) co
         }
     }
 
-    // First insert uid
-    nonCustomMap.insert( Qtopia::AddressUid, resItem.data( "uid" ) );
-    t3needed = t3.elapsed();
-
-    // odebug << "Adding UID: " << resItem.data( "uid" ) << "" << oendl;
-    odebug << "RequestNonCustom needed: insg.:" << t.elapsed() << " ms, query: " << t2needed
-           << " ms, mapping: " << t3needed << " ms" << oendl;
+    nonCustomMap.insert( Qtopia::AddressUid, resultItem.data( "uid" ) );
 
     return nonCustomMap;
 }
+
 
 QMap<QString, QString>  OPimContactAccessBackend_SQL::requestCustom( int uid ) const
 {
