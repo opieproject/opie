@@ -15,9 +15,9 @@
 #include "filePermissions.h"
 
 
-#include <opie/ofileselector.h>
-#include <opie/ofiledialog.h>
-#include <opie/ofontselector.h>
+#include <opie2/ofileselector.h>
+#include <opie2/ofiledialog.h>
+#include <opie2/ofontselector.h>
 
 #include <qpe/fontdatabase.h>
 #include <qpe/global.h>
@@ -54,6 +54,10 @@
 #include <unistd.h>
 #include <sys/stat.h>
 #include <stdlib.h> //getenv
+
+using Opie::OFileDialog;
+using Opie::OFileSelector;
+using Opie::OFontSelector;
 
 #if QT_VERSION < 300
 

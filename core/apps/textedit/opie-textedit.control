@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/pim
 Maintainer: L.J. Potter <lpotter@trolltech.com>
 Architecture: arm
-Depends: task-opie-minimal, libopie1
+Depends: task-opie-minimal, libopiecore2, libopieui2
 Description: Text Editor
  The text editor for the Opie environment.
 Version: $QPE_VERSION$EXTRAVERSION
