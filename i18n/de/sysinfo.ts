@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>This page shows how much this device&apos;s processor is being used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Seite zeigt die Auslastung des Prozessors.</translation>
     </message>
 </context>
 <context>
@@ -103,11 +103,11 @@ Click and hold on a module to see additional information about the module, or to
     </message>
     <message>
         <source>Available (%1 kB)</source>
-        <translation>Verfügar (%1 kB)</translation>
+        <translation>Verfügbar (%1 kB)</translation>
     </message>
     <message>
         <source> : %1 kB</source>
-        <translation type="unfinished">: %1 kB</translation>
+        <translation>: %1 kB</translation>
     </message>
 </context>
 <context>
@@ -276,15 +276,15 @@ Click and hold on a process to see additional information about the process, or 
     </message>
     <message>
         <source>&lt;p&gt;Version: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Version: </translation>
     </message>
     <message>
         <source>&lt;p&gt;Model: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Model: </translation>
     </message>
     <message>
         <source>&lt;p&gt;Vendor: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Hersteller:</translation>
     </message>
     <message>
         <source>This page shows the current versions of Opie, the Linux kernel and distribution running on this handheld device.</source>

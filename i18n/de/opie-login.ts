@@ -4,30 +4,32 @@
     <message>
         <source>Touch the crosshairs firmly and
 accurately to calibrate your screen.</source>
-        <translation type="unfinished"></translation>
+        <translation>Berühren Sie das Fadenkreuz kräftig
+und präzise um Ihr Display zu 
+kalibrieren.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation type="unfinished"></translation>
+        <translation>Willkommen zu OPIE</translation>
     </message>
 </context>
 <context>
     <name>LoginWindow</name>
     <message>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Anmeldung</translation>
     </message>
     <message>
         <source>&lt;center&gt;Welcome to OPIE&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;Welcome to OPIE&lt;/center&gt;</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="unfinished"></translation>
+        <translation>Benutzer</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort</translation>
     </message>
     <message>
         <source>Suspend</source>
@@ -42,23 +44,23 @@ accurately to calibrate your screen.</source>
     <name>LoginWindowImpl</name>
     <message>
         <source>Restart</source>
-        <translation type="unfinished"></translation>
+        <translation>Neustart</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Beenden</translation>
     </message>
     <message>
         <source>&lt;center&gt;%1 %2&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;%1 %2&lt;/center&gt;</translation>
     </message>
     <message>
         <source>Wrong password</source>
-        <translation type="unfinished"></translation>
+        <translation>Falsches Passwort</translation>
     </message>
     <message>
         <source>The given password is incorrect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Das eingegebene Passwort ist nicht richtig.</translation>
     </message>
     <message>
         <source>OPIE was terminated

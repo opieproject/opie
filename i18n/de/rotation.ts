@@ -3,7 +3,7 @@
     <name>RotationSettings</name>
     <message>
         <source>Rotation Settings</source>
-        <translation type="unfinished">Rotationseinstellungen</translation>
+        <translation>Rotationseinstellungen</translation>
     </message>
     <message>
         <source>&lt;p&gt;Select orientation from options at left.</source>

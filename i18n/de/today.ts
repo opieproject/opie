@@ -16,75 +16,79 @@
     </message>
     <message>
         <source>No plugins found</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Plugins gefunden</translation>
     </message>
     <message>
         <source>No plugins activated</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Plugins aktiviert</translation>
     </message>
     <message>
         <source>Click here to launch the associated app</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken, um das entsprechende 
+Programm zu starten</translation>
     </message>
 </context>
 <context>
     <name>TodayBase</name>
     <message>
         <source>Today</source>
-        <translation type="unfinished">Heute</translation>
+        <translation>Heute</translation>
     </message>
     <message>
         <source>Today by Maximilian Rei&#xdf;</source>
-        <translation type="unfinished"></translation>
+        <translation>Heute von Maximilian Reiß</translation>
     </message>
     <message>
         <source>Click here to get to the config dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicken Sie hier, um den Konfigurations-
+dialog zu starten</translation>
     </message>
 </context>
 <context>
     <name>TodayConfig</name>
     <message>
         <source>Today config</source>
-        <translation type="unfinished">Heute - Einstellungen</translation>
+        <translation>Heute - Einstellungen</translation>
     </message>
     <message>
         <source>Load which plugins in what order:</source>
-        <translation type="unfinished"></translation>
+        <translation>Reihenfolge des Plugin-Ladens:</translation>
     </message>
     <message>
         <source>Move Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoch</translation>
     </message>
     <message>
         <source>Move Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Runter</translation>
     </message>
     <message>
         <source>active/order</source>
-        <translation type="unfinished"></translation>
+        <translation>aktiv/Reihenfolge</translation>
     </message>
     <message>
         <source>autostart on 
 resume?
  (Opie only)</source>
-        <translation type="unfinished"></translation>
+        <translation>Beim Starten
+automatisch laden?
+(nur für Opie)</translation>
     </message>
     <message>
         <source>minutes inactive</source>
-        <translation type="unfinished"></translation>
+        <translation>Minuten inaktiv</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation type="unfinished">Verschiedenes</translation>
+        <translation>Verschiedenes</translation>
     </message>
     <message>
         <source>Check a checkbox to activate/deactivate a plugin ore use the arrow buttons on the right to change the appearance order</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicken Sie hier, um ein Plugin zu (de)aktivieren oder benutzen Sie die Pfeiltasten, um die Reihenfolge des Erscheinens zu ändern</translation>
     </message>
     <message>
         <source>Check this if today should be autostarted on resume.</source>
-        <translation type="unfinished"></translation>
+        <translation>Soll Heute bei starten automatisch gestartet werden.</translation>
     </message>
     <message>
         <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
@@ -100,7 +104,7 @@ resume?
     </message>
     <message>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Neu laden</translation>
     </message>
     <message>
         <source>How often should Today refresh itself</source>
@@ -108,11 +112,11 @@ resume?
     </message>
     <message>
         <source> sec</source>
-        <translation type="unfinished"></translation>
+        <translation>Sekunden</translation>
     </message>
     <message>
         <source>never</source>
-        <translation type="unfinished"></translation>
+        <translation>niemals</translation>
     </message>
 </context>
 </TS>

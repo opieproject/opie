@@ -3,15 +3,15 @@
     <name>AppEdit</name>
     <message>
         <source>Application</source>
-        <translation type="unfinished"></translation>
+        <translation>Programm</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Name:</translation>
     </message>
     <message>
         <source>Icon:</source>
-        <translation type="unfinished"></translation>
+        <translation>Icon:</translation>
     </message>
     <message>
         <source>Exec:</source>
@@ -81,7 +81,7 @@ still in the group.</source>
     <name>Wait</name>
     <message>
         <source>Please Wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte warten Sie...</translation>
     </message>
 </context>
 </TS>
