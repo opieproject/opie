@@ -1,4 +1,0 @@
-  config DRAWPAD
-    boolean "drawpad"
-    default "y"
-    depends LIBQPE && LIBOPIE

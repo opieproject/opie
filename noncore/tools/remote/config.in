@@ -1,4 +1,0 @@
-  config REMOTE
-    boolean "remote"
-    default "y"
-    depends LIBQPE && LIBOPIE

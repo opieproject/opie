@@ -1,4 +1,0 @@
-  config SOLITAIRE
-    boolean "solitaire"
-    default "y"
-    depends LIBQPE && LIBOPIE

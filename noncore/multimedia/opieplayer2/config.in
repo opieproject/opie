@@ -1,4 +1,0 @@
-#  config #OPIEPLAYER2
-#    boolean "opieplayer2"
-#    default "y"
-#    depends LIBQPE && LIBOPIE

@@ -1,6 +1,0 @@
-Makefile*
-*.o
-*~
-wellenreiterbase.cpp
-wellenreiterbase.h
-moc_*

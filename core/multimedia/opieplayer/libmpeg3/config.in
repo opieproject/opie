@@ -1,4 +1,0 @@
-  config LIBMPEG3
-    boolean "libmpeg3"
-    default "y"
-    depends LIBQPE && LIBOPIE

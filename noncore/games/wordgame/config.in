@@ -1,4 +1,0 @@
-  config WORDGAME
-    boolean "wordgame"
-    default "y"
-    depends LIBQPE && LIBOPIE

@@ -1,4 +1,0 @@
-#  config #APPLET
-#    boolean "applet"
-#    default "y"
-#    depends LIBQPE && LIBOPIE

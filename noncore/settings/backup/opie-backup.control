@@ -1,8 +1,0 @@
-Files: bin/backup pics/backup apps/Settings/backup.desktop
-Priority: optional
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
-Architecture: arm
-Maintainer: Benjamin Meyer <meyerb@sharpsec.com>
-Section: opie/Settings
-Description: Backup and Restore utility.

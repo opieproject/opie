@@ -1,4 +1,0 @@
-  config DATEBOOK
-    boolean "datebook"
-    default "y"
-    depends LIBQPE && LIBOPIE

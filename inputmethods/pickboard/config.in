@@ -1,4 +1,0 @@
-  config PICKBOARD
-    boolean "pickboard"
-    default "y"
-    depends LIBQPE && LIBOPIE

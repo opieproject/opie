@@ -1,4 +1,0 @@
-  config VMEMO
-    boolean "vmemo"
-    default "y"
-    depends LIBQPE && LIBOPIE

@@ -1,4 +1,0 @@
-  config OBEX
-    boolean "obex"
-    default "y"
-    depends LIBQPE && LIBOPIE

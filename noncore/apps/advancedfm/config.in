@@ -1,4 +1,0 @@
-  config ADVANCEDFM
-    boolean "advancedfm"
-    default "y"
-    depends LIBQPE && LIBOPIE

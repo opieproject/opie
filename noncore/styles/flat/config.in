@@ -1,4 +1,0 @@
-  config FLAT
-    boolean "flat"
-    default "y"
-    depends LIBQPE && LIBOPIE

@@ -1,4 +1,0 @@
-  config OPIE-READER
-    boolean "opie-reader"
-    default "y"
-    depends LIBQPE && LIBOPIE

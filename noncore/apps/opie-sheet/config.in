@@ -1,4 +1,0 @@
-  config OPIE-SHEET
-    boolean "opie-sheet"
-    default "y"
-    depends LIBQPE && LIBOPIE

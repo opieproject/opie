@@ -1,4 +1,0 @@
-  config FREETYPE
-    boolean "freetype"
-    default "y"
-    depends LIBQPE && LIBOPIE

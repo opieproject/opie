@@ -1,4 +1,0 @@
-  config SSHKEYS
-    boolean "sshkeys"
-    default "y"
-    depends LIBQPE && LIBOPIE

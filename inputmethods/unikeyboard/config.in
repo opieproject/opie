@@ -1,4 +1,0 @@
-  config UNIKEYBOARD
-    boolean "unikeyboard"
-    default "y"
-    depends LIBQPE && LIBOPIE

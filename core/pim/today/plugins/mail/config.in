@@ -1,4 +1,0 @@
-  config TODAY_MAIL
-    boolean "mail"
-    default "y"
-    depends LIBQPE && LIBOPIE

@@ -1,4 +1,0 @@
-#  config #LIBFLASH
-#    boolean "libflash"
-#    default "y"
-#    depends LIBQPE && LIBOPIE

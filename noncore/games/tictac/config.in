@@ -1,4 +1,0 @@
-  config TICTAC
-    boolean "tictac"
-    default "y"
-    depends LIBQPE && LIBOPIE

@@ -1,4 +1,0 @@
-  config BUZZWORD
-    boolean "buzzword"
-    default "y"
-    depends LIBQPE && LIBOPIE

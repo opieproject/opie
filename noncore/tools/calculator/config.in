@@ -1,4 +1,0 @@
-  config CALCULATOR
-    boolean "calculator"
-    default "y"
-    depends LIBQPE && LIBOPIE

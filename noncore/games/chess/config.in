@@ -1,4 +1,0 @@
-#  config #CHESS
-#    boolean "chess"
-#    default "y"
-#    depends LIBQPE && LIBOPIE

@@ -1,4 +1,0 @@
-#  config #KEYVIEW
-#    boolean "keyview"
-#    default "y"
-#    depends LIBQPE && LIBOPIE

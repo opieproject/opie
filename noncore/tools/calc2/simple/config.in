@@ -1,4 +1,0 @@
-#  config #SIMPLE
-#    boolean "simple"
-#    default "y"
-#    depends LIBQPE && LIBOPIE

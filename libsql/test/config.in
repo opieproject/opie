@@ -1,4 +1,0 @@
-#  config #TEST
-#    boolean "test"
-#    default "y"
-#    depends LIBQPE && LIBOPIE

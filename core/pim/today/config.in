@@ -1,8 +1,0 @@
-menu "today"
-
-  config TODAY
-    boolean "today"
-    default "y"
-    depends LIBQPE && LIBOPIE
-  source core/pim/today/plugins/config.in
-endmenu

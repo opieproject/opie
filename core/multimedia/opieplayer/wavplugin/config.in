@@ -1,4 +1,0 @@
-  config WAVPLUGIN
-    boolean "wavplugin"
-    default "y"
-    depends LIBQPE && LIBOPIE

@@ -1,4 +1,0 @@
-  config OPIEFTP
-    boolean "opieftp"
-    default "y"
-    depends LIBQPE && LIBOPIE

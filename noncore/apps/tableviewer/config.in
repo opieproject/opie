@@ -1,4 +1,0 @@
-  config TABLEVIEWER
-    boolean "tableviewer"
-    default "y"
-    depends LIBQPE && LIBOPIE

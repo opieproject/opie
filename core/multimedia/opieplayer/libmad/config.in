@@ -1,4 +1,0 @@
-  config LIBMAD
-    boolean "libmad"
-    default "y"
-    depends LIBQPE && LIBOPIE

@@ -1,4 +1,0 @@
-  config LAUNCHER
-    boolean "launcher"
-    default "y"
-    depends LIBQPE && LIBOPIE

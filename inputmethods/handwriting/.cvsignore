@@ -1,5 +1,0 @@
-moc_*
-*.moc
-Makefile*
-qimpenprefbase.h
-qimpenprefbase.cpp

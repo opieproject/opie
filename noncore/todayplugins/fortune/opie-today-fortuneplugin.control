@@ -1,8 +1,0 @@
-Files: plugins/today/libtodayfortuneplugin.so*
-Priority: optional
-Section: opie/applications
-Maintainer: Chris Larson <kergoth@handhelds.org>
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-today, fortune (<=9708-0.1) | fortune-mod
-Description: 'fortune' plugin for today

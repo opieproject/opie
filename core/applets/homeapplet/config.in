@@ -1,4 +1,0 @@
-  config HOMEAPPLET
-    boolean "homeapplet"
-    default "y"
-    depends LIBQPE && LIBOPIE

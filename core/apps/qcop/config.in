@@ -1,4 +1,0 @@
-  config QCOP
-    boolean "qcop"
-    default "y"
-    depends LIBQPE && LIBOPIE

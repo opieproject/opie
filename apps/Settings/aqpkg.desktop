@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=Application
-Exec=aqpkg
-MimeType=application/ipkg
-MimeTypeIcons=aqpkg/ipkg
-Icon=aqpkg/aqpkg
-Name=AQPkg

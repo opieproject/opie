@@ -1,4 +1,0 @@
-  config CITYTIME
-    boolean "citytime"
-    default "y"
-    depends LIBQPE && LIBOPIE

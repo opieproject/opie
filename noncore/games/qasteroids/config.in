@@ -1,4 +1,0 @@
-  config QASTEROIDS
-    boolean "qasteroids"
-    default "y"
-    depends LIBQPE && LIBOPIE

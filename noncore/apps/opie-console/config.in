@@ -1,8 +1,0 @@
-menu "opie-console"
-
-  config #TEST
-    boolean "opie-console"
-    default "y"
-    depends LIBQPE && LIBOPIE
-  source noncore/apps/opie-console/test/config.in
-endmenu

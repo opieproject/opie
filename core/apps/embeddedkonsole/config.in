@@ -1,4 +1,0 @@
-  config EMBEDDEDKONSOLE
-    boolean "embeddedkonsole"
-    default "y"
-    depends LIBQPE && LIBOPIE

@@ -1,7 +1,0 @@
-menu "batteryapplet"
-
-  config BATTERYAPPLET
-    boolean "batteryapplet"
-    default "y"
-    depends LIBQPE && LIBOPIE
-endmenu

@@ -1,4 +1,0 @@
-  config KCHECKERS
-    boolean "kcheckers"
-    default "y"
-    depends LIBQPE && LIBOPIE

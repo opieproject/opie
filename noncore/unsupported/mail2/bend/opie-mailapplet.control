@@ -1,9 +1,0 @@
-Files: plugins/applets/libbend.so*
-Priority: optional
-Section: opie/applications
-Maintainer: Constantin Bergemann <cbergemann@lisa.de>
-Architecture: arm
-Version: 0.0.9-$SUB_VERSION
-Depends: opie-base libopie opie-mail2
-Description: A Biff-Like mailchecker
-License: LGPL
