@@ -99,7 +99,7 @@
     </message>
     <message>
         <source>Do you want to restart Opie now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Reiniciar o Opie agora?</translation>
     </message>
 </context>
 <context>

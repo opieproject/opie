@@ -3,7 +3,7 @@
     <name>VolumeControl</name>
     <message>
         <source>Mute</source>
-        <translation>Silêncio</translation>
+        <translation type="obsolete">Silêncio</translation>
     </message>
     <message>
         <source>Enable Sounds for:</source>
@@ -19,7 +19,11 @@
     </message>
     <message>
         <source>Screen taps</source>
-        <translation>Toques de Caneta</translation>
+        <translation type="obsolete">Toques de Caneta</translation>
+    </message>
+    <message>
+        <source>Screen Taps</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -3,7 +3,7 @@
     <name>ScreenshotControl</name>
     <message>
         <source>Snapshot</source>
-        <translation type="unfinished">Grava Ecrâ</translation>
+        <translation>Grava Ecrâ</translation>
     </message>
 </context>
 </TS>

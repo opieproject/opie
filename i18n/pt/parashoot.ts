@@ -18,7 +18,10 @@
        Your Score:  %1
  Parachuters Killed: %2
         Accuracy: %3% </source>
-        <translation type="unfinished"></translation>
+        <translation>Perdeu!
+Pontuação: %1
+Paraquedistas Atingidos: %2
+Pontaria: %3%</translation>
     </message>
 </context>
 </TS>
