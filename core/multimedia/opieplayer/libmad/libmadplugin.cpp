@@ -344,7 +344,7 @@ int LibMadPlugin::http_open(const QString& path ) {
 
 bool LibMadPlugin::open( const QString& path ) {
     debugMsg( "LibMadPlugin::open" );
-    Config cfg("MediaPlayer");
+    Config cfg("OpiePlayer");
     cfg.setGroup("Options");
     bufferSize = cfg.readNumEntry("MPeg_BufferSize",MPEG_BUFFER_SIZE);
     qDebug("buffer size is %d", bufferSize);
