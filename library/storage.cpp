@@ -314,66 +314,6 @@ bool StorageInfo::hasMmc()
     return hasMmc;
 }
 
-/*!
-* @fn QString StorageInfo::getCfPath()
-* @brief returns the Mount-Path of Cf Card
-*
-*/
-QString StorageInfo::getCfPath()
-{
-    QString r = "";
-
-    for (QListIterator<FileSystem> i(mFileSystems); i.current(); ++i)
-    {
-        if ( (*i)->disk().left( 8 ) == "/dev/hda"  )
-        {
-            r = (*i)->path();
-            break;
-        }
-    }
-    return r;
-}
-
-/*!
-* @fn QString StorageInfo::getSdPath()
-* @brief returns the Mount-Path of Sd Card
-*
-*/
-QString StorageInfo::getSdPath()
-{
-    QString r = "";
-
-    for (QListIterator<FileSystem> i(mFileSystems); i.current(); ++i)
-    {
-        if ( (*i)->disk().left( 9 ) == "/dev/mmcd" )
-        {
-            r = (*i)->path();
-            break;
-        }
-    }
-    return r;
-}
-
-/*!
-* @fn QString StorageInfo::getMmcPath()
-* @brief returns the Mount-Path of Mmc Card
-*
-*/
-QString StorageInfo::getMmcPath()
-{
-    QString r = "";
-
-    for (QListIterator<FileSystem> i(mFileSystems); i.current(); ++i)
-    {
-        if ( (*i)->disk().left( 14 ) == "/dev/mmc/part1" )
-        {
-            r = (*i)->path();
-            break;
-        }
-    }
-    return r;
-}
-
 /*! \fn const QList<FileSystem> &StorageInfo::fileSystems() const
   Returns a list of all available mounted file systems.
 

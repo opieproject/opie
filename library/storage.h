@@ -37,10 +37,6 @@ public:
     static bool hasCf();
     static bool hasSd();
     static bool hasMmc();
-
-    QString getCfPath();
-    QString getSdPath();
-    QString getMmcPath();
 signals:
     void disksChanged();
 
