@@ -27,3 +27,11 @@ void ABluetoothBNEP::commit( void ) {
     if( GUI && GUI->commit( Data ) )
       setModified( 1 );
 }
+
+bool ABluetoothBNEP::hasDataFor( const QString & ) {
+    return 0;
+}
+
+bool ABluetoothBNEP::generateDataForCommonFile( SystemFile & , long ){
+    return 0;
+}

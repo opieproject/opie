@@ -28,3 +28,11 @@ void ABluetoothRFCOMM::commit( void ) {
     if( GUI->commit( Data ) )
       setModified( 1 );
 }
+
+bool ABluetoothRFCOMM::hasDataFor( const QString & ) {
+    return 0;
+}
+
+bool ABluetoothRFCOMM::generateDataForCommonFile( SystemFile & , long ){
+    return 0;
+}
