@@ -31,10 +31,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Backup Successfull.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Backup and Restore</source>
         <translation type="unfinished"></translation>
     </message>
@@ -51,7 +47,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Restore Successfull.</source>
+        <source>Backup Successful.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restore Successful.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

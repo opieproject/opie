@@ -145,10 +145,6 @@ Quit anyway?</source>
         <source>Sunday</source>
         <translation>FOO</translation>
     </message>
-    <message>
-        <source>DateBookDayHeaderBase</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>DateBookDayView</name>

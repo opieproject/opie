@@ -39,27 +39,27 @@
     </message>
     <message>
         <source>44100</source>
-        <translation>44100</translation>
+        <translation type="obsolete">44100</translation>
     </message>
     <message>
         <source>32000</source>
-        <translation>32000</translation>
+        <translation type="obsolete">32000</translation>
     </message>
     <message>
         <source>22050</source>
-        <translation>22050</translation>
+        <translation type="obsolete">22050</translation>
     </message>
     <message>
         <source>16000</source>
-        <translation>16000</translation>
+        <translation type="obsolete">16000</translation>
     </message>
     <message>
         <source>11025</source>
-        <translation>11025</translation>
+        <translation type="obsolete">11025</translation>
     </message>
     <message>
         <source>8000</source>
-        <translation>8000</translation>
+        <translation type="obsolete">8000</translation>
     </message>
     <message>
         <source>Limit Size</source>
@@ -79,11 +79,11 @@
     </message>
     <message>
         <source>16</source>
-        <translation>16</translation>
+        <translation type="obsolete">16</translation>
     </message>
     <message>
         <source>8</source>
-        <translation>8</translation>
+        <translation type="obsolete">8</translation>
     </message>
     <message>
         <source>In</source>

@@ -36,7 +36,7 @@
     </message>
     <message>
         <source>Backup Successfull.</source>
-        <translation>Backup gennemført.</translation>
+        <translation type="obsolete">Backup gennemført.</translation>
     </message>
     <message>
         <source>Please select something to restore.</source>
@@ -51,7 +51,11 @@
         <translation>Kunne ikke åbne filen %1</translation>
     </message>
     <message>
-        <source>Restore Successfull.</source>
+        <source>Backup Successful.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restore Successful.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

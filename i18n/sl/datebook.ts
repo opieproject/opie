@@ -151,10 +151,6 @@ Izhod?</translation>
         <source>Sunday</source>
         <translation>Nedelja</translation>
     </message>
-    <message>
-        <source>DateBookDayHeaderBase</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>DateBookDayView</name>

@@ -497,143 +497,143 @@
     </message>
     <message>
         <source>&amp;Standard</source>
-        <translation>E&amp;standard</translation>
+        <translation type="obsolete">E&amp;standard</translation>
     </message>
     <message>
         <source>Summation</source>
-        <translation>Suma</translation>
+        <translation type="obsolete">Suma</translation>
     </message>
     <message>
         <source>&amp;Summation</source>
-        <translation>&amp;Suma</translation>
+        <translation type="obsolete">&amp;Suma</translation>
     </message>
     <message>
         <source>Absolute Value</source>
-        <translation>Valor absoluto</translation>
+        <translation type="obsolete">Valor absoluto</translation>
     </message>
     <message>
         <source>&amp;Absolute</source>
-        <translation>&amp;Asoluto</translation>
+        <translation type="obsolete">&amp;Asoluto</translation>
     </message>
     <message>
         <source>Sine</source>
-        <translation>Seno</translation>
+        <translation type="obsolete">Seno</translation>
     </message>
     <message>
         <source>Si&amp;ne</source>
-        <translation>Se&amp;no</translation>
+        <translation type="obsolete">Se&amp;no</translation>
     </message>
     <message>
         <source>Arc Sine</source>
-        <translation>Arco seno</translation>
+        <translation type="obsolete">Arco seno</translation>
     </message>
     <message>
         <source>A&amp;rc Sine</source>
-        <translation>A&amp;rco seno</translation>
+        <translation type="obsolete">A&amp;rco seno</translation>
     </message>
     <message>
         <source>Cosine</source>
-        <translation>Coseno</translation>
+        <translation type="obsolete">Coseno</translation>
     </message>
     <message>
         <source>&amp;Cosine</source>
-        <translation>&amp;Coseno</translation>
+        <translation type="obsolete">&amp;Coseno</translation>
     </message>
     <message>
         <source>ArcCosine</source>
-        <translation>Arco coseno</translation>
+        <translation type="obsolete">Arco coseno</translation>
     </message>
     <message>
         <source>Arc Cos&amp;ine</source>
-        <translation>Arco cos&amp;eno</translation>
+        <translation type="obsolete">Arco cos&amp;eno</translation>
     </message>
     <message>
         <source>Tangent</source>
-        <translation>Tangente</translation>
+        <translation type="obsolete">Tangente</translation>
     </message>
     <message>
         <source>&amp;Tangent</source>
-        <translation>&amp;Tangente</translation>
+        <translation type="obsolete">&amp;Tangente</translation>
     </message>
     <message>
         <source>Arc Tangent</source>
-        <translation>Arco tangente</translation>
+        <translation type="obsolete">Arco tangente</translation>
     </message>
     <message>
         <source>Arc Tan&amp;gent</source>
-        <translation>Arco tan&amp;gente</translation>
+        <translation type="obsolete">Arco tan&amp;gente</translation>
     </message>
     <message>
         <source>Arc Tangent of Coordinates</source>
-        <translation>Arco tangente de coordenadas</translation>
+        <translation type="obsolete">Arco tangente de coordenadas</translation>
     </message>
     <message>
         <source>C&amp;oor. Arc Tangent</source>
-        <translation>Arco tangente co&amp;or</translation>
+        <translation type="obsolete">Arco tangente co&amp;or</translation>
     </message>
     <message>
         <source>Exponential</source>
-        <translation>Exponencial</translation>
+        <translation type="obsolete">Exponencial</translation>
     </message>
     <message>
         <source>&amp;Exponential</source>
-        <translation>&amp;Exponencial</translation>
+        <translation type="obsolete">&amp;Exponencial</translation>
     </message>
     <message>
         <source>Logarithm</source>
-        <translation>Logaritmo</translation>
+        <translation type="obsolete">Logaritmo</translation>
     </message>
     <message>
         <source>&amp;Logarithm</source>
-        <translation>&amp;Logaritmo</translation>
+        <translation type="obsolete">&amp;Logaritmo</translation>
     </message>
     <message>
         <source>Power</source>
-        <translation>Potencia</translation>
+        <translation type="obsolete">Potencia</translation>
     </message>
     <message>
         <source>&amp;Power</source>
-        <translation>&amp;Potencia</translation>
+        <translation type="obsolete">&amp;Potencia</translation>
     </message>
     <message>
         <source>&amp;Mathematical</source>
-        <translation>&amp;Matemática</translation>
+        <translation type="obsolete">&amp;Matemática</translation>
     </message>
     <message>
         <source>Average</source>
-        <translation>Media</translation>
+        <translation type="obsolete">Media</translation>
     </message>
     <message>
         <source>&amp;Average</source>
-        <translation>Medi&amp;a</translation>
+        <translation type="obsolete">Medi&amp;a</translation>
     </message>
     <message>
         <source>Maximum</source>
-        <translation>Máximo</translation>
+        <translation type="obsolete">Máximo</translation>
     </message>
     <message>
         <source>Ma&amp;ximum</source>
-        <translation>Má&amp;ximo</translation>
+        <translation type="obsolete">Má&amp;ximo</translation>
     </message>
     <message>
         <source>Minimum</source>
-        <translation>Mínimo</translation>
+        <translation type="obsolete">Mínimo</translation>
     </message>
     <message>
         <source>&amp;Minimum</source>
-        <translation>&amp;Mínimo</translation>
+        <translation type="obsolete">&amp;Mínimo</translation>
     </message>
     <message>
         <source>Count</source>
-        <translation>Contador</translation>
+        <translation type="obsolete">Contador</translation>
     </message>
     <message>
         <source>&amp;Count</source>
-        <translation>&amp;Contador</translation>
+        <translation type="obsolete">&amp;Contador</translation>
     </message>
     <message>
         <source>&amp;Statistical</source>
-        <translation>E&amp;stadístico</translation>
+        <translation type="obsolete">E&amp;stadístico</translation>
     </message>
     <message>
         <source>Functions</source>
@@ -719,6 +719,386 @@ Este producto está bajo licencia GPL. Es distribuible libremente. Si quiere la 
 
 http://qtopia.sitebest.com</translation>
     </message>
+    <message>
+        <source>Import Excel file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import E&amp;xcel file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Simple</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ABS(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CEILING(x,acc)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FACT(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FLOOR(x,acc)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>INT(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MOD(x,y)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ROUND(x,digits)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SIGN(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>EXP(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LN(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LOG(x,b)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LOG10(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>POWER(x,y)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SQRT(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DEGREES(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RADIANS(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PI()</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RAND()</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RANDBETWEEN(a,b)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>S&amp;tandard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>AND(x1,x2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>NOT(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OR(x1,x2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>IF(compare,val1,val2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>INDEX(range,index)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ISBLANK(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ISNUMBER(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>EVEN(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ISEVEN(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ODD(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ISODD(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Logical-&amp;Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SIN(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>COS(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TAN(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ASIN(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ACOS(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ATAN(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ATAN2(x,y)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SINH(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>COSH(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TANH(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ACOSH(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ASINH(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ATANH(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Trigonometric</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LEN(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LEFT(s,num)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RIGHT(s,num)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MID(s,pos,len)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CONCATENATE(s1,s2..)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>EXACT(s1,s2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FIND(what,where,pos)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>REPLACE(s,pos,len,ns)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>REPT(s,n)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>UPPER(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LOWER(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Strings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>AVERAGE(range)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>COUNT(range)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>COUNTIF(range,eqls)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MAX(range)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MIN(range)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SUM(range)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SUMSQ(range)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>VAR(range)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>VARP(range)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>STDEV(range)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>STDEVP(range)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SKEW(range)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>KURT(range)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sta&amp;tistical</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>BESSELI(x,n)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>BESSELJ(x,n)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>BESSELK(x,n)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>BESSELY(x,n)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>BETAI(x,a,b)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ERF(a,b)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ERFC(a,b)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GAMMALN(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GAMMAP(x,a)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GAMMAQ(x,a)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scienti&amp;fic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>BETADIST(z,a,b,Q?)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CHI2DIST(x,n,Q?)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CHIDIST(x,n,Q?)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FDIST(z,deg1,deg2,Q?)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GAMMADIST(x,a,b,Q?)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>NORMALDIST(x,m,s,Q?)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PHI(x,Q?)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>POISSON(x,n,Q?)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Distributions</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Sheet</name>
@@ -728,7 +1108,7 @@ http://qtopia.sitebest.com</translation>
     </message>
     <message>
         <source>Syntax error!</source>
-        <translation>¡Error sintáctico!</translation>
+        <translation type="obsolete">¡Error sintáctico!</translation>
     </message>
     <message>
         <source>Search key not found!</source>

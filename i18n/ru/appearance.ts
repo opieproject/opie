@@ -83,19 +83,19 @@
     </message>
     <message>
         <source>Restart</source>
-        <translation>Перегрузить</translation>
+        <translation type="obsolete">Перегрузить</translation>
     </message>
     <message>
         <source>Do you want to restart %1 now?</source>
-        <translation>Вы хотите перезагрузить %1?</translation>
+        <translation type="obsolete">Вы хотите перезагрузить %1?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Да</translation>
+        <translation type="obsolete">Да</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>Нет</translation>
+        <translation type="obsolete">Нет</translation>
     </message>
     <message>
         <source>Save Scheme</source>

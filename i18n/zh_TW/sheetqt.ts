@@ -497,143 +497,143 @@
     </message>
     <message>
         <source>&amp;Standard</source>
-        <translation>標準(&amp;S)</translation>
+        <translation type="obsolete">標準(&amp;S)</translation>
     </message>
     <message>
         <source>Summation</source>
-        <translation>總和</translation>
+        <translation type="obsolete">總和</translation>
     </message>
     <message>
         <source>&amp;Summation</source>
-        <translation>總和(&amp;S)</translation>
+        <translation type="obsolete">總和(&amp;S)</translation>
     </message>
     <message>
         <source>Absolute Value</source>
-        <translation>絕對值</translation>
+        <translation type="obsolete">絕對值</translation>
     </message>
     <message>
         <source>&amp;Absolute</source>
-        <translation>絕對值(&amp;A)</translation>
+        <translation type="obsolete">絕對值(&amp;A)</translation>
     </message>
     <message>
         <source>Sine</source>
-        <translation>正弦</translation>
+        <translation type="obsolete">正弦</translation>
     </message>
     <message>
         <source>Si&amp;ne</source>
-        <translation>正弦(&amp;N)</translation>
+        <translation type="obsolete">正弦(&amp;N)</translation>
     </message>
     <message>
         <source>Arc Sine</source>
-        <translation>反正弦</translation>
+        <translation type="obsolete">反正弦</translation>
     </message>
     <message>
         <source>A&amp;rc Sine</source>
-        <translation>反正弦(&amp;R)</translation>
+        <translation type="obsolete">反正弦(&amp;R)</translation>
     </message>
     <message>
         <source>Cosine</source>
-        <translation>餘弦</translation>
+        <translation type="obsolete">餘弦</translation>
     </message>
     <message>
         <source>&amp;Cosine</source>
-        <translation>餘弦(&amp;C)</translation>
+        <translation type="obsolete">餘弦(&amp;C)</translation>
     </message>
     <message>
         <source>ArcCosine</source>
-        <translation>反餘弦</translation>
+        <translation type="obsolete">反餘弦</translation>
     </message>
     <message>
         <source>Arc Cos&amp;ine</source>
-        <translation>反餘弦(&amp;I)</translation>
+        <translation type="obsolete">反餘弦(&amp;I)</translation>
     </message>
     <message>
         <source>Tangent</source>
-        <translation>正切</translation>
+        <translation type="obsolete">正切</translation>
     </message>
     <message>
         <source>&amp;Tangent</source>
-        <translation>正切(&amp;T)</translation>
+        <translation type="obsolete">正切(&amp;T)</translation>
     </message>
     <message>
         <source>Arc Tangent</source>
-        <translation>反正切</translation>
+        <translation type="obsolete">反正切</translation>
     </message>
     <message>
         <source>Arc Tan&amp;gent</source>
-        <translation>反正切(&amp;G)</translation>
+        <translation type="obsolete">反正切(&amp;G)</translation>
     </message>
     <message>
         <source>Arc Tangent of Coordinates</source>
-        <translation>座標的反正切</translation>
+        <translation type="obsolete">座標的反正切</translation>
     </message>
     <message>
         <source>C&amp;oor. Arc Tangent</source>
-        <translation>座標的反正切(&amp;O)</translation>
+        <translation type="obsolete">座標的反正切(&amp;O)</translation>
     </message>
     <message>
         <source>Exponential</source>
-        <translation>指數</translation>
+        <translation type="obsolete">指數</translation>
     </message>
     <message>
         <source>&amp;Exponential</source>
-        <translation>指數(&amp;E)</translation>
+        <translation type="obsolete">指數(&amp;E)</translation>
     </message>
     <message>
         <source>Logarithm</source>
-        <translation>對數</translation>
+        <translation type="obsolete">對數</translation>
     </message>
     <message>
         <source>&amp;Logarithm</source>
-        <translation>對數(&amp;L)</translation>
+        <translation type="obsolete">對數(&amp;L)</translation>
     </message>
     <message>
         <source>Power</source>
-        <translation>乘冪</translation>
+        <translation type="obsolete">乘冪</translation>
     </message>
     <message>
         <source>&amp;Power</source>
-        <translation>乘冪(&amp;P)</translation>
+        <translation type="obsolete">乘冪(&amp;P)</translation>
     </message>
     <message>
         <source>&amp;Mathematical</source>
-        <translation>數學的(&amp;M)</translation>
+        <translation type="obsolete">數學的(&amp;M)</translation>
     </message>
     <message>
         <source>Average</source>
-        <translation>平均數</translation>
+        <translation type="obsolete">平均數</translation>
     </message>
     <message>
         <source>&amp;Average</source>
-        <translation>平均數(&amp;A)</translation>
+        <translation type="obsolete">平均數(&amp;A)</translation>
     </message>
     <message>
         <source>Maximum</source>
-        <translation>最大值</translation>
+        <translation type="obsolete">最大值</translation>
     </message>
     <message>
         <source>Ma&amp;ximum</source>
-        <translation>最大值(&amp;X)</translation>
+        <translation type="obsolete">最大值(&amp;X)</translation>
     </message>
     <message>
         <source>Minimum</source>
-        <translation>最小值</translation>
+        <translation type="obsolete">最小值</translation>
     </message>
     <message>
         <source>&amp;Minimum</source>
-        <translation>最小值(&amp;M)</translation>
+        <translation type="obsolete">最小值(&amp;M)</translation>
     </message>
     <message>
         <source>Count</source>
-        <translation>計數</translation>
+        <translation type="obsolete">計數</translation>
     </message>
     <message>
         <source>&amp;Count</source>
-        <translation>計數(&amp;C)</translation>
+        <translation type="obsolete">計數(&amp;C)</translation>
     </message>
     <message>
         <source>&amp;Statistical</source>
-        <translation>統計(&amp;S)</translation>
+        <translation type="obsolete">統計(&amp;S)</translation>
     </message>
     <message>
         <source>Functions</source>
@@ -719,6 +719,386 @@ QWDC Beta Winner (以 Sheet/Qt)
 
 http://qtopia.sitebest.com</translation>
     </message>
+    <message>
+        <source>Import Excel file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import E&amp;xcel file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Simple</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ABS(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CEILING(x,acc)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FACT(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FLOOR(x,acc)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>INT(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MOD(x,y)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ROUND(x,digits)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SIGN(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>EXP(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LN(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LOG(x,b)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LOG10(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>POWER(x,y)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SQRT(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DEGREES(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RADIANS(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PI()</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RAND()</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RANDBETWEEN(a,b)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>S&amp;tandard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>AND(x1,x2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>NOT(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OR(x1,x2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>IF(compare,val1,val2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>INDEX(range,index)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ISBLANK(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ISNUMBER(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>EVEN(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ISEVEN(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ODD(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ISODD(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Logical-&amp;Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SIN(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>COS(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TAN(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ASIN(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ACOS(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ATAN(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ATAN2(x,y)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SINH(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>COSH(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TANH(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ACOSH(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ASINH(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ATANH(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Trigonometric</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LEN(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LEFT(s,num)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RIGHT(s,num)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MID(s,pos,len)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CONCATENATE(s1,s2..)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>EXACT(s1,s2)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FIND(what,where,pos)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>REPLACE(s,pos,len,ns)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>REPT(s,n)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>UPPER(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LOWER(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Strings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>AVERAGE(range)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>COUNT(range)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>COUNTIF(range,eqls)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MAX(range)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MIN(range)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SUM(range)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SUMSQ(range)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>VAR(range)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>VARP(range)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>STDEV(range)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>STDEVP(range)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SKEW(range)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>KURT(range)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sta&amp;tistical</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>BESSELI(x,n)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>BESSELJ(x,n)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>BESSELK(x,n)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>BESSELY(x,n)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>BETAI(x,a,b)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ERF(a,b)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ERFC(a,b)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GAMMALN(x)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GAMMAP(x,a)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GAMMAQ(x,a)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scienti&amp;fic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>BETADIST(z,a,b,Q?)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CHI2DIST(x,n,Q?)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CHIDIST(x,n,Q?)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FDIST(z,deg1,deg2,Q?)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GAMMADIST(x,a,b,Q?)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>NORMALDIST(x,m,s,Q?)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PHI(x,Q?)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>POISSON(x,n,Q?)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Distributions</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Sheet</name>
@@ -728,7 +1108,7 @@ http://qtopia.sitebest.com</translation>
     </message>
     <message>
         <source>Syntax error!</source>
-        <translation>語法錯誤!</translation>
+        <translation type="obsolete">語法錯誤!</translation>
     </message>
     <message>
         <source>Search key not found!</source>

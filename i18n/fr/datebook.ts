@@ -152,10 +152,6 @@ Quitter ?</translation>
         <source>Sunday</source>
         <translation>Dimanche</translation>
     </message>
-    <message>
-        <source>DateBookDayHeaderBase</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>DateBookDayView</name>

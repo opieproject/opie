@@ -39,11 +39,11 @@
     </message>
     <message>
         <source>Switch to Local</source>
-        <translation>Перекл. на местную</translation>
+        <translation type="obsolete">Перекл. на местную</translation>
     </message>
     <message>
         <source>Switch to Remote</source>
-        <translation>Перекл. на удаленную</translation>
+        <translation type="obsolete">Перекл. на удаленную</translation>
     </message>
     <message>
         <source>Size</source>
@@ -270,6 +270,33 @@ and all it&apos;s contents ?</source>
         <source> As</source>
         <translation>Как</translation>
     </message>
+    <message>
+        <source>AdvancedFm :: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> kB free</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Switch to View 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Switch to View 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not copy 
+%1 
+to 
+%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not Yet Implemented</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Output</name>
@@ -360,6 +387,10 @@ Finished
     <message>
         <source>Error setting mode</source>
         <translation>Ошибка настройки режима</translation>
+    </message>
+    <message>
+        <source>filePermissions</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -37,7 +37,7 @@
     </message>
     <message>
         <source>Backup Successfull.</source>
-        <translation>Backup succesvol.</translation>
+        <translation type="obsolete">Backup succesvol.</translation>
     </message>
     <message>
         <source>Please select something to restore.</source>
@@ -53,7 +53,15 @@
     </message>
     <message>
         <source>Restore Successfull.</source>
-        <translation>Herstel sucsesvol.</translation>
+        <translation type="obsolete">Herstel sucsesvol.</translation>
+    </message>
+    <message>
+        <source>Backup Successful.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restore Successful.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

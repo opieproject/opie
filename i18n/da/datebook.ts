@@ -151,10 +151,6 @@ Afslut alligevel?</translation>
         <source>Sunday</source>
         <translation>Søndag</translation>
     </message>
-    <message>
-        <source>DateBookDayHeaderBase</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>DateBookDayView</name>

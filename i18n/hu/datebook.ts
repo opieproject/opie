@@ -150,10 +150,6 @@ Mégis kilép?</translation>
         <source>Sunday</source>
         <translation>Vasárnap</translation>
     </message>
-    <message>
-        <source>DateBookDayHeaderBase</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>DateBookDayView</name>

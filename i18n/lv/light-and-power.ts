@@ -96,10 +96,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>CPU frequency</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Warnings</source>
         <translation type="unfinished"></translation>
     </message>
@@ -129,6 +125,22 @@
     </message>
     <message>
         <source>critical power warning at</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>On closing the hinge</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ignore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>display off</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>suspend</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -151,10 +151,6 @@ longa que o intervalo entre repetições.</translation>
         <source>Thursday</source>
         <translation>Quinta</translation>
     </message>
-    <message>
-        <source>DateBookDayHeaderBase</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>DateBookDayView</name>

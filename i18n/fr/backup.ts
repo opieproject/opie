@@ -38,7 +38,7 @@
     </message>
     <message>
         <source>Backup Successfull.</source>
-        <translation>Sauvegarde Effectuée.</translation>
+        <translation type="obsolete">Sauvegarde Effectuée.</translation>
     </message>
     <message>
         <source>Please select something to restore.</source>
@@ -56,7 +56,15 @@
     </message>
     <message>
         <source>Restore Successfull.</source>
-        <translation>Restauration effectuée.</translation>
+        <translation type="obsolete">Restauration effectuée.</translation>
+    </message>
+    <message>
+        <source>Backup Successful.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restore Successful.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

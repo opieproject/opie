@@ -218,7 +218,7 @@ Quit Anyway?</source>
     </message>
     <message>
         <source>Description</source>
-        <translation>Описание</translation>
+        <translation type="obsolete">Описание</translation>
     </message>
     <message>
         <source>Deadline</source>
@@ -335,6 +335,10 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     <message>
         <source>Data can&apos;t be edited, currently syncing</source>
         <translation>Не могу изменить данные, идет синхронизация</translation>
+    </message>
+    <message>
+        <source>Summary</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

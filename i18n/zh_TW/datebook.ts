@@ -148,10 +148,6 @@ Quit anyway?</translation>
         <source>Sunday</source>
         <translation>天</translation>
     </message>
-    <message>
-        <source>DateBookDayHeaderBase</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>DateBookDayView</name>

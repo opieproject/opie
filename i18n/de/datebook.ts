@@ -151,10 +151,6 @@ Trozdem beenden?</translation>
         <source>Sunday</source>
         <translation>Sonntag</translation>
     </message>
-    <message>
-        <source>DateBookDayHeaderBase</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>DateBookDayView</name>

@@ -151,10 +151,6 @@ Uscire comunque?</translation>
         <source>Sunday</source>
         <translation>Domenica</translation>
     </message>
-    <message>
-        <source>DateBookDayHeaderBase</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>DateBookDayView</name>

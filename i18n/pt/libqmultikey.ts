@@ -53,6 +53,14 @@
         <source>Text Color</source>
         <translation>Cor do Texto</translation>
     </message>
+    <message>
+        <source>Move Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move Down</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>InputMethods</name>

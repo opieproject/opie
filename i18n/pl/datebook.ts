@@ -150,10 +150,6 @@ Wyjsc ?</translation>
         <source>Sunday</source>
         <translation>Niedziela</translation>
     </message>
-    <message>
-        <source>DateBookDayHeaderBase</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>DateBookDayView</name>

@@ -14,10 +14,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>ESS-ID</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>MAC</source>
         <translation type="unfinished"></translation>
     </message>
@@ -87,6 +83,18 @@
     </message>
     <message>
         <source>&amp;Reject</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SSID</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rescan Neighbourhood</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chn</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

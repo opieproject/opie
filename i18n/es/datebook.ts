@@ -149,10 +149,6 @@ Libere espacio y vuelva a intentarlo.
         <source>Sunday</source>
         <translation>Domingo</translation>
     </message>
-    <message>
-        <source>DateBookDayHeaderBase</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>DateBookDayView</name>
