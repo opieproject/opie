@@ -9,11 +9,11 @@
 /* This file is part of Konsole - an X terminal for KDE                       */
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
-/*									      */
+/*                        */
 /* Ported Konsole to Qt/Embedded                                              */
-/*									      */
+/*                        */
 /* Copyright (C) 2000 by John Ryland <jryland@trolltech.com>                  */
-/*									      */
+/*                        */
 /* -------------------------------------------------------------------------- */
 
 #include "TEHistory.h"
@@ -117,18 +117,24 @@ bool HistoryBuffer::hasScroll()
 void HistoryBuffer::add(const unsigned char* bytes, int len)
 { int rc;
   assert(hasScroll());
-  rc = lseek(ion,length,SEEK_SET); if (rc < 0) { perror("HistoryBuffer::add.seek"); setScroll(FALSE); return; }
-  rc = write(ion,bytes,len);       if (rc < 0) { perror("HistoryBuffer::add.write"); setScroll(FALSE); return; }
+  rc = lseek( ion, length, SEEK_SET);
+  if (rc < 0) { perror("HistoryBuffer::add.seek"); setScroll(FALSE); return; }
+  rc = write( ion, bytes, len);
+  if (rc < 0) { perror("HistoryBuffer::add.write"); setScroll(FALSE); return; }
   length += rc;
 }
 
-void HistoryBuffer::get(unsigned char* bytes, int len, int loc)
-{ int rc;
+void HistoryBuffer::get(unsigned char* bytes, int len, int loc) {
+    int rc;
   assert(hasScroll());
+//  qDebug("history get len %d, loc %d, length %d", len, loc, length);
   if (loc < 0 || len < 0 || loc + len > length)
-    fprintf(stderr,"getHist(...,%d,%d): invalid args.\n",len,loc);
-  rc = lseek(ion,loc,SEEK_SET); if (rc < 0) { perror("HistoryBuffer::get.seek"); setScroll(FALSE); return; }
-  rc = read(ion,bytes,len);     if (rc < 0) { perror("HistoryBuffer::get.read"); setScroll(FALSE); return; }
+     fprintf(stderr,"getHist(...,%d,%d): invalid args.\n",len,loc);
+     
+  rc = lseek( ion, loc, SEEK_SET);
+  if (rc < 0) { perror("HistoryBuffer::get.seek"); setScroll(FALSE); return; }
+  rc = read( ion, bytes, len);
+  if (rc < 0) { perror("HistoryBuffer::get.read"); setScroll(FALSE); return; }
 }
 
 int HistoryBuffer::len()
@@ -195,7 +201,8 @@ int HistoryScroll::startOfLine(int lineno)
 void HistoryScroll::getCells(int lineno, int colno, int count, ca res[])
 {
   assert(hasScroll());
-  cells.get((unsigned char*)res,count*sizeof(ca),startOfLine(lineno)+colno*sizeof(ca));
+//get(unsigned char* bytes, int len, int loc)   
+  cells.get( (unsigned char*)res, count * sizeof(ca), startOfLine( lineno) + colno * sizeof(ca) );
 }
 
 void HistoryScroll::addCells(ca text[], int count)

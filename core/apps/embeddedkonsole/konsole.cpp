@@ -358,8 +358,20 @@ void Konsole::init(const char* _pgm, QStrList & _args)
   scrollMenu->insertItem(tr( "None" ));
   scrollMenu->insertItem(tr( "Left" ));
   scrollMenu->insertItem(tr( "Right" ));
+  scrollMenu->insertSeparator(4);
+  scrollMenu->insertItem(tr( "Horizontal" ));
+ 
   configMenu->insertItem(tr( "ScrollBar" ),scrollMenu);
-
+//scrollMenuSelected(-29);
+//   cfg.setGroup("ScrollBar");
+//   if(cfg.readBoolEntry("HorzScroll",0)) {
+//       if(cfg.readNumEntry("Position",2) == 0)
+//           te->setScrollbarLocation(1);
+//       else
+//           te->setScrollbarLocation(0);
+//       te->setScrollbarLocation( cfg.readNumEntry("Position",2));
+//       te->setWrapAt(120);
+//   }
       // create applications /////////////////////////////////////////////////////
   setCentralWidget(tab);
 
@@ -372,7 +384,7 @@ void Konsole::init(const char* _pgm, QStrList & _args)
 
   se_pgm = _pgm;
   se_args = _args;
-
+  se_args.prepend("--login");
 parseCommandLine();
   // read and apply default values ///////////////////////////////////////////
   resize(321, 321); // Dummy.
@@ -508,6 +520,8 @@ QSize Konsole::calcSize(int columns, int lines) {
 
 void Konsole::setColLin(int columns, int lines)
 {
+  qDebug("konsole::setColLin:: Columns %d", columns);
+    
   if ((columns==0) || (lines==0))
   {
     if (defaultSize.isEmpty()) // not in config file : set default value
@@ -552,6 +566,7 @@ void Konsole::setFont(int fontno)
 
 void Konsole::changeColumns(int columns)
 {
+    qDebug("change columns");
   TEWidget* te = getTe();
   if (te != 0) {
   setColLin(columns,te->Lines());
@@ -800,8 +815,7 @@ void Konsole::setColor()
 
 void Konsole::scrollMenuSelected(int index)
 {
-//      QString temp;
-//      qDebug( temp.sprintf("scrollbar menu %d",index));
+    qDebug( "scrollbar menu %d",index);
     TEWidget* te = getTe();
     Config cfg("Konsole");
     cfg.setGroup("ScrollBar");
@@ -817,6 +831,18 @@ void Konsole::scrollMenuSelected(int index)
     case -27:
         te->setScrollbarLocation(2);
         cfg.writeEntry("Position",2);
+        break;
+      case -29: {
+          bool b=cfg.readBoolEntry("HorzScroll",0);
+          cfg.writeEntry("HorzScroll", !b );
+          cfg.write();
+          if(cfg.readNumEntry("Position",2) == 0)
+              te->setScrollbarLocation(1);
+          else
+              te->setScrollbarLocation(0);
+          te->setScrollbarLocation( cfg.readNumEntry("Position",2));
+          te->setWrapAt(120);
+      }
         break;
     };
 

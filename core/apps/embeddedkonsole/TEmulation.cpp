@@ -9,11 +9,11 @@
 /* This file is part of Konsole - an X terminal for KDE                       */
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
-/*									      */
+/*                        */
 /* Ported Konsole to Qt/Embedded                                              */
-/*									      */
+/*                        */
 /* Copyright (C) 2000 by John Ryland <jryland@trolltech.com>                  */
-/*									      */
+/*                        */
 /* -------------------------------------------------------------------------- */
 
 /*! \class TEmulation
@@ -103,20 +103,30 @@ TEmulation::TEmulation(TEWidget* gui)
   connected  = FALSE;
 
   QObject::connect(&bulk_timer, SIGNAL(timeout()), this, SLOT(showBulk()) );
+
   QObject::connect(gui,SIGNAL(changedImageSizeSignal(int,int)),
                    this,SLOT(onImageSizeChange(int,int)));
+
   QObject::connect(gui,SIGNAL(changedHistoryCursor(int)),
                    this,SLOT(onHistoryCursorChange(int)));
+
+  QObject::connect(gui,SIGNAL(changedHorzCursor(int)),
+                   this,SLOT(onHorzCursorChange(int)));
+
   QObject::connect(gui,SIGNAL(keyPressedSignal(QKeyEvent*)),
                    this,SLOT(onKeyPress(QKeyEvent*)));
+
   QObject::connect(gui,SIGNAL(beginSelectionSignal(const int,const int)),
-		   this,SLOT(onSelectionBegin(const int,const int)) );
+       this,SLOT(onSelectionBegin(const int,const int)) );
+
   QObject::connect(gui,SIGNAL(extendSelectionSignal(const int,const int)),
-		   this,SLOT(onSelectionExtend(const int,const int)) );
+       this,SLOT(onSelectionExtend(const int,const int)) );
+
   QObject::connect(gui,SIGNAL(endSelectionSignal(const BOOL)),
-		   this,SLOT(setSelection(const BOOL)) );
+       this,SLOT(setSelection(const BOOL)) );
+
   QObject::connect(gui,SIGNAL(clearSelectionSignal()),
-		   this,SLOT(clearSelection()) );
+       this,SLOT(clearSelection()) );
 }
 
 /*!
@@ -299,8 +309,10 @@ void TEmulation::showBulk()
                   scr->getLines(),
                   scr->getColumns());     // actual refresh
     free(image);
-    //FIXME: check that we do not trigger other draw event here.
+
+      //FIXME: check that we do not trigger other draw event here.
     gui->setScroll(scr->getHistCursor(),scr->getHistLines());
+
   }
 }
 
@@ -339,8 +351,7 @@ void TEmulation::setConnect(bool c)
     and to the related serial line.
 */
 
-void TEmulation::onImageSizeChange(int lines, int columns)
-{
+void TEmulation::onImageSizeChange(int lines, int columns) {
   if (!connected) return;
   screen[0]->resizeImage(lines,columns);
   screen[1]->resizeImage(lines,columns);
@@ -348,15 +359,19 @@ void TEmulation::onImageSizeChange(int lines, int columns)
   emit ImageSizeChanged(lines,columns);   // propagate event to serial line
 }
 
-void TEmulation::onHistoryCursorChange(int cursor)
-{
+void TEmulation::onHistoryCursorChange(int cursor) {
   if (!connected) return;
   scr->setHistCursor(cursor);
   showBulk();
 }
 
-void TEmulation::setColumns(int columns)
-{
+void TEmulation::onHorzCursorChange(int cursor) {
+  if (!connected) return;
+ scr->setHorzCursor(cursor);
+  showBulk();
+}
+
+void TEmulation::setColumns(int columns) {
   //FIXME: this goes strange ways.
   //       Can we put this straight or explain it at least?
   emit changeColumns(columns);

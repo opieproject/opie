@@ -60,7 +60,11 @@ public:
     void setScroll(int cursor, int lines);
     void doScroll(int lines);
 
+    void doHScroll(int lines);
+
+    
     void emitSelection();
+  void setWrapAt(int columns);
 
 public:
 
@@ -76,6 +80,7 @@ public:
     QSize sizeHint() const;
 
 public:
+    bool useHorzScroll;
 
     void Bell();
     void emitText(QString text);
@@ -87,6 +92,7 @@ signals:
     void mouseSignal(int cb, int cx, int cy);
     void changedImageSizeSignal(int lines, int columns);
     void changedHistoryCursor(int value);
+    void changedHorzCursor(int value);
     void configureRequest( TEWidget*, int state, int x, int y );
 
     void clearSelectionSignal();
@@ -96,7 +102,6 @@ signals:
 
 
 protected:
-
     virtual void styleChange( QStyle& );
 
     bool eventFilter( QObject *, QEvent * );
@@ -147,6 +152,7 @@ public slots:
 protected slots:
 
     void scrollChanged(int value);
+    void hScrollChanged(int value);
     void blinkEvent();
 
 private:
@@ -180,9 +186,12 @@ private:
     BOOL    preserve_line_breaks;
 
     QClipboard*    cb;
-    QScrollBar* scrollbar;
-    int         scrollLoc;
+    QScrollBar* scrollbar, *hScrollbar;
+    
+    int         scrollLoc, hScrollLoc;
+  int hposition, vcolumns;
 
+    
 //#define SCRNONE  0
 //#define SCRLEFT  1
 //#define SCRRIGHT 2

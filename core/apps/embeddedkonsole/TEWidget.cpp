@@ -52,6 +52,13 @@
 #include "session.h"
 #include <qpe/config.h>
 
+#include <qpe/resource.h>
+#include <qpe/sound.h>
+
+#ifdef QWS
+#include <qpe/qcopenvelope_qws.h>
+#endif
+
 #include <qcursor.h>
 #include <qregexp.h>
 #include <qpainter.h>
@@ -287,6 +294,13 @@ TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
   scrollbar->setCursor( arrowCursor );
   connect(scrollbar, SIGNAL(valueChanged(int)), this, SLOT(scrollChanged(int)));
 
+  hScrollbar = new QScrollBar(this);
+  hScrollbar->setCursor( arrowCursor );
+  hScrollbar->setOrientation(QScrollBar::Horizontal);
+  hScrollbar->setMaximumHeight(16);
+  
+  connect( hScrollbar, SIGNAL(valueChanged(int)), this, SLOT( hScrollChanged(int)));
+
   Config cfg("Konsole");
   cfg.setGroup("ScrollBar");
   switch( cfg.readNumEntry("Position",2)){
@@ -300,6 +314,8 @@ TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
       scrollLoc = SCRRIGHT;
       break;
   };
+
+  useHorzScroll=cfg.readBoolEntry("HorzScroll",0);
 
   blinkT   = new QTimer(this);
   connect(blinkT, SIGNAL(timeout()), this, SLOT(blinkEvent()));
@@ -315,6 +331,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
   font_h   = 1;
   font_a   = 1;
   word_selection_mode = FALSE;
+  hposition = 0;
 
   setMouseMarks(TRUE);
   setVTFont( QFont("fixed") );
@@ -410,10 +427,7 @@ HCNT("setImage");
   int lins = QMIN(this->lines,  QMAX(0,lines  ));
   int cols = QMIN(this->columns,QMAX(0,columns));
   QChar *disstrU = new QChar[cols];
-
-//{ static int cnt = 0; printf("setImage %d\n",cnt++); }
-  for (y = 0; y < lins; y++)
-  {
+  for (y = 0; y < lins; y++) {
     const ca*       lcl = &image[y*this->columns];
     const ca* const ext = &newimg[y*columns];
     if (!resizing) // not while resizing, we're expecting a paintEvent
@@ -588,9 +602,16 @@ void TEWidget::propagateSize()
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-void TEWidget::scrollChanged(int)
-{
+void TEWidget::scrollChanged(int) {
   emit changedHistoryCursor(scrollbar->value()); //expose
+}
+
+void TEWidget::hScrollChanged(int loc) {
+  hposition = loc;
+  propagateSize();
+  update();
+
+//  emit changedHorzCursor( hScrollbar->value()); //expose
 }
 
 void TEWidget::setScroll(int cursor, int slines)
@@ -697,6 +718,7 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
   int    tLx = tL.x();
   int    tLy = tL.y();
   int    scroll = scrollbar->value();
+//  int    hScroll = hScrollbar->value();
 
   // we're in the process of moving the mouse with the left button pressed
   // the mouse cursor will kept catched within the bounds of the text in
@@ -973,6 +995,10 @@ void TEWidget::doScroll(int lines)
   scrollbar->setValue(scrollbar->value()+lines);
 }
 
+void TEWidget::doHScroll(int lines) {
+  hScrollbar->setValue( hScrollbar->value()+lines);
+}
+
 bool TEWidget::eventFilter( QObject *obj, QEvent *e )
 {
     if ( (e->type() == QEvent::Accel ||
@@ -1078,7 +1104,17 @@ void TEWidget::frameChanged()
 
 void TEWidget::Bell()
 {
-  QApplication::beep();
+//#ifdef QT_QWS_CUSTOM
+//# ifndef QT_NO_COP
+    QCopEnvelope( "QPE/TaskBar", "soundAlarm()" );
+//# endif
+//#else
+//# ifndef QT_NO_SOUND
+//    QSound::play(Resource::findSound("alarm"));
+//# endif
+//#endif    
+
+//    QApplication::beep();
 }
 
 /* ------------------------------------------------------------------------- */
@@ -1105,10 +1141,80 @@ void TEWidget::clearImage()
 
 void TEWidget::calcGeometry()
 {
-  //FIXME: set rimX == rimY == 0 when running in full screen mode.
+    int showhscrollbar = 1;
+    int hwidth = 0;
+    int dcolumns;
+    Config cfg("Konsole");
+    cfg.setGroup("ScrollBar");
+    useHorzScroll=cfg.readBoolEntry("HorzScroll",0);
 
-  scrollbar->resize(QApplication::style().scrollBarExtent().width(),
+    if(vcolumns == 0) showhscrollbar = 0;
+    if(showhscrollbar == 1) hwidth = QApplication::style().scrollBarExtent().width();
+
+    scrollbar->resize(QApplication::style().scrollBarExtent().width(),
+                      contentsRect().height() - hwidth);
+
+    switch(scrollLoc)  {
+      case SCRNONE :
+          columns = ( contentsRect().width() - 2 * rimX ) / font_w;
+          dcolumns = columns;
+          if(vcolumns) columns = vcolumns;
+          blX = (contentsRect().width() - (columns*font_w) ) / 2;
+          if(showhscrollbar)
+              blX = -hposition * font_w;
+          brX = blX;
+          scrollbar->hide();
+          break;
+      case SCRLEFT :
+          columns = ( contentsRect().width() - 2 * rimX - scrollbar->width()) / font_w;
+          dcolumns = columns;
+          if(vcolumns) columns = vcolumns;
+          brX = (contentsRect().width() - (columns*font_w) - scrollbar->width() ) / 2;
+          if(showhscrollbar)
+              brX = -hposition * font_w;
+          blX = brX + scrollbar->width();
+          scrollbar->move(contentsRect().topLeft());
+          scrollbar->show();
+          break;
+      case SCRRIGHT:
+          columns = ( contentsRect().width()  - 2 * rimX - scrollbar->width()) / font_w;
+          dcolumns = columns;
+          if(vcolumns) columns = vcolumns;
+          blX = (contentsRect().width() - (columns*font_w) - scrollbar->width() ) / 2;
+          if(showhscrollbar)
+              blX = -hposition * font_w;
+          brX = blX;
+          scrollbar->move(contentsRect().topRight() - QPoint(scrollbar->width()-1,0));
+          scrollbar->show();
+          break;
+    }
+      //FIXME: support 'rounding' styles
+    lines   = ( contentsRect().height() - 2 * rimY  ) / font_h;
+    bY = (contentsRect().height() - (lines  *font_h)) / 2;
+
+    if(showhscrollbar == 1)  {
+        hScrollbar->resize(contentsRect().width() - hwidth, hwidth);
+        hScrollbar->setRange(0, vcolumns - dcolumns);
+
+        QPoint p = contentsRect().bottomLeft();
+        hScrollbar->move(QPoint(p.x(), p.y() - hwidth));
+        hScrollbar->show();
+    }
+    else hScrollbar->hide();
+
+    if(showhscrollbar == 1)  {
+        lines = lines - (hwidth / font_h) - 1;
+        if(lines < 1) lines = 1;
+    }
+
+      /*//FIXME: set rimX == rimY == 0 when running in full screen mode.
+  Config cfg("Konsole");
+  cfg.setGroup("ScrollBar");
+  useHorzScroll=cfg.readBoolEntry("HorzScroll",0);
+
+  scrollbar->resize( QApplication::style().scrollBarExtent().width(),
                     contentsRect().height());
+  qDebug("font_w %d", font_w);
   switch(scrollLoc)
   {
     case SCRNONE :
@@ -1119,22 +1225,47 @@ void TEWidget::calcGeometry()
      break;
     case SCRLEFT :
      columns = ( contentsRect().width() - 2 * rimX - scrollbar->width()) / font_w;
+     if(useHorzScroll) columns = columns * (font_w/2);
      brX = (contentsRect().width() - (columns*font_w) - scrollbar->width() ) / 2;
      blX = brX + scrollbar->width();
      scrollbar->move(contentsRect().topLeft());
      scrollbar->show();
      break;
     case SCRRIGHT:
-     columns = ( contentsRect().width()  - 2 * rimX - scrollbar->width()) / font_w;
-     blX = (contentsRect().width() - (columns*font_w) - scrollbar->width() ) / 2;
-     brX = blX;
-     scrollbar->move(contentsRect().topRight() - QPoint(scrollbar->width()-1,0));
+      columns = ( contentsRect().width()  - 2 * rimX - scrollbar->width() ) / font_w;
+      if(useHorzScroll) columns = columns * (font_w/2);
+      blX = (contentsRect().width() - (columns*font_w) - scrollbar->width() ) / 2;
+      if(useHorzScroll) {
+          brX = blX =2;
+      } else {
+         brX=blX;
+      }
+     scrollbar->move(contentsRect().topRight() - QPoint(scrollbar->width()-1,0) );
      scrollbar->show();
      break;
   }
+
+   if( !scrollbar->isHidden())
+       hScrollbar->resize( contentsRect().width()-SCRWIDTH, QApplication::style()
+                      .scrollBarExtent().height());
+   else
+       hScrollbar->resize( contentsRect().width(), QApplication::style()
+                      .scrollBarExtent().height());
+
+   hScrollbar->move( 0, contentsRect().height() - SCRWIDTH);
+      
+
+  if(useHorzScroll) {
+      hScrollbar->show();
+      lines   = ( (contentsRect().height() - SCRWIDTH)  - 2 * rimY  ) / font_h;
+      bY = ((contentsRect().height() - SCRWIDTH) - (lines  *font_h)) / 2;
+  } else {
+      hScrollbar->hide();
+      lines   = (contentsRect().height()  - 2 * rimY  ) / font_h;
+      bY = (contentsRect().height() - (lines  *font_h)) / 2;
+  }     
+      */      
   //FIXME: support 'rounding' styles
-  lines   = ( contentsRect().height() - 2 * rimY  ) / font_h;
-  bY = (contentsRect().height() - (lines  *font_h)) / 2;
 }
 
 void TEWidget::makeImage()
@@ -1265,4 +1396,12 @@ void TEWidget::drop_menu_activated(int item)
   }
 #endif
 }
+
+void TEWidget::setWrapAt(int columns)
+{
+  vcolumns = columns;
+    propagateSize();
+    update();
+}
+
 

@@ -9,12 +9,13 @@
 /* This file is part of Konsole - an X terminal for KDE                       */
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
-/*									      */
+/*                        */
 /* Ported Konsole to Qt/Embedded                                              */
-/*									      */
+/*                        */
 /* Copyright (C) 2000 by John Ryland <jryland@trolltech.com>                  */
-/*									      */
+/*                        */
 /* -------------------------------------------------------------------------- */
+// enhancements added by L.J. Potter <ljp@llornkcor.com>
 
 /*! \file
 */
@@ -50,6 +51,7 @@
 #include <string.h>
 #include <ctype.h>
 
+#include <qpe/config.h>
 #include "TEScreen.h"
 
 #define HERE printf("%s(%d): here\n",__FILE__,__LINE__)
@@ -58,7 +60,7 @@
 //FIXME: see if we can get this from terminfo.
 #define BS_CLEARS FALSE
 
-#define loc(X,Y) ((Y)*columns+(X))
+#define loc(X,Y) ((Y) * columns + (X))
 
 /*! creates a `TEScreen' of `lines' lines and `columns' columns.
 */
@@ -67,11 +69,13 @@ TEScreen::TEScreen(int lines, int columns)
 {
   this->lines   = lines;
   this->columns = columns;
-
+//  qDebug("Columns %d", columns);
+  
   image      = (ca*) malloc(lines*columns*sizeof(ca));
   tabstops   = NULL; initTabStops();
 
   histCursor = 0;
+  horzCursor = 0;
 
   clearSelection();
   reset();
@@ -383,53 +387,49 @@ void TEScreen::restoreCursor()
 
 void TEScreen::resizeImage(int new_lines, int new_columns)
 {
-
-  if (cuY > new_lines-1)
-  { // attempt to preserve focus and lines
-    bmargin = lines-1; //FIXME: margin lost
-    for (int i = 0; i < cuY-(new_lines-1); i++)
-    {
-      addHistLine(); scrollUp(0,1);
+    if (cuY > new_lines-1)  {
+// attempt to preserve focus and lines
+        bmargin = lines-1; //FIXME: margin lost
+        for (int i = 0; i < cuY-(new_lines-1); i++) {
+            addHistLine(); scrollUp(horzCursor,1);
+        }
     }
-  }
 
-  // make new image
-  ca* newimg = (ca*)malloc(new_lines*new_columns*sizeof(ca));
+      // make new image
+    ca* newimg = (ca*)malloc( new_lines * new_columns * sizeof( ca));
 
-  clearSelection();
+    clearSelection();
 
-  // clear new image
-  for (int y = 0; y < new_lines; y++)
-  for (int x = 0; x < new_columns; x++)
-  {
-    newimg[y*new_columns+x].c = ' ';
-    newimg[y*new_columns+x].f = DEFAULT_FORE_COLOR;
-    newimg[y*new_columns+x].b = DEFAULT_BACK_COLOR;
-    newimg[y*new_columns+x].r = DEFAULT_RENDITION;
-  }
-  int cpy_lines   = QMIN(new_lines,  lines);
-  int cpy_columns = QMIN(new_columns,columns);
-  // copy to new image
-  for (int y = 0; y < cpy_lines; y++)
-  for (int x = 0; x < cpy_columns; x++)
-  {
-    newimg[y*new_columns+x].c = image[loc(x,y)].c;
-    newimg[y*new_columns+x].f = image[loc(x,y)].f;
-    newimg[y*new_columns+x].b = image[loc(x,y)].b;
-    newimg[y*new_columns+x].r = image[loc(x,y)].r;
-  }
-  free(image);
-  image = newimg;
-  lines = new_lines;
-  columns = new_columns;
-  cuX = QMIN(cuX,columns-1);
-  cuY = QMIN(cuY,lines-1);
+      // clear new image
+    for (int y = 0; y < new_lines; y++)
+        for (int x = 0; x < new_columns; x++) {
+            newimg[y*new_columns+x].c = ' ';
+            newimg[y*new_columns+x].f = DEFAULT_FORE_COLOR;
+            newimg[y*new_columns+x].b = DEFAULT_BACK_COLOR;
+            newimg[y*new_columns+x].r = DEFAULT_RENDITION;
+        }
+    int cpy_lines   = QMIN(new_lines,  lines);
+    int cpy_columns = QMIN(new_columns,columns);
+      // copy to new image
+    for (int y = 0; y < cpy_lines; y++)
+        for (int x = 0; x < cpy_columns; x++) {
+            newimg[y*new_columns+x].c = image[loc(x,y)].c;
+            newimg[y*new_columns+x].f = image[loc(x,y)].f;
+            newimg[y*new_columns+x].b = image[loc(x,y)].b;
+            newimg[y*new_columns+x].r = image[loc(x,y)].r;
+        }
+    free(image);
+    image = newimg;
+    lines = new_lines;
+    columns = new_columns;
+    cuX = QMIN(cuX,columns-1);
+    cuY = QMIN(cuY,lines-1);
 
-  // FIXME: try to keep values, evtl.
-  tmargin=0;
-  bmargin=lines-1;
-  initTabStops();
-  clearSelection();
+      // FIXME: try to keep values, evtl.
+    tmargin=0;
+    bmargin=lines-1;
+    initTabStops();
+    clearSelection();
 }
 
 /*
@@ -505,7 +505,8 @@ void TEScreen::effectiveRendition()
 */
 
 ca* TEScreen::getCookedImage()
-{ int x,y;
+{
+ int x,y;
   ca* merged = (ca*)malloc(lines*columns*sizeof(ca));
   ca dft(' ',DEFAULT_FORE_COLOR,DEFAULT_BACK_COLOR,DEFAULT_RENDITION);
 
@@ -548,6 +549,65 @@ ca* TEScreen::getCookedImage()
   if (getMode(MODE_Cursor) && (cuY+(hist.getLines()-histCursor) < lines)) // cursor visible
     reverseRendition(&merged[loc(cuX,cuY+(hist.getLines()-histCursor))]);
   return merged;
+
+    /*
+    int x, y, z;
+
+  ca* merged = (ca*)malloc( lines * columns * sizeof( ca));
+
+  ca dft(' ',DEFAULT_FORE_COLOR,DEFAULT_BACK_COLOR,DEFAULT_RENDITION);
+
+//      qDebug("hist lines %d, historyCursor %d, minus %d ,lines %d, columns %d",
+//               hist.getLines(), histCursor, hist.getLines() - histCursor , lines, columns);
+  for (y = 0; (y < lines) && (y < ( hist.getLines() - histCursor )); y++)  {
+
+    int len = QMIN( columns, hist.getLineLen( y + histCursor) );
+    int yp  = y * columns;
+    int yq  = ( y + histCursor) * columns;
+//     qDebug("horzCursor %d, columns %d, len %d", horzCursor, columns, len);    
+//     qDebug("lineno %d, colno %d, count %d\n",  y + histCursor, (horzCursor / 2), len );
+    qDebug("Y %d", y);    
+    hist.getCells( y + histCursor, (horzCursor / 2), len, merged + yp);
+
+    for (x = len; x < columns; x++)
+        merged[yp + x] = dft;
+    for (x = 0; x < columns; x++) {
+        int p = x + yp; int q = x + yq;
+        if ( ( q >= sel_TL ) && ( q <= sel_BR ) )
+            reverseRendition(&merged[p]); // for selection
+    }
+  }
+
+  if (lines >= hist.getLines() - histCursor)  {
+      for (y = ( hist.getLines() - histCursor); y < lines ; y++)  {
+       int z = horzCursor;
+       int yp  = y * columns;
+       int yq  = ( y + histCursor) * columns;
+       int yr =  ( y - hist.getLines() + histCursor) * columns;
+//        qDebug("y %d, yp %d, yq %d, columns %d, z cursor %d", y,  yp, yq, columns, z);
+       for (x = 0; x < columns; x++) {
+           int p = x + yp; int q = x + yq; int r = (x + (horzCursor/2) ) + yr;
+           merged[p] = image[r];
+           if ( q >= sel_TL && q <= sel_BR )
+               reverseRendition( &merged[p]); // for selection
+       }
+    }
+ }
+
+      
+// evtl. inverse display
+  if (getMode(MODE_Screen))
+  { int i, n = lines * columns;
+    for (i = 0; i < n; i++)
+      reverseRendition( &merged[i]); // for reverse display
+  }
+  if (getMode(MODE_Cursor) && ( cuY + ( hist.getLines() - histCursor) < lines)) // cursor visible
+
+      reverseRendition( &merged[ loc( cuX, cuY + ( hist.getLines() - histCursor))] );
+
+  return merged;
+      */
+  
 }
 
 
@@ -556,7 +616,12 @@ ca* TEScreen::getCookedImage()
 
 void TEScreen::reset()
 {
+  Config cfg("Konsole");
+  cfg.setGroup("ScrollBar");
+  if( !cfg.readBoolEntry("HorzScroll",0) )
     setMode(MODE_Wrap  ); saveMode(MODE_Wrap  );  // wrap at end of margin
+
+    
   resetMode(MODE_Origin); saveMode(MODE_Origin);  // position refere to [1,1]
   resetMode(MODE_Insert); saveMode(MODE_Insert);  // overstroke
     setMode(MODE_Cursor);                         // cursor visible
@@ -658,12 +723,13 @@ void TEScreen::ShowCharacter(unsigned short c)
 
   if (cuX >= columns)
   {
-    if (getMode(MODE_Wrap)) NextLine(); else cuX = columns-1;
+    if (getMode(MODE_Wrap)) NextLine(); else cuX = columns - 1;
+       // comment out for no wrap
   }
 
   if (getMode(MODE_Insert)) insertChars(1);
 
-  int i = loc(cuX,cuY);
+  int i = loc( cuX, cuY);
 
   checkSelection(i, i); // check if selection is still valid.
 
@@ -685,10 +751,11 @@ void TEScreen::ShowCharacter(unsigned short c)
 
 void TEScreen::scrollUp(int from, int n)
 {
-  if (n <= 0 || from + n > bmargin) return;
+ if (n <= 0 || from + n > bmargin) return;
   //FIXME: make sure `tmargin', `bmargin', `from', `n' is in bounds.
-  moveImage(loc(0,from),loc(0,from+n),loc(columns-1,bmargin));
-  clearImage(loc(0,bmargin-n+1),loc(columns-1,bmargin),' ');
+
+    moveImage( loc( 0, from), loc( 0, from + n), loc( columns - 1, bmargin));
+    clearImage( loc( 0, bmargin - n + 1), loc( columns - 1, bmargin), ' ');
 }
 
 /*! scroll down `n' lines within current region.
@@ -698,13 +765,17 @@ void TEScreen::scrollUp(int from, int n)
 
 void TEScreen::scrollDown(int from, int n)
 {
+    
 //FIXME: make sure `tmargin', `bmargin', `from', `n' is in bounds.
-  if (n <= 0) return;
+ if (n <= 0) return;
   if (from > bmargin) return;
   if (from + n > bmargin) n = bmargin - from;
-  moveImage(loc(0,from+n),loc(0,from),loc(columns-1,bmargin-n));
+
+  moveImage( loc(0,from+n), loc(0,from), loc(columns-1,bmargin-n));
   clearImage(loc(0,from),loc(columns-1,from+n-1),' ');
 }
+
+
 
 /*! position the cursor to a specific line and column. */
 void TEScreen::setCursorYX(int y, int x)
@@ -871,7 +942,7 @@ void TEScreen::clearToBeginOfLine()
 
 void TEScreen::clearEntireLine()
 {
-  clearImage(loc(0,cuY),loc(columns-1,cuY),' ');
+  clearImage( loc( 0, cuY),loc( columns - 1, cuY),' ');
 }
 
 // Rendition ------------------------------------------------------------------
@@ -988,17 +1059,17 @@ QString TEScreen::getSelText(const BOOL preserve_line_breaks)
   if (sel_begin == -1) 
      return QString::null; // Selection got clear while selecting.
 
-  int *m;			// buffer to fill.
-  int s, d;			// source index, dest. index.
+  int *m;     // buffer to fill.
+  int s, d;     // source index, dest. index.
   int hist_BR = loc(0, hist.getLines());
   int hY = sel_TL / columns;
   int hX = sel_TL % columns;
-  int eol;			// end of line
+  int eol;      // end of line
 
-  s = sel_TL;			// tracks copy in source.
+  s = sel_TL;     // tracks copy in source.
 
-				// allocate buffer for maximum
-				// possible size...
+        // allocate buffer for maximum
+        // possible size...
   d = (sel_BR - sel_TL) / columns + 1;
   m = new int[d * (columns + 1) + 2];
   d = 0;
@@ -1006,103 +1077,103 @@ QString TEScreen::getSelText(const BOOL preserve_line_breaks)
   while (s <= sel_BR)
     {
       if (s < hist_BR)
-	{			// get lines from hist.history
-				// buffer.
-	  eol = hist.getLineLen(hY);
+  {     // get lines from hist.history
+        // buffer.
+    eol = hist.getLineLen(hY);
 
-	  if ((hY == (sel_BR / columns)) &&
-	      (eol >= (sel_BR % columns)))
-	    {
-	      eol = sel_BR % columns + 1;
-	    }
-	  
-	  while (hX < eol)
-	    {
-	      m[d++] = hist.getCell(hY, hX++).c;
-	      s++;
-	    }
+    if ((hY == (sel_BR / columns)) &&
+        (eol >= (sel_BR % columns)))
+      {
+        eol = sel_BR % columns + 1;
+      }
+    
+    while (hX < eol)
+      {
+        m[d++] = hist.getCell(hY, hX++).c;
+        s++;
+      }
 
-	  if (s <= sel_BR)
-	    {
-				// The line break handling
-				// It's different from the screen
-				// image case!
-	      if (eol % columns == 0)
-		{
-				// That's either a completely filled
-				// line or an empty line
-		  if (eol == 0)
-		    {
-		      m[d++] = '\n';
-		    }
-		  else
-		    {
-				// We have a full line.
-				// FIXME: How can we handle newlines
-				// at this position?!
-		    }
-		}
-	      else if ((eol + 1) % columns == 0)
-		{
-				// FIXME: We don't know if this was a
-				// space at the last position or a
-				// short line!!
-		  m[d++] = ' ';
-		}
-	      else
-		{
-				// We have a short line here. Put a
-				// newline or a space into the
-				// buffer.
-		  m[d++] = preserve_line_breaks ? '\n' : ' ';
-		}
-	    }
+    if (s <= sel_BR)
+      {
+        // The line break handling
+        // It's different from the screen
+        // image case!
+        if (eol % columns == 0)
+    {
+        // That's either a completely filled
+        // line or an empty line
+      if (eol == 0)
+        {
+          m[d++] = '\n';
+        }
+      else
+        {
+        // We have a full line.
+        // FIXME: How can we handle newlines
+        // at this position?!
+        }
+    }
+        else if ((eol + 1) % columns == 0)
+    {
+        // FIXME: We don't know if this was a
+        // space at the last position or a
+        // short line!!
+      m[d++] = ' ';
+    }
+        else
+    {
+        // We have a short line here. Put a
+        // newline or a space into the
+        // buffer.
+      m[d++] = preserve_line_breaks ? '\n' : ' ';
+    }
+      }
 
-	  hY++;
-	  hX = 0;
-	  s = hY * columns;
-	}
+    hY++;
+    hX = 0;
+    s = hY * columns;
+  }
     else
-      {				// or from screen image.
-	eol = (s / columns + 1) * columns - 1;
+      {       // or from screen image.
+  eol = (s / columns + 1) * columns - 1;
 
-	if (eol < sel_BR)
-	  {
-	    while ((eol > s) &&
-		   isspace(image[eol - hist_BR].c))
-	      {
-		eol--;
-	      }
-	  }
-	else
-	  {
-	    eol = sel_BR;
-	  }
+  if (eol < sel_BR)
+    {
+      while ((eol > s) &&
+       isspace(image[eol - hist_BR].c))
+        {
+    eol--;
+        }
+    }
+  else
+    {
+      eol = sel_BR;
+    }
 
-	while (s <= eol)
-	  {
-	    m[d++] = image[s++ - hist_BR].c;
-	  }
+  while (s <= eol)
+    {
+      m[d++] = image[s++ - hist_BR].c;
+    }
 
-	if (eol < sel_BR)
-	  {
-				// eol processing see below ...
-	    if ((eol + 1) % columns == 0)
-	      {
-		if (image[eol - hist_BR].c == ' ')
-		  {
-		    m[d++] = ' ';
-		  }
-	      }
-	    else
-	      {
-		m[d++] = ((preserve_line_breaks ||
-			   ((eol % columns) == 0)) ?
-			  '\n' : ' ');
-	      }
-	  }
+  if (eol < sel_BR)
+    {
+        // eol processing see below ...
+      if ((eol + 1) % columns == 0)
+        {
+    if (image[eol - hist_BR].c == ' ')
+      {
+        m[d++] = ' ';
+      }
+        }
+      else
+        {
+    m[d++] = ((preserve_line_breaks ||
+         ((eol % columns) == 0)) ?
+        '\n' : ' ');
+        }
+    }
 
-	s = (eol / columns + 1) * columns;
+  s = (eol / columns + 1) * columns;
       }
     }
 
@@ -1129,8 +1200,8 @@ cases:
    are preserved.
 
 FIXME:
-	* this suppresses \n for command output that is
-	  sized to the exact column width of the screen.
+  * this suppresses \n for command output that is
+    sized to the exact column width of the screen.
 
 2)    eol%columns == 0     --> blank line.
    insert a \n unconditionally.
@@ -1138,7 +1209,7 @@ FIXME:
    or because it's an ASCII paragraph delimiter, so even when
    not preserving line_breaks, you want to preserve paragraph breaks.
 
-3)    else		 --> partially filled line
+3)    else     --> partially filled line
    insert a \n in preserve line break mode, else a space
    The space prevents concatenation of the last word of one
    line with the first of the next.
@@ -1152,18 +1223,18 @@ void TEScreen::addHistLine()
   // add to hist buffer
   // we have to take care about scrolling, too...
 
-  if (hasScroll())
-  { ca dft;
+  if (hasScroll()){
+      ca dft;
 
-    int end = columns-1;
+    int end = columns - 1;
     while (end >= 0 && image[end] == dft)
       end -= 1;
 
-    hist.addCells(image,end+1);
+    hist.addCells( image, end + 1);
     hist.addLine();
 
     // adjust history cursor
-    histCursor += (hist.getLines()-1 == histCursor);
+    histCursor += ( hist.getLines() - 1 == histCursor);
   }
 
   if (!hasScroll()) histCursor = 0; //FIXME: a poor workaround
@@ -1174,9 +1245,19 @@ void TEScreen::setHistCursor(int cursor)
   histCursor = cursor; //FIXME:rangecheck
 }
 
+void TEScreen::setHorzCursor(int cursor)
+{
+  horzCursor = cursor; 
+}
+
 int TEScreen::getHistCursor()
 {
   return histCursor;
+}
+
+int TEScreen::getHorzCursor()
+{
+  return horzCursor;
 }
 
 int TEScreen::getHistLines()
