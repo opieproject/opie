@@ -414,7 +414,11 @@ void ViewMail::slotReply()
 
     Settings *settings = new Settings();
     ComposeMail composer( settings ,this, 0, true);
-    composer.setTo( m_mail[0] );
+    if (m_recMail.Replyto().isEmpty()) {
+        composer.setTo( m_recMail.getFrom());
+    } else {
+        composer.setTo( m_recMail.Replyto());
+    }
     composer.setSubject( prefix + m_mail[1] );
     composer.setMessage( rtext );
     composer.setInReplyTo(m_recMail.Msgid());
