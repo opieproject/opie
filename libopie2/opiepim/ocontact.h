@@ -49,6 +49,11 @@ public:
     OContact( const QMap<int, QString> &fromMap );
     virtual ~OContact();
 
+    enum DateFormat{
+	    Zip_City_State = 0,
+	    City_State_Zip
+    };
+
     /*
      * do we need to inline them
      * if yes do we need to inline them this way?

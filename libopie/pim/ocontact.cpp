@@ -21,10 +21,11 @@
 
 #include "ocontact.h"
 #include "opimresolver.h"
+#include "oconversion.h"
 
 #include <qpe/stringutil.h>
-#include "oconversion.h"
 #include <qpe/timestring.h>
+#include <qpe/config.h>
 
 #include <qobject.h>
 #include <qregexp.h>
@@ -438,6 +439,10 @@ QString OContact::toRichText() const
     QString str;
     bool marker = false;
 
+    Config cfg("qpe");
+    cfg.setGroup("Appearance");
+    int dateformat = cfg.readNumEntry( "DateFormat", Zip_City_State );
+
     // name, jobtitle and company
     if ( !(value = fullName()).isEmpty() )
 	text += "<b><h3><img src=\"addressbook/AddressBook\"> " + Qtopia::escapeString(value) + "</h3></b>";
@@ -477,20 +482,40 @@ QString OContact::toRichText() const
 	    text += "<br>" + Qtopia::escapeString(value);
 	    marker = true;
     }
-    state =  businessState();
-    if ( !(value = businessZip()).isEmpty() ){
-	    text += "<br>" + Qtopia::escapeString(value) + " ";
-	    marker = true;
 
+    switch( dateformat ){
+    case Zip_City_State:{ //  Zip_Code City, State
+	    state =  businessState();
+	    if ( !(value = businessZip()).isEmpty() ){
+		    text += "<br>" + Qtopia::escapeString(value) + " ";
+		    marker = true;
+		    
+	    }
+	    if ( !(value = businessCity()).isEmpty() ) {
+		    marker = true;
+		    text += Qtopia::escapeString(value);
+		    if ( state )
+			    text += ", " + Qtopia::escapeString(state);
+	    } else if ( !state.isEmpty() ){
+		    text += "<br>" + Qtopia::escapeString(state);
+		    marker = true;
+	    }
+	    break;
     }
-    if ( !(value = businessCity()).isEmpty() ) {
-	    marker = true;
-	    text += Qtopia::escapeString(value);
-	    if ( state )
-		    text += ", " + Qtopia::escapeString(state);
-    } else if ( !state.isEmpty() ){
-	    text += "<br>" + Qtopia::escapeString(state);
-	    marker = true;
+    case City_State_Zip:{ // City, State Zip_Code 
+	    state =  businessState();
+	    if ( !(value = businessCity()).isEmpty() ) {
+		    marker = true;
+		    text += "<br>" + Qtopia::escapeString(value);
+		    if ( state )
+			    text += ", " + Qtopia::escapeString(state);
+	    }
+	    if ( !(value = businessZip()).isEmpty() ){
+		    text += " " + Qtopia::escapeString(value);
+		    marker = true;
+	    }
+	    break;
+    }
     }
 
     if ( !(value = businessCountry()).isEmpty() ){
@@ -547,24 +572,44 @@ QString OContact::toRichText() const
 	text += "<br>" + Qtopia::escapeString(value);
 	marker = true;
     }
-    state =  homeState();
-    if ( !(value = homeZip()).isEmpty() ){
-	text += "<br>" + Qtopia::escapeString(value) + " ";
-	marker = true;
-    }
 
-    if ( !(value = homeCity()).isEmpty() ) {
-	    marker = true;
-	    text += Qtopia::escapeString(value);
-	    if ( !state.isEmpty() )
-		    text += ", " + Qtopia::escapeString(state);
-    } else if (!state.isEmpty()) {
-	    text += "<br>" + Qtopia::escapeString(state);
-	    marker = true;
+    switch( dateformat ){
+    case Zip_City_State:{ //  Zip_Code City, State
+	    state =  homeState();
+	    if ( !(value = homeZip()).isEmpty() ){
+		    text += "<br>" + Qtopia::escapeString(value) + " ";
+		    marker = true;
+	    }
+
+	    if ( !(value = homeCity()).isEmpty() ) {
+		    marker = true;
+		    text += Qtopia::escapeString(value);
+		    if ( !state.isEmpty() )
+			    text += ", " + Qtopia::escapeString(state);
+	    } else if (!state.isEmpty()) {
+		    text += "<br>" + Qtopia::escapeString(state);
+		    marker = true;
+	    }
+	    break;
+    }
+    case City_State_Zip:{ // City, State Zip_Code 
+	    state =  homeState();
+	    if ( !(value = homeCity()).isEmpty() ) {
+		    marker = true;
+		    text += "<br>" + Qtopia::escapeString(value);
+		    if ( state )
+			    text += ", " + Qtopia::escapeString(state);
+	    }
+	    if ( !(value = homeZip()).isEmpty() ){
+		    text += " " + Qtopia::escapeString(value);
+		    marker = true;
+	    }
+	    break;
+    }
     }
 	    
     if ( !(value = homeCountry()).isEmpty() ){
-	text += Qtopia::escapeString(value);
+	text += "<br>" + Qtopia::escapeString(value);
 	marker = true;
     }
 
