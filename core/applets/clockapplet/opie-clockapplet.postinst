@@ -1,2 +1,2 @@
 #!/bin/sh
-/opt/QtPalmtop/bin/qcop QPE/TaskBar "reloadApplets()"
+pidof -s qpe >/dev/null && /opt/QtPalmtop/bin/qcop QPE/TaskBar "reloadApplets()"
