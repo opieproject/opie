@@ -21,7 +21,7 @@ crash into the walls, edges or its tail.</source>
     </message>
     <message>
         <source>Press Any Key To Start</source>
-        <translation type="obsolete">FOO</translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>     Score :    %1   </source>
@@ -34,15 +34,15 @@ crash into the walls, edges or its tail.</source>
     </message>
     <message>
         <source>Press Any Key to Begin a New Game.</source>
-        <translation type="obsolete">FOO</translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Press any key to start</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Press any key to begin a new game.</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
 </context>
 </TS>
