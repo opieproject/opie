@@ -10,7 +10,7 @@ SOURCES   = main.cpp \
         playlistselection.cpp mediaplayerstate.cpp xinecontrol.cpp mediadetect.cpp\
        videowidget.cpp audiowidget.cpp playlistwidget.cpp mediaplayer.cpp inputDialog.cpp \
    frame.cpp lib.cpp nullvideo.c xinevideowidget.cpp \
-         alphablend.c yuv2rgb.c yuv2rgb_mlib.c yuv2rgb_mmx.c
+         alphablend.c yuv2rgb.c yuv2rgb_arm.c yuv2rgb_arm4l.S
 TARGET    = opieplayer2
 INCLUDEPATH += $(OPIEDIR)/include 
 DEPENDPATH  += $(OPIEDIR)/include 

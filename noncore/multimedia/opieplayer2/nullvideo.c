@@ -344,8 +344,6 @@ static void null_update_frame_format( vo_driver_t* self, vo_frame_t* img,
 
 	}else{
 	    frame->frame.pitches[0] = 8*((width + 3) / 4);
-	    frame->frame.pitches[1] = 8*((width + 3) / 4);
-	    frame->frame.pitches[2] = 8*((width + 3) / 4);
 	    
 	    frame->frame.base[0] = xine_xmalloc_aligned (16, frame->frame.pitches[0] * height,
                                                       (void **)&frame->chunk[0]);

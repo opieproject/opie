@@ -22,7 +22,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: yuv2rgb.c,v 1.1 2002-07-11 22:48:38 zecke Exp $
+ * $Id: yuv2rgb.c,v 1.2 2002-08-04 20:23:19 sandman Exp $
  */
 
 #include <stdio.h>
@@ -3135,6 +3135,14 @@ yuv2rgb_factory_t* yuv2rgb_factory_init (int mode, int swapped,
 
     if (this->yuv2rgb_fun != NULL)
       printf ("yuv2rgb: using medialib for colorspace transform\n");
+  }
+#endif
+#ifdef __arm__
+  if (this->yuv2rgb_fun == NULL) {
+  yuv2rgb_init_arm ( this );
+  
+  if(this->yuv2rgb_fun != NULL)
+  	printf("yuv2rgb: using arm4l assembler for colorspace transform\n" );
   }
 #endif
   if (this->yuv2rgb_fun == NULL) {
