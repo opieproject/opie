@@ -91,11 +91,11 @@
     </message>
     <message>
         <source>Remaining Power: %1%</source>
-        <translation type="unfinished"></translation>
+        <translation>Batería Restante: %1%</translation>
     </message>
     <message>
         <source>Remaining Time: %1m %2s</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiempo Restante: %1m %2s</translation>
     </message>
     <message>
         <source>Remaing Power: %1 %2

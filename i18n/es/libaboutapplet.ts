@@ -7,18 +7,18 @@
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Acerca de</translation>
     </message>
 </context>
 <context>
     <name>AboutWidget</name>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Acerca de</translation>
     </message>
     <message>
         <source>&lt;center&gt;&lt;b&gt;The Open Palmtop Integrated Environment V1.1.8&lt;/b&gt;&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;center&gt;&lt;b&gt;E</translation>
     </message>
     <message>
         <source>&lt;p&gt;
@@ -34,7 +34,7 @@ Visit &lt;i&gt;http://opie.handhelds.org&lt;/i&gt; for more information on the O
     </message>
     <message>
         <source>Authors</source>
-        <translation type="unfinished"></translation>
+        <translation>Autores</translation>
     </message>
     <message>
         <source>&lt;p&gt;
@@ -48,17 +48,28 @@ Visit &lt;i&gt;http://opie.handhelds.org&lt;/i&gt; for more information on the O
 &lt;b&gt;Andreas &apos;ar&apos; Richter&lt;/b&gt; (ar@handhelds.org)&lt;br/&gt;
 &lt;b&gt;Dan &apos;drw&apos; Williams&lt;/b&gt; (drw@handhelds.org)&lt;/tt&gt;&lt;br/&gt;
 &lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;
+&lt;b&gt;Rajko &apos;alwin&apos; Albrecht&lt;/b&gt; (alwin@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Stefan &apos;eilers&apos; Eilers&lt;/b&gt; (eilers@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Holger &apos;Zecke&apos; Freyther&lt;/b&gt; (zecke@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Chris &apos;Kergoth&apos; Larson&lt;/b&gt; (kergoth@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Michael &apos;Mickey&apos; Lauer&lt;/b&gt; (mickeyl@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Lorn &apos;ljp&apos; Potter&lt;/b&gt; (ljp@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Max &apos;Harlekin&apos; Reiss&lt;/b&gt; (harlekin@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Andreas &apos;ar&apos; Richter&lt;/b&gt; (ar@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Dan &apos;drw&apos; Williams&lt;/b&gt; (drw@handhelds.org)&lt;/tt&gt;&lt;br/&gt;
+&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Report</source>
-        <translation type="unfinished"></translation>
+        <translation>Informe de fallos</translation>
     </message>
     <message>
         <source>&lt;p&gt;Software can always be improved, and the Opie Team is ready to do so. However, you - the user - must tell us when something does not work as expected or could be done better.&lt;/p&gt;
 &lt;p&gt;The Open Palmtop Integrated Environment has a bug tracking system. Visit &lt;i&gt;http://opie.handhelds.org/&lt;/i&gt; to report bugs.&lt;/p&gt;
 &lt;p&gt;If you have a suggestion for improvement then you are welcome to use the bug tracking system to register your wish. Make sure you use the severity called &quot;Feature Wish&quot;.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;p&gt;El software siempre puede mejorarse, y el Equipo de Opie está listo para hacerlo. No obstante, usted - el usuario - debe decirnos qué cree que no funciona como debería o puede mejorarse.&lt;/p&gt;
+&lt;p&gt;</translation>
     </message>
     <message>
         <source>Join</source>

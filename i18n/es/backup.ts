@@ -57,19 +57,19 @@
     </message>
     <message>
         <source>Backup Successful.</source>
-        <translation type="unfinished"></translation>
+        <translation>Copia Correcta.</translation>
     </message>
     <message>
         <source>Restore Successful.</source>
-        <translation type="unfinished"></translation>
+        <translation>Restauración Correcta.</translation>
     </message>
     <message>
         <source>Backing up...</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiando...</translation>
     </message>
     <message>
         <source>Restore Backup...</source>
-        <translation type="unfinished"></translation>
+        <translation>Restaurando...</translation>
     </message>
 </context>
 <context>
@@ -100,7 +100,7 @@
     </message>
     <message>
         <source>Select Source</source>
-        <translation>Seleccionar fuente</translation>
+        <translation>Seleccionar Origen</translation>
     </message>
     <message>
         <source>Column 1</source>
@@ -116,39 +116,39 @@
     </message>
     <message>
         <source>Locations</source>
-        <translation type="unfinished"></translation>
+        <translation>Sitios</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>Destination</source>
-        <translation type="unfinished"></translation>
+        <translation>Destino</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo</translation>
     </message>
     <message>
         <source>User Data (Configuration + PIM)</source>
-        <translation type="unfinished"></translation>
+        <translation>Datos de Usuario (Configuración + PIM)</translation>
     </message>
     <message>
         <source>Full Backup (Root File System)</source>
-        <translation type="unfinished"></translation>
+        <translation>Copia Completa (Sistema de Ficheros Raíz)</translation>
     </message>
 </context>
 <context>

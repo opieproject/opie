@@ -263,7 +263,7 @@ Esta área le permite seleccionar un aplicación y qué funciones desea deshabil
     </message>
     <message>
         <source>Normal Text</source>
-        <translation>Texto norma</translation>
+        <translation>Texto normal</translation>
     </message>
     <message>
         <source>Highlighted Text</source>
