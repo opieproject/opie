@@ -111,6 +111,7 @@ class OTaskbarApplet : public QWidget
     OTaskbarApplet( QWidget* parent, const char* name = 0 );
     virtual ~OTaskbarApplet();
 
+
   protected:
     virtual void popup( QWidget* widget );
 private:

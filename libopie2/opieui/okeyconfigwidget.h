@@ -36,7 +36,11 @@ namespace Internal {
  * There are two ways you can use this widget. Either in a tab were
  * all changes are immediately getting into effect or in a queue
  * were you ask for saving. Save won't write the data but only set
- * it to the OKeyConfigManager
+ * it to the OKeyConfigManager.
+ *
+ * Normally subclassing this widget does not make much sense as the widget content
+ * as such is immutable. If I'm wrong I'm willing to learn and you could mail me which
+ * functions do make sense with virtual on it (zecke@handhelds.org).
  *
  * @since 1.2
  */
@@ -50,7 +54,7 @@ public:
      */
     enum ChangeMode { Imediate, Queue };
     OKeyConfigWidget( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
-    ~OKeyConfigWidget();
+    virtual ~OKeyConfigWidget();
 
     void setChangeMode( enum ChangeMode );
     ChangeMode changeMode()const;
@@ -60,7 +64,7 @@ public:
     void load();
     void save();
 
-private slots:
+protected slots:
     void slotListViewItem(  QListViewItem* );
     void slotNoKey();
     void slotDefaultKey();
