@@ -58,7 +58,7 @@
 #endif
 
 #define FTPLIB_BUFSIZ 8192
-#define ACCEPT_TIMEOUT 30
+#define ACCEPT_TIMEOUT 15
 
 #define FTPLIB_CONTROL 0
 #define FTPLIB_READ 1

@@ -36,9 +36,10 @@ class QPopupMenu;
 class QFile;
 class QListViewItem;
 class QLineEdit;
+class QPushButton;
 
 class OpieFtp : public QMainWindow
-{ 
+{
     Q_OBJECT
 
 public:
@@ -58,9 +59,11 @@ public:
     QString currentRemoteDir;
     QString filterStr;
     QListViewItem * item;
+    QPushButton *connectServerBtn;
     bool b;
-    
+    int currentServerConfig;
 protected slots:
+    void serverComboEdited(const QString & );
     void showLocalMenu( QListViewItem *);
     void showRemoteMenu( QListViewItem *);
     void doLocalCd();
@@ -96,7 +99,7 @@ protected slots:
   void fillCombos();
   void serverComboSelected(int);
   void deleteServer();
-  
+  void connectorBtnToggled(bool);  
 protected:
     void nullifyCallBack();
     QGridLayout* tabLayout;
