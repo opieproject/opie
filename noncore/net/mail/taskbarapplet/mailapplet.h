@@ -10,27 +10,27 @@ class QTimer;
 
 class MailApplet : public QWidget {
 
-	Q_OBJECT
+    Q_OBJECT
 
 public:
-	MailApplet( QWidget *parent = 0 );
-        ~MailApplet();
+    MailApplet( QWidget *parent = 0 );
+    ~MailApplet();
 
 protected:
-	void gotNewMail();
-        void mouseReleaseEvent( QMouseEvent* );
-        void paintEvent( QPaintEvent* );
+    void gotNewMail();
+    void mouseReleaseEvent( QMouseEvent* );
+    void paintEvent( QPaintEvent* );
 
 protected slots:
-        void startup();
-	void slotCheck();
-	void slotClicked();
+    void startup();
+    void slotCheck();
+    void slotClicked();
 private:
-	Config *m_config;
-	QTimer *m_intervalTimer;
-	int m_intervalMs;
-        StatusMail* m_statusMail;
-        int m_newMails;
+    Config *m_config;
+    QTimer *m_intervalTimer;
+    int m_intervalMs;
+    StatusMail* m_statusMail;
+    int m_newMails;
 
 };
 

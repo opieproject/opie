@@ -8,18 +8,18 @@ class MailApplet;
 class MailAppletImpl : public TaskbarAppletInterface {
 
 public:
-	MailAppletImpl();
-	virtual ~MailAppletImpl();
+    MailAppletImpl();
+    virtual ~MailAppletImpl();
 
-	QRESULT queryInterface( const QUuid &uuid, QUnknownInterface **iface );
-	Q_REFCOUNT
+    QRESULT queryInterface( const QUuid &uuid, QUnknownInterface **iface );
+    Q_REFCOUNT
 
-	virtual QWidget *applet( QWidget *parent );
-	virtual int position() const;
+    virtual QWidget *applet( QWidget *parent );
+    virtual int position() const;
 
 private:
-	MailApplet *m_mailApplet;
-	ulong ref;
+    MailApplet *m_mailApplet;
+    ulong ref;
 
 };
 
