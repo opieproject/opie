@@ -115,7 +115,7 @@
             </property>
             <property stdset="1">
                 <name>text</name>
-                <string>100000000</string>
+                <string></string>
             </property>
         </widget>
     </grid>
