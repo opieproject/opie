@@ -41,7 +41,7 @@ void SzTransfer::sendFile(const QString& file) {
 
 void SzTransfer::SzReceivedStdout(OProcess *, char *buffer, int buflen) {
 
-    qWarning("recieved from sz on stdout %d bytes", buflen);
+    owarn << "recieved from sz on stdout " << buflen << " bytes" << oendl; 
 
     QByteArray data(buflen);
     data.fill(*buffer, buflen);
@@ -65,7 +65,7 @@ void SzTransfer::SzReceivedStderr(OProcess *, char *buffer, int length) {
 
 void SzTransfer::receivedStdin(const QByteArray &data) {
 
-    qWarning("recieved from io_serial %d bytes", data.size());
+    owarn << "recieved from io_serial " << data.size() << " bytes" << oendl; 
 
     // recieved data from the io layer goes to sz
     proc->writeStdin(data.data(), data.size());
@@ -74,7 +74,7 @@ void SzTransfer::receivedStdin(const QByteArray &data) {
 
 void SzTransfer::sent() {
 
-    qWarning("sent file");
+    owarn << "sent file" << oendl; 
 
     //setcbreak(0); /* default */
 

@@ -21,20 +21,24 @@
 
 #include "soundsettings.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/storage.h>
+using namespace Opie::Core;
 
+/* QT */
 #include <qcheckbox.h>
 #include <qcombobox.h>
 #include <qlabel.h>
 
+/* STD */
 #include <sys/utsname.h>
 #include <sys/time.h>
 #include <sys/types.h>
 #include <unistd.h>
-#include <stdio.h>
 #include <sys/stat.h>
 
 
@@ -73,7 +77,7 @@ SoundSettings::SoundSettings( QWidget* parent,  const char* objname, WFlags fl )
     if (uname(&name) != -1) {// TODO change this here,...
         QString release=name.release;
         if( release.find("embedix",0,TRUE) != -1) {
-            qDebug("IS System Zaurus");
+            odebug << "IS System Zaurus" << oendl; 
             systemZaurus=TRUE;
         }
     }
@@ -85,7 +89,7 @@ SoundSettings::SoundSettings( QWidget* parent,  const char* objname, WFlags fl )
 #else
 #endif
     int sRate=cfg.readNumEntry("SizeLimit", 30);
-    qDebug("%d",sRate);
+    odebug << "" << sRate << "" << oendl; 
 
     if(sRate ==30)
         timeLimitComboBox->setCurrentItem(0);
@@ -143,7 +147,7 @@ void SoundSettings::updateStorageCombo() {
     for( ; it.current(); ++it ){
         const QString name = (*it)->name();
         const QString path = (*it)->path();
-        qDebug("storage name "+name +" storage path is "+path);
+        odebug << "storage name "+name +" storage path is "+path << oendl; 
         list << name + ": " +path;
         if( loc.find( path,0,TRUE) != -1)
             set = i;      
@@ -152,7 +156,7 @@ void SoundSettings::updateStorageCombo() {
     }
 
     LocationComboBox->insertStringList(list);
-    qDebug("set item %d", set);
+    odebug << "set item " << set << "" << oendl; 
     LocationComboBox->setCurrentItem(set);
 }
 
@@ -160,7 +164,7 @@ void SoundSettings::setLocation(const QString & string) {
     Config config( "Vmemo" );
     config.setGroup( "System" );
     config.writeEntry("RecLocation",string);
-    qDebug("set location "+string);
+    odebug << "set location "+string << oendl; 
     config.write();
 }
 

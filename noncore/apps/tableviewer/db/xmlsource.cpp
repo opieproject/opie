@@ -18,12 +18,18 @@
 **
 **********************************************************************/ 
 #include "xmlsource.h"
-#include <qdict.h>
-#include <stdlib.h>
-#include <qtextstream.h>
 #include "../xmlencodeattr.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
 
+/* QT */
+#include <qdict.h>
+#include <qtextstream.h>
+
+/* STD */
+#include <stdlib.h>
 
 DBXml::DBXml(DBStore *d) 
 {
@@ -140,7 +146,7 @@ DBXmlHandler::~DBXmlHandler()
 
 QString DBXmlHandler::errorProtocol()
 {
-    qWarning("Error reading file");
+    owarn << "Error reading file" << oendl; 
 	return errorProt;
 }
 
@@ -172,7 +178,7 @@ bool DBXmlHandler::startElement(const QString&, const QString&,
         last_key_type = TVVariant::String;
         key = atts.value("name");
         if (key.isEmpty()) {
-            qWarning("empty key name");
+            owarn << "empty key name" << oendl; 
             return FALSE;
         }
         if(!atts.value("type").isEmpty())
@@ -190,13 +196,13 @@ bool DBXmlHandler::startElement(const QString&, const QString&,
         /* the qName is the name of a key */
         if (!keyIndexList[qName]) {
             /* invalid key, we failed */
-            qWarning("Invalid key in record");
+            owarn << "Invalid key in record" << oendl; 
             return FALSE;
         }
         keyIndex = *keyIndexList[qName];
 		return TRUE;
 	}
-    qWarning("Unable to determine tag type");
+    owarn << "Unable to determine tag type" << oendl; 
 	return FALSE;
 }
 
@@ -225,7 +231,7 @@ bool DBXmlHandler::endElement(const QString&, const QString&,
 		break;
 	default:
 		// should only get a 'endElement' from one of the above states.
-        qWarning("Invalid end tag");
+        owarn << "Invalid end tag" << oendl; 
 		return FALSE;
 		break;
 	}
@@ -254,7 +260,7 @@ bool DBXmlHandler::characters(const QString& ch)
 		return TRUE;
 	}
 	
-    qWarning("Junk characters found... ignored");
+    owarn << "Junk characters found... ignored" << oendl; 
     return TRUE;
 }
 
@@ -270,7 +276,7 @@ bool DBXmlHandler::warning(const QXmlParseException& exception)
 	.arg(exception.lineNumber())
 	.arg(exception.columnNumber());
 
-    qWarning(errorProt);
+    owarn << errorProt << oendl; 
     return QXmlDefaultHandler::fatalError(exception);
 }
 
@@ -281,7 +287,7 @@ bool DBXmlHandler::error(const QXmlParseException& exception)
 	.arg(exception.lineNumber())
 	.arg(exception.columnNumber());
 
-    qWarning(errorProt);
+    owarn << errorProt << oendl; 
     return QXmlDefaultHandler::fatalError(exception);
 }
 
@@ -292,6 +298,6 @@ bool DBXmlHandler::fatalError(const QXmlParseException& exception)
 	.arg(exception.lineNumber())
 	.arg(exception.columnNumber());
 
-    qWarning(errorProt);
+    owarn << errorProt << oendl; 
     return QXmlDefaultHandler::fatalError(exception);
 }

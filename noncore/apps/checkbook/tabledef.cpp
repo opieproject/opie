@@ -28,6 +28,8 @@
 
 #include "tabledef.h"
 
+#include <opie2/odebug.h>
+using namespace Opie::Core;
 
 // --- ColumnDef --------------------------------------------------------------
 ColumnDef::ColumnDef(const char *sName, ColumnType type, const char *sNewValue)
@@ -42,14 +44,14 @@ ColumnDef::ColumnDef(const char *sName, ColumnType type, const char *sNewValue)
 void ColumnDef::addColumnValue(const QString &sValue)
 {
     if( (_type & 0x00ffffff) !=typeList )
-        qDebug("Column %s is not a list", (const char *)_sName);
+        odebug << "Column " << (const char *)_sName << " is not a list" << oendl; 
     else
         _valueList.append(sValue);
 }
 void ColumnDef::addColumnValue(const char *sValue)
 {
     if( (_type & 0x00ffffff)!=typeList )
-        qDebug("Column %s is not a list", (const char *)_sName);
+        odebug << "Column " << (const char *)_sName << " is not a list" << oendl; 
     else
         _valueList.append(sValue);
 }

@@ -26,10 +26,14 @@
 
 #include "calculatorimpl.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
 #include <qpe/resource.h>
 #include <qpe/qmath.h>
 #include <qpe/qpeapplication.h>
+using namespace Opie::Core;
 
+/* QT */
 #include <qpushbutton.h>
 #include <qcombobox.h>
 #include <qlabel.h>
@@ -39,7 +43,10 @@
 #include <qfile.h>
 #include <qtextstream.h>
 #include <qmessagebox.h>
+
+/* STD */
 #include <math.h>
+
 /* XPM */
 static char *oneoverx_xpm[] = {
 /* width height num_colors chars_per_pixel */
@@ -233,7 +240,7 @@ CalculatorImpl::CalculatorImpl( QWidget * parent, const char * name,
     tmp += "etc/unit_conversion.dat";
     QFile myfile(tmp);
     if ( !myfile.open( IO_Translate | IO_ReadOnly ) ) {
-        qDebug("Data file unit_conversion.dat not found\nNo conversion features will be available\n"+tmp);
+        odebug << "Data file unit_conversion.dat not found\nNo conversion features will be available\n"+tmp << oendl; 
         // disable the f button if no conv file available
         ComboBoxFunction->setEnabled(FALSE);
     }
@@ -507,7 +514,7 @@ void CalculatorImpl::execOp( Operation i )
     return;
       processStack( oAdd );
       if ( operationStack.top().operation != oOpenBrace )
-    qDebug( "Calculator: internal Error" );
+    odebug << "Calculator: internal Error" << oendl; 
       operationStack.pop();
       state = sNewNumber;
       numOpenBraces--;

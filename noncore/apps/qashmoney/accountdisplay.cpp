@@ -1,11 +1,16 @@
-#include <qmessagebox.h>
-#include <qheader.h>
-
 #include "accountdisplay.h"
 #include "newaccount.h"
 #include "transaction.h"
 #include "transferdialog.h"
 #include "transfer.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
+/* QT */
+#include <qmessagebox.h>
+#include <qheader.h>
 
 extern Account *account;
 extern Transaction *transaction;
@@ -267,7 +272,7 @@ void AccountDisplay::getTransferAccounts ( QListViewItem * item )
             // set the cleared integer if the checkbox is checked
             if ( td->clearedcheckbox->isChecked() == TRUE )
               cleared = 1;
-            qDebug("Year from transferdialog = %i",td->getYear());
+            odebug << "Year from transferdialog = " << td->getYear() << "" << oendl; 
             // add the transfer with a new date if its been edited or use the default date
             if ( td->getDateEdited () == TRUE )
               transfer->addTransfer ( firstaccountid, account->getParentAccountID ( firstaccountid ), secondaccountid, account->getParentAccountID ( secondaccountid ), td->getDay(), td->getMonth(), td->getYear(), td->amount->text().toFloat(), cleared );

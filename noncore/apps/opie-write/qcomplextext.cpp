@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qcomplextext.cpp,v 1.3 2004-03-01 19:44:43 chicken Exp $
+** $Id: qcomplextext.cpp,v 1.4 2004-04-04 13:54:45 mickeyl Exp $
 **
 ** Implementation of some internal classes
 **
@@ -106,7 +106,7 @@ QBidiContext::~QBidiContext()
 */
 static inline const QChar *prevChar( const QString &str, int pos )
 {
-    //qDebug("leftChar: pos=%d", pos);
+    //odebug << "leftChar: pos=" << pos << "" << oendl; 
     pos--;
     const QChar *ch = str.unicode() + pos;
     while( pos > -1 ) {
@@ -124,7 +124,7 @@ static inline const QChar *nextChar( const QString &str, int pos)
     int len = str.length();
     const QChar *ch = str.unicode() + pos;
     while( pos < len ) {
-	//qDebug("rightChar: %d isLetter=%d, joining=%d", pos, ch.isLetter(), ch.joining());
+	//odebug << "rightChar: " << pos << " isLetter=" << ch.isLetter() << ", joining=" << ch.joining() << "" << oendl; 
 	if( !ch->isMark() )
 	    return ch;
 	// assume it's a transparent char, this might not be 100% correct

@@ -15,6 +15,10 @@
 
 #include "gps.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
 /* QT */
 #include <qtextstream.h>
 
@@ -25,14 +29,14 @@
 GPS::GPS( QObject* parent, const char * name )
     :QObject( parent, name )
 {
-    qDebug( "GPS::GPS()" );
+    odebug << "GPS::GPS()" << oendl; 
     _socket = new QSocket( this, "gpsd commsock" );
 }
 
 
 GPS::~GPS()
 {
-    qDebug( "GPS::~GPS()" );
+    odebug << "GPS::~GPS()" << oendl; 
 }
 
 
@@ -53,7 +57,7 @@ GpsLocation GPS::position() const
     if ( result )
     {
         int numAvail = _socket->bytesAvailable();
-        qDebug( "GPS write succeeded, %d bytes available for reading...", numAvail );
+        odebug << "GPS write succeeded, " << numAvail << " bytes available for reading..." << oendl; 
         if ( numAvail )
         {                     
             int numRead = _socket->readBlock( &buf[0], sizeof buf );
@@ -61,7 +65,7 @@ GpsLocation GPS::position() const
             
             if ( numRead < 7 || numScan != 2 )
             {
-                qDebug( "GPS read %d bytes succeeded, invalid response: '%s'", numRead, &buf[0] );
+                odebug << "GPS read " << numRead << " bytes succeeded, invalid response: '" << &buf[0] << "'" << oendl; 
                 return GpsLocation( -111, -111 );
             }
             else

@@ -1,10 +1,11 @@
-
 #include "backuprestore.h"
 #include "errordialog.h"
 
 /* OPIE */
+#include <opie2/odebug.h>
 #include <opie2/ostorageinfo.h>
 #include <qpe/qpeapplication.h>
+using namespace Opie::Core;
 
 /* QT */
 #include <qapplication.h>
@@ -40,7 +41,6 @@
 
 const QString tempFileName = "/tmp/backup.err";
 
-
 BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name,  WFlags fl)
         : BackupAndRestoreBase(parent, name,  fl)
 {
@@ -73,17 +73,17 @@ BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name,  WFlags f
     if ( storage.hasCf() )
     {
         backupLocations.insert( "CF", storage.cfPath() );
-        qDebug( "Cf Path: " + storage.cfPath() );
+        odebug << "Cf Path: " + storage.cfPath() << oendl; 
     }
     if ( storage.hasSd() )
     {
         backupLocations.insert( "SD", storage.sdPath() );
-        qDebug( " Sd Path: " + storage.sdPath() );
+        odebug << " Sd Path: " + storage.sdPath() << oendl; 
     }
     if ( storage.hasMmc() )
     {
         backupLocations.insert( "MMC", storage.mmcPath() );
-        qDebug( "Mmc Path: " + storage.mmcPath() );
+        odebug << "Mmc Path: " + storage.mmcPath() << oendl; 
     }
 
     Config config("BackupAndRestore");
@@ -203,7 +203,7 @@ void BackupAndRestore::scanForApplicationSettings()
     QFileInfo *fi;
     while ( (fi=it.current()) )
     {
-        //qDebug((d.path()+"/"+fi->fileName()).latin1());
+        //odebug << (d.path()+"/"+fi->fileName()).latin1() << oendl; 
         if ( ( fi->fileName() != "." ) && ( fi->fileName() != ".." ) )
         {
             QListViewItem *newItem = new QListViewItem(applicationSettings, fi->fileName());
@@ -249,7 +249,7 @@ void BackupAndRestore::backup()
     // We execute tar and compressing its output with gzip..
     // The error output will be written into a temp-file which could be provided
     // for debugging..
-    qDebug( "Storing file: %s", outputFile.latin1() );
+    odebug << "Storing file: " << outputFile.latin1() << "" << oendl; 
     outputFile += EXTENSION;
 
     QString commandLine = QString( "cd %1 && (tar -X %1 -cz %2 Applications/backup/exclude -f %3 ) 2> %4" ).arg( QDir::homeDirPath() )
@@ -258,7 +258,7 @@ void BackupAndRestore::backup()
                           .arg( outputFile.latin1() )
                           .arg( tempFileName.latin1() );
 
-    qDebug( commandLine );
+    odebug << commandLine << oendl; 
 
     int r = system( commandLine );
 
@@ -272,7 +272,7 @@ void BackupAndRestore::backup()
         {
 
         case 1:
-            qWarning("Details pressed !");
+            owarn << "Details pressed !" << oendl; 
             ErrorDialog* pErrDialog = new ErrorDialog( this, NULL, true );
             QFile errorFile( tempFileName );
             if ( errorFile.open(IO_ReadOnly) )
@@ -359,7 +359,7 @@ void BackupAndRestore::sourceDirChanged(int selection)
 
 void BackupAndRestore::fileListUpdate()
 {
-    qWarning("void BackupAndRestore::fileListUpdate()");
+    owarn << "void BackupAndRestore::fileListUpdate()" << oendl; 
     restoreList->clear();
     rescanFolder( backupLocations[restoreSource->currentText()] );
 }
@@ -371,7 +371,7 @@ void BackupAndRestore::fileListUpdate()
  */
 void BackupAndRestore::rescanFolder(QString directory)
 {
-    //qDebug(QString("rescanFolder: ") + directory.latin1());
+    //odebug << QString("rescanFolder: ") + directory.latin1() << oendl; 
     QDir d(directory);
     if(!d.exists())
         return;
@@ -419,7 +419,7 @@ void BackupAndRestore::restore()
 
     restoreFile += "/" + restoreItem->text(0);
 
-    qDebug( restoreFile );
+    odebug << restoreFile << oendl; 
 
     //check if backup file come from opie 1.0.x
 
@@ -442,7 +442,7 @@ void BackupAndRestore::restore()
                   .arg( restoreFile.latin1() )
                   .arg( tempFileName.latin1() );
 
-    qDebug( commandLine );
+    odebug << commandLine << oendl; 
 
     r = system( commandLine );
 
@@ -454,7 +454,7 @@ void BackupAndRestore::restore()
                                       + errorMsg, QString( tr( "Ok") ), QString( tr( "Details" ) ) ) )
         {
         case 1:
-            qWarning("Details pressed !");
+            owarn << "Details pressed !" << oendl; 
             ErrorDialog* pErrDialog = new ErrorDialog( this, NULL, true );
             QFile errorFile( tempFileName );
             if ( errorFile.open(IO_ReadOnly) )

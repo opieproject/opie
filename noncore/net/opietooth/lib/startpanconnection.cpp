@@ -39,7 +39,7 @@ StartConnection::ConnectionType StartPanConnection::type() {
 
 void StartPanConnection::start()  {
     m_panConnect = new OProcess();
-    qDebug( "IM START " + m_mac );
+    odebug << "IM START " + m_mac << oendl; 
     *m_panConnect << "pand" << "--connect" << m_mac;
 
     connect( m_panConnect, SIGNAL( processExited(Opie::Core::OProcess*) ) ,
@@ -47,7 +47,7 @@ void StartPanConnection::start()  {
     connect( m_panConnect, SIGNAL( receivedStdout(Opie::Core::OProcess*,char*,int) ),
              this, SLOT( slotStdOut(Opie::Core::OProcess*,char*,int) ) );
     if (!m_panConnect->start( OProcess::NotifyOnExit, OProcess::AllOutput) ) {
-        qWarning( "could not start" );
+        owarn << "could not start" << oendl; 
         delete m_panConnect;
     }
 }
@@ -68,7 +68,7 @@ void StartPanConnection::stop()  {
         m_panConnect = 0l;
     }
     m_panConnect = new OProcess();
-    qDebug("IM STOP " + m_mac);
+    odebug << "IM STOP " + m_mac << oendl; 
 
     *m_panConnect << "pand" << "--kill" << m_mac;
 
@@ -77,7 +77,7 @@ void StartPanConnection::stop()  {
     connect( m_panConnect, SIGNAL( receivedStdout(Opie::Core::OProcess*,char*,int) ),
              this, SLOT( slotStdOut(Opie::Core::OProcess*,char*,int) ) );
     if (!m_panConnect->start( OProcess::NotifyOnExit, OProcess::AllOutput) ) {
-        qWarning( "could not stop" );
+        owarn << "could not stop" << oendl; 
         delete m_panConnect;
     }
 }

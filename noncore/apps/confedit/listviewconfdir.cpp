@@ -9,10 +9,14 @@
   // (c) 2002 Patrick S. Vogtp <tille@handhelds.org>
 
 #include "listviewconfdir.h"
-
-#include <qmessagebox.h>
-
 #include "listviewitemconffile.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
+/* QT */
+#include <qmessagebox.h>
 
 ListViewConfDir::ListViewConfDir(QString settingsPath, QWidget *parent, const char *name )
   : QListView(parent,name), confDir(settingsPath)
@@ -36,7 +40,7 @@ ListViewConfDir::~ListViewConfDir()
 void ListViewConfDir::readConfFiles()
 {
 
-	confDir.setFilter( QDir::Files | QDir::NoSymLinks );
+  confDir.setFilter( QDir::Files | QDir::NoSymLinks );
   confDir.setSorting( QDir::Name );
   confDir.setNameFilter("*.conf");
   const QFileInfoList *list = confDir.entryInfoList();
@@ -47,7 +51,7 @@ void ListViewConfDir::readConfFiles()
 
 	while ( (fi=it.current()) )
  	{
-    qDebug( "opening: >%s<", fi->fileName().data() );
+    odebug << "opening: >" << fi->fileName().data() << "<" << oendl; 
   	fileEntry = new ListViewItemConfFile( fi, this );
     QListViewItem *dummy = new QListViewItem(fileEntry, "dummy");
   	++it;

@@ -14,24 +14,27 @@
 **********************************************************************/
 
 #include "mainwindow.h"
+
 #ifdef QWS
+#include <opie2/odebug.h>
 #include <opie2/oapplication.h>
 #include <opie2/oprocess.h>
 #else
 #include <qapplication.h>
 #endif
 
+/* QT */
 #include <qmessagebox.h>
 #include <qstringlist.h>
 
+/* STD */
 #include <errno.h>
 #include <signal.h>
 #include <string.h>
 #include <unistd.h>
 
 using namespace Opie::Core;
-using namespace Opie::Core;
-using namespace Opie::Core;
+
 int main( int argc, char **argv )
 {
     #ifdef QWS
@@ -55,10 +58,10 @@ int main( int argc, char **argv )
     bool check = true;
     for ( int i = 1; i < argc; ++i )
     {
-        qDebug( "Wellenreiter::main() parsing argument %d = '%s'", i, argv[i] );
+        odebug << "Wellenreiter::main() parsing argument " << i << " = '" << argv[i] << "'" << oendl; 
         if ( !strcmp( "-nocheck", argv[i] ) )
         {
-            qDebug( "-nocheck found" );
+            odebug << "-nocheck found" << oendl; 
             check = false;
             break;
         }
@@ -69,7 +72,7 @@ int main( int argc, char **argv )
         // root check
         if ( getuid() )
         {
-            qWarning( QObject::tr( "Wellenreiter: trying to run as non-root!" ) );
+            owarn << QObject::tr( "Wellenreiter: trying to run as non-root!" ) << oendl; 
             result = QMessageBox::warning( w, " - Wellenreiter II -  (non-root)", QObject::tr( "You have started Wellenreiter II\n"
             "as non-root. You will have\nonly limited functionality.\nProceed anyway?" ),
             QMessageBox::Yes, QMessageBox::No );
@@ -86,7 +89,7 @@ int main( int argc, char **argv )
             if ( result == QMessageBox::Yes )
             {
                 if ( -1 == ::kill( dhcpid, SIGTERM ) )
-                    qWarning( "Wellenreiter: can't kill process #%d (%s)", result, strerror( errno ) );
+                    owarn << "Wellenreiter: can't kill process #" << result << " (" << strerror( errno ) << ")" << oendl; 
                 else
                     killed = true;
             }

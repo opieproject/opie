@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: helpwindow.cpp,v 1.5 2004-03-13 23:10:27 zecke Exp $
+** $Id: helpwindow.cpp,v 1.6 2004-04-04 13:54:51 mickeyl Exp $
 **
 ** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
 **
@@ -9,14 +9,19 @@
 *****************************************************************************/
 
 #include "helpwindow.h"
-#include <qlayout.h>
 
-#include <qtoolbar.h>
+/* OPIE */
+#include <opie2/odebug.h>
 #include <qpe/resource.h>
+using namespace Opie::Core;
 
+/* QT */
+#include <qlayout.h>
+#include <qtoolbar.h>
 #include <qaction.h>
 #include <qmenubar.h>
 
+/* STD */
 #include <ctype.h>
 
 HelpWindow::HelpWindow( const QString& home_, const QString& _path, QWidget* parent, const char *name )
@@ -25,7 +30,7 @@ HelpWindow::HelpWindow( const QString& home_, const QString& _path, QWidget* par
     QGridLayout *layout = new QGridLayout( this );
     layout->setSpacing( 2);
     layout->setMargin( 2);
-    qDebug(_path);
+    odebug << _path << oendl; 
     browser = new QTextBrowser( this );
     QStringList Strlist;
     Strlist.append( home_);

@@ -1,8 +1,12 @@
 #include "slavemaster.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/qcopenvelope_qws.h>
+using namespace Opie::Core;
 
+/* QT */
 #include <qcopchannel_qws.h>
 #include <qtimer.h>
 
@@ -23,7 +27,7 @@ QDataStream & operator >> (QDataStream & str, bool & b)
  * ! We don't put a Pixmap in!!!!
  */
 QDataStream &operator<<( QDataStream& s, const PixmapInfo& inf) {
-    qWarning( "Image request is %s %d %d", inf.file.latin1(), inf.width, inf.height );
+    owarn << "Image request is " << inf.file.latin1() << " " << inf.width << " " << inf.height << "" << oendl; 
     return s << inf.file  << inf.width << inf.height;
 }
 QDataStream &operator>>( QDataStream& s, PixmapInfo& inf ) {
@@ -78,10 +82,10 @@ void SlaveMaster::imageInfo( const QString& str ) {
 
 void SlaveMaster::thumbNail( const QString& str, int w, int h ) {
     if ( str.isEmpty() ) {
-        qWarning( "Asking for empty nail" );
+        owarn << "Asking for empty nail" << oendl; 
         return;
     }
-    qWarning( "Asking for thumbNail in size %d %d" + str, w,h );
+    owarn << "Asking for thumbNail in size " << w << " " << h << "" + str << oendl; 
     PixmapInfo item;
     item.file = str; item.width = w; item.height = h;
     item.pixmap = QPixmap();
@@ -105,7 +109,7 @@ void SlaveMaster::recieve( const QCString& str, const QByteArray& at) {
     else if ( str == "pixmapsHandled(StringList)" )
         stream >> infos;
 
-    qWarning( "PixInfos %d", pixinfos.count() );
+    owarn << "PixInfos " << pixinfos.count() << "" << oendl; 
 
     bool got_data = ( !infos.isEmpty() || !pixinfos.isEmpty() );
     if ( got_data ) {

@@ -26,8 +26,16 @@
 #include "datacache.h"
 #include "xmlsource.h"
 #include "csvsource.h"
-#include <stdlib.h>
+
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
+/* QT */
 #include <qheader.h>
+
+/* STD */
+#include <stdlib.h>
 
 #define INIT_TABLE_SIZE 128
 
@@ -150,7 +158,7 @@ void DBStore::addItemInternal(DataElem *delem)
 {
     /* if already full, don't over fill, do a qWarning though */
     if (full) {
-        qWarning("Attempted to add items to already full table");
+        owarn << "Attempted to add items to already full table" << oendl; 
         return;
     }
 

@@ -3,15 +3,20 @@
 #include "krfbdecoder.h"
 #include "krfbbuffer.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
 
+/* QT */
 #include <qpixmap.h>
 
+/* STD */
 #include <assert.h>
 
 //
 // Endian stuff
 //
-#ifndef KDE_USE_FINAL
+#ifndef OPIE_NO_DEBUG
 const int endianTest = 1;
 #endif
 
@@ -135,7 +140,7 @@ void KRFBDecoder::sendClientInit()
   con->write( &( con->options()->shared ), 1 );
 
   // Wait for server init
-  qWarning( "Waiting for server init" );
+  owarn << "Waiting for server init" << oendl; 
 
   static QString statusMsg = tr( "Waiting for server initialization..." );
   emit status( statusMsg );
@@ -147,7 +152,7 @@ void KRFBDecoder::sendClientInit()
 
 void KRFBDecoder::gotServerInit()
 {
-  qWarning( "Got server init" );
+  owarn << "Got server init" << oendl; 
   disconnect( con, SIGNAL( gotEnoughData() ), this, SLOT( gotServerInit() ) );
 
   if ( info )
@@ -181,7 +186,7 @@ void KRFBDecoder::gotServerInit()
   con->read( &(info->nameLength), 4 );
   info->nameLength = Swap32IfLE( info->nameLength );
 
-  qWarning( "Width = %d, Height = %d", info->width, info->height );
+  owarn << "Width = " << info->width << ", Height = " << info->height << "" << oendl; 
   qWarning( "Bpp = %d, Depth = %d, Big = %d, True = %d",
 	   info->bpp, info->depth, info->bigEndian, info->trueColor );
   qWarning( "RedMax = %d, GreenMax = %d, BlueMax = %d",
@@ -192,7 +197,7 @@ void KRFBDecoder::gotServerInit()
   buf->resize( info->width/con->options()->scaleFactor, info->height /con->options()->scaleFactor);
 
   // Wait for desktop name
-  qWarning( "Waiting for desktop name" );
+  owarn << "Waiting for desktop name" << oendl; 
 
   static QString statusMsg = tr( "Waiting for desktop name..." );
   emit status( statusMsg );
@@ -207,7 +212,7 @@ void KRFBDecoder::gotDesktopName()
   assert( info );
   assert( currentState == AwaitingDesktopName );
 
-  qWarning( "Got desktop name" );
+  owarn << "Got desktop name" << oendl; 
 
   disconnect( con, SIGNAL( gotEnoughData() ),
 	      this, SLOT( gotDesktopName() ) );
@@ -219,7 +224,7 @@ void KRFBDecoder::gotDesktopName()
   buf[ info->nameLength ] = '\0';
   info->name = buf;
 
-  qWarning( "Desktop: %s", info->name.latin1() );
+  owarn << "Desktop: " << info->name.latin1() << "" << oendl; 
 
   delete buf;
 
@@ -371,7 +376,7 @@ void KRFBDecoder::gotUpdateHeader()
 {
   assert( currentState == AwaitingUpdate );
 
-  //  qWarning( "Got update header" );
+  //  owarn << "Got update header" << oendl; 
 
   disconnect( con, SIGNAL( gotEnoughData() ),
 	      this, SLOT( gotUpdateHeader() ) );
@@ -406,7 +411,7 @@ void KRFBDecoder::gotUpdateHeader()
   con->read( &noRects, 2 );
   noRects = Swap16IfLE( noRects );
 
-  //  qWarning( "Expecting %d rects", noRects );
+  //  owarn << "Expecting " << noRects << " rects" << oendl; 
 
   // Now wait for the data
   currentState = AwaitingRectHeader;
@@ -418,7 +423,7 @@ void KRFBDecoder::gotRectHeader()
 {
   assert( currentState == AwaitingRectHeader );
 
-  //  qWarning( "Got rect header" );
+  //  owarn << "Got rect header" << oendl; 
 
   disconnect( con, SIGNAL( gotEnoughData() ),
 	      this, SLOT( gotRectHeader() ) );
@@ -446,23 +451,23 @@ void KRFBDecoder::gotRectHeader()
   // the remote value as is.
   //
   if ( encoding == RawEncoding ) {
-      //    qWarning( "Raw encoding" );
+      //    owarn << "Raw encoding" << oendl; 
     handleRawRect();
   }
   else if ( encoding == CopyRectEncoding ) {
-//    qWarning( "CopyRect encoding" );
+//    owarn << "CopyRect encoding" << oendl; 
     handleCopyRect();
   }
   else if ( encoding == RreEncoding ) {
-    qWarning( "RRE encoding" );
+    owarn << "RRE encoding" << oendl; 
     handleRRERect();
   }
   else if ( encoding == CorreEncoding ) {
-    qWarning( "CoRRE encoding" );
+    owarn << "CoRRE encoding" << oendl; 
     handleCoRRERect();
   }
   else if ( encoding == HexTileEncoding ) {
-    qWarning( "HexTile encoding" );
+    owarn << "HexTile encoding" << oendl; 
     handleHexTileRect();
   }
   else {
@@ -470,7 +475,7 @@ void KRFBDecoder::gotRectHeader()
     QString protocolError = tr( "Protocol Error: An unknown encoding was "
 				  "used by the server %1" ).arg( msg );
     currentState = Error;
-    qWarning( "Unknown encoding, %d", msg );
+    owarn << "Unknown encoding, " << msg << "" << oendl; 
     emit error( protocolError );
     return;
   }
@@ -486,7 +491,7 @@ void KRFBDecoder::handleRawRect()
   // rectanges nicely. The chunking should be based on the
   // overall size (but has to be in complete lines).
 
-    //  qWarning( "Handling a raw rect chunk" );
+    //  owarn << "Handling a raw rect chunk" << oendl; 
 
     //  CARD32 lineCount = w * format->bpp / 8;
 
@@ -509,7 +514,7 @@ void KRFBDecoder::getRawRectChunk( int lines )
   CARD32 count = lines * w * format->bpp / 8;
 
   // Wait for server init
-  //  qWarning( "Waiting for raw rect chunk, %ld", count );
+  //  owarn << "Waiting for raw rect chunk, " << count << "" << oendl; 
 
   currentState = AwaitingRawRectChunk;
   connect( con, SIGNAL( gotEnoughData() ), SLOT( gotRawRectChunk() ) );
@@ -523,7 +528,7 @@ void KRFBDecoder::gotRawRectChunk()
   disconnect( con, SIGNAL( gotEnoughData() ),
               this, SLOT( gotRawRectChunk() ) );
 
-  //  qWarning( "Got raw rect chunk" );
+  //  owarn << "Got raw rect chunk" << oendl; 
 
   //
   // Read the rect data and copy it to the buffer.
@@ -546,7 +551,7 @@ void KRFBDecoder::gotRawRectChunk()
   else {
     noRects--;
 
-    //    qWarning( "There are %d rects left", noRects );
+    //    owarn << "There are " << noRects << " rects left" << oendl; 
 
     if ( noRects ) {
       currentState = AwaitingRectHeader;
@@ -590,7 +595,7 @@ void KRFBDecoder::gotCopyRectPos()
 
   noRects--;
 
-  //    qWarning( "There are %d rects left", noRects );
+  //    owarn << "There are " << noRects << " rects left" << oendl; 
 
   if ( noRects ) {
     currentState = AwaitingRectHeader;
@@ -603,17 +608,17 @@ void KRFBDecoder::gotCopyRectPos()
 
 void KRFBDecoder::handleRRERect()
 {
-  qWarning( "RRE not implemented" );
+  owarn << "RRE not implemented" << oendl; 
 }
 
 void KRFBDecoder::handleCoRRERect()
 {
-  qWarning( "CoRRE not implemented" );
+  owarn << "CoRRE not implemented" << oendl; 
 }
 
 void KRFBDecoder::handleHexTileRect()
 {
-  qWarning( "HexTile not implemented" );
+  owarn << "HexTile not implemented" << oendl; 
 }
 
 void KRFBDecoder::sendMouseEvent( QMouseEvent *e )
@@ -673,7 +678,7 @@ void KRFBDecoder::sendCutEvent( const QString &unicode )
 
 void KRFBDecoder::gotServerCut()
 {
-  qWarning( "Got server cut" );
+  owarn << "Got server cut" << oendl; 
 
   currentState = AwaitingServerCutLength;
   connect( con, SIGNAL( gotEnoughData() ), SLOT( gotServerCutLength() ) );
@@ -721,7 +726,7 @@ void KRFBDecoder::gotServerCutText()
 
   /* For some reason QApplication::clipboard()->setText() segfaults when called
    * from within keypebble's mass of signals and slots
-  qWarning( "Server cut: %s", cutbuf );
+  owarn << "Server cut: " << cutbuf << "" << oendl; 
 
   QString cutText( cutbuf ); // DANGER!!
   qApp->clipboard()->setText( cutText );
@@ -738,14 +743,14 @@ void KRFBDecoder::gotServerCutText()
     currentState = Idle;
   }
   else {
-    qWarning( "Async handled in weird state" );
+    owarn << "Async handled in weird state" << oendl; 
     currentState = oldState;
   };
 }
 
 void KRFBDecoder::gotBell()
 {
-  qWarning( "Got server bell" );
+  owarn << "Got server bell" << oendl; 
   buf->soundBell();
 
   // Now wait for the update (again)
@@ -758,7 +763,7 @@ void KRFBDecoder::gotBell()
     currentState = Idle;
   }
   else {
-    qWarning( "Async handled in weird state" );
+    owarn << "Async handled in weird state" << oendl; 
     currentState = oldState;
   };
 }

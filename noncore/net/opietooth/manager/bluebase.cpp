@@ -155,7 +155,7 @@ void BlueBase::writeConfig()
  */
 void BlueBase::writeToHciConfig()
 {
-    qWarning("writeToHciConfig");
+    owarn << "writeToHciConfig" << oendl; 
     HciConfWrapper hciconf ( "/etc/bluetooth/hcid.conf" );
     hciconf.load();
     hciconf.setPinHelper( "/opt/QtPalmtop/bin/bluepin" );
@@ -367,25 +367,25 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
         QPopupMenu *popup =0l;
         if ( it != list.end() )
         {
-            qWarning("Searching id %d %s", it.key(), it.data().latin1() );
+            owarn << "Searching id " << it.key() << " " << it.data().latin1() << "" << oendl; 
             popup = m_popHelper.find( it.key(),
                                       service->services(),
                                       (BTDeviceItem*)service->parent() );
         }
         else
         {
-            qWarning("Empty");
+            owarn << "Empty" << oendl; 
         }
 
         if ( popup == 0l )
         {
-            qWarning("factory returned 0l");
+            owarn << "factory returned 0l" << oendl; 
             popup = new QPopupMenu();
         }
         int test1 = popup->insertItem( tr("Test1:"),  2);
 
         ret = popup->exec( point );
-        qWarning("returned from exec() ");
+        owarn << "returned from exec() " << oendl; 
         if ( ret == -1 )
         {
             ;
@@ -406,7 +406,7 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
  */
 void BlueBase::addServicesToDevice( BTDeviceItem * item )
 {
-    qDebug("addServicesToDevice");
+    odebug << "addServicesToDevice" << oendl; 
     // row of mac adress text(3)
     RemoteDevice device = item->remoteDevice();
     m_deviceList.insert( item->mac() , item );
@@ -423,7 +423,7 @@ void BlueBase::addServicesToDevice( BTDeviceItem * item )
  */
 void BlueBase::addServicesToDevice( const QString& device, Services::ValueList servicesList )
 {
-    qDebug("fill services list");
+    odebug << "fill services list" << oendl; 
 
     QMap<QString,BTDeviceItem*>::Iterator it;
     BTDeviceItem* deviceItem = 0;
@@ -607,7 +607,7 @@ void BlueBase::deviceActive( const RemoteDevice &device )
  */
 void BlueBase::deviceActive( const QString& device, bool connected  )
 {
-    qDebug("deviceActive slot");
+    odebug << "deviceActive slot" << oendl; 
 
     QMap<QString,BTDeviceItem*>::Iterator it;
 

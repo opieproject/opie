@@ -26,23 +26,25 @@
 #include "ImageFileSelector.h"
 #include "settingsdialog.h"
 
-
+/* OPIE */
+#include <opie2/odebug.h>
 #include <opie2/ofiledialog.h>
-
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
 #include <qpe/resource.h>
-#include <qtoolbar.h>
+using namespace Opie::Core;
+using namespace Opie::Ui; 
 
+/* QT */
+#include <qtoolbar.h>
 #include <qaction.h>
 #include <qfiledialog.h>
 #include <qmenubar.h>
 #include <qspinbox.h>
 
+/* STD */
 #include <math.h>
 
-
-using namespace Opie::Ui;
 ControlsDialog::ControlsDialog(const QString &caption,QImage image,int *brightness,QWidget *parent)
         : QDialog(parent,0,true)
 {
@@ -286,7 +288,7 @@ ImageViewer::ImageViewer( QWidget *parent, const char *name, int /*wFlags*/ )
     else
         cv=ImageFileSelector::DETAILED;
 
-    qDebug("cv = %d",cv);
+    odebug << "cv = " << cv << "" << oendl; 
 
     fileSelector = new ImageFileSelector( cv,stack, "fs");
 
@@ -413,7 +415,7 @@ void ImageViewer::settings()
     dlg.setFastLoad(fastLoad);
 
     if ( QPEApplication::execDialog(&dlg) == QDialog::Accepted ) {
-        qDebug("<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>");
+        odebug << "<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>" << oendl; 
         slideDelay = dlg.delay();
         slideRepeat = dlg.repeat();
         slideReverse = dlg.reverse();
@@ -505,7 +507,7 @@ void ImageViewer::show()
 
 void ImageViewer::show(const QString& fileref)
 {
-//    qDebug("Show "+fileref);
+//    odebug << "Show "+fileref << oendl; 
     bFromDocView = TRUE;
     closeFileSelector();
     DocLnk link(fileref);
@@ -535,7 +537,7 @@ void ImageViewer::openFile( const DocLnk &link )
 {
     closeFileSelector();
 //    DocLnk link(file);
-    qDebug("open "+link.name());
+    odebug << "open "+link.name() << oendl; 
     updateCaption( link.name() );
     loadImage( link.file() );
     if (slideTimer->isActive()) {

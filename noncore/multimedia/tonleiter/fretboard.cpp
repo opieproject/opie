@@ -1,5 +1,10 @@
 #include "fretboard.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
+/* QT */
 #include <qpainter.h>
 
 Graph::FretBoard::FretBoard(TonleiterData* data,QWidget* parent,const char* name,WFlags f)
@@ -27,7 +32,7 @@ void Graph::FretBoard::paintEvent(QPaintEvent* pe)
 
     int instid=data->getCurrentInstrumentID();
     inst=data->getInstrument(instid);
-    //qDebug("inst %d  is %s",instid,inst.instName().data());
+    //odebug << "inst " << instid << "  is " << inst.instName().data() << "" << oendl; 
 
     QRect mysize=rect();
 
@@ -143,17 +148,17 @@ void Graph::FretBoard::paintScale(QPainter* p)
                 //no more than six octaves can be visualised (there is a zero octave)
                 int octave=Note::octaveOfBaseNote(data->getCurrentBaseNote(),note)-baseoctave;
                 if(octave<0)
-                    qDebug("%d,%d",octave,baseoctave);
+                    odebug << "" << octave << "," << baseoctave << "" << oendl; 
                 if(octave>5)
                 {
-                    qDebug("octave out of range");
+                    odebug << "octave out of range" << oendl; 
                     octave=5;
                 }
 
                 p->setPen(QColor(255,0,0));
                 int c= ( (note-12*baseoctave) - (12*octave+data->getCurrentBaseNote()) )*15;
                 if(c<0 || c>255)
-                    qDebug("%d = %d - ( %d + %d)",c,note,12*octave,data->getCurrentBaseNote());
+                    odebug << "" << c << " = " << note << " - ( " << 12*octave << " + " << data->getCurrentBaseNote() << ")" << oendl; 
                 QColor dotcolor(255,255,255);
 
                 if(octave==0)

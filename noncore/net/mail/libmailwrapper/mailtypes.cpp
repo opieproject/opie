@@ -13,7 +13,7 @@ RecMail::RecMail(const RecMail&old)
 {
     init();
     copy_old(old);
-    qDebug("Copy constructor RecMail");
+    odebug << "Copy constructor RecMail" << oendl; 
 }
 
 RecMail::~RecMail()
@@ -131,7 +131,7 @@ RecPart::RecPart(const RecPart&old)
     m_size = old.m_size;
     m_Parameters = old.m_Parameters;
     m_poslist = old.m_poslist;
-    qDebug("RecPart copy constructor");
+    odebug << "RecPart copy constructor" << oendl; 
 }
 
 RecPart::~RecPart()
@@ -255,7 +255,7 @@ RecBody::RecBody(const RecBody&old)
     m_BodyText = old.m_BodyText;
     m_PartsList = old.m_PartsList;
     m_description = old.m_description;
-    qDebug("Recbody copy constructor");
+    odebug << "Recbody copy constructor" << oendl; 
 }
 
 RecBody::~RecBody()
@@ -320,14 +320,14 @@ encodedString::encodedString(const encodedString&old)
 {
     init();
     copy_old(old);
-    qDebug("encodedeString: copy constructor!");
+    odebug << "encodedeString: copy constructor!" << oendl; 
 }
 
 encodedString& encodedString::operator=(const encodedString&old)
 {
     init();
     copy_old(old);
-    qDebug("encodedString: assign operator!");
+    odebug << "encodedString: assign operator!" << oendl; 
     return *this;
 }
 

@@ -1,5 +1,8 @@
-#include <stdio.h>
 #include "ircmisc.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
 
 IRCTabBar::IRCTabBar(QWidget *parent, const char *name) : QTabBar(parent, name) {
 }
@@ -64,7 +67,7 @@ void IRCHistoryLineEdit::keyPressEvent(QKeyEvent *event) {
         m_history.prepend(text());
         m_index = -1;
     } else if (key == Key_Tab) {
-        printf("got tab\n");
+        odebug << "got tab" << oendl;
         return;
     }
     QLineEdit::keyPressEvent(event);
@@ -75,7 +78,7 @@ bool IRCHistoryLineEdit::eventFilter(QObject *object, QEvent *event) {
         QKeyEvent *k = (QKeyEvent *) event;
         /* Catch tab characters */
         if (k->key() == Key_Tab) {
-            qDebug("tab!");
+            odebug << "tab!" << oendl; 
             return TRUE;
         }
     }

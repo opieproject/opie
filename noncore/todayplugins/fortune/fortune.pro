@@ -1,5 +1,4 @@
 TEMPLATE = lib
-#CONFIG -= moc
 CONFIG += qt plugin 
 
 # Input

@@ -1,8 +1,13 @@
 #include "editinst.h"
 
-#include <qpushbutton.h>
-
+/* OPIE */
+#include <opie2/odebug.h>
+#include <qpe/config.h>
 #include <qpe/qpeapplication.h>
+using namespace Opie::Core;
+
+/* QT */
+#include <qpushbutton.h>
 
 Menu::InstEditDialog::InstEditDialog(TonleiterData* data,QWidget* parent,const char* name)
 :QDialog(parent,name,true,0),data(data)
@@ -100,7 +105,7 @@ void Menu::InstEditDialog::loadInstrument()
 {
     stringlist.clear();
     Instrument inst=data->getInstrument(instid);
-    qDebug("load Instrument : %d strings",inst.noOfStrings());
+    odebug << "load Instrument : " << inst.noOfStrings() << " strings" << oendl; 
     for(uint s=0;s<inst.noOfStrings();s++)
     {
         stringlist.append(new EditStringWidget(inst.string(s),stringwidget));

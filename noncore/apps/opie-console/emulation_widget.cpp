@@ -224,9 +224,9 @@ void EmulationWidget::calcGeometry()
 {
 	m_scrollbar->resize(QApplication::style().scrollBarExtent().width(), contentsRect().height() );
 
-        qDebug( QString(" TEST").arg( contentsRect().width() ) );
-        qDebug( QString(" TEST").arg( contentsRect().height() ) );
-        qDebug("NEUER TESTT!!!!!!!!");
+        odebug << QString(" TEST").arg( contentsRect().width() ) << oendl; 
+        odebug << QString(" TEST").arg( contentsRect().height() ) << oendl; 
+        odebug << "NEUER TESTT!!!!!!!!" << oendl; 
 
        	switch( scrollLoc )
 	{
@@ -258,7 +258,7 @@ void EmulationWidget::calcGeometry()
 
 void EmulationWidget::drawAttrString( QString& string, QPainter &painter, QRect rect, Character attr, bool usePixmap, bool clear )
 {
-    qWarning("Color1 %s", color_table[attr.b].color.name().latin1() );
+    owarn << "Color1 " << color_table[attr.b].color.name().latin1() << "" << oendl; 
     if ( usePixmap && color_table[attr.b].transparent )
     {
 	painter.setBackgroundMode( TransparentMode );
@@ -272,7 +272,7 @@ void EmulationWidget::drawAttrString( QString& string, QPainter &painter, QRect 
 	else
 	{
 	    painter.setBackgroundMode( OpaqueMode );
-            qWarning("Color %s", color_table[attr.b].color.name().latin1() );
+            owarn << "Color " << color_table[attr.b].color.name().latin1() << "" << oendl; 
 	    painter.setBackgroundColor( color_table[attr.b].color );
 	}
     }

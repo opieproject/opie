@@ -1,7 +1,5 @@
 TEMPLATE     = app
-TMAKE_CXXFLAGS    += -DHAVE_OPENPTY
 CONFIG       += qt warn_on 
-#CONFIG          = qt 
 DESTDIR      = $(OPIEDIR)/bin
 HEADERS      = io_layer.h io_serial.h io_irda.h io_bt.h io_modem.h \
            file_layer.h filetransfer.h \
@@ -70,7 +68,7 @@ DEPENDPATH  += $(OPIEDIR)/include
 LIBS        += -lqpe -lopiecore2 -lopieui2 -lutil
 TARGET       = opie-console
 
-
+DEFINES += HAVE_OPENPTY
 
 
 include ( $(OPIEDIR)/include.pro )

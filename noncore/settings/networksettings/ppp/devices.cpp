@@ -1,7 +1,7 @@
 /*
  *           kPPP: A pppd front end for the KDE project
  *
- * $Id: devices.cpp,v 1.3 2004-02-21 16:02:02 ar Exp $
+ * $Id: devices.cpp,v 1.4 2004-04-04 13:55:00 mickeyl Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -72,11 +72,11 @@ DevicesWidget::DevicesWidget( InterfacePPP* ip, QWidget *parent, const char *nam
 //  delete_b->setEnabled( false ); //FIXME
 
   QStringList tmp = _pppdata->getDevicesNamesList();
-  qDebug("DevicesWidget::DevicesWidget got devices %s",tmp.join("--").latin1());
+  odebug << "DevicesWidget::DevicesWidget got devices " << tmp.join("--").latin1() << "" << oendl; 
   listListbox->insertStringList(tmp);
 
   for (uint i = 0; i < listListbox->count(); i++){
-      qDebug("listListbox->text(i) %s == _pppdata->devname() %s",listListbox->text(i).latin1(), _pppdata->devname().latin1());
+      odebug << "listListbox->text(i) " << listListbox->text(i).latin1() << " == _pppdata->devname() " << _pppdata->devname().latin1() << "" << oendl; 
       if ( listListbox->text(i) == _pppdata->devname() )
           listListbox->setCurrentItem( i );
   }

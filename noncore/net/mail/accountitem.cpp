@@ -78,7 +78,7 @@ void POP3viewItem::refresh()
 
 RECBODYP POP3viewItem::fetchBody( const RecMailP &mail )
 {
-    qDebug( "POP3 fetchBody" );
+    odebug << "POP3 fetchBody" << oendl; 
     return wrapper->fetchBody( mail );
 }
 
@@ -269,7 +269,7 @@ void NNTPviewItem::refresh()
 
 RECBODYP NNTPviewItem::fetchBody( const RecMailP &mail )
 {
-    qDebug( "NNTP fetchBody" );
+    odebug << "NNTP fetchBody" << oendl; 
     return wrapper->fetchBody( mail );
 }
 
@@ -460,7 +460,7 @@ void IMAPviewItem::refreshFolders(bool force)
         {
             item = new IMAPfolderItem( (*it), this , item );
             folders->remove(it);
-            qDebug("inbox found");
+            odebug << "inbox found" << oendl; 
             break;
         }
     }
@@ -533,7 +533,7 @@ void IMAPviewItem::createNewFolder()
 
 void IMAPviewItem::contextMenuSelected(int id)
 {
-    qDebug("Id selected: %i",id);
+    odebug << "Id selected: " << id << "" << oendl; 
     switch (id)
     {
     case 0:
@@ -671,7 +671,7 @@ void IMAPfolderItem::deleteFolder()
                                      QObject::tr("<center>Realy delete folder <br><b>%1</b><br>and all if it content?</center>",contextName).arg(folder->getDisplayName()),
                                      QObject::tr("Yes",contextName),
                                      QObject::tr("No",contextName),QString::null,1,1);
-    qDebug("Auswahl: %i",yesno);
+    odebug << "Auswahl: " << yesno << "" << oendl; 
     if (yesno == 0)
     {
         if (imap->getWrapper()->deleteMbox(folder))
@@ -698,7 +698,7 @@ void IMAPfolderItem::downloadMails()
 
 void IMAPfolderItem::contextMenuSelected(int id)
 {
-    qDebug("Selected id: %i",id);
+    odebug << "Selected id: " << id << "" << oendl; 
     AccountView * view = (AccountView*)listView();
     switch(id)
     {
@@ -802,7 +802,7 @@ void MHviewItem::refresh(bool force)
 
 RECBODYP MHviewItem::fetchBody( const RecMailP &mail )
 {
-    qDebug( "MH fetchBody" );
+    odebug << "MH fetchBody" << oendl; 
     return wrapper->fetchBody( mail );
 }
 
@@ -932,7 +932,7 @@ void MHfolderItem::deleteFolder()
                                      QObject::tr("<center>Realy delete folder <br><b>%1</b><br>and all if it content?</center>",contextName).arg(folder->getDisplayName()),
                                      QObject::tr("Yes",contextName),
                                      QObject::tr("No",contextName),QString::null,1,1);
-    qDebug("Auswahl: %i",yesno);
+    odebug << "Auswahl: " << yesno << "" << oendl; 
     if (yesno == 0)
     {
         if (mbox->getWrapper()->deleteMbox(folder))
@@ -1074,7 +1074,7 @@ void AccountViewItem::deleteAllMail(AbstractMail*wrapper,const FolderP&folder)
                                      arg(fname),
                                      QObject::tr("Yes",contextName),
                                      QObject::tr("No",contextName),QString::null,1,1);
-    qDebug("Auswahl: %i",yesno);
+    odebug << "Auswahl: " << yesno << "" << oendl; 
     if (yesno == 0)
     {
         if (wrapper->deleteAllMail(folder))

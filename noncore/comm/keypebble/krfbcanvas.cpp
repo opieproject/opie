@@ -2,8 +2,12 @@
 #include "krfbcanvas.h"
 #include "krfbbuffer.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
 #include <qpe/qpeapplication.h>
+using namespace Opie::Core;
 
+/* QT */
 #include <qclipboard.h>
 
 KRFBCanvas::KRFBCanvas( QWidget *parent, const char *name )
@@ -42,7 +46,7 @@ void KRFBCanvas::openConnection(KRFBServer server)
 void KRFBCanvas::openURL( const QUrl &url )
 {
   if ( loggedIn_ ) {
-      qWarning( "openURL invoked when logged in\n" );
+      owarn << "openURL invoked when logged in\n" << oendl; 
       return;
   }
 
@@ -74,7 +78,7 @@ void KRFBCanvas::bell()
 
 void KRFBCanvas::loggedIn()
 {
-  qWarning( "Ok, we're logged in" );
+  owarn << "Ok, we're logged in" << oendl; 
 
   //
   // Get ready for action

@@ -1,4 +1,4 @@
-CONFIG += qte
+CONFIG = qt
 TEMPLATE = app
 TARGET = opie-eye_slave
 DESTDIR = $(OPIEDIR)/bin
@@ -13,6 +13,6 @@ SOURCES = main.cpp gif_slave.cpp   slavereciever.cpp \
 INCLUDEPATH += $(OPIEDIR)/include ../
 DEPENDSPATH += $(OPIEDIR)/include
 
-LIBS += -lqpe
+LIBS += -lqpe -lopiecore2
 
 include ( $(OPIEDIR)/include.pro )

@@ -152,7 +152,7 @@ void MediaPlayer::next() {
             mediaPlayerState.setList();
         }
     } else { //if playing from file list, let's just stop
-        qDebug("<<<<<<<<<<<<<<<<<stop for filelists");
+        odebug << "<<<<<<<<<<<<<<<<<stop for filelists" << oendl; 
         mediaPlayerState.setPlaying(false);
         mediaPlayerState.setDisplayType( MediaPlayerState::MediaSelection );
         if(l) mediaPlayerState.setLooping(l);
@@ -285,7 +285,7 @@ void MediaPlayer::blank( bool b ) {
 #endif
     if (fd != -1) {
         if ( b ) {
-            qDebug("do blanking");
+            odebug << "do blanking" << oendl; 
 #ifdef QT_QWS_SL5XXX
             ioctl( fd, FBIOBLANK, 1 );
             if(fl !=-1) {
@@ -297,7 +297,7 @@ void MediaPlayer::blank( bool b ) {
 #endif
             isBlanked = TRUE;
         } else {
-            qDebug("do unblanking");
+            odebug << "do unblanking" << oendl; 
             ioctl( fd, FBIOBLANK, 0);
 #ifdef QT_QWS_SL5XXX
             if(fl != -1) {
@@ -309,7 +309,7 @@ void MediaPlayer::blank( bool b ) {
         }
         close( fd );
     } else {
-        qDebug("<< /dev/fb0 could not be opened  >>");
+        odebug << "<< /dev/fb0 could not be opened  >>" << oendl; 
     }
 }
 
@@ -325,11 +325,11 @@ void MediaPlayer::keyReleaseEvent( QKeyEvent *e) {
       case Key_F11: //menu
           break;
       case Key_F12: //home
-          qDebug("Blank here");
+          odebug << "Blank here" << oendl; 
 //          mediaPlayerState->toggleBlank();
           break;
       case Key_F13: //mail
-          qDebug("Blank here");
+          odebug << "Blank here" << oendl; 
           //  mediaPlayerState->toggleBlank();
           break;
     }

@@ -1,7 +1,11 @@
-#include <qfileinfo.h>
-
 #include "zkbcfg.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
+/* QT */
+#include <qfileinfo.h>
 
 // Implementation of XkbConfig class
 ZkbConfig::ZkbConfig(const QString& dir):path(dir) {
@@ -15,7 +19,7 @@ bool ZkbConfig::load(const QString& file, Keymap& keymap, const QString& prefix)
 	QFile f(path+"/"+file);
 	QFileInfo fi(f);
 
-	qDebug("start loading file=%s\n", (const char*) file.utf8());
+	odebug << "start loading file=" << (const char*) file.utf8() << "\n" << oendl; 
 	if (includedFiles.find(fi.absFilePath()) != includedFiles.end()) {
 		return false;
 	}
@@ -30,8 +34,7 @@ bool ZkbConfig::load(const QString& file, Keymap& keymap, const QString& prefix)
 	ret = reader.parse(is);
 	includedFiles.remove(fi.absFilePath());
 
-	qDebug("end loading file=%s : status=%s\n", (const char*) file.utf8(),
-		(const char*) err.utf8());
+	odebug << "end loading file=" << file.utf8() << ": status=" << err.utf8() << oendl;
 	return ret;
 }
 
@@ -122,7 +125,7 @@ bool ZkbHandler::startStateElement(const QString& name,
 	currentStateName = prefix + name;
 	currentState = keymap.getStateByName(currentStateName);
 
-//	qDebug("state name=%s\n", (const char*) currentStateName.utf8());
+//	odebug << "state name=" << (const char*) currentStateName.utf8() << "\n" << oendl; 
 
 	State* parent = 0;
 	if (!parentName.isEmpty()) {

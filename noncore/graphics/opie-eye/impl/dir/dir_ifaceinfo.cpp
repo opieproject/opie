@@ -3,14 +3,18 @@
  * zecke@handhelds.org
  */
 
+#include "dir_ifaceinfo.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
+#include <qpe/config.h>
+using namespace Opie::Core;
+
+/* QT */
 #include <qwidget.h>
 #include <qcheckbox.h>
 #include <qhbox.h>
 #include <qlabel.h>
-
-#include <qpe/config.h>
-
-#include "dir_ifaceinfo.h"
 
 namespace {
     class DirImageWidget : public QHBox {
@@ -41,7 +45,7 @@ QWidget* DirInterfaceInfo::configWidget(const Config& cfg) {
 }
 
 void DirInterfaceInfo::writeConfig( QWidget* _wid, Config& cfg) {
-    qWarning( "Write Config" );
+    owarn << "Write Config" << oendl; 
     DirImageWidget* wid = static_cast<DirImageWidget*>(_wid);
     cfg.writeEntry("Dir_Check_All_Files", wid->chkbox->isChecked() );
 }

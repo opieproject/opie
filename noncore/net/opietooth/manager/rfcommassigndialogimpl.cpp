@@ -71,7 +71,7 @@ void RfcommAssignDialog::newDevice( const QString & mac )
                 rfcomm->setMac( mac );
                 rfcomm->setChannel( newDev->channel() );
                 rfcomm->setComment( newDev->comment() );
-                qDebug( "New device set up" );
+                odebug << "New device set up" << oendl; 
             }
         }
     }
@@ -92,7 +92,7 @@ void RfcommAssignDialog::loadConfig()
         it = confHandler->foundEntries().find( QString("%1").arg( i ) );
         if ( it != confHandler->foundEntries().end() )
         {
-            qDebug( "Found key in foundEntries() " );
+            odebug << "Found key in foundEntries() " << oendl; 
             rfcomm->setMac( it.data()->mac() );
             rfcomm->setChannel( it.data()->channel() );
             rfcomm->setComment( it.data()->comment() );

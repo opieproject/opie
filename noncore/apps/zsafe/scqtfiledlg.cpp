@@ -1,13 +1,10 @@
-/****************************************************************************
-** Form implementation generated from reading ui file 'scqtfiledlg.ui'
-**
-** Created: Sun Jun 8 15:51:12 2003
-**      by:  The User Interface Compiler (uic)
-**
-** WARNING! All changes made in this file will be lost!
-****************************************************************************/
 #include "scqtfiledlg.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
+/* QT */
 #include <qcombobox.h>
 #include <qlineedit.h>
 #include <qlistview.h>
@@ -216,41 +213,41 @@ ScQtFileDlg::~ScQtFileDlg()
 
 void ScQtFileDlg::slotCancel()
 {
-    qWarning( "ScQtFileDlg::slotCancel(): Not implemented yet!" );
+    owarn << "ScQtFileDlg::slotCancel(): Not implemented yet!" << oendl; 
 }
 
 void ScQtFileDlg::slotDirComboBoxChanged( int )
 {
-    qWarning( "ScQtFileDlg::slotDirComboBoxChanged( int ): Not implemented yet!" );
+    owarn << "ScQtFileDlg::slotDirComboBoxChanged( int ): Not implemented yet!" << oendl; 
 }
 
 void ScQtFileDlg::slotDoubleClicked(QListViewItem *)
 {
-    qWarning( "ScQtFileDlg::slotDoubleClicked(QListViewItem *): Not implemented yet!" );
+    owarn << "ScQtFileDlg::slotDoubleClicked(QListViewItem *): Not implemented yet!" << oendl; 
 }
 
 void ScQtFileDlg::slotFileTextChanged( const QString & )
 {
-    qWarning( "ScQtFileDlg::slotFileTextChanged( const QString & ): Not implemented yet!" );
+    owarn << "ScQtFileDlg::slotFileTextChanged( const QString & ): Not implemented yet!" << oendl; 
 }
 
 void ScQtFileDlg::slotMkDir()
 {
-    qWarning( "ScQtFileDlg::slotMkDir(): Not implemented yet!" );
+    owarn << "ScQtFileDlg::slotMkDir(): Not implemented yet!" << oendl; 
 }
 
 void ScQtFileDlg::slotOK()
 {
-    qWarning( "ScQtFileDlg::slotOK(): Not implemented yet!" );
+    owarn << "ScQtFileDlg::slotOK(): Not implemented yet!" << oendl; 
 }
 
 void ScQtFileDlg::slotSelectionChanged(QListViewItem *)
 {
-    qWarning( "ScQtFileDlg::slotSelectionChanged(QListViewItem *): Not implemented yet!" );
+    owarn << "ScQtFileDlg::slotSelectionChanged(QListViewItem *): Not implemented yet!" << oendl; 
 }
 
 void ScQtFileDlg::slotTypeComboBoxChanged( int )
 {
-    qWarning( "ScQtFileDlg::slotTypeComboBoxChanged( int ): Not implemented yet!" );
+    owarn << "ScQtFileDlg::slotTypeComboBoxChanged( int ): Not implemented yet!" << oendl; 
 }
 

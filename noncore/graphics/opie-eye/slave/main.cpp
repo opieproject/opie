@@ -31,26 +31,26 @@ int main( int argc, char* argv[] ) {
     QString str = QString::fromLatin1(argv[2] );
     QApplication app( argc, argv );
     GifSlave slave;
-    qWarning( str +" "+slave.iconViewName(str ) );
-    qWarning( str+" "+slave.fullImageInfo( str ) );
+    owarn << str +" "+slave.iconViewName(str ) << oendl; 
+    owarn << str+" "+slave.fullImageInfo( str ) << oendl; 
 
     PNGSlave pngslave;
-    qWarning( str + " " + pngslave.iconViewName(str) );
-    qWarning( str + " " + pngslave.fullImageInfo(str));
+    owarn << str + " " + pngslave.iconViewName(str) << oendl; 
+    owarn << str + " " + pngslave.fullImageInfo(str) << oendl; 
 
 
     JpegSlave jpgslave;
-    qWarning( str + " " + jpgslave.iconViewName(str ) );
-    qWarning( str + " " + jpgslave.fullImageInfo( str ) );
+    owarn << str + " " + jpgslave.iconViewName(str ) << oendl; 
+    owarn << str + " " + jpgslave.fullImageInfo( str ) << oendl; 
 //return app.exec();
     QPixmap pix = ThumbNailTool::getThumb( str, 24, 24 );
     if ( pix.isNull() ) {
-        qWarning( "No Thumbnail" );
+        owarn << "No Thumbnail" << oendl; 
         pix = slave.pixmap(str, 24, 24);
     }
 
     if (!pix.isNull() ) {
-        qWarning( "Saving Thumbnail" );
+        owarn << "Saving Thumbnail" << oendl; 
         ThumbNailTool::putThumb( str, pix, 24, 24 );
     }
 

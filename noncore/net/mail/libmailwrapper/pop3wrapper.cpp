@@ -28,7 +28,7 @@ POP3wrapper::~POP3wrapper() {
 }
 
 void POP3wrapper::pop3_progress( size_t current, size_t maximum ) {
-    qDebug( "POP3: %i of %i", current, maximum );
+    odebug << "POP3: " << current << " of " << maximum << "" << oendl; 
 }
 
 RecBodyP POP3wrapper::fetchBody( const RecMailP &mail ) {
@@ -45,7 +45,7 @@ RecBodyP POP3wrapper::fetchBody( const RecMailP &mail ) {
 
     mailmessage * mailmsg;
     if (mail->Msgsize()>HARD_MSG_SIZE_LIMIT) {
-        qDebug("Message to large: %i",mail->Msgsize());
+        odebug << "Message to large: " << mail->Msgsize() << "" << oendl; 
         return body;
     }
 
@@ -130,7 +130,7 @@ void POP3wrapper::login()
             pass = login.getPassword().latin1();
         } else {
             // cancel
-            qDebug( "POP3: Login canceled" );
+            odebug << "POP3: Login canceled" << oendl; 
             return;
         }
     } else {
@@ -162,7 +162,7 @@ void POP3wrapper::login()
 
     err = mailstorage_connect(m_pop3);
     if (err != MAIL_NO_ERROR) {
-        qDebug( QString( "FEHLERNUMMER %1" ).arg(  err ) );
+        odebug << QString( "FEHLERNUMMER %1" ).arg(  err ) << oendl; 
         Global::statusMessage(tr("Error initializing folder"));
         mailstorage_free(m_pop3);
         m_pop3 = 0;
@@ -236,7 +236,7 @@ void POP3wrapper::statusFolder(folderStat&target_stat,const QString&) {
     int r = mailsession_status_folder(m_pop3->sto_session,0,&target_stat.message_count,
                                       &target_stat.message_recent,&target_stat.message_unseen);
     if (r != MAIL_NO_ERROR) {
-        qDebug("error getting folter status.");
+        odebug << "error getting folter status." << oendl; 
     }
 }
 

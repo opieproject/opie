@@ -1,10 +1,14 @@
 #include  "jpeg_slave.h"
-
 #include "thumbnailtool.h"
 
 PHUNK_VIEW_INTERFACE( "JPEG", JpegSlave )
 
-#include <qtopia/timestring.h>
+/* OPIE */
+#include <opie2/odebug.h>
+#include <qpe/timestring.h>
+using namespace Opie::Core;
+
+/* QT */
 #include <qobject.h>
 #include <qimage.h>
 
@@ -119,7 +123,7 @@ class FatalError {
     const char* ex;
 public:
     FatalError(const char* s) { ex = s; }
-    void debug_print() const { qWarning("exception: %s", ex ); }
+    void debug_print() const { owarn << "exception: " << ex << "" << oendl;  }
 };
 
 
@@ -262,7 +266,7 @@ int ExifData::ReadJpegSections (QFile & infile, ReadMode_t ReadMode)
 
             if (a >= 6){
 
-                qWarning( "too many padding bytes" );
+                owarn << "too many padding bytes" << oendl; 
                 return false;
 
             }
@@ -327,7 +331,7 @@ int ExifData::ReadJpegSections (QFile & infile, ReadMode_t ReadMode)
                 return true;
 
             case M_EOI:   // in case it's a tables-only JPEG stream
-                qWarning( "No image in jpeg!" );
+                owarn << "No image in jpeg!" << oendl; 
                 return false;
 
             case M_COM: // Comment section
@@ -726,7 +730,7 @@ void ExifData::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBa
                         // Jhead 1.3 or earlier would crop the whole directory!
                         // As Jhead produces this form of format incorrectness,
                         // I'll just let it pass silently
-                        qWarning( "Thumbnail removed with Jhead 1.3 or earlier" );
+                        owarn << "Thumbnail removed with Jhead 1.3 or earlier" << oendl; 
                     }else{
                         return;
                     }
@@ -913,7 +917,7 @@ bool ExifData::scan(const QString & path)
     ret = ReadJpegSections(f, READ_EXIF);
 
     if (ret == false){
-        qWarning(  "Not JPEG file!" );
+        owarn << "Not JPEG file!" << oendl; 
         DiscardData();
         f.close();
         return false;

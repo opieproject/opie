@@ -15,10 +15,8 @@
 
 #include "notes.h"
 
-#include <qapplication.h>
-#include <stdlib.h>
-#include <qstringlist.h>
-
+/* OPIE */
+#include <opie2/odebug.h>
 #include <opie2/otaskbarapplet.h>
 #include <qpe/filemanager.h>
 #include <qpe/qpeapplication.h>
@@ -26,14 +24,15 @@
 #include <qpe/applnk.h>
 #include <qpe/ir.h>
 #include <qpe/config.h>
+using namespace Opie::Core;
+using namespace Opie::Ui;
 
-// #include <qsocket.h>
-// #include <qclipboard.h>
+/* QT */
 #include <qmultilineedit.h>
 #include <qlistbox.h>
 #include <qpopupmenu.h>
 #include <qmessagebox.h>
-
+#include <qapplication.h>
 #include <qdir.h>
 #include <qfile.h>
 #include <qpoint.h>
@@ -43,10 +42,13 @@
 #include <qframe.h>
 #include <qpixmap.h>
 #include <qstring.h>
+#include <qstringlist.h>
 #include <qtimer.h>
 
+/* STD */
+#include <stdlib.h>
+
 /* XPM */
-using namespace Opie::Ui;
 static char * notes_xpm[] = {
 "16 16 11 1",
 "   c None",
@@ -84,9 +86,9 @@ NotesControl::NotesControl( QWidget *, const char * )
 {
     QDir d( QDir::homeDirPath()+"/notes");
     if( !d.exists()) {
-        qDebug("make dir");
+        odebug << "make dir" << oendl; 
         if(!d.mkdir( QDir::homeDirPath()+"/notes", true))
-            qDebug("<<<<<<<<<<<<<<<<<<<<<<<<<<<make dir failed");
+            odebug << "<<<<<<<<<<<<<<<<<<<<<<<<<<<make dir failed" << oendl; 
     }
     Config cfg("Notes");
      cfg.setGroup("Options");
@@ -165,7 +167,7 @@ void NotesControl::slotDeleteButtonClicked() {
 void NotesControl::slotDeleteButton() {
 
     QString selectedText = box->currentText();
-    qDebug("deleting "+selectedText);
+    odebug << "deleting "+selectedText << oendl; 
 
     if( !selectedText.isEmpty()) {
 
@@ -176,12 +178,12 @@ void NotesControl::slotDeleteButton() {
         for ( int i = 0; i < noOfFiles; i++ ) {
             entryName.sprintf( "File%i", i + 1 );
             if(selectedText == cfg.readEntry( entryName )) {
-                qDebug("removing %s, %d", selectedText.latin1(), i);
+                odebug << "removing " << selectedText.latin1() << ", " << i << "" << oendl; 
                 for ( int j = i; j < noOfFiles; j++ ) {
                     entryName.sprintf( "File%i", i + 1  );
                     entryName2.sprintf( "File%i", i + 2 );
                     QString temp = cfg.readEntry(entryName2);
-                    qDebug("move "+temp);
+                    odebug << "move "+temp << oendl; 
                     cfg.writeEntry(entryName, temp);
                     i++;
                 }
@@ -192,10 +194,10 @@ void NotesControl::slotDeleteButton() {
                 DocLnk nf(selectedText);
                 nf.removeFiles();
                 QString fi=QPEApplication::documentDir()+"/text/plain/"+selectedText+".desktop";
-                qDebug(fi);
+                odebug << fi << oendl; 
 
                 QFile f( fi);
-                if( !f.remove()) qDebug(".desktop file not removed");
+                if( !f.remove()) odebug << ".desktop file not removed" << oendl; 
 
             }
         }
@@ -283,7 +285,7 @@ void NotesControl::save() {
     Config cfg("Notes");
     cfg.setGroup("Docs");
     if( edited) {
-//        qDebug("is edited");
+//        odebug << "is edited" << oendl; 
         QString rt = view->text();
         if( rt.length()>1) {
             QString pt = rt.simplifyWhiteSpace();
@@ -301,7 +303,7 @@ void NotesControl::save() {
                 docname = docname.left(40);
             if ( docname.isEmpty() )
                 docname = "Empty Text";
-//            qDebug(docname);
+//            odebug << docname << oendl; 
 
             if( oldDocName != docname) {
                 int noOfFiles = cfg.readNumEntry("NumberOfFiles", 0 );
@@ -312,11 +314,11 @@ void NotesControl::save() {
                 cfg.write();
             }
 //             else
-//                 qDebug("oldname equals docname");
+//                 odebug << "oldname equals docname" << oendl; 
 
             doc = new DocLnk(docname);
             if(QFile(doc->linkFile()).exists())
-               qDebug("puppie");
+               odebug << "puppie" << oendl; 
             doc->setType("text/plain");
             doc->setName(docname);
             QString temp = docname.replace( QRegExp(" "), "_" );
@@ -327,7 +329,7 @@ void NotesControl::save() {
 
             oldDocName=docname;
             edited=false;
-//            qDebug("save");
+//            odebug << "save" << oendl; 
             if (doPopulate)
                 populateBox();
         }
@@ -339,7 +341,7 @@ void NotesControl::save() {
 
 void NotesControl::populateBox() {
     box->clear();
-//    qDebug("populate");
+//    odebug << "populate" << oendl; 
     Config cfg("Notes");
     cfg.setGroup("Docs");
     int noOfFiles = cfg.readNumEntry("NumberOfFiles", 0 );
@@ -374,7 +376,7 @@ void NotesControl::load() {
 }
 
 void NotesControl::load(const QString & file) {
-    qDebug("loading "+file);
+    odebug << "loading "+file << oendl; 
     QString name = file;
     QString temp;
     if( !QFile( QDir::homeDirPath()+"/"+file).exists() )
@@ -401,7 +403,7 @@ void NotesControl::loadDoc( const DocLnk &f) {
     FileManager fm;
     QString txt;
     if ( !fm.loadFile( f, txt ) ) {
-        qDebug("could not load file "+f.file());
+        odebug << "could not load file "+f.file() << oendl; 
         return;
     }
     view->setText(txt);
@@ -435,7 +437,7 @@ void NotesControl::slotSearch() {
 //     switch ( e->state() ) {
 //           case ControlButton:
 //               if(e->key() == Key_C) { //copy
-//                   qDebug("copy");
+//                   odebug << "copy" << oendl; 
 //     QClipboard *cb = QApplication::clipboard();
 //     QString text;
 
@@ -482,10 +484,10 @@ void NotesApplet::mousePressEvent( QMouseEvent *) {
 //    vc = new NotesControl;
 //    QPoint curPos = mapToGlobal( rect().topLeft() );
          if(vc->showMax) {
-             qDebug("show max");
+             odebug << "show max" << oendl; 
              vc->showMaximized();
          } else {
-             qDebug("no show max");
+             odebug << "no show max" << oendl; 
              QWidget *wid = QPEApplication::desktop();
             QRect rect = QApplication::desktop()->geometry();
              vc->setGeometry( ( wid->width() / 2) - ( vc->width() / 2 ) , 28 , wid->width() -10 , 180);

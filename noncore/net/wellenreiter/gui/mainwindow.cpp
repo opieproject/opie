@@ -21,6 +21,21 @@
 #include "wellenreiter.h"
 #include "scanlist.h"
 
+/* OPIE */
+#ifdef QWS
+#include <qpe/resource.h>
+#include <opie2/odebug.h>
+#include <opie2/ofiledialog.h>
+#else
+#include "resource.h"
+#include <qapplication.h>
+#include <qfiledialog.h> 
+#endif
+using namespace Opie::Core;
+using namespace Opie::Net;
+using namespace Opie::Ui;
+
+/* QT */
 #include <qcombobox.h>
 #include <qdatastream.h>
 #include <qfile.h>
@@ -39,23 +54,9 @@
 #include <qtoolbutton.h>
 #include <qwhatsthis.h>
 
-#ifdef QWS
-#include <qpe/resource.h>
-#include <opie2/ofiledialog.h>
-using namespace Opie;
-#else
-#include "resource.h"
-#include <qapplication.h>
-#include <qfiledialog.h>
-#endif
-
+/* STD */
 #include <unistd.h>
 
-using namespace Opie::Ui;
-using namespace Opie::Net;
-using namespace Opie::Ui;
-using namespace Opie::Net;
-using namespace Opie::Net;
 WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * name, WFlags f )
            :QMainWindow( parent, name, f )
 {
@@ -188,7 +189,7 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
 
 void WellenreiterMainWindow::showConfigure()
 {
-    qDebug( "show configure..." );
+    odebug << "show configure..." << oendl; 
     cw->setCaption( tr( "Configure" ) );
     int result = QPEApplication::execDialog( cw );
 
@@ -231,7 +232,7 @@ void WellenreiterMainWindow::changedSniffingState()
 
 WellenreiterMainWindow::~WellenreiterMainWindow()
 {
-    qDebug( "Wellenreiter: bye." );
+    odebug << "Wellenreiter: bye." << oendl; 
 };
 
 
@@ -251,7 +252,7 @@ void WellenreiterMainWindow::demoReadFromGps()
 {
     WellenreiterConfigWindow* configwindow = WellenreiterConfigWindow::instance();
     GPS* gps = new GPS( this );
-    qDebug( "Wellenreiter::demoReadFromGps(): url=gps://%s:%d/", (const char*) configwindow->gpsdHost->currentText(), configwindow->gpsdPort->value() );
+    odebug << "Wellenreiter::demoReadFromGps(): url=gps://" << (const char*) configwindow->gpsdHost->currentText() << ":" << configwindow->gpsdPort->value() << "/" << oendl; 
     gps->open( configwindow->gpsdHost->currentText(), configwindow->gpsdPort->value() );
     GpsLocation loc = gps->position();
     QMessageBox::information( this, "Wellenreiter/Opie", tr( "GPS said:\n%1" ).arg( loc.dmsPosition() ) );
@@ -305,11 +306,11 @@ void WellenreiterMainWindow::fileSaveLog()
             QTextStream t( &f );
             t << mw->logWindow()->getLog();
             f.close();
-            qDebug( "Saved log to file '%s'", (const char*) fname );
+            odebug << "Saved log to file '" << (const char*) fname << "'" << oendl; 
         }
         else
         {
-            qDebug( "Problem saving log to file '%s'", (const char*) fname );
+            odebug << "Problem saving log to file '" << (const char*) fname << "'" << oendl; 
         }
     }
 }
@@ -326,11 +327,11 @@ void WellenreiterMainWindow::fileSaveSession()
             QDataStream t( &f );
             t << *mw->netView();
             f.close();
-            qDebug( "Saved session to file '%s'", (const char*) fname );
+            odebug << "Saved session to file '" << (const char*) fname << "'" << oendl; 
         }
         else
         {
-            qDebug( "Problem saving session to file '%s'", (const char*) fname );
+            odebug << "Problem saving session to file '" << (const char*) fname << "'" << oendl; 
         }
     }
 }
@@ -348,11 +349,11 @@ void WellenreiterMainWindow::fileSaveHex()
             QTextStream t( &f );
             t << mw->hexWindow()->getLog();
             f.close();
-            qDebug( "Saved hex log to file '%s'", (const char*) fname );
+            odebug << "Saved hex log to file '" << (const char*) fname << "'" << oendl; 
         }
         else
         {
-            qDebug( "Problem saving hex log to file '%s'", (const char*) fname );
+            odebug << "Problem saving hex log to file '" << (const char*) fname << "'" << oendl; 
         }
     }
     */
@@ -369,11 +370,11 @@ void WellenreiterMainWindow::fileLoadSession()
             QDataStream t( &f );
             t >> *mw->netView();
             f.close();
-            qDebug( "Loaded session from file '%s'", (const char*) fname );
+            odebug << "Loaded session from file '" << (const char*) fname << "'" << oendl; 
         }
         else
         {
-            qDebug( "Problem loading session from file '%s'", (const char*) fname );
+            odebug << "Problem loading session from file '" << (const char*) fname << "'" << oendl; 
         }
     }
 }
@@ -438,11 +439,11 @@ void WellenreiterMainWindow::uploadSession()
 
     if ( !result )
     {
-        qDebug( "Session upload cancelled :(" );
+        odebug << "Session upload cancelled :(" << oendl; 
         return;
     }
 
-    qDebug( "Starting upload..." );
+    odebug << "Starting upload..." << oendl; 
 
     struct sockaddr_in raddr;
     struct hostent *rhost_info;

@@ -11,13 +11,14 @@
 #include "output.h"
 
 /* OPIE */
-#include <qtoolbar.h>
+#include <opie2/odebug.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
 #include <qpe/config.h>
 #include <qpe/mimetype.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/storage.h>
+using namespace Opie::Core;
 
 /* QT */
 #include <qmenubar.h>
@@ -35,6 +36,7 @@
 #include <qlabel.h>
 #include <qlineedit.h>
 #include <qpushbutton.h>
+#include <qtoolbar.h>
 #include <qtabwidget.h>
 #include <qwidget.h>
 #include <qlayout.h>
@@ -238,12 +240,12 @@ void FormatterApp::doFormat()
             outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
 
             sleep(1);
-            qDebug("Command is "+umountS);
+            odebug << "Command is "+umountS << oendl; 
             fp = popen(  (const char *) umountS, "r");
-            //          qDebug("%d", fp);
+            //          odebug << "" << fp << "" << oendl; 
             if ( !fp )
             {
-                qDebug("Could not execute '" + umountS + "'! err=%d\n" +(QString)strerror(errno), err);
+                odebug << "Could not execute '" + umountS + "'! err=" << err << "\n" +(QString)strerror(errno) << oendl; 
                 QMessageBox::warning( this, tr("Formatter"), tr("umount failed!"), tr("&OK") );
                 pclose(fp);
                 return;
@@ -256,7 +258,7 @@ void FormatterApp::doFormat()
                 {
                     if( ((QString)line).find("busy",0,TRUE) != -1)
                     {
-                        qDebug("Could not find '" + umountS);
+                        odebug << "Could not find '" + umountS << oendl; 
                         QMessageBox::warning( this, tr("Formatter"), tr("Could not umount.\nDevice is busy!"), tr("&OK") );
                         pclose(fp);
                         return;
@@ -272,7 +274,7 @@ void FormatterApp::doFormat()
             }
             pclose(fp);
 
-            qDebug("Command would be: "+cmd);
+            odebug << "Command would be: "+cmd << oendl; 
             outDlg->OutputEdit->append( tr("Trying to format.") );
             outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
 
@@ -281,7 +283,7 @@ void FormatterApp::doFormat()
             {
                 if( ((QString)line).find("No such device",0,TRUE) != -1)
                 {
-                    qDebug("No such device '" + umountS);
+                    odebug << "No such device '" + umountS << oendl; 
                     QMessageBox::warning( this, tr("Formatter"), tr("No such device!"), tr("&OK") );
                     pclose(fp);
                     //               outDlg->OutputEdit->append("No such device");
@@ -305,7 +307,7 @@ void FormatterApp::doFormat()
             fp = popen(  (const char *) remountS, "r");
             if ( !fp)
             {
-                qDebug("Could not execute '" + remountS + "'! err=%d\n" +(QString)strerror(errno), err);
+                odebug << "Could not execute '" + remountS + "'! err=" << err << "\n" +(QString)strerror(errno) << oendl; 
                 QMessageBox::warning( this, tr("Formatter"), tr("Card mount failed!"), tr("&OK") );
 
             }
@@ -380,7 +382,7 @@ void FormatterApp::storageComboSelected(int index )
     currentText = currentText.right( currentText.length() - currentText.find(" -> ",0,TRUE) - 4);
 
     QString fsType = getFileSystemType((const QString &) currentText);
-    //    qDebug(fsType);
+    //    odebug << fsType << oendl; 
     for(int i = 0; i < fileSystemsCombo->count(); i++)
     {
         if( fsType == fileSystemsCombo->text(i))
@@ -464,7 +466,7 @@ void FormatterApp::parsetab(const QString &fileName)
                         & filesystemType.find("auto",0,TRUE) == -1)
                     fsList << filesystemType;
                 deviceList << deviceName;
-                qDebug(deviceName+"::"+filesystemType);
+                odebug << deviceName+"::"+filesystemType << oendl; 
                 fileSystemTypeList << deviceName+"::"+filesystemType;
             }
         }
@@ -506,7 +508,7 @@ QString FormatterApp::getFileSystemType(const QString &currentText)
         if( temp.find( currentText,0,TRUE) != -1)
         {
             return temp.right( temp.length() - temp.find("::",0,TRUE) - 2);
-            //                qDebug(fsType);
+            //                odebug << fsType << oendl; 
         }
     }
     return "";
@@ -533,7 +535,7 @@ bool FormatterApp::doFsck()
 
     QString fsType = getFileSystemType((const QString &)selectedDevice);
     QString cmd;
-    qDebug( selectedDevice +" "+ fsType);
+    odebug << selectedDevice +" "+ fsType << oendl; 
     if(fsType == "vfat") cmd = "dosfsck -vy ";
     if(fsType == "ext2") cmd = "e2fsck -cpvy ";
     cmd += selectedDevice + " 2>&1";
@@ -547,12 +549,12 @@ bool FormatterApp::doFsck()
     outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
 
     sleep(1);
-    //          qDebug("Command is "+umountS);
+    //          odebug << "Command is "+umountS << oendl; 
     fp = popen(  (const char *) umountS, "r");
-    //          qDebug("%d", fp);
+    //          odebug << "" << fp << "" << oendl; 
     if ( !fp )
     {
-        qDebug("Could not execute '" + umountS + "'!\n" +(QString)strerror(errno));
+        odebug << "Could not execute '" + umountS + "'!\n" +(QString)strerror(errno) << oendl; 
         QMessageBox::warning( this, tr("Formatter"), tr("umount failed!"), tr("&OK") );
         pclose(fp);
         return false;
@@ -565,7 +567,7 @@ bool FormatterApp::doFsck()
         {
             if( ((QString)line).find("busy",0,TRUE) != -1)
             {
-                qDebug("Could not find '" + umountS);
+                odebug << "Could not find '" + umountS << oendl; 
                 QMessageBox::warning( this, tr("Formatter"),
                                       tr("Could not umount.\nDevice is busy!"), tr("&OK") );
                 pclose(fp);
@@ -587,7 +589,7 @@ bool FormatterApp::doFsck()
     {
         if( ((QString)line).find("No such device",0,TRUE) != -1)
         {
-            qDebug("No such device '" + umountS);
+            odebug << "No such device '" + umountS << oendl; 
             QMessageBox::warning( this, tr("Formatter"), tr("No such device!"), tr("&OK") );
             pclose(fp);
             //               outDlg->OutputEdit->append("No such device");

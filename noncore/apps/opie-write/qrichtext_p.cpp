@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qrichtext_p.cpp,v 1.2 2002-07-15 23:22:50 leseb Exp $
+** $Id: qrichtext_p.cpp,v 1.3 2004-04-04 13:54:45 mickeyl Exp $
 **
 ** Implementation of the internal Qt classes dealing with rich text
 **
@@ -34,6 +34,9 @@
 ** not clear to you.
 **
 **********************************************************************/
+
+#include <opie2/odebug.h>
+using namespace Opie::Core;
 
 #include "qrichtext_p.h"
 
@@ -137,7 +140,7 @@ void QTextCursor::gotoPosition( QTextParagraph* p, int index )
     para = p;
     if ( index < 0 || index >= para->length() ) {
 #if defined(QT_CHECK_RANGE)
-	qWarning( "QTextCursor::gotoParagraph Index: %d out of range", index );
+	owarn << "QTextCursor::gotoParagraph Index: " << index << " out of range" << oendl; 
 #endif
 	index = index < 0 ? 0 : para->length() - 1;
     }
@@ -477,7 +480,7 @@ bool QTextParagraph::fullSelected( int id ) const
 int QTextParagraph::lineY( int l ) const
 {
     if ( l > (int)lineStarts.count() - 1 ) {
-	qWarning( "QTextParagraph::lineY: line %d out of range!", l );
+	owarn << "QTextParagraph::lineY: line " << l << " out of range!" << oendl; 
 	return 0;
     }
 
@@ -493,7 +496,7 @@ int QTextParagraph::lineY( int l ) const
 int QTextParagraph::lineBaseLine( int l ) const
 {
     if ( l > (int)lineStarts.count() - 1 ) {
-	qWarning( "QTextParagraph::lineBaseLine: line %d out of range!", l );
+	owarn << "QTextParagraph::lineBaseLine: line " << l << " out of range!" << oendl; 
 	return 10;
     }
 
@@ -509,7 +512,7 @@ int QTextParagraph::lineBaseLine( int l ) const
 int QTextParagraph::lineHeight( int l ) const
 {
     if ( l > (int)lineStarts.count() - 1 ) {
-	qWarning( "QTextParagraph::lineHeight: line %d out of range!", l );
+	owarn << "QTextParagraph::lineHeight: line " << l << " out of range!" << oendl; 
 	return 15;
     }
 
@@ -525,8 +528,8 @@ int QTextParagraph::lineHeight( int l ) const
 void QTextParagraph::lineInfo( int l, int &y, int &h, int &bl ) const
 {
     if ( l > (int)lineStarts.count() - 1 ) {
-	qWarning( "QTextParagraph::lineInfo: line %d out of range!", l );
-	qDebug( "%d %d", (int)lineStarts.count() - 1, l );
+	owarn << "QTextParagraph::lineInfo: line " << l << " out of range!" << oendl; 
+	odebug << "" << (int)lineStarts.count() - 1 << " " << l << "" << oendl; 
 	y = 0;
 	h = 15;
 	bl = 10;

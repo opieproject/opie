@@ -1,6 +1,5 @@
 
-CONFIG        += qt warn on  quick-app
-
+CONFIG        += qt warn on quick-app
 
 HEADERS    =    qcleanuphandler.h \
         qcomplextext_p.h \

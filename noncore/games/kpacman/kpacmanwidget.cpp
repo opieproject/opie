@@ -13,7 +13,8 @@
 #include "kpacmanwidget.h"
 #endif
 
-
+#include <opie2/odebug.h>
+using namespace Opie::Core;
 
 KpacmanWidget::KpacmanWidget( QWidget *parent, const char *name)
         : QWidget( parent, name )
@@ -139,7 +140,7 @@ void KpacmanWidget::setScheme(int Scheme, int Mode)
 
 void KpacmanWidget::resizeEvent( QResizeEvent * )
 {
-    qWarning("Resize");
+    owarn << "Resize" << oendl; 
     referee->setGeometry(0, bitfont->height()*3, referee->width(), referee->height());
     referee->setBackgroundColor(BLACK);
 

@@ -17,21 +17,26 @@
 #include "configwindow.h"
 #include "logwindow.h"
 
-#include <assert.h>
+/* OPIE */
+#ifdef QWS
+#include <opie2/odebug.h>
+#include <qpe/qpeapplication.h>
+#include <qpe/resource.h>
+#else
+#include "resource.h"
+#endif
+using namespace Opie::Core;
+using namespace Opie::Ui;
+using namespace Opie::Net;
+
+/* QT */
 #include <qcursor.h>
 #include <qdatetime.h>
 #include <qpopupmenu.h>
 #include <qcheckbox.h>
 
-#ifdef QWS
-#include <qpe/qpeapplication.h>
-#endif
-
-#ifdef QWS
-#include <qpe/resource.h>
-#else
-#include "resource.h"
-#endif
+/* STD */
+#include <assert.h>
 
 const int col_type = 0;
 const int col_essid = 0;
@@ -46,12 +51,6 @@ const int col_firstseen = 8;
 const int col_lastseen = 9;
 const int col_location = 10;
 
-using namespace Opie::Net;
-using namespace Opie::Ui;
-using namespace Opie::Net;
-using namespace Opie::Ui;
-using namespace Opie::Ui;
-using namespace Opie::Net;
 MScanListView::MScanListView( QWidget* parent, const char* name )
               :OListView( parent, name )
 {
@@ -106,14 +105,14 @@ OListViewItem* MScanListView::childFactory()
 
 void MScanListView::serializeTo( QDataStream& s) const
 {
-    qDebug( "serializing MScanListView" );
+    odebug << "serializing MScanListView" << oendl; 
     OListView::serializeTo( s );
 }
 
 
 void MScanListView::serializeFrom( QDataStream& s)
 {
-    qDebug( "serializing MScanListView" );
+    odebug << "serializing MScanListView" << oendl; 
     OListView::serializeFrom( s );
 }
 
@@ -143,7 +142,7 @@ void MScanListView::addNewItem( const QString& type,
     while ( item && ( item->text( col_essid ) != essid ) )
     {
         #ifdef DEBUG
-        qDebug( "itemtext: %s", (const char*) item->text( col_essid ) );
+        odebug << "itemtext: " << (const char*) item->text( col_essid ) << "" << oendl; 
         #endif
         item = static_cast<MScanListItem*> ( item->nextSibling() );
     }
@@ -159,7 +158,7 @@ void MScanListView::addNewItem( const QString& type,
         while ( item && ( item->text( col_ap ) != macaddr ) )
         {
             #ifdef DEBUG
-            qDebug( "subitemtext: %s", (const char*) item->text( col_ap ) );
+            odebug << "subitemtext: " << (const char*) item->text( col_ap ) << "" << oendl; 
             #endif
             item = static_cast<MScanListItem*> ( item->nextSibling() );
         }
@@ -168,7 +167,7 @@ void MScanListView::addNewItem( const QString& type,
         {
             // we have already seen this item, it's a dupe
             #ifdef DEBUG
-            qDebug( "%s is a dupe - ignoring...", (const char*) macaddr );
+            odebug << "" << (const char*) macaddr << " is a dupe - ignoring..." << oendl; 
             #endif
             item->receivedBeacon();
             return;
@@ -186,7 +185,7 @@ void MScanListView::addNewItem( const QString& type,
     // no essid to reduce clutter, maybe later we have a nick or stationname to display!?
 
     #ifdef DEBUG
-    qDebug( "inserting new station %s", (const char*) macaddr );
+    odebug << "inserting new station " << (const char*) macaddr << "" << oendl; 
     #endif
 
     MScanListItem* station = new MScanListItem( network, type, "", macaddr, wep, channel, signal );
@@ -212,7 +211,7 @@ void MScanListView::addIfNotExisting( MScanListItem* network, const OMacAddress&
     while ( subitem && ( subitem->text( col_ap ) != addr.toString(true) ) )
     {
         #ifdef DEBUG
-        qDebug( "subitemtext: %s", (const char*) subitem->text( col_ap ) );
+        odebug << "subitemtext: " << (const char*) subitem->text( col_ap ) << "" << oendl; 
         #endif
         subitem = static_cast<MScanListItem*> ( subitem->nextSibling() );
     }
@@ -221,7 +220,7 @@ void MScanListView::addIfNotExisting( MScanListItem* network, const OMacAddress&
     {
         // we have already seen this item, it's a dupe
         #ifdef DEBUG
-        qDebug( "%s is a dupe - ignoring...", (const char*) addr.toString(true) );
+        odebug << "" << (const char*) addr.toString(true) << " is a dupe - ignoring..." << oendl; 
         #endif
         subitem->receivedBeacon(); //FIXME: sent data bit
         return;
@@ -246,7 +245,7 @@ void MScanListView::addIfNotExisting( MScanListItem* network, const OMacAddress&
 
 void MScanListView::WDStraffic( const OMacAddress& from, const OMacAddress& to, const OMacAddress& viaFrom, const OMacAddress& viaTo )
 {
-    qDebug( "WDSTraffic: %s and %s seem to form a WDS", (const char*) viaFrom.toString(), (const char*) viaTo.toString() );
+    odebug << "WDSTraffic: " << (const char*) viaFrom.toString() << " and " << (const char*) viaTo.toString() << " seem to form a WDS" << oendl; 
     QString s;
     MScanListItem* network;
 
@@ -264,7 +263,7 @@ void MScanListView::WDStraffic( const OMacAddress& from, const OMacAddress& to, 
     }
     else
     {
-        qDebug( "D'Oh! Stations without AP... ignoring for now... will handle this in 1.1 version :-D" );
+        odebug << "D'Oh! Stations without AP... ignoring for now... will handle this in 1.1 version :-D" << oendl; 
         MLogWindow::logwindow()->log( "WARNING: Unhandled WSD traffic!" );
     }
 }
@@ -286,7 +285,7 @@ void MScanListView::toDStraffic( const OMacAddress& from, const OMacAddress& to,
     }
     else
     {
-        qDebug( "D'Oh! Station without AP... ignoring for now... will handle this in 1.1 :-D" );
+        odebug << "D'Oh! Station without AP... ignoring for now... will handle this in 1.1 :-D" << oendl; 
         MLogWindow::logwindow()->log( "WARNING: Unhandled toDS traffic!" );
 
     }
@@ -309,7 +308,7 @@ void MScanListView::fromDStraffic( const OMacAddress& from, const OMacAddress& t
     }
     else
     {
-        qDebug( "D'Oh! Station without AP... ignoring for now... will handle this in 1.1 :-D" );
+        odebug << "D'Oh! Station without AP... ignoring for now... will handle this in 1.1 :-D" << oendl; 
         MLogWindow::logwindow()->log( "WARNING: Unhandled fromDS traffic!" );
     }
 }
@@ -317,14 +316,14 @@ void MScanListView::fromDStraffic( const OMacAddress& from, const OMacAddress& t
 
 void MScanListView::IBSStraffic( const OMacAddress& from, const OMacAddress& to, const OMacAddress& via )
 {
-    qWarning( "D'oh! Not yet implemented..." );
+    owarn << "D'oh! Not yet implemented..." << oendl; 
     MLogWindow::logwindow()->log( "WARNING: Unhandled IBSS traffic!" );
 }
 
 
 void MScanListView::identify( const OMacAddress& macaddr, const QString& ip )
 {
-    qDebug( "identify %s = %s", (const char*) macaddr.toString(), (const char*) ip );
+    odebug << "identify " << (const char*) macaddr.toString() << " = " << (const char*) ip << "" << oendl; 
 
     QListViewItemIterator it( this );
     for ( ; it.current(); ++it )
@@ -335,7 +334,7 @@ void MScanListView::identify( const OMacAddress& macaddr, const QString& ip )
             return;
         }
     }
-    qDebug( "D'oh! Received identification, but item not yet in list... ==> Handle this!" );
+    odebug << "D'oh! Received identification, but item not yet in list... ==> Handle this!" << oendl; 
     MLogWindow::logwindow()->log( QString().sprintf( "WARNING: Unhandled identification %s = %s!",
                                                      (const char*) macaddr.toString(), (const char*) ip ) );
 }
@@ -343,7 +342,7 @@ void MScanListView::identify( const OMacAddress& macaddr, const QString& ip )
 
 void MScanListView::addService( const QString& name, const OMacAddress& macaddr, const QString& ip )
 {
-    qDebug( "addService '%s', Server = %s = %s", (const char*) name, (const char*) macaddr.toString(), (const char*) ip );
+    odebug << "addService '" << (const char*) name << "', Server = " << (const char*) macaddr.toString() << " = " << (const char*) ip << "" << oendl; 
 
     //TODO: Refactor that out, we need it all over the place.
     //      Best to do it in a more comfortable abstraction in OListView
@@ -360,7 +359,7 @@ void MScanListView::addService( const QString& name, const OMacAddress& macaddr,
             while ( subitem && ( subitem->text( col_essid ) != name ) )
             {
                 #ifdef DEBUG
-                qDebug( "subitemtext: %s", (const char*) subitem->text( col_essid ) );
+                odebug << "subitemtext: " << (const char*) subitem->text( col_essid ) << "" << oendl; 
                 #endif
                 subitem = static_cast<MScanListItem*> ( subitem->nextSibling() );
             }
@@ -369,7 +368,7 @@ void MScanListView::addService( const QString& name, const OMacAddress& macaddr,
             {
                 // we have already seen this item, it's a dupe
                 #ifdef DEBUG
-                qDebug( "%s is a dupe - ignoring...", (const char*) name );
+                odebug << "" << (const char*) name << " is a dupe - ignoring..." << oendl; 
                 #endif
                 subitem->receivedBeacon(); //FIXME: sent data bit
                 return;
@@ -383,7 +382,7 @@ void MScanListView::addService( const QString& name, const OMacAddress& macaddr,
             return;
         }
     }
-    qDebug( "D'oh! Received identification, but item not yet in list... ==> Handle this!" );
+    odebug << "D'oh! Received identification, but item not yet in list... ==> Handle this!" << oendl; 
     MLogWindow::logwindow()->log( QString().sprintf( "WARNING: Unhandled service addition %s = %s!",
                                                      (const char*) macaddr.toString(), (const char*) ip ) );
 }
@@ -421,7 +420,7 @@ MScanListItem::MScanListItem( QListView* parent, const QString& type, const QStr
                 _channel( channel ), _signal( signal ), _beacons( 1 )
 {
     #ifdef DEBUG
-    qDebug( "creating scanlist item" );
+    odebug << "creating scanlist item" << oendl; 
     #endif
 
     if ( WellenreiterConfigWindow::instance() )
@@ -435,7 +434,7 @@ MScanListItem::MScanListItem( QListViewItem* parent, const QString& type, const 
                :OListViewItem( parent, essid, QString::null, macaddr, QString::null, QString::null )
 {
     #ifdef DEBUG
-    qDebug( "creating scanlist item" );
+    odebug << "creating scanlist item" << oendl; 
     #endif
     if ( WellenreiterConfigWindow::instance() )
         WellenreiterConfigWindow::instance()->performAction( type, essid, macaddr, wep, channel, signal ); // better use signal/slot combination here
@@ -459,7 +458,7 @@ OListViewItem* MScanListItem::childFactory()
 void MScanListItem::serializeTo( QDataStream& s ) const
 {
     #ifdef DEBUG
-    qDebug( "serializing MScanListItem" );
+    odebug << "serializing MScanListItem" << oendl; 
     #endif
     OListViewItem::serializeTo( s );
 
@@ -470,7 +469,7 @@ void MScanListItem::serializeTo( QDataStream& s ) const
 void MScanListItem::serializeFrom( QDataStream& s )
 {
     #ifdef DEBUG
-    qDebug( "serializing MScanListItem" );
+    odebug << "serializing MScanListItem" << oendl; 
     #endif
     OListViewItem::serializeFrom( s );
 
@@ -556,7 +555,7 @@ void MScanListItem::receivedBeacon()
 {
     _beacons++;
     #ifdef DEBUG
-    qDebug( "MScanListItem %s: received beacon #%d", (const char*) _macaddr, _beacons );
+    odebug << "MScanListItem " << (const char*) _macaddr << ": received beacon #" << _beacons << "" << oendl; 
     #endif
     setText( col_sig, QString::number( _beacons ) );
     setText( col_lastseen, QTime::currentTime().toString() );

@@ -52,7 +52,7 @@ WLANImp::WLANImp( QWidget* parent, const char* name, Interface *i, bool modal, W
   // Check sanity - the existance of the wireless-tools if-pre-up script
   QFile file(QString(PREUP));
   if (file.exists()) {
-    qWarning(QString("WLANImp: Unable to open /etc/network/if-pre-up.d/wireless-tools"));
+    owarn << QString("WLANImp: Unable to open /etc/network/if-pre-up.d/wireless-tools") << oendl; 
   }
 
   connect( rescanButton, SIGNAL( clicked() ), this, SLOT( rescanNeighbourhood() ) );
@@ -233,7 +233,7 @@ void WLANImp::writeOpts() {
     }
     bool error = false;
 
-    qDebug("setting wlan interface %s", interfaces->getInterfaceName( error ).latin1() );
+    odebug << "setting wlan interface " << interfaces->getInterfaceName( error ).latin1() << "" << oendl; 
 
     if (error)  QMessageBox::warning(0,"Inface not set","should not happen!!!");
 
@@ -307,7 +307,7 @@ void WLANImp::writeOpts() {
 void WLANImp::rescanNeighbourhood()
 {
     QString name = interface->getInterfaceName();
-    qDebug( "rescanNeighbourhood via '%s'", (const char*) name );
+    odebug << "rescanNeighbourhood via '" << (const char*) name << "'" << oendl; 
 
     OWirelessNetworkInterface* wiface = static_cast<OWirelessNetworkInterface*>( ONetwork::instance()->interface( name ) );
     assert( wiface );
@@ -330,12 +330,12 @@ void WLANImp::rescanNeighbourhood()
     }
     if ( devicetype.isEmpty() )
     {
-        qWarning( "rescanNeighbourhood(): couldn't guess device type :(" );
+        owarn << "rescanNeighbourhood(): couldn't guess device type :(" << oendl; 
         return;
     }
     else
     {
-        qDebug( "rescanNeighbourhood(): device type seems to be '%s'", (const char*) devicetype );
+        odebug << "rescanNeighbourhood(): device type seems to be '" << (const char*) devicetype << "'" << oendl; 
     }
 
     // configure interface to receive 802.11 management frames
@@ -349,14 +349,14 @@ void WLANImp::rescanNeighbourhood()
     else if ( devicetype == "orinoco" ) wiface->setMonitoring( new OOrinocoMonitoringInterface( wiface, false ) );
     else
     {
-        qDebug( "rescanNeighbourhood(): unsupported device type for monitoring :(" );
+        odebug << "rescanNeighbourhood(): unsupported device type for monitoring :(" << oendl; 
         return;
     }
 
     wiface->setMode( "monitor" );
     if ( wiface->mode() != "monitor" )
     {
-        qWarning( "rescanNeighbourhood(): Unable to bring device into monitor mode (%s).", strerror( errno ) );
+        owarn << "rescanNeighbourhood(): Unable to bring device into monitor mode (" << strerror( errno ) << ")." << oendl; 
         return;
     }
 
@@ -365,7 +365,7 @@ void WLANImp::rescanNeighbourhood()
     cap->open( name );
     if ( !cap->isOpen() )
     {
-        qWarning( "rescanNeighbourhood(): Unable to open libpcap (%s).", strerror( errno ) );
+        owarn << "rescanNeighbourhood(): Unable to open libpcap (" << strerror( errno ) << ")." << oendl; 
         return;
     }
 
@@ -398,15 +398,15 @@ void WLANImp::rescanNeighbourhood()
         wiface->setChannel( i );
         pb->setProgress( i );
         qApp->processEvents();
-        qDebug( "rescanNeighbourhood(): listening on channel %d...", i );
+        odebug << "rescanNeighbourhood(): listening on channel " << i << "..." << oendl; 
         OPacket* p = cap->next( 1000 );
         if ( !p )
         {
-            qDebug( "rescanNeighbourhood(): nothing received on channel %d", i );
+            odebug << "rescanNeighbourhood(): nothing received on channel " << i << "" << oendl; 
         }
         else
         {
-            qDebug( "rescanNeighbourhood(): TADAA - something came in on channel %d", i );
+            odebug << "rescanNeighbourhood(): TADAA - something came in on channel " << i << "" << oendl; 
             handlePacket( p );
         }
     }
@@ -439,7 +439,7 @@ void WLANImp::handlePacket( OPacket* p )
         }
         else
         {
-            qWarning( "handlePacket(): invalid frame [possibly noise] detected!" );
+            owarn << "handlePacket(): invalid frame [possibly noise] detected!" << oendl; 
             return;
         }
 

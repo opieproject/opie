@@ -1,4 +1,4 @@
   config TONLEITER
     boolean "tonleiter (shows scales on sting instruments)"
     default "n"
-    depends ( LIBQPE || LIBQPE-X11 ) 
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE

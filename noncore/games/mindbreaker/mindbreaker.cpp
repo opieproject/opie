@@ -90,7 +90,7 @@ static void setupBoardSize(int w, int h)
     adjusted_board_height = adjusted_title_height + (adjusted_panel_height * 9);
     adjusted_board_width = adjusted_panel_width + (adjusted_bin_margin * 2) + adjusted_peg_size;
 
-//    qDebug("Adjusted width %d height %d", adjusted_board_width, adjusted_board_height);
+//    odebug << "Adjusted width " << adjusted_board_width << " height " << adjusted_board_height << "" << oendl; 
 }
 
 

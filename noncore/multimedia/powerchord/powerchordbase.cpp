@@ -7,9 +7,15 @@
 ** WARNING! All changes made in this file will be lost!
 ****************************************************************************/
 #include "powerchordbase.h"
-
 #include "fretboard.h"
 #include "vumeter.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
+#include <qpe/resource.h>
+using namespace Opie::Core;
+
+/* QT */
 #include <qcombobox.h>
 #include <qlabel.h>
 #include <qlistbox.h>
@@ -18,8 +24,6 @@
 #include <qtabwidget.h>
 #include <qlayout.h>
 #include <qtooltip.h>
-#include <qpe/resource.h>
-
 
 /*
  *  Constructs a PowerchordBase which is a child of 'parent', with the
@@ -580,6 +584,6 @@ PowerchordBase::~PowerchordBase()
 
 void PowerchordBase::change_handler()
 {
-    qWarning( "PowerchordBase::change_handler(): Not implemented yet!" );
+    owarn << "PowerchordBase::change_handler(): Not implemented yet!" << oendl; 
 }
 

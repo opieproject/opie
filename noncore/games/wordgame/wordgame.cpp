@@ -675,7 +675,7 @@ if (s>0 || current==QPoint(5,1)){
 QString st;
 for ( int i=0; i<n; i++ )
     st += tiles[i]->text();
-qDebug("%d,%d: %s (%d) for %d",current.x(),current.y(),st.latin1(),n,s);
+odebug << "" << current.x() << "," << current.y() << ": " << st.latin1() << " (" << n << ") for " << s << "" << oendl; 
 }
 */
     if ( s > best_score ) {

@@ -139,7 +139,7 @@ void ViewMail::setBody(const RecBodyP&body )
         part_plist_t::ConstIterator it = body->Parts()[i]->Parameters().begin();
         for (;it!=body->Parts()[i]->Parameters().end();++it)
         {
-            qDebug(it.key());
+            odebug << it.key() << oendl; 
             if (it.key().lower()=="name")
             {
                 filename=it.data();

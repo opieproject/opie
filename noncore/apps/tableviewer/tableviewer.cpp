@@ -18,7 +18,6 @@
 **
 **********************************************************************/ 
 
-/* local includes */
 #include "tableviewer.h"
 #include "ui/tvbrowseview.h"
 #include "ui/tvfilterview.h"
@@ -27,18 +26,21 @@
 #include "ui/tvkeyedit.h"
 #include "db/datacache.h"
 
-/* QPE includes */
+/* OPIE */
+#include <opie2/odebug.h>
 #include <qpe/fileselector.h>
 #include <qpe/resource.h>
-#include <qtoolbar.h>
+using namespace Opie::Core;
 
-/* QTE includes */
+/* QT */
 #include <qmenubar.h>
+#include <qtoolbar.h>
 #include <qpopupmenu.h>
 #include <qapplication.h>
 #include <qwidgetstack.h>
 #include <qlayout.h>
 #include <qbuffer.h>
+
 /*!
     \class TableViewerWindow
     \brief The main window widget of the application
@@ -201,7 +203,7 @@ void TableViewerWindow::saveDocument()
     QIODevice *dev = fm.saveFile(doc);
 
     if(!ds->saveSource(dev, doc.type())){
-  qWarning("Save unsuccessful");
+  owarn << "Save unsuccessful" << oendl; 
   return;
     }
     dev->close();
@@ -288,7 +290,7 @@ void TableViewerWindow::openDocument(const DocLnk &f)
 
   dirty = FALSE;
     } else {
-        qWarning(tr("could not load Document"));
+        owarn << tr("could not load Document") << oendl; 
     }
     dev->close();
 }

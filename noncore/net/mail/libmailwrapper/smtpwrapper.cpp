@@ -115,7 +115,7 @@ void SMTPwrapper::smtpSend( mailmime *mail,bool later) {
     if (r != MAIL_NO_ERROR || !data) {
         if (data)
             free(data);
-        qDebug("Error fetching mime...");
+        odebug << "Error fetching mime..." << oendl; 
         return;
     }
     msg = 0;
@@ -208,16 +208,16 @@ void SMTPwrapper::connect_server()
     }
 
     int err = MAILSMTP_NO_ERROR;
-    qDebug( "Servername %s at port %i", server, port );
+    odebug << "Servername " << server << " at port " << port << "" << oendl; 
     if ( ssl ) {
-        qDebug( "SSL session" );
+        odebug << "SSL session" << oendl; 
         err = mailsmtp_ssl_connect( m_smtp, server, port );
     } else {
-        qDebug( "No SSL session" );
+        odebug << "No SSL session" << oendl; 
         err = mailsmtp_socket_connect( m_smtp, server, port );
     }
     if ( err != MAILSMTP_NO_ERROR ) {
-        qDebug("Error init connection");
+        odebug << "Error init connection" << oendl; 
         failuretext = tr("Error init SMTP connection: %1").arg(mailsmtpError(err));
         result = 0;
     }
@@ -246,7 +246,7 @@ void SMTPwrapper::connect_server()
     }
 
     if (result==1 && m_SmtpAccount->getLogin() ) {
-        qDebug("smtp with auth");
+        odebug << "smtp with auth" << oendl; 
         if ( m_SmtpAccount->getUser().isEmpty() || m_SmtpAccount->getPassword().isEmpty() ) {
             // get'em
             LoginDialog login( m_SmtpAccount->getUser(),
@@ -264,11 +264,11 @@ void SMTPwrapper::connect_server()
             user = m_SmtpAccount->getUser().latin1();
             pass = m_SmtpAccount->getPassword().latin1();
         }
-        qDebug( "session->auth: %i", m_smtp->auth);
+        odebug << "session->auth: " << m_smtp->auth << "" << oendl; 
         if (result) {
             err = mailsmtp_auth( m_smtp, (char*)user, (char*)pass );
             if ( err == MAILSMTP_NO_ERROR ) {
-                qDebug("auth ok");
+                odebug << "auth ok" << oendl; 
             } else {
                 failuretext = tr("Authentification failed");
                 result = 0;
@@ -307,7 +307,7 @@ int SMTPwrapper::smtpSend(char*from,clist*rcpts,const char*data,size_t size )
     if (!result) {
         storeFailedMail(data,size,failuretext);
     } else {
-        qDebug( "Mail sent." );
+        odebug << "Mail sent." << oendl; 
         storeMail(data,size,"Sent");
     }
     return result;
@@ -319,13 +319,13 @@ void SMTPwrapper::sendMail(const Opie::Core::OSmartPointer<Mail>&mail,bool later
 
     mimeMail = createMimeMail(mail );
     if ( mimeMail == NULL ) {
-        qDebug( "sendMail: error creating mime mail" );
+        odebug << "sendMail: error creating mime mail" << oendl; 
     } else {
         sendProgress = new progressMailSend();
         sendProgress->show();
         sendProgress->setMaxMails(1);
         smtpSend( mimeMail,later);
-        qDebug("Clean up done");
+        odebug << "Clean up done" << oendl; 
         sendProgress->hide();
         delete sendProgress;
         sendProgress = 0;
@@ -378,9 +378,9 @@ int SMTPwrapper::sendQueuedMail(AbstractMail*wrap,const RecMailP&which) {
 bool SMTPwrapper::flushOutbox() {
     bool returnValue = true;
 
-    qDebug("Sending the queue");
+    odebug << "Sending the queue" << oendl; 
     if (!m_SmtpAccount) {
-        qDebug("No smtp account given");
+        odebug << "No smtp account given" << oendl; 
         return false;
     }
 
@@ -388,7 +388,7 @@ bool SMTPwrapper::flushOutbox() {
     QString localfolders = AbstractMail::defaultLocalfolder();
     AbstractMail*wrap = AbstractMail::getWrapper(localfolders);
     if (!wrap) {
-        qDebug("memory error");
+        odebug << "memory error" << oendl; 
         return false;
     }
     QString oldPw, oldUser;
@@ -398,7 +398,7 @@ bool SMTPwrapper::flushOutbox() {
     wrap->listMessages(mbox,mailsToSend);
     if (mailsToSend.count()==0) {
         delete wrap;
-        qDebug("No mails to send");
+        odebug << "No mails to send" << oendl; 
         return false;
     }
 

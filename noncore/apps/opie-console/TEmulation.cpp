@@ -70,6 +70,12 @@
 */
 
 #include "TEmulation.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
+/* STD */
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -204,7 +210,7 @@ void TEmulation::onRcvChar(int c)
 
 void TEmulation::onKeyPress( QKeyEvent* ev )
 {
-    qWarning("onKeyPress,....");
+    owarn << "onKeyPress,...." << oendl; 
   if (!connected) return; // someone else gets the keys
   if (scr->getHistCursor() != scr->getHistLines());
     scr->setHistCursor(scr->getHistLines());

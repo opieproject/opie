@@ -17,7 +17,7 @@ using namespace OpieTooth;
 RfcCommPopup::RfcCommPopup( OpieTooth::BTDeviceItem* item  )
         : QPopupMenu()
 {
-    qWarning("RfcCommPopup c'tor");
+    owarn << "RfcCommPopup c'tor" << oendl; 
 
     QAction* a;
 
@@ -70,7 +70,7 @@ RfcCommPopup::~RfcCommPopup()
 void RfcCommPopup::slotConnect()
 {
 
-    qWarning("connect");
+    owarn << "connect" << oendl; 
 
     PPPDialog pppDialog;
     QPEApplication::execDialog( &pppDialog );
@@ -79,7 +79,7 @@ void RfcCommPopup::slotConnect()
 
 void RfcCommPopup::slotDisconnect()
 {
-    qWarning("slot disconnected");
+    owarn << "slot disconnected" << oendl; 
 }
 
 
@@ -98,6 +98,6 @@ void RfcCommPopup::slotBind()
 
 void RfcCommPopup::slotBar()
 {
-    qWarning("slotBar");
+    owarn << "slotBar" << oendl; 
 };
 

@@ -60,10 +60,10 @@ PPPModule::PPPModule() : Module()
     QMap<QString,QString> ifaces = PPPData::getConfiguredInterfaces();
     QMap<QString,QString>::Iterator it;
     InterfacePPP *iface;
-    qDebug("getting interfaces");
+    odebug << "getting interfaces" << oendl; 
     for( it = ifaces.begin(); it != ifaces.end(); ++it )
     {
-        qDebug("ifaces %s %s", it.key().latin1(), it.data().latin1() );
+        odebug << "ifaces " << it.key().latin1() << " " << it.data().latin1() << "" << oendl; 
         iface = new InterfacePPP( 0, it.key() );
         iface->setHardwareName( it.data() );
         list.append( (Interface*)iface );
@@ -71,7 +71,7 @@ PPPModule::PPPModule() : Module()
         // check if (*it) is one of the running ifaces
         if ( running.contains( it.data() ) )
         {
-            qDebug("iface is running %s", it.key().latin1() );
+            odebug << "iface is running " << it.key().latin1() << "" << oendl; 
             handledInterfaceNames << running[it.data()].device;
             iface->setStatus( true );
             iface->setPPPDpid( running[it.data()].pid );
@@ -88,7 +88,7 @@ PPPModule::PPPModule() : Module()
  */
 PPPModule::~PPPModule()
 {
-    qDebug("PPPModule::~PPPModule() " );
+    odebug << "PPPModule::~PPPModule() " << oendl; 
     QMap<QString,QString> ifaces;
     InterfaceKeeper keeper;
     Interface *i;
@@ -97,7 +97,7 @@ PPPModule::~PPPModule()
         /* if online save the state */
         if ( i->getStatus() )
         {
-            qDebug("Iface %s is still up", i->getHardwareName().latin1() );
+            odebug << "Iface " << i->getHardwareName().latin1() << " is still up" << oendl; 
             InterfacePPP* ppp = static_cast<InterfacePPP*>(i);
             keeper.addInterface( ppp->pppPID(), ppp->pppDev(), ppp->getHardwareName() );
         }
@@ -141,7 +141,7 @@ bool PPPModule::isOwner(Interface *i)
  */
 QWidget *PPPModule::configure(Interface *i)
 {
-    qDebug("return ModemWidget");
+    odebug << "return ModemWidget" << oendl; 
     PPPConfigWidget *pppconfig = new PPPConfigWidget( (InterfacePPP*)i,
                                  0, "PPPConfig", false,
                                  (Qt::WDestructiveClose | Qt::WStyle_ContextHelp));
@@ -168,7 +168,7 @@ QWidget *PPPModule::information(Interface *i)
 QList<Interface> PPPModule::getInterfaces()
 {
     // List all of the files in the peer directory
-    qDebug("PPPModule::getInterfaces");
+    odebug << "PPPModule::getInterfaces" << oendl; 
     return list;
 }
 
@@ -261,7 +261,7 @@ namespace
             con.name = (*it);
             con.pid = cfg.readNumEntry("pid");
             con.device = cfg.readEntry("device");
-            qDebug(" %s %s %d", con.name.latin1(), con.device.latin1(),  con.pid );
+            odebug << " " << con.name.latin1() << " " << con.device.latin1() << " " << con.pid << "" << oendl; 
 
             if ( con.pid != -1 && isAvailable( con.pid ) )
                 ifaces.insert( con.name, con );
@@ -272,11 +272,11 @@ namespace
     {
         if (::kill(p, 0 ) == 0 || errno != ESRCH )
         {
-            qDebug("isAvailable %d",  p);
+            odebug << "isAvailable " << p << "" << oendl; 
             return true;
         }
 
-        qDebug("notAvailable %d", p);
+        odebug << "notAvailable " << p << "" << oendl; 
         return false;
     }
 

@@ -24,6 +24,6 @@ void LoginDialog::accept()
     _user = userLine->text();
     _pass = passLine->text();
 
-    qDebug("User im accept: |%s|",_user.latin1());
+    odebug << "User im accept: |" << _user.latin1() << "|" << oendl; 
     QDialog::accept();
 }

@@ -142,7 +142,7 @@ void AuthWidget::save()
 
 void AuthWidget::authChanged( const QString &authStr )
 {
-    qDebug("AuthWidget::authChanged( %s )", authStr.latin1() );
+    odebug << "AuthWidget::authChanged( " << authStr.latin1() << " )" << oendl; 
     if ( authStr.contains( tr("Script-based") ) ){
         showUsernamePassword( false );
         showScriptWindow( true );
@@ -151,7 +151,7 @@ void AuthWidget::authChanged( const QString &authStr )
         showUsernamePassword( true );
         showScriptWindow( false );
     } else {
-        qDebug("do not really know how to handle");
+        odebug << "do not really know how to handle" << oendl; 
         showUsernamePassword( false );
         showScriptWindow( false );
     }

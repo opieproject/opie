@@ -1,7 +1,7 @@
 /*
  *              kPPP: A pppd Front End for the KDE project
  *
- * $Id: modem.cpp,v 1.8 2003-08-09 17:14:55 kergoth Exp $
+ * $Id: modem.cpp,v 1.9 2004-04-04 13:55:01 mickeyl Exp $
  *
  *              Copyright (C) 1997 Bernd Johannes Wuebben
  *                      wuebben@math.cornell.edu
@@ -55,7 +55,7 @@
 
 
 #define MY_ASSERT(x)  if (!(x)) { \
-        qFatal( "ASSERT: \"%s\" in %s (%d)\n",#x,__FILE__,__LINE__); \
+        ofatal << "ASSERT: \"" << #x << "\" in " << __FILE__ << " (" << __LINE__ << ")\n" << oendl;  \
         exit(1); }
 
 
@@ -165,7 +165,7 @@ bool Modem::opentty() {
     close(modemfd);
     device = _pppdata->modemDevice();
     if ((modemfd = open(device, O_RDWR|O_NDELAY|O_NOCTTY)) == -1) {
-        qDebug("error opening modem device !");
+        odebug << "error opening modem device !" << oendl; 
         errmsg = QObject::tr("Unable to open modem.");
         return false;
     }
@@ -306,9 +306,9 @@ void Modem::startNotifier() {
     if(sn == 0) {
       sn = new QSocketNotifier(modemfd, QSocketNotifier::Read, this);
       connect(sn, SIGNAL(activated(int)), SLOT(readtty(int)));
-      qDebug("QSocketNotifier started!");
+      odebug << "QSocketNotifier started!" << oendl; 
     } else {
-        qDebug("QSocketNotifier re-enabled!");
+        odebug << "QSocketNotifier re-enabled!" << oendl; 
         sn->setEnabled(true);
     }
   }
@@ -321,7 +321,7 @@ void Modem::stopNotifier() {
     disconnect(sn);
     delete sn;
     sn = 0;
-    qDebug( "QSocketNotifier stopped!" );
+    odebug << "QSocketNotifier stopped!" << oendl; 
   }
 }
 
@@ -337,7 +337,7 @@ bool Modem::writeChar(unsigned char c) {
   do {
     s = write(modemfd, &c, 1);
     if (s < 0) {
-      qError( "write() in Modem::writeChar failed" );
+      oerr << "write() in Modem::writeChar failed" << oendl; 
       return false;
     }
   } while(s == 0);
@@ -365,7 +365,7 @@ bool Modem::writeLine(const char *buf) {
     int wr = write(modemfd, &b[len-l], l);
     if(wr < 0) {
       // TODO do something meaningful with the error code (or ignore it
-      qError( "write() in Modem::writeLine failed" );
+      oerr << "write() in Modem::writeLine failed" << oendl; 
       delete[] b;
       return false;
     }
@@ -474,7 +474,7 @@ QString Modem::parseModemSpeed(const QString &s) {
   int i;
   QString result;
 
-  qDebug( "Modem reported result string: %s", s.latin1());
+  odebug << "Modem reported result string: " << s.latin1() << "" << oendl; 
 
   const int RXMAX = 7;
   const int TXMAX = 2;
@@ -560,7 +560,7 @@ QString Modem::parseModemSpeed(const QString &s) {
   else
     result.sprintf("%d/%d", rx, tx);
 
-  qDebug( "The parsed result is: %s", result.latin1());
+  odebug << "The parsed result is: " << result.latin1() << "" << oendl; 
 
   return result;
 }
@@ -573,7 +573,7 @@ int Modem::lockdevice() {
   char newlock[80]=""; // safe
 
   if(!_pppdata->modemLockFile()) {
-    qDebug("The user doesn't want a lockfile.");
+    odebug << "The user doesn't want a lockfile." << oendl; 
     return 0;
   }
 
@@ -595,7 +595,7 @@ if ((fd = openLockfile(QFile::encodeName(lockfile), O_RDONLY)) >= 0) {
         return 1;
       oldlock[sz] = '\0';
 
-      qDebug( "Device is locked by: %s", oldlock);
+      odebug << "Device is locked by: " << oldlock << "" << oendl; 
 
       int oldpid;
       int match = sscanf(oldlock, "%d", &oldpid);
@@ -608,14 +608,14 @@ if ((fd = openLockfile(QFile::encodeName(lockfile), O_RDONLY)) >= 0) {
       if (kill((pid_t)oldpid, 0) == 0 || errno != ESRCH)
         return 1;
 
-      qDebug( "lockfile is stale" );
+      odebug << "lockfile is stale" << oendl; 
     }
   }
 
   fd = openLockfile(_pppdata->modemDevice(),O_WRONLY|O_TRUNC|O_CREAT);
   if(fd >= 0) {
     sprintf(newlock,"%010d\n", getpid());
-    qDebug("Locking Device: %s", newlock);
+    odebug << "Locking Device: " << newlock << "" << oendl; 
 
     write(fd, newlock, strlen(newlock));
     close(fd);
@@ -632,7 +632,7 @@ if ((fd = openLockfile(QFile::encodeName(lockfile), O_RDONLY)) >= 0) {
 // UnLock modem device
 void Modem::unlockdevice() {
   if (modem_is_locked) {
-    qDebug( "UnLocking Modem Device" );
+    odebug << "UnLocking Modem Device" << oendl; 
     close(modemfd);
     modemfd = -1;
     unlink(lockfile);
@@ -654,7 +654,7 @@ int Modem::openLockfile( QString lockfile, int flags)
     lockfile = LOCK_DIR;
     lockfile += "/LCK..";
     lockfile += device.right( device.length() - device.findRev("/") -1 );
-    qDebug("lockfile >%s<",lockfile.latin1());
+    odebug << "lockfile >" << lockfile.latin1() << "<" << oendl; 
     // TODO:
     //   struct stat st;
     //   if(stat(lockfile.data(), &st) == -1) {
@@ -666,7 +666,7 @@ int Modem::openLockfile( QString lockfile, int flags)
     //       return -1;
     //   }
     if ((fd = open(lockfile, flags, mode)) == -1) {
-        qDebug("error opening lockfile!");
+        odebug << "error opening lockfile!" << oendl; 
         lockfile = QString::null;
         fd = open(DEVNULL, O_RDONLY);
     } else
@@ -927,7 +927,7 @@ bool Modem::execpppd(const char *arguments) {
       break;
 
     default:
-      qDebug("In parent: pppd pid %d\n",pppdPid);
+      odebug << "In parent: pppd pid " << pppdPid << "\n" << oendl; 
       close(modemfd);
 
       ::close( m_pppdLOG[1] );
@@ -935,7 +935,7 @@ bool Modem::execpppd(const char *arguments) {
       int flag = ::fcntl( m_pppdLOG[0], F_GETFL );
 
       if ( !(flag & O_NONBLOCK) ) {
-          qDebug("Setting nonblocking io");
+          odebug << "Setting nonblocking io" << oendl; 
           flag |= O_NONBLOCK;
           ::fcntl(m_pppdLOG[0], F_SETFL, flag );
       }
@@ -954,15 +954,15 @@ bool Modem::execpppd(const char *arguments) {
 
 
 bool Modem::killpppd() {
-    qDebug("In killpppd and pid is %d", pppdPid );
+    odebug << "In killpppd and pid is " << pppdPid << "" << oendl; 
   if(pppdPid > 0) {
     delete m_modemDebug;
     m_modemDebug = 0;
-    qDebug("In killpppd(): Sending SIGTERM to %d\n", pppdPid);
+    odebug << "In killpppd(): Sending SIGTERM to " << pppdPid << "\n" << oendl; 
     if(kill(pppdPid, SIGTERM) < 0) {
-      qDebug("Error terminating %d. Sending SIGKILL\n", pppdPid);
+      odebug << "Error terminating " << pppdPid << ". Sending SIGKILL\n" << oendl; 
       if(kill(pppdPid, SIGKILL) < 0) {
-        qDebug("Error killing %d\n", pppdPid);
+        odebug << "Error killing " << pppdPid << "\n" << oendl; 
         return false;
       }
     }
@@ -1035,7 +1035,7 @@ int Modem::openResolv(int flags)
 {
     int fd;
     if ((fd = open(_PATH_RESCONF, flags)) == -1) {
-        qDebug("error opening resolv.conf!");
+        odebug << "error opening resolv.conf!" << oendl; 
         fd = open(DEVNULL, O_RDONLY);
     }
     return fd;
@@ -1056,7 +1056,7 @@ pid_t Modem::pppPID()const {
     return pppdPid;
 }
 void Modem::setPPPDPid( pid_t pid ) {
-    qDebug("Modem setting pid");
+    odebug << "Modem setting pid" << oendl; 
     _pppdExitStatus = -1;
     pppdPid = pid;
     modemfd = -1;

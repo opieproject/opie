@@ -16,10 +16,10 @@ void PopupHelper::insert( int id, popupFactory fact ) {
 }
 
 QPopupMenu* PopupHelper::find( int id, const Services& ser, BTDeviceItem* item ) {
-    //qWarning("find");
+    //owarn << "find" << oendl; 
     FactoryMap::Iterator it = m_map.find(id );
     if ( it != m_map.end() ) {
-        //qWarning("found");
+        //owarn << "found" << oendl; 
         popupFactory fact = it.data();
         return (*fact)(ser, item);
     }

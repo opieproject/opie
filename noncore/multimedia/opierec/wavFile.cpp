@@ -2,17 +2,20 @@
 #include "wavFile.h"
 #include "qtrec.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+#include <qpe/config.h>
+using namespace Opie::Core;
+
+/* QT */
 #include <qmessagebox.h>
 #include <qdir.h>
 
-#include <qpe/config.h>
-
+/* STD */
 #include <errno.h>
-
 #include <sys/time.h>
 #include <sys/types.h>
 #include <sys/vfs.h>
-
 #include <fcntl.h>
 #include <math.h>
 #include <mntent.h>
@@ -24,7 +27,7 @@ WavFile::WavFile( QObject * parent,const QString &fileName, bool makeNwFile, int
                   int channels, int resolution, int format )
         : QObject( parent)
 {
-//qDebug("new wave file");
+//odebug << "new wave file" << oendl; 
     bool b =  makeNwFile;
     wavSampleRate=sampleRate;
     wavFormat=format;
@@ -40,7 +43,7 @@ WavFile::WavFile( QObject * parent,const QString &fileName, bool makeNwFile, int
 
 bool WavFile::newFile() {
 
-//  qDebug("Set up new file");
+//  odebug << "Set up new file" << oendl; 
   Config cfg("OpieRec");
   cfg.setGroup("Settings");
 
@@ -60,7 +63,7 @@ bool WavFile::newFile() {
     currentFileName += date;
   currentFileName+=".wav";
 
-//  qDebug("set up file for recording: "+currentFileName);
+//  odebug << "set up file for recording: "+currentFileName << oendl; 
   char pointer[] = "/tmp/opierec-XXXXXX";
   int fd = 0;
 
@@ -75,7 +78,7 @@ bool WavFile::newFile() {
        return false;
     }
     
-//    qDebug("Opening tmp file %s",pointer);
+//    odebug << "Opening tmp file " << pointer << "" << oendl; 
     track.setName( pointer);
 
   } else { //just use regular file.. no moving
@@ -85,7 +88,7 @@ bool WavFile::newFile() {
   }
   if(!track.open( IO_ReadWrite | IO_Truncate)) {
     QString errorMsg=(QString)strerror(errno);
-    qDebug(errorMsg);
+    odebug << errorMsg << oendl; 
     QMessageBox::message("Note", "Error opening file.\n" +errorMsg);
   
     return false;
@@ -106,14 +109,14 @@ void WavFile::closeFile() {
 }
 
 int WavFile::openFile(const QString &currentFileName) {
-//    qDebug("open play file "+currentFileName);
+//    odebug << "open play file "+currentFileName << oendl; 
     closeFile();
     
   track.setName(currentFileName);
 
   if(!track.open(IO_ReadOnly)) {
     QString errorMsg=(QString)strerror(errno);
-    qDebug("<<<<<<<<<<< "+errorMsg+currentFileName);
+    odebug << "<<<<<<<<<<< "+errorMsg+currentFileName << oendl; 
     QMessageBox::message("Note", "Error opening file.\n" +errorMsg);
     return -1;
   } else {
@@ -131,11 +134,11 @@ bool WavFile::setWavHeader(int fd, wavhdr *hdr) {
 
   if( wavFormat == WAVE_FORMAT_PCM) {
     (*hdr).fmtTag = 1; // PCM
-//    qDebug("set header  WAVE_FORMAT_PCM");
+//    odebug << "set header  WAVE_FORMAT_PCM" << oendl; 
   }
   else {
     (*hdr).fmtTag = WAVE_FORMAT_DVI_ADPCM; //intel ADPCM
- //    qDebug("set header  WAVE_FORMAT_DVI_ADPCM");
+ //    odebug << "set header  WAVE_FORMAT_DVI_ADPCM" << oendl; 
   }
 
   //  (*hdr).nChannels = 1;//filePara.channels;// ? 2 : 1*/; // channels
@@ -160,12 +163,12 @@ bool WavFile::adjustHeaders(int fd, int total) {
   write( fd, &i, sizeof(i));
   lseek( fd, 40, SEEK_SET);
   write( fd, &total, sizeof(total));
-  qDebug("adjusting header %d", total);
+  odebug << "adjusting header " << total << "" << oendl; 
   return true;
 }
 
 int WavFile::parseWavHeader(int fd) {
-  qDebug("Parsing wav header");
+  odebug << "Parsing wav header" << oendl; 
   char string[4];
   int found;
   short fmt;
@@ -173,39 +176,39 @@ int WavFile::parseWavHeader(int fd) {
   unsigned long samplerrate, longdata;
 
   if (read(fd, string, 4) < 4) {
-    qDebug(" Could not read from sound file.\n");
+    odebug << " Could not read from sound file.\n" << oendl; 
     return -1;
   }
   if (strncmp(string, "RIFF", 4)) {
-    qDebug(" not a valid WAV file.\n");
+    odebug << " not a valid WAV file.\n" << oendl; 
     return -1;
   }
   lseek(fd, 4, SEEK_CUR);
   if (read(fd, string, 4) < 4) {
-    qDebug("Could not read from sound file.\n");
+    odebug << "Could not read from sound file.\n" << oendl; 
     return -1;
   }
   if (strncmp(string, "WAVE", 4)) {
-    qDebug("not a valid WAV file.\n");
+    odebug << "not a valid WAV file.\n" << oendl; 
     return -1;
   }
   found = 0;
 
   while (!found) {
     if (read(fd, string, 4) < 4) {
-      qDebug("Could not read from sound file.\n");
+      odebug << "Could not read from sound file.\n" << oendl; 
       return -1;
     }
     if (strncmp(string, "fmt ", 4)) {
       if (read(fd, &longdata, 4) < 4) {
-        qDebug("Could not read from sound file.\n");
+        odebug << "Could not read from sound file.\n" << oendl; 
         return -1;
       }
       lseek(fd, longdata, SEEK_CUR);
     } else {
       lseek(fd, 4, SEEK_CUR);
       if (read(fd, &fmt, 2) < 2) {
-        qDebug("Could not read format chunk.\n");
+        odebug << "Could not read format chunk.\n" << oendl; 
         return -1;
       }
       if (fmt != WAVE_FORMAT_PCM && fmt != WAVE_FORMAT_DVI_ADPCM) {
@@ -215,30 +218,30 @@ int WavFile::parseWavHeader(int fd) {
       }
       wavFormat = fmt;
       //      compressionFormat=fmt;
-      qDebug("compressionFormat is %d", fmt);
+      odebug << "compressionFormat is " << fmt << "" << oendl; 
       if (read(fd, &ch, 2) < 2) {
-        qDebug("Could not read format chunk.\n");
+        odebug << "Could not read format chunk.\n" << oendl; 
         return -1;
       } else {
         wavChannels = ch;
-        qDebug("File has %d channels", ch);
+        odebug << "File has " << ch << " channels" << oendl; 
       }
       if (read(fd, &samplerrate, 4) < 4) {
-        qDebug("Could not read from format chunk.\n");
+        odebug << "Could not read from format chunk.\n" << oendl; 
         return -1;
       } else {
         wavSampleRate = samplerrate;
         //                sampleRate = samplerrate;
-        qDebug("File has samplerate of %d",(int) samplerrate);
+        odebug << "File has samplerate of " << (int) samplerrate << "" << oendl; 
       }
       lseek(fd, 6, SEEK_CUR);
       if (read(fd, &bitrate, 2) < 2) {
-        qDebug("Could not read format chunk.\n");
+        odebug << "Could not read format chunk.\n" << oendl; 
         return -1;
       }  else {
         wavResolution=bitrate;
         //                 resolution =  bitrate;
-        qDebug("File has bitrate of %d", bitrate);
+        odebug << "File has bitrate of " << bitrate << "" << oendl; 
       }
       found++;
     }
@@ -246,20 +249,20 @@ int WavFile::parseWavHeader(int fd) {
   found = 0;
   while (!found) {
     if (read(fd, string, 4) < 4) {
-      qDebug("Could not read from sound file.\n");
+      odebug << "Could not read from sound file.\n" << oendl; 
       return -1;
     }
 
     if (strncmp(string, "data", 4)) {
       if (read(fd, &longdata, 4)<4) {
-        qDebug("Could not read from sound file.\n");
+        odebug << "Could not read from sound file.\n" << oendl; 
         return -1;
       }
 
       lseek(fd, longdata, SEEK_CUR);
     } else {
       if (read(fd, &longdata, 4) < 4) {
-        qDebug("Could not read from sound file.\n");
+        odebug << "Could not read from sound file.\n" << oendl; 
         return -1;
       } else {
         wavNumberSamples =  longdata;

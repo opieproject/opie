@@ -9,12 +9,15 @@
 
 #include "usermanager.h"
 
-#include <qlayout.h>
+/* OPIE */
+#include <opie2/odebug.h>
+#include <qpe/resource.h>
+using namespace Opie::Core;
 
+/* QT */
+#include <qlayout.h>
 #include <qmessagebox.h>
 #include <qfile.h>
-#include <qpe/resource.h>
-
 #include <qregexp.h>
 
 /**
@@ -253,5 +256,5 @@ void UserConfig::delGroup() {
 
 void UserConfig::showUserMenu(QListViewItem *item) {
 //	userPopupMenu.exec(item->mapToGlobal(QPoint(0,0)));
-	qWarning("Pressed!");
+	owarn << "Pressed!" << oendl; 
 }

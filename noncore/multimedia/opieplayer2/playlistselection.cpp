@@ -44,7 +44,7 @@ private:
 PlayListSelection::PlayListSelection( QWidget *parent, const char *name )
     : QListView( parent, name )
 {
-//    qDebug("starting playlistselector");
+//    odebug << "starting playlistselector" << oendl; 
 // #ifdef USE_PLAYLIST_BACKGROUND
 //    setStaticBackground( TRUE );
 //      setBackgroundPixmap( Resource::loadPixmap( "opieplayer/background" ) );
@@ -65,7 +65,7 @@ PlayListSelection::~PlayListSelection() {
 
 // #ifdef USE_PLAYLIST_BACKGROUND
 void PlayListSelection::drawBackground( QPainter *p, const QRect &r ) {
-//  qDebug("drawBackground");
+//  odebug << "drawBackground" << oendl; 
    p->fillRect( r, QBrush( white ) );
 //        QImage logo = Resource::loadImage( "launcher/opielogo" );
 //          if ( !logo.isNull() )
@@ -184,7 +184,7 @@ void PlayListSelection::writeCurrent( Config& cfg ) {
     QListViewItem *item = selectedItem();
     if ( item )
         cfg.writeEntry("current", item->text(0) );
-    qDebug(item->text(0));
+    odebug << item->text(0) << oendl; 
 
 }
 
@@ -193,9 +193,9 @@ void  PlayListSelection::setSelectedItem(const QString &strk ) {
     unSelect();
     QListViewItemIterator it( this );
     for ( ; it.current(); ++it ) {
-//        qDebug( it.current()->text(0));
+//        odebug << it.current()->text(0) << oendl; 
         if( strk == it.current()->text(0)) {
-//             qDebug( "We have a match "+strk);
+//             odebug << "We have a match "+strk << oendl; 
             setSelected( it.current(), TRUE);
             ensureItemVisible( it.current() );
             return;

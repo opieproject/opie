@@ -101,7 +101,7 @@ void Engine::pushValue (char v)
     };
     if (!ok) {
 	state = sError;
-	qDebug("pushValue() - num->string conversion");
+	odebug << "pushValue() - num->string conversion" << oendl; 
     } else {
 	const QString constString = displayString;
 	emit(display(constString));
@@ -127,7 +127,7 @@ void Engine::del ()
 	    num.dbl=displayString.toDouble(&ok);
 	    break;
 	case rFraction:
-	    qDebug("not available");
+	    odebug << "not available" << oendl; 
 	    break;
 	default:
 	    displayString.truncate(displayString.length());
@@ -136,7 +136,7 @@ void Engine::del ()
 
     if (!ok) {
 	state = sError;
-	qDebug("del() - num->string conversion");
+	odebug << "del() - num->string conversion" << oendl; 
     } else {
 	const QString constString = displayString;
 	emit(display(constString));
@@ -149,7 +149,7 @@ void Engine::displayData(Data d) {
 	    displayString.setNum(d.dbl);
 	    break;
 	case rFraction:
-	    qDebug("fractional display not yet impl");
+	    odebug << "fractional display not yet impl" << oendl; 
 	    break;
 	default:
 	    displayString.setNum(d.i, calcBase());
@@ -172,7 +172,7 @@ int Engine::calcBase () {
 	    return 16;
 	default:
 	    state = sError;
-	    qDebug("Error - attempt to calc base for non-integer");
+	    odebug << "Error - attempt to calc base for non-integer" << oendl; 
 	    return 10;
     };
 }

@@ -11,8 +11,6 @@
 **
 ***********************************************************************/
 
-// Local
-
 #include "gps.h"
 #include "wellenreiter.h"
 #include "scanlist.h"
@@ -23,10 +21,10 @@
 #include "graphwindow.h"
 #include "protolistview.h"
 
-// Opie
-
+/* OPIE */
 #ifdef QWS
 #include <opie2/oapplication.h>
+#include <opie2/odebug.h>
 #include <opie2/odevice.h>
 #else
 #include <qapplication.h>
@@ -35,10 +33,11 @@
 #include <opie2/onetwork.h>
 #include <opie2/opcap.h>
 #include <qpe/qcopenvelope_qws.h>
-using namespace Opie;
+using namespace Opie::Core;
+using namespace Opie::Net;
+using namespace Opie::Ui;
 
-// Qt
-
+/* QT */
 #include <qcheckbox.h>
 #include <qcombobox.h>
 #include <qdatetime.h>
@@ -52,8 +51,7 @@ using namespace Opie;
 #include <qtoolbutton.h>
 #include <qmainwindow.h>
 
-// Standard
-
+/* STD */
 #include <assert.h>
 #include <errno.h>
 #include <unistd.h>
@@ -61,12 +59,6 @@ using namespace Opie;
 #include <sys/types.h>
 #include <stdlib.h>
 
-using namespace Opie::Core;
-using namespace Opie::Net;
-using namespace Opie::Net;
-using namespace Opie::Core;
-using namespace Opie::Net;
-using namespace Opie::Core;
 Wellenreiter::Wellenreiter( QWidget* parent )
     : WellenreiterBase( parent, 0, 0 ),
       sniffing( false ), iface( 0 ), configwindow( 0 )
@@ -106,7 +98,7 @@ Wellenreiter::~Wellenreiter()
 
 void Wellenreiter::initialTimer()
 {
-    qDebug( "Wellenreiter::preloading manufacturer database..." );
+    odebug << "Wellenreiter::preloading manufacturer database..." << oendl; 
     OManufacturerDB::instance();
 }
 
@@ -149,12 +141,12 @@ void Wellenreiter::handleNotification( OPacket* p )
         if ( configwindow->parsePackets->isProtocolChecked( name ) )
         {
             QString action = configwindow->parsePackets->protocolAction( name );
-            qDebug( "parsePacket-action for '%s' seems to be '%s'", (const char*) name, (const char*) action );
+            odebug << "parsePacket-action for '" << (const char*) name << "' seems to be '" << (const char*) action << "'" << oendl; 
             doAction( action, name, p );
         }
         else
         {
-            qDebug( "protocol '%s' not checked in parsePackets.", (const char*) name );
+            odebug << "protocol '" << (const char*) name << "' not checked in parsePackets." << oendl; 
         }
     ++it;
     }
@@ -166,7 +158,7 @@ void Wellenreiter::handleManagementFrame( OPacket* p, OWaveLanManagementPacket* 
     if ( manage->managementType() == "Beacon" ) handleManagementFrameBeacon( p, manage );
     else if ( manage->managementType() == "ProbeRequest" ) handleManagementFrameProbeRequest( p, manage );
     else if ( manage->managementType() == "ProbeResponse" ) handleManagementFrameProbeResponse( p, manage );
-    else qWarning( "Wellenreiter::handleManagementFrame(): '%s' - please handle me!", (const char*) manage->managementType() );
+    else owarn << "Wellenreiter::handleManagementFrame(): '" << (const char*) manage->managementType() << "' - please handle me!" << oendl; 
 }
 
 
@@ -182,14 +174,14 @@ void Wellenreiter::handleManagementFrameProbeRequest( OPacket* p, OWaveLanManage
     if ( configwindow->enableGPS->isChecked() )
     {
         // TODO: add check if GPS is working!?
-        qDebug( "Wellenreiter::gathering GPS data..." );
+        odebug << "Wellenreiter::gathering GPS data..." << oendl; 
         loc = gps->position();
-        qDebug( "Wellenreiter::GPS data received is ( %f , %f ) - dms string = '%s'", loc.latitude(), loc.longitude(), loc.dmsPosition().latin1() );
+        odebug << "Wellenreiter::GPS data received is ( " << loc.latitude() << " , " << loc.longitude() << " ) - dms string = '" << loc.dmsPosition().latin1() << "'" << oendl; 
     }
 
     if ( essid.length() )
         netView()->addNewItem( "adhoc", essid, header->macAddress2(), false /* should check FrameControl field */, -1, 0, loc, true /* only probed */ );
-    qDebug( "Wellenreiter::invalid frame [possibly noise] detected!" );
+    odebug << "Wellenreiter::invalid frame [possibly noise] detected!" << oendl; 
 }
 
 
@@ -211,7 +203,7 @@ void Wellenreiter::handleManagementFrameBeacon( OPacket* p, OWaveLanManagementPa
     }
     else
     {
-        qWarning( "Wellenreiter::invalid frame [possibly noise] detected!" );
+        owarn << "Wellenreiter::invalid frame [possibly noise] detected!" << oendl; 
         return;
     }
 
@@ -226,9 +218,9 @@ void Wellenreiter::handleManagementFrameBeacon( OPacket* p, OWaveLanManagementPa
     if ( configwindow->enableGPS->isChecked() )
     {
         // TODO: add check if GPS is working!?
-        qDebug( "Wellenreiter::gathering GPS data..." );
+        odebug << "Wellenreiter::gathering GPS data..." << oendl; 
         loc = gps->position();
-        qDebug( "Wellenreiter::GPS data received is ( %f , %f ) - dms string = '%s'", loc.latitude(), loc.longitude(), loc.dmsPosition().latin1() );
+        odebug << "Wellenreiter::GPS data received is ( " << loc.latitude() << " , " << loc.longitude() << " ) - dms string = '" << loc.dmsPosition().latin1() << "'" << oendl; 
     }
 
     netView()->addNewItem( type, essid, header->macAddress2(), beacon->canPrivacy(), channel, 0, loc );
@@ -255,7 +247,7 @@ void Wellenreiter::handleControlFrame( OPacket* p, OWaveLanControlPacket* contro
     }
     else
     {
-        qDebug( "Wellenreiter::handleControlFrame - please handle %s in a future version! :D", (const char*) control->controlType()  );
+        odebug << "Wellenreiter::handleControlFrame - please handle " << (const char*) control->controlType() << " in a future version! :D" << oendl; 
     }
 }
 
@@ -304,7 +296,7 @@ void Wellenreiter::handleARPData( OPacket* p, OARPPacket*, OMacAddress& source, 
     OARPPacket* arp = (OARPPacket*) p->child( "ARP" );
     if ( arp )
     {
-        qDebug( "Received ARP traffic (type '%s'): ", (const char*) arp->type() );
+        odebug << "Received ARP traffic (type '" << (const char*) arp->type() << "'): " << oendl; 
         if ( arp->type() == "REQUEST" )
         {
             netView()->identify( arp->senderMacAddress(), arp->senderIPV4Address().toString() );
@@ -325,16 +317,16 @@ void Wellenreiter::handleIPData( OPacket* p, OIPPacket* ip, OMacAddress& source,
     ODHCPPacket* dhcp = (ODHCPPacket*) p->child( "DHCP" );
     if ( dhcp )
     {
-        qDebug( "Received DHCP '%s' packet", (const char*) dhcp->type() );
+        odebug << "Received DHCP '" << (const char*) dhcp->type() << "' packet" << oendl; 
         if ( dhcp->type() == "OFFER" )
         {
-            qDebug( "DHCP: '%s' ('%s') seems to be a DHCP server.", (const char*) source.toString(), (const char*) dhcp->serverAddress().toString() );
+            odebug << "DHCP: '" << (const char*) source.toString() << "' ('" << (const char*) dhcp->serverAddress().toString() << "') seems to be a DHCP server." << oendl; 
             netView()->identify( source, dhcp->serverAddress().toString() );
             netView()->addService( "DHCP", source, dhcp->serverAddress().toString() );
         }
         else if ( dhcp->type() == "ACK" )
         {
-            qDebug( "DHCP: '%s' ('%s') accepted the offered DHCP address.", (const char*) dhcp->clientMacAddress().toString(), (const char*) dhcp->yourAddress().toString() );
+            odebug << "DHCP: '" << (const char*) dhcp->clientMacAddress().toString() << "' ('" << (const char*) dhcp->yourAddress().toString() << "') accepted the offered DHCP address." << oendl; 
             netView()->identify( dhcp->clientMacAddress(), dhcp->yourAddress().toString() );
         }
     }
@@ -368,7 +360,7 @@ bool Wellenreiter::checkDumpPacket( OPacket* p )
         if ( configwindow->capturePackets->isProtocolChecked( name ) )
         {
             QString action = configwindow->capturePackets->protocolAction( name );
-            qDebug( "capturePackets-action for '%s' seems to be '%s'", (const char*) name, (const char*) action );
+            odebug << "capturePackets-action for '" << (const char*) name << "' seems to be '" << (const char*) action << "'" << oendl; 
             if ( action == "Discard" )
             {
                 logwindow->log( QString().sprintf( "(i) dump-discarding of '%s' packet requested.", (const char*) name ) );
@@ -377,7 +369,7 @@ bool Wellenreiter::checkDumpPacket( OPacket* p )
         }
         else
         {
-            qDebug( "protocol '%s' not checked in capturePackets.", (const char*) name );
+            odebug << "protocol '" << (const char*) name << "' not checked in capturePackets." << oendl; 
         }
     ++it;
     }
@@ -551,7 +543,7 @@ void Wellenreiter::startClicked()
         case DEVTYPE_HOSTAP: iface->setMonitoring( new OHostAPMonitoringInterface( iface, usePrism ) ); break;
         case DEVTYPE_ORINOCO: iface->setMonitoring( new OOrinocoMonitoringInterface( iface, usePrism ) ); break;
         case DEVTYPE_MANUAL: QMessageBox::information( this, "Wellenreiter II", tr( "Bring your device into\nmonitor mode now." ) ); break;
-        case DEVTYPE_FILE: qDebug( "Wellenreiter: Capturing from file '%s'", (const char*) interface ); break;
+        case DEVTYPE_FILE: odebug << "Wellenreiter: Capturing from file '" << (const char*) interface << "'" << oendl;  break;
         default: assert( 0 ); // shouldn't reach this
     }
 
@@ -572,7 +564,7 @@ void Wellenreiter::startClicked()
     // open GPS device
     if ( configwindow->enableGPS->isChecked() )
     {
-        qDebug( "Wellenreiter:GPS enabled @ %s:%d", (const char*) configwindow->gpsdHost->currentText(), configwindow->gpsdPort->value() );
+        odebug << "Wellenreiter:GPS enabled @ " << (const char*) configwindow->gpsdHost->currentText() << ":" << configwindow->gpsdPort->value() << "" << oendl; 
         gps->open( configwindow->gpsdHost->currentText(), configwindow->gpsdPort->value() );
     }
 
@@ -596,7 +588,7 @@ void Wellenreiter::startClicked()
     else
         pcap->open( QFile( interface ) );
 
-    qDebug( "Wellenreiter:: dumping to %s", (const char*) dumpname );
+    odebug << "Wellenreiter:: dumping to " << (const char*) dumpname << "" << oendl; 
     pcap->openDumpFile( dumpname );
 
     if ( !pcap->isOpen() )
@@ -652,7 +644,7 @@ void Wellenreiter::startClicked()
 
 void Wellenreiter::timerEvent( QTimerEvent* )
 {
-    qDebug( "Wellenreiter::timerEvent()" );
+    odebug << "Wellenreiter::timerEvent()" << oendl; 
     OPacket* p = pcap->next();
     if ( !p ) // no more packets available
     {
@@ -715,15 +707,15 @@ void Wellenreiter::joinNetwork(const QString& type, const QString& essid, int ch
 
     QCopEnvelope msg( "QPE/Application/networksettings", "wlan(QString,QString,QString)" );
     int count = 3;
-    qDebug("sending %d messages",count);
+    odebug << "sending " << count << " messages" << oendl; 
     msg << QString("count") << QString::number(count);
-    qDebug("msg >%s< Mode >%s<", iface->name(),type.latin1() );
+    odebug << "msg >" << iface->name() << "< Mode >" << type.latin1() << "<" << oendl; 
     msg << QString(iface->name()) << QString("Mode") << type;
-    qDebug("msg >%s< essid >%s<", iface->name(),essid.latin1());
+    odebug << "msg >" << iface->name() << "< essid >" << essid.latin1() << "<" << oendl; 
     msg << QString(iface->name()) << QString("ESSID") << essid;
-    qDebug("msg >%s< channel >%d<", iface->name(),channel);
+    odebug << "msg >" << iface->name() << "< channel >" << channel << "<" << oendl; 
     msg << QString(iface->name()) << QString("Channel") << channel;
-//    qDebug("msg >%s< mac >%s<", iface->name(),macaddr);
+//    odebug << "msg >" << iface->name() << "< mac >" << macaddr << "<" << oendl; 
 //    msg << QString(iface->name()) << QString("MacAddr") << macaddr;
     #else
     QMessageBox::warning( this, tr( "Can't do that!" ), tr( "Function only available on Embedded build" ) );

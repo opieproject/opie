@@ -91,7 +91,7 @@ int main(int argc, char **argv) {
     QPEApplication app( argc, argv );
 
 #ifdef   FSCKED_DISTRIBUTION
-    qWarning("fscked");
+    owarn << "fscked" << oendl; 
     FixIt it;
     it.fixIt();
 #endif

@@ -1,4 +1,4 @@
-CONFIG		= qt warn_on  quick-app
+CONFIG		= qt warn_on quick-app
 SUBDIRS		= db ui
 HEADERS		= tableviewer.h \
 		  xmlencodeattr.h \
@@ -31,8 +31,8 @@ SOURCES		= main.cpp \
 		  db/common.cpp
 INTERFACES	= ui/tvkeyedit_gen.ui
 TARGET		= tableviewer
-INCLUDEPATH += $(OPIEDIR)/include
-DEPENDPATH     += $(OPIEDIR)/include
-LIBS	       += -lqpe -lopiecore2
+INCLUDEPATH	+= $(OPIEDIR)/include
+DEPENDPATH	+= $(OPIEDIR)/include
+LIBS		+= -lqpe -lopiecore2
 
 include ( $(OPIEDIR)/include.pro )

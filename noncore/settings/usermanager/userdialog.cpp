@@ -11,8 +11,11 @@
 #include "passwd.h"
 
 /* OPIE */
+#include <opie2/odebug.h>
 #include <opie2/odevice.h>
 #include <qpe/qpeapplication.h>
+using namespace Opie::Core;
+using namespace Opie::Ui;
 
 /* QT */
 #include <qlayout.h>
@@ -26,15 +29,10 @@
 #include <unistd.h>
 #include <signal.h>
 
-
-using namespace Opie::Core;
-
-
 /**
  * UserDialog constructor. Setup the dialog, fill the groupComboBox & groupsListView with all groups.
  *
  */
-using namespace Opie::Ui;
 UserDialog::UserDialog(int viewmode, QWidget* parent, const char* name, bool modal, WFlags fl) : QDialog(parent, name, modal, fl)
 {
     vm=viewmode;
@@ -245,7 +243,7 @@ bool UserDialog::addUser(int uid, int gid)
     {
         accounts->findGroup(adduserDialog->groupComboBox->currentText());
         adduserDialog->groupID=accounts->gr_gid;
-        qWarning(QString::number(accounts->gr_gid));
+        owarn << QString::number(accounts->gr_gid) << oendl; 
     }
     if(!(accounts->addUser(adduserDialog->loginLineEdit->text(), adduserDialog->passwordLineEdit->text(),
                            adduserDialog->uidLineEdit->text().toInt(), adduserDialog->groupID, adduserDialog->gecosLineEdit->text(),
@@ -374,7 +372,7 @@ bool UserDialog::editUser(const char *username)
     QStringList tempList=accounts->groupStringList.grep(userRegExp);    // Find all entries in the group database, that the user is a member of.
     for(QStringList::Iterator it=tempList.begin(); it!=tempList.end(); ++it)
     {    // Iterate over all of them.
-        qWarning(*it);
+        owarn << *it << oendl; 
         QListViewItemIterator lvit( edituserDialog->groupsListView );    // Compare to all groups.
         for ( ; lvit.current(); ++lvit )
         {
@@ -389,7 +387,7 @@ bool UserDialog::editUser(const char *username)
     tempList=accounts->groupStringList.grep(userRegExp);    // Find all entries in the group database, that the user is a member of.
     for(QStringList::Iterator it=tempList.begin(); it!=tempList.end(); ++it)
     {    // Iterate over all of them.
-        qWarning(*it);
+        owarn << *it << oendl; 
         QListViewItemIterator lvit( edituserDialog->groupsListView );    // Compare to all groups.
         for ( ; lvit.current(); ++lvit )
         {

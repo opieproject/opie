@@ -34,7 +34,7 @@ int Note::octaveOfBaseNote(int base,int note)
 {
     int normnote = (note>=base) ? note-base : (12-base)+note;
     int octave=getOctaveOfNote(normnote);
-    //qDebug("note %d of %d base is norm %d -> ocatve %d",note,base,normnote,octave);
+    //odebug << "note " << note << " of " << base << " base is norm " << normnote << " -> ocatve " << octave << "" << oendl; 
     return octave;
 }
 //****************************************************************************
@@ -131,12 +131,12 @@ bool Scale::noteInScale(int base,int note)
 
     if(halftones.contains(normnote)>0)
     {
-        //qDebug("OK : base : %d, note %d -> norm %d",base,note,normnote);
+        //odebug << "OK : base : " << base << ", note " << note << " -> norm " << normnote << "" << oendl; 
         return true;
     }
     else
     {
-        //qDebug("BAD : base : %d, note %d -> norm %d",base,note,normnote);
+        //odebug << "BAD : base : " << base << ", note " << note << " -> norm " << normnote << "" << oendl; 
         return false;
     }
 }

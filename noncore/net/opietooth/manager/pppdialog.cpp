@@ -56,7 +56,7 @@ void PPPDialog::connectToDevice() {
     connect( pppDial, SIGNAL(receivedStdout(Opie::Core::OProcess*,char*,int) ),
              this, SLOT(fillOutPut(Opie::Core::OProcess*,char*,int) ) );
      if (!pppDial->start(OProcess::DontCare, OProcess::AllOutput) ) {
-        qWarning("could not start");
+        owarn << "could not start" << oendl; 
         delete pppDial;
     }
 }

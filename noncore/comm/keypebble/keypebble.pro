@@ -1,4 +1,4 @@
-CONFIG          += qt warn_on  quick-app
+CONFIG          += qt warn_on quick-app
 HEADERS		= d3des.h \
 		  krfbbuffer.h \
 		  krfbcanvas.h \
@@ -23,12 +23,11 @@ SOURCES		= d3des.c \
 		  kvncconndlg.cpp \
 		  kvncbookmarkdlg.cpp \
 		  main.cpp
-INTERFACES	= kvncconndlgbase.ui \
-						kvncbookmarkdlgbase.ui
+INTERFACES	= kvncconndlgbase.ui kvncbookmarkdlgbase.ui
 
-INCLUDEPATH += $(OPIEDIR)/include
+INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
-LIBS            += -lqpe
+LIBS            += -lqpe -lopiecore2
 
 TARGET		= keypebble
 

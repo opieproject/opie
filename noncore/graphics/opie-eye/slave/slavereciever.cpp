@@ -5,9 +5,13 @@
 #include "slavereciever.h"
 #include "slaveiface.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpeapplication.h>
+using namespace Opie::Core;
 
+/* QT */
 #include <qtimer.h>
 
 static SlaveObjects* _slaveObj = 0;
@@ -37,7 +41,7 @@ QDataStream &operator<<( QDataStream& s, const PixmapInfo& inf) {
  */
 QDataStream &operator>>( QDataStream& s, PixmapInfo& inf ) {
     s >> inf.file >> inf.width >> inf.height;
-    qWarning( "Recieved %s %d %d", inf.file.latin1(), inf.width, inf.height );
+    owarn << "Recieved " << inf.file.latin1() << " " << inf.width << " " << inf.height << "" << oendl; 
     return s;
 }
 QDataStream &operator<<( QDataStream& s, const ImageInfo& i) {
@@ -82,7 +86,7 @@ SlaveReciever::~SlaveReciever() {
 }
 
 void SlaveReciever::recieveAnswer( const QCString& string, const QByteArray& ar) {
-    qWarning( "String is %s", string.data() );
+    owarn << "String is " << string.data() << "" << oendl; 
     QDataStream stream(ar, IO_ReadOnly );
     QStringList lst;
     static ImageInfo  inf;
@@ -94,7 +98,7 @@ void SlaveReciever::recieveAnswer( const QCString& string, const QByteArray& ar)
     }else if ( string == "thumbInfos(QStringList)" ) {
         stream >> lst;
         for(QStringList::Iterator it = lst.begin(); it != lst.end(); ++it ) {
-            qWarning( "Adding thumbinfo for file "+ *it );
+            owarn << "Adding thumbinfo for file "+ *it << oendl; 
             inf.file = (*it);
             m_inList.append(inf);
         }
@@ -105,7 +109,7 @@ void SlaveReciever::recieveAnswer( const QCString& string, const QByteArray& ar)
     }else if ( string == "fullInfos(QStringList)" ) {
         stream >> lst;
         for(QStringList::Iterator it = lst.begin(); it != lst.end(); ++it ) {
-            qWarning( "Adding fullInfo for"+ *it );
+            owarn << "Adding fullInfo for"+ *it << oendl; 
             inf.file = (*it);
             inf.kind = true;
             m_inList.append(inf);
@@ -117,7 +121,7 @@ void SlaveReciever::recieveAnswer( const QCString& string, const QByteArray& ar)
         PixmapList list;
         stream >> list;
         for(PixmapList::Iterator it = list.begin(); it != list.end(); ++it ) {
-            qWarning( "Got %d %d " + (*it).file, (*it).width , (*it).height );
+            owarn << "Got " << (*it).width << " " << (*it).height << " " + (*it).file << oendl; 
             m_inPix.append(*it);
         }
     }else if ( string == "refUp()" ) {
@@ -181,7 +185,7 @@ void SlaveReciever::slotThumbNail() {
         SlaveInterface* iface = it.data();
         if( iface->supports(inf.file ) ) {
             /* pixmap */
-            qWarning( "Asking for thumbNail in size %d %d for "+inf.file, inf.width, inf.height );
+            owarn << "Asking for thumbNail in size " << inf.width << " " << inf.height << " for "+inf.file << oendl; 
             inf.pixmap = iface->pixmap(inf.file, 64, 64);
             m_outPix.append( inf );
             break;
@@ -200,7 +204,7 @@ void SlaveReciever::slotSend() {
 
     m_out->stop();
 
-    qWarning( "Sending %d %d", outPix().count(), outInf().count() );
+    owarn << "Sending " << outPix().count() << " " << outInf().count() << "" << oendl; 
     /* queue it and send */
     /* if this ever gets a service introduce request queues
      * so we can differinatate between different clients
@@ -209,14 +213,14 @@ void SlaveReciever::slotSend() {
         QCopEnvelope answer("QPE/opie-eye", "pixmapsHandled(PixmapList)" );
         answer << outPix();
         for ( PixmapList::Iterator it = m_outPix.begin();it!=m_outPix.end();++it ) {
-            qWarning( "Sending out %s %d %d", (*it).file.latin1(), (*it).width, (*it).height );
+            owarn << "Sending out " << (*it).file.latin1() << " " << (*it).width << " " << (*it).height << "" << oendl; 
         }
     }
     if ( !m_outList.isEmpty() ) {
         QCopEnvelope answer("QPE/opie-eye", "pixmapsHandled(StringList)" );
         answer << outInf();
         for ( StringList::Iterator it = m_outList.begin();it!=m_outList.end();++it ) {
-            qWarning( "Sending out2 " + (*it).file );
+            owarn << "Sending out2 " + (*it).file << oendl; 
         }
     }
 

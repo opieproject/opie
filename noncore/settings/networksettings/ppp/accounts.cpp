@@ -1,7 +1,7 @@
 /*
  *           kPPP: A pppd front end for the KDE project
  *
- * $Id: accounts.cpp,v 1.11 2004-02-21 18:32:38 ar Exp $
+ * $Id: accounts.cpp,v 1.12 2004-04-04 13:55:00 mickeyl Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -118,7 +118,7 @@ void AccountWidget::create()
     int result;
     if (_pppdata->newaccount() == -1)
     {
-        qDebug("_pppdata->newaccount() == -1");
+        odebug << "_pppdata->newaccount() == -1" << oendl; 
         return;
     }
     result = doTab();

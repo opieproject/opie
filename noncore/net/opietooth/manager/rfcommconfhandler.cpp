@@ -92,23 +92,23 @@ void RfCommConfHandler::load()  {
 
             if ( tmpLine.startsWith("rfcomm") )  {
                 QString number = tmpLine.mid( 6,1 );
-                qDebug( tmpLine );
-                qDebug( "TEST " + number );
+                odebug << tmpLine << oendl; 
+                odebug << "TEST " + number << oendl; 
             } else if ( tmpLine.startsWith( "}" ) ) {
                 m_foundEntries.insert( number, new RfCommConfObject( number.toInt(), mac, channel.toInt(),  comment ) );
             } else if ( tmpLine.startsWith( "device" ) )  {
                 mac = tmpLine.mid( 7, 17 );
-                qDebug( "mac" + mac );
+                odebug << "mac" + mac << oendl; 
             } else if ( tmpLine.startsWith( "channel" ) ) {
                 channel = tmpLine.mid( 8, 1 );
                 qDebug ( "Channel :" + channel );
             } else if ( tmpLine.startsWith( "comment" ) ) {
                 comment = tmpLine.mid( 9, tmpLine.find( ';' ) - 9 - 1 );
-                qDebug( "Comment: " + comment );
+                odebug << "Comment: " + comment << oendl; 
             }
         }
         rfCommConf.close();
     }
     save( m_foundEntries );
-    qDebug( QString( "ENTries: %1").arg( m_foundEntries.count() ) );
+    odebug << QString( "ENTries: %1").arg( m_foundEntries.count() ) << oendl; 
 }

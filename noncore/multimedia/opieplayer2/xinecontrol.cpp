@@ -93,7 +93,7 @@ void XineControl::play( const QString& fileName ) {
     hasAudioChannel = FALSE;
     m_fileName = fileName;
 
-    qDebug("<<FILENAME: " + fileName  + ">>>>");
+    odebug << "<<FILENAME: " + fileName  + ">>>>" << oendl; 
 
     if ( !libXine->play( fileName, 0, 0 ) ) {
         QMessageBox::warning( 0l , tr( "Failure" ), getErrorCode() );
@@ -106,12 +106,12 @@ void XineControl::play( const QString& fileName ) {
     MediaPlayerState::DisplayType displayType;
     if ( !libXine->hasVideo() ) {
         displayType = MediaPlayerState::Audio;
-        qDebug("HAS AUDIO");
+        odebug << "HAS AUDIO" << oendl; 
         libXine->setShowVideo( false );
         hasAudioChannel = TRUE;
     } else {
         displayType = MediaPlayerState::Video;
-        qDebug("HAS VIDEO");
+        odebug << "HAS VIDEO" << oendl; 
         libXine->setShowVideo( true );
         hasVideoChannel = TRUE;
     }
@@ -243,7 +243,7 @@ QString XineControl::getErrorCode() {
 
     int errorCode = libXine->error();
 
-    qDebug( QString("ERRORCODE: %1 ").arg(errorCode) );
+    odebug << QString("ERRORCODE: %1 ").arg(errorCode) << oendl; 
 
     if ( errorCode == 1 ) {
         return tr( "No input plugin found for this media type" );

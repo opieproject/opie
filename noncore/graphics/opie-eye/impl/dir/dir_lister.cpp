@@ -6,19 +6,21 @@
 
 #include <lib/slavemaster.h>
 
-
+/* OPIE */
+#include <opie2/odebug.h>
 #include <qpe/config.h>
 #include <qpe/qpeapplication.h>
+using namespace Opie::Core;
 
+/* QT */
 #include <qdir.h>
 #include <qfileinfo.h>
-
 
 Dir_DirLister::Dir_DirLister( bool list )
     : PDirLister( "dir_dir_lister" )
 {
     m_allFiles = list;
-    qWarning("All Files %d", m_allFiles );
+    owarn << "All Files " << m_allFiles << "" << oendl; 
 
     SlaveMaster* master = SlaveMaster::self();
     connect( master, SIGNAL(sig_start()), this, SIGNAL(sig_start()) );

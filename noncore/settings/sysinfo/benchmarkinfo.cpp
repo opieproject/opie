@@ -19,6 +19,7 @@
 #include "benchmarkinfo.h"
 
 /* OPIE */
+#include <opie2/odebug.h>
 #include <opie2/ostorageinfo.h>
 #include <opie2/olistview.h>
 #include <qpe/qpeapplication.h>
@@ -26,6 +27,8 @@
 #include <qpe/qpedecoration_qws.h>
 #include <qpe/resource.h>
 #include <qpe/config.h>
+using namespace Opie::Core;
+using namespace Opie::Ui;
 
 /* QT */
 #include <qclipboard.h>
@@ -51,10 +54,7 @@
 #define round qRound
 #endif
 
-using namespace Opie::Ui;
-using namespace Opie::Core;
 extern "C"
-
 {
     void BenchFFT( void );
     double dhry_main( int );
@@ -148,7 +148,7 @@ BenchmarkInfo::BenchmarkInfo( QWidget *parent, const char *name, int wFlags )
         while( !ts.eof() )
         {
             QString machline = ts.readLine();
-            qDebug( "sysinfo: parsing benchmark results for '%s'", (const char*) machline );
+            odebug << "sysinfo: parsing benchmark results for '" << (const char*) machline << "'" << oendl; 
             QString resline = ts.readLine();
             machines.insert( machline, new QStringList( QStringList::split( ",", resline ) ) );
             machineCombo->insertItem( machline );
@@ -173,7 +173,7 @@ void BenchmarkInfo::machineActivated( int index )
     QStringList* results = machines[ machineCombo->text( index ) ];
     if ( !results )
     {
-        qDebug( "sysinfo: no results available." );
+        odebug << "sysinfo: no results available." << oendl; 
         return;
     }
     QStringList::Iterator it = results->begin();

@@ -20,6 +20,12 @@
 
 #include "swapfile.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+#include <qpe/resource.h>
+using namespace Opie::Core;
+
+/* QT */
 #include <qfile.h>
 #include <qtextstream.h>
 #include <qlabel.h>
@@ -34,13 +40,12 @@
 #include <qvgroupbox.h>
 #include <qhbox.h>
 #include <qmessagebox.h>
+#include <qcopchannel_qws.h>
+
+/* STD */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-#include <qcopchannel_qws.h>
-#include <qpe/resource.h>
-
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/vfs.h>
@@ -54,11 +59,11 @@ Swapfile::Swapfile( QWidget *parent, const char *name, WFlags f )
 	// are we running as root?
 	isRoot = geteuid() == 0;
 
-    QVBoxLayout* vb = new QVBoxLayout(this, 5);
+	QVBoxLayout* vb = new QVBoxLayout(this, 5);
 
 	QHButtonGroup* cfsdRBG = new QHButtonGroup(tr("Swapfile location"), this);
 	cfsdRBG->setRadioButtonExclusive(true);
-    vb->addWidget(cfsdRBG);
+	vb->addWidget(cfsdRBG);
 
 	ramRB = new QRadioButton(tr("RAM"), cfsdRBG);
 	cfRB = new QRadioButton(tr("CF Card"), cfsdRBG);
@@ -75,7 +80,7 @@ Swapfile::Swapfile( QWidget *parent, const char *name, WFlags f )
 	vb->addWidget(hb1);
 
 	QVGroupBox* box1 = new QVGroupBox(tr("Manage Swapfile"), this);
-    vb->addWidget(box1);
+	vb->addWidget(box1);
 
 	QHBox *hb2 = new QHBox(box1);
 	hb2->setSpacing(5);
@@ -213,7 +218,7 @@ void Swapfile::getStatusPcmcia()
 	}
     } else {
 	// no file found
-	qDebug("no file found");
+	odebug << "no file found" << oendl; 
 	cardInPcmcia0 = FALSE;
 	cardInPcmcia1 = FALSE;
     }

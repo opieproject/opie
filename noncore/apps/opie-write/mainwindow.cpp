@@ -20,12 +20,16 @@
 **********************************************************************/
 
 #include "mainwindow.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
 #include <qpe/fileselector.h>
 #include <qpe/applnk.h>
 #include <qpe/resource.h>
 #include <qpe/fontdatabase.h>
+using namespace Opie::Core;
 
-//#include "qspellchecker.h"
+/* QT */
 #include "qtextedit.h"
 #include <qaction.h>
 #include <qtoolbar.h>
@@ -444,7 +448,7 @@ void MainWindow::fileOpen()
 
 void MainWindow::fileRevert()
 {
-    qDebug( "QMainWindow::fileRevert needs to be done" );
+    odebug << "QMainWindow::fileRevert needs to be done" << oendl; 
 }
 
 void MainWindow::fileNew()
@@ -456,7 +460,7 @@ void MainWindow::fileNew()
 
 void MainWindow::insertTable()
 {
-    qDebug( "MainWindow::insertTable() needs to be done" );
+    odebug << "MainWindow::insertTable() needs to be done" << oendl; 
 }
 
 void MainWindow::newFile( const DocLnk &dl )
@@ -475,7 +479,7 @@ void MainWindow::openFile( const DocLnk &dl )
     FileManager fm;
     QString txt;
     if ( !fm.loadFile( dl, txt ) )
-  qDebug( "couldn't open file" );
+  odebug << "couldn't open file" << oendl; 
     clear();
     editorStack->raiseWidget( editor );
     editor->viewport()->setFocus();

@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qrichtext.cpp,v 1.3 2004-03-01 19:44:43 chicken Exp $
+** $Id: qrichtext.cpp,v 1.4 2004-04-04 13:54:45 mickeyl Exp $
 **
 ** Implementation of the internal Qt classes dealing with rich text
 **
@@ -37,11 +37,17 @@
 
 #include "qrichtext_p.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
+/* QT */
 #include "qdragobject.h"
 #include "qpaintdevicemetrics.h"
 #include "qdrawutil.h"
 #include "qcleanuphandler.h"
 
+/* STD */
 #include <stdlib.h>
 
 using namespace Qt3;
@@ -184,7 +190,7 @@ QTextCursor *QTextDeleteCommand::execute( QTextCursor *c )
 {
     QTextParagraph *s = doc ? doc->paragAt( id ) : parag;
     if ( !s ) {
-	qWarning( "can't locate parag at %d, last parag: %d", id, doc->lastParagraph()->paragId() );
+	owarn << "can't locate parag at " << id << ", last parag: " << doc->lastParagraph()->paragId() << "" << oendl; 
 	return 0;
     }
 
@@ -212,7 +218,7 @@ QTextCursor *QTextDeleteCommand::unexecute( QTextCursor *c )
 {
     QTextParagraph *s = doc ? doc->paragAt( id ) : parag;
     if ( !s ) {
-	qWarning( "can't locate parag at %d, last parag: %d", id, doc->lastParagraph()->paragId() );
+	owarn << "can't locate parag at " << id << ", last parag: " << doc->lastParagraph()->paragId() << "" << oendl; 
 	return 0;
     }
 
@@ -1544,10 +1550,10 @@ void QTextDocument::setRichTextInternal( const QString &text, QTextCursor* curso
 			    QString bg = attr["background"];
 			    const QMimeSource* m = factory_->data( bg, contxt );
 			    if ( !m ) {
-				qWarning("QRichText: no mimesource for %s", bg.latin1() );
+				owarn << "QRichText: no mimesource for " << bg.latin1() << "" << oendl; 
 			    } else {
 				if ( !QImageDrag::decode( m, img ) ) {
-				    qWarning("QTextImage: cannot decode %s", bg.latin1() );
+				    owarn << "QTextImage: cannot decode " << bg.latin1() << "" << oendl; 
 				}
 			    }
 			    if ( !img.isNull() ) {
@@ -2152,7 +2158,7 @@ QString QTextDocument::richText() const
     QStyleSheetItem* item_ol = styleSheet()->item("ol");
     QStyleSheetItem* item_li = styleSheet()->item("li");
     if ( !item_p || !item_ul || !item_ol || !item_li ) {
-	qWarning( "QTextEdit: cannot export HTML due to insufficient stylesheet (lack of p, ul, ol, or li)" );
+	owarn << "QTextEdit: cannot export HTML due to insufficient stylesheet (lack of p, ul, ol, or li)" << oendl; 
 	return QString::null;
     }
     int pastListDepth = 0;
@@ -4096,7 +4102,7 @@ int QTextParagraph::lineHeightOfChar( int i, int *bl, int *y ) const
 	--it;
     }
 
-    qWarning( "QTextParagraph::lineHeightOfChar: couldn't find lh for %d", i );
+    owarn << "QTextParagraph::lineHeightOfChar: couldn't find lh for " << i << "" << oendl; 
     return 15;
 }
 
@@ -4122,7 +4128,7 @@ QTextStringChar *QTextParagraph::lineStartOfChar( int i, int *index, int *line )
 	--l;
     }
 
-    qWarning( "QTextParagraph::lineStartOfChar: couldn't find %d", i );
+    owarn << "QTextParagraph::lineStartOfChar: couldn't find " << i << "" << oendl; 
     return 0;
 }
 
@@ -4149,7 +4155,7 @@ QTextStringChar *QTextParagraph::lineStartOfLine( int line, int *index ) const
 	return &str->at( i );
     }
 
-    qWarning( "QTextParagraph::lineStartOfLine: couldn't find %d", line );
+    owarn << "QTextParagraph::lineStartOfLine: couldn't find " << line << "" << oendl; 
     return 0;
 }
 
@@ -5697,7 +5703,7 @@ QTextFormat *QTextFormatCollection::format( const QFont &f, const QColor &c )
     cachedFormat->collection = this;
     cKey.insert( cachedFormat->key(), cachedFormat );
     if ( cachedFormat->key() != key )
-	qWarning("ASSERT: keys for format not identical: '%s '%s'", cachedFormat->key().latin1(), key.latin1() );
+	owarn << "ASSERT: keys for format not identical: '" << cachedFormat->key().latin1() << " '" << key.latin1() << "'" << oendl; 
     return cachedFormat;
 }
 
@@ -6083,11 +6089,11 @@ QTextImage::QTextImage( QTextDocument *p, const QMap<QString, QString> &attr, co
 	    const QMimeSource* m =
 		factory.data( imageName, context );
 	    if ( !m ) {
-		qWarning("QTextImage: no mimesource for %s", imageName.latin1() );
+		owarn << "QTextImage: no mimesource for " << imageName.latin1() << "" << oendl; 
 	    }
 	    else {
 		if ( !QImageDrag::decode( m, img ) ) {
-		    qWarning("QTextImage: cannot decode %s", imageName.latin1() );
+		    owarn << "QTextImage: cannot decode " << imageName.latin1() << "" << oendl; 
 		}
 	    }
 

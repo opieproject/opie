@@ -1,8 +1,8 @@
-CONFIG		= qt warn_on  quick-app
+CONFIG		= qt warn_on quick-app
 HEADERS		= calculatorimpl.h
 SOURCES		= calculatorimpl.cpp \
 		  main.cpp
-INCLUDEPATH += $(OPIEDIR)/include
+INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe -lopiecore2
 INTERFACES	= calculator.ui

@@ -112,7 +112,7 @@ int WExtensions::channel(){
     left += 0.005;
     right += 0.005;
   }
-  qDebug(QString("Unknown frequency: %1, returning -1 for the channel.").arg(num).latin1());
+  odebug << QString("Unknown frequency: %1, returning -1 for the channel.").arg(num).latin1() << oendl; 
   return -1;
 }
 
@@ -177,12 +177,12 @@ bool WExtensions::stats(int &signal, int &noise, int &quality){
     wstream >> name >> status >> quality >> c >> signal >> c >> noise;
     if(name == QString("%1:").arg(interface)){
       if ( quality > 92 )
-        qDebug( "WIFIAPPLET: D'oh! Quality %d > estimated max!\n", quality );
+        odebug << "WIFIAPPLET: D'oh! Quality " << quality << " > estimated max!\n" << oendl; 
       if ( ( signal > IW_UPPER ) || ( signal < IW_LOWER ) )
-        qDebug( "WIFIAPPLET: Doh! Strength %d > estimated max!\n", signal );
+        odebug << "WIFIAPPLET: Doh! Strength " << signal << " > estimated max!\n" << oendl; 
       if ( ( noise > IW_UPPER ) || ( noise < IW_LOWER ) )
-        qDebug( "WIFIAPPLET: Doh! Noise %d > estimated max!\n", noise );
-      //qDebug(QString("q:%1, s:%2, n:%3").arg(quality).arg(signal).arg(noise).latin1());
+        odebug << "WIFIAPPLET: Doh! Noise " << noise << " > estimated max!\n" << oendl; 
+      //odebug << QString("q:%1, s:%2, n:%3").arg(quality).arg(signal).arg(noise).latin1() << oendl; 
       signal = ( ( signal-IW_LOWER ) * 100 ) / IW_UPPER;
       noise = ( ( noise-IW_LOWER ) * 100 ) / IW_UPPER;
       quality = ( quality*100 ) / 92;
@@ -190,7 +190,7 @@ bool WExtensions::stats(int &signal, int &noise, int &quality){
     }  
   }
 
-  qDebug("WExtensions::statsCard no longer present.");
+  odebug << "WExtensions::statsCard no longer present." << oendl; 
   quality = -1;
   signal = IW_LOWER;
   noise = IW_LOWER;

@@ -1,9 +1,10 @@
 #include "tonleiterdata.h"
-
-#include <qpe/config.h>
-
 using namespace Data;
 
+/* OPIE */
+#include <opie2/odebug.h>
+#include <qpe/config.h>
+using namespace Opie::Core;
 
 TonleiterData::TonleiterData(QObject* parent)
 :QObject(parent)
@@ -152,7 +153,7 @@ Instrument TonleiterData::getInstrument(int id)
         return instruments[id];
     else
     {
-        qDebug("undefined insrtument %d of %d",id,instruments.count());
+        odebug << "undefined insrtument " << id << " of " << instruments.count() << "" << oendl; 
         return Instrument();
     }
 
@@ -174,7 +175,7 @@ Scale TonleiterData::getScale(int id)
         return scales[id];
     else
     {
-        qDebug("Undefined scale");
+        odebug << "Undefined scale" << oendl; 
         return Scale();
     }
 }

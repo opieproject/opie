@@ -40,7 +40,7 @@ AccountListItem::AccountListItem( QListView *parent, Account *a)
 EditAccounts::EditAccounts( Settings *s, QWidget *parent, const char *name, bool modal, WFlags flags )
         : EditAccountsUI( parent, name, modal, flags )
 {
-    qDebug( "New Account Configuration Widget" );
+    odebug << "New Account Configuration Widget" << oendl; 
     settings = s;
 
     mailList->addColumn( tr( "Account" ) );
@@ -80,7 +80,7 @@ void EditAccounts::slotFillLists()
 
 void EditAccounts::slotNewMail()
 {
-    qDebug( "New Mail Account" );
+    odebug << "New Mail Account" << oendl; 
     QString *selection = new QString();
     SelectMailType selType( selection, this, 0, true );
     selType.show();
@@ -94,7 +94,7 @@ void EditAccounts::slotNewAccount( const QString &type )
 {
     if ( type.compare( "IMAP" ) == 0 )
     {
-        qDebug( "-> config IMAP" );
+        odebug << "-> config IMAP" << oendl; 
         IMAPaccount *account = new IMAPaccount();
         IMAPconfig imap( account, this, 0, true );
         if ( QDialog::Accepted == QPEApplication::execDialog( &imap ) )
@@ -110,7 +110,7 @@ void EditAccounts::slotNewAccount( const QString &type )
     }
     else if ( type.compare( "POP3" ) == 0 )
     {
-        qDebug( "-> config POP3" );
+        odebug << "-> config POP3" << oendl; 
         POP3account *account = new POP3account();
         POP3config pop3( account, this, 0, true, WStyle_ContextHelp );
         if ( QDialog::Accepted == QPEApplication::execDialog( &pop3 ) )
@@ -126,7 +126,7 @@ void EditAccounts::slotNewAccount( const QString &type )
     }
     else if ( type.compare( "SMTP" ) == 0 )
     {
-        qDebug( "-> config SMTP" );
+        odebug << "-> config SMTP" << oendl; 
         SMTPaccount *account = new SMTPaccount();
         SMTPconfig smtp( account, this, 0, true, WStyle_ContextHelp );
         if ( QDialog::Accepted == QPEApplication::execDialog( &smtp ) )
@@ -143,7 +143,7 @@ void EditAccounts::slotNewAccount( const QString &type )
     }
     else if ( type.compare( "NNTP" ) == 0 )
     {
-        qDebug( "-> config NNTP" );
+        odebug << "-> config NNTP" << oendl; 
         NNTPaccount *account = new NNTPaccount();
         NNTPconfig nntp( account, this, 0, true, WStyle_ContextHelp );
         if ( QDialog::Accepted == QPEApplication::execDialog( &nntp ) )
@@ -212,7 +212,7 @@ void EditAccounts::slotDeleteAccount( Account *account )
 
 void EditAccounts::slotEditMail()
 {
-    qDebug( "Edit Mail Account" );
+    odebug << "Edit Mail Account" << oendl; 
     if ( !mailList->currentItem() )
     {
         QMessageBox::information( this, tr( "Error" ),
@@ -241,13 +241,13 @@ void EditAccounts::slotDeleteMail()
 
 void EditAccounts::slotNewNews()
 {
-    qDebug( "New News Account" );
+    odebug << "New News Account" << oendl; 
     slotNewAccount( "NNTP" );
 }
 
 void EditAccounts::slotEditNews()
 {
-    qDebug( "Edit News Account" );
+    odebug << "Edit News Account" << oendl; 
     if ( !newsList->currentItem() )
     {
         QMessageBox::information( this, tr( "Error" ),
@@ -262,7 +262,7 @@ void EditAccounts::slotEditNews()
 
 void EditAccounts::slotDeleteNews()
 {
-    qDebug( "Delete News Account" );
+    odebug << "Delete News Account" << oendl; 
     if ( !newsList->currentItem() )
     {
         QMessageBox::information( this, tr( "Error" ),
@@ -578,7 +578,7 @@ void NNTPconfig::save()
    for ( ; list_it.current(); ++list_it ) {
 
        if ( ( (QCheckListItem*)list_it.current() )->isOn() ) {
-          qDebug(list_it.current()->text(0) );
+          odebug << list_it.current()->text(0) << oendl; 
           groupList.append(  list_it.current()->text(0) );
       }
 

@@ -52,7 +52,7 @@ AbstractMail* AbstractMail::getWrapper(Account*a)
 
 encodedString* AbstractMail::decode_String(const encodedString*text,const QString&enc)
 {
-    qDebug("Decode string start");
+    odebug << "Decode string start" << oendl; 
     char*result_text;
     size_t index = 0;
     /* reset for recursive use! */
@@ -76,7 +76,7 @@ encodedString* AbstractMail::decode_String(const encodedString*text,const QStrin
     if (err == MAILIMF_NO_ERROR) {
         result->setContent(result_text,target_length);
     }
-    qDebug("Decode string finished");
+    odebug << "Decode string finished" << oendl; 
     return result;
 }
 
@@ -91,10 +91,10 @@ QString AbstractMail::convert_String(const char*text)
     /* due a bug in libetpan it isn't usable this moment */
 /*    int err = mailmime_encoded_phrase_parse("iso-8859-1",
         text, strlen(text),&index, "iso-8859-1",&res);*/
-    //qDebug("Input: %s",text);
+    //odebug << "Input: " << text << "" << oendl; 
     if (err == MAILIMF_NO_ERROR && res && strlen(res)) {
 //        result = QString(res);
-//        qDebug("Res: %s, length: %i",res,strlen(res));
+//        odebug << "Res: " << res << ", length: " << strlen(res) << "" << oendl; 
     }
     if (res) free(res);
     return result;

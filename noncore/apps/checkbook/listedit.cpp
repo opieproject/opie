@@ -27,14 +27,19 @@
 */
 
 #include "listedit.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
+#include <qpe/resource.h>
+using namespace Opie::Core;
+
+/* QT */
 #include <qlayout.h>
 #include <qlineedit.h>
 #include <qlistview.h>
 #include <qwidgetstack.h>
 #include <qcombobox.h>
 #include <qpushbutton.h>
-#include <qpe/resource.h>
-
 
 // --- ListEdit ---------------------------------------------------------------
 ListEdit::ListEdit( QWidget *parent, const char *sName )
@@ -302,7 +307,7 @@ void ListEdit::slotClick(QListViewItem *itm, const QPoint &pnt, int col)
         }
         _stack->raiseWidget(_box);
     } else {
-        qDebug( "Unsupported column type for column %s", (const char *)pDef->getName() );
+        odebug << "Unsupported column type for column " << (const char *)pDef->getName() << "" << oendl; 
         _typeEdit->setText("");
         _stack->raiseWidget(_typeEdit);
     }

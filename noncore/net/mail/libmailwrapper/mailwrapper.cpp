@@ -51,7 +51,7 @@ IMAPFolder::IMAPFolder(const QString&name,const QString&sep, bool select,bool no
   // Decode IMAP foldername
   nameDisplay = IMAPFolder::decodeFolderName( name );
   /*
-  qDebug( "folder " + name + " - displayed as " + nameDisplay );
+  odebug << "folder " + name + " - displayed as " + nameDisplay << oendl; 
   */
     prefix = aprefix;
 

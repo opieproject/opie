@@ -17,8 +17,15 @@
 ** not clear to you.
 **
 **********************************************************************/ 
+
 #include "tvlistview.h"
 #include "../db/common.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
+/* QT */
 #include <qtoolbutton.h>
 #include <qlistview.h>
 #include <qlayout.h>
@@ -163,7 +170,7 @@ void TVListView::first()
 
 void TVListView::last()
 {
-    qWarning("TVListView::last not yet implemented");
+    owarn << "TVListView::last not yet implemented" << oendl; 
 }
 
 void TVListView::next()

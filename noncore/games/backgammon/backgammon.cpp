@@ -1,19 +1,23 @@
 #include "backgammon.h"
-
 #include "aidialog.h"
 #include "filedialog.h"
 #include "playerdialog.h"
 #include "rulesdialog.h"
 #include "themedialog.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+#include <qpe/qpeapplication.h>
+#include <qpe/config.h>
+#include <qpe/resource.h>
+using namespace Opie::Core;
+
+/* QT */
 #include <qfile.h>
 #include <qlayout.h>
 #include <qmessagebox.h>
 #include <qtimer.h>
-#include <qpe/qpeapplication.h>
-#include <qpe/config.h>
 #include <qmenubar.h>
-#include <qpe/resource.h>
 
 #include <stdlib.h>
 
@@ -33,7 +37,7 @@ BackGammon::BackGammon(QWidget* parent, const char* name, WFlags fl)
     Config conf("backgammon");
     if(!conf.isValid())
     {
-        qDebug("config file does not exist");
+        odebug << "config file does not exist" << oendl; 
         conf.setGroup("general");
         conf.writeEntry("theme","default");
         conf.setGroup("rules");
@@ -78,7 +82,7 @@ BackGammon::BackGammon(QWidget* parent, const char* name, WFlags fl)
     Config theme(theme_file,Config::File);   
     if(!theme.isValid())
     {
-      qDebug("theme file does not exist");
+      odebug << "theme file does not exist" << oendl; 
       theme.setGroup("theme");
       theme.writeEntry("board","casino_board_1");
       theme.writeEntry("pieces1","casino_pieces_blue");

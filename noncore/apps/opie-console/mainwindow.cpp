@@ -1,16 +1,3 @@
-#include <assert.h>
-
-#include <qaction.h>
-#include <qmenubar.h>
-#include <qtoolbar.h>
-#include <qmessagebox.h>
-#include <qwhatsthis.h>
-#include <qfileinfo.h>
-
-#include <qpe/filemanager.h>
-
-#include <opie2/ofiledialog.h>
-
 #include "TEmulation.h"
 #include "profileeditordialog.h"
 #include "configdialog.h"
@@ -23,8 +10,24 @@
 #include "emulation_handler.h"
 #include "script.h"
 
-
+/* OPIE */
+#include <opie2/odebug.h>
+#include <opie2/ofiledialog.h>
+#include <qpe/filemanager.h>
+using namespace Opie::Core;
 using namespace Opie::Ui;
+
+/* QT */
+#include <qaction.h>
+#include <qmenubar.h>
+#include <qtoolbar.h>
+#include <qmessagebox.h>
+#include <qwhatsthis.h>
+#include <qfileinfo.h>
+
+/* STD */
+#include <assert.h>
+
 MainWindow::MainWindow(QWidget *parent, const char *name, WFlags) : QMainWindow(parent, name, WStyle_ContextHelp)  {
     KeyTrans::loadAll();
     for (int i = 0; i < KeyTrans::count(); i++ ) {
@@ -446,13 +449,13 @@ void MainWindow::slotClose() {
         return;
 
     Session* ses = currentSession();
-    qWarning("removing! currentSession %s", currentSession()->name().latin1() );
+    owarn << "removing! currentSession " << currentSession()->name().latin1() << "" << oendl; 
     /* set to NULL to be safe, if its needed slotSessionChanged resets it automatically */
     m_curSession = NULL;
     tabWidget()->remove( /*currentSession()*/ses );
     /*it's autodelete */
     m_sessions.remove( ses );
-    qWarning("after remove!!");
+    owarn << "after remove!!" << oendl; 
 
     if (!currentSession() ) {
         m_connect->setEnabled( false );
@@ -570,7 +573,7 @@ void MainWindow::slotOpenButtons( bool state ) {
 
 
 void MainWindow::slotSessionChanged( Session* ses ) {
-    qWarning("changed!");
+    owarn << "changed!" << oendl; 
 
     if(m_curSession)
         if(m_curSession->transferDialog()) m_curSession->transferDialog()->hide();
@@ -579,7 +582,7 @@ void MainWindow::slotSessionChanged( Session* ses ) {
 
     if ( ses ) {
         m_curSession = ses;
-        qDebug(QString("is connected : %1").arg(  m_curSession->layer()->isConnected() ) );
+        odebug << QString("is connected : %1").arg(  m_curSession->layer()->isConnected() ) << oendl; 
         if ( m_curSession->layer()->isConnected() ) {
             m_connect->setEnabled( false );
             m_disconnect->setEnabled( true );

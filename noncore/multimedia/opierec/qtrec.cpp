@@ -8,24 +8,22 @@
 #include "pixmaps.h"
 #include "qtrec.h"
 #include "waveform.h"
-
-#include <pthread.h>
-
 extern "C" {
 #include "adpcm.h"
 }
 
-#include <sys/soundcard.h>
-
+/* OPIE */
+#include <opie2/odebug.h>
 #include <qpe/config.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
 #include <qpe/storage.h>
+using namespace Opie::Core;
 
+/* QT */
 #include <qcheckbox.h>
 #include <qcombobox.h>
-//#include <qdatetime.h>
 #include <qdir.h>
 #include <qgroupbox.h>
 #include <qlabel.h>
@@ -38,6 +36,7 @@ extern "C" {
 #include <qtabwidget.h>
 #include <qtimer.h>
 
+/* STD */
 #include <errno.h>
 #include <fcntl.h>
 #include <math.h>
@@ -53,7 +52,7 @@ extern "C" {
 #include <unistd.h>
 #include <sys/wait.h>
 #include <sys/signal.h>
-
+#include <pthread.h>
 
 #ifdef PDAUDIO //ALSA
 #include <alsa/asoundlib.h>
@@ -136,17 +135,17 @@ void quickRec()
 		int level = 0;
 		int threshold = 0;
 //   int bits = filePara.resolution;
-//   qDebug("bits %d", bits);
+//   odebug << "bits " << bits << "" << oendl; 
 
 		if( filePara.resolution == 16 ) { //AFMT_S16_LE)
-//       qDebug("AFMT_S16_LE size %d", filePara.SecondsToRecord);
-//       qDebug("samples to record %d", filePara.samplesToRecord);
-//       qDebug("%d", filePara.sd);
+//       odebug << "AFMT_S16_LE size " << filePara.SecondsToRecord << "" << oendl; 
+//       odebug << "samples to record " << filePara.samplesToRecord << "" << oendl; 
+//       odebug << "" << filePara.sd << "" << oendl; 
 				level = 7;
 				threshold = 0;
 
 				if( filePara.format == WAVE_FORMAT_DVI_ADPCM) {
-//          qDebug("start recording WAVE_FORMAT_DVI_ADPCM");
+//          odebug << "start recording WAVE_FORMAT_DVI_ADPCM" << oendl; 
 							// <<<<<<<<<<<<<<<<<<<<<<<<<<<  WAVE_FORMAT_DVI_ADPCM  >>>>>>>>>>>>>>>>>>>>>>
 						char abuf[ BUFSIZE/2 ];
 						short sbuf[ BUFSIZE ];
@@ -157,7 +156,7 @@ void quickRec()
 
 						for(;;) {
 								if ( stopped) {
-//										qDebug("quickRec:: stopped");
+//										odebug << "quickRec:: stopped" << oendl; 
 										break;
 								}
 
@@ -166,7 +165,7 @@ void quickRec()
 
 								if(number <= 0) {
 										perror("recording error ");
-										qDebug( "%s %d", filePara.fileName, number);
+										odebug << "" << filePara.fileName << " " << number << "" << oendl; 
 										stopped = true;
 										return;
 								}
@@ -192,14 +191,14 @@ void quickRec()
 						}
 				} else {
 							// <<<<<<<<<<<<<<<<<<<<<<<<<<<  WAVE_FORMAT_PCM   >>>>>>>>>>>>>>>>>>>>>>
-						qDebug("start recording WAVE_FORMAT_PCM");
+						odebug << "start recording WAVE_FORMAT_PCM" << oendl; 
 						short inbuffer[ BUFSIZE ], outbuffer[ BUFSIZE ];
 						memset( inbuffer, 0, BUFSIZE);
 						memset( outbuffer, 0, BUFSIZE);
 
 						for(;;) {
 								if ( stopped) {
-										qDebug("quickRec:: stopped");
+										odebug << "quickRec:: stopped" << oendl; 
 										stopped = true;
 										break;  // stop if playing was set to false
 										return;
@@ -210,7 +209,7 @@ void quickRec()
 
 								if( number <= 0) {
 										perror( "recording error ");
-										qDebug( filePara.fileName);
+										odebug << filePara.fileName << oendl; 
 										stopped = true;
 										return;
 								}
@@ -250,7 +249,7 @@ void quickRec()
 
 				for(;;) {
 						if ( stopped) {
-								qDebug("quickRec:: stopped");
+								odebug << "quickRec:: stopped" << oendl; 
 								break;  // stop if playing was set to false
 						}
          
@@ -373,7 +372,7 @@ void playIt()
 								qApp->processEvents();
 
 								if( /*total >= filePara.numberSamples || */ bytesWritten == 0) {
-										qWarning("Jane! Stop this crazy thing!");
+										owarn << "Jane! Stop this crazy thing!" << oendl; 
 										stopped = true;
 //                playing = false;
 										break;
@@ -718,7 +717,7 @@ void QtRec::initIconView() {
 		QPixmap image0( ( const char** ) image0_data );
 
 		int nFiles = cfg.readNumEntry("NumberofFiles",0);
-//		qDebug("init number of files %d", nFiles);
+//		odebug << "init number of files " << nFiles << "" << oendl; 
 
 		for(int i=1;i<= nFiles;i++) {
 
@@ -860,7 +859,7 @@ void QtRec::initConfig() {
 }
 
 void QtRec::stop() {
-		qWarning("STOP");
+		owarn << "STOP" << oendl; 
 		setRecordButton(false);
 
 		if( !recording)
@@ -922,20 +921,20 @@ bool QtRec::rec() { //record
 //                     soundDevice->getDeviceChannels());
 
 									//filePara.sampleRate = cfg.readNumEntry("samplerate", 22050);
-//             qDebug("sample rate is %d", filePara.sampleRate);
+//             odebug << "sample rate is " << filePara.sampleRate << "" << oendl; 
 								filePara.SecondsToRecord = getCurrentSizeLimit();
 
-//             qDebug("size limit %d sec", filePara.SecondsToRecord);
+//             odebug << "size limit " << filePara.SecondsToRecord << " sec" << oendl; 
 								int diskSize = checkDiskSpace( (const QString &) wavFile->trackName());
 
 								if( filePara.SecondsToRecord == 0) {
 										fileSize = diskSize;
 								} else if( filePara.format == WAVE_FORMAT_PCM) {
-//                qDebug("WAVE_FORMAT_PCM");
+//                odebug << "WAVE_FORMAT_PCM" << oendl; 
 										fileSize = (filePara.SecondsToRecord ) * filePara.channels
 												* filePara.sampleRate * ( filePara.resolution / 8) + 1000;
 								} else {
-//                qDebug("WAVE_FORMAT_DVI_ADPCM");
+//                odebug << "WAVE_FORMAT_DVI_ADPCM" << oendl; 
 										fileSize = ((filePara.SecondsToRecord) * filePara.channels
 																* filePara.sampleRate * ( filePara.resolution / 8) ) / 4 + 250;
 								}
@@ -947,7 +946,7 @@ bool QtRec::rec() { //record
 										paused = false;
 								}
 									//                  else {
-								qDebug("Setting timeslider %d", filePara.samplesToRecord);
+								odebug << "Setting timeslider " << filePara.samplesToRecord << "" << oendl; 
 									//           if(fileSize != 0)
 								timeSlider->setRange(0, filePara.samplesToRecord);
 									//                  }
@@ -966,7 +965,7 @@ bool QtRec::rec() { //record
 										setCaption( msg);
 #endif
 										filePara.fileName=currentFile.latin1();
-										qDebug("Start recording thread");
+										odebug << "Start recording thread" << oendl; 
 										stopped = false;
 
 #ifdef THREADED
@@ -1010,13 +1009,13 @@ void QtRec::thisTab(QWidget* widg) {
 
 void QtRec::getOutVol( ) {
 		filePara.outVol = soundDevice->getOutVolume();
-//   qDebug("out vol %d", filePara.outVol);
+//   odebug << "out vol " << filePara.outVol << "" << oendl; 
 		OutputSlider->setValue( -filePara.outVol);
 }
 
 void QtRec::getInVol() {
 		filePara.inVol = soundDevice->getInVolume();
-//    qDebug("in vol %d", filePara.inVol);
+//    odebug << "in vol " << filePara.inVol << "" << oendl; 
 		InputSlider->setValue( -filePara.inVol);
 }
 
@@ -1090,11 +1089,11 @@ bool QtRec::setupAudio( bool b) {
 
 				if( !compressionCheckBox->isChecked()) {
 						filePara.format = WAVE_FORMAT_PCM;
-//          qDebug("WAVE_FORMAT_PCM");
+//          odebug << "WAVE_FORMAT_PCM" << oendl; 
 				}  else {
 						filePara.format = WAVE_FORMAT_DVI_ADPCM;
 						sampleformat = AFMT_S16_LE;
-//          qDebug("WAVE_FORMAT_DVI_ADPCM");
+//          odebug << "WAVE_FORMAT_DVI_ADPCM" << oendl; 
 				}
 #endif
 			
@@ -1110,15 +1109,15 @@ bool QtRec::setupAudio( bool b) {
 		}
 
 			// if(soundDevice) delete soundDevice;
-		qDebug("<<<<<<<<<<<<<<<<<<<open dsp %d %d %d", filePara.sampleRate, filePara.channels, sampleformat);
-		qWarning("change waveform settings");
+		odebug << "<<<<<<<<<<<<<<<<<<<open dsp " << filePara.sampleRate << " " << filePara.channels << " " << sampleformat << "" << oendl; 
+		owarn << "change waveform settings" << oendl; 
 		waveform->changeSettings( filePara.sampleRate, filePara.channels );
 
 		soundDevice = new Device( this, dspString, mixerString, b);
 //    soundDevice->openDsp();
 		soundDevice->reset();
 
-		qDebug("device has been made %d", soundDevice->sd);
+		odebug << "device has been made " << soundDevice->sd << "" << oendl; 
 
 			//////////////////         <<<<<<<<<<<<>>>>>>>>>>>>
 		soundDevice->setDeviceFormat( sampleformat);
@@ -1149,7 +1148,7 @@ bool QtRec::setupAudio( bool b) {
 
 
 bool QtRec::setUpFile() { //setup file for recording
-//    qDebug("Setting up wavfile");
+//    odebug << "Setting up wavfile" << oendl; 
 //  if(wavFile) delete wavFile;
 		wavFile = new WavFile( this, (const QString &)"",
 													 true,
@@ -1182,7 +1181,7 @@ bool QtRec::doPlay() {
 		recording = false;
 
 		QString num;
-		qDebug( "Play number of samples %d", filePara.numberSamples);
+		odebug << "Play number of samples " << filePara.numberSamples << "" << oendl; 
 
 //   timeSlider->setRange( 0, filePara.numberSamples);
 
@@ -1234,7 +1233,7 @@ void QtRec::changesamplerateCombo(int i) {
 		rate = sampleRateComboBox->text(i).toInt(&ok, 10);
 		cfg.writeEntry( "samplerate",rate);
 		filePara.sampleRate=rate;
-		qDebug( "Change sample rate %d", rate);
+		odebug << "Change sample rate " << rate << "" << oendl; 
 		cfg.write();
 }
 
@@ -1254,7 +1253,7 @@ void QtRec::changeDirCombo(int index) {
 						const QString path = (*it)->path();
 						recDir = path;
 						cfg.writeEntry("directory", recDir);
-						qDebug("new rec dir "+recDir);
+						odebug << "new rec dir "+recDir << oendl; 
 				}
 		}
 		cfg.write();
@@ -1374,7 +1373,7 @@ void QtRec::keyPressEvent( QKeyEvent *e) {
 						//    newSound();
 					break;
 			case Key_Left: {
-					qDebug("rewinding");
+					odebug << "rewinding" << oendl; 
 					if( !e->isAutoRepeat())
 							rewindPressed();
 			}
@@ -1428,19 +1427,19 @@ void  QtRec::keyReleaseEvent( QKeyEvent *e) {
 					break;
 			case Key_Up:
 						//      stop();
-					qDebug("Up");
+					odebug << "Up" << oendl; 
 					break;
 			case Key_Down:
 						//      start();
-						//      qDebug("Down");
+						//      odebug << "Down" << oendl; 
 						//    newSound();
 					break;
 			case Key_Left:
-					qDebug("Left");
+					odebug << "Left" << oendl; 
 					rewindReleased();
 					break;
 			case Key_Right:
-					qDebug("Right");
+					odebug << "Right" << oendl; 
 					FastforwardReleased();
 					break;
 		}
@@ -1475,11 +1474,11 @@ void QtRec::endRecording() {
 // move tmp file to regular file
 						QString cmd;
 						cmd.sprintf("mv "+ wavFile->trackName() + " " + wavFile->currentFileName);
-//         qDebug("moving tmp file to "+currentFileName);
+//         odebug << "moving tmp file to "+currentFileName << oendl; 
 						system( cmd.latin1());
 				}
       
-				qDebug("Just moved " + wavFile->currentFileName);
+				odebug << "Just moved " + wavFile->currentFileName << oendl; 
 				Config cfg("OpieRec");
 				cfg.setGroup("Sounds");
 
@@ -1495,10 +1494,10 @@ void QtRec::endRecording() {
 				QString time;
 				time.sprintf("%.2f", filePara.numberOfRecordedSeconds);
 				cfg.writeEntry( wavFile->currentFileName, time );
-//       qDebug("writing config numberOfRecordedSeconds "+time);
+//       odebug << "writing config numberOfRecordedSeconds "+time << oendl; 
 
 				cfg.write();
-				qDebug("finished recording");
+				odebug << "finished recording" << oendl; 
 				timeLabel->setText("");
 		}
 
@@ -1516,7 +1515,7 @@ void QtRec::endPlaying() {
 		stopped = true;
 		waveform->reset();
 //   errorStop();
-//    qDebug("end playing");
+//    odebug << "end playing" << oendl; 
 		setRecordButton( false);
 
 		toBeginningButton->setEnabled( true);
@@ -1528,7 +1527,7 @@ void QtRec::endPlaying() {
 		soundDevice->closeDevice( false);
 		soundDevice->sd = -1;
 			//  if(soundDevice) delete soundDevice;
-//    qDebug("file and sound device closed");
+//    odebug << "file and sound device closed" << oendl; 
 		timeLabel->setText("");
 		total = 0;
 		filePara.numberSamples = 0;
@@ -1537,9 +1536,9 @@ void QtRec::endPlaying() {
 		filePara.fd = 0;
 //  if(wavFile) delete wavFile; //this crashes
 
-//    qDebug("track closed");
+//    odebug << "track closed" << oendl; 
 		killTimers();
-		qWarning("reset slider");
+		owarn << "reset slider" << oendl; 
 		timeSlider->setValue(0);
 
 		if(soundDevice) delete soundDevice;
@@ -1561,7 +1560,7 @@ bool QtRec::openPlayFile() {
 		for(int i=0;i<nFiles+1;i++) { //look for file
 				if( cfg.readEntry( QString::number(i),"").find( currentFile,0,true) != -1) {
 						currentFileName = cfg.readEntry( currentFile, "" );
-						qDebug("opening for play: " + currentFileName);
+						odebug << "opening for play: " + currentFileName << oendl; 
 				}
 		}
 		wavFile = new WavFile(this,
@@ -1586,10 +1585,10 @@ bool QtRec::openPlayFile() {
 				timeSlider->setPageStep(1);
 				monitoring = true;
 
-				qDebug("file %d, samples %d %d", filePara.fd, filePara.numberSamples, filePara.sampleRate);
+				odebug << "file " << filePara.fd << ", samples " << filePara.numberSamples << " " << filePara.sampleRate << "" << oendl; 
 				int sec = (int) (( filePara.numberSamples / filePara.sampleRate) / filePara.channels) / ( filePara.channels*( filePara.resolution/8));
 
-				qWarning("seconds %d", sec);
+				owarn << "seconds " << sec << "" << oendl; 
 
 				timeSlider->setRange(0, filePara.numberSamples );
 		}
@@ -1690,7 +1689,7 @@ void QtRec::doRename() {
 }
 
 void QtRec::okRename() {
-		qDebug(renameBox->text());
+		odebug << renameBox->text() << oendl; 
 		QString  filename = renameBox->text();
 		cancelRename();
 
@@ -1702,7 +1701,7 @@ void QtRec::okRename() {
 
 		QString file = ListView1->currentItem()->text(0);
 
-		qDebug("filename is  " + filename);
+		odebug << "filename is  " + filename << oendl; 
 
 		int nFiles = cfg.readNumEntry("NumberofFiles",0);
 
@@ -1773,7 +1772,7 @@ void QtRec::doVolMuting(bool b) {
 }
 
 void QtRec::doMicMuting(bool b) {
-			//  qDebug("mic mute");
+			//  odebug << "mic mute" << oendl; 
 		Config cfg( "qpe" );
 		cfg. setGroup( "Volume" );
 		cfg.writeEntry( "MicMute",b);
@@ -1829,7 +1828,7 @@ long QtRec::checkDiskSpace(const QString &path) {
 //   char  f_fpack[6]; /* Pack name */
 
 void QtRec::receive( const QCString &msg, const QByteArray & ) {
-		qDebug("Voicerecord received message "+msg);
+		odebug << "Voicerecord received message "+msg << oendl; 
 
 }
 
@@ -1854,7 +1853,7 @@ void QtRec::timerEvent( QTimerEvent * ) {
 				stop();
 		}
    
-		qDebug( "%d", secCount );
+		odebug << "" << secCount << "" << oendl; 
 		QString  timeString;
 #ifdef DEV_VERSION
 		QString msg;
@@ -1870,7 +1869,7 @@ void QtRec::timerEvent( QTimerEvent * ) {
 
 void QtRec::changeTimeSlider(int index) {
 		if( ListView1->currentItem() == 0 || !wavFile->track.isOpen()) return;
-			//  qDebug("Slider moved to %d",index);
+			//  odebug << "Slider moved to " << index << "" << oendl; 
 		paused = true;
 		stopped = true;
 
@@ -1885,7 +1884,7 @@ void QtRec::changeTimeSlider(int index) {
 
 void QtRec::timeSliderPressed() {
 		if( ListView1->currentItem() == 0) return;
-			//  qDebug("slider pressed");
+			//  odebug << "slider pressed" << oendl; 
 		paused = true;
 		stopped = true;
 }
@@ -1894,7 +1893,7 @@ void QtRec::timeSliderReleased() {
 		if( ListView1->currentItem() == 0) return;
 		sliderPos = timeSlider->value();
 
-			//  qDebug("slider released %d", sliderPos);
+			//  odebug << "slider released " << sliderPos << "" << oendl; 
 		stopped = false;
 		int newPos =  lseek( filePara.fd, sliderPos, SEEK_SET);
 		total =  newPos*4;
@@ -1924,7 +1923,7 @@ void QtRec::rewindTimerTimeout() {
 		sliderValue = sliderValue - ( filePara.numberSamples / 100);
 			//  if(toBeginningButton->isDown())
 		timeSlider->setValue( sliderValue ) ;
-			//  qDebug("%d", sliderValue);
+			//  odebug << "" << sliderValue << "" << oendl; 
 		QString timeString;
 		filePara.numberOfRecordedSeconds = (float)sliderValue / (float)filePara.sampleRate * (float)2;
 		timeString.sprintf( "%.2f", filePara.numberOfRecordedSeconds);
@@ -1938,7 +1937,7 @@ void QtRec::rewindReleased() {
 				stopped = false;
 				int newPos =  lseek( filePara.fd, sliderPos, SEEK_SET);
 				total =  newPos * 4;
-					//    qDebug("rewind released %d", total);
+					//    odebug << "rewind released " << total << "" << oendl; 
 				startTimer( 1000);
 				doPlay();
 		}
@@ -2002,7 +2001,7 @@ QString QtRec::getStorage(const QString &fileName) {
 					//        const QString options = (*it)->options();
 					//        if( name.find( tr("Internal"),0,true) == -1) {
 					//            storageComboBox->insertItem( name +" -> "+disk);
-					//    qDebug(name);
+					//    odebug << name << oendl; 
 		}
 		return storage;
 			//      struct mntent *me;

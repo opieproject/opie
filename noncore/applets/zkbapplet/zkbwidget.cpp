@@ -94,7 +94,7 @@ QSize ZkbWidget::sizeHint() const {
 }
 
 void ZkbWidget::stateChanged(const QString& s) {
-//	qDebug("stateChanged: %s\n", (const char*) s.utf8());
+//	odebug << "stateChanged: " << (const char*) s.utf8() << "\n" << oendl; 
 	setText(s);
 }
 

@@ -1,5 +1,10 @@
 #include "thumbnailtool.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
+/* QT */
 #include <qfileinfo.h>
 #include <qdir.h>
 #include <qimage.h>
@@ -26,13 +31,13 @@ static bool makeThumbDir( const QFileInfo& inf,  bool make = false) {
  */
 QPixmap ThumbNailTool::getThumb( const QString& path, int width, int height ) {
     QFileInfo inf( path );
-    qWarning( "Get Thumb" );
+    owarn << "Get Thumb" << oendl; 
     if ( !makeThumbDir( inf ) ) {
         QPixmap pix;
         return pix;
     }
     QString str = QString( "/.opie-eye/%1x%2-%3" ).arg( width ).arg( height ).arg( inf.fileName() );
-    qWarning( inf.dirPath()+str );
+    owarn << inf.dirPath()+str << oendl; 
     return QPixmap( inf.dirPath()+str,"PNG" );
 
 }
@@ -41,7 +46,7 @@ void ThumbNailTool::putThumb( const QString& path, const QPixmap& pix, int width
     QFileInfo inf( path );
     makeThumbDir( inf, true );
     QString str = QString( "/.opie-eye/%1x%2-%3" ).arg( width ).arg( height ).arg( inf.fileName() );
-    qWarning( inf.dirPath()+str );
+    owarn << inf.dirPath()+str << oendl; 
     pix.save( inf.dirPath()+str, "PNG" );
 }
 

@@ -457,7 +457,7 @@ int MoveEngine::getPossibleMoves()
 
 void MoveEngine::move(const int& from, int to, const int& dice)
 {
-    //qDebug("%d moves from %d to %d (%d) with dice %d",player,from,to,to-from,dice);
+    //odebug << "" << player << " moves from " << from << " to " << to << " (" << to-from << ") with dice " << dice << "" << oendl; 
 
     if(player==1 && to==25)
         to=26;

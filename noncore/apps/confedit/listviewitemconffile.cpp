@@ -9,9 +9,15 @@
 // (c) 2002 Patrick S. Vogt <tille@handhelds.org>
 
 #include "listviewitemconffile.h"
+#include "listviewitemconfigentry.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
+/* QT */
 #include <qmessagebox.h>
 #include <qtextstream.h>
-#include "listviewitemconfigentry.h"
 
 #define tr QObject::tr
 
@@ -19,7 +25,7 @@ ListViewItemConfFile::ListViewItemConfFile(QFileInfo *file, QListView *parent)
    : ListViewItemConf(parent), _valid(false)
 {
   confFileInfo = file;
-//  parseFile();
+  //  parseFile();
   displayText();
 }
 
@@ -40,8 +46,8 @@ QString ListViewItemConfFile::fileName()
 
 void ListViewItemConfFile::parseFile()
 {
-	//qDebug("ListViewItemConfFile::parseFile BEGIN");
-  QFile confFile(confFileInfo->absFilePath());
+	//odebug << "ListViewItemConfFile::parseFile BEGIN" << oendl; 
+        QFile confFile(confFileInfo->absFilePath());
 	if(! confFile.open(IO_ReadOnly))
  		QMessageBox::critical(0,tr("Could not open"),tr("The file ")+confFileInfo->fileName()+tr(" could not be opened."),1,0);	
 	QTextStream t( &confFile );
@@ -52,7 +58,7 @@ void ListViewItemConfFile::parseFile()
   while ( !t.atEnd() )
   {
   	s = t.readLine().stripWhiteSpace();
-		//qDebug( "line: >%s<\n", s.latin1() );
+		//odebug << "line: >" << s.latin1() << "<\n" << oendl; 
   	if (s.contains("<?xml"))
    	{
     	_valid = false;
@@ -60,7 +66,7 @@ void ListViewItemConfFile::parseFile()
     }else
     if ( s[0] == '[' && s[s.length()-1] == ']' )
    	{
-  //    qDebug("got group"+s);
+  //    odebug << "got group"+s << oendl; 
       group = s.mid(1,s.length()-2);
       if (!groupItem) groupItem = new ListViewItemConfigEntry(this, tr("no group") );
       groupItem = new ListViewItemConfigEntry(this, group );
@@ -68,15 +74,15 @@ void ListViewItemConfFile::parseFile()
     } else
     if ( int pos = s.find('=') )
     {
-//      qDebug("got key"+s);
-     	if (!groupItem) qDebug("PANIK NO GROUP! >%s<",group.latin1());
+//      odebug << "got key"+s << oendl; 
+     	if (!groupItem) odebug << "PANIK NO GROUP! >" << group.latin1() << "<" << oendl; 
     	item = new ListViewItemConfigEntry(this, group, s );
       groupItem->insertItem( item );
     }
   }	
 	confFile.close();
 	setExpandable( _valid );
-//	qDebug("ListViewItemConfFile::parseFile END");
+//	odebug << "ListViewItemConfFile::parseFile END" << oendl; 
 }
 
 

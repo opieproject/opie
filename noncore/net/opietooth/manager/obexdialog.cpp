@@ -80,7 +80,7 @@ void ObexDialog::sendData() {
         *obexSend << "ussp-push" << m_device << fileURL << file;
     }
     if (!obexSend->start(OProcess::DontCare, OProcess::AllOutput) ) {
-        qWarning("could not start");
+        owarn << "could not start" << oendl; 
         delete obexSend;
     }
 

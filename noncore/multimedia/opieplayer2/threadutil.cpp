@@ -187,7 +187,7 @@ void Thread::start()
     AutoLock lock( d->guard );
 
     if ( d->isRunning ) {
-        qDebug( "ThreadUtil::Thread::start() called for running thread." );
+        odebug << "ThreadUtil::Thread::start() called for running thread." << oendl; 
         return;
     }
 
@@ -196,7 +196,7 @@ void Thread::start()
     pthread_attr_setscope( &attributes, PTHREAD_SCOPE_SYSTEM );
     int err = pthread_create( &d->self, &attributes, start_thread, ( void* )d );
     if ( err != 0 ) {
-        qDebug( "ThreadUtil::Thread::start() : can't create thread: %s", strerror( err ) );
+        odebug << "ThreadUtil::Thread::start() : can't create thread: " << strerror( err ) << "" << oendl; 
         pthread_attr_destroy( &attributes );
         return;
     }
@@ -284,7 +284,7 @@ void ChannelMessage::reply()
 {
     if ( !m_isCall )
     {
-        qDebug( "ChannelMessage::reply() - can't reply oneway message!" );
+        odebug << "ChannelMessage::reply() - can't reply oneway message!" << oendl; 
         return;
     }
 

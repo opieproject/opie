@@ -1,5 +1,11 @@
 #include "dialer.h"
+#include "io_modem.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
+/* QT */
 #include <qlayout.h>
 #include <qprogressbar.h>
 #include <qlabel.h>
@@ -8,12 +14,11 @@
 #include <qtimer.h>
 #include <qmessagebox.h>
 
+/* STD */
 #include <unistd.h>
 #include <string.h>
 #include <fcntl.h>
 #include <errno.h>
-
-#include "io_modem.h"
 
 // State machine:          | When an error occurs, we don't have to
 //                         | reset everything.
@@ -104,7 +109,7 @@ void Dialer::slotCancel()
 
 void Dialer::reset()
 {
-    qWarning("reset");
+    owarn << "reset" << oendl; 
 	switchState(state_cancel);
 }
 
@@ -136,18 +141,18 @@ void Dialer::dial(const QString& number)
 
 void Dialer::trydial(const QString& number)
 {
-    qWarning("TryDial:%s", number.latin1() );
+    owarn << "TryDial:" << number.latin1() << "" << oendl; 
 	if(state != state_cancel) switchState(state_preinit);
 	if(cleanshutdown)
 	{
-            qWarning("HangupString " + m_profile.readEntry("HangupString",  MODEM_DEFAULT_HANGUP_STRING));
+            owarn << "HangupString " << m_profile.readEntry("HangupString") << oendl; 
             send(m_profile.readEntry("HangupString", MODEM_DEFAULT_HANGUP_STRING ) + "\r");
 	}
 
 	if(state != state_cancel)
 	{
 		switchState(state_init);
-//                qWarning("Init String " + m_profile.readEntry("InitString") );
+//                owarn << "Init String " + m_profile.readEntry("InitString") << oendl; 
 		send(m_profile.readEntry("InitString",MODEM_DEFAULT_INIT_STRING ) + "\r");
 		QString response2 = receive();
 		if(!response2.contains("\nOK\r"))
@@ -158,7 +163,7 @@ void Dialer::trydial(const QString& number)
 	{
 		switchState(state_options);
 
-                qWarning("ATM3l3");
+                owarn << "ATM3l3" << oendl; 
 		send("ATM3L3\r");
 		QString response3 = receive();
 		if(!response3.contains("\nOK\r"))
@@ -178,7 +183,7 @@ void Dialer::trydial(const QString& number)
 
 	if(state != state_cancel)
 	{
-            qWarning("progress");
+            owarn << "progress" << oendl; 
 		switchState(state_dialing);
 
 //		send(QString("ATDT %1\r").arg(number));
@@ -214,7 +219,7 @@ void Dialer::send(const QString& msg)
 	int bytes;
 	QString termination;
 
-	qWarning("Sending: %s", m.latin1());
+	owarn << "Sending: " << m.latin1() << "" << oendl; 
 
 /*	termination = "\r";
 	//termination = m_profile.readEntry("Termination");
@@ -247,11 +252,11 @@ QString Dialer::receive()
 			for(int i = 0; i < ret; i++)
 				buffer[i] = buffer[i] & 0x7F;
 			buffer[ret] = 0;
-			qWarning("Got: %s", buffer);
+			owarn << "Got: " << buffer << "" << oendl; 
 			buf.append(QString(buffer));
 			if(buf.contains("OK") || buf.contains("ERROR") || buf.contains("CONNECT") || (buf.contains("BUSY")))
 			{
-				//qWarning("Receiving: '%s'", buf.latin1());
+				//owarn << "Receiving: '" << buf.latin1() << "'" << oendl; 
 				cleanshutdown = 1;
 				return buf;
 			}else if (buf.contains("NO CARRIER") || buf.contains("NO DIALTONE")  ) {

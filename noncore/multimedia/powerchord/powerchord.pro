@@ -18,8 +18,7 @@ SOURCES		= main.cpp        \
 
 INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
-LIBS            += -lqpe
-#INTERFACES	= powerchordbase.ui
+LIBS            += -lqpe -lopiecore2
 DESTDIR         = $(OPIEDIR)/bin
 TARGET		= powerchord
 

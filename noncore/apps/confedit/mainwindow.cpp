@@ -11,14 +11,17 @@
 
 
 #include "mainwindow.h"
-
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qlineedit.h>
-
 #include "listviewconfdir.h"
 #include "listviewitemconfigentry.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
+/* QT */
+#include <qlabel.h>
+#include <qlayout.h>
+#include <qlineedit.h>
 
 MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
   QMainWindow( parent, name, f ), _currentItem(0), _fileItem(0)
@@ -33,12 +36,12 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
   mainLayout->setMargin( 0 );
 
 
-  qDebug("creating settingList");
+  odebug << "creating settingList" << oendl; 
   settingList = new ListViewConfDir( QDir::homeDirPath() + "/Settings", this, "settingslist");
   settingList->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));//, sizePolicy().hasHeightForWidth() ) );
   mainLayout->addWidget( settingList, 0);
 
-  qDebug("creating editor");
+  odebug << "creating editor" << oendl; 
   editor = new EditWidget(this);
   editor->setSizePolicy( QSizePolicy( QSizePolicy::Minimum, QSizePolicy::Maximum));//, sizePolicy().hasHeightForWidth() ) );
   mainLayout->addWidget( editor, 1 );
@@ -98,7 +101,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::setCurrent(QListViewItem *item)
 {
-//	qDebug("MainWindow::setCurrent");
+//	odebug << "MainWindow::setCurrent" << oendl; 
 	if (!item) return;
  	_item = (ListViewItemConf*) item;
   if (!_item) return;
@@ -174,7 +177,7 @@ void MainWindow::removeConfFile()
 
 void MainWindow::showPopup()
 {
-qDebug("showPopup");
+odebug << "showPopup" << oendl; 
  	if (!_item) return;
  	popupActionRevert->setEnabled(_item->revertable());
 	popupActionSave->setEnabled(_item->isChanged());

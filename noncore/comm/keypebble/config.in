@@ -1,4 +1,4 @@
   config KEYPEBBLE
     boolean "opie-keypebble (Virtual Network Computing VNC viewer)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 )
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE

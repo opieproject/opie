@@ -104,7 +104,7 @@ void MailApplet::slotCheck() {
     m_statusMail->check_current_stat( stat );
     int newMailsOld = m_newMails;
     m_newMails = stat.message_unseen;
-    qDebug( QString( "test %1" ).arg( m_newMails ) );
+    odebug << QString( "test %1" ).arg( m_newMails ) << oendl; 
     if ( m_newMails > 0 &&  newMailsOld != m_newMails  ) {
         ODevice *device = ODevice::inst();
         if ( isHidden() )

@@ -17,11 +17,18 @@
  */
 
 
-#include <stdlib.h>
-#include <qtimer.h>
-#include <qpe/qpeapplication.h>
-
 #include "game.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
+#include <qpe/qpeapplication.h>
+using namespace Opie::Core;
+
+/* QT */
+#include <qtimer.h>
+
+/* STD */
+#include <stdlib.h>
 
 #define TILE_SIZE 9 
 
@@ -367,7 +374,7 @@ JezzGame::~JezzGame()
 
 void JezzGame::display( QString text, int size )
 {
-    qDebug("This function \"display\" shouldn't be called!!!");
+    odebug << "This function \"display\" shouldn't be called!!!" << oendl; 
     if ( !text.isEmpty() )
     {
         QFont font( "Helvetica", size, QFont::Bold );

@@ -31,6 +31,6 @@ DEPENDPATH  += $(OPIEDIR)/include
 
 
 
-LIBS += -lqpe -lopieui2
+LIBS += -lqpe -lopiecore2 -lopieui2
 
 include ( $(OPIEDIR)/include.pro )

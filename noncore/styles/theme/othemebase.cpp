@@ -15,24 +15,26 @@
   the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
   Boston, MA 02111-1307, USA.
 */
+
 #include "othemebase.h"
 #include "ogfxeffect.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
 #include <qpe/qpeapplication.h> 
-//#include <kdebug.h>
-//#include <klocale.h>
-#include <qpe/config.h> 
-//#include <kglobal.h>
-//#include <kglobalsettings.h>
-//#include <kstddirs.h>
+#include <qpe/config.h>
+using namespace Opie::Core;
+
+/* QT */
 #include <qfile.h>
 #include <qtextstream.h>
 #include <qdir.h>
 #include <qpainter.h>
 #include <qbitmap.h>
-#include <stdlib.h> 
 #include <qstringlist.h>
 
-#include <stdio.h>
+/* STD */
+#include <stdlib.h>
 
 
 template class QIntCache<OThemePixmap>
@@ -262,27 +264,21 @@ void OThemeBase::readConfig( Qt::GUIStyle /*style*/ )
 	}
 	Config config( configFilePath + "/themes/" + configFileName + ".themerc" , Config::File );
 
-//	printf ( "Opened config file: %s\n", ( configFilePath + "/themes/" + configFileName + ".themerc" ). ascii());
-
 	// Are we initalized?
 	applyMiscResourceGroup( &config );
 	for ( i = 0; i < INHERIT_ITEMS; ++i ) {
 		applyResourceGroup( &config, i, copyfrom, pixnames, brdnames );		
-//		printf ( "%d [%s]: copy=%s, pix=%s, brd=%s\n", i, widgetEntries [i], copyfrom [i].latin1(), pixnames[i].latin1(),brdnames[i].latin1() );
 	}
 	for ( ; i < INHERIT_ITEMS*2; ++i ) {
 		if ( config.hasGroup( QString( widgetEntries[ i ] ) ) ) {
 			applyResourceGroup( &config, i, copyfrom, pixnames, brdnames );
-//			printf ( "%d [%s]: copy=%s, pix=%s, brd=%s\n", i, widgetEntries [i], copyfrom [i].latin1(), pixnames[i].latin1(),brdnames[i].latin1() );
 		}
 		else {
 			copyfrom [ i ] = widgetEntries[ i - INHERIT_ITEMS ];
-//			printf ( "%d [%s]: copy=%s\n", i, widgetEntries [i], copyfrom [i].latin1());
 		}
 	}
 	for ( ; i < WIDGETS; ++i ) {
 		applyResourceGroup( &config, i, copyfrom, pixnames, brdnames );
-//		printf ( "%d [%s]: copy=%s, pix=%s, brd=%s\n", i, widgetEntries [i], copyfrom [i].latin1(), pixnames[i].latin1(),brdnames[i].latin1() );
 	}
 
 	// initalize defaults that may not be read
@@ -295,7 +291,6 @@ void OThemeBase::readConfig( Qt::GUIStyle /*style*/ )
 
 	for ( i = 0; i < WIDGETS; ++i ) {
 		readResourceGroup( i, copyfrom, pixnames, brdnames, loaded );
-//		printf ( "%d [%s]: copy=%s, pix=%s, brd=%s, colors=%s\n", i, widgetEntries [i], copyfrom [i].latin1(), pixnames[i].latin1(),brdnames[i].latin1(), (colors[i]?colors[i]->background().name().latin1():"<none)" ));
 	}
 
 	// misc items
@@ -407,7 +402,7 @@ OThemePixmap* OThemeBase::scale( int w, int h, WidgetType widget )
 					cache->insert( pixmaps[ widget ], OThemeCache::FullScale,
 					               widget );
 				else
-					qDebug( "We would have inserted a null pixmap!\n" );
+					odebug << "We would have inserted a null pixmap!\n" << oendl; 
 				pixmaps[ widget ] = cachePix;
 			}
 			else {

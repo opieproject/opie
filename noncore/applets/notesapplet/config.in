@@ -1,4 +1,4 @@
   config NOTESAPPLET
     boolean "opie-notesapplet (quick note taking applet)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) 
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE

@@ -1,9 +1,11 @@
-
 #include "TEmuVt102.h"
-
 #include "profile.h"
 #include "emulation_handler.h"
 #include "script.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
 
 EmulationHandler::EmulationHandler( const Profile& prof, QWidget* parent,const char* name )
     : QObject(0, name )
@@ -128,11 +130,11 @@ QColor EmulationHandler::foreColor(int col) {
         co = Qt::black;
         break;
     case Profile::Green:
-        qWarning("Foreground green");
+        owarn << "Foreground green" << oendl; 
         co = Qt::green;
         break;
     case Profile::Orange:
-        qWarning("Foreground orange");
+        owarn << "Foreground orange" << oendl; 
         co.setRgb( 231, 184, 98 );
         break;
     }
@@ -152,11 +154,11 @@ QColor EmulationHandler::backColor(int col ) {
         co = Qt::white;
         break;
     case Profile::Green:
-        qWarning("Background black");
+        owarn << "Background black" << oendl; 
         co = Qt::black;
         break;
     case Profile::Orange:
-        qWarning("Background black");
+        owarn << "Background black" << oendl; 
         co = Qt::black;
         break;
     }

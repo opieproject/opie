@@ -14,13 +14,13 @@ InterfacePPP::InterfacePPP(QObject *parent, const char *name, bool status)
       _modemPtr(0),
       _dataPtr(0)
 {
-    qDebug("InterfacePPP::InterfacePPP(");
+    odebug << "InterfacePPP::InterfacePPP(" << oendl; 
 }
 
 PPPData* InterfacePPP::data()const
 {
     if (!_dataPtr){
-        qDebug("creating new Data obj");
+        odebug << "creating new Data obj" << oendl; 
         _dataPtr = new PPPData();
         _dataPtr->setDevice( getInterfaceName() );
         _dataPtr->setAccount( getHardwareName() );
@@ -31,7 +31,7 @@ PPPData* InterfacePPP::data()const
 Modem* InterfacePPP::modem()const
 {
     if (!_modemPtr){
-        qDebug("creating new modem obj");
+        odebug << "creating new modem obj" << oendl; 
         _modemPtr = new Modem( data() );
     }
     return _modemPtr;
@@ -39,7 +39,7 @@ Modem* InterfacePPP::modem()const
 
 bool InterfacePPP::refresh()
 {
-    qDebug("InterfacePPP::refresh()");
+    odebug << "InterfacePPP::refresh()" << oendl; 
     QString old = getInterfaceName();
     setInterfaceName( modem()->pppDevice() );
 
@@ -53,7 +53,7 @@ bool InterfacePPP::refresh()
 
 void InterfacePPP::start()
 {
-    qDebug("InterfacePPP::start");
+    odebug << "InterfacePPP::start" << oendl; 
 
     if (data()->password().isEmpty() && !data()->storedUsername().isEmpty() ) {
 
@@ -143,12 +143,12 @@ void InterfacePPP::start()
 
   emit begin_connect();
 
-  qDebug("InterfacePPP::start END");
+  odebug << "InterfacePPP::start END" << oendl; 
 }
 
 void InterfacePPP::stop()
 {
-    qDebug("InterfacePPP::stop");
+    odebug << "InterfacePPP::stop" << oendl; 
     // emit hangup_now();
     status = false; // not connected
     setStatus( false );

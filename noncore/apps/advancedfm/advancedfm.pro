@@ -1,31 +1,11 @@
 TEMPLATE  = app
-CONFIG    += qt warn_on  quick-app
-# CONFIG    += qt warn_on 
+CONFIG    += qt warn_on quick-app
 HEADERS   = advancedfm.h filePermissions.h output.h
 SOURCES   = advancedfm.cpp advancedfmData.cpp advancedfmMenu.cpp filePermissions.cpp output.cpp main.cpp
 TARGET    = advancedfm
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
-LIBS            += -lqpe -lopiecore2 -lopieui2
-
-TRANSLATIONS = ../../../i18n/de/advancedfm.ts \
-     ../../../i18n/nl/advancedfm.ts \
-     ../../../i18n/da/advancedfm.ts \
-     ../../../i18n/xx/advancedfm.ts \
-   ../../../i18n/en/advancedfm.ts \
-   ../../../i18n/es/advancedfm.ts \
-   ../../../i18n/fr/advancedfm.ts \
-   ../../../i18n/hu/advancedfm.ts \
-   ../../../i18n/ja/advancedfm.ts \
-   ../../../i18n/ko/advancedfm.ts \
-   ../../../i18n/no/advancedfm.ts \
-   ../../../i18n/pl/advancedfm.ts \
-   ../../../i18n/pt/advancedfm.ts \
-   ../../../i18n/pt_BR/advancedfm.ts \
-   ../../../i18n/sl/advancedfm.ts \
-   ../../../i18n/zh_CN/advancedfm.ts \
-   ../../../i18n/zh_TW/advancedfm.ts
-
+LIBS        += -lqpe -lopiecore2 -lopieui2
 
 !contains(CONFIG,quick-app) {
  DESTDIR = $(OPIEDIR)/bin

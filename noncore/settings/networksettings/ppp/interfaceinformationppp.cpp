@@ -20,7 +20,7 @@
 InterfaceInformationPPP::InterfaceInformationPPP(QWidget *parent, const char *name, Interface *i, WFlags f)
     :InterfaceInformationImp(parent, name, i, Qt::WStyle_ContextHelp)
 {
-    qDebug("InterfaceInformationPPP::InterfaceInformationPPP %s", name);
+    odebug << "InterfaceInformationPPP::InterfaceInformationPPP " << name << "" << oendl; 
     con = new ConnectWidget( (InterfacePPP*)i, this, "con" );
     con->setSizePolicy( QSizePolicy(QSizePolicy::MinimumExpanding,
                                     QSizePolicy::Fixed) );

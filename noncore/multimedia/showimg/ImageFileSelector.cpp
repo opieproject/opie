@@ -1,14 +1,16 @@
-
-
-#include "qpe/qpeapplication.h"
-
-#include <stdlib.h>
-
-#include <qlabel.h>
-#include <qfileinfo.h>
-
 #include "ImageFileSelector.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+#include <qpe/qpeapplication.h>
+using namespace Opie::Core;
+
+/* QT */
+#include <qlabel.h>   
+#include <qfileinfo.h>
+
+/* STD */
+#include <stdlib.h>
 
 ThumbWidget::ThumbWidget(QPixmap p,QString text,const DocLnk& f,QWidget *parent,int w)
         : QWidget( parent ),fl(f)
@@ -155,7 +157,7 @@ void ImageFileSelector::updateSizes()
 
 void ImageFileSelector::reread(bool)
 {
-//    qDebug("reread");
+//    odebug << "reread" << oendl; 
     ImageFileSelectorItem *item = (ImageFileSelectorItem *)detailed->selectedItem();
     QString oldFile;
     if ( item )
@@ -221,7 +223,7 @@ int ImageFileSelector::fileCount()
 }
 const DocLnk * ImageFileSelector::selected()
 {
-    qDebug("image selected");
+    odebug << "image selected" << oendl; 
     ImageFileSelectorItem *item = (ImageFileSelectorItem *) detailed->selectedItem();
     if ( item )
         return new DocLnk( item->file() );

@@ -1,4 +1,4 @@
   config OPIEFTP
     boolean "opie-ftp (ftp client for Opie)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && FTPLIB
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && FTPLIB

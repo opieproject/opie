@@ -71,7 +71,7 @@ void AdvancedFm::cleanUp() {
 }
 
 void AdvancedFm::tabChanged(QWidget *) {
-//   qWarning("tab changed");
+//   owarn << "tab changed" << oendl; 
    QString path = CurrentDir()->canonicalPath();
    currentPathCombo->lineEdit()->setText( path );
 
@@ -93,13 +93,13 @@ void AdvancedFm::tabChanged(QWidget *) {
 
 void AdvancedFm::populateView() {
 
-// qWarning("PopulateView");
+// owarn << "PopulateView" << oendl; 
         QPixmap pm;
         QListView *thisView = CurrentView();
         QDir *thisDir = CurrentDir();
         QString path = thisDir->canonicalPath();
 
-//qWarning("path is "+path);
+//owarn << "path is "+path << oendl; 
         thisView->clear();
         thisDir->setSorting(/* QDir::Size*/ /*| QDir::Reversed | */QDir::DirsFirst);
         thisDir->setMatchAllDirs(TRUE);
@@ -160,7 +160,7 @@ void AdvancedFm::populateView() {
                                 }
                         }
                         if(  fi->isSymLink() || fileL.find("->",0,TRUE) != -1) {
-                                    //  qDebug(" overlay link image");
+                                    //  odebug << " overlay link image" << oendl; 
                                 pm= Resource::loadPixmap( "advancedfm/symlink" );
                                     //              pm= Resource::loadPixmap( "folder" );
 //                QPixmap lnk = Resource::loadPixmap( "opie/symlink" );
@@ -184,7 +184,7 @@ void AdvancedFm::populateView() {
                 if((dir = opendir( path.latin1())) != NULL)
                         while ((mydirent = readdir(dir)) != NULL) {
                                 lstat( mydirent->d_name, &buf);
-//        qDebug(mydirent->d_name);
+//        odebug << mydirent->d_name << oendl; 
                                 fileL.sprintf("%s", mydirent->d_name);
                                 devT = buf.st_dev;
                                 fileS.sprintf("%d, %d", (int) ( devT >>8) &0xFF, (int)devT &0xFF);
@@ -209,7 +209,7 @@ void AdvancedFm::rePopulate() {
      populateView();
 
 //      int tmpTab = whichTab;
-// //  qDebug("%d", tmpTab);
+// //  odebug << "" << tmpTab << "" << oendl; 
 
 //    for(int i =1; i < 3; i++) {
 //       TabWidget->setCurrentWidget(i - 1);
@@ -219,10 +219,10 @@ void AdvancedFm::rePopulate() {
 }
 
 void AdvancedFm::ListClicked(QListViewItem *selectedItem) {
-//qWarning("listclicked");
+//owarn << "listclicked" << oendl; 
    if(selectedItem) {
       QString strItem=selectedItem->text(0);
-//      qWarning(strItem);
+//      owarn << strItem << oendl; 
       QString strSize=selectedItem->text(1);
       strSize=strSize.stripWhiteSpace();
       bool isDirectory = false;
@@ -267,13 +267,13 @@ void AdvancedFm::ListPressed( int mouse, QListViewItem *item, const QPoint& , in
 
 
 void AdvancedFm::switchToLocalTab() {
-//qWarning("switch to local view");
+//owarn << "switch to local view" << oendl; 
    TabWidget->setCurrentWidget(0);
    Local_View->setFocus();
 }
 
 void AdvancedFm::switchToRemoteTab() {
-//qWarning("switch to local view");
+//owarn << "switch to local view" << oendl; 
    TabWidget->setCurrentWidget(1);
    Remote_View->setFocus();
 }
@@ -329,7 +329,7 @@ QStringList AdvancedFm::getPath() {
    for ( ; it.current(); ++it ) {
       if ( it.current()->isSelected() ) {
          strList <<  it.current()->text(0);
-//        qDebug(it.current()->text(0));
+//        odebug << it.current()->text(0) << oendl; 
       }
    }
    return strList;
@@ -380,7 +380,7 @@ void AdvancedFm::doAbout() {
 }
 
 void AdvancedFm::keyPressEvent( QKeyEvent *e) {
-//   qWarning("key %d", e->key());
+//   owarn << "key " << e->key() << "" << oendl; 
 //   if( CurrentView()->hasFocus()  )
    {
       switch ( e->key() ) {
@@ -638,7 +638,7 @@ void AdvancedFm::addToDocs() {
       QString curFile;
       for ( QStringList::Iterator it = strListPaths.begin(); it != strListPaths.end(); ++it ) {
          curFile = thisDir->canonicalPath()+"/"+(*it);
-//                qDebug(curFile);
+//                odebug << curFile << oendl; 
          QFileInfo fi(curFile);
          DocLnk f;
 //                curFile.replace(QRegExp("\\..*"),"");
@@ -711,7 +711,7 @@ void AdvancedFm::addCustomDir() {
 }
 
 void AdvancedFm::removeCustomDir() {
-//  qDebug("remove custom dir");
+//  odebug << "remove custom dir" << oendl; 
    Config cfg("AdvancedFm");
    cfg.setGroup("Menu");
    QString dir;
@@ -746,7 +746,7 @@ void AdvancedFm::removeCustomDir() {
 }
 
 void AdvancedFm::gotoCustomDir(const QString &dir) {
-//     qDebug("gotoCustomDir(const QString &dir) " +dir );
+//     odebug << "gotoCustomDir(const QString &dir) " +dir << oendl; 
 //  QString curDir = dir;
 //  QDir *thisDir = CurrentDir();
 //     if( curDir.isEmpty()) {
@@ -787,10 +787,10 @@ QDir *AdvancedFm::OtherDir() {
 
 QListView * AdvancedFm::CurrentView() {
    if ( whichTab == 1) {
-//      qWarning("CurrentView Tab 1");
+//      owarn << "CurrentView Tab 1" << oendl; 
       return Local_View;
    } else {
-//      qWarning("CurrentView Tab 2");
+//      owarn << "CurrentView Tab 2" << oendl; 
       return Remote_View;
    }
 }
@@ -803,7 +803,7 @@ QListView * AdvancedFm::OtherView() {
 }
 
 void AdvancedFm::setOtherTabCurrent() {
-//   qWarning("setOtherTabCurrent() %d", whichTab);
+//   owarn << "setOtherTabCurrent() " << whichTab << "" << oendl; 
    if ( whichTab == 1) {
       TabWidget->setCurrentWidget(1);
    } else {
@@ -814,10 +814,10 @@ void AdvancedFm::setOtherTabCurrent() {
 }
 
 void AdvancedFm::qcopReceive(const QCString &msg, const QByteArray &data) {
-//   qDebug("qcop message "+msg );
+//   odebug << "qcop message "+msg << oendl; 
    QDataStream stream ( data, IO_ReadOnly );
    if ( msg == "openDirectory(QString)" ) {
-//      qDebug("received");
+//      odebug << "received" << oendl; 
       QString file;
       stream >> file;
       gotoDirectory( (const QString &) file);
@@ -830,7 +830,7 @@ void AdvancedFm::setDocument(const QString &file) {
 }
 
 void AdvancedFm::gotoDirectory(const QString &file) {
-//   qWarning("goto dir "+file);
+//   owarn << "goto dir "+file << oendl; 
    QString curDir = file;
    QDir *thisDir = CurrentDir();
    if(QDir( curDir).exists() )  {
@@ -866,7 +866,7 @@ void AdvancedFm::findFile(const QString &fileName) {
 }
 
 void AdvancedFm::slotSwitchMenu(int ) {
-//   qDebug("Switch %d", item);
+//   odebug << "Switch " << item << "" << oendl; 
    //   viewMenu->setItemChecked(item, true);
 }
 

@@ -1,16 +1,24 @@
-#include <assert.h>
-#include <qimage.h>
-#include <qpainter.h>
-#include <qapplication.h>
 #include "krfbdecoder.h"
 #include "krfbbuffer.h"
 #include "krfbconnection.h"
 #include "krfbserverinfo.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
+/* QT */
+#include <qimage.h>
+#include <qpainter.h>
+#include <qapplication.h>
+
+/* STD */
+#include <assert.h>
+
 //
 // Endian stuff
 //
-#ifndef KDE_USE_FINAL
+#ifndef OPIE_NO_DEBUG
 const int endianTest = 1;
 #endif
 
@@ -39,7 +47,7 @@ KRFBBuffer::~KRFBBuffer()
 
 void KRFBBuffer::resize( int w, int h )
 {
-  qWarning( "Resizing buffer" );
+  owarn << "Resizing buffer" << oendl; 
 
   pix->resize( w, h );
   
@@ -61,7 +69,7 @@ void KRFBBuffer::mouseEvent( QMouseEvent *e )
 
 void KRFBBuffer::keyPressEvent( QKeyEvent *e )
 {
-    qWarning( "Buffer got a key" );
+    owarn << "Buffer got a key" << oendl; 
 
   decoder->sendKeyPressEvent( e );
 }
@@ -74,7 +82,7 @@ void KRFBBuffer::keyReleaseEvent( QKeyEvent *e )
 void KRFBBuffer::copyRect( int srcX, int srcY,
                            int destX, int destY, int w, int h )
 {
-//  qWarning( "Got copy rect" );
+//  owarn << "Got copy rect" << oendl; 
   bitBlt( pix, destX, destY, pix, srcX, srcY, w, h, CopyROP );
 
   emit updated( destX, destY, w, h );

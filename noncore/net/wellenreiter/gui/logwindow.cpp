@@ -14,6 +14,12 @@
 **********************************************************************/
 
 #include "logwindow.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
+/* QT */
 #include <qmultilineedit.h>
 #include <qdatetime.h>
 
@@ -38,7 +44,7 @@ void MLogWindow::log( QString text )
     int row;
     ledit->getCursorPosition( &col, &row );
     ledit->insertAt( line, col, row );
-    qDebug( line );
+    odebug << line << oendl; 
 }
 
 

@@ -97,7 +97,7 @@ mailimf_address_list *Generatemail::parseAddresses(const QString&addr ) {
                 s = addr.mid(startpos,i-startpos);
                 if (!s.isEmpty()) {
                     list.append(s);
-                    qDebug("Appended %s",s.latin1());
+                    odebug << "Appended " << s.latin1() << "" << oendl; 
                 }
                 // !!!! this is a MUST BE!
                 startpos = ++i;
@@ -110,16 +110,16 @@ mailimf_address_list *Generatemail::parseAddresses(const QString&addr ) {
     s = addr.mid(startpos,i-startpos);
     if (!s.isEmpty()) {
         list.append(s);
-        qDebug("Appended %s",s.latin1());
+        odebug << "Appended " << s.latin1() << "" << oendl; 
     }
     QStringList::Iterator it;
     for ( it = list.begin(); it != list.end(); it++ ) {
         int err = mailimf_address_list_add_parse( addresses, (char*)(*it).latin1() );
         if ( err != MAILIMF_NO_ERROR ) {
-            qDebug( "Error parsing" );
-            qDebug( *it );
+            odebug << "Error parsing" << oendl; 
+            odebug << *it << oendl; 
         } else {
-            qDebug( "Parse success! %s",(*it).latin1());
+            odebug << "Parse success! " << (*it).latin1() << "" << oendl; 
         }
     }
     return addresses;
@@ -175,7 +175,7 @@ mailmime *Generatemail::buildFilePart(const QString&filename,const QString&mimet
             err = mailmime_set_body_text(filePart,strdup(TextContent.data()),TextContent.length());
         }
         if (err != MAILIMF_NO_ERROR) {
-            qDebug("Error setting body with file %s",file);
+            odebug << "Error setting body with file " << file << "" << oendl; 
             mailmime_free( filePart );
             filePart = 0;
         }
@@ -206,23 +206,23 @@ mailmime *Generatemail::buildFilePart(const QString&filename,const QString&mimet
 void Generatemail::addFileParts( mailmime *message,const QList<Attachment>&files ) {
     const Attachment *it;
     unsigned int count = files.count();
-    qDebug("List contains %i values",count);
+    odebug << "List contains " << count << " values" << oendl; 
     for ( unsigned int i = 0; i < count; ++i ) {
-        qDebug( "Adding file" );
+        odebug << "Adding file" << oendl; 
         mailmime *filePart;
         int err;
         it = ((QList<Attachment>)files).at(i);
 
         filePart = buildFilePart( it->getFileName(), it->getMimeType(),"" );
         if ( filePart == NULL ) {
-            qDebug( "addFileParts: error adding file:" );
-            qDebug( it->getFileName() );
+            odebug << "addFileParts: error adding file:" << oendl; 
+            odebug << it->getFileName() << oendl; 
             continue;
         }
         err = mailmime_smart_add_part( message, filePart );
         if ( err != MAILIMF_NO_ERROR ) {
             mailmime_free( filePart );
-            qDebug("error smart add");
+            odebug << "error smart add" << oendl; 
         }
     }
 }
@@ -270,7 +270,7 @@ err_free_content:
 err_free_param:
     mailmime_parameter_free( param );
 err_free:
-    qDebug( "buildTxtPart - error" );
+    odebug << "buildTxtPart - error" << oendl; 
 
     return NULL;        // Error :(
 }
@@ -345,7 +345,7 @@ mailimf_fields *Generatemail::createImfFields(const Opie::Core::OSmartPointer<Ma
             memset(c_reply,0,nsize+1);
             memcpy(c_reply,h.latin1(),nsize);
             clist_append(in_reply_to,c_reply);
-            qDebug("In reply to: %s",c_reply);
+            odebug << "In reply to: " << c_reply << "" << oendl; 
         }
     }
 
@@ -353,7 +353,7 @@ mailimf_fields *Generatemail::createImfFields(const Opie::Core::OSmartPointer<Ma
         fields = mailimf_fields_new_with_data( from, sender, reply, to, cc, bcc,
                                            in_reply_to, NULL, subject );
         if ( fields == NULL ) {
-            qDebug("Error creating mailimf fields");
+            odebug << "Error creating mailimf fields" << oendl; 
             res = 0;
         }
     }
@@ -435,7 +435,7 @@ err_free_message:
 err_free_fields:
     mailimf_fields_free( fields );
 err_free:
-    qDebug( "createMimeMail: error" );
+    odebug << "createMimeMail: error" << oendl; 
 
     return NULL;            // Error :(
 }

@@ -139,7 +139,7 @@ void SettingsTabWidget::saveSettings()
 		curSrv = 0;
 		for ( int i = 1; i < srvCount; i++ )
 		{
-//			qDebug( "ntpSrvs[%i/%i]=%s", i, srvCount, cbTimeServer->text( i ).latin1() );
+//			odebug << "ntpSrvs[" << i << "/" << srvCount << "]=" << cbTimeServer->text( i ).latin1() << "" << oendl; 
 			ntpSrvs.setGroup( QString::number( i ) );
 			ntpSrvs.writeEntry( "name", cbTimeServer->text( i-1 ) );
 		}

@@ -11,12 +11,19 @@
 #define INCLUDE_MENUITEM_DEF
 #endif
 
-#include <qmenudata.h>
 #include "liquid.h"
-//#include "liquiddeco.h"
-#include <qapplication.h>
+#include "effects.h" 
+#include "htmlmasks.h"
+#include "embeddata.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
 #include <qpe/config.h>
-#include "effects.h"
+using namespace Opie::Core;
+
+/* QT */
+#include <qmenudata.h>
+#include <qapplication.h>
 #include <qpalette.h>
 #include <qbitmap.h>
 #include <qtabbar.h>
@@ -31,16 +38,14 @@
 #include <qwidgetlist.h>
 #include <qtoolbutton.h>
 #include <qheader.h>
-#include <unistd.h>
 #include <qmenubar.h>
 #include <qprogressbar.h>
 #include <qlineedit.h>
 #include <qlistbox.h>
 
+/* STD */
+#include <unistd.h>
 #include <stdio.h>
-
-#include "htmlmasks.h"
-#include "embeddata.h"
 
 
 typedef void (QStyle::*QDrawMenuBarItemImpl) (QPainter *, int, int, int, int, QMenuItem *,
@@ -149,7 +154,7 @@ bool TransMenuHandler::eventFilter(QObject *obj, QEvent *ev)
     else if(ev->type() == QEvent::Hide){
         if(type == TransStippleBg || type == TransStippleBtn ||
            type == Custom){
-//            qWarning("Deleting menu pixmap, width %d", pixDict.find(p->winId())->width());
+//            owarn << "Deleting menu pixmap, width " << pixDict.find(p->winId())->width() << "" << oendl; 
 
             pixDict.remove(p->winId());
             if ( !p->inherits("QPopupMenu")) 
@@ -494,7 +499,7 @@ QPixmap* LiquidStyle::processEmbedded(const char *label, int h, int s, int v,
     QImage img(qembed_findImage(label));
     img.detach();
     if(img.isNull()){ // shouldn't happen, been tested
-        qWarning("Invalid embedded label %s", label);
+        owarn << "Invalid embedded label " << label << "" << oendl; 
         return(NULL);
     }
     if(img.depth() != 32)
@@ -860,7 +865,7 @@ void LiquidStyle::polish(QWidget *w)
 
     if(w->parent() && w->parent()->isWidgetType() && !((QWidget*)w->parent())->
        palette().active().brush(QColorGroup::Background).pixmap()){
-        qWarning("No parent pixmap for child widget %s", w->className());
+        owarn << "No parent pixmap for child widget " << w->className() << "" << oendl; 
         return;
     }
     if(!isViewport && !isViewportChild && !w->testWFlags(WType_Popup) &&

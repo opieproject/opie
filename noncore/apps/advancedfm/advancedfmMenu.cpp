@@ -9,19 +9,25 @@
     *   the Free Software Foundation; either version 2 of the License, or     *
     *   (at your option) any later version.                                   *
     ***************************************************************************/
+
 #include "advancedfm.h"
 #include "output.h"
 #include "filePermissions.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
 #include <qpe/lnkproperties.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/applnk.h>
+using namespace Opie::Core;
+
+/* QT*/
 
 #include <qmessagebox.h>
-
-
 #include <qpopupmenu.h>
 #include <qlistview.h>
+
+/* STD */
 
 #include <errno.h>
 #include <stdlib.h>
@@ -31,9 +37,6 @@
 #include <sys/sendfile.h>
 #include <fcntl.h>
 
-
-using namespace Opie::Core;
-using namespace Opie::Core;
 void AdvancedFm::doDirChange() {
    QString pathItem = CurrentView()->currentItem()->text(0);
    if( pathItem == "../") {
@@ -41,7 +44,7 @@ void AdvancedFm::doDirChange() {
    } else {
       if( pathItem.find(" -> ",0,TRUE) != -1)
          pathItem = dealWithSymName((const QString&)pathItem)+"/";
-//      qWarning(pathItem);
+//      owarn << pathItem << oendl; 
       gotoDirectory( CurrentDir()->path()+"/"+pathItem.left( pathItem.length() - 1) );
    }
 }
@@ -92,7 +95,7 @@ void AdvancedFm::runThis() {
 
       fs = getFileSystemType((const QString &) path);
       QFileInfo fileInfo( path  + "/" + curFile);
-//      qDebug( fileInfo.owner());
+//      odebug << fileInfo.owner() << oendl; 
 
       if( (fileInfo.permission( QFileInfo::ExeUser)
            | fileInfo.permission( QFileInfo::ExeGroup)
@@ -104,7 +107,7 @@ void AdvancedFm::runThis() {
           curFile =  path + "/" + curFile;
           DocLnk nf(curFile);
           QString execStr = nf.exec();
-//          qDebug( execStr);
+//          odebug << execStr << oendl; 
           if( execStr.isEmpty() ) {
             } else {
               nf.execute();
@@ -202,12 +205,12 @@ void AdvancedFm::doDelete() {
             QFile file(f);
             QFileInfo fi(myFile);
             if( fi.fileName().find("../",0,TRUE)==-1) {
-//               qDebug("remove link files "+myFile);
+//               odebug << "remove link files "+myFile << oendl; 
 
 //               DocLnk lnk(f);
                  DocLnk *lnk;
                  lnk = new DocLnk(f);
-//                 qDebug("Deleting doclnk " + lnk->linkFile());
+//                 odebug << "Deleting doclnk " + lnk->linkFile() << oendl; 
                  if(lnk->isValid())
                     lnk->removeLinkFile();
                // delete lnk;
@@ -243,10 +246,10 @@ void AdvancedFm::doProperties() {
    QString filePath;
    filePath = CurrentDir()->canonicalPath()+"/";
 
-//   qDebug("%d",curFileList.count());
+//   odebug << "" << curFileList.count() << "" << oendl; 
 
    for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
-//      qDebug((filePath+*it));
+//      odebug << (filePath+*it) << oendl; 
       DocLnk lnk( (filePath+*it));
       LnkProperties prop( &lnk );
       QPEApplication::execDialog( &prop );
@@ -302,8 +305,8 @@ void AdvancedFm::copy() {
          curFile = thisDir->canonicalPath()+"/"+ item;
          destFile = thatDir->canonicalPath()+"/"+ item;
 
-//          qDebug("Destination file is "+destFile);
-//          qDebug("CurrentFile file is " + curFile);
+//          odebug << "Destination file is "+destFile << oendl; 
+//          odebug << "CurrentFile file is " + curFile << oendl; 
 
          QFile f(destFile);
          if( f.exists()) {
@@ -420,7 +423,7 @@ void AdvancedFm::copySameDir() {
               return;
             }
 
-//          qDebug("copy "+curFile+" as "+destFile);
+//          odebug << "copy "+curFile+" as "+destFile << oendl; 
         }
       delete fileDlg;
     }
@@ -443,13 +446,13 @@ void AdvancedFm::move() {
           if(destFile.right(1).find("/",0,TRUE) == -1)
             destFile+="/";
           destFile += item;
-//          qDebug("Destination file is "+destFile);
+//          odebug << "Destination file is "+destFile << oendl; 
 
           curFile = thisDir->canonicalPath();
           if(curFile.right(1).find("/",0,TRUE) == -1)
                             curFile +="/";
           curFile+= item;
-//          qDebug("CurrentFile file is " + curFile);
+//          odebug << "CurrentFile file is " + curFile << oendl; 
 
           if(QFileInfo(curFile).isDir()) {
                             moveDirectory( curFile, destFile );
@@ -489,7 +492,7 @@ bool AdvancedFm::moveDirectory( const QString & src, const QString & dest ) {
 bool AdvancedFm::copyDirectory( const QString & src, const QString & dest ) {
 
         QString    cmd = "/bin/cp -fpR " + src + " " + dest;
-    qWarning(cmd);
+    owarn << cmd << oendl; 
         int    err = system( (const char *) cmd );
         if ( err != 0 ) {
                 QMessageBox::message("AdvancedFm",
@@ -525,14 +528,14 @@ bool AdvancedFm::copyFile( const QString & src, const QString & dest ) {
    struct stat stat_buf;
    off_t offset = 0;
       if(!srcFile.open( IO_ReadOnly|IO_Raw)) {
-//         qWarning("open failed");
+//         owarn << "open failed" << oendl; 
          return success = false;
    }
    read_fd = srcFile.handle();
    if(read_fd != -1) {
       fstat (read_fd, &stat_buf);
       if( !destFile.open( IO_WriteOnly|IO_Raw ) ) {
-//       qWarning("destfile open failed");
+//       owarn << "destfile open failed" << oendl; 
        return success = false;
       }
       write_fd = destFile.handle();
@@ -547,7 +550,7 @@ bool AdvancedFm::copyFile( const QString & src, const QString & dest ) {
               case EIO: msg = "Unspecified error while reading from in_fd.";
               };
               success = false;
-//              qWarning(msg);
+//              owarn << msg << oendl; 
          }
       } else {
          success = false;
@@ -579,7 +582,7 @@ void AdvancedFm::runCommand() {
    //QString command;
 
    if( fileDlg->result() == 1 ) {
-//      qDebug(fileDlg->LineEdit1->text());
+//      odebug << fileDlg->LineEdit1->text() << oendl; 
       QStringList command;
 
       command << "/bin/sh";
@@ -662,7 +665,7 @@ void AdvancedFm::mkSym() {
             }
 
           cmd = "ln -s "+curFile+" "+destName;
-//          qDebug(cmd);
+//          odebug << cmd << oendl; 
           startProcess( (const QString)cmd );
         }
             rePopulate();
@@ -715,7 +718,7 @@ void AdvancedFm::startProcess(const QString & cmd) {
   command << cmd.latin1();
   *process << command;
   if(!process->start(OProcess::NotifyOnExit, OProcess::All) )
-    qDebug("could not start process");
+    odebug << "could not start process" << oendl; 
 }
 
 void AdvancedFm::processEnded(OProcess *) {
@@ -723,7 +726,7 @@ void AdvancedFm::processEnded(OProcess *) {
 }
 
 void AdvancedFm::oprocessStderr(OProcess*, char *buffer, int ) {
-//    qWarning("received stderrt %d bytes", buflen);
+//    owarn << "received stderrt " << buflen << " bytes" << oendl; 
 
     QString lineStr = buffer;
     QMessageBox::warning( this, tr("Error"), lineStr ,tr("Ok") );
@@ -765,7 +768,7 @@ bool AdvancedFm::eventFilter( QObject * o, QEvent * e ) {
 
 
 void AdvancedFm::cancelRename() {
-//  qDebug("cancel rename");
+//  odebug << "cancel rename" << oendl; 
   QListView * view;
   view = CurrentView();
 

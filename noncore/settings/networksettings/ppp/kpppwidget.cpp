@@ -2,7 +2,7 @@
  *
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: kpppwidget.cpp,v 1.7 2004-03-02 12:21:30 alwin Exp $
+ * $Id: kpppwidget.cpp,v 1.8 2004-04-04 13:55:01 mickeyl Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -74,13 +74,13 @@ KPPPWidget::KPPPWidget(PPPData*pd, Interface *i, QWidget *parent, const char *na
   // before doing anything else, run a few tests
     if (!_pppdata->setModemDevice( i->getInterfaceName() ))
         _pppdata->setModemDevice("/dev/modem");
-    qDebug("PPPConfigWidget::PPPConfigWidget");
-    qDebug(" interface->getHardwareName >%s<", i->getHardwareName().latin1());
+    odebug << "PPPConfigWidget::PPPConfigWidget" << oendl; 
+    odebug << " interface->getHardwareName >" << i->getHardwareName().latin1() << "<" << oendl; 
     if (!_pppdata->setAccount( i->getHardwareName() ))
         _pppdata->setAccount( 0 );
 
-    qDebug(" _pppdata->accname >%s<",_pppdata->accname().latin1());
-    qDebug(" _pppdata->currentAccountID() >%i<",_pppdata->currentAccountID());
+    odebug << " _pppdata->accname >" << _pppdata->accname().latin1() << "<" << oendl; 
+    odebug << " _pppdata->currentAccountID() >" << _pppdata->currentAccountID() << "<" << oendl; 
 
   int result = runTests();
   if(result == TEST_CRITICAL)
@@ -305,7 +305,7 @@ KPPPWidget::~KPPPWidget()
 //   if(e->type() == QEvent::User) {
 //     switch(((SignalEvent*)e)->sigType()) {
 //     case SIGINT:
-//       qDebug( "Received a SIGINT" );
+//       odebug << "Received a SIGINT" << oendl; 
 //       interruptConnection();
 //       break;
 //     case SIGCHLD:
@@ -423,13 +423,13 @@ void KPPPWidget::interruptConnection() {
 
 
 void KPPPWidget::sigPPPDDied() {
-    qDebug( "Received a SIGUSR1" );
+    odebug << "Received a SIGUSR1" << oendl; 
 
     // if we are not connected pppdpid is -1 so have have to check for that
     // in the followin line to make sure that we don't raise a false alarm
     // such as would be the case when the log file viewer exits.
     if(_pppdata->pppdRunning() || _pppdata->pppdError()) {
-        qDebug( "It was pppd that died" );
+        odebug << "It was pppd that died" << oendl; 
 
         // when we killpppd() on Cancel in ConnectWidget
         // we set pppid to -1 so we won't
@@ -442,7 +442,7 @@ void KPPPWidget::sigPPPDDied() {
 
         _pppdata->setpppdRunning(false);
 
-        qDebug( "Executing command on disconnect since pppd has died." );
+        odebug << "Executing command on disconnect since pppd has died." << oendl; 
         QApplication::flushX();
         execute_command(_pppdata->command_on_disconnect());
 
@@ -489,7 +489,7 @@ void KPPPWidget::sigPPPDDied() {
 // //	  PPPL_ShowLog();
 //       } else { /* reconnect on disconnect */
             if (false){
-                qDebug( "Trying to reconnect... " );
+                odebug << "Trying to reconnect... " << oendl; 
 
                 if(_pppdata->authMethod() == AUTH_PAP ||
                    _pppdata->authMethod() == AUTH_CHAP ||
@@ -511,7 +511,7 @@ void KPPPWidget::sigPPPDDied() {
 }
 
 // void KPPPWidget::sigChld() {
-//   qDebug( "sigchld()" );
+//   odebug << "sigchld()" << oendl; 
 //   //  pid_t id = wait(0L);
 //   //  if(id == helperPid && helperPid != -1) {
 //   //    kdDebug(5002) << "It was the setuid child that died" << endl;

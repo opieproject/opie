@@ -1,5 +1,4 @@
 TEMPLATE = lib
-CONFIG -= moc
 CONFIG += qt plugin 
 
 HEADERS = stocktickerplugin.h stocktickerpluginimpl.h stocktickerpluginwidget.h stocktickerconfig.h \
@@ -20,8 +19,8 @@ INCLUDEPATH     += $(OPIEDIR)/include \
 DEPENDPATH      += $(OPIEDIR)/include \
     ../ ../library
 
-LIBS+= -lqpe  -lopieui2 -lopiepim2 -lpthread
-TMAKE_CFLAGS += -D__UNIX__
+LIBS    += -lqpe -lopiecore2 -lopieui2 -lopiepim2 -lpthread
+DEFINES += __UNIX__
 
 DESTDIR = $(OPIEDIR)/plugins/today
 TARGET = todaystocktickerplugin

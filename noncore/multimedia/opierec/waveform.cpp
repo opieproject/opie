@@ -19,8 +19,12 @@
  **********************************************************************/
 #include "waveform.h"
 
-#include <qpainter.h>
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
 
+/* QT */
+#include <qpainter.h>
 
 Waveform::Waveform( QWidget *parent, const char *name, WFlags fl )
    : QWidget( parent, name, fl )
@@ -38,9 +42,9 @@ Waveform::Waveform( QWidget *parent, const char *name, WFlags fl )
 void Waveform::changeSettings( int frequency, int channels )
 {
    makePixmap();
-//   qWarning("change waveform %d, %d", frequency, channels);
+//   owarn << "change waveform " << frequency << ", " << channels << "" << oendl; 
    samplesPerPixel = frequency * channels / (5 * windowSize);
-   qWarning("Waveform::changeSettings %d", samplesPerPixel);
+   owarn << "Waveform::changeSettings " << samplesPerPixel << "" << oendl; 
    if ( !samplesPerPixel )
       samplesPerPixel = 1;
    currentValue = 0;
@@ -96,7 +100,7 @@ void Waveform::newSamples( const short *buf, int len )
    }
 
    // Copy the final state back to the object.
-//qWarning("%d, %d, %d", currentValue, numSamples, windowPosn);
+//owarn << "" << currentValue << ", " << numSamples << ", " << windowPosn << "" << oendl; 
  this->currentValue = currentValue;
    this->numSamples = numSamples;
    this->windowPosn = windowPosn;

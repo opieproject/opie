@@ -16,10 +16,14 @@
 #include "advancedconfig.h"
 
 /* OPIE */
+#include <opie2/odebug.h>
 #include <opie2/onetwork.h>
 #include <opie2/otaskbarapplet.h>
 #include <qpe/config.h>
 #include <qpe/qpeapplication.h>
+using namespace Opie::Core;
+using namespace Opie::Ui;
+using namespace Opie::Net;
 
 /* QT */
 #include <qradiobutton.h>
@@ -43,8 +47,6 @@
 //#define MDEBUG
 #undef MDEBUG
 
-using namespace Opie::Ui;
-using namespace Opie::Net;
 WirelessControl::WirelessControl( WirelessApplet *applet, QWidget *parent, const char *name )
         : QFrame( parent, name, WStyle_StaysOnTop | WType_Popup ), applet( applet )
 {
@@ -207,14 +209,14 @@ void WirelessApplet::checkInterface()
     if ( interface )
     {
 #ifdef MDEBUG
-        qDebug( "WIFIAPPLET: using interface '%s'", ( const char* ) interface->name() );
+        odebug << "WIFIAPPLET: using interface '" << ( const char* ) interface->name() << "'" << oendl; 
 #endif
 
     }
     else
     {
 #ifdef MDEBUG
-        qDebug( "WIFIAPPLET: D'oh! No Wireless interface present... :(" );
+        odebug << "WIFIAPPLET: D'oh! No Wireless interface present... :(" << oendl; 
 #endif
         hide();
     }
@@ -223,7 +225,7 @@ void WirelessApplet::checkInterface()
 void WirelessApplet::renewDHCP()
 {
 #ifdef MDEBUG
-    qDebug( "WIFIAPPLET: Going to request a DHCP configuration renew." );
+    odebug << "WIFIAPPLET: Going to request a DHCP configuration renew." << oendl; 
 #endif
 
     QString pidfile;
@@ -235,7 +237,7 @@ void WirelessApplet::renewDHCP()
 
     pidfile.sprintf( "/var/run/dhcpcd-%s.pid", ( const char* ) ifacename );
 #ifdef MDEBUG
-    qDebug( "WIFIAPPLET: dhcpcd pidfile is '%s'", ( const char* ) pidfile );
+    odebug << "WIFIAPPLET: dhcpcd pidfile is '" << ( const char* ) pidfile << "'" << oendl; 
 #endif
     int pid;
     QFile pfile( pidfile );
@@ -245,7 +247,7 @@ void WirelessApplet::renewDHCP()
     {
         s >> pid;
 #ifdef MDEBUG
-        qDebug( "WIFIAPPLET: sent SIGALARM to pid %d", pid );
+        odebug << "WIFIAPPLET: sent SIGALARM to pid " << pid << "" << oendl; 
 #endif
         kill( pid, SIGALRM );
         return ;
@@ -253,11 +255,11 @@ void WirelessApplet::renewDHCP()
 
     // No dhcpcd, so we are trying udhcpc
 #ifdef MDEBUG
-    qDebug( "WIFIAPPLET: dhcpcd not available." );
+    odebug << "WIFIAPPLET: dhcpcd not available." << oendl; 
 #endif
     pidfile.sprintf( "/var/run/udhcpc.%s.pid", ( const char* ) ifacename );
 #ifdef MDEBUG
-    qDebug( "WIFIAPPLET: udhcpc pidfile is '%s'", ( const char* ) pidfile );
+    odebug << "WIFIAPPLET: udhcpc pidfile is '" << ( const char* ) pidfile << "'" << oendl; 
 #endif
     QFile pfile2( pidfile );
     hasFile = pfile2.open( IO_ReadOnly );
@@ -266,7 +268,7 @@ void WirelessApplet::renewDHCP()
     {
         s2 >> pid;
 #ifdef MDEBUG
-        qDebug( "WIFIAPPLET: sent SIGUSR1 to pid %d", pid );
+        odebug << "WIFIAPPLET: sent SIGUSR1 to pid " << pid << "" << oendl; 
 #endif
         kill( pid, SIGUSR1 );
         return ;
@@ -303,14 +305,14 @@ WirelessApplet::~WirelessApplet()
 void WirelessApplet::timerEvent( QTimerEvent* )
 {
 #ifdef MDEBUG
-    qDebug( "WirelessApplet::timerEvent" );
+    odebug << "WirelessApplet::timerEvent" << oendl; 
 #endif
     if ( interface )
     {
         if ( !ONetwork::instance()->isPresent( (const char*) interface->name() ) )
         {
 #ifdef MDEBUG
-            qDebug( "WIFIAPPLET: Interface no longer present." );
+            odebug << "WIFIAPPLET: Interface no longer present." << oendl; 
 #endif
             interface = 0L;
             mustRepaint();
@@ -320,7 +322,7 @@ void WirelessApplet::timerEvent( QTimerEvent* )
         if ( mustRepaint() )
         {
 #ifdef MDEBUG
-            qDebug( "WIFIAPPLET: A value has changed -> repainting." );
+            odebug << "WIFIAPPLET: A value has changed -> repainting." << oendl; 
 #endif
             repaint();
         }
@@ -356,14 +358,14 @@ bool WirelessApplet::mustRepaint()
         if ( interface )
         {
 #ifdef MDEBUG
-            qDebug( "WIFIAPPLET: We had no interface but now we have one! :-)" );
+            odebug << "WIFIAPPLET: We had no interface but now we have one! :-)" << oendl; 
 #endif
             show();
         }
         else
         {
 #ifdef MDEBUG
-            qDebug( "WIFIAPPLET: We had a interface but now we don't have one! ;-(" );
+            odebug << "WIFIAPPLET: We had a interface but now we don't have one! ;-(" << oendl; 
 #endif
             hide();
             return true;
@@ -395,28 +397,28 @@ bool WirelessApplet::mustRepaint()
     if ( rocESSID && ( oldESSID != interface->SSID() ) )
     {
 #ifdef MDEBUG
-        qDebug( "WIFIAPPLET: ESSID has changed." );
+        odebug << "WIFIAPPLET: ESSID has changed." << oendl; 
 #endif
         renewDHCP();
     }
     else if ( rocFREQ && ( oldFREQ != interface->frequency() ) )
     {
 #ifdef MDEBUG
-        qDebug( "WIFIAPPLET: FREQ has changed." );
+        odebug << "WIFIAPPLET: FREQ has changed." << oendl; 
 #endif
         renewDHCP();
     }
     else if ( rocAP && ( oldAP != interface->associatedAP().toString() ) )
     {
 #ifdef MDEBUG
-        qDebug( "WIFIAPPLET: AP has changed." );
+        odebug << "WIFIAPPLET: AP has changed." << oendl; 
 #endif
         renewDHCP();
     }
     else if ( rocMODE && ( oldMODE != interface->mode() ) )
     {
 #ifdef MDEBUG
-        qDebug( "WIFIAPPLET: MODE has changed." );
+        odebug << "WIFIAPPLET: MODE has changed." << oendl; 
 #endif
         renewDHCP();
     }
@@ -450,7 +452,7 @@ int WirelessApplet::numberOfRings()
 {
     if ( !interface ) return -1;
     int qualityH = interface->signalStrength();
-    qDebug( "quality = %d", qualityH );
+    odebug << "quality = " << qualityH << "" << oendl; 
     if ( qualityH < 1 ) return -1;
     if ( qualityH < 20 ) return 0;
     if ( qualityH < 40 ) return 1;
@@ -481,7 +483,7 @@ void WirelessApplet::paintEvent( QPaintEvent* )
         return;
     }
 
-    qDebug( "WirelessApplet: painting %d rings", rings );
+    odebug << "WirelessApplet: painting " << rings << " rings" << oendl; 
     int radius = 2;
     int rstep = 4;
     int maxrings = w/rstep;

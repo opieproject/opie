@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: general.cpp,v 1.7 2004-03-02 12:21:30 alwin Exp $
+ * $Id: general.cpp,v 1.8 2004-04-04 13:55:00 mickeyl Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -335,7 +335,7 @@ bool ModemWidget::save()
             !_pppdata->isUniqueDevname(modemname->text()))
         return false;
 
-    qDebug("ModemWidget::save saving modem1 data");
+    odebug << "ModemWidget::save saving modem1 data" << oendl; 
     _pppdata->setDevname( modemname->text() );
     _pppdata->setModemDevice( modemdevice->currentText() );
     _pppdata->setFlowcontrol(flowcontrol->currentText());

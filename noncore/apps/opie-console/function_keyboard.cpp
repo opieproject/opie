@@ -1,5 +1,10 @@
 #include "function_keyboard.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
+/* QT */
 #include <qlayout.h>
 #include <qlistbox.h>
 #include <qlabel.h>
@@ -37,7 +42,7 @@ FunctionKeyboard::FunctionKeyboard(QWidget *parent) :
                  FKey (value_list[0], value_list[1], value_list[2].toUShort(), value_list[3].toUShort())
             );
         }
-    //qWarning("loaded %d keys", keys.count());
+    //owarn << "loaded " << keys.count() << " keys" << oendl; 
     */
     if (keys.isEmpty()) loadDefaults();
 
@@ -256,7 +261,7 @@ FunctionKeyboardConfig::FunctionKeyboardConfig(const QString& name, QWidget* par
     : ProfileDialogKeyWidget(name, parent, na),
       selectedRow(0), selectedCol(0)
 {
-    qWarning("FunctionKeyboardConfig");
+    owarn << "FunctionKeyboardConfig" << oendl; 
 
 
     kb = new FunctionKeyboard(this);

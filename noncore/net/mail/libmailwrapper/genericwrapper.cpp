@@ -135,7 +135,7 @@ QString Genericwrapper::getencoding(mailmime_mechanism*aEnc)
 void Genericwrapper::traverseBody(RecBodyP&target,mailmessage*message,mailmime*mime,QValueList<int>recList,unsigned int current_rec,int current_count)
 {
     if (current_rec >= 10) {
-        qDebug("too deep recursion!");
+        odebug << "too deep recursion!" << oendl; 
     }
     if (!message || !mime) {
         return;
@@ -272,7 +272,7 @@ QString Genericwrapper::parseAddressList( mailimf_address_list *list )
                 result.append( parseGroup( addr->ad_data.ad_group ) );
                 break;
             default:
-                qDebug( "Generic: unkown mailimf address type" );
+                odebug << "Generic: unkown mailimf address type" << oendl; 
                 break;
         }
     }
@@ -365,7 +365,7 @@ void Genericwrapper::cleanMimeCache()
         if (t) delete t;
     }
     bodyCache.clear();
-    qDebug("Genericwrapper: cache cleaned");
+    odebug << "Genericwrapper: cache cleaned" << oendl; 
 }
 
 QStringList Genericwrapper::parseInreplies(mailimf_in_reply_to * in_replies)
@@ -394,12 +394,12 @@ void Genericwrapper::parseList(QValueList<Opie::Core::OSmartPointer<RecMail> > &
     mailmessage_list * env_list = 0;
     r = mailsession_get_messages_list(session,&env_list);
     if (r != MAIL_NO_ERROR) {
-        qDebug("Error message list");
+        odebug << "Error message list" << oendl; 
         return;
     }
     r = mailsession_get_envelopes_list(session, env_list);
     if (r != MAIL_NO_ERROR) {
-        qDebug("Error filling message list");
+        odebug << "Error filling message list" << oendl; 
         if (env_list) {
             mailmessage_list_free(env_list);
         }
@@ -413,7 +413,7 @@ void Genericwrapper::parseList(QValueList<Opie::Core::OSmartPointer<RecMail> > &
         QBitArray mFlags(7);
         msg = (mailmessage*)carray_get(env_list->msg_tab, i);
         if (msg->msg_fields == NULL) {
-            //qDebug("could not fetch envelope of message %i", i);
+            //odebug << "could not fetch envelope of message " << i << "" << oendl; 
             continue;
         }
         RecMailP mail = new RecMail();
@@ -448,7 +448,7 @@ void Genericwrapper::parseList(QValueList<Opie::Core::OSmartPointer<RecMail> > &
         // crashes when accessing pop3 account?
         if (single_fields.fld_message_id->mid_value) {
             mail->setMsgid(QString(single_fields.fld_message_id->mid_value));
-            qDebug("Msgid == %s",mail->Msgid().latin1());
+            odebug << "Msgid == " << mail->Msgid().latin1() << "" << oendl; 
         }
 
         if (single_fields.fld_reply_to) {

@@ -36,17 +36,19 @@
 #include <opie2/otaskbarapplet.h>
 #include <qpe/applnk.h>
 #include <qpe/resource.h>
-#include <qpainter.h>
+using namespace Opie::Core;
+using namespace Opie::Ui;
+using namespace Opie::Net;
 
 /* QT */
+#include <qpainter.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qobjectlist.h>
 
+/* STD */
 #include <assert.h>
 
-using namespace Opie::Ui;
-using namespace Opie::Net;
 IfaceUpDownButton::IfaceUpDownButton( QWidget* parent, const char* name )
                   :QToolButton( parent, name )
 {
@@ -167,7 +169,7 @@ QString NetworkAppletControl::guessDevice( ONetworkInterface* iface )
 
 void NetworkAppletControl::showEvent( QShowEvent* e )
 {
-    qDebug( "showEvent" );
+    odebug << "showEvent" << oendl; 
     build();
     QWidget::showEvent( e );
 }
@@ -175,7 +177,7 @@ void NetworkAppletControl::showEvent( QShowEvent* e )
 
 void NetworkAppletControl::hideEvent( QHideEvent* e )
 {
-    qDebug( "hideEvent" );
+    odebug << "hideEvent" << oendl; 
     QWidget::hideEvent( e );
 
     delete l;
@@ -192,7 +194,7 @@ void NetworkAppletControl::hideEvent( QHideEvent* e )
 
     list = const_cast<QObjectList*>( children() );
     if ( list )
-        qWarning( "D'oh! We still have %d children...", list->count() );
+        owarn << "D'oh! We still have " << list->count() << " children..." << oendl; 
 
     // renew layout
     l = new QVBoxLayout( this, 4, 2 );
@@ -203,7 +205,7 @@ void NetworkAppletControl::hideEvent( QHideEvent* e )
 QSize NetworkAppletControl::sizeHint() const
 {
     ONetwork::instance()->synchronize(); // rebuild interface database
-    qDebug( "sizeHint (#ifaces=%d)", ONetwork::instance()->count() );
+    odebug << "sizeHint (#ifaces=" << ONetwork::instance()->count() << ")" << oendl; 
     return QSize( 14+35+105+14 + 8, ONetwork::instance()->count() * 26 );
 }
 

@@ -1,5 +1,11 @@
-#include <qmessagebox.h>
 #include "cfgfile.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
+/* QT */
+#include <qmessagebox.h>
 
 // CfgEntry implementation
 CfgEntry::CfgEntry() {
@@ -95,7 +101,7 @@ bool CfgParser::load(QString file, CfgFile& cfg) {
 	reader.parse(is);
 
 	if (!err.isEmpty()) {
-		qDebug(err);
+		odebug << err << oendl; 
 		return false;
 	}
 
@@ -106,7 +112,7 @@ bool CfgParser::load(QString file, CfgFile& cfg) {
 		QString prefix = fit.data();
 		QString label = "";
 
-		qDebug("include: file=" + fit.key() + ", prefix=" + fit.data());
+		odebug << "include: file=" + fit.key() + ", prefix=" + fit.data() << oendl; 
 		lit = labels.find(prefix+":*");
 		if (lit != labels.end()) {
 			label = lit.data();

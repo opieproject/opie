@@ -1,7 +1,10 @@
 
 #include "io_bt.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
 using namespace Opie::Core;
+
 IOBt::IOBt( const Profile &config ) : IOSerial( config ) {
     m_attach = 0;
 }
@@ -43,7 +46,7 @@ bool IOBt::open() {
         if ( m_attach->start() ) {
             ret = IOSerial::open();
         } else {
-            qWarning("could not attach to device");
+            owarn << "could not attach to device" << oendl; 
             delete m_attach;
             m_attach = 0;
         }
@@ -89,5 +92,5 @@ bool IOBt::isConnected() {
 }
 
 void IOBt::send(const QByteArray &data) {
-    qDebug( "Please overload me..." );
+    odebug << "Please overload me..." << oendl; 
 }

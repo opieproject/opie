@@ -4,7 +4,7 @@
 **
 ** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: zsafe.cpp,v 1.13 2004-03-13 22:42:01 zecke Exp $
+** $Id: zsafe.cpp,v 1.14 2004-04-04 13:54:46 mickeyl Exp $
 **
 ** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 **
@@ -29,7 +29,8 @@
 #ifndef DESKTOP
 #ifndef NO_OPIE
 #include <opie2/ofiledialog.h>
-
+#include <opie2/odebug.h>
+using namespace Opie::Core;
 using namespace Opie::Ui;
 #else
 #include "scqtfileedit.h"
@@ -37,8 +38,6 @@ using namespace Opie::Ui;
 #endif
 
 #include <qclipboard.h>
-
-#include <stdio.h>
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -2069,7 +2068,6 @@ int ZSafe::loadInit(const char* _filename, const char *password)
 #ifndef WIN32
     size = read(fileno (fd), (unsigned char *) (charbuf + count), 8);
 #else
-    printf ("LoadInit() read1");
     size = fread ((unsigned char *) (charbuf + count), sizeof(unsigned char), 8, fd);
 #endif
 
@@ -2089,7 +2087,6 @@ int ZSafe::loadInit(const char* _filename, const char *password)
         while (count < 8) {
             count2 = read (fileno (fd), (unsigned char *) (charbuf + count), 8);
 #else
-    printf ("LoadInit() read2");
     while ((count = fread ((unsigned char *) (charbuf), sizeof(unsigned char), 8, fd)) > 0) {
         while (count < 8) {
             count2 = fread ((unsigned char *) (charbuf + count), sizeof(unsigned char), 8, fd);
@@ -2259,7 +2256,7 @@ bool ZSafe::saveDocument(const char* _filename,
        retval = saveEntry(entry);
            for (int z=0; z<i; z++) free(entry[z]);
            if (retval == PWERR_DATA) {
-              qWarning("1: Error writing file, contents not saved");
+              owarn << "1: Error writing file, contents not saved" << oendl; 
               saveFinalize();
               return false;
            }
@@ -2303,7 +2300,7 @@ bool ZSafe::saveDocument(const char* _filename,
                   free(entry[z]);
               }
               if (retval == PWERR_DATA) {
-                        qWarning("1: Error writing file, contents not saved");
+                        owarn << "1: Error writing file, contents not saved" << oendl; 
                         saveFinalize();
                         return false;
               }
@@ -2312,7 +2309,7 @@ bool ZSafe::saveDocument(const char* _filename,
         }
 
     if (saveFinalize() == PWERR_DATA) {
-                qWarning("2: Error writing file, contents not saved");
+                owarn << "2: Error writing file, contents not saved" << oendl; 
         return false;
     } else {
 #ifndef DESKTOP
@@ -3190,7 +3187,7 @@ void ZSafe::editCategory()
 
            if (cat)
            {
-              qWarning("Category found");
+              owarn << "Category found" << oendl; 
 
               // if (!icon.isEmpty() && !icon.isNull())
               if (icon != "predefined.png")

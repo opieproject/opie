@@ -63,7 +63,7 @@ TabManager::~TabManager(){
  * NULL then the item is a tab and should be placed as a child of the window.
  */
 void TabManager::rescanFolder(QString directory, QListViewItem* parent){
-  //qDebug(QString("rescanFolder: ") + directory.latin1());
+  //odebug << QString("rescanFolder: ") + directory.latin1() << oendl; 
   
   QDir d;
   d.setPath(directory);
@@ -207,7 +207,7 @@ void TabManager::removeItem(){
  
   // If removing failed. 
   if(!removeSuccessful){
-    qDebug((QString("removeItem: ") + location).latin1());
+    odebug << (QString("removeItem: ") + location).latin1() << oendl; 
     QMessageBox::critical(this, tr("Message"), tr("Can't remove."), tr("Ok") );
     return;
   }
@@ -244,7 +244,7 @@ void TabManager::editItem( QListViewItem * item){
   
   TabAppLnk app(itemList[item]);
   if(!app.isValid()){
-    qDebug(QString("editItem: Not a valid applnk file: ") + itemList[item].latin1());
+    odebug << QString("editItem: Not a valid applnk file: ") + itemList[item].latin1() << oendl; 
     return;	 
   } 
   
@@ -273,7 +273,7 @@ void TabManager::editItem( QListViewItem * item){
 	imageOfFile.convertFromImage(foo);
         application->iconLineEdit->insertItem(imageOfFile,fileName); 
       }
-      //qDebug(fi->fileName().latin1());
+      //odebug << fi->fileName().latin1() << oendl; 
       ++it;
     }
     waitDialog.hide();
@@ -402,8 +402,8 @@ void TabManager::moveApplication(QListViewItem *item, QListViewItem *newGroup){
     QMessageBox::critical(this, tr("Message"), "Can't move application.", tr("Ok") );
     return;	  
   }
-  //qDebug((QString("moveApplication: ") + itemList[item]).latin1());
-  //qDebug((QString("moveApplication: ") + newFolder).latin1());
+  //odebug << (QString("moveApplication: ") + itemList[item]).latin1() << oendl; 
+  //odebug << (QString("moveApplication: ") + newFolder).latin1() << oendl; 
  
   // Move in the gui
   item->parent()->takeItem(item);
@@ -415,7 +415,7 @@ void TabManager::moveApplication(QListViewItem *item, QListViewItem *newGroup){
   if(findInstalledApplication(desktopFile, installedAppFile))
     swapInstalledLocation(installedAppFile, desktopFile, newFolder);
   else
-    qDebug("moveApplication: No installed app found for dekstop file");  
+    odebug << "moveApplication: No installed app found for dekstop file" << oendl;   
 		  
   // Move application type  
   AppLnk app(newFolder);
@@ -464,7 +464,7 @@ bool TabManager::findInstalledApplication(QString desktopFile, QString &installe
       file.close();
     }
     else
-      qDebug((QString("findInstalledApplication: Can't open file") + HOME_APP_INSTALL_DIR + "/" + fi->fileName()).latin1());
+      odebug << (QString("findInstalledApplication: Can't open file") + HOME_APP_INSTALL_DIR + "/" + fi->fileName()).latin1() << oendl; 
     ++it;  // goto next list element
   }
   return false;
@@ -479,7 +479,7 @@ bool TabManager::findInstalledApplication(QString desktopFile, QString &installe
 void TabManager::swapInstalledLocation( QString installedAppFile, QString desktopFile, QString newLocation ){
   QFile file(installedAppFile);
   if ( !file.open(IO_ReadOnly) ){
-    qDebug(QString("swapInstalledLocation: Can't edit file: %1").arg(installedAppFile).latin1());
+    odebug << QString("swapInstalledLocation: Can't edit file: %1").arg(installedAppFile).latin1() << oendl; 
     return;
   }
   
@@ -496,7 +496,7 @@ void TabManager::swapInstalledLocation( QString installedAppFile, QString deskto
   file.close();
 
   if ( !file.open(IO_ReadWrite) ){
-    qDebug(QString("swapInstalledLocation: Can't edit file: %1").arg(installedAppFile).latin1());
+    odebug << QString("swapInstalledLocation: Can't edit file: %1").arg(installedAppFile).latin1() << oendl; 
     return;
   }
   QTextStream streamOut( &file );

@@ -84,7 +84,7 @@ void PacketView::showPacket( int number )
     }
     else
     {
-        qDebug( "D'oh! No packet!" );
+        odebug << "D'oh! No packet!" << oendl; 
     }
 }
 

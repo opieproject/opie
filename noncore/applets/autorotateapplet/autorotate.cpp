@@ -13,16 +13,16 @@
 #include "autorotate.h"
 
 /* OPIE */
-#include <opie2/odevice.h>
+#include <opie2/odebug.h>
 #include <opie2/otaskbarapplet.h>
 #include <qpe/applnk.h>
 #include <qpe/config.h>
 #include <qpe/resource.h>
+using namespace Opie::Core;
 
 /* QT */
 #include <qpainter.h>
 
-using namespace Opie::Ui;
 AutoRotate::AutoRotate(QWidget * parent):QWidget(parent)
 {
     setFixedWidth( AppLnk::smallIconSize() );
@@ -87,11 +87,11 @@ bool AutoRotate::isRotateEnabled()
     bool res = cfg.readBoolEntry( "rotateEnabled" );
 
     if (res )
-        qDebug("Enabled");
+        odebug << "Enabled" << oendl; 
     else
-        qDebug("Disabled");
+        odebug << "Disabled" << oendl; 
     return res;
 }
 
-EXPORT_OPIE_APPLET_v1(  AutoRotate )
+EXPORT_OPIE_APPLET_v1( AutoRotate )
 

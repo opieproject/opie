@@ -11,11 +11,16 @@
  ***************************************************************************/
 #include "advancedfm.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
 #include <qpe/storage.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
 #include <qpe/menubutton.h>
+using namespace Opie::Core;
+using namespace Opie::Ui;
 
+/* QT */
 #include <qlayout.h>
 #include <qhbox.h>
 #include <qmenubar.h>
@@ -24,10 +29,9 @@
 #include <qlineedit.h>
 #include <qlistview.h>
 
+/* STD */
 #include <sys/utsname.h>
 
-
-using namespace Opie::Ui;
 void AdvancedFm::init() {
 	 b = false;
 	 setCaption( tr( "AdvancedFm" ) );
@@ -219,11 +223,11 @@ void AdvancedFm::init() {
 
 
 	 if( !StorageInfo::hasSd() || !StorageInfo::hasMmc()) {
-			qDebug("not have sd");
+			odebug << "not have sd" << oendl; 
 			sdButton->hide();
 	 }
 	 if( !StorageInfo::hasCf() ) {
-			qDebug("not have cf");
+			odebug << "not have cf" << oendl; 
 			cfButton->hide();
 	 }
 	 currentDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);

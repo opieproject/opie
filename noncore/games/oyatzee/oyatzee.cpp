@@ -1,10 +1,16 @@
 #include "oyatzee.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
+/* QT */
 #include <qmessagebox.h>
 #include <qpushbutton.h>
 #include <qpainter.h>
 #include <qlayout.h>
 
+/* STD */
 #include <stdlib.h>
 
 OYatzee::OYatzee( QWidget *parent , const char *name, WFlags fl ) : QMainWindow( parent , name , fl )
@@ -41,7 +47,7 @@ OYatzee::OYatzee( QWidget *parent , const char *name, WFlags fl ) : QMainWindow(
 
 void OYatzee::slotEndRound( int item )
 {
-	qDebug( "Der User hat Nummer %d ausgewählt" , item );
+	odebug << "Der User hat Nummer " << item << " ausgewählt" << oendl; 
 
 	/*
 	 * if the user clicked on Total, Bonus or Score and thus not on a 
@@ -109,7 +115,7 @@ void OYatzee::slotEndRound( int item )
 	sb->nextRB(currentPlayer-1)->updateMap( item , points );
 	nextPlayer();
 
-	qDebug( "Punkte: %d" , points );
+	odebug << "Punkte: " << points << "" << oendl; 
 }
 
 void OYatzee::nextPlayer()
@@ -156,7 +162,7 @@ OYatzee::~OYatzee()
 void OYatzee::detectPosibilities()
 {
 	posibilities.clear();
-	qDebug( "running detectPosibilities()" );
+	odebug << "running detectPosibilities()" << oendl; 
 	
 	Dice *d = dw->diceList.first();
 
@@ -261,47 +267,47 @@ void OYatzee::displayPossibilites()
 {
 //X 	for ( QValueListInt::Iterator it = posibilities.begin() ; it != posibilities.end(); ++it )
 //X 	{
-//X 		qDebug( QString::number( *it ) );
+//X 		odebug << QString::number( *it ) << oendl; 
 //X 		switch ( *it )
 //X 		{
 //X 			case Ones:
-//X 				qDebug( "1er" );
+//X 				odebug << "1er" << oendl; 
 //X 				break;
 //X 			case Twos:
-//X 				qDebug( "2er" );
+//X 				odebug << "2er" << oendl; 
 //X 				break;
 //X 			case Threes:
-//X 				qDebug( "3er" );
+//X 				odebug << "3er" << oendl; 
 //X 				break;
 //X 			case Fours:
-//X 				qDebug( "4er" );
+//X 				odebug << "4er" << oendl; 
 //X 				break;
 //X 			case Fives:
-//X 				qDebug( "5er" );
+//X 				odebug << "5er" << oendl; 
 //X 				break;
 //X 			case Sixes:
-//X 				qDebug( "6er" );
+//X 				odebug << "6er" << oendl; 
 //X 				break;
 //X 			case ThreeOfAKind:
-//X 				qDebug( "3oaK" );
+//X 				odebug << "3oaK" << oendl; 
 //X 				break;
 //X 			case FourOfAKind:
-//X 				qDebug( "4oaK" );
+//X 				odebug << "4oaK" << oendl; 
 //X 				break;
 //X 			case FullHouse:
-//X 				qDebug( "Full House" );
+//X 				odebug << "Full House" << oendl; 
 //X 				break;
 //X 			case SStraight:
-//X 				qDebug( "Short S" );
+//X 				odebug << "Short S" << oendl; 
 //X 				break;
 //X 			case LStraight:
-//X 				qDebug( "Long S" );
+//X 				odebug << "Long S" << oendl; 
 //X 				break;
 //X 			case Yatzee:
-//X 				qDebug( "Yatzee!" );
+//X 				odebug << "Yatzee!" << oendl; 
 //X 				break;
 //X 			case Chance:
-//X 				qDebug( "Chance" );
+//X 				odebug << "Chance" << oendl; 
 //X 				break;
 //X 		}
 //X 	}
@@ -335,7 +341,7 @@ void OYatzee::slotStartGame()
 
 void OYatzee::slotRollDices()
 {
-	qDebug( "Roll nummer: %d" , ps.at( currentPlayer-1 )->turn );
+	odebug << "Roll nummer: " << ps.at( currentPlayer-1 )->turn << "" << oendl; 
 
 	if ( ps.at( currentPlayer-1 )->turn == 3 )
 	{
@@ -353,9 +359,9 @@ void OYatzee::slotRollDices()
 			d->roll();
 	}
 	
-//	qDebug( "Roll nummer (vorher): %d" , ps.at( currentPlayer-1 )->turn );
+//	odebug << "Roll nummer (vorher): " << ps.at( currentPlayer-1 )->turn << "" << oendl; 
 	ps.at(currentPlayer-1)->turn++;
-//	qDebug( "Roll nummer (nachher): %d" , ps.at( currentPlayer-1 )->turn );
+//	odebug << "Roll nummer (nachher): " << ps.at( currentPlayer-1 )->turn << "" << oendl; 
 
 	detectPosibilities();
 }
@@ -391,7 +397,7 @@ Resultboard* Scoreboard::nextRB( int currentPlayer )
 
 	b = rbList.at( currentPlayer );
 	
-	qDebug( "Anzahl: %d" ,	rbList.count() );
+	odebug << "Anzahl: " << rbList.count() << "" << oendl; 
 
 	return b;
 }		
@@ -608,7 +614,7 @@ void Resultboard::paintEvent( QPaintEvent* )
 	for ( ; it != pMap.end() ; ++it )
 	{
 		int i = it.key();
-		qDebug( "ok: %d , %d" , i , it.data() );
+		odebug << "ok: " << i << " , " << it.data() << "" << oendl; 
 		p.drawText( 0, i*cell_height , cell_width , cell_height , Qt::AlignCenter , QString::number( it.data() ) );
 	}
 

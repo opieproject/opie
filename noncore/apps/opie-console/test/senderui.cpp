@@ -26,15 +26,15 @@ SenderUI::SenderUI()
     prof.writeEntry("Device",str );
     prof.writeEntry("Baud", 19200 );
 
-    qWarning("prof " + prof.readEntry("Device")  + " " + str);
+    owarn << "prof " + prof.readEntry("Device")  + " " + str << oendl; 
     ser = new IOSerial(prof);
     connect(ser, SIGNAL(received(const QByteArray&) ),
             this, SLOT(got(const QByteArray&) ) );
 
     if ( ser->open() )
-        qWarning("opened!!!");
+        owarn << "opened!!!" << oendl; 
     else
-        qWarning("could not open");
+        owarn << "could not open" << oendl; 
 
 
 }
@@ -52,12 +52,12 @@ void SenderUI::slotSendFile() {
 
 void SenderUI::slotSend() {
     QCString str = MultiLineEdit1->text().utf8();
-    qWarning("sending: %s", str.data() );
+    owarn << "sending: " << str.data() << "" << oendl; 
     str = str.replace( QRegExp("\n"), "\r");
     ser->send( str );
 }
 void SenderUI::got(const QByteArray& ar) {
-    qWarning("got:");
+    owarn << "got:" << oendl; 
     for ( uint i = 0; i < ar.count(); i++ ) {
         printf("%c", ar[i] );
     }
@@ -66,13 +66,13 @@ void SenderUI::got(const QByteArray& ar) {
 
 void SenderUI::fileTransComplete() {
 
-    qWarning("file transfer complete");
+    owarn << "file transfer complete" << oendl; 
 }
 void SenderUI::send() {
 
 }
 void SenderUI::slotRev(){
-qWarning("Going to receive!");
+owarn << "Going to receive!" << oendl; 
 FileReceive *rev = new FileReceive( FileReceive::SZ, ser );
 rev->receive();
 

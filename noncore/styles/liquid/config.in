@@ -1,4 +1,4 @@
   config LIQUID
     boolean "opie-liquid (Mosfet's well known Liquid GUI style from KDE)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBQTAUX
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBQTAUX && LIBOPIE2CORE

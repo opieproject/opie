@@ -23,7 +23,9 @@
 #include <opie2/oapplication.h>
 #include <opie2/oconfig.h>
 #include <opie2/odevice.h>
-using namespace Opie;
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+using namespace Opie::Net;
 #endif
 
 /* QT */
@@ -40,15 +42,9 @@ using namespace Opie;
 #include <qspinbox.h>
 #include <qtextstream.h>
 
-/* POSIX */
+/* STD */
 #include <assert.h>
 
-using namespace Opie::Core;
-using namespace Opie::Net;
-using namespace Opie::Core;
-using namespace Opie::Net;
-using namespace Opie::Core;
-using namespace Opie::Net;
 WellenreiterConfigWindow* WellenreiterConfigWindow::_instance = 0;
 
 WellenreiterConfigWindow::WellenreiterConfigWindow( QWidget * parent, const char * name, WFlags f )
@@ -116,7 +112,7 @@ void WellenreiterConfigWindow::performAutodetection()
     //      and sleep a second, so that it looks
     //      like we're actually doing something fancy... ;-)
 
-    qDebug( "WellenreiterConfigWindow::performAutodetection()" );
+    odebug << "WellenreiterConfigWindow::performAutodetection()" << oendl; 
 
     // try to guess device type
     QFile m( "/proc/modules" );
@@ -137,7 +133,7 @@ void WellenreiterConfigWindow::performAutodetection()
         {
             deviceType->setCurrentItem( devicetype );
             _guess = devicetype;
-            qDebug( "Wellenreiter: guessed device type to be #%d", devicetype );
+            odebug << "Wellenreiter: guessed device type to be #" << devicetype << "" << oendl; 
         }
     }
 }
@@ -241,7 +237,7 @@ void WellenreiterConfigWindow::changedStationAction(int t)
 void WellenreiterConfigWindow::getCaptureFileNameClicked()
 {
     QString name = ( (WellenreiterMainWindow*) qApp->mainWidget() )->getFileName(true);
-    qDebug( "name = %s", (const char*) name );
+    odebug << "name = " << (const char*) name << "" << oendl; 
     if ( !name.isEmpty() )
     {
         captureFileName->setText( name );
@@ -316,11 +312,11 @@ void WellenreiterConfigWindow::performAction( const QString& type,
     }
     else
     {
-        qWarning( "WellenreiterConfigWindow::performAction(): unknown type '%s'", (const char*) type );
+        owarn << "WellenreiterConfigWindow::performAction(): unknown type '" << (const char*) type << "'" << oendl; 
         return;
     }
 
-    qDebug( "for event '%s' I'm going to perform action %d (script='%s')", (const char*) type, action, (const char*) script );
+    odebug << "for event '" << (const char*) type << "' I'm going to perform action " << action << " (script='" << (const char*) script << "')" << oendl; 
 
     switch( action )
     {
@@ -345,9 +341,9 @@ void WellenreiterConfigWindow::performAction( const QString& type,
             script = script.replace( QRegExp( "$WEP" ), wep ? QString( "true" ) : QString( "false" ) );
             script = script.replace( QRegExp( "$CHAN" ), QString::number( channel ) );
 
-            qDebug( "going to call script '%s'", (const char*) script );
+            odebug << "going to call script '" << (const char*) script << "'" << oendl; 
             ::system( script );
-            qDebug( "script returned." );
+            odebug << "script returned." << oendl; 
             return;
         }
         default: assert( false );
@@ -361,7 +357,7 @@ void WellenreiterConfigWindow::load()
     #warning Persistent Configuration not yet implemented for standalone X11 build
     performAutodetection();
 #else
-    qDebug( "loading configuration settings..." );
+    odebug << "loading configuration settings..." << oendl; 
 
     /* This is dumb monkey typing stuff... We _need_ to do this automatically! */
 
@@ -439,7 +435,7 @@ void WellenreiterConfigWindow::save()
 #ifdef Q_WS_X11
     #warning Persistent Configuration not yet implemented for standalone X11 build
 #else
-    qDebug( "saving configuration settings..." );
+    odebug << "saving configuration settings..." << oendl; 
 
     /* This is dumb monkey typing stuff... We _need_ to do this automatically! */
 

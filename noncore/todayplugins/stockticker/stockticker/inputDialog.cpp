@@ -1,5 +1,12 @@
 #include "inputDialog.h"
+#include "helpwindow.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+#include <qpe/config.h>
+using namespace Opie::Core;
+
+/* QT */
 #include <qapplication.h>
 #include <qlayout.h>
 #include <qcheckbox.h>
@@ -9,16 +16,11 @@
 #include <qwhatsthis.h>
 #include <qlabel.h>
 #include <qlayout.h>
-#include <qpe/config.h>
 #include <qstringlist.h>
-using namespace Opie::Core;
-using namespace Opie::Core;
 #include <qmainwindow.h>
-#include "helpwindow.h"
 
+/* STD */
 #include <stdlib.h>
-// #include <sys/stat.h>
-// #include <unistd.h>
 
 InputDialog::InputDialog( )
  : QMainWindow( 0x0, 0x0, WStyle_ContextHelp ) {
@@ -54,7 +56,7 @@ void InputDialog::doLookup() {
     QString url = "\"http://finance.yahoo.com/l?m=&s="+LineEdit1->text()+"\"";
     QString tempHtml = "/tmp/stockticker.html";
      QString cmd = "wget -O "+tempHtml+" "+url;
-     qDebug(cmd);
+     odebug << cmd << oendl; 
 
 
 /*
@@ -76,7 +78,7 @@ void InputDialog::doLookup() {
 }
 
 void InputDialog::showBrowser(OProcess*) {
-    qDebug("BLAH");
+    odebug << "BLAH" << oendl; 
     QString tempHtml = "/tmp/stockticker.html";
 
     HelpWindow *StockLookup = new HelpWindow( tempHtml,".",this, "SymbolLookup");

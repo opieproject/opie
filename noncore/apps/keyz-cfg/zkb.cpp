@@ -364,7 +364,7 @@ State* Keymap::getStateByLabel(const QString& label) {
 		}
 	}
 
-//	qDebug("look for: %s\n", (const char*) name.utf8());
+//	odebug << "look for: " << (const char*) name.utf8() << "\n" << oendl; 
 	QMap<QString, State*>::Iterator sit = states.find(name);
 	if (sit != states.end()) {
 		state = sit.data();
@@ -416,7 +416,7 @@ bool Keymap::setCurrentState(State* state) {
 			if (tit != stateLabelMap.end()) {
 				currentLabel = tit.data();
 			} else {
-//				qDebug("no label for: " + currentStateName + "\n");
+//				odebug << "no label for: " + currentStateName + "\n" << oendl; 
 				currentLabel = "";
 			}
 

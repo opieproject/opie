@@ -17,15 +17,23 @@
 ** not clear to you.
 **
 **********************************************************************/ 
-#include <stdlib.h>
+#include "common.h"   
+#include "datacache.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
+#include <qpe/timestring.h>
+using namespace Opie::Core;
+
+/* QT */
 #include <qstring.h>
 #include <qheader.h>
 #include <qvector.h>
 #include <qdatetime.h>
-#include <qpe/timestring.h>
-#include "common.h"
-#include "datacache.h"
+
+/* STD */
 #include <assert.h>
+#include <stdlib.h>
 
 static const int del_flag = 0x1;
 static const int new_flag = 0x2;
@@ -312,7 +320,7 @@ void TVVariant::load(QDataStream &s )
             }
       break;
         default:
-      qFatal("Unrecognized data type");
+      ofatal << "Unrecognized data type" << oendl; 
     }
 }
 
@@ -1078,7 +1086,7 @@ QDataStream &operator>>( QDataStream &s, DataElem &d)
 
     s >> size; /* redundent data but makes streaming easier */
     if (size != d.getNumFields()) {
-        qWarning("DataSize mis-match");
+        owarn << "DataSize mis-match" << oendl; 
         return s; /* sanity check failed.. don't load */
     }
 
@@ -1377,7 +1385,7 @@ bool DataElem::contains(int i, TVVariant v) const
         case TVVariant::Date:
             break;
         default:
-            qWarning("Tried to compare unknown data type");
+            owarn << "Tried to compare unknown data type" << oendl; 
     }
     return FALSE;
 }
@@ -1403,7 +1411,7 @@ bool DataElem::startsWith(int i, TVVariant v) const
         case TVVariant::Date:
             return FALSE;
         default:
-            qWarning("Tried to compare unknown data type");
+            owarn << "Tried to compare unknown data type" << oendl; 
     }
     return FALSE;
 }
@@ -1429,7 +1437,7 @@ bool DataElem::endsWith(int i, TVVariant v) const
         case TVVariant::Date:
             return FALSE;
         default:
-            qWarning("Tried to compare unknown data type");
+            owarn << "Tried to compare unknown data type" << oendl; 
     }
     return FALSE;
 }
@@ -1461,7 +1469,7 @@ bool DataElem::closer(DataElem*d1, DataElem *d2, TVVariant target, int column)
     if(d2) {
         if (type != d2->getField(column).type()) {
                 /* can't do compare */
-                qWarning("Tried to compare two incompatable types");
+                owarn << "Tried to compare two incompatable types" << oendl; 
                 return FALSE;
         }
         return target.closer(d1->getField(column), d2->getField(column));

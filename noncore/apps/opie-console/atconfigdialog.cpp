@@ -1,4 +1,11 @@
+#include "atconfigdialog.h"
+#include "io_modem.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
+/* QT */
 #include <qlineedit.h>
 #include <qspinbox.h>
 #include <qlayout.h>
@@ -6,10 +13,6 @@
 #include <qtabwidget.h>
 #include <qlabel.h>
 #include <qscrollview.h>
-
-#include "atconfigdialog.h"
-#include "io_modem.h"
-
 
 ATConfigDialog::ATConfigDialog(  QWidget* parent, const char* name, bool modal, WFlags fl )
     : QDialog( parent, name, modal, fl ) {
@@ -152,7 +155,7 @@ QWidget* ATConfigDialog::tab1( QWidget* parent ) {
 
 
 void ATConfigDialog::readConfig( const Profile& config ) {
-    qWarning("config in atconfigdialog");
+    owarn << "config in atconfigdialog" << oendl; 
 
     initStringLine->setText( config.readEntry("InitString", MODEM_DEFAULT_INIT_STRING ) );
     resetStringLine->setText( config.readEntry("ResetString", MODEM_DEFAULT_RESET_STRING ) );

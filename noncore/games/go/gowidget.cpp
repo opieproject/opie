@@ -20,18 +20,19 @@
 
 #include "gowidget.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
 #include <qpe/config.h>
 #include <qpe/resource.h>
+using namespace Opie::Core;
 
+/* QT */
 #include <qpainter.h>
 #include <qtoolbar.h>
 #include <qmenubar.h>
 #include <qaction.h>
 #include <qapplication.h> //processEvents()
 #include <qlabel.h>
-
-//#include <stdio.h>
-
 
 static const enum bVal computer_color = BLACK;
 
@@ -448,7 +449,7 @@ void	placestone (enum bVal c, short x, short y )
 
 void	intrMoveReport(enum bVal c ,char *coord ,char *reason )
 {
-    qDebug( "intrMoveReport colour %d, %s %s", c, coord, reason );
+    odebug << "intrMoveReport colour " << c << ", " << coord << " " << reason << "" << oendl; 
 }
 
 void	intrPrisonerReport( short blackcnt, short whitecnt )

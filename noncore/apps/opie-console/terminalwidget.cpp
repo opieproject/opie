@@ -1,3 +1,10 @@
+#include "terminalwidget.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
+/* QT */
 #include <qlabel.h>
 #include <qcheckbox.h>
 #include <qcombobox.h>
@@ -5,8 +12,6 @@
 #include <qhgroupbox.h>
 #include <qhbuttongroup.h>
 #include <qlayout.h>
-
-#include "terminalwidget.h"
 
 namespace {
     enum TermIds {
@@ -69,7 +74,7 @@ TerminalWidget::TerminalWidget( const QString& name, QWidget* parent,
     m_lroot->addStretch( 0 );
 
     // Fill in some options
-    qWarning("Options for terminal box");
+    owarn << "Options for terminal box" << oendl; 
     m_terminalBox->insertItem( tr("VT 100"), 0 ); // /*, id_term_vt100*/ );
     m_terminalBox->insertItem( tr("VT 102"), 1 );  // /* , id_term_vt102 */);
     m_terminalBox->insertItem( tr("Linux Console"), 2 ); //, id_term_linux );

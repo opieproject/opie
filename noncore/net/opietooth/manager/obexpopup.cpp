@@ -16,7 +16,7 @@ using namespace OpieTooth;
 ObexPopup::ObexPopup()
         : QPopupMenu()
 {
-    qWarning("RfcCommPopup c'tor");
+    owarn << "RfcCommPopup c'tor" << oendl; 
 
     QAction* a;
 
@@ -36,7 +36,7 @@ ObexPopup::~ObexPopup()
 void ObexPopup::slotPush()
 {
 
-    qWarning("push something");
+    owarn << "push something" << oendl; 
 
     ObexDialog obexDialog;
     QPEApplication::execDialog( &obexDialog );

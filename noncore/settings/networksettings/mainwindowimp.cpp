@@ -79,7 +79,7 @@ MainWindowImp::MainWindowImp(QWidget *parent, const char *name, WFlags) : MainWi
          */
         if (m_handledIfaces.contains( *ni) )
         {
-            qDebug("Not up iface handled by module");
+            odebug << "Not up iface handled by module" << oendl; 
             continue;
         }
         bool found = false;
@@ -219,7 +219,7 @@ void MainWindowImp::getAllInterfaces()
         int flags = 0;
         if ( m_handledIfaces.contains( (*it) ) )
         {
-            qDebug(" %s is handled by a module", (*it).latin1() );
+            odebug << " " << (*it).latin1() << " is handled by a module" << oendl; 
             continue;
         }
         //    int family;
@@ -249,7 +249,7 @@ void MainWindowImp::getAllInterfaces()
         else
             i->setHardwareName("Unknown");
 
-        qWarning("Adding interface %s to interfaceNames\n", ifr.ifr_name);
+        owarn << "Adding interface " << ifr.ifr_name << " to interfaceNames\n" << oendl; 
         interfaceNames.insert(i->getInterfaceName(), i);
         updateInterface(i);
         connect(i, SIGNAL(updateInterface(Interface*)),
@@ -265,7 +265,7 @@ void MainWindowImp::getAllInterfaces()
             ilist = it.key()->getInterfaces();
             for( i = ilist.first(); i != 0; i = ilist.next() )
             {
-                qWarning("Adding interface %s to interfaceNames\n", i->getInterfaceName().latin1() );
+                owarn << "Adding interface " << i->getInterfaceName().latin1() << " to interfaceNames\n" << oendl; 
                 interfaceNames.insert(i->getInterfaceName(), i);
                 updateInterface(i);
                 connect(i, SIGNAL(updateInterface(Interface*)),
@@ -283,7 +283,7 @@ void MainWindowImp::getAllInterfaces()
 void MainWindowImp::loadModules(const QString &path)
 {
 #ifdef DEBUG
-    qDebug("MainWindowImp::loadModules: %s", path.latin1());
+    odebug << "MainWindowImp::loadModules: " << path.latin1() << "" << oendl; 
 #endif
     QDir d(path);
     if(!d.exists())
@@ -304,7 +304,7 @@ void MainWindowImp::loadModules(const QString &path)
         {
 #endif
             loadPlugin(path + "/" + fi->fileName());
-            qDebug("loaded plugin: >%s< ",QString(path + "/" + fi->fileName()).latin1());
+            odebug << "loaded plugin: >" << QString(path + "/" + fi->fileName()).latin1() << "< " << oendl; 
         }
         ++it;
     }
@@ -319,7 +319,7 @@ void MainWindowImp::loadModules(const QString &path)
 Module* MainWindowImp::loadPlugin(const QString &pluginFileName, const QString &resolveString)
 {
 #ifdef DEBUG
-    qDebug("MainWindowImp::loadPlugin: %s: resolving %s", pluginFileName.latin1(), resolveString.latin1());
+    odebug << "MainWindowImp::loadPlugin: " << pluginFileName.latin1() << ": resolving " << resolveString.latin1() << "" << oendl; 
 #endif
 #ifdef QWS
     QLibrary *lib = new QLibrary(pluginFileName);
@@ -327,7 +327,7 @@ Module* MainWindowImp::loadPlugin(const QString &pluginFileName, const QString &
     if( !functionPointer )
     {
 #ifdef DEBUG
-        qDebug("MainWindowImp::loadPlugin: Warning: %s is not a plugin", pluginFileName.latin1());
+        odebug << "MainWindowImp::loadPlugin: Warning: " << pluginFileName.latin1() << " is not a plugin" << oendl; 
 #endif
         delete lib;
         return NULL;
@@ -337,7 +337,7 @@ Module* MainWindowImp::loadPlugin(const QString &pluginFileName, const QString &
     if(object == NULL)
     {
 #ifdef DEBUG
-        qDebug("MainWindowImp: Couldn't create object, but did load library!");
+        odebug << "MainWindowImp: Couldn't create object, but did load library!" << oendl; 
 #endif
         delete lib;
         return NULL;
@@ -352,7 +352,7 @@ Module* MainWindowImp::loadPlugin(const QString &pluginFileName, const QString &
     QLibrary *lib = loader->library(pluginFileName);
     if( !lib || !lib->hasSymbol(resolveString) )
     {
-        qDebug(QString("MainWindowImp::loadPlugin: File: %1 is not a plugin, but though was.").arg(pluginFileName).latin1());
+        odebug << QString("MainWindowImp::loadPlugin: File: %1 is not a plugin, but though was.").arg(pluginFileName).latin1() << oendl; 
         return NULL;
     }
     // Try to get an object.
@@ -360,12 +360,12 @@ Module* MainWindowImp::loadPlugin(const QString &pluginFileName, const QString &
     if(object == NULL)
     {
 #ifdef DEBUG
-        qDebug("MainWindowImp: Couldn't create object, but did load library!");
+        odebug << "MainWindowImp: Couldn't create object, but did load library!" << oendl; 
 #endif
         return NULL;
     }
 #ifdef DEBUG
-    qDebug("MainWindowImp::loadPlugin:: Found object, storing.");
+    odebug << "MainWindowImp::loadPlugin:: Found object, storing." << oendl; 
 #endif
     // Store for deletion later
     libraries.insert(object, lib);
@@ -411,7 +411,7 @@ void MainWindowImp::addClicked()
                 Interface *i = (it.key())->addNewInterface(item->text(0));
                 if(i)
                 {
-                    qDebug("iface name %s",i->getInterfaceName().latin1());
+                    odebug << "iface name " << i->getInterfaceName().latin1() << "" << oendl; 
                     interfaceNames.insert(i->getInterfaceName(), i);
                     updateInterface(i);
                 }
@@ -513,7 +513,7 @@ void MainWindowImp::informationClicked()
         {
             QPEApplication::showWidget( moduleInformation );
 #ifdef DEBUG
-            qDebug("MainWindowImp::informationClicked:: Module owner has created, we showed.");
+            odebug << "MainWindowImp::informationClicked:: Module owner has created, we showed." << oendl; 
 #endif
             return;
         }
@@ -650,7 +650,7 @@ void MainWindowImp::removeProfile()
         for( it = items.begin(); it != items.end(); ++it )
         {
             QString interfaceName = it.key()->getInterfaceName();
-            qDebug(interfaceName.latin1());
+            odebug << interfaceName.latin1() << oendl; 
             if(interfaces.setInterface(interfaceName + "_" + profileToRemove))
             {
                 interfaces.removeInterface();
@@ -719,7 +719,7 @@ void MainWindowImp::makeChannel()
 void MainWindowImp::receive(const QCString &msg, const QByteArray &arg)
 {
     bool found = false;
-    qDebug("MainWindowImp::receive QCop msg >"+msg+"<");
+    odebug << "MainWindowImp::receive QCop msg >"+msg+"<" << oendl; 
     if (msg == "raise")
     {
         raise();
@@ -729,12 +729,12 @@ void MainWindowImp::receive(const QCString &msg, const QByteArray &arg)
     QString dest = msg.left(msg.find("("));
     QCString param = msg.right(msg.length() - msg.find("(") - 1);
     param = param.left( param.length() - 1 );
-    qDebug("dest >%s< param >"+param+"<",dest.latin1());
+    odebug << "dest >" << dest.latin1() << "< param >"+param+"<" << oendl; 
 
     QMap<Module*, QLibrary*>::Iterator it;
     for( it = libraries.begin(); it != libraries.end(); ++it )
     {
-        qDebug("plugin >%s<", it.key()->type().latin1() );
+        odebug << "plugin >" << it.key()->type().latin1() << "<" << oendl; 
         if(it.key()->type() == dest)
         {
             it.key()->receive( param, arg );
@@ -744,5 +744,5 @@ void MainWindowImp::receive(const QCString &msg, const QByteArray &arg)
 
 
     if (found) QPEApplication::setKeepRunning();
-    else qDebug("Huh what do ya want");
+    else odebug << "Huh what do ya want" << oendl; 
 }

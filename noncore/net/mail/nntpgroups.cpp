@@ -53,7 +53,7 @@ void NNTPGroups::storeValues()
     subscribedGroups.clear();
     for ( ; list_it.current(); ++list_it ) {
         if ( ( (QCheckListItem*)list_it.current() )->isOn() ) {
-            qDebug(list_it.current()->text(0) );
+            odebug << list_it.current()->text(0) << oendl; 
             subscribedGroups.append(  list_it.current()->text(0) );
         }
     }

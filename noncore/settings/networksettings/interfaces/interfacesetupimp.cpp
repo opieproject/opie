@@ -46,7 +46,7 @@ InterfaceSetupImp::~InterfaceSetupImp(){
 bool InterfaceSetupImp::saveChanges(){
   bool error;
   QString iface = interfaces->getInterfaceName(error);
-  qDebug("InterfaceSetupImp::saveChanges saves interface %s", iface.latin1() );
+  odebug << "InterfaceSetupImp::saveChanges saves interface " << iface.latin1() << "" << oendl; 
   if(!saveSettings())
     return false;
 
@@ -72,7 +72,7 @@ bool InterfaceSetupImp::saveChanges(){
     qApp->processEvents();
 
     if (!restart.start(OProcess::Block, OProcess::NoCommunication) ) {
-      qWarning("unstable to spawn ifdown/ifup");
+      owarn << "unstable to spawn ifdown/ifup" << oendl; 
     }
 
     owait->hide();
@@ -157,7 +157,7 @@ void InterfaceSetupImp::setProfile(const QString &profile){
       if(!interfaces->setMapping(interface->getInterfaceName())){
         interfaces->addMapping(interface->getInterfaceName());
         if(!interfaces->setMapping(interface->getInterfaceName())){
-      qDebug("InterfaceSetupImp: Added Mapping, but still can't setInterface.");
+      odebug << "InterfaceSetupImp: Added Mapping, but still can't setInterface." << oendl; 
           return;
     }
       }
@@ -167,7 +167,7 @@ void InterfaceSetupImp::setProfile(const QString &profile){
     else{
       interfaces->addInterface(newInterfaceName, INTERFACES_FAMILY_INET, INTERFACES_METHOD_DHCP);
       if(!interfaces->setInterface(newInterfaceName)){
-        qDebug("InterfaceSetupImp: Added interface, but still can't setInterface.");
+        odebug << "InterfaceSetupImp: Added interface, but still can't setInterface." << oendl; 
         return;
       }
     }
@@ -185,7 +185,7 @@ void InterfaceSetupImp::setProfile(const QString &profile){
   // IP Information
   autoStart->setChecked(interfaces->isAuto(interface->getInterfaceName()));
   QString dns = interfaces->getInterfaceOption("up "DNSSCRIPT" -a", error);
-  qDebug("dns >%s<",dns.latin1());
+  odebug << "dns >" << dns.latin1() << "<" << oendl; 
   if(dns.contains(" ")){
     firstDNSLineEdit->setText(dns.mid(0, dns.find(" ")));
     secondDNSLineEdit->setText(dns.mid(dns.find(" ")+1, dns.length()));
@@ -199,8 +199,8 @@ void InterfaceSetupImp::setProfile(const QString &profile){
 
 
 
-  qWarning("InterfaceSetupImp::setProfile(%s)\n", profile.latin1());
-  qWarning("InterfaceSetupImp::setProfile: iface is %s\n", interfaces->getInterfaceName(error).latin1());
+  owarn << "InterfaceSetupImp::setProfile(" << profile.latin1() << ")\n" << oendl; 
+  owarn << "InterfaceSetupImp::setProfile: iface is " << interfaces->getInterfaceName(error).latin1() << "\n" << oendl; 
 
 }
 

@@ -183,7 +183,7 @@ void ComposeMail::removeAttachment()
 void ComposeMail::accept()
 {
     if ( checkBoxLater->isChecked() ) {
-        qDebug(  "Send later" );
+        odebug << "Send later" << oendl; 
     }
 
 #if 0
@@ -256,7 +256,7 @@ void ComposeMail::reject()
             txt.append( "\n--\n" );
             txt.append( sigMultiLine->text() );
         }
-        qDebug(txt);
+        odebug << txt << oendl; 
         mail->setMessage( txt );
 
         /* only use the default drafts folder name! */
@@ -292,7 +292,7 @@ AttachViewItem::AttachViewItem( QListView *parent, Attachment *att )
     : QListViewItem( parent )
 {
     attachment = att;
-    qDebug( att->getMimeType() );
+    odebug << att->getMimeType() << oendl; 
     setPixmap( 0, attachment->getDocLnk().pixmap().isNull() ?
                   Resource::loadPixmap( "UnknownDocument-14" ) :
                   attachment->getDocLnk().pixmap() );

@@ -16,9 +16,14 @@
 
 #include "fortunepluginwidget.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
 #include <qpe/config.h>
 #include <qpe/qcopenvelope_qws.h>
+using namespace Opie::Core;
+using namespace Opie::Ui;
 
+/* QT */
 #include <qvaluelist.h>
 #include <qtl.h>
 #include <qstring.h>
@@ -26,8 +31,6 @@
 #include <qobject.h>
 #include <qlayout.h>
 
-using namespace Opie::Core;
-using namespace Opie::Ui;
 FortunePluginWidget::FortunePluginWidget( QWidget *parent,  const char* name )
 	: QWidget( parent, name )
 {
@@ -67,7 +70,7 @@ void FortunePluginWidget::getFortune() {
 		this,  SLOT(slotStdOut(Opie::Core::OProcess*,char*,int) ) );
 
 	if(!fortuneProcess->start(OProcess::NotifyOnExit, OProcess::AllOutput) ) {
-		qWarning("could not start :(");
+		owarn << "could not start :(" << oendl; 
 		fortune->setText( QString("Failed to obtain fortune.") );
 		delete fortuneProcess;
 		fortuneProcess = 0;

@@ -11,7 +11,7 @@ using namespace OpieTooth;
  */
 PanPopup::PanPopup( OpieTooth::BTDeviceItem* item ) : QPopupMenu()  {
 
-    qWarning("PanPopup c'tor");
+    owarn << "PanPopup c'tor" << oendl; 
 
     m_item = item;
     QAction *a, *b, *c;

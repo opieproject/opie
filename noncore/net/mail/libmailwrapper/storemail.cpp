@@ -58,7 +58,7 @@ int Storemail::storeMail(const Opie::Core::OSmartPointer<Mail>&mail)
     mailmime * mimeMail = 0;
     mimeMail = createMimeMail(mail );
     if ( mimeMail == NULL ) {
-        qDebug( "storeMail: error creating mime mail" );
+        odebug << "storeMail: error creating mime mail" << oendl; 
         return 0;
     }
     char *data;
@@ -73,7 +73,7 @@ int Storemail::storeMail(const Opie::Core::OSmartPointer<Mail>&mail)
     mailmessage_free(msg);
     msg = 0;
     if (r != MAIL_NO_ERROR || !data) {
-        qDebug("Error fetching mime...");
+        odebug << "Error fetching mime..." << oendl; 
         ret = 0;
     }
 

@@ -1,13 +1,18 @@
+#include "krfblogin.h"
+#include "krfbconnection.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
+/* QT */
+#include <qtimer.h>
+
+/* STD */
 #include <assert.h>
-
-
 extern "C" {
 #include "vncauth.h"
 }
-
-#include "krfblogin.h"
-#include "krfbconnection.h"
-#include <qtimer.h>
 
 // The length of the various messages (used to decide how many bytes to
 // wait for).
@@ -52,7 +57,7 @@ KRFBLogin::KRFBLogin( KRFBConnection *con )
 	   con, SIGNAL( error(const QString&) ) );
 
 
-  qWarning( "Waiting for server version..." );
+  owarn << "Waiting for server version..." << oendl; 
 
   static QString statusMsg = tr( "Waiting for server version..." );
   emit status( statusMsg );
@@ -74,7 +79,7 @@ KRFBLogin::State KRFBLogin::state() const
 
 void KRFBLogin::gotServerVersion()
 {
-  qWarning( "Got server version" );
+  owarn << "Got server version" << oendl; 
 
   disconnect( con, SIGNAL( gotEnoughData() ), 
 	      this, SLOT( gotServerVersion() ) );
@@ -92,7 +97,7 @@ void KRFBLogin::gotServerVersion()
   if ( rfbString.find( regexp ) == -1 ) {
     static QString msg = tr( "Error: Invalid server version, %1" ).arg( rfbString );
 
-    qWarning( msg );
+    owarn << msg << oendl; 
     emit error( msg );
     currentState = Error;
     return;
@@ -106,20 +111,20 @@ void KRFBLogin::gotServerVersion()
     + (serverVersion[9] - '0') * 10
     + (serverVersion[10] - '0');
 
-  qWarning("Server Version: %03d.%03d", serverMajor, serverMinor );
+  owarn << "Server Version: " << serverMajor << "." << serverMinor << "" << oendl; 
 
   if ( serverMajor != 3 ) {
     QString msg = tr( "Error: Unsupported server version, %1" )
       .arg( rfbString );
 
-    qWarning( msg );
+    owarn << msg << oendl; 
     emit error( msg );
     currentState = Error;
     return;    
   }
   
   if ( serverMinor != 3 ) {
-    qWarning( "Minor version mismatch: %d", serverMinor );
+    owarn << "Minor version mismatch: " << serverMinor << "" << oendl; 
   }
 
   // Setup for the next state
@@ -143,7 +148,7 @@ void KRFBLogin::gotAuthScheme()
 
   switch ( scheme ) {
   case 0:
-    qWarning( "Failed" );
+    owarn << "Failed" << oendl; 
     // Handle failure
     connect( con, SIGNAL( gotEnoughData() ), SLOT( gotFailureReasonSize() ) );
     con->waitForData( FailureReasonSizeLength );
@@ -159,7 +164,7 @@ void KRFBLogin::gotAuthScheme()
     con->waitForData( ChallengeLength );
     break;
   default:
-    qWarning( "Unknown authentication scheme, 0x%08lx", scheme );
+    owarn << "Unknown authentication scheme, 0x" << scheme << "" << oendl; 
     currentState = Error;
     break;
   };
@@ -181,7 +186,7 @@ void KRFBLogin::getPassword()
 
   // Last chance to enter a password
   if ( con->options_->password.isNull() ) {
-    qWarning( "krfblogin needs a password" );
+    owarn << "krfblogin needs a password" << oendl; 
     emit passwordRequired( con );
   }
 
@@ -216,7 +221,7 @@ void KRFBLogin::gotAuthResult()
   con->read( &result, AuthResultLength );
   result = Swap32IfLE( result );
 
-  qWarning( "Authentication Result is 0x%08lx", result );
+  owarn << "Authentication Result is 0x" << result << "" << oendl; 
 
   static QString failed = tr( "Error: The password you specified was incorrect." );
   static QString tooMany = tr( "Error: Too many invalid login attempts have been made\n"
@@ -232,7 +237,7 @@ void KRFBLogin::gotAuthResult()
     con->gotRFBConnection();
     break;
   case AuthFailed:
-    qWarning( "Dammit" );
+    owarn << "Dammit" << oendl; 
     emit status( statusMsgFailed );
     emit error( failed );
     break;
@@ -241,13 +246,13 @@ void KRFBLogin::gotAuthResult()
     emit error( tooMany );    
     break;
   default:
-    qWarning( "Invalid authentication result, %lx", result );
+    owarn << "Invalid authentication result, " << result << "" << oendl; 
     break;
   }
 }
 
 void KRFBLogin::sendClientVersion()
 {
-  qWarning( "Sending client version" );
+  owarn << "Sending client version" << oendl; 
   con->write( (void*)"RFB 003.003\n", ClientVersionLength );
 }

@@ -43,7 +43,7 @@ void StatusMail::initAccounts(QList<Account>&accounts)
         }
         current->logout();
     }
-    qDebug("Pop3 init count: %i",currentPop3Stat.message_count);
+    odebug << "Pop3 init count: " << currentPop3Stat.message_count << "" << oendl; 
     currentPop3Stat.message_recent = currentPop3Stat.message_unseen = 0;
     lastPop3Stat.message_unseen = currentPop3Stat.message_unseen;
     lastPop3Stat.message_recent = currentPop3Stat.message_recent;
@@ -72,10 +72,10 @@ void StatusMail::check_current_stat(folderStat&targetStat)
             currentImapStat.message_count+=currentStat.message_count;
         } else if (it->getType() == MAILLIB::A_POP3) {
             currentPop3Stat.message_count+=currentStat.message_count;
-            qDebug("Pop3 count: %i",currentPop3Stat.message_count);
+            odebug << "Pop3 count: " << currentPop3Stat.message_count << "" << oendl; 
         }
     }
-    qDebug("Pop3 last: %i",lastPop3Stat.message_count);
+    odebug << "Pop3 last: " << lastPop3Stat.message_count << "" << oendl; 
     if (currentPop3Stat.message_count > lastPop3Stat.message_count) {
         currentPop3Stat.message_recent = currentPop3Stat.message_count - lastPop3Stat.message_count;
         currentPop3Stat.message_unseen = currentPop3Stat.message_recent;

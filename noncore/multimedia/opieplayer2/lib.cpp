@@ -106,10 +106,10 @@ Lib::Lib( InitializationMode initMode, XineVideoWidget* widget )
 
 void Lib::run()
 {
-    qDebug( "Lib::run() started" );
+    odebug << "Lib::run() started" << oendl; 
     initialize();
     m_initialized = true;
-    qDebug( "Lib::run() finished" );
+    odebug << "Lib::run() finished" << oendl; 
 }
 
 void Lib::initialize()
@@ -215,7 +215,7 @@ int Lib::play( const QString& fileName, int startPos, int start_time ) {
 void Lib::stop() {
     assert( m_initialized );
 
-    qDebug("<<<<<<<< STOP IN LIB TRIGGERED >>>>>>>");
+    odebug << "<<<<<<<< STOP IN LIB TRIGGERED >>>>>>>" << oendl; 
     xine_stop( m_stream );
 }
 
@@ -327,9 +327,9 @@ void Lib::ensureInitialized()
     if ( m_initialized )
         return;
 
-    qDebug( "waiting for initialization thread to finish" );
+    odebug << "waiting for initialization thread to finish" << oendl; 
     wait();
-    qDebug( "initialization thread finished!" );
+    odebug << "initialization thread finished!" << oendl; 
 }
 
 void Lib::setWidget( XineVideoWidget *widget )
@@ -422,7 +422,7 @@ void Lib::drawFrame( uint8_t* frame,  int width,  int height,  int bytes ) {
     assert( m_initialized );
 
     if ( !m_video ) {
-        qWarning("not showing video now");
+        owarn << "not showing video now" << oendl; 
         return;
     }
 

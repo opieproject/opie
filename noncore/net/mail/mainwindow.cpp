@@ -141,7 +141,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::appMessage(const QCString &, const QByteArray &)
 {
-    qDebug("appMessage not reached");
+    odebug << "appMessage not reached" << oendl; 
 }
 
 void MainWindow::slotAdjustLayout() {
@@ -175,32 +175,32 @@ void MainWindow::slotEditSettings()
 
 void MainWindow::slotShowFolders( bool )
 {
-   qDebug( "slotShowFolders not reached" );
+   odebug << "slotShowFolders not reached" << oendl; 
 }
 
 void MainWindow::refreshMailView(const QValueList<RecMailP>&)
 {
-   qDebug( "refreshMailView not reached" );
+   odebug << "refreshMailView not reached" << oendl; 
 }
 
 void MainWindow::mailLeftClicked(int, QListViewItem *,const QPoint&,int )
 {
-    qDebug( "mailLeftClicked not reached" );
+    odebug << "mailLeftClicked not reached" << oendl; 
 }
 
 void MainWindow::displayMail()
 {
-    qDebug("displayMail not reached");
+    odebug << "displayMail not reached" << oendl; 
 }
 
 void MainWindow::slotDeleteMail()
 {
-    qDebug("deleteMail not reached");
+    odebug << "deleteMail not reached" << oendl; 
 }
 
 void MainWindow::mailHold(int, QListViewItem *,const QPoint&,int  )
 {
-    qDebug("mailHold not reached");
+    odebug << "mailHold not reached" << oendl; 
 }
 
 void MainWindow::slotSendQueued()

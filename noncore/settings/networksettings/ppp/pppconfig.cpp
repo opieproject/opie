@@ -25,10 +25,10 @@ PPPConfigWidget::PPPConfigWidget( InterfacePPP* iface, QWidget *parent,
     }
 
     interface = iface;
-    qDebug("PPPConfigWidget::PPPConfigWidget");
-    qDebug(" interface->getHardwareName >%s<", interface->getHardwareName().latin1());
+    odebug << "PPPConfigWidget::PPPConfigWidget" << oendl; 
+    odebug << " interface->getHardwareName >" << interface->getHardwareName().latin1() << "<" << oendl; 
 
-    qDebug(" _pppdata->accname >%s<",interface->data()->accname().latin1());
+    odebug << " _pppdata->accname >" << interface->data()->accname().latin1() << "<" << oendl; 
 
 
   QVBoxLayout *layout = new QVBoxLayout( this );
@@ -58,9 +58,9 @@ PPPConfigWidget::~PPPConfigWidget()
 
 void PPPConfigWidget::accept()
 {
-    qDebug("PPPConfigWidget::accept");
-    qDebug(" _pppdata->accname >%s<",interface->data()->accname().latin1());
-    qDebug(" interface->getHardwareName >%s<", interface->getHardwareName().latin1());
+    odebug << "PPPConfigWidget::accept" << oendl; 
+    odebug << " _pppdata->accname >" << interface->data()->accname().latin1() << "<" << oendl; 
+    odebug << " interface->getHardwareName >" << interface->getHardwareName().latin1() << "<" << oendl; 
     interface->setInterfaceName( interface->data()->devname() );
     interface->setHardwareName( interface->data()->accname() );
     interface->save();

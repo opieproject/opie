@@ -67,13 +67,13 @@ void OpieMail::slotwriteMail(const QString&name,const QString&email)
 
 void OpieMail::slotComposeMail()
 {
-    qDebug( "Compose Mail" );
+    odebug << "Compose Mail" << oendl; 
     slotwriteMail(0l,0l);
 }
 
 void OpieMail::slotSendQueued()
 {
-    qDebug( "Send Queued" );
+    odebug << "Send Queued" << oendl; 
     SMTPaccount *smtp = 0;
 
     QList<Account> list = settings->getAccounts();
@@ -120,7 +120,7 @@ void OpieMail::slotSendQueued()
 
 void OpieMail::slotSearchMails()
 {
-    qDebug( "Search Mails" );
+    odebug << "Search Mails" << oendl; 
 }
 
 void OpieMail::slotEditSettings()
@@ -131,7 +131,7 @@ void OpieMail::slotEditSettings()
 
 void OpieMail::slotEditAccounts()
 {
-    qDebug( "Edit Accounts" );
+    odebug << "Edit Accounts" << oendl; 
     EditAccounts eaDialog( settings, this, 0, true,  WStyle_ContextHelp );
     eaDialog.slotAdjustColumns();
     QPEApplication::execDialog( &eaDialog );
@@ -180,7 +180,7 @@ void OpieMail::mailHold(int button, QListViewItem *item,const QPoint&,int  )
     MAILLIB::ATYPE mailtype = ((MailListViewItem*)mailView->currentItem() )->wrapperType();
     /* just the RIGHT button - or hold on pda */
     if (button!=2) {return;}
-    qDebug("Event right/hold");
+    odebug << "Event right/hold" << oendl; 
     if (!item) return;
     QPopupMenu *m = new QPopupMenu(0);
     if (m)
@@ -204,15 +204,15 @@ void OpieMail::mailHold(int button, QListViewItem *item,const QPoint&,int  )
 
 void OpieMail::slotShowFolders( bool show )
 {
-    qDebug( "Show Folders" );
+    odebug << "Show Folders" << oendl; 
     if ( show && folderView->isHidden() )
     {
-        qDebug( "-> showing" );
+        odebug << "-> showing" << oendl; 
         folderView->show();
     }
     else if ( !show && !folderView->isHidden() )
     {
-        qDebug( "-> hiding" );
+        odebug << "-> hiding" << oendl; 
         folderView->hide();
     }
 }

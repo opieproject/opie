@@ -133,7 +133,7 @@ void AudioWidget::sliderReleased() {
 }
 
 void AudioWidget::setPosition( long i ) {
-    //    qDebug("<<<<<<<<<<<<<<<<<<<<<<<<set position %d",i);
+    //    odebug << "<<<<<<<<<<<<<<<<<<<<<<<<set position " << i << "" << oendl; 
     updateSlider( i, mediaPlayerState.length() );
 }
 
@@ -187,7 +187,7 @@ void AudioWidget::loadSkin()
 void AudioWidget::setSeekable( bool isSeekable ) {
 
     if ( !isSeekable ) {
-        qDebug("<<<<<<<<<<<<<<file is STREAMING>>>>>>>>>>>>>>>>>>>");
+        odebug << "<<<<<<<<<<<<<<file is STREAMING>>>>>>>>>>>>>>>>>>>" << oendl; 
         if( !slider.isHidden()) {
             slider.hide();
         }
@@ -199,7 +199,7 @@ void AudioWidget::setSeekable( bool isSeekable ) {
         // this stops the slider from being moved, thus
         // does not stop stream when it reaches the end
         slider.show();
-        qDebug( " CONNECT SET POSTION " );
+        odebug << " CONNECT SET POSTION " << oendl; 
         connect( &mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
         connect( &mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
         connect( &slider, SIGNAL( sliderPressed() ), this, SLOT( sliderPressed() ) );
@@ -271,7 +271,7 @@ void AudioWidget::keyReleaseEvent( QKeyEvent *e) {
           break;
       case Key_F9: //activity
            hide();
-           //           qDebug("Audio F9");
+           //           odebug << "Audio F9" << oendl; 
            e->accept();
           break;
       case Key_F10: //contacts

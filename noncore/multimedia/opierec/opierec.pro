@@ -1,6 +1,4 @@
-#CONFIG   = qt warn_on  pdaudio
-CONFIG   = qt warn_on  opie
-#CONFIG    = qt warn_on  quick-app
+CONFIG   = qt warn_on
 HEADERS   = adpcm.h \
 	pixmaps.h \
 	helpwindow.h \
@@ -29,7 +27,7 @@ contains(CONFIG, pdaudio) {
 #  DESTDIR=$(QPEDIR)/bin
 }
 
-contains(CONFIG, opie) {
+!contains(CONFIG, pdaudio) {
   INCLUDEPATH += $(OPIEDIR)/include
   DEPENDPATH  += $(OPIEDIR)/include
   DESTDIR=$(OPIEDIR)/bin

@@ -13,6 +13,9 @@
 #include "status.h"
 #endif
 
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
 #include <qbitmap.h>
 #include <qmsgbox.h>
 #include <qfileinfo.h>
@@ -20,7 +23,7 @@
 Status::Status( QWidget *parent, const char *name, int Scheme, int Mode ) :
     QWidget( parent, name )
 {
-    qWarning("Status::Status");
+    owarn << "Status::Status" << oendl; 
     actualLifes = 0;
     actualLevel = 0;
 

@@ -206,7 +206,7 @@ namespace OpieTooth {
  */
     void BluezApplet::paintEvent( QPaintEvent* ) {
         QPainter p(this);
-        qDebug("paint bluetooth pixmap");
+        odebug << "paint bluetooth pixmap" << oendl; 
 
         if (bluezactive > 0) {
             p.drawPixmap( 0, 1,  bluezOnPixmap );

@@ -45,7 +45,7 @@ WLANImp::WLANImp( QWidget* parent, const char* name, Interface *i, bool modal, W
     parseSettingFile();
   }
   else
-    qDebug(QString("WLANImp: Can't open file: %1 for reading.").arg(wlanFile).latin1());
+    odebug << QString("WLANImp: Can't open file: %1 for reading.").arg(wlanFile).latin1() << oendl; 
   connect(networkType, SIGNAL(activated(int)), this, SLOT(typeChanged(int)));
 }
 
@@ -146,7 +146,7 @@ void WLANImp::changeAndSaveSettingFile(){
   QFile file(wlanFile);
 
   if (!file.open(IO_ReadWrite)){
-    qDebug(QString("WLANImp::changeAndSaveSettingFile(): Can't open file: %1 for writing.").arg(wlanFile).latin1());
+    odebug << QString("WLANImp::changeAndSaveSettingFile(): Can't open file: %1 for writing.").arg(wlanFile).latin1() << oendl; 
     return;
   }
 
@@ -236,7 +236,7 @@ void WLANImp::accept(){
   insert << "cardctl eject && cardctl insert";
 
   if (!insert.start(OProcess::DontCare, OProcess::NoCommunication) ) {
-    qWarning("could not start cardctl");
+    owarn << "could not start cardctl" << oendl; 
   }
 
   // Close out the dialog

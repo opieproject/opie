@@ -122,13 +122,13 @@ bool WLANModule::remove(Interface*){
 
 void WLANModule::receive(const QCString &param, const QByteArray &arg)
 {
-    qDebug("WLANModule::receive "+param);
+    odebug << "WLANModule::receive "+param << oendl; 
     QStringList params = QStringList::split(",",param);
     int count = params.count();
-    qDebug("WLANModule got %i params", count );
+    odebug << "WLANModule got " << count << " params" << oendl; 
     if (count < 2){
-        qDebug("Erorr less than 2 parameter");
-        qDebug("RETURNING");
+        odebug << "Erorr less than 2 parameter" << oendl; 
+        odebug << "RETURNING" << oendl; 
         return;
     }
 
@@ -137,38 +137,38 @@ void WLANModule::receive(const QCString &param, const QByteArray &arg)
     QString action;
     int countMsgs = 0;
     stream >> interface;
-    qDebug("got count? >%s<",interface.latin1());
+    odebug << "got count? >" << interface.latin1() << "<" << oendl; 
     if (interface == "count"){
-        qDebug("got count");
+        odebug << "got count" << oendl; 
         stream >> action;
-        qDebug("Got count num >%s<", action.latin1());
+        odebug << "Got count num >" << action.latin1() << "<" << oendl; 
         countMsgs = action.toInt();
     }
 
     QDialog *toShow;
     //while (! stream.atEnd() ){
     for (int i = 0; i < countMsgs; i++){
-        qDebug("start stream %d/%d",i,countMsgs);
+        odebug << "start stream " << i << "/" << countMsgs << "" << oendl; 
         if (stream.atEnd()){
-            qDebug("end of stream");
+            odebug << "end of stream" << oendl; 
             return;
         }
         stream >> interface;
-        qDebug("got iface");
+        odebug << "got iface" << oendl; 
         stream >> action;
-        qDebug("WLANModule got interface %s and acion %s", interface.latin1(), action.latin1());
+        odebug << "WLANModule got interface " << interface.latin1() << " and acion " << action.latin1() << "" << oendl; 
         // find interfaces
         Interface *ifa=0;
         for ( Interface *i=list.first(); i != 0; i=list.next() ){
             if (i->getInterfaceName() == interface){
-                qDebug("WLANModule found interface %s",interface.latin1());
+                odebug << "WLANModule found interface " << interface.latin1() << "" << oendl; 
                 ifa = i;
             }
         }
 
         if (ifa == 0){
-            qDebug("WLANModule Did not find %s",interface.latin1());
-            qDebug("skipping");
+            odebug << "WLANModule Did not find " << interface.latin1() << "" << oendl; 
+            odebug << "skipping" << oendl; 
             count = 0;
         }
 
@@ -195,9 +195,9 @@ void WLANModule::receive(const QCString &param, const QByteArray &arg)
             }
             QPEApplication::showWidget( wlanconfigWiget );
             stream >> value;
-            qDebug("WLANModule (build 4) is setting %s of %s to %s", action.latin1(), interface.latin1(), value.latin1() );
+            odebug << "WLANModule (build 4) is setting " << action.latin1() << " of " << interface.latin1() << " to " << value.latin1() << "" << oendl; 
             if (value.isEmpty()){
-                qDebug("value is empty!!!\nreturning");
+                odebug << "value is empty!!!\nreturning" << oendl; 
                 return;
             }
             if ( action.contains("ESSID") ){
@@ -218,10 +218,10 @@ void WLANModule::receive(const QCString &param, const QByteArray &arg)
 
             }else if (action.contains("Channel")){
                 bool ok;
-                qDebug("converting channel");
+                odebug << "converting channel" << oendl; 
                 int chan = value.toInt( &ok );
                 if (ok){
-                    qDebug("ok setting channel");
+                    odebug << "ok setting channel" << oendl; 
                     wlanconfigWiget->specifyChan->setChecked( true );
                     wlanconfigWiget->networkChannel->setValue( chan );
                 }
@@ -229,27 +229,27 @@ void WLANModule::receive(const QCString &param, const QByteArray &arg)
                 wlanconfigWiget->specifyAp->setChecked( true );
                 wlanconfigWiget->macEdit->setText( value );
             }else
-                qDebug("wlan plugin has no clue");
+                odebug << "wlan plugin has no clue" << oendl; 
         }
-        qDebug("next stream");
+        odebug << "next stream" << oendl; 
     }// while stream
-    qDebug("end of stream");
+    odebug << "end of stream" << oendl; 
     if (toShow) toShow->exec();
-    qDebug("returning");
+    odebug << "returning" << oendl; 
 }
 
 QWidget *WLANModule::getInfo( Interface *i)
 {
-    qDebug("WLANModule::getInfo start");
+    odebug << "WLANModule::getInfo start" << oendl; 
     WlanInfoImp *info = new WlanInfoImp(0, i->getInterfaceName(), Qt::WDestructiveClose);
     InterfaceInformationImp *information = new InterfaceInformationImp(info->tabWidget, "InterfaceSetupImp", i);
     info->tabWidget->insertTab(information, "TCP/IP", 0);
     info->tabWidget->setCurrentPage( 0 );
     info->tabWidget->showPage( information );
-    if (info->tabWidget->currentPage() == information ) qDebug("infotab OK");
-    else qDebug("infotab NOT OK");
-    qDebug("current idx %d", info->tabWidget->currentPageIndex());
-    qDebug("WLANModule::getInfo return");
+    if (info->tabWidget->currentPage() == information ) odebug << "infotab OK" << oendl; 
+    else odebug << "infotab NOT OK" << oendl; 
+    odebug << "current idx " << info->tabWidget->currentPageIndex() << "" << oendl; 
+    odebug << "WLANModule::getInfo return" << oendl; 
     return info;
 }
 

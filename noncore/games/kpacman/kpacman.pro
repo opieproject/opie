@@ -1,7 +1,5 @@
 TEMPLATE	= app
-#CONFIG		= qt warn_on 
 CONFIG		= qt warn_on 
-#TMAKE_CXXFLAGS	+= 
 HEADERS		= kpacmanwidget.h \
 		    referee.h \
 		    status.h \
@@ -34,7 +32,7 @@ SOURCES		= kpacmanwidget.cpp \
 		    main.cpp 
 INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
-LIBS            += -lqpe
+LIBS            += -lqpe -lopiecore2
 DESTDIR         = $(OPIEDIR)/bin
 TARGET		= kpacman
 

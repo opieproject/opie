@@ -1,8 +1,14 @@
+#include "kvncbookmarkdlg.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
+#include <qpe/global.h>
+using namespace Opie::Core;
+
+/* QT */
 #include <qdir.h>
 #include <qtextstream.h>
 #include <qlistbox.h>
-#include <qpe/global.h>
-#include "kvncbookmarkdlg.h"
 
 KVNCBookmarkDlg::KVNCBookmarkDlg( QWidget * parent, const char * name, WFlags f ) 
 
@@ -175,7 +181,7 @@ void KVNCBookmarkDlg::writeBookmarks(void)
         KRFBServer *server;
 
          for ( server=servers.first(); server != 0; server=servers.next() ) {
-		qDebug(server->name);
+		odebug << server->name << oendl; 
           t << "server=" << server->name << '\n';
 					t << "\thostname=" << server->hostname << '\n';
 					t << "\tpassword=" << encipher(server->password )<< '\n';

@@ -1,7 +1,10 @@
-
 #include "tabwidget.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
 using namespace Opie::Ui;
+
 TabWidget::TabWidget( QWidget* parent, const char* name )
     : OTabWidget( parent, name ) {
     connect(this, SIGNAL( currentChanged(QWidget*) ),
@@ -12,7 +15,7 @@ TabWidget::~TabWidget() {
 }
 
 void TabWidget::add( Session* ses ) {
-    qWarning("session ses " + ses->name() );
+    owarn << "session ses " + ses->name() << oendl; 
     if ( !ses->widgetStack() ) return;
     //reparent( ses->widgetStack(), QPoint() );
     addTab( ses->widgetStack(), "console/konsole", ses->name() );

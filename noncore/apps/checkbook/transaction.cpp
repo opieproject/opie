@@ -31,8 +31,12 @@
 #include "cfg.h"
 #include "checkbook.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
 #include <qpe/datebookmonth.h>
+using namespace Opie::Core;
 
+/* QT */
 #include <qbuttongroup.h>
 #include <qcombobox.h>
 #include <qlabel.h>
@@ -332,6 +336,6 @@ void Transaction::slotActivated(const QString &arg )
 // slotNotNew -----------------------------------------------------------------
 void Transaction::slotNotNew()
 {
-    qDebug("Not new");
+    odebug << "Not new" << oendl; 
     _bNew=false;
 }

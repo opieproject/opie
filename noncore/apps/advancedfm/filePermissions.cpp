@@ -32,7 +32,7 @@ filePermissions::filePermissions( QWidget* parent,  const char* name, bool modal
 {
     if ( !name )
   setName( tr("filePermissions") );
-//    qDebug("FilePermissions "+fileName);
+//    odebug << "FilePermissions "+fileName << oendl; 
 /*    resize( 236, 210 );
     setMaximumSize( QSize( 236, 210 ) );
 */    setCaption( tr( "Set File Permissions" ) );

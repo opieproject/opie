@@ -16,12 +16,13 @@
 #include "searchresults.h"
 #include "bac.h"
 
-#include <qtoolbar.h>
-#include <qmenubar.h>
-//#include <opie2/colorpopupmenu.h>
+/* OPIE */
+#include <opie2/odebug.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
+using namespace Opie::Core;
 
+/* QT */
 #include <qlineedit.h>
 #include <qdir.h>
 #include <qpushbutton.h>
@@ -33,13 +34,15 @@
 #include <qheader.h>
 #include <qlistview.h>
 #include <qlayout.h>
+#include <qtoolbar.h>
+#include <qmenubar.h>
 
+/* STD */
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <errno.h>
-
 
 Bartender::Bartender( QWidget* parent,  const char* name, WFlags fl )
     : QMainWindow( parent, name, fl ) {
@@ -144,13 +147,13 @@ void Bartender::fillList() {
     while ( !t.eof()) {
         s = t.readLine();
         if(s.find("#",0,TRUE) != -1) {
-//            qDebug(s.right(s.length()-2));
+//            odebug << s.right(s.length()-2) << oendl; 
             item= new QListViewItem( DrinkView, 0 );
             item->setText( 0, s.right(s.length()-2));
             i++;
         }
     }
-    qDebug("there are currently %d of drinks", i);
+    odebug << "there are currently " << i << " of drinks" << oendl; 
 }
 
 void Bartender::fileNew() {
@@ -171,7 +174,7 @@ void Bartender::fileNew() {
     if(newDrinks ->result() == 1 ) {
         QString newDrink="\n# "+newName+"\n";
         newDrink.append(newIng+"\n");
-        qDebug("writing "+newDrink);
+        odebug << "writing "+newDrink << oendl; 
         dbFile.writeBlock( newDrink.latin1(), newDrink.length());
         clearList();
         dbFile.close();
@@ -207,7 +210,7 @@ void Bartender::showDrink( QListViewItem *item) {
             for(int i=0;s2.find( "#", 0, TRUE) == -1;i++) {
                 s2 = t.readLine();
                 if(s2.find("#",0,TRUE) == -1 || dbFile.atEnd() ) {
-//                    qDebug(s2);
+//                    odebug << s2 << oendl; 
                     showDrinks->MultiLineEdit1->append(s2);
                 }
                 if( dbFile.atEnd() ) break;
@@ -248,7 +251,7 @@ void Bartender::doSearchByName() {
         QListViewItemIterator it( DrinkView );
         for ( ; it.current(); ++it ) {
             if ( it.current()->text(0).find( searchForDrinkName, 0, TRUE) != -1 ) {
-//                 qDebug( it.current()->text(0));
+//                 odebug << it.current()->text(0) << oendl; 
                 searchList.append(it.current()->text(0));
             }
         }
@@ -279,10 +282,10 @@ void Bartender::doSearchByDrink() {
             s = t.readLine();
             if(s.find("#",0,TRUE) != -1) {
                 lastDrinkName=s.right(s.length()-2);
-//                qDebug("last drink name "+lastDrinkName);
+//                odebug << "last drink name "+lastDrinkName << oendl; 
             }
             else if( s.find( searchForDrinkName ,0, FALSE) != -1 && lastDrinkName != tempName ) {
-//                qDebug("appending "+lastDrinkName);
+//                odebug << "appending "+lastDrinkName << oendl; 
                 searchList.append( lastDrinkName);
                 tempName=lastDrinkName;
             }
@@ -313,7 +316,7 @@ void Bartender::showSearchResult(QStringList &searchList) {
     QListViewItemIterator it2( DrinkView );
     for ( ; it2.current(); ++it2 ) {
         if ( it2.current()->text(0)== result ) {
-//                qDebug( it2.current()->text(0));
+//                odebug << it2.current()->text(0) << oendl; 
             showDrink(it2.current());
         }
     }
@@ -343,7 +346,7 @@ void Bartender::doEdit() {
             for(int i=0;s2.find( "#", 0, TRUE) == -1;i++) {
                 s2 = t.readLine();
                 if(s2.find("#",0,TRUE) == -1 || dbFile.atEnd() ) {
-//                    qDebug(s2);
+//                    odebug << s2 << oendl; 
                     newDrinks->MultiLineEdit1->append(s2);
                     newDrinks->LineEdit1->setText(myDrink);
                 }
@@ -370,7 +373,7 @@ void Bartender::doEdit() {
         ////////// FIXME write to user file
         QString newDrink="# "+newName+"\n";
         newDrink.append(newIng+"\n");
-        qDebug("writing "+newDrink);
+        odebug << "writing "+newDrink << oendl; 
         dbFile.writeBlock( newDrink.latin1(), newDrink.length());
         clearList();
 
@@ -397,7 +400,7 @@ void Bartender::openCurrentDrink() {
 }
 
 void Bartender::fileMenuActivated( int item) {
-    qDebug("Item %d", item);
+    odebug << "Item " << item << "" << oendl; 
     switch(item) {
       case -3: //        new -3
           fileNew();
@@ -418,7 +421,7 @@ void Bartender::fileMenuActivated( int item) {
 }
 
 void Bartender::editMenuActivated(int item) {
-    qDebug("Item %d", item);
+    odebug << "Item " << item << "" << oendl; 
       /*
         edit -8
       */

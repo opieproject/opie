@@ -1,7 +1,9 @@
-
 #include "io_irda.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
 using namespace Opie::Core;
+
 IOIrda::IOIrda( const Profile &config ) : IOSerial( config ) {
     m_attach = 0;
 }
@@ -35,7 +37,7 @@ bool IOIrda::open() {
         ret= IOSerial::open();
     } else {
     // emit error!!!
-        qWarning("could not attach to device");
+        owarn << "could not attach to device" << oendl; 
         delete m_attach;
 	m_attach = 0l;
     }
@@ -74,5 +76,5 @@ bool IOIrda::isConnected() {
 }
 
 void IOIrda::send(const QByteArray &data) {
-    qDebug( "Please overload me..." );
+    odebug << "Please overload me..." << oendl; 
 }

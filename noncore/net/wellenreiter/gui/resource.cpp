@@ -29,7 +29,7 @@ QPixmap loadPixmap( const QString& pix )
     QPixmap pixmap( filename );
     if ( pixmap.isNull() )
     {
-        qDebug( "Wellenreiter::Resource: can't find pixmap " + filename );
+        odebug << "Wellenreiter::Resource: can't find pixmap " + filename << oendl; 
     }
     return pixmap;
 };
@@ -41,7 +41,7 @@ QIconSet loadIconSet( const QString& pix )
     QPixmap pixmap( filename );
     if ( pixmap.isNull() )
     {
-        qDebug( "Wellenreiter::Resource: can't find pixmap " + filename );
+        odebug << "Wellenreiter::Resource: can't find pixmap " + filename << oendl; 
     }
     return QIconSet( pixmap );
 };

@@ -13,7 +13,7 @@ WlanInfoImp::WlanInfoImp( QWidget* parent, const char* name, WFlags fl): WlanInf
   WExtensions *wExtensions = new WExtensions(name);
   if(!wExtensions->doesHaveWirelessExtensions()){
     delete  wExtensions;
-    qDebug("WlanInfoImp::No wireless extension");
+    odebug << "WlanInfoImp::No wireless extension" << oendl; 
     return;
   }
   delete  wExtensions;
@@ -28,7 +28,7 @@ WlanInfoImp::WlanInfoImp( QWidget* parent, const char* name, WFlags fl): WlanInf
 void WlanInfoImp::update(){
   WExtensions *wExtensions = new WExtensions(this->name());
   if(!wExtensions->doesHaveWirelessExtensions()){
-    qDebug("No extension");
+    odebug << "No extension" << oendl; 
     delete wExtensions;
     timer->stop();
     return;

@@ -1,12 +1,19 @@
-#include <assert.h>
-#include <qsocket.h>
-#include <qtimer.h>
-#include <string.h>
-
 #include "krfbconnection.h"
 #include "krfblogin.h"
 #include "krfbdecoder.h"
 #include "krfbbuffer.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
+/* QT */
+#include <qsocket.h>
+#include <qtimer.h>
+
+/* STD */
+#include <assert.h>
+#include <string.h>
 
 KRFBConnection::KRFBConnection( QObject *parent )
 		: QObject( parent, "KRFBConnection" )
@@ -43,7 +50,7 @@ void KRFBConnection::connectTo( KRFBServer server)
 		connect( sock, SIGNAL( error(int) ), SLOT( gotSocketError(int) ) );
 		connect( sock, SIGNAL( connected() ), SLOT( gotSocketConnection() ) );
 
-		qWarning( "Connecting..." );
+		owarn << "Connecting..." << oendl; 
 
 		currentState_ = Connecting;
 		sock->connectToHost( options_->hostname.latin1(), portBase_ + options_->display );
@@ -51,7 +58,7 @@ void KRFBConnection::connectTo( KRFBServer server)
 
 void KRFBConnection::disconnect()
 {
-		qWarning( "Disconnecting from server" );
+		owarn << "Disconnecting from server" << oendl; 
 
 		if ( ( currentState_ != Disconnected )
 						&& ( currentState_ != Disconnecting )
@@ -82,7 +89,7 @@ void KRFBConnection::gotSocketConnection()
 {
 		currentState_ = LoggingIn;
 
-		qWarning( "Connected, logging in..." );
+		owarn << "Connected, logging in..." << oendl; 
 
 		static QString statusMsg = tr( "Connected" );
 		emit statusChanged( statusMsg );
@@ -93,7 +100,7 @@ void KRFBConnection::gotSocketConnection()
 
 void KRFBConnection::gotRFBConnection()
 {
-		qWarning( "Logged into server" );
+		owarn << "Logged into server" << oendl; 
 
 		currentState_ = Connected;
 		emit connected();
@@ -122,7 +129,7 @@ void KRFBConnection::gotSocketError( int err )
 		currentState_ = Error;
 
 		// Do some error handling stuff
-		qWarning( "KRFBConnection: Socket error %d", err );
+		owarn << "KRFBConnection: Socket error " << err << "" << oendl; 
 
 		static QString refused = tr( "Connection Refused" );
 		static QString host = tr( "Host not found" );
@@ -172,11 +179,11 @@ void KRFBConnection::waitForData( unsigned int sz )
 		assert( currentState_ != Error );
 
 		if ( sock->size() >= sz ) {
-				//    qWarning( "No need to wait for data" );
+				//    owarn << "No need to wait for data" << oendl; 
 				emit gotEnoughData();
 		}
 		else {
-				//    qWarning( "Waiting for %u bytes", sz );
+				//    owarn << "Waiting for " << sz << " bytes" << oendl; 
 				minData_ = sz;
 				connect( sock, SIGNAL( readyRead() ), SLOT( gotMoreData() ) );
 		}

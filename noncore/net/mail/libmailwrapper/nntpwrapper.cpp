@@ -29,7 +29,7 @@ NNTPwrapper::~NNTPwrapper() {
 }
 
 void NNTPwrapper::nntp_progress( size_t current, size_t maximum ) {
-    qDebug( "NNTP: %i of %i", current, maximum );
+    odebug << "NNTP: " << current << " of " << maximum << "" << oendl; 
 }
 
 
@@ -46,7 +46,7 @@ RecBodyP NNTPwrapper::fetchBody( const RecMailP &mail ) {
 
     mailmessage * mailmsg;
     if (mail->Msgsize()>HARD_MSG_SIZE_LIMIT) {
-        qDebug("Message to large: %i",mail->Msgsize());
+        odebug << "Message to large: " << mail->Msgsize() << "" << oendl; 
         return body;
     }
 
@@ -134,7 +134,7 @@ void NNTPwrapper::login()
             Pass = login.getPassword().latin1();
         } else {
             // cancel
-            qDebug( "NNTP: Login canceled" );
+            odebug << "NNTP: Login canceled" << oendl; 
             return;
         }
     } else {
@@ -171,7 +171,7 @@ void NNTPwrapper::login()
     err = mailstorage_connect( m_nntp );
 
    if (err != NEWSNNTP_NO_ERROR) {
-        qDebug( QString( "FEHLERNUMMER %1" ).arg(  err ) );
+        odebug << QString( "FEHLERNUMMER %1" ).arg(  err ) << oendl; 
      //   Global::statusMessage(tr("Error initializing folder"));
         mailstorage_free(m_nntp);
         m_nntp = 0;

@@ -63,10 +63,18 @@
     nessesary to make everything work as it should.
 */
 
+#include "procctl.h"
+#include "MyPty.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
+/* QT */
 #include <qsocketnotifier.h>
 #include <qfile.h>
 
+/* STD */
 #include <stdlib.h>
 #include <stdio.h>
 #include <signal.h>
@@ -81,10 +89,6 @@
 #include <pty.h>
 #endif
 
-#include "procctl.h"
-#include "MyPty.h"
-
-
 #undef VERBOSE_DEBUG
 
 
@@ -97,7 +101,7 @@
 
 void MyPty::setSize(int lines, int columns)
 {
-    qWarning("setting size");
+    owarn << "setting size" << oendl; 
   struct winsize wsize;
   wsize.ws_row = (unsigned short)lines;
   wsize.ws_col = (unsigned short)columns;

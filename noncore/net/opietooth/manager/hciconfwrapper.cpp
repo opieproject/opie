@@ -74,16 +74,16 @@ namespace OpieTooth {
         for (it = m_file.begin(); it != m_file.end(); ++it ) {
             str = (*it);
             if( (str.contains(key)) > 0 ) {
-                qDebug("Found");
+                odebug << "Found" << oendl; 
                 // still need to look if its commented out!!!
                 str.simplifyWhiteSpace();
-                qDebug( key );
+                odebug << key << oendl; 
                 if (str.startsWith("#")) {
                     str = (key + " " + value + ";");
                 } else {
                     str = str.replace( QRegExp( "\\s*"+key+"\\s+[^\\s][^;]*;" ),  key + " " + value + ";");
                 }
-                qDebug( str );
+                odebug << str << oendl; 
                 it = m_file.remove( it );
                 it = m_file.insert( it,  str );
                 //return; the regexp is too wide  -zecke // all set
@@ -98,11 +98,11 @@ namespace OpieTooth {
      * the m_file
      */
     void HciConfWrapper::load() {
-        qWarning("loaded");
+        owarn << "loaded" << oendl; 
         m_file.clear();
         QFile file( m_fileName );
         if (!file.open( IO_ReadOnly ) ) {
-            qDebug("Could not open");
+            odebug << "Could not open" << oendl; 
             return;
         }
 
@@ -119,13 +119,13 @@ namespace OpieTooth {
             }
     }
     void HciConfWrapper::save() {
-        qWarning("save");
+        owarn << "save" << oendl; 
         if (m_file.isEmpty() ) // load first
             return;
 
         QFile file( m_fileName );
         if ( !file.open(IO_WriteOnly ) ) {
-            qWarning("could not open %s",  m_fileName.latin1() );
+            owarn << "could not open " << m_fileName.latin1() << "" << oendl; 
             return;
         }
 
@@ -134,6 +134,6 @@ namespace OpieTooth {
         for ( it = m_file.begin(); it != m_file.end(); ++it ) {
             stream << (*it) << endl;
         }
-        qWarning("saved");
+        owarn << "saved" << oendl; 
     };
 }
