@@ -13,11 +13,15 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_xml.h,v 1.9 2002-12-08 12:48:57 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_xml.h,v 1.9.2.1 2002-12-22 14:48:07 tille Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_xml.h,v $
- * Revision 1.9  2002-12-08 12:48:57  eilers
+ * Revision 1.9.2.1  2002-12-22 14:48:07  tille
+ * loads custom fields,
+ * but somehow forgets 'em again... ;-S
+ *
+ * Revision 1.9  2002/12/08 12:48:57  eilers
  * Moved journal-enum from ocontact into i the xml-backend..
  *
  * Revision 1.8  2002/11/14 17:04:24  eilers
@@ -528,6 +532,7 @@ class OContactAccessBackend_XML : public OContactAccessBackend {
 						qWarning("Attribute %s not known.", it.key().latin1());
 						//contact.setCustomField(it.key(), it.data());
 						customMap.insert( it.key(),  it.data() );
+						qWarning("inserted Attribute %s value %s", it.key().latin1(),it.data().latin1());
 						continue;
 					}
 					
@@ -560,6 +565,7 @@ class OContactAccessBackend_XML : public OContactAccessBackend {
 				OContact contact( contactMap );
 				
 				for (customIt = customMap.begin(); customIt != customMap.end(); ++customIt ) {
+				        qWarning("inserting custom field %s value %s into contact", customIt.key().latin1(),customIt.data().latin1());
 					contact.setCustomField( customIt.key(),  customIt.data() );
 				}
 				

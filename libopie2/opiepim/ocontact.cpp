@@ -52,7 +52,7 @@
   Creates a new, empty contact.
 */
 OContact::OContact()
-  : OPimRecord(), mMap(), d( 0 ), eMap()
+  : OPimRecord(), mMap(), eMap(), d( 0 )
 {
 }
 
@@ -637,11 +637,17 @@ void OContact::replace( int key, const QString & v )
 */
 void OContact::replaceCustom( const QString & key, const QString & v )
 {
+  qDebug("OContact::replaceCustom( key=>%s<, value=>%s<)",key.latin1(),v.latin1());
     QString value = v.stripWhiteSpace();
+
     if ( value.isEmpty() )
 	eMap.remove( key );
     else
+      if ( eMap.contains( key ) )
 	eMap.replace( key, value );
+      else
+	eMap.insert( key, value );
+    qDebug("findCustom[%s]=>%s<",key.latin1(),findCustom(key).latin1());
 }
 
 /*!

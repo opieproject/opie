@@ -188,8 +188,8 @@ public:
     QStringList groupList() const;
 
 //     // custom
-     const QString &customField( const QString &key )
-         { return QString ( findCustom( key ) ); }
+     QString customField( const QString &key )
+         const { return findCustom( key ); }
 
 
     QString toRichText() const;
