@@ -491,7 +491,7 @@ const QPixmap& AppLnk::bigPixmap() const
     if ( d->mPixmaps[1].isNull() ) {
         return pixmap( AppLnkPrivate::Big, bigSize );
     }
-    return mBigPixmap;
+    return d->mPixmaps[1];
 }
 
 /*!
