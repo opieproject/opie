@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.42 2003-03-26 21:58:02 kergoth Exp $
+** $Id: qpeapplication.cpp,v 1.43 2003-04-10 15:09:57 harlekin Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -92,9 +92,9 @@
 class QPEApplicationData
 {
 public:
-	QPEApplicationData ( ) 
-		: presstimer( 0 ), presswidget( 0 ), rightpressed( false ), kbgrabbed( false ), 
-		  notbusysent( false ), preloaded( false ), forceshow( false ), nomaximize( false ), 
+	QPEApplicationData ( )
+		: presstimer( 0 ), presswidget( 0 ), rightpressed( false ), kbgrabbed( false ),
+		  notbusysent( false ), preloaded( false ), forceshow( false ), nomaximize( false ),
 		  keep_running( true ), qpe_main_widget( 0 )
 
 	{
@@ -516,13 +516,13 @@ QPEApplication::QPEApplication( int & argc, char **argv, Type t )
 		AppLnk::setBigIconSize( 28 );
 	}
 	else if ( dw > 600 ) {
-		setFont( QFont( "helvetica", 12 ) );
+		setFont( QFont( "helvetica", 18 ) );
 		AppLnk::setSmallIconSize( 24 );
 		AppLnk::setBigIconSize( 48 );
 	}
 	else if ( dw > 200 ) {
 		setFont( QFont( "helvetica", 10 ) );
-		AppLnk::setSmallIconSize( 16 );
+		AppLnk::setSmallIconSize( 14 );
 		AppLnk::setBigIconSize( 32 );
 	}
 
@@ -814,7 +814,7 @@ bool QPEApplication::qwsEventFilter( QWSEvent * e )
 			if ( active && ((int) active-> winId ( ) == ke-> simpleData.window )) {
 				if ( d-> kbgrabbed ) { // we grabbed the keyboard
 					QChar ch ( ke-> simpleData.unicode );
-					QKeyEvent qke ( ke-> simpleData. is_press ? QEvent::KeyPress : QEvent::KeyRelease, 
+					QKeyEvent qke ( ke-> simpleData. is_press ? QEvent::KeyPress : QEvent::KeyRelease,
 					                ke-> simpleData.keycode,
 					                ch. latin1 ( ),
 					                ke-> simpleData.modifiers,
@@ -822,13 +822,13 @@ bool QPEApplication::qwsEventFilter( QWSEvent * e )
 					                ke-> simpleData.is_auto_repeat, 1 );
 
 					QObject *which = QWidget::keyboardGrabber ( );
-					if ( !which )  
+					if ( !which )
 						which = QApplication::focusWidget ( );
-					if ( !which )  
+					if ( !which )
 						which = QApplication::activeWindow ( );
-					if ( !which )  
+					if ( !which )
 						which = qApp;
-				         
+
 					QApplication::sendEvent ( which, &qke );
 				}
 				else { // we didn't grab the keyboard, so send the event to the launcher
@@ -837,7 +837,7 @@ bool QPEApplication::qwsEventFilter( QWSEvent * e )
 				}
 			}
 			return true;
-		}		
+		}
 	}
 	if ( e->type == QWSEvent::Focus ) {
 		QWSFocusEvent * fe = ( QWSFocusEvent* ) e;
@@ -1047,9 +1047,9 @@ void QPEApplication::systemMessage( const QCString& msg, const QByteArray& data 
 	}
 	else if ( msg == "toggleApplicationMenu()" ) {
 		QWidget *active = activeWindow ( );
-	
+
 		if ( active ) {
-			QPEMenuToolFocusManager *man = QPEMenuToolFocusManager::manager ( );			
+			QPEMenuToolFocusManager *man = QPEMenuToolFocusManager::manager ( );
 			bool oldactive = man-> isActive ( );
 
 			man-> setActive( !man-> isActive() );
