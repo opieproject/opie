@@ -188,7 +188,6 @@ void Today::init() {
   QString time = (tr( date.toString()) );
   
   TextLabel1->setText(QString("<font color=#FFFFFF>" + time + "</font>"));
-  db = new DateBookDB;
    
   // read config
   Config cfg("today");
@@ -207,8 +206,9 @@ void Today::init() {
   SHOW_NOTES = cfg.readNumEntry("shownotes",0);
   // should only later appointments be shown or all for the current day.
   ONLY_LATER = cfg.readNumEntry("onlylater",1);
-}
 
+  db = new DateBookDB;
+}
 
 /*
  * The method for the configuration dialog.
@@ -296,7 +296,7 @@ void Today::getDates() {
 	
 	if (!ONLY_LATER) {
 	  count++;
-	  DateBookEvent *l=new DateBookEvent(*it, AllDateBookEvents);
+	  DateBookEvent *l=new DateBookEvent(*it, AllDateBookEvents, SHOW_LOCATION, SHOW_NOTES);
 	  layoutDates->addWidget(l);
 	  connect (l, SIGNAL(editEvent(const Event &)),
 		   this, SLOT(editEvent(const Event &)));
@@ -304,7 +304,7 @@ void Today::getDates() {
 	  count++;
 	  
 	  // show only later appointments
-	  DateBookEventLater *l=new DateBookEventLater(*it, AllDateBookEvents);
+	  DateBookEventLater *l=new DateBookEventLater(*it, AllDateBookEvents, SHOW_LOCATION, SHOW_NOTES);
 	  layoutDates->addWidget(l);
 	  connect (l, SIGNAL(editEvent(const Event &)),
 		   this, SLOT(editEvent(const Event &)));
@@ -442,9 +442,11 @@ Today::~Today() {
  * Gets the events for the current day, if it should get all dates 
  */
 DateBookEvent::DateBookEvent(const EffectiveEvent &ev, 
-					   QWidget* parent = 0, 
-					   const char* name = 0, 
-					   WFlags fl = 0) :
+			     QWidget* parent = 0, 
+			     int SHOW_LOCATION = 0,
+			     int SHOW_NOTES = 0,
+			     const char* name = 0, 
+			     WFlags fl = 0) :
   ClickableLabel(parent,name,fl), event(ev) {
   
   QString msg;
@@ -457,8 +459,7 @@ DateBookEvent::DateBookEvent(const EffectiveEvent &ev,
     }
     // include location or not
     if (SHOW_LOCATION == 1) {
-      msg += "<BR><i>" + (ev).location();
-      msg += "</i>";
+      msg += "<BR><i>" + (ev).location() + "</i>";
     }
     
     if ( (TimeString::timeString(QTime((ev).event().start().time()) ) == "00:00") &&  (TimeString::timeString(QTime((ev).event().end().time()) ) == "23:59") ) {
@@ -472,7 +473,7 @@ DateBookEvent::DateBookEvent(const EffectiveEvent &ev,
     
     // include possible note or not
     if (SHOW_NOTES == 1) {
-      msg += "<br> <i>note</i>:" +((ev).notes()).mid(0, MAX_CHAR_CLIP) + "<br>";
+      msg += "<br> <i>note</i>:" +((ev).notes()).mid(0, MAX_CHAR_CLIP);
     }
   }
   setText(msg);
@@ -483,6 +484,8 @@ DateBookEvent::DateBookEvent(const EffectiveEvent &ev,
 
 DateBookEventLater::DateBookEventLater(const EffectiveEvent &ev, 
 				       QWidget* parent = 0, 
+				       int SHOW_LOCATION = 0,
+				       int SHOW_NOTES = 0,
 				       const char* name = 0, 
 				       WFlags fl = 0) :
   ClickableLabel(parent,name,fl), event(ev) {
@@ -498,8 +501,7 @@ DateBookEventLater::DateBookEventLater(const EffectiveEvent &ev,
     }
     // include location or not
     if (SHOW_LOCATION == 1) {
-      msg += "<BR><i>" + (ev).location();
-      msg += "</i>";
+      msg += "<BR><i>" + (ev).location() + "</i>";
     }
     
     if ( (TimeString::timeString(QTime((ev).event().start().time()) ) == "00:00") &&  (TimeString::timeString(QTime((ev).event().end().time()) ) == "23:59") ) {
@@ -512,7 +514,7 @@ DateBookEventLater::DateBookEventLater(const EffectiveEvent &ev,
     }
     // include possible note or not
     if (SHOW_NOTES == 1) {
-      msg += "<br> <i>note</i>:" +((ev).notes()).mid(0, MAX_CHAR_CLIP) + "<br>";
+      msg += "<br> <i>note</i>:" +((ev).notes()).mid(0, MAX_CHAR_CLIP);
     }
   } 
   

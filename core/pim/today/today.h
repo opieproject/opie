@@ -78,8 +78,11 @@ class DateBookEvent: public ClickableLabel {
   Q_OBJECT
 public:
     DateBookEvent(const EffectiveEvent &ev, 
-			 QWidget* parent = 0, const char* name = 0, 
-			 WFlags fl = 0);
+		  QWidget* parent = 0,
+		  int SHOW_LOCATION = 0,
+		  int SHOW_NOTES = 0,
+		  const char* name = 0, 
+		  WFlags fl = 0);
 signals:
     void editEvent(const Event &e);
 private slots:
@@ -92,8 +95,11 @@ class DateBookEventLater: public ClickableLabel {
   Q_OBJECT
 public:
     DateBookEventLater(const EffectiveEvent &ev, 
-			 QWidget* parent = 0, const char* name = 0, 
-			 WFlags fl = 0);
+		       QWidget* parent = 0,
+		       int SHOW_LOCATION = 0,
+		       int SHOW_NOTES = 0,
+		       const char* name = 0, 
+		       WFlags fl = 0);
 signals:
     void editEvent(const Event &e);
 private slots:
