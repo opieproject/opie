@@ -31,7 +31,11 @@ bool IOModem::open() {
 	{
 		return true;
 	}
-	else return false;
+	else
+	{
+		close();
+		return false;
+	}
 }
 
 void IOModem::reload( const Profile &config ) {

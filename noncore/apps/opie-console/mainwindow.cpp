@@ -318,8 +318,10 @@ void MainWindow::slotConnect() {
         if(!ret) QMessageBox::warning(currentSession()->widgetStack(),
                                       QObject::tr("Failed"),
                                       QObject::tr("Connecting failed for this session."));
-        m_connect->setEnabled( false );
-        m_disconnect->setEnabled( true );
+        else {
+            m_connect->setEnabled( false );
+            m_disconnect->setEnabled( true );
+        }
     }
 }
 
@@ -364,7 +366,9 @@ void MainWindow::slotClose() {
 
     Session* ses = currentSession();
     qWarning("removing! currentSession %s", currentSession()->name().latin1() );
-    tabWidget()->remove( currentSession() );
+	/* set to NULL to be safe, if its needed slotSessionChanged resets it automatically */
+	m_curSession = NULL;
+    tabWidget()->remove( /*currentSession()*/ses );
     /*it's autodelete */
     m_sessions.remove( ses );
     qWarning("after remove!!");

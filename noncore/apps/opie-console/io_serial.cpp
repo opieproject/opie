@@ -46,6 +46,7 @@ bool IOSerial::open() {
         m_fd = ::open(m_device, O_RDWR | O_NOCTTY | O_NONBLOCK);
         if (m_fd < 0) {
             emit error(CouldNotOpen, strerror(errno));
+            m_fd = 0;
             return FALSE;
         }
         tcgetattr(m_fd, &tty);
