@@ -13,7 +13,7 @@
 
 #include "page.h"
 
-const int PAGE_BACKUPS = 99;
+const int PAGE_BACKUPS = 9;
 
 Page::Page()
 {
