@@ -435,10 +435,9 @@ DateBookEvent::DateBookEvent(const EffectiveEvent &ev,
         // end time of event
         + "<b> - </b>" + TimeString::timeString(QTime((ev).event().end().time()) );
     }
-    msg += "<BR>";
     // include possible note or not
     if (SHOW_NOTES == 1) {
-      msg += " <i>note</i>:" +((ev).notes()).mid(0, MAX_CHAR_CLIP) + "<br>";
+      msg += "<br> <i>note</i>:" +((ev).notes()).mid(0, MAX_CHAR_CLIP) + "<br>";
     }
   } else if ((time.toString() <= TimeString::dateString((ev).event().end())) ) {
     msg += "<B>" + (ev).description() + "</B>";
@@ -447,7 +446,7 @@ DateBookEvent::DateBookEvent(const EffectiveEvent &ev,
     }
     // include location or not
     if (SHOW_LOCATION == 1) {
-      msg+= "<BR><i>" + (ev).location();
+      msg += "<BR><i>" + (ev).location();
       msg += "</i>";
     }
     
