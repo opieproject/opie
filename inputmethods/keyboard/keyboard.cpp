@@ -33,8 +33,8 @@
 
 #define USE_SMALL_BACKSPACE
 
-Keyboard::Keyboard(QWidget* parent, const char* name, WFlags f) :
-    QFrame(parent, name, f),  shift(FALSE), lock(FALSE), ctrl(FALSE),
+Keyboard::Keyboard(QWidget* parent, const char* _name, WFlags f) :
+    QFrame(parent, _name, f),  shift(FALSE), lock(FALSE), ctrl(FALSE),
     alt(FALSE), useLargeKeys(TRUE), useOptiKeys(0), pressedKey(-1),
     unicode(-1), qkeycode(0), modifiers(0)
 {
