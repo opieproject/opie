@@ -528,7 +528,7 @@ bool iPAQ::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, b
 				case Key_Up   : newkeycode = Key_Down; break;
 				case Key_Down : newkeycode = Key_Up; break;
 			}
-			break;
+			//nobreak;
 
 		case Model_iPAQ_H36xx: 
 		case Model_iPAQ_H37xx: 
@@ -547,7 +547,7 @@ bool iPAQ::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, b
 				}
 				newkeycode = Key_unknown;			
 			}
-			break;
+			//nobreak;
 		
 		default: 
 			break;
