@@ -1102,7 +1102,7 @@ bool Yopy::suspend()
   return false;
 }
 
-bool Yopy::setDisplayBrightness(int bright)
+bool Yopy::setDisplayBrightness(int /*bright*/)
 {
   /* The code here works, but is disabled as the current version runs
      parallel to X, and relies on the existing backlight demon. */
@@ -1668,7 +1668,6 @@ void Zaurus::init ( )
 		d-> m_modelstr = "Zaurus (Model unknown)";
 	}
 
-	bool flipstate = false;
 	switch ( d-> m_model ) {
 		case Model_Zaurus_SLA300:
 			d-> m_rotation = Rot0;
@@ -2367,7 +2366,7 @@ bool SIMpad::setLedState ( OLed l, OLedState st )
 }
 
 
-bool SIMpad::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, bool autoRepeat )
+bool SIMpad::filter ( int /*unicode*/, int /*keycode*/, int /*modifiers*/, bool /*isPress*/, bool /*autoRepeat*/ )
 {
 	//TODO
 	return false;
@@ -2428,7 +2427,7 @@ bool SIMpad::suspend ( ) // Must override because SIMpad does NOT have apm
 
 	bool res = false;
 
-	struct timeval tvs, tvn;
+	struct timeval tvs;
 	::gettimeofday ( &tvs, 0 );
 
 	::sync ( ); // flush fs caches
@@ -2450,7 +2449,6 @@ bool SIMpad::setDisplayStatus ( bool on )
 	qDebug( "ODevice for SIMpad: setDisplayStatus(%s)", on? "on" : "off" );
 
 	bool res = false;
-	int fd;
 
 	QString cmdline = QString().sprintf( "echo %s > /proc/cs3", on ? "0xd41a" : "0xd40a" ); //TODO make better :)
 
@@ -2781,6 +2779,7 @@ void Jornada::initButtons ( )
 #endif
 int Jornada::displayBrightnessResolution ( ) const
 {
+        return 255;
 }
 
 bool Jornada::setDisplayBrightness ( int bright )
