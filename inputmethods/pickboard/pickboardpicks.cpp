@@ -261,7 +261,7 @@ void PickboardPicks::initialise(void)
     DictFilterConfig* dc = new DictFilterConfig(this);
     QStringList sets_a = QStringList::split(' ',tr("ABC DEF GHI JKL MNO PQR STU VWX YZ-'"));
     QStringList sets = QStringList::split(' ',
-                                          tr("ABC%/1€“iso8859-15ÀÁÂÃÄÅÆÇ DEF%/1€iso8859-15ÐÈÉÊË GHI%/1€iso8859-15ÌÍÎÏ JKL MNO%/1€’iso8859-15ÑÒÓÔÕÖØ PQR%/1€Œiso8859-15Þ STU%/1€iso8859-15ßÙÚÛÜ VWX YZ-'%/1€iso8859-15Ýÿ"));
+                                          tr("ABCÀÁÂÃÄÅÆÇ DEFÐÈÉÊË GHIÌÍÎÏ JKL MNOÑÒÓÔÕÖØ PQRÞ STUßÙÚÛÜ VWX YZ-'Ýÿ"));
     for (QStringList::ConstIterator it = sets.begin(), it_a = sets_a.begin(); it!=sets.end(); ++it,++it_a)
         dc->addSet(*it_a,*it);
     dc->addMode("123");
