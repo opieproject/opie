@@ -3,6 +3,7 @@
 #include <qhbox.h>
 #include <qlayout.h>
 #include <qtimer.h>
+#include <qtl.h>
 
 #include <qcopchannel_qws.h>
 
@@ -59,8 +60,8 @@ void SendWidget::initUI() {
 
     m_devBox = new DeviceBox(this);
     lay->addWidget( m_devBox, 50 );
-    connect(m_devBox, SIGNAL(selectedDevice(const QString&, int ) ),
-            this, SLOT(slotSelectedDevice(const QString&, int) ) );
+    connect(m_devBox, SIGNAL(selectedDevice(int, int ) ),
+            this, SLOT(slotSelectedDevice(int, int) ) );
 
     QPushButton *but = new QPushButton(this);
     but->setText(tr("Done") );
@@ -86,16 +87,16 @@ void SendWidget::send( const QString& file, const QString& desc ) {
     m_lblFile->setText(desc.isEmpty() ? file : desc );
 
     if ( !QCopChannel::isRegistered("QPE/IrDaApplet") ) {
-        m_devBox->addDevice( tr("IrDa is not enabled!"), DeviceBox::Error );
+        m_irDeSearch = m_devBox->addDevice( tr("IrDa is not enabled!"), DeviceBox::Error );
         m_start++;
     }else
-        m_devBox->addDevice( tr("Searching for IrDa Devices."), DeviceBox::Search );
+        m_irDeSearch = m_devBox->addDevice( tr("Searching for IrDa Devices."), DeviceBox::Search );
 
     if ( !QCopChannel::isRegistered("QPE/Bluetooth") ) {
-        m_devBox->addDevice( tr("Bluetooth is not available"), DeviceBox::Error );
+        m_btDeSearch = m_devBox->addDevice( tr("Bluetooth is not available"), DeviceBox::Error );
         m_start++;
     }else
-        m_devBox->addDevice( tr("Searching for bluetooth Devices."), DeviceBox::Search );
+        m_btDeSearch = m_devBox->addDevice( tr("Searching for bluetooth Devices."), DeviceBox::Search );
 
     if (m_start != 2 ) {
         QCopEnvelope e0("QPE/IrDaApplet", "enableIrda()");
@@ -106,27 +107,28 @@ void SendWidget::send( const QString& file, const QString& desc ) {
 }
 void SendWidget::slotIrDaDevices( const QStringList& list) {
     qWarning("slot it irda devices ");
-    m_irDa = list;
-    m_start = 0;
-    for (QStringList::ConstIterator it = list.begin(); it != list.end(); ++it )
-        m_devBox->addDevice( (*it), DeviceBox::IrDa, tr("Scheduling for beam.") );
-
-    m_devBox->removeDevice( tr("Searching for IrDa Devices.") );
+    for (QStringList::ConstIterator it = list.begin(); it != list.end(); ++it ) {
+        int id = m_devBox->addDevice( (*it), DeviceBox::IrDa, tr("Scheduling for beam.") );
+        m_irDa.insert( id, (*it) );
+    }
+    m_devBox->removeDevice( m_irDeSearch );
+    m_irDaIt = m_irDa.begin();
 
     slotStartIrda();
 }
+
 void SendWidget::slotBTDevices( const QMap<QString, QString>& str ) {
-    m_bt = str;
     for(QMap<QString, QString>::ConstIterator it = str.begin(); it != str.end(); ++it ) {
-        m_devBox->addDevice( it.key(), DeviceBox::BT, tr("Click to beam") );
+        int id = m_devBox->addDevice( it.key(), DeviceBox::BT, tr("Click to beam") );
+        m_bt.insert( id, Pair( it.key(), it.data() ) );
     }
-    m_devBox->removeDevice( tr("Searching for bluetooth Devices.") );
+    m_devBox->removeDevice( m_btDeSearch );
 }
-void SendWidget::slotSelectedDevice( const QString& name, int dev ) {
-    qWarning("Start beam? %s %d", name.latin1(), dev );
-    if ( name == tr("Search again for IrDa.") ) {
-        for (QStringList::Iterator it= m_irDa.begin(); it != m_irDa.end(); ++it )
-            m_devBox->removeDevice( (*it) );
+void SendWidget::slotSelectedDevice( int name, int dev ) {
+    qWarning("Start beam? %d %d", name, dev );
+    if ( name ==  m_irDeSearch ) {
+        for (QMap<int, QString>::Iterator it= m_irDa.begin(); it != m_irDa.end(); ++it )
+            m_devBox->removeDevice( it.key() );
 
         QCopEnvelope e2("QPE/IrDaApplet", "listDevices()");
     }
@@ -140,7 +142,7 @@ void SendWidget::dispatchIrda( const QCString& str, const QByteArray& ar ) {
         slotIrDaDevices( list );
     }
 }
-void SendWidget::dispatchBt( const QCString& str, const QByteArray& ar ) {
+void SendWidget::dispatchBt( const QCString&, const QByteArray&  ) {
 
 }
 void SendWidget::slotIrError( int ) {
@@ -149,19 +151,19 @@ void SendWidget::slotIrError( int ) {
 void SendWidget::slotIrSent( bool b) {
     qWarning("irda sent!!");
     QString text = b ? tr("Sent") : tr("Failure");
-//    m_devBox->setStatus( m_irDa[m_start], text );
-    m_start++;
+    m_devBox->setStatus( m_irDaIt.key(), text );
+    ++m_irDaIt;
     slotStartIrda();
 }
 void SendWidget::slotIrTry(unsigned int trI) {
-//    m_devBox->setStatus( m_irDa[m_start], tr("Try %1").arg( QString::number( trI ) ) );
+    m_devBox->setStatus( m_irDaIt.key(), tr("Try %1").arg( QString::number( trI ) ) );
 }
 void SendWidget::slotStartIrda() {
-    if (m_start >= m_irDa.count() ) {
-        m_devBox->addDevice(tr("Search again for IrDa."), DeviceBox::Search );
+    if (m_irDaIt == m_irDa.end() ) {
+        m_irDeSearch = m_devBox->addDevice(tr("Search again for IrDa."), DeviceBox::Search );
         return;
     }
-//    m_devBox->setStatus( m_irDa[m_start], tr("Start sending") );
+    m_devBox->setStatus( m_irDaIt.key(), tr("Start sending") );
     m_obex->send( m_file );
 }
 void SendWidget::slotDone() {
@@ -179,43 +181,78 @@ DeviceBox::DeviceBox( QWidget* parent )
 DeviceBox::~DeviceBox() {
 
 }
-void DeviceBox::addDevice( const QString& name, int dev, const QString& status ) {
-    QString tex;
-    DeviceItem item( name, status, dev );
-    m_dev.insert( name, item );
-    tex = item.toString();
-    m_devices.prepend(tex);
-    setText( text()+ "<br>"+tex );
-}
-void DeviceBox::removeDevice( const QString& name ) {
-    if (!m_dev.contains(name) ) return;
-    m_devices.remove( m_dev[name].toString() );
+int DeviceBox::addDevice( const QString& name, int dev, const QString& status ) {
+    /* return a id for a range of devices */
+    int id = idFor ( dev );
+    DeviceItem item( name, status, dev,id );
+    m_dev.insert( id, item );
+    setText( allText() );
 
-    m_dev.remove(name);
-    setText( m_devices.join("<br>") );
-
+    return id;
 }
-void DeviceBox::setStatus( const QString& name, const QString& status ) {
-    if ( !m_dev.contains(name) ) return;
-    DeviceItem dev = m_dev[name];
-    QString ole = dev.toString();
-    dev.setStatus( status );
-    int index = m_devices.findIndex( ole );
-    m_devices[index] = dev.toString();
-    setText( m_devices.join("<br>") );
+void DeviceBox::removeDevice( int id ) {
+    if (!m_dev.contains(id) ) return;
+
+    m_dev.remove( id );
+    setText( allText() );
+}
+void DeviceBox::setStatus( int id, const QString& status ) {
+    if ( !m_dev.contains(id) ) return;
+    m_dev[id].setStatus(status );
+    setText( allText() );
 }
 void DeviceBox::setSource( const QString& str ) {
-    qWarning("SetSource:%s", str.latin1() );
-    emit selectedDevice( str, m_dev[str].device() );
+    qWarning("SetSource:%d", str.toInt() );
+    int id = str.toInt();
+    emit selectedDevice( id, m_dev[id].device() );
+}
+int DeviceBox::idFor ( int id ) {
+    static int irId = 1501;
+    static int irBT = 1001;
+    static int irSr = 501;
+    static int irEr = 0;
+
+    int ret = -1;
+    switch(id ) {
+    case IrDa:
+        ret = irId;
+        irId++;
+        break;
+    case BT:
+        ret = irBT;
+        irBT++;
+        break;
+    case Search:
+        ret = irSr;
+        irSr++;
+        break;
+    case Error:
+        ret = irEr;
+        irEr++;
+        break;
+    }
+    return ret;
+}
+QString DeviceBox::allText() {
+    QString str;
+    typedef QMap<int, DeviceItem> DeviceMap;
+
+    for (QMap<int, DeviceItem>::Iterator it = m_dev.begin(); it != m_dev.end(); ++it ) {
+        str += it.data().toString() + "<br>";
+    }
+    return str;
 }
 
-
 DeviceItem::DeviceItem( const QString& name,
-                        const QString& status, int dev)
+                        const QString& status, int dev,  int id)
 {
     m_name = name;
     m_status = status;
     m_dev = dev;
+    m_id = id;
+}
+int DeviceItem::id()const {
+    return m_id;
 }
 QString DeviceItem::name()const {
     return m_name;
@@ -250,5 +287,5 @@ void DeviceItem::setStatus(const QString& status ) {
     m_status = status;
 }
 QString DeviceItem::toString()const {
-    return "<p><a href=\""+m_name +"\" ><img src=\""+pixmap()+"\" >"+m_name+" "+m_status+" </a></p>" ;
+    return "<p><a href=\""+QString::number(m_id) +"\" ><img src=\""+pixmap()+"\" >"+m_name+" "+m_status+" </a></p>" ;
 }
