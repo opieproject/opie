@@ -227,6 +227,8 @@ class ONetworkInterface : public QObject
  */
 class OChannelHopper : public QObject
 {
+  Q_OBJECT
+
   public:
     OChannelHopper( OWirelessNetworkInterface* );
     virtual ~OChannelHopper();
@@ -235,6 +237,9 @@ class OChannelHopper : public QObject
     virtual void timerEvent( QTimerEvent* );
     void setInterval( int );
     int interval() const;
+
+  signals:
+    void hopped( int );
 
   private:
     OWirelessNetworkInterface* _iface;
@@ -324,6 +329,10 @@ class OWirelessNetworkInterface : public ONetworkInterface
      * @returns the channel hopping interval or 0, if channel hopping is disabled.
      */
     virtual int channelHopping() const;
+    /**
+     * @returns the @ref OChannelHopper of this interface or 0, if channel hopping has not been activated before
+     */
+    virtual OChannelHopper* channelHopper() const;
     /**
      * Set the station @a nickname.
      */

@@ -349,6 +349,7 @@ int OChannelHopper::channel() const
 void OChannelHopper::timerEvent( QTimerEvent* )
 {
     _iface->setChannel( *_channel );
+    emit( hopped( *_channel ) );
     qDebug( "OChannelHopper::timerEvent(): set channel %d on interface '%s'",
             *_channel, (const char*) _iface->name() );
     if ( ++_channel == _channels.end() ) _channel = _channels.begin();
@@ -590,6 +591,12 @@ void OWirelessNetworkInterface::setChannelHopping( int interval )
 int OWirelessNetworkInterface::channelHopping() const
 {
     return _hopper->interval();
+}
+
+
+OChannelHopper* OWirelessNetworkInterface::channelHopper() const
+{
+    return _hopper;
 }
 
 
