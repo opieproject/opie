@@ -65,6 +65,9 @@ Today::Today( QWidget* parent,  const char* name, WFlags fl )
 #endif
 
     setOwnerField();
+    m_refreshTimer = new QTimer( this );
+    connect( m_refreshTimer, SIGNAL( timeout() ), this, SLOT( refresh() ) );
+    m_refreshTimer->start( 15000 );
     refresh();
     showMaximized();
 }
@@ -80,6 +83,14 @@ void Today::channelReceived( const QCString &msg, const QByteArray & data ) {
       setOwnerField( message );
   }
 }
+
+void Today::setRefreshTimer( int interval ) {
+
+    if ( m_refreshTimerEnabled ) {
+        m_refreshTimer->changeInterval( interval );
+    }
+}
+
 
 /**
  * Initialises the owner field with the default value, the username
@@ -111,12 +122,15 @@ void Today::setOwnerField( QString &message ) {
 void Today::init() {
     // read config
     Config cfg( "today" );
-    cfg.setGroup( "Plugins" );
 
+    cfg.setGroup( "Plugins" );
     m_excludeApplets = cfg.readListEntry( "ExcludeApplets", ',' );
     m_allApplets = cfg.readListEntry( "AllApplets", ',' );
+
     cfg.setGroup( "General" );
     m_iconSize = cfg.readNumEntry( "IconSize", 18 );
+    m_refreshTimer->changeInterval( cfg.readNumEntry( "checkinterval", 15000 ) );
+
 }
 
 
@@ -293,6 +307,7 @@ void Today::startConfig() {
 void Today::refresh() {
     init();
 
+    qDebug(" refresh ");
     // set the date in top label
     QDate date = QDate::currentDate();
     QString time = ( tr( date.toString() ) );

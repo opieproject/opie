@@ -67,6 +67,7 @@ private:
     QSpinBox* SpinBox7;
     QLabel* TimeLabel;
     QSpinBox* SpinBoxTime;
+    QSpinBox* SpinRefresh;
     QSpinBox* SpinBoxIconSize;
 };
 

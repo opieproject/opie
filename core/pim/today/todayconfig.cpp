@@ -99,9 +99,19 @@ TodayConfig::TodayConfig( QWidget* parent, const char* name, bool modal )
     SpinBoxIconSize->setMaxValue( 32 );
     QWhatsThis::add( SpinBoxIconSize, tr( "Set the icon size in pixel" ) );
 
+    QHBox *hbox_refresh = new QHBox( tab_3 );
+    QLabel *refreshLabel = new QLabel( hbox_refresh );
+    refreshLabel->setText( tr( "Refresh" ) );
+    QWhatsThis::add( refreshLabel, tr( "How often should Today refresh itself" ) );
+    SpinRefresh = new QSpinBox( hbox_refresh );
+    SpinRefresh->setMinValue( 2 );
+    SpinRefresh->setSuffix( tr( " seconds" ) );
+    QWhatsThis::add(  SpinRefresh, tr( "How often should Today refresh itself" ) );
+
     tab3Layout->addWidget( hbox_auto );
     tab3Layout->addWidget( hbox_inactive );
     tab3Layout->addWidget( hbox_iconSize );
+    tab3Layout->addWidget( hbox_refresh );
     TabWidget3->addTab( tab_3, "SettingsIcon", tr( "Misc" ) );
 
     m_applets_changed = false;
@@ -146,6 +156,8 @@ void TodayConfig::readConfig() {
     cfg.setGroup( "General" );
     m_iconSize = cfg.readNumEntry( "IconSize", 18 );
     SpinBoxIconSize->setValue( m_iconSize );
+    SpinRefresh->setValue( cfg.readNumEntry( "checkinterval", 15000 ) / 1000 );
+
 
     cfg.setGroup( "Plugins" );
     m_excludeApplets = cfg.readListEntry( "ExcludeApplets", ',' );
@@ -192,7 +204,7 @@ void TodayConfig::writeConfig() {
 
     cfg.setGroup( "General" );
     cfg.writeEntry( "IconSize", m_iconSize );
-
+    cfg.writeEntry( "checkinterval", SpinRefresh->value()*1000 );
 
     // set autostart settings
     setAutoStart();

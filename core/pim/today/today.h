@@ -56,6 +56,7 @@ private:
     void setOwnerField(QString &string);
     void loadPlugins();
     void draw();
+    void setRefreshTimer( int );
 
 private slots:
     void channelReceived(const QCString &msg, const QByteArray & data);
@@ -65,6 +66,9 @@ private slots:
     QStringList m_excludeApplets;
     QStringList m_allApplets;
 
+    QTimer *m_refreshTimer;
+
+    bool m_refreshTimerEnabled;
     int m_newStart;
     int m_iconSize;
     int m_maxCharClip;
