@@ -3,6 +3,6 @@ CanFastload = 0
 Categories = 
 Comment = Classic Dungeon Adventure Game
 Exec = nethack
-Icon = nethack
+Icon = nethack/nethack
 Name = NetHack
 Type = Games
