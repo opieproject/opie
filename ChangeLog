@@ -4,6 +4,7 @@
 	* Added applet and configuration application for switching hardware keyboard layouts (alwin)
 	* Ported applications from libopie1 to libopie2* (drw,ar,arlwin)
 	* Imported fullscreen and font improvements from the Qkonsole fork to embeddedkonsole (waspe)
+	* Clean-up of package information in control files (drw)
 	* Repaired mediummount which was broken since integrating the quicklauncher (alwin)
 	* Improved big-screen support (zecke,ar)
 	* Improved multikeyboard support, added keyboard layout switching applet (mouse)
