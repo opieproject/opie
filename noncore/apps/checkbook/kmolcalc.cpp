@@ -2,6 +2,7 @@
  * kmolcalc.cpp
  *
  * Copyright (C) 2000 Tomislav Gountchev <tomi@idiom.com>
+ * Copyright (C) 2002 Carsten Niehaus <cniehaus@handhelds.org>
  */
 
 /**
@@ -13,6 +14,7 @@
 #include "kmolcalc.h"
 #include <qdict.h>
 #include <qdir.h>
+#include <qfile.h>
 #include <iostream.h>
 
 
@@ -35,7 +37,7 @@ void KMolCalc::readElstable() {
   elstable = new QDict<SubUnit> (197, TRUE);
   elstable->setAutoDelete(TRUE);
   QStringList files;// = // KGlobal::dirs()->findAllResources("appdata", "kmolweights");
-//  mwfile = locateLocal("data", "kmol")+"/kmolweights";
+  mwfile = "/home/opie/opie/noncore/apps/oxigen/kmolweights";
   QFile f(mwfile);
   QString* latest_f = &mwfile;
   for (uint i=0; i<files.count(); i++) {

@@ -5,48 +5,51 @@
  * the Free Software Foundation; either version 2 of the License, or       *
  * ( at your option ) any later version.                                   *
  *                                                                         *
- *  ***********************************************************************/
+ **************************************************************************/
 #include "oxygen.h"
 
-#include <qmenubar.h>
-#include <qstatusbar.h>
-#include <qpopupmenu.h>
-#include <qlabel.h>
-#include <qapplication.h>
+#include "calcdlgui.h"
+#include "kmolcalc.h"
+#include <qlineedit.h>
+#include <qmultilineedit.h>
 #include <qpushbutton.h>
-#include <qfile.h>
-#include <qdir.h>
-#include <qvbox.h>
-#include "calcdlg.h"
 
-Oxygen::Oxygen()
-  : QMainWindow()
+calcDlgUI::calcDlgUI() : CalcDlg()
 {
-    this->setCaption( "Oxygen" );
-    vbox = new QVBox( this );
-    QPushButton *setButton = new QPushButton( "Settings", vbox );
-    connect ( setButton, SIGNAL( clicked() ), this, SLOT( slotSettings() ) );
-    QPushButton *calcButton = new QPushButton( "Calculations", vbox );
-    connect ( calcButton, SIGNAL( clicked() ), this, SLOT( slotCalculations() ) );
-    QPushButton *pseButton = new QPushButton( "PSE", vbox );
-    connect ( pseButton, SIGNAL( clicked() ), this, SLOT( slotPSE() ) );
-
-    setCentralWidget( vbox );
+    kmolcalc = new KMolCalc;
+    connect( calculate, SIGNAL( clicked() ), this, SLOT( calc() ) );
+    connect( clear_fields, SIGNAL( clicked() ), this, SLOT( clear() ) );
 }
 
-
-void Oxygen::close()
+void calcDlgUI::calc()
 {
-  QApplication::exit();
+    QString compound( formula->text() );
+    if ( compound.isEmpty() ) {
+        clear();
+        return;
+    }
+    QString errors( kmolcalc->readFormula( compound ) );
+    QString mw, ea;
+    double weight = kmolcalc->getWeight();
+    if ( errors == "OK" ) {
+        mw.setNum( weight );
+        ea = kmolcalc->getEmpFormula() + " :\n" + kmolcalc->getEA();
+    } else {
+        mw = "???";
+        ea = tr( "ERROR: \n" ) + errors + "\n";
+    }
+    result->setText( mw );
+    anal_display->setText( ea );
 }
 
-//SLOTS
+/**
+ * * Clear all text entry / result fields.
+ * */
+void calcDlgUI::clear()
+{
+    formula->clear();
+    result->clear();
+    anal_display->clear();
+}
 
-void Oxygen::slotCalculations(){ 
-    CalcDlgUI *calcDlgUI = new calcDlgUI();
-    calcDlgUI->show();
-};
-
-void Oxygen::slotSettings(){ };
-void Oxygen::slotPSE(){ };
 

@@ -18,6 +18,7 @@
 #include <qdir.h>
 #include <qvbox.h>
 #include "calcdlg.h"
+#include "calcdlgui.h"
 
 Oxygen::Oxygen()
   : QMainWindow()
@@ -43,8 +44,8 @@ void Oxygen::close()
 //SLOTS
 
 void Oxygen::slotCalculations(){ 
-    CalcDlgUI *calcDlgUI = new calcDlgUI();
-    calcDlgUI->show();
+    calcDlgUI *CalcDlgUI = new calcDlgUI();
+    CalcDlgUI->show();
 };
 
 void Oxygen::slotSettings(){ };

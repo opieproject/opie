@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>222</width>
+            <width>218</width>
             <height>274</height>
         </rect>
     </property>
@@ -100,26 +100,6 @@
                     </property>
                 </widget>
                 <widget>
-                    <class>QLabel</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>TextLabel2_4</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>geometry</name>
-                        <rect>
-                            <x>1</x>
-                            <y>86</y>
-                            <width>298</width>
-                            <height>16</height>
-                        </rect>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>Result:</string>
-                    </property>
-                </widget>
-                <widget>
                     <class>QLayoutWidget</class>
                     <property stdset="1">
                         <name>name</name>
@@ -203,7 +183,7 @@
                     <class>QLineEdit</class>
                     <property stdset="1">
                         <name>name</name>
-                        <cstring>LineEdit2</cstring>
+                        <cstring>result</cstring>
                     </property>
                     <property stdset="1">
                         <name>geometry</name>
@@ -213,6 +193,26 @@
                             <width>170</width>
                             <height>22</height>
                         </rect>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>TextLabel2_4</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>geometry</name>
+                        <rect>
+                            <x>1</x>
+                            <y>86</y>
+                            <width>298</width>
+                            <height>16</height>
+                        </rect>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Result:</string>
                     </property>
                 </widget>
             </widget>

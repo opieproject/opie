@@ -1,22 +1,27 @@
 
-#include <qpe/resource.h>
-#include <qmainwindow.h>
-#include <qtoolbar.h>
+/***************************************************************************
+ *                                                                         *
+ * This program is free software; you can redistribute it and/or modify    *
+ * it under the terms of the GNU General Public License as published by    *
+ * the Free Software Foundation; either version 2 of the License, or       *
+ * ( at your option ) any later version.                                   *
+ *                                                                         *
+ **************************************************************************/
 #include <qstring.h>
-#include <qpopupmenu.h>
+#include "calcdlg.h"
 
 class  QVBox;
+class KMolCalc;
 
-class Oxygen : public QMainWindow
+class calcDlgUI : public CalcDlg
 {
 	Q_OBJECT
 	
     public:
-		Oxygen();
-        QVBox *vbox;
-	private slots:
-        void slotCalculations();
-        void slotSettings();
-        void slotPSE();
-		void close();
+		calcDlgUI();
+        KMolCalc *kmolcalc;
+
+    public slots:
+        void calc();
+        void clear();
 };
