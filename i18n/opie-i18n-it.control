@@ -1,0 +1,9 @@
+Files: i18n/it/.directory i18n/de/*.qm
+Priority: optional
+Section: opie/i18n
+Maintainer: Carsten Niehaus <cniehaus@kde.org>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base ($QPE_VERSION)
+Description: i18n: it
+ it UI texts and dictionary for Qtopia environment.
