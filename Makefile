@@ -60,7 +60,8 @@ NONCORESETTINGS  =noncore/settings/language noncore/settings/rotation \
 NONCORETOOLS = noncore/tools/calculator noncore/tools/clock \
 	 noncore/tools/remote noncore/tools/opie-sh noncore/apps/advancedfm
 
-NONCORESTYLES = noncore/styles/liquid noncore/styles/theme noncore/styles/metal
+NONCORESTYLES = noncore/styles/liquid noncore/styles/theme noncore/styles/metal \
+	noncore/styles/flat noncore/styles/fresh
 
 NONCOREDECOS = noncore/decorations/liquid noncore/decorations/flat \
 	noncore/decorations/polished
