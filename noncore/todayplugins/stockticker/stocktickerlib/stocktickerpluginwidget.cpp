@@ -207,7 +207,7 @@ void StockTickerPluginWidget::getStocks( const char *blah) {
             output +=tempString;
 
 //         printf("----------------------------------------\n\n");
-        tempString.sprintf("||==++==");
+        tempString.sprintf("||==++==|");
         output +=tempString;
 
           /* Simple function which help to browse in the stocks list */ 
