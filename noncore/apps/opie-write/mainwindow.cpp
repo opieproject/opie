@@ -172,13 +172,13 @@ void MainWindow::setupActions()
     connect( a, SIGNAL(activated()), this, SLOT(fileOpen()) );
     a->addTo( file );
 
-    a = new QAction( tr( "Undo" ), Resource::loadIconSet("opie-write/undo"),
+    a = new QAction( tr( "Undo" ), Resource::loadIconSet("undo"),
          QString::null, 0, this, "editUndo" );
     connect( a, SIGNAL( activated() ), this, SLOT( editUndo() ) );
     connect( editor, SIGNAL(undoAvailable(bool)), a, SLOT(setEnabled(bool)) );
     a->addTo( tbEdit );
     a->addTo( edit );
-    a = new QAction( tr( "Redo" ), Resource::loadIconSet("opie-write/redo"),
+    a = new QAction( tr( "Redo" ), Resource::loadIconSet("redo"),
          QString::null, 0, this, "editRedo" );
     connect( a, SIGNAL( activated() ), this, SLOT( editRedo() ) );
     connect( editor, SIGNAL(redoAvailable(bool)), a, SLOT(setEnabled(bool)) );
@@ -186,7 +186,7 @@ void MainWindow::setupActions()
     a->addTo( edit );
 
     edit->insertSeparator();
-    
+
     a = new QAction( tr( "Copy" ), Resource::loadIconSet("copy"),
          QString::null, 0, this, "editCopy" );
     connect( a, SIGNAL( activated() ), this, SLOT( editCopy() ) );
@@ -265,7 +265,7 @@ void MainWindow::setupActions()
 
 Qt3::QTextEdit *MainWindow::currentEditor() const
 {
-    return editor;  
+    return editor;
 }
 
 void MainWindow::doConnections( Qt3::QTextEdit *e )
@@ -507,7 +507,7 @@ void MainWindow::hideEditTools( void )
     tbStyle->hide();
 }
 
-  
+
 void MainWindow::save()
 {
     if ( !doc )
