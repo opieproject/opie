@@ -477,7 +477,8 @@ void odClearDebugConfig();
 #define odBacktrace ondBacktrace
 #endif
 
+}
+}
+
 #endif
 
-}
-}
