@@ -1,15 +1,16 @@
 2004-??-??	Michael Lauer		<mickey@Vanille.de>
 
+	* Switched to a (hopefully) more reliable method reading from gpsd.
 	* Added parsing of named ProbeRequests. Display only-probed-yet SSIDs in a different network color.
 	* Rewrote the simple actions on new {Network, Client, Station}. Besides playing a sound or
 	  blinking a LED, a user customizable script can now be executed, if something has been
 	  detected. This opens up many possibilities, i.e. a qcop to qpegps or exec'ing flite (speech).
-	* Added decloaking of cloaked ESSIDs (length != 0, but essid[0] == \0)
+	* Added decloaking of cloaked ESSIDs (length != 0, but essid[0] == \0).
 	* Hided the 'Parse' Tab in the configuration window. Not functional now and may come later
 	* Added parsing of control frames. Display stations sending them SSID "<unknown>" for now.
-	* Added command line option "-nocheck" to skip non-root and dhcp tests
-	* Improved the speed reading the manufacturer list
-	* GPS coordinates are now presented in the DMS (as opposed to decimal) format
+	* Added command line option "-nocheck" to skip non-root and dhcp tests.
+	* Improved the speed reading the manufacturer list.
+	* GPS coordinates are now presented in the DMS (as opposed to decimal) format.
 
 2003-12-18	Michael Lauer		<mickey@Vanille.de>
 
