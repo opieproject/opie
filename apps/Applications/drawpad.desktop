@@ -4,3 +4,4 @@ Exec=drawpad
 Icon=drawpad/DrawPad
 Type=Application
 Name=DrawPad
+Name[de]=Zeichenbrett

@@ -5,3 +5,4 @@ Icon=qpdf_icon
 Type=Application
 MimeType=application/pdf
 Name=PDF Viewer
+Name[de]=PDF Betrachter

@@ -5,3 +5,4 @@ Icon=vnc
 Type=Application
 Name=VNC Viewer
 Name[pt_BR]=Cliente VNC
+Name[de]=VNC Client
