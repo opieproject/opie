@@ -120,8 +120,3 @@ ifeq ($(STRIP),)
     endif
 endif
 
-export CCACHE=$(shell which ccache 2>/dev/null)
-export DISTCC=$(shell which distcc 2>/dev/null)
-ifneq ($(DISTCC),)
-    export CCACHE_PREFIX=$(shell which distcc &>/dev/null && echo distcc)
-endif
