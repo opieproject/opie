@@ -31,7 +31,7 @@ public:
     exitButton = new QPushButton("Cancel", this);
     connect(bkmkselector, SIGNAL( selected(int) ), this, SLOT( slotSelected(int) ) );
     connect(bkmkselector, SIGNAL( clicked(QListBoxItem*) ), this, SLOT( slotSelected(QListBoxItem*) ) );
-    connect(exitButton, SIGNAL( released() ), this, SLOT( slotCancel() ) );
+    connect(exitButton, SIGNAL( clicked() ), this, SLOT( slotCancel() ) );
     grid->addWidget(bkmkselector,1);
     grid->addWidget(exitButton);
   }

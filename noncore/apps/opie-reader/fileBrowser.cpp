@@ -12,6 +12,8 @@ Extensive modification by Tim Wentford to allow it to work in rotated mode
 #include "QtrListView.h"
 #include <qlineedit.h>
 #include <qpushbutton.h>
+#include <qfile.h>
+#include <qmessagebox.h>
 #ifndef _WINDOWS
 #include <unistd.h>
 #endif
@@ -19,9 +21,6 @@ Extensive modification by Tim Wentford to allow it to work in rotated mode
 #ifdef _WINDOWS
 #include <direct.h>
 #endif
-
-#include <qpe/qpeapplication.h>
-
 
 fileBrowser::fileBrowser( bool allownew, QWidget* parent,  const char* name, bool modal, WFlags fl , const QString filter, const QString iPath )
     : QDialog( parent, name, true,
@@ -31,23 +30,11 @@ fileBrowser::fileBrowser( bool allownew, QWidget* parent,  const char* name, boo
 //    showMaximized();
     if ( !name )
 	setName( "fileBrowser" );
-/*
-    if (parent != NULL)
-    {
-#ifdef OPIE
-	move(0,0);
-	resize( parent->width(), parent->height() );
-#else
-	setGeometry(parent->x(), parent->y(), parent->width(), parent->height() );
-#endif
-    }
-*/
-//    showFullScreen();
     setCaption(tr( "Browse for file" ) );
     filterStr=filter;
 
     buttonOk = new QPushButton( this, "buttonOk" );
-    buttonOk->setFixedSize( 25, 25 );
+    //    buttonOk->setFixedSize( 25, 25 );
     buttonOk->setAutoDefault( false );
     buttonOk->setText( tr( "/" ) );
 
@@ -74,17 +61,33 @@ fileBrowser::fileBrowser( bool allownew, QWidget* parent,  const char* name, boo
     // signals and slots connections
     connect( buttonShowHidden, SIGNAL( toggled(bool) ), this, SLOT( setHidden(bool) ) );
     connect( buttonOk, SIGNAL( clicked() ), this, SLOT( OnRoot() ) );
-    connect( ListView, SIGNAL(doubleClicked(QListViewItem*)), SLOT(listDoubleClicked(QListViewItem*)) );
-    connect( ListView, SIGNAL(clicked(QListViewItem*)), SLOT(listClicked(QListViewItem*)) );
-    connect( ListView, SIGNAL(OnOKButton(QListViewItem*)), SLOT(listClicked(QListViewItem*)) );
-    connect( ListView, SIGNAL(OnCentreButton(QListViewItem*)), SLOT(listClicked(QListViewItem*)) );
+    connect( ListView, SIGNAL(doubleClicked( QListViewItem*)), SLOT(listDoubleClicked(QListViewItem *)) );
+    connect( ListView, SIGNAL(clicked( QListViewItem*)), SLOT(listClicked(QListViewItem *)) );
+    connect( ListView, SIGNAL(OnOKButton( QListViewItem*)), SLOT(listClicked(QListViewItem *)) );
+    connect( ListView, SIGNAL(OnCentreButton( QListViewItem*)), SLOT(listClicked(QListViewItem *)) );
     connect( ListView, SIGNAL(OnCancelButton()), SLOT(OnCancel()) );
 
     QVBoxLayout* grid = new QVBoxLayout(this);
+    grid->addWidget(dirLabel);
     QHBoxLayout* hgrid = new QHBoxLayout(grid);
-    hgrid->addWidget(dirLabel,1);
-    hgrid->addWidget(buttonShowHidden);
+    
+    QPushButton* bt = new QPushButton( this );
+    bt->setText( tr( "SD" ) );
+    connect( bt, SIGNAL( clicked() ), this, SLOT( onSD() ) );
+    hgrid->addWidget(bt);
+
+    bt = new QPushButton( this );
+    bt->setText( tr( "CF" ) );
+    connect( bt, SIGNAL( clicked() ), this, SLOT( onCF() ) );
+    hgrid->addWidget(bt);
+
+    bt = new QPushButton( this );
+    bt->setText( tr( "Home" ) );
+    connect( bt, SIGNAL( clicked() ), this, SLOT( onHome() ) );
+    hgrid->addWidget(bt);
+
     hgrid->addWidget(buttonOk);
+    hgrid->addWidget(buttonShowHidden);
     grid->addWidget(ListView,1);
     if (allownew)
     {
@@ -114,8 +117,7 @@ fileBrowser::fileBrowser( bool allownew, QWidget* parent,  const char* name, boo
 
     populateList();
 
-    if (modal)
-        QPEApplication::showDialog( this );
+    if (modal) showMaximized();
 }
 
 void fileBrowser::resizeEvent(QResizeEvent* e)
@@ -132,7 +134,7 @@ fileBrowser::~fileBrowser()
 void fileBrowser::populateList()
 {
     ListView->clear();
-////odebug << currentDir.canonicalPath() << oendl; 
+////qDebug(currentDir.canonicalPath());
 //    currentDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::NoSymLinks );
     currentDir.setFilter( filterspec );
     currentDir.setSorting(/* QDir::Size*/ /*| QDir::Reversed | */QDir::DirsFirst);
@@ -156,7 +158,7 @@ void fileBrowser::populateList()
 	    } 
 	    else 
 	    {
-////        odebug << "Not a dir: "+currentDir.canonicalPath()+fileL << oendl; 
+////        qDebug("Not a dir: "+currentDir.canonicalPath()+fileL);
 	    }
 	    new QListViewItem( ListView,fileL,fileS );
 	}
@@ -169,7 +171,7 @@ void fileBrowser::populateList()
 
 void fileBrowser::upDir()
 {
-////    odebug << currentDir.canonicalPath() << oendl; 
+////    qDebug(currentDir.canonicalPath());
 }
 
 void fileBrowser::listClicked(QListViewItem *selectedItem)
@@ -177,7 +179,7 @@ void fileBrowser::listClicked(QListViewItem *selectedItem)
     if (selectedItem == NULL) return;
     QString strItem=selectedItem->text(0);
 
-////    odebug << "" << strItem << "" << oendl; 
+////    qDebug("%s", (const char*)strItem);
     
 
     QString strSize=selectedItem->text(1);
@@ -232,9 +234,7 @@ void fileBrowser::OnOK()
 
 void fileBrowser::OnRoot()
 {
-    currentDir.cd("/", TRUE);
-    populateList();
-    chdir("/");
+  setdir("/");
 }
 
 void fileBrowser::OnCancel()
@@ -263,4 +263,26 @@ void fileBrowser::onReturn()
 	filename = QDir::cleanDirPath(currentDir.canonicalPath()+"/"+m_filename->text());
     }
     OnOK();
+}
+
+void fileBrowser::onCF()
+{
+  setdir("/mnt/cf");
+}
+
+void fileBrowser::onSD()
+{
+  setdir("/mnt/card");
+}
+
+void fileBrowser::onHome()
+{
+  setdir(QDir::homeDirPath());
+}
+
+void fileBrowser::setdir(const QString& s)
+{
+    currentDir.cd(s, TRUE);
+    populateList();
+    chdir(s);
 }

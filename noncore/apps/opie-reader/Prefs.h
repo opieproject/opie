@@ -8,23 +8,24 @@
 ****************************************************************************/
 #ifndef CPREFS_H
 #define CPREFS_H
-#include "useqpe.h"
+
 #include <qvariant.h>
 #include <qwidget.h>
 #include <qtabdialog.h>
 #include <qtabwidget.h>
 #include <qspinbox.h>
 #include <qcheckbox.h>
-#include <qcombobox.h>
 #include <qlineedit.h>
-#ifdef USEQPE
+
+#define USECOMBO
+
+#ifdef USECOMBO
+#include <qcombobox.h>
+#else
 #include <qpe/menubutton.h>
 #endif
-//#include "opie.h"
 
-//#ifdef OPIE
-#define USECOMBO
-//#endif
+#include "orkey.h"
 
 class QVBoxLayout; 
 class QHBoxLayout; 
@@ -32,10 +33,11 @@ class QGridLayout;
 //class QCheckBox;
 class QLabel;
 //class QSpinBox;
+class QListViewItem;
 
 class CLayoutPrefs : public QWidget
 { 
-    Q_OBJECT
+
 public:
 
     friend class CPrefs;
@@ -52,26 +54,33 @@ public:
     QCheckBox* Remap;
     QCheckBox* Embolden;
     QCheckBox* FullJustify;
+    QCheckBox* FixGraphics;
+    QCheckBox* hyphenate;
+    //    QCheckBox* customhyphen;
+    QCheckBox* prepalm;
+    QCheckBox* pkern;
+    //    QCheckBox* Inverse;
+    //    QCheckBox* Negative;
 };
 
 class CLayoutPrefs2 : public QWidget
 { 
-    Q_OBJECT
+
 public:
 
     friend class CPrefs;
 
-    CLayoutPrefs2( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
+    CLayoutPrefs2( int w, QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     ~CLayoutPrefs2();
 
     QSpinBox* ParaLead;
     QSpinBox* LineLead;
     QSpinBox* Indent;
-    QSpinBox* Margin, *gfxzoom, *pageoverlap;
+    QSpinBox *TopMargin, *BottomMargin, *LeftMargin, *RightMargin, *gfxzoom, *pageoverlap;
 #ifdef USECOMBO
-    QComboBox *Markup, *fontselector;
+    QComboBox *Markup, *fontselector, *fgsel, *bgsel;
 #else
-    MenuButton *Markup, *fontselector;
+    MenuButton *Markup, *fontselector, *fgsel, *bgsel;
 #endif
 };
 
@@ -99,7 +108,7 @@ protected:
 */
 class CMiscPrefs : public QWidget
 { 
-    Q_OBJECT
+
 public:
 
     friend class CPrefs;
@@ -109,11 +118,26 @@ public:
 
     QCheckBox *annotation, *dictionary, *clipboard;
     QCheckBox *Depluck, *Dejpluck, *Continuous;
+
+    QSpinBox *scrollstep;
+
+#ifdef USECOMBO
+    QComboBox *scrollcolor, *bgtype, *scrolltype, *minibarcol;
+#else
+    MenuButton *scrollcolor, *bgtype, *scrolltype, *minibarcol;
+#endif
 };
+/*
+class QListView;
+class QListViewItem;
 
 class CButtonPrefs : public QWidget
-{ 
-    Q_OBJECT
+{
+Q_OBJECT
+  QMap<orKey, int> *kmap;
+  QMap<orKey, QListViewItem*> listmap;
+  QListView* lb;
+  void keyPressEvent(QKeyEvent* e);
 #ifdef USECOMBO
     void populate(QComboBox*);
 #else
@@ -123,20 +147,24 @@ public:
 
     friend class CPrefs;
 
-    CButtonPrefs( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
+    CButtonPrefs( QMap<orKey, int>*, QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     ~CButtonPrefs();
 
 #ifdef USECOMBO
-    QComboBox *returnAction, *spaceAction, *escapeAction, *leftAction, *rightAction, *upAction, *downAction;
+    QComboBox *action;
 #else
-    MenuButton *returnAction, *spaceAction, *escapeAction, *leftAction, *rightAction, *upAction, *downAction;
+    MenuButton *action;
 #endif
-    QCheckBox *leftScroll, *rightScroll, *upScroll, *downScroll;
-};
+    QSpinBox* debounce;
 
+    //    QCheckBox *leftScroll, *rightScroll, *upScroll, *downScroll;
+ private slots:
+    void erasemapping(QListViewItem*);
+};
+*/
 class CInterPrefs : public QWidget
 { 
-    Q_OBJECT
+
 public:
 
     friend class CPrefs;
@@ -161,7 +189,7 @@ Q_OBJECT
     CLayoutPrefs* layout;
     CLayoutPrefs2* layout2;
  CMiscPrefs* misc;
- CButtonPrefs* button;
+ // CButtonPrefs* button;
  CInterPrefs* inter;
 
     void keyPressEvent(QKeyEvent* e)
@@ -182,11 +210,19 @@ Q_OBJECT
 	    }
 	}
  public:
-    CPrefs(bool fs = true, QWidget* parent = 0, const char* name = 0);
+    CPrefs(int w, bool fs = true, QWidget* parent = 0, const char* name = 0);
     ~CPrefs()
 	{
 	}
+    bool hyphenate() { return layout->hyphenate->isChecked(); }
+    void hyphenate(bool _v) { layout->hyphenate->setChecked(_v); }
+    /*
+    bool customhyphen() { return layout->customhyphen->isChecked(); }
+    void customhyphen(bool _v) { layout->customhyphen->setChecked(_v); }
+    */
     bool StripCR() { return layout->StripCR->isChecked(); }
+    bool repalm() { return layout->prepalm->isChecked(); }
+    bool kern() { return layout->pkern->isChecked(); }
     bool Dehyphen() { return layout->Dehyphen->isChecked(); }
     bool SingleSpace() { return layout->SingleSpace->isChecked(); }
     bool Unindent() { return layout->Unindent->isChecked(); }
@@ -195,15 +231,23 @@ Q_OBJECT
     bool Remap() { return layout->Remap->isChecked(); }
     bool Embolden() { return layout->Embolden->isChecked(); }
     bool FullJustify() { return layout->FullJustify->isChecked(); }
+    //    bool Inverse() { return layout->Inverse->isChecked(); }
+    //    bool Negative() { return layout->Negative->isChecked(); }
+    bool FixGraphics() { return layout->FixGraphics->isChecked(); }
     int ParaLead() { return layout2->ParaLead->value(); }
     int LineLead() { return layout2->LineLead->value(); }
-    int Margin() { return layout2->Margin->value(); }
+    int TopMargin() { return layout2->TopMargin->value(); }
+    int BottomMargin() { return layout2->BottomMargin->value(); }
+    int LeftMargin() { return layout2->LeftMargin->value(); }
+    int RightMargin() { return layout2->RightMargin->value(); }
     int Indent() { return layout2->Indent->value(); }
     int Markup() { return layout2->Markup->currentItem(); }
     QString Font() { return layout2->fontselector->currentText(); }
 
 
     void StripCR(bool v) { layout->StripCR->setChecked(v); }
+    void repalm(bool v) { layout->prepalm->setChecked(v); }
+    void kern(bool v) { layout->pkern->setChecked(v); }
     void Dehyphen(bool v) { layout->Dehyphen->setChecked(v); }
     void SingleSpace(bool v) { layout->SingleSpace->setChecked(v); }
     void Unindent(bool v) { layout->Unindent->setChecked(v); }
@@ -212,15 +256,51 @@ Q_OBJECT
     void Remap(bool v) { layout->Remap->setChecked(v); }
     void Embolden(bool v) { layout->Embolden->setChecked(v); }
     void FullJustify(bool v) { layout->FullJustify->setChecked(v); }
+    //    void Negative(bool v) { layout->Negative->setChecked(v); }
+    //    void Inverse(bool v) { layout->Inverse->setChecked(v); }
+    void FixGraphics(bool v) { layout->FixGraphics->setChecked(v); }
     void ParaLead(int v) { layout2->ParaLead->setValue(v); }
     void LineLead(int v) { layout2->LineLead->setValue(v); }
-    void Margin(int v) { layout2->Margin->setValue(v); }
+    void TopMargin(int v) { layout2->TopMargin->setValue(v); }
+    void BottomMargin(int v) { layout2->BottomMargin->setValue(v); }
+    void LeftMargin(int v) { layout2->LeftMargin->setValue(v); }
+    void RightMargin(int v) { layout2->RightMargin->setValue(v); }
     void Indent(int v) { layout2->Indent->setValue(v); }
 #ifdef USECOMBO
     void Markup(int v) { layout2->Markup->setCurrentItem(v); }
 #else
     void Markup(int v) { layout2->Markup->select(v); }
 #endif
+#ifdef USECOMBO
+    void bgtype(int v) { misc->bgtype->setCurrentItem(v); }
+    void scrollcolor(int v) { misc->scrollcolor->setCurrentItem(v); }
+    void minibarcol(int v) { misc->minibarcol->setCurrentItem(v); }
+#else
+    void bgtype(int v) { misc->bgtype->select(v); }
+    void scrollcolor(int v) { misc->scrollcolor->select(v); }
+    void minibarcol(int v) { misc->minibarcol->select(v); }
+#endif
+    int bgtype() { return misc->bgtype->currentItem(); }
+    int scrollcolor() { return misc->scrollcolor->currentItem(); }
+    int minibarcol() { return misc->minibarcol->currentItem(); }
+
+
+#ifdef USECOMBO
+    void foreground(int v) { layout2->fgsel->setCurrentItem(v); }
+#else
+    void foreground(int v) { layout2->fgsel->select(v); }
+#endif
+    int foreground() { return layout2->fgsel->currentItem(); }
+
+#ifdef USECOMBO
+    void background(int v) { layout2->bgsel->setCurrentItem(v); }
+#else
+    void background(int v) { layout2->bgsel->select(v); }
+#endif
+    int background() { return layout2->bgsel->currentItem(); }
+
+
+
 #ifdef USECOMBO
     void Font(QString& s)
 	{
@@ -258,49 +338,11 @@ Q_OBJECT
     bool miscannotation() { return misc->annotation->isChecked(); }
     bool miscdictionary() { return misc->dictionary->isChecked(); }
     bool miscclipboard() { return misc->clipboard->isChecked(); }
-
-    int spaceAction() { return button->spaceAction->currentItem(); }
-#ifdef USECOMBO
-    void spaceAction(int v) { button->spaceAction->setCurrentItem(v); }
-#else
-    void spaceAction(int v) { button->spaceAction->select(v); }
-#endif
-    int escapeAction() { return button->escapeAction->currentItem(); }
-#ifdef USECOMBO
-    void escapeAction(int v) { button->escapeAction->setCurrentItem(v); }
-#else
-    void escapeAction(int v) { button->escapeAction->select(v); }
-#endif
-    int returnAction() { return button->returnAction->currentItem(); }
-#ifdef USECOMBO
-    void returnAction(int v) { button->returnAction->setCurrentItem(v); }
-#else
-    void returnAction(int v) { button->returnAction->select(v); }
-#endif
-    int leftAction() { return button->leftAction->currentItem(); }
-#ifdef USECOMBO
-    void leftAction(int v) { button->leftAction->setCurrentItem(v); }
-#else
-    void leftAction(int v) { button->leftAction->select(v); }
-#endif
-    int rightAction() { return button->rightAction->currentItem(); }
-#ifdef USECOMBO
-    void rightAction(int v) { button->rightAction->setCurrentItem(v); }
-#else
-    void rightAction(int v) { button->rightAction->select(v); }
-#endif
-    int upAction() { return button->upAction->currentItem(); }
-#ifdef USECOMBO
-    void upAction(int v) { button->upAction->setCurrentItem(v); }
-#else
-    void upAction(int v) { button->upAction->select(v); }
-#endif
-    int downAction() { return button->downAction->currentItem(); }
-#ifdef USECOMBO
-    void downAction(int v) { button->downAction->setCurrentItem(v); }
-#else
-    void downAction(int v) { button->downAction->select(v); }
-#endif
+    /*
+    int Debounce() { return button->debounce->value(); }
+    void Debounce(int v) { button->debounce->setValue(v); }
+    */
+    /*
     bool leftScroll() { return button->leftScroll->isChecked(); }
     void leftScroll(bool v) { button->leftScroll->setChecked(v); }
     bool rightScroll() { return button->rightScroll->isChecked(); }
@@ -309,10 +351,10 @@ Q_OBJECT
     void upScroll(bool v) { button->upScroll->setChecked(v); }
     bool downScroll() { return button->downScroll->isChecked(); }
     void downScroll(bool v) { button->downScroll->setChecked(v); }
+    */
 
-
-    int gfxsize() { return layout2->gfxzoom->value(); }
-    void gfxsize(int v) { layout2->gfxzoom->setValue(v); }
+    int gfxsize() { return layout2->gfxzoom->value()/10; }
+    void gfxsize(int v) { layout2->gfxzoom->setValue(10*v); }
     int pageoverlap() { return layout2->pageoverlap->value(); }
     void pageoverlap(int v) { layout2->pageoverlap->setValue(v); }
 
@@ -329,13 +371,15 @@ Q_OBJECT
     void propfontchange(bool v) { inter->propfontchange->setChecked(v); }
 
     int encoding() { return inter->encoding->currentItem(); }
+    int scrolltype() { return misc->scrolltype->currentItem(); }
 #ifdef USECOMBO
     void encoding(int v) { inter->encoding->setCurrentItem(v); }
+    void scrolltype(int v) { misc->scrolltype->setCurrentItem(v); }
 #else
     void encoding(int v) { inter->encoding->select(v); }
+    void scrolltype(int v) { misc->scrolltype->select(v); }
 #endif
-
-
-
+    void scrollstep(int v) { misc->scrollstep->setValue(v); }
+    int scrollstep() { return misc->scrollstep->value(); }
 };
 #endif // CPREFS_H

@@ -4,7 +4,6 @@
 
 #ifndef __Aportis_h
 #define __Aportis_h
-#include "useqpe.h"
 #include "CExpander.h"
 #include "pdb.h"
 
@@ -60,8 +59,8 @@ inline DWORD SwapLong(DWORD r)
 	return  ((r>>24) & 0xFF) + (r<<24) + ((r>>8) & 0xFF00) + ((r<<8) & 0xFF0000);
 }
 
-class Aportis : public CExpander, Cpdb {
-    bool peanutfile;
+class Aportis : public Cpdb {
+    bool peanutfile, html;
     void dePeanut(int&);
   DWORD dwLen;
   WORD nRecs2;
@@ -69,24 +68,16 @@ class Aportis : public CExpander, Cpdb {
   WORD nRecs;
   WORD BlockSize;
   DWORD dwRecLen;
+  WORD mobiimagerec;
   int currentrec, currentpos;
   unsigned int cbptr;
   unsigned int outptr;
   unsigned char circbuf[2048];
   char bCompressed;
 public:
-#ifdef USEQPE
-	void suspend()
-      {
-	  CExpander::suspend(fin);
-      }
-  void unsuspend()
-      {
-	  CExpander::unsuspend(fin);
-      }
-#endif
   void sizes(unsigned long& _file, unsigned long& _text)
     {
+      qDebug("Calling aportis sizes:(%u,%u,%u)", dwTLen, nRecs, BlockSize);
       _file = dwLen;
       _text = dwTLen;
     }
@@ -100,8 +91,10 @@ public:
   CList<Bkmk>* getbkmklist();
   MarkupType PreferredMarkup()
       {
-	  return (peanutfile) ? cPML : cTEXT;
+	  return (peanutfile) ? cPML : ((html) ? cHTML : cTEXT);
       }
+  QImage* getPicture(unsigned long);
+  QString about() { return QString("AportisDoc codec (c) Tim Wentford"); }
 private:
   bool refreshbuffer();
   unsigned int GetBS(unsigned int bn);

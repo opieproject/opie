@@ -2,13 +2,15 @@
 
 #include "Bkmks.h"
 
+#include "StyleConsts.h"
+#include "Markups.h"
 #include "my_list.h"
 #include "version.h"
 #include "names.h"
 
 const unsigned long BkmkFile::magic = ((unsigned long)'q' << 24) | ((unsigned long)'t' << 16) | ((unsigned long)'r' << 8) | ((unsigned long)BKMKTYPE);
 
-Bkmk::Bkmk(const unsigned char* _nm, unsigned short _nmlen, const unsigned char* _anno, unsigned short _annolen, unsigned int _p) : m_position(_p)
+Bkmk::Bkmk(const unsigned char* _nm, unsigned short _nmlen, const unsigned char* _anno, unsigned short _annolen, unsigned int _p)
 {
     init(_nm, _nmlen, _anno, _annolen, _p);
 }
@@ -20,7 +22,6 @@ Bkmk::Bkmk(const tchar* _nm, const unsigned char* _anno, unsigned short annolen,
 
 Bkmk::Bkmk(const tchar* _nm, const tchar* _anno, unsigned int _p) : m_position(_p)
 {
-
     if (_anno == NULL)
     {
 	tchar t = 0;
@@ -30,6 +31,21 @@ Bkmk::Bkmk(const tchar* _nm, const tchar* _anno, unsigned int _p) : m_position(_
     {
 	init(_nm, sizeof(tchar)*(ustrlen(_nm)+1), _anno, sizeof(tchar)*(ustrlen(_anno)+1), _p);
     }
+}
+
+Bkmk::Bkmk(const tchar* _nm, const tchar* _anno, unsigned int _p, unsigned int _p2) : m_position(_p)
+{
+    if (_anno == NULL)
+    {
+	tchar t = 0;
+	init(_nm, sizeof(tchar)*(ustrlen(_nm)+1), &t, sizeof(t), _p);
+    }
+    else
+    {
+	init(_nm, sizeof(tchar)*(ustrlen(_nm)+1), _anno, sizeof(tchar)*(ustrlen(_anno)+1), _p);
+    }
+    m_position2 = _p2;
+    m_red = m_green = m_blue = 127;
 }
 
 void Bkmk::init(const void* _nm, unsigned short _nmlen, const void* _anno, unsigned short _annolen, unsigned int _p)
@@ -56,6 +72,9 @@ void Bkmk::init(const void* _nm, unsigned short _nmlen, const void* _anno, unsig
 	m_anno = NULL;
     }
     m_position = _p;
+    m_position2 = _p;
+    m_red = m_green = m_blue = 255;
+    m_level = 0;
 }
 
 Bkmk::~Bkmk()
@@ -95,12 +114,17 @@ Bkmk& Bkmk::operator=(const Bkmk& rhs)
     else
 	m_anno = NULL;
     m_position = rhs.m_position;
+    m_position2 = rhs.m_position2;
+    m_red = rhs.m_red;
+    m_green = rhs.m_green;
+    m_blue = rhs.m_blue;
+    m_level = rhs.m_level;
     return *this;
 }
 
 bool Bkmk::operator==(const Bkmk& rhs)
 {
-    return (m_position == rhs.m_position && (rhs.m_namelen == m_namelen) && memcmp(m_name,rhs.m_name,m_namelen) == 0);
+    return ((m_position == rhs.m_position) && (m_position2 == rhs.m_position2) && (rhs.m_namelen == m_namelen) && memcmp(m_name,rhs.m_name,m_namelen) == 0);
 }
 
 void Bkmk::setAnno(unsigned char* t, unsigned short len)
@@ -146,9 +170,9 @@ void Bkmk::setAnno(tchar* t)
     }
 }
 
-BkmkFile::BkmkFile(const char *fnm, bool w)
-    :
-    wt(w), isUpgraded(false)
+BkmkFile::BkmkFile(const char *fnm, bool w, bool _x)
+  :
+  wt(w), isUpgraded(false), m_extras(_x)
 {
     if (w)
     {
@@ -174,6 +198,14 @@ void BkmkFile::write(const Bkmk& b)
 	fwrite(&b.m_annolen, sizeof(b.m_annolen),1,f);
 	fwrite(b.m_anno,1,b.m_annolen,f);
 	fwrite(&b.m_position,sizeof(b.m_position),1,f);
+	if (m_extras)
+	  {
+	    fwrite(&b.m_position2,sizeof(b.m_position2),1,f);
+	    fwrite(&b.m_red,sizeof(b.m_red),1,f);
+	    fwrite(&b.m_green,sizeof(b.m_green),1,f);
+	    fwrite(&b.m_blue,sizeof(b.m_blue),1,f);
+	    fwrite(&b.m_level,sizeof(b.m_level),1,f);
+	  }
     }
 }
 
@@ -214,18 +246,23 @@ CList<Bkmk>* BkmkFile::readall()
 	{
 	    switch(newmagic & 0xff)
 	    {
-		case 6:
+		case 7:
 		    isUpgraded = false;
+		    bl = readall00(read07);
+//		    qDebug("Correct version!");
+		    break;
+		case 6:
+		    isUpgraded = true;
 		    bl = readall00(read06);
-//		    odebug << "Correct version!" << oendl; 
+//		    qDebug("Correct version!");
 		    break;
 		case 5:
 		    isUpgraded = true;
 		    bl = readall00(read05);
-//		    odebug << "Known version!" << oendl; 
+//		    qDebug("Known version!");
 		    break;
 		default:
-//		    odebug << "Unknown version!" << oendl; 
+//		    qDebug("Unknown version!");
 		    isUpgraded = true;
 		    bl = readall00(read05);
 	    }
@@ -234,12 +271,12 @@ CList<Bkmk>* BkmkFile::readall()
     return bl;
 }
 
-CList<Bkmk>* BkmkFile::readall00(Bkmk* (*readfn)(FILE*))
+CList<Bkmk>* BkmkFile::readall00(Bkmk* (*readfn)(BkmkFile*, FILE*))
 {
     CList<Bkmk>* bl = new CList<Bkmk>;
     while (1)
     {
-	Bkmk* b = (*readfn)(f);
+	Bkmk* b = (*readfn)(this, f);
 	if (b == NULL) break;
 	bl->push_back(*b);
 	delete b;
@@ -247,7 +284,7 @@ CList<Bkmk>* BkmkFile::readall00(Bkmk* (*readfn)(FILE*))
     return bl;
 }
 
-Bkmk* BkmkFile::read03(FILE* f)
+Bkmk* BkmkFile::read03(BkmkFile* /*_this*/, FILE* f)
 {
     Bkmk* b = NULL;
     if (f != NULL)
@@ -271,7 +308,7 @@ Bkmk* BkmkFile::read03(FILE* f)
     return b;
 }
 
-Bkmk* BkmkFile::read05(FILE* f)
+Bkmk* BkmkFile::read05(BkmkFile* /*_this*/, FILE* f)
 {
     Bkmk* b = NULL;
     if (f != NULL)
@@ -294,7 +331,7 @@ Bkmk* BkmkFile::read05(FILE* f)
     return b;
 }
 
-Bkmk* BkmkFile::read06(FILE* f)
+Bkmk* BkmkFile::read06(BkmkFile* /*_this*/, FILE* f)
 {
     Bkmk* b = NULL;
     if (f != NULL)
@@ -314,7 +351,49 @@ Bkmk* BkmkFile::read06(FILE* f)
 		fread(b->m_anno,1,b->m_annolen,f);
 	    }
 	    fread(&(b->m_position),sizeof(b->m_position),1,f);
+	    b->m_position2 = b->m_position+b->m_namelen-1;
+	    b->m_red = b->m_green = b->m_blue = 127;
+	    b->m_level = 0;
 	}
     }
     return b;
+}
+
+Bkmk* BkmkFile::read07(BkmkFile* _this, FILE* f)
+{
+  Bkmk* b = NULL;
+  if (f != NULL)
+    {
+      unsigned short ln;
+      if (fread(&ln,sizeof(ln),1,f) == 1)
+	{
+	  b = new Bkmk;
+	  b->m_namelen = ln;
+	  b->m_name = new unsigned char[b->m_namelen];
+	  fread(b->m_name,1,b->m_namelen,f);
+	  
+	  fread(&(b->m_annolen),sizeof(b->m_annolen),1,f);
+	  if (b->m_annolen > 0)
+	    {
+	      b->m_anno = new unsigned char[b->m_annolen];
+	      fread(b->m_anno,1,b->m_annolen,f);
+	    }
+	  fread(&(b->m_position),sizeof(b->m_position),1,f);
+	  if (_this->m_extras)
+	    {
+	      fread(&(b->m_position2),sizeof(b->m_position2),1,f);
+	      fread(&(b->m_red),sizeof(b->m_red),1,f);
+	      fread(&(b->m_green),sizeof(b->m_green),1,f);
+	      fread(&(b->m_blue),sizeof(b->m_blue),1,f);
+	      fread(&(b->m_level),sizeof(b->m_level),1,f);
+	    }
+	  else
+	    {
+	      b->m_position2 = b->m_position;
+	      b->m_red = b->m_green = b->m_blue = 255;
+	      b->m_level = 0;
+	    }
+	}
+    }
+  return b;
 }

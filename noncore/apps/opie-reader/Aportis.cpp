@@ -3,6 +3,7 @@
 #include "Aportis.h"
 #include "my_list.h"
 #include "Bkmks.h"
+#include "static.h"
 
 Aportis::Aportis() : peanutfile(false) { /*printf("constructing:%x\n",fin);*/ }
 
@@ -28,14 +29,14 @@ CList<Bkmk>* Aportis::getbkmklist()
 	    {
 		char name[17];
 		name[16] = '\0';
-//		odebug << "Record:" << i << ", Length:" << recordlength(i) << "" << oendl; 
+//		qDebug("Record:%d, Length:%u",i,recordlength(i));
 		gotorecordnumber(i);
 		fread(name,1,16,fin);
 		unsigned long lcn;
 		fread(&lcn,sizeof(lcn),1,fin);
 		lcn ^= 0xa5a5a5a5;
 		lcn = SwapLong(lcn);
-//		odebug << "Bookmark:" << name << ":" << lcn << "" << oendl; 
+//		qDebug("Bookmark:%s:%u", name,lcn);
 		tchar tname[17];
 		memset(tname, 0, sizeof(tname));
 		for (int i = 0; name[i] != 0; i++)
@@ -94,26 +95,45 @@ int Aportis::OpenFile(const char *src)
 {
   //  printf("In openfile\n");
   int ret = 0;
+  html = false;
+  mobiimagerec = 0;
+  if (!Cpdb::openpdbfile(src)) return -1;
 
-  if (!Cpdb::openfile(src)) return -1;
-
-  if (head.creator != 0x64414552 //   'dAER'
-      || head.type != 0x74584554) // 'tXET')
+  if (head.creator == 0x64414552 //   'dAER'
+      || head.type == 0x74584554) // 'tXET')
     {
-
-	if (memcmp(&head.creator, "PPrs", 4) == 0 && memcmp(&head.type, "PNRd", 4) == 0)
-	{
-	    peanutfile = true;
-	}
-	else
-	{
-	    return -2;
-	}
+    }
+  else if (memcmp(&head.creator, "PPrs", 4) == 0 && memcmp(&head.type, "PNRd", 4) == 0)
+    {
+      peanutfile = true;
+    }
+  else if (memcmp(&head.creator, "MOBI", 4) == 0 && memcmp(&head.type, "BOOK", 4) == 0)
+    {
+      html = true;
+      unsigned char vsn;
+      fseek(fin, recordpos(0)+39, SEEK_SET);
+      fread(&vsn, 1, sizeof(vsn), fin);
+      qDebug("Mobi version:%x", vsn);
+      if (vsn > 2)
+	 {
+	    fseek(fin, recordpos(0)+110, SEEK_SET);
+	    fread(&mobiimagerec, 1, sizeof(mobiimagerec), fin);
+	    mobiimagerec = ntohs(mobiimagerec)-1;
+	 }
+    }
+  else
+    {
+      return -2;
     }
 
   nRecs2 = nRecs = SwapWord(head.recordList.numRecords) - 1;
-  fseek(fin,0,SEEK_END);
-  dwLen = ftell(fin);
+
+  struct stat _stat;
+  stat(src,&_stat);
+  dwLen = _stat.st_size;
+
+  //fseek(fin,0,SEEK_END);
+  //dwLen = ftell(fin);
 
   if (peanutfile)
   {
@@ -121,7 +141,7 @@ int Aportis::OpenFile(const char *src)
       PeanutHeader hdr0;
       gotorecordnumber(0);
       fread(&hdr0, sizeof(hdr0), 1, fin);
-//      odebug << "Version:" << ntohs(hdr0.Version) << "" << oendl; 
+//      qDebug("Version:%x", ntohs(hdr0.Version));
       if (hdr0.Version && 0x0200)
       {
 	  bCompressed = 2;
@@ -141,7 +161,8 @@ int Aportis::OpenFile(const char *src)
       fread(&hdr0, sizeof(hdr0), 1, fin);
       bCompressed = SwapWord(hdr0.wVersion);
       if (bCompressed!=1 && bCompressed!=2 && bCompressed != 4) {
-	  ret = bCompressed;
+	  qDebug("ERROR:Unrecognised compression type in Aportis:%u", bCompressed);
+	ret = bCompressed;
 	  bCompressed = 2;
       }
       switch (bCompressed)
@@ -164,6 +185,7 @@ int Aportis::OpenFile(const char *src)
 	  case 2:
 	  default:
 	      nRecs = SwapWord(hdr0.wNumRecs);
+	      if (mobiimagerec == 0 || mobiimagerec > nRecs2) mobiimagerec = nRecs;
 	      dwTLen = SwapLong(hdr0.dwStoryLen);
 	      BlockSize = SwapWord(hdr0.wRecSize);
 	      if (BlockSize == 0)
@@ -173,8 +195,8 @@ int Aportis::OpenFile(const char *src)
 	      }
       }
   }
-
-
+   
+  qDebug("Mobi image rec:%u", mobiimagerec);
 
   // this is the main record buffer
   // it knows how to stretch to accomodate the decompress
@@ -182,7 +204,39 @@ int Aportis::OpenFile(const char *src)
   cbptr = 0;
   outptr = 0;
   refreshbuffer();
-//  odebug << "Number of records:[" << nRecs << "," << nRecs2 << "]" << oendl; 
+  if (!html)
+    {
+      int c;
+      char htmltag[] = "<HTML>";
+      char *p = htmltag;
+      while (1)
+	{
+	  c = getch();
+	  char ch = *p++;
+	  if (ch == 0)
+	    {
+	      html = true;
+	      break;
+	    }
+	  if (c != ch)
+	    {
+	      html = false;
+	      break;
+	    }
+	}
+      currentrec = 0;
+      cbptr = 0;
+      outptr = 0;
+      refreshbuffer();
+    }
+  /*
+     for (int i = 0; i < nRecs2; i++)
+     {
+	qDebug("Record:%u - %u bytes at position %x", i, recordlength(i), recordpos(i));
+     }
+  */
+
+  qDebug("Number of records:[%u,%u]", nRecs, nRecs2);
   return ret;
 }
 
@@ -372,3 +426,30 @@ bool Aportis::refreshbuffer()
     return false;
   }
 }
+
+#include <qimage.h>
+
+QImage* Aportis::getPicture(unsigned long tgt)
+{
+  unsigned short tgtrec = tgt+mobiimagerec;
+  if (tgtrec > nRecs2) return NULL;
+  size_t cur = ftell(fin);
+  unsigned short reclen = recordlength(tgtrec);
+  gotorecordnumber(tgtrec);
+  UInt8* imgbuffer = new UInt8[reclen];
+  fread(imgbuffer, 1, reclen, fin);
+  QByteArray arr;
+  arr.assign((const char*)imgbuffer, reclen);
+
+  QImage* qimage = new QImage(arr);
+  fseek(fin, cur, SEEK_SET);
+
+  return qimage;
+}
+
+#ifndef __STATIC
+extern "C"
+{
+  CExpander* newcodec() { return new Aportis; }
+}
+#endif

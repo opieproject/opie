@@ -8,23 +8,54 @@
 ****************************************************************************/
 #include "Prefs.h"
 
+#include <qcheckbox.h>
 #include <qlabel.h>
+#include <qpushbutton.h>
+#include <qspinbox.h>
 #include <qlayout.h>
+#include <qvariant.h>
+#include <qtooltip.h>
+#include <qwhatsthis.h>
 #include <qbuttongroup.h>
-#ifdef USEQPE
-#include <qpe/menubutton.h>
-#include <qpe/fontdatabase.h>
+#include <qlineedit.h>
+#ifdef USECOMBO
+#include <qcombobox.h>
 #else
-#include <qfontdatabase.h>
+#include <qpe/menubutton.h>
 #endif
+#include <qfontdatabase.h>
 
-#include <qpe/qpeapplication.h>
+#ifdef USECOMBO
+void populate_colours(QComboBox *mb)
+#else
+void populate_colours(MenuButton *mb)
+#endif
+{
+    mb->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
+    mb->insertItem("White");
+    mb->insertItem("Black");
+    mb->insertItem("Dark Gray");
+    mb->insertItem("Gray");
+    mb->insertItem("Light Gray");
+    mb->insertItem("Red");
+    mb->insertItem("Green");
+    mb->insertItem("Blue");
+    mb->insertItem("Cyan");
+    mb->insertItem("Magenta");
+    mb->insertItem("Yellow");
+    mb->insertItem("Dark Red");
+    mb->insertItem("Dark Green");
+    mb->insertItem("Dark Blue");
+    mb->insertItem("Dark Cyan");
+    mb->insertItem("Dark Magenta");
+    mb->insertItem("Dark Yellow");
+}
 
 CLayoutPrefs::CLayoutPrefs( QWidget* parent,  const char* name, WFlags fl )
     : QWidget( parent, name, fl )
 {
     QHBoxLayout* hb = new QHBoxLayout(this);
-    QButtonGroup* bg = new QButtonGroup(2, Qt::Horizontal, tr("Text"), this);
+    QButtonGroup* bg = new QButtonGroup(2, Qt::Horizontal, "Text", this);
     hb->addWidget(bg);
 
     StripCR = new QCheckBox( bg );
@@ -54,6 +85,30 @@ CLayoutPrefs::CLayoutPrefs( QWidget* parent,  const char* name, WFlags fl )
     FullJustify = new QCheckBox( bg );
     FullJustify->setText( tr( "Full Justify" ) );
 
+    FixGraphics = new QCheckBox( bg );
+    FixGraphics->setText( tr( "Fix Graphic Size" ) );
+
+    hyphenate = new QCheckBox( bg );
+    hyphenate->setText( tr( "Hyphenate" ) );
+
+    /*
+    customhyphen = new QCheckBox( bg );
+    customhyphen->setText( tr( "Custom Hyphen'n" ) );
+    */
+
+    prepalm = new QCheckBox( bg );
+    prepalm->setText( tr( "Repalm(Baen)" ) );
+
+    pkern = new QCheckBox( bg );
+    pkern->setText( tr( "Kern" ) );
+
+    /*
+    Negative = new QCheckBox( bg );
+    Negative->setText( tr( "Negative" ) );
+    */
+
+    //    Inverse = new QCheckBox( bg );
+    //    Inverse->setText( tr( "Inverse" ) );
 }
 
 /*  
@@ -66,7 +121,149 @@ CLayoutPrefs::~CLayoutPrefs()
 
 
 
-CLayoutPrefs2::CLayoutPrefs2( QWidget* parent,  const char* name, WFlags fl )
+CLayoutPrefs2::CLayoutPrefs2( int w, QWidget* parent,  const char* name, WFlags fl )
+    : QWidget( parent, name, fl )
+{
+    
+    QVBoxLayout* vb = new QVBoxLayout(this);
+    QGridLayout* gl = new QGridLayout(vb, 4, 5);
+
+    QLabel *TextLabel;
+
+    TextLabel = new QLabel( this );
+    TextLabel->setText( tr( "Page\nOverlap" ) );
+    gl->addWidget(TextLabel, 0, 0);
+    pageoverlap = new QSpinBox( this );
+    pageoverlap->setRange(0,20);
+    gl->addWidget(pageoverlap, 0, 1);
+
+    TextLabel = new QLabel( this, "TextLabel1" );
+    TextLabel->setText( tr( "Indent" ) );
+    gl->addWidget(TextLabel, 1, 0);
+    Indent = new QSpinBox( this, "Indent" );
+    Indent->setRange(0,20);
+    gl->addWidget(Indent, 1, 1);
+
+
+
+    TextLabel = new QLabel( this );
+    TextLabel->setText( tr( "Graphics\nZoom" ) );
+    gl->addWidget(TextLabel, 1, 2);
+    gfxzoom = new QSpinBox( this );
+    gfxzoom->setRange(0,2000);
+    gfxzoom->setLineStep(10);
+    gfxzoom->setSuffix("%");
+    gl->addWidget(gfxzoom, 1, 3);
+
+    TextLabel = new QLabel( this, "TextLabel4" );
+    TextLabel->setText( tr( "Top\nMargin" ) );
+    gl->addWidget(TextLabel, 2, 0);
+    TopMargin = new QSpinBox( this, "TMargin" );
+    TopMargin->setRange(0, 1000);
+    gl->addWidget(TopMargin, 2, 1);
+
+    TextLabel = new QLabel( this );
+    TextLabel->setText( tr( "Bottom\nMargin" ) );
+    gl->addWidget(TextLabel, 2, 2);
+    BottomMargin = new QSpinBox( this, "BMargin" );
+    BottomMargin->setRange(0, 1000);
+    gl->addWidget(BottomMargin, 2, 3);
+
+    TextLabel = new QLabel( this, "TextLabel4" );
+    TextLabel->setText( tr( "Left\nMargin" ) );
+    gl->addWidget(TextLabel, 3, 0);
+    LeftMargin = new QSpinBox( this, "LMargin" );
+    LeftMargin->setRange(0, 1000);
+    gl->addWidget(LeftMargin, 3, 1);
+
+    TextLabel = new QLabel( this );
+    TextLabel->setText( tr( "Right\nMargin" ) );
+    gl->addWidget(TextLabel, 3, 2);
+    RightMargin = new QSpinBox( this, "RMargin" );
+    RightMargin->setRange(0, 1000);
+    gl->addWidget(RightMargin, 3, 3);
+
+    TextLabel = new QLabel( this );
+    TextLabel->setText( tr( "Paragraph\nLeading" ) );
+    gl->addWidget(TextLabel, 4, 0);
+    ParaLead = new QSpinBox( this );
+    ParaLead->setRange(-5, 50);
+    gl->addWidget(ParaLead, 4, 1);
+
+    TextLabel = new QLabel( this );
+    TextLabel->setText( tr( "Line\nLeading" ) );
+    gl->addWidget(TextLabel, 4, 2);
+    LineLead = new QSpinBox( this );
+    LineLead->setRange(-5, 50);
+    gl->addWidget(LineLead, 4, 3);
+
+    gl = new QGridLayout(vb, 2, 2);
+
+    TextLabel = new QLabel( this);
+    TextLabel->setText( tr( "Markup" ) );
+    gl->addWidget(TextLabel, 0, 0, Qt::AlignBottom);
+    TextLabel = new QLabel( this);
+    TextLabel->setText( tr( "Font" ) );
+    gl->addWidget(TextLabel, 0, 1, Qt::AlignBottom);
+
+
+#ifdef USECOMBO
+    Markup = new QComboBox( this);
+#else
+    Markup = new MenuButton( this);
+#endif
+    Markup->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
+    Markup->insertItem("Auto");
+    Markup->insertItem("None");
+    Markup->insertItem("Text");
+    Markup->insertItem("HTML");
+    Markup->insertItem("PML");
+    gl->addWidget(Markup, 1, 0, Qt::AlignTop);
+
+#ifdef USECOMBO
+    fontselector = new QComboBox( this);
+#else
+    fontselector = new MenuButton( this);
+#endif
+    fontselector->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
+    {
+	QFontDatabase f;
+	QStringList flist = f.families();
+	for (QStringList::Iterator nm = flist.begin(); nm != flist.end(); nm++)
+	{
+	    fontselector->insertItem(*nm);
+	}
+    } // delete the FontDatabase!!!
+    gl->addWidget(fontselector, 1, 1, Qt::AlignTop);
+
+#ifdef USECOMBO
+    bgsel = new QComboBox( this );
+#else
+    bgsel = new MenuButton( this );
+#endif
+    populate_colours(bgsel);
+
+#ifdef USECOMBO
+    fgsel = new QComboBox( this );
+#else
+    fgsel = new MenuButton( this );
+#endif
+    populate_colours(fgsel);
+    gl = new QGridLayout(vb, 2, 2);
+
+    TextLabel = new QLabel( this);
+    TextLabel->setText( tr( "Background" ) );
+    gl->addWidget(TextLabel, 0, 0, Qt::AlignBottom);
+    TextLabel = new QLabel( this);
+    TextLabel->setText( tr( "Foreground" ) );
+    gl->addWidget(TextLabel, 0, 1, Qt::AlignBottom);
+
+    gl->addWidget(bgsel, 1, 0, Qt::AlignTop);
+    gl->addWidget(fgsel, 1, 1, Qt::AlignTop);
+
+}
+/*
+CLayoutPrefs2::CLayoutPrefs2( int w, QWidget* parent,  const char* name, WFlags fl )
     : QWidget( parent, name, fl )
 {
     
@@ -113,7 +310,7 @@ CLayoutPrefs2::CLayoutPrefs2( QWidget* parent,  const char* name, WFlags fl )
     gl->addWidget(TextLabel, 2, 2);
 
     Margin = new QSpinBox( this, "Margin" );
-    Margin->setRange(0, 100);
+    Margin->setRange(0, w/2);
     gl->addWidget(Margin, 3, 0);
 
     ParaLead = new QSpinBox( this );
@@ -154,11 +351,7 @@ CLayoutPrefs2::CLayoutPrefs2( QWidget* parent,  const char* name, WFlags fl )
 #endif
     fontselector->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
     {
-#ifdef USEQPE
-	FontDatabase f;
-#else
 	QFontDatabase f;
-#endif
 	QStringList flist = f.families();
 	for (QStringList::Iterator nm = flist.begin(); nm != flist.end(); nm++)
 	{
@@ -166,7 +359,34 @@ CLayoutPrefs2::CLayoutPrefs2( QWidget* parent,  const char* name, WFlags fl )
 	}
     } // delete the FontDatabase!!!
     gl->addWidget(fontselector, 1, 1, Qt::AlignTop);
+
+#ifdef USECOMBO
+    bgsel = new QComboBox( this );
+#else
+    bgsel = new MenuButton( this );
+#endif
+    populate_colours(bgsel);
+
+#ifdef USECOMBO
+    fgsel = new QComboBox( this );
+#else
+    fgsel = new MenuButton( this );
+#endif
+    populate_colours(fgsel);
+    gl = new QGridLayout(vb, 2, 2);
+
+    TextLabel = new QLabel( this);
+    TextLabel->setText( tr( "Background" ) );
+    gl->addWidget(TextLabel, 0, 0, Qt::AlignBottom);
+    TextLabel = new QLabel( this);
+    TextLabel->setText( tr( "Foreground" ) );
+    gl->addWidget(TextLabel, 0, 1, Qt::AlignBottom);
+
+    gl->addWidget(bgsel, 1, 0, Qt::AlignTop);
+    gl->addWidget(fgsel, 1, 1, Qt::AlignTop);
+
 }
+*/
 /*
 CLayoutPrefs2::CLayoutPrefs2( QWidget* parent,  const char* name, WFlags fl )
     : QWidget( parent, name, fl )
@@ -354,12 +574,15 @@ CMiscPrefs::CMiscPrefs( QWidget* parent,  const char* name, WFlags fl )
     : QWidget( parent, name, fl )
 {
 
-    QGridLayout* hl = new QGridLayout(this,1,2);
+  QVBoxLayout* vl = new QVBoxLayout(this);
+    QHBoxLayout* hl = new QHBoxLayout;
+    vl->addLayout(hl);
 
+    vl->setMargin( 0 );
     hl->setMargin( 0 );
 
-    QGroupBox* gb = new QGroupBox(1, Qt::Horizontal, tr("Select Action"), this);
-    hl->addWidget( gb, 0, 0 );
+    QGroupBox* gb = new QGroupBox(1, Qt::Horizontal, "Select Action", this);
+    hl->addWidget( gb );
 
     annotation = new QCheckBox( gb );
     annotation->setText( tr( "Annotation" ) );
@@ -370,8 +593,8 @@ CMiscPrefs::CMiscPrefs( QWidget* parent,  const char* name, WFlags fl )
     clipboard = new QCheckBox( gb );
     clipboard->setText( tr( "Clipboard" ) );
 
-    QButtonGroup* bg = new QButtonGroup(1, Qt::Horizontal, tr("Plucker"), this);
-    hl->addWidget( bg, 0 , 1 );
+    QButtonGroup* bg = new QButtonGroup(1, Qt::Horizontal, "Plucker", this);
+    hl->addWidget( bg );
 
     Depluck = new QCheckBox( bg );
     Depluck->setText( tr( "Depluck" ) );
@@ -382,20 +605,66 @@ CMiscPrefs::CMiscPrefs( QWidget* parent,  const char* name, WFlags fl )
     Continuous = new QCheckBox( bg );
     Continuous->setText( tr( "Continuous" ) );
 
+    bg = new QButtonGroup(2, Qt::Horizontal, "Scroll", this);
+    vl->addWidget( bg );
 
-/*
+    //    scrollinplace = new QCheckBox( bg );
+    //    scrollinplace->setText( tr( "In Place" ) );
+#ifdef USECOMBO
+    scrolltype = new QComboBox( bg );
+#else
+    scrolltype = new MenuButton( this);
+#endif
+    scrolltype->insertItem("In Place");
+    scrolltype->insertItem("Rolling (moving bg)");
+    scrolltype->insertItem("Rolling (window)");
+    scrolltype->insertItem("Rolling (static bg)");
+    scrolltype->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
 
-    QGroupBox* gb = new QGroupBox(1, Qt::Horizontal, "Navigation", this);
-    TextLabel = new QLabel( gb );
-    TextLabel->setText( tr( "Overlap" ) );
-    QSpinBox* sb = new QSpinBox( gb );
 
-    Internationalisation
-    Ideogram/Word
-    Set Width
-    Set Encoding
-    Set Font
-*/
+#ifdef USECOMBO
+    scrollcolor = new QComboBox( bg );
+#else
+    scrollcolor = new MenuButton( this);
+#endif
+    populate_colours(scrollcolor);
+    scrollcolor->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
+
+
+    QLabel* TextLabel = new QLabel( bg );
+    TextLabel->setText( tr( "Scroll step" ) );
+    //    gl->addWidget(TextLabel, 2, 0);
+    scrollstep = new QSpinBox( bg );
+    scrollstep->setRange(1, 10);
+    scrollstep->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
+
+    TextLabel = new QLabel( bg );
+    TextLabel->setText( tr( "Minibar Colour" ) );
+#ifdef USECOMBO
+    minibarcol = new QComboBox( bg );
+#else
+    minibarcol = new MenuButton( this);
+#endif
+    populate_colours(minibarcol);
+    minibarcol->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
+
+
+    bg = new QButtonGroup(2, Qt::Vertical, "Background", this);
+    vl->addWidget( bg );
+
+//    QLabel* TextLabel = new QLabel( bg );
+//    TextLabel->setText( tr( "Copy an image to \"background\" in\n~/Applications/uqtreader/Theme/" ) );
+
+#ifdef USECOMBO
+    bgtype = new QComboBox( bg );
+#else
+    bgtype = new MenuButton( this);
+#endif
+    bgtype->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
+
+    bgtype->insertItem( tr("Centred") );
+    bgtype->insertItem( tr("Tiled") );
+    bgtype->insertItem( tr("Fitted") );
 }
 
 CMiscPrefs::~CMiscPrefs()
@@ -403,25 +672,24 @@ CMiscPrefs::~CMiscPrefs()
     // no need to delete child widgets, Qt does it all for us
 }
 
-CPrefs::CPrefs(bool fs, QWidget* parent, const char* name) : QDialog(parent, name, true)
+CPrefs::CPrefs( int w, bool fs, QWidget* parent, const char* name) : QDialog(parent, name, true)
 {
     setCaption(tr( "OpieReader Settings" ) );
     QTabWidget* td = new QTabWidget(this);
     layout = new CLayoutPrefs(this);
-    layout2 = new CLayoutPrefs2(this);
+    layout2 = new CLayoutPrefs2(w, this);
     misc = new CMiscPrefs(this);
-    button = new CButtonPrefs(this);
+    //    button = new CButtonPrefs(kmap, this);
     inter = new CInterPrefs(this);
     td->addTab(layout, tr("Layout"));
     td->addTab(layout2, tr("Layout(2)"));
     td->addTab(inter, tr("Locale"));
     td->addTab(misc, tr("Misc"));
-    td->addTab(button, tr("Buttons"));
+    //    td->addTab(button, tr("Buttons"));
     QVBoxLayout* v = new QVBoxLayout(this);
     v->addWidget(td);
 
-    if (fs)
-        QPEApplication::showDialog( this );
+    if (fs) showMaximized();
 }
 
 
@@ -478,7 +746,7 @@ CInterPrefs::CInterPrefs( QWidget* parent,  const char* name, WFlags fl )
 
     QVBoxLayout* vb = new QVBoxLayout;
 
-    gb = new QGroupBox(1, Qt::Horizontal, tr("Dictionary"), this);
+    gb = new QGroupBox(1, Qt::Horizontal, "Dictionary", this);
 
     TextLabel = new QLabel( gb );
     TextLabel->setText( tr( "Application" ) );
@@ -494,7 +762,7 @@ CInterPrefs::CInterPrefs( QWidget* parent,  const char* name, WFlags fl )
     twotouch->setText( tr( "Two/One\nTouch" ) );
 
     SwapMouse = new QCheckBox( gb );
-    SwapMouse->setText(tr("Swap Tap\nActions") );
+    SwapMouse->setText("Swap Tap\nActions");
 
 
     vb->addWidget(gb);
@@ -504,127 +772,6 @@ CInterPrefs::CInterPrefs( QWidget* parent,  const char* name, WFlags fl )
 }
 
 CInterPrefs::~CInterPrefs()
-{
-    // no need to delete child widgets, Qt does it all for us
-}
-
-
-
-#ifdef USECOMBO
-void CButtonPrefs::populate(QComboBox *mb)
-#else
-void CButtonPrefs::populate(MenuButton *mb)
-#endif
-{
-    mb->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
-    mb->insertItem(tr("<Nothing>") );
-    mb->insertItem(tr("Open file") );
-    mb->insertItem(tr("Autoscroll") );
-    mb->insertItem(tr("Bookmark") );
-    mb->insertItem(tr("Annotate") );
-    mb->insertItem(tr("Fullscreen") );
-
-    mb->insertItem(tr("Zoom in") );
-    mb->insertItem(tr("Zoom out") );
-    mb->insertItem(tr("Back") );
-    mb->insertItem(tr("Forward") );
-    mb->insertItem(tr("Home") );
-    mb->insertItem(tr("Page up") );
-    mb->insertItem(tr("Page down") );
-    mb->insertItem(tr("Line up") );
-    mb->insertItem(tr("Line down") );
-    mb->insertItem(tr("Beginning") );
-    mb->insertItem(tr("End") );
-}
-
-CButtonPrefs::CButtonPrefs( QWidget* parent,  const char* name, WFlags fl )
-    : QWidget( parent, name, fl )
-{
-
-    QGridLayout* hl = new QGridLayout(this,10,2);
-
-    hl->setMargin( 0 );
-
-    QLabel* ql = new QLabel(tr("Escape Button"), this);
-    hl->addWidget(ql, 0, 0, Qt::AlignBottom);
-#ifdef USECOMBO
-    escapeAction = new QComboBox( this );
-#else
-    escapeAction = new MenuButton( this );
-#endif
-    populate(escapeAction);
-    hl->addWidget(escapeAction, 1, 0, Qt::AlignTop | Qt::AlignLeft);
-
-    ql = new QLabel(tr("Space Button"), this);
-    hl->addWidget(ql, 2, 0, Qt::AlignBottom);
-#ifdef USECOMBO
-    spaceAction = new QComboBox( this );
-#else
-    spaceAction = new MenuButton( this );
-#endif
-    populate(spaceAction);
-    hl->addWidget(spaceAction, 3, 0, Qt::AlignTop | Qt::AlignLeft);
-
-    ql = new QLabel(tr("Return Button"), this);
-    hl->addWidget(ql, 2, 1, Qt::AlignBottom);
-#ifdef USECOMBO
-    returnAction = new QComboBox( this );
-#else
-    returnAction = new MenuButton( this );
-#endif
-    populate(returnAction);
-    hl->addWidget(returnAction, 3, 1, Qt::AlignTop | Qt::AlignLeft);
-
-    ql = new QLabel(tr("Left Arrow"), this);
-    hl->addWidget(ql, 4, 0, Qt::AlignBottom);
-#ifdef USECOMBO
-    leftAction = new QComboBox( this );
-#else
-    leftAction = new MenuButton( this );
-#endif
-    populate(leftAction);
-    hl->addWidget(leftAction, 5, 0, Qt::AlignTop | Qt::AlignLeft);
-    leftScroll = new QCheckBox( tr("Scroll Speed"), this );
-    hl->addWidget(leftScroll, 6, 0, Qt::AlignTop | Qt::AlignLeft);
-
-    ql = new QLabel(tr("Right Arrow"), this);
-    hl->addWidget(ql, 4, 1, Qt::AlignBottom);
-#ifdef USECOMBO
-    rightAction = new QComboBox( this );
-#else
-    rightAction = new MenuButton( this );
-#endif
-    populate(rightAction);
-    hl->addWidget(rightAction, 5, 1, Qt::AlignTop | Qt::AlignLeft);
-    rightScroll = new QCheckBox( tr("Scroll Speed"), this );
-    hl->addWidget(rightScroll, 6, 1, Qt::AlignTop | Qt::AlignLeft);
-
-    ql = new QLabel(tr("Down Arrow"), this);
-    hl->addWidget(ql, 7, 0, Qt::AlignBottom);
-#ifdef USECOMBO
-    downAction = new QComboBox( this );
-#else
-    downAction = new MenuButton( this );
-#endif
-    populate(downAction);
-    hl->addWidget(downAction, 8, 0, Qt::AlignTop | Qt::AlignLeft);
-    downScroll = new QCheckBox( tr("Scroll Speed"), this );
-    hl->addWidget(downScroll, 9, 0, Qt::AlignTop | Qt::AlignLeft);
-
-    ql = new QLabel(tr("Up Arrow"), this);
-    hl->addWidget(ql, 7, 1, Qt::AlignBottom);
-#ifdef USECOMBO
-    upAction = new QComboBox( this );
-#else
-    upAction = new MenuButton( this );
-#endif
-    populate(upAction);
-    hl->addWidget(upAction, 8, 1, Qt::AlignTop | Qt::AlignLeft);
-    upScroll = new QCheckBox( tr("Scroll Speed"), this );
-    hl->addWidget(upScroll, 9, 1, Qt::AlignTop | Qt::AlignLeft);
-}
-
-CButtonPrefs::~CButtonPrefs()
 {
     // no need to delete child widgets, Qt does it all for us
 }

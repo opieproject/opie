@@ -1,0 +1,17 @@
+TEMPLATE	= lib
+CONFIG		= qt warn_on release dll
+HEADERS		= CFilter.h
+
+SOURCES		= striphtml.cpp
+
+
+INTERFACES	= 
+DESTDIR		= $(QTDIR)/plugins/reader/filters
+TARGET		= HTMLfilter
+
+
+
+OBJECTS_DIR = WSREADEROBJS
+MOC_DIR = WSREADERMOCS
+INCLUDEPATH	+= WSREADERINC
+DEPENDPATH	+= WSREADERINC

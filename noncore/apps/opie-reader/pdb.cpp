@@ -3,6 +3,30 @@
 #include <winsock2.h>
 #endif
 
+#include "useqpe.h"
+
+#ifdef USEQPE
+void Cpdb::suspend()
+{
+  CExpander::suspend(fin);
+}
+void Cpdb::unsuspend()
+{
+  CExpander::unsuspend(fin);
+}
+#endif
+
+Cpdb::~Cpdb()
+{
+  if (fin != NULL)
+    {
+#ifdef USEQPE
+      unsuspend();
+#endif
+      fclose(fin);
+    }
+}
+
 size_t Cpdb::recordpos(int n)
 {
     UInt16 mxn = ntohs(head.recordList.numRecords);
@@ -32,11 +56,11 @@ void Cpdb::gotorecordnumber(int n)
     fseek(fin, recordpos(n), SEEK_SET);
 }
 
-bool Cpdb::openfile(const char *src)
+bool Cpdb::openpdbfile(const char *src)
 {
+  //qDebug("cpdb openfile:%s", src);
 
     //  printf("In openfile\n");
-    int ret = 0;
     //  printf("closing fin:%x\n",fin);
     if (fin != NULL) fclose(fin);
     //  printf("opening fin\n");
@@ -49,12 +73,18 @@ bool Cpdb::openfile(const char *src)
 
     // just holds the first few chars of the file
     //	char buf[0x100];
-    fseek(fin,0,SEEK_END);
-    file_length = ftell(fin);
+      struct stat _stat;
+      stat(src,&_stat);
+      file_length = _stat.st_size;
+      //    fseek(fin,0,SEEK_END);
+      //    file_length = ftell(fin);
 
     fseek(fin,0,SEEK_SET);
 
     fread(&head, 1, sizeof(head), fin);
+
+    qDebug("Database name:%s", head.name);
+    qDebug("Total number of records:%u", ntohs(head.recordList.numRecords));
 
     return true;
 }

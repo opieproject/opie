@@ -37,16 +37,23 @@
 #include <qlineedit.h>
 #include <qstack.h>
 #include <qlistbox.h>
+#ifdef USEQPE
+#include <qpe/qpeapplication.h>
+#endif
+#include "orkey.h"
 //#include "Queue.h"
+#include "BGType.h"
 
+class QBoxLayout;
 class QWidgetStack;
 class QToolButton;
 class QPopupMenu;
 class QToolBar;
 #ifdef USEQPE
-class QToolBar;
-class QMenuBar;
+class QPEToolBar;
+class QPEMenuBar;
 #endif
+class QScrollBar;
 class CBkmkSelector;
 class QProgressBar;
 class QAction;
@@ -56,40 +63,22 @@ class CDrawBuffer;
 class QTReader;
 class QImage;
 class Config;
+class CButtonPrefs;
 
-enum ActionTypes
-{
-    cesNone = 0,
-    cesOpenFile,
-    cesAutoScroll,
-    cesActionMark,
-    cesActionAnno,
-    cesFullScreen,
-    cesZoomIn,
-    cesZoomOut,
-    cesBack,
-    cesForward,
-    cesHome,
-    cesPageUp,
-    cesPageDown,
-    cesLineUp,
-    cesLineDown,
-    cesStartDoc,
-    cesEndDoc
-};
-/*
-*m_preferences_action, *m_close_action *m_info_action, *m_touch_action,
-*m_find_action, *m_jump_action, *m_setfont_action *m_goto_action,
-*m_delete_action; *m_autogen_action, *m_clear_action, *m_save_action;
-*m_tidy_action, *m_startBlock_action, *m_endBlock_action;
-*m_setenc_action, *m_setmono_action;
-*/
+#ifdef USEQPE
 enum ToolbarPolicy
 {
     cesSingle = 0,
     cesMenuTool,
     cesMultiple
 };
+#else
+enum ToolbarPolicy
+{
+    cesMenuTool = 0,
+    cesMultiple
+};
+#endif
 
 enum regedit_type
 {
@@ -104,7 +93,8 @@ enum regedit_type
     cSetConfigName,
     cMargin,
     cExtraSpace,
-    cExtraLead
+    cExtraLead,
+    cRepara
 };
 
 enum bkmk_action
@@ -115,7 +105,8 @@ enum bkmk_action
     cRmBkmkFile,
     cLdConfig,
     cRmConfig,
-    cExportLinks
+    cExportLinks,
+    cLdTheme
 };
 
 enum fontselector_action
@@ -140,62 +131,103 @@ class QTReaderApp : public QMainWindow
 {
     Q_OBJECT
 
+      QColor getcolour(int c);
+
+      QMap<orKey, int> kmap;
     unsigned long m_savedpos;
     int m_debounce;
+    bool m_kmapchanged;
+    bground m_bgtype;
     timeb m_lastkeytime;
+    QScrollBar* m_scrollbar;
+    QScrollBar* scrollbar;
+    int m_qtscroll, m_localscroll;
+    bool m_hidebars, m_scrollishidden, m_statusishidden;
+    QBoxLayout *m_layout;
+    QLabel* m_prog;
     bool m_annoIsEditing;
     bool m_propogatefontchange, m_bFloatingDialog;
     bool m_url_clipboard, m_url_localfile, m_url_globalfile;
+    CButtonPrefs* m_buttonprefs;
     fontselector_action m_fontAction;
-    void doAction(ActionTypes a, QKeyEvent* e);
+    void doAction(QKeyEvent* e);
 
-    public:
+	public:
     QTReaderApp( QWidget *parent = 0, const char *name = 0, WFlags f = 0 );
     ~QTReaderApp();
 
-    void handlekey(QKeyEvent* e);
     void hideEvent(QHideEvent*)
-    {
-        suspend();
-    }
-
+	{
+#ifdef USEQPE
+	if (m_grabkeyboard)
+	  {
+	    ((QPEApplication*)qApp)->ungrabKeyboard();
+	  }
+#endif
+	    suspend();
+	}
+#ifdef USEQPE
+    void showEvent(QShowEvent*)
+      {
+	if (m_grabkeyboard)
+	  {
+	    ((QPEApplication*)qApp)->grabKeyboard();
+	  }
+      }
+#endif
     void suspend();
     void openFile( const QString & );
 
-    void setScrollState(bool _b);
 
  protected:
     void setfontHelper(const QString& lcn, int size = 0);
     QAction* m_bkmkAvail, *m_actFullscreen;
     CAnnoEdit* m_annoWin;
     Bkmk* m_anno;
+    int m_scrollcolor, m_scrollbarcolor, m_background, m_foreground;
 //    void resizeEvent(QResizeEvent* e);
     void closeEvent( QCloseEvent *e );
-    void readbkmks();
-    void do_mono(const QString&);
-    void do_jump(const QString&);
-    void do_settarget(const QString&);
-#ifdef _SCROLLPIPE
-//  void do_setpipetarget(const QString&);
+#ifdef NEWFULLSCREEN
+    void resizeEvent(QResizeEvent *);
+    void focusInEvent(QFocusEvent*);
+    void enableFullscreen();
 #endif
-    void do_saveconfig(const QString&, bool);
-    bool readconfig(const QString&, bool);
-    bool PopulateConfig(const char*);
-    ActionTypes ActNameToInt(const QString&);
+	void readbkmks();
+	void do_mono(const QString&);
+	void do_jump(const QString&);
+	void do_reparastring(const QString&);
+	void do_settarget(const QString&);
+#ifdef _SCROLLPIPE
+//	void do_setpipetarget(const QString&);
+#endif
+	void do_saveconfig(const QString&, bool);
+	bool readconfig(const QString&, const QString&, bool);
+	bool PopulateConfig(const char*, bool usedirs = false);
+	ActionTypes ActNameToInt(const QString&);
+#ifdef USEQPE
+	bool m_grabkeyboard;
+#endif
     bool m_doAnnotation;
     bool m_doDictionary;
     bool m_doClipboard;
     bool m_fullscreen;
     bool m_loadedconfig;
  public:
-    void saveprefs();
+	void saveprefs();
 public slots:
+      void setBackgroundBitmap();
+  void UpdateStatus();
+    void setScrollState(bool _b);
+    void handlekey(QKeyEvent* e);
+      void forceopen(const QString& filename);
     void setDocument(const QString&);
 private slots:
 #ifdef _SCRIPT
 //    void RunScript();
 #endif
+  void actionscroll(int v);
     void SaveConfig();
+ void LoadTheme();
  void LoadConfig();
  void TidyConfig();
  void ExportLinks();
@@ -203,53 +235,58 @@ private slots:
     void zoomout();
     void chooseencoding();
     void setfullscreen(bool sfs);
+    void setrotated(bool sfs);
+    void setinverted(bool sfs);
+    void setgrab(bool sfs);
 //    void setcontinuous(bool sfs);
     void setTwoTouch(bool _b);
  void restoreFocus();
  void OnAnnotation(bool _b)
-    {
-        m_doAnnotation = _b;
-    }
+	{
+	    m_doAnnotation = _b;
+	}
     void OnDictionary(bool _b)
-    {
-        m_doDictionary = _b;
-    }
+	{
+	    m_doDictionary = _b;
+	}
     void OnClipboard(bool _b)
-    {
-        m_doClipboard = _b;
-    }
-    void OnWordSelected(const QString&, size_t, const QString&);
-    void OnURLSelected(const QString& href);
+	{
+	    m_doClipboard = _b;
+	}
+    void OnWordSelected(const QString&, size_t, size_t, const QString&);
+    void OnURLSelected(const QString& href, const size_t tgt);
     void showgraphic(QImage&);
-    void addAnno(const QString&, const QString&, size_t);
+    void addAnno(const QString&, const QString&, size_t, size_t);
     void addAnno(const QString&, const QString&);
     void addanno();
     void showAnnotation();
     void do_setencoding(int i);
-    void do_setfont(const QString&);
-    void buttonActionSelected(QAction*);
-//  void msgHandler(const QCString&, const QByteArray&);
-    void monospace(bool);
-    void jump();
-    void settarget();
+	void do_setfont(const QString&);
+	//	void buttonActionSelected(QAction*);
+	void msgHandler(const QCString&, const QByteArray&);
+	void monospace(bool);
+	void jump();
+	void reparastring();
+	void settarget();
 #ifdef _SCROLLPIPE
-//  void setpipetarget();
-//  void setpause(bool);
+//	void setpipetarget();
+//	void setpause(bool);
 #endif
-//  void setspacing();
-    void setfont();
-    void clearBkmkList();
-    void listBkmkFiles();
-    void editMark();
-    void autoScroll(bool);
-    void addbkmk();
-    void savebkmks();
-//  void importFiles();
-    void showprefs();
-    void showtoolbarprefs();
-    void infoClose();
-    //    void oldFile();
-    void showinfo();
+//	void setspacing();
+	void setfont();
+	void clearBkmkList();
+	void listBkmkFiles();
+	void editMark();
+	void autoScroll(bool);
+	void addbkmk();
+	void savebkmks();
+//	void importFiles();
+	void showprefs();
+	void showtoolbarprefs();
+	void showbuttonprefs();
+	void infoClose();
+	//    void oldFile();
+	void showinfo();
 
 //    void indentplus();
 //    void indentminus();
@@ -282,9 +319,7 @@ private slots:
 //    void stripcr(bool);
 //    void setfulljust(bool);
 //    void onespace(bool);
-#ifdef REPALM
 //    void repalm(bool);
-#endif
 //    void peanut(bool _b);
 //    void remap(bool);
 //    void embolden(bool);
@@ -308,6 +343,8 @@ private slots:
     void OnRedraw();
 
  private:
+    void setscrollcolour();
+    void setscrollbarcolour();
     void writeUrl(const QString& file, const QString& href);
     QAction *m_preferences_action, *m_open_action, *m_close_action;
     QAction *m_info_action, *m_touch_action, *m_find_action, *m_start_action;
@@ -319,8 +356,12 @@ private slots:
     QAction *m_autogen_action, *m_clear_action, *m_save_action;
     QAction *m_tidy_action, *m_startBlock_action, *m_endBlock_action;
     QAction *m_setenc_action, *m_setmono_action, *m_saveconfig_action;
-    QAction *m_loadconfig_action, *m_toolbarprefs_action, *m_tidyconfig_action;
-    QAction *m_exportlinks_action;
+    QAction *m_loadconfig_action, *m_loadtheme_action, *m_toolbarprefs_action, *m_tidyconfig_action;
+    QAction *m_exportlinks_action, *m_rotate_action, *m_buttonprefs_action, *m_inverse_action;
+    QAction *m_repara_action;
+#ifdef USEQPE
+    QAction *m_grab_action;
+#endif
     void addtoolbars(Config* config);
     ToolbarPolicy m_tbpol, m_tbpolsave;
     ToolBarDock m_tbposition;
@@ -347,7 +388,7 @@ private slots:
     void savefilelist();
     void updatefileinfo();
     bool openfrombkmk(Bkmk*);
-  QString m_targetapp, m_targetmsg;
+  QString m_targetapp, m_targetmsg, m_statusstring, m_themename;
     bool listbkmk(CList<Bkmk>*, const QString& _lab = QString::null);
     QString usefilebrowser();
     void do_regedit();
@@ -366,9 +407,9 @@ private slots:
 
     CBkmkSelector* bkmkselector;
 
-    ActionTypes m_spaceTarget, m_escapeTarget, m_returnTarget, m_leftTarget, m_rightTarget,
-    m_upTarget, m_downTarget;
-    bool m_leftScroll, m_rightScroll, m_upScroll, m_downScroll;
+    //    ActionTypes m_spaceTarget, m_escapeTarget, m_returnTarget, m_leftTarget, m_rightTarget,
+    //m_upTarget, m_downTarget;
+    //bool m_leftScroll, m_rightScroll, m_upScroll, m_downScroll;
     bool m_bcloseDisabled, m_disableesckey;
     size_t searchStart;
 #ifdef __ISEARCH
@@ -380,10 +421,13 @@ private slots:
     QWidgetStack *editorStack;
     QTReader* reader;
     QComboBox* m_fontSelector;
-//    QToolBar /* *menu,*/ *fileBar;
-    QToolBar *menubar, *fileBar, *navBar, *viewBar, *markBar;
+//    QPEToolBar /* *menu,*/ *fileBar;
 #ifdef USEQPE
-    QMenuBar *mb;
+    QToolBar *menubar;
+#endif
+    QToolBar *fileBar, *navBar, *viewBar, *markBar;
+#ifdef USEQPE
+    QPEMenuBar *mb;
 #else
     QMenuBar *mb;
 #endif
@@ -393,14 +437,13 @@ private slots:
     bool searchVisible;
     bool regVisible;
     bool m_fontVisible, m_twoTouch;
-    bool bFromDocView;
     static unsigned long m_uid;
     long unsigned get_unique_id() { return m_uid++; }
     /*
       void resizeEvent( QResizeEvent * r)
       {
-//      odebug << "resize:(" << r->oldSize().width() << "," << r->oldSize().height() << ")" << oendl;
-//      odebug << "resize:(" << r->size().width() << "," << r->size().height() << ")" << oendl;
+//      qDebug("resize:(%u,%u)", r->oldSize().width(), r->oldSize().height());
+//      qDebug("resize:(%u,%u)", r->size().width(), r->size().height());
       //    bgroup->move( width()-bgroup->width(), 0 );
       }
     */

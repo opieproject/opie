@@ -1,231 +1,23 @@
+#include <qmap.h>
+#include <qfileinfo.h>
+#include <qtextstream.h>
+#include <qdir.h>
+#include "useqpe.h"
+#ifdef USEQPE
+#include <qpe/global.h>
+#endif
+#include "CDrawBuffer.h"
 #include "CFilter.h"
+#include "hrule.h"
+#include "util.h"
 
-unsigned short striphtml::skip_ws()
-{
-    tchar ch;
-    CStyle sty;
-    do
-    {
-	parent->getch(ch, sty);
-    }
-    while (ch < 33);
-    return ch;
-}
+#include <qregexp.h>
+#include <qimage.h>
+#include <qpixmap.h>
+//#include <qprogressdialog.h>
+//#include <qapplication.h>
 
-unsigned short striphtml::skip_ws_end()
-{
-    tchar ch;
-    CStyle sty;
-    parent->getch(ch, sty);
-    if (ch == ' ')
-    {
-	do
-	{
-	    parent->getch(ch, sty);
-	}
-	while (ch != '>');
-    }
-    return ch;
-}
-
-unsigned short striphtml::parse_m()
-{
-    tchar ch;
-    CStyle sty;
-    parent->getch(ch, sty);
-    if (ch == 'm' || ch == 'M')
-    {
-	ch = skip_ws_end();
-	if (ch == '>')
-	{
-	    return 0;
-	}
-    }
-    return ch;
-}
-
-void striphtml::mygetch(tchar& ch, CStyle& sty)
-{
-    parent->getch(ch, sty);
-    if (ch == 10) ch = ' ';
-}
-
-void striphtml::getch(tchar& ch, CStyle& sty)
-{
-    CStyle dummy;
-    mygetch(ch, dummy);
-    if (ch == 10) ch = ' ';
-    while (ch == '<')
-    {
-	ch = skip_ws();
-
-	switch (ch)
-	{
-	    case 'p':
-	    case 'P':
-		ch = skip_ws_end();
-		if (ch == '>')
-		{
-		    ch = 10;
-		    continue;
-		}
-		break;
-	    case 'b':
-	    case 'B':
-		ch = skip_ws_end();
-		if (ch == '>')
-		{
-		    currentstyle.setBold();
-		    mygetch(ch, dummy);
-		    continue;
-		}
-		else if (ch == 'r' || ch == 'R')
-		{
-		    ch = skip_ws_end();
-		    if (ch == '>')
-		    {
-			ch = 10;
-			continue;
-		    }
-		}
-		break;
-	    case 'i':
-	    case 'I':
-		ch = skip_ws_end();
-		if (ch == '>')
-		{
-		    currentstyle.setItalic();
-		    mygetch(ch, dummy);
-		    continue;
-		}
-		break;
-	    case 'e':
-	    case 'E':
-		if ((ch = parse_m()) == 0)
-		{
-		    currentstyle.setItalic();
-		    mygetch(ch, dummy);
-		    continue;
-		}
-		break;
-	    case 'h':
-	    case 'H':
-		mygetch(ch, dummy);
-		if ('0' < ch && ch <= '9')
-		{
-		    tchar hs = ch;
-		    ch = skip_ws_end();
-		    if (ch == '>')
-		    {
-			switch (hs)
-			{
-			    case '1':
-//				currentstyle = ucBold | ucFontBase+2 | (ucAlignCentre << ucAlignShift);
-				currentstyle.unset();
-				currentstyle.setFontSize(2);
-				currentstyle.setBold();
-				currentstyle.setCentreJustify();
-				break;
-			    case '2':
-//				currentstyle = ucBold | ucFontBase+1;
-				currentstyle.unset();
-				currentstyle.setFontSize(1);
-				currentstyle.setBold();
-				break;
-			    default:
-//				currentstyle = ucBold | ucFontBase;
-				currentstyle.unset();
-				currentstyle.setBold();
-			}
-			ch = 10;
-//			mygetch(ch, dummy);
-			continue;
-		    }
-		}
-		break;
-	    case '/':
-		mygetch(ch, dummy);
-		switch (ch)
-		{
-		    case 'b':
-		    case 'B':
-			ch = skip_ws_end();
-			if (ch == '>')
-			{
-			    currentstyle.unsetBold();
-			    mygetch(ch, dummy);
-			    continue;
-			}
-			break;
-		    case 'i':
-		    case 'I':
-			ch = skip_ws_end();
-			if (ch == '>')
-			{
-			    currentstyle.unsetItalic();
-			    mygetch(ch, dummy);
-			    continue;
-			}
-			break;
-		    case 'e':
-		    case 'E':
-			if ((ch = parse_m()) == 0)
-			{
-			    currentstyle.unsetItalic();
-			    mygetch(ch, dummy);
-			    continue;
-			}
-			break;
-		    case 'h':
-		    case 'H':
-			mygetch(ch, dummy);
-			if ('0' < ch && ch <= '9')
-			{
-			    ch = skip_ws_end();
-			    if (ch == '>')
-			    {
-				currentstyle.unset();
-				//mygetch(ch, dummy);
-				ch = 10;
-				continue;
-			    }
-			}
-			break;
-		    default:
-			break;
-		}
-		break;
-	    default:
-		break;
-	}
-	while (ch != '>' && ch != UEOF)
-	{
-	    mygetch(ch, dummy);
-	}
-	mygetch(ch, dummy);
-    }
-    if (ch == '&')
-    {
-	mygetch(ch, dummy);
-	if (ch == '#')
-	{
-	    int id = 0;
-	    mygetch(ch, dummy);
-	    while (ch != ';' && ch != UEOF)
-	    {
-		id = 10*id+ch-'0';
-		mygetch(ch, dummy);
-	    }
-	    ch = id;
-	}
-    }
-//    sty = (dummy == ucFontBase) ? currentstyle : dummy;
-    sty = currentstyle;
-    return;
-}
-
-
-void textfmt::mygetch(tchar& ch, CStyle& sty)
+void textfmt::mygetch(tchar& ch, CStyle& sty, unsigned long& pos)
 {
     if (uselast)
     {
@@ -234,13 +26,13 @@ void textfmt::mygetch(tchar& ch, CStyle& sty)
     }
     else
     {
-	parent->getch(ch, sty);
+	parent->getch(ch, sty, pos);
     }
 }
 
-void textfmt::getch(tchar& ch, CStyle& sty)
+void textfmt::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 {
-    mygetch(ch, sty);
+    mygetch(ch, sty, pos);
     do
     {
 	sty = currentstyle;
@@ -253,7 +45,7 @@ void textfmt::getch(tchar& ch, CStyle& sty)
 // Use this if you want to replace -- by em-dash
 	    case '-':
 //		parent->getch(ch, sty);
-		mygetch(ch, sty);
+		mygetch(ch, sty, pos);
 		if (ch == '-')
 		{
 		    ch = 0x2014;
@@ -277,7 +69,7 @@ void textfmt::getch(tchar& ch, CStyle& sty)
 			currentstyle.unsetBold();
 			CStyle dummy;
 //			parent->getch(ch, dummy);
-			mygetch(ch, dummy);
+			mygetch(ch, dummy, pos);
 		    }
 		}
 		else
@@ -285,7 +77,7 @@ void textfmt::getch(tchar& ch, CStyle& sty)
 // not bold - time to turn it on?
 		    CStyle dummy;
 //		    parent->getch(ch, dummy);
-		    mygetch(ch, dummy);
+		    mygetch(ch, dummy, pos);
 		    QChar c(ch);
 		    if ((ch != '*') && (c.isPunct() || c.isLetterOrNumber()))
 		    {
@@ -312,7 +104,7 @@ void textfmt::getch(tchar& ch, CStyle& sty)
 			currentstyle.unsetItalic();
 			CStyle dummy;
 //			parent->getch(ch, dummy);
-			mygetch(ch, dummy);
+			mygetch(ch, dummy, pos);
 		    }
 		}
 		else
@@ -320,7 +112,7 @@ void textfmt::getch(tchar& ch, CStyle& sty)
 // not bold - time to turn it on?
 		    CStyle dummy;
 //		    parent->getch(ch, dummy);
-		    mygetch(ch, dummy);
+		    mygetch(ch, dummy, pos);
 		    QChar c(ch);
 		    if ((ch != '_') && (c.isPunct() || c.isLetterOrNumber()))
 		    {
@@ -342,7 +134,7 @@ void textfmt::getch(tchar& ch, CStyle& sty)
     return;
 }
 
-void remap::getch(tchar& ch, CStyle& sty)
+void remap::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 {
     if (q[offset] != 0)
     {
@@ -350,7 +142,7 @@ void remap::getch(tchar& ch, CStyle& sty)
 	sty = currentstyle;
 	return;
     }
-    parent->getch(ch, sty);
+    parent->getch(ch, sty, pos);
     switch (ch)
     {
 	case 0x201a:
@@ -423,6 +215,14 @@ void remap::getch(tchar& ch, CStyle& sty)
 	    q[1] = 0;
 	    ch = 'o';// should be oe
 	    break;
+	    /*
+	case 0x0009: // tab
+	    offset = 0;
+	    q[0] = ' ';
+	    q[1] = 0;
+	    ch = ' ';
+	    break;
+	    */
 	case 0x017e:
 	    ch = 'z';
 	    break;
@@ -433,14 +233,14 @@ void remap::getch(tchar& ch, CStyle& sty)
     currentstyle = sty;
 }
 
-void PeanutFormatter::getch(tchar& ch, CStyle& sty)
+void PeanutFormatter::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 {
     CStyle dummy;
     currentstyle.setColour(0,0,0);
-    parent->getch(ch, dummy);
+    parent->getch(ch, dummy, pos);
     while (ch == '\\')
     {
-	parent->getch(ch, dummy);
+	parent->getch(ch, dummy, pos);
 	if (ch == '\\') break;
 	switch(ch)
 	{
@@ -449,7 +249,7 @@ void PeanutFormatter::getch(tchar& ch, CStyle& sty)
 		int code = 0;
 		for (int i = 0; i < 3; i++)
 		{
-		    parent->getch(ch, dummy);
+		    parent->getch(ch, dummy, pos);
 		    code = 10*code + ch - '0';
 		}
 		ch = code;
@@ -459,13 +259,13 @@ void PeanutFormatter::getch(tchar& ch, CStyle& sty)
 	    {
 		while (1)
 		{
-		    parent->getch(ch, dummy);
+		    parent->getch(ch, dummy, pos);
 		    if (ch == '\\')
 		    {
-			parent->getch(ch, dummy);
+			parent->getch(ch, dummy, pos);
 			if (ch == 'v')
 			{
-			    parent->getch(ch, dummy);
+			    parent->getch(ch, dummy, pos);
 			    break;
 			}
 		    }
@@ -475,7 +275,7 @@ void PeanutFormatter::getch(tchar& ch, CStyle& sty)
 	    case 's':
 	    case 'n':
 		currentstyle.setFontSize(0);
-		parent->getch(ch,dummy);
+		parent->getch(ch,dummy, pos);
 		break;
 	    case 'p':
 		currentstyle.unset();
@@ -491,7 +291,7 @@ void PeanutFormatter::getch(tchar& ch, CStyle& sty)
 		{
 		    currentstyle.setFontSize(1);
 		}
-		parent->getch(ch, dummy);
+		parent->getch(ch, dummy, pos);
 		break;
 	    case 'x':
 		if (currentstyle.getFontSize() == 0)
@@ -516,7 +316,7 @@ void PeanutFormatter::getch(tchar& ch, CStyle& sty)
 		{
 		    currentstyle.setItalic();
 		}
-		parent->getch(ch, dummy);
+		parent->getch(ch, dummy, pos);
 		break;
 	    case 'b':
 	    case 'B':
@@ -528,7 +328,7 @@ void PeanutFormatter::getch(tchar& ch, CStyle& sty)
 		{
 		    currentstyle.setBold();
 		}
-		parent->getch(ch, dummy);
+		parent->getch(ch, dummy, pos);
 		break;
 	    case 'c':
 		if (currentstyle.getJustify() == m_AlignCentre)
@@ -539,7 +339,7 @@ void PeanutFormatter::getch(tchar& ch, CStyle& sty)
 		{
 		    currentstyle.setCentreJustify();
 		}
-		parent->getch(ch, dummy);
+		parent->getch(ch, dummy, pos);
 		break;
 	    case 'r':
 		if (currentstyle.getJustify() == m_AlignRight)
@@ -550,7 +350,7 @@ void PeanutFormatter::getch(tchar& ch, CStyle& sty)
 		{
 		    currentstyle.setRightJustify();
 		}
-		parent->getch(ch, dummy);
+		parent->getch(ch, dummy, pos);
 		break;
 	    default:
 		currentstyle.setColour(255,0,0);
@@ -559,20 +359,19 @@ void PeanutFormatter::getch(tchar& ch, CStyle& sty)
     sty = currentstyle;
 }
 
-void OnePara::getch(tchar& ch, CStyle& sty)
+void OnePara::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 {
-    parent->getch(ch, sty);
+    parent->getch(ch, sty, pos);
     if (m_lastchar == 10)
     {
-	while (ch == 10) parent->getch(ch, sty);
+	while (ch == 10) parent->getch(ch, sty, pos);
     }
     m_lastchar = ch;
 }
 
-#ifdef REPALM
-void repalm::getch(tchar& ch, CStyle& sty)
+void repalm::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 {
-    parent->getch(ch, sty);
+    parent->getch(ch, sty, pos);
     switch (ch)
     {
 	case 0x80:
@@ -680,12 +479,11 @@ void repalm::getch(tchar& ch, CStyle& sty)
 	    break;
     }
 }
-#endif
 
 //static tchar nextpart[] = { 'C','l','i','c','k',' ','h','e','r','e',' ','f','o','r',' ','t','h','e',' ','n','e','x','t',' ','p','a','r','t',0 };
 //static tchar prevpart[] = { 'C','l','i','c','k',' ','h','e','r','e',' ','f','o','r',' ','t','h','e',' ','p','r','e','v','i','o','u','s',' ','p','a','r','t',0 };
 
-void DePluck::getch(tchar& ch, CStyle& sty)
+void DePluck::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 {
     if (m_buffed > 0)
     {
@@ -704,26 +502,30 @@ void DePluck::getch(tchar& ch, CStyle& sty)
 	    m_buffer = 0;
 	    return;
 	}
-	unsigned long lnk;
+	unsigned long lnk, lnkoff;
 	do
 	{
 	    if (nextpart[m_buffed] == 0) break;
-	    parent->getch(ch, sty);
+	    parent->getch(ch, sty, pos);
 	    m_laststyle = sty;
-	    if (sty.getLink()) lnk = sty.getData();
+	    if (sty.getLink())
+	      {
+		lnk = sty.getData();
+		lnkoff = sty.getOffset();
+	      }
 	} while (ch == nextpart[m_buffed] && sty.getLink() && ++m_buffed);
 	m_current = 0;
 	if (nextpart[m_buffed] == 0)
 	{
 	    m_buffed = 0;
-	    QString dmy;
-	    parent->hyperlink(lnk, dmy);
+	    QString dmy, dmy2;
+	    parent->hyperlink(lnk, lnkoff, dmy, dmy2);
 	    do
 	    {
-		parent->getch(ch, sty);
+		parent->getch(ch, sty, pos);
 	    }
 	    while (ch != 10);
-	    parent->getch(ch, sty);
+	    parent->getch(ch, sty, pos);
 	}
 	else if (m_buffed > 0)
 	{
@@ -738,4 +540,276 @@ void DePluck::getch(tchar& ch, CStyle& sty)
     }
 
     return;
+}
+
+HighlightFilter::HighlightFilter(QTReader* _p) : pReader(_p), lastpos(0), nextpos(0), red(255), green(255), blue(255)
+{
+}
+
+#include "Bkmks.h"
+#include "QTReader.h"
+
+void HighlightFilter::refresh(unsigned long pos)
+{
+  bkmks = pReader->Bkmklist();
+  
+  red = green = blue = 255;
+  
+  if (bkmks == NULL)
+    {
+      lastpos = 0;
+      nextpos = 0xffffffff;
+    }
+  else
+    {
+      lastpos = 0;
+      nextpos = 0xffffffff;
+      for (CList<Bkmk>::iterator i = bkmks->begin(); i != bkmks->end(); i++)
+	{
+	  if ((*i).value() <= pos && pos < (*i).value2())
+	    {
+	      red = i->red();
+	      green = i->green();
+	      blue = i->blue();
+	      lastpos = (*i).value();
+	      nextpos = (*i).value2();
+	      break;
+	    }
+	  if ((*i).value() > pos)
+	    {
+	      nextpos = (*i).value();
+	      break;
+	    }
+	  lastpos = (*i).value();
+	}
+    }
+}
+
+void HighlightFilter::getch(tchar& ch, CStyle& sty, unsigned long& pos)
+{
+  parent->getch(ch, sty, pos);
+  if (bkmks != pReader->Bkmklist() || pos <= lastpos || pos >= nextpos)
+    {
+      //      qDebug("Recalc <%lu, %lu, %lu>", lastpos, pos, nextpos);
+      refresh(pos);
+      //      qDebug("Recalc(2) <%lu, %lu, %lu>", lastpos, pos, nextpos);
+    }
+   int r = sty.bRed(), g = sty.bGreen(), b = sty.bBlue();
+   if (r == 255 && g == 255 && b == 255)
+     {
+	sty.setBackground(red, green, blue);
+     }
+}
+
+void kern::getch(tchar& ch, CStyle& sty, unsigned long& pos)
+{
+  if (uselast)
+    {
+      ch = lastchar;
+      sty = laststy;
+      uselast = false;
+      return;
+    }
+  else
+    {
+      parent->getch(ch, sty, pos);
+    }
+  switch (ch)
+    {
+    case 'f':
+      {
+	tchar savedchar = 'f';
+	parent->getch(ch, sty, pos);
+	switch (ch)
+	  {
+	  case 'i':
+	    ch = (251 << 8) + 1;
+	    break;
+	  case 'l':
+	    ch = (251 << 8) + 2;
+	    break;
+	  default:
+	    lastchar = ch;
+	    uselast = true;
+	    laststy = sty;
+	    ch = savedchar;
+	  }
+      }
+      break;
+    default:
+      break;
+    }
+}
+
+class ErrorFilter : public CFilter
+{
+  QString error;
+  int currentpos;
+ public:
+  ErrorFilter(const QString& _s) : error(_s), currentpos(0) {}
+  ~ErrorFilter() {}
+  void getch(tchar& ch, CStyle& sty, unsigned long& pos)
+  {
+    if (currentpos == error.length())
+      {
+	ch = UEOF;
+	currentpos = 0;
+      }
+    else
+      {
+	ch = error[currentpos++].unicode();
+      }
+  }
+  QString about() { return parent->about(); }
+};
+
+#ifndef __STATIC
+ExternFilter::ExternFilter(const QString& nm, const QString& optional) : filt(NULL), handle(NULL)
+{
+  QString filterpath(QTReaderUtil::getPluginPath("filters/lib"));
+  filterpath += nm;
+  filterpath += ".so";
+  if (QFile::exists(filterpath))
+    {
+      qDebug("Filter:%s", (const char*)filterpath);
+      handle = dlopen(filterpath, RTLD_LAZY);
+      if (handle == 0)
+	{
+	  qDebug("Can't find filter:%s", dlerror());
+	  //	  status = -10;
+	  filt = new ErrorFilter(QString("Can't find plugin:")+nm);
+	  return;
+	}
+      CFilter* (*newfilter)(const QString&);
+      newfilter = (CFilter* (*)(const QString&))dlsym(handle, "newfilter");
+      if (newfilter == NULL)
+	{
+	  qDebug("Can't find newfilter");
+	  filt = new ErrorFilter(QString("Can't find entry point in plugin:")+nm);
+	  return;
+	}
+      filt = (*newfilter)(optional);
+    }
+  else
+    {
+      qDebug("No filter path");
+      filt = new ErrorFilter(QString("No filter plugins installed:")+nm);
+    }
+  if (filt == NULL)
+    {
+      qDebug("Can't do newfilter");
+      filt = new ErrorFilter(QString("Filter creation failed:")+nm);
+      return;
+    }
+}
+#endif
+
+void makeInverse::getch(tchar& ch, CStyle& sty, unsigned long& pos)
+{
+  parent->getch(ch, sty, pos);
+  int r,g,b;
+  r = 255 - sty.Red(), g = 255 - sty.Green(), b = 255 - sty.Blue();
+  sty.setColour(r,g,b);
+  r = 255 - sty.bRed(), g = 255 - sty.bGreen(), b = 255 - sty.bBlue();
+  sty.setBackground(r,g,b);
+  r = 255 - sty.pRed(), g = 255 - sty.pGreen(), b = 255 - sty.pBlue();
+  sty.setPaper(r,g,b);
+}
+/*
+void makeNegative::getch(tchar& ch, CStyle& sty, unsigned long& pos)
+{
+  parent->getch(ch, sty, pos);
+  QColor fg(sty.Red(), sty.Green(), sty.Blue());
+  int h,s,v;
+  fg.hsv(&h,&s,&v);
+  fg.setHsv(h,s,255-v);
+  int r,g,b;
+  fg.rgb(&r,&g,&b);
+  sty.setColour(r,g,b);
+  
+  fg = QColor(sty.bRed(), sty.bGreen(), sty.bBlue());
+  fg.hsv(&h,&s,&v);
+  fg.setHsv(h,s,255-v);
+  fg.rgb(&r,&g,&b);
+  sty.setBackground(r,g,b);
+}
+*/
+void setbg::getch(tchar& ch, CStyle& sty, unsigned long& pos)
+{
+  parent->getch(ch, sty, pos);
+ int r = sty.pRed(), g = sty.pGreen(), b = sty.pBlue();
+  if (r == 255 && g == 255 && b == 255)
+    {
+      sty.setPaper(m_r,m_g,m_b);
+    }
+   else
+     {
+	qDebug("We have background [%x%x%x]", r, g, b);
+     }
+   r = sty.bRed(), g = sty.bGreen(), b = sty.bBlue();
+  if (r == 255 && g == 255 && b == 255)
+    {
+      sty.setBackground(m_r,m_g,m_b);
+    }
+   else
+     {
+	qDebug("We have background [%x%x%x]", r, g, b);
+     }
+}
+
+void setfg::getch(tchar& ch, CStyle& sty, unsigned long& pos)
+{
+  parent->getch(ch, sty, pos);
+  int r = sty.Red(), g = sty.Green(), b = sty.Blue();
+  if (r == 0 && g == 0 && b == 0)
+    {
+      sty.setColour(m_r,m_g,m_b);
+    }
+}
+
+#include "CRegExp.h"
+
+repara::repara(const QString& pat) : tch(0)
+{
+  //  QString pat("{\\n[A-Z\"]}");
+  flt = new CRegExpFilt(pat, false);
+  qDebug("Construction done");
+}
+
+repara::~repara()
+{
+  delete flt;
+}
+
+void repara::getch(tchar& ch, CStyle& sty, unsigned long& pos)
+{
+  if (flt->empty())
+    {
+      while (flt->empty())
+	{
+	  parent->getch(ch, sty, pos);
+	  flt->addch(ch);
+	}
+    }
+  ch = flt->pop();
+  /*
+  parent->getch(ch, sty, pos);
+  if (ch == 10 || ch == ' ')
+    {
+      if (tch == 10)
+	{
+	  tch = ch;
+	  ch = 10;
+	  return;
+	}
+      else
+	{
+	  tch = ch;
+	  ch = ' ';
+	  return;
+	}
+	    }
+  tch = ch;
+  */
+  return;
 }

@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include "CEncoding.h"
 
-void CUtf8::getch(tchar& ch, CStyle& sty)
+void CUtf8::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 {
     tchar ret;
-    parent->getch(ret, sty);
+    parent->getch(ret, sty, pos);
     if (ret == UEOF)
     {
 	ch = UEOF;
@@ -18,7 +18,7 @@ void CUtf8::getch(tchar& ch, CStyle& sty)
 	{
 	    ret <<= 6;
 	    tchar iret;
-	    parent->getch(iret, sty);
+	    parent->getch(iret, sty, pos);
 	    ret += iret & 0x3f;
 	    flags <<= 1;
 	    count++;
@@ -43,38 +43,38 @@ void CUtf8::getch(tchar& ch, CStyle& sty)
     return;
 }
 
-void CUcs16be::getch(tchar& ch, CStyle& sty)
+void CUcs16be::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 {
     tchar iret;
-    parent->getch(iret, sty);
+    parent->getch(iret, sty, pos);
     if (iret == UEOF)
     {
 	ch = UEOF;
 	return;
     }
     tchar ret = iret;
-    parent->getch(iret, sty);
+    parent->getch(iret, sty, pos);
     ch = (ret << 8) + iret;
 }
 
-void CUcs16le::getch(tchar& ch, CStyle& sty)
+void CUcs16le::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 {
     tchar iret;
-    parent->getch(iret, sty);
+    parent->getch(iret, sty, pos);
     if (iret == UEOF)
     {
 	ch = UEOF;
 	return;
     }
     tchar ret = iret;
-    parent->getch(iret, sty);
+    parent->getch(iret, sty, pos);
     ch = ret + (iret << 8);
 }
 
-void Ccp1252::getch(tchar& ch, CStyle& sty)
+void Ccp1252::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 {
     tchar iret;
-    parent->getch(iret, sty);
+    parent->getch(iret, sty, pos);
     ch = iret;
     switch (ch)
     {
@@ -167,9 +167,9 @@ void Ccp1252::getch(tchar& ch, CStyle& sty)
     }
 }
 
-void CPalm::getch(tchar& ch, CStyle& sty)
+void CPalm::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 {
-    Ccp1252::getch(ch, sty);
+    Ccp1252::getch(ch, sty, pos);
     switch (ch)
     {
 	case 0x18:
@@ -195,10 +195,10 @@ void CPalm::getch(tchar& ch, CStyle& sty)
     }
 }
 
-void CAscii::getch(tchar& ch, CStyle& sty)
+void CAscii::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 {
     tchar iret;
-    parent->getch(iret, sty);
+    parent->getch(iret, sty, pos);
     if (iret == UEOF)
     {
 	ch = UEOF;

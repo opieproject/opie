@@ -1,11 +1,7 @@
 #ifndef __LINKTYPE_H
 #define __LINKTYPE_H
 
-enum linkType
-{
-    eNone,
-    eLink,
-    ePicture
-};
+typedef unsigned int linkType;
+const linkType eNone = 0, eLink = 1, ePicture = 2, eFile = 4;
 
 #endif

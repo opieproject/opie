@@ -1,6 +1,10 @@
 #ifndef __MY_LIST_H
 #define __MY_LIST_H
 
+#ifndef NULL
+#define NULL 0
+#endif
+
 template<class T>
 class CList
 {
@@ -30,6 +34,14 @@ class CList
     }
   T& first() { return front->data; }
   T& last() { return back->data; }
+  T pop()
+    {
+      T data = front->data;
+      node* n = front;
+      front = front->next;
+      delete n;
+      return data;
+    }
   T* operator[](int n)
     {
       node* current = front;

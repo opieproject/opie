@@ -4,26 +4,60 @@
 #include "CExpander.h"
 #include "CEncoding.h"
 
-class CFilter : public CCharacterSource
+class CFilter_IFace : public CCharacterSource
 {
-    friend class CFilterChain;
+ public:
+    virtual linkType hyperlink(unsigned int n, unsigned int noff, QString& w, QString& nm) = 0;
+    virtual void setparent(CCharacterSource* p) = 0;
+    virtual ~CFilter_IFace() {};
+    virtual void locate(unsigned int n) = 0;
+    virtual bool findanchor(const QString& nm) = 0;
+    virtual void saveposn(const QString& f, size_t posn) = 0;
+    virtual void writeposn(const QString& f, size_t posn) = 0;
+    virtual linkType forward(QString& f, size_t& loc) = 0;
+    virtual linkType back(QString& f, size_t& loc) = 0;
+    virtual bool hasnavigation() = 0;
+    virtual int getwidth() = 0;
+    virtual CCharacterSource* getparent() = 0;
+};
+
+class CFilter : public CFilter_IFace
+{
  protected:
     CCharacterSource* parent;
-    linkType hyperlink(unsigned int n, QString& w)
-	{
-	    return parent->hyperlink(n,w);
-	}
  public:
+    virtual linkType hyperlink(unsigned int n, unsigned int noff, QString& w, QString& nm)
+	{
+	    return parent->hyperlink(n,noff,w,nm);
+	}
     CFilter() : parent(NULL) {}
     void setparent(CCharacterSource* p) { parent = p; }
+    CCharacterSource* getparent() { return parent; }
     virtual ~CFilter() {};
+    virtual void locate(unsigned int n)
+      {
+	parent->locate(n);
+      }
+   virtual bool findanchor(const QString& nm)
+     {
+       return parent->findanchor(nm);
+     }
+    virtual void saveposn(const QString& f, size_t posn) { parent->saveposn(f, posn); }
+    virtual void writeposn(const QString& f, size_t posn) { parent->writeposn(f, posn); }
+    virtual linkType forward(QString& f, size_t& loc) { return parent->forward(f, loc); }
+    virtual linkType back(QString& f, size_t& loc) { return parent->back(f, loc); }
+    virtual bool hasnavigation() { return parent->hasnavigation(); }
+    virtual int getwidth() { return parent->getwidth(); }
+    QImage* getPicture(unsigned long tgt) { return parent->getPicture(tgt); }
+    QImage* getPicture(const QString& href) { return parent->getPicture(href); }
+    bool getFile(const QString& href) { return parent->getFile(href); }
 };
 
 class CFilterChain
 {
-    CExpander* expander;
+    CExpander_Interface* expander;
     CEncoding* encoder;
-    CFilter* first;
+    CFilter_IFace* first;
     CCharacterSource* front;
  public:
     CFilterChain(CEncoding* _e) : encoder(_e), first(NULL), front(_e) {};
@@ -32,17 +66,25 @@ class CFilterChain
 	    CCharacterSource* p = front;
 	    while (p != encoder)
 	    {
-		CFilter* pnext = (CFilter*)p;
-		p = ((CFilter*)p)->parent;
+		CFilter_IFace* pnext = (CFilter_IFace*)p;
+		p = ((CFilter_IFace*)p)->getparent();
 		delete pnext;
 	    }
 	    delete encoder;
 	}
-    void getch(tchar& ch, CStyle& sty)
+    linkType hyperlink(unsigned int n, unsigned int noff, QString& wrd, QString& nm)
+      {
+	return front->hyperlink(n, noff, wrd, nm);
+      }
+    void locate(unsigned int n)
+      {
+	front->locate(n);
+      }
+    void getch(tchar& ch, CStyle& sty, unsigned long& pos)
 	{
-	    front->getch(ch, sty);
+	    front->getch(ch, sty, pos);
 	}
-    void addfilter(CFilter* p)
+    void addfilter(CFilter_IFace* p)
 	{
 	    if (first == NULL)
 	    {
@@ -55,18 +97,28 @@ class CFilterChain
 		front = p;
 	    }
 	}
-    void setsource(CExpander* p)
+    void setsource(CExpander_Interface* p)
 	{
 	    expander = p;
 	    encoder->setparent(p);
 	}
     void setencoder(CEncoding* p)
-	{
-	    delete encoder;
-	    encoder = p;
-	    first->setparent(p);
-	    encoder->setparent(expander);
-	}
+      {
+	delete encoder;
+	encoder = p;
+	first->setparent(p);
+	encoder->setparent(expander);
+      }
+    bool findanchor(const QString& nm)
+      {
+	return front->findanchor(nm);
+      }
+    void saveposn(const QString& f, size_t posn) { front->saveposn(f, posn); }
+    void writeposn(const QString& f, size_t posn) { front->writeposn(f, posn); }
+    linkType forward(QString& f, size_t& loc) { return front->forward(f, loc); }
+    linkType back(QString& f, size_t& loc) { return front->back(f, loc); }
+    bool hasnavigation() { return front->hasnavigation(); }
+    QString about() { return QString("Filter chain (c) Tim Wentford\n")+front->about(); }
 };
 
 class stripcr : public CFilter
@@ -74,14 +126,15 @@ class stripcr : public CFilter
  public:
     stripcr() {}
     ~stripcr() {}
-    void getch(tchar& ch, CStyle& sty)
+    void getch(tchar& ch, CStyle& sty, unsigned long& pos)
 	{
 	    do
 	    {
-		parent->getch(ch, sty);
+		parent->getch(ch, sty, pos);
 	    }
 	    while (ch == 13);
 	}
+    QString about() { return QString("StripCR filter (c) Tim Wentford\n")+parent->about(); }
 };
 
 class dehyphen : public CFilter
@@ -92,7 +145,7 @@ class dehyphen : public CFilter
  public:
     dehyphen() : m_bCharWaiting(false) {}
     ~dehyphen() {}
-    void getch(tchar& ch, CStyle& sty)
+    void getch(tchar& ch, CStyle& sty, unsigned long& pos)
 	{
 	    if (m_bCharWaiting)
 	    {
@@ -101,30 +154,33 @@ class dehyphen : public CFilter
 		sty = m_nextSty;
 		return;
 	    }
-	    parent->getch(ch, sty);
+	    parent->getch(ch, sty, pos);
 	    if (ch != '-') return;
-	    parent->getch(m_nextChar, m_nextSty);
+	    parent->getch(m_nextChar, m_nextSty, pos);
 	    if (m_nextChar != 10)
 	    {
 		m_bCharWaiting = true;
 		ch = '-';
 		return;
 	    }
-	    parent->getch(ch, sty);
+	    parent->getch(ch, sty, pos);
 	}
+    QString about() { return QString("Hyphenation filter (c) Tim Wentford\n")+parent->about(); }
 };
 
-class striphtml : public CFilter
+template<class A, class B>class QMap;
+
+const int m_cmaxdepth = 8;
+
+class htmlmark
 {
-    CStyle currentstyle;
-    unsigned short skip_ws();
-    unsigned short skip_ws_end();
-    unsigned short parse_m();
-    void mygetch(tchar& ch, CStyle& sty);
+  QString file;
+  size_t pos;
  public:
-    striphtml() {}
-    ~striphtml() {}
-    void getch(tchar& ch, CStyle& sty);
+  htmlmark() : file(), pos(0) {}
+  htmlmark(const QString& _f, size_t _p) : file(_f), pos(_p) {}
+  QString filename() { return file; }
+  size_t posn() { return pos; }
 };
 
 class unindent : public CFilter
@@ -133,47 +189,33 @@ class unindent : public CFilter
  public:
     unindent() : lc(0) {}
     ~unindent() {}
-    void getch(tchar& ch, CStyle& sty)
+    void getch(tchar& ch, CStyle& sty, unsigned long& pos)
 	{
 	    if (lc == 10)
 	    {
 		do
 		{
-		    parent->getch(ch, sty);
+		    parent->getch(ch, sty, pos);
 		}
 		while (ch == ' ');
 	    }
-	    else parent->getch(ch, sty);
+	    else parent->getch(ch, sty, pos);
 	    lc = ch;
 	    return;
 	}
+    QString about() { return QString("Unindent filter (c) Tim Wentford\n")+parent->about(); }
 };
 
+class CRegExpFilt;
 class repara : public CFilter
 {
     tchar tch;
+    CRegExpFilt* flt;
  public:
-    repara() : tch(0) {}
-    ~repara() {}
-    void getch(tchar& ch, CStyle& sty)
-	{
-	    parent->getch(ch, sty);
-	    if (ch == 10)
-	    {
-		if (tch == 10)
-		{
-		    return;
-		}
-		else
-		{
-		    tch = ch;
-		    ch = ' ';
-		    return;
-		}
-	    }
-	    tch = ch;
-	    return;
-	}
+    repara(const QString&);
+    ~repara();
+    void getch(tchar& ch, CStyle& sty, unsigned long& pos);
+    QString about() { return QString("Reparagraph filter (c) Tim Wentford\n")+parent->about(); }
 };
 
 class indenter : public CFilter
@@ -184,7 +226,7 @@ class indenter : public CFilter
  public:
     indenter(int _a=5) : amnt(_a), indent(0) {}
     ~indenter() {}
-    void getch(tchar& ch, CStyle& sty)
+    void getch(tchar& ch, CStyle& sty, unsigned long& pos)
 	{
 	    if (indent > 0)
 	    {
@@ -193,7 +235,7 @@ class indenter : public CFilter
 		sty = lsty;
 		return;
 	    }
-	    parent->getch(ch, sty);
+	    parent->getch(ch, sty, pos);
 	    if (ch == 10)
 	    {
 		indent = amnt;
@@ -201,6 +243,7 @@ class indenter : public CFilter
 	    }
 	    return;
 	}
+    QString about() { return QString("Indentation filter (c) Tim Wentford\n")+parent->about(); }
 };
 
 class dblspce : public CFilter
@@ -210,7 +253,7 @@ class dblspce : public CFilter
  public:
     dblspce() : lastlf(false) {}
     ~dblspce() {}
-    void getch(tchar& ch, CStyle& sty)
+    void getch(tchar& ch, CStyle& sty, unsigned long& pos)
 	{
 	    if (lastlf)
 	    {
@@ -219,13 +262,14 @@ class dblspce : public CFilter
 		sty = lsty;
 		return;
 	    }
-	    parent->getch(ch, sty);
+	    parent->getch(ch, sty, pos);
 	    if (lastlf = (ch == 10))
 	    {
 		lsty = sty;
 	    }
 	    return;
 	}
+    QString about() { return QString("Double space (c) Tim Wentford\n")+parent->about(); }
 };
 
 class textfmt : public CFilter
@@ -233,11 +277,12 @@ class textfmt : public CFilter
     CStyle currentstyle;
     tchar lastchar;
     bool uselast;
-    void mygetch(tchar&, CStyle&);
+    void mygetch(tchar&, CStyle&, unsigned long& pos);
  public:
     textfmt() : lastchar(0), uselast(false) {}
     ~textfmt() {}
-    void getch(tchar& ch, CStyle& sty);
+    void getch(tchar& ch, CStyle& sty, unsigned long& pos);
+    QString about() { return QString("Text formatting filter (c) Tim Wentford\n")+parent->about(); }
 };
 
 class embolden : public CFilter
@@ -245,11 +290,12 @@ class embolden : public CFilter
  public:
     embolden() {}
     ~embolden() {}
-    void getch(tchar& ch, CStyle& sty)
+    void getch(tchar& ch, CStyle& sty, unsigned long& pos)
 	{
-	    parent->getch(ch, sty);
+	    parent->getch(ch, sty, pos);
 	    sty.setBold();
 	}
+    QString about() { return QString("Emboldening filter (c) Tim Wentford\n")+parent->about(); }
 };
 
 class remap : public CFilter
@@ -260,7 +306,8 @@ class remap : public CFilter
  public:
     remap() : offset(0) { q[0] = 0; }
     ~remap() {}
-    void getch(tchar& ch, CStyle& sty);
+    void getch(tchar& ch, CStyle& sty, unsigned long& pos);
+    QString about() { return QString("Character remapping filter (c) Tim Wentford\n")+parent->about(); }
 };
 
 class PeanutFormatter : public CFilter
@@ -268,7 +315,8 @@ class PeanutFormatter : public CFilter
     CStyle currentstyle;
  public:
     ~PeanutFormatter() {}
-    void getch(tchar& ch, CStyle& sty);
+    void getch(tchar& ch, CStyle& sty, unsigned long& pos);
+    QString about() { return QString("PML filter (c) Tim Wentford\n")+parent->about(); }
 };
 
 class OnePara : public CFilter
@@ -277,7 +325,8 @@ class OnePara : public CFilter
  public:
     OnePara() : m_lastchar(0) {}
     ~OnePara() {}
-    void getch(tchar& ch, CStyle& sty);
+    void getch(tchar& ch, CStyle& sty, unsigned long& pos);
+    QString about() { return QString("Single space filter (c) Tim Wentford\n")+parent->about(); }
 };
 
 class DePluck : public CFilter
@@ -291,26 +340,27 @@ class DePluck : public CFilter
  public:
     DePluck(tchar* t) : nextpart(t), m_buffer(0), m_buffed(0), m_current(0), m_debuff(false) {}
     ~DePluck() {}
-    void getch(tchar& ch, CStyle& sty);
+    void getch(tchar& ch, CStyle& sty, unsigned long& pos);
+    QString about() { return QString("Depluck filter (c) Tim Wentford\n")+parent->about(); }
 };
 
-#ifdef REPALM
 class repalm : public CFilter
 {
  public:
     ~repalm() {}
-    void getch(tchar& ch, CStyle& sty);
+    void getch(tchar& ch, CStyle& sty, unsigned long& pos);
+    QString about() { return QString("Repalm filter (c) Tim Wentford\n")+parent->about(); }
 };
-#endif
 
 class FullJust : public CFilter
 {
  public:
-    void getch(tchar& ch, CStyle& sty)
+    void getch(tchar& ch, CStyle& sty, unsigned long& pos)
 	{
-	    parent->getch(ch, sty);
+	    parent->getch(ch, sty, pos);
 	    if (sty.getJustify() == m_AlignLeft) sty.setFullJustify();
 	}
+    QString about() { return QString("Full justification filter (c) Tim Wentford\n")+parent->about(); }
 };
 /*
 class AddSpace : public CFilter
@@ -318,11 +368,108 @@ class AddSpace : public CFilter
     unsigned char m_espc;
  public:
     AddSpace(unsigned char s) : m_espc(s) {}
-    void getch(tchar& ch, CStyle& sty)
+    void getch(tchar& ch, CStyle& sty, unsigned long& pos)
 	{
-	    parent->getch(ch, sty);
+	    parent->getch(ch, sty, pos);
 	    sty.setExtraSpace(m_espc);
 	}
 };
 */
+
+class QTReader;
+
+class HighlightFilter : public CFilter
+{
+  QTReader* pReader;
+  unsigned long lastpos, nextpos;
+  unsigned char red, green, blue;
+  CList<Bkmk>* bkmks;
+ public:
+  HighlightFilter(QTReader*);
+  void getch(tchar& ch, CStyle& sty, unsigned long& pos);
+  void refresh(unsigned long);
+  QString about() { return QString("High-lighting filter (c) Tim Wentford\n")+parent->about(); }
+};
+
+#include "static.h"
+#ifndef __STATIC
+#include <dlfcn.h>
+
+class ExternFilter : public CFilter_IFace
+{
+  CFilter* filt;
+  void *handle;
+ public:
+  linkType hyperlink(unsigned int n, unsigned int noff, QString& w, QString& nm)
+    {
+      return filt->hyperlink(n, noff, w, nm);
+    }
+  void setparent(CCharacterSource* p) { filt->setparent(p); }
+  ExternFilter(const QString& nm, const QString& optional);
+  ~ExternFilter()
+    {
+      if (filt != NULL) delete filt;
+      if (handle != NULL) dlclose(handle);
+    }
+  void locate(unsigned int n) { filt->locate(n); }
+  bool findanchor(const QString& nm) { return filt->findanchor(nm); }
+  void saveposn(const QString& f, size_t posn) { filt->saveposn(f, posn); }
+  void writeposn(const QString& f, size_t posn) { filt->writeposn(f, posn); }
+  linkType forward(QString& f, size_t& loc) { return filt->forward(f, loc); }
+  linkType back(QString& f, size_t& loc) { return filt->back(f, loc); }
+  bool hasnavigation() { return filt->hasnavigation(); }
+  int getwidth() { return filt->getwidth(); }
+  CCharacterSource* getparent() { return filt->getparent(); }
+  void getch(tchar& c, CStyle& s, unsigned long& l) { filt->getch(c, s, l); }
+  QImage* getPicture(unsigned long tgt) { return filt->getPicture(tgt); }
+  CFilter* filter() { return filt; }
+  QImage* getPicture(const QString& href) { return filt->getPicture(href); }
+  bool getFile(const QString& href) { return filt->getFile(href); }
+  QString about() { return QString("Filter plug-in (c) Tim Wentford\n")+filt->about(); }
+};
+#endif
+
+class kern : public CFilter
+{
+    tchar lastchar;
+    bool uselast;
+    CStyle laststy;
+ public:
+    kern() : lastchar(0), uselast(false) {}
+    ~kern() {}
+    void getch(tchar& ch, CStyle& sty, unsigned long& pos);
+    QString about() { return QString("Kerning filter (c) Tim Wentford\n")+parent->about(); }
+};
+
+class makeInverse : public CFilter
+{
+ public:
+  void getch(tchar& ch, CStyle& sty, unsigned long& pos);
+  QString about() { return QString("Colourmap inversion filter (c) Tim Wentford\n")+parent->about(); }
+};
+/*
+class makeNegative : public CFilter
+{
+ public:
+  void getch(tchar& ch, CStyle& sty, unsigned long& pos);
+};
+*/
+class setbg : public CFilter
+{
+  int m_r, m_g, m_b;
+ public:
+  setbg(int _r, int _g, int _b) : m_r(_r), m_g(_g), m_b(_b) {}
+  void getch(tchar& ch, CStyle& sty, unsigned long& pos);
+  QString about() { return QString("Background colour filter (c) Tim Wentford\n")+parent->about(); }
+};
+
+class setfg : public CFilter
+{
+  int m_r, m_g, m_b;
+ public:
+  setfg(int _r, int _g, int _b) : m_r(_r), m_g(_g), m_b(_b) {}
+  void getch(tchar& ch, CStyle& sty, unsigned long& pos);
+  QString about() { return QString("Foreground colour filter (c) Tim Wentford\n")+parent->about(); }
+};
+
 #endif

@@ -3,13 +3,14 @@
 #include "ztxt.h"
 #include "my_list.h"
 #include "Bkmks.h"
+#include "static.h"
 
 ztxt::ztxt() : bInit(false), expandedtextbuffer(NULL), compressedtextbuffer(NULL) { /*printf("constructing:%x\n",fin);*/ }
 
 
 int ztxt::OpenFile(const char *src)
 {
-    if (!Cpdb::openfile(src))
+    if (!Cpdb::openpdbfile(src))
     {
 	return -1;
     }
@@ -154,8 +155,20 @@ CList<Bkmk>* ztxt::getbkmklist()
       zTXTbkmk bkmk;
       if (fread(&bkmk, sizeof(bkmk), 1, fin) != 1) break;
 //      printf("Bookmark number:%d:%.20s\n", i, bkmk.title);
-      t->push_back(Bkmk(bkmk.title, NULL, ntohl(bkmk.offset)));
+      tchar title[MAX_BMRK_LENGTH];
+      for (int j = 0; j < MAX_BMRK_LENGTH; j++)
+	{
+	  title[j] = bkmk.title[j];
+	}
+      t->push_back(Bkmk(title, NULL, ntohl(bkmk.offset)));
   }
   fseek(fin, cur, SEEK_SET);
   return t;
 }
+
+#ifndef __STATIC
+extern "C"
+{
+  CExpander* newcodec() { return new ztxt; }
+}
+#endif

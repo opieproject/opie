@@ -6,7 +6,7 @@ GraphicLink::~GraphicLink() { delete graphic; }
 
 pmstore::~pmstore()
 { 
-////    odebug << "Deleting image" << oendl; 
+////    qDebug("Deleting image");
     delete graphic;
 }
 
@@ -91,4 +91,18 @@ void CStyle::setPicture(bool canScale, QImage* _g, bool il, unsigned long tgt)
 	graphic = NULL;
     }
     if (_g != NULL) graphic = new pmstore(canScale, _g, il, tgt);
+}
+
+void CStyle::invert()
+{
+  qDebug("Before:<%02x%02x%02x>", sty.bred, sty.bgreen, sty.bblue);
+  qDebug("Before:<%02x%02x%02x>", sty.red, sty.green, sty.blue);
+  sty.bred = 255-sty.bred;
+  sty.bgreen = 255-sty.bgreen;
+  sty.bblue = 255-sty.bblue;
+  sty.red = 255-sty.red;
+  sty.green = 255-sty.green;
+  sty.blue = 255-sty.blue;
+  qDebug("After:<%02x%02x%02x>", sty.bred, sty.bgreen, sty.bblue);
+  qDebug("After:<%02x%02x%02x>", sty.red, sty.green, sty.blue);
 }

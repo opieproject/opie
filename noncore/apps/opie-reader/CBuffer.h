@@ -50,6 +50,6 @@ class CBufferFace
 };
 
 typedef CBufferFace<tchar> CBuffer;
-typedef CBufferFace<size_t> CSizeBuffer;
+typedef CBufferFace<unsigned long> CSizeBuffer;
 
 #endif

@@ -6,14 +6,23 @@
 **
 ** WARNING! All changes made in this file will be lost!
 ****************************************************************************/
+#include "useqpe.h"
 #include "ToolbarPrefs.h"
 
+#include <qcheckbox.h>
+#include <qlabel.h>
+#include <qpushbutton.h>
+#include <qspinbox.h>
 #include <qlayout.h>
+#include <qvariant.h>
+#include <qtooltip.h>
+#include <qwhatsthis.h>
+#include <qcombobox.h>
 #include <qbuttongroup.h>
+#include <qlineedit.h>
 #ifdef USEQPE
 #include <qpe/menubutton.h>
 #endif
-#include <qpe/qpeapplication.h>
 
 CBarPrefs::CBarPrefs(const QString& appdir, bool fs, QWidget* parent, const char* name) : QDialog(parent, name, true), config( appdir )
 {
@@ -34,8 +43,7 @@ CBarPrefs::CBarPrefs(const QString& appdir, bool fs, QWidget* parent, const char
     QVBoxLayout* v = new QVBoxLayout(this);
     v->addWidget(td);
 
-    if (fs)
-        QPEApplication::showDialog( this );
+    if (fs) showMaximized();
 }
 
 /*
@@ -121,6 +129,14 @@ CBarPrefs2::CBarPrefs2( Config& _config, QWidget* parent,  const char* name, WFl
     fullscreen = new QCheckBox( tr("Fullscreen"), bg );
     fullscreen->setChecked(config.readBoolEntry( "Fullscreen", false ));
     connect(fullscreen, SIGNAL(stateChanged(int)), this, SLOT( isChanged(int) ) );
+    rotate = new QCheckBox( tr("Rotate"), bg );
+    rotate->setChecked(config.readBoolEntry( "Rotate", false ));
+    connect(rotate, SIGNAL(stateChanged(int)), this, SLOT( isChanged(int) ) );
+
+    invert = new QCheckBox( tr("Invert"), bg );
+    invert->setChecked(config.readBoolEntry( "Invert Action", false ));
+    connect(invert, SIGNAL(stateChanged(int)), this, SLOT( isChanged(int) ) );
+
     zoom = new QCheckBox( tr("Zoom"), bg );
     zoom->setChecked(config.readBoolEntry( "Zoom In/Out", false ));
     connect(zoom, SIGNAL(stateChanged(int)), this, SLOT( isChanged(int) ) );
@@ -177,6 +193,8 @@ void CBarPrefs2::saveall()
 {
     config.setGroup( "Toolbar" );
     config.writeEntry( "Fullscreen", fullscreen->isChecked());
+    config.writeEntry( "Rotate", rotate->isChecked());
+    config.writeEntry( "Invert Action", invert->isChecked());
     config.writeEntry( "Zoom In/Out", zoom->isChecked());
     config.writeEntry( "Set Font", setfont->isChecked());
     config.writeEntry("Encoding Select", encoding->isChecked());
@@ -315,6 +333,14 @@ CViewBarPrefs::CViewBarPrefs( Config& _config, QWidget* parent,  const char* nam
     fullscreen = new QCheckBox( tr("Fullscreen"), bg );
     fullscreen->setChecked(config.readBoolEntry( "Fullscreen", false ));
     connect(fullscreen, SIGNAL(stateChanged(int)), this, SLOT( isChanged(int) ) );
+    rotate = new QCheckBox( tr("Rotate"), bg );
+    rotate->setChecked(config.readBoolEntry( "Rotate", false ));
+    connect(rotate, SIGNAL(stateChanged(int)), this, SLOT( isChanged(int) ) );
+
+    invert = new QCheckBox( tr("Invert"), bg );
+    invert->setChecked(config.readBoolEntry( "Invert Action", false ));
+    connect(invert, SIGNAL(stateChanged(int)), this, SLOT( isChanged(int) ) );
+
     zoomin = new QCheckBox( tr("Zoom In"), bg );
     zoomin->setChecked(config.readBoolEntry( "Zoom In", false ));
     connect(zoomin, SIGNAL(stateChanged(int)), this, SLOT( isChanged(int) ) );
@@ -338,6 +364,8 @@ void CViewBarPrefs::saveall()
 {
     config.setGroup( "Toolbar" );
     config.writeEntry( "Fullscreen", fullscreen->isChecked());
+    config.writeEntry( "Rotate", rotate->isChecked());
+    config.writeEntry( "Invert Action", invert->isChecked());
     config.writeEntry( "Zoom In", zoomin->isChecked());
     config.writeEntry( "Zoom Out", zoomout->isChecked());
     config.writeEntry( "Set Font", setfont->isChecked());
@@ -412,18 +440,13 @@ CMiscBarPrefs::CMiscBarPrefs( QWidget* parent,  const char* name, WFlags fl )
     : QWidget( parent, name, fl )
 {
 
-    QGridLayout* hl = new QGridLayout(this,1,2);
+    QGridLayout* hl = new QGridLayout(this,2,2);
 
     hl->setMargin( 0 );
 
     QGroupBox* gb = new QGroupBox(1, Qt::Horizontal, "Dialogs", this);
     floating = new QCheckBox(gb);
     floating->setText(tr("Floating"));
-
-//    QLabel* TextLabel = new QLabel( gb );
-//    TextLabel->setText( tr( "Select Button" ) );
-
-
     hl->addWidget( gb, 0, 0 );
 
 
@@ -439,9 +462,14 @@ CMiscBarPrefs::CMiscBarPrefs( QWidget* parent,  const char* name, WFlags fl )
     tbpolicy = new MenuButton(gb);
 #endif
     tbpolicy->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
+#ifdef USEQPE
     tbpolicy->insertItem(tr("Single bar"));
     tbpolicy->insertItem(tr("Menu/tool bar"));
     tbpolicy->insertItem(tr("Multiple bars"));
+#else
+    tbpolicy->insertItem(tr("Single bar"));
+    tbpolicy->insertItem(tr("Multiple bars"));
+#endif
 
 #ifdef USECOMBO
     tbposition = new QComboBox(gb);
@@ -455,9 +483,37 @@ CMiscBarPrefs::CMiscBarPrefs( QWidget* parent,  const char* name, WFlags fl )
     tbposition->insertItem(tr("Minimised"));
 
     tbmovable = new QCheckBox( tr("Movable"), gb );
-//  ch->setChecked(config.readBoolEntry( "Movable", false ));
 
     hl->addWidget(gb, 0, 1);
+
+    gb = new QGroupBox(1, Qt::Horizontal, "QT Scroll Bar", this);
+
+#ifdef USECOMBO
+    qtscroll = new QComboBox(gb);
+#else
+    qtscroll = new MenuButton(gb);
+#endif
+    qtscroll->insertItem(tr("None"));
+    qtscroll->insertItem(tr("Right"));
+    qtscroll->insertItem(tr("Left"));
+
+    hl->addWidget(gb, 1, 0);
+    gb = new QGroupBox(1, Qt::Horizontal, "Miniscroll", this);
+
+#ifdef USECOMBO
+    localscroll = new QComboBox(gb);
+#else
+    localscroll = new MenuButton(gb);
+#endif
+    localscroll->insertItem(tr("None"));
+    localscroll->insertItem(tr("Bottom"));
+    localscroll->insertItem(tr("Right"));
+    localscroll->insertItem(tr("Left"));
+
+    //scrollonleft = new QCheckBox( tr("... on Left"), gb );
+    //  ch->setChecked(config.readBoolEntry( "Movable", false ));
+
+    hl->addWidget(gb, 1, 1);
 
 }
 

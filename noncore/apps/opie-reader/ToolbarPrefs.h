@@ -116,7 +116,7 @@ class CViewBarPrefs : public QWidget
 { 
     Q_OBJECT
 	Config& config;
-    QCheckBox *fullscreen, *zoomin, *zoomout, *setfont, *encoding, *ideogram;
+    QCheckBox *fullscreen, *rotate, *zoomin, *zoomout, *setfont, *encoding, *ideogram, *invert;
 
     bool m_isChanged;
 
@@ -171,16 +171,16 @@ class CIndBarPrefs : public QWidget
 
 class CMiscBarPrefs : public QWidget
 { 
-    Q_OBJECT
+
 public:
 
     CMiscBarPrefs( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     ~CMiscBarPrefs();
 
 #ifdef USECOMBO
-    QComboBox *tbpolicy, *tbposition;
+    QComboBox *tbpolicy, *tbposition, *qtscroll, *localscroll;
 #else
-    MenuButton *tbpolicy, *tbposition;
+    MenuButton *tbpolicy, *tbposition, *qtscroll, *localscroll;
 #endif
     QCheckBox *tbmovable, *floating;
 };
@@ -245,10 +245,16 @@ class CBarPrefs : public QDialog
     bool floating() { return misc->floating->isChecked(); }
     void floating(bool v) { misc->floating->setChecked(v); }
     int tbpolicy() { return misc->tbpolicy->currentItem(); }
+    int qtscroll() { return misc->qtscroll->currentItem(); }
+    int localscroll() { return misc->localscroll->currentItem(); }
 #ifdef USECOMBO
     void tbpolicy(int v) { misc->tbpolicy->setCurrentItem(v); }
+    void qtscroll(int v) { misc->qtscroll->setCurrentItem(v); }
+    void localscroll(int v) { misc->localscroll->setCurrentItem(v); }
 #else
     void tbpolicy(int v) { misc->tbpolicy->select(v); }
+    void qtscroll(int v) { misc->qtscroll->select(v); }
+    void localscroll(int v) { misc->localscroll->select(v); }
 #endif
     bool tbmovable() { return misc->tbmovable->isChecked(); }
     void tbmovable(bool v) { misc->tbmovable->setChecked(v); }

@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
+#include "static.h"
 
 /***************************************************************************
  * Interface avec les routines de compression
@@ -65,9 +66,9 @@ int ppm_expander::home()
   if (fread(&blocksize,sizeof(blocksize),1,my_file_in) != 1) return 1;
   if (fread(&numblocks,sizeof(numblocks),1,my_file_in) != 1) return 1;
   //fprintf(stderr,"<%u,%u,%u>\n",maxnode,blocksize,numblocks);
-  int err = locate(0,0);
+  locate(0,0);
   outbytes = 0;
-  return err;
+  return 0;
 }
 
 void ppm_expander::locate(unsigned int n) {
@@ -75,7 +76,7 @@ void ppm_expander::locate(unsigned int n) {
   outbytes = n;
 }
 
-int ppm_expander::locate(unsigned short block, unsigned int n)
+void ppm_expander::locate(unsigned short block, unsigned int n)
 {
   if (needppmend)
     {
@@ -84,7 +85,7 @@ int ppm_expander::locate(unsigned short block, unsigned int n)
     }
   size_t fpos;
   fseek(my_file_in,STAT_MAGIC_SIZE+sizeof(maxnode)+sizeof(blocksize)+sizeof(numblocks)+block*sizeof(fpos),SEEK_SET);
-  if (fread(&fpos,sizeof(fpos),1,my_file_in) != 1) return 1;
+  fread(&fpos,sizeof(fpos),1,my_file_in);
   fseek(my_file_in,fpos,SEEK_SET);
 
   ppm.arith.Arith_DecodeInit(my_read_buf,buf_in,bufsize);
@@ -106,3 +107,10 @@ int ppm_expander::getch() {
   outbytes++;
   return (c==SYM_EOF) ? EOF : c;
 }
+
+#ifndef __STATIC
+extern "C"
+{
+  CExpander* newcodec() { return new ppm_expander; }
+}
+#endif

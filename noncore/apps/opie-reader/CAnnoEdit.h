@@ -5,6 +5,7 @@
 #include <qpushbutton.h>
 #include <qlineedit.h>
 #include <qmultilineedit.h>
+#include <qcombobox.h>
 
 class CAnnoEdit : public QWidget
 {
@@ -12,10 +13,15 @@ class CAnnoEdit : public QWidget
 
     QLineEdit* m_name;
     QMultiLineEdit* m_anno;
-    size_t m_posn;
+    size_t m_posn, m_posn2;
+    QComboBox* colorbox;
  public:
     void setPosn(size_t p) { m_posn = p; }
+    void setPosn2(size_t p) { m_posn2 = p; }
     size_t getPosn() { return m_posn; }
+    size_t getPosn2() { return m_posn2; }
+    QColor getColor();
+    void setColor(QColor);
     void setName(const QString& name)
 	{
 	    m_name->setText(name);
@@ -26,29 +32,12 @@ class CAnnoEdit : public QWidget
 	    m_anno->setEdited(false);
 	}
     bool edited() { return m_anno->edited(); }
-    CAnnoEdit(QWidget *parent=0, const char *name=0, WFlags f = 0) :
-	QWidget(parent, name, f)
-	{
-	    QVBoxLayout* grid = new QVBoxLayout(this);
-	    m_name = new QLineEdit(this, "Name");
-	    m_anno = new QMultiLineEdit(this, "Annotation");
-	    m_anno->setWordWrap(QMultiLineEdit::WidgetWidth);
-	    QPushButton* exitButton = new QPushButton("Okay", this);
-	    connect(exitButton, SIGNAL( released() ), this, SLOT( slotOkay() ) );
-	    QPushButton* cancelButton = new QPushButton("Cancel", this);
-	    connect(cancelButton, SIGNAL( released() ), this, SLOT( slotCancel() ) );
-	    QLabel *l = new QLabel("Text",this);
-	    grid->addWidget(l);
-	    grid->addWidget(m_name);
-	    l = new QLabel("Annotation",this);
-	    grid->addWidget(l);
-	    grid->addWidget(m_anno,1);
-	    QHBoxLayout* hgrid = new QHBoxLayout(grid);
-	    hgrid->addWidget(cancelButton);
-	    hgrid->addWidget(exitButton);
-	}
+    CAnnoEdit(QWidget *parent=0, const char *name=0, WFlags f = 0);
     private slots:
-	void slotOkay() { emit finished(m_name->text(), m_anno->text()); }
+	void slotOkay()
+      {
+	emit finished(m_name->text(), m_anno->text());
+      }
 	void slotCancel() { emit cancelled(); }
  public:
  signals:

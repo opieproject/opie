@@ -7,6 +7,8 @@
 #include "QTReaderApp.h"
 
 #include "signal.h"
+#include "stdio.h"
+#include "time.h"
 
 
 #ifdef USEQPE

@@ -1,7 +1,11 @@
 #include "CDrawBuffer.h"
 #include "FontControl.h"
+#include <qfontmetrics.h>
 #include <qpainter.h>
+#include <qpixmap.h>
 #include <qimage.h>
+#include "useqpe.h"
+#include "opie.h"
 
 CDrawBuffer::~CDrawBuffer()
 {
@@ -13,7 +17,7 @@ void CDrawBuffer::setright(CDrawBuffer& rhs, int f)
   int i;
   len = rhs.len;
   fc = rhs.fc;
-  m_maxstyle = m_ascent = m_descent = m_lineSpacing = m_lineExtraSpacing = 0;
+  m_ascent = m_descent = m_lineSpacing = m_lineExtraSpacing = 0;
   while (!segs.isEmpty())
   {
       segs.erase(0);
@@ -28,7 +32,6 @@ void CDrawBuffer::setright(CDrawBuffer& rhs, int f)
 	  if (st < 0) st = 0;
 
 	  CStyle _style = next->style;
-
 	  segs.push_back(textsegment(st,next->style));
       }
   }
@@ -40,13 +43,13 @@ void CDrawBuffer::setright(CDrawBuffer& rhs, int f)
 CDrawBuffer& CDrawBuffer::operator=(CDrawBuffer& rhs)
 {
   int i;
-//  //odebug << "Trying 2" << oendl; 
+//  //qDebug("Trying 2");
   len = rhs.len;
-  m_maxstyle = rhs.m_maxstyle;
   m_ascent = rhs.m_ascent;
   m_descent = rhs.m_descent;
   m_lineSpacing = rhs.m_lineSpacing;
   m_lineExtraSpacing = rhs.m_lineExtraSpacing;
+  m_showPartial = rhs.m_showPartial;
   while (!segs.isEmpty())
   {
       segs.erase(0);
@@ -58,7 +61,7 @@ CDrawBuffer& CDrawBuffer::operator=(CDrawBuffer& rhs)
   for (i = 0; rhs[i] != '\0'; i++) (*this)[i] = rhs[i];
   (*this)[i] = '\0';
   len = i;
-//  //odebug << "Tried 2" << oendl; 
+//  //qDebug("Tried 2");
   return *this;
 }
 
@@ -80,6 +83,7 @@ void CDrawBuffer::empty()
 {
     m_bSop = false;
     m_bEop = false;
+    m_bBop = false;
     len = 0;
     (*this)[0] = 0;
     while (!segs.isEmpty())
@@ -87,8 +91,18 @@ void CDrawBuffer::empty()
 	segs.erase(0);
     }
     segs.push_back(textsegment(0,CStyle()));
-    m_maxstyle = m_ascent = m_descent = m_lineSpacing = m_lineExtraSpacing = 0;
+    m_ascent = m_descent = m_lineSpacing = m_lineExtraSpacing = 0;
     m_bEof = false;
+}
+
+void CDrawBuffer::setendpara(const CStyle& _style/* = ucFontBase*/)
+{
+   m_bEop = true;
+   if (len == 0)
+    {
+	segs.first().start = 0;
+	segs.first().style = _style;
+    }
 }
 
 void CDrawBuffer::addch(tchar ch, CStyle _style/* = ucFontBase*/)
@@ -111,7 +125,7 @@ void CDrawBuffer::truncate(int n)
     (*this)[n] = 0;
 }
 
-int CDrawBuffer::width(int numchars, bool onscreen, int scwidth, unsigned char _border)
+int CDrawBuffer::width(int availht, int numchars, bool onscreen, int scwidth, unsigned short _lborder, unsigned short _rborder)
 {
     int gzoom = fc->gzoom();
     int currentx = 0, end = 0;
@@ -150,7 +164,7 @@ int CDrawBuffer::width(int numchars, bool onscreen, int scwidth, unsigned char _
 	}
 	else
 	{
-	    extraspace = (scwidth - 2*_border - rightMargin() - leftMargin() - width());
+	    extraspace = (scwidth - (_lborder+_rborder) - rightMargin() - leftMargin() - width(availht));
 	    if (extraspace == 0) just = false;
 	}
     }
@@ -168,7 +182,13 @@ int CDrawBuffer::width(int numchars, bool onscreen, int scwidth, unsigned char _
 	{
 	    if (currentstyle.canScale())
 	    {
-		currentx += (gzoom*currentstyle.getPicture()->width())/100;
+	      int ht = (gzoom*currentstyle.getPicture()->height())/100;
+	      int wt = (gzoom*currentstyle.getPicture()->width())/100;
+	      if (ht > availht)
+		{
+		  wt = (wt*availht)/ht;
+		}
+	      currentx += wt;
 	    }
 	    else
 	    {
@@ -208,7 +228,7 @@ int CDrawBuffer::width(int numchars, bool onscreen, int scwidth, unsigned char _
 			else
 			{
 			    QString nstr = str.mid(lastspace+1, nsp-lastspace);
-//			    odebug << "str:" << str << ": last:" << lastspace << " new:" << nsp << " nstr:" << nstr << ":" << oendl; 
+//			    qDebug("str:%s: last:%d new:%d nstr:%s:", (const char*)str, lastspace, nsp, (const char*)nstr);
 			    int lw = fm.width(nstr);
 			    cx += lw;
 			    lastspace = nsp;
@@ -230,6 +250,92 @@ int CDrawBuffer::width(int numchars, bool onscreen, int scwidth, unsigned char _
     return currentx;
 }
 
+int CDrawBuffer::charwidth(int numchars, CStyle& currentstyle)
+{
+    if (currentstyle.isPicture())
+      {
+	int gzoom = fc->gzoom();
+	if (currentstyle.canScale())
+	  {
+	    return (gzoom*currentstyle.getPicture()->width())/100;
+	  }
+	else
+	  {
+	    return currentstyle.getPicture()->width();
+	  }
+      }
+    else
+      {
+	if (currentstyle.isMono() && !fc->hasCourier())
+	  {
+	    return (7*fc->getsize(currentstyle))/10;
+	  }
+	else
+	  {
+	    QString text = QChar((data())[numchars]);
+	    QFont f(currentstyle.isMono() ? QString(fc->fixedfontname()) : fc->name(), fc->getsize(currentstyle), (currentstyle.isBold()) ? QFont::Bold : QFont::Normal, (currentstyle.isItalic()) );
+	    //	    f.setUnderline(currentstyle.isUnderline());
+	    QFontMetrics fm(f);
+	    return fm.width(text);
+	  }
+      }
+    return 0;
+}
+
+int CDrawBuffer::charwidth(int numchars)
+{
+    int gzoom = fc->gzoom();
+    int end = 0;
+    QString text = QChar((data())[numchars]);
+    CList<textsegment>::iterator textstart = segs.begin();
+    CList<textsegment>::iterator textend = textstart;
+    do
+    {
+	textend++;
+	end = (textend != segs.end()) ? textend->start : len;
+	if (end <= numchars)
+	{
+	    textstart = textend;
+	    continue;
+	}
+	if (numchars >= 0 && end > numchars)
+	{
+	    end = numchars;
+	}
+	CStyle currentstyle = textstart->style;
+	if (currentstyle.isPicture())
+	{
+	    if (currentstyle.canScale())
+	    {
+		return (gzoom*currentstyle.getPicture()->width())/100;
+	    }
+	    else
+	    {
+		return currentstyle.getPicture()->width();
+	    }
+	}
+	else
+	{
+	    if (currentstyle.isMono() && !fc->hasCourier())
+	    {
+		return (7*fc->getsize(currentstyle))/10;
+	    }
+	    else
+	    {
+		QFont f(currentstyle.isMono() ? QString(fc->fixedfontname()) : fc->name(), fc->getsize(currentstyle), (currentstyle.isBold()) ? QFont::Bold : QFont::Normal, (currentstyle.isItalic()) );
+//	    f.setUnderline(currentstyle.isUnderline());
+		QFontMetrics fm(f);
+		return fm.width(text);
+	    }
+	}
+	textstart = textend;
+    }
+    while (textend != segs.end() /* && end != numchars*/ && textstart->start < len);
+    return 0;
+}
+
+
+
 int CDrawBuffer::leftMargin()
 {
     return (segs.begin()->style.getLeftMargin()*fc->getsize(segs.begin()->style)+3)/6;
@@ -240,38 +346,79 @@ int CDrawBuffer::rightMargin()
     return (segs.begin()->style.getRightMargin()*fc->getsize(segs.begin()->style)+3)/6;
 }
 
-int CDrawBuffer::offset(int scwidth, unsigned char _border)
+int CDrawBuffer::offset(int scwidth, unsigned short _lborder, unsigned short _rborder, int availht)
 {
-    int currentx = _border;
+    int currentx = _lborder;
     switch(segs.begin()->style.getJustify())
     {
 	case m_AlignRight:
 	{
-	    currentx = scwidth - _border - rightMargin() - width();
+	    currentx = scwidth - _rborder - rightMargin() - width(availht);
 	}
 	break;
 	case m_AlignCentre:
 	{
 	    currentx = (
-		scwidth +
+		scwidth - _lborder -_rborder +
 		leftMargin() - rightMargin()
-		- width())/2;
+		- width(availht))/2 + _lborder;
 	}
 	break;
 	case m_AlignJustify:
 	case m_AlignLeft:
-	    currentx = _border + leftMargin();
+	    currentx = _lborder + leftMargin();
 	    break;
     }
     return currentx;
 }
 
-void CDrawBuffer::render(QPainter* _p, int _y, bool _bMono, int _charWidth, int scwidth, unsigned char _border)
+void CDrawBuffer::render(QPainter* _p, int _y, bool _bMono, int _charWidth, int scwidth, unsigned short _lborder, unsigned short _rborder, const QColor& _bg, int availht)
 {
-    int gzoom = fc->gzoom();
-    int currentx = offset(scwidth, _border);
-    QString text = toQString(data());
     CList<textsegment>::iterator textstart = segs.begin();
+   QColor paperColour = QColor(qRgb(textstart->style.pRed(),
+				    textstart->style.pGreen(),
+				    textstart->style.pBlue()));
+
+   Highlight(_p, !(paperColour == _bg), _lborder, _y, scwidth-(_lborder+_rborder), paperColour);
+   //   Highlight(_p, true, _lborder, _y, scwidth-(_lborder+_rborder), paperColour);
+    int gzoom = fc->gzoom();
+    int currentx = offset(scwidth, _lborder, _rborder, availht);
+   if (!m_hastext)
+     {
+	for (CList<textsegment>::iterator iter = segs.begin(); iter != segs.end(); iter++)
+	  {
+	     CStyle currentstyle = iter->style;
+	     if (currentstyle.isPicture())
+	       {
+		  CStyle currentstyle = segs.begin()->style;
+		  int ht = (gzoom*currentstyle.getPicture()->height())/100;
+		  int wt = (gzoom*currentstyle.getPicture()->width())/100;
+		  bool willscale = false;
+		  if (ht > availht)
+		    {
+		      wt = (wt*availht)/ht;
+		      ht = availht;
+		      willscale = true;
+		    }
+
+		  QPixmap pc;
+		  if ((willscale || gzoom != 100) && currentstyle.canScale())
+		    {
+		       QImage im = currentstyle.getPicture()->smoothScale(wt,ht);
+		       pc.convertFromImage(im);
+		    }
+		  else
+		    {
+		       pc.convertFromImage(*currentstyle.getPicture());
+		    }
+		  int yoffset = pc.height()/2;
+		  _p->drawPixmap( currentx, _y-yoffset, pc );
+		  currentx += pc.width();
+	       }
+	  }	  
+	return;
+     }
+    QString text = toQString(data());
     int extraspace = 0;
     bool just = (!m_bEop && textstart->style.getJustify() == m_AlignJustify);
     int spaces = 0;
@@ -305,19 +452,37 @@ void CDrawBuffer::render(QPainter* _p, int _y, bool _bMono, int _charWidth, int 
 	}
 	else
 	{
-	    extraspace = (scwidth - 2*_border - rightMargin() - leftMargin() - width());
+	    extraspace = (scwidth - (_lborder+_rborder) - rightMargin() - leftMargin() - width(availht));
 	    if (extraspace == 0) just = false;
 	}
     }
     CList<textsegment>::iterator textend = textstart;
+
+   bool drawBackground = false;
     do
     {
 	textend++;
 	int end = (textend != segs.end()) ? textend->start : len;
 	CStyle currentstyle = textstart->style;
+	/*
+	bool drawBackground = (
+			       currentstyle.bRed() != 255
+			       ||
+			       currentstyle.bGreen() != 255
+			       ||
+			       currentstyle.bBlue() != 255
+			       );
+	*/
+	QColor bgColour = QColor(qRgb(currentstyle.bRed(),
+					      currentstyle.bGreen(),
+					      currentstyle.bBlue()));
+	drawBackground = !(bgColour == _bg);
+
+//       if (drawBackground) qDebug("Drawing background");
+       
 	QFont f((currentstyle.isMono() && fc->hasCourier()) ? fc->fixedfontname() : fc->name(), fc->getsize(currentstyle), (currentstyle.isBold()) ? QFont::Bold : QFont::Normal, (currentstyle.isItalic()) );
 //	f.setUnderline(currentstyle.isUnderline());
-//	if (currentstyle.isUnderline()) odebug << "UNDERLINE" << oendl; 
+//	if (currentstyle.isUnderline()) qDebug("UNDERLINE");
 	_p->setFont(f);
 	QString str = text.mid(textstart->start, end-textstart->start);
 #if defined(OPIE) || !defined(USEQPE)
@@ -326,8 +491,11 @@ void CDrawBuffer::render(QPainter* _p, int _y, bool _bMono, int _charWidth, int 
 	_p->setPen(QPen(QColor(currentstyle.Red(), currentstyle.Green(), currentstyle.Blue()), fc->getsize(currentstyle)/10));
 #endif
 	int voffset = currentstyle.getVOffset()*fc->getsize(currentstyle)/2;
+
 	if (_bMono)
 	{
+
+	  Highlight(_p, drawBackground, currentx, _y, str.length()*_charWidth, bgColour);
 	    if (currentstyle.isUnderline())
 	    {
 		_p->drawLine( currentx, _y+voffset, currentx + str.length()*_charWidth, _y+voffset);
@@ -349,11 +517,18 @@ void CDrawBuffer::render(QPainter* _p, int _y, bool _bMono, int _charWidth, int 
 	    {
 		int ht = (gzoom*currentstyle.getPicture()->height())/100;
 		int wt = (gzoom*currentstyle.getPicture()->width())/100;
+		  bool willscale = false;
+		  if (ht > availht)
+		    {
+		      wt = (wt*availht)/ht;
+		      ht = availht;
+		      willscale = true;
+		    }
 		int ascent = fc->ascent(currentstyle)/2;
 		int yoffset = ht/2 + ascent;
 
 		QPixmap pc;
-		if (gzoom != 100 && currentstyle.canScale())
+		if ((willscale || gzoom != 100) && currentstyle.canScale())
 		{
 		    QImage im = currentstyle.getPicture()->smoothScale(wt,ht);
 		    pc.convertFromImage(im);
@@ -371,6 +546,7 @@ void CDrawBuffer::render(QPainter* _p, int _y, bool _bMono, int _charWidth, int 
 		{
 		    int cw = (7*fc->getsize(currentstyle))/10;
 		    int w = cw*(end-textstart->start);
+		    Highlight(_p, drawBackground, currentx, _y, w, bgColour);
 		    if (currentstyle.isUnderline())
 		    {
 			_p->drawLine( currentx, _y+voffset, currentx + w, _y+voffset);
@@ -408,9 +584,11 @@ void CDrawBuffer::render(QPainter* _p, int _y, bool _bMono, int _charWidth, int 
 				spacenumber++;
 				int nexttoadd = (extraspace*spacenumber+spaces/2)/spaces - spacesofar;
 				QString nstr = str.mid(lastspace+1, nsp-lastspace);
-//			    odebug << "str:" << str << ": last:" << lastspace << " new:" << nsp << " nstr:" << nstr << ":" << oendl; 
+//			    qDebug("str:%s: last:%d new:%d nstr:%s:", (const char*)str, lastspace, nsp, (const char*)nstr);
 				int lw = fm.width(nstr);
+				Highlight(_p, drawBackground, cx, _y, lw, bgColour);
 				_p->drawText( cx, _y+voffset, nstr);
+				Highlight(_p, drawBackground, cx+lw, _y, nexttoadd, bgColour);
 				cx += lw+nexttoadd;
 				spacesofar += nexttoadd;
 				lastspace = nsp;
@@ -418,22 +596,27 @@ void CDrawBuffer::render(QPainter* _p, int _y, bool _bMono, int _charWidth, int 
 			    else
 			    {
 				QString nstr = str.mid(lastspace+1, nsp-lastspace);
-//			    odebug << "str:" << str << ": last:" << lastspace << " new:" << nsp << " nstr:" << nstr << ":" << oendl; 
+//			    qDebug("str:%s: last:%d new:%d nstr:%s:", (const char*)str, lastspace, nsp, (const char*)nstr);
 				int lw = fm.width(nstr);
+				Highlight(_p, drawBackground, cx, _y, lw, bgColour);
 				_p->drawText( cx, _y+voffset, nstr);
 				cx += lw;
 				lastspace = nsp;
 			    }
 			}
 			QString nstr = str.right(str.length()-1-lastspace);
+			int lw = fm.width(nstr);
+			Highlight(_p, drawBackground, cx, _y, lw, bgColour);
 			_p->drawText( cx, _y+voffset, nstr);
-			cx += fm.width(nstr);
+			cx += lw;
 			w = cx - currentx;
 		    }
 		    else
 		    {
+			int lw = fm.width(str);
+			Highlight(_p, drawBackground, currentx, _y, lw, bgColour);
 			_p->drawText( currentx, _y+voffset, str);
-			w = fm.width(str);
+			w = lw;
 		    }
 		    if (currentstyle.isUnderline())
 		    {
@@ -451,6 +634,20 @@ void CDrawBuffer::render(QPainter* _p, int _y, bool _bMono, int _charWidth, int 
 	textstart = textend;
     }
     while (textend != segs.end() && textstart->start < len);
+/*
+ if (firstColour ==  bgColour)
+     {
+	Highlight(_p, drawBackground, currentx, _y, scwidth - (currentx + _lborder + _rborder), bgColour);
+     }
+ */
+}
+
+void CDrawBuffer::Highlight(QPainter* _p, bool drawBackground, int _x, int _y, int w, QColor bgColour)
+{
+  if (drawBackground)
+    {
+      _p->fillRect(_x, _y-m_ascent, w, m_lineSpacing, bgColour);
+    }
 }
 
 CStyle CDrawBuffer::laststyle()
@@ -458,8 +655,14 @@ CStyle CDrawBuffer::laststyle()
     return segs.last().style;
 }
 
-linkType CDrawBuffer::getLinkType(int numchars, size_t& tgt)
+CStyle CDrawBuffer::firststyle()
 {
+    return segs.first().style;
+}
+
+linkType CDrawBuffer::getLinkType(int numchars, size_t& tgt, size_t& offset, size_t& pictgt, QImage*& img)
+{
+  linkType ret = eNone;
     int end = 0;
     CStyle currentstyle;
     CList<textsegment>::iterator textstart = segs.begin();
@@ -470,77 +673,192 @@ linkType CDrawBuffer::getLinkType(int numchars, size_t& tgt)
 	end = (textend != segs.end()) ? textend->start : len;
 	currentstyle = textstart->style;
 /*
-	if (currentstyle.isPicture()) odebug << "Passed thru picture" << oendl; 
-	if (currentstyle.getLink()) odebug << "Passed thru link" << oendl; 
-	//odebug << "islink:" << numchars << " - " << end << "" << oendl; 
+	if (currentstyle.isPicture()) qDebug("Passed thru picture");
+	if (currentstyle.getLink()) qDebug("Passed thru link");
+	//qDebug("islink:%d - %d", numchars, end);
 */
 	textstart = textend;
     }
     while (textend != segs.end() && end <= numchars);
-//    if (currentstyle.isPicture()) odebug << "Clicked on picture" << oendl; 
+    img = currentstyle.getPicture();
     if (currentstyle.getPictureLink())
     {
-	tgt = currentstyle.getPictureLinkData();
-	return ePicture;
+	pictgt = currentstyle.getPictureLinkData();
+	ret |= ePicture;
     }
     if (currentstyle.getLink())
     {
 	tgt = currentstyle.getData();
-	return eLink;
+	offset = currentstyle.getOffset();
+	ret |= eLink;
     }
-    return eNone;
+    return ret;
 }
 
-void CDrawBuffer::resize()
+void CDrawBuffer::resize(int availht)
 {
     int gzoom = fc->gzoom();
-    m_maxstyle = m_ascent = m_descent = m_lineSpacing = m_lineExtraSpacing = 0;
+    m_ascent = m_descent = m_lineSpacing = m_lineExtraSpacing = 0;
+    /*
+    int t_ascent = 0;
+    int t_descent = 0;
+    int t_lineExtraSpacing = 0;
+    */
+    int t_lineSpacing = 0;
+   m_hastext = false;
     for (CList<textsegment>::iterator iter = segs.begin(); iter != segs.end() && iter->start <= len; )
     {
+       CStyle _style = iter->style;
+       if (!_style.isPicture())
+	 {
+	    m_hastext = true;
+	    break;
+	 }
+       iter++;
+    }
+   if (m_hastext)
+     {
+	
+	for (CList<textsegment>::iterator iter = segs.begin(); iter != segs.end() && iter->start <= len; )
+	  {
+	     CList<textsegment>::iterator next = iter;
+	     iter++;
+	     int st = next->start;
+	     if (st < 0) st = 0;
+	     
+	     CStyle _style = next->style;
+	     
+	     int linespacing, ascent, descent, extra;
+	     
+	     ascent = fc->ascent(_style);
+	     descent = fc->descent(_style);
+	     linespacing = fc->lineSpacing(_style);
+	     extra = linespacing - ascent - descent;
+	     /*
+	      if (ascent > t_ascent) t_ascent = ascent;
+	      if (descent > t_descent) t_descent = descent;
+	      if (extra > t_lineExtraSpacing) t_lineExtraSpacing = extra;
+	      t_lineSpacing = t_ascent+t_descent+t_lineExtraSpacing;
+	      */
+	     if (linespacing > t_lineSpacing) t_lineSpacing = linespacing;
+	     if (_style.isPicture())
+	       {
+		  int ht = (gzoom*_style.getPicture()->height())/100;
+		  int wt = (gzoom*_style.getPicture()->width())/100;
+
+		  bool willscale = false;
+		  if (ht > availht)
+		    {
+		      wt = (wt*availht)/ht;
+		      ht = availht;
+		      willscale = true;
+		    }
+		  if (willscale || _style.canScale())
+		    {
+		       descent = ((gzoom*_style.getPicture()->height())/100-ascent)/2;
+		       ascent = ((gzoom*_style.getPicture()->height())/100+ascent)/2;
+		    }
+	       }
+	     
+	     /*
+	      else if (fc != NULL)
+	      {
+	      ascent = fc->ascent(_style);
+	      descent = fc->descent(_style);
+	      linespacing = fc->lineSpacing(_style);
+	      extra = linespacing - ascent - descent;
+	      }
+	      */
+	     if (ascent > m_ascent) m_ascent = ascent;
+	     if (descent > m_descent) m_descent = descent;
+	     if (extra > m_lineExtraSpacing) m_lineExtraSpacing = extra;
+	     m_lineSpacing = m_ascent+m_descent+m_lineExtraSpacing;
+	  }
+	m_showPartial = (m_lineSpacing > t_lineSpacing);
+	int lead = fc->getlead();
+	if (lead != 0)
+	  {
+	     int xt = (lead*t_lineSpacing+5)/10;
+	     m_lineExtraSpacing += xt;
+	     m_lineSpacing += xt;
+	  }
+	if (m_bSop)
+	  {
+	     int xt = ((segs.begin()->style.getExtraSpace()+fc->getextraspace())*fc->getsize(segs.begin()->style)+5)/10;
+	     //	qDebug("ExtraSpace:%d", xt);
+	     m_ascent += xt;
+	     m_lineSpacing += xt;
+	  }
+     }
+   else
+     {
+	m_showPartial = true;
+	int maxheight = 0;
+	for (CList<textsegment>::iterator iter = segs.begin(); iter != segs.end(); iter++)
+	  {
+	     CStyle _style = iter->style;
+	     if (_style.isPicture())
+	       {
+		  int ht = 0;
+		  if (_style.canScale())
+		    {
+		       ht = ((gzoom*_style.getPicture()->height())/100);
+		    }
+		  else
+		    {
+		       ht = _style.getPicture()->height();
+		    }
+		  if (ht > availht)
+		    {
+		      ht = availht;
+		    }
+		  if (ht > maxheight) maxheight = ht;
+	       }
+	  }
+	m_ascent = maxheight/2;
+	m_descent = maxheight-m_ascent;
+	m_lineExtraSpacing = 0;
+	m_lineSpacing = m_ascent+m_descent;
+     }
+}
+
+CStyle* CDrawBuffer::getNextLink(int& offset)
+{
+  CStyle* ret = NULL;
+  for (CList<textsegment>::iterator iter = segs.begin(); iter != segs.end(); ++iter)
+  {
+    if (offset < iter->start && iter->style.getLink())
+      {
+	ret = &(iter->style);
+	offset = iter->start;
+	qDebug("Found a link at offset %d!", offset);
+	break;
+      }
+  }
+  return ret;
+}
+
+int CDrawBuffer::invertLink(int offset)
+{
+  for (CList<textsegment>::iterator iter = segs.begin(); iter != segs.end(); ++iter)
+  {
+    if (offset <= iter->start && iter->style.getLink())
+      {
+	iter->style.invert();
+	unsigned long currentvalue = iter->style.getData();
+	qDebug("Link data %u", currentvalue);
 	CList<textsegment>::iterator next = iter;
-	iter++;
-	int st = next->start;
-	if (st < 0) st = 0;
-
-	CStyle _style = next->style;
-
-	int linespacing, ascent, descent, extra;
-
-	ascent = fc->ascent(_style);
-	descent = fc->descent(_style);
-	linespacing = fc->lineSpacing(_style);
-	extra = linespacing - ascent - descent;
-	if (_style.isPicture() && _style.canScale())
-	{
-	    descent = ((gzoom*_style.getPicture()->height())/100-ascent)/2;
-	    ascent = ((gzoom*_style.getPicture()->height())/100+ascent)/2;
-	}
-/*
-	else if (fc != NULL)
-	{
-	    ascent = fc->ascent(_style);
-	    descent = fc->descent(_style);
-	    linespacing = fc->lineSpacing(_style);
-	    extra = linespacing - ascent - descent;
-	}
-*/
-	if (ascent > m_ascent) m_ascent = ascent;
-	if (descent > m_descent) m_descent = descent;
-	if (extra > m_lineExtraSpacing) m_lineExtraSpacing = extra;
-	m_lineSpacing = m_ascent+m_descent+m_lineExtraSpacing;
-    }
-    int lead = fc->getlead();
-    if (lead != 0)
-    {
-	int xt = (lead*m_lineSpacing+5)/10;
-	m_descent += xt;
-	m_lineSpacing += xt;
-    }
-    if (m_bSop)
-    {
-	int xt = ((segs.begin()->style.getExtraSpace()+fc->getextraspace())*fc->getsize(segs.begin()->style)+5)/10;
-//	odebug << "ExtraSpace:" << xt << "" << oendl; 
-	m_ascent += xt;
-	m_lineSpacing += xt;
-    }
+	++next;
+	while (next != segs.end() && (currentvalue == next->style.getData()) && next->style.getLink())
+	  {
+	    next->style.invert();
+	    offset = next->start;
+	    iter++;
+	    next++;
+	  }
+	return offset;
+      }
+  }
+  qDebug("Failed to invert");
+  return offset;
 }

@@ -3,6 +3,9 @@
 
 typedef unsigned short StyleType;
 
+#ifdef _WINDOWS
+#include <string.h>
+#endif
 #include <string.h>
 #include <stdlib.h>
 #include <qglobal.h>
@@ -42,12 +45,16 @@ class CBasicStyle
 {
     friend class CStyle;
     bool m_bold,
-	m_italic;
+      m_italic;
     int m_fontsize;
     EalignmentType m_align;
     unsigned char red, green, blue;
+    unsigned char bred, bgreen, bblue;
+    unsigned char pred, pgreen, pblue;
     unsigned long data;
+    unsigned long offset;
     bool isLink;
+    //    bool isVisited;
     bool m_underline;
     bool m_strikethru;
     bool m_monospaced;
@@ -69,8 +76,12 @@ class CBasicStyle
 	    m_fontsize = 0;
 	    m_align = m_AlignLeft;
 	    red = green = blue = 0;
+	    bred = bgreen = bblue = 255;
+	    pred = pgreen = pblue = 255;
 	    data = 0;
+	    offset = 0;
 	    isLink = false;
+	    //    isVisited = false;
 	    m_underline = false;
 	    m_strikethru = false;
 	    m_leftmargin = 0;
@@ -111,14 +122,32 @@ class CStyle
 	    sty.green = g;
 	    sty.blue = b;
 	}
+    unsigned char bRed() { return sty.bred; }
+    unsigned char bGreen() { return sty.bgreen; }
+    unsigned char bBlue() { return sty.bblue; }
+    unsigned char pRed() { return sty.pred; }
+    unsigned char pGreen() { return sty.pgreen; }
+    unsigned char pBlue() { return sty.pblue; }
+    void setPaper(unsigned char r, unsigned char g, unsigned char b)
+	{
+	    sty.pred = r;
+	    sty.pgreen = g;
+	    sty.pblue = b;
+	}
+    void setBackground(unsigned char r, unsigned char g, unsigned char b)
+	{
+	    sty.bred = r;
+	    sty.bgreen = g;
+	    sty.bblue = b;
+	}
     CStyle() : graphic(NULL) {}
     ~CStyle();
 //    CStyle(CStyle&);
     CStyle(const CStyle&);
     CStyle& operator=(const CStyle&);
     void unset();
-    bool isPicture() { return (graphic != NULL); }
-    bool canScale() { return graphic->m_isScaleable; }
+    bool isPicture() const { return (graphic != NULL); }
+    bool canScale() const { return graphic->m_isScaleable; }
     void clearPicture();
     void setPicture(bool canScale, QImage* _g, bool il=false, unsigned long tgt=0);
     QImage* getPicture()
@@ -181,8 +210,13 @@ class CStyle
 	}
     void setLink(bool _l) { sty.isLink = _l; }
     bool getLink() { return sty.isLink; }
+    //    void setVisited(bool _l) { sty.isVisited = _l; }
+    //    bool getVisited() { return sty.isVisited; }
     void setData(unsigned long _d) { sty.data = _d; }
     unsigned long getData() { return sty.data; }
+    void setOffset(unsigned long _d) { sty.offset = _d; }
+    unsigned long getOffset() { return sty.offset; }
+    void invert();
 };
 
 #endif

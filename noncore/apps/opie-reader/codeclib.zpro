@@ -1,0 +1,15 @@
+TEMPLATE	= lib
+CONFIG		= qt warn_on release dll
+HEADERS		= pdb.h
+
+SOURCES		= CExpander.cpp CBuffer.cpp StyleConsts.cpp \
+		  hrule.cpp Navigation.cpp Bkmks.cpp
+
+INTERFACES	= 
+DESTDIR		= $(QTDIR)/lib
+TARGET		= reader_codec
+
+OBJECTS_DIR = ZREADEROBJS
+MOC_DIR = ZREADERMOCS
+INCLUDEPATH	+= ZREADERINC
+DEPENDPATH	+= ZREADERINC

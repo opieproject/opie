@@ -27,6 +27,7 @@ class ppm_expander : public CExpander {
   PPM_ReadBuf* my_read_buf;
   ppm_worker ppm;
 public:
+  QString about() { return QString("ppms Codec (c) Tim Wentford\nCompression code (c) Fabrice Bellard"); }
 #ifdef USEQPE
 	void suspend()
       {
@@ -46,7 +47,7 @@ public:
   }
   int OpenFile(const char* infile);
   int getch();
-  int locate(unsigned short block, unsigned int n);
+  void locate(unsigned short block, unsigned int n);
   virtual ~ppm_expander();
   unsigned int locate() { return outbytes; }
   void locate(unsigned int n);

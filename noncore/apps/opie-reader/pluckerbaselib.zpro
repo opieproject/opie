@@ -1,0 +1,14 @@
+TEMPLATE	= lib
+CONFIG		= qt warn_on release dll
+HEADERS		= pdb.h
+
+SOURCES		= plucker_base.cpp
+
+INTERFACES	= 
+DESTDIR		= $(QTDIR)/lib
+TARGET		= reader_pluckerbase
+
+OBJECTS_DIR = ZREADEROBJS
+MOC_DIR = ZREADERMOCS
+INCLUDEPATH	+= ZREADERINC
+DEPENDPATH	+= ZREADERINC

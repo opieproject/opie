@@ -13,11 +13,14 @@ public:
   void suspend()
       {
 #ifdef USEQPE
-	  bSuspended = true;
-	  suspos = gztell(file);
-	  gzclose(file);
-	  file = NULL;
-	  sustime = time(NULL);
+	if (!bSuspended)
+	  {
+	    bSuspended = true;
+	    suspos = gztell(file);
+	    gzclose(file);
+	    file = NULL;
+	    sustime = time(NULL);
+	  }
 #endif
       }
   void unsuspend()
@@ -26,8 +29,11 @@ public:
 	  if (bSuspended)
 	  {
 	      bSuspended = false;
-	      int delay = time(NULL) - sustime;
-	      if (delay < 10) sleep(10-delay);
+	      if (sustime != ((time_t)-1))
+		{
+		  int delay = time(NULL) - sustime;
+		  if (delay < 10) sleep(10-delay);
+		}
 	      file = gzopen(fname, "rb");
 	      for (int i = 0; file == NULL && i < 5; i++)
 	      {
@@ -46,7 +52,13 @@ public:
   Text() : file(NULL) {};
   virtual ~Text()
     {
-      if (file != NULL) gzclose(file);
+      if (file != NULL)
+	{
+#ifdef USEQPE
+	  unsuspend();
+#endif
+	  gzclose(file);
+	}
     }
   int OpenFile(const char *src)
     {
@@ -56,9 +68,27 @@ public:
       fsize = _stat.st_size;
       return ((file = gzopen(src,"rb")) == NULL);
     }
-  int getch() { return gzgetc(file); }
-  unsigned int locate() { return gztell(file); }
-  void locate(unsigned int n) { gzseek(file,n,SEEK_SET); }
+  int getch()
+    {
+#ifdef USEQPE
+      unsuspend();
+#endif
+      return gzgetc(file);
+    }
+  unsigned int locate()
+    {
+#ifdef USEQPE
+      unsuspend();
+#endif
+      return gztell(file);
+    }
+  void locate(unsigned int n)
+    {
+#ifdef USEQPE
+      unsuspend();
+#endif
+      gzseek(file,n,SEEK_SET);
+    }
   bool hasrandomaccess() { return true; }
   void sizes(unsigned long& _file, unsigned long& _text)
     {
@@ -81,5 +111,6 @@ public:
       {
 	  return cTEXT;
       }
+  QString about() { return QString("Text/gzipped text codec (c) Tim Wentford"); }
 };
 #endif

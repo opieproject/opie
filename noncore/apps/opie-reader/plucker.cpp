@@ -1,5 +1,8 @@
+#include "useqpe.h"
 #include <stdio.h>
 #include <string.h>
+#include <qmessagebox.h>
+#include <qpixmap.h>
 #ifdef USEQPE
 #include <qpe/qcopenvelope_qws.h>
 #endif
@@ -12,9 +15,12 @@
 #else
 #include <qapplication.h>
 #endif
+#include <qclipboard.h>
 
 #include "plucker.h"
+#include "Aportis.h"
 #include "Palm2QImage.h"
+#include "static.h"
 
 
 struct CPlucker_dataRecord
@@ -43,7 +49,9 @@ void CPlucker::GetHeader(UInt16& uid, UInt16& nParagraphs, UInt32& size, UInt8& 
 }
 
 CPlucker::CPlucker()
- { /*printf("constructing:%x\n",fin);*/ }
+ { /*printf("constructing:%x\n",fin);*/
+     EOPPhase = 0;
+ }
 
 bool CPlucker::CorrectDecoder()
 {
@@ -55,23 +63,31 @@ int CPlucker::bgetch()
     int ch = EOF;
     if (bufferpos >= buffercontent)
     {
-	if (!m_continuous) return EOF;
-	if (bufferrec >= ntohs(head.recordList.numRecords) - 1) return EOF;
-////	odebug << "Passing through " << currentpos << "" << oendl; 
-	if (!expand(bufferrec+1)) return EOF;
+	if (isEndOfSection(bufferrec))
+	{
+	  if (!m_continuous) return EOF;
+	}
+	if (bufferrec >= ntohs(head.recordList.numRecords) - 1)
+	{
+		return EOF;
+	}
+	if (!expand(bufferrec+1))
+	{
+		return EOF;
+	}
 	mystyle.unset();
 	if (m_ParaOffsets[m_nextParaIndex] == 0)
 	{
 	    while (m_ParaOffsets[m_nextParaIndex+1] == 0)
 	    {
-//		odebug << "Skipping extraspace:" << m_ParaAttrs[m_nextParaIndex]&7 << "" << oendl; 
+//		qDebug("Skipping extraspace:%d", m_ParaAttrs[m_nextParaIndex]&7);
 		m_nextParaIndex++;
 	    }
 	}
 	mystyle.setExtraSpace((m_ParaAttrs[m_nextParaIndex]&7)*2);
-//	odebug << "Using extraspace:" << m_ParaAttrs[m_nextParaIndex]&7 << "" << oendl; 
+//	qDebug("Using extraspace:%d", m_ParaAttrs[m_nextParaIndex]&7);
 	ch = 10;
-	EOPPhase = 4;
+	if (m_continuous) EOPPhase = 4;
     }
     else if (bufferpos == m_nextPara)
     {
@@ -79,7 +95,7 @@ int CPlucker::bgetch()
 	{
 	    UInt16 attr = m_ParaAttrs[m_nextParaIndex];
 	    m_nextParaIndex++;
-//	    odebug << "Skipping extraspace:" << m_ParaAttrs[m_nextParaIndex]&7 << "" << oendl; 
+//	    qDebug("Skipping extraspace:%d", m_ParaAttrs[m_nextParaIndex]&7);
 	    if (m_nextParaIndex == m_nParas)
 	    {
 		m_nextPara = -1;
@@ -91,7 +107,7 @@ int CPlucker::bgetch()
 	}
 	mystyle.unset();
 	mystyle.setExtraSpace((m_ParaAttrs[m_nextParaIndex]&7)*2);
-//	odebug << "Using extraspace:" << m_ParaAttrs[m_nextParaIndex]&7 << "" << oendl; 
+//	qDebug("Using extraspace:%d", m_ParaAttrs[m_nextParaIndex]&7);
 	if (m_lastBreak == locate())
 	{
 	    currentpos++;
@@ -149,3 +165,67 @@ QImage* CPlucker::imagefromdata(UInt8* imgbuffer, UInt32 imgsize)
     delete [] imgbuffer;
     return qimage;
 }
+
+void CPlucker::start2endSection() // to plucker base
+{
+    m_currentstart = NEFstartSection();
+    m_currentend = NEFendSection();
+}
+
+unsigned long CPlucker::NEFstartSection() // virtual in plucker base - differs only in obsoleted nef so move implementation
+{
+//inefficient - Should calc start/end of section on entry to section?
+    UInt16 thishdr_uid, thishdr_nParagraphs;
+    UInt32 thishdr_size;
+    UInt8 thishdr_type, thishdr_reserved;
+    unsigned long textlength = currentpos-bufferpos;
+    for (UInt16 recptr = bufferrec-1; recptr >= 1; recptr--)
+    {
+	gotorecordnumber(recptr);
+	//qDebug("recptr:%u", recptr);
+	GetHeader(thishdr_uid, thishdr_nParagraphs, thishdr_size, thishdr_type, thishdr_reserved);
+	if (thishdr_type < 2)
+	{
+	    if ((thishdr_reserved && continuation_bit) == 0) break;
+	    textlength -= thishdr_size;
+	    //qDebug("Textlength:%u, reserved:%u, recptr:%u", textlength, thishdr_reserved, recptr);
+	}
+    }
+    return textlength;
+}
+
+unsigned long CPlucker::NEFendSection() // virtual in plucker base - differs only in obsoleted nef so move implementation
+{
+//inefficient - Should calc start/end of section on entry to section?
+    unsigned long textlength = currentpos-bufferpos+buffercontent;
+    gotorecordnumber(bufferrec);
+    UInt16 thishdr_uid, thishdr_nParagraphs;
+    UInt32 thishdr_size;
+    UInt8 thishdr_type, thishdr_reserved;
+    GetHeader(thishdr_uid, thishdr_nParagraphs, thishdr_size, thishdr_type, thishdr_reserved);
+    if ((thishdr_reserved && continuation_bit) != 0)
+      {
+	for (UInt16 recptr = bufferrec+1; recptr < ntohs(head.recordList.numRecords); recptr++)
+	  {
+	    gotorecordnumber(recptr);
+	    UInt16 thishdr_uid, thishdr_nParagraphs;
+	    UInt32 thishdr_size;
+	    UInt8 thishdr_type, thishdr_reserved;
+	    GetHeader(thishdr_uid, thishdr_nParagraphs, thishdr_size, thishdr_type, thishdr_reserved);
+	    //	qDebug("recptr %u bufferrec %u type %u m_reserved %u", recptr, bufferrec, typ
+	    if (thishdr_type < 2)
+	      {
+		textlength += thishdr_size;
+		if ((thishdr_reserved && continuation_bit) == 0) break;
+	      }
+	  }
+      }
+    return textlength;
+}
+
+#ifndef __STATIC
+extern "C"
+{
+  CExpander* newcodec() { return new CPlucker; }
+}
+#endif

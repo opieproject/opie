@@ -1,15 +1,15 @@
 /*
-Derived from the file browser published by ljp@llornkcor.com but extensively
-modified to work in rotated views on the Zaurus
+  Derived from the file browser published by ljp@llornkcor.com but extensively
+  modified to work in rotated views on the Zaurus
 */
 
 /****************************************************************************
-** Form interface generated from reading ui file 'fileBrowzer.ui'
-**
-** Created: Fri Dec 14 08:16:02 2001
-**      by:  The User Interface Compiler (uic)
-**
-** WARNING! All changes made in this file will be lost!
+ ** Form interface generated from reading ui file 'fileBrowzer.ui'
+ **
+ ** Created: Fri Dec 14 08:16:02 2001
+ **      by:  The User Interface Compiler (uic)
+ **
+ ** WARNING! All changes made in this file will be lost!
 blah,blah,blah
 ****************************************************************************/
 #ifndef FILEBROWSER_H
@@ -33,45 +33,49 @@ class QLineEdit;
 
 class fileBrowser : public QDialog
 { 
-    Q_OBJECT
+  Q_OBJECT
 
-public:
+    public:
   void populateList();
-    fileBrowser( bool allownew, QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 ,const QString filter=0, const QString iPath=0);
-    ~fileBrowser();
+  fileBrowser( bool allownew, QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 ,const QString filter=0, const QString iPath=0);
+  ~fileBrowser();
 
-    QPushButton* buttonOk;
-    QPushButton* buttonShowHidden;
-    QtrListView* ListView;
-    QPushButton* buttonCancel;
-    QLabel *dirLabel;
-    QString selectedFileName, filterStr;
-    QDir currentDir;
-    QFile file;
-    QString getCurrentFile();
-    QLineEdit* m_filename;
-    int filterspec;
-//    QDir::FilterSpec filterspec;
+  QPushButton* buttonOk;
+  QPushButton* buttonShowHidden;
+  QtrListView* ListView;
+  QPushButton* buttonCancel;
+  QLabel *dirLabel;
+  QString selectedFileName, filterStr;
+  QDir currentDir;
+  QFile file;
+  QString getCurrentFile();
+  QLineEdit* m_filename;
+  int filterspec;
+  //    QDir::FilterSpec filterspec;
  
-//QListViewItem * item;
-public slots:
+  //QListViewItem * item;
+  public slots:
 
-private:
- QString filename; 
-private slots: 
-        void upDir();
-        void listDoubleClicked(QListViewItem *);
-        void listClicked(QListViewItem *);
-	void OnRoot();
-	void OnCancel();
-	void setHidden(bool);
-	void onReturn();
+ private:
+  QString filename; 
+  private slots: 
+    void upDir();
+  void listDoubleClicked(QListViewItem *);
+  void listClicked(QListViewItem *);
+  void OnRoot();
+  void OnCancel();
+  void setHidden(bool);
+  void onReturn();
+  void onCF();
+  void onSD();
+  void onHome();
 
-protected slots: 
+  protected slots: 
 
-protected:
-        void OnOK();
- virtual void resizeEvent(QResizeEvent* e); 
+ protected:
+  void OnOK();
+  virtual void resizeEvent(QResizeEvent* e); 
+  void setdir(const QString& s);
 };
 
 #endif // FILEBROWSER_H

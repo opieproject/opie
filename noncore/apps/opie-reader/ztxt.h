@@ -1,7 +1,6 @@
 #ifndef __ztxt_h
 #define __ztxt_h
 
-#include "useqpe.h"
 #include "CExpander.h"
 #include <zlib.h>
 #include "pdb.h"
@@ -12,7 +11,7 @@
 /*
  * Stuff common to both Weasel Reader and makeztxt
  *
- * $Id: ztxt.h,v 1.4 2003/01/29 14:06:06 tim Exp $
+ * $Id: ztxt.h,v 1.11 2004/02/28 11:21:06 tim Exp $
  *
  */
 
@@ -22,7 +21,7 @@
 
 /* Padding is no good */
 #if defined(__GNUC__) && defined(__UNIX__)
-#  pragma pack(2)
+//#  pragma pack(2)
 #endif
 
 /*  The default creator is Weasel Reader 'GPlm'  */
@@ -58,7 +57,7 @@ typedef struct zTXT_record0Type {
 struct zTXTbkmk
 {
     UInt32 offset;
-    tchar title[MAX_BMRK_LENGTH];
+    unsigned char title[MAX_BMRK_LENGTH];
 };
 
 #endif
@@ -66,7 +65,7 @@ struct zTXTbkmk
 
 const UInt32 ZTXT_ID = 0x5458547a;
 
-class ztxt : public CExpander, Cpdb
+class ztxt : public Cpdb
 {
     bool bInit;
     UInt32 buffersize;
@@ -80,16 +79,7 @@ class ztxt : public CExpander, Cpdb
     size_t currentpos;
     void home();
 public:
-#ifdef USEQPE
-	void suspend()
-      {
-	  CExpander::suspend(fin);
-      }
-  void unsuspend()
-      {
-	  CExpander::unsuspend(fin);
-      }
-#endif
+    QString about() { return QString("Weasel codec (c) Tim Wentford"); }
     void sizes(unsigned long& _file, unsigned long& _text)
 	{
 	    _file = file_length;

@@ -1,25 +1,35 @@
+#include <qfontdatabase.h>
+#include "opie.h"
+#include "useqpe.h"
 #include "FontControl.h"
 
 int FontControl::gzoom()
 {
-    int ret;
-    if (m_size == g_size)
+  if (m_fixgraphics)
     {
-	ret = m_fontsizes[m_size]*m_basesize;
+      return 100;
     }
-    else if (g_size < 0)
+  else
     {
-	int f = -g_size;
-	ret = (m_fontsizes[0]*m_basesize) >> (f/2);
-	if (f%2) ret = (2*ret/3);
+      int ret;
+      if (m_size == g_size)
+	{
+	  ret = m_fontsizes[m_size]*m_basesize;
+	}
+      else if (g_size < 0)
+	{
+	  int f = -g_size;
+	  ret = (m_fontsizes[0]*m_basesize) >> (f/2);
+	  if (f%2) ret = (2*ret/3);
+	}
+      else
+	{
+	  int f = g_size - m_maxsize + 1;
+	  ret = (m_fontsizes[m_maxsize-1]*m_basesize) << (f/2);
+	  if (f%2) ret = (3*ret/2);
+	}
+      return ret;
     }
-    else
-    {
-	int f = g_size - m_maxsize + 1;
-	ret = (m_fontsizes[m_maxsize-1]*m_basesize) << (f/2);
-	if (f%2) ret = (3*ret/2);
-    }
-    return ret;
 }
 
 bool FontControl::ChangeFont(QString& n, int tgt)
