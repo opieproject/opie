@@ -34,6 +34,7 @@
 /* OPIE */
 
 #include <opie2/onetwork.h>
+#include <opie2/ostation.h>
 
 /* QT */
 
@@ -881,11 +882,53 @@ int OWirelessNetworkInterface::scanNetwork()
 
     if ( results )
     {
+        qDebug( " - result length = %d", _iwr.u.data.length );
+        if ( !_iwr.u.data.length )
+        {
+            qDebug( " - no results (empty neighbourhood)" );
+            return 0;
+        }
+
         qDebug( " - results are in!" );
+        dumpBytes( (const unsigned char*) &buffer[0], _iwr.u.data.length );
+
+        int stations = 0;
+
+        // parse results
+
+        int offset = 0;
+        struct iw_event* we = (struct iw_event*) &buffer[0];
+
+        while ( offset < _iwr.u.data.length )
+        {
+            //const char* cmd = *(*_ioctlmap)[we->cmd];
+            //if ( !cmd ) cmd = "<unknown>";
+            qDebug( "reading next event... cmd=%d, len=%d", we->cmd, we->len );
+            switch (we->cmd)
+            {
+                case SIOCGIWAP: qDebug( "SIOCGIWAP" ); stations++; break;
+                case SIOCGIWMODE: qDebug( "SIOCGIWMODE" ); break;
+                case SIOCGIWFREQ: qDebug( "SIOCGIWFREQ" ); break;
+                case SIOCGIWESSID: qDebug( "SIOCGIWESSID" ); break;
+                case SIOCGIWSENS: qDebug( "SIOCGIWSENS" ); break;
+                case SIOCGIWENCODE: qDebug( "SIOCGIWENCODE" ); break;
+                case IWEVTXDROP: qDebug( "IWEVTXDROP" ); break;         /* Packet dropped to excessive retry */
+                case IWEVQUAL: qDebug( "IWEVQUAL" ); break;             /* Quality part of statistics (scan) */
+                case IWEVCUSTOM: qDebug( "IWEVCUSTOM" ); break;         /* Driver specific ascii string */
+                case IWEVREGISTERED: qDebug( "IWEVREGISTERED" ); break; /* Discovered a new node (AP mode) */
+                case IWEVEXPIRED: qDebug( "IWEVEXPIRED" ); break;       /* Expired a node (AP mode) */
+                default: qDebug( "unhandled event" );
+            }
+
+            offset += we->len;
+            we = (struct iw_event*) &buffer[offset];
+        }
+
     }
     else
     {
-        qDebug( " - no results :(" );
+        qDebug( " - no results (timeout) :(" );
+        return 0;
     }
 }
 

@@ -9,12 +9,14 @@ HEADERS     = 802_11_user.h       \
               omanufacturerdb.h   \
               onetutils.h         \
               onetwork.h          \
-              opcap.h
+              opcap.h             \
+              ostation.h
 SOURCES     = oioctlmap.cpp       \
               omanufacturerdb.cpp \
               onetutils.cpp       \
               onetwork.cpp        \
-              opcap.cpp
+              opcap.cpp           \
+              ostation.cpp
 INTERFACES  =
 TARGET      = opienet2
 VERSION     = 1.8.1
