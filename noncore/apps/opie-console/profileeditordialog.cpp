@@ -29,7 +29,7 @@ ProfileEditorDialog::ProfileEditorDialog( MetaFactory* fact )
     : QTabDialog(0, 0, TRUE), m_fact( fact )
 {
 	// Default profile
-	m_prof = Profile("serial", QString::null, Profile::Black, Profile::White, Profile::VT102);
+	m_prof = Profile(QString::null, "serial", Profile::Black, Profile::White, Profile::VT102);
 
 	initUI();
 
@@ -194,8 +194,13 @@ void ProfileEditorDialog::initUI()
 	setOkButton(QObject::tr("OK"));
 	setCancelButton(QObject::tr("Cancel"));
 
-	connect(this, SIGNAL(cancelButtonPressed()), SLOT(slotCancel()));
+	// load profile values
 
+	name_line->setText(m_prof.name());
+
+	// signals
+
+	connect(this, SIGNAL(cancelButtonPressed()), SLOT(slotCancel()));
 	connect(device_box, SIGNAL(activated(int)), SLOT(slotDevice(int)));
 }
 
@@ -230,6 +235,9 @@ void ProfileEditorDialog::accept()
 
 	// Save profile and plugin profile
 	if(plugin_plugin) plugin_plugin->save();
+
+	// Save general values
+	m_prof.setName(prof_name());
 
 	QDialog::accept();
 }

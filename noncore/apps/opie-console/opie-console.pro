@@ -22,7 +22,8 @@ HEADERS      = io_layer.h io_serial.h \
                history.h \
                screen.h \
 	       keytrans.h \
-	       widget_layer.h
+	       widget_layer.h \
+		   transferdialog.h
 
 SOURCES      = io_layer.cpp io_serial.cpp \
 	       file_layer.cpp sz_transfer.cpp \
@@ -43,7 +44,8 @@ SOURCES      = io_layer.cpp io_serial.cpp \
 	       history.cpp \
 	       screen.cpp \
 	       keytrans.cpp \
-	       widget_layer.cpp
+	       widget_layer.cpp \
+		   transferdialog.cpp
    
 INTERFACES   = configurebase.ui editbase.ui
 INCLUDEPATH += $(OPIEDIR)/include

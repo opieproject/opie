@@ -43,7 +43,7 @@ public:
 	/**
 	 * sets the image
 	 */
-	virtual void setImage( const Character* const newimg, int lines, int colums );
+	virtual void setImage( const Character* const newimg, int lines, int colums ) = 0;
 
 	/**
 	 * annoy the user
@@ -143,7 +143,7 @@ protected:
 	/**
 	 *
 	 */
-	virtual void calcGeometry();
+	virtual void calcGeometry() = 0;
 
 	/**
 	 * makes an empty image

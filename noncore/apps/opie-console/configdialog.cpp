@@ -66,8 +66,10 @@ void ConfigDialog::slotRemove() {
 void ConfigDialog::slotEdit() {
 	Profile p;
 
+	if(!lstView->currentItem()) return;
+
 	// Load profile
-	// p = currentItem()->profile();
+	p = ((ConfigListItem*)lstView->currentItem())->profile();
 
 	ProfileEditorDialog dlg(new MetaFactory(), p);
 
