@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.41 2003-03-26 10:02:13 simon Exp $
+** $Id: qpeapplication.cpp,v 1.42 2003-03-26 21:58:02 kergoth Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -943,7 +943,7 @@ void QPEApplication::setDefaultRotation( int r )
 		setenv( "QWS_DISPLAY", QString( "Transformed:Rot%1:0" ).arg( r ).latin1(), 1 );
 		Config config("qpe");
 		config.setGroup( "Rotation" );
-		config.writeEntry( "Screen", getenv("QWS_DISPLAY") );
+		config.writeEntry( "Rot", r );
 	}
 	else {
 #ifndef QT_NO_COP
