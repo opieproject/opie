@@ -9,6 +9,7 @@
 
 #include <qpe/timestring.h>
 
+class QCopChannel;
 class QPEApplication : public QApplication {
     Q_OBJECT
 public:
@@ -35,7 +36,7 @@ public:
     void showMainDocumentWidget( QWidget*, bool nomax = FALSE );
 
     static void showDialog( QDialog*, bool nomax = FALSE );
-    static void execDialog( QDialog*, bool nomax = FALSE );
+    static int execDialog( QDialog*, bool nomax = FALSE );
 
     static void setKeepRunning();
     bool keepRunning()const;
@@ -55,6 +56,15 @@ signals:
     void flush();
     void reload();
 
+private:
+    void initTranslations();
+    void internalSetStyle(const QString&);
+
+private:
+    class Private;
+    Private* d;
+    QCopChannel *m_sys;
+    QCopChannel *m_pid;
 };
 
 #endif
