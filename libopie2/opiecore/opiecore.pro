@@ -4,7 +4,6 @@ DESTDIR     = $(OPIEDIR)/lib
 HEADERS     = oapplication.h            \
               oconfig.h                 \
               odebug.h                  \
-              ofilenotify.h             \
               oglobal.h                 \
               oglobalsettings.h         \
               okeyconfigmanager.h       \
@@ -17,7 +16,6 @@ HEADERS     = oapplication.h            \
 SOURCES     = oapplication.cpp          \
               oconfig.cpp               \
               odebug.cpp                \
-              ofilenotify.cpp           \
               oglobal.cpp               \
               oglobalsettings.cpp       \
               okeyconfigmanager.cpp     \
@@ -25,6 +23,18 @@ SOURCES     = oapplication.cpp          \
               oprocctrl.cpp             \
               ostorageinfo.cpp          \
               xmltree.cpp
+
+
+# The following files are currently not compileable on mac !
+# Therfore I removed them from the build .. (eilers)
+
+CONFTEST = $$system( echo $CONFIG_TARGET_MACOSX )
+!contains( CONFTEST, y ) {
+HEADERS     += ofilenotify.h 
+SOURCES     += ofilenotify.cpp
+} else {
+    message( "ofilenotify is not available in a mac build !" )
+}
 
 include ( device/device.pro )
 
