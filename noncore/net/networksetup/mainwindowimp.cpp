@@ -160,8 +160,8 @@ void MainWindowImp::addClicked(){
   QMap<Module*, QLibrary*>::Iterator it;
   QMap<QString, QString> list;
   QMap<QString, Module*> newInterfaceOwners;
-  list.insert("USB (PPP) / (ADD_TEST)", "A dialup connection over the USB port");
-  list.insert("IrDa (PPP) / (ADD_TEST)", "A dialup connection over the IdDa port");
+  //list.insert("USB (PPP) / (ADD_TEST)", "A dialup connection over the USB port");
+  //list.insert("IrDa (PPP) / (ADD_TEST)", "A dialup connection over the IdDa port");
   for( it = libraries.begin(); it != libraries.end(); ++it ){
     if(it.key()){
       (it.key())->possibleNewInterfaces(list);
