@@ -1,7 +1,7 @@
 [Desktop Entry]
 Comment=A Ckeckers Game
 Exec=kcheckers
-Icon=KCheckers
+Icon=kcheckers/KCheckers
 Type=Application
 Name=KCheckers
 Name[pt_BR]=Damas
