@@ -112,6 +112,7 @@ signals:
 private slots:
     void repeat();
     void togglePickboard(bool on_off);
+    void toggleRepeat(bool on_off);
     void setMapToDefault();
     void setMapToFile(QString map);
 
@@ -128,6 +129,7 @@ private:
     bool *alt;
     uint useLargeKeys:1;
     uint usePicks:1;
+    uint useRepeat:1;
     
     int pressedKeyRow;
     int pressedKeyCol;

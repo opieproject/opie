@@ -111,10 +111,12 @@ ConfigDlg::ConfigDlg () : QTabWidget ()
         remove_button->setDisabled(true);
     connect(remove_button, SIGNAL(clicked()), SLOT(removeMap()));
 
-    pick_button = new QCheckBox(tr("Pickboard"), gen_box);
+    // make a box that will contain the buttons on the bottom
+    QGrid *other_grid = new QGrid(2, gen_box);
+    pick_button = new QCheckBox(tr("Pickboard"), other_grid);
 
-    config.setGroup ("pickboard");
-    bool pick_open = config.readBoolEntry ("open", "0"); // default closed
+    config.setGroup ("general");
+    bool pick_open = config.readBoolEntry ("usePickboard", (bool)0); // default closed
     if (pick_open) {
 
         pick_button->setChecked(true);
@@ -122,6 +124,16 @@ ConfigDlg::ConfigDlg () : QTabWidget ()
 
     // by connecting it after checking it, the signal isn't emmited
     connect (pick_button, SIGNAL(clicked()), this, SLOT(pickTog()));
+
+    repeat_button = new QCheckBox(tr("Key Repeat"), other_grid);
+    bool repeat_on = config.readBoolEntry ("useRepeat", (bool)1);
+
+    if (repeat_on) {
+
+        repeat_button->setChecked(true);
+    }
+    connect (repeat_button, SIGNAL(clicked()), this, SLOT(repeatTog()));
+
 
     /*
      * 'color' tab
@@ -169,10 +181,19 @@ ConfigDlg::ConfigDlg () : QTabWidget ()
 void ConfigDlg::pickTog() {
 
     Config config ("multikey");
-    config.setGroup ("pickboard");
-    config.writeEntry ("open", pick_button->isChecked()); // default closed
+    config.setGroup ("general");
+    config.writeEntry ("usePickboard", pick_button->isChecked()); // default closed
 
     emit pickboardToggled(pick_button->isChecked());
+}
+
+void ConfigDlg::repeatTog() {
+
+    Config config ("multikey");
+    config.setGroup ("general");
+    config.writeEntry ("useRepeat", repeat_button->isChecked()); // default closed
+
+    emit repeatToggled(repeat_button->isChecked());
 }
 
 /* 

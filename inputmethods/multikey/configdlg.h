@@ -16,12 +16,14 @@ public:
 
 signals:
     void pickboardToggled(bool on_off);
+    void repeatToggled(bool on_off);
     void setMapToDefault();
     void setMapToFile(QString map);
     void reloadKeyboard();
 
 private slots:
     void pickTog();
+    void repeatTog();
     void setMap(int index);
     void addMap();
     void removeMap();
@@ -31,6 +33,7 @@ private slots:
 
 private:
     QCheckBox *pick_button;
+    QCheckBox *repeat_button;
     QListBox *keymaps;
     QPushButton *add_button;
     QPushButton *remove_button;

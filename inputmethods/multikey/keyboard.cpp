@@ -39,12 +39,10 @@
 #include <sys/utsname.h>
 
 
-#define USE_SMALL_BACKSPACE
-
 /* Keyboard::Keyboard {{{1 */
 Keyboard::Keyboard(QWidget* parent, const char* _name, WFlags f) :
     QFrame(parent, _name, f),  shift(0), lock(0), ctrl(0),
-    alt(0), useLargeKeys(TRUE), usePicks(0), pressedKeyRow(-1), pressedKeyCol(-1),
+    alt(0), useLargeKeys(TRUE), usePicks(0), useRepeat(0), pressedKeyRow(-1), pressedKeyCol(-1),
     unicode(-1), qkeycode(0), modifiers(0), schar(0), mchar(0), echar(0),
     configdlg(0)
 
@@ -57,9 +55,11 @@ Keyboard::Keyboard(QWidget* parent, const char* _name, WFlags f) :
     delete config;
 
     config = new Config("multikey");
-    config->setGroup ("pickboard");
-    usePicks = config->readBoolEntry ("open", "0"); // default closed
+    config->setGroup ("general");
+    usePicks = config->readBoolEntry ("usePickboard", "0"); // default closed
+    useRepeat = config->readBoolEntry ("useRepeat", "1");
     delete config;
+
 
     setFont( QFont( familyStr, 10 ) );
 
@@ -284,12 +284,14 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
             }
             else {
                configdlg = new ConfigDlg ();
-               connect(configdlg, SIGNAL(pickboardToggled(bool)), 
-                       this, SLOT(togglePickboard(bool)));
                connect(configdlg, SIGNAL(setMapToDefault()), 
                        this, SLOT(setMapToDefault()));
                connect(configdlg, SIGNAL(setMapToFile(QString)), 
                        this, SLOT(setMapToFile(QString)));
+               connect(configdlg, SIGNAL(pickboardToggled(bool)), 
+                       this, SLOT(togglePickboard(bool)));
+               connect(configdlg, SIGNAL(repeatToggled(bool)),
+                       this, SLOT(toggleRepeat(bool)));
                connect(configdlg, SIGNAL(reloadKeyboard()),
                        this, SLOT(reloadKeyboard()));
                configdlg->showMaximized();
@@ -395,7 +397,8 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
 
     }
 
-    pressTid = startTimer(80);
+    if (useRepeat) repeatTimer->start( 800 );
+    //pressTid = startTimer(80);
 
 }
 
@@ -404,7 +407,7 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
 void Keyboard::mouseReleaseEvent(QMouseEvent*)
 {
     pressed = FALSE;
-    if ( pressTid == 0 )
+    //if ( pressTid == 0 )
 #if defined(Q_WS_QWS) || defined(_WS_QWS_)
     if ( unicode != -1 ) {
 	emit key( unicode, qkeycode, modifiers, false, false );
@@ -425,15 +428,19 @@ void Keyboard::mouseReleaseEvent(QMouseEvent*)
 }
 
 /* Keyboard::timerEvent {{{1 */
-/*
-void Keyboard::timerEvent(QTimerEvent* e)
+
+/* dont know what this does, but i think it is here so that if your screen
+ * sticks (like on an ipaq) then it will stop repeating if you click another
+ * key... but who knows what anything does in this thing anyway?
+
+ void Keyboard::timerEvent(QTimerEvent* e)
 {
     if ( e->timerId() == pressTid ) {
 	killTimer(pressTid);
 	pressTid = 0;
 	if ( !pressed )
         cout << "calling clearHighlight from timerEvent\n";
-	    clearHighlight();
+	    //clearHighlight();
     }
 }
 */
@@ -442,7 +449,7 @@ void Keyboard::repeat()
 {
 
   repeatTimer->start( 200 );
-  emit key( unicode, 0, modifiers, true, true );
+  emit key( unicode, qkeycode, modifiers, true, true );
 }
 
 void Keyboard::clearHighlight()
@@ -501,6 +508,12 @@ void Keyboard::togglePickboard(bool on_off)
      */
     QCopChannel::send ("QPE/TaskBar", "hideInputMethod()");
     QCopChannel::send ("QPE/TaskBar", "showInputMethod()");
+}
+
+void Keyboard::toggleRepeat(bool on) {
+
+    useRepeat = on;
+    cout << "setting useRepeat to: " << useRepeat << "\n";
 }
 
 /* Keyboard::setMapTo ... {{{1 */
