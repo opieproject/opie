@@ -21,7 +21,9 @@
 #ifndef __SYSTRAY_H__
 #define __SYSTRAY_H__
 
-#include <qpe/taskbarappletinterface.h>
+#ifndef QT_NO_COMPONENT
+#include <qtopia/taskbarappletinterface.h>
+#endif
 
 #include <qframe.h>
 #include <qvaluelist.h>
@@ -33,25 +35,23 @@ struct TaskbarApplet
 {
 #ifndef QT_NO_COMPONENT
     QLibrary *library;
-#endif
     TaskbarAppletInterface *iface;
+#endif
     QWidget *applet;
+    QString name;
 };
 
 class SysTray : public QFrame {
     Q_OBJECT
 public:
     SysTray( QWidget *parent );
+    ~SysTray();
 
     void clearApplets();
     void addApplets();
 
-protected:
-    void timerEvent(QTimerEvent* e);
-
 private:
     void loadApplets();
-    int safety_tid;
     QHBoxLayout *layout;
     QValueList<TaskbarApplet> appletList;
 };

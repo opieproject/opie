@@ -18,28 +18,35 @@
 **
 **********************************************************************/
 
-#include <qpe/qpeapplication.h>
-#include <qpe/qlibrary.h>
-#include <qpe/config.h>
+#include <qtopia/qpeapplication.h>
+#include <qtopia/qlibrary.h>
+#include <qtopia/config.h>
 
 #include <qlayout.h>
 #include <qdir.h>
+#include <qmessagebox.h>
 #include <qtranslator.h>
 
-#include "quicklauncher.h"
 #include "systray.h"
 
 #include <stdlib.h>
 
-#ifdef SINGLE_APP
-#include "clockappletimpl.h"
+/* ### Single build floppies ### */
+#if 0
+#ifdef QT_NO_COMPONENTS
+#include "../plugins/applets/clockapplet/clockappletimpl.h"
+#endif
 #endif
 
 SysTray::SysTray( QWidget *parent ) : QFrame( parent ), layout(0)
 {
-    safety_tid = 0;
     //setFrameStyle( QFrame::Panel | QFrame::Sunken );
     loadApplets();
+}
+
+SysTray::~SysTray()
+{
+    clearApplets();
 }
 
 static int compareAppletPositions(const void *a, const void *b)
@@ -48,25 +55,27 @@ static int compareAppletPositions(const void *a, const void *b)
     const TaskbarApplet* ab = *(const TaskbarApplet**)b;
     int d = ab->iface->position() - aa->iface->position();
     if ( d ) return d;
-    return QString::compare(ab->library->library(),aa->library->library());
+    return QString::compare(ab->name,aa->name);
 }
 
 void SysTray::loadApplets()
 {
+    hide();
     clearApplets();
     addApplets();
 }
 
 void SysTray::clearApplets()
 {
-    hide();
-#ifndef SINGLE_APP
+#ifndef QT_NO_COMPONENTS
+
     QValueList<TaskbarApplet>::Iterator mit;
     for ( mit = appletList.begin(); mit != appletList.end(); ++mit ) {
-	(*mit).iface->release();
+        (*mit).iface->release();
 	(*mit).library->unload();
 	delete (*mit).library;
     }
+
 #endif
     appletList.clear();
     if ( layout )
@@ -77,18 +86,10 @@ void SysTray::clearApplets()
 
 void SysTray::addApplets()
 {
-#ifndef SINGLE_APP
+    hide();
+#ifndef QT_NO_COMPONENTS
     Config cfg( "Taskbar" );
     cfg.setGroup( "Applets" );
-    
-    // SafeMode causes too much problems, so we disable it for now --
-    // maybe we should reenable it for OPIE 1.0 - sandman 26.09.02
-    
-    bool safe = false; //cfg.readBoolEntry("SafeMode",FALSE);
-    if ( safe && !safety_tid )
-	return;
-    cfg.writeEntry("SafeMode",TRUE);
-    cfg.write();
     QStringList exclude = cfg.readListEntry( "ExcludeApplets", ',' );
 
     QString lang = getenv( "LANG" );
@@ -108,14 +109,14 @@ void SysTray::addApplets()
 	    applets[napplets++] = applet;
 	    applet->library = lib;
 	    applet->iface = iface;
-	    
+
 	    QTranslator *trans = new QTranslator(qApp);
 	    QString type = (*it).left( (*it).find(".") );
 	    QString tfn = QPEApplication::qpeDir()+"/i18n/"+lang+"/"+type+".qm";
 	    if ( trans->load( tfn ))
 		qApp->installTranslator( trans );
 	    else
-		delete trans;	    
+		delete trans;
 	} else {
 	    exclude += *it;
 	    delete lib;
@@ -129,25 +130,12 @@ void SysTray::addApplets()
 	appletList.append(*applet);
     }
     delete [] applets;
-#else
-    TaskbarApplet applet;
-    applet.iface = new ClockAppletImpl();
-    applet.applet = applet.iface->applet( this );
-    appletList.append( a );
+#else /* ## FIXME single app */
+    TaskbarApplet * const applet = new TaskbarApplet();
+    applet->iface = new ClockAppletImpl();
+    applet->applet = applet->iface->applet( this );
+    appletList.append( applet );
 #endif
     show();
-
-    if ( !safety_tid )
-	safety_tid = startTimer(2000); // TT has 5000, but this is a PITA for a developer ;) (sandman)
 }
 
-void SysTray::timerEvent(QTimerEvent* e)
-{
-    if ( e->timerId() == safety_tid ) {
-	Config cfg( "Taskbar" );
-	cfg.setGroup( "Applets" );
-	cfg.writeEntry( "SafeMode", FALSE );
-	killTimer(safety_tid);
-	safety_tid = 0;
-    }
-}
