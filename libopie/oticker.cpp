@@ -59,12 +59,12 @@ OTicker::OTicker( QWidget* parent )
 OTicker::~OTicker() {
 }
 
-void OTicker::setBackgroundColor(QColor backcolor) {
+void OTicker::setBackgroundColor(const QColor& backcolor) {
     backgroundcolor = backcolor;
     update();
 }
 
-void OTicker::setForegroundColor(QColor backcolor) {
+void OTicker::setForegroundColor(const QColor& backcolor) {
     foregroundcolor = backcolor;
     update();
 }
