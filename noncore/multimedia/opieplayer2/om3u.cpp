@@ -94,7 +94,8 @@ void Om3u::readPls() { //it's a pls file
         while ( !t.atEnd() ) {
             s = t.readLine();
             if( s.left(4)  == "File" ) {
-                s = s.right( s.length() - 6 );
+                s = s.right( s.length() - s.find("=",0,true)-1 );
+                s = s.stripWhiteSpace();
                 s.replace( QRegExp( "%20" )," ");
 //                qDebug( "adding " + s + " to playlist" );
                 // numberofentries=2

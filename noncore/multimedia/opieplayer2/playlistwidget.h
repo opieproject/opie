@@ -94,8 +94,9 @@ signals:
 
 private:
     int defaultSkinIndex;
-    void readm3u(const QString &);
-    void readPls(const QString &);
+/*     void readm3u(const QString &); */
+/*     void readPls(const QString &); */
+    void readListFromFile(const QString &);
     void initializeStates();
 
     bool inFileListMode() const;
