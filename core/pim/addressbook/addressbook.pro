@@ -15,23 +15,22 @@ SOURCES	= main.cpp \
 		  addresssettings.cpp \
 		  picker.cpp
 INTERFACES	= addresssettingsbase.ui
-
 TARGET		= addressbook
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe -lopie
 
-TRANSLATIONS    = ../../i18n/pt_BR/addressbook.ts
-TRANSLATIONS    += ../../i18n/es/addressbook.ts
-TRANSLATIONS    += ../../i18n/pt/addressbook.ts
-TRANSLATIONS   += ../../i18n/de/addressbook.ts
-TRANSLATIONS   += ../../i18n/en/addressbook.ts
-TRANSLATIONS   += ../../i18n/hu/addressbook.ts
-TRANSLATIONS   += ../../i18n/sl/addressbook.ts
-TRANSLATIONS   += ../../i18n/ja/addressbook.ts
-TRANSLATIONS   += ../../i18n/ko/addressbook.ts
-TRANSLATIONS   += ../../i18n/pl/addressbook.ts
-TRANSLATIONS   += ../../i18n/no/addressbook.ts
-TRANSLATIONS   += ../../i18n/zh_CN/addressbook.ts
-TRANSLATIONS   += ../../i18n/zh_TW/addressbook.ts
-TRANSLATIONS   += ../../i18n/fr/addressbook.ts
+TRANSLATIONS = ../../../i18n/de/addressbook.ts \
+	 ../../../i18n/en/addressbook.ts \
+	 ../../../i18n/es/addressbook.ts \
+	 ../../../i18n/fr/addressbook.ts \
+	 ../../../i18n/hu/addressbook.ts \
+	 ../../../i18n/ja/addressbook.ts \
+	 ../../../i18n/ko/addressbook.ts \
+	 ../../../i18n/no/addressbook.ts \
+	 ../../../i18n/pl/addressbook.ts \
+	 ../../../i18n/pt/addressbook.ts \
+	 ../../../i18n/pt_BR/addressbook.ts \
+	 ../../../i18n/sl/addressbook.ts \
+	 ../../../i18n/zh_CN/addressbook.ts \
+	 ../../../i18n/zh_TW/addressbook.ts

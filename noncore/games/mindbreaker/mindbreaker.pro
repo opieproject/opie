@@ -9,20 +9,17 @@ INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
 LIBS            += -lqpe
 
-
-
-TRANSLATIONS = ../../../i18n/de/mindbreaker.ts
-TRANSLATIONS += ../../../i18n/en/mindbreaker.ts
-TRANSLATIONS += ../../../i18n/es/mindbreaker.ts
-TRANSLATIONS += ../../../i18n/fr/mindbreaker.ts
-TRANSLATIONS += ../../../i18n/hu/mindbreaker.ts
-TRANSLATIONS += ../../../i18n/ja/mindbreaker.ts
-TRANSLATIONS += ../../../i18n/ko/mindbreaker.ts
-TRANSLATIONS += ../../../i18n/no/mindbreaker.ts
-TRANSLATIONS += ../../../i18n/pl/mindbreaker.ts
-TRANSLATIONS += ../../../i18n/pt/mindbreaker.ts
-TRANSLATIONS += ../../../i18n/pt_BR/mindbreaker.ts
-TRANSLATIONS += ../../../i18n/sl/mindbreaker.ts
-TRANSLATIONS += ../../../i18n/zh_CN/mindbreaker.ts
-TRANSLATIONS += ../../../i18n/zh_TW/mindbreaker.ts
-
+TRANSLATIONS = ../../../i18n/de/mindbreaker.ts \
+	 ../../../i18n/en/mindbreaker.ts \
+	 ../../../i18n/es/mindbreaker.ts \
+	 ../../../i18n/fr/mindbreaker.ts \
+	 ../../../i18n/hu/mindbreaker.ts \
+	 ../../../i18n/ja/mindbreaker.ts \
+	 ../../../i18n/ko/mindbreaker.ts \
+	 ../../../i18n/no/mindbreaker.ts \
+	 ../../../i18n/pl/mindbreaker.ts \
+	 ../../../i18n/pt/mindbreaker.ts \
+	 ../../../i18n/pt_BR/mindbreaker.ts \
+	 ../../../i18n/sl/mindbreaker.ts \
+	 ../../../i18n/zh_CN/mindbreaker.ts \
+	 ../../../i18n/zh_TW/mindbreaker.ts

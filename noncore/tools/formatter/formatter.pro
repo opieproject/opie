@@ -9,19 +9,17 @@ INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 LIBS            += -lqpe
 
-
-TRANSLATIONS = ../../../i18n/de/formatter.ts
-TRANSLATIONS += ../../../i18n/en/formatter.ts
-TRANSLATIONS += ../../../i18n/es/formatter.ts
-TRANSLATIONS += ../../../i18n/fr/formatter.ts
-TRANSLATIONS += ../../../i18n/hu/formatter.ts
-TRANSLATIONS += ../../../i18n/ja/formatter.ts
-TRANSLATIONS += ../../../i18n/ko/formatter.ts
-TRANSLATIONS += ../../../i18n/no/formatter.ts
-TRANSLATIONS += ../../../i18n/pl/formatter.ts
-TRANSLATIONS += ../../../i18n/pt/formatter.ts
-TRANSLATIONS += ../../../i18n/pt_BR/formatter.ts
-TRANSLATIONS += ../../../i18n/sl/formatter.ts
-TRANSLATIONS += ../../../i18n/zh_CN/formatter.ts
-TRANSLATIONS += ../../../i18n/zh_TW/formatter.ts
-
+TRANSLATIONS = ../../../i18n/de/formatter.ts \
+	 ../../../i18n/en/formatter.ts \
+	 ../../../i18n/es/formatter.ts \
+	 ../../../i18n/fr/formatter.ts \
+	 ../../../i18n/hu/formatter.ts \
+	 ../../../i18n/ja/formatter.ts \
+	 ../../../i18n/ko/formatter.ts \
+	 ../../../i18n/no/formatter.ts \
+	 ../../../i18n/pl/formatter.ts \
+	 ../../../i18n/pt/formatter.ts \
+	 ../../../i18n/pt_BR/formatter.ts \
+	 ../../../i18n/sl/formatter.ts \
+	 ../../../i18n/zh_CN/formatter.ts \
+	 ../../../i18n/zh_TW/formatter.ts

@@ -1,7 +1,6 @@
 TEMPLATE	= app
 CONFIG		+= qt warn_on release
 DESTDIR		= $(OPIEDIR)/bin
-
 HEADERS	= datebookday.h \
 	  datebook.h \	
 	  dateentryimpl.h \
@@ -14,7 +13,6 @@ HEADERS	= datebookday.h \
 	  timepicker.h \
 	  noteentryimpl.h \
 	  onoteedit.h
-
 SOURCES	= main.cpp \
 	  datebookday.cpp \
 	  datebook.cpp \
@@ -28,7 +26,6 @@ SOURCES	= main.cpp \
 	  timepicker.cpp \
 	  noteentryimpl.cpp \
 	  onoteedit.cpp
-
 INTERFACES	= dateentry.ui \
 		  datebookdayheader.ui \
 		  datebookweekheader.ui \
@@ -37,24 +34,22 @@ INTERFACES	= dateentry.ui \
  		  repeatentrybase.ui \
 		  datebooksettingsbase.ui \
 		  noteentry.ui
-
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe -lopie
-
 TARGET		= datebook
 
-TRANSLATIONS    = ../i18n/pt_BR/datebook.ts
-TRANSLATIONS    += ../i18n/pt/datebook.ts
-TRANSLATIONS   += ../i18n/de/datebook.ts
-TRANSLATIONS   += ../i18n/en/datebook.ts
-TRANSLATIONS   += ../i18n/hu/datebook.ts
-TRANSLATIONS   += ../i18n/pl/datebook.ts
-TRANSLATIONS   += ../i18n/sl/datebook.ts
-TRANSLATIONS   += ../i18n/ja/datebook.ts
-TRANSLATIONS   += ../i18n/ko/datebook.ts
-TRANSLATIONS   += ../i18n/no/datebook.ts
-TRANSLATIONS   += ../i18n/zh_CN/datebook.ts
-TRANSLATIONS   += ../i18n/zh_TW/datebook.ts
-TRANSLATIONS   += ../i18n/fr/datebook.ts
-TRANSLATIONS   += ../i18n/es/datebook.ts
+TRANSLATIONS = ../../../i18n/de/datebook.ts \
+	 ../../../i18n/en/datebook.ts \
+	 ../../../i18n/es/datebook.ts \
+	 ../../../i18n/fr/datebook.ts \
+	 ../../../i18n/hu/datebook.ts \
+	 ../../../i18n/ja/datebook.ts \
+	 ../../../i18n/ko/datebook.ts \
+	 ../../../i18n/no/datebook.ts \
+	 ../../../i18n/pl/datebook.ts \
+	 ../../../i18n/pt/datebook.ts \
+	 ../../../i18n/pt_BR/datebook.ts \
+	 ../../../i18n/sl/datebook.ts \
+	 ../../../i18n/zh_CN/datebook.ts \
+	 ../../../i18n/zh_TW/datebook.ts

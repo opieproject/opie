@@ -10,20 +10,17 @@ DEPENDPATH    += $(OPIEDIR)/include
 LIBS          += -lqpe -lopietooth
 VERSION       = 0.0.3
 
-
-
-TRANSLATIONS = ../../../../i18n/de/libbluetoothapplet.ts
-TRANSLATIONS += ../../../../i18n/en/libbluetoothapplet.ts
-TRANSLATIONS += ../../../../i18n/es/libbluetoothapplet.ts
-TRANSLATIONS += ../../../../i18n/fr/libbluetoothapplet.ts
-TRANSLATIONS += ../../../../i18n/hu/libbluetoothapplet.ts
-TRANSLATIONS += ../../../../i18n/ja/libbluetoothapplet.ts
-TRANSLATIONS += ../../../../i18n/ko/libbluetoothapplet.ts
-TRANSLATIONS += ../../../../i18n/no/libbluetoothapplet.ts
-TRANSLATIONS += ../../../../i18n/pl/libbluetoothapplet.ts
-TRANSLATIONS += ../../../../i18n/pt/libbluetoothapplet.ts
-TRANSLATIONS += ../../../../i18n/pt_BR/libbluetoothapplet.ts
-TRANSLATIONS += ../../../../i18n/sl/libbluetoothapplet.ts
-TRANSLATIONS += ../../../../i18n/zh_CN/libbluetoothapplet.ts
-TRANSLATIONS += ../../../../i18n/zh_TW/libbluetoothapplet.ts
-
+TRANSLATIONS = ../../../../i18n/de/libbluetoothapplet.ts \
+	 ../../../../i18n/en/libbluetoothapplet.ts \
+	 ../../../../i18n/es/libbluetoothapplet.ts \
+	 ../../../../i18n/fr/libbluetoothapplet.ts \
+	 ../../../../i18n/hu/libbluetoothapplet.ts \
+	 ../../../../i18n/ja/libbluetoothapplet.ts \
+	 ../../../../i18n/ko/libbluetoothapplet.ts \
+	 ../../../../i18n/no/libbluetoothapplet.ts \
+	 ../../../../i18n/pl/libbluetoothapplet.ts \
+	 ../../../../i18n/pt/libbluetoothapplet.ts \
+	 ../../../../i18n/pt_BR/libbluetoothapplet.ts \
+	 ../../../../i18n/sl/libbluetoothapplet.ts \
+	 ../../../../i18n/zh_CN/libbluetoothapplet.ts \
+	 ../../../../i18n/zh_TW/libbluetoothapplet.ts

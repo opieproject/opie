@@ -11,20 +11,17 @@ INTERFACES      = pindlgbase.ui
 DESTDIR		= $(OPIEDIR)/bin
 TARGET          = bluepin
 
-
-
-TRANSLATIONS = ../../../../i18n/de/bluepin.ts
-TRANSLATIONS += ../../../../i18n/en/bluepin.ts
-TRANSLATIONS += ../../../../i18n/es/bluepin.ts
-TRANSLATIONS += ../../../../i18n/fr/bluepin.ts
-TRANSLATIONS += ../../../../i18n/hu/bluepin.ts
-TRANSLATIONS += ../../../../i18n/ja/bluepin.ts
-TRANSLATIONS += ../../../../i18n/ko/bluepin.ts
-TRANSLATIONS += ../../../../i18n/no/bluepin.ts
-TRANSLATIONS += ../../../../i18n/pl/bluepin.ts
-TRANSLATIONS += ../../../../i18n/pt/bluepin.ts
-TRANSLATIONS += ../../../../i18n/pt_BR/bluepin.ts
-TRANSLATIONS += ../../../../i18n/sl/bluepin.ts
-TRANSLATIONS += ../../../../i18n/zh_CN/bluepin.ts
-TRANSLATIONS += ../../../../i18n/zh_TW/bluepin.ts
-
+TRANSLATIONS = ../../../../i18n/de/bluepin.ts \
+	 ../../../../i18n/en/bluepin.ts \
+	 ../../../../i18n/es/bluepin.ts \
+	 ../../../../i18n/fr/bluepin.ts \
+	 ../../../../i18n/hu/bluepin.ts \
+	 ../../../../i18n/ja/bluepin.ts \
+	 ../../../../i18n/ko/bluepin.ts \
+	 ../../../../i18n/no/bluepin.ts \
+	 ../../../../i18n/pl/bluepin.ts \
+	 ../../../../i18n/pt/bluepin.ts \
+	 ../../../../i18n/pt_BR/bluepin.ts \
+	 ../../../../i18n/sl/bluepin.ts \
+	 ../../../../i18n/zh_CN/bluepin.ts \
+	 ../../../../i18n/zh_TW/bluepin.ts

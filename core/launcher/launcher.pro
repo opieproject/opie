@@ -1,9 +1,6 @@
 TEMPLATE	= app
-
 CONFIG		= qt warn_on release
-
 DESTDIR		= $(OPIEDIR)/bin
-
 HEADERS		= background.h \
 		  desktop.h \
 		  qprocess.h \
@@ -45,7 +42,6 @@ HEADERS		= background.h \
 	$(OPIEDIR)/rsync/config_rsync.h \
 	$(OPIEDIR)/rsync/qrsync.h
 #		  quicklauncher.h \
-
 SOURCES		= background.cpp \
 		  desktop.cpp \
 		  mediummountgui.cpp \
@@ -95,31 +91,27 @@ SOURCES		= background.cpp \
 	$(OPIEDIR)/rsync/version.c \
 	$(OPIEDIR)/rsync/whole.c \
 	$(OPIEDIR)/rsync/qrsync.cpp
-
 INTERFACES	= shutdown.ui syncdialog.ui
-
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include .
-
 INCLUDEPATH += $(OPIEDIR)/core/apps/calibrate
 DEPENDPATH	+= $(OPIEDIR)/core/apps/calibrate
-
 INCLUDEPATH += $(OPIEDIR)/rsync
 DEPENDPATH	+= $(OPIEDIR)/rsync
-
 TARGET		= qpe
-
 LIBS		+= -lqpe -lcrypt -lopie
 
-TRANSLATIONS = ../i18n/de/qpe.ts
-TRANSLATIONS += ../i18n/es/qpe.ts
-TRANSLATIONS += ../i18n/pt/qpe.ts
-TRANSLATIONS += ../i18n/pt_BR/qpe.ts
-TRANSLATIONS   += ../i18n/en/qpe.ts
-TRANSLATIONS   += ../i18n/hu/qpe.ts
-TRANSLATIONS   += ../i18n/ja/qpe.ts
-TRANSLATIONS   += ../i18n/fr/qpe.ts
-TRANSLATIONS   += ../i18n/ko/qpe.ts
-TRANSLATIONS   += ../i18n/no/qpe.ts
-TRANSLATIONS   += ../i18n/zh_CN/qpe.ts
-TRANSLATIONS   += ../i18n/zh_TW/qpe.ts
+TRANSLATIONS = ../../i18n/de/qpe.ts \
+	 ../../i18n/en/qpe.ts \
+	 ../../i18n/es/qpe.ts \
+	 ../../i18n/fr/qpe.ts \
+	 ../../i18n/hu/qpe.ts \
+	 ../../i18n/ja/qpe.ts \
+	 ../../i18n/ko/qpe.ts \
+	 ../../i18n/no/qpe.ts \
+	 ../../i18n/pl/qpe.ts \
+	 ../../i18n/pt/qpe.ts \
+	 ../../i18n/pt_BR/qpe.ts \
+	 ../../i18n/sl/qpe.ts \
+	 ../../i18n/zh_CN/qpe.ts \
+	 ../../i18n/zh_TW/qpe.ts

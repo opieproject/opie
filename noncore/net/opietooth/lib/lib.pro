@@ -8,19 +8,17 @@ DESTDIR         = $(QTDIR)/lib$(PROJMAK)
 LIBS += -lopie
 #VERSION = 0.0.0
 
-
-TRANSLATIONS = ../../../../i18n/de/libopietooth.ts
-TRANSLATIONS += ../../../../i18n/en/libopietooth.ts
-TRANSLATIONS += ../../../../i18n/es/libopietooth.ts
-TRANSLATIONS += ../../../../i18n/fr/libopietooth.ts
-TRANSLATIONS += ../../../../i18n/hu/libopietooth.ts
-TRANSLATIONS += ../../../../i18n/ja/libopietooth.ts
-TRANSLATIONS += ../../../../i18n/ko/libopietooth.ts
-TRANSLATIONS += ../../../../i18n/no/libopietooth.ts
-TRANSLATIONS += ../../../../i18n/pl/libopietooth.ts
-TRANSLATIONS += ../../../../i18n/pt/libopietooth.ts
-TRANSLATIONS += ../../../../i18n/pt_BR/libopietooth.ts
-TRANSLATIONS += ../../../../i18n/sl/libopietooth.ts
-TRANSLATIONS += ../../../../i18n/zh_CN/libopietooth.ts
-TRANSLATIONS += ../../../../i18n/zh_TW/libopietooth.ts
-
+TRANSLATIONS = ../../../../i18n/de/libopietooth.ts \
+	 ../../../../i18n/en/libopietooth.ts \
+	 ../../../../i18n/es/libopietooth.ts \
+	 ../../../../i18n/fr/libopietooth.ts \
+	 ../../../../i18n/hu/libopietooth.ts \
+	 ../../../../i18n/ja/libopietooth.ts \
+	 ../../../../i18n/ko/libopietooth.ts \
+	 ../../../../i18n/no/libopietooth.ts \
+	 ../../../../i18n/pl/libopietooth.ts \
+	 ../../../../i18n/pt/libopietooth.ts \
+	 ../../../../i18n/pt_BR/libopietooth.ts \
+	 ../../../../i18n/sl/libopietooth.ts \
+	 ../../../../i18n/zh_CN/libopietooth.ts \
+	 ../../../../i18n/zh_TW/libopietooth.ts

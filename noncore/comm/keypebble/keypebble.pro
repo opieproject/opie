@@ -1,8 +1,6 @@
 TEMPLATE        = app
-
 CONFIG          += qt warn_on release
 DESTDIR         = $(OPIEDIR)/bin
-
 HEADERS		= d3des.h \
 		  krfbbuffer.h \
 		  krfbcanvas.h \
@@ -16,7 +14,6 @@ HEADERS		= d3des.h \
 		  kvncoptionsdlg.h \
 		  version.h \
 		  vncauth.h
-
 SOURCES		= d3des.c \
 		  vncauth.c \
 		  krfbbuffer.cpp \
@@ -31,25 +28,21 @@ SOURCES		= d3des.c \
 		  main.cpp
 INTERFACES	= vncoptionsbase.ui
 TARGET          = keypebble
-
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
 LIBS            += -lqpe
 
-
-
-TRANSLATIONS = ../../../i18n/de/keypebble.ts
-TRANSLATIONS += ../../../i18n/en/keypebble.ts
-TRANSLATIONS += ../../../i18n/es/keypebble.ts
-TRANSLATIONS += ../../../i18n/fr/keypebble.ts
-TRANSLATIONS += ../../../i18n/hu/keypebble.ts
-TRANSLATIONS += ../../../i18n/ja/keypebble.ts
-TRANSLATIONS += ../../../i18n/ko/keypebble.ts
-TRANSLATIONS += ../../../i18n/no/keypebble.ts
-TRANSLATIONS += ../../../i18n/pl/keypebble.ts
-TRANSLATIONS += ../../../i18n/pt/keypebble.ts
-TRANSLATIONS += ../../../i18n/pt_BR/keypebble.ts
-TRANSLATIONS += ../../../i18n/sl/keypebble.ts
-TRANSLATIONS += ../../../i18n/zh_CN/keypebble.ts
-TRANSLATIONS += ../../../i18n/zh_TW/keypebble.ts
-
+TRANSLATIONS = ../../../i18n/de/keypebble.ts \
+	 ../../../i18n/en/keypebble.ts \
+	 ../../../i18n/es/keypebble.ts \
+	 ../../../i18n/fr/keypebble.ts \
+	 ../../../i18n/hu/keypebble.ts \
+	 ../../../i18n/ja/keypebble.ts \
+	 ../../../i18n/ko/keypebble.ts \
+	 ../../../i18n/no/keypebble.ts \
+	 ../../../i18n/pl/keypebble.ts \
+	 ../../../i18n/pt/keypebble.ts \
+	 ../../../i18n/pt_BR/keypebble.ts \
+	 ../../../i18n/sl/keypebble.ts \
+	 ../../../i18n/zh_CN/keypebble.ts \
+	 ../../../i18n/zh_TW/keypebble.ts

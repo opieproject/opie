@@ -13,19 +13,17 @@ LIBS            += -lqpe -L$(GSMLIBDIR)/gsmlib/.libs -lgsmme
 INTERFACES	= gsmtoolbase.ui
 TARGET		= gsmtool
 
-
-TRANSLATIONS = ../../../i18n/de/gsmtool.ts
-TRANSLATIONS += ../../../i18n/en/gsmtool.ts
-TRANSLATIONS += ../../../i18n/es/gsmtool.ts
-TRANSLATIONS += ../../../i18n/fr/gsmtool.ts
-TRANSLATIONS += ../../../i18n/hu/gsmtool.ts
-TRANSLATIONS += ../../../i18n/ja/gsmtool.ts
-TRANSLATIONS += ../../../i18n/ko/gsmtool.ts
-TRANSLATIONS += ../../../i18n/no/gsmtool.ts
-TRANSLATIONS += ../../../i18n/pl/gsmtool.ts
-TRANSLATIONS += ../../../i18n/pt/gsmtool.ts
-TRANSLATIONS += ../../../i18n/pt_BR/gsmtool.ts
-TRANSLATIONS += ../../../i18n/sl/gsmtool.ts
-TRANSLATIONS += ../../../i18n/zh_CN/gsmtool.ts
-TRANSLATIONS += ../../../i18n/zh_TW/gsmtool.ts
-
+TRANSLATIONS = ../../../i18n/de/gsmtool.ts \
+	 ../../../i18n/en/gsmtool.ts \
+	 ../../../i18n/es/gsmtool.ts \
+	 ../../../i18n/fr/gsmtool.ts \
+	 ../../../i18n/hu/gsmtool.ts \
+	 ../../../i18n/ja/gsmtool.ts \
+	 ../../../i18n/ko/gsmtool.ts \
+	 ../../../i18n/no/gsmtool.ts \
+	 ../../../i18n/pl/gsmtool.ts \
+	 ../../../i18n/pt/gsmtool.ts \
+	 ../../../i18n/pt_BR/gsmtool.ts \
+	 ../../../i18n/sl/gsmtool.ts \
+	 ../../../i18n/zh_CN/gsmtool.ts \
+	 ../../../i18n/zh_TW/gsmtool.ts

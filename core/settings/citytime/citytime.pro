@@ -1,4 +1,4 @@
-# $Id: citytime.pro,v 1.9 2002-06-16 15:05:48 cniehaus Exp $
+# $Id: citytime.pro,v 1.10 2002-06-26 23:13:52 sandman Exp $
 CONFIG += qt warn_on release
 TEMPLATE = app
 DESTDIR         = $(OPIEDIR)/bin
@@ -10,17 +10,17 @@ INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
 LIBS            += -lqpe
 
-TRANSLATIONS = ../i18n/de/citytime.ts
-TRANSLATIONS += ../i18n/es/citytime.ts
-TRANSLATIONS += ../i18n/pt/citytime.ts
-TRANSLATIONS += ../i18n/pt_BR/citytime.ts
-TRANSLATIONS   += ../i18n/en/citytime.ts
-TRANSLATIONS   += ../i18n/hu/citytime.ts
-TRANSLATIONS   += ../i18n/ja/citytime.ts
-TRANSLATIONS   += ../i18n/ko/citytime.ts
-TRANSLATIONS   += ../i18n/pl/citytime.ts
-TRANSLATIONS   += ../i18n/fr/citytime.ts
-TRANSLATIONS   += ../i18n/sl/citytime.ts
-TRANSLATIONS   += ../i18n/no/citytime.ts
-TRANSLATIONS   += ../i18n/zh_CN/citytime.ts
-TRANSLATIONS   += ../i18n/zh_TW/citytime.ts
+TRANSLATIONS = ../../../i18n/de/citytime.ts \
+	 ../../../i18n/en/citytime.ts \
+	 ../../../i18n/es/citytime.ts \
+	 ../../../i18n/fr/citytime.ts \
+	 ../../../i18n/hu/citytime.ts \
+	 ../../../i18n/ja/citytime.ts \
+	 ../../../i18n/ko/citytime.ts \
+	 ../../../i18n/no/citytime.ts \
+	 ../../../i18n/pl/citytime.ts \
+	 ../../../i18n/pt/citytime.ts \
+	 ../../../i18n/pt_BR/citytime.ts \
+	 ../../../i18n/sl/citytime.ts \
+	 ../../../i18n/zh_CN/citytime.ts \
+	 ../../../i18n/zh_TW/citytime.ts

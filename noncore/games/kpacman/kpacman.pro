@@ -34,26 +34,23 @@ SOURCES		= kpacmanwidget.cpp \
 		    kpacman.cpp \
 		    config.cpp \
 		    main.cpp 
-
 INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe
 DESTDIR         = $(OPIEDIR)/bin
 TARGET		= kpacman
 
-
-TRANSLATIONS = ../../../i18n/de/kpacman.ts
-TRANSLATIONS += ../../../i18n/en/kpacman.ts
-TRANSLATIONS += ../../../i18n/es/kpacman.ts
-TRANSLATIONS += ../../../i18n/fr/kpacman.ts
-TRANSLATIONS += ../../../i18n/hu/kpacman.ts
-TRANSLATIONS += ../../../i18n/ja/kpacman.ts
-TRANSLATIONS += ../../../i18n/ko/kpacman.ts
-TRANSLATIONS += ../../../i18n/no/kpacman.ts
-TRANSLATIONS += ../../../i18n/pl/kpacman.ts
-TRANSLATIONS += ../../../i18n/pt/kpacman.ts
-TRANSLATIONS += ../../../i18n/pt_BR/kpacman.ts
-TRANSLATIONS += ../../../i18n/sl/kpacman.ts
-TRANSLATIONS += ../../../i18n/zh_CN/kpacman.ts
-TRANSLATIONS += ../../../i18n/zh_TW/kpacman.ts
-
+TRANSLATIONS = ../../../i18n/de/kpacman.ts \
+	 ../../../i18n/en/kpacman.ts \
+	 ../../../i18n/es/kpacman.ts \
+	 ../../../i18n/fr/kpacman.ts \
+	 ../../../i18n/hu/kpacman.ts \
+	 ../../../i18n/ja/kpacman.ts \
+	 ../../../i18n/ko/kpacman.ts \
+	 ../../../i18n/no/kpacman.ts \
+	 ../../../i18n/pl/kpacman.ts \
+	 ../../../i18n/pt/kpacman.ts \
+	 ../../../i18n/pt_BR/kpacman.ts \
+	 ../../../i18n/sl/kpacman.ts \
+	 ../../../i18n/zh_CN/kpacman.ts \
+	 ../../../i18n/zh_TW/kpacman.ts

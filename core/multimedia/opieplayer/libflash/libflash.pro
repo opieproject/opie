@@ -13,3 +13,17 @@ DEPENDPATH      +=  ../$(OPIEDIR)/include ..
 LIBS            +=  -lqpe
 VERSION		=   1.0.0
 
+TRANSLATIONS = ../../../../i18n/de/libflashplugin.ts \
+	 ../../../../i18n/en/libflashplugin.ts \
+	 ../../../../i18n/es/libflashplugin.ts \
+	 ../../../../i18n/fr/libflashplugin.ts \
+	 ../../../../i18n/hu/libflashplugin.ts \
+	 ../../../../i18n/ja/libflashplugin.ts \
+	 ../../../../i18n/ko/libflashplugin.ts \
+	 ../../../../i18n/no/libflashplugin.ts \
+	 ../../../../i18n/pl/libflashplugin.ts \
+	 ../../../../i18n/pt/libflashplugin.ts \
+	 ../../../../i18n/pt_BR/libflashplugin.ts \
+	 ../../../../i18n/sl/libflashplugin.ts \
+	 ../../../../i18n/zh_CN/libflashplugin.ts \
+	 ../../../../i18n/zh_TW/libflashplugin.ts

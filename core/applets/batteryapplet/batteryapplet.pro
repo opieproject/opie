@@ -9,14 +9,17 @@ DEPENDPATH      += ../$(OPIEDIR)/include ..
 LIBS            += -lqpe
 VERSION		= 1.0.0
 
-TRANSLATIONS = ../../i18n/de/libbatteryapplet.ts
-TRANSLATIONS += ../../i18n/es/libbatteryapplet.ts
-TRANSLATIONS += ../../i18n/pt/libbatteryapplet.ts
-TRANSLATIONS += ../../i18n/pt_BR/libbatteryapplet.ts
-TRANSLATIONS   += ../../i18n/en/libbatteryapplet.ts
-TRANSLATIONS   += ../../i18n/hu/libbatteryapplet.ts
-TRANSLATIONS   += ../../i18n/ja/libbatteryapplet.ts
-TRANSLATIONS   += ../../i18n/ko/libbatteryapplet.ts
-TRANSLATIONS   += ../../i18n/no/libbatteryapplet.ts
-TRANSLATIONS   += ../../i18n/zh_CN/libbatteryapplet.ts
-TRANSLATIONS   += ../../i18n/zh_TW/libbatteryapplet.ts
+TRANSLATIONS = ../../../i18n/de/libbatteryapplet.ts \
+	 ../../../i18n/en/libbatteryapplet.ts \
+	 ../../../i18n/es/libbatteryapplet.ts \
+	 ../../../i18n/fr/libbatteryapplet.ts \
+	 ../../../i18n/hu/libbatteryapplet.ts \
+	 ../../../i18n/ja/libbatteryapplet.ts \
+	 ../../../i18n/ko/libbatteryapplet.ts \
+	 ../../../i18n/no/libbatteryapplet.ts \
+	 ../../../i18n/pl/libbatteryapplet.ts \
+	 ../../../i18n/pt/libbatteryapplet.ts \
+	 ../../../i18n/pt_BR/libbatteryapplet.ts \
+	 ../../../i18n/sl/libbatteryapplet.ts \
+	 ../../../i18n/zh_CN/libbatteryapplet.ts \
+	 ../../../i18n/zh_TW/libbatteryapplet.ts

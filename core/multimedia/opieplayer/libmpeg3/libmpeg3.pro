@@ -41,3 +41,18 @@ INCLUDEPATH += $(OPIEDIR)/include ..
 DEPENDPATH      +=  ../$(OPIEDIR)/include ..
 LIBS            +=  -lqpe -lpthread -lm
 VERSION   =   1.0.0
+
+TRANSLATIONS = ../../../../i18n/de/libmpeg3plugin.ts \
+	 ../../../../i18n/en/libmpeg3plugin.ts \
+	 ../../../../i18n/es/libmpeg3plugin.ts \
+	 ../../../../i18n/fr/libmpeg3plugin.ts \
+	 ../../../../i18n/hu/libmpeg3plugin.ts \
+	 ../../../../i18n/ja/libmpeg3plugin.ts \
+	 ../../../../i18n/ko/libmpeg3plugin.ts \
+	 ../../../../i18n/no/libmpeg3plugin.ts \
+	 ../../../../i18n/pl/libmpeg3plugin.ts \
+	 ../../../../i18n/pt/libmpeg3plugin.ts \
+	 ../../../../i18n/pt_BR/libmpeg3plugin.ts \
+	 ../../../../i18n/sl/libmpeg3plugin.ts \
+	 ../../../../i18n/zh_CN/libmpeg3plugin.ts \
+	 ../../../../i18n/zh_TW/libmpeg3plugin.ts

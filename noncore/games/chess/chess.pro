@@ -13,20 +13,17 @@ DBFILE	= chess.db
 LANGUAGE	= C++
 CPP_ALWAYS_CREATE_SOURCE	= TRUE
 
-
-
-TRANSLATIONS = ../../../i18n/de/chess.ts
-TRANSLATIONS += ../../../i18n/en/chess.ts
-TRANSLATIONS += ../../../i18n/es/chess.ts
-TRANSLATIONS += ../../../i18n/fr/chess.ts
-TRANSLATIONS += ../../../i18n/hu/chess.ts
-TRANSLATIONS += ../../../i18n/ja/chess.ts
-TRANSLATIONS += ../../../i18n/ko/chess.ts
-TRANSLATIONS += ../../../i18n/no/chess.ts
-TRANSLATIONS += ../../../i18n/pl/chess.ts
-TRANSLATIONS += ../../../i18n/pt/chess.ts
-TRANSLATIONS += ../../../i18n/pt_BR/chess.ts
-TRANSLATIONS += ../../../i18n/sl/chess.ts
-TRANSLATIONS += ../../../i18n/zh_CN/chess.ts
-TRANSLATIONS += ../../../i18n/zh_TW/chess.ts
-
+TRANSLATIONS = ../../../i18n/de/chess.ts \
+	 ../../../i18n/en/chess.ts \
+	 ../../../i18n/es/chess.ts \
+	 ../../../i18n/fr/chess.ts \
+	 ../../../i18n/hu/chess.ts \
+	 ../../../i18n/ja/chess.ts \
+	 ../../../i18n/ko/chess.ts \
+	 ../../../i18n/no/chess.ts \
+	 ../../../i18n/pl/chess.ts \
+	 ../../../i18n/pt/chess.ts \
+	 ../../../i18n/pt_BR/chess.ts \
+	 ../../../i18n/sl/chess.ts \
+	 ../../../i18n/zh_CN/chess.ts \
+	 ../../../i18n/zh_TW/chess.ts

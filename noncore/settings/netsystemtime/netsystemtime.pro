@@ -10,19 +10,17 @@ INTERFACES	= ntpbase.ui
 DESTDIR         = $(OPIEDIR)/bin
 TARGET		= netsystemtime
 
-
-TRANSLATIONS = ../../../i18n/de/netsystemtime.ts
-TRANSLATIONS += ../../../i18n/en/netsystemtime.ts
-TRANSLATIONS += ../../../i18n/es/netsystemtime.ts
-TRANSLATIONS += ../../../i18n/fr/netsystemtime.ts
-TRANSLATIONS += ../../../i18n/hu/netsystemtime.ts
-TRANSLATIONS += ../../../i18n/ja/netsystemtime.ts
-TRANSLATIONS += ../../../i18n/ko/netsystemtime.ts
-TRANSLATIONS += ../../../i18n/no//netsystemtime.ts
-TRANSLATIONS += ../../../i18n/pl/netsystemtime.ts
-TRANSLATIONS += ../../../i18n/pt/netsystemtime.ts
-TRANSLATIONS += ../../../i18n/pt_BR/netsystemtime.ts
-TRANSLATIONS += ../../../i18n/sl/netsystemtime.ts
-TRANSLATIONS += ../../../i18n/zh_CN/netsystemtime.ts
-TRANSLATIONS += ../../../i18n/zh_TW/netsystemtime.ts
-
+TRANSLATIONS = ../../../i18n/de/netsystemtime.ts \
+	 ../../../i18n/en/netsystemtime.ts \
+	 ../../../i18n/es/netsystemtime.ts \
+	 ../../../i18n/fr/netsystemtime.ts \
+	 ../../../i18n/hu/netsystemtime.ts \
+	 ../../../i18n/ja/netsystemtime.ts \
+	 ../../../i18n/ko/netsystemtime.ts \
+	 ../../../i18n/no/netsystemtime.ts \
+	 ../../../i18n/pl/netsystemtime.ts \
+	 ../../../i18n/pt/netsystemtime.ts \
+	 ../../../i18n/pt_BR/netsystemtime.ts \
+	 ../../../i18n/sl/netsystemtime.ts \
+	 ../../../i18n/zh_CN/netsystemtime.ts \
+	 ../../../i18n/zh_TW/netsystemtime.ts

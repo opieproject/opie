@@ -56,7 +56,6 @@ HEADERS	=   calendar.h \
 	findwidget_p.h \
 	finddialog.h \
 	lnkproperties.h
-
 SOURCES	=   calendar.cpp \
 	    global.cpp \
 	    xmlreader.cpp \
@@ -112,32 +111,28 @@ SOURCES	=   calendar.cpp \
 	findwidget_p.cpp \
 	finddialog.cpp \
 	lnkproperties.cpp
-
 # Qt 3 compatibility
 qt2:HEADERS += quuid.h qcom.h qlibrary.h qlibrary_p.h
 qt2:SOURCES += quuid.cpp qlibrary.cpp qlibrary_unix.cpp
-
 INCLUDEPATH += $(OPIEDIR)/include backend
 LIBS		+= -ldl -lcrypt -lm
-
 INTERFACES = passwordbase_p.ui categoryeditbase_p.ui findwidgetbase_p.ui lnkpropertiesbase_p.ui
-
 TARGET		= qpe
 DESTDIR		= $(QTDIR)/lib$(PROJMAK)
 # This is set by configure$(OPIEDIR).
 VERSION		= 1.5.0.1
 
-TRANSLATIONS = ../i18n/de/libqpe.ts
-TRANSLATIONS += ../i18n/es/libqpe.ts
-TRANSLATIONS += ../i18n/pt/libqpe.ts
-TRANSLATIONS += ../i18n/pt_BR/libqpe.ts
-TRANSLATIONS   += ../i18n/en/libqpe.ts
-TRANSLATIONS   += ../i18n/sl/libqpe.ts
-TRANSLATIONS   += ../i18n/hu/libqpe.ts
-TRANSLATIONS   += ../i18n/ja/libqpe.ts
-TRANSLATIONS   += ../i18n/ko/libqpe.ts
-TRANSLATIONS   += ../i18n/pl/libqpe.ts
-TRANSLATIONS   += ../i18n/fr/libqpe.ts
-TRANSLATIONS   += ../i18n/no/libqpe.ts
-TRANSLATIONS   += ../i18n/zh_CN/libqpe.ts
-TRANSLATIONS   += ../i18n/zh_TW/libqpe.ts
+TRANSLATIONS = ../i18n/de/libqpe.ts \
+	 ../i18n/en/libqpe.ts \
+	 ../i18n/es/libqpe.ts \
+	 ../i18n/fr/libqpe.ts \
+	 ../i18n/hu/libqpe.ts \
+	 ../i18n/ja/libqpe.ts \
+	 ../i18n/ko/libqpe.ts \
+	 ../i18n/no/libqpe.ts \
+	 ../i18n/pl/libqpe.ts \
+	 ../i18n/pt/libqpe.ts \
+	 ../i18n/pt_BR/libqpe.ts \
+	 ../i18n/sl/libqpe.ts \
+	 ../i18n/zh_CN/libqpe.ts \
+	 ../i18n/zh_TW/libqpe.ts

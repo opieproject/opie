@@ -1,8 +1,6 @@
 TEMPLATE    =  app
-
 CONFIG      *= qt embedded release warn_off
 CONFIG      -= warn_on
-
 SOURCES     =  xpdf/Array.cc \
                xpdf/BuiltinFont.cc \
                xpdf/BuiltinFontTables.cc \
@@ -40,12 +38,10 @@ SOURCES     =  xpdf/Array.cc \
                qpdf.cpp \
                qbusybar.cpp \
                gooStub.cpp
-
 HEADERS     =  QOutputDev.h \
                QPEOutputDev.h \
                qbusybar.h \
                qpdf.h
-
 INCLUDEPATH += . \
                .. \
                xpdf \
@@ -54,24 +50,20 @@ INCLUDEPATH += . \
                goo
                
 LIBS        += -L $(OPIEDIR)/lib -lqpe -lopie
-
 DESTDIR      = $(OPIEDIR)/bin
 TARGET       = qpdf
 
-
-
-TRANSLATIONS = ../../../i18n/de/qpdf.ts
-TRANSLATIONS += ../../../i18n/en/qpdf.ts
-TRANSLATIONS += ../../../i18n/es/qpdf.ts
-TRANSLATIONS += ../../../i18n/fr/qpdf.ts
-TRANSLATIONS += ../../../i18n/hu/qpdf.ts
-TRANSLATIONS += ../../../i18n/ja/qpdf.ts
-TRANSLATIONS += ../../../i18n/ko/qpdf.ts
-TRANSLATIONS += ../../../i18n/no/qpdf.ts
-TRANSLATIONS += ../../../i18n/pl/qpdf.ts
-TRANSLATIONS += ../../../i18n/pt/qpdf.ts
-TRANSLATIONS += ../../../i18n/pt_BR/qpdf.ts
-TRANSLATIONS += ../../../i18n/sl/qpdf.ts
-TRANSLATIONS += ../../../i18n/zh_CN/qpdf.ts
-TRANSLATIONS += ../../../i18n/zh_TW/qpdf.ts
-
+TRANSLATIONS = ../../../i18n/de/qpdf.ts \
+	 ../../../i18n/en/qpdf.ts \
+	 ../../../i18n/es/qpdf.ts \
+	 ../../../i18n/fr/qpdf.ts \
+	 ../../../i18n/hu/qpdf.ts \
+	 ../../../i18n/ja/qpdf.ts \
+	 ../../../i18n/ko/qpdf.ts \
+	 ../../../i18n/no/qpdf.ts \
+	 ../../../i18n/pl/qpdf.ts \
+	 ../../../i18n/pt/qpdf.ts \
+	 ../../../i18n/pt_BR/qpdf.ts \
+	 ../../../i18n/sl/qpdf.ts \
+	 ../../../i18n/zh_CN/qpdf.ts \
+	 ../../../i18n/zh_TW/qpdf.ts

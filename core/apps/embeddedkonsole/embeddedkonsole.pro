@@ -34,17 +34,17 @@ DEPENDPATH  += $(OPIEDIR)/include
 LIBS            += -lqpe
 REQUIRES  = embeddedkonsole
 
-TRANSLATIONS = ../i18n/pt_BR/embeddedkonsole.ts
-TRANSLATIONS += ../i18n/es/embeddedkonsole.ts
-TRANSLATIONS += ../i18n/pt/embeddedkonsole.ts
-TRANSLATIONS   += ../i18n/de/embeddedkonsole.ts
-TRANSLATIONS   += ../i18n/en/embeddedkonsole.ts
-TRANSLATIONS   += ../i18n/hu/embeddedkonsole.ts
-TRANSLATIONS   += ../i18n/fr/embeddedkonsole.ts
-TRANSLATIONS   += ../i18n/pl/embeddedkonsole.ts
-TRANSLATIONS   += ../i18n/ja/embeddedkonsole.ts
-TRANSLATIONS   += ../i18n/ko/embeddedkonsole.ts
-TRANSLATIONS   += ../i18n/no/embeddedkonsole.ts
-TRANSLATIONS   += ../i18n/sl/embeddedkonsole.ts
-TRANSLATIONS   += ../i18n/zh_CN/embeddedkonsole.ts
-TRANSLATIONS   += ../i18n/zh_TW/embeddedkonsole.ts
+TRANSLATIONS = ../../../i18n/de/embeddedkonsole.ts \
+	 ../../../i18n/en/embeddedkonsole.ts \
+	 ../../../i18n/es/embeddedkonsole.ts \
+	 ../../../i18n/fr/embeddedkonsole.ts \
+	 ../../../i18n/hu/embeddedkonsole.ts \
+	 ../../../i18n/ja/embeddedkonsole.ts \
+	 ../../../i18n/ko/embeddedkonsole.ts \
+	 ../../../i18n/no/embeddedkonsole.ts \
+	 ../../../i18n/pl/embeddedkonsole.ts \
+	 ../../../i18n/pt/embeddedkonsole.ts \
+	 ../../../i18n/pt_BR/embeddedkonsole.ts \
+	 ../../../i18n/sl/embeddedkonsole.ts \
+	 ../../../i18n/zh_CN/embeddedkonsole.ts \
+	 ../../../i18n/zh_TW/embeddedkonsole.ts

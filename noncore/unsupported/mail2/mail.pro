@@ -43,19 +43,17 @@ LIBS           += 	-lmail -lqpe -lopie
 TARGET		= 	mail 
 DESTDIR		= 	$(OPIEDIR)/bin
 
-
-TRANSLATIONS = ../../i18n/de/mail.ts
-TRANSLATIONS += ../../i18n/en/mail.ts
-TRANSLATIONS += ../../i18n/es/mail.ts
-TRANSLATIONS += ../../i18n/fr/mail.ts
-TRANSLATIONS += ../../i18n/hu/mail.ts
-TRANSLATIONS += ../../i18n/ja/mail.ts
-TRANSLATIONS += ../../i18n/ko/mail.ts
-TRANSLATIONS += ../../i18n/no/mail.ts
-TRANSLATIONS += ../../i18n/pl/mail.ts
-TRANSLATIONS += ../../i18n/pt/mail.ts
-TRANSLATIONS += ../../i18n/pt_BR/mail.ts
-TRANSLATIONS += ../../i18n/sl/mail.ts
-TRANSLATIONS += ../../i18n/zh_CN/mail.ts
-TRANSLATIONS += ../../i18n/zh_TW/mail.ts
-
+TRANSLATIONS = ../../i18n/de/mail.ts \
+	 ../../i18n/en/mail.ts \
+	 ../../i18n/es/mail.ts \
+	 ../../i18n/fr/mail.ts \
+	 ../../i18n/hu/mail.ts \
+	 ../../i18n/ja/mail.ts \
+	 ../../i18n/ko/mail.ts \
+	 ../../i18n/no/mail.ts \
+	 ../../i18n/pl/mail.ts \
+	 ../../i18n/pt/mail.ts \
+	 ../../i18n/pt_BR/mail.ts \
+	 ../../i18n/sl/mail.ts \
+	 ../../i18n/zh_CN/mail.ts \
+	 ../../i18n/zh_TW/mail.ts

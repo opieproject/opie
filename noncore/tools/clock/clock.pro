@@ -10,20 +10,17 @@ LIBS            += -lqpe -lopie
 INTERFACES  = 
 TARGET    = clock
 
-
-
-TRANSLATIONS = ../../../i18n/de/clock.ts
-TRANSLATIONS += ../../../i18n/en/clock.ts
-TRANSLATIONS += ../../../i18n/es/clock.ts
-TRANSLATIONS += ../../../i18n/fr/clock.ts
-TRANSLATIONS += ../../../i18n/hu/clock.ts
-TRANSLATIONS += ../../../i18n/ja/clock.ts
-TRANSLATIONS += ../../../i18n/ko/clock.ts
-TRANSLATIONS += ../../../i18n/no/clock.ts
-TRANSLATIONS += ../../../i18n/pl/clock.ts
-TRANSLATIONS += ../../../i18n/pt/clock.ts
-TRANSLATIONS += ../../../i18n/pt_BR/clock.ts
-TRANSLATIONS += ../../../i18n/sl/clock.ts
-TRANSLATIONS += ../../../i18n/zh_CN/clock.ts
-TRANSLATIONS += ../../../i18n/zh_TW/clock.ts
-
+TRANSLATIONS = ../../../i18n/de/clock.ts \
+	 ../../../i18n/en/clock.ts \
+	 ../../../i18n/es/clock.ts \
+	 ../../../i18n/fr/clock.ts \
+	 ../../../i18n/hu/clock.ts \
+	 ../../../i18n/ja/clock.ts \
+	 ../../../i18n/ko/clock.ts \
+	 ../../../i18n/no/clock.ts \
+	 ../../../i18n/pl/clock.ts \
+	 ../../../i18n/pt/clock.ts \
+	 ../../../i18n/pt_BR/clock.ts \
+	 ../../../i18n/sl/clock.ts \
+	 ../../../i18n/zh_CN/clock.ts \
+	 ../../../i18n/zh_TW/clock.ts

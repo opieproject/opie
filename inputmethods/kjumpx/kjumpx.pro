@@ -11,19 +11,17 @@ DEPENDPATH      += $(OPIEDIR)/include
 LIBS           += -lqpe
 VERSION         = 1.0.0
 
-
-TRANSLATIONS = ../../i18n/de/libqkjumpx.ts
-TRANSLATIONS += ../../i18n/en/libqkjumpx.ts
-TRANSLATIONS += ../../i18n/es/libqkjumpx.ts
-TRANSLATIONS += ../../i18n/fr/libqkjumpx.ts
-TRANSLATIONS += ../../i18n/hu/libqkjumpx.ts
-TRANSLATIONS += ../../i18n/ja/libqkjumpx.ts
-TRANSLATIONS += ../../i18n/ko/libqkjumpx.ts
-TRANSLATIONS += ../../i18n/no/libqkjumpx.ts
-TRANSLATIONS += ../../i18n/pl/libqkjumpx.ts
-TRANSLATIONS += ../../i18n/pt/libqkjumpx.ts
-TRANSLATIONS += ../../i18n/pt_BR/libqkjumpx.ts
-TRANSLATIONS += ../../i18n/sl/libqkjumpx.ts
-TRANSLATIONS += ../../i18n/zh_CN/libqkjumpx.ts
-TRANSLATIONS += ../../i18n/zh_TW/libqkjumpx.ts
-
+TRANSLATIONS = ../../i18n/de/libqkjumpx.ts \
+	 ../../i18n/en/libqkjumpx.ts \
+	 ../../i18n/es/libqkjumpx.ts \
+	 ../../i18n/fr/libqkjumpx.ts \
+	 ../../i18n/hu/libqkjumpx.ts \
+	 ../../i18n/ja/libqkjumpx.ts \
+	 ../../i18n/ko/libqkjumpx.ts \
+	 ../../i18n/no/libqkjumpx.ts \
+	 ../../i18n/pl/libqkjumpx.ts \
+	 ../../i18n/pt/libqkjumpx.ts \
+	 ../../i18n/pt_BR/libqkjumpx.ts \
+	 ../../i18n/sl/libqkjumpx.ts \
+	 ../../i18n/zh_CN/libqkjumpx.ts \
+	 ../../i18n/zh_TW/libqkjumpx.ts

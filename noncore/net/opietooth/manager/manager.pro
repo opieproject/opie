@@ -11,20 +11,17 @@ INTERFACES      = bluetoothbase.ui  devicedialog.ui
 DESTDIR         = $(OPIEDIR)/bin
 TARGET          = bluetooth-manager
 
-
-
-TRANSLATIONS = ../../../../i18n/de/bluetooth-manager.ts
-TRANSLATIONS += ../../../../i18n/en/bluetooth-manager.ts
-TRANSLATIONS += ../../../../i18n/es/bluetooth-manager.ts
-TRANSLATIONS += ../../../../i18n/fr/bluetooth-manager.ts
-TRANSLATIONS += ../../../../i18n/hu/bluetooth-manager.ts
-TRANSLATIONS += ../../../../i18n/ja/bluetooth-manager.ts
-TRANSLATIONS += ../../../../i18n/ko/bluetooth-manager.ts
-TRANSLATIONS += ../../../../i18n/no/bluetooth-manager.ts
-TRANSLATIONS += ../../../../i18n/pl/bluetooth-manager.ts
-TRANSLATIONS += ../../../../i18n/pt/bluetooth-manager.ts
-TRANSLATIONS += ../../../../i18n/pt_BR/bluetooth-manager.ts
-TRANSLATIONS += ../../../../i18n/sl/bluetooth-manager.ts
-TRANSLATIONS += ../../../../i18n/zh_CN/bluetooth-manager.ts
-TRANSLATIONS += ../../../../i18n/zh_TW/bluetooth-manager.ts
-
+TRANSLATIONS = ../../../../i18n/de/bluetooth-manager.ts \
+	 ../../../../i18n/en/bluetooth-manager.ts \
+	 ../../../../i18n/es/bluetooth-manager.ts \
+	 ../../../../i18n/fr/bluetooth-manager.ts \
+	 ../../../../i18n/hu/bluetooth-manager.ts \
+	 ../../../../i18n/ja/bluetooth-manager.ts \
+	 ../../../../i18n/ko/bluetooth-manager.ts \
+	 ../../../../i18n/no/bluetooth-manager.ts \
+	 ../../../../i18n/pl/bluetooth-manager.ts \
+	 ../../../../i18n/pt/bluetooth-manager.ts \
+	 ../../../../i18n/pt_BR/bluetooth-manager.ts \
+	 ../../../../i18n/sl/bluetooth-manager.ts \
+	 ../../../../i18n/zh_CN/bluetooth-manager.ts \
+	 ../../../../i18n/zh_TW/bluetooth-manager.ts

@@ -9,20 +9,17 @@ DEPENDPATH      += $(OPIEDIR)/include ../launcher
 LIBS            += -lqpe
 VERSION		= 1.0.0
 
-
-
-TRANSLATIONS = ../../../i18n/de/libcardmonapplet.ts
-TRANSLATIONS += ../../../i18n/en/libcardmonapplet.ts
-TRANSLATIONS += ../../../i18n/es/libcardmonapplet.ts
-TRANSLATIONS += ../../../i18n/fr/libcardmonapplet.ts
-TRANSLATIONS += ../../../i18n/hu/libcardmonapplet.ts
-TRANSLATIONS += ../../../i18n/ja/libcardmonapplet.ts
-TRANSLATIONS += ../../../i18n/ko/libcardmonapplet.ts
-TRANSLATIONS += ../../../i18n/no/libcardmonapplet.ts
-TRANSLATIONS += ../../../i18n/pl/libcardmonapplet.ts
-TRANSLATIONS += ../../../i18n/pt/libcardmonapplet.ts
-TRANSLATIONS += ../../../i18n/pt_BR/libcardmonapplet.ts
-TRANSLATIONS += ../../../i18n/sl/libcardmonapplet.ts
-TRANSLATIONS += ../../../i18n/zh_CN/libcardmonapplet.ts
-TRANSLATIONS += ../../../i18n/zh_TW/libcardmonapplet.ts
-
+TRANSLATIONS = ../../../i18n/de/libcardmonapplet.ts \
+	 ../../../i18n/en/libcardmonapplet.ts \
+	 ../../../i18n/es/libcardmonapplet.ts \
+	 ../../../i18n/fr/libcardmonapplet.ts \
+	 ../../../i18n/hu/libcardmonapplet.ts \
+	 ../../../i18n/ja/libcardmonapplet.ts \
+	 ../../../i18n/ko/libcardmonapplet.ts \
+	 ../../../i18n/no/libcardmonapplet.ts \
+	 ../../../i18n/pl/libcardmonapplet.ts \
+	 ../../../i18n/pt/libcardmonapplet.ts \
+	 ../../../i18n/pt_BR/libcardmonapplet.ts \
+	 ../../../i18n/sl/libcardmonapplet.ts \
+	 ../../../i18n/zh_CN/libcardmonapplet.ts \
+	 ../../../i18n/zh_TW/libcardmonapplet.ts

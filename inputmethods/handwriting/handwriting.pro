@@ -30,20 +30,17 @@ DEPENDPATH      += ../$(OPIEDIR)/include ../../launcher
 LIBS            += -lqpe
 VERSION		= 1.0.0
 
-
-
-TRANSLATIONS = ../../i18n/de/libqhandwriting.ts
-TRANSLATIONS += ../../i18n/en/libqhandwriting.ts
-TRANSLATIONS += ../../i18n/es/libqhandwriting.ts
-TRANSLATIONS += ../../i18n/fr/libqhandwriting.ts
-TRANSLATIONS += ../../i18n/hu/libqhandwriting.ts
-TRANSLATIONS += ../../i18n/ja/libqhandwriting.ts
-TRANSLATIONS += ../../i18n/ko/libqhandwriting.ts
-TRANSLATIONS += ../../i18n/no/libqhandwriting.ts
-TRANSLATIONS += ../../i18n/pl/libqhandwriting.ts
-TRANSLATIONS += ../../i18n/pt/libqhandwriting.ts
-TRANSLATIONS += ../../i18n/pt_BR/libqhandwriting.ts
-TRANSLATIONS += ../../i18n/sl/libqhandwriting.ts
-TRANSLATIONS += ../../i18n/zh_CN/libqhandwriting.ts
-TRANSLATIONS += ../../i18n/zh_TW/libqhandwriting.ts
-
+TRANSLATIONS = ../../i18n/de/libqhandwriting.ts \
+	 ../../i18n/en/libqhandwriting.ts \
+	 ../../i18n/es/libqhandwriting.ts \
+	 ../../i18n/fr/libqhandwriting.ts \
+	 ../../i18n/hu/libqhandwriting.ts \
+	 ../../i18n/ja/libqhandwriting.ts \
+	 ../../i18n/ko/libqhandwriting.ts \
+	 ../../i18n/no/libqhandwriting.ts \
+	 ../../i18n/pl/libqhandwriting.ts \
+	 ../../i18n/pt/libqhandwriting.ts \
+	 ../../i18n/pt_BR/libqhandwriting.ts \
+	 ../../i18n/sl/libqhandwriting.ts \
+	 ../../i18n/zh_CN/libqhandwriting.ts \
+	 ../../i18n/zh_TW/libqhandwriting.ts
