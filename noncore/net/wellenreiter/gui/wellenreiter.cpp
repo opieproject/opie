@@ -176,12 +176,12 @@ void Wellenreiter::addNewItem( QString type, QString essid, QString macaddr, boo
       
     QString s;
     MScanListItem* network;
-    MScanListItem* item = (MScanListItem*) netview->firstChild();
+    MScanListItem* item = static_cast<MScanListItem*> ( netview->firstChild() );
 
     while ( item && ( item->text( 0 ) != essid ) )
     {
         qDebug( "itemtext: %s", (const char*) item->text( 0 ) );
-        item = item->itemBelow();
+        item = static_cast<MScanListItem*> ( item->itemBelow() );
     }
     if ( item )
     {
@@ -189,13 +189,13 @@ void Wellenreiter::addNewItem( QString type, QString essid, QString macaddr, boo
         
         network = item;
         
-        item = item->firstChild();
+        item = static_cast<MScanListItem*> ( item->firstChild() );
         assert( item ); // this shouldn't fail
         
         while ( item && ( item->text( 2 ) != macaddr ) )
         {
             qDebug( "subitemtext: %s", (const char*) item->text( 2 ) );
-            item = item->itemBelow();
+            item = static_cast<MScanListItem*> ( item->itemBelow() );
         }
         
         if ( item )
