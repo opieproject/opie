@@ -66,9 +66,9 @@ PageListBoxItem::PageListBoxItem(Page* page, QListBox* parent)
     baseColor.hsv(&h, &s, &v);
 
     if (v > 128) {
-        m_alternateColor = baseColor.dark(106);
+        m_alternateColor = baseColor.dark(115);
     } else if (baseColor != Qt::black) {
-        m_alternateColor = baseColor.light(110);
+        m_alternateColor = baseColor.light(115);
     } else {
         m_alternateColor = QColor(32, 32, 32);
     }

@@ -82,7 +82,7 @@ bool DrawPadCanvasXmlHandler::startElement(const QString& namespaceURI, const QS
 
     if (qName == "image") {
         m_title = QString();
-        m_date = QDateTime(QDate(1970, 1, 1));
+        m_date = QDateTime::currentDateTime();
     } else if (qName == "title") {
         m_state = InTitle;
     } else if (qName == "date") {
@@ -122,7 +122,7 @@ bool DrawPadCanvasXmlHandler::characters(const QString& ch)
     if (m_state == InTitle) {
         m_title = ch;
     } else if (m_state == InDate) {
-        m_date = m_date.addSecs(ch.toInt());
+        m_date = QDateTime(QDate(1970, 1, 1)).addSecs(ch.toInt());
     } else if (m_state == InData) {
         QByteArray byteArray(ch.length() / 2);
 
