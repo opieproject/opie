@@ -198,6 +198,20 @@
                         <bool>true</bool>
                     </property>
                 </column>
+                <column>
+                    <property>
+                        <name>text</name>
+                        <string>Signal</string>
+                    </property>
+                    <property>
+                        <name>clickable</name>
+                        <bool>true</bool>
+                    </property>
+                    <property>
+                        <name>resizeable</name>
+                        <bool>true</bool>
+                    </property>
+                </column>
                 <property stdset="1">
                     <name>name</name>
                     <cstring>ListView4</cstring>

@@ -13,6 +13,7 @@
 
 #include "btserviceitem.h"
 #include "btdeviceitem.h"
+
 #include "popuphelper.h"
 
 #include "bticonloader.h"
@@ -28,6 +29,7 @@ class QLabel;
 class QPushButton;
 class QTabWidget;
 class QCheckBox;
+class BTConnectionItem;
 
 
 namespace OpieTooth {
@@ -55,6 +57,7 @@ namespace OpieTooth {
 	QString status()const;
 	void initGui();
         void setInfo();
+
         PopupHelper m_popHelper;
         Manager *m_localDevice;
         QMap<QString,BTDeviceItem*> m_deviceList;
@@ -84,6 +87,8 @@ namespace OpieTooth {
         void startServiceActionHold( QListViewItem *, const QPoint &, int );
         void deviceActive( const QString& mac, bool connected  );
         void applyConfigChanges();
+	void addSignalStrength();
+	void addSignalStrength( const QString& mac, const QString& strengh );
 
     };
 

@@ -22,3 +22,21 @@ ConnectionState BTConnectionItem::connection() const {
     return m_con;
 }
 
+void BTConnectionItem::setName( QString name ) {
+	m_name = name;
+	setText( 0, m_name );
+}
+
+QString BTConnectionItem::name() {
+	return m_name;
+}
+
+
+void BTConnectionItem::setSignalStrength( QString strength ) {
+	m_signalStrength = strength;
+	setText( 2, m_signalStrength );
+}
+
+QString BTConnectionItem::signalStrength()  {
+	return m_signalStrength;
+}

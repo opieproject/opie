@@ -13,11 +13,17 @@ namespace OpieTooth {
         BTConnectionItem( QListView* parent, const ConnectionState& state );
         ~BTConnectionItem();
         QString type()const;
+	QString name();
+	QString signalStrength();
         int typeId() const;
         ConnectionState connection()const;
+	void setSignalStrength( QString );
+	void setName( QString );
+
     private:
         ConnectionState m_con;
-
+	QString m_name;
+	QString m_signalStrength;
     };
 
 };

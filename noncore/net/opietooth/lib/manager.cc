@@ -260,7 +260,6 @@ void Manager::searchConnections() {
     }
 }
 void Manager::slotConnectionExited( OProcess* proc ) {
-    qWarning("<<<<<<<<<<<<<<<<<exited");
     ConnectionState::ValueList list;
     list = parseConnections( m_hcitoolCon );
     emit connections(list );
@@ -300,4 +299,36 @@ ConnectionState::ValueList Manager::parseConnections( const QString& out ) {
         list2.append( con );
     }
     return list2;
+}
+
+void Manager::signalStrength( const QString &mac ) {
+
+    OProcess* sig_proc = new OProcess();
+
+    connect(sig_proc, SIGNAL(processExited(OProcess*) ),
+            this, SLOT(slotSignalStrengthExited( OProcess*) ) );
+    connect(sig_proc, SIGNAL(receivedStdout(OProcess*, char*, int) ),
+            this, SLOT(slotSignalStrengthOutput(OProcess*, char*, int) ) );
+    *sig_proc << "hcitool";
+    *sig_proc << "lq";
+    *sig_proc << mac;
+
+    sig_proc->setName( mac.latin1() );
+
+    if (!sig_proc->start(OProcess::NotifyOnExit, OProcess::AllOutput) ) {
+        emit signalStrength( mac, "-1" );
+        delete sig_proc;
+    }
+}
+
+void Manager::slotSignalStrengthOutput(OProcess* proc, char* cha, int len) {
+    QCString str(cha, len );
+    QString temp = QString(str).stripWhiteSpace();
+    QStringList value = QStringList::split(' ', temp );
+    emit signalStrength( proc->name(), value[2].latin1() );
+}
+
+
+void Manager::slotSignalStrengthExited( OProcess* proc ) {
+     delete proc;
 }

@@ -72,6 +72,8 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
              this, SLOT( deviceActive( const QString& , bool ) ) );
     connect( m_localDevice, SIGNAL( connections( ConnectionState::ValueList ) ),
              this, SLOT( addConnectedDevices( ConnectionState::ValueList ) ) );
+    connect( m_localDevice, SIGNAL( signalStrength( const QString&, const QString& ) ),
+    	     this, SLOT( addSignalStrength( const QString&, const QString& ) ) );
 
 
     // let hold be rightButtonClicked()
@@ -98,9 +100,11 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
 
     ListView2->setRootIsDecorated(true);
 
+
     writeToHciConfig();
     // search conncetions
     addConnectedDevices();
+    addSignalStrength();
     m_iconLoader = new BTIconLoader();
     readSavedDevices();
 }
@@ -370,7 +374,8 @@ void BlueBase::addServicesToDevice( BTDeviceItem * item ) {
 
 
 /**
- * Overloaded. This one it the one that is connected to the foundServices signal
+ * Overloaded. This one it the one that is
+ ted to the foundServices signal
  * @param device the mac address of the remote device
  * @param servicesList the list with the service the device has.
  */
@@ -425,6 +430,29 @@ void BlueBase::addServicesToDevice( const QString& device, Services::ValueList s
 }
 
 
+
+
+
+void BlueBase::addSignalStrength() {
+
+	QListViewItemIterator it( ListView4 );
+	for ( ; it.current(); ++it ) {
+	     m_localDevice->signalStrength( ((BTConnectionItem*)it.current() )->connection().mac() );
+	}
+
+	QTimer::singleShot( 5000, this, SLOT( addSignalStrength() ) );
+}
+
+void BlueBase::addSignalStrength( const QString& mac, const QString& strength ) {
+
+	QListViewItemIterator it( ListView4 );
+	for ( ; it.current(); ++it ) {
+		if( ((BTConnectionItem*)it.current())->connection().mac() == mac ) {
+			((BTConnectionItem*)it.current() )->setSignalStrength( strength );
+		}
+	}
+}
+
 /**
  * Add the existing connections (pairs) to the connections tab.
  * This one triggers the search
@@ -432,7 +460,6 @@ void BlueBase::addServicesToDevice( const QString& device, Services::ValueList s
 void BlueBase::addConnectedDevices() {
         m_localDevice->searchConnections();
 }
-
 
 /**
  * This adds the found connections to the connection tab.
@@ -449,8 +476,13 @@ void BlueBase::addConnectedDevices( ConnectionState::ValueList connectionList ) 
     if ( !connectionList.isEmpty() ) {
 
         for (it = connectionList.begin(); it != connectionList.end(); ++it) {
-            connectionItem = new BTConnectionItem( ListView4 , (*it) );
-        }
+            connectionItem = new BTConnectionItem( ListView4, (*it) );
+
+ 	    if( m_deviceList.find((*it).mac()).data() ) {
+
+	        connectionItem->setName( m_deviceList.find( (*it).mac()).data()->name() );
+             }
+	}
     } else {
         ConnectionState con;
         con.setMac( tr("No connections found") );
