@@ -88,6 +88,7 @@ bool OKeyFilterPrivate::filter( int unicode, int keycode, int modifiers, bool is
 
 void OKeyFilterPrivate::addHandler(QWSServer::KeyboardFilter*aF)
 {
+    if (!aF) return;
     if (filterList.find(aF)!=filterList.end()) {
         return;
     }
@@ -97,6 +98,7 @@ void OKeyFilterPrivate::addHandler(QWSServer::KeyboardFilter*aF)
 
 void OKeyFilterPrivate::remHandler(QWSServer::KeyboardFilter*aF)
 {
+    if (!aF) return;
     QValueList<QWSServer::KeyboardFilter*>::Iterator iter;
     if ( (iter=filterList.find(aF))==filterList.end() ) {
         return;
@@ -107,6 +109,7 @@ void OKeyFilterPrivate::remHandler(QWSServer::KeyboardFilter*aF)
 
 void OKeyFilterPrivate::addPreHandler(QWSServer::KeyboardFilter*aF)
 {
+    if (!aF) return;
     if (preFilterList.find(aF)!=preFilterList.end()) {
         return;
     }
@@ -116,6 +119,7 @@ void OKeyFilterPrivate::addPreHandler(QWSServer::KeyboardFilter*aF)
 
 void OKeyFilterPrivate::remPreHandler(QWSServer::KeyboardFilter*aF)
 {
+    if (!aF) return;
     QValueList<QWSServer::KeyboardFilter*>::Iterator iter;
     if ( (iter=preFilterList.find(aF))==preFilterList.end() ) {
         return;
