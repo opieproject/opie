@@ -1,4 +1,3 @@
-Package: userconfig
 Files: bin/usermanager apps/Settings/usermanager.desktop pics/usermanager/*
 Priority: optional
 Section: opie/settings
