@@ -26,75 +26,76 @@
     <message>
         <source>Enter stock symbols seperated
 by a space.</source>
-        <translation type="unfinished"></translation>
+        <translation>Voer aandeelsymbolen in,
+gescheiden door een spatie.</translation>
     </message>
     <message>
         <source>Toggles Time of current price field</source>
-        <translation type="unfinished"></translation>
+        <translation>Schakel tussen tijd of huidige prijs</translation>
     </message>
     <message>
         <source>Toggles date field</source>
-        <translation type="unfinished"></translation>
+        <translation>Shcakelt tijdveld</translation>
     </message>
     <message>
         <source>Toggles Symbol field</source>
-        <translation type="unfinished"></translation>
+        <translation>Schakelt Symboolveld</translation>
     </message>
     <message>
         <source>Toggles Name of symbols owner field</source>
-        <translation type="unfinished"></translation>
+        <translation>Schakelt Naam van symbolen eigenaar veld</translation>
     </message>
     <message>
         <source>Toggles current Price field</source>
-        <translation type="unfinished"></translation>
+        <translation>Schakelt huidige prijs veld</translation>
     </message>
     <message>
         <source>Toggles last price field</source>
-        <translation type="unfinished"></translation>
+        <translation>Schakelt laatste prijs veld</translation>
     </message>
     <message>
         <source>Toggles opening price field</source>
-        <translation type="unfinished"></translation>
+        <translation>Schakelt openings prijs veld</translation>
     </message>
     <message>
         <source>Toggles minimum daily price field</source>
-        <translation type="unfinished"></translation>
+        <translation>Schakelt minimum dagelijkse prijs veld</translation>
     </message>
     <message>
         <source>Toggles maximum daily price field</source>
-        <translation type="unfinished"></translation>
+        <translation>Schakelt maximum dagelijkse prijs veld</translation>
     </message>
     <message>
         <source>Toggles daily variation of price field</source>
-        <translation type="unfinished"></translation>
+        <translation>Schakelt dagelijkse prijs variatie veld</translation>
     </message>
     <message>
         <source>Toggles volume of trading field</source>
-        <translation type="unfinished"></translation>
+        <translation>Schakelt verkoopvolume veld</translation>
     </message>
     <message>
         <source>How often stocks prices should be looked up. In minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoe vaak koersinfo opgehaald moet worden. In minuten</translation>
     </message>
     <message>
         <source>Minutes between lookups.</source>
-        <translation type="unfinished"></translation>
+        <translation>Minuten tussen ophalen.</translation>
     </message>
     <message>
         <source>Speed of scrolling action, in milliseconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Snelheid van scrollen, in milliseconden</translation>
     </message>
     <message>
         <source>Scroll Speed, in milliseconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Scrollsnelheid in milliseconden</translation>
     </message>
     <message>
         <source>Length of scrolling</source>
-        <translation type="unfinished"></translation>
+        <translation>Lengte van scrollen</translation>
     </message>
     <message>
         <source>Scroll Length</source>
-        <translation type="unfinished"></translation>
+        <translation>Scrollengte</translation>
     </message>
 </context>
 </TS>

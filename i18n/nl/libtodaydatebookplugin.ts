@@ -18,7 +18,7 @@
     </message>
     <message>
         <source>Check this if the location of an appointment should be shown for each one</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier als iedere afspraak met plaats weergegeven moet worden</translation>
     </message>
     <message>
         <source>Show notes</source>
@@ -26,16 +26,17 @@
     </message>
     <message>
         <source>Check this if the note attached to an appointment should be shown for each one</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier als iedere afspraak met notitie weergegeven moet worden</translation>
     </message>
     <message>
         <source>Show only later
  appointments</source>
-        <translation type="unfinished"></translation>
+        <translation>Laat alleen latere
+afspraken zien</translation>
     </message>
     <message>
         <source>Check this if only appointments later then current time should be shown</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier als alleen afspraken later dan de huidige tijd weergegeven moeten worden</translation>
     </message>
     <message>
         <source>How many 
@@ -49,15 +50,15 @@ getoond?</translation>
     </message>
     <message>
         <source>How many appointments should be shown maximal. In chronical order</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoeveel afspraken moeten maximaal worden weergegeven. Chronologisch</translation>
     </message>
     <message>
         <source>How many more days</source>
-        <translation>Hoeveel meer dagen</translation>
+        <translation>Hoeveel dagen meer</translation>
     </message>
     <message>
         <source>How many more days should be in the range</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoeveel dagen meer moeten in de reeks zitten</translation>
     </message>
     <message>
         <source> day(s)</source>

@@ -22,7 +22,7 @@
     <name>AccountEditorBase</name>
     <message>
         <source>Account Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Account editor</translation>
     </message>
     <message>
         <source>Server</source>
@@ -113,7 +113,7 @@
     <name>AddressPicker</name>
     <message>
         <source>There are no entries in the addressbook.</source>
-        <translation type="unfinished"></translation>
+        <translation>Er zijn geen gegevens in adresboek.</translation>
     </message>
     <message>
         <source>Error</source>
@@ -121,7 +121,7 @@
     </message>
     <message>
         <source>&lt;p&gt;You have to select at least one address entry.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;U moet minimaal een adres ingevoerd hebben.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -151,7 +151,7 @@
     </message>
     <message>
         <source>Please select an entry first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer een keuze aub.</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -159,19 +159,19 @@
     </message>
     <message>
         <source>Set Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Stel omschrijving in</translation>
     </message>
     <message>
         <source>&lt;div align=center&gt;Description</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;div align=center&gt;Omschrijving</translation>
     </message>
     <message>
         <source>&lt;p&gt;You have to specify a recipient.&lt;br&gt;(eg: foo@bar.org)&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;U moet een ontvanger ingeven.&lt;br&gt;(bv: foo@bar.org)&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;There was a problem sending some of the queued mails.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Er is een probleem bij het verzenden van de wachtrij met mails.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Success</source>
@@ -179,31 +179,31 @@
     </message>
     <message>
         <source>&lt;p&gt;The mail was queued successfully.&lt;/p&gt;&lt;p&gt;The queue contains </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;De mail is succesvol in de wachtrij geplaatst&lt;/p&gt;&lt;p&gt;De wachtrij bevat</translation>
     </message>
     <message>
         <source> mails.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>mails.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;font color=#ff0000&gt;Error occoured during sending.&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;font color=#ff0000&gt;Fout opgetreden tijdens zenden.&lt;/font&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;%1&lt;/p</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;%1&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;The mail was sent successfully.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;De mail is succesvol verzonden.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;The queued mails </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;De mails in de wachtrij</translation>
     </message>
     <message>
         <source> of </source>
-        <translation type="unfinished"></translation>
+        <translation>van</translation>
     </message>
 </context>
 <context>
@@ -336,568 +336,570 @@
     <name>ConfigDiagBase</name>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Configutratie</translation>
     </message>
     <message>
         <source>Accounts</source>
-        <translation type="unfinished"></translation>
+        <translation>Accounts</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Wijzig</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder</translation>
     </message>
     <message>
         <source>[Hidden]</source>
-        <translation type="unfinished"></translation>
+        <translation>[Verborgen]</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw</translation>
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>Algemeen</translation>
     </message>
     <message>
         <source>Mail notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Mail notificatie</translation>
     </message>
     <message>
         <source>Blink LED</source>
-        <translation type="unfinished"></translation>
+        <translation>Knipper LED</translation>
     </message>
     <message>
         <source>Play sound</source>
-        <translation type="unfinished"></translation>
+        <translation>Maak geluid</translation>
     </message>
     <message>
         <source>&lt;b&gt;Check&amp;nbsp;every</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Controleer&amp;nbsp;iedere</translation>
     </message>
     <message>
         <source> min</source>
-        <translation type="unfinished"></translation>
+        <translation>nim</translation>
     </message>
     <message>
         <source>Disable mail notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Schakel mailnotificatie uit</translation>
     </message>
     <message>
         <source>&lt;p&gt;&lt;b&gt;Mail version %1&lt;/b&gt;&lt;hr&gt;
 Sponsored and Programmed by LISAsystems&lt;br&gt;
 Visit http://www.lisa.de/ for Information.
                             </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;b&gt;Mail versie %1&lt;/b&gt;&lt;hr&gt;
+Gesponsord and Geprogrammeerd door LISAsystems&lt;br&gt;
+Ga naar http://www.lisa.de/ voor informatie.</translation>
     </message>
 </context>
 <context>
     <name>FolderWidget</name>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Hernoem</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder</translation>
     </message>
     <message>
         <source>Move</source>
-        <translation type="unfinished"></translation>
+        <translation>Verplaats</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopieer</translation>
     </message>
     <message>
         <source>Create folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Maak map</translation>
     </message>
     <message>
         <source>Rescan folder list</source>
-        <translation type="unfinished"></translation>
+        <translation>Vernieuw mappenlijst</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout</translation>
     </message>
     <message>
         <source>&lt;p&gt;Please select an item first.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Selecteer eerst een item aub.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Question</source>
-        <translation type="unfinished"></translation>
+        <translation>Vraag</translation>
     </message>
     <message>
         <source>&lt;p&gt;Do you really want to delete &lt;pre&gt;%1&lt;/pre&gt;?</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Wil je echt &lt;pre&gt;%1&lt;/pre&gt; verwijderen?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nee</translation>
     </message>
     <message>
         <source>Foldername</source>
-        <translation type="unfinished"></translation>
+        <translation>Mapnaam</translation>
     </message>
     <message>
         <source>&lt;p&gt;Please enter the name of the new folder.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Voer de naam van de nieuwe map in aub.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Looking up host...</source>
-        <translation type="unfinished"></translation>
+        <translation>Host opzoeken...</translation>
     </message>
     <message>
         <source>Host found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Host gevonden.</translation>
     </message>
     <message>
         <source>Connected to host.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbonden met host.</translation>
     </message>
     <message>
         <source>&lt;p&gt;The IMAP connection was refused.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;De IMAP verbinding is geweigerd.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;The host was not found.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;De host is niet gevonden.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;There was an error while reading from the socket.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Er was een fout bij het lezen van de bron.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Login failed. Check your password/username.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Inloggen mislukt. Controleer uw gebruikersnaam/wachtwoord.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unknown error was encountered.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Een onbekende fout is opgetreden.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Disconnected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbinding verbroken.</translation>
     </message>
     <message>
         <source>Login successfull!</source>
-        <translation type="unfinished"></translation>
+        <translation>Inloggen succesvol!</translation>
     </message>
     <message>
         <source>&lt;p&gt;Login failed. Go away.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Inloggen mislukt. Ga weg!&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Renaming successfull!</source>
-        <translation type="unfinished"></translation>
+        <translation>Hernoemen succesvol!</translation>
     </message>
     <message>
         <source>&lt;p&gt;Renaming failed. (Server said: %1)&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Hernoemen mislukt. (Zerver zei: %1)&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Deletion successfull!</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijderen succesvol!</translation>
     </message>
     <message>
         <source>&lt;p&gt;Delete failed. (Server said: %1)&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Verwijderen mislukt. (Server zei: %1)&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Folder created. Rescanning...</source>
-        <translation type="unfinished"></translation>
+        <translation>Map aangemaakt. Vernieuwen...</translation>
     </message>
     <message>
         <source>&lt;p&gt;The folder could not be created. (Server said: %1)&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Map maken mislukt. (Server zei: %1)&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Couldn&apos;t open folder cache file for writing!&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Kan mapcache bestand niet wijzigen!&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Got folder list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mappenlijst opgehaald.</translation>
     </message>
     <message>
         <source>&lt;p&gt;Couldn&apos;t retrieve the folder list. (Server said: %1)&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Mappenlijst ophalen mislukt. (Server zei: %1)&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
     <name>MailTable</name>
     <message>
         <source>From</source>
-        <translation type="unfinished"></translation>
+        <translation>Van</translation>
     </message>
     <message>
         <source>Subject</source>
-        <translation type="unfinished"></translation>
+        <translation>Onderwerp</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopie</translation>
     </message>
     <message>
         <source>Seen</source>
-        <translation type="unfinished"></translation>
+        <translation>Gezien</translation>
     </message>
     <message>
         <source>Unseen</source>
-        <translation type="unfinished"></translation>
+        <translation>Niet gezien</translation>
     </message>
     <message>
         <source>Marked</source>
-        <translation type="unfinished"></translation>
+        <translation>Gemarkeerd</translation>
     </message>
     <message>
         <source>Unmarked</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongemarkeerd</translation>
     </message>
     <message>
         <source>Mark as...</source>
-        <translation type="unfinished"></translation>
+        <translation>Markeer als...</translation>
     </message>
     <message>
         <source>Delete Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder mail</translation>
     </message>
     <message>
         <source>Mailbox contained no mails.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mailbox bavat geen mails.</translation>
     </message>
     <message>
         <source>Getting mail headers...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ophalen mailheaders...</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout</translation>
     </message>
     <message>
         <source>&lt;p&gt;An error occoured during the selection of the mailbox. (Server said: %1)&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Fout opgetreden tijdens het selecteren van de mailbox. (Server zei: %1)&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Stopped</source>
-        <translation type="unfinished"></translation>
+        <translation>Gestopt</translation>
     </message>
     <message>
         <source>Got all mail headers.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mailheaders opgehaald.</translation>
     </message>
     <message>
         <source>&lt;font color=#ff0000&gt;Couldn&apos;t fetch mail.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;font color=#ff0000&gt;Kan mail niet ophalen.</translation>
     </message>
 </context>
 <context>
     <name>MainWindowBase</name>
     <message>
         <source>E-Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>E-Mail</translation>
     </message>
     <message>
         <source>Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Mail</translation>
     </message>
     <message>
         <source>Servers</source>
-        <translation type="unfinished"></translation>
+        <translation>Servers</translation>
     </message>
     <message>
         <source>Compose new mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Maak nieuwe mail</translation>
     </message>
     <message>
         <source>Send queued mails</source>
-        <translation type="unfinished"></translation>
+        <translation>Verzend mailwachtrij</translation>
     </message>
     <message>
         <source>Show/hide folders</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbergen/Laten Zien van mappen</translation>
     </message>
     <message>
         <source>Search mails</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoek mails</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuratie</translation>
     </message>
 </context>
 <context>
     <name>OpenDiagBase</name>
     <message>
         <source>Open file...</source>
-        <translation type="unfinished"></translation>
+        <translation>Open bestand...</translation>
     </message>
     <message>
         <source> Stop </source>
-        <translation type="unfinished"></translation>
+        <translation>Stop</translation>
     </message>
     <message>
         <source>&lt;b&gt;%1&lt;/b&gt; kB of &lt;b&gt;%2&lt;/b&gt; kB at &lt;b&gt;%3&lt;/b&gt; kB/s</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;%1&lt;/b&gt; kB van &lt;b&gt;%2&lt;/b&gt; kB met &lt;b&gt;%3&lt;/b&gt; kB/s</translation>
     </message>
     <message>
         <source>[Icon]</source>
-        <translation type="unfinished"></translation>
+        <translation>[Icoon]</translation>
     </message>
     <message>
         <source>&lt;i&gt;application/v-card</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;prograama/v-kaart</translation>
     </message>
     <message>
         <source>Open using an application</source>
-        <translation type="unfinished"></translation>
+        <translation>Open met programma</translation>
     </message>
     <message>
         <source>Save to disk</source>
-        <translation type="unfinished"></translation>
+        <translation>Sla op op disk</translation>
     </message>
     <message>
         <source>Display</source>
-        <translation type="unfinished"></translation>
+        <translation>Geef weer</translation>
     </message>
     <message>
         <source>Save to</source>
-        <translation type="unfinished"></translation>
+        <translation>Sla op naar</translation>
     </message>
     <message>
         <source>RAM</source>
-        <translation type="unfinished"></translation>
+        <translation>RAM</translation>
     </message>
     <message>
         <source>CF</source>
-        <translation type="unfinished"></translation>
+        <translation>CF</translation>
     </message>
     <message>
         <source>SD</source>
-        <translation type="unfinished"></translation>
+        <translation>SD</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>(no name)</source>
-        <translation type="unfinished"></translation>
+        <translation>(geen naam)</translation>
     </message>
     <message>
         <source>&lt;Foldertree not known.&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;mappenboom niet bekend.&gt;</translation>
     </message>
     <message>
         <source>Inbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Inbox</translation>
     </message>
     <message>
         <source>(no from)</source>
-        <translation type="unfinished"></translation>
+        <translation>(geen van)</translation>
     </message>
     <message>
         <source>(no subject)</source>
-        <translation type="unfinished"></translation>
+        <translation>(geen onderwerp)</translation>
     </message>
     <message>
         <source>(no date)</source>
-        <translation type="unfinished"></translation>
+        <translation>(geen datum)</translation>
     </message>
 </context>
 <context>
     <name>RenameBase</name>
     <message>
         <source>Renaming</source>
-        <translation type="unfinished"></translation>
+        <translation>Hernoemen</translation>
     </message>
     <message>
         <source>&lt;div align=center&gt;Renaming</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;div align=center&gt;Hernoemen</translation>
     </message>
     <message>
         <source>&lt;div align=center&gt;to</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;div align=center&gt;naar</translation>
     </message>
 </context>
 <context>
     <name>SearchDiag</name>
     <message>
         <source>Body</source>
-        <translation type="unfinished"></translation>
+        <translation>Inhoud</translation>
     </message>
     <message>
         <source>Header Field</source>
-        <translation type="unfinished"></translation>
+        <translation>Titelveld</translation>
     </message>
     <message>
         <source>Subject</source>
-        <translation type="unfinished"></translation>
+        <translation>Onderwerp</translation>
     </message>
     <message>
         <source>From</source>
-        <translation type="unfinished"></translation>
+        <translation>Van</translation>
     </message>
     <message>
         <source>To</source>
-        <translation type="unfinished"></translation>
+        <translation>Naar</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout</translation>
     </message>
     <message>
         <source>&lt;p&gt;Please enter what to search for.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Voer zoekterm in aub.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>&lt;p&gt;Please select a folder.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Selecteer een map aub.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Please enter a header field to search in.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Selecteer een titelveld om in te zoeken&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Could not select the folder. Aborting. (Server said: %1)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Kan map niet selecteren. Afbreken. (Server zei: %1)</translation>
     </message>
     <message>
         <source>Results</source>
-        <translation type="unfinished"></translation>
+        <translation>Resultaten</translation>
     </message>
     <message>
         <source>&lt;p&gt;No mails match your criteria.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Geen mails voldoen aan zoekopdracht.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Search failed. (Server said: %1)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Zoeken mislukt. (Server zei: %1)&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Couldn&apos;t fetch the mail headers. (Server said: %1)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Ophalen titelvelden mails mislukt. (Server zei: %1)&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
     <name>SearchDiagBase</name>
     <message>
         <source>Mail Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Mail zoeken</translation>
     </message>
     <message>
         <source>&lt;b&gt;Search&amp;nbsp;in:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Zoek&amp;nbsp;in:</translation>
     </message>
     <message>
         <source>&lt;b&gt;For:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;naar:</translation>
     </message>
 </context>
 <context>
     <name>ViewMail</name>
     <message>
         <source>&lt;html&gt;&lt;body&gt;&lt;div align=center&gt;&lt;b&gt;%1&lt;/b&gt;&lt;/div&gt;&lt;b&gt;From:&lt;/b&gt; %2&lt;br&gt;&lt;b&gt;To:&lt;/b&gt; %3&lt;br&gt;%4%5&lt;b&gt;Date:&lt;/b&gt; %6&lt;hr&gt;&lt;font face=fixed&gt;%7&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;body&gt;&lt;div align=center&gt;&lt;b&gt;%1&lt;/b&gt;&lt;/div&gt;&lt;b&gt;Van:&lt;/b&gt; %2&lt;br&gt;&lt;b&gt;Naar:&lt;/b&gt; %3&lt;br&gt;%4%5&lt;b&gt;Datum:&lt;/b&gt; %6&lt;hr&gt;&lt;font face=fixed&gt;%7&lt;/font&gt;</translation>
     </message>
     <message>
         <source>(no subject)</source>
-        <translation type="unfinished"></translation>
+        <translation>(geen onderwerp)</translation>
     </message>
     <message>
         <source>(no from)</source>
-        <translation type="unfinished"></translation>
+        <translation>(geen naam)</translation>
     </message>
     <message>
         <source>(no recipient)</source>
-        <translation type="unfinished"></translation>
+        <translation>(geen ontvanger)</translation>
     </message>
     <message>
         <source>&lt;b&gt;Cc:&lt;/b&gt; %1&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Cc:&lt;/b&gt; %1&lt;br&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Bcc:&lt;/b&gt; %1&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Bcc:&lt;/b&gt; %1&lt;br&gt;</translation>
     </message>
     <message>
         <source>(no date)</source>
-        <translation type="unfinished"></translation>
+        <translation>(geen datum)</translation>
     </message>
     <message>
         <source>Getting mail body from server. Please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Haal gehele mail van server. Wachten aub...</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout</translation>
     </message>
     <message>
         <source>&lt;p&gt;The mail body is not yet downloaded, so you cannot reply yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;De inhoud van de mail is nog niet opgehaald, dus u kunt nog niet antwoorden.</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>&lt;p&gt;The mail body is not yet downloaded, so you cannot forward yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;De inhoud van de mail is nog niet opgehaald, dus u kunt nog niet doorsturen.</translation>
     </message>
     <message>
         <source>&lt;p&gt;I was unable to retrieve the mail from the server. You can try again later or give up.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Kon de mail niet van de server ophalen. Probeer het later nog eens of geef het op.&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
     <name>ViewMailBase</name>
     <message>
         <source>E-Mail by %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Email door %1</translation>
     </message>
     <message>
         <source>Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Mail</translation>
     </message>
     <message>
         <source>Reply</source>
-        <translation type="unfinished"></translation>
+        <translation>Antwoord</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Doorsturen</translation>
     </message>
     <message>
         <source>Attachments</source>
-        <translation type="unfinished"></translation>
+        <translation>Bijlagen</translation>
     </message>
     <message>
         <source>Delete Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder mail</translation>
     </message>
 </context>
 </TS>
