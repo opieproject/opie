@@ -3,12 +3,15 @@ CONFIG      += qt warn_on debug
 DESTDIR     = $(OPIEDIR)/lib
 HEADERS     = 802_11_user.h       \
               dhcp.h              \
+              udp_ports.h         \
               wireless.h          \
-              omanufacturerdb.cpp \
-              onetutils.cpp       \
+              oioctlmap.h         \
+              omanufacturerdb.h   \
+              onetutils.h         \
               onetwork.h          \
               opcap.h
-SOURCES     = omanufacturerdb.cpp \
+SOURCES     = oioctlmap.cpp       \
+              omanufacturerdb.cpp \
               onetutils.cpp       \
               onetwork.cpp        \
               opcap.cpp
@@ -18,8 +21,6 @@ VERSION     = 1.8.1
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 LIBS        += -lpcap
-MOC_DIR     = moc
-OBJECTS_DIR = obj
 
 
 !contains( platform, x11 ) {

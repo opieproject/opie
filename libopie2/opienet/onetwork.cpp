@@ -58,6 +58,11 @@
 
 using namespace std;
 
+#ifndef NODEBUG
+#include <opie2/oioctlmap.h>
+IntStringMap* _ioctlmap = constructIoctlMap();
+#endif
+
 /*======================================================================================
  * ONetwork
  *======================================================================================*/
@@ -187,12 +192,16 @@ void ONetworkInterface::init()
 
 bool ONetworkInterface::ioctl( int call, struct ifreq& ifreq ) const
 {
+    #ifndef NODEBUG
     int result = ::ioctl( _sfd, call, &ifreq );
     if ( result == -1 )
-        qDebug( "ONetworkInterface::ioctl (%s) call %d (0x%04X) - Status: Failed: %d (%s)", name(), call, call, result, strerror( errno ) );
+        qDebug( "ONetworkInterface::ioctl (%s) call %s (0x%04X) - Status: Failed: %d (%s)", name(), (const char*) *(*_ioctlmap)[call], call, result, strerror( errno ) );
     else
-        qDebug( "ONetworkInterface::ioctl (%s) call %d (0x%04X) - Status: Ok.", name(), call, call );
+        qDebug( "ONetworkInterface::ioctl (%s) call %s (0x%04X) - Status: Ok.", name(), (const char*) *(*_ioctlmap)[call], call );
     return ( result != -1 );
+    #else
+    return ::ioctl( _sfd, call, &ifreq ) != -1;
+    #endif
 }
 
 
@@ -883,12 +892,16 @@ int OWirelessNetworkInterface::scanNetwork()
 
 bool OWirelessNetworkInterface::wioctl( int call, struct iwreq& iwreq ) const
 {
+    #ifndef NODEBUG
     int result = ::ioctl( _sfd, call, &iwreq );
     if ( result == -1 )
-        qDebug( "ONetworkInterface::wioctl (%s) call %d (0x%04X) - Status: Failed: %d (%s)", name(), call, call, result, strerror( errno ) );
+        qDebug( "ONetworkInterface::wioctl (%s) call %s (0x%04X) - Status: Failed: %d (%s)", name(), (const char*) *(*_ioctlmap)[call], call, result, strerror( errno ) );
     else
-        qDebug( "ONetworkInterface::wioctl (%s) call %d (0x%04X) - Status: Ok.", name(), call, call );
+        qDebug( "ONetworkInterface::wioctl (%s) call %s (0x%04X) - Status: Ok.", name(), (const char*) *(*_ioctlmap)[call], call );
     return ( result != -1 );
+    #else
+    return ::ioctl( _sfd, call, &iwreq ) != -1;
+    #endif
 }
 
 
