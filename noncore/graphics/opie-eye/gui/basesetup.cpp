@@ -17,7 +17,7 @@ BaseSetup::BaseSetup(Opie::Core::OConfig *a_cfg,QWidget * parent, const char * n
     m_SlideShowTime->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding,QSizePolicy::Fixed));
     m_SlideShowTime->setButtonSymbols( QSpinBox::PlusMinus );
     m_SlideShowTime->setMaxValue( 60 );
-    m_SlideShowTime->setMinValue(0);
+    m_SlideShowTime->setMinValue(1);
     m_SlideShowTime->setValue( 2 );
     m_SlideShowTime->setSuffix(tr(" seconds"));
 
@@ -36,7 +36,7 @@ BaseSetup::BaseSetup(Opie::Core::OConfig *a_cfg,QWidget * parent, const char * n
     m_MainLayout->addItem( spacer1 );
 
     int stime = m_cfg->readNumEntry("base_slideshowtimeout",2);
-    if (stime<0) stime=2;
+    if (stime<1) stime=2;
     if (stime>60) stime=60;
     m_SlideShowTime->setValue(stime);
 
