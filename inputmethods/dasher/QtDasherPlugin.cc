@@ -35,7 +35,7 @@ QSize QtDasherPlugin::sizeHint() const
 
 QtDasherPlugin::~QtDasherPlugin()
 {
-  delete d;
+    delete interface;
 }
 
 void QtDasherPlugin::resetState()

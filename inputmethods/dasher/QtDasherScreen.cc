@@ -77,10 +77,8 @@ long QtDasherScreen::get_time()
 }
 
 QtDasherScreen::~QtDasherScreen()
-{
+{ 
   delete painter;
-  delete interface;
-  delete edit;
 }
 
 QColor QtDasherScreen::getColor(int Color, const Opts::ColorSchemes ColorScheme) const
