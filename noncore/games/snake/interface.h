@@ -36,7 +36,6 @@ public:
 
     void clear(); 
     void createTargets();
-    void welcomescreen();
 
 protected:
     virtual void keyPressEvent(QKeyEvent*); 
@@ -51,6 +50,7 @@ private slots:
     void wait();
     void levelUp();
     void scoreInc();
+    void welcomescreen();
  
 private:
     void showScore(int);

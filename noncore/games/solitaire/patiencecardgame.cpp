@@ -17,6 +17,7 @@
 ** not clear to you.
 **
 **********************************************************************/
+#include <qgfx_qws.h>
 #include "patiencecardgame.h"
 
 
@@ -28,19 +29,35 @@ PatienceCardGame::PatienceCardGame(QCanvas *c, bool snap, QWidget *parent) : Can
     numberOfTimesThroughDeck = 0;
     highestZ = 0;
 
-    circleCross = new CanvasCircleOrCross( 7, 18, canvas() );
-    rectangle = new CanvasRoundRect(  35, 10, canvas() );
+    if ( qt_screen->deviceWidth() < 200 ) {
+	circleCross = new CanvasCircleOrCross( 7, 16, canvas() );
+	rectangle = new CanvasRoundRect(  30, 10, canvas() );
 
-    for (int i = 0; i < 4; i++) {
-	discardPiles[i] = new PatienceDiscardPile( 110 + i * 30, 10, canvas() );
-	addCardPile(discardPiles[i]);
+	for (int i = 0; i < 4; i++) {
+	    discardPiles[i] = new PatienceDiscardPile( 78 + i * 23, 10, canvas() );
+	    addCardPile(discardPiles[i]);
+	}
+	for (int i = 0; i < 7; i++) {
+	    workingPiles[i] = new PatienceWorkingPile( 5 + i * 23, 50, canvas() );
+	    addCardPile(workingPiles[i]);
+	}
+	faceDownDealingPile = new PatienceFaceDownDeck( 5, 10, canvas() );
+	faceUpDealingPile   = new PatienceFaceUpDeck( 30, 10, canvas() );
+    } else {
+	circleCross = new CanvasCircleOrCross( 7, 18, canvas() );
+	rectangle = new CanvasRoundRect(  35, 10, canvas() );
+
+	for (int i = 0; i < 4; i++) {
+	    discardPiles[i] = new PatienceDiscardPile( 110 + i * 30, 10, canvas() );
+	    addCardPile(discardPiles[i]);
+	}
+	for (int i = 0; i < 7; i++) {
+	    workingPiles[i] = new PatienceWorkingPile( 10 + i * 30, 50, canvas() );
+	    addCardPile(workingPiles[i]);
+	}
+	faceDownDealingPile = new PatienceFaceDownDeck( 5, 10, canvas() );
+	faceUpDealingPile   = new PatienceFaceUpDeck( 35, 10, canvas() );
     }
-    for (int i = 0; i < 7; i++) {
-	workingPiles[i] = new PatienceWorkingPile( 10 + i * 30, 50, canvas() );
-	addCardPile(workingPiles[i]);
-    }
-    faceDownDealingPile = new PatienceFaceDownDeck( 5, 10, canvas() );
-    faceUpDealingPile   = new PatienceFaceUpDeck( 35, 10, canvas() );
 }
 
 
@@ -173,7 +190,10 @@ bool PatienceCardGame::mousePressCard( Card *card, QPoint p )
 	    faceUpDealingPile->addCardToTop(item);
 	    item->setCardPile( faceUpDealingPile );
 
-	    item->flipTo( 35, (int)item->y() );
+	    if ( qt_screen->deviceWidth() < 200 )
+		item->flipTo( 30, (int)item->y() );
+	    else
+		item->flipTo( 35, (int)item->y() );
 	}
 	moving = NULL;
 	moved = FALSE;
@@ -195,7 +215,10 @@ bool PatienceCardGame::mousePressCard( Card *card, QPoint p )
 		faceUpDealingPile->addCardToTop(item);
 		item->setCardPile( faceUpDealingPile );
 
-		item->flipTo( 35, (int)item->y(), 8 * flipped );
+		if ( qt_screen->deviceWidth() < 200 )
+		    item->flipTo( 30, (int)item->y(), 8 * flipped );
+		else
+		    item->flipTo( 35, (int)item->y(), 8 * flipped );
 	    }
 	}
 	

@@ -19,14 +19,24 @@
 **********************************************************************/
 
 #include <qpe/categories.h>
+#include <qpe/palmtoprecord.h>
 
-#include <qdialog.h>
+#include <qmessagebox.h>
 #include <qlayout.h>
 #include <qtoolbutton.h>
+#include <qfile.h>
 
 #include "categorywidget.h"
 #include "categoryselect.h"
 
+#include <stdlib.h>
+
+static QString categoryEdittingFileName()
+{
+    QString str = getenv("HOME");
+    str +="/.cateditting";
+    return str;
+}
 
 class CategoryComboPrivate
 {
@@ -57,10 +67,12 @@ public:
     QString mVisibleName;
 };
 
-CategoryCombo::CategoryCombo( QWidget *parent, const char *name )
+CategoryCombo::CategoryCombo( QWidget *parent, const char *name , int width)
     : QComboBox( parent, name )
 {
     d = new CategoryComboPrivate(this);
+    if (width)
+      setFixedWidth(width);
 }
 
 void CategoryCombo::initCombo( const QArray<int> &recCats,
@@ -78,11 +90,15 @@ void CategoryCombo::initCombo( const QArray<int> &recCats,
     clear();
     QStringList slApp;
 
+    QObject::disconnect( this, SIGNAL(activated(int)),
+		      this, SLOT(slotValueChanged(int)) );
+
     QObject::connect( this, SIGNAL(activated(int)),
 		      this, SLOT(slotValueChanged(int)) );
     bool loadOk = d->mCat.load( categoryFileName() );
     slApp = d->mCat.labels( d->mStrAppName, TRUE, Categories::UnfiledLabel );
-    d->mAppCats = d->mCat.ids( d->mStrAppName );
+
+    d->mAppCats = d->mCat.ids( d->mStrAppName, slApp);
 
     int i,
 	j,
@@ -94,9 +110,7 @@ void CategoryCombo::initCombo( const QArray<int> &recCats,
     saveMe = -1;
     if ( recCount > 1 && loadOk ) {
 	it = slApp.begin();
-	insertItem( *it );
-	++it;
-	for ( j = 0; it != slApp.end(); ++it, j++ ) {
+	for ( j = 0; j< (int)(slApp.count()-1); ++it, j++ ) {
 	    // grr... we have to go through and compare...
 	    if ( j < int(d->mAppCats.size()) ) {
 		for ( i = 0; i < recCount; i++ ) {
@@ -111,21 +125,120 @@ void CategoryCombo::initCombo( const QArray<int> &recCats,
 	    }
 	    insertItem( *it );
 	}
+	insertItem( *it );
     } else
 	insertStringList( slApp );
 
     if ( recCount > 0 && loadOk ) {
 	for ( i = 0; i < int(d->mAppCats.size()); i++ ) {
 	    if ( d->mAppCats[i] == recCats[0] ) {
-		setCurrentItem( i + 1 );
+		setCurrentItem( i );
 		break;
 	    }
 	}
     } else
-	setCurrentItem( 0 );  // unfiled
+    {
+	setCurrentItem( slApp.count()-1 );  // unfiled
+    }
+}
+
+// this is a new function by SHARP instead of initCombo()
+QArray<int> CategoryCombo::initComboWithRefind( const QArray<int> &recCats,
+			       const QString &appName)
+{
+    QString visibleName = appName;
+    d->mStrAppName = appName;
+    d->mStrVisibleName = visibleName;
+    clear();
+    QStringList slApp;
+    QArray<int> results;
+
+    QObject::disconnect( this, SIGNAL(activated(int)),
+		      this, SLOT(slotValueChanged(int)) );
+
     QObject::connect( this, SIGNAL(activated(int)),
 		      this, SLOT(slotValueChanged(int)) );
+    bool loadOk = d->mCat.load( categoryFileName() );
+    slApp = d->mCat.labels( d->mStrAppName, TRUE, Categories::UnfiledLabel );
+
+    d->mAppCats = d->mCat.ids( d->mStrAppName, slApp);
+
+    // addition part
+    // make new recCats
+    if (loadOk){
+      int i,j;
+      int value;
+      int rCount = recCats.count();
+      int mCount = d->mAppCats.count();
+
+      for (i=0; i<rCount; i++){
+	value = 0;
+	for (j=0; j<mCount; j++){
+	  if (recCats[i] == d->mAppCats[j]){
+	    value = recCats[i];
+	    break;
+	  }
+	}
+	if (value != 0){
+	  int tmp = results.size();
+	  results.resize( tmp + 1 );
+	  results[ tmp ] = value;
+	}
+      }
+    }
+    else{
+      results = recCats;
+    }
+    // addition end
+
+    int i,
+	j,
+	saveMe,
+	recCount;
+    QStringList::Iterator it;
+    // now add in all the items...
+    recCount = results.count();
+    saveMe = -1;
+    if ( recCount > 1 && loadOk ) {
+	it = slApp.begin();
+	for ( j = 0; j< (int)(slApp.count()-1); ++it, j++ ) {
+
+	    // grr... we have to go through and compare...
+	    if ( j < int(d->mAppCats.size()) ) {
+		for ( i = 0; i < recCount; i++ ) {
+		    if ( results[i] == d->mAppCats[j] ) {
+			(*it).append( tr(" (Multi.)") );
+			if ( saveMe < 0 )
+			    saveMe = j;
+			// no need to continue through the list.
+			break;
+		    }
+		}
+	    }
+	    insertItem( *it );
+	}
+	insertItem( *it );
+    } else
+	insertStringList( slApp );
+
+    if ( recCount > 0 && loadOk ) {
+	for ( i = 0; i < int(d->mAppCats.size()); i++ ) {
+	    if ( d->mAppCats[i] == results[0] ) {
+		setCurrentItem( i );
+		break;
+	    }
+	}
+    } else
+    {
+	setCurrentItem( slApp.count()-1 );  // unfiled
+    }
+/*
+    QObject::connect( this, SIGNAL(activated(int)),
+		      this, SLOT(slotValueChanged(int)) );
+*/
+    return results;
 }
+
 
 CategoryCombo::~CategoryCombo()
 {
@@ -136,13 +249,13 @@ int CategoryCombo::currentCategory() const
 {
     int returnMe;
     returnMe = currentItem();
-    // unfiled is now 0...
-    if ( returnMe == 0 )
+    
+    if ( returnMe == (int)d->mAppCats.count() )
 	returnMe = -1;
     else if ( returnMe > (int)d->mAppCats.count() )  // only happen on "All"
 	returnMe = -2;
     else
-	returnMe =  d->mAppCats[returnMe - 1];
+	returnMe =  d->mAppCats[returnMe];
     return returnMe;
 }
 
@@ -173,34 +286,36 @@ void CategoryCombo::slotValueChanged( int )
     emit sigCatChanged( currentCategory() );
 }
 
-CategorySelect::CategorySelect( QWidget *parent, const char *name )
+CategorySelect::CategorySelect( QWidget *parent, const char *name,int width)
     : QHBox( parent, name ),
       cmbCat( 0 ),
       cmdCat( 0 ),
       d( 0 )
 {
     d = new CategorySelectPrivate();
-    init();
+    init(width);
 }
 
 CategorySelect::CategorySelect( const QArray<int> &vl,
 				const QString &appName, QWidget *parent,
-				const char *name )
+				const char *name ,int width)
     : QHBox( parent, name )
 {
     d = new CategorySelectPrivate( vl );
-    init();
+
+    init(width);
+
     setCategories( vl, appName, appName );
 }
 
 CategorySelect::CategorySelect( const QArray<int> &vl,
 				const QString &appName,
 				const QString &visibleName,
-				QWidget *parent, const char *name )
+				QWidget *parent, const char *name , int width)
     : QHBox( parent, name )
 {
     d = new CategorySelectPrivate( vl );
-    init();
+    init(width);
     setCategories( vl, appName, visibleName );
 }
 
@@ -211,6 +326,17 @@ CategorySelect::~CategorySelect()
 
 void CategorySelect::slotDialog()
 {
+    if (QFile::exists( categoryEdittingFileName() )){
+        QMessageBox::warning(this,tr("Error"),
+	   tr("Sorry, another application is\nediting categories.") );
+        return;
+    }
+
+    QFile f( categoryEdittingFileName() );
+    if ( !f.open( IO_WriteOnly) ){
+        return;
+    }
+
     QDialog editDlg( this, 0, TRUE );
     editDlg.setCaption( tr("Edit Categories") );
     QVBoxLayout *vb = new QVBoxLayout( &editDlg );
@@ -226,6 +352,9 @@ void CategorySelect::slotDialog()
 	d->mRec = ce.newCategories();
 	cmbCat->initCombo( d->mRec, mStrAppName );
     }
+
+    f.close();
+    QFile::remove( categoryEdittingFileName() );
 }
 
 void CategorySelect::slotNewCat( int newUid )
@@ -247,25 +376,26 @@ void CategorySelect::slotNewCat( int newUid )
     emit signalSelected( currentCategory() );
 }
 
-void CategorySelect::setCategories( const QArray<int> &rec,
+QString CategorySelect::setCategories( const QArray<int> &rec,
 				    const QString &appName )
 {
-    setCategories( rec, appName, appName );
+    return setCategories( rec, appName, appName );
 }
 
-void CategorySelect::setCategories( const QArray<int> &rec,
+QString CategorySelect::setCategories( const QArray<int> &rec,
 				    const QString &appName,
 				    const QString &visibleName )
 {
-    d->mRec = rec;
     d->mVisibleName = visibleName;
     mStrAppName = appName;
-    cmbCat->initCombo( rec, appName );
+    d->mRec = cmbCat->initComboWithRefind( rec, appName );
+    return Qtopia::Record::idsToString(d->mRec);
 }
 
-void CategorySelect::init()
+void CategorySelect::init(int width)
 {
-    cmbCat = new CategoryCombo( this );
+    cmbCat = new CategoryCombo( this, 0, width);
+
     QObject::connect( cmbCat, SIGNAL(sigCatChanged(int)),
 		      this, SLOT(slotNewCat(int)) );
     cmdCat = new QToolButton( this );
@@ -312,4 +442,11 @@ void CategorySelect::setAllCategories( bool add )
 	cmbCat->setCurrentItem( cmbCat->count() - 1 );
     } else
 	cmbCat->removeItem( cmbCat->count() - 1 );
+}
+
+// 01.12.21 added
+void CategorySelect::setFixedWidth(int width)
+{
+  width -= cmdCat->width();
+  cmbCat->setFixedWidth(width);
 }

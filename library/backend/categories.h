@@ -71,8 +71,7 @@ public:
 
     /** Returns a sorted list of labels */
     QStringList labels() const;
-    QArray<int> ids( const QStringList &cats ) const;
-    QArray<int> ids() const;
+
     QStringList labels( const QArray<int> &catids ) const;
 
     const QMap<int, QString> &idMap() const { return mIdLabelMap; }
@@ -130,9 +129,8 @@ public:
     bool removeGlobalCategory( const QString &catName );
     bool removeGlobalCategory( int uid );
 
-    QArray<int> ids( const QString &app ) const;
-    QArray<int> ids( const QString &app,
-		     const QStringList &cats ) const;
+    QArray<int> ids( const QString &app, const QStringList &labels) const;
+
     /** Returns the id associated with the app */
     int id( const QString &app, const QString &cat ) const;
     /** Returns the label associated with the id */
@@ -152,10 +150,6 @@ public:
     QStringList labels( const QString &app,
 			bool includeGlobal = TRUE,
 			ExtraLabels extra = NoExtra ) const;
-
-    /** Returns the labels of the categories associated with the uids */
-    QStringList labels( const QString & app,
-			const QArray<int> &catids ) const;
 
     enum DisplaySingle { ShowMulti, ShowAll, ShowFirst };
 

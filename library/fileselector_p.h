@@ -17,37 +17,40 @@
 ** not clear to you.
 **
 **********************************************************************/
-#ifndef WAV_PLUGIN_IMPL_H 
-#define WAV_PLUGIN_IMPL_H
+#ifndef FILESELECTOR_P_H
+#define FILESELECTOR_P_H
 
+#include <qlistview.h>
 
-#include <qpe/mediaplayerplugininterface.h>
+class FileManager;
+class CategoryMenu;
+class FileSelectorViewPrivate;
 
-
-class WavPlugin;
-
-
-class WavPluginImpl : public MediaPlayerPluginInterface
+class FileSelectorView : public QListView
 {
+    Q_OBJECT
+
 public:
-    WavPluginImpl();
-    virtual ~WavPluginImpl();
+    FileSelectorView( const QString &mimefilter, QWidget *parent, const char *name );
+    ~FileSelectorView();
+    void reread();
+    int fileCount() { return count; }
 
-#ifndef QT_NO_COMPONENT
+    void setCategoryFilter(CategoryMenu *);
+protected:
+    void keyPressEvent( QKeyEvent *e );
 
-    QRESULT queryInterface( const QUuid&, QUnknownInterface** );
-    Q_REFCOUNT
+protected slots:
+    void cardMessage( const QCString &, const QByteArray &);
 
-#endif
-
-    virtual MediaPlayerDecoder *decoder();
-    virtual MediaPlayerEncoder *encoder();
-
+    void categoryChanged();
+    
 private:
-    WavPlugin *libmadplugin;
-    ulong ref;
+    QString filter;
+    FileManager *fileManager;
+    int count;
+    FileSelectorViewPrivate *d;
 };
 
 
 #endif
-

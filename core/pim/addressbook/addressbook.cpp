@@ -18,6 +18,8 @@
 **
 **********************************************************************/
 
+#define QTOPIA_INTERNAL_FD
+
 #include "abeditor.h"
 #include "ablabel.h"
 #include "abtable.h"

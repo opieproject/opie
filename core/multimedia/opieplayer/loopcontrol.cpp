@@ -21,6 +21,7 @@
 #ifdef Q_WS_QWS
 #include <qpe/qcopenvelope_qws.h>
 #endif
+#include <qpe/mediaplayerplugininterface.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -30,7 +31,6 @@
 #include "loopcontrol.h"
 #include "videowidget.h"
 #include "audiodevice.h"
-#include "mediaplayerplugininterface.h"
 #include "mediaplayerstate.h"
 
 
@@ -101,19 +101,24 @@ LoopControl::LoopControl( QObject *parent, const char *name )
     audioMutex = new Mutex;
 
     pthread_attr_init(&audio_attr);
-#define USE_REALTIME_AUDIO_THREAD
-#ifdef USE_REALTIME_AUDIO_THREAD
-    // Attempt to set it to real-time round robin
-    if ( pthread_attr_setschedpolicy( &audio_attr, SCHED_RR ) == 0 ) {
-	sched_param params;
-	params.sched_priority = 50;
-	pthread_attr_setschedparam(&audio_attr,&params);
-    } else {
-	qDebug( "Error setting up a realtime thread, reverting to using a normal thread." );
-	pthread_attr_destroy(&audio_attr);
-	pthread_attr_init(&audio_attr);
+
+    if ( getuid() == 0 ) {
+        printf("true, guid = %i\n", getuid());
+
+	// Attempt to set it to real-time round robin
+	if ( pthread_attr_setschedpolicy( &audio_attr, SCHED_RR ) == 0 ) {
+	    sched_param params;
+	    params.sched_priority = 50;
+	    pthread_attr_setschedparam(&audio_attr,&params);
+	} else {
+	    qDebug( "Error setting up a realtime thread, reverting to using a normal thread." );
+	    pthread_attr_destroy(&audio_attr);
+	    pthread_attr_init(&audio_attr);
+	}
     }
-#endif
+//    printf("false, guid = %i\n", getuid());
+    usleep( 100 );
+
     pthread_create(&audio_tid, &audio_attr, (void * (*)(void *))startAudioThread, this);
 }
 

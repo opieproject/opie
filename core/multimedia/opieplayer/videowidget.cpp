@@ -18,13 +18,13 @@
 **
 **********************************************************************/
 #include <qpe/resource.h>
+#include <qpe/mediaplayerplugininterface.h>
 #include <qwidget.h>
 #include <qpainter.h>
 #include <qpixmap.h>
 #include <qslider.h>
 #include <qdrawutil.h>
 #include "videowidget.h"
-#include "mediaplayerplugininterface.h"
 #include "mediaplayerstate.h"
 
 

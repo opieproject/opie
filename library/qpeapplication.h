@@ -117,6 +117,11 @@ private:
     QCopChannel *pidChannel;
 #endif
     QPEApplicationData *d;
+
+    bool reserved_sh;
+
+
+
 };
 
 

@@ -23,20 +23,39 @@
 
 #include <qpe/resource.h>
 
-Obstacle::Obstacle(QCanvas* canvas, int x, int y)
-         : QCanvasSprite(0, canvas)
+
+
+Obstacle::Obstacle(QCanvas* canvas, int y)
+         : QCanvasSprite(0,canvas)
 {
-   newObstacle(x, y);
+    newObstacle(y);
 } 
 
-void Obstacle::newObstacle(int x, int y)
+void Obstacle::newObstacle(int y)
 {
-   QCanvasPixmapArray* obstaclearray = new QCanvasPixmapArray(Resource::findPixmap("snake/wall.png"));
- 
+   QPixmap obstaclePix( Resource::findPixmap("snake/wall.png") );
+   
+   if ( obstaclePix.width() > canvas()->width()*3/5 ) {
+       int w = canvas()->width()*3/5;
+       w = w - w % 16;
+       obstaclePix.resize( w, obstaclePix.height() );
+   }
+
+   QList<QPixmap> pixl;
+   pixl.append( &obstaclePix );
+
+   QPoint nullp;
+   QList<QPoint> pl;
+   pl.append( &nullp );
+   
+   QCanvasPixmapArray* obstaclearray = new QCanvasPixmapArray(pixl, pl);
    setSequence(obstaclearray);
- 
+   
+   int x = ( canvas()->width() - obstaclePix.width() )/2;
+   x = x - x % 16;
+   y = y - y % 16;
    move(x, y);
- 
+   setZ( -100 );
    show();
    canvas()->update();
 }

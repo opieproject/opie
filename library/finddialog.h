@@ -18,6 +18,11 @@
 **
 **********************************************************************/
 
+
+//
+//   DO NOT ATTEMPT TO USE THIS CLASS
+//
+
 #ifndef __FINDDIALOG_H__
 #define __FINDDIALOG_H__
 
@@ -31,9 +36,15 @@ class FindDialog : public QDialog
 {
     Q_OBJECT
 public:
+
+// WARNING: Do *NOT* define this yourself. The SL5xxx from SHARP does NOT
+//      have this class.
+#ifdef QTOPIA_INTERNAL_FD
+
     FindDialog( const QString &appName,
                 QWidget *parent = 0, const char *name = 0, bool modal = TRUE );
     ~FindDialog();
+#endif
 
     QString findText() const;
     void setUseDate( bool show );

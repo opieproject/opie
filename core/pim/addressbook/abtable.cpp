@@ -18,6 +18,8 @@
 **
 **********************************************************************/
 
+#define QTOPIA_INTERNAL_CONTACT_MRE
+
 #include <qpe/categoryselect.h>
 #include <qpe/config.h>
 #include <qpe/stringutil.h>

@@ -36,7 +36,8 @@ class CategoryCombo : public QComboBox
     Q_OBJECT
 
 public:
-    CategoryCombo( QWidget *parent, const char* name = 0 );
+    CategoryCombo( QWidget *parent, const char* name = 0, int width=0);
+
     ~CategoryCombo();
 
     int currentCategory() const;
@@ -45,6 +46,8 @@ public:
     void initCombo( const QArray<int> &recCats, const QString &appName );
     void initCombo( const QArray<int> &recCats, const QString &appName,
 		    const QString &visibleName /* = appName */ );
+
+    QArray<int> initComboWithRefind( const QArray<int> &recCats, const QString &appName );
 
 signals:
     void sigCatChanged( int newUid );
@@ -65,13 +68,16 @@ class CategorySelect : public QHBox
     Q_OBJECT
 public:
     // we need two constructors, the first gets around designer limitations
-    CategorySelect( QWidget *parent = 0, const char *name = 0 );
+
+    CategorySelect( QWidget *parent = 0, const char *name = 0, int width = 0 );
 
     CategorySelect( const QArray<int> &vlCats, const QString &appName,
-		    QWidget *parent = 0, const char *name = 0 );
+		    QWidget *parent = 0, const char *name = 0, 
+		    int width = 0);
     CategorySelect( const QArray<int> &vlCats, const QString &appName,
 		    const QString &visibleName, QWidget *parent = 0,
-		    const char *name = 0 );
+		    const char *name = 0 , int width = 0);
+
     ~CategorySelect();
 
     const QArray<int> &currentCategories() const;
@@ -80,24 +86,26 @@ public:
     // pretty much if you don't set it the constructor, you need to
     // call it here ASAP!
     // however this call is depreciated...
-    void setCategories( const QArray<int> &vlCats, const QString &appName );
-    // use this one instead (for translating )
-    void setCategories( const QArray<int> &vlCats, const QString &appName,
-			const QString &visibleName );
 
+    QString setCategories( const QArray<int> &vlCats, const QString &appName );
+    QString setCategories( const QArray<int> &vlCats, const QString &appName,
+			const QString &visibleName );
     // these were added for find dialog.
     void setRemoveCategoryEdit( bool remove );
     void setAllCategories( bool add );
 
+    void setFixedWidth(int width);
 signals:
     void signalSelected( int );
 
 private slots:
     void slotDialog();
+
+public slots:
     void slotNewCat( int id );
 
 private:
-    void init();
+    void init(int width=0);
     QString mStrAppName;
     CategoryCombo *cmbCat;
     QToolButton *cmdCat;

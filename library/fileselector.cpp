@@ -17,7 +17,13 @@
 ** not clear to you.
 **
 **********************************************************************/
+
+// WARNING: Do *NOT* define this yourself. The SL5xxx from SHARP does NOT
+//      have this class.
+#define QTOPIA_INTERNAL_FSLP
+
 #include "fileselector.h"
+#include "fileselector_p.h"
 #include "global.h"
 #include "resource.h"
 #include "config.h"
@@ -318,17 +324,6 @@ void FileSelector::setCloseVisible( bool b )
 	buttonClose->show();
     else
 	buttonClose->hide();
-}
-
-/*!
-  Sets whether a categories menu is visible, according to \a b.
-*/
-void FileSelector::setCategoriesVisible( bool b )
-{
-    if ( b )
-	d->mb->show();
-    else
-	d->mb->hide();
 }
 
 /*!

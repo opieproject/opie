@@ -23,7 +23,10 @@
 
 #include <qstring.h>
 #include <qapplication.h>
-#include "mediaplayerplugininterface.h"
+#include <qpe/mediaplayerplugininterface.h>
+
+
+// #define OLD_MEDIAPLAYER_API
 
 
 class WavPluginData;
@@ -43,8 +46,7 @@ public:
     bool open( const QString& );
     bool close();
     bool isOpen();
-    //const QString &fileInfo() { return strInfo = qApp->translate( "MediaPlayer", "No Information Available", "media plugin text" ); }
-    const QString &fileInfo() { return strInfo = QString(""); }
+    const QString &fileInfo() { return strInfo = ""; }
 
     // If decoder doesn't support audio then return 0 here
     int audioStreams();
@@ -53,11 +55,14 @@ public:
     int audioSamples( int stream );
     bool audioSetSample( long sample, int stream );
     long audioGetSample( int stream );
-    //bool audioReadMonoSamples( short *output, long samples, long& samplesRead, int stream );
-    //bool audioReadStereoSamples( short *output, long samples, long& samplesRead, int stream );
+#ifdef OLD_MEDIAPLAYER_API
+    bool audioReadMonoSamples( short *output, long samples, long& samplesRead, int stream );
+    bool audioReadStereoSamples( short *output, long samples, long& samplesRead, int stream );
+    bool audioReadSamples( short *output, int channel, long samples, int stream );
+    bool audioReReadSamples( short *output, int channel, long samples, int stream );
+#else
     bool audioReadSamples( short *output, int channels, long samples, long& samplesRead, int stream );
-    //bool audioReadSamples( short *output, int channel, long samples, int stream );
-    //bool audioReReadSamples( short *output, int channel, long samples, int stream );
+#endif
 
     // If decoder doesn't support video then return 0 here
     int videoStreams() { return 0; }
@@ -86,6 +91,8 @@ public:
     bool supportsSMP() { return FALSE; }
     bool supportsStereo() { return TRUE; }
     bool supportsScaling() { return FALSE; }
+
+    long getPlayTime() { return -1; }
 
 private:
     WavPluginData *d;

@@ -58,6 +58,8 @@ public:
     const QArray<int> &categories() const;
     int id() const { return mId; }
 
+    bool linkFileKnown() const { return !mLinkFile.isNull(); }
+
     void execute() const;
     void execute(const QStringList& args) const;
     void removeFiles();
@@ -96,6 +98,7 @@ protected:
 
     virtual void invoke(const QStringList& args) const;
     bool ensureLinkExists() const;
+    void storeLink() const;
 };
 
 class DocLnk : public AppLnk

@@ -75,9 +75,11 @@ void CategoryEdit::setCategories( const QArray<int> &recCats,
 	d = new CategoryEditPrivate( (QWidget*)parent(), name()  );
     d->mStrApp = appName;
     d->mVisible = visibleName;
-    QArray<int> cats = d->mCategories.ids( d->mStrApp );
-    lvView->clear();
+
     QStringList appCats = d->mCategories.labels( d->mStrApp );
+    QArray<int> cats = d->mCategories.ids(d->mStrApp, appCats);
+    lvView->clear();
+
     QStringList::ConstIterator it;
     int i, j;
     for ( i = 0, it = appCats.begin(); it != appCats.end(); i++, ++it ) {

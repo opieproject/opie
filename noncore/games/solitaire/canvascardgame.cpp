@@ -29,6 +29,7 @@
 #include <qmainwindow.h>
 #include <qpe/qpemenubar.h>
 #include <qpainter.h>
+#include <qgfx_qws.h>
 
 #include <stdlib.h>
 #include <limits.h>
@@ -71,14 +72,18 @@ private:
 
 void CanvasCardPile::addCard( CanvasCard *card )
 {
+    int offsetDown = ( qt_screen->deviceWidth() < 200 ) ? 9 : 13;
+    int cardHeight = ( qt_screen->deviceWidth() < 200 ) ? 27 : 36;
+    int cardWidth  = ( qt_screen->deviceWidth() < 200 ) ? 20 : 23;
+
     if ( !firstCard )
 	firstCard = card;
 
-    int height = 36 + pileHeight * 13;
-    setSize( 23, height );
-    pile->resize( 23, height );
+    int height = cardHeight + pileHeight * offsetDown;
+    setSize( cardWidth, height );
+    pile->resize( cardWidth, height );
     QPainter p( pile );
-    p.translate( -card->x(), -card->y() + pileHeight * 13 );
+    p.translate( -card->x(), -card->y() + pileHeight * offsetDown );
     card->draw( p );
     pileHeight++;
 
@@ -99,17 +104,17 @@ void CanvasCardPile::addCard( CanvasCard *card )
     tempImage32.setPixel( 0, 0, alpha );
     tempImage32.setPixel( 0, 1, alpha );
 
-    tempImage32.setPixel( 21, 0, alpha );
-    tempImage32.setPixel( 22, 0, alpha );
-    tempImage32.setPixel( 22, 1, alpha );
+    tempImage32.setPixel( cardWidth - 2, 0, alpha );
+    tempImage32.setPixel( cardWidth - 1, 0, alpha );
+    tempImage32.setPixel( cardWidth - 1, 1, alpha );
     height--;
     tempImage32.setPixel( 1, height, alpha );
     tempImage32.setPixel( 0, height - 1, alpha );
     tempImage32.setPixel( 0, height, alpha );
 
-    tempImage32.setPixel( 21, height, alpha );
-    tempImage32.setPixel( 22, height, alpha );
-    tempImage32.setPixel( 22, height - 1, alpha );
+    tempImage32.setPixel( cardWidth - 2, height, alpha );
+    tempImage32.setPixel( cardWidth - 1, height, alpha );
+    tempImage32.setPixel( cardWidth - 1, height - 1, alpha );
 }
 
 

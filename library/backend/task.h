@@ -72,6 +72,10 @@ private:
     int mPriority;
     QString mDesc;
     TaskPrivate *d;
+    // ADDITION
+    int recordId;
+    int recordInfo;
+    //
 };
 
 #endif

@@ -18,6 +18,8 @@
 **
 **********************************************************************/
 
+#define QTOPIA_INTERNAL_MIMEEXT
+
 #include "applnk.h"
 
 #include <qpe/qpeapplication.h>
@@ -55,6 +57,16 @@ static QString safeFileName(const QString& n)
     return safename;
 }
 
+static bool prepareDirectories(const QString& lf)
+{
+    if ( !QFile::exists(lf) ) {
+	// May need to create directories
+	QFileInfo fi(lf);
+	if ( system(("mkdir -p "+fi.dirPath(TRUE))) )
+	    return FALSE;
+    }
+    return TRUE;
+}
 
 class AppLnkPrivate
 {
@@ -284,6 +296,9 @@ QString AppLnk::file() const
 {
     if ( mFile.isNull() ) {
 	AppLnk* that = (AppLnk*)this;
+	QString ext = MimeType(mType).extension();
+	if ( !ext.isEmpty() )
+	    ext = "." + ext;
 	if ( !mLinkFile.isEmpty() ) {
 	    that->mFile =
 		mLinkFile.right(8)==".desktop" // 8 = strlen(".desktop")
@@ -291,16 +306,21 @@ QString AppLnk::file() const
 	} else if ( mType.contains('/') ) {
 	    that->mFile =
 		QString(getenv("HOME"))+"/Documents/"+mType+"/"+safeFileName(that->mName);
-	    if ( QFile::exists(that->mFile) || QFile::exists(that->mFile+".desktop") ) {
+	    if ( QFile::exists(that->mFile+ext) || QFile::exists(that->mFile+".desktop") ) {
 		int n=1;
 		QString nn;
-		while (QFile::exists((nn=(that->mFile+"_"+QString::number(n))))
+		while (QFile::exists((nn=(that->mFile+"_"+QString::number(n)))+ext)
 			|| QFile::exists(nn+".desktop"))
 		    n++;
 		that->mFile = nn;
 	    }
 	    that->mLinkFile = that->mFile+".desktop";
+	    that->mFile += ext;
 	}
+	prepareDirectories(that->mFile);
+	QFile f(that->mFile);
+	if ( !f.open(IO_WriteOnly) )
+	    that->mFile = QString::null;
 	return that->mFile;
     }
     return mFile;
@@ -318,11 +338,7 @@ QString AppLnk::linkFile() const
 	if ( type().contains('/') ) {
 	    StorageInfo storage;
 	    const FileSystem *fs = storage.fileSystemOf( that->mFile );
-// 	    qDebug("creating lnkFile for %s", mFile.latin1() );
-// 	    if ( fs )
-// 		qDebug("fs is %s", fs->path().latin1() );
 	    if ( fs && fs->isRemovable() ) {
-//		qDebug("isRemovable");
 		that->mLinkFile = fs->path();
 	    } else
 		that->mLinkFile = getenv( "HOME" );
@@ -335,7 +351,7 @@ QString AppLnk::linkFile() const
 		that->mLinkFile = nn;
 	    }
 	    that->mLinkFile += ".desktop";
-//	    qDebug("file is %s", mLinkFile.latin1() );
+	    storeLink();
 	}
 	return that->mLinkFile;
     }
@@ -514,13 +530,7 @@ void AppLnk::setCategories( const QArray<int>& c )
 bool AppLnk::ensureLinkExists() const
 {
     QString lf = linkFile();
-    if ( !QFile::exists(lf) ) {
-	// May need to create directories
-	QFileInfo fi(lf);
-	if ( system(("mkdir -p "+fi.dirPath(TRUE))) )
-	    return FALSE;
-    }
-    return TRUE;
+    return prepareDirectories(lf);
 }
 
 /*!
@@ -535,7 +545,13 @@ bool AppLnk::writeLink() const
     QString lf = linkFile();
     if ( !ensureLinkExists() )
 	return FALSE;
-    Config config( lf, Config::File );
+    storeLink();
+    return TRUE;
+}
+
+void AppLnk::storeLink() const
+{
+    Config config( mLinkFile, Config::File );
     config.setGroup("Desktop Entry");
     config.writeEntry("Name",mName);
     if ( !mIconFile.isNull() ) config.writeEntry("Icon",mIconFile);
@@ -551,9 +567,7 @@ bool AppLnk::writeLink() const
     config.writeEntry( "Categories", sl, ';' );
 
     QCopEnvelope e("QPE/System", "linkChanged(QString)");
-    e << lf;
-
-    return TRUE;
+    e << mLinkFile;
 }
 
 /*!
@@ -586,10 +600,13 @@ QString AppLnk::property(const QString& key) const
 void AppLnk::removeFiles()
 {
     bool valid = isValid();
-    if ( !valid || QFile::remove(linkFile()) ) {
+    if ( !valid || !linkFileKnown() || QFile::remove(linkFile()) ) {
 	if ( QFile::remove(file()) ) {
 	    QCopEnvelope e("QPE/System", "linkChanged(QString)");
-	    e << linkFile();
+	    if ( linkFileKnown() )
+		e << linkFile();
+	    else
+		e << file();
 	} else if ( valid ) {
 	    // restore link
 	    writeLink();
@@ -602,7 +619,7 @@ void AppLnk::removeFiles()
 */
 void AppLnk::removeLinkFile()
 {
-    if ( isValid() && QFile::remove(linkFile()) ) {
+    if ( isValid() && linkFileKnown() && QFile::remove(linkFile()) ) {
 	QCopEnvelope e("QPE/System", "linkChanged(QString)");
 	e << linkFile();
     }
@@ -1083,7 +1100,7 @@ void DocLnk::invoke(const QStringList& args) const
     const AppLnk* app = mt.application();
     if ( app ) {
 	QStringList a = args;
-	if ( QFile::exists( linkFile() ) )
+	if ( linkFileKnown() && QFile::exists( linkFile() ) )
 	    a.append(linkFile());
 	else
 	    a.append(file());

@@ -78,6 +78,8 @@ private:
     QValueList<Event> repeatEvents; // the repeating events...
     DateBookDBPrivate *d;
     QFile journalFile;
+
+    int	recordIdMax;  // ADDITION
 };
 
 /* helper functions, also useful to other apps. */

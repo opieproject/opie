@@ -19,7 +19,10 @@
 **********************************************************************/
 #include "libmpeg3plugin.h"
 
-/*
+
+#ifdef OLD_MEDIAPLAYER_API
+
+
 bool LibMpeg3Plugin::audioReadSamples( short *output, int channel, long samples, int stream ) {
     return file ? mpeg3_read_audio( file, 0, output, 0, channel, samples, stream ) == 1 : FALSE; 
 }
@@ -58,7 +61,10 @@ bool LibMpeg3Plugin::audioReadStereoSamples( short *output, long samples, long& 
     samplesRead = samples;
     return err;
 }
-*/
+
+
+#else
+
 
 bool LibMpeg3Plugin::audioReadSamples( short *output, int channels, long samples, long& samplesRead, int stream ) {
     samplesRead = samples;
@@ -73,6 +79,10 @@ bool LibMpeg3Plugin::audioReadSamples( short *output, int channels, long samples
     }
     return FALSE;
 }
+
+
+#endif
+
 
 bool LibMpeg3Plugin::videoReadFrame( unsigned char **output_rows, int in_x, int in_y, int in_w, int in_h, ColorFormat color_model, int stream ) {
     int format = MPEG3_RGB565;

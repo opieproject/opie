@@ -25,7 +25,10 @@
 #include <qapplication.h>
 #include "libmpeg3.h"
 #include "mpeg3protos.h"
-#include "mediaplayerplugininterface.h"
+#include <qpe/mediaplayerplugininterface.h>
+
+
+// #define OLD_MEDIAPLAYER_API
 
 
 class LibMpeg3Plugin : public MediaPlayerDecoder {
@@ -42,7 +45,7 @@ public:
     bool open( const QString& fileName ) { file = mpeg3_open( (char *)fileName.latin1() ); return file != NULL; }
     bool close() { if ( file ) { int r = mpeg3_close( file ); file = NULL; return r == 1; } return FALSE; }
     bool isOpen() { return file != NULL; }
-    const QString &fileInfo() { return strInfo = QString( "" ); }
+    const QString &fileInfo() { return strInfo = ""; }
 
     // If decoder doesn't support audio then return 0 here
     int audioStreams() { return file ? mpeg3_total_astreams( file ) : 0; }
@@ -51,11 +54,14 @@ public:
     int audioSamples( int stream ) { return file ? mpeg3_audio_samples( file, stream ) : 0; } 
     bool audioSetSample( long sample, int stream ) { return file ? mpeg3_set_sample( file, sample, stream) == 1 : FALSE; }
     long audioGetSample( int stream ) { return file ? mpeg3_get_sample( file, stream ) : 0; }
-//    bool audioReadMonoSamples( short *output, long samples, long& samplesRead, int stream );
-//    bool audioReadStereoSamples( short *output, long samples, long& samplesRead, int stream );
+#ifdef OLD_MEDIAPLAYER_API
+    bool audioReadMonoSamples( short *output, long samples, long& samplesRead, int stream );
+    bool audioReadStereoSamples( short *output, long samples, long& samplesRead, int stream );
+    bool audioReadSamples( short *output, int channel, long samples, int stream );
+    bool audioReReadSamples( short *output, int channel, long samples, int stream );
+#else
     bool audioReadSamples( short *output, int channels, long samples, long& samplesRead, int stream );
-//    bool audioReadSamples( short *output, int channel, long samples, int stream );
-//    bool audioReReadSamples( short *output, int channel, long samples, int stream );
+#endif
 
     // If decoder doesn't support video then return 0 here
     int videoStreams() { return file ? mpeg3_total_vstreams( file ) : 0; }
@@ -101,6 +107,8 @@ public:
     bool supportsSMP() { return TRUE; }
     bool supportsStereo() { return TRUE; }
     bool supportsScaling() { return TRUE; }
+
+    long getPlayTime() { return -1; }
 
 private:
     mpeg3_t *file;

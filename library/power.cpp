@@ -102,6 +102,8 @@ bool PowerStatusManager::getProcApmStatus( int &ac, int &bs, int &bf, int &pc, i
 		ps->bs = PowerStatus::Charging;
 		break;
 	    case 0x04:
+	    case 0xff: // 0xff is Unknown but we map to NotPresent
+	    default:
 		ps->bs = PowerStatus::NotPresent;
 		break;
 	}

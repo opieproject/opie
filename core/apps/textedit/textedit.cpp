@@ -253,7 +253,6 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
 
     fileSelector = new FileSelector( "text/*", editorStack, "fileselector" ,
 	    TRUE, FALSE );
-    fileSelector->setCategoriesVisible(TRUE);
     connect( fileSelector, SIGNAL( closeMe() ), this, SLOT( showEditTools() ) );
     connect( fileSelector, SIGNAL( newSelected( const DocLnk &) ), this, SLOT( newFile( const DocLnk & ) ) );
     connect( fileSelector, SIGNAL( fileSelected( const DocLnk &) ), this, SLOT( openFile( const DocLnk & ) ) );
@@ -530,12 +529,6 @@ bool TextEdit::save()
 	if ( docname.isEmpty() )
 	    docname = "Empty Text";
 	doc->setName(docname);
-
-	// append .txt to the file name
-	if ( doc->file().find(".txt") == -1 ) {
-	    QString file = doc->file() + ".txt";
-	    doc->setFile( file );
-	}
     }
 
 	

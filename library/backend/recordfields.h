@@ -39,9 +39,34 @@ namespace Qtopia
 	Suffix,
 	FileAs,
 
+	JobTitle,
+	Department,
+	Company,
+	BusinessPhone,
+	BusinessFax,
+	BusinessMobile,
+
 	// email
 	DefaultEmail,
 	Emails,
+
+	HomePhone,
+	HomeFax,
+	HomeMobile,
+
+	// business
+	BusinessStreet,
+	BusinessCity,
+	BusinessState,
+	BusinessZip,
+	BusinessCountry,
+	BusinessPager,
+	BusinessWebPage,
+
+	Office,
+	Profession,
+	Assistant,
+	Manager,
 
 	// home
 	HomeStreet,
@@ -49,29 +74,7 @@ namespace Qtopia
 	HomeState,
 	HomeZip,
 	HomeCountry,
-	HomePhone,
-	HomeFax,
-	HomeMobile,
 	HomeWebPage,
-
-	// business
-	Company,
-	BusinessStreet,
-	BusinessCity,
-	BusinessState,
-	BusinessZip,
-	BusinessCountry,
-	BusinessWebPage,
-	JobTitle,
-	Department,
-	Office,
-	BusinessPhone,
-	BusinessFax,
-	BusinessMobile,
-	BusinessPager,
-	Profession,
-	Assistant,
-	Manager,
 
 	//personal
 	Spouse,
@@ -84,6 +87,9 @@ namespace Qtopia
 	// other
 	Notes,
 	Groups
+
+	,rid,
+	rinfo
     };
 
     // dataset = "todolist"
@@ -95,7 +101,10 @@ namespace Qtopia
 	Completed,
 	TaskDescription,
 	Priority,
-	Date	
+	Date,
+
+	TaskRid,
+	TaskRinfo
     };
 
     // dataset = "categories" for todos
@@ -128,6 +137,9 @@ namespace Qtopia
 	RepeatPatternDays,
 	RepeatPatternHasEndDate,
 	RepeatPatternEndDate,	
+
+	DateBookRid,
+	DateBookRinfo
     };
 };
 
