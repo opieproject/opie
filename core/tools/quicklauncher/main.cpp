@@ -227,7 +227,7 @@ int main( int argc, char** argv )
 
         /* make sure libopie gets lined in */
         {
-            OWait item;
+            Opie::Ui::OWait item;
         }
 
 	// Create a widget to force initialization of title bar images, etc.
