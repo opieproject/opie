@@ -48,6 +48,7 @@ class Today : public TodayBase
     void getDates();
     void getTodo();
     void getMail();
+    void autoStart();
     QList<TodoItem> loadTodo(const char *filename);
  private:
     DateBookDB *db;

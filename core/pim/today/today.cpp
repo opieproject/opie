@@ -50,6 +50,7 @@ int SHOW_LOCATION;
 int SHOW_NOTES;
 // show only later dates
 int ONLY_LATER;
+int AUTOSTART;
 /* 
  *  Constructs a Example which is a child of 'parent', with the 
  *  name 'name' and widget flags set to 'f' 
@@ -61,9 +62,26 @@ Today::Today( QWidget* parent,  const char* name, WFlags fl )
   QObject::connect( (QObject*)DatesButton, SIGNAL( clicked() ), this, SLOT(startDatebook() ) );
   QObject::connect( (QObject*)MailButton, SIGNAL( clicked() ), this, SLOT(startMail() ) );
  
+  
+  autoStart();
   draw();
 }
 
+
+void Today::autoStart() {
+  Config cfg("today");
+  cfg.setGroup("Autostart"); 
+  AUTOSTART = cfg.readNumEntry("autostart",1);
+  if (AUTOSTART) {
+    QCopEnvelope e("QPE/System", "autoStart(QString,QString)");
+    e << QString("add");
+    e << QString("today");
+  } else {
+    QCopEnvelope e("QPE/System", "autoStart(QString,QString)");
+    e << QString("remove");
+    e << QString("today");
+  }
+}
 
 void Today::draw() {
   init();
@@ -76,9 +94,9 @@ void Today::draw() {
 
 void Today::init() {
   QDate date = QDate::currentDate();
-  QString time = (date.toString());
+  QString time = (tr( date.toString() ), white);
   
-  TextLabel1->setText("<qt><font color=white>" +time + "<font></qt>");
+  TextLabel1->setText(time);
   db = new DateBookDB;
   
   // read config
@@ -123,6 +141,8 @@ void Today::startConfig() {
   // only later
   conf->CheckBox3->setChecked(ONLY_LATER);
   
+  conf->CheckBoxAuto->setChecked(AUTOSTART);
+
   conf->exec();
   
   int maxlinestask = conf->SpinBox2->value();
@@ -131,16 +151,19 @@ void Today::startConfig() {
   int notes = conf->CheckBox2->isChecked();
   int maxcharclip = conf->SpinBox7->value();
   int onlylater = conf->CheckBox3->isChecked();
-
+  int autostart =conf->CheckBoxAuto->isChecked();
+  
   cfg.writeEntry("maxlinestask",maxlinestask);
   cfg.writeEntry("maxcharclip", maxcharclip); 
   cfg.writeEntry("maxlinesmeet",maxmeet);
   cfg.writeEntry("showlocation",location);
   cfg.writeEntry("shownotes", notes);
   cfg.writeEntry("onlylater", onlylater);
+  cfg.setGroup("Autostart");
+  cfg.writeEntry("autostart", autostart);
   // sync it to "disk"
   cfg.write(); 
-  
+  autoStart();
   draw();
 }
 
@@ -224,7 +247,7 @@ void Today::getDates() {
       }
     }
     if (msg.isEmpty()) {
-      msg = "No more appointments today";
+      msg = tr("No more appointments today");
     }
     DatesField->setText(msg);
   }
@@ -340,16 +363,16 @@ void Today::getTodo() {
   
   if (count > 0) {
     if( count == 1 ) {
-      output = QString("There is <b> 1</b> active task:  <br>" );
+      output = tr("There is <b> 1</b> active task:  <br>" );
     } else {
-      output = QString("There are <b> %1</b> active tasks: <br>").arg(count);
+      output = tr("There are <b> %1</b> active tasks: <br>").arg(count);
     }
     output += tmpout;
   } else {
-    output = ("No active tasks");
+    output = tr("No active tasks");
   }
   
-  TodoField->setText(output);
+  TodoField->setText(tr(output));
 }
 
 /*
