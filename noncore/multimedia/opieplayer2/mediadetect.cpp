@@ -9,16 +9,18 @@ MediaDetect::~MediaDetect() {
 }
 
 char MediaDetect::videoOrAudio( const QString& fileName ) {
-    if( fileName.right(4) == ".avi" ||
-        fileName.right(4) == ".mpg" ||
-        fileName.right(4) == ".asf" ||
-        fileName.right(4) == ".mov" ||
-        fileName.right(5) == ".mpeg"  ) {
+    if( (fileName.lower()).right(4) == ".avi" ||
+        (fileName.lower()).right(4) == ".mpg" ||
+        (fileName.lower()).right(4) == ".asf" ||
+        (fileName.lower()).right(4) == ".mov" ||
+        (fileName.lower()).right(5) == ".mpeg"  ) {
+        qDebug("Video out taken");
         return 'v';
-    } else if ( fileName.right(4) == ".avi" ||
-                fileName.right(4) == ".mp3" ||
-                fileName.right(4) == ".ogg" ||
-                fileName.right(4) == ".wav" ) {
+    } else if ( (fileName.lower()).right(4) == "·mp1" ||
+                (fileName.lower()).right(4) == ".mp3" ||
+                (fileName.lower()).right(4) == ".ogg" ||
+                (fileName.lower()).right(4) == ".wav" ) {
+        qDebug("AUDIO out taken");
         return 'a';
     } else {
          return 'f';
@@ -27,9 +29,9 @@ char MediaDetect::videoOrAudio( const QString& fileName ) {
 
 bool MediaDetect::isStreaming( const QString& fileName ) {
     // ugly
-    if( fileName.left(4) == "http" ) {
+    if( (fileName.lower()).left(4) == "http" ) {
         return true;
-    } else if (fileName.left(3) == "ftp" ) {
+    } else if ( (fileName.lower()).left(3) == "ftp" ) {
         return true;
     } else {
         return false;
