@@ -11,7 +11,7 @@
  ***************************************************************************/
 #include "advancedfm.h"
 
-#include <opie/otabwidget.h>
+#include <opie/osplitter.h>
 #include <qpe/storage.h>
 
 #include <qpe/qpeapplication.h>
@@ -130,7 +130,7 @@ void AdvancedFm::init() {
   layout->addWidget( lineBox );
 
 
-  TabWidget = new OTabWidget( this, "TabWidget",/* OTabWidget::Global | */OTabWidget::IconTab);
+  TabWidget = new OSplitter( Horizontal, this, "TabWidget" );
 //  TabWidget = new QTabWidget( this, "TabWidget" );
   layout->addWidget( TabWidget, 4 );
 
@@ -153,7 +153,7 @@ void AdvancedFm::init() {
 
   tabLayout->addWidget( Local_View, 0, 0 );
 
-  TabWidget->addTab( tab,"advancedfm/smFileBrowser.png", tr("1"));
+  TabWidget->addWidget( tab,"advancedfm/smFileBrowser.png", tr("1"));
 //  TabWidget->insertTab( tab, tr("1"));
 
   tab_2 = new QWidget( TabWidget, "tab_2" );
@@ -176,7 +176,8 @@ void AdvancedFm::init() {
 
   tabLayout_2->addWidget( Remote_View, 0, 0 );
 
-  TabWidget->addTab( tab_2, "advancedfm/smFileBrowser.png",tr( "2"));
+  TabWidget->addWidget( tab_2, "advancedfm/smFileBrowser.png",tr( "2"));
+  TabWidget->setSizeChange( 370 );
 //  TabWidget->insertTab( tab_2, tr( "2"));
 
   /*     tab_3 = new QWidget( TabWidget, "tab_3" );
@@ -232,7 +233,7 @@ void AdvancedFm::init() {
   filterStr="*";
   b=FALSE;
   showMenuHidden();
-  TabWidget->setCurrentTab(0);
+  TabWidget->setCurrentWidget(0);
 
 }
 

@@ -30,7 +30,7 @@
 #include <qtimer.h>
 #include <qpixmap.h>
 
-class OTabWidget;
+class OSplitter;
 class QVBoxLayout;
 class QHBoxLayout;
 class QGridLayout;
@@ -90,7 +90,7 @@ protected slots:
 
 protected:
 
-   OTabWidget *TabWidget;
+   OSplitter *TabWidget;
    QCopChannel * channel;
    QPixmap unknownXpm;
    int whichTab;

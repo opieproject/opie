@@ -16,7 +16,7 @@
 //  #include <opie/ofileselector.h>
 //  #include <opie/ofiledialog.h>
 
-#include <opie/otabwidget.h>
+#include <opie/osplitter.h>
 
 #include <qpe/filemanager.h>
 #include <qpe/qcopenvelope_qws.h>
@@ -218,10 +218,10 @@ void AdvancedFm::rePopulate()
 
   for(int i =1; i < 3; i++)
     {
-      TabWidget->setCurrentTab(i - 1);
+      TabWidget->setCurrentWidget(i - 1);
       populateView();
     }
-  TabWidget->setCurrentTab( tmpTab - 1);
+  TabWidget->setCurrentWidget( tmpTab - 1);
 }
 
 void AdvancedFm::ListClicked(QListViewItem *selectedItem)
@@ -276,13 +276,13 @@ void AdvancedFm::ListPressed( int mouse, QListViewItem *, const QPoint& , int ) 
 
 void AdvancedFm::switchToLocalTab()
 {
-  TabWidget->setCurrentTab(0);
+  TabWidget->setCurrentWidget(0);
   Local_View->setFocus();
 }
 
 void AdvancedFm::switchToRemoteTab()
 {
-  TabWidget->setCurrentTab(1);
+  TabWidget->setCurrentWidget(1);
   Remote_View->setFocus();
 }
 
@@ -862,9 +862,9 @@ QListView * AdvancedFm::OtherView()
 void AdvancedFm::setOtherTabCurrent()
 {
   if ( whichTab == 1)
-    TabWidget->setCurrentTab(1);
+    TabWidget->setCurrentWidget(1);
   else
-    TabWidget->setCurrentTab(0);
+    TabWidget->setCurrentWidget(0);
 }
 
 void AdvancedFm::qcopReceive(const QCString &msg, const QByteArray &data) {
