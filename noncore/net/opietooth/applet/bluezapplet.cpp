@@ -35,6 +35,8 @@
 #include <qpe/resource.h>
 #include <qpe/config.h>
 
+#include <opie/odevice.h>
+
 #include <qpoint.h>
 #include <qpainter.h>
 #include <qlayout.h>
@@ -45,6 +47,8 @@
 #include <qpopupmenu.h>
 
 #include <device.h>
+
+using namespace Opie;
 
 namespace OpieTooth {
 
@@ -81,10 +85,18 @@ namespace OpieTooth {
 
     int BluezApplet::setBluezStatus(int c) {
 
-        if (c == 1) {
-            btDevice = new Device("/dev/ttySB0", "bcsp", "230400" );
+        if ( c == 1 ) {
+            switch ( ODevice::inst()->model() ) {
+            case Model_iPAQ_H39xx:
+                btDevice = new Device( "/dev/tts/1", "bcsp", "921600" );
+                break;
+
+            default:
+                btDevice = new Device( "/dev/ttySB0", "bcsp", "230400" );
+                break;
+            }
         } else {
-            if (btDevice) {
+            if ( btDevice ) {
                 delete btDevice;
                 btDevice = 0;
             }
@@ -117,8 +129,8 @@ namespace OpieTooth {
         menu->insertItem( tr("Launch manager"), 2 );
 
         menu->insertSeparator(6);
-        menu->insertItem( tr("Signal strength"), signal,  5);
-        menu->insertSeparator(8);
+        //menu->insertItem( tr("Signal strength"), signal,  5);
+        //menu->insertSeparator(8);
 
         if (bluezDiscoveryActive) {
             menu->insertItem( tr("Disable discovery"), 3 );
