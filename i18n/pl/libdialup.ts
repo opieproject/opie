@@ -3,7 +3,7 @@
     <name>DialupBase</name>
     <message>
         <source>Dial-up </source>
-        <translation type="unfinished"></translation>
+        <translation>Dial-up</translation>
     </message>
     <message>
         <source>Account</source>
@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>Modem</source>
-        <translation type="unfinished"></translation>
+        <translation>Modem</translation>
     </message>
     <message>
         <source>AT-dial:</source>
@@ -35,39 +35,39 @@
     </message>
     <message>
         <source>ATDT</source>
-        <translation type="unfinished"></translation>
+        <translation>ATDT</translation>
     </message>
     <message>
         <source>ATDP</source>
-        <translation type="unfinished"></translation>
+        <translation>ATDP</translation>
     </message>
     <message>
         <source>Speed:</source>
-        <translation>Predkosc:</translation>
+        <translation>Szybkosc:</translation>
     </message>
     <message>
         <source>4800</source>
-        <translation type="unfinished"></translation>
+        <translation>4800</translation>
     </message>
     <message>
         <source>9600</source>
-        <translation type="unfinished"></translation>
+        <translation>9600</translation>
     </message>
     <message>
         <source>19200</source>
-        <translation type="unfinished"></translation>
+        <translation>19200</translation>
     </message>
     <message>
         <source>38400</source>
-        <translation type="unfinished"></translation>
+        <translation>38400</translation>
     </message>
     <message>
         <source>57600</source>
-        <translation type="unfinished"></translation>
+        <translation>57600</translation>
     </message>
     <message>
         <source>115200</source>
-        <translation type="unfinished"></translation>
+        <translation>115200</translation>
     </message>
     <message>
         <source>Wait time:</source>
@@ -75,11 +75,11 @@
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>sec</source>
-        <translation type="unfinished"></translation>
+        <translation>sek</translation>
     </message>
     <message>
         <source>Flow control:</source>
@@ -87,7 +87,7 @@
     </message>
     <message>
         <source>Hardware flow control</source>
-        <translation>Sprzetowa</translation>
+        <translation>Sprzetowa kontrola przeplywu</translation>
     </message>
     <message>
         <source>Demand Dialing</source>
@@ -95,7 +95,7 @@
     </message>
     <message>
         <source>Manual connect and disconnect</source>
-        <translation>Reczne</translation>
+        <translation>Reczne laczenie i odlaczanie</translation>
     </message>
     <message>
         <source> seconds</source>
@@ -103,15 +103,15 @@
     </message>
     <message>
         <source>Idle timeout:</source>
-        <translation>Czas bezczynnosci</translation>
+        <translation>Czas bezczynnosci:</translation>
     </message>
     <message>
         <source>Automatic connect and disconnect</source>
-        <translation>Automatyczne</translation>
+        <translation>Automatyczne laczenie i odlaczanie</translation>
     </message>
     <message>
         <source>Manual connect, automatic disconnect</source>
-        <translation>Reczne dzwonienie, automatyczne rozlaczanie</translation>
+        <translation>Reczne laczenie, automatyczne odlaczanie</translation>
     </message>
     <message>
         <source>Network</source>
@@ -119,7 +119,7 @@
     </message>
     <message>
         <source>Auto-detect name servers</source>
-        <translation>Rozpoznaj serwery nazw</translation>
+        <translation>Rozpoznawaj serwery nazw</translation>
     </message>
     <message>
         <source>Gateway</source>
@@ -143,26 +143,26 @@
     </message>
     <message>
         <source>Device:</source>
-        <translation type="unfinished"></translation>
+        <translation>Urzadzenie:</translation>
     </message>
     <message>
         <source>IrDA</source>
-        <translation type="unfinished"></translation>
+        <translation>IrDA</translation>
     </message>
     <message>
         <source>PCMCIA</source>
-        <translation type="unfinished"></translation>
+        <translation>PCMCIA</translation>
     </message>
     <message>
         <source>Serial</source>
-        <translation type="unfinished"></translation>
+        <translation>Szeregowe</translation>
     </message>
 </context>
 <context>
     <name>PppMon</name>
     <message>
         <source>Waiting for activity</source>
-        <translation>Oczekiwanie na aktywacje</translation>
+        <translation>Oczekiwanie na aktywnosc</translation>
     </message>
     <message>
         <source>Initializing modem</source>
@@ -233,15 +233,15 @@
     </message>
     <message>
         <source>HTTP:</source>
-        <translation type="unfinished"></translation>
+        <translation>HTTP:</translation>
     </message>
     <message>
         <source>FTP:</source>
-        <translation type="unfinished"></translation>
+        <translation>FTP:</translation>
     </message>
     <message>
         <source>Host:</source>
-        <translation type="unfinished"></translation>
+        <translation>Host:</translation>
     </message>
     <message>
         <source>No proxies for:</source>
