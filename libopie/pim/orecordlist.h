@@ -89,7 +89,7 @@ public:
      */
     ORecordList () {
     }
-    ORecordList( const QArray<int>& ids,
+ORecordList( const QArray<int>& ids,
                  const Base* );
     ~ORecordList();
 
@@ -110,7 +110,12 @@ public:
 
     T operator[]( uint i );
     int uidAt(uint i );
-     // FIXME implemenent remove
+
+   /** 
+    * Remove the contact with given uid
+    */
+    bool remove( int uid );
+
     /*
       ConstIterator begin()const;
       ConstIterator end()const;
@@ -159,7 +164,7 @@ ORecordListIterator<T> &ORecordListIterator<T>::operator=( const ORecordListIter
 
 template <class T>
 T ORecordListIterator<T>::operator*() {
-    qWarning("operator* %d %d", m_current,  m_uids[m_current] );
+	//qWarning("operator* %d %d", m_current,  m_uids[m_current] );
     if (!m_end )
         m_record = m_temp->find( m_uids[m_current], m_uids, m_current,
                                  m_direction ? Base::Forward :
@@ -269,4 +274,27 @@ template <class T>
 int ORecordList<T>::uidAt( uint i ) {
     return m_ids[i];
 }
+
+template <class T>
+bool ORecordList<T>::remove( int uid ) {
+	QArray<int> copy( m_ids.count() );
+	int counter = 0;
+	bool ret_val = false;
+
+	for (uint i = 0; i < m_ids.count(); i++){
+		if ( m_ids[i] != uid ){
+			copy[counter++] = m_ids[i];
+
+		}else
+			ret_val = true;
+	}
+
+	copy.resize( counter );
+	m_ids = copy;
+
+
+	return ret_val;
+}
+
+
 #endif
