@@ -174,7 +174,7 @@
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
-                                    <string>&amp;Information</string>
+                                    <string>&amp;Start/Stop</string>
                                 </property>
                             </widget>
                             <widget row="0"  column="1" >

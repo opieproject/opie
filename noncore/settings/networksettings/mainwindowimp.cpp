@@ -420,10 +420,10 @@ void MainWindowImp::informationClicked(){
   }
 
   Interface *i = interfaceItems[item];
-  if(!i->isAttached()){
-    QMessageBox::information(this, "Sorry","No information about\na disconnected interface.", QMessageBox::Ok);
-    return;
-  }
+//   if(!i->isAttached()){
+//     QMessageBox::information(this, "Sorry","No information about\na disconnected interface.", QMessageBox::Ok);
+//     return;
+//   }
 
   if(i->getModuleOwner()){
     QWidget *moduleInformation = i->getModuleOwner()->information(i);
