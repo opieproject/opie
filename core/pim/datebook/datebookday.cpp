@@ -303,20 +303,22 @@ void DateBookDay::redraw()
 
 void DateBookDay::getEvents()
 {
-    widgetList.clear();
+	widgetList.clear();
 
-    QValueList<EffectiveEvent> eventList = db->getEffectiveEvents( currDate,
-								   currDate );
-    QValueListIterator<EffectiveEvent> it;
-    for ( it = eventList.begin(); it != eventList.end(); ++it ) {
-        DateBookDayWidget* w = new DateBookDayWidget( *it, this );
-        connect( w, SIGNAL( deleteMe( const Event & ) ),
-                 this, SIGNAL( removeEvent( const Event & ) ) );
-        connect( w, SIGNAL( editMe( const Event & ) ),
-                 this, SIGNAL( editEvent( const Event & ) ) );
-        connect( w, SIGNAL( beamMe( const Event & ) ),
-                 this, SIGNAL( beamEvent( const Event & ) ) );
-        widgetList.append( w );
+	QValueList<EffectiveEvent> eventList = db->getEffectiveEvents( currDate, currDate );
+	QValueListIterator<EffectiveEvent> it;
+	for ( it = eventList.begin(); it != eventList.end(); ++it ) {
+		EffectiveEvent ev=*it;
+		if(!(ev.end().hour()==ev.start().hour() && ev.end().minute()==ev.start().minute())) {	// Skip effective events with no duration. (i.e ending at 00:00)
+			DateBookDayWidget* w = new DateBookDayWidget( *it, this );
+			connect( w, SIGNAL( deleteMe( const Event & ) ),
+						this, SIGNAL( removeEvent( const Event & ) ) );
+			connect( w, SIGNAL( editMe( const Event & ) ),
+						this, SIGNAL( editEvent( const Event & ) ) );
+			connect( w, SIGNAL( beamMe( const Event & ) ),
+						this, SIGNAL( beamEvent( const Event & ) ) );
+			widgetList.append( w );
+		}
     }
 
 }
@@ -360,7 +362,7 @@ void DateBookDay::relayoutPage( bool fromResize )
     setUpdatesEnabled( FALSE );
     if ( !fromResize )
         getEvents();    // no need we already have them!
-
+                            
     widgetList.sort();
     //sorts the widgetList by the heights of the widget so that the tallest widgets are at the beginning
     //this is needed for the simple algo below to work correctly, otherwise some widgets would be drawn outside the view
