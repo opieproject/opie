@@ -1,8 +1,7 @@
 #ifndef __Text_h
 #define __Text_h
 #include <stdio.h>
-#include "zlib/zlib.h"
-//#include <zlib.h>
+#include <zlib.h>
 #include <sys/stat.h>
 
 #include "CExpander.h"
@@ -32,5 +31,9 @@ public:
     {
       _text = _file = fsize;
     }
+  virtual MarkupType PreferredMarkup()
+      {
+	  return cTEXT;
+      }
 };
 #endif

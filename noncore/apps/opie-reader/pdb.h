@@ -4,7 +4,7 @@
  * Palm SDK.  However, I don't want to require the presense of the SDK for a
  * small utility since most Palm owners won't have it.
  *
- * $Id: pdb.h,v 1.1 2002-07-01 23:24:08 llornkcor Exp $
+ * $Id: pdb.h,v 1.3 2002-12-20 01:35:01 llornkcor Exp $
  *
  */
 
@@ -17,6 +17,7 @@
 /* Normal Palm typedefs */
 typedef unsigned char   UInt8;
 typedef unsigned short  UInt16;
+typedef signed short  Int16;
 typedef unsigned long   UInt32;
 typedef UInt32          LocalID;
 

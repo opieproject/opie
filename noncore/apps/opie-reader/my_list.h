@@ -28,6 +28,8 @@ class CList
 	    }
 	}
     }
+  T& first() { return front->data; }
+  T& last() { return back->data; }
   T* operator[](int n)
     {
       node* current = front;
@@ -61,6 +63,7 @@ class CList
 	  back = n;
 	}
     }
+  bool isEmpty() { return (front == NULL); }
   void erase(unsigned int n)
     {
       node* p = front;
@@ -155,9 +158,17 @@ class CList
       {
 	return &(current->data);
       }
+    T* pContent()
+      {
+	return &(current->data);
+      }
     bool operator!=(iterator t)
     {
       return (current != t.current);
+    }
+    bool operator==(iterator t)
+    {
+      return (current == t.current);
     }
   };
   iterator begin()

@@ -1,37 +1,29 @@
 #include <qpe/qpeapplication.h>
-//#include <qmainwindow.h>
 #include "QTReaderApp.h"
 
+#include "signal.h"
+#include "stdio.h"
+#include "time.h"
 
+QTReaderApp* app = NULL;
 
-
-
-/*
-class myapp : public QPEApplication
+void handler(int signum)
 {
- public slots:
-    void receive( const QCString& msg, const QByteArray& data )
-    {
-
-        QDataStream stream( data, IO_ReadOnly );
-        if ( msg == "someMessage(int,int,int)" ) {
-            int a,b,c;
-            stream >> a >> b >> c;
-            ...
-        } else if ( msg == "otherMessage(QString)" ) {
-            ...
-        }
-
-    }
+    if (app != NULL) app->saveprefs();
+    signal(signum, handler);
 }
-*/
 
 int main( int argc, char ** argv )
 {
+    signal(SIGCONT, handler);
+
     QPEApplication a( argc, argv );
 
     QTReaderApp m;
+
     a.showMainDocumentWidget( &m );
+
+    app = &m;
 
     return a.exec();
 }

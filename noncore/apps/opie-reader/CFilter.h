@@ -6,28 +6,13 @@
 
 class CFilter : public CCharacterSource
 {
-  friend class CFilterChain;
+    friend class CFilterChain;
  protected:
-  CCharacterSource* parent;
-public:
-  CFilter() : parent(NULL) {}
-  void setparent(CCharacterSource* p) { parent = p; }
-  virtual ~CFilter() {};
-};
-
-class vanilla : public CFilter
-{
-public:
-  vanilla() {}
-  virtual ~vanilla() {}
-#ifdef _UNICODE
-  virtual tchar getch()
-#else
-  virtual int getch()
-#endif
-  {
-    return parent->getch();
-  }
+    CCharacterSource* parent;
+ public:
+    CFilter() : parent(NULL) {}
+    void setparent(CCharacterSource* p) { parent = p; }
+    virtual ~CFilter() {};
 };
 
 class CFilterChain
@@ -49,7 +34,10 @@ class CFilterChain
 	    }
 	    delete encoder;
 	}
-    int getch() { return front->getch(); }
+    void getch(tchar& ch, CStyle& sty)
+	{
+	    front->getch(ch, sty);
+	}
     void addfilter(CFilter* p)
 	{
 	    if (first == NULL)
@@ -79,276 +67,203 @@ class CFilterChain
 
 class stripcr : public CFilter
 {
-public:
-  stripcr() {}
-  virtual ~stripcr() {}
-#ifdef _UNICODE
-  virtual tchar getch()
-  {
-    tchar ch;
-    do
-      {
-	ch = parent->getch();
-      }
-    while (ch == 13);
-    return ch;
-  }
-#else
-  virtual int getch()
-  {
-    int ch;
-    do
-      {
-	ch = parent->getch();
-      }
-    while (ch == 13);
-    return ch;
-  }
-#endif
+ public:
+    stripcr() {}
+    virtual ~stripcr() {}
+    virtual void getch(tchar& ch, CStyle& sty)
+	{
+	    do
+	    {
+		parent->getch(ch, sty);
+	    }
+	    while (ch == 13);
+	}
 };
 
 class dehyphen : public CFilter
 {
     bool m_bCharWaiting;
     tchar m_nextChar;
+    CStyle m_nextSty;
  public:
     dehyphen() : m_bCharWaiting(false) {}
     virtual ~dehyphen() {}
-    virtual tchar getch()
+    virtual void getch(tchar& ch, CStyle& sty)
 	{
 	    if (m_bCharWaiting)
 	    {
 		m_bCharWaiting = false;
-		return m_nextChar;
+		ch = m_nextChar;
+		sty = m_nextSty;
+		return;
 	    }
-	    tchar ch = parent->getch();
-	    if (ch != '-') return ch;
-	    m_nextChar = parent->getch();
+	    parent->getch(ch, sty);
+	    if (ch != '-') return;
+	    parent->getch(m_nextChar, m_nextSty);
 	    if (m_nextChar != 10)
 	    {
 		m_bCharWaiting = true;
-		return '-';
+		ch = '-';
+		return;
 	    }
-	    return parent->getch();
+	    parent->getch(ch, sty);
 	}
 };
 
 class striphtml : public CFilter
 {
-public:
-  striphtml() {}
-  virtual ~striphtml() {}
-#ifdef _UNICODE
-  virtual tchar getch()
-  {
-    tchar ch;
-    ch = parent->getch();
-    while (ch == '<')
-    {
-	while (ch != '>')
-	{
-	    ch = parent->getch();
-	}
-	ch = parent->getch();
-    }
-    if (ch == '&')
-    {
-	ch = parent->getch();
-	if (ch == '#')
-	{
-	    int id = 0;
-	    while ((ch = parent->getch()) != ';') id = 10*id+ch-'0';
-	    ch = id;
-	}
-    }
-    return ch;
-  }
-#else
-  virtual int getch()
-  {
-    int ch;
-    ch = parent->getch();
-    while (ch == '<')
-    {
-	while (ch != '>')
-	{
-	    ch = parent->getch();
-	}
-	ch = parent->getch();
-    }
-    if (ch == '&')
-    {
-	ch = parent->getch();
-	if (ch == '#')
-	{
-	    int id = 0;
-	    while ((ch = parent->getch()) != ';') id = 10*id+ch-'0';
-	    ch = id;
-	}
-    }
-    return ch;
-  }
-#endif
+    CStyle currentstyle;
+    unsigned short skip_ws();
+    unsigned short skip_ws_end();
+    unsigned short parse_m();
+    void mygetch(tchar& ch, CStyle& sty);
+ public:
+    striphtml() {}
+    virtual ~striphtml() {}
+    virtual void getch(tchar& ch, CStyle& sty);
 };
 
 class unindent : public CFilter
 {
-  tchar lc;
-public:
-  unindent() : lc(0) {}
-  virtual ~unindent() {}
-#ifdef _UNICODE
-  virtual tchar getch()
-  {
-    tchar ch;
-    if (lc == 10)
-      {
-	while ((ch = parent->getch()) == ' ');
-      }
-    else ch = parent->getch();
-    lc = ch;
-    return ch;
-  }
-#else
-  virtual int getch()
-  {
-    int ch;
-    if (lc == 10)
-      {
-	while ((ch = parent->getch()) == ' ');
-      }
-    else ch = parent->getch();
-    lc = ch;
-    return ch;
-  }
-#endif
+    tchar lc;
+ public:
+    unindent() : lc(0) {}
+    virtual ~unindent() {}
+    virtual void getch(tchar& ch, CStyle& sty)
+	{
+	    if (lc == 10)
+	    {
+		do
+		{
+		    parent->getch(ch, sty);
+		}
+		while (ch == ' ');
+	    }
+	    else parent->getch(ch, sty);
+	    lc = ch;
+	    return;
+	}
 };
 
-#ifdef _UNICODE
 class repara : public CFilter
 {
-  tchar tch;
-public:
-  repara() : tch(0) {}
-  virtual ~repara() {}
-  virtual tchar getch()
-  {
-    tchar ch = parent->getch();
-    if (ch == 10)
-      {
-	if (tch == 10)
-	  {
-	    return ch;
-	  }
-	else
-	  {
+    tchar tch;
+ public:
+    repara() : tch(0) {}
+    virtual ~repara() {}
+    virtual void getch(tchar& ch, CStyle& sty)
+	{
+	    parent->getch(ch, sty);
+	    if (ch == 10)
+	    {
+		if (tch == 10)
+		{
+		    return;
+		}
+		else
+		{
+		    tch = ch;
+		    ch = ' ';
+		    return;
+		}
+	    }
 	    tch = ch;
-	    return ' ';
-	  }
-      }
-    tch = ch;
-    return ch;
-  }
+	    return;
+	}
 };
-#else
-class repara : public CFilter
-{
-  int tch;
-public:
-  repara() : tch(0) {}
-  virtual ~repara() {}
-  virtual int getch()
-  {
-    int ch = parent->getch();
-    if (ch == 10)
-      {
-	if (tch == 10)
-	  {
-	    return ch;
-	  }
-	else
-	  {
-	    tch = ch;
-	    return ' ';
-	  }
-      }
-    tch = ch;
-    return ch;
-  }
-};
-#endif
 
 class indenter : public CFilter
 {
-  int amnt;
-  int indent;
-public:
-  indenter(int _a=5) : amnt(_a), indent(0) {}
-  virtual ~indenter() {}
-#ifdef _UNICODE
-  virtual tchar getch()
-    {
-      if (indent > 0)
+    int amnt;
+    int indent;
+    CStyle lsty;
+ public:
+    indenter(int _a=5) : amnt(_a), indent(0) {}
+    virtual ~indenter() {}
+    virtual void getch(tchar& ch, CStyle& sty)
 	{
-	  indent--;
-	  return ' ';
+	    if (indent > 0)
+	    {
+		indent--;
+		ch = ' ';
+		sty = lsty;
+		return;
+	    }
+	    parent->getch(ch, sty);
+	    if (ch == 10)
+	    {
+		indent = amnt;
+		lsty = sty;
+	    }
+	    return;
 	}
-      tchar ch = parent->getch();
-      if (ch == 10)
-	{
-	  indent = amnt;
-	}
-      return ch;
-    }
-#else
-  virtual int getch()
-    {
-      if (indent > 0)
-	{
-	  indent--;
-	  return ' ';
-	}
-      int ch = parent->getch();
-      if (ch == 10)
-	{
-	  indent = amnt;
-	}
-      return ch;
-    }
-#endif
 };
 
 class dblspce : public CFilter
 {
-  bool lastlf;
-public:
-  dblspce() : lastlf(false) {}
-  virtual ~dblspce() {}
-#ifdef _UNICODE
-  virtual tchar getch()
-    {
-      if (lastlf)
+    bool lastlf;
+    CStyle lsty;
+ public:
+    dblspce() : lastlf(false) {}
+    virtual ~dblspce() {}
+    virtual void getch(tchar& ch, CStyle& sty)
 	{
-	  lastlf = false;
-	  return 10;
+	    if (lastlf)
+	    {
+		lastlf = false;
+		ch = 10;
+		sty = lsty;
+		return;
+	    }
+	    parent->getch(ch, sty);
+	    if (lastlf = (ch == 10))
+	    {
+		lsty = sty;
+	    }
+	    return;
 	}
-      tchar ch = parent->getch();
-      lastlf = (ch == 10);
-      return ch;
-    }
-#else
-  virtual int getch()
-    {
-      if (lastlf)
-	{
-	  lastlf = false;
-	  return 10;
-	}
-      int ch = parent->getch();
-      lastlf = (ch == 10);
-      return ch;
-    }
-#endif
 };
 
+class textfmt : public CFilter
+{
+    CStyle currentstyle;
+    tchar lastchar;
+    bool uselast;
+    void mygetch(tchar&, CStyle&);
+ public:
+    textfmt() : lastchar(0), uselast(false) {}
+    virtual ~textfmt() {}
+    virtual void getch(tchar& ch, CStyle& sty);
+};
+
+class embolden : public CFilter
+{
+ public:
+    embolden() {}
+    virtual ~embolden() {}
+    virtual void getch(tchar& ch, CStyle& sty)
+	{
+	    parent->getch(ch, sty);
+	    sty.setBold();
+	}
+};
+
+class remap : public CFilter
+{
+    tchar q[3];
+    int offset;
+    CStyle currentstyle;
+ public:
+    remap() : offset(0) { q[0] = 0; }
+    virtual ~remap() {}
+    virtual void getch(tchar& ch, CStyle& sty);
+};
+
+class PeanutFormatter : public CFilter
+{
+    CStyle currentstyle;
+ public:
+    virtual ~PeanutFormatter() {}
+    virtual void getch(tchar& ch, CStyle& sty);
+};
 #endif

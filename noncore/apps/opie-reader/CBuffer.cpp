@@ -1,35 +1,46 @@
 #include "CBuffer.h"
 
-CBuffer& CBuffer::operator=(const tchar*sztmp)
+CBufferBase& CBufferBase::assign(const void* sztmp, size_t ms)
 {
-  int i;
-  for (i = 0; sztmp[i] != '\0'; i++) (*this)[i] = sztmp[i];
-  (*this)[i] = '\0';
-  return *this;
+    if (ms*membersize > len)
+    {
+	delete [] buffer;
+	buffer = new unsigned char[len = ms*membersize];
+    }
+    memcpy(buffer, sztmp, ms*membersize);
+    return *this;
 }
 
-tchar& CBuffer::operator[](int i)
+CBufferBase::CBufferBase(size_t ms, size_t n = 16) : len(n), membersize(ms)
 {
-  if (i >= len)
-    {
-      tchar *newbuff = new tchar[i+1];
-      memcpy(newbuff,buffer,sizeof(tchar)*len);
-      delete [] buffer;
-      buffer = newbuff;
-      len = i+1;
-    }
-  return buffer[i];
+    buffer = new unsigned char[len*membersize];
+    memset(buffer, 0, len*membersize);
 }
 
-size_t& CSizeBuffer::operator[](int i)
+void* CBufferBase::operator[](int i)
 {
-  if (i >= len)
+    if ((i+1)*membersize > len)
     {
-      size_t *newbuff = new size_t[i+1];
-      memcpy(newbuff,buffer,sizeof(size_t)*len);
-      delete [] buffer;
-      buffer = newbuff;
-      len = i+1;
+	unsigned char* oldbuffer = buffer;
+	buffer = new unsigned char[(i+1)*membersize];
+	memcpy(buffer, oldbuffer, len);
+	memset(buffer+len, 0, (i+1)*membersize-len);
+	len = (i+1)*membersize;
+	delete [] oldbuffer;
     }
-  return buffer[i];
+    return buffer+i*membersize;
+}
+
+size_t CBufferBase::bstrlen(unsigned char* _buffer = NULL)
+{
+    if (_buffer == NULL) _buffer = buffer;
+    unsigned char* zero = new unsigned char[membersize];
+    memset(zero,0,membersize);
+    unsigned char* element = _buffer;
+    while (memcmp(element, zero, membersize) != 0)
+    {
+	element += membersize;
+    }
+    delete [] zero;
+    return (element - _buffer)/membersize;
 }

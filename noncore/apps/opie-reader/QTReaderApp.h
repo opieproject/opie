@@ -23,24 +23,37 @@
 //#define __ISEARCH
 
 #define MAX_ENCODING 6
+#define MAX_ACTIONS 3
 
 #include <qmainwindow.h>
-#include "QTReader.h"
+#include "CExpander.h"
 #include <qlist.h>
 #include <qpe/filemanager.h>
 #include <qmap.h>
 #include <qlineedit.h>
 #include <qstack.h>
 #include <qlistbox.h>
-#include "Queue.h"
+//#include "Queue.h"
 
 class QWidgetStack;
 class QToolButton;
 class QPopupMenu;
 class QToolBar;
+class QPEToolBar;
 class CBkmkSelector;
 class QProgressBar;
 class QAction;
+class CAnnoEdit;
+class QFloatBar;
+class CDrawBuffer;
+class QTReader;
+
+enum ActionTypes
+{
+    cesOpenFile = 0,
+    cesAutoScroll,
+    cesActionMark
+};
 
 #ifdef __ISEARCH
 struct searchrecord
@@ -58,6 +71,7 @@ class QTReaderApp : public QMainWindow
     Q_OBJECT
 
 	unsigned long m_savedpos;
+    bool m_annoIsEditing;
 
 	public:
     QTReaderApp( QWidget *parent = 0, const char *name = 0, WFlags f = 0 );
@@ -68,6 +82,10 @@ class QTReaderApp : public QMainWindow
     void setScrollState(bool _b);
 
  protected:
+    void setfontHelper(const QString& lcn, int size = 0);
+    QAction* m_bkmkAvail;
+    CAnnoEdit* m_annoWin;
+    Bkmk* m_anno;
     void closeEvent( QCloseEvent *e );
 	void readbkmks();
 	void do_mono(const QString&);
@@ -75,11 +93,36 @@ class QTReaderApp : public QMainWindow
 	void do_overlap(const QString&);
 	void do_settarget(const QString&);
 	int EncNameToInt(const QString&);
-	void saveprefs();
+	ActionTypes ActNameToInt(const QString&);
+    bool m_doAnnotation;
+    bool m_doDictionary;
+    bool m_doClipboard;
 
+ public:
+	void saveprefs();
 private slots:
+    void setTwoTouch(bool _b);
+ void restoreFocus();
+ void OnAnnotation(bool _b)
+	{
+	    m_doAnnotation = _b;
+	}
+    void OnDictionary(bool _b)
+	{
+	    m_doDictionary = _b;
+	}
+    void OnClipboard(bool _b)
+	{
+	    m_doClipboard = _b;
+	}
+    void OnWordSelected(const QString&, size_t, const QString&);
+    void addAnno(const QString&, const QString&, size_t);
+    void addAnno(const QString&, const QString&);
+    void addanno();
+    void showAnnotation();
 	void do_setfont(const QString&);
 	void encodingSelected(QAction*);
+	void buttonActionSelected(QAction*);
 	void msgHandler(const QCString&, const QByteArray&);
  void monospace(bool);
 	void jump();
@@ -127,11 +170,15 @@ private slots:
     void showEditTools();
 
     void stripcr(bool);
+    void peanut(bool _b);
+    void remap(bool);
+    void embolden(bool);
+    void autofmt(bool);
+    void textfmt(bool);
     void striphtml(bool);
     void dehyphen(bool);
     void unindent(bool);
     void repara(bool);
-    void setbold(bool);
     void dblspce(bool);
     void pagemode(bool);
     //  void gotobkmk(const QString& bm);
@@ -141,8 +188,11 @@ private slots:
     void do_delmark();
     void do_autogen();
     void do_regaction();
+    void OnRedraw();
+    void OnActionPressed();
 
  private:
+  QString m_targetapp, m_targetmsg;
     void listbkmk();
     void do_regedit();
     void colorChanged( const QColor &c );
@@ -150,6 +200,7 @@ private slots:
     void updateCaption();
     void do_autogen(const QString&);
     void do_addbkmk(const QString&);
+    bool findNextBookmark(size_t start);
 
  private:
 
@@ -157,24 +208,29 @@ private slots:
 
     QAction* m_EncodingAction[MAX_ENCODING];
 
+    QAction* m_buttonAction[MAX_ACTIONS];
+
     CBkmkSelector* bkmkselector;
 
+    ActionTypes m_spaceTarget;
     size_t searchStart;
 #ifdef __ISEARCH
     QStack<searchrecord>* searchStack;
-    bool dosearch(size_t start, CBuffer& test, const QString& arg);
+    bool dosearch(size_t start, CDrawBuffer& test, const QString& arg);
 #else
-    bool dosearch(size_t start, CBuffer& test, const QRegExp& arg);
+    bool dosearch(size_t start, CDrawBuffer& test, const QRegExp& arg);
 #endif
     QWidgetStack *editorStack;
     QTReader* reader;
     QComboBox* m_fontSelector;
-    QToolBar *menu, *editBar, *searchBar, *regBar, *m_fontBar;
+    QPEToolBar /* *menu,*/ *editBar;
+    QFloatBar *searchBar, *regBar/*, *m_fontBar*/;
+    QToolBar /* *searchBar, *regBar,*/ *m_fontBar;
     QLineEdit *searchEdit, *regEdit;
     DocLnk *doc;
     bool searchVisible;
     bool regVisible;
-    bool m_fontVisible;
+    bool m_fontVisible, m_twoTouch;
     bool bFromDocView;
     static unsigned long m_uid;
     long unsigned get_unique_id() { return m_uid++; }
@@ -192,6 +248,7 @@ private slots:
     bool m_fBkmksChanged;
     int m_nRegAction;
     QString m_autogenstr;
+    bool m_dontSave;
 };
 
 const int cAutoGen = 0;

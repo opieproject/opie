@@ -17,7 +17,7 @@ Extensive modification by Tim Wentford to allow it to work in rotated mode
 #include <qlayout.h>
 
 fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags fl , const QString filter, const QString iPath )
-    : QDialog( parent, name, modal, fl )
+    : QDialog( parent, name, modal, fl ), filterspec(QDir::All)
 {
 //    showMaximized();
     if ( !name )
@@ -28,7 +28,15 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
 
     buttonOk = new QPushButton( this, "buttonOk" );
     buttonOk->setFixedSize( 25, 25 );
+    buttonOk->setAutoDefault( false );
     buttonOk->setText( tr( "/" ) );
+
+    buttonShowHidden = new QPushButton( this, "buttonShowHidden" );
+//    buttonShowHidden->setFixedSize( 50, 25 );
+    buttonShowHidden->setText( tr( "Hidden" ) );
+    buttonShowHidden->setAutoDefault( false );
+    buttonShowHidden->setToggleButton( true );
+    buttonShowHidden->setOn( false );
 
     dirLabel = new QLabel(this, "DirLabel");
     dirLabel->setText(currentDir.canonicalPath());
@@ -38,10 +46,10 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
     ListView->setSorting( 2, FALSE);
     ListView->addColumn( tr( "Size" ) );
     ListView->setSelectionMode(QListView::Single);
-
     ListView->setAllColumnsShowFocus( TRUE );
 
     // signals and slots connections
+    connect( buttonShowHidden, SIGNAL( toggled(bool) ), this, SLOT( setHidden(bool) ) );
     connect( buttonOk, SIGNAL( clicked() ), this, SLOT( OnRoot() ) );
     connect( ListView, SIGNAL(doubleClicked( QListViewItem*)), SLOT(listDoubleClicked(QListViewItem *)) );
     connect( ListView, SIGNAL(clicked( QListViewItem*)), SLOT(listClicked(QListViewItem *)) );
@@ -52,6 +60,7 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
     QVBoxLayout* grid = new QVBoxLayout(this);
     QHBoxLayout* hgrid = new QHBoxLayout(grid);
     hgrid->addWidget(dirLabel,1);
+    hgrid->addWidget(buttonShowHidden);
     hgrid->addWidget(buttonOk);
     grid->addWidget(ListView,1);
 
@@ -85,14 +94,14 @@ void fileBrowser::populateList()
     ListView->clear();
 //qDebug(currentDir.canonicalPath());
 //    currentDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::NoSymLinks );
-    currentDir.setFilter( QDir::All );
+    currentDir.setFilter( filterspec );
     currentDir.setSorting(/* QDir::Size*/ /*| QDir::Reversed | */QDir::DirsFirst);
     currentDir.setMatchAllDirs(TRUE);
 
     currentDir.setNameFilter(filterStr);
 //    currentDir.setNameFilter("*.txt;*.etx");
     QString fileL, fileS;
-    const QFileInfoList *list = currentDir.entryInfoList(QDir::All);
+    const QFileInfoList *list = currentDir.entryInfoList();
     QFileInfoListIterator it(*list);
     QFileInfo *fi;
     while ( (fi=it.current()) )
@@ -115,6 +124,7 @@ void fileBrowser::populateList()
     }
     ListView->setSorting( 2, FALSE);
     dirLabel->setText("Current Directory:\n"+currentDir.canonicalPath());
+    ListView->setFocus();
 }
 
 void fileBrowser::upDir()
@@ -182,4 +192,13 @@ void fileBrowser::OnRoot()
 void fileBrowser::OnCancel()
 {
     reject();
+}
+
+void fileBrowser::setHidden(bool _hidden)
+{
+    if (_hidden)
+	filterspec = QDir::All | QDir::Hidden;
+    else
+	filterspec = QDir::All;
+    populateList();
 }

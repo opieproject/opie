@@ -40,6 +40,14 @@ struct tDocRecord0 {
 	DWORD dwSpare2;
 };
 
+struct PeanutHeader
+{
+    UInt16 Version;
+    UInt8 Junk1[6];
+    UInt16 Records;
+    UInt8 Junk2[106];
+};
+
 ////////////// utilities //////////////////////////////////////
 
 inline WORD SwapWord(WORD r)
@@ -53,6 +61,8 @@ inline DWORD SwapLong(DWORD r)
 }
 
 class Aportis : public CExpander, Cpdb {
+    bool peanutfile;
+    void dePeanut(int&);
   DWORD dwLen;
   WORD nRecs2;
   DWORD dwTLen;
@@ -78,6 +88,10 @@ public:
   virtual unsigned int locate();
   virtual void locate(unsigned int n);
   virtual CList<Bkmk>* getbkmklist();
+  virtual MarkupType PreferredMarkup()
+      {
+	  return (peanutfile) ? cPML : cTEXT;
+      }
 private:
   bool refreshbuffer();
   unsigned int GetBS(unsigned int bn);

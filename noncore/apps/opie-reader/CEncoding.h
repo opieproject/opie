@@ -17,37 +17,37 @@ public:
 class CUtf8 : public CEncoding
 {
 public:
-    tchar getch();
+    void getch(tchar& ch, CStyle& sty);
 };
 
 class CUcs16be : public CEncoding
 {
 public:
-    tchar getch();
+    void getch(tchar& ch, CStyle& sty);
 };
 
 class CUcs16le : public CEncoding
 {
 public:
-    tchar getch();
+    void getch(tchar& ch, CStyle& sty);
 };
 
 class Ccp1252 : public CEncoding
 {
 public:
-    virtual tchar getch();
+    void getch(tchar& ch, CStyle& sty);
 };
 
 class CPalm : public Ccp1252
 {
 public:
-    tchar getch();
+    void getch(tchar& ch, CStyle& sty);
 };
 
 class CAscii : public CEncoding
 {
 public:
-    tchar getch();
+    void getch(tchar& ch, CStyle& sty);
 };
 
 #endif

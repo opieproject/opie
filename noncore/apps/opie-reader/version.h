@@ -1,3 +1,5 @@
-#define MAJOR "0"
-#define MINOR "3r"
-#define RELEASE_TYPE "beta(U)"
+
+#define MAJOR 0
+#define BKMKTYPE 5
+#define MINOR 'a'
+#define RELEASE_TYPE "beta"

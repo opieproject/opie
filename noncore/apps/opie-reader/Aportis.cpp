@@ -1,11 +1,57 @@
 #include <stdio.h>
 #include <string.h>
 #include "Aportis.h"
+#include "my_list.h"
+#include "Bkmks.h"
 
-Aportis::Aportis() { /*printf("constructing:%x\n",fin);*/ }
+Aportis::Aportis() : peanutfile(false) { /*printf("constructing:%x\n",fin);*/ }
+
+void Aportis::dePeanut(int& ch)
+{
+    if (peanutfile && ch != EOF)
+    {
+	unsigned char c = ch;
+	if (peanutfile) c ^= 0xa5;
+	ch = c;
+    }
+}
 
 CList<Bkmk>* Aportis::getbkmklist()
 {
+/*
+    if (peanutfile)
+    {
+	if (nRecs2 > nRecs)
+	{
+	    CList<Bkmk>* t = new CList<Bkmk>;
+	    for (int i = nRecs; i < nRecs2; i++)
+	    {
+		char name[17];
+		name[16] = '\0';
+		qDebug("Record:%d, Length:%u",i,recordlength(i));
+		gotorecordnumber(i);
+		fread(name,1,16,fin);
+		unsigned long lcn;
+		fread(&lcn,sizeof(lcn),1,fin);
+		lcn ^= 0xa5a5a5a5;
+		lcn = SwapLong(lcn);
+		qDebug("Bookmark:%s:%u", name,lcn);
+		tchar tname[17];
+		memset(tname, 0, sizeof(tname));
+		for (int i = 0; name[i] != 0; i++)
+		{
+		    tname[i] = name[i] ^ 0xa5;
+		}
+		t->push_back(Bkmk(tname, NULL, lcn));
+	    }
+	    return t;
+	}
+	else
+	{
+	    return NULL;
+	}
+    }
+*/
   if (bCompressed != 4) return NULL;
   CList<Bkmk>* t = new CList<Bkmk>;
   size_t cur = ftell(fin);
@@ -34,7 +80,7 @@ CList<Bkmk>* Aportis::getbkmklist()
 	{
 	    tname[i] = name[i];
 	}
-	t->push_back(Bkmk(tname,lcn));
+	t->push_back(Bkmk(tname, NULL, lcn));
 #else
 	t->push_back(Bkmk(name,lcn));
 #endif
@@ -46,7 +92,6 @@ CList<Bkmk>* Aportis::getbkmklist()
 
 int Aportis::openfile(const char *src)
 {
-
   //  printf("In openfile\n");
   int ret = 0;
 
@@ -55,49 +100,80 @@ int Aportis::openfile(const char *src)
   if (head.creator != 0x64414552 //   'dAER'
       || head.type != 0x74584554) // 'tXET')
     {
-      return -2;
-    }
 
-  gotorecordnumber(0);
-  tDocRecord0 hdr0;
-  fread(&hdr0, sizeof(hdr0), 1, fin);
-  bCompressed = SwapWord(hdr0.wVersion);
-  if (bCompressed!=1 && bCompressed!=2 && bCompressed != 4) {
-    ret = bCompressed;
-    bCompressed = 2;
-  }
-	
-  fseek(fin,0,SEEK_END);
-  dwLen = ftell(fin);
-  nRecs2 = nRecs = SwapWord(head.recordList.numRecords) - 1;
-
-  switch (bCompressed)
-    {
-    case 4:
-      {
-	dwTLen = 0;
-	int i;
-	for (i = 0; i < nRecs; i++)
-	  {
-	    unsigned int bs = GetBS(i);
-	    if (bs == 0) break;
-	    else dwTLen += bs;
-	  }
-	nRecs = i;
-	BlockSize = 0;
-      }
-      break;
-    case 1:
-    case 2:
-    default:
-      dwTLen = SwapLong(hdr0.dwStoryLen);
-      BlockSize = SwapWord(hdr0.wRecSize);
-      if (BlockSize == 0)
+	if (memcmp(&head.creator, "PPrs", 4) == 0 && memcmp(&head.type, "PNRd", 4) == 0)
 	{
-	  BlockSize = 4096;
-	  printf("WARNING: Blocksize not set in source file\n");
+	    peanutfile = true;
+	}
+	else
+	{
+	    return -2;
 	}
     }
+
+  nRecs2 = nRecs = SwapWord(head.recordList.numRecords) - 1;
+  fseek(fin,0,SEEK_END);
+  dwLen = ftell(fin);
+
+  if (peanutfile)
+  {
+      
+      PeanutHeader hdr0;
+      gotorecordnumber(0);
+      fread(&hdr0, sizeof(hdr0), 1, fin);
+      qDebug("Version:%x", ntohs(hdr0.Version));
+      if (hdr0.Version && 0x0200)
+      {
+	  bCompressed = 2;
+      }
+      else
+      {
+	  bCompressed = 1;
+      }
+      BlockSize = 4096;
+      nRecs = SwapWord(hdr0.Records)-1;
+      dwTLen = nRecs*BlockSize;
+  }
+  else
+  {
+      gotorecordnumber(0);
+      tDocRecord0 hdr0;
+      fread(&hdr0, sizeof(hdr0), 1, fin);
+      bCompressed = SwapWord(hdr0.wVersion);
+      if (bCompressed!=1 && bCompressed!=2 && bCompressed != 4) {
+	  ret = bCompressed;
+	  bCompressed = 2;
+      }
+      switch (bCompressed)
+      {
+	  case 4:
+	  {
+	      dwTLen = 0;
+	      int i;
+	      for (i = 0; i < nRecs; i++)
+	      {
+		  unsigned int bs = GetBS(i);
+		  if (bs == 0) break;
+		  else dwTLen += bs;
+	      }
+	      nRecs = i;
+	      BlockSize = 0;
+	  }
+	  break;
+	  case 1:
+	  case 2:
+	  default:
+	      nRecs = SwapWord(hdr0.wNumRecs);
+	      dwTLen = SwapLong(hdr0.dwStoryLen);
+	      BlockSize = SwapWord(hdr0.wRecSize);
+	      if (BlockSize == 0)
+	      {
+		  BlockSize = 4096;
+		  printf("WARNING: Blocksize not set in source file\n");
+	      }
+      }
+  }
+
 
 
   // this is the main record buffer
@@ -106,6 +182,7 @@ int Aportis::openfile(const char *src)
   cbptr = 0;
   outptr = 0;
   refreshbuffer();
+  qDebug("Number of records:[%u,%u]", nRecs, nRecs2);
   return ret;
 }
 
@@ -117,6 +194,7 @@ int Aportis::getch()
       else
 	{
 	  int c = getc(fin);
+	  dePeanut(c);
 	  dwRecLen--;
 	  currentpos++;
 	  return c;
@@ -129,10 +207,11 @@ int Aportis::getch()
     }
   if ((dwRecLen == 0) && !refreshbuffer()) return EOF;
   currentpos++;
-  unsigned int c;
+  int c;
 
   // take a char from the input buffer
   c = getc(fin);
+  dePeanut(c);
   dwRecLen--;
   // separate the char into zones: 0, 1...8, 9...0x7F, 0x80...0xBF, 0xC0...0xFF
 
@@ -152,7 +231,9 @@ int Aportis::getch()
       dwRecLen -= c;
       while(c--)
 	{
-	  circbuf[cbptr = (cbptr+1)%2048] = getc(fin);
+	    int c = getc(fin);
+	    dePeanut(c);
+	    circbuf[cbptr = (cbptr+1)%2048] = c;
 	}
       return circbuf[outptr = (outptr+1)%2048];
     }
@@ -160,7 +241,9 @@ int Aportis::getch()
     {
       int m,n;
       c <<= 8;
-      c += getc(fin);
+      int c1 = getc(fin);
+      dePeanut(c1);
+      c += c1;
       dwRecLen--;
       m = (c & 0x3FFF) >> COUNT_BITS;
       n = c & ((1<<COUNT_BITS) - 1);

@@ -5,41 +5,51 @@
 #include <string.h>
 #include "config.h"
 
-class CBuffer
+
+class CBufferBase
 {
+ protected:
   size_t len;
-  tchar *buffer;
-  CBuffer(const CBuffer&);
+  unsigned char *buffer;
+  size_t membersize;
+  CBufferBase(const CBufferBase&);
  public:
-  CBuffer& operator=(const tchar*sztmp);
-#ifdef _UNICODE
-  size_t length() { return ustrlen(buffer); }
-#else
-  size_t length() { return strlen(buffer); }
-#endif
-  tchar* data() { return buffer; }
-  CBuffer(size_t n = 16) : len(n)
-    {
-      buffer = new tchar[len];
-      buffer[0] = '\0';
-    }
-  ~CBuffer() { delete [] buffer; }
-  tchar& operator[](int i);
+  CBufferBase& assign(const void* sztmp, size_t ms);
+  void* data() { return buffer; }
+  CBufferBase(size_t ms, size_t n = 16);
+  ~CBufferBase() { delete [] buffer; }
+  void* operator[](int i);
+  size_t bstrlen(unsigned char* _buffer = NULL);
+  size_t totallen() { return len; }
 };
 
-class CSizeBuffer
+template<class T>
+class CBufferFace
 {
-  size_t len;
-  size_t *buffer;
-  CSizeBuffer(const CSizeBuffer&);
+    CBufferBase m_buffer;
+ protected:
+  CBufferFace(const CBufferFace&);
  public:
-  size_t* data() { return buffer; }
-  CSizeBuffer(size_t n = 16) : len(n)
-    {
-      buffer = new size_t[len];
-    }
-  ~CSizeBuffer() { delete [] buffer; }
-  size_t& operator[](int i);
+  CBufferFace& operator=(const T* sztmp)
+      {
+	  m_buffer.assign(sztmp, m_buffer.bstrlen(sztmp));
+	  return *this;
+      }
+  void assign(const T* sztmp, size_t n)
+      {
+	  m_buffer.assign(sztmp, n);
+      }
+  size_t length() { return m_buffer.bstrlen(); }
+  size_t totallen() { return m_buffer.totallen(); }
+  T* data() { return (T*)m_buffer.data(); }
+  CBufferFace(size_t n = 16) : m_buffer(sizeof(T), n) {}
+  T& operator[](int i)
+      {
+	  return *((T*)m_buffer[i]);
+      }
 };
+
+typedef CBufferFace<tchar> CBuffer;
+typedef CBufferFace<size_t> CSizeBuffer;
 
 #endif

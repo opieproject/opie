@@ -41,6 +41,10 @@ class ppm_expander : public CExpander {
   virtual void locate(unsigned int n);
   virtual bool hasrandomaccess() { return (numblocks > 1); }
   virtual void sizes(unsigned long& file, unsigned long& text);
+  virtual MarkupType PreferredMarkup()
+      {
+	  return cTEXT;
+      }
 };
 
 #endif

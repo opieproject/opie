@@ -40,6 +40,7 @@ public:
     ~fileBrowser();
 
     QPushButton* buttonOk;
+    QPushButton* buttonShowHidden;
     QtrListView* ListView;
     QPushButton* buttonCancel;
     QLabel *dirLabel;
@@ -47,6 +48,8 @@ public:
     QDir currentDir;
     QFile file;
     QStringList fileList;
+    int filterspec;
+//    QDir::FilterSpec filterspec;
  
 //QListViewItem * item;
 public slots:
@@ -59,6 +62,7 @@ private slots:
         void listClicked(QListViewItem *);
 	void OnRoot();
 	void OnCancel();
+	void setHidden(bool);
 
 protected slots: 
 

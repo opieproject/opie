@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include "ztxt.h"
+#include "my_list.h"
+#include "Bkmks.h"
 
 ztxt::ztxt() : bInit(false), expandedtextbuffer(NULL), compressedtextbuffer(NULL) { /*printf("constructing:%x\n",fin);*/ }
 
@@ -152,7 +154,7 @@ CList<Bkmk>* ztxt::getbkmklist()
       zTXTbkmk bkmk;
       if (fread(&bkmk, sizeof(bkmk), 1, fin) != 1) break;
 //      printf("Bookmark number:%d:%.20s\n", i, bkmk.title);
-      t->push_back(Bkmk(bkmk.title, ntohl(bkmk.offset)));
+      t->push_back(Bkmk(bkmk.title, NULL, ntohl(bkmk.offset)));
   }
   fseek(fin, cur, SEEK_SET);
   return t;

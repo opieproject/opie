@@ -1,7 +1,6 @@
 #include "infowin.h"
 #include "version.h"
-
-#define VERSION_STRING "QT Reader v" ## MAJOR ## "." ## MINOR ## " (" ## RELEASE_TYPE ## ")\nA small e-text reader"
+#include <stdio.h>
 
 infowin::infowin( QWidget *parent=0, const char *name=0, WFlags f = 0) :
     QWidget(parent, name, f)
@@ -33,7 +32,9 @@ infowin::infowin( QWidget *parent=0, const char *name=0, WFlags f = 0) :
     read = new QLabel("0", this);
     read->setAlignment( AlignVCenter | AlignRight );
     grid->addWidget(read, 4, 1);
-    l = new QLabel(VERSION_STRING, this);
+    char vstr[128];
+    sprintf(vstr, "QT Reader v%u.%u%c (%s)\nA small e-text reader", MAJOR, BKMKTYPE, MINOR, RELEASE_TYPE);
+    l = new QLabel(vstr, this);
     grid->addWidget(l, 5, 0);
     QPushButton* exitbutton = new QPushButton("Cancel", this);
     connect( exitbutton, SIGNAL( released() ), this, SLOT( infoClose() ) );
