@@ -11,7 +11,7 @@
 *********************************************************************************************/
 
 /*
- * $Id: vmemo.h,v 1.9 2002-05-26 23:41:26 llornkcor Exp $
+ * $Id: vmemo.h,v 1.10 2002-06-23 17:17:08 llornkcor Exp $
  */
 
 #ifndef __VMEMO_H__
@@ -24,6 +24,7 @@
 #include <qfile.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qlabel.h>
+#include <qtimer.h>
 
 class VMemo : public QWidget
 {
@@ -34,6 +35,8 @@ public:
   QFile track;  
   QString fileName, errorMsg;
   QLabel* msgLabel;
+  QTimer *t_timer;
+
 public slots:
   void record();
   void mousePressEvent( QMouseEvent * );
@@ -41,6 +44,7 @@ public slots:
   void receive( const QCString &msg, const QByteArray &data );
   bool startRecording();
   void stopRecording();
+  void timerBreak();
 private:
   bool useAlerts;
   void paintEvent( QPaintEvent* );

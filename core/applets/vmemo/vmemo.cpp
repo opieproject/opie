@@ -11,7 +11,7 @@
  ************************************************************************************/
 // copyright 2002 Jeremy Cowgar <jc@cowgar.com>
 /*
- * $Id: vmemo.cpp,v 1.35 2002-06-23 14:43:54 llornkcor Exp $
+ * $Id: vmemo.cpp,v 1.36 2002-06-23 17:17:08 llornkcor Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 #include <sys/utsname.h>
@@ -27,6 +27,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <errno.h>
+#include <qtimer.h>
 
 typedef struct _waveheader {
   u_long  main_chunk; /* 'RIFF'  */
@@ -201,6 +202,9 @@ VMemo::VMemo( QWidget *parent, const char *_name )
   setFixedWidth( 14 );
   
   recording = FALSE;
+
+  t_timer = new QTimer( this );
+  connect( t_timer, SIGNAL( timeout() ), SLOT( timerBreak() ) );
   
   struct utsname name; /* check for embedix kernel running on the zaurus*/
   if (uname(&name) != -1) {
@@ -453,12 +457,14 @@ void VMemo::record(void)
   msg.sprintf("Recording format %d", format);
   qDebug(msg);
 
+  t_timer->start( 30 * 1000+1000, TRUE);
+
   if(systemZaurus) {
 
     msg.sprintf("Recording format zaurus");
     qDebug(msg);
     signed short sound[512], monoBuffer[512];
-
+  
     if(format==AFMT_S16_LE)  {
 
 
@@ -468,7 +474,6 @@ void VMemo::record(void)
         result = read(dsp, sound, 512); // 8192
         int j=0;
 
-        //        if(systemZaurus) {
         for (int i = 0; i < result; i++) { //since Z is mono do normally
           monoBuffer[i] = sound[i];
         }
@@ -610,4 +615,11 @@ int VMemo::setToggleButton(int tog) {
     };
   }
   return -1;
+}
+
+void VMemo::timerBreak() {
+  //stop
+  recording=false;
+
+  QMessageBox::message("Vmemo","Vmemo recording has \ntimed out");
 }
