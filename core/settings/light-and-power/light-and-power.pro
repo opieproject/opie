@@ -1,6 +1,6 @@
 TEMPLATE	= app
 CONFIG		+= qt warn_on release
-DESTDIR		= ../../bin
+DESTDIR		= $(OPIEDIR)/bin
 HEADERS		= settings.h
 SOURCES		= light.cpp main.cpp
 INTERFACES	= lightsettingsbase.ui

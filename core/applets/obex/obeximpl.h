@@ -3,7 +3,7 @@
 #define OpieObexImpl_H
 
 #include <qobject.h>
-#include "../obexinterface.h"
+#include <obexinterface.h>
 #include "obexdlg.h"
 #include "obexinc.h"
 #include <qpe/qcopenvelope_qws.h>

@@ -1,6 +1,6 @@
 TEMPLATE  = app
 CONFIG    += qt warn_on release
-DESTDIR   = ../../bin
+DESTDIR   = $(OPIEDIR)/bin
 HEADERS   = soundsettings.h soundsettingsbase.h
 SOURCES   = soundsettings.cpp soundsettingsbase.cpp main.cpp
 #INTERFACES = soundsettingsbase.ui

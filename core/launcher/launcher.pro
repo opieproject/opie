@@ -20,7 +20,7 @@ HEADERS		= background.h \
 		  shutdownimpl.h \
 		  launcher.h \
 		  launcherview.h \
-		  ../calibrate/calibrate.h \
+		  $(OPIEDIR)/core/apps/calibrate/calibrate.h \
 		  startmenu.h \
 		  transferserver.h \
 		  qcopbridge.h \
@@ -62,7 +62,7 @@ SOURCES		= background.cpp \
 		  shutdownimpl.cpp \
 		  launcher.cpp \
 		  launcherview.cpp \
-		  $(OPIEDIR)/calibrate/calibrate.cpp \
+		  $(OPIEDIR)/core/apps/calibrate/calibrate.cpp \
 		  transferserver.cpp \
 		  packageslave.cpp \
 		irserver.cpp \
@@ -101,8 +101,8 @@ INTERFACES	= shutdown.ui syncdialog.ui
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include .
 
-INCLUDEPATH += $(OPIEDIR)/calibrate
-DEPENDPATH	+= $(OPIEDIR)/calibrate
+INCLUDEPATH += $(OPIEDIR)/core/apps/calibrate
+DEPENDPATH	+= $(OPIEDIR)/core/apps/calibrate
 
 INCLUDEPATH += $(OPIEDIR)/rsync
 DEPENDPATH	+= $(OPIEDIR)/rsync

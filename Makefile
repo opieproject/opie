@@ -4,59 +4,79 @@ all: default docs
 
 LIBS=library libopie
 
-COMPONENTS=$(LOCALCOMPONENTS) inputmethods/keyboard \
-	inputmethods/pickboard \
-	inputmethods/handwriting \
-	inputmethods/unikeyboard \
-	inputmethods/jumpx \
-	inputmethods/kjumpx \
-	inputmethods/dvorak \
-	core/applets/batteryapplet \
-	core/applets/batteryapplet-ipaq \
-	core/applets/irdaapplet \
-	core/applets/volumeapplet \
-	core/applets/clockapplet \
-	core/applets/netmonapplet \
-	core/applets/screenshotapplet \
-	core/applets/clipboardapplet \
-	core/applets/cardmon \
-	core/applets/obex \
-	core/applets/vmemo \
-	noncore/net/netsetup/dialup \
-	noncore/net/netsetup/lan \
-	core/multimedia/opieplayer/libmpeg3 \
-	core/multimedia/opieplayer/libmad \
-	core/multimedia/opieplayer/wavplugin \
-	noncore/mail/libmail \
-	noncore/mail/bend \
 
-APPS=$(LOCALAPPS) core/pim/addressbook noncore/tools/calculator \
-    noncore/tools/clock core/pim/datebook core/apps/filebrowser \
-    core/apps/helpbrowser noncore/games/minesweep \
-    core/multimedia/opieplayer core/settings/light-and-power \
-    noncore/settings/language \
-    noncore/settings/rotation \
-    noncore/settings/appearance \
-    core/settings/security \
-    noncore/settings/sound \
-    core/settings/systemtime \
-    noncore/settings/mediummount \
-    noncore/settings/tabmanager \
-    noncore/games/solitaire noncore/apps/spreadsheet \
-    noncore/games/tetrix  core/apps/textedit  \
-    core/pim/todo noncore/games/wordgame core/apps/embeddedkonsole \
-    core/launcher core/apps/sysinfo \
-    noncore/games/parashoot noncore/games/snake core/settings/citytime  \
-    noncore/multimedia/showimg noncore/net/netsetup core/settings/wlansetup \
-    noncore/apps/tableviewer   core/apps/oipkg noncore/games/mindbreaker \
-    noncore/games/go noncore/games/qasteroids core/apps/qcop \
-    noncore/games/fifteen noncore/comm/keypebble  \
-    core/pim/today  noncore/games/tictac noncore/net/opieftp  \
-    noncore/graphics/drawpad noncore/games/kcheckers noncore/settings/appskey \
-    noncore/graphics/qpdf   noncore/games/kpacman noncore/apps/advancedfm  \
-    noncore/games/kbill noncore/tools/remote  \
-    noncore/tools/opie-sh \
-    noncore/mail
+INPUTCOMPONENTS= inputmethods/keyboard inputmethods/pickboard \
+	inputmethods/handwriting  inputmethods/unikeyboard \
+	inputmethods/jumpx inputmethods/kjumpx \
+	inputmethods/dvorak 
+
+APPLETS= core/applets/batteryapplet core/applets/batteryapplet-ipaq \
+	core/applets/irdaapplet core/applets/volumeapplet \
+	core/applets/clockapplet core/applets/netmonapplet \
+	core/applets/screenshotapplet core/applets/clipboardapplet \
+	core/applets/cardmon core/applets/obex \
+	core/applets/vmemo noncore/net/netsetup/dialup \
+	noncore/net/netsetup/lan 
+
+MAIL= noncore/mail/libmail noncore/mail/bend 
+
+PLAYER = core/multimedia/opieplayer/libmpeg3 \
+	core/multimedia/opieplayer/libmad \
+	core/multimedia/opieplayer/wavplugin 
+
+COMPONENTS=$(LOCALCOMPONENTS) $(INPUTCOMPONENTS) $(APPLETS) $(MAIL) $(PLAYER)	
+
+
+PIMAPPS = core/pim/addressbook core/pim/datebook \
+	 core/pim/today core/pim/todo 
+
+COREAPPS = core/apps/filebrowser core/apps/helpbrowser \
+	core/apps/textedit core/apps/embeddedkonsole \
+	core/launcher core/apps/sysinfo \
+	core/apps/oipkg core/apps/qcop
+
+COREMULTIMEDIA = core/multimedia/opieplayer
+
+CORESETTINGS = core/settings/light-and-power core/settings/security \
+	core/settings/systemtime core/settings/citytime \
+	core/settings/wlansetup
+
+NONCORESETTINGS  =noncore/settings/language noncore/settings/rotation \
+	noncore/settings/appearance noncore/settings/sound \
+	noncore/settings/mediummount \
+	noncore/settings/tabmanager noncore/settings/appskey 
+
+NONCORETOOLS = noncore/tools/calculator noncore/tools/clock \
+	 noncore/tools/remote noncore/tools/opie-sh 
+
+GAMES = noncore/games/minesweep noncore/games/solitaire \
+	noncore/games/tetrix noncore/games/wordgame \
+	noncore/games/parashoot noncore/games/snake \
+	noncore/games/mindbreaker \
+	noncore/games/go noncore/games/qasteroids \
+	noncore/games/fifteen noncore/games/tictac \
+	noncore/games/kcheckers noncore/games/kpacman \
+	noncore/games/kbill
+
+NONAPPS = noncore/apps/spreadsheet noncore/apps/tableviewer \
+	noncore/apps/advancedfm
+
+NONNET = noncore/net/netsetup noncore/net/opieftp \
+	noncore/mail
+
+NONMULT = noncore/multimedia/showimg noncore/graphics/drawpad \
+	noncore/graphics/qpdf 
+
+
+NONCOMM = noncore/comm/keypebble
+
+APPS=$(LOCALAPPS) $(PIMAPPS)  $(COREAPPS)     \
+	$(COREMULTIMEDIA) $(CORESETTINGS) \
+	$(NONCORESETTINGS) $(NONCORETOOLS) \
+	$(NOAPPS) $(NONNET) $(NONMULT) \
+	$(NONCOMM) $(GAMES)
+    
+    
 
 NONTMAKEAPPS := ipaq/opiealarm noncore/nethack
 

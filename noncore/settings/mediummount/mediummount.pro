@@ -1,5 +1,5 @@
 TEMPLATE	= app
-DESTDIR         = ../../bin/
+DESTDIR         = $(OPIEDIR)/bin/
 #CONFIG		= qt warn_on debug
 CONFIG		= qt warn_on release
 HEADERS		= mediumwidget.h mediumglobal.h mainwindow.h
