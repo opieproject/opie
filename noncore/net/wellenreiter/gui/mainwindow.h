@@ -50,6 +50,7 @@ class WellenreiterMainWindow: public QMainWindow
   public slots:
     void showConfigure();
     void demoAddStations();
+    void demoReadFromGps();
     void fileSaveLog();
     void fileSaveHex();
     void fileSaveSession();

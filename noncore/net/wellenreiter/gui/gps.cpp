@@ -45,6 +45,8 @@ bool GPS::open( const QString& host, int port )
 GpsLocation GPS::position() const
 {
     char buf[256];
+    double lat = -111.0;
+    double lon = -111.0;
 
     int result = _socket->writeBlock( "p\r\n", 3 );
     _socket->flush();
@@ -53,19 +55,19 @@ GpsLocation GPS::position() const
         int numAvail = _socket->bytesAvailable();
         qDebug( "GPS write succeeded, %d bytes available for reading...", numAvail );
         if ( numAvail )
-        {
-            QTextStream stream( _socket );
-
-            QString str;
-            stream.readRawBytes( &buf[0], 7 );
-            float lat = -111;
-            stream >> lat;
-            stream.skipWhiteSpace();
-            float lon = -111;
-            stream >> lon;
-            stream.readRawBytes( &buf[0], 200 ); // read and discard the stuff until EOF
-
-            return GpsLocation( lat, lon );
+        {                     
+            int numRead = _socket->readBlock( &buf[0], sizeof buf );
+            int numScan = sscanf( &buf[0], "GPSD,P=%lg %lg", &lat, &lon);
+            
+            if ( numRead < 7 || numScan != 2 )
+            {
+                qDebug( "GPS read %d bytes succeeded, invalid response: '%s'", numRead, &buf[0] );
+                return GpsLocation( -111, -111 );
+            }
+            else
+            {
+                return GpsLocation( lat, lon );
+            }
         }
     }
     return GpsLocation( -111, -111 );
@@ -123,9 +125,3 @@ QString GpsLocation::dmsPosition() const
 
     return dms;
 }
-
-
-
-
-
-

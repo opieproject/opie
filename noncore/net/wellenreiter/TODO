@@ -30,6 +30,8 @@ ENGINE
 
 - enable sniffing in wired networks
 
+- fix autodetection (interface name)
+
 ---------
    UI
 ---------

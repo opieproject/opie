@@ -34,6 +34,7 @@
 #include <qpopupmenu.h>
 #include <qpushbutton.h>
 #include <qstatusbar.h>
+#include <qspinbox.h>
 #include <qtextstream.h>
 #include <qtoolbutton.h>
 
@@ -133,6 +134,7 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
 
     QPopupMenu* demo = new QPopupMenu( mb );
     demo->insertItem( tr( "&Add something" ), this, SLOT( demoAddStations() ) );
+    demo->insertItem( tr( "&Read from GPSd" ), this, SLOT( demoReadFromGps() ) );
 
     id = mb->insertItem( tr( "&File" ), file );
     //id = mb->insertItem( tr( "&View" ), view );
@@ -223,13 +225,24 @@ WellenreiterMainWindow::~WellenreiterMainWindow()
 
 void WellenreiterMainWindow::demoAddStations()
 {
-    //mw = 0; // test SIGSGV handling
+    //mw = 0; // test SIGSEGV handling
 
     mw->netView()->addNewItem( "managed", "Vanille", OMacAddress::fromString("00:00:20:EF:A6:43"), true, 6, 80, GpsLocation( 39.8794, -94.0936) );
     mw->netView()->addNewItem( "managed", "Vanille", OMacAddress::fromString("00:30:6D:EF:A6:23"), true, 11, 10, GpsLocation( 0.0, 0.0 ) );
     mw->netView()->addNewItem( "adhoc", "ELAN", OMacAddress::fromString("00:03:F8:E7:16:22"), false, 3, 10, GpsLocation( 5.5, 2.3 ) );
     mw->netView()->addNewItem( "adhoc", "ELAN", OMacAddress::fromString("00:04:01:E7:56:62"), false, 3, 15, GpsLocation( 2.3, 5.5 ) );
     mw->netView()->addNewItem( "adhoc", "ELAN", OMacAddress::fromString("00:05:8E:E7:56:E2"), false, 3, 20, GpsLocation( -10.0, -20.5 ) );
+}
+
+
+void WellenreiterMainWindow::demoReadFromGps()
+{
+    WellenreiterConfigWindow* configwindow = WellenreiterConfigWindow::instance();
+    GPS* gps = new GPS( this );
+    gps->open( configwindow->gpsdHost->currentText(), configwindow->gpsdPort->value() );
+    GpsLocation loc = gps->position();
+
+    QMessageBox::information( this, "Wellenreiter/Opie", tr( "GPS said:\n$1" ).arg( loc.dmsPosition() ) );
 }
 
 
