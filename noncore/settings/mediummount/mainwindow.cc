@@ -2,6 +2,8 @@
 
 #include <qtabwidget.h>
 #include <qlayout.h>
+#include <qtooltip.h>
+#include <qwhatsthis.h>
 
 #include <qpe/storage.h>
 
@@ -13,22 +15,25 @@
 using namespace MediumMountSetting;
 
 
-MainWindow::MainWindow( QWidget *parent, const char *name, WFlags )
-  : QMainWindow( parent, name, WStyle_ContextHelp  )
+MainWindow::MainWindow( QWidget *parent, const char *name, bool modal, WFlags )
+  : QDialog( parent, name, modal, WStyle_ContextHelp  )
 
 {
-	setCaption ( tr( "Medium Mount Settings" ));
+    setCaption ( tr( "Medium Mount Settings" ));
 
-  //  m_lay = new QVBoxLayout( this );
-  m_tab = new QTabWidget( this );
-  setCentralWidget( m_tab );
-  init();
+    m_lay = new QVBoxLayout( this );
+
+    m_tab = new QTabWidget( this );
+
+    m_lay->addWidget( m_tab );
+
+    init();
 }
 
 MainWindow::~MainWindow()
 {
-
 }
+
 void MainWindow::init()
 {
   m_global = new MediumGlobalWidget( m_tab, "test drive" );
@@ -45,6 +50,19 @@ void MainWindow::init()
       m_tab->addTab( wid, (*it)->name()  );
     }
   }
+}
+
+void MainWindow::accept()
+{
+    m_global->writeConfig();
+
+    MediumMountWidget *confWidget;
+    for ( confWidget = m_mediums.first(); confWidget != 0;
+              confWidget = m_mediums.next() ) {
+        confWidget->writeConfig();
+    }
+
+    QDialog::accept();
 }
 
 void MainWindow::slotGlobalChanged(int )

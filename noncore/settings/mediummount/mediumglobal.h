@@ -23,6 +23,8 @@ namespace MediumMountSetting {
   public:
     MediumGlobalWidget(QWidget *parent = 0, const char *name =0 );
     ~MediumGlobalWidget();
+
+    void writeConfig();
   signals:
     // the global status changed
     void globalStateChanged( int );
@@ -35,7 +37,6 @@ namespace MediumMountSetting {
   private:
     void initGUI();
     void readConfig();
-    void writeConfig();
     Config *m_config;
     QCheckBox *m_check;
     QCheckBox *m_useglobal;

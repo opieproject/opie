@@ -26,6 +26,8 @@ namespace MediumMountSetting {
   public:
     MediumMountWidget(const QString&, const QPixmap &, QWidget *parent, const char *name = 0 );
     ~MediumMountWidget();
+
+    void writeConfig();
     
   private slots:
     void slotAdd();
@@ -34,8 +36,7 @@ namespace MediumMountSetting {
   private:
     void readConfig();
     void initGUI();
-    void writeConfig();
-
+  
     bool m_dirty : 1;
 
     class MediumMountWidgetPrivate;

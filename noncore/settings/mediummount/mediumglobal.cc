@@ -16,7 +16,7 @@
 using namespace MediumMountSetting;
 
 MediumGlobalWidget::MediumGlobalWidget(QWidget *wid, const char *name )
-  : QWidget( wid, name )
+  : QWidget( wid, name, WStyle_ContextHelp )
 {
   m_config = 0;
   initGUI();
@@ -26,8 +26,8 @@ MediumGlobalWidget::MediumGlobalWidget(QWidget *wid, const char *name )
 void MediumGlobalWidget::initGUI()
 {
   m_layout = new QVBoxLayout(this );
-  m_layout->setMargin( 10 );
-  m_layout->setSpacing( 10 );
+  // m_layout->setMargin( 10 );
+  // m_layout->setSpacing( 10 );
 
 
   m_label = new QLabel( this );
@@ -39,7 +39,7 @@ void MediumGlobalWidget::initGUI()
            "if Opie should scan for Documents globally or on a "
            "per medium level. You're also able to reconfigure "
            "each medium.") );
-  
+
   m_layout->addWidget( m_label );
 
   m_check = new QCheckBox( tr("Enable medium checking" ), this );
@@ -61,11 +61,11 @@ void MediumGlobalWidget::initGUI()
 
   m_global = new QGroupBox( tr("Which media files"), m_frame );
   m_frameLay = new QGridLayout(m_global, 4, 3 );
-  m_frameLay->setMargin( 12 );
+   m_frameLay->setMargin( 6 );
 
   QSpacerItem *item2 = new QSpacerItem( 5, 8,
           QSizePolicy::Fixed,
-          QSizePolicy::Fixed );         
+          QSizePolicy::Fixed );
   m_audio = new QCheckBox( tr("Audio"), m_global );
   m_all   = new QCheckBox( tr("All")  , m_global );
   m_image = new QCheckBox( tr("Image"), m_global );
@@ -84,11 +84,11 @@ void MediumGlobalWidget::initGUI()
   m_frameLay->addWidget( m_text,  1, 2 );
   m_frameLay->addWidget( m_video, 2, 2 );
 
-  m_frameLay->addRowSpacing( 0, 8 );
-  m_frameLay->addColSpacing( 1, 2 );
+//  m_frameLay->addRowSpacing( 0, 8 );
+//  m_frameLay->addColSpacing( 1, 2 );
 
   m_box->addWidget( m_global );
-  
+
 
   m_layout->addWidget( m_frame );
 
@@ -140,7 +140,6 @@ void MediumGlobalWidget::writeConfig()
 }
 MediumGlobalWidget::~MediumGlobalWidget()
 {
-  writeConfig();
   delete m_config;
 }
 void MediumGlobalWidget::slotGlobalChanged()

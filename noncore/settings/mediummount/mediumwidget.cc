@@ -36,7 +36,7 @@ MediumMountWidget::MediumMountWidget(const QString &path,
   m_path = path;
   initGUI();
   m_label->setPixmap(pix );
-  m_config = 0;  
+  m_config = 0;
 
   readConfig();
 }
@@ -81,7 +81,7 @@ void MediumMountWidget::initGUI()
   m_text  = new QCheckBox( tr("Text") , m_group );
   m_video = new QCheckBox( tr("Video"), m_group );
 
-  QSpacerItem *iti1b = new QSpacerItem(2, 10, QSizePolicy::Fixed, 
+  QSpacerItem *iti1b = new QSpacerItem(2, 10, QSizePolicy::Fixed,
                QSizePolicy::Fixed );
   m_checks->addItem( iti1b, 0, 0 );
 
@@ -96,7 +96,7 @@ void MediumMountWidget::initGUI()
   m_checks->addColSpacing(1, 2 );
   m_checks->setColStretch(1, -2 );
 
-  connect(m_all, SIGNAL(stateChanged(int) ), 
+  connect(m_all, SIGNAL(stateChanged(int) ),
     this, SLOT(slotStateChanged() ) );
 
   m_box->addWidget( m_group );
@@ -143,7 +143,7 @@ void MediumMountWidget::readConfig( )
     m_audio->setEnabled( true );
     m_image->setEnabled( true );
     m_text->setEnabled ( true );
-    m_all->setEnabled  ( true ); 
+    m_all->setEnabled  ( true );
 
     m_all->setChecked( false );
 
@@ -171,10 +171,8 @@ void MediumMountWidget::writeConfig()
 }
 MediumMountWidget::~MediumMountWidget()
 {
-  writeConfig();
   delete m_config;
 }
-
 
 void MediumMountWidget::slotAdd()
 {
