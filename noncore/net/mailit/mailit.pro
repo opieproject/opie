@@ -43,6 +43,7 @@ DESTDIR=$(OPIEDIR)/bin
 TRANSLATIONS = ../../../i18n/de/mailit.ts \
 	 ../../../i18n/da/mailit.ts \
 	 ../../../i18n/xx/mailit.ts \
+         ../../../i18n/it/mailit.ts \
 	 ../../../i18n/en/mailit.ts \
 	 ../../../i18n/es/mailit.ts \
 	 ../../../i18n/fr/mailit.ts \
