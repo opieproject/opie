@@ -37,6 +37,7 @@ class StorageInfo;
 class SyncDialog;
 class DocumentList;
 class ServerInterface;
+class QueuedRequestRunner;
 namespace Opie {
 namespace Core {
     class ODeviceButton;
@@ -69,6 +70,9 @@ private slots:
     void applicationConnected(const QString &app);
     void storageChanged();
     void cancelSync();
+    void desktopMessage( const QCString &, const QByteArray & );
+    void runDirectAccess();
+    void finishedQueuedRequests();
 
 protected:
     void styleChange( QStyle & );
@@ -78,6 +82,10 @@ private:
     void layout();
     void startTransferServer();
     void preloadApps();
+    void prepareDirectAccess();
+    void postDirectAccess();
+    QString cardInfoString();
+    QString installLocationsString();
 
     QCopBridge *qcopBridge;
     TransferServer *transferServer;
@@ -92,6 +100,10 @@ private:
     AppLauncher *appLauncher;
     DocumentList *docList;
     ServerInterface *serverGui;
+
+    int pendingFlushes;
+    bool directAccessRun;
+    QueuedRequestRunner *qrr;
 };
 
 

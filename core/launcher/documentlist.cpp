@@ -387,10 +387,10 @@ void DocumentList::DiffAppLnks()
 	    ++it1;
 	}
 	if (!found) {
-	    odebug << "Item " << j->name().ascii() << " needs to be added" << oendl; 
+	    odebug << "Item " << j->name().ascii() << " needs to be added" << oendl;
 	    d->serverGui->applicationAdded( j->type(), *j );
-	}		    
-	    ++it2; 
+	}
+	    ++it2;
     }
 
     it1 = appLnkSet->children();
@@ -403,13 +403,13 @@ void DocumentList::DiffAppLnks()
 	    ++it2;
 	}
 	if (!found) {
-	    odebug << "Item " << i->name().ascii() << " needs to be removed" << oendl; 
+	    odebug << "Item " << i->name().ascii() << " needs to be removed" << oendl;
 	    d->serverGui->applicationRemoved( i->type(), *i );
 	}
-		    
-	    ++it1; 
+
+	    ++it1;
     }
-    
+
     delete appLnkSet;
     appLnkSet = appLnkSet2;
 
@@ -422,10 +422,10 @@ void DocumentList::storageChanged()
     t.start();
     DiffAppLnks();
 //    reloadAppLnks();
-    odebug << "Reload App links took " << t.elapsed() << " ms" << oendl; 
+    odebug << "Reload App links took " << t.elapsed() << " ms" << oendl;
     reloadDocLnks();
 //    odebug << "Reload links took " << t.elapsed() << " ms " << oendl;
-    odebug << "Reload All links took " << t.elapsed() << " ms" << oendl; 
+    odebug << "Reload All links took " << t.elapsed() << " ms" << oendl;
 // ### Optimization opportunity
     // Could be a bit more intelligent and somehow work out which
     // mtab entry has changed and then only scan that and add and remove
@@ -456,7 +456,18 @@ void DocumentList::sendAllDocLinks()
 	    if ( f.open( IO_ReadOnly ) ) {
 		QTextStream ts( &f );
 		ts.setEncoding( QTextStream::UnicodeUTF8 );
-		contents += ts.read();
+		QString docLnk = ts.read();
+		// Strip out the (stale) LinkFile entry
+		int start = docLnk.find( "\nLinkFile = " ) + 1;
+		if ( start > 0 ) {
+		    int end = docLnk.find( "\n", start + 1 ) + 1;
+		    contents += docLnk.left(start);
+		    contents += docLnk.mid(end);
+		} else {
+		    contents += docLnk;
+		}
+		contents += "LinkFile = " + doc->linkFile() + "\n";
+
 		f.close();
 	    } else
 		fake = TRUE;

@@ -60,11 +60,13 @@ static int loggedin=0;
 QCopKeyRegister::QCopKeyRegister()
     : m_keyCode( 0 )
 {
+odebug << "KeyRegister1 " << m_keyCode << oendl;
 }
 
 QCopKeyRegister::QCopKeyRegister( int k, const QCString& c, const QCString& m )
     :m_keyCode( k ), m_channel( c ), m_message( m )
 {
+odebug << "keyRegister2 " << m_keyCode << c << m << oendl;
 }
 
 int QCopKeyRegister::keyCode() const
@@ -86,8 +88,8 @@ bool QCopKeyRegister::send()
 {
     if (m_channel.isNull() )
         return false;
-
-    QCopEnvelope( m_channel, m_message );
+qDebug("Send Message: "+m_channel+" "+m_message);
+    QCopEnvelope e( m_channel, m_message );
 
     return true;
 }
@@ -165,6 +167,7 @@ void KeyFilter::timerEvent(QTimerEvent* e)
 
 void KeyFilter::registerKey( const QCopKeyRegister& key )
 {
+odebug << "KeyFilter::registerKey " << key.keyCode() << key.channel() << key.message() << oendl;
     m_keys.insert( key.keyCode(), key );
 }
 

@@ -39,6 +39,7 @@ public:
     ~AppLauncher();
 
     bool isRunning(const QString &app);
+    const QMap<int,QString> &runningApplications() { return runningApps; }
 
     static const int RAISE_TIMEOUT_MS;
 
@@ -46,7 +47,7 @@ signals:
     void launched(int pid, const QString &app);
     void terminated(int pid, const QString &app);
     void connected(const QString &app);
-    
+
 protected slots:
     void sigStopped(int sigPid, int sigStatus);
     void received(const QCString& msg, const QByteArray& data);
@@ -65,12 +66,12 @@ private:
     bool execute(const QString &c, const QString &document, bool noRaise = FALSE);
     void kill( int pid );
     int pidForName( const QString & );
-    
-private:    
+
+private:
     QMap<int,QString> runningApps;
     QMap<QString,int> waitingHeartbeat;
 #ifdef Q_OS_WIN32
-    QList<QProcess> runningAppsProc; 
+    QList<QProcess> runningAppsProc;
 #endif
     int qlPid;
     bool qlReady;

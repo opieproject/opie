@@ -35,6 +35,7 @@
 #include "suspendmonitor.h"
 #endif
 #include "documentlist.h"
+#include "qrr.h"
 
 /* OPIE */
 #include <opie2/odebug.h>
@@ -117,6 +118,10 @@ static Global::Command builtins[] = {
     { 0,            calibrate,  0, 0 },
 };
 
+#ifdef QPE_HAVE_DIRECT_ACCESS
+extern void readyDirectAccess(QString cardInfo, QString installLocations);
+extern const char *directAccessQueueFile();
+#endif
 
 //---------------------------------------------------------------------------
 
@@ -137,6 +142,7 @@ Server::Server() :
 /*    tid_today = startTimer(3600*2*1000);*/
     last_today_show = QDate::currentDate();
 
+#warning FIXME support TempScreenSaverMode
 #if 0
     tsmMonitor = new TempScreenSaverMode();
     connect( tsmMonitor, SIGNAL(forceSuspend()), qApp, SIGNAL(power()) );
@@ -153,6 +159,13 @@ Server::Server() :
 
     storage = new StorageInfo( this );
     connect( storage, SIGNAL(disksChanged()), this, SLOT(storageChanged()) );
+
+
+#ifdef QPE_HAVE_DIRECT_ACCESS
+    QCopChannel *desktopChannel = new QCopChannel( "QPE/Desktop", this );
+    connect( desktopChannel, SIGNAL(received( const QCString &, const QByteArray & )),
+	     this, SLOT(desktopMessage( const QCString &, const QByteArray & )) );
+#endif
 
     // start services
     startTransferServer();
@@ -196,6 +209,31 @@ Server::~Server()
 #endif
 }
 
+
+static bool hasVisibleWindow(const QString& clientname, bool partial)
+{
+#ifdef QWS
+    const QList<QWSWindow> &list = qwsServer->clientWindows();
+    QWSWindow* w;
+    for (QListIterator<QWSWindow> it(list); (w=it.current()); ++it) {
+	if ( w->client()->identity() == clientname ) {
+	    if ( partial && !w->isFullyObscured() )
+		return TRUE;
+	    if ( !partial && !w->isFullyObscured() && !w->isPartiallyObscured() ) {
+# if QT_VERSION < 0x030000
+		QRect mwr = qt_screen->mapToDevice(qt_maxWindowRect,
+			QSize(qt_screen->width(),qt_screen->height()) );
+# else
+		QRect mwr = qt_maxWindowRect;
+# endif
+		if ( mwr.contains(w->requested().boundingRect()) )
+		    return TRUE;
+	    }
+	}
+    }
+#endif
+    return FALSE;
+}
 
 void Server::activate(const ODeviceButton* button, bool held)
 {
@@ -292,48 +330,34 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
 
     if ( qcopBridge )
         qcopBridge->authorizeConnections();
-    } else
-
+#warning FIXME support TempScreenSaverMode
 #if 0
-    /* ### FIXME support TempScreenSaverMode */
-    if ( msg == "setTempScreenSaverMode(int,int)" ) {
+    } else if ( msg == "setTempScreenSaverMode(int,int)" ) {
         int mode, pid;
         stream >> mode >> pid;
         tsmMonitor->setTempMode(mode, pid);
-    } else
 #endif
-
-    if ( msg == "linkChanged(QString)" ) {
+    } else if ( msg == "linkChanged(QString)" ) {
         QString link;
         stream >> link;
         odebug << "desktop.cpp systemMsg -> linkchanged( " << link << " )" << oendl;
         docList->linkChanged(link);
-    } else
-
-    if ( msg == "serviceChanged(QString)" ) {
+    } else if ( msg == "serviceChanged(QString)" ) {
         MimeType::updateApplications();
-    } else
-
-    if ( msg == "mkdir(QString)" ) {
+    } else if ( msg == "mkdir(QString)" ) {
         QString dir;
         stream >> dir;
         if ( !dir.isEmpty() )
             mkdir( dir );
-    } else
-
-    if ( msg == "rdiffGenSig(QString,QString)" ) {
+    } else if ( msg == "rdiffGenSig(QString,QString)" ) {
         QString baseFile, sigFile;
         stream >> baseFile >> sigFile;
         QRsync::generateSignature( baseFile, sigFile );
-    } else
-
-    if ( msg == "rdiffGenDiff(QString,QString,QString)" ) {
+    } else if ( msg == "rdiffGenDiff(QString,QString,QString)" ) {
         QString baseFile, sigFile, deltaFile;
         stream >> baseFile >> sigFile >> deltaFile;
         QRsync::generateDiff( baseFile, sigFile, deltaFile );
-    } else
-
-    if ( msg == "rdiffApplyPatch(QString,QString)" ) {
+    } else if ( msg == "rdiffApplyPatch(QString,QString)" ) {
         QString baseFile, deltaFile;
         stream >> baseFile >> deltaFile;
         if ( !QFile::exists( baseFile ) ) {
@@ -346,18 +370,14 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
         QCopEnvelope e( "QPE/Desktop", "patchApplied(QString)" );
         e << baseFile;
 #endif
-    } else
-
-    if ( msg == "rdiffCleanup()" ) {
+    } else if ( msg == "rdiffCleanup()" ) {
         mkdir( "/tmp/rdiff" );
         QDir dir;
         dir.setPath( "/tmp/rdiff" );
         QStringList entries = dir.entryList();
         for ( QStringList::Iterator it = entries.begin(); it != entries.end(); ++it )
             dir.remove( *it );
-    } else
-
-    if ( msg == "sendHandshakeInfo()" ) {
+    } else if ( msg == "sendHandshakeInfo()" ) {
         QString home = getenv( "HOME" );
 #ifndef QT_NO_COP
         QCopEnvelope e( "QPE/Desktop", "handshakeInfo(QString,bool)" );
@@ -365,21 +385,17 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
         int locked = (int) ServerApplication::screenLocked();
         e << locked;
 #endif
-    } else
-
+    } else  if ( msg == "sendVersionInfo()" ) {
     /*
      * QtopiaDesktop relies on the major number
-     * to start with 1. We're at 0.9
-     * so wee need to fake at least 1.4 to be able
+     * to start with 1.
+     * we need to fake at least 1.4 to be able
      * to sync with QtopiaDesktop1.6
      */
-    if ( msg == "sendVersionInfo()" ) {
         QCopEnvelope e( "QPE/Desktop", "versionInfo(QString,QString)" );
             /* ### FIXME Architecture ### */
         e << QString::fromLatin1("1.7") << "Uncustomized Device";
-    } else
-
-    if ( msg == "sendCardInfo()" ) {
+    } else if ( msg == "sendCardInfo()" ) {
 #ifndef QT_NO_COP
         QCopEnvelope e( "QPE/Desktop", "cardInfo(QString)" );
 #endif
@@ -409,9 +425,12 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
 #ifndef QT_NO_COP
         e << s;
 #endif
-    } else
-
-    if ( msg == "sendSyncDate(QString)" ) {
+    } else if ( msg == "sendInstallLocations()" ) {
+#ifndef QT_NO_COP
+	QCopEnvelope e( "QPE/Desktop", "installLocations(QString)" );
+	e << installLocationsString();
+#endif
+    } else if ( msg == "sendSyncDate(QString)" ) {
         QString app;
         stream >> app;
         Config cfg( "qpe" );
@@ -422,55 +441,48 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
 #endif
         //odebug << "QPE/System sendSyncDate for " << app.latin1() << ": response "
         //       << cfg.readEntry( app ).latin1() << oendl;
-    } else
-
-    if ( msg == "setSyncDate(QString,QString)" ) {
+    } else if ( msg == "setSyncDate(QString,QString)" ) {
         QString app, date;
         stream >> app >> date;
         Config cfg( "qpe" );
         cfg.setGroup("SyncDate");
         cfg.writeEntry( app, date );
         //odebug << "setSyncDate(QString,QString) " << app << " " << date << "" << oendl;
-    } else
-
-    if ( msg == "startSync(QString)" ) {
+    } else if ( msg == "startSync(QString)" ) {
         QString what;
         stream >> what;
         delete syncDialog;
         syncDialog = new SyncDialog( this, what );
         syncDialog->show();
         connect( syncDialog, SIGNAL(cancel()), SLOT(cancelSync()) );
-    } else
-
-    if ( msg == "stopSync()") {
+    } else if ( msg == "stopSync()") {
         delete syncDialog;
         syncDialog = 0;
-    } else
-
-    if (msg == "restoreDone(QString)") {
+    } else if (msg == "restoreDone(QString)") {
         docList->restoreDone();
-    } else
-
-    if ( msg == "getAllDocLinks()" ) {
+    } else if ( msg == "getAllDocLinks()" ) {
         docList->sendAllDocLinks();
-    } else
-
+    }
+#ifdef QPE_HAVE_DIRECT_ACCESS
+    else if ( msg == "prepareDirectAccess()" ) {
+	prepareDirectAccess();
+    } else if ( msg == "postDirectAccess()" ) {
+	postDirectAccess();
+    }
+#endif
 #ifdef Q_WS_QWS
-    if ( msg == "setMouseProto(QString)" ) {
+
+ else if ( msg == "setMouseProto(QString)" ) {
         QString mice;
         stream >> mice;
         setenv("QWS_MOUSE_PROTO",mice.latin1(),1);
         qwsServer->openMouse();
-    } else
-
-    if ( msg == "setKeyboard(QString)" ) {
+    } else if ( msg == "setKeyboard(QString)" ) {
         QString kb;
         stream >> kb;
         setenv("QWS_KEYBOARD",kb.latin1(),1);
         qwsServer->openKeyboard();
-    } else
-
-    if ( msg == "setKeyboardAutoRepeat(int,int)" ) {
+    } else if ( msg == "setKeyboardAutoRepeat(int,int)" ) {
         int delay, period;
         stream >> delay >> period;
         qwsSetKeyboardAutoRepeat( delay, period );
@@ -478,18 +490,14 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
         cfg.setGroup("Keyboard");
         cfg.writeEntry( "RepeatDelay", delay );
         cfg.writeEntry( "RepeatPeriod", period );
-    } else
-
-    if ( msg == "setKeyboardLayout(QString)" ) {
+    } else if ( msg == "setKeyboardLayout(QString)" ) {
         QString kb;
         stream >> kb;
         setKeyboardLayout( kb );
         Config cfg( "qpe" );
         cfg.setGroup("Keyboard");
         cfg.writeEntry( "Layout", kb );
-    } else
-
-    if ( msg == "autoStart(QString)" ) {
+    } else if ( msg == "autoStart(QString)" ) {
         QString appName;
         stream >> appName;
         Config cfg( "autostart" );
@@ -497,9 +505,7 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
         if ( appName.compare("clear") == 0){
             cfg.writeEntry("Apps", "");
         }
-    } else
-
-    if ( msg == "autoStart(QString,QString)" ) {
+    } else if ( msg == "autoStart(QString,QString)" ) {
         QString modifier, appName;
         stream >> modifier >> appName;
         Config cfg( "autostart" );
@@ -520,9 +526,7 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
             }
         }
         // case the autostart feature should be delayed
-    } else
-
-    if ( msg == "autoStart(QString,QString,QString)") {
+    } else if ( msg == "autoStart(QString,QString,QString)") {
         QString modifier, appName, delay;
         stream >> modifier >> appName >> delay;
         Config cfg( "autostart" );
@@ -539,19 +543,71 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
 #endif
 }
 
+QString Server::cardInfoString()
+{
+    storage->update();
+    const QList<FileSystem> &fs = storage->fileSystems();
+    QListIterator<FileSystem> it ( fs );
+    QString s;
+    QString homeDir = getenv("HOME");
+    QString homeFs, homeFsPath;
+    for ( ; it.current(); ++it ) {
+	int k4 = (*it)->blockSize()/256;
+	if ( (*it)->isRemovable() ) {
+	    s += (*it)->name() + "=" + (*it)->path() + "/Documents " // No tr
+		 + QString::number( (*it)->availBlocks() * k4/4 )
+		 + "K " + (*it)->options() + ";";
+	} else if ( homeDir.contains( (*it)->path() ) &&
+		  (*it)->path().length() > homeFsPath.length() ) {
+	    homeFsPath = (*it)->path();
+	    homeFs =
+		(*it)->name() + "=" + homeDir + "/Documents " // No tr
+		+ QString::number( (*it)->availBlocks() * k4/4 )
+		+ "K " + (*it)->options() + ";";
+	}
+    }
+    if ( !homeFs.isEmpty() )
+	s += homeFs;
+    return s;
+}
+
+QString Server::installLocationsString()
+{
+    storage->update();
+    const QList<FileSystem> &fs = storage->fileSystems();
+    QListIterator<FileSystem> it ( fs );
+    QString s;
+    QString homeDir = getenv("HOME");
+    QString homeFs, homeFsPath;
+    for ( ; it.current(); ++it ) {
+	int k4 = (*it)->blockSize()/256;
+	if ( (*it)->isRemovable() ) {
+	    s += (*it)->name() + "=" + (*it)->path() + " " // No tr
+		 + QString::number( (*it)->availBlocks() * k4/4 )
+		 + "K " + (*it)->options() + ";";
+	} else if ( homeDir.contains( (*it)->path() ) &&
+		    (*it)->path().length() > homeFsPath.length() ) {
+	    homeFsPath = (*it)->path();
+	    homeFs =
+		(*it)->name() + "=" + homeDir + " " // No tr
+		+ QString::number( (*it)->availBlocks() * k4/4 )
+		+ "K " + (*it)->options() + ";";
+	}
+    }
+    if ( !homeFs.isEmpty() )
+	s = homeFs + s;
+    return s;
+}
+
 void Server::receiveTaskBar(const QCString &msg, const QByteArray &data)
 {
     QDataStream stream( data, IO_ReadOnly );
 
     if ( msg == "reloadApps()" ) {
       docList->reloadAppLnks();
-    } else
-
-    if ( msg == "soundAlarm()" ) {
+    } else if ( msg == "soundAlarm()" ) {
       ServerApplication::soundAlarm();
-    } else
-
-    if ( msg == "setLed(int,bool)" ) {
+    } else if ( msg == "setLed(int,bool)" ) {
         int led, status;
         stream >> led >> status;
 
@@ -748,3 +804,176 @@ void Server::preloadApps()
 #endif
     }
 }
+
+// This is only called if QPE_HAVE_DIRECT_ACCESS is defined
+void Server::prepareDirectAccess()
+{
+    qDebug( "Server::prepareDirectAccess()" );
+    // Put up a pretty dialog
+    syncDialog = new SyncDialog( this, tr("USB Lock") );
+    syncDialog->show();
+
+    // Prevent the PDA from acting as a PDA
+    terminateServers();
+
+    // suspend the mtab monitor
+#ifndef QT_NO_COP
+    {
+	QCopEnvelope e( "QPE/Stabmon", "suspendMonitor()" );
+    }
+#endif
+
+    // send out a flush message
+    // once flushes are done call runDirectAccess()
+    // We just count the number of apps and set a timer.
+    // Either the timer expires or the correct number of apps responds.
+    // Note: quicklauncher isn't in the runningApps list but it responds
+    //       to the flush so we start the counter at 1
+    pendingFlushes = 1;
+    directAccessRun = FALSE;
+    for ( QMap<int,QString>::ConstIterator it =
+	    appLauncher->runningApplications().begin();
+	  it != appLauncher->runningApplications().end();
+	  ++it ) {
+	pendingFlushes++;
+    }
+#ifndef QT_NO_COP
+    QCopEnvelope e1( "QPE/System", "flush()" );
+#endif
+    QTimer::singleShot( 10000, this, SLOT(runDirectAccess()) );
+#warning FIXME support TempScreenSaverMode
+#if 0
+    QPEApplication::setTempScreenSaverMode(QPEApplication::DisableSuspend);
+#endif
+}
+
+// This is only connected if QPE_HAVE_DIRECT_ACCESS is defined
+// It fakes the presence of Qtopia Desktop
+void Server::desktopMessage( const QCString &message, const QByteArray &data )
+{
+    QDataStream stream( data, IO_ReadOnly );
+    if ( message == "flushDone(QString)" ) {
+	QString app;
+	stream >> app;
+	qDebug( "flushDone from %s", app.latin1() );
+	if ( --pendingFlushes == 0 ) {
+	    qDebug( "pendingFlushes == 0, all the apps responded" );
+	    runDirectAccess();
+	}
+    } else if ( message == "installStarted(QString)" ) {
+	QString package;
+	stream >> package;
+	qDebug( "\tInstall Started for package %s", package.latin1() );
+    } else if ( message == "installStep(QString)" ) {
+	QString step;
+	stream >> step;
+	qDebug( "\tInstall Step %s", step.latin1() );
+    } else if ( message == "installDone(QString)" ) {
+	QString package;
+	stream >> package;
+	qDebug( "\tInstall Finished for package %s", package.latin1() );
+    } else if ( message == "installFailed(QString,int,QString)" ) {
+	QString package, error;
+	int status;
+	stream >> package >> status >> error;
+	qDebug( "\tInstall Failed for package %s with error code %d and error message %s",
+		package.latin1(), status, error.latin1() );
+    } else if ( message == "removeStarted(QString)" ) {
+	QString package;
+	stream >> package;
+	qDebug( "\tRemove Started for package %s", package.latin1() );
+    } else if ( message == "removeDone(QString)" ) {
+	QString package;
+	stream >> package;
+	qDebug( "\tRemove Finished for package %s", package.latin1() );
+    } else if ( message == "removeFailed(QString)" ) {
+	QString package;
+	stream >> package;
+	qDebug( "\tRemove Failed for package %s", package.latin1() );
+    }
+
+    if ( qrr && qrr->waitingForMessages )
+	qrr->desktopMessage( message, data );
+}
+
+
+// This is only connected if QPE_HAVE_DIRECT_ACCESS is defined
+void Server::runDirectAccess()
+{
+#ifdef QPE_HAVE_DIRECT_ACCESS
+    // The timer must have fired after all the apps responded
+    // with flushDone(). Just ignore it.
+    if ( directAccessRun )
+	return;
+
+    directAccessRun = TRUE;
+    ::readyDirectAccess(cardInfoString(), installLocationsString());
+#endif
+}
+
+// This is only called if QPE_HAVE_DIRECT_ACCESS is defined
+void Server::postDirectAccess()
+{
+#ifdef QPE_HAVE_DIRECT_ACCESS
+    qDebug( "Server::postDirectAccess()" );
+
+    // Categories may have changed
+    QCopEnvelope e1( "QPE/System", "categoriesChanged()" );
+    // Apps need to reload their data
+    QCopEnvelope e2( "QPE/System", "reload()" );
+    // Reload DocLinks
+    docList->storageChanged();
+    // Restart the PDA server stuff
+    startTransferServer();
+
+    // restart the mtab monitor
+#ifndef QT_NO_COP
+    {
+	QCopEnvelope e( "QPE/Stabmon", "restartMonitor()" );
+    }
+#endif
+
+    // Process queued requests
+    const char *queueFile = ::directAccessQueueFile();
+    QFile *file = new QFile( queueFile );
+    if ( !file->exists() ) {
+	delete file;
+	// Get rid of the dialog
+	if ( syncDialog ) {
+	    delete syncDialog;
+	    syncDialog = 0;
+	}
+#warning FIXME support TempScreenSaverMode
+#if 0
+	QPEApplication::setTempScreenSaverMode(QPEApplication::Enable);
+#endif
+    } else {
+	qrr = new QueuedRequestRunner( file, syncDialog );
+	connect( qrr, SIGNAL(finished()),
+		 this, SLOT(finishedQueuedRequests()) );
+	QTimer::singleShot( 100, qrr, SLOT(process()) );
+	// qrr will remove the sync dialog later
+    }
+#endif
+}
+
+void Server::finishedQueuedRequests()
+{
+    if ( qrr->readyToDelete ) {
+	delete qrr;
+	qrr = 0;
+	// Get rid of the dialog
+	if ( syncDialog ) {
+	    delete syncDialog;
+	    syncDialog = 0;
+	}
+#warning FIXME support TempScreenSaverMode
+#if 0
+	QPEApplication::setTempScreenSaverMode(QPEApplication::Enable);
+#endif
+    } else {
+	qrr->readyToDelete = TRUE;
+	QTimer::singleShot( 0, this, SLOT(finishedQueuedRequests()) );
+    }
+}
+

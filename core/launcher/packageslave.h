@@ -38,7 +38,7 @@ public slots:
     void redoPackages();
 
 protected:
-    void installPackage( const QString &package );
+    void installPackage( const QString &package, const QString &dest = QString::null );
     void removePackage( const QString &package );
 
     void addPackageFiles( const QString &location, const QString &listfile );

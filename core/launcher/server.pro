@@ -5,6 +5,7 @@ CONFIG		+= qt warn_on
 DESTDIR		= $$(OPIEDIR)/bin
 
 HEADERS		+= server.h \
+		    qrr.h \
 		  serverinterface.h \
 		  launchertab.h \
 		  documentlist.h \
@@ -34,6 +35,7 @@ HEADERS		+= server.h \
                   mediadlg.h
 
 SOURCES		+= server.cpp \
+		qrr.cpp \
 		  serverinterface.cpp \
 		  launchertab.cpp \
 		  documentlist.cpp \
@@ -76,6 +78,9 @@ DEPENDPATH  += $(OPIEDIR)/noncore/settings/mediummount
 
 LIBS        += -lqpe -lopiecore2 -lopieui2 -lopiesecurity2 -lqrsync
 TARGET       = qpe
+
+## not ready for use yet
+# DEFINES += QPE_HAVE_DIRECT_ACCESS
 
 contains( $(CONFIG_TARGET_MACOSX), y ) {
   LIBS += -lcrypt

@@ -65,6 +65,10 @@ void PackageHandler::qcopMessage( const QCString &msg, const QByteArray &data )
         QString file;
         stream >> file;
         installPackage( file );
+    } else if ( msg == "installPackage(QString,QString)" ) {
+        QString file, dest;
+        stream >> file >> dest;
+        installPackage( file, dest );
     } else if ( msg == "removePackage(QString)" ) {
     QString file;
         stream >> file;
@@ -93,7 +97,7 @@ void PackageHandler::qcopMessage( const QCString &msg, const QByteArray &data )
     }
 }
 
-void PackageHandler::installPackage( const QString &package )
+void PackageHandler::installPackage( const QString &package, const QString &dest )
 {
     if ( mNoSpaceLeft ) {
     mNoSpaceLeft = FALSE;
@@ -102,7 +106,13 @@ void PackageHandler::installPackage( const QString &package )
     //return;
     }
 
-    currentProcess = new QProcess( QStringList() << "ipkg" << "install" << package ); // No tr
+    QStringList cmd;
+    cmd << "ipkg";
+    if ( !dest.isEmpty() ) {
+	cmd << "-d" << dest;
+    }
+    cmd << "install" << package;
+    currentProcess = new QProcess( cmd ); // No tr
     connect( currentProcess, SIGNAL( processExited() ), SLOT( iProcessExited() ) );
     connect( currentProcess, SIGNAL( readyReadStdout() ), SLOT( readyReadStdout() ) );
     connect( currentProcess, SIGNAL( readyReadStderr() ), SLOT( readyReadStderr() ) );
