@@ -67,6 +67,7 @@
 #include <qapplication.h>
 #include <qsocketnotifier.h>
 #include <qstring.h>
+#include <qfile.h>
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -142,6 +143,11 @@ void MyPty::error()
 
 void MyPty::start() {
     char* cmd = "/bin/sh";
+
+    if ( QFile::exists( "/bin/bash" ) ) {
+        char* cmd = "/bin/bash";
+    }
+
     QStrList lis;
     int r =run(cmd, lis, 0, 0);
     r = r;
