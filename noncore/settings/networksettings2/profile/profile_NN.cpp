@@ -2,11 +2,7 @@
 #include "profile_NN.h"
 #include "profile_NNI.h"
 
-#ifndef MYPLUGIN
-
 #include "netnodeinterface.h"
-
-#endif
 
 static const char * ProfileNeeds[] = 
     { "connection", 
@@ -59,17 +55,4 @@ void ProfileNetNode::setSpecificAttribute( QString & , QString & ) {
 void ProfileNetNode::saveSpecificAttribute( QTextStream & ) {
 }
 
-#ifdef MYPLUGIN 
-
-extern "C" {
-void create_plugin( QList<ANetNode> & PNN ) {
-      PNN.append( new ProfileNetNode() );
-}
-
-#else
-
-OPIE_NS2_PLUGIN( NetNodeInterface<ProfileNetNode> )
-
-#endif
-
-}
+OPIE_NS2_PLUGIN( NetNodeInterface_T<ProfileNetNode> )

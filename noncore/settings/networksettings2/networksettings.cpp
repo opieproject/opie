@@ -237,7 +237,7 @@ void NetworkSettings::SLOT_EditNode( QListBoxItem * LBI ) {
               } // else new name
               // new name -> remove item
               NSResources->removeConnection( OldName );
-              NSResources->addConnection( NC );
+              NSResources->addConnection( NC, 0 );
             } // else not changed
 
             // must add it here since change will trigger event
@@ -248,7 +248,7 @@ void NetworkSettings::SLOT_EditNode( QListBoxItem * LBI ) {
           } else {
             // new item
             int ci = Profiles_LB->count();
-            NSResources->addConnection( NC );
+            NSResources->addConnection( NC, 0 );
             NC->setNumber( NSResources->assignConnectionNumber() );
             Profiles_LB->insertItem( NC->devicePixmap(), NC->name() );
             Profiles_LB->setSelected( ci, TRUE );

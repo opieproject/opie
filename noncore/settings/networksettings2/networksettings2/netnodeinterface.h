@@ -78,8 +78,18 @@ struct NS2PrivateFactory<Opie::Core::Typelist<Node, Tail> > {
 
 };
 
+class NetNodeInterface : public QUnknownInterface {
+
+public :
+
+      virtual QRESULT queryInterface( const QUuid& uuid, 
+                              QUnknownInterface **iface ) = 0;
+
+      virtual void create_plugin( QList<ANetNode> & PNN ) = 0;
+};
+
 template<class Node>
-struct NetNodeInterface : public QUnknownInterface {
+struct NetNodeInterface_T : public NetNodeInterface {
 
     QRESULT queryInterface(const QUuid& uuid, QUnknownInterface **iface) {
 	*iface = 0;
@@ -107,8 +117,8 @@ struct NetNodeInterface : public QUnknownInterface {
 };
 
 template<class Node, class Tail>
-struct NetNodeInterface<Opie::Core::Typelist<Node, Tail> >
-    : public QUnknownInterface {
+struct NetNodeInterface_T<Opie::Core::Typelist<Node, Tail> >
+    : public NetNodeInterface {
 
     QRESULT queryInterface( const QUuid& uuid, 
                             QUnknownInterface **iface) {
@@ -125,7 +135,7 @@ struct NetNodeInterface<Opie::Core::Typelist<Node, Tail> >
     }
 
     void create_plugin( QList<ANetNode> & PNN ) {
-	NS2PrivateFactory<Opie::Core::Typelist<Node,Tail> >::createPlugin( PNN );
+	NS2PrivateFactory<Opie::Core::Typelist<Node,Tail> >::createPlugins( PNN );
     }
 
     Q_REFCOUNT

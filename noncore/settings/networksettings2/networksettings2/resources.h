@@ -38,21 +38,7 @@ public :
         QArray<char *> EnvList;
 };
 
-#ifdef MYPLUGIN
-
-typedef struct NetNode_S {
-        ANetNode * NetNode;
-        QLibrary * TheLibrary;
-        long NodeCountInLib;
-} NetNode_t;
-typedef QDict<NetNode_t> Name2NetNode_t;
-
-#else
-
 typedef QDict<ANetNode>  Name2NetNode_t;
-
-#endif
-
 typedef QDict<ANetNodeInstance > Name2Instance_t;
 typedef QDict<NodeCollection> Name2Connection_t;
 typedef QDict<SystemFile> Name2SystemFile_t;
@@ -77,16 +63,9 @@ public :
       { return AllNodeTypes; }
     bool netNodeExists( const QString & X )
       { return AllNodeTypes.find(X)!=0; }
-#ifdef MYPLUGIN
-    ANetNode * findNetNode( const QString & N )
-      { NetNode_t * NNT = AllNodeTypes.find(N);
-        return (NNT) ? NNT->NetNode : 0;
-      }
-#else
     ANetNode * findNetNode( const QString & N )
       { return AllNodeTypes.find(N);
       }
-#endif
     // define new plugin (=node)
     void addNodeType( const QString & ID,
                       const QString & LongName,
@@ -99,21 +78,15 @@ public :
                         bool KDI );
 
     ANetNodeInstance * createNodeInstance( const QString & S )
-      { ANetNodeInstance * NNI = 0;
-        printf( "Find node type %s\n", S.latin1() );
-#ifdef MYPLUGIN
-        NetNode_t * NNT = AllNodeTypes[S];
-        if( ! NNT ) {
+      { ANetNode * NN = findNetNode( S );
+
+        Log(( "Find node type %s : %p\n", S.latin1(), NN ));
+
+        if( NN == 0 ) 
+          // type of this instance not found
           return 0;
-        }
-        NNI = NNT->NetNode->createInstance();
-#else
-        ANetNode * NNT = AllNodeTypes[S];
-        if( ! NNT ) {
-          return 0;
-        }
-        NNI = NNT->createInstance();
-#endif
+
+        ANetNodeInstance * NNI = NN->createInstance();
         NNI->initialize();
         return NNI;
       }
@@ -130,11 +103,13 @@ public :
     const QString & netNode2Name( const char * Type );
     const QString & netNode2Description( const char * Type );
 
-    void addConnection( NodeCollection * NC );
+    void addConnection( NodeCollection * NC, bool Dangling );
     void removeConnection( const QString & N );
     NodeCollection * findConnection( const QString & N );
     NodeCollection * getConnection( int nr );
     Name2Connection_t & connections( void )
+      { return ConnectionsMap; }
+    Name2Connection_t & danglingConnections( void )
       { return ConnectionsMap; }
 
     inline bool userKnown( void )
@@ -147,18 +122,15 @@ private :
     void detectCurrentUser( void );
     QString tr( const char * path );
 
-#ifdef MYPLUGIN
-    void findAvailableNetNodes( const QString &path );
-    bool loadNetNode(
-         const QString &pluginFileName,
-         const QString &resolveString = "create_plugin");
-#else
     void findAvailableNetNodes( void );
-#endif
 
     QMap< QString, QString>   NodeTypeNameMap;
     QMap< QString, QString>   NodeTypeDescriptionMap;
+    // list of connections that are valid
     Name2Connection_t         ConnectionsMap;
+    // list of connection configurations that are not valid
+    // e.g. because plugins are missing
+    Name2Connection_t         DanglingConnectionsMap;
     System *                  TheSystem;
     Name2SystemFile_t         SystemFiles;
 
@@ -170,10 +142,8 @@ private :
 
     CurrentQPEUser            CurrentUser;
 
-#ifndef MYPLUGIN
     Opie::Core::OPluginLoader *  Plugins;
     Opie::Core::OPluginManager * PluginManager;
-#endif
 
 };
 

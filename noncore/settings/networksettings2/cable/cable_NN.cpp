@@ -1,11 +1,7 @@
 #include "cable_NN.h"
 #include "cable_NNI.h"
 
-#ifndef MYPLUGIN
-
 #include "netnodeinterface.h"
-
-#endif
 
 static const char * CableNeeds[] = 
     { 0
@@ -53,17 +49,4 @@ void CableNetNode::setSpecificAttribute( QString & , QString &  ) {
 void CableNetNode::saveSpecificAttribute( QTextStream & ) {
 }
 
-#ifdef MYPLUGIN 
-
-extern "C" {
-void create_plugin( QList<ANetNode> & PNN ) {
-      PNN.append( new CableNetNode() );
-}
-
-#else
-
-OPIE_NS2_PLUGIN(  NetNodeInterface<CableNetNode> )
-
-#endif
-
-}
+OPIE_NS2_PLUGIN(  NetNodeInterface_T<CableNetNode> )

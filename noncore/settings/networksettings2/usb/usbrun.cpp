@@ -5,9 +5,11 @@
 #include "usbrun.h"
 
 State_t USBRun::detectState( void ) {
+
     // unavailable : no card found
     // available : card found and assigned to us or free
     // up : card found and assigned to us and up
+
     NodeCollection * NC = nodeCollection();
     QString S = QString( "/tmp/profile-%1.up" ).arg(NC->number());
     System & Sys = NSResources->system();
@@ -64,7 +66,9 @@ State_t USBRun::detectState( void ) {
           ! Run->IsUp
         ) {
         // proper type, and Not UP -> free
-        return Off;
+        // usb cables are currently always available when requested
+        // until we can detect if we are plugged in
+        return Available;
       }
     }
 
@@ -75,15 +79,6 @@ QString USBRun::setMyState( NodeCollection * NC, Action_t A, bool ) {
 
     // nothing needs to be done to 'activate' or 'deactivate' 
     // a cable
-
-    // perhaps (later) we can figure out if the device is IN the
-    // cradle 
-    if( A == Activate ) {
-      NC->setCurrentState( Available );
-    } else if ( A == Deactivate ) {
-      NC->setCurrentState( Unavailable );
-    }
-
     return QString();
 }
 

@@ -141,13 +141,17 @@ NodeCollection::NodeCollection( void ) : QList<ANetNodeInstance>() {
     IsNew = 1;
     CurrentState = Unchecked;
     AssignedInterface = 0;
+    Number = -1;
+    Done = 0;
 }
 
-NodeCollection::NodeCollection( QTextStream & TS ) :
+NodeCollection::NodeCollection( QTextStream & TS, bool & Dangling ) :
       QList<ANetNodeInstance>() {
     long idx;
-    bool InError = 0;
     QString S, A, N;
+
+    Number = -1;
+    Done = 0;
     IsModified = 0;
     Index = -1;
     Name="";
@@ -155,13 +159,11 @@ NodeCollection::NodeCollection( QTextStream & TS ) :
     AssignedInterface = 0;
     CurrentState = Unchecked;
 
+    Dangling = 0; // by default node collection is ok
+
     do {
       S = TS.readLine();
       if( S.isEmpty() ) {
-        if( InError ) {
-          // remove all nodes
-          clear();
-        }
         // empty line
         break;
       }
@@ -181,11 +183,15 @@ NodeCollection::NodeCollection( QTextStream & TS ) :
       } else if( A == "node" ) {
         ANetNodeInstance * NNI = NSResources->findNodeInstance( N );
         Log(( "Find node %s : %p\n", N.latin1(), NNI ));
-        if( NNI && ! InError ) {
+        if( NNI ) {
           append( NNI );
         } else {
           // could not find a node type -> collection invalid
-          InError = 1;
+          Log(( "Node %s missing -> connection dangling\n", 
+                      N.latin1() ));
+          // create placeholder for this dangling NNI
+          NNI = new ErrorNNI( N );
+          Dangling = 1;
         }
       }
     } while( 1 );
@@ -193,7 +199,6 @@ NodeCollection::NodeCollection( QTextStream & TS ) :
     Log(( "Profile number %s : %d nodes\n", 
           Name.latin1(), count() ));
 }
-
 
 NodeCollection::~NodeCollection( void ) {
 }
@@ -229,10 +234,11 @@ ANetNodeInstance * NodeCollection::getToplevel( void ) {
          it.current();
          ++it ) {
       NNI = it.current();
-      if( NNI->nodeClass()->isToplevel() )
-        break;
+      if( NNI->nodeClass()->isToplevel() ) {
+        return NNI;
+      }
     }
-    return NNI;
+    return 0;
 }
 
 ANetNodeInstance * NodeCollection::findByName( const QString & S ) {
@@ -241,10 +247,11 @@ ANetNodeInstance * NodeCollection::findByName( const QString & S ) {
          it.current();
          ++it ) {
       NNI = it.current();
-      if( NNI->name() == S )
-        break;
+      if( NNI->name() == S ) {
+        return NNI;
+      }
     }
-    return NNI;
+    return 0;
 }
 
 ANetNodeInstance * NodeCollection::findNext( ANetNodeInstance * NNI ) {

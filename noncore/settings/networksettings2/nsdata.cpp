@@ -116,8 +116,9 @@ void NetworkSettingsData::loadSettings( void ) {
 
         if( S == "connection" ) {
           // load connections -> collections of nodes
-          NodeCollection * NC = new NodeCollection( TS );
-          NSResources->addConnection( NC );
+          bool Dangling;
+          NodeCollection * NC = new NodeCollection( TS, Dangling );
+          NSResources->addConnection( NC, Dangling );
         } else {
           ANetNode * NN = 0;
           ANetNodeInstance* NNI = 0;
@@ -133,45 +134,45 @@ void NetworkSettingsData::loadSettings( void ) {
 
           if( NN == 0 && NNI == 0 ) {
             LeftOvers.append( Line );
-          }
+            do {
+              Line = TS.readLine();
+              // store even delimiter
+              LeftOvers.append( Line );
+            } while ( ! Line.isEmpty() );
 
+            //next section 
+            continue;
+          } 
+
+          // read entries of this section
           do {
             S = Line = TS.readLine();
 
-            if( NN || NNI ) {
-              if( S.isEmpty() ) {
-                // empty line
-                break;
-              }
-              idx = S.find( '=' );
-              if( idx > 0 ) {
-                Attr = S.left( idx );
-                Value = S.mid( idx+1, S.length() );
-              } else {
-                Value="";
-                Attr = S;
-              }
-
-              Value.stripWhiteSpace();
-              Attr.stripWhiteSpace();
-              Attr.lower();
-              // dequote Attr
-              Value = deQuote(Value);
-
-              if( NN ) {
-                // set the attribute
-                NN->setAttribute( Attr, Value );
-              } else {
-                // set the attribute
-                NNI->setAttribute( Attr, Value );
-              }
+            if( S.isEmpty() ) {
+              // empty line
+              break;
+            }
+            idx = S.find( '=' );
+            if( idx > 0 ) {
+              Attr = S.left( idx );
+              Value = S.mid( idx+1, S.length() );
             } else {
-              LeftOvers.append( Line );
-              // add empty line too as delimiter
-              if( S.isEmpty() ) {
-                // empty line
-                break;
-              }
+              Value="";
+              Attr = S;
+            }
+
+            Value.stripWhiteSpace();
+            Attr.stripWhiteSpace();
+            Attr.lower();
+            // dequote Attr
+            Value = deQuote(Value);
+
+            if( NN ) {
+              // set the attribute
+              NN->setAttribute( Attr, Value );
+            } else {
+              // set the attribute
+              NNI->setAttribute( Attr, Value );
             }
           } while( 1 );
 
@@ -181,6 +182,7 @@ void NetworkSettingsData::loadSettings( void ) {
             NNI->setNew( FALSE );
             NSResources->addNodeInstance( NNI );
           }
+
           if( NN ) {
             Log( ( "Node %s : %p\n", NN->name(), NN ) );
           }
@@ -211,46 +213,61 @@ QString NetworkSettingsData::saveSettings( void ) {
 
     QTextStream TS( &F );
 
+    // save global configs
+    for( QDictIterator<ANetNode> it( NSResources->netNodes() );
+        it.current();
+        ++it ) {
+        TS << "[nodetype "
+           << quote( QString( it.current()->name() ) )
+           << "]" 
+           << endl;
+
+        it.current()->saveAttributes( TS );
+        TS << endl;
+    }
+
     // save leftovers
     for ( QStringList::Iterator it = LeftOvers.begin(); 
           it != LeftOvers.end(); ++it ) {
       TS << (*it) << endl;
     }
 
-    // save global configs
-    for( QDictIterator<NetNode_t> it( NSResources->netNodes() );
-        it.current();
-        ++it ) {
-        TS << "[nodetype "
-           << quote( QString( it.current()->NetNode->name() ) )
-           << "]" 
+    // save all netnode instances
+    { ANetNodeInstance * NNI;
+      for( QDictIterator<ANetNodeInstance> nit( 
+                          NSResources->netNodeInstances()); 
+           nit.current();
+           ++nit ) {
+        // header
+        NNI = nit.current();
+        TS << '[' 
+           << QString(NNI->nodeClass()->name()) 
+           << ']' 
            << endl;
-
-        it.current()->NetNode->saveAttributes( TS );
+        NNI->saveAttributes( TS );
         TS << endl;
+      }
     }
 
+    // good connections
     { Name2Connection_t & M = NSResources->connections();
-      ANetNodeInstance * NNI;
 
       // for all connections
       for( QDictIterator<NodeCollection> it(M);
            it.current();
            ++it ) {
-        // all nodes in those connections
-        for( QListIterator<ANetNodeInstance> nit(*(it.current())); 
-             nit.current();
-             ++nit ) {
-          // header
-          NNI = nit.current();
-          TS << '[' 
-             << QString(NNI->nodeClass()->name()) 
-             << ']' 
-             << endl;
-          NNI->saveAttributes( TS );
-          TS << endl;
-        }
+        TS << "[connection]" << endl;
+        it.current()->save(TS);
+      }
+    }
 
+    // save dangling connections
+    { Name2Connection_t & M = NSResources->danglingConnections();
+
+      // for all connections
+      for( QDictIterator<NodeCollection> it(M);
+           it.current();
+           ++it ) {
         TS << "[connection]" << endl;
         it.current()->save(TS);
       }
@@ -289,14 +306,15 @@ QString NetworkSettingsData::generateSettings( void ) {
     // regenerate system files
     Log( ( "Generating settings from %s\n", CfgFile.latin1()  ));
 
-    for( QDictIterator<NetNode_t> nnit( NSResources->netNodes() );
+    for( QDictIterator<ANetNode> nnit( NSResources->netNodes() );
          nnit.current();
          ++nnit ) {
-      { QStringList SL;
-        bool FirstItem = 1;
-        bool Generated = 0;
+      bool FirstItem = 1;
+      bool Generated = 0;
 
-        CurDevNN = nnit.current()->NetNode;
+      CurDevNN = nnit.current();
+
+      { QStringList SL;
         SL = CurDevNN->properFiles();
 
         for ( QStringList::Iterator it = SL.begin(); 
@@ -395,10 +413,10 @@ QString NetworkSettingsData::generateSettings( void ) {
       SF = sfit.current();
 
       // reset all 
-      for( QDictIterator<NetNode_t> nnit( NSResources->netNodes() );
+      for( QDictIterator<ANetNode> nnit( NSResources->netNodes() );
            nnit.current();
            ++nnit ) {
-        nnit.current()->NetNode->setDone(0);
+        nnit.current()->setDone(0);
       }
 
       for( QDictIterator<ANetNodeInstance> nniit(
@@ -420,11 +438,11 @@ QString NetworkSettingsData::generateSettings( void ) {
 
       // are there netnodes that have instances and need 
       // to write data in this system file ?
-      for( QDictIterator<NetNode_t> nnit( NSResources->netNodes() );
+      for( QDictIterator<ANetNode> nnit( NSResources->netNodes() );
            ! needToGenerate && nnit.current();
            ++nnit ) {
 
-        NN = nnit.current()->NetNode;
+        NN = nnit.current();
 
         if( NN->hasDataForFile( *SF ) ) {
           // netnode can have data

@@ -321,11 +321,10 @@ void EditConnection::buildFullTree( void ) {
 
     // find all Nodes that are toplevel nodes -> ie provide
     // TCP/IP Connection
-    for( QDictIterator<NetNode_t> Iter(NSResources->netNodes());
+    for( QDictIterator<ANetNode> Iter(NSResources->netNodes());
          Iter.current();
          ++Iter ) {
-
-      NN = Iter.current()->NetNode;
+      NN = Iter.current();
 
       if( ! NN->isToplevel() ) {
         continue;

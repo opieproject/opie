@@ -25,57 +25,13 @@
 TheNSResources * _NSResources = 0;
 
 TheNSResources::TheNSResources( void ) : NodeTypeNameMap(),
-        ConnectionsMap() {
+        ConnectionsMap(), DanglingConnectionsMap() {
 
     _NSResources = this;
 
     detectCurrentUser();
 
     // load available netnodes
-
-#ifdef MYPLUGIN
-
-    findAvailableNetNodes(QPEApplication::qpeDir() + PLUGINDIR );
-
-    // compile provides and needs lists
-    { const char ** NeedsRun;
-      QDictIterator<NetNode_t> OuterIt( AllNodeTypes );
-      bool Done;
-
-      for ( ; OuterIt.current(); ++OuterIt ) {
-        // find needs list
-        ANetNode::NetNodeList * NNLP = new ANetNode::NetNodeList;
-        ANetNode::NetNodeList & NNL = *(NNLP);
-
-        // must iterate this way to avoid duplication pointers
-        for ( QDictIterator<NetNode_t> InnerIt( AllNodeTypes );
-              InnerIt.current(); ++InnerIt ) {
-          if( InnerIt.current() == OuterIt.current() )
-            // avoid recursive 
-            continue;
-
-          const char ** Provides = InnerIt.current()->NetNode->provides();
-          NeedsRun = OuterIt.current()->NetNode->needs();
-
-          for( ; *NeedsRun; NeedsRun ++ ) {
-            const char ** PRun;
-            PRun = Provides;
-            for( ; *PRun; PRun ++ ) {
-              if( strcmp( *PRun, *NeedsRun ) == 0 ) {
-                // inner provides what outer needs
-                NNL.resize( NNL.size() + 1 );
-                NNL[NNL.size()-1] = InnerIt.current()->NetNode;
-                Done = 1; // break from 2 loops
-                break;
-              }
-            }
-          }
-        }
-        OuterIt.current()->NetNode->setAlternatives( NNLP );
-      }
-    }
-
-#else
 
     Plugins = 0;
     findAvailableNetNodes();
@@ -119,8 +75,6 @@ TheNSResources::TheNSResources( void ) : NodeTypeNameMap(),
       }
     }
 
-#endif
-
     // define built in Node types to Description map
     addNodeType( "device", tr( "Network Device" ),
          tr( "<p>Devices that can handle IP packets</p>" ) );
@@ -140,12 +94,10 @@ TheNSResources::TheNSResources( void ) : NodeTypeNameMap(),
 
 TheNSResources::~TheNSResources( void ) {
 
-#ifndef MYPLUGINS
     if( Plugins ) {
       delete Plugins;
       delete PluginManager;
     }
-#endif
     delete TheSystem;
 
 }
@@ -179,99 +131,6 @@ void TheNSResources::busy( bool ) {
 */
 }
 
-#ifdef MYPLUGIN
-/**
- * Load all modules that are found in the path
- * @param path a directory that is scaned for any plugins that can be loaded
- *  and attempts to load them
- */
-void TheNSResources::findAvailableNetNodes(const QString &path){
-
-    Log(("Locate plugins in %s\n", path.latin1() ));
-    QDir d(path);
-    if(!d.exists())
-      return;
-
-    QString lang = ::getenv("LANG");
-    
-    // Don't want sym links
-    d.setFilter( QDir::Files | QDir::NoSymLinks );
-    const QFileInfoList *list = d.entryInfoList();
-    QFileInfoListIterator it( *list );
-    QFileInfo *fi;
-
-    while ( (fi=it.current()) ) {
-
-      if( fi->fileName().contains(".so")){
-        /* if loaded install translation */
-        if( loadNetNode(path + "/" + fi->fileName()) ) {
-          Log(( "Loading plugin %s\n", fi->fileName().latin1()));
-          QTranslator *trans = new QTranslator(qApp);
-          QString fn = QPEApplication::qpeDir()+
-                    "/i18n/"+lang+"/"+ 
-                    fi->fileName().left( fi->fileName().find(".") )+
-                    ".qm";
-
-          if( trans->load( fn ) )
-              qApp->installTranslator( trans );
-          else
-              delete trans;
-        } else {
-          Log(( "Error loading plugin %s\n", fi->fileName().latin1()));
-        }
-      }
-      ++it;
-    }
-}
-
-/**
- * Attempt to load a function and resolve a function.
- * @param pluginFileName - the name of the file in which to attempt to load
- * @param resolveString - function pointer to resolve
- * @return true of loading is successful
- */
-bool TheNSResources::loadNetNode(
-      const QString &pluginFileName, const QString &resolveString){
-
-    QLibrary *lib = new QLibrary(pluginFileName);
-    void * res = lib->resolve(resolveString);
-    if( ! res ){
-      delete lib;
-      return 0;
-    }
-
-    GetNetNodeListFt_t getNetNodeList = (GetNetNodeListFt_t)res;
-    
-    // Try to get an object.
-    QList<ANetNode> PNN;
-
-    getNetNodeList( PNN );
-    if( PNN.isEmpty() ) {
-      delete lib;
-      return 0;
-    }
-
-    ANetNode * NNP;
-    for( QListIterator<ANetNode> it(PNN);
-         it.current();
-         ++it ) {
-      NetNode_t * NN;
-
-      NNP = it.current();
-      NN = new NetNode_t;
-      NN->NetNode = NNP;
-      NN->TheLibrary = lib;
-      NN->NodeCountInLib = PNN.count();
-
-      // store mapping
-      AllNodeTypes.insert( NN->NetNode->name(), NN );
-    }
-
-    return 1;
-}
-
-#else
-
 void TheNSResources::findAvailableNetNodes( void ){
 
     Plugins = new OPluginLoader( "networksettings2" );
@@ -293,6 +152,7 @@ void TheNSResources::findAvailableNetNodes( void ){
 
     // Get All Plugins
     OPluginLoader::List allplugins = Plugins->filtered();
+    QString lang = ::getenv("LANG");
 
     for( OPluginLoader::List::Iterator it = allplugins.begin(); 
          it != allplugins.end(); 
@@ -304,7 +164,7 @@ void TheNSResources::findAvailableNetNodes( void ){
 
       if( ! interface ) {
         Log(( "Plugin %s from %s does not support proper interface\n", 
-           it->name().latin1(), it->path().latin1() ));
+           (*it).name().latin1(), (*it).path().latin1() ));
         continue;
       }
 
@@ -315,7 +175,7 @@ void TheNSResources::findAvailableNetNodes( void ){
 
         if( PNN.isEmpty() ) {
           Log(( "Plugin %s from %s does offer any nodes\n", 
-             it->name().latin1(), it->path().latin1() ));
+             (*it).name().latin1(), (*it).path().latin1() ));
           delete interface;
           continue;
         }
@@ -324,14 +184,14 @@ void TheNSResources::findAvailableNetNodes( void ){
         for( QListIterator<ANetNode> it(PNN);
              it.current();
              ++it ) {
-          AllNodeTypes.insert( it->current()->name(), it->current() );
+          AllNodeTypes.insert( it.current()->name(), it.current() );
         }
       }
 
       // load the translation 
       QTranslator *trans = new QTranslator(qApp);
       QString fn = QPEApplication::qpeDir()+
-                "/i18n/"+lang+"/"+ it->name() + ".qm";
+                "/i18n/"+lang+"/"+ (*it).name() + ".qm";
 
       if( trans->load( fn ) )
           qApp->installTranslator( trans );
@@ -340,8 +200,6 @@ void TheNSResources::findAvailableNetNodes( void ){
     }
 
 }
-
-#endif
 
 // used to find unique connection number
 int TheNSResources::assignConnectionNumber( void ) {
@@ -387,9 +245,14 @@ const QString & TheNSResources::netNode2Description( const char * s ) {
     return NodeTypeDescriptionMap[s];
 }
 
-void TheNSResources::addConnection( NodeCollection * NC ) {
+void TheNSResources::addConnection( NodeCollection * NC, bool Dangling ) {
       ANetNodeInstance * NNI;
-      ConnectionsMap.insert( NC->name(), NC );
+      if( Dangling ) {
+        DanglingConnectionsMap.insert( NC->name(), NC );
+      } else {
+        ConnectionsMap.insert( NC->name(), NC );
+      }
+
       // add (new) nodes to NodeList
       for( QListIterator<ANetNodeInstance> it(*NC);
            it.current();
@@ -412,9 +275,15 @@ void TheNSResources::removeConnection( const QString & N ) {
       for( NNI = NC->first(); NNI != 0; NNI = NC->next() ) {
         removeNodeInstance( NNI->name() );
       }
-      ConnectionsMap.remove( N ); 
+      if( ConnectionsMap.find( N ) ) {
+        ConnectionsMap.remove( N ); 
+      } else {
+        DanglingConnectionsMap.remove( N ); 
+      }
+
 }
 
+// dangling connections are filtered out
 NodeCollection * TheNSResources::findConnection( const QString & S ) {
       return ConnectionsMap[ S ];
 }

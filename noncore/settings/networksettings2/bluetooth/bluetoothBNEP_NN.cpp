@@ -2,11 +2,7 @@
 #include "bluetoothBNEP_NNI.h"
 #include "bluetoothRFCOMM_NNI.h"
 
-#ifndef MYPLUGIN
-
 #include "netnodeinterface.h"
-
-#endif
 
 //
 //
@@ -75,20 +71,5 @@ void BluetoothBNEPNetNode::saveSpecificAttribute( QTextStream & TS) {
          << endl;
 }
 
-#ifndef MYPLUGIN
-
-extern "C" {
-// create plugin registers both BT functions
-void create_plugin( QList<ANetNode> & PNN ) {
-      PNN.append( new BluetoothBNEPNetNode() );
-      PNN.append( new BluetoothRFCOMMNetNode() );
-}
-
-#else
-
 typedef Opie::Core::MakeTypelist<BluetoothBNEPNetNode,  BluetoothRFCOMMNetNode>::Result BluetoothTypes;
-OPIE_NS2_PLUGIN( NetNodeInterface<BluetoothTypes> )
-
-#endif
-
-}
+OPIE_NS2_PLUGIN( NetNodeInterface_T<BluetoothTypes> )

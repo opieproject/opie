@@ -4,11 +4,7 @@
 #include "network_NN.h"
 #include "network_NNI.h"
 
-#ifndef MYPLUGIN
-
 #include "netnodeinterface.h"
-
-#endif
 
 static const char * NetworkNeeds[] = 
     { "device", 
@@ -96,17 +92,4 @@ void NetworkNetNode::setSpecificAttribute( QString & , QString & ) {
 void NetworkNetNode::saveSpecificAttribute( QTextStream & ) {
 }
 
-#ifdef MYPLUGIN 
-
-extern "C" {
-void create_plugin( QList<ANetNode> & PNN ) {
-      PNN.append( new NetworkNetNode() );
-}
-
-#else
-
-OPIE_NS2_PLUGIN( NetNodeInterface<NetworkNetNode> )
-
-#endif
-
-}
+OPIE_NS2_PLUGIN( NetNodeInterface_T<NetworkNetNode> )

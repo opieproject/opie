@@ -1,11 +1,7 @@
 #include "irda_NN.h"
 #include "irda_NNI.h"
 
-#ifndef MYPLUGIN
-
 #include "netnodeinterface.h"
-
-#endif
 
 static const char * IRDANeeds[] = 
     { 0
@@ -53,17 +49,4 @@ void IRDANetNode::setSpecificAttribute( QString & , QString & ) {
 void IRDANetNode::saveSpecificAttribute( QTextStream & ) {
 }
 
-#ifdef MYPLUGIN 
-
-extern "C" {
-void create_plugin( QList<ANetNode> & PNN ) {
-      PNN.append( new IRDANetNode() );
-}
-
-#else
-
-OPIE_NS2_PLUGIN(  NetNodeInterface<IRDANetNode> )
-
-#endif
-
-}
+OPIE_NS2_PLUGIN(  NetNodeInterface_T<IRDANetNode> )

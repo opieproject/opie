@@ -319,10 +319,52 @@ protected :
     NodeCollection * Connection;
     QString   Description;
     bool      IsModified;
+    // true if this nodeinstance was just created (and not
+    // loaded from file
     bool      IsNew;
     int       Done;
 
     static long InstanceCounter;
+};
+
+class ErrorNNI: public ANetNodeInstance {
+
+public:
+
+    ErrorNNI( const QString & _Name ) : ANetNodeInstance( 0 ) {
+      setName( _Name.latin1() );
+    }
+
+    RuntimeInfo * runtime( void ) {
+      return 0;
+    }
+
+    // create edit widget under parent
+    QWidget * edit( QWidget * parent ) {
+      return 0;
+    }
+
+    // is given data acceptable
+    QString acceptable( void ) {
+      return QString();
+    }
+
+    // get data from GUI and store in node
+    void commit( void ) {
+    }
+
+    // returns node specific data -> only useful for 'buddy'
+    void * data( void ) {
+      return 0;
+    }
+
+protected :
+
+    void setSpecificAttribute( QString & , QString & ) {
+    }
+
+    void saveSpecificAttribute( QTextStream & ) {
+    }
 };
 
 class RuntimeInfo : public QObject {
@@ -468,7 +510,7 @@ class NodeCollection : public QList<ANetNodeInstance> {
 public :
 
       NodeCollection( void );
-      NodeCollection( QTextStream & TS );
+      NodeCollection( QTextStream & TS, bool & Dangling );
       ~NodeCollection( void );
 
       inline int done( void ) 
@@ -585,9 +627,9 @@ private :
       // loaded from file
       bool    IsNew;
       // index in listbox
-      int Index;
+      int     Index;
       bool    IsModified;
-      int Done;
+      int     Done;
 
       InterfaceInfo * AssignedInterface;
 
