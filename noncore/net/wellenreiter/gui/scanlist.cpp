@@ -26,6 +26,24 @@
 using namespace Opie;
 #endif
 
+
+#ifdef QWS
+#include <qpe/resource.h>
+#else
+#include "resource.h"
+#endif
+
+const int col_type = 0;
+const int col_essid = 0;
+const int col_sig = 1;
+const int col_ap = 2;
+const int col_channel = 3;
+const int col_wep = 4;
+const int col_traffic = 5;
+const int col_manuf = 6;
+const int col_firstseen = 7;
+const int col_lastseen = 8;
+
 MScanListView::MScanListView( QWidget* parent, const char* name )
               :OListView( parent, name ), _manufacturerdb( 0 )
 {
@@ -105,7 +123,7 @@ void MScanListView::addNewItem( QString type, QString essid, QString macaddr, bo
     if ( item )
     {
         // animate the item
-        
+
         /*
 
         const QPixmap* pixmap = item->pixmap( 0 );
@@ -173,22 +191,57 @@ void MScanListView::addNewItem( QString type, QString essid, QString macaddr, bo
 
 }
 
-#ifdef QWS
-#include <qpe/resource.h>
-#else
-#include "resource.h"
-#endif
+void MScanListView::traffic( QString type, QString from, QString to, QString via, QString additional )
+{
+    if ( type != "toDS" ) return;
 
-const int col_type = 0;
-const int col_essid = 0;
-const int col_sig = 1;
-const int col_ap = 2;
-const int col_channel = 3;
-const int col_wep = 4;
-const int col_traffic = 5;
-const int col_manuf = 6;
-const int col_firstseen = 7;
-const int col_lastseen = 8;
+    qDebug( "MScanList::traffic( [%s] | %s -> %s (via %s)",
+        (const char*) type, (const char*) from,
+        (const char*) to, (const char*) via );
+
+    QString s;
+    MScanListItem* network;
+
+    QListViewItemIterator it( this );
+    while ( it.current() && it.current()->text( col_ap ) != via ) ++it;
+
+    MScanListItem* item = static_cast<MScanListItem*>( it.current() );
+
+    if ( item ) // AP has been shown up, so just add our new "from" - station
+    {
+        network = static_cast<MScanListItem*>( item->parent() );
+        MScanListItem* subitem = static_cast<MScanListItem*>( network->firstChild() );
+
+        while ( subitem && ( subitem->text( col_ap ) != from ) )
+        {
+            qDebug( "subitemtext: %s", (const char*) subitem->text( col_ap ) );
+            subitem = static_cast<MScanListItem*> ( subitem->itemBelow() );
+        }
+
+        if ( subitem )
+        {
+            // we have already seen this item, it's a dupe
+            #ifdef DEBUG
+            qDebug( "%s is a dupe - ignoring...", (const char*) from );
+            #endif
+            subitem->receivedBeacon(); //FIXME: sent data bit
+            return;
+        }
+
+        // Hey, it seems to be a new item :-D
+        MScanListItem* station = new MScanListItem( item->parent(), "adhoc", /* network->text( col_essid ) */ "", from, false, -1, -1 );
+        if ( _manufacturerdb )
+          station->setManufacturer( _manufacturerdb->lookup( from ) );
+    }
+    else
+    {
+        qDebug( "D'Oh! Station without AP... ignoring for now... will handle this in alpha-4 version :-D" );
+    }
+}
+
+//============================================================
+// MScanListItem
+//============================================================
 
 MScanListItem::MScanListItem( QListView* parent, QString type, QString essid, QString macaddr,
                               bool wep, int channel, int signal )

@@ -39,6 +39,7 @@ class MScanListView: public OListView
 
   public slots:
     void addNewItem( QString type, QString essid, QString macaddr, bool wep, int channel, int signal );
+    void traffic( QString type, QString from, QString to, QString via, QString additional = QString::null );
 
   private:
     ManufacturerDB* _manufacturerdb;

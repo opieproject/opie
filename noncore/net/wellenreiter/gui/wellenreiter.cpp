@@ -113,28 +113,76 @@ void Wellenreiter::receivePacket(OPacket* p)
     hexWindow()->log( p->dump( 8 ) );
 
     // check if we received a beacon frame
-    // static_cast is justified here
     OWaveLanManagementPacket* beacon = static_cast<OWaveLanManagementPacket*>( p->child( "802.11 Management" ) );
-    if ( !beacon ) return;
-    QString type;
+    if ( beacon )
+    {
+        QString type;
+        if ( beacon->canIBSS() )
+            type = "adhoc";
+        else
+            type = "managed";
 
-    //FIXME: Can stations in ESS mode can be distinguished from APs?
-    //FIXME: Apparently yes, but not by listening to beacons, because
-    //FIXME: they simply don't send beacons in infrastructure mode.
-    //FIXME: so we also have to listen to data packets
+        OWaveLanManagementSSID* ssid = static_cast<OWaveLanManagementSSID*>( p->child( "802.11 SSID" ) );
+        QString essid = ssid ? ssid->ID() : QString("<unknown>");
+        OWaveLanManagementDS* ds = static_cast<OWaveLanManagementDS*>( p->child( "802.11 DS" ) );
+        int channel = ds ? ds->channel() : -1;
 
-    if ( beacon->canIBSS() )
-        type = "adhoc";
-    else
-        type = "managed";
+        OWaveLanPacket* header = static_cast<OWaveLanPacket*>( p->child( "802.11" ) );
+        netView()->addNewItem( type, essid, header->macAddress2().toString(), header->usesWep(), channel, 0 );
+        return;
+    }
 
-    OWaveLanManagementSSID* ssid = static_cast<OWaveLanManagementSSID*>( p->child( "802.11 SSID" ) );
-    QString essid = ssid ? ssid->ID() : QString("<unknown>");
-    OWaveLanManagementDS* ds = static_cast<OWaveLanManagementDS*>( p->child( "802.11 DS" ) );
-    int channel = ds ? ds->channel() : -1;
-
-    OWaveLanPacket* header = static_cast<OWaveLanPacket*>( p->child( "802.11" ) );
-    netView()->addNewItem( type, essid, header->macAddress2().toString(), header->usesWep(), channel, 0 );
+    // check for a data frame
+    OWaveLanDataPacket* data = static_cast<OWaveLanDataPacket*>( p->child( "802.11 Data" ) );
+    if ( data )
+    {
+        OWaveLanPacket* wlan = (OWaveLanPacket*) p->child( "802.11" );
+        if ( wlan->fromDS() && !wlan->toDS() )
+        {
+            qDebug( "FromDS traffic: '%s' -> '%s' via '%s'",
+                (const char*) wlan->macAddress3().toString(true),
+                (const char*) wlan->macAddress1().toString(true),
+                (const char*) wlan->macAddress2().toString(true) );
+            netView()->traffic( "fromDS", wlan->macAddress3().toString(),
+                                        wlan->macAddress1().toString(),
+                                        wlan->macAddress2().toString() );
+        }
+        else
+        if ( !wlan->fromDS() && wlan->toDS() )
+        {
+            qDebug( "ToDS traffic: '%s' -> '%s' via '%s'",
+                (const char*) wlan->macAddress2().toString(true),
+                (const char*) wlan->macAddress3().toString(true),
+                (const char*) wlan->macAddress1().toString(true) );
+            netView()->traffic( "toDS", wlan->macAddress2().toString(),
+                                      wlan->macAddress3().toString(),
+                                      wlan->macAddress1().toString() );
+        }
+        else
+        if ( wlan->fromDS() && wlan->toDS() )
+        {
+            qDebug( "WSD(bridge) traffic: '%s' -> '%s' via '%s' and '%s'",
+                (const char*) wlan->macAddress4().toString(true),
+                (const char*) wlan->macAddress3().toString(true),
+                (const char*) wlan->macAddress1().toString(true),
+                (const char*) wlan->macAddress2().toString(true) );
+            netView()->traffic( "WSD", wlan->macAddress4().toString(),
+                                     wlan->macAddress3().toString(),
+                                     wlan->macAddress1().toString(),
+                                     wlan->macAddress2().toString() );
+        }
+        else
+        {
+            qDebug( "IBSS(AdHoc) traffic: '%s' -> '%s' (Cell: '%s')'",
+                (const char*) wlan->macAddress2().toString(true),
+                (const char*) wlan->macAddress1().toString(true),
+                (const char*) wlan->macAddress3().toString(true) );
+            netView()->traffic( "fromDS", wlan->macAddress2().toString(),
+                                        wlan->macAddress1().toString(),
+                                        wlan->macAddress3().toString() );
+        }
+        return;
+    }
 }
 
 void Wellenreiter::startStopClicked()
