@@ -39,9 +39,9 @@ public:
 
     struct Button
     {
-        Button() : buttonType( NormalButton ), isHeld( false ), isDown( false ) {}
+        Button() : type( NormalButton ), isHeld( false ), isDown( false ) {}
 
-        ButtonType buttonType : 1;
+        ButtonType type : 1;
         bool isHeld : 1;
         bool isDown : 1;
     };
@@ -51,7 +51,7 @@ public:
     {
         Command command;
         const char *fileName;
-        ButtonType buttonType;
+        ButtonType type;
     };
 
     MediaWidget( PlayListWidget &_playList, MediaPlayerState &_mediaPlayerState, QWidget *parent = 0, const char *name = 0 );

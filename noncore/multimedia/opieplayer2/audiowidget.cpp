@@ -88,7 +88,7 @@ AudioWidget::AudioWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
 {
     for ( uint i = 0; i < buttonCount; ++i ) {
         Button button;
-        button.buttonType = skinInfo[ i ].buttonType;
+        button.type = skinInfo[ i ].type;
         buttons.push_back( button );
     }
 
@@ -387,7 +387,7 @@ void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
         } else {
             if ( buttons[i].isHeld ) {
                 buttons[i].isHeld = FALSE;
-                if ( buttons[i].buttonType != ToggleButton ) {
+                if ( buttons[i].type != ToggleButton ) {
                     setToggleButton( i, FALSE );
                 }
                 qDebug("mouseEvent %d", i);

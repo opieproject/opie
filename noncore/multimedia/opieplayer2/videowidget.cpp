@@ -72,7 +72,7 @@ VideoWidget::VideoWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
 
     Button defaultButton; 
     Button toggleButton = defaultButton;
-    toggleButton.buttonType = ToggleButton;
+    toggleButton.type = ToggleButton;
 
     buttons.reserve( 7 );
     buttons.push_back( toggleButton ); // play
@@ -296,7 +296,7 @@ void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
 
             if ( buttons[i].isHeld ) {
                 buttons[i].isHeld = FALSE;
-                if ( buttons[i].buttonType != ToggleButton ) {
+                if ( buttons[i].type != ToggleButton ) {
                     setToggleButton( i, FALSE );
                 }
 
