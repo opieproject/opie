@@ -46,10 +46,25 @@ public:
 
     bool operator==( const ORecordListIterator& it );
     bool operator!=( const ORecordListIterator& it );
+    
+    /**
+     * the current item
+     */
+    uint current()const;
+    
+    /**
+     * the number of items
+     */
+    uint count()const;
+    
+    /**
+     * sets the current item
+     */
+    void setCurrent( uint cur );
 
 private:
     QArray<int> m_uids;
-    int m_current;
+    uint m_current;
     const Base* m_temp;
     bool m_end : 1;
     T m_record;
@@ -86,6 +101,13 @@ public:
      * the end
      */
     Iterator end();
+    
+    /**
+     * the number of items in the list
+     */
+     uint count()const;
+     
+     // FIXME implemenent remove
     /*
       ConstIterator begin()const;
       ConstIterator end()const;
@@ -133,7 +155,12 @@ template <class T>
 T ORecordListIterator<T>::operator*() {
 //    qWarning("operator* %d %d", m_current,  m_uids[m_current] );
     if (!m_end )
-        m_record = m_temp->find( m_uids[m_current] );
+        /* FIXME
+	 * until the cache is in place
+	 * we do the uid match uid check
+	 */
+        if(m_record.uid() != m_uids[m_current] )
+           m_record = m_temp->find( m_uids[m_current] );
     else
         m_record = T();
 
@@ -142,7 +169,7 @@ T ORecordListIterator<T>::operator*() {
 
 template <class T>
 ORecordListIterator<T> &ORecordListIterator<T>::operator++() {
-    if (m_current < (int)m_uids.count() ) {
+    if (m_current < m_uids.count() ) {
         m_end = false;
         ++m_current;
     }else
@@ -183,7 +210,21 @@ ORecordListIterator<T>::ORecordListIterator( const QArray<int> uids,
     : m_uids( uids ), m_current( 0 ),  m_temp( t ), m_end( false )
 {
 }
-
+template <class T>
+uint ORecordListIterator<T>::current()const {
+    return m_current;
+}
+template <class T>
+void ORecordListIterator<T>::setCurrent( uint cur ) {
+    if( cur < m_uids.count() ) {
+	m_end = false;
+	m_current= cur;
+    }
+}
+template <class T>
+uint ORecordListIterator<T>::count()const {
+ return m_uids.count();
+}
 template <class T>
 ORecordList<T>::ORecordList( const QArray<int>& ids,
                              const Base* acc )
@@ -206,5 +247,9 @@ ORecordList<T>::Iterator ORecordList<T>::end() {
     it.m_current = m_ids.count();
 
     return it;
+}
+template <class T>
+uint ORecordList<T>::count()const {
+return m_ids.count();
 }
 #endif
