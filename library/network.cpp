@@ -19,12 +19,12 @@
 **********************************************************************/
 
 #define QTOPIA_INTERNAL_LANGLIST
-#include "qpe/network.h"
-#include "qpe/networkinterface.h"
-#include "qpe/global.h"
-#include "qpe/config.h"
-#include "qpe/resource.h"
-#include "qpe/qpeapplication.h"
+#include <qpe/network.h>
+#include <qpe/networkinterface.h>
+#include <qpe/global.h>
+#include <qpe/config.h>
+#include <qpe/resource.h>
+#include <qpe/qpeapplication.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qlibrary.h>
 
