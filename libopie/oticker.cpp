@@ -60,14 +60,17 @@ OTicker::~OTicker() {
 
 void OTicker::setBackgroundColor(QColor backcolor) {
     backgroundcolor = backcolor;
+    update();
 }
 
 void OTicker::setForegroundColor(QColor backcolor) {
     foregroundcolor = backcolor;
+    update();
 }
 
 void OTicker::setFrame(int frameStyle) {
     setFrameStyle( frameStyle/*WinPanel | Sunken */);
+    update();
 }
 
 void OTicker::setText( const QString& text ) {
