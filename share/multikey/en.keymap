@@ -191,19 +191,21 @@
         " .    .  . . .   "
         "  ..  .  . . ... "
         "                 "
-5 0x1030    0       2 #original code is F1, but i'll use it for turning on/off pickboard
+5 0x1030    0       2 #original code is F1, but i'll use it for turning on/off the config dialog
         "13 7 2 1"
         "   c None"
         ".  c #000000"
         "             "
-        " ..  ...  .. "
-        " . .  .  .   "
-        " ..   .  .   "
-        " .    .  .   "
-        " .   ...  .. "
+        "      .      "
+        "     ...     "
+        "    .....    "
+        "      .      "
+        "      .      "
         "             "
 # shift table
 # add xpm support for these keys too?
+
+# unshifed shifted
 0x60  0x7e
 0x31  0x21  
 0x32  0x40  
