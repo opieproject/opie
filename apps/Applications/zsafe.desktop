@@ -9,3 +9,5 @@ Name=ZSafe
 Name[de]=ZSafe
 CanFastLoad=0
 MimeType=application/zsafe
+Name[lv]=ZSeifs
+Comment[lv]=Paroïu uzglabâðanas programma
