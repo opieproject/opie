@@ -31,10 +31,6 @@
 #include "qpedecoration_qws.h"
 #include "timestring.h"
 
-#if ( defined Q_WS_QWS || defined( _WS_QWS_ ) ) && !defined( QT_NO_COP )
-#include <qpe/qcopenvelope_qws.h>
-#endif
-
 class QCopChannel;
 class QPEApplicationData;
 class QWSEvent;
