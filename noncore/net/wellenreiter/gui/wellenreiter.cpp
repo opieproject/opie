@@ -58,6 +58,7 @@ using namespace Opie;
 #include "hexwindow.h"
 #include "configwindow.h"
 #include "statwindow.h"
+#include "graphwindow.h"
 #include "manufacturers.h"
 
 Wellenreiter::Wellenreiter( QWidget* parent )
@@ -166,6 +167,12 @@ void Wellenreiter::receivePacket(OPacket* p)
 
         OWaveLanPacket* header = static_cast<OWaveLanPacket*>( p->child( "802.11" ) );
         netView()->addNewItem( type, essid, header->macAddress2().toString(), beacon->canPrivacy(), channel, 0 );
+
+        // do we have a prism header?
+        OPrismHeaderPacket* prism = static_cast<OPrismHeaderPacket*>( p->child( "Prism" ) );
+        if ( ds && prism )
+            graphwindow->traffic( ds->channel(), prism->signalStrength() );
+
         return;
     }
 

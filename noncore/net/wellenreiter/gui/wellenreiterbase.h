@@ -28,6 +28,7 @@ class QPushButton;
 class MLogWindow;
 class MHexWindow;
 class MStatWindow;
+class MGraphWindow;
 
 #ifdef QWS
 class OTabWidget;
@@ -53,6 +54,7 @@ public:
     MLogWindow* logwindow;
     MHexWindow* hexwindow;
     MStatWindow* statwindow;
+    MGraphWindow* graphwindow;
     QWidget* about;
     QLabel* PixmapLabel1_3_2;
     QLabel* TextLabel1_4_2;

@@ -31,6 +31,7 @@
 #include "hexwindow.h"
 #include "scanlist.h"
 #include "statwindow.h"
+#include "graphwindow.h"
 
 #ifdef QWS
 #include <qpe/resource.h>
@@ -78,6 +79,10 @@ WellenreiterBase::WellenreiterBase( QWidget* parent,  const char* name, WFlags f
 
     netview = new MScanListView( ap );
     apLayout->addWidget( netview );
+
+    //--------- GRAPH TAB --------------
+
+    graphwindow = new MGraphWindow( TabWidget, "Graph" );
 
     //--------- LOG TAB --------------
 
@@ -129,12 +134,14 @@ WellenreiterBase::WellenreiterBase( QWidget* parent,  const char* name, WFlags f
 
 #ifdef QWS
     TabWidget->addTab( ap, "wellenreiter/networks", tr( "Nets" ) );
+    TabWidget->addTab( graphwindow, "wellenreiter/graph", tr( "Graph" ) );
     TabWidget->addTab( logwindow, "wellenreiter/log", tr( "Log" ) );
     TabWidget->addTab( hexwindow, "wellenreiter/hex", tr( "Hex" ) );
     TabWidget->addTab( statwindow, "wellenreiter/stat", tr( "Stat" ) );
     TabWidget->addTab( about, "wellenreiter/about", tr( "About" ) );
 #else
     TabWidget->addTab( ap, /* "wellenreiter/networks", */ tr( "Networks" ) );
+    TabWidget->addTab( graphwindow, /* "wellenreiter/graph", */ tr( "Graph" ) );
     TabWidget->addTab( logwindow, /* "wellenreiter/log", */ tr( "Log" ) );
     TabWidget->addTab( hexwindow, /* "wellenreiter/hex", */ tr( "Hex" ) );
     TabWidget->addTab( statwindow, /* "wellenreiter/hex", */ tr( "Stat" ) );
@@ -171,7 +178,7 @@ bool WellenreiterBase::event( QEvent* ev )
 	QFont TextLabel1_4_2_font(  TextLabel1_4_2->font() );
 	TextLabel1_4_2_font.setFamily( "adobe-helvetica" );
 	TextLabel1_4_2_font.setPointSize( 10 );
-	TextLabel1_4_2->setFont( TextLabel1_4_2_font ); 
+	TextLabel1_4_2->setFont( TextLabel1_4_2_font );
     }
     return ret;
 }

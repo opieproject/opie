@@ -12,7 +12,8 @@ HEADERS         = wellenreiterbase.h \
                   hexwindow.h \
                   statwindow.h \
                   configwindow.h \
-                  manufacturers.h
+                  manufacturers.h \
+                  graphwindow.h
 
 SOURCES         = main.cpp \
                   mainwindow.cpp \
@@ -23,7 +24,8 @@ SOURCES         = main.cpp \
                   hexwindow.cpp \
                   statwindow.cpp \
                   configwindow.cpp \
-                  manufacturers.cpp
+                  manufacturers.cpp \
+                  graphwindow.cpp
 
 INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
