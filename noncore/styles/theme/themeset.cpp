@@ -49,7 +49,7 @@ public:
 class MyItem : public QListViewItem 
 {
 public:
-	MyItem ( QListView *lv, const QString &name, const QString &comm, const QString &theme ) : QListViewItem ( lv, name, comm )
+	MyItem ( QListView *lv, QListViewItem *after, const QString &name, const QString &comm, const QString &theme ) : QListViewItem ( lv, after, name, comm )
 	{
 		m_theme = theme;	
 	}
@@ -80,9 +80,10 @@ ThemeSettings::ThemeSettings ( QWidget* parent, const char *name, WFlags fl )
 	m_list-> addColumn ( tr( "Description" ));
 	m_list-> setSelectionMode ( QListView::Single );
 	m_list-> setAllColumnsShowFocus ( true );
+	m_list-> setSorting ( -1 );
 	vbox-> addWidget ( m_list, 10 );
 		
-	QListViewItem *item = new MyItem ( m_list, tr( "[No theme]" ), "", "" );
+	QListViewItem *item = new MyItem ( m_list, 0, tr( "[No theme]" ), "", "" );
 	m_list-> setSelected ( item, true );
 	
 	QString path = QPEApplication::qpeDir() + "/plugins/styles/themes";
@@ -100,7 +101,7 @@ ThemeSettings::ThemeSettings ( QWidget* parent, const char *name, WFlags fl )
 			if ( !name. isEmpty ( )) {	
 				QString fname = (*it). left ((*it). length ( ) - 8 );
 			
-				item = new MyItem ( m_list, name, comm, fname );
+				item = new MyItem ( m_list, item, name, comm, fname );
 				if ( active == fname ) {
 					m_list-> setSelected ( item, true );
 				}
