@@ -3,7 +3,7 @@
 #include "ircversion.h"
 
 /* Lookup table for literal commands */
-IRCLiteralMessageParserStruct IRCMessageParser::literalParserProcTable[] = { 
+IRCLiteralMessageParserStruct IRCMessageParser::literalParserProcTable[] = {
     { "PING",    FUNC(parseLiteralPing) },
     { "NOTICE",  FUNC(parseLiteralNotice) },
     { "JOIN",    FUNC(parseLiteralJoin) },
@@ -20,7 +20,7 @@ IRCLiteralMessageParserStruct IRCMessageParser::literalParserProcTable[] = {
 };
 
 /* Lookup table for literal commands */
-IRCCTCPMessageParserStruct IRCMessageParser::ctcpParserProcTable[] = { 
+IRCCTCPMessageParserStruct IRCMessageParser::ctcpParserProcTable[] = {
     { "PING",    FUNC(parseCTCPPing) },
     { "VERSION", FUNC(parseCTCPVersion) },
     { "ACTION",  FUNC(parseCTCPAction) },
@@ -28,7 +28,7 @@ IRCCTCPMessageParserStruct IRCMessageParser::ctcpParserProcTable[] = {
 };
 
 /* Lookup table for numerical commands */
-IRCNumericalMessageParserStruct IRCMessageParser::numericalParserProcTable[] = { 
+IRCNumericalMessageParserStruct IRCMessageParser::numericalParserProcTable[] = {
     { 1,   FUNC(parseNumerical001) },           // RPL_WELCOME
     { 2,   FUNC(parseNumerical002) },           // RPL_YOURHOST
     { 3,   FUNC(parseNumerical003) },           // RPL_CREATED
@@ -171,7 +171,7 @@ void IRCMessageParser::parseLiteralPart(IRCMessage *message) {
 }
 
 void IRCMessageParser::parseLiteralPrivMsg(IRCMessage *message) {
-    if (m_session->m_server->nick() == message->param(0)) {
+    if (m_session->m_server->nick().lower() == message->param(0).lower() ) {
         /* IRC Query message detected, verify sender and display it */
         IRCPerson mask(message->prefix());
         IRCPerson *person = m_session->getPerson(mask.nick());
@@ -206,7 +206,7 @@ void IRCMessageParser::parseLiteralPrivMsg(IRCMessage *message) {
 }
 
 void IRCMessageParser::parseLiteralNick(IRCMessage *message) {
-  
+
     IRCPerson mask(message->prefix());
     /* this way of handling nick changes really sucks */
     if (mask.nick() == m_session->m_server->nick()) {
@@ -220,7 +220,7 @@ void IRCMessageParser::parseLiteralNick(IRCMessage *message) {
         IRCPerson *person = m_session->getPerson(mask.nick());
         if (person) {
             //IRCOutput output(OUTPUT_NICKCHANGE, tr("%1 is now known as %2").arg( mask.nick() ).arg( message->param(0)));
-            
+
             /* new code starts here -- this removes the person from all channels */
             QList<IRCChannel> channels;
             m_session->getChannelsByPerson(person, channels);
@@ -234,7 +234,7 @@ void IRCMessageParser::parseLiteralNick(IRCMessage *message) {
               output.addParam(person);
               emit outputReady(output);
             }
-            /* new code ends here */  
+            /* new code ends here */
         } else {
             emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Nickname change of an unknown person")));
         }
@@ -248,7 +248,7 @@ void IRCMessageParser::parseLiteralQuit(IRCMessage *message) {
         QList<IRCChannel> channels;
         m_session->getChannelsByPerson(person, channels);
         QListIterator<IRCChannel> it(channels);
-        for (;it.current(); ++it) { 
+        for (;it.current(); ++it) {
             IRCChannelPerson *chanperson = it.current()->getPerson(mask.nick());
             it.current()->removePerson(chanperson);
             delete chanperson;
@@ -325,7 +325,7 @@ void IRCMessageParser::parseCTCPAction(IRCMessage *message) {
         }
     }
 }
-    
+
 void IRCMessageParser::parseLiteralMode(IRCMessage *message) {
     IRCPerson mask(message->prefix());
 
@@ -461,13 +461,13 @@ void IRCMessageParser::parseNumericalNames(IRCMessage *message) {
 
         while (!stream.atEnd()) {
             stream >> temp;
-            
+
             char flagch = temp.at(0).latin1();
             int flag = 0;
             QString nick;
             /* Parse person flags */
             if (flagch == '@' || flagch == '+' || flagch=='%' || flagch == '*') {
-                
+
                 nick = temp.right(temp.length()-1);
                 switch (flagch) {
                     case '@': flag = PERSON_FLAG_OP;     break;
@@ -478,7 +478,7 @@ void IRCMessageParser::parseNumericalNames(IRCMessage *message) {
             } else {
                 nick = temp;
             }
-            
+
             IRCChannelPerson *chan_person = new IRCChannelPerson();
             IRCPerson *person = m_session->getPerson(nick);
             if (person == 0) {

@@ -7,6 +7,11 @@
 #include "ircserverlist.h"
 #include "ircsettings.h"
 
+QString MainWindow::appCaption() {
+    return QObject::tr("Opie IRC");
+}
+
+
 MainWindow::MainWindow(QWidget *parent, const char *name, WFlags) : QMainWindow(parent, name, WStyle_ContextHelp) {
     setCaption(tr("IRC Client"));
     m_tabWidget = new IRCTabWidget(this);
@@ -52,6 +57,11 @@ void MainWindow::selected(QWidget *) {
 
 void MainWindow::addTab(IRCTab *tab) {
     connect(tab, SIGNAL(changed(IRCTab*)), this, SLOT(changeEvent(IRCTab*)));
+    connect(tab, SIGNAL(ping (const QString&)), this, SLOT(slotPing(const QString&)));
+    connect(tab, SIGNAL(nextTab()), this, SLOT(slotNextTab()));
+    connect(tab, SIGNAL(prevTab()), this, SLOT(slotPrevTab()));
+    connect(tab, SIGNAL(closeTab()), this, SLOT(slotCloseTab()));
+
     m_tabWidget->addTab(tab, tab->title());
     m_tabWidget->showPage(tab);
     tab->setID(m_tabWidget->currentPageIndex());
@@ -89,3 +99,30 @@ void MainWindow::settings() {
         }
     }
 }
+
+
+void MainWindow::slotNextTab() {
+    int i = m_tabWidget->currentPageIndex ();
+    m_tabWidget->setCurrentPage ( i+1 );
+
+    int j = m_tabWidget->currentPageIndex ();
+    if ( i == j )
+        m_tabWidget->setCurrentPage ( 1 );
+}
+
+void MainWindow::slotPrevTab() {
+    int i = m_tabWidget->currentPageIndex ();
+    if ( i > 1 )
+        m_tabWidget->setCurrentPage ( i-1 );
+}
+
+void MainWindow::slotCloseTab() {
+    IRCTab *tab = (IRCTab *) m_tabWidget->currentPage ();
+    if ( tab )
+        killTab ( tab );
+}
+
+void MainWindow::slotPing( const QString& channel ) {
+    raise();
+}
+

@@ -66,10 +66,17 @@ void IRCHistoryLineEdit::keyPressEvent(QKeyEvent *event) {
     } else if (key == Key_Return) {
         m_history.prepend(text());
         m_index = -1;
-    } else if (key == Key_Tab) {
-        odebug << "got tab" << oendl;
+    } else if (key == Key_N && event->state() == Qt::ControlButton) {
+        emit nextTab();
+        return;
+    } else if ( ( key == Key_Y || key == Key_Z ) && event->state() == Qt::ControlButton) {
+        emit closeTab();
+        return;
+    } else if (key == Key_P && event->state() == Qt::ControlButton) {
+        emit prevTab();
         return;
     }
+
     QLineEdit::keyPressEvent(event);
 }
 
@@ -78,9 +85,15 @@ bool IRCHistoryLineEdit::eventFilter(QObject *object, QEvent *event) {
         QKeyEvent *k = (QKeyEvent *) event;
         /* Catch tab characters */
         if (k->key() == Key_Tab) {
-            odebug << "tab!" << oendl; 
+            emit nextTab();
             return TRUE;
         }
     }
     return QLineEdit::eventFilter(object, event);
+}
+
+
+void IRCHistoryLineEdit::setEditFocus() {
+    setActiveWindow();
+    setFocus();
 }

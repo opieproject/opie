@@ -36,6 +36,7 @@ public:
     void addTab(IRCTab *tab);
     void killTab(IRCTab *tab);
     static QString appName() { return QString::fromLatin1("opieirc"); }
+    static QString appCaption();
 signals:
     void updateScroll();
 protected slots:
@@ -43,6 +44,12 @@ protected slots:
     void settings();
     void selected(QWidget *);
     void changeEvent(IRCTab *);
+
+    void slotNextTab();
+    void slotPrevTab();
+    void slotCloseTab();
+    void slotPing(const QString&);    
+
 protected:
     void loadSettings();
 protected:

@@ -61,6 +61,14 @@ class IRCHistoryLineEdit : public QLineEdit {
 public:
     IRCHistoryLineEdit(QWidget *parent = 0, const char *name = 0);
     virtual bool eventFilter(QObject *object, QEvent *event);
+public slots:
+    void setEditFocus();
+signals:
+    void nextTab();
+    void prevTab();
+    void closeTab();
+
+
 protected:
     void keyPressEvent(QKeyEvent *);
 protected:

@@ -2,6 +2,12 @@
 #include <qwhatsthis.h>
 #include "ircservertab.h"
 
+
+bool IRCServerTab::containsPing( const QString& text, IRCServerTab* tab ) {
+    return (text.find("ping") != -1 && text.find( tab->server()->nick() != -1));
+}
+
+
 IRCServerTab::IRCServerTab(IRCServer server, MainWindow *mainWindow, QWidget *parent, const char *name, WFlags f) : IRCTab(parent, name, f) {
     m_server = server;
     m_session = new IRCSession(&m_server);
@@ -16,6 +22,11 @@ IRCServerTab::IRCServerTab(IRCServer server, MainWindow *mainWindow, QWidget *pa
     QWhatsThis::add(m_textview, tr("Server messages"));
     m_layout->add(m_textview);
     m_field = new IRCHistoryLineEdit(this);
+    connect(m_field, SIGNAL(nextTab()), this, SIGNAL(nextTab()));
+    connect(m_field, SIGNAL(prevTab()), this, SIGNAL(prevTab()));
+    connect(m_field, SIGNAL(closeTab()), this, SIGNAL(closeTab()));
+    connect(this, SIGNAL(editFocus()), m_field, SLOT(setEditFocus()));
+
     QWhatsThis::add(m_field, tr("Type commands here. A list of available commands can be found inside the OpieIRC help"));
     m_layout->add(m_field);
     connect(m_field, SIGNAL(returnPressed()), this, SLOT(processCommand()));
@@ -121,14 +132,14 @@ void IRCServerTab::executeCommand(IRCTab *tab, QString line) {
  else if (command == "OP"){
 		QString nickname;
         stream >> nickname;
-        if (nickname.length() > 0) { 
+        if (nickname.length() > 0) {
                 QString text = line.right(line.length()-nickname.length()-5);
                 IRCPerson person;
                 person.setNick(nickname);
                 m_session->op(((IRCChannelTab *)tab)->channel(), &person);
             }
         }
-  
+
   //SEND MODES
   else if (command == "MODE"){
      QString text = line.right(line.length()-6);

@@ -43,9 +43,19 @@ public:
     virtual void appendText(QString text) = 0;
 signals:
     void changed(IRCTab *);
+    void ping(const QString& );
+    void nextTab();
+    void prevTab();
+    void closeTab();
+    void editFocus();
+
 public slots:
     virtual void remove() = 0;
     virtual void settingsChanged() = 0;
+
+protected:
+    void showEvent( QShowEvent* );
+
 protected:
     QLabel      *m_description;
     QVBoxLayout *m_layout;

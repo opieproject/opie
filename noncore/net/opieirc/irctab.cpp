@@ -2,6 +2,7 @@
 #include <qpushbutton.h>
 #include <qwhatsthis.h>
 #include "irctab.h"
+#include "mainwindow.h"
 
 QString IRCTab::m_errorColor;
 QString IRCTab::m_serverColor;
@@ -35,4 +36,10 @@ void IRCTab::setID(int id) {
 
 int IRCTab::id() {
     return m_id;
+}
+
+void IRCTab::showEvent( QShowEvent *ev ) {
+    topLevelWidget()->setCaption( MainWindow::appCaption() + " " + title() );
+    QWidget::showEvent( ev );
+    emit editFocus();
 }

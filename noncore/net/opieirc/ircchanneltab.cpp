@@ -23,6 +23,11 @@ IRCChannelTab::IRCChannelTab(IRCChannel *channel, IRCServerTab *parentTab, MainW
     m_list->update();
     m_list->setMaximumWidth(LISTWIDTH);
     m_field = new IRCHistoryLineEdit(this);
+    connect(m_field, SIGNAL(nextTab()), this, SIGNAL(nextTab()));
+    connect(m_field, SIGNAL(prevTab()), this, SIGNAL(prevTab()));
+    connect(m_field, SIGNAL(closeTab()), this, SIGNAL(closeTab()));
+    connect(this, SIGNAL(editFocus()), m_field, SLOT(setEditFocus()));
+
     QWhatsThis::add(m_field, tr("Type your message here to participate in the channel discussion"));
     m_popup = new QPopupMenu(m_list);
     m_lines = 0;
@@ -41,6 +46,8 @@ IRCChannelTab::IRCChannelTab(IRCChannel *channel, IRCServerTab *parentTab, MainW
     hbox->show();
     m_layout->add(m_field);
     m_field->setFocus();
+    m_field->setActiveWindow();
+
     connect(m_field, SIGNAL(returnPressed()), this, SLOT(processCommand()));
     settingsChanged();
 }
@@ -63,6 +70,15 @@ void IRCChannelTab::appendText(QString text) {
     m_textview->ensureVisible(0, m_textview->contentsHeight());
     m_textview->setText(txt);
     m_textview->ensureVisible(0, m_textview->contentsHeight());
+
+    int p1, p2;
+    if ( (p1 = text.find("ping", 0, false) )!= -1 && (p2 = text.find( m_parentTab->server()->nick(), 0,false )) != -1  ) {
+        int col = text.findRev("color", -1, false);
+        if ( col < p2 )
+            emit ping( title() );
+
+    }
+
     emit changed(this);
 }
 
@@ -122,7 +138,7 @@ void IRCChannelTab::popupQuery() {
         if (person) {
             IRCQueryTab *tab = m_parentTab->getTabForQuery(person);
             if (!tab) {
-                tab = new IRCQueryTab(person, m_parentTab, m_mainWindow, (QWidget *)parent()); 
+                tab = new IRCQueryTab(person, m_parentTab, m_mainWindow, (QWidget *)parent());
                 m_parentTab->addQueryTab(tab);
                 m_mainWindow->addTab(tab);
             }

@@ -16,6 +16,11 @@ IRCQueryTab::IRCQueryTab(IRCPerson *person, IRCServerTab *parentTab, MainWindow 
     m_textview->setTextFormat(RichText);
     QWhatsThis::add(m_textview, tr("Private discussion"));
     m_field = new IRCHistoryLineEdit(this);
+    connect(m_field, SIGNAL(nextTab()), this, SIGNAL(nextTab()));
+    connect(m_field, SIGNAL(prevTab()), this, SIGNAL(prevTab()));
+    connect(m_field, SIGNAL(closeTab()),this, SIGNAL(closeTab()));
+
+
     QWhatsThis::add(m_field, tr("Type your text here in order to send a message to the other person"));
     m_layout->add(hbox);
     hbox->show();
@@ -44,6 +49,10 @@ void IRCQueryTab::appendText(QString text) {
     }
     m_textview->setText(txt);
     m_textview->ensureVisible(0, m_textview->contentsHeight());
+
+    if ( IRCServerTab::containsPing( text, m_parentTab ) )
+        emit ping( title() );
+
     emit changed(this);
 }
 
