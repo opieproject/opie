@@ -4,80 +4,83 @@
     <message>
         <source>Touch the crosshairs firmly and
 accurately to calibrate your screen.</source>
-        <translation type="unfinished"></translation>
+        <translation>Притиснете на крстовите цврсто и 
+прецизно за да го калибрирате екранот.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation type="unfinished"></translation>
+        <translation>Добредојдовте во Opie</translation>
     </message>
 </context>
 <context>
     <name>LoginWindow</name>
     <message>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Логирај се</translation>
     </message>
     <message>
         <source>&lt;center&gt;Welcome to OPIE&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;Добредојдовре во OPIE &lt;/center&gt;</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="unfinished"></translation>
+        <translation>КОрисник</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Лозинка</translation>
     </message>
     <message>
         <source>Suspend</source>
-        <translation type="unfinished"></translation>
+        <translation>Суспензирај</translation>
     </message>
     <message>
         <source>Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Мени</translation>
     </message>
 </context>
 <context>
     <name>LoginWindowImpl</name>
     <message>
         <source>Restart</source>
-        <translation type="unfinished"></translation>
+        <translation>Рестартирај</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Изклучи</translation>
     </message>
     <message>
         <source>&lt;center&gt;%1 %2&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;%1 %2&lt;/center&gt;</translation>
     </message>
     <message>
         <source>Wrong password</source>
-        <translation type="unfinished"></translation>
+        <translation>Погрешна лозинка</translation>
     </message>
     <message>
         <source>The given password is incorrect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Внесената лозинка е неточна.</translation>
     </message>
     <message>
         <source>OPIE was terminated
 by an uncaught signal
 (%1)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>OPIE беше исклучен
+од неозначен сигнал
+(%1)</translation>
     </message>
     <message>
         <source>Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Неуспех</translation>
     </message>
     <message>
         <source>Could not start OPIE.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неможе да се стартува OPIE.</translation>
     </message>
     <message>
         <source>Could not switch to new user identity</source>
-        <translation type="unfinished"></translation>
+        <translation>Неможе да се префрли на нов идентитет на корисник</translation>
     </message>
 </context>
 </TS>

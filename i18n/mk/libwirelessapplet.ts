@@ -3,27 +3,27 @@
     <name>AdvancedConfigBase</name>
     <message>
         <source>Advanced Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Напредна Конфигурација</translation>
     </message>
     <message>
         <source>Renew DHCP on changing</source>
-        <translation type="unfinished"></translation>
+        <translation>Обнови DHCP на промена</translation>
     </message>
     <message>
         <source>Frequency</source>
-        <translation type="unfinished"></translation>
+        <translation>Фрекфенција</translation>
     </message>
     <message>
         <source>MODE</source>
-        <translation type="unfinished"></translation>
+        <translation>МОД</translation>
     </message>
     <message>
         <source>ESSID</source>
-        <translation type="unfinished"></translation>
+        <translation>ESSID</translation>
     </message>
     <message>
         <source>AccessPoint</source>
-        <translation type="unfinished"></translation>
+        <translation>Точка на поврзување</translation>
     </message>
 </context>
 </TS>
