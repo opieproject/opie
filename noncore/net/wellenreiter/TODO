@@ -1,25 +1,17 @@
-- beep over headphone / customizable
+/************************************************************************
+/*                W e l l e n r e i t e r   I I
+/*               ===============================
+/*
+/*                    Version: 1.0.2
+/************************************************************************
 
-- add configuration for scrollback buffer in hex window and log window
+----------------------------------------------------
+    Ideas as of Wellenreiter II / December 2003
+----------------------------------------------------
 
-- implement beacon stripping (the first beacon is enough to detect a 
-  new network - further beacons just blow up the capture file)
-
-- identification of probe requests
-  i.e. other sniffers around
-
-- decloaking of falsely reported SSIDs [done]
-
-- option to launch an external application (i.e. qcop) on
-  - new net
-  - new station
-  - <whatever> event
-
-- adaptive hopping scheme !
-
-- display interface capabilities
-
-- enable sniffing in wired networks
+--------
+ENGINE
+--------
 
 - enable multiple packet sources
   - infrared
@@ -32,7 +24,35 @@
 - pester the ethereal folks to settle for an application independant
   packet dissection framework... (unlikely)
 
+- adaptive hopping scheme !
+
+- gather interface capabilities
+
+- enable sniffing in wired networks
+
+---------
+   UI
+---------
+
+- display interface capabilities (or rewrite networksettings?)
+
+- distinguish wireless bridges (WDS traffic)
+
+- expand/collapse all
+
+- add configuration for scrollback buffer in hex window and log window
+
 - revamp hex window, make it more sophisticated than just a QMultiLineEdit
+  - tree view
+
+- beep over headphone / customizable
+
+---------
+ FILES
+---------
 
 - write kismet-like .network format and format to be importable into AutoRoute
+
+- implement beacon stripping (the first beacon is enough to detect a
+  new network - further beacons just blow up the capture file)
 
