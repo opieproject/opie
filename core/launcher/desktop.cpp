@@ -58,6 +58,8 @@
 #include <unistd.h>
 #include <fcntl.h>
 
+using namespace Opie;
+
 class QCopKeyRegister
 {
 public:
@@ -177,7 +179,7 @@ public:
     if ( !m_lcd_status )     // We must have turned it off
       ODevice::inst ( ) -> setDisplayStatus ( true );
 
-    setBacklight ( -1 );
+    setBacklight ( -3 );
   }
   bool save( int level )
   {
@@ -319,8 +321,13 @@ void DesktopApplication::switchLCD ( bool on )
   if ( qApp ) {
     DesktopApplication *dapp = (DesktopApplication *) qApp;
 
-    if ( dapp-> m_screensaver )
-      dapp-> m_screensaver-> setBacklight ( on ? -3 : -1 );
+    if ( dapp-> m_screensaver ) {
+      if ( on )
+	    dapp-> m_screensaver-> restore ( ); //setBacklight ( on ? -3 : -1 );
+	  else
+	    dapp-> m_screensaver-> save ( 1 );
+	  
+	}
   }
 }
 
@@ -1006,30 +1013,3 @@ void Desktop::soundAlarm()
     ODevice::inst ( ) -> alarmSound ( );
 }
 
-bool Desktop::eventFilter( QObject *, QEvent *ev )
-{
-  if ( ev-> type ( ) == QEvent::KeyPress ) {
-    QKeyEvent * ke = ( QKeyEvent * ) ev;
-    if ( ke-> key ( ) == Qt::Key_F11 ) { // menu key
-      QWidget * active = qApp-> activeWindow ( );
-
-      if ( active && active-> isPopup ( ) )
-        active->close();
-
-      /*
-       * On iPAQ 38xx that key is not the "menu key" but the mail key
-       * To not confuse the users, make it launch the mail app on 38xx
-       */
-      if ( ODevice::inst() ->model() == OMODEL_iPAQ_H38xx ) {
-        QCopEnvelope e( "QPE/System", "execute(QString)" );
-        e << QString( "mail" );
-        return true;
-      }
-      else {
-        raiseMenu ( );
-        return true;
-      }
-    }
-  }
-  return false;
-}

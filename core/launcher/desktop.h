@@ -122,7 +122,6 @@ protected:
 	void executeOrModify( const QString& appLnkFile );
 	void styleChange( QStyle & );
 	void timerEvent( QTimerEvent *e );
-	bool eventFilter( QObject *, QEvent * );
 
 	QWidget *bg;
 	Launcher *launcher;
