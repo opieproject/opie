@@ -33,6 +33,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <fcntl.h>
+#include <qsound.h>
 
 #if defined(_OS_LINUX_) || defined(Q_OS_LINUX)
 #include <sys/vfs.h>
@@ -99,12 +100,12 @@ void CardMonitor::mousePressEvent( QMouseEvent * ) {
     }
 
     if ( cardInPcmcia0 ) {
-        menu->insertItem( QIconSet ( Resource::loadPixmap ( getIconName(cardInPcmcia0Type) )), 
+        menu->insertItem( QIconSet ( Resource::loadPixmap ( "cardmon/" + cardInPcmcia0Type )), 
 		tr("Eject card 0: %1").arg(cardInPcmcia0Name), 1 );
     }
 
     if ( cardInPcmcia1 ) {
-        menu->insertItem( QIconSet ( Resource::loadPixmap ( getIconName(cardInPcmcia1Type) )), 
+        menu->insertItem( QIconSet ( Resource::loadPixmap ( "cardmon/" + cardInPcmcia1Type )), 
 		tr("Eject card 1: %1").arg(cardInPcmcia1Name), 2 );
     }
 
@@ -209,33 +210,32 @@ bool CardMonitor::getStatusPcmcia( int showPopUp ) {
             }
         }
 	f.close();
+	if( !showPopUp && (cardWas0 != cardInPcmcia0 || cardWas1 != cardInPcmcia1)) {
+	    QString text = "";
+	    QString what = "";
+	    if(cardWas0 != cardInPcmcia0) {
+		if(cardInPcmcia0) { text += tr("New card: "); what="on";}
+		else { text += tr("Ejected: "); what="off";}
+		text += cardInPcmcia0Name;
+		popUp( text, "cardmon/" + cardInPcmcia0Type );
+	    }
+	    if(cardWas1 != cardInPcmcia1) {
+		if(cardInPcmcia1) { text += tr("New card: "); what="on";}
+		else { text += tr("Ejected: "); what="off";}
+		text += cardInPcmcia1Name;
+		popUp( text, "cardmon/" + cardInPcmcia1Type );
+	    }
+	    QSound::play(Resource::findSound("cardmon/card" + what));
+	}
+
     } else {
         // no file found
 	qDebug("no file found");
         cardInPcmcia0 = FALSE;
         cardInPcmcia1 = FALSE;
-	return FALSE;
-
     }
 
-    if( !showPopUp && (cardWas0 != cardInPcmcia0 || cardWas1 != cardInPcmcia1)) {
-	QString text = "";
-	if(cardWas0 != cardInPcmcia0) {
-	    if(cardInPcmcia0) { text += tr("New card: "); }
-	    else { text += tr("Ejected: "); }
-	    text += cardInPcmcia0Name;
-	    popUp( text, getIconName( cardInPcmcia0Type ) );
-	}
-	if(cardWas1 != cardInPcmcia1) {
-	    if(cardInPcmcia1) { text += tr("New card: "); }
-	    else { text += tr("Ejected: "); }
-	    text += cardInPcmcia1Name;
-	    popUp( text, getIconName( cardInPcmcia1Type ) );
-	}
-    }
-
-
-    return ((cardWas0 == cardInPcmcia0 || cardWas1 == cardInPcmcia1) ? FALSE : TRUE);
+    return ((cardWas0 == cardInPcmcia0 && cardWas1 == cardInPcmcia1) ? FALSE : TRUE);
 }
 
 
@@ -281,13 +281,3 @@ void CardMonitor::paintEvent( QPaintEvent * ) {
 	hide();
     }
 }
-
-QString CardMonitor::getIconName( QString type ) {
-    if( type != "network" && 
-	type != "ide" ) {
-	type="cardmon";
-    }
-    return "cardmon/"+type;
-}
-	
-

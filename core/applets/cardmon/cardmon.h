@@ -52,8 +52,7 @@ private:
     void iconShow();
     QPopupMenu *popupMenu;
     void popUp(QString message, QString icon="");
-    QString getIconName(QString type);
-};
+ };
 
 #endif
 

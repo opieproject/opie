@@ -1,4 +1,4 @@
-Files: plugins/applets/libcardmonapplet.so* pics/cardmon/*.png
+Files: plugins/applets/libcardmonapplet.so* pics/cardmon/*.png sound/cardmon/*.wav
 Priority: optional
 Section: opie/taskbar
 Maintainer: Maximilian Reiﬂ <max.reiss@gmx.de>
