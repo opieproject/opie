@@ -231,7 +231,7 @@
     </message>
     <message>
         <source>Installation Setups</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Install destination:</source>
@@ -243,7 +243,7 @@
     </message>
     <message>
         <source>Used servers:</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>New</source>
@@ -251,7 +251,7 @@
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Remove</source>
@@ -287,6 +287,10 @@
     </message>
     <message>
         <source>removeable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Used servers: (Highlighted feeds are active)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

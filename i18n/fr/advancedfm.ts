@@ -1,5 +1,5 @@
 <!DOCTYPE TS><TS>
-<codec>iso8859-1</codec>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>AdvancedFm</name>
     <message>
@@ -40,11 +40,11 @@
     </message>
     <message>
         <source>Switch to Local</source>
-        <translation>Basculer vers "Local"</translation>
+        <translation>Basculer vers &quot;Local&quot;</translation>
     </message>
     <message>
         <source>Switch to Remote</source>
-        <translation>Basculer vers "Remote"</translation>
+        <translation>Basculer vers &quot;Remote&quot;</translation>
     </message>
     <message>
         <source>About</source>
@@ -109,7 +109,7 @@
     </message>
     <message>
         <source>Advancedfm Beam out</source>
-        <translation type='unfinished'></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ir sent.</source>
@@ -161,7 +161,7 @@
     </message>
     <message>
         <source>Beam File</source>
-        <translation type='unfinished'></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source> already exists

@@ -744,15 +744,15 @@ y </translation>
     </message>
     <message>
         <source>Var1</source>
-        <translation>Var 1</translation>
+        <translation type="obsolete">Var 1</translation>
     </message>
     <message>
         <source>Var 2</source>
-        <translation>Var 2</translation>
+        <translation type="obsolete">Var 2</translation>
     </message>
     <message>
         <source>WeekVar</source>
-        <translation>Var semana</translation>
+        <translation type="obsolete">Var semana</translation>
     </message>
     <message>
         <source>months</source>

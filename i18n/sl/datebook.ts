@@ -954,15 +954,15 @@ in</translation>
     </message>
     <message>
         <source>Var1</source>
-        <translation>Spremenljivka1</translation>
+        <translation type="obsolete">Spremenljivka1</translation>
     </message>
     <message>
         <source>Var 2</source>
-        <translation>Spremenljivka 2</translation>
+        <translation type="obsolete">Spremenljivka 2</translation>
     </message>
     <message>
         <source>WeekVar</source>
-        <translation>TedenskaSpremenljivka</translation>
+        <translation type="obsolete">TedenskaSpremenljivka</translation>
     </message>
     <message>
         <source>months</source>
