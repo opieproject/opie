@@ -1,6 +1,6 @@
 Files: bin/go apps/Games/go.desktop
 Priority: optional
-Section: qpe/games
+Section: opie/games
 Maintainer: Warwick Allison <warwick@trolltech.com>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION

@@ -1,6 +1,6 @@
 Files: bin/citytime apps/Applications/citytime.desktop
 Priority: optional
-Section: qpe/applications
+Section: opie/applications
 Maintainer: Warwick Allison <warwick@trolltech.com>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION

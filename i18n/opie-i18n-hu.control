@@ -1,6 +1,6 @@
 Files: i18n/hu/.directory i18n/hu/*.qm etc/dict/dawg.hu
 Priority: optional
-Section: qpe/i18n
+Section: opie/i18n
 Maintainer: Warwick Allison <warwick@trolltech.com>
 Architecture: arm
 Arch: iPAQ

@@ -1,6 +1,6 @@
 Files: bin/chess apps/Games/chess.desktop
 Priority: optional
-Section: qpe/games
+Section: opie/games
 Maintainer: Luke Graham <luke@trolltech.com>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION

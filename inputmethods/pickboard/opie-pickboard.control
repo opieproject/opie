@@ -1,6 +1,6 @@
 Files: plugins/inputmethods/libqpickboard.so*
 Priority: optional
-Section: qpe/inputmethods
+Section: opie/inputmethods
 Maintainer: Warwick Allison <warwick@trolltech.com>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION

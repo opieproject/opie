@@ -1,6 +1,6 @@
 Files: bin/example apps/Applications/example.desktop pics/Example.png
 Priority: optional
-Section: qpe/applications
+Section: opie/applications
 Maintainer: Warwick Allison <warwick@trolltech.com>
 Architecture: arm
 Version: 1.0.0

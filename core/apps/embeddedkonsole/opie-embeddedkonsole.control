@@ -1,6 +1,6 @@
 Files: bin/embeddedkonsole apps/Applications/embeddedkonsole.desktop pics/konsole etc/keytabs/*
 Priority: optional
-Section: qpe/applications
+Section: opie/applications
 Maintainer: Warwick Allison <warwick@trolltech.com>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION

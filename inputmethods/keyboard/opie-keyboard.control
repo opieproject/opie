@@ -1,6 +1,6 @@
 Files: plugins/inputmethods/libqkeyboard.so*
 Priority: optional
-Section: qpe/inputmethods
+Section: opie/inputmethods
 Maintainer: Martin Jones <mjones@trolltech.com>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION

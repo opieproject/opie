@@ -1,6 +1,6 @@
 Files: ipaq/etc
 Priority: optional
-Section: qpe/system
+Section: opie/system
 Maintainer: Trenton Schulz <twschulz@trolltech.com>
 Architecture: arm
 Version: 1.0

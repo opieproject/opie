@@ -1,6 +1,6 @@
 Files: bin/addressbook apps/Applications/addressbook.desktop
 Priority: optional
-Section: qpe/applications
+Section: opie/applications
 Maintainer: Warwick Allison <warwick@trolltech.com>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION

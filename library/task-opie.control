@@ -1,6 +1,6 @@
 Files: 
 Priority: required
-Section: qpe/system
+Section: opie/system
 Maintainer: Warwick Allison <warwick@trolltech.com>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
