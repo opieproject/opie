@@ -43,20 +43,20 @@ static bool isCF(const QString& m)
     if (!f) f = fopen("/var/state/pcmcia/stab", "r");
     if (!f) f = fopen("/var/lib/pcmcia/stab", "r");
     if ( f ) {
-  char line[1024];
-  char devtype[80];
-  char devname[80];
-  while ( fgets( line, 1024, f ) ) {
-      // 0       ide     ide-cs  0       hda     3       0
-      if ( sscanf(line,"%*d %s %*s %*s %s", devtype, devname )==2 )
-      {
-    if ( QString(devtype) == "ide" && m.find(devname)>0 ) {
+        char line[1024];
+        char devtype[80];
+        char devname[80];
+        while ( fgets( line, 1024, f ) ) {
+              // 0       ide     ide-cs  0       hda     3       0
+            if ( sscanf(line,"%*d %s %*s %*s %s", devtype, devname )==2 )
+              {
+                  if ( QString(devtype) == "ide" && m.find(devname)>0 ) {
+                      fclose(f);
+                      return TRUE;
+                  }
+              }
+        }
         fclose(f);
-        return TRUE;
-    }
-      }
-  }
-  fclose(f);
     }
     return FALSE;
 }
@@ -154,8 +154,8 @@ void StorageInfo::update()
     humanname = tr("Internal Storage") + " " + humanname.mid(14);
       else if ( disk.left(13) == "/dev/mtdblock" )
     humanname = tr("Internal Storage") + " " + humanname.mid(13);
-      else if ( disk.left(10) == "/dev/ramfs" )
-    humanname = tr("Internal Storage") + " " + humanname.mid(10);
+      else if ( disk.left(5) == "tmpfs" ) //ipaqs /mnt/ramfs
+    humanname = tr("Ram FS") + " " + humanname.mid(5);
       FileSystem *fs = new FileSystem( disk, *fsit, humanname, removable, opts );
       mFileSystems.append( fs );
   }
