@@ -1225,7 +1225,7 @@ void AdvancedFm::copy()
                 };
             }
             if(!copyFile(destFile, curFile) ) {
-                    QMessageBox::message("AdvancedFm","Could not copy\n"+curFile +"to\n"+destFile);
+                    QMessageBox::message("AdvancedFm",tr("Could not copy\n")+curFile +tr("to\n")+destFile);
 
                     qWarning("nothin doing");
             }
@@ -1270,7 +1270,7 @@ void AdvancedFm::copyAs()
                         };
                     }
                     if(!copyFile(destFile, curFile) ) {
-                        QMessageBox::message("AdvancedFm","Could not copy\n"+curFile +"to\n"+destFile);
+                        QMessageBox::message("AdvancedFm",tr("Could not copy\n")+curFile +tr("to\n")+destFile);
                         qWarning("nothin doing");
                     }
                 }
@@ -1303,7 +1303,7 @@ void AdvancedFm::copyAs()
                             };
                         }
                         if(!copyFile(destFile, curFile) ) {
-                            QMessageBox::message("AdvancedFm","Could not copy\n"+curFile +"to\n"+destFile);
+                            QMessageBox::message("AdvancedFm",tr("Could not copy\n")+curFile +tr("to\n")+destFile);
                             qWarning("nothin doing");
                         }
                         
@@ -1351,7 +1351,7 @@ void AdvancedFm::copySameDir() {
                         };
                     }
                     if(!copyFile(destFile, curFile) ) {
-                        QMessageBox::message("AdvancedFm","Could not copy\n"+curFile +"to\n"+destFile);
+                            QMessageBox::message("AdvancedFm",tr("Could not copy\n")+curFile +tr("to\n")+destFile);
                         qWarning("nothin doing");
                     }
                     
@@ -1388,7 +1388,7 @@ void AdvancedFm::copySameDir() {
                             };
                         }
                         if(!copyFile(destFile, curFile) ) {
-                            QMessageBox::message("AdvancedFm","Could not copy\n"+curFile +"to\n"+destFile);
+                            QMessageBox::message("AdvancedFm",tr("Could not copy\n")+curFile +tr("to\n")+destFile);
                             qWarning("nothin doing");
                         }
                         qDebug("copy "+curFile+" as "+destFile);
@@ -1436,7 +1436,7 @@ void AdvancedFm::move() {
                           break;
                     };
                     if(!copyFile( destFile, curFile) ) {
-                        QMessageBox::message(tr("Note"),tr("Could not move\n"+curFile));
+                        QMessageBox::message(tr("Note"),tr("Could not move\n")+curFile);
                         return;
                     }
                     QFile::remove(curFile);
@@ -1468,7 +1468,7 @@ void AdvancedFm::move() {
                           break;
                     };
                     if(!copyFile(destFile, curFile) ) {
-                        QMessageBox::message(tr("Note"),tr("Could not move\n"+curFile));
+                        QMessageBox::message(tr("Note"),tr("Could not move\n")+curFile);
                         return;
                     }
                 }
@@ -1545,7 +1545,7 @@ void AdvancedFm::runCommand() {
         fp = popen(  (const char *) command, "r");
         if ( !fp ) {
             qDebug("Could not execute '" + command + "'! err=%d", fp);
-            QMessageBox::warning( this, tr("AdvancedFm"), tr("command failed!"), tr("&OK") );
+            QMessageBox::warning( this, "AdvancedFm", tr("command failed!"), tr("&OK") );
             pclose(fp);
             return;
         } else {
@@ -1601,7 +1601,7 @@ void AdvancedFm::fileStatus() {
     fp = popen(  (const char *) command, "r");
     if ( !fp ) {
         qDebug("Could not execute '" + command + "'! err=%d", fp);
-        QMessageBox::warning( this, tr("AdvancedFm"), tr("command failed!"), tr("&OK") );
+        QMessageBox::warning( this, "AdvancedFm", tr("command failed!"), tr("&OK") );
         pclose(fp);
         return;
     } else {
@@ -1638,10 +1638,10 @@ void AdvancedFm::del() {
 }
 
 void AdvancedFm::doAbout() {
-    QMessageBox::message("AdvancedFm","Advanced FileManager\n"
+    QMessageBox::message("AdvancedFm",tr("Advanced FileManager\n"
                          "is copyright 2002 by\n"
                          "L.J.Potter<llornkcor@handhelds.org>\n"
-                         "and is licensed by the GPL");
+                         "and is licensed by the GPL"));
 }
 
 void AdvancedFm::keyReleaseEvent( QKeyEvent *e)
@@ -1802,6 +1802,9 @@ QString  AdvancedFm::getFileSystemType(const QString &currentText) {
     return baseFs;
 }
 
+QString  AdvancedFm::getDiskSpace( const QString &) {
+
+}
 
 void AdvancedFm::doBeam() {
     Ir ir;
@@ -1868,7 +1871,7 @@ void AdvancedFm::showFileMenu() {
   const AppLnk* app = mt.application();
   QFile fi(curApp);
 
-//  QPopupMenu m;
+  //  QPopupMenu m;
   QPopupMenu *m = new QPopupMenu(0);
 
   m->insertItem(  tr( "Show Hidden Files" ), this,  SLOT( showHidden() ));
@@ -1884,57 +1887,58 @@ void AdvancedFm::showFileMenu() {
 
     m->insertItem( Resource::loadPixmap( "txt" ), tr( "Open as text" ),this, SLOT( runText() ) );
   }
-    m->insertSeparator();
+  m->insertSeparator();
 
 
-    if(isLocalView)
-      m->insertItem( tr( "Make Directory" ), this, SLOT( localMakDir() ));
-    else
-      m->insertItem( tr( "Make Directory" ), this, SLOT( remoteMakDir() ));
+  if(isLocalView)
+    m->insertItem( tr( "Make Directory" ), this, SLOT( localMakDir() ));
+  else
+    m->insertItem( tr( "Make Directory" ), this, SLOT( remoteMakDir() ));
 
-    m->insertItem( tr( "Make Symlink" ), this, SLOT( mkSym() ));
-    m->insertSeparator();
+  m->insertItem( tr( "Make Symlink" ), this, SLOT( mkSym() ));
+  m->insertSeparator();
 
-    if(isLocalView)
-      m->insertItem( tr( "Rename" ), this, SLOT( localRename() ));
-    else
-      m->insertItem( tr( "Rename" ), this, SLOT( remoteRename() ));
+  if(isLocalView)
+    m->insertItem( tr( "Rename" ), this, SLOT( localRename() ));
+  else
+    m->insertItem( tr( "Rename" ), this, SLOT( remoteRename() ));
 
-    m->insertItem( tr( "Copy" ), this, SLOT( copy() ));
-    m->insertItem( tr( "Copy As" ), this, SLOT( copyAs() ));
-    m->insertItem( tr( "Copy Same Dir" ), this, SLOT( copySameDir() ));
-    m->insertItem( tr( "Move" ), this, SLOT( move() ));
-    m->insertSeparator();
+  m->insertItem( tr( "Copy" ), this, SLOT( copy() ));
+  m->insertItem( tr( "Copy As" ), this, SLOT( copyAs() ));
+  m->insertItem( tr( "Copy Same Dir" ), this, SLOT( copySameDir() ));
+  m->insertItem( tr( "Move" ), this, SLOT( move() ));
+  m->insertSeparator();
 
-    if(isLocalView)
-      m->insertItem( tr( "Rescan" ), this, SLOT( populateLocalView() ));
-    else
-      m->insertItem( tr( "Rescan" ), this, SLOT( populateRemoteView() ));
+  if(isLocalView)
+    m->insertItem( tr( "Rescan" ), this, SLOT( populateLocalView() ));
+  else
+    m->insertItem( tr( "Rescan" ), this, SLOT( populateRemoteView() ));
 
-    m->insertItem( tr( "Run Command" ), this, SLOT( runCommand() ));
-    m->insertItem( tr( "File Info" ), this, SLOT( fileStatus() ));
-    m->insertSeparator();
+  m->insertItem( tr( "Run Command" ), this, SLOT( runCommand() ));
+  m->insertItem( tr( "File Info" ), this, SLOT( fileStatus() ));
+  m->insertSeparator();
 
-    if(isLocalView)
-      m->insertItem( tr( "Delete" ), this, SLOT( localDelete() ));
-    else
-      m->insertItem( tr( "Delete" ), this, SLOT( remoteDelete() ));
+  if(isLocalView)
+    m->insertItem( tr( "Delete" ), this, SLOT( localDelete() ));
+  else
+    m->insertItem( tr( "Delete" ), this, SLOT( remoteDelete() ));
 
-    m->insertSeparator();
-    m->insertItem( tr( "Set Permissions" ), this, SLOT( filePerms() ));
-    if( QFile(QPEApplication::qpeDir()+"lib/libopie.so").exists() )  //bad hack for Sharp zaurus failings
-      m->insertItem( tr( "Properties" ), this, SLOT( doProperties() ));
-    m->setCheckable(TRUE);
-    if (!b)
-      m->setItemChecked(m->idAt(0),TRUE);
-    else
-      m->setItemChecked(m->idAt(0),FALSE);
-    if(Ir::supported())
-      m->insertItem( tr( "Beam File" ), this, SLOT( doBeam() ));
-    m->setFocus();
-    m->exec( QCursor::pos() );
-    sleep(1);
-    if(m) delete m;
+  m->insertSeparator();
+  m->insertItem( tr( "Set Permissions" ), this, SLOT( filePerms() ));
+
+  if( QFile(QPEApplication::qpeDir()+"lib/libopie.so").exists() )  //bad hack for Sharp zaurus failings
+    m->insertItem( tr( "Properties" ), this, SLOT( doProperties() ));
+  m->setCheckable(TRUE);
+  if (!b)
+    m->setItemChecked(m->idAt(0),TRUE);
+  else
+    m->setItemChecked(m->idAt(0),FALSE);
+  if(Ir::supported())
+    m->insertItem( tr( "Beam File" ), this, SLOT( doBeam() ));
+  m->setFocus();
+  m->exec( QCursor::pos() );
+  sleep(1);
+  if(m) delete m;
 }
 
 
