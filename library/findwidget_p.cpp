@@ -108,7 +108,8 @@ void FindWidget::slotNotFound()
 
 void FindWidget::slotWrapAround()
 {
-    lblStatus->setText( tr("End reached, starting at beginning") );
+    lblStatus->setText( tr("End reached, starting at %1", "Date using TimeString::shortDate")
+                        .arg(TimeString::shortDate( mDate ) ) );
 }
 
 void FindWidget::slotDateChanged( int year, int month, int day )
