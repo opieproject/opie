@@ -1,0 +1,10 @@
+Files: bin/qpe apps/Settings/Calibrate.desktop bin/targzip bin/targunzip bin/qtopia-update-symlinks services/calibrate/calibrate services/shutdown/shutdown pics/SyncScreen.png pics/syncdot.png pics/syncdot.path
+Priority: required
+Section: qpe/system
+Maintainer: Trolltech (www.trolltech.com)
+Architecture: $CPU_ARCH
+Arch: $DEVICE_ARCH
+Version: $QPE_VERSION-12
+Depends: qpe-libqtopia
+Description: Launcher for QPE
+ The "finder" or "explorer", or whatever you want to call it.

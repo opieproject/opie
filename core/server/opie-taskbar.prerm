@@ -1,0 +1,5 @@
+#/bin/sh
+
+find /etc -name [SK][0-9][0-9]opie | xargs rm -f
+
+exit 0
