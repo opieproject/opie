@@ -1,9 +1,9 @@
 [Desktop Entry]
 Comment=A Terminal Window
 Exec=embeddedkonsole
-Icon=Konsole
+Icon=Terminal
 Type=Application
-Name=Terminal
+Name=Konsole
 Name[de]=Kommando zeile
 Name[hu]=Terminál
 Name[it]=Terminale
