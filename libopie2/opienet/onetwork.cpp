@@ -968,7 +968,7 @@ OStationList* OWirelessNetworkInterface::scanNetwork()
                 case SIOCGIWESSID:
                 {
                     odebug << "SIOCGIWESSID" << oendl;
-                    stations->last()->ssid = we->u.essid.pointer;
+                    stations->last()->ssid = static_cast<const char*>( we->u.essid.pointer );
                     break;
                 }
                 case SIOCGIWSENS: odebug << "SIOCGIWSENS" << oendl; break;
