@@ -51,12 +51,12 @@ PlayListSelection::~PlayListSelection() {
 
 void PlayListSelection::contentsMouseMoveEvent( QMouseEvent *event ) {
     if ( event->state() == QMouseEvent::LeftButton ) {
-	QListViewItem *currentItem = selectedItem();
-	QListViewItem *itemUnder = itemAt( QPoint( event->pos().x(), event->pos().y() - contentsY() ) );
-	if ( currentItem && currentItem->itemAbove() == itemUnder )
-	    moveSelectedUp();
-	else if ( currentItem && currentItem->itemBelow() == itemUnder )
-	    moveSelectedDown();
+  QListViewItem *currentItem = selectedItem();
+  QListViewItem *itemUnder = itemAt( QPoint( event->pos().x(), event->pos().y() - contentsY() ) );
+  if ( currentItem && currentItem->itemAbove() == itemUnder )
+      moveSelectedUp();
+  else if ( currentItem && currentItem->itemBelow() == itemUnder )
+      moveSelectedDown();
     }
 }
 
@@ -64,7 +64,7 @@ void PlayListSelection::contentsMouseMoveEvent( QMouseEvent *event ) {
 const QString *PlayListSelection::current() {
     PlayListSelectionItem *item = (PlayListSelectionItem *)selectedItem();
     if ( item )
-	return item->file();
+  return item->file();
     return NULL;
 }
 
@@ -91,7 +91,7 @@ void PlayListSelection::removeSelected() {
     qDebug("removeSelected()");
     QListViewItem *item = selectedItem();
     if ( item )
-	delete item;
+  delete item;
     setSelected( currentItem(), TRUE );
     ensureItemVisible( selectedItem() );
 }
@@ -100,7 +100,7 @@ void PlayListSelection::removeSelected() {
 void PlayListSelection::moveSelectedUp() {
     QListViewItem *item = selectedItem();
     if ( item && item->itemAbove() )
-	item->itemAbove()->moveItem( item );
+  item->itemAbove()->moveItem( item );
     ensureItemVisible( selectedItem() );
 }
 
@@ -118,7 +118,7 @@ bool PlayListSelection::prev() {
     if ( item && item->itemAbove() )
         setSelected( item->itemAbove(), TRUE );
     else
-	return FALSE;
+  return FALSE;
     ensureItemVisible( selectedItem() );
     return TRUE;
 }
@@ -129,7 +129,7 @@ bool PlayListSelection::next() {
     if ( item && item->itemBelow() )
         setSelected( item->itemBelow(), TRUE );
     else
-	return FALSE;
+  return FALSE;
     ensureItemVisible( selectedItem() );
     return TRUE;
 }
@@ -140,7 +140,7 @@ bool PlayListSelection::first() {
     if ( item )
         setSelected( item, TRUE );
     else
-	return FALSE;
+  return FALSE;
     ensureItemVisible( selectedItem() );
     return TRUE;
 }
@@ -150,11 +150,11 @@ bool PlayListSelection::last() {
     QListViewItem *prevItem = NULL;
     QListViewItem *item = firstChild();
     while ( ( item = item->nextSibling() ) )
-	prevItem = item;
+  prevItem = item;
     if ( prevItem )
         setSelected( prevItem, TRUE );
     else
-	return FALSE;
+  return FALSE;
     ensureItemVisible( selectedItem() );
     return TRUE;
 }
