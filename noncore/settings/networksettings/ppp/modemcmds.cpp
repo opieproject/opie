@@ -1,7 +1,7 @@
 /*
  *            kPPP: A front end for pppd for the KDE project
  *
- * $Id: modemcmds.cpp,v 1.3.2.3 2003-07-25 15:12:55 harlekin Exp $
+ * $Id: modemcmds.cpp,v 1.3.2.3.2.1 2003-07-30 17:54:23 tille Exp $
  *
  * Copyright (C) 1997 Bernd Johannes Wuebben
  * wuebben@math.cornell.edu
@@ -39,8 +39,8 @@
 // a little trick to make the label look like a disabled lineedit
 #define FORMATSLIDERLABEL(l) //l->setFixedWidth(l->sizeHint().width()); l->setFixedHeight(QLineEdit(dummyWidget).sizeHint().height()); l->setAlignment(AlignCenter); l->setFrameStyle(QFrame::WinPanel|QFrame::Sunken); l->setLineWidth(2);
 
-ModemCommands::ModemCommands(PPPData *pd, QWidget *parent, const char *name)
-    : QDialog( parent, name, true ), _pppdata(pd)
+ModemCommands::ModemCommands(PPPData *pd, QWidget *parent, const char *name , bool modal, WFlags f)
+    : QDialog( parent, name, modal,  f ), _pppdata(pd)
 {
     setCaption(i18n("Edit Modem Commands"));
 

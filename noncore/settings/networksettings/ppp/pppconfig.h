@@ -8,6 +8,9 @@ class QTabWidget;
 class InterfacePPP;
 class AccountWidget;
 class GeneralWidget;
+class DevicesWidget;
+
+//OLD:
 class ModemWidget;
 class ModemWidget2;
 
@@ -29,6 +32,9 @@ protected slots:
   QTabWidget *tabWindow;
   AccountWidget *accounts;
   GeneralWidget *general;
+  DevicesWidget* devices;
+
+  //OLD:
   ModemWidget *modem1;
   ModemWidget2 *modem2;
 };

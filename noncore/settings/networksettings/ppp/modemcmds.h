@@ -3,7 +3,7 @@
  *
  *            kPPP: A front end for pppd for the KDE project
  *
- * $Id: modemcmds.h,v 1.2.2.2 2003-07-25 11:20:42 tille Exp $
+ * $Id: modemcmds.h,v 1.2.2.2.2.1 2003-07-30 17:54:23 tille Exp $
  *
  * Copyright (C) 1997 Bernd Johannes Wuebben
  * wuebben@math.cornell.edu
@@ -44,7 +44,7 @@ Q_OBJECT
 
 public:
 
-  ModemCommands(PPPData*, QWidget *parent=0, const char *name=0);
+  ModemCommands(PPPData*, QWidget *parent=0, const char *name=0, bool modal=0, WFlags f = 0);
   ~ModemCommands() {}
 
 private slots:

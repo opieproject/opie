@@ -2,7 +2,7 @@
  *
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdata.h,v 1.8.2.4 2003-07-30 03:55:02 tille Exp $
+ * $Id: pppdata.h,v 1.8.2.4.2.1 2003-07-30 17:54:24 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -65,6 +65,7 @@ class Config;
 
 // general
 #define ACCOUNT_LIST       "AccountList"
+#define DEVICE_LIST        "DeviceList"
 #define DEFAULTACCOUNT_KEY "DefaultAccount"
 #define PPPDVERSION_KEY    "pppdVersion"
 #define PPPDTIMEOUT_KEY    "pppdTimeout"
@@ -73,10 +74,12 @@ class Config;
 #define AUTOREDIAL_KEY     "AutomaticRedial"
 #define DISCONNECT_KEY     "DisconnectOnXServerExit"
 #define QUITONDISCONNECT_KEY "QuitOnDisconnect"
-#define NUMACCOUNTS_KEY    "NumberOfAccounts"
+#define NUMACCOUNTS_KEY    "HighcountAccounts"
+#define NUMDEVICES_KEY    "HighcountDevices"
 #define ID_KEY		   "ID"
 
 // modem
+#define MODEMNAME_KEY      "Modem_Name"
 #define MODEMDEV_KEY       "Device"
 #define LOCKFILE_KEY       "UseLockFile"
 #define FLOWCONTROL_KEY    "FlowControl"
@@ -151,6 +154,10 @@ class Config;
 #define ACCOUNTS_COUNT     "Accounts_Count"
 #define ACOUNTS_DEV        "Accounts_Modem"
 #define ACOUNTS_ACC        "Accounts_Account"
+
+#define DEVICESNAMES_LIST  "DevicesNames_List"
+#define DEVICES_LIST       "Devices_List"
+#define DEVICES_LIST_SEP   ','
 
 class PPPData {
 public:
@@ -239,8 +246,12 @@ public:
   void setModemEscapeResp(const QString &);
   const QString modemEscapeResp();
 
-  const QString modemDevice();
-  bool setModemDevice(const QString &);
+//  const QString modemName();
+//  bool setModemName(const QString &);
+//  bool changeModemName(const QString &);
+
+   const QString modemDevice();
+   bool setModemDevice(const QString &);
 
   const QString flowcontrol();
   void setFlowcontrol(const QString &);
@@ -323,7 +334,7 @@ public:
   bool deleteAccount();
   bool deleteAccount(const QString &);
   int newaccount();
-  int copyaccount(int i);
+  int copyaccount(const QString&);
 
   const QString accname();
   void setAccname(const QString &);
@@ -412,16 +423,27 @@ public:
   int pppdError() const;
   void setpppdError(int err);
 
+  QStringList getDevicesList();
 
   static QString encodeWord(const QString &s);
+
+  const QString devname();
+  void setDevname(const QString &);
+  bool setDevice(const QString& );
+  bool deleteDevice();
+  bool deleteDevice(const QString &);
+  int newdevice();
+  int copydevice(const QString&);
+  QStringList getDevicesNamesList();
 
 private:
 
     //static PPPData *_data;
 //    int modemDeviceGroup;
     QString passwd;
-    QString deviceName;
+    QString _modemName;
     int highcount;                         // index of highest account
+    int highcountdev;                      // index of highest device
 //    int caccount;                          // index of the current account
     QString cgroup;                        // name of current config group
     pid_t suidprocessid;                   // process ID of setuid child
@@ -433,6 +455,7 @@ private:
 
     QStringList phonelist;
     QStringList accountList;
+    QStringList deviceList;
     QMap<QString,QString> stringEntries;
     QMap<QString,int> intEntries;
     QMap<QString,QStringList> listEntries;
