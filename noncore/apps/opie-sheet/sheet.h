@@ -100,7 +100,7 @@ class Sheet: public QTable
   QString findCellName(int row, int col);
   bool findRange(const QString &variable1, const QString &variable2, int *row1, int *col1, int *row2, int *col2);
   QString calculateVariable(const QString &variable);
-  QString calculateFunction(const QString &function, const QString &parameters, int NumOfParams);
+  QString calculateFunction(const QString &func, const QString &parameters, int NumOfParams);
   QString getParameter(const QString &parameters, int paramNo, bool giveError=FALSE, const QString funcName="");
   QString dataParser(const QString &cell, const QString &data);
   QString dataParserHelper(const QString &data);

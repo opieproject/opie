@@ -1,3 +1,7 @@
+January 8, 2004
+	- fixed issue : "-if someone enters directly text as parameter to a string function the text renders as uppercase due to the calculation engine that uppercases all the parsing sentence."
+	now the text is handled correctly.
+
 January 7, 2004
 	* Release by hayzel (koppermind@panafonet.gr)
 	This version has many valuable changes, though It may have some annoying bugs. Please if you are interested in opie-sheet try it hard, so I can fix some of them. Also If you want some other functions that must be here and are missing feel free to ask them. (no financial functions please. :)  I really hate them )

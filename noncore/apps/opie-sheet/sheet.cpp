@@ -909,7 +909,7 @@ double Sheet::functionCountIf(const QString &param1, const QString &param2, cons
 }
 
 
-QString Sheet::calculateFunction(const QString &function, const QString &parameters, int NumOfParams)
+QString Sheet::calculateFunction(const QString &func, const QString &parameters, int NumOfParams)
 {
   bool ok;
   double val1=0.0,val2=0.0,val3=0.0;
@@ -918,6 +918,8 @@ QString Sheet::calculateFunction(const QString &function, const QString &paramet
   int row,col;
   QString s1,s2;
 //basic functions
+  QString function;
+  function=func.upper();
   if (function=="+")
   {
     s1=calculateVariable(getParameter(parameters, 0));
@@ -1777,7 +1779,7 @@ QString Sheet::dataParserHelper(const QString &data)
 		}
 		else if(tokentype==VARIABLE_TOKEN)
 		{
-			stack1.push(new QString(*s1));
+			stack1.push(new QString(QString(*s1).upper()));
 			//printf("Parse:Var=%s\r\n",s1->latin1());
 			//here to put implementation of other types of variables except cell.
 			//for example names
@@ -1801,7 +1803,7 @@ QString Sheet::dataParserHelper(const QString &data)
 				//printf("Parse:Func=%s, params=%s, stackcount=%d,args=%d\r\n"
 				//	,s1->latin1(),params.latin1(),stack1.count(),args);
 				tempval=calculateFunction(*s1,params,args);
-				tempval=tempval.upper();
+				tempval=tempval;
 				stack1.push(new QString(tempval));
 		};
 
@@ -1825,7 +1827,7 @@ QString Sheet::dataParser(const QString &cell, const QString &data)
   if (listDataParser.find(cell)!=listDataParser.end()) return "0";
   listDataParser.append(cell);
  // printf("DATAPARSER: data=%s, cell=%s\r\n",data.ascii(),cell.ascii());
-  strippedData=dataParserHelper(strippedData.remove(0, 1).upper().replace(QRegExp(":"), ","));
+  strippedData=dataParserHelper(strippedData.remove(0, 1).replace(QRegExp(":"), ","));
 
   int i=0;
   QString tempParameter(getParameter(strippedData, i)), result="";
