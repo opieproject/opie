@@ -38,7 +38,9 @@
 #include <unistd.h>
 
 
-
+/*
+ * Intel Assabat FrontLight Control
+ */
 #define _SA1100_FL_IOCTL_ON		1
 #define _SA1100_FL_IOCTL_OFF		2
 #define _SA1100_FL_IOCTL_INTENSITY	3
@@ -50,6 +52,9 @@
 #define _SA1100_FL_IOCTL_PWR_TOGGLE		8
 #define _SA1100_FL_IOCTL_AUTOLIGHT		10
 
+/*
+ * The device
+ */
 #define FL_MAJOR   60
 #define FL_NAME   "sa1100-fl"
 #define FL_FILE   "/dev/sa1100-fl"
@@ -69,7 +74,17 @@ struct b_button {
     char *fheldaction;
 };
 
+
+/*
+ * The MVista Beagle kernel maps the action
+ * buttons to the Qt keymap
+ */
 struct b_button beagle_buttons [] = {
+    { Model_Beagle_PA100,
+      Qt::Key_F8, QT_TRANSLATE_NOOP("Button", "Record Button"),
+      "devicebuttons/beagle_record",
+      "QPE/VMemo", "toggleRecord()",
+      "sound", "raise()" },
     { Model_Beagle_PA100,
       Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Calendar Button"),
       "devicebuttons/beagle_calendar",
@@ -93,12 +108,13 @@ struct b_button beagle_buttons [] = {
 };
 
 
-Beagle::Beagle()
-{
-    qWarning( "Created Beagle" );
-}
+Beagle::Beagle()  {}
+
 Beagle::~Beagle() {}
 
+/*
+ * Simply set the Tradesquare.NL data
+ */
 void Beagle::init( const QString&) {
     /*
      * No other assabat model yet
@@ -107,8 +123,18 @@ void Beagle::init( const QString&) {
     d->m_vendor = Vendor_MasterIA;
     d->m_modelstr = "Tuxpda 1";
     d->m_rotation = Rot0;
+    d->m_model = Model_Beagle_PA100;
 }
 
+
+/*
+ * Initialize the Buttons. We only do it
+ * if not yet initialized.
+ * We go through our hardware button array
+ * and set the 'Factory' Pressed and Held Action
+ * reloadButtonMapping will then apply the user
+ * configuration to the buttons
+ */
 void Beagle::initButtons() {
     if ( d->m_buttons )
         return;
@@ -129,26 +155,45 @@ void Beagle::initButtons() {
     reloadButtonMapping();
 }
 
+/*
+ * Turn the display on. We do it by ioctl on FL_FILE
+ */
 bool Beagle::setDisplayStatus( bool on ) {
     int fd = ::open(FL_FILE, O_WRONLY);
 
     if ( fd < 0 )
         return false;
 
-    return ( ::ioctl(fd, on ? _SA1100_FL_IOCTL_ON : _SA1100_FL_IOCTL_OFF, 0 ) == -1 );
+    return ( ::ioctl(fd, on ? _SA1100_FL_IOCTL_ON : _SA1100_FL_IOCTL_OFF, 0 ) == 0 );
 }
 
+/*
+ * 0-100 are legal steps of the frontlight.
+ */
 int Beagle::displayBrightnessResolution()const {
     return 100;
 }
 
+/*
+ * Opie uses the values 0-255 for the frontlight
+ * intensity and we need to map it to the range
+ * of 0-100.
+ * But first we do some sanity of the range of brightness
+ *
+ */
 bool Beagle::setDisplayBrightness( int brightness ) {
+    if ( brightness > 255 )
+        brightness = 255;
+    else if ( brightness < 0 )
+        brightness = 0;
+    brightness = (100*brightness)/255;
+
     int fd = ::open(FL_FILE, O_WRONLY);
 
     if ( fd < 0 )
         return false;
 
-    return ( ::ioctl(fd, _SA1100_FL_IOCTL_INTENSITY, brightness%101 ) == 0 );
+    return ( ::ioctl(fd, _SA1100_FL_IOCTL_INTENSITY, brightness ) == 0 );
 }
 
 }
