@@ -75,7 +75,11 @@ qDebug( "Opening %s",dspstr);
 
 qDebug( "Opening mixer" );
     int mixerHandle=0;
+#ifdef QT_QWS_DEVFS
+        if  (( mixerHandle = open("/dev/sound/mixer",O_RDWR))<0) {
+#else
         if  (( mixerHandle = open("/dev/mixer",O_RDWR))<0) {
+#endif
             perror("open(\"/dev/mixer\")");
               QString errorMsg="Could not open audio device\n /dev/dsp\n"
                   +(QString)strerror(errno);
@@ -168,7 +172,11 @@ int Device::getInVolume() {
 void Device::changedOutVolume(int vol) {
     int level = (vol << 8) + vol;
     int fd = 0;
+#ifdef QT_QWS_DEVFS
+    if ((fd = open("/dev/sound/mixer", O_RDWR))>=0) {
+#else
     if ((fd = open("/dev/mixer", O_RDWR))>=0) {
+#endif
         if(ioctl(fd, MIXER_WRITE(SOUND_MIXER_VOLUME), &level) == -1)
             perror("ioctl(\"MIXER_IN_WRITE\")");
 
@@ -184,7 +192,11 @@ void Device::changedOutVolume(int vol) {
 void Device::changedInVolume(int vol ) {
     int level = (vol << 8) + vol;
     int fd = 0;
+#ifdef QT_QWS_DEVFS
+    if ((fd = open("/dev/sound/mixer", O_RDWR))>=0) {
+#else
     if ((fd = open("/dev/mixer", O_RDWR))>=0) {
+#endif
         if(ioctl(fd, MIXER_WRITE(SOUND_MIXER_MIC), &level) == -1)
             perror("ioctl(\"MIXER_IN_WRITE\")");
         Config cfg("qpe");
@@ -200,7 +212,11 @@ bool Device::selectMicInput() {
 
   int md=0;
   int info=MIXER_WRITE(SOUND_MIXER_MIC);
+#ifdef QT_QWS_DEVFS
+  md = ::open(  "/dev/sound/mixer", O_RDWR );
+#else
   md = ::open(  "/dev/mixer", O_RDWR );
+#endif
   if ( md == -1)
   perror("open(\"/dev/mixer\")");
   else {

@@ -281,7 +281,11 @@ void MediaPlayer::timerEvent( QTimerEvent * ) {
 
 
 void MediaPlayer::blank( bool b ) {
+#ifdef QT_QWS_DEVFS
+    fd=open("/dev/fb/0",O_RDWR);
+#else
     fd=open("/dev/fb0",O_RDWR);
+#endif
 #ifdef QT_QWS_SL5XXX
     fl= open( "/dev/fl", O_RDWR );
 #endif
