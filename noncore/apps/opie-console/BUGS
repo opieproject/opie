@@ -6,6 +6,9 @@ and we need to work around some compiler bugs!! -zecke
 Send/receive: lrzsz behaves strange when trying to use
 --overwrite or --rename.
 
+- transfer dialog is still a top dialog instead on the widgetstack of of the
+connection its used on
+
 - keys and buttonbar merge
 
 - keys really working
