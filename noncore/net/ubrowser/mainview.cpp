@@ -102,11 +102,11 @@ void MainView::textChanged()
 {
 	if(browser->documentTitle().isNull())
 	{
-		setCaption(browser->source() + tr(" - uBrowser") );
+		setCaption( tr("%1 - uBrowser").arg( browser->source() ) );
 	}
 	else
 	{
-		setCaption(browser->documentTitle() + tr(" - uBrowser"));
+		setCaption(tr(" - uBrowser").arg( browser->documentTitle() ));
 	}
 
 	location->setEditText(browser->source());

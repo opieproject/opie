@@ -96,7 +96,7 @@ const QMimeSource * HttpFactory::data(const QString &abs_name) const
 	if( serverInfo == NULL )
 	{
 		QMessageBox *mb = new QMessageBox(QObject::tr("Error!"),
-			QObject::tr("couldnt find ip address"),
+			QObject::tr("IP-Address not found"),
 			QMessageBox::NoIcon,
 			QMessageBox::Ok,
 			QMessageBox::NoButton,
@@ -115,7 +115,7 @@ const QMimeSource * HttpFactory::data(const QString &abs_name) const
 	if( con == -1 )
 	{
 		QMessageBox *mb = new QMessageBox(QObject::tr("Error!"),
-			QObject::tr("couldnt create socket"),
+			QObject::tr("Error creating socket"),
 			QMessageBox::NoIcon,
 			QMessageBox::Ok,
 			QMessageBox::NoButton,
@@ -133,7 +133,7 @@ const QMimeSource * HttpFactory::data(const QString &abs_name) const
 	if(::connect( con, (struct sockaddr *)&serverAddr, sizeof(struct sockaddr)) == -1 )
 	{
 		QMessageBox *mb = new QMessageBox(QObject::tr("Error!"),
-			QObject::tr("couldnt connect to socket"),
+			QObject::tr("Error connecting to socket"),
 			QMessageBox::NoIcon,
 			QMessageBox::Ok,
 			QMessageBox::NoButton,
