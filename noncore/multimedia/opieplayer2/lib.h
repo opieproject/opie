@@ -181,6 +181,8 @@ namespace XINE {
         virtual void receiveMessage( ThreadUtil::ChannelMessage *msg, SendType sendType );
 
     private:
+        void initialize();
+
         int m_bytes_per_pixel;
         bool m_video:1;
         XineVideoWidget *m_wid;

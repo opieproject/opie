@@ -38,6 +38,7 @@
 #include <qpe/resource.h>
 
 #include <qfile.h>
+#include <qdir.h>
 
 #include <qgfx_qws.h>
 #include <qdirectpainter_qws.h>
@@ -73,22 +74,27 @@ Lib::Lib( XineVideoWidget* widget ) {
     m_video = false;
     m_wid = widget;
     printf("Lib");
-    QCString str( getenv("HOME") );
-    str += "/Settings/opiexine.cf";
+    QString configPath = QDir::homeDirPath() + "/Settings/opiexine.cf";
     // get the configuration
 
     // not really OO, should be an extra class, later
-    if ( !QFile(str).exists() ) {
-        QFile f(str);
+    if ( !QFile::exists(configPath) ) {
+        QFile f(configPath);
         f.open(IO_WriteOnly);
         QTextStream ts( &f );
         ts << "misc.memcpy_method:glibc\n";
         f.close();
     }
 
+    initialize();
+}
+
+void Lib::initialize()
+{
     m_xine =  xine_new( );
 
-    xine_config_load( m_xine, str.data() );
+    QString configPath = QDir::homeDirPath() + "/Settings/opiexine.cf";
+    xine_config_load( m_xine, QFile::encodeName( configPath ) );
 
     xine_init( m_xine );
 
@@ -116,6 +122,7 @@ Lib::Lib( XineVideoWidget* widget ) {
     m_queue = xine_event_new_queue (m_stream);
 
     xine_event_create_listener_thread (m_queue, xine_event_handler, this);
+
 }
 
 Lib::~Lib() {
