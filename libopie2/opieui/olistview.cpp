@@ -62,7 +62,7 @@ OListView::~OListView()
 
 void OListView::setFullWidth( bool fullWidth )
 {
-    m_fullWidth = m_fullWidth;
+    m_fullWidth = fullWidth;
     #if QT_VERSION > 290
     header()->setStretchEnabled( fullWidth, columns()-1 );
     #endif
