@@ -1,7 +1,7 @@
 /****************************************************************************
-** $Id: colordialog.cpp,v 1.1 2002-04-25 23:32:41 drw Exp $
+** $Id: colordialog.cpp,v 1.2 2002-04-30 01:09:14 drw Exp $
 **
-** Implementation of QColorDialog class
+** Implementation of OColorDialog class
 **
 ** Created : 990222
 **
@@ -476,49 +476,49 @@ QColorShower::QColorShower( QWidget *parent, const char *name )
 
     hEd = new QColNumLineEdit( this );
     hEd->setValidator( val360 );
-    QLabel *l = new QLabel( hEd, QColorDialog::tr("Hue:"), this );
+    QLabel *l = new QLabel( hEd, OColorDialog::tr("Hue:"), this );
     l->setAlignment( AlignRight|AlignVCenter );
     gl->addWidget( l, 0, 1 );
     gl->addWidget( hEd, 0, 2 );
 
     sEd = new QColNumLineEdit( this );
     sEd->setValidator( val256 );
-    l = new QLabel( sEd, QColorDialog::tr("Sat:"), this );
+    l = new QLabel( sEd, OColorDialog::tr("Sat:"), this );
     l->setAlignment( AlignRight|AlignVCenter );
     gl->addWidget( l, 1, 1 );
     gl->addWidget( sEd, 1, 2 );
 
     vEd = new QColNumLineEdit( this );
     vEd->setValidator( val256 );
-    l = new QLabel( vEd, QColorDialog::tr("Val:"), this );
+    l = new QLabel( vEd, OColorDialog::tr("Val:"), this );
     l->setAlignment( AlignRight|AlignVCenter );
     gl->addWidget( l, 2, 1 );
     gl->addWidget( vEd, 2, 2 );
 
     rEd = new QColNumLineEdit( this );
     rEd->setValidator( val256 );
-    l = new QLabel( rEd, QColorDialog::tr("Red:"), this );
+    l = new QLabel( rEd, OColorDialog::tr("Red:"), this );
     l->setAlignment( AlignRight|AlignVCenter );
     gl->addWidget( l, 0, 3 );
     gl->addWidget( rEd, 0, 4 );
 
     gEd = new QColNumLineEdit( this );
     gEd->setValidator( val256 );
-    l = new QLabel( gEd, QColorDialog::tr("Green:"), this );
+    l = new QLabel( gEd, OColorDialog::tr("Green:"), this );
     l->setAlignment( AlignRight|AlignVCenter );
     gl->addWidget( l, 1, 3 );
     gl->addWidget( gEd, 1, 4 );
 
     bEd = new QColNumLineEdit( this );
     bEd->setValidator( val256 );
-    l = new QLabel( bEd, QColorDialog::tr("Blue:"), this );
+    l = new QLabel( bEd, OColorDialog::tr("Blue:"), this );
     l->setAlignment( AlignRight|AlignVCenter );
     gl->addWidget( l, 2, 3 );
     gl->addWidget( bEd, 2, 4 );
 
     alphaEd = new QColNumLineEdit( this );
     alphaEd->setValidator( val256 );
-    alphaLab = new QLabel( alphaEd, QColorDialog::tr("Alpha channel:"), this );
+    alphaLab = new QLabel( alphaEd, OColorDialog::tr("Alpha channel:"), this );
     alphaLab->setAlignment( AlignRight|AlignVCenter );
     gl->addMultiCellWidget( alphaLab, 3, 3, 1, 3 );
     gl->addWidget( alphaEd, 3, 4 );
@@ -607,11 +607,11 @@ void QColorShower::setHsv( int h, int s, int v )
     showCurrentColor();
 }
 
-class QColorDialogPrivate : public QObject
+class OColorDialogPrivate : public QObject
 {
 Q_OBJECT
 public:
-    QColorDialogPrivate( QColorDialog *p );
+    OColorDialogPrivate( OColorDialog *p );
     QRgb currentColor() const { return cs->currentColor(); }
     void setCurrentColor( QRgb rgb );
 
@@ -629,7 +629,7 @@ private:
 };
 
 //sets all widgets to display h,s,v
-void QColorDialogPrivate::newHsv( int h, int s, int v )
+void OColorDialogPrivate::newHsv( int h, int s, int v )
 {
     cs->setHsv( h, s, v );
     cp->setCol( h, s );
@@ -637,14 +637,14 @@ void QColorDialogPrivate::newHsv( int h, int s, int v )
 }
 
 //sets all widgets to display rgb
-void QColorDialogPrivate::setCurrentColor( QRgb rgb )
+void OColorDialogPrivate::setCurrentColor( QRgb rgb )
 {
     cs->setRgb( rgb );
     newColorTypedIn( rgb );
 }
 
 //sets all widgets exept cs to display rgb
-void QColorDialogPrivate::newColorTypedIn( QRgb rgb )
+void OColorDialogPrivate::newColorTypedIn( QRgb rgb )
 {
     int h, s, v;
     rgb2hsv(rgb, h, s, v );
@@ -652,7 +652,7 @@ void QColorDialogPrivate::newColorTypedIn( QRgb rgb )
     lp->setCol( h, s, v);
 }
 
-QColorDialogPrivate::QColorDialogPrivate( QColorDialog *dialog ) :
+OColorDialogPrivate::OColorDialogPrivate( OColorDialog *dialog ) :
     QObject(dialog)
 {
     int border = 2;
@@ -685,8 +685,8 @@ QColorDialogPrivate::QColorDialogPrivate( QColorDialog *dialog ) :
 
 // BEING REVISED: jo
 /*!
-  \class QColorDialog qcolordialog.h
-  \brief The QColorDialog class provides a dialog widget for specifying colors.
+  \class OColorDialog OColorDialog.h
+  \brief The OColorDialog class provides a dialog widget for specifying colors.
   \ingroup dialogs
 
   The color dialog's function is to allow users to choose colors -
@@ -712,10 +712,10 @@ QColorDialogPrivate::QColorDialogPrivate( QColorDialog *dialog ) :
   \sa getColor()
 */
 
-QColorDialog::QColorDialog(QWidget* parent, const char* name, bool modal) :
+OColorDialog::OColorDialog(QWidget* parent, const char* name, bool modal) :
     QDialog(parent, name, modal )
 {
-    d = new QColorDialogPrivate( this );
+    d = new OColorDialogPrivate( this );
 }
 
 
@@ -726,17 +726,17 @@ QColorDialog::QColorDialog(QWidget* parent, const char* name, bool modal) :
   before this function returns.
 */
 
-QColor QColorDialog::getColor( QColor initial, QWidget *parent,
+QColor OColorDialog::getColor( QColor initial, QWidget *parent,
 			       const char *name )
 {
     int allocContext = QColor::enterAllocContext();
-    QColorDialog *dlg = new QColorDialog( parent, name, TRUE );  //modal
+    OColorDialog *dlg = new OColorDialog( parent, name, TRUE );  //modal
     if ( parent && parent->icon() && !parent->icon()->isNull() )
 	dlg->setIcon( *parent->icon() );
     else if ( qApp->mainWidget() && qApp->mainWidget()->icon() && !qApp->mainWidget()->icon()->isNull() )
 	dlg->setIcon( *qApp->mainWidget()->icon() );
 
-    dlg->setCaption( QColorDialog::tr( "Select color" ) );
+    dlg->setCaption( OColorDialog::tr( "Select color" ) );
     dlg->setColor( initial );
     dlg->showMaximized();
     int resultCode = dlg->exec();
@@ -763,11 +763,11 @@ QColor QColorDialog::getColor( QColor initial, QWidget *parent,
   If the user clicks Cancel the \a initial value is returned.
 */
 
-QRgb QColorDialog::getRgba( QRgb initial, bool *ok,
+QRgb OColorDialog::getRgba( QRgb initial, bool *ok,
 			    QWidget *parent, const char* name )
 {
     int allocContext = QColor::enterAllocContext();
-    QColorDialog *dlg = new QColorDialog( parent, name, TRUE );  //modal
+    OColorDialog *dlg = new OColorDialog( parent, name, TRUE );  //modal
     dlg->setColor( initial );
     dlg->setSelectedAlpha( qAlpha(initial) );
     dlg->showMaximized();
@@ -797,7 +797,7 @@ QRgb QColorDialog::getRgba( QRgb initial, bool *ok,
   \sa setColor()
 */
 
-QColor QColorDialog::color() const
+QColor OColorDialog::color() const
 {
     return QColor(d->currentColor());
 }
@@ -807,7 +807,7 @@ QColor QColorDialog::color() const
 
 */
 
-QColorDialog::~QColorDialog()
+OColorDialog::~OColorDialog()
 {
     //d inherits QObject, so it is deleted by Qt.
 }
@@ -819,7 +819,7 @@ QColorDialog::~QColorDialog()
   \sa color()
 */
 
-void QColorDialog::setColor( QColor c )
+void OColorDialog::setColor( QColor c )
 {
     d->setCurrentColor( c.rgb() );
 }
@@ -832,7 +832,7 @@ void QColorDialog::setColor( QColor c )
   entry box.
 */
 
-void QColorDialog::setSelectedAlpha( int a )
+void OColorDialog::setSelectedAlpha( int a )
 {
     d->showAlpha( TRUE );
     d->setCurrentAlpha( a );
@@ -843,7 +843,7 @@ void QColorDialog::setSelectedAlpha( int a )
   Returns the value selected for the alpha channel.
 */
 
-int QColorDialog::selectedAlpha() const
+int OColorDialog::selectedAlpha() const
 {
     return d->currentAlpha();
 }

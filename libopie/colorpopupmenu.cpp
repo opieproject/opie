@@ -158,7 +158,7 @@ void ColorPopupMenu::buttonSelected( const QColor& color )
 
 void ColorPopupMenu::moreColorClicked()
 {
-    QColor color = QColorDialog::getColor( m_color );
+    QColor color = OColorDialog::getColor( m_color );
     m_color = color;
     emit colorSelected( color );
     hide();

@@ -1,7 +1,7 @@
 /****************************************************************************
-** $Id: colordialog.h,v 1.1 2002-04-25 23:32:41 drw Exp $
+** $Id: colordialog.h,v 1.2 2002-04-30 01:09:14 drw Exp $
 **
-** Definition of QColorDialog class
+** Definition of OColorDialog class
 **
 ** Created : 990222
 **
@@ -35,16 +35,16 @@
 **
 **********************************************************************/
 
-#ifndef QCOLORDIALOG_H
-#define QCOLORDIALOG_H
+#ifndef OColorDialog_H
+#define OColorDialog_H
 
 #ifndef QT_H
 #include <qdialog.h>
 #endif // QT_H
 
-class QColorDialogPrivate;
+class OColorDialogPrivate;
 
-class Q_EXPORT QColorDialog : public QDialog
+class Q_EXPORT OColorDialog : public QDialog
 {
     Q_OBJECT
 
@@ -54,9 +54,9 @@ public:
 			 QWidget *parent=0, const char* name=0 );
 
 private:
-    ~QColorDialog();
+    ~OColorDialog();
 
-    QColorDialog( QWidget* parent=0, const char* name=0, bool modal=FALSE );
+    OColorDialog( QWidget* parent=0, const char* name=0, bool modal=FALSE );
     void setColor( QColor ); // ### 3.0: make const QColor&
     QColor color() const;
 
@@ -64,13 +64,13 @@ private:
     void setSelectedAlpha( int );
     int selectedAlpha() const;
 private:
-    QColorDialogPrivate *d;
-    friend class QColorDialogPrivate;
+    OColorDialogPrivate *d;
+    friend class OColorDialogPrivate;
 
 private:	// Disabled copy constructor and operator=
 #if defined(Q_DISABLE_COPY)
-    QColorDialog( const QColorDialog & );
-    QColorDialog& operator=( const QColorDialog & );
+    OColorDialog( const OColorDialog & );
+    OColorDialog& operator=( const OColorDialog & );
 #endif
 };
 
