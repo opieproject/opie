@@ -56,6 +56,8 @@
 #include "videowidget.h"
 
 extern MediaPlayerState *mediaPlayerState;
+// extern AudioWidget *audioUI;
+// extern VideoWidget *videoUI;
 
 QString audioMimes ="audio/mpeg;audio/x-wav;audio/x-ogg";
 // no m3u's here please
@@ -297,7 +299,7 @@ void PlayListWidget::setDocument( const QString& fileref ) {
     qDebug( "<<<<<<<<set document>>>>>>>>>> "+fileref );
     fromSetDocument = TRUE;
     if ( fileref.isNull() ) {
-        QMessageBox::critical( 0, tr( "Invalid File" ),
+        QMessageBox::warning( this, tr( "Invalid File" ),
                                tr( "There was a problem in getting the file." ) );
         return;
     }
@@ -1063,7 +1065,9 @@ void PlayListWidget::skinsMenuActivated( int item ) {
     Config cfg( "OpiePlayer" );
     cfg.setGroup("Options");
     cfg.writeEntry("Skin", skinsMenu->text( item ) );
-}
+    QMessageBox::warning( this, tr( "OpiePlayer" ),
+                               tr( "You must <b>restart</b> Opieplayer<br>to see your changes." ) );
+} 
 
 int PlayListWidget::whichList() {
     return tabWidget->currentPageIndex();
