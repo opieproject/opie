@@ -2,7 +2,7 @@
  *
  * Global configuration for wellenreiter
  *
- * $Id: config.hh,v 1.4 2002-12-16 17:59:21 mjm Exp $
+ * $Id: config.hh,v 1.5 2003-02-27 19:17:48 max Exp $
  *
  * Written by Martin J. Muench <mjm@codito.de>
  *
@@ -24,5 +24,6 @@
 #define   CARD_TYPE_CISCO       1
 #define   CARD_TYPE_NG          2
 #define   CARD_TYPE_HOSTAP      3
+#define   CARD_TYPE_ORINOCCO    4
 
 #endif /* CONFIG_HH */
