@@ -241,7 +241,7 @@ void AbView::setShowByLetter( char c, AbConfig::LPSearchMode mode )
 		case AbConfig::LastName:
 			query.setLastName( QString("%1*").arg(c) );
 			break;
-		case AbConfig::FullName:
+		case AbConfig::FileAs:
 			query.setFileAs( QString("%1*").arg(c) );
 			break;
 		default:

@@ -9,7 +9,7 @@ class AbConfig
 public:
 	enum LPSearchMode{
 		LastName = 0,
-		FullName,
+		FileAs,
 		LASTELEMENT
 	};
 

@@ -132,7 +132,7 @@ void AbConfig::load()
 	cfg.setGroup("Search");
 	m_useRegExp = cfg.readBoolEntry( "useRegExp", false );
 	m_beCaseSensitive = cfg.readBoolEntry( "caseSensitive", false );
-	m_lpSearchMode = cfg.readNumEntry( "lpSearchMode", FullName );
+	m_lpSearchMode = cfg.readNumEntry( "lpSearchMode", FileAs );
 
 	cfg.setGroup("Mail");
 	m_useQtMail = cfg.readBoolEntry( "useQtMail", true );
