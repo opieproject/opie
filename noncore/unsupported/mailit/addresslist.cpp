@@ -26,136 +26,136 @@
 
 AddressList::AddressList()
 {
-	addresses.setAutoDelete(TRUE);
-	read();
-	dirty = FALSE;
+  addresses.setAutoDelete(TRUE);
+  read();
+  dirty = FALSE;
 }
 
 AddressList::~AddressList()
 {
-	addresses.clear();
+  addresses.clear();
 }
 
-void AddressList::addContact(QString email, QString name)
+void AddressList::addContact(const QString &email, const QString &name)
 {
-	//skip if not a valid email address,
-	if (email.find( '@') == -1)
-		return;
-		
-	if ( ! containsEmail(email) ) {
-		Contact *in = new Contact;
-		in->email = email;
-		in->name = name;
-		addresses.append(in);
-		dirty = TRUE;
-	}
+  //skip if not a valid email address,
+  if (email.find( '@') == -1)
+    return;
+    
+  if ( ! containsEmail(email) ) {
+    Contact *in = new Contact;
+    in->email = email;
+    in->name = name;
+    addresses.append(in);
+    dirty = TRUE;
+  }
 }
 
-bool AddressList::containsEmail(QString email)
+bool AddressList::containsEmail(const QString &email)
 {
-	return ( getEmailRef(email) != -1 );
+  return ( getEmailRef(email) != -1 );
 }
 
-bool AddressList::containsName(QString name)
+bool AddressList::containsName(const QString &name)
 {
-	return ( getNameRef(name) != -1 );
+  return ( getNameRef(name) != -1 );
 }
 
-QString AddressList::getNameByEmail(QString email)
+QString AddressList::getNameByEmail(const QString &email)
 {
-	int pos = getEmailRef(email);
-	if (pos != -1) {
-		Contact *ptr = addresses.at(pos);
-		return ptr->name;
-	}
-	
-	return NULL;
+  int pos = getEmailRef(email);
+  if (pos != -1) {
+    Contact *ptr = addresses.at(pos);
+    return ptr->name;
+  }
+  
+  return NULL;
 }
 
-QString AddressList::getEmailByName(QString name)
+QString AddressList::getEmailByName(const QString &name)
 {
-	int pos = getNameRef(name);
-	if (pos != -1) {
-		Contact *ptr = addresses.at(pos);
-		return ptr->email;
-	}
-	
-	return NULL;
+  int pos = getNameRef(name);
+  if (pos != -1) {
+    Contact *ptr = addresses.at(pos);
+    return ptr->email;
+  }
+  
+  return NULL;
 }
 
-int AddressList::getEmailRef(QString email)
+int AddressList::getEmailRef(const QString &email)
 {
-	int pos = 0;
-	Contact *ptr;
-	
-	for (ptr = addresses.first(); ptr != 0; ptr = addresses.next() ) {
-		if (ptr->email == email)
-			return pos;
-		pos++;
-	}
-	return -1;
+  int pos = 0;
+  Contact *ptr;
+  
+  for (ptr = addresses.first(); ptr != 0; ptr = addresses.next() ) {
+    if (ptr->email == email)
+      return pos;
+    pos++;
+  }
+  return -1;
 }
 
-int AddressList::getNameRef(QString name)
+int AddressList::getNameRef(const QString &name)
 {
-	int pos = 0;
-	Contact *ptr;
-	
-	for (ptr = addresses.first(); ptr != 0; ptr = addresses.next() ) {
-		if (ptr->name == name)
-			return pos;
-		pos++;
-	}
-	return -1;
+  int pos = 0;
+  Contact *ptr;
+  
+  for (ptr = addresses.first(); ptr != 0; ptr = addresses.next() ) {
+    if (ptr->name == name)
+      return pos;
+    pos++;
+  }
+  return -1;
 }
 
 QList<Contact>* AddressList::getContactList()
 {
-	return &addresses;
+  return &addresses;
 }
 
 void AddressList::read()
 {
-	OContactAccess::List::Iterator it;
-	
-	QString lineEmail, lineName, email, name;
-	OContactAccess m_contactdb("mailit");
-	OContactAccess::List m_list = m_contactdb.sorted( true, 0, 0, 0 );
-	//OContact* oc;(*it).defaultEmail()
-	
-	for ( it = m_list.begin(); it != m_list.end(); ++it )
-	{
-		//oc=(OContact*) it;
-		if ((*it).defaultEmail().length()!=0)
-			addContact((*it).defaultEmail(),(*it).fileAs());
-	}
-	
-	/*if (! f.open(IO_ReadOnly) )
-		return;
-	
-	QTextStream stream(&f);
-	
-	while (! stream.atEnd() ) {
-		lineEmail = stream.readLine();
-		if (! stream.atEnd() )
-			lineName = stream.readLine();
-		else return;
-		
-		email = getRightString(lineEmail);
-		name = getRightString(lineName);
-		addContact(email, name);
-	}
-	f.close();*/
+  OContactAccess::List::Iterator it;
+  
+  QString lineEmail, lineName, email, name;
+  OContactAccess m_contactdb("mailit");
+  OContactAccess::List m_list = m_contactdb.sorted( true, 0, 0, 0 );
+  //OContact* oc;(*it).defaultEmail()
+  
+  for ( it = m_list.begin(); it != m_list.end(); ++it )
+  {
+    //oc=(OContact*) it;
+    if ((*it).defaultEmail().length()!=0)
+      addContact((*it).defaultEmail(),(*it).fileAs());
+  }
+  
+  /*if (! f.open(IO_ReadOnly) )
+    return;
+  
+  QTextStream stream(&f);
+  
+  while (! stream.atEnd() ) {
+    lineEmail = stream.readLine();
+    if (! stream.atEnd() )
+      lineName = stream.readLine();
+    else return;
+    
+    email = getRightString(lineEmail);
+    name = getRightString(lineName);
+    addContact(email, name);
+  }
+  f.close();*/
 }
 
-QString AddressList::getRightString(QString in)
+QString AddressList::getRightString(const QString &in)
 {
-	QString out = "";
-	
-	int pos = in.find('=');
-	if (pos != -1) {
-		out = in.mid(pos+1).stripWhiteSpace();
-	}
-	return out;
+  QString out = "";
+  
+  int pos = in.find('=');
+  if (pos != -1) {
+    out = in.mid(pos+1).stripWhiteSpace();
+  }
+  return out;
 }
 

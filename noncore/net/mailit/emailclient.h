@@ -106,7 +106,7 @@ public slots:
   void inboxItemReleased();  
   void mailArrived(const Email &mail, bool fromDisk);
   void allMailArrived(int);
-  void saveMail(QString fileName, QListView *view);
+  void saveMail(const QString &fileName, QListView *view);
   void selectAccount(int);
   void editAccount(int);
   void updateAccounts();

@@ -39,7 +39,7 @@ SmtpClient::~SmtpClient()
   delete stream;
 }
 
-void SmtpClient::newConnection(QString target, int port)
+void SmtpClient::newConnection(const QString &target, int port)
 {
   if (sending) {
     qWarning("socket in use, connection refused");
@@ -53,7 +53,7 @@ void SmtpClient::newConnection(QString target, int port)
   emit updateStatus(tr("DNS lookup"));
 }
 
-void SmtpClient::addMail(QString from, QString subject, QStringList to, QString body)
+void SmtpClient::addMail(const QString &from, const QString &subject, const QStringList &to, const QString &body)
 {
   RawEmail *mail = new RawEmail;
   

@@ -49,9 +49,9 @@ class TextParser: public QObject
   Q_OBJECT
   
 public:
-  TextParser(QString in, QString lineBreak);
-  TextParser(QString in, QString lineBreak, QString sep);
-  int find(QString target, QChar sep, int pos, bool upperCase);
+  TextParser(const QString &in, const QString &lineBreak);
+  TextParser(const QString &in, const QString &lineBreak, const QString &sep);
+  int find(const QString &target, QChar sep, int pos, bool upperCase);
   int elmCount();
   QChar separatorAt(int pos);
   QChar nextSeparator();

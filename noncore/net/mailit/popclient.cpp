@@ -50,7 +50,7 @@ PopClient::~PopClient()
   delete stream;
 }
 
-void PopClient::newConnection(QString target, int port)
+void PopClient::newConnection(const QString &target, int port)
 {
   if (receiving) {
     qWarning("socket in use, connection refused");
@@ -66,7 +66,7 @@ void PopClient::newConnection(QString target, int port)
   emit updateStatus("DNS lookup");
 }
 
-void PopClient::setAccount(QString popUser, QString popPasswd)
+void PopClient::setAccount(const QString &popUser, const QString &popPasswd)
 {
   popUserName = popUser;
   popPassword = popPasswd;
@@ -158,15 +158,15 @@ void PopClient::incomingData()
     
     case Pass:  {
           *stream << "PASS " << popPassword << "\r\n";
-	  status = Stat;
-	  
+    status = Stat;
+    
           break;
         }
     //ask for number of messages
     case Stat:  {
           if (response[0] == '+') {
             *stream << "STAT" << "\r\n";
-            status = Mcnt;	    
+            status = Mcnt;      
           } else errorHandling(ErrLoginFailed);
             break;
           }
@@ -182,18 +182,18 @@ void PopClient::incomingData()
               
             if (synchronize) {
               //messages deleted from server, reload all
-              	if (newMessages < lastSync)
-                	lastSync = 0;
+                if (newMessages < lastSync)
+                  lastSync = 0;
                 messageCount = 1;
               }
               
-              if (selected) {		
+              if (selected) {   
                 int *ptr = mailList->first();
                 if (ptr != 0) {
                   newMessages++;  //to ensure no early jumpout
                   messageCount = *ptr;
                 } else newMessages = 0; 
-	      }
+        }
 
             } else errorHandling(ErrUnknownResponse);
           }
@@ -242,10 +242,10 @@ void PopClient::incomingData()
     case Retr:  {
           if (status != Quit) {
             if ((selected)||(mailSize <= headerLimit)) 
-	    {
+      {
               *stream << "RETR " << messageCount << "\r\n";
             } else {        //only header
-	     *stream << "TOP " << messageCount << " 0\r\n";
+       *stream << "TOP " << messageCount << " 0\r\n";
             }
             messageCount++;
             status = Ignore;
@@ -276,23 +276,23 @@ void PopClient::incomingData()
             if (x == -1) {
               break;
             } else {  //message reach entire size
-	      if ( (selected)||(mailSize <= headerLimit)) //mail size limit is not used if late download is active
-	      {
-	    	emit newMessage(message, messageCount-1, mailSize, TRUE);
+        if ( (selected)||(mailSize <= headerLimit)) //mail size limit is not used if late download is active
+        {
+        emit newMessage(message, messageCount-1, mailSize, TRUE);
               } else {  //incomplete mail downloaded
-		emit newMessage(message, messageCount-1, mailSize, FALSE);
+    emit newMessage(message, messageCount-1, mailSize, FALSE);
               }
-	      
+        
               if ((messageCount > newMessages)||(selected)) //last message ?
-	      {
+        {
                 status = Quit;
                 if (selected) {   //grab next from queue
                     newMessages--;
                     status = Quit;
                   }
-	      }
+        }
               else 
-	      {
+        {
                   *stream << "LIST " << messageCount << "\r\n";
                   status = Size;
                   temp2.setNum(newMessages - lastSync);
