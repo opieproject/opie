@@ -10,15 +10,16 @@
 
 #include "pksettings.h"
 
-class Package //: public QObject
+class Package : public QObject
 {
-//  	Q_OBJECT
+  	Q_OBJECT
  public:
-  Package(PackageManagerSettings *);
- // ~Package();
-  Package( QStringList, PackageManagerSettings * );
-  Package( QString, PackageManagerSettings * );
-  Package( Package* );
+  Package(QObject *parent=0, const char *name=0);
+  Package(PackageManagerSettings *s, QObject *parent=0, const char *name=0);
+ ~Package();
+  Package( QStringList, PackageManagerSettings *s, QObject *parent=0, const char *name=0 );
+  Package( QString, PackageManagerSettings *s, QObject *parent=0, const char *name=0 );
+  Package( Package*s, QObject *parent=0, const char *name=0 );
  	
   void    setValue( QString, QString );
   void    copyValues( Package* );

@@ -10,8 +10,8 @@
 static QDict<Package>  *packageListAll;
 static int packageListAllRefCount = 0;
 
-PackageList::PackageList()
-  : packageIter( packageList )
+PackageList::PackageList(QObject *parent=0, const char *name=0)
+  : QObject(parent,name), packageIter( packageList )
 {
   empty=true;
   if (!packageListAll) packageListAll = new QDict<Package>();
@@ -24,11 +24,11 @@ PackageList::PackageList()
   aktSubSection = "All";
 }
 
-PackageList::PackageList( PackageManagerSettings* s)
-  : packageIter( packageList )
+PackageList::PackageList( PackageManagerSettings* s, QObject *parent, const char *name)
+  : QObject(parent,name), packageIter( packageList )
 {
   settings = s;
-  PackageList();
+  PackageList(parent, name);
 }
 
 PackageList::~PackageList()

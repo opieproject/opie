@@ -2,6 +2,7 @@
 #define PMIPKG_H
 
 
+#include <opie/oprocess.h>
 #include <qobject.h>
 #include <qlist.h>
 #include <qstring.h>
@@ -40,17 +41,16 @@ public slots:
   void createLinks( const QString &dest );
   void removeLinks( const QString &dest );
 
+//private slots:
+	void getIpkgOutput(OProcess *proc, char *buffer, int buflen);
+
 private:
+	OProcess *ipkgProcess;
   PackageManagerSettings* settings;
   RunWindow *runwindow;
   InstallDialog *installDialog;
   QList<Package> to_remove;
   QList<Package> to_install;
-  QString fileNameToInstall;
-  QCheckBox *_force_reinstall;
-  QCheckBox *_force_remove;
-  QCheckBox *_force_depends;
-//  void startDialog();
   void makeLinks(Package*);
   void linkPackage( QString, QString );
   void processLinkDir( QString , QString );

@@ -3,7 +3,9 @@
 #include "package.h"
 #include "packagelistitem.h"
 
-#include <qpe/process.h>
+//#infdef OPROCESS
+#include <opie/oprocess.h>
+//#endif
 #include <qpe/resource.h>
 #include <qpe/config.h>
 #include <qpe/stringutil.h>
@@ -32,10 +34,22 @@ PmIpkg::PmIpkg( PackageManagerSettings* s, QWidget* p,  const char * name, WFlag
 {
   settings = s;
  	runwindow = new RunWindow( p, name, true, f );
+#ifdef OPROCESS
+  ipkgProcess = new OProcess();
+  connect ( ipkgProcess, SIGNAL(receivedStdout(OProcess*,char*,int)),
+  					this, SLOT(getIpkgOutput(OProcess*,char*,int)));
+
+  connect ( ipkgProcess, SIGNAL(receivedStderr(OProcess*,char*,int)),
+  					this, SLOT(getIpkgOutput(OProcess*,char*,int)));
+  installDialog = 0;
+#endif
 }
 
 PmIpkg::~PmIpkg()
 {
+#ifdef OPROCESS
+ delete ipkgProcess;
+#endif
 }
 
 bool PmIpkg::runIpkg(const QString& args, const QString& dest )
@@ -43,6 +57,11 @@ bool PmIpkg::runIpkg(const QString& args, const QString& dest )
 	bool ret=false;
   QDir::setCurrent("/tmp");
   QString cmd = "/usr/bin/ipkg ";
+#ifdef OPROCESS
+  ipkgProcess->clearArguments();
+  *ipkgProcess << "/usr/bin/ipkg ";
+  QString cmd = "";
+#endif
 	pvDebug( 3,"PmIpkg::runIpkg got dest="+dest);
 	if ( dest == "" )
 	  cmd += " -dest "+settings->getDestinationName();
@@ -65,6 +84,41 @@ bool PmIpkg::runIpkg(const QString& args, const QString& dest )
   cmd += args;
   out( "running:\n"+cmd+"\n" );
   pvDebug(2,"running:"+cmd);
+#ifdef OPROCESS
+  *ipkgProcess <<  args;
+  out( "running:\n" + cmd);
+  *ipkgProcess << cmd;
+
+//debug
+  ipkgProcess->clearArguments();
+  *ipkgProcess << "/bin/ls ";
+//debug
+  QValueList<QCString> a = ipkgProcess->args();
+  QValueList<QCString>::Iterator it;
+  for( it = a.begin(); it != a.end(); ++it )
+  {
+  	out( *it );
+   	cmd += *it;
+  }
+
+  pvDebug(2,"running:"+cmd);
+  qApp->processEvents();
+//  sleep(1);
+  ret = ipkgProcess->start(OProcess::NotifyOnExit,OProcess::AllOutput);
+  if ( !ret ) {
+     pvDebug(2,"Could not execute '" + cmd);
+     out("\nError while executing "+ cmd+"\n\n");
+     out("\nError while executing\n\n");
+ //    return false;
+  }
+
+  while ( ipkgProcess->isRunning() )
+  {
+   out(".");	
+   pvDebug(7,"wait for oprocess to terminate");
+   qApp->processEvents();
+  };
+#else
   qApp->processEvents();
   FILE *fp;
   char line[130];
@@ -91,6 +145,7 @@ bool PmIpkg::runIpkg(const QString& args, const QString& dest )
      }
      pclose(fp);
   }
+#endif
   //out( "Finished!");
   pvDebug(2,QString(ret?"success\n":"failure\n"));
   return ret;
@@ -99,7 +154,7 @@ bool PmIpkg::runIpkg(const QString& args, const QString& dest )
 void PmIpkg::makeLinks(Package *pack)
 {
 	pvDebug( 2, "PmIpkg::makeLinks "+ pack->name());
-  linkPackage( pack->installName(), pack->dest() );
+  linkPackage( pack->name(), pack->dest() );
 }
 
 QStringList* PmIpkg::getList( QString packFileName, QString d )
@@ -242,6 +297,7 @@ void PmIpkg::commit()
   }
  	installDialog->close();
   delete installDialog;
+  installDialog = 0;
   out(tr("\nAll done."));
 }
 
@@ -395,4 +451,16 @@ void PmIpkg::clearLists()
 {
 	to_remove.clear();
  	to_install.clear();
+}
+
+
+void  PmIpkg::getIpkgOutput(OProcess *proc, char *buffer, int buflen)
+{
+  QString lineStr, lineStrOld;
+  lineStr = buffer;
+  lineStr=lineStr.left(buflen);
+  //Configuring opie-oipkg...Done
+  if (lineStr!=lineStrOld)
+                out(lineStr);
+  lineStrOld = lineStr;
 }

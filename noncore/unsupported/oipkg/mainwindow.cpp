@@ -33,6 +33,9 @@
 
 MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
   QMainWindow( parent, name, f )
+//  packageListServers( QObject(parent), name ),
+//  packageListSearch( parent, name ),
+//  packageListDocLnk( parent, name )
 {	
   setCaption( tr("Package Manager") );
   settings = new PackageManagerSettings(this,0,TRUE);

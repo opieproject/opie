@@ -8,14 +8,14 @@
 #include "package.h"
 #include "pksettings.h"
 
-PackageListDocLnk::PackageListDocLnk(PackageManagerSettings* s)
+PackageListDocLnk::PackageListDocLnk(PackageManagerSettings* s, QObject *parent=0, const char *name=0)
 	: PackageList(s)
 {
-	PackageListDocLnk();
+	PackageListDocLnk(parent, name);
 }
 
-PackageListDocLnk::PackageListDocLnk()
-	: PackageList()
+PackageListDocLnk::PackageListDocLnk(QObject *parent=0, const char *name=0)
+	: PackageList(parent, name)
 {
 	Config cfg( "oipkg", Config::User );
 	cfg.setGroup( "Common" );

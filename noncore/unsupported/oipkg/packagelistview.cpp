@@ -59,7 +59,7 @@ void PackageListView::showPopup()
  	QAction *popupAction;
   if ( !activePackage->installed() )
   {
-	  popupMenu->insertItem( QObject::tr("Install to"), destsMenu );
+	  popupMenu->insertItem( tr("Install to"), destsMenu );
   	QStringList dests = settings->getDestinationNames();
    	QString ad = settings->getDestinationName();
 	  for (uint i = 0; i < dests.count(); i++ )
@@ -75,11 +75,11 @@ void PackageListView::showPopup()
 	  connect( destsMenu, SIGNAL( activated( int ) ),
 		   this, SLOT( changePackageDest( int ) ) );
    }else{
-   	popupAction = new QAction( QObject::tr("Remove"),QString::null,  0, this, 0 );
+   	popupAction = new QAction( tr("Remove"),QString::null,  0, this, 0 );
 		popupAction->addTo( popupMenu );
   	connect( popupAction, SIGNAL( activated() ),
 	   	this , SLOT( toggleProcess() ) );
-   	popupAction = new QAction( QObject::tr("Reinstall"),QString::null,  0, this, 0 );
+   	popupAction = new QAction( tr("Reinstall"),QString::null,  0, this, 0 );
 		popupAction->addTo( popupMenu );
   	popupAction->setEnabled( false );
    }

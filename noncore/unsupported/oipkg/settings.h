@@ -8,7 +8,7 @@
 class PackageManagerSettings : public PackageManagerSettingsBase
 //class PackageManagerSettings : private PackageManagerSettingsBase
 {
-  //	 Q_OBJECT
+  	 Q_OBJECT
 public: 
   PackageManagerSettings( QWidget* ,  const char* , WFlags  );
   ~PackageManagerSettings();

@@ -241,6 +241,7 @@ void PackageManagerSettings::readInstallationSettings()
 {
   Config cfg( "oipkg", Config::User );
   cfg.setGroup( "Settings" );
+
   installationSettingsCount = cfg.readNumEntry( "count", -1 );
   currentSetting  = cfg.readNumEntry( "current", 0 );// o should be -1
 

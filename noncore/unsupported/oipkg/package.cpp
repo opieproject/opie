@@ -9,12 +9,20 @@
 
 #include "debug.h"
 
-//Package::~Package()
-//{
-//}
-
-Package::Package( PackageManagerSettings *s )
+Package::Package( QObject *parent=0, const char *name=0 )
+	: QObject(parent,name)
 {
+
+}
+
+Package::~Package()
+{
+}
+
+Package::Package( PackageManagerSettings *s, QObject *parent=0, const char *name=0 )
+	: QObject(parent,name)
+{
+	Package(parent,name);
 	init(s);
 }
 
@@ -37,13 +45,14 @@ void Package::init( PackageManagerSettings *s )
   _version="";
 }
 
-Package::Package( QStringList pack, PackageManagerSettings *s  )
+Package::Package( QStringList pack, PackageManagerSettings *s , QObject *parent=0, const char *name=0 )
+	: QObject(parent,name)
 {	
   init(s);
   parsePackage( pack );
 }
 
-Package::Package( QString n, PackageManagerSettings *s )
+Package::Package( QString n, PackageManagerSettings *s, QObject *parent=0, const char *name=0 )
 {	
   init(s);
  	if ( !QFile::exists( n ) )
@@ -57,7 +66,7 @@ Package::Package( QString n, PackageManagerSettings *s )
   }
 }
 
-Package::Package( Package *pi )
+Package::Package( Package *pi, QObject *parent=0, const char *name=0 )
 {
   init(pi->settings);
   copyValues( pi );

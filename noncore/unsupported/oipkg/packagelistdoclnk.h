@@ -9,8 +9,8 @@ class DocLnkSet;
 class PackageListDocLnk : public PackageList
 {
 public:
-	PackageListDocLnk();
-	PackageListDocLnk( PackageManagerSettings* s);
+	PackageListDocLnk(QObject *parent=0, const char *name=0);
+	PackageListDocLnk( PackageManagerSettings *s, QObject *parent=0, const char *name=0);
 	virtual ~PackageListDocLnk();
 public slots:
   void update();

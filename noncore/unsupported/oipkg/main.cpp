@@ -9,7 +9,7 @@ int debugLevel;
 int main( int argc, char ** argv )
 {
   printf("This is oipkg\n");
-  printf("$ID$\n");
+  printf("$Id: main.cpp,v 1.12 2002-06-21 09:01:39 tille Exp $\n");
   debugLevel = 2;
   if (argc > 1)
   {

@@ -6,14 +6,14 @@
 #include "pksettings.h"
 #include "debug.h"
 
-class PackageList //:QObject
+class PackageList :QObject
 {
-//  	Q_OBJECT
+  Q_OBJECT
 public:
 //	static QString all = QObject::tr("All");
 
-  PackageList();
-  PackageList( PackageManagerSettings* );
+  PackageList (QObject *parent=0, const char *name=0);
+  PackageList( PackageManagerSettings *s, QObject *parent=0, const char *name=0);
  	virtual ~PackageList();
   void insertPackage( Package* );
   Package* find( QString );
