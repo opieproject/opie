@@ -492,17 +492,33 @@ void NetworkPackageManager :: displayText( const QString &t )
 
 void NetworkPackageManager :: letterPushed( QString t )
 {
-    QCheckListItem *item = (QCheckListItem *)packagesList->firstChild();
+    QCheckListItem *top = (QCheckListItem *)packagesList->firstChild();
+    QCheckListItem *start = (QCheckListItem *)packagesList->currentItem();
+    if ( packagesList->firstChild() == 0 )
+        return;
+
+    QCheckListItem *item;
+    if ( start == 0 )
+    {
+        item = (QCheckListItem *)packagesList->firstChild();
+        start = top;
+    }
+    else
+        item = (QCheckListItem *)start->nextSibling();
+
+    if ( item == 0 )
+        item = (QCheckListItem *)packagesList->firstChild();
     do
     {
         if ( item->text().lower().startsWith( t.lower() ) )
         {
-            cout << "Found - item->text()" << endl;
             packagesList->setSelected( item, true );
             packagesList->ensureItemVisible( item );
             break;
 		}
 
         item = (QCheckListItem *)item->nextSibling();
-    } while ( item );
+        if ( !item )
+            item = (QCheckListItem *)packagesList->firstChild();        
+    } while ( item != start);
 }
