@@ -237,24 +237,32 @@ void AddressbookWindow::slotSetFont( int size ) {
 
 	startFontSize = size;
 
+	QFont *currentFont;
+	
 	switch (size) {
 		case 0:
 			fontMenu->setItemChecked(0, true);
 			fontMenu->setItemChecked(1, false);
 			fontMenu->setItemChecked(2, false);
 			abList->setFont( QFont( defaultFont->family(), defaultFont->pointSize() - 2 ) );
+			currentFont = new QFont (abList->font());
+			abList->resizeRows(currentFont->pixelSize() + 7);
 			break;
 		case 1:
 			fontMenu->setItemChecked(0, false);
 			fontMenu->setItemChecked(1, true);
 			fontMenu->setItemChecked(2, false);
 			abList->setFont( *defaultFont );
+			currentFont = new QFont (abList->font());
+			abList->resizeRows(currentFont->pixelSize() + 7);
 			break;
 		case 2:
 			fontMenu->setItemChecked(0, false);
 			fontMenu->setItemChecked(1, false);
 			fontMenu->setItemChecked(2, true);
 			abList->setFont( QFont( defaultFont->family(), defaultFont->pointSize() + 2 ) );
+			currentFont = new QFont (abList->font());
+			abList->resizeRows(currentFont->pixelSize() + 7);
 			break;
 	}
 }

@@ -86,6 +86,7 @@ public:
     void setShowCategory( const QString &c );
     QString showCategory() const;
     QStringList categories();
+    void resizeRows( int size );
 
     void show();
     void setPaintingEnabled( bool e );

@@ -451,6 +451,15 @@ void AbTable::addEntry( const Contact &newCnt )
     updateVisible();
 }
 
+void AbTable::resizeRows( int size ) {
+
+	if (numRows()) {
+		for (int i = 0; i < numRows(); i++) {
+			setRowHeight( i, size );
+		}
+	}
+}
+
 void AbTable::updateJournal( const Contact &cnt,
 			     Contact::journal_action action, int row )
 {
