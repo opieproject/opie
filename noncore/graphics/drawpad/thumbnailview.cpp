@@ -18,7 +18,9 @@
 #include "newpagedialog.h"
 #include "page.h"
 
+#include <qpe/config.h>
 #include <qpe/resource.h>
+#include <qpe/timestring.h>
 
 #include <qapplication.h>
 #include <qimage.h>
@@ -54,10 +56,10 @@ PageListBoxItem::PageListBoxItem(Page* page, QListBox* parent)
 
     m_thumbnail.convertFromImage(thumbnailImage);
 
-    m_titleText = QObject::tr("Title:") + " -";
+    m_titleText = QObject::tr("Title:") + " " + m_pPage->title();
     m_dimensionText = QObject::tr("Dimension:") + " " + QString::number(m_pPage->width())
                       + "x" + QString::number(m_pPage->height());
-    m_dateTimeText = QObject::tr("Date:") + " -";
+    m_dateText = QObject::tr("Date:") + " " + dateTimeString(m_pPage->lastModified());
 
     QColor baseColor = parent->colorGroup().base();
     int h, s, v;
@@ -86,7 +88,7 @@ int PageListBoxItem::width(const QListBox* lb) const
     QFontMetrics fontMetrics = lb->fontMetrics();
     int maxtextLength = QMAX(fontMetrics.width(m_titleText),
                              QMAX(fontMetrics.width(m_dimensionText),
-                                  fontMetrics.width(m_dateTimeText)));
+                                  fontMetrics.width(m_dateText)));
 
     return QMAX(THUMBNAIL_SIZE + maxtextLength + 8, QApplication::globalStrut().width());
 }
@@ -117,7 +119,7 @@ void PageListBoxItem::paint(QPainter *painter)
 
     painter->setFont(standardFont);
     painter->drawText(textRect, Qt::AlignLeft | Qt::AlignVCenter, m_dimensionText);
-    painter->drawText(textRect, Qt::AlignLeft | Qt::AlignBottom, m_dateTimeText);
+    painter->drawText(textRect, Qt::AlignLeft | Qt::AlignBottom, m_dateText);
 
     if (!selected() && !(listBox()->hasFocus() && listBox()->item(listBox()->currentItem()) == this)) {
         painter->drawLine(0, itemRect.height() - 1, itemRect.width() - 1, itemRect.height() - 1);
@@ -127,6 +129,41 @@ void PageListBoxItem::paint(QPainter *painter)
 Page* PageListBoxItem::page() const
 {
     return m_pPage;
+}
+
+QString PageListBoxItem::dateTimeString(QDateTime dateTime)
+{
+    QString result;
+
+    Config config("qpe");
+    config.setGroup("Date");
+
+    QChar separator = config.readEntry("Separator", "/")[0];
+    DateFormat::Order shortOrder = (DateFormat::Order)config .readNumEntry("ShortOrder", DateFormat::DayMonthYear);
+
+    for (int i = 0; i < 3; i++) {
+        switch((shortOrder >> (i * 3)) & 0x0007) {
+            case 0x0001:
+                result += QString().sprintf("%02d", dateTime.date().day());
+                break;
+            case 0x0002:
+                result += QString().sprintf("%02d", dateTime.date().month());
+                break;
+            case 0x0004:
+                result += QString().sprintf("%04d", dateTime.date().year());
+                break;
+            default:
+                break;
+        }
+
+        if (i < 2) {
+            result += separator;
+        }
+    }
+
+    result += QString().sprintf(" %02d:%02d", dateTime.time().hour(), dateTime.time().minute());
+
+    return result;
 }
 
 PageListBox::PageListBox(DrawPadCanvas* drawPadCanvas, QWidget* parent, const char* name)

@@ -16,6 +16,8 @@
 
 #include <qpixmap.h>
 
+#include <qdatetime.h>
+
 class Page : public QPixmap
 {
 public:
@@ -24,6 +26,16 @@ public:
     Page(const QSize& size);
 
     ~Page();
+    
+    QString title() const;
+    QDateTime lastModified() const;
+
+    void setTitle(QString title);
+    void setLastModified(QDateTime lastModified);
+
+private:
+    QString m_title;
+    QDateTime m_lastModified;
 };
 
 #endif // PAGE_H

@@ -16,18 +16,42 @@
 Page::Page()
     : QPixmap()
 {
+    m_lastModified = QDateTime::currentDateTime();
 }
 
 Page::Page(int w, int h)
     : QPixmap(w, h)
 {
+    m_lastModified = QDateTime::currentDateTime();
 }
 
 Page::Page(const QSize& size)
     : QPixmap(size)
 {
+    m_lastModified = QDateTime::currentDateTime();
 }
 
 Page::~Page()
 {
 }
+
+QString Page::title() const
+{
+    return m_title;
+}
+
+QDateTime Page::lastModified() const
+{
+    return m_lastModified;
+}
+
+void Page::setTitle(QString title)
+{
+    m_title = title;
+}
+
+void Page::setLastModified(QDateTime lastModified)
+{
+    m_lastModified = lastModified;
+}
+

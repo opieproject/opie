@@ -18,6 +18,8 @@
 
 class Page;
 
+#include <qdatetime.h>
+
 class QLineEdit;
 
 class PageInformationDialog : public QDialog
@@ -31,6 +33,8 @@ public:
     QString selectedTitle();
 
 private:
+    QString dateTimeString(QDateTime dateTime);
+
     Page* m_pPage;
 
     QLineEdit* m_pTitleLineEdit;

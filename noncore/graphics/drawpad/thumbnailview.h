@@ -21,6 +21,8 @@ class DrawPad;
 class DrawPadCanvas;
 class Page;
 
+#include <qdatetime.h>
+
 class QToolButton;
 
 class PageListBoxItem : public QListBoxItem
@@ -36,13 +38,15 @@ public:
     Page* page() const;
 
 private:
+    QString dateTimeString(QDateTime dateTime);
+
     Page* m_pPage;
 
     QPixmap m_thumbnail;
 
     QString m_titleText;
     QString m_dimensionText;
-    QString m_dateTimeText;
+    QString m_dateText;
 
     QColor m_alternateColor;
 };
