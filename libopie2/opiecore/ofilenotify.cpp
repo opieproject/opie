@@ -119,7 +119,7 @@ int OFileNotification::start( const QString& path, bool sshot, OFileNotification
             qWarning( "OFileNotification::start(): Can't subscribe to '%s': %s.", (const char*) dirpath, strerror( errno ) );
             return -1;
         }
-        if ( !sshot ) (int) type |= (int) Multi;
+        if ( !sshot ) type = static_cast<OFileNotificationType>( (int) type | (int) Multi );
         result = ::fcntl( fd, F_NOTIFY, type );
         if ( result == -1 )
         {
@@ -299,6 +299,7 @@ bool OFileNotification::registerSignalHandler()
         return false;
     }
     qDebug( "OFileNotification::registerSignalHandler(): done" );
+    return true;
 }
 
 
