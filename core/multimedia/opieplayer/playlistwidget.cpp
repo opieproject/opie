@@ -221,8 +221,9 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     audioView->setColumnAlignment(1, Qt::AlignRight);
     audioView->setColumnAlignment(2, Qt::AlignRight);
     audioView->setAllColumnsShowFocus(TRUE);
-//     audioView->setMultiSelection( TRUE );
-//     audioView->setSelectionMode( QListView::Extended);
+
+    audioView->setMultiSelection( TRUE );
+    audioView->setSelectionMode( QListView::Extended);
     
     tabWidget->insertTab(aTab,tr("Audio"));
 
@@ -246,8 +247,8 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     videoView->setColumnAlignment(1, Qt::AlignRight);
     videoView->setColumnAlignment(2, Qt::AlignRight);
     videoView->setAllColumnsShowFocus(TRUE);
-//     videoView->setMultiSelection( TRUE );
-//     videoView->setSelectionMode( QListView::Extended);
+    videoView->setMultiSelection( TRUE );
+    videoView->setSelectionMode( QListView::Extended);
 
     QPEApplication::setStylusOperation( videoView->viewport(),QPEApplication::RightOnHold);
     connect( videoView, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
@@ -680,37 +681,54 @@ void PlayListWidget::addSelected() {
         case 0: //playlist
             break;
         case 1: { //audio
-            for ( int i = 0; i < noOfFiles; i++ ) {
-                QString entryName;
-                entryName.sprintf( "File%i", i + 1 );
-                QString linkFile = cfg.readEntry( entryName );
-                  if( DocLnk( linkFile).name() == audioView->selectedItem()->text(0) ) {
-                      int result= QMessageBox::warning(this,tr("OpiePlayer"),
-                                  tr("This is all ready in your playlist.\nContinue?"),
-                                  tr("Yes"),tr("No"),0,0,1);
-                      if (result !=0)
-                          return;
-                  }
+//                 QString entryName;
+//                 entryName.sprintf( "File%i", i + 1 );
+//                 QString linkFile = cfg.readEntry( entryName );
+            QListViewItemIterator it(  audioView  );
+              // iterate through all items of the listview
+            for ( ; it.current(); ++it ) {
+                if ( it.current()->isSelected() ) {
+                    QListIterator<DocLnk> dit( files.children() );
+                    for ( ; dit.current(); ++dit ) {
+                        if( dit.current()->name() == it.current()->text(0) ) {
+                            d->selectedFiles->addToSelection(  **dit );
+                        }
+                    }
+                    audioView->setSelected( it.current(),FALSE);
+                }
             }
-            addToSelection( audioView->selectedItem() );
-            tabWidget->setCurrentPage(1);
+            tabWidget->setCurrentPage(0);
         }           
         break;
         case 2: { // video
-            for ( int i = 0; i < noOfFiles; i++ ) {
-                QString entryName;
-                entryName.sprintf( "File%i", i + 1 );
-                QString linkFile = cfg.readEntry( entryName );
-                  if( DocLnk( linkFile).name() == videoView->selectedItem()->text(0) ) {
-                      int result= QMessageBox::warning(this,tr("OpiePlayer"),
-                                  tr("This is all ready in your playlist.\nContinue?"),
-                                  tr("Yes"),tr("No"),0,0,1);
-                      if (result !=0)
-                          return;
-                  }
+            QListViewItemIterator it(  videoView  );
+              // iterate through all items of the listview
+            for ( ; it.current(); ++it ) {
+                if ( it.current()->isSelected() ) {
+                    QListIterator<DocLnk> dit( vFiles.children() );
+                    for ( ; dit.current(); ++dit ) {
+                        if( dit.current()->name() == it.current()->text(0) ) {
+                            d->selectedFiles->addToSelection(  **dit );
+                        }
+                    }
+
+                    videoView->setSelected( it.current(),FALSE);
+                }
             }
-            addToSelection( videoView->selectedItem() );
-            tabWidget->setCurrentPage(2);
+//             for ( int i = 0; i < noOfFiles; i++ ) {
+//                 QString entryName;
+//                 entryName.sprintf( "File%i", i + 1 );
+//                 QString linkFile = cfg.readEntry( entryName );
+//                   if( DocLnk( linkFile).name() == videoView->selectedItem()->text(0) ) {
+//                       int result= QMessageBox::warning(this,tr("OpiePlayer"),
+//                                   tr("This is all ready in your playlist.\nContinue?"),
+//                                   tr("Yes"),tr("No"),0,0,1);
+//                       if (result !=0)
+//                           return;
+//                   }
+//             }
+//             addToSelection( videoView->selectedItem() );
+            tabWidget->setCurrentPage(0);
         }
         break;
       };

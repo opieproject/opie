@@ -534,12 +534,12 @@ int LibMadPlugin::audioFrequency( int ) {
 
 int LibMadPlugin::audioSamples( int ) {
     debugMsg( "LibMadPlugin::audioSamples" );
-/*
-    long t; short t1[5]; audioReadSamples( t1, 2, 1, t, 0 );
-    mad_header_decode( (struct mad_header *)&d->frame.header, &d->stream );
-    qDebug( "LibMadPlugin::audioSamples: %i*%i", d->frame.header.duration.seconds, d->frame.header.samplerate );
-    return d->frame.header.duration.seconds * d->frame.header.samplerate;
-*/
+
+  //   long t; short t1[5]; audioReadSamples( t1, 2, 1, t, 0 );
+//     mad_header_decode( (struct mad_header *)&d->frame.header, &d->stream );
+//     qDebug( "LibMadPlugin::audioSamples: %i*%i", d->frame.header.duration.seconds, d->frame.header.samplerate );
+//     return d->frame.header.duration.seconds * d->frame.header.samplerate;
+
     return 10000000;
 }
 
@@ -782,7 +782,7 @@ double LibMadPlugin::getTime() {
 
 
 void LibMadPlugin::printID3Tags() {
-    debugMsg( "LibMadPlugin::printID3Tags" );
+    qDebug( "LibMadPlugin::printID3Tags" );
 
     char id3v1[128 + 1];
 
