@@ -10,7 +10,7 @@
 
 #include <qlayout.h>
 
-#include <opie/oclickablelabel.h>
+#include <opie2/oclickablelabel.h>
 
 class ExamplePluginWidget : public QWidget {
 
@@ -26,7 +26,7 @@ private slots:
    void slotClicked();
 
 private:
-    OClickableLabel* m_exampleLabel;
+    Opie::Ui::OClickableLabel* m_exampleLabel;
     QHBoxLayout* m_layout;
     void readConfig();
     void getInfo();

@@ -17,9 +17,9 @@
 #include <qpe/datebookmonth.h>
 #include <qpe/timestring.h>
 
-#include <opie/oapplicationfactory.h> // a template + macro to save the main method and allow quick launching
-#include <opie/otabwidget.h>
-#include <opie/owait.h>
+#include <opie2/oapplicationfactory.h> // a template + macro to save the main method and allow quick launching
+#include <opie2/otabwidget.h>
+#include <opie2/owait.h>
 
 #include "simple.h"
 
@@ -35,6 +35,7 @@
  * either a main method or one for our component plugin system
  */
 
+using namespace Opie::Core;
 OPIE_EXPORT_APP( OApplicationFactory<MainWindow> )
 
 MainWindow::MainWindow(QWidget *parent,  const char* name, WFlags fl )
@@ -50,7 +51,7 @@ MainWindow::MainWindow(QWidget *parent,  const char* name, WFlags fl )
     /*
      * Tab widget as central
      */
-    m_tab = new OTabWidget(this);
+    m_tab = new Opie::Ui::OTabWidget(this);
 
     setCentralWidget( m_tab );
 
@@ -211,7 +212,7 @@ void MainWindow::slotLoad() {
         m_synced++;
 
     /* we will provide a wait scrren */
-    m_loading = new OWait(this, "wait screen" );
+    m_loading = new Opie::Ui::OWait(this, "wait screen" );
 }
 
 void MainWindow::slotDesktopReceive(const QCString& cmd, const QByteArray& data ) {
@@ -276,7 +277,7 @@ void MainWindow::slotShow() {
 }
 
 /* as answer this slot will be called */
-void MainWindow::slotShowRecord( const OPimRecord& rec) {
+void MainWindow::slotShowRecord( const Opie::OPimRecord& rec) {
     /* got a parent but still is a toplevel MODAL dialog */
     QDialog* dia = new QDialog(this,"dialog",TRUE );
     QVBoxLayout *box = new QVBoxLayout( dia );
@@ -344,19 +345,19 @@ namespace {
          *currently no hierachies are planed for the example
          * so only one constructor with a QListView as parent
          */
-        PIMListViewItem( QListView*, OPimRecord* record );
+        PIMListViewItem( QListView*, Opie::OPimRecord* record );
         ~PIMListViewItem();
 
         /* used by the QListViewItem to easily allow identifiying of different
          * items. Values greater than 1000 should be used */
         int rtti()const;
-        OPimRecord* record()const;
+        Opie::OPimRecord* record()const;
 
     private:
-        OPimRecord* m_record;
+        Opie::OPimRecord* m_record;
     };
 
-    PIMListViewItem::PIMListViewItem( QListView *p, OPimRecord* rec )
+    PIMListViewItem::PIMListViewItem( QListView *p, Opie::OPimRecord* rec )
         : QListViewItem(p), m_record( rec ) {
     }
 
@@ -365,7 +366,7 @@ namespace {
         delete m_record;
     }
 
-    OPimRecord* PIMListViewItem::record()const {
+    Opie::OPimRecord* PIMListViewItem::record()const {
         return m_record;
     }
 
@@ -382,28 +383,28 @@ PIMListView::~PIMListView() {
 
 }
 
-void PIMListView::set( OTodoAccess::List list ) {
+void PIMListView::set( Opie::OPimTodoAccess::List list ) {
     /* clear first and then add new items */
     clear();
 
-    OTodoAccess::List::Iterator it;
+    Opie::OPimTodoAccess::List::Iterator it;
     for (it = list.begin(); it != list.end(); ++it ) {
         /*
          * make a new item which automatically gets added to the listview
-         * and call the copy c'tor to create a new OTodo
+         * and call the copy c'tor to create a new OPimTodo
          */
-        PIMListViewItem *i = new PIMListViewItem(this, new OTodo( *it ) );
+        PIMListViewItem *i = new PIMListViewItem(this, new Opie::OPimTodo( *it ) );
         i->setText(0, (*it).summary() );
     }
 }
 
-void PIMListView::set( const OEffectiveEvent::ValueList& lst ) {
+void PIMListView::set( const Opie::OEffectiveEvent::ValueList& lst ) {
     /* clear first and then add items */
     clear();
 
-    OEffectiveEvent::ValueList::ConstIterator it;
+    Opie::OEffectiveEvent::ValueList::ConstIterator it;
     for ( it = lst.begin(); it != lst.end(); ++it ) {
-        PIMListViewItem *i = new PIMListViewItem(this, new OEvent( (*it).event() ) );
+        PIMListViewItem *i = new PIMListViewItem(this, new Opie::OPimEvent( (*it).event() ) );
         i->setText( 0, PIMListView::makeString( (*it) ) );
     }
 
@@ -425,7 +426,7 @@ void PIMListView::showCurrentRecord() {
     emit showRecord( (*item->record() ) );
 }
 
-QString PIMListView::makeString( const OEffectiveEvent& ev ) {
+QString PIMListView::makeString( const Opie::OEffectiveEvent& ev ) {
     QString str;
     str += ev.description();
     if ( !ev.event().isAllDay() ) {

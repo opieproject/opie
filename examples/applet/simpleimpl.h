@@ -17,6 +17,7 @@
  * need to implement. The interfaces inherits from QUnknownInterface and
  * you'll need inherit from the interface.
  * As example we will use the Taskbar interface
+ * the OTaskBarAppletWrapper implements the factory for us
  */
 
 #ifndef SIMPLE_OPIE_EXAMPLE_APPLET_H
@@ -45,33 +46,13 @@ class SimpleApplet : public QWidget {
 public:
     SimpleApplet(QWidget *parent);
     ~SimpleApplet();
+    static int position();
 private:
     void mousePressEvent( QMouseEvent* );
     void paintEvent( QPaintEvent* );
     QPixmap *m_pix;
 };
 
-class SimpleAppletImpl : public TaskbarAppletInterface {
-public:
-
-    SimpleAppletImpl();
-    virtual ~SimpleAppletImpl();
-
-    QRESULT queryInterface( const QUuid&, QUnknownInterface** );
-
-    QWidget *applet( QWidget* parent );
-    int position()const;
-
-    /*
-     * macro for reference countint
-     * if reference drops to zero
-     * delete this is called
-     */
-    Q_REFCOUNT
-
-private:
-    QList<SimpleApplet> m_applets;
-};
 
 
 #endif

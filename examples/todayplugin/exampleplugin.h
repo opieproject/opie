@@ -12,8 +12,8 @@
 #include <qwidget.h>
 #include <qguardedptr.h>
 
-#include <opie/todayplugininterface.h>
-#include <opie/todayconfigwidget.h>
+#include <opie2/todayplugininterface.h>
+#include <opie2/todayconfigwidget.h>
 
 #include "examplepluginwidget.h"
 

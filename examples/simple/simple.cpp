@@ -4,7 +4,7 @@
 
 #include <qpe/qpeapplication.h> // the QPEApplication
 
-#include <opie/oapplicationfactory.h> // a template + macro to save the main method and allow quick launching
+#include <opie2/oapplicationfactory.h> // a template + macro to save the main method and allow quick launching
 
 #include "simple.h"
 
@@ -20,6 +20,8 @@
  * either a main method or one for our component plugin system
  */
 
+/* The OApplicationFactory is in Opie::Core */
+using namespace Opie::Core;
 OPIE_EXPORT_APP( OApplicationFactory<Simple> )
 
 Simple::Simple( QWidget* parent, const char* name,  WFlags fl )

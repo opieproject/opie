@@ -12,6 +12,6 @@ DEPENDPATH  += $(OPIEDIR)/include
 
 
 # we now also include opie
-LIBS += -lqpe -lopie
+LIBS += -lqpe -lopieui2
 
 include ( $(OPIEDIR)/include.pro )

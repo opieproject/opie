@@ -8,7 +8,7 @@
 #ifndef EXAMPLE_PLUGIN_IMPL_H
 #define EXAMPLE_PLUGIN_IMPL_H
 
-#include <opie/todayplugininterface.h>
+#include <opie2/todayplugininterface.h>
 
 class ExamplePlugin;
 

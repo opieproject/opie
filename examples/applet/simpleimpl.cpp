@@ -1,11 +1,16 @@
-#include <qlabel.h>
-#include <qpainter.h>
-#include <qmessagebox.h>
+
+#include "simpleimpl.h"
+
+#include <opie2/otaskbarapplet.h>
 
 #include <qpe/applnk.h> // for AppLnk
 #include <qpe/resource.h> // for Resource loading
 
-#include "simpleimpl.h"
+#include <qlabel.h>
+#include <qpainter.h>
+#include <qmessagebox.h>
+
+
 
 
 SimpleApplet::SimpleApplet(QWidget *parent)
@@ -71,92 +76,15 @@ void SimpleApplet::paintEvent( QPaintEvent* ) {
 }
 
 /*
- * Here comes the implementation of the interface
+ * We need to add this symbol for the plugin exporter!
  */
-SimpleAppletImpl::SimpleAppletImpl() {
-}
-/* needed cause until it is only pure virtual */
-SimpleAppletImpl::~SimpleAppletImpl() {
-    /*
-     * we will delete our applets as well
-     * setAUtoDelete makes the QList free
-     * the objects behind the pointers
-     */
-    m_applets.setAutoDelete( true );
-    m_applets.clear();
-}
-
-/*
- * For the taskbar interface return a Widget
- */
-QWidget* SimpleAppletImpl::applet( QWidget* parent ) {
-    /*
-     * There are problems with ownership. So we add
-     * our ownlist and clear this;
-     */
-    SimpleApplet* ap = new SimpleApplet( parent );
-    m_applets.append( ap );
-
-    return ap;
-}
-
-/*
- * A small hint where the Applet Should be displayed
- */
-int SimpleAppletImpl::position()const {
+int SimpleApplet::position(){
     return 1;
 }
 
 
-/*
- * Now the important QUnkownInterface method without
- * this one your applet won't load
- * @param uuid The uuid of the interface
- * @param iface The pointer to the interface ptr
- */
-QRESULT SimpleAppletImpl::queryInterface( const QUuid& uuid, QUnknownInterface** iface) {
-    /* set the pointer to the interface to 0 */
-    *iface = 0;
-
-    /*
-     * we check if we support the requested interface
-     * and then assign to the pointer.
-     * You may alos create another interface here so
-     * *iface = this is only in this simple case true you
-     * could also support more interfaces.
-     * But this example below is the most common use.
-     * Now the caller knows that the Interface Pointer
-     * is valid and the interface supported
-     */
-    if ( uuid == IID_QUnknown )
-        *iface = this;
-    else if ( uuid == IID_TaskbarApplet )
-        *iface = this;
-    else
-        return QS_FALSE;
-
-    if ( *iface )
-        (*iface)->addRef();
-
-    return QS_OK;
-}
-
 
 /*
- * Finally we need to export the Interface.
- * CREATE_INSTANCE creates a interface and calls
- * queryInterface for the QUnknownInterface once
- * With out this function the applet can't be loaded.
- *
- * NOTE: If your applet does not load it's likely you've an
- * unresolved symbol. Change the .pro TEMPLATE = lib to TEMPLATE= app
- * and recompile. If the linker only complains about a missing
- * main method the problem is more complex. In most cases it'll say
- * you which symbols are missing and you can implement them.
- * The main(int argc, char* argv[] ) does not need to be
- * included in a library so it's ok that the linker complains
+ * Here comes the implementation of the interface
  */
-Q_EXPORT_INTERFACE() {
-    Q_CREATE_INSTANCE( SimpleAppletImpl )
-}
-
+EXPORT_OPIE_APPLET_v1( SimpleApplet )

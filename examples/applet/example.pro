@@ -10,7 +10,7 @@ HEADERS = simpleimpl.h
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDSPATH += $(OPIEDIR)/include
 
-LIBS += -lqpe
+LIBS += -lqpe -lopieui2
 
 
 include ( $(OPIEDIR)/include.pro ) 

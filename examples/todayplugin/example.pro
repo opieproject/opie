@@ -9,7 +9,7 @@ SOURCES = exampleplugin.cpp examplepluginimpl.cpp examplepluginwidget.cpp
 INCLUDEPATH     += $(OPIEDIR)/include 
 DEPENDPATH      += $(OPIEDIR)/include 
 
-LIBS+= -lqpe -lopie
+LIBS+= -lqpe -lopieui2
 
 DESTDIR = $(OPIEDIR)/plugins/today
 TARGET = todayexampleplugin

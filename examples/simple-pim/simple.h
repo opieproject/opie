@@ -18,16 +18,20 @@
 #include <qmainwindow.h>  // from this class we will inherit
 #include <qlistview.h> // A ListView for our PIM records
 
-#include <opie/otodoaccess.h>
-#include <opie/odatebookaccess.h>
+#include <opie2/otodoaccess.h>
+#include <opie2/odatebookaccess.h>
 
 class QPushButton; // forward declaration to not include the header. This can save time when compiling
 class QAction;
 class PIMListView;
 class QDate;
 class QCopChannel;
+namespace Opie{
+namespace Ui  {
 class OWait;
 class OTabWidget;
+}
+}
 
 /*
  * A mainwindow is a special QWidget it helps layouting
@@ -50,22 +54,22 @@ private slots:
     void slotLoadForDay(const QDate&);
     void slotShow();
     void slotDate();
-    void slotShowRecord( const OPimRecord& );
+    void slotShowRecord( const Opie::OPimRecord& );
 
 private:
     void initUI();
     QAction *m_fire;
     QAction *m_dateAction;
-    OTabWidget* m_tab;
+    Opie::Ui::OTabWidget* m_tab;
 
-    OTodoAccess     m_tb;
-    ODateBookAccess m_db;
+    Opie::OPimTodoAccess     m_tb;
+    Opie::ODateBookAccess m_db;
     PIMListView    *m_todoView;
     PIMListView    *m_dateView;
 
     int m_synced; // a counter for synced objects..
     QCopChannel    *m_desktopChannel;
-    OWait          *m_loading;
+    Opie::Ui::OWait          *m_loading;
 };
 
 /*
@@ -80,15 +84,15 @@ public:
     ~PIMListView();
 
 
-    void set( OTodoAccess::List );
-    void set( const OEffectiveEvent::ValueList& );
+    void set( Opie::OPimTodoAccess::List );
+    void set( const Opie::OEffectiveEvent::ValueList& );
     void showCurrentRecord();
 
 signals:
-    void showRecord( const OPimRecord& );
+    void showRecord( const Opie::OPimRecord& );
 
 private:
-    static QString makeString( const OEffectiveEvent& ev );
+    static QString makeString( const Opie::OEffectiveEvent& ev );
 
 };
 

@@ -10,6 +10,7 @@
 
 #include "examplepluginwidget.h"
 
+
 ExamplePluginWidget::ExamplePluginWidget( QWidget *parent,  const char* name)
     : QWidget(parent,  name ) {
 
@@ -23,7 +24,7 @@ ExamplePluginWidget::ExamplePluginWidget( QWidget *parent,  const char* name)
    // since here a OClickableLabel is used, the plugin part will be clickable, and the actions
    // that should be triggered when clicked are defined in  slotClicked()
    // of course also normal widgets can be used.
-    m_exampleLabel = new OClickableLabel( this );
+    m_exampleLabel = new Opie::Ui::OClickableLabel( this );
     connect( m_exampleLabel, SIGNAL( clicked() ), this, SLOT( slotClicked() ) );
 
     if ( m_layout )  {

@@ -6,7 +6,7 @@
 #include <qpe/resource.h>  // for loading icon
 #include <qpe/sound.h>  // for playing a sound
 
-#include <opie/oapplicationfactory.h> // a template + macro to save the main method and allow quick launching
+#include <opie2/oapplicationfactory.h> // a template + macro to save the main method and allow quick launching
 
 #include "simple.h"
 
@@ -21,7 +21,7 @@
  * Depending on the global quick launch setting this will create
  * either a main method or one for our component plugin system
  */
-
+using namespace Opie::Core;
 OPIE_EXPORT_APP( OApplicationFactory<Simple> )
 
 Simple::Simple( QWidget* parent, const char* name,  WFlags fl )

@@ -9,8 +9,8 @@
 #include <qpe/resource.h>
 #include <qpe/sound.h>
 
-#include <opie/oapplicationfactory.h> // a template + macro to save the main method and allow quick launching
-#include <opie/otabwidget.h>
+#include <opie2/oapplicationfactory.h> // a template + macro to save the main method and allow quick launching
+#include <opie2/otabwidget.h>
 
 #include "simple.h"
 
@@ -26,6 +26,8 @@
  * either a main method or one for our component plugin system
  */
 
+/* The OApplicationFactory is in the Opie::Core namespace */
+using namespace Opie::Core; 
 OPIE_EXPORT_APP( OApplicationFactory<MainWindow> )
 
 MainWindow::MainWindow(QWidget *parent,  const char* name, WFlags fl )
@@ -38,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent,  const char* name, WFlags fl )
     /*
      * Tab widget as central
      */
-    OTabWidget *tab = new OTabWidget(this);
+    Opie::Ui::OTabWidget *tab = new Opie::Ui::OTabWidget(this);
     connect(tab, SIGNAL(currentChanged(QWidget*) ),
             this, SLOT( slotCurrentChanged(QWidget*) ) );
     setCentralWidget( tab );

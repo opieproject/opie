@@ -1,5 +1,5 @@
   config TODAY_EXAMPLE
     boolean "Opie-Today Plugin Example"
     default "n"
-    depends ( LIBQPE || LIBQPE-X11 ) && EXAMPLES && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) && EXAMPLES && LIBOPIEUI2
 
