@@ -7,5 +7,5 @@ REQUIRES=medium-config
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 DESTDIR = $(OPIEDIR)/bin
-LIBS            += -lqpe
+LIBS            += -lqpe -lopie
 

@@ -17,6 +17,10 @@
 #include "filePermissions.h"
 #include "output.h"
 
+#include <opie/ofileselector.h>
+#include <opie/ofiledialog.h>
+
+
 #include <qpe/lnkproperties.h>
 #include <qpe/filemanager.h>
 #include <qpe/qcopenvelope_qws.h>
@@ -89,7 +93,7 @@ AdvancedFm::AdvancedFm( )
     menuBar->insertItem( tr( "File" ), fileMenu);
     menuBar->insertItem( tr( "View" ), viewMenu);
 
-    qpeDirButton= new QPushButton(Resource::loadIconSet("go"),"",this,"QPEButton");
+    qpeDirButton= new QPushButton(Resource::loadIconSet("launcher/opielogo16x16"),"",this,"QPEButton");
     qpeDirButton ->setFixedSize( QSize( 20, 20 ) );
     connect( qpeDirButton ,SIGNAL(released()),this,SLOT( QPEButtonPushed()) );
     qpeDirButton->setFlat(TRUE);
@@ -191,6 +195,7 @@ AdvancedFm::AdvancedFm( )
              this,SLOT( localListClicked(QListViewItem *)) );
     connect( Local_View, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
              this,SLOT( localListPressed(int, QListViewItem *, const QPoint&, int)) );
+
     connect( Local_View, SIGNAL( selectionChanged() ), SLOT( cancelMenuTimer() ) );
 
     TabWidget->insertTab( tab, tr("1"));
@@ -216,7 +221,7 @@ AdvancedFm::AdvancedFm( )
              this,SLOT( remoteListClicked(QListViewItem *)) );
     connect( Remote_View, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
              this,SLOT( remoteListPressed(int, QListViewItem *, const QPoint&, int)) );
-    connect( Remote_View, SIGNAL( selectionChanged() ), SLOT( cancelMenuTimer() ) );
+//    connect( Remote_View, SIGNAL( selectionChanged() ), SLOT( cancelMenuTimer() ) );
 
     tabLayout_2->addWidget( Remote_View, 0, 0 );
 
@@ -225,17 +230,30 @@ AdvancedFm::AdvancedFm( )
      connect(TabWidget,SIGNAL(currentChanged(QWidget *)),
             this,SLOT(tabChanged(QWidget*)));
 
-//     tab_3 = new QWidget( TabWidget, "tab_3" );
-//      tabLayout_3 = new QGridLayout( tab_3 );
-//      tabLayout_3->setSpacing( 2);
-//      tabLayout_3->setMargin( 2);
+     tab_3 = new QWidget( TabWidget, "tab_3" );
+      tabLayout_3 = new QGridLayout( tab_3 );
+      tabLayout_3->setSpacing( 2);
+      tabLayout_3->setMargin( 2);
 
-//     OFileSelector *fileSelector;
-//     fileSelector = new OFileSelector(tab_3,0,0,"/","","*");
-//     tabLayout_3->addMultiCellWidget( fileSelector, 0, 0, 0, 3 );
 
-//     TabWidget->insertTab( tab_3, tr( "Files" ) );
+//     OFileDialog fileDialog;
+// fileDialog;
+//    fileSelector = new FileSelector( "*",tab_3, "fileselector" , FALSE, FALSE); //buggy
+//     fileDialog = new OFileDialog("bangalow", tab_3, 4, 2, "Bungalow");
+//      OFileSelector fileDialog = new OFileSelector( tab_3, 4, 2,"/");
 
+QListView *fileTree;
+    fileTree = new QListView( tab_3, "tree" );
+
+      
+     tabLayout_3->addMultiCellWidget( fileTree, 0, 0, 0, 3 );
+
+     TabWidget->insertTab( tab_3, tr( "Remote" ) );
+///////////////
+
+////////////////////     
+
+     
     currentDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
     currentDir.setPath( QDir::currentDirPath());
 
@@ -251,6 +269,7 @@ AdvancedFm::AdvancedFm( )
     
     populateLocalView();
     populateRemoteView();
+    currentPathCombo->setFocus();
 }
 
 AdvancedFm::~AdvancedFm()
@@ -547,9 +566,9 @@ void AdvancedFm::localListClicked(QListViewItem *selectedItem)
             } else {
                 strItem=QDir::cleanDirPath(currentDir.canonicalPath()+"/"+strItem);
                 if( QFile::exists(strItem ) ) {
-                    qDebug("clicked item "+strItem);
-                    DocLnk doc( strItem, FALSE );
-                    doc.execute();
+//                     qDebug("clicked item "+strItem);
+//                     DocLnk doc( strItem, FALSE );
+//                     doc.execute();
                       //    Local_View->clearSelection();
                 }
             } //end not symlink
@@ -588,9 +607,9 @@ void AdvancedFm::remoteListClicked(QListViewItem *selectedItem)
             } else {
                 strItem=QDir::cleanDirPath( currentRemoteDir.canonicalPath()+"/"+strItem);
                 if( QFile::exists(strItem ) ) {
-                    qDebug("clicked item "+strItem);
-                    DocLnk doc( strItem, FALSE );
-                    doc.execute();
+//                     qDebug("clicked item "+strItem);
+//                     DocLnk doc( strItem, FALSE );
+//                     doc.execute();
                       //    Remote_View->clearSelection();
                 }
             } //end not symlink
@@ -648,11 +667,13 @@ void AdvancedFm::showRemoteHidden()
 
 void AdvancedFm::localListPressed( int mouse, QListViewItem *item, const QPoint &point, int i)
 {
-     switch (mouse) {
+qDebug("list pressed");
+ switch (mouse) {
        case 1:
            break;
        case 2:
-           menuTimer.start( 500, TRUE );
+           menuTimer.start( 750, TRUE );
+    qDebug("Start menu timer\n");
      break;
      };
 }
@@ -660,11 +681,12 @@ void AdvancedFm::localListPressed( int mouse, QListViewItem *item, const QPoint 
 void AdvancedFm::remoteListPressed( int mouse, QListViewItem *item, const QPoint &point, int i)
 {
 
-  switch (mouse) {
+    switch (mouse) {
        case 1:
            break;
        case 2:
-           menuTimer.start( 500, TRUE );
+           menuTimer.start( 750, TRUE );
+  qDebug("Start menu timer");
        break;
      };
 }
@@ -1461,6 +1483,7 @@ void AdvancedFm::doAbout() {
 
 void AdvancedFm::keyReleaseEvent( QKeyEvent *e)
 {
+  if( TabWidget->hasFocus()) 
     switch ( e->key() ) {
       case Key_Delete:
           del();
@@ -1668,6 +1691,7 @@ void AdvancedFm::fileBeamFinished( Ir *ir) {
 //     }
 
 void AdvancedFm::showFileMenu() {
+
   QString curApp;
   bool isLocalView = false;
   if (TabWidget->currentPageIndex() == 0) {
@@ -1681,73 +1705,78 @@ void AdvancedFm::showFileMenu() {
   const AppLnk* app = mt.application();
   QFile fi(curApp);
 
-  QPopupMenu m;
-  m.insertItem(  tr( "Show Hidden Files" ), this,  SLOT( showHidden() ));
-  m.insertSeparator();
+//  QPopupMenu m;
+  QPopupMenu *m = new QPopupMenu(0);
+
+  m->insertItem(  tr( "Show Hidden Files" ), this,  SLOT( showHidden() ));
+  m->insertSeparator();
   if ( QFileInfo(fi).isDir() ) {
-    m.insertItem( tr( "Change Directory" ), this, SLOT( doLocalCd() ));
+    m->insertItem( tr( "Change Directory" ), this, SLOT( doLocalCd() ));
   } else {
 
     if ( app )
-      m.insertItem( app->pixmap(), tr( "Open in " + app->name() ), this, SLOT( runThis() ) );
+      m->insertItem( app->pixmap(), tr( "Open in " + app->name() ), this, SLOT( runThis() ) );
     else if( QFileInfo(fi).isExecutable() )
-      m.insertItem(  tr( "Execute" ), this, SLOT( runThis() ) );
+      m->insertItem(  tr( "Execute" ), this, SLOT( runThis() ) );
 
-    m.insertItem( /*Resource::loadPixmap( "txt" ),*/ tr( "Open as text" ),this, SLOT( runText() ) );
+    m->insertItem( Resource::loadPixmap( "txt" ), tr( "Open as text" ),this, SLOT( runText() ) );
   }
-    m.insertSeparator();
+    m->insertSeparator();
 
 
     if(isLocalView)
-      m.insertItem( tr( "Make Directory" ), this, SLOT( localMakDir() ));
+      m->insertItem( tr( "Make Directory" ), this, SLOT( localMakDir() ));
     else
-      m.insertItem( tr( "Make Directory" ), this, SLOT( remoteMakDir() ));
+      m->insertItem( tr( "Make Directory" ), this, SLOT( remoteMakDir() ));
 
-    m.insertItem( tr( "Make Symlink" ), this, SLOT( mkSym() ));
-    m.insertSeparator();
+    m->insertItem( tr( "Make Symlink" ), this, SLOT( mkSym() ));
+    m->insertSeparator();
 
     if(isLocalView)
-      m.insertItem( tr( "Rename" ), this, SLOT( localRename() ));
+      m->insertItem( tr( "Rename" ), this, SLOT( localRename() ));
     else
-      m.insertItem( tr( "Rename" ), this, SLOT( remoteRename() ));
+      m->insertItem( tr( "Rename" ), this, SLOT( remoteRename() ));
 
-    m.insertItem( tr( "Copy" ), this, SLOT( copy() ));
-    m.insertItem( tr( "Copy As" ), this, SLOT( copyAs() ));
-    m.insertItem( tr( "Move" ), this, SLOT( move() ));
-    m.insertSeparator();
+    m->insertItem( tr( "Copy" ), this, SLOT( copy() ));
+    m->insertItem( tr( "Copy As" ), this, SLOT( copyAs() ));
+    m->insertItem( tr( "Move" ), this, SLOT( move() ));
+    m->insertSeparator();
 
     if(isLocalView)
-      m.insertItem( tr( "Rescan" ), this, SLOT( populateLocalView() ));
+      m->insertItem( tr( "Rescan" ), this, SLOT( populateLocalView() ));
     else
-      m.insertItem( tr( "Rescan" ), this, SLOT( populateRemoteView() ));
+      m->insertItem( tr( "Rescan" ), this, SLOT( populateRemoteView() ));
 
-    m.insertItem( tr( "Run Command" ), this, SLOT( runCommand() ));
-    m.insertItem( tr( "File Info" ), this, SLOT( fileStatus() ));
-    m.insertSeparator();
+    m->insertItem( tr( "Run Command" ), this, SLOT( runCommand() ));
+    m->insertItem( tr( "File Info" ), this, SLOT( fileStatus() ));
+    m->insertSeparator();
 
     if(isLocalView)
-      m.insertItem( tr( "Delete" ), this, SLOT( localDelete() ));
+      m->insertItem( tr( "Delete" ), this, SLOT( localDelete() ));
     else
-      m.insertItem( tr( "Delete" ), this, SLOT( remoteDelete() ));
+      m->insertItem( tr( "Delete" ), this, SLOT( remoteDelete() ));
 
-    m.insertSeparator();
-    m.insertItem( tr( "Set Permissions" ), this, SLOT( filePerms() ));
+    m->insertSeparator();
+    m->insertItem( tr( "Set Permissions" ), this, SLOT( filePerms() ));
     if( QFile(QPEApplication::qpeDir()+"lib/libopie.so").exists() )  //bad hack for Sharp zaurus failings
-      m.insertItem( tr( "Properties" ), this, SLOT( doProperties() ));
-    m.setCheckable(TRUE);
+      m->insertItem( tr( "Properties" ), this, SLOT( doProperties() ));
+    m->setCheckable(TRUE);
     if (!b)
-      m.setItemChecked(m.idAt(0),TRUE);
+      m->setItemChecked(m->idAt(0),TRUE);
     else
-      m.setItemChecked(m.idAt(0),FALSE);
+      m->setItemChecked(m->idAt(0),FALSE);
     if(Ir::supported())
-      m.insertItem( tr( "Beam File" ), this, SLOT( doBeam() ));
-    m.exec( QCursor::pos() );
+      m->insertItem( tr( "Beam File" ), this, SLOT( doBeam() ));
+    m->setFocus();
+    m->exec( QCursor::pos() );
+    if(m) delete m;
 }
 
 
 void AdvancedFm::cancelMenuTimer()
 {
-qDebug("cancel menu timer");
+
+    qDebug("selectionChanged: cancel menu timer");
     if( menuTimer.isActive() )
     menuTimer.stop();
 }
