@@ -4,7 +4,6 @@ Section: opie/applications
 Maintainer: Maximilian Reiss <max.reiss@gmx.de>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-appearance, opie-security, opie-systemtime,
-opie-light-and-power, opie-rotation, opie-tabmanager, opie-wlansetup
+Depends: opie-appearance, opie-security, opie-systemtime, opie-light-and-power, opie-rotation, opie-tabmanager, opie-wlansetup
 Description: Opie settings app
  All settings apps
