@@ -167,6 +167,52 @@ void EmulationWidget::setImage( QArray<Character> const newimg, int lines, int c
 	delete [] disstrU;
 }
 
+
+void EmulationWidget::paintEvent( QPaintEvent* pe )
+{
+    QPainter painter;
+    const QPixmap* pm = backgroundPixmap();
+    
+    painter.begin( this );
+    painter.setBackgroundMode( TransparentMode );
+
+    QRect rect = pe->rect().intersect( contentsRect() );
+    QPoint tL = contentsRect().topLeft();
+    int tLx = tL.x();
+    int tLy = tL.y();
+    
+    int lux = QMIN(m_columns-1, QMAX(0,(rect.left()   - tLx - m_blX ) / f_width));
+    int luy = QMIN(m_lines-1,   QMAX(0,(rect.top()    - tLy - m_bY  ) / f_height));
+    int rlx = QMIN(m_columns-1, QMAX(0,(rect.right()  - tLx - m_blX ) / f_width));
+    int rly = QMIN(m_lines-1,   QMAX(0,(rect.bottom() - tLy - m_bY  ) / f_height));
+    
+    QChar *disstrU = new QChar[m_columns];
+    for (int y = luy; y <= rly; y++)
+    for (int x = lux; x <= rlx; x++)
+    {
+	int len = 1;
+	disstrU[0] = vt100extended(m_image[loc(x,y)].c);
+	int cf = m_image[loc(x,y)].f;
+	int cb = m_image[loc(x,y)].b;
+	int cr = m_image[loc(x,y)].r;
+	while (x+len <= rlx &&
+	       m_image[loc(x+len,y)].f == cf &&
+	       m_image[loc(x+len,y)].b == cb &&
+	       m_image[loc(x+len,y)].r == cr )
+	{
+	    disstrU[len] = vt100extended(m_image[loc(x+len,y)].c);
+	    len += 1;
+	}
+	QString unistr(disstrU,len);
+
+	drawAttrString( unistr, painter, QRect( m_blX+tLx+f_width*x,m_bY+tLy+f_height*y,f_width*len,f_height ), m_image[loc(x ,y )], pm != NULL, false );
+	x +=len -1;
+    }
+    delete [] disstrU;
+    drawFrame( &painter );
+    painter.end();
+}
+
 void EmulationWidget::calcGeometry()
 {
 	m_scrollbar->resize(QApplication::style().scrollBarExtent().width(), contentsRect().height() );

@@ -70,6 +70,8 @@ protected:
     virtual void calcGeometry();
 
 
+    void paintEvent( QPaintEvent* event );
+
     /**
      * @param const ColorEntry* table, the new color table
      */
