@@ -98,11 +98,13 @@ void AdvancedFm::init() {
   fileMenu->insertItem( tr( "Delete" ), this, SLOT( del() ));
   fileMenu->setCheckable(TRUE);
 
-  viewMenu->insertItem( tr( "Switch to Local" ), this, SLOT( switchToLocalTab() ));
-  viewMenu->insertItem( tr( "Switch to Remote" ), this, SLOT( switchToRemoteTab() ));
-//   viewMenu->insertSeparator();
-//   viewMenu->insertItem( tr( "About" ), this, SLOT( doAbout() ));
-  viewMenu->setCheckable(TRUE);
+  viewMenu->insertItem( tr( "Switch to View 1" ), this, SLOT( switchToLocalTab()));
+  viewMenu->insertItem( tr( "Switch to View 2" ), this, SLOT( switchToRemoteTab()));
+//     viewMenu->insertSeparator();
+//     viewMenu->insertItem( tr( "About" ), this, SLOT( doAbout() ));
+  viewMenu->setCheckable(true);
+  viewMenu->setItemChecked( viewMenu->idAt(0), true);
+  viewMenu->setItemChecked( viewMenu->idAt(1), false);
 
   s_addBookmark = tr("Bookmark Directory");
   s_removeBookmark = tr("Remove Current Directory from Bookmarks");
@@ -279,7 +281,7 @@ void AdvancedFm::initConnections()
 
   connect( menuButton, SIGNAL( selected(const QString &)), SLOT(gotoCustomDir(const QString&)));
 //  connect( menuButton, SIGNAL( selected( int)), SLOT( dirMenuSelected(int)));
-
+  connect( viewMenu, SIGNAL( activated(int )), this, SLOT(slotSwitchMenu(int )));
 //  connect( customDirMenu, SIGNAL( activated(int)), this, SLOT( dirMenuSelected(int)));
 
 }

@@ -823,6 +823,8 @@ void AdvancedFm::cancelRename()
 
 void AdvancedFm::doRename(QListView * view)
 {
+  if(  view->currentItem() == NULL)
+    return;
 
     QRect r = view->itemRect( view->currentItem( ));
     r = QRect( view->viewportToContents( r.topLeft() ), r.size() );
@@ -877,5 +879,6 @@ void AdvancedFm::okRename()
 }
 
 void AdvancedFm::openSearch() {
+    QMessageBox::message(tr("Note"),tr("Not Yet Implemented"));
 
 }

@@ -40,6 +40,8 @@
 #include <qmessagebox.h>
 #include <qlineedit.h>
 
+#include <qpe/qpemessagebox.h>
+
 #include <sys/stat.h>
 #include <time.h>
 #include <dirent.h>
@@ -58,9 +60,9 @@ AdvancedFm::AdvancedFm( )
    whichTab=1;
    rePopulate();
    currentPathCombo->setFocus();
-   channel = new QCopChannel( "QPE/Application/advancedfm", this );
-   connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
-            this, SLOT( qcopReceive(const QCString&, const QByteArray&)) );
+    channel = new QCopChannel( "QPE/Application/advancedfm", this );
+    connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
+        this, SLOT( qcopReceive(const QCString&, const QByteArray&)) );
 }
 
 AdvancedFm::~AdvancedFm() {
@@ -91,13 +93,18 @@ void AdvancedFm::tabChanged(QWidget *w)
    QString path = CurrentDir()->canonicalPath();
   currentPathCombo->lineEdit()->setText( path );
 
-  viewMenu->setItemChecked(viewMenu->idAt(0),TRUE);
-  viewMenu->setItemChecked(viewMenu->idAt(1),FALSE);
+  if(whichTab == 1) {
+    viewMenu->setItemChecked(viewMenu->idAt(0), true);
+    viewMenu->setItemChecked(viewMenu->idAt(1), false);
+    } else {
+    viewMenu->setItemChecked(viewMenu->idAt(0), false);
+    viewMenu->setItemChecked(viewMenu->idAt(1), true);
+    }
 
   QString fs= getFileSystemType( (const QString &)  path);
 
-  setCaption( tr("AdvancedFm :: ") +fs+" :: "
-             +checkDiskSpace( (const QString &) path )+ " kB free" );
+  setCaption(tr("AdvancedFm :: ")+fs+" :: "
+             +checkDiskSpace( (const QString &) path )+ tr(" kB free") );
   chdir( path.latin1());
 }
 
@@ -115,8 +122,8 @@ void AdvancedFm::populateView()
   thisDir->setNameFilter(filterStr);
   QString fileL, fileS, fileDate;
   QString fs= getFileSystemType((const QString &) path);
-  setCaption( tr("AdvancedFm :: ")+fs+" :: "
-             +checkDiskSpace((const QString &) path)+" kB free" );
+  setCaption(tr("AdvancedFm :: ")+fs+" :: "
+             +checkDiskSpace((const QString &) path)+ tr(" kB free") );
   bool isDir=FALSE;
   const QFileInfoList *list = thisDir->entryInfoList( /*QDir::All*/ /*, QDir::SortByMask*/);
   QFileInfoListIterator it(*list);
@@ -273,6 +280,7 @@ void AdvancedFm::ListPressed( int mouse, QListViewItem *, const QPoint& , int ) 
     break;
   };
 }
+
 
 void AdvancedFm::switchToLocalTab()
 {
@@ -904,7 +912,7 @@ void AdvancedFm::gotoDirectory(const QString &file) {
     }
     findFile(file);
  }
-
+  
 }
 
 void AdvancedFm::findFile(const QString &fileName) {
@@ -917,4 +925,10 @@ void AdvancedFm::findFile(const QString &fileName) {
          thisView->ensureItemVisible(it.current());
       }
    }
+}
+
+void AdvancedFm::slotSwitchMenu(int item)
+{
+   qDebug("Switch %d", item);
+   //   viewMenu->setItemChecked(item, true);
 }
