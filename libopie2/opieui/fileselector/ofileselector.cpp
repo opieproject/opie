@@ -62,9 +62,11 @@ using namespace Opie::Ui::Internal;
 namespace Opie {
 namespace Ui   {
 namespace Internal {
-OFileViewInterface::OFileViewInterface( OFileSelector* selector )
-        : m_selector( selector )
-{}
+OFileViewInterface::OFileViewInterface( OFileSelector* _selector )
+        : m_selector( _selector )
+{
+    selector()->registerView( this );
+}
 
 OFileViewInterface::~OFileViewInterface()
 {}
@@ -511,7 +513,7 @@ OFileSelector* OFileViewFileListView::selector()
     return m_sel;
 }
 
-bool OFileViewFileListView::eventFilter (QObject *o, QEvent *e)
+bool OFileViewFileListView::eventFilter (QObject *, QEvent *e)
 {
     if ( e->type() == QEvent::KeyPress )
     {
@@ -947,7 +949,7 @@ void OFileSelector::initUI()
  * This will make sure that the return key in the name edit causes dialogs to close
  */
 
-bool OFileSelector::eventFilter (QObject *o, QEvent *e)
+bool OFileSelector::eventFilter (QObject *, QEvent *e)
 {
     if ( e->type() == QEvent::KeyPress )
     {
@@ -998,11 +1000,18 @@ void OFileSelector::initViews()
     m_views.insert( QObject::tr("All Files"), in );
 }
 
+void OFileSelector::registerView( const Internal::OFileViewInterface* iface ) {
+    m_viewsPtr.append( iface );
+}
+
+
 /**
  * d'tor
  */
 OFileSelector::~OFileSelector()
 {
+    m_viewsPtr.setAutoDelete( true );
+    m_viewsPtr.clear();
 }
 
 

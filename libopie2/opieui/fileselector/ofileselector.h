@@ -44,6 +44,7 @@
 #include <qmap.h>
 #include <qvaluelist.h>
 #include <qstringlist.h>
+#include <qlist.h>
 
 class QLineEdit;
 class QComboBox;
@@ -183,6 +184,13 @@ private:
     /* init the Views :) */
     void initViews();
 
+
+    /*
+     * register a view for deletion.
+     * This happens on creation of a OFileViewInterface
+     */
+    void registerView( const Internal::OFileViewInterface* );
+
 private:
     QLineEdit* m_lneEdit; // the LineEdit for the Name
     QComboBox *m_cmbView, *m_cmbMime; // two ComboBoxes to select the View and MimeType
@@ -194,6 +202,8 @@ private:
     MimeTypes m_mimeType; // list of mimetypes
 
     QMap<QString, Internal::OFileViewInterface*> m_views; // QString translated view name + ViewInterface Ptr
+    /* views register themselves automatically */
+    QList<Internal::OFileViewInterface> m_viewsPtr;
     QHBox* m_nameBox; // the LineEdit + Label is hold here
     QHBox* m_cmbBox; // this holds the two combo boxes
 
