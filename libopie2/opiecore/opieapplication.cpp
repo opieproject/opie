@@ -28,6 +28,7 @@
                              Boston, MA 02111-1307, USA.
 */
 
+#include <opie2/odebug.h>
 
 #include "opieapplication.h"
 
@@ -42,7 +43,28 @@ OpieApplication::OpieApplication( int& argc, char** argv)
 #ifndef QWS
 void OpieApplication::showMainWidget( QWidget* widget, bool nomax )
 {
+    if (nomax) odebug << "ignoring nomax";
     setMainWidget( widget );
     widget->show();
 };
 #endif
+
+#ifndef QWS
+QString OpieApplication::qpeDir()
+{
+	const char * base = getenv( "OPIEDIR" );
+	if ( base )
+		return QString( base ) + "/";
+
+	return QString( "../" );
+}
+#endif
+
+
+#ifndef QWS
+void OpieApplication::showMainDocumentWidget( QWidget* widget, bool nomax)
+{
+    showMainWidget(widget,nomax);
+}
+#endif
+

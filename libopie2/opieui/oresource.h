@@ -1,6 +1,7 @@
 /*
                              This file is part of the Opie Project
 
+                             Copyright (C) 2003 Michael Lauer <mickey@tm.informatik.uni-frankfurt.de>
                              Copyright (C) 2003 Patrick S. Vogt <tille@handhelds.org>
               =.
             .=l.
@@ -28,32 +29,20 @@
                              Boston, MA 02111-1307, USA.
 */
 
-#ifndef OPIE_APPLICATION_H
-#define OPIE_APPLICATION_H
+#ifndef ORESOURCE_H
+#define ORESOURCE_H
 
 #ifdef QWS
-#include <qpe/qpeapplication.h>
+#include <qpe/resource.h>
 #else
-#include <qapplication.h>
-#endif
+#include <qpixmap.h>
 
-class OpieApplication 
-#ifdef QWS
-: public QPEApplication
-#else
-: public QApplication
-#endif
+namespace Resource
 {
- public:
-    OpieApplication( int& argc, char** argv );
+    QPixmap loadPixmap( const QString& );
+}
 
-#ifndef QWS
-    void showMainWidget( QWidget* widget, bool nomax=false );
-    void showMainDocumentWidget( QWidget* widget, bool nomax=false );
-    static QString qpeDir();	
 #endif
-};
-
 
 #endif
 

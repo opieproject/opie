@@ -28,33 +28,31 @@
                              Boston, MA 02111-1307, USA.
 */
 
-#ifndef OPIE_APPLICATION_H
-#define OPIE_APPLICATION_H
+#include <opie2/oapplication.h>
+#include <opie2/odebug.h>
+
+#include "oresource.h"
+
 
 #ifdef QWS
-#include <qpe/qpeapplication.h>
-#else
-#include <qapplication.h>
-#endif
-
-class OpieApplication 
-#ifdef QWS
-: public QPEApplication
-#else
-: public QApplication
-#endif
+namespace Resource
 {
- public:
-    OpieApplication( int& argc, char** argv );
 
-#ifndef QWS
-    void showMainWidget( QWidget* widget, bool nomax=false );
-    void showMainDocumentWidget( QWidget* widget, bool nomax=false );
-    static QString qpeDir();	
-#endif
+QPixmap loadPixmap( const QString& pix )
+{
+    QString filename;
+    filename.sprintf( "%s/%s.png", (const char*) oApp->opieDir(), (const char*) pix );
+    QPixmap pixmap( filename );
+    if ( pixmap.isNull() )
+    {
+        odebug << "libopie2 resource: can't find pixmap " << filename << oendl;;
+    }
+    return pixmap;
 };
 
+};
 
 #endif
+
 
 

@@ -28,33 +28,26 @@
                              Boston, MA 02111-1307, USA.
 */
 
-#ifndef OPIE_APPLICATION_H
-#define OPIE_APPLICATION_H
+#ifndef OMESSAGEBOX_H
+#define OMESSAGEBOX_H
+
+
 
 #ifdef QWS
-#include <qpe/qpeapplication.h>
+#include <qpe/qpemessagebox.h>
 #else
-#include <qapplication.h>
+#include <qmessagebox.h>
 #endif
 
-class OpieApplication 
+
+
+class OMessageBox 
 #ifdef QWS
-: public QPEApplication
+: public QPEMessageBox
 #else
-: public QApplication
+: public QMessageBox
 #endif
 {
- public:
-    OpieApplication( int& argc, char** argv );
-
-#ifndef QWS
-    void showMainWidget( QWidget* widget, bool nomax=false );
-    void showMainDocumentWidget( QWidget* widget, bool nomax=false );
-    static QString qpeDir();	
-#endif
 };
 
-
-#endif
-
-
+#endif // OAPPLICATION_H

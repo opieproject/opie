@@ -15,6 +15,11 @@ HEADERS     = ocompletionbox.h       \
               oversatileviewitem.h   \
               #ojanuswidget.h         \
               odialog.h              \
+	      omenubar.h             \
+	      opiemenubar.h          \
+	      omessagebox.h          \
+	      oresource.h            \
+	      otoolbar.h            \
               oseparator.h           
 #              otaskbarapplet.h
 
@@ -32,6 +37,10 @@ SOURCES     = ocompletionbox.cpp     \
               oversatileviewitem.cpp \
               #ojanuswidget.cpp       \
               odialog.cpp            \
+	      omenubar.cpp           \
+	      opiemenubar.cpp        \
+	      oresource.cpp          \
+	      otoolbar.cpp           \
               oseparator.cpp         #\
 #              otaskbarapplet.cpp
 

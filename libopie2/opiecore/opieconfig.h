@@ -55,7 +55,8 @@ class OpieConfig
 
 #ifndef QWS
     void setGroup( const QString& key);
-	bool hasKey ( const QString & key ) const;
+    bool hasKey ( const QString & key ) const;
+    void write() {}; // FIXME: did not find the docu... what shall I do here?
 #endif
 
     /**

@@ -92,6 +92,11 @@ class OApplication : public OpieApplication
      */
     virtual void setTitle( const QString& title = QString::null ) const;
 
+    /**
+     * see qpeDir()
+     */
+    static QString opieDir() {return qpeDir();};
+
   protected:
     void init();
 

@@ -28,33 +28,16 @@
                              Boston, MA 02111-1307, USA.
 */
 
-#ifndef OPIE_APPLICATION_H
-#define OPIE_APPLICATION_H
 
-#ifdef QWS
-#include <qpe/qpeapplication.h>
-#else
-#include <qapplication.h>
-#endif
+#include "opiemenubar.h"
 
-class OpieApplication 
+OpieMenuBar::OpieMenuBar(QWidget* parent, const char* name )
 #ifdef QWS
-: public QPEApplication
+    : QPEMenuBar(parent,name)
 #else
-: public QApplication
+    : QMenuBar(parent,name)
 #endif
 {
- public:
-    OpieApplication( int& argc, char** argv );
-
-#ifndef QWS
-    void showMainWidget( QWidget* widget, bool nomax=false );
-    void showMainDocumentWidget( QWidget* widget, bool nomax=false );
-    static QString qpeDir();	
-#endif
-};
-
-
-#endif
+}
 
 
