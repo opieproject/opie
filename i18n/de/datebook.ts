@@ -564,7 +564,7 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>Start Time</source>
-        <translation type="unfinished">Startzeit</translation>
+        <translation>Startzeit</translation>
     </message>
 </context>
 <context>
