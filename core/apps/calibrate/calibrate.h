@@ -20,7 +20,7 @@
 
 #include <qwsmouse_qws.h>
 
-#if defined(Q_WS_QWS) || defined(_WS_QWS_)
+//#if defined(Q_WS_QWS) || defined(_WS_QWS_)
 
 #include <qdialog.h>
 #include <qpixmap.h>
@@ -52,8 +52,10 @@ private:
     void store();
     void reset();
     QPixmap logo;
+#ifdef QWS
     QWSPointerCalibrationData goodcd,cd;
     QWSPointerCalibrationData::Location location;
+#endif
     QPoint crossPos;
     QPoint penPos;
     QPixmap saveUnder;
@@ -63,5 +65,5 @@ private:
     bool showCross;
 };
 
-#endif // _WS_QWS_
+//#endif // _WS_QWS_
 

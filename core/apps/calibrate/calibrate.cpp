@@ -26,7 +26,7 @@
 #include <qpe/qcopenvelope_qws.h>
 #include <qapplication.h>
 
-#if defined(Q_WS_QWS) || defined(_WS_QWS_)
+//#if defined(Q_WS_QWS) || defined(_WS_QWS_)
 
 #include <qpainter.h>
 #include <qtimer.h>
@@ -37,6 +37,7 @@
 Calibrate::Calibrate( QWidget* parent, const char * name, WFlags wf ) :
 		QDialog( parent, name, TRUE, wf | WStyle_Tool | WStyle_Customize | WStyle_StaysOnTop )
 {
+#ifdef QWS
 	showCross = TRUE;
 	const int offset = 30;
 	QRect desk = qApp->desktop() ->geometry();
@@ -58,6 +59,7 @@ Calibrate::Calibrate( QWidget* parent, const char * name, WFlags wf ) :
 
 	timer = new QTimer( this );
 	connect( timer, SIGNAL( timeout() ), this, SLOT( timeout() ) );
+#endif
 }
 
 Calibrate::~Calibrate()
@@ -67,15 +69,19 @@ Calibrate::~Calibrate()
 
 void Calibrate::show()
 {
+#ifdef QWS
 	grabMouse();
 	QWSServer::mouseHandler() ->getCalibration( &goodcd );
 	QWSServer::mouseHandler() ->clearCalibration();
 	QDialog::show();
+#endif
 }
 
 void Calibrate::store()
 {
+#ifdef QWS
 	QWSServer::mouseHandler() ->calibrate( &goodcd );
+#endif
 }
 
 void Calibrate::hide()
@@ -87,25 +93,33 @@ void Calibrate::hide()
 		{
 			QCopEnvelope e( "QPE/System", "closing(QString)" );
 			e << QString ( "calibrate" );
-		}                        
+		}
 	}
 	QDialog::hide();
 }
 
 void Calibrate::reset()
 {
+#ifdef QWS
 	penPos = QPoint();
 	location = QWSPointerCalibrationData::TopLeft;
 	crossPos = fromDevice( cd.screenPoints[ location ] );
+#endif
 }
 
 QPoint Calibrate::fromDevice( const QPoint &p )
 {
+#ifdef QWS
 	return qt_screen->mapFromDevice ( p, QSize( qt_screen->deviceWidth ( ), qt_screen->deviceHeight() ) );
+#else
+        return QPoint();
+#endif
+
 }
 
 bool Calibrate::sanityCheck()
 {
+#ifdef QWS
 	QPoint tl = cd.devPoints[QWSPointerCalibrationData::TopLeft];
 	QPoint tr = cd.devPoints[QWSPointerCalibrationData::TopRight];
 	QPoint bl = cd.devPoints[QWSPointerCalibrationData::BottomLeft];
@@ -127,8 +141,8 @@ bool Calibrate::sanityCheck()
 	int dr = (int) ::sqrt (( drx * drx ) + ( dry * dry ));
 	int dt = (int) ::sqrt (( dtx * dtx ) + ( dty * dty ));
 	int db = (int) ::sqrt (( dbx * dbx ) + ( dby * dby ));
-    
-	// Calculate leeway for x/y (we do not care if diff1/diff2 is for x or y here !)	
+
+	// Calculate leeway for x/y (we do not care if diff1/diff2 is for x or y here !)
 	int diff1 = QABS( dl - dr );
 	int avg1  = ( dl + dr ) / 2;
 	int diff2 = QABS( dt - db );
@@ -137,7 +151,7 @@ bool Calibrate::sanityCheck()
 	// Calculate leeway for "real" vector length against "manhattan" vector length
 	// This is a check, if the rect is rotated (other then 0/90/180/270)
 	// It needs to be performed only for the triange (bl, tl, tr)
-	int diff3 = QABS(( dlx + dly + dtx + dty ) - ( dl + dt )); 
+	int diff3 = QABS(( dlx + dly + dtx + dty ) - ( dl + dt ));
 	int avg3 = (( dlx + dly + dtx + dty ) + ( dl + dt )) / 2;
 
 	if (( diff1 > ( avg1 / 20 )) || // 5% leeway
@@ -146,7 +160,10 @@ bool Calibrate::sanityCheck()
 		return false;
 	else
 		return true;
-}	
+#else
+return true;
+#endif
+}
 
 void Calibrate::moveCrosshair( QPoint pt )
 {
@@ -190,6 +207,7 @@ void Calibrate::paintEvent( QPaintEvent * )
 
 void Calibrate::mousePressEvent( QMouseEvent *e )
 {
+#ifdef QWS
 	// map to device coordinates
 	QPoint devPos = qt_screen->mapToDevice( e->pos(), QSize( qt_screen->width(), qt_screen->height() ) );
 	if ( penPos.isNull() )
@@ -197,10 +215,12 @@ void Calibrate::mousePressEvent( QMouseEvent *e )
 	else
 		penPos = QPoint( ( penPos.x() + devPos.x() ) / 2,
 		                 ( penPos.y() + devPos.y() ) / 2 );
+#endif
 }
 
 void Calibrate::mouseReleaseEvent( QMouseEvent * )
 {
+#ifdef QWS
 	if ( timer->isActive() )
 		return ;
 
@@ -229,10 +249,12 @@ void Calibrate::mouseReleaseEvent( QMouseEvent * )
 		dy = ( target.y() - crossPos.y() ) / 10;
 		timer->start( 30 );
 	}
+#endif
 }
 
 void Calibrate::timeout()
 {
+#ifdef QWS
 	QPoint target = fromDevice( cd.screenPoints[ location ] );
 
 	bool doneX = FALSE;
@@ -255,6 +277,7 @@ void Calibrate::timeout()
 	}
 
 	moveCrosshair( newPos );
+#endif
 }
 
-#endif // _WS_QWS_
+//#endif // _WS_QWS_
