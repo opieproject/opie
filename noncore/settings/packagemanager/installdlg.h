@@ -39,7 +39,16 @@ class QLabel;
 class QMultiLineEdit;
 class QPushButton;
 
+class OConfItem;
 class OPackageManager;
+
+namespace Opie
+{
+    namespace Core
+    {
+        class OProcess;
+    }
+}
 
 class InstallDlg : public QWidget
 {
@@ -54,7 +63,6 @@ public:
                 const QStringList &packages2 = QStringList(),
                 OPackage::Command command3 = OPackage::NotDefined,
                 const QStringList &packages3 = QStringList() );
-    ~InstallDlg();
 
 private:
     OPackageManager *m_packman;     // Pointer to application instance of package manager
@@ -71,13 +79,15 @@ private:
     int               m_currCommand; // Number of currently executing command
     OPackage::Command m_command[3];  // List of commands to be executed
     QStringList       m_packages[3]; // Lists of package names associated to commands (m_command[])
+    OConfItem        *m_destItem;    // Pointer to destination for package installation
 
 private slots:
     // UI control slots
     void slotDisplayAvailSpace( const QString &destination );
     void slotBtnStart();
     void slotBtnOptions();
-
+    void slotProcessDone( Opie::Core::OProcess *proc );
+    
     // Execution slots
     void slotOutput( char *msg );
 

@@ -531,7 +531,7 @@ void MainWindow::slotApply()
         upgradeCmd = OPackage::Upgrade;
 
     // Create package manager output widget
-    InstallDlg *dlg = new InstallDlg( this, &m_packman, tr( "Apply changes" ), true,
+    InstallDlg *dlg = new InstallDlg( this, &m_packman, tr( "Apply changes" ), !installList.isEmpty(),
                                       removeCmd, removeList,
                                       installCmd, installList,
                                       upgradeCmd, upgradeList );

@@ -30,6 +30,7 @@ _;:,   .>  :=|.         This file is free software; you can
 #include "installdlg.h"
 
 #include <opie2/ofiledialog.h>
+#include <opie2/oprocess.h>
 
 #include <qpe/fileselector.h>
 #include <qpe/resource.h>
@@ -57,6 +58,7 @@ InstallDlg::InstallDlg( QWidget *parent, OPackageManager *pm, const QString &cap
     , m_packman( pm )
     , m_numCommands( 0 )
     , m_currCommand( 0 )
+    , m_destItem( 0x0 )
 {
     // Save command/package list information
     if ( command1 != OPackage::NotDefined )
@@ -163,10 +165,6 @@ InstallDlg::InstallDlg( QWidget *parent, OPackageManager *pm, const QString &cap
 
 }
 
-InstallDlg::~InstallDlg()
-{
-}
-
 void InstallDlg::slotDisplayAvailSpace( const QString &destination )
 {
     // If available space is not displayed, exit
@@ -176,13 +174,14 @@ void InstallDlg::slotDisplayAvailSpace( const QString &destination )
     QString space = tr( "Unknown" );
 
     // Get destination
-    OConfItem *dest = m_packman->findConfItem( OConfItem::Destination, destination );
+    if ( !destination.isNull() )
+        m_destItem = m_packman->findConfItem( OConfItem::Destination, destination );
 
-    if ( dest )
+    if ( m_destItem )
     {
         // Calculate available space
         struct statfs fs;
-        if ( !statfs( dest->value(), &fs ) )
+        if ( !statfs( m_destItem->value(), &fs ) )
         {
             long mult = fs.f_bsize / 1024;
             long div = 1024 / fs.f_bsize;
@@ -220,6 +219,13 @@ void InstallDlg::slotBtnStart()
     }
 
     // Start was clicked, start executing
+    QString dest;
+    if ( m_destination )
+    {
+        dest = m_destination->currentText();
+        m_destination->setEnabled( false );
+    }
+    
     m_btnOptions->setEnabled( false );
     if ( m_numCommands > 1 )
     {
@@ -231,16 +237,46 @@ void InstallDlg::slotBtnStart()
         m_btnStart->setEnabled( false );
     }
 
-    QString dest;
-    if ( m_destination )
-        dest = m_destination->currentText();
-
     for ( m_currCommand = 0; m_currCommand < m_numCommands; m_currCommand++ )
     {
         // Execute next command
         m_packman->executeCommand( m_command[ m_currCommand ], m_packages[ m_currCommand ], dest,
                                    this, SLOT(slotOutput(char*)), true );
     }
+    slotProcessDone(0l);
+
+    // Get destination
+/*
+    if ( dest == "root" )
+    {
+        slotProcessDone(0l);
+        return;
+    }
+
+    m_destItem = m_packman->findConfItem( OConfItem::Destination, dest );
+    if ( m_destItem )
+    {
+        QString path = m_destItem->value();
+        Opie::Core::OProcess *process = new Opie::Core::OProcess( this, "ipkg-link process" );
+        connect( process, SIGNAL(processExited(Opie::Core::OProcess*)),
+                 this, SLOT(slotProcessDone(Opie::Core::OProcess*)) );
+
+        *process << "ipkg-link" << "mount" << path;
+        if ( !process->start( Opie::Core::OProcess::NotifyOnExit,
+                              Opie::Core::OProcess::NoCommunication ) )
+            slotProcessDone( 0l );
+        m_output->append( tr( "Starting ipkg-link to link installed applications." ) );
+        m_output->setCursorPosition( m_output->numLines(), 0 );
+    }
+*/
+}
+
+void InstallDlg::slotProcessDone( Opie::Core::OProcess *proc )
+{
+    delete proc;
+
+    m_output->append( tr( "The package linking is done." ) );
+    m_output->setCursorPosition( m_output->numLines(), 0 );
 
     // All commands executed, allow user to close dialog
     m_btnStart->setEnabled( true );
@@ -294,4 +330,7 @@ void InstallDlg::slotOutput( char *msg )
         lineStr.truncate( lineStr.length() - 1 );
     m_output->append( lineStr );
     m_output->setCursorPosition( m_output->numLines(), 0 );
+    
+    // Update available space
+    slotDisplayAvailSpace( QString::null );
 }
