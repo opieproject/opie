@@ -133,7 +133,8 @@ OpieFtp::OpieFtp( )
     Local_View->setAllColumnsShowFocus(TRUE);
     Local_View->setMultiSelection( TRUE );
     Local_View->setSelectionMode(QListView::Extended);
-     QPEApplication::setStylusOperation( Local_View->viewport(),QPEApplication::RightOnHold);
+
+    QPEApplication::setStylusOperation( Local_View->viewport(),QPEApplication::RightOnHold);
 
     tabLayout->addWidget( Local_View, 0, 0 );
 
@@ -318,7 +319,6 @@ void OpieFtp::newConnection()
    remotePath->setText( currentRemoteDir = "/");
    PortSpinBox->setValue( 21);
    TabWidget->setCurrentPage(2);
-   currentServerConfig = -1;
 }
 
 void OpieFtp::serverComboEdited(const QString & edit)
@@ -432,8 +432,8 @@ void OpieFtp::localUpload()
             }
             ProgressBar->reset();
             nullifyCallBack();
-            it.current()->setSelected(FALSE);
         } //end currentSelected
+        it.current()->setSelected(FALSE);
     }
     TabWidget->setCurrentPage(1);
     remoteDirList( (const QString &)currentRemoteDir); //this also calls populate
@@ -486,8 +486,8 @@ void OpieFtp::remoteDownload()
             }
             ProgressBar->reset();
             nullifyCallBack();
-            it.current()->setSelected(FALSE);
         }
+        it.current()->setSelected(FALSE);
     }
     TabWidget->setCurrentPage(0);
     populateLocalView();
@@ -657,7 +657,7 @@ bool OpieFtp::populateRemoteView( )
 void OpieFtp::remoteListClicked(QListViewItem *selectedItem)
 {
     if( selectedItem) {
-        QCopEnvelope ( "QPE/System", "busy()" );
+//         QCopEnvelope ( "QPE/System", "busy()" );
         QString  oldRemoteCurrentDir =  currentRemoteDir;
         QString strItem=selectedItem->text(0);
         strItem=strItem.simplifyWhiteSpace();
@@ -686,28 +686,28 @@ void OpieFtp::remoteListClicked(QListViewItem *selectedItem)
                 if( !remoteChDir( (const QString &)strItem)) {
                     currentRemoteDir = oldRemoteCurrentDir;
                     strItem="";
-                    qDebug("RemoteCurrentDir1 "+oldRemoteCurrentDir);
+//                     qDebug("RemoteCurrentDir1 "+oldRemoteCurrentDir);
                 }
             } else if(strItem.find("/",0,TRUE) != -1) { // this is a directory
-                qDebug("trying directory");
                 if( !remoteChDir( (const QString &)currentRemoteDir + strItem)) {
                     currentRemoteDir = oldRemoteCurrentDir;
                     strItem="";
-                    qDebug("RemoteCurrentDir1 "+oldRemoteCurrentDir);
+//                     qDebug("RemoteCurrentDir1 "+oldRemoteCurrentDir);
 
                 } else {
                     currentRemoteDir = currentRemoteDir+strItem;
                 }
             } else {
-                qDebug("download "+strItem);
+                QCopEnvelope ( "QPE/System", "notBusy()" );
+                return;
             }
         }
         remoteDirList( (const QString &)currentRemoteDir); //this also calls populate
         if(currentRemoteDir.right(1) !="/")
             currentRemoteDir +="/";
-        currentPathCombo->lineEdit()->setText( currentRemoteDir );
-        fillRemoteCombo( (const QString &)currentDir);
-        QCopEnvelope ( "QPE/System", "notBusy()" );
+        currentPathCombo->lineEdit()->setText( currentRemoteDir);
+        fillRemoteCombo( (const QString &)currentRemoteDir);
+//        QCopEnvelope ( "QPE/System", "notBusy()" );
     }
 }
 
@@ -727,6 +727,7 @@ void OpieFtp::localListClicked(QListViewItem *selectedItem)
             }
         } else { // not a symlink
             if(strItem.find(". .",0,TRUE) && strItem.find("/",0,TRUE)!=-1 ) {
+                
                 if(QDir(QDir::cleanDirPath(currentDir.canonicalPath()+"/"+strItem)).exists() ) {
                     strItem=QDir::cleanDirPath(currentDir.canonicalPath()+"/"+strItem);
                     currentDir.cd(strItem,FALSE);
@@ -743,6 +744,7 @@ void OpieFtp::localListClicked(QListViewItem *selectedItem)
                 strItem=QDir::cleanDirPath(currentDir.canonicalPath()+"/"+strItem);
                 if( QFile::exists(strItem ) ) {
                       //  qDebug("upload "+strItem);
+                    return;
                 }
             } //end not symlink
             chdir(strItem.latin1());
@@ -1068,12 +1070,16 @@ void OpieFtp::readConfig()
 
 void OpieFtp::writeConfig()
 {
-
     Config cfg("opieftp");
     cfg.setGroup("Server");
     QString username, remoteServerStr, remotePathStr, password, port, temp;
     int numberOfEntries = cfg.readNumEntry("numberOfEntries",0);
     if( currentServerConfig == -1) {
+    for (int i = 1; i <= numberOfEntries; i++) {
+        temp.setNum(i);
+        cfg.setGroup("Server");
+        QString tempStr = cfg.readEntry( temp,"");
+    }
 
         temp.setNum( numberOfEntries + 1);
         cfg.setGroup("Server");
@@ -1090,7 +1096,6 @@ void OpieFtp::writeConfig()
         cfg.writeEntryCrypt( UsernameComboBox->currentText(), PasswordEdit->text());
         cfg.setGroup("Server");
         cfg.writeEntry("numberOfEntries", QString::number(numberOfEntries + 1 ));
-
     }
 }
 
