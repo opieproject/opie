@@ -86,8 +86,8 @@ adpcm_coder(indata, outdata, len, state)
     int valpred;		/* Predicted output value */
     int vpdiff;			/* Current change to valpred */
     int index;			/* Current step change index */
-    int outputbuffer;		/* place to keep previous 4-bit value */
-    int bufferstep;		/* toggle between outputbuffer/output */
+    int outputbuffer = 0;		/* place to keep previous 4-bit value */
+    int bufferstep = 0;		/* toggle between outputbuffer/output */
 
     outp = (signed char *)outdata;
     inp = indata;
@@ -187,8 +187,8 @@ adpcm_decoder(indata, outdata, len, state)
     int valpred;		/* Predicted value */
     int vpdiff;			/* Current change to valpred */
     int index;			/* Current step change index */
-    int inputbuffer;		/* place to keep next 4-bit value */
-    int bufferstep;		/* toggle between inputbuffer/input */
+    int inputbuffer = 0;		/* place to keep next 4-bit value */
+    int bufferstep = 0;		/* toggle between inputbuffer/input */
 
     outp = outdata;
     inp = (signed char *)indata;
