@@ -50,6 +50,7 @@ private:
     QString currentFileName;
     OTabWidget *tabwidget;
     KTextEditor::View *currentView;
+    bool shutDown;
 
     QToolButton *editCopy, *editCut, *editPaste, *editUndo, *editRedo,  *editFindReplace;
     QAction *viewIncFontSizes, *viewDecFontSizes, *utilSettings;

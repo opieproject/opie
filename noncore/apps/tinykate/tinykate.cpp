@@ -35,6 +35,7 @@
 TinyKate::TinyKate( QWidget *parent, const char *name, WFlags f) :
     QMainWindow( parent, name, f )
 {
+  shutDown=false;
   nextUnnamed=0;
   currentView=0;
   viewCount=0;
@@ -156,6 +157,12 @@ TinyKate::TinyKate( QWidget *parent, const char *name, WFlags f) :
 TinyKate::~TinyKate( )
 {
   qWarning("TinyKate destructor\n");
+
+  shutDown=true;
+  while (currentView!=0) {
+	slotClose();
+  }
+
   if( KGlobal::config() != 0 ) {
     qWarning("deleting KateConfig object..\n");
     delete KGlobal::config();
@@ -237,7 +244,7 @@ void TinyKate::slotClose( )
   tabwidget->removePage(dv);
   delete dv->document();
   viewCount--;
-  if (!viewCount) slotNew();
+  if ((!viewCount) && (!shutDown))  slotNew();
 }
 
 void TinyKate::slotSave() {
