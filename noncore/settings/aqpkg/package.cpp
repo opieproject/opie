@@ -70,9 +70,17 @@ QString Package :: toString()
 
 void Package :: setStatus( const QString &s )
 {
-    status = s;
+    QString state_status;
+    int two, three;
 
-    if ( status.find( "ok installed" ) != -1 )
+    status = s.simplifyWhiteSpace( );
+    
+    two = status.find( " " ); // find second column
+    three = status.find( " ", two + 1 ); // find third column
+
+    state_status = status.mid( three ).stripWhiteSpace( );
+
+    if ( state_status == "installed" )
         installed = true;
 }
 
