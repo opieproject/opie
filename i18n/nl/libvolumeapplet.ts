@@ -3,19 +3,19 @@
     <name>VolumeControl</name>
     <message>
         <source>Enable Sounds for:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zet geluid aan voor:</translation>
     </message>
     <message>
         <source>Screen Taps</source>
-        <translation type="unfinished"></translation>
+        <translation>Schermaanrakingen</translation>
     </message>
     <message>
         <source>Key Clicks</source>
-        <translation type="unfinished"></translation>
+        <translation>Toetsdrukken</translation>
     </message>
     <message>
         <source>Alarm Sound</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarmgeluid</translation>
     </message>
 </context>
 </TS>

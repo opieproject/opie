@@ -3,19 +3,19 @@
     <name>AccountEditor</name>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Waarschuwing</translation>
     </message>
     <message>
         <source>&lt;p&gt;Your signature is longer than 4 lines. This is considered inpolite by many people. You should shorten your signature.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Je handtekening is langer dan 4 regels. Dit wordt als onbeleefd gezien door veel mensen. Je zou je handtekening moeten verkorten.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Verander</translation>
     </message>
     <message>
         <source>Continue</source>
-        <translation type="unfinished"></translation>
+        <translation>Ga door</translation>
     </message>
 </context>
 <context>
@@ -26,87 +26,87 @@
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Server</translation>
     </message>
     <message>
         <source>&lt;b&gt;Port:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Poort:</translation>
     </message>
     <message>
         <source>&lt;b&gt;IMAP:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;IMAP:</translation>
     </message>
     <message>
         <source>[--]</source>
-        <translation type="unfinished"></translation>
+        <translation>[--]</translation>
     </message>
     <message>
         <source>&lt;b&gt;SMTP:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;SMTP:</translation>
     </message>
     <message>
         <source>&lt;b&gt;User:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Gebruiker:</translation>
     </message>
     <message>
         <source>&lt;b&gt;Pass:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Wachtwoord:</translation>
     </message>
     <message>
         <source>Identity</source>
-        <translation type="unfinished"></translation>
+        <translation>Identiteit</translation>
     </message>
     <message>
         <source>&lt;b&gt;Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Naam:</translation>
     </message>
     <message>
         <source>&lt;b&gt;E-Mail:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;E-Mail:</translation>
     </message>
     <message>
         <source>&lt;b&gt;Org:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Org:</translation>
     </message>
     <message>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Geavanceerd</translation>
     </message>
     <message>
         <source>Cc</source>
-        <translation type="unfinished"></translation>
+        <translation>Cc</translation>
     </message>
     <message>
         <source>Bcc</source>
-        <translation type="unfinished"></translation>
+        <translation>Bcc</translation>
     </message>
     <message>
         <source>Reply-To</source>
-        <translation type="unfinished"></translation>
+        <translation>Antwoord aan</translation>
     </message>
     <message>
         <source>&lt;b&gt;Signature:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Handtekening:</translation>
     </message>
     <message>
         <source>SSL</source>
-        <translation type="unfinished"></translation>
+        <translation>SSL</translation>
     </message>
     <message>
         <source>IMAP</source>
-        <translation type="unfinished"></translation>
+        <translation>IMAP</translation>
     </message>
     <message>
         <source>Use SSL</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik SSL</translation>
     </message>
     <message>
         <source>993</source>
-        <translation type="unfinished"></translation>
+        <translation>993</translation>
     </message>
     <message>
         <source>SMTP</source>
-        <translation type="unfinished"></translation>
+        <translation>SMTP</translation>
     </message>
 </context>
 <context>
@@ -117,7 +117,7 @@
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout</translation>
     </message>
     <message>
         <source>&lt;p&gt;You have to select at least one address entry.&lt;/p&gt;</source>
@@ -125,29 +125,29 @@
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
     <name>AddressPickerBase</name>
     <message>
         <source>Address Picker</source>
-        <translation type="unfinished"></translation>
+        <translation>Adreskiezer</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuleer</translation>
     </message>
 </context>
 <context>
     <name>Composer</name>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout</translation>
     </message>
     <message>
         <source>Please select an entry first.</source>
@@ -155,7 +155,7 @@
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Set Description</source>
@@ -175,7 +175,7 @@
     </message>
     <message>
         <source>Success</source>
-        <translation type="unfinished"></translation>
+        <translation>Succes</translation>
     </message>
     <message>
         <source>&lt;p&gt;The mail was queued successfully.&lt;/p&gt;&lt;p&gt;The queue contains </source>
@@ -210,126 +210,126 @@
     <name>ComposerBase</name>
     <message>
         <source>Compose Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Maak bericht</translation>
     </message>
     <message>
         <source>Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Mail</translation>
     </message>
     <message>
         <source>Send the mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Verstuur de mail</translation>
     </message>
     <message>
         <source>Queue the mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Zet mail in wachtrij</translation>
     </message>
     <message>
         <source>Attach a file</source>
-        <translation type="unfinished"></translation>
+        <translation>Voeg bestand bij</translation>
     </message>
     <message>
         <source>Addressbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Adresboek</translation>
     </message>
     <message>
         <source>From</source>
-        <translation type="unfinished"></translation>
+        <translation>Van</translation>
     </message>
     <message>
         <source>Reply</source>
-        <translation type="unfinished"></translation>
+        <translation>Antwoord</translation>
     </message>
     <message>
         <source>To</source>
-        <translation type="unfinished"></translation>
+        <translation>Aan</translation>
     </message>
     <message>
         <source>Cc</source>
-        <translation type="unfinished"></translation>
+        <translation>Cc</translation>
     </message>
     <message>
         <source>Bcc</source>
-        <translation type="unfinished"></translation>
+        <translation>Bcc</translation>
     </message>
     <message>
         <source>Subj.</source>
-        <translation type="unfinished"></translation>
+        <translation>Onderw.</translation>
     </message>
     <message>
         <source>Prio.</source>
-        <translation type="unfinished"></translation>
+        <translation>Prio.</translation>
     </message>
     <message>
         <source>Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Laag</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Normaal</translation>
     </message>
     <message>
         <source>High</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoog</translation>
     </message>
     <message>
         <source>Add an Attachement</source>
-        <translation type="unfinished"></translation>
+        <translation>Voeg een bijlage in</translation>
     </message>
     <message>
         <source>Remove Attachement</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder bijlage</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Omschrijving</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Hernoem</translation>
     </message>
     <message>
         <source>Change Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Verander omschrijving</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder</translation>
     </message>
 </context>
 <context>
     <name>ConfigDiag</name>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout</translation>
     </message>
     <message>
         <source>&lt;p&gt;You have to select an account first.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;U moet eerst een account selecteren.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Question</source>
-        <translation type="unfinished"></translation>
+        <translation>Vraag</translation>
     </message>
     <message>
         <source>&lt;p&gt;Do you relly want to delete the selected account?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Wilt u het geselecteerde account echt verwijderen?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nee</translation>
     </message>
 </context>
 <context>

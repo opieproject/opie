@@ -3,38 +3,38 @@
     <name>QObject</name>
     <message>
         <source>Todolist plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>Te Doen-lijst plugin</translation>
     </message>
     <message>
         <source>There is &lt;b&gt; 1&lt;/b&gt; active task:  &lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Er is &lt;b&gt; 1&lt;/b&gt; actieve taak:  &lt;br&gt;</translation>
     </message>
     <message>
         <source>There are &lt;b&gt; %1&lt;/b&gt; active tasks: &lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Er zijn &lt;b&gt; %1&lt;/b&gt; achtieve taken:  &lt;br&gt;</translation>
     </message>
     <message>
         <source>No active tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen actieve taken</translation>
     </message>
 </context>
 <context>
     <name>TodolistPluginConfig</name>
     <message>
         <source>tasks shown </source>
-        <translation type="unfinished"></translation>
+        <translation>weergegeven taken</translation>
     </message>
     <message>
         <source>Set the maximum number of task that should be shown</source>
-        <translation type="unfinished"></translation>
+        <translation>Stel het maximum aantal te tonen taken in</translation>
     </message>
     <message>
         <source>Clip line after X chars</source>
-        <translation type="unfinished"></translation>
+        <translation>Breek af na X tekens</translation>
     </message>
     <message>
         <source>After how many chars should be the info about the task be cut off</source>
-        <translation type="unfinished"></translation>
+        <translation>Na hoeveel tekens moet de info over de taak worden afgebroken</translation>
     </message>
 </context>
 </TS>

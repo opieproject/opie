@@ -3,7 +3,7 @@
     <name>AddressBookPluginConfig</name>
     <message>
         <source>Max Lines: </source>
-        <translation type="unfinished"></translation>
+        <translation>Max lijnen:</translation>
     </message>
     <message>
         <source>Set the maximum number of lines that should be shown for each anniversaries/birthdays</source>
@@ -19,7 +19,7 @@
     </message>
     <message>
         <source>Days look ahead: </source>
-        <translation type="unfinished"></translation>
+        <translation>Dagen vooruitzien:</translation>
     </message>
     <message>
         <source>How many days we should search forward</source>
@@ -52,7 +52,7 @@ Color if below </source>
     </message>
     <message>
         <source> days: </source>
-        <translation type="unfinished"></translation>
+        <translation>dagen:</translation>
     </message>
     <message>
         <source>This urgent color will be used if we are close to the event !</source>
@@ -67,7 +67,7 @@ Color if below </source>
     <name>QObject</name>
     <message>
         <source>AddressBook plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>Adresboek plugin</translation>
     </message>
     <message>
         <source>Next birthdays in &lt;b&gt; %1 &lt;/b&gt; days:</source>

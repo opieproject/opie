@@ -3,22 +3,22 @@
     <name>QObject</name>
     <message>
         <source>StockTicker plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>Beurskoers plugin</translation>
     </message>
 </context>
 <context>
     <name>StockTickerPluginWidget</name>
     <message>
         <source>Connection refused.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbinding geweigerd.</translation>
     </message>
     <message>
         <source>Could not find server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan server niet vinden.</translation>
     </message>
     <message>
         <source>Socket read error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestandsleesfout.</translation>
     </message>
 </context>
 <context>

@@ -3,18 +3,18 @@
     <name>DateBookEvent</name>
     <message>
         <source>[with alarm]</source>
-        <translation type="unfinished"></translation>
+        <translation>[met alarm]</translation>
     </message>
     <message>
         <source>note</source>
-        <translation type="unfinished"></translation>
+        <translation>notitie</translation>
     </message>
 </context>
 <context>
     <name>DatebookPluginConfig</name>
     <message>
         <source>Show location</source>
-        <translation type="unfinished"></translation>
+        <translation>Laat locatie zien</translation>
     </message>
     <message>
         <source>Check this if the location of an appointment should be shown for each one</source>
@@ -22,7 +22,7 @@
     </message>
     <message>
         <source>Show notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Laat notitie zien</translation>
     </message>
     <message>
         <source>Check this if the note attached to an appointment should be shown for each one</source>
@@ -42,7 +42,10 @@
 appointment
 should be 
 shown?</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoeveel
+afspraken
+moeten worden
+getoond?</translation>
     </message>
     <message>
         <source>How many appointments should be shown maximal. In chronical order</source>
@@ -50,7 +53,7 @@ shown?</source>
     </message>
     <message>
         <source>How many more days</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoeveel meer dagen</translation>
     </message>
     <message>
         <source>How many more days should be in the range</source>
@@ -58,26 +61,26 @@ shown?</source>
     </message>
     <message>
         <source> day(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>dag(en)</translation>
     </message>
     <message>
         <source>only today</source>
-        <translation type="unfinished"></translation>
+        <translation>alleen vandaag</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Datebook plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>Agendaplugin</translation>
     </message>
     <message>
         <source>No more appointments today</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen afspraken meer vandaag</translation>
     </message>
     <message>
         <source>No appointments today</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen afspraken vandaag</translation>
     </message>
 </context>
 </TS>

@@ -189,25 +189,25 @@
     <name>PackageListView</name>
     <message>
         <source>Package</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakket</translation>
     </message>
 </context>
 <context>
     <name>PackageManagerSettings</name>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw</translation>
     </message>
 </context>
 <context>
     <name>PackageManagerSettingsBase</name>
     <message>
         <source>Package Servers</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakketservers</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Instellingen</translation>
     </message>
     <message>
         <source>Install destination:</source>
@@ -223,35 +223,35 @@
     </message>
     <message>
         <source>Servers</source>
-        <translation type="unfinished"></translation>
+        <translation>Servers</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam:</translation>
     </message>
     <message>
         <source>URL:</source>
-        <translation type="unfinished"></translation>
+        <translation>URL:</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw</translation>
     </message>
     <message>
         <source>Destinations</source>
-        <translation type="unfinished"></translation>
+        <translation>Doel</translation>
     </message>
     <message>
         <source>link to /</source>
-        <translation type="unfinished"></translation>
+        <translation>link naar /</translation>
     </message>
     <message>
         <source>Remove links</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder links</translation>
     </message>
     <message>
         <source>volatile</source>
@@ -259,7 +259,7 @@
     </message>
     <message>
         <source>removeable</source>
-        <translation type="unfinished"></translation>
+        <translation>verwijderbaar</translation>
     </message>
 </context>
 <context>
