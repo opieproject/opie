@@ -547,7 +547,8 @@ UIDArray OPimContactAccessBackend_SQL::queryByExample ( const UIDArray& uidlist,
 	    qu += " ) AND ";
     }
 
-    QString searchQuery ="";
+    QString searchQuery = "";
+    QString temp_searchQuery = "";
 
     QDate startDate;
 
@@ -585,20 +586,29 @@ UIDArray OPimContactAccessBackend_SQL::queryByExample ( const UIDArray& uidlist,
                     endDate = new QDate( query.anniversary() );
 
                 if ( settings & OPimContactAccess::DateDiff ) {
-                    searchQuery += QString( " (\"%1\" <= '%2-%3-%4\' AND \"%5\" >= '%6-%7-%8')" )
+		    // To handle datediffs correctly, we need to remove the year information from
+		    // the birthday and anniversary. 
+		    // To do this efficiently, we will create a temporary table which contains the
+		    // information we need and do the query on it. 
+		    // This table is just visible for this process and will be removed
+		    // automatically after using.
+		    temp_searchQuery = "CREATE TEMP TABLE bs ( uid, \"Birthday\", \"Anniversary\" );";
+		    temp_searchQuery += "INSERT INTO bs SELECT uid,substr(\"Birthday\", 6, 10),substr(\"Anniversary\", 6, 10) FROM addressbook WHERE ( \"Birthday\" != '' OR \"Anniversary\" != '' );";
+
+                    temp_searchQuery += QString( "SELECT uid FROM bs WHERE (\"%1\" <= '%2-%3\' AND \"%4\" >= '%5-%6')" )
                         .arg( *it )
-                        .arg( QString::number( endDate->year() ).rightJustify( 4, '0' ) )
+			    //.arg( QString::number( endDate->year() ).rightJustify( 4, '0' ) )
                         .arg( QString::number( endDate->month() ).rightJustify( 2, '0' ) )
                         .arg( QString::number( endDate->day() ).rightJustify( 2, '0' ) )
                         .arg( *it )
-                        .arg( QString::number( startDate.year() ).rightJustify( 4, '0' ) )
+			    //.arg( QString::number( startDate.year() ).rightJustify( 4, '0' ) )
                         .arg( QString::number( startDate.month() ).rightJustify( 2, '0' ) )
                         .arg( QString::number( startDate.day() ).rightJustify( 2, '0' ) ) ;
                 }
 
                 if ( settings & OPimContactAccess::DateYear ){
-                    if ( settings & OPimContactAccess::DateDiff )
-                        searchQuery += " AND";
+                    // if ( settings & OPimContactAccess::DateDiff )
+		    //     searchQuery += " AND";
 
                     searchQuery += QString( " (\"%1\" LIKE '%2-%')" )
                         .arg( *it )
@@ -643,11 +653,20 @@ UIDArray OPimContactAccessBackend_SQL::queryByExample ( const UIDArray& uidlist,
 
         delete endDate;
     }
-    // Skip trailing "AND"
-//  if ( isAnyFieldSelected )
-//      qu = qu.left( qu.length() - 4 );
 
-    qu += searchQuery;
+    // The following is very ugly! (eilers)
+    if ( !temp_searchQuery.isEmpty() && !searchQuery.isEmpty() ){
+	    // If we use DateDiff, we have to intersect two queries.
+	    qu = temp_searchQuery + QString( " INTERSECT " ) + qu + searchQuery;
+    } else if ( temp_searchQuery.isEmpty() && !searchQuery.isEmpty() ){
+	    qu += searchQuery;
+    } else if ( !temp_searchQuery.isEmpty() && searchQuery.isEmpty() ){
+	    // This will cause wrong results!! Uid filter is not used here!
+	    qu = temp_searchQuery;
+    } else if ( temp_searchQuery.isEmpty() && searchQuery.isEmpty() ){
+	    UIDArray empty;
+	    return empty;
+    } 
 
     odebug << "queryByExample query: " << qu << "" << oendl;
 
@@ -660,6 +679,13 @@ UIDArray OPimContactAccessBackend_SQL::queryByExample ( const UIDArray& uidlist,
     }
 
     UIDArray list = extractUids( res );
+
+    // Remove temp table if created
+    if ( !temp_searchQuery.isEmpty( ) ){
+	    qu = "DROP TABLE bs";
+	    OSQLRawQuery raw( qu );
+	    OSQLResult res = m_driver->query( &raw );
+    }
 
     return list;
 }

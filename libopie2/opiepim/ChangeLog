@@ -1,4 +1,6 @@
-2005-03.19 Stefan Eilers <stefan@eilers-online.net>
+2005-03-20 Stefan Eilers <stefan@eilers-online.net>
+	* #1608 Quickfix for problem with DateDiff on SQL backend. I have to rethink this solution, but due to the short time, this should work.  
+2005-03-19 Stefan Eilers <stefan@eilers-online.net>
 	* Minor update for sorted(). Now ignoring any category search if "DoNotShowWithCategory" filter is activated.
 	* Fixing uninitialized member variable, caused crash of backend
 2005-03-18 Stefan Eilers <stefan@eilers-online.net>
