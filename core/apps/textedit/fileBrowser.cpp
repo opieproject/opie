@@ -12,7 +12,7 @@
 **
 ****************************************************************************/
 #include "fileBrowser.h"
-#include "inputDialog.h"
+//#include "inputDialog.h"
 
 #include <qpe/config.h>
 #include <qpe/resource.h>
@@ -553,3 +553,24 @@ void fileBrowser::fillCombo(const QString &currentPath) {
         dirPathCombo->insertStringList( dirPathStringList,-1);
     }
 }
+
+
+InputDialog::InputDialog( QWidget* parent,  const char* name, bool modal, WFlags fl )
+    : QDialog( parent, name, modal, fl )
+{
+    if ( !name )
+  setName( "InputDialog" );
+    resize( 234, 50 ); 
+    setMaximumSize( QSize( 240, 50 ) );
+    setCaption( tr(name ) );
+
+    LineEdit1 = new QLineEdit( this, "LineEdit1" );
+    LineEdit1->setGeometry( QRect( 10, 10, 216, 22 ) ); 
+}
+
+InputDialog::~InputDialog()
+{
+    inputText= LineEdit1->text();
+  
+}
+
