@@ -1,4 +1,3 @@
-#include <qfileinfo.h>
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -6,7 +5,6 @@
 #include <fcntl.h>
 #include <string.h>
 #include <qdir.h>
-#include <qtextstream.h>
 
 #include "mailwrapper.h"
 #include "logindialog.h"

@@ -3,7 +3,6 @@
 #include <qheader.h>
 #include <qtimer.h>
 
-#include <qpe/resource.h>
 
 #include "defines.h"
 #include "mainwindow.h"

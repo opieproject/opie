@@ -1,5 +1,4 @@
 #include <qt.h>
-#include <qtabwidget.h>
 
 #include "defines.h"
 #include "editaccounts.h"

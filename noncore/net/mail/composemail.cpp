@@ -1,16 +1,9 @@
 #include <qt.h>
-#include <qcombobox.h>
-#include <qmessagebox.h>
-#include <qlistview.h>
-#include <qtabwidget.h>
-#include <qmultilineedit.h>
-#include <qregexp.h>
 
 #include <opie/ofiledialog.h>
 #include <qpe/resource.h>
 
 #include "composemail.h"
-#include "mailwrapper.h"
 
 ComposeMail::ComposeMail( Settings *s, QWidget *parent, const char *name, bool modal, WFlags flags )
     : ComposeMailUI( parent, name, modal, flags )
