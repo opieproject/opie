@@ -17,49 +17,86 @@ What is ready:
 
 libqpe
 libopie1
+libopie2/opiedb
 pim-applications (addressbook, todolist, datebook, today)
 A lot of applications and plugins which are not platform specific.
 
 What will follow soon:
 
-libopie2
+libopie2 
 
-Remember: A lot of configuration-settings are not tested (as for instance 
-the quicklauncher) and might fail to compile. 
-If you want to avoid misconfigurations, you may want to start with
-the config-file in this directory. Just copy "config_macosx" to $OPIEDIR/.config
-to get a working configuration to start with.
-
-(The missing apps/plugins will be ported on demand.)
 
 How to compile Opie for MacOS-X:
 -------------------------------
 
 Before compiling for MacOS-X, you need the following:
 
-1. X11-Server (Provided by Apple)
-2. QT-2.3.2 for X11
-3. QT/E-2.3.7
-4. Patches for QT-2.3.2 for MacOSX
-5. Patches for QT/E-2.3.7 for MacOSX
+1. X11-Server+X11SDK 			(Provided by Apple)
+2. QT-2.3.2 for X11 			(Provided by Trolltech)
+3. QT/E-2.3.7       			(Provided by Trolltech)
+4. Patches for QT-2.3.2 for MacOSX   	(take the one in this directory !)
+5. Patches for QT/E-2.3.7 for MacOSX 	(take the one, provided in $OPIEDIR/qt)
 
-Please follow the instructions by http://www.lucid-cake.net/osx_qpe/index_de.html
-how to create a buildsystem for your Mac.
-What is different to the previous desciption: 
-You don't need Qtopia ! 
-It is recommended to use QT/E in version 2.3.7 instead of 2.3.5 as described.
 The Patch for QT/E for Opie, including all other opie-patches is available in the
 qt-directory ($OPIEDIR/qt) and is called "qte237-all-macosx.patch".
+The Patch for QT-2.3.2 is provided in this directory..
 
 If your buildsystem is working correctly, you should be able to build
-opie. You have to enter "make menuconfig" and set 
-"Build Parameters"->"Target Machine"->"Mac OS X (DARWIN)"
-activate the platform specific changes.
+opie. 
+
+HOWTO COMPILE:
+-------------
+
+Compile QT-2.3.2:
+
+Got to into the basic directory of qt-2.3.2 and enter 
+export QTDIR=`pwd`
+export DYLD_LIBRARY_PATH=$QTDIR/lib
+./configure -no-xft -platform darwin-g++
+make
+After compiling successful (I hope) you need qvfb:
+cd tools/qvfb
+make
+
+Compile QT/E-2.3.7:
+
+Got to into the basic directory of qt-2.3.2 and enter 
+export QTDIR=`pwd`
+export QPEDIR=$QTDIR
+export DYLD_LIBRARY_PATH=$QTDIR/lib
+./configure -platform darwin-generic-g++ -qconfig qpe -qvfb -depths 4,8,16,32
+make
+
+Compile OPIE:
+Set your environment
+(You may use the script "set_vars.sh" to set your variables successfully !
+BUT: You have to customize this script for YOUR needs !!)
+Go into the basic directory of Opie
+make menuconfig" 
+set "Build Parameters"->"Target Machine"->"Mac OS X (DARWIN)" to activate the platform specific changes.
+save and exit the menuconfig app
+make
 
 You will see that a lot of applications and plugins/applets will not compile
 successfully, due to the fact that they are not ported to this platform.
 You may disable them to be able to compile the rest.
 
+Remember: A lot of configuration-settings are not tested and might fail to compile. 
+If you want to avoid misconfigurations, you may want to start with
+the config-file in this directory. Just copy "config_macosx" to $OPIEDIR/.config
+to get a working configuration to start with.
+
+(The missing apps/plugins will be ported on demand.)
+
+
+SPECIAL INFORMATION FOR USERS OF PANTHER
+----------------------------------------
+I had a lot of problems compiling qt-2.3.2 and QT/E-2.3.7 on Panther. The
+new release of the X-Server causes a lot of trouble.. 
+
+To compile QT-2.3.2 successfully, you have to disable support of freetype fonts and you have
+to use the patch in this directory, otherwise your wont't be able to compile !
+Use the param "-no-xft" for the configure script to disable this function !
 
 Information for Developers:
 ---------------------------
