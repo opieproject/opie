@@ -29,7 +29,7 @@ void DCCTransfer::cancel()
     if(m_socket)
         m_socket->close();
     
-    emit(finished(DCCTransfer::SelfAborted));
+    emit(finished(this, DCCTransfer::SelfAborted));
 }
 
 QString DCCTransfer::filename()
