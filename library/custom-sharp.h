@@ -18,14 +18,7 @@
 **
 **********************************************************************/
 
-#define QPE_NEED_CALIBRATION
-#define QPE_OWNAPM
-#define QPE_HAVE_TOGGLELIGHT
 #define QPE_NOCIBAUD
-#define QPE_STARTMENU
-#define OPIE_NEW_MALLOC
-#define USE_REALTIME_AUDIO_THREAD
-#define OPIE_NO_SOUND_PCM_READ_BITS
 
 #include <asm/sharp_apm.h>
 #ifndef APM_IOC_BATTERY_BACK_CHK
