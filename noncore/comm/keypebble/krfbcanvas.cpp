@@ -169,7 +169,11 @@ void KRFBCanvas::sendCtlAltDel( void)
 
 		qDebug("Here");
   if ( loggedIn_ ) {
-    connection_->buffer()->keyPressEvent( &QKeyEvent(QEvent::KeyPress,Qt::Key_Delete, 0x7f,ControlButton|AltButton));
- //   connection_->buffer()->keyPressEvent( &QKeyEvent(QEvent::KeyRelease,Qt::Key_Delete, 0x7f,ControlButton|AltButton));
+    connection_->buffer()->keyPressEvent( &QKeyEvent(QEvent::KeyPress,Qt::Key_Control, 0,0));
+    connection_->buffer()->keyPressEvent( &QKeyEvent(QEvent::KeyPress,Qt::Key_Alt, 0,0));
+		connection_->buffer()->keyPressEvent( &QKeyEvent(QEvent::KeyPress,Qt::Key_Delete, 0,0));
+		connection_->buffer()->keyPressEvent( &QKeyEvent(QEvent::KeyRelease,Qt::Key_Control, 0,0));
+		connection_->buffer()->keyPressEvent( &QKeyEvent(QEvent::KeyRelease,Qt::Key_Alt, 0,0));
+    connection_->buffer()->keyPressEvent( &QKeyEvent(QEvent::KeyRelease,Qt::Key_Delete, 0,0));
 	}
 }
