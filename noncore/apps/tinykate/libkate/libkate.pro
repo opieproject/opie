@@ -1,6 +1,5 @@
 TEMPLATE	= lib
 CONFIG		= qt warn_on release
-DESTDIR		= $(OPIEDIR)/bin
 HEADERS		= microkde/kapplication.h \
 		  microkde/kconfig.h \
                   microkde/kdebug.h \
@@ -87,8 +86,5 @@ TARGET		= tinykate
 
 INCLUDEPATH += $(OPIEDIR)/include
 DESTDIR      = $(OPIEDIR)/lib$(PROJMAK)
-
-
-
 
 include ( ../../../../include.pro )
