@@ -152,7 +152,7 @@ void Today::loadPlugins() {
         for ( tit = pluginList.begin(); tit != pluginList.end(); ++tit ) {
             if ( (*tit).excludeRefresh ) {
                 pluginListRefreshExclude.insert( (*tit).name , (*tit) );
-                qDebug( "Found an plug that does not want refresh feature" );
+                qDebug( "Found an plugin that does not want refresh feature" );
             } else {
                 (*tit).library->unload();
                 delete (*tit).library;
@@ -182,8 +182,16 @@ void Today::loadPlugins() {
             // If plugin is exludes from refresh, get it in the list again here.
 
             if ( pluginListRefreshExclude.contains( (*it) ) ) {
-                tempList.insert( pluginListRefreshExclude[(*it)].name, pluginListRefreshExclude[(*it)] );
-                qDebug( "TEST2 " +  pluginListRefreshExclude[(*it)].name );
+
+                // if its not in allApplets list, add it to a layout
+                if ( !m_allApplets.contains( pluginListRefreshExclude[(*it)].name ) ) {
+                    qDebug( "NUGASDA" );
+                    layout->addWidget( pluginListRefreshExclude[(*it)].guiBox );
+                    pluginList.append( pluginListRefreshExclude[(*it)] );
+                } else {
+                    tempList.insert( pluginListRefreshExclude[(*it)].name, pluginListRefreshExclude[(*it)] );
+                    qDebug( "TEST2 " +  pluginListRefreshExclude[(*it)].name );
+                }
             } else {
 
                 TodayPlugin plugin;
@@ -197,6 +205,7 @@ void Today::loadPlugins() {
                 } else {
                     plugin.active = false;
                 }
+
                 plugin.guiPart = plugin.iface->guiPart();
                 plugin.excludeRefresh = plugin.guiPart->excludeFromRefresh();
 
@@ -229,6 +238,12 @@ void Today::loadPlugins() {
 
                 // on first start the list is off course empty
                 if ( m_allApplets.isEmpty() ) {
+                    layout->addWidget( plugin.guiBox );
+                    pluginList.append( plugin );
+                }
+
+                // if plugin is not yet in the list, add it to the layout too
+                if ( !m_allApplets.contains( plugin.name ) ) {
                     layout->addWidget( plugin.guiBox );
                     pluginList.append( plugin );
                 }
