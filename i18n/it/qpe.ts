@@ -170,10 +170,6 @@ Please charge the back-up battery.</source>
 <context>
     <name>ShutdownImpl</name>
     <message>
-        <source>Shut down...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Terminate</source>
         <translation type="unfinished"></translation>
     </message>
@@ -200,6 +196,10 @@ These termination options are provided primarily for use while developing and te
     </message>
     <message>
         <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shutdown...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

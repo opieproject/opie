@@ -58,25 +58,6 @@ Hukommelse er kategoriseret som følgende:
     </message>
 </context>
 <context>
-    <name>ModulesDetail</name>
-    <message>
-        <source>Select a command here and then click the Send button to the right to send the command.</source>
-        <translation>Vælg en kommando her og klik på Send-knappen til højre for at sende kommandoen.</translation>
-    </message>
-    <message>
-        <source>This area shows detailed information about this module.</source>
-        <translation>Dette område viser detaljeret information om dette modul.</translation>
-    </message>
-    <message>
-        <source>Send</source>
-        <translation>Send</translation>
-    </message>
-    <message>
-        <source>Click here to send the selected command to this module.</source>
-        <translation>Klik her for at sende den valgte kommando til dette modul.</translation>
-    </message>
-</context>
-<context>
     <name>ModulesInfo</name>
     <message>
         <source>Module</source>
@@ -102,6 +83,27 @@ Click and hold on a module to see additional information about the module, or to
 
 Klik og hold på et modul for at se yderligere information om modulet eller for at fjerne det.</translation>
     </message>
+    <message>
+        <source>Select a command here and then click the Send button to the right to send the command to module selected above.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation type="unfinished">Send</translation>
+    </message>
+    <message>
+        <source>Click here to send the selected command to the module selected above.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This area shows detailed information about this module.</source>
+        <translation type="unfinished">Dette område viser detaljeret information om dette modul.</translation>
+    </message>
+    <message>
+        <source>You really want to execute
+</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MountInfo</name>
@@ -116,25 +118,6 @@ Klik og hold på et modul for at se yderligere information om modulet eller for 
     <message>
         <source>Available (%1 kB)</source>
         <translation>Fri (%1 kB)</translation>
-    </message>
-</context>
-<context>
-    <name>ProcessDetail</name>
-    <message>
-        <source>Select a signal here and then click the Send button to the right to send to this process.</source>
-        <translation>Vælg et signal her og klik på Send-knappen til højre for at sende til denne proces.</translation>
-    </message>
-    <message>
-        <source>This area shows detailed information about this process.</source>
-        <translation>Dette område viser detaljeret information omkring denne proces.</translation>
-    </message>
-    <message>
-        <source>Send</source>
-        <translation>Send</translation>
-    </message>
-    <message>
-        <source>Click here to send the selected signal to this process.</source>
-        <translation>Klik her for at sende det valgte signal til denne proces.</translation>
     </message>
 </context>
 <context>
@@ -163,6 +146,27 @@ Click and hold on a process to see additional information about the process, or 
 
 Klik og hold på en proces for at se yderligere information om processen eller for at sende et signal til den.</translation>
     </message>
+    <message>
+        <source>Select a signal here and then click the Send button to the right to send to this process.</source>
+        <translation type="unfinished">Vælg et signal her og klik på Send-knappen til højre for at sende til denne proces.</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation type="unfinished">Send</translation>
+    </message>
+    <message>
+        <source>Click here to send the selected signal to this process.</source>
+        <translation type="unfinished">Klik her for at sende det valgte signal til denne proces.</translation>
+    </message>
+    <message>
+        <source>This area shows detailed information about this process.</source>
+        <translation type="unfinished">Dette område viser detaljeret information omkring denne proces.</translation>
+    </message>
+    <message>
+        <source>You really want to send
+</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>StorageInfo</name>
@@ -189,14 +193,6 @@ Klik og hold på en proces for at se yderligere information om processen eller f
     <message>
         <source>Int. Storage </source>
         <translation>Int. lager </translation>
-    </message>
-    <message>
-        <source>Int. Storage /dev/mtdblock/ </source>
-        <translation>Int. lager /dev/mtdblock/ </translation>
-    </message>
-    <message>
-        <source>Int. Storage /dev/mtdblock </source>
-        <translation>Int. lager /dev/mtdblock </translation>
     </message>
     <message>
         <source>CF</source>
@@ -233,6 +229,18 @@ Klik og hold på en proces for at se yderligere information om processen eller f
     <message>
         <source>This graph represents how much memory is currently used of the built-in memory (i.e. Flash memory) on this handheld device.</source>
         <translation>Denne graf repræsenterer hvor meget hukommelse der iøjeblikket er i brug af den indbyggede hukommelse (f.eks. Flash hukommelsen) på denne håndholdte enhed.</translation>
+    </message>
+    <message>
+        <source>RAM disk</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RA</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used of the temporary RAM disk.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

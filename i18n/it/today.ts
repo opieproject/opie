@@ -81,10 +81,6 @@ resume?(new line)
         <translation>Varie</translation>
     </message>
     <message>
-        <source>Check a checkbox to activate/deactivate a plugin ore use the arrow buttons on the right to change the appearance order</source>
-        <translation>Clicca qui per attivare/disattivare il plugin o utilizza le frecce direzionali sulla destra per modificare l&apos;ordine di visualizzazione</translation>
-    </message>
-    <message>
         <source>Check this if today should be autostarted on resume.</source>
         <translation>Clicca qui se l&apos;applicazione deve partire automaticamente al riavvio.</translation>
     </message>
@@ -114,6 +110,10 @@ resume?(new line)
     </message>
     <message>
         <source>never</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -52,10 +52,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Check a checkbox to activate/deactivate a plugin ore use the arrow buttons on the right to change the appearance order</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Move Up</source>
         <translation type="unfinished"></translation>
     </message>
@@ -111,6 +107,10 @@ resume?
     </message>
     <message>
         <source>Misc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

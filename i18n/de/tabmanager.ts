@@ -63,7 +63,7 @@ still in the group.</source>
     </message>
     <message>
         <source>Application</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Programm</translation>
     </message>
 </context>
 <context>

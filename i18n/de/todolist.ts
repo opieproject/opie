@@ -176,20 +176,16 @@ Trozdem beenden?</translation>
         <translation>Tabellenansicht</translation>
     </message>
     <message>
-        <source> day(s)</source>
-        <translation>Tag(e)</translation>
-    </message>
-    <message>
         <source>None</source>
         <translation>Keine</translation>
+    </message>
+    <message>
+        <source>%1 day(s)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>TaskEditorAdvanced</name>
-    <message>
-        <source>Form2</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>State:</source>
         <translation>Status:</translation>
@@ -252,10 +248,6 @@ Trozdem beenden?</translation>
 </context>
 <context>
     <name>TaskEditorAlarms</name>
-    <message>
-        <source>Form3</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>empty</source>
         <translation>leer</translation>

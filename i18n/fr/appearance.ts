@@ -119,16 +119,98 @@
         <translation type="unfinished">Effacer le thème</translation>
     </message>
     <message>
-        <source>Do you really want to delete
-</source>
-        <translation type="unfinished">Voulez-vous vraiment effacer</translation>
-    </message>
-    <message>
         <source>Unable to delete current scheme.</source>
         <translation type="unfinished">Impossible d&apos;effacer le thème actuel.</translation>
     </message>
     <message>
         <source>&lt;new&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Styles control the way items such as buttons and scroll bars appear in all applications.
+
+Click here to select an available style.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to configure the currently selected style.
+
+Note:  This option is not available for all styles.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Window decorations control the way the application title bar and its buttons appear.
+
+Click here to select an available decoration.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select the desired name, style and size of the default font applications will use.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color schemes are a collection of colors which are used for various parts of the display.
+
+Click here to select an available scheme.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to change the colors in the current color scheme.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to delete the color scheme selected in the list to the left.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to name and save the current color scheme.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to allow all applications to use global appearance settings.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If some applications do not display correctly with the global appearance settings, certain features can be turned off for that application.
+
+This area allows you to select an application and which settings you wish to disable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to add an application to the list above.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to delete the currently selected application.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to move the currently selected application up in the list.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to move the currently selected application down in the list.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to select a desired style for tabbed dialogs (such as this application). The styles available are:
+
+1. Tabs - normal tabs with text labels only
+2. Tabs w/icons - tabs with icons for each tab, text label only appears on current tab
+3. Drop down list - a vertical listing of tabs
+4. Drop down list w/icons - a vertical listing of tabs with icons</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here so that tabs appear at the top of the window.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here so that tabs appear at the bottom of the window.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is a preview window.  Look here to see your new appearance as options are changed.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -137,6 +219,10 @@
     <message>
         <source>Edit scheme</source>
         <translation>Editer le thème</translation>
+    </message>
+    <message>
+        <source>Click here to select a color for: </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

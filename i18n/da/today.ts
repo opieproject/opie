@@ -52,10 +52,6 @@
         <translation>Hent hvilke plugins i hvilken rækkefølge:</translation>
     </message>
     <message>
-        <source>Check a checkbox to activate/deactivate a plugin ore use the arrow buttons on the right to change the appearance order</source>
-        <translation>Afkryds firkanten for at aktivere/deaktivere det pågældende plugin eller brug piletasterne på højre side for at ændre rækkefølgen det vises i</translation>
-    </message>
-    <message>
         <source>Move Up</source>
         <translation>Flyt Op</translation>
     </message>
@@ -114,6 +110,10 @@ ved opvågning?
     <message>
         <source>Misc</source>
         <translation>Blandet</translation>
+    </message>
+    <message>
+        <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

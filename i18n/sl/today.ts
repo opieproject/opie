@@ -78,10 +78,6 @@ resume?
         <translation type="unfinished">Različno</translation>
     </message>
     <message>
-        <source>Check a checkbox to activate/deactivate a plugin ore use the arrow buttons on the right to change the appearance order</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Check this if today should be autostarted on resume.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -111,6 +107,10 @@ resume?
     </message>
     <message>
         <source>never</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

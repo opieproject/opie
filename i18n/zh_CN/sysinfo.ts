@@ -52,25 +52,6 @@ Memory is categorized as follows:
     </message>
 </context>
 <context>
-    <name>ModulesDetail</name>
-    <message>
-        <source>Send</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select a command here and then click the Send button to the right to send the command.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This area shows detailed information about this module.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to send the selected command to this module.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>ModulesInfo</name>
     <message>
         <source>Module</source>
@@ -94,6 +75,27 @@ Memory is categorized as follows:
 Click and hold on a module to see additional information about the module, or to unload it.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Select a command here and then click the Send button to the right to send the command to module selected above.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to send the selected command to the module selected above.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This area shows detailed information about this module.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You really want to execute
+</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MountInfo</name>
@@ -107,25 +109,6 @@ Click and hold on a module to see additional information about the module, or to
     </message>
     <message>
         <source> : %1 kB</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ProcessDetail</name>
-    <message>
-        <source>Send</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select a signal here and then click the Send button to the right to send to this process.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This area shows detailed information about this process.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to send the selected signal to this process.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -153,6 +136,27 @@ Click and hold on a module to see additional information about the module, or to
 Click and hold on a process to see additional information about the process, or to send a signal to it.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Select a signal here and then click the Send button to the right to send to this process.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to send the selected signal to this process.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This area shows detailed information about this process.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You really want to send
+</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>StorageInfo</name>
@@ -178,14 +182,6 @@ Click and hold on a process to see additional information about the process, or 
     </message>
     <message>
         <source>Int. Storage </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Int. Storage /dev/mtdblock/ </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Int. Storage /dev/mtdblock </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -222,6 +218,18 @@ Click and hold on a process to see additional information about the process, or 
     </message>
     <message>
         <source>This graph represents how much memory is currently used of the built-in memory (i.e. Flash memory) on this handheld device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RAM disk</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RA</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used of the temporary RAM disk.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

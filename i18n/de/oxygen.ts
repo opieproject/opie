@@ -159,7 +159,7 @@
     </message>
     <message>
         <source>Oxygen</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Oxygen</translation>
     </message>
     <message>
         <source>Fluorine</source>

@@ -177,20 +177,16 @@ Izhod?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source> day(s)</source>
+        <source>None</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>None</source>
+        <source>%1 day(s)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>TaskEditorAdvanced</name>
-    <message>
-        <source>Form2</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>State:</source>
         <translation type="unfinished"></translation>
@@ -253,10 +249,6 @@ Izhod?</translation>
 </context>
 <context>
     <name>TaskEditorAlarms</name>
-    <message>
-        <source>Form3</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>empty</source>
         <translation type="unfinished"></translation>

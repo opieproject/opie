@@ -147,12 +147,6 @@
         <translation>A traduire</translation>
     </message>
     <message>
-        <source> already exists
-Do you really want to delete it?</source>
-        <translation>existe déjà
-Souhaitez-vous vraiment l&apos;effacer ?</translation>
-    </message>
-    <message>
         <source>Copy </source>
         <translation>Copier</translation>
     </message>
@@ -228,6 +222,11 @@ and is licensed by the GPL</source>
     <message>
         <source>
 exists. Ok to overwrite?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> already exists.
+Do you really want to delete it?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

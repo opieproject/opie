@@ -101,6 +101,10 @@ Mantenga pulsado un módulo para ver información adicional sobre el módulo, o 
         <translation>Seguro que quiere ejecutar
 </translation>
     </message>
+    <message>
+        <source>This area shows detailed information about this module.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MountInfo</name>
@@ -115,25 +119,6 @@ Mantenga pulsado un módulo para ver información adicional sobre el módulo, o 
     <message>
         <source>Available (%1 kB)</source>
         <translation>Libre (%1 kB)</translation>
-    </message>
-</context>
-<context>
-    <name>ProcessDetail</name>
-    <message>
-        <source>Send</source>
-        <translation>Enviar</translation>
-    </message>
-    <message>
-        <source>Select a signal here and then click the Send button to the right to send to this process.</source>
-        <translation>Seleccione aquí una señal y luego pulse el botón Enviar de la derecha para enviárselo a este proceso.</translation>
-    </message>
-    <message>
-        <source>This area shows detailed information about this process.</source>
-        <translation>Esta área muestra información detallada sobre este proceso.</translation>
-    </message>
-    <message>
-        <source>Click here to send the selected signal to this process.</source>
-        <translation>Pulse aquí para enviar la señal seleccionada a este proceso.</translation>
     </message>
 </context>
 <context>
@@ -161,6 +146,27 @@ Click and hold on a process to see additional information about the process, or 
         <translation>Esta es una lista de todos los procesos de este dispositivo.
 
 Mantenga pulsado un proceso para ver información adicional, o para enviarle una señal.</translation>
+    </message>
+    <message>
+        <source>Select a signal here and then click the Send button to the right to send to this process.</source>
+        <translation type="unfinished">Seleccione aquí una señal y luego pulse el botón Enviar de la derecha para enviárselo a este proceso.</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation type="unfinished">Enviar</translation>
+    </message>
+    <message>
+        <source>Click here to send the selected signal to this process.</source>
+        <translation type="unfinished">Pulse aquí para enviar la señal seleccionada a este proceso.</translation>
+    </message>
+    <message>
+        <source>This area shows detailed information about this process.</source>
+        <translation type="unfinished">Esta área muestra información detallada sobre este proceso.</translation>
+    </message>
+    <message>
+        <source>You really want to send
+</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

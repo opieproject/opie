@@ -174,10 +174,6 @@ Genoplad venligst back-up batteriet.</translation>
 <context>
     <name>ShutdownImpl</name>
     <message>
-        <source>Shut down...</source>
-        <translation>Luk ned...</translation>
-    </message>
-    <message>
         <source>Terminate</source>
         <translation>Luk ned</translation>
     </message>
@@ -206,6 +202,10 @@ Disse muligheder er primært givet til brug under udvikling og test af Opie syst
     <message>
         <source>Cancel</source>
         <translation>Fortryd</translation>
+    </message>
+    <message>
+        <source>Shutdown...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

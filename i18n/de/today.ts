@@ -83,10 +83,6 @@ automatisch laden?
         <translation>Verschiedenes</translation>
     </message>
     <message>
-        <source>Check a checkbox to activate/deactivate a plugin ore use the arrow buttons on the right to change the appearance order</source>
-        <translation>Klicken Sie hier, um ein Plugin zu (de)aktivieren oder benutzen Sie die Pfeiltasten, um die Reihenfolge des Erscheinens zu ändern</translation>
-    </message>
-    <message>
         <source>Check this if today should be autostarted on resume.</source>
         <translation>Soll Heute bei starten automatisch gestartet werden.</translation>
     </message>
@@ -117,6 +113,10 @@ automatisch laden?
     <message>
         <source>never</source>
         <translation>niemals</translation>
+    </message>
+    <message>
+        <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

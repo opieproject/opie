@@ -146,12 +146,6 @@
         <translation>Prežarči datoteko</translation>
     </message>
     <message>
-        <source> already exists
-Do you really want to delete it?</source>
-        <translation>že obstaja.
-Ali jo res želite izbrisati?</translation>
-    </message>
-    <message>
         <source>Copy </source>
         <translation>Kopiraj</translation>
     </message>
@@ -232,6 +226,11 @@ in je licencirano pod GPL</translation>
     <message>
         <source>
 exists. Ok to overwrite?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> already exists.
+Do you really want to delete it?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

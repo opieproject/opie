@@ -203,11 +203,6 @@ exists. Ok to overwrite?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source> already exists
-Do you really want to delete it?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Could not move
 </source>
         <translation type="unfinished"></translation>
@@ -226,6 +221,11 @@ Do you really want to delete it?</source>
     </message>
     <message>
         <source>Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> already exists.
+Do you really want to delete it?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

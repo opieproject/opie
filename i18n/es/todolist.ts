@@ -250,10 +250,6 @@ e inténtelo de nuevo.
 <context>
     <name>TaskEditorAlarms</name>
     <message>
-        <source>Form3</source>
-        <translation>Form3</translation>
-    </message>
-    <message>
         <source>empty</source>
         <translation>vacío</translation>
     </message>
