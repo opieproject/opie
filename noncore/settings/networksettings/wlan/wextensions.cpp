@@ -62,7 +62,7 @@ QString WExtensions::essid(){
   if(!hasWirelessExtensions)
     return QString();
   if ( 0 == ioctl( fd, SIOCGIWESSID, &iwr )){
-    iwr.u.essid.pointer[(unsigned int) iwr.u.essid.length-1] = '\0';
+    iwr.u.essid.pointer[(unsigned int) iwr.u.essid.length] = '\0';
     return QString(iwr.u.essid.pointer);
   }
   return QString();
