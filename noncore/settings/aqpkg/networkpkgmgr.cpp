@@ -39,6 +39,7 @@ using namespace std;
 #include "installdlgimpl.h"
 #include "ipkg.h"
 #include "inputdlg.h"
+#include "letterpushbutton.h"
 
 #include "global.h"
 
@@ -46,6 +47,14 @@ NetworkPackageManager::NetworkPackageManager( DataManager *dataManager, QWidget 
   : QWidget(parent, name)
 {
     dataMgr = dataManager;
+
+#ifdef QWS
+        // read download directory from config file
+        Config cfg( "aqpkg" );
+        cfg.setGroup( "settings" );
+        currentlySelectedServer = cfg.readEntry( "selectedServer", "local" );
+#endif
+    
 
     initGui();
     setupConnections();
@@ -80,7 +89,7 @@ void NetworkPackageManager :: updateData()
     for ( i = 0, it = dataMgr->getServerList().begin() ; it != dataMgr->getServerList().end() ; ++it, ++i )
     {
         serversList->insertItem( it->getServerName() );
-        if ( it->getServerName() == dataMgr->getActiveServer() )
+        if ( it->getServerName() == currentlySelectedServer )
         	activeItem = i;
 	}
 
@@ -105,6 +114,22 @@ void NetworkPackageManager :: initGui()
     QHBoxLayout *hbox1 = new QHBoxLayout( vbox, -1, "HBox1" );
     hbox1->addWidget( l );
     hbox1->addWidget( serversList );
+
+    QHBoxLayout *hbox3 = new QHBoxLayout( vbox, -1, "HBox1" );
+    QHBoxLayout *hbox4 = new QHBoxLayout( vbox, -1, "HBox1" );
+
+    char text[2];
+    text[1] = '\0';
+    for ( int i = 0 ; i < 26 ; ++i )
+    {
+        text[0] = 'A' + i;
+        LetterPushButton *b = new LetterPushButton( text, this );
+        connect( b, SIGNAL( released( QString ) ), this, SLOT( letterPushed( QString ) ) );
+        if ( i < 16 )
+            hbox3->addWidget( b );
+        else
+            hbox4->addWidget( b );
+    }
 
     vbox->addWidget( packagesList );
     packagesList->addColumn( "Packages" );
@@ -140,8 +165,17 @@ void NetworkPackageManager :: serverSelected( int )
 
     // display packages
     QString serverName = serversList->currentText();
+    currentlySelectedServer = serverName;
+
+#ifdef QWS
+        // read download directory from config file
+        Config cfg( "aqpkg" );
+        cfg.setGroup( "settings" );
+        cfg.writeEntry( "selectedServer", currentlySelectedServer );
+#endif
+
     Server *s = dataMgr->getServer( serverName );
-    dataMgr->setActiveServer( serverName );
+//    dataMgr->setActiveServer( serverName );
 
     vector<Package> &list = s->getPackageList();
     vector<Package>::iterator it;
@@ -206,8 +240,7 @@ void NetworkPackageManager :: updateServer()
     // Update the current server
     // Display dialog
     ProgressDlg *dlg = new ProgressDlg( this );
-    QString status = "Updating package list for ";
-    status += serverName;
+    QString status = "Updating package lists...";
     dlg->show();
     dlg->setText( status );
 
@@ -216,11 +249,11 @@ void NetworkPackageManager :: updateServer()
     // First, write out ipkg_conf file so that ipkg can use it
     dataMgr->writeOutIpkgConf();
 
-    if ( serverName == LOCAL_SERVER )
-        ;
-    else if ( serverName == LOCAL_IPKGS )
-        ;
-    else
+//    if ( serverName == LOCAL_SERVER )
+//        ;
+//    else if ( serverName == LOCAL_IPKGS )
+//        ;
+//    else
     {
         QString option = "update";
         QString dummy = "";
@@ -302,10 +335,11 @@ void NetworkPackageManager :: downloadPackage()
         Ipkg ipkg;
         connect( &ipkg, SIGNAL(outputText(const QString &)), this, SLOT(displayText(const QString &)));
 
-        QCheckListItem *item = (QCheckListItem *)packagesList->firstChild();
         ipkg.setOption( "download" );
         ipkg.setRuntimeDirectory( dir );
-        do
+        for ( QCheckListItem *item = (QCheckListItem *)packagesList->firstChild();
+              item != 0 ;
+              item = (QCheckListItem *)item->nextSibling() )
         {
             if ( item->isOn() )
             {
@@ -321,14 +355,13 @@ void NetworkPackageManager :: downloadPackage()
                 ipkg.setPackage( name );
                 ipkg.runIpkg( );
             }
-
-            item = (QCheckListItem *)item->nextSibling();
-        } while ( item );
+        }
     }
     else if ( download->text() == "Remove" )
     {
-        QCheckListItem *item = (QCheckListItem *)packagesList->firstChild();
-        do
+        for ( QCheckListItem *item = (QCheckListItem *)packagesList->firstChild();
+              item != 0 ;
+              item = (QCheckListItem *)item->nextSibling() )
         {
             if ( item->isOn() )
             {
@@ -345,8 +378,7 @@ void NetworkPackageManager :: downloadPackage()
                 QFile f( p->getFilename() );
                 f.remove();
             }
-            item = (QCheckListItem *)item->nextSibling();
-        } while ( item );
+        }
     }
 
     dataMgr->reloadServerData( LOCAL_IPKGS );
@@ -357,7 +389,7 @@ void NetworkPackageManager :: downloadPackage()
 void NetworkPackageManager :: applyChanges()
 {
     // Disable buttons to stop silly people clicking lots on them :)
-
+    
     // First, write out ipkg_conf file so that ipkg can use it
     dataMgr->writeOutIpkgConf();
 
@@ -365,17 +397,16 @@ void NetworkPackageManager :: applyChanges()
     // deal with it
 
 	vector<QString> workingPackages;
-    QCheckListItem *item = (QCheckListItem *)packagesList->firstChild();
-    do
+    for ( QCheckListItem *item = (QCheckListItem *)packagesList->firstChild();
+          item != 0 ;
+          item = (QCheckListItem *)item->nextSibling() )
     {
         if ( item->isOn() )
         {
             QString p = dealWithItem( item );
             workingPackages.push_back( p );
 		}
-
-        item = (QCheckListItem *)item->nextSibling();
-    } while ( item );
+    }
 
     // do the stuff
     InstallDlgImpl dlg( workingPackages, dataMgr, this, "Install", true );
@@ -450,4 +481,22 @@ QString NetworkPackageManager :: dealWithItem( QCheckListItem *item )
 void NetworkPackageManager :: displayText( const QString &t )
 {
     cout << t << endl;
+}
+
+
+void NetworkPackageManager :: letterPushed( QString t )
+{
+    QCheckListItem *item = (QCheckListItem *)packagesList->firstChild();
+    do
+    {
+        if ( item->text().lower().startsWith( t.lower() ) )
+        {
+            cout << "Found - item->text()" << endl;
+            packagesList->setSelected( item, true );
+            packagesList->ensureItemVisible( item );
+            break;
+		}
+
+        item = (QCheckListItem *)item->nextSibling();
+    } while ( item );
 }

@@ -50,6 +50,7 @@ private:
     QPushButton *apply;
 
     ProgressDlg *progressDlg;
+    QString currentlySelectedServer;
 
     int timerId;
 
@@ -67,6 +68,7 @@ public slots:
     void downloadPackage();
     void updateServer();
     void displayText( const QString &t );
+    void letterPushed( QString t );
 };
 
 #endif
