@@ -73,24 +73,28 @@ bool PmIpkg::runIpkg(const QString& args, const QString& dest )
   cmd = "";
 #endif
 	pvDebug( 3,"PmIpkg::runIpkg got dest="+dest);
-	if ( dest == "" )
-	  cmd += " -dest "+settings->getDestinationName();
-  else
-	  cmd += " -dest "+ dest;
+	if (!args.contains("update"))
+	{
+		if ( dest == "" )
+		  cmd += " -dest "+settings->getDestinationName();
+	  else
+		  cmd += " -dest "+ dest;
 
- 	cmd += " -force-defaults ";
+	 	cmd += " -force-defaults ";
 
-  if (installDialog && installDialog->_force_depends)
-  {
-	  if (installDialog->_force_depends->isChecked())
-  		 cmd += " -force-depends ";
-	  if (installDialog->_force_reinstall->isChecked())
-  		 cmd += " -force-reinstall ";
-	  if (installDialog->_force_remove->isChecked())
-  		 cmd += " -force-removal-of-essential-packages ";
-  }
+  	if ( installDialog && installDialog->_force_depends )
+  	{
+	  	if (installDialog->_force_depends->isChecked())
+  			 cmd += " -force-depends ";
+		  if (installDialog->_force_reinstall->isChecked())
+  			 cmd += " -force-reinstall ";
+	  	if (installDialog->_force_remove->isChecked())
+  			 cmd += " -force-removal-of-essential-packages ";
+	  }
+	} //!args.contains("update")
 
   out( "Starting to "+ args+"\n");
+  qApp->processEvents();
   cmd += args;
   out( "running:\n"+cmd+"\n" );
   pvDebug(2,"running:"+cmd);
@@ -433,9 +437,7 @@ void PmIpkg::removeLinks( const QString &dest )
 void PmIpkg::update()
 {
 	show();
-	if ( runIpkg( "update" ) )
-	 	runwindow->close();
- 	else out("An error occurred!\nPlease check the log.");
+	runIpkg( "update" );
 }
 
 void PmIpkg::out( QString o )

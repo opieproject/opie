@@ -68,7 +68,7 @@ void PackageList::insertPackage( Package* pack )
 		       	packver->insert( pack->name(), p );
           	p->setOtherVersions( packver );
         }
-       	pack->setName( pack->name()+"["+pack->version()+"]" );
+       	pack->setName( pack->name() );//+"["+pack->version()+"]" );
        	pack->setOtherVersions( packver );
        	packver->insert( pack->name(), pack );
 				packageListAll->insert( pack->name(), pack );
