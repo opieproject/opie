@@ -1,7 +1,7 @@
 /* 
  * Set card modes for sniffing
  *
- * $Id: cardmode.cc,v 1.22 2003-02-13 10:57:19 max Exp $
+ * $Id: cardmode.cc,v 1.23 2003-02-16 20:05:29 max Exp $
  */
 
 #include "cardmode.hh"
@@ -90,7 +90,7 @@ int card_into_monitormode (pcap_t **orighandle, const char *device, int cardtype
 	   // This is the monitor mode for 802.11 non-prism header
 	   ptr[0] = 2;
 	   strcpy(ireq.ifr_ifrn.ifrn_name, device);
-	   if (ioctl( fd, SIOCIWFIRSTPRIV + 4, &ireq)==0)
+	   if (ioctl( fd, SIOCDEVPRIVATE, &ireq)==0)
 	   {
 		  /* All was fine... */
 		  close(fd);
