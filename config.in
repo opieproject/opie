@@ -1,17 +1,6 @@
 mainmenu "Opie Configuration"
-menu "Build Parameters"
 
-#choice
-# prompt "Build Processor family"
-#  default BUILD_X86
-#  help
-#    Please select the architecture of the machine you will be
-#    building the OpenZaurus buildroot on.
-#
-#  config BUILD_X86
-#    boolean "X86 Architecture"
-#
-#endchoice
+menu "Build Parameters"
 
 choice
   prompt "Target Machine"
@@ -25,9 +14,6 @@ choice
 
   config TARGET_SHARP
     boolean "Sharp Zaurus SL-5x00 - stock"
-
-#  config TARGET_OZ
-#    boolean "Sharp Zaurus SL-5x00 - OpenZaurus"
 
   config TARGET_IPAQ
     boolean "iPAQ"
@@ -47,11 +33,10 @@ config OPTIMIZE
 config DEBUG
   boolean "Enable debug builds"
   default n
-
-  config RELEASE
-    bool
-    default y
-    depends ! DEBUG
+config RELEASE
+  bool
+  default y
+  depends !DEBUG
 
 config SPECFILE
   string
@@ -59,7 +44,6 @@ config SPECFILE
   default "linux-g++" if TARGET_X86 && X11
   default "qws/linux-sharp-g++" if TARGET_SHARP && (! X11)
   default "linux-g++" if TARGET_SHARP && X11
-#  default "linux-oz-g++" if TARGET_OZ
   default "qws/linux-ipaq-g++" if TARGET_IPAQ && (! X11)
   default "linux-g++" if TARGET_IPAQ && X11
   default "qws/linux-ramses-g++" if TARGET_RAMSES && (! X11)
@@ -73,7 +57,6 @@ config CUSTOMFILE
   default "custom-sharp.h" if TARGET_SHARP
   default "custom-ramses.h" if TARGET_RAMSES
   default "custom-ipaq.h" if TARGET_SIMPAD
-  
 
 config OPTIMIZATIONS
   string "Optimization flags"
@@ -82,14 +65,6 @@ config OPTIMIZATIONS
   default "-march=armv4 -mtune=strongarm1100 -mapcs-32 -fexpensive-optimizations -fomit-frame-pointer -O2" if TARGET_SHARP
   default "-march=armv4 -mtune=strongarm1100 -mapcs-32 -fexpensive-optimizations -fomit-frame-pointer -O2" if TARGET_RAMSES
   default "-march=armv4 -mtune=strongarm1100 -mapcs-32 -fexpensive-optimizations -fomit-frame-pointer -O2" if TARGET_SIMPAD
-
-#config CROSS
-#  string "Crosscompilation prefix"
-#  default "arm-linux-"
-#  help
-#    Crosscompilation prefix is the prefix which will be prepended
-#    to all compilation commands. For example, a crosscompilation prefix
-#    of arm-linux-, results in the build calling arm-linux-gcc as its CC.
 
 config EXPERIMENTAL
   bool "Prompt for development and/or incomplete items"
@@ -101,7 +76,6 @@ menu "Base"
   choice
     prompt "Qpe Library Selection"
     default LIBQPE
-    
     source library/config.in
     source x11/config.in
   endchoice
@@ -114,24 +88,12 @@ endmenu
 
 comment ""
 
-#config APPLETS
-# bool "Applets"
-# default "y"
-
 menu "Applets"
-# depends APPLETS
-  
   source core/applets/config.in
   source noncore/applets/config.in
 endmenu
 
-#config APPS
-# bool "Apps"
-# default "y"
-
 menu "Apps"
-# depends APPS
-  
   source core/apps/config.in
   source noncore/apps/config.in
 endmenu
@@ -141,18 +103,22 @@ menu "Communications and Networking"
   source noncore/mail/config.in
   source noncore/net/config.in
 endmenu
+
 menu "Games"
   source noncore/games/config.in
 endmenu
+
 menu "Graphics and Multimedia"
   source freetype/config.in
   source noncore/graphics/config.in
   source core/multimedia/config.in
   source noncore/multimedia/config.in
 endmenu
+
 menu "Input methods"
   source inputmethods/config.in
 endmenu
+
 menu "Pim"
   source core/pim/config.in
   menu "Today Plugins"
@@ -160,22 +126,25 @@ menu "Pim"
     source core/pim/today/plugins/config.in
   endmenu
 endmenu
+
 menu "Settings"
   source core/settings/config.in
   source noncore/settings/config.in
 endmenu
+
 menu "Theming"
   source noncore/decorations/config.in
   source noncore/styles/config.in
 endmenu
+
 menu "Tools"
   source noncore/tools/config.in
   source development/config.in
 endmenu
+
 comment ""
   depends on EXPERIMENTAL
 menu "Experimental"
   depends on EXPERIMENTAL
   source libopie2/config.in
 endmenu
-
