@@ -114,14 +114,40 @@ void MultiauthGeneralConfig::checkBypass()
         allowBypass->setChecked(false);
 }
 
+
+
+
+
+
+
+
+
+
+
 /// Builds and displays the Opie multi-authentication configuration dialog
-MultiauthConfig::MultiauthConfig() : QDialog(0, 0, TRUE),
-                                     m_mainTW(0), m_pluginListView(0), m_pluginListWidget(0),
-                                     m_generalConfig(0), m_loginWidget(0), m_syncWidget(0),
-                                     m_nbSuccessReq(0), m_plugins_changed(false)
+static void test_and_start() {
+    Config pcfg("Security");
+    pcfg.setGroup( "Misc" );
+    bool protectConfigDialog = ! pcfg.readBoolEntry("noProtectConfig", true);
+
+    if (protectConfigDialog && Opie::Security::Internal::runPlugins() != 0) {
+         owarn << "authentication failed, not showing opie-security" << oendl;
+        exit( -1 );
+    }
+}
+
+
+
+MultiauthConfig::MultiauthConfig(QWidget* par, const char* w,  WFlags f)
+    : QDialog(par, w, TRUE, f),
+      m_mainTW(0), m_pluginListView(0), m_pluginListWidget(0),
+      m_generalConfig(0), m_loginWidget(0), m_syncWidget(0),
+      m_nbSuccessReq(0), m_plugins_changed(false)
 {
     /* Initializes the global configuration window
      */
+    test_and_start();
+
     setCaption( tr( "Security configuration" ) );
     QVBoxLayout *layout = new QVBoxLayout( this );
     m_mainTW = new Opie::Ui::OTabWidget( this );
@@ -204,6 +230,22 @@ MultiauthConfig::MultiauthConfig() : QDialog(0, 0, TRUE),
 /// nothing to do
 MultiauthConfig::~MultiauthConfig()
 {
+}
+
+void MultiauthConfig::accept() {
+    writeConfig();
+
+    MultiauthConfigWidget* confWidget = 0;
+    for ( confWidget = configWidgetList.first(); confWidget != 0;
+          confWidget = configWidgetList.next() )
+        confWidget->writeConfig();
+
+    QDialog::accept();
+}
+
+void MultiauthConfig::done( int r ) {
+    QDialog::done( r );
+    close();
 }
 
 /// moves up the selected plugin

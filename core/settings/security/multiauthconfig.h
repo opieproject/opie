@@ -81,12 +81,15 @@ class MultiauthConfig : public QDialog
     Q_OBJECT
     
 public:
-    MultiauthConfig();
+    static QString appName() { return QString::fromLatin1("security"); }
+    MultiauthConfig(QWidget *parent, const char* name, WFlags fl);
     virtual ~MultiauthConfig();
     void writeConfig();
     QList<Opie::Security::MultiauthConfigWidget> configWidgetList;
     
 protected slots:
+    void accept();
+    void done(int r); 
     void pluginsChanged();
     void moveSelectedUp();
     void moveSelectedDown();
