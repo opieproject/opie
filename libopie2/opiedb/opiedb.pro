@@ -1,5 +1,5 @@
 TEMPLATE    = lib
-CONFIG     += qt warn_on 
+CONFIG     += qt warn_on
 DESTDIR     = $(OPIEDIR)/lib
 HEADERS     = osqlbackend.h    \
               osqldriver.h     \
@@ -34,3 +34,9 @@ contains( platform, x11 ) {
   LIBS        += -L$(OPIEDIR)/lib -Wl,-rpath,$(OPIEDIR)/lib
 }
 
+!isEmpty( LIBSQLITE_INC_DIR ) {
+    INCLUDEPATH = $$LIBSQLITE_INC_DIR $$INCLUDEPATH
+}
+!isEmpty( LIBSQLITE_LIB_DIR ) {
+    LIBS = -L$$LIBSQLITE_LIB_DIR $$LIBS
+}
