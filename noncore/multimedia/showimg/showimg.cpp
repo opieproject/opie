@@ -133,8 +133,8 @@ ImageViewer::ImageViewer( QWidget *parent, const char *name, int wFlags )
     QPopupMenu *edit = new QPopupMenu( menubar );
     QPopupMenu *view = new QPopupMenu( menubar );
 
-    menubar->insertItem( "Edit", edit );
-    menubar->insertItem( "View", view );
+    menubar->insertItem(tr("Edit"), edit );
+    menubar->insertItem(tr("View"), view );
 
     edit->insertItem(tr("Horizontal flip"), this, SLOT(hFlip()), 0);
     edit->insertItem(tr("Vertical flip"), this, SLOT(vFlip()), 0);
