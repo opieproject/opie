@@ -25,6 +25,7 @@
 
 #include <qvbox.h>
 #include <qiconview.h>
+#include <qtimer.h>
 
 class CategorySelect;
 class LauncherIconView;
@@ -173,20 +174,6 @@ public:
     void setBusy(bool on);
     bool inKeyEvent() const { return ike; }
 
-    void keyPressEvent(QKeyEvent* e)
-    {
-        ike = TRUE;
-        if ( e->key() == Key_F33 /* OK button */ || e->key() == Key_Space ) {
-            if ( (e->state() & ShiftButton) )
-                emit mouseButtonPressed(ShiftButton, currentItem(), QPoint() );
-            else
-                returnPressed(currentItem());
-        }
-
-        QIconView::keyPressEvent(e);
-        ike = FALSE;
-    }
-
     void addItem(AppLnk* app, bool resort=TRUE);
     bool removeLink(const QString& linkfile);
 
@@ -219,7 +206,7 @@ public:
     void requestEyePix(const LauncherItem*which);
 
 protected:
-    void timerEvent( QTimerEvent *te );
+    virtual void timerEvent( QTimerEvent *te );
     void styleChange( QStyle &old );
     void calculateGrid( ItemTextPos pos );
     void focusInEvent( QFocusEvent * ) {}
@@ -227,9 +214,11 @@ protected:
     LauncherItem*findDocItem(const QString&);
     void addCheckItem(AppLnk* app);
     void checkCallback();
+    virtual void keyPressEvent(QKeyEvent* e);
 
 protected slots:
     void setEyePixmap(const QPixmap&,const QString&,int width);
+    void stopEyeTimer();
 
 private:
     QList<AppLnk> hidden;
@@ -248,7 +237,8 @@ private:
 #ifdef USE_ANIMATED_BUSY_ICON_OVERLAY
     QPixmap busyPix;
 #endif
-  BusyIndicatorType busyType;
+    BusyIndicatorType busyType;
+    QTimer m_eyeTimer;
 };
 
 #endif // LAUNCHERVIEW_H

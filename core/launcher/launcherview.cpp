@@ -271,6 +271,7 @@ LauncherIconView::LauncherIconView( QWidget* parent, const char* name )
     hidden.setAutoDelete(TRUE);
     ike = FALSE;
     calculateGrid( Bottom );
+    connect(&m_eyeTimer,SIGNAL(timeout()),this,SLOT(stopEyeTimer()));
 }
 
 LauncherIconView::~LauncherIconView()
@@ -455,10 +456,21 @@ void LauncherIconView::requestEyePix(const LauncherItem*item)
 {
     if (!item) return;
     if (item->isEyeImage()) {
+        m_eyeTimer.changeInterval(600000);
         checkCallback();
         int s = ( bigIcns ) ? AppLnk::bigIconSize() : AppLnk::smallIconSize();
         m_EyeCallBack->requestThumb(item->appLnk()->file(),s,s);
     }
+}
+
+void LauncherIconView::stopEyeTimer()
+{
+    odebug << "Launcherview: delete opie-eye handle" << oendl;
+    if (m_EyeCallBack) {
+        delete m_EyeCallBack;
+        m_EyeCallBack=0;
+    }
+    m_eyeTimer.stop();
 }
 
 void LauncherIconView::addItem(AppLnk* app, bool resort)
@@ -601,6 +613,21 @@ void LauncherIconView::styleChange( QStyle &old )
     QIconView::styleChange( old );
     calculateGrid( itemTextPos() );
 }
+
+void LauncherIconView::keyPressEvent(QKeyEvent* e)
+{
+    ike = TRUE;
+    if ( e->key() == Key_F33 /* OK button */ || e->key() == Key_Space ) {
+        if ( (e->state() & ShiftButton) )
+            emit mouseButtonPressed(ShiftButton, currentItem(), QPoint() );
+         else
+            returnPressed(currentItem());
+    }
+
+    QIconView::keyPressEvent(e);
+    ike = FALSE;
+}
+
 //===========================================================================
 // Implemantation of LauncherIconview end
 //===========================================================================
@@ -1123,7 +1150,6 @@ void LauncherThumbReceiver::recieve( const QCString&str, const QByteArray&at )
         stream >> pixinfos;
 
     for ( PixmapInfos::Iterator it = pixinfos.begin(); it != pixinfos.end(); ++it ) {
-        odebug << "Pixinfos: " << (*it).file << " - " << (*it).width << oendl;
         emit sig_Thumbnail((*it).pixmap,(*it).file,(*it).width);
     }
 }
