@@ -5,5 +5,6 @@ HEADERS		= usermanager.h userdialog.h groupdialog.h passwd.h
 SOURCES		= usermanager.cpp userdialog.cpp groupdialog.cpp passwd.h main.cpp
 INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
-LIBS            += -L/opt/Embedix/tools/arm-linux/lib/ -lqpe -lcrypt
+LIBS            += -lqpe -lcrypt
 TARGET		= usermanager
+DESTDIR         = $(OPIEDIR)/bin
