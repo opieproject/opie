@@ -55,8 +55,8 @@ struct buttoninfo {
 };
 
 
-ButtonSettings::ButtonSettings ( QWidget *parent , const char *name,  bool modal, WFlags f )
-	: QDialog ( 0, "ButtonSettings", false, WStyle_ContextHelp )
+ButtonSettings::ButtonSettings ( QWidget *parent , const char *,  bool, WFlags  )
+	: QDialog ( parent, "ButtonSettings", false, WStyle_ContextHelp )
 {
 	const QValueList <ODeviceButton> &buttons = ODevice::inst ( )-> buttons ( );
 	(void) ButtonUtils::inst ( ); // initialise
