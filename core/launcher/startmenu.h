@@ -21,16 +21,14 @@
 #ifndef __START_MENU_H__
 #define __START_MENU_H__
 
+#include <qtopia/applnk.h>
+#include <qintdict.h>
 #include <qstring.h>
 #include <qlist.h>
-#include <qintdict.h>
 #include <qlabel.h>
 #include <qpopupmenu.h>
 
-#include <qpe/menuappletinterface.h>
-
-class AppLnkSet;
-class AppLnk;
+#include <qtopia/menuappletinterface.h>
 
 class StartPopupMenu : public QPopupMenu
 {
@@ -42,16 +40,13 @@ protected:
 
 class QLibrary;
 
-struct MenuApplet
-{
-#ifndef QT_NO_COMPONENT
+
+struct MenuApplet {
     QLibrary *library;
-#endif
     MenuAppletInterface *iface;
     int id;
     QPopupMenu *popup;
 };
-            
 
 class StartMenu : public QLabel {
     Q_OBJECT
@@ -59,29 +54,29 @@ public:
     StartMenu( QWidget * );
     ~StartMenu();
 
-    const AppLnk* execToLink(const QString& appname);
+    void refreshMenu();
 
 public:
     StartPopupMenu *launchMenu;
 
+signals:
+    void tabSelected(const QString&);
+
 public slots:
     void launch( );
-    void loadOptions( );
     void createMenu( );
-    void reloadApps( );
-    void reloadApplets( );
 
 protected slots:
     void itemSelected( int id );
 
 protected:
     virtual void mousePressEvent( QMouseEvent * );
-    virtual void timerEvent ( QTimerEvent * );
-    
+
 private:
-    bool loadMenu( AppLnkSet *folder, QPopupMenu *menu );
-    void loadApplets( );
-    void clearApplets( );
+    void loadApplets();
+    void clearApplets();
+    void addApplets( QPopupMenu* menu );
+    bool loadMenu( QPopupMenu *menu );
 
 private:
     bool useWidePopupMenu;
@@ -90,14 +85,11 @@ private:
     bool startButtonIsFlat;
     QString startButtonPixmap;
 
-    AppLnkSet *apps;
-
-	QIntDict<MenuApplet> applets;
-	QIntDict<QPopupMenu> tabdict;
-	
-//    QValueList<MenuApplet> appletList;
-    int safety_tid;
-    int sepId;
+    QStringList tabs;
+    QList<AppLnk> other;
+    QIntDict<MenuApplet> m_applets;
+    int ntabs;
+    int nother;
 };
 
 #endif // __START_MENU_H__
