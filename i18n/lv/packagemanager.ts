@@ -1,9 +1,27 @@
 <!DOCTYPE TS><TS>
 <context>
+    <name>CategoryFilterImpl</name>
+    <message>
+        <source>Category Filter</source>
+        <translation type="obsolete">Kategoriju Filtrs</translation>
+    </message>
+    <message>
+        <source>Select one or more groups</source>
+        <translation type="obsolete">Izvēlēties vienu vai vairāk grupas</translation>
+    </message>
+</context>
+<context>
+    <name>DataManager</name>
+    <message>
+        <source>Reading configuration...</source>
+        <translation type="obsolete">Lasa konfigurāciju...</translation>
+    </message>
+</context>
+<context>
     <name>FilterDlg</name>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Visas</translation>
     </message>
     <message>
         <source>Installed</source>
@@ -43,26 +61,37 @@
     </message>
 </context>
 <context>
+    <name>InputDialog</name>
+    <message>
+        <source>&amp;OK</source>
+        <translation type="obsolete">&amp;OK</translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation type="obsolete">&amp;Atlikt</translation>
+    </message>
+</context>
+<context>
     <name>InstallDlg</name>
     <message>
         <source>Destination</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mērķis</translation>
     </message>
     <message>
         <source>Space Avail</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pieejamā Vieta</translation>
     </message>
     <message>
         <source>Output</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Izvads</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Starts</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Opcijas</translation>
     </message>
     <message>
         <source>Packages to </source>
@@ -91,49 +120,130 @@
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nezināms</translation>
     </message>
     <message>
         <source>%1 Kb</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 Kb</translation>
     </message>
     <message>
         <source>Abort</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pārtrauce</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Aizvērt</translation>
     </message>
     <message>
         <source>Save output</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Saglabāt izvadu</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Visas</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Teksts</translation>
     </message>
 </context>
 <context>
+    <name>InstallDlgImpl</name>
+    <message>
+        <source>Remove
+</source>
+        <translation type="obsolete">Izņemt
+</translation>
+    </message>
+    <message>
+        <source>Install
+</source>
+        <translation type="obsolete">Instalēt
+</translation>
+    </message>
+    <message>
+        <source>Upgrade
+</source>
+        <translation type="obsolete">Uzlabot</translation>
+    </message>
+    <message>
+        <source>(ReInstall)</source>
+        <translation type="obsolete">(Pārinstalēt)</translation>
+    </message>
+    <message>
+        <source>(Upgrade)</source>
+        <translation type="obsolete">(Uzlabot)</translation>
+    </message>
+    <message>
+        <source>Destination</source>
+        <translation type="obsolete">Mērķis</translation>
+    </message>
+    <message>
+        <source>Space Avail</source>
+        <translation type="obsolete">Pieejamā Vieta</translation>
+    </message>
+    <message>
+        <source>Output</source>
+        <translation type="obsolete">Izvads</translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="obsolete">Starts</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="obsolete">Opcijas</translation>
+    </message>
+    <message>
+        <source>All</source>
+        <translation type="obsolete">Visas</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation type="obsolete">Teksts</translation>
+    </message>
+    <message>
+        <source>Abort</source>
+        <translation type="obsolete">Pārtrauce</translation>
+    </message>
+    <message>
+        <source>
+**** User Clicked ABORT ***</source>
+        <translation type="obsolete">**** Lietotājs klikšķināja PĀRTRAUKT ****</translation>
+    </message>
+    <message>
+        <source>**** Process Aborted ****</source>
+        <translation type="obsolete">**** Process Pārtraukts ****</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="obsolete">Aizvērt</translation>
+    </message>
+    <message>
+        <source>%1 Kb</source>
+        <translation type="obsolete">%1 Kb</translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="obsolete">Nezināms</translation>
+    </message>
+    <message>
+        <source>Save output</source>
+        <translation type="obsolete">Saglabāt izvadu</translation>
+    </message>
+</context>
+<context>
+    <name>InstallOptionsDlgImpl</name>
+    <message>
+        <source>Options</source>
+        <translation type="obsolete">Opcijas</translation>
+    </message>
+</context>
+<context>
+    <name>Ipkg</name>
+</context>
+<context>
     <name>MainWindow</name>
-    <message>
-        <source>Packages</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This is a listing of all packages.
-
-A blue dot next to the package name indicates that the package is currently installed.
-
-A blue dot with a star indicates that a newer version of the package is available from the server feed.
-
-Click inside the box at the left to select a package.</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Type the text to search for here.</source>
         <translation type="unfinished"></translation>
@@ -207,22 +317,6 @@ Click inside the box at the left to select a package.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Filter</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to apply current filter.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Filter settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to change the package filter criteria.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Find</source>
         <translation type="unfinished"></translation>
     </message>
@@ -247,15 +341,19 @@ Click inside the box at the left to select a package.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Package Manager</source>
+        <source>Packages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Update package information</source>
+        <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Upgrade installed packages</source>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -271,6 +369,44 @@ Click inside the box at the left to select a package.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>This is a listing of all packages.
+
+A blue dot next to the package name indicates that the package is currently installed.
+
+A blue dot with a star indicates that a newer version of the package is available from the server feed.
+
+Click inside the box at the left to select a package.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to apply current filter.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filter settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to change the package filter criteria.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Package Manager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update package information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Upgrade installed packages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Enter path to download package to:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -280,10 +416,6 @@ Click inside the box at the left to select a package.</source>
     </message>
     <message>
         <source>Remove or upgrade</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -300,14 +432,6 @@ Click inside the box at the left to select a package.</source>
     </message>
     <message>
         <source>The configuration has been updated.  Do you want to update server and package information now?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -346,7 +470,7 @@ Click inside the box at the left to select a package.</source>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Opcijas</translation>
     </message>
     <message>
         <source>New</source>
@@ -463,6 +587,26 @@ Click inside the box at the left to select a package.</source>
     <message>
         <source>File list</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PackageWindow</name>
+    <message>
+        <source>Close</source>
+        <translation type="obsolete">Aizvērt</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+</context>
+<context>
+    <name>QuestionDlg</name>
+</context>
+<context>
+    <name>SettingsImpl</name>
+    <message>
+        <source>Destination</source>
+        <translation type="obsolete">Mērķis</translation>
     </message>
 </context>
 </TS>

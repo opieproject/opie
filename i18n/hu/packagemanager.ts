@@ -1,5 +1,11 @@
 <!DOCTYPE TS><TS>
 <context>
+    <name>CategoryFilterImpl</name>
+</context>
+<context>
+    <name>DataManager</name>
+</context>
+<context>
     <name>FilterDlg</name>
     <message>
         <source>All</source>
@@ -41,6 +47,9 @@
         <source>Installed on device at:</source>
         <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>InputDialog</name>
 </context>
 <context>
     <name>InstallDlg</name>
@@ -119,21 +128,16 @@
     </message>
 </context>
 <context>
+    <name>InstallDlgImpl</name>
+</context>
+<context>
+    <name>InstallOptionsDlgImpl</name>
+</context>
+<context>
+    <name>Ipkg</name>
+</context>
+<context>
     <name>MainWindow</name>
-    <message>
-        <source>Packages</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This is a listing of all packages.
-
-A blue dot next to the package name indicates that the package is currently installed.
-
-A blue dot with a star indicates that a newer version of the package is available from the server feed.
-
-Click inside the box at the left to select a package.</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Type the text to search for here.</source>
         <translation type="unfinished"></translation>
@@ -171,14 +175,6 @@ Click inside the box at the left to select a package.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Configure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to configure this application.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Actions</source>
         <translation type="unfinished"></translation>
     </message>
@@ -207,22 +203,6 @@ Click inside the box at the left to select a package.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Filter</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to apply current filter.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Filter settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to change the package filter criteria.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Find</source>
         <translation type="unfinished"></translation>
     </message>
@@ -243,19 +223,31 @@ Click inside the box at the left to select a package.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Configure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to configure this application.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Click here to hide the find toolbar.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Package Manager</source>
+        <source>Packages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Update package information</source>
+        <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Upgrade installed packages</source>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -271,6 +263,44 @@ Click inside the box at the left to select a package.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>This is a listing of all packages.
+
+A blue dot next to the package name indicates that the package is currently installed.
+
+A blue dot with a star indicates that a newer version of the package is available from the server feed.
+
+Click inside the box at the left to select a package.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to apply current filter.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filter settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to change the package filter criteria.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Package Manager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update package information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Upgrade installed packages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Enter path to download package to:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -280,10 +310,6 @@ Click inside the box at the left to select a package.</source>
     </message>
     <message>
         <source>Remove or upgrade</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -300,14 +326,6 @@ Click inside the box at the left to select a package.</source>
     </message>
     <message>
         <source>The configuration has been updated.  Do you want to update server and package information now?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -464,5 +482,17 @@ Click inside the box at the left to select a package.</source>
         <source>File list</source>
         <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>PackageWindow</name>
+</context>
+<context>
+    <name>QObject</name>
+</context>
+<context>
+    <name>QuestionDlg</name>
+</context>
+<context>
+    <name>SettingsImpl</name>
 </context>
 </TS>
