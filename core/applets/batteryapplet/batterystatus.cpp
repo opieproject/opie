@@ -16,7 +16,7 @@ using namespace Opie;
 
 BatteryStatus::BatteryStatus( const PowerStatus *p, QWidget *parent )
   : QWidget( parent, 0, WDestructiveClose), ps(p) {
-  setCaption( tr("Battery status for Ipaq") );
+  setCaption( tr("Battery status") );
   QPushButton *pb = new QPushButton( tr("Close"), this );
   pb->move( 70, 250 );
   pb->setMaximumHeight(20);
