@@ -214,6 +214,7 @@ QPopupMenu *OPimMainWindow::itemContextMenu() {
         m_itemContextMenu = new QPopupMenu( this );
         m_itemEditAction->addTo( m_itemContextMenu );
         m_itemDuplicateAction->addTo( m_itemContextMenu );
+        m_itemBeamAction->addTo( m_itemContextMenu );
         m_itemDeleteAction->addTo( m_itemContextMenu );
     }
 
@@ -343,12 +344,6 @@ void OPimMainWindow::initBars( const QString &itemName ) {
     connect( m_itemDuplicateAction, SIGNAL(activated()), this, SLOT(slotItemDuplicate()) );
     m_itemDuplicateAction->setWhatsThis( tr( "Click here to duplicate the selected item." ) );
 
-    m_itemDeleteAction = new QAction( tr( "Delete" ), Resource::loadPixmap( "trash" ),
-                                      QString::null, 0, m_itemMenuGroup1, 0 );
-    connect( m_itemDeleteAction, SIGNAL(activated()), this, SLOT(slotItemDelete()) );
-    m_itemDeleteAction->setWhatsThis( tr( "Click here to delete the selected item." ) );
-    m_itemDeleteAction->addTo( toolbar );
-
     if ( Ir::supported() ) {
         m_itemBeamAction = new QAction( tr( "Beam" ), Resource::loadPixmap( "beam" ),
                                         QString::null, 0, m_itemMenuGroup1, 0 );
@@ -356,6 +351,12 @@ void OPimMainWindow::initBars( const QString &itemName ) {
         m_itemBeamAction->setWhatsThis( tr( "Click here to transmit the selected item." ) );
         m_itemBeamAction->addTo( toolbar );
     }
+
+    m_itemDeleteAction = new QAction( tr( "Delete" ), Resource::loadPixmap( "trash" ),
+                                      QString::null, 0, m_itemMenuGroup1, 0 );
+    connect( m_itemDeleteAction, SIGNAL(activated()), this, SLOT(slotItemDelete()) );
+    m_itemDeleteAction->setWhatsThis( tr( "Click here to delete the selected item." ) );
+    m_itemDeleteAction->addTo( toolbar );
 
     m_itemMenuGroup1->addTo( m_itemMenu );
 
