@@ -7,35 +7,35 @@
     </message>
     <message>
         <source>&amp;New game</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nowa gra</translation>
     </message>
     <message>
         <source>&amp;Pause game</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Pauzuj gre</translation>
     </message>
     <message>
         <source>&amp;About</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;O...</translation>
     </message>
     <message>
         <source>&amp;Game</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Gra</translation>
     </message>
     <message>
         <source>Score: 00</source>
-        <translation type="unfinished"></translation>
+        <translation>Punkty: 00</translation>
     </message>
     <message>
         <source>Lives: 0%</source>
-        <translation type="unfinished"></translation>
+        <translation>Zycia: 0%</translation>
     </message>
     <message>
         <source>Filled: 00%</source>
-        <translation type="unfinished"></translation>
+        <translation>Wypelnione: 00%</translation>
     </message>
     <message>
         <source>Time: 00</source>
-        <translation type="unfinished"></translation>
+        <translation>Czas: 00</translation>
     </message>
     <message>
         <source>Bounce Level %1</source>
@@ -43,33 +43,35 @@
     </message>
     <message>
         <source>Score: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Punkty: %1</translation>
     </message>
     <message>
         <source>Game paused.
 Press P to continue!</source>
-        <translation type="unfinished"></translation>
+        <translation>Gra zatrzymana.
+Wcisnij P aby kontynuowac!</translation>
     </message>
     <message>
         <source>Game Over!
 Score: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Koniec Gry!
+Punkty: %1</translation>
     </message>
     <message>
         <source>Time: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Czas: %1</translation>
     </message>
     <message>
         <source>Lives: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Zycia: %1</translation>
     </message>
     <message>
         <source>Filled: %1%</source>
-        <translation type="unfinished"></translation>
+        <translation>Wypelnione: %1%</translation>
     </message>
     <message>
         <source>Filled: 0%</source>
-        <translation type="unfinished"></translation>
+        <translation>Wypelnione: 0%</translation>
     </message>
     <message>
         <source>Successfully cleared more than 75%.
@@ -79,22 +81,26 @@ Score: %1</source>
     <message>
         <source>%1 points: 15 points per life
 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1 punktow: 15 punktow na zycie
+</translation>
     </message>
     <message>
         <source>%1 points: Bonus
 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1 punktow: Bonus
+</translation>
     </message>
     <message>
         <source>%1 points: Total score
 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1 punktow: Wszystkie punkty
+</translation>
     </message>
     <message>
         <source>On to level %1.
 You get %2 lives this time!</source>
-        <translation type="unfinished"></translation>
+        <translation>Na poziom %1.
+Tym razem otrzymujesz %2 zyc!</translation>
     </message>
 </context>
 </TS>
