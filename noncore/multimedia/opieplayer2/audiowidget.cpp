@@ -413,7 +413,7 @@ void AudioWidget::closeEvent( QCloseEvent* ) {
 }
 
 
-void AudioWidget::paintEvent( QPaintEvent * ) {
+void AudioWidget::paintEvent( QPaintEvent * pe) {
     if ( !pe->erased() ) {
           // Combine with background and double buffer
         QPixmap pix( pe->rect().size() );
