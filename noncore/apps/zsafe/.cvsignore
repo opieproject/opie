@@ -1,3 +1,16 @@
+.moc
+categorydialog.cpp
+categorydialog.h
+infoform.cpp
+infoform.h
+newdialog.cpp
+newdialog.h
+passworddialog.cpp
+passworddialog.h
+searchdialog.cpp
+searchdialog.h
+wait.cpp
+wait.h
 Makefile
 Makefile.in
 moc*
