@@ -3,5 +3,6 @@ Maintainer: Patrick S. Vogt <tille@handhelds.org>
 Section: opie/system
 Priority: optional
 Version: 0.9.1
+Architecture: all
 Description: Remove opie -- Use at own risc -- will remove opie and /opt/QtPalmtop/
 Files:
