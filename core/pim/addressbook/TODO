@@ -1,7 +1,7 @@
 Stuff todo:
 
 Urgent:
-- "Nonenglish" translation bug has to be fixed.
+- Syncing: abtable not reloaded after sync.
 
 Important:
 
@@ -10,6 +10,7 @@ Important:
 - "What's this" should be added
 - The names of the countries are sorted by there english names, only..
   Even if they are translated.. :S
+- Store last settings of combo-boxes
 
 Less important:
 
@@ -17,3 +18,9 @@ Less important:
   qpdf has.
 -  The picker (alphabetical sort widget) should be
    placed verticaly or horizontally (configurable)
+
+
+Should be Fixed:
+- "Nonenglish" translation bug has to be fixed.
+
+Fixed:
