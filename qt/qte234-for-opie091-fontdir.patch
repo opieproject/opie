@@ -37,7 +37,7 @@
 +    if [ -n "$QTDIR" ]; then
 +        fontdir=$QTDIR/lib/fonts
 +    else
-+        usage
++        fontdir=/opt/QtPalmtop/lib/fonts
 +    fi
 +else
 +    fontdir=$1
