@@ -56,8 +56,8 @@ LauncherSettings::LauncherSettings (QWidget*,const char*, WFlags)
 
 	tw-> addTab ( m_taskbar, "wait", tr( "Taskbar" ));
 	tw-> addTab ( m_menu, "go", tr( "O-Menu" ));
-	tw-> addTab ( m_tabs, "launchersettings/tabstab.png", tr( "Tabs" ));
-	tw-> addTab ( m_imethods, "launchersettings/inputmethod.png", tr( "InputMethods" ));
+	tw-> addTab ( m_tabs, "launchersettings/tabstab", tr( "Tabs" ));
+	tw-> addTab ( m_imethods, "launchersettings/inputmethod", tr( "InputMethods" ));
 	tw-> addTab ( m_doctab, "DocsIcon", tr( "DocTab" ) );
 	tw-> setCurrentTab ( m_taskbar );
 }
