@@ -78,6 +78,7 @@ void FortunePluginWidget::getFortune() {
 
 void FortunePluginWidget::slotStdOut( OProcess* proc, char* buf, int len )
 {
-	QCString cstring( buf,  len );
-	fortune->setText( cstring );
+	QCString s( buf, len );
+	s.replace( QRegExp("\n"), "" );
+	fortune->setText( s );
 }
