@@ -45,6 +45,7 @@ class WellenreiterConfigWindow : public WellenreiterConfigBase
 
   public slots:
     void changedDeviceType(int);
+    void getCaptureFileNameClicked();
 
   protected:
     QMap<QString, int> _devicetype;

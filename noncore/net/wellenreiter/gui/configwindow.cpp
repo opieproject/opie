@@ -21,9 +21,11 @@
 #include <qapplication.h>
 #include <qcombobox.h>
 #include <qfile.h>
+#include <qlineedit.h>
 #include <qlayout.h>
 #include <qmap.h>
 #include <qpushbutton.h>
+#include <qtoolbutton.h>
 #include <qspinbox.h>
 #include <qtextstream.h>
 
@@ -85,6 +87,7 @@ WellenreiterConfigWindow::WellenreiterConfigWindow( QWidget * parent, const char
     WellenreiterConfigWindow::_instance = this;
 
     connect( deviceType, SIGNAL( activated(int) ), this, SLOT( changedDeviceType(int) ) );
+    connect( getCaptureFileName, SIGNAL( clicked() ), this, SLOT( getCaptureFileNameClicked() ) );
 };
 
 
@@ -112,7 +115,7 @@ void WellenreiterConfigWindow::changedDeviceType(int t)
 {
     if ( t != DEVTYPE_FILE ) return;
     QString name = ( (WellenreiterMainWindow*) qApp->mainWidget() )->getFileName(false);
-    if ( !name.isNull() && QFile::exists( name ) )
+    if ( !name.isEmpty() && QFile::exists( name ) )
     {
         interfaceName->insertItem( name );
         interfaceName->setCurrentItem( interfaceName->count()-1 );
@@ -122,5 +125,16 @@ void WellenreiterConfigWindow::changedDeviceType(int t)
         deviceType->setCurrentItem( _guess );
     }
 
+}
+
+
+void WellenreiterConfigWindow::getCaptureFileNameClicked()
+{
+    QString name = ( (WellenreiterMainWindow*) qApp->mainWidget() )->getFileName(true);
+    qDebug( "name = %s", (const char*) name );
+    if ( !name.isEmpty() )
+    {
+        captureFileName->setText( name );
+    }
 }
 

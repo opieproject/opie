@@ -30,9 +30,11 @@ using namespace Opie;
 
 // Qt
 
-#include <qpushbutton.h>
-#include <qmessagebox.h>
+#include <qcheckbox.h>
 #include <qcombobox.h>
+#include <qpushbutton.h>
+#include <qlineedit.h>
+#include <qmessagebox.h>
 #include <qspinbox.h>
 #include <qtoolbutton.h>
 #include <qmainwindow.h>
@@ -320,9 +322,20 @@ void Wellenreiter::startClicked()
 
     // open pcap and start sniffing
     if ( cardtype != DEVTYPE_FILE )
-        pcap->open( interface );
+    {
+        if ( configwindow->writeCaptureFile->isEnabled() )
+        {
+            pcap->open( interface, configwindow->captureFileName->text() );
+        }
+        else
+        {
+            pcap->open( interface );
+        }
+    }
     else
+    {
         pcap->open( QFile( interface ) );
+    }
 
     if ( !pcap->isOpen() )
     {

@@ -11,8 +11,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>220</width>
-            <height>306</height>
+            <width>236</width>
+            <height>342</height>
         </rect>
     </property>
     <property stdset="1">
@@ -25,16 +25,16 @@
     <property>
         <name>layoutSpacing</name>
     </property>
-    <vbox>
+    <grid>
         <property stdset="1">
             <name>margin</name>
-            <number>3</number>
+            <number>6</number>
         </property>
         <property stdset="1">
             <name>spacing</name>
-            <number>1</number>
+            <number>5</number>
         </property>
-        <widget>
+        <widget row="0"  column="0"  rowspan="1"  colspan="3" >
             <class>QLayoutWidget</class>
             <property stdset="1">
                 <name>name</name>
@@ -83,258 +83,170 @@
                 </widget>
             </hbox>
         </widget>
-        <widget>
-            <class>QLayoutWidget</class>
+        <widget row="1"  column="0"  rowspan="1"  colspan="2" >
+            <class>QComboBox</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>Layout7</cstring>
+                <cstring>interfaceName</cstring>
+            </property>
+            <property stdset="1">
+                <name>enabled</name>
+                <bool>true</bool>
             </property>
             <property>
-                <name>layoutSpacing</name>
+                <name>whatsThis</name>
+                <string>Choose the interface used for sniffing.</string>
             </property>
-            <grid>
-                <property stdset="1">
-                    <name>margin</name>
-                    <number>0</number>
-                </property>
-                <property stdset="1">
-                    <name>spacing</name>
-                    <number>2</number>
-                </property>
-                <widget row="0"  column="0" >
-                    <class>QComboBox</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>interfaceName</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>enabled</name>
-                        <bool>true</bool>
-                    </property>
-                    <property>
-                        <name>whatsThis</name>
-                        <string>Choose the interface used for sniffing.</string>
-                    </property>
-                </widget>
-                <widget row="4"  column="0"  rowspan="1"  colspan="2" >
-                    <class>QCheckBox</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>activeScanning</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>enabled</name>
-                        <bool>false</bool>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>Active Scanning (caution!)</string>
-                    </property>
-                </widget>
-                <widget row="1"  column="0" >
-                    <class>QComboBox</class>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string>&lt;select&gt;</string>
-                        </property>
-                    </item>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string>cisco</string>
-                        </property>
-                    </item>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string>wlan-ng</string>
-                        </property>
-                    </item>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string>hostap</string>
-                        </property>
-                    </item>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string>orinoco</string>
-                        </property>
-                    </item>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string>&lt;manual&gt;</string>
-                        </property>
-                    </item>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string>&lt;file&gt;</string>
-                        </property>
-                    </item>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>deviceType</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>enabled</name>
-                        <bool>true</bool>
-                    </property>
-                    <property>
-                        <name>whatsThis</name>
-                        <string>Choose the type of driver used for sniffing.</string>
-                    </property>
-                </widget>
-                <widget row="3"  column="0"  rowspan="1"  colspan="2" >
-                    <class>QCheckBox</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>additionalInfo</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>enabled</name>
-                        <bool>false</bool>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>Gather Additional Info</string>
-                    </property>
-                </widget>
-                <widget row="2"  column="0" >
-                    <class>QSpinBox</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>hopInterval</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>enabled</name>
-                        <bool>true</bool>
-                    </property>
-                    <property stdset="1">
-                        <name>suffix</name>
-                        <string> ms</string>
-                    </property>
-                    <property stdset="1">
-                        <name>maxValue</name>
-                        <number>2000</number>
-                    </property>
-                    <property stdset="1">
-                        <name>minValue</name>
-                        <number>100</number>
-                    </property>
-                    <property stdset="1">
-                        <name>lineStep</name>
-                        <number>100</number>
-                    </property>
-                    <property>
-                        <name>whatsThis</name>
-                        <string>Choose the channel hop interval.</string>
-                    </property>
-                </widget>
-                <widget row="2"  column="1" >
-                    <class>QLabel</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>TextLabel3_3</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>enabled</name>
-                        <bool>true</bool>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>Hop Interval</string>
-                    </property>
-                </widget>
-                <widget row="1"  column="1" >
-                    <class>QLabel</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>TextLabel2_3</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>enabled</name>
-                        <bool>true</bool>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>Device Type</string>
-                    </property>
-                </widget>
-                <widget row="0"  column="1" >
-                    <class>QLabel</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>TextLabel1_2</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>enabled</name>
-                        <bool>true</bool>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>Interface Name</string>
-                    </property>
-                </widget>
-            </grid>
         </widget>
-        <widget>
-            <class>QLayoutWidget</class>
+        <widget row="2"  column="0"  rowspan="1"  colspan="2" >
+            <class>QComboBox</class>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>&lt;select&gt;</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>cisco</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>wlan-ng</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>hostap</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>orinoco</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>&lt;manual&gt;</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>&lt;file&gt;</string>
+                </property>
+            </item>
             <property stdset="1">
                 <name>name</name>
-                <cstring>Layout6</cstring>
+                <cstring>deviceType</cstring>
+            </property>
+            <property stdset="1">
+                <name>enabled</name>
+                <bool>true</bool>
             </property>
             <property>
-                <name>layoutSpacing</name>
+                <name>whatsThis</name>
+                <string>Choose the type of driver used for sniffing.</string>
             </property>
-            <hbox>
-                <property stdset="1">
-                    <name>margin</name>
-                    <number>0</number>
-                </property>
-                <property stdset="1">
-                    <name>spacing</name>
-                    <number>2</number>
-                </property>
-                <widget>
-                    <class>QLabel</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>TextLabel3_2_2</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>sizePolicy</name>
-                        <sizepolicy>
-                            <hsizetype>4</hsizetype>
-                            <vsizetype>1</vsizetype>
-                        </sizepolicy>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>GUI</string>
-                    </property>
-                </widget>
-                <widget>
-                    <class>Line</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>Line9_2</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>orientation</name>
-                        <enum>Horizontal</enum>
-                    </property>
-                </widget>
-            </hbox>
         </widget>
-        <widget>
-            <class>QCheckBox</class>
+        <widget row="3"  column="0"  rowspan="1"  colspan="2" >
+            <class>QSpinBox</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>groupNetworks</cstring>
+                <cstring>hopInterval</cstring>
+            </property>
+            <property stdset="1">
+                <name>enabled</name>
+                <bool>true</bool>
+            </property>
+            <property stdset="1">
+                <name>suffix</name>
+                <string> ms</string>
+            </property>
+            <property stdset="1">
+                <name>maxValue</name>
+                <number>2000</number>
+            </property>
+            <property stdset="1">
+                <name>minValue</name>
+                <number>100</number>
+            </property>
+            <property stdset="1">
+                <name>lineStep</name>
+                <number>100</number>
+            </property>
+            <property>
+                <name>whatsThis</name>
+                <string>Choose the channel hop interval.</string>
+            </property>
+        </widget>
+        <widget row="3"  column="2" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel3_3</cstring>
+            </property>
+            <property stdset="1">
+                <name>enabled</name>
+                <bool>true</bool>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Hop Interval</string>
+            </property>
+        </widget>
+        <widget row="2"  column="2" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel2_3</cstring>
+            </property>
+            <property stdset="1">
+                <name>enabled</name>
+                <bool>true</bool>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Device Type</string>
+            </property>
+        </widget>
+        <widget row="1"  column="2" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel1_2</cstring>
+            </property>
+            <property stdset="1">
+                <name>enabled</name>
+                <bool>true</bool>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Interface Name</string>
+            </property>
+        </widget>
+        <widget row="5"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel1_5</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Fake MAC:</string>
+            </property>
+        </widget>
+        <widget row="5"  column="1"  rowspan="1"  colspan="2" >
+            <class>QLineEdit</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>MAC</cstring>
             </property>
             <property stdset="1">
                 <name>enabled</name>
@@ -342,14 +254,14 @@
             </property>
             <property stdset="1">
                 <name>text</name>
-                <string>Group Detected Networks</string>
+                <string>44:44:44:44:44:44</string>
             </property>
         </widget>
-        <widget>
+        <widget row="4"  column="0"  rowspan="1"  colspan="3" >
             <class>QCheckBox</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>enableActivity</cstring>
+                <cstring>activeScanning</cstring>
             </property>
             <property stdset="1">
                 <name>enabled</name>
@@ -357,10 +269,10 @@
             </property>
             <property stdset="1">
                 <name>text</name>
-                <string>Enable Activity Display</string>
+                <string>Active Scanning (caution!)</string>
             </property>
         </widget>
-        <widget>
+        <widget row="10"  column="0"  rowspan="1"  colspan="3" >
             <class>QLayoutWidget</class>
             <property stdset="1">
                 <name>name</name>
@@ -461,6 +373,182 @@
                 </widget>
             </grid>
         </widget>
-    </vbox>
+        <widget row="8"  column="0"  rowspan="1"  colspan="3" >
+            <class>QLayoutWidget</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Layout7</cstring>
+            </property>
+            <hbox>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>0</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>6</number>
+                </property>
+                <widget>
+                    <class>QCheckBox</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>writeCaptureFile</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>enabled</name>
+                        <bool>true</bool>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Write Capture File</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QToolButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>getCaptureFileName</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>enabled</name>
+                        <bool>false</bool>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>...</string>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+        <widget row="7"  column="0"  rowspan="1"  colspan="3" >
+            <class>QLayoutWidget</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Layout6</cstring>
+            </property>
+            <property>
+                <name>layoutSpacing</name>
+            </property>
+            <hbox>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>0</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>2</number>
+                </property>
+                <widget>
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>TextLabel3_2_2</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>4</hsizetype>
+                            <vsizetype>1</vsizetype>
+                        </sizepolicy>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>GUI</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>Line</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>Line9_2</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>orientation</name>
+                        <enum>Horizontal</enum>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+        <spacer row="6"  column="2" >
+            <property>
+                <name>name</name>
+                <cstring>Spacer1</cstring>
+            </property>
+            <property stdset="1">
+                <name>orientation</name>
+                <enum>Vertical</enum>
+            </property>
+            <property stdset="1">
+                <name>sizeType</name>
+                <enum>Expanding</enum>
+            </property>
+            <property>
+                <name>sizeHint</name>
+                <size>
+                    <width>20</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
+        <widget row="9"  column="0"  rowspan="1"  colspan="3" >
+            <class>QLayoutWidget</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Layout7</cstring>
+            </property>
+            <hbox>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>0</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>6</number>
+                </property>
+                <widget>
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>TextLabel1_4</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>CaptureFile:</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QLineEdit</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>captureFileName</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>enabled</name>
+                        <bool>false</bool>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+    </grid>
 </widget>
+<connections>
+    <connection>
+        <sender>writeCaptureFile</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>getCaptureFileName</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>activeScanning</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>MAC</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>writeCaptureFile</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>captureFileName</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+</connections>
 </UI>
