@@ -3,7 +3,7 @@
 
 #include "module.h"
 
-//class WlanInfoImp;
+class WLANImp;
 
 class WLANModule : Module{
 
@@ -29,11 +29,10 @@ public:
 
 private:
   QWidget *getInfo(Interface*);
-
+  WLANImp *wlanconfigWiget;
   QList<Interface> list;
   QString profile;
-  //  WlanInfoImp *info;
-  //  Interface *iface;
+
 };
 
 extern "C"

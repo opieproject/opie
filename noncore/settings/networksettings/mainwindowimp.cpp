@@ -662,5 +662,6 @@ void MainWindowImp::receive(const QCString &msg, const QByteArray &arg)
      }
 
 
-    if (!found) qDebug("Huh what do ya want");
+     if (found) QPEApplication::setKeepRunning();
+     else qDebug("Huh what do ya want");
 }

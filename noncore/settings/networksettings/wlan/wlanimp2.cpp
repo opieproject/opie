@@ -28,7 +28,7 @@
  * Constructor, read in the wireless.opts file for parsing later.
  */
 WLANImp::WLANImp( QWidget* parent, const char* name, Interface *i, bool modal, WFlags fl) : WLAN(parent, name, modal, fl), currentProfile("*"), interface(i) {
-  interfaces = new Interfaces;
+  interfaces = new Interfaces();
   interfaceSetup = new InterfaceSetupImp(tabWidget, "InterfaceSetupImp", i, interfaces);
   tabWidget->insertTab(interfaceSetup, "TCP/IP");
 

@@ -4,8 +4,11 @@
 #include "wextensions.h"
 #include "interfaceinformationimp.h"
 
+#include <qcheckbox.h>
+#include <qcombobox.h>
 #include <qlabel.h>
 #include <qprogressbar.h>
+#include <qspinbox.h>
 #include <qtabwidget.h>
 
 
@@ -14,7 +17,10 @@
 /**
  * Constructor, find all of the possible interfaces
  */
-WLANModule::WLANModule() : Module() {
+WLANModule::WLANModule()
+    : Module(),
+      wlanconfigWiget(0)
+{
 }
 
 /**
@@ -115,7 +121,7 @@ void WLANModule::receive(const QCString &param, const QByteArray &arg)
     qDebug("WLANModule::receive "+param);
     QStringList params = QStringList::split(",",param);
     int count = params.count();
-    qDebug("got %i params", count );
+    qDebug("WLANModule got %i params", count );
     if (count < 2){
         qDebug("Erorr less than 2 parameter");
         qDebug("RETURNING");
@@ -128,18 +134,18 @@ void WLANModule::receive(const QCString &param, const QByteArray &arg)
 
     stream >> interface;
     stream >> action;
-    qDebug("got interface %s and acion %s", interface.latin1(), action.latin1());
+    qDebug("WLANModule got interface %s and acion %s", interface.latin1(), action.latin1());
     // find interfaces
     Interface *ifa=0;
     for ( Interface *i=list.first(); i != 0; i=list.next() ){
         if (i->getInterfaceName() == interface){
-            qDebug("found interface %s",interface.latin1());
+            qDebug("WLANModule found interface %s",interface.latin1());
             ifa = i;
         }
     }
 
     if (ifa == 0){
-        qFatal("Did not find %s",interface.latin1());
+        qFatal("WLANModule Did not find %s",interface.latin1());
     }
 
     if (count == 2){
@@ -158,21 +164,36 @@ void WLANModule::receive(const QCString &param, const QByteArray &arg)
         }
     }else if (count == 3){
         QString value;
+        if (!wlanconfigWiget){
+            //FIXME: what if it got closed meanwhile?
+            wlanconfigWiget = (WLANImp*) configure(ifa);
+        }
+        wlanconfigWiget->showMaximized();
         stream >> value;
-        qDebug("setting %s of %s to %s", action.latin1(), interface.latin1(), value.latin1() );
+        qDebug("WLANModule is setting %s of %s to %s", action.latin1(), interface.latin1(), value.latin1() );
         if ( action.contains("ESSID") ){
-            qDebug("Setting ESSID not yet impl");
+            QComboBox *combo = wlanconfigWiget->essid;
+            bool found = false;
+            for ( int i = 0; i < combo->count(); i++)
+                if ( combo->text( i ) == value ){
+                    combo->setCurrentItem( i );
+                    found = true;
+                }
+            if (!found) combo->insertItem( value, 0 );
+        }else if ( action.contains("Mode") ){
+            QComboBox *combo = wlanconfigWiget->mode;
+            for ( int i = 0; i < combo->count(); i++)
+                if ( combo->text( i ) == value ){
+                    combo->setCurrentItem( i );
+                }
+
         }else if (action.contains("Channel")){
-            qDebug("Setting Channel not yet impl");
+            wlanconfigWiget->specifyChan->setChecked( true );
+            wlanconfigWiget->networkChannel->setValue( value.toInt() );
         }else
             qDebug("wlan plugin has no clue");
     }
-    // if (param.contains("QString,QString,QString")) {
-//         QDataStream stream(arg,IO_ReadOnly);
-//         QString arg1, arg2, arg3;
-//         stream >> arg1 >> arg2 >> arg3 ;
-//         qDebug("interface >%s< setting >%s< value >%s<",arg1.latin1(),arg2.latin1(),arg3.latin1());
-//     }
+
 }
 
 QWidget *WLANModule::getInfo( Interface *i)
@@ -185,3 +206,4 @@ QWidget *WLANModule::getInfo( Interface *i)
     qDebug("WLANModule::getInfo return");
     return info;
 }
+
