@@ -124,6 +124,7 @@ public:
  *
  * @param widget Widget control to be removed.
  */
+    /* ### Page vs. Tab.. yes the widget is a Page but then is addTab wrong -zecke */
     void removePage( QWidget * );
 
 /**
@@ -198,8 +199,14 @@ public:
  * @fn currentTab( )
  * @brief returns current tab id.
  */
-    int currentTab();
-
+    // ### make const
+    int currentTab()/* const */;
+/**
+ * @brief returns the current page of the active tab
+ *
+ * @since 1.2
+ */
+    QWidget* currentWidget()const;
 
 protected:
 

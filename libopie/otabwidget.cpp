@@ -408,3 +408,12 @@ int OTabWidget::currentTab()
     return -1;
 }
 
+QWidget* OTabWidget::currentWidget()const
+{
+    if ( currTab )
+    {
+        return currTab->control();
+    }
+
+    return 0;
+}
