@@ -21,7 +21,8 @@
 #include <qpe/applnk.h>
 #include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
-using namespace Opie::Ui;
+#include <qpe/ir.h>
+
 
 /* QT */
 #include <qpainter.h>
@@ -266,7 +267,10 @@ void IrdaApplet::mousePressEvent ( QMouseEvent * )
 
 	if ( m_irda_active ) {
 		menu-> insertItem ( m_irda_discovery_active ? tr( "Disable Discovery" ) : tr( "Enable Discovery" ), 1 );
-		menu-> insertItem ( m_receive_active ? tr( "Disable Receive" ) : tr( "Enable Receive" ), 2 );
+		
+		/* Only Receive if OBEX is installed */
+		if( Ir::supported() )
+			menu-> insertItem ( m_receive_active ? tr( "Disable Receive" ) : tr( "Enable Receive" ), 2 );
 	}
 
 	QPoint p = mapToGlobal ( QPoint ( 0, 0 ) );
