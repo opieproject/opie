@@ -134,12 +134,14 @@ protected:
 	void executeOrModify( const QString& appLnkFile );
 	void styleChange( QStyle & );
 	void timerEvent( QTimerEvent *e );
+	virtual bool eventFilter( QObject *o, QEvent *ev );
 
 	QWidget *bg;
 	Launcher *launcher;
 	TaskBar *tb;
 
 private:
+	void layout();
 	void startTransferServer();
 	bool recoverMemory();
 

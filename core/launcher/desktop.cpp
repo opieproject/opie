@@ -507,7 +507,7 @@ Desktop::Desktop() :
 	QSize sz = tb->sizeHint();
 
 	setGeometry( 0, displayh - sz.height(), displayw, sz.height() );
-	tb->setGeometry( 0, displayh - sz.height(), displayw, sz.height() );
+	layout();
 
 	tb->show();
 	launcher->showMaximized();
@@ -524,6 +524,7 @@ Desktop::Desktop() :
 	packageSlave = new PackageSlave( this );
 
 	qApp->installEventFilter( this );
+	qApp->desktop()->installEventFilter( this );
 
 	qApp-> setMainWidget ( launcher );
 }
@@ -732,12 +733,7 @@ void Desktop::toggleCapsLockState()
 void Desktop::styleChange( QStyle &s )
 {
 	QWidget::styleChange( s );
-	int displayw = qApp->desktop() ->width();
-	int displayh = qApp->desktop() ->height();
-
-	QSize sz = tb->sizeHint();
-
-	tb->setGeometry( 0, displayh - sz.height(), displayw, sz.height() );
+	layout();
 }
 
 void DesktopApplication::shutdown()
@@ -806,6 +802,17 @@ void DesktopApplication::restart()
 #endif
 }
 
+void Desktop::layout()
+{
+	int displayw = qApp->desktop() ->width();
+	int displayh = qApp->desktop() ->height();
+
+	QSize sz = tb->sizeHint();
+
+	tb->setGeometry( 0, displayh - sz.height(), displayw, sz.height() );
+	tb->calcMaxWindowRect();
+}
+
 void Desktop::startTransferServer()
 {
 	// start qcop bridge server
@@ -828,6 +835,16 @@ void Desktop::timerEvent( QTimerEvent *e )
 {
 	killTimer( e->timerId() );
 	startTransferServer();
+}
+
+bool Desktop::eventFilter( QObject *o, QEvent *ev )
+{
+    if ( o != qApp->desktop() || ev->type() != QEvent::Resize )
+	return QWidget::eventFilter( o, ev );
+
+    layout();
+
+    return QWidget::eventFilter( o, ev );
 }
 
 void Desktop::terminateServers()
