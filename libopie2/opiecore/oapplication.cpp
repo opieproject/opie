@@ -1,7 +1,6 @@
 /*
                              This file is part of the Opie Project
-
-                             Copyright (C) 2003 Michael Lauer <mickey@tm.informatik.uni-frankfurt.de>
+                             Copyright (C) 2003 Michael 'Mickey' Lauer <mickey@Vanille.de>
               =.
             .=l.
            .>+-=
@@ -101,7 +100,9 @@ void OApplication::init()
     }
     else
     {
-        qFatal( "OApplication: Can't create more than one OApplication object. Aborting." );
+        ofatal << "OApplication: Can't create more than one OApplication object. Aborting." << oendl;
+        //FIXME exit gracefully ?
+        ::exit( -1 );
     }
 }
 

@@ -1,7 +1,6 @@
 /*
                              This file is part of the Opie Project
-
-                             Copyright (C) 2003 Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
+                             Copyright (C) 2003 Michael 'Mickey' Lauer <mickey@Vanille.de>
               =.
             .=l.
            .>+-=
@@ -26,7 +25,7 @@
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
- */
+*/
 
 #include <opie2/oglobal.h>
 
@@ -36,6 +35,7 @@ OConfig* OGlobal::config()
 {
     if ( !OGlobal::_config )
     {
+        // odebug classes are reading config, so can't use them here!
         qDebug( "OGlobal::creating global configuration instance." );
         OGlobal::_config = new OConfig( "global" );
     }
