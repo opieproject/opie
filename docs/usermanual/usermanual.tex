@@ -39,8 +39,32 @@ Opie should now be running (if you should have to reboot, which is rare, Opie wi
 
 \section{Zaurus}
 
-To install Opie completely on the Zaurus, you will have to install OpenZaurus, which includes Opie. However, individual Opie apps will work fine on the default Zaurus rom. Do not install Opie's launcher on a default Zaurus ROM though. 
+To install Opie completely on the Zaurus, you will have to install OpenZaurus, which includes Opie. However, individual Opie apps will work fine on the default Zaurus rom. Do not install Opie's launcher on a default Zaurus ROM though.
 
+\chapter{Using Opie}
+Now that Opie is installed and running, it's time to start using it.  When you first start Opie, you will see the ``Launcher'' where you start all your applications from, and the ``Taskbar'' along the bottom, where you can see all the running applications, select an input method, and where all the ``Applets'' show up.
+
+\section{Getting Around}
+
+Getting around in Opie is very easy, you simply click your stylus on whatever icon or button you want to click on.  The main difference between using the stylus and using a mouse is that you cannot right click with a stylus, so things that require a right click are kept to a minimum.  However, it is necessary to right click sometimes, and this is implemented with a ``press and hold''.  Any time you want to do something that you think would require a right click on a normal pc, try pressing the stylus down and holding it still for a few seconds.  This usually opens up a context sensative menu, much like the right click usually does on  a desktop interface.
+
+\section{Launcher}
+
+The launcher functions like the ``desktop'' on most PC GUIs.  When no applications are running or visible, you will get to the launcher.  You can also map a hardware key to bring the launcher to the top without closing any of the running applications (this is similar to ``minimising'' all the applications that are running).
+
+Along the top of the launcher you will see a list of tabs which function as categories for your applications.  You can click on the tab for the category you want to view, and then click on the icon for the application that you wish to launch.  By default, there will be an Applications tab and a Settings tab (if you install any games, they will go in the Games tab).  When new applications get installed, they will usually be in one of these three tabs, or in a tab of their own.  To add or delete tabs or to move applications between the tabs, you can use the Tab Manager application, or you can edit them by hand, by changing the directories in /opt/QtPalmtop/apps.
+
+There is also a tab to the far right called the ``Documents'' tab, which allows you to quickly open your most used documents.  You can click on a document to open it up in the proper application.  For help on adding files to the Documents tab see \ref{docadd} on page \pageref{docadd}
+
+\section{Taskbar}
+
+Opie has a ``Taskbar'' that always runs along the bottom of the screen in Opie, except for a few ``fullscreen'' applications that cover it up.  The taskbar is what lets you select which input method you would like to use, and is also where the ``applets'' draw their icons.  On the left of the taskbar is an ``O'' button that opens a menu which has an entry for every tab in the launcher, allowing you to star an applications without going back to the launcher, or quiting the application that you are running.  On the right hand side of the taskbar, you will probably see a clock (unless you installed task-opie-minimal), which is actually just another applet that draws the time instead of an icon.
+
+\section{Dialogs}
+
+In Opie, dialogs, as well as some applications, have a button labeled ``Ok'' on the right side of the window title bar, in addition to the normal ``x''.  For dialogs, the ``Ok'' will apply your changes and close the window, while the ``x'' will cancel them before closing the window (for people used to most desktop GUI's the ``Ok'' and ``x'' are like the ``Ok'' and ``Cancel'' buttons you would normally see in the bottom right of the dialog window).
+
+For most applications that have an ``Ok'' button as well as the ``x'' button that all applications have, the ``Ok'' button will usually save the current file and then close, while the ``x'' button will close the application without saving.
 
 \chapter{Upgrading} 
 
@@ -181,35 +205,6 @@ To only view tasks filled under certain categories, go to the Category menu, and
 
 To mark a task as completed without deleting it, you can either check the checkbox next to it in the main view, or edit it, and check the "completed" check box in the edit dialog. If Options then Completed tasks is not checked, the task will disapear when you mark it completed. but dont worry, its not gone forever, just check Completed tasks in the options menu, and you can see it, and edit it again.
 
-\chapter{EmbeddedKonsole}
-EmbeddedKonsole is Opie's terminal emulator.  From here you can do pretty much anything in (since Linux is actually a command line based OS by itself).  I will not go into much detail on using the linux command line, as that is covered in many other places (http://www.tldp.org is a good place to start, or read O'Reilly's \underline{Running Linux} for a comprehensive look at Linux for the beginner).  I will, however, give a quick overview of using a Linux shell.
-
-\section{What is a shell}
-
-A shell is a program that accepts input from a user, and runs commands.  Each ``command'' in the shell is actually a separate program (unless you are using a shell like BusyBox, which makes some of the more common commands part of its own program in order to save space).  Shells can actually be very powerful, and many of them allow you to write something called ``shell scripts'' which are just a sequence of commands, sometimes with some flow control statements.  For the most part, the average user does not need to know about any of this, though.  If you are running Opie on your iPaq, it is advisable to install the bash shell (ipkg install bash) because it offers things like tab completion, use of the backspace key, and a command history, as well as offering a more advanced scripting languauge than most other shells.
-
-\section{Running Programs}
-
-To run a program or a command (remember, a command is just a program), you simply type the name of the program and hit ``Return'' (in Linux, program names do not have a special suffix like they do in windows, in fact the ``.'' character has no special meaning unless it is at the begining of a filename).  When you type a program name and hit ``Return'' the shell looks in a special list of directories called your ``path'', and if it cannot find it in any of those directories, it stops looking and tells you it could not find them.  If you want to run a program that is not in your path, you must specify a absolute or relative path to that program.  For instance, to run a program that is in the directory you are currently in, you would type \verb+./program+ (``./'' is a special directory that is explained below), or to run a program in /home/username/ you would call \verb+/home/username/program+.
-
-Most programs take ``arguments'' when run from the command line.  An argument is a string that contains no spaces that changes how the program behaves (a text editor, for instance, might take a single argument, which would be the name of the file you wish to edit).  Usually, you can use the arguments ``-h'' or ``--help'' to get a list of the common arguments that that program takes, along with a short usage description, and a short description of what each argument does.
-
-\section{Basic Navigation}
-
-The command that you will use most often in the shell is probably the ``cd'' command, which stands for ``change directory.''  With this command, you can move around in the file system, by issuing the command like this: \verb+cd [new directory]+, where \verb+[new directory]+ is the directory you want to move to.  This directory name does not have to include the entire directory structure, but can be ``relative'' which means it assumes you are talking about directories relative to the directory you are in.  For example, if you are in a directory called /home/username and you want to move to the directory /home/username/other/dir you could simply type \verb+cd other/dir+ and you would end up in /home/username/other/dir.  You can also specify a full, or ``absolute'' path, by specifying the entire path name starting with / ( / is a special directory called the ``root'' directory, and does not have a ``parent'', which means that it is not in any other directory).  There are also two special directories called ``./'' and ``../''.  The ``./'' directory is the current directory you are in, and you will probably never use this in conjunction with the cd command (why would you want to move to the directory you are already in?).  The ``../'' directory represents the parent directory of the directory you are currently in, so if you are in /home/username, ../ is the same as /home.  You can string several ../'s together, so if you are in /home/username/dir/ ../../ represents /home.  There is one other special directory, called ``$\sim$/'' that points to your home directory (usually /home/username or /root for the root user).
-
-\section{Moving Files}
-
-To move files around, you need to use the ``cp'' (copy) and ``mv'' (move) commands.  Both of these are run the same way: \verb+command originalfile newfile+.  The only difference is that cp creates a new file without touching the old one, while mv deletes the original file.  The two path names can be either absolute or relative.  If you only specify a directory for the destination, and no filename, it will use the filename for the original file.
-
-\section{Deleting Files}
-
-To delete a file, run the ``rm'' command, and to delete a directory, run the ``rmdir'' command, each of them take the file to be removed as their only argument.
-
-\section{Linking Files}
-
-In Linux, you can have a special file called a ``symbolic link'' that acts just like a copy of another file, except it takes up less space.  This is convinient if two applications are looking for the same file in two separate places, because the file can be in both places at once, without taking up any extra space, and any change to one is automatically applied to the other (really, there is no other, one of them is just a file pointing to the other one).  This is also usefull for naming applications independant of their version number.  For instance, you could have a link called ``application'' that points to ``application1.0''.  To create a link, use the following command: \verb+ln -s originalfile link+.
-
 \chapter{File Manager}
 The file manager allows easy access to your file system, letting you browse, copy, move, delete and link files.  You can also use it to open the file in an application based upon the file type, or add the file to your ``Documents'' tab, as well as several other filesystem related things.
 
@@ -242,7 +237,7 @@ To create a directory, first bring up the input method you want to use (if you a
 To view a file, press and hold on a file, and the menu that comes up will contain two entries for vieing the file, the first depends on the filetype, but usually lets you open the file in a specific program. The second is ``view as text'' which will open the file up in TextEdit (regardless of whether or not it is actually a text file). 
 
 \section{Adding to ``Documents''}
-
+\label{docadd}
 To add a file to your ``Documents'', press and hold the file, and select ``Add to documents'' from the menu. This will add the file to the documents tab, which you can use to quickly open the file (simply click on the icon for the file in the Documents tab). Some programs also use the Documents list to aid in quickly opening files. 
 
 
@@ -253,4 +248,33 @@ To sort the files, use the ``Sort'' menu to select wich field you want to sort t
 \section{Viewing Options}
 
 The ``View'' menu lets you choose which files you view. If ``Hidden'' is checked, hidden files will be visible (in Linux, hidden files start with a ``.''). If ``Symlinks'' is checked, symbolic links (files or directories which are merely links to other files or directories) will be visible.
+
+\chapter{EmbeddedKonsole}
+EmbeddedKonsole is Opie's terminal emulator.  From here you can do pretty much anything in (since Linux is actually a command line based OS by itself).  I will not go into much detail on using the linux command line, as that is covered in many other places (http://www.tldp.org is a good place to start, or read O'Reilly's \underline{Running Linux} for a comprehensive look at Linux for the beginner).  I will, however, give a quick overview of using a Linux shell.
+
+\section{What is a shell}
+
+A shell is a program that accepts input from a user, and runs commands.  Each ``command'' in the shell is actually a separate program (unless you are using a shell like BusyBox, which makes some of the more common commands part of its own program in order to save space).  Shells can actually be very powerful, and many of them allow you to write something called ``shell scripts'' which are just a sequence of commands, sometimes with some flow control statements.  For the most part, the average user does not need to know about any of this, though.  If you are running Opie on your iPaq, it is advisable to install the bash shell (ipkg install bash) because it offers things like tab completion, use of the backspace key, and a command history, as well as offering a more advanced scripting languauge than most other shells.
+
+\section{Running Programs}
+
+To run a program or a command (remember, a command is just a program), you simply type the name of the program and hit ``Return'' (in Linux, program names do not have a special suffix like they do in windows, in fact the ``.'' character has no special meaning unless it is at the begining of a filename).  When you type a program name and hit ``Return'' the shell looks in a special list of directories called your ``path'', and if it cannot find it in any of those directories, it stops looking and tells you it could not find them.  If you want to run a program that is not in your path, you must specify a absolute or relative path to that program.  For instance, to run a program that is in the directory you are currently in, you would type \verb+./program+ (``./'' is a special directory that is explained below), or to run a program in /home/username/ you would call \verb+/home/username/program+.
+
+Most programs take ``arguments'' when run from the command line.  An argument is a string that contains no spaces that changes how the program behaves (a text editor, for instance, might take a single argument, which would be the name of the file you wish to edit).  Usually, you can use the arguments ``-h'' or ``--help'' to get a list of the common arguments that that program takes, along with a short usage description, and a short description of what each argument does.
+
+\section{Basic Navigation}
+
+The command that you will use most often in the shell is probably the ``cd'' command, which stands for ``change directory.''  With this command, you can move around in the file system, by issuing the command like this: \verb+cd [new directory]+, where \verb+[new directory]+ is the directory you want to move to.  This directory name does not have to include the entire directory structure, but can be ``relative'' which means it assumes you are talking about directories relative to the directory you are in.  For example, if you are in a directory called /home/username and you want to move to the directory /home/username/other/dir you could simply type \verb+cd other/dir+ and you would end up in /home/username/other/dir.  You can also specify a full, or ``absolute'' path, by specifying the entire path name starting with / ( / is a special directory called the ``root'' directory, and does not have a ``parent'', which means that it is not in any other directory).  There are also two special directories called ``./'' and ``../''.  The ``./'' directory is the current directory you are in, and you will probably never use this in conjunction with the cd command (why would you want to move to the directory you are already in?).  The ``../'' directory represents the parent directory of the directory you are currently in, so if you are in /home/username, ../ is the same as /home.  You can string several ../'s together, so if you are in /home/username/dir/ ../../ represents /home.  There is one other special directory, called ``$\sim$/'' that points to your home directory (usually /home/username or /root for the root user).
+
+\section{Moving Files}
+
+To move files around, you need to use the ``cp'' (copy) and ``mv'' (move) commands.  Both of these are run the same way: \verb+command originalfile newfile+.  The only difference is that cp creates a new file without touching the old one, while mv deletes the original file.  The two path names can be either absolute or relative.  If you only specify a directory for the destination, and no filename, it will use the filename for the original file.
+
+\section{Deleting Files}
+
+To delete a file, run the ``rm'' command, and to delete a directory, run the ``rmdir'' command, each of them take the file to be removed as their only argument.
+
+\section{Linking Files}
+
+In Linux, you can have a special file called a ``symbolic link'' that acts just like a copy of another file, except it takes up less space.  This is convinient if two applications are looking for the same file in two separate places, because the file can be in both places at once, without taking up any extra space, and any change to one is automatically applied to the other (really, there is no other, one of them is just a file pointing to the other one).  This is also usefull for naming applications independant of their version number.  For instance, you could have a link called ``application'' that points to ``application1.0''.  To create a link, use the following command: \verb+ln -s originalfile link+.
 \end{document}
