@@ -7,3 +7,5 @@ Name=o-rdesktop
 Comment=Remote Desktop Protocol Client
 Name[fr]=Opie rdesktop
 Comment[fr]=Client RDP (Remote Desktop Protocol)
+Name[lv]=Opie rdesktop
+Comment[lv]=RDP Klients (Remote Desktop Protocol)

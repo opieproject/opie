@@ -3,3 +3,4 @@ Type=Application
 Exec=olinphone
 Icon=linphone/linphone
 Name=Sip Phone
+Name[lv]=Sip Telefons
