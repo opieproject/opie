@@ -37,10 +37,12 @@
 #include "lib.h"
 #include <qobject.h>
 
+#include "mediaplayerstate.h"
+
 class XineControl : public QObject  {
     Q_OBJECT
 public:
-    XineControl( QObject *parent = 0, const char *name =0 );
+    XineControl( MediaPlayerState &_mediaPlayerState, QObject *parent = 0, const char *name =0 );
     ~XineControl();
 
     bool hasVideo() const { return hasVideoChannel; }
@@ -106,6 +108,7 @@ private:
     bool disabledSuspendScreenSaver : 1;
     bool hasVideoChannel : 1;
     bool hasAudioChannel : 1;
+    MediaPlayerState &mediaPlayerState;
 
 signals:
     void positionChanged( long );

@@ -60,7 +60,7 @@ MediaPlayer::MediaPlayer( MediaPlayerState &_mediaPlayerState, QObject *parent, 
     connect( videoUI,  SIGNAL( lessReleased() ), this, SLOT( stopChangingVolume() ) );
 
     volControl = new VolumeControl;
-    xineControl = new XineControl();
+    xineControl = new XineControl( mediaPlayerState );
     Config cfg( "OpiePlayer" );
     cfg.setGroup("PlayList");
     QString currentPlaylist = cfg.readEntry( "CurrentPlaylist", "default");

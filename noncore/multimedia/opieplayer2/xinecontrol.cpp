@@ -40,20 +40,19 @@
 #include "mediaplayerstate.h"
 #include "videowidget.h"
 
-extern MediaPlayerState *mediaPlayerState;
 extern VideoWidget *videoUI;
-XineControl::XineControl( QObject *parent, const char *name )
-    : QObject( parent, name ) {
+XineControl::XineControl( MediaPlayerState &_mediaPlayerState, QObject *parent, const char *name )
+    : QObject( parent, name ), mediaPlayerState( _mediaPlayerState ) {
 
     libXine = new XINE::Lib( videoUI->vidWidget() );
 
     connect ( videoUI, SIGNAL( videoResized( const QSize & )), this, SLOT( videoResized ( const QSize & ) ) );
-    connect( mediaPlayerState, SIGNAL( pausedToggled( bool ) ),  this, SLOT( pause( bool ) ) );
-    connect( this, SIGNAL( positionChanged( long ) ), mediaPlayerState, SLOT( updatePosition( long ) ) );
-    connect( mediaPlayerState, SIGNAL( playingToggled( bool ) ), this, SLOT( stop( bool ) ) );
-    connect( mediaPlayerState, SIGNAL( fullscreenToggled( bool ) ), this, SLOT( setFullscreen( bool ) ) );
-    connect( mediaPlayerState, SIGNAL( positionChanged( long ) ),  this,  SLOT( seekTo( long ) ) );
-    connect( mediaPlayerState,  SIGNAL( videoGammaChanged( int ) ), this,  SLOT( setGamma( int ) ) );
+    connect( &mediaPlayerState, SIGNAL( pausedToggled( bool ) ),  this, SLOT( pause( bool ) ) );
+    connect( this, SIGNAL( positionChanged( long ) ), &mediaPlayerState, SLOT( updatePosition( long ) ) );
+    connect( &mediaPlayerState, SIGNAL( playingToggled( bool ) ), this, SLOT( stop( bool ) ) );
+    connect( &mediaPlayerState, SIGNAL( fullscreenToggled( bool ) ), this, SLOT( setFullscreen( bool ) ) );
+    connect( &mediaPlayerState, SIGNAL( positionChanged( long ) ),  this,  SLOT( seekTo( long ) ) );
+    connect( &mediaPlayerState,  SIGNAL( videoGammaChanged( int ) ), this,  SLOT( setGamma( int ) ) );
     connect( libXine, SIGNAL( stopped() ), this, SLOT( nextMedia() ) );
 
     disabledSuspendScreenSaver = FALSE;
@@ -80,10 +79,10 @@ void XineControl::play( const QString& fileName ) {
     if ( !libXine->play( fileName, 0, 0 ) ) {
         QMessageBox::warning( 0l , tr( "Failure" ), getErrorCode() );
         // toggle stop so the the play button is reset
-        mediaPlayerState->setPlaying( false );
+        mediaPlayerState.setPlaying( false );
         return;
     }
-    mediaPlayerState->setPlaying( true );
+    mediaPlayerState.setPlaying( true );
 
     MediaPlayerState::DisplayType displayType;
     // qDebug( QString( "libXine->hasVideo() return : %1 ").arg( libXine->hasVideo() ) );
@@ -99,10 +98,10 @@ void XineControl::play( const QString& fileName ) {
         hasVideoChannel = TRUE;
     }
     // determine if slider is shown
-    mediaPlayerState->setIsSeekable( libXine->isSeekable() );
+    mediaPlayerState.setIsSeekable( libXine->isSeekable() );
 
     // which gui (video / audio)
-    mediaPlayerState->setDisplayType( displayType );
+    mediaPlayerState.setDisplayType( displayType );
 
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)
     if ( !disabledSuspendScreenSaver ) {
@@ -118,7 +117,7 @@ void XineControl::play( const QString& fileName ) {
 }
 
 void XineControl::nextMedia() {
-    mediaPlayerState->setNext();
+    mediaPlayerState.setNext();
 }
 
 void XineControl::setGamma( int value ) {
@@ -167,7 +166,7 @@ long XineControl::currentTime() {
  */
 void  XineControl::length() {
     m_length = libXine->length();
-    mediaPlayerState->setLength( m_length );
+    mediaPlayerState.setLength( m_length );
 }
 
 
@@ -177,10 +176,10 @@ void  XineControl::length() {
  */
 long XineControl::position() {
     m_position = ( currentTime() );
-    mediaPlayerState->updatePosition( m_position );
+    mediaPlayerState.updatePosition( m_position );
     long emitPos = (long)m_position;
     emit positionChanged( emitPos );
-    if( mediaPlayerState->isPlaying() ) {
+    if( mediaPlayerState.isPlaying() ) {
     // needs to be stopped the media is stopped
         QTimer::singleShot( 1000, this, SLOT( position() ) );
     }

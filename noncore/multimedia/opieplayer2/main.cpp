@@ -6,7 +6,6 @@
 #include "videowidget.h"
 #include "mediaplayer.h"
 
-MediaPlayerState *mediaPlayerState;
 PlayListWidget *playList;
 AudioWidget *audioUI;
 VideoWidget *videoUI;
@@ -15,7 +14,6 @@ int main(int argc, char **argv) {
     QPEApplication a(argc,argv);
 
     MediaPlayerState st( 0, "mediaPlayerState" );
-    mediaPlayerState = &st;
     PlayListWidget pl( st, 0, "playList" );
     playList = &pl;
     pl.showMaximized();
