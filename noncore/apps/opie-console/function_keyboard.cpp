@@ -190,13 +190,14 @@ void FunctionKeyboard::loadDefaults() {
 
 FunctionKeyboardConfig::FunctionKeyboardConfig(const QString& name, QWidget* parent, const char* na )
     : ProfileDialogKeyWidget(name, parent, na) {
+    qWarning("FunctionKeyboardConfig");
 
 
     kb = new FunctionKeyboard(this);
 
     QGroupBox *dimentions = new QGroupBox(2, Qt::Horizontal, tr("Dimentions"), this);
     QLabel *l = new QLabel("Rows", dimentions);
-    QSpinBox *m_rowBox = new QSpinBox(1, 15, 1, dimentions);
+    m_rowBox = new QSpinBox(1, 15, 1, dimentions);
     connect (m_rowBox, SIGNAL(valueChanged(int)), this, SLOT(slotChangeRows(int)));
     l = new QLabel("Columns", dimentions);
     m_colBox = new QSpinBox(1, 15, 1, dimentions);
