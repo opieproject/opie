@@ -943,7 +943,7 @@ void OpieFtp::remoteRename()
     QString curFile = Remote_View->currentItem()->text(0);
     InputDialog *fileDlg;
     fileDlg = new InputDialog(this,tr("Rename"),TRUE, 0);
-    fileDlg->inputText = curFile;
+    fileDlg->setTextEdit((const QString &)curFile);
     fileDlg->exec();
     if( fileDlg->result() == 1 ) {
         QString oldName = currentRemoteDir +"/"+ curFile;
@@ -965,7 +965,7 @@ void OpieFtp::localRename()
     QString curFile = Local_View->currentItem()->text(0);
     InputDialog *fileDlg;
     fileDlg = new InputDialog(this,tr("Rename"),TRUE, 0);
-    fileDlg->inputText = curFile;
+    fileDlg->setTextEdit((const QString &)curFile);
     fileDlg->exec();
     if( fileDlg->result() == 1 ) {
         QString oldname =  currentDir.canonicalPath() + "/" + curFile;

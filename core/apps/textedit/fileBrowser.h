@@ -113,7 +113,7 @@ public:
     ~InputDialog();
     QString inputText;
     QLineEdit* LineEdit1;
-
+    void setTextEdit(const QString &);
 };
 
 #endif // FILEBROWSER_H

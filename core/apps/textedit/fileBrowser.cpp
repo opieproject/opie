@@ -11,7 +11,7 @@
 ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 **
 ****************************************************************************/
-#define QTOPIA_INTERNAL_MIMEEXT
+//#define QTOPIA_INTERNAL_MIMEEXT
 #include "fileBrowser.h"
 //#include "inputDialog.h"
 
@@ -50,12 +50,19 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
     if ( !name )
         setName( "fileBrowser" );
     setCaption(tr( name ) );
-    mimeType =  mimeFilter;
-    MimeType mt( mimeType);
-    if( mt.extension().isEmpty())
-        filterStr =  "*";
-    else
-        filterStr = "*."+ mt.extension();
+//     mimeType =  mimeFilter;
+//     MimeType mt( mimeType);
+//     if( mt.extension().isEmpty())
+    QStringList filterList;
+    filterList=QStringList::split(";",mimeFilter,FALSE);
+     for ( QStringList::Iterator it = filterList.begin(); it != filterList.end(); ++it ) {
+            printf( "%s \n", (*it).latin1() );
+        }
+
+    filterStr = mimeFilter.right(mimeFilter.length()- mimeFilter.find("/",0,TRUE) - 1);// "*";
+    qDebug(filterStr);
+//     else
+//         filterStr = "*."+ mt.extension();
 //      qDebug("description "+mt.description());
 //      qDebug( "id "+mt.id());
 //      qDebug("extension "+mt.extension());
@@ -68,7 +75,7 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
     layout->setSpacing( 4 );
     layout->setMargin( 4 );
 
-    dirPathCombo = new QComboBox( FALSE, this, "dorPathCombo" );
+    dirPathCombo = new QComboBox( FALSE, this, "dirPathCombo" );
     dirPathCombo->setEditable(TRUE);
 
     connect( dirPathCombo, SIGNAL( activated( const QString & ) ),
@@ -130,7 +137,8 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
     fileSelector = new FileSelector( mimeType, FileStack, "fileselector" , FALSE, FALSE); //buggy
 //    connect( fileSelector, SIGNAL( closeMe() ), this, SLOT( showEditTools() ) );
 //    connect( fileSelector, SIGNAL( newSelected( const DocLnk &) ), this, SLOT( newFile( const DocLnk & ) ) );
-    connect( fileSelector, SIGNAL( fileSelected( const DocLnk &) ), this, SLOT( docOpen( const DocLnk & ) ) );
+    connect( fileSelector, SIGNAL( fileSelected( const DocLnk &) ),
+             this, SLOT( docOpen( const DocLnk & ) ) );
     layout->addMultiCellWidget( FileStack, 1, 1, 0, 7 );
 
     SelectionCombo = new QComboBox( FALSE, this, "SelectionCombo" );
@@ -216,7 +224,7 @@ void fileBrowser::populateList()
                         pm = Resource::loadPixmap( "locked" );
                     else {
                         MimeType mt(fi->filePath());
-                        pm=mt.pixmap();
+                        pm=mt.pixmap();// sets the pixmap for the mimetype
                         if(pm.isNull())
                             pm =  Resource::loadPixmap( "UnknownDocument-14" );
                         item->setPixmap( 0,pm);
@@ -417,7 +425,7 @@ void fileBrowser::localRename() {
     QString curFile = ListView->currentItem()->text(0);
     InputDialog *fileDlg;
     fileDlg = new InputDialog(this,"Rename",TRUE, 0);
-    fileDlg->inputText = curFile;
+    fileDlg->setTextEdit((const QString &) curFile);
     fileDlg->exec();
     if( fileDlg->result() == 1 ) {
         QString oldname =  currentDir.canonicalPath() + "/" + curFile;
@@ -492,14 +500,14 @@ void fileBrowser::showType(const QString &t) {
         for ( QStringList::Iterator it = list.begin(); it != list.end(); ++it ) {
             mimeType =(*it);
             MimeType mt( mimeType);
-            qDebug("mime "+mimeType);
+//            qDebug("mime "+mimeType);
 //         qDebug("description "+mt.description());
 //         qDebug( "id "+mt.id());
-            qDebug("extension "+mt.extension());
-            if( mt.extension().isEmpty())
+//            qDebug("extension "+mt.extension());
+//             if( mt.extension().isEmpty())
                 filterStr =  "*";
-            else
-                filterStr = "*."+ mt.extension()+" ";
+//             else
+//                 filterStr = "*."+ mt.extension()+" ";
 //         printf( "%s \n", (*it).latin1() );
         }
     }
@@ -611,3 +619,6 @@ InputDialog::~InputDialog()
   
 }
 
+void InputDialog::setTextEdit(const QString &string) {
+    LineEdit1->setText(string);
+}

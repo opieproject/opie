@@ -38,3 +38,7 @@ InputDialog::~InputDialog()
   
 }
 
+void InputDialog::setTextEdit(const QString &string)
+{
+    LineEdit1->setText(string);
+}

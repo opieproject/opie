@@ -28,7 +28,7 @@ public:
     ~InputDialog();
     QString inputText;
     QLineEdit* LineEdit1;
-
+    void setTextEdit(const QString &);
 };
 
 #endif // INPUTDIALOG_H
