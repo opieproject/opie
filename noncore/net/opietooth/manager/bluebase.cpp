@@ -35,64 +35,20 @@
 #include <qpe/resource.h>
 
 BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
-  : QWidget( parent, name, fl ) {
-
-  QWidget *d = QApplication::desktop();
-  int w=d->width();
-  int h=d->height();
-  resize( w , h );
+    : BluetoothBase( parent, name, fl ) {
 
 
-  QVBoxLayout * TopLayout = new QVBoxLayout(this);
-  TabWidget = new QTabWidget( this, "TabWidget" );
-  TopLayout->addWidget(TabWidget);
-  TabWidget->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)7, (QSizePolicy::SizeType)7, TabWidget->sizePolicy().hasHeightForWidth() ) );
-  TabWidget->setAutoMask( FALSE );
-  TabWidget->setTabShape( QTabWidget::Rounded );
-
-  Tab = new QWidget( TabWidget, "tab" );
-
-  QVBoxLayout * Layout = new QVBoxLayout(Tab);
-
-  Test = new QLabel( Tab, "test");
-  ScanButton = new QPushButton(Tab,  "scanbutton");
-
-  Layout->addWidget(Test);
-  Layout->addWidget(ScanButton);
-
-
-  TabWidget->insertTab( Tab, tr( "Geräte" ) );
-
-
-  TabConn = new QWidget( TabWidget,  "tab3" );
-
-  TabWidget->insertTab( TabConn, tr("Connections") );
-
-  TabConf = new QWidget( TabWidget,  "tab2" );
-
-  AuthCheckBox = new QCheckBox (TabConf, "auth" );
-  QLabel *AuthLabel = new QLabel( TabConf, "authlabel" );
-  AuthLabel->setText( tr("enable authentification"));
-
-  CryptCheckBox = new QCheckBox (TabConf, "crypt");
-  QLabel *CryptLabel = new QLabel ( TabConf, "cryptlabel");
-  CryptLabel->setText(tr("enable encryption"));
-
-
-  TabWidget->insertTab( TabConf, tr("Configuration"));
-
-
-
-  QPalette pal = this->palette();
-  QColor col = pal.color(QPalette::Active, QColorGroup::Background);
-  pal.setColor(QPalette::Active, QColorGroup::Button, col);
-  pal.setColor(QPalette::Inactive, QColorGroup::Button, col);
-  pal.setColor(QPalette::Normal, QColorGroup::Button, col);
-  pal.setColor(QPalette::Disabled, QColorGroup::Button, col);
-  this->setPalette(pal);
+    QPalette pal = this->palette();
+    QColor col = pal.color(QPalette::Active, QColorGroup::Background);
+    pal.setColor(QPalette::Active, QColorGroup::Button, col);
+    pal.setColor(QPalette::Inactive, QColorGroup::Button, col);
+    pal.setColor(QPalette::Normal, QColorGroup::Button, col);
+    pal.setColor(QPalette::Disabled, QColorGroup::Button, col);
+    this->setPalette(pal);
 }
 
 
 BlueBase::~BlueBase(){
 }
+
 

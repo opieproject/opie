@@ -17,20 +17,20 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "bluemanager.h"
+#include "bluebase.h"
 #include <qpe/qpeapplication.h>
 
 QPEApplication *BluetoothApp;
 
-int main( int argc, char ** argv )
-{
-  QPEApplication a(argc, argv);
-  BluetoothApp=&a;
+int main( int argc, char ** argv ) {
+    QPEApplication a(argc, argv);
+    BluetoothApp=&a;
 
-  BlueManager t;
+    BlueBase t;
 
-  t.setCaption( BlueManager::tr("Bluetooth Manager") );
-  a.showMainWidget(&t);
+    t.setCaption( BlueBase::tr("Bluetooth Manager") );
+    a.showMainWidget(&t);
 
-  return a.exec();
+    return a.exec();
 }
+

@@ -1,0 +1,8 @@
+Makefile
+bluetoothbase.cpp
+bluetoothbase.h
+devicedialog.cpp
+devicedialog.h
+moc_*
+scandialog.cpp
+scandialog.h

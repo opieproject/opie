@@ -7,6 +7,8 @@
 #include <qscrollview.h>
 #include <qsplitter.h>
 
+#include "bluetoothbase.h"
+
 class QVBox;
 class QHBoxLayout;
 class QGridLayout;
@@ -16,25 +18,17 @@ class QPushButton;
 class QTabWidget;
 class QCheckBox;
 
-class BlueBase : public QWidget
-{
+class BlueBase : public BluetoothBase {
     Q_OBJECT
 
 public:
     BlueBase( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     ~BlueBase();
 
-
-
 protected:
-    QTabWidget *TabWidget;
-    QWidget *Tab;
-    QWidget *TabConf;
-    QWidget *TabConn;
-    QCheckBox *AuthCheckBox;
-    QCheckBox *CryptCheckBox;
-    QLabel *Test;
-    QPushButton *ScanButton;
+
 };
+
+
 
 #endif
