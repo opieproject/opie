@@ -8,5 +8,5 @@ DEPENDSPATH +=  $(OPIEDIR)/include
 HEADERS = osplitter_mail.h
 SOURCES = osplitter_mail.cpp
 
-LIBS += -lqpe -lopie
+LIBS += -lqpe -lopieui2
 include ( $(OPIEDIR)/include.pro )

@@ -33,7 +33,7 @@
 // Opie
 
 #ifdef QWS
-#include <opie/odevice.h>
+#include <opie2/odevice.h>
 using namespace Opie;
 #endif
 
@@ -56,7 +56,7 @@ enum Demos { ocompletionbox, olineedit, ocombobox, oeditlistbox, oselector };
 OpieUIDemo::OpieUIDemo( QWidget* parent, const char* name, WFlags fl )
     : QMainWindow( parent, name, fl )
 {
-    
+
     QMenuBar* mbar = this->menuBar();
     OPopupMenu* demo = new OPopupMenu( this );
     demo->setTitle( "Title" );
@@ -66,7 +66,7 @@ OpieUIDemo::OpieUIDemo( QWidget* parent, const char* name, WFlags fl )
     demo->setItemParameter( demo->insertItem( "OEditListBox", this, SLOT( demo(int) ) ), oeditlistbox );
     demo->setItemParameter( demo->insertItem( "OSelector", this, SLOT( demo(int) ) ), oselector );
     mbar->insertItem( "Demonstrate", demo );
-    
+
     build();
 
 }
@@ -80,7 +80,7 @@ void OpieUIDemo::build()
     main = new QTabWidget( this, "tabwidget" );
     setCentralWidget( main );
     main->show();
-    
+
     main->addTab( new OVersatileViewDemo( main ), "VersatileView" );
 }
 
@@ -102,25 +102,25 @@ void OpieUIDemo::demo( int d )
 void OpieUIDemo::demoOCompletionBox()
 {
     qDebug( "ocompletionbox" );
-    
+
     OCompletionBox* box = new OCompletionBox( 0 );
     box->insertItem( "This CompletionBox" );
     box->insertItem( "Says 'Hello World'" );
     box->insertItem( "Here are some" );
     box->insertItem( "Additional Items" );
     box->insertItem( "Complete Completion Box" );
-    
+
     connect( box, SIGNAL( activated( const QString& ) ), this, SLOT( messageBox( const QString& ) ) );
     box->popup();
-    
+
 }
 
 void OpieUIDemo::demoOLineEdit()
 {
     qDebug( "olineedit" );
-    
+
     OLineEdit *edit = new OLineEdit( 0, "lineedit" );
-    
+
     edit->setCompletionMode( OGlobalSettings::CompletionPopup );
     OCompletion* comp = edit->completionObject();
 
@@ -128,9 +128,9 @@ void OpieUIDemo::demoOLineEdit()
     list << "mickeyl@handhelds.org";
     list << "mickey@tm.informatik.uni-frankfurt.de";
     list << "mickey@vanille.de";
-    
+
     comp->setItems( list );
-    
+
     edit->show();
 
 }
@@ -138,9 +138,9 @@ void OpieUIDemo::demoOLineEdit()
 void OpieUIDemo::demoOComboBox()
 {
     qDebug( "ocombobox" );
-    
+
     OComboBox *combo = new OComboBox( true, 0, "combobox" );
-    
+
     combo->setCompletionMode( OGlobalSettings::CompletionPopup );
     OCompletion* comp = combo->completionObject();
 
@@ -149,13 +149,13 @@ void OpieUIDemo::demoOComboBox()
     ilist << "harlekin@handhelds.org";
     ilist << "groucho@handhelds.org";
     combo->insertStringList( ilist );
-    
+
     QStringList clist;
     clist << "mickeyl@handhelds.org";
     clist << "mickey@tm.informatik.uni-frankfurt.de";
     clist << "mickey@vanille.de";
     comp->setItems( clist );
-    
+
     combo->show();
 
 }
@@ -163,9 +163,9 @@ void OpieUIDemo::demoOComboBox()
 void OpieUIDemo::demoOEditListBox()
 {
     qDebug( "oeditlistbox" );
-    
+
     OEditListBox* edit = new OEditListBox( "OEditListBox", 0, "editlistbox" );
-    
+
     edit->lineEdit()->setCompletionMode( OGlobalSettings::CompletionPopup );
     OCompletion* comp = edit->lineEdit()->completionObject();
     QStringList clist;
@@ -180,7 +180,7 @@ void OpieUIDemo::demoOEditListBox()
     list << "groucho@handhelds.org";
     list << "mickeyl@handhelds.org";
     edit->insertStringList( list );
-    
+
     edit->show();
 
 }
@@ -188,12 +188,12 @@ void OpieUIDemo::demoOEditListBox()
 void OpieUIDemo::demoOSelector()
 {
     qDebug( "oselector" );
-    
+
     OHSSelector* sel = new OHSSelector( 0, "gradientselector" );
     //#sel->resize( QSize( 200, 30 ) );
     //#sel->setColors( QColor( 90, 190, 60 ), QColor( 200, 55, 255 ) );
     //#sel->setText( "Dark", "Light" );
-   
+
     sel->show();
 }
 

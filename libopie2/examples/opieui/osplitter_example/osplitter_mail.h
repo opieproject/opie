@@ -14,6 +14,10 @@
 #include <qlist.h>
 #include <qlistview.h>
 
+#include <opie2/osplitter.h>
+
+using Opie::OSplitter;
+
 class Folder;
 class QLabel;
 

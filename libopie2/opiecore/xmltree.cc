@@ -17,8 +17,9 @@
    Boston, MA 02111-1307, USA.
 */
 
+#include <opie2/xmltree.h>
+
 #include <qpe/stringutil.h>
-#include <opie/xmltree.h>
 
 #include <qxml.h>
 
@@ -86,7 +87,7 @@ void XMLElement::insertAfter( XMLElement *newChild, XMLElement *refChild )
 
     newChild->m_prev = refChild;
     newChild->m_next = next;
-   
+
     if ( next )
         next->m_prev = newChild;
 }
@@ -95,7 +96,7 @@ QString XMLElement::attribute( const QString &attr ) const
 {
     AttributeMap::ConstIterator it = m_attributes.find( attr );
     if ( it == m_attributes.end() )
-	return QString::null;
+    return QString::null;
     return it.data();
 }
 
@@ -119,7 +120,7 @@ void XMLElement::insertBefore( XMLElement *newChild, XMLElement *refChild )
     XMLElement *prev = refChild->m_prev;
 
     refChild->m_prev = newChild;
-    
+
     newChild->m_prev = prev;
     newChild->m_next = refChild;
 
@@ -281,7 +282,7 @@ XMLElement *XMLElement::namedItem( const QString &name )
         if ( e->tagName() == name )
             return e;
 
-    return 0; 
+    return 0;
 }
 
 XMLElement *XMLElement::clone() const

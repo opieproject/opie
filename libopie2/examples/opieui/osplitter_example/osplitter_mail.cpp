@@ -5,12 +5,9 @@
 #include <qlayout.h>
 
 #include <qpe/qpeapplication.h>
-#include <opie/oapplicationfactory.h>
 
-#include "../osplitter.h"
-
+#include <opie2/oapplicationfactory.h>
 #include "osplitter_mail.h"
-
 
 OPIE_EXPORT_APP( OApplicationFactory<ListViews> )
 

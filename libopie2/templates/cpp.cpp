@@ -27,7 +27,7 @@
                              Boston, MA 02111-1307, USA.
 */
 
-#include <opie/h.h>
+#include <opie2/h.h>
 
 /* OPIE */
 opie (and for now, qpe) includes here
