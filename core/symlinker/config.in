@@ -1,5 +1,7 @@
   config SYMLINKER
     boolean "Opie Symlinker for external media"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LAUNCHER
+    depends ( LIBQPE || LIBQPE-X11 )
+    comment "Opie Symlinker needs a libqpe"
+    depends !( LIBQPE || LIBQPE-X11 )
 

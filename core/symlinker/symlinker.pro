@@ -9,7 +9,7 @@ INTERFACES	=
 TARGET		= opie-update-symlinks
 INCLUDEPATH     += $(OPIEDIR)/include 
 DEPENDPATH      += $(OPIEDIR)/include .
-LIBS            += -lqpe -lopie
+LIBS            += -lqpe
 
 include ( $(OPIEDIR)/include.pro )
 
