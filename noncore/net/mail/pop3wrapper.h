@@ -20,6 +20,7 @@ protected:
     void logout();
 
 private:
+    RecMail *parseHeader( const char *header );
     POP3account *account;
     mailpop3 *m_pop3;
 

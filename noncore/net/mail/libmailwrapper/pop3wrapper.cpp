@@ -6,6 +6,7 @@
 POP3wrapper::POP3wrapper( POP3account *a )
 {
     account = a;
+    m_pop3 = NULL;
 }
 
 POP3wrapper::~POP3wrapper()
@@ -20,14 +21,46 @@ void POP3wrapper::pop3_progress( size_t current, size_t maximum )
 
 void POP3wrapper::listMessages( QList<RecMail> &target )
 {
+    int err = MAILPOP3_NO_ERROR;
+    char *header;
+    size_t length;
+    carray *messages;
+    
     login();
-    //TODO: list messages
+    mailpop3_list( m_pop3, &messages );
+
+    for ( int i = carray_count( messages ); i > 0; i-- ) {
+        mailpop3_msg_info *info = (mailpop3_msg_info *) carray_get( messages, i - 1 );
+
+        err = mailpop3_header( m_pop3, info->index, &header, &length );
+        if ( err != MAILPOP3_NO_ERROR ) {
+            qDebug( "POP3: error retrieving header msgid: %i", info->index );
+            logout();
+            return;
+        }
+        RecMail *mail = parseHeader( header );
+        mail->setNumber( info->index );
+        target.append( mail );
+    }
+
     logout();
+}
+
+RecMail *POP3wrapper::parseHeader( const char *h )
+{
+    RecMail *mail = new RecMail();
+    QString header( h );
+
+    //TODO: parse header - maybe something like this is already implemented in libetpan?
+    mail->setSubject( "Blah blubb" );
+
+    return mail;
 }
 
 void POP3wrapper::login()
 {
-    logout();
+    if ( m_pop3 != NULL ) logout();
+
     const char *server, *user, *pass;
     uint16_t port;
     int err = MAILPOP3_NO_ERROR;
@@ -37,7 +70,7 @@ void POP3wrapper::login()
     user = account->getUser().latin1();
     pass = account->getPassword().latin1();
 
-    m_pop3 = mailpop3_new( 20, &pop3_progress );
+    m_pop3 = mailpop3_new( 200, &pop3_progress );
 
     // connect
     err = mailpop3_socket_connect( m_pop3, (char *) server, port );
@@ -65,7 +98,7 @@ void POP3wrapper::login()
 void POP3wrapper::logout()
 {
     int err = MAILPOP3_NO_ERROR;
-    if ( !m_pop3 ) return;
+    if ( m_pop3 == NULL ) return;
     err = mailpop3_quit( m_pop3 );
     mailpop3_free( m_pop3 );
     m_pop3 = NULL;
