@@ -362,6 +362,7 @@ void NetworkPackageManager :: upgradePackages()
 
 void NetworkPackageManager :: downloadPackage()
 {
+    bool doUpdate = true;
     if ( download->text() == "Download" )
     {
         // First, write out ipkg_conf file so that ipkg can use it
@@ -420,6 +421,7 @@ void NetworkPackageManager :: downloadPackage()
     }
     else if ( download->text() == "Remove" )
     {
+        doUpdate = false;
         for ( QCheckListItem *item = (QCheckListItem *)packagesList->firstChild();
               item != 0 ;
               item = (QCheckListItem *)item->nextSibling() )
@@ -436,14 +438,25 @@ void NetworkPackageManager :: downloadPackage()
                     name.truncate( pos - 1 );
                
                 Package *p = dataMgr->getServer( serversList->currentText() )->getPackage( name );
-                QFile f( p->getFilename() );
-                f.remove();
+
+                QString msgtext;
+                msgtext.sprintf( "Are you sure you wish to delete\n%s?", (const char *)p->getPackageName() );
+                if ( QMessageBox::information( this, "Are you sure?",
+                                    msgtext, "No", "Yes" ) == 1 )
+                {
+                    doUpdate = true;
+                    QFile f( p->getFilename() );
+                    f.remove();
+                }
             }
         }
     }
 
-    dataMgr->reloadServerData();
-    serverSelected( -1 );
+    if ( doUpdate )
+    {
+        dataMgr->reloadServerData();
+        serverSelected( -1 );
+    }
 }
 
 
