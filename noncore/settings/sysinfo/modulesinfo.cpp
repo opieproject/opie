@@ -48,7 +48,7 @@ ModulesInfo::ModulesInfo( QWidget* parent,  const char* name, WFlags fl )
     ModulesView->setColumnAlignment( colnum, Qt::AlignRight );
     colnum = ModulesView->addColumn( tr( "Use#" ) );
     ModulesView->setColumnAlignment( colnum, Qt::AlignRight );
-    colnum = ModulesView->addColumn( tr( "Used By" ) );
+    colnum = ModulesView->addColumn( tr( "Used by" ) );
     ModulesView->setAllColumnsShowFocus( TRUE );
     layout->addMultiCellWidget( ModulesView, 0, 0, 0, 1 );
     QWhatsThis::add( ModulesView, tr( "This is a list of all the kernel modules currently loaded on this handheld device.\n\nClick and hold on a module to see additional information about the module, or to unload it." ) );
@@ -141,9 +141,7 @@ void ModulesInfo::slotSendClicked()
 		return;
 	}
 	
-	QString capstr = tr( "You really want to execute\n" );
-	capstr.append( CommandCB->currentText() );
-	capstr.append( "\nfor this module?" );
+	QString capstr = tr( "You really want to execute %1 for this module?" ).arg( CommandCB->currentText() );
 
 	QString modname = ModulesView->currentItem()->text( 0 );
 	
