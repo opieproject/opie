@@ -14,7 +14,6 @@ POP3wrapper::POP3wrapper( POP3account *a )
 : Genericwrapper() {
     account = a;
     m_pop3 = NULL;
-    m_folder = NULL;
     msgTempName = a->getFileName()+"_msg_cache";
     last_msg_id = 0;
 }
@@ -58,7 +57,7 @@ RecBody POP3wrapper::fetchBody( const RecMail &mail ) {
         }
         msg_cache.open(IO_ReadWrite|IO_Truncate);
         last_msg_id = mail.getNumber();
-        err = mailsession_get_message(m_folder->fld_session, mail.getNumber(), &mailmsg);
+        err = mailsession_get_message(m_pop3->sto_session, mail.getNumber(), &mailmsg);
         err = mailmessage_fetch(mailmsg,&message,&length);
         msg_cache.writeBlock(message,length);
     } else {
@@ -94,17 +93,19 @@ RecBody POP3wrapper::fetchBody( const RecMail &mail ) {
     return body;
 }
 
-void POP3wrapper::listMessages(const QString &, QList<RecMail> &target ) {
+void POP3wrapper::listMessages(const QString &, QList<RecMail> &target ) 
+{
     login();
     if (!m_pop3)
         return;
     uint32_t res_messages,res_recent,res_unseen;
-    mailsession_status_folder(m_folder->fld_session,"INBOX",&res_messages,&res_recent,&res_unseen);
-    parseList(target,m_folder->fld_session,"INBOX");
+    mailsession_status_folder(m_pop3->sto_session,"INBOX",&res_messages,&res_recent,&res_unseen);
+    parseList(target,m_pop3->sto_session,"INBOX");
     Global::statusMessage( tr("Mailbox contains %1 mail(s)").arg(res_messages));
 }
 
-void POP3wrapper::login() {
+void POP3wrapper::login()
+{
     if (account->getOffline())
         return;
     /* we'll hold the line */
@@ -157,32 +158,20 @@ void POP3wrapper::login() {
                           (char*)user,(char*)pass,0,0,0);
 
 
-
-    m_folder = mailfolder_new(m_pop3, NULL, NULL);
-
-    if (m_folder==0) {
-        Global::statusMessage(tr("Error initializing folder"));
-        mailstorage_free(m_pop3);
-        m_pop3 = NULL;
-        return;
-    }
-    err = mailfolder_connect(m_folder);
+    err = mailstorage_connect(m_pop3);
     if (err != MAIL_NO_ERROR) {
         qDebug( QString( "FEHLERNUMMER %1" ).arg(  err ) );
         Global::statusMessage(tr("Error initializing folder"));
-        mailfolder_free(m_folder);
-        m_folder = 0;
         mailstorage_free(m_pop3);
         m_pop3 = 0;
     }
 }
 
-void POP3wrapper::logout() {
+void POP3wrapper::logout() 
+{
     int err = MAILPOP3_NO_ERROR;
     if ( m_pop3 == NULL )
         return;
-    mailfolder_free(m_folder);
-    m_folder = 0;
     mailstorage_free(m_pop3);
     m_pop3 = 0;
 }
@@ -200,7 +189,7 @@ void POP3wrapper::deleteMail(const RecMail&mail) {
     login();
     if (!m_pop3)
         return;
-    int err = mailsession_remove_message(m_folder->fld_session,mail.getNumber());
+    int err = mailsession_remove_message(m_pop3->sto_session,mail.getNumber());
     if (err != MAIL_NO_ERROR) {
         Global::statusMessage(tr("error deleting mail"));
     }
@@ -215,13 +204,13 @@ int POP3wrapper::deleteAllMail(const Folder*) {
     int res = 1;
 
     uint32_t result = 0;
-    int err = mailsession_messages_number(m_folder->fld_session,NULL,&result);
+    int err = mailsession_messages_number(m_pop3->sto_session,NULL,&result);
     if (err != MAIL_NO_ERROR) {
         Global::statusMessage(tr("Error getting folder info"));
         return 0;
     }
     for (unsigned int i = 0; i < result; ++i) {
-        err = mailsession_remove_message(m_folder->fld_session,i+1);
+        err = mailsession_remove_message(m_pop3->sto_session,i+1);
         if (err != MAIL_NO_ERROR) {
             Global::statusMessage(tr("Error deleting mail %1").arg(i+1));
             res=0;
@@ -238,7 +227,7 @@ void POP3wrapper::statusFolder(folderStat&target_stat,const QString&) {
     target_stat.message_recent = 0;
     if (!m_pop3)
         return;
-    int r = mailsession_status_folder(m_folder->fld_session,0,&target_stat.message_count,
+    int r = mailsession_status_folder(m_pop3->sto_session,0,&target_stat.message_count,
                                       &target_stat.message_recent,&target_stat.message_unseen);
 }
 
@@ -247,7 +236,7 @@ encodedString* POP3wrapper::fetchRawBody(const RecMail&mail) {
     size_t length=0;
     encodedString*res = 0;
     mailmessage * mailmsg = 0;
-    int err = mailsession_get_message(m_folder->fld_session, mail.getNumber(), &mailmsg);
+    int err = mailsession_get_message(m_pop3->sto_session, mail.getNumber(), &mailmsg);
     err = mailmessage_fetch(mailmsg,&target,&length);
     if (mailmsg)
         mailmessage_free(mailmsg);
@@ -261,6 +250,6 @@ const QString&POP3wrapper::getType()const {
     return account->getType();
 }
 
-const QString&POP3wrapper::getName()const {
+const QString&POP3wrapper::getName()const{
     return account->getAccountName();
 }

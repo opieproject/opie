@@ -331,3 +331,71 @@ const QString&MHwrapper::getName()const
 {
     return MHName;
 }
+void MHwrapper::mvcpMail(const RecMail&mail,const QString&targetFolder,AbstractMail*targetWrapper,bool moveit)
+{
+    init_storage();
+    if (!m_storage) {
+        return;
+    }
+    if (targetWrapper != this) {
+        qDebug("Using generic");
+        Genericwrapper::mvcpMail(mail,targetFolder,targetWrapper,moveit);
+        return;
+    }
+    qDebug("Using internal routines for move/copy");
+    QString tf = buildPath(targetFolder);
+    int r = mailsession_select_folder(m_storage->sto_session,(char*)mail.getMbox().latin1());    
+    if (r != MAIL_NO_ERROR) {
+        qDebug("Error selecting source mailbox");
+        return;
+    }
+    if (moveit) {
+        r = mailsession_move_message(m_storage->sto_session,mail.getNumber(),(char*)tf.latin1());
+    } else {
+        r = mailsession_copy_message(m_storage->sto_session,mail.getNumber(),(char*)tf.latin1());
+    }
+    if (r != MAIL_NO_ERROR) {
+        qDebug("Error copy/moving mail internal (%i)",r);
+    }
+}
+
+void MHwrapper::mvcpAllMails(Folder*fromFolder,const QString&targetFolder,AbstractMail*targetWrapper,bool moveit)
+{
+    init_storage();
+    if (!m_storage) {
+        return;
+    }
+    if (targetWrapper != this) {
+        qDebug("Using generic");
+        Genericwrapper::mvcpAllMails(fromFolder,targetFolder,targetWrapper,moveit);
+        return;
+    }
+    if (!fromFolder) return;
+    int r = mailsession_select_folder(m_storage->sto_session,(char*)fromFolder->getName().latin1());
+    if (r!=MAIL_NO_ERROR) {
+        qDebug("error selecting source folder!");
+        return;
+    }
+    QString tf = buildPath(targetFolder);
+    mailmessage_list*l=0;
+    r = mailsession_get_messages_list(m_storage->sto_session,&l);
+    if (r != MAIL_NO_ERROR) {
+        qDebug("Error message list");
+    }
+    unsigned j = 0;
+    for(unsigned int i = 0 ; l!= 0 && i < carray_count(l->msg_tab) ; ++i) {
+        mailmessage * msg;
+        msg = (mailmessage*)carray_get(l->msg_tab, i);
+        j = msg->msg_index;
+        if (moveit) {
+            r = mailsession_move_message(m_storage->sto_session,j,(char*)tf.latin1());
+        } else {
+            r = mailsession_copy_message(m_storage->sto_session,j,(char*)tf.latin1());
+        }
+        if (r != MAIL_NO_ERROR) {
+            qDebug("Error copy/moving mail internal (%i)",r);
+            break;
+        }
+    }
+    if (l) mailmessage_list_free(l);
+}

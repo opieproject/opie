@@ -37,7 +37,6 @@ protected:
     void login();
     POP3account *account;
     mailstorage*m_pop3;
-    mailfolder*m_folder;
 };
 
 #endif

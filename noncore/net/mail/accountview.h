@@ -134,10 +134,12 @@ public:
     virtual void refresh(bool force=false);
 
 protected:
+    void downloadMails();
+    void removeChilds();
     virtual void createFolder();
     QString m_Path;
     AbstractMail *wrapper;
-
+    Folder *folder;
 };
 
 class MHfolderItem : public AccountViewItem
@@ -145,6 +147,7 @@ class MHfolderItem : public AccountViewItem
 
 public:
     MHfolderItem( Folder *folder, MHviewItem *parent , QListViewItem*after  );
+    MHfolderItem( Folder *folder, MHfolderItem *parent, QListViewItem*after, MHviewItem*master);
     virtual ~MHfolderItem();
     virtual void refresh(QList<RecMail>&);
     virtual RecBody fetchBody(const RecMail&);
@@ -155,6 +158,7 @@ public:
 protected:
     void downloadMails();
     virtual void deleteFolder();
+    void initName();
     Folder *folder;
     MHviewItem *mbox;
 };

@@ -22,6 +22,8 @@ public:
 
     virtual void deleteMail(const RecMail&mail);
     virtual void answeredMail(const RecMail&mail);
+    virtual void mvcpMail(const RecMail&mail,const QString&targetFolder,AbstractMail*targetWrapper,bool moveit);
+    virtual void mvcpAllMails(Folder*fromFolder,const QString&targetFolder,AbstractMail*targetWrapper,bool moveit);
     
     virtual int createMbox(const QString&folder,const Folder*f=0,const QString&d="",bool s=false);
     virtual int deleteMbox(const Folder*);

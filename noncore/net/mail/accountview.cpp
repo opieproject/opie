@@ -242,7 +242,6 @@ void IMAPviewItem::removeChilds()
         child = child->nextSibling();
         delete tmp;
     }
-
 }
 
 const QStringList&IMAPviewItem::subFolders()
@@ -706,7 +705,8 @@ void AccountView::downloadMails(Folder*fromFolder,AbstractMail*fromWrapper)
 /**
  * MH Account stuff
  */
-
+/* MH is a little bit different - the top folder can contains messages other than in IMAP and
+   POP3 and MBOX */
 MHviewItem::MHviewItem( const QString&aPath, AccountView *parent )
     : AccountViewItem( parent )
 {
@@ -716,11 +716,13 @@ MHviewItem::MHviewItem( const QString&aPath, AccountView *parent )
     setPixmap( 0, PIXMAP_LOCALFOLDER );
     setText( 0, " Local Folders" );
     setOpen( true );
+    folder = 0;
 }
 
 MHviewItem::~MHviewItem()
 {
     delete wrapper;
+    if (folder) delete folder;
 }
 
 AbstractMail *MHviewItem::getWrapper()
@@ -728,25 +730,43 @@ AbstractMail *MHviewItem::getWrapper()
     return wrapper;
 }
 
-void MHviewItem::refresh( QList<RecMail> & )
+void MHviewItem::refresh( QList<RecMail> & target)
 {
     refresh(false);
+    getWrapper()->listMessages( "",target );
 }
 
-void MHviewItem::refresh(bool force)
+void MHviewItem::removeChilds()
 {
-    if (childCount()>0 && force==false) return;
-    QList<Folder> *folders = wrapper->listFolders();
     QListViewItem *child = firstChild();
     while ( child ) {
         QListViewItem *tmp = child;
         child = child->nextSibling();
         delete tmp;
     }
+}
+
+void MHviewItem::refresh(bool force)
+{
+    if (childCount()>0 && force==false) return;
+    removeChilds();
+    QList<Folder> *folders = wrapper->listFolders();
     Folder *it;
-    QListViewItem*item = 0;
+    MHfolderItem*item = 0;
+    MHfolderItem*pmaster = 0;
+    QString fname = "";
     for ( it = folders->first(); it; it = folders->next() ) {
-        item = new MHfolderItem( it, this , item );
+        fname = it->getDisplayName();
+        /* this folder itself */
+        if (fname=="/") {
+            folder = it;
+            continue;
+        }
+        if (pmaster) {
+            item = new MHfolderItem( it, pmaster, item, this );
+        } else {
+            item = new MHfolderItem( it, this , item );
+        }
         item->setSelectable(it->may_select());
     }
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -766,6 +786,8 @@ QPopupMenu * MHviewItem::getContextMenu()
     if (m) {
         m->insertItem(QObject::tr("Refresh folder list",contextName),0);
         m->insertItem(QObject::tr("Create new folder",contextName),1);
+        m->insertItem(QObject::tr("Delete all mails",contextName),2);
+        m->insertItem(QObject::tr("Move/Copie all mails",contextName),3);
     }
     return m;
 }
@@ -782,10 +804,18 @@ void MHviewItem::createFolder()
     }
 }
 
+void MHviewItem::downloadMails()
+{
+    AccountView*bl = accountView();
+    if (!bl) return;
+    bl->downloadMails(folder,getWrapper());
+}
+
 QStringList MHviewItem::subFolders()
 {
     QStringList result;
     QListViewItem *child = firstChild();
+    result.append("/");
     while ( child ) {
         MHfolderItem *tmp = (MHfolderItem*)child;
         child = child->nextSibling();
@@ -804,6 +834,12 @@ void MHviewItem::contextMenuSelected(int which)
     case 1:
         createFolder();
         break;
+    case 2:
+        deleteAllMail(getWrapper(),folder);
+        break;
+    case 3:
+        downloadMails();
+        break;
     default:
         break;
     }
@@ -819,14 +855,31 @@ MHfolderItem::MHfolderItem( Folder *folderInit, MHviewItem *parent , QListViewIt
 {
     folder = folderInit;
     mbox = parent;
-    if (folder->getDisplayName().lower() == "outgoing") {
+    initName();
+}
+
+MHfolderItem::MHfolderItem( Folder *folderInit, MHfolderItem *parent, QListViewItem*after, MHviewItem*master)
+    : AccountViewItem( parent,after )
+{
+    folder = folderInit;
+    mbox = master;
+    initName();
+}
+
+void MHfolderItem::initName()
+{
+    QString bName = folder->getDisplayName();
+    if (bName.startsWith("/")&&bName.length()>1) {
+        bName.replace(0,1,"");
+    }
+    if (bName.lower() == "outgoing") {
         setPixmap( 0, PIXMAP_OUTBOXFOLDER );
-    } else if (folder->getDisplayName().lower() == "inbox") {
+    } else if (bName.lower() == "inbox") {
         setPixmap( 0, PIXMAP_INBOXFOLDER);
     } else {
         setPixmap( 0, PIXMAP_MBOXFOLDER );
 	}
-    setText( 0, folder->getDisplayName() );
+    setText( 0, bName );
 }
 
 Folder*MHfolderItem::getFolder()
@@ -873,6 +926,7 @@ QPopupMenu * MHfolderItem::getContextMenu()
         m->insertItem(QObject::tr("Delete all mails",contextName),0);
         m->insertItem(QObject::tr("Delete folder",contextName),1);
         m->insertItem(QObject::tr("Move/Copie all mails",contextName),2);
+        m->insertItem(QObject::tr("Create new folder",contextName),3);
     }
     return m;
 }
@@ -900,3 +954,4 @@ void MHfolderItem::contextMenuSelected(int which)
         break;
     }
 }
+
