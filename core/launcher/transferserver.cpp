@@ -345,7 +345,9 @@ ServerPI::ServerPI( int socket, QObject *parent, const char* name )
 ServerPI::~ServerPI()
 {
     close();
-    dtp->close();
+
+    if ( dtp )
+        dtp->close();
     delete dtp;
     delete serversocket;
 }
