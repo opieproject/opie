@@ -537,7 +537,11 @@ void InputMethods::showKbd( bool on )
 	// HACK... Make the texteditor fit with all input methods
 	// Input methods should also never use more than about 40% of the screen
 	int height = QMIN( mkeyboard->widget->sizeHint().height(), 134 );
+	#ifdef QT_QWS_SIMPAD
+	mkeyboard->widget->resize( qApp->desktop()->width() / 2, height );
+	#else
 	mkeyboard->widget->resize( qApp->desktop()->width(), height );
+	#endif
 	mkeyboard->widget->move( 0, mapToGlobal( QPoint() ).y() - height );
 	mkeyboard->widget->show();
     } else {

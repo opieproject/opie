@@ -289,10 +289,14 @@ void TaskBar::styleChange( QStyle &s )
     calcMaxWindowRect();
 }
 
+/*
+ * This method is needed to calculate the amount of
+ * space needed for a inputmethod in "opened" state
+ */
 void TaskBar::calcMaxWindowRect()
 {
-    /*
-#ifdef Q_WS_QWS
+
+#if defined(Q_WS_QWS) && !defined(QT_QWS_SIMPAD)
     QRect wr;
     int displayWidth  = qApp->desktop()->width();
     QRect ir = inputMethods->inputRect();
@@ -310,7 +314,6 @@ void TaskBar::calcMaxWindowRect()
     QWSServer::setMaxWindowRect( wr );
 #endif
 #endif
-    */
 }
 
 void TaskBar::receive( const QCString &msg, const QByteArray &data )
