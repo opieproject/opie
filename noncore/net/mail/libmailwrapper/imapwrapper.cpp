@@ -80,8 +80,18 @@ void IMAPwrapper::login()
 
     m_imap = mailimap_new( 20, &imap_progress );
 
+
+
     /* connect */
-    if (account->getSSL()) {
+
+    bool ssl = false;
+
+    if  ( account->ConnectionType() == 2 ) {
+        ssl = true;
+    }
+
+    if ( ssl ) {
+        qDebug(  "using ssl" );
         err = mailimap_ssl_connect( m_imap, (char*)server, port );
     } else {
         err = mailimap_socket_connect( m_imap, (char*)server, port );
@@ -369,7 +379,7 @@ RecMail*IMAPwrapper::parse_list_result(mailimap_msg_att* m_att)
             QDateTime da(QDate(d->dt_year,d->dt_month,d->dt_day),QTime(d->dt_hour,d->dt_min,d->dt_sec));
             qDebug("%i %i %i - %i %i %i",d->dt_year,d->dt_month,d->dt_day,d->dt_hour,d->dt_min,d->dt_sec);
             qDebug(da.toString());
-#endif            
+#endif
         } else if (item->att_data.att_static->att_type==MAILIMAP_MSG_ATT_RFC822_SIZE) {
             size = item->att_data.att_static->att_data.att_rfc822_size;
         }
@@ -408,7 +418,7 @@ RecBody IMAPwrapper::fetchBody(const RecMail&mail)
     if ( err != MAILIMAP_NO_ERROR ) {
         return body;
     }
- 
+
     /* the range has to start at 1!!! not with 0!!!! */
     set = mailimap_set_new_interval( mail.getNumber(),mail.getNumber() );
     fetchAtt = mailimap_fetch_att_new_bodystructure();
@@ -495,9 +505,9 @@ encodedString*IMAPwrapper::fetchRawPart(const RecMail&mail,const QValueList<int>
         }
     }
     set = mailimap_set_new_single(mail.getNumber());
-    
+
     clist*id_list = 0;
-    
+
     /* if path == empty then its a request for the whole rfc822 mail and generates
        a "fetch <id> (body[])" statement on imap server */
     if (path.count()>0 ) {
@@ -510,17 +520,17 @@ encodedString*IMAPwrapper::fetchRawPart(const RecMail&mail,const QValueList<int>
         section_part =  mailimap_section_part_new(id_list);
         section_spec =  mailimap_section_spec_new(MAILIMAP_SECTION_SPEC_SECTION_PART, NULL, section_part, NULL);
     }
-    
+
     section =  mailimap_section_new(section_spec);
     fetch_att = mailimap_fetch_att_new_body_section(section);
     fetchType = mailimap_fetch_type_new_fetch_att(fetch_att);
-    
+
     clist*result = 0;
-    
+
     err = mailimap_fetch( m_imap, set, fetchType, &result );
     mailimap_set_free( set );
     mailimap_fetch_type_free( fetchType );
-    
+
     if (err == MAILIMAP_NO_ERROR && (current=clist_begin(result)) ) {
         mailimap_msg_att * msg_att;
         msg_att = (mailimap_msg_att*)current->data;
@@ -535,7 +545,7 @@ encodedString*IMAPwrapper::fetchRawPart(const RecMail&mail,const QValueList<int>
                     res->setContent(text,msg_att_item->att_data.att_static->att_data.att_body_section->sec_length);
                 }
             }
-        }         
+        }
     } else {
         qDebug("error fetching text: %s",m_imap->imap_response);
     }
@@ -664,11 +674,11 @@ void IMAPwrapper::fillSingleMsgPart(RecPart&target_part,mailimap_body_type_msg*w
     qDebug("Message part");
     /* we set this type to text/plain */
     target_part.setLines(which->bd_lines);
-    fillBodyFields(target_part,which->bd_fields);    
+    fillBodyFields(target_part,which->bd_fields);
 }
 
 void IMAPwrapper::fillMultiPart(RecPart&target_part,mailimap_body_type_mpart*which)
-{       
+{
     if (!which) return;
     QString sub = which->bd_media_subtype;
     target_part.setSubtype(sub.lower());
@@ -680,7 +690,7 @@ void IMAPwrapper::fillMultiPart(RecPart&target_part,mailimap_body_type_mpart*whi
             if (param) {
                 target_part.addParameter(QString(param->pa_name).lower(),QString(param->pa_value));
             }
-        }        
+        }
     }
 }
 

@@ -164,6 +164,7 @@ void IMAPaccount::read()
     if (server.isNull()) server="";
     port = conf->readEntry( "Port","" );
     if (port.isNull()) port="143";
+    connectionType = conf->readNumEntry( "ConnectionType" );
     ssl = conf->readBoolEntry( "SSL",false );
     user = conf->readEntry( "User","" );
     if (user.isNull()) user = "";
@@ -186,6 +187,7 @@ void IMAPaccount::save()
     conf->writeEntry( "Server", server );
     conf->writeEntry( "Port", port );
     conf->writeEntry( "SSL", ssl );
+    conf->writeEntry( "ConnectionType", connectionType );
     conf->writeEntry( "User", user );
     conf->writeEntryCrypt( "Password", password );
     conf->writeEntry( "MailPrefix",prefix);
