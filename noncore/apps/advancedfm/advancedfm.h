@@ -26,6 +26,7 @@
 #include <qstring.h>
 #include <qpoint.h>
 #include <qtimer.h>
+#include <qpixmap.h>
 
 class OTabWidget;
 class QVBoxLayout;
@@ -91,6 +92,7 @@ protected slots:
 protected:
 
    OTabWidget *TabWidget;
+   QPixmap unknownXpm;
    int whichTab;
 //    QTabWidget *TabWidget;
    QWidget *tab, *tab_2, *tab_3;
