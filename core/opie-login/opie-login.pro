@@ -1,5 +1,5 @@
 TEMPLATE    = app
-CONFIG      = qt warn_on  usepam
+CONFIG      = qt warn_on
 
 HEADERS     = loginwindowimpl.h  \
               loginapplication.h \
@@ -21,8 +21,8 @@ DEPENDPATH  += $(OPIEDIR)/include ../launcher ../apps/calibrate
 
 LIBS        += -lqpe -lopiecore2
 
-usepam:LIBS += -lpam
-usepam:DEFINES += USEPAM
+OPIELOGIN_USEPAM:LIBS += -lpam
+OPIELOGIN_USEPAM:DEFINES += USEPAM
 
 DESTDIR     = $(OPIEDIR)/bin
 TARGET      = opie-login

@@ -2,3 +2,7 @@
     boolean "opie-login (Initial Login app, ala xdm/kdm/gdm)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE
+
+config OPIELOGIN_USEPAM
+    boolean "Compile login manager with PAM support"
+    depends OPIE-LOGIN
