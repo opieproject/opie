@@ -14,6 +14,8 @@ public:
 	void selectedDatabase( int num );
 	void selectedDestFormat( int num );
 	void selectedSourceFormat( int num );
+
+	void closeEvent( QCloseEvent *e );
 	
 private:
 	// Caution:
@@ -33,6 +35,7 @@ private:
 	int m_selectedDatabase;
 	int m_selectedSourceFormat;
 	int m_selectedDestFormat;
+	bool m_criticalState;
 
 };
 

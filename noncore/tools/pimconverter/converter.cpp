@@ -14,6 +14,7 @@
 #include <qprogressbar.h>
 #include <qcombobox.h>
 #include <qcheckbox.h>
+#include <qmessagebox.h>
 
 
 using namespace Opie;
@@ -22,7 +23,8 @@ using namespace Pim;
 Converter::Converter():
     m_selectedDatabase( ADDRESSBOOK ),
     m_selectedSourceFormat( XML ),
-    m_selectedDestFormat( SQL )
+    m_selectedDestFormat( SQL ),
+    m_criticalState( false )
 {
     m_dataBaseSelector -> setCurrentItem( m_selectedDatabase );
     m_sourceFormatSelector -> setCurrentItem( m_selectedSourceFormat );
@@ -50,6 +52,17 @@ void Converter::start_conversion(){
     // Creating backends to the requested databases..
     OPimBase* sourceDB;
     OPimBase* destDB;
+
+    odebug << "SourceFormat: " <<  m_selectedSourceFormat << oendl;
+    odebug << "DestFormat: " << m_selectedDestFormat << oendl;
+    if ( m_selectedSourceFormat == m_selectedDestFormat ){
+	    
+	    QMessageBox::warning( this, "PimConverter",
+				  tr( "It is not a good idea to use\n" )
+				  +tr( "the same source and destformat !" ),
+				  tr( "Ok" ) ); 
+	    return;
+    }
 
     switch( m_selectedSourceFormat ){
     case XML:
@@ -142,6 +155,8 @@ void Converter::start_conversion(){
     if ( !sourceDB || !destDB )
         return;
 
+    m_criticalState = true;
+
     sourceDB -> load();
     destDB -> load();
 
@@ -169,6 +184,8 @@ void Converter::start_conversion(){
     // Now commit data..
     destDB -> save();
 
+    m_criticalState = false;
+
     // Delete the frontends. Backends will be deleted automatically, too !
     // We have to cast them back to delete them properly !
     switch( m_selectedDatabase ){
@@ -192,6 +209,21 @@ void Converter::start_conversion(){
 
     owarn << "Conversion is finished and needed " << t.elapsed() << " ms !" << oendl;
 }
+
+void Converter::closeEvent( QCloseEvent *e )
+{
+	
+	/* Due to the fact that we don't have multitasking here, this
+	 * critical handling don't make sense, but the future..
+	 */
+	if ( m_criticalState ){
+		e->ignore();
+		return;
+	}
+	e->accept();
+}
+
+
 
 int main( int argc, char** argv ) {
 
