@@ -152,9 +152,7 @@ bool WavFile::setWavHeader(int fd, wavhdr *hdr) {
   strncpy((*hdr).dataID, "data", 4);
 
   write( fd,hdr, sizeof(*hdr));
-   odebug << "writing header: bitrate " << wavResolution
-          << ", samplerate " << wavSampleRate
-          << ",  channels " << wavChannels << oendl;
+   odebug << "writing header: bitrate " << wavResolution << ", samplerate " << wavSampleRate << ",  channels " << wavChannels << oendl;
   return true;
 }
 
@@ -177,57 +175,57 @@ int WavFile::parseWavHeader(int fd) {
   unsigned long samplerrate, longdata;
 
   if (read(fd, string, 4) < 4) {
-    odebug << " Could not read from sound file.\n" << oendl;
+    odebug << " Could not read from sound file." << oendl;
     return -1;
   }
   if (strncmp(string, "RIFF", 4)) {
-    odebug << " not a valid WAV file.\n" << oendl;
+    odebug << " not a valid WAV file." << oendl;
     return -1;
   }
   lseek(fd, 4, SEEK_CUR);
   if (read(fd, string, 4) < 4) {
-    odebug << "Could not read from sound file.\n" << oendl;
+    odebug << "Could not read from sound file." << oendl;
     return -1;
   }
   if (strncmp(string, "WAVE", 4)) {
-    odebug << "not a valid WAV file.\n" << oendl;
+    odebug << "not a valid WAV file." << oendl;
     return -1;
   }
   found = 0;
 
   while (!found) {
     if (read(fd, string, 4) < 4) {
-      odebug << "Could not read from sound file.\n" << oendl;
+      odebug << "Could not read from sound file." << oendl;
       return -1;
     }
     if (strncmp(string, "fmt ", 4)) {
       if (read(fd, &longdata, 4) < 4) {
-        odebug << "Could not read from sound file.\n" << oendl;
+        odebug << "Could not read from sound file." << oendl;
         return -1;
       }
       lseek(fd, longdata, SEEK_CUR);
     } else {
       lseek(fd, 4, SEEK_CUR);
       if (read(fd, &fmt, 2) < 2) {
-        odebug << "Could not read format chunk.\n" << oendl;
+        odebug << "Could not read format chunk." << oendl;
         return -1;
       }
       if (fmt != WAVE_FORMAT_PCM && fmt != WAVE_FORMAT_DVI_ADPCM) {
-        odebug << "Wave file contains unknown format. Unable to continue.\n" << oendl;
+        odebug << "Wave file contains unknown format. Unable to continue." << oendl;
         return -1;
       }
       wavFormat = fmt;
       //      compressionFormat=fmt;
       odebug << "compressionFormat is " << fmt << "" << oendl;
       if (read(fd, &ch, 2) < 2) {
-        odebug << "Could not read format chunk.\n" << oendl;
+        odebug << "Could not read format chunk." << oendl;
         return -1;
       } else {
         wavChannels = ch;
         odebug << "File has " << ch << " channels" << oendl;
       }
       if (read(fd, &samplerrate, 4) < 4) {
-        odebug << "Could not read from format chunk.\n" << oendl;
+        odebug << "Could not read from format chunk." << oendl;
         return -1;
       } else {
         wavSampleRate = samplerrate;
@@ -236,7 +234,7 @@ int WavFile::parseWavHeader(int fd) {
       }
       lseek(fd, 6, SEEK_CUR);
       if (read(fd, &bitrate, 2) < 2) {
-        odebug << "Could not read format chunk.\n" << oendl;
+        odebug << "Could not read format chunk." << oendl;
         return -1;
       }  else {
         wavResolution=bitrate;
@@ -249,24 +247,24 @@ int WavFile::parseWavHeader(int fd) {
   found = 0;
   while (!found) {
     if (read(fd, string, 4) < 4) {
-      odebug << "Could not read from sound file.\n" << oendl;
+      odebug << "Could not read from sound file." << oendl;
       return -1;
     }
 
     if (strncmp(string, "data", 4)) {
       if (read(fd, &longdata, 4)<4) {
-        odebug << "Could not read from sound file.\n" << oendl;
+        odebug << "Could not read from sound file." << oendl;
         return -1;
       }
 
       lseek(fd, longdata, SEEK_CUR);
     } else {
       if (read(fd, &longdata, 4) < 4) {
-        odebug << "Could not read from sound file.\n" << oendl;
+        odebug << "Could not read from sound file." << oendl;
         return -1;
       } else {
         wavNumberSamples =  longdata;
-         odebug << "file hase length of " << (int)longdata << "\n"
+         odebug << "file hase length of " << (int)longdata << ""
                 << "lasting "
                 << (int)(( longdata / wavSampleRate) / wavChannels) / ( wavChannels*( wavResolution/8))
                 << " seconds" << oendl;
