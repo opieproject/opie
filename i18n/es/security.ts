@@ -31,14 +31,6 @@ Acceso denegado</translation>
         <source>None</source>
         <translation>Ninguna</translation>
     </message>
-    <message>
-        <source>Enter new passcode</source>
-        <translation type="obsolete">Introduzca nuevo código</translation>
-    </message>
-    <message>
-        <source>Re-enter new passcode</source>
-        <translation type="obsolete">Re-introduzca el código</translation>
-    </message>
 </context>
 <context>
     <name>SecurityBase</name>

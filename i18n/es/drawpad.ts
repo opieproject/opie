@@ -98,14 +98,6 @@
         <translation>Ancho lápiz</translation>
     </message>
     <message>
-        <source>More</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>More...</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>Pen Color</source>
         <translation>Color lápiz</translation>
     </message>
@@ -173,52 +165,7 @@ las páginas?</translation>
     </message>
 </context>
 <context>
-    <name>DrawPadCanvas</name>
-    <message>
-        <source>Delete All</source>
-        <translation type="obsolete">Borrar todo</translation>
-    </message>
-    <message>
-        <source>Do you want to delete
-all the pages?</source>
-        <translation type="obsolete">¿Quiere borrar todas
-las páginas?</translation>
-    </message>
-    <message>
-        <source>Clear Page</source>
-        <translation type="obsolete">Limpiar página</translation>
-    </message>
-    <message>
-        <source>Do you want to clear
-the current page?</source>
-        <translation type="obsolete">¿Quiere limpiar la
-página actual?</translation>
-    </message>
-    <message>
-        <source>Delete Page</source>
-        <translation type="obsolete">Borrar página</translation>
-    </message>
-    <message>
-        <source>Do you want to delete
-the current page?</source>
-        <translation type="obsolete">¿Quiere borrar la
-página actual?</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="obsolete">Sí</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="obsolete">No</translation>
-    </message>
-</context>
-<context>
     <name>ExportDialog</name>
-    <message>
-        <source>Export</source>
-        <translation type="obsolete">Exportar</translation>
-    </message>
     <message>
         <source>Page Selection</source>
         <translation>Selección de páginas</translation>
@@ -259,10 +206,6 @@ página actual?</translation>
 <context>
     <name>ImportDialog</name>
     <message>
-        <source>Import</source>
-        <translation type="obsolete">Importar</translation>
-    </message>
-    <message>
         <source>Automatic preview</source>
         <translation>Vistazo automático</translation>
     </message>
@@ -282,32 +225,8 @@ página actual?</translation>
         <translation>Nueva Página</translation>
     </message>
     <message>
-        <source>Page Size</source>
-        <translation type="obsolete">Tamaño página</translation>
-    </message>
-    <message>
-        <source>Width :</source>
-        <translation type="obsolete">Ancho:</translation>
-    </message>
-    <message>
-        <source>Height :</source>
-        <translation type="obsolete">Alto:</translation>
-    </message>
-    <message>
-        <source>Contents</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>White</source>
         <translation>Blanco</translation>
-    </message>
-    <message>
-        <source>Foreground Color</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Background Color</source>
-        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Background</source>
@@ -316,10 +235,6 @@ página actual?</translation>
     <message>
         <source>Pen Color</source>
         <translation>Color del lápiz</translation>
-    </message>
-    <message>
-        <source>Brush Color</source>
-        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Fill Color</source>
@@ -375,41 +290,6 @@ página actual?</translation>
     <message>
         <source>Height:</source>
         <translation>Alto:</translation>
-    </message>
-</context>
-<context>
-    <name>QColorDialog</name>
-    <message>
-        <source>Hue:</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Sat:</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Val:</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Red:</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Green:</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Blue:</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Alpha channel:</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Select color</source>
-        <translation type="obsolete"></translation>
     </message>
 </context>
 <context>

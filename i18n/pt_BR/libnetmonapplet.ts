@@ -26,20 +26,12 @@
         <translation type="unfinished">Senha de Rede</translation>
     </message>
     <message>
-        <source>Disconnect</source>
-        <translation type="obsolete">Desconectado</translation>
-    </message>
-    <message>
         <source>Connect</source>
         <translation type="unfinished">Conectado</translation>
     </message>
     <message>
         <source>Enter password for %1:</source>
         <translation type="unfinished">Entre a senha para %1</translation>
-    </message>
-    <message>
-        <source>Network Offline</source>
-        <translation type="obsolete">Rede Desconectada</translation>
     </message>
 </context>
 </TS>

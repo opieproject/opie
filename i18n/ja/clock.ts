@@ -26,14 +26,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Alarm On</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Alarm Off</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>Stop</source>
         <translation type="unfinished"></translation>
     </message>

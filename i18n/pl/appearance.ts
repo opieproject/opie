@@ -14,10 +14,6 @@
         <translation>Edytuj aktualny schemat...</translation>
     </message>
     <message>
-        <source>Load</source>
-        <translation type="obsolete">Zaladuj</translation>
-    </message>
-    <message>
         <source>Delete</source>
         <translation>Usun</translation>
     </message>
@@ -38,22 +34,12 @@
         <translation>Tlo</translation>
     </message>
     <message>
-        <source>Do you want to apply your changes?
-</source>
-        <translation type="obsolete">Czy chcesz zatwierdzic zmiany?
-</translation>
-    </message>
-    <message>
         <source>Yes</source>
         <translation>Tak</translation>
     </message>
     <message>
         <source>No</source>
         <translation>Nie</translation>
-    </message>
-    <message>
-        <source>Open File</source>
-        <translation type="obsolete">Otworz plik</translation>
     </message>
     <message>
         <source>Delete scheme</source>
@@ -119,132 +105,6 @@
     <message>
         <source>Edit scheme</source>
         <translation>Edytuj schemat</translation>
-    </message>
-    <message>
-        <source>More</source>
-        <translation type="obsolete">Wiecej</translation>
-    </message>
-    <message>
-        <source>More...</source>
-        <translation type="obsolete">Wiecej...</translation>
-    </message>
-</context>
-<context>
-    <name>QColorDialog</name>
-    <message>
-        <source>Hue:</source>
-        <translation type="obsolete">Barwa:</translation>
-    </message>
-    <message>
-        <source>Sat:</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Val:</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Red:</source>
-        <translation type="obsolete">Czerwony:</translation>
-    </message>
-    <message>
-        <source>Green:</source>
-        <translation type="obsolete">Zielony:</translation>
-    </message>
-    <message>
-        <source>Blue:</source>
-        <translation type="obsolete">Niebieski:</translation>
-    </message>
-    <message>
-        <source>Alpha channel:</source>
-        <translation type="obsolete">Kanal alfa:</translation>
-    </message>
-    <message>
-        <source>Select color</source>
-        <translation type="obsolete">Wybierz kolor</translation>
-    </message>
-</context>
-<context>
-    <name>fileBrowser</name>
-    <message>
-        <source>Name</source>
-        <translation type="obsolete">Nazwa</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete">Rozmiar</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation type="obsolete">Data</translation>
-    </message>
-    <message>
-        <source>Documents</source>
-        <translation type="obsolete">Dokumenty</translation>
-    </message>
-    <message>
-        <source>All files</source>
-        <translation type="obsolete">Wszyskie pliki</translation>
-    </message>
-    <message>
-        <source>Hidden files</source>
-        <translation type="obsolete">Ukryte pliki</translation>
-    </message>
-    <message>
-        <source>Type: %1</source>
-        <translation type="obsolete">Typ: %1</translation>
-    </message>
-    <message>
-        <source>Change Directory</source>
-        <translation type="obsolete">Zmien katalog</translation>
-    </message>
-    <message>
-        <source>Make Directory</source>
-        <translation type="obsolete">Utworz katalog</translation>
-    </message>
-    <message>
-        <source>Rescan</source>
-        <translation type="obsolete">Przeskanuj</translation>
-    </message>
-    <message>
-        <source>Rename</source>
-        <translation type="obsolete">Zmiana nazwy</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="obsolete">Usun</translation>
-    </message>
-    <message>
-        <source>Note</source>
-        <translation type="obsolete">Komentarz</translation>
-    </message>
-    <message>
-        <source>Could not rename</source>
-        <translation type="obsolete">Nie moge zmianic nazwy</translation>
-    </message>
-    <message>
-        <source>Do you really want to delete
-</source>
-        <translation type="obsolete">Naprawde chcesz usunac
-</translation>
-    </message>
-    <message>
-        <source> ?
-It must be empty</source>
-        <translation type="obsolete">?
-To musi byc puste?</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="obsolete">Tak</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="obsolete">Nie</translation>
-    </message>
-    <message>
-        <source>All</source>
-        <translation type="obsolete">Wszystkie</translation>
     </message>
 </context>
 </TS>

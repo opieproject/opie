@@ -1,52 +1,5 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>AbEditor</name>
-    <message>
-        <source>First Name</source>
-        <translation type="obsolete">Ime</translation>
-    </message>
-    <message>
-        <source>Last Name</source>
-        <translation type="obsolete">Priimek</translation>
-    </message>
-    <message>
-        <source>Categories</source>
-        <translation type="obsolete">Kategorija</translation>
-    </message>
-    <message>
-        <source>Gender</source>
-        <translation type="obsolete">Spol</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="obsolete">Zapiski</translation>
-    </message>
-    <message>
-        <source>Middle Name</source>
-        <translation type="obsolete">Medimek</translation>
-    </message>
-    <message>
-        <source>Male</source>
-        <translation type="obsolete">Moški</translation>
-    </message>
-    <message>
-        <source>Female</source>
-        <translation type="obsolete">Ženski</translation>
-    </message>
-    <message>
-        <source>Enter Note</source>
-        <translation type="obsolete">Vpišite zapiske</translation>
-    </message>
-    <message>
-        <source>Notes...</source>
-        <translation type="obsolete">Zapiski...</translation>
-    </message>
-    <message>
-        <source>Contacts</source>
-        <translation type="obsolete">Stiki</translation>
-    </message>
-</context>
-<context>
     <name>AbTable</name>
     <message>
         <source>Full Name</source>
@@ -277,30 +230,6 @@ Izhod?</translation>
 <context>
     <name>ContactEditor</name>
     <message>
-        <source>Fax</source>
-        <translation type="obsolete">Faks</translation>
-    </message>
-    <message>
-        <source>Phone</source>
-        <translation type="obsolete">Telefon</translation>
-    </message>
-    <message>
-        <source>IM</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Mobile</source>
-        <translation type="obsolete">Mobitel</translation>
-    </message>
-    <message>
-        <source>Page</source>
-        <translation type="obsolete">Stran</translation>
-    </message>
-    <message>
-        <source>Pager</source>
-        <translation type="obsolete">Pager</translation>
-    </message>
-    <message>
         <source>Default Email</source>
         <translation>Privzeta Epošta</translation>
     </message>
@@ -353,28 +282,12 @@ Izhod?</translation>
         <translation>Skupine</translation>
     </message>
     <message>
-        <source>Street</source>
-        <translation type="obsolete">Ulica</translation>
-    </message>
-    <message>
-        <source>Street 2</source>
-        <translation type="obsolete">Ulica 2</translation>
-    </message>
-    <message>
-        <source>P.O. Box</source>
-        <translation type="obsolete">Poštna številka</translation>
-    </message>
-    <message>
         <source>City</source>
         <translation>Mesto</translation>
     </message>
     <message>
         <source>State</source>
         <translation>Pokrajina</translation>
-    </message>
-    <message>
-        <source>Zip</source>
-        <translation type="obsolete">Poštna številka</translation>
     </message>
     <message>
         <source>Country</source>

@@ -230,30 +230,6 @@ inténtelo de nuevo.
 <context>
     <name>ContactEditor</name>
     <message>
-        <source>Fax</source>
-        <translation type="obsolete">Fax</translation>
-    </message>
-    <message>
-        <source>Phone</source>
-        <translation type="obsolete">Teléfono</translation>
-    </message>
-    <message>
-        <source>IM</source>
-        <translation type="obsolete">Mensajería instantánea</translation>
-    </message>
-    <message>
-        <source>Mobile</source>
-        <translation type="obsolete">Móvil</translation>
-    </message>
-    <message>
-        <source>Page</source>
-        <translation type="obsolete">Página</translation>
-    </message>
-    <message>
-        <source>Pager</source>
-        <translation type="obsolete">Busca</translation>
-    </message>
-    <message>
         <source>Default Email</source>
         <translation>Correo-e por omisión</translation>
     </message>
@@ -306,28 +282,12 @@ inténtelo de nuevo.
         <translation>Grupos</translation>
     </message>
     <message>
-        <source>Street</source>
-        <translation type="obsolete">Calle</translation>
-    </message>
-    <message>
-        <source>Street 2</source>
-        <translation type="obsolete">Calle 2</translation>
-    </message>
-    <message>
-        <source>P.O. Box</source>
-        <translation type="obsolete">Apdo. de correos</translation>
-    </message>
-    <message>
         <source>City</source>
         <translation>Ciudad</translation>
     </message>
     <message>
         <source>State</source>
         <translation>Provincia</translation>
-    </message>
-    <message>
-        <source>Zip</source>
-        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Country</source>

@@ -116,32 +116,16 @@
 <context>
     <name>TodoWindow</name>
     <message>
-        <source>All</source>
-        <translation type="obsolete">Todas</translation>
-    </message>
-    <message>
         <source>Beam</source>
         <translation>Enviar</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="obsolete">Editar</translation>
     </message>
     <message>
         <source>Find</source>
         <translation>Localizar</translation>
     </message>
     <message>
-        <source>Task</source>
-        <translation type="obsolete">Tarefa</translation>
-    </message>
-    <message>
         <source>Todo</source>
         <translation>Tarefas</translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation type="obsolete">Ver</translation>
     </message>
     <message>
         <source>Edit Task</source>
@@ -158,10 +142,6 @@ antes de inserir dados</translation>
     <message>
         <source>Completed tasks</source>
         <translation>Tarefas completadas</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="obsolete">Apagar</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
@@ -236,10 +216,6 @@ Sair assim mesmo ?</translation>
     <message>
         <source>Options</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete all tasks?</source>
-        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>all tasks</source>

@@ -6,34 +6,6 @@
         <translation>Configuração Vmemo</translation>
     </message>
     <message>
-        <source>Levels</source>
-        <translation type="obsolete">Níveis</translation>
-    </message>
-    <message>
-        <source>Loud</source>
-        <translation type="obsolete">Alto</translation>
-    </message>
-    <message>
-        <source>Output</source>
-        <translation type="obsolete">Saída</translation>
-    </message>
-    <message>
-        <source>Mic</source>
-        <translation type="obsolete">Mic</translation>
-    </message>
-    <message>
-        <source>Silent</source>
-        <translation type="obsolete">Silêncio</translation>
-    </message>
-    <message>
-        <source>Vmemo</source>
-        <translation type="obsolete">Vmemo</translation>
-    </message>
-    <message>
-        <source>Sample Rate</source>
-        <translation type="obsolete">Amostragem</translation>
-    </message>
-    <message>
         <source>8000</source>
         <translation>8000</translation>
     </message>
@@ -64,14 +36,6 @@
     <message>
         <source>Visual Alerts</source>
         <translation>Alertas Visuais</translation>
-    </message>
-    <message>
-        <source>Location:</source>
-        <translation type="obsolete">Localização:</translation>
-    </message>
-    <message>
-        <source>Record Key:</source>
-        <translation type="obsolete">Tecla Gravação:</translation>
     </message>
     <message>
         <source>Taskbar Icon</source>
@@ -106,10 +70,6 @@
         <translation>Key_Mail</translation>
     </message>
     <message>
-        <source>Recording Limit:</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>30</source>
         <translation type="unfinished">30</translation>
     </message>
@@ -128,10 +88,6 @@
     <message>
         <source>5</source>
         <translation type="unfinished">5</translation>
-    </message>
-    <message>
-        <source>seconds</source>
-        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Sample Rate:</source>

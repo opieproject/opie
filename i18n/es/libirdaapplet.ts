@@ -6,10 +6,6 @@
         <translation>Disposiitivo descubierto:</translation>
     </message>
     <message>
-        <source>None</source>
-        <translation type="obsolete">Ninguno</translation>
-    </message>
-    <message>
         <source>Disable IrDA</source>
         <translation>Desactivar IrDA</translation>
     </message>

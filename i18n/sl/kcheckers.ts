@@ -2,80 +2,12 @@
 <context>
     <name>KCheckers</name>
     <message>
-        <source>New</source>
-        <translation type="obsolete">Novo</translation>
-    </message>
-    <message>
-        <source>Quit</source>
-        <translation type="obsolete">Izhod</translation>
-    </message>
-    <message>
-        <source>Beginner</source>
-        <translation type="obsolete">Začetnik</translation>
-    </message>
-    <message>
-        <source>Novice</source>
-        <translation type="obsolete">Novinec</translation>
-    </message>
-    <message>
-        <source>Average</source>
-        <translation type="obsolete">Povprečen</translation>
-    </message>
-    <message>
-        <source>Good</source>
-        <translation type="obsolete">Dober</translation>
-    </message>
-    <message>
-        <source>Expert</source>
-        <translation type="obsolete">Strokovnjak</translation>
-    </message>
-    <message>
-        <source>Master</source>
-        <translation type="obsolete">Mojster</translation>
-    </message>
-    <message>
-        <source>English Rules</source>
-        <translation type="obsolete">Angleška pravila</translation>
-    </message>
-    <message>
-        <source>Russian Rules</source>
-        <translation type="obsolete">Ruska pravila</translation>
-    </message>
-    <message>
-        <source>Marble Board</source>
-        <translation type="obsolete">Marmornata plošča</translation>
-    </message>
-    <message>
-        <source>Wooden Board</source>
-        <translation type="obsolete">Lesena plošča</translation>
-    </message>
-    <message>
         <source>What&apos;s This</source>
         <translation>Kaj je to</translation>
     </message>
     <message>
-        <source>About KCheckers</source>
-        <translation type="obsolete">O KCheckers</translation>
-    </message>
-    <message>
         <source>About &amp;Qt</source>
         <translation>O &amp;QT</translation>
-    </message>
-    <message>
-        <source>Game</source>
-        <translation type="obsolete">Igra</translation>
-    </message>
-    <message>
-        <source>Skill</source>
-        <translation type="obsolete">Izkušnje</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Možnosti</translation>
-    </message>
-    <message>
-        <source>Help</source>
-        <translation type="obsolete">Pomoč</translation>
     </message>
     <message>
         <source>Go!</source>

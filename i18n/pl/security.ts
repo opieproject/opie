@@ -59,10 +59,6 @@ Dostep zabroniony</translation>
         <translation>Akceptuj synchronizacje z sieci:</translation>
     </message>
     <message>
-        <source>192.168.1.0/24 (default)</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>192.168.0.0/16</source>
         <translation type="unfinished"></translation>
     </message>

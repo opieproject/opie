@@ -18,15 +18,4 @@
         <translation type="unfinished"></translation>
     </message>
 </context>
-<context>
-    <name>RotationSettingsBase</name>
-    <message>
-        <source>Rotation Settings</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;The chosen rotation will only affect new applications.</source>
-        <translation type="obsolete"></translation>
-    </message>
-</context>
 </TS>

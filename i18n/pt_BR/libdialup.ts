@@ -144,53 +144,6 @@
     </message>
 </context>
 <context>
-    <name>DialupImpl</name>
-    <message>
-        <source>Authenticating</source>
-        <translation type="obsolete">Autenticando</translation>
-    </message>
-    <message>
-        <source>Timed out</source>
-        <translation type="obsolete">Tempo esgotado</translation>
-    </message>
-    <message>
-        <source>Waiting for activity</source>
-        <translation type="obsolete">Esperando por atividade</translation>
-    </message>
-    <message>
-        <source>Connecting</source>
-        <translation type="obsolete">Conectando</translation>
-    </message>
-    <message>
-        <source>Connected</source>
-        <translation type="obsolete">Conectado</translation>
-    </message>
-    <message>
-        <source>Authentication Failed</source>
-        <translation type="obsolete">Autenticação Falhou</translation>
-    </message>
-    <message>
-        <source>No carrier</source>
-        <translation type="obsolete">Sem Portadora</translation>
-    </message>
-    <message>
-        <source>Initializing modem</source>
-        <translation type="obsolete">Iniciando o modem</translation>
-    </message>
-    <message>
-        <source>Number is busy</source>
-        <translation type="obsolete">Número ocupado</translation>
-    </message>
-    <message>
-        <source>Connection failed</source>
-        <translation type="obsolete">Conexão falhou</translation>
-    </message>
-    <message>
-        <source>No dialtone</source>
-        <translation type="obsolete">Sem tom de discagem</translation>
-    </message>
-</context>
-<context>
     <name>PppMon</name>
     <message>
         <source>Waiting for activity</source>

@@ -2,34 +2,6 @@
 <context>
     <name>CardMonitor</name>
     <message>
-        <source>Eject card</source>
-        <translation type="obsolete">Vstavite kartico</translation>
-    </message>
-    <message>
-        <source>CardMonitor</source>
-        <translation type="obsolete">NadzorKartic</translation>
-    </message>
-    <message>
-        <source>Card eject failed!</source>
-        <translation type="obsolete">Vstavitev kartice je spodletela!</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;Vredu</translation>
-    </message>
-    <message>
-        <source>Eject SD/ MMC card</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Eject %1 (0)</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Eject %1 (1)</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>CF/PCMCIA card eject failed!</source>
         <translation>Ne morem izvreči CF/PCMCIA kartice!</translation>
     </message>

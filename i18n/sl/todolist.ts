@@ -135,14 +135,6 @@ preden vnesete podatke</translation>
         <translation>Novo opravilo</translation>
     </message>
     <message>
-        <source>Edit</source>
-        <translation type="obsolete">Uredi</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="obsolete">Izbriši</translation>
-    </message>
-    <message>
         <source>Beam</source>
         <translation>Prežarči</translation>
     </message>
@@ -153,14 +145,6 @@ preden vnesete podatke</translation>
     <message>
         <source>Completed tasks</source>
         <translation>Končana opravila</translation>
-    </message>
-    <message>
-        <source>Task</source>
-        <translation type="obsolete">Opravilo</translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation type="obsolete">Pogled</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
@@ -231,10 +215,6 @@ Izhod?</translation>
     <message>
         <source>Options</source>
         <translation>Izbire</translation>
-    </message>
-    <message>
-        <source>Delete all tasks?</source>
-        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>all tasks</source>

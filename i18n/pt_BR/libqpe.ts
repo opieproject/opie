@@ -329,13 +329,6 @@ editando as categorias.</translation>
     </message>
 </context>
 <context>
-    <name>PasswordDialog</name>
-    <message>
-        <source>Owner Information</source>
-        <translation type="obsolete">Informação sobre o Proprietário</translation>
-    </message>
-</context>
-<context>
     <name>QObject</name>
     <message>
         <source>Y</source>

@@ -189,10 +189,6 @@ before you enter any data</source>
         <translation>Não pode editar enquanto sincroniza</translation>
     </message>
     <message>
-        <source>Delete all tasks?</source>
-        <translation type="obsolete">Apagar todas as tarefas?</translation>
-    </message>
-    <message>
         <source>All Categories</source>
         <translation>Todas as Categoria</translation>
     </message>

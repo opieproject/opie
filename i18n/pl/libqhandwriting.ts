@@ -38,13 +38,6 @@
     </message>
 </context>
 <context>
-    <name>InputMethods</name>
-    <message>
-        <source>Handwriting</source>
-        <translation type="obsolete">Odrecznie</translation>
-    </message>
-</context>
-<context>
     <name>QIMPenEdit</name>
     <message>
         <source>New...</source>

@@ -18,15 +18,4 @@
         <translation>&lt;p&gt;Rotacija ni vklopljena v tej demo verziji, kakorkoli to je podprto v Qt/Embedded.</translation>
     </message>
 </context>
-<context>
-    <name>RotationSettingsBase</name>
-    <message>
-        <source>Rotation Settings</source>
-        <translation type="obsolete">Nastavitve rotacije</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;The chosen rotation will only affect new applications.</source>
-        <translation type="obsolete">&lt;p&gt;Izbrana rotacija bo vplivala le na nove aplikacije.</translation>
-    </message>
-</context>
 </TS>

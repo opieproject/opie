@@ -121,10 +121,6 @@
         <translation>Pisava</translation>
     </message>
     <message>
-        <source>Save File As?</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>Permissions</source>
         <translation>Pravice</translation>
     </message>
@@ -155,10 +151,6 @@ To se ne da preklicati!!</translation>
         <translation>O</translation>
     </message>
     <message>
-        <source>Open File</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>Text Editor has detected
  you selected a .desktop file.
 Open .desktop file or linked file?</source>
@@ -181,57 +173,6 @@ Odprem .desktop datoteko ali povezano datoteko?</translation>
     <message>
         <source>Text</source>
         <translation>Besedilo</translation>
-    </message>
-</context>
-<context>
-    <name>fileBrowser</name>
-    <message>
-        <source>Name</source>
-        <translation type="obsolete">Ime</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete">Velikost</translation>
-    </message>
-    <message>
-        <source>Documents</source>
-        <translation type="obsolete">Dokumenti</translation>
-    </message>
-    <message>
-        <source>All files</source>
-        <translation type="obsolete">Vse datoteke</translation>
-    </message>
-    <message>
-        <source>Hidden files</source>
-        <translation type="obsolete">Skrite datoteke</translation>
-    </message>
-    <message>
-        <source>Type: %1</source>
-        <translation type="obsolete">Tip: %1</translation>
-    </message>
-    <message>
-        <source>Change Directory</source>
-        <translation type="obsolete">Zamenjaj imenik</translation>
-    </message>
-    <message>
-        <source>Make Directory</source>
-        <translation type="obsolete">Ustvari imenik</translation>
-    </message>
-    <message>
-        <source>Rescan</source>
-        <translation type="obsolete">Preišči</translation>
-    </message>
-    <message>
-        <source>Rename</source>
-        <translation type="obsolete">Preimenuj</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="obsolete">Izbriši</translation>
-    </message>
-    <message>
-        <source>All</source>
-        <translation type="obsolete">Vse</translation>
     </message>
 </context>
 <context>
@@ -299,29 +240,6 @@ Odprem .desktop datoteko ali povezano datoteko?</translation>
     <message>
         <source>Error setting mode</source>
         <translation>Napaka pri nastavitvi načina</translation>
-    </message>
-</context>
-<context>
-    <name>fileSaver</name>
-    <message>
-        <source>Name</source>
-        <translation type="obsolete">Ime</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete">Velikost</translation>
-    </message>
-    <message>
-        <source>fileSaver</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>set file permissions</source>
-        <translation type="obsolete"></translation>
     </message>
 </context>
 </TS>

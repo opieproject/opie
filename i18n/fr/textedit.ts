@@ -121,10 +121,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Save File As?</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>Permissions</source>
         <translation type="unfinished"></translation>
     </message>
@@ -152,10 +148,6 @@ This is irreversable!!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Open File</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>Text Editor has detected
  you selected a .desktop file.
 Open .desktop file or linked file?</source>
@@ -176,57 +168,6 @@ Open .desktop file or linked file?</source>
     <message>
         <source>Text</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>fileBrowser</name>
-    <message>
-        <source>Name</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Documents</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>All files</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Hidden files</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Type: %1</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Change Directory</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Make Directory</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Rescan</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Rename</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>All</source>
-        <translation type="obsolete"></translation>
     </message>
 </context>
 <context>
@@ -294,29 +235,6 @@ Open .desktop file or linked file?</source>
     <message>
         <source>Error setting mode</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>fileSaver</name>
-    <message>
-        <source>Name</source>
-        <translation type="obsolete">Nom</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete">Taille</translation>
-    </message>
-    <message>
-        <source>fileSaver</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>set file permissions</source>
-        <translation type="obsolete"></translation>
     </message>
 </context>
 </TS>

@@ -71,10 +71,6 @@
         <translation>Disponível (%1 kB)</translation>
     </message>
     <message>
-        <source> total: %1 kB</source>
-        <translation type="obsolete"> total: %1 kB</translation>
-    </message>
-    <message>
         <source>Used (%1 kB)</source>
         <translation>Usado (%1 kB)</translation>
     </message>
@@ -93,16 +89,8 @@
 <context>
     <name>ProcessInfo</name>
     <message>
-        <source>No</source>
-        <translation type="obsolete">Não</translation>
-    </message>
-    <message>
         <source>PID</source>
         <translation>PID</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="obsolete">Sim</translation>
     </message>
     <message>
         <source>Time</source>
@@ -116,28 +104,12 @@
         <source>Command</source>
         <translation>Comando</translation>
     </message>
-    <message>
-        <source>Kill Process?</source>
-        <translation type="obsolete">Matar processo?</translation>
-    </message>
 </context>
 <context>
     <name>StorageInfo</name>
     <message>
         <source>SCSI Hard Disk</source>
         <translation>Disco Rígido SCSI</translation>
-    </message>
-    <message>
-        <source>Internal Storage</source>
-        <translation type="obsolete">Armazenamento Interno</translation>
-    </message>
-    <message>
-        <source>SD Card</source>
-        <translation type="obsolete">Cartão SD</translation>
-    </message>
-    <message>
-        <source>CF Card</source>
-        <translation type="obsolete">Cartão CF</translation>
     </message>
     <message>
         <source>Hard Disk</source>

@@ -1,5 +1,5 @@
 <!DOCTYPE TS><TS>
-<codec>iso8859-1</codec>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>Clock</name>
     <message>
@@ -25,14 +25,6 @@
     <message>
         <source>Set Alarm</source>
         <translation>Définir l&apos;alarme</translation>
-    </message>
-    <message>
-        <source>Alarm On</source>
-        <translation type='obsolete'></translation>
-    </message>
-    <message>
-        <source>Alarm Off</source>
-        <translation type='obsolete'></translation>
     </message>
     <message>
         <source>Stop</source>

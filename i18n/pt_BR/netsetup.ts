@@ -69,47 +69,4 @@
         <translation type="unfinished">&lt;p&gt;Este é o estado dos serviços em execução.</translation>
     </message>
 </context>
-<context>
-    <name>ProxiesPageBase</name>
-    <message>
-        <source>FTP:</source>
-        <translation type="obsolete">FTP:</translation>
-    </message>
-    <message>
-        <source>HTTP:</source>
-        <translation type="obsolete">HTTP:</translation>
-    </message>
-    <message>
-        <source>Host:</source>
-        <translation type="obsolete">Computador:</translation>
-    </message>
-    <message>
-        <source>Port:</source>
-        <translation type="obsolete">Porta:</translation>
-    </message>
-    <message>
-        <source>Proxy Settings</source>
-        <translation type="obsolete">Proxy Setings</translation>
-    </message>
-    <message>
-        <source>No proxies</source>
-        <translation type="obsolete">Não usar proxy.</translation>
-    </message>
-    <message>
-        <source>Set proxies</source>
-        <translation type="obsolete">Config. de proxy</translation>
-    </message>
-    <message>
-        <source>Auto configure proxies</source>
-        <translation type="obsolete">Configurar proxies automaticamente</translation>
-    </message>
-    <message>
-        <source>Config:</source>
-        <translation type="obsolete">Configuração:</translation>
-    </message>
-    <message>
-        <source>No proxies for:</source>
-        <translation type="obsolete">Não usar proxy para:</translation>
-    </message>
-</context>
 </TS>

@@ -26,14 +26,6 @@
         <translation>Nastavi alarm</translation>
     </message>
     <message>
-        <source>Alarm On</source>
-        <translation type="obsolete">Alarm vključen</translation>
-    </message>
-    <message>
-        <source>Alarm Off</source>
-        <translation type="obsolete">Alarm izključen</translation>
-    </message>
-    <message>
         <source>Stop</source>
         <translation>Stop</translation>
     </message>

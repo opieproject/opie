@@ -66,10 +66,6 @@
 <context>
     <name>MountInfo</name>
     <message>
-        <source> total: %1 kB</source>
-        <translation type="obsolete">skupaj: %1 kB</translation>
-    </message>
-    <message>
         <source>Used (%1 kB)</source>
         <translation>Uporabljeno (%1 kB)</translation>
     </message>
@@ -111,24 +107,12 @@
 <context>
     <name>StorageInfo</name>
     <message>
-        <source>CF Card</source>
-        <translation type="obsolete">CF kartica</translation>
-    </message>
-    <message>
         <source>Hard Disk</source>
         <translation>Trdi disk</translation>
     </message>
     <message>
-        <source>SD Card</source>
-        <translation type="obsolete">SD kartica</translation>
-    </message>
-    <message>
         <source>SCSI Hard Disk</source>
         <translation>SCSI trdi disk</translation>
-    </message>
-    <message>
-        <source>Internal Storage</source>
-        <translation type="obsolete">Notranji pomnilnik</translation>
     </message>
     <message>
         <source>Int. Storage</source>

@@ -98,14 +98,6 @@
         <translation>Grubosc rysika</translation>
     </message>
     <message>
-        <source>More</source>
-        <translation type="obsolete">Wiecej</translation>
-    </message>
-    <message>
-        <source>More...</source>
-        <translation type="obsolete">Wiecej...</translation>
-    </message>
-    <message>
         <source>Pen Color</source>
         <translation>Kolor rysika</translation>
     </message>
@@ -173,52 +165,7 @@ wszystkie strony?</translation>
     </message>
 </context>
 <context>
-    <name>DrawPadCanvas</name>
-    <message>
-        <source>Delete All</source>
-        <translation type="obsolete">Usun wszystko</translation>
-    </message>
-    <message>
-        <source>Do you want to delete
-all the pages?</source>
-        <translation type="obsolete">Chcesz usunac
-wszystkie strony?</translation>
-    </message>
-    <message>
-        <source>Clear Page</source>
-        <translation type="obsolete">Wyczysc strone</translation>
-    </message>
-    <message>
-        <source>Do you want to clear
-the current page?</source>
-        <translation type="obsolete">Chcesz wyczyscic
-aktualna strone?</translation>
-    </message>
-    <message>
-        <source>Delete Page</source>
-        <translation type="obsolete">Usun strone</translation>
-    </message>
-    <message>
-        <source>Do you want to delete
-the current page?</source>
-        <translation type="obsolete">Chcesz usunac
-aktualna strone?</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="obsolete"></translation>
-    </message>
-</context>
-<context>
     <name>ExportDialog</name>
-    <message>
-        <source>Export</source>
-        <translation type="obsolete">Eksport</translation>
-    </message>
     <message>
         <source>Page Selection</source>
         <translation>Wybor strony</translation>
@@ -259,10 +206,6 @@ aktualna strone?</translation>
 <context>
     <name>ImportDialog</name>
     <message>
-        <source>Import</source>
-        <translation type="obsolete">Import</translation>
-    </message>
-    <message>
         <source>Automatic preview</source>
         <translation>Automatyczny podglad</translation>
     </message>
@@ -282,18 +225,6 @@ aktualna strone?</translation>
         <translation>Nowa strona</translation>
     </message>
     <message>
-        <source>Page Size</source>
-        <translation type="obsolete">Rozmiar strony</translation>
-    </message>
-    <message>
-        <source>Width :</source>
-        <translation type="obsolete">Szerokosc :</translation>
-    </message>
-    <message>
-        <source>Height :</source>
-        <translation type="obsolete">Wysokosc :</translation>
-    </message>
-    <message>
         <source>Background</source>
         <translation>Tlo</translation>
     </message>
@@ -304,10 +235,6 @@ aktualna strone?</translation>
     <message>
         <source>Pen Color</source>
         <translation>Kolor rysika</translation>
-    </message>
-    <message>
-        <source>Brush Color</source>
-        <translation type="obsolete">Kolor wypelnienia</translation>
     </message>
     <message>
         <source>Fill Color</source>
@@ -363,41 +290,6 @@ aktualna strone?</translation>
     <message>
         <source>Height:</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>QColorDialog</name>
-    <message>
-        <source>Hue:</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Sat:</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Val:</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Red:</source>
-        <translation type="obsolete">Czerwony:</translation>
-    </message>
-    <message>
-        <source>Green:</source>
-        <translation type="obsolete">Zielony:</translation>
-    </message>
-    <message>
-        <source>Blue:</source>
-        <translation type="obsolete">Niebieski:</translation>
-    </message>
-    <message>
-        <source>Alpha channel:</source>
-        <translation type="obsolete">Kanal alfa:</translation>
-    </message>
-    <message>
-        <source>Select color</source>
-        <translation type="obsolete">Wybierz kolor</translation>
     </message>
 </context>
 <context>

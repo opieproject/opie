@@ -46,12 +46,6 @@
         <translation>Fundo</translation>
     </message>
     <message>
-        <source>Do you want to apply your changes?
-</source>
-        <translation type="obsolete">Aplicar alterações?
-</translation>
-    </message>
-    <message>
         <source>Yes</source>
         <translation>Sim</translation>
     </message>

@@ -155,10 +155,6 @@ longa que o intervalo entre repetições.</translation>
         <source>Thursday</source>
         <translation>Quinta</translation>
     </message>
-    <message>
-        <source>Form1</source>
-        <translation type="obsolete"></translation>
-    </message>
 </context>
 <context>
     <name>DateBookDayView</name>
@@ -290,27 +286,12 @@ longa que o intervalo entre repetições.</translation>
         <translation type="unfinished">A: </translation>
     </message>
     <message>
-        <source>Form1</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>00. Jan-00. Jan</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>DateBookWeekLstDayHdrBase</name>
-    <message>
-        <source>Form1</source>
-        <translation type="obsolete"></translation>
-    </message>
-</context>
-<context>
     <name>DateBookWeekLstHeaderBase</name>
-    <message>
-        <source>Form2</source>
-        <translation type="obsolete"></translation>
-    </message>
     <message>
         <source>W: 00,00</source>
         <translation type="unfinished"></translation>
@@ -408,10 +389,6 @@ longa que o intervalo entre repetições.</translation>
 <context>
     <name>DateEntryBase</name>
     <message>
-        <source>End</source>
-        <translation type="obsolete">Fim</translation>
-    </message>
-    <message>
         <source>Home</source>
         <translation type="unfinished">Casa</translation>
     </message>
@@ -424,16 +401,8 @@ longa que o intervalo entre repetições.</translation>
         <translation type="unfinished">Almoço</translation>
     </message>
     <message>
-        <source>Start</source>
-        <translation type="obsolete">Início</translation>
-    </message>
-    <message>
         <source>&amp;Alarm</source>
         <translation type="unfinished">&amp;Alarme</translation>
-    </message>
-    <message>
-        <source>(None)</source>
-        <translation type="obsolete">(Nenhum)</translation>
     </message>
     <message>
         <source>Meeting</source>
@@ -450,14 +419,6 @@ longa que o intervalo entre repetições.</translation>
     <message>
         <source>Dinner</source>
         <translation type="unfinished">Jantar</translation>
-    </message>
-    <message>
-        <source>Description:</source>
-        <translation type="obsolete">Descrição:</translation>
-    </message>
-    <message>
-        <source>(Unknown)</source>
-        <translation type="obsolete">(Desconhecido)</translation>
     </message>
     <message>
         <source>Office</source>
@@ -480,10 +441,6 @@ longa que o intervalo entre repetições.</translation>
         <translation type="unfinished">Viagem</translation>
     </message>
     <message>
-        <source>Time zone:</source>
-        <translation type="obsolete">Zona Horária:</translation>
-    </message>
-    <message>
         <source>All day</source>
         <translation type="unfinished">O Dia Todo</translation>
     </message>
@@ -494,14 +451,6 @@ longa que o intervalo entre repetições.</translation>
     <message>
         <source>New Event</source>
         <translation>Novo Evento</translation>
-    </message>
-    <message>
-        <source>Description</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Start - End</source>
-        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Jan 02 00</source>
@@ -778,15 +727,15 @@ e </translation>
     </message>
     <message>
         <source>Var1</source>
-        <translation type="obsolete"></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Var 2</source>
-        <translation type="obsolete"></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>WeekVar</source>
-        <translation type="obsolete"></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

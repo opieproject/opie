@@ -2,28 +2,12 @@
 <context>
     <name>SoundSettingsBase</name>
     <message>
-        <source>Sound Settings</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Vmemo</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Sample Rate</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>11025</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>22050</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>32000</source>
-        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>44100</source>
@@ -36,34 +20,6 @@
     <message>
         <source>16 bit</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Screen sounds</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Keyboard sounds</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Levels</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Loud</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Output</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Mic</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Silent</source>
-        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Vmemo Settings</source>
@@ -80,18 +36,6 @@
     <message>
         <source>Visual Alerts</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Location</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Location:</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Record Key:</source>
-        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Taskbar Icon</source>
@@ -126,10 +70,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Recording Limit:</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>30</source>
         <translation type="unfinished"></translation>
     </message>
@@ -148,10 +88,6 @@
     <message>
         <source>5</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>seconds</source>
-        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Sample Rate:</source>

@@ -6,10 +6,6 @@
         <translation>Devices Descobertos:</translation>
     </message>
     <message>
-        <source>None</source>
-        <translation type="obsolete">Nenhum</translation>
-    </message>
-    <message>
         <source>Disable IrDA</source>
         <translation>Desligar IrDA</translation>
     </message>

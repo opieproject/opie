@@ -226,37 +226,9 @@ Sair na mesma?</translation>
         <source>Import vCard</source>
         <translation>Importar cartão de visita</translation>
     </message>
-    <message>
-        <source>SMS Entry</source>
-        <translation type="obsolete">Enviar SMS</translation>
-    </message>
 </context>
 <context>
     <name>ContactEditor</name>
-    <message>
-        <source>Fax</source>
-        <translation type="obsolete">Fax</translation>
-    </message>
-    <message>
-        <source>Phone</source>
-        <translation type="obsolete">Telefon</translation>
-    </message>
-    <message>
-        <source>IM</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Mobile</source>
-        <translation type="obsolete">Handy</translation>
-    </message>
-    <message>
-        <source>Page</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Pager</source>
-        <translation type="obsolete"></translation>
-    </message>
     <message>
         <source>Default Email</source>
         <translation>E-Mail Principal</translation>
@@ -310,28 +282,12 @@ Sair na mesma?</translation>
         <translation type="unfinished">Grupos</translation>
     </message>
     <message>
-        <source>Street</source>
-        <translation type="obsolete">Strasse</translation>
-    </message>
-    <message>
-        <source>Street 2</source>
-        <translation type="obsolete">2. Straße</translation>
-    </message>
-    <message>
-        <source>P.O. Box</source>
-        <translation type="obsolete">Postfach</translation>
-    </message>
-    <message>
         <source>City</source>
         <translation>Cidade</translation>
     </message>
     <message>
         <source>State</source>
         <translation>Estado</translation>
-    </message>
-    <message>
-        <source>Zip</source>
-        <translation type="obsolete">Postleitzahl</translation>
     </message>
     <message>
         <source>Country</source>

@@ -1,53 +1,6 @@
 <!DOCTYPE TS><TS>
 <defaultcodec>iso8859-1</defaultcodec>
 <context>
-    <name>AbEditor</name>
-    <message>
-        <source>Male</source>
-        <translation type="obsolete">Masculino</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="obsolete">Notas</translation>
-    </message>
-    <message>
-        <source>Middle Name</source>
-        <translation type="obsolete">Nome do Meio</translation>
-    </message>
-    <message>
-        <source>Female</source>
-        <translation type="obsolete">Feminino</translation>
-    </message>
-    <message>
-        <source>Gender</source>
-        <translation type="obsolete">Sexo</translation>
-    </message>
-    <message>
-        <source>Contacts</source>
-        <translation type="obsolete">Contatos</translation>
-    </message>
-    <message>
-        <source>Notes...</source>
-        <translation type="obsolete">Notas...</translation>
-    </message>
-    <message>
-        <source>First Name</source>
-        <translation type="obsolete">Nome</translation>
-    </message>
-    <message>
-        <source>Last Name</source>
-        <translation type="obsolete">Sobrenome</translation>
-    </message>
-    <message>
-        <source>Categories</source>
-        <translation type="obsolete">Categorias</translation>
-    </message>
-    <message>
-        <source>Enter Note</source>
-        <translation type="obsolete">Escrever Nota</translation>
-    </message>
-</context>
-<context>
     <name>AbTable</name>
     <message>
         <source>Pick</source>
@@ -277,30 +230,6 @@ Sair assim mesmo?</translation>
 <context>
     <name>ContactEditor</name>
     <message>
-        <source>Fax</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Phone</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>IM</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Mobile</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Page</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Pager</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>Default Email</source>
         <translation type="unfinished">E-mail Padrão</translation>
     </message>
@@ -353,28 +282,12 @@ Sair assim mesmo?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Street</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Street 2</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>P.O. Box</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>City</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>State</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Zip</source>
-        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Country</source>

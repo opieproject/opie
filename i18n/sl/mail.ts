@@ -548,7 +548,7 @@ Obiščite http://www.lisa.de/ za informacije.
     <name>MailTable</name>
     <message>
         <source>From</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Od</translation>
     </message>
     <message>
         <source>Subject</source>
@@ -560,7 +560,7 @@ Obiščite http://www.lisa.de/ za informacije.
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kopiraj</translation>
     </message>
     <message>
         <source>Seen</source>
@@ -596,7 +596,7 @@ Obiščite http://www.lisa.de/ za informacije.
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Napaka</translation>
     </message>
     <message>
         <source>&lt;p&gt;An error occoured during the selection of the mailbox. (Server said: %1)&lt;/p&gt;</source>
@@ -604,7 +604,7 @@ Obiščite http://www.lisa.de/ za informacije.
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vredu</translation>
     </message>
     <message>
         <source>Stopped</source>
@@ -627,7 +627,7 @@ Obiščite http://www.lisa.de/ za informacije.
     </message>
     <message>
         <source>Mail</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pošta</translation>
     </message>
     <message>
         <source>Servers</source>
@@ -651,11 +651,7 @@ Obiščite http://www.lisa.de/ za informacije.
     </message>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Abort</source>
-        <translation type="obsolete"></translation>
+        <translation type="unfinished">Nastavitve</translation>
     </message>
 </context>
 <context>
@@ -767,15 +763,15 @@ Obiščite http://www.lisa.de/ za informacije.
     </message>
     <message>
         <source>From</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Od</translation>
     </message>
     <message>
         <source>To</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Za</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Napaka</translation>
     </message>
     <message>
         <source>&lt;p&gt;Please enter what to search for.&lt;/p&gt;</source>
@@ -783,7 +779,7 @@ Obiščite http://www.lisa.de/ za informacije.
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vredu</translation>
     </message>
     <message>
         <source>&lt;p&gt;Please select a folder.&lt;/p&gt;</source>
@@ -865,7 +861,7 @@ Obiščite http://www.lisa.de/ za informacije.
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Napaka</translation>
     </message>
     <message>
         <source>&lt;p&gt;The mail body is not yet downloaded, so you cannot reply yet.</source>
@@ -873,7 +869,7 @@ Obiščite http://www.lisa.de/ za informacije.
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vredu</translation>
     </message>
     <message>
         <source>&lt;p&gt;The mail body is not yet downloaded, so you cannot forward yet.</source>
@@ -892,11 +888,11 @@ Obiščite http://www.lisa.de/ za informacije.
     </message>
     <message>
         <source>Mail</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pošta</translation>
     </message>
     <message>
         <source>Reply</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Odgovori</translation>
     </message>
     <message>
         <source>Forward</source>

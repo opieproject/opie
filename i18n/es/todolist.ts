@@ -191,10 +191,6 @@ de introducir algún dato</translation>
         <translation>No puedo editar datos, estoy sincronizando</translation>
     </message>
     <message>
-        <source>Delete all tasks?</source>
-        <translation type="obsolete">Borrar todas la tareas?</translation>
-    </message>
-    <message>
         <source>All Categories</source>
         <translation>Todas</translation>
     </message>

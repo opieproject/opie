@@ -139,10 +139,6 @@ Open .desktop file or linked file?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Save File As?</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>Permissions</source>
         <translation type="unfinished"></translation>
     </message>
@@ -239,29 +235,6 @@ This is irreversable!!</source>
     <message>
         <source>Error setting mode</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>fileSaver</name>
-    <message>
-        <source>fileSaver</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>set file permissions</source>
-        <translation type="obsolete"></translation>
     </message>
 </context>
 </TS>

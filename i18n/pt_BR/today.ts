@@ -23,14 +23,6 @@
         <translation>Nenhuma tarefa ativa</translation>
     </message>
     <message>
-        <source>&lt;b&gt;Please fill out the business card &lt;/b&gt;</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>No more appointments today</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>No appointments today</source>
         <translation type="unfinished">Nenhum compromisso hoje</translation>
     </message>
@@ -42,16 +34,16 @@
         <source>Please fill out the business card</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>No more  today</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TodayBase</name>
     <message>
         <source>Opiemail not installed</source>
         <translation>Opiemail não instalado</translation>
-    </message>
-    <message>
-        <source>No appointments today</source>
-        <translation type="obsolete">Nenhum compromisso hoje</translation>
     </message>
     <message>
         <source>Today</source>
@@ -61,26 +53,12 @@
 <context>
     <name>todayconfig</name>
     <message>
-        <source>All</source>
-        <translation type="obsolete">Tudo</translation>
-    </message>
-    <message>
         <source>How many
 tasks should 
 be shown?</source>
         <translation>Quantas
 tarefas devem 
 ser mostradas ?</translation>
-    </message>
-    <message>
-        <source>How many 
-appointment
-should should 
-be shown?</source>
-        <translation type="obsolete">Quantos 
-compromissos
-devem ser 
-mostrados ?</translation>
     </message>
     <message>
         <source>Tasks</source>
@@ -119,14 +97,6 @@ mostrada ?</translation>
 many letters</source>
         <translation>Truncar após
 quantas letras</translation>
-    </message>
-    <message>
-        <source>Should today be
-autostarted on
-resume ? (Opie only)</source>
-        <translation type="obsolete">Hoje deve abrir
-automaticamente ao
-ligar ? (apenas Opie)</translation>
     </message>
     <message>
         <source>Misc</source>

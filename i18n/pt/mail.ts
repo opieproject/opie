@@ -650,10 +650,6 @@ Visit http://www.lisa.de/ for Information.
         <source>Configuration</source>
         <translation>Configuração</translation>
     </message>
-    <message>
-        <source>Abort</source>
-        <translation type="obsolete">Abortar</translation>
-    </message>
 </context>
 <context>
     <name>OpenDiagBase</name>

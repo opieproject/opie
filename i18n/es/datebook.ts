@@ -106,10 +106,6 @@ Libere espacio y vuelva a intentarlo.
 <context>
     <name>DateBookDayHeaderBase</name>
     <message>
-        <source>Form1</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>M</source>
         <translation>L</translation>
     </message>
@@ -280,10 +276,6 @@ Libere espacio y vuelva a intentarlo.
 <context>
     <name>DateBookWeekHeaderBase</name>
     <message>
-        <source>Form1</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>Y: </source>
         <translation>A: </translation>
     </message>
@@ -297,18 +289,7 @@ Libere espacio y vuelva a intentarlo.
     </message>
 </context>
 <context>
-    <name>DateBookWeekLstDayHdrBase</name>
-    <message>
-        <source>Form1</source>
-        <translation type="obsolete"></translation>
-    </message>
-</context>
-<context>
     <name>DateBookWeekLstHeaderBase</name>
-    <message>
-        <source>Form2</source>
-        <translation type="obsolete"></translation>
-    </message>
     <message>
         <source>W: 00,00</source>
         <translation>S: 00,00</translation>
@@ -434,20 +415,12 @@ Libere espacio y vuelva a intentarlo.
         <translation>Viaje</translation>
     </message>
     <message>
-        <source>Description</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>Office</source>
         <translation>Oficina</translation>
     </message>
     <message>
         <source>Home</source>
         <translation>Casa</translation>
-    </message>
-    <message>
-        <source>Start - End</source>
-        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Jan 02 00</source>

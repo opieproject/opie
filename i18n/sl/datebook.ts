@@ -108,10 +108,6 @@ Izhod?</translation>
 <context>
     <name>DateBookDayHeaderBase</name>
     <message>
-        <source>Form1</source>
-        <translation type="obsolete">Obrazec1</translation>
-    </message>
-    <message>
         <source>M</source>
         <translation>P</translation>
     </message>
@@ -282,10 +278,6 @@ Izhod?</translation>
 <context>
     <name>DateBookWeekHeaderBase</name>
     <message>
-        <source>Form1</source>
-        <translation type="obsolete">Obrazec1</translation>
-    </message>
-    <message>
         <source>Y: </source>
         <translation>L: </translation>
     </message>
@@ -299,18 +291,7 @@ Izhod?</translation>
     </message>
 </context>
 <context>
-    <name>DateBookWeekLstDayHdrBase</name>
-    <message>
-        <source>Form1</source>
-        <translation type="obsolete">Obrazec1</translation>
-    </message>
-</context>
-<context>
     <name>DateBookWeekLstHeaderBase</name>
-    <message>
-        <source>Form2</source>
-        <translation type="obsolete">Obrazec2</translation>
-    </message>
     <message>
         <source>W: 00,00</source>
         <translation>T: 00,00</translation>
@@ -436,10 +417,6 @@ Izhod?</translation>
         <translation>Potovanje</translation>
     </message>
     <message>
-        <source>Description:</source>
-        <translation type="obsolete">Opis:</translation>
-    </message>
-    <message>
         <source>Office</source>
         <translation>Pisarna</translation>
     </message>
@@ -448,216 +425,12 @@ Izhod?</translation>
         <translation>Dom</translation>
     </message>
     <message>
-        <source>Start</source>
-        <translation type="obsolete">Začetek</translation>
-    </message>
-    <message>
         <source>Jan 02 00</source>
         <translation>Jan 02 00</translation>
     </message>
     <message>
-        <source>00:00</source>
-        <translation type="obsolete">00:00</translation>
-    </message>
-    <message>
-        <source>00:30</source>
-        <translation type="obsolete">00:30</translation>
-    </message>
-    <message>
-        <source>01:00</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>01:30</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>02:00</source>
-        <translation type="obsolete">02:00</translation>
-    </message>
-    <message>
-        <source>02:30</source>
-        <translation type="obsolete">02:30</translation>
-    </message>
-    <message>
-        <source>03:00</source>
-        <translation type="obsolete">03:00</translation>
-    </message>
-    <message>
-        <source>03:30</source>
-        <translation type="obsolete">03:30</translation>
-    </message>
-    <message>
-        <source>04:00</source>
-        <translation type="obsolete">04:00</translation>
-    </message>
-    <message>
-        <source>04:30</source>
-        <translation type="obsolete">04:30</translation>
-    </message>
-    <message>
-        <source>05:00</source>
-        <translation type="obsolete">05:00</translation>
-    </message>
-    <message>
-        <source>05:30</source>
-        <translation type="obsolete">05:30</translation>
-    </message>
-    <message>
-        <source>06:00</source>
-        <translation type="obsolete">06:00</translation>
-    </message>
-    <message>
-        <source>06:30</source>
-        <translation type="obsolete">06:30</translation>
-    </message>
-    <message>
-        <source>07:00</source>
-        <translation type="obsolete">07:00</translation>
-    </message>
-    <message>
-        <source>07:30</source>
-        <translation type="obsolete">07:30</translation>
-    </message>
-    <message>
-        <source>08:00</source>
-        <translation type="obsolete">08:00</translation>
-    </message>
-    <message>
-        <source>08:30</source>
-        <translation type="obsolete">08:30</translation>
-    </message>
-    <message>
-        <source>09:00</source>
-        <translation type="obsolete">09:00</translation>
-    </message>
-    <message>
-        <source>09:30</source>
-        <translation type="obsolete">09:30</translation>
-    </message>
-    <message>
-        <source>10:00</source>
-        <translation type="obsolete">10:00</translation>
-    </message>
-    <message>
-        <source>10:30</source>
-        <translation type="obsolete">10:30</translation>
-    </message>
-    <message>
-        <source>11:00</source>
-        <translation type="obsolete">11:00</translation>
-    </message>
-    <message>
-        <source>11:30</source>
-        <translation type="obsolete">11:30</translation>
-    </message>
-    <message>
-        <source>12:00</source>
-        <translation type="obsolete">12:00</translation>
-    </message>
-    <message>
-        <source>12:30</source>
-        <translation type="obsolete">12:30</translation>
-    </message>
-    <message>
-        <source>13:00</source>
-        <translation type="obsolete">13:00</translation>
-    </message>
-    <message>
-        <source>13:30</source>
-        <translation type="obsolete">13:30</translation>
-    </message>
-    <message>
-        <source>14:00</source>
-        <translation type="obsolete">14:00</translation>
-    </message>
-    <message>
-        <source>14:30</source>
-        <translation type="obsolete">14:30</translation>
-    </message>
-    <message>
-        <source>15:00</source>
-        <translation type="obsolete">15:00</translation>
-    </message>
-    <message>
-        <source>15:30</source>
-        <translation type="obsolete">15:30</translation>
-    </message>
-    <message>
-        <source>16:00</source>
-        <translation type="obsolete">16:00</translation>
-    </message>
-    <message>
-        <source>16:30</source>
-        <translation type="obsolete">16:30</translation>
-    </message>
-    <message>
-        <source>17:00</source>
-        <translation type="obsolete">17:00</translation>
-    </message>
-    <message>
-        <source>17:30</source>
-        <translation type="obsolete">17:30</translation>
-    </message>
-    <message>
-        <source>18:00</source>
-        <translation type="obsolete">18:00</translation>
-    </message>
-    <message>
-        <source>18:30</source>
-        <translation type="obsolete">18:30</translation>
-    </message>
-    <message>
-        <source>19:00</source>
-        <translation type="obsolete">19:00</translation>
-    </message>
-    <message>
-        <source>19:30</source>
-        <translation type="obsolete">19:30</translation>
-    </message>
-    <message>
-        <source>20:00</source>
-        <translation type="obsolete">20:00</translation>
-    </message>
-    <message>
-        <source>20:30</source>
-        <translation type="obsolete">20:30</translation>
-    </message>
-    <message>
-        <source>21:00</source>
-        <translation type="obsolete">21:00</translation>
-    </message>
-    <message>
-        <source>21:30</source>
-        <translation type="obsolete">21:30</translation>
-    </message>
-    <message>
-        <source>22:00</source>
-        <translation type="obsolete">22:00</translation>
-    </message>
-    <message>
-        <source>22:30</source>
-        <translation type="obsolete">22:30</translation>
-    </message>
-    <message>
-        <source>23:00</source>
-        <translation type="obsolete">23:00</translation>
-    </message>
-    <message>
-        <source>23:30</source>
-        <translation type="obsolete">23:30</translation>
-    </message>
-    <message>
-        <source>End</source>
-        <translation type="obsolete">Konec</translation>
-    </message>
-    <message>
         <source>All day</source>
         <translation>Cel dan</translation>
-    </message>
-    <message>
-        <source>Time zone:</source>
-        <translation type="obsolete">Časovni pas:</translation>
     </message>
     <message>
         <source>&amp;Alarm</source>
@@ -682,14 +455,6 @@ Izhod?</translation>
     <message>
         <source>No Repeat...</source>
         <translation>Ne ponovi...</translation>
-    </message>
-    <message>
-        <source>Description</source>
-        <translation type="obsolete">Opis</translation>
-    </message>
-    <message>
-        <source>Start - End</source>
-        <translation type="obsolete">Začetek - Konec</translation>
     </message>
     <message>
         <source>Start time</source>
@@ -954,15 +719,15 @@ in</translation>
     </message>
     <message>
         <source>Var1</source>
-        <translation type="obsolete">Spremenljivka1</translation>
+        <translation type="unfinished">Spremenljivka1</translation>
     </message>
     <message>
         <source>Var 2</source>
-        <translation type="obsolete">Spremenljivka 2</translation>
+        <translation type="unfinished">Spremenljivka 2</translation>
     </message>
     <message>
         <source>WeekVar</source>
-        <translation type="obsolete">TedenskaSpremenljivka</translation>
+        <translation type="unfinished">TedenskaSpremenljivka</translation>
     </message>
     <message>
         <source>months</source>

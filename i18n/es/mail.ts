@@ -652,10 +652,6 @@ Visite http://www.lisa.de/ para informarse.</translation>
         <source>Configuration</source>
         <translation>Configuración</translation>
     </message>
-    <message>
-        <source>Abort</source>
-        <translation type="obsolete">Cancelar</translation>
-    </message>
 </context>
 <context>
     <name>OpenDiagBase</name>

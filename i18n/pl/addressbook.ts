@@ -229,30 +229,6 @@ Zakonczyc?</translation>
 <context>
     <name>ContactEditor</name>
     <message>
-        <source>Fax</source>
-        <translation type="obsolete">Fax</translation>
-    </message>
-    <message>
-        <source>Phone</source>
-        <translation type="obsolete">Telefon</translation>
-    </message>
-    <message>
-        <source>IM</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Mobile</source>
-        <translation type="obsolete">Komorka</translation>
-    </message>
-    <message>
-        <source>Page</source>
-        <translation type="obsolete">Strona</translation>
-    </message>
-    <message>
-        <source>Pager</source>
-        <translation type="obsolete">Biper</translation>
-    </message>
-    <message>
         <source>Default Email</source>
         <translation>Domyslny e-mail</translation>
     </message>
@@ -305,28 +281,12 @@ Zakonczyc?</translation>
         <translation>Grupa</translation>
     </message>
     <message>
-        <source>Street</source>
-        <translation type="obsolete">Ulica</translation>
-    </message>
-    <message>
-        <source>Street 2</source>
-        <translation type="obsolete">Ulica 2</translation>
-    </message>
-    <message>
-        <source>P.O. Box</source>
-        <translation type="obsolete">Skrytka Pocztowa</translation>
-    </message>
-    <message>
         <source>City</source>
         <translation>Miasto</translation>
     </message>
     <message>
         <source>State</source>
         <translation>Wojewodztwo</translation>
-    </message>
-    <message>
-        <source>Zip</source>
-        <translation type="obsolete">Kod pocztowy</translation>
     </message>
     <message>
         <source>Country</source>

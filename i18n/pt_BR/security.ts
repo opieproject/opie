@@ -56,10 +56,6 @@ Acesso negado</translation>
         <translation type="unfinished">Aceitar sincronização da rede:</translation>
     </message>
     <message>
-        <source>192.168.1.0/24 (default)</source>
-        <translation type="obsolete">192.168.1.0/24 (padrão)</translation>
-    </message>
-    <message>
         <source>Security Settings</source>
         <translation type="unfinished">Ajustes</translation>
     </message>

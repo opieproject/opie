@@ -133,14 +133,6 @@ before you enter any data</source>
         <translation>Nowy proces</translation>
     </message>
     <message>
-        <source>Edit</source>
-        <translation type="obsolete">Edycja</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="obsolete">Usun</translation>
-    </message>
-    <message>
         <source>Beam</source>
         <translation type="unfinished"></translation>
     </message>
@@ -151,14 +143,6 @@ before you enter any data</source>
     <message>
         <source>Completed tasks</source>
         <translation>Zakonczonych procesow</translation>
-    </message>
-    <message>
-        <source>Task</source>
-        <translation type="obsolete">Proces</translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation type="obsolete">Widok</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
@@ -224,10 +208,6 @@ Quit Anyway?</source>
     <message>
         <source>Options</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete all tasks?</source>
-        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>all tasks</source>

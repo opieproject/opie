@@ -6,10 +6,6 @@
         <translation>Hoje</translation>
     </message>
     <message>
-        <source>&lt;b&gt;Please fill out the business card &lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;Bitte füllen Sie die Visitenkarte aus&lt;/b&gt;</translation>
-    </message>
-    <message>
         <source>&lt;b&gt;%1&lt;/b&gt; new mail(s), &lt;b&gt;%2&lt;/b&gt; outgoing</source>
         <translation>&lt;b&gt;%1&lt;/b&gt; novo(s) email(s), &lt;b&gt;%2&lt;/b&gt; na caixa de saída</translation>
     </message>
@@ -26,10 +22,6 @@
         <translation>Não existem tarefas activas</translation>
     </message>
     <message>
-        <source>No more appointments today</source>
-        <translation>Não existem mais eventos hoje</translation>
-    </message>
-    <message>
         <source>No appointments today</source>
         <translation>Não existem eventos hoje</translation>
     </message>
@@ -42,24 +34,8 @@
         <translation>Deve preencher o cartão de visita</translation>
     </message>
     <message>
-        <source>&lt;b&gt; 1&lt;/b&gt; new mail</source>
-        <translation type="obsolete">&lt;b&gt; 1&lt;/b&gt; novo email</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;%1&lt;/b&gt; new mail(s)</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>&lt;b&gt; 1&lt;/b&gt; outgoing</source>
-        <translation type="obsolete">&lt;b&gt; 1&lt;/b&gt; na caixa de saída</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;%1&lt;/b&gt; outgoing</source>
-        <translation type="obsolete">&lt;b&gt;%1&lt;/&gt; na caixa de saída</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;%1&lt;/b&gt; new mails</source>
-        <translation type="obsolete">&lt;b&gt;%1&lt;/b&gt; novos emails</translation>
+        <source>No more  today</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -99,13 +75,6 @@ appointments</source>
 os últimos eventos</translation>
     </message>
     <message>
-        <source>How many 
-appointment
-should should 
-be shown?</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>Calendar</source>
         <translation>Calendário</translation>
     </message>
@@ -125,12 +94,6 @@ tarefas?</translation>
 many letters</source>
         <translation>Cortar ao fim
 de quantas letras</translation>
-    </message>
-    <message>
-        <source>Should today be
-autostarted on
-resume ? (Opie only)</source>
-        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Misc</source>

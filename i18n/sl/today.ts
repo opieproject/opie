@@ -6,14 +6,6 @@
         <translation>Danes</translation>
     </message>
     <message>
-        <source>&lt;b&gt;Please fill out the business card &lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;Prosim izpolnite poslovno kartico &lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;%1&lt;/b&gt; BLAH mail(s), &lt;b&gt;%2&lt;/b&gt; outgoing</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>There is &lt;b&gt; 1&lt;/b&gt; active task:  &lt;br&gt;</source>
         <translation>Trenutno je &lt;b&gt; 1&lt;/b&gt; tekoče opravilo:  &lt;br&gt;</translation>
     </message>
@@ -30,10 +22,6 @@
         <translation>&lt;b&gt;%1&lt;/b&gt; novih sporočil, &lt;b&gt;%2&lt;/b&gt; izhodnih</translation>
     </message>
     <message>
-        <source>No more appointments today</source>
-        <translation>Danes ni več sestankov</translation>
-    </message>
-    <message>
         <source>No appointments today</source>
         <translation>Danes ni sestankov</translation>
     </message>
@@ -44,6 +32,10 @@
     <message>
         <source>Please fill out the business card</source>
         <translation>Prosim izplonite poslovno kartico</translation>
+    </message>
+    <message>
+        <source>No more  today</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -84,16 +76,6 @@ appointments</source>
 zmenke</translation>
     </message>
     <message>
-        <source>How many 
-appointment
-should should 
-be shown?</source>
-        <translation type="obsolete">Koliko 
-zmenkov
-naj bo
-prikazanih?</translation>
-    </message>
-    <message>
         <source>Calendar</source>
         <translation>Koledar</translation>
     </message>
@@ -114,14 +96,6 @@ prikazanih?</translation>
 many letters</source>
         <translation>Odščipni po koliko
 znakih</translation>
-    </message>
-    <message>
-        <source>Should today be
-autostarted on
-resume ? (Opie only)</source>
-        <translation type="obsolete">Naj se danes
-sam zažene pri
-nadaljevanju? (samo Opie)</translation>
     </message>
     <message>
         <source>Misc</source>

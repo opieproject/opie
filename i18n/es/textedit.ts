@@ -141,10 +141,6 @@ que ha seleccionado un .desktop
         <translation>Sin nombre</translation>
     </message>
     <message>
-        <source>Save File As?</source>
-        <translation type="obsolete">¿Guardar fichero como?</translation>
-    </message>
-    <message>
         <source>Permissions</source>
         <translation>Permisos</translation>
     </message>
@@ -243,29 +239,6 @@ el fichero actual del disco?
     <message>
         <source>Error setting mode</source>
         <translation>Error fijando modo</translation>
-    </message>
-</context>
-<context>
-    <name>fileSaver</name>
-    <message>
-        <source>fileSaver</source>
-        <translation type="obsolete">SalvarFichero</translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation type="obsolete">Nombre</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete">Tamaño</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation type="obsolete">Fecha</translation>
-    </message>
-    <message>
-        <source>set file permissions</source>
-        <translation type="obsolete">fijar permisos fichero</translation>
     </message>
 </context>
 </TS>

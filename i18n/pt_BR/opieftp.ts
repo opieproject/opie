@@ -63,10 +63,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>me@opieftp.org</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>Remote server</source>
         <translation type="unfinished"></translation>
     </message>
@@ -113,10 +109,6 @@
     <message>
         <source>Dir</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>192.168.129.201</source>
-        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Ftp</source>

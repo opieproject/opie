@@ -6,22 +6,6 @@
         <translation>Aplicación</translation>
     </message>
     <message>
-        <source>Exec</source>
-        <translation type="obsolete">Ejecutar</translation>
-    </message>
-    <message>
-        <source>Comment</source>
-        <translation type="obsolete">Comentario</translation>
-    </message>
-    <message>
-        <source>Icon</source>
-        <translation type="obsolete">Icono</translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation type="obsolete">Nombre</translation>
-    </message>
-    <message>
         <source>Name:</source>
         <translation>Nombre:</translation>
     </message>
@@ -71,20 +55,8 @@ aún en el grupo.</translation>
         <translation>No puedo borrar.</translation>
     </message>
     <message>
-        <source>Application edit</source>
-        <translation type="obsolete">Editor aplicación</translation>
-    </message>
-    <message>
         <source>Tab</source>
         <translation>Ficha</translation>
-    </message>
-    <message>
-        <source>Can&apos;t save.</source>
-        <translation type="obsolete">No puedo guardar.</translation>
-    </message>
-    <message>
-        <source>Can&apos;t move application.</source>
-        <translation type="obsolete">No puedo mover aplicación.</translation>
     </message>
     <message>
         <source>Gathering icons...</source>
@@ -97,18 +69,6 @@ aún en el grupo.</translation>
 </context>
 <context>
     <name>TabManagerBase</name>
-    <message>
-        <source>Tab Manger</source>
-        <translation type="obsolete">Gestor de Fichas</translation>
-    </message>
-    <message>
-        <source>Groups</source>
-        <translation type="obsolete">Grupos</translation>
-    </message>
-    <message>
-        <source>Applications</source>
-        <translation type="obsolete">Aplicaciones</translation>
-    </message>
     <message>
         <source>Tab Manager</source>
         <translation>Gestor Etiquetas</translation>

@@ -6,22 +6,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Exec</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Comment</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Icon</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>Name:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -70,20 +54,8 @@ still in the group.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Application edit</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>Tab</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Can&apos;t save.</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Can&apos;t move application.</source>
-        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Gathering icons...</source>
@@ -96,18 +68,6 @@ still in the group.</source>
 </context>
 <context>
     <name>TabManagerBase</name>
-    <message>
-        <source>Tab Manger</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Groups</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Applications</source>
-        <translation type="obsolete"></translation>
-    </message>
     <message>
         <source>Tab Manager</source>
         <translation type="unfinished"></translation>

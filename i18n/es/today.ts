@@ -14,10 +14,6 @@
         <translation>Por favor, rellene su información personal</translation>
     </message>
     <message>
-        <source>No more appointments today</source>
-        <translation>No hay más citas para hoy</translation>
-    </message>
-    <message>
         <source>No appointments today</source>
         <translation>No hay citas para hoy</translation>
     </message>
@@ -36,6 +32,10 @@
     <message>
         <source>No active tasks</source>
         <translation>No hay tareas pendientes</translation>
+    </message>
+    <message>
+        <source>No more  today</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

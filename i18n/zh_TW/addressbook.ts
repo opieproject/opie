@@ -222,30 +222,6 @@ Quit anyway?</source>
 <context>
     <name>ContactEditor</name>
     <message>
-        <source>Fax</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Phone</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>IM</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Mobile</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Page</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Pager</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>Default Email</source>
         <translation type="unfinished"></translation>
     </message>
@@ -298,28 +274,12 @@ Quit anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Street</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Street 2</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>P.O. Box</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>City</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>State</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Zip</source>
-        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Country</source>

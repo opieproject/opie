@@ -6,10 +6,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>None</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>Disable IrDA</source>
         <translation type="unfinished"></translation>
     </message>

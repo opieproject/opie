@@ -6,10 +6,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;b&gt;Please fill out the business card &lt;/b&gt;</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>&lt;b&gt;%1&lt;/b&gt; new mail(s), &lt;b&gt;%2&lt;/b&gt; outgoing</source>
         <translation type="unfinished"></translation>
     </message>
@@ -26,10 +22,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>No more appointments today</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>No appointments today</source>
         <translation type="unfinished"></translation>
     </message>
@@ -39,6 +31,10 @@
     </message>
     <message>
         <source>Please fill out the business card</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No more  today</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -76,13 +72,6 @@ appointments</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>How many 
-appointment
-should should 
-be shown?</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>Calendar</source>
         <translation type="unfinished"></translation>
     </message>
@@ -100,12 +89,6 @@ be shown?</source>
         <source>Clip after how
 many letters</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Should today be
-autostarted on
-resume ? (Opie only)</source>
-        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Misc</source>

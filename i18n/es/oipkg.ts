@@ -41,10 +41,6 @@
         <translation>fuentes</translation>
     </message>
     <message>
-        <source>ipkgfind</source>
-        <translation type="obsolete">ipkgfind</translation>
-    </message>
-    <message>
         <source>Package</source>
         <translation>Paquetes</translation>
     </message>
@@ -81,10 +77,6 @@
         <translation>Destinos</translation>
     </message>
     <message>
-        <source>Section: </source>
-        <translation type="obsolete">Sección: </translation>
-    </message>
-    <message>
         <source>Close Section</source>
         <translation>Cerrar sección</translation>
     </message>
@@ -107,10 +99,6 @@
     <message>
         <source>Filter</source>
         <translation>Filtro</translation>
-    </message>
-    <message>
-        <source>ipkgfind: </source>
-        <translation type="obsolete">ipkgfind: </translation>
     </message>
     <message>
         <source>Clear Search</source>
@@ -230,10 +218,6 @@
         <translation>Configuración</translation>
     </message>
     <message>
-        <source>Installation Setups</source>
-        <translation type="obsolete">Configar instalación</translation>
-    </message>
-    <message>
         <source>Install destination:</source>
         <translation>Destino instalación:</translation>
     </message>
@@ -242,16 +226,8 @@
         <translation>Enlazar al destino root</translation>
     </message>
     <message>
-        <source>Used servers:</source>
-        <translation type="obsolete">Servidores usados:</translation>
-    </message>
-    <message>
         <source>New</source>
         <translation>Nuevo</translation>
-    </message>
-    <message>
-        <source>Rename</source>
-        <translation type="obsolete">Renombrar</translation>
     </message>
     <message>
         <source>Remove</source>
