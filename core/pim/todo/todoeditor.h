@@ -4,6 +4,7 @@
 #include <opie/otodo.h>
 
 
+class OTaskEditor;
 namespace Todo {
     class Editor {
     public:
@@ -17,8 +18,11 @@ namespace Todo {
 
 
         bool accepted()const;
+    protected:
+        OTaskEditor* self();
     private:
         bool m_accepted: 1;
+        OTaskEditor* m_self;
     };
 };
 

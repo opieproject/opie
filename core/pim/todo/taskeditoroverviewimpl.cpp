@@ -20,6 +20,16 @@ TaskEditorOverViewImpl::TaskEditorOverViewImpl( QWidget* parent, const char* nam
 TaskEditorOverViewImpl::~TaskEditorOverViewImpl() {
 }
 void TaskEditorOverViewImpl::load( const OTodo& todo) {
+      /*
+     * now that we're 'preloaded' we
+     * need to disable the buttons
+     * holding the dat
+     */
+    btnDue->  setEnabled( FALSE );
+    btnComp-> setEnabled( FALSE );
+    btnStart->setEnabled( FALSE );
+
+
     QDate date = QDate::currentDate();
     QString str = TimeString::longDateString( date );
 
@@ -68,6 +78,8 @@ void TaskEditorOverViewImpl::init() {
     QDate curDate = QDate::currentDate();
     m_start = m_comp = m_due = curDate;
     QString str = TimeString::longDateString( curDate );
+
+
 
     /* Start Date Picker */
     m_startPop = new QPopupMenu(this);

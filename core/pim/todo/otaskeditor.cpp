@@ -14,19 +14,26 @@
 OTaskEditor::OTaskEditor(int cur)
     : QDialog(0, 0, TRUE ) {
     init();
-    OTodo to;
-    to.setCategories( cur );
-    load(to);
-    m_uid = 1; // generate a new one
+    init( cur );
 }
 OTaskEditor::OTaskEditor( const OTodo& to)
     : QDialog(0, 0, TRUE ) {
     init();
-    load( to );
-    m_uid = to.uid();
+    init( to );
 }
 OTaskEditor::~OTaskEditor() {
 
+}
+void OTaskEditor::init( int cur ) {
+    OTodo to;
+    if ( cur != 0 )
+        to.setCategories( cur );
+    load(to);
+    m_uid = 1; // generate a new one
+}
+void OTaskEditor::init( const OTodo& to ) {
+    load( to );
+    m_uid = to.uid();
 }
 OTodo OTaskEditor::todo()const{
     qWarning("saving!");

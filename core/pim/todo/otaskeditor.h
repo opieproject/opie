@@ -18,6 +18,13 @@ public:
     OTaskEditor( const OTodo& todo );
     ~OTaskEditor();
 
+    /*
+     * same as the c'tor but this gives us the
+     * power to 'preload' the dialog
+     */
+    void init( int cur );
+    void init( const OTodo& todo );
+
     OTodo todo()const;
 private:
     void load( const OTodo& );

@@ -175,7 +175,7 @@ void MainWindow::initActions() {
     m_bar->insertItem( tr("Options"), m_options );
 
     /* initialize the view menu */
-    a = new QAction( QString::null, tr("Show over due"),
+    a = new QAction( QString::null, tr("Show only over due"),
                      0, this, 0, TRUE );
     a->addTo( m_view );
     a->setOn( showOverDue() );
