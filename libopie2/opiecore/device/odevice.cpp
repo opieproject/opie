@@ -780,7 +780,9 @@ void ODevice::remPreHandler(QWSServer::KeyboardFilter*aFilter)
  * @see changeMixerForAlarm
  */
 void ODevice::playingStopped() {
-    const_cast<QObject*>(sender())->disconnect( this );
+    if ( sender() )
+	const_cast<QObject*>(sender())->disconnect( this );
+
 #ifndef QT_NO_SOUND
     if ( d->m_sound >= 0 ) {
         ::ioctl ( d->m_sound, MIXER_WRITE( d->m_mixer ), &d->m_vol );
