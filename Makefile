@@ -107,4 +107,9 @@ clean : $(TOPDIR)/.config
 apidox : 
 	doc/generate_apidox 
 
+mrproper : clean-configs
+	find . -name ".moc"|xargs rm -rf
+	find . -name ".obj"|xargs rm -rf
+	find . -name "*.pro"|xargs touch
+
 include $(TOPDIR)/Rules.make
