@@ -45,6 +45,13 @@
 "of the scoring zones. This will display 4 red lines at varying heights " \
 "above the landscape - if your ship falls into this zone, point are scored. " \
 "The closer to the landscape you get the more points you get.<br><br>" \
+"In addition, SFCave has replays - save and load too so you can show off to all " \
+"your friends (or vice versa). Currently, this is in its infancy but will improve.<br>" \
+"To use, once you have crashed, press 'r' to replay the last game.<br>" \
+"To save the replay press 's'.<br>" \
+"To load a saved replay press 'l' (after you've crashed at least once).<br><br>" \
+"Replays are currently saved to your home directory in a file called sfcave.replay." \
+"This file can be copied and given to others as long as it it put in their home directory.<br><br>" \
 "Have lots of fun.<br>" \
 "Andy" \
 "</p></qt>"
