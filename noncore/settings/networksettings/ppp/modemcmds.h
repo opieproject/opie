@@ -3,7 +3,7 @@
  *
  *            kPPP: A front end for pppd for the KDE project
  *
- * $Id: modemcmds.h,v 1.2.2.1 2003-07-15 15:29:08 tille Exp $
+ * $Id: modemcmds.h,v 1.2.2.2 2003-07-25 11:20:42 tille Exp $
  *
  * Copyright (C) 1997 Bernd Johannes Wuebben
  * wuebben@math.cornell.edu
@@ -48,6 +48,7 @@ public:
   ~ModemCommands() {}
 
 private slots:
+  virtual void accept();
   void slotCancel();
   void slotOk();
 

@@ -1,7 +1,7 @@
 /*
  *            kPPP: A front end for pppd for the KDE project
  *
- * $Id: modemcmds.cpp,v 1.3.2.1 2003-07-15 15:29:08 tille Exp $
+ * $Id: modemcmds.cpp,v 1.3.2.2 2003-07-25 11:20:42 tille Exp $
  *
  * Copyright (C) 1997 Bernd Johannes Wuebben
  * wuebben@math.cornell.edu
@@ -307,7 +307,12 @@ void ModemCommands::slotOk() {
   _pppdata->setVolumeOff(volume_off->text());
 
   _pppdata->save();
-  accept();
+  QDialog::accept();
+}
+
+void ModemCommands::accept()
+{
+    slotOk();
 }
 
 
