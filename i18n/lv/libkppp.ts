@@ -320,7 +320,7 @@ the device &quot;%1&quot;?</source>
     </message>
     <message>
         <source>Confirm</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Apstiprināt</translation>
     </message>
     <message>
         <source>New Device</source>
@@ -800,7 +800,7 @@ you setup the modem</source>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pievienot</translation>
     </message>
     <message>
         <source>Remove</source>
@@ -1256,7 +1256,7 @@ Ask your system administrator to create this file (can be empty) with appropriat
     <name>ScriptWidget</name>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pievienot</translation>
     </message>
     <message>
         <source>Insert</source>
