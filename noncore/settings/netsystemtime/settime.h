@@ -76,6 +76,7 @@ protected slots:
 
 protected:
 		void commitTime();
+   	void  setTime(QDateTime dt);
     virtual void accept();
     virtual void done(int);
 

@@ -25,7 +25,7 @@ private:
 		QString _ntpOutput;
   	int _maxOffset;
    	float _shiftPerSec;
-  	QTimer *_nextCorrection;
+//  	QTimer *_nextCorrection;
     int _minLookupDiff;
 
    	float getTimeShift();
@@ -34,7 +34,7 @@ private slots:
     void slotRunNtp();
     void getNtpOutput(OProcess *proc, char *buffer, int buflen);
     void ntpFinished(OProcess*);
-    void correctClock();
+//    void correctClock();
 	  void preditctTime();
 };
 

@@ -32,8 +32,8 @@ Ntp::Ntp( QWidget* parent,  const char* name, WFlags fl )
   					this, SLOT(ntpFinished(OProcess*)));
   connect(runNtp, SIGNAL(clicked()), this, SLOT(slotRunNtp()));
   connect(PushButtonPredict, SIGNAL(clicked()), this, SLOT(preditctTime()));
- 	_nextCorrection = new QTimer( this );
-    connect( _nextCorrection, SIGNAL(timeout()), SLOT(correctClock()) );
+// 	_nextCorrection = new QTimer( this );
+//    connect( _nextCorrection, SIGNAL(timeout()), SLOT(correctClock()) );
   slotRunNtp();
   readLookups();
 }
@@ -83,6 +83,8 @@ void  Ntp::ntpFinished(OProcess*)
   int lookupCount = cfg.readNumEntry("count",-1);
   int time = TimeConversion::toUTC( QDateTime::currentDateTime() );
   cfg.writeEntry("time", time);
+  cfg.setGroup("correction");
+  cfg.writeEntry("time", time);
  	
   float timeShift = getTimeShift();
   if (timeShift == 0.0) return;
@@ -101,24 +103,28 @@ void  Ntp::ntpFinished(OProcess*)
   }
 }
 
-void Ntp::correctClock()
-{
-	qDebug("current time: %s",QDateTime::currentDateTime().toString().latin1());
-	Config cfg("ntp",Config::User);
-  cfg.setGroup("correction");
- 	int lastTime = cfg.readNumEntry("time",0);
-  int now = TimeConversion::toUTC( QDateTime::currentDateTime() );
-  int corr = int((now - lastTime) * _shiftPerSec);
-  struct timeval myTv;
-  myTv.tv_sec = TimeConversion::toUTC( QDateTime::currentDateTime().addSecs(corr) );
-  myTv.tv_usec = 0;
-
-  if ( myTv.tv_sec != -1 )
-      ::settimeofday( &myTv, 0 );
-  Global::writeHWClock();
-  cfg.writeEntry("time",now);
-	qDebug("current time: %s",QDateTime::currentDateTime().toString().latin1());
-}
+//void Ntp::correctClock()
+//{
+//	qDebug("current time: %s",QDateTime::currentDateTime().toString().latin1());
+//	Config cfg("ntp",Config::User);
+//  cfg.setGroup("correction");
+// 	int lastTime = cfg.readNumEntry("time",0);
+//  if ( lastTime == 0 )
+//  {
+//   	return;
+//  }
+//  int now = TimeConversion::toUTC( QDateTime::currentDateTime() );
+//  int corr = int((now - lastTime) * _shiftPerSec);
+//  struct timeval myTv;
+//  myTv.tv_sec = TimeConversion::toUTC( QDateTime::currentDateTime().addSecs(corr) );
+//  myTv.tv_usec = 0;
+//
+//  if ( myTv.tv_sec != -1 )
+//      ::settimeofday( &myTv, 0 );
+//  Global::writeHWClock();
+//  cfg.writeEntry("time",now);
+//	qDebug("current time: %s",QDateTime::currentDateTime().toString().latin1());
+//}
 
 float Ntp::getTimeShift()
 {
@@ -179,5 +185,7 @@ void Ntp::preditctTime()
   setenv( "TZ", tz->currentZone(), 1 );
   int now = TimeConversion::toUTC( QDateTime::currentDateTime() );
   int corr = int((now - lastTime) * _shiftPerSec);
- 	TextLabelPredTime->setText(QDateTime::currentDateTime().addSecs(corr).toString());
+  QDateTime dt = QDateTime::currentDateTime().addSecs(corr);
+  setTime(dt);
+ 	TextLabelPredTime->setText(dt.toString());
 }

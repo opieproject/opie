@@ -208,10 +208,6 @@ void SetDateTime::accept()
 
 void  SetDateTime::commitTime()
 {
-	Config cfg("ntp",Config::User);
-  cfg.setGroup("lookups");
-  int time = TimeConversion::toUTC( QDateTime::currentDateTime() );
-  cfg.writeEntry("time", time);
     tz->setFocus();
     // really turn off the screensaver before doing anything
     {
@@ -227,10 +223,18 @@ void  SetDateTime::commitTime()
     // now set the time...
     QDateTime dt( dateButton->date(), timeButton->time() );
 
-    if ( dt.isValid() ) {
-  struct timeval myTv;
-  myTv.tv_sec = TimeConversion::toUTC( dt );
-  myTv.tv_usec = 0;
+    if ( dt.isValid() ) setTime(dt);
+}
+
+void  SetDateTime::setTime(QDateTime dt)
+{
+	Config cfg("ntp",Config::User);
+  cfg.setGroup("correction");
+    int t = TimeConversion::toUTC(dt);
+	  struct timeval myTv;
+  	myTv.tv_sec = t;
+	  cfg.writeEntry("time", t );
+	  myTv.tv_usec = 0;
 
   if ( myTv.tv_sec != -1 )
       ::settimeofday( &myTv, 0 );
@@ -239,9 +243,7 @@ void  SetDateTime::commitTime()
   // to allow the alarm server to get a better grip on itself
   // (example re-trigger alarms for when we travel back in time)
   DateBookDB db;
-    } else {
-  qWarning( "Invalid date/time" );
-    }
+
     // set the timezone for everyone else...
     QCopEnvelope setTimeZone( "QPE/System", "timeChange(QString)" );
     setTimeZone << tz->currentZone();
