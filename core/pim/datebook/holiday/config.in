@@ -1,0 +1,4 @@
+menu "Holiday Plugins"
+  source core/pim/datebook/holiday/christian/config.in
+  source core/pim/datebook/holiday/dummy/config.in
+endmenu
