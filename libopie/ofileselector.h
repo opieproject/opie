@@ -64,54 +64,7 @@ class QVBoxLayout;
 class QPopupMenu;
 class QFileInfo;
 // 
-class OFileSelectorItem : public QListViewItem {
- public:
-  OFileSelectorItem(QListView *view, const QPixmap &pixmap, const QString &path,
-        const QString &date, const QString &size, const QString &mDir,
-        bool isLocked=false, bool isDir=false ): QListViewItem(view) {
-    setPixmap(0, pixmap );
-    setText(1, path );
-    setText(2, size );
-    setText(3, date );
-    //setText(4, mDir );
-    m_dir = mDir;
-    dir = isDir;
-    mLocked = isLocked;
-  }
-  bool isLocked() const{
-    return mLocked;
-  }
-  QString directory()const{
-    return m_dir;
-  }
-  bool isDir()const{
-    return dir;
-  }
-  QString path()const{
-    return text(1 );
-  }
-  QString key(int id, bool )const {
-    QString ke;
-    if( id == 0 || id == 1 ){ // name
-      if( dir ){
-  ke.append("0" );
-  ke.append( text(1) );
-      }else{
-  ke.append("1" );
-  ke.append( text(1) );
-      }
-    }else if( id == 2 ){ // size
-      return text(2);
-    }else if( id == 3 ){ // date
-      return text(3);
-    }
-    return ke;
-  };
- private:
-  bool mLocked:1;
-  bool dir:1;
-  QString m_dir;
-};
+
 
 class OFileSelector : public QWidget {
   Q_OBJECT
