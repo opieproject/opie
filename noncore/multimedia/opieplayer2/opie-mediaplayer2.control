@@ -7,5 +7,5 @@ Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal, libopie1, zlib1g, libxine1 | opie-mediaplayer-codecs
 Description: The Opie media player
- The mediaplayer for Opie. It plays mp3, mpeg, wav, ogg, quicktime, divx and
+ The mediaplayer for Opie. It plays mp3, mpeg, wav, ogg, divx and
  more. Also it is streaming capable.
