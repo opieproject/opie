@@ -834,7 +834,6 @@ void AdvancedFm::localDelete()
                   break;
             };
         }
-            
     }
 }
 
@@ -1140,8 +1139,14 @@ void AdvancedFm::copy()
     if (TabWidget->currentPageIndex() == 0) {
         for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
 
-            QString destFile = currentRemoteDir.canonicalPath()+"/"+(*it);
-            curFile = currentDir.canonicalPath()+"/"+(*it);
+            QString destFile = currentRemoteDir.canonicalPath(); 
+            if(destFile.right(1).find("/",0,TRUE) == -1)
+                destFile+="/";
+            destFile +=(*it);
+            curFile = currentDir.canonicalPath();
+            if(curFile.right(1).find("/",0,TRUE) == -1)
+                curFile +="/";
+            curFile +=(*it);
             QFile f(destFile);
             if( f.exists())
                 f.remove();
@@ -1154,8 +1159,14 @@ void AdvancedFm::copy()
     } else {
         for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
 
-            QString destFile = currentDir.canonicalPath()+"/"+(*it);
-            curFile = currentRemoteDir.canonicalPath()+"/"+(*it);
+            QString destFile = currentDir.canonicalPath();
+            if(destFile.right(1).find("/",0,TRUE) == -1)
+                destFile+="/";
+            destFile +=(*it);
+            curFile = currentRemoteDir.canonicalPath();
+            if(curFile.right(1).find("/",0,TRUE) == -1)
+                curFile +="/";
+            curFile +=(*it);
             QFile f(destFile);
             if( f.exists())
                 f.remove();
@@ -1176,15 +1187,21 @@ void AdvancedFm::copyAs()
 
     if (TabWidget->currentPageIndex() == 0) {
         for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
-            QString destFile = *it;
-            curFile = currentDir.canonicalPath()+"/"+(*it);
+            QString destFile;
+            curFile = currentDir.canonicalPath();
+            if(curFile.right(1).find("/",0,TRUE) == -1)
+                curFile +="/";
+            curFile+=(*it);
 //             InputDialog *fileDlg;
 //             fileDlg = new InputDialog(this,tr("Copy As"),TRUE, 0);
             fileDlg->setInputText((const QString &) destFile );
             fileDlg->exec();
             if( fileDlg->result() == 1 ) {
                 QString  filename = fileDlg->LineEdit1->text();
-                destFile = currentRemoteDir.canonicalPath()+"/"+destFile;
+                destFile = currentRemoteDir.canonicalPath();
+                if(destFile.right(1).find("/",0,TRUE) == -1)
+                    destFile+="/";
+                destFile +=(*it);
 
                 QFile f(destFile);
                 if( f.exists())
@@ -1200,13 +1217,19 @@ void AdvancedFm::copyAs()
         if (TabWidget->currentPageIndex() == 0) {
             for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
 
-                curFile = currentDir.canonicalPath()+"/"+(*it);
-                QString destFile  = *it;
+                curFile = currentDir.canonicalPath();
+                if(curFile.right(1).find("/",0,TRUE) == -1)
+                    curFile +="/";
+                curFile+=(*it);
+                QString destFile;
                 fileDlg->setInputText((const QString &) destFile);
                 fileDlg->exec();
                 if( fileDlg->result() == 1 ) {
                     QString  filename = fileDlg->LineEdit1->text();
-                    destFile = currentDir.canonicalPath()+"/"+destFile;
+                    destFile = currentDir.canonicalPath();
+                    if(destFile.right(1).find("/",0,TRUE) == -1)
+                        destFile+="/";
+                    destFile +=(*it);
 
                     QFile f(destFile);
                     if( f.exists())
@@ -1230,9 +1253,15 @@ void AdvancedFm::move() {
 
     if (TabWidget->currentPageIndex() == 0) {
         for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
-            QString destFile =  currentRemoteDir.canonicalPath() + "/" + *it;
-            curFile = currentDir.canonicalPath()+"/"+(*it);
+            QString destFile =  currentRemoteDir.canonicalPath();
+                if(destFile.right(1).find("/",0,TRUE) == -1)
+                    destFile+="/";
+                destFile +=(*it);
+            curFile = currentDir.canonicalPath();
             qDebug("Destination file is "+destFile);
+            if(curFile.right(1).find("/",0,TRUE) == -1)
+                curFile +="/";
+            curFile+=(*it);
 
             QFile f(destFile);
             if( f.exists())
@@ -1246,9 +1275,15 @@ void AdvancedFm::move() {
         TabWidget->setCurrentPage(1);
     } else {
         for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
-            QString destFile = currentRemoteDir.canonicalPath() + "/" + *it;
+            QString destFile = currentRemoteDir.canonicalPath();
+                if(destFile.right(1).find("/",0,TRUE) == -1)
+                    destFile+="/";
+                destFile +=(*it);
             qDebug("Destination file is "+destFile);
-            curFile = currentDir.canonicalPath()+"/"+(*it);
+            curFile = currentDir.canonicalPath();
+            if(curFile.right(1).find("/",0,TRUE) == -1)
+                curFile +="/";
+            curFile+=(*it);
 
             QFile f(destFile);
             if( f.exists())
