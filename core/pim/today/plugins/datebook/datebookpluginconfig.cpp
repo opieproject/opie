@@ -66,7 +66,7 @@ DatebookPluginConfig::DatebookPluginConfig( QWidget* parent, const char* name)
     TextLabelDays->setText( tr( "How many more days" ) );
     SpinBox2 = new QSpinBox( box5, "SpinBox2" );
     QWhatsThis::add( SpinBox2 , tr( "How many more days should be in the range" ) );
-    SpinBox2->setMaxValue( 7 );
+    SpinBox2->setMaxValue( 21 );
     SpinBox2->setSuffix( tr( " day(s)" ) );
     SpinBox2->setSpecialValueText ( tr("only today") );
 
