@@ -203,6 +203,16 @@ namespace {
     };
 };
 // QPEApplication
+QPEApplication::~QPEApplication() {
+    qWarning("~QPEApplication");
+    ungrabKeyboard();
+    qWarning("UngrabKeyboard");
+
+//    delete m_sys;
+//    delete m_pid;
+
+    delete d;
+}
 QPEApplication::QPEApplication(int &arg, char** argv, Type t)
     : QApplication( arg, argv, t ) {
     d = new Private;
@@ -234,7 +244,10 @@ QPEApplication::QPEApplication(int &arg, char** argv, Type t)
         flock( file.handle(), LOCK_EX );
     }
 
-    m_sys = new QCopChannel( "QPE/System", this );
+    /* Hmmm damn we need to make the parent 0l otherwise it get's deleted
+     * past the QApplication
+     */
+    m_sys = new QCopChannel( "QPE/System", 0l);
     connect(m_sys, SIGNAL( received( const QCString&, const QByteArray& ) ),
             this, SLOT(systemMessage( const QCString&, const QByteArray& ) ) );
 
@@ -243,7 +256,7 @@ QPEApplication::QPEApplication(int &arg, char** argv, Type t)
     channel.replace( QRegExp( ".*/"), "" );
     d->appName = channel;
     channel = "QPE/Application/"+ channel;
-    m_pid = new QCopChannel( channel, this );
+    m_pid = new QCopChannel( channel, 0l );
     connect(m_pid, SIGNAL( received( const QCString&, const QByteArray& ) ),
             this, SLOT( pidMessage( const QCString&, const QByteArray& ) ) );
 
@@ -305,9 +318,6 @@ void QPEApplication::initTranslations() {
         else
             delete trans;
     }
-}
-QPEApplication::~QPEApplication() {
-    delete d;
 }
 QString QPEApplication::qpeDir() {
     const char * base = getenv( "OPIEDIR" );
@@ -386,12 +396,6 @@ void QPEApplication::ungrabKeyboard() {
         d->kbgrabber = 0;
     }
 }
-void QPEApplication::setStylusOperation( QWidget*, StylusMode ) {
-
-}
-QPEApplication::StylusMode QPEApplication::stylusOperation( QWidget* ) {
-
-}
 void QPEApplication::showMainWidget( QWidget* wid, bool b) {
     d->show(wid, b );
 }
@@ -435,21 +439,198 @@ int QPEApplication::exec() {
     /* now send the QCOP stuff gotten from the file */
     d->sendQCopQ();
 
-    if ( d->keep_running )
-        return QApplication::exec();
+    if ( d->keep_running ) {
+        qWarning("going to exec");
+        int a = QApplication::exec();
+        qWarning("left");
+        return a;
+    }
 
     {
         QCopEnvelope e( "QPE/System", "closing(QString)" );
         e << d->appName;
     }
+    qWarning("processing events!");
     processEvents();
     return 0;
 }
 void QPEApplication::internalSetStyle( const QString& ) {
 
 }
+void QPEApplication::systemMessage( const QCString&, const QByteArray& ) {
+
+}
+void QPEApplication::pidMessage( const QCString&, const QByteArray& ) {
+
+}
+void QPEApplication::timerEvent( QTimerEvent* e ) {
+    if ( e->timerId() == d->presstimer && d->presswidget ) {
+        // Right pressed
+        postEvent( d->presswidget,
+                   new QMouseEvent( QEvent::MouseButtonPress, d->presspos,
+                                    RightButton, LeftButton ) );
+        killTimer( d->presstimer );
+        d->presstimer = 0;
+    }
+}
+
+// InputMethods Hints
+namespace {
+    static QPtrDict<void>* inputMethodDict = 0;
+    static void createInputMethodDict(){
+	if ( !inputMethodDict )
+            inputMethodDict = new QPtrDict<void>;
+    }
+
+    static QPtrDict<void>* stylusDict = 0;
+    static void createDict() {
+        if ( !stylusDict )
+            stylusDict = new QPtrDict<void>;
+    }
+};
+
+void QPEApplication::setInputMethodHint( QWidget* w, InputMethodHint mode ) {
+    createInputMethodDict();
+    if ( mode == Normal ) {
+        inputMethodDict->remove
+            ( w );
+    }else {
+        inputMethodDict->insert( w, ( void* ) mode );
+    }
+}
+QPEApplication::InputMethodHint QPEApplication::inputMethodHint( QWidget* w) {
+    if ( inputMethodDict && w )
+        return ( InputMethodHint ) ( int ) inputMethodDict->find( w );
+    return Normal;
+}
 
 
+void QPEApplication::removeSenderFromStylusDict() {
+    stylusDict->remove( ( void* ) sender() );
+    if ( d->presswidget == sender() )
+        d->presswidget = 0;
+}
+void QPEApplication::setStylusOperation( QWidget* w, StylusMode mode) {
+    createDict();
+    if ( mode == LeftOnly ) {
+        stylusDict->remove
+            ( w );
+        w->removeEventFilter( qApp );
+    }else {
+        stylusDict->insert( w, ( void* ) mode );
+        connect( w, SIGNAL( destroyed() ), qApp, SLOT( removeSenderFromStylusDict() ) );
+        w->installEventFilter( qApp );
+    }
+}
+QPEApplication::StylusMode QPEApplication::stylusOperation( QWidget* w) {
+    if ( stylusDict )
+        return ( StylusMode ) ( int ) stylusDict->find( w );
+    return LeftOnly;
+}
+
+// eventFilter......
+bool QPEApplication::eventFilter( QObject* o, QEvent* e ) {
+    if ( stylusDict && e->type() >= QEvent::MouseButtonPress && e->type() <= QEvent::MouseMove ) {
+        QMouseEvent * me = ( QMouseEvent* ) e;
+        StylusMode mode = (StylusMode)(int)stylusDict->find(o);
+        switch (mode) {
+        case RightOnHold:
+            switch ( me->type() ) {
+            case QEvent::MouseButtonPress:
+                if ( me->button() == LeftButton ) {
+                    d->presstimer = startTimer(500); // #### pref.
+                    d->presswidget = (QWidget*)o;
+                    d->presspos = me->pos();
+                    d->rightpressed = FALSE;
+                }
+                break;
+            case QEvent::MouseMove:
+                if (d->presstimer && (me->pos() - d->presspos).manhattanLength() > 8) {
+                    killTimer(d->presstimer);
+                    d->presstimer = 0;
+                }
+                break;
+            case QEvent::MouseButtonRelease:
+                if ( me->button() == LeftButton ) {
+                    if ( d->presstimer ) {
+                        killTimer(d->presstimer);
+                        d->presstimer = 0;
+                    }
+                    if ( d->rightpressed && d->presswidget ) {
+                        // Right released
+                        postEvent( d->presswidget,
+                                   new QMouseEvent( QEvent::MouseButtonRelease, me->pos(),
+                                                    RightButton, LeftButton + RightButton ) );
+                        // Left released, off-widget
+                        postEvent( d->presswidget,
+                                   new QMouseEvent( QEvent::MouseMove, QPoint( -1, -1),
+                                                    LeftButton, LeftButton ) );
+                        postEvent( d->presswidget,
+                                   new QMouseEvent( QEvent::MouseButtonRelease, QPoint( -1, -1),
+                                                    LeftButton, LeftButton ) );
+                        d->rightpressed = FALSE;
+                        return TRUE; // don't send the real Left release
+                    }
+                }
+                break;
+            default:
+                break;
+            }
+            break;
+        default:
+            ;
+        }
+    }
+    else if ( e->type() == QEvent::KeyPress || e->type() == QEvent::KeyRelease ) {
+        QKeyEvent *ke = (QKeyEvent *)e;
+        if ( ke->key() == Key_Enter ) {
+            if ( o->isA( "QRadioButton" ) || o->isA( "QCheckBox" ) ) {
+                postEvent( o, new QKeyEvent( e->type(), Key_Space, ' ',
+                                             ke->state(), " ", ke->isAutoRepeat(), ke->count() ) );
+                return TRUE;
+            }
+        }
+    }
+    return FALSE;
+}
+
+// Quit stuff
+void QPEApplication::restart() {
+
+}
+void QPEApplication::shutdown() {
+
+}
+void QPEApplication::tryQuit() {
+    qWarning("TryQuit!!");
+    if ( activeModalWidget() || strcmp( argv() [ 0 ], "embeddedkonsole" ) == 0 )
+        return ; // Inside modal loop or konsole. Too hard to save state.
+    {
+        QCopEnvelope e( "QPE/System", "closing(QString)" );
+        e << d->appName;
+    }
+    processEvents();
+
+    quit();
+}
+void QPEApplication::hideOrQuit() {
+    qWarning("hide or close");
+    processEvents();
+    qWarning("past processing");
+
+    // If we are a preloaded application we don't actually quit, so emit
+    // a System message indicating we're quasi-closing.
+    if ( d->preloaded && d->qpe_main_widget )
+
+    {
+        qWarning("hiding");
+        QCopEnvelope e("QPE/System", "fastAppHiding(QString)" );
+        e << d->appName;
+        d->qpe_main_widget->hide();
+    }
+    else
+        quit();
+}
 
 #if defined(QT_QWS_IPAQ) || defined(QT_QWS_EBX)
 

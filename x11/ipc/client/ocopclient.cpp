@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/socket.h>
+#include <sys/types.h>
 #include <sys/un.h>
 
 
@@ -16,16 +17,26 @@
 OCOPClient::OCOPClient( const QString& path, QObject* obj )
     : QObject( obj )
 {
+    m_tries = 0;
     init(QFile::encodeName(path) );
 }
 OCOPClient::~OCOPClient() {
+    delete m_notify;
     close( m_socket );
 }
+void OCOPClient::init() {
+    // failed start ther server NOW!!!
+    startUP();
+    QCString str;
+    init(str );
+}
 void OCOPClient::init( const QCString&  ) {
+    m_tries++;
     struct sockaddr_un unix_adr;
     if ( (m_socket = socket(PF_UNIX, SOCK_STREAM, 0) ) < 0 ) {
         qWarning("could not socket");
-        QTimer::singleShot(400, this,SLOT(init() ) );
+        if ( m_tries < 8 )
+            QTimer::singleShot(400, this,SLOT(init() ) );
         return;
     }
     memset(&unix_adr, 0, sizeof(unix_adr ) );
@@ -36,7 +47,8 @@ void OCOPClient::init( const QCString&  ) {
     if ( ::connect(m_socket,  (struct sockaddr*)&unix_adr, length ) < 0 ) {
         qWarning("could not connect %d", errno );
         close( m_socket );
-        QTimer::singleShot(400, this, SLOT(init() ) );
+        if ( m_tries < 8 )
+            QTimer::singleShot(400, this, SLOT(init() ) );
         return;
     }
     m_notify = new QSocketNotifier(m_socket, QSocketNotifier::Read, this );
@@ -126,4 +138,13 @@ void OCOPClient::call( const OCOPPacket& pack ) {
     write(m_socket, pack.channel().data(), pack.channel().size() );
     write(m_socket, pack.header().data(), pack.header().size() );
     write(m_socket, pack.content().data(), pack.content().size() );
+}
+void OCOPClient::startUP() {
+    qWarning("Start me up");
+    pid_t pi = fork();
+    if ( pi == 0 ) {
+        setsid();
+        execlp("opie-ipc", "opie-ipc", NULL );
+        _exit(1);
+    }
 }

@@ -44,15 +44,17 @@ public:
 signals:
     void called(const QCString&, const QCString&, const QByteArray& );
 private slots:
+    void init();
     void init(const QCString& pa);
     void newData();
 private:
+    void startUP();
     OCOPPacket packet()const;
     void call( const OCOPPacket& );
 
     QSocketNotifier* m_notify;
     int m_socket;
-private slots:
+    int m_tries;
 
 };
 

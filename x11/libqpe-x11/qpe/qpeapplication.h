@@ -6,6 +6,7 @@
  */
 
 #include <qapplication.h>
+#include <qevent.h>
 
 #include <qpe/timestring.h>
 
@@ -15,6 +16,7 @@ class QPEApplication : public QApplication {
 public:
     QPEApplication(int& argc,  char** argv, Type=GuiClient );
     ~QPEApplication();
+
 
     static QString qpeDir();
     static QString documentDir();
@@ -31,6 +33,14 @@ public:
     };
     static void setStylusOperation( QWidget*, StylusMode );
     static StylusMode stylusOperation( QWidget* );
+
+    enum InputMethodHint {
+	Normal,
+	AlwaysOff,
+	AlwaysOn
+    };
+    static void setInputMethodHint( QWidget*, InputMethodHint );
+    static InputMethodHint inputMethodHint( QWidget* );
 
     void showMainWidget( QWidget*, bool nomax = FALSE );
     void showMainDocumentWidget( QWidget*, bool nomax = FALSE );
@@ -59,6 +69,19 @@ signals:
 private:
     void initTranslations();
     void internalSetStyle(const QString&);
+
+private slots:
+    void hideOrQuit();
+    void systemMessage( const QCString&, const QByteArray& );
+    void pidMessage( const QCString&, const QByteArray& );
+    void removeSenderFromStylusDict();
+protected:
+    virtual void restart();
+    virtual void shutdown();
+    bool eventFilter( QObject*, QEvent* );
+    void timerEvent( QTimerEvent* );
+    void raiseAppropriateWindow();
+    virtual void tryQuit();
 
 private:
     class Private;
