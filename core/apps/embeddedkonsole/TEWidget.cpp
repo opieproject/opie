@@ -1389,7 +1389,7 @@ void TEWidget::dropEvent(QDropEvent* event)
 #endif
 
 
-void TEWidget::drop_menu_activated(int /*item*/)
+void TEWidget::drop_menu_activated(int item)
 {
 #ifndef QT_NO_DRAGANDDROP
   switch (item)
@@ -1418,6 +1418,8 @@ void TEWidget::drop_menu_activated(int /*item*/)
 //    KWM::activate((Window)this->winId());
       break;
   }
+#else
+  Q_UNUSED(item);  
 #endif
 }
 
