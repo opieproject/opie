@@ -147,7 +147,8 @@ void StorageInfo::update()
             if ( fs.left(7)=="/dev/hd" || fs.left(7)=="/dev/sd"
                     || fs.left(8)=="/dev/mtd" || fs.left(9) == "/dev/mmcd"
                     || fs.left( 14 ) == "/dev/mmc/part1"
-                    || fs.left(5)=="tmpfs" || fs.left(9)=="/dev/root" )
+                    || fs.left(5)=="tmpfs" || fs.left(11)=="/dev/mmcblk"
+                    || fs.left(9)=="/dev/root" )
             {
                 n++;
                 curdisks.append(fs);
@@ -196,7 +197,7 @@ void StorageInfo::update()
                 humanname = tr("SD Card");
                 removable = TRUE;
             }
-            else if ( disk.left( 14 ) == "/dev/mmc/part1" )
+            else if ( disk.left( 14 ) == "/dev/mmc/part1" || disk.left(11) == "/dev/mmcblk" )
             {
                 humanname = tr("MMC Card");
                 removable = TRUE;
