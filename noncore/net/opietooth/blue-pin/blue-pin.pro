@@ -8,5 +8,5 @@ INCLUDEPATH   += $(OPIEDIR)/noncore/opietooth/lib
 DEPENDPATH      += $(OPIEDIR)/include
 LIBS            += -lqpe 
 INTERFACES      = pindlgbase.ui
-TARGET          = $(OPIEDIR)bin/bluepin
+TARGET          = $(OPIEDIR)/bin/bluepin
 
