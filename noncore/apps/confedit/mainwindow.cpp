@@ -12,12 +12,6 @@
 
 #include "mainwindow.h"
 
-#include <opie2/omenubar.h>
-#include <opie2/omessagebox.h>
-#include <opie2/oresource.h>
-#include <opie2/oconfig.h>
-#include <opie2/otoolbar.h>
-#include <opie2/oapplication.h>
 #include <qaction.h>
 #include <qmessagebox.h>
 #include <qpopupmenu.h>

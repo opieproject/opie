@@ -62,7 +62,7 @@ GoMainWidget::GoMainWidget( QWidget *parent, const char* name) :
     toolbar->setHorizontalStretchable( TRUE );
     addToolBar(toolbar);
 
-    QPEMenuBar *mb = new QPEMenuBar( toolbar );
+    QMenuBar *mb = new QMenuBar( toolbar );
     mb->setMargin(0);
     QPopupMenu *file = new QPopupMenu( this );
 

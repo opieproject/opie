@@ -282,7 +282,7 @@ QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
 //    QToolBar* markBar = new QToolBar("File", this);
 
 #ifdef USEQPE
-    mb = new QPEMenuBar( menubar );
+    mb = new QMenuBar( menubar );
 #else
     mb = new QMenuBar( menubar );
 #endif

@@ -9,7 +9,7 @@
 #include <qlabel.h>
 #include <qstringlist.h>
 #include <qdatetime.h>
-#include <qpe/qpemenubar.h>
+#include <qmenubar.h>
 #include <qpopupmenu.h>
 #include <qhbox.h>
 
@@ -22,7 +22,7 @@ class BudgetDisplay : public QWidget
     public:
       BudgetDisplay ( QWidget *parent );
 
-      QPEMenuBar *menu;
+      QMenuBar *menu;
       QPopupMenu *budgetmenu;
       QPopupMenu *lineitemsmenu;
       QPopupMenu *datemenu;

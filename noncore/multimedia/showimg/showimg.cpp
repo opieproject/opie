@@ -231,7 +231,7 @@ ImageViewer::ImageViewer( QWidget *parent, const char *name, int wFlags )
     toolBar = new QPEToolBar( this );
     toolBar->setHorizontalStretchable( TRUE );
 
-    menuBar = new QPEMenuBar( toolBar );
+    menuBar = new QMenuBar( toolBar );
 
     current=menuBar;
 

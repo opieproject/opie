@@ -57,7 +57,7 @@ CanvasCardWindow::CanvasCardWindow(QWidget* parent, const char* name, WFlags f) 
 
 
 #ifdef _PATIENCE_USE_ACCELS_
-    QPEMenuBar* menu = menuBar();
+    QMenuBar* menu = menuBar();
 
     QPopupMenu* file = new QPopupMenu;
     file->insertItem(tr("Patience"), this, SLOT(initPatience()), CTRL+Key_F);

@@ -21,7 +21,7 @@
 #define QTOPIA_INTERNAL_FSLP
 #include <qpe/qcopenvelope_qws.h>
 
-#include <qpe/qpemenubar.h>
+#include <qmenubar.h>
 #include <qpe/qpetoolbar.h>
 #include <qpe/fileselector.h>
 #include <qpe/qpeapplication.h>
@@ -158,7 +158,7 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     toolbar->setHorizontalStretchable( TRUE );
 
       // Create Menubar
-    QPEMenuBar *menu = new QPEMenuBar( toolbar );
+    QMenuBar *menu = new QMenuBar( toolbar );
     menu->setMargin( 0 );
 
     QPEToolBar *bar = new QPEToolBar( this );

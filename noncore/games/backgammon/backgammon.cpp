@@ -102,7 +102,7 @@ BackGammon::BackGammon(QWidget* parent, const char* name, WFlags fl)
     
 
     //the menu
-    QPEMenuBar* menuBar = new QPEMenuBar(this);
+    QMenuBar* menuBar = new QMenuBar(this);
 
     QPopupMenu* gamemenu= new QPopupMenu(this);
     gamemenu->insertItem(tr( "New" ),this,SLOT(newgame()));

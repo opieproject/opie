@@ -26,7 +26,7 @@
 #include <qpe/resource.h>
 #include <qpe/config.h>
 #include <qpe/qpeapplication.h>
-#include <qpe/qpemenubar.h>
+#include <qmenubar.h>
 #include <qpe/qpetoolbar.h>
 #include <qpe/qcopenvelope_qws.h>
 
@@ -186,7 +186,7 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     bar->setHorizontalStretchable( true );
     menu = bar;
 
-    QPEMenuBar *mb = new QPEMenuBar( bar );
+    QMenuBar *mb = new QMenuBar( bar );
     QPopupMenu *file = new QPopupMenu( this );
     QPopupMenu *edit = new QPopupMenu( this );
     QPopupMenu *advancedMenu = new QPopupMenu(this);

@@ -45,7 +45,7 @@ class QPopupMenu;
 class QToolBar;
 #ifdef USEQPE
 class QPEToolBar;
-class QPEMenuBar;
+class QMenuBar;
 #endif
 class CBkmkSelector;
 class QProgressBar;
@@ -383,7 +383,7 @@ private slots:
 //    QPEToolBar /* *menu,*/ *fileBar;
     QToolBar *menubar, *fileBar, *navBar, *viewBar, *markBar;
 #ifdef USEQPE
-    QPEMenuBar *mb;
+    QMenuBar *mb;
 #else
     QMenuBar *mb;
 #endif

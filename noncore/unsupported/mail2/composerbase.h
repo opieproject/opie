@@ -8,7 +8,7 @@ class MailStatusBar;
 class ListViewPlus;
 class QPopupMenu;
 class QPEToolBar;
-class QPEMenuBar;
+class QMenuBar;
 class QPopupMenu;
 class QComboBox;
 class QLineEdit;
@@ -43,7 +43,7 @@ protected:
 	QMainWindow *attachWindow;
 	QPopupMenu *attachPopup;
 	QPEToolBar *toolbar, *attachToolbar;
- 	QPEMenuBar *menubar;
+ 	QMenuBar *menubar;
 	QPopupMenu *mailmenu;
 	QComboBox *fromBox, *from, *receiversBox, *subjectBox, *priority;
 	QLineEdit *replyto, *to, *cc, *bcc, *subject;

@@ -20,7 +20,7 @@ MainWindowBase::MainWindowBase(QWidget *parent, const char *name, WFlags fl)
 	setToolBarsMovable(false);
 
 	toolbar = new QPEToolBar(this);
-	menubar = new QPEMenuBar( toolbar );
+	menubar = new QMenuBar( toolbar );
 	mailmenu = new QPopupMenu( menubar );
 	servermenu = new QPopupMenu( menubar );
 	menubar->insertItem( tr( "Mail" ), mailmenu );

@@ -66,7 +66,7 @@ TableViewerWindow::TableViewerWindow(QWidget *parent, const char *name, WFlags f
     ts.kRep = ds->getKeys();
 
 /* build menus */
-    menu = new QPEMenuBar(this, 0);
+    menu = new QMenuBar(this, 0);
 
     QPopupMenu *file_menu = new QPopupMenu;
     file_menu->insertItem("New", this, SLOT(newDocument()));

@@ -23,7 +23,7 @@ QashMoney::QashMoney () : QWidget ()
 
     // Create new menubar for our mainwindow
     // and add menu items
-    mainmenu = new QPEMenuBar ( this );
+    mainmenu = new QMenuBar ( this );
     mainmenu->setFrameStyle ( QFrame::PopupPanel | QFrame::Raised );
     preferencesmenu = new QPopupMenu ( this );
     utilitiesmenu = new QPopupMenu ( this );

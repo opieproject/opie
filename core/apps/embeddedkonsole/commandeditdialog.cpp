@@ -6,7 +6,7 @@
 #include <qpe/config.h>
 #include <qpe/qpetoolbar.h>
 #include <qwidget.h>
-#include <qpe/qpemenubar.h>
+#include <qmenubar.h>
 #include <qpe/resource.h>
 #include <qlist.h>
 #include <qtoolbutton.h>

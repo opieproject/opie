@@ -246,7 +246,7 @@ MineSweep::MineSweep( QWidget* parent, const char* name, WFlags f )
     QPEToolBar *toolBar = new QPEToolBar( this );
     toolBar->setHorizontalStretchable( TRUE );
 
-    QPEMenuBar *menuBar = new QPEMenuBar( toolBar );
+    QMenuBar *menuBar = new QMenuBar( toolBar );
 
     QPopupMenu *gameMenu = new QPopupMenu( this );
     gameMenu->insertItem( tr("Beginner"), this, SLOT( beginner() ) );

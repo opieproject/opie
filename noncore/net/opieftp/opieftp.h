@@ -32,7 +32,7 @@ class QSpinBox;
 class QTabWidget;
 class QWidget;
 class QPEToolBar;
-class QPEMenuBar;
+class QMenuBar;
 class QPopupMenu;
 class QFile;
 class QLineEdit;

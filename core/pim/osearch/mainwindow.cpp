@@ -28,7 +28,7 @@
 #include <qtextbrowser.h>
 #include <qregexp.h>
 #include <qwhatsthis.h>
-#include <qpe/qpemenubar.h>
+#include <qmenubar.h>
 #include <qpe/qpemessagebox.h>
 #include <qpe/resource.h>
 #include <qpe/config.h>
@@ -115,7 +115,7 @@ void MainWindow::makeMenu()
 {
    QPEToolBar *toolBar = new QPEToolBar( this );
    QPEToolBar *searchBar = new QPEToolBar(this);
-   QPEMenuBar *menuBar = new QPEMenuBar( toolBar );
+   QMenuBar *menuBar = new QMenuBar( toolBar );
    QPopupMenu *searchMenu = new QPopupMenu( menuBar );
 //   QPopupMenu *viewMenu = new QPopupMenu( menuBar );
    QPopupMenu *cfgMenu = new QPopupMenu( menuBar );

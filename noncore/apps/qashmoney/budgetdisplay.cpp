@@ -33,7 +33,7 @@ BudgetDisplay::BudgetDisplay ( QWidget *parent ) : QWidget ( parent )
     secondline = new QHBox ( this );
     secondline->setSpacing ( 10 );
 
-    menu = new QPEMenuBar ( this );
+    menu = new QMenuBar ( this );
     menu->setFrameStyle ( QFrame::Box | QFrame::Sunken );
     budgetmenu = new QPopupMenu ( this );
     lineitemsmenu = new QPopupMenu ( this );

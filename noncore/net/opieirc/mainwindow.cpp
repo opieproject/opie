@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent, const char *name, WFlags) : QMainWindow(
     connect(m_tabWidget, SIGNAL(currentChanged(QWidget *)), this, SLOT(selected(QWidget *)));
     setCentralWidget(m_tabWidget);
     setToolBarsMovable(FALSE);
-    QPEMenuBar *menuBar = new QPEMenuBar(this);
+    QMenuBar *menuBar = new QMenuBar(this);
     QPopupMenu *irc = new QPopupMenu(this);
     menuBar->insertItem(tr("IRC"), irc);
     QAction *a = new QAction(tr("New connection"), Resource::loadPixmap("pass"), QString::null, 0, this, 0);

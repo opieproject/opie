@@ -37,7 +37,7 @@
 #include <qpe/qpemessagebox.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpetoolbar.h>
-#include <qpe/qpemenubar.h>
+#include <qmenubar.h>
 // #include <qtoolbar.h>
 // #include <qmenubar.h>
 #include <qpe/qpeapplication.h>
@@ -93,7 +93,7 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	QPEToolBar *bar = new QPEToolBar( this );
 	bar->setHorizontalStretchable( TRUE );
 
-	QPEMenuBar *mbList = new QPEMenuBar( bar  );
+	QMenuBar *mbList = new QMenuBar( bar  );
 	mbList->setMargin( 0 );
 
 	QPopupMenu *edit = new QPopupMenu( mbList );

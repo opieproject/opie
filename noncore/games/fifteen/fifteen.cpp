@@ -52,7 +52,7 @@ FifteenMainWindow::FifteenMainWindow(QWidget *parent, const char* name)
   toolbar->setHorizontalStretchable( TRUE );
   addToolBar(toolbar);
 
-  QPEMenuBar *menubar = new QPEMenuBar( toolbar );
+  QMenuBar *menubar = new QMenuBar( toolbar );
   menubar->setMargin(0);
 
   QPopupMenu *game = new QPopupMenu( this );

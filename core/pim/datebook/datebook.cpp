@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.27 2003-11-03 18:28:50 waspe Exp $
+** $Id: datebook.cpp,v 1.28 2003-12-07 13:51:03 mickeyl Exp $
 **
 **********************************************************************/
 
@@ -36,7 +36,7 @@
 #include <qpe/event.h>
 #include <qpe/finddialog.h>
 #include <qpe/ir.h>
-#include <qpe/qpemenubar.h>
+#include <qmenubar.h>
 #include <qpe/qpemessagebox.h>
 #include <qpe/resource.h>
 #include <qpe/sound.h>
@@ -103,7 +103,7 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
 //    QPEToolBar *bar = new QPEToolBar( this );
 //    bar->setHorizontalStretchable( TRUE );
 
-//    QPEMenuBar *mb = new QPEMenuBar( bar );
+//    QMenuBar *mb = new QMenuBar( bar );
 //    mb->setMargin( 0 );
 
 //    QPopupMenu *view = new QPopupMenu( this );

@@ -68,7 +68,7 @@ OpieFtp::OpieFtp( QWidget* parent, const char* name, WFlags fl)
 
     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
 
-    QPEMenuBar *menuBar = new QPEMenuBar(this);
+    QMenuBar *menuBar = new QMenuBar(this);
 //     QPEToolBar *menuBar = new QPEToolBar(this);
 //     menuBar->setHorizontalStretchable( TRUE );
 

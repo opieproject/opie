@@ -1,4 +1,15 @@
-- save configuration settings
 - beep over headphone / customizable
-- autoshow new nets - maybe in other color or more contrast
 
+- identification of probe requests
+  i.e. other sniffers around
+
+- decloaking of falsely reported zero-length SSIDs
+
+- option to run skript on
+  - new net
+  - new station
+  - <whatever>
+
+- adaptive hopping scheme !
+
+- 

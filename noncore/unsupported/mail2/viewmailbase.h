@@ -8,7 +8,7 @@ class OpenDiag;
 class QListView;
 class QPEToolBar;
 class QTextBrowser;
-class QPEMenuBar;
+class QMenuBar;
 class QPopupMenu;
 
 class ViewMailBase : public QMainWindow
@@ -24,7 +24,7 @@ protected:
 	QPEToolBar *toolbar;
 	QTextBrowser *browser;
 	OpenDiag *openDiag;
- 	QPEMenuBar *menubar;
+ 	QMenuBar *menubar;
   QPopupMenu *mailmenu;
 
 protected slots:

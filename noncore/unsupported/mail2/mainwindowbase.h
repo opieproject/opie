@@ -7,7 +7,7 @@ class ServerConnection;
 class MailStatusBar;
 class FolderWidget;
 class QPEToolBar;
-class QPEMenuBar;
+class QMenuBar;
 class QPopupMenu;
 class MailTable;
 class QAction;
@@ -27,7 +27,7 @@ protected:
 	MailStatusBar *status;
 	FolderWidget *folderView;
 	QPEToolBar *toolbar;
- 	QPEMenuBar *menubar;
+ 	QMenuBar *menubar;
 	QPopupMenu *mailmenu, *servermenu;
 	MailTable *mailView;
 	QAction *compose, *sendQueue, *folders, *findmails, *configure;

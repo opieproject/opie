@@ -33,7 +33,7 @@
 #include <qfontdialog.h>
 #include <qglobal.h>
 #include <qpainter.h>
-#include <qpe/qpemenubar.h>
+#include <qmenubar.h>
 #include <qmessagebox.h>
 #include <qaction.h>
 #include <qapplication.h>
@@ -285,7 +285,7 @@ void Konsole::init(const char* _pgm, QStrList & _args)
   QPEToolBar *menuToolBar = new QPEToolBar( this );
   menuToolBar->setHorizontalStretchable( TRUE );
 
-  QPEMenuBar *menuBar = new QPEMenuBar( menuToolBar );
+  QMenuBar *menuBar = new QMenuBar( menuToolBar );
 
   fontList = new QPopupMenu( this );
   for(uint i = 0; i < fonts.count(); i++) {

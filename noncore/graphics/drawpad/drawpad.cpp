@@ -65,7 +65,7 @@ DrawPad::DrawPad(QWidget* parent, const char* name,  WFlags fl )
     setToolBarsMovable(false);
 
     QPEToolBar* menuToolBar = new QPEToolBar(this);
-    QPEMenuBar* menuBar = new QPEMenuBar(menuToolBar);
+    QMenuBar* menuBar = new QMenuBar(menuToolBar);
 
     QPopupMenu* toolsPopupMenu = new QPopupMenu(menuBar);
 

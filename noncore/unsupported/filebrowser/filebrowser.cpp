@@ -37,7 +37,7 @@
 #include <qheader.h>
 #include <qpe/qpetoolbar.h>
 #include <qpopupmenu.h>
-#include <qpe/qpemenubar.h>
+#include <qmenubar.h>
 #include <qaction.h>
 #include <qstringlist.h>
 #include <qcursor.h>
@@ -842,7 +842,7 @@ void FileBrowser::init(const QString & dir)
     QPEToolBar* toolBar = new QPEToolBar( this );
     toolBar->setHorizontalStretchable( TRUE );
 
-    QPEMenuBar* menuBar = new QPEMenuBar( toolBar );
+    QMenuBar* menuBar = new QMenuBar( toolBar );
 
     dirMenu = new QPopupMenu( this );
     menuBar->insertItem( tr( "Dir" ), dirMenu );

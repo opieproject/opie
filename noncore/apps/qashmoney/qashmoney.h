@@ -1,7 +1,7 @@
 #ifndef QASHMONEY_H
 #define QASHMONEY_H
 
-#include <qpe/qpemenubar.h>
+#include <qmenubar.h>
 #include <qpopupmenu.h>
 #include <qlayout.h>
 #include <qtabwidget.h>
@@ -30,7 +30,7 @@ class QashMoney : public QWidget
       QWidget* tab_2;
       QWidget* tab_3;
 
-      QPEMenuBar *mainmenu;
+      QMenuBar *mainmenu;
       QPopupMenu *preferencesmenu;
       QPopupMenu *utilitiesmenu;
 

@@ -361,7 +361,7 @@ void MainWindow::initActions()
 
 void MainWindow::initMenu()
 {
-  menu=new QPEMenuBar(this);
+  menu=new QMenuBar(this);
 
   menuFile=new QPopupMenu;
   fileNew->addTo(menuFile);

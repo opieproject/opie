@@ -67,7 +67,7 @@ Bartender::Bartender( QWidget* parent,  const char* name, WFlags fl )
     ToolBar1->setFixedHeight(22);
     layout->addMultiCellWidget( ToolBar1, 0, 0, 0, 4 );
 
-    QPEMenuBar *menuBar = new QPEMenuBar( ToolBar1 );
+    QMenuBar *menuBar = new QMenuBar( ToolBar1 );
     QPopupMenu *fileMenu;
     fileMenu = new QPopupMenu( this);
     menuBar->insertItem( tr("File"), fileMenu );

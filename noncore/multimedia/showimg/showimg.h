@@ -35,7 +35,7 @@
 
 class QAction;
 class QPEToolBar;
-class QPEMenuBar;
+class QMenuBar;
 class QPopupMenu;
 class QWidgetStack;
 class FileSelector;
@@ -250,8 +250,8 @@ private:
     QPixmap pmScaled;       // the scaled pixmap
     QPEToolBar  *toolBar;
     QPEToolBar  *iconToolBar;
-    QPEMenuBar  *menuBar;
-    QPEMenuBar  *current;
+    QMenuBar  *menuBar;
+    QMenuBar  *current;
 
 
     QPopupMenu  *fileMenuFile;

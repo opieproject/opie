@@ -66,7 +66,7 @@ MainWindow::MainWindow( QWidget* parent, const char* name, WFlags fl )
 
 	QPEToolBar *bar = new QPEToolBar( this );
 	bar->setHorizontalStretchable( TRUE );
-	QPEMenuBar *mb = new QPEMenuBar( bar );
+	QMenuBar *mb = new QMenuBar( bar );
 	mb->setMargin( 0 );
 	QPopupMenu *popup = new QPopupMenu( this );
 
