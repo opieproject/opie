@@ -8,7 +8,7 @@
 
 /***************************************************************************
  *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
+ *   This program is free softwaSre; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
  *   the Free Software Foundation.                                         *
  *   ONLY VERSION 2 OF THE LICENSE IS APPLICABLE                           *
@@ -17,8 +17,8 @@
 #include <qwidget.h>
 #include <qaction.h>
 #include <qlayout.h>
-#include <qpe/qpetoolbar.h>
-#include <qpe/qpemenubar.h>
+#include <qtoolbutton.h>
+#include <qmenubar.h>
 #include <qpe/resource.h>
 #include <qpe/global.h>
 #include <qpe/qpeapplication.h>
@@ -41,12 +41,8 @@ TinyKate::TinyKate( QWidget *parent, const char *name, WFlags f) :
   setCaption(tr("TinyKATE"));
   KGlobal::setAppName("TinyKATE");
 
-  setToolBarsMovable(FALSE);
-
-        QPEToolBar *bar = new QPEToolBar( this );
-        bar->setHorizontalStretchable( TRUE );
-        QPEMenuBar *mb = new QPEMenuBar( bar );
-        mb->setMargin( 0 );
+  QMenuBar *mb = new QMenuBar( this );
+  mb->setMargin( 0 );
 
   tabwidget=new OTabWidget(this);
   setCentralWidget(tabwidget);
@@ -87,29 +83,34 @@ TinyKate::TinyKate( QWidget *parent, const char *name, WFlags f) :
 //EDIT ACTIONS
 
   // Action for cutting text
-        editCut = new QAction( tr( "Cut" ), Resource::loadPixmap( "cut" ), QString::null, 0, this, 0 );
-        editCut->addTo( bar );
+        editCut = new QToolButton( 0 );
+        editCut->setAutoRaise( true );
+        editCut->setIconSet(  Resource::loadPixmap( "cut" ) );
 
   // Action for Copying text
-        editCopy = new QAction( tr( "Copy" ), Resource::loadPixmap( "copy" ), QString::null, 0, this, 0 );
-        editCopy->addTo( bar );
+        editCopy = new QToolButton( 0 );
+        editCopy->setAutoRaise( true );
+        editCopy->setIconSet( Resource::loadPixmap( "copy" ) );
 
   // Action for pasting text
-        editPaste = new QAction( tr( "Paste" ), Resource::loadPixmap( "paste" ), QString::null, 0, this, 0 );
-        editPaste->addTo( bar );
-
+        editPaste =  new QToolButton( 0 );
+        editPaste->setAutoRaise( true );
+        editPaste->setIconSet( Resource::loadPixmap( "paste" ) );
 
   // Action for finding / replacing  text
-        editFindReplace = new QAction( tr( "Find/Replace" ), Resource::loadPixmap("find"), QString::null, 0, this, 0 );
-        editFindReplace->addTo( bar );
+        editFindReplace = new QToolButton( 0 );
+        editFindReplace->setAutoRaise( true );
+        editFindReplace->setIconSet( Resource::loadPixmap("find") );
 
-  // Action for undo
-        editUndo = new QAction( tr( "Undo" ),Resource::loadPixmap( "undo" ) , QString::null, 0, this, 0 );
-        editUndo->addTo( bar );
+   // Action for undo
+        editUndo = new QToolButton( 0 );
+        editUndo->setAutoRaise( true );
+        editUndo->setIconSet( Resource::loadPixmap( "undo" ) );
 
   // Action for redo
-        editRedo = new QAction( tr( "Redo" ),Resource::loadPixmap( "redo" ) , QString::null, 0, this, 0 );
-        editRedo->addTo( bar );
+        editRedo = new QToolButton( 0 );
+        editRedo->setAutoRaise( true );
+        editRedo->setIconSet( Resource::loadPixmap( "redo" ) );
 
 //VIEW ACITONS
         popup = new QPopupMenu( this );
@@ -120,12 +121,19 @@ TinyKate::TinyKate( QWidget *parent, const char *name, WFlags f) :
         viewDecFontSizes = new QAction( tr( "Font -" ), QString::null, 0, this, 0 );
         viewDecFontSizes->addTo( popup );
 
-  mb->insertItem(tr("View"),popup);
-
-
+        mb->insertItem(tr("View"),popup);
 
         popup = new QPopupMenu( this );
-  mb->insertItem(tr("Utils"),popup);
+        mb->insertItem(tr("Utils"),popup);
+
+
+        mb->insertItem( editCut );
+        mb->insertItem( editCopy );
+        mb->insertItem( editPaste );
+        mb->insertItem( editFindReplace );
+        mb->insertItem( editUndo );
+        mb->insertItem(  editRedo );
+
 
 //Highlight management
   hlmenu=new QPopupMenu(this);
@@ -186,21 +194,21 @@ void TinyKate::slotCurrentChanged( QWidget * view)
     disconnect(editPaste,SIGNAL(activated()),currentView,SLOT(paste()));
     disconnect(editUndo,SIGNAL(activated()),currentView,SLOT(undo()));
     disconnect(editRedo,SIGNAL(activated()),currentView,SLOT(redo()));
-        disconnect(viewIncFontSizes,SIGNAL(activated()), currentView,SLOT(slotIncFontSizes()));
-        disconnect(viewDecFontSizes,SIGNAL(activated()), currentView,SLOT(slotDecFontSizes()));
+    disconnect(viewIncFontSizes,SIGNAL(activated()), currentView,SLOT(slotIncFontSizes()));
+    disconnect(viewDecFontSizes,SIGNAL(activated()), currentView,SLOT(slotDecFontSizes()));
     disconnect(hlmenu,SIGNAL(activated(int)), currentView,SLOT(setHl(int)));
     disconnect(utilSettings,SIGNAL(activated()), currentView,SLOT(configDialog()));
   }
 
   currentView=(KTextEditor::View*)view;
 
-  connect(editCopy,SIGNAL(activated()),currentView,SLOT(copy()));
-  connect(editCut,SIGNAL(activated()),currentView,SLOT(cut()));
-  connect(editPaste,SIGNAL(activated()),currentView,SLOT(paste()));
-  connect(editUndo,SIGNAL(activated()),currentView,SLOT(undo()));
-  connect(editRedo,SIGNAL(activated()),currentView,SLOT(redo()));
-      connect(viewIncFontSizes,SIGNAL(activated()), currentView,SLOT(slotIncFontSizes()));
-      connect(viewDecFontSizes,SIGNAL(activated()), currentView,SLOT(slotDecFontSizes()));
+  connect(editCopy,SIGNAL(clicked()),currentView,SLOT(copy()));
+  connect(editCut,SIGNAL(clicked()),currentView,SLOT(cut()));
+  connect(editPaste,SIGNAL(clicked()),currentView,SLOT(paste()));
+  connect(editUndo,SIGNAL(clicked()),currentView,SLOT(undo()));
+  connect(editRedo,SIGNAL(clicked()),currentView,SLOT(redo()));
+  connect(viewIncFontSizes,SIGNAL(activated()), currentView,SLOT(slotIncFontSizes()));
+  connect(viewDecFontSizes,SIGNAL(activated()), currentView,SLOT(slotDecFontSizes()));
   connect(hlmenu,SIGNAL(activated(int)), currentView,SLOT(setHl(int)));
   connect(utilSettings,SIGNAL(activated()), currentView,SLOT(configDialog()));
 

@@ -23,6 +23,7 @@
 #include <opie/otabwidget.h>
 #include <ktexteditor.h>
 
+class QToolButton;
 class QAction;
 class QPopupMenu;
 
@@ -49,15 +50,8 @@ private:
     OTabWidget *tabwidget;
     KTextEditor::View *currentView;
 
-    QAction *editCopy;
-    QAction *editCut;
-    QAction *editPaste;
-    QAction *editUndo;
-    QAction *editRedo;
-    QAction *editFindReplace;
-    QAction *viewIncFontSizes;
-    QAction *viewDecFontSizes;
-    QAction *utilSettings;
+    QToolButton *editCopy, *editCut, *editPaste, *editUndo, *editRedo,  *editFindReplace;
+    QAction *viewIncFontSizes, *viewDecFontSizes, *utilSettings;
 
     QPopupMenu *hlmenu;
     uint nextUnnamed;
