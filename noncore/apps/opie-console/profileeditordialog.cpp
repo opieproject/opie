@@ -115,6 +115,7 @@ void ProfileEditorDialog::initUI()
 	tabWidget->addTab(tabprof, "", QObject::tr("Profile"));
 	tabWidget->addTab(tabconn, "", QObject::tr("Connection"));
 	tabWidget->addTab(tabterm, "", QObject::tr("Terminal"));
+        tabWidget->setCurrentTab( tabprof );
 
 	// load profile values
 	name_line->setText(m_prof.name());
