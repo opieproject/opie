@@ -1,33 +1,15 @@
 /*
  * Startup functions of wellenreiter
  *
- * $Id: daemon.cc,v 1.18 2003-02-07 17:17:35 max Exp $
+ * $Id: daemon.cc,v 1.19 2003-02-09 15:48:34 mjm Exp $
  */
 
 #include "config.hh"
 #include "daemon.hh"
 
-// temporary solution, will be removed soon
+/* should be parsed from cfg-file */
 #define MAXCHANNEL 13
-int card_type;
-char sniffer_device[6];
-int channel=0;
-int timedout=1;
-
-void chanswitch(int blah)
-{
-  if(channel >= MAXCHANNEL)
-  {
-  	channel=1;
-  }
-  else
-  {
-	channel++;
-  }
-  card_set_channel(sniffer_device, channel, card_type);
-  timedout=0;
-  alarm(1);
-}
+#define CHANINTERVAL 100000
 
 /* Main function of wellenreiterd */
 int main(int argc, char **argv)
@@ -37,6 +19,8 @@ int main(int argc, char **argv)
   struct pcap_pkthdr header;
   struct sockaddr_in saddr;
   pcap_t *handletopcap;
+  wl_cardtype_t cardtype;
+  pthread_t sub;
   const unsigned char *packet;
 
   fd_set rset;
@@ -47,46 +31,60 @@ int main(int argc, char **argv)
   if(argc < 3)
     usage();
 
-  // removed soon, see above
-  signal(SIGALRM, chanswitch);
-  alarm(1);
   /* Set sniffer device */
-  memset(sniffer_device, 0, sizeof(sniffer_device));
-  strncpy(sniffer_device, (char *)argv[1], sizeof(sniffer_device) - 1);
+  memset(cardtype.iface, 0, sizeof(cardtype.iface));
+  strncpy(cardtype.iface, (char *)argv[1], sizeof(cardtype.iface) - 1);
 
   /* Set card type */
-  card_type = atoi(argv[2]);
-  if(card_type < 1 || card_type > 4)
+  cardtype.type = atoi(argv[2]);
+  if(cardtype.type < 1 || cardtype.type > 4)
     usage();
 
-  if(!card_into_monitormode(&handletopcap, sniffer_device, card_type))
+  if(!card_into_monitormode(&handletopcap, cardtype.iface, cardtype.type))
   {
     wl_logerr("Cannot initialize the wireless-card, aborting");
-    exit(-1);
+    exit(EXIT_FAILURE);
   }
   wl_loginfo("Set card into monitor mode");
 
+
   /////// following line will be moved to lib as soon as possible ////////////
-    if((handletopcap = pcap_open_live(sniffer_device, BUFSIZ, 1, 0, NULL)) == NULL)
+    if((handletopcap = pcap_open_live(cardtype.iface, BUFSIZ, 1, 0, NULL)) == NULL)
     {
       wl_logerr("pcap_open_live() failed: %s", strerror(errno));
-      exit(-1);
+      exit(EXIT_FAILURE);
     }
 
 #ifdef HAVE_PCAP_NONBLOCK
     pcap_setnonblock(handletopcap, 1, NULL);
 #endif
-      
-    ////////////////////////////////////////
+  ////////////////////////////////////////
  
+
   /* Setup socket for incoming commands */
   if((sock=wl_setupsock(DAEMONADDR, DAEMONPORT, saddr)) < 0)
   {
     wl_logerr("Cannot setup socket");
-    exit(-1);
+    exit(EXIT_FAILURE);
   } 
   wl_loginfo("Set up socket '%d' for GUI communication", sock);
 
+  /* Create channelswitching thread */
+  if(pthread_create(&sub, NULL, channel_switcher, (void *)&cardtype) != 0)
+  {
+    wl_logerr("Cannot create thread: %s", strerror(errno));
+    close(sock);
+    exit(EXIT_FAILURE);
+  } 
+  if(pthread_detach(sub))
+  {
+    wl_logerr("Error detaching thread");
+    close(sock);
+    pthread_exit((pthread_t *)sub);
+    exit(EXIT_FAILURE);
+  }
+  wl_loginfo("Created and detached channel switching thread");
+  
   FD_ZERO(&rset);
 
   /* Start main loop */
@@ -97,13 +95,10 @@ int main(int argc, char **argv)
     FD_SET(sock, &rset);
     FD_SET(pcap_fileno(handletopcap), &rset);
 
-    // blah
-    timedout=1;
-
     /* socket or pcap handle bigger? Will be cleaned up, have to check pcap */
-    maxfd = (sock > pcap_fileno(handletopcap) ? sock : pcap_fileno(handletopcap)) + 1;
+    maxfd = (sock > pcap_fileno(handletopcap) ? sock + 1: pcap_fileno(handletopcap)) + 1;
 
-    if(select(maxfd, &rset, NULL, NULL, NULL) < 0 && timedout)
+    if(select(maxfd, &rset, NULL, NULL, NULL) < 0)
     {
       wl_logerr("Error calling select: %s", strerror(errno));
       break;
@@ -113,7 +108,7 @@ int main(int argc, char **argv)
     if(FD_ISSET(sock, &rset))
     {
       /* Receive data from socket */
-      if((retval=wl_recv(&sock, saddr, buffer, sizeof(buffer))) < 0 && timedout)
+      if((retval=wl_recv(&sock, saddr, buffer, sizeof(buffer))) < 0)
       {
 	wl_logerr("Error trying to read: %s", strerror(errno));
 	break;
@@ -150,7 +145,7 @@ int main(int argc, char **argv)
   } /* while(1) */
   
   close(sock);
-  exit(0);
+  exit(EXIT_SUCCESS);
 }
 
 void usage(void)
@@ -161,5 +156,35 @@ void usage(void)
 	  "\t\t\t\tNG\t= 2\n"                             \
           "\t\t\t\tHOSTAP\t= 3\n"			  \
 	  "\t\t\t\tLUCENT\t= 4\n");
-  exit(-1);
+  exit(EXIT_FAILURE);
+}
+
+void * 
+channel_switcher(void *cardtypeptr)
+{
+  wl_cardtype_t *cardtype;
+  int channel=1;
+
+  /* Get card info struct */
+  cardtype = (wl_cardtype_t *)cardtypeptr;
+
+  while(1)
+  {
+
+    /* If channel bigger than maxchannel, set to 1 */
+    if(channel > MAXCHANNEL)
+      channel=1;
+    
+    /* Set channel */
+    if(!card_set_channel(cardtype->iface, channel, cardtype->type))
+    {
+      wl_logerr("Cannot set channel, thread exiting");
+      pthread_exit(NULL);
+    }
+    
+    /* sleep */
+    usleep(CHANINTERVAL);
+    
+    channel++;
+  } /* while */
 }

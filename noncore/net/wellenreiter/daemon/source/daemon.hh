@@ -1,4 +1,4 @@
-/* $Id: daemon.hh,v 1.8 2003-02-07 17:17:35 max Exp $ */
+/* $Id: daemon.hh,v 1.9 2003-02-09 15:48:34 mjm Exp $ */
 
 #ifndef DAEMON_HH
 #define DAEMON_HH
@@ -10,9 +10,9 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <pthread.h>
 #include <unistd.h>
 #include <errno.h>
-#include <signal.h>
 
 #include <libwellenreiter/source/wl_sock.hh>
 #include <libwellenreiter/source/wl_log.hh>
@@ -22,5 +22,6 @@
 #include <libwellenreiter/source/sniff.hh>
 
 void usage(void);
+void *channel_switcher(void *);
 
 #endif /* DAEMON_HH */ 
