@@ -96,6 +96,15 @@
 #endif
 #include "qt_override_p.h"
 
+class HackWidget : public QWidget
+{
+public:
+    bool needsOk()
+    { return (getWState() & WState_Reserved1 ); }
+
+    QRect normalGeometry()
+    { return topData()->normalGeometry; };
+};
 
 class QPEApplicationData
 {
@@ -118,10 +127,10 @@ public:
 	bool forceshow    : 1;
 	bool nomaximize   : 1;
 	bool keep_running : 1;
-        bool qcopQok      : 1;
+  bool qcopQok      : 1;
 
 
-        QStringList langs;
+  QStringList langs;
 	QString appName;
 	struct QCopRec
 	{
@@ -163,32 +172,228 @@ public:
 	       delete r;
            }
 	}
-	static void show_mx(QWidget* mw, bool nomaximize,  const QString & = QString::null )
+
+	static void show_mx(QWidget* mw, bool nomaximize, QString &strName/* = QString::null */)
 	{
+	if ( mw->isVisible() ) {
+	    mw->raise();
+	} else {
+	    QPoint p;
+	    QSize s;
 
-            // ugly hack, remove that later after finding a sane solution
-            // Addendum: Only Sharp currently has models with high resolution but (physically) small displays,
-            // so this is only useful if QT_QWS_SIMPAD is NOT defined. E.g. SIMpad has 800x600 but has
-            // a (physically) large enough display to use the small icons
-#if defined(OPIE_HIGH_RES_SMALL_PHY)
-            if ( QPEApplication::desktop() ->width() >= 600 && ( mw->inherits("QMainWindow") || mw->isA("QMainWindow") ) )  {
-                ( (  QMainWindow* ) mw )->setUsesBigPixmaps( true );
-            }
-#endif
+	    if ( mw->layout() && mw->inherits("QDialog") ) {
+		bool max;
+		if ( read_widget_rect(strName, max, p, s) && validate_widget_size(mw, p, s) ) {
+		    mw->resize(s);
+		    mw->move(p);
 
-		if ( mw->layout() && mw->inherits("QDialog") ) {
-			QPEApplication::showDialog((QDialog*)mw, nomaximize);
+		    if ( max && !nomaximize )
+			mw->showMaximized();
+		    else
+			mw->show();
+		} else {
+		    qpe_show_dialog((QDialog*)mw,nomaximize);
 		}
-		else {
+	    } else {
+		bool max;
+		if ( read_widget_rect(strName, max, p, s) && validate_widget_size(mw, p, s) ) {
+		    mw->resize(s);
+		    mw->move(p);
+		} else {    //no stored rectangle, make an estimation
+		    int x = (qApp->desktop()->width()-mw->frameGeometry().width())/2;
+		    int y = (qApp->desktop()->height()-mw->frameGeometry().height())/2;
+		    mw->move( QMAX(x,0), QMAX(y,0) );
 #ifdef Q_WS_QWS
-			if ( !nomaximize )
-				mw->showMaximized();
-			else
+		    if ( !nomaximize )
+			mw->showMaximized();
+#endif
+		}
+		if ( max && !nomaximize )
+		    mw->showMaximized();
+		else
+		    mw->show();
+	    }
+	}
+	}
+//             // ugly hack, remove that later after finding a sane solution
+//             // Addendum: Only Sharp currently has models with high resolution but (physically) small displays,
+//             // so this is only useful if QT_QWS_SIMPAD is NOT defined. E.g. SIMpad has 800x600 but has
+//             // a (physically) large enough display to use the small icons
+// #if defined(OPIE_HIGH_RES_SMALL_PHY)
+//             if ( QPEApplication::desktop() ->width() >= 600 && ( mw->inherits("QMainWindow") || mw->isA("QMainWindow") ) )  {
+//                 ( (  QMainWindow* ) mw )->setUsesBigPixmaps( true );
+//             }
+// #endif
+
+// 		if ( mw->layout() && mw->inherits("QDialog") ) {
+// 			QPEApplication::showDialog((QDialog*)mw, nomaximize);
+// 		}
+// 		else {
+// #ifdef Q_WS_QWS
+// 			if ( !nomaximize ) {
+// 			qDebug("QDialog special case XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+// 			mw->showMaximized();
+// //	QPEApplication::showWidget( mw, !nomaximize );
+// 			}	else
+// #endif
+// 			mw->show();
+// 		}
+//	}
+
+
+static void qpe_show_dialog( QDialog* d, bool nomax )
+{
+    QSize sh = d->sizeHint();
+    int w = QMAX(sh.width(),d->width());
+    int h = QMAX(sh.height(),d->height());
+
+    if ( d->parentWidget() && !d->parentWidget()->topLevelWidget()->isMaximized() )
+	nomax = TRUE;
+
+#ifndef Q_WS_QWS
+	QSize s(qApp->desktop()->width(), qApp->desktop()->height() );
+#else
+	QSize s(qt_maxWindowRect.width(), qt_maxWindowRect.height() );
 #endif
 
-				mw->show();
-		}
+    int maxX = s.width() - (d->frameGeometry().width() - d->geometry().width());
+    int maxY = s.height() - (d->frameGeometry().height() - d->geometry().height());
+
+    if ( (w >= maxX && h >= maxY) || ( (!nomax) && ( w > s.width()*3/4 || h > s.height()*3/4 ) ) ) {
+	d->showMaximized();
+    } else {
+	// try centering the dialog around its parent
+	QPoint p(0,0);
+	if ( d->parentWidget() ) {
+	    QPoint pp = d->parentWidget()->mapToGlobal( QPoint(0,0) );
+	    p = QPoint( pp.x() + d->parentWidget()->width()/2,
+			pp.y() + d->parentWidget()->height()/ 2 );
+	} else {
+	    p = QPoint( maxX/2, maxY/2 );
 	}
+
+	p = QPoint( p.x() - w/2, p.y() - h/2 );
+//	qDebug("p(x,y) is %d %d", p.x(), p.y() );
+
+	if ( w >= maxX ) {
+	    if ( p.y() < 0 )
+		p.setY(0);
+	    if ( p.y() + h > maxY )
+		p.setY( maxY - h);
+
+	    d->resize(maxX, h);
+	    d->move(0, p.y() );
+	} else if ( h >= maxY ) {
+	    if ( p.x() < 0 )
+		p.setX(0);
+	    if ( p.x() + w > maxX )
+		p.setX( maxX - w);
+
+	    d->resize(w, maxY);
+	    d->move(p.x(),0);
+	} else {
+	    d->resize(w, h);
+	}
+
+	d->show();
+    }
+}
+
+    static bool read_widget_rect(const QString &app, bool &maximized, QPoint &p, QSize &s)
+    {
+	maximized = TRUE;
+
+	// 350 is the trigger in qwsdefaultdecoration for providing a resize button
+	if ( qApp->desktop()->width() <= 350 )
+	    return FALSE;
+
+	Config cfg( "qpe" );
+	cfg.setGroup("ApplicationPositions");
+	QString str = cfg.readEntry( app, QString::null );
+	QStringList l = QStringList::split(",", str);
+
+	if ( l.count() == 5) {
+	    p.setX( l[0].toInt() );
+	    p.setY( l[1].toInt() );
+
+	    s.setWidth( l[2].toInt() );
+	    s.setHeight( l[3].toInt() );
+
+	    maximized = l[4].toInt();
+
+	    return TRUE;
+	}
+
+	return FALSE;
+    }
+
+
+	    static bool validate_widget_size(const QWidget *w, QPoint &p, QSize &s)
+    {
+#ifndef Q_WS_QWS
+	QRect qt_maxWindowRect = qApp->desktop()->geometry();
+#endif
+	int maxX = qt_maxWindowRect.width();
+	int maxY = qt_maxWindowRect.height();
+	int wWidth = s.width() + ( w->frameGeometry().width() - w->geometry().width() );
+	int wHeight = s.height() + ( w->frameGeometry().height() - w->geometry().height() );
+
+	// total window size is not allowed to be larger than desktop window size
+	if ( ( wWidth >= maxX ) && ( wHeight >= maxY ) )
+	    return FALSE;
+
+	if ( wWidth > maxX ) {
+	    s.setWidth( maxX - (w->frameGeometry().width() - w->geometry().width() ) );
+	    wWidth = maxX;
+	}
+
+	if ( wHeight > maxY ) {
+	    s.setHeight( maxY - (w->frameGeometry().height() - w->geometry().height() ) );
+	    wHeight = maxY;
+	}
+
+	// any smaller than this and the maximize/close/help buttons will be overlapping
+	if ( wWidth < 80 || wHeight < 60 )
+	    return FALSE;
+
+	if ( p.x() < 0 )
+	    p.setX(0);
+	if ( p.y() < 0 )
+	    p.setY(0);
+
+	if ( p.x() + wWidth > maxX )
+	    p.setX( maxX - wWidth );
+	if ( p.y() + wHeight > maxY )
+	    p.setY( maxY - wHeight );
+
+	return TRUE;
+    }
+
+    static void store_widget_rect(QWidget *w, QString &app)
+    {
+	// 350 is the trigger in qwsdefaultdecoration for providing a resize button
+	if ( qApp->desktop()->width() <= 350 )
+	    return;
+
+	// we use these to map the offset of geometry and pos.  ( we can only use normalGeometry to
+	// get the non-maximized version, so we have to do it the hard way )
+	int offsetX = w->x() - w->geometry().left();
+	int offsetY = w->y() - w->geometry().top();
+
+	QRect r;
+	if ( w->isMaximized() )
+	    r = ( (HackWidget *) w)->normalGeometry();
+	else
+	    r = w->geometry();
+
+	// Stores the window placement as pos(), size()  (due to the offset mapping)
+	Config cfg( "qpe" );
+	cfg.setGroup("ApplicationPositions");
+	QString s;
+	s.sprintf("%d,%d,%d,%d,%d", r.left() + offsetX, r.top() + offsetY, r.width(), r.height(), w->isMaximized() );
+	cfg.writeEntry( app, s );
+    }
+
 	static bool setWidgetCaptionFromAppName( QWidget* /*mw*/, const QString& /*appName*/, const QString& /*appsPath*/ )
 	{
 		/*
@@ -226,10 +431,10 @@ public:
 
 		if ( preloaded ) {
 			if (forceshow)
-				show_mx(mw, nomax);
+				show_mx(mw, nomax, appName);
 		}
 		else if ( keep_running ) {
-			show_mx(mw, nomax);
+			show_mx(mw, nomax, appName);
 		}
 	}
 
@@ -863,14 +1068,14 @@ void QPEApplication::mapToDefaultAction( QWSKeyEvent * ke, int key )
 #endif
 }
 
-class HackWidget : public QWidget
-{
-public:
-	bool needsOk()
-	{
-		return ( getWState() & WState_Reserved1 );
-	}
-};
+// class HackWidget : public QWidget
+// {
+// public:
+// 	bool needsOk()
+// 	{
+// 		return ( getWState() & WState_Reserved1 );
+// 	}
+// };
 
 /*!
   \internal
@@ -1978,6 +2183,8 @@ void QPEApplication::tryQuit()
 		e << d->appName;
 	}
 #endif
+    if ( d->keep_running )
+	d->store_widget_rect(d->qpe_main_widget, d->appName);
 	processEvents();
 
 	quit();
@@ -2003,6 +2210,8 @@ void QPEApplication::installTranslation( const QString& baseName ) {
 */
 void QPEApplication::hideOrQuit()
 {
+    if ( d->keep_running )
+	d->store_widget_rect(d->qpe_main_widget, d->appName);
 	processEvents();
 
 	// If we are a preloaded application we don't actually quit, so emit
