@@ -1,4 +1,3 @@
-
 .cvsignore
 conf
 depends.c
@@ -6,6 +5,7 @@ lex.backup
 lex.zconf.c
 lkc_defs.h
 mconf
+qconf
 qconf.moc
 zconf.output
 zconf.tab.c
