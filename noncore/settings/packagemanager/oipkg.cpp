@@ -443,6 +443,7 @@ bool OIpkg::executeCommand( OPackage::Command command, const QStringList &parame
         case OPackage::Update : {
                 connect( this, SIGNAL(signalIpkgMessage(const QString &)), receiver, slotOutput );
                 ipkg_lists_update( &m_ipkgArgs );
+                disconnect( this, SIGNAL(signalIpkgMessage(const QString &)), 0, 0 );
             };
             break;
         case OPackage::Upgrade : {
@@ -459,6 +460,7 @@ bool OIpkg::executeCommand( OPackage::Command command, const QStringList &parame
                         linkPackageDir( dest->name() );
                 }
                 delete destList;
+                disconnect( this, SIGNAL(signalIpkgMessage(const QString &)), 0, 0 );
             };
             break;
         case OPackage::Install : {
@@ -469,6 +471,7 @@ bool OIpkg::executeCommand( OPackage::Command command, const QStringList &parame
                 }
                 if ( destination != "root" )
                     linkPackageDir( destination );
+                disconnect( this, SIGNAL(signalIpkgMessage(const QString &)), 0, 0 );
             };
             break;
         case OPackage::Remove : {
@@ -484,6 +487,7 @@ bool OIpkg::executeCommand( OPackage::Command command, const QStringList &parame
                 }
 
                 delete destList;
+                disconnect( this, SIGNAL(signalIpkgMessage(const QString &)), 0, 0 );
             };
             break;
         case OPackage::Download : {
@@ -492,16 +496,19 @@ bool OIpkg::executeCommand( OPackage::Command command, const QStringList &parame
                 {
                     ipkg_packages_download( &m_ipkgArgs, (*it) );
                 }
+                disconnect( this, SIGNAL(signalIpkgMessage(const QString &)), 0, 0 );
             };
             break;
         case OPackage::Info : {
                 connect( this, SIGNAL(signalIpkgStatus(const QString &)), receiver, slotOutput );
                 ipkg_packages_info( &m_ipkgArgs, (*parameters.begin()), &fIpkgStatus, 0l );
+                disconnect( this, SIGNAL(signalIpkgStatus(const QString &)), 0, 0 );
             };
             break;
         case OPackage::Files : {
                 connect( this, SIGNAL(signalIpkgList(const QString &)), receiver, slotOutput );
                 ipkg_package_files( &m_ipkgArgs, (*parameters.begin()), &fIpkgFiles, 0l );
+                disconnect( this, SIGNAL(signalIpkgList(const QString &)), 0, 0 );
             };
             break;
         default : break;
