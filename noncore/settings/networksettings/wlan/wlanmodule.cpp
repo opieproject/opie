@@ -132,9 +132,26 @@ void WLANModule::receive(const QCString &param, const QByteArray &arg)
     QDataStream stream(arg,IO_ReadOnly);
     QString interface;
     QString action;
+    int countMsgs = 0;
+    stream >> interface;
+    qDebug("got count? >%s<",interface.latin1());
+    if (interface == "count"){
+        qDebug("got count");
+        stream >> action;
+        qDebug("Got count num >%s<", action.latin1());
+        countMsgs = action.toInt();
+    }
+
     QDialog *toShow;
-    while (! stream.atEnd() ){
+    //while (! stream.atEnd() ){
+    for (int i = 0; i < countMsgs; i++){
+        qDebug("start stream %d/%d",i,countMsgs);
+        if (stream.atEnd()){
+            qDebug("end of stream");
+            return;
+        }
         stream >> interface;
+        qDebug("got iface");
         stream >> action;
         qDebug("WLANModule got interface %s and acion %s", interface.latin1(), action.latin1());
         // find interfaces
@@ -175,7 +192,11 @@ void WLANModule::receive(const QCString &param, const QByteArray &arg)
             }
             wlanconfigWiget->showMaximized();
             stream >> value;
-            qDebug("WLANModule is setting %s of %s to %s", action.latin1(), interface.latin1(), value.latin1() );
+            qDebug("WLANModule (build 4) is setting %s of %s to %s", action.latin1(), interface.latin1(), value.latin1() );
+            if (value.isEmpty()){
+                qDebug("value is empty!!!\nreturning");
+                return;
+            }
             if ( action.contains("ESSID") ){
                 QComboBox *combo = wlanconfigWiget->essid;
                 bool found = false;
@@ -194,8 +215,10 @@ void WLANModule::receive(const QCString &param, const QByteArray &arg)
 
             }else if (action.contains("Channel")){
                 bool ok;
+                qDebug("converting channel");
                 int chan = value.toInt( &ok );
                 if (ok){
+                    qDebug("ok setting channel");
                     wlanconfigWiget->specifyChan->setChecked( true );
                     wlanconfigWiget->networkChannel->setValue( chan );
                 }
@@ -205,8 +228,11 @@ void WLANModule::receive(const QCString &param, const QByteArray &arg)
             }else
                 qDebug("wlan plugin has no clue");
         }
+        qDebug("next stream");
     }// while stream
+    qDebug("end of stream");
     if (toShow) toShow->exec();
+    qDebug("returning");
 }
 
 QWidget *WLANModule::getInfo( Interface *i)
@@ -215,7 +241,11 @@ QWidget *WLANModule::getInfo( Interface *i)
     WlanInfoImp *info = new WlanInfoImp(0, i->getInterfaceName(), Qt::WDestructiveClose);
     InterfaceInformationImp *information = new InterfaceInformationImp(info->tabWidget, "InterfaceSetupImp", i);
     info->tabWidget->insertTab(information, "TCP/IP", 0);
-
+    info->tabWidget->setCurrentPage( 0 );
+    info->tabWidget->showPage( information );
+    if (info->tabWidget->currentPage() == information ) qDebug("infotab OK");
+    else qDebug("infotab NOT OK");
+    qDebug("current idx %d", info->tabWidget->currentPageIndex());
     qDebug("WLANModule::getInfo return");
     return info;
 }

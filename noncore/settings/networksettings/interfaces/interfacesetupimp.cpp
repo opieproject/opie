@@ -187,6 +187,8 @@ void InterfaceSetupImp::setProfile(const QString &profile){
 
   ipAddressEdit->setText(interfaces->getInterfaceOption("address", error));
   subnetMaskEdit->setText(interfaces->getInterfaceOption("netmask", error));
+  if (subnetMaskEdit->text().isEmpty())
+      subnetMaskEdit->setText( "255.255.255.0" );
   gatewayEdit->setText(interfaces->getInterfaceOption("gateway", error));
 
 
