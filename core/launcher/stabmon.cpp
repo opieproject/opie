@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -21,13 +21,17 @@
 
 #include "stabmon.h"
 
-#include <qpe/qcopenvelope_qws.h>
+#ifdef QWS
+#include <qtopia/qcopenvelope_qws.h>
+#endif
 
 #include <qfile.h>
 #include <qcstring.h>
 
 #include <sys/stat.h>
+#if defined(Q_OS_LINUX) || defined(_OS_LINUX_)
 #include <unistd.h>
+#endif
 #include <stdlib.h>
 
 SysFileMonitor::SysFileMonitor(QObject* parent) :
@@ -59,11 +63,13 @@ void SysFileMonitor::timerEvent(QTimerEvent*)
 	    ch=TRUE;
 	}
 	if ( ch ) {
+#ifndef QT_NO_COP
 	    QCopEnvelope("QPE/Card", "stabChanged()" );
+#endif
 	    break;
 	}
     }
-    
+
     // st_size is no use, it's 0 for /proc/mounts too. Read it all.
     static int mtabSize = 0;
     QFile f( "/proc/mounts" );
@@ -73,7 +79,9 @@ void SysFileMonitor::timerEvent(QTimerEvent*)
 	QByteArray ba = f.readAll();
 	if ( (int)ba.size() != mtabSize ) {
 	    mtabSize = (int)ba.size();
+#ifndef QT_NO_COP
 	    QCopEnvelope("QPE/Card", "mtabChanged()" );
+#endif
 	}
 #else
 	QString s;
@@ -84,9 +92,11 @@ void SysFileMonitor::timerEvent(QTimerEvent*)
 	}
 	if ( (int)s.length() != mtabSize ) {
 	    mtabSize = (int)s.length();
+#ifndef QT_NO_COP
 	    QCopEnvelope("QPE/Card", "mtabChanged()" );
+#endif
 	}
-#endif	    
+#endif
     }
 }
 
