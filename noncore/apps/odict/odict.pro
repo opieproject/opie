@@ -5,13 +5,11 @@ HEADERS		= odict.h \
 				searchmethoddlg.h \
 				configdlg.h \
 				dingwidget.h \
-				dictwidget.h
 
 SOURCES		= main.cpp \
 		  odict.cpp \
 		  searchmethoddlg.cpp \
 		  configdlg.cpp \
-		  dictwidget.cpp \
 		  dingwidget.cpp
 INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include

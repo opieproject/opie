@@ -111,9 +111,7 @@ void ODict::slotStartQuery()
 		ding->setDict( activated_name );
 		
 		if ( activated_name != ding->loadedDict() )
-		{
 			ding->loadDict(activated_name);
-		}
 		
 		BroswerContent test = ding->setText( querystring );
 
