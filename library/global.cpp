@@ -830,16 +830,19 @@ QStringList Global::languageList()
 
 QStringList Global::helpPath()
 {
+    QString qpeDir = QPEApplication::qpeDir();
     QStringList path;
     QStringList langs = Global::languageList();
     for (QStringList::ConstIterator it = langs.fromLast(); it!=langs.end(); --it) {
 	QString lang = *it;
 	if ( !lang.isEmpty() )
-	    path += QPEApplication::qpeDir() + "/help/" + lang + "/html";
+	    path += qpeDir + "/help/" + lang + "/html";
     }
-    path += QPEApplication::qpeDir() + "/pics";
-    path += QPEApplication::qpeDir() + "/help/html";
-    path += QPEApplication::qpeDir() + "/docs";
+    path += qpeDir + "/pics";
+    path += qpeDir + "/help/html";
+    /* we even put english into the en dir so try it as fallback as well for opie */
+    path += qpeDir + "/help/en/html";
+    path += qpeDir + "/docs";
 
 
     return path;
