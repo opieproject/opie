@@ -1,0 +1,4 @@
+  config APPLET_EXAMPLE
+    boolean "Applet Example"
+    default "y"
+    depends ( LIBQPE || LIBQPE-X11 ) && EXAMPLES 
