@@ -1,5 +1,4 @@
-#include <opie2/multiauthmainwindow.h>
-#include <opie2/multiauthcommon.h>
+#include <opie2/multiauthpassword.h>
 
 #include <opie2/oapplication.h>
 
