@@ -318,11 +318,9 @@ void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
 
                 switch (i) {
                 case VideoVolUp:
-                    qDebug("more clicked");
                     emit moreClicked();
                     return;
                 case VideoVolDown:
-                    qDebug("less clicked");
                     emit lessClicked();
                     return;
                 }
@@ -336,19 +334,16 @@ void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
                 videoButtons[i].isHeld = FALSE;
                 if ( !videoButtons[i].isToggle ) {
                     setToggleButton( i, FALSE );
-                    qDebug("button toggled3  %d",i);
                 }
 
                 switch(i) {
 
                 case VideoPlay: {
                     if( mediaPlayerState->isPaused ) {
-                        qDebug("play again clicked");
                         setToggleButton( i, FALSE );
                         mediaPlayerState->setPaused( FALSE );
                         return;
                     } else if( !mediaPlayerState->isPaused ) {
-                        qDebug("pause now clicked");
                         setToggleButton( i, TRUE );
                         mediaPlayerState->setPaused( TRUE );
                         return;
@@ -379,9 +374,8 @@ void VideoWidget::mouseReleaseEvent( QMouseEvent *event ) {
     if ( mediaPlayerState->fullscreen() ) {
         mediaPlayerState->setFullscreen( FALSE );
         makeVisible();
-
-        mouseMoveEvent( event );
     }
+        mouseMoveEvent( event );
 }
 
 void VideoWidget::showEvent( QShowEvent* ) {
