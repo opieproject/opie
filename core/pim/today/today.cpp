@@ -21,20 +21,20 @@
 #include "minidom.h"
 #include "TodoItem.h"
 
-#include <qpushbutton.h>
-#include <qlabel.h>
-
 #include <qpe/datebookdb.h>
 #include <qpe/timestring.h>
 #include <qpe/config.h>
-
+#include <qpe/qcopenvelope_qws.h> 
 #include <qpe/qprocess.h>
+
 #include <qdir.h>
 #include <qfile.h>
 #include <qdatetime.h> 
 #include <qtextstream.h>
 #include <qcheckbox.h>
 #include <qspinbox.h>
+#include <qpushbutton.h>
+#include <qlabel.h>
 
 //#include <iostream.h>
 //#include <unistd.h>
@@ -189,8 +189,8 @@ void Today::getDates()
 }
 
 /*
- *
- *
+ * Parse in the todolist.xml
+ * 
  */
 QList<TodoItem> Today::loadTodo(const char *filename)
 {
@@ -311,9 +311,9 @@ void Today::getTodo()
  * lanches datebook
  */
 void Today::startDatebook()
-{
-  //ugly but working
-  system("/opt/QtPalmtop/bin/datebook");
+{ 
+  QCopEnvelope e("QPE/System", "execute(QString)");
+  e << QString("datebook");
 }
 
 /*
@@ -321,9 +321,8 @@ void Today::startDatebook()
  */ 
 void Today::startTodo()
 {
-  //  QProcess *datelanch = new QProcess( this,  "datebook");
-  //datelanch->start();
-  system("/opt/QtPalmtop/bin/todolist");
+  QCopEnvelope e("QPE/System", "execute(QString)");
+  e << QString("todolist");
 }
 
 /*  
