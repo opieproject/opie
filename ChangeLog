@@ -1,6 +1,7 @@
 2004-??-??	The Opie Team <opie@handhelds.org>
 
-	* Added  a new Image Viewer. Work is ongoing (zecke)
+	* Added new Bible reader app - opie-dagger (drw)
+	* Added a new Image Viewer. Work is ongoing (zecke)
 	* Added namespace usage in libopie2 and everywhere (zecke,alwin)
 	* Enabled the possibility to pass command line arguments to applications (mickeyl)
 	* Added an about applet showing some credits and information about Opie (mickeyl)
