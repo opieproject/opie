@@ -113,6 +113,7 @@ bool Ipkg :: runIpkg( )
         {
             emit outputText( QString( "Removing symbolic links...\n" ) );
             linkPackage( Utils::getPackageNameFromIpkFilename( package ), destination, destDir );
+            emit outputText( QString( " " ) );
         }
     }
     
@@ -140,6 +141,8 @@ bool Ipkg :: runIpkg( )
             QString *pkg;
             for ( pkg = dependantPackages->first(); pkg != 0; pkg = dependantPackages->next() )
             {
+                if ( *pkg == package )
+                    continue;
                 emit outputText( " " );
                 emit outputText( QString( "Creating symbolic links for " )+ (*pkg) );
                 linkPackage( Utils::getPackageNameFromIpkFilename( *pkg ), destination, destDir );
@@ -284,7 +287,6 @@ void Ipkg :: processFileList( const QStringList *fileList, const QString &destDi
     {
         for ( int i = fileList->count()-1; i >= 0 ; i-- )
         {
-            cout << "i = " << i << ", Dealing with " << (*fileList)[i] << endl;
             processLinkDir( (*fileList)[i], baseDir, destDir );
             qApp->processEvents();
         }
@@ -293,8 +295,18 @@ void Ipkg :: processFileList( const QStringList *fileList, const QString &destDi
 
 void Ipkg :: processLinkDir( const QString &file, const QString &destDir, const QString &baseDir )
 {
+
     QString sourceFile = baseDir + file;
-    QString linkFile = destDir + file;
+    
+    QString linkFile = destDir;
+    if ( file.startsWith( "/" ) && destDir.right( 1 ) == "/" )
+    {
+        linkFile += file.mid( 1 );
+    }   
+    else
+    {
+        linkFile += file;
+    }
     QString text;
     if ( createLinks )
     {
