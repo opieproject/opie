@@ -1,4 +1,4 @@
-Files: bin/citytime apps/Applications/citytime.desktop
+Files: bin/citytime apps/Applications/citytime.desktop pics/citytime
 Priority: optional
 Section: opie/applications
 Maintainer: Warwick Allison <warwick@trolltech.com>

@@ -1,4 +1,4 @@
-Files: bin/chess apps/Games/chess.desktop
+Files: bin/chess apps/Games/chess.desktop pics/chess
 Priority: optional
 Section: opie/games
 Maintainer: Luke Graham <luke@trolltech.com>

@@ -1,4 +1,4 @@
-Files: bin/security apps/Settings/Security.desktop
+Files: bin/security apps/Settings/Security.desktop pics/security
 Priority: optional
 Section: opie/settings
 Maintainer: Warwick Allison <warwick@trolltech.com>

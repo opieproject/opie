@@ -1,4 +1,4 @@
-Files: bin/keypebble apps/Applications/keypebble.desktop
+Files: bin/keypebble apps/Applications/keypebble.desktop pics/vnc
 Priority: optional
 Section: opie/applications
 Maintainer: Martin Jones <mjones@trolltech.com>
