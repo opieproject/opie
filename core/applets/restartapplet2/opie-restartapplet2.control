@@ -6,4 +6,4 @@ Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION.1
 Depends: opie-base ($QPE_VERSION)
 Description: Restart Applet
- A simple taskbar applet to restart the  Opie environment
+ A simple opie menu applet to restart the  Opie environment
