@@ -828,14 +828,23 @@ OWaveLanManagementSSID::~OWaveLanManagementSSID()
 }
 
 
-QString OWaveLanManagementSSID::ID() const
+QString OWaveLanManagementSSID::ID( bool decloak ) const
 {
     int length = _data->length;
     if ( length > 32 ) length = 32;
     char essid[length+1];
     memcpy( &essid, &_data->ssid, length );
     essid[length] = 0x0;
-    return essid;
+    if ( !decloak || length < 2 || essid[0] != '\0' ) return essid;
+    odebug << "OWaveLanManagementSSID:ID(): SSID is cloaked - decloaking..." << oendl;
+
+    QString decloakedID;
+    for ( int i = 1; i < length; ++i )
+    {
+        if ( essid[i] >= 32 && essid[i] <= 126 ) decloakedID.append( essid[i] );
+        else decloakedID.append( '.' );
+    }
+    return decloakedID;
 }
 
 

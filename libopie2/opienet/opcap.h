@@ -249,7 +249,7 @@ class OWaveLanManagementSSID : public QObject
     OWaveLanManagementSSID( const unsigned char*, const struct ssid_t*, QObject* parent = 0 );
     virtual ~OWaveLanManagementSSID();
 
-    QString ID() const;
+    QString ID( bool decloak = false ) const;
 
   private:
     const struct ssid_t* _data;
