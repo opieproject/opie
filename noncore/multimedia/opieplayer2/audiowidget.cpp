@@ -86,12 +86,6 @@ AudioWidget::AudioWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
     MediaWidget( playList, mediaPlayerState, parent, name ), songInfo( this ), slider( Qt::Horizontal, this ),  time( this ),
     audioSliderBeingMoved( false )
 {
-    for ( uint i = 0; i < buttonCount; ++i ) {
-        Button button;
-        button.type = skinInfo[ i ].type;
-        buttons.push_back( button );
-    }
-
     setCaption( tr("OpiePlayer") );
 
     Config cfg("OpiePlayer");
@@ -108,12 +102,15 @@ AudioWidget::AudioWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
     buttonMask = QImage( imgUp.width(), imgUp.height(), 8, 255 );
     buttonMask.fill( 0 );
 
-    for ( uint i = 0; i < buttons.size(); i++ ) {
-        QString filename = QString( QPEApplication::qpeDir()  + "/pics/" + skinPath + "/skin_mask_" + skinInfo[i].fileName + ".png" );
-        buttons[ i ].mask =QBitmap( filename );
+    for ( uint i = 0; i < buttonCount; i++ ) {
+        Button button;
+        button.type = skinInfo[ i ].type;
 
-        if ( !buttons[i].mask.isNull() ) {
-            QImage imgMask = buttons[i].mask.convertToImage();
+        QString filename = QString( QPEApplication::qpeDir()  + "/pics/" + skinPath + "/skin_mask_" + skinInfo[i].fileName + ".png" );
+        button.mask =QBitmap( filename );
+
+        if ( !button.mask.isNull() ) {
+            QImage imgMask = button.mask.convertToImage();
             uchar **dest = buttonMask.jumpTable();
             for ( int y = 0; y < imgUp.height(); y++ ) {
                 uchar *line = dest[y];
@@ -123,6 +120,7 @@ AudioWidget::AudioWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
             }
         }
 
+        buttons.push_back( button );
     }
 
     setBackgroundPixmap( pixBg );
