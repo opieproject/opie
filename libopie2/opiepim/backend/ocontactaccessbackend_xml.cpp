@@ -33,13 +33,11 @@
 #include <opie2/ocontactaccessbackend_xml.h>
 
 #include <qasciidict.h>
-#include <qdatetime.h>
 #include <qfile.h>
 #include <qfileinfo.h>
 #include <qregexp.h>
 #include <qarray.h>
 #include <qmap.h>
-#include <qdatetime.h>
 
 #include <qpe/global.h>
 

@@ -36,7 +36,6 @@
 #include <qlistbox.h>
 #include <qcombobox.h>
 #include <qlabel.h>
-#include <qfont.h>
 #include <qmultilineedit.h>
 
 using namespace Opie;

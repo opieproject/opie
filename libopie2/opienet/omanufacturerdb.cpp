@@ -40,7 +40,6 @@
 
 /* QT */
 #include <qapplication.h>
-#include <qstring.h>
 #include <qfile.h>
 #include <qtextstream.h>
 

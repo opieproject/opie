@@ -39,11 +39,7 @@
 #include <qpe/config.h>
 
 /* QT */
-#include <qobject.h>
-#include <qregexp.h>
 #include <qstylesheet.h>
-#include <qfileinfo.h>
-#include <qmap.h>
 
 /* STD */
 #include <stdio.h>

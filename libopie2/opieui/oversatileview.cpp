@@ -38,18 +38,7 @@
 /* QT */
 
 #include <qaction.h>
-#include <qbrush.h>
-#include <qfont.h>
-#include <qiconset.h>
-#include <qiconview.h>
-#include <qlistview.h>
-#include <qpalette.h>
-#include <qpoint.h>
 #include <qpopupmenu.h>
-#include <qrect.h>
-#include <qsize.h>
-#include <qstring.h>
-#include <qwidgetstack.h>
 
 /* XPM */
 static const char * view_icon_xpm[] = {

@@ -28,11 +28,8 @@
 */
 
 /* QT */
-#include <qbuttongroup.h>
 #include <qlayout.h>
 #include <qlineedit.h>
-#include <qstring.h>
-#include <qtoolbutton.h>
 
 /* OPIE */
 #include <opie2/otimepicker.h>

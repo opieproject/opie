@@ -47,20 +47,9 @@
 
 /* QT */
 
-#include <qbrush.h>
-#include <qdatetime.h>
 #include <qfile.h>
-#include <qhostaddress.h>
 #include <qmessagebox.h>
-#include <qintdict.h>
-#include <qpoint.h>
-#include <qrect.h>
-#include <qregion.h>
-#include <qsize.h>
 #include <qsocketdevice.h>
-#include <qstring.h>
-#include <qstringlist.h>
-#include <qtextstream.h>
 
 /* UNIX */
 

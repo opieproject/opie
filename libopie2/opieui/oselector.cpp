@@ -20,7 +20,6 @@
 /* QT */
 
 #include <qimage.h>
-#include <qpainter.h>
 #include <qdrawutil.h>
 
 /* OPIE */

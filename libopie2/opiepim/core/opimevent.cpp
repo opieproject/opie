@@ -34,12 +34,9 @@
 #include <opie2/opimresolver.h>
 #include <opie2/opimnotifymanager.h>
 #include <qpe/categories.h>
-#include <qpe/palmtopuidgen.h>
 #include <qpe/stringutil.h>
 
 /* QT */
-#include <qshared.h>
-#include <qarray.h>
 
 namespace Opie
 {

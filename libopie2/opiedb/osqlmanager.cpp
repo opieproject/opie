@@ -1,8 +1,6 @@
 
 #include <stdlib.h>
 
-#include "osqlbackend.h"
-#include "osqldriver.h"
 #include "osqlmanager.h"
 #include "osqlbackendmanager.h"
 #include "osqlitedriver.h"

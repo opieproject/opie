@@ -29,9 +29,6 @@
 
 /* QT */
 
-#include <qcolor.h>
-#include <qheader.h>
-#include <qpainter.h>
 #include <qpixmap.h>
 
 /* OPIE */

@@ -30,7 +30,6 @@
 #include "opimnotify.h"
 
 /* QT */
-#include <qshared.h>
 
 namespace Opie
 {

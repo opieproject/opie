@@ -28,7 +28,6 @@
 
 */
 
-#include "osqlresult.h"
 #include "osqlquery.h"
 #include "osqlitedriver.h"
 

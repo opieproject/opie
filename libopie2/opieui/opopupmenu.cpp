@@ -19,15 +19,8 @@
 
 /* QT */
 
-#include <qapplication.h>
-#include <qcursor.h>
-#include <qpainter.h>
 #include <qdrawutil.h>
 #include <qtimer.h>
-#include <qfont.h>
-#include <qfontmetrics.h>
-#include <qregexp.h>
-#include <qstyle.h>
 
 /* OPIE */
 

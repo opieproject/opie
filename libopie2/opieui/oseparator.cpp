@@ -36,7 +36,6 @@
 
 /* QT */
 
-#include <qstyle.h>
 
 OSeparator::OSeparator(QWidget* parent, const char* name, WFlags f)
    : QFrame(parent, name, f)

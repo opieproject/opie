@@ -34,7 +34,6 @@
 #include <qpe/categoryselect.h>
 
 /* QT */
-#include <qarray.h>
 
 namespace Opie
 {

@@ -1,5 +1,4 @@
 #include <qdir.h>
-#include <qfile.h>
 #include <qmap.h>
 
 #include "osqlbackendmanager.h"

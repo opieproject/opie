@@ -29,7 +29,6 @@
 
 #include <opie2/oglobal.h>
 
-#include <qfile.h>
 #include <qtextstream.h>
 #include <qdir.h>
 #include <qpe/mimetype.h>

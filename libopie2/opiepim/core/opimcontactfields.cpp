@@ -31,12 +31,10 @@
 
 /* OPIE */
 #include <opie2/opimcontact.h>
-#include <qpe/recordfields.h> // We should use our own enum in the future ..
 #include <qpe/config.h>
 
 /* QT */
 #include <qobject.h>
-#include <qstringlist.h>
 
 
 namespace Opie

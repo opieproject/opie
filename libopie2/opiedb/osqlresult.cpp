@@ -1,5 +1,4 @@
 
-#include "osqlquery.h"
 #include "osqlresult.h"
 
 OSQLResultItem::OSQLResultItem( const TableString& string,

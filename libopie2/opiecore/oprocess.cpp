@@ -37,9 +37,7 @@ _;:,     .>    :=|.         This program is free software; you can
 
 #include <qapplication.h>
 #include <qdir.h>
-#include <qfile.h>
 #include <qmap.h>
-#include <qregexp.h>
 #include <qsocketnotifier.h>
 #include <qtextstream.h>
 
