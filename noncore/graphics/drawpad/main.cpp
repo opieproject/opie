@@ -14,14 +14,6 @@
 #include "drawpad.h"
 
 #include <qpe/qpeapplication.h>
+#include <opie/oapplicationfactory.h>
 
-int main(int argc, char **argv)
-{
-    QPEApplication a(argc, argv);
-
-    DrawPad mw; // = new DrawPad();;
-    a.showMainWidget(&mw );
-    mw.finishStartup();
-    
-    return a.exec();
-}
+OPIE_EXPORT_APP( OApplicationFactory<DrawPad> )

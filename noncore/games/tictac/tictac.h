@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: tictac.h,v 1.1 2002-03-05 03:48:46 bipolar Exp $
+** $Id: tictac.h,v 1.1.10.1 2003-08-29 06:50:40 harlekin Exp $
 **
 ** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
 **
@@ -91,7 +91,9 @@ class TicTacToe : public QWidget
 {
     Q_OBJECT
 public:
-    TicTacToe( int boardSize=3, QWidget *parent=0, const char *name=0 );
+    TicTacToe( QWidget *parent=0, const char *name=0, WFlags fl = 0 );
+    static QString appName() { return QString::fromLatin1("tictac"); }
+
 private slots:
     void	newGameClicked();
     void	gameOver();
@@ -102,6 +104,7 @@ private:
     QPushButton *quit;
     QLabel	*message;
     TicTacGameBoard *board;
+    int boardSize;
 };
 
 

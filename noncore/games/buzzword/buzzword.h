@@ -64,7 +64,8 @@ class BuzzWord : public QMainWindow
 	Q_OBJECT
 
 public:
-	BuzzWord();
+	BuzzWord( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
+	static QString appName() { return QString::fromLatin1("buzzword"); }
 
 private:
 	void drawGrid();

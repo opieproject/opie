@@ -14,6 +14,7 @@ INTERFACES   = remapdlgbase.ui
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 LIBS        += -lqpe -lopie
+TARGET	     = buttonsettings
 
 TRANSLATIONS = ../../../i18n/de/buttonsettings.ts \
 	 ../../../i18n/nl/buttonsettings.ts \

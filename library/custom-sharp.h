@@ -47,13 +47,13 @@ static void sig_handler(int sig) \
 { \
     switch (sig) { \
     case SIGHUP: \
-  memstate = VeryLow; \
+  memstate = MemVeryLow; \
   break; \
     case SIGUSR1: \
-  memstate = Normal; \
+  memstate = MemNormal; \
   break; \
     case SIGUSR2: \
-  memstate = Low; \
+  memstate = MemLow; \
   break; \
     } \
 } \

@@ -1,6 +1,4 @@
-TEMPLATE        = app
-#CONFIG         = qt warn_on debug
-CONFIG          = qt warn_on release
+CONFIG          = qt warn_on release quick-app
 HEADERS         = pindlg.h 
 SOURCES         = main.cc pindlg.cc
 INCLUDEPATH     += $(OPIEDIR)/include
@@ -8,8 +6,6 @@ INCLUDEPATH    += $(OPIEDIR)/noncore/opietooth/lib
 DEPENDPATH      += $(OPIEDIR)/include
 LIBS            += -lqpe 
 INTERFACES      = pindlgbase.ui
-DESTDIR		= $(OPIEDIR)/bin
-TARGET          = bluepin
 
 TRANSLATIONS = ../../../../i18n/de/bluepin.ts \
 	 ../../../../i18n/nl/bluepin.ts \
@@ -28,7 +24,6 @@ TRANSLATIONS = ../../../../i18n/de/bluepin.ts \
 	 ../../../../i18n/sl/bluepin.ts \
 	 ../../../../i18n/zh_CN/bluepin.ts \
 	 ../../../../i18n/zh_TW/bluepin.ts
-
 
 
 include ( $(OPIEDIR)/include.pro )

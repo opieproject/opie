@@ -1,4 +1,4 @@
-3 /*
+/*
                             This file is part of the Opie Project
 
                              Copyright (c)  2002 Max Reiss <harlekin@handhelds.org>

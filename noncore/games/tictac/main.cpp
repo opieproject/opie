@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: main.cpp,v 1.1.8.1 2003-06-01 13:45:31 zecke Exp $
+** $Id: main.cpp,v 1.1.8.1.2.1 2003-08-29 06:50:40 harlekin Exp $
 **
 ** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
 **
@@ -9,23 +9,7 @@
 *****************************************************************************/
 
 #include <qpe/qpeapplication.h>
-#include <stdlib.h>
+#include <opie/oapplicationfactory.h>
 #include "tictac.h"
 
-
-int main( int argc, char **argv )
-{
-    QPEApplication a( argc, argv );
-    int n = 3;
-    if ( argc == 2 )				// get board size n
-        n = atoi(argv[1]);
-    if ( n < 3 || n > 10 ) {			// out of range
-        qWarning( "%s: Board size must be from 3x3 to 10x10", argv[0] );
-        return 1;
-    }
-    TicTacToe ttt( n );				// create game
-    a.setMainWidget( &ttt );
-    ttt.setCaption( QObject::tr("TicTac") );
-    ttt.show();					// show widget
-    return a.exec();				// go
-}
+OPIE_EXPORT_APP( OApplicationFactory<TicTacToe> )

@@ -1,13 +1,12 @@
-TEMPLATE  = app
-CONFIG    += qt warn_on release
+CONFIG    += qt warn_on release quick-app
 HEADERS   = tictac.h
 SOURCES   = main.cpp \
       tictac.cpp
-TARGET    = tictac
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 LIBS            += -lqpe
-DESTDIR   = $(OPIEDIR)/bin
+
+TARGET		= tictac
 
 TRANSLATIONS = ../../../i18n/de/tictac.ts \
 	 ../../../i18n/nl/tictac.ts \
@@ -26,7 +25,5 @@ TRANSLATIONS = ../../../i18n/de/tictac.ts \
 	 ../../../i18n/sl/tictac.ts \
 	 ../../../i18n/zh_CN/tictac.ts \
 	 ../../../i18n/zh_TW/tictac.ts
-
-
 
 include ( $(OPIEDIR)/include.pro )

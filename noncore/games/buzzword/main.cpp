@@ -17,19 +17,8 @@
  */
 
 #include <qpe/qpeapplication.h>
-
-#include <stdlib.h>
-#include <time.h>
+#include <opie/oapplicationfactory.h>
 
 #include "buzzword.h"
 
-int main(int argc, char **argv)
-{
-	srand(time(0));
-
-	QPEApplication a( argc, argv );
-	BuzzWord *top = new BuzzWord;
-	a.showMainWidget(top);
-
-	return a.exec();
-}
+OPIE_EXPORT_APP( OApplicationFactory<BuzzWord> )

@@ -78,6 +78,7 @@ $(OPIEDIR)/stamp-headers :
 	( cd include/opie; for generatedHeader in `cd ../../libopie; ls *.ui | sed -e "s,\.ui,\.h,g"`; do \
 	ln -sf ../../libopie/$$generatedHeader $$generatedHeader; done )
 	ln -sf ../../library/custom.h $(TOPDIR)/include/qpe/custom.h
+	ln -sf ../../library/custom.h $(TOPDIR)/include/qtopia/custom.h
 	touch $@
 	
 $(OPIEDIR)/stamp-headers-x11 :
@@ -93,6 +94,7 @@ $(OPIEDIR)/stamp-headers-x11 :
 	( cd include/opie; for generatedHeader in `cd ../../libopie; ls *.ui | sed -e "s,\.ui,\.h,g"`; do \
 	ln -sf ../../libopie/$$generatedHeader $$generatedHeader; done )
 	ln -sf ../../library/custom.h $(TOPDIR)/include/qpe/custom.h
+	ln -sf ../../library/custom.h $(TOPDIR)/include/qtopia/custom.h
 	( cd include/qpe; ln -sf ../../x11/libqpe-x11/qpe/*.h .; )
 	touch $@
 	

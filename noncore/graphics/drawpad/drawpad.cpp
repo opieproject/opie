@@ -49,7 +49,7 @@
 #include <qtooltip.h>
 #include <qwhatsthis.h>
 
-DrawPad::DrawPad(QWidget* parent, const char* name)
+DrawPad::DrawPad(QWidget* parent, const char* name,  WFlags fl )
     : QMainWindow(parent, name, WStyle_ContextHelp)
 {
     // init members
@@ -281,7 +281,7 @@ DrawPad::DrawPad(QWidget* parent, const char* name)
 }
 
 
-void DrawPad::finishStartup() 
+void DrawPad::finishStartup()
 {
     // init pages
 

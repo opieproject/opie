@@ -1,6 +1,4 @@
-TEMPLATE        = app
-CONFIG          = qt warn_on debug
-#CONFIG          = qt warn_on release
+CONFIG          = qt warn_on release quick-app
 HEADERS         = btconnectionitem.h btdeviceitem.h \
                   btserviceitem.h stdpopups.h \ 
 		  popuphelper.h bluebase.h \ 
@@ -26,8 +24,8 @@ INCLUDEPATH     += $(OPIEDIR)/noncore/net/opietooth/lib
 DEPENDPATH      += $(OPIEDIR)/include
 LIBS            += -lqpe -lopietooth -lopie
 INTERFACES      = bluetoothbase.ui  devicedialog.ui rfcommassigndialogbase.ui rfcommdialogitembase.ui
-DESTDIR         = $(OPIEDIR)/bin
-TARGET          = bluetooth-manager
+
+TARGET 		= bluetooth-manager
 
 TRANSLATIONS = ../../../../i18n/de/bluetooth-manager.ts \
 	 ../../../../i18n/nl/bluetooth-manager.ts \

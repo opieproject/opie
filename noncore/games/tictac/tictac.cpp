@@ -1,5 +1,5 @@
 /****************************************************************************
- ** $Id: tictac.cpp,v 1.3 2002-04-14 13:09:32 llornkcor Exp $
+ ** $Id: tictac.cpp,v 1.3.8.1 2003-08-29 06:50:40 harlekin Exp $
  **
  ** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
  **
@@ -288,12 +288,13 @@ void TicTacGameBoard::computerMove()
 // signals of child widgets to slots.
 //
 
-TicTacToe::TicTacToe( int boardSize, QWidget *parent, const char *name )
-        : QWidget( parent, name )
+TicTacToe::TicTacToe( QWidget *parent, const char *name, WFlags fl )
+        : QWidget( parent, name, fl )
 {
     QVBoxLayout * l = new QVBoxLayout( this, 6 );
 
       // Create a message label
+    boardSize = 3;
 
     message = new QLabel( this );
     message->setFrameStyle( QFrame::WinPanel | QFrame::Sunken );
