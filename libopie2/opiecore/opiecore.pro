@@ -5,14 +5,16 @@ HEADERS     = oapplication.h            \
               oconfig.h                 \
               odebug.h                  \
               oglobal.h                 \
-              oglobalsettings.h                       
+              oglobalsettings.h         \
+              ostorage.h
 
 SOURCES     = oapplication.cpp          \
               oconfig.cpp               \
               odebug.cpp                \
               oglobal.cpp               \
-              oglobalsettings.cpp      
-              
+              oglobalsettings.cpp       \
+              ostorage.cpp
+
 INTERFACES  =
 TARGET      = opiecore2
 VERSION     = 1.8.2
