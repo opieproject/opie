@@ -517,5 +517,5 @@ void IRCMessageParser::parseNumericalTopic(IRCMessage *message) {
     }
 }
 
-void IRCMessageParser::parseNumericalTopicWhoTime(IRCMessage *message) {
+void IRCMessageParser::parseNumericalTopicWhoTime(IRCMessage *) {
 }

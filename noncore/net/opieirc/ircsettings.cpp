@@ -1,43 +1,65 @@
 #include <qlayout.h>
+#include <qvalidator.h>
+#include <qscrollview.h>
 #include "ircsettings.h"
 #include "irctab.h"
 #include "ircmisc.h"
-#include <stdio.h>
 
 IRCSettings::IRCSettings(QWidget* parent, const char* name, bool modal, WFlags f) : QDialog(parent, name, modal, f) {
+    setCaption("Settings");
     m_config = new Config("OpieIRC");
     m_config->setGroup("OpieIRC");
-    
-    setCaption("Settings");
-    QGridLayout *layout = new QGridLayout(this, 7, 2, 5, 0);
-    QLabel *label = new QLabel(tr("Background color :"), this);
+    QHBoxLayout *l = new QHBoxLayout(this, 2, 2);
+    QTabWidget *tw = new QTabWidget(this);
+    l->addWidget(tw);
+    /* General Configuration */
+    QWidget *widget = new QWidget(tw);
+    QGridLayout *layout = new QGridLayout(widget, 1, 2, 5, 0);
+    QLabel *label = new QLabel(tr("Lines displayed :"), widget);
     layout->addWidget(label, 0, 0);
-    m_background = new IRCFramedColorLabel(QColor(m_config->readEntry("BackgroundColor", "#FFFFFF")), this);
+    m_lines = new QLineEdit(m_config->readEntry("Lines", "100"), widget);
+    QIntValidator *validator = new QIntValidator(this);
+    validator->setTop(10000);
+    validator->setBottom(0);
+    m_lines->setValidator(validator);
+    layout->addWidget(m_lines, 0, 1);
+    tw->addTab(widget, tr("General"));
+
+    /* Color configuration */
+    QScrollView *view = new QScrollView(tw);
+    view->setResizePolicy(QScrollView::AutoOneFit);
+    widget = new QWidget(view->viewport());
+    view->addChild(widget);
+    layout = new QGridLayout(widget, 7, 2, 5, 0);
+    label = new QLabel(tr("Background color :"), widget);
+    layout->addWidget(label, 0, 0);
+    m_background = new IRCFramedColorLabel(QColor(m_config->readEntry("BackgroundColor", "#FFFFFF")), widget);
     layout->addWidget(m_background, 0, 1);
-    label = new QLabel(tr("Normal text color :"), this);
+    label = new QLabel(tr("Normal text color :"), widget);
     layout->addWidget(label, 1, 0);
-    m_text = new IRCFramedColorLabel(m_config->readEntry("TextColor", "#000000"), this);
+    m_text = new IRCFramedColorLabel(m_config->readEntry("TextColor", "#000000"), widget);
     layout->addWidget(m_text, 1, 1);
-    label = new QLabel(tr("Error color :"), this);
+    label = new QLabel(tr("Error color :"), widget);
     layout->addWidget(label, 2, 0);
-    m_error = new IRCFramedColorLabel(m_config->readEntry("ErrorColor", "#FF0000"), this);
+    m_error = new IRCFramedColorLabel(m_config->readEntry("ErrorColor", "#FF0000"), widget);
     layout->addWidget(m_error, 2, 1);
-    label = new QLabel(tr("Text written by yourself :"), this);
+    label = new QLabel(tr("Text written by yourself :"), widget);
     layout->addWidget(label, 3, 0);
-    m_self = new IRCFramedColorLabel(m_config->readEntry("SelfColor", "#CC0000"), this);
+    m_self = new IRCFramedColorLabel(m_config->readEntry("SelfColor", "#CC0000"), widget);
     layout->addWidget(m_self, 3, 1);
-    label = new QLabel(tr("Text written by others :"), this);
+    label = new QLabel(tr("Text written by others :"), widget);
     layout->addWidget(label, 4, 0);
-    m_other = new IRCFramedColorLabel(m_config->readEntry("OtherColor", "#0000BB"), this);
+    m_other = new IRCFramedColorLabel(m_config->readEntry("OtherColor", "#0000BB"), widget);
     layout->addWidget(m_other, 4, 1);
-    label = new QLabel(tr("Text written by the server :"), this);
+    label = new QLabel(tr("Text written by the server :"), widget);
     layout->addWidget(label, 5, 0);
-    m_server = new IRCFramedColorLabel(m_config->readEntry("ServerColor", "#0000FF"), this);
+    m_server = new IRCFramedColorLabel(m_config->readEntry("ServerColor", "#0000FF"), widget);
     layout->addWidget(m_server, 5, 1);
-    label = new QLabel(tr("Notifications :"), this);
+    label = new QLabel(tr("Notifications :"), widget);
     layout->addWidget(label, 6, 0);
-    m_notification = new IRCFramedColorLabel(m_config->readEntry("NotificationColor", "#AAE300"), this);
+    m_notification = new IRCFramedColorLabel(m_config->readEntry("NotificationColor", "#AAE300"), widget);
     layout->addWidget(m_notification, 6, 1);
+    tw->addTab(view, tr("Colors"));
     showMaximized();
 }
 
@@ -56,6 +78,7 @@ void IRCSettings::accept() {
     IRCTab::m_otherColor = getColorString(m_other);
     IRCTab::m_serverColor = getColorString(m_server);
     IRCTab::m_notificationColor = getColorString(m_notification);
+    IRCTab::m_maxLines = m_lines->text().toInt();
     m_config->writeEntry("BackgroundColor", getColorString(m_background));
     m_config->writeEntry("TextColor", getColorString(m_text));
     m_config->writeEntry("ErrorColor", getColorString(m_error));
@@ -63,6 +86,7 @@ void IRCSettings::accept() {
     m_config->writeEntry("OtherColor", getColorString(m_other));
     m_config->writeEntry("ServerColor", getColorString(m_server));
     m_config->writeEntry("NotificationColor", getColorString(m_notification));
+    m_config->writeEntry("Lines", m_lines->text());
     QDialog::accept();
 }
 

@@ -1,6 +1,7 @@
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
 #include <qcursor.h>
+#include <stdio.h>
 #include <qhbox.h>
 #include "ircchanneltab.h"
 #include "ircservertab.h"
@@ -22,11 +23,13 @@ IRCChannelTab::IRCChannelTab(IRCChannel *channel, IRCServerTab *parentTab, MainW
     m_list = new IRCChannelList(m_channel, hbox);
     m_list->update();
     m_list->setMaximumWidth(LISTWIDTH);
-    m_field = new QLineEdit(this);
+    m_field = new IRCHistoryLineEdit(this);
     m_popup = new QPopupMenu(m_list);
+    m_lines = 0;
     /* Required so that embedded-style "right" clicks work */
     QPEApplication::setStylusOperation(m_list->viewport(), QPEApplication::RightOnHold);
     connect(m_list, SIGNAL(mouseButtonPressed(int, QListBoxItem *, const QPoint&)), this, SLOT(mouseButtonPressed(int, QListBoxItem *, const QPoint &)));
+
     /* Construct the popup menu */
     QPopupMenu *ctcpMenu = new QPopupMenu(m_list);
     m_popup->insertItem(Resource::loadPixmap("opieirc/ctcp"), tr("CTCP"), ctcpMenu);
@@ -45,7 +48,16 @@ IRCChannelTab::IRCChannelTab(IRCChannel *channel, IRCServerTab *parentTab, MainW
 
 void IRCChannelTab::appendText(QString text) {
     /* not using append because it creates layout problems */
-    m_textview->setText(m_textview->text() + text);
+    QString txt = m_textview->text() + text + "\n";
+    if (m_maxLines > 0 && m_lines >= m_maxLines) {
+        int firstBreak = txt.find('\n');
+        if (firstBreak != -1) {
+            txt = "<qt bgcolor=\"" + m_backgroundColor + "\"/>" + txt.right(txt.length() - (firstBreak + 1));
+        }
+    } else {
+        m_lines++;
+    }
+    m_textview->setText(txt);
     m_textview->ensureVisible(0, m_textview->contentsHeight());
     emit changed(this);
 }
@@ -76,6 +88,7 @@ void IRCChannelTab::processCommand() {
 
 void IRCChannelTab::settingsChanged() {
     m_textview->setText("<qt bgcolor=\"" + m_backgroundColor + "\"/>");
+    m_lines = 0;
 }
 
 void IRCChannelTab::toggleList() {

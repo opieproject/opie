@@ -36,10 +36,11 @@ void MainWindow::loadSettings() {
     IRCTab::m_otherColor = config.readEntry("OtherColor", "#0000BB");
     IRCTab::m_serverColor = config.readEntry("ServerColor", "#0000FF");
     IRCTab::m_notificationColor = config.readEntry("NotificationColor", "#AA3300");
+    IRCTab::m_maxLines = config.readNumEntry("Lines", 100);
 }
 
 void MainWindow::selected(QWidget *) {
-    m_tabWidget->setTabColor(m_tabWidget->currentPageIndex(), &black);
+    m_tabWidget->setTabColor(m_tabWidget->currentPageIndex(), black);
 }
 
 void MainWindow::addTab(IRCTab *tab) {
@@ -52,7 +53,7 @@ void MainWindow::addTab(IRCTab *tab) {
 
 void MainWindow::changeEvent(IRCTab *tab) {
     if (tab->id() != m_tabWidget->currentPageIndex())
-        m_tabWidget->setTabColor(tab->id(), &blue);
+        m_tabWidget->setTabColor(tab->id(), blue);
 }
 
 void MainWindow::killTab(IRCTab *tab) {

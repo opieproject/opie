@@ -26,6 +26,7 @@
 #include "mainwindow.h"
 #include "ircchanneltab.h"
 #include "ircquerytab.h"
+#include "ircmisc.h"
 
 class IRCServerTab : public IRCTab {
     Q_OBJECT
@@ -58,12 +59,13 @@ public slots:
 protected slots:
     void display(IRCOutput output);
 protected:
+    int                   m_lines;
     bool                  m_close;
     IRCServer             m_server;
     IRCSession           *m_session;
     MainWindow           *m_mainWindow;
     QTextView            *m_textview;
-    QLineEdit            *m_field;
+    IRCHistoryLineEdit   *m_field;
     /* Channel tabs associated with this server tab */
     QList<IRCChannelTab>  m_channelTabs;
     /* Query tabs associated with this server tab */

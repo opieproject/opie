@@ -10,7 +10,7 @@ QString IRCTab::m_backgroundColor;
 QString IRCTab::m_selfColor;
 QString IRCTab::m_otherColor;
 QString IRCTab::m_notificationColor;
-
+int IRCTab::m_maxLines;
 
 IRCTab::IRCTab(QWidget *parent, const char *name, WFlags f) : QWidget(parent, name, f) {
     m_layout = new QVBoxLayout(this);

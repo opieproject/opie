@@ -22,10 +22,11 @@
 #define __IRCMISC_H
 
 #include <qtabwidget.h>
+#include <qlineedit.h>
 #include <qtabbar.h>
 #include <qlabel.h>
 #include <qcolor.h>
-#include <qvector.h>
+#include <qarray.h>
 
 /* IRCFramedColorLabel is used to display a color */
 
@@ -50,23 +51,41 @@ protected:
 
 /* Custom colored QTabWidget */
 
+class QExtTab : public QTab {
+public:
+    QColor color;
+};
+
 class IRCTabWidget : public QTabWidget {
     Q_OBJECT
 public:
     IRCTabWidget(QWidget *parent = 0, const char *name = 0);
-    void setTabColor(int index, const QColor *color);
+    void setTabColor(int index, QColor color);
 };
 
 class IRCTabBar : public QTabBar {
     Q_OBJECT
 public:
     IRCTabBar(QWidget *parent = 0, const char *name = 0);
-    void setTabColor(int index, const QColor *color);
+    void setTabColor(int index, QColor color);
 protected:
     void paintLabel(QPainter*, const QRect&, QTab*, bool) const;
     int insertTab(QTab *, int index = -1);
 protected:
-    QVector<QColor> m_colors;
+    QArray<QColor> m_colors;
+};
+
+/* A QLineEdit with history functionality */
+
+class IRCHistoryLineEdit : public QLineEdit {
+    Q_OBJECT
+public:
+    IRCHistoryLineEdit(QWidget *parent = 0, const char *name = 0);
+protected:
+    void keyPressEvent(QKeyEvent *);
+protected:
+    QStringList m_history;
+    int         m_index;
 };
 
 #endif /* __IRCMISC_H */

@@ -21,7 +21,7 @@
 #ifndef __IRCVERSION_H
 #define __IRCVERSION_H
 
-#define APP_VERSION "OpieIRC 0.3"
+#define APP_VERSION "OpieIRC 0.4"
 #define APP_COPYSTR "(c) 2002 by Wenzel Jakob"
 
 #endif /* __IRCVERSION_H */

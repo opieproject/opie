@@ -35,6 +35,7 @@ class IRCTab : public QWidget {
     Q_OBJECT
 public:
     IRCTab(QWidget *parent = 0, const char *name = 0, WFlags f = 0);
+    /* The ID is required to store the position of this IRCTab inside the IRCTabWidget */
     void setID(int id);
     int id();
     virtual QString title() = 0;
@@ -58,6 +59,8 @@ public:
     static QString m_selfColor;
     static QString m_otherColor;
     static QString m_notificationColor;
+    /* Max number of lines to be displayed */
+    static int m_maxLines;
 };
 
 #endif /* __IRCTAB_H */

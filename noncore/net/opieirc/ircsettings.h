@@ -23,6 +23,7 @@
 
 #include <qpe/config.h>
 #include <qdialog.h>
+#include <qlineedit.h>
 
 class IRCSettings : public QDialog {
     Q_OBJECT
@@ -33,14 +34,15 @@ public:
 protected slots:
     void accept();
 protected:
-    Config  *m_config;
-    QWidget *m_background;
-    QWidget *m_text;
-    QWidget *m_error;
-    QWidget *m_self;
-    QWidget *m_server;
-    QWidget *m_other;
-    QWidget *m_notification;
+    Config    *m_config;
+    QWidget   *m_background;
+    QWidget   *m_text;
+    QWidget   *m_error;
+    QWidget   *m_self;
+    QWidget   *m_server;
+    QWidget   *m_other;
+    QWidget   *m_notification;
+    QLineEdit *m_lines;
 };
 
 #endif /* __IRCSETTINGS_H */

@@ -7,13 +7,14 @@ IRCServerTab::IRCServerTab(IRCServer server, MainWindow *mainWindow, QWidget *pa
     m_session = new IRCSession(&m_server);
     m_mainWindow = mainWindow;
     m_close = FALSE;
+    m_lines = 0;
     m_description->setText(tr("Connection to")+" <b>" + server.hostname() + ":" + QString::number(server.port()) + "</b>");
     m_textview = new QTextView(this);
     m_textview->setHScrollBarMode(QScrollView::AlwaysOff);
     m_textview->setVScrollBarMode(QScrollView::AlwaysOn);
     m_textview->setTextFormat(RichText);
     m_layout->add(m_textview);
-    m_field = new QLineEdit(this);
+    m_field = new IRCHistoryLineEdit(this);
     m_layout->add(m_field);
     connect(m_field, SIGNAL(returnPressed()), this, SLOT(processCommand()));
     m_field->setFocus();
@@ -23,7 +24,16 @@ IRCServerTab::IRCServerTab(IRCServer server, MainWindow *mainWindow, QWidget *pa
 
 void IRCServerTab::appendText(QString text) {
     /* not using append because it creates layout problems */
-    m_textview->setText(m_textview->text() + text);
+    QString txt = m_textview->text() + text + "\n";
+    if (m_maxLines > 0 && m_lines >= m_maxLines) {
+        int firstBreak = txt.find('\n');
+        if (firstBreak != -1) {
+            txt = "<qt bgcolor=\"" + m_backgroundColor + "\"/>" + txt.right(txt.length() - (firstBreak + 1));
+        }
+    } else {
+        m_lines++;
+    }
+    m_textview->setText(txt);
     m_textview->ensureVisible(0, m_textview->contentsHeight());
     emit changed(this);
 }
@@ -58,6 +68,7 @@ IRCServer *IRCServerTab::server() {
 
 void IRCServerTab::settingsChanged() {
     m_textview->setText("<qt bgcolor=\"" + m_backgroundColor + "\"/>");
+    m_lines = 0;
 }
 
 void IRCServerTab::executeCommand(IRCTab *tab, QString line) {

@@ -21,8 +21,9 @@
 #ifndef __IRCQUERYTAB_H
 #define __IRCQUERYTAB_H
 
-#include "ircsession.h"
 #include "mainwindow.h"
+#include "ircsession.h"
+#include "ircmisc.h"
 
 class IRCServerTab;
 class IRCQueryTab : public IRCTab {
@@ -46,7 +47,8 @@ protected:
     IRCServerTab         *m_parentTab;
     IRCPerson            *m_person;
     QTextView            *m_textview;
-    QLineEdit            *m_field;
+    IRCHistoryLineEdit   *m_field;
+    int                   m_lines;
 };
 
 #endif /* __IRCQUERYTAB_H */

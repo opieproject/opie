@@ -25,6 +25,7 @@
 #include <qpushbutton.h>
 #include "irctab.h"
 #include "ircsession.h"
+#include "ircmisc.h"
 #include "mainwindow.h"
 #include "ircchannellist.h"
 
@@ -56,15 +57,16 @@ protected slots:
     void popupVersion();
     void popupWhois();
 protected:
-    IRCServerTab   *m_parentTab;
-    IRCChannel     *m_channel;
-    IRCChannelList *m_list;
-    QPushButton    *m_listButton;
-    MainWindow     *m_mainWindow;
-    QTextView      *m_textview;
-    QLineEdit      *m_field;
-    QPopupMenu     *m_popup;
-    bool            m_listVisible;
+    IRCServerTab       *m_parentTab;
+    IRCChannel         *m_channel;
+    IRCChannelList     *m_list;
+    QPushButton        *m_listButton;
+    MainWindow         *m_mainWindow;
+    QTextView          *m_textview;
+    IRCHistoryLineEdit *m_field;
+    QPopupMenu         *m_popup;
+    bool                m_listVisible;
+    int                 m_lines;
 };
 
 #endif /* __IRCCHANNELTAB_H */

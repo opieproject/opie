@@ -5,6 +5,7 @@
 IRCQueryTab::IRCQueryTab(IRCPerson *person, IRCServerTab *parentTab, MainWindow *mainWindow, QWidget *parent, const char *name, WFlags f) : IRCTab(parent, name, f) {
     m_mainWindow = mainWindow;
     m_parentTab = parentTab;
+    m_lines = 0;
     m_person = new IRCPerson(*person); /* We need this (the person might sign off and the original IRCPerson gets deleted) */
     m_description->setText(tr("Talking to ") + " <b>" + person->nick() + "</b>");
     QHBox *hbox = new QHBox(this);
@@ -12,7 +13,7 @@ IRCQueryTab::IRCQueryTab(IRCPerson *person, IRCServerTab *parentTab, MainWindow 
     m_textview->setHScrollBarMode(QScrollView::AlwaysOff);
     m_textview->setVScrollBarMode(QScrollView::AlwaysOn);
     m_textview->setTextFormat(RichText);
-    m_field = new QLineEdit(this);
+    m_field = new IRCHistoryLineEdit(this);
     m_layout->add(hbox);
     hbox->show();
     m_layout->add(m_field);
@@ -23,7 +24,16 @@ IRCQueryTab::IRCQueryTab(IRCPerson *person, IRCServerTab *parentTab, MainWindow 
 
 void IRCQueryTab::appendText(QString text) {
     /* not using append because it creates layout problems */
-    m_textview->setText(m_textview->text() + text);
+    QString txt = m_textview->text() + text + "\n";
+    if (m_maxLines > 0 && m_lines >= m_maxLines) {
+        int firstBreak = txt.find('\n');
+        if (firstBreak != -1) {
+            txt = "<qt bgcolor=\"" + m_backgroundColor + "\"/>" + txt.right(txt.length() - (firstBreak + 1));
+        }
+    } else {
+        m_lines++;
+    }
+    m_textview->setText(txt);
     m_textview->ensureVisible(0, m_textview->contentsHeight());
     emit changed(this);
 }
@@ -63,6 +73,7 @@ void IRCQueryTab::display(IRCOutput output) {
 
 void IRCQueryTab::settingsChanged() {
     m_textview->setText("<qt bgcolor=\"" + m_backgroundColor + "\"/>");
+    m_lines = 0;
 }
 
 QString IRCQueryTab::title() {
