@@ -66,7 +66,7 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     hb1->setSpacing( 2 );
 
     QLabel *palmtopLogo = new QLabel( this );
-    QImage logo1 = Resource::loadImage( "qpe-logo" );
+    QImage logo1 = Resource::loadImage( "opielogo" );
     logo1 = logo1.smoothScale( 50, 55 );
     QPixmap logo1Pixmap;
     logo1Pixmap.convertFromImage( logo1 );
