@@ -665,7 +665,7 @@ void PlayListWidget::openFile() {
     QStringList audio, video, all;
     audio << "audio/*";
     audio << "playlist/plain";
-    audio << "application/ogg";
+    audio << "audio/x-ogg";
     audio << "audio/x-mpegurl";
 
     video << "video/*";
