@@ -51,8 +51,8 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags /*fl*/ )
                                    new sword::MarkupFilterMgr( sword::FMT_HTMLHREF ) );
 
     // Retrieve list of available Sword module options (e.g. footnotes, Strong's numbers, etc.)
-    sword::OptionsList swordOpts = m_swordMgr->getGlobalOptions();
-    for ( sword::OptionsList::iterator it = swordOpts.begin(); it != swordOpts.end(); it++ )
+    sword::StringList swordOpts = m_swordMgr->getGlobalOptions();
+    for ( sword::StringList::iterator it = swordOpts.begin(); it != swordOpts.end(); it++ )
         m_actionSwordOpts.append( new QAction( (*it).c_str(), QString::null, 0, this, 0 ) );
     m_actionSwordOpts.sort();
 
