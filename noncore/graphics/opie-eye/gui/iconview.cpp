@@ -242,6 +242,10 @@ void PIconView::initKeys() {
                                                 Resource::loadPixmap("DocumentTypeWord"), InfoItem,
                                                 Opie::Core::OKeyPair(Qt::Key_I, Qt::ShiftButton ),
                                                 this, SLOT(slotImageInfo()) ) );
+    m_viewManager->addKeyConfig( OKeyConfigItem(tr("Start slideshow"), "slideshow",
+                                                Resource::loadPixmap("1to1"), SlideItem,
+                                                Opie::Core::OKeyPair(Qt::Key_S, Qt::ShiftButton),
+                                                this, SLOT(slotStartSlide())));
     m_viewManager->load();
     m_viewManager->handleWidget( m_view );
 }
@@ -564,11 +568,76 @@ void PIconView::slotEnd() {
     m_updatet = false;
 }
 
+void PIconView::slotShowLast()
+{
+    QIconViewItem* last_it = m_view->lastItem();
+    if (!last_it) return;
+    m_view->setCurrentItem(last_it);
+    IconViewItem* it = static_cast<IconViewItem*>( last_it );
+    bool isDir = it->isDir();
+    QString name = it->path();
+    if (!isDir && !name.isEmpty()) {
+        slotShowImage(name);
+        return;
+    }
+    bool first_loop = true;
+    while(isDir==true) {
+        if (!first_loop) {
+            m_view->setCurrentItem(m_view->currentItem()->prevItem());
+        } else {
+            first_loop = false;
+        }
+        name = prevFileName(isDir);
+    }
+
+    if (name.isEmpty()) return;
+    /* if we got a name we have a prev item */
+    m_view->setCurrentItem(m_view->currentItem()->prevItem());
+    slotShowImage(name);
+}
+
+bool PIconView::slotShowFirst()
+{
+    /* stop when reached - otherwise we may get an endless loop */
+    QIconViewItem* first_it = m_view->firstItem();
+    if (!first_it) return false;
+    m_view->setCurrentItem(first_it);
+    IconViewItem* it = static_cast<IconViewItem*>( first_it );
+    bool isDir = it->isDir();
+    QString name = it->path();
+    if (!isDir && !name.isEmpty()) {
+        slotShowImage(name);
+        return false;
+    }
+    bool first_loop = true;
+    while(isDir==true) {
+        /* if name is empty isDir is false, too. */
+        if (!first_loop) {
+            m_view->setCurrentItem(m_view->currentItem()->nextItem());
+        } else {
+            first_loop = false;
+        }
+        name = nextFileName(isDir);
+    }
+    if (name.isEmpty()) return false;
+    /* if we got a name we have a next item */
+    m_view->setCurrentItem(m_view->currentItem()->nextItem());
+    slotShowImage(name);
+    return true;
+}
+
 void PIconView::slotShowNext()
 {
     bool isDir = false;
     QString name = nextFileName(isDir);
-    if (name.isEmpty()) return;
+    while (isDir==true) {
+        m_view->setCurrentItem(m_view->currentItem()->nextItem());
+        name = nextFileName(isDir);
+    }
+    if (name.isEmpty()) {
+        slotShowFirst();
+        return;
+    }
     if (isDir) return;
     /* if we got a name we have a next item */
     m_view->setCurrentItem(m_view->currentItem()->nextItem());
@@ -579,7 +648,15 @@ void PIconView::slotShowPrev()
 {
     bool isDir = false;
     QString name = prevFileName(isDir);
-    if (name.isEmpty()) return;
+    while (isDir==true) {
+        /* if name is empty isDir is false, too. */
+        m_view->setCurrentItem(m_view->currentItem()->prevItem());
+        name = prevFileName(isDir);
+    }
+    if (name.isEmpty()) {
+        slotShowLast();
+        return;
+    }
     if (isDir) return;
     /* if we got a name we have a prev item */
     m_view->setCurrentItem(m_view->currentItem()->prevItem());
@@ -598,6 +675,19 @@ void PIconView::slotShowImage( const QString& name) {
     QString r_name = lister->nameToFname(name);
     emit sig_display( r_name );
 }
+
+void PIconView::slotStartSlide() {
+    bool isDir = false;
+    QString name = currentFileName(isDir);
+    if (isDir) {
+        if (!slotShowFirst())
+            return;
+    } else {
+        slotShowImage( name );
+    }
+    emit sig_startslide(2);
+}
+
 void PIconView::slotImageInfo() {
     bool isDir = false;
     QString name = currentFileName(isDir);

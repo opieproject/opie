@@ -7,6 +7,7 @@
 #include <qpe/resource.h>
 #include <qpe/qpeapplication.h>
 #include <qpopupmenu.h>
+#include <qtimer.h>
 
 using namespace Opie::Core;
 
@@ -18,8 +19,10 @@ ImageView::ImageView(Opie::Core::OConfig *cfg, QWidget* parent, const char* name
     m_cfg = cfg;
     m_isFullScreen = false;
     m_ignore_next_in = false;
+    m_slideTimer = 0;
     QPEApplication::setStylusOperation(viewport(),QPEApplication::RightOnHold);
     initKeys();
+    m_slideValue = 5;
 }
 
 ImageView::~ImageView()
@@ -36,6 +39,29 @@ Opie::Core::OKeyConfigManager* ImageView::manager()
     return m_viewManager;
 }
 
+void ImageView::startSlide(int value)
+{
+    if (!m_slideTimer) {
+        m_slideTimer = new QTimer(this);
+    }
+    m_slideValue=value;
+    connect(m_slideTimer,SIGNAL(timeout()),SLOT(nextSlide()));
+    m_slideTimer->start(m_slideValue*1000,true);
+}
+
+void ImageView::nextSlide()
+{
+    if (!m_slideTimer) {
+        return;
+    }
+    if (isHidden()) {
+        delete m_slideTimer;
+        m_slideTimer = 0;
+        return;
+    }
+    emit dispNext();
+    m_slideTimer->start(m_slideValue*1000,true);
+}
 void ImageView::initKeys()
 {
     odebug << "init imageview keys" << oendl;
@@ -139,7 +165,7 @@ void ImageView::setFullScreen(bool how)
         setFixedSize(qApp->desktop()->size());
         showFullScreen();
     } else {
-	setMinimumSize(10,10);
+        setMinimumSize(10,10);
     }
 }
 

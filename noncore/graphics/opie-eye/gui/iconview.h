@@ -27,7 +27,7 @@ class PIconView : public QVBox {
     Q_OBJECT
     friend class PIconViewItem;
     enum ActionIds {
-        BeamItem, DeleteItem, ViewItem, InfoItem
+        BeamItem, DeleteItem, ViewItem, InfoItem,SlideItem
     };
 public:
     PIconView( QWidget* wid, Opie::Core::OConfig *cfg );
@@ -38,10 +38,13 @@ public:
 signals:
     void sig_showInfo( const QString& );
     void sig_display( const QString& );
+    void sig_startslide(int timeout);
 
 public slots:
     virtual void slotShowNext();
     virtual void slotShowPrev();
+    virtual void slotShowLast();
+    virtual bool slotShowFirst();
 
 protected:
     void resizeEvent( QResizeEvent* );
@@ -68,6 +71,7 @@ private slots:
     void slotShowImage( const QString& );
     void slotImageInfo();
     void slotImageInfo( const QString& );
+    void slotStartSlide();
 
     void slotStart();
     void slotEnd();

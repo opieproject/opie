@@ -311,6 +311,7 @@ void PMainWindow::initDisp() {
         connect(m_disp,SIGNAL(toggleZoomer()),this,SLOT(slotToggleZoomer()));
         connect(m_disp,SIGNAL(toggleAutoscale()),this,SLOT(slotToggleAutoscale()));
         connect(m_disp,SIGNAL(toggleAutorotate()),this,SLOT(slotToggleAutorotate()));
+        connect(m_view,SIGNAL(sig_startslide(int)),m_disp,SLOT(startSlide(int)));
     }
 }
 

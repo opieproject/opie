@@ -5,6 +5,8 @@
 
 #include <qwidget.h>
 
+class QTimer;
+
 namespace Opie {
     namespace Core {
         class OConfig;
@@ -51,10 +53,14 @@ protected:
     bool m_isFullScreen:1;
     bool m_ignore_next_in:1;
     int focus_in_count;
+    QTimer*m_slideTimer;
+    int m_slideValue;
     virtual void focusInEvent ( QFocusEvent * );
 
 public slots:
     virtual void hide();
+    virtual void startSlide(int);
+    virtual void nextSlide();
 
 protected slots:
     virtual void slotShowImageInfo();
