@@ -1,7 +1,0 @@
-sqltest
-Makefile*
-moc*
-*moc
-*.o
-~*
-obj
