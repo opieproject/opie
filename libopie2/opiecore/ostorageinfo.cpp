@@ -61,7 +61,8 @@ QString OStorageInfo::sdPath()const
 
     for (QListIterator<FileSystem> i( fileSystems() ); i.current(); ++i)
     {
-        if ( (*i)->disk().left( 9 ) == "/dev/mmcd" )
+        if ( (*i)->disk().left( 9 ) == "/dev/mmcd" ||
+             (*i)->disk().left( 14 ) == "/dev/mmc/part1" )
         {
             r = (*i)->path();
             break;
