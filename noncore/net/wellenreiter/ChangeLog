@@ -12,13 +12,13 @@
 
 	* Released as Version 1.0.1 (Development Snapshot)
 	* Fixed ARP decoding for wired networks.
-          Interestingly, 802.11 encapsulates these in IP packets, while wired ethernet just tags the type_of_protocol.
+	  Interestingly, 802.11 encapsulates these in IP packets, while wired ethernet just tags the type_of_protocol.
 	* Added reading GPS data from a gps daemon.
 	* Started preparations for utilizing Wellenreiter II in wired networks.
 	* Implemented persistant configuration interface and retriggerable auto detection.
 	* Added QCOP interface for talking to opie-networksettings.
 	* Added parsing of DHCP packets and detecting DHCP servers.
-        * Overhauled the configuration window and started with the customizable event system.
+	* Overhauled the configuration window and started with the customizable event system.
 	* Added disabling the screensaver.
 	* Added automatic opening and scrolling to the network tree if a new station appears.
 

@@ -5,11 +5,24 @@
 
 - decloaking of falsely reported zero-length SSIDs
 
-- option to run skript on
+- option to launch an external application (i.e. qcop) on
   - new net
   - new station
-  - <whatever>
+  - <whatever> event
 
 - adaptive hopping scheme !
 
-- 
+- display interface capabilities
+
+- enable sniffing in wired networks
+
+- enable multiple packet sources
+  - infrared
+  - bluetooth
+  - usb?
+
+- define packet structure in a metalanguage and generate
+  the actual parsing code (hmmm)
+
+- pester the ethereal folks to settle for an application independant
+  packet dissection framework... (unlikely)

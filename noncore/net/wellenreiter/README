@@ -31,6 +31,8 @@ packages for Qt3/X11, depending on the distribution e.g. libqt3-devel, libqt3-de
  * as root, './build install'
  * Wellenreiter will be installed in /usr/local (sorry, no relocation possible yet)
 
+The current CVS version of Wellenreiter II is _not_ X11 compatible.
+
 =====================
 = Precompiled Binaries
 =====================
@@ -51,7 +53,7 @@ if your device has been properly configured.
 =     Credits       =
 =====================
 
-Wellenreiter II is (C) 2002-2003 Michael 'Mickey' Lauer
+Wellenreiter II is (C) 2002-2004 Michael 'Mickey' Lauer
 
 Additional Ideas, the Name, and the Logo by
 Max Moser        <max@remote-exploit.org>
