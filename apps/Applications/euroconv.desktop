@@ -1,0 +1,10 @@
+[Desktop Entry]
+Comment=An Euro converter
+Comment[fr]=Un convertisseur Euro
+Exec=euroconv
+Icon=euroconv/euroconv
+Type=Application
+Name=Euroconv
+Name[fr]=Euroconv
+Name[de]=Euroconv
+

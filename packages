@@ -6,6 +6,7 @@ CONFIG_CHESS	noncore/games/chess	chess.pro
 CONFIG_CONVERTER	noncore/unsupported/opiemail/converter	converter.pro
 CONFIG_DIALUP	noncore/unsupported/netsetup/dialup	dialup.pro
 CONFIG_DICTIONARY	noncore/apps/dictionary	dictionary.pro
+CONFIG_EUROCONV		noncore/tools/euroconv/ euroconv.pro
 CONFIG_GSMTOOL	noncore/comm/gsmtool	gsmtool.pro
 CONFIG_KEYVIEW	development/keyview	keyview.pro
 CONFIG_LAN	noncore/unsupported/netsetup/lan	lan.pro
