@@ -11,7 +11,7 @@
  ************************************************************************************/
 // copyright 2002 Jeremy Cowgar <jc@cowgar.com>
 /*
- * $Id: vmemo.cpp,v 1.32 2002-06-23 13:30:55 llornkcor Exp $
+ * $Id: vmemo.cpp,v 1.33 2002-06-23 13:46:45 llornkcor Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 #include <sys/utsname.h>
@@ -408,6 +408,8 @@ int VMemo::openDSP()
     perror("ioctl(\"SOUND_PCM_READ_RATE\")");
     return -1;
   }
+
+  QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << FALSE; //mute
   
   return 1;
 }
@@ -453,86 +455,89 @@ void VMemo::record(void)
 
   if(systemZaurus) {
 
-  msg.sprintf("Recording format zaurus");
-  qDebug(msg);
+    msg.sprintf("Recording format zaurus");
+    qDebug(msg);
     signed short sound[512], monoBuffer[512];
 
     if(format==AFMT_S16_LE)  {
+
+
 
       while(recording)   {
 
         result = read(dsp, sound, 512); // 8192
         int j=0;
 
-        if(systemZaurus) {
-          for (int i = 0; i < result; i++) { //since Z is mono do normally
-            monoBuffer[i] = sound[i];
-          }
-
-          length+=write(wav, monoBuffer, result);
-          if(length<0)
-            recording=false;
-
-        } else { //ipaq /stereo inputs
-
-
-          for (int i = 0; i < result; i+=2) {
-            monoBuffer[j] = sound[i];
-            //            monoBuffer[j] = (sound[i]+sound[i+1])/2;
-
-            j++;
-          }
-
-          length+=write(wav, monoBuffer, result);
-          if(length<0)
-            recording=false;
-          //          length+=write(wav, monoBuffer, result/2);
+        //        if(systemZaurus) {
+        for (int i = 0; i < result; i++) { //since Z is mono do normally
+          monoBuffer[i] = sound[i];
         }
+
+        length+=write(wav, monoBuffer, result);
+        if(length<0)
+          recording=false;
+
+        //         } else { //ipaq /stereo inputs
+
+
+        //           for (int i = 0; i < result; i+=2) {
+        //             monoBuffer[j] = sound[i];
+        //             //            monoBuffer[j] = (sound[i]+sound[i+1])/2;
+
+        //             j++;
+        //           }
+
+        //           length+=write(wav, monoBuffer, result);
+        //           if(length<0)
+        //             recording=false;
+        //           //          length+=write(wav, monoBuffer, result/2);
+        //         }
         qApp->processEvents();
-//                 printf("%d\r",length);
-//                 fflush(stdout);
+        //                 printf("%d\r",length);
+        //                 fflush(stdout);
       }
     
-} else { //AFMT_U8 
+    } else { //AFMT_U8 
       // 8bit unsigned
       unsigned short sound[512], monoBuffer[512];
       while(recording)   {
         result = read(dsp, sound, 512); // 8192
         int j=0;
 
-        if(systemZaurus) {
+        //        if(systemZaurus) {
 
-          for (int i = 0; i < result; i++) { //since Z is mono do normally
-            monoBuffer[i] = sound[i];
-          }
-
-          length+=write(wav, monoBuffer, result);
-
-        } else { //ipaq /stereo inputs
-
-          for (int i = 0; i < result; i+=2) {
-            monoBuffer[j] = (sound[i]+sound[i+1])/2;
-            j++;
-          }
-
-          length+=write(wav, monoBuffer, result/2);
-
-          if(length<0)
-            recording=false;
-
+        for (int i = 0; i < result; i++) { //since Z is mono do normally
+          monoBuffer[i] = sound[i];
         }
+
+        length+=write(wav, monoBuffer, result);
+
+        //         } else { //ipaq /stereo inputs
+
+        //           for (int i = 0; i < result; i+=2) {
+        //             monoBuffer[j] = (sound[i]+sound[i+1])/2;
+        //             j++;
+        //           }
+
+        //           length+=write(wav, monoBuffer, result/2);
+
+        //           if(length<0)
+        //             recording=false;
+
+        //         }
         length += result;
-//            printf("%d\r",length);
-//               fflush(stdout);
+        //            printf("%d\r",length);
+        //               fflush(stdout);
       }
 
       qApp->processEvents();
     }
 
-  } else { // this is specific for ipaqs that do not have 8 bit capabilities
+  } else { // 16 bit only capabilities
 
-  msg.sprintf("Recording format other");
-  qDebug(msg);
+
+    msg.sprintf("Recording format other");
+    qDebug(msg);
 
     signed short sound[512], monoBuffer[512];
 
@@ -544,12 +549,12 @@ void VMemo::record(void)
       length += result;
       if(length<0) {
 
-            recording=false;
-            perror("dev/dsp's is a lookin' messy");
- QMessageBox::message("Vmemo"," Done1 recording\n"+ fileName);
+        recording=false;
+        perror("dev/dsp's is a lookin' messy");
+        QMessageBox::message("Vmemo"," Done1 recording\n"+ fileName);
       }
-//       printf("%d\r",length);
-//       fflush(stdout);
+      //       printf("%d\r",length);
+      //       fflush(stdout);
       qApp->processEvents();
     }
     //  qDebug("file has length of %d lasting %d seconds",
@@ -579,6 +584,13 @@ void VMemo::record(void)
   //         QMessageBox::message("Vmemo"," Done1 recording\n"+ fileName);
   qDebug("done recording "+fileName);
   QSound::play(Resource::findSound("vmemoe"));
+
+  Config cfg("qpe");
+  cfg.setGroup("Volume");
+  QString foo = cfg.readEntry("Mute","TRUE");
+  if(foo.find("TRUE",0,TRUE) != -1)
+    QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << TRUE; //mute
+
 }
 
 int VMemo::setToggleButton(int tog) {
