@@ -435,18 +435,24 @@ bool LibMadPlugin::open( const QString& path ) {
 
 
     if (path.left( 4 ) == "http" ) {
+        qDebug("Test2");
         // in case of any error we get 0 here
-        if ( !(http_open(path)==0) ) {
+        if ( !(http_open(path) == 0) ) {
+            qDebug("Test3");
             d->input.fd = http_open(path);
+        } else {
+            qDebug("Test5");
+            return FALSE;
         }
     } else {
+        qDebug("Test4");
         d->input.path = path.latin1();
         d->input.fd = ::open( d->input.path, O_RDONLY );
         // thats a better place, since it should only seek for ID3 tags on mp3 files, not streams
         printID3Tags();
     }
     if (d->input.fd == -1) {
-//        qDebug("error opening %s", d->input.path );
+        qDebug("error opening %s", d->input.path );
   return FALSE;
     }
 
