@@ -49,7 +49,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
 
 
   qDebug("creating settingList");
-  settingList = new ListViewConfDir( QString(getenv("HOME")) + "/Settings", this, "settingslist");
+  settingList = new ListViewConfDir( QDir::homeDirPath() + "/Settings", this, "settingslist");
   settingList->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));//, sizePolicy().hasHeightForWidth() ) );
   mainLayout->addWidget( settingList, 0);
 
