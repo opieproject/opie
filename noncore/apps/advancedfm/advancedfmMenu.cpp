@@ -828,8 +828,9 @@ void AdvancedFm::okRename() {
       QMessageBox::message(tr("Note"),tr("Could not rename"));
    else
       oldName = "";
-   view->takeItem( view->currentItem() );
-   delete view->currentItem();
+   QListViewItem *item = view->currentItem();
+   view->takeItem( item );
+   delete item;
      rePopulate();
 }
 
