@@ -143,11 +143,13 @@ void TabsSettings::readTabSettings ( Config &cfg )
 	global_def. m_font_italic = false;
 	global_def. m_changed     = false;
 
+	Config cfg2 = Config( "Launchersettings" );
 
 	for ( QStringList::Iterator it = m_ids. begin ( ); it != m_ids. end ( ); ++it ) {
 		TabConfig tc = ( it != m_ids. begin ( )) ? m_tabs [GLOBALID] : global_def;
 
 		cfg. setGroup ( grp. arg ( *it ));
+		cfg2. setGroup( grp. arg ( *it ));
 
 		QString view = cfg. readEntry ( "View" );
 		if ( view == "Icon" ) // No tr
@@ -164,6 +166,7 @@ void TabsSettings::readTabSettings ( Config &cfg )
 			tc. m_bg_type = TabConfig::Image;
 
 		tc. m_bg_image = cfg. readEntry ( "BackgroundImage", tc. m_bg_image );
+		tc. m_last_directory = cfg2.readEntry( "DefaultDir", "" );
 		tc. m_bg_color = cfg. readEntry ( "BackgroundColor", tc. m_bg_color );
 		tc. m_text_color = cfg. readEntry ( "TextColor", tc. m_text_color );
 		QStringList f = cfg. readListEntry ( "Font", ',' );
@@ -200,6 +203,7 @@ void TabsSettings::readTabSettings ( Config &cfg )
 void TabsSettings::accept ( )
 {
 	Config cfg ( "Launcher" );
+	Config cfg2 ( "Launchersettings" );
 
 	// Launcher Tab
 	QString grp ( "Tab %1" ); // No tr
@@ -211,6 +215,7 @@ void TabsSettings::accept ( )
 			continue;
 
 		cfg. setGroup ( grp. arg ( *it ));
+		cfg2. setGroup ( grp. arg ( *it ));
 		switch ( tc. m_view ) {
 			case TabConfig::Icon:
 				cfg.writeEntry ( "View", "Icon" );
@@ -226,6 +231,7 @@ void TabsSettings::accept ( )
 		cfg. writeEntry ( "BackgroundImage", tc. m_bg_image );
 		cfg. writeEntry ( "BackgroundColor", tc. m_bg_color );
 		cfg. writeEntry ( "TextColor", tc. m_text_color );
+		cfg2. writeEntry ( "DefaultDir", tc.m_last_directory );
 
 		if ( tc. m_font_use ) {
 			QString f = tc. m_font_family + "," + QString::number ( tc. m_font_size ) + "," + QString::number ( tc. m_font_weight ) + "," + ( tc. m_font_italic ? "1" : "0" );

@@ -15,7 +15,7 @@
     =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
   _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU General
 ..}^=.=       =       ;      Public License for more details.
-++=   -.     .`     .:       
+++=   -.     .`     .:
  :     =  ...= . :.=-        You should have received a copy of the GNU
  -.   .:....=;==+<;          General Public License along with this file;
   -_. . .   )=.  =           see the file COPYING. If not, write to the
@@ -28,7 +28,7 @@
 #define __TABCONFIG_H__
 
 struct TabConfig {
-	enum ViewMode {	
+	enum ViewMode {
 		Icon,
 		List
 	};
@@ -40,6 +40,7 @@ struct TabConfig {
 
 	ViewMode       m_view;
 	BackgroundType m_bg_type;
+	QString		m_last_directory;
 	QString        m_bg_image;
 	QString        m_bg_color;
 	QString        m_text_color;
@@ -49,22 +50,22 @@ struct TabConfig {
 	int            m_font_weight;
 	bool           m_font_italic;
 	bool           m_changed;
-	
+
 	bool operator == ( const TabConfig &tc )
 	{
-		return ( m_view == tc. m_view ) && 
+		return ( m_view == tc. m_view ) &&
 		       ( m_bg_type == tc. m_bg_type ) &&
 		       ( m_bg_image == tc. m_bg_image ) &&
 		       ( m_bg_color == tc. m_bg_color ) &&
 		       ( m_text_color == tc. m_text_color ) &&
-		       ( m_font_use == tc. m_font_use ) && 
+		       ( m_font_use == tc. m_font_use ) &&
 		       ( m_font_use ? (
 		         ( m_font_family == tc. m_font_family ) &&
 		         ( m_font_size == tc. m_font_size ) &&
 		         ( m_font_weight == tc. m_font_weight ) &&
 		         ( m_font_italic == tc. m_font_italic )
 		        ) : true );
-		        
+
 	}
 };
 

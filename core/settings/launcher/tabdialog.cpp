@@ -28,12 +28,16 @@
 #include "tabdialog.h"
 
 /* OPIE */
-#include <qpe/resource.h>
+
 #include <opie2/ofontselector.h>
 #include <opie2/otabwidget.h>
 #include <opie2/ocolorbutton.h>
 #include <opie2/ofiledialog.h>
 #include <opie2/odebug.h>
+
+/* QPE */
+#include <qpe/resource.h>
+#include <qpe/qpeapplication.h>
 
 /* QT */
 #include <qlayout.h>
@@ -42,6 +46,7 @@
 #include <qiconview.h>
 #include <qapplication.h>
 #include <qlabel.h>
+#include <qfileinfo.h>
 #include <qradiobutton.h>
 #include <qbuttongroup.h>
 #include <qwhatsthis.h>
@@ -414,9 +419,6 @@ QWidget *TabDialog::createIconTab ( QWidget *parent )
 
     connect ( m_iconsize, SIGNAL( clicked(int)), this, SLOT( iconSizeClicked(int)));
 
-//  vertLayout-> addSpacing ( 8 );
-
-//  gridLayout = new QGridLayout ( vertLayout );
     gridLayout-> addRowSpacing ( 2, 8 );
 
     label = new QLabel ( tr( "Color:" ), tab );
@@ -427,6 +429,10 @@ QWidget *TabDialog::createIconTab ( QWidget *parent )
     gridLayout-> addWidget ( m_iconcolor, 3, 1, AlignLeft );
 
     vertLayout-> addStretch ( 10 );
+
+    if ( m_tc.m_last_directory == QString::null ) {
+    	m_tc.m_last_directory = QPEApplication::documentDir();
+    }
 
     return tab;
 }
@@ -480,8 +486,10 @@ void TabDialog::bgImageClicked ( )
     list << "image/*";
     types. insert ( "Images", list );
 
-    QString file = OFileDialog::getOpenFileName ( 1, "/", QString::null, types );
+    QString file = OFileDialog::getOpenFileName ( 1, m_tc.m_last_directory, QString::null, types );
+
     if ( !file. isEmpty ( )) {
+    	m_tc.m_last_directory = QFileInfo( file ).dirPath();
         m_bgimage = DocLnk ( file ). file ( );
         bgTypeClicked ( TabConfig::Image );
     }
