@@ -56,7 +56,8 @@ NONCORESETTINGS  =noncore/settings/language noncore/settings/rotation \
 	noncore/settings/mediummount \
 	noncore/settings/tabmanager noncore/settings/appskey \
 	noncore/settings/netsystemtime noncore/settings/wlansetup \
-	noncore/settings/sshkeys noncore/settings/usermanager
+	noncore/settings/sshkeys noncore/settings/usermanager \
+	noncore/apps/backup
 
 NONCORETOOLS = noncore/tools/calculator noncore/tools/clock \
 	 noncore/tools/remote noncore/tools/opie-sh noncore/apps/advancedfm
@@ -79,7 +80,8 @@ GAMES = noncore/games/minesweep noncore/games/solitaire \
 
 NONAPPS = noncore/apps/opie-sheet noncore/apps/tableviewer \
 	noncore/apps/opie-reader noncore/apps/checkbook noncore/apps/oxygen \
-	noncore/apps/sysinfo noncore/net/opieirc noncore/apps/aqpkg\
+	noncore/apps/sysinfo noncore/net/opieirc noncore/apps/aqpkg \
+	noncore/multimedia/opieplayer2 
 	
 NONNET = noncore/net/netsetup noncore/net/opieftp \
 	noncore/mail
