@@ -57,6 +57,7 @@ SearchDialog::SearchDialog( QWidget* parent,  const char* name, bool modal, WFla
     buttonCancel = new QPushButton( this, "buttonCancel" );
     buttonCancel->setText( tr( "&Cancel"  ) );
     buttonCancel->setAutoDefault( TRUE );
+    layout->addMultiCellWidget(buttonCancel, 2, 2, 1, 1);
 //    buttonCancel->setMaximumWidth(40);
 
 
