@@ -3,7 +3,6 @@
 "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
 <!ENTITY about SYSTEM "about/about.sgml">
 <!ENTITY core SYSTEM "core/core.sgml">
-<!ENTITY apps SYSTEM "apps/apps.sgml">
 <!ENTITY fdl SYSTEM "gfdl/fdl.sgml">
 ]>
 <book>
@@ -25,6 +24,5 @@
 </bookinfo>
 &about
 &core
-&apps
 &fdl
 </book>

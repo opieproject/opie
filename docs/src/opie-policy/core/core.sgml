@@ -27,4 +27,43 @@
   </itemizedlist>
   </para>
   </sect1>
+  <sect1 id="librarypolicy"><title>Qtopia Compatibility</title>
+    <para>
+    This section outlines the stance of Opie with regard to compatibility with Qtopia.  Testing must be done on a regular basis to ensure that this is still the case.  Our applications must work in a Qtopia environment, and vice versa.
+    <itemizedlist><title>Primary Declarations</title>
+      <listitem>
+        <para>
+        Binary compatibility is to be retained with Qtopia, in both directions.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+        The libqpe library is not to be altered in such a way that compatibility is broken.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+        Functions may be added to the library, as long as that does not affect compatibility, and as long as said functions are used ONLY internally.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+        Existing functions are not to be altered in an unexpected way.
+        </para>
+      </listitem>
+    </itemizedlist>
+    </para>
+  </sect1>
+  <sect1 id="corevsnoncore"><title>Core/NonCore</title>
+  <para>
+  This section outlines policies and guidelines with regard to the core/noncore seperation.
+  <itemizedlist><title>Primary Declarations</title>
+    <listitem>
+      <para>
+      NULL
+      </para>
+    </listitem>
+  </itemizedlist>
+  </para>
+  </sect1>
 </chapter>
