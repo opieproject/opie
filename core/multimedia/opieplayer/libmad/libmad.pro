@@ -1,6 +1,9 @@
 QMAKE_CFLAGS += $(if $(CONFIG_TARGET_X86),-DFPM_INTEL) \
 		$(if $(CONFIG_TARGET_IPAQ),-DFPM_ARM) \
 		$(if $(CONFIG_TARGET_SHARP),-DFPM_ARM)
+QMAKE_CXXFLAGS += $(if $(CONFIG_TARGET_X86),-DFPM_INTEL) \
+		$(if $(CONFIG_TARGET_IPAQ),-DFPM_ARM) \
+		$(if $(CONFIG_TARGET_SHARP),-DFPM_ARM)
 TEMPLATE 	= lib
 CONFIG   	+=  qt warn_on release
 HEADERS   	= libmad_version.h fixed.h bit.h timer.h stream.h frame.h synth.h decoder.h \
