@@ -418,7 +418,7 @@ bool Zaurus::setDisplayBrightness( int bright )
         int fd = ::open( SHARP_FL_IOCTL_DEVICE, O_WRONLY|O_NONBLOCK );       
         if ( fd )
         {
-            int val = ( numberOfSteps * 255 ) / 255;
+            int val = ( bright * numberOfSteps ) / 255;
             res = ( ::ioctl ( fd, SHARP_FL_IOCTL_STEP_CONTRAST, val ) == 0 );
             ::close ( fd );
         }
