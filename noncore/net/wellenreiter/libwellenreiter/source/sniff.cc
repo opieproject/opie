@@ -1,7 +1,7 @@
 /* 
  *  rfmon mode sniffer
  *
- *  $Id: sniff.cc,v 1.2 2002-12-04 19:51:24 mjm Exp $
+ *  $Id: sniff.cc,v 1.3 2002-12-04 20:41:42 mjm Exp $
  */
 
 #include "sniff.hh"
@@ -116,11 +116,17 @@ void process_packets(const struct pcap_pkthdr *pkthdr, const unsigned char *pack
 		  //		  wl_net.bssid=pinfoptr->ssid;
 		}
 
+	      wl_loginfo("SSID length is: %d", pinfoptr->ssid_len);
 	      wl_net.ssid_len=pinfoptr->ssid_len;
+	    
+              wl_loginfo("Channel is: %d", pinfoptr->channel);
 	      wl_net.channel=pinfoptr->channel;
 	      wl_net.wep=pinfoptr->cap_WEP;
-	      memcpy(wl_net.mac, pinfoptr->sndhwaddr, sizeof(wl_net.mac));;
-	      memcpy(wl_net.bssid, pinfoptr->ssid, sizeof(wl_net.bssid));
+
+	      wl_loginfo("Mac is: %s", pinfoptr->sndhwaddr);
+	      memcpy(wl_net.mac, pinfoptr->sndhwaddr, sizeof(wl_net.mac)-1);;
+	      wl_loginfo("SSID is: %s", pinfoptr->ssid);
+	      memcpy(wl_net.bssid, pinfoptr->ssid, sizeof(wl_net.bssid)-1);
 
 	      //	      printf ("\n\tDest	   : %s\n",pinfoptr->desthwaddr);
 	      send_network_found((char *)guihost, guiport, &wl_net);
