@@ -261,12 +261,14 @@ Non è inserita nei bookmark!</translation>
     <message>
         <source>Really delete %1
 and all it&apos;s contents ?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vuoi veramente eliminare %1
+e tutto il suo contenuto ?</translation>
     </message>
     <message>
         <source>Really delete
 %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vuoi veramente eliminare
+%1?</translation>
     </message>
 </context>
 <context>

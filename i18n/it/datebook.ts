@@ -384,37 +384,37 @@ Uscire comunque?</translation>
     <message>
         <source>Mo</source>
         <comment>Monday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Lun</translation>
     </message>
     <message>
         <source>Tu</source>
         <comment>Tuesday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Mar</translation>
     </message>
     <message>
         <source>We</source>
         <comment>Wednesday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Mer</translation>
     </message>
     <message>
         <source>Th</source>
         <comment>Thursday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gio</translation>
     </message>
     <message>
         <source>Fr</source>
         <comment>Friday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ven</translation>
     </message>
     <message>
         <source>Sa</source>
         <comment>Saturday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Sab</translation>
     </message>
     <message>
         <source>Su</source>
         <comment>Sunday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dom</translation>
     </message>
 </context>
 <context>
