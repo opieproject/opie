@@ -3,11 +3,11 @@
     <name>AbTable</name>
     <message>
         <source>Full Name</source>
-        <translation>Vollständiger Name</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Contact</source>
-        <translation>Kontakt</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Pick</source>
@@ -15,104 +15,108 @@
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>unbestimmt</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>AddressSettings</name>
     <message>
         <source>Name Title</source>
-        <translation>Anrede</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation>Vorname</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation>Nachname</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>File As</source>
-        <translation>Führen als...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation>E-Mailadresse</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation>Notizen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation>Geschlecht</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>AddressSettingsBase</name>
     <message>
         <source>Arrange Edit Fields</source>
-        <translation>Felder anordnen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Select the field order:</source>
-        <translation>Wählen Sie die Reihenfolde der Felder:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Up</source>
-        <translation>Hoch</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Runter</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>AddressbookWindow</name>
     <message>
         <source>Contacts</source>
-        <translation>Kontakte</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Contact</source>
-        <translation>Kontakt</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>New</source>
-        <translation>Neu</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Editieren</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>Suchen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Write Mail To</source>
-        <translation>Schreibe E-Mail an</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Beam Entry</source>
-        <translation>Eintrage senden...</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import vCard</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>My Personal Details</source>
-        <translation>Eigene Daten</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Arrange Edit Fields</source>
-        <translation>Felder anordnen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Out of Space</source>
-        <translation>Nicht genügend Speicherplatz</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>There is not enough space to create
@@ -124,27 +128,43 @@ entering data!</source>
     </message>
     <message>
         <source>View</source>
-        <translation>Ansicht</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Small</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Normal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Large</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Font</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation>Kann die Daten nicht editieren, synchronisiere gerade</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit My Personal Details</source>
-        <translation>Persönliche Daten editieren</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit Address</source>
-        <translation>Adresse Editieren</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Contacts - My Personal Details</source>
-        <translation>Adressbuch - Persönliche Einstellungen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation>Kein Speicherplatz</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unable to save information.
@@ -156,15 +176,15 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Name Title</source>
-        <translation>Anrede</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation>Notizen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Work</source>
-        <translation>Arbeit</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Mb</source>
@@ -172,78 +192,94 @@ Quit anyway?</source>
     </message>
     <message>
         <source>First Name</source>
-        <translation>Vorname</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation>Nachname</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>File As</source>
-        <translation>Führen als...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation>E-Mailadresse</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation>Geschlecht</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>All</source>
-        <translation>Alle</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>unbestimmt</translation>
-    </message>
-    <message>
-        <source>Font</source>
-        <translation>Schrift</translation>
-    </message>
-    <message>
-        <source>Small</source>
-        <translation>Klein</translation>
-    </message>
-    <message>
-        <source>Normal</source>
-        <translation>Normal</translation>
-    </message>
-    <message>
-        <source>Large</source>
-        <translation>Groß</translation>
-    </message>
-    <message>
-        <source>Import vCard</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ContactEditor</name>
     <message>
+        <source>Business Fax</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home Fax</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Business Phone</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home Phone</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Business Mobile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home Mobile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Business WebPage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home Web Page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Business Pager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Default Email</source>
-        <translation>E-Mailadresse</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Emails</source>
-        <translation>2. E-Mailadresse</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Name Title</source>
-        <translation>Anrede</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation>Vorname</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Middle Name</source>
-        <translation>2. Vorname</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation>Nachname</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Suffix</source>
@@ -251,11 +287,11 @@ Quit anyway?</source>
     </message>
     <message>
         <source>File As</source>
-        <translation>Führen als...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation>Geschlecht</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Job Title</source>
@@ -263,51 +299,79 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Company</source>
-        <translation>Firma</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation>Notizen</translation>
-    </message>
-    <message>
-        <source>Groups</source>
-        <translation>Gruppen</translation>
-    </message>
-    <message>
-        <source>City</source>
-        <translation>Stadt</translation>
-    </message>
-    <message>
-        <source>State</source>
-        <translation>Bundesland</translation>
-    </message>
-    <message>
-        <source>Country</source>
-        <translation>Land</translation>
-    </message>
-    <message>
-        <source>Full Name...</source>
-        <translation>Vollständiger Name</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Organization</source>
-        <translation>Organisation</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Business Street</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home Street</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Business City</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Business State</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Business Zip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Business Country</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home City</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home State</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home Zip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home Country</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full Name...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Category</source>
-        <translation>Kategorie</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Notes...</source>
-        <translation>Notizen...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>General</source>
-        <translation>Allgemein</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Business</source>
-        <translation>Geschäft</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Home</source>
@@ -318,72 +382,40 @@ Quit anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>City</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>State</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Zip Code</source>
-        <translation>Postleitzahl</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Country</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>United States</source>
-        <translation>Vereinigte Staaten</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>United Kingdom</source>
-        <translation>Vereingtes Königreich</translation>
-    </message>
-    <message>
-        <source>Japan</source>
-        <translation>Japan</translation>
-    </message>
-    <message>
-        <source>France</source>
-        <translation>Frankreich</translation>
-    </message>
-    <message>
-        <source>Germany</source>
-        <translation>Deutschland</translation>
-    </message>
-    <message>
-        <source>Norway</source>
-        <translation>Norwegen</translation>
-    </message>
-    <message>
-        <source>Canada</source>
-        <translation>Kanada</translation>
-    </message>
-    <message>
-        <source>Male</source>
-        <translation>Männlich</translation>
-    </message>
-    <message>
-        <source>Female</source>
-        <translation>Weiblich</translation>
-    </message>
-    <message>
-        <source>Details</source>
-        <translation>Details</translation>
-    </message>
-    <message>
-        <source>Enter Note</source>
-        <translation>Notiz eingeben</translation>
-    </message>
-    <message>
-        <source>Edit Name</source>
-        <translation>Namen editieren</translation>
-    </message>
-    <message>
-        <source>Contacts</source>
-        <translation>Kontakte</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Afganistan</source>
-        <translation>Afganistan</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Albania</source>
-        <translation>Albanien</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Algeria</source>
-        <translation>Algerien</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>American Samoa</source>
@@ -391,27 +423,27 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Andorra</source>
-        <translation>Andorra</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Angola</source>
-        <translation>Angola</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Anguilla</source>
-        <translation>Anguilla</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Antartica</source>
-        <translation>Antarktis</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Argentina</source>
-        <translation>Argentinien</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Armania</source>
-        <translation>Armenien</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Aruba</source>
@@ -419,11 +451,11 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Australia</source>
-        <translation>Australien</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Austria</source>
-        <translation>Östereich</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Azerbaijan</source>
@@ -431,7 +463,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Bahamas</source>
-        <translation>Bahamas</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Bahrain</source>
@@ -439,7 +471,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Bangladesh</source>
-        <translation>Bangladesch</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Barbados</source>
@@ -447,11 +479,11 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Belarus</source>
-        <translation>Belarus</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Belgium</source>
-        <translation>Belgien</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Belize</source>
@@ -471,11 +503,11 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Boliva</source>
-        <translation>Bolivien</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Botswana</source>
-        <translation>Botswana</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Bouvet Island</source>
@@ -483,7 +515,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Brazil</source>
-        <translation>Brasilien</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Brunei Darussalam</source>
@@ -491,15 +523,15 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Bulgaria</source>
-        <translation>Bulgarien</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Burkina Faso</source>
-        <translation>Burkina Faso</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Burundi</source>
-        <translation>Burundi</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cambodia</source>
@@ -510,32 +542,36 @@ Quit anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Canada</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Cape Verde</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cayman Islands</source>
-        <translation>Cayman Inseln</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Chad</source>
-        <translation>Chad</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Chile</source>
-        <translation>Chile</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>China</source>
-        <translation>China</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Christmas Island</source>
-        <translation>Weinachtsinseln</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Colombia</source>
-        <translation>Kolumbien</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Comoros</source>
@@ -543,39 +579,39 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Congo</source>
-        <translation>Kongo</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cook Island</source>
-        <translation>Cook Inseln</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Costa Rica</source>
-        <translation>Costa Rica</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cote d&apos;Ivoire</source>
-        <translation>Elfenbeinküste</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Croatia</source>
-        <translation>Kroatien</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cuba</source>
-        <translation>Kuba</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cyprus</source>
-        <translation>Zypern</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Czech Republic</source>
-        <translation>Tschechei</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Denmark</source>
-        <translation>Dänemark</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Djibouti</source>
@@ -587,47 +623,47 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Dominican Republic</source>
-        <translation>Dominikanische Republik</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>East Timor</source>
-        <translation>Ost Timor</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ecuador</source>
-        <translation>Equador</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Egypt</source>
-        <translation>Ägypten</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>El Salvador</source>
-        <translation>El Salvador</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Equatorial Guinea</source>
-        <translation>Äquitorial Guinea</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Eritrea</source>
-        <translation>Eritrea</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Estonia</source>
-        <translation>Estland</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ethiopia</source>
-        <translation>Äthopien</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Falkland Islands</source>
-        <translation>Falklandinseln</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Faroe Islands</source>
-        <translation>Farörinseln</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Fiji</source>
@@ -635,11 +671,15 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Finland</source>
-        <translation>Finland</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>France</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>French Guiana</source>
-        <translation>Französisch Guiana</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>French Polynesia</source>
@@ -655,7 +695,11 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Georgia</source>
-        <translation>Georgien</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Germany</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Gahna</source>
@@ -663,19 +707,19 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Gibraltar</source>
-        <translation>Gibraltar</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Greece</source>
-        <translation>Griechenland</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Greenland</source>
-        <translation>Grönland</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Grenada</source>
-        <translation>Grenada</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Guadelupe</source>
@@ -719,23 +763,23 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Hungary</source>
-        <translation>Ungarn</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Iceland</source>
-        <translation>Island</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>India</source>
-        <translation>Indien</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Indonesia</source>
-        <translation>Indonesien</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ireland</source>
-        <translation>Irland</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Israel</source>
@@ -743,10 +787,14 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Italy</source>
-        <translation>Italien</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Jamacia</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Japan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -807,7 +855,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Luxembourg</source>
-        <translation>Luxemburg</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Macau</source>
@@ -907,7 +955,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Netherlands</source>
-        <translation>Niederlande</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>New Caledonia</source>
@@ -915,7 +963,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>New Zealand</source>
-        <translation>Neuseeland</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Nicaragua</source>
@@ -931,6 +979,10 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Niue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Norway</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1087,7 +1139,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Switzerland</source>
-        <translation>Schweiz</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Taiwan</source>
@@ -1123,7 +1175,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Turkey</source>
-        <translation>Türkei</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Turkmenistan</source>
@@ -1159,11 +1211,11 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Viet Nam</source>
-        <translation>Vietnam</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Virgin Islands</source>
-        <translation>Jungfraueninseln</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Western Sahara</source>
@@ -1175,7 +1227,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Yugoslavia</source>
-        <translation>Yogoslavien</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Zambia</source>
@@ -1186,79 +1238,23 @@ Quit anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Business Fax</source>
+        <source>Male</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Home Fax</source>
+        <source>Female</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Business Phone</source>
+        <source>Details</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Home Phone</source>
+        <source>Enter Note</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Business Mobile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Home Mobile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Business WebPage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Home Web Page</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Business Pager</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Business Street</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Home Street</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Business City</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Business State</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Business Zip</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Business Country</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Home City</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Home State</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Home Zip</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Home Country</source>
+        <source>Edit Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1319,6 +1315,10 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Work Web Page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contacts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
