@@ -1,0 +1,12 @@
+diff -ru libetpan-0.32/tools/mailstream_helper.c libetpan-0.32_fixed/tools/mailstream_helper.c
+--- libetpan-0.32/tools/mailstream_helper.c	2003-12-15 04:33:58.000000000 +0100
++++ libetpan-0.32_fixed/tools/mailstream_helper.c	2003-12-23 02:28:20.000000000 +0100
+@@ -352,7 +352,7 @@
+   current = message;
+   remaining = size;
+ 
+-  while (remaining > 0) {
++  while (remaining > 0 && remaining<=size) {
+     ssize_t length;
+   
+     length = send_data_line(s, current, remaining);
