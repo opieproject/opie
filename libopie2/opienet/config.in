@@ -2,6 +2,6 @@
     boolean "libopie2net (network and packet capturing related classes)"
     default "n"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBPCAP_DEP
-    comment "libopie2net needs a libqpe and libopie2core"
+    comment "libopie2net needs a libqpe, libopie2core and libpcap dependency"
     depends !(( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBPCAP_DEP)
 
