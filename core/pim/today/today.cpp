@@ -48,6 +48,8 @@ struct TodayPlugin {
 
 static QValueList<TodayPlugin> pluginList;
 
+static  QMap<QString, TodayPlugin> tempList;
+
 Today::Today( QWidget* parent,  const char* name, WFlags fl )
     : TodayBase( parent, name, fl ) {
 
@@ -66,20 +68,20 @@ Today::Today( QWidget* parent,  const char* name, WFlags fl )
     m_refreshTimer = new QTimer( this );
     connect( m_refreshTimer, SIGNAL( timeout() ), this, SLOT( refresh() ) );
     m_refreshTimer->start( 15000 );
-    big_box = 0L;
+    m_big_box = 0L;
 
 
     layout = new QVBoxLayout( this );
     layout->addWidget( Frame );
     layout->addWidget( OwnerField );
 
-    sv = new QScrollView( this );
-    sv->setResizePolicy( QScrollView::AutoOneFit );
-    sv->setHScrollBarMode( QScrollView::AlwaysOff );
-    sv->setFrameShape( QFrame::NoFrame );
+    m_sv = new QScrollView( this );
+    m_sv->setResizePolicy( QScrollView::AutoOneFit );
+    m_sv->setHScrollBarMode( QScrollView::AlwaysOff );
+    m_sv->setFrameShape( QFrame::NoFrame );
 
-    layout->addWidget( sv );
-    layout->setStretchFactor( sv,4 );
+    layout->addWidget( m_sv );
+    layout->setStretchFactor( m_sv,4 );
 
     qApp->processEvents();
     loadPlugins();
@@ -161,15 +163,13 @@ void Today::init() {
         TodayLabel->show();
     }
 
-    if ( big_box ) {
-        delete big_box;
+    if ( m_big_box ) {
+        delete m_big_box;
     }
 
-    big_box = new QWidget( sv->viewport() );
-    //big_box->setSpacing( 0 );
-    // big_box->setSpacing( 0 );
-    sv->addChild( big_box );
-    bblayout = new QVBoxLayout ( big_box );
+    m_big_box = new QWidget( m_sv->viewport() );
+    m_sv->addChild( m_big_box );
+    m_bblayout = new QVBoxLayout ( m_big_box );
 }
 
 /**
@@ -197,7 +197,7 @@ void Today::loadPlugins() {
     QStringList list = dir.entryList();
     QStringList::Iterator it;
 
-    QMap<QString, TodayPlugin> tempList;
+    //   QMap<QString, TodayPlugin> tempList;
 
     for ( it = list.begin(); it != list.end(); ++it ) {
         QInterfacePtr<TodayPluginInterface> iface;
@@ -241,7 +241,7 @@ void Today::loadPlugins() {
             plugin.excludeRefresh = plugin.guiPart->excludeFromRefresh();
 
             // package the whole thing into a qwidget so it can be shown and hidden
-            plugin.guiBox = new QWidget( big_box );
+            plugin.guiBox = new QWidget( m_big_box );
             QHBoxLayout *boxLayout = new QHBoxLayout( plugin.guiBox );
             QPixmap plugPix;
             plugPix.convertFromImage( Resource::loadImage( plugin.guiPart->pixmapNameWidget() ).smoothScale( m_iconSize, m_iconSize ), 0 );
@@ -276,6 +276,7 @@ void Today::loadPlugins() {
 
     }
 
+
     if ( !m_allApplets.isEmpty() ) {
         TodayPlugin tempPlugin;
         QStringList::Iterator stringit;
@@ -284,13 +285,15 @@ void Today::loadPlugins() {
             tempPlugin = ( tempList.find( *stringit ) ).data();
             if ( !( (tempPlugin.name).isEmpty() ) ) {
                 pluginList.append( tempPlugin );
-                bblayout->addWidget( tempPlugin.guiBox );
+                m_bblayout->addWidget( tempPlugin.guiBox );
             }
         }
     }
-    bblayout->addStretch( 2 );
+    m_bblayout->addStretch( 2 );
     draw();
 }
+
+
 
 
 /**
@@ -384,7 +387,7 @@ void Today::reinitialize()  {
     Config cfg( "today" );
     cfg.setGroup( "Plugins" );
     m_excludeApplets = cfg.readListEntry( "ExcludeApplets", ',' );
-
+    m_allApplets = cfg.readListEntry( "AllApplets", ',' );
 
     /* reinitialize all plugins */
     QValueList<TodayPlugin>::Iterator it;
@@ -402,6 +405,20 @@ void Today::reinitialize()  {
         }
 
     }
+
+    delete m_bblayout;
+    m_bblayout = new QVBoxLayout( m_big_box );
+    TodayPlugin tempPlugin;
+    QStringList::Iterator stringit;
+
+    for( stringit = m_allApplets.begin(); stringit !=  m_allApplets.end(); ++stringit ) {
+        tempPlugin = ( tempList.find( *stringit ) ).data();
+        if ( !( (tempPlugin.name).isEmpty() ) ) {
+            m_bblayout->addWidget( tempPlugin.guiBox );
+        }
+    }
+    m_bblayout->addStretch( 2 );
+
 }
 
 /**
