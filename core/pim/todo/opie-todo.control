@@ -1,4 +1,4 @@
-Files: bin/todolist apps/1Pim/todo.desktop
+Files: bin/todolist apps/1Pim/todo.desktop pics/todo
 Priority: optional
 Section: opie/applications
 Maintainer: Holger 'zecke' Freyther <zecke@handhelds.org>
