@@ -9,10 +9,16 @@
 
 #include <qmainwindow.h>
 
+class QStringList;
+
 class Oxygen : public QMainWindow
 {
 	Q_OBJECT
 	
     public:
 		Oxygen();
+		QStringList *names;
+
+	private:
+		void loadNames();
 };

@@ -63,10 +63,10 @@ void OxydataWidget::setElement( int el )
     DataTable->setText( 0,1,tr( "%1 u" ).arg( configobj.readEntry( "Weight" ) ) );
     DataTable->setText( 1,1,configobj.readEntry( "Block" ) );
     DataTable->setText( 2,1,configobj.readEntry( "Group" ) );
-    DataTable->setText( 3,1,tr( "%1 J").arg( configobj.readEntry( "EN" ) ) );
-    DataTable->setText( 4,1,tr( "%1 nm" ).arg( configobj.readEntry( "AR" ) ) ) ;
+    DataTable->setText( 3,1,configobj.readEntry( "EN" ) );
+    DataTable->setText( 4,1,tr( "%1 pm" ).arg( configobj.readEntry( "AR" ) ) ) ;
     DataTable->setText( 5,1,tr( "%1 J" ).arg( configobj.readEntry( "IE" ) ) );
-    DataTable->setText( 6,1,configobj.readEntry( "Density" ) );
+    DataTable->setText( 6,1,tr( "%1 g/cm^3" ).arg( configobj.readEntry( "Density" ) ) );
     DataTable->setText( 7,1,tr( "%1 K" ).arg( configobj.readEntry( "BP" ) ) );
     DataTable->setText( 8,1,tr( "%1 K" ).arg( configobj.readEntry( "MP" ) ) );
 }
