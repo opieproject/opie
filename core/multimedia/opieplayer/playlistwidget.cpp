@@ -171,7 +171,7 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
 
     QHBox *hbox6 = new QHBox( vbox4 ); hbox6->setBackgroundMode( PaletteButton );
     
-    tabWidget = new QTabWidget( hbox6, "tabWidget" ); 
+    tabWidget = new QTabWidget( hbox6, "tabWidget" );
     tabWidget->setTabShape(QTabWidget::Triangular);
     
     QWidget *pTab;
@@ -482,7 +482,7 @@ const DocLnk *PlayListWidget::current() { // this is fugly
 //          QListIterator<DocLnk> dit( files.children() );
 //          for ( ; dit.current(); ++dit ) {
 //              if(dit.current()->linkFile() ==  setDocFileRef) {
-//                  qDebug(setDocFileRef);  
+//                  qDebug(setDocFileRef);
 //                  return dit;
 //              }
 //          }
@@ -493,7 +493,7 @@ const DocLnk *PlayListWidget::current() { // this is fugly
 //          {
           qDebug("playlist");
           if ( mediaPlayerState->playlist() ) {
-              return d->selectedFiles->current();
+		        return d->selectedFiles->current();
           }
           else if ( d->setDocumentUsed && d->current ) {
               return d->current;
@@ -813,6 +813,7 @@ void PlayListWidget::btnPlay(bool b) {
 //            qApp->processEvents();
           d->selectedFiles->removeSelected( );
           tabWidget->setCurrentPage(1);
+		  d->selectedFiles->unSelect();
 //            mediaPlayerState->setPlaying(FALSE);
       }
       break;
@@ -823,6 +824,7 @@ void PlayListWidget::btnPlay(bool b) {
           qApp->processEvents();
           d->selectedFiles->removeSelected( );
           tabWidget->setCurrentPage(2);
+		  d->selectedFiles->unSelect();
 //            mediaPlayerState->setPlaying(FALSE);
       }
       break;

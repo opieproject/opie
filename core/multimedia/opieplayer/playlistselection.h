@@ -37,6 +37,7 @@ public slots:
     void removeSelected();   // Remove a media file from the playlist
     void moveSelectedUp();   // Move the media file up the playlist so it is played earlier
     void moveSelectedDown(); // Move the media file down the playlist so it is played later
+	void unSelect();
     bool prev();
     bool next();
     bool first();

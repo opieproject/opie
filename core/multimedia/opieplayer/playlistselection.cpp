@@ -145,7 +145,6 @@ bool PlayListSelection::prev() {
     return TRUE;
 }
 
-
 bool PlayListSelection::next() {
     QListViewItem *item = selectedItem();
     if ( item && item->itemBelow() )
@@ -181,3 +180,8 @@ bool PlayListSelection::last() {
     return TRUE;
 }
 
+void PlayListSelection::unSelect()
+{
+    QListViewItem *item = selectedItem();
+    setSelected( currentItem(), FALSE);
+}
