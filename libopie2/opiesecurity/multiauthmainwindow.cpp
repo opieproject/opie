@@ -39,7 +39,7 @@ MultiauthMainWindow::MultiauthMainWindow(bool allowBypass)
     // and we proceed directly
     if ( explanScreens == true )
     {
-        title = new QLabel("<center><h1>" + tr("Welcome to Opie Multi-authentication Framework") + "</h1></center>", this);
+        title = new QLabel("<center><h1>" + tr("Welcome to Opie") + "</h1></center>", this);
         message = new QLabel("<center><h3>" + tr("Launching authentication plugins...") + "</h3></center>", this);
     } else {
         title = new QLabel("", this);
@@ -60,7 +60,7 @@ MultiauthMainWindow::MultiauthMainWindow(bool allowBypass)
         if ( allowBypass == true )
         {
             // very important: we can close the widget through the quit button, and bypass authentication, only if allowBypass is set!
-            message2 = new QLabel("<center><i>" + tr("Note: this 'exit' button only appears during <b>simulations</b>, like the one we are in. If you don't succeed an authentication step at some point, it will keep on asking you to authenticate, but remember you can <b>skip</b> it too (and have access to this button again).") + "</i></center>", this);
+            message2 = new QLabel("<center><i>" + tr("Note: this 'exit' button only appears during <b>simulations</b>, like the one we are in. If you don't succeed a step, remember you can <b>skip</b> it.") + "</i></center>", this);
             layout->addWidget(message2);
             QObject::connect(quit, SIGNAL(clicked()), this, SLOT(close()));
         }
