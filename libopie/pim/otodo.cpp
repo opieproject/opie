@@ -28,6 +28,11 @@ struct OTodo::OTodoData : public QShared {
         maintainer = 0;
         notifiers = 0;
     };
+    ~OTodoData() {
+        delete recur;
+        delete maintainer;
+        delete notifiers;
+    }
 
     QDate date;
     bool isCompleted:1;
@@ -279,7 +284,7 @@ QString OTodo::toRichText() const
       text += Qtopia::escapeString(summary() ).replace(QRegExp( "[\n]"),  "" );
   }
   text += "</h3></b><br><hr><br>";
-    
+
   // description
   if( !description().isEmpty() ){
     text += "<b>" + QObject::tr( "Description:" ) + "</b><br>";
@@ -306,16 +311,16 @@ QString OTodo::toRichText() const
         break;
   };
   text += "<br>";
-    
+
   // progress
   text += "<b>" + QObject::tr( "Progress:") + " </b>"
           + QString::number( progress() ) + " %<br>";
-          
+
   // due date
   if (hasDueDate() ){
     QDate dd = dueDate();
     int off = QDate::currentDate().daysTo( dd );
-    
+
     text += "<b>" + QObject::tr( "Deadline:" ) + " </b><font color=\"";
     if ( off < 0 )
       text += "#FF0000";
@@ -326,7 +331,7 @@ QString OTodo::toRichText() const
 
     text += "\">" + dd.toString() + "</font><br>";
   }
-  
+
   // categories
   text += "<b>" + QObject::tr( "Category:") + "</b> ";
   text += categoryNames( "Todo List" ).join(", ");
