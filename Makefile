@@ -6,6 +6,7 @@ COMPONENTS=$(LOCALCOMPONENTS) inputmethods/keyboard \
 	inputmethods/pickboard \
 	inputmethods/handwriting \
 	inputmethods/unikeyboard \
+	inputmethods/jumpx \
 	taskbar/batteryapplet \
 	taskbar/volumeapplet \
 	taskbar/clockapplet \
