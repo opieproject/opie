@@ -63,12 +63,10 @@ bool Ipkg :: runIpkg( )
         cmd += runtimeDir;
         cmd += " ; ";
     }
-    cmd += "ipkg";
-
-    if ( option != "update" && option != "download" && option != "upgrade" )
+    cmd += "ipkg -force-defaults";
+    if ( option != "update" && option != "download" )
     {
         cmd += " -dest "+ destination;
-        cmd += " -force-defaults";
 
         if ( flags & FORCE_DEPENDS )
             cmd += " -force-depends";
@@ -101,7 +99,7 @@ bool Ipkg :: runIpkg( )
         cmd += " install";
     else
         cmd += " " + option;
-    if ( option != "upgrade" )
+    if ( package != "" )
         cmd += " " + package;
     cmd += " 2>&1";
 

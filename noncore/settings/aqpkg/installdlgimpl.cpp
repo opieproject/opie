@@ -90,7 +90,7 @@ InstallDlgImpl::InstallDlgImpl( vector<InstallData> &packageList, DataManager *d
 			removeList.push_back( item );
 			remove += "   " + item.packageName + "\n";
 		}
-		else if ( item.option == "U" )
+		else if ( item.option == "U" || item.option == "R" )
 		{
 			updateList.push_back( item );
 			upgrade += "   " + item.packageName + "\n";
@@ -208,9 +208,12 @@ void InstallDlgImpl :: installSelected()
         }
 
         flags |= FORCE_REINSTALL;
-        pIpkg->setOption( "reinstall" );
         for ( it = updateList.begin() ; it != updateList.end() ; ++it )
         {
+            if ( it->option == "R" )
+                pIpkg->setOption( "reinstall" );
+            else
+                pIpkg->setOption( "upgrade" );
             pIpkg->setDestination( it->destination->getDestinationName() );
             pIpkg->setDestinationDir( it->destination->getDestinationPath() );
             pIpkg->setPackage( it->packageName );

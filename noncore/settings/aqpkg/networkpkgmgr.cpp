@@ -559,7 +559,11 @@ InstallData NetworkPackageManager :: dealWithItem( QCheckListItem *item )
         if ( p->getVersion() != p->getInstalledVersion() )
            item.recreateLinks = true;
         else
+        {
+            if ( item.option == "U" )
+                item.option = "R";
            item.recreateLinks = false;
+        }
 
         // User hit cancel (on dlg - assume remove)
         return item;

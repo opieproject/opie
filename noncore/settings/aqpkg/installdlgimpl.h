@@ -28,7 +28,7 @@ using namespace std;
 class InstallData
 {
 public:
-    QString option;            // I - install, D - delete, U - upgrade
+    QString option;            // I - install, D - delete, R- reinstall U - upgrade
     QString packageName;
     Destination *destination;
     bool recreateLinks;
