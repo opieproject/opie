@@ -202,20 +202,29 @@ QList<Folder>* NNTPwrapper::listFolders() {
     return folders;
 }
 
-  clist *  NNTPwrapper::listAllNewsgroups() {
- login();
+QStringList NNTPwrapper::listAllNewsgroups() {
+    login();
+    QStringList res;
     clist *result = 0;
-    clistcell *current;
-    newsnntp_group_description *list;
-  if ( m_nntp )   {
-  mailsession * session = m_nntp->sto_session;
- newsnntp * news =  ( (  nntp_session_state_data * )session->sess_data )->nntp_session;
-   int err = newsnntp_list_newsgroups(news, NULL, &result);
+    clistcell *current = 0;
+    newsnntp_group_description *group;
 
-   if ( err == NEWSNNTP_NO_ERROR ) {
-        return result;
-   }
- }
+    if ( m_nntp )   {
+        mailsession * session = m_nntp->sto_session;
+        newsnntp * news =  ( (  nntp_session_state_data * )session->sess_data )->nntp_session;
+        int err = newsnntp_list_newsgroups(news, NULL, &result);
+        if ( err == NEWSNNTP_NO_ERROR && result) {
+            for ( current=clist_begin(result);current!=NULL;current=clist_next(current) ) {
+                group = (  newsnntp_group_description* ) current->data;
+                if (!group||!group->grp_name||strlen(group->grp_name)==0) continue;
+                res.append(group->grp_name);
+            }
+        }
+    }
+    if (result) {
+        clist_free(result);
+    }
+    return res;
 }
 
 void NNTPwrapper::answeredMail(const RecMail&) {}

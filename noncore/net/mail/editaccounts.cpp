@@ -11,8 +11,6 @@
 
 #include <libmailwrapper/nntpwrapper.h>
 
-#include <libetpan/nntpdriver.h>
-
 AccountListItem::AccountListItem( QListView *parent, Account *a)
         : QListViewItem( parent )
 {
@@ -503,23 +501,17 @@ void NNTPconfig::slotGetNG() {
     save();
     data->save();
     NNTPwrapper* tmp = new NNTPwrapper( data );
-    clist* list =  tmp->listAllNewsgroups();
+    QStringList list =  tmp->listAllNewsgroups();
+    
+    ListViewGroups->clear();
 
-    clistcell *current;
-    newsnntp_group_description *group;
-
-   // FIXME - test if not empty
-    current = list->first;
-     for ( current=clist_begin(list);current!=NULL;current=clist_next(current) ) {
-               group = (  newsnntp_group_description* ) current->data;
-             // qDebug(  group->grp_name );
-
-       	   QCheckListItem *item;
-    	   item = new QCheckListItem( ListViewGroups, ( QString )group->grp_name, QCheckListItem::CheckBox );
-                 if ( subscribedGroups.contains( ( QString )group->grp_name ) >= 1 ) {
-                      item->setOn( true );
-                }
-       }
+    for ( QStringList::Iterator it = list.begin(); it != list.end(); ++it ) {
+         QCheckListItem *item;
+         item = new QCheckListItem( ListViewGroups, (*it), QCheckListItem::CheckBox );
+         if ( subscribedGroups.contains( (*it) ) >= 1 ) {
+             item->setOn( true );
+         }
+    }
 }
 
 void NNTPconfig::slotSSL( bool enabled )
@@ -544,6 +536,12 @@ void NNTPconfig::fillValues()
     userLine->setText( data->getUser() );
     passLine->setText( data->getPassword() );
     subscribedGroups = data->getGroups();
+    /* don't forget that - you will overwrite values if user clicks cancel! */
+    for ( QStringList::Iterator it = subscribedGroups.begin(); it != subscribedGroups.end(); ++it ) {
+         QCheckListItem *item;
+         item = new QCheckListItem( ListViewGroups, (*it), QCheckListItem::CheckBox );
+         item->setOn( true );
+    }
 }
 
 void NNTPconfig::save()
