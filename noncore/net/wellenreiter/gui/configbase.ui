@@ -11,8 +11,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>230</width>
-            <height>287</height>
+            <width>286</width>
+            <height>280</height>
         </rect>
     </property>
     <property stdset="1">
@@ -965,6 +965,177 @@
                     </widget>
                 </grid>
             </widget>
+            <widget>
+                <class>QWidget</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>tab</cstring>
+                </property>
+                <attribute>
+                    <name>title</name>
+                    <string>GPS</string>
+                </attribute>
+                <widget>
+                    <class>QLayoutWidget</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>Layout1</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>geometry</name>
+                        <rect>
+                            <x>10</x>
+                            <y>40</y>
+                            <width>216</width>
+                            <height>27</height>
+                        </rect>
+                    </property>
+                    <hbox>
+                        <property stdset="1">
+                            <name>margin</name>
+                            <number>0</number>
+                        </property>
+                        <property stdset="1">
+                            <name>spacing</name>
+                            <number>6</number>
+                        </property>
+                        <widget>
+                            <class>QLabel</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>TextLabel1_4</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>text</name>
+                                <string>Host</string>
+                            </property>
+                        </widget>
+                        <widget>
+                            <class>QComboBox</class>
+                            <item>
+                                <property>
+                                    <name>text</name>
+                                    <string>localhost</string>
+                                </property>
+                            </item>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>ComboBox8</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>enabled</name>
+                                <bool>false</bool>
+                            </property>
+                            <property stdset="1">
+                                <name>editable</name>
+                                <bool>true</bool>
+                            </property>
+                            <property stdset="1">
+                                <name>currentItem</name>
+                                <number>0</number>
+                            </property>
+                        </widget>
+                        <widget>
+                            <class>QLabel</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>TextLabel2_2</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>text</name>
+                                <string>:</string>
+                            </property>
+                        </widget>
+                        <widget>
+                            <class>QSpinBox</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>SpinBox2</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>enabled</name>
+                                <bool>false</bool>
+                            </property>
+                            <property stdset="1">
+                                <name>maxValue</name>
+                                <number>65535</number>
+                            </property>
+                            <property stdset="1">
+                                <name>minValue</name>
+                                <number>1024</number>
+                            </property>
+                            <property stdset="1">
+                                <name>value</name>
+                                <number>2947</number>
+                            </property>
+                        </widget>
+                    </hbox>
+                </widget>
+                <widget>
+                    <class>QCheckBox</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>enableGPS</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>geometry</name>
+                        <rect>
+                            <x>10</x>
+                            <y>10</y>
+                            <width>199</width>
+                            <height>21</height>
+                        </rect>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Enable GPS logging w/ gpsd</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QCheckBox</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>startGPS</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>geometry</name>
+                        <rect>
+                            <x>10</x>
+                            <y>80</y>
+                            <width>171</width>
+                            <height>21</height>
+                        </rect>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Start gpsd on localhost</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QLineEdit</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>commandGPS</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>enabled</name>
+                        <bool>false</bool>
+                    </property>
+                    <property stdset="1">
+                        <name>geometry</name>
+                        <rect>
+                            <x>10</x>
+                            <y>110</y>
+                            <width>210</width>
+                            <height>22</height>
+                        </rect>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>gpsd -p /dev/ttyS3 -s 57600</string>
+                    </property>
+                </widget>
+            </widget>
         </widget>
     </grid>
 </widget>
@@ -1031,6 +1202,24 @@
         <sender>writeCaptureFile</sender>
         <signal>toggled(bool)</signal>
         <receiver>capturePackets</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>enableGPS</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>ComboBox8</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>enableGPS</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>SpinBox2</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>startGPS</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>commandGPS</receiver>
         <slot>setEnabled(bool)</slot>
     </connection>
 </connections>

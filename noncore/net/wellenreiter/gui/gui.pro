@@ -13,7 +13,8 @@ HEADERS         = wellenreiterbase.h \
                   statwindow.h \
                   configwindow.h \
                   graphwindow.h \
-                  protolistview.h
+                  protolistview.h \
+                  gps.h
 
 SOURCES         = main.cpp \
                   mainwindow.cpp \
@@ -25,7 +26,8 @@ SOURCES         = main.cpp \
                   statwindow.cpp \
                   configwindow.cpp \
                   graphwindow.cpp \
-                  protolistview.cpp
+                  protolistview.cpp \
+                  gps.cpp
 
 INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
