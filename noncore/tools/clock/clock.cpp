@@ -17,6 +17,7 @@
 ** not clear to you.
 **
 **********************************************************************/
+// changes added and Copyright (C) by L. J. Potter <ljp@llornkcor.com> 2002
 
 #include "clock.h"
 #include "setAlarm.h"
@@ -65,6 +66,7 @@ Clock::Clock( QWidget * parent, const char * name, WFlags f )
     Config config( "qpe" );
     config.setGroup("Time");
     ampm = config.readBoolEntry( "AMPM", TRUE );
+
 
     snoozeBtn = new QPushButton ( this);
     snoozeBtn->setText( tr( "Snooze" ) );
@@ -380,10 +382,15 @@ void Clock::appMessage(const QCString& msg, const QByteArray& data)
     int stopTimer = 0;
     int timerStay = 5000;
     bSound=TRUE;
+    qDebug("Message received in clock");
    if ( msg == "alarm(QDateTime,int)" ) {
        Sound::soundAlarm();
        stopTimer = startTimer( timerStay);
    }
+   show();
+   raise();
+   QPEApplication::setKeepRunning();
+   setActiveWindow();
 }
 
 void Clock::timerEvent( QTimerEvent *e )
@@ -485,8 +492,8 @@ QPoint AnalogClock::rotate( QPoint c, QPoint p, int a )
     ( p.x() - c.x() ) * sin( angle );
     return QPoint( nx, ny );
 }
-void Clock::slotAdjustTime()
-{
+
+void Clock::slotAdjustTime() {
     QCopEnvelope e("QPE/System", "execute(QString)");
     e << QString("systemtime");
 }

@@ -77,7 +77,6 @@ private slots:
     void appMessage(const QCString& msg, const QByteArray& data);
     void timerEvent( QTimerEvent *e );
     void slotAdjustTime();
-
 private:
     void clearClock();
 
