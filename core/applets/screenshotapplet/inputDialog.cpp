@@ -10,7 +10,7 @@
 
 #include <qpe/resource.h>
 
-#include <opie/ofiledialog.h>
+#include <opie2/ofiledialog.h>
 
 #include <qlineedit.h>
 #include <qlayout.h>
@@ -61,7 +61,7 @@ void InputDialog::browse() {
     types.insert("Audio",  audio );
     types.insert("Video", video );
 
-    QString str = OFileDialog::getOpenFileName( 1,"/","", types, 0 );
+    QString str = Opie::OFileDialog::getOpenFileName( 1,"/","", types, 0 );
     LineEdit1->setText(str);
 }
 
