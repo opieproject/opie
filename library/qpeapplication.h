@@ -113,6 +113,9 @@ private slots:
     void removeSenderFromStylusDict();
     void hideOrQuit();
 
+private:
+    inline QWidget *nextWidget( QWidgetList*, QWidget* );
+
 protected:
     bool qwsEventFilter( QWSEvent * );
     void internalSetStyle( const QString &style );
@@ -191,13 +194,13 @@ inline void QPEApplication::setCurrentRotation( int r )
 {
     // setTransformation has been introduced in Qt/Embedded 2.3.4 snapshots
     // for compatibility with the SharpROM use fallback to setDefaultTransformation()
-    #if QT_VERSION > 233
+#if QT_VERSION > 233
     Transformation e = DegToTrans( r );
-    setenv( "QWS_DISPLAY", QString( "Transformed:Rot%1:0" ).arg( r ).latin1(), 1 );
+    ::setenv( "QWS_DISPLAY", QString( "Transformed:Rot%1:0" ).arg( r ).latin1(), 1 );
     qApp->desktop()->qwsDisplay()->setTransformation( e );
-    #else
+#else
     setDefaultRotation( r );
-    #endif
+#endif
 }
 
 

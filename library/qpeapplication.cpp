@@ -16,9 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.56 2003-08-26 14:14:34 mickeyl Exp $
-**
-**********************************************************************/
+*/
 #define QTOPIA_INTERNAL_LANGLIST
 #include <stdlib.h>
 #include <unistd.h>
@@ -51,6 +49,7 @@
 #include <qtooltip.h>
 #include <qsignal.h>
 #include <qmainwindow.h>
+#include <qwidgetlist.h>
 
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)
 #define QTOPIA_INTERNAL_INITAPP
@@ -117,6 +116,7 @@ public:
 	bool nomaximize   : 1;
 	bool keep_running : 1;
 
+        QStringList langs;
 	QString appName;
 	struct QCopRec
 	{
@@ -130,7 +130,10 @@ public:
 		QByteArray data;
 	};
 	QWidget* qpe_main_widget;
+        QGuardedPtr<QWidget> lastWidget;
 	QList<QCopRec> qcopq;
+        QString styleName;
+	QString decorationName;
 
 	void enqueueQCop( const QCString &ch, const QCString &msg,
 	                  const QByteArray &data )
@@ -266,8 +269,6 @@ public:
 			}
 		}
 	}
-	QString styleName;
-	QString decorationName;
 };
 
 class ResourceMimeFactory : public QMimeSourceFactory
@@ -663,8 +664,8 @@ QPEApplication::QPEApplication( int & argc, char **argv, Type t )
 
 #ifndef QT_NO_TRANSLATION
 
-	QStringList langs = Global::languageList();
-	for ( QStringList::ConstIterator it = langs.begin(); it != langs.end(); ++it ) {
+	d->langs = Global::languageList();
+	for ( QStringList::ConstIterator it = d->langs.begin(); it != d->langs.end(); ++it ) {
 		QString lang = *it;
 
                 installTranslation( lang + "/libopie.qm");
@@ -742,6 +743,10 @@ void QPEApplication::initApp( int argc, char **argv )
 
     /* overide stored arguments */
     setArgs(argc, argv);
+
+    /* install translation here */
+    for ( QStringList::ConstIterator it = d->langs.begin(); it != d->langs.end(); ++it )
+        installTranslation( (*it) + "/" + d->appName + ".qm" );
 }
 #endif
 
@@ -1311,44 +1316,102 @@ void QPEApplication::systemMessage( const QCString& msg, const QByteArray& data 
 #endif
 }
 
+#include <qmetaobject.h>
+
+QWidget *QPEApplication::nextWidget(QWidgetList* list,  QWidget* _wid) {
+    QWidget *next = 0;
+    if ( list->isEmpty() || list->count() == 1 )
+        next = _wid;
+    else{
+        QWidget* wid;
+        uint idx   = list->findRef( _wid );
+        uint count = list->count();
+
+        /* one time through the list hacky we may not start with idx but end with it*/
+        for (uint i = (idx + 1)%count; true; i=(i+1)%count ) {
+            wid = list->at(i);
+            if ( wid == _wid ) {
+                next = _wid;
+                break;
+            }else if ((( wid->inherits("QMainWindow") ||
+                        wid->inherits("QDialog") ) &&
+                      wid != qApp->desktop() && !wid->isHidden() ) ||
+                      ( wid == mainWidget() || wid == d->qpe_main_widget ) ){
+                next = wid;
+                break;
+            }
+        }
+    }
+
+    delete list;
+    return next;
+}
 /*!
   \internal
 */
+// ########## raise()ing main window should raise and set active
+// ########## it and then all childen. This belongs in Qt/Embedded
+/*
+ * slightly change in behaviour to kill the need of modality in Opie
+ * If any of the topLevelWidgets !isFullyObscured we highlight the next
+ * top level window
+ * 1)If visible and not modal we iterate over the list of top level widgets
+ * 2)If modal we we make the modal and its parent toplevel widget visible if available
+ * 3)else make topLevel visible
+ *
+ * send qcop if necessary and save current visible widget if not modal
+ */
 bool QPEApplication::raiseAppropriateWindow()
 {
-	bool r = FALSE;
-	// ########## raise()ing main window should raise and set active
-	// ########## it and then all childen. This belongs in Qt/Embedded
-	QWidget *top = d->qpe_main_widget;
-	if ( !top )
-		top = mainWidget();
-	if ( top && d->keep_running ) {
-		if ( top->isVisible() )
-			r = TRUE;
-		else if (d->preloaded) {
-			// We are preloaded and not visible.. pretend we just started..
-			QCopEnvelope e("QPE/System", "fastAppShowing(QString)");
-			e << d->appName;
-		}
+    bool r = FALSE;
 
-		d->show_mx(top, d->nomaximize);
-		top->raise();
-		top->setActiveWindow();
-	}
-	QWidget *topm = activeModalWidget();
-	if ( topm && topm != top ) {
-		topm->show();
-		topm->raise();
-		topm->setActiveWindow();
-		// If we haven't already handled the fastAppShowing message
-		if (!top && d->preloaded) {
-			QCopEnvelope e("QPE/System", "fastAppShowing(QString)");
-			e << d->appName;
-		}
-		r = FALSE;
-	}
-	return r;
+    QWidget *top = d->qpe_main_widget ? d->qpe_main_widget : mainWidget();
+    /* 1. */
+    if ( ( top && (top->isVisible() ) || ( d->lastWidget && d->lastWidget->isVisible() ) ) &&
+         !activeModalWidget() ) {
+        r = TRUE;
+        /*wid will be valid and topLevelWidgets will be deleted properly.. */
+        QWidget *wid = nextWidget( topLevelWidgets(),
+                                   d->lastWidget ? (QWidget*)d->lastWidget : top  );
+        /* keep the size window got but not for root*/
+        if ( top == wid )
+            d->show_mx(top, d->nomaximize );
+        else
+            wid->show();
+
+        wid->raise();
+        wid->setActiveWindow();
+        d->lastWidget = wid;
+    }else if ( activeModalWidget() ) {
+        QWidget*  mod = activeModalWidget();
+        /* get the parent of the modal and its topLevelWidget as background widget */
+        QWidget*  par = activeModalWidget()->parentWidget() ? activeModalWidget()->parentWidget()->topLevelWidget() : 0;
+        if (par ) {
+            if (par == top )
+                d->show_mx(par, d->nomaximize );
+            else
+                par->show();
+            par->raise();
+            par->setActiveWindow();
+        }
+        mod->show();
+        mod->raise();
+        mod->setActiveWindow();
+    }else if (top){
+        d->show_mx(top, d->nomaximize );
+        top->raise();
+        top->setActiveWindow();
+        d->lastWidget = top;
+    }
+
+    if (!r && d->preloaded ) {
+        QCopEnvelope e("QPE/System", "fastAppShowing(QString)");
+        e << d->appName;
+    }
+
+    return r;
 }
+
 
 void QPEApplication::pidMessage( const QCString& msg, const QByteArray& data)
 {
@@ -1402,10 +1465,11 @@ void QPEApplication::pidMessage( const QCString& msg, const QByteArray& data)
 			mw = d->qpe_main_widget;
 		if ( mw )
 			Global::setDocument( mw, doc );
+
 	} else if ( msg == "QPEProcessQCop()" ) {
             processQCopFile();
             d->sendQCopQ();
-        }
+        }else
         {
             bool p = d->keep_running;
             d->keep_running = FALSE;
