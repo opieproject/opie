@@ -10,7 +10,6 @@ ConfigDlg::ConfigDlg( QWidget *parent = 0, const char *name = 0 ):
 	ConfigDlg_Base(parent, name, true )
 {
 	contFields = OContact::trfields();
-// 	QStringList xmlFields = OContact::fields();
 
 	// We add all Fields into the Listbox and creating
 	// some translation maps between the translated string and the ID in "recordfields.h".

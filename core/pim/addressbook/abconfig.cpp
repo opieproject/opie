@@ -1,5 +1,7 @@
 #include "abconfig.h"
+
 #include <qpe/config.h>
+#include <qpe/recordfields.h>
 
 AbConfig::AbConfig( ):
 	m_useQtMail( true ),
@@ -107,6 +109,15 @@ void AbConfig::load()
 		m_ordered.append( ID );
 		ID = cfg.readNumEntry( "ContactID_"+QString::number(i++), 0 );
 	}
+
+	// If no contact order is defined, we set the default
+	if ( m_ordered.count() == 0 ) {
+		m_ordered.append( Qtopia::DefaultEmail );
+		m_ordered.append( Qtopia::HomePhone);
+		m_ordered.append( Qtopia::HomeMobile);
+		m_ordered.append( Qtopia::BusinessPhone);
+	}
+
 	m_changed = false;
 }
 

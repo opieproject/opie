@@ -251,13 +251,13 @@ void AbView::clearForCategory()
 {
 	OContactAccess::List::Iterator it;
 	// Now remove all contacts with wrong category if any category selected
-	// This algorithm is a litte bit ineffective
+
+	OContactAccess::List allList = m_list;
 	if ( m_curr_category != -1 ){
-		for ( it = m_list.begin(); it != m_list.end(); ++it ){
+		for ( it = allList.begin(); it != allList.end(); ++it ){
 			if ( !contactCompare( *it, m_curr_category ) ){ 
 				qWarning("Removing %d", (*it).uid());
 				m_list.remove( (*it).uid() );
-				it = m_list.begin();
 			}
 		}
 	}

@@ -8,15 +8,17 @@ Feature requests:
 - 3rd column for 2. Contact
 
 Known Bugs:
-- "Unfiled" is always in listview ..
 - Personal Details not working
-- Contact-Editor is dropped. Wait for replacement.
+- Contact-Editor is temporarely reanabled. Wait for replacement.
 - If category changed, the letterpicker should be resetted
+- Return from Contacteditor: Category resettet to all
+- OK-Key does not switch from Detailview to Listview
 
 Urgent:
 
 Important:
 
+- Add "Do you really want to close app" Box.
 - Redesign of Contacteditor
 - Store last settings of combo-boxes
 
@@ -58,3 +60,4 @@ Fixed:
 - Abtable: Configure Contact column (internally already available, 
 	need configuration)
 - Select of primary contact (see #274 on mantis)
+- Category-select does not work completely: "Unfiled" is always in listview ..
