@@ -293,3 +293,41 @@ int main( int argc,  char **argv ) {                                    \
         return -1; \
 }
 #endif
+
+#ifdef OPIE_APP_INTERFACE
+#define OPIE_EXPORT_APP_V2( factory,name ) Q_EXPORT_INTERFACE() { Q_CREATE_INSTANCE( factory ) }
+#else
+
+#include <opie2/oapplication.h>
+
+#define OPIE_EXPORT_APP_V2( Factory,name )                                      \
+int main( int argc,  char **argv ) {                                    \
+    Opie::Core::OApplication a(argc, argv, name );               \
+    QWidget *mw = 0;\
+\
+    /* method from TT */ \
+    QString executableName = QString::fromLatin1( argv[0] ); \
+    executableName =  executableName.right(executableName.length() \
+	    - executableName.findRev('/') - 1); \
+ \
+    Factory f; \
+    QStringList list = f.applications(); \
+    if (list.contains(executableName) ) \
+        mw = f.createMainWindow(executableName, 0, 0, 0 ); \
+    else \
+        mw = f.createMainWindow( list[0], 0, 0, 0 ); \
+\
+    if( mw ) { \
+        if ( mw->metaObject()->slotNames().contains("setDocument(const QString&)" ) ) \
+            a.showMainDocumentWidget( mw ); \
+        else \
+            a.showMainWidget( mw ); \
+\
+        int rv = a.exec(); \
+        delete mw; \
+        return rv; \
+    }else \
+        return -1; \
+}
+#endif
+
