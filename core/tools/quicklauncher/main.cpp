@@ -24,15 +24,14 @@
 #include <qguardedptr.h>
 #include <qcopchannel_qws.h>
 #define QTOPIA_INTERNAL_INITAPP
-#include <qtopia/timezone.h>
 #include <qtopia/qpeapplication.h>
-#include <qtopia/resource.h>
-#include <qtopia/pluginloader.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+
+#include "dropins.h"
 
 static QPEApplication *app = 0;
 static PluginLoader *loader = 0;
@@ -210,10 +209,17 @@ int main( int argc, char** argv )
 	// Each of the following force internal structures/internal
 	// initialization to be performed.  This may mean allocating
 	// memory that is not needed by all applications.
+#if 0
 	TimeZone::current().isValid(); // popuplate timezone cache
 	TimeString::currentDateFormat(); // create internal structures
 	TimeString::currentAMPM();
+#endif
 	Resource::loadIconSet("new"); // do internal init
+
+        /* make sure libopie gets lined in */
+        {
+            OWait item;
+        }
 
 	// Create a widget to force initialization of title bar images, etc.
 	QObject::disconnect(app, SIGNAL(lastWindowClosed()), app, SLOT(hideOrQuit()));

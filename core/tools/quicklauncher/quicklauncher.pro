@@ -1,11 +1,15 @@
 TEMPLATE	= app
 CONFIG		+= qtopia warn_on release
-DESTDIR		= $(QPEDIR)/bin
+DESTDIR		= $(OPIEDIR)/bin
 
-HEADERS		= 
+HEADERS		= dropins.h
 SOURCES		= main.cpp
 INTERFACES	= 
 
-unix:LIBS       += -lqpepim -lpthread
+INCLUDEPATH	+= $(OPIEDIR)/include
+LIBS       	+= -lqpe -lopie
 
 TARGET		= quicklauncher
+
+
+include ( $(OPIEDIR)/include.pro )
