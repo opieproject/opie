@@ -60,10 +60,10 @@ extern "C" {
 QProgressBar *ProgressBar;
 static netbuf *conn=NULL;
 
-static int log_progress(netbuf *ctl, int xfered, void *arg)
+static int log_progress(netbuf *, int xfered, void *)
 {
-    int fsz = *(int *)arg;
-    int pct = (xfered * 100) / fsz;
+//    int fsz = *(int *)arg;
+//    int pct = (xfered * 100) / fsz;
 //      printf("%3d%%\r", pct);
 //      fflush(stdout);
     ProgressBar->setProgress(xfered);
@@ -225,7 +225,8 @@ OpieFtp::OpieFtp( )
     UsernameComboBox->setEditable(TRUE);
     tabLayout_3->addMultiCellWidget( UsernameComboBox, 1, 1, 0, 1 );
 
-    connect( UsernameComboBox,SIGNAL(textChanged(const QString &)),this,SLOT( UsernameComboBoxEdited(const QString & ) ));
+    connect( UsernameComboBox,SIGNAL(textChanged(const QString &)),this,
+             SLOT( UsernameComboBoxEdited(const QString & ) ));
 
     TextLabel2 = new QLabel( tab_3, "TextLabel2" );
     TextLabel2->setText( tr( "Password" ) );
@@ -235,7 +236,8 @@ OpieFtp::OpieFtp( )
     PasswordEdit->setEchoMode(QLineEdit::Password);
     tabLayout_3->addMultiCellWidget( PasswordEdit, 1, 1, 2, 3 );
 
-    connect( PasswordEdit,SIGNAL(textChanged(const QString &)),this,SLOT( PasswordEditEdited(const QString & ) ));
+    connect( PasswordEdit,SIGNAL(textChanged(const QString &)),this,
+             SLOT( PasswordEditEdited(const QString & ) ));
 
 //PasswordEdit->setFixedWidth(85);
     TextLabel3 = new QLabel( tab_3, "TextLabel3" );
@@ -247,7 +249,8 @@ OpieFtp::OpieFtp( )
     tabLayout_3->addMultiCellWidget( ServerComboBox, 3, 3, 0, 1 );
 
     connect(ServerComboBox,SIGNAL(activated(int)),this,SLOT(serverComboSelected(int ) ));
-    connect(ServerComboBox,SIGNAL(textChanged(const QString &)),this,SLOT(serverComboEdited(const QString & ) ));
+    connect(ServerComboBox,SIGNAL(textChanged(const QString &)),this,
+            SLOT(serverComboEdited(const QString & ) ));
 
     QLabel *TextLabel5 = new QLabel( tab_3, "TextLabel5" );
     TextLabel5->setText( tr( "Remote path" ) );
@@ -347,7 +350,7 @@ void OpieFtp::cleanUp()
     exit(0);
 }
 
-void OpieFtp::tabChanged(QWidget *w)
+void OpieFtp::tabChanged(QWidget *)
 {
     if (TabWidget->currentPageIndex() == 0) {
         currentPathCombo->lineEdit()->setText( currentDir.canonicalPath());
@@ -389,7 +392,7 @@ void OpieFtp::newConnection()
    TabWidget->setCurrentPage(2);
 }
 
-void OpieFtp::serverComboEdited(const QString & edit)
+void OpieFtp::serverComboEdited(const QString & )
 {
 //   if(  ServerComboBox->text(currentServerConfig) != edit /*edit.isEmpty() */) {
 //       qDebug("ServerComboEdited");
@@ -397,11 +400,11 @@ void OpieFtp::serverComboEdited(const QString & edit)
 //      }
 }
 
-void OpieFtp::UsernameComboBoxEdited(const QString & use) {
+void OpieFtp::UsernameComboBoxEdited(const QString &) {
 //        currentServerConfig = -1;
 }
 
-void OpieFtp::PasswordEditEdited(const QString & pass) {
+void OpieFtp::PasswordEditEdited(const QString & ) {
 //        currentServerConfig = -1;
 }
 
@@ -442,7 +445,7 @@ void OpieFtp::connector()
 
     Config cfg("opieftp");
     cfg.setGroup("Server");
-    int current=cfg.readNumEntry("currentServer", 1);
+//    int current=cfg.readNumEntry("currentServer", 1);
 
 //      if(ftp_host!= cfg.readEntry(QString::number( current)))
 //         currentServerConfig=-1;
@@ -653,12 +656,12 @@ void OpieFtp::populateLocalView()
             QString symLink=fi->readLink();
 //         qDebug("Symlink detected "+symLink);
             QFileInfo sym( symLink);
-            fileS.sprintf( "%10li", sym.size() );
+            fileS.sprintf( "%10i", sym.size() );
             fileL.sprintf( "%s ->  %s",  fi->fileName().data(),sym.absFilePath().data() );
             fileDate = sym.lastModified().toString();
         } else {
 //        qDebug("Not a dir: "+currentDir.canonicalPath()+fileL);
-            fileS.sprintf( "%10li", fi->size() );
+            fileS.sprintf( "%10i", fi->size() );
             fileL.sprintf( "%s",fi->fileName().data() );
             fileDate= fi->lastModified().toString();
             if( QDir(QDir::cleanDirPath(currentDir.canonicalPath()+"/"+fileL)).exists() ) {
@@ -814,6 +817,8 @@ void OpieFtp::remoteListClicked(QListViewItem *selectedItem)
         currentPathCombo->lineEdit()->setText( currentRemoteDir);
         fillRemoteCombo( (const QString &)currentRemoteDir);
 //        QCopEnvelope ( "QPE/System", "notBusy()" );
+    Remote_View->ensureItemVisible(Remote_View->firstChild());    
+        
     }
 }
 
@@ -855,6 +860,7 @@ void OpieFtp::localListClicked(QListViewItem *selectedItem)
             } //end not symlink
             chdir(strItem.latin1());
         }
+    Local_View->ensureItemVisible(Local_View->firstChild());    
     }
 }
 
@@ -886,7 +892,7 @@ void OpieFtp::showHidden()
     populateLocalView();
 }
 
-void OpieFtp::ListPressed( int mouse, QListViewItem *item, const QPoint &point, int i)
+void OpieFtp::ListPressed( int mouse, QListViewItem *item, const QPoint &, int)
 {
 // if(item)
     if (mouse == 2) {
@@ -894,7 +900,7 @@ void OpieFtp::ListPressed( int mouse, QListViewItem *item, const QPoint &point, 
     }
 }
 
-void OpieFtp::RemoteListPressed( int mouse, QListViewItem *item, const QPoint &point, int i)
+void OpieFtp::RemoteListPressed( int mouse, QListViewItem *item, const QPoint &, int )
 {
     if(mouse == 2) {
         showRemoteMenu(item);
@@ -1305,7 +1311,7 @@ void OpieFtp::serverComboSelected(int index)
 
     Config cfg("opieftp");
     cfg.setGroup("Server");
-    int numberOfEntries = cfg.readNumEntry("numberOfEntries",0);
+//    int numberOfEntries = cfg.readNumEntry("numberOfEntries",0);
 
     temp.setNum(index+1);
     remoteServerStr = cfg.readEntry( temp,"");
