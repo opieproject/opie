@@ -69,7 +69,7 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
     
 //         qDebug(filterStr);
 //     } else {
-        filterStr = "*."+ mt.extension();
+        filterStr = "*";//+ mt.extension();
 //      qDebug("description "+mt.description());
 //      qDebug( "id "+mt.id());
 //      qDebug("extension "+mt.extension());
