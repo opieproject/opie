@@ -80,7 +80,7 @@ protected:
 
 private:
     int defaultSkinIndex;
-    bool audioScan, videoScan;
+    bool audioScan, videoScan, audioPopulated, videoPopulated;
     void readm3u(const QString &);
     void readPls(const QString &);
     void initializeStates();

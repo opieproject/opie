@@ -156,6 +156,8 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     // see which skins are installed
     videoScan=false;
     audioScan=false;
+    audioPopulated=false;
+    videoPopulated=false;
     populateSkinsMenu();
     initializeStates();
 
@@ -618,8 +620,8 @@ void PlayListWidget::tabChanged(QWidget *) {
     break;
     case 1:
     {
-        audioView->clear();
-        populateAudioView();
+      //        audioView->clear();
+        if(!audioPopulated) populateAudioView();
 
         if( !tbDeletePlaylist->isHidden() ) {
             tbDeletePlaylist->hide();
@@ -630,8 +632,8 @@ void PlayListWidget::tabChanged(QWidget *) {
     break;
     case 2:
     {
-        videoView->clear();
-        populateVideoView();
+      //        videoView->clear();
+        if(!videoPopulated) populateVideoView();
         if( !tbDeletePlaylist->isHidden() ) {
             tbDeletePlaylist->hide();
         }
@@ -686,7 +688,8 @@ void PlayListWidget::scanForAudio() {
   }
 //  Global::findDocuments( &files, "audio/*");
   Global::findDocuments( &files, audioMimes);
-  audioScan = TRUE;
+  audioScan = true;
+  populateAudioView();
 }
 
 void PlayListWidget::scanForVideo() {
@@ -697,7 +700,8 @@ void PlayListWidget::scanForVideo() {
     delete sdit.current();
   }
   Global::findDocuments(&vFiles, "video/*");
-  videoScan = TRUE;
+  videoScan = true;
+  populateVideoView();  
 }
 
 void PlayListWidget::populateAudioView() {
@@ -734,6 +738,7 @@ void PlayListWidget::populateAudioView() {
             newItem->setPixmap( 0, Resource::loadPixmap( "opieplayer2/musicfile" ) );
         }
     }
+    audioPopulated=true;
 }
 
 
@@ -768,6 +773,7 @@ void PlayListWidget::populateVideoView() {
             newItem->setPixmap(0, Resource::loadPixmap( "opieplayer2/videofile" ) );
         }
     }
+    videoPopulated=true;
 }
 
 
