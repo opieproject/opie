@@ -15,7 +15,8 @@ usage ( ) {
 
 shift
 
-[ -f /etc/resolv.conf ] && cp /etc/resolv.conf $tmpfile
+[ ! -e "/etc/resolv.conf" ] && touch /etc/resolv.conf
+cp /etc/resolv.conf $tmpfile
 
 case "$arg1" in
 	"-a")
@@ -35,7 +36,7 @@ case "$arg1" in
 	;;
 esac
 
-[ -f $tmpfile ] && cp $tmpfile /etc/resolv.conf
+[ -e $tmpfile ] && cp $tmpfile /etc/resolv.conf
 rm -f $tmpfile
 
 exit 0
