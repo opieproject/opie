@@ -47,6 +47,7 @@ class Dialer : public QDialog
 		int usercancel;
 		const Profile& m_profile;
 		int m_fd;
+		int cleanshutdown;
 };
 
 #endif

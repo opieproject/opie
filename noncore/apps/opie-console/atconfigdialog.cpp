@@ -9,6 +9,7 @@
 #include <qscrollview.h>
 
 #include "atconfigdialog.h"
+#include "io_modem.h"
 
 
 ATConfigDialog::ATConfigDialog(  QWidget* parent, const char* name, bool modal, WFlags fl )
@@ -170,6 +171,21 @@ void ATConfigDialog::readConfig( const Profile& config ) {
     bpsDetectBox->setCurrentItem( config.readBoolEntry("BPSDetect", MODEM_DEFAULT_BPS_DETECT ) );
     dcdLinesBox->setCurrentItem( config.readBoolEntry("DCDLines", MODEM_DEFAULT_DCD_LINES ) );
     multiLineUntagBox->setCurrentItem( config.readBoolEntry("MultiLineUntag", MODEM_DEFAULT_MULTI_LINE_UNTAG ) );
+
+	// Not implemented yet
+	resetStringLine->setEnabled(false);
+	dialSuf1Line->setEnabled(false);
+	dialPref2Line->setEnabled(false);
+	dialSuf2Line->setEnabled(false);
+	dialPref3Line->setEnabled(false);
+	dialSuf3Line->setEnabled(false);
+	dialTimeSpin->setEnabled(false);
+	delayRedialSpin->setEnabled(false);
+	numberTriesSpin->setEnabled(false);
+	dtrDropTimeSpin->setEnabled(false);
+	bpsDetectBox->setEnabled(false);
+	dcdLinesBox->setEnabled(false);
+	multiLineUntagBox->setEnabled(false);
 }
 
 void ATConfigDialog::writeConfig( Profile& config ) {

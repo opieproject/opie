@@ -58,6 +58,7 @@ Dialer::Dialer(const Profile& profile, int fd, QWidget *parent, const char *name
 	//m_profile.writeEntry("Termination", "\n");
 
 	usercancel = 0;
+	cleanshutdown = 0;
 
 	fcntl(m_fd, F_SETFL, O_NONBLOCK);
 
@@ -133,19 +134,19 @@ void Dialer::dial(const QString& number)
 
 void Dialer::trydial(const QString& number)
 {
-	//if(state != state_cancel)
-	//{
-		if(state != state_cancel) switchState(state_preinit);
-		send("+++ATH");
+	if(state != state_cancel) switchState(state_preinit);
+	if(cleanshutdown)
+	{
+		send(m_profile.readEntry("HangupString"));
+		//send("+++ATH");
 		send("");
-		//QString response = receive();
-	//}
+	}
 
 	if(state != state_cancel)
 	{
 		switchState(state_init);
-		send("ATZ");
-		//send(m_profile.readEntry("InitString"));
+		//send("ATZ");
+		send(m_profile.readEntry("InitString"));
 		QString response2 = receive();
 		if(!response2.contains("\nOK\r"))
 			reset();
@@ -175,10 +176,10 @@ void Dialer::trydial(const QString& number)
 	{
 		switchState(state_dialing);
 
-		send(QString("ATDT %1").arg(number));
-		//send(QString("%1 %2").arg(m_profile.readEntry("DialPrefix1")).arg(number));
+		//send(QString("ATDT %1").arg(number));
+		send(QString("%1 %2").arg(m_profile.readEntry("DialPrefix1")).arg(number));
 		QString response5 = receive();
-		if(!response5.contains("\nCONNECT"))
+		if(!response5.contains("\n" + m_profile.readEntry("DefaultConnect")))
 		{
 			if(response5.contains("BUSY"))
 				switchState(state_dialing);
@@ -204,7 +205,7 @@ void Dialer::send(const QString& msg)
 	int bytes;
 	QString termination;
 
-qWarning("Sending: '%s'", m.latin1());
+	//qWarning("Sending: '%s'", m.latin1());
 
 	termination = "\r";
 	//termination = m_profile.readEntry("Termination");
@@ -235,13 +236,14 @@ QString Dialer::receive()
 			for(int i = 0; i < ret; i++)
 				buffer[i] = buffer[i] & 0x7F;
 			buffer[ret] = 0;
-qWarning("Got: '%s'", buffer);
+			//qWarning("Got: '%s'", buffer);
 			buf.append(QString(buffer));
 			if(buf.contains("OK") || buf.contains("ERROR") || buf.contains("CONNECT") || (buf.contains("BUSY")))
-{
-qWarning("Receiving: '%s'", buf.latin1());
+			{
+				//qWarning("Receiving: '%s'", buf.latin1());
+				cleanshutdown = 1;
 				return buf;
-}
+			}
 		}
 		else if(ret < 0)
 		{
@@ -249,8 +251,11 @@ qWarning("Receiving: '%s'", buf.latin1());
 			else if(!(counter++ % 100)) qApp->processEvents();
 		}
 		else if(!(counter++ % 100)) qApp->processEvents();
+
+		if(usercancel) return QString::null;
 	}
 
+	cleanshutdown = 1;
 	return QString::null;
 }
 
