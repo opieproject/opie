@@ -472,6 +472,9 @@ void ODevice::initButtons ( )
 
 ODevice::~ODevice ( )
 {
+// we leak m_devicebuttons and m_cpu_frequency 
+// but it's a singleton and it is not so importantant
+// -zecke
 	delete d;
 }
 
@@ -785,7 +788,7 @@ const QStrList &ODevice::allowedCpuFrequencies ( ) const
 
 /**
  * Set desired CPU frequency
- *
+ * 
  * @param index index into d->m_cpu_frequencies of the frequency to be set
  */
 bool ODevice::setCurrentCpuFrequency(uint index)
@@ -920,11 +923,9 @@ void ODevice::remapHeldAction ( int button, const OQCopMessage &action )
 
 	QCopEnvelope ( "QPE/System", "deviceButtonMappingChanged()" );
 }
-void ODevice::virtual_hook( int id, void* data ) {
-	Q_UNUSED(id);
-	Q_UNUSED(data);
-}
+void ODevice::virtual_hook(int, void* ){
 
+}
 
 
 /**************************************************
@@ -1648,7 +1649,6 @@ int Zaurus::displayBrightnessResolution ( ) const
 	return 5;
 }
 
-
 /**************************************************
  *
  * SIMpad
@@ -1889,7 +1889,7 @@ bool SIMpad::suspend ( ) // Must override because SIMpad does NOT have apm
 	::gettimeofday ( &tvs, 0 );
 
 	::sync ( ); // flush fs caches
-	res = ( ::system ( "echo > /proc/sys/pm/suspend" ) == 0 ); //TODO make better :)
+	res = ( ::system ( "cat /dev/fb/0 >/tmp/.buffer; echo > /proc/sys/pm/suspend; cat /tmp/.buffer >/dev/fb/0" ) == 0 ); //TODO make better :)
 
 	return res;
 }
@@ -1911,10 +1911,8 @@ bool SIMpad::setDisplayStatus ( bool on )
 
 	QString cmdline = QString().sprintf( "echo %s > /proc/cs3", on ? "0xd41a" : "0xd40a" ); //TODO make better :)
 
-	if (( fd = ::open ( "/dev/fb0", O_RDWR )) >= 0 ) {
-		res = ( ::system( (const char*) cmdline ) == 0 );
-		::close ( fd );
-	}
+	res = ( ::system( (const char*) cmdline ) == 0 );
+
 	return res;
 }
 
@@ -1927,7 +1925,7 @@ bool SIMpad::setDisplayBrightness ( int bright )
 
 	if ( bright > 255 )
 		bright = 255;
-	if ( bright < 0 )
+	if ( bright < 1 )
 		bright = 0;
 
 	if (( fd = ::open ( SIMPAD_BACKLIGHT_CONTROL, O_WRONLY )) >= 0 ) {
@@ -1946,16 +1944,7 @@ bool SIMpad::setDisplayBrightness ( int bright )
 
 int SIMpad::displayBrightnessResolution ( ) const
 {
-	switch ( model ( )) {
-		case Model_SIMpad_CL4:
-		case Model_SIMpad_SL4:
-		case Model_SIMpad_SLC:
-		case Model_SIMpad_TSinus:
-			return 255; //TODO find out if this is save
-
-		default:
-			return 2;
-	}
+	return 255; // All SIMpad models share the same display
 }
 
 /**************************************************
@@ -1974,9 +1963,8 @@ void Ramses::init()
 	d->m_modelstr = "Ramses";
 	d->m_model = Model_Ramses_MNCI;
 
-	d->m_rotation  = Rot180;
-	d->m_direction = CW;
-	d->m_holdtime  = 1000;
+	d->m_rotation = Rot0;
+	d->m_holdtime = 1000;
 
 	f.setName("/etc/oz_version");
 
@@ -2034,24 +2022,45 @@ void Ramses::timerEvent(QTimerEvent *)
 
 bool Ramses::setSoftSuspend(bool soft)
 {
-    Q_UNUSED(soft);
-    return true;
-}
-
-bool Ramses::suspend()
-{
-	//qDebug("Ramses::suspend()");
-	if ( !isQWS() ) // only qwsserver is allowed to suspend
-		return false;
-
+	qDebug("Ramses::setSoftSuspend(%d)", soft);
+#if 0
 	bool res = false;
 	int fd;
 
-	if ((fd = ::open("/proc/sys/pm/suspend", O_WRONLY)) >= 0) {
-		res = ( ::write ( fd, "1", 1 ) != -1 );
+	if (((fd = ::open("/dev/apm_bios", O_RDWR)) >= 0) ||
+        ((fd = ::open("/dev/misc/apm_bios",O_RDWR)) >= 0)) {
+
+		int sources = ::ioctl(fd, APM_IOCGEVTSRC, 0); // get current event sources
+
+		if (sources >= 0) {
+			if (soft)
+				sources &= ~APM_EVT_POWER_BUTTON;
+			else
+				sources |= APM_EVT_POWER_BUTTON;
+
+			if (::ioctl(fd, APM_IOCSEVTSRC, sources) >= 0) // set new event sources
+				res = true;
+			else
+				perror("APM_IOCGEVTSRC");
+		}
+		else
+			perror("APM_IOCGEVTSRC");
+
 		::close(fd);
 	}
-	return res;
+	else
+		perror("/dev/apm_bios or /dev/misc/apm_bios");
+
+    return res;
+#else
+    return true;
+#endif
+}
+
+bool Ramses::suspend ( )
+{
+	qDebug("Ramses::suspend");
+	return false;
 }
 
 /**
@@ -2059,15 +2068,19 @@ bool Ramses::suspend()
  */
 bool Ramses::setDisplayStatus(bool on)
 {
-	//qDebug("Ramses::setDisplayStatus(%d)", on);
+	qDebug("Ramses::setDisplayStatus(%d)", on);
+#if 0
 	bool res = false;
 	int fd;
 
-	if ((fd = ::open ("/dev/fb/1", O_RDWR)) >= 0) {
+	if ((fd = ::open ("/dev/fb/0", O_RDWR)) >= 0) {
 		res = (::ioctl(fd, FBIOBLANK, on ? VESA_NO_BLANKING : VESA_POWERDOWN) == 0);
 		::close(fd);
 	}
 	return res;
+#else
+	return true;
+#endif
 }
 
 
@@ -2076,7 +2089,7 @@ bool Ramses::setDisplayStatus(bool on)
 */
 bool Ramses::setDisplayBrightness(int bright)
 {
-	//qDebug("Ramses::setDisplayBrightness(%d)", bright);
+	qDebug("Ramses::setDisplayBrightness(%d)", bright);
 	bool res = false;
 	int fd;
 
@@ -2096,8 +2109,9 @@ bool Ramses::setDisplayBrightness(int bright)
 	}
 
 	// scale backlight brightness to hardware
-	if ((fd = ::open("/proc/sys/board/lcd_brightness", O_WRONLY)) >= 0) {
-		//qDebug(" %d -> pwm1", bright);
+	bright = 500-(bright * 500 / 255);
+	if ((fd = ::open("/proc/sys/board/pwm1", O_WRONLY)) >= 0) {
+		qDebug(" %d -> pwm1", bright);
 		char writeCommand[100];
 		const int count = sprintf(writeCommand, "%d\n", bright);
 		res = (::write(fd, writeCommand, count) != -1);
@@ -2109,12 +2123,12 @@ bool Ramses::setDisplayBrightness(int bright)
 
 int Ramses::displayBrightnessResolution() const
 {
-	return 256;
+	return 32;
 }
 
 bool Ramses::setDisplayContrast(int contr)
 {
-	//qDebug("Ramses::setDisplayContrast(%d)", contr);
+	qDebug("Ramses::setDisplayContrast(%d)", contr);
 	bool res = false;
 	int fd;
 
@@ -2124,9 +2138,10 @@ bool Ramses::setDisplayContrast(int contr)
 		contr = 255;
 	if (contr < 0)
 		contr = 0;
+	contr = 90 - (contr * 20 / 255);
 
-	if ((fd = ::open("/proc/sys/board/lcd_contrast", O_WRONLY)) >= 0) {
-		//qDebug(" %d -> pwm0", contr);
+	if ((fd = ::open("/proc/sys/board/pwm0", O_WRONLY)) >= 0) {
+		qDebug(" %d -> pwm0", contr);
 		char writeCommand[100];
 		const int count = sprintf(writeCommand, "%d\n", contr);
 		res = (::write(fd, writeCommand, count) != -1);
@@ -2139,5 +2154,5 @@ bool Ramses::setDisplayContrast(int contr)
 
 int Ramses::displayContrastResolution() const
 {
-	return 256;
+	return 20;
 }

@@ -1,6 +1,6 @@
 /*
                =.            This file is part of the OPIE Project
-             .=l.            Copyright (c)  2002 <>
+             .=l.            Copyright (c)  2002,2003 <zecke@handhelds.org>
            .>+-=
  _;:,     .>    :=|.         This library is free software; you can
 .> <`_,   >  .   <=          redistribute it and/or  modify it under
@@ -27,11 +27,47 @@
 */
 
 #include <qpe/applnk.h>
+#include <qpe/config.h>
+#include <qpe/qpeapplication.h>
+
+#include <qfileinfo.h>
 #include <qstring.h>
 #include <qapplication.h>
 #include <qlayout.h>
 
+
 #include "ofiledialog.h"
+
+
+namespace {
+    /*
+     * helper functions to load the start dir
+     * and to save it
+     * helper to extract the dir out of a file name
+     */
+    /**
+     * This method will use Config( argv[0] );
+     * @param key The group key used
+     */
+    QString lastUsedDir( const QString& key ) {
+        if ( qApp->argc() < 1 )
+            return QString::null;
+
+        Config cfg( QFileInfo(qApp->argv()[0]).fileName() ); // appname
+        cfg.setGroup( key );
+        return cfg.readEntry("LastDir", QPEApplication::documentDir() );
+    }
+
+    void saveLastDir( const QString& key, const QString& file ) {
+        if ( qApp->argc() < 1 )
+            return;
+
+        Config cfg(  QFileInfo(qApp->argv()[0]).fileName() );
+        cfg.setGroup( key );
+        QFileInfo inf( file );
+        cfg.writeEntry("LastDir", inf.dirPath( true ) );
+    }
+};
 
 /**
  * This constructs a modal dialog
@@ -64,12 +100,15 @@ OFileDialog::OFileDialog(const QString &caption,
   setCaption( caption.isEmpty() ? tr("FileDialog") : caption );
   connect(file, SIGNAL(fileSelected(const QString&) ),
 	  this, SLOT(slotFileSelected(const QString&) ) );
+  connect(file, SIGNAL(ok() ),
+	  this, SLOT(slotSelectorOk()) ) ;
 
+  connect(file, SIGNAL(dirSelected(const QString&) ), this, SLOT(slotDirSelected(const QString&) ) );
+
+#if 0
   connect(file, SIGNAL(dirSelected(const QString &) ),
 	  this, SLOT(slotDirSelected(const QString &) ) );
-
-
-  file->setYesCancelVisible( false );  // relayout
+#endif
 }
 /**
  * @returns the mimetype of the selected
@@ -108,18 +147,25 @@ DocLnk OFileDialog::selectedDocument()const
  * @return the fileName or QString::null
  */
 QString OFileDialog::getOpenFileName(int selector,
-				     const QString &startDir,
+				     const QString &_startDir,
 				     const QString &file,
 				     const MimeTypes &mimes,
 				     QWidget *wid,
 				     const QString &caption )
 {
   QString ret;
+  QString startDir = _startDir;
+  if (startDir.isEmpty() )
+      startDir = lastUsedDir( "FileDialog-OPEN" );
+
+
   OFileDialog dlg( caption.isEmpty() ? tr("Open") : caption,
-		   wid, OFileSelector::OPEN, selector, startDir, file, mimes);
+		   wid, OFileSelector::Open, selector, startDir, file, mimes);
   dlg.showMaximized();
-  if( dlg.exec() )
+  if( dlg.exec() ) {
     ret = dlg.fileName();
+    saveLastDir( "FileDialog-OPEN", ret );
+  }
 
   return ret;
 }
@@ -129,18 +175,24 @@ QString OFileDialog::getOpenFileName(int selector,
  * @see getOpenFileName
  */
 QString OFileDialog::getSaveFileName(int selector,
-				  const QString &startDir,
+				  const QString &_startDir,
 				  const QString &file,
 				  const MimeTypes &mimes,
 				  QWidget *wid,
 				  const QString &caption )
 {
   QString ret;
+  QString startDir = _startDir;
+  if (startDir.isEmpty() )
+      startDir = lastUsedDir( "FileDialog-SAVE" );
+
   OFileDialog dlg( caption.isEmpty() ? tr("Save") : caption,
-		   wid, OFileSelector::SAVE, selector, startDir, file, mimes);
+		   wid, OFileSelector::Save, selector, startDir, file, mimes);
   dlg.showMaximized();
-  if( dlg.exec() )
+  if( dlg.exec() ) {
     ret = dlg.fileName();
+    saveLastDir( "FileDialog-SAVE", ret );
+  }
 
   return ret;
 }
@@ -149,8 +201,15 @@ void OFileDialog::slotFileSelected(const QString & )
 {
   accept();
 }
-void OFileDialog::slotDirSelected(const QString & )
+
+void OFileDialog::slotSelectorOk( )
 {
+  accept();
+}
+
+void OFileDialog::slotDirSelected(const QString &dir )
+{
+  setCaption( dir );
   // if mode
   //accept();
 }

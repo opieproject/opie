@@ -73,14 +73,14 @@ public:
  */
     void setText( const QString& text ) ;
 /*!
- * @fn setBackgroundColor(QColor color)
+ * @fn setBackgroundColor(const QColor& color)
  * @brief sets color of the ticker's background
  * @param color QColor color to be set.
  *
  */
     void setBackgroundColor(const QColor& color);
 /*!
- * @fn setForegroundColor(QColor color)
+ * @fn setForegroundColor(const QColor& color)
  * @brief sets color of text
  * @param color QColor color of text
  *

@@ -3,6 +3,7 @@ CONFIG          += qte warn_on release
 HEADERS   = ofontmenu.h \
     ocolorbutton.h \
     ofiledialog.h ofileselector.h \
+    ofileselector_p.h \
     ocheckitem.h  \
     xmltree.h \
     colordialog.h colorpopupmenu.h \
@@ -49,7 +50,7 @@ SOURCES   = ofontmenu.cc  \
         ocolorbutton.cpp \
         sharp_compat.cpp \
       xmltree.cc \
-      ofiledialog.cc ofileselector.cc \
+      ofiledialog.cc ofileselector.cpp \
             ocheckitem.cpp  \
       colordialog.cpp \
       colorpopupmenu.cpp oclickablelabel.cpp \
