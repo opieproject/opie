@@ -1,5 +1,5 @@
 Package: opie-advancedfm-help-en
-Files: help/en/html/opie-advancedfm.html 
+Files: help/en/html/advancedfm.html 
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: ljp <llornkcor@handhelds.org>
