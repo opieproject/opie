@@ -4,207 +4,207 @@
     <name>GSMToolBase</name>
     <message>
         <source>GSM Tool</source>
-        <translation type="unfinished">Outils GSM</translation>
+        <translation>Outils GSM</translation>
     </message>
     <message>
         <source>Device</source>
-        <translation type="unfinished">Périphérique</translation>
+        <translation>Périphérique</translation>
     </message>
     <message>
         <source>Modem Device:</source>
-        <translation type="unfinished">Périphérique modem</translation>
+        <translation>Périphérique modem :</translation>
     </message>
     <message>
         <source>/dev/ircomm0</source>
-        <translation type="unfinished">/dev/ircomm0</translation>
+        <translation>/dev/ircomm0</translation>
     </message>
     <message>
         <source>/dev/ttySA0</source>
-        <translation type="unfinished">/dev/ttySA0</translation>
+        <translation>/dev/ttySA0</translation>
     </message>
     <message>
         <source>/dev/ttyS0</source>
-        <translation type="unfinished">/dev/ttyS0</translation>
+        <translation>/dev/ttyS0</translation>
     </message>
     <message>
         <source>Baud Rate:</source>
-        <translation type="unfinished">Débit (bauds) :</translation>
+        <translation>Débit (bauds) :</translation>
     </message>
     <message>
         <source>300</source>
-        <translation type="unfinished">300</translation>
+        <translation>300</translation>
     </message>
     <message>
         <source>600</source>
-        <translation type="unfinished">600</translation>
+        <translation>600</translation>
     </message>
     <message>
         <source>1200</source>
-        <translation type="unfinished">1200</translation>
+        <translation>1200</translation>
     </message>
     <message>
         <source>2400</source>
-        <translation type="unfinished">2400</translation>
+        <translation>2400</translation>
     </message>
     <message>
         <source>4800</source>
-        <translation type="unfinished">4800</translation>
+        <translation>4800</translation>
     </message>
     <message>
         <source>9600</source>
-        <translation type="unfinished">9600</translation>
+        <translation>9600</translation>
     </message>
     <message>
         <source>19200</source>
-        <translation type="unfinished">19200</translation>
+        <translation>19200</translation>
     </message>
     <message>
         <source>38400</source>
-        <translation type="unfinished">38400</translation>
+        <translation>38400</translation>
     </message>
     <message>
         <source>57600</source>
-        <translation type="unfinished">57600</translation>
+        <translation>57600</translation>
     </message>
     <message>
         <source>115200</source>
-        <translation type="unfinished">115200</translation>
+        <translation>115200</translation>
     </message>
     <message>
         <source>230400</source>
-        <translation type="unfinished">230400</translation>
+        <translation>230400</translation>
     </message>
     <message>
         <source>460800</source>
-        <translation type="unfinished">460800</translation>
+        <translation>460800</translation>
     </message>
     <message>
         <source>Connect</source>
-        <translation type="unfinished">Se connecter</translation>
+        <translation>Se connecter</translation>
     </message>
     <message>
         <source>Manufacturer:</source>
-        <translation type="unfinished">Fabricant :</translation>
+        <translation>Fabricant :</translation>
     </message>
     <message>
         <source>Model:</source>
-        <translation type="unfinished">Modèle :</translation>
+        <translation>Modèle :</translation>
     </message>
     <message>
         <source>Revision:</source>
-        <translation type="unfinished">Révision :</translation>
+        <translation>Révision :</translation>
     </message>
     <message>
         <source>Serial Number:</source>
-        <translation type="unfinished">Numéro de série :</translation>
+        <translation>Numéro de série :</translation>
     </message>
     <message>
         <source>Network</source>
-        <translation type="unfinished">Réseau :</translation>
+        <translation>Réseau</translation>
     </message>
     <message>
         <source>Network Status:</source>
-        <translation type="unfinished">État du réseau :</translation>
+        <translation>État du réseau :</translation>
     </message>
     <message>
         <source>Current Network:</source>
-        <translation type="unfinished">Réseau actuel :</translation>
+        <translation>Réseau actuel :</translation>
     </message>
     <message>
         <source>Signal Strength:</source>
-        <translation type="unfinished">Puissance du signal :</translation>
+        <translation>Puissance du signal :</translation>
     </message>
     <message>
         <source>dBm</source>
-        <translation type="unfinished">dBm</translation>
+        <translation>dBm</translation>
     </message>
     <message>
         <source>Available Networks:</source>
-        <translation type="unfinished">Réseaux disponibles :</translation>
+        <translation>Réseaux disponibles :</translation>
     </message>
     <message>
         <source>Scan</source>
-        <translation type="unfinished">Rechercher</translation>
+        <translation>Rechercher</translation>
     </message>
     <message>
         <source>Network Name</source>
-        <translation type="unfinished">Nom du réseau</translation>
+        <translation>Nom du réseau</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished">État</translation>
+        <translation>État</translation>
     </message>
     <message>
         <source>No.</source>
-        <translation type="unfinished">No.</translation>
+        <translation>No.</translation>
     </message>
     <message>
         <source>Shortname</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom</translation>
     </message>
     <message>
         <source>Register</source>
-        <translation type="unfinished">S&apos;enregistrer</translation>
+        <translation>S&apos;enregistrer</translation>
     </message>
     <message>
         <source>SMS</source>
-        <translation type="unfinished">SMS</translation>
+        <translation>SMS</translation>
     </message>
     <message>
         <source>Store:</source>
-        <translation type="unfinished">Enregistrer :</translation>
+        <translation>Enregistrer :</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">Aucun</translation>
+        <translation>Aucun</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished">Type :</translation>
+        <translation>Type :</translation>
     </message>
     <message>
         <source>Incoming</source>
-        <translation type="unfinished">Entrant</translation>
+        <translation>Entrant</translation>
     </message>
     <message>
         <source>Outgoing</source>
-        <translation type="unfinished">Sortant</translation>
+        <translation>Sortant</translation>
     </message>
     <message>
         <source>Number</source>
-        <translation type="unfinished">Numéro</translation>
+        <translation>Numéro</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished">Date</translation>
+        <translation>Date</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Effacer</translation>
+        <translation>Effacer</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished">Envoyer</translation>
+        <translation>Envoyer</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished">Nouveau</translation>
+        <translation>Nouveau</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Enregistrer</translation>
+        <translation>Enregistrer</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished">Effacer</translation>
+        <translation>Effacer</translation>
     </message>
     <message>
         <source>To:</source>
-        <translation type="unfinished">Pour :</translation>
+        <translation>Pour :</translation>
     </message>
     <message>
         <source>Message:</source>
-        <translation type="unfinished">Message :</translation>
+        <translation>Message :</translation>
     </message>
 </context>
 </TS>
