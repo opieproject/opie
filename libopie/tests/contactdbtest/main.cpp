@@ -30,20 +30,34 @@ int main( int argc, char ** argv )
     /* Testroutine für OContactDB */
     OContactDB contactdb ("testprg");
     Contact query;
-    const Contact *result;
+    Contact result;
 
+    qWarning ("All contacts with birthdays in the year 20xx");
     QString queryString ("\\..*\\.20.*"); /* Every birthday in the year 20xx */
     query.setBirthday (queryString);
-    if ( (result = contactdb.queryByExample (query, OContactDB::query_IgnoreCase | OContactDB::query_RegExp)) != NULL){
-	    do{
-		    qWarning ( "Found Name: %s", result->fullName().latin1() );
-		    qWarning ( "Found UID:  %d", result->uid() );
-		    qWarning ( "Birthday:   %s", result->birthday().latin1() );
 
-		    result = contactdb.nextFound();
-	    } while (result != NULL); 
+    if ( contactdb.queryByExample( query, 
+				   OContactDB::query_IgnoreCase | OContactDB::query_RegExp) ){
+	    while ( contactdb.nextFound( result ) ){
+		    qWarning ( "Found Name: %s", result.fullName().latin1() );
+		    qWarning ( "Found UID:  %d", result.uid() );
+		    qWarning ( "Birthday:   %s", result.birthday().latin1() );
+	    }
     }
 
+    qWarning ("All contacts with firstnames, starting with an A ");
+    Contact query2;
+    queryString ="A*" ; /* Every contact with lastname starting with A */
+    query2.setFirstName (queryString);
+
+    if ( contactdb.queryByExample( query2, 
+				   OContactDB::query_IgnoreCase | OContactDB::query_WildCards ) ){
+	    while ( contactdb.nextFound( result ) ){
+		    qWarning ( "Found Name: %s", result.fullName().latin1() );
+		    qWarning ( "Found UID:  %d", result.uid() );
+		    qWarning ( "Birthday:   %s", result.birthday().latin1() );
+	    }
+    }
 
 
     return 0;

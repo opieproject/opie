@@ -14,68 +14,16 @@
  *       with our version of libqpe
  *
  * =====================================================================
- * Version: $Id: ocontactdb.cpp,v 1.1.2.15 2002-08-04 12:24:30 eilers Exp $
+ * Version: $Id: ocontactdb.cpp,v 1.1.2.16 2002-08-10 15:00:30 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb.cpp,v $
- * Revision 1.1.2.15  2002-08-04 12:24:30  eilers
+ * Revision 1.1.2.16  2002-08-10 15:00:30  eilers
+ * Improved search interface. Thanks to Zecke
+ *
+ * Revision 1.1.2.15  2002/08/04 12:24:30  eilers
  * It is now possible to ask the backend which kind of queries he support
  * or if a query is correct...
- *
- * Revision 1.1.2.14  2002/07/28 17:41:52  eilers
- * oops..
- *
- * Revision 1.1.2.13  2002/07/28 15:35:22  eilers
- * Example-By-Query Search interface debugged. It is working now.. :)
- *
- * Revision 1.1.2.12  2002/07/24 07:01:58  eilers
- * Some minor changes. Fixed search query bug
- *
- * Revision 1.1.2.11  2002/07/21 15:21:26  eilers
- * Some interface changes and minor bugfixes...
- * The search interface is able to use wildcards, regular expressions and
- * ignore cases... I love the Trolltech cClasslibrary ! :)
- *
- * Revision 1.1.2.10  2002/07/18 13:37:53  eilers
- * Uniinitialized variable: fixed..
- *
- * Revision 1.1.2.9  2002/07/14 13:50:08  eilers
- * Interface change... REMEMBER: The search function is currently totally
- * untested !!
- *
- * Revision 1.1.2.8  2002/07/14 13:41:30  eilers
- * Some bugfixes,
- * Added interface for searching contacts in database, using "query by example"
- * like system
- *
- * Revision 1.1.2.7  2002/07/13 17:19:20  eilers
- * Added signal handling:
- * The database will be informed if it is changed externally and if flush() or
- * reload() signals sent. The application which is using the database may
- * reload manually if this happens...
- *
- * Revision 1.1.2.6  2002/07/07 16:24:47  eilers
- * All active parts moved into the backend. It should be easily possible to
- * use a database as backend
- *
- * Revision 1.1.2.5  2002/07/07 12:40:35  zecke
- * Why was this there in the first place?
- *
- * Revision 1.1.2.4  2002/07/06 16:06:03  eilers
- * Some bugfixes and cleanup of inconsistencies
- *
- * Revision 1.1.2.3  2002/07/05 13:03:30  zecke
- * Move the stuff responsible for loading and unloading
- * out of the ContactDB. This will make the switch to a real
- * database more easy.
- * Contact::insert is private so I had to workaround this 'feature'
- * CVS
- *
- * Revision 1.1.2.2  2002/07/05 11:17:19  zecke
- * Some API updates by me
- *
- * Revision 1.1.2.1  2002/07/01 16:49:46  eilers
- * First attempt for cross reference
  *
  */
 
@@ -223,13 +171,14 @@ namespace {
 			return ( false );
 		}
 		
-		const Contact *queryByExample ( const Contact &query, const uint settings ){
-			m_currentQuery.setAutoDelete( false );
-			m_currentQuery.clear();
+		bool queryByExample ( const Contact &query, const uint settings ){
 
+			m_currentQuery.clear();
 			QValueListConstIterator<Contact> it;
+			bool found_one = false;
+
 			for( it = m_contactList.begin(); it != m_contactList.end(); ++it ){
-				/* Search all fields and compare them with query object. Store pointer into list
+				/* Search all fields and compare them with query object. Store them into list
 				 * if all fields matches. 
 				 */
 				bool allcorrect = true;
@@ -267,14 +216,33 @@ namespace {
 						}
 					}
 				}
-				if ( allcorrect )
-					m_currentQuery.append( &(*it) );
+				if ( allcorrect ){
+					found_one = true;
+					m_currentQuery.append( (*it) );
+				}
 			}
 			
 			/* Move to the top of the list and set this query valid */
-			
-			m_queryValid = true;
-			return m_currentQuery.first();
+			m_queryIndex = 0;
+
+			if ( found_one )
+				m_queryValid = true;
+
+			return found_one;
+		}
+
+		bool nextFound ( Contact& next )
+		{
+			if ( m_queryValid && ( m_queryIndex < m_currentQuery.count() ) ){
+				next = m_currentQuery[m_queryIndex++];
+				return true;
+			} else
+				return false;
+		}
+
+		const QValueList<Contact> allFound ()
+		{
+			return m_currentQuery;
 		}
 
 		const uint getQuerySettings()
@@ -301,14 +269,6 @@ namespace {
 			default:
 				return ( false );
 			}
-		}
-
-		const Contact *nextFound ()
-		{
-			if ( m_queryValid )
-				return ( m_currentQuery.next() );
-			else
-				return NULL;
 		}
 
 		bool addContact ( const Contact &newcontact )
@@ -576,7 +536,8 @@ namespace {
 		QString m_fileName;
 		QString m_appName;
 		QValueList<Contact> m_contactList;
-		QList<Contact> m_currentQuery;
+		QValueList<Contact> m_currentQuery;
+		uint m_queryIndex;
 		bool m_queryValid;
 		QDateTime m_readtime;
 	};
@@ -648,7 +609,7 @@ QValueList<Contact> OContactDB::allContacts() const
 	return ( m_backEnd->allContacts() );
 }
 
-const Contact *OContactDB::queryByExample ( const Contact &query, const uint setting )
+bool OContactDB::queryByExample ( const Contact &query, const Query setting )
 {
 	return ( m_backEnd->queryByExample ( query, setting ) );
 }
@@ -658,17 +619,22 @@ const uint OContactDB::getQuerySettings()
 	return ( m_backEnd->getQuerySettings() );
 }
 
-bool OContactDB::hasQuerySettings (uint querySettings) const 
+bool OContactDB::hasQuerySettings ( Query querySettings ) const 
 {
 	return ( m_backEnd->hasQuerySettings ( querySettings ) );
 }
 
-const Contact *OContactDB::nextFound ()
+bool OContactDB::nextFound ( Contact& next)
 {
-	return ( m_backEnd->nextFound () ); 
+	return ( m_backEnd->nextFound ( next ) ); 
 }
 
-bool OContactDB::addContact ( const Contact &newcontact )
+const QValueList<Contact> OContactDB::allFound()
+{
+	return ( m_backEnd->allFound() );
+}
+
+bool OContactDB::addContact ( const Contact& newcontact )
 {
 	m_changed = true;
 	return ( m_backEnd->addContact ( newcontact ) );

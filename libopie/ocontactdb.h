@@ -13,68 +13,15 @@
  * =====================================================================
  * ToDo: ...
  * =====================================================================
- * Version: $Id: ocontactdb.h,v 1.1.2.15 2002-08-05 09:27:49 eilers Exp $
+ * Version: $Id: ocontactdb.h,v 1.1.2.16 2002-08-10 15:00:30 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb.h,v $
- * Revision 1.1.2.15  2002-08-05 09:27:49  eilers
+ * Revision 1.1.2.16  2002-08-10 15:00:30  eilers
+ * Improved search interface. Thanks to Zecke
+ *
+ * Revision 1.1.2.15  2002/08/05 09:27:49  eilers
  * i think i need hollidays..
- *
- * Revision 1.1.2.14  2002/08/05 09:26:11  eilers
- * forgotten to set methods to abstract
- *
- * Revision 1.1.2.13  2002/08/04 12:24:30  eilers
- * It is now possible to ask the backend which kind of queries he support
- * or if a query is correct...
- *
- * Revision 1.1.2.12  2002/07/28 15:35:22  eilers
- * Example-By-Query Search interface debugged. It is working now.. :)
- *
- * Revision 1.1.2.11  2002/07/21 15:21:26  eilers
- * Some interface changes and minor bugfixes...
- * The search interface is able to use wildcards, regular expressions and
- * ignore cases... I love the Trolltech cClasslibrary ! :)
- *
- * Revision 1.1.2.10  2002/07/14 13:50:08  eilers
- * Interface change... REMEMBER: The search function is currently totally
- * untested !!
- *
- * Revision 1.1.2.9  2002/07/14 13:41:30  eilers
- * Some bugfixes,
- * Added interface for searching contacts in database, using "query by example"
- * like system
- *
- * Revision 1.1.2.8  2002/07/13 17:19:20  eilers
- * Added signal handling:
- * The database will be informed if it is changed externally and if flush() or
- * reload() signals sent. The application which is using the database may
- * reload manually if this happens...
- *
- * Revision 1.1.2.7  2002/07/07 16:24:47  eilers
- * All active parts moved into the backend. It should be easily possible to
- * use a database as backend
- *
- * Revision 1.1.2.6  2002/07/07 12:40:35  zecke
- * Why was this there in the first place?
- *
- * Revision 1.1.2.5  2002/07/06 16:06:52  eilers
- * Some bugfixes and cleanup of inconsistencies
- *
- * Revision 1.1.2.4  2002/07/05 13:03:30  zecke
- * Move the stuff responsible for loading and unloading
- * out of the ContactDB. This will make the switch to a real
- * database more easy.
- * Contact::insert is private so I had to workaround this 'feature'
- * CVS
- *
- * Revision 1.1.2.3  2002/07/05 11:17:19  zecke
- * Some API updates by me
- *
- * Revision 1.1.2.2  2002/07/03 06:55:54  eilers
- * Moved to LGPL
- *
- * Revision 1.1.2.1  2002/07/01 16:49:46  eilers
- * First attempt for cross reference
  *
  * =====================================================================
  * This database emits the following signal if the xml-file is changed:
@@ -158,12 +105,28 @@ class OContactBackend {
 	 * To find a special contact, just fill all known information into
 	 * a new contact-object and start query with this function.
 	 * All information will be connected by an "AND".
+	 * @param first_contact The first result of this query, if this function returnes <i>true</i>.
 	 * @param query The query form.
-	 * @param settings The parameters how to perform the query.
-	 * @return <i>NULL</i> if nothing was found or the first contact.
-	 * @see nextFound(), query_RegExp, query_WildCards, query_ExactMatch, query_IgnoreCase
+	 * @param querysettings The parameters how to perform the query (OContactBackend::query_*).
+	 * @return <i>true</i> if something was found.
+	 * @see nextFound(), OContactBackend::query_RegExp, OContactBackend::query_WildCards, 
+	 * OContactBackend::query_ExactMatch, OContactBackend::query_IgnoreCase
 	 */
-	virtual const Contact *queryByExample ( const Contact &query, const uint settings ) = 0;
+	virtual bool queryByExample ( const Contact &query, const uint querysettings ) = 0; 
+
+	/** Returns the list of all found contacts, found by a query.
+	 * @return The list of all contacts found by the pervious query.
+	 * @see queryByExample()
+	 */
+	virtual const QValueList<Contact> allFound () = 0;
+
+	/** Requests a contact which was selected by queryByExample().
+	 * Use this function to move through the list of selected contacts.
+	 * @param next Is the next contact if this function returns <i>true</i>
+	 * @return <i>true</i> if there is a valid contact returned.
+	 * @see qeryByExample()
+	 */
+	virtual bool nextFound ( Contact& next ) = 0;
 
 	/** Return all possible settings.
 	 *  @return All settings provided by the current backend 
@@ -175,14 +138,6 @@ class OContactBackend {
 	 * @return <i>true</i> if the given settings are correct and possible.
 	 */
 	virtual bool hasQuerySettings (uint querySettings) const = 0;
-
-	/** Requests a contact which was selected by queryByExample().
-	 * Use this function to move through the list of selected contacts.
-	 * @return Pointer to next contact or <i>NULL</i> if list empty or no 
-	 * next element.
-	 * @see qeryByExample
-	 */
-	virtual const Contact *nextFound () = 0;
 
 	/** Add Contact to database.
 	 * @param newcontact The contact to add.
@@ -233,6 +188,17 @@ class OContactDB: public QObject
                     OContactBackend* backend = 0l, bool handlesync = true);
 	~OContactDB ();
 	
+	/** Constants for query.
+	 * Use this constants to set the query parameters.
+	 * Note: <i>query_IgnoreCase</i> just make sense with one of the other attributes !
+	 * @see queryByExample()
+	 */
+	typedef uint Query;
+        static const Query query_WildCards  = 0x0001;
+	static const Query query_IgnoreCase = 0x0002;
+	static const Query query_RegExp     = 0x0004; 
+	static const Query query_ExactMatch = 0x0008;
+
 	/** Returns all Contacts.
 	 * @return List of all contacts.
 	 */
@@ -251,12 +217,25 @@ class OContactDB: public QObject
 	 * All information will be connected by an "AND".
 	 * @param query The query form.
 	 * @param querysettings The parameters how to perform the query (OContactBackend::query_*).
-	 * @return <i>NULL</i> if nothing was found or the first contact.
+	 * @return <i>true</i> if something was found.
 	 * @see nextFound(), OContactBackend::query_RegExp, OContactBackend::query_WildCards, 
 	 * OContactBackend::query_ExactMatch, OContactBackend::query_IgnoreCase
-	 * @see 
 	 */
-	const Contact *queryByExample ( const Contact &query, const uint querysettings ); 
+	bool queryByExample ( const Contact &query, Query querysettings ); 
+
+	/** Returns the list of all found contacts, found by a query.
+	 * @return The list of all contacts found by the pervious query.
+	 * @see queryByExample()
+	 */
+	const QValueList<Contact> allFound ();
+
+	/** Requests a contact which was selected by queryByExample().
+	 * Use this function to move through the list of selected contacts.
+	 * @param next Is the next contact if this function returns <i>true</i>
+	 * @return <i>true</i> if there is a valid contact returned.
+	 * @see qeryByExample
+	 */
+	bool nextFound ( Contact& next );
 
 	/** Return all possible settings.
 	 *  @return All settings provided by the current backend 
@@ -267,21 +246,13 @@ class OContactDB: public QObject
 	/** Check whether settings are correct.
 	 * @return <i>true</i> if the given settings are correct and possible.
 	 */
-	bool hasQuerySettings (uint querySettings) const;
-
-	/** Requests a contact which was selected by queryByExample().
-	 * Use this function to move through the list of selected contacts.
-	 * @return Pointer to next contact or <i>null</i> if list empty or no 
-	 * next element.
-	 * @see qeryByExample
-	 */
-	const Contact *nextFound ();
+	bool hasQuerySettings ( Query querySettings ) const;
 
 	/** Add Contact to database.
 	 * @param newcontact The contact to add.
 	 * @return <i>true</i> if added successfully.
 	 */
-	bool addContact (const Contact &newcontact);
+	bool addContact (const Contact& newcontact);
 	
 	/** Replace contact.
 	 * Replaces given contact with contact with the user id <i>uid</i>.
@@ -311,16 +282,6 @@ class OContactDB: public QObject
 	 * @return true if successful
 	 */
 	bool save();
-
-	/** Constants for query.
-	 * Use this constants to set the query parameters.
-	 * Note: <i>query_IgnoreCase</i> just make sense with one of the other attributes !
-	 * @see queryByExample()
-	 */
-	static const uint query_WildCards  = 0x0001;
-	static const uint query_IgnoreCase = 0x0002;
-	static const uint query_RegExp     = 0x0004;
-	static const uint query_ExactMatch = 0x0008;
 
  signals:
 	/* Signal is emitted if the database was changed. Therefore
