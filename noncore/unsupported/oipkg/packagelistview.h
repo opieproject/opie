@@ -38,7 +38,7 @@ public:
   QTimer *popupTimer;
 private:
   QDict<PackageList> PackageLists;
-  QDict<ListViewItemOipkg> rootItems;
+//  QDict<ListViewItemOipkg> rootItems;
   PackageManagerSettings *settings;
 //  OipkgPackage *activePackage;
 //  PackageListItem *activePackageListItem;

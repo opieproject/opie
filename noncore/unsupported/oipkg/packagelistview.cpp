@@ -91,8 +91,8 @@ void PackageListView::display()
   QListViewItem* itdel;
   while ( list.current() ) {
     packlist = list.current();
-    rootItem = rootItems.find( list.currentKey() );
-    //rootItem->clear();
+    rootItem = static_cast<ListViewItemOipkg*>(packlist);
+   // rootItem = rootItems.find( list.currentKey() );
     it=rootItem->firstChild();
     while ( it )
       {
@@ -113,7 +113,7 @@ void PackageListView::display()
 void PackageListView::addList( QString n, PackageList* pl)
 {
   PackageLists.insert(n, pl);
-  rootItems.insert(n, static_cast<ListViewItemOipkg*>(pl));
+//  rootItems.insert(n, static_cast<ListViewItemOipkg*>(pl));
 //  ListViewItemOipkg *item = new ListViewItemOipkg(this,n,ListViewItemOipkg::Feed);
 //  rootItems.insert(n, item);
 }

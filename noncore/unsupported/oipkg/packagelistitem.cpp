@@ -224,7 +224,8 @@ QPopupMenu* PackageListItem::getPopupMenu()
 
 void PackageListItem::menuAction( int i )
 {
-  if (package->installed()){
+  if (!package->installed()){
+    qDebug("set dest[%i] -> %s",i, destsMenu->text(i).latin1());
     package->setDest( destsMenu->text(i) );
     package->setLink( settings->createLinks() );
   }
