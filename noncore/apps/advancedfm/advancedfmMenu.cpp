@@ -716,9 +716,8 @@ void AdvancedFm::startProcess(const QString & cmd) {
   QStringList command;
   OProcess *process;
   process = new OProcess();
-  connect(process, SIGNAL(processExited(Opie::Core::OProcess*)), this, SLOT( processEnded(Opie::Core::OProcess*)));
-
-  connect(process, SIGNAL( receivedStderr(Opie::Core::OProcess*,char*,int)), this, SLOT( oprocessStderr(Opie::Core::OProcess*,char*,int)));
+  connect(process,SIGNAL(processExited(Opie::Core::OProcess*)),this,SLOT(processEnded(Opie::Core::OProcess*)));
+  connect(process,SIGNAL(receivedStderr(Opie::Core::OProcess*,char*,int)),this,SLOT(oprocessStderr(Opie::Core::OProcess*,char*,int)));
 
   command << "/bin/sh";
   command << "-c";

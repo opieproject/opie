@@ -96,12 +96,12 @@ protected:
    QListView *CurrentView();
    QListView *OtherView();
    void setOtherTabCurrent();
-	 void changeTo(const QString dir);
 
 //protected signals:
 //		void newPath(QString);
     
 protected slots:
+	 void changeTo(const QString &);
    void slotSwitchMenu(int);
    void selectAll();
    void addToDocs();

@@ -43,7 +43,7 @@ AdvancedFm::AdvancedFm(QWidget *,const char*, WFlags )
    : QMainWindow( ) {
    init();
    renameBox = 0;
-
+	 whichTab = 1;
    unknownXpm = Resource::loadImage("UnknownDocument").smoothScale(AppLnk::smallIconSize(),AppLnk::smallIconSize() );
 
 	 initConnections();
@@ -89,10 +89,6 @@ void AdvancedFm::tabChanged(QWidget *wd) {
  				viewMenu->setItemChecked(viewMenu->idAt(1), true);
  		}
 
- 		QString fs= getFileSystemType( (const QString &)  path);
-
- 		setCaption(tr("AdvancedFm :: ")+fs+" :: "
- 							 +checkDiskSpace( (const QString &) path )+ tr(" kB free") );
  		chdir( path.latin1());
  		currentPathCombo->lineEdit()->setText(path);
 }
@@ -110,16 +106,18 @@ void AdvancedFm::populateView() {
 		thisDir->setMatchAllDirs(TRUE);
 		thisDir->setNameFilter(filterStr);
 		QString fileL, fileS, fileDate;
-		QString fs= getFileSystemType((const QString &) path);
+
+		QString fs = getFileSystemType((const QString &) path);
 		setCaption(tr("AdvancedFm :: ")+fs+" :: "
 							 +checkDiskSpace((const QString &) path)+ tr(" kB free") );
-		bool isDir=FALSE;
+		bool isDir = FALSE;
+
 		const QFileInfoList *list = thisDir->entryInfoList( /*QDir::All*/ /*, QDir::SortByMask*/);
 		QFileInfoListIterator it(*list);
 		QFileInfo *fi;
 		while ( (fi=it.current()) ) {
 				if (fi->isSymLink() )  {
-						QString symLink=fi->readLink();
+						QString symLink = fi->readLink();
 						QFileInfo sym( symLink);
 						fileS.sprintf( "%10i", sym.size() );
 						fileL =  fi->fileName() +" ->  " + sym.filePath().data();
@@ -323,7 +321,7 @@ QStringList AdvancedFm::getPath() {
    return strList;
 }
 
-void AdvancedFm::changeTo(const QString dir) {
+void AdvancedFm::changeTo(const QString &dir) {
    chdir( dir.latin1());
    CurrentDir()->cd(dir, TRUE);
    populateView();
@@ -340,12 +338,12 @@ void AdvancedFm::docButtonPushed() {
 
 void AdvancedFm::SDButtonPushed() {
 		Opie::Core::OStorageInfo info;
-   changeTo(info.sdPath());
+		changeTo(info.sdPath());
 }
 
 void AdvancedFm::CFButtonPushed() {
 		Opie::Core::OStorageInfo info;
-   changeTo(info.cfPath());
+		changeTo(info.cfPath());
 }
 
 void AdvancedFm::QPEButtonPushed() {
