@@ -10,6 +10,7 @@ XineControl::XineControl( QObject *parent, const char *name )
 
     connect( mediaPlayerState, SIGNAL( pausedToggled(bool) ),  this, SLOT( pause(bool) ) );
     connect( this, SIGNAL( positionChanged( int position ) ),  mediaPlayerState, SLOT( updatePosition( long p ) ) );
+    connect( mediaPlayerState, SIGNAL( playingToggled( bool ) ), this, SLOT( stop( bool ) ) );
 
 }
 
@@ -20,15 +21,22 @@ XineControl::~XineControl() {
 void XineControl::play( const QString& fileName ) {
     libXine->play( fileName );
     mediaPlayerState->setPlaying( true );
+    // default to audio view until we know how to handle video
+    mediaPlayerState->setView('a');
+    // determines of slider is shown
+    mediaPlayerState->isStreaming = false;
     // hier dann schaun welcher view
 }
 
-void XineControl::stop() {
-    libXine->stop();
-    mediaPlayerState->setPlaying( false );
+void XineControl::stop( bool isSet ) {
+    if ( isSet) {
+        libXine->stop();
+    }
+    // mediaPlayerState->setPlaying( false );
 }
 
-void XineControl::pause( bool ) {
+void XineControl::pause( bool isSet) {
+
     libXine->pause();
 }
 

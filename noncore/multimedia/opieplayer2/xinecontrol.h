@@ -13,7 +13,7 @@ public:
 
 public slots:
     void play( const QString& fileName );
-    void stop();
+    void stop( bool );
     void pause( bool );
 
     int currentTime();

@@ -86,24 +86,28 @@ void MediaPlayer::setPlaying( bool play ) {
 
 
 void MediaPlayer::prev() {
-    if ( playList->prev() )
-  play();
-    else if ( mediaPlayerState->looping() ) {
-        if ( playList->last() )
-      play();
-    } else
-  mediaPlayerState->setList();
+    if ( playList->prev() ) {
+        play();
+    } else if ( mediaPlayerState->looping() ) {
+        if ( playList->last() ) {
+            play();
+        }
+    } else {
+        mediaPlayerState->setList();
+    }
 }
 
 
 void MediaPlayer::next() {
-    if ( playList->next() )
-  play();
-    else if ( mediaPlayerState->looping() ) {
-        if ( playList->first() )
-      play();
-    } else
-  mediaPlayerState->setList();
+    if ( playList->next() ) {
+        play();
+    } else if ( mediaPlayerState->looping() ) {
+        if ( playList->first() ) {
+            play();
+        }
+    } else {
+        mediaPlayerState->setList();
+    }
 }
 
 
