@@ -53,6 +53,7 @@ void QPEApplication::showWidget( QWidget* wg, bool nomax ) {
     }
 
 #ifndef OPIE_NO_WINDOWED
+    Q_UNUSED( nomax )
     if ( TRUE ) {
 #else
     if ( !nomax
