@@ -72,7 +72,7 @@ using namespace Opie;
 
 static void cleanup()
 {
-    QDir dir( OGlobal::tempDirPath(), "qcop-msg-*" );
+    QDir dir( "/tmp", "qcop-msg-*" );
 
     QStringList stale = dir.entryList();
     QStringList::Iterator it;
