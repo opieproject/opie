@@ -121,6 +121,7 @@ $(TOPDIR)/scripts/filesubst : FORCE
 		echo 's,^root/,/,g'; \
 		echo 's,^etc/,/etc/,g'; \
 		echo 's,^lib/,$(prefix)/lib/,g'; \
+		echo 's,^bin/,$(prefix)/bin/,g'; \
 		echo 's,^pics/,$(prefix)/pics/,g'; \
 		echo 's,^sounds/,$(prefix)/sounds/,g'; \
 		echo 's,^plugins/,$(prefix)/plugins/,g'; \
