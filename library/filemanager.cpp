@@ -317,7 +317,7 @@ bool FileManager::renameFile( const QString & src, const QString & dest ) {
     return false;  
 }
 
-
+/*
 bool FileManager::copyFile( const QString & src, const QString & dest ) {
    bool success = true;
    struct stat status;
@@ -377,7 +377,7 @@ bool FileManager::renameFile( const QString & src, const QString & dest ) {
    }
     return false;
 }
-
+*/
 
 /*!
   Opens the document specified by \a f as a readable QIODevice.
