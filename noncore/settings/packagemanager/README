@@ -2,7 +2,7 @@
 /*
 /*                       Opie - Package Manager
 /*                      ========================
-/*                           Version 0.1.0
+/*                           Version 0.2.0
 /*
 /*                A package management client for Opie
 /*
@@ -19,11 +19,26 @@
 - See $OPIEDIR/noncore/settings/packagemanager/TODO for more info.
 
 ======================
+=        Build       =
+======================
+
+In order to build opie-packagemanager, libipkg needs to be present on
+the build system along with the appropriate headers.
+
+- libipkg source (best to use version 109 or greater):
+  - Familiar CVS directory: familiar/dist/ipkg/C (e.g. 'cvs co familiar/dist/ipkg/C')
+  - FTP: ftp://handhelds.org/linux/packages/ipkg
+
+- before building opie-packagemanager, define the environmental variable
+  IPKGDIR to point to the directory containing the ipkg source code
+  - e.g. 'export IPKGDIR=$HOME/familiar/dist/ipkg/C'
+
+======================
 =         Run        =
 ======================
 
-- In order to use opie-packagemanager, ipkg must be installed and
-  configured on the system.
+- In order to use opie-packagemanager, libipkg must be installed
+  on the system.
 
 ======================
 =       Credits      =
