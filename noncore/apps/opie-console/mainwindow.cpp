@@ -473,15 +473,21 @@ void MainWindow::slotFullscreen() {
 }
 
 
-void MainWindow::slotKeyReceived(ushort u, ushort q, bool, bool, bool) {
+void MainWindow::slotKeyReceived(ushort u, ushort q, bool, bool pressed, bool) {
 
-    qWarning("received key event! relay to TE widget");
+    qWarning("unicode: %x, qkey: %x, %s", u, q, pressed ? "pressed" : "released");
 
     if ( m_curSession ) {
-        QKeyEvent ke(QEvent::KeyPress, q, u, 0);
 
-        ke.ignore();
+        QEvent::Type state;
+
+        if (pressed) state = QEvent::KeyPress;
+        else state = QEvent::KeyRelease;
+
+        QKeyEvent ke(state, q, u, 0, QString(QChar(u)));
+
         // where should i send this event? doesnt work sending it here
-        QApplication::sendEvent((QObject *)m_curSession->widgetStack(), &ke);
+        QApplication::sendEvent((QObject *)m_curSession->widget(), &ke);
+        ke.ignore();
     }
 }
