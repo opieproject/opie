@@ -55,7 +55,7 @@
 #include <qpe/resource.h>
 #include <qpe/sound.h>
 
-#ifdef QWS
+#if !(QT_NO_COP)
 #include <qpe/qcopenvelope_qws.h>
 #endif
 
