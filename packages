@@ -110,6 +110,7 @@ CONFIG_OPIEPLAYER2	noncore/multimedia/opieplayer2	opieplayer2.pro
 CONFIG_OPIEREC		noncore/multimedia/opierec	opierec.pro
 CONFIG_OPIETOOTH-APPLET	noncore/net/opietooth/applet	applet.pro
 CONFIG_OPIETOOTH-MANAGER	noncore/net/opietooth/manager	manager.pro
+CONFIG_OSEARCH	noncore/apps/osearch	osearch.pro
 CONFIG_OXYGEN	noncore/apps/oxygen	oxygen.pro
 CONFIG_PARASHOOT	noncore/games/parashoot	parashoot.pro
 CONFIG_PICKBOARD	inputmethods/pickboard	pickboard.pro
