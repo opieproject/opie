@@ -74,33 +74,13 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
     Config config( "apm" );
     config.setGroup( "Battery" );
 
-    int interval;
     // battery spinboxes
-    interval = config.readNumEntry( "Interval_Dim", 20 );
-    if ( config.readNumEntry("Dim",1) == 0 ) {
-        interval_dim->setValue( 0 );
-    } else {
-        interval_dim->setValue( interval );
-    }
-
-    interval = config.readNumEntry( "Interval_LightOff", 30 );
-    if ( config.readNumEntry("LightOff",1) == 0 ) {
-        interval_lightoff->setValue( 0 );
-    } else {
-        interval_lightoff->setValue( interval );
-    }
-
-    interval = config.readNumEntry( "Interval", 60 );
-    if ( interval > 3600 ) interval /= 1000; // compatibility (was millisecs)
-
-    if ( config.readNumEntry("NoApm", 0 ) == 1 ) {
-        interval_suspend->setValue( 0 );
-    } else {
-        interval_suspend->setValue( interval );
-    }
+    interval_dim->setValue( config.readNumEntry( "Dim", 20 ));
+    interval_lightoff->setValue( config.readNumEntry( "LightOff", 30 ));
+    interval_suspend->setValue( config.readNumEntry( "Suspend", 60 ));
 
     // battery check and slider
-    LcdOffOnly->setChecked( config.readNumEntry("LcdOffOnly",0) != 0 );
+    LcdOffOnly->setChecked( config.readBoolEntry("LcdOffOnly",false));
     int maxbright = ODevice::inst ( )-> displayBrightnessResolution ( );
     initbright = config.readNumEntry("Brightness",255);
     brightness->setMaxValue( maxbright );
@@ -116,32 +96,12 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
 
     config.setGroup( "AC" );
     // ac spinboxes
-    interval = config.readNumEntry( "Interval_Dim", 20 );
-    if ( config.readNumEntry("Dim",1) == 0 ) {
-        interval_dim_ac_3->setValue( 0 );
-    } else {
-    interval_dim_ac_3->setValue( interval );
-    }
-
-    interval = config.readNumEntry( "Interval_LightOff", 30 );
-    if ( config.readNumEntry("LightOff",1) == 0 ) {
-        interval_lightoff_ac_3->setValue( 0 );
-    } else {
-        interval_lightoff_ac_3->setValue( interval );
-    }
-
-    interval = config.readNumEntry( "Interval", 60 );
-    if ( interval > 3600 ) {
-        interval /= 1000; // compatibility (was millisecs)
-    }
-    if ( config.readNumEntry("NoApm", 1) == 1 ) {
-        interval_suspend_ac_3->setValue( 0 );
-    } else {
-        interval_suspend_ac_3->setValue( interval );
-    }
+    interval_dim_ac_3->setValue( config.readNumEntry( "Dim", 20 ));
+    interval_lightoff_ac_3->setValue( config.readNumEntry( "LightOff", 30 ));
+    interval_suspend_ac_3->setValue( config.readNumEntry( "Suspend", 60 ));
 
     // ac check and slider
-    LcdOffOnly_2_3->setChecked( config.readNumEntry("LcdOffOnly",0) != 0 );
+    LcdOffOnly_2_3->setChecked( config.readBoolEntry("LcdOffOnly",false));
     int maxbright_ac = ODevice::inst ( )-> displayBrightnessResolution ( );
     initbright_ac = config.readNumEntry("Brightness",255);
     brightness_ac_3->setMaxValue( maxbright_ac );
@@ -198,15 +158,15 @@ void LightSettings::accept()
     applyBrightness();
 
     // bat
-    int i_dim =      ( !( interval_dim->specialValueText() == tr("never") ) ? interval_dim->value() : 0);
-    int i_lightoff = ( !( interval_lightoff->specialValueText() == tr("never") )  ? interval_lightoff->value() : 0);
+    int i_dim =      interval_dim->value();
+    int i_lightoff = interval_lightoff->value();
     int i_suspend =  interval_suspend->value();
     QCopEnvelope e("QPE/System", "setScreenSaverIntervals(int,int,int)" );
     e << i_dim << i_lightoff << i_suspend;
 
     // ac
-    int i_dim_ac =      ( !( interval_dim_ac_3->specialValueText() == tr("never") ) ? interval_dim_ac_3->value() : 0);
-    int i_lightoff_ac = ( !( interval_lightoff_ac_3->specialValueText() == tr("never") ) ? interval_lightoff_ac_3->value() : 0);
+    int i_dim_ac =      interval_dim_ac_3->value();
+    int i_lightoff_ac = interval_lightoff_ac_3->value();
     int i_suspend_ac =  interval_suspend_ac_3->value();
     QCopEnvelope e_ac("QPE/System", "setScreenSaverIntervalsAC(int,int,int)" );
     e << i_dim_ac << i_lightoff_ac << i_suspend_ac;
@@ -216,25 +176,19 @@ void LightSettings::accept()
     config.setGroup( "Battery" );
 
     // bat
-    config.writeEntry( "Dim", interval_dim->specialValueText() == tr("never") );
-    config.writeEntry( "LightOff", interval_lightoff->specialValueText() == tr("never") );
-    config.writeEntry( "LcdOffOnly", (int)LcdOffOnly->isChecked() );
-    config.writeEntry( "NoAPm", interval_suspend->specialValueText() == tr("never") );
-    config.writeEntry( "Interval_Dim", interval_dim->value() );
-    config.writeEntry( "Interval_LightOff", interval_lightoff->value() );
-    config.writeEntry( "Interval", interval_suspend->value() );
+    config.writeEntry( "LcdOffOnly", LcdOffOnly->isChecked() );
+    config.writeEntry( "Dim", interval_dim->value() );
+    config.writeEntry( "LightOff", interval_lightoff->value() );
+    config.writeEntry( "Suspend", interval_suspend->value() );
     config.writeEntry( "Brightness",
     ( brightness->value() ) * 255 / brightness->maxValue() );
 
     // ac
     config.setGroup( "AC" );
-    config.writeEntry( "Dim", interval_dim_ac_3->specialValueText() == tr("never") );
-    config.writeEntry( "LightOff", interval_lightoff_ac_3->specialValueText() == tr("never") );
-    config.writeEntry( "LcdOffOnly", (int)LcdOffOnly_2_3->isChecked() );
-    config.writeEntry( "NoAPm", interval_suspend_ac_3->specialValueText() == tr("never") );
-    config.writeEntry( "Interval_Dim", interval_dim_ac_3->value() );
-    config.writeEntry( "Interval_LightOff", interval_lightoff_ac_3->value() );
-    config.writeEntry( "Interval", interval_suspend_ac_3->value() );
+    config.writeEntry( "LcdOffOnly", LcdOffOnly_2_3->isChecked() );
+    config.writeEntry( "Dim", interval_dim_ac_3->value() );
+    config.writeEntry( "LightOff", interval_lightoff_ac_3->value() );
+    config.writeEntry( "Suspend", interval_suspend_ac_3->value() );
     config.writeEntry( "Brightness",
     ( brightness_ac_3->value()) * 255 / brightness_ac_3->maxValue() );
 
