@@ -915,7 +915,7 @@ void MHfolderItem::initName()
     {
         setPixmap( 0, PIXMAP_INBOXFOLDER);
     } else if (bName.lower() == "drafts") {
-        setPixmap(0, Resource::loadPixmap("inline/edit"));
+        setPixmap(0, Resource::loadPixmap("edit"));
     } else {
         setPixmap( 0, PIXMAP_MBOXFOLDER );
     }
