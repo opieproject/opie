@@ -15,6 +15,10 @@
 #include <qtoolbutton.h>
 #include <qcombobox.h>
 
+#ifndef QT_NO_FILEDIALOG
+#include <qfiledialog.h>
+#endif
+
 #include <ctype.h>
 
 HelpWindow::HelpWindow( const QString& home_, const QString& _path, QWidget* parent, const char *name )
