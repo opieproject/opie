@@ -4,7 +4,7 @@ copyright 2002 by L.J. Potter ljp@llornkcor.com
 ****************************************************************************/
 #ifndef QTREC_H
 #define QTREC_H
-#define VERSION 20040101
+#define VERSION 20040628
 
 #include <qpe/ir.h>
 
