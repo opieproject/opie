@@ -34,7 +34,6 @@ public:
 
 private:
     StockTickerPlugin *stocktickerPlugin;
-    ulong ref;
 };
 
 #endif

@@ -6,7 +6,7 @@
 
 
 
-LiquidInterface::LiquidInterface ( ) :  ref ( 0 )
+LiquidInterface::LiquidInterface ( ) 
 {
 	m_widget = 0;
 }
@@ -65,6 +65,8 @@ QRESULT LiquidInterface::queryInterface ( const QUuid &uuid, QUnknownInterface *
 		*iface = this;
 	else if ( uuid == IID_StyleExtended ) 
 		*iface = this;
+	else
+	    return QS_FALSE;
 	
 	if ( *iface )
 		(*iface)-> addRef ( );

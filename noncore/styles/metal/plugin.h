@@ -15,8 +15,6 @@ public:
 	virtual QStyle *style ( );	
 	virtual QString name ( ) const;
 	
-private:
-	ulong ref;
 };
 
 #endif

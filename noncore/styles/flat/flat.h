@@ -112,7 +112,6 @@ public:
 
 private:
     FlatStyle *flat;
-    ulong ref;
 };
 
 #endif // FLATSTYLE_H

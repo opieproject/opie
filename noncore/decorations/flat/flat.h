@@ -42,7 +42,6 @@ public:
     Q_REFCOUNT
 
 private:
-    ulong ref;
     QCache<QImage> buttonCache;
 };
 

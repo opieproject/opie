@@ -6,7 +6,7 @@
 #include <qdrawutil.h>
 
 
-LiquidDecoInterface::LiquidDecoInterface ( ) :  ref ( 0 )
+LiquidDecoInterface::LiquidDecoInterface ( ) 
 {
 }
     
@@ -122,6 +122,8 @@ QRESULT LiquidDecoInterface::queryInterface ( const QUuid &uuid, QUnknownInterfa
 		*iface = this;
 	else if ( uuid == IID_WindowDecoration )
 		*iface = this;
+	else
+	    return QS_FALSE;
 	
 	if ( *iface )
 		(*iface)-> addRef ( );

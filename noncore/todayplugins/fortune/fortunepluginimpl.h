@@ -35,7 +35,6 @@ public:
 
 private:
 	FortunePlugin *fortunePlugin;
-	ulong ref;
 };
 
 #endif

@@ -42,8 +42,6 @@ public:
 protected:
     void PolishedDecoration::drawBlend( QPainter *, const QRect &r, const QColor &c1, const QColor&c2 ) const;
 
-private:
-    ulong ref;
 };
 
 #endif

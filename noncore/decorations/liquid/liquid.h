@@ -18,8 +18,6 @@ public:
 	virtual QString name ( ) const;
 	virtual QPixmap icon ( ) const;
 	
-private:
-	ulong ref;
 };
 
 #endif

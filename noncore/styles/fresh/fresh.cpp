@@ -804,7 +804,7 @@ void FreshStyle::drawPopupMenuItem( QPainter* p, bool checkable, int maxpmw, int
 //===========================================================================
 
 FreshStyleImpl::FreshStyleImpl()
-    : fresh(0), ref(0)
+    : fresh(0)
 {
 }
 
@@ -833,6 +833,8 @@ QRESULT FreshStyleImpl::queryInterface( const QUuid &uuid, QUnknownInterface **i
 	*iface = this;
     else if ( uuid == IID_Style )
 	*iface = this;
+    else
+	return QS_FALSE;
 
     if ( *iface )
 	(*iface)->addRef();

@@ -46,7 +46,6 @@ class WeatherPluginImpl : public TodayPluginInterface
 
 	private:
 		WeatherPlugin *weatherPlugin;
-		ulong ref;
 };
 
 #endif

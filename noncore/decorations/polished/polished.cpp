@@ -22,7 +22,7 @@
 #include <qpainter.h>
 #include <qapplication.h>
 
-PolishedDecoration::PolishedDecoration() : ref(0)
+PolishedDecoration::PolishedDecoration() 
 {
 }
 
@@ -158,6 +158,8 @@ QRESULT PolishedDecoration::queryInterface( const QUuid &uuid, QUnknownInterface
 	*iface = this;
     else if ( uuid == IID_WindowDecoration )
 	*iface = this;
+    else
+	return QS_FALSE;
 
     if ( *iface )
 	(*iface)->addRef();

@@ -94,7 +94,6 @@ public:
 
 private:
     FreshStyle *fresh;
-    ulong ref;
 };
 
 #endif // FRESHSTYLE_H

@@ -28,7 +28,6 @@ public:
 
 private:
 	LiquidSettings *m_widget;
-	ulong ref;
 };
 
 #endif

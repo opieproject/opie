@@ -4,7 +4,7 @@
 #include "plugin.h"
 
 
-MetalInterface::MetalInterface ( ) :  ref ( 0 )
+MetalInterface::MetalInterface ( ) 
 {
 }
     
@@ -31,6 +31,8 @@ QRESULT MetalInterface::queryInterface ( const QUuid &uuid, QUnknownInterface **
 		*iface = this;
 	else if ( uuid == IID_Style )
 		*iface = this;
+	else
+	    return QS_FALSE;
 	
 	if ( *iface )
 		(*iface)-> addRef ( );

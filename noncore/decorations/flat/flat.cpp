@@ -200,7 +200,7 @@ static void colorize( QImage &img, const QColor &c, bool rev )
     }
 }
 
-FlatDecoration::FlatDecoration() : ref(0), buttonCache(16)
+FlatDecoration::FlatDecoration() : buttonCache(16)
 {
     buttonCache.setAutoDelete(TRUE);
 }
@@ -347,6 +347,8 @@ QRESULT FlatDecoration::queryInterface( const QUuid &uuid, QUnknownInterface **i
 	*iface = this;
     else if ( uuid == IID_WindowDecoration )
 	*iface = this;
+    else
+	return QS_FALSE;
 
     if ( *iface )
 	(*iface)->addRef();

@@ -1058,7 +1058,7 @@ void FlatStyle::getButtonShift( int &x, int &y )
 //===========================================================================
 
 FlatStyleImpl::FlatStyleImpl()
-    : flat(0), ref(0)
+    : flat(0)
 {
 }
 

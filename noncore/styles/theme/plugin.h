@@ -27,7 +27,6 @@ public:
 	
 private:
 	ThemeSettings *m_widget;
-	ulong ref;
 };
 
 #endif
