@@ -21,9 +21,10 @@ namespace Core{
 }
 }
 
+class ImageView;
 class PIconView;
 class imageinfo;
-class ImageView;
+
 class PMainWindow : public QMainWindow {
     Q_OBJECT
     enum Views { IconView,  ImageInfo, ImageDisplay };

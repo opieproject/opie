@@ -9,7 +9,7 @@
 using namespace Opie::Core;
 
 ImageView::ImageView(Opie::Core::OConfig *cfg, QWidget* parent, const char* name, WFlags fl )
-    : ImageScrollView(parent,name,fl)
+    : Opie::MM::OImageScrollView(parent,name,fl)
 {
     m_viewManager = 0;
     m_cfg = cfg;
@@ -43,7 +43,6 @@ void ImageView::initKeys()
     lst.append( Opie::Core::OKeyPair::downArrowKey() );
     lst.append( Opie::Core::OKeyPair::leftArrowKey() );
     lst.append( Opie::Core::OKeyPair::rightArrowKey() );
-    lst.append( Opie::Core::OKeyPair::returnKey() );
 
     m_viewManager = new Opie::Core::OKeyConfigManager(m_cfg, "image_view_keys",
                                                     lst, false,this, "image_view_keys" );

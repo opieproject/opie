@@ -1,60 +1,93 @@
 #include "imagescrollview.h"
 
+#include "lib/oimagezoomer.h"
+
 #include <opie2/odebug.h>
 #include <opie2/oapplication.h>
 #include <opie2/owait.h>
-
-using namespace Opie::Core;
 
 #include <qimage.h>
 #include <qlayout.h>
 #include <qpe/qcopenvelope_qws.h>
 
-ImageScrollView::ImageScrollView( QWidget* parent, const char* name,  WFlags f )
-    :QScrollView(parent,name,f|Qt::WRepaintNoErase ),_image_data(),_original_data(),scale_to_fit(true),
-     rotate_to_fit(true),show_zoomer(true),first_resize_done(false),m_lastName("")
+/* for usage with the bitset */
+#define AUTO_SCALE 0
+#define AUTO_ROTATE 1
+#define SHOW_ZOOMER 2
+#define FIRST_RESIZE_DONE 3
+#define IMAGE_IS_JPEG 4
+#define IMAGE_SCALED_LOADED 5
+
+#define SCROLLVIEW_BITSET_SIZE 6
+
+namespace Opie {
+namespace MM {
+OImageScrollView::OImageScrollView( QWidget* parent, const char* name,  WFlags f )
+    :QScrollView(parent,name,f|Qt::WRepaintNoErase ),_image_data(),_original_data(),
+    m_states(SCROLLVIEW_BITSET_SIZE),m_lastName("")
 {
+    _zoomer = 0;
+    m_states[AUTO_SCALE]=true;
+    m_states[AUTO_ROTATE]=true;
+    m_states[FIRST_RESIZE_DONE]=false;
+    m_states[IMAGE_IS_JPEG]=false;
+    m_states[IMAGE_SCALED_LOADED]=false;
+    m_states[SHOW_ZOOMER]=true;
     init();
 }
 
-ImageScrollView::ImageScrollView (const QImage&img, QWidget * parent, const char * name, WFlags f,bool always_scale,bool rfit)
-    :QScrollView(parent,name,f|Qt::WRepaintNoErase),_image_data(),_original_data(img),scale_to_fit(always_scale),
-    rotate_to_fit(rfit),show_zoomer(true),first_resize_done(false),m_lastName("")
+OImageScrollView::OImageScrollView (const QImage&img, QWidget * parent, const char * name, WFlags f,bool always_scale,bool rfit)
+    :QScrollView(parent,name,f|Qt::WRepaintNoErase),_image_data(),_original_data(img),
+     m_states(SCROLLVIEW_BITSET_SIZE),m_lastName("")
 {
+    _zoomer = 0;
+    m_states[AUTO_SCALE]=always_scale;
+    m_states[AUTO_ROTATE]=rfit;
+    m_states[FIRST_RESIZE_DONE]=false;
+    m_states[IMAGE_IS_JPEG]=false;
+    m_states[IMAGE_SCALED_LOADED]=false;
+    m_states[SHOW_ZOOMER]=true;
     _original_data.convertDepth(QPixmap::defaultDepth());
     _original_data.setAlphaBuffer(false);
     init();
 }
 
-ImageScrollView::ImageScrollView (const QString&img, QWidget * parent, const char * name, WFlags f,bool always_scale,bool rfit)
-    :QScrollView(parent,name,f|Qt::WRepaintNoErase),_image_data(),_original_data(),scale_to_fit(always_scale),
-    rotate_to_fit(rfit),show_zoomer(true),first_resize_done(false),m_lastName("")
+OImageScrollView::OImageScrollView (const QString&img, QWidget * parent, const char * name, WFlags f,bool always_scale,bool rfit)
+    :QScrollView(parent,name,f|Qt::WRepaintNoErase),_image_data(),_original_data(),m_states(SCROLLVIEW_BITSET_SIZE),m_lastName("")
 {
+    _zoomer = 0;
+    m_states.resize(SCROLLVIEW_BITSET_SIZE);
+    m_states[AUTO_SCALE]=always_scale;
+    m_states[AUTO_ROTATE]=rfit;
+    m_states[FIRST_RESIZE_DONE]=false;
+    m_states[IMAGE_IS_JPEG]=false;
+    m_states[IMAGE_SCALED_LOADED]=false;
+    m_states[SHOW_ZOOMER]=true;
     init();
     setImage(img);
 }
 
-void ImageScrollView::setImage(const QImage&img)
+void OImageScrollView::setImage(const QImage&img)
 {
     _image_data = QImage();
     _original_data=img;
     _original_data.convertDepth(QPixmap::defaultDepth());
     _original_data.setAlphaBuffer(false);
     m_lastName = "";
-    image_is_jpeg = false;
-    image_scaled_loaded = false;
-    if (first_resize_done) {
+    setImageIsJpeg(false);
+    setImageScaledLoaded(false);
+    if (FirstResizeDone()) {
         generateImage();
     }
 }
 
-void ImageScrollView::loadJpeg(bool interncall)
+void OImageScrollView::loadJpeg(bool interncall)
 {
     if (m_lastName.isEmpty()) return;
     QImageIO iio( m_lastName, 0l );
     QString param;
     bool real_load = false;
-    if (scale_to_fit) {
+    if (AutoScale()) {
         if (!interncall) {
             int wid, hei;
             wid = QApplication::desktop()->width();
@@ -67,15 +100,15 @@ void ImageScrollView::loadJpeg(bool interncall)
             param = QString( "Fast Shrink( 7 ) Scale( %1, %2, ScaleFree)" ).arg( wid ).arg( hei );
             odebug << "Load jpeg scaled \"" << param << "\"" << oendl;
             iio.setParameters(param.latin1());
-            image_scaled_loaded = true;
+            setImageScaledLoaded(true);
             real_load = true;
         }
     } else {
-        if (image_scaled_loaded||!interncall) {
+        if (ImageScaledLoaded()||!interncall) {
             odebug << "Load jpeg unscaled" << oendl;
             real_load = true;
         }
-        image_scaled_loaded = false;
+        setImageScaledLoaded(false);
     }
     if (real_load) {
         {
@@ -89,20 +122,20 @@ void ImageScrollView::loadJpeg(bool interncall)
     }
 }
 
-void ImageScrollView::setImage( const QString& path ) {
+void OImageScrollView::setImage( const QString& path ) {
     odebug << "load new image " << oendl;
     if (m_lastName == path) return;
     m_lastName = path;
     QString itype = QImage::imageFormat(m_lastName);
     odebug << "Image type = " << itype << oendl;
     if (itype == "JPEG") {
-        image_is_jpeg = true;
+        setImageIsJpeg(true);
         loadJpeg();
     } else {
         {
             QCopEnvelope( "QPE/System", "busy()" );
         }
-        image_is_jpeg = false;
+        setImageIsJpeg(false);
         _original_data.load(path);
         _original_data.convertDepth(QPixmap::defaultDepth());
         _original_data.setAlphaBuffer(false);
@@ -112,13 +145,13 @@ void ImageScrollView::setImage( const QString& path ) {
         }
     }
     _image_data = QImage();
-    if (first_resize_done) {
+    if (FirstResizeDone()) {
         generateImage();
     }
 }
 
 /* should be called every time the QImage changed it content */
-void ImageScrollView::init()
+void OImageScrollView::init()
 {
     odebug << "init " << oendl;
 
@@ -129,6 +162,8 @@ void ImageScrollView::init()
     _zoomer = new Opie::MM::OImageZoomer( this, "The Zoomer" );
     connect(_zoomer, SIGNAL( zoomAreaRel(int,int)),
             this, SLOT(scrollBy(int,int)) );
+    connect(_zoomer, SIGNAL( zoomArea(int,int)),
+            this, SLOT(center(int,int)) );
     connect(this,SIGNAL(contentsMoving(int,int)),
             _zoomer, (SLOT(setVisiblePoint(int,int))) );
     connect(this,SIGNAL(imageSizeChanged(const QSize&)),
@@ -138,45 +173,55 @@ void ImageScrollView::init()
 
     viewport()->setBackgroundColor(white);
     setFocusPolicy(QWidget::StrongFocus);
-    image_scaled_loaded = false;
-    image_is_jpeg = false;
-    if (first_resize_done) {
-        last_rot = Rotate0;
+    setImageScaledLoaded(false);
+    setImageIsJpeg(false);
+    if (FirstResizeDone()) {
+        m_last_rot = Rotate0;
         generateImage();
     } else if (_original_data.size().isValid()) {
-        if (image_fit_into(_original_data.size()) || !show_zoomer) _zoomer->hide();
+        if (image_fit_into(_original_data.size()) || !ShowZoomer()) _zoomer->hide();
         resizeContents(_original_data.width(),_original_data.height());
     }
 }
 
-void ImageScrollView::setAutoRotate(bool how)
+void OImageScrollView::setAutoRotate(bool how)
 {
     /* to avoid double repaints */
-    if (rotate_to_fit != how) {
-        rotate_to_fit = how;
+    if (AutoRotate() != how) {
+        m_states.setBit(AUTO_ROTATE,how);
         _image_data = QImage();
         generateImage();
     }
 }
 
-void ImageScrollView::setAutoScale(bool how)
+bool OImageScrollView::AutoRotate()const
 {
-    scale_to_fit = how;
+    return m_states.testBit(AUTO_ROTATE);
+}
+
+void OImageScrollView::setAutoScale(bool how)
+{
+    m_states.setBit(AUTO_SCALE,how);
     if (!how) {
-        rotate_to_fit = false;
+        setAutoRotate(false);
     }
     _image_data = QImage();
-    if (image_is_jpeg && how == false && image_scaled_loaded==true) {
+    if (ImageIsJpeg() && how == false && ImageScaledLoaded()==true) {
         loadJpeg(true);
     }
     generateImage();
 }
 
-ImageScrollView::~ImageScrollView()
+bool OImageScrollView::AutoScale()const
+{
+    return m_states.testBit(AUTO_SCALE);
+}
+
+OImageScrollView::~OImageScrollView()
 {
 }
 
-void ImageScrollView::rescaleImage(int w, int h)
+void OImageScrollView::rescaleImage(int w, int h)
 {
     if (_image_data.width()==w && _image_data.height()==h) {
         return;
@@ -189,7 +234,7 @@ void ImageScrollView::rescaleImage(int w, int h)
     _image_data = _image_data.smoothScale(smoothW,smoothH);
 }
 
-void ImageScrollView::rotate_into_data(Rotation r)
+void OImageScrollView::rotate_into_data(Rotation r)
 {
     /* realy - we must do this that way, 'cause when acting direct on _image_data the app will
        segfault :( */
@@ -303,19 +348,20 @@ void ImageScrollView::rotate_into_data(Rotation r)
     _image_data = dest;
 }
 
-void ImageScrollView::generateImage()
+void OImageScrollView::generateImage()
 {
     Rotation r = Rotate0;
+    if (_original_data.isNull()) return;
     {
         QCopEnvelope( "QPE/System", "busy()" );
     }
     if (width()>height()&&_original_data.width()<_original_data.height() ||
         width()<height()&&_original_data.width()>_original_data.height()) {
-        if (rotate_to_fit) r = Rotate90;
+        if (AutoRotate()) r = Rotate90;
     }
 
     odebug << " r = " << r << oendl;
-    if (scale_to_fit) {
+    if (AutoScale()) {
         if (!_image_data.size().isValid()||width()>_image_data.width()||height()>_image_data.height()) {
             odebug << "Rescaling data" << oendl;
             if (r==Rotate0) {
@@ -326,13 +372,13 @@ void ImageScrollView::generateImage()
         }
         rescaleImage(width(),height());
         resizeContents(_image_data.width(),_image_data.height());
-    }  else if (!first_resize_done||r!=last_rot||_image_data.width()==0) {
+    }  else if (!FirstResizeDone()||r!=m_last_rot||_image_data.width()==0) {
         if (r==Rotate0) {
             _image_data = _original_data;
         } else {
             rotate_into_data(r);
         }
-        last_rot = r;
+        m_last_rot = r;
         resizeContents(_image_data.width(),_image_data.height());
     }
     _pdata.convertFromImage(_image_data);
@@ -347,10 +393,11 @@ void ImageScrollView::generateImage()
     /*
      * move scrollbar
      */
-    _zoomer->setGeometry( viewport()->width()-_image_data.width()/2, viewport()->height()-_image_data.height()/2,
-         _image_data.width()/2, _image_data.height()/2 );
-
-    _zoomer->setImage( _image_data );
+     if (_zoomer) {
+        _zoomer->setGeometry( viewport()->width()-_image_data.width()/2, viewport()->height()-_image_data.height()/2,
+             _image_data.width()/2, _image_data.height()/2 );
+        _zoomer->setImage( _image_data );
+     }
     /*
      * invalidate
      */
@@ -361,17 +408,17 @@ void ImageScrollView::generateImage()
     }
 }
 
-void ImageScrollView::resizeEvent(QResizeEvent * e)
+void OImageScrollView::resizeEvent(QResizeEvent * e)
 {
-    odebug << "ImageScrollView resizeEvent" << oendl;
+    odebug << "OImageScrollView resizeEvent" << oendl;
     QScrollView::resizeEvent(e);
     generateImage();
-    first_resize_done = true;
+    setFirstResizeDone(true);
     emit viewportSizeChanged( viewport()->size() );
 
 }
 
-void ImageScrollView::keyPressEvent(QKeyEvent * e)
+void OImageScrollView::keyPressEvent(QKeyEvent * e)
 {
     if (!e) return;
     int dx = horizontalScrollBar()->lineStep();
@@ -394,7 +441,7 @@ void ImageScrollView::keyPressEvent(QKeyEvent * e)
     QScrollView::keyPressEvent(e);
 }
 
-void ImageScrollView::drawContents(QPainter * p, int clipx, int clipy, int clipw, int cliph)
+void OImageScrollView::drawContents(QPainter * p, int clipx, int clipy, int clipw, int cliph)
 {
     int w = clipw;
     int h = cliph;
@@ -427,7 +474,7 @@ void ImageScrollView::drawContents(QPainter * p, int clipx, int clipy, int clipw
 }
 
 /* using the real geometry points and not the translated points is wanted! */
-void ImageScrollView::viewportMouseMoveEvent(QMouseEvent* e)
+void OImageScrollView::viewportMouseMoveEvent(QMouseEvent* e)
 {
     odebug << "Move X and Y " << e->x() << " " << e->y() << oendl;
     int mx, my;
@@ -456,7 +503,7 @@ void ImageScrollView::viewportMouseMoveEvent(QMouseEvent* e)
     _mouseStartPosY=my;
 }
 
-void ImageScrollView::contentsMousePressEvent ( QMouseEvent * e)
+void OImageScrollView::contentsMousePressEvent ( QMouseEvent * e)
 {
     odebug << " X and Y " << e->x() << " " << e->y() << oendl;
     /* this marks the beginning of a possible mouse move. Due internal reasons of QT
@@ -468,7 +515,7 @@ void ImageScrollView::contentsMousePressEvent ( QMouseEvent * e)
     _mouseStartPosY = -1;
 }
 
-void ImageScrollView::setDestructiveClose() {
+void OImageScrollView::setDestructiveClose() {
     WFlags fl = getWFlags();
     /* clear it just in case */
     fl &= ~WDestructiveClose;
@@ -476,7 +523,7 @@ void ImageScrollView::setDestructiveClose() {
     setWFlags( fl );
 }
 
-bool ImageScrollView::image_fit_into(const QSize&s )
+bool OImageScrollView::image_fit_into(const QSize&s )
 {
     if (s.width()>width()||s.height()>height()) {
         return false;
@@ -484,17 +531,56 @@ bool ImageScrollView::image_fit_into(const QSize&s )
     return true;
 }
 
-void ImageScrollView::setShowZoomer(bool how)
+void OImageScrollView::setShowZoomer(bool how)
 {
-    show_zoomer = how;
+    m_states.setBit(SHOW_ZOOMER,how);
     check_zoomer();
 }
 
-void ImageScrollView::check_zoomer()
+bool OImageScrollView::ShowZoomer()const
 {
-    if ( (!show_zoomer||image_fit_into(_pdata.size()) ) && _zoomer->isVisible()) {
+    return m_states.testBit(SHOW_ZOOMER);
+}
+
+void OImageScrollView::check_zoomer()
+{
+    if (!_zoomer) return;
+    if ( (!ShowZoomer()||image_fit_into(_pdata.size()) ) && _zoomer->isVisible()) {
         _zoomer->hide();
-    } else if ( show_zoomer && !image_fit_into(_pdata.size()) && _zoomer->isHidden()){
+    } else if ( ShowZoomer() && !image_fit_into(_pdata.size()) && _zoomer->isHidden()){
         _zoomer->show();
     }
 }
+
+bool OImageScrollView::FirstResizeDone()const
+{
+    return m_states.testBit(FIRST_RESIZE_DONE);
+}
+
+void OImageScrollView::setFirstResizeDone(bool how)
+{
+    m_states.setBit(FIRST_RESIZE_DONE,how);
+}
+
+bool OImageScrollView::ImageIsJpeg()const
+{
+    return m_states.testBit(IMAGE_IS_JPEG);
+}
+
+void OImageScrollView::setImageIsJpeg(bool how)
+{
+    m_states.setBit(IMAGE_IS_JPEG,how);
+}
+
+bool OImageScrollView::ImageScaledLoaded()const
+{
+    return m_states.testBit(IMAGE_SCALED_LOADED);
+}
+
+void OImageScrollView::setImageScaledLoaded(bool how)
+{
+    m_states.setBit(IMAGE_SCALED_LOADED,how);
+}
+
+} // namespace MM
+} // namespace Opie

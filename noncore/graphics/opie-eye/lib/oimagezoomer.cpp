@@ -1,5 +1,7 @@
 #include "oimagezoomer.h"
 
+#include <opie2/odebug.h>
+
 #include <qimage.h>
 #include <qpixmap.h>
 #include <qpainter.h>
@@ -86,6 +88,7 @@ OImageZoomer::~OImageZoomer() {
 }
 
 void OImageZoomer::init() {
+    m_mevent = false;
     setFrameStyle( Panel | Sunken );
 }
 
@@ -195,8 +198,19 @@ void OImageZoomer::drawContents( QPainter* p ) {
     p->drawRect( x, y, w, h );
 }
 
-void OImageZoomer::mousePressEvent( QMouseEvent*  ) {
+void OImageZoomer::mousePressEvent( QMouseEvent*ev) {
     m_mouseX = m_mouseY = -1;
+    m_mevent = true;
+}
+
+void OImageZoomer::mouseReleaseEvent( QMouseEvent*ev) {
+    if (!m_mevent) return;
+    int mx, my;
+    mx = ev->x();
+    my = ev->y();
+    int diffx = (mx) * m_imgSize.width() / width();
+    int diffy = (my) * m_imgSize.height() / height();
+    emit zoomArea(diffx,diffy);
 }
 
 void OImageZoomer::mouseMoveEvent( QMouseEvent* ev ) {
@@ -205,10 +219,10 @@ void OImageZoomer::mouseMoveEvent( QMouseEvent* ev ) {
     my = ev->y();
 
     if ( m_mouseX != -1 && m_mouseY != -1 ) {
+        m_mevent = false;
         int diffx = ( mx - m_mouseX ) * m_imgSize.width() / width();
         int diffy = ( my - m_mouseY ) * m_imgSize.height() / height();
         emit zoomAreaRel( diffx, diffy );
-        emit zoomArea(m_visPt.x()+diffx, m_visPt.y()+diffy );
     }
     m_mouseX = mx;
     m_mouseY = my;

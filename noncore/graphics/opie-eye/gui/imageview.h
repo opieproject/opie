@@ -11,7 +11,7 @@ namespace Opie {
     }
 }
 
-class ImageView:public ImageScrollView
+class ImageView:public Opie::MM::OImageScrollView
 {
     Q_OBJECT
 
@@ -26,7 +26,6 @@ public:
 
 signals:
     void dispImageInfo(const QString&);
-    void sig_return();
 
 protected:
     Opie::Core::OConfig * m_cfg;

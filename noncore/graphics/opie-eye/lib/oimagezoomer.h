@@ -71,7 +71,8 @@ signals:
 
     /**
      * Here you get absolute coordinates.
-     * This slot will be emitted from within the mouseMoveEvent of this widget.
+     * This slot will be emitted from within the mouseReleaseEvent of this widget.
+     * if no mouse move where done.
      * So you may not delete this widget
      *
      * @param x The absolute X Coordinate to scroll to.
@@ -98,12 +99,17 @@ protected:
      * make sure to call these if you reimplememt
      * @internal
      */
-    void mousePressEvent( QMouseEvent* ev );
+    virtual void mousePressEvent( QMouseEvent* ev );
     /**
      * make sure to call these if you reimplement
      * @internal
      */
-    void mouseMoveEvent( QMouseEvent* ev );
+    virtual void mouseMoveEvent( QMouseEvent* ev );
+    /**
+     * make sure to call these if you reimplement
+     * @internal
+     */
+    virtual void mouseReleaseEvent( QMouseEvent* ev );
 
 private:
     /**
@@ -114,6 +120,7 @@ private:
     QSize m_imgSize, m_visSize;
     QPoint m_visPt;
     int m_mouseX, m_mouseY;
+    bool m_mevent;
 };
 
 /**

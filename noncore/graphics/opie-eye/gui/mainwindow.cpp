@@ -3,11 +3,11 @@
  * No WArranty...
  */
 #include "mainwindow.h"
+#include "imageview.h"
 
 #include "iconview.h"
 #include "filesystem.h"
 #include "imageinfoui.h"
-#include "imageview.h"
 #include "viewmodebutton.h"
 
 #include <iface/ifaceinfo.h>
