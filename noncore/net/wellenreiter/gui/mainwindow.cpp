@@ -57,20 +57,13 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
     setIconText( "Wellenreiter/X11" );
     #endif
 
-    // setup icon sets
-
-    infoIconSet = new QIconSet( Resource::loadPixmap( "wellenreiter/InfoIcon" ) );
-    settingsIconSet = new QIconSet( Resource::loadPixmap( "wellenreiter/SettingsIcon" ) );
-    startIconSet = new QIconSet( Resource::loadPixmap( "wellenreiter/SearchIcon" ) );
-    stopIconSet = new QIconSet( Resource::loadPixmap( "wellenreiter/CancelIcon" ) );
-
     // setup tool buttons
 
     startButton = new QToolButton( 0 );
     #ifdef QWS
     startButton->setAutoRaise( true );
     #endif
-    startButton->setIconSet( *startIconSet );
+    startButton->setIconSet( Resource::loadIconSet( "wellenreiter/SearchIcon" ) );
     startButton->setEnabled( false );
     connect( startButton, SIGNAL( clicked() ), mw, SLOT( startClicked() ) );
 
@@ -78,23 +71,24 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
     #ifdef QWS
     stopButton->setAutoRaise( true );
     #endif
-    stopButton->setIconSet( *stopIconSet );
+    stopButton->setIconSet( Resource::loadIconSet( "wellenreiter/CancelIcon" ) );
     stopButton->setEnabled( false );
     connect( stopButton, SIGNAL( clicked() ), mw, SLOT( stopClicked() ) );
-
-    QToolButton* c = new QToolButton( 0 );
-    #ifdef QWS
-    c->setAutoRaise( true );
-    #endif
-    c->setIconSet( *infoIconSet );
-    c->setEnabled( false );
 
     QToolButton* d = new QToolButton( 0 );
     #ifdef QWS
     d->setAutoRaise( true );
     #endif
-    d->setIconSet( *settingsIconSet );
+    d->setIconSet( Resource::loadIconSet( "wellenreiter/SettingsIcon" ) );
     connect( d, SIGNAL( clicked() ), this, SLOT( showConfigure() ) );
+
+    uploadButton = new QToolButton( 0 );
+    #ifdef QWS
+    uploadButton->setAutoRaise( true );
+    #endif
+    uploadButton->setIconSet( Resource::loadIconSet( "up" ) );
+    uploadButton->setEnabled( false );
+    connect( uploadButton, SIGNAL( clicked() ), this, SLOT( uploadSession() ) );
 
     // setup menu bar
 
@@ -115,6 +109,8 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
     file->insertItem( tr( "&New" ), this, SLOT( fileNew() ) );
     id = file->insertItem( tr( "&Load" ), fileLoad );
     file->insertItem( tr( "&Save" ), fileSave );
+    file->insertSeparator();
+    uploadID = file->insertItem( tr( "&Upload Session" ), this, SLOT( uploadSession() ) );
     file->insertSeparator();
     file->insertItem( tr( "&Exit" ), qApp, SLOT( quit() ) );
 
@@ -139,15 +135,16 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
 
     id = mb->insertItem( tr( "&Demo" ), demo );
     mb->setItemEnabled( id, true );
+    mb->setItemEnabled( uploadID, false );
 
     #ifdef QWS
     mb->insertItem( startButton );
     mb->insertItem( stopButton );
-    mb->insertItem( c );
+    mb->insertItem( uploadButton );
     mb->insertItem( d );
     #else // Qt3 changed the insertion order. It's now totally random :(
     mb->insertItem( d );
-    mb->insertItem( c );
+    mb->insertItem( uploadButton );
     mb->insertItem( stopButton );
     mb->insertItem( startButton );
     #endif
@@ -179,7 +176,6 @@ void WellenreiterMainWindow::showConfigure()
 }
 
 
-
 void WellenreiterMainWindow::updateToolButtonState()
 {
     const QString& interface = cw->interfaceName->currentText();
@@ -204,16 +200,20 @@ void WellenreiterMainWindow::changedSniffingState()
     menuBar()->setItemEnabled( startID, !mw->sniffing );
     stopButton->setEnabled( mw->sniffing );
     menuBar()->setItemEnabled( stopID, mw->sniffing );
+
+    if ( !mw->sniffing )
+    {
+        menuBar()->setItemEnabled( uploadID, true );
+        uploadButton->setEnabled( true );
+    }
 }
 
 
 WellenreiterMainWindow::~WellenreiterMainWindow()
 {
-    delete infoIconSet;
-    delete settingsIconSet;
-    delete startIconSet;
-    delete stopIconSet;
+    qDebug( "Wellenreiter:: bye." );
 };
+
 
 void WellenreiterMainWindow::demoAddStations()
 {
@@ -343,12 +343,14 @@ void WellenreiterMainWindow::fileLoadSession()
     }
 }
 
+
 void WellenreiterMainWindow::fileNew()
 {
     mw->netView()->clear();
     mw->logWindow()->clear();
     mw->hexWindow()->clear();
 }
+
 
 void WellenreiterMainWindow::closeEvent( QCloseEvent* e )
 {
@@ -364,4 +366,10 @@ void WellenreiterMainWindow::closeEvent( QCloseEvent* e )
     }
 }
 
+
+void WellenreiterMainWindow::uploadSession()
+{
+    QMessageBox::warning( this, "Wellenreiter/Opie",
+                        tr( "This feature is\nunder construction... ;-)" ) );
+}
 

@@ -36,15 +36,12 @@ class WellenreiterMainWindow: public QMainWindow
     Wellenreiter* mw;
     WellenreiterConfigWindow* cw;
 
-    const QIconSet* startIconSet;
-    const QIconSet* stopIconSet;
-    const QIconSet* infoIconSet;
-    const QIconSet* settingsIconSet;
-
     QToolButton* startButton;
     QToolButton* stopButton;
+    QToolButton* uploadButton;
     int startID;
     int stopID;
+    int uploadID;
 
   protected:
     virtual void closeEvent( QCloseEvent* );
@@ -58,6 +55,7 @@ class WellenreiterMainWindow: public QMainWindow
     void fileSaveSession();
     void fileLoadSession();
     void fileNew();
+    void uploadSession();
     void changedSniffingState();
 };
 

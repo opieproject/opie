@@ -302,7 +302,7 @@ bool Wellenreiter::checkDumpPacket( OPacket* p )
     // go through all child packets and see if one is inside the child hierarchy for p
     // if so, do what the user requested (protocolAction), e.g. pass or discard
     if ( !configwindow->writeCaptureFile->isChecked() )
-        return false;
+        return true; // semantic change - we're logging anyway now to /tmp/wellenreiter
 
     QObjectList* l = p->queryList();
     QObjectListIt it( *l );
@@ -506,28 +506,28 @@ void Wellenreiter::startClicked()
     }
 
     // open pcap and start sniffing
-    if ( cardtype != DEVTYPE_FILE )
-    {
-        pcap->open( interface );
 
-        if ( configwindow->writeCaptureFile->isChecked() )
-        {
-            QString dumpname( configwindow->captureFileName->text() );
-            if ( dumpname.isEmpty() ) dumpname = "captureFile";
-            dumpname.append( '-' );
-            dumpname.append( QTime::currentTime().toString().replace( QRegExp( ":" ), "-" ) );
-            dumpname.append( ".wellenreiter" );
-            pcap->openDumpFile( dumpname );
-        }
-        else
-        {
-            pcap->open( interface );
-        }
-    }
-    else
+    QString dumpname;
+    if ( configwindow->writeCaptureFile->isChecked() ) // write to a user specified capture file?
     {
-        pcap->open( QFile( interface ) );
+        dumpname = configwindow->captureFileName->text();
+        if ( dumpname.isEmpty() ) dumpname = "captureFile";
+        dumpname.append( '-' );
+        dumpname.append( QTime::currentTime().toString().replace( QRegExp( ":" ), "-" ) );
+        dumpname.append( ".wellenreiter" );
     }
+    else // write it anyway ;)
+    {
+        dumpname = "/var/log/dump.wellenreiter";
+    }
+
+    if ( cardtype != DEVTYPE_FILE )
+        pcap->open( interface );
+    else
+        pcap->open( QFile( interface ) );
+
+    qDebug( "Wellenreiter:: dumping to %s", (const char*) dumpname );
+    pcap->openDumpFile( dumpname );
 
     if ( !pcap->isOpen() )
     {
