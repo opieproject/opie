@@ -117,7 +117,7 @@ CONFIG_NETWORKAPPLET	noncore/applets/networkapplet	networkapplet.pro
 CONFIG_NETWORKSETUP	noncore/settings/networksettings	networksettings.pro
 CONFIG_NOTESAPPLET	noncore/applets/notesapplet	notesapplet.pro
 CONFIG_OAPP	core/apps/oapp	oapp.pro
-CONFIG_OBEX	core/applets/obex2	obex.pro
+CONFIG_OBEX	core/obex	obex.pro
 CONFIG_ODICT	noncore/apps/odict	odict.pro
 CONFIG_OIPKG	noncore/unsupported/oipkg	oipkg.pro
 CONFIG_OPIEALARM	core/opiealarm	opiealarm.pro

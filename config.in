@@ -214,6 +214,7 @@ menu "Input methods"
 endmenu
 
 menu "Pim"
+  source core/obex/config.in
   source core/pim/config.in
   comment "Today Plugins ---"
     source noncore/todayplugins/config.in
