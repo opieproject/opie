@@ -131,7 +131,7 @@ void PatienceCardGame::readConfig( Config& cfg )
     createDeck();
 
     // How many times through the deck have we been
-    numberOfTimesThroughDeck = cfg.readNumEntry("NumberOfTimesThroughDeck");
+    numberOfTimesThroughDeck = cfg.readNumEntry("numberOfTimesThroughDeck");
 
     // restore state to the circle/cross under the dealing pile
     if ( canTurnOverDeck() )
@@ -170,7 +170,7 @@ void PatienceCardGame::readConfig( Config& cfg )
 void PatienceCardGame::writeConfig( Config& cfg )
 {
     cfg.setGroup("GameState");
-    cfg.writeEntry("NumberOfTimesThroughDeck", numberOfTimesThroughDeck);
+    cfg.writeEntry("numberOfTimesThroughDeck", numberOfTimesThroughDeck);
 
     for ( int i = 0; i < 7; i++ )
     {
