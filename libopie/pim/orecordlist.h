@@ -265,7 +265,7 @@ return m_ids.count();
 }
 template <class T>
 T ORecordList<T>::operator[]( uint i ) {
-    if ( i < 0 || (i+1) > m_ids.count() )
+    if ( i >= m_ids.count() )
         return T();
     /* forward */
     return m_acc->find( m_ids[i], m_ids, i );
