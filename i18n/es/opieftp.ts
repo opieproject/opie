@@ -243,5 +243,9 @@ Debaría estar vacío</translation>
         <source>Sorry name already taken</source>
         <translation>Lo siento, nombre ya usado</translation>
     </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

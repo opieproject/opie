@@ -245,5 +245,9 @@ Den skal være tom</translation>
         <source>Sorry name already taken</source>
         <translation>Desværre, navnet er allerede brugt</translation>
     </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
