@@ -14,6 +14,7 @@ public:
 
 public slots:
     void slotComposeMail();
+    void appMessage(const QCString &msg, const QByteArray &data);
 protected slots:
     void slotSendQueued();
     void slotSearchMails();
