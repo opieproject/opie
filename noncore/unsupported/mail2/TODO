@@ -5,6 +5,7 @@ General stuff:
  - This program needs a name!
  - If password is empty, ask for it during fetch.
  - Check if all necessary fields in AccoundEditor are filled. 
+ - Seperate Sending and Recieving in configuration.
 
 Protocol related:
  - The IMAP implentation is kinda strange and slow.
