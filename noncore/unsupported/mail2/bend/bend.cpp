@@ -16,6 +16,8 @@
 #include "configfile.h"
 #include "bend.h"
 
+using namespace Opie;
+
 BenD::BenD(QWidget *parent, const char *name, WFlags fl)
 	: QButton(parent, name, fl)
 {
@@ -54,8 +56,11 @@ void BenD::slotClicked()
 	e << QString("mail");
 	
 	ODevice *device = ODevice::inst();
-	if (device->led(1) == OLED_BlinkSlow)
-		device->setLed(1, OLED_Off);
+	if ( !device-> ledList ( ). isEmpty ( )) {
+		OLed led = ( device-> ledList ( ). contains ( Led_Mail )) ? Led_Mail : device-> ledList ( ) [0];	
+		
+		device->setLedState(led, Led_Off);
+	}
 }
 
 void BenD::slotCheck()
@@ -95,15 +100,23 @@ void BenD::slotIMAPStatus(IMAPResponse &response)
 		if (response.STATUS()[0].recent().toInt() > 0) {
 			ODevice *device = ODevice::inst();
 			if (isHidden()) show();
-			if (_config->readBoolEntry("BlinkLed", true))
-				device->setLed(1, OLED_BlinkSlow); 
+			if (_config->readBoolEntry("BlinkLed", true)) {
+				if ( !device-> ledList ( ). isEmpty ( )) {
+					OLed led = ( device-> ledList ( ). contains ( Led_Mail )) ? Led_Mail : device-> ledList ( ) [0];	
+				
+					device->setLedState(led, device-> ledStateList ( led ). contains ( Led_BlinkSlow ) ? Led_BlinkSlow : Led_On );
+				}
+			}
 			if (_config->readBoolEntry("PlaySound", false))
 				device->alarmSound();
 		} else {
 			ODevice *device = ODevice::inst();
 			if (!isHidden()) hide();
-			if (device->led(1) == OLED_BlinkSlow) 
-				device->setLed(1, OLED_Off);
+			if ( !device-> ledList ( ). isEmpty ( )) {
+				OLed led = ( device-> ledList ( ). contains ( Led_Mail )) ? Led_Mail : device-> ledList ( ) [0];	
+			
+				device->setLedState(led, Led_Off);
+			}
 		}
 		response.imapHandler()->iLogout();
 	} else qWarning("BenD: WARNING: Couldn't retrieve INBOX status.");
