@@ -8,6 +8,7 @@
 
 /* OPIE */
 #include <opie2/odebug.h>
+#include <opie2/oprocess.h>
 #include <qpe/applnk.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpeapplication.h>
@@ -24,6 +25,7 @@
 #include <qlabel.h>
 #include <qtabwidget.h> // in order to disable the profiles tab
 #include <qmessagebox.h>
+#include <qtextstream.h>
 
 
 #if QT_VERSION < 0x030000
@@ -43,6 +45,12 @@
 
 #define DEFAULT_SCHEME "/var/lib/pcmcia/scheme"
 #define _PROCNETDEV "/proc/net/dev"
+
+// is this always right?
+#define _HOSTFILE "/etc/hostname"
+#define _IRDANAME "/proc/sys/net/irda/devname"
+
+using namespace Opie::Core;
 
 MainWindowImp::MainWindowImp(QWidget *parent, const char *name, WFlags) : MainWindow(parent, name, Qt::WStyle_ContextHelp), advancedUserMode(true), scheme(DEFAULT_SCHEME)
 {
@@ -122,6 +130,7 @@ MainWindowImp::MainWindowImp(QWidget *parent, const char *name, WFlags) : MainWi
         file.close();
     }
     makeChannel();
+    initHostname();
 }
 
 /**
@@ -713,4 +722,54 @@ void MainWindowImp::receive(const QCString &msg, const QByteArray &arg)
 
     if (found) QPEApplication::setKeepRunning();
     else odebug << "Huh what do ya want" << oendl;
+}
+
+void MainWindowImp::setHostname()
+{
+    QFile f(_HOSTFILE);
+
+    OProcess*h = new OProcess;
+    _procTemp="";
+    *h << "hostname" << m_Nameinput->text();
+    connect(h,SIGNAL(receivedStderr(Opie::Core::OProcess*,char*,int)),this,SLOT(slotHostname(Opie::Core::OProcess*,char*,int)));
+    h->start(OProcess::Block,OProcess::Stderr);
+    odebug << "Got " << _procTemp << " - " << h->exitStatus() << oendl;
+    _procTemp="";
+    delete h;
+
+    if (f.open(IO_Truncate|IO_WriteOnly))
+    {
+        QTextStream s(&f);
+        s << m_Nameinput->text();
+    }
+    f.close();
+    f.setName(_IRDANAME);
+    if (f.open(IO_WriteOnly))
+    {
+        QTextStream s(&f);
+        s << m_Nameinput->text();
+    }
+}
+
+void MainWindowImp::initHostname()
+{
+    OProcess h;
+    _procTemp="";
+
+    h << "hostname";
+    connect(&h,SIGNAL(receivedStdout(Opie::Core::OProcess*,char*,int)),this,SLOT(slotHostname(Opie::Core::OProcess*,char*,int)));
+    h.start(OProcess::Block,OProcess::AllOutput);
+    odebug << "Got " << _procTemp <<oendl;
+    m_Nameinput->setText(_procTemp);
+    _procTemp="";
+}
+
+void MainWindowImp::slotHostname(Opie::Core::OProcess *proc, char *buffer, int buflen)
+{
+    if (buflen < 1 || buffer==0) return;
+    char*_t = new char[buflen+1];
+    ::memset(_t,0,buflen+1);
+    ::memcpy(_t,buffer,buflen);
+    _procTemp+=_t;
+    delete[]_t;
 }

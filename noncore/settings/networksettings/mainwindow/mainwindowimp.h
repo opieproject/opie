@@ -18,6 +18,11 @@ class KLibLoader;
 #define QLibrary KLibrary
 #endif
 
+namespace Opie {
+namespace Core {
+    class OProcess;
+}
+}
 
 class MainWindowImp : public MainWindow {
   Q_OBJECT
@@ -46,12 +51,17 @@ private slots:
 
   void receive (const QCString &, const QByteArray &);
 
+protected slots:
+  virtual void setHostname();
+  virtual void slotHostname(Opie::Core::OProcess *proc, char *buffer, int buflen);
+
 private:
   void makeChannel();
   void loadModules(const QString &path);
+  void initHostname();
 
   Module* loadPlugin(const QString &pluginFileName,
-		     const QString &resolveString = "create_plugin");
+             const QString &resolveString = "create_plugin");
 
   // For our local list of names
   QMap<QString, Interface*> interfaceNames;
@@ -66,6 +76,7 @@ private:
 
   bool advancedUserMode;
   QString scheme;
+  QString _procTemp;
 #ifndef QWS
   KLibLoader *loader;
 #endif
