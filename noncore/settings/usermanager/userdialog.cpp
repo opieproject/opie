@@ -342,7 +342,7 @@ void UserDialog::clickedPicture() {
 	if(!(filename.isEmpty())) {
 		userImage.reset();
 		if(!(userImage.load(filename))) {
-			QMessageBox::information(0,"Sorry!","Icon selection not yet implemented.\nComming real soon now! (tm)\n"+filename);
+			QMessageBox::information(0,"Sorry!","That icon could not be loaded.\nLoading failed on: "+filename);
 		} else {
 			userImage=userImage.smoothScale(48,48);
 			QPixmap *picture;
