@@ -1,4 +1,4 @@
   config SFCAVE
     boolean "opie-sfcave (fly the dot though the cave avoiding the walls)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE

@@ -1,4 +1,4 @@
   config UBROWSER
     boolean "opie-ubrowser (a very small web brower)"
     default "n"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 )

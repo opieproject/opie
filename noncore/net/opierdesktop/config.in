@@ -1,6 +1,6 @@
   config OPIE-RDESKTOP
     boolean "opie-rdesktop (rdp client)"
     default "n"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
-    comment "opie-rdesktop needs libqpe and libopie1"
-    depends !(( LIBQPE || LIBQPE-X11 ) && LIBOPIE)
+    depends ( LIBQPE || LIBQPE-X11 )
+    comment "opie-rdesktop needs a libqpe"
+    depends !( LIBQPE || LIBQPE-X11 )
