@@ -1,7 +1,22 @@
+include ( $(OPIEDIR)/gen.pro )
+
 # make install
 
 # base opie install path
 prefix = /opt/QtPalmtop
+
+
+contains( CONFIG, quick-app-lib ) {
+    TEMPLATE = lib
+    DESTDIR  = $(OPIEDIR)/plugins/applications
+    DEFINES += OPIE_APP_INTERFACE
+}
+contains ( CONFIG, quick-app-bin ) {
+    TEMPLATE = app
+    DESTDIR  = $(OPIEDIR)/bin
+    DEFINES -= OPIE_APP_INTERFACE
+}
+
 
 contains( TEMPLATE, lib ) {
   target.path = $$prefix/lib
@@ -77,4 +92,5 @@ QMAKE_LIBDIR += $(OPIEDIR)/lib
 MOC_DIR=.moc/$(PLATFORM)
 OBJECTS_DIR=.obj/$(PLATFORM)
 
-include ( $(OPIEDIR)/gen.pro )
+#was here now at thetop
+#include ( $(OPIEDIR)/gen.pro )

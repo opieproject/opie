@@ -18,6 +18,17 @@ ifeq ($(filter 3.%,$(QTE_VERSION)),) # not qt3
 else
 	echo CONFIG += qt3 >> $@
 endif
+ifneq ($(CONFIG_QUICK_LAUNCH),)
+	echo contains\( CONFIG, quick-app \) \{ >> $@
+	echo CONFIG -= quick-app >> $@
+	echo CONFIG += quick-app-lib >> $@
+	echo \} >> $@
+else
+	echo contains\( CONFIG, quick-app \) \{ >> $@
+	echo CONFIG -= quick-app >> $@
+	echo CONFIG += quick-app-bin >> $@
+	echo \} >> $@
+endif	
 
 $(TOPDIR)/.depends : $(shell if [ -e $(TOPDIR)/config.in ]\; then echo $(TOPDIR)/config.in\; fi\;) $(TOPDIR)/.config $(TOPDIR)/packages
 	@echo Generating dependency information...

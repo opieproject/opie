@@ -37,6 +37,10 @@ config RELEASE
   bool
   default y
   depends !DEBUG
+  
+config QUICK_LAUNCH
+  boolean "Enable Quick Launch"
+  default n
 
 config SPECFILE
   string
