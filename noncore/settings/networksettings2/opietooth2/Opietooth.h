@@ -3,9 +3,9 @@
 
 #include <OTIcons.h>
 
-#include <OTPairingGUI.h>
 namespace Opie { namespace Ui { class OLedBox; }; };
 
+#include <OTSniffGUI.h>
 namespace Opietooth2 {
 
 class OTGateway;
@@ -14,6 +14,33 @@ class OTInquiry;
 class OTPeer;
 class PeerLVI;
 
+class OTSniffing : public OTSniffGUI {
+
+      Q_OBJECT
+
+public :
+
+      OTSniffing( QWidget * parent );
+      ~OTSniffing();
+
+private slots :
+
+      void SLOT_Trace( void );
+      void SLOT_ClearLog( void );
+
+signals :
+
+protected :
+
+private :
+
+      OTGateway *       OT;
+};
+};
+
+#include <OTPairingGUI.h>
+
+namespace Opietooth2 {
 class OTPairing : public OTPairingGUI {
 
       Q_OBJECT
@@ -174,6 +201,7 @@ private slots :
 
       void SLOT_Pairing( void );
       void SLOT_Manage( void );
+      void SLOT_Sniffing( void );
       void SLOT_Scan( void );
       void SLOT_EnableBluetooth( bool );
       void SLOT_DriverListChanged();
@@ -189,6 +217,7 @@ private :
       // load scanned devices
       OTIcons *         Icons;
       OTGateway *       OT;
+      OTSniffing *      SnifWindow;
 };
 };
 #endif

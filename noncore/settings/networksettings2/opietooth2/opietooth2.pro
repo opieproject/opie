@@ -30,7 +30,7 @@ SOURCES		= OTDevice.cpp \
 INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe -lopiecore2 -lbluetooth
-INTERFACES	= OTMainGUI.ui OTScanGUI.ui OTManageGUI.ui OTPairingGUI.ui
+INTERFACES	= OTMainGUI.ui OTSniffGUI.ui OTScanGUI.ui OTManageGUI.ui OTPairingGUI.ui
 TARGET		= opietooth2
 VERSION		= 1.0.0
 

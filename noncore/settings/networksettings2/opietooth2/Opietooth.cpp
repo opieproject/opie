@@ -110,6 +110,27 @@ private :
 //
 //
 
+OTSniffing::OTSniffing( QWidget * parent ) : OTSniffGUI( parent ) {
+
+      OT = OTGateway::getOTGateway();
+
+}
+
+OTSniffing::~OTSniffing() {
+}
+
+void OTSniffing::SLOT_Trace( void ) {
+}
+
+void OTSniffing::SLOT_ClearLog( void ) {
+}
+
+//
+//
+//
+//
+//
+
 OTPairing::OTPairing( QWidget * parent, OTIcons * _IC ) :
                 OTPairingGUI( parent ) {
 
@@ -873,6 +894,7 @@ void OTManage::SLOT_SetRefreshTimer( int v ) {
 OTMain::OTMain( QWidget * parent ) : OTMainGUI( parent ) {
 
       Icons = new OTIcons();
+      SnifWindow = 0;
       OT = OTGateway::getOTGateway();
 
       connect( OT,
@@ -1002,4 +1024,14 @@ void OTMain::SLOT_Pairing( void ) {
       Dlg->exec();
 
       delete Dlg;
+}
+
+void OTMain::SLOT_Sniffing( void ) {
+
+      if( SnifWindow == 0 ) {
+        SnifWindow = new OTSniffing( this );
+      }
+
+      SnifWindow->showMaximized();
+      SnifWindow->show();
 }

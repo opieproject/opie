@@ -134,3 +134,17 @@ mrproper : clean-configs
 	find . -name "*.pro"|xargs touch
 
 include $(TOPDIR)/Rules.make
+
+# to speed up (avoid include/generation of packaging rules)
+ifneq ($(filter package%,$(MAKECMDGOALS)),)
+
+# packaging requested
+
+$(TOPDIR)/Package.make :
+	@echo "Generating packaging rules"
+	@$(TOPDIR)/scripts/GeneratePackageMake > $(TOPDIR)/Package.make
+
+# load rules to make packages
+-include $(TOPDIR)/Package.make
+
+endif

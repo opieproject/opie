@@ -1,3 +1,4 @@
+Package: opie-powercord
 Files: plugins/applications/libpowerchord.so* bin/powerchord apps/Applications/powerchord.desktop pics/powerchord share/powerchord
 Priority: optional
 Section: opie/multimedia

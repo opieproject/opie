@@ -83,9 +83,10 @@ void OPackageManager::loadAvailablePackages()
                         OPackage *package = packageIt.current();
 
                         // Load package info
-                        if ( !m_packages.find( package->name() ) )
+                        if ( !m_packages.find( package->name() ) ) {
+                          printf( "ADD AVAILABLE '%s'\n", package->name().latin1());
                             m_packages.insert( package->name(), package );
-                        else
+                        } else
                         {
                             // If new package is newer version, replace existing package
                             OPackage *currPackage = m_packages[package->name()];
@@ -138,6 +139,7 @@ void OPackageManager::loadInstalledPackages()
                 emit statusBar( destCount );
                 qApp->processEvents();
 
+                        printf( "DESGTINATION %s\n", destination->name().latin1());
                 OPackageList *packageList = m_ipkg.installedPackages( destination->name(),
                                                                       destination->value() );
                 if ( packageList )
@@ -157,6 +159,7 @@ void OPackageManager::loadInstalledPackages()
                         else
                         {
                             // Package isn't in a current feed, add to list
+                            printf( "ADD INSTALLED '%s'\n", package->name().latin1());
                             m_packages.insert( package->name(), package );
 
                             // Add category to list if it doesn't already exist

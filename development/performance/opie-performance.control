@@ -1,3 +1,4 @@
+Package: opie-performance
 Files: plugins/applications/libperformance.so* bin/performance apps/Applications/performance.desktop
 Priority: optional
 Section: opie/other
