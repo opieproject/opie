@@ -12,7 +12,6 @@ HEADERS         = mailwrapper.h \
                settings.h \
                logindialog.h \
                sendmailprogress.h \
-               statusmail.h
                
 SOURCES         = imapwrapper.cpp \
                mailwrapper.cpp \
@@ -25,7 +24,6 @@ SOURCES         = imapwrapper.cpp \
                settings.cpp \
                logindialog.cpp \
                sendmailprogress.cpp \
-               statusmail.cpp
 
 INTERFACES 	= logindialogui.ui \
               sendmailprogressui.ui
