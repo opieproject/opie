@@ -909,7 +909,7 @@ frei und versuchen Sie es noch einmal
     </message>
     <message>
         <source>Please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte warten...</translation>
     </message>
 </context>
 <context>

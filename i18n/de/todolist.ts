@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>MainWindow</name>
     <message>
@@ -341,7 +342,7 @@ Er ermöglicht die schnelle Erfassung einer neuen Aufgabe. Dieser Bereich kann e
     </message>
     <message>
         <source>Summary</source>
-        <translation type="unfinished"></translation>
+        <translation>Beschreibung</translation>
     </message>
 </context>
 <context>

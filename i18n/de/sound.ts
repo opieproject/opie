@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>SoundSettings</name>
     <message>
@@ -126,7 +127,7 @@
     </message>
     <message>
         <source>Use ADPCM compression</source>
-        <translation type="unfinished"></translation>
+        <translation>ADPCM Kompression verwenden</translation>
     </message>
 </context>
 </TS>

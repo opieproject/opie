@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>Button</name>
     <message>
@@ -75,7 +76,7 @@
     </message>
     <message>
         <source>Todo Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Todo-Button</translation>
     </message>
 </context>
 <context>

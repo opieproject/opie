@@ -218,79 +218,80 @@
     </message>
     <message>
         <source>Konsole</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Unten</translation>
     </message>
     <message>
         <source>Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Oben</translation>
     </message>
     <message>
         <source>Hidden</source>
-        <translation type="unfinished"></translation>
+        <translation>Versteckt
+</translation>
     </message>
     <message>
         <source>Tabs</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Black on Pink</source>
-        <translation type="unfinished"></translation>
+        <translation>Schwarz auf Pink</translation>
     </message>
     <message>
         <source>Pink on Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Pink auf Scwarz</translation>
     </message>
     <message>
         <source>default</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorgabe</translation>
     </message>
     <message>
         <source>new session</source>
-        <translation type="unfinished"></translation>
+        <translation>Neue Sitzung</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Ansicht</translation>
     </message>
     <message>
         <source>Fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>Schrift</translation>
     </message>
     <message>
         <source>Sessions</source>
-        <translation type="unfinished"></translation>
+        <translation>Sitzung</translation>
     </message>
     <message>
         <source>Full Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Vollbild</translation>
     </message>
     <message>
         <source>Zoom</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Edit...</source>
-        <translation type="unfinished"></translation>
+        <translation>Editieren...</translation>
     </message>
     <message>
         <source>History...</source>
-        <translation type="unfinished"></translation>
+        <translation>History...</translation>
     </message>
     <message>
         <source>To exit fullscreen, tap here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier clicken für die normale Ansicht.</translation>
     </message>
     <message>
         <source>History Lines:</source>
-        <translation type="unfinished"></translation>
+        <translation>History Zeilen:</translation>
     </message>
     <message>
         <source>Konsole </source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>

@@ -11,7 +11,7 @@
     <name>LightSettings</name>
     <message>
         <source>Backlight &amp;&amp; Contrast</source>
-        <translation type="unfinished"></translation>
+        <translation>Beleuchtung &amp;&amp; Kontrast</translation>
     </message>
 </context>
 <context>
@@ -122,27 +122,27 @@
     </message>
     <message>
         <source>CPU Frequency</source>
-        <translation type="unfinished"></translation>
+        <translation>CPU Frequenz</translation>
     </message>
     <message>
         <source>set a fix value for contrast</source>
-        <translation type="unfinished"></translation>
+        <translation>Fixer Wet für den Kontrast</translation>
     </message>
     <message>
         <source>On closing the hinge</source>
-        <translation type="unfinished"></translation>
+        <translation>Beim schliessen des Deckels</translation>
     </message>
     <message>
         <source>ignore</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorieren</translation>
     </message>
     <message>
         <source>display off</source>
-        <translation type="unfinished"></translation>
+        <translation>Display aus</translation>
     </message>
     <message>
         <source>suspend</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
