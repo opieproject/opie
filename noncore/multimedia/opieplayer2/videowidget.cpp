@@ -341,8 +341,8 @@ void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
                 }
 
                 case VideoStop:       mediaPlayerState->setPlaying( FALSE ); return;
-                case VideoNext:       if(playList->whichList() ==0) mediaPlayerState->setNext(); return;
-                case VideoPrevious:   if(playList->whichList() ==0) mediaPlayerState->setPrev(); return;
+		case VideoNext:       if( playList->currentTab() == PlayListWidget::CurrentPlayList ) mediaPlayerState->setNext(); return;
+		case VideoPrevious:   if( playList->currentTab() == PlayListWidget::CurrentPlayList ) mediaPlayerState->setPrev(); return;
                 case VideoVolUp:      emit moreReleased(); return;
                 case VideoVolDown:    emit lessReleased(); return;
                 case VideoFullscreen: mediaPlayerState->setFullscreen( TRUE ); makeVisible(); return;
