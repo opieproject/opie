@@ -506,15 +506,15 @@ void TextEdit::fileOpen()
     bool b=FALSE;
 
     QMap<QString, QStringList> map;
-  map.insert(tr("All"), QStringList() );
-  QStringList text;
-  text << "text/*";
-  map.insert(tr("Text"), text );
-  text << "*";
-  map.insert(tr("All"), text );
-        QString str = OFileDialog::getOpenFileName( 2,"/", QString::null, map);
-        if(!str.isEmpty() )
-            openFile( str );
+    map.insert(tr("All"), QStringList() );
+    QStringList text;
+    text << "text/*";
+    map.insert(tr("Text"), text );
+    text << "*";
+    map.insert(tr("All"), text );
+    QString str = OFileDialog::getOpenFileName( 2,"/", QString::null, map);
+    if(!str.isEmpty() )
+        openFile( str );
     
 }
 
@@ -792,17 +792,26 @@ bool TextEdit::saveAs()
         }
     }
 
-    
-//         QString str = OFileDialog::getSaveFileName( 2,"/");//,"", "*", this );
-//         if(!str.isEmpty() ) {
-//            openFile( str );
+/*    
+    QMap<QString, QStringList> map;
+    map.insert(tr("All"), QStringList() );
+    QStringList text;
+    text << "text/*";
+    map.insert(tr("Text"), text );
+    text << "*";
+    map.insert(tr("All"), text );
+    QString str = OFileDialog::getSaveFileName( 2,"/", QString::null, map);
+    if(!str.isEmpty() ) {
+        QString fileNm=str;
+*/
 
-     fileSaveDlg=new fileSaver(this,tr("Save File As?"),TRUE, 0, currentFileName);
-     qDebug("wanna save filename "+currentFileName);
-     fileSaveDlg->exec();
-     if( fileSaveDlg->result() == 1 ) {
+      fileSaveDlg=new fileSaver(this,tr("Save File As?"),TRUE, 0, currentFileName);
+      qDebug("wanna save filename "+currentFileName);
+      fileSaveDlg->exec();
+      if( fileSaveDlg->result() == 1 ) {
         QString fileNm=fileSaveDlg->selectedFileName;
-//             QString fileNm=srt;
+
+
         qDebug("saving filename "+fileNm);
         QFileInfo fi(fileNm);
         currentFileName=fi.fileName();
@@ -837,7 +846,7 @@ bool TextEdit::saveAs()
     edited1=FALSE;
     edited=TRUE;
     if(caption().left(1)=="*")
-    setCaption(caption().right(caption().length()-1));
+        setCaption(caption().right(caption().length()-1));
 
     if(fileSaveDlg)
         delete fileSaveDlg;
