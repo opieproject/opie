@@ -42,6 +42,7 @@
 #include <qslider.h>
 #include <qframe.h>
 #include <qlineedit.h>
+#include <qimage.h>
 
 #include <opie/oticker.h>
 
@@ -113,10 +114,10 @@ private:
     void paintButton( QPainter *p, int i );
     int skipDirection;
     QString skin;
-    QPixmap *pixBg;
-    QImage  *imgUp;
-    QImage  *imgDn;
-    QImage  *imgButtonMask;
+    QPixmap pixBg;
+    QImage  imgUp;
+    QImage  imgDn;
+    QImage  imgButtonMask;
     QBitmap *masks[10];
     QPixmap *buttonPixUp[10];
     QPixmap *buttonPixDown[10];

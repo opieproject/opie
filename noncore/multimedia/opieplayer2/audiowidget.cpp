@@ -74,7 +74,7 @@ MediaButton audioButtons[] = {
    { FALSE, FALSE, FALSE }  // back
 };
 
-const char *skin_mask_file_names[10] = {
+const char * const skin_mask_file_names[10] = {
    "play", "stop", "next", "prev", "up",
    "down", "loop", "playlist", "forward", "back"
 };
@@ -103,12 +103,12 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
     // color of background, frame, degree of transparency
 
     QString skinPath = "opieplayer2/skins/" + skin;
-    pixBg = new QPixmap( Resource::loadPixmap( QString("%1/background").arg(skinPath) ) );
-    imgUp = new QImage( Resource::loadImage( QString("%1/skin_up").arg(skinPath) ) );
-    imgDn = new QImage( Resource::loadImage( QString("%1/skin_down").arg(skinPath) ) );
+    pixBg = QPixmap( Resource::loadPixmap( QString("%1/background").arg(skinPath) ) );
+    imgUp = QImage( Resource::loadImage( QString("%1/skin_up").arg(skinPath) ) );
+    imgDn = QImage( Resource::loadImage( QString("%1/skin_down").arg(skinPath) ) );
 
-    imgButtonMask = new QImage( imgUp->width(), imgUp->height(), 8, 255 );
-    imgButtonMask->fill( 0 );
+    imgButtonMask = QImage( imgUp.width(), imgUp.height(), 8, 255 );
+    imgButtonMask.fill( 0 );
 
     for ( int i = 0; i < 10; i++ ) {
         QString filename = QString( QPEApplication::qpeDir()  + "/pics/" + skinPath + "/skin_mask_" + skin_mask_file_names[i] + ".png" );
@@ -116,10 +116,10 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
 
         if ( !masks[i]->isNull() ) {
             QImage imgMask = masks[i]->convertToImage();
-            uchar **dest = imgButtonMask->jumpTable();
-            for ( int y = 0; y < imgUp->height(); y++ ) {
+            uchar **dest = imgButtonMask.jumpTable();
+            for ( int y = 0; y < imgUp.height(); y++ ) {
                 uchar *line = dest[y];
-                for ( int x = 0; x < imgUp->width(); x++ )
+                for ( int x = 0; x < imgUp.width(); x++ )
                     if ( !qRed( imgMask.pixel( x, y ) ) )
                         line[x] = i + 1;
             }
@@ -132,7 +132,7 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
         buttonPixDown[i] = 0l;
     }
 
-    setBackgroundPixmap( *pixBg );
+    setBackgroundPixmap( pixBg );
 
     songInfo.setFocusPolicy( QWidget::NoFocus );
 //    changeTextColor( &songInfo );
@@ -145,7 +145,7 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
     slider.setMinValue( 0 );
     slider.setMaxValue( 1 );
     slider.setFocusPolicy( QWidget::NoFocus );
-    slider.setBackgroundPixmap( *pixBg );
+    slider.setBackgroundPixmap( pixBg );
 
 //     Config cofg("qpe");
 //     cofg.setGroup("Appearance");
@@ -185,10 +185,6 @@ AudioWidget::~AudioWidget() {
         delete buttonPixUp[i];
         delete buttonPixDown[i];
     }
-    delete pixBg;
-    delete imgUp;
-    delete imgDn;
-    delete imgButtonMask;
     for ( int i = 0; i < 10; i++ ) {
         delete masks[i];
     }
@@ -197,12 +193,12 @@ AudioWidget::~AudioWidget() {
 
 namespace {
 
-QPixmap *combineImageWithBackground( QImage img, QPixmap bg, QPoint offset ) {
+QPixmap combineImageWithBackground( QImage img, QPixmap bg, QPoint offset ) {
     QPixmap pix( img.width(), img.height() );
     QPainter p( &pix );
     p.drawTiledPixmap( pix.rect(), bg, offset );
     p.drawImage( 0, 0, img );
-    return new QPixmap( pix );
+    return pix;
 }
 
 
@@ -224,24 +220,21 @@ void AudioWidget::resizeEvent( QResizeEvent * ) {
     slider.setBackgroundOrigin( QWidget::ParentOrigin );
     time.setGeometry( QRect( w - 85, h - 30, 70, 20 ) );
 
-    xoff = ( w - imgUp->width() ) / 2;
-    yoff = (( h - imgUp->height() ) / 2) - 10;
+    xoff = ( w - imgUp.width() ) / 2;
+    yoff = (( h - imgUp.height() ) / 2) - 10;
     QPoint p( xoff, yoff );
 
-    QPixmap *pixUp = combineImageWithBackground( *imgUp, *pixBg, p );
-    QPixmap *pixDn = combineImageWithBackground( *imgDn, *pixBg, p );
+    QPixmap pixUp = combineImageWithBackground( imgUp, pixBg, p );
+    QPixmap pixDn = combineImageWithBackground( imgDn, pixBg, p );
 
     for ( int i = 0; i < 10; i++ ) {
         if ( !masks[i]->isNull() ) {
             delete buttonPixUp[i];
             delete buttonPixDown[i];
-            buttonPixUp[i] = maskPixToMask( *pixUp, *masks[i] );
-            buttonPixDown[i] = maskPixToMask( *pixDn, *masks[i] );
+            buttonPixUp[i] = maskPixToMask( pixUp, *masks[i] );
+            buttonPixDown[i] = maskPixToMask( pixDn, *masks[i] );
         }
     }
-
-    delete pixUp;
-    delete pixDn;
 }
 
 static bool audioSliderBeingMoved = FALSE;
@@ -397,9 +390,9 @@ void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
             int x = event->pos().x() - xoff;
             int y = event->pos().y() - yoff;
 
-            bool isOnButton = ( x > 0 && y > 0 && x < imgButtonMask->width()
-                                && y < imgButtonMask->height()
-                                && imgButtonMask->pixelIndex( x, y ) == i + 1 );
+            bool isOnButton = ( x > 0 && y > 0 && x < imgButtonMask.width()
+                                && y < imgButtonMask.height()
+                                && imgButtonMask.pixelIndex( x, y ) == i + 1 );
 
             if ( isOnButton && !audioButtons[i].isHeld ) {
                 audioButtons[i].isHeld = TRUE;
@@ -481,7 +474,7 @@ void AudioWidget::paintEvent( QPaintEvent * pe ) {
         QPixmap pix( pe->rect().size() );
         QPainter p( &pix );
         p.translate( -pe->rect().topLeft().x(), -pe->rect().topLeft().y() );
-        p.drawTiledPixmap( pe->rect(), *pixBg, pe->rect().topLeft() );
+        p.drawTiledPixmap( pe->rect(), pixBg, pe->rect().topLeft() );
         for ( int i = 0; i < numButtons; i++ )
             paintButton( &p, i );
         QPainter p2( this );
