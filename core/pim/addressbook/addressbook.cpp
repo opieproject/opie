@@ -717,6 +717,7 @@ void AddressbookWindow::editPersonal()
 		abEditor = new ContactEditor( entry, this, "editor" );
 	}
 
+	m_abView->showPersonal( true );
  	abEditor->setCaption(tr("Edit My Personal Details"));
  	abEditor->setPersonalView( true );
 	editEntry( EditEntry );
