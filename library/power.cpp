@@ -120,8 +120,8 @@ bool PowerStatusManager::getProcApmStatus( int &ac, int &bs, int &bf, int &pc, i
 		break;
 	}
 
-	if ( pc > 100 )
-	    pc = -1;
+	if ( pc > 100 ) pc = 100;
+	if ( pc < 0 ) pc = 0;
 
 	ps->percentRemain = pc;
 	ps->secsRemain = sec;
@@ -131,60 +131,6 @@ bool PowerStatusManager::getProcApmStatus( int &ac, int &bs, int &bf, int &pc, i
 
     return ok;
 }
-
-#ifdef QT_QWS_SHARP
-
-void PowerStatusManager::getStatus()
-{
-    int ac, bs, bf, pc, sec;
-    ps->percentAccurate = TRUE; // not for long...
-
-    if ( haveProcApm && getProcApmStatus( ac, bs, bf, pc, sec ) ) {
-	// special case
-	if ( bs == 0x7f )
-	    ps->bs = PowerStatus::VeryLow;
-	pc = -1; // fake percentage
-	if ( pc < 0 ) {
-	    switch ( bs ) {
-		case 0x00: ps->percentRemain = 100; break; // High
-		case 0x01: ps->percentRemain = 30; break; // Low
-		case 0x7f: ps->percentRemain = 10; break; // Very Low
-		case 0x02: ps->percentRemain = 5; break; // Critical
-		case 0x03: ps->percentRemain = -1; break; // Charging
-	    }
-	    ps->percentAccurate = FALSE;
-	}
-    }
-
-    char *device = "/dev/apm_bios";
-    int fd = ::open (device, O_WRONLY);
-    if ( fd >= 0 ) {
-	int bbat_status = ioctl( fd, APM_IOC_BATTERY_BACK_CHK, 0 );
-	switch ( bbat_status ) {
-	    case 0x00:
-		ps->bbs = PowerStatus::High;
-		break;
-	    case 0x01:
-		ps->bbs = PowerStatus::Low;
-		break;
-	    case 0x7f:
-		ps->bbs = PowerStatus::VeryLow;
-		break;
-	    case 0x02:
-		ps->bbs = PowerStatus::Critical;
-		break;
-	    case 0x03:
-		ps->bbs = PowerStatus::Charging;
-		break;
-	    case 0x04:
-		ps->bbs = PowerStatus::NotPresent;
-		break;
-	}
-	::close(fd);
-    }
-}
-
-#else
 
 void PowerStatusManager::getStatus()
 {
@@ -223,6 +169,3 @@ void PowerStatusManager::getStatus()
 #endif
     }
 }
-
-#endif
-
