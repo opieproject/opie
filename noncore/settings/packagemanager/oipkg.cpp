@@ -31,7 +31,6 @@
 
 #include "oipkg.h"
 
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -69,7 +68,6 @@ int fIpkgStatus( char */*name*/, int /*status*/, char *desc, void */*userdata*/ 
 int fIpkgFiles( char */*name*/, char *desc, char */*version*/, pkg_state_status_t /*status*/,
                 void */*userdata*/ )
 {
-printf( "*****List*****\n%s\n", desc );
     oipkg->ipkgList( desc );
     return 0;
 }

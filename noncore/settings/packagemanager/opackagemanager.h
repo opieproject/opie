@@ -80,6 +80,9 @@ private:
     QDict<OPackage> m_packages;   // Global list of available packages
     QStringList     m_categories; // List of all categories
 
+    void parseVersion( const QString &verstr, int *epoch, QString *version, QString *revision );
+    int verrevcmp( const char *val, const char *ref );
+
 signals:
     void initStatus( int numSteps );
     void statusText( const QString &status );

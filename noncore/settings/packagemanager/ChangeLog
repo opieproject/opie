@@ -1,6 +1,9 @@
 2004-02-13 Dan Williams <drw@handhelds.org>
 
+    * Released version 0.3.0
     * Fix handling of filtering options in View menu
+    * Do proper version string comparison
+    * Fix string alignment code in PromptDlg to eliminate QT warning messages
 
 2004-02-12 Dan Williams <drw@handhelds.org>
 

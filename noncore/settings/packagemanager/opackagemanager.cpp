@@ -29,6 +29,8 @@
 
 */
 
+#include <ctype.h>
+
 #include <qpe/qpeapplication.h>
 
 #include "opackagemanager.h"
@@ -293,15 +295,28 @@ OPackage *OPackageManager::findPackage( const QString &name )
     return m_packages[ name ];
 }
 
-int OPackageManager::compareVersions( const QString &version1, const QString &version2 )
+int OPackageManager::compareVersions( const QString &ver1, const QString &ver2 )
 {
-    // TODO - do proper compare!
-    if ( version1 < version2 )
-        return -1;
-    else if ( version1 > version2 )
-        return 1;
+    // TODO - should this be in OIpkg???
 
-    return 0;
+    int epoch1, epoch2;
+    QString version1, revision1;
+    QString version2, revision2;
+
+    parseVersion( ver1, &epoch1, &version1, &revision1 );
+    parseVersion( ver2, &epoch2, &version2, &revision2 );
+
+    if ( epoch1 > epoch2 )
+        return 1;
+    else if ( epoch1 < epoch2 )
+        return -1;
+
+    int r = verrevcmp( version1.latin1(), version2.latin1() );
+    if (r)
+        return r;
+
+    r = verrevcmp( revision1.latin1(), revision2.latin1() );
+    return r;
 }
 
 bool OPackageManager::configureDlg( bool installOptions )
@@ -320,4 +335,78 @@ bool OPackageManager::executeCommand( OPackage::Command command, QStringList *pa
                                       const char *slotOutput, bool rawOutput )
 {
     return m_ipkg.executeCommand( command, packages, destination, receiver, slotOutput, rawOutput );
+}
+
+void OPackageManager::parseVersion( const QString &verstr, int *epoch, QString *version,
+                                    QString *revision )
+{
+    *epoch = 0;
+    *revision = QString::null;
+
+    // Version string is in the format "ee:vv-rv", where ee=epoch, vv=version, rv=revision
+
+    // Get epoch
+    int colonpos = verstr.find( ':' );
+    if ( colonpos > -1 )
+    {
+        *epoch = verstr.left( colonpos ).toInt();
+    }
+
+    // Get version and revision
+    int hyphenpos = verstr.find( '-', colonpos + 1 );
+    int verlen = verstr.length();
+    if ( hyphenpos > -1 )
+    {
+        *version = verstr.mid( colonpos + 1, hyphenpos - colonpos - 1 );
+        *revision = verstr.right( verlen - hyphenpos - 1 );
+    }
+    else
+    {
+       *version = verstr.right( verlen - colonpos );
+    }
+}
+
+/*
+ * libdpkg - Debian packaging suite library routines
+ * vercmp.c - comparison of version numbers
+ *
+ * Copyright (C) 1995 Ian Jackson <iwj10@cus.cam.ac.uk>
+ */
+int OPackageManager::verrevcmp( const char *val, const char *ref )
+{
+     int vc, rc;
+     long vl, rl;
+     const char *vp, *rp;
+     const char *vsep, *rsep;
+
+     if (!val) val= "";
+     if (!ref) ref= "";
+     for (;;) {
+      vp= val;  while (*vp && !isdigit(*vp)) vp++;
+      rp= ref;  while (*rp && !isdigit(*rp)) rp++;
+      for (;;) {
+           vc= (val == vp) ? 0 : *val++;
+           rc= (ref == rp) ? 0 : *ref++;
+           if (!rc && !vc) break;
+           if (vc && !isalpha(vc)) vc += 256; /* assumes ASCII character set */
+           if (rc && !isalpha(rc)) rc += 256;
+           if (vc != rc) return vc - rc;
+      }
+      val= vp;
+      ref= rp;
+      vl=0;  if (isdigit(*vp)) vl= strtol(val,(char**)&val,10);
+      rl=0;  if (isdigit(*rp)) rl= strtol(ref,(char**)&ref,10);
+      if (vl != rl) return vl - rl;
+
+      vc = *val;
+      rc = *ref;
+      vsep = strchr(".-", vc);
+      rsep = strchr(".-", rc);
+      if (vsep && !rsep) return -1;
+      if (!vsep && rsep) return +1;
+
+      if (!*val && !*ref) return 0;
+      if (!*val) return -1;
+      if (!*ref) return +1;
+     }
 }

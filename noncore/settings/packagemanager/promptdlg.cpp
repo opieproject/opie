@@ -45,7 +45,7 @@ PromptDlg::PromptDlg( const QString &caption, const QString &text, const QString
 
     QGridLayout *layout = new QGridLayout( this, 2, 2, 4, 2 );
     QLabel *label = new QLabel( text, this );
-    label->setAlignment( AlignCenter | AlignTop | WordBreak );
+    label->setAlignment( AlignCenter | WordBreak );
     layout->addMultiCellWidget( label, 0, 0, 0, 1 );
 
     QPushButton *btn = new QPushButton( btn1, this );
