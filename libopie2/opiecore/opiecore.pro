@@ -9,10 +9,11 @@ HEADERS     = oapplication.h            \
               oinputsystem.h            \
               okeyconfigmanager.h       \
               okeyfilter.h              \
-	      opluginloader.h           \
+              opluginloader.h           \
               oprocess.h                \
               oprocctrl.h               \
-	      osharedpointer.h          \
+              oresource.h               \
+              osharedpointer.h          \
               osmartpointer.h           \
               ostorageinfo.h            \
               xmltree.h
@@ -25,10 +26,11 @@ SOURCES     = oapplication.cpp          \
               oinputsystem.cpp          \
               okeyconfigmanager.cpp     \
               okeyfilter.cpp            \
-	      opluginloader.cpp         \
+              opluginloader.cpp         \
               oprocess.cpp              \
-              oprocctrl.cpp             \	    
-	      osmartpointer.cpp         \
+              oprocctrl.cpp             \
+              oresource.cpp             \
+              osmartpointer.cpp         \
               ostorageinfo.cpp          \
               xmltree.cpp
 
@@ -38,7 +40,7 @@ SOURCES     = oapplication.cpp          \
 
 CONFTEST = $$system( echo $CONFIG_TARGET_MACOSX )
 !contains( CONFTEST, y ) {
-HEADERS     += ofilenotify.h 
+HEADERS     += ofilenotify.h
 SOURCES     += ofilenotify.cpp
 } else {
     message( "ofilenotify is not available in a mac build !" )
