@@ -61,7 +61,12 @@ void DateBookWeekLstHeader::setDate(const QDate &d) {
 	int year,week,dayofweek;
 	date=d;
 	dayofweek=d.dayOfWeek();
-	if(bStartOnMonday) dayofweek--;
+	if(bStartOnMonday) 
+	    dayofweek--;
+	else if( dayofweek == 7 )
+	    /* we already have the right day -7 would lead to the same week */
+	    dayofweek = 0;
+	
 	date=date.addDays(-dayofweek);
 
 	calcWeek(date,week,year,bStartOnMonday);

@@ -70,18 +70,22 @@ void DateBookWeekHeader::pickDate()
 
 void DateBookWeekHeader::nextMonth()
 {
+	qWarning("nextMonth() " );
 	setDate(date.addDays(28));
 }
 void DateBookWeekHeader::prevMonth()
 {
+	qWarning("prevMonth() " );
 	setDate(date.addDays(-28));
 }
 void DateBookWeekHeader::nextWeek()
 {
+	qWarning("nextWeek() " );
 	setDate(date.addDays(7));
 }
 void DateBookWeekHeader::prevWeek()
 {
+	qWarning("prevWeek() ");
 	setDate(date.addDays(-7));
 }
 
@@ -94,9 +98,13 @@ void DateBookWeekHeader::setDate(const QDate &d) {
 	int year,week,dayofweek;
 	date=d;
 	dayofweek=d.dayOfWeek();
-	if(bStartOnMonday) dayofweek--;
+	if(bStartOnMonday) 
+	    dayofweek--;
+	else if( dayofweek == 7 )
+	    /* we already have the right day -7 would lead to the current week..*/
+	    dayofweek = 0;
+	    	    
 	date=date.addDays(-dayofweek);
-
 	calcWeek(date,week,year,bStartOnMonday);
 	QDate start=date;
 	QDate stop=start.addDays(6);
