@@ -136,7 +136,7 @@ void DateBookEvent::editEventSlot( const Event &e ) {
     if ( ODevice::inst()->system() == System_Zaurus ) {
         QCopEnvelope env( "QPE/Application/datebook", "raise()" );
     } else {
-        QCopEnvelope env( "QPE/Datebook", "editEvent(int)" );
+        QCopEnvelope env( "QPE/Application/datebook", "editEvent(int)" );
         env << e.uid();
     }
 }
