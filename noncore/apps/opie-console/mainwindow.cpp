@@ -164,7 +164,7 @@ void MainWindow::initUI() {
      * action that open/closes the keyboard
      */
     m_openKeys = new QAction (tr("Open Keyboard..."),
-                             Resource::loadPixmap( "console/keyboard_icon.png" ),
+                             Resource::loadPixmap( "down" ),
                              QString::null, 0, this, 0);
 
     m_openKeys->setToggleAction(true);
@@ -174,11 +174,11 @@ void MainWindow::initUI() {
     m_openKeys->addTo(m_icons);
 
 
-     /*
+    /*
      * action that open/closes the keyboard
-     */
+ 
     m_openButtons = new QAction ( tr( "Open Buttons..." ),
-                             Resource::loadPixmap( "down" ),
+                             Resource::loadPixmap( "" ),
                              QString::null, 0, this, 0 );
 
     m_openButtons->setToggleAction( true );
@@ -187,6 +187,7 @@ void MainWindow::initUI() {
              this, SLOT( slotOpenButtons( bool ) ) );
     m_openButtons->addTo( m_icons );
 
+    */
 
     /* insert the submenu */
     m_console->insertItem(tr("New from Profile"), m_sessionsPop,
