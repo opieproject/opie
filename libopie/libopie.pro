@@ -59,7 +59,7 @@ DESTDIR      = $(QTDIR)/lib$(PROJMAK)
 
 # LIBS            += -lopiesql
 
-INTERFACES      = otimepickerbase.ui oreccurancebase.ui
+INTERFACES      = otimepickerbase.ui orecurrancebase.ui
 
 TRANSLATIONS = ../i18n/de/libopie.ts \
    ../i18n/en/libopie.ts \
