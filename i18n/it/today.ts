@@ -24,15 +24,15 @@
     </message>
     <message>
         <source>&lt;b&gt;%1&lt;/b&gt; new mail(s), &lt;b&gt;%2&lt;/b&gt; outgoing</source>
-        <translation>&lt;b&gt;%1&lt;/b&gt; nuove e-mail, &lt;b&gt;%2&lt;/b&gt; in uscita</translation>
+        <translation>&lt;b&gt;%1&lt;/b&gt; nuove Email, &lt;b&gt;%2&lt;/b&gt; in uscita</translation>
     </message>
     <message>
         <source>There is &lt;b&gt; 1&lt;/b&gt; active task:  &lt;br&gt;</source>
-        <translation>C&apos;è &lt;b&gt; 1&lt;/b&gt; promemoria attivo:  &lt;br&gt;</translation>
+        <translation>C&apos;è &lt;b&gt; 1&lt;/b&gt; impegno attivo:  &lt;br&gt;</translation>
     </message>
     <message>
         <source>There are &lt;b&gt; %1&lt;/b&gt; active tasks: &lt;br&gt;</source>
-        <translation>Ci sono&lt;b&gt; %1&lt;/b&gt; promemoria attivi: &lt;br&gt;</translation>
+        <translation>Ci sono&lt;b&gt; %1&lt;/b&gt; impegni attivi: &lt;br&gt;</translation>
     </message>
     <message>
         <source>No active tasks</source>
@@ -73,7 +73,7 @@ note?</translation>
         <source>Show only later
 appointments</source>
         <translation>Mostrare solo gli
-app. successivi?</translation>
+appuntamenti successivi?</translation>
     </message>
     <message>
         <source>How many 

@@ -6,3 +6,4 @@ Type=Application
 Name=NTP-Date/Time
 Name[zh_TW]=網絡時間
 Name[ko]=네트워크로 시간 설정
+Name[it]=NTP

@@ -6,5 +6,6 @@ Type=Application
 Name=Opie Sheet
 MimeType=application/sheet-qt
 Name[es]=Hoja Cálculo
+Name[it]=Foglio di Calcolo
 Name[zh_TW]=Opie Sheet
 Name[ko]=스프레드시트
