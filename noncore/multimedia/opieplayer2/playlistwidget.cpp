@@ -465,6 +465,7 @@ void PlayListWidget::addSelected() {
           }
 //          tabWidget->setCurrentPage(0);
           writeCurrentM3u();          
+    d->selectedFiles->next();
       }
           break;
       case 2: { // video
@@ -485,6 +486,7 @@ void PlayListWidget::addSelected() {
           }
 //          tabWidget->setCurrentPage(0);
           writeCurrentM3u();          
+    
       }
           break;
     };
@@ -774,9 +776,9 @@ void PlayListWidget::readm3u( const QString &filename ) {
         if(s.left(4)=="http") {
           lnk.setName( s ); //sets file name
           lnk.setIcon("opieplayer2/musicfile");
-          if(s.right(4) != '.' || s.right(5) != '.')
-            lnk.setFile( s+"/"); //if url with no extension
-          else
+//           if(s.right(4) != '.' || s.right(5) != '.')
+//             lnk.setFile( s+"/"); //if url with no extension
+//           else
             lnk.setFile( s ); //sets file name
             
         }  else {
