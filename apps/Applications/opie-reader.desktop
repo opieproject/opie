@@ -1,6 +1,6 @@
 [Desktop Entry]
 CanFastLoad=1
-Exec=reader
+Exec=opie-reader
 Icon=opie-reader/uqtreader
 MimeType=etext/*
 Type=Application
