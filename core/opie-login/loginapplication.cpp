@@ -44,10 +44,11 @@ extern "C" {
 
 LoginApplication *lApp;
 
-LoginApplication::LoginApplication ( int &argc, char **argv )
+LoginApplication::LoginApplication ( int &argc, char **argv, pid_t parentpid )
 	: QPEApplication ( argc, argv, GuiServer )
 {
 	lApp = this;
+	m_parentpid = parentpid;
 }
 
 const char *LoginApplication::s_username = 0;
@@ -216,5 +217,5 @@ QStringList LoginApplication::allUsers ( )
 void LoginApplication::quitToConsole ( )
 {
 	QPEApplication::quit ( );
-	::kill ( ::getppid ( ), SIGTERM );
+	::kill ( m_parentpid, SIGTERM );
 }

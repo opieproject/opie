@@ -60,7 +60,7 @@
 
 using namespace Opie;
 
-int login_main ( int argc, char **argv );
+int login_main ( int argc, char **argv, pid_t ppid );
 void sigterm ( int sig );
 void exit_closelog ( );
 
@@ -72,6 +72,9 @@ static struct option long_options [] = {
 
 int main ( int argc, char **argv )
 {
+	pid_t ppid = ::getpid ( );
+
+
 	if ( ::geteuid ( ) != 0 ) {
 		::fprintf ( stderr, "%s can only be executed by root. (or chmod +s)", argv [0] );
 		return 1;
@@ -183,7 +186,7 @@ int main ( int argc, char **argv )
 					::exit ( 0 );
 			}
 			else 
-				::exit ( login_main ( argc, argv ));
+				::exit ( login_main ( argc, argv, ppid ));
 		}
 	}
 	return 0;
@@ -302,10 +305,10 @@ private:
 
 
 
-int login_main ( int argc, char **argv )
+int login_main ( int argc, char **argv, pid_t ppid )
 {
 	QWSServer::setDesktopBackground( QImage() );
-	LoginApplication *app = new LoginApplication ( argc, argv );
+	LoginApplication *app = new LoginApplication ( argc, argv, ppid );
 
 	app-> setFont ( QFont ( "Helvetica", 10 ));
 	app-> setStyle ( new QPEStyle ( ));

@@ -39,7 +39,7 @@ struct pam_response;
 
 class LoginApplication : public QPEApplication {
 public:
-	LoginApplication ( int &argc, char **argv );
+	LoginApplication ( int &argc, char **argv, pid_t parentpid );
 
 	static bool checkPassword ( const char *user, const char *password );
 
@@ -60,6 +60,9 @@ private:
 	static int pam_helper ( int num_msg, const struct pam_message **msg, struct pam_response **resp, void * );
 	static const char *s_pam_password;
 #endif
+
+private:
+	pid_t m_parentpid;
 };
 
 extern LoginApplication *lApp;
