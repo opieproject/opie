@@ -994,7 +994,7 @@ bool QPEApplication::qwsEventFilter( QWSEvent * e )
 		else {
 			// make sure our modal widget is ALWAYS on top
 			QWidget *topm = activeModalWidget();
-			if ( topm ) {
+			if ( topm && static_cast<int>( topm->winId() ) != fe->simpleData.window) {
 				topm->raise();
 			}
 		}
@@ -1465,7 +1465,7 @@ bool QPEApplication::raiseAppropriateWindow()
     }
 
     // 3. Raise the active modal widget.
-    if ( topm && topm != top ) {
+    if ( topm ) {
 	topm->show();
 	topm->raise();
 	// If we haven't already handled the fastAppShowing message
