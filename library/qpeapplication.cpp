@@ -1073,7 +1073,7 @@ void QPEApplication::setDefaultRotation( int r )
 
 extern void qws_clearLoadedFonts();
 
-inline void QPEApplication::setCurrentMode( int x, int y, int depth )
+void QPEApplication::setCurrentMode( int x, int y, int depth )
 {
     // Reset the caches
     qws_clearLoadedFonts();
@@ -1092,7 +1092,7 @@ inline void QPEApplication::setCurrentMode( int x, int y, int depth )
     }
 }
 
-inline void QPEApplication::reset() {
+void QPEApplication::reset() {
     // Reconnect to the screen
     qt_screen->disconnect();
     qt_screen->connect( QString::null );

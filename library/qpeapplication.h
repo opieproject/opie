@@ -116,7 +116,7 @@ private slots:
     void hideOrQuit();
 
 private:
-    inline QWidget *nextWidget( QWidgetList*, QWidget* );
+    QWidget *nextWidget( QWidgetList*, QWidget* );
 
 protected:
     bool qwsEventFilter( QWSEvent * );
