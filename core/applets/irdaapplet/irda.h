@@ -12,8 +12,8 @@
 **
 **********************************************************************/
 
-#ifndef __SCREENSHOT_APPLET_H__
-#define __SCREENSHOT_APPLET_H__
+#ifndef SCREENSHOT_APPLET_H__
+#define SCREENSHOT_APPLET_H__
 
 
 
@@ -35,7 +35,6 @@ public:
 protected:
     void timerEvent(QTimerEvent *te );
 
-public slots:
 private:
     void mousePressEvent( QMouseEvent * );
     void paintEvent( QPaintEvent* );
@@ -49,7 +48,7 @@ private:
     QPixmap irdaOnPixmap;
     QPixmap irdaOffPixmap;
     QPixmap irdaDiscoveryOnPixmap;
-    int irdaactive;
+    int irdaactive; // bool and bitfields later bool irdaactive :1 ;
     int irdaDiscoveryActive;
 
 private slots:

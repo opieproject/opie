@@ -25,6 +25,8 @@
 #include <qpe/config.h>
 #include <qpe/applnk.h>
 #include <qpe/config.h>
+#include <qpe/ir.h>
+#include <qpe/qcopenvelope_qws.h>
 
 #include <qdir.h>
 #include <qfileinfo.h>
@@ -149,9 +151,12 @@ void IrdaApplet::mousePressEvent( QMouseEvent *)
 	else
 		menu->insertItem( tr("Enable Discovery"), 3 );
 
-	QPoint p = mapToGlobal( QPoint(1, -menu->sizeHint().height()-1) );
+	if( Ir::supported() ){
+	  menu->insertItem( tr("Enable Receive"), 4 );
+	}
+	QPoint p = mapToGlobal( QPoint(1, menu->sizeHint().height()-1) );
 	ret = menu->exec(p, 2);
-
+	  
 	qDebug("ret was %d\n", ret);
 
 	switch(ret) {
@@ -169,13 +174,19 @@ void IrdaApplet::mousePressEvent( QMouseEvent *)
 		break;
 	case 3:
 		setIrdaDiscoveryStatus(1);
-		timerEvent(NULL);
+		timerEvent(NULL); // NULL is undefined in c++ use 0 or 0l
 		break;
-	case 4:
+	case 4: { // enable receive{
+	  qWarning("Enable receive" );
+	  QCopEnvelope e("QPE/Obex", "receive(bool)" );
+	  e << true;
+	  break;
+	}
+	case 6:
 		qDebug("FIXME: Bring up pretty menu...\n");
 		// With table of currently-detected devices.
 	}
-
+	delete menu; // Can somebody explain why use a QPopupMenu* and not QPopupMenu nor QAction. with out delete we will leak cause QPopupMenu doesn't have a parent in this case
 }
 
 void IrdaApplet::timerEvent( QTimerEvent * )
