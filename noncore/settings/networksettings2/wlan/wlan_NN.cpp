@@ -40,7 +40,7 @@ const char * WLanNetNode::provides( void ) {
 
 bool WLanNetNode::generateProperFilesFor( 
             ANetNodeInstance * ) {
-      return 1;
+      return 0;
 }
 
 bool WLanNetNode::hasDataFor( const QString & S ) {

@@ -40,13 +40,13 @@ const char * VPNNetNode::provides( void ) {
 
 bool VPNNetNode::generateProperFilesFor( 
             ANetNodeInstance * ) {
-      return 1;
+      return 0;
 }
 
 bool VPNNetNode::generateDeviceDataForCommonFile( 
                                 SystemFile & , 
                                 long ) {
-      return 1;
+      return 0;
 }
 
 void VPNNetNode::setSpecificAttribute( QString & , QString & ) {

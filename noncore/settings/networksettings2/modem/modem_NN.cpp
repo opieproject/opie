@@ -39,13 +39,13 @@ const char * ModemNetNode::provides( void ) {
 
 bool ModemNetNode::generateProperFilesFor( 
             ANetNodeInstance * ) {
-      return 1;
+      return 0;
 }
 
 bool ModemNetNode::generateDeviceDataForCommonFile( 
                                 SystemFile & , 
                                 long ) {
-      return 1;
+      return 0;
 }
 
 void ModemNetNode::setSpecificAttribute( QString & , QString & ) {

@@ -11,8 +11,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>283</width>
-            <height>199</height>
+            <width>278</width>
+            <height>339</height>
         </rect>
     </property>
     <property stdset="1">
@@ -28,104 +28,144 @@
     <vbox>
         <property stdset="1">
             <name>margin</name>
-            <number>2</number>
+            <number>0</number>
         </property>
         <property stdset="1">
             <name>spacing</name>
-            <number>2</number>
+            <number>0</number>
         </property>
         <widget>
-            <class>QLayoutWidget</class>
+            <class>QCheckBox</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>Layout4</cstring>
-            </property>
-            <hbox>
-                <property stdset="1">
-                    <name>margin</name>
-                    <number>0</number>
-                </property>
-                <property stdset="1">
-                    <name>spacing</name>
-                    <number>6</number>
-                </property>
-                <widget>
-                    <class>QLabel</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>TextLabel4</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>Name</string>
-                    </property>
-                </widget>
-                <widget>
-                    <class>QLineEdit</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>Name_LE</cstring>
-                    </property>
-                </widget>
-            </hbox>
-        </widget>
-        <widget>
-            <class>QLabel</class>
-            <property stdset="1">
-                <name>name</name>
-                <cstring>TextLabel3</cstring>
+                <cstring>AnyPAN_CB</cstring>
             </property>
             <property stdset="1">
                 <name>text</name>
-                <string>Description</string>
+                <string>Any available PAN device</string>
+            </property>
+            <property stdset="1">
+                <name>checked</name>
+                <bool>true</bool>
             </property>
         </widget>
         <widget>
-            <class>QMultiLineEdit</class>
+            <class>QGroupBox</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>Description_LE</cstring>
+                <cstring>GroupBox1</cstring>
             </property>
-        </widget>
-        <widget>
-            <class>QLayoutWidget</class>
             <property stdset="1">
-                <name>name</name>
-                <cstring>Layout5</cstring>
+                <name>enabled</name>
+                <bool>false</bool>
             </property>
-            <hbox>
+            <property stdset="1">
+                <name>title</name>
+                <string>Select Card</string>
+            </property>
+            <property>
+                <name>layoutMargin</name>
+            </property>
+            <vbox>
                 <property stdset="1">
                     <name>margin</name>
-                    <number>0</number>
+                    <number>5</number>
                 </property>
                 <property stdset="1">
                     <name>spacing</name>
                     <number>6</number>
                 </property>
                 <widget>
-                    <class>QCheckBox</class>
+                    <class>QListView</class>
+                    <column>
+                        <property>
+                            <name>text</name>
+                            <string>BDAddress</string>
+                        </property>
+                        <property>
+                            <name>clickable</name>
+                            <bool>true</bool>
+                        </property>
+                        <property>
+                            <name>resizeable</name>
+                            <bool>true</bool>
+                        </property>
+                    </column>
                     <property stdset="1">
                         <name>name</name>
-                        <cstring>Automatic_CB</cstring>
+                        <cstring>BTPANServers_LV</cstring>
                     </property>
                     <property stdset="1">
-                        <name>text</name>
-                        <string>Start automatically</string>
+                        <name>allColumnsShowFocus</name>
+                        <bool>true</bool>
                     </property>
                 </widget>
                 <widget>
-                    <class>QCheckBox</class>
+                    <class>QLayoutWidget</class>
                     <property stdset="1">
                         <name>name</name>
-                        <cstring>Confirm_CB</cstring>
+                        <cstring>Layout2</cstring>
                     </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>Confirm before start</string>
-                    </property>
+                    <hbox>
+                        <property stdset="1">
+                            <name>margin</name>
+                            <number>0</number>
+                        </property>
+                        <property stdset="1">
+                            <name>spacing</name>
+                            <number>6</number>
+                        </property>
+                        <spacer>
+                            <property>
+                                <name>name</name>
+                                <cstring>Spacer1</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>orientation</name>
+                                <enum>Horizontal</enum>
+                            </property>
+                            <property stdset="1">
+                                <name>sizeType</name>
+                                <enum>Expanding</enum>
+                            </property>
+                            <property>
+                                <name>sizeHint</name>
+                                <size>
+                                    <width>20</width>
+                                    <height>20</height>
+                                </size>
+                            </property>
+                        </spacer>
+                        <widget>
+                            <class>QPushButton</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>BTManager_BUT</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>text</name>
+                                <string>Rescan</string>
+                            </property>
+                        </widget>
+                    </hbox>
                 </widget>
-            </hbox>
+            </vbox>
         </widget>
     </vbox>
 </widget>
+<connections>
+    <connection>
+        <sender>BTManager_BUT</sender>
+        <signal>clicked()</signal>
+        <receiver>BluetoothBNEP_FRM</receiver>
+        <slot>SLOT_StartBTMgr()</slot>
+    </connection>
+    <connection>
+        <sender>AnyPAN_CB</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>GroupBox1</receiver>
+        <slot>setDisabled(bool)</slot>
+    </connection>
+    <slot access="public">SLOT_StartBTMgr()</slot>
+</connections>
 </UI>

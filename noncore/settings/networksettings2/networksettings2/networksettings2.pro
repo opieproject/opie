@@ -18,7 +18,7 @@ SOURCES		= netnode.cpp \
                   resources.cpp
 INCLUDEPATH	+= $(OPIEDIR)/include ../networksettings2
 DEPENDPATH	+= $(OPIEDIR)/include
-LIBS            += -lqpe -lopie
+LIBS            += -lqpe -lopiecore2
 INTERFACES	= 
 TARGET		= networksettings2
 VERSION		= 1.0.0

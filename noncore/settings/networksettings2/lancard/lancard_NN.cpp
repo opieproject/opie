@@ -40,7 +40,7 @@ const char * LanCardNetNode::provides( void ) {
 
 bool LanCardNetNode::generateProperFilesFor( 
             ANetNodeInstance * ) {
-      return 1;
+      return 0;
 }
 
 bool LanCardNetNode::hasDataFor( const QString & S ) {

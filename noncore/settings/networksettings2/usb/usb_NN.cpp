@@ -39,7 +39,7 @@ const char * USBNetNode::provides( void ) {
 
 bool USBNetNode::generateProperFilesFor( 
             ANetNodeInstance * ) {
-      return 1;
+      return 0;
 }
 
 bool USBNetNode::hasDataFor( const QString & S ) {

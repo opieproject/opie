@@ -1,3 +1,5 @@
+#include <qtopia/qcopenvelope_qws.h>
+
 #include <GUIUtils.h>
 #include "bluetoothBNEPedit.h"
 
@@ -10,9 +12,15 @@ QString BluetoothBNEPEdit::acceptable( void ) {
     return QString();
 }
 
-bool BluetoothBNEPEdit::commit( BluetoothBNEPData & Data ) {
+bool BluetoothBNEPEdit::commit( BluetoothBNEPData & ) {
     return 0;
 }
 
-void BluetoothBNEPEdit::showData( BluetoothBNEPData & Data ) {
+void BluetoothBNEPEdit::showData( BluetoothBNEPData & ) {
+}
+
+void BluetoothBNEPEdit::SLOT_StartBTMgr( void ) {
+      QCopEnvelope e( "QPE/System", "execute(QString)" );
+              e << QString( "bluetooth-manager" );
+
 }

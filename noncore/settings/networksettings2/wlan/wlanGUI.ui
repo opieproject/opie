@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>196</width>
+            <width>192</width>
             <height>329</height>
         </rect>
     </property>
@@ -38,7 +38,7 @@
             <class>QTabWidget</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>tabWidget</cstring>
+                <cstring>WLan_TAB</cstring>
             </property>
             <property stdset="1">
                 <name>enabled</name>
@@ -119,7 +119,7 @@
                                 </item>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>essid</cstring>
+                                    <cstring>ESSID_CB</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>sizePolicy</name>
@@ -199,7 +199,7 @@
                                 </item>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>mode</cstring>
+                                    <cstring>Mode_CB</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>enabled</name>
@@ -240,7 +240,7 @@
                                 <class>QCheckBox</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>specifyAp</cstring>
+                                    <cstring>SpecifyAP_CB</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
@@ -273,7 +273,7 @@
                                 <class>QLineEdit</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>macEdit</cstring>
+                                    <cstring>APMac_LE</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>enabled</name>
@@ -332,7 +332,7 @@
                                 <class>QCheckBox</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>specifyChan</cstring>
+                                    <cstring>SpecifyChannel_CB</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
@@ -343,7 +343,7 @@
                                 <class>QSpinBox</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>networkChannel</cstring>
+                                    <cstring>ChannelNr_SB</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>enabled</name>
@@ -400,7 +400,7 @@
                 <vbox>
                     <property stdset="1">
                         <name>margin</name>
-                        <number>0</number>
+                        <number>2</number>
                     </property>
                     <property stdset="1">
                         <name>spacing</name>
@@ -410,7 +410,7 @@
                         <class>QCheckBox</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>wepEnabled</cstring>
+                            <cstring>EnableWEB_CB</cstring>
                         </property>
                         <property stdset="1">
                             <name>text</name>
@@ -450,7 +450,7 @@
                                 <class>QRadioButton</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>keyRadio0</cstring>
+                                    <cstring>Key1_RB</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
@@ -465,7 +465,7 @@
                                 <class>QRadioButton</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>keyRadio3</cstring>
+                                    <cstring>Key4_RB</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
@@ -476,14 +476,18 @@
                                 <class>QLineEdit</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>LineEdit6</cstring>
+                                    <cstring>Key1_LE</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>frame</name>
+                                    <bool>true</bool>
                                 </property>
                             </widget>
                             <widget row="1"  column="0" >
                                 <class>QRadioButton</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>keyRadio1</cstring>
+                                    <cstring>Key2_RB</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
@@ -494,7 +498,7 @@
                                 <class>QRadioButton</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>keyRadio2</cstring>
+                                    <cstring>Key3_RB</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
@@ -505,90 +509,39 @@
                                 <class>QLineEdit</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>LineEdit6_2</cstring>
+                                    <cstring>Key2_LE</cstring>
                                 </property>
                             </widget>
                             <widget row="3"  column="1" >
                                 <class>QLineEdit</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>LineEdit6_4</cstring>
+                                    <cstring>Key4_LE</cstring>
                                 </property>
                             </widget>
                             <widget row="2"  column="1" >
                                 <class>QLineEdit</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>LineEdit6_3</cstring>
+                                    <cstring>Key3_LE</cstring>
                                 </property>
                             </widget>
                         </grid>
                     </widget>
                     <widget>
-                        <class>QButtonGroup</class>
+                        <class>QCheckBox</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>NonEncButtonGroup</cstring>
+                            <cstring>CheckBox4</cstring>
                         </property>
                         <property stdset="1">
                             <name>enabled</name>
                             <bool>false</bool>
                         </property>
                         <property stdset="1">
-                            <name>title</name>
-                            <string>Non-encrypted Packets</string>
+                            <name>text</name>
+                            <string>Accept Non-Encrypted packets</string>
                         </property>
-                        <property stdset="1">
-                            <name>radioButtonExclusive</name>
-                            <bool>true</bool>
-                        </property>
-                        <property>
-                            <name>layoutMargin</name>
-                        </property>
-                        <grid>
-                            <property stdset="1">
-                                <name>margin</name>
-                                <number>2</number>
-                            </property>
-                            <property stdset="1">
-                                <name>spacing</name>
-                                <number>6</number>
-                            </property>
-                            <widget row="0"  column="0" >
-                                <class>QRadioButton</class>
-                                <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>acceptNonEnc</cstring>
-                                </property>
-                                <property stdset="1">
-                                    <name>text</name>
-                                    <string>&amp;Accept</string>
-                                </property>
-                                <property stdset="1">
-                                    <name>checked</name>
-                                    <bool>true</bool>
-                                </property>
-                                <property stdset="1">
-                                    <name>buttonGroupId</name>
-                                    <number>0</number>
-                                </property>
-                            </widget>
-                            <widget row="0"  column="1" >
-                                <class>QRadioButton</class>
-                                <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>rejectNonEnc</cstring>
-                                </property>
-                                <property stdset="1">
-                                    <name>text</name>
-                                    <string>&amp;Reject</string>
-                                </property>
-                                <property stdset="1">
-                                    <name>buttonGroupId</name>
-                                    <number>1</number>
-                                </property>
-                            </widget>
-                        </grid>
                     </widget>
                     <spacer>
                         <property>
@@ -673,7 +626,11 @@
                                 </property>
                                 <property stdset="1">
                                     <name>frameShadow</name>
-                                    <enum>Sunken</enum>
+                                    <enum>Plain</enum>
+                                </property>
+                                <property stdset="1">
+                                    <name>indent</name>
+                                    <number>0</number>
                                 </property>
                             </widget>
                             <widget row="3"  column="0" >
@@ -732,7 +689,11 @@
                                 </property>
                                 <property stdset="1">
                                     <name>frameShadow</name>
-                                    <enum>Sunken</enum>
+                                    <enum>Plain</enum>
+                                </property>
+                                <property stdset="1">
+                                    <name>indent</name>
+                                    <number>0</number>
                                 </property>
                             </widget>
                             <widget row="5"  column="1" >
@@ -754,7 +715,11 @@
                                 </property>
                                 <property stdset="1">
                                     <name>frameShadow</name>
-                                    <enum>Sunken</enum>
+                                    <enum>Plain</enum>
+                                </property>
+                                <property stdset="1">
+                                    <name>indent</name>
+                                    <number>0</number>
                                 </property>
                             </widget>
                             <widget row="5"  column="0" >
@@ -780,14 +745,18 @@
                                 </property>
                                 <property stdset="1">
                                     <name>frameShadow</name>
-                                    <enum>Sunken</enum>
+                                    <enum>Plain</enum>
+                                </property>
+                                <property stdset="1">
+                                    <name>indent</name>
+                                    <number>0</number>
                                 </property>
                             </widget>
                             <widget row="1"  column="1" >
                                 <class>QLabel</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>essidLabel_3</cstring>
+                                    <cstring>ESSID_LBL</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>frameShape</name>
@@ -795,14 +764,18 @@
                                 </property>
                                 <property stdset="1">
                                     <name>frameShadow</name>
-                                    <enum>Sunken</enum>
+                                    <enum>Plain</enum>
+                                </property>
+                                <property stdset="1">
+                                    <name>indent</name>
+                                    <number>0</number>
                                 </property>
                             </widget>
                             <widget row="2"  column="1" >
                                 <class>QLabel</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>modeLabel_3</cstring>
+                                    <cstring>Mode_LBL</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>frameShape</name>
@@ -810,7 +783,11 @@
                                 </property>
                                 <property stdset="1">
                                     <name>frameShadow</name>
-                                    <enum>Sunken</enum>
+                                    <enum>Plain</enum>
+                                </property>
+                                <property stdset="1">
+                                    <name>indent</name>
+                                    <number>0</number>
                                 </property>
                             </widget>
                         </grid>
@@ -923,6 +900,14 @@
                                     <cstring>Signal_PB</cstring>
                                 </property>
                                 <property stdset="1">
+                                    <name>frameShadow</name>
+                                    <enum>Plain</enum>
+                                </property>
+                                <property stdset="1">
+                                    <name>lineWidth</name>
+                                    <number>1</number>
+                                </property>
+                                <property stdset="1">
                                     <name>progress</name>
                                     <number>0</number>
                                 </property>
@@ -957,33 +942,33 @@
 </widget>
 <connections>
     <connection>
-        <sender>wepEnabled</sender>
+        <sender>EnableWEB_CB</sender>
         <signal>toggled(bool)</signal>
         <receiver>KeyButtonGroup</receiver>
         <slot>setEnabled(bool)</slot>
     </connection>
     <connection>
-        <sender>wepEnabled</sender>
+        <sender>SpecifyAP_CB</sender>
         <signal>toggled(bool)</signal>
-        <receiver>NonEncButtonGroup</receiver>
+        <receiver>APMac_LE</receiver>
         <slot>setEnabled(bool)</slot>
     </connection>
     <connection>
-        <sender>specifyAp</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>macEdit</receiver>
-        <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>specifyAp</sender>
+        <sender>SpecifyAP_CB</sender>
         <signal>toggled(bool)</signal>
         <receiver>macLabel</receiver>
         <slot>setEnabled(bool)</slot>
     </connection>
     <connection>
-        <sender>specifyChan</sender>
+        <sender>SpecifyChannel_CB</sender>
         <signal>toggled(bool)</signal>
-        <receiver>networkChannel</receiver>
+        <receiver>ChannelNr_SB</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>EnableWEB_CB</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>CheckBox4</receiver>
         <slot>setEnabled(bool)</slot>
     </connection>
 </connections>

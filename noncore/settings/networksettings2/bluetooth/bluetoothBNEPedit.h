@@ -10,4 +10,8 @@ public :
     QString acceptable( void );
     bool commit( BluetoothBNEPData & Data );
     void showData( BluetoothBNEPData & Data );
+
+public slots :
+
+    void SLOT_StartBTMgr( void );
 };

@@ -40,13 +40,13 @@ const char * NetworkNetNode::provides( void ) {
 
 bool NetworkNetNode::generateProperFilesFor( 
             ANetNodeInstance * ) {
-      return 1;
+      return 0;
 }
 
 bool NetworkNetNode::generateDeviceDataForCommonFile( 
                                 SystemFile & , 
                                 long ) {
-      return 1;
+      return 0;
 }
 
 void NetworkNetNode::setSpecificAttribute( QString & , QString & ) {

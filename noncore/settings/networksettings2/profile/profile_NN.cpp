@@ -40,13 +40,13 @@ const char * ProfileNetNode::provides( void ) {
 
 bool ProfileNetNode::generateProperFilesFor( 
             ANetNodeInstance * ) {
-      return 1;
+      return 0;
 }
 
 bool ProfileNetNode::generateDeviceDataForCommonFile( 
                                 SystemFile & , 
                                 long ) {
-      return 1;
+      return 0;
 }
 
 void ProfileNetNode::setSpecificAttribute( QString & , QString & ) {

@@ -302,7 +302,7 @@ QString NetworkSettingsData::generateSettings( bool ForceReq ) {
           NNI = NNIIt.current();
 
           if( ForceIt || NNI->isModified() ) {
-            if( ! NNI->nodeClass()->generateProperFilesFor( NNI ) ) {
+            if( NNI->nodeClass()->generateProperFilesFor( NNI ) ) {
               // problem generating
               S = qApp->translate( "NetworkSettings", 
                                    "<p>Cannot generate files proper to \"%1\"</p>" ).
@@ -494,7 +494,7 @@ QString NetworkSettingsData::generateSystemFileNode(
 
       if( SF.preDeviceSection( CurDevNN ) ) {
         S = qApp->translate( "NetworkSettings", 
-            "<p>Error in preDeviceSection for file \"%1\" and nodetype \"%2\"</p>" ).
+            "<p>Error in \"Pre-Device Part\" for file \"%1\" and nodetype \"%2\"</p>" ).
             arg( SF.name() ).
             arg( CurDevNN->name() );
         return S;
@@ -503,7 +503,7 @@ QString NetworkSettingsData::generateSystemFileNode(
       if( CurDevNN->hasDataFor( SF.name() ) ) {
         if( CurDevNN->generateDeviceDataForCommonFile( SF, DevInstNr ) ) {
           S = qApp->translate( "NetworkSettings", 
-            "<p>Error in node Device part for file \"%1\" and node \"%2\"</p>" ).
+            "<p>Error in \"Device Part\" for file \"%1\" and node \"%2\"</p>" ).
               arg( SF.name() ).
               arg( CurDevNN->name() );
           return S;
@@ -537,7 +537,7 @@ QString NetworkSettingsData::generateSystemFileNode(
         // generate 'entry' 
         if( SF.preNodeSection( DevNNI, DevInstNr ) ) {
           S = qApp->translate( "NetworkSettings", 
-              "<p>Error in preNodeSection for file \"%1\" and node \"%2\"</p>" ).
+              "<p>Error in \"Pre-Node Part\" for file \"%1\" and node \"%2\"</p>" ).
               arg( SF.name() ).
               arg( CurDevNN->name() );
           return S;
@@ -552,7 +552,7 @@ QString NetworkSettingsData::generateSystemFileNode(
           if( NNI->hasDataFor( SF.name() ) ) {
             if( NNI->generateDataForCommonFile(SF,DevInstNr) ) {
               S = qApp->translate( "NetworkSettings", 
-                "<p>Error in node part for file \"%1\" and node \"%2\"</p>" ).
+                "<p>Error in \"Node Part\" for file \"%1\" and node \"%2\"</p>" ).
                   arg( SF.name() ).
                   arg( NNI->nodeClass()->name() );
               return S;
@@ -562,7 +562,7 @@ QString NetworkSettingsData::generateSystemFileNode(
 
         if( SF.postNodeSection( DevNNI, DevInstNr ) ) {
           S = qApp->translate( "NetworkSettings", 
-              "<p>Error in postNodeSection for file \"%1\" and node \"%2\"</p>" ).
+              "<p>Error in \"Post-Node Part\" for file \"%1\" and node \"%2\"</p>" ).
                   arg( SF.name() ).
                   arg( CurDevNN->name() );
           return S;
@@ -572,7 +572,7 @@ QString NetworkSettingsData::generateSystemFileNode(
 
       if( SF.postDeviceSection( CurDevNN ) ) {
         S = qApp->translate( "NetworkSettings", 
-            "<p>Error in postDeviceSection for file \"%1\" and node \"%2\"</p>" ).
+            "<p>Error in \"Post-Device Part\" for file \"%1\" and node \"%2\"</p>" ).
                 arg( SF.name() ).
                 arg( CurDevNN->name() );
         return S;

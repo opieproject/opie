@@ -48,7 +48,7 @@ const char * BluetoothBNEPNetNode::provides( void ) {
 
 bool BluetoothBNEPNetNode::generateProperFilesFor( 
             ANetNodeInstance * ) {
-      return 1;
+      return 0;
 }
 
 bool BluetoothBNEPNetNode::hasDataFor( const QString & S ) {
@@ -56,9 +56,17 @@ bool BluetoothBNEPNetNode::hasDataFor( const QString & S ) {
 }
 
 bool BluetoothBNEPNetNode::generateDeviceDataForCommonFile( 
-                                SystemFile & , 
-                                long ) {
-      return 1;
+                                SystemFile & S , 
+                                long DevNr) {
+      QString NIC = genNic( DevNr );
+
+      if( S.name() == "interfaces" ) {
+        // generate mapping stanza for this interface
+        S << "# check if " << NIC << " can be brought UP" << endl;
+        S << "mapping " << NIC << endl;
+        S << "  script networksettings2-request" << endl << endl;
+      }
+      return 0;
 }
 
 QString BluetoothBNEPNetNode::genNic( long nr ) { 

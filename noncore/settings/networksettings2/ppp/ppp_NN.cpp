@@ -41,13 +41,13 @@ const char * PPPNetNode::provides( void ) {
 
 bool PPPNetNode::generateProperFilesFor( 
             ANetNodeInstance * ) {
-      return 1;
+      return 0;
 }
 
 bool PPPNetNode::generateDeviceDataForCommonFile( 
                                 SystemFile & , 
                                 long ) {
-      return 1;
+      return 0;
 }
 
 QString PPPNetNode::genNic( long NicNr ) { 
