@@ -44,6 +44,8 @@ SoundSettings::SoundSettings( QWidget* parent,  const char* name, WFlags fl )
         sampleRate->setCurrentItem(0);
     else if(rate == 22050)
         sampleRate->setCurrentItem(1);
+    else if(rate == 32000)
+        sampleRate->setCurrentItem(2);
     else if(rate==44100)
         sampleRate->setCurrentItem(2);
 
@@ -69,8 +71,10 @@ void SoundSettings::reject()
         sampleRate->setCurrentItem(0);
     else if(rate == 22050)
         sampleRate->setCurrentItem(1);
-    else if(rate==44100)
+    else if(rate == 32000)
         sampleRate->setCurrentItem(2);
+    else if(rate==44100)
+        sampleRate->setCurrentItem(3);
   stereoCheckBox->setChecked(config.readNumEntry("Stereo", 0));
   sixteenBitCheckBox->setChecked(config.readNumEntry("SixteenBit", 0));
 

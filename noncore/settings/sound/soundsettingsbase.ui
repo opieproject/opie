@@ -126,6 +126,12 @@
                                             <item>
                                                 <property>
                                                     <name>text</name>
+                                                    <string>32000</string>
+                                                </property>
+                                            </item>
+                                            <item>
+                                                <property>
+                                                    <name>text</name>
                                                     <string>44100</string>
                                                 </property>
                                             </item>

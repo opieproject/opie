@@ -9,4 +9,4 @@ DEPENDPATH	+= ../$(OPIEDIR)/include
 LIBS            += -lqpe
 TARGET		= sound
 
-TRANSLATIONS = ../../i18n/pt_BR/sound.ts
+TRANSLATIONS += ../../i18n/pt_BR/sound.ts
