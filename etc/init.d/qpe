@@ -7,6 +7,8 @@ export QWS_DISPLAY=Transformed:Rot270:0
 export QTDIR=/usr
 export OPIEDIR=/opt/QtPalmtop
 export QPEDIR=/opt/QtPalmtop
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$OPIEDIR/lib
+export PATH=$PATH:$OPIEDIR/bin
 
 #this sets the iPaqs powerbutton to mapable
 echo 1 > /proc/sys/ts/suspend_button_mode
