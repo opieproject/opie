@@ -45,25 +45,20 @@ OTabWidget::OTabWidget( QWidget *parent, const char *name, TabStyle s, TabPositi
     {
         Config config( "qpe" );
         config.setGroup( "Appearance" );
-        tabBarStyle = ( TabStyle ) config.readNumEntry( "TabStyle", (int) IconTab );
-        if ( tabBarStyle <= Global || tabBarStyle > IconList)
+        s = ( TabStyle ) config.readNumEntry( "TabStyle", (int) IconTab );
+        if ( s <= Global || s > IconList)
         {
-            tabBarStyle = IconTab;
+            s = IconTab;
         }
         QString pos = config.readEntry( "TabPosition", "Top");
         if ( pos == "Bottom" )
         {
-            tabBarPosition = Bottom;
+            p = Bottom;
         }
         else
         {
-            tabBarPosition = Top;
+            p = Top;
         }
-    }
-    else
-    {
-        tabBarStyle = s;
-        tabBarPosition = p;
     }
 
     widgetStack = new QWidgetStack( this, "widgetstack" );
@@ -80,21 +75,9 @@ OTabWidget::OTabWidget( QWidget *parent, const char *name, TabStyle s, TabPositi
     tabBarStack->addWidget( tabList, 1 );
     connect( tabList, SIGNAL( activated( int ) ), this, SLOT( slotTabListSelected( int ) ) );
 
-    if ( tabBarStyle == TextTab || tabBarStyle == IconTab )
-    {
-        tabBarStack->raiseWidget( tabBar );
-    }
-    else if ( tabBarStyle == TextList || tabBarStyle == IconList )
-    {
-        tabBarStack->raiseWidget( tabList );
-    }
+    setTabStyle( s );
+    setTabPosition( p );
 
-    if ( tabBarPosition == Bottom )
-    {
-        tabBar->setShape( QTabBar::RoundedBelow );
-    }
-
-    //tabs.setAutoDelete( TRUE );
     currentTab= 0x0;
 }
 
@@ -222,6 +205,45 @@ OTabWidget::TabStyle OTabWidget::tabStyle() const
 void OTabWidget::setTabStyle( TabStyle s )
 {
     tabBarStyle = s;
+    if ( tabBarStyle == TextTab || tabBarStyle == IconTab )
+    {
+        QTab *currtab;
+        for (  OTabInfo *tabinfo = tabs.first(); tabinfo; tabinfo = tabs.next() )
+        {
+            currtab = tabBar->tab( tabinfo->id() );
+            if ( tabBarStyle == IconTab )
+            {
+                currtab->iconset = new QIconSet( loadSmooth( tabinfo->icon() ) );
+                if ( tabinfo == currentTab )
+                    currtab->setText( tabinfo->label() );
+                else
+                    currtab->setText( QString::null );
+            }
+            else
+            {
+                currtab->iconset = 0x0;
+                currtab->setText( tabinfo->label() );
+            }
+        }
+        tabBarStack->raiseWidget( tabBar );
+    }
+    else if ( tabBarStyle == TextList || tabBarStyle == IconList )
+    {
+        tabList->clear();
+        for (  OTabInfo *tabinfo = tabs.first(); tabinfo; tabinfo = tabs.next() )
+        {
+            if ( tabBarStyle == IconList )
+            {
+                tabList->insertItem( loadSmooth( tabinfo->icon() ), tabinfo->label() );
+            }
+            else
+            {
+                tabList->insertItem( tabinfo->label() );
+            }
+        }
+        tabBarStack->raiseWidget( tabList );
+    }
+    setUpLayout();
 }
 
 OTabWidget::TabPosition OTabWidget::tabPosition() const
@@ -232,6 +254,15 @@ OTabWidget::TabPosition OTabWidget::tabPosition() const
 void OTabWidget::setTabPosition( TabPosition p )
 {
     tabBarPosition = p;
+    if ( tabBarPosition == Top )
+    {
+        tabBar->setShape( QTabBar::RoundedAbove );
+    }
+    else
+    {
+        tabBar->setShape( QTabBar::RoundedBelow );
+    }
+    setUpLayout();
 }
 
 void OTabWidget::slotTabBarSelected( int id )
@@ -270,7 +301,7 @@ void OTabWidget::selectTab( OTabInfo *tab )
     {
         if ( currentTab )
         {
-            tabBar->tab( currentTab->id() )->setText( "" );
+            tabBar->tab( currentTab->id() )->setText( QString::null );
             setUpLayout();
         }
         tabBar->tab( tab->id() )->setText( tab->label() );
@@ -331,11 +362,12 @@ void OTabWidget::resizeEvent( QResizeEvent * )
     setUpLayout();
 }
 
-int OTabWidget::getCurrentTab() {
+int OTabWidget::getCurrentTab()
+{
     if ( currentTab )
-      {
-          return currentTab->id();            
-      }
+    {
+        return currentTab->id();
+    }
     return -1;
 }
 
