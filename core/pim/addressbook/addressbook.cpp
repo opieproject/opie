@@ -351,10 +351,34 @@ void AddressbookWindow::setDocument( const QString &filename )
 									 filename );
 	OContactAccess* access = new OContactAccess ( "addressbook", QString::null , vcard_backend, true );
 	OContactAccess::List allList = access->allRecords();
+	qWarning( "Found number of contacts in File: %d", allList.count() );
 
+	bool doAsk = true;
 	OContactAccess::List::Iterator it;
 	for ( it = allList.begin(); it != allList.end(); ++it ){
-		m_abView->addEntry( *it );
+		qWarning("Adding Contact from: %s", (*it).fullName().latin1() );
+		if ( doAsk ){
+			switch( QMessageBox::information( this, tr ( "Add Contact ?" ),
+							  tr( "Do you really want add contact for \n%1 ?" )
+							  .arg( (*it).fullName().latin1() ),
+							  tr( "&Yes" ), tr( "&No" ), tr( "&AllYes"),
+							  0,      // Enter == button 0
+							  2 ) ) { // Escape == button 2
+			case 0: 
+				qWarning("YES clicked");
+				m_abView->addEntry( *it );
+				break;
+			case 1: 
+				qWarning("NO clicked");
+				break;
+			case 2:
+				qWarning("YesAll clicked");
+				doAsk = false;
+				break;
+			}
+		}else
+			m_abView->addEntry( *it );
+
 	}
 	
 	delete access;

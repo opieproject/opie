@@ -11,6 +11,7 @@ Feature requests:
 - Implementing additional Views (Phonebook, ...)
 - Birthday & Anniversary Reminder
 - Plugin for Today for Birthdays and Anniversaries
+- Beaming of multiple contacts (current list/ by search or by category)
 
 Known Bugs:
 -----------
@@ -59,9 +60,6 @@ Less important:
 
 Should be Fixed (not absolute sure, need further validation):
 -------------------------------------------------------------
-- Searchwidget closed: Selected user is jumping
-- Wenn suchen beendet, dann dauert das Tabellenupdate (was überhaupt überflüssig ist)
-	zu lange..
 
 
 Fixed:
@@ -103,6 +101,10 @@ Fixed:
 - Optimize Table Update...
 - Change MyDialog to Config
 - Store position and state of toolbar
+- Searchwidget closed: Selected user is jumping
+- Wenn suchen beendet, dann dauert das Tabellenupdate (was überhaupt überflüssig ist)
+	zu lange..
 - VCARD: Import of Anniversary does not work correctly (currently disabled)
 - Name order selected in "contacteditor" not used in list view.
 - OK-Key does not switch from Detailview (ablable) to Listview
+- Receiving of beams should open a dialog
