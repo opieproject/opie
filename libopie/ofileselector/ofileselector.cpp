@@ -246,10 +246,10 @@ void OFileSelector::setSelector(int mode )
     text = tr("Documents");
     break;
   case Extended:
-    text = tr("Files");
+    text = tr("List View");
     break;
   case ExtendedAll:
-    text = tr("All Files");
+    text = tr("All List View");
     break;
   }
   slotViewCheck( text );
@@ -466,6 +466,8 @@ void OFileSelector::init()
 
   /* take care of the main view... */
   initToolbar();
+  //if( m_shChooser ) // the Chooser for the view and Mimetypes
+  initializeChooser();
 
   /* initialize the file lister */
   if( m_selector == Normal ){
@@ -487,9 +489,6 @@ void OFileSelector::init()
 
   if( m_shPerm ) // the Permission QCheckBox
       initializePerm();
-
-  if( m_shChooser ) // the Chooser for the view and Mimetypes
-      initializeChooser();
 
   if( m_shYesNo ) // the Yes No button row
       initializeYes( );
@@ -956,6 +955,7 @@ void OFileSelector::setView( const QString& lis ) {
         m_fileView = 0l;
         initializeOldSelector();
     }else {
+        qWarning("lis %s", lis.latin1() );
         QString list;
 
         delete m_lister;
@@ -1092,9 +1092,9 @@ void OFileSelector::initializeView() {
     setLister(QString::null);
     fillList();
     if (m_selector == Extended ) {
-        setView( tr("Files") );
+        setView( tr("List View") );
     }else{
-        setView( tr("All Files") );
+        setView( tr("All List View") );
     }
 }
 
