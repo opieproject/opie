@@ -104,6 +104,7 @@ clean : $(TOPDIR)/.config
 	make -C lib clean
 	make -C plugins clean
 
-apidox : doc/generate_apidox 
+apidox : 
+	doc/generate_apidox 
 
 include $(TOPDIR)/Rules.make
