@@ -14,42 +14,30 @@ You should have received a copy of the GNU General Public License along with thi
 Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 */
 
-#include <qwidget.h>
-#include <qlistbox.h>
-#include <qstring.h>
-#include <qstringlist.h>
-#include <qlayout.h>
+#include <qdialog.h>
+#include <qtextview.h>
+#include <qlineedit.h>
 #include <qpushbutton.h>
+#include <qwidget.h>
+#include <qlayout.h>
 #include <qmessagebox.h>
 
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/socket.h>
-#include <sys/types.h>
-#include <sys/un.h>
-#include <unistd.h>
-#include <errno.h>
 
-#include "recorddialog.h"
+#include <opie/oprocess.h>
 
-#define PACKET_SIZE 256
-#define TIMEOUT 3
-
-class LearnTab : public QWidget
+class RecordDialog : public QDialog
 {
 	Q_OBJECT
 public:
-	LearnTab(QWidget *parent=0, const char *name=0);
-	const char *readPacket();
-	QStringList getRemotes();
+	RecordDialog(QWidget *parent=0, const char *name=0);
 public slots:
-	void add();
-	void edit();
-	void del();
+	void retPressed();
+	void incoming(OProcess *proc, char *buffer, int len);
+	void done(OProcess *proc);
 private:
-	QListBox *remotesBox;
-	int fd;
-	int timeout;
-	struct sockaddr_un addr;
+	QTextView *output;
+	QLineEdit *input;
+	OProcess *record;
+	int where;
 };

@@ -26,21 +26,18 @@ MainView::MainView(QWidget *parent, const char *name) : QWidget(parent, name)
 
 	layout->addWidget(tabs);
 
-	printf("MainView: 1\n");
 	remote = new RemoteTab(tabs);
-	printf("MainView: 2\n");
 	learn = new LearnTab(tabs);
-	printf("MainView: 3\n");
 	config = new ConfigTab(tabs);
-	printf("MainView: 4\n");
+	help = new HelpTab(tabs);
 	connect(config, SIGNAL(remotesChanged()), this, SLOT(updateRemotesList()) );
-	printf("MainView: 5\n");
 
 	remote->setIRSocket(fd);
 
 	tabs->addTab(remote, tr("Remote") );
 	tabs->addTab(learn,tr("Learn") );
 	tabs->addTab(config,tr("Config") );
+	tabs->addTab(help, tr("Help") );
 
 	printf("1\n");
 	cfg = new Config("Remote");

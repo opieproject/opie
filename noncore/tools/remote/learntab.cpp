@@ -19,8 +19,173 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 LearnTab::LearnTab(QWidget *parent, const char *name):QWidget(parent,name)
 {
 	QVBoxLayout *layout = new QVBoxLayout(this);
-	QString *string = new QString("<qt><h1>Opie-Remote Usage Instructions</h1><p>First, some definitions.  A Remote is a remote entry in an lircd.conf file, it represents one remote you want to emulate.  A Remote Layout is one entry in your ~/Settings/Remote.conf file.  It represents the buttons that you see on your screen.  Each button on a Remote Layout can be mapped to any button in a Remote.  This way you can have, for example, a vcr remote layout, in which all the play/pause/etc buttons are mapped to the buttons on your vcr's remote.  However, most VCR's don't have volume controls, so the volume buttons can be mapped to the volume buttons on your TV.</p><p>The first things you need the lirc and lirc-modules ipkgs.  If you installed this from an ipkg, they should already be there, thanks to the wonderful world of dependencies.  If not, get them.  The next thing you need is an lircd.conf file.  you can get these at <a href=http://www.lirc.org/>http://www.lirc.org/</a>.  Read the documentation there to figure out how to make your own, if one for your remote doesn't exist, or how to have multiple remotes in one lircd.conf file.  Once you have a good lircd.conf file, put it in /etc, kill the lircd daemon (if its running) and do a modprobe lirc_sir.  Then, run lircd again.</p><p>The next thing you want to do is to create a remote layout.  Go to the config tab, and enter a name for your remote layout in the pulldown menu. Dont use the name Remotes, as that could confuse the app.  Hopefully, that will be fixed soon.  after entering the name you want to use, press New, and then select the name again from the pulldown menu (another oddity that i hope to fix).  Then, press each button that you want to map, and a dialog should appear.  Select the remote and button that you want to use, and click OK.  Once you are done, go to the Remote tab, and select the new remote from the dropdown menu.  It should works fine.  If at any time you want to change a remote layout, go to the Config tab, select the layout from the dropdown menu, and change the buttons you want to change.</p><p>This is program is written and maintaned by Thomas (spiralman) Stephens. <a href=mailto:spiralman@softhome.net>spiralman@softhome.net</a>.  Or, look for me on #opie or #handhelds.org on irc.openprojects.net.</p></qt>");
+	QHBoxLayout *bottomLayout = new QHBoxLayout(this);
 
-	QTextView *textView = new QTextView(*string, 0, this);
-	layout->addWidget(textView);
+	layout->insertSpacing(0,5);
+	remotesBox = new QListBox(this, "remotesBox");
+	layout->insertWidget(0, remotesBox, 1);
+	remotesBox->insertStringList(getRemotes());
+	
+	layout->insertSpacing(-1,5);
+	layout->insertLayout(-1, bottomLayout);
+	layout->insertSpacing(-1,5);
+	
+	QPushButton *add = new QPushButton("Add", this, "add");
+	bottomLayout->insertSpacing(-1, 5);
+	bottomLayout->insertWidget(-1, add);
+	bottomLayout->insertSpacing(-1, 5);
+	QPushButton *edit = new QPushButton("Edit", this, "edit");
+	bottomLayout->insertWidget(-1, edit);
+	bottomLayout->insertSpacing(-1, 5);
+	QPushButton *del = new QPushButton("Delete", this, "delete");
+	bottomLayout->insertWidget(-1, del);
+	bottomLayout->insertSpacing(-1, 5);
+	
+	connect(add, SIGNAL(clicked()), this, SLOT(add()) );
+	connect(edit, SIGNAL(clicked()), this, SLOT(edit()) );
+	connect(del, SIGNAL(clicked()), this, SLOT(del()) );
 }
+
+void LearnTab::add()
+{
+	printf("LearnTab::add: add pressed\n");
+	RecordDialog *dialog = new RecordDialog(this);
+	dialog->showMaximized();
+}
+
+void LearnTab::edit()
+{
+}
+
+void LearnTab::del()
+{
+}
+
+QStringList LearnTab::getRemotes()
+{
+	const char write_buffer[] = "LIST\n";
+	const char *readbuffer;
+	int i, numlines;
+	QStringList list;
+
+	addr.sun_family=AF_UNIX;
+	strcpy(addr.sun_path,"/dev/lircd");
+
+	fd = socket(AF_UNIX, SOCK_STREAM, 0);
+	if(fd == -1)
+	{
+		QMessageBox *mb = new QMessageBox("Error!",
+											"couldnt connect to socket",
+											QMessageBox::NoIcon,
+											QMessageBox::Ok,
+											QMessageBox::NoButton,
+											QMessageBox::NoButton);
+		mb->exec();
+		perror("ButtonDialog::GetRemotes");
+		return NULL;
+	}
+
+	if(::connect(fd,(struct sockaddr *) &addr, sizeof(addr) ) == -1)
+	{
+		QMessageBox *mb = new QMessageBox("Error!",
+											"couldnt connect to socket",
+											QMessageBox::NoIcon,
+											QMessageBox::Ok,
+											QMessageBox::NoButton,
+											QMessageBox::NoButton);
+		mb->exec();
+		perror("ButtonDialog::GetRemotes");
+		return NULL;
+	}
+
+	write(fd, write_buffer, strlen(write_buffer));
+
+	for(i=0; i<5; i++)
+	{
+		printf("%d\n", i);
+		readbuffer = readPacket();
+		printf("%s", readbuffer);
+		printf("%d\n", i);
+	}
+
+	numlines = atoi(readbuffer);
+
+	for(i=0; i<numlines; i++)
+	{
+		list+=readPacket();
+	}
+
+	if(strcasecmp(readPacket(), "END") != 0)
+	{
+		QMessageBox *mb = new QMessageBox("Error!",
+											"bad packet",
+											QMessageBox::NoIcon,
+											QMessageBox::Ok,
+											QMessageBox::NoButton,
+											QMessageBox::NoButton);
+		mb->exec();
+		perror("ButtonDialog::GetRemotes");
+		return NULL;
+	}
+
+	::close(fd);
+	return list;
+}
+
+//this function was ripped for rc.c in xrc, it is available here: http://www.lirc.org/software.html
+const char *LearnTab::readPacket()
+{
+	static char buffer[PACKET_SIZE+1]="";
+	char *end;
+	static int ptr=0,end_len=0;
+	ssize_t ret;
+	timeout = 0;
+
+	if(ptr>0)
+	{
+		memmove(buffer,buffer+ptr,strlen(buffer+ptr)+1);
+		ptr=strlen(buffer);
+		end=strchr(buffer,'\n');
+	}
+	else
+	{
+		end=NULL;
+	}
+	alarm(TIMEOUT);
+	while(end==NULL)
+	{
+		if(PACKET_SIZE<=ptr)
+		{
+			fprintf(stderr,"bad packet\n");
+			ptr=0;
+			return(NULL);
+		}
+		ret=read(fd,buffer+ptr,PACKET_SIZE-ptr);
+
+		if(ret<=0 || timeout)
+		{
+			if(timeout)
+			{
+				fprintf(stderr,"timeout\n");
+			}
+			else
+			{
+				alarm(0);
+			}
+			ptr=0;
+			return(NULL);
+		}
+		buffer[ptr+ret]=0;
+		ptr=strlen(buffer);
+		end=strchr(buffer,'\n');
+	}
+	alarm(0);timeout=0;
+
+	end[0]=0;
+	ptr=strlen(buffer)+1;
+//#       ifdef DEBUG
+//	printf("buffer: -%s-\n",buffer);
+//#       endif
+	return(buffer);
+}
+

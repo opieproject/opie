@@ -33,6 +33,7 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #include "remotetab.h"
 #include "learntab.h"
 #include "configtab.h"
+#include "helptab.h"
 
 #define BUFFERSIZE 256
 
@@ -50,5 +51,6 @@ private:
 	RemoteTab *remote;
 	ConfigTab *config;
 	LearnTab *learn;
+	HelpTab *help;
 	Config *cfg;
 };

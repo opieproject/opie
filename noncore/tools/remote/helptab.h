@@ -15,41 +15,12 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 */
 
 #include <qwidget.h>
-#include <qlistbox.h>
+#include <qtextview.h>
 #include <qstring.h>
-#include <qstringlist.h>
 #include <qlayout.h>
-#include <qpushbutton.h>
-#include <qmessagebox.h>
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/socket.h>
-#include <sys/types.h>
-#include <sys/un.h>
-#include <unistd.h>
-#include <errno.h>
-
-#include "recorddialog.h"
-
-#define PACKET_SIZE 256
-#define TIMEOUT 3
-
-class LearnTab : public QWidget
+class HelpTab : public QWidget
 {
-	Q_OBJECT
 public:
-	LearnTab(QWidget *parent=0, const char *name=0);
-	const char *readPacket();
-	QStringList getRemotes();
-public slots:
-	void add();
-	void edit();
-	void del();
-private:
-	QListBox *remotesBox;
-	int fd;
-	int timeout;
-	struct sockaddr_un addr;
+	HelpTab(QWidget *parent=0, const char *name=0);
 };
