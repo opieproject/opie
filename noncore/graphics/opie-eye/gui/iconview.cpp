@@ -160,8 +160,6 @@ PIconView::PIconView( QWidget* wid, Opie::Core::OConfig* cfg )
     lbl->setText(  tr("View as" ) );
 
     m_views = new QComboBox( hbox, "View As" );
-    connect( m_views, SIGNAL(activated(int)),
-             this, SLOT(slotViewChanged(int)) );
 
     m_view= new QIconView( this );
     connect(m_view, SIGNAL(clicked(QIconViewItem*) ),
@@ -171,7 +169,8 @@ PIconView::PIconView( QWidget* wid, Opie::Core::OConfig* cfg )
 
     m_view->setArrangement( QIconView::LeftToRight );
 
-    m_mode = cfg->readNumEntry("ListViewMode", 1);
+    m_mode = m_cfg->readNumEntry("ListViewMode", 1);
+    QString lastView = m_cfg->readEntry("LastView","");
 
     if (m_mode < 1 || m_mode>3) m_mode = 1;
 
@@ -182,7 +181,20 @@ PIconView::PIconView( QWidget* wid, Opie::Core::OConfig* cfg )
     initKeys();
 
     loadViews();
-    slotViewChanged(  m_views->currentItem() );
+    int cc=0;
+    for (; cc<m_views->count();++cc) {
+        if (m_views->text(cc)==lastView) {
+            break;
+        }
+    }
+    if (cc<m_views->count()) {
+        m_views->setCurrentItem(cc);
+        slotViewChanged(cc);
+    } else {
+        slotViewChanged(m_views->currentItem());
+    }
+    connect( m_views, SIGNAL(activated(int)),
+             this, SLOT(slotViewChanged(int)) );
 }
 
 /*
@@ -372,6 +384,8 @@ void PIconView::slotViewChanged( int i) {
         owarn << "Key not found" << oendl;
         setCurrentView(0l); return;
     }
+    m_cfg->writeEntry("LastView",str);
+    m_cfg->write();
     cur = (*(*map)[str])(*m_cfg);
     setCurrentView( cur );
 
