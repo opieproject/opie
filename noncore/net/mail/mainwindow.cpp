@@ -6,6 +6,7 @@
 
 #include <opie2/odebug.h>
 #include <qpe/qpeapplication.h>
+#include <qpe/qcopenvelope_qws.h>
 
 #include "defines.h"
 #include "mainwindow.h"
@@ -86,7 +87,6 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     setCentralWidget( wrapperBox );
 
     QWidget *view = new QWidget( wrapperBox );
-
     layout = new QBoxLayout ( view, QBoxLayout::LeftToRight );
 
     folderView = new AccountView( view );
@@ -113,6 +113,8 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     layout->setStretchFactor( folderView, 1 );
     layout->setStretchFactor( mailView, 2 );
 
+    m_Rotate = (QApplication::desktop()->width() > QApplication::desktop()->height()?0:90);
+
     slotAdjustLayout();
 
     QPEApplication::setStylusOperation( mailView->viewport(),QPEApplication::RightOnHold);
@@ -133,6 +135,9 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
 #if !defined(QT_NO_COP)
     connect( qApp, SIGNAL( appMessage(const QCString&,const QByteArray&) ),
              this, SLOT( appMessage(const QCString&,const QByteArray&) ) );
+    m_sysChannel = new QCopChannel( "QPE/System", this );
+    connect( m_sysChannel, SIGNAL( received(const QCString&,const QByteArray&) ),
+        this, SLOT( systemMessage(const QCString&,const QByteArray&) ) );
 #endif
 
     QTimer::singleShot( 1000, this, SLOT( slotAdjustColumns() ) );
@@ -142,6 +147,20 @@ MainWindow::~MainWindow()
 {
 }
 
+void MainWindow::systemMessage( const QCString& msg, const QByteArray& data )
+{
+    int _newrotation;
+    QDataStream stream( data, IO_ReadOnly );
+    if ( msg == "setCurrentRotation(int)" )
+    {
+        stream >> _newrotation;
+        if (m_Rotate != _newrotation) {
+            slotAdjustLayout();
+            m_Rotate = _newrotation;
+        }
+    }
+}
+
 void MainWindow::appMessage(const QCString &, const QByteArray &)
 {
     odebug << "appMessage not reached" << oendl;
@@ -149,13 +168,12 @@ void MainWindow::appMessage(const QCString &, const QByteArray &)
 
 void MainWindow::slotAdjustLayout() {
 
-  QWidget *d = QApplication::desktop();
-
-  if ( d->width() < d->height() ) {
-    layout->setDirection( QBoxLayout::TopToBottom );
+    QWidget *d = QApplication::desktop();
+    if ( d->width() < d->height() ) {
+        layout->setDirection( QBoxLayout::TopToBottom );
     } else {
-    layout->setDirection( QBoxLayout::LeftToRight );
-  }
+        layout->setDirection( QBoxLayout::LeftToRight );
+    }
 }
 
 void MainWindow::slotAdjustColumns()

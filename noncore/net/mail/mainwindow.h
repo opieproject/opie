@@ -15,6 +15,7 @@
 #include <opie2/osmartpointer.h>
 
 class RecMail;
+class QCopChannel;
 
 class MainWindow : public QMainWindow
 {
@@ -28,6 +29,7 @@ public slots:
     virtual void slotAdjustColumns();
     virtual void appMessage(const QCString &msg, const QByteArray &data);
     virtual void slotComposeMail();
+    virtual void systemMessage( const QCString&, const QByteArray& );
 
 protected slots:
     virtual void slotSendQueued();
@@ -51,6 +53,8 @@ protected:
     AccountView *folderView;
     QListView *mailView;
     QBoxLayout *layout;
+    int m_Rotate;
+    QCopChannel* m_sysChannel;
 };
 
 #endif
