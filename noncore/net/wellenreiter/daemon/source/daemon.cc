@@ -1,7 +1,7 @@
 /*
  * Startup functions of wellenreiter
  *
- * $Id: daemon.cc,v 1.20 2003-02-09 19:22:51 mjm Exp $
+ * $Id: daemon.cc,v 1.21 2003-02-09 19:30:29 max Exp $
  */
 
 #include "config.hh"
@@ -9,7 +9,7 @@
 
 /* should be parsed from cfg-file */
 #define MAXCHANNEL 13
-#define CHANINTERVAL 100000
+#define CHANINTERVAL 700000
 
 /* Main function of wellenreiterd */
 int main(int argc, char **argv)
