@@ -173,14 +173,14 @@ void CategoryTabWidget::addItem( const QString& linkfile )
    }
    if ( !app || !app->file().isEmpty() ) {
       // A document
-      delete app;
-      app = new DocLnk(linkfile);
-      if ( app->fileKnown() ) {
-         ((LauncherView*)(stack->widget(ids.count()-1)))->addItem(app);
-      } else {
-         ((LauncherView*)(stack->widget(ids.count()-1)))->sort();
-         delete app;
-      }
+//        delete app;
+//        app = new DocLnk(linkfile);
+//        if ( app->fileKnown() ) {
+//           ((LauncherView*)(stack->widget(ids.count()-1)))->addItem(app);
+//        } else {
+//           ((LauncherView*)(stack->widget(ids.count()-1)))->sort();
+//           delete app;
+//        }
       return;
    }
    // An application
