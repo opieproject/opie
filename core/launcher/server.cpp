@@ -78,16 +78,16 @@ static QWidget *calibrate(bool)
 
 #define FACTORY(T) \
     static QWidget *new##T( bool maximized ) { \
-	QWidget *w = new T( 0, 0, QWidget::WDestructiveClose | QWidget::WGroupLeader ); \
-	if ( maximized ) { \
-	    if ( qApp->desktop()->width() <= 350 ) { \
-		w->showMaximized(); \
-	    } else { \
-		w->resize( QSize( 300, 300 ) ); \
-	    } \
-	} \
-	w->show(); \
-	return w; \
+    QWidget *w = new T( 0, 0, QWidget::WDestructiveClose | QWidget::WGroupLeader ); \
+    if ( maximized ) { \
+        if ( qApp->desktop()->width() <= 350 ) { \
+        w->showMaximized(); \
+        } else { \
+        w->resize( QSize( 300, 300 ) ); \
+        } \
+    } \
+    w->show(); \
+    return w; \
     }
 
 
@@ -107,14 +107,14 @@ static Global::Command builtins[] = {
 
     /* FIXME defines need to be defined*/
 #if !defined(OPIE_NO_BUILTIN_CALIBRATE)
-        { "calibrate",          calibrate,	        1, 0 }, // No tr
+        { "calibrate",          calibrate,          1, 0 }, // No tr
 #endif
 #if !defined(OPIE_NO_BUILTIN_SHUTDOWN)
-	{ "shutdown",           Global::shutdown,      	1, 0 }, // No tr
-//	{ "run",                run,			1, 0 }, // No tr
+    { "shutdown",           Global::shutdown,       1, 0 }, // No tr
+//  { "run",                run,            1, 0 }, // No tr
 #endif
 
-	{ 0,            calibrate,	0, 0 },
+    { 0,            calibrate,  0, 0 },
 };
 
 
@@ -166,11 +166,11 @@ Server::Server() :
 
     QCopChannel *channel = new QCopChannel("QPE/System", this);
     connect(channel, SIGNAL(received(const QCString&,const QByteArray&)),
-	    this, SLOT(systemMsg(const QCString&,const QByteArray&)) );
+        this, SLOT(systemMsg(const QCString&,const QByteArray&)) );
 
     QCopChannel *tbChannel = new QCopChannel( "QPE/TaskBar", this );
     connect( tbChannel, SIGNAL(received(const QCString&,const QByteArray&)),
-	    this, SLOT(receiveTaskBar(const QCString&,const QByteArray&)) );
+        this, SLOT(receiveTaskBar(const QCString&,const QByteArray&)) );
 
     connect( qApp, SIGNAL(prepareForRestart()), this, SLOT(terminateServers()) );
     connect( qApp, SIGNAL(timeChanged()), this, SLOT(pokeTimeMonitors()) );
@@ -202,20 +202,20 @@ static bool hasVisibleWindow(const QString& clientname, bool partial)
     const QList<QWSWindow> &list = qwsServer->clientWindows();
     QWSWindow* w;
     for (QListIterator<QWSWindow> it(list); (w=it.current()); ++it) {
-	if ( w->client()->identity() == clientname ) {
-	    if ( partial && !w->isFullyObscured() )
-		return TRUE;
-	    if ( !partial && !w->isFullyObscured() && !w->isPartiallyObscured() ) {
+    if ( w->client()->identity() == clientname ) {
+        if ( partial && !w->isFullyObscured() )
+        return TRUE;
+        if ( !partial && !w->isFullyObscured() && !w->isPartiallyObscured() ) {
 # if QT_VERSION < 0x030000
-		QRect mwr = qt_screen->mapToDevice(qt_maxWindowRect,
-			QSize(qt_screen->width(),qt_screen->height()) );
+        QRect mwr = qt_screen->mapToDevice(qt_maxWindowRect,
+            QSize(qt_screen->width(),qt_screen->height()) );
 # else
-		QRect mwr = qt_maxWindowRect;
+        QRect mwr = qt_maxWindowRect;
 # endif
-		if ( mwr.contains(w->requested().boundingRect()) )
-		    return TRUE;
-	    }
-	}
+        if ( mwr.contains(w->requested().boundingRect()) )
+            return TRUE;
+        }
+    }
     }
 #endif
     return FALSE;
@@ -226,9 +226,9 @@ void Server::activate(const ODeviceButton* button, bool held)
     Global::terminateBuiltin("calibrate"); // No tr
     OQCopMessage om;
     if ( held ) {
-	om = button->heldAction();
+    om = button->heldAction();
     } else {
-	om = button->pressedAction();
+    om = button->pressedAction();
     }
 
     if ( om.channel() != "ignore" )
@@ -239,16 +239,16 @@ void Server::activate(const ODeviceButton* button, bool held)
     /* ### FIXME */
 #if 0
     if ( !sr.isNull() ) {
-	QString app = sr.app();
-	bool vis = hasVisibleWindow(app, app != "qpe");
-	if ( sr.message() == "raise()" && vis ) {
-	    sr.setMessage("nextView()");
-	} else {
-	    // "back door"
-	    sr << (int)vis;
-	}
+    QString app = sr.app();
+    bool vis = hasVisibleWindow(app, app != "qpe");
+    if ( sr.message() == "raise()" && vis ) {
+        sr.setMessage("nextView()");
+    } else {
+        // "back door"
+        sr << (int)vis;
+    }
 
-	sr.send();
+    sr.send();
     }
 #endif
 }
@@ -292,14 +292,14 @@ bool Server::setKeyboardLayout( const QString &kb )
 
     QIntDict<QWSServer::KeyMap> *om = 0;
     if ( kb == "us101" ) { // No tr
-	om = 0;
+    om = 0;
     } else if ( kb == "jp109" ) {
-	om = new QIntDict<QWSServer::KeyMap>(37);
-	const KeyOverride *k = jp109keys;
-	while ( k->scan_code ) {
-	    om->insert( k->scan_code, &k->map );
-	    k++;
-	}
+    om = new QIntDict<QWSServer::KeyMap>(37);
+    const KeyOverride *k = jp109keys;
+    while ( k->scan_code ) {
+        om->insert( k->scan_code, &k->map );
+        k++;
+    }
     }
     QWSServer::setOverrideKeys( om );
 
@@ -313,66 +313,66 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
     QDataStream stream( data, IO_ReadOnly );
 
     if ( msg == "securityChanged()" ) {
-	if ( transferServer )
-	   transferServer->authorizeConnections();
-	if ( qcopBridge )
-	    qcopBridge->authorizeConnections();
+    if ( transferServer )
+       transferServer->authorizeConnections();
+    if ( qcopBridge )
+        qcopBridge->authorizeConnections();
     }
     /* ### FIXME support TempScreenSaverMode */
 #if 0
     else if ( msg == "setTempScreenSaverMode(int,int)" ) {
-	int mode, pid;
-	stream >> mode >> pid;
-	tsmMonitor->setTempMode(mode, pid);
+    int mode, pid;
+    stream >> mode >> pid;
+    tsmMonitor->setTempMode(mode, pid);
     }
 #endif
     else if ( msg == "linkChanged(QString)" ) {
-	QString link;
-	stream >> link;
+    QString link;
+    stream >> link;
     odebug << "desktop.cpp systemMsg -> linkchanged( " << link << " )" << oendl;
-	docList->linkChanged(link);
+    docList->linkChanged(link);
     } else if ( msg == "serviceChanged(QString)" ) {
-	MimeType::updateApplications();
+    MimeType::updateApplications();
     } else if ( msg == "mkdir(QString)" ) {
-	QString dir;
-	stream >> dir;
-	if ( !dir.isEmpty() )
-	    mkdir( dir );
+    QString dir;
+    stream >> dir;
+    if ( !dir.isEmpty() )
+        mkdir( dir );
     } else if ( msg == "rdiffGenSig(QString,QString)" ) {
-	QString baseFile, sigFile;
-	stream >> baseFile >> sigFile;
-	QRsync::generateSignature( baseFile, sigFile );
+    QString baseFile, sigFile;
+    stream >> baseFile >> sigFile;
+    QRsync::generateSignature( baseFile, sigFile );
     } else if ( msg == "rdiffGenDiff(QString,QString,QString)" ) {
-	QString baseFile, sigFile, deltaFile;
-	stream >> baseFile >> sigFile >> deltaFile;
-	QRsync::generateDiff( baseFile, sigFile, deltaFile );
+    QString baseFile, sigFile, deltaFile;
+    stream >> baseFile >> sigFile >> deltaFile;
+    QRsync::generateDiff( baseFile, sigFile, deltaFile );
     } else if ( msg == "rdiffApplyPatch(QString,QString)" ) {
-	QString baseFile, deltaFile;
-	stream >> baseFile >> deltaFile;
-	if ( !QFile::exists( baseFile ) ) {
-	    QFile f( baseFile );
-	    f.open( IO_WriteOnly );
-	    f.close();
-	}
-	QRsync::applyDiff( baseFile, deltaFile );
+    QString baseFile, deltaFile;
+    stream >> baseFile >> deltaFile;
+    if ( !QFile::exists( baseFile ) ) {
+        QFile f( baseFile );
+        f.open( IO_WriteOnly );
+        f.close();
+    }
+    QRsync::applyDiff( baseFile, deltaFile );
 #ifndef QT_NO_COP
-	QCopEnvelope e( "QPE/Desktop", "patchApplied(QString)" );
-	e << baseFile;
+    QCopEnvelope e( "QPE/Desktop", "patchApplied(QString)" );
+    e << baseFile;
 #endif
     } else if ( msg == "rdiffCleanup()" ) {
-	mkdir( "/tmp/rdiff" );
-	QDir dir;
-	dir.setPath( "/tmp/rdiff" );
-	QStringList entries = dir.entryList();
-	for ( QStringList::Iterator it = entries.begin(); it != entries.end(); ++it )
-	    dir.remove( *it );
+    mkdir( "/tmp/rdiff" );
+    QDir dir;
+    dir.setPath( "/tmp/rdiff" );
+    QStringList entries = dir.entryList();
+    for ( QStringList::Iterator it = entries.begin(); it != entries.end(); ++it )
+        dir.remove( *it );
     } else if ( msg == "sendHandshakeInfo()" ) {
-	QString home = getenv( "HOME" );
+    QString home = getenv( "HOME" );
 #ifndef QT_NO_COP
-	QCopEnvelope e( "QPE/Desktop", "handshakeInfo(QString,bool)" );
-	e << home;
-	int locked = (int) ServerApplication::screenLocked();
-	e << locked;
+    QCopEnvelope e( "QPE/Desktop", "handshakeInfo(QString,bool)" );
+    e << home;
+    int locked = (int) ServerApplication::screenLocked();
+    e << locked;
 #endif
 
     }
@@ -383,100 +383,100 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
      * to sync with QtopiaDesktop1.6
      */
     else if ( msg == "sendVersionInfo()" ) {
-	QCopEnvelope e( "QPE/Desktop", "versionInfo(QString,QString)" );
+    QCopEnvelope e( "QPE/Desktop", "versionInfo(QString,QString)" );
         /* ### FIXME Architecture ### */
-	e << QString::fromLatin1("1.7") << "Uncustomized Device";
+    e << QString::fromLatin1("1.7") << "Uncustomized Device";
     } else if ( msg == "sendCardInfo()" ) {
 #ifndef QT_NO_COP
-	QCopEnvelope e( "QPE/Desktop", "cardInfo(QString)" );
+    QCopEnvelope e( "QPE/Desktop", "cardInfo(QString)" );
 #endif
-	storage->update();
-	const QList<FileSystem> &fs = storage->fileSystems();
-	QListIterator<FileSystem> it ( fs );
-	QString s;
-	QString homeDir = getenv("HOME");
-	QString homeFs, homeFsPath;
-	for ( ; it.current(); ++it ) {
-	    int k4 = (*it)->blockSize()/256;
-	    if ( (*it)->isRemovable() ) {
-		s += (*it)->name() + "=" + (*it)->path() + "/Documents " // No tr
-		     + QString::number( (*it)->availBlocks() * k4/4 )
-		     + "K " + (*it)->options() + ";";
-	    } else if ( homeDir.contains( (*it)->path() ) &&
-		      (*it)->path().length() > homeFsPath.length() ) {
-		homeFsPath = (*it)->path();
-		homeFs =
-		    (*it)->name() + "=" + homeDir + "/Documents " // No tr
-		    + QString::number( (*it)->availBlocks() * k4/4 )
-		    + "K " + (*it)->options() + ";";
-	    }
-	}
-	if ( !homeFs.isEmpty() )
-	    s += homeFs;
+    storage->update();
+    const QList<FileSystem> &fs = storage->fileSystems();
+    QListIterator<FileSystem> it ( fs );
+    QString s;
+    QString homeDir = getenv("HOME");
+    QString homeFs, homeFsPath;
+    for ( ; it.current(); ++it ) {
+        int k4 = (*it)->blockSize()/256;
+        if ( (*it)->isRemovable() ) {
+        s += (*it)->name() + "=" + (*it)->path() + "/Documents " // No tr
+             + QString::number( (*it)->availBlocks() * k4/4 )
+             + "K " + (*it)->options() + ";";
+        } else if ( homeDir.contains( (*it)->path() ) &&
+              (*it)->path().length() > homeFsPath.length() ) {
+        homeFsPath = (*it)->path();
+        homeFs =
+            (*it)->name() + "=" + homeDir + "/Documents " // No tr
+            + QString::number( (*it)->availBlocks() * k4/4 )
+            + "K " + (*it)->options() + ";";
+        }
+    }
+    if ( !homeFs.isEmpty() )
+        s += homeFs;
 
 #ifndef QT_NO_COP
-	e << s;
+    e << s;
 #endif
     } else if ( msg == "sendSyncDate(QString)" ) {
-	QString app;
-	stream >> app;
-	Config cfg( "qpe" );
-	cfg.setGroup("SyncDate");
+    QString app;
+    stream >> app;
+    Config cfg( "qpe" );
+    cfg.setGroup("SyncDate");
 #ifndef QT_NO_COP
-	QCopEnvelope e( "QPE/Desktop", "syncDate(QString,QString)" );
-	e  << app  << cfg.readEntry( app );
+    QCopEnvelope e( "QPE/Desktop", "syncDate(QString,QString)" );
+    e  << app  << cfg.readEntry( app );
 #endif
-	//qDebug("QPE/System sendSyncDate for %s: response %s", app.latin1(),
-	//cfg.readEntry( app ).latin1() );
+    //odebug << "QPE/System sendSyncDate for " << app.latin1() << ": response "
+    //       << cfg.readEntry( app ).latin1() << oendl;
     } else if ( msg == "setSyncDate(QString,QString)" ) {
-	QString app, date;
-	stream >> app >> date;
-	Config cfg( "qpe" );
-	cfg.setGroup("SyncDate");
-	cfg.writeEntry( app, date );
+    QString app, date;
+    stream >> app >> date;
+    Config cfg( "qpe" );
+    cfg.setGroup("SyncDate");
+    cfg.writeEntry( app, date );
     //odebug << "setSyncDate(QString,QString) " << app << " " << date << "" << oendl;
     } else if ( msg == "startSync(QString)" ) {
-	QString what;
-	stream >> what;
-	delete syncDialog;
-	syncDialog = new SyncDialog( this, what );
-	syncDialog->show();
-	connect( syncDialog, SIGNAL(cancel()), SLOT(cancelSync()) );
+    QString what;
+    stream >> what;
+    delete syncDialog;
+    syncDialog = new SyncDialog( this, what );
+    syncDialog->show();
+    connect( syncDialog, SIGNAL(cancel()), SLOT(cancelSync()) );
     } else if ( msg == "stopSync()") {
-	delete syncDialog;
-	syncDialog = 0;
+    delete syncDialog;
+    syncDialog = 0;
     } else if (msg == "restoreDone(QString)") {
-	docList->restoreDone();
+    docList->restoreDone();
     } else if ( msg == "getAllDocLinks()" ) {
-	docList->sendAllDocLinks();
+    docList->sendAllDocLinks();
     }
 #ifdef Q_WS_QWS
     else if ( msg == "setMouseProto(QString)" ) {
-	QString mice;
-	stream >> mice;
-	setenv("QWS_MOUSE_PROTO",mice.latin1(),1);
-	qwsServer->openMouse();
+    QString mice;
+    stream >> mice;
+    setenv("QWS_MOUSE_PROTO",mice.latin1(),1);
+    qwsServer->openMouse();
     } else if ( msg == "setKeyboard(QString)" ) {
-	QString kb;
-	stream >> kb;
-	setenv("QWS_KEYBOARD",kb.latin1(),1);
-	qwsServer->openKeyboard();
+    QString kb;
+    stream >> kb;
+    setenv("QWS_KEYBOARD",kb.latin1(),1);
+    qwsServer->openKeyboard();
 
     } else if ( msg == "setKeyboardAutoRepeat(int,int)" ) {
-	int delay, period;
-	stream >> delay >> period;
-	qwsSetKeyboardAutoRepeat( delay, period );
-	Config cfg( "qpe" );
-	cfg.setGroup("Keyboard");
-	cfg.writeEntry( "RepeatDelay", delay );
-	cfg.writeEntry( "RepeatPeriod", period );
+    int delay, period;
+    stream >> delay >> period;
+    qwsSetKeyboardAutoRepeat( delay, period );
+    Config cfg( "qpe" );
+    cfg.setGroup("Keyboard");
+    cfg.writeEntry( "RepeatDelay", delay );
+    cfg.writeEntry( "RepeatPeriod", period );
     } else if ( msg == "setKeyboardLayout(QString)" ) {
-	QString kb;
-	stream >> kb;
-	setKeyboardLayout( kb );
-	Config cfg( "qpe" );
-	cfg.setGroup("Keyboard");
-	cfg.writeEntry( "Layout", kb );
+    QString kb;
+    stream >> kb;
+    setKeyboardLayout( kb );
+    Config cfg( "qpe" );
+    cfg.setGroup("Keyboard");
+    cfg.writeEntry( "Layout", kb );
     } else if ( msg == "autoStart(QString)" ) {
         QString appName;
         stream >> appName;
@@ -529,16 +529,16 @@ void Server::receiveTaskBar(const QCString &msg, const QByteArray &data)
     QDataStream stream( data, IO_ReadOnly );
 
     if ( msg == "reloadApps()" ) {
-	docList->reloadAppLnks();
+    docList->reloadAppLnks();
     } else if ( msg == "soundAlarm()" ) {
-	ServerApplication::soundAlarm();
+    ServerApplication::soundAlarm();
     }
     else if ( msg == "setLed(int,bool)" ) {
-	int led, status;
-	stream >> led >> status;
+    int led, status;
+    stream >> led >> status;
 
         QValueList <OLed> ll = ODevice::inst ( )-> ledList ( );
-        if ( ll. count ( ))	{
+        if ( ll. count ( )) {
             OLed l = ll. contains ( Led_Mail ) ? Led_Mail : ll [0];
             bool canblink = ODevice::inst ( )-> ledStateList ( l ). contains ( Led_BlinkSlow );
 
@@ -560,7 +560,7 @@ bool Server::mkdir(const QString &localPath)
 {
     QDir fullDir(localPath);
     if (fullDir.exists())
-	return true;
+    return true;
 
     // at this point the directory doesn't exist
     // go through the directory tree and start creating the direcotories
@@ -573,29 +573,29 @@ bool Server::mkdir(const QString &localPath)
     // didn't find any seps; weird, use the cur dir instead
     if (dirIndex == -1) {
     //odebug << "No seperators found in path " << localPath << "" << oendl;
-	checkedPath = QDir::currentDirPath();
+    checkedPath = QDir::currentDirPath();
     }
 
     while (checkedPath != localPath) {
-	// no more seperators found, use the local path
-	if (dirIndex == -1)
-	    checkedPath = localPath;
-	else {
-	    // the next directory to check
-	    checkedPath = localPath.left(dirIndex) + "/";
-	    // advance the iterator; the next dir seperator
-	    dirIndex = localPath.find(dirSeps, dirIndex+1);
-	}
+    // no more seperators found, use the local path
+    if (dirIndex == -1)
+        checkedPath = localPath;
+    else {
+        // the next directory to check
+        checkedPath = localPath.left(dirIndex) + "/";
+        // advance the iterator; the next dir seperator
+        dirIndex = localPath.find(dirSeps, dirIndex+1);
+    }
 
-	QDir checkDir(checkedPath);
-	if (!checkDir.exists()) {
+    QDir checkDir(checkedPath);
+    if (!checkDir.exists()) {
         //odebug << "mkdir making dir " << checkedPath << "" << oendl;
 
-	    if (!checkDir.mkdir(checkedPath)) {
+        if (!checkDir.mkdir(checkedPath)) {
         odebug << "Unable to make directory " << checkedPath << "" << oendl;
-		return FALSE;
-	    }
-	}
+        return FALSE;
+        }
+    }
 
     }
     return TRUE;
@@ -609,53 +609,53 @@ void Server::styleChange( QStyle &s )
 void Server::startTransferServer()
 {
     if ( !qcopBridge ) {
-	// start qcop bridge server
-	qcopBridge = new QCopBridge( 4243 );
-	if ( qcopBridge->ok() ) {
-	    // ... OK
-	    connect( qcopBridge, SIGNAL(connectionClosed(const QHostAddress&)),
-		    this, SLOT(syncConnectionClosed(const QHostAddress&)) );
-	} else {
-	    delete qcopBridge;
-	    qcopBridge = 0;
-	}
+    // start qcop bridge server
+    qcopBridge = new QCopBridge( 4243 );
+    if ( qcopBridge->ok() ) {
+        // ... OK
+        connect( qcopBridge, SIGNAL(connectionClosed(const QHostAddress&)),
+            this, SLOT(syncConnectionClosed(const QHostAddress&)) );
+    } else {
+        delete qcopBridge;
+        qcopBridge = 0;
+    }
     }
     if ( !transferServer ) {
-	// start transfer server
-	transferServer = new TransferServer( 4242 );
-	if ( transferServer->ok() ) {
-	    // ... OK
-	} else {
-	    delete transferServer;
-	    transferServer = 0;
-	}
+    // start transfer server
+    transferServer = new TransferServer( 4242 );
+    if ( transferServer->ok() ) {
+        // ... OK
+    } else {
+        delete transferServer;
+        transferServer = 0;
+    }
     }
     if ( !transferServer || !qcopBridge )
-	tid_xfer = startTimer( 2000 );
+    tid_xfer = startTimer( 2000 );
 }
 
 void Server::timerEvent( QTimerEvent *e )
 {
     if ( e->timerId() == tid_xfer ) {
-	killTimer( tid_xfer );
-	tid_xfer = 0;
-	startTransferServer();
+    killTimer( tid_xfer );
+    tid_xfer = 0;
+    startTransferServer();
     }
     /* ### FIXME today startin */
 #if 0
     else if ( e->timerId() == tid_today ) {
-	QDate today = QDate::currentDate();
-	if ( today != last_today_show ) {
-	    last_today_show = today;
-	    Config cfg("today");
-	    cfg.setGroup("Start");
+    QDate today = QDate::currentDate();
+    if ( today != last_today_show ) {
+        last_today_show = today;
+        Config cfg("today");
+        cfg.setGroup("Start");
 #ifndef QPE_DEFAULT_TODAY_MODE
 #define QPE_DEFAULT_TODAY_MODE "Never"
 #endif
-	    if ( cfg.readEntry("Mode",QPE_DEFAULT_TODAY_MODE) == "Daily" ) {
-		QCopEnvelope env(Service::channel("today"),"raise()");
-	    }
-	}
+        if ( cfg.readEntry("Mode",QPE_DEFAULT_TODAY_MODE) == "Daily" ) {
+        QCopEnvelope env(Service::channel("today"),"raise()");
+        }
+    }
     }
 #endif
 }
@@ -681,9 +681,9 @@ void Server::pokeTimeMonitors()
     // inform all TimeMonitors
     QStrList tms = Service::channels("TimeMonitor");
     for (const char* ch = tms.first(); ch; ch=tms.next()) {
-	QString t = getenv("TZ");
-	QCopEnvelope e(ch, "timeChange(QString)");
-	e << t;
+    QString t = getenv("TZ");
+    QCopEnvelope e(ch, "timeChange(QString)");
+    e << t;
     }
 #endif
 }
@@ -722,7 +722,7 @@ void Server::preloadApps()
     QStringList apps = cfg.readListEntry("Apps",',');
     for (QStringList::ConstIterator it=apps.begin(); it!=apps.end(); ++it) {
 #ifndef QT_NO_COP
-	QCopEnvelope e("QPE/Application/"+(*it).local8Bit(), "enablePreload()");
+    QCopEnvelope e("QPE/Application/"+(*it).local8Bit(), "enablePreload()");
 #endif
     }
 }

@@ -387,7 +387,7 @@ void DocumentList::DiffAppLnks()
 	    ++it1;
 	}
 	if (!found) {
-	    qDebug("Item %s needs to be added",j->name().ascii() );
+	    odebug << "Item " << j->name().ascii() << " needs to be added" << oendl; 
 	    d->serverGui->applicationAdded( j->type(), *j );
 	}		    
 	    ++it2; 
@@ -403,7 +403,7 @@ void DocumentList::DiffAppLnks()
 	    ++it2;
 	}
 	if (!found) {
-	    qDebug("Item %s needs to be removed",i->name().ascii() );
+	    odebug << "Item " << i->name().ascii() << " needs to be removed" << oendl; 
 	    d->serverGui->applicationRemoved( i->type(), *i );
 	}
 		    
@@ -422,10 +422,10 @@ void DocumentList::storageChanged()
     t.start();
     DiffAppLnks();
 //    reloadAppLnks();
-    qDebug("Reload App links took %i ms",t.elapsed() );
+    odebug << "Reload App links took " << t.elapsed() << " ms" << oendl; 
     reloadDocLnks();
 //    odebug << "Reload links took " << t.elapsed() << " ms " << oendl;
-    qDebug("Reload All links took %i ms",t.elapsed() );
+    odebug << "Reload All links took " << t.elapsed() << " ms" << oendl; 
 // ### Optimization opportunity
     // Could be a bit more intelligent and somehow work out which
     // mtab entry has changed and then only scan that and add and remove
