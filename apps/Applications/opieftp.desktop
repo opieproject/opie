@@ -1,0 +1,6 @@
+[Desktop Entry]
+Comment=An Ftp Client
+Exec=opieftp
+Icon=opieftp
+Type=Application
+Name=OpieFtp
