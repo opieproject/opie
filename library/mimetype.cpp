@@ -243,14 +243,12 @@ void MimeType::loadExtensions(const QString& filename)
 		// new override old (though left overrides right)
 		QStringList exts = (*extFor)[id];
 		QStringList newexts;
-		if ( it != tokens.end() ) {
+		while ( it != tokens.end() ) {
 		    exts.remove(*it);
 		    if ( !newexts.contains(*it) )
 			newexts.append(*it);
-		    while (it != tokens.end()) {
-			(*typeFor)[*it] = id;
-			++it;
-		    }
+		    (*typeFor)[*it] = id;
+		    ++it;
 		}
 		(*extFor)[id] = newexts + exts;
 	    }
