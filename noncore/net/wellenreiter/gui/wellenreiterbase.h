@@ -28,6 +28,7 @@ class QPushButton;
 class OTabWidget;
 class MLogWindow;
 class MHexWindow;
+class WellenreiterConfigWindow;
 
 class WellenreiterBase : public QWidget
 { 
@@ -41,7 +42,8 @@ public:
     QWidget* ap;
     QListView* netview;
     MLogWindow* logwindow;
-    MHexWindow* hexwindow;  
+    MHexWindow* hexwindow;
+    WellenreiterConfigWindow* configwindow;
     QWidget* about;
     QLabel* PixmapLabel1_3_2;
     QLabel* TextLabel1_4_2;

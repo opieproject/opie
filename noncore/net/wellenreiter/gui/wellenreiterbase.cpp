@@ -30,6 +30,7 @@
 
 #include "logwindow.h"
 #include "hexwindow.h"
+#include "configwindow.h"
 
 #include <qpe/resource.h>
 
@@ -90,8 +91,8 @@ WellenreiterBase::WellenreiterBase( QWidget* parent,  const char* name, WFlags f
 
     //--------- CONFIG TAB --------------
     
-    QPushButton* dummy = new QPushButton( "under construction", TabWidget );
-    TabWidget->addTab( dummy, "wellenreiter/config", tr( "Config" ) );
+    configwindow = new WellenreiterConfigWindow( TabWidget, "Config" );
+    TabWidget->addTab( configwindow, "wellenreiter/config", tr( "Config" ) );
     
     //--------- ABOUT TAB --------------
     
