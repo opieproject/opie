@@ -39,6 +39,9 @@
 
 #include <qwindowsystem_qws.h>
 
+#ifndef ARRAY_SIZE
+#define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
+#endif
 
 // _IO and friends are only defined in kernel headers ...
 
@@ -203,6 +206,29 @@ struct z_button {
 	"devicebuttons/z_mail",
 	"mail", "raise()",
 	"mail", "newMail()" },
+};
+
+struct z_button z_buttons_c700 [] = {
+    { Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Calendar Button"),
+	"devicebuttons/z_calendar",
+	"datebook", "nextView()",
+	"today", "raise()" },
+    { Qt::Key_F10, QT_TRANSLATE_NOOP("Button", "Contacts Button"),
+	"devicebuttons/z_contact",
+	"addressbook", "raise()",
+	"addressbook", "beamBusinessCard()" },
+    { Qt::Key_F12, QT_TRANSLATE_NOOP("Button", "Home Button"),
+	"devicebuttons/z_home",
+	"QPE/Launcher", "home()",
+	"buttonsettings", "raise()" },
+    { Qt::Key_F11, QT_TRANSLATE_NOOP("Button", "Menu Button"),
+	"devicebuttons/z_menu",
+ 	"QPE/TaskBar", "toggleMenu()",
+	"QPE/TaskBar", "toggleStartMenu()" },
+    { Qt::Key_F13, QT_TRANSLATE_NOOP("Button", "Display Rotate"),
+	"",
+	"QPE/Rotation", "flip()",
+	"QPE/Rotation", "flip()" },
 };
 
 static QCString makeChannel ( const char *str )
@@ -1141,12 +1167,12 @@ void Zaurus::init ( )
 		d-> m_modelstr = "Zaurus (model unknown)";
 	}
 
+	bool flipstate = false;
 	switch ( d-> m_model ) {
 		case Model_Zaurus_SLA300:
 			d-> m_rotation = Rot0;
 			break;
 		case Model_Zaurus_SLC700:
-			bool flipstate = false;
 			// Note: need to 1) set flipstate based on physical screen orientation
 			// and 2) check to see if the user overrode the rotation direction
 			// using appearance, and if so, remove that item from the Config to
@@ -1180,8 +1206,21 @@ void Zaurus::initButtons ( )
 
 	d-> m_buttons = new QValueList <ODeviceButton>;
 
-	for ( uint i = 0; i < ( sizeof( z_buttons ) / sizeof( z_button )); i++ ) {
-		z_button *zb = z_buttons + i;
+	struct z_button * pz_buttons;
+	int buttoncount;
+	switch ( d-> m_model ) {
+		case Model_Zaurus_SLC700:
+			pz_buttons = z_buttons_c700;
+			buttoncount = ARRAY_SIZE(z_buttons_c700);
+			break;
+		default:
+			pz_buttons = z_buttons;
+			buttoncount = ARRAY_SIZE(z_buttons);
+			break;
+	}
+
+	for ( int i = 0; i < buttoncount; i++ ) {
+		struct z_button *zb = pz_buttons + i;
 		ODeviceButton b;
 
 		b. setKeycode ( zb-> code );
