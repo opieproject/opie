@@ -1,6 +1,8 @@
 #include <qtextstream.h>
 #include <qwhatsthis.h>
+
 #include "ircservertab.h"
+#include "ircmessageparser.h"
 
 
 bool IRCServerTab::containsPing( const QString& text, IRCServerTab* tab ) {

@@ -1,8 +1,10 @@
 #include <qpe/resource.h>
 #include <qwhatsthis.h>
 #include <qhbox.h>
+
 #include "ircchanneltab.h"
 #include "ircservertab.h"
+#include "ircmessageparser.h"
 
 IRCChannelTab::IRCChannelTab(IRCChannel *channel, IRCServerTab *parentTab, MainWindow *mainWindow, QWidget *parent, const char *name, WFlags f) : IRCTab(parent, name, f) {
     m_mainWindow = mainWindow;
