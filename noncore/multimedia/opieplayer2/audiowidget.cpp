@@ -98,7 +98,7 @@ static const int numButtons = (sizeof(audioButtons)/sizeof(MediaButton));
 AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
         QWidget( parent, name, f ), songInfo( this ), slider( Qt::Horizontal, this ),  time( this ) {
     setCaption( tr("OpiePlayer") );
-
+    
     Config cfg("OpiePlayer");
     cfg.setGroup("AudioWidget");
     skin = cfg.readEntry("Skin","default");
@@ -251,7 +251,7 @@ void AudioWidget::sliderReleased() {
 }
 
 void AudioWidget::setPosition( long i ) {
-    //    qDebug("set position %d",i);
+    qDebug("<<<<<<<<<<<<<<<<<<<<<<<<set position %d",i);
     updateSlider( i, mediaPlayerState->length() );
 }
 
@@ -262,17 +262,22 @@ void AudioWidget::setLength( long max ) {
 
 
 void AudioWidget::setView( char view ) {
-    if (mediaPlayerState->streaming() ) {
-        if( !slider.isHidden()) slider.hide();
-        disconnect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
-        disconnect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
-    } else {
+        slider.show();
+
+// this isnt working for some reason
+
+//     if ( mediaPlayerState->streaming() ) {
+//         qDebug("<<<<<<<<<<<<<<file is STREAMING>>>>>>>>>>>>>>>>>>>");
+//         if( !slider.isHidden()) slider.hide();
+//         disconnect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
+//         disconnect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
+//     } else {
         // this stops the slider from being moved, thus
         // does not stop stream when it reaches the end
         slider.show();
         connect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
         connect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
-    }
+//    }
 
     if ( view == 'a' ) {
         startTimer( 150 );
@@ -292,7 +297,9 @@ static QString timeAsString( long length ) {
 }
 
 void AudioWidget::updateSlider( long i, long max ) {
+
     time.setText( timeAsString( i ) + " / " + timeAsString( max ) );
+
     if ( max == 0 ) {
         return;
     }

@@ -71,10 +71,28 @@ void MediaPlayer::setPlaying( bool play ) {
     if ( playListCurrent != NULL ) {
         currentFile = playListCurrent;
     }
+    
+    xineControl->play( currentFile->file() );
+
+    xineControl->length();
+    long seconds =  mediaPlayerState->length();//
+    QString time; time.sprintf("%li:%02i", seconds/60, (int)seconds%60 );
+    qDebug(time);
+
+    QString tickerText;
+    if( currentFile->file().left(4) == "http" )
+     tickerText= tr( " File: " ) + currentFile->name();
+    else
+    tickerText = tr( " File: " ) + currentFile->name() + tr(", Length: ") + time;
+
+//     QString fileInfo = mediaPlayerState->curDecoder()->fileInfo();
+
+//     if ( !fileInfo.isEmpty() )
+//         tickerText += ", " + fileInfo;
+//     audioUI->setTickerText( tickerText + "." );
 
     audioUI->setTickerText( currentFile->file( ) );
-
-    xineControl->play( currentFile->file() );
+    
 }
 
 
