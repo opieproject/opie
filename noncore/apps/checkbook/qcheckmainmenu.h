@@ -12,16 +12,17 @@
 
 class QCheckMainMenu : public QCheckMMBase
 {
-	Q_OBJECT
-	public:
-		QCheckMainMenu(QWidget *);
-	signals:
-		void itemSelected(const QString &);
-	private:
-		void init();
-	private slots:
-		void slotSelected(QListBoxItem *);
-	public slots:
-		void newClicked();
+  Q_OBJECT
+  public:
+    QCheckMainMenu(QWidget *);
+  signals:
+    void itemSelected(const QString &);
+  private:
+    void init();
+  private slots:
+    void slotSelected(QListBoxItem *);
+  public slots:
+    void newClicked();
+    void deleteClicked();
 };
 

@@ -91,6 +91,11 @@ void QCheckBook::newCheck(const QString &filename)
   }
 }
 
+void QCheckBook::deleteCheck(const QString &filename)
+{
+    qDebug("Deleting "+filename);
+}
+
 void QCheckBook::close()
 {
   QApplication::exit();
@@ -136,6 +141,7 @@ void QCheckBook::initMainMenus()
 
   popup = new QPopupMenu();
   popup->insertItem("&New", m_view3, SLOT(newClicked()));
+  popup->insertItem("&Delete", m_view3, SLOT(deleteClicked()));
   popup->insertItem("&Exit", this, SLOT(close()));
   mbar->insertItem("&File", popup);
 

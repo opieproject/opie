@@ -11,27 +11,28 @@
 
 class QCheckBook : public QMainWindow
 {
-	Q_OBJECT
-	public:
-		QCheckBook();
-	private slots:
-		void newCheck(const QString &filename);
-		void newGraph();
-		void close();
-		void initMainMenus();
-	private:
-		QCheckView *m_view;
-		QCheckGraph *m_view2;
-		QCheckMainMenu *m_view3;
-		QToolBar *bar;
-		QMenuBar *mbar;
-		int filemenuid;
-		QString m_filename;
-		QToolButton *nb1;
-		QToolButton *nb2;
-		QToolButton *nb3;
-		QToolButton *nb4;
-		bool initCheck;
-		bool initMM;
-		QPopupMenu *popup;
+  Q_OBJECT
+  public:
+    QCheckBook();
+  private slots:
+    void newCheck(const QString &filename);
+    void deleteCheck(const QString &filename);
+    void newGraph();
+    void close();
+    void initMainMenus();
+  private:
+    QCheckView *m_view;
+    QCheckGraph *m_view2;
+    QCheckMainMenu *m_view3;
+    QToolBar *bar;
+    QMenuBar *mbar;
+    int filemenuid;
+    QString m_filename;
+    QToolButton *nb1;
+    QToolButton *nb2;
+    QToolButton *nb3;
+    QToolButton *nb4;
+    bool initCheck;
+    bool initMM;
+    QPopupMenu *popup;
 };
