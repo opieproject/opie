@@ -1,0 +1,68 @@
+<keymap>
+
+<include file="common_c8x0.xml"/>
+
+<state name="lower-case">
+    <map keycode="Space" pressed="true">
+        <event keycode="Space" unicode="32" pressed="true" autorepeat="true"/>
+    </map>
+    <map keycode="Apostrophe" pressed="true">
+        <event keycode="Apostrophe" unicode="39" pressed="true" autorepeat="true"/>
+    </map>
+    <map keycode="Comma" pressed="true">
+        <event keycode="Comma" unicode="44" pressed="true" autorepeat="true"/>
+    </map>
+    <map keycode="Period" pressed="true">
+        <event keycode="Period" unicode="46" pressed="true" autorepeat="true"/>
+    </map>
+    <map keycode="Slash" pressed="true">
+        <event keycode="Slash" unicode="47" pressed="true" autorepeat="true"/>
+    </map>
+
+    <map keycode="Space" pressed="false">
+        <event keycode="Space" unicode="32" pressed="false"/>
+    </map>
+    <map keycode="Apostrophe" pressed="false">
+        <event keycode="Apostrophe" unicode="39" pressed="false"/>
+    </map>
+    <map keycode="Comma" pressed="false">
+        <event keycode="Comma" unicode="44" pressed="false"/>
+    </map>
+    <map keycode="Period" pressed="false">
+        <event keycode="Period" unicode="46" pressed="false"/>
+    </map>
+    <map keycode="Slash" pressed="false">
+        <event keycode="Slash" unicode="47" pressed="false"/>
+    </map>
+
+</state>
+
+<state name="upper-case">
+    <map keycode="Space" pressed="true">
+        <event keycode="Space" unicode="32" modifiers="Shift" pressed="true" autorepeat="true"/>
+    </map>
+    <map keycode="Apostrophe" pressed="true">
+        <event keycode="QuoteDbl" unicode="34" modifiers="Shift" pressed="true" autorepeat="true"/>
+    </map>
+    <map keycode="Comma" pressed="true">
+        <event keycode="Semicolon" unicode="59" modifiers="Shift" pressed="true" autorepeat="true"/>
+    </map>
+    <map keycode="Period" pressed="true">
+        <event keycode="Colon" unicode="58" modifiers="Shift" pressed="true" autorepeat="true"/>
+    </map>
+
+    <map keycode="Space" pressed="false">
+        <event keycode="Space" unicode="32" modifiers="Shift" pressed="false"/>
+    </map>
+    <map keycode="Apostrophe" pressed="false">
+        <event keycode="QuoteDbl" unicode="34" modifiers="Shift" pressed="false"/>
+    </map>
+    <map keycode="Comma" pressed="false">
+        <event keycode="Semicolon" unicode="59" modifiers="Shift" pressed="false"/>
+    </map>
+    <map keycode="Period" pressed="false">
+        <event keycode="Colon" unicode="58" modifiers="Shift" pressed="false"/>
+    </map>
+</state>
+
+</keymap>
