@@ -221,6 +221,10 @@ edytuje kategorie.</translation>
         <source>File does not exist.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Hard Disk</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LnkPropertiesBase</name>
@@ -720,6 +724,10 @@ Zwolnij wiecej pamieci</translation>
     </message>
     <message>
         <source>Ram FS</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>Internal Memory</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

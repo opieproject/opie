@@ -222,6 +222,10 @@ editando as categorias.</translation>
         <source>File does not exist.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Hard Disk</source>
+        <translation type="unfinished">Disco Rígido</translation>
+    </message>
 </context>
 <context>
     <name>LnkPropertiesBase</name>
@@ -721,6 +725,10 @@ tente novamente.</translation>
     </message>
     <message>
         <source>Ram FS</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>Internal Memory</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

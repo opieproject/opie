@@ -221,6 +221,10 @@ editando las categorías.</translation>
         <source>File does not exist.</source>
         <translation>El fichero no existe.</translation>
     </message>
+    <message>
+        <source>Hard Disk</source>
+        <translation type="unfinished">Disco duro</translation>
+    </message>
 </context>
 <context>
     <name>LnkPropertiesBase</name>
@@ -720,7 +724,11 @@ Libere memoria e intételo de nuevo.</translation>
     </message>
     <message>
         <source>Ram FS</source>
-        <translation>Ram FS</translation>
+        <translation type="obsolete">Ram FS</translation>
+    </message>
+    <message>
+        <source>Internal Memory</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -45,6 +45,10 @@
         <source>Set date and time.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Clock: Alarm was missed.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Set_Alarm</name>

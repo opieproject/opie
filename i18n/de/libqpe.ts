@@ -220,6 +220,10 @@ editing categories.</source>
         <source>File does not exist.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Hard Disk</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LnkPropertiesBase</name>
@@ -710,6 +714,10 @@ Free some memory and try again.</source>
     </message>
     <message>
         <source>Ram FS</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>Internal Memory</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -1,28 +1,24 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>AdvancedConfigBase</name>
+    <name>BuzzWord</name>
     <message>
-        <source>Advanced Config</source>
+        <source>buZzword</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Renew DHCP on changing</source>
+        <source>&amp;New game</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Frequency</source>
+        <source>&amp;About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>MODE</source>
+        <source>&amp;Game</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>ESSID</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>AccessPoint</source>
+        <source>&lt;h1&gt;&lt;b&gt;BINGO !&lt;/b&gt;&lt;/h1&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -3,19 +3,27 @@
     <name>SoundSettings</name>
     <message>
         <source>Restart</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>To implement a new key switch
 Opie will have to be restarted./n&lt;B&gt;Restart&lt;/B&gt; Opie now?</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>No</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>Shows icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hides icon</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -127,6 +135,10 @@ Opie will have to be restarted./n&lt;B&gt;Restart&lt;/B&gt; Opie now?</source>
     </message>
     <message>
         <source>Unlimited</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restart Opie if needed</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

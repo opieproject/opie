@@ -221,6 +221,10 @@ ureja kategorije.</translation>
         <source>File does not exist.</source>
         <translation>Datoteka ne obstaja.</translation>
     </message>
+    <message>
+        <source>Hard Disk</source>
+        <translation type="unfinished">Trdi disk</translation>
+    </message>
 </context>
 <context>
     <name>LnkPropertiesBase</name>
@@ -720,7 +724,11 @@ Sprostite nekaj spomina in poizkusite ponovno.</translation>
     </message>
     <message>
         <source>Ram FS</source>
-        <translation>Ran FS</translation>
+        <translation type="obsolete">Ran FS</translation>
+    </message>
+    <message>
+        <source>Internal Memory</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
