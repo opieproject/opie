@@ -1,1 +1,5 @@
 config.in
+mainwindowbase.h
+mainwindowbase.cpp
+Makefile
+

@@ -24,8 +24,11 @@
 #include <stdio.h>
 
 #include <qimage.h>
+#include <qdatetime.h>
 
 #include <opie2/odebug.h>
+
+#define SHARPZDC "/dev/sharp_zdc"
 
 ZCameraIO* ZCameraIO::_instance = 0;
 
@@ -43,7 +46,7 @@ ZCameraIO* ZCameraIO::instance()
 ZCameraIO::ZCameraIO()
           :_height( 0 ), _width( 0 ), _zoom( 0 ), _rot( 0 ), _readlen( 0 )
 {
-    _driver = ::open( "/dev/sharp_zdc", O_RDWR );
+    _driver = ::open( SHARPZDC, O_RDWR );
     if ( _driver == -1 )
         oerr << "Can't open camera driver: " << strerror(errno) << oendl;
     else
@@ -65,7 +68,10 @@ void ZCameraIO::init()
 ZCameraIO::~ZCameraIO()
 {
     if ( _driver != -1 )
+    {
+        setReadMode( 0 );
         ::close( _driver );
+    }
 }
 
 
@@ -107,7 +113,7 @@ bool ZCameraIO::setCaptureFrame( int width, int height, int zoom, bool rot )
     if ( write( b ) )
     {
         _width = width;
-        _height = _height;
+        _height = height;
         _zoom = zoom;
         _rot = rot;
         _readlen = 2 * _width * _height; // camera is fixed @ 16 bits per pixel
@@ -119,7 +125,7 @@ bool ZCameraIO::setCaptureFrame( int width, int height, int zoom, bool rot )
 
 void ZCameraIO::setReadMode( int mode )
 {
-    char b[4];
+    char b[10];
     sprintf( b, "M=%d", mode );
     write( b, mode <= 9 ? 3 : 4 );
     if ( mode & 1 ) // STATUS bit is set
@@ -136,8 +142,20 @@ void ZCameraIO::clearShutterLatch()
 
 bool ZCameraIO::read( char* b, int len )
 {
+    #ifndef NO_TIMING
+    QTime t;
+    t.start();
+    #endif
     int rlen = ::read( _driver, b, len );
-    odebug << "read " << rlen << " from driver." << oendl;
+    #ifndef NO_TIMING
+    int time = t.elapsed();
+    #else
+    int time = -1;
+    #endif
+    if ( rlen )
+        odebug << "read " << rlen << " ('" << b[0] << b[1] << b[2] << b[3] << "') [" << time << " ms] from driver." << oendl;
+    else
+        odebug << "read nothing from driver." << oendl;
     return rlen == len;
 }
 
@@ -155,27 +173,12 @@ bool ZCameraIO::write( char* buf, int len )
 
 bool ZCameraIO::snapshot( QImage* image )
 {
-    /*
-
+    setReadMode( IMAGE | XFLIP | YFLIP );
     char buf[76800];
-
-    write( _driver, "M=13", 4 );
-    write( _driver, "R=240,160,256,480", 17 );
-    write( _driver, "M=12", 4 );
-
-    int result = read( _driver, &buf, sizeof buf );
-
-    return result == sizeof buf;
-
-    */
-
-    unsigned char buf[76800];
-    unsigned char* bp = buf;
+    char* bp = buf;
     unsigned char* p;
 
-    int fd = open( "/tmp/cam", O_RDONLY );
-    if ( ::read( fd, buf, sizeof buf ) != sizeof buf )
-        owarn << "Couldn't read image from /dev/sharp_zdc" << oendl;
+    read( bp, _readlen );
 
     image->create( 240, 160, 16 );
     for ( int i = 0; i < 160; ++i )
@@ -195,11 +198,18 @@ bool ZCameraIO::snapshot( QImage* image )
     return true;
 }
 
-bool ZCameraIO::snapshot( uchar* buf )
+bool ZCameraIO::snapshot( unsigned char* buf )
 {
+    setReadMode( IMAGE | XFLIP | YFLIP );
+
+    read( (char*) buf, _readlen );
+
+    /* //TESTCODE
     int fd = open( "/tmp/cam", O_RDONLY );
-    if ( ::read( fd, buf, 76800 ) != 76800 )
+    if ( ::read( fd, (char*) buf, 76800 ) != 76800 )
         owarn << "Couldn't read image from /dev/sharp_zdc" << oendl;
+    // TESTCODE */
+
 
     return true;
 }

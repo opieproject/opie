@@ -14,30 +14,28 @@
 **********************************************************************/
 
 #include "mainwindow.h"
+#include "mainwindowbase.h"
 #include "zcameraio.h"
 
 #include <qvbox.h>
+#include <qcombobox.h>
 #include <qpushbutton.h>
 #include <qlabel.h>
-
 #include <qdirectpainter_qws.h>
-
 #include <qpe/resource.h>
 #include <opie/ofiledialog.h>
+
+#include <assert.h>
 
 CameraMainWindow::CameraMainWindow( QWidget * parent, const char * name, WFlags f )
            :QMainWindow( parent, name, f )
 {
-    QVBox* v = new QVBox( this );
-    l = new QLabel( v );
-    l->setFixedSize( QSize( 240, 160 ) );
-    QPushButton* p = new QPushButton( "Snapshot", v );
-    connect( p, SIGNAL( clicked() ), this, SLOT( clickedSnapShot() ) );
-    v->show();
-    l->show();
-    p->show();
-    setCentralWidget( v );
+    mw = new MainWindowBase( this, "main widget" );
+    ZCameraIO::instance()->setCaptureFrame( 240, 160, 256 );
+    setCentralWidget( mw );
+    mw->show();
 
+    connect( mw->zoom, SIGNAL( activated( int ) ), this, SLOT( changeZoom(int) ) );
 };
 
 
@@ -46,19 +44,17 @@ CameraMainWindow::~CameraMainWindow()
 }
 
 
-void CameraMainWindow::clickedSnapShot()
+void CameraMainWindow::changeZoom( int zoom )
 {
-    QDirectPainter fb( l );
-    ZCameraIO::instance()->snapshot( fb.frameBuffer() );
-
-    /*
-    QImage i;
-    QPixmap p;
-    if ( ZCameraIO::instance()->snapshot( &i ) )
+    int z;
+    switch ( zoom )
     {
-        p.convertFromImage( i );
-        l->setPixmap( p );
+        case 0: z = 128; break;
+        case 1: z = 256; break;
+        case 2: z = 512; break;
+        default: assert( 0 ); break;
     }
-    */
+
+    ZCameraIO::instance()->setCaptureFrame( 240, 160, z );
 }
 

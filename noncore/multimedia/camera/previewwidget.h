@@ -13,34 +13,27 @@
 **
 **********************************************************************/
 
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef PREVIEWWIDGET_H
+#define PREVIEWWIDGET_H
 
-#include <qmainwindow.h>
-#include <qdatetime.h>
+#include <qlabel.h>
 #include <qimage.h>
 #include <qpixmap.h>
 
-class QIconSet;
-class QToolButton;
-class QLabel;
-class MainWindowBase;
-
-class CameraMainWindow: public QMainWindow
+class PreviewWidget: public QLabel
 {
   Q_OBJECT
 
   public:
-    CameraMainWindow( QWidget * parent = 0, const char * name = "mainwindow", WFlags f = 0 );
-    virtual ~CameraMainWindow();
-
-  public slots:
-    void changeZoom( int );
+    PreviewWidget( QWidget * parent = 0, const char * name = 0, WFlags f = 0 );
+    virtual ~PreviewWidget();
 
   protected:
+    virtual void timerEvent( QTimerEvent* );
 
   private:
-    MainWindowBase* mw;
+    QPixmap p;
+    QImage i;
 };
 
 #endif
