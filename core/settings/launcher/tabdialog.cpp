@@ -1,6 +1,33 @@
+/*
+               =.            This file is part of the OPIE Project
+             .=l.            Copyright (c)  2002 Robert Griebl <sandman@handhelds.org>
+           .>+-=
+ _;:,     .>    :=|.         This file is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This file is distributed in the hope that
+     +  .  -:.       =       it will be useful, but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU General
+..}^=.=       =       ;      Public License for more details.
+++=   -.     .`     .:       
+ :     =  ...= . :.=-        You should have received a copy of the GNU
+ -.   .:....=;==+<;          General Public License along with this file;
+  -_. . .   )=.  =           see the file COPYING. If not, write to the
+    --        :-=`           Free Software Foundation, Inc.,
+                             59 Temple Place - Suite 330,
+                             Boston, MA 02111-1307, USA.
+
+*/
 
 #include <qpe/resource.h>
 #include <qpe/config.h>
+#include <qpe/applnk.h>
 
 #include <qlayout.h>
 #include <qvbox.h>
@@ -10,10 +37,12 @@
 #include <qlabel.h>
 #include <qradiobutton.h>
 #include <qbuttongroup.h>
+#include <qpushbutton.h>
 
 #include <opie/ofontselector.h>
 #include <opie/otabwidget.h>
 #include <opie/ocolorbutton.h>
+#include <opie/ofiledialog.h>
 
 #include "tabdialog.h"
 
@@ -38,7 +67,8 @@ public:
 			return (QPixmap *) &m_small;
 		else
 			return (QPixmap *) &m_large;
-	}	
+	}
+	
 private:
 	QPixmap m_large, m_small;
 };
@@ -185,6 +215,12 @@ public:
                                                                                                                                                                   
 	void paletteChange( const QPalette &p )
 	{
+		static bool excllock = false;
+		
+		if ( excllock )
+			return;
+		excllock = true;
+	
 		unsetPalette ( );
 		QIconView::paletteChange ( p );
 		if ( m_bgtype == TabConfig::Ruled )
@@ -192,6 +228,8 @@ public:
 		QColorGroup cg = colorGroup ( );
 		cg.setColor ( QColorGroup::Text, m_textcolor );
 		setPalette ( QPalette ( cg, cg, cg ));
+		
+		excllock = false;
 	}
                             
 	void setBackgroundPixmap ( const QPixmap &pm ) 
@@ -212,7 +250,7 @@ public:
 		} 
 		else
 			p-> fillRect ( r, m_bgcolor );
-	}                                                                                                                
+	}
 	
 private:
 	QColor m_textcolor;
@@ -252,8 +290,11 @@ TabDialog::TabDialog ( const QPixmap *tabicon, const QString &tabname, TabConfig
 	
 	m_iconsize-> setButton ( tc. m_view );
 	iconSizeClicked ( tc. m_view );
+	m_iconcolor-> setColor ( QColor ( m_tc. m_text_color ));
+	iconColorClicked ( m_iconcolor-> color ( ));
 	m_bgtype-> setButton ( tc. m_bg_type );
 	m_solidcolor-> setColor ( QColor ( tc. m_bg_color ));
+	m_bgimage = tc. m_bg_image;
 	bgTypeClicked ( tc. m_bg_type );
 	m_fontselect-> setSelectedFont ( tc. m_font_family, tc. m_font_style, tc. m_font_size );
 	fontClicked ( m_fontselect-> selectedFont ( ));
@@ -302,16 +343,30 @@ QWidget *TabDialog::createBgTab ( QWidget *parent )
 	hb-> addSpacing ( 10 );
     
 	m_solidcolor = new OColorButton ( tab );
-	connect ( m_solidcolor, SIGNAL( colorSelected ( const QColor & )), this, SLOT( colorClicked ( const QColor & )));
+	connect ( m_solidcolor, SIGNAL( colorSelected ( const QColor & )), this, SLOT( bgColorClicked ( const QColor & )));
 	hb-> addWidget ( m_solidcolor );
+	hb-> addStretch ( 10 );
 
     gridLayout-> addLayout ( hb, 1, 1 );
 
-    rb = new QRadioButton( tr( "Image" ), tab, "image" );
+	hb = new QHBoxLayout ( );
+	hb-> setSpacing ( 4 );
+	
+	rb = new QRadioButton( tr( "Image" ), tab, "image" );
     m_bgtype-> insert ( rb, TabConfig::Image );
-    gridLayout-> addWidget( rb, 3, 1 );
+    hb-> addWidget( rb );
+    hb-> addSpacing ( 10 );
+    
+	m_imagebrowse = new QPushButton ( tr( "Select..." ), tab );
+	connect ( m_imagebrowse, SIGNAL( clicked ( )), this, SLOT( bgImageClicked ( )));
+	hb-> addWidget ( m_imagebrowse );
+	hb-> addStretch ( 10 );
+	
+    gridLayout-> addLayout ( hb, 2, 1 );
 
-//	QPushButton *p;
+	QPushButton *p = new QPushButton ( tr( "Default" ), tab );	
+	connect ( p, SIGNAL( clicked ( )), this, SLOT( bgDefaultClicked ( )));
+	gridLayout-> addWidget ( p, 3, 1 );
 
 	connect ( m_bgtype, SIGNAL( clicked ( int )), this, SLOT( bgTypeClicked ( int )));
 
@@ -345,6 +400,18 @@ QWidget *TabDialog::createIconTab ( QWidget *parent )
 
 	connect ( m_iconsize, SIGNAL( clicked ( int )), this, SLOT( iconSizeClicked ( int )));
 
+//	vertLayout-> addSpacing ( 8 );
+
+//	gridLayout = new QGridLayout ( vertLayout );
+	gridLayout-> addRowSpacing ( 2, 8 );
+	
+	label = new QLabel ( tr( "Color:" ), tab );
+	gridLayout-> addWidget ( label, 3, 0 );
+	
+	m_iconcolor = new OColorButton ( tab );
+	connect ( m_iconcolor, SIGNAL( colorSelected ( const QColor & )), this, SLOT( iconColorClicked ( const QColor & )));
+	gridLayout-> addWidget ( m_iconcolor, 3, 1, AlignLeft );        	
+
 	vertLayout-> addStretch ( 10 );
 
 	return tab;
@@ -365,19 +432,51 @@ void TabDialog::bgTypeClicked ( int t )
 {
 	QString s;
 
+	if ( m_bgtype-> id ( m_bgtype-> selected ( )) != t )
+		m_bgtype-> setButton ( t );
+		
 	m_solidcolor-> setEnabled ( t == TabConfig::SolidColor );
-//	m_imagebrowse-> setEnabled ( t == TabConfig::Image );
-//	m_imagedefault-> setEnabled ( t == TabConfig::Image );
+	m_imagebrowse-> setEnabled ( t == TabConfig::Image );
 
 	if ( t == TabConfig::SolidColor )
 		s = m_solidcolor-> color ( ). name ( );
+	else if ( t == TabConfig::Image )
+		s = m_bgimage;
 		
 	m_sample-> setBackgroundType ((TabConfig::BackgroundType) t, s );
 }
 
-void TabDialog::colorClicked ( const QColor &col )
+void TabDialog::bgColorClicked ( const QColor & )
 {
-	m_sample-> setBackgroundType ( TabConfig::SolidColor, col. name ( ));
+	bgTypeClicked ( TabConfig::SolidColor );
+}
+
+void TabDialog::iconColorClicked ( const QColor &col )
+{
+	m_sample-> setTextColor ( col );
+}
+
+void TabDialog::bgImageClicked ( )
+{
+	// ### use OFileSelector here ###
+	// this is just a quick c&p from the old appearance app
+
+	MimeTypes types;
+	QStringList list;
+	list << "image/*";	
+	types. insert ( "Images", list );
+	
+	QString file = OFileDialog::getOpenFileName ( 1, "/", QString::null, types );
+	if ( !file. isEmpty ( )) {
+		m_bgimage = DocLnk ( file ). file ( );
+		bgTypeClicked ( TabConfig::Image );
+	}                                                                    
+}
+
+void TabDialog::bgDefaultClicked ( )
+{
+	m_bgimage = Resource::findPixmap ( "launcher/opie-background.jpg" );
+	bgTypeClicked ( TabConfig::Image );
 }
 
 void TabDialog::accept ( )
@@ -385,6 +484,8 @@ void TabDialog::accept ( )
 	m_tc. m_view = (TabConfig::ViewMode) m_iconsize-> id ( m_iconsize-> selected ( ));
 	m_tc. m_bg_type = (TabConfig::BackgroundType) m_bgtype-> id ( m_bgtype-> selected ( ));
 	m_tc. m_bg_color = m_solidcolor-> color ( ). name ( );
+	m_tc. m_bg_image = m_bgimage;
+	m_tc. m_text_color = m_iconcolor-> color ( ). name ( );
 	m_tc. m_font_family = m_fontselect-> fontFamily ( );
 	m_tc. m_font_size = m_fontselect-> fontSize ( );
 	m_tc. m_font_style = m_fontselect-> fontStyle ( );
