@@ -332,13 +332,6 @@ diff -ur qt-2.3.7-old/include/qstring.h qt-2.3.7/include/qstring.h
 diff -ur qt-2.3.7-old/src/iconview/qiconview.cpp qt-2.3.7/src/iconview/qiconview.cpp
 --- qt-2.3.7-old/src/iconview/qiconview.cpp	2004-07-23 15:22:56.000000000 +0200
 +++ qt-2.3.7/src/iconview/qiconview.cpp	2004-07-23 15:45:34.000000000 +0200
-@@ -1,5 +1,5 @@
- /****************************************************************************
--** $Id: qte237-all.patch,v 1.10 2004-07-23 18:18:17 zecke Exp $
-+** $Id: qte237-all.patch,v 1.10 2004-07-23 18:18:17 zecke Exp $
- **
- ** Implementation of QIconView widget class
- **
 @@ -220,6 +220,7 @@
      QIconView::SelectionMode selectionMode;
      QIconViewItem *currentItem, *tmpCurrentItem, *highlightedItem, *startDragItem, *pressedItem, *selectAnchor;

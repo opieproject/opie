@@ -12,13 +12,6 @@ http://lists.kde.org/?l=kde-optimize&m=105382164111363&w=2 (complete thread)
 diff -u qt-2.3.7_old/src/iconview/qiconview.cpp qt-2.3.7/src/iconview/qiconview.cpp
 --- qt-2.3.7_old/src/iconview/qiconview.cpp	2004-06-13 22:29:56.000000000 +0200
 +++ qt-2.3.7/src/iconview/qiconview.cpp	2004-06-13 22:33:32.000000000 +0200
-@@ -1,5 +1,5 @@
- /****************************************************************************
--** $Id: qte237-iconviewspeed.patch,v 1.1 2004-07-23 18:18:17 zecke Exp $
-+** $Id: qte237-iconviewspeed.patch,v 1.1 2004-07-23 18:18:17 zecke Exp $
- **
- ** Implementation of QIconView widget class
- **
 @@ -220,6 +220,7 @@
      QIconView::SelectionMode selectionMode;
      QIconViewItem *currentItem, *tmpCurrentItem, *highlightedItem, *startDragItem, *pressedItem, *selectAnchor;
