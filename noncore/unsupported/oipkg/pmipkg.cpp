@@ -67,6 +67,7 @@ bool PmIpkg::runIpkg(const QString& args, const QString& dest )
   QDir::setCurrent("/tmp");
   QString cmd = "/usr/bin/ipkg ";
 #ifdef OPROCESS
+  ipkgProcess->kill();
   ipkgProcess->clearArguments();
   *ipkgProcess << "/usr/bin/ipkg ";
   cmd = "";
@@ -99,6 +100,8 @@ bool PmIpkg::runIpkg(const QString& args, const QString& dest )
   *ipkgProcess << cmd;
 
 //debug
+	delete ipkgProcess;
+ 	ipkgProcess = new OProcess();
   ipkgProcess->clearArguments();
   *ipkgProcess << "/bin/ls ";
 //debug
@@ -170,19 +173,25 @@ QStringList* PmIpkg::getList( QString packFileName, QString d )
 {
 	QString dest = settings->getDestinationUrlByName( d );
  	dest = dest==""?d:dest;
-  if (dest == "/" ) return 0;
+	//  if (dest == "/" ) return 0;
 	{
     Config cfg( "oipkg", Config::User );
     cfg.setGroup( "Common" );
     QString statusDir = cfg.readEntry( "statusDir", "" );
 	}
- 	packFileName = dest+"/"+statusDir+"/info/"+packFileName+".list";
+ 	QString packFileDir = dest+"/"+statusDir+"/info/"+packFileName+".list";
  	QFile f( packFileName );
  	if ( ! f.open(IO_ReadOnly) )
   {
-   	pvDebug(1," Panik!  Could not open");
-  	out( "Panik!\n Could not open:\n"+packFileName );
-   	return (QStringList*)0;
+  	out( "Could not open:\n"+packFileDir );
+	  f.close();
+   	packFileDir = "/"+statusDir+"/info/"+packFileName+".list";
+   	f.setName( packFileDir );
+	 	if ( ! f.open(IO_ReadOnly) )
+  	{
+	   	qDebug(" Panik!  Could not open"+packFileDir);
+ 		 	out( "Could not open:\n"+packFileDir+"\n Panik!" );
+    }
   }
   QStringList *fileList = new QStringList();
   QTextStream t( &f );
@@ -190,11 +199,13 @@ QStringList* PmIpkg::getList( QString packFileName, QString d )
     {
       *fileList += t.readLine();
     }	
+  f.close();
   return fileList;
 }
 
 void PmIpkg::linkPackage( QString packFileName, QString dest )
 {
+	if (dest == "root" || dest == "/" ) return;
 	QStringList *fileList = getList( packFileName, dest );
  	processFileList( fileList, dest );
   delete fileList;

@@ -1,12 +1,4 @@
 /***************************************************************************
-                          utils.h  -  description
-                             -------------------
-    begin                : Sun Apr 28 2002
-    copyright            : (C) 2002 by tille
-    email                : tille@handhelds.org
- ***************************************************************************/
-
-/***************************************************************************
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -14,5 +6,6 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
+// (c) 2002 Patrick S. Vogt <tille@handhelds.org>
 
 void setComboName( QComboBox*, QString );

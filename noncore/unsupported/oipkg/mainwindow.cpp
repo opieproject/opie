@@ -61,17 +61,11 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
 	pvDebug(9,"packageListServers.update");
   packageListServers.update();
 	pvDebug(9,"packageListDocLnk.update");
- 	pvDebug(0,"no UPDATE of DocLnk");
   packageListDocLnk.update();
 	pvDebug(9,"makeMenu");
   makeMenu();	
   makeChannel();
-  //opie is hardcoded default ;)
-//	pvDebug(9,"section->setCurrentItem");
-//  for (int i=0;i<section->count();i++)
-//  	if (section->text(i)=="opie")
-//   		section->setCurrentItem(i);
-//  sectionChanged();
+
 
   connect( section,    SIGNAL(activated(int)), SLOT(sectionChanged()) );
   connect( subsection, SIGNAL(activated(int)), SLOT(subSectionChanged()) );
@@ -151,12 +145,18 @@ void MainWindow::makeMenu()
 	sectionBar = new QPEToolBar( this );
  	addToolBar( sectionBar,  "Section", QMainWindow::Top, TRUE );
   sectionBar->setHorizontalStretchable( true );
-  QLabel *label = new QLabel( tr("Section: "), sectionBar );
-  label->setBackgroundColor( sectionBar->backgroundColor() );
+  QLabel *label = new QLabel( sectionBar, "section" );
+//  label->setBackgroundMode( NoBackground );
+ 	label->font().setPointSize( 8 );
+  label->setText( tr( "Section:" ) ); 	
+  sectionBar->setStretchableWidget( label );
   section = new QComboBox( false, sectionBar );
+ 	section->font().setPointSize( 8 );
   label = new QLabel( " / ", sectionBar );
-  label->setBackgroundColor( sectionBar->backgroundColor() );
+ 	label->font().setPointSize( 8 );
+//  label->setBackgroundMode( PaletteForeground );
   subsection = new QComboBox( false, sectionBar );
+ 	subsection->font().setPointSize( 8 );
   a = new QAction( tr( "Close Section" ), Resource::loadPixmap( "close" ), QString::null, 0, this, 0 );
   connect( a, SIGNAL( activated() ), this, SLOT( sectionClose() ) );
   a->addTo( sectionBar );
@@ -166,13 +166,13 @@ void MainWindow::makeMenu()
   connect( sectionAction, SIGNAL( toggled(bool) ), this, SLOT( sectionShow(bool) ) );
   sectionAction->setToggleAction( true );
   sectionAction->addTo( viewMenu );
- 	sectionBar->setStretchableWidget( section );
+// 	sectionBar->setStretchableWidget( section );
 
   //FIND
   findBar = new QPEToolBar(this);
   addToolBar( findBar,  "Filter", QMainWindow::Top, TRUE );
   label = new QLabel( tr("Filter: "), findBar );
-  label->setBackgroundColor( findBar->backgroundColor() );
+//  label->setBackgroundMode( PaletteForeground );
   findBar->setHorizontalStretchable( TRUE );
   findEdit = new QLineEdit( findBar, "findEdit" );
   findBar->setStretchableWidget( findEdit );
@@ -193,7 +193,7 @@ void MainWindow::makeMenu()
   searchBar = new QPEToolBar(this);
   addToolBar( searchBar,  "Search", QMainWindow::Top, TRUE );
   label = new QLabel( tr("ipkgfind: "), searchBar );
-  label->setBackgroundColor( searchBar->backgroundColor() );
+//  label->setBackgroundMode( PaletteForeground );
   searchBar->setHorizontalStretchable( TRUE );
   searchEdit = new QLineEdit( searchBar, "seachEdit" );
   searchBar->setStretchableWidget( searchEdit );
@@ -217,7 +217,7 @@ void MainWindow::makeMenu()
   destBar = new QPEToolBar(this);
   addToolBar( destBar,  "Destination", QMainWindow::Top, TRUE );
   label = new QLabel( tr("Destination: "), destBar );
-  label->setBackgroundColor( destBar->backgroundColor() );
+//  label->setBackgroundMode( PaletteForeground );
   destBar->setHorizontalStretchable( TRUE );
   destination = new QComboBox( false, destBar );
   destination->insertStringList( settings->getDestinationNames() );
@@ -225,9 +225,9 @@ void MainWindow::makeMenu()
   connect( destination, SIGNAL(activated(int)),
   			 settings, SLOT(activeDestinationChange(int)) );
   spacer = new QLabel( " ", destBar );
-  spacer->setBackgroundColor( destBar->backgroundColor() );
+//  spacer->setBackgroundMode( PaletteForeground );
   CheckBoxLink = new QCheckBox( tr("Link"), destBar);
-  CheckBoxLink->setBackgroundColor( destBar->backgroundColor() );
+//  CheckBoxLink->setBackgroundMode( PaletteForeground );
   CheckBoxLink->setChecked( settings->createLinks() );
   connect( CheckBoxLink, SIGNAL(toggled(bool)),
      				 settings, SLOT(linkEnabled(bool)) );
@@ -285,6 +285,8 @@ void MainWindow::makeMenu()
   searchShow( cfg.readBoolEntry( "searchBar", true ) );
   sectionShow( cfg.readBoolEntry( "sectionBar", true ) );
   destShow( cfg.readBoolEntry( "destBar", false ) );
+	setComboName(section,cfg.readEntry("default_section"));
+  sectionChanged();
 }
 
 MainWindow::~MainWindow()
@@ -295,6 +297,7 @@ MainWindow::~MainWindow()
   cfg.writeEntry( "searchBar", !searchBar->isHidden() );
   cfg.writeEntry( "sectionBar", !sectionBar->isHidden() );
   cfg.writeEntry( "destBar", !destBar->isHidden() );
+  cfg.writeEntry( "default_section", section->currentText() );
 	
 }
 
