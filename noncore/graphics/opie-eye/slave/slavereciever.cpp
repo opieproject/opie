@@ -185,8 +185,14 @@ void SlaveReciever::slotThumbNail() {
         SlaveInterface* iface = it.data();
         if( iface->supports(inf.file ) ) {
             /* pixmap */
-            owarn << "Asking for thumbNail in size " << inf.width << " " << inf.height << " for "+inf.file << oendl; 
-            inf.pixmap = iface->pixmap(inf.file, 64, 64);
+            owarn << "Asking for thumbNail in size " << inf.width << " " << inf.height << " for "+inf.file << oendl;
+            if (inf.width>256||inf.height>256) {
+                owarn << "Scaling thumbnail to 64x64 'cause " << inf.width<<"x"<<inf.height<<
+                    " may be nonsense";
+                inf.pixmap = iface->pixmap(inf.file, 64, 64);
+            }else {
+                inf.pixmap = iface->pixmap(inf.file, inf.width, inf.height);
+            }
             m_outPix.append( inf );
             break;
         }
