@@ -29,14 +29,6 @@
 
 #include "vt.h"
 
-class VTPopupMenu : public QPopupMenu
-{
-  public:
-    VTPopupMenu( QWidget * parent=0, const char * name=0 ) : QPopupMenu( parent, name ) {};
-
-  virtual void activated() { qDebug( "VTPopupMenu::activated()" ); }
-};
-
 VTApplet::VTApplet ( )
 	: QObject ( 0, "VTApplet" ), ref ( 0 )
 {
@@ -88,11 +80,11 @@ QPopupMenu *VTApplet::popup ( QWidget* parent ) const
     qDebug( "VTApplet::popup" );
 
     struct vt_stat vtstat;
-    int fd = ::open("/dev/tty0", O_RDWR);
+    int fd = ::open( "/dev/tty0", O_RDWR );
     if ( fd == -1 ) return 0;
     if ( ioctl( fd, VT_GETSTATE, &vtstat ) == -1 ) return 0;
 
-    submenu = new VTPopupMenu( parent );
+    submenu = new QPopupMenu( parent );
     submenu->setCheckable( true );
     for ( int i = 1; i < 10; ++i )
     {
@@ -102,6 +94,7 @@ QPopupMenu *VTApplet::popup ( QWidget* parent ) const
     ::close( fd );
 
     connect( submenu, SIGNAL( activated(int) ), this, SLOT( changeVT(int) ) );
+    connect( submenu, SIGNAL( aboutToShow() ), this, SLOT( updateMenu() ) );
 
     return submenu;
 }
@@ -109,10 +102,36 @@ QPopupMenu *VTApplet::popup ( QWidget* parent ) const
 
 void VTApplet::changeVT( int index )
 {
-    qDebug( "VTApplet::changeVT( %d )", index-500 );
+    //qDebug( "VTApplet::changeVT( %d )", index-500 );
+
     int fd = ::open("/dev/tty0", O_RDWR);
     if ( fd == -1 ) return;
     ioctl( fd, VT_ACTIVATE, index-500 );
+}
+
+
+void VTApplet::updateMenu()
+{
+    //qDebug( "VTApplet::updateMenu()" );
+
+    int fd = ::open( "/dev/console", O_RDONLY );
+    if ( fd == -1 ) return;
+
+    for ( int i = 1; i < 10; ++i )
+    {
+        int result = ioctl( fd, VT_DISALLOCATE, i );
+
+        /*
+        if ( result == -1 )
+            qDebug( "VT %d disallocated == free", i );
+        else
+            qDebug( "VT %d _not_ disallocated == busy", i );
+        */
+
+        submenu->setItemEnabled( 500+i, result == -1 );
+    }
+
+    ::close( fd );
 }
 
 

@@ -43,6 +43,7 @@ public:
 
 public slots:
     virtual void changeVT( int index );
+    virtual void updateMenu();
 
 private:
     ulong ref;
