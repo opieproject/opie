@@ -3,6 +3,14 @@
 # base opie install path
 outdir = /opt/QtPalmtop
 
+contains( TEMPLATE, lib ) {
+	target.path = $$outdir/lib
+}
+!contains( TEMPLATE, lib ) {
+	target.path = $$outdir/bin
+}
+INSTALLS += target
+
 # ipkg control files
 control.path = /CONTROL
 control.files = control postinst prerm postrm preinst conffiles
