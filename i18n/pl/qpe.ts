@@ -70,11 +70,12 @@
     <message>
         <source>Touch the crosshairs firmly and
 accurately to calibrate your screen.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokładnie i silnie dotknij krzyżyk
+aby skalibrować ekran.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation type="unfinished"></translation>
+        <translation>Witaj w Opie</translation>
     </message>
 </context>
 <context>
@@ -191,11 +192,11 @@ accurately to calibrate your screen.</source>
     <name>Mediadlg</name>
     <message>
         <source>A new storage media detected:</source>
-        <translation type="unfinished"></translation>
+        <translation>Wykryto nowy nośnik danych:</translation>
     </message>
     <message>
         <source>What should I do with it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Co z nim zrobić?</translation>
     </message>
 </context>
 <context>
@@ -369,7 +370,7 @@ Te opcje zamykające zostały pierwotnie dodane do użytku deweloperów i dla te
     </message>
     <message>
         <source>&lt;qt&gt;&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;You chose IntelliSync so you may I allow or deny this connection.&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;&lt;p&gt;Nieautoryzowany system żąda dostępu do tego urządzenia.&lt;p&gt;Wybrałeś IntelliSync więc możesz zezwolić na połączenie albo go odmówić.&lt;/qt&gt;</translation>
     </message>
 </context>
 <context>
