@@ -96,14 +96,14 @@ RecBody NNTPwrapper::fetchBody( const RecMail &mail ) {
 }
 
 
-void NNTPwrapper::listMessages(const QString &, QList<RecMail> &target )
+void NNTPwrapper::listMessages(const QString & which, QList<RecMail> &target )
 {
     login();
     if (!m_nntp)
         return;
     uint32_t res_messages,res_recent,res_unseen;
-    mailsession_status_folder(m_nntp->sto_session,"INBOX",&res_messages,&res_recent,&res_unseen);
-    parseList(target,m_nntp->sto_session,"INBOX");
+    mailsession_status_folder(m_nntp->sto_session,(char*)which.latin1(),&res_messages,&res_recent,&res_unseen);
+    parseList(target,m_nntp->sto_session,which);
 }
 
 void NNTPwrapper::login()
@@ -192,8 +192,13 @@ QList<Folder>* NNTPwrapper::listFolders() {
 
     QList<Folder> * folders = new QList<Folder>();
     folders->setAutoDelete( false );
-
-//    folders->append(inb);
+    QStringList groups;
+    if (account) {
+        groups = account->getGroups();
+    }
+    for ( QStringList::Iterator it = groups.begin(); it != groups.end(); ++it ) {
+        folders->append(new Folder((*it),"."));
+    }
     return folders;
 }
 

@@ -25,7 +25,7 @@ public:
     virtual QList<Folder>* listFolders();
     /* mailbox will be ignored */
     virtual void statusFolder(folderStat&target_stat,const QString & mailbox="INBOX");
-     clist * listAllNewsgroups();
+    clist * listAllNewsgroups();
     virtual void deleteMail(const RecMail&mail);
     virtual void answeredMail(const RecMail&mail);
     virtual int deleteAllMail(const Folder*);

@@ -438,4 +438,3 @@ QString NNTPaccount::getFileName()
 {
     return (QString) getenv( "HOME" ) + "/Applications/opiemail/nntp-" + file;
 }
-
