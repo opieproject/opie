@@ -32,9 +32,11 @@ class StorageInfo : public QObject
 public:
     StorageInfo( QObject *parent=0 );
 
-    const QList<FileSystem> &fileSystems() const { return mFileSystems; }
-    const FileSystem *fileSystemOf( const QString &filename );
-
+   const QList<FileSystem> &fileSystems() const { return mFileSystems; }
+   const FileSystem *fileSystemOf( const QString &filename );
+   static bool hasCf();
+   static bool hasSd();
+   static bool hasMmc();
 signals:
     void disksChanged();
 

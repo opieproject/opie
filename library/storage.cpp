@@ -1,8 +1,9 @@
 /**********************************************************************
 ** Copyright (C) Holger 'zecke' Freyther <freyther@kde.org>
+** Copyright (C) Lorn Potter <llornkcor@handhelds.org>
 ** Copyright (C) 2000 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of Opie Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -36,6 +37,10 @@
 #endif
 
 #include <qstringlist.h>
+
+#include <sys/vfs.h>
+#include <mntent.h>
+
 
 static bool isCF(const QString& m)
 {
@@ -173,6 +178,60 @@ void StorageInfo::update()
     }
 #endif
 }
+
+bool deviceTab( const char *device) {
+   QString name = device;
+   bool hasDevice=false;
+   struct mntent *me;
+    FILE *mntfp = setmntent( "/etc/mtab", "r" );
+    if ( mntfp ) {
+        while ( (me = getmntent( mntfp )) != 0 ) {
+          QString deviceName = me->mnt_fsname;
+//          qDebug(deviceName);
+            if( deviceName.left(name.length()) == name) {
+               hasDevice = true;
+            }
+        }
+    }
+    endmntent( mntfp );
+    return hasDevice;
+}
+
+/*!
+ * @fn hasCf()
+ * @brief returns whether device has Cf mounted
+ *
+ */
+bool StorageInfo::hasCf()
+{
+    return deviceTab("/dev/hd");
+}
+
+/*!
+ * @fn hasSd()
+ * @brief returns whether device has SD mounted
+ *
+ */
+bool StorageInfo::hasSd()
+{
+    return deviceTab("/dev/mmcd");
+}
+
+/*!
+ * @fn hasMmc()
+ * @brief reutrns whether device has mmc mounted
+ *
+ */
+bool StorageInfo::hasMmc()
+{
+   bool hasMmc=false;
+   if( deviceTab("/dev/mmc/part"))
+      hasMmc=true;
+   if( deviceTab("/dev/mmcd"))
+      hasMmc=true;
+   return hasMmc;
+}
+
 
 //---------------------------------------------------------------------------
 
