@@ -1,4 +1,4 @@
-/* $Id: cardmode.hh,v 1.4 2002-12-11 14:57:54 mickeyl Exp $ */
+/* $Id: cardmode.hh,v 1.5 2002-12-14 19:13:32 mjm Exp $ */
 
 #ifndef CARDMODE_HH
 #define CARDMODE_HH
@@ -15,8 +15,6 @@ extern "C"
 #include <net/bpf.h>
 #include <pcap.h>  
 }
-
-#include "../../libwellenreiter/source/log.hh"
 
 /* Defines, used for the card setup */
 #define   DEFAULT_PATH       "/proc/driver/aironet/%s/Config"

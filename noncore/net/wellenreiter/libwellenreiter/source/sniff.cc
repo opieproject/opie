@@ -1,7 +1,7 @@
 /* 
  *  rfmon mode sniffer
  *
- *  $Id: sniff.cc,v 1.6 2002-12-10 01:24:42 mickeyl Exp $
+ *  $Id: sniff.cc,v 1.7 2002-12-14 19:13:32 mjm Exp $
  */
 
 #include "sniff.hh"
@@ -94,8 +94,6 @@ void process_packets(const struct pcap_pkthdr *pkthdr, const unsigned char *pack
 		  return;
 	      }
 
-          printf( "cap_ESS is %d, cap_IBSS is %d\n", pinfoptr->cap_ESS, pinfoptr->cap_IBSS );
-          
 	      /* Here should be the infos to the gui issued */
 	      if (pinfoptr->cap_ESS == 1 &&pinfoptr->cap_IBSS ==0)
 		{
@@ -107,15 +105,14 @@ void process_packets(const struct pcap_pkthdr *pkthdr, const unsigned char *pack
 		  wl_loginfo("Found an ad-hoc network");
 		  wl_net.net_type=2;
 		}
+
 	      if (strcmp (pinfoptr->ssid,NONBROADCASTING) ==0)
-		{
 		  wl_loginfo("Net is a non-broadcasting network");
-		}
 	      else
-		{
 		  wl_loginfo("SSID is: %s", pinfoptr->ssid);
-		  //		  wl_net.bssid=pinfoptr->ssid;
-		}
+
+              wl_loginfo("SSID is: %s", pinfoptr->ssid);
+	      memcpy(wl_net.bssid, pinfoptr->ssid, sizeof(wl_net.bssid)-1);
 
 	      wl_loginfo("SSID length is: %d", pinfoptr->ssid_len);
 	      wl_net.ssid_len=pinfoptr->ssid_len;
@@ -126,14 +123,12 @@ void process_packets(const struct pcap_pkthdr *pkthdr, const unsigned char *pack
 
 	      wl_loginfo("Mac is: %s", pinfoptr->sndhwaddr);
 	      memcpy(wl_net.mac, pinfoptr->sndhwaddr, sizeof(wl_net.mac)-1);;
-	      wl_loginfo("SSID is: %s", pinfoptr->ssid);
-	      memcpy(wl_net.bssid, pinfoptr->ssid, sizeof(wl_net.bssid)-1);
-
-	      //	      printf ("\n\tDest	   : %s\n",pinfoptr->desthwaddr);
+	      
 	      send_network_found((char *)guihost, guiport, &wl_net);
 	      wl_loginfo("Sent network to GUI '%s:%d'", guihost, guiport);
 	    }
 	  break;	
+
 	default:
 	  wl_logerr("Unknown IEEE802.11 frame subtype (%d)", FC_SUBTYPE(fc));
 	  break;	

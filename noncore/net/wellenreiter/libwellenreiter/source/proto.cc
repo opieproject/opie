@@ -1,7 +1,7 @@
 /*
  * Communication protocol
  *
- * $Id: proto.cc,v 1.2 2002-12-04 21:23:17 mickeyl Exp $
+ * $Id: proto.cc,v 1.3 2002-12-14 19:13:32 mjm Exp $
  */
 
 #include "proto.hh"
@@ -56,15 +56,14 @@ int send_network_found (const char *guihost, int guiport, void *structure)
 
   memcpy(buffer + 23, temp, 3);
 
-  fprintf( stderr, "Temp is %s\n", temp );
-  fprintf( stderr, "ssid_len is %d\n", ptr->ssid_len );
-
   /* Set ssid */
   memcpy(buffer + 26, ptr->bssid, ptr->ssid_len);
 
-  fprintf( stderr, "Buffer is %s\n", buffer );
-
   /* Send prepared buffer to GUI */
+#ifdef DEBUG
+  wl_loginfo("Sending network to GUI: '%s'", buffer);
+#endif
+
   sendcomm(guihost, guiport, buffer);
 
   return 1;

@@ -1,10 +1,11 @@
 /* 
  * Set card modes for sniffing
  *
- * $Id: cardmode.cc,v 1.4 2002-11-28 00:00:52 mjm Exp $
+ * $Id: cardmode.cc,v 1.5 2002-12-14 19:13:32 mjm Exp $
  */
 
 #include "cardmode.hh"
+#include "log.hh"
 
 /* main card into monitor function */
 int card_into_monitormode (pcap_t **orighandle, char *device, int cardtype)
