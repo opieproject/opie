@@ -83,13 +83,6 @@ void DataManager :: loadServers()
     }
     else
     {
-        {
-            cout << "Before ipkg.conf read" << endl;
-            vector<Server>::iterator it;
-            for ( it = serverList.begin() ; it != serverList.end() ; ++it )
-                cout << "servername - " << it->getServerName() << endl;
-        }
-        
         while ( fgets( line, sizeof line, fp) != NULL )
         {
             lineStr = line;
@@ -104,8 +97,6 @@ void DataManager :: loadServers()
                 // is next.
                 // Should Handle #src, # src, src, and combinations of
                 sscanf( lineStr, "%*[^r]%*[^ ] %s %s", alias, url );
-                cout << "Adding alias " << alias << " to list" << endl;
-                cout << lineStr << endl;
                 Server s( alias, url );
                 serverList.push_back( s );
 
@@ -121,13 +112,6 @@ void DataManager :: loadServers()
                 destList.push_back( d );
             }
         }
-        {
-            cout << "After ipkg.conf read" << endl;
-            vector<Server>::iterator it;
-            for ( it = serverList.begin() ; it != serverList.end() ; ++it )
-                cout << "servername - " << it->getServerName() << endl;
-        }
-        
     }
     fclose( fp );
 
