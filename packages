@@ -8,7 +8,6 @@ CONFIG_DIALUP	noncore/unsupported/netsetup/dialup	dialup.pro
 CONFIG_DICTIONARY	noncore/apps/dictionary	dictionary.pro
 CONFIG_GSMTOOL	noncore/comm/gsmtool	gsmtool.pro
 CONFIG_KEYVIEW	development/keyview	keyview.pro
-CONFIG_ROTTEST	development/rottest	rottest.pro
 CONFIG_LAN	noncore/unsupported/netsetup/lan	lan.pro
 CONFIG_LIB	noncore/unsupported/opiemail/lib	lib.pro
 CONFIG_LIBFFMPEG	core/multimedia/opieplayer/libffmpeg	libffmpeg.pro
