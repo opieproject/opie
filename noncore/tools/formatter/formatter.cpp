@@ -470,17 +470,18 @@ QString FormatterApp::getFileSystemType(const QString &currentText) {
 
 bool FormatterApp::doFsck() {
 
-  Output *outDlg;
-      QString selectedDevice;
-//f defined(QT_QWS_IPAQ) || defined(QT_QWS_EBX) // lets test on something cheap
+    Output *outDlg;
+    QString selectedDevice;
+#if defined(QT_QWS_IPAQ) || defined(QT_QWS_EBX) 
     selectedDevice = deviceComboBox->currentText();
-//#else
+#else
+      // for testing
 //    currentText  = diskDevice  = "/dev/fd0";
-  QString  umountS = "umount -v /floppy 2>&1";
-  QString  remountS = "mount -v /floppy 2>&1";
-  selectedDevice ="/dev/fd0";
+    QString umountS = "umount -v /floppy 2>&1";
+    QString remountS = "mount -v /floppy 2>&1";
+    selectedDevice ="/dev/fd0";
   
-//#endif
+#endif
 
     QString fsType = getFileSystemType((const QString &)selectedDevice);
     QString cmd;
