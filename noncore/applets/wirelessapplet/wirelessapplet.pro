@@ -1,7 +1,7 @@
 TEMPLATE     = lib
 CONFIG      += qt plugin warn_on release
-HEADERS      = wireless.h networkinfo.h mgraph.h advancedconfig.h
-SOURCES      = wireless.cpp networkinfo.cpp mgraph.cpp advancedconfig.cpp
+HEADERS      = wireless.h mgraph.h advancedconfig.h
+SOURCES      = wireless.cpp mgraph.cpp advancedconfig.cpp
 INTERFACES   = advancedconfigbase.ui
 TARGET       = wirelessapplet
 DESTDIR      = $(OPIEDIR)/plugins/applets

@@ -12,7 +12,6 @@
 **********************************************************************/
 
 #include "wireless.h"
-#include "networkinfo.h"
 #include "mgraph.h"
 #include "advancedconfig.h"
 #include "connect0.xpm"
@@ -51,8 +50,8 @@
 #define STYLE_BARS 0
 #define STYLE_ANTENNA 1
 
-//#define MDEBUG
-#undef MDEBUG
+#define MDEBUG
+//#undef MDEBUG
 
 WirelessControl::WirelessControl( WirelessApplet *applet, QWidget *parent, const char *name )
         : QFrame( parent, name, WStyle_StaysOnTop | WType_Popup ), applet( applet )
@@ -325,32 +324,26 @@ WirelessApplet::~WirelessApplet()
 
 void WirelessApplet::timerEvent( QTimerEvent* )
 {
-    /*
-
+    qDebug( "WirelessApplet::timerEvent" );
     OWirelessNetworkInterface* iface = interface;
 
     if ( iface )
     {
-        bool statResult = iface->updateStatistics();
-        if ( !statResult )
+        if ( mustRepaint() )
         {
-            interface = 0;
-            mustRepaint();
-            return ;
+            qDebug( "WIFIAPPLET: A value has changed -> repainting." );
+            repaint();
         }
-        else
-            if ( mustRepaint() )
-            {
-                //qDebug( "WIFIAPPLET: A value has changed -> repainting." );
-                repaint();
-            }
 
         if ( status->isVisible() )
+        {
             updatePopupWindow();
+        }
     }
-    else checkInterface();
-
-    */
+    else
+    {
+        checkInterface();
+    }
 }
 
 void WirelessApplet::mousePressEvent( QMouseEvent * )
@@ -450,28 +443,28 @@ bool WirelessApplet::mustRepaint()
 
 void WirelessApplet::updatePopupWindow()
 {
-    MWirelessNetworkInterface * iface = ( MWirelessNetworkInterface* ) interface;
-    int qualityH = iface->qualityPercent();
+    OWirelessNetworkInterface* iface = interface;
+    int qualityH = iface->signalStrength();
 
     if ( status->mgraph )
         status->mgraph->addValue( qualityH, false );
 
     QString freqString;
-    QString cell = ( iface->mode == "Managed" ) ? "AP: " : "Cell: ";
-    freqString.sprintf( "%.3f GHz", iface->freq );
-    status->statusLabel->setText( "Station: " + iface->nick + "<br>" +
-                                  "ESSID: " + iface->essid + "<br>" +
-                                  "MODE: " + iface->mode + "<br>" +
+    QString cell = ( iface->mode() == "Managed" ) ? "AP: " : "Cell: ";
+    freqString.sprintf( "%.3f GHz", iface->frequency() );
+    status->statusLabel->setText( "Station: " + iface->nickName() + "<br>" +
+                                  "ESSID: " + iface->SSID() + "<br>" +
+                                  "MODE: " + iface->mode() + "<br>" +
                                   "FREQ: " + freqString + "<br>" +
-                                  cell + " " + iface->APAddr );
+                                  cell + " " + iface->associatedAP().toString() );
 }
 
 const char** WirelessApplet::getQualityPixmap()
 {
-    MWirelessNetworkInterface * iface = ( MWirelessNetworkInterface* ) interface;
+    OWirelessNetworkInterface* iface = interface;
 
     if ( !iface ) return ( const char** ) nowireless_xpm;
-    int qualityH = iface->qualityPercent();
+    int qualityH = iface->signalStrength();
     if ( qualityH < 0 ) return ( const char** ) nowireless_xpm;
 
     if ( visualStyle == STYLE_ANTENNA )
@@ -489,7 +482,7 @@ const char** WirelessApplet::getQualityPixmap()
 
 void WirelessApplet::paintEvent( QPaintEvent* )
 {
-    MWirelessNetworkInterface * iface = ( MWirelessNetworkInterface* ) interface;
+    OWirelessNetworkInterface* iface = interface;
 
     QPainter p( this );
     QColor color;
@@ -501,9 +494,9 @@ void WirelessApplet::paintEvent( QPaintEvent* )
     else
     {
 
-        int noiseH = iface->noisePercent() * ( height() - 3 ) / 100;
-        int signalH = iface->signalPercent() * ( height() - 3 ) / 100;
-        int qualityH = iface->qualityPercent() * ( height() - 3 ) / 100;
+        int noiseH = 30; // iface->noisePercent() * ( height() - 3 ) / 100;
+        int signalH = 50; // iface->signalPercent() * ( height() - 3 ) / 100;
+        int qualityH = iface->signalStrength(); // iface->qualityPercent() * ( height() - 3 ) / 100;
 
         double intensity;
         int pixelHeight;
