@@ -114,8 +114,8 @@ FormatTabWidget::FormatTabWidget( QWidget *parent )
 	//dateButton->setDateFormat( df );
 
 	config.setGroup( "Time" );
-	cbAmpm->setCurrentItem( config.readBoolEntry( "AMPM" ) ? 1 : 0 );
-	cbWeekStart->setCurrentItem( config.readBoolEntry( "MONDAY" ) ? 1 : 0 );
+	cbAmpm->setCurrentItem( config.readBoolEntry( "AMPM", FALSE ) ? 1 : 0 );
+	cbWeekStart->setCurrentItem( config.readBoolEntry( "MONDAY", TRUE ) ? 1 : 0 );
 
 	// Send initial configuration options
 	QTimer::singleShot( 1200, this, SLOT(sendOptions()) );
