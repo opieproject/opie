@@ -53,13 +53,14 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
 //     mimeType =  mimeFilter;
 //     MimeType mt( mimeType);
 //     if( mt.extension().isEmpty())
-    QStringList filterList;
-    filterList=QStringList::split(";",mimeFilter,FALSE);
-     for ( QStringList::Iterator it = filterList.begin(); it != filterList.end(); ++it ) {
-            printf( "%s \n", (*it).latin1() );
-        }
+//     QStringList filterList;
+//     filterList=QStringList::split(";",mimeFilter,FALSE);
+//      for ( QStringList::Iterator it = filterList.begin(); it != filterList.end(); ++it ) {
+//             printf( "%s \n", (*it).latin1() );
+//         }
 
-    filterStr = mimeFilter.right(mimeFilter.length()- mimeFilter.find("/",0,TRUE) - 1);// "*";
+      filterStr = mimeFilter.right(mimeFilter.length() - mimeFilter.find("/",0,TRUE) - 1);// "*";
+    
     qDebug(filterStr);
 //     else
 //         filterStr = "*."+ mt.extension();
