@@ -3,159 +3,160 @@
     <name>Ntp</name>
     <message>
         <source>time.fu-berlin.de</source>
-        <translation type="unfinished"></translation>
+        <translation>chronos.cru.fr</translation>
     </message>
     <message>
         <source>Run NTP?</source>
-        <translation type="unfinished"></translation>
+        <translation>Lancer NTP?</translation>
     </message>
     <message>
         <source>Running:</source>
-        <translation type="unfinished"></translation>
+        <translation>Running:</translation>
     </message>
     <message>
         <source>Error while executing ntpdate</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur lors de l&apos;execution de ntpdate</translation>
     </message>
     <message>
         <source> seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>secondes</translation>
     </message>
     <message>
         <source>last [h]</source>
-        <translation type="unfinished"></translation>
+        <translation>dernier [h]</translation>
     </message>
     <message>
         <source>offset [s]</source>
-        <translation type="unfinished"></translation>
+        <translation>offset [s]</translation>
     </message>
     <message>
         <source>shift [s/h]</source>
-        <translation type="unfinished"></translation>
+        <translation>Décalage [s/h]</translation>
     </message>
     <message>
         <source> s/h</source>
-        <translation type="unfinished"></translation>
+        <translation>s/h</translation>
     </message>
     <message>
         <source>Get time from network</source>
-        <translation type="unfinished"></translation>
+        <translation>Obtenir l&apos;heure par le réseau</translation>
     </message>
     <message>
         <source>Set predicted time: </source>
-        <translation type="unfinished"></translation>
+        <translation>Définir la prévision de l&apos;heure:</translation>
     </message>
     <message>
         <source>Could not connect to server </source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de se connecter au serveur</translation>
     </message>
     <message>
         <source>Predict</source>
-        <translation type="unfinished"></translation>
+        <translation>Prév</translation>
     </message>
     <message>
         <source>NTP</source>
-        <translation type="unfinished"></translation>
+        <translation>NTP</translation>
     </message>
     <message>
         <source>Main</source>
-        <translation type="unfinished"></translation>
+        <translation>Géneral</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Options</translation>
     </message>
     <message>
         <source>ntp error</source>
-        <translation type="unfinished"></translation>
+        <translation>erreur ntp</translation>
     </message>
     <message>
         <source>Error while getting time form network!</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur lors de l&apos;optention de l&apos;heure par le réseau!</translation>
     </message>
     <message>
         <source>Error while getting time form
  server</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur lors de l&apos;obtention de l&apos;heure
+à partir du serveur</translation>
     </message>
     <message>
         <source>You asked for a delay of %1 minutes, but only %2 minutes elapsed since last lookup. &lt;br&gt; Rerun NTP?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous avez demandé un délai de %1, mais seulement %2 minute(s) se sont écoulée(s).&lt;br&gt; Relancer NTP?</translation>
     </message>
 </context>
 <context>
     <name>NtpBase</name>
     <message>
         <source>Network Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Network Time</translation>
     </message>
     <message>
         <source>Get time from network</source>
-        <translation type="unfinished"></translation>
+        <translation>Obtenir la date d&apos;un serveur NTP</translation>
     </message>
     <message>
         <source>Start Time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Heure de départ:</translation>
     </message>
     <message>
         <source>nan</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucune</translation>
     </message>
     <message>
         <source>Time Shift:</source>
-        <translation type="unfinished"></translation>
+        <translation>Décalage de l&apos;heure:</translation>
     </message>
     <message>
         <source>New Time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nouvelle heure:</translation>
     </message>
     <message>
         <source>Esimated Shift:</source>
-        <translation type="unfinished"></translation>
+        <translation>Décalage estimé:</translation>
     </message>
     <message>
         <source>Predicted Time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Heure calculée:</translation>
     </message>
     <message>
         <source>Mean shift:</source>
-        <translation type="unfinished"></translation>
+        <translation>Décalage moyen:</translation>
     </message>
     <message>
         <source>Set predicted time</source>
-        <translation type="unfinished"></translation>
+        <translation>Fixer la prévision de l&apos;heure</translation>
     </message>
     <message>
         <source>Predict time</source>
-        <translation type="unfinished"></translation>
+        <translation>Heure prévu</translation>
     </message>
     <message>
         <source>Use</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser</translation>
     </message>
     <message>
         <source>as</source>
-        <translation type="unfinished"></translation>
+        <translation>comme</translation>
     </message>
     <message>
         <source>NTP server to get the time from the network.</source>
-        <translation type="unfinished"></translation>
+        <translation>serveur NTP pour obtenir la date et l&apos;heure.</translation>
     </message>
     <message>
         <source>Wait for </source>
-        <translation type="unfinished"></translation>
+        <translation>Attendre</translation>
     </message>
     <message>
         <source>minutes until</source>
-        <translation type="unfinished"></translation>
+        <translation>minute(s) avant</translation>
     </message>
     <message>
         <source>NTP tries to syncronises the clock with the network.</source>
-        <translation type="unfinished"></translation>
+        <translation>que NTP essaye de synchroniser l&apos;heure avec le réseau.</translation>
     </message>
     <message>
         <source>Insure a delay of</source>
-        <translation type="unfinished"></translation>
+        <translation>S&apos;assurer d&apos;un délai de</translation>
     </message>
     <message>
         <source>a new NTP lookup will be used to predict the time.</source>
