@@ -43,6 +43,7 @@ public slots:
     void slotRotateToggled(bool);
     void slotScaleToggled(bool);
     void slotZoomerToggled(bool);
+    void slotToggleZoomer();
     void setDocument( const QString& );
     virtual void slotToggleFullScreen();
 
@@ -65,7 +66,7 @@ private:
     bool autoScale;
     bool zoomerOn;
     QToolButton*rotateButton,*upButton,*fsButton,*viewModeButton;
-    QToolButton*nextButton,*prevButton;
+    QToolButton*nextButton,*prevButton,*zoomButton;
 
 private slots:
     void slotConfig();

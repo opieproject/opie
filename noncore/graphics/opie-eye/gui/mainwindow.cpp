@@ -135,16 +135,23 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
     connect(btn,SIGNAL(toggled(bool)),this,SLOT(slotScaleToggled(bool)));
     autoScale = true;
 
-    btn = new QToolButton(bar);
-    btn->setIconSet( Resource::loadIconSet( "mag" ) );
-    btn->setToggleButton(true);
-    btn->setOn(true);
-    connect(btn,SIGNAL(toggled(bool)),this,SLOT(slotZoomerToggled(bool)));
+    zoomButton = new QToolButton(bar);
+    zoomButton->setIconSet( Resource::loadIconSet( "mag" ) );
+    zoomButton->setToggleButton(true);
+    zoomButton->setOn(true);
+    connect(zoomButton,SIGNAL(toggled(bool)),this,SLOT(slotZoomerToggled(bool)));
     zoomerOn = true;
 }
 
 PMainWindow::~PMainWindow() {
     odebug << "Shutting down" << oendl;
+}
+
+void PMainWindow::slotToggleZoomer()
+{
+    if (!m_disp) return;
+    bool cur = zoomButton->isOn();
+    zoomButton->setOn(!cur);
 }
 
 void PMainWindow::slotZoomerToggled(bool how)
@@ -287,6 +294,7 @@ void PMainWindow::initDisp() {
         connect(m_disp,SIGNAL(dispPrev()),m_view,SLOT(slotShowPrev()));
         connect(m_disp,SIGNAL(toggleFullScreen()),this,SLOT(slotToggleFullScreen()));
         connect(m_disp,SIGNAL(hideMe()),this,SLOT(raiseIconView()));
+        connect(m_disp,SIGNAL(toggleZoomer()),this,SLOT(slotToggleZoomer()));
     }
 }
 

@@ -16,7 +16,10 @@ class ImageView:public Opie::MM::OImageScrollView
 
     enum ActionIds {
         ViewInfo,
-        FullScreen
+        FullScreen,
+        ShowNext,
+        ShowPrevious,
+        Zoomer,
     };
 
 public:
@@ -32,6 +35,7 @@ signals:
     void dispPrev();
     void toggleFullScreen();
     void hideMe();
+    void toggleZoomer();
 
 protected:
     Opie::Core::OConfig * m_cfg;
@@ -41,8 +45,6 @@ protected:
 
 protected slots:
     virtual void slotShowImageInfo();
-    virtual void slotDispNext();
-    virtual void slotDispPrev();
     virtual void keyReleaseEvent(QKeyEvent * e);
 };
 #endif

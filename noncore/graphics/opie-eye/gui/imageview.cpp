@@ -44,9 +44,7 @@ void ImageView::initKeys()
     lst.append( Opie::Core::OKeyPair::downArrowKey() );
     lst.append( Opie::Core::OKeyPair::leftArrowKey() );
     lst.append( Opie::Core::OKeyPair::rightArrowKey() );
-    lst.append( Opie::Core::OKeyPair(Qt::Key_N,0));
-    lst.append( Opie::Core::OKeyPair(Qt::Key_P,0));
-    lst.append( Opie::Core::OKeyPair(Qt::Key_F,0));
+    lst.append( Opie::Core::OKeyPair(Qt::Key_Escape,0));
 
     m_viewManager = new Opie::Core::OKeyConfigManager(m_cfg, "image_view_keys",
                                                     lst, false,this, "image_view_keys" );
@@ -54,6 +52,23 @@ void ImageView::initKeys()
                                                 Resource::loadPixmap("1to1"), ViewInfo,
                                                 Opie::Core::OKeyPair(Qt::Key_I,0),
                                                 this, SLOT(slotShowImageInfo())));
+
+    m_viewManager->addKeyConfig( Opie::Core::OKeyConfigItem(tr("Switch to next image"), "imageshownext",
+                                                Resource::loadPixmap("forward"), ShowNext,
+                                                Opie::Core::OKeyPair(Qt::Key_N,0),
+                                                this, SIGNAL(dispNext())));
+    m_viewManager->addKeyConfig( Opie::Core::OKeyConfigItem(tr("Switch to previous image"), "imageshowprev",
+                                                Resource::loadPixmap("back"), ShowPrevious,
+                                                Opie::Core::OKeyPair(Qt::Key_P,0),
+                                                this, SIGNAL(dispPrev())));
+    m_viewManager->addKeyConfig( Opie::Core::OKeyConfigItem(tr("Toggle fullscreen"), "imagefullscreen",
+                                                Resource::loadPixmap("fullscreen"), FullScreen,
+                                                Opie::Core::OKeyPair(Qt::Key_F,0),
+                                                this, SIGNAL(toggleFullScreen())));
+    m_viewManager->addKeyConfig( Opie::Core::OKeyConfigItem(tr("Toggle thumbnail"), "imagezoomer",
+                                                Resource::loadPixmap("mag"), Zoomer,
+                                                Opie::Core::OKeyPair(Qt::Key_T,0),
+                                                this, SIGNAL(toggleZoomer())));
     m_viewManager->handleWidget( this );
     m_viewManager->load();
 }
@@ -63,20 +78,7 @@ void ImageView::keyReleaseEvent(QKeyEvent * e)
     if (!e || e->state()!=0) {
         return;
     }
-    if (e->key()==Qt::Key_N) slotDispNext();
-    if (e->key()==Qt::Key_P) slotDispPrev();
-    if (e->key()==Qt::Key_F) emit toggleFullScreen();
     if (e->key()==Qt::Key_Escape && fullScreen()) emit hideMe();
-}
-
-void ImageView::slotDispNext()
-{
-    emit dispNext();
-}
-
-void ImageView::slotDispPrev()
-{
-    emit dispPrev();
 }
 
 void ImageView::slotShowImageInfo()
