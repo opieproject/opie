@@ -27,10 +27,10 @@ int main( int argc, char ** argv ) {
     QPEApplication a(argc, argv);
     BluetoothApp=&a;
 
-    OpieTooth::BlueBase t;
+    OpieTooth::BlueBase *t = new OpieTooth::BlueBase();
 
     // t.setCaption( OpieTooth::BlueBase::tr("Bluetooth Manager") );
-    a.showMainWidget(&t);
+    a.showMainWidget(t);
 
     return a.exec();
 }
