@@ -11,15 +11,5 @@ LIBS            += -lqpe -lopiecore2 -lopiepim2 -lopieui2
 
 TARGET		= today
 
-include(
-
-
-
-
-
-
-
-
-
- $(OPIEDIR)/include.pro )
+include( $(OPIEDIR)/include.pro )
 

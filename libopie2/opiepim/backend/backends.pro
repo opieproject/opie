@@ -23,7 +23,7 @@ HEADERS += \
         backend/otodoaccessxml.h               
 
 contains( ENABLE_SQL_PIM_BACKEND, y ) {
-	message( Enabling the SQL Backend for libopiepim2 )
+	message ( Enabling the SQL Backend for libopiepim2 )
 	DEFINES += __USE_SQL
 	LIBS    += -lopiedb2
 	HEADERS += backend/otodoaccesssql.h             \
@@ -35,6 +35,6 @@ contains( ENABLE_SQL_PIM_BACKEND, y ) {
 }
 
 !contains( ENABLE_SQL_PIM_BACKEND, y ) {
-	message( No SQL Backend in libopiepim2 )
+	message ( No SQL Backend in libopiepim2 )
 }
 

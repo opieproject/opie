@@ -8,29 +8,4 @@ LIBS            += -lqpe -lopiecore2
 INTERFACES	=
 TARGET          = helpbrowser
 
-include(
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- $(OPIEDIR)/include.pro )
+include( $(OPIEDIR)/include.pro )

@@ -11,6 +11,4 @@ TARGET		= ocopserver
 
 
 
-include(
-
- $(OPIEDIR)/include.pro )
+include( $(OPIEDIR)/include.pro )

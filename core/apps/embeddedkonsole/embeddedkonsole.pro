@@ -36,31 +36,4 @@ LIBS        += -lqpe -lopiecore2 -lqtaux2 -lutil
 #DEFINES     += HAVE_OPENPTY
 #LIBS        += -lqpe -lutil
 
-include(
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- $(OPIEDIR)/include.pro )
+include( $(OPIEDIR)/include.pro )

@@ -14,23 +14,4 @@ MOC_DIR		= .build
 OBJECTS_DIR	= .build
 UI_DIR		= .build
 
-include(
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- $(OPIEDIR)/include.pro )
+include( $(OPIEDIR)/include.pro )

@@ -11,41 +11,7 @@ DEPENDPATH      +=  ..
 LIBS            += -lqpe -lm
 VERSION   =   1.0.0
 
-include(
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- $(OPIEDIR)/include.pro )
+include( $(OPIEDIR)/include.pro )
 	
 DEFINES += FPM_INTEL
 

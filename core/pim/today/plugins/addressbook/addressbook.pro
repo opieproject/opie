@@ -18,14 +18,4 @@ LIBS+= -lqpe -lopiecore2 -lopieui2 -lopiepim2 -lqtaux2
 DESTDIR = $(OPIEDIR)/plugins/today
 TARGET = todayaddressbookplugin
 
-include(
-
-
-
-
-
-
-
-
-
- $(OPIEDIR)/include.pro )
+include( $(OPIEDIR)/include.pro )

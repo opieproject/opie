@@ -8,27 +8,4 @@ DEPENDPATH	+= $(QTDIR)/include $(OPIEDIR)/include
 TARGET		= calibrate
 LIBS		+= -lqpe 
 
-include(
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- $(OPIEDIR)/include.pro )
+include( $(OPIEDIR)/include.pro )

@@ -17,20 +17,4 @@ DEPENDPATH	+= $(OPIEDIR)/include .
 TARGET		= qws
 LIBS		+= -lqpe -lopiecore2 -lopieui2
 
-include(
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- $(OPIEDIR)/include.pro )
+include( $(OPIEDIR)/include.pro )

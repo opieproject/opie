@@ -13,38 +13,4 @@ DEPENDPATH      +=   ..
 LIBS            +=  -lqpe
 VERSION		=   1.0.0
 
-include(
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- $(OPIEDIR)/include.pro )
+include( $(OPIEDIR)/include.pro )

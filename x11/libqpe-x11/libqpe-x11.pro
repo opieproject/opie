@@ -144,8 +144,4 @@ VERSION		= 1.5.0.1
 
 
 
-include(
-
-
-
- $(OPIEDIR)/include.pro )
+include( $(OPIEDIR)/include.pro )

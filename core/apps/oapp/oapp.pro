@@ -15,20 +15,4 @@ DESTDIR		= $(OPIEDIR)/lib$(PROJMAK)
 INCLUDEPATH	+= $(OPIEDIR)/include 
 DEPENDPATH	+= $(OPIEDIR)/include .
 
-include(
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- $(OPIEDIR)/include.pro )
+include( $(OPIEDIR)/include.pro )
