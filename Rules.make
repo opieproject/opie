@@ -9,6 +9,8 @@ $(TOPDIR)/gen.pro : $(TOPDIR)/.config
 ifneq ($(CONFIG_DEBUG),)
 	echo CONFIG += debug >> $@
 	echo CONFIG -= release >> $@
+	echo DEFINES += "QT_COMPONENT_DEBUG=2" >> $@
+	echo DEFINES += QT_DEBUG >> $@
 else
 	echo CONFIG -= debug >> $@
 	echo CONFIG += release >> $@
