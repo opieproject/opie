@@ -501,39 +501,48 @@ void TextEdit::fileNew()
 
 void TextEdit::fileOpen()
 {
-    QString str = OFileDialog::getOpenFileName(1,"/","", QStringList() , this );
-    if(!str.isEmpty() )
-        openFile( str );
-//     browseForFiles = new fileBrowser(this,tr("Open File"),TRUE,0, "text/*"); //
-//     browseForFiles->setFileView( viewSelection );
-//     browseForFiles->showMaximized();
-// //    if( result != -1 )
+    Config cfg("TextEdit");
+    cfg.setGroup("View");
+    bool b=FALSE;
+        if(cfg.readEntry("useOldFileDialog") == "TRUE")
+    b=TRUE;
+    if(!b) {
+        QString str = OFileDialog::getOpenFileName( 1,"/","", "text/plain", this );
+        if(!str.isEmpty() )
+            openFile( str );
+    } else {
+        QString str;
+        browseForFiles = new fileBrowser(this,tr("Open File"),TRUE,0, "text/*"); //
+        browseForFiles->setFileView( viewSelection );
+        browseForFiles->showMaximized();
+//    if( result != -1 )
 
-//     if( browseForFiles->exec() != -1 ) {
-//         QString selFile = browseForFiles->selectedFileName;
-//         QStringList fileList = browseForFiles->fileList;
-//         qDebug(selFile);
-//         QStringList::ConstIterator f;
-//         QString fileTemp;
-//         for (  f = fileList.begin(); f != fileList.end(); f++ ) {
-//             fileTemp = *f;
-//             fileTemp.right( fileTemp.length()-5);
-//             QString  fileName = fileTemp;
-//             if( fileName != "Unnamed" || fileName != "Empty Text"  ) {
-//                 currentFileName = fileName;
-//                 qDebug("please open "+currentFileName);
-//                 openFile(str );
-//             }
-//         }
-//         viewSelection = browseForFiles->SelectionCombo->currentItem();
-//     }
-//     delete browseForFiles;
-//     editor->setEdited( FALSE);
-//     edited1=FALSE;
-//     edited=FALSE;
-//     if(caption().left(1)=="*")
-//         setCaption(caption().right(caption().length()-1));
-//     doSearchBar();
+        if( browseForFiles->exec() != -1 ) {
+            QString selFile = browseForFiles->selectedFileName;
+            QStringList fileList = browseForFiles->fileList;
+            qDebug(selFile);
+            QStringList::ConstIterator f;
+            QString fileTemp;
+            for (  f = fileList.begin(); f != fileList.end(); f++ ) {
+                fileTemp = *f;
+                fileTemp.right( fileTemp.length()-5);
+                QString  fileName = fileTemp;
+                if( fileName != "Unnamed" || fileName != "Empty Text"  ) {
+                    currentFileName = fileName;
+                    qDebug("please open "+currentFileName);
+                    openFile(str );
+                }
+            }
+            viewSelection = browseForFiles->SelectionCombo->currentItem();
+        }
+        delete browseForFiles;
+        editor->setEdited( FALSE);
+        edited1=FALSE;
+        edited=FALSE;
+        if(caption().left(1)=="*")
+            setCaption(caption().right(caption().length()-1));
+        doSearchBar();
+    }
 }
 
 void TextEdit::doSearchBar()

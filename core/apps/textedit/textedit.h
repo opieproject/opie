@@ -57,7 +57,7 @@ public:
     ~TextEdit();
 
     QPopupMenu *font;
-    QAction *nStart;
+    QAction *nStart, *nFileDlgOpt;
     bool edited, edited1;
     void openFile( const QString & );
         QCopChannel * channel;

@@ -11,7 +11,7 @@
 ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 **
 ****************************************************************************/
-//#define QTOPIA_INTERNAL_MIMEEXT
+#define QTOPIA_INTERNAL_MIMEEXT
 #include "fileBrowser.h"
 //#include "inputDialog.h"
 
@@ -50,24 +50,30 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
     if ( !name )
         setName( "fileBrowser" );
     setCaption(tr( name ) );
-//     mimeType =  mimeFilter;
-//     MimeType mt( mimeType);
-//     if( mt.extension().isEmpty())
-//     QStringList filterList;
-//     filterList=QStringList::split(";",mimeFilter,FALSE);
-//      for ( QStringList::Iterator it = filterList.begin(); it != filterList.end(); ++it ) {
-//             printf( "%s \n", (*it).latin1() );
-//         }
 
-      filterStr = mimeFilter.right(mimeFilter.length() - mimeFilter.find("/",0,TRUE) - 1);// "*";
+//    getMimeTypes();
+
+    mimeType =  mimeFilter;
+    MimeType mt( mimeType);
+
+    if( mt.extension().isEmpty()) {
+
+        QStringList filterList;
+        filterList=QStringList::split(";",mimeFilter,FALSE);
+
+        for ( QStringList::Iterator it = filterList.begin(); it != filterList.end(); ++it ) {
+            printf( "%s \n", (*it).latin1() );
+        }
+
+        filterStr = mimeFilter.right(mimeFilter.length() - mimeFilter.find("/",0,TRUE) - 1);// "*";
     
-    qDebug(filterStr);
-//     else
-//         filterStr = "*."+ mt.extension();
+        qDebug(filterStr);
+    } else {
+        filterStr = "*."+ mt.extension();
 //      qDebug("description "+mt.description());
 //      qDebug( "id "+mt.id());
 //      qDebug("extension "+mt.extension());
-
+    }
 //      channel = new QCopChannel( "QPE/fileDialog", this );
 //      connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
 //         this, SLOT(receive(const QCString&, const QByteArray&)) );
@@ -234,7 +240,7 @@ void fileBrowser::populateList()
                 if(  fileL.find("->",0,TRUE) != -1) {
                       // overlay link image
                     pm= Resource::loadPixmap( "folder" );
-                    QPixmap lnk = Resource::loadPixmap( "symlink" );
+                    QPixmap lnk = Resource::loadPixmap( "opie/symlink" );
                     QPainter painter( &pm );
                     painter.drawPixmap( pm.width()-lnk.width(), pm.height()-lnk.height(), lnk );
                     pm.setMask( pm.createHeuristicMask( FALSE ) );
@@ -492,7 +498,7 @@ void fileBrowser::updateMimeTypeMenu() {
 
 void fileBrowser::showType(const QString &t) {
 
-    qDebug(t);
+//    qDebug("Show type "+t);
     if(t.find("All",0,TRUE) != -1) {
         filterStr =  "*";
     } else {
@@ -500,15 +506,17 @@ void fileBrowser::showType(const QString &t) {
         QString ext;     
         for ( QStringList::Iterator it = list.begin(); it != list.end(); ++it ) {
             mimeType =(*it);
-            MimeType mt( mimeType);
-//            qDebug("mime "+mimeType);
-//         qDebug("description "+mt.description());
-//         qDebug( "id "+mt.id());
-//            qDebug("extension "+mt.extension());
-//             if( mt.extension().isEmpty())
+            MimeType mt(mimeType);
+
+//             qDebug("mime "+mimeType);
+//             qDebug("description "+mt.description());
+//             qDebug( "id "+mt.id());
+//             qDebug("extension "+mt.extension());
+
+            if( mt.extension().isEmpty())
                 filterStr =  "*";
-//             else
-//                 filterStr = "*."+ mt.extension()+" ";
+            else
+                filterStr = "*."+ mt.extension()+" ";
 //         printf( "%s \n", (*it).latin1() );
         }
     }
@@ -546,10 +554,11 @@ QStringList fileBrowser::getMimeTypes() {
         QStringList::ConstIterator f;
         for (  f = maj.begin(); f != maj.end(); f++ ) {
             QString  temp = *f;
+            qDebug("type "+temp);
             mimetypes << temp;
             int sl = temp.find('/');
             if (sl >= 0) {
-                QString k = temp.left(sl);
+                QString k = temp;//.left(sl);
                 if( r.grep(k,TRUE).isEmpty() ) {
                     r << k;
                     k+="\n";
