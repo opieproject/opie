@@ -24,6 +24,7 @@ HEADERS   = ofontmenu.h \
     pim/ocontactaccessbackend_xml.h \
     pim/obackendfactory.h \
     pim/opimcache.h \ 
+    pim/otodoaccessvcal.h \
 #    pim/otodoaccesssql.h \
 
 SOURCES   = ofontmenu.cc  \
@@ -43,7 +44,8 @@ SOURCES   = ofontmenu.cc  \
 	     pim/otodoaccessbackend.cpp \
              pim/otodoaccessxml.cpp \
              pim/ocontact.cpp \
-             pim/ocontactaccess.cpp
+             pim/ocontactaccess.cpp \
+	     pim/otodoaccessvcal.cpp \
 #             pim/otodoaccesssql.cpp \
 
 TARGET    = opie
