@@ -407,7 +407,7 @@ void MainWindowImp::updateInterface(Interface *i){
   if(i->getModuleOwner() != NULL)
     typeName = i->getModuleOwner()->getPixmapName(i);
   
-  item->setPixmap(1, (Resource::loadPixmap(QString("networksetup/") + typeName)));
+  item->setPixmap(1, (Resource::loadPixmap(QString("networksettings/") + typeName)));
   item->setText(2, i->getHardwareName());
   item->setText(3, QString("(%1)").arg(i->getInterfaceName()));
   item->setText(4, (i->getStatus()) ? i->getIp() : QString(""));

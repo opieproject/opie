@@ -1,7 +1,7 @@
 TEMPLATE        = lib
 CONFIG          += qt warn_on release
 #CONFIG		+= qt warn_on debug
-DESTDIR         = $(OPIEDIR)/plugins/networksetup
+DESTDIR         = $(OPIEDIR)/plugins/networksettings
 HEADERS		= pppimp.h pppmodule.h
 SOURCES		= pppimp.cpp pppmodule.cpp
 INCLUDEPATH	+= $(OPIEDIR)/include ../ ../interfaces/
