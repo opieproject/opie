@@ -156,7 +156,7 @@
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar</translation>
     </message>
 </context>
 <context>
@@ -198,19 +198,19 @@
     </message>
     <message>
         <source>White</source>
-        <translation type="unfinished"></translation>
+        <translation>Branco</translation>
     </message>
     <message>
         <source>Gray</source>
-        <translation type="unfinished"></translation>
+        <translation>Cinzento</translation>
     </message>
     <message>
         <source>Background:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fundo:</translation>
     </message>
     <message>
         <source>Font:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fonte:</translation>
     </message>
     <message>
         <source>Micro</source>
@@ -218,11 +218,11 @@
     </message>
     <message>
         <source>Small</source>
-        <translation type="unfinished"></translation>
+        <translation>Pequena</translation>
     </message>
     <message>
         <source>Medium</source>
-        <translation type="unfinished"></translation>
+        <translation>Média</translation>
     </message>
 </context>
 <context>
@@ -247,18 +247,18 @@
     <name>FunctionKeyboardConfig</name>
     <message>
         <source>Dimensions</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimensões</translation>
     </message>
     <message>
         <source>Edit Key</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar Tecla</translation>
     </message>
 </context>
 <context>
     <name>IOLayerBase</name>
     <message>
         <source>Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Velocidade</translation>
     </message>
     <message>
         <source>Flow control</source>
@@ -278,15 +278,15 @@
     </message>
     <message>
         <source>Parity</source>
-        <translation type="unfinished"></translation>
+        <translation>Paridade</translation>
     </message>
     <message>
         <source>Odd</source>
-        <translation type="unfinished"></translation>
+        <translation>Par</translation>
     </message>
     <message>
         <source>Even</source>
-        <translation type="unfinished"></translation>
+        <translation>Ímpar</translation>
     </message>
     <message>
         <source>Data Bits</source>
@@ -294,19 +294,19 @@
     </message>
     <message>
         <source>5</source>
-        <translation type="unfinished"></translation>
+        <translation>5</translation>
     </message>
     <message>
         <source>6</source>
-        <translation type="unfinished"></translation>
+        <translation>6</translation>
     </message>
     <message>
         <source>7</source>
-        <translation type="unfinished"></translation>
+        <translation>7</translation>
     </message>
     <message>
         <source>8</source>
-        <translation type="unfinished"></translation>
+        <translation>8</translation>
     </message>
     <message>
         <source>Stop Bits</source>
@@ -314,15 +314,15 @@
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>1.5</source>
-        <translation type="unfinished"></translation>
+        <translation>1.5</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation>2</translation>
     </message>
     <message>
         <source>115200 baud</source>

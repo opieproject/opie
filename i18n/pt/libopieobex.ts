@@ -1,17 +1,17 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>OpieObex::OtherHandler</name>
+    <name>OtherHandler</name>
     <message>
         <source>&lt;qt&gt;&lt;b&gt;Received:&lt;/b&gt;&lt;/qt&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Accept</source>
-        <translation type="unfinished"></translation>
+        <translation>Aceitar</translation>
     </message>
     <message>
         <source>Deny</source>
-        <translation type="unfinished"></translation>
+        <translation>Rejeitar</translation>
     </message>
     <message>
         <source>&lt;p&gt;You received a file of type %1 (&lt;img src=&quot;%2&quot;&gt; )What do you want to do?</source>
@@ -19,7 +19,7 @@
     </message>
 </context>
 <context>
-    <name>OpieObex::SendWidget</name>
+    <name>SendWidget</name>
     <message>
         <source>&lt;qt&gt;&lt;h1&gt;Sending:&lt;/h1&gt;&lt;/qt&gt;</source>
         <translation type="unfinished"></translation>
@@ -38,7 +38,7 @@
     </message>
     <message>
         <source>Bluetooth is not available</source>
-        <translation type="unfinished"></translation>
+        <translation>O bluetooth não está disponível</translation>
     </message>
     <message>
         <source>Searching for bluetooth Devices.</source>
@@ -50,23 +50,23 @@
     </message>
     <message>
         <source>Click to beam</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique para irradiar</translation>
     </message>
     <message>
         <source>Sent</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviado</translation>
     </message>
     <message>
         <source>Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Falhou</translation>
     </message>
     <message>
         <source>Try %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Tentativa %1</translation>
     </message>
     <message>
         <source>Search again for IrDa.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Procurar outra vez por </translation>
     </message>
     <message>
         <source>Start sending</source>

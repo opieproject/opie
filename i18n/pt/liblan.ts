@@ -3,7 +3,7 @@
     <name>Lan</name>
     <message>
         <source>LAN Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuração de Rede</translation>
     </message>
     <message>
         <source>This name already
@@ -36,7 +36,7 @@ different name.</source>
     </message>
     <message>
         <source>TCP/IP</source>
-        <translation type="unfinished"></translation>
+        <translation>TCP/IP</translation>
     </message>
     <message>
         <source>IP Address</source>
@@ -44,7 +44,7 @@ different name.</source>
     </message>
     <message>
         <source>Gateway</source>
-        <translation type="unfinished">Gateway</translation>
+        <translation>Gateway</translation>
     </message>
     <message>
         <source>Subnet Mask</source>
@@ -56,49 +56,49 @@ different name.</source>
     </message>
     <message>
         <source>DNS</source>
-        <translation type="unfinished"></translation>
+        <translation>DNS</translation>
     </message>
     <message>
         <source>First DNS</source>
-        <translation type="unfinished"></translation>
+        <translation>DNS Primário</translation>
     </message>
     <message>
         <source>Second DNS</source>
-        <translation type="unfinished"></translation>
+        <translation>DNS Secundário</translation>
     </message>
     <message>
         <source>Proxies</source>
-        <translation type="unfinished"></translation>
+        <translation>Proxies</translation>
     </message>
 </context>
 <context>
     <name>LanState</name>
     <message>
         <source>Form2</source>
-        <translation type="unfinished"></translation>
+        <translation>Form2</translation>
     </message>
     <message>
         <source>Service:</source>
-        <translation type="unfinished"></translation>
+        <translation>Serviço:</translation>
     </message>
     <message>
         <source>IP address:</source>
-        <translation type="unfinished"></translation>
+        <translation>Endereço IP:</translation>
     </message>
     <message>
         <source>0.0.0.0</source>
-        <translation type="unfinished"></translation>
+        <translation>0.0.0.0</translation>
     </message>
 </context>
 <context>
     <name>ProxiesPageBase</name>
     <message>
         <source>Proxy Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuração de Proxies</translation>
     </message>
     <message>
         <source>No proxies</source>
-        <translation type="unfinished"></translation>
+        <translation>Sem proxies</translation>
     </message>
     <message>
         <source>Auto configure proxies</source>
@@ -114,15 +114,15 @@ different name.</source>
     </message>
     <message>
         <source>Port:</source>
-        <translation type="unfinished"></translation>
+        <translation>Porta:</translation>
     </message>
     <message>
         <source>HTTP:</source>
-        <translation type="unfinished"></translation>
+        <translation>HTTP:</translation>
     </message>
     <message>
         <source>FTP:</source>
-        <translation type="unfinished"></translation>
+        <translation>FTP:</translation>
     </message>
     <message>
         <source>Host:</source>

@@ -30,7 +30,7 @@
     <name>TodayBase</name>
     <message>
         <source>Today</source>
-        <translation type="unfinished">Hoje</translation>
+        <translation>Hoje</translation>
     </message>
     <message>
         <source>Today by Maximilian Rei&#xdf;</source>
@@ -43,6 +43,10 @@
 </context>
 <context>
     <name>TodayConfig</name>
+    <message>
+        <source>Today config</source>
+        <translation type="unfinished">Configuração</translation>
+    </message>
     <message>
         <source>Load which plugins in what order:</source>
         <translation type="unfinished"></translation>
@@ -71,7 +75,7 @@ resume?
     </message>
     <message>
         <source>Misc</source>
-        <translation type="unfinished">Vários</translation>
+        <translation>Vários</translation>
     </message>
     <message>
         <source>Check this if today should be autostarted on resume.</source>
@@ -107,14 +111,6 @@ resume?
     </message>
     <message>
         <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Today Config</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tiny Banner</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

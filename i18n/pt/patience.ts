@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Freecell</source>
-        <translation type="unfinished"></translation>
+        <translation>Freecell</translation>
     </message>
     <message>
         <source>&amp;Game</source>
@@ -19,7 +19,7 @@
     </message>
     <message>
         <source>&amp;Snap To Position</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ir Para Posição</translation>
     </message>
     <message>
         <source>&amp;Settings</source>
@@ -39,11 +39,11 @@
     </message>
     <message>
         <source>Change Card Backs</source>
-        <translation type="unfinished"></translation>
+        <translation>Mudar Cartas</translation>
     </message>
     <message>
         <source>Snap To Position</source>
-        <translation type="unfinished"></translation>
+        <translation>Ir Para Posição</translation>
     </message>
     <message>
         <source>Turn One Card</source>
@@ -59,15 +59,15 @@
     </message>
     <message>
         <source>Chicane</source>
-        <translation type="unfinished"></translation>
+        <translation>Chicane</translation>
     </message>
     <message>
         <source>Harp</source>
-        <translation type="unfinished"></translation>
+        <translation>Harpa</translation>
     </message>
     <message>
         <source>Teeclub</source>
-        <translation type="unfinished"></translation>
+        <translation>Teeclub</translation>
     </message>
 </context>
 </TS>

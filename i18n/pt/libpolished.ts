@@ -3,7 +3,7 @@
     <name>Decoration</name>
     <message>
         <source>Polished</source>
-        <translation type="unfinished"></translation>
+        <translation>Polido</translation>
     </message>
 </context>
 </TS>

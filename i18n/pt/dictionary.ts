@@ -7,15 +7,15 @@
     </message>
     <message>
         <source>All dictionaries</source>
-        <translation type="unfinished"></translation>
+        <translation>Todos os dicionários</translation>
     </message>
     <message>
         <source>Personal dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Dicionário pessoal</translation>
     </message>
     <message>
         <source>System dictionary (English)</source>
-        <translation type="unfinished"></translation>
+        <translation>Dicionário de sistema (Inglês)</translation>
     </message>
     <message>
         <source>Selects the dictionary to manipulate.</source>
@@ -23,11 +23,11 @@
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Procurar</translation>
     </message>
     <message>
         <source>Pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Padrão</translation>
     </message>
     <message>
         <source>Enter your search pattern here. You may use &lt;big&gt;&lt;tt&gt;?&lt;/tt&gt;&lt;/big&gt; to represent any one letter, &lt;big&gt;&lt;tt&gt;*&lt;/tt&gt;&lt;/big&gt; to represent zero or more arbitrary letters, or &lt;big&gt;&lt;tt&gt;[&lt;i&gt;abc&lt;/i&gt;]&lt;/tt&gt;&lt;/big&gt; to represent any one of the letters &lt;big&gt;&lt;tt&gt;&lt;i&gt;abc&lt;/i&gt;&lt;/tt&gt;&lt;/big&gt;.</source>
@@ -55,15 +55,15 @@
     </message>
     <message>
         <source>Edit words</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar palavras</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Remover</translation>
     </message>
     <message>
         <source>This dictionary is read-only.</source>

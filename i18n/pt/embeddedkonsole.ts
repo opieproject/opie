@@ -5,26 +5,6 @@
         <source>Command Selection</source>
         <translation>Selecção do Comando</translation>
     </message>
-    <message>
-        <source>new</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>edit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>delete</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>down</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>CommandEditDialogBase</name>
@@ -197,23 +177,23 @@
     </message>
     <message>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Personalizado</translation>
     </message>
     <message>
         <source>Command List</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista de Comandos</translation>
     </message>
     <message>
         <source>Wrap</source>
-        <translation type="unfinished"></translation>
+        <translation>Quebra</translation>
     </message>
     <message>
         <source>Use Beep</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar Som</translation>
     </message>
     <message>
         <source>Tabs on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabs em Cima</translation>
     </message>
 </context>
 <context>

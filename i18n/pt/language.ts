@@ -3,11 +3,11 @@
     <name>LanguageSettings</name>
     <message>
         <source>English</source>
-        <translation type="unfinished"></translation>
+        <translation>Inglês</translation>
     </message>
     <message>
         <source>default</source>
-        <translation type="unfinished"></translation>
+        <translation>omissão</translation>
     </message>
 </context>
 <context>
@@ -18,7 +18,7 @@
     </message>
     <message>
         <source>Language Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuração da Linguagem</translation>
     </message>
 </context>
 </TS>

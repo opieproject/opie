@@ -22,11 +22,11 @@
     </message>
     <message>
         <source>Applications</source>
-        <translation type="unfinished"></translation>
+        <translation>Aplicações</translation>
     </message>
     <message>
         <source>Save To</source>
-        <translation type="unfinished"></translation>
+        <translation>Gravar Para</translation>
     </message>
     <message>
         <source>&amp;Backup</source>

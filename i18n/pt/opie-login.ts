@@ -8,7 +8,7 @@ accurately to calibrate your screen.</source>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation type="unfinished"></translation>
+        <translation>Bem vindo ao Opie</translation>
     </message>
 </context>
 <context>
@@ -23,57 +23,59 @@ accurately to calibrate your screen.</source>
     </message>
     <message>
         <source>User</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilizador</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Palavra Chave</translation>
     </message>
     <message>
         <source>Suspend</source>
-        <translation type="unfinished"></translation>
+        <translation>Suspender</translation>
     </message>
     <message>
         <source>Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu</translation>
     </message>
 </context>
 <context>
     <name>LoginWindowImpl</name>
     <message>
         <source>Restart</source>
-        <translation type="unfinished"></translation>
+        <translation>Reiniciar</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Sair</translation>
     </message>
     <message>
         <source>&lt;center&gt;%1 %2&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;%1 %2&lt;/center&gt;</translation>
     </message>
     <message>
         <source>Wrong password</source>
-        <translation type="unfinished"></translation>
+        <translation>Palavra chave inválida</translation>
     </message>
     <message>
         <source>The given password is incorrect.</source>
-        <translation type="unfinished"></translation>
+        <translation>A palavra chave é incorrecta.</translation>
     </message>
     <message>
         <source>OPIE was terminated
 by an uncaught signal
 (%1)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>O OPIE terminou 
+devido a um sinal
+de sistema (%1)</translation>
     </message>
     <message>
         <source>Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Falha</translation>
     </message>
     <message>
         <source>Could not start OPIE.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível iniciar o OPIE.</translation>
     </message>
     <message>
         <source>Could not switch to new user identity</source>

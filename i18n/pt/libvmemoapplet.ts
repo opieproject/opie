@@ -3,11 +3,11 @@
     <name>VMemo</name>
     <message>
         <source>Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Nota</translation>
     </message>
     <message>
         <source>error recording</source>
-        <translation type="unfinished"></translation>
+        <translation>erro ao gravar</translation>
     </message>
 </context>
 </TS>

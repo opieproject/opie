@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajuda</translation>
     </message>
 </context>
 </TS>

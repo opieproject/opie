@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>Tips</source>
-        <translation type="unfinished"></translation>
+        <translation>Dicas</translation>
     </message>
     <message>
         <source>Trainer</source>
@@ -45,7 +45,7 @@
     <name>InputMethods</name>
     <message>
         <source>Handwriting</source>
-        <translation type="unfinished"></translation>
+        <translation>Handwriting</translation>
     </message>
 </context>
 <context>
@@ -72,18 +72,18 @@
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancelar</translation>
     </message>
 </context>
 <context>
     <name>QIMPenInput</name>
     <message>
         <source>Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Atalho</translation>
     </message>
 </context>
 <context>
@@ -94,7 +94,7 @@
     </message>
     <message>
         <source>Character:</source>
-        <translation type="unfinished"></translation>
+        <translation>Caracter:</translation>
     </message>
 </context>
 <context>

@@ -3,7 +3,7 @@
     <name>AddressBookPluginConfig</name>
     <message>
         <source>Max Lines: </source>
-        <translation type="unfinished"></translation>
+        <translation>Máximo de Linhas:</translation>
     </message>
     <message>
         <source>Set the maximum number of lines that should be shown for each anniversaries/birthdays</source>

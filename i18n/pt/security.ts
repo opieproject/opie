@@ -28,7 +28,7 @@ Access denied</source>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nenhum</translation>
     </message>
     <message>
         <source>Enter new passcode</source>
@@ -43,7 +43,7 @@ Access denied</source>
     <name>SecurityBase</name>
     <message>
         <source>Security Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurações de Segurança</translation>
     </message>
     <message>
         <source>Change passcode</source>

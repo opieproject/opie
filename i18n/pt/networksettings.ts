@@ -3,74 +3,74 @@
     <name>AddConnection</name>
     <message>
         <source>Add Network Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar Ligação à Rede</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Cancelar</translation>
     </message>
     <message>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Adicionar</translation>
     </message>
     <message>
         <source>Services</source>
-        <translation type="unfinished"></translation>
+        <translation>Serviços</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>Network Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuração da Rede</translation>
     </message>
     <message>
         <source>Connections</source>
-        <translation type="unfinished"></translation>
+        <translation>Ligações</translation>
     </message>
     <message>
         <source>s</source>
-        <translation type="unfinished"></translation>
+        <translation>s</translation>
     </message>
     <message>
         <source>t</source>
-        <translation type="unfinished"></translation>
+        <translation>t</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome</translation>
     </message>
     <message>
         <source>in</source>
-        <translation type="unfinished"></translation>
+        <translation>em</translation>
     </message>
     <message>
         <source>IP</source>
-        <translation type="unfinished"></translation>
+        <translation>IP</translation>
     </message>
     <message>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Adicionar</translation>
     </message>
     <message>
         <source>&amp;Information</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Informação</translation>
     </message>
     <message>
         <source>&amp;Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Configuração</translation>
     </message>
     <message>
         <source>&amp;Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Remover</translation>
     </message>
     <message>
         <source>Profiles</source>
-        <translation type="unfinished"></translation>
+        <translation>Perfis</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Todos</translation>
     </message>
     <message>
         <source>&amp;Set Current</source>
@@ -78,11 +78,11 @@
     </message>
     <message>
         <source>Current Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Perfil Actual</translation>
     </message>
     <message>
         <source>New Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Novo Perfil</translation>
     </message>
 </context>
 </TS>
