@@ -4,6 +4,7 @@
 	------------
 	* Number of icon columns in Launcher is customizable through Launcher.conf (hrw,zecke,mickeyl)
 	* Number of icon columns in Launcher is customizable through LauncherSettings (mickeyl)
+	* Usability enhancements in OpieIRC (skyhusker)
 
 	Fixed Bugs
 	----------
@@ -13,6 +14,7 @@
 	* #1533 - Security Owner Dialog (shown in case of unsuccessfull authentiacation) wasn't able to display information in non latin1 encoding (zecke)
 	* n.a. - Removed hard coded font sizes in a couple of inputmethods (mickeyl)
 	* n.a. - Removed MediumDlg appearing prior to FirstUsage wizard (i.e. calibration) (mickeyl)
+	* n.a. - Fixed numerous buglets in OpieIRC (skyhusker)
 
 	Internal
 	--------
@@ -20,6 +22,7 @@
 	* You can now use the Opie build system in combination with a OpenEmbedded staging area which makes a nice cross development environment (mickeyl)
 	* Made Opie compilable with Qt/Embedded 2.3.10 (ar)
 	* Changed Launcher to get default orientation from ODevice w/ QWS_DISPLAY overriding (mickeyl)
+	* Build tree cleanups (mickeyl)
 
 2004-11-26	Opie 1.1.8
 
