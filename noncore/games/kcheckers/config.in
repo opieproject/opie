@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config KCHECKERS
+    boolean "kcheckers"
     default "y"
     depends LIBQPE && LIBOPIE

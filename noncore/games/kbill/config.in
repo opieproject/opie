@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config KBILL
+    boolean "kbill"
     default "y"
     depends LIBQPE && LIBOPIE

@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config TODO
+    boolean "todo"
     default "y"
     depends LIBQPE && LIBOPIE

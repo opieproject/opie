@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config QASTEROIDS
+    boolean "qasteroids"
     default "y"
     depends LIBQPE && LIBOPIE

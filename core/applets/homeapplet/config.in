@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config HOMEAPPLET
+    boolean "homeapplet"
     default "y"
     depends LIBQPE && LIBOPIE

@@ -1,0 +1,4 @@
+  config VOLUMEAPPLET
+    boolean "volumeapplet"
+    default "y"
+    depends LIBQPE && LIBOPIE

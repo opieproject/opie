@@ -1,0 +1,4 @@
+#  config #DICTIONARY
+#    boolean "dictionary"
+#    default "y"
+#    depends LIBQPE && LIBOPIE

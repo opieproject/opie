@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config VMEMO
+    boolean "vmemo"
     default "y"
     depends LIBQPE && LIBOPIE

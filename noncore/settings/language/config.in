@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config LANGUAGE
+    boolean "language"
     default "y"
     depends LIBQPE && LIBOPIE

@@ -1,0 +1,4 @@
+  config SCREENSHOTAPPLET
+    boolean "screenshotapplet"
+    default "y"
+    depends LIBQPE && LIBOPIE

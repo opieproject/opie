@@ -1,0 +1,4 @@
+#  config #BLUE-PIN
+#    boolean "blue-pin"
+#    default "y"
+#    depends LIBQPE && LIBOPIE

@@ -1,4 +1,4 @@
-config INTERFACES
-  boolean
-  depends LIBQPE && LIBOPIE
-  default "y"
+  config INTERFACES
+    boolean "interfaces"
+    default "y"
+    depends LIBQPE && LIBOPIE

@@ -1,0 +1,4 @@
+#  config #LIBQPE-X11
+#    boolean "libqpe-x11"
+#    default "y"
+#    depends LIBQPE && LIBOPIE

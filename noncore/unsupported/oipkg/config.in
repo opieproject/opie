@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config OIPKG
+    boolean "oipkg"
     default "y"
     depends LIBQPE && LIBOPIE

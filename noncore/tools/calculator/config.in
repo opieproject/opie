@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config CALCULATOR
+    boolean "calculator"
     default "y"
     depends LIBQPE && LIBOPIE

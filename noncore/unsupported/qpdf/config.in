@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config QPDF
+    boolean "qpdf"
     default "y"
     depends LIBQPE && LIBOPIE

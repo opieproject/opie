@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config BEND
+    boolean "bend"
     default "y"
     depends LIBQPE && LIBOPIE

@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config AQPKG
+    boolean "aqpkg"
     default "y"
     depends LIBQPE && LIBOPIE

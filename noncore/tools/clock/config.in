@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config CLOCK
+    boolean "clock"
     default "y"
     depends LIBQPE && LIBOPIE

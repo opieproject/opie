@@ -1,0 +1,4 @@
+#  config #QUICKEXEC
+#    boolean "quickexec"
+#    default "y"
+#    depends LIBQPE && LIBOPIE

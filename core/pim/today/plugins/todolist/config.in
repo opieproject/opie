@@ -1,0 +1,4 @@
+  config TODAY_TODOLIST
+    boolean "todolist"
+    default "y"
+    depends LIBQPE && LIBOPIE

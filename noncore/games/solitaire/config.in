@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config SOLITAIRE
+    boolean "solitaire"
     default "y"
     depends LIBQPE && LIBOPIE

@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config BOUNCE
+    boolean "bounce"
     default "y"
     depends LIBQPE && LIBOPIE

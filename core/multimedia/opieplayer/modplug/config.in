@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config MODPLUG
+    boolean "modplug"
     default "y"
     depends LIBQPE && LIBOPIE

@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config OPIE-SH
+    boolean "opie-sh"
     default "y"
     depends LIBQPE && LIBOPIE

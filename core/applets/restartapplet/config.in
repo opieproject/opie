@@ -1,0 +1,7 @@
+menu "restartapplet"
+
+  config #RESTARTAPPLET
+    boolean "restartapplet"
+    default "y"
+    depends LIBQPE && LIBOPIE
+endmenu

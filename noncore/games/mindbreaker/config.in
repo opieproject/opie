@@ -1,0 +1,4 @@
+  config MINDBREAKER
+    boolean "mindbreaker"
+    default "y"
+    depends LIBQPE && LIBOPIE

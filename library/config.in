@@ -1,0 +1,3 @@
+  config LIBQPE
+    boolean "library"
+    default "y"

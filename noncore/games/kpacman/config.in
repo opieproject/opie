@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config KPACMAN
+    boolean "kpacman"
     default "y"
     depends LIBQPE && LIBOPIE

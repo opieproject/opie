@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config JUMPX
+    boolean "jumpx"
     default "y"
     depends LIBQPE && LIBOPIE

@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config ADVANCEDFM
+    boolean "advancedfm"
     default "y"
     depends LIBQPE && LIBOPIE

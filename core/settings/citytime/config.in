@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config CITYTIME
+    boolean "citytime"
     default "y"
     depends LIBQPE && LIBOPIE

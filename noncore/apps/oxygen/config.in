@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config OXYGEN
+    boolean "oxygen"
     default "y"
     depends LIBQPE && LIBOPIE

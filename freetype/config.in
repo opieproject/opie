@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config FREETYPE
+    boolean "freetype"
     default "y"
     depends LIBQPE && LIBOPIE

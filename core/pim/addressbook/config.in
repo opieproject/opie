@@ -1,0 +1,4 @@
+  config ADDRESSBOOK
+    boolean "addressbook"
+    default "y"
+    depends LIBQPE && LIBOPIE

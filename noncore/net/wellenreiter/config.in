@@ -1,0 +1,4 @@
+#  config #WELLENREITER
+#    boolean "wellenreiter"
+#    default "y"
+#    depends LIBQPE && LIBOPIE

@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config DECO_FLAT
+    boolean "flat"
     default "y"
     depends LIBQPE && LIBOPIE

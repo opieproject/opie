@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config OPIE-SHEET
+    boolean "opie-sheet"
     default "y"
     depends LIBQPE && LIBOPIE

@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config KEYBOARD
+    boolean "keyboard"
     default "y"
     depends LIBQPE && LIBOPIE

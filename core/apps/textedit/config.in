@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config TEXTEDIT
+    boolean "textedit"
     default "y"
     depends LIBQPE && LIBOPIE

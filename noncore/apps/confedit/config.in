@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config CONFEDIT
+    boolean "confedit"
     default "y"
     depends LIBQPE && LIBOPIE

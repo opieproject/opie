@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config TABMANAGER
+    boolean "tabmanager"
     default "y"
     depends LIBQPE && LIBOPIE

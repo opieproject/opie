@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config QCOP
+    boolean "qcop"
     default "y"
     depends LIBQPE && LIBOPIE

@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config FORMATTER
+    boolean "formatter"
     default "y"
     depends LIBQPE && LIBOPIE

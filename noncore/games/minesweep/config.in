@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config MINESWEEP
+    boolean "minesweep"
     default "y"
     depends LIBQPE && LIBOPIE

@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config SYSINFO
+    boolean "sysinfo"
     default "y"
     depends LIBQPE && LIBOPIE

@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config THEME
+    boolean "theme"
     default "y"
     depends LIBQPE && LIBOPIE

@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config DRAWPAD
+    boolean "drawpad"
     default "y"
     depends LIBQPE && LIBOPIE

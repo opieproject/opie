@@ -1,0 +1,4 @@
+  config TODAY_DATEBOOK
+    boolean "datebook"
+    default "y"
+    depends LIBQPE && LIBOPIE

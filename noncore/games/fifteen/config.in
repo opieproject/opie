@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config FIFTEEN
+    boolean "fifteen"
     default "y"
     depends LIBQPE && LIBOPIE

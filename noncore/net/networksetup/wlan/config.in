@@ -1,4 +1,4 @@
-config WLAN
-  boolean
-  depends LIBQPE && LIBOPIE
-  default "y"
+  config WLAN
+    boolean "wlan"
+    default "y"
+    depends LIBQPE && LIBOPIE

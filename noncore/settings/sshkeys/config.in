@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config SSHKEYS
+    boolean "sshkeys"
     default "y"
     depends LIBQPE && LIBOPIE

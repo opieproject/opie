@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config KEYPEBBLE
+    boolean "keypebble"
     default "y"
     depends LIBQPE && LIBOPIE

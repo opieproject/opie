@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config BACKUP
+    boolean "backup"
     default "y"
     depends LIBQPE && LIBOPIE

@@ -1,0 +1,4 @@
+  config CLIPBOARDAPPLET
+    boolean "clipboardapplet"
+    default "y"
+    depends LIBQPE && LIBOPIE

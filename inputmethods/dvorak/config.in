@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config DVORAK
+    boolean "dvorak"
     default "y"
     depends LIBQPE && LIBOPIE

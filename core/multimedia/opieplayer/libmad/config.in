@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config LIBMAD
+    boolean "libmad"
     default "y"
     depends LIBQPE && LIBOPIE

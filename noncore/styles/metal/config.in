@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config METAL
+    boolean "metal"
     default "y"
     depends LIBQPE && LIBOPIE

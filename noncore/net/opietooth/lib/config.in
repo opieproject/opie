@@ -1,0 +1,4 @@
+#  config #LIB
+#    boolean "lib"
+#    default "y"
+#    depends LIBQPE && LIBOPIE

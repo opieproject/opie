@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config TETRIX
+    boolean "tetrix"
     default "y"
     depends LIBQPE && LIBOPIE

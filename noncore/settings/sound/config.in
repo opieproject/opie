@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config SOUND
+    boolean "sound"
     default "y"
     depends LIBQPE && LIBOPIE

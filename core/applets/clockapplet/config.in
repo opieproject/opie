@@ -1,0 +1,4 @@
+  config CLOCKAPPLET
+    boolean "clockapplet"
+    default "y"
+    depends LIBQPE && LIBOPIE

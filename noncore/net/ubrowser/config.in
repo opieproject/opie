@@ -1,0 +1,4 @@
+#  config #UBROWSER
+#    boolean "ubrowser"
+#    default "y"
+#    depends LIBQPE && LIBOPIE

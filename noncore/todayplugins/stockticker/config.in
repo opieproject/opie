@@ -1,0 +1,9 @@
+menu "stockticker"
+
+  config TODAY_STOCKTICKER
+    boolean "stockticker"
+    default "y"
+    depends LIBQPE && LIBOPIE
+  source noncore/todayplugins/stockticker/stockticker/config.in
+  source noncore/todayplugins/stockticker/stocktickerlib/config.in
+endmenu

@@ -1,0 +1,4 @@
+  config HELPBROWSER
+    boolean "helpbrowser"
+    default "y"
+    depends LIBQPE && LIBOPIE

@@ -1,0 +1,8 @@
+menu "libopie"
+
+  config LIBOPIE
+    boolean "libopie"
+    default "y"
+  source libopie/ofileselector/config.in
+  source libopie/pim/config.in
+endmenu

@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config LIQUID
+    boolean "liquid"
     default "y"
     depends LIBQPE && LIBOPIE

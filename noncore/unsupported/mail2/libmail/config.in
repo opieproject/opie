@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config LIBMAIL
+    boolean "libmail"
     default "y"
     depends LIBQPE && LIBOPIE

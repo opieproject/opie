@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config SNAKE
+    boolean "snake"
     default "y"
     depends LIBQPE && LIBOPIE

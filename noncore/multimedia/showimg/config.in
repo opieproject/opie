@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config SHOWIMG
+    boolean "showimg"
     default "y"
     depends LIBQPE && LIBOPIE

@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config REMOTE
+    boolean "remote"
     default "y"
     depends LIBQPE && LIBOPIE

@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config MULTIKEY
+    boolean "multikey"
     default "y"
     depends LIBQPE && LIBOPIE

@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config BUZZWORD
+    boolean "buzzword"
     default "y"
     depends LIBQPE && LIBOPIE

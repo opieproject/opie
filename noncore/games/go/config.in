@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config GO
+    boolean "go"
     default "y"
     depends LIBQPE && LIBOPIE

@@ -1,0 +1,4 @@
+  config FILEBROWSER
+    boolean "filebrowser"
+    default "y"
+    depends LIBQPE && LIBOPIE

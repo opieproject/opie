@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config SECURITY
+    boolean "security"
     default "y"
     depends LIBQPE && LIBOPIE

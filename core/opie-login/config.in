@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config OPIE-LOGIN
+    boolean "opie-login"
     default "y"
     depends LIBQPE && LIBOPIE

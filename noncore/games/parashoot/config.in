@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config PARASHOOT
+    boolean "parashoot"
     default "y"
     depends LIBQPE && LIBOPIE

@@ -1,4 +1,4 @@
-  config INTERFACES
-    boolean "interfaces"
+  config CARDMON
+    boolean "cardmon"
     default "y"
     depends LIBQPE && LIBOPIE
