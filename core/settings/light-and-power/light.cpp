@@ -58,6 +58,7 @@ using namespace Opie;
 LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
     : LightSettingsBase( parent, name, TRUE, WStyle_ContextHelp )
 {
+    int res = ODevice::inst ( )-> displayBrightnessResolution ( );
 
     if ( ODevice::inst()->hasLightSensor() ) {
         // Not supported yet - hide until implemented
@@ -81,18 +82,16 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
 
     // battery check and slider
     LcdOffOnly->setChecked( config.readBoolEntry("LcdOffOnly",false));
-    int maxbright = ODevice::inst ( )-> displayBrightnessResolution ( );
-    initbright = config.readNumEntry("Brightness",255);
-    brightness->setMaxValue( maxbright );
-    brightness->setTickInterval( QMAX(1,maxbright/16) );
-    brightness->setLineStep( QMAX(1,maxbright/16) );
-    brightness->setPageStep( QMAX(1,maxbright/16) );
-    brightness->setValue( (maxbright*255 - initbright*maxbright)/255 );
+
+    initbright = config. readNumEntry ( "Brightness", 255 );
+    brightness-> setMaxValue ( res - 1 );
+    brightness-> setTickInterval ( QMAX( 1, res / 16 ));
+    brightness-> setLineStep ( QMAX( 1, res / 16 ));
+    brightness-> setPageStep ( QMAX( 1, res / 16 ));
+    brightness-> setValue (( initbright * ( res - 1 ) + 127 ) / 255 );
 
     // light sensor
     auto_brightness->setChecked( config.readNumEntry("LightSensor",0) != 0 );
-
-
 
     config.setGroup( "AC" );
     // ac spinboxes
@@ -102,13 +101,13 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
 
     // ac check and slider
     LcdOffOnly_2_3->setChecked( config.readBoolEntry("LcdOffOnly",false));
-    int maxbright_ac = ODevice::inst ( )-> displayBrightnessResolution ( );
-    initbright_ac = config.readNumEntry("Brightness",255);
-    brightness_ac_3->setMaxValue( maxbright_ac );
-    brightness_ac_3->setTickInterval( QMAX(1,maxbright_ac/16) );
-    brightness_ac_3->setLineStep( QMAX(1,maxbright_ac/16) );
-    brightness_ac_3->setPageStep( QMAX(1,maxbright_ac/16) );
-    brightness_ac_3->setValue( (maxbright_ac*255 - initbright_ac*maxbright_ac)/255 );
+
+    initbright_ac = config. readNumEntry ( "Brightness", 255 );
+    brightness_ac_3-> setMaxValue ( res - 1 );
+    brightness_ac_3-> setTickInterval ( QMAX( 1, res / 16 ));
+    brightness_ac_3-> setLineStep ( QMAX( 1, res / 16 ));
+    brightness_ac_3-> setPageStep ( QMAX( 1, res / 16 ));
+    brightness_ac_3-> setValue (( initbright_ac * ( res - 1 ) + 127 ) / 255 );
 
     // light sensor
     auto_brightness_ac_3->setChecked( config.readNumEntry("LightSensor",0) != 0 );
@@ -138,7 +137,6 @@ void LightSettings::slotSliderTicks( int steps ) {
 
 static void set_fl(int bright)
 {
-    qDebug ( QString( "Brightness" ).arg( bright ) );
     QCopEnvelope e("QPE/System", "setBacklight(int)" );
     e << bright;
 }
@@ -192,9 +190,9 @@ void LightSettings::accept()
     // only make light sensor stuff appear if the unit has a sensor
     if ( ODevice::inst()->hasLightSensor() ) {
         config.setGroup( "Battery" );
-        config.writeEntry( "LightSensor", (int)auto_brightness->isChecked() );
+        config.writeEntry( "LightSensor", auto_brightness->isChecked() );
         config.setGroup( "AC" );
-        config.writeEntry( "LightSensor", (int)auto_brightness_ac_3->isChecked() );
+        config.writeEntry( "LightSensor", auto_brightness_ac_3->isChecked() );
         //config.writeEntry( "Steps", LightStepSpin->value() );
         //onfig.writeEntry( "MinValue", LightMinValueSlider->value() );
         //config.writeEntry( "Shift", LightShiftSpin->value() );
