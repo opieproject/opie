@@ -88,3 +88,4 @@ int SimpleApplet::position(){
  * Here comes the implementation of the interface
  */
 EXPORT_OPIE_APPLET_v1( SimpleApplet )
+
