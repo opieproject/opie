@@ -73,6 +73,7 @@ void UserConfig::setupTabAccounts() {
 	
 	usersIconView=new QIconView(tabpage,"users");
 	usersIconView->setItemTextPos(QIconView::Right);
+	usersIconView->setArrangement(QIconView::LeftToRight);
 	layout->addWidget(usersIconView);
 	
 	myTabWidget->addTab(tabpage,"Users");
@@ -123,14 +124,16 @@ void UserConfig::getUsers() {
 		new QListViewItem(usersListView,QString::number(accounts->pw_uid),accounts->pw_name,accounts->pw_gecos);
 		if((accounts->pw_uid>=500) && (accounts->pw_uid<65000)) {	// Is this user a "normal" user ?
 			mytext=QString(accounts->pw_name)+" - ("+QString(accounts->pw_gecos)+")"; // The string displayed next to the icon.
-			mypixmap=Resource::loadPixmap(QString("users/"+accounts->pw_name));	// Is there an icon for this user?
-			if(mypixmap.isNull()) {
+//			mypixmap=Resource::loadPixmap(QString("users/"+accounts->pw_name));	// Is there an icon for this user? Resource::loadPixmap is caching, doesn't work.
+			if(!(mypixmap.load("/opt/QtPalmtop/pics/users/"+accounts->pw_name+".png"))) {
+//			if(mypixmap.isNull()) {
 				mypixmap=Resource::loadPixmap(QString("usermanager/usericon"));	// If this user has no icon, load the default icon.
 			}
 			new QIconViewItem(usersIconView,mytext,mypixmap);	// Add the icon+text to the qiconview.
 		}
 		if((accounts->pw_uid>=availableUID) && (accounts->pw_uid<65000)) availableUID=accounts->pw_uid+1; // Increase 1 to the latest know UID to get a free uid. 
 	}
+	usersIconView->sort();
 }
 
 void UserConfig::addUser() {

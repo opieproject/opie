@@ -203,6 +203,16 @@ bool UserDialog::addUser(int uid, int gid) {
 	if ( it.current()->isSelected() )
 		accounts->addGroupMember(it.current()->text(0),adduserDialog->loginLineEdit->text());
 	}
+	// Copy image to pics/users/
+	if(!(adduserDialog->userImage.isNull())) {
+		QDir d;
+		if(!(d.exists("/opt/QtPalmtop/pics/users"))) {
+			d.mkdir("/opt/QtPalmtop/pics/users");
+		}
+		QString filename="/opt/QtPalmtop/pics/users/"+accounts->pw_name+".png";
+		adduserDialog->userImage=adduserDialog->userImage.smoothScale(48,48);
+		adduserDialog->userImage.save(filename,"PNG");
+	}
 	return true;
 }
 
@@ -296,6 +306,17 @@ bool UserDialog::editUser(const char *username) {
 	if ( it.current()->isSelected() )
 		accounts->addGroupMember(it.current()->text(0),edituserDialog->loginLineEdit->text());
 	}
+	
+	// Copy image to pics/users/
+	if(!(edituserDialog->userImage.isNull())) {
+		QDir d;
+		if(!(d.exists("/opt/QtPalmtop/pics/users"))) {
+			d.mkdir("/opt/QtPalmtop/pics/users");
+		}
+		QString filename="/opt/QtPalmtop/pics/users/"+accounts->pw_name+".png";
+		edituserDialog->userImage=edituserDialog->userImage.smoothScale(48,48);
+		edituserDialog->userImage.save(filename,"PNG");
+	}
 	return true;
 }
 
@@ -318,8 +339,16 @@ void UserDialog::accept() {
  */
 void UserDialog::clickedPicture() {
 	QString filename=OFileDialog::getOpenFileName(OFileSelector::EXTENDED,"/opt/QtPalmtop/pics");
-	// OFileDialog *fd=new OFileDialog("Select Icon",this, OFileSelector::OPEN, OFileSelector::EXTENDED,"/");
-	//fd->showMaximized();
-	//fd->exec();
-	QMessageBox::information(0,"Sorry!","Icon selection not yet implemented.\nComming real soon now! (tm)\n"+filename);
+	if(!(filename.isEmpty())) {
+		userImage.reset();
+		if(!(userImage.load(filename))) {
+			QMessageBox::information(0,"Sorry!","Icon selection not yet implemented.\nComming real soon now! (tm)\n"+filename);
+		} else {
+			userImage=userImage.smoothScale(48,48);
+			QPixmap *picture;
+			picture=(QPixmap *)picturePushButton->pixmap();
+			picture->convertFromImage(userImage,0);
+			picturePushButton->update();
+		}
+	}
 }

@@ -36,6 +36,7 @@ private:
 	
 	QStringList groupMembers;
 	QString pictureLocation;
+	QImage userImage;
 	int groupID;
 	int userID;
 	
