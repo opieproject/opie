@@ -267,63 +267,63 @@ je zastonj!</translation>
     </message>
     <message>
         <source>Click on tab to select one</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite na zavihek, da izberte</translation>
     </message>
     <message>
         <source>Settings for the search query style</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavitve za stil iskalne poizvedbe</translation>
     </message>
     <message>
         <source>Search widget expects regular expressions if selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Iskalnik pričakuje regularne izraze, če so ti izbrani</translation>
     </message>
     <message>
         <source>Search widget just expects simple wildcards</source>
-        <translation type="unfinished"></translation>
+        <translation>Iskalnik pričakuje enostavne zvezdice</translation>
     </message>
     <message>
         <source>If selected, search differs between upper and lower chars</source>
-        <translation type="unfinished"></translation>
+        <translation>Če izbrano, iskalnik razlikuje med velikimi in malimi črkami</translation>
     </message>
     <message>
         <source>Font size for list- and card view</source>
-        <translation type="unfinished"></translation>
+        <translation>Velikost pisave za seznam- in kartični pogled</translation>
     </message>
     <message>
         <source>Fontsettings for list and card view</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavitve pisave za seznam in kartični pregled</translation>
     </message>
     <message>
         <source>Use Sharp&apos;s mail application if available</source>
-        <translation type="unfinished"></translation>
+        <translation>Uporabi Sharpov poštni program, če je navoljo</translation>
     </message>
     <message>
         <source>Use OPIE mail if installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Uporabi OPIE pošto že je naložena</translation>
     </message>
     <message>
         <source>Move selected attribute one line up</source>
-        <translation type="unfinished"></translation>
+        <translation>Premakni izbrani parameter eno vrstico gor</translation>
     </message>
     <message>
         <source>Move selected attribute one line down</source>
-        <translation type="unfinished"></translation>
+        <translation>Premakni izbrani parameter eno vrstico dol</translation>
     </message>
     <message>
         <source>List of all available attributes</source>
-        <translation type="unfinished"></translation>
+        <translation>Seznam vseh dostopnih parametrov</translation>
     </message>
     <message>
         <source>Add selected attribute from list below to the upper list</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodaj izbrani parameter iz seznama spodaj v gornji seznam</translation>
     </message>
     <message>
         <source>Remove the selected attribute from the upper list</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstrani izbrani parameter iz gornjega seznama</translation>
     </message>
     <message>
         <source>Order (up -&gt; down) defines the primary contact shown in the second column of the list view</source>
-        <translation type="unfinished"></translation>
+        <translation>Red (gor -&gt; dol) definira prvi stik prikazan v naslednjem stolpcu seznama</translation>
     </message>
 </context>
 <context>
@@ -1286,31 +1286,31 @@ je zastonj!</translation>
     </message>
     <message>
         <source>Press to enter last- middle and firstname</source>
-        <translation type="unfinished"></translation>
+        <translation>Pritisnite, da vpišete priimek- in ime</translation>
     </message>
     <message>
         <source>Enter fullname directly ! If you have a lastname with multiple words ( for instance &quot;de la Guerra&quot;), please write &lt;lastname&gt;,&lt;firstnames&gt; like this: &quot;de la Guerra, Carlos Pedro&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Vpišite celo ime direktno! Če imate več priimkov (primer: &quot;Božič Novak&quot; ), prosimo vpišite &lt;priimek&gt;,&lt;ime&gt; kot to: &quot;Božič Novak, Jože&quot;</translation>
     </message>
     <message>
         <source>The jobtitle..</source>
-        <translation type="unfinished"></translation>
+        <translation>Naziv delovnega mesta..</translation>
     </message>
     <message>
         <source>Something like &quot;jr.&quot;..</source>
-        <translation type="unfinished"></translation>
+        <translation>Nekaj kot &quot;ml.&quot;..</translation>
     </message>
     <message>
         <source>The working place of the contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Delovno mesto stika</translation>
     </message>
     <message>
         <source>Press to select attribute to change</source>
-        <translation type="unfinished"></translation>
+        <translation>Pritisnite, da izberete parameter, ki bi ga radi spremenili</translation>
     </message>
     <message>
         <source>Press to select how to store the name (and howto show it in the listview)</source>
-        <translation type="unfinished"></translation>
+        <translation>Pristisnite, da izberete kako shraniti ime (in kako ga prikazati v seznamu)</translation>
     </message>
 </context>
 <context>

@@ -213,34 +213,37 @@ in je licencirano pod GPL</translation>
     </message>
     <message>
         <source>Delete Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Izbriši imenik</translation>
     </message>
     <message>
         <source>Really copy
 %1 files?</source>
-        <translation type="unfinished"></translation>
+        <translation>Res skopiram
+%1 datotek?</translation>
     </message>
     <message>
         <source>File Exists!</source>
-        <translation type="unfinished"></translation>
+        <translation>Datoteka obstaja!</translation>
     </message>
     <message>
         <source>
 exists. Ok to overwrite?</source>
-        <translation type="unfinished"></translation>
+        <translation>
+obstaja. Ali prepišem?</translation>
     </message>
     <message>
         <source> already exists.
 Do you really want to delete it?</source>
-        <translation type="unfinished"></translation>
+        <translation>že obstaja.
+Ali jo res želite izbrisati?</translation>
     </message>
     <message>
         <source>%1 exists. Ok to overwrite?</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 obstaja. Ali prepišem?</translation>
     </message>
     <message>
         <source>Could not copy %1 to %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne morem skopirati %1 v %2</translation>
     </message>
 </context>
 <context>
