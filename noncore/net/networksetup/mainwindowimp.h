@@ -28,9 +28,10 @@ private slots:
  
   void addProfile();
   void removeProfile();
-  void changeProfile(const QString&);
+  void changeProfile();
   
   void updateInterface(Interface *i);
+  void newProfileChanged(const QString& newText);
 
 private:
   void loadModules(QString path);

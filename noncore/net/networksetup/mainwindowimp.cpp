@@ -5,11 +5,11 @@
 #include "module.h"
 
 #include "kprocess.h"
-#include "namedialog.h"
 
 #include <qpushbutton.h>
 #include <qtabwidget.h>
 #include <qlistbox.h>
+#include <qlineedit.h>
 #include <qlistview.h>
 #include <qheader.h>
 #include <qlabel.h>
@@ -37,8 +37,9 @@ MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(par
   
   connect(newProfileButton, SIGNAL(clicked()), this, SLOT(addProfile()));
   connect(removeProfileButton, SIGNAL(clicked()), this, SLOT(removeProfile()));
-  connect(profilesList, SIGNAL(highlighted(const QString&)), this, SLOT(changeProfile(const QString&)));
-		  
+  connect(setCurrentProfileButton, SIGNAL(clicked()), this, SLOT(changeProfile()));
+
+  connect(newProfile, SIGNAL(textChanged(const QString&)), this, SLOT(newProfileChanged(const QString&)));  
   // Load connections.
   loadModules(QDir::homeDirPath() + "/.networksetup/plugins");
   getInterfaceList();
@@ -59,6 +60,7 @@ MainWindowImp::~MainWindowImp(){
   // Save profiles.
   if(profiles.count() > 1){
     Config cfg("NetworkSetup");
+    cfg.setGroup("General");
     cfg.writeEntry("Profiles", profiles.join(" "));
   }
   // Delete Modules and Libraries
@@ -372,17 +374,20 @@ void MainWindowImp::updateInterface(Interface *i){
   item->setText(3, (i->getStatus()) ? i->getIp() : QString(""));
 }
 
+void MainWindowImp::newProfileChanged(const QString& newText){
+  if(newText.length() > 0)
+   newProfileButton->setEnabled(true);
+  else
+    newProfileButton->setEnabled(false);
+}
+
 /**
  * Adds a new profile to the list of profiles.
  * Don't add profiles that already exists.
  * Appends to the list and QStringList
  */ 
 void MainWindowImp::addProfile(){
-  NameDialog foo(this, "namedialog", true);
-  QString newProfileName = foo.go();
-  if(newProfileName.length() == 0)
-    return;
-  
+  QString newProfileName = newProfile->text();
   if(profiles.grep(newProfileName).count() > 0){
     QMessageBox::information(this, "Can't Add","Profile already exists.", "Ok");
     return;
@@ -414,8 +419,8 @@ void MainWindowImp::removeProfile(){
  * A new profile has been selected, change.
  * @param newProfile the new profile.
  */ 
-void MainWindowImp::changeProfile(const QString& newProfile){
-  currentProfileLabel->setText(newProfile);
+void MainWindowImp::changeProfile(){
+  currentProfileLabel->setText(profilesList->text(profilesList->currentItem()));
 }
 
 // mainwindowimp.cpp

@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>271</width>
+            <width>267</width>
             <height>280</height>
         </rect>
     </property>
@@ -333,4 +333,15 @@
         <slot>setDisabled(bool)</slot>
     </connection>
 </connections>
+<tabstops>
+    <tabstop>autoStart</tabstop>
+    <tabstop>profileCombo</tabstop>
+    <tabstop>dhcpCheckBox</tabstop>
+    <tabstop>leaseTime</tabstop>
+    <tabstop>ipAddressEdit</tabstop>
+    <tabstop>subnetMaskEdit</tabstop>
+    <tabstop>gatewayEdit</tabstop>
+    <tabstop>firstDNSLineEdit</tabstop>
+    <tabstop>secondDNSLineEdit</tabstop>
+</tabstops>
 </UI>
