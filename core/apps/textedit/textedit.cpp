@@ -877,6 +877,9 @@ void TextEdit::setDocument(const QString& fileref)
     } else {
       openFile(DocLnk(fileref));
     }
+    editor->setEdited(TRUE);
+    edited1=FALSE;
+    edited=TRUE;
 }
 
 void TextEdit::closeEvent( QCloseEvent *e )
