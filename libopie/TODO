@@ -2,6 +2,7 @@
 
 - tododb
    - set Alarms
+   - move to Qtopia::Record
    
 - OFileSelector
    - m_mimeCheck always shows the first icon

@@ -215,12 +215,16 @@ QString ToDoEvent::richText() const
   QStringList catlist;
 
   // Description of the todo
-  if ( !description().isEmpty() ){
+  if ( !summary().isEmpty() ) {
     text += "<b>" + QObject::tr( "Summary:") + "</b><br>";
     text += Qtopia::escapeString(summary() ).replace(QRegExp( "[\n]"),  "<br>" ) + "<br>";
-    text += "<b>" + QObject::tr( "Description:" ) + "</b><br>";
-    text += Qtopia::escapeString(description() ).replace(QRegExp( "[\n]"), "<br>" ) + "<br><br><br>";
   }
+  if( !description().isEmpty() ){
+    text += "<b>" + QObject::tr( "Description:" ) + "</b><br>";
+    text += Qtopia::escapeString(description() ).replace(QRegExp( "[\n]"), "<br>" ) ;
+  }
+  text += "<br><br><br>";
+  
   text += "<b>" + QObject::tr( "Priority:") +" </b>"
     +  QString::number( priority() ) + " <br>";
   text += "<b>" + QObject::tr( "Progress:") + " </b>"
