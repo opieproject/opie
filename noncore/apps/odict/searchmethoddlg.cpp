@@ -16,6 +16,9 @@
  **************************************************************************/
 #include "searchmethoddlg.h"
 
+#include <opie2/ofileselector.h>
+#include <opie2/ofiledialog.h>
+
 #include <qpe/config.h>
 #include <qpe/qpeapplication.h>
 
@@ -29,8 +32,8 @@
 #include <qlineedit.h>
 #include <qdir.h>
 
-#include <opie/ofileselector.h>
-#include <opie/ofiledialog.h>
+using Opie::OFileDialog;
+using Opie::OFileSelector;
 
 SearchMethodDlg::SearchMethodDlg(QWidget *parent, const char *name, bool modal, QString itemname) : QDialog(parent, name, modal)
 {

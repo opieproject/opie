@@ -16,8 +16,8 @@
  **************************************************************************/
 
 
-#include <qpe/qpeapplication.h>
-#include <opie/oapplicationfactory.h>
+#include <opie2/oapplicationfactory.h>
+
 #include "odict.h"
 
 
