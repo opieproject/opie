@@ -575,7 +575,16 @@ void LauncherView::internalPopulate( AppLnkSet *folder, const QString& typefilte
     icons->setTypeFilter(typefilter,FALSE);
 
     while ( it.current() ) {
-	icons->addItem(*it,FALSE);
+      // show only the icons for existing files
+      if (!QFile(it.current()->file()).exists() )
+	{
+	  //maybe insert some .desktop file deletion code later
+	  //maybe dir specific
+	}
+      else
+	{
+	  icons->addItem(*it,FALSE);
+	}
 	++it;
     }
 
