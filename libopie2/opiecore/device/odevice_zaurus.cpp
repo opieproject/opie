@@ -169,6 +169,9 @@ void Zaurus::init(const QString& cpu_info)
     } else if ( model == "SHARP Husky" ) {
         d->m_model = Model_Zaurus_SLC7x0;
         d->m_modelstr = "Zaurus SL-C760 or SL-C860";
+    } else if ( model == "SHARP Boxer" ) {
+        d->m_model = Model_Zaurus_SLC7x0;
+        d->m_modelstr = "Zaurus SL-C760 or SL-C860";
     } else if ( model == "SHARP Poodle" ) {
         d->m_model = Model_Zaurus_SLB600;
         d->m_modelstr = "Zaurus SL-B500 or SL-5600";
@@ -178,9 +181,12 @@ void Zaurus::init(const QString& cpu_info)
     } else if ( model == "SHARP Tosa" ) {
         d->m_model = Model_Zaurus_SL6000;
         d->m_modelstr = "Zaurus SL-6000";
+    } else if ( model == "SHARP Spitz" ) {
+        d->m_model = Model_Zaurus_SLC3000;
+        d->m_modelstr = "Zaurus SL-C3000";
     } else {
         d->m_model = Model_Zaurus_SL5500;
-        d->m_modelstr = "Unkown Zaurus";
+        d->m_modelstr = "Unknown Zaurus";
     }
 
     // set initial rotation
@@ -189,18 +195,19 @@ void Zaurus::init(const QString& cpu_info)
         case Model_Zaurus_SLA300:
             d->m_rotation = Rot0;
             break;
+        case Model_Zaurus_SLC3000: // fallthrough
         case Model_Zaurus_SLC7x0:
             d->m_rotation = rotation();
             d->m_direction = direction();
             break;
         case Model_Zaurus_SLB600: // fallthrough
+        case Model_Zaurus_SL5000: // fallthrough
         case Model_Zaurus_SL5500: // fallthrough
-        case Model_Zaurus_SL5000:
         default:
             d->m_rotation = Rot270;
             break;
     }
-    m_leds [0] = Led_Off;
+    m_leds[0] = Led_Off;
 }
 
 void Zaurus::initButtons()
@@ -253,27 +260,26 @@ void Zaurus::buzzer( int sound )
 #ifndef QT_NO_SOUND
     Sound *snd = 0;
 
-    // Not all devices have real sound
-    if ( d->m_model == Model_Zaurus_SLC7x0
-      || d->m_model == Model_Zaurus_SLB600 
-      || d->m_model == Model_Zaurus_SL6000 ) {
+    // All devices except SL5500 have a DSP device
+    if ( d->m_model != Model_Zaurus_SL5000
+      && d->m_model != Model_Zaurus_SL5500 ) {
 
         switch ( sound ){
         case SHARP_BUZ_TOUCHSOUND: {
             static Sound touch_sound("touchsound");
             snd = &touch_sound;
-	}
+    }
             break;
         case SHARP_BUZ_KEYSOUND: {
             static Sound key_sound( "keysound" );
             snd = &key_sound;
-	}
+    }
             break;
         case SHARP_BUZ_SCHEDULE_ALARM:
         default: {
             static Sound alarm_sound("alarm");
             snd = &alarm_sound;
-	}	    
+    }
             break;
         }
     }
@@ -320,7 +326,7 @@ QValueList <OLed> Zaurus::ledList() const
     return vl;
 }
 
-QValueList <OLedState> Zaurus::ledStateList ( OLed l ) const
+QValueList <OLedState> Zaurus::ledStateList( OLed l ) const
 {
     QValueList <OLedState> vl;
 
@@ -329,7 +335,7 @@ QValueList <OLedState> Zaurus::ledStateList ( OLed l ) const
     return vl;
 }
 
-OLedState Zaurus::ledState ( OLed which ) const
+OLedState Zaurus::ledState( OLed which ) const
 {
     if ( which == Led_Mail )
         return m_leds [0];
@@ -337,10 +343,14 @@ OLedState Zaurus::ledState ( OLed which ) const
         return Led_Off;
 }
 
-bool Zaurus::setLedState ( OLed which, OLedState st )
+bool Zaurus::setLedState( OLed which, OLedState st )
 {
-    if (!m_embedix) // Currently not supported on non_embedix kernels
+     // Currently not supported on non_embedix kernels
+    if (!m_embedix)
+    {
+        qDebug( "Zaurus::setLedState: ODevice handling for non-embedix kernels not yet implemented" );
         return false;
+    }
 
     static int fd = ::open ( "/dev/sharp_led", O_RDWR|O_NONBLOCK );
 
@@ -415,7 +425,7 @@ bool Zaurus::setDisplayBrightness( int bright )
     if ( m_embedix )
     {
         int numberOfSteps = displayBrightnessResolution();
-        int fd = ::open( SHARP_FL_IOCTL_DEVICE, O_WRONLY|O_NONBLOCK );       
+        int fd = ::open( SHARP_FL_IOCTL_DEVICE, O_WRONLY|O_NONBLOCK );
         if ( fd )
         {
             int val = ( bright * numberOfSteps ) / 255;
@@ -425,7 +435,7 @@ bool Zaurus::setDisplayBrightness( int bright )
     }
     else
     {
-        qDebug( "ODevice handling for non-embedix kernels not yet implemented" );
+        qDebug( "Zaurus::setDisplayBrightness: ODevice handling for non-embedix kernels not yet implemented" );
     }
     return res;
 }
@@ -435,7 +445,7 @@ bool Zaurus::setDisplayStatus( bool on )
     bool res = false;
     if ( m_embedix )
     {
-        int fd = ::open( SHARP_FL_IOCTL_DEVICE, O_WRONLY|O_NONBLOCK );       
+        int fd = ::open( SHARP_FL_IOCTL_DEVICE, O_WRONLY|O_NONBLOCK );
         if ( fd )
         {
             int ioctlnum = on ? SHARP_FL_IOCTL_ON : SHARP_FL_IOCTL_OFF;
@@ -445,10 +455,10 @@ bool Zaurus::setDisplayStatus( bool on )
     }
     else
     {
-        qDebug( "ODevice handling for non-embedix kernels not yet implemented" );
+        qDebug( "Zaurus::setDisplayStatus: ODevice handling for non-embedix kernels not yet implemented" );
     }
     return res;
-}    
+}
 
 bool Zaurus::suspend()
 {
@@ -489,6 +499,7 @@ Transformation Zaurus::rotation() const
     int retval = 0;
 
     switch ( d->m_model ) {
+        case Model_Zaurus_SLC3000: // fallthrough
         case Model_Zaurus_SLC7x0:
             handle = ::open("/dev/apm_bios", O_RDWR|O_NONBLOCK);
             if (handle == -1) {
@@ -503,8 +514,9 @@ Transformation Zaurus::rotation() const
                     rot = Rot270;
             }
             break;
-        case Model_Zaurus_SLA300:
+        case Model_Zaurus_SL6000:
         case Model_Zaurus_SLB600:
+        case Model_Zaurus_SLA300:
         case Model_Zaurus_SL5500:
         case Model_Zaurus_SL5000:
         default:
@@ -520,6 +532,7 @@ ODirection Zaurus::direction() const
     int handle = 0;
     int retval = 0;
     switch ( d->m_model ) {
+        case Model_Zaurus_SLC3000: // fallthrough
         case Model_Zaurus_SLC7x0:
             handle = ::open( "/dev/apm_bios", O_RDWR|O_NONBLOCK );
             if (handle == -1) {
@@ -533,11 +546,12 @@ ODirection Zaurus::direction() const
                     dir = CW;
             }
             break;
+        case Model_Zaurus_SL6000:
         case Model_Zaurus_SLA300:
         case Model_Zaurus_SLB600:
         case Model_Zaurus_SL5500:
         case Model_Zaurus_SL5000:
-        default: dir = d->m_direction; 
+        default: dir = d->m_direction;
             break;
     }
     return dir;
@@ -554,37 +568,45 @@ int Zaurus::displayBrightnessResolution() const
     }
     else
     {
-        qDebug( "ODevice handling for non-embedix kernels not yet implemented" );
+        qDebug( "Zaurus::displayBrightnessResolution: ODevice handling for non-embedix kernels not yet implemented" );
         return 1;
     }
 }
 
 bool Zaurus::hasHingeSensor() const
 {
-    return d->m_model == Model_Zaurus_SLC7x0;
+    return d->m_model == Model_Zaurus_SLC7x0 || d->m_model == Model_Zaurus_SLC3000;
 }
 
 OHingeStatus Zaurus::readHingeSensor()
 {
-    int handle = ::open("/dev/apm_bios", O_RDWR|O_NONBLOCK);
-    if (handle == -1)
+    if (m_embedix)
     {
-        qWarning("Zaurus::readHingeSensor() - failed (%s)", "unknown reason" ); //FIXME: use strerror
-        return CASE_UNKNOWN;
-    }
-    else
-    {
-        int retval = ::ioctl(handle, SHARP_IOCTL_GET_ROTATION);
-        ::close (handle);
-        if ( retval == CASE_CLOSED || retval == CASE_PORTRAIT || retval == CASE_LANDSCAPE )
+        int handle = ::open("/dev/apm_bios", O_RDWR|O_NONBLOCK);
+        if (handle == -1)
         {
-            qDebug( "Zaurus::readHingeSensor() - result = %d", retval );
-            return static_cast<OHingeStatus>( retval );
+            qWarning("Zaurus::readHingeSensor() - failed (%s)", "unknown reason" ); //FIXME: use strerror
+            return CASE_UNKNOWN;
         }
         else
         {
-            qWarning("Zaurus::readHingeSensor() - couldn't compute hinge status!" );
-            return CASE_UNKNOWN;
+            int retval = ::ioctl(handle, SHARP_IOCTL_GET_ROTATION);
+            ::close (handle);
+            if ( retval == CASE_CLOSED || retval == CASE_PORTRAIT || retval == CASE_LANDSCAPE )
+            {
+                qDebug( "Zaurus::readHingeSensor() - result = %d", retval );
+                return static_cast<OHingeStatus>( retval );
+            }
+            else
+            {
+                qWarning("Zaurus::readHingeSensor() - couldn't compute hinge status!" );
+                return CASE_UNKNOWN;
+            }
         }
+    }
+    else
+    {
+        qDebug( "Zaurus::readHingeSensor: ODevice handling for non-embedix kernels not yet implemented" );
+        return CASE_UNKNOWN;
     }
 }

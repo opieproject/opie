@@ -86,6 +86,7 @@
 namespace Opie {
 namespace Core {
 namespace Internal {
+
 class Zaurus : public ODevice
 {
   protected:
@@ -116,9 +117,9 @@ class Zaurus : public ODevice
     virtual ODirection direction() const;
 
   protected:
-    virtual void buzzer ( int snd );
+    virtual void buzzer( int snd );
 
-    OLedState m_leds [1];
+    OLedState m_leds[1];
     bool m_embedix;
 };
 

@@ -80,6 +80,7 @@ enum OModel {
     Model_Zaurus_SLB600 = ( Model_Zaurus | 0x000004 ),
     Model_Zaurus_SLC7x0 = ( Model_Zaurus | 0x000005 ),
     Model_Zaurus_SL6000 = ( Model_Zaurus | 0x000006 ),
+    Model_Zaurus_SLC3000 = ( Model_Zaurus | 0x000007 ),
 
     Model_SIMpad        = ( 3 << 24 ),
 
@@ -361,7 +362,7 @@ class ODeviceData {
     QValueList <ODeviceButton> *m_buttons;
     uint                        m_holdtime;
     QStrList                   *m_cpu_frequencies;
-    bool	m_initializedButtonQcop : 1;
+    bool    m_initializedButtonQcop : 1;
 
     /* values for changeMixerForAlarm */
     int m_sound, m_vol, m_mixer;
