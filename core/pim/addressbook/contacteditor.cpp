@@ -52,9 +52,9 @@ void parseEmailTo( const QString &strDefaultEmail,
 ContactEditor::ContactEditor(	const Contact &entry,
 				const QValueList<int> *newOrderedValues,
 				QStringList *slNewOrdered,
-				QWidget *parent = 0,
-				const char *name = 0,
-				WFlags fl = 0 )
+				QWidget *parent,
+				const char *name,
+				WFlags fl )
 	: QDialog( parent, name, TRUE, fl ),
 	  orderedValues( newOrderedValues ),
 	  slOrdered( slNewOrdered )
@@ -1125,6 +1125,7 @@ QString ContactEditor::parseName( const QString fullName, int type ) {
 			return strSuffix;
 
 	}
+	return QString::null;
 }
 
 void ContactEditor::cleanupFields() {
