@@ -90,10 +90,10 @@ void ContactEditor::init() {
 		slBusinessAddress.append( "" );
 	}
 
-	trlChooserNames   = OContactFields::trphonefields();
-	slChooserNames    = OContactFields::untrphonefields();
-	slDynamicEntries  = OContactFields::untrdetailsfields();
-	trlDynamicEntries = OContactFields::trdetailsfields();
+	trlChooserNames   = OContactFields::trphonefields( false );
+	slChooserNames    = OContactFields::untrphonefields( false );
+	slDynamicEntries  = OContactFields::untrdetailsfields( false );
+	trlDynamicEntries = OContactFields::trdetailsfields( false );
 	for (i = 0; i < slChooserNames.count(); i++)
 	  slChooserValues.append("");
 
