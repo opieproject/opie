@@ -1,19 +1,18 @@
 
-#include "profileeditorplugins.h"
-#include "profile.h"
-
-#include "qframe.h"
-#include "qlabel.h"
-#include "qlineedit.h"
-#include "qlayout.h"
-#include "qcombobox.h"
-#include "qradiobutton.h"
-#include "qcheckbox.h"
-#include "qbuttongroup.h"
-#include "qhgroupbox.h"
-#include "qvbox.h"
+#include <qframe.h>
+#include <qlabel.h>
+#include <qlineedit.h>
+#include <qlayout.h>
+#include <qcombobox.h>
+#include <qradiobutton.h>
+#include <qcheckbox.h>
+#include <qbuttongroup.h>
+#include <qhgroupbox.h>
+#include <qvbox.h>
 
 #include "io_serial.h"
+#include "profile.h"
+#include "profileeditorplugins.h"
 
 // Base class
 

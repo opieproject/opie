@@ -1,6 +1,7 @@
-#include "file_layer.h"
 #include <qfile.h>
 #include <opie/oprocess.h>
+
+#include "file_layer.h"
 
 FileTransferLayer::FileTransferLayer(IOLayer *layer)
     : QObject(), m_layer( layer )

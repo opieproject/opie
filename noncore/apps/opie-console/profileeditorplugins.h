@@ -1,12 +1,11 @@
 #ifndef PROFILE_EDITOR_PLUGINS_H
 #define PROFILE_EDITOR_PLUGINS_H
 
-#include "profile.h"
 
 #include <qobject.h>
 
 class QWidget;
-
+class Profile;
 class ProfileEditorPlugin : public QObject
 {
     Q_OBJECT
