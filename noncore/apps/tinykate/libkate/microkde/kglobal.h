@@ -4,12 +4,12 @@
 #include "klocale.h"
 #include "kiconloader.h"
 #include "kstandarddirs.h"
-#include "kconfig.h"
+#include <kateconfig.h>
 
 class KGlobal {
   public:
     static KLocale *locale();
-    static KConfig *config();
+    static KateConfig *config();
     static KIconLoader *iconLoader();
     static KStandardDirs *dirs();
 
@@ -17,7 +17,7 @@ class KGlobal {
 
   private:
     static KLocale *mLocale;
-    static KConfig *mConfig;
+    static KateConfig *mConfig;
     static KIconLoader *mIconLoader;
     static KStandardDirs *mDirs;
 

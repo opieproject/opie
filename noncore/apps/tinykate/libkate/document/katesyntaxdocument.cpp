@@ -16,13 +16,13 @@
  ***************************************************************************/
 
 #include "katesyntaxdocument.h"
+#include <kateconfig.h>
 #include <qfile.h>
 #include <kdebug.h>
 #include <kstddirs.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <qstringlist.h>
-#include <kconfig.h>
 #include <kglobal.h>
 #include <qpe/qpeapplication.h>
 #include <qdir.h>
@@ -51,7 +51,7 @@ void SyntaxDocument::setupModeList(bool force)
 
   if (myModeList.count() > 0) return;
 
-  KConfig *config=KGlobal::config();
+  KateConfig *config=KGlobal::config();
   KStandardDirs *dirs = KGlobal::dirs();
 
 //  QStringList list=dirs->findAllResources("data","kate/syntax/*.xml",false,true);
@@ -63,7 +63,6 @@ void SyntaxDocument::setupModeList(bool force)
   for ( QStringList::Iterator it = list.begin(); it != list.end(); ++it )
   {
     QString Group="Highlighting_Cache"+path+*it;
-
     if ((config->hasGroup(Group)) && (!force))
     {
       config->setGroup(Group);
@@ -96,21 +95,16 @@ void SyntaxDocument::setupModeList(bool force)
               mli->section=i18n("Other");
 
             mli->identifier = path+(*it);
-#warning fixme
-/*
             config->setGroup(Group);
             config->writeEntry("name",mli->name);
             config->writeEntry("section",mli->section);
             config->writeEntry("mimetype",mli->mimetype);
             config->writeEntry("extension",mli->extension);
-*/
             myModeList.append(mli);
           }
         }
-      }
     }
-//  }
-
+  }
 //  config->sync();
 }
 

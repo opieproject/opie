@@ -1,7 +1,7 @@
 #include "kglobal.h"
 
 KLocale *KGlobal::mLocale = 0;
-KConfig *KGlobal::mConfig = 0;
+KateConfig *KGlobal::mConfig = 0;
 KIconLoader *KGlobal::mIconLoader = 0;
 KStandardDirs *KGlobal::mDirs = 0;
 
@@ -16,10 +16,10 @@ KLocale *KGlobal::locale()
   return mLocale;
 }
 
-KConfig *KGlobal::config()
+KateConfig *KGlobal::config()
 {
   if ( !mConfig ) {
-    mConfig = new KConfig( KStandardDirs::appDir() + mAppName + "rc" );
+    mConfig = new KateConfig( mAppName );
   }
   
   return mConfig;

@@ -649,17 +649,17 @@ int Highlight::doHighlight(int ctxNum, TextLine *textLine)
   return context->ctx;
 }
 
-KConfig *Highlight::getKConfig() {
-  KConfig *config;
+KateConfig *Highlight::getKateConfig() {
+  KateConfig *config;
   config=KGlobal::config();
   config->setGroup(iName + QString(" Highlight"));
   return config;
 }
 
 QString Highlight::getWildcards() {
-  KConfig *config;
+  KateConfig *config;
 
-  config = getKConfig();
+  config = getKateConfig();
 
   //if wildcards not yet in config, then use iWildCards as default
   return config->readEntry("Wildcards", iWildcards);
@@ -667,19 +667,19 @@ QString Highlight::getWildcards() {
 
 
 QString Highlight::getMimetypes() {
-  KConfig *config;
+  KateConfig *config;
 
-  config = getKConfig();
+  config = getKateConfig();
 
   return config->readEntry("Mimetypes", iMimetypes);
 }
 
 
 HlData *Highlight::getData() {
-  KConfig *config;
+  KateConfig *config;
   HlData *hlData;
 
-  config = getKConfig();
+  config = getKateConfig();
 
 //  iWildcards = config->readEntry("Wildcards");
 //  iMimetypes = config->readEntry("Mimetypes");
@@ -693,9 +693,9 @@ HlData *Highlight::getData() {
 }
 
 void Highlight::setData(HlData *hlData) {
-  KConfig *config;
+  KateConfig *config;
 
-  config = getKConfig();
+  config = getKateConfig();
 
 //  iWildcards = hlData->wildcards;
 //  iMimetypes = hlData->mimetypes;
@@ -707,13 +707,13 @@ void Highlight::setData(HlData *hlData) {
 }
 
 void Highlight::getItemDataList(ItemDataList &list) {
-  KConfig *config;
+  KateConfig *config;
 
-  config = getKConfig();
+  config = getKateConfig();
   getItemDataList(list, config);
 }
 
-void Highlight::getItemDataList(ItemDataList &list, KConfig *config) {
+void Highlight::getItemDataList(ItemDataList &list, KateConfig *config) {
   ItemData *p;
   QString s;
   QRgb col, selCol;
@@ -739,7 +739,7 @@ void Highlight::getItemDataList(ItemDataList &list, KConfig *config) {
 
                         * input: ItemDataList &list             :reference to the list, whose
                         *                                        items should be saved
-                        *        KConfig *config                :Pointer KDE configuration
+                        *        KateConfig *config                :Pointer KDE configuration
                         *                                        class, which should be used
                         *                                        as storage
                         *************
@@ -748,7 +748,7 @@ void Highlight::getItemDataList(ItemDataList &list, KConfig *config) {
                         * return value: none
 *******************************************************************************************/
 
-void Highlight::setItemDataList(ItemDataList &list, KConfig *config) {
+void Highlight::setItemDataList(ItemDataList &list, KateConfig *config) {
   ItemData *p;
   QString s;
 
@@ -1266,7 +1266,7 @@ Highlight *HlManager::getHl(int n) {
 }
 
 int HlManager::defaultHl() {
-  KConfig *config;
+  KateConfig *config;
   config = KGlobal::config();
   config->setGroup("General Options");
 
@@ -1374,7 +1374,7 @@ QString HlManager::defaultStyleName(int n)
 }
 
 void HlManager::getDefaults(ItemStyleList &list) {
-  KConfig *config;
+  KateConfig *config;
   int z;
   ItemStyle *i;
   QString s;
@@ -1410,7 +1410,7 @@ void HlManager::getDefaults(ItemStyleList &list) {
 }
 
 void HlManager::setDefaults(ItemStyleList &list) {
-  KConfig *config;
+  KateConfig *config;
   int z;
   ItemStyle *i;
   char s[64];

@@ -236,7 +236,7 @@ class HlData {
 typedef QList<HlData> HlDataList;
 
 class HlManager;
-class KConfig;
+class KateConfig;
 
 //context
 class HlContext {
@@ -258,14 +258,14 @@ class Highlight
 
     int doHighlight(int ctxNum, TextLine *);
 
-    KConfig *getKConfig();
+    KateConfig *getKateConfig();
     QString getWildcards();
     QString getMimetypes();
     HlData *getData();
     void setData(HlData *);
     void getItemDataList(ItemDataList &);
-    void getItemDataList(ItemDataList &, KConfig *);
-    void setItemDataList(ItemDataList &, KConfig *);
+    void getItemDataList(ItemDataList &, KateConfig *);
+    void setItemDataList(ItemDataList &, KateConfig *);
     QString name() {return iName;}
     QString section() {return iSection;}
     void use();

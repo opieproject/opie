@@ -49,6 +49,7 @@
 
 
 class KateDocument;
+class KateConfig;
 class Highlight;
 
 /*
@@ -661,14 +662,14 @@ class KateView : public Kate::View
     */
     void writeConfig();
     /**
-      Reads session config out of the KConfig object. This also includes
+      Reads session config out of the KateConfig object. This also includes
       the actual cursor position and the bookmarks.
     */
-    void readSessionConfig(KConfig *);
+    void readSessionConfig(KateConfig *);
     /**
-      Writes session config into the KConfig object
+      Writes session config into the KateConfig object
     */
-    void writeSessionConfig(KConfig *);
+    void writeSessionConfig(KateConfig *);
 
 
   public:

@@ -35,6 +35,7 @@
 #include <katedocument.h>
 #include <katehighlight.h>
 #include <kateview.h>
+#include <kglobal.h>
 
 TinyKate::TinyKate( QWidget *parent, const char *name, WFlags f) :
     QMainWindow( parent, name, f )
@@ -43,6 +44,7 @@ TinyKate::TinyKate( QWidget *parent, const char *name, WFlags f) :
   currentView=0;
   viewCount=0;
   setCaption(tr("TinyKATE"));
+  KGlobal::setAppName("TinyKATE");
 
   setToolBarsMovable(FALSE);
 
@@ -148,6 +150,14 @@ TinyKate::TinyKate( QWidget *parent, const char *name, WFlags f) :
 
 }
 
+TinyKate::~TinyKate( )
+{
+  qWarning("TinyKate destructor\n");
+  if( KGlobal::config() != 0 ) {
+    qWarning("deleting KateConfig object..\n");
+    delete KGlobal::config();
+  }
+}
 
 void TinyKate::slotOpen( )
 {

@@ -30,7 +30,7 @@
 
 #include <ktexteditor.h>
 
-class KConfig;
+class KateConfig;
 
 namespace Kate
 {
@@ -79,8 +79,8 @@ class View : public KTextEditor::View
     virtual void writeConfig () { ; };
 
     // read/save sessionconfig of the view
-    virtual void readSessionConfig (KConfig *) { ; };
-    virtual void writeSessionConfig (KConfig *) { ; };
+    virtual void readSessionConfig (KateConfig *) { ; };
+    virtual void writeSessionConfig (KateConfig *) { ; };
 
   public slots:
     // some simply key commands

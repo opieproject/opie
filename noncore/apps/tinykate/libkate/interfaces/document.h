@@ -30,7 +30,7 @@
 
 #include <ktexteditor.h>
 
-class KConfig;
+class KateConfig;
 
 namespace Kate
 {
@@ -63,10 +63,10 @@ class Document : public KTextEditor::Document
 
     /** Read document session config.
     */
-    virtual void readSessionConfig (KConfig *) { ; };
+    virtual void readSessionConfig (KateConfig *) { ; };
     /** Save document session config.
     */
-    virtual void writeSessionConfig (KConfig *) { ; };
+    virtual void writeSessionConfig (KateConfig *) { ; };
 
     /** Returns the document ID.
     */

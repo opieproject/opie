@@ -46,6 +46,7 @@
 #include "../document/katehighlight.h"
 #include "kateviewdialog.h"
 #include "../document/katedialogs.h"
+#include <kateconfig.h>
 
 #include <qfocusdata.h>
 #include <kdebug.h>
@@ -56,7 +57,6 @@
 #include <kpopupmenu.h>
 #include <qkeycode.h>
 #include <qintdict.h>
-#include <kconfig.h>
 #include <qfont.h>
 #include <qpainter.h>
 #include <qpixmap.h>
@@ -1241,12 +1241,12 @@ KateView::KateView(KateDocument *doc, QWidget *parent, const char * name) : Kate
 
 KateView::~KateView()
 {
+  writeConfig();
 
   if (myDoc && !myDoc->m_bSingleViewMode)
     myDoc->removeView( this );
 
   delete myViewInternal;
-
 }
 
 #if 0
@@ -2222,27 +2222,27 @@ void KateView::installPopup(QPopupMenu *rmb_Menu)
 
 void KateView::readConfig()
 {
-  KConfig *config = KGlobal::config();
+  KateConfig *config = KGlobal::config();
   config->setGroup("Kate View");
 
   searchFlags = config->readNumEntry("SearchFlags", KateView::sfPrompt);
   configFlags = config->readNumEntry("ConfigFlags", configFlags) & ~KateView::cfMark;
 
-  config->sync();
+//  config->sync();
 }
 
 void KateView::writeConfig()
 {
-  KConfig *config = KGlobal::config();
+  KateConfig *config = KGlobal::config();
   config->setGroup("Kate View");
 
   config->writeEntry("SearchFlags",searchFlags);
   config->writeEntry("ConfigFlags",configFlags);
 
-  config->sync();
+//  config->sync();
 }
 
-void KateView::readSessionConfig(KConfig *config)
+void KateView::readSessionConfig(KateConfig *config)
 {
   PointStruc cursor;
 
@@ -2255,7 +2255,7 @@ void KateView::readSessionConfig(KConfig *config)
   setIconBorder(myIconBorder);
 }
 
-void KateView::writeSessionConfig(KConfig *config)
+void KateView::writeSessionConfig(KateConfig *config)
 {
   config->writeEntry("XPos",myViewInternal->xPos);
   config->writeEntry("YPos",myViewInternal->yPos);
@@ -2320,7 +2320,7 @@ void KateView::configDialog()
   hlManager->getDefaults(defaultStyleList);
 
   hlDataList.setAutoDelete(true);
-  //this gets the data from the KConfig object
+  //this gets the data from the KateConfig object
   hlManager->getHlDataList(hlDataList);
 
   page=kd->addPage(i18n("Highlighting"));

@@ -229,8 +229,8 @@ class KateDocument: public Kate::Document
 
     void readConfig();
     void writeConfig();
-    void readSessionConfig(KConfig *);
-    void writeSessionConfig(KConfig *);
+    void readSessionConfig(KateConfig *);
+    void writeSessionConfig(KateConfig *);
 
     bool hasBrowserExtension() const { return m_bBrowserView; }
 

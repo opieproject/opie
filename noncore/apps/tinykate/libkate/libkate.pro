@@ -1,7 +1,7 @@
 TEMPLATE	= lib
 CONFIG		= qt warn_on release
 HEADERS		= microkde/kapplication.h \
-		  microkde/kconfig.h \
+		  kateconfig.h \
                   microkde/kdebug.h \
                   microkde/kdialog.h \
                   microkde/kdialogbase.h \
@@ -14,7 +14,6 @@ HEADERS		= microkde/kapplication.h \
                   microkde/kprinter.h \
                   microkde/krestrictedline.h \
                   microkde/kseparator.h \
-                  microkde/ksimpleconfig.h \
                   microkde/kstandarddirs.h \
                   microkde/ktempfile.h \
                   microkde/kunload.h \
@@ -45,7 +44,7 @@ HEADERS		= microkde/kapplication.h \
 
 SOURCES		= microkde/kapplication.cpp \
                   microkde/kdialogbase.cpp \
-		  microkde/kconfig.cpp \
+		  kateconfig.cpp \
                   microkde/klocale.cpp \
                   microkde/kmessagebox.cpp \
                   microkde/kprocess.cpp \
@@ -74,7 +73,9 @@ SOURCES		= microkde/kapplication.cpp \
 		  interfaces/interfaces.cpp
 
 INTERFACES	= 
-INCLUDEPATH	+= $(OPIEDIR)/include $(OPIEDIR)/noncore/apps/tinykate/libkate/microkde \
+INCLUDEPATH	+= $(OPIEDIR)/include \
+			$(OPIEDIR)/noncore/apps/tinykate/libkate \
+			$(OPIEDIR)/noncore/apps/tinykate/libkate/microkde \
 			$(OPIEDIR)/noncore/apps/tinykate/libkate/document \
 			$(OPIEDIR)/noncore/apps/tinykate/libkate/view \
 			$(OPIEDIR)/noncore/apps/tinykate/libkate/interfaces \

@@ -280,6 +280,7 @@ void KateDocument::doPreHighlight()
 KateDocument::~KateDocument()
 {
   m_highlight->release();
+  writeConfig();
 
   if ( !m_bSingleViewMode )
   {
@@ -596,7 +597,7 @@ bool KateDocument::isModified() const {
 
 void KateDocument::readConfig()
 {
-  KConfig *config = KGlobal::config();
+  KateConfig *config = KGlobal::config();
   config->setGroup("Kate Document");
 
   myWordWrap = config->readBoolEntry("Word Wrap On", false);
@@ -608,20 +609,19 @@ void KateDocument::readConfig()
   setUndoSteps(config->readNumEntry("UndoSteps", 50));
   m_singleSelection = config->readBoolEntry("SingleSelection", false);
   myEncoding = config->readEntry("Encoding", QString::fromLatin1(QTextCodec::codecForLocale()->name()));
-  setFont (config->readFontEntry("Font", &myFont));
+  setFont (config->readFontEntry("Font", myFont));
 
-  colors[0] = config->readColorEntry("Color Background", &colors[0]);
-  colors[1] = config->readColorEntry("Color Selected", &colors[1]);
+  colors[0] = config->readColorEntry("Color Background", colors[0]);
+  colors[1] = config->readColorEntry("Color Selected", colors[1]);
   
-  config->sync();
+//  config->sync();
 }
 
 void KateDocument::writeConfig()
 {
-  KConfig *config = KGlobal::config();
+  KateConfig *config = KGlobal::config();
   config->setGroup("Kate Document");
-#if 0
-  cofig->writeEntry("Word Wrap On", myWordWrap);
+  config->writeEntry("Word Wrap On", myWordWrap);
   config->writeEntry("Word Wrap At", myWordWrapAt);
   config->writeEntry("TabWidth", tabChars);
   config->writeEntry("UndoSteps", undoSteps);
@@ -630,11 +630,10 @@ void KateDocument::writeConfig()
   config->writeEntry("Font", myFont);
   config->writeEntry("Color Background", colors[0]);
   config->writeEntry("Color Selected", colors[1]);
-#endif
-  config->sync();
+//  config->sync();
 }
 
-void KateDocument::readSessionConfig(KConfig *config)
+void KateDocument::readSessionConfig(KateConfig *config)
 {
   m_url = config->readEntry("URL"); // ### doesn't this break the encoding? (Simon)
   setHighlight(hlManager->nameFind(config->readEntry("Highlight")));
@@ -648,7 +647,7 @@ void KateDocument::readSessionConfig(KConfig *config)
   }
 }
 
-void KateDocument::writeSessionConfig(KConfig *config)
+void KateDocument::writeSessionConfig(KateConfig *config)
 {
 #if 0
   config->writeEntry("URL", m_url); // ### encoding?? (Simon)

@@ -4,7 +4,9 @@ DESTDIR		= $(OPIEDIR)/bin
 HEADERS		= tinykate.h
 SOURCES		= tinykate.cpp main.cpp
 INTERFACES	= 
-INCLUDEPATH	+= $(OPIEDIR)/include $(OPIEDIR)/noncore/apps/tinykate/libkate/microkde \
+INCLUDEPATH	+= $(OPIEDIR)/include \
+			$(OPIEDIR)/noncore/apps/tinykate/libkate \
+			$(OPIEDIR)/noncore/apps/tinykate/libkate/microkde \
                         $(OPIEDIR)/noncore/apps/tinykate/libkate/document \
                         $(OPIEDIR)/noncore/apps/tinykate/libkate/view \
                         $(OPIEDIR)/noncore/apps/tinykate/libkate/interfaces \
