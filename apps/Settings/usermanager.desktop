@@ -2,7 +2,7 @@
 Comment=User Manager
 Comment[es]=Gestor de usuarios
 Exec=usermanager
-Icon=usermanager/usermanager.png
+Icon=usermanager/usermanager
 Type=Setting
 Name=User Manager
 Name[es]=Gestor Usuarios
