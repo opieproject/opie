@@ -44,7 +44,8 @@
 #include <unistd.h>
 #include <sys/stat.h>
 #include <dirent.h>
-
+#include <sys/sendfile.h>
+#include <fcntl.h>
 
 void AdvancedFm::doDirChange()
 {
@@ -312,7 +313,7 @@ void AdvancedFm::copy()
     if(count > 1 ){
       QString msg;
       msg=tr("Really copy\n%1 files?").arg(count);
-      switch ( QMessageBox::warning(this,tr("Delete"),msg
+      switch ( QMessageBox::warning(this,tr("Copy"),msg
                                     ,tr("Yes"),tr("No"),0,0,1) )
         {
         case 0:
@@ -520,32 +521,56 @@ void AdvancedFm::move()
 
 bool AdvancedFm::copyFile( const QString & src, const QString & dest )
 {
-  char bf[ 50000 ];
-  int  bytesRead;
-  bool success = TRUE;
-  struct stat status;
+//    char bf[ 50000 ];
+//    int  bytesRead;
+   bool success = true;
+   struct stat status;
 
-  QFile s( src );
-  QFile d( dest );
+//    QFile s( src );
+//    QFile d( dest );
 
-  if( s.open( IO_ReadOnly | IO_Raw ) &&  d.open( IO_WriteOnly | IO_Raw ) )
-    {
-      while( (bytesRead = s.readBlock( bf, sizeof( bf ) )) == sizeof( bf ) )
-        {
-        if( d.writeBlock( bf, sizeof( bf ) ) != sizeof( bf ) ){
-          success = FALSE;
-          break;
-        }
+   int read_fd=0;
+   int write_fd=0;
+   struct stat stat_buf;
+   off_t offset = 0;
+   read_fd = ::open(src.latin1(), O_RDONLY);
+   if(read_fd != -1) {
+      fstat (read_fd, &stat_buf);
+      write_fd = ::open(dest.latin1(), O_WRONLY | O_CREAT, stat_buf.st_mode);
+      if(write_fd != -1) {
+         if(sendfile(write_fd, read_fd, &offset, stat_buf.st_size) == -1) {
+            success = false;
+         }
+      } else {
+         success = false;
       }
-      if( success && (bytesRead > 0) )
-        {
-          d.writeBlock( bf, bytesRead );
-        }
-    }
-  else
-    {
-      success = FALSE;
-    }
+   } else {
+      success = false;
+   }
+
+   ::close (read_fd);
+   ::close (write_fd);
+
+
+//    if( s.open( IO_ReadOnly | IO_Raw ) &&  d.open( IO_WriteOnly | IO_Raw ) )
+// {
+//    while( (bytesRead = s.readBlock( bf, sizeof( bf ) )) == sizeof( bf ) )
+//         {
+//         if( d.writeBlock( bf, sizeof( bf ) ) != sizeof( bf ) ){
+//           success = FALSE;
+//           break;
+//         }
+//       }
+//       if( success && (bytesRead > 0) )
+//         {
+//           d.writeBlock( bf, bytesRead );
+//         }
+
+//     }
+//   else
+//     {
+//       success = FALSE;
+//     }
 
     // Set file permissions
   if( stat( (const char *) src, &status ) == 0 )
