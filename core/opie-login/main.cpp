@@ -6,8 +6,8 @@
 .> <`_,   >  .   <=          redistribute it and/or modify it under
 :`=1 )Y*s>-.--   :           the terms of the GNU General Public
 .="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
+ - .   .-<_>     .<>         Foundation; version 2 of the License.
+     ._= =}       :
     .%`+i>       _;_.
     .i_,=:_.      -<s.       This file is distributed in the hope that
      +  .  -:.       =       it will be useful, but WITHOUT ANY WARRANTY;
@@ -321,15 +321,10 @@ private:
 };
 
 
-namespace Opie { extern int force_appearance; }  // HACK to get around the force-style setting
-
-
 int login_main ( int argc, char **argv, pid_t ppid )
 {
 	QWSServer::setDesktopBackground( QImage() );
 	LoginApplication *app = new LoginApplication ( argc, argv, ppid );
-
-	Opie::force_appearance = 0;
 
 	app-> setFont ( QFont ( "Helvetica", 10 ));
 	app-> setStyle ( new QPEStyle ( ));
