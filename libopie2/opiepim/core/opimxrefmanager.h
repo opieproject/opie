@@ -1,6 +1,8 @@
 #ifndef OPIM_XREF_MANAGER_H
 #define OPIM_XREF_MANAGER_H
 
+#include <qstringlist.h>
+
 #include <opie/opimxref.h>
 
 /**
@@ -31,6 +33,9 @@ public:
     OPimXRef::ValueList list()const;
     OPimXRef::ValueList list( const QString& appName )const;
     OPimXRef::ValueList list( int uid )const;
+
+private:
+    OPimXRef::ValueList m_list;
 };
 
 #endif

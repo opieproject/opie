@@ -28,6 +28,9 @@ HEADERS   = ofontmenu.h \
     pim/otodoaccessvcal.h \
     pim/orecur.h \
     pim/opimstate.h \
+    pim/opimxrefpartner.h \
+    pim/opimxref.h \
+    pim/opimxrefmanager.h \
     orecurrancewidget.h \
     oticker.h 
 #    pim/otodoaccesssql.h \
@@ -54,6 +57,9 @@ SOURCES   = ofontmenu.cc  \
        pim/otodoaccessvcal.cpp \
        pim/orecur.cpp \
        pim/opimstate.cpp \
+       pim/opimxrefpartner.cpp \
+       pim/opimxref.cpp \
+       pim/opimxrefmanager.cpp \
        orecurrancewidget.cpp \
        oticker.cpp
 #             pim/otodoaccesssql.cpp \

@@ -20,11 +20,14 @@ public:
     ~OPimXRef();
 
     OPimXRef &operator=( const OPimXRef& );
-    bool operator==( const OPimXRef );
+    bool operator==( const OPimXRef& );
 
-    OPimXRefPartner partner( enum Partners );
+    OPimXRefPartner partner( enum Partners )const;
 
     void setPartner( enum Partners,  const OPimXRefPartner& );
+
+    bool containsString( const QString& appName)const;
+    bool containsUid( int uid )const;
 
 private:
     QArray<OPimXRefPartner> m_partners;

@@ -331,7 +331,7 @@ void OTodoAccessXML::todo( QAsciiDict<int>* dict, OTodo& ev,
         for (strIt = refs.begin(); strIt != refs.end(); ++strIt ) {
             int pos = (*strIt).find(',');
             if ( pos > -1 )
-                ev.addRelation( (*strIt).left(pos),  (*strIt).mid(pos+1).toInt() );
+                ; // ev.addRelation( (*strIt).left(pos),  (*strIt).mid(pos+1).toInt() );
 
         }
         break;
@@ -382,22 +382,6 @@ QString OTodoAccessXML::toString( const OTodo& ev )const {
         str += extIt.key() + "=\"" +  extIt.data() + "\" ";
     */
     // cross refernce
-    QStringList list = ev.relatedApps();
-    QStringList::Iterator listIt;
-    QString refs;
-    str += "CrossReference=\"";
-    bool added = false;
-    for ( listIt = list.begin(); listIt != list.end(); ++listIt ) {
-        added = true;
-        QArray<int> ints = ev.relations( (*listIt) );
-        for ( uint i = 0; i< ints.count(); i++ ) {
-            str += (*listIt) + "," + QString::number( i ) + ";";
-        }
-    }
-    if ( added )
-        str = str.remove( str.length()-1, 1 );
-
-    str += "\" ";
 
     str += "AlarmDateTime=\"" + TimeConversion::toISO8601( ev.alarmDateTime() ) + "\" ";
 

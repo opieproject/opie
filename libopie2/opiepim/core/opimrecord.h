@@ -7,6 +7,7 @@
 
 #include <qpe/palmtoprecord.h>
 
+#include <opie/opimxrefmanager.h>
 
 /**
  * This is the base class for
@@ -86,30 +87,12 @@ public:
     virtual QString recordField(int)const = 0;
 
     /**
-     * the related apps names
+     * returns a reference of the
+     * Cross Reference Manager
+     * Partner One is THIS PIM RECORD!
+     * Two is the Partner where we link to
      */
-    QStringList relatedApps()const;
-
-    /**
-     * the realtions between an app
-     */
-    QArray<int> relations( const QString& app )const;
-
-    /**
-     * clear the relations for all relations
-     * with app
-     */
-    void clearRelation( const QString& app );
-
-    /**
-     * add a relation
-     */
-    void addRelation( const QString& app,  int id );
-
-    /**
-     * set the relations for an app
-     */
-    void setRelations( const QString&, QArray<int> ids );
+    OPimXRefManager& xrefmanager();
 
     /**
      * set the uid
@@ -118,12 +101,12 @@ public:
 
 protected:
     Qtopia::UidGen &uidGen();
-    QString crossToString()const;
+//    QString crossToString()const;
 
 private:
     class OPimRecordPrivate;
     OPimRecordPrivate *d;
-    QMap<QString, QArray<int> > m_relations;
+    OPimXRefManager m_xrefman;
     static Qtopia::UidGen m_uidGen;
 
 };
