@@ -288,11 +288,16 @@ void AdvancedFm::tabChanged(QWidget *w)
     currentPathCombo->lineEdit()->setText( currentDir.canonicalPath());
     viewMenu->setItemChecked(viewMenu->idAt(0),TRUE);
     viewMenu->setItemChecked(viewMenu->idAt(1),FALSE);
+  QString fs= getFileSystemType((const QString &) currentDir.canonicalPath());
+  setCaption("AdvancedFm :: "+fs+" :: "+checkDiskSpace((const QString &) currentDir.canonicalPath())+" kB free" );
+    
   }
   if (TabWidget->currentPageIndex() == 1) {
     currentPathCombo->lineEdit()->setText( currentRemoteDir.canonicalPath());
     viewMenu->setItemChecked(viewMenu->idAt(1),TRUE);
     viewMenu->setItemChecked(viewMenu->idAt(0),FALSE);
+  QString fs= getFileSystemType((const QString &) currentRemoteDir.canonicalPath());
+  setCaption("AdvancedFm :: "+fs+" :: "+checkDiskSpace((const QString &) currentRemoteDir.canonicalPath())+" kB free" );
   }
 }
 
