@@ -83,7 +83,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
 
     folderView = new AccountView( view );
     folderView->header()->hide();
-    folderView->setRootIsDecorated( false );
+    folderView->setRootIsDecorated( true );
     folderView->addColumn( tr( "Mailbox" ) );
     //folderView->hide();
 

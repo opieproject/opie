@@ -1,5 +1,5 @@
 #include <qtextbrowser.h>
-#include <qmessagebox.h>?
+#include <qmessagebox.h>
 #include <qtextstream.h>
 #include <qaction.h>
 #include <qpopupmenu.h>

@@ -273,7 +273,7 @@ void POP3wrapper::logout()
 QList<Folder>* POP3wrapper::listFolders()
 {
     QList<Folder> * folders = new QList<Folder>();
-    folders->setAutoDelete( true );
+    folders->setAutoDelete( false );
     Folder*inb=new Folder("INBOX");
     folders->append(inb);
     return folders;

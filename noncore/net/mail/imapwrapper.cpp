@@ -149,7 +149,7 @@ QList<Folder>* IMAPwrapper::listFolders()
     clistcell *current;
 
     QList<Folder> * folders = new QList<Folder>();
-    folders->setAutoDelete( true );
+    folders->setAutoDelete( false );
     login();
     if (!m_imap) {
         return folders;
@@ -188,19 +188,23 @@ QList<Folder>* IMAPwrapper::listFolders()
     if (!path) path = "";
     result = clist_new();
     qDebug(path);
+    bool selectable = true;
+    mailimap_mbx_list_flags*bflags;
     err = mailimap_list( m_imap, (char*)path, (char*)mask, &result );
     if ( err == MAILIMAP_NO_ERROR ) {
         current = result->first;
-        for ( int i = result->count; i > 0; i-- ) {
+        for ( current=clist_begin(result);current!=NULL;current=clist_next(current)) {
             list = (mailimap_mailbox_list *) current->data;
             // it is better use the deep copy mechanism of qt itself
             // instead of using strdup!
             temp = list->mb_name;
-            current = current->next;
             if (temp.lower()=="inbox")
                 continue;
-            folders->append(new IMAPFolder(temp));
-
+            if ( (bflags = list->mb_flag) ) {
+                selectable = !(bflags->mbf_type==MAILIMAP_MBX_LIST_FLAGS_SFLAG&&
+                            bflags->mbf_sflag==MAILIMAP_MBX_LIST_SFLAG_NOSELECT);
+            }
+            folders->append(new IMAPFolder(temp,selectable));
         }
     } else {
         qDebug("error fetching folders %s",m_imap->imap_response);

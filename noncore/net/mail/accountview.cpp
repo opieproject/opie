@@ -73,7 +73,11 @@ void IMAPviewItem::refresh(QList<RecMail>&)
     QListViewItem*item = 0;
     for ( it = folders->first(); it; it = folders->next() ) {
         item = new IMAPfolderItem( it, this , item );
+        item->setSelectable(it->may_select());
     }
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    folders->setAutoDelete(false);
+    delete folders;
 }
 
 RecBody IMAPviewItem::fetchBody(const RecMail&)
@@ -97,7 +101,8 @@ IMAPfolderItem::IMAPfolderItem( Folder *folderInit, IMAPviewItem *parent , QList
 
 void IMAPfolderItem::refresh(QList<RecMail>&target)
 {
-    imap->getWrapper()->listMessages( folder->getName(),target );
+    if (folder->may_select())
+        imap->getWrapper()->listMessages( folder->getName(),target );
 }
 
 RecBody IMAPfolderItem::fetchBody(const RecMail&aMail)
@@ -112,7 +117,7 @@ RecBody IMAPfolderItem::fetchBody(const RecMail&aMail)
 AccountView::AccountView( QWidget *parent, const char *name, WFlags flags )
     : QListView( parent, name, flags )
 {
-    connect( this, SIGNAL( clicked( QListViewItem * ) ),
+    connect( this, SIGNAL( selectionChanged( QListViewItem * ) ),
              SLOT( refresh( QListViewItem * ) ) );
     setSorting(-1);
 }
