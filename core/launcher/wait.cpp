@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -20,8 +20,10 @@
 
 #include "wait.h"
 
-#include <qpe/resource.h>
-#include <qpe/config.h>
+#include <qtopia/resource.h>
+#include <qtopia/config.h>
+
+#include <opie/owait.h>
 
 #include <qwidget.h>
 #include <qpixmap.h>
@@ -36,8 +38,8 @@ Wait::Wait( QWidget *parent ) : QWidget( parent ),
 {
     setFixedSize( pm.size() );
     lastWaitObject = this;
-    centralWait = new OWait( 0L );
-    centralWait->hide();
+    m_centralWait = new OWait( 0l );
+    m_centralWait->hide();
     hide();
 }
 
@@ -51,19 +53,18 @@ Wait *Wait::getWaitObject()
 void Wait::setWaiting( bool w )
 {
     Config cfg ( "Launcher" );
-    cfg. setGroup ( "GUI" );
+    cfg.setGroup("GUI");
 
 
     waiting = w;
     if ( w ) {
-        if (   cfg. readBoolEntry ( "BigBusy" ) )  {
-            centralWait->show();
-        } else {
+        if ( cfg. readBoolEntry( "BigBusy" ) )
+            m_centralWait->show();
+        else
             show();
-        }
-    } else {
-        centralWait->hide();
-        hide();
+    }else{
+        m_centralWait->hide();
+	hide();
     }
 }
 
