@@ -556,6 +556,19 @@ void Launcher::loadDocs() // ok here comes a hack belonging to Global::
     docsFolder->appendFrom( *tmp );
     delete tmp;
 
+    // RAM documents
+    StorageInfo storage;
+    const QList<FileSystem> &fileSystems = storage.fileSystems();
+    QListIterator<FileSystem> it ( fileSystems );
+
+    for ( ; it.current(); ++it ) {
+	if ( (*it)->disk() == "/dev/mtdblock6" || (*it)->disk() == "tmpfs" ) {
+	    tmp = new DocLnkSet( (*it)->path(), QString::null );
+	    docsFolder->appendFrom( *tmp );
+	    delete tmp;
+	}
+    }
+
     Config mediumCfg( "medium");
     mediumCfg.setGroup("main");
     // a) -zecke we don't want to check
@@ -569,14 +582,11 @@ void Launcher::loadDocs() // ok here comes a hack belonging to Global::
     int stamp = uidgen.generate();
 
     QString newStamp = QString::number( stamp ); // generates newtime Stamp
-    StorageInfo storage;
-    const QList<FileSystem> &fileSystems = storage.fileSystems();
-    QListIterator<FileSystem> it ( fileSystems );
 
     // b)
     if( mediumCfg.readBoolEntry("global", true ) ){
       QString mime = configToMime(&mediumCfg).join(";");
-      for( ; it.current(); ++it ){
+      for( it.toFirst(); it.current(); ++it ){
 	if( (*it)->isRemovable() ){
 	  tmp = new DocLnkSet( (*it)->path(), mime );
 	  docsFolder->appendFrom( *tmp );
@@ -586,7 +596,7 @@ void Launcher::loadDocs() // ok here comes a hack belonging to Global::
       return; // save the else
     }
     // c) zecke
-    for ( ; it.current(); ++it ) {
+    for ( it.toFirst(); it.current(); ++it ) {
       if ( (*it)->isRemovable() ) { // let's find out  if we should search on it
 	Config cfg( (*it)->path() + "/.opiestorage.cf", Config::File);
 	cfg.setGroup("main");
@@ -827,7 +837,7 @@ void Launcher::systemMessage( const QCString &msg, const QByteArray &data)
         QString homeDir = getenv("HOME");
         QString hardDiskHome;
         for ( ; it.current(); ++it ) {
-            if ( (*it)->isRemovable() )
+            if ( (*it)->isRemovable() || (*it)->disk() == "/dev/mtdblock6" || (*it)->disk() == "tmpfs" )
                 s += (*it)->name() + "=" + (*it)->path() + "/Documents "
                      + QString::number( (*it)->availBlocks() * (*it)->blockSize() )
                      + " " + (*it)->options() + ";";
@@ -836,7 +846,7 @@ void Launcher::systemMessage( const QCString &msg, const QByteArray &data)
                 s += (*it)->name() + "=" + homeDir + "/Documents "
                      + QString::number( (*it)->availBlocks() * (*it)->blockSize() )
                      + " " + (*it)->options() + ";";
-            else if ( (*it)->name().contains( "Hard Disk") &&
+            else if ( (*it)->name().contains( tr("Hard Disk") ) &&
                       homeDir.contains( (*it)->path() ) &&
                       (*it)->path().length() > hardDiskHome.length() )
                 hardDiskHome =
