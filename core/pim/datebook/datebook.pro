@@ -11,7 +11,8 @@ HEADERS	= datebookday.h \
 	  datebookweeklst.h \
 	  datebookweekheaderimpl.h \
 	  repeatentry.h \
-	  clickablelabel.h
+	  clickablelabel.h \
+	  timepicker.h
 
 SOURCES	= main.cpp \
 	  datebookday.cpp \
@@ -23,7 +24,8 @@ SOURCES	= main.cpp \
 	  datebookweeklst.cpp \
 	  datebookweekheaderimpl.cpp \
 	  repeatentry.cpp \
-	  clickablelabel.cpp
+	  clickablelabel.cpp \
+	  timepicker.cpp
 
 INTERFACES	= dateentry.ui \
 		  datebookdayheader.ui \

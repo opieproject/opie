@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.4 2002-03-09 13:07:57 hakan Exp $
+** $Id: datebook.cpp,v 1.5 2002-03-26 19:05:31 hakan Exp $
 **
 **********************************************************************/
 
@@ -207,6 +207,9 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
     QCopChannel *channel = new QCopChannel( "QPE/System", this );
     connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
 	     this, SLOT(receive(const QCString&, const QByteArray&)) );
+    channel = new QCopChannel( "QPE/Datebook", this );
+    connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
+	     this, SLOT(receive(const QCString&, const QByteArray&)) );
 #endif
 #endif
     
@@ -225,6 +228,14 @@ void DateBook::receive( const QCString &msg, const QByteArray &data )
 	    viewWeek();
 	else if ( monthAction->isOn() )
 	    viewMonth();
+    }
+    else if (msg == "editEvent(int)") {
+      /* Not yet working...
+      int uid;
+      stream >> uid;
+      Event e=db->getEvent(uid);
+      editEvent(e);
+      */
     }
 }
 

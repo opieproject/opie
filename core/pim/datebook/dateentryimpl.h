@@ -46,10 +46,12 @@ public:
 public slots:
     void endDateChanged( int, int, int );
     void endTimeChanged( const QString & );
+    void endTimeChanged( const QTime & );
     void startDateChanged(int, int, int);
-    void startTimeChanged( int index );
+    void startTimeEdited( const QString & );
+    void startTimeChanged( const QTime & );
+    void startTimePicked( const QTime & );
     void typeChanged( const QString & );
-    void changeEndCombo( int change );
     void slotRepeat();
     void slotChangeClock( bool );
     void slotChangeStartOfWeek( bool );
@@ -59,6 +61,7 @@ private:
     void initCombos();
     void setDates( const QDateTime& s, const QDateTime& e );
     void setRepeatLabel();
+    void updateTimeEdit(bool,bool);
 
     DateBookMonth *startPicker, *endPicker;
     QDate startDate, endDate;

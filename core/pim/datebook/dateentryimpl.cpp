@@ -39,6 +39,8 @@
 #include <qspinbox.h>
 #include <qtoolbutton.h>
 
+#include "timepicker.h"
+
 #include <stdlib.h>
 
 #include <stdiostream.h>
@@ -60,18 +62,22 @@ DateEntry::DateEntry( bool startOnMonday, const QDateTime &start,
 {
     init();
     setDates(start,end);
-		setFocusProxy(comboDescription);
+    setFocusProxy(comboDescription);
 }
 
 static void addOrPick( QComboBox* combo, const QString& t )
 {
+    // Pick an  item if one excists
     for (int i=0; i<combo->count(); i++) {
 	if ( combo->text(i) == t ) {
 	    combo->setCurrentItem(i);
 	    return;
 	}
     }
-    combo->setEditText(t);
+
+    // Else add one
+    combo->insertItem(t);
+    combo->setCurrentItem(combo->count()-1);
 }
 
 DateEntry::DateEntry( bool startOnMonday, const Event &event, bool whichClock,
@@ -103,45 +109,50 @@ DateEntry::DateEntry( bool startOnMonday, const Event &event, bool whichClock,
 
 void DateEntry::setDates( const QDateTime& s, const QDateTime& e )
 {
-    int shour,
-        ehour;
-    QString strStart,
-            strEnd;
     startDate = s.date();
     endDate = e.date();
     startTime = s.time();
     endTime = e.time();
     startDateChanged( s.date().year(), s.date().month(), s.date().day() );
+    endDateChanged( e.date().year(), e.date().month(), e.date().day() );
+    updateTimeEdit(true,true);
+}
+
+void DateEntry::updateTimeEdit(bool s, bool e) {
+
+    // Comboboxes
+    QString strStart, strEnd;
+    int shour, ehour;
     if ( ampm ) {
-	shour = s.time().hour();
-	ehour = e.time().hour();
+	shour = startTime.hour();
+	ehour = endTime.hour();
 	if ( shour >= 12 ) {
 	    if ( shour > 12 )
 		shour -= 12;
-	    strStart.sprintf( "%d:%02d PM", shour, s.time().minute() );
+	    strStart.sprintf( "%d:%02d PM", shour, startTime.minute() );
 	} else {
 	    if ( shour == 0 )
 		shour = 12;
-	    strStart.sprintf( "%d:%02d AM", shour, s.time().minute() );
+	    strStart.sprintf( "%d:%02d AM", shour, startTime.minute() );
 	}
-	if ( ehour == 24 && e.time().minute() == 0 ) {
+	if ( ehour == 24 && endTime.minute() == 0 ) {
 	    strEnd  = "11:59 PM"; // or "midnight"
 	} else if ( ehour >= 12 ) {
 	    if ( ehour > 12 )
 		ehour -= 12;
-	    strEnd.sprintf( "%d:%02d PM", ehour, e.time().minute() );
+	    strEnd.sprintf( "%d:%02d PM", ehour, endTime.minute() );
 	} else {
 	    if ( ehour == 0 )
 		ehour = 12;
-	    strEnd.sprintf( "%d:%02d AM", ehour, e.time().minute() );
+	    strEnd.sprintf( "%d:%02d AM", ehour, endTime.minute() );
 	}
     } else {
-	strStart.sprintf( "%02d:%02d", s.time().hour(), s.time().minute() );
-	strEnd.sprintf( "%02d:%02d", e.time().hour(), e.time().minute() );
+	strStart.sprintf( "%02d:%02d", startTime.hour(), startTime.minute() );
+	strEnd.sprintf( "%02d:%02d", endTime.hour(), endTime.minute() );
     }
-    addOrPick(comboStart, strStart );
-    endDateChanged( e.date().year(), e.date().month(), e.date().day() );
-    addOrPick(comboEnd, strEnd );
+    
+    if (s) comboStart->setText(strStart);
+    if (e) comboEnd->setText(strEnd);
 }
 
 void DateEntry::init()
@@ -171,6 +182,10 @@ void DateEntry::init()
     buttonEnd->setPopup( m2 );
     connect( endPicker, SIGNAL( dateClicked( int, int, int ) ),
 	     this, SLOT( endDateChanged( int, int, int ) ) );
+
+    connect(timePickerStart, SIGNAL( timeChanged(const QTime &) ),
+	    this, SLOT( startTimePicked(const QTime &) ));
+    editNote->setFixedVisibleLines(3);
 }
 
 /*
@@ -240,8 +255,12 @@ void DateEntry::endTimeChanged( const QString &s )
         endTime = tmpTime;
     } else {
         endTime = startTime;
-        comboEnd->setCurrentItem( comboStart->currentItem() );
+        //comboEnd->setCurrentItem( comboStart->currentItem() );
     }
+    
+}
+
+void DateEntry::endTimeChanged( const QTime &t ) {
 }
 
 /*
@@ -270,12 +289,25 @@ void DateEntry::startDateChanged( int y, int m, int d )
 /*
  * public slot
  */
-void DateEntry::startTimeChanged( int index )
+void DateEntry::startTimeEdited( const QString &s )
 {
-    startTime = parseTime(comboStart->text(index),ampm);
-    changeEndCombo( index );
-		//cout << "Start: " << comboStart->currentText() << endl;
+    startTimeChanged(parseTime(s,ampm));
+    updateTimeEdit(false,true);
+    timePickerStart->setHour(startTime.hour());
+    timePickerStart->setMinute(startTime.minute());
 }
+
+void DateEntry::startTimeChanged( const QTime &t )
+{
+    int duration=startTime.secsTo(endTime);
+    startTime = t;
+    endTime=t.addSecs(duration);
+}
+void DateEntry::startTimePicked( const QTime &t ) {
+    startTimeChanged(t);
+    updateTimeEdit(true,true);
+}
+
 /*
  * public slot
  */
@@ -285,16 +317,6 @@ void DateEntry::typeChanged( const QString &s )
     buttonStart->setEnabled( b );
     comboStart->setEnabled( b );
     comboEnd->setEnabled( b );
-}
-/*
- * public slot
- */
-void DateEntry::changeEndCombo( int change )
-{
-    if ( change + 2 < comboEnd->count() )
-        change += 2;
-    comboEnd->setCurrentItem( change );
-    endTimeChanged( comboEnd->currentText() );
 }
 
 void DateEntry::slotRepeat()
@@ -336,8 +358,11 @@ Event DateEntry::event()
         endDate = startDate;
         startDate = tmp;
     }
-    startTime = parseTime( comboStart->currentText(), ampm );
-    endTime = parseTime( comboEnd->currentText(), ampm );
+    
+    // This is now done in the changed slots
+    //    startTime = parseTime( comboStart->text(), ampm );
+    //endTime = parseTime( comboEnd->text(), ampm );
+
     if ( startTime > endTime && endDate == startDate ) {
         QTime tmp = endTime;
         endTime = startTime;
@@ -427,6 +452,7 @@ void DateEntry::setAlarmEnabled( bool alarmPreset, int presetTime, Event::SoundT
 
 void DateEntry::initCombos()
 {
+    /*
     comboStart->clear();
     comboEnd->clear();
     if ( ampm ) {
@@ -472,6 +498,7 @@ void DateEntry::initCombos()
 	    }
 	}
     }
+    */
 }
 
 void DateEntry::slotChangeClock( bool whichClock )
