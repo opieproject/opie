@@ -18,6 +18,10 @@
 #include <iostream>
 using namespace std;
 
+#ifdef QWS
+#include <qpe/config.h>
+#endif
+
 #include <stdio.h>
 
 #include "datamgr.h"
@@ -70,6 +74,11 @@ void DataManager :: loadServers()
     serverList.push_back( Server( LOCAL_SERVER, "" ) );
     serverList.push_back( Server( LOCAL_IPKGS, "" ) );
 
+#ifdef QWS
+    Config cfg( "aqpkg" );
+    cfg.setGroup( "destinations" );
+#endif
+
     // Read file from /etc/ipkg.conf
     QString ipkg_conf = IPKG_CONF;
     FILE *fp;
@@ -112,6 +121,14 @@ void DataManager :: loadServers()
                 char path[50];
                 sscanf( lineStr, "%*[^ ] %s %s", alias, path );
                 Destination d( alias, path );
+                bool linkToRoot = true;
+#ifdef QWS
+                QString key = alias;
+                key += "_linkToRoot";
+                linkToRoot = cfg.readBoolEntry( key, true );
+#endif
+                d.linkToRoot( linkToRoot );
+                
                 destList.push_back( d );
             }
         }
