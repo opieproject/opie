@@ -221,23 +221,34 @@ void Gutenbrowser::goGetit( const QString &url, bool showMsg) {
 				odebug << "Issuing the system command: " << cmd << "" << oendl;
 
 				Output *outDlg;
-				outDlg = new Output(this, tr("Gutenbrowser Output"),FALSE);
+
+				outDlg = new Output( 0, tr("Downloading Gutenberg Index...."),TRUE);
+
 				outDlg->showMaximized();
 				outDlg->show();
 				qApp->processEvents();
 				FILE *fp;
 				char line[130];
 				outDlg->OutputEdit->append( tr("Running wget") );
+				outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
 				sleep(1);
 				fp = popen(  (const char *) cmd, "r");
-				odebug << "Issuing the command\n"+cmd << oendl;
-					//                 system(cmd);
-				while ( fgets( line, sizeof line, fp)) {
-						outDlg->OutputEdit->append(line);
-//                        outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
+				if ( !fp ) {
+				} else {
+							//odebug << "Issuing the command\n"+cmd << oendl;
+							//                 system(cmd);
+						while ( fgets( line, sizeof line, fp)) {
+								outDlg->OutputEdit->append(line);
+								outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
+						}
+						pclose(fp);
+						outDlg->OutputEdit->append("Finished downloading\n");
+						outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
+						qApp->processEvents();
+
 				}
-				pclose(fp);
-				outDlg->close();
+ 				outDlg->close();
+
 				if(outDlg)
 						delete outDlg;
 		} else {
