@@ -273,7 +273,7 @@ void MainWindow::slotLoadForDay(const QDate& date) {
 
     /* all todos for today including the ones without dueDate */
     m_todoView->set( m_tb.effectiveToDos(date, date ) );
-    m_dateView->set( m_db.effectiveEvents( date, date ) );
+    m_dateView->set( m_db.occurrences( date, date ) );
 }
 
 /* we want to show the current record */
@@ -408,13 +408,13 @@ void PIMListView::set( Opie::OPimTodoAccess::List list ) {
     }
 }
 
-void PIMListView::set( const Opie::OEffectiveEvent::ValueList& lst ) {
+void PIMListView::set( const Opie::OPimOccurrence::List& lst ) {
     /* clear first and then add items */
     clear();
 
-    Opie::OEffectiveEvent::ValueList::ConstIterator it;
+    Opie::OPimOccurrence::List::ConstIterator it;
     for ( it = lst.begin(); it != lst.end(); ++it ) {
-        PIMListViewItem *i = new PIMListViewItem(this, new Opie::OPimEvent( (*it).event() ) );
+        PIMListViewItem *i = new PIMListViewItem(this, new Opie::OPimEvent( (*it).toEvent() ) );
         i->setText( 0, PIMListView::makeString( (*it) ) );
     }
 
@@ -436,18 +436,23 @@ void PIMListView::showCurrentRecord() {
     emit showRecord( (*item->record() ) );
 }
 
-QString PIMListView::makeString( const Opie::OEffectiveEvent& ev ) {
+QString PIMListView::makeString( const Opie::OPimOccurrence& _ev ) {
     QString str;
-    str += ev.description();
-    if ( !ev.event().isAllDay() ) {
+    str += _ev.summary();
+    
+    Opie::OPimEvent ev = _ev.toEvent();
+    if ( !ev.isAllDay() ) {
+#if 0    
         if ( ev.startDate() != ev.endDate() ) {
-            str += tr("Start ") + TimeString::timeString( ev.event().startDateTime().time() );
-            str += " - " + TimeString::longDateString( ev.startDate() );
-            str +=  tr("End ") + TimeString::timeString( ev.event().endDateTime().time() );
-            str += " - " + TimeString::longDateString( ev.endDate() );
-        }else{
-            str += tr("Time ") + TimeString::timeString( ev.startTime() );
-            str += " - " + TimeString::timeString( ev.endTime() );
+            str += tr("Start ") + TimeString::timeString( ev.startDateTime().time() );
+            str += " - " + TimeString::longDateString( ev.startDateTime().date() );
+            str +=  tr("End ") + TimeString::timeString( ev.endDateTime().time() );
+            str += " - " + TimeString::longDateString( ev.endDateTime().date() );
+        }else
+#endif	
+	{
+            str += tr("Time ") + TimeString::timeString( _ev.startTime() );
+            str += " - " + TimeString::timeString( _ev.endTime() );
         }
     }else
         str += tr(" This is an All-Day Event");

@@ -85,14 +85,14 @@ public:
 
 
     void set( Opie::OPimTodoAccess::List );
-    void set( const Opie::OEffectiveEvent::ValueList& );
+    void set( const Opie::OPimOccurrence::List& );
     void showCurrentRecord();
 
 signals:
     void showRecord( const Opie::OPimRecord& );
 
 private:
-    static QString makeString( const Opie::OEffectiveEvent& ev );
+    static QString makeString( const Opie::OPimOccurrence& ev );
 
 };
 
