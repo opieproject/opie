@@ -25,6 +25,7 @@ public:
     ListViews( QWidget* parent, const char * name, WFlags fl );
     ~ListViews();
 
+    bool eventFilter( QObject* , QEvent* );
 private:
     void initFolders();
     void initFolder( Folder *folder, unsigned int &count );

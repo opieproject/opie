@@ -22,6 +22,7 @@ class Folder {
 
 ListViews::ListViews( QWidget* p, const char* name, WFlags fl )
     : QWidget( p, name, fl ) {
+    qApp->installEventFilter( this );
     m_lstFolders.setAutoDelete( true );
     QHBoxLayout *lay = new QHBoxLayout(this);
 
@@ -67,4 +68,15 @@ ListViews::ListViews( QWidget* p, const char* name, WFlags fl )
 
 ListViews::~ListViews() {
 
+}
+
+
+bool ListViews::eventFilter( QObject* obj, QEvent* ev ) {
+    if (!obj->isWidgetType() )
+        return false;
+    if ( ev->type() == QEvent::MouseButtonRelease ) {
+        qWarning(" name %s, class %s", obj->name(), obj->className() );
+    }
+
+    return false;
 }
