@@ -1,4 +1,6 @@
  config MAILAPPLET
-    boolean "mailapplet ( taskbar mail applet )"
+    boolean "mailapplet (taskbar mail applet)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && MAIL3
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBMAILWRAPPER
+    comment "mailapplet needs a libqpe, libopie2core and the libmailwrapper"
+    depends !( ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBMAILWRAPPER )

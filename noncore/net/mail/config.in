@@ -1,6 +1,10 @@
 source noncore/net/mail/libmailwrapper/config.in
+
 config MAIL3
     boolean "opie-mail3 (a mail client)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2PIM && LIBOPIE2DB && LIBMAILWRAPPER
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2PIM && LIBOPIE2DB && LIBMAILWRAPPER
+    comment "opie-mail3 needs a libqpe, libopie2core, libopie2pim, libopie2db and the libmailwrapper"
+    depends ! ( ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2PIM && LIBOPIE2DB && LIBMAILWRAPPER )
+
 source noncore/net/mail/taskbarapplet/config.in

@@ -38,17 +38,14 @@ SOURCES         = imapwrapper.cpp \
 INTERFACES     = logindialogui.ui \
               sendmailprogressui.ui
 
-
 INCLUDEPATH += $(OPIEDIR)/include
+LIBS        += -lqpe -letpan -lssl -lcrypto
 
-CONFTEST = $$system( echo $CONFIG_TARGET_MACOSX )
-contains( CONFTEST, y ){
-    LIBS        += -lqpe -letpan -lssl -lcrypto -liconv
-}else{
-    LIBS        += -lqpe -letpan -lssl -lcrypto
+contains( $(CONFIG_TARGET_MACOSX), y ){
+    LIBS    += -liconv
 }
 
-DESTDIR         = $(OPIEDIR)/lib$(PROJMAK)
+DESTDIR      = $(OPIEDIR)/lib
 TARGET       = mailwrapper
 
 include ( $(OPIEDIR)/include.pro )
