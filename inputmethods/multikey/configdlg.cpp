@@ -21,6 +21,8 @@
 #include <qpushbutton.h>
 #include <qlistbox.h>
 #include <qstringlist.h>
+#include <opie/ofiledialog.h>
+#include <iostream.h>
 #include "configdlg.h"
 #include "keyboard.h"
 
@@ -58,16 +60,6 @@ ConfigDlg::ConfigDlg () : QTabWidget ()
 
     connect(keymaps, SIGNAL(highlighted(int)), SLOT(setMap(int)));
 
-    /*
-    QString ko(QPEApplication::qpeDir() + "/share/multikey/ko.keymap");
-    keymaps->insertItem(ko);
-
-    QString en(QPEApplication::qpeDir() + "/share/multikey/en.keymap");
-    keymaps->insertItem(en);
-
-    QString de(QPEApplication::qpeDir() + "/share/multikey/de.keymap");
-    keymaps->insertItem(de);
-    */
 
     QGrid *add_remove_grid = new QGrid(2, map_group);
     add_remove_grid->setMargin(3);
@@ -75,6 +67,7 @@ ConfigDlg::ConfigDlg () : QTabWidget ()
 
     add_button = new QPushButton(tr("Add"), add_remove_grid);
     add_button->setFlat((bool)1);
+    connect(add_button, SIGNAL(clicked()), SLOT(addMap()));
 
     remove_button = new QPushButton(tr("Remove"), add_remove_grid);
     remove_button->setFlat((bool)1);
@@ -158,6 +151,9 @@ void ConfigDlg::setMap(int index) {
 }
 
 void ConfigDlg::addMap() {
+
+    QString map = OFileDialog::getOpenFileName(2, QPEApplication::qpeDir() + "/share/multikey");
+    cout << "added file " << map << "!\n";
 
 }
 

@@ -1,4 +1,4 @@
-Files: plugins/inputmethods/libqmultikey.so*
+Files: plugins/inputmethods/libqmultikey.so* share/multikey/*
 Priority: optional
 Section: opie/inputmethods
 Maintainer: Jake Richardson (jake@asdfnews.org)
