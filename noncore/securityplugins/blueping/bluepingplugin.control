@@ -5,7 +5,7 @@ Section: opie/settings
 Maintainer: Clement Seveillac <clement@nist.gov>
 Architecture: arm
 Version: 0.0.2.5
-Depends: libopiecore2, opie-security
+Depends: libopiecore2, opie-security, bluez-utils
 Description: Blueping plugin for opie-security authentication.
  This is a bluetooth-based authentication plugin (you need
  to have another Bluetooth device around, the more secure the
