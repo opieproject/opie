@@ -313,6 +313,10 @@ void LnkProperties::done(int ok)
 		reloadMime = TRUE;
 	    }
 	}
+    if ( d->arguments->text() != lnk->property( "Arguments" ) ) {
+        lnk->setProperty( "Arguments", d->arguments->text() );
+        changed = TRUE;
+    }
 	if ( d->preload->isHidden() && d->locationCombo->currentItem() != currentLocation ) {
 	    moveLnk();
 	} else if ( changed ) {
