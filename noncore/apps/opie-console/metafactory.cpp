@@ -60,7 +60,7 @@ IOLayer* MetaFactory::newIOLayer( const QString& str,const Profile& prof ) {
     return lay;
 }
 
-ProfileEditorPlugin *MetaFactory::newConfigPlugin ( const QString& str, QWidget *parent, const Profile& prof) {
+ProfileEditorPlugin *MetaFactory::newConfigPlugin ( const QString& str, QWidget *parent, Profile *prof) {
     ProfileEditorPlugin *p = NULL;
     configWidget c;
 

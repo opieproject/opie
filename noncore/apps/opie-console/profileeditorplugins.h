@@ -11,7 +11,7 @@ class ProfileEditorPlugin : public QObject
 {
 	Q_OBJECT
 	public:
-		ProfileEditorPlugin(QWidget *parent, Profile p);
+		ProfileEditorPlugin(QWidget *parent, Profile *p);
 
 		virtual ~ProfileEditorPlugin();
 
@@ -36,7 +36,7 @@ class ProfileEditorPlugin : public QObject
 
 	protected:
 		QWidget *m_parent, *m_widget;
-		Profile m_profile;
+		Profile *m_profile;
 
 	private:
 		enum ParityIds
@@ -85,9 +85,9 @@ class ProfileEditorPlugin : public QObject
 //extern "C" {
 //#endif
 
-ProfileEditorPlugin *factory_serial(QWidget *parent, const Profile& p);
-ProfileEditorPlugin *factory_irda(QWidget *parent, const Profile& p);
-ProfileEditorPlugin *factory_modem(QWidget *parent, const Profile& p);
+ProfileEditorPlugin *factory_serial(QWidget *parent, Profile *p);
+ProfileEditorPlugin *factory_irda(QWidget *parent, Profile *p);
+ProfileEditorPlugin *factory_modem(QWidget *parent, Profile *p);
 
 //#ifdef __cplusplus
 //}

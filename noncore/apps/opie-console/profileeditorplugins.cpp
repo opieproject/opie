@@ -15,7 +15,7 @@
 
 // Base class
 
-ProfileEditorPlugin::ProfileEditorPlugin(QWidget *parent, Profile p)
+ProfileEditorPlugin::ProfileEditorPlugin(QWidget *parent, Profile *p)
 {
 	m_parent = parent;
 	m_profile = p;
@@ -76,9 +76,10 @@ QWidget *ProfileEditorPlugin::connection_widget()
 	hbox2->add(parity_even);
 
 	// Apply profile settings
-	int rad_flow = m_profile.readNumEntry("Flow");
-	int rad_parity = m_profile.readNumEntry("Parity");
-	int speed = m_profile.readNumEntry("Speed");
+
+	int rad_flow = m_profile->readNumEntry("Flow");
+	int rad_parity = m_profile->readNumEntry("Parity");
+	int speed = m_profile->readNumEntry("Speed");
 
 	if(rad_flow == IOSerial::FlowHW) flow_hw->setChecked(true);
 	else flow_sw->setChecked(true);
@@ -160,13 +161,14 @@ QWidget *ProfileEditorPlugin::terminal_widget()
 	hbox3->add(option_echo);
 
 	// Apply profile settings
-	int term = m_profile.readNumEntry("Terminal");
-	int colour = m_profile.readNumEntry("Colour");
-	int fontsize = m_profile.readNumEntry("Font");
-	int opt_echo = m_profile.readNumEntry("Echo");
-	int opt_wrap = m_profile.readNumEntry("Wrap");
-	int opt_inbound = m_profile.readNumEntry("Inbound");
-	int opt_outbound = m_profile.readNumEntry("Outbound");
+
+	int term = m_profile->readNumEntry("Terminal");
+	int colour = m_profile->readNumEntry("Colour");
+	int fontsize = m_profile->readNumEntry("Font");
+	int opt_echo = m_profile->readNumEntry("Echo");
+	int opt_wrap = m_profile->readNumEntry("Wrap");
+	int opt_inbound = m_profile->readNumEntry("Inbound");
+	int opt_outbound = m_profile->readNumEntry("Outbound");
 
 	if(term == Profile::VT102) terminal_box->setCurrentItem(id_term_vt100);
 
@@ -201,10 +203,10 @@ void ProfileEditorPlugin::slotConnFlow(int id)
 	switch(id)
 	{
 		case id_flow_hw:
-			m_profile.writeEntry("Flow", IOSerial::FlowHW);
+			m_profile->writeEntry("Flow", IOSerial::FlowHW);
 			break;
 		case id_flow_sw:
-			m_profile.writeEntry("Flow", IOSerial::FlowSW);
+			m_profile->writeEntry("Flow", IOSerial::FlowSW);
 			break;
 	}
 }
@@ -214,10 +216,10 @@ void ProfileEditorPlugin::slotConnParity(int id)
 	switch(id)
 	{
 		case id_parity_odd:
-			m_profile.writeEntry("Parity", IOSerial::ParityEven);
+			m_profile->writeEntry("Parity", IOSerial::ParityEven);
 			break;
 		case id_parity_even:
-			m_profile.writeEntry("Parity", IOSerial::ParityOdd);
+			m_profile->writeEntry("Parity", IOSerial::ParityOdd);
 			break;
 	}
 }
@@ -228,19 +230,19 @@ void ProfileEditorPlugin::slotConnSpeed(int id)
 	{
 
 		case id_baud_115200:
-			m_profile.writeEntry("Speed", 115200);
+			m_profile->writeEntry("Speed", 115200);
 			break;
 		case id_baud_57600:
-			m_profile.writeEntry("Speed", 57600);
+			m_profile->writeEntry("Speed", 57600);
 			break;
 		case id_baud_38400:
-			m_profile.writeEntry("Speed", 38400);
+			m_profile->writeEntry("Speed", 38400);
 			break;
 		case id_baud_19200:
-			m_profile.writeEntry("Speed", 19200);
+			m_profile->writeEntry("Speed", 19200);
 			break;
 		case id_baud_9600:
-			m_profile.writeEntry("Speed", 9600);
+			m_profile->writeEntry("Speed", 9600);
 			break;
 	}
 }
@@ -250,13 +252,13 @@ void ProfileEditorPlugin::slotTermTerm(int id)
 	switch(id)
 	{
 		case id_term_vt100:
-			m_profile.writeEntry("Terminal", Profile::VT102);
+			m_profile->writeEntry("Terminal", Profile::VT102);
 			break;
 		case id_term_vt220:
-			m_profile.writeEntry("Terminal", Profile::VT102);
+			m_profile->writeEntry("Terminal", Profile::VT102);
 			break;
 		case id_term_ansi:
-			m_profile.writeEntry("Terminal", Profile::VT102);
+			m_profile->writeEntry("Terminal", Profile::VT102);
 			break;
 	}
 }
@@ -266,10 +268,10 @@ void ProfileEditorPlugin::slotTermColour(int id)
 	switch(id)
 	{
 		case id_term_black:
-			m_profile.writeEntry("Colour", Profile::Black);
+			m_profile->writeEntry("Colour", Profile::Black);
 			break;
 		case id_term_white:
-			m_profile.writeEntry("Colour", Profile::White);
+			m_profile->writeEntry("Colour", Profile::White);
 			break;
 	}
 }
@@ -279,35 +281,35 @@ void ProfileEditorPlugin::slotTermFont(int id)
 	switch(id)
 	{
 		case id_size_small:
-			m_profile.writeEntry("Font", Profile::Micro);
+			m_profile->writeEntry("Font", Profile::Micro);
 			break;
 		case id_size_medium:
-			m_profile.writeEntry("Font", Profile::Small);
+			m_profile->writeEntry("Font", Profile::Small);
 			break;
 		case id_size_large:
-			m_profile.writeEntry("Font", Profile::Medium);
+			m_profile->writeEntry("Font", Profile::Medium);
 			break;
 	}
 }
 
 void ProfileEditorPlugin::slotTermEcho(bool on)
 {
-	m_profile.writeEntry("Echo", on ? 1 : 0);
+	m_profile->writeEntry("Echo", on ? 1 : 0);
 }
 
 void ProfileEditorPlugin::slotTermWrap(bool on)
 {
-	m_profile.writeEntry("Wrap", on ? 1 : 0);
+	m_profile->writeEntry("Wrap", on ? 1 : 0);
 }
 
 void ProfileEditorPlugin::slotTermInbound(bool on)
 {
-	m_profile.writeEntry("Inbound", on ? 1 : 0);
+	m_profile->writeEntry("Inbound", on ? 1 : 0);
 }
 
 void ProfileEditorPlugin::slotTermOutbound(bool on)
 {
-	m_profile.writeEntry("Outbound", on ? 1 : 0);
+	m_profile->writeEntry("Outbound", on ? 1 : 0);
 }
 
 // Inherited classes
@@ -316,7 +318,7 @@ class ProfileEditorPluginSerial : public ProfileEditorPlugin
 {
 	public:
 	
-	ProfileEditorPluginSerial(QWidget *parent, Profile p)
+	ProfileEditorPluginSerial(QWidget *parent, Profile *p)
 	: ProfileEditorPlugin(parent, p)
 	{
 	}
@@ -343,7 +345,9 @@ class ProfileEditorPluginSerial : public ProfileEditorPlugin
 			m_widget = device_frame;
 
 			// Load special settings
-			device_line->setText(m_profile.readEntry("Device"));
+
+			QString dev = m_profile->readEntry("Device");
+			if(!dev.isNull()) device_line->setText(dev);
 		}
 
 		return m_widget;
@@ -352,8 +356,7 @@ class ProfileEditorPluginSerial : public ProfileEditorPlugin
 	void save()
 	{
 		// special settings
-		Profile p = m_profile;
-		p.writeEntry("Device", device_line->text());
+		m_profile->writeEntry("Device", device_line->text());
 	}
 
 	private:
@@ -364,7 +367,7 @@ class ProfileEditorPluginIrda : public ProfileEditorPlugin
 {
 	public:
 
-	ProfileEditorPluginIrda(QWidget *parent, Profile p)
+	ProfileEditorPluginIrda(QWidget *parent, Profile *p)
 	: ProfileEditorPlugin(parent, p)
 	{
 	}
@@ -391,7 +394,8 @@ class ProfileEditorPluginIrda : public ProfileEditorPlugin
 			m_widget = device_frame;
 
 			// Load special settings
-			device_line->setText(m_profile.readEntry("Device"));
+			QString dev = m_profile->readEntry("Device");
+			if(!dev.isNull()) device_line->setText(dev);
 		}
 
 		return m_widget;
@@ -400,8 +404,7 @@ class ProfileEditorPluginIrda : public ProfileEditorPlugin
 	void save()
 	{
 		// special settings
-		Profile p = m_profile;
-		p.writeEntry("Device", device_line->text());
+		m_profile->writeEntry("Device", device_line->text());
 	}
 
 	private:
@@ -412,7 +415,7 @@ class ProfileEditorPluginModem : public ProfileEditorPlugin
 {
 	public:
 
-	ProfileEditorPluginModem(QWidget *parent, Profile p)
+	ProfileEditorPluginModem(QWidget *parent, Profile *p)
 	: ProfileEditorPlugin(parent, p)
 	{
 	}
@@ -443,8 +446,10 @@ class ProfileEditorPluginModem : public ProfileEditorPlugin
 			m_widget = device_frame;
 
 			// Load special settings
-			device_line->setText(m_profile.readEntry("Device"));
-			number_line->setText(m_profile.readEntry("Number"));
+			QString dev = m_profile->readEntry("Device");
+			QString num = m_profile->readEntry("Number");
+			if(!dev.isNull()) device_line->setText(dev);
+			number_line->setText(num);
 		}
 
 		return m_widget;
@@ -453,26 +458,25 @@ class ProfileEditorPluginModem : public ProfileEditorPlugin
 	void save()
 	{
 		// special settings
-		Profile p = m_profile;
-		p.writeEntry("Device", device_line->text());
-		p.writeEntry("Number", number_line->text());
+		m_profile->writeEntry("Device", device_line->text());
+		m_profile->writeEntry("Number", number_line->text());
 	}
 
 	private:
 		QLineEdit *device_line, *number_line;
 };
 
-ProfileEditorPlugin *factory_serial(QWidget *parent, const Profile& p)
+ProfileEditorPlugin *factory_serial(QWidget *parent, Profile *p)
 {
 	return new ProfileEditorPluginSerial(parent, p);
 }
 
-ProfileEditorPlugin *factory_irda(QWidget *parent, const Profile& p)
+ProfileEditorPlugin *factory_irda(QWidget *parent, Profile *p)
 {
 	return new ProfileEditorPluginIrda(parent, p);
 }
 
-ProfileEditorPlugin *factory_modem(QWidget *parent, const Profile& p)
+ProfileEditorPlugin *factory_modem(QWidget *parent, Profile *p)
 {
 	return new ProfileEditorPluginModem(parent, p);
 }

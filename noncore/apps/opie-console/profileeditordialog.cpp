@@ -73,7 +73,7 @@ void ProfileEditorDialog::initUI()
 	plugin_base = new QWidget(tabconn);
 	plugin_layout = new QHBoxLayout(plugin_base, 0);
 
-	plugin_plugin = m_fact->newConfigPlugin("serial", plugin_base, m_prof);
+	plugin_plugin = m_fact->newConfigPlugin("serial", plugin_base, &m_prof);
 	plugin_layout->add(plugin_plugin->widget());
 
 	// connection tab, general part
@@ -112,6 +112,15 @@ void ProfileEditorDialog::initUI()
 	// load profile values
 
 	name_line->setText(m_prof.name());
+	for(int i = 0; i < device_box->count(); i++)
+	{
+		device_box->setCurrentItem(i);
+		if(prof_type() == m_prof.ioLayerName())
+		{
+			slotDevice(i);
+			break;
+		}
+	}
 
 	// signals
 
@@ -127,7 +136,7 @@ void ProfileEditorDialog::slotDevice(int id)
 {
 	delete plugin_plugin;
 
-	plugin_plugin = m_fact->newConfigPlugin(prof_type(), plugin_base, m_prof);
+	plugin_plugin = m_fact->newConfigPlugin(prof_type(), plugin_base, &m_prof);
 	plugin_layout->add(plugin_plugin->widget());
 
 	// Reload profile associated to device, including e.g. conn_device()
@@ -152,6 +161,7 @@ void ProfileEditorDialog::accept()
 
 	// Save general values
 	m_prof.setName(prof_name());
+	m_prof.setIOLayer(prof_type());
 
 	QDialog::accept();
 }

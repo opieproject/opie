@@ -18,7 +18,7 @@
 
 class MetaFactory {
 public:
-    typedef ProfileEditorPlugin* (*configWidget)(QWidget* parent, const Profile&);
+    typedef ProfileEditorPlugin* (*configWidget)(QWidget* parent, Profile* prof);
     typedef IOLayer* (*iolayer)(const Profile& );
     typedef FileTransferLayer* (*filelayer)(IOLayer*);
 
@@ -36,7 +36,7 @@ public:
     QStringList configWidgets()const;
     QStringList fileTransferLayers()const;
     IOLayer* newIOLayer( const QString&,const Profile& );
-    ProfileEditorPlugin *newConfigPlugin ( const QString&, QWidget*, const Profile& );
+    ProfileEditorPlugin *newConfigPlugin ( const QString&, QWidget*, Profile* );
 
     QString name( const QString& );
 
