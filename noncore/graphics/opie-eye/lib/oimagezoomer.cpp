@@ -173,6 +173,15 @@ void OImageZoomer::drawContents( QPainter* p ) {
     QRect c( contentsRect() );
     p->setPen( Qt::red );
 
+    /*
+     * the contentRect is set equal to the size of the image
+     * Rect/Original = NewRectORWidth/OriginalVisibleStuff and then simply we
+     * need to add the c.y/x due usage of QFrame
+     * For x and y we use the visiblePoint
+     * For height and width we use the size of the viewport
+     * if width/height would be bigger than our widget we use this width/height
+     *
+     */
     int len = m_imgSize.width();
     int x = (c.width()*m_visPt.x())/len        + c.x();
     int w = (c.width()*m_visSize.width() )/len + c.x();

@@ -471,21 +471,33 @@ void PIconView::slotImageInfo( const QString& name) {
 
 
 void PIconView::slotChangeMode( int mode ) {
-    if ( mode >= 0 && mode <= 3 )
+    if ( mode >= 1 && mode <= 3 )
         m_mode = mode;
 
     QIconView::ItemTextPos pos;
     switch( m_mode ) {
-    case 1:
+    case 2:
         pos = QIconView::Bottom;
         break;
-    case 2:
-    case 0:
+    case 3:
+    case 1:
     default:
         pos = QIconView::Right;
         break;
     }
     m_view->setItemTextPos( pos );
 
+    calculateGrid();
     slotReloadDir();
+}
+
+
+void PIconView::resizeEvent( QResizeEvent* re ) {
+    QVBox::resizeEvent( re );
+    calculateGrid();
+}
+
+
+void PIconView::calculateGrid() {
+
 }

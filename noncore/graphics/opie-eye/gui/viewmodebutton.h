@@ -18,6 +18,8 @@ public:
 
 signals:
     void changeMode( int );
+private slots:
+    void slotChange( int i );
 };
 
 #endif

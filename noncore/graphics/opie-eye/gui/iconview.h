@@ -39,10 +39,14 @@ signals:
     void sig_showInfo( const QString& );
     void sig_display( const QString& );
 
+protected:
+    void resizeEvent( QResizeEvent* );
+
 private:
     void initKeys();
     QString currentFileName(bool &isDir)const;
     void loadViews();
+    void calculateGrid();
 
 private slots:
     void slotDirUp();
