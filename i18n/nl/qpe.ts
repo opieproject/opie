@@ -392,6 +392,13 @@ Reservebatterij opladen aub.</translation>
     </message>
 </context>
 <context>
+    <name>QueuedRequestRunner</name>
+    <message>
+        <source>Processing Queued Requests</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SafeMode</name>
     <message>
         <source>Safe Mode</source>
@@ -408,6 +415,13 @@ Reservebatterij opladen aub.</translation>
     <message>
         <source>Help...</source>
         <translation>Hulp...</translation>
+    </message>
+</context>
+<context>
+    <name>Server</name>
+    <message>
+        <source>USB Lock</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

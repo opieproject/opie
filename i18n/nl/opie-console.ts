@@ -264,6 +264,28 @@
         <source>Edit Key</source>
         <translation>Wijzig sleutel</translation>
     </message>
+    <message>
+        <source>Rows</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Columns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Q Keycode</source>
+        <comment>Qt Key Code for the OnScreen Keyboard</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unicode Value</source>
+        <comment>The Unicode value of the key</comment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>IOLayerBase</name>
@@ -354,6 +376,18 @@
     <message>
         <source>9600 baud</source>
         <translation>9600 baud</translation>
+    </message>
+    <message>
+        <source>4800 baud</source>
+        <translation type="unfinished">4800 baud</translation>
+    </message>
+    <message>
+        <source>2400 baud</source>
+        <translation type="unfinished">2400 baud</translation>
+    </message>
+    <message>
+        <source>1200 baud</source>
+        <translation type="unfinished">1200 baud</translation>
     </message>
 </context>
 <context>
@@ -487,6 +521,18 @@
     <message>
         <source>Save Profile</source>
         <translation>Bewaar Profiel</translation>
+    </message>
+    <message>
+        <source>Start log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stop log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Log</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -746,7 +792,7 @@
     </message>
     <message>
         <source>Dialing the number failed.</source>
-        <translation>Bellen van nummer mislukt.</translation>
+        <translation type="obsolete">Bellen van nummer mislukt.</translation>
     </message>
     <message>
         <source>Cancelling...</source>
@@ -784,6 +830,14 @@
         <source>Dismiss</source>
         <translation>Sluit af</translation>
     </message>
+    <message>
+        <source>&lt;qt&gt;Dialing the number failed.&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fixing up Embedix</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SerialConfigWidget</name>
@@ -804,19 +858,19 @@
     </message>
     <message>
         <source>Font size</source>
-        <translation>Lettertypegrootte</translation>
+        <translation type="obsolete">Lettertypegrootte</translation>
     </message>
     <message>
         <source>small</source>
-        <translation>klein</translation>
+        <translation type="obsolete">klein</translation>
     </message>
     <message>
         <source>medium</source>
-        <translation>middel</translation>
+        <translation type="obsolete">middel</translation>
     </message>
     <message>
         <source>large</source>
-        <translation>groot</translation>
+        <translation type="obsolete">groot</translation>
     </message>
     <message>
         <source>Line-break conversions</source>

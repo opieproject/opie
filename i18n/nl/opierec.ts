@@ -114,7 +114,7 @@ kaart wordt niet herkend</translation>
     </message>
     <message>
         <source> seconds</source>
-        <translation>seconden</translation>
+        <translation type="obsolete">seconden</translation>
     </message>
     <message>
         <source>Do you really want to &lt;font size=+2&gt;&lt;B&gt;DELETE&lt;/B&gt;&lt;/font&gt;
@@ -181,15 +181,15 @@ echt &lt;font size=+2&gt;&lt;B&gt;VERWIJDEREN&lt;/B&gt;&lt;/font&gt;?</translati
     </message>
     <message>
         <source>Rec</source>
-        <translation>Opname</translation>
+        <translation type="obsolete">Opname</translation>
     </message>
     <message>
         <source>Location</source>
-        <translation>Plaats</translation>
+        <translation type="obsolete">Plaats</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation>Datum</translation>
+        <translation type="obsolete">Datum</translation>
     </message>
     <message>
         <source>Wave Compression (smaller files)</source>
@@ -205,7 +205,7 @@ echt &lt;font size=+2&gt;&lt;B&gt;VERWIJDEREN&lt;/B&gt;&lt;/font&gt;?</translati
     </message>
     <message>
         <source>Stop</source>
-        <translation>Stop</translation>
+        <translation type="obsolete">Stop</translation>
     </message>
     <message>
         <source>Auto Mute</source>
@@ -213,7 +213,15 @@ echt &lt;font size=+2&gt;&lt;B&gt;VERWIJDEREN&lt;/B&gt;&lt;/font&gt;?</translati
     </message>
     <message>
         <source>Stereo Channels</source>
-        <translation>Stereokanalen</translation>
+        <translation type="obsolete">Stereokanalen</translation>
+    </message>
+    <message>
+        <source>Del</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stereo</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

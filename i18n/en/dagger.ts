@@ -164,6 +164,14 @@
         <source>View</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Morphological Tags</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Morphological tag cross-referencing not implemented yet.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NavBar</name>

@@ -25,11 +25,11 @@
 <context>
     <name>VPNNetNode</name>
     <message>
-        <source>VPN Connection</source>
+        <source>&lt;p&gt;Configure private IP connection.&lt;/p&gt;&lt;p&gt;Defines Secure tunnels over non secure IP sessions&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;p&gt;Configure private IP connection.&lt;/p&gt;&lt;p&gt;Defines Secure tunnels over non secure IP sessions&lt;/p&gt;</source>
+        <source>VPN connection</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

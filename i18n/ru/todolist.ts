@@ -9,6 +9,29 @@
         <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
         <translation>&lt;h1&gt;Извещение в %1&lt;/h1&gt;&lt;br&gt;</translation>
     </message>
+    <message>
+        <source>All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished">Без категории</translation>
+    </message>
+</context>
+<context>
+    <name>NewTaskDlg</name>
+    <message>
+        <source>New Task</source>
+        <translation type="unfinished">Новая задача</translation>
+    </message>
+    <message>
+        <source>Blank task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Using template:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OTaskEditor</name>
@@ -34,6 +57,17 @@
     </message>
 </context>
 <context>
+    <name>Opie</name>
+    <message>
+        <source>Todo List</source>
+        <translation type="unfinished">Список задач</translation>
+    </message>
+    <message>
+        <source>Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <source>Enter Task</source>
@@ -53,46 +87,46 @@
     </message>
     <message>
         <source>Opie Todolist</source>
-        <translation>Opie Дела</translation>
+        <translation type="obsolete">Opie Дела</translation>
     </message>
 </context>
 <context>
     <name>QWidget</name>
     <message>
         <source>New from template</source>
-        <translation>Новая по образцу</translation>
+        <translation type="obsolete">Новая по образцу</translation>
     </message>
     <message>
         <source>New Task</source>
-        <translation>Новая задача</translation>
+        <translation type="obsolete">Новая задача</translation>
     </message>
     <message>
         <source>Click here to create a new task.</source>
-        <translation>Нажмите здесь чтобы создать новую задачу.</translation>
+        <translation type="obsolete">Нажмите здесь чтобы создать новую задачу.</translation>
     </message>
     <message>
         <source>Edit Task</source>
-        <translation>Изменить задачу</translation>
+        <translation type="obsolete">Изменить задачу</translation>
     </message>
     <message>
         <source>Click here to modify the current task.</source>
-        <translation>Нажмите здесь чтобы изменить эту задачу.</translation>
+        <translation type="obsolete">Нажмите здесь чтобы изменить эту задачу.</translation>
     </message>
     <message>
         <source>View Task</source>
-        <translation>Просмотреть задачу</translation>
+        <translation type="obsolete">Просмотреть задачу</translation>
     </message>
     <message>
         <source>Delete...</source>
-        <translation>Удалить...</translation>
+        <translation type="obsolete">Удалить...</translation>
     </message>
     <message>
         <source>Click here to remove the current task.</source>
-        <translation>Нажмите здесь чтобы убрать эту задачу.</translation>
+        <translation type="obsolete">Нажмите здесь чтобы убрать эту задачу.</translation>
     </message>
     <message>
         <source>Delete all...</source>
-        <translation>Удалить все...</translation>
+        <translation type="obsolete">Удалить все...</translation>
     </message>
     <message>
         <source>Delete completed</source>
@@ -100,15 +134,15 @@
     </message>
     <message>
         <source>Beam</source>
-        <translation>Отправить</translation>
+        <translation type="obsolete">Отправить</translation>
     </message>
     <message>
         <source>Click here to send the current task to another device.</source>
-        <translation>Нажмите здесь чтобы отправить эту задачу на другое устройство.</translation>
+        <translation type="obsolete">Нажмите здесь чтобы отправить эту задачу на другое устройство.</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>Найти</translation>
+        <translation type="obsolete">Найти</translation>
     </message>
     <message>
         <source>Show completed tasks</source>
@@ -128,15 +162,15 @@
     </message>
     <message>
         <source>Data</source>
-        <translation>Данные</translation>
+        <translation type="obsolete">Данные</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation>Категория</translation>
+        <translation type="obsolete">Категория</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation>Опции</translation>
+        <translation type="obsolete">Опции</translation>
     </message>
     <message>
         <source>QuickEdit</source>
@@ -160,7 +194,7 @@ The list displays the following information:
     </message>
     <message>
         <source>All Categories</source>
-        <translation>Все категории</translation>
+        <translation type="obsolete">Все категории</translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -194,7 +228,7 @@ Quit Anyway?</source>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Без категории</translation>
+        <translation type="obsolete">Без категории</translation>
     </message>
     <message>
         <source>&lt;P&gt;%1 new tasks arrived.&lt;p&gt;Would you like to add them to your Todolist?</source>
@@ -206,7 +240,7 @@ Quit Anyway?</source>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation>Сдублировать</translation>
+        <translation type="obsolete">Сдублировать</translation>
     </message>
     <message>
         <source>C.</source>
@@ -226,7 +260,7 @@ Quit Anyway?</source>
     </message>
     <message>
         <source>Configure Templates</source>
-        <translation>Настроить образцы</translation>
+        <translation type="obsolete">Настроить образцы</translation>
     </message>
     <message>
         <source>Priority:</source>

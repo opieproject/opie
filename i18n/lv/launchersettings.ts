@@ -176,6 +176,14 @@
         <source>Color:</source>
         <translation>Krāsa:</translation>
     </message>
+    <message>
+        <source>Columns:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Automatic</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabsSettings</name>

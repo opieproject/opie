@@ -94,10 +94,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>No Receiver spezified</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Store message</source>
         <translation type="unfinished"></translation>
     </message>
@@ -115,6 +111,10 @@
     </message>
     <message>
         <source>&lt;center&gt;Attachments will not be stored in &quot;Draft&quot; folder&lt;/center&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No Receiver specified</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -441,17 +441,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Enter a filter string here.
-Then hit &quot;get newsgroup list&quot; again and only groups starting 
-with that filter will be listet.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Get newsgroup list from server</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Retrieve the list of groups from server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter a filter string here.
+Then hit &quot;get newsgroup list&quot; again and only groups starting 
+with that filter will be listed.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -834,6 +834,18 @@ All mails will be deleted.</source>
         <source>Password</source>
         <translation type="unfinished">密碼</translation>
     </message>
+    <message>
+        <source>ask before downloading large mails</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Large mail size (kb):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> kB</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QMailView</name>
@@ -1059,13 +1071,13 @@ All mails will be deleted.</source>
         <source>Display image preview</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>ViewMailBase</name>
     <message>
         <source>E-Mail by %1</source>
         <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>ViewMailBase</name>
     <message>
         <source>Mail</source>
         <translation type="unfinished">郵件</translation>
@@ -1100,6 +1112,10 @@ All mails will be deleted.</source>
     </message>
     <message>
         <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>E-Mail view</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

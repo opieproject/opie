@@ -38,4 +38,11 @@
         <translation>&lt;p&gt;Konfiguriert eine LAN Karte.&lt;/p&gt;&lt;p&gt;Dies verwenden für 10/100/1000 MBit LAN Karten.&lt;/p&gt;</translation>
     </message>
 </context>
+<context>
+    <name>LanCardRun</name>
+    <message>
+        <source>No interface found</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 </TS>

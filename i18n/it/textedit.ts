@@ -207,6 +207,10 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
         <translation>Vuoi veramente&lt;BR&gt;&lt;B&gt;cancellare&lt;/B&gt; il file corrente
 dal disco?&lt;BR&gt;L&apos;operazione è &lt;B&gt;irreversibile!&lt;/B&gt;</translation>
     </message>
+    <message>
+        <source>Save Failed</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>filePermissions</name>

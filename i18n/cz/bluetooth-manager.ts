@@ -90,7 +90,7 @@
     </message>
     <message>
         <source>Bluetooh Basic Config</source>
-        <translation>Základní konfigurace Bluetooth</translation>
+        <translation type="obsolete">Základní konfigurace Bluetooth</translation>
     </message>
     <message>
         <source>Default Passkey</source>
@@ -127,6 +127,10 @@
     <message>
         <source>Status Label</source>
         <translation>Značka stavu</translation>
+    </message>
+    <message>
+        <source>Bluetooth Basic Config</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

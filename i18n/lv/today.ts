@@ -15,11 +15,23 @@
     </message>
     <message>
         <source>No plugins found</source>
-        <translation>Nav atrasti spraudņi</translation>
+        <translation type="obsolete">Nav atrasti spraudņi</translation>
     </message>
     <message>
         <source>No plugins activated</source>
         <translation>Nav aktviēti spraudņi</translation>
+    </message>
+    <message>
+        <source>Today</source>
+        <translation type="unfinished">Šodien</translation>
+    </message>
+    <message>
+        <source>Today Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;The plugin &apos;%1&apos; caused Today to crash. It could be that the plugin is not properly installed.&lt;br&gt;Today tries to continue loading plugins.&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -26,6 +26,10 @@
         <source>Chemical Formula</source>
         <translation>Formula Chimica</translation>
     </message>
+    <message>
+        <source>CalcDlg</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OxydataWidget</name>

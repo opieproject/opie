@@ -389,6 +389,10 @@ zgodnie ze swoimi potrzebami</translation>
         <source>You must enter a unique device name</source>
         <translation>Musisz podac unikalna nazwe urzadzenia</translation>
     </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Blad</translation>
+    </message>
 </context>
 <context>
     <name>DialWidget</name>

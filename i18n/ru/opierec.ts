@@ -82,7 +82,7 @@ or a card isn&apos;t being recognized</source>
     </message>
     <message>
         <source> seconds</source>
-        <translation>секунд</translation>
+        <translation type="obsolete">секунд</translation>
     </message>
     <message>
         <source>Do you really want to &lt;font size=+2&gt;&lt;B&gt;DELETE&lt;/B&gt;&lt;/font&gt;
@@ -150,15 +150,15 @@ the selected file?</source>
     </message>
     <message>
         <source>Rec</source>
-        <translation>Запись</translation>
+        <translation type="obsolete">Запись</translation>
     </message>
     <message>
         <source>Location</source>
-        <translation>Место</translation>
+        <translation type="obsolete">Место</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation>Дата</translation>
+        <translation type="obsolete">Дата</translation>
     </message>
     <message>
         <source>Wave Compression (smaller files)</source>
@@ -170,7 +170,7 @@ the selected file?</source>
     </message>
     <message>
         <source>Stop</source>
-        <translation>Стоп</translation>
+        <translation type="obsolete">Стоп</translation>
     </message>
     <message>
         <source>Auto Mute</source>
@@ -178,7 +178,15 @@ the selected file?</source>
     </message>
     <message>
         <source>Stereo Channels</source>
-        <translation>Стерео каналы</translation>
+        <translation type="obsolete">Стерео каналы</translation>
+    </message>
+    <message>
+        <source>Del</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stereo</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

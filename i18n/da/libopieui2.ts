@@ -63,20 +63,12 @@
 <context>
     <name>OFileDialog</name>
     <message>
-        <source>FileDialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Open</source>
-        <translation type="unfinished">Åbn</translation>
+        <translation type="obsolete">Åbn</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Gem</translation>
-    </message>
-    <message>
-        <source>Select Directory</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Gem</translation>
     </message>
 </context>
 <context>
@@ -120,15 +112,11 @@
     <name>OFontSelector</name>
     <message>
         <source>Style</source>
-        <translation type="unfinished">Stil</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Stil</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="unfinished">The Quick Brown Fox Jumps Over Lazy Dog</translation>
+        <translation type="obsolete">The Quick Brown Fox Jumps Over Lazy Dog</translation>
     </message>
 </context>
 <context>
@@ -370,7 +358,7 @@ og</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Størelse</translation>
     </message>
     <message>
         <source>Date</source>
@@ -385,11 +373,19 @@ og</translation>
     <name>Opie::Ui::OFileDialog</name>
     <message>
         <source>Open</source>
-        <translation type="obsolete">Åbn</translation>
+        <translation type="unfinished">Åbn</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="obsolete">Gem</translation>
+        <translation type="unfinished">Gem</translation>
+    </message>
+    <message>
+        <source>FileDialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select Directory</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -403,15 +399,15 @@ og</translation>
     <name>Opie::Ui::OFontSelector</name>
     <message>
         <source>Style</source>
-        <translation type="obsolete">Stil</translation>
+        <translation type="unfinished">Stil</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="obsolete">Størrelse</translation>
+        <translation type="unfinished">Størrelse</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="obsolete">The Quick Brown Fox Jumps Over Lazy Dog</translation>
+        <translation type="unfinished">The Quick Brown Fox Jumps Over Lazy Dog</translation>
     </message>
 </context>
 <context>

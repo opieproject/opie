@@ -252,6 +252,13 @@ mittig um das Display zu kalibrieren.</translation>
     </message>
 </context>
 <context>
+    <name>QueuedRequestRunner</name>
+    <message>
+        <source>Processing Queued Requests</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SafeMode</name>
     <message>
         <source>Safe Mode</source>
@@ -268,6 +275,13 @@ mittig um das Display zu kalibrieren.</translation>
     <message>
         <source>Help...</source>
         <translation>Hilfe...</translation>
+    </message>
+</context>
+<context>
+    <name>Server</name>
+    <message>
+        <source>USB Lock</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -265,6 +265,28 @@ de DTR (0=non)</translation>
         <source>Edit Key</source>
         <translation>Editer touche</translation>
     </message>
+    <message>
+        <source>Rows</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Columns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Q Keycode</source>
+        <comment>Qt Key Code for the OnScreen Keyboard</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unicode Value</source>
+        <comment>The Unicode value of the key</comment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>IOLayerBase</name>
@@ -355,6 +377,18 @@ de DTR (0=non)</translation>
     <message>
         <source>9600 baud</source>
         <translation>9600 baud</translation>
+    </message>
+    <message>
+        <source>4800 baud</source>
+        <translation type="unfinished">4800 baud</translation>
+    </message>
+    <message>
+        <source>2400 baud</source>
+        <translation type="unfinished">2400 baud</translation>
+    </message>
+    <message>
+        <source>1200 baud</source>
+        <translation type="unfinished">1200 baud</translation>
     </message>
 </context>
 <context>
@@ -488,6 +522,18 @@ de DTR (0=non)</translation>
     <message>
         <source>Save Profile</source>
         <translation>Enregister profil</translation>
+    </message>
+    <message>
+        <source>Start log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stop log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Log</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -747,7 +793,7 @@ de DTR (0=non)</translation>
     </message>
     <message>
         <source>Dialing the number failed.</source>
-        <translation>La numérotation du numéro a échouée.</translation>
+        <translation type="obsolete">La numérotation du numéro a échouée.</translation>
     </message>
     <message>
         <source>Cancelling...</source>
@@ -785,6 +831,14 @@ de DTR (0=non)</translation>
         <source>Dismiss</source>
         <translation>Rejeté</translation>
     </message>
+    <message>
+        <source>&lt;qt&gt;Dialing the number failed.&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fixing up Embedix</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SerialConfigWidget</name>
@@ -805,19 +859,19 @@ de DTR (0=non)</translation>
     </message>
     <message>
         <source>Font size</source>
-        <translation>Taille de police</translation>
+        <translation type="obsolete">Taille de police</translation>
     </message>
     <message>
         <source>small</source>
-        <translation>petite</translation>
+        <translation type="obsolete">petite</translation>
     </message>
     <message>
         <source>medium</source>
-        <translation>moyenne</translation>
+        <translation type="obsolete">moyenne</translation>
     </message>
     <message>
         <source>large</source>
-        <translation>large</translation>
+        <translation type="obsolete">large</translation>
     </message>
     <message>
         <source>Line-break conversions</source>

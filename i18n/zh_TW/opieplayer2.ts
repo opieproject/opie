@@ -7,6 +7,13 @@
     </message>
 </context>
 <context>
+    <name>Lib</name>
+    <message>
+        <source>Progress: %1 %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MediaPlayer</name>
     <message>
         <source>OpiePlayer: Initializating</source>
@@ -166,6 +173,30 @@ this playlist?</source>
         <source>Add  URL</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Loading of Skin started</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add File to Playlist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Files from Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opieplayer Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;&lt;b&gt;Opieplayer2 skin not found!&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Please install an opieplayer2 skin package.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PlayListWidgetGui</name>
@@ -203,6 +234,13 @@ this playlist?</source>
     </message>
 </context>
 <context>
+    <name>SkinLoader</name>
+    <message>
+        <source>Loading of Skin finished</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VideoWidget</name>
     <message>
         <source>OpiePlayer - Video</source>
@@ -216,23 +254,32 @@ this playlist?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>No input plugin found for this media type</source>
+        <source>Error on file &apos;%1&apos; with reason: </source>
+        <comment>Error when playing a file</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>No demux plugin found for this media type</source>
+        <source>&lt;qt&gt;No input plugin found for this media type&lt;/qt&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Demuxing failed for this media type</source>
+        <source>&lt;qt&gt;No demux plugin found for this media type&lt;/qt&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Malformed MRL</source>
+        <source>&lt;qt&gt;Demuxing failed for this media type&lt;/qt&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Some other error</source>
+        <source>&lt;qt&gt;Malformed MRL&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Input failed&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Some other error&lt;/qt&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -71,7 +71,7 @@
     </message>
     <message>
         <source>That directory does not exist</source>
-        <translation>Ez a könyvtár nem létezik</translation>
+        <translation type="obsolete">Ez a könyvtár nem létezik</translation>
     </message>
     <message>
         <source>Copy As</source>
@@ -140,18 +140,18 @@
     <message>
         <source>Could not copy
 </source>
-        <translation>Nem lehetett másolni
+        <translation type="obsolete">Nem lehetett másolni
 </translation>
     </message>
     <message>
         <source>to
 </source>
-        <translation>cél</translation>
+        <translation type="obsolete">cél</translation>
     </message>
     <message>
         <source>Could not move
 </source>
-        <translation>Nem lehetett áthelyezni</translation>
+        <translation type="obsolete">Nem lehetett áthelyezni</translation>
     </message>
     <message>
         <source>Add To Documents</source>
@@ -168,7 +168,7 @@
     <message>
         <source>Really delete
 %1 files?</source>
-        <translation>Valóban töröl
+        <translation type="obsolete">Valóban töröl
 %1 fájlt?</translation>
     </message>
     <message>
@@ -178,7 +178,7 @@
     <message>
         <source>Really copy
 %1 files?</source>
-        <translation>Valóban másol
+        <translation type="obsolete">Valóban másol
 %1 fájlt?</translation>
     </message>
     <message>
@@ -188,28 +188,28 @@
     <message>
         <source>
 exists. Ok to overwrite?</source>
-        <translation>
+        <translation type="obsolete">
 létezik. Felülírható?</translation>
     </message>
     <message>
         <source> already exists.
 Do you really want to delete it?</source>
-        <translation>már létezik. Valóban törölni akarja?</translation>
+        <translation type="obsolete">már létezik. Valóban törölni akarja?</translation>
     </message>
     <message>
         <source>%1 exists. Ok to overwrite?</source>
-        <translation>%1 létezik. Felülírja?</translation>
+        <translation type="obsolete">%1 létezik. Felülírja?</translation>
     </message>
     <message>
         <source>Could not copy %1 to %2</source>
-        <translation>%1 nem másolható a %2 helyre</translation>
+        <translation type="obsolete">%1 nem másolható a %2 helyre</translation>
     </message>
     <message>
         <source>Advanced FileManager
 is copyright 2002-2003 by
 L.J.Potter&lt;llornkcor@handhelds.org&gt;
 and is licensed by the GPL</source>
-        <translation>A Fejlett Fájlmenedzser
+        <translation type="obsolete">A Fejlett Fájlmenedzser
 szerzői joggal védett 2002-2003
 L.J.Potter&lt;llornkcor@handhelds.org&gt;
 a programot a GPL licensz védi
@@ -231,7 +231,7 @@ fordítás: Bácsi László &lt;lackac@math.bme.hu&gt;</translation>
         <source>Cannot remove current directory
 from bookmarks.
 It is not bookmarked!</source>
-        <translation>Az aktuális könyvtárt nem lehet törölni
+        <translation type="obsolete">Az aktuális könyvtárt nem lehet törölni
 a könyvjelzők közül.
 Nincs ilyen könyvjelző!</translation>
     </message>
@@ -242,13 +242,13 @@ Nincs ilyen könyvjelző!</translation>
     <message>
         <source>Really delete %1
 and all it&apos;s contents ?</source>
-        <translation>Valóban törli %1-t
+        <translation type="obsolete">Valóban törli %1-t
 minden tartalmával együtt?</translation>
     </message>
     <message>
         <source>Really delete
 %1?</source>
-        <translation>Valóban törli
+        <translation type="obsolete">Valóban törli
 %1-t?</translation>
     </message>
     <message>
@@ -284,10 +284,74 @@ minden tartalmával együtt?</translation>
 %1 
 to 
 %2</source>
-        <translation>%1
+        <translation type="obsolete">%1
 nem másolható a
 %2
 helyre</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;%1 does not exist&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;Advanced FileManager is copyright 2002-2003 by L.J.Potter&lt;llornkcor@handhelds.org&gt; and is licensed by the GPL&lt;/P&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Cannot remove current directory from bookmarks. It is not bookmarked!&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Really delete %1 files?&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Really delete %1 and all it&apos;s contents?&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Really delete %1?&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Really copy %1 files?&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;%1 already  exists. Ok to overwrite?&lt;/P&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;Could not copy %1 to %2&lt;/P&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy %1 As</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;P&gt; %1 already exists. Ok to overwrite?&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Could not copy %1 to %2&lt;/P&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt; %1 already exists. Do you really want to delete it?&lt;/P&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Could not move %1&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Could not copy %1 to %2&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

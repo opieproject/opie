@@ -1,374 +1,397 @@
-<!DOCTYPE TS>
-<TS>
-  <context>
+<!DOCTYPE TS><TS>
+<context>
     <name>@default</name>
     <message>
-      <source>Title</source>
-      <translation>Nadpis</translation>
+        <source>Title</source>
+        <translation>Nadpis</translation>
     </message>
     <message>
-      <source>Author</source>
-      <translation>Autor</translation>
+        <source>Author</source>
+        <translation>Autor</translation>
     </message>
     <message>
-      <source>Description</source>
-      <translation>Popis</translation>
+        <source>Description</source>
+        <translation>Popis</translation>
     </message>
     <message>
-      <source>Copyright</source>
-      <translation>Autorská práva</translation>
+        <source>Copyright</source>
+        <translation>Autorská práva</translation>
     </message>
     <message>
-      <source>Creation Time</source>
-      <translation>Čas vytvoření</translation>
+        <source>Creation Time</source>
+        <translation>Čas vytvoření</translation>
     </message>
     <message>
-      <source>Software</source>
-      <translation>Software</translation>
+        <source>Software</source>
+        <translation>Software</translation>
     </message>
     <message>
-      <source>Disclaimer</source>
-      <translation>Vzdání se práv</translation>
+        <source>Disclaimer</source>
+        <translation>Vzdání se práv</translation>
     </message>
     <message>
-      <source>Warning</source>
-      <translation>Varování</translation>
+        <source>Warning</source>
+        <translation>Varování</translation>
     </message>
     <message>
-      <source>Source</source>
-      <translation>Zdroj</translation>
+        <source>Source</source>
+        <translation>Zdroj</translation>
     </message>
     <message>
-      <source>Comment</source>
-      <translation>Komentář</translation>
+        <source>Comment</source>
+        <translation>Komentář</translation>
     </message>
     <message>
-      <source>Grayscale</source>
-      <translation>Odstíny šedi</translation>
+        <source>Grayscale</source>
+        <translation>Odstíny šedi</translation>
     </message>
     <message>
-      <source>Unknown</source>
-      <translation>Neznámý</translation>
+        <source>Unknown</source>
+        <translation>Neznámý</translation>
     </message>
     <message>
-      <source>RGB</source>
-      <translation>RGB</translation>
+        <source>RGB</source>
+        <translation>RGB</translation>
     </message>
     <message>
-      <source>Palette</source>
-      <translation>Paleta</translation>
+        <source>Palette</source>
+        <translation>Paleta</translation>
     </message>
     <message>
-      <source>Grayscale/Alpha</source>
-      <translation>Odstíny šedi/Průhlednost</translation>
+        <source>Grayscale/Alpha</source>
+        <translation>Odstíny šedi/Průhlednost</translation>
     </message>
     <message>
-      <source>RGB/Alpha</source>
-      <translation>RGB/Průhlednost</translation>
+        <source>RGB/Alpha</source>
+        <translation>RGB/Průhlednost</translation>
     </message>
     <message>
-      <source>Deflate</source>
-      <translation>Deflate</translation>
+        <source>Deflate</source>
+        <translation>Deflate</translation>
     </message>
     <message>
-      <source>None</source>
-      <translation>Žádná</translation>
+        <source>None</source>
+        <translation>Žádná</translation>
     </message>
     <message>
-      <source>Adam7</source>
-      <translation>Adam7</translation>
+        <source>Adam7</source>
+        <translation>Adam7</translation>
     </message>
-  </context>
-  <context>
+</context>
+<context>
     <name>QObject</name>
     <message>
-      <source>Not a GIF file</source>
-      <translation>Není to soubor GIF</translation>
+        <source>Not a GIF file</source>
+        <translation>Není to soubor GIF</translation>
     </message>
     <message>
-      <source>Dimensions: %1x%2
+        <source>Dimensions: %1x%2
 </source>
-      <translation>Rozměry: %1x%2</translation>
+        <translation>Rozměry: %1x%2</translation>
     </message>
     <message>
-      <source>Depth: %1 bits
+        <source>Depth: %1 bits
 </source>
-      <translation>Hloubka: %1 bitů</translation>
+        <translation>Hloubka: %1 bitů</translation>
     </message>
     <message>
-      <source>Sort Flag: %1
+        <source>Sort Flag: %1
 </source>
-      <translation>Řazení: %1</translation>
+        <translation>Řazení: %1</translation>
     </message>
     <message>
-      <source>Size of Global Color Table: %1 colors
+        <source>Size of Global Color Table: %1 colors
 </source>
-      <translation>Velikost globální tabulky barev: %1 barev</translation>
+        <translation>Velikost globální tabulky barev: %1 barev</translation>
     </message>
     <message>
-      <source>Background Color Index: %1
+        <source>Background Color Index: %1
 </source>
-      <translation>Index barvy pozadí: %1</translation>
+        <translation>Index barvy pozadí: %1</translation>
     </message>
     <message>
-      <source>Pixel Aspect Ratio: %1 (Aspect Ratio %2)
+        <source>Pixel Aspect Ratio: %1 (Aspect Ratio %2)
 </source>
-      <translation>Poměr stran bodu: %1 (Poměr stran %2)</translation>
+        <translation>Poměr stran bodu: %1 (Poměr stran %2)</translation>
     </message>
     <message>
-      <source>Comment: %1
+        <source>Comment: %1
 </source>
-      <translation>Komentář: %1</translation>
+        <translation>Komentář: %1</translation>
     </message>
     <message>
-      <source>Depth: %1
+        <source>Depth: %1
 </source>
-      <translation>Hloubka: %1</translation>
+        <translation>Hloubka: %1</translation>
     </message>
     <message>
-      <source>ColorMode: %1
+        <source>ColorMode: %1
 </source>
-      <translation>Režim barev: %1</translation>
+        <translation>Režim barev: %1</translation>
     </message>
     <message>
-      <source>Unknown</source>
-      <translation>Neznámý</translation>
+        <source>Unknown</source>
+        <translation>Neznámý</translation>
     </message>
     <message>
-      <source>Compression: %1
+        <source>Compression: %1
 </source>
-      <translation>Komprese: %1</translation>
+        <translation>Komprese: %1</translation>
     </message>
     <message>
-      <source>InterlaceMode: %1
+        <source>InterlaceMode: %1
 </source>
-      <translation>Prokládaný režim: %1</translation>
+        <translation>Prokládaný režim: %1</translation>
     </message>
     <message>
-      <source>Colormode: Color
+        <source>Colormode: Color
 </source>
-      <translation>Režim barev: Barevný</translation>
+        <translation type="obsolete">Režim barev: Barevný</translation>
     </message>
     <message>
-      <source>Colormode: Black and white
+        <source>Colormode: Black and white
 </source>
-      <translation>Režim barev: Černobílý</translation>
+        <translation type="obsolete">Režim barev: Černobílý</translation>
     </message>
     <message>
-      <source>Basic</source>
-      <translation>Základní</translation>
+        <source>Basic</source>
+        <translation type="obsolete">Základní</translation>
     </message>
     <message>
-      <source>Normal</source>
-      <translation>Normální</translation>
+        <source>Normal</source>
+        <translation type="obsolete">Normální</translation>
     </message>
     <message>
-      <source>Fine</source>
-      <translation>Jemný</translation>
+        <source>Fine</source>
+        <translation type="obsolete">Jemný</translation>
     </message>
     <message>
-      <source>Quality: %1
+        <source>Quality: %1
 </source>
-      <translation>Kvalita: %1</translation>
+        <translation type="obsolete">Kvalita: %1</translation>
     </message>
     <message>
-      <source>Daylight</source>
-      <translation>Denní světlo</translation>
+        <source>Daylight</source>
+        <translation type="obsolete">Denní světlo</translation>
     </message>
     <message>
-      <source>Fluorescent</source>
-      <translation>Zářivka</translation>
+        <source>Fluorescent</source>
+        <translation type="obsolete">Zářivka</translation>
     </message>
     <message>
-      <source>Tungsten</source>
-      <translation>Žárovka</translation>
+        <source>Tungsten</source>
+        <translation type="obsolete">Žárovka</translation>
     </message>
     <message>
-      <source>Standard light A</source>
-      <translation>Standardní světlo A</translation>
+        <source>Standard light A</source>
+        <translation type="obsolete">Standardní světlo A</translation>
     </message>
     <message>
-      <source>Standard light B</source>
-      <translation>Standardní světlo B</translation>
+        <source>Standard light B</source>
+        <translation type="obsolete">Standardní světlo B</translation>
     </message>
     <message>
-      <source>Standard light C</source>
-      <translation>Standardní světlo C</translation>
+        <source>Standard light C</source>
+        <translation type="obsolete">Standardní světlo C</translation>
     </message>
     <message>
-      <source>D55</source>
-      <translation>D55</translation>
+        <source>D55</source>
+        <translation type="obsolete">D55</translation>
     </message>
     <message>
-      <source>D65</source>
-      <translation>D65</translation>
+        <source>D65</source>
+        <translation type="obsolete">D65</translation>
     </message>
     <message>
-      <source>D75</source>
-      <translation>D75</translation>
+        <source>D75</source>
+        <translation type="obsolete">D75</translation>
     </message>
     <message>
-      <source>Other</source>
-      <translation>Jiné</translation>
+        <source>Other</source>
+        <translation type="obsolete">Jiné</translation>
     </message>
     <message>
-      <source>White Balance: %1
+        <source>White Balance: %1
 </source>
-      <translation>Balance bílé: %1</translation>
+        <translation type="obsolete">Balance bílé: %1</translation>
     </message>
     <message>
-      <source>Average</source>
-      <translation>Průměr</translation>
+        <source>Average</source>
+        <translation type="obsolete">Průměr</translation>
     </message>
     <message>
-      <source>Center weighted average</source>
-      <translation>Středově vážený průměr</translation>
+        <source>Center weighted average</source>
+        <translation type="obsolete">Středově vážený průměr</translation>
     </message>
     <message>
-      <source>Spot</source>
-      <translation>Bodové</translation>
+        <source>Spot</source>
+        <translation type="obsolete">Bodové</translation>
     </message>
     <message>
-      <source>MultiSpot</source>
-      <translation>Vícebodové</translation>
+        <source>MultiSpot</source>
+        <translation type="obsolete">Vícebodové</translation>
     </message>
     <message>
-      <source>Pattern</source>
-      <translation>Vzorec</translation>
+        <source>Pattern</source>
+        <translation type="obsolete">Vzorec</translation>
     </message>
     <message>
-      <source>Partial</source>
-      <translation>Částečný</translation>
+        <source>Partial</source>
+        <translation type="obsolete">Částečný</translation>
     </message>
     <message>
-      <source>Metering Mode: %1
+        <source>Metering Mode: %1
 </source>
-      <translation>Režim měření: %1</translation>
+        <translation type="obsolete">Režim měření: %1</translation>
     </message>
     <message>
-      <source>Not defined</source>
-      <translation>Nedefinován</translation>
+        <source>Not defined</source>
+        <translation type="obsolete">Nedefinován</translation>
     </message>
     <message>
-      <source>Manual</source>
-      <translation>Manuální</translation>
+        <source>Manual</source>
+        <translation type="obsolete">Manuální</translation>
     </message>
     <message>
-      <source>Normal progam</source>
-      <translation>Normální program</translation>
+        <source>Normal progam</source>
+        <translation type="obsolete">Normální program</translation>
     </message>
     <message>
-      <source>Aperture priority</source>
-      <translation>Priorita clony</translation>
+        <source>Aperture priority</source>
+        <translation type="obsolete">Priorita clony</translation>
     </message>
     <message>
-      <source>Shutter priority</source>
-      <translation>Priorita času</translation>
+        <source>Shutter priority</source>
+        <translation type="obsolete">Priorita času</translation>
     </message>
     <message>
-      <source>Creative progam
+        <source>Creative progam
 (biased toward fast shutter speed</source>
-      <translation>Kreativní program 
+        <translation type="obsolete">Kreativní program 
 (používá větší rychlost závěrky)</translation>
     </message>
     <message>
-      <source>Action progam
+        <source>Action progam
 (biased toward fast shutter speed)</source>
-      <translation>Akční program
+        <translation type="obsolete">Akční program
 (používá větší rychlost závěrky)</translation>
     </message>
     <message>
-      <source>Portrait mode
+        <source>Portrait mode
 (for closeup photos with the background out of focus)</source>
-      <translation>Režim portrét 
+        <translation type="obsolete">Režim portrét 
 (Pro blízké snímky s rozostřeným pozadím)</translation>
     </message>
     <message>
-      <source>Landscape mode
+        <source>Landscape mode
 (for landscape photos with the background in focus)</source>
-      <translation>Režim krajina 
+        <translation type="obsolete">Režim krajina 
 (pro snímky krajiny se zaostřeným pozadím)</translation>
     </message>
     <message>
-      <source>Exposure Program: %1
+        <source>Exposure Program: %1
 </source>
-      <translation>Expoziční program: %1</translation>
+        <translation type="obsolete">Expoziční program: %1</translation>
     </message>
     <message>
-      <source>Date/Time: %1
+        <source>Date/Time: %1
 </source>
-      <translation>Datum/Čas: %1</translation>
+        <translation>Datum/Čas: %1</translation>
     </message>
     <message>
-      <source>&lt;qt>Comment: %1
+        <source>&lt;qt&gt;Comment: %1
 </source>
-      <translation>&lt;qt>Komentář: %1</translation>
+        <translation>&lt;qt&gt;Komentář: %1</translation>
     </message>
     <message>
-      <source>Manufacturer: %1
+        <source>Manufacturer: %1
 </source>
-      <translation>Výrobce: %1</translation>
+        <translation>Výrobce: %1</translation>
     </message>
     <message>
-      <source>Model: %1
+        <source>Model: %1
 </source>
-      <translation>Model: %1</translation>
+        <translation>Model: %1</translation>
     </message>
     <message>
-      <source>Orientation: %1
+        <source>Orientation: %1
 </source>
-      <translation>Orientace: %1</translation>
+        <translation>Orientace: %1</translation>
     </message>
     <message>
-      <source>Flash used
+        <source>Flash used
 </source>
-      <translation>Použitý blesk</translation>
+        <translation>Použitý blesk</translation>
     </message>
     <message>
-      <source>Focal length: %1
+        <source>Focal length: %1
 </source>
-      <translation>Ohnisková vzdálenost: %1</translation>
+        <translation>Ohnisková vzdálenost: %1</translation>
     </message>
     <message>
-      <source>35mm equivalent: %1
+        <source>35mm equivalent: %1
 </source>
-      <translation>Ekvivalent 35mm: %1</translation>
+        <translation>Ekvivalent 35mm: %1</translation>
     </message>
     <message>
-      <source>CCD width: %1</source>
-      <translation>Šířka CCD: %1</translation>
+        <source>CCD width: %1</source>
+        <translation>Šířka CCD: %1</translation>
     </message>
     <message>
-      <source>Exposure time: %1
+        <source>Exposure time: %1
 </source>
-      <translation>Doba expozice: %1</translation>
+        <translation>Doba expozice: %1</translation>
     </message>
     <message>
-      <source>Aperture: %1
+        <source>Aperture: %1
 </source>
-      <translation>Clona: %1</translation>
+        <translation>Clona: %1</translation>
     </message>
     <message>
-      <source>Distance: %1
+        <source>Distance: %1
 </source>
-      <translation>Vzdálenost: %1</translation>
+        <translation>Vzdálenost: %1</translation>
     </message>
     <message>
-      <source>Infinite</source>
-      <translation>Nekonečno</translation>
+        <source>Infinite</source>
+        <translation>Nekonečno</translation>
     </message>
     <message>
-      <source>ISO equivalent: %1
+        <source>ISO equivalent: %1
 </source>
-      <translation>Ekvivalent ISO: %1</translation>
+        <translation>Ekvivalent ISO: %1</translation>
     </message>
     <message>
-      <source>EXIF comment: %1</source>
-      <translation>EXIF komentář: %1</translation>
+        <source>EXIF comment: %1</source>
+        <translation>EXIF komentář: %1</translation>
     </message>
     <message>
-      <source>&lt;/qt></source>
-      <translation>&lt;/qt></translation>
+        <source>&lt;/qt&gt;</source>
+        <translation>&lt;/qt&gt;</translation>
     </message>
-  </context>
+    <message>
+        <source>Dimensions: %1 x %2
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size: %1
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Compressed size: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>used colors: %1
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resolution: %1 x %2
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 </TS>

@@ -432,7 +432,7 @@ laat de lijst van mappen en bestanden zien</translation>
 %1
 
 ZSafe will now exit.</source>
-        <translation>Kan de map
+        <translation type="obsolete">Kan de map
 %1
 niet maken.
 
@@ -516,7 +516,7 @@ ZSafe zal nu afsluiten.</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="obsolete">Ändern</translation>
+        <translation type="unfinished">Ändern</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -564,7 +564,7 @@ ZSafe zal nu afsluiten.</translation>
     </message>
     <message>
         <source>Edit Entry</source>
-        <translation>Invoer wijzigen</translation>
+        <translation type="obsolete">Invoer wijzigen</translation>
     </message>
     <message>
         <source>Username</source>
@@ -576,7 +576,7 @@ ZSafe zal nu afsluiten.</translation>
     </message>
     <message>
         <source>New Entry</source>
-        <translation>Nieuwe Invoer</translation>
+        <translation type="obsolete">Nieuwe Invoer</translation>
     </message>
     <message>
         <source>Entry name must be different
@@ -708,7 +708,7 @@ opslaan</translation>
     </message>
     <message>
         <source>Zaurus Password Manager&lt;br&gt;</source>
-        <translation>Handheld Wachtwoord Manager&lt;br&gt;</translation>
+        <translation type="obsolete">Handheld Wachtwoord Manager&lt;br&gt;</translation>
     </message>
     <message>
         <source>ZSafe version 2.0.1ern&lt;br&gt;</source>
@@ -716,11 +716,11 @@ opslaan</translation>
     </message>
     <message>
         <source>by Carsten Schneider&lt;br&gt;</source>
-        <translation>door Carsten Schneider&lt;br&gt;</translation>
+        <translation type="obsolete">door Carsten Schneider&lt;br&gt;</translation>
     </message>
     <message>
         <source>Translations by Robert Ernst&lt;br&gt;</source>
-        <translation>Vertaling door Ruben Lubbes&lt;br&gt;</translation>
+        <translation type="obsolete">Vertaling door Ruben Lubbes&lt;br&gt;</translation>
     </message>
     <message>
         <source>&amp;New document</source>
@@ -736,7 +736,7 @@ opslaan</translation>
     </message>
     <message>
         <source>Create new ZSafe document</source>
-        <translation>Maak nieuw ZSafe Bestand</translation>
+        <translation type="obsolete">Maak nieuw ZSafe Bestand</translation>
     </message>
     <message>
         <source>Open ZSafe document</source>
@@ -744,14 +744,14 @@ opslaan</translation>
     </message>
     <message>
         <source>Save ZSafe document as..</source>
-        <translation>ZSafe document opslaan als..</translation>
+        <translation type="obsolete">ZSafe document opslaan als..</translation>
     </message>
     <message>
         <source>Can&apos;t create directory
 .../Documents/application
 
 ZSafe will now exit.</source>
-        <translation>Kan de map
+        <translation type="obsolete">Kan de map
 .../Documents/application
 niet maken.
 
@@ -763,7 +763,7 @@ ZSafe zal nu afsluiten.
 ...//Documents/application/zsafe
 
 ZSafe will now exit.</source>
-        <translation>Kan de map
+        <translation type="obsolete">Kan de map
 .../Documents/application/zsafe
 niet maken.
 
@@ -836,11 +836,43 @@ uw nieuwe bestand.</translation>
     </message>
     <message>
         <source>ZSafe version 2.1.2-jv01b&lt;br&gt;</source>
-        <translation>ZSafe versie 2.1.2-jv01b&lt;br&gt;</translation>
+        <translation type="obsolete">ZSafe versie 2.1.2-jv01b&lt;br&gt;</translation>
     </message>
     <message>
         <source>ZSafe version 2.1.2&lt;br&gt;</source>
-        <translation>ZSafe versie 2.1.2&lt;br&gt;</translation>
+        <translation type="obsolete">ZSafe versie 2.1.2&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;Can&apos;t create directory %1&lt;/P&gt;&lt;P&gt;ZSafe will now exit.&lt;/P&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ZSafe: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;No document defined. You have to create a new document&lt;/P&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;You must create a new document first. Ok to create?&lt;/P&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;body&gt;&lt;div align=center&gt;&lt;b&gt;Zaurus Password Manager&lt;br&gt;ZSafe version 2.1.2&lt;br&gt;&lt;/b&gt;by Carsten Schneider&lt;br&gt;zcarsten@gmx.net&lt;br&gt;http://z-soft.z-portal.info/zsafe&lt;br&gt;Translations by Robert Ernst&lt;br&gt;robert.ernst@linux-solutions.at&lt;br&gt;&lt;br&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy to Clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPluginConfig</name>
     <message>
-        <source>To activate settings: Restart application !</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Enable/Disable Views</source>
         <translation type="unfinished"></translation>
     </message>
@@ -31,14 +27,6 @@
     </message>
     <message>
         <source>Set the maximum number of lines that should be shown for each anniversaries/birthdays</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Clip line after X chars: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>After how many chars should be the info about the task be cut off</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

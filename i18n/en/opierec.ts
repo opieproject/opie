@@ -79,10 +79,6 @@ or a card isn&apos;t being recognized</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source> seconds</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Do you really want to &lt;font size=+2&gt;&lt;B&gt;DELETE&lt;/B&gt;&lt;/font&gt;
 the selected file?</source>
         <translation type="unfinished"></translation>
@@ -145,18 +141,6 @@ the selected file?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Rec</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Location</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Wave Compression (smaller files)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -165,15 +149,15 @@ the selected file?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Stop</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Auto Mute</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Stereo Channels</source>
+        <source>Del</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stereo</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

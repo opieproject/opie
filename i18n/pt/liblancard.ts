@@ -37,4 +37,11 @@
         <translation type="unfinished"></translation>
     </message>
 </context>
+<context>
+    <name>LanCardRun</name>
+    <message>
+        <source>No interface found</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 </TS>

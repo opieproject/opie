@@ -1,16 +1,5 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>QObject</name>
-    <message>
-        <source>KeyList::addKey() Cannot make default value for type %1, Key not added.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>DataElem::setField(%1, %2) No valid type found</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>TVBrowseKeyEntry</name>
     <message>
         <source>Reset</source>

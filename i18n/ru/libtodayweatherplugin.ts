@@ -107,11 +107,15 @@ Pres: </source>
     </message>
     <message>
         <source> hPa</source>
-        <translation>кПа</translation>
+        <translation type="obsolete">кПа</translation>
     </message>
     <message>
         <source> Hg</source>
         <translation>ртути</translation>
+    </message>
+    <message>
+        <source> kPa</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

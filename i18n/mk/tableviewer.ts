@@ -3,11 +3,11 @@
     <name>QObject</name>
     <message>
         <source>KeyList::addKey() Cannot make default value for type %1, Key not added.</source>
-        <translation>Листа на клучеви::ДодајКлуч() Немпже да се внесе основна вредност за тип %1. Клучот не е додаден.</translation>
+        <translation type="obsolete">Листа на клучеви::ДодајКлуч() Немпже да се внесе основна вредност за тип %1. Клучот не е додаден.</translation>
     </message>
     <message>
         <source>DataElem::setField(%1, %2) No valid type found</source>
-        <translation>ПодатокЕлемент::ПоставиПоле(%1 %2) Не е пронајден валиден тип</translation>
+        <translation type="obsolete">ПодатокЕлемент::ПоставиПоле(%1 %2) Не е пронајден валиден тип</translation>
     </message>
 </context>
 <context>

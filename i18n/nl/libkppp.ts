@@ -456,6 +456,10 @@ apparaat
         <source>You must enter a unique device name</source>
         <translation>Unieke verbindingsnaam invoeren</translation>
     </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Fout</translation>
+    </message>
 </context>
 <context>
     <name>DialWidget</name>

@@ -5,6 +5,14 @@
         <source>Command : </source>
         <translation>Команда :</translation>
     </message>
+    <message>
+        <source>State should be off</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>State should at least be off</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TheNSResources</name>
@@ -34,11 +42,35 @@
     </message>
     <message>
         <source>&lt;p&gt;Nodes that provide working IP connections&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Ноды, которые обеспечивают рабочие IP соединения&lt;/p&gt;</translation>
+        <translation type="obsolete">&lt;p&gt;Ноды, которые обеспечивают рабочие IP соединения&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Fully configured connection profile&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Полностью настроенный профиль соединения&lt;/p&gt;</translation>
+        <translation type="obsolete">&lt;p&gt;Полностью настроенный профиль соединения&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Nodes that provide working IP connection&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Fully configured network profile&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connection to GPRS device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Connection to a GPRS capable device&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Today Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;The plugin &apos;%1&apos; caused Today to crash. It could be that the plugin is not properly installed.&lt;br&gt;Today tries to continue loading plugins.&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -57,7 +89,7 @@
     </message>
     <message>
         <source>Off</source>
-        <translation>Отключен</translation>
+        <translation type="obsolete">Отключен</translation>
     </message>
     <message>
         <source>Available</source>
@@ -65,7 +97,15 @@
     </message>
     <message>
         <source>IsUp</source>
-        <translation>Включен</translation>
+        <translation type="obsolete">Включен</translation>
+    </message>
+    <message>
+        <source>Inactive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Up</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -13,6 +13,29 @@
         <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
         <translation>&lt;h1&gt;Alarm om %1&lt;/h1&gt;&lt;br&gt;</translation>
     </message>
+    <message>
+        <source>All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished">Onbenoemd</translation>
+    </message>
+</context>
+<context>
+    <name>NewTaskDlg</name>
+    <message>
+        <source>New Task</source>
+        <translation type="unfinished">Nieuwe taak</translation>
+    </message>
+    <message>
+        <source>Blank task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Using template:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OTaskEditor</name>
@@ -38,6 +61,17 @@
     </message>
 </context>
 <context>
+    <name>Opie</name>
+    <message>
+        <source>Todo List</source>
+        <translation type="unfinished">Te Doen Lijst</translation>
+    </message>
+    <message>
+        <source>Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <source>Enter Task</source>
@@ -57,46 +91,46 @@
     </message>
     <message>
         <source>Opie Todolist</source>
-        <translation>Opie TeDoen lijst</translation>
+        <translation type="obsolete">Opie TeDoen lijst</translation>
     </message>
 </context>
 <context>
     <name>QWidget</name>
     <message>
         <source>New from template</source>
-        <translation>Nieuw van voorbeeld</translation>
+        <translation type="obsolete">Nieuw van voorbeeld</translation>
     </message>
     <message>
         <source>New Task</source>
-        <translation>Nieuwe taak</translation>
+        <translation type="obsolete">Nieuwe taak</translation>
     </message>
     <message>
         <source>Click here to create a new task.</source>
-        <translation>Klik hier om een nieuwe taak te maken.</translation>
+        <translation type="obsolete">Klik hier om een nieuwe taak te maken.</translation>
     </message>
     <message>
         <source>Edit Task</source>
-        <translation>Wijzig taak</translation>
+        <translation type="obsolete">Wijzig taak</translation>
     </message>
     <message>
         <source>Click here to modify the current task.</source>
-        <translation>Klik hier om de huidige taak te wijzigen.</translation>
+        <translation type="obsolete">Klik hier om de huidige taak te wijzigen.</translation>
     </message>
     <message>
         <source>View Task</source>
-        <translation>Bekijk taak</translation>
+        <translation type="obsolete">Bekijk taak</translation>
     </message>
     <message>
         <source>Delete...</source>
-        <translation>Verwijder...</translation>
+        <translation type="obsolete">Verwijder...</translation>
     </message>
     <message>
         <source>Click here to remove the current task.</source>
-        <translation>Klik hier om de huidige taak te verwijderen.</translation>
+        <translation type="obsolete">Klik hier om de huidige taak te verwijderen.</translation>
     </message>
     <message>
         <source>Delete all...</source>
-        <translation>Verwijder alle...</translation>
+        <translation type="obsolete">Verwijder alle...</translation>
     </message>
     <message>
         <source>Delete completed</source>
@@ -104,19 +138,19 @@
     </message>
     <message>
         <source>Duplicate</source>
-        <translation>Dupliceer</translation>
+        <translation type="obsolete">Dupliceer</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation>IrDa Versturen</translation>
+        <translation type="obsolete">IrDa Versturen</translation>
     </message>
     <message>
         <source>Click here to send the current task to another device.</source>
-        <translation>Klik hier om de huidige taak naar een ander apparaat te sturen.</translation>
+        <translation type="obsolete">Klik hier om de huidige taak naar een ander apparaat te sturen.</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>Vind</translation>
+        <translation type="obsolete">Vind</translation>
     </message>
     <message>
         <source>Show completed tasks</source>
@@ -136,15 +170,15 @@
     </message>
     <message>
         <source>Data</source>
-        <translation>Data</translation>
+        <translation type="obsolete">Data</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation>Kategorie</translation>
+        <translation type="obsolete">Kategorie</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation>Opties</translation>
+        <translation type="obsolete">Opties</translation>
     </message>
     <message>
         <source>QuickEdit</source>
@@ -168,11 +202,11 @@ De lijst geeft de volgende info door:
     </message>
     <message>
         <source>All Categories</source>
-        <translation>Alle kategorieen</translation>
+        <translation type="obsolete">Alle kategorieen</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Onbenoemd</translation>
+        <translation type="obsolete">Onbenoemd</translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -234,7 +268,7 @@ Toch stoppen?</translation>
     </message>
     <message>
         <source>Configure Templates</source>
-        <translation>Stel voorbeelden in</translation>
+        <translation type="obsolete">Stel voorbeelden in</translation>
     </message>
     <message>
         <source>Template Editor</source>

@@ -4,7 +4,7 @@
     <name>BackupAndRestore</name>
     <message>
         <source>Backup and Restore... working...</source>
-        <translation>Sichern und Wiederherstellen... arbeitet ...</translation>
+        <translation type="obsolete">Sichern und Wiederherstellen... arbeitet ...</translation>
     </message>
     <message>
         <source>Backup and Restore</source>
@@ -64,6 +64,14 @@
         <source>Restore Successful.</source>
         <translation>Rückspielen erfolgreich.</translation>
     </message>
+    <message>
+        <source>Backing up...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restore Backup...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>BackupAndRestoreBase</name>
@@ -81,7 +89,7 @@
     </message>
     <message>
         <source>Save To</source>
-        <translation>Speichern nach</translation>
+        <translation type="obsolete">Speichern nach</translation>
     </message>
     <message>
         <source>&amp;Backup</source>
@@ -126,6 +134,22 @@
     <message>
         <source>...</source>
         <translation>...</translation>
+    </message>
+    <message>
+        <source>Destination</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User Data (Configuration + PIM)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full Backup (Root File System)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

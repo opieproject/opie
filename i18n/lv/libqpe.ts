@@ -317,7 +317,7 @@ labo kategorijas.</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Dzēst</translation>
     </message>
     <message>
         <source>Delete this document.</source>
@@ -558,11 +558,11 @@ Free some memory and try again.</source>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Visi</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Neaizpildīts</translation>
     </message>
     <message>
         <source>&lt;b&gt;Work Address:&lt;/b&gt;</source>
@@ -897,7 +897,7 @@ Free some memory and try again.</source>
     </message>
     <message>
         <source>Hard Disk</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cietais Disks</translation>
     </message>
     <message>
         <source>SD Card</source>

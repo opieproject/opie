@@ -11,11 +11,11 @@
     </message>
     <message>
         <source>Clip line after X chars: </source>
-        <translation>Knip lijn na X tekens:</translation>
+        <translation type="obsolete">Knip lijn na X tekens:</translation>
     </message>
     <message>
         <source>After how many chars should be the info about the task be cut off</source>
-        <translation>Na hoeveel tekens de info over de taak afgebroken moet worden</translation>
+        <translation type="obsolete">Na hoeveel tekens de info over de taak afgebroken moet worden</translation>
     </message>
     <message>
         <source>Days look ahead: </source>
@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>To activate settings: Restart application !</source>
-        <translation>Herstart programma om instellingen te activeren!</translation>
+        <translation type="obsolete">Herstart programma om instellingen te activeren!</translation>
     </message>
     <message>
         <source>Set Headline Color: </source>

@@ -113,19 +113,15 @@
     <name>OFileDialog</name>
     <message>
         <source>FileDialog</source>
-        <translation type="unfinished">Dateidialog</translation>
+        <translation type="obsolete">Dateidialog</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished">Öffnen</translation>
+        <translation type="obsolete">Öffnen</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Speichern</translation>
-    </message>
-    <message>
-        <source>Select Directory</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Speichern</translation>
     </message>
 </context>
 <context>
@@ -173,15 +169,15 @@
     <name>OFontSelector</name>
     <message>
         <source>Style</source>
-        <translation type="unfinished">Stil</translation>
+        <translation type="obsolete">Stil</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Größe</translation>
+        <translation type="obsolete">Größe</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="unfinished">Falsches Üben von Xylophonmusik quält jeden größeren Zwerg</translation>
+        <translation type="obsolete">Falsches Üben von Xylophonmusik quält jeden größeren Zwerg</translation>
     </message>
 </context>
 <context>
@@ -450,15 +446,19 @@ und</translation>
     <name>Opie::Ui::OFileDialog</name>
     <message>
         <source>FileDialog</source>
-        <translation type="obsolete">Dateidialog</translation>
+        <translation type="unfinished">Dateidialog</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="obsolete">Öffnen</translation>
+        <translation type="unfinished">Öffnen</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="obsolete">Speichern</translation>
+        <translation type="unfinished">Speichern</translation>
+    </message>
+    <message>
+        <source>Select Directory</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -472,15 +472,15 @@ und</translation>
     <name>Opie::Ui::OFontSelector</name>
     <message>
         <source>Style</source>
-        <translation type="obsolete">Stil</translation>
+        <translation type="unfinished">Stil</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="obsolete">Größe</translation>
+        <translation type="unfinished">Größe</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="obsolete">Falsches Üben von Xylophonmusik quält jeden größeren Zwerg</translation>
+        <translation type="unfinished">Falsches Üben von Xylophonmusik quält jeden größeren Zwerg</translation>
     </message>
 </context>
 <context>

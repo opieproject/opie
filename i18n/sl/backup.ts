@@ -3,7 +3,7 @@
     <name>BackupAndRestore</name>
     <message>
         <source>Backup and Restore... working...</source>
-        <translation>Kopiraj in restavriraj... delam...</translation>
+        <translation type="obsolete">Kopiraj in restavriraj... delam...</translation>
     </message>
     <message>
         <source>Backup and Restore</source>
@@ -54,6 +54,14 @@
         <source>Restore Successful.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Backing up...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restore Backup...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>BackupAndRestoreBase</name>
@@ -71,7 +79,7 @@
     </message>
     <message>
         <source>Save To</source>
-        <translation>Shrani na</translation>
+        <translation type="obsolete">Shrani na</translation>
     </message>
     <message>
         <source>&amp;Backup</source>
@@ -111,6 +119,22 @@
     </message>
     <message>
         <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Destination</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User Data (Configuration + PIM)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full Backup (Root File System)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -201,6 +201,10 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
         <translation>Er du sikker på at du vil&lt;br&gt;&lt;b&gt;slette&lt;/b&gt; den nuværende fil
  fra disken?&lt;br&gt;Det kan &lt;b&gt;ikke fortrydes!&lt;/b&gt;</translation>
     </message>
+    <message>
+        <source>Save Failed</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>filePermissions</name>

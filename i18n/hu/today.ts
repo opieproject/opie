@@ -3,7 +3,7 @@
     <name>Today</name>
     <message>
         <source>Today</source>
-        <translation type="obsolete">Ma</translation>
+        <translation type="unfinished">Ma</translation>
     </message>
     <message>
         <source>Owned by </source>
@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>No plugins found</source>
-        <translation>Nem találtam kiegészítőt</translation>
+        <translation type="obsolete">Nem találtam kiegészítőt</translation>
     </message>
     <message>
         <source>No plugins activated</source>
@@ -24,6 +24,14 @@
     <message>
         <source>Click here to launch the associated app</source>
         <translation>Bökjön ide a hozzárendelt program indításához</translation>
+    </message>
+    <message>
+        <source>Today Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;The plugin &apos;%1&apos; caused Today to crash. It could be that the plugin is not properly installed.&lt;br&gt;Today tries to continue loading plugins.&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -76,7 +76,7 @@ Vous ne pouvez sélectionner qu&apos;un nom d&apos;utilisateur existant.</transl
     </message>
     <message>
         <source>&lt;p&gt;All user-defined net ranges will be lost.</source>
-        <translation type="unfinished">&lt;p&gt;Tous les paramètres utilisateurs seront perdus.</translation>
+        <translation type="obsolete">&lt;p&gt;Tous les paramètres utilisateurs seront perdus.</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -84,31 +84,31 @@ Vous ne pouvez sélectionner qu&apos;un nom d&apos;utilisateur existant.</transl
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished">OK</translation>
+        <translation type="obsolete">OK</translation>
     </message>
     <message>
         <source>192.168.129.0/24</source>
-        <translation type="unfinished">192.168.129.0/24</translation>
+        <translation type="obsolete">192.168.129.0/24</translation>
     </message>
     <message>
         <source>192.168.1.0/24</source>
-        <translation type="unfinished">192.168.1.0/24</translation>
+        <translation type="obsolete">192.168.1.0/24</translation>
     </message>
     <message>
         <source>192.168.0.0/16</source>
-        <translation type="unfinished">192.168.0.0/16</translation>
+        <translation type="obsolete">192.168.0.0/16</translation>
     </message>
     <message>
         <source>172.16.0.0/12</source>
-        <translation type="unfinished">172.16.0.0/12</translation>
+        <translation type="obsolete">172.16.0.0/12</translation>
     </message>
     <message>
         <source>10.0.0.0/8</source>
-        <translation type="unfinished">10.0.0.0/8</translation>
+        <translation type="obsolete">10.0.0.0/8</translation>
     </message>
     <message>
         <source>1.0.0.0/8</source>
-        <translation type="unfinished">1.0.0.0/8</translation>
+        <translation type="obsolete">1.0.0.0/8</translation>
     </message>
     <message>
         <source>Any</source>
@@ -117,6 +117,26 @@ Vous ne pouvez sélectionner qu&apos;un nom d&apos;utilisateur existant.</transl
     <message>
         <source>None</source>
         <translation type="unfinished">Aucun</translation>
+    </message>
+    <message>
+        <source>Important notice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To be able to protect your PDA with one or more authentication plugins (for example, a simple PIN authentication), you must install at least one &lt;em&gt;opie-multiauth-*&lt;/em&gt; package! Once you have done that, you will be able to configure your PDA protection here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Locking</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All user-defined net ranges will be lost.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -142,10 +162,6 @@ Vous ne pouvez sélectionner qu&apos;un nom d&apos;utilisateur existant.</transl
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Debug options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Don&apos;t protect this config screen</source>
         <translation type="unfinished"></translation>
     </message>
@@ -154,11 +170,35 @@ Vous ne pouvez sélectionner qu&apos;un nom d&apos;utilisateur existant.</transl
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Allow to bypass authentication</source>
+        <source>Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Note: the third option implies the second one</source>
+        <source>Testing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test the authentication now</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Attention</source>
+        <translation type="unfinished">Attention</translation>
+    </message>
+    <message>
+        <source>You must save your current settings before trying to authenticate. Press OK to accept and launch a simulated authentication process.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If you don&apos;t like the result of this test, don&apos;t forget to change your settings before you exit the configuration application!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Annuler</translation>
+    </message>
+    <message>
+        <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -124,7 +124,7 @@ Gegeugen wordt geklassificeerd als volgt:
     </message>
     <message>
         <source>2 Mb,4 Mb,6 Mb,8 Mb</source>
-        <translation>2 Mb, 4 Mb, 6 Mb, 8 Mb</translation>
+        <translation type="obsolete">2 Mb, 4 Mb, 6 Mb, 8 Mb</translation>
     </message>
     <message>
         <source>Failed to detach swapfile.</source>
@@ -161,6 +161,10 @@ Gegeugen wordt geklassificeerd als volgt:
     <message>
         <source></source>
         <translation></translation>
+    </message>
+    <message>
+        <source>2 Mb,4 Mb,6 Mb,8 Mb,16 Mb,32 Mb,64 Mb</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -155,154 +155,136 @@
     <message>
         <source>Colormode: Color
 </source>
-        <translation>Krāsurežīms: Krāsa</translation>
+        <translation type="obsolete">Krāsurežīms: Krāsa</translation>
     </message>
     <message>
         <source>Colormode: Black and white
 </source>
-        <translation>Krāsurežīms: Melnbalts
+        <translation type="obsolete">Krāsurežīms: Melnbalts
 </translation>
     </message>
     <message>
         <source>Basic</source>
-        <translation>Pamata</translation>
+        <translation type="obsolete">Pamata</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation>Normāls</translation>
+        <translation type="obsolete">Normāls</translation>
     </message>
     <message>
         <source>Fine</source>
-        <translation>Precīzi</translation>
+        <translation type="obsolete">Precīzi</translation>
     </message>
     <message>
         <source>Quality: %1
 </source>
-        <translation>Kvalitāte: %1
+        <translation type="obsolete">Kvalitāte: %1
 </translation>
     </message>
     <message>
         <source>Daylight</source>
-        <translation>Dienasgaisma</translation>
+        <translation type="obsolete">Dienasgaisma</translation>
     </message>
     <message>
         <source>Fluorescent</source>
-        <translation>Fluroscents</translation>
+        <translation type="obsolete">Fluroscents</translation>
     </message>
     <message>
         <source>Tungsten</source>
-        <translation>Tungsten</translation>
+        <translation type="obsolete">Tungsten</translation>
     </message>
     <message>
         <source>Standard light A</source>
-        <translation>Standarta gaišs A</translation>
+        <translation type="obsolete">Standarta gaišs A</translation>
     </message>
     <message>
         <source>Standard light B</source>
-        <translation>Standarta gaišs B</translation>
+        <translation type="obsolete">Standarta gaišs B</translation>
     </message>
     <message>
         <source>Standard light C</source>
-        <translation>Standarta gaišs C</translation>
+        <translation type="obsolete">Standarta gaišs C</translation>
     </message>
     <message>
         <source>D55</source>
-        <translation>D55</translation>
-    </message>
-    <message>
-        <source>D65</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>D75</source>
-        <translation></translation>
+        <translation type="obsolete">D55</translation>
     </message>
     <message>
         <source>Other</source>
-        <translation>Cits</translation>
+        <translation type="obsolete">Cits</translation>
     </message>
     <message>
         <source>White Balance: %1
 </source>
-        <translation>Baltā Balanss: %1
+        <translation type="obsolete">Baltā Balanss: %1
 </translation>
     </message>
     <message>
         <source>Average</source>
-        <translation>Vidēji</translation>
+        <translation type="obsolete">Vidēji</translation>
     </message>
     <message>
         <source>Center weighted average</source>
-        <translation>Centrāli izvērti vidējais</translation>
+        <translation type="obsolete">Centrāli izvērti vidējais</translation>
     </message>
     <message>
         <source>Spot</source>
-        <translation>Punkts</translation>
+        <translation type="obsolete">Punkts</translation>
     </message>
     <message>
         <source>MultiSpot</source>
-        <translation>Daudzpunktu</translation>
+        <translation type="obsolete">Daudzpunktu</translation>
     </message>
     <message>
         <source>Pattern</source>
-        <translation>Raksts</translation>
+        <translation type="obsolete">Raksts</translation>
     </message>
     <message>
         <source>Partial</source>
-        <translation>Daļējs</translation>
+        <translation type="obsolete">Daļējs</translation>
     </message>
     <message>
         <source>Metering Mode: %1
 </source>
-        <translation>Matering Režīms: %1
+        <translation type="obsolete">Matering Režīms: %1
 </translation>
     </message>
     <message>
         <source>Not defined</source>
-        <translation>Nav definēts</translation>
+        <translation type="obsolete">Nav definēts</translation>
     </message>
     <message>
         <source>Manual</source>
-        <translation>Rokas</translation>
+        <translation type="obsolete">Rokas</translation>
     </message>
     <message>
         <source>Normal progam</source>
-        <translation>Normāla programma</translation>
+        <translation type="obsolete">Normāla programma</translation>
     </message>
     <message>
         <source>Aperture priority</source>
-        <translation>Atklāšanas prioritāte</translation>
+        <translation type="obsolete">Atklāšanas prioritāte</translation>
     </message>
     <message>
         <source>Shutter priority</source>
-        <translation>Aizklāšanas prioritāte</translation>
-    </message>
-    <message>
-        <source>Creative progam
-(biased toward fast shutter speed</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Action progam
-(biased toward fast shutter speed)</source>
-        <translation></translation>
+        <translation type="obsolete">Aizklāšanas prioritāte</translation>
     </message>
     <message>
         <source>Portrait mode
 (for closeup photos with the background out of focus)</source>
-        <translation>Portreta režīms
+        <translation type="obsolete">Portreta režīms
 (bildēm ar fonu bez fokusa)</translation>
     </message>
     <message>
         <source>Landscape mode
 (for landscape photos with the background in focus)</source>
-        <translation>Ainavas režīms
+        <translation type="obsolete">Ainavas režīms
 (ainavu atēliem)</translation>
     </message>
     <message>
         <source>Exposure Program: %1
 </source>
-        <translation>Attīstīšanas Programma: %1
+        <translation type="obsolete">Attīstīšanas Programma: %1
 </translation>
     </message>
     <message>
@@ -392,6 +374,30 @@
     <message>
         <source>&lt;/qt&gt;</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>Dimensions: %1 x %2
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size: %1
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Compressed size: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>used colors: %1
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resolution: %1 x %2
+</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

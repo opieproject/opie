@@ -440,6 +440,10 @@ novo, que poderão ser modificadas</translation>
         <source>You must enter a unique device name</source>
         <translation>O nome do dispositivo tem de ser único</translation>
     </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Erro</translation>
+    </message>
 </context>
 <context>
     <name>DialWidget</name>

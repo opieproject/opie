@@ -247,6 +247,13 @@ akurāti kalibrējiet ekrānu.</translation>
     </message>
 </context>
 <context>
+    <name>QueuedRequestRunner</name>
+    <message>
+        <source>Processing Queued Requests</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SafeMode</name>
     <message>
         <source>Safe Mode</source>
@@ -263,6 +270,13 @@ akurāti kalibrējiet ekrānu.</translation>
     <message>
         <source>Help...</source>
         <translation>Palīdzība...</translation>
+    </message>
+</context>
+<context>
+    <name>Server</name>
+    <message>
+        <source>USB Lock</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

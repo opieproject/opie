@@ -206,6 +206,10 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
         <translation>¿Seguro que quiere&lt;BR&gt;&lt;B&gt;borrar&lt;/B&gt; el fichero actual
 del disco?&lt;BR&gt;¡Es &lt;B&gt;irreversible&lt;/B&gt;!</translation>
     </message>
+    <message>
+        <source>Save Failed</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>filePermissions</name>

@@ -73,39 +73,35 @@ Login einzustellen.</translation>
     </message>
     <message>
         <source>&lt;p&gt;All user-defined net ranges will be lost.</source>
-        <translation>&lt;p&gt;Alle manuell erstellten Werte gehen verloren.</translation>
+        <translation type="obsolete">&lt;p&gt;Alle manuell erstellten Werte gehen verloren.</translation>
     </message>
     <message>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
     </message>
     <message>
-        <source>Ok</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>192.168.129.0/24</source>
-        <translation>192.168.129.0/24</translation>
+        <translation type="obsolete">192.168.129.0/24</translation>
     </message>
     <message>
         <source>192.168.1.0/24</source>
-        <translation>192.168.1.0/24</translation>
+        <translation type="obsolete">192.168.1.0/24</translation>
     </message>
     <message>
         <source>192.168.0.0/16</source>
-        <translation>192.168.0.0/16</translation>
+        <translation type="obsolete">192.168.0.0/16</translation>
     </message>
     <message>
         <source>172.16.0.0/12</source>
-        <translation>172.16.0.0/12</translation>
+        <translation type="obsolete">172.16.0.0/12</translation>
     </message>
     <message>
         <source>10.0.0.0/8</source>
-        <translation>10.0.0.0/8</translation>
+        <translation type="obsolete">10.0.0.0/8</translation>
     </message>
     <message>
         <source>1.0.0.0/8</source>
-        <translation>1.0.0.0/8</translation>
+        <translation type="obsolete">1.0.0.0/8</translation>
     </message>
     <message>
         <source>Any</source>
@@ -114,6 +110,26 @@ Login einzustellen.</translation>
     <message>
         <source>None</source>
         <translation>Keine</translation>
+    </message>
+    <message>
+        <source>Important notice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To be able to protect your PDA with one or more authentication plugins (for example, a simple PIN authentication), you must install at least one &lt;em&gt;opie-multiauth-*&lt;/em&gt; package! Once you have done that, you will be able to configure your PDA protection here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Locking</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All user-defined net ranges will be lost.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -140,7 +156,7 @@ Login einzustellen.</translation>
     </message>
     <message>
         <source>Debug options</source>
-        <translation>Debug Optionen</translation>
+        <translation type="obsolete">Debug Optionen</translation>
     </message>
     <message>
         <source>Don&apos;t protect this config screen</source>
@@ -152,11 +168,43 @@ Login einzustellen.</translation>
     </message>
     <message>
         <source>Allow to bypass authentication</source>
-        <translation>Umgehen der Anmeldung erlauben</translation>
+        <translation type="obsolete">Umgehen der Anmeldung erlauben</translation>
     </message>
     <message>
         <source>Note: the third option implies the second one</source>
-        <translation>Hinweis: Die dritte Option erfordert die zweite Option</translation>
+        <translation type="obsolete">Hinweis: Die dritte Option erfordert die zweite Option</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Testing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test the authentication now</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Attention</source>
+        <translation type="unfinished">Achtung</translation>
+    </message>
+    <message>
+        <source>You must save your current settings before trying to authenticate. Press OK to accept and launch a simulated authentication process.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If you don&apos;t like the result of this test, don&apos;t forget to change your settings before you exit the configuration application!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Abbrechen</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -380,7 +428,7 @@ geänderten Daten gehen dabei verloren!</translation>
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    IntelliSync will disable the password check but you&apos;ll be prompted to accept the connection.
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Opie1.0 will be compatible with QtopiaDesktop, MultiSync and KitchenSync
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Qtopia1.7 will alter the way data is send to the client and will not work with older clients.
-<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/></source>
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    </source>
         <translation type="unfinished"></translation>
     </message>
 </context>

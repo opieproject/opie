@@ -25,6 +25,10 @@
         <source>Elemental Composition (%):</source>
         <translation>Елементарни состојки (%):</translation>
     </message>
+    <message>
+        <source>CalcDlg</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OxydataWidget</name>

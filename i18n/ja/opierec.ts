@@ -21,10 +21,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Rec</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
@@ -34,14 +30,6 @@
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Location</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -77,10 +65,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Stereo Channels</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>In</source>
         <translation type="unfinished"></translation>
     </message>
@@ -101,10 +85,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Stop</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Low Disk Space</source>
         <translation type="unfinished"></translation>
     </message>
@@ -112,10 +92,6 @@
         <source>You are running low of
 recording space
 or a card isn&apos;t being recognized</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> seconds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -174,6 +150,14 @@ the selected file?</source>
     </message>
     <message>
         <source>Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Del</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stereo</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -1,78 +1,104 @@
-<!DOCTYPE TS>
-<TS>
-  <context>
+<!DOCTYPE TS><TS>
+<context>
     <name>BluetoothBNEPEdit</name>
     <message>
-      <source>&lt;p>No bluetooth device addresses specified&lt;/p></source>
-      <translation>&lt;p>Nebyly specifikovány adresy bluetooth zařízení&lt;/p></translation>
+        <source>&lt;p&gt;No bluetooth device addresses specified&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Nebyly specifikovány adresy bluetooth zařízení&lt;/p&gt;</translation>
     </message>
-  </context>
-  <context>
+</context>
+<context>
     <name>BluetoothBNEPGUI</name>
     <message>
-      <source>Bluetooth-bnep</source>
-      <translation>Bluetooth-bnep</translation>
+        <source>Bluetooth-bnep</source>
+        <translation>Bluetooth-bnep</translation>
     </message>
     <message>
-      <source>Any available PAN device</source>
-      <translation>Jakékoliv dostupné PAN zařízení</translation>
+        <source>Any available PAN device</source>
+        <translation>Jakékoliv dostupné PAN zařízení</translation>
     </message>
     <message>
-      <source>Select Card</source>
-      <translation>Vyberte kartu</translation>
+        <source>Select Card</source>
+        <translation>Vyberte kartu</translation>
     </message>
     <message>
-      <source>BDAddress</source>
-      <translation>BD adresa</translation>
+        <source>BDAddress</source>
+        <translation>BD adresa</translation>
     </message>
     <message>
-      <source>Rescan</source>
-      <translation>Prohledat</translation>
+        <source>Rescan</source>
+        <translation>Prohledat</translation>
     </message>
-  </context>
-  <context>
+</context>
+<context>
     <name>BluetoothBNEPNetNode</name>
     <message>
-      <source>Bluetooth PAN/NAP</source>
-      <translation>Bluetooth PAN/NAP</translation>
+        <source>Bluetooth PAN/NAP</source>
+        <translation>Bluetooth PAN/NAP</translation>
     </message>
     <message>
-      <source>&lt;p>Sets up a bluetooth link using the bluetooth Network profile.&lt;/p>&lt;p>Use this to connect two computing devices.&lt;/p></source>
-      <translation>&lt;p>Vytvoří bluetooth spojení s použitím bluetooth síťového profilu.&lt;/p>&lt;p>Toto použijte pro spojení dvou počítačových zařízení.&lt;/p></translation>
+        <source>&lt;p&gt;Sets up a bluetooth link using the bluetooth Network profile.&lt;/p&gt;&lt;p&gt;Use this to connect two computing devices.&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Vytvoří bluetooth spojení s použitím bluetooth síťového profilu.&lt;/p&gt;&lt;p&gt;Toto použijte pro spojení dvou počítačových zařízení.&lt;/p&gt;</translation>
     </message>
-  </context>
-  <context>
+</context>
+<context>
     <name>BluetoothRFCOMMGUI</name>
     <message>
-      <source>Bluetooth-rfcomm</source>
-      <translation>Bluetooth-rfcomm</translation>
+        <source>Bluetooth-rfcomm</source>
+        <translation>Bluetooth-rfcomm</translation>
     </message>
     <message>
-      <source>Name</source>
-      <translation>Jméno</translation>
+        <source>Name</source>
+        <translation>Jméno</translation>
     </message>
     <message>
-      <source>Description</source>
-      <translation>Popis</translation>
+        <source>Description</source>
+        <translation type="obsolete">Popis</translation>
     </message>
     <message>
-      <source>Start automatically</source>
-      <translation>Spustit automaticky</translation>
+        <source>Start automatically</source>
+        <translation type="obsolete">Spustit automaticky</translation>
     </message>
     <message>
-      <source>Confirm before start</source>
-      <translation>Potvrdit před spuštěním</translation>
+        <source>Confirm before start</source>
+        <translation type="obsolete">Potvrdit před spuštěním</translation>
     </message>
-  </context>
-  <context>
+    <message>
+        <source>Selected devices with gprs capability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Channel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Addresses</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>BluetoothRFCOMMNetNode</name>
     <message>
-      <source>Bluetooth serial link</source>
-      <translation>Bluetooth serial link</translation>
+        <source>Bluetooth serial link</source>
+        <translation>Bluetooth serial link</translation>
     </message>
     <message>
-      <source>&lt;p>Sets up a bluetooth link using the bluetooth serial profile.&lt;/p>&lt;p>Use this to connect to a GSM.&lt;/p></source>
-      <translation>&lt;p>Vytvoří bluetooth spojení s použitím profilu sériového portu.&lt;/p>&lt;p>Použijte pro GSM spojení.&lt;/p></translation>
+        <source>&lt;p&gt;Sets up a bluetooth link using the bluetooth serial profile.&lt;/p&gt;&lt;p&gt;Use this to connect to a GSM.&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Vytvoří bluetooth spojení s použitím profilu sériového portu.&lt;/p&gt;&lt;p&gt;Použijte pro GSM spojení.&lt;/p&gt;</translation>
     </message>
-  </context>
+</context>
+<context>
+    <name>BluetoothRFCOMMRun</name>
+    <message>
+        <source>Select device to connect to</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 </TS>

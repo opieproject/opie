@@ -129,7 +129,7 @@ is not available on this system
     </message>
     <message>
         <source>&lt;p&gt;The Wireless Extension Versions&lt;br&gt;are not matching!&lt;p&gt;  Wellenreiter II : WE V%1&lt;br&gt;Interface driver: WE V%2</source>
-        <translation>&lt;p&gt;Версии Wireless Extension&lt;br&gt;не совпадают!&lt;p&gt;  Велленрейтер II : WE V%1&lt;br&gt;драйвер интерфейса: WE V%2</translation>
+        <translation type="obsolete">&lt;p&gt;Версии Wireless Extension&lt;br&gt;не совпадают!&lt;p&gt;  Велленрейтер II : WE V%1&lt;br&gt;драйвер интерфейса: WE V%2</translation>
     </message>
     <message>
         <source>Bring your device into
@@ -188,6 +188,10 @@ joining a net.</source>
         <source>Function only available on Embedded build</source>
         <translation>Функция доступна только в Встраиваемой сборке</translation>
     </message>
+    <message>
+        <source>&lt;p&gt;The Wireless Extension Versions&lt;br&gt;do not match!&lt;p&gt;  Wellenreiter II : WE V%1&lt;br&gt;Interface driver: WE V%2</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>WellenreiterBase</name>
@@ -232,7 +236,7 @@ joining a net.</source>
     <name>WellenreiterConfigBase</name>
     <message>
         <source>Wellenreiter II COnfiguration Dialog</source>
-        <translation>Диалог конфигурации Велленрейтера II</translation>
+        <translation type="obsolete">Диалог конфигурации Велленрейтера II</translation>
     </message>
     <message>
         <source>Interface</source>
@@ -536,7 +540,7 @@ joining a net.</source>
     </message>
     <message>
         <source>Send proble requests</source>
-        <translation>Посылать пробные запросы</translation>
+        <translation type="obsolete">Посылать пробные запросы</translation>
     </message>
     <message>
         <source>&lt;automatic&gt;</source>
@@ -617,6 +621,14 @@ joining a net.</source>
     <message>
         <source>Command line to start the gps daemon.</source>
         <translation>Командная строка для запуска GPS демона.</translation>
+    </message>
+    <message>
+        <source>Wellenreiter II Configuration Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send probe requests</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -3,99 +3,99 @@
     <name>WLAN</name>
     <message>
         <source>Wireless Configuration</source>
-        <translation>Конфигурация радиосети</translation>
+        <translation type="unfinished">Конфигурация радиосети</translation>
     </message>
     <message>
         <source>General</source>
-        <translation>Общие</translation>
+        <translation type="unfinished">Общие</translation>
     </message>
     <message>
         <source>Mode</source>
-        <translation>Режим</translation>
+        <translation type="unfinished">Режим</translation>
     </message>
     <message>
         <source>MAC</source>
-        <translation>MAC</translation>
+        <translation type="unfinished">MAC</translation>
     </message>
     <message>
         <source>Specify &amp;Access Point</source>
-        <translation>Указать &amp;Точку доступа</translation>
+        <translation type="unfinished">Указать &amp;Точку доступа</translation>
     </message>
     <message>
         <source>Specify &amp;Channel</source>
-        <translation>Указать &amp;Канал</translation>
+        <translation type="unfinished">Указать &amp;Канал</translation>
     </message>
     <message>
         <source>any</source>
-        <translation>любой</translation>
+        <translation type="unfinished">любой</translation>
     </message>
     <message>
         <source>Infrastructure</source>
-        <translation>Инфраструктура</translation>
+        <translation type="unfinished">Инфраструктура</translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation>Авто</translation>
+        <translation type="unfinished">Авто</translation>
     </message>
     <message>
         <source>Managed</source>
-        <translation>Управляемый</translation>
+        <translation type="unfinished">Управляемый</translation>
     </message>
     <message>
         <source>Ad-Hoc</source>
-        <translation>Равноправный</translation>
+        <translation type="unfinished">Равноправный</translation>
     </message>
     <message>
         <source>Encryption</source>
-        <translation>Шифрование</translation>
+        <translation type="unfinished">Шифрование</translation>
     </message>
     <message>
         <source>&amp;Enable Encryption</source>
-        <translation>&amp;Включить шифрование</translation>
+        <translation type="unfinished">&amp;Включить шифрование</translation>
     </message>
     <message>
         <source>&amp;Key Setting</source>
-        <translation>&amp;Настройка ключей</translation>
+        <translation type="unfinished">&amp;Настройка ключей</translation>
     </message>
     <message>
         <source>Key &amp;1</source>
-        <translation>Ключ &amp;1</translation>
+        <translation type="unfinished">Ключ &amp;1</translation>
     </message>
     <message>
         <source>Key &amp;2</source>
-        <translation>Ключ &amp;2</translation>
+        <translation type="unfinished">Ключ &amp;2</translation>
     </message>
     <message>
         <source>Key &amp;3</source>
-        <translation>Ключ &amp;3</translation>
+        <translation type="unfinished">Ключ &amp;3</translation>
     </message>
     <message>
         <source>Key &amp;4</source>
-        <translation>Ключ &amp;4</translation>
+        <translation type="unfinished">Ключ &amp;4</translation>
     </message>
     <message>
         <source>Non-encrypted Packets</source>
-        <translation>Незашифрованные пакеты</translation>
+        <translation type="unfinished">Незашифрованные пакеты</translation>
     </message>
     <message>
         <source>&amp;Accept</source>
-        <translation>&amp;Принимать</translation>
+        <translation type="unfinished">&amp;Принимать</translation>
     </message>
     <message>
         <source>&amp;Reject</source>
-        <translation>&amp;Отвергать</translation>
+        <translation type="unfinished">&amp;Отвергать</translation>
     </message>
     <message>
         <source>SSID</source>
-        <translation>SSID</translation>
+        <translation type="unfinished">SSID</translation>
     </message>
     <message>
         <source>Rescan Neighbourhood</source>
-        <translation>Просканировать окрестности</translation>
+        <translation type="unfinished">Просканировать окрестности</translation>
     </message>
     <message>
         <source>Chn</source>
-        <translation>Кнл</translation>
+        <translation type="unfinished">Кнл</translation>
     </message>
 </context>
 <context>
@@ -184,52 +184,60 @@
         <source>Signal</source>
         <translation type="obsolete">Сигнал</translation>
     </message>
+    <message>
+        <source>SSID</source>
+        <translation type="obsolete">SSID</translation>
+    </message>
+    <message>
+        <source>Chn</source>
+        <translation type="obsolete">Кнл</translation>
+    </message>
 </context>
 <context>
     <name>WlanInfo</name>
     <message>
         <source>Interface Information</source>
-        <translation>Информация интерфейса</translation>
+        <translation type="unfinished">Информация интерфейса</translation>
     </message>
     <message>
         <source>802.11b</source>
-        <translation>802.11b</translation>
+        <translation type="unfinished">802.11b</translation>
     </message>
     <message>
         <source>Channel</source>
-        <translation>Канал</translation>
+        <translation type="unfinished">Канал</translation>
     </message>
     <message>
         <source>Mode</source>
-        <translation>Режим</translation>
+        <translation type="unfinished">Режим</translation>
     </message>
     <message>
         <source>ESSID</source>
-        <translation>ESSID</translation>
+        <translation type="unfinished">ESSID</translation>
     </message>
     <message>
         <source>Station</source>
-        <translation>Станция</translation>
+        <translation type="unfinished">Станция</translation>
     </message>
     <message>
         <source>AP</source>
-        <translation>Точка доступа</translation>
+        <translation type="unfinished">Точка доступа</translation>
     </message>
     <message>
         <source>Rate</source>
-        <translation>Скорость</translation>
+        <translation type="unfinished">Скорость</translation>
     </message>
     <message>
         <source>Quality</source>
-        <translation>Качество</translation>
+        <translation type="unfinished">Качество</translation>
     </message>
     <message>
         <source>Noise</source>
-        <translation>Шум</translation>
+        <translation type="unfinished">Шум</translation>
     </message>
     <message>
         <source>Signal</source>
-        <translation>Сигнал</translation>
+        <translation type="unfinished">Сигнал</translation>
     </message>
 </context>
 </TS>

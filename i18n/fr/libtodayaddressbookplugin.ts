@@ -12,11 +12,11 @@
     </message>
     <message>
         <source>Clip line after X chars: </source>
-        <translation>Couper la ligne après X caractères:</translation>
+        <translation type="obsolete">Couper la ligne après X caractères:</translation>
     </message>
     <message>
         <source>After how many chars should be the info about the task be cut off</source>
-        <translation>Après combien de caractères doit-être coupé l&apos;information sur la tâche</translation>
+        <translation type="obsolete">Après combien de caractères doit-être coupé l&apos;information sur la tâche</translation>
     </message>
     <message>
         <source>Days look ahead: </source>
@@ -28,7 +28,7 @@
     </message>
     <message>
         <source>To activate settings: Restart application !</source>
-        <translation>Pour activer les changement: Redémarrez l&apos;application !</translation>
+        <translation type="obsolete">Pour activer les changement: Redémarrez l&apos;application !</translation>
     </message>
     <message>
         <source>Set Headline Color: </source>

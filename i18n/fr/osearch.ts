@@ -48,7 +48,7 @@
     </message>
     <message>
         <source>Case sensitiv</source>
-        <translation>Sensible à la casse</translation>
+        <translation type="obsolete">Sensible à la casse</translation>
     </message>
     <message>
         <source>Use wildcards</source>
@@ -66,6 +66,10 @@
         <source></source>
         <translation></translation>
     </message>
+    <message>
+        <source>Case sensitive</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OListView</name>
@@ -78,15 +82,15 @@
     <name>QObject</name>
     <message>
         <source>show completed tasks</source>
-        <translation>montrer les tâches terminées</translation>
+        <translation type="obsolete">montrer les tâches terminées</translation>
     </message>
     <message>
         <source>show past events</source>
-        <translation>montrer événements passés</translation>
+        <translation type="obsolete">montrer événements passés</translation>
     </message>
     <message>
         <source>search in dates</source>
-        <translation>rechercher dates</translation>
+        <translation type="obsolete">rechercher dates</translation>
     </message>
     <message>
         <source>show</source>
@@ -122,11 +126,27 @@
     </message>
     <message>
         <source>search content</source>
-        <translation>rechercher contenu</translation>
+        <translation type="obsolete">rechercher contenu</translation>
     </message>
     <message>
         <source>searching %1</source>
         <translation>recherche de %1</translation>
+    </message>
+    <message>
+        <source>Show completed tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show past events</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search in dates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search content</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

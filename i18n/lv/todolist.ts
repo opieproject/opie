@@ -9,6 +9,29 @@
         <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
         <translation>&lt;h1&gt;Brīdinājums uz %1&lt;/h1&gt;&lt;br&gt;</translation>
     </message>
+    <message>
+        <source>All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished">Neaizpildīts</translation>
+    </message>
+</context>
+<context>
+    <name>NewTaskDlg</name>
+    <message>
+        <source>New Task</source>
+        <translation type="unfinished">Jauns Uzdevums</translation>
+    </message>
+    <message>
+        <source>Blank task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Using template:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OTaskEditor</name>
@@ -34,10 +57,21 @@
     </message>
 </context>
 <context>
+    <name>Opie</name>
+    <message>
+        <source>Todo List</source>
+        <translation type="unfinished">Darbu Saraksts</translation>
+    </message>
+    <message>
+        <source>Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <source>Opie Todolist</source>
-        <translation>Opie Uzdevumi</translation>
+        <translation type="obsolete">Opie Uzdevumi</translation>
     </message>
     <message>
         <source>Enter Task</source>
@@ -60,39 +94,39 @@
     <name>QWidget</name>
     <message>
         <source>New from template</source>
-        <translation>Jauns no sagataves</translation>
+        <translation type="obsolete">Jauns no sagataves</translation>
     </message>
     <message>
         <source>New Task</source>
-        <translation>Jauns Uzdevums</translation>
+        <translation type="obsolete">Jauns Uzdevums</translation>
     </message>
     <message>
         <source>Click here to create a new task.</source>
-        <translation>Klikšķiniet šeit lai izveidotu jaunu uzdevumu.</translation>
+        <translation type="obsolete">Klikšķiniet šeit lai izveidotu jaunu uzdevumu.</translation>
     </message>
     <message>
         <source>Edit Task</source>
-        <translation>Labot Uzdevumu</translation>
+        <translation type="obsolete">Labot Uzdevumu</translation>
     </message>
     <message>
         <source>Click here to modify the current task.</source>
-        <translation>Klikšķiniet šeit lai labotu tekošo uzdevumu.</translation>
+        <translation type="obsolete">Klikšķiniet šeit lai labotu tekošo uzdevumu.</translation>
     </message>
     <message>
         <source>View Task</source>
-        <translation>Skatīt Uzdevumu</translation>
+        <translation type="obsolete">Skatīt Uzdevumu</translation>
     </message>
     <message>
         <source>Delete...</source>
-        <translation>Dzēst...</translation>
+        <translation type="obsolete">Dzēst...</translation>
     </message>
     <message>
         <source>Click here to remove the current task.</source>
-        <translation>Klikšķiniet šeit lai dzēstu tekošo uzdevumu.</translation>
+        <translation type="obsolete">Klikšķiniet šeit lai dzēstu tekošo uzdevumu.</translation>
     </message>
     <message>
         <source>Delete all...</source>
-        <translation>Dzēst visu...</translation>
+        <translation type="obsolete">Dzēst visu...</translation>
     </message>
     <message>
         <source>Delete completed</source>
@@ -100,19 +134,19 @@
     </message>
     <message>
         <source>Duplicate</source>
-        <translation>Pavairot</translation>
+        <translation type="obsolete">Pavairot</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation>Bīmot</translation>
+        <translation type="obsolete">Bīmot</translation>
     </message>
     <message>
         <source>Click here to send the current task to another device.</source>
-        <translation>Klikšķiniet šeit lai nosūtītu uzdevumu uz citu iekārtu.</translation>
+        <translation type="obsolete">Klikšķiniet šeit lai nosūtītu uzdevumu uz citu iekārtu.</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>Meklēt</translation>
+        <translation type="obsolete">Meklēt</translation>
     </message>
     <message>
         <source>Show completed tasks</source>
@@ -132,15 +166,15 @@
     </message>
     <message>
         <source>Data</source>
-        <translation>Dati</translation>
+        <translation type="obsolete">Dati</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation>Kategorija</translation>
+        <translation type="obsolete">Kategorija</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation>Opcijas</translation>
+        <translation type="obsolete">Opcijas</translation>
     </message>
     <message>
         <source>QuickEdit</source>
@@ -164,11 +198,11 @@ Saraksts attēlo sekojošu informāciju:
     </message>
     <message>
         <source>All Categories</source>
-        <translation>Visas Kategorijas</translation>
+        <translation type="obsolete">Visas Kategorijas</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Neaizpildīts</translation>
+        <translation type="obsolete">Neaizpildīts</translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -234,7 +268,7 @@ Vai Begit?</translation>
     </message>
     <message>
         <source>Configure Templates</source>
-        <translation>Konfigurēt Sagataves</translation>
+        <translation type="obsolete">Konfigurēt Sagataves</translation>
     </message>
     <message>
         <source>Template Editor</source>

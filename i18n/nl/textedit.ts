@@ -209,6 +209,10 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
 van de schijf&lt;b&gt;verwijderd&lt;/b&gt;
 worden? Dit is onomkeerbaar!</translation>
     </message>
+    <message>
+        <source>Save Failed</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>filePermissions</name>

@@ -205,6 +205,10 @@ Continuer et sauvegarder ?</translation>
 from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
         <translation>Confirmez-vous la &lt;B&gt;suppression&lt;/B&gt; du fichier courant ?&lt;BR&gt;&lt;B&gt;Cette suppression est irréversible !&lt;/B&gt;</translation>
     </message>
+    <message>
+        <source>Save Failed</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>filePermissions</name>

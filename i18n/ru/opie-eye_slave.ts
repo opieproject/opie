@@ -156,157 +156,157 @@
     <message>
         <source>Colormode: Color
 </source>
-        <translation>Режим: Цветной
+        <translation type="obsolete">Режим: Цветной
 </translation>
     </message>
     <message>
         <source>Colormode: Black and white
 </source>
-        <translation>Режим: Черно-белый
+        <translation type="obsolete">Режим: Черно-белый
 </translation>
     </message>
     <message>
         <source>Basic</source>
-        <translation>Основной</translation>
+        <translation type="obsolete">Основной</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation>Обычный</translation>
+        <translation type="obsolete">Обычный</translation>
     </message>
     <message>
         <source>Fine</source>
-        <translation>Мелкий</translation>
+        <translation type="obsolete">Мелкий</translation>
     </message>
     <message>
         <source>Quality: %1
 </source>
-        <translation>Качество: %1
+        <translation type="obsolete">Качество: %1
 </translation>
     </message>
     <message>
         <source>Daylight</source>
-        <translation>Дневной свет</translation>
+        <translation type="obsolete">Дневной свет</translation>
     </message>
     <message>
         <source>Fluorescent</source>
-        <translation>Флуоресцентный</translation>
+        <translation type="obsolete">Флуоресцентный</translation>
     </message>
     <message>
         <source>Tungsten</source>
-        <translation>Вольфрам</translation>
+        <translation type="obsolete">Вольфрам</translation>
     </message>
     <message>
         <source>Standard light A</source>
-        <translation>Обычное освещение А</translation>
+        <translation type="obsolete">Обычное освещение А</translation>
     </message>
     <message>
         <source>Standard light B</source>
-        <translation>Обычное освещение Б</translation>
+        <translation type="obsolete">Обычное освещение Б</translation>
     </message>
     <message>
         <source>Standard light C</source>
-        <translation>Обычное освещение В</translation>
+        <translation type="obsolete">Обычное освещение В</translation>
     </message>
     <message>
         <source>D55</source>
-        <translation>D55</translation>
+        <translation type="obsolete">D55</translation>
     </message>
     <message>
         <source>D65</source>
-        <translation>D65</translation>
+        <translation type="obsolete">D65</translation>
     </message>
     <message>
         <source>D75</source>
-        <translation>D75</translation>
+        <translation type="obsolete">D75</translation>
     </message>
     <message>
         <source>Other</source>
-        <translation>Прочие</translation>
+        <translation type="obsolete">Прочие</translation>
     </message>
     <message>
         <source>White Balance: %1
 </source>
-        <translation>Баланс белого: %1
+        <translation type="obsolete">Баланс белого: %1
 </translation>
     </message>
     <message>
         <source>Average</source>
-        <translation>Средний</translation>
+        <translation type="obsolete">Средний</translation>
     </message>
     <message>
         <source>Center weighted average</source>
-        <translation>Взвешенное среднее</translation>
+        <translation type="obsolete">Взвешенное среднее</translation>
     </message>
     <message>
         <source>Spot</source>
-        <translation>Место</translation>
+        <translation type="obsolete">Место</translation>
     </message>
     <message>
         <source>MultiSpot</source>
-        <translation>МультиМестный</translation>
+        <translation type="obsolete">МультиМестный</translation>
     </message>
     <message>
         <source>Pattern</source>
-        <translation>Шаблон</translation>
+        <translation type="obsolete">Шаблон</translation>
     </message>
     <message>
         <source>Partial</source>
-        <translation>Частичный</translation>
+        <translation type="obsolete">Частичный</translation>
     </message>
     <message>
         <source>Metering Mode: %1
 </source>
-        <translation>Режим измерения: %1
+        <translation type="obsolete">Режим измерения: %1
 </translation>
     </message>
     <message>
         <source>Not defined</source>
-        <translation>Не определен</translation>
+        <translation type="obsolete">Не определен</translation>
     </message>
     <message>
         <source>Manual</source>
-        <translation>Вручную</translation>
+        <translation type="obsolete">Вручную</translation>
     </message>
     <message>
         <source>Normal progam</source>
-        <translation>Обычная программа</translation>
+        <translation type="obsolete">Обычная программа</translation>
     </message>
     <message>
         <source>Aperture priority</source>
-        <translation>Приоритет апертуры</translation>
+        <translation type="obsolete">Приоритет апертуры</translation>
     </message>
     <message>
         <source>Shutter priority</source>
-        <translation>Приоритет задвижки</translation>
+        <translation type="obsolete">Приоритет задвижки</translation>
     </message>
     <message>
         <source>Creative progam
 (biased toward fast shutter speed</source>
-        <translation>Творческая программа
+        <translation type="obsolete">Творческая программа
 (сделана под короткую выдержку)</translation>
     </message>
     <message>
         <source>Action progam
 (biased toward fast shutter speed)</source>
-        <translation>Программа действия
+        <translation type="obsolete">Программа действия
 (сделана под короткую выдержку)</translation>
     </message>
     <message>
         <source>Portrait mode
 (for closeup photos with the background out of focus)</source>
-        <translation>Режим портрета
+        <translation type="obsolete">Режим портрета
 (для близких объектов с размытым фоном)</translation>
     </message>
     <message>
         <source>Landscape mode
 (for landscape photos with the background in focus)</source>
-        <translation>Альбомный режим 
+        <translation type="obsolete">Альбомный режим 
 (для альбомных фотографий с резким фоном)</translation>
     </message>
     <message>
         <source>Exposure Program: %1
 </source>
-        <translation>Программа выдержки: %1
+        <translation type="obsolete">Программа выдержки: %1
 </translation>
     </message>
     <message>
@@ -396,6 +396,30 @@
     <message>
         <source>&lt;/qt&gt;</source>
         <translation>&lt;/qt&gt;</translation>
+    </message>
+    <message>
+        <source>Dimensions: %1 x %2
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size: %1
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Compressed size: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>used colors: %1
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resolution: %1 x %2
+</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

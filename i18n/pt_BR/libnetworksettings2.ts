@@ -5,6 +5,14 @@
         <source>Command : </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>State should be off</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>State should at least be off</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TheNSResources</name>
@@ -33,11 +41,27 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;p&gt;Nodes that provide working IP connections&lt;/p&gt;</source>
+        <source>&lt;p&gt;Nodes that provide working IP connection&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;p&gt;Fully configured connection profile&lt;/p&gt;</source>
+        <source>&lt;p&gt;Fully configured network profile&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connection to GPRS device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Connection to a GPRS capable device&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Today Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;The plugin &apos;%1&apos; caused Today to crash. It could be that the plugin is not properly installed.&lt;br&gt;Today tries to continue loading plugins.&lt;/qt&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -56,15 +80,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Off</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>IsUp</source>
+        <source>Inactive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Up</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

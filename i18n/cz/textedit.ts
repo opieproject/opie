@@ -200,6 +200,10 @@ Chcete je uložit?</translation>
         <source>Not enough lines</source>
         <translation>Nedostatek řádek</translation>
     </message>
+    <message>
+        <source>Save Failed</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>filePermissions</name>

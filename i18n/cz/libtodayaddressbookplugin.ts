@@ -3,7 +3,7 @@
     <name>AddressBookPluginConfig</name>
     <message>
         <source>To activate settings: Restart application !</source>
-        <translation>Pro aktivaci nastavení restartujte aplikaci!</translation>
+        <translation type="obsolete">Pro aktivaci nastavení restartujte aplikaci!</translation>
     </message>
     <message>
         <source>Enable/Disable Views</source>
@@ -35,11 +35,11 @@
     </message>
     <message>
         <source>Clip line after X chars: </source>
-        <translation>Ukončí řádek po X znacích:</translation>
+        <translation type="obsolete">Ukončí řádek po X znacích:</translation>
     </message>
     <message>
         <source>After how many chars should be the info about the task be cut off</source>
-        <translation>Po kolika znacích bude informace o události ukončena</translation>
+        <translation type="obsolete">Po kolika znacích bude informace o události ukončena</translation>
     </message>
     <message>
         <source>Days look ahead: </source>

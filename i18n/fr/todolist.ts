@@ -10,6 +10,29 @@
         <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
         <translation>&lt;h1&gt;Alarme à %1&lt;/h1&gt;&lt;br&gt;</translation>
     </message>
+    <message>
+        <source>All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished">Non classée</translation>
+    </message>
+</context>
+<context>
+    <name>NewTaskDlg</name>
+    <message>
+        <source>New Task</source>
+        <translation type="unfinished">Nouvelle tâche</translation>
+    </message>
+    <message>
+        <source>Blank task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Using template:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OTaskEditor</name>
@@ -43,6 +66,17 @@
     </message>
 </context>
 <context>
+    <name>Opie</name>
+    <message>
+        <source>Todo List</source>
+        <translation type="unfinished">Liste des tâches</translation>
+    </message>
+    <message>
+        <source>Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <source>Enter Task</source>
@@ -54,7 +88,7 @@
     </message>
     <message>
         <source>Opie Todolist</source>
-        <translation>Opie Todolist</translation>
+        <translation type="obsolete">Opie Todolist</translation>
     </message>
     <message>
         <source>silent</source>
@@ -69,39 +103,39 @@
     <name>QWidget</name>
     <message>
         <source>New from template</source>
-        <translation>Nouvelle à partir d&apos;un modèle</translation>
+        <translation type="obsolete">Nouvelle à partir d&apos;un modèle</translation>
     </message>
     <message>
         <source>New Task</source>
-        <translation>Nouvelle tâche</translation>
+        <translation type="obsolete">Nouvelle tâche</translation>
     </message>
     <message>
         <source>Click here to create a new task.</source>
-        <translation>Cliquez ici pour créer une nouvelle tâche.</translation>
+        <translation type="obsolete">Cliquez ici pour créer une nouvelle tâche.</translation>
     </message>
     <message>
         <source>Edit Task</source>
-        <translation>Editer la tâche</translation>
+        <translation type="obsolete">Editer la tâche</translation>
     </message>
     <message>
         <source>Click here to modify the current task.</source>
-        <translation>Cliquez ici pour modifier la tâche courante.</translation>
+        <translation type="obsolete">Cliquez ici pour modifier la tâche courante.</translation>
     </message>
     <message>
         <source>View Task</source>
-        <translation>Voir la tâche</translation>
+        <translation type="obsolete">Voir la tâche</translation>
     </message>
     <message>
         <source>Delete...</source>
-        <translation>Supprimer...</translation>
+        <translation type="obsolete">Supprimer...</translation>
     </message>
     <message>
         <source>Click here to remove the current task.</source>
-        <translation>Cliquez  ici pour effacer la tâche courante.</translation>
+        <translation type="obsolete">Cliquez  ici pour effacer la tâche courante.</translation>
     </message>
     <message>
         <source>Delete all...</source>
-        <translation>Supprimer tout...</translation>
+        <translation type="obsolete">Supprimer tout...</translation>
     </message>
     <message>
         <source>Delete completed</source>
@@ -109,15 +143,15 @@
     </message>
     <message>
         <source>Beam</source>
-        <translation>Transmettre</translation>
+        <translation type="obsolete">Transmettre</translation>
     </message>
     <message>
         <source>Click here to send the current task to another device.</source>
-        <translation>Cliquez ici pour transmettre la tâche courante à un autre dispositif.</translation>
+        <translation type="obsolete">Cliquez ici pour transmettre la tâche courante à un autre dispositif.</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>Rechercher</translation>
+        <translation type="obsolete">Rechercher</translation>
     </message>
     <message>
         <source>Show completed tasks</source>
@@ -137,15 +171,15 @@
     </message>
     <message>
         <source>Data</source>
-        <translation>Tâches</translation>
+        <translation type="obsolete">Tâches</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation>Catégorie</translation>
+        <translation type="obsolete">Catégorie</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation>Options</translation>
+        <translation type="obsolete">Options</translation>
     </message>
     <message>
         <source>QuickEdit</source>
@@ -168,7 +202,7 @@ La liste affiche les informations suivantes:
     </message>
     <message>
         <source>All Categories</source>
-        <translation>Toutes les catégories</translation>
+        <translation type="obsolete">Toutes les catégories</translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -206,7 +240,7 @@ Voulez-vous quitter ?</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Non classée</translation>
+        <translation type="obsolete">Non classée</translation>
     </message>
     <message>
         <source>&lt;P&gt;%1 new tasks arrived.&lt;p&gt;Would you like to add them to your Todolist?</source>
@@ -218,7 +252,7 @@ Voulez-vous quitter ?</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation>Dupliquer</translation>
+        <translation type="obsolete">Dupliquer</translation>
     </message>
     <message>
         <source>C.</source>
@@ -238,7 +272,7 @@ Voulez-vous quitter ?</translation>
     </message>
     <message>
         <source>Configure Templates</source>
-        <translation>Configurer les modèles</translation>
+        <translation type="obsolete">Configurer les modèles</translation>
     </message>
     <message>
         <source>Priority:</source>

@@ -115,7 +115,7 @@ wurde nicht erkannt</translation>
     </message>
     <message>
         <source> seconds</source>
-        <translation>Sekunden</translation>
+        <translation type="obsolete">Sekunden</translation>
     </message>
     <message>
         <source>Do you really want to &lt;font size=+2&gt;&lt;B&gt;DELETE&lt;/B&gt;&lt;/font&gt;
@@ -183,15 +183,15 @@ Datei &lt;font size=+2&gt;&lt;B&gt;LÖSCHEN&lt;/B&gt;&lt;/font&gt;?</translation
     </message>
     <message>
         <source>Rec</source>
-        <translation>Aufn</translation>
+        <translation type="obsolete">Aufn</translation>
     </message>
     <message>
         <source>Location</source>
-        <translation>Ort</translation>
+        <translation type="obsolete">Ort</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation>Datum</translation>
+        <translation type="obsolete">Datum</translation>
     </message>
     <message>
         <source>Wave Compression (smaller files)</source>
@@ -207,7 +207,7 @@ Datei &lt;font size=+2&gt;&lt;B&gt;LÖSCHEN&lt;/B&gt;&lt;/font&gt;?</translation
     </message>
     <message>
         <source>Stop</source>
-        <translation>Stopp</translation>
+        <translation type="obsolete">Stopp</translation>
     </message>
     <message>
         <source>Auto Mute</source>
@@ -215,7 +215,15 @@ Datei &lt;font size=+2&gt;&lt;B&gt;LÖSCHEN&lt;/B&gt;&lt;/font&gt;?</translation
     </message>
     <message>
         <source>Stereo Channels</source>
-        <translation>Stereo Kanäle</translation>
+        <translation type="obsolete">Stereo Kanäle</translation>
+    </message>
+    <message>
+        <source>Del</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stereo</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -153,6 +153,23 @@
         <source>Error deleting mail %1</source>
         <translation>Fehler beim Löschen von Nachricht %1</translation>
     </message>
+    <message>
+        <source>Download mail?
+It is %1 kByte but your limit is %2 kByte</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Download message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SMTPwrapper</name>

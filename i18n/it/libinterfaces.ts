@@ -1,6 +1,13 @@
 <!DOCTYPE TS><TS>
 <defaultcodec>iso8859-1</defaultcodec>
 <context>
+    <name>Interface</name>
+    <message>
+        <source>Restarting interface</source>
+        <translation type="unfinished">Riavvia interfaccia</translation>
+    </message>
+</context>
+<context>
     <name>InterfaceAdvanced</name>
     <message>
         <source>Advanced Interface Information</source>

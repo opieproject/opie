@@ -113,7 +113,7 @@ espaço livre</translation>
     </message>
     <message>
         <source> seconds</source>
-        <translation>segundos</translation>
+        <translation type="obsolete">segundos</translation>
     </message>
     <message>
         <source>Do you really want to &lt;font size=+2&gt;&lt;B&gt;DELETE&lt;/B&gt;&lt;/font&gt;
@@ -180,15 +180,15 @@ the selected file?</source>
     </message>
     <message>
         <source>Rec</source>
-        <translation>Gravar</translation>
+        <translation type="obsolete">Gravar</translation>
     </message>
     <message>
         <source>Location</source>
-        <translation>Localização</translation>
+        <translation type="obsolete">Localização</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation>Data</translation>
+        <translation type="obsolete">Data</translation>
     </message>
     <message>
         <source>Wave Compression (smaller files)</source>
@@ -204,14 +204,18 @@ the selected file?</source>
     </message>
     <message>
         <source>Stop</source>
-        <translation>Parar</translation>
+        <translation type="obsolete">Parar</translation>
     </message>
     <message>
         <source>Auto Mute</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Stereo Channels</source>
+        <source>Del</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stereo</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

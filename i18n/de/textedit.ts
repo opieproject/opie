@@ -209,6 +209,10 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
 Platte &lt;B&gt;löschen&lt;/B&gt;?&lt;BR&gt;
 Das ist &lt;B&gt;irreversibel!&lt;/B&gt;</translation>
     </message>
+    <message>
+        <source>Save Failed</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>filePermissions</name>

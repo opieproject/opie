@@ -389,6 +389,10 @@ needs</source>
         <source>You must enter a unique device name</source>
         <translation>Вы должны ввести уникальное имя устройства</translation>
     </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Ошибка</translation>
+    </message>
 </context>
 <context>
     <name>DialWidget</name>

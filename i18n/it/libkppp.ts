@@ -452,6 +452,10 @@ potrai modificare a piacimento</translation>
         <source>You must enter a unique device name</source>
         <translation>Devi inserire un nome univoco per il dispositivo</translation>
     </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Errore</translation>
+    </message>
 </context>
 <context>
     <name>DialWidget</name>

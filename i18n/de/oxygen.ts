@@ -26,6 +26,10 @@
         <source>Elemental Composition (%):</source>
         <translation>elementare Zusammensetzung (%):</translation>
     </message>
+    <message>
+        <source>CalcDlg</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OxydataWidget</name>

@@ -53,15 +53,35 @@
     </message>
     <message>
         <source>Description</source>
-        <translation>Beschreibung</translation>
+        <translation type="obsolete">Beschreibung</translation>
     </message>
     <message>
         <source>Start automatically</source>
-        <translation>Automatisch starten</translation>
+        <translation type="obsolete">Automatisch starten</translation>
     </message>
     <message>
         <source>Confirm before start</source>
-        <translation>Start bestätigen</translation>
+        <translation type="obsolete">Start bestätigen</translation>
+    </message>
+    <message>
+        <source>Selected devices with gprs capability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Channel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Addresses</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -73,6 +93,13 @@
     <message>
         <source>&lt;p&gt;Sets up a bluetooth link using the bluetooth serial profile.&lt;/p&gt;&lt;p&gt;Use this to connect to a GSM.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Konfiguriert eine serielle BlueTooth Verbindung.&lt;/p&gt;&lt;p&gt;Dies verdenden für GSM.&lt;/p&gt;</translation>
+    </message>
+</context>
+<context>
+    <name>BluetoothRFCOMMRun</name>
+    <message>
+        <source>Select device to connect to</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

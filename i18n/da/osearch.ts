@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Case sensitiv</source>
-        <translation>Versalfølsom</translation>
+        <translation type="obsolete">Versalfølsom</translation>
     </message>
     <message>
         <source>Use wildcards</source>
@@ -65,6 +65,10 @@
         <source></source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Case sensitive</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OListView</name>
@@ -97,15 +101,15 @@
     </message>
     <message>
         <source>show completed tasks</source>
-        <translation>vis udførte opgaver</translation>
+        <translation type="obsolete">vis udførte opgaver</translation>
     </message>
     <message>
         <source>show past events</source>
-        <translation>vis hændelser i fortiden</translation>
+        <translation type="obsolete">vis hændelser i fortiden</translation>
     </message>
     <message>
         <source>search in dates</source>
-        <translation>søg i datoer</translation>
+        <translation type="obsolete">søg i datoer</translation>
     </message>
     <message>
         <source>File: </source>
@@ -121,11 +125,27 @@
     </message>
     <message>
         <source>search content</source>
-        <translation>søg indhold</translation>
+        <translation type="obsolete">søg indhold</translation>
     </message>
     <message>
         <source>searching %1</source>
         <translation>søger %1</translation>
+    </message>
+    <message>
+        <source>Show completed tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show past events</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search in dates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search content</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

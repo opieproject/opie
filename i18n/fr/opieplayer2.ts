@@ -8,6 +8,13 @@
     </message>
 </context>
 <context>
+    <name>Lib</name>
+    <message>
+        <source>Progress: %1 %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MediaPlayer</name>
     <message>
         <source>OpiePlayer: Initializating</source>
@@ -100,7 +107,7 @@
     </message>
     <message>
         <source>Open File or URL</source>
-        <translation>Ouvrir un fichier ou une URL</translation>
+        <translation type="obsolete">Ouvrir un fichier ou une URL</translation>
     </message>
     <message>
         <source>Rescan for Audio Files</source>
@@ -158,7 +165,7 @@ la liste ?</translation>
     </message>
     <message>
         <source>Open file or URL</source>
-        <translation>Ouvrir un fichier ou une URL</translation>
+        <translation type="obsolete">Ouvrir un fichier ou une URL</translation>
     </message>
     <message>
         <source>OpiePlayer: </source>
@@ -166,7 +173,43 @@ la liste ?</translation>
     </message>
     <message>
         <source>Save m3u Playlist </source>
-        <translation>Enregistrer liste m3u</translation>
+        <translation type="obsolete">Enregistrer liste m3u</translation>
+    </message>
+    <message>
+        <source>Loading of Skin started</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add URL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add  URL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add File to Playlist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Files from Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opieplayer Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;&lt;b&gt;Opieplayer2 skin not found!&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Please install an opieplayer2 skin package.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -205,6 +248,13 @@ la liste ?</translation>
     </message>
 </context>
 <context>
+    <name>SkinLoader</name>
+    <message>
+        <source>Loading of Skin finished</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VideoWidget</name>
     <message>
         <source>OpiePlayer - Video</source>
@@ -219,23 +269,52 @@ la liste ?</translation>
     </message>
     <message>
         <source>No input plugin found for this media type</source>
-        <translation>Pas de plugin trouvé pour ce type de média</translation>
+        <translation type="obsolete">Pas de plugin trouvé pour ce type de média</translation>
     </message>
     <message>
         <source>No demux plugin found for this media type</source>
-        <translation>Pas de plugin &quot;demux&quot; trouvé pour ce type de média</translation>
+        <translation type="obsolete">Pas de plugin &quot;demux&quot; trouvé pour ce type de média</translation>
     </message>
     <message>
         <source>Demuxing failed for this media type</source>
-        <translation>problème de &quot;demuxing&quot; pour ce type de média</translation>
+        <translation type="obsolete">problème de &quot;demuxing&quot; pour ce type de média</translation>
     </message>
     <message>
         <source>Malformed MRL</source>
-        <translation>MRL mal formée</translation>
+        <translation type="obsolete">MRL mal formée</translation>
     </message>
     <message>
         <source>Some other error</source>
-        <translation>D&apos;autres erreurs</translation>
+        <translation type="obsolete">D&apos;autres erreurs</translation>
+    </message>
+    <message>
+        <source>Error on file &apos;%1&apos; with reason: </source>
+        <comment>Error when playing a file</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;No input plugin found for this media type&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;No demux plugin found for this media type&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Demuxing failed for this media type&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Malformed MRL&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Input failed&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Some other error&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

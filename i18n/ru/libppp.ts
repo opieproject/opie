@@ -124,6 +124,45 @@
     </message>
 </context>
 <context>
+    <name>PPPDialingGUI</name>
+    <message>
+        <source>PPPDialing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dialing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GPRS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>APN</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dialup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Commands</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <source>New Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>PPPGUI</name>
     <message>
         <source>PPP</source>
@@ -141,24 +180,32 @@
         <source>DNS Settings</source>
         <translation>Настройки DNS</translation>
     </message>
+    <message>
+        <source>Commands</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dialing</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PPPIPEdit</name>
     <message>
         <source>IPAddress needed</source>
-        <translation>Необходим IP адрес</translation>
+        <translation type="obsolete">Необходим IP адрес</translation>
     </message>
     <message>
         <source>IPAddress not valid</source>
-        <translation>IP адрес неверен</translation>
+        <translation type="obsolete">IP адрес неверен</translation>
     </message>
     <message>
         <source>Subnet mask needed</source>
-        <translation>Необходима маска подсети</translation>
+        <translation type="obsolete">Необходима маска подсети</translation>
     </message>
     <message>
         <source>Subnet mask not valid</source>
-        <translation>Маска подсети неверна</translation>
+        <translation type="obsolete">Маска подсети неверна</translation>
     </message>
     <message>
         <source>Gateway address needed</source>
@@ -189,7 +236,7 @@
     </message>
     <message>
         <source>Subnetmask</source>
-        <translation>Маска подсети</translation>
+        <translation type="obsolete">Маска подсети</translation>
     </message>
     <message>
         <source>Address</source>
@@ -203,16 +250,66 @@
         <source>Set as default</source>
         <translation>Установить по умолчанию</translation>
     </message>
+    <message>
+        <source>Local</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Server Overrules</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remote</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Only if not yet set</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PPPNetNode</name>
     <message>
         <source>PPP Connection</source>
-        <translation>PPP соединение</translation>
+        <translation type="obsolete">PPP соединение</translation>
     </message>
     <message>
         <source>&lt;p&gt;Sets up IP using PPP.&lt;/p&gt;&lt;p&gt;Use this for dialup devices or serial setups&lt;/p&gt;</source>
         <translation>&lt;p&gt;Устанавливает IP связь через PPP.&lt;/p&gt;&lt;p&gt;Используйте для телефонных модемов или последовательных линий&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>PPP connection</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PPPRunGUI</name>
+    <message>
+        <source>PPPRun</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Upon connect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Before</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>After</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Upon disconnect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;UL&gt;
+&lt;LI&gt;Commands run under your &lt;b&gt;real&lt;/b&gt; user id (&lt;b&gt;not&lt;/b&gt; as root)&lt;/LI&gt;
+&lt;LI&gt;Supply the whole path&lt;/LI&gt;
+&lt;/UL&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -22,10 +22,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Percentage battery remaining</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Battery status: </source>
         <translation type="unfinished"></translation>
     </message>
@@ -62,27 +58,28 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Battery time remaining</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ipaq  </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Percentage battery remaining: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Battery time remaining: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Jacket  </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>No jacket with battery inserted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remaining Power: %1%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remaining Time: %1m %2s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remaing Power: %1 %2
+Remaining Time: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ipaq  %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

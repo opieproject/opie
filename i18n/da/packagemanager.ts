@@ -59,6 +59,46 @@
         <source>Installed on device at:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tap here to filter package list by application category.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select the application category to filter by here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap here to filter package list by package name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter the package name to filter by here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap here to filter package list by the package status.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select the package status to filter by here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap here to filter package list by source server.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select the source server to filter by here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap here to filter package list by destination where the package is installed to on this device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select the destination location to filter by here.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>InputDialog</name>
@@ -339,7 +379,7 @@
     </message>
     <message>
         <source>Click here to update package lists from servers.</source>
-        <translation>Klik her for at opdatere pakke lister fra serverne.</translation>
+        <translation type="obsolete">Klik her for at opdatere pakke lister fra serverne.</translation>
     </message>
     <message>
         <source>Upgrade</source>
@@ -347,7 +387,7 @@
     </message>
     <message>
         <source>Click here to upgrade all installed packages if a newer version is available.</source>
-        <translation>Klik her for at opgradere alle installerede pakker, hvis en nyere version er tilgængelig.</translation>
+        <translation type="obsolete">Klik her for at opgradere alle installerede pakker, hvis en nyere version er tilgængelig.</translation>
     </message>
     <message>
         <source>Download</source>
@@ -355,7 +395,7 @@
     </message>
     <message>
         <source>Click here to download the currently selected package(s).</source>
-        <translation>Klik her for at hente den/de valgte pakke(r).</translation>
+        <translation type="obsolete">Klik her for at hente den/de valgte pakke(r).</translation>
     </message>
     <message>
         <source>Apply changes</source>
@@ -363,7 +403,7 @@
     </message>
     <message>
         <source>Click here to install, remove or upgrade currently selected package(s).</source>
-        <translation>Klik her for at installere, fjerne eller opgradere den/de valgte pakke(r).</translation>
+        <translation type="obsolete">Klik her for at installere, fjerne eller opgradere den/de valgte pakke(r).</translation>
     </message>
     <message>
         <source>Actions</source>
@@ -375,7 +415,7 @@
     </message>
     <message>
         <source>Click here to show packages available which have not been installed.</source>
-        <translation>Klik her for at vise de tilgængelige pakker der ikke er installeret.</translation>
+        <translation type="obsolete">Klik her for at vise de tilgængelige pakker der ikke er installeret.</translation>
     </message>
     <message>
         <source>Show installed packages</source>
@@ -383,7 +423,7 @@
     </message>
     <message>
         <source>Click here to show packages currently installed on this device.</source>
-        <translation>Klik her for at vise de pakker der er installeret på denne enhed.</translation>
+        <translation type="obsolete">Klik her for at vise de pakker der er installeret på denne enhed.</translation>
     </message>
     <message>
         <source>Show updated packages</source>
@@ -391,7 +431,7 @@
     </message>
     <message>
         <source>Click here to show packages currently installed on this device which have a newer version available.</source>
-        <translation>Klik her for at vise de pakker der er installeret på denne enhed, hvor en nyere version er tilgængelig.</translation>
+        <translation type="obsolete">Klik her for at vise de pakker der er installeret på denne enhed, hvor en nyere version er tilgængelig.</translation>
     </message>
     <message>
         <source>Filter by category</source>
@@ -415,7 +455,7 @@
     </message>
     <message>
         <source>Click here to search for text in package names.</source>
-        <translation>Klik her for at søge efter tekst i pakke navnene.</translation>
+        <translation type="obsolete">Klik her for at søge efter tekst i pakke navnene.</translation>
     </message>
     <message>
         <source>Find next</source>
@@ -423,7 +463,7 @@
     </message>
     <message>
         <source>Click here to find the next package name containing the text you are searching for.</source>
-        <translation>Klik her for at finde det næste pakke navn indeholdende den tekst du søger efter.</translation>
+        <translation type="obsolete">Klik her for at finde det næste pakke navn indeholdende den tekst du søger efter.</translation>
     </message>
     <message>
         <source>Quick Jump keypad</source>
@@ -443,11 +483,11 @@
     </message>
     <message>
         <source>Click here to configure this application.</source>
-        <translation>Klik her for at konfigurere dette program.</translation>
+        <translation type="obsolete">Klik her for at konfigurere dette program.</translation>
     </message>
     <message>
         <source>Click here to hide the find toolbar.</source>
-        <translation>Klik her for at skjule søge værktøjslinien.</translation>
+        <translation type="obsolete">Klik her for at skjule søge værktøjslinien.</translation>
     </message>
     <message>
         <source>Servers:</source>
@@ -606,29 +646,11 @@ Er du sikker?
         <translation type="obsolete">Opdaterer Launcher...</translation>
     </message>
     <message>
-        <source>This is a listing of all packages.
-
-A blue dot next to the package name indicates that the package is currently installed.
-
-A blue dot with a star indicates that a newer version of the package is available from the server feed.
-
-Click inside the box at the left to select a package.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Filter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Click here to apply current filter.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Filter settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to change the package filter criteria.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -671,19 +693,93 @@ Click inside the box at the left to select a package.</source>
         <source>The configuration has been updated.  Do you want to update server and package information now?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>This is a listing of all packages.
+
+A blue dot next to the package name indicates that the package is currently installed.
+
+A blue dot with a star indicates that a newer version of the package is available from the server feed.
+
+Tap inside the box at the left to select a package.  Tap and hold to view package details.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap here to update package lists from servers.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap here to upgrade all installed packages if a newer version is available.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap here to download the currently selected package(s).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap here to install, remove or upgrade currently selected package(s).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Install local package</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap here to install a package file located on device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap here to configure this application.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap here to show packages available which have not been installed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap here to show packages currently installed on this device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap here to show packages currently installed on this device which have a newer version available.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap here to apply current filter.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap here to change the package filter criteria.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap here to search for text in package names.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap here to find the next package name containing the text you are searching for.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap here to hide the find toolbar.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Application Packages</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OIpkg</name>
     <message>
-        <source>OIpkg</source>
+        <source>Linking packages installed in: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error initialing libipkg</source>
+        <source>Error linkling &apos;%1&apos; to &apos;%2&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error freeing libipkg</source>
+        <source>Links removed for: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -719,23 +815,23 @@ Click inside the box at the left to select a package.</source>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished">Server</translation>
+        <translation type="obsolete">Server</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Navn:</translation>
+        <translation type="obsolete">Navn:</translation>
     </message>
     <message>
         <source>Address:</source>
-        <translation type="unfinished">Adresse:</translation>
+        <translation type="obsolete">Adresse:</translation>
     </message>
     <message>
         <source>Active Server</source>
-        <translation type="unfinished">Aktiv server</translation>
+        <translation type="obsolete">Aktiv server</translation>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished">Opdater</translation>
+        <translation type="obsolete">Opdater</translation>
     </message>
     <message>
         <source>HTTP Proxy</source>
@@ -793,6 +889,148 @@ Click inside the box at the left to select a package.</source>
         <source>Troubleshooting output</source>
         <translation type="unfinished">Meddelelser til fejlfinding</translation>
     </message>
+    <message>
+        <source>This is a list of all servers configured.  Select one here to edit or delete, or add a new one below.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap here to create a new entry.  Fill in the fields below and then tap on Update.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap here to edit the entry selected above.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap here to delete the entry selected above.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is a list of all destinations configured for this device.  Select one here to edit or delete, or add a new one below.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter the URL address of the HTTP proxy server here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap here to enable or disable the HTTP proxy server.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter the URL address of the FTP proxy server here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap here to enable or disable the FTP proxy server.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter the username for the proxy servers here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter the password for the proxy servers here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap here to enable or disable the &apos;-force-depends&apos; option for Ipkg.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap here to enable or disable the &apos;-force-reinstall&apos; option for Ipkg.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap here to enable or disable the &apos;-force-removal-of-dependent-packages&apos; option for Ipkg.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap here to enable or disable the &apos;-force-overwrite&apos; option for Ipkg.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select information level for Ipkg.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>OIpkgDestDlg</name>
+    <message>
+        <source>Edit Destination</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Active</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap here to indicate whether this entry is active or not.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Navn:</translation>
+    </message>
+    <message>
+        <source>Enter the name of this entry here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Location:</source>
+        <translation type="unfinished">Placering:</translation>
+    </message>
+    <message>
+        <source>Enter the absolute directory path of this entry here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap here to select the desired location.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>OIpkgServerDlg</name>
+    <message>
+        <source>Edit Server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Active</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap here to indicate whether this entry is active or not.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Navn:</translation>
+    </message>
+    <message>
+        <source>Enter the name of this entry here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Address:</source>
+        <translation type="unfinished">Adresse:</translation>
+    </message>
+    <message>
+        <source>Enter the URL address of this entry here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Compressed server feed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap here to indicate whether the server support compressed archives or not.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OPackageManager</name>
@@ -823,6 +1061,18 @@ Click inside the box at the left to select a package.</source>
     </message>
     <message>
         <source>File list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This area contains information about the package.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This area contains a list of files contained in this package.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap here to retrieve list of files contained in this package.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

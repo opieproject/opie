@@ -393,6 +393,13 @@ Veuillez rechargez la batterie de sauvegarde.</translation>
     </message>
 </context>
 <context>
+    <name>QueuedRequestRunner</name>
+    <message>
+        <source>Processing Queued Requests</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SafeMode</name>
     <message>
         <source>Safe Mode</source>
@@ -409,6 +416,13 @@ Veuillez rechargez la batterie de sauvegarde.</translation>
     <message>
         <source>Help...</source>
         <translation>Aide...</translation>
+    </message>
+</context>
+<context>
+    <name>Server</name>
+    <message>
+        <source>USB Lock</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -201,6 +201,10 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
         <translation>Czy na pewno chcesz&lt;BR&gt;&lt;b&gt;usunac&lt;/b&gt; aktualny plik
 z dysku?&lt;BR&gt;Operacja jest &lt;b&gt;nieodwracalna!&lt;/b&gt;</translation>
     </message>
+    <message>
+        <source>Save Failed</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>filePermissions</name>

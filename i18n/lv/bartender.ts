@@ -90,7 +90,7 @@
     </message>
     <message>
         <source>Find by Alcohol</source>
-        <translation>Meklēt pēc Alkohola</translation>
+        <translation type="obsolete">Meklēt pēc Alkohola</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -98,7 +98,7 @@
     </message>
     <message>
         <source>edit</source>
-        <translation>labot</translation>
+        <translation type="obsolete">labot</translation>
     </message>
     <message>
         <source>New</source>
@@ -138,7 +138,7 @@
     </message>
     <message>
         <source>Alcohol</source>
-        <translation>Alkohols</translation>
+        <translation type="obsolete">Alkohols</translation>
     </message>
     <message>
         <source>Search</source>
@@ -149,6 +149,23 @@
 </source>
         <translation>Atvainojiet nav rezultātu priekš
 </translation>
+    </message>
+    <message>
+        <source>Find by Ingredient</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Drink</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to write to drink database!
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ingredient</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

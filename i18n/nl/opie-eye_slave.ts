@@ -157,157 +157,157 @@
     <message>
         <source>Colormode: Color
 </source>
-        <translation>Kleurmodus: Kleur
+        <translation type="obsolete">Kleurmodus: Kleur
 </translation>
     </message>
     <message>
         <source>Colormode: Black and white
 </source>
-        <translation>Kleurmodus: Zwart/Wit
+        <translation type="obsolete">Kleurmodus: Zwart/Wit
 </translation>
     </message>
     <message>
         <source>Basic</source>
-        <translation>Grof</translation>
+        <translation type="obsolete">Grof</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation>Normaal</translation>
+        <translation type="obsolete">Normaal</translation>
     </message>
     <message>
         <source>Fine</source>
-        <translation>Fijn</translation>
+        <translation type="obsolete">Fijn</translation>
     </message>
     <message>
         <source>Quality: %1
 </source>
-        <translation>Kwaliteit: %1
+        <translation type="obsolete">Kwaliteit: %1
 </translation>
     </message>
     <message>
         <source>Daylight</source>
-        <translation>Daglicht</translation>
+        <translation type="obsolete">Daglicht</translation>
     </message>
     <message>
         <source>Fluorescent</source>
-        <translation>Fluorescent</translation>
+        <translation type="obsolete">Fluorescent</translation>
     </message>
     <message>
         <source>Tungsten</source>
-        <translation>Tungsten</translation>
+        <translation type="obsolete">Tungsten</translation>
     </message>
     <message>
         <source>Standard light A</source>
-        <translation>Standaardlicht A</translation>
+        <translation type="obsolete">Standaardlicht A</translation>
     </message>
     <message>
         <source>Standard light B</source>
-        <translation>Standaardlicht B</translation>
+        <translation type="obsolete">Standaardlicht B</translation>
     </message>
     <message>
         <source>Standard light C</source>
-        <translation>Standaardlicht C</translation>
+        <translation type="obsolete">Standaardlicht C</translation>
     </message>
     <message>
         <source>D55</source>
-        <translation>D55</translation>
+        <translation type="obsolete">D55</translation>
     </message>
     <message>
         <source>D65</source>
-        <translation>D65</translation>
+        <translation type="obsolete">D65</translation>
     </message>
     <message>
         <source>D75</source>
-        <translation>D75</translation>
+        <translation type="obsolete">D75</translation>
     </message>
     <message>
         <source>Other</source>
-        <translation>Anders</translation>
+        <translation type="obsolete">Anders</translation>
     </message>
     <message>
         <source>White Balance: %1
 </source>
-        <translation>Witbalans: %1
+        <translation type="obsolete">Witbalans: %1
 </translation>
     </message>
     <message>
         <source>Average</source>
-        <translation>Gemiddeld</translation>
+        <translation type="obsolete">Gemiddeld</translation>
     </message>
     <message>
         <source>Center weighted average</source>
-        <translation>Centreer gewogen gemiddelde</translation>
+        <translation type="obsolete">Centreer gewogen gemiddelde</translation>
     </message>
     <message>
         <source>Spot</source>
-        <translation>Spot</translation>
+        <translation type="obsolete">Spot</translation>
     </message>
     <message>
         <source>MultiSpot</source>
-        <translation>MultiSpot</translation>
+        <translation type="obsolete">MultiSpot</translation>
     </message>
     <message>
         <source>Pattern</source>
-        <translation>Patroon</translation>
+        <translation type="obsolete">Patroon</translation>
     </message>
     <message>
         <source>Partial</source>
-        <translation>Gedeeltelijk</translation>
+        <translation type="obsolete">Gedeeltelijk</translation>
     </message>
     <message>
         <source>Metering Mode: %1
 </source>
-        <translation>Meetmodus: %1
+        <translation type="obsolete">Meetmodus: %1
 </translation>
     </message>
     <message>
         <source>Not defined</source>
-        <translation>Niet opgegeven</translation>
+        <translation type="obsolete">Niet opgegeven</translation>
     </message>
     <message>
         <source>Manual</source>
-        <translation>Handmatig</translation>
+        <translation type="obsolete">Handmatig</translation>
     </message>
     <message>
         <source>Normal progam</source>
-        <translation>Normaal programma</translation>
+        <translation type="obsolete">Normaal programma</translation>
     </message>
     <message>
         <source>Aperture priority</source>
-        <translation>Aperture prioriteit</translation>
+        <translation type="obsolete">Aperture prioriteit</translation>
     </message>
     <message>
         <source>Shutter priority</source>
-        <translation>Sluiterprioriteit</translation>
+        <translation type="obsolete">Sluiterprioriteit</translation>
     </message>
     <message>
         <source>Creative progam
 (biased toward fast shutter speed</source>
-        <translation>Kreatief programma
+        <translation type="obsolete">Kreatief programma
 (ingesteld op snelle sluitertijd)</translation>
     </message>
     <message>
         <source>Action progam
 (biased toward fast shutter speed)</source>
-        <translation>Aktief programma
+        <translation type="obsolete">Aktief programma
 (ingesteld op snelle sluitertijd)</translation>
     </message>
     <message>
         <source>Portrait mode
 (for closeup photos with the background out of focus)</source>
-        <translation>Portretmodus
+        <translation type="obsolete">Portretmodus
 (voor close-ups met vervaagde achtergrond)</translation>
     </message>
     <message>
         <source>Landscape mode
 (for landscape photos with the background in focus)</source>
-        <translation>Landschap modus
+        <translation type="obsolete">Landschap modus
 (voor landschapfoto&apos;s met scherpe achtergrond)</translation>
     </message>
     <message>
         <source>Exposure Program: %1
 </source>
-        <translation>Belichtings programma: %1
+        <translation type="obsolete">Belichtings programma: %1
 </translation>
     </message>
     <message>
@@ -394,6 +394,30 @@
     <message>
         <source>&lt;/qt&gt;</source>
         <translation>&lt;/qt&gt;</translation>
+    </message>
+    <message>
+        <source>Dimensions: %1 x %2
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size: %1
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Compressed size: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>used colors: %1
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resolution: %1 x %2
+</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

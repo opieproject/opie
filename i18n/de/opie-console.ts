@@ -267,6 +267,28 @@ Verbindung</translation>
         <source>Edit Key</source>
         <translation>Schlüssel bearbeiten</translation>
     </message>
+    <message>
+        <source>Rows</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Columns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Q Keycode</source>
+        <comment>Qt Key Code for the OnScreen Keyboard</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unicode Value</source>
+        <comment>The Unicode value of the key</comment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>IOLayerBase</name>
@@ -357,6 +379,18 @@ Verbindung</translation>
     <message>
         <source>9600 baud</source>
         <translation>9600 baud</translation>
+    </message>
+    <message>
+        <source>4800 baud</source>
+        <translation type="unfinished">4800 baud</translation>
+    </message>
+    <message>
+        <source>2400 baud</source>
+        <translation type="unfinished">2400 baud</translation>
+    </message>
+    <message>
+        <source>1200 baud</source>
+        <translation type="unfinished">1200 baud</translation>
     </message>
 </context>
 <context>
@@ -490,6 +524,18 @@ Verbindung</translation>
     <message>
         <source>Save Profile</source>
         <translation>Profil speichern</translation>
+    </message>
+    <message>
+        <source>Start log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stop log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Log</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -749,7 +795,7 @@ Verbindung</translation>
     </message>
     <message>
         <source>Dialing the number failed.</source>
-        <translation>Nummer wählen fehlgeschlagen.</translation>
+        <translation type="obsolete">Nummer wählen fehlgeschlagen.</translation>
     </message>
     <message>
         <source>Cancelling...</source>
@@ -787,6 +833,14 @@ Verbindung</translation>
         <source>Dismiss</source>
         <translation>Aufgeben</translation>
     </message>
+    <message>
+        <source>&lt;qt&gt;Dialing the number failed.&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fixing up Embedix</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SerialConfigWidget</name>
@@ -807,19 +861,19 @@ Verbindung</translation>
     </message>
     <message>
         <source>Font size</source>
-        <translation>Schriftgröße</translation>
+        <translation type="obsolete">Schriftgröße</translation>
     </message>
     <message>
         <source>small</source>
-        <translation>klein</translation>
+        <translation type="obsolete">klein</translation>
     </message>
     <message>
         <source>medium</source>
-        <translation>mittel</translation>
+        <translation type="obsolete">mittel</translation>
     </message>
     <message>
         <source>large</source>
-        <translation>groß</translation>
+        <translation type="obsolete">groß</translation>
     </message>
     <message>
         <source>Line-break conversions</source>

@@ -165,7 +165,7 @@ Bitte Konfiguration prüfen!</translation>
     </message>
     <message>
         <source>&lt;p&gt;The Wireless Extension Versions&lt;br&gt;are not matching!&lt;p&gt;  Wellenreiter II : WE V%1&lt;br&gt;Interface driver: WE V%2</source>
-        <translation>&lt;p&gt;Die Wireless Extension Versionen sind inkompatibel!&lt;p&gt; Wellenreiter II: WE V%1&lt;br&gt;Interface Treiber: WE V%2</translation>
+        <translation type="obsolete">&lt;p&gt;Die Wireless Extension Versionen sind inkompatibel!&lt;p&gt; Wellenreiter II: WE V%1&lt;br&gt;Interface Treiber: WE V%2</translation>
     </message>
     <message>
         <source>Can&apos;t set interface &apos;%1&apos;
@@ -215,6 +215,10 @@ joinen eines Netzes.</translation>
     <message>
         <source>Function only available on Embedded build</source>
         <translation>Funktion nur bei einem Embedded Build verfügbar</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;The Wireless Extension Versions&lt;br&gt;do not match!&lt;p&gt;  Wellenreiter II : WE V%1&lt;br&gt;Interface driver: WE V%2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -392,7 +396,7 @@ Michael Lauer&lt;br&gt;&lt;hr&gt;
     </message>
     <message>
         <source>Wellenreiter II COnfiguration Dialog</source>
-        <translation>Wellenreiter II Konfiguration</translation>
+        <translation type="obsolete">Wellenreiter II Konfiguration</translation>
     </message>
     <message>
         <source>Interface</source>
@@ -652,7 +656,7 @@ Michael Lauer&lt;br&gt;&lt;hr&gt;
     </message>
     <message>
         <source>Send proble requests</source>
-        <translation>Probe Requests senden</translation>
+        <translation type="obsolete">Probe Requests senden</translation>
     </message>
     <message>
         <source>&lt;automatic&gt;</source>
@@ -729,6 +733,14 @@ Michael Lauer&lt;br&gt;&lt;hr&gt;
     <message>
         <source>Command line to start the gps daemon.</source>
         <translation>Befehlszeile um den gps deamon zu starten.</translation>
+    </message>
+    <message>
+        <source>Wellenreiter II Configuration Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send probe requests</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -76,7 +76,7 @@ Jūs varat izvēlēties konfigurētu lietotāju.</translation>
     </message>
     <message>
         <source>&lt;p&gt;All user-defined net ranges will be lost.</source>
-        <translation>&lt;p&gt;Visi lieotāju-definēti diapazoni pazudīs.</translation>
+        <translation type="obsolete">&lt;p&gt;Visi lieotāju-definēti diapazoni pazudīs.</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -84,31 +84,7 @@ Jūs varat izvēlēties konfigurētu lietotāju.</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation>Labi</translation>
-    </message>
-    <message>
-        <source>192.168.129.0/24</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>192.168.1.0/24</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>192.168.0.0/16</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>172.16.0.0/12</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>10.0.0.0/8</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>1.0.0.0/8</source>
-        <translation></translation>
+        <translation type="obsolete">Labi</translation>
     </message>
     <message>
         <source>Any</source>
@@ -117,6 +93,26 @@ Jūs varat izvēlēties konfigurētu lietotāju.</translation>
     <message>
         <source>None</source>
         <translation>Neviens</translation>
+    </message>
+    <message>
+        <source>Important notice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To be able to protect your PDA with one or more authentication plugins (for example, a simple PIN authentication), you must install at least one &lt;em&gt;opie-multiauth-*&lt;/em&gt; package! Once you have done that, you will be able to configure your PDA protection here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Locking</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All user-defined net ranges will be lost.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -143,7 +139,7 @@ Jūs varat izvēlēties konfigurētu lietotāju.</translation>
     </message>
     <message>
         <source>Debug options</source>
-        <translation>Atblusošanas opcijas</translation>
+        <translation type="obsolete">Atblusošanas opcijas</translation>
     </message>
     <message>
         <source>Don&apos;t protect this config screen</source>
@@ -155,11 +151,43 @@ Jūs varat izvēlēties konfigurētu lietotāju.</translation>
     </message>
     <message>
         <source>Allow to bypass authentication</source>
-        <translation>Atļaut izlaist autentifikāciju</translation>
+        <translation type="obsolete">Atļaut izlaist autentifikāciju</translation>
     </message>
     <message>
         <source>Note: the third option implies the second one</source>
-        <translation>Piezīme: trešā opcija ietekmē otro</translation>
+        <translation type="obsolete">Piezīme: trešā opcija ietekmē otro</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Testing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Test the authentication now</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Attention</source>
+        <translation type="unfinished">Uzmanību</translation>
+    </message>
+    <message>
+        <source>You must save your current settings before trying to authenticate. Press OK to accept and launch a simulated authentication process.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If you don&apos;t like the result of this test, don&apos;t forget to change your settings before you exit the configuration application!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Atlikt</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -11,11 +11,11 @@
     </message>
     <message>
         <source>Clip line after X chars: </source>
-        <translation>Обрезать после X символов:</translation>
+        <translation type="obsolete">Обрезать после X символов:</translation>
     </message>
     <message>
         <source>After how many chars should be the info about the task be cut off</source>
-        <translation>После скольки символов данные будут обрезаны</translation>
+        <translation type="obsolete">После скольки символов данные будут обрезаны</translation>
     </message>
     <message>
         <source>Days look ahead: </source>
@@ -61,7 +61,7 @@ Color if below </source>
     </message>
     <message>
         <source>To activate settings: Restart application !</source>
-        <translation>Чтобы применить установки: Перезапустите приложение!</translation>
+        <translation type="obsolete">Чтобы применить установки: Перезапустите приложение!</translation>
     </message>
     <message>
         <source>Enable/Disable Views</source>

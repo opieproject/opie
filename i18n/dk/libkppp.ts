@@ -335,6 +335,10 @@ the device &quot;%1&quot;?</source>
         <source>You must enter a unique device name</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialWidget</name>

@@ -89,10 +89,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Bluetooh Basic Config</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Default Passkey</source>
         <translation type="unfinished"></translation>
     </message>
@@ -126,6 +122,10 @@
     </message>
     <message>
         <source>Status Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bluetooth Basic Config</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -8,7 +8,7 @@
     </message>
     <message>
         <source>That directory does not exist</source>
-        <translation>La directory non esiste</translation>
+        <translation type="obsolete">La directory non esiste</translation>
     </message>
     <message>
         <source>Show Hidden Files</source>
@@ -137,13 +137,13 @@
     <message>
         <source>Could not copy
 </source>
-        <translation>Impossibile copiare
+        <translation type="obsolete">Impossibile copiare
 </translation>
     </message>
     <message>
         <source>to
 </source>
-        <translation>to
+        <translation type="obsolete">to
 </translation>
     </message>
     <message>
@@ -157,7 +157,7 @@
     <message>
         <source>Could not move
 </source>
-        <translation>Impossibile spostare
+        <translation type="obsolete">Impossibile spostare
 </translation>
     </message>
     <message>
@@ -181,7 +181,7 @@
 is copyright 2002-2003 by
 L.J.Potter&lt;llornkcor@handhelds.org&gt;
 and is licensed by the GPL</source>
-        <translation>Advanced FileManager
+        <translation type="obsolete">Advanced FileManager
 copyright 2002-2003 di
 L.J.Potter &lt;llornkcor@handhelds.org&gt;
 sotto licenza GPL</translation>
@@ -205,7 +205,7 @@ sotto licenza GPL</translation>
     <message>
         <source>Really delete
 %1 files?</source>
-        <translation>Vuoi realmente cancellare
+        <translation type="obsolete">Vuoi realmente cancellare
 %1 file?</translation>
     </message>
     <message>
@@ -215,7 +215,7 @@ sotto licenza GPL</translation>
     <message>
         <source>Really copy
 %1 files?</source>
-        <translation>Copiare realmente
+        <translation type="obsolete">Copiare realmente
 %1 file?</translation>
     </message>
     <message>
@@ -224,22 +224,22 @@ sotto licenza GPL</translation>
     </message>
     <message>
         <source>%1 exists. Ok to overwrite?</source>
-        <translation>%1 esiste. Ok per sovrascrivere?</translation>
+        <translation type="obsolete">%1 esiste. Ok per sovrascrivere?</translation>
     </message>
     <message>
         <source>Could not copy %1 to %2</source>
-        <translation>Impossibile copiare %1 su %2</translation>
+        <translation type="obsolete">Impossibile copiare %1 su %2</translation>
     </message>
     <message>
         <source>
 exists. Ok to overwrite?</source>
-        <translation>
+        <translation type="obsolete">
 esiste. Ok per sovrascrivere?</translation>
     </message>
     <message>
         <source> already exists.
 Do you really want to delete it?</source>
-        <translation> già esiste.
+        <translation type="obsolete"> già esiste.
 Vuoi veramente eliminarlo?</translation>
     </message>
     <message>
@@ -250,7 +250,7 @@ Vuoi veramente eliminarlo?</translation>
         <source>Cannot remove current directory
 from bookmarks.
 It is not bookmarked!</source>
-        <translation>Impossibile rimuovere la directory corrente
+        <translation type="obsolete">Impossibile rimuovere la directory corrente
 dai bookmark.
 Non è inserita nei bookmark!</translation>
     </message>
@@ -261,13 +261,13 @@ Non è inserita nei bookmark!</translation>
     <message>
         <source>Really delete %1
 and all it&apos;s contents ?</source>
-        <translation>Vuoi veramente eliminare %1
+        <translation type="obsolete">Vuoi veramente eliminare %1
 e tutto il suo contenuto ?</translation>
     </message>
     <message>
         <source>Really delete
 %1?</source>
-        <translation>Vuoi veramente eliminare
+        <translation type="obsolete">Vuoi veramente eliminare
 %1?</translation>
     </message>
     <message>
@@ -291,10 +291,67 @@ e tutto il suo contenuto ?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Could not copy 
-%1 
-to 
-%2</source>
+        <source>&lt;p&gt;%1 does not exist&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;Advanced FileManager is copyright 2002-2003 by L.J.Potter&lt;llornkcor@handhelds.org&gt; and is licensed by the GPL&lt;/P&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Cannot remove current directory from bookmarks. It is not bookmarked!&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Really delete %1 files?&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Really delete %1 and all it&apos;s contents?&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Really delete %1?&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Really copy %1 files?&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;%1 already  exists. Ok to overwrite?&lt;/P&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;Could not copy %1 to %2&lt;/P&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy %1 As</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;P&gt; %1 already exists. Ok to overwrite?&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Could not copy %1 to %2&lt;/P&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt; %1 already exists. Do you really want to delete it?&lt;/P&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Could not move %1&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Could not copy %1 to %2&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

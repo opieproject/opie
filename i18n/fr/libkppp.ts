@@ -384,6 +384,10 @@ nouveaux paramètres</translation>
         <source>You must enter a unique device name</source>
         <translation>Vous devez utiliser un nom de dispositif unique</translation>
     </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Erreur</translation>
+    </message>
 </context>
 <context>
     <name>DialWidget</name>

@@ -52,15 +52,35 @@
     </message>
     <message>
         <source>Description</source>
-        <translation>Описание</translation>
+        <translation type="obsolete">Описание</translation>
     </message>
     <message>
         <source>Start automatically</source>
-        <translation>Запускать автоматически</translation>
+        <translation type="obsolete">Запускать автоматически</translation>
     </message>
     <message>
         <source>Confirm before start</source>
-        <translation>Подтвердить перед запуском</translation>
+        <translation type="obsolete">Подтвердить перед запуском</translation>
+    </message>
+    <message>
+        <source>Selected devices with gprs capability</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Channel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Addresses</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -72,6 +92,13 @@
     <message>
         <source>&lt;p&gt;Sets up a bluetooth link using the bluetooth serial profile.&lt;/p&gt;&lt;p&gt;Use this to connect to a GSM.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Устанавливает связь с использованием bluetooth последовательного профиля.&lt;/p&gt;&lt;p&gt;Используйте для связи с GSM.&lt;/p&gt;</translation>
+    </message>
+</context>
+<context>
+    <name>BluetoothRFCOMMRun</name>
+    <message>
+        <source>Select device to connect to</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

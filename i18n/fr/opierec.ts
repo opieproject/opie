@@ -114,7 +114,7 @@ votre carte n&apos;est pas reconnue</translation>
     </message>
     <message>
         <source> seconds</source>
-        <translation>seconds</translation>
+        <translation type="obsolete">seconds</translation>
     </message>
     <message>
         <source>Do you really want to &lt;font size=+2&gt;&lt;B&gt;DELETE&lt;/B&gt;&lt;/font&gt;
@@ -182,15 +182,15 @@ des fichiers sélectionnés ?</translation>
     </message>
     <message>
         <source>Rec</source>
-        <translation>Rec</translation>
+        <translation type="obsolete">Rec</translation>
     </message>
     <message>
         <source>Location</source>
-        <translation>Emplacement</translation>
+        <translation type="obsolete">Emplacement</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation>Date</translation>
+        <translation type="obsolete">Date</translation>
     </message>
     <message>
         <source>Wave Compression (smaller files)</source>
@@ -206,7 +206,7 @@ des fichiers sélectionnés ?</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation>Stopper</translation>
+        <translation type="obsolete">Stopper</translation>
     </message>
     <message>
         <source>Auto Mute</source>
@@ -214,7 +214,15 @@ des fichiers sélectionnés ?</translation>
     </message>
     <message>
         <source>Stereo Channels</source>
-        <translation>Canaux stéréo</translation>
+        <translation type="obsolete">Canaux stéréo</translation>
+    </message>
+    <message>
+        <source>Del</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stereo</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

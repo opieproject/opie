@@ -117,10 +117,6 @@ is not available on this system
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;p&gt;The Wireless Extension Versions&lt;br&gt;are not matching!&lt;p&gt;  Wellenreiter II : WE V%1&lt;br&gt;Interface driver: WE V%2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Bring your device into
 monitor mode now.</source>
         <translation type="unfinished"></translation>
@@ -169,6 +165,10 @@ joining a net.</source>
         <source>Function only available on Embedded build</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&lt;p&gt;The Wireless Extension Versions&lt;br&gt;do not match!&lt;p&gt;  Wellenreiter II : WE V%1&lt;br&gt;Interface driver: WE V%2</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>WellenreiterBase</name>
@@ -211,10 +211,6 @@ joining a net.</source>
 </context>
 <context>
     <name>WellenreiterConfigBase</name>
-    <message>
-        <source>Wellenreiter II COnfiguration Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Interface</source>
         <translation type="unfinished"></translation>
@@ -516,10 +512,6 @@ joining a net.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Send proble requests</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&lt;automatic&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -597,6 +589,14 @@ joining a net.</source>
     </message>
     <message>
         <source>Command line to start the gps daemon.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wellenreiter II Configuration Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send probe requests</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -3,34 +3,34 @@
     <name>OFileDialog</name>
     <message>
         <source>FileDialog</source>
-        <translation>FailuDialogs</translation>
+        <translation type="obsolete">FailuDialogs</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation>Atvērt</translation>
+        <translation type="obsolete">Atvērt</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Saglabāt</translation>
+        <translation type="obsolete">Saglabāt</translation>
     </message>
     <message>
         <source>Select Directory</source>
-        <translation>Izvēlēties Katalogu</translation>
+        <translation type="obsolete">Izvēlēties Katalogu</translation>
     </message>
 </context>
 <context>
     <name>OFontSelector</name>
     <message>
         <source>Style</source>
-        <translation>Stils</translation>
+        <translation type="obsolete">Stils</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Izmērs</translation>
+        <translation type="obsolete">Izmērs</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation>Glāžšķūņu utt</translation>
+        <translation type="obsolete">Glāžšķūņu utt</translation>
     </message>
 </context>
 <context>
@@ -75,19 +75,19 @@
     <name>Opie::Ui::OFileDialog</name>
     <message>
         <source>FileDialog</source>
-        <translation type="obsolete">FailuDialogs</translation>
+        <translation type="unfinished">FailuDialogs</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="obsolete">Atvērt</translation>
+        <translation type="unfinished">Atvērt</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="obsolete">Saglabāt</translation>
+        <translation type="unfinished">Saglabāt</translation>
     </message>
     <message>
         <source>Select Directory</source>
-        <translation type="obsolete">Izvēlēties Katalogu</translation>
+        <translation type="unfinished">Izvēlēties Katalogu</translation>
     </message>
 </context>
 <context>
@@ -101,15 +101,15 @@
     <name>Opie::Ui::OFontSelector</name>
     <message>
         <source>Style</source>
-        <translation type="obsolete">Stils</translation>
+        <translation type="unfinished">Stils</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="obsolete">Izmērs</translation>
+        <translation type="unfinished">Izmērs</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="obsolete">Glāžšķūņu utt</translation>
+        <translation type="unfinished">Glāžšķūņu utt</translation>
     </message>
 </context>
 <context>

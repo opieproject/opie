@@ -8,7 +8,7 @@
     </message>
     <message>
         <source>Percentage battery remaining</source>
-        <translation>Pourcentage de batterie chargé </translation>
+        <translation type="obsolete">Pourcentage de batterie chargé </translation>
     </message>
     <message>
         <source>Battery status: </source>
@@ -48,7 +48,7 @@
     </message>
     <message>
         <source>Battery time remaining</source>
-        <translation>Durée de batterie restante </translation>
+        <translation type="obsolete">Durée de batterie restante </translation>
     </message>
     <message>
         <source>Close</source>
@@ -72,11 +72,11 @@
     </message>
     <message>
         <source>Percentage battery remaining: </source>
-        <translation>Pourcentage de batterie chargé : </translation>
+        <translation type="obsolete">Pourcentage de batterie chargé : </translation>
     </message>
     <message>
         <source>Battery time remaining: </source>
-        <translation>Temps restant de la batterie : </translation>
+        <translation type="obsolete">Temps restant de la batterie : </translation>
     </message>
     <message>
         <source>No jacket with battery inserted</source>
@@ -88,11 +88,28 @@
     </message>
     <message>
         <source>Ipaq  </source>
-        <translation>iPaq </translation>
+        <translation type="obsolete">iPaq </translation>
     </message>
     <message>
         <source>Jacket  </source>
         <translation>Jaquette </translation>
+    </message>
+    <message>
+        <source>Remaining Power: %1%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remaining Time: %1m %2s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remaing Power: %1 %2
+Remaining Time: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ipaq  %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

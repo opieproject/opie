@@ -9,6 +9,29 @@
         <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
         <translation>&lt;h1&gt;Alarm v %1&lt;/h1&gt;&lt;br&gt;</translation>
     </message>
+    <message>
+        <source>All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished">Nezařazené</translation>
+    </message>
+</context>
+<context>
+    <name>NewTaskDlg</name>
+    <message>
+        <source>New Task</source>
+        <translation type="unfinished">Nový úkol</translation>
+    </message>
+    <message>
+        <source>Blank task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Using template:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OTaskEditor</name>
@@ -34,10 +57,21 @@
     </message>
 </context>
 <context>
+    <name>Opie</name>
+    <message>
+        <source>Todo List</source>
+        <translation type="unfinished">Seznam Todo</translation>
+    </message>
+    <message>
+        <source>Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <source>Opie Todolist</source>
-        <translation>Opie Todolist</translation>
+        <translation type="obsolete">Opie Todolist</translation>
     </message>
     <message>
         <source>Enter Task</source>
@@ -60,39 +94,39 @@
     <name>QWidget</name>
     <message>
         <source>New from template</source>
-        <translation>Nový ze šablony</translation>
+        <translation type="obsolete">Nový ze šablony</translation>
     </message>
     <message>
         <source>New Task</source>
-        <translation>Nový úkol</translation>
+        <translation type="obsolete">Nový úkol</translation>
     </message>
     <message>
         <source>Click here to create a new task.</source>
-        <translation>Klikněte sem pro vytvoření nového úkolu.</translation>
+        <translation type="obsolete">Klikněte sem pro vytvoření nového úkolu.</translation>
     </message>
     <message>
         <source>Edit Task</source>
-        <translation>Upravit úkol</translation>
+        <translation type="obsolete">Upravit úkol</translation>
     </message>
     <message>
         <source>Click here to modify the current task.</source>
-        <translation>Klikněte sem pro změnu aktuálního úkolu.</translation>
+        <translation type="obsolete">Klikněte sem pro změnu aktuálního úkolu.</translation>
     </message>
     <message>
         <source>View Task</source>
-        <translation>Zobrazit úkol</translation>
+        <translation type="obsolete">Zobrazit úkol</translation>
     </message>
     <message>
         <source>Delete...</source>
-        <translation>Smazat...</translation>
+        <translation type="obsolete">Smazat...</translation>
     </message>
     <message>
         <source>Click here to remove the current task.</source>
-        <translation>Klikněte sem pro odstranění aktuálního úkolu.</translation>
+        <translation type="obsolete">Klikněte sem pro odstranění aktuálního úkolu.</translation>
     </message>
     <message>
         <source>Delete all...</source>
-        <translation>Smazat vše...</translation>
+        <translation type="obsolete">Smazat vše...</translation>
     </message>
     <message>
         <source>Delete completed</source>
@@ -100,19 +134,19 @@
     </message>
     <message>
         <source>Duplicate</source>
-        <translation>Duplikovat</translation>
+        <translation type="obsolete">Duplikovat</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation>Odeslat</translation>
+        <translation type="obsolete">Odeslat</translation>
     </message>
     <message>
         <source>Click here to send the current task to another device.</source>
-        <translation>Klikněte sem pro odeslání aktuálního úkolu jinému zařízení.</translation>
+        <translation type="obsolete">Klikněte sem pro odeslání aktuálního úkolu jinému zařízení.</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>Hledat</translation>
+        <translation type="obsolete">Hledat</translation>
     </message>
     <message>
         <source>Show completed tasks</source>
@@ -132,15 +166,15 @@
     </message>
     <message>
         <source>Data</source>
-        <translation>Data</translation>
+        <translation type="obsolete">Data</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation>Kategorie</translation>
+        <translation type="obsolete">Kategorie</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation>Možnosti</translation>
+        <translation type="obsolete">Možnosti</translation>
     </message>
     <message>
         <source>QuickEdit</source>
@@ -164,11 +198,11 @@ Seznam zobrazuje následující informace:
     </message>
     <message>
         <source>All Categories</source>
-        <translation>Všechny kategorie</translation>
+        <translation type="obsolete">Všechny kategorie</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Nezařazené</translation>
+        <translation type="obsolete">Nezařazené</translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -234,7 +268,7 @@ Přesto skončit?</translation>
     </message>
     <message>
         <source>Configure Templates</source>
-        <translation>Konfigurovat šablony</translation>
+        <translation type="obsolete">Konfigurovat šablony</translation>
     </message>
     <message>
         <source>Template Editor</source>

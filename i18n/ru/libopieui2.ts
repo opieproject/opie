@@ -116,19 +116,19 @@
     <name>OFileDialog</name>
     <message>
         <source>FileDialog</source>
-        <translation>ФайлДиалог</translation>
+        <translation type="obsolete">ФайлДиалог</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation>Открыть</translation>
+        <translation type="obsolete">Открыть</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Сохранить</translation>
+        <translation type="obsolete">Сохранить</translation>
     </message>
     <message>
         <source>Select Directory</source>
-        <translation>Выбрать каталог</translation>
+        <translation type="obsolete">Выбрать каталог</translation>
     </message>
 </context>
 <context>
@@ -176,15 +176,15 @@
     <name>OFontSelector</name>
     <message>
         <source>Style</source>
-        <translation>Стиль</translation>
+        <translation type="obsolete">Стиль</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Размер</translation>
+        <translation type="obsolete">Размер</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation>А ещё хорошо уметь всем на зависть чётко и складно писать буквы и цифры!</translation>
+        <translation type="obsolete">А ещё хорошо уметь всем на зависть чётко и складно писать буквы и цифры!</translation>
     </message>
 </context>
 <context>
@@ -500,19 +500,19 @@ and </source>
     <name>Opie::Ui::OFileDialog</name>
     <message>
         <source>FileDialog</source>
-        <translation type="obsolete">ФайлДиалог</translation>
+        <translation type="unfinished">ФайлДиалог</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="obsolete">Открыть</translation>
+        <translation type="unfinished">Открыть</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="obsolete">Сохранить</translation>
+        <translation type="unfinished">Сохранить</translation>
     </message>
     <message>
         <source>Select Directory</source>
-        <translation type="obsolete">Выбрать каталог</translation>
+        <translation type="unfinished">Выбрать каталог</translation>
     </message>
 </context>
 <context>
@@ -526,15 +526,15 @@ and </source>
     <name>Opie::Ui::OFontSelector</name>
     <message>
         <source>Style</source>
-        <translation type="obsolete">Стиль</translation>
+        <translation type="unfinished">Стиль</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="obsolete">Размер</translation>
+        <translation type="unfinished">Размер</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="obsolete">А ещё хорошо уметь всем на зависть чётко и складно писать буквы и цифры!</translation>
+        <translation type="unfinished">А ещё хорошо уметь всем на зависть чётко и складно писать буквы и цифры!</translation>
     </message>
 </context>
 <context>

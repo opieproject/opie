@@ -89,15 +89,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Find by Alcohol</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -135,16 +127,29 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Alcohol</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Sorry no results for
 </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Find by Ingredient</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Drink</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to write to drink database!
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ingredient</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

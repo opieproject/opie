@@ -45,5 +45,13 @@
         <source>Connection to %1 failed.</source>
         <translation>Conexión fallida a %1.</translation>
     </message>
+    <message>
+        <source>Opie drawpad</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please set &lt;b&gt;QWS_DISPLAY&lt;/b&gt; environmental variable.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

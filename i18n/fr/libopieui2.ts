@@ -125,19 +125,15 @@
     <name>OFileDialog</name>
     <message>
         <source>FileDialog</source>
-        <translation type="unfinished">Sélection fichier</translation>
+        <translation type="obsolete">Sélection fichier</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished">Ouvrir</translation>
+        <translation type="obsolete">Ouvrir</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Enregistrer</translation>
-    </message>
-    <message>
-        <source>Select Directory</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Enregistrer</translation>
     </message>
 </context>
 <context>
@@ -185,15 +181,15 @@
     <name>OFontSelector</name>
     <message>
         <source>Style</source>
-        <translation type="unfinished">Style</translation>
+        <translation type="obsolete">Style</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Taille</translation>
+        <translation type="obsolete">Taille</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="unfinished">Le renard brun saute au dessus du chien paresseux</translation>
+        <translation type="obsolete">Le renard brun saute au dessus du chien paresseux</translation>
     </message>
 </context>
 <context>
@@ -521,15 +517,19 @@ et </translation>
     <name>Opie::Ui::OFileDialog</name>
     <message>
         <source>FileDialog</source>
-        <translation type="obsolete">Sélection fichier</translation>
+        <translation type="unfinished">Sélection fichier</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="obsolete">Ouvrir</translation>
+        <translation type="unfinished">Ouvrir</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="obsolete">Enregistrer</translation>
+        <translation type="unfinished">Enregistrer</translation>
+    </message>
+    <message>
+        <source>Select Directory</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -543,15 +543,15 @@ et </translation>
     <name>Opie::Ui::OFontSelector</name>
     <message>
         <source>Style</source>
-        <translation type="obsolete">Style</translation>
+        <translation type="unfinished">Style</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="obsolete">Taille</translation>
+        <translation type="unfinished">Taille</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="obsolete">Le renard brun saute au dessus du chien paresseux</translation>
+        <translation type="unfinished">Le renard brun saute au dessus du chien paresseux</translation>
     </message>
 </context>
 <context>

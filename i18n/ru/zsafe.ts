@@ -482,7 +482,7 @@ shows the list of dirs and files</source>
 %1
 
 ZSafe will now exit.</source>
-        <translation>Не могу создать каталог
+        <translation type="obsolete">Не могу создать каталог
 %1
 
 ZСейф будет закрыт.</translation>
@@ -604,7 +604,7 @@ ZСейф будет закрыт.</translation>
 .../Documents/application
 
 ZSafe will now exit.</source>
-        <translation>Не могу создать каталог
+        <translation type="obsolete">Не могу создать каталог
 ...//Documents/application
 
 ZСейф будет закрыт.</translation>
@@ -614,7 +614,7 @@ ZСейф будет закрыт.</translation>
 ...//Documents/application/zsafe
 
 ZSafe will now exit.</source>
-        <translation>Не могу создать каталог
+        <translation type="obsolete">Не могу создать каталог
 ...//Documents/application/zsafe
 
 ZСейф будет закрыт.</translation>
@@ -649,7 +649,7 @@ ZСейф будет закрыт.</translation>
     </message>
     <message>
         <source>Edit Entry</source>
-        <translation>Правка записи</translation>
+        <translation type="obsolete">Правка записи</translation>
     </message>
     <message>
         <source>Username</source>
@@ -661,7 +661,7 @@ ZСейф будет закрыт.</translation>
     </message>
     <message>
         <source>New Entry</source>
-        <translation>Создать запись</translation>
+        <translation type="obsolete">Создать запись</translation>
     </message>
     <message>
         <source>Entry name must be different
@@ -827,7 +827,7 @@ password</source>
     </message>
     <message>
         <source>Create new ZSafe document</source>
-        <translation>Создать новый документ ZСейф</translation>
+        <translation type="obsolete">Создать новый документ ZСейф</translation>
     </message>
     <message>
         <source>Now you have to enter
@@ -843,27 +843,63 @@ newly created document.</source>
     </message>
     <message>
         <source>Save ZSafe document as..</source>
-        <translation>Сохранить документ ZСейф как..</translation>
+        <translation type="obsolete">Сохранить документ ZСейф как..</translation>
     </message>
     <message>
         <source>Zaurus Password Manager&lt;br&gt;</source>
-        <translation>Zaurus Менеджер Паролей&lt;br&gt;</translation>
+        <translation type="obsolete">Zaurus Менеджер Паролей&lt;br&gt;</translation>
     </message>
     <message>
         <source>ZSafe version 2.1.2-jv01b&lt;br&gt;</source>
-        <translation>ZСейф версии 2.1.2-jv01b&lt;br&gt;</translation>
+        <translation type="obsolete">ZСейф версии 2.1.2-jv01b&lt;br&gt;</translation>
     </message>
     <message>
         <source>by Carsten Schneider&lt;br&gt;</source>
-        <translation>написан Carsten Schneider&lt;br&gt;</translation>
+        <translation type="obsolete">написан Carsten Schneider&lt;br&gt;</translation>
     </message>
     <message>
         <source>Translations by Robert Ernst&lt;br&gt;</source>
-        <translation>Перевод Robert Ernst&lt;br&gt;</translation>
+        <translation type="obsolete">Перевод Robert Ernst&lt;br&gt;</translation>
     </message>
     <message>
         <source>ZSafe version 2.1.2&lt;br&gt;</source>
-        <translation>ZСейф версии 2.1.2&lt;br&gt;</translation>
+        <translation type="obsolete">ZСейф версии 2.1.2&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;Can&apos;t create directory %1&lt;/P&gt;&lt;P&gt;ZSafe will now exit.&lt;/P&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ZSafe: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;No document defined. You have to create a new document&lt;/P&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;You must create a new document first. Ok to create?&lt;/P&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;body&gt;&lt;div align=center&gt;&lt;b&gt;Zaurus Password Manager&lt;br&gt;ZSafe version 2.1.2&lt;br&gt;&lt;/b&gt;by Carsten Schneider&lt;br&gt;zcarsten@gmx.net&lt;br&gt;http://z-soft.z-portal.info/zsafe&lt;br&gt;Translations by Robert Ernst&lt;br&gt;robert.ernst@linux-solutions.at&lt;br&gt;&lt;br&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy to Clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

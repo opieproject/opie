@@ -115,7 +115,7 @@ scheda non è stata riconosciuta</translation>
     </message>
     <message>
         <source> seconds</source>
-        <translation> secondi</translation>
+        <translation type="obsolete"> secondi</translation>
     </message>
     <message>
         <source>Do you really want to &lt;font size=+2&gt;&lt;B&gt;DELETE&lt;/B&gt;&lt;/font&gt;
@@ -183,15 +183,15 @@ il file selezionato?</translation>
     </message>
     <message>
         <source>Rec</source>
-        <translation>Registra</translation>
+        <translation type="obsolete">Registra</translation>
     </message>
     <message>
         <source>Location</source>
-        <translation>Ubicazione</translation>
+        <translation type="obsolete">Ubicazione</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation>Data</translation>
+        <translation type="obsolete">Data</translation>
     </message>
     <message>
         <source>Wave Compression (smaller files)</source>
@@ -207,14 +207,18 @@ il file selezionato?</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation>Stop</translation>
+        <translation type="obsolete">Stop</translation>
     </message>
     <message>
         <source>Auto Mute</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Stereo Channels</source>
+        <source>Del</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stereo</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

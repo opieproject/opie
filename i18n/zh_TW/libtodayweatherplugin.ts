@@ -105,11 +105,11 @@ Pres: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source> hPa</source>
+        <source> Hg</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source> Hg</source>
+        <source> kPa</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

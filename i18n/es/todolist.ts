@@ -9,6 +9,29 @@
         <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
         <translation>&lt;h1&gt;Alarma en %1&lt;/h1&gt;&lt;br&gt;</translation>
     </message>
+    <message>
+        <source>All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished">En blanco</translation>
+    </message>
+</context>
+<context>
+    <name>NewTaskDlg</name>
+    <message>
+        <source>New Task</source>
+        <translation type="unfinished">Nueva tarea</translation>
+    </message>
+    <message>
+        <source>Blank task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Using template:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OTaskEditor</name>
@@ -34,6 +57,17 @@
     </message>
 </context>
 <context>
+    <name>Opie</name>
+    <message>
+        <source>Todo List</source>
+        <translation type="unfinished">Lista de Tareas</translation>
+    </message>
+    <message>
+        <source>Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <source>Edit Task</source>
@@ -53,46 +87,46 @@
     </message>
     <message>
         <source>Opie Todolist</source>
-        <translation>Tareas Opie</translation>
+        <translation type="obsolete">Tareas Opie</translation>
     </message>
 </context>
 <context>
     <name>QWidget</name>
     <message>
         <source>New from template</source>
-        <translation>Nuevo desde plantilla</translation>
+        <translation type="obsolete">Nuevo desde plantilla</translation>
     </message>
     <message>
         <source>New Task</source>
-        <translation>Nueva tarea</translation>
+        <translation type="obsolete">Nueva tarea</translation>
     </message>
     <message>
         <source>Click here to create a new task.</source>
-        <translation>Pulse aquí para crear una nueva tarea.</translation>
+        <translation type="obsolete">Pulse aquí para crear una nueva tarea.</translation>
     </message>
     <message>
         <source>Edit Task</source>
-        <translation>Editar Tarea</translation>
+        <translation type="obsolete">Editar Tarea</translation>
     </message>
     <message>
         <source>Click here to modify the current task.</source>
-        <translation>Pulse aquí para modificar la tarea actual.</translation>
+        <translation type="obsolete">Pulse aquí para modificar la tarea actual.</translation>
     </message>
     <message>
         <source>View Task</source>
-        <translation>Ver tarea</translation>
+        <translation type="obsolete">Ver tarea</translation>
     </message>
     <message>
         <source>Delete...</source>
-        <translation>Eliminar...</translation>
+        <translation type="obsolete">Eliminar...</translation>
     </message>
     <message>
         <source>Click here to remove the current task.</source>
-        <translation>Pulse aquí para borrar la tarea actual.</translation>
+        <translation type="obsolete">Pulse aquí para borrar la tarea actual.</translation>
     </message>
     <message>
         <source>Delete all...</source>
-        <translation>Borrar todo...</translation>
+        <translation type="obsolete">Borrar todo...</translation>
     </message>
     <message>
         <source>Delete completed</source>
@@ -100,15 +134,15 @@
     </message>
     <message>
         <source>Beam</source>
-        <translation>Emitir</translation>
+        <translation type="obsolete">Emitir</translation>
     </message>
     <message>
         <source>Click here to send the current task to another device.</source>
-        <translation>Pulse aquí para enviar la tarea actual a otro dispositivo.</translation>
+        <translation type="obsolete">Pulse aquí para enviar la tarea actual a otro dispositivo.</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>Buscar</translation>
+        <translation type="obsolete">Buscar</translation>
     </message>
     <message>
         <source>Show completed tasks</source>
@@ -128,15 +162,15 @@
     </message>
     <message>
         <source>Data</source>
-        <translation>Datos</translation>
+        <translation type="obsolete">Datos</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation>Categoría</translation>
+        <translation type="obsolete">Categoría</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation>Opciones</translation>
+        <translation type="obsolete">Opciones</translation>
     </message>
     <message>
         <source>QuickEdit</source>
@@ -160,7 +194,7 @@ La lista muestra la siguiente información:
     </message>
     <message>
         <source>All Categories</source>
-        <translation>Todas</translation>
+        <translation type="obsolete">Todas</translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -198,7 +232,7 @@ e inténtelo de nuevo.
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>En blanco</translation>
+        <translation type="obsolete">En blanco</translation>
     </message>
     <message>
         <source>&lt;P&gt;%1 new tasks arrived.&lt;p&gt;Would you like to add them to your Todolist?</source>
@@ -210,7 +244,7 @@ e inténtelo de nuevo.
     </message>
     <message>
         <source>Duplicate</source>
-        <translation>Duplicar</translation>
+        <translation type="obsolete">Duplicar</translation>
     </message>
     <message>
         <source>C.</source>
@@ -230,7 +264,7 @@ e inténtelo de nuevo.
     </message>
     <message>
         <source>Configure Templates</source>
-        <translation>Configurar Platillas</translation>
+        <translation type="obsolete">Configurar Platillas</translation>
     </message>
     <message>
         <source>Priority:</source>

@@ -61,10 +61,6 @@
         <source>error</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Compare:</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>FileSysInfo</name>
@@ -342,6 +338,10 @@ to this process?</source>
         <source>Benchmark</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Syslog</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VersionInfo</name>
@@ -383,6 +383,10 @@ to this process?</source>
     </message>
     <message>
         <source>&lt;br&gt;Vendor: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Built against Qt/E </source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -108,11 +108,15 @@ Druck:</translation>
     </message>
     <message>
         <source> hPa</source>
-        <translation>hPa</translation>
+        <translation type="obsolete">hPa</translation>
     </message>
     <message>
         <source> Hg</source>
         <translation>Hg</translation>
+    </message>
+    <message>
+        <source> kPa</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

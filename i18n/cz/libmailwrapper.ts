@@ -1,287 +1,303 @@
-<!DOCTYPE TS>
-<TS>
-  <context>
+<!DOCTYPE TS><TS>
+<context>
     <name>IMAPwrapper</name>
     <message>
-      <source>error connecting imap server: %1</source>
-      <translation>chyba připojení k imap serveru: %1</translation>
+        <source>error connecting imap server: %1</source>
+        <translation>chyba připojení k imap serveru: %1</translation>
     </message>
     <message>
-      <source>error logging in imap server: %1</source>
-      <translation>chyba přihlášení k imap serveru: %1</translation>
+        <source>error logging in imap server: %1</source>
+        <translation>chyba přihlášení k imap serveru: %1</translation>
     </message>
     <message>
-      <source>Mailbox has no mails</source>
-      <translation>Schránka neobsahuje zprávy</translation>
+        <source>Mailbox has no mails</source>
+        <translation>Schránka neobsahuje zprávy</translation>
     </message>
     <message>
-      <source>Mailbox has %1 mails</source>
-      <translation>Ve schránce je %1 zpráv</translation>
+        <source>Mailbox has %1 mails</source>
+        <translation>Ve schránce je %1 zpráv</translation>
     </message>
     <message>
-      <source>Error fetching headers: %1</source>
-      <translation>Chyba ztažení hlaviček: %1</translation>
+        <source>Error fetching headers: %1</source>
+        <translation>Chyba ztažení hlaviček: %1</translation>
     </message>
     <message>
-      <source>Mailbox has no mails!</source>
-      <translation>Schránka neobsahuje zprávy!</translation>
+        <source>Mailbox has no mails!</source>
+        <translation>Schránka neobsahuje zprávy!</translation>
     </message>
     <message>
-      <source>error deleting mail: %s</source>
-      <translation>chyba smazání zprávy: %s</translation>
+        <source>error deleting mail: %s</source>
+        <translation>chyba smazání zprávy: %s</translation>
     </message>
     <message>
-      <source>Cannot create folder %1 for holding subfolders</source>
-      <translation>Nelze vytvořit složku %1 pro uskladnění podsložek</translation>
+        <source>Cannot create folder %1 for holding subfolders</source>
+        <translation>Nelze vytvořit složku %1 pro uskladnění podsložek</translation>
     </message>
     <message>
-      <source>%1</source>
-      <translation>%1</translation>
+        <source>%1</source>
+        <translation>%1</translation>
     </message>
     <message>
-      <source>error copy mails: %1</source>
-      <translation>chyba kopírování zpráv: %1</translation>
+        <source>error copy mails: %1</source>
+        <translation>chyba kopírování zpráv: %1</translation>
     </message>
     <message>
-      <source>error copy mail: %1</source>
-      <translation>chyba kopírování zprávy: %1</translation>
+        <source>error copy mail: %1</source>
+        <translation>chyba kopírování zprávy: %1</translation>
     </message>
     <message>
-      <source>Server has no TLS support!</source>
-      <translation>Server nemá podporu TLS!</translation>
+        <source>Server has no TLS support!</source>
+        <translation>Server nemá podporu TLS!</translation>
     </message>
-  </context>
-  <context>
+</context>
+<context>
     <name>LoginDialogUI</name>
     <message>
-      <source>Login</source>
-      <translation>Přihlášení</translation>
+        <source>Login</source>
+        <translation>Přihlášení</translation>
     </message>
     <message>
-      <source>User</source>
-      <translation>Jméno</translation>
+        <source>User</source>
+        <translation>Jméno</translation>
     </message>
     <message>
-      <source>Password</source>
-      <translation>Heslo</translation>
+        <source>Password</source>
+        <translation>Heslo</translation>
     </message>
-  </context>
-  <context>
+</context>
+<context>
     <name>MBOXwrapper</name>
     <message>
-      <source>Mailbox has %1 mail(s)</source>
-      <translation>Schránka obsahuje %1 zpráv</translation>
+        <source>Mailbox has %1 mail(s)</source>
+        <translation>Schránka obsahuje %1 zpráv</translation>
     </message>
     <message>
-      <source>Mailbox exists.</source>
-      <translation>Schránka existuje.</translation>
+        <source>Mailbox exists.</source>
+        <translation>Schránka existuje.</translation>
     </message>
     <message>
-      <source>Error init folder</source>
-      <translation>Nelze inicializovat složku</translation>
+        <source>Error init folder</source>
+        <translation>Nelze inicializovat složku</translation>
     </message>
     <message>
-      <source>Error writing to message folder</source>
-      <translation>Nelze zapsat do složky zpráv</translation>
+        <source>Error writing to message folder</source>
+        <translation>Nelze zapsat do složky zpráv</translation>
     </message>
     <message>
-      <source>Error initializing mbox</source>
-      <translation>Nelze inicializovat schránku</translation>
+        <source>Error initializing mbox</source>
+        <translation>Nelze inicializovat schránku</translation>
     </message>
     <message>
-      <source>Error fetching mail %i</source>
-      <translation>Nelze stáhnout zprávu %i</translation>
+        <source>Error fetching mail %i</source>
+        <translation>Nelze stáhnout zprávu %i</translation>
     </message>
     <message>
-      <source>Error deleting mail %1</source>
-      <translation>Nelze smazat zprávu %1</translation>
+        <source>Error deleting mail %1</source>
+        <translation>Nelze smazat zprávu %1</translation>
     </message>
     <message>
-      <source>Mailbox doesn't exist.</source>
-      <translation>Schránka neexistuje.</translation>
+        <source>Mailbox doesn&apos;t exist.</source>
+        <translation>Schránka neexistuje.</translation>
     </message>
     <message>
-      <source>Error deleting Mailbox.</source>
-      <translation>Nelze smazat schránku.</translation>
+        <source>Error deleting Mailbox.</source>
+        <translation>Nelze smazat schránku.</translation>
     </message>
-  </context>
-  <context>
+</context>
+<context>
     <name>MHwrapper</name>
     <message>
-      <source>Mailbox has %1 mail(s)</source>
-      <translation>Ve schránce je %1 zpráv</translation>
+        <source>Mailbox has %1 mail(s)</source>
+        <translation>Ve schránce je %1 zpráv</translation>
     </message>
     <message>
-      <source>Error fetching mail %i</source>
-      <translation>Nelze stáhnout zprávu %i</translation>
+        <source>Error fetching mail %i</source>
+        <translation>Nelze stáhnout zprávu %i</translation>
     </message>
     <message>
-      <source>Error deleting mail %1</source>
-      <translation>Nelze smazat zprávu %1</translation>
+        <source>Error deleting mail %1</source>
+        <translation>Nelze smazat zprávu %1</translation>
     </message>
     <message>
-      <source>Error retrieving status</source>
-      <translation>Nelze zjistit stav</translation>
+        <source>Error retrieving status</source>
+        <translation>Nelze zjistit stav</translation>
     </message>
     <message>
-      <source>Error</source>
-      <translation>Chyba</translation>
+        <source>Error</source>
+        <translation>Chyba</translation>
     </message>
     <message>
-      <source>Ok</source>
-      <translation>Ok</translation>
+        <source>Ok</source>
+        <translation>Ok</translation>
     </message>
-  </context>
-  <context>
+</context>
+<context>
     <name>POP3wrapper</name>
     <message>
-      <source>Mailbox contains %1 mail(s)</source>
-      <translation>Schránka obsahuje %1 zpráv</translation>
+        <source>Mailbox contains %1 mail(s)</source>
+        <translation>Schránka obsahuje %1 zpráv</translation>
     </message>
     <message>
-      <source>Error initializing folder</source>
-      <translation>Nelze inicializovat složku</translation>
+        <source>Error initializing folder</source>
+        <translation>Nelze inicializovat složku</translation>
     </message>
     <message>
-      <source>error deleting mail</source>
-      <translation>Nelze smazat zprávu</translation>
+        <source>error deleting mail</source>
+        <translation>Nelze smazat zprávu</translation>
     </message>
     <message>
-      <source>Error getting folder info</source>
-      <translation>Nelze zjistit informace o složce</translation>
+        <source>Error getting folder info</source>
+        <translation>Nelze zjistit informace o složce</translation>
     </message>
     <message>
-      <source>Error deleting mail %1</source>
-      <translation>Nelze smazat zprávu %1</translation>
+        <source>Error deleting mail %1</source>
+        <translation>Nelze smazat zprávu %1</translation>
     </message>
-  </context>
-  <context>
+    <message>
+        <source>Download mail?
+It is %1 kByte but your limit is %2 kByte</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Download message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SMTPwrapper</name>
     <message>
-      <source>No error</source>
-      <translation>Žádná chyba</translation>
+        <source>No error</source>
+        <translation>Žádná chyba</translation>
     </message>
     <message>
-      <source>Unexpected error code</source>
-      <translation>Neočekávaný chybový kód</translation>
+        <source>Unexpected error code</source>
+        <translation>Neočekávaný chybový kód</translation>
     </message>
     <message>
-      <source>Service not available</source>
-      <translation>Služba není k dispozici</translation>
+        <source>Service not available</source>
+        <translation>Služba není k dispozici</translation>
     </message>
     <message>
-      <source>Stream error</source>
-      <translation>Chyba toku</translation>
+        <source>Stream error</source>
+        <translation>Chyba toku</translation>
     </message>
     <message>
-      <source>gethostname() failed</source>
-      <translation>gethostname() selhalo</translation>
+        <source>gethostname() failed</source>
+        <translation>gethostname() selhalo</translation>
     </message>
     <message>
-      <source>Not implemented</source>
-      <translation>Není implementováno</translation>
+        <source>Not implemented</source>
+        <translation>Není implementováno</translation>
     </message>
     <message>
-      <source>Error, action not taken</source>
-      <translation>Chyba, akce se neprovedla</translation>
+        <source>Error, action not taken</source>
+        <translation>Chyba, akce se neprovedla</translation>
     </message>
     <message>
-      <source>Data exceeds storage allocation</source>
-      <translation>Data přesáhla velikost místa</translation>
+        <source>Data exceeds storage allocation</source>
+        <translation>Data přesáhla velikost místa</translation>
     </message>
     <message>
-      <source>Error in processing</source>
-      <translation>Chyba při zpracovávání</translation>
+        <source>Error in processing</source>
+        <translation>Chyba při zpracovávání</translation>
     </message>
     <message>
-      <source>Mailbox unavailable</source>
-      <translation>Schránka není k dispozici</translation>
+        <source>Mailbox unavailable</source>
+        <translation>Schránka není k dispozici</translation>
     </message>
     <message>
-      <source>Mailbox name not allowed</source>
-      <translation>Jméno schránky není povoleno</translation>
+        <source>Mailbox name not allowed</source>
+        <translation>Jméno schránky není povoleno</translation>
     </message>
     <message>
-      <source>Bad command sequence</source>
-      <translation>Špatná sekvence příkazů</translation>
+        <source>Bad command sequence</source>
+        <translation>Špatná sekvence příkazů</translation>
     </message>
     <message>
-      <source>User not local</source>
-      <translation>Uživatel není lokální</translation>
+        <source>User not local</source>
+        <translation>Uživatel není lokální</translation>
     </message>
     <message>
-      <source>Transaction failed</source>
-      <translation>Transakce selhala</translation>
+        <source>Transaction failed</source>
+        <translation>Transakce selhala</translation>
     </message>
     <message>
-      <source>Memory error</source>
-      <translation>Chyba paměti</translation>
+        <source>Memory error</source>
+        <translation>Chyba paměti</translation>
     </message>
     <message>
-      <source>Connection refused</source>
-      <translation>Připojení odmítnuto</translation>
+        <source>Connection refused</source>
+        <translation>Připojení odmítnuto</translation>
     </message>
     <message>
-      <source>Unknown error code</source>
-      <translation>Neznámý chybový kód</translation>
+        <source>Unknown error code</source>
+        <translation>Neznámý chybový kód</translation>
     </message>
     <message>
-      <source>Error sending mail</source>
-      <translation>Zprávu nelze odeslat</translation>
+        <source>Error sending mail</source>
+        <translation>Zprávu nelze odeslat</translation>
     </message>
     <message>
-      <source>Error sending queued mail - breaking</source>
-      <translation>Zprávu z fronty nelze odeslat - přerušení</translation>
+        <source>Error sending queued mail - breaking</source>
+        <translation>Zprávu z fronty nelze odeslat - přerušení</translation>
     </message>
     <message>
-      <source>Starttls not supported</source>
-      <translation>Starttls není podporováno</translation>
+        <source>Starttls not supported</source>
+        <translation>Starttls není podporováno</translation>
     </message>
     <message>
-      <source>&lt;center>%1&lt;/center></source>
-      <translation>&lt;center>%1&lt;/center></translation>
+        <source>&lt;center&gt;%1&lt;/center&gt;</source>
+        <translation>&lt;center&gt;%1&lt;/center&gt;</translation>
     </message>
     <message>
-      <source>Error init SMTP connection: %1</source>
-      <translation>Chyba inicializace SMTP spojení: %1</translation>
+        <source>Error init SMTP connection: %1</source>
+        <translation>Chyba inicializace SMTP spojení: %1</translation>
     </message>
     <message>
-      <source>Error init SMTP tls: %1</source>
-      <translation>Chyba inicializace SMTP tls: %1</translation>
+        <source>Error init SMTP tls: %1</source>
+        <translation>Chyba inicializace SMTP tls: %1</translation>
     </message>
     <message>
-      <source>Login aborted - storing mail to localfolder</source>
-      <translation>Přihlášení přerušeno - ukládání mailu do lokální složky</translation>
+        <source>Login aborted - storing mail to localfolder</source>
+        <translation>Přihlášení přerušeno - ukládání mailu do lokální složky</translation>
     </message>
     <message>
-      <source>Authentification failed</source>
-      <translation>Autentizace selhala</translation>
+        <source>Authentification failed</source>
+        <translation>Autentizace selhala</translation>
     </message>
     <message>
-      <source>Error sending mail: %1</source>
-      <translation>Chyba odesílání mailu: %1</translation>
+        <source>Error sending mail: %1</source>
+        <translation>Chyba odesílání mailu: %1</translation>
     </message>
-  </context>
-  <context>
+</context>
+<context>
     <name>progressMailSend</name>
     <message>
-      <source>%1 of %2 bytes send</source>
-      <translation>Bylo odesláno %1 z %2 bajtů</translation>
+        <source>%1 of %2 bytes send</source>
+        <translation>Bylo odesláno %1 z %2 bajtů</translation>
     </message>
     <message>
-      <source>Sending mail %1 of %2</source>
-      <translation>Odesílání zprávy %1 z %2</translation>
+        <source>Sending mail %1 of %2</source>
+        <translation>Odesílání zprávy %1 z %2</translation>
     </message>
-  </context>
-  <context>
+</context>
+<context>
     <name>progressMailSendUI</name>
     <message>
-      <source>Sending mail</source>
-      <translation>Odesílání zprávy</translation>
+        <source>Sending mail</source>
+        <translation>Odesílání zprávy</translation>
     </message>
     <message>
-      <source>Progress of mail</source>
-      <translation>Průběh zprávy</translation>
+        <source>Progress of mail</source>
+        <translation>Průběh zprávy</translation>
     </message>
-  </context>
+</context>
 </TS>

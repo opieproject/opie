@@ -80,7 +80,7 @@
     </message>
     <message>
         <source>No Receiver spezified</source>
-        <translation>Nav norādīts saņēmējs</translation>
+        <translation type="obsolete">Nav norādīts saņēmējs</translation>
     </message>
     <message>
         <source>Store message</source>
@@ -101,6 +101,10 @@
     <message>
         <source>&lt;center&gt;Attachments will not be stored in &quot;Draft&quot; folder&lt;/center&gt;</source>
         <translation>&lt;center&gt;Piesaistne netiks saglabāt &quot;Melnraksti&quot; mapē&lt;/center&gt;</translation>
+    </message>
+    <message>
+        <source>No Receiver specified</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -367,7 +371,7 @@
         <source>Enter a filter string here.
 Then hit &quot;get newsgroup list&quot; again and only groups starting 
 with that filter will be listet.</source>
-        <translation>Šeit ievadiet atlases kritēriju.
+        <translation type="obsolete">Šeit ievadiet atlases kritēriju.
 Tad vēlreiz nospiediet &quot;saņemt intreškopu sarakstu&quot; un tiks parādītas
 tika kopas ar šo filtru.</translation>
     </message>
@@ -378,6 +382,12 @@ tika kopas ar šo filtru.</translation>
     <message>
         <source>Retrieve the list of groups from server</source>
         <translation>Saņemt no servera  intreškopu sarakstu</translation>
+    </message>
+    <message>
+        <source>Enter a filter string here.
+Then hit &quot;get newsgroup list&quot; again and only groups starting 
+with that filter will be listed.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -534,6 +544,18 @@ tika kopas ar šo filtru.</translation>
     <message>
         <source>Password</source>
         <translation>Parole</translation>
+    </message>
+    <message>
+        <source>ask before downloading large mails</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Large mail size (kb):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> kB</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -726,12 +748,16 @@ tika kopas ar šo filtru.</translation>
         <source>Display image preview</source>
         <translation>Rādīt attēla pirmsskatu</translation>
     </message>
+    <message>
+        <source>E-Mail by %1</source>
+        <translation type="unfinished">E-Pasts no %1</translation>
+    </message>
 </context>
 <context>
     <name>ViewMailBase</name>
     <message>
         <source>E-Mail by %1</source>
-        <translation>E-Pasts no %1</translation>
+        <translation type="obsolete">E-Pasts no %1</translation>
     </message>
     <message>
         <source>Mail</source>
@@ -768,6 +794,10 @@ tika kopas ar šo filtru.</translation>
     <message>
         <source>Size</source>
         <translation>Izmērs</translation>
+    </message>
+    <message>
+        <source>E-Mail view</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

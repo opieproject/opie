@@ -156,11 +156,11 @@
 <context>
     <name>CableNetNode</name>
     <message>
-        <source>Cable Connection</source>
+        <source>&lt;p&gt;Sets up a wired serial or parallel.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;p&gt;Sets up a wired serial or parallel.&lt;/p&gt;</source>
+        <source>Cable connection</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -9,6 +9,29 @@
         <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished">未分類的</translation>
+    </message>
+</context>
+<context>
+    <name>NewTaskDlg</name>
+    <message>
+        <source>New Task</source>
+        <translation type="unfinished">新增待辦事項</translation>
+    </message>
+    <message>
+        <source>Blank task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Using template:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OTaskEditor</name>
@@ -34,6 +57,17 @@
     </message>
 </context>
 <context>
+    <name>Opie</name>
+    <message>
+        <source>Todo List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <source>Enter Task</source>
@@ -51,48 +85,32 @@
         <source>loud</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Opie Todolist</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>QWidget</name>
     <message>
         <source>New from template</source>
-        <translation type="unfinished">利用樣板建立新事項</translation>
+        <translation type="obsolete">利用樣板建立新事項</translation>
     </message>
     <message>
         <source>New Task</source>
-        <translation type="unfinished">新增待辦事項</translation>
-    </message>
-    <message>
-        <source>Click here to create a new task.</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">新增待辦事項</translation>
     </message>
     <message>
         <source>Edit Task</source>
-        <translation type="unfinished">編輯待辦事項</translation>
-    </message>
-    <message>
-        <source>Click here to modify the current task.</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">編輯待辦事項</translation>
     </message>
     <message>
         <source>View Task</source>
-        <translation type="unfinished">檢視待辦事項</translation>
+        <translation type="obsolete">檢視待辦事項</translation>
     </message>
     <message>
         <source>Delete...</source>
-        <translation type="unfinished">刪除...</translation>
-    </message>
-    <message>
-        <source>Click here to remove the current task.</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">刪除...</translation>
     </message>
     <message>
         <source>Delete all...</source>
-        <translation type="unfinished">刪除全部....</translation>
+        <translation type="obsolete">刪除全部....</translation>
     </message>
     <message>
         <source>Delete completed</source>
@@ -100,19 +118,15 @@
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished">複製事項</translation>
+        <translation type="obsolete">複製事項</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation type="unfinished">傳送資料</translation>
-    </message>
-    <message>
-        <source>Click here to send the current task to another device.</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">傳送資料</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation type="unfinished">搜尋</translation>
+        <translation type="obsolete">搜尋</translation>
     </message>
     <message>
         <source>Show completed tasks</source>
@@ -132,15 +146,15 @@
     </message>
     <message>
         <source>Data</source>
-        <translation type="unfinished">資料管理</translation>
+        <translation type="obsolete">資料管理</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation type="unfinished">分類目錄</translation>
+        <translation type="obsolete">分類目錄</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">設定選項</translation>
+        <translation type="obsolete">設定選項</translation>
     </message>
     <message>
         <source>QuickEdit</source>
@@ -158,11 +172,11 @@ The list displays the following information:
     </message>
     <message>
         <source>All Categories</source>
-        <translation type="unfinished">全部目錄</translation>
+        <translation type="obsolete">全部目錄</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished">未分類的</translation>
+        <translation type="obsolete">未分類的</translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -215,7 +229,7 @@ Quit Anyway?</source>
     </message>
     <message>
         <source>Configure Templates</source>
-        <translation type="unfinished">樣板管理</translation>
+        <translation type="obsolete">樣板管理</translation>
     </message>
     <message>
         <source>Template Editor</source>

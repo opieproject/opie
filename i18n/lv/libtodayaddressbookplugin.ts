@@ -3,7 +3,7 @@
     <name>AddressBookPluginConfig</name>
     <message>
         <source>To activate settings: Restart application !</source>
-        <translation>Lai aktivizētu uzstādījumus: Pārstartējiet aplikāciju !</translation>
+        <translation type="obsolete">Lai aktivizētu uzstādījumus: Pārstartējiet aplikāciju !</translation>
     </message>
     <message>
         <source>Enable/Disable Views</source>
@@ -35,11 +35,11 @@
     </message>
     <message>
         <source>Clip line after X chars: </source>
-        <translation>Klip līnija pēc X simbola:</translation>
+        <translation type="obsolete">Klip līnija pēc X simbola:</translation>
     </message>
     <message>
         <source>After how many chars should be the info about the task be cut off</source>
-        <translation>Pēc cik simboliem uzdevuma info ir jāapgriež</translation>
+        <translation type="obsolete">Pēc cik simboliem uzdevuma info ir jāapgriež</translation>
     </message>
     <message>
         <source>Days look ahead: </source>

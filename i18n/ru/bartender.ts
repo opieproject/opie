@@ -90,7 +90,7 @@
     </message>
     <message>
         <source>Find by Alcohol</source>
-        <translation>Искать по уровню алкоголя</translation>
+        <translation type="obsolete">Искать по уровню алкоголя</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -98,7 +98,7 @@
     </message>
     <message>
         <source>edit</source>
-        <translation>правка</translation>
+        <translation type="obsolete">правка</translation>
     </message>
     <message>
         <source>New</source>
@@ -138,7 +138,7 @@
     </message>
     <message>
         <source>Alcohol</source>
-        <translation>Уровень алкоголя</translation>
+        <translation type="obsolete">Уровень алкоголя</translation>
     </message>
     <message>
         <source>Search</source>
@@ -149,6 +149,23 @@
 </source>
         <translation>Извините, ничего не найдено по
 </translation>
+    </message>
+    <message>
+        <source>Find by Ingredient</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Drink</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to write to drink database!
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ingredient</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -46,10 +46,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Case sensitiv</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Use wildcards</source>
         <translation type="unfinished"></translation>
     </message>
@@ -65,6 +61,10 @@
         <source></source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Case sensitive</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OListView</name>
@@ -75,18 +75,6 @@
 </context>
 <context>
     <name>QObject</name>
-    <message>
-        <source>show completed tasks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>show past events</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>search in dates</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>show</source>
         <translation type="unfinished"></translation>
@@ -120,11 +108,23 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>search content</source>
+        <source>searching %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>searching %1</source>
+        <source>Show completed tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show past events</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search in dates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search content</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

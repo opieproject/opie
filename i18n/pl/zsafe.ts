@@ -476,7 +476,7 @@ pokazuje listę katalogów i plików</translation>
 %1
 
 ZSafe will now exit.</source>
-        <translation>Nie można utworzyć katalogu
+        <translation type="obsolete">Nie można utworzyć katalogu
 %1
 
 ZSafe zostanie zamknięty.</translation>
@@ -559,7 +559,7 @@ ZSafe zostanie zamknięty.</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="obsolete">Ändern</translation>
+        <translation type="unfinished">Ändern</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -607,7 +607,7 @@ ZSafe zostanie zamknięty.</translation>
     </message>
     <message>
         <source>Edit Entry</source>
-        <translation>Edytuj wpis</translation>
+        <translation type="obsolete">Edytuj wpis</translation>
     </message>
     <message>
         <source>Username</source>
@@ -619,7 +619,7 @@ ZSafe zostanie zamknięty.</translation>
     </message>
     <message>
         <source>New Entry</source>
-        <translation>Nowy wpis</translation>
+        <translation type="obsolete">Nowy wpis</translation>
     </message>
     <message>
         <source>Entry name must be different
@@ -747,7 +747,7 @@ password</source>
     </message>
     <message>
         <source>Zaurus Password Manager&lt;br&gt;</source>
-        <translation>Menedżer haseł&lt;br&gt;</translation>
+        <translation type="obsolete">Menedżer haseł&lt;br&gt;</translation>
     </message>
     <message>
         <source>ZSafe version 2.0.1ern&lt;br&gt;</source>
@@ -755,11 +755,11 @@ password</source>
     </message>
     <message>
         <source>by Carsten Schneider&lt;br&gt;</source>
-        <translation>autor: Carsten Schneider&lt;br&gt;</translation>
+        <translation type="obsolete">autor: Carsten Schneider&lt;br&gt;</translation>
     </message>
     <message>
         <source>Translations by Robert Ernst&lt;br&gt;</source>
-        <translation>Tłumaczenia Robert Ernst&lt;br&gt;</translation>
+        <translation type="obsolete">Tłumaczenia Robert Ernst&lt;br&gt;</translation>
     </message>
     <message>
         <source>&amp;New document</source>
@@ -775,7 +775,7 @@ password</source>
     </message>
     <message>
         <source>Create new ZSafe document</source>
-        <translation>Twórz nowy dokument ZSafe</translation>
+        <translation type="obsolete">Twórz nowy dokument ZSafe</translation>
     </message>
     <message>
         <source>Open ZSafe document</source>
@@ -783,14 +783,14 @@ password</source>
     </message>
     <message>
         <source>Save ZSafe document as..</source>
-        <translation>Zapisz dokument ZSafe jako..</translation>
+        <translation type="obsolete">Zapisz dokument ZSafe jako..</translation>
     </message>
     <message>
         <source>Can&apos;t create directory
 .../Documents/application
 
 ZSafe will now exit.</source>
-        <translation>Nie można utworzyć katalogu
+        <translation type="obsolete">Nie można utworzyć katalogu
 .../Documents/application
 
 ZSafe zostanie zamknięty.</translation>
@@ -800,7 +800,7 @@ ZSafe zostanie zamknięty.</translation>
 ...//Documents/application/zsafe
 
 ZSafe will now exit.</source>
-        <translation>Nie można utworzyć katalogu
+        <translation type="obsolete">Nie można utworzyć katalogu
 .../Documents/application/zsafe
 
 ZSafe zostanie zamknięty.</translation>
@@ -867,11 +867,43 @@ dokumentu.</translation>
     </message>
     <message>
         <source>ZSafe version 2.1.2-jv01b&lt;br&gt;</source>
-        <translation>ZSafe wersja 2.1.2-jv01b&lt;br&gt;</translation>
+        <translation type="obsolete">ZSafe wersja 2.1.2-jv01b&lt;br&gt;</translation>
     </message>
     <message>
         <source>ZSafe version 2.1.2&lt;br&gt;</source>
-        <translation>ZSafe wersja 2.1.2&lt;br&gt;</translation>
+        <translation type="obsolete">ZSafe wersja 2.1.2&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;Can&apos;t create directory %1&lt;/P&gt;&lt;P&gt;ZSafe will now exit.&lt;/P&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ZSafe: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;No document defined. You have to create a new document&lt;/P&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;You must create a new document first. Ok to create?&lt;/P&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;body&gt;&lt;div align=center&gt;&lt;b&gt;Zaurus Password Manager&lt;br&gt;ZSafe version 2.1.2&lt;br&gt;&lt;/b&gt;by Carsten Schneider&lt;br&gt;zcarsten@gmx.net&lt;br&gt;http://z-soft.z-portal.info/zsafe&lt;br&gt;Translations by Robert Ernst&lt;br&gt;robert.ernst@linux-solutions.at&lt;br&gt;&lt;br&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy to Clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -14,7 +14,7 @@
     <name>AboutDialog</name>
     <message>
         <source>About</source>
-        <translation>Over...</translation>
+        <translation type="obsolete">Over...</translation>
     </message>
     <message>
         <source>&lt;center&gt;&lt;b&gt;The Open Palmtop Integrated Environment V1.1.2&lt;/b&gt;&lt;/center&gt;</source>
@@ -42,7 +42,7 @@ Ga naar &lt;a href=&quot;http://opie.handhelds.org/&quot;&gt;http://opie.handhel
     </message>
     <message>
         <source>Authors</source>
-        <translation>Schrijvers</translation>
+        <translation type="obsolete">Schrijvers</translation>
     </message>
     <message>
         <source>&lt;p&gt;
@@ -68,7 +68,7 @@ Ga naar &lt;a href=&quot;http://opie.handhelds.org/&quot;&gt;http://opie.handhel
     </message>
     <message>
         <source>Report</source>
-        <translation>Rapporteer</translation>
+        <translation type="obsolete">Rapporteer</translation>
     </message>
     <message>
         <source>&lt;p&gt;Software can always be improved, and the Opie Team is ready to do so. However, you - the user - must tell us when something does not work as expected or could be done better.&lt;/p&gt;
@@ -80,7 +80,7 @@ Ga naar &lt;a href=&quot;http://opie.handhelds.org/&quot;&gt;http://opie.handhel
     </message>
     <message>
         <source>Join</source>
-        <translation>Meedoen</translation>
+        <translation type="obsolete">Meedoen</translation>
     </message>
     <message>
         <source>&lt;p&gt;You don&apos;t have to be a software developer to be a member of the Opie Team. You can join the national teams that translate program interfaces. You can provide graphics, themes, sounds and improved documentation. You decide!&lt;/p&gt;
@@ -95,6 +95,21 @@ Ga naar &lt;a href=&quot;http://opie.handhelds.org/&quot;&gt;http://opie.handhel
         <translation type="obsolete">&lt;center&gt;&lt;b&gt;The Open Palmtop Integrated Environment V1.1.3&lt;/b&gt;&lt;/center&gt;</translation>
     </message>
     <message>
+        <source>&lt;center&gt;&lt;b&gt;The Open Palmtop Integrated Environment V1.1.6&lt;/b&gt;&lt;/center&gt;</source>
+        <translation type="obsolete">&lt;center&gt;&lt;b&gt;The Open Palmtop Integrated Environment V1.1.6&lt;/b&gt;&lt;/center&gt;</translation>
+    </message>
+</context>
+<context>
+    <name>AboutWidget</name>
+    <message>
+        <source>About</source>
+        <translation type="unfinished">Over...</translation>
+    </message>
+    <message>
+        <source>&lt;center&gt;&lt;b&gt;The Open Palmtop Integrated Environment V1.1.8&lt;/b&gt;&lt;/center&gt;</source>
+        <translation type="unfinished">&lt;center&gt;&lt;b&gt;The Open Palmtop Integrated Environment V1.1.8&lt;/b&gt;&lt;/center&gt;</translation>
+    </message>
+    <message>
         <source>&lt;p&gt;
 The &lt;b&gt;Open Palmtop Integrated Environment&lt;/b&gt; is written and maintained by the Opie Team, a world-wide network of software engineers committed to free software development.
 &lt;/p&gt;
@@ -107,20 +122,8 @@ Visit &lt;i&gt;http://opie.handhelds.org&lt;/i&gt; for more information on the O
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;p&gt;Software can always be improved, and the Opie Team is ready to do so. However, you - the user - must tell us when something does not work as expected or could be done better.&lt;/p&gt;
-&lt;p&gt;The Open Palmtop Integrated Environment has a bug tracking system. Visit &lt;i&gt;http://opie.handhelds.org/&lt;/i&gt; to report bugs.&lt;/p&gt;
-&lt;p&gt;If you have a suggestion for improvement then you are welcome to use the bug tracking system to register your wish. Make sure you use the severity called &quot;Feature Wish&quot;.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;You don&apos;t have to be a software developer to be a member of the Opie Team. You can join the national teams that translate program interfaces. You can provide graphics, themes, sounds and improved documentation. You decide!&lt;/p&gt;
-&lt;p&gt;Visit &lt;i&gt;http://opie.handhelds.org/&lt;/i&gt; for information on some projects in which you can participate.&lt;/p&gt;
-&lt;p&gt;If you need more information or documentation, then a visit to &lt;i&gt;http://opie.handhelds.org/&lt;/i&gt; will provide you with what you need.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;center&gt;&lt;b&gt;The Open Palmtop Integrated Environment V1.1.6&lt;/b&gt;&lt;/center&gt;</source>
-        <translation type="unfinished">&lt;center&gt;&lt;b&gt;The Open Palmtop Integrated Environment V1.1.6&lt;/b&gt;&lt;/center&gt;</translation>
+        <source>Authors</source>
+        <translation type="unfinished">Schrijvers</translation>
     </message>
     <message>
         <source>&lt;p&gt;
@@ -134,6 +137,26 @@ Visit &lt;i&gt;http://opie.handhelds.org&lt;/i&gt; for more information on the O
 &lt;b&gt;Andreas &apos;ar&apos; Richter&lt;/b&gt; (ar@handhelds.org)&lt;br/&gt;
 &lt;b&gt;Dan &apos;drw&apos; Williams&lt;/b&gt; (drw@handhelds.org)&lt;/tt&gt;&lt;br/&gt;
 &lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Report</source>
+        <translation type="unfinished">Rapporteer</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Software can always be improved, and the Opie Team is ready to do so. However, you - the user - must tell us when something does not work as expected or could be done better.&lt;/p&gt;
+&lt;p&gt;The Open Palmtop Integrated Environment has a bug tracking system. Visit &lt;i&gt;http://opie.handhelds.org/&lt;/i&gt; to report bugs.&lt;/p&gt;
+&lt;p&gt;If you have a suggestion for improvement then you are welcome to use the bug tracking system to register your wish. Make sure you use the severity called &quot;Feature Wish&quot;.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Join</source>
+        <translation type="unfinished">Meedoen</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;You don&apos;t have to be a software developer to be a member of the Opie Team. You can join the national teams that translate program interfaces. You can provide graphics, themes, sounds and improved documentation. You decide!&lt;/p&gt;
+&lt;p&gt;Visit &lt;i&gt;http://opie.handhelds.org/&lt;/i&gt; for information on some projects in which you can participate.&lt;/p&gt;
+&lt;p&gt;If you need more information or documentation, then a visit to &lt;i&gt;http://opie.handhelds.org/&lt;/i&gt; will provide you with what you need.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

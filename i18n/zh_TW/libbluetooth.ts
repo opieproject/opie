@@ -51,15 +51,23 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Description</source>
+        <source>Selected devices with gprs capability</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Start automatically</source>
+        <source>Address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Confirm before start</source>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Channel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Addresses</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -71,6 +79,13 @@
     </message>
     <message>
         <source>&lt;p&gt;Sets up a bluetooth link using the bluetooth serial profile.&lt;/p&gt;&lt;p&gt;Use this to connect to a GSM.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>BluetoothRFCOMMRun</name>
+    <message>
+        <source>Select device to connect to</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -289,7 +289,7 @@ http://www.trolltech.com
     </message>
     <message>
         <source></source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Options</source>
@@ -312,6 +312,10 @@ http://www.trolltech.com
     <message>
         <source>Close</source>
         <translation>Закрыть</translation>
+    </message>
+    <message>
+        <source>   </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -4,11 +4,11 @@
     <name>QObject</name>
     <message>
         <source>KeyList::addKey() Cannot make default value for type %1, Key not added.</source>
-        <translation>KeyList::addKey() Impossibile creare valore predefinito per il tipo %1, Chiave non aggiunta.</translation>
+        <translation type="obsolete">KeyList::addKey() Impossibile creare valore predefinito per il tipo %1, Chiave non aggiunta.</translation>
     </message>
     <message>
         <source>DataElem::setField(%1, %2) No valid type found</source>
-        <translation>DataElem::setField(%1, %2) Tipo valido non trovato</translation>
+        <translation type="obsolete">DataElem::setField(%1, %2) Tipo valido non trovato</translation>
     </message>
 </context>
 <context>

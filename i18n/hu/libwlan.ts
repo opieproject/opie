@@ -1,8 +1,5 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>AWLan</name>
-</context>
-<context>
     <name>WLAN</name>
     <message>
         <source>Wireless Configuration</source>
@@ -100,12 +97,6 @@
         <source>&amp;Reject</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>WLanGUI</name>
-</context>
-<context>
-    <name>WLanNetNode</name>
 </context>
 <context>
     <name>WlanInfo</name>

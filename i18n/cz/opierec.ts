@@ -22,7 +22,7 @@
     </message>
     <message>
         <source>Rec</source>
-        <translation>Nahrát</translation>
+        <translation type="obsolete">Nahrát</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -38,11 +38,11 @@
     </message>
     <message>
         <source>Location</source>
-        <translation>Lokalita</translation>
+        <translation type="obsolete">Lokalita</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation>Datum</translation>
+        <translation type="obsolete">Datum</translation>
     </message>
     <message>
         <source>Files</source>
@@ -78,7 +78,7 @@
     </message>
     <message>
         <source>Stereo Channels</source>
-        <translation>Stereo kanály</translation>
+        <translation type="obsolete">Stereo kanály</translation>
     </message>
     <message>
         <source>In</source>
@@ -102,7 +102,7 @@
     </message>
     <message>
         <source>Stop</source>
-        <translation>Stop</translation>
+        <translation type="obsolete">Stop</translation>
     </message>
     <message>
         <source>Low Disk Space</source>
@@ -118,7 +118,7 @@ nelze rozpoznat kartu</translation>
     </message>
     <message>
         <source> seconds</source>
-        <translation>sekund</translation>
+        <translation type="obsolete">sekund</translation>
     </message>
     <message>
         <source>Do you really want to &lt;font size=+2&gt;&lt;B&gt;DELETE&lt;/B&gt;&lt;/font&gt;
@@ -179,6 +179,14 @@ vybraný soubor?</translation>
     <message>
         <source>Ok</source>
         <translation>Ok</translation>
+    </message>
+    <message>
+        <source>Del</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stereo</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

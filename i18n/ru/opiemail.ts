@@ -80,7 +80,7 @@
     </message>
     <message>
         <source>No Receiver spezified</source>
-        <translation>Не задан адресат</translation>
+        <translation type="obsolete">Не задан адресат</translation>
     </message>
     <message>
         <source>Store message</source>
@@ -101,6 +101,10 @@
     <message>
         <source>&lt;center&gt;Attachments will not be stored in &quot;Draft&quot; folder&lt;/center&gt;</source>
         <translation>&lt;center&gt;Вложение не будут сохранены в папке &quot;Черновики&quot;&lt;/center&gt;</translation>
+    </message>
+    <message>
+        <source>No Receiver specified</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -367,7 +371,7 @@
         <source>Enter a filter string here.
 Then hit &quot;get newsgroup list&quot; again and only groups starting 
 with that filter will be listet.</source>
-        <translation>Введите строку фильтра.
+        <translation type="obsolete">Введите строку фильтра.
 Потом нажмите &quot;получить список групп новостей&quot; снова и только группы,
 начинающиеся с этой строки, будут показаны.</translation>
     </message>
@@ -378,6 +382,12 @@ with that filter will be listet.</source>
     <message>
         <source>Retrieve the list of groups from server</source>
         <translation>Загрузить список групп новостей с сервера</translation>
+    </message>
+    <message>
+        <source>Enter a filter string here.
+Then hit &quot;get newsgroup list&quot; again and only groups starting 
+with that filter will be listed.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -534,6 +544,18 @@ with that filter will be listet.</source>
     <message>
         <source>Password</source>
         <translation>Пароль</translation>
+    </message>
+    <message>
+        <source>ask before downloading large mails</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Large mail size (kb):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> kB</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -726,12 +748,16 @@ with that filter will be listet.</source>
         <source>Display image preview</source>
         <translation>Показать предв. просмотр изображения</translation>
     </message>
+    <message>
+        <source>E-Mail by %1</source>
+        <translation type="unfinished">E-Mail от %1</translation>
+    </message>
 </context>
 <context>
     <name>ViewMailBase</name>
     <message>
         <source>E-Mail by %1</source>
-        <translation>E-Mail от %1</translation>
+        <translation type="obsolete">E-Mail от %1</translation>
     </message>
     <message>
         <source>Mail</source>
@@ -768,6 +794,10 @@ with that filter will be listet.</source>
     <message>
         <source>Size</source>
         <translation>Размер</translation>
+    </message>
+    <message>
+        <source>E-Mail view</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

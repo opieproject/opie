@@ -124,7 +124,7 @@ Memory is categorized as follows:
     </message>
     <message>
         <source>2 Mb,4 Mb,6 Mb,8 Mb</source>
-        <translation>2, 4, 6, 8 Мбайт</translation>
+        <translation type="obsolete">2, 4, 6, 8 Мбайт</translation>
     </message>
     <message>
         <source>Failed to detach swapfile.</source>
@@ -161,6 +161,10 @@ Memory is categorized as follows:
     <message>
         <source></source>
         <translation></translation>
+    </message>
+    <message>
+        <source>2 Mb,4 Mb,6 Mb,8 Mb,16 Mb,32 Mb,64 Mb</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

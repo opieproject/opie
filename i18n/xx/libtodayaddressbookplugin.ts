@@ -11,11 +11,11 @@
     </message>
     <message>
         <source>Clip line after X chars: </source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>After how many chars should be the info about the task be cut off</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Days look ahead: </source>
@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>To activate settings: Restart application !</source>
-        <translation type="unfinished">FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Set Headline Color: </source>

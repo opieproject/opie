@@ -14,6 +14,29 @@
         <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
         <translation>&lt;h1&gt;Alarm um %1&gt;&lt;/h1&gt;&lt;br&gt;</translation>
     </message>
+    <message>
+        <source>All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished">nicht eingeteilt</translation>
+    </message>
+</context>
+<context>
+    <name>NewTaskDlg</name>
+    <message>
+        <source>New Task</source>
+        <translation type="unfinished">Neue Aufgabe</translation>
+    </message>
+    <message>
+        <source>Blank task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Using template:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OTaskEditor</name>
@@ -39,6 +62,17 @@
     </message>
 </context>
 <context>
+    <name>Opie</name>
+    <message>
+        <source>Todo List</source>
+        <translation type="unfinished">Aufgabenliste</translation>
+    </message>
+    <message>
+        <source>Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <source>Enter Task</source>
@@ -58,46 +92,46 @@
     </message>
     <message>
         <source>Opie Todolist</source>
-        <translation>Opie Aufgaben</translation>
+        <translation type="obsolete">Opie Aufgaben</translation>
     </message>
 </context>
 <context>
     <name>QWidget</name>
     <message>
         <source>New from template</source>
-        <translation>Neu von Vorlage</translation>
+        <translation type="obsolete">Neu von Vorlage</translation>
     </message>
     <message>
         <source>New Task</source>
-        <translation>Neue Aufgabe</translation>
+        <translation type="obsolete">Neue Aufgabe</translation>
     </message>
     <message>
         <source>Click here to create a new task.</source>
-        <translation>Hier klicken, um eine neue Aufgabe zu erzeugen.</translation>
+        <translation type="obsolete">Hier klicken, um eine neue Aufgabe zu erzeugen.</translation>
     </message>
     <message>
         <source>Edit Task</source>
-        <translation>Aufgabe editieren</translation>
+        <translation type="obsolete">Aufgabe editieren</translation>
     </message>
     <message>
         <source>Click here to modify the current task.</source>
-        <translation>Hier klicken, um die aktuelle Aufgabe zu ändern.</translation>
+        <translation type="obsolete">Hier klicken, um die aktuelle Aufgabe zu ändern.</translation>
     </message>
     <message>
         <source>View Task</source>
-        <translation>Aufgabe ansehen</translation>
+        <translation type="obsolete">Aufgabe ansehen</translation>
     </message>
     <message>
         <source>Delete...</source>
-        <translation>Löschen...</translation>
+        <translation type="obsolete">Löschen...</translation>
     </message>
     <message>
         <source>Click here to remove the current task.</source>
-        <translation>Hier klicken, um die aktuelle Aufgabe zu löschen.</translation>
+        <translation type="obsolete">Hier klicken, um die aktuelle Aufgabe zu löschen.</translation>
     </message>
     <message>
         <source>Delete all...</source>
-        <translation>Alles löschen...</translation>
+        <translation type="obsolete">Alles löschen...</translation>
     </message>
     <message>
         <source>Delete completed</source>
@@ -105,15 +139,15 @@
     </message>
     <message>
         <source>Beam</source>
-        <translation>Senden</translation>
+        <translation type="obsolete">Senden</translation>
     </message>
     <message>
         <source>Click here to send the current task to another device.</source>
-        <translation>Hier klicken, um die aktuelle Aufgabe an ein anderes Gerät zu senden.</translation>
+        <translation type="obsolete">Hier klicken, um die aktuelle Aufgabe an ein anderes Gerät zu senden.</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>Suchen</translation>
+        <translation type="obsolete">Suchen</translation>
     </message>
     <message>
         <source>Show completed tasks</source>
@@ -133,15 +167,15 @@
     </message>
     <message>
         <source>Data</source>
-        <translation>Datei</translation>
+        <translation type="obsolete">Datei</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation>Kategorie</translation>
+        <translation type="obsolete">Kategorie</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation>Optionen</translation>
+        <translation type="obsolete">Optionen</translation>
     </message>
     <message>
         <source>QuickEdit</source>
@@ -165,7 +199,7 @@ Die Liste zeigt folgende Informationen:
     </message>
     <message>
         <source>All Categories</source>
-        <translation>Alle Kategorien</translation>
+        <translation type="obsolete">Alle Kategorien</translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -203,7 +237,7 @@ Es wird gerade synchronisiert</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>nicht eingeteilt</translation>
+        <translation type="obsolete">nicht eingeteilt</translation>
     </message>
     <message>
         <source>&lt;P&gt;%1 new tasks arrived.&lt;p&gt;Would you like to add them to your Todolist?</source>
@@ -215,7 +249,7 @@ Es wird gerade synchronisiert</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation>Duplizieren</translation>
+        <translation type="obsolete">Duplizieren</translation>
     </message>
     <message>
         <source>C.</source>
@@ -235,7 +269,7 @@ Es wird gerade synchronisiert</translation>
     </message>
     <message>
         <source>Configure Templates</source>
-        <translation>Vorlagen konfigurieren</translation>
+        <translation type="obsolete">Vorlagen konfigurieren</translation>
     </message>
     <message>
         <source>Priority:</source>

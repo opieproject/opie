@@ -23,7 +23,7 @@
     </message>
     <message>
         <source>Disabled</source>
-        <translation>Запрещен</translation>
+        <translation type="obsolete">Запрещен</translation>
     </message>
     <message>
         <source>Trigger VPN</source>
@@ -111,11 +111,11 @@
     </message>
     <message>
         <source>Transmitting</source>
-        <translation>Исходящий</translation>
+        <translation type="obsolete">Исходящий</translation>
     </message>
     <message>
         <source>Others</source>
-        <translation>Прочие</translation>
+        <translation type="obsolete">Прочие</translation>
     </message>
     <message>
         <source>Collisions</source>
@@ -124,6 +124,30 @@
     <message>
         <source>Live feed </source>
         <translation>Прямая передача</translation>
+    </message>
+    <message>
+        <source>Enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pkt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ODO</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sending</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Miscellaneous</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset ODO</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -6,10 +6,6 @@
         <translation>Polnim</translation>
     </message>
     <message>
-        <source>Percentage battery remaining</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Battery status: </source>
         <translation>Status baterije:</translation>
     </message>
@@ -47,7 +43,7 @@
     </message>
     <message>
         <source>Battery time remaining</source>
-        <translation>Čas baterije do konca</translation>
+        <translation type="obsolete">Čas baterije do konca</translation>
     </message>
     <message>
         <source>Close</source>
@@ -71,11 +67,11 @@
     </message>
     <message>
         <source>Percentage battery remaining: </source>
-        <translation>Delež ostanka baterije:</translation>
+        <translation type="obsolete">Delež ostanka baterije:</translation>
     </message>
     <message>
         <source>Battery time remaining: </source>
-        <translation>Preostali čas baterije:</translation>
+        <translation type="obsolete">Preostali čas baterije:</translation>
     </message>
     <message>
         <source>No jacket with battery inserted</source>
@@ -86,11 +82,24 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Ipaq  </source>
+        <source>Jacket  </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Jacket  </source>
+        <source>Remaining Power: %1%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remaining Time: %1m %2s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remaing Power: %1 %2
+Remaining Time: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ipaq  %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

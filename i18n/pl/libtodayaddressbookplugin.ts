@@ -11,11 +11,11 @@
     </message>
     <message>
         <source>Clip line after X chars: </source>
-        <translation>Ogranicz linię do X znaków:</translation>
+        <translation type="obsolete">Ogranicz linię do X znaków:</translation>
     </message>
     <message>
         <source>After how many chars should be the info about the task be cut off</source>
-        <translation>Po ilu znakach powinna być obcięta informacja o zadaniu</translation>
+        <translation type="obsolete">Po ilu znakach powinna być obcięta informacja o zadaniu</translation>
     </message>
     <message>
         <source>Days look ahead: </source>
@@ -61,7 +61,7 @@ jeśli bliżej niż</translation>
     </message>
     <message>
         <source>To activate settings: Restart application !</source>
-        <translation>By uaktywnić ustawienia: Uruchom ponownie aplikację!</translation>
+        <translation type="obsolete">By uaktywnić ustawienia: Uruchom ponownie aplikację!</translation>
     </message>
     <message>
         <source>Enable/Disable Views</source>

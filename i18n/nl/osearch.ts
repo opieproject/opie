@@ -35,7 +35,7 @@
     </message>
     <message>
         <source>Case sensitiv</source>
-        <translation>Hoofdlettergevoelig</translation>
+        <translation type="obsolete">Hoofdlettergevoelig</translation>
     </message>
     <message>
         <source>Use wildcards</source>
@@ -85,6 +85,10 @@
         <source></source>
         <translation></translation>
     </message>
+    <message>
+        <source>Case sensitive</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OListView</name>
@@ -117,15 +121,15 @@
     </message>
     <message>
         <source>show completed tasks</source>
-        <translation>laat afgemaakte taken zien</translation>
+        <translation type="obsolete">laat afgemaakte taken zien</translation>
     </message>
     <message>
         <source>show past events</source>
-        <translation>laat vroegere gebeurtenissen zien</translation>
+        <translation type="obsolete">laat vroegere gebeurtenissen zien</translation>
     </message>
     <message>
         <source>search in dates</source>
-        <translation>zoek in data</translation>
+        <translation type="obsolete">zoek in data</translation>
     </message>
     <message>
         <source>File: </source>
@@ -141,11 +145,27 @@
     </message>
     <message>
         <source>search content</source>
-        <translation>zoek inhoud</translation>
+        <translation type="obsolete">zoek inhoud</translation>
     </message>
     <message>
         <source>searching %1</source>
         <translation>zoek naar %1</translation>
+    </message>
+    <message>
+        <source>Show completed tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show past events</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search in dates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search content</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>CTCP</source>
-        <translation>CTCP</translation>
+        <translation type="obsolete">CTCP</translation>
     </message>
     <message>
         <source>Query</source>
@@ -58,6 +58,21 @@
     </message>
 </context>
 <context>
+    <name>IRCHistoryLineEdit</name>
+    <message>
+        <source>Next Tab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Previous Tab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close Tab</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>IRCMessageParser</name>
     <message>
         <source>Nonexistant channel join - desynchronized?</source>
@@ -89,7 +104,7 @@
     </message>
     <message>
         <source>Nickname change of an unknown person</source>
-        <translation>Alteração de alcunha de um utilizador desconhecido</translation>
+        <translation type="obsolete">Alteração de alcunha de um utilizador desconhecido</translation>
     </message>
     <message>
         <source>Unknown person quit - desynchronized?</source>
@@ -109,7 +124,7 @@
     </message>
     <message>
         <source>Received a CTCP VERSION from </source>
-        <translation>Recebido um VERSÃO CTCP  de</translation>
+        <translation type="obsolete">Recebido um VERSÃO CTCP  de</translation>
     </message>
     <message>
         <source>CTCP ACTION with unknown person - Desynchronized?</source>
@@ -209,15 +224,112 @@
     </message>
     <message>
         <source>You are now known as %1</source>
-        <translation>A sua alcunha mudou para %1</translation>
+        <translation type="obsolete">A sua alcunha mudou para %1</translation>
     </message>
     <message>
         <source>%1 is now known as %2</source>
-        <translation>%1 mudou a alcunha para %2</translation>
+        <translation type="obsolete">%1 mudou a alcunha para %2</translation>
     </message>
     <message>
         <source>%1 has quit (%2)</source>
         <translation>%1 saíu (%2)</translation>
+    </message>
+    <message>
+        <source>Server %1 version %2 supports usermodes &apos;%3&apos; and channelmodes &apos;%4&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There are %1 operators connected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There are %1 unknown connection(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There are %1 channels formed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please wait a while and try again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Whois %1 (%2@%3)
+Real name: %4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 is using server %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 is on channels: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Names for %1: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time on server %1 is %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Channel or nick %1 doesn&apos;t exists</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There is no history information for %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown command: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t change nick to %1: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You&apos;re not on channel %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>[%1] Operation not permitted, you don&apos;t have enough channel privileges</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connected to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 has been idle for %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 signed on %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CTCP PING with unknown person - Desynchronized?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CTCP PING with unknown channel - Desynchronized?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CTCP PING with bad recipient</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Received a CTCP VERSION request from </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Malformed DCC request from </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -315,7 +427,7 @@
     </message>
     <message>
         <source>Port required</source>
-        <translation>É necessária uma porta</translation>
+        <translation type="obsolete">É necessária uma porta</translation>
     </message>
     <message>
         <source>Nickname required</source>
@@ -323,7 +435,7 @@
     </message>
     <message>
         <source>Realname required</source>
-        <translation>É necessário um nome</translation>
+        <translation type="obsolete">É necessário um nome</translation>
     </message>
     <message>
         <source>The channel list needs to contain a
@@ -377,7 +489,7 @@ nomes começam por &quot;#&quot; ou &quot;+&quot;</translation>
     <name>IRCServerTab</name>
     <message>
         <source>Connection to</source>
-        <translation>Ligação a</translation>
+        <translation type="obsolete">Ligação a</translation>
     </message>
     <message>
         <source>Server messages</source>
@@ -386,6 +498,25 @@ nomes começam por &quot;#&quot; ou &quot;+&quot;</translation>
     <message>
         <source>Type commands here. A list of available commands can be found inside the OpieIRC help</source>
         <translation>Escreva comandos aqui. A lista de comandos está disponível na ajuda do OpieIRC</translation>
+    </message>
+    <message>
+        <source>Connecting to</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>IRCSession</name>
+    <message>
+        <source>You are now known as %1</source>
+        <translation type="unfinished">A sua alcunha mudou para %1</translation>
+    </message>
+    <message>
+        <source>Nickname change of an unknown person</source>
+        <translation type="unfinished">Alteração de alcunha de um utilizador desconhecido</translation>
+    </message>
+    <message>
+        <source>%1 is now known as %2</source>
+        <translation type="unfinished">%1 mudou a alcunha para %2</translation>
     </message>
 </context>
 <context>
@@ -466,6 +597,14 @@ nomes começam por &quot;#&quot; ou &quot;+&quot;</translation>
         <source>Settings</source>
         <translation>Configurações</translation>
     </message>
+    <message>
+        <source>Display time in chat log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Keyboard Shortcuts</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>IRCTab</name>
@@ -511,6 +650,33 @@ nomes começam por &quot;#&quot; ou &quot;+&quot;</translation>
     <message>
         <source>Configure OpieIRC&apos;s behavior and appearance</source>
         <translation>Configurar o comportamento e aparência do OpieIRC</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source> User</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opie IRC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> gives channel operator status to </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> removes channel operator status from </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> gives voice to </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> removes voice from </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

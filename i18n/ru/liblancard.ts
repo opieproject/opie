@@ -37,4 +37,11 @@
         <translation>&lt;p&gt;Настраивает обычные сетевые карты.&lt;/p&gt;&lt;p&gt;Используйте для настройки 10/100/1000 МБит/с сетевых карт.&lt;/p&gt;</translation>
     </message>
 </context>
+<context>
+    <name>LanCardRun</name>
+    <message>
+        <source>No interface found</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 </TS>

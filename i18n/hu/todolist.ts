@@ -9,6 +9,29 @@
         <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished">Iktatatlan</translation>
+    </message>
+</context>
+<context>
+    <name>NewTaskDlg</name>
+    <message>
+        <source>New Task</source>
+        <translation type="unfinished">Új feladat</translation>
+    </message>
+    <message>
+        <source>Blank task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Using template:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OTaskEditor</name>
@@ -34,6 +57,17 @@
     </message>
 </context>
 <context>
+    <name>Opie</name>
+    <message>
+        <source>Todo List</source>
+        <translation type="unfinished">Teendők listája</translation>
+    </message>
+    <message>
+        <source>Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <source>Enter Task</source>
@@ -51,48 +85,44 @@
         <source>loud</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Opie Todolist</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>QWidget</name>
     <message>
         <source>New from template</source>
-        <translation type="unfinished">Új sablonból</translation>
+        <translation type="obsolete">Új sablonból</translation>
     </message>
     <message>
         <source>New Task</source>
-        <translation type="unfinished">Új feladat</translation>
+        <translation type="obsolete">Új feladat</translation>
     </message>
     <message>
         <source>Click here to create a new task.</source>
-        <translation type="unfinished">Bökjön ide új feladat létrehozásához.</translation>
+        <translation type="obsolete">Bökjön ide új feladat létrehozásához.</translation>
     </message>
     <message>
         <source>Edit Task</source>
-        <translation type="unfinished">Feladat szerkesztése</translation>
+        <translation type="obsolete">Feladat szerkesztése</translation>
     </message>
     <message>
         <source>Click here to modify the current task.</source>
-        <translation type="unfinished">Bökjön ide az aktuális feladat módosításához.</translation>
+        <translation type="obsolete">Bökjön ide az aktuális feladat módosításához.</translation>
     </message>
     <message>
         <source>View Task</source>
-        <translation type="unfinished">Feladat megnézése</translation>
+        <translation type="obsolete">Feladat megnézése</translation>
     </message>
     <message>
         <source>Delete...</source>
-        <translation type="unfinished">Töröl...</translation>
+        <translation type="obsolete">Töröl...</translation>
     </message>
     <message>
         <source>Click here to remove the current task.</source>
-        <translation type="unfinished">Bökjön ide az aktuális feladat eltávolításához.</translation>
+        <translation type="obsolete">Bökjön ide az aktuális feladat eltávolításához.</translation>
     </message>
     <message>
         <source>Delete all...</source>
-        <translation type="unfinished">Mindent töröl...</translation>
+        <translation type="obsolete">Mindent töröl...</translation>
     </message>
     <message>
         <source>Delete completed</source>
@@ -100,15 +130,15 @@
     </message>
     <message>
         <source>Beam</source>
-        <translation type="unfinished">Átsugárzás</translation>
+        <translation type="obsolete">Átsugárzás</translation>
     </message>
     <message>
         <source>Click here to send the current task to another device.</source>
-        <translation type="unfinished">Bökjön ide az aktuális felada másik eszköznek küldéséhez.</translation>
+        <translation type="obsolete">Bökjön ide az aktuális felada másik eszköznek küldéséhez.</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation type="unfinished">Keresés</translation>
+        <translation type="obsolete">Keresés</translation>
     </message>
     <message>
         <source>Show completed tasks</source>
@@ -128,15 +158,15 @@
     </message>
     <message>
         <source>Data</source>
-        <translation type="unfinished">Adat</translation>
+        <translation type="obsolete">Adat</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation type="unfinished">Kategória</translation>
+        <translation type="obsolete">Kategória</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Beállítások</translation>
+        <translation type="obsolete">Beállítások</translation>
     </message>
     <message>
         <source>QuickEdit</source>
@@ -160,7 +190,7 @@ A lista az alábbi információkat tartalmazza:
     </message>
     <message>
         <source>All Categories</source>
-        <translation type="unfinished">Minden kategória</translation>
+        <translation type="obsolete">Minden kategória</translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -198,7 +228,7 @@ Mégis kilép?</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished">Iktatatlan</translation>
+        <translation type="obsolete">Iktatatlan</translation>
     </message>
     <message>
         <source>&lt;P&gt;%1 new tasks arrived.&lt;p&gt;Would you like to add them to your Todolist?</source>
@@ -210,7 +240,7 @@ Mégis kilép?</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished">Dupláz</translation>
+        <translation type="obsolete">Dupláz</translation>
     </message>
     <message>
         <source>C.</source>
@@ -230,7 +260,7 @@ Mégis kilép?</translation>
     </message>
     <message>
         <source>Configure Templates</source>
-        <translation type="unfinished">Sablonok beállítása</translation>
+        <translation type="obsolete">Sablonok beállítása</translation>
     </message>
     <message>
         <source>Priority:</source>

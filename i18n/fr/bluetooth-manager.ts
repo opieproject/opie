@@ -91,7 +91,7 @@
     </message>
     <message>
         <source>Bluetooh Basic Config</source>
-        <translation>Conf Bluetooth de base</translation>
+        <translation type="obsolete">Conf Bluetooth de base</translation>
     </message>
     <message>
         <source>Default Passkey</source>
@@ -128,6 +128,10 @@
     <message>
         <source>Status Label</source>
         <translation>Etiquette de statut</translation>
+    </message>
+    <message>
+        <source>Bluetooth Basic Config</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

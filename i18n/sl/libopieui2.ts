@@ -1,39 +1,5 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>OFileDialog</name>
-    <message>
-        <source>FileDialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select Directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>OFontSelector</name>
-    <message>
-        <source>Style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>ORecurranceBase</name>
     <message>
         <source>Repeating Event </source>
@@ -211,9 +177,43 @@
     </message>
 </context>
 <context>
+    <name>Opie::Ui::OFileDialog</name>
+    <message>
+        <source>FileDialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Opie::Ui::OFileSelector</name>
     <message>
         <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Opie::Ui::OFontSelector</name>
+    <message>
+        <source>Style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

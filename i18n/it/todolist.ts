@@ -10,6 +10,29 @@
         <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
         <translation>&lt;h1&gt;Allarme alle %1&lt;/h1&gt;&lt;br&gt;</translation>
     </message>
+    <message>
+        <source>All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished">Vuota</translation>
+    </message>
+</context>
+<context>
+    <name>NewTaskDlg</name>
+    <message>
+        <source>New Task</source>
+        <translation type="unfinished">Nuova Attività</translation>
+    </message>
+    <message>
+        <source>Blank task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Using template:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OTaskEditor</name>
@@ -35,10 +58,21 @@
     </message>
 </context>
 <context>
+    <name>Opie</name>
+    <message>
+        <source>Todo List</source>
+        <translation type="unfinished">Attività</translation>
+    </message>
+    <message>
+        <source>Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <source>Opie Todolist</source>
-        <translation>Attività Opie</translation>
+        <translation type="obsolete">Attività Opie</translation>
     </message>
     <message>
         <source>Enter Task</source>
@@ -61,39 +95,39 @@
     <name>QWidget</name>
     <message>
         <source>New from template</source>
-        <translation>Nuova da modello</translation>
+        <translation type="obsolete">Nuova da modello</translation>
     </message>
     <message>
         <source>New Task</source>
-        <translation>Nuova Attività</translation>
+        <translation type="obsolete">Nuova Attività</translation>
     </message>
     <message>
         <source>Click here to create a new task.</source>
-        <translation>Premi qui per creare una nuova attività.</translation>
+        <translation type="obsolete">Premi qui per creare una nuova attività.</translation>
     </message>
     <message>
         <source>Edit Task</source>
-        <translation>Modifica Attività</translation>
+        <translation type="obsolete">Modifica Attività</translation>
     </message>
     <message>
         <source>Click here to modify the current task.</source>
-        <translation>Premi qui per modificare l&apos;attività corrente.</translation>
+        <translation type="obsolete">Premi qui per modificare l&apos;attività corrente.</translation>
     </message>
     <message>
         <source>View Task</source>
-        <translation>Visualizza Attività</translation>
+        <translation type="obsolete">Visualizza Attività</translation>
     </message>
     <message>
         <source>Delete...</source>
-        <translation>Elimina...</translation>
+        <translation type="obsolete">Elimina...</translation>
     </message>
     <message>
         <source>Click here to remove the current task.</source>
-        <translation>Premi qui per eliminare l&apos;attività corrente.</translation>
+        <translation type="obsolete">Premi qui per eliminare l&apos;attività corrente.</translation>
     </message>
     <message>
         <source>Delete all...</source>
-        <translation>Elimina tutti...</translation>
+        <translation type="obsolete">Elimina tutti...</translation>
     </message>
     <message>
         <source>Delete completed</source>
@@ -101,19 +135,19 @@
     </message>
     <message>
         <source>Duplicate</source>
-        <translation>Copia</translation>
+        <translation type="obsolete">Copia</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation>Trasmetti</translation>
+        <translation type="obsolete">Trasmetti</translation>
     </message>
     <message>
         <source>Click here to send the current task to another device.</source>
-        <translation>Premi qui per inviare l&apos;attività in corso ad un altro dispositivo.</translation>
+        <translation type="obsolete">Premi qui per inviare l&apos;attività in corso ad un altro dispositivo.</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>Trova</translation>
+        <translation type="obsolete">Trova</translation>
     </message>
     <message>
         <source>Show completed tasks</source>
@@ -133,15 +167,15 @@
     </message>
     <message>
         <source>Data</source>
-        <translation>Dati</translation>
+        <translation type="obsolete">Dati</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation>Categoria</translation>
+        <translation type="obsolete">Categoria</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation>Opzioni</translation>
+        <translation type="obsolete">Opzioni</translation>
     </message>
     <message>
         <source>QuickEdit</source>
@@ -165,11 +199,11 @@ Vengono elencate le seguenti informazioni:
     </message>
     <message>
         <source>All Categories</source>
-        <translation>Tutte le Categorie</translation>
+        <translation type="obsolete">Tutte le Categorie</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Vuota</translation>
+        <translation type="obsolete">Vuota</translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -225,7 +259,7 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>Configure Templates</source>
-        <translation>Modifica Modelli</translation>
+        <translation type="obsolete">Modifica Modelli</translation>
     </message>
     <message>
         <source>Template Editor</source>

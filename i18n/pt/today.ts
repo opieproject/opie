@@ -3,7 +3,7 @@
     <name>Today</name>
     <message>
         <source>Today</source>
-        <translation type="obsolete">Hoje</translation>
+        <translation type="unfinished">Hoje</translation>
     </message>
     <message>
         <source>Owned by </source>
@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>No plugins found</source>
-        <translation>Não foram encontrados extras</translation>
+        <translation type="obsolete">Não foram encontrados extras</translation>
     </message>
     <message>
         <source>No plugins activated</source>
@@ -28,6 +28,14 @@
     <message>
         <source>&lt;b&gt;Owned by %1&lt;/b&gt;</source>
         <translation type="obsolete">&lt;b&gt;Propriedade de %1&lt;/b&gt;</translation>
+    </message>
+    <message>
+        <source>Today Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;The plugin &apos;%1&apos; caused Today to crash. It could be that the plugin is not properly installed.&lt;br&gt;Today tries to continue loading plugins.&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

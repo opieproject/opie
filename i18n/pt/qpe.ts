@@ -246,6 +246,13 @@ accurately to calibrate your screen.</source>
     </message>
 </context>
 <context>
+    <name>QueuedRequestRunner</name>
+    <message>
+        <source>Processing Queued Requests</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SafeMode</name>
     <message>
         <source>Safe Mode</source>
@@ -262,6 +269,13 @@ accurately to calibrate your screen.</source>
     <message>
         <source>Help...</source>
         <translation>Ajuda...</translation>
+    </message>
+</context>
+<context>
+    <name>Server</name>
+    <message>
+        <source>USB Lock</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

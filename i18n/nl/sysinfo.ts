@@ -65,10 +65,6 @@
         <source>error</source>
         <translation>fout</translation>
     </message>
-    <message>
-        <source>Compare:</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>FileSysInfo</name>
@@ -366,6 +362,10 @@ dit proces gestuurd worden?</translation>
         <source>Benchmark</source>
         <translation>Benchmark</translation>
     </message>
+    <message>
+        <source>Syslog</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VersionInfo</name>
@@ -408,6 +408,10 @@ dit proces gestuurd worden?</translation>
     <message>
         <source>&lt;br&gt;Vendor: </source>
         <translation>&lt;br&gt;Merk:</translation>
+    </message>
+    <message>
+        <source>Built against Qt/E </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

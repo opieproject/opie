@@ -13,6 +13,29 @@
         <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
         <translation type="unfinished">&lt;h1&gt;Аларм на %1 &lt;h1&gt;&lt;br&gt;</translation>
     </message>
+    <message>
+        <source>All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished">Незапишано</translation>
+    </message>
+</context>
+<context>
+    <name>NewTaskDlg</name>
+    <message>
+        <source>New Task</source>
+        <translation type="unfinished">Нова задала</translation>
+    </message>
+    <message>
+        <source>Blank task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Using template:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OTaskEditor</name>
@@ -38,6 +61,17 @@
     </message>
 </context>
 <context>
+    <name>Opie</name>
+    <message>
+        <source>Todo List</source>
+        <translation type="unfinished">Листа на задачи</translation>
+    </message>
+    <message>
+        <source>Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <source>Enter Task</source>
@@ -55,48 +89,44 @@
         <source>loud</source>
         <translation>Гласен</translation>
     </message>
-    <message>
-        <source>Opie Todolist</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>QWidget</name>
     <message>
         <source>New from template</source>
-        <translation>Нова од поставка</translation>
+        <translation type="obsolete">Нова од поставка</translation>
     </message>
     <message>
         <source>New Task</source>
-        <translation>Нова задала</translation>
+        <translation type="obsolete">Нова задала</translation>
     </message>
     <message>
         <source>Click here to create a new task.</source>
-        <translation>Кликни овде за да се зададе нова задача.</translation>
+        <translation type="obsolete">Кликни овде за да се зададе нова задача.</translation>
     </message>
     <message>
         <source>Edit Task</source>
-        <translation>Уреди Задача</translation>
+        <translation type="obsolete">Уреди Задача</translation>
     </message>
     <message>
         <source>Click here to modify the current task.</source>
-        <translation>Кликни овде за да се измени задачата.</translation>
+        <translation type="obsolete">Кликни овде за да се измени задачата.</translation>
     </message>
     <message>
         <source>View Task</source>
-        <translation>Види Задача</translation>
+        <translation type="obsolete">Види Задача</translation>
     </message>
     <message>
         <source>Delete...</source>
-        <translation>Избриши...</translation>
+        <translation type="obsolete">Избриши...</translation>
     </message>
     <message>
         <source>Click here to remove the current task.</source>
-        <translation>Кликни овде за да ја отстраниш моменталната задача.</translation>
+        <translation type="obsolete">Кликни овде за да ја отстраниш моменталната задача.</translation>
     </message>
     <message>
         <source>Delete all...</source>
-        <translation>Избриш се...</translation>
+        <translation type="obsolete">Избриш се...</translation>
     </message>
     <message>
         <source>Delete completed</source>
@@ -104,19 +134,19 @@
     </message>
     <message>
         <source>Duplicate</source>
-        <translation>Дуплирај</translation>
+        <translation type="obsolete">Дуплирај</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation>Пренеси</translation>
+        <translation type="obsolete">Пренеси</translation>
     </message>
     <message>
         <source>Click here to send the current task to another device.</source>
-        <translation>Кликни овде за да ја пренесеш оваа задача на нов уред.</translation>
+        <translation type="obsolete">Кликни овде за да ја пренесеш оваа задача на нов уред.</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>Најди</translation>
+        <translation type="obsolete">Најди</translation>
     </message>
     <message>
         <source>Show completed tasks</source>
@@ -136,15 +166,15 @@
     </message>
     <message>
         <source>Data</source>
-        <translation>Податоци</translation>
+        <translation type="obsolete">Податоци</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation>Категорија</translation>
+        <translation type="obsolete">Категорија</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation>Опции</translation>
+        <translation type="obsolete">Опции</translation>
     </message>
     <message>
         <source>QuickEdit</source>
@@ -168,11 +198,11 @@ The list displays the following information:
     </message>
     <message>
         <source>All Categories</source>
-        <translation>Сите категории</translation>
+        <translation type="obsolete">Сите категории</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Незапишано</translation>
+        <translation type="obsolete">Незапишано</translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -234,7 +264,7 @@ Quit Anyway?</source>
     </message>
     <message>
         <source>Configure Templates</source>
-        <translation>Подеси поставки</translation>
+        <translation type="obsolete">Подеси поставки</translation>
     </message>
     <message>
         <source>Template Editor</source>

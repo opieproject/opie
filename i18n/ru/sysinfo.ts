@@ -67,7 +67,7 @@
     </message>
     <message>
         <source>Compare:</source>
-        <translation>Сравнить:</translation>
+        <translation type="obsolete">Сравнить:</translation>
     </message>
 </context>
 <context>
@@ -349,6 +349,10 @@ to this process?</source>
         <source>Benchmark</source>
         <translation>Бенчмарки</translation>
     </message>
+    <message>
+        <source>Syslog</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VersionInfo</name>
@@ -391,6 +395,10 @@ to this process?</source>
     <message>
         <source>&lt;br&gt;Vendor: </source>
         <translation>&lt;br&gt;Производитель:</translation>
+    </message>
+    <message>
+        <source>Built against Qt/E </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -1,5 +1,12 @@
 <!DOCTYPE TS><TS>
 <context>
+    <name>Interface</name>
+    <message>
+        <source>Restarting interface</source>
+        <translation type="unfinished">Reiniciar Interface</translation>
+    </message>
+</context>
+<context>
     <name>InterfaceAdvanced</name>
     <message>
         <source>Advanced Interface Information</source>

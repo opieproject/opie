@@ -264,6 +264,28 @@
         <source>Edit Key</source>
         <translation>FOO</translation>
     </message>
+    <message>
+        <source>Rows</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Columns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Q Keycode</source>
+        <comment>Qt Key Code for the OnScreen Keyboard</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unicode Value</source>
+        <comment>The Unicode value of the key</comment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>IOLayerBase</name>
@@ -354,6 +376,18 @@
     <message>
         <source>9600 baud</source>
         <translation>FOO</translation>
+    </message>
+    <message>
+        <source>4800 baud</source>
+        <translation type="unfinished">FOO {4800?}</translation>
+    </message>
+    <message>
+        <source>2400 baud</source>
+        <translation type="unfinished">FOO {2400?}</translation>
+    </message>
+    <message>
+        <source>1200 baud</source>
+        <translation type="unfinished">FOO {1200?}</translation>
     </message>
 </context>
 <context>
@@ -486,6 +520,18 @@
     </message>
     <message>
         <source>Save Profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stop log</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Log</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -746,7 +792,7 @@
     </message>
     <message>
         <source>Dialing the number failed.</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Cancelling...</source>
@@ -784,6 +830,14 @@
         <source>Dismiss</source>
         <translation>FOO</translation>
     </message>
+    <message>
+        <source>&lt;qt&gt;Dialing the number failed.&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fixing up Embedix</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SerialConfigWidget</name>
@@ -804,19 +858,19 @@
     </message>
     <message>
         <source>Font size</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>small</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>medium</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>large</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Line-break conversions</source>

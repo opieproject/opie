@@ -3,7 +3,7 @@
     <name>BackupAndRestore</name>
     <message>
         <source>Backup and Restore... working...</source>
-        <translation>Kopēšana un Atjaunošana... strādāju...</translation>
+        <translation type="obsolete">Kopēšana un Atjaunošana... strādāju...</translation>
     </message>
     <message>
         <source>Error from System:
@@ -55,6 +55,14 @@
         <source>Restore Successful.</source>
         <translation>Atjaunošana Pabeigta.</translation>
     </message>
+    <message>
+        <source>Backing up...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restore Backup...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>BackupAndRestoreBase</name>
@@ -68,7 +76,7 @@
     </message>
     <message>
         <source>Save To</source>
-        <translation>Saglabāt Uz</translation>
+        <translation type="obsolete">Saglabāt Uz</translation>
     </message>
     <message>
         <source>&amp;Backup</source>
@@ -116,6 +124,22 @@
     </message>
     <message>
         <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Destination</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User Data (Configuration + PIM)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full Backup (Root File System)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -455,6 +455,10 @@ neues Gerät kopiert, das modifiziert werden kann</translation>
         <source>You must enter a unique device name</source>
         <translation>Sie müssen einen eindeutigen Gerätnamen angeben</translation>
     </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Fehler</translation>
+    </message>
 </context>
 <context>
     <name>DialWidget</name>

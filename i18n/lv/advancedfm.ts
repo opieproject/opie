@@ -15,14 +15,14 @@
     </message>
     <message>
         <source>That directory does not exist</source>
-        <translation>Šāda direktorija neeksistē</translation>
+        <translation type="obsolete">Šāda direktorija neeksistē</translation>
     </message>
     <message>
         <source>Advanced FileManager
 is copyright 2002-2003 by
 L.J.Potter&lt;llornkcor@handhelds.org&gt;
 and is licensed by the GPL</source>
-        <translation>Uzlabotais FailuMenedžeris
+        <translation type="obsolete">Uzlabotais FailuMenedžeris
 visas tiesības rezervētas 2002-2003 g.
 L.J.Potters&lt;llornkcor@handhelds.org&gt;
 un ir licezēts ar GPL</translation>
@@ -111,7 +111,7 @@ un ir licezēts ar GPL</translation>
         <source>Cannot remove current directory
 from bookmarks.
 It is not bookmarked!</source>
-        <translation>Nevaru izņemt tekošo direktoriju no grāmatzīmēm.  Tas nav iezīmēts!</translation>
+        <translation type="obsolete">Nevaru izņemt tekošo direktoriju no grāmatzīmēm.  Tas nav iezīmēts!</translation>
     </message>
     <message>
         <source>File</source>
@@ -168,7 +168,7 @@ It is not bookmarked!</source>
     <message>
         <source>Really delete
 %1 files?</source>
-        <translation>Vai tiešām dzēst
+        <translation type="obsolete">Vai tiešām dzēst
 %1 failus?</translation>
     </message>
     <message>
@@ -186,18 +186,18 @@ It is not bookmarked!</source>
     <message>
         <source>Really delete %1
 and all it&apos;s contents ?</source>
-        <translation>Vai tiešām dzēst %1 un visu tā saturu ?</translation>
+        <translation type="obsolete">Vai tiešām dzēst %1 un visu tā saturu ?</translation>
     </message>
     <message>
         <source>Really delete
 %1?</source>
-        <translation>Tiešām dzēst
+        <translation type="obsolete">Tiešām dzēst
 %1?</translation>
     </message>
     <message>
         <source>Really copy
 %1 files?</source>
-        <translation>Tiešām kopēt
+        <translation type="obsolete">Tiešām kopēt
 %1 failus?</translation>
     </message>
     <message>
@@ -206,27 +206,27 @@ and all it&apos;s contents ?</source>
     </message>
     <message>
         <source>%1 exists. Ok to overwrite?</source>
-        <translation>%1 eksistē. Tiešām pārrakstīt?</translation>
+        <translation type="obsolete">%1 eksistē. Tiešām pārrakstīt?</translation>
     </message>
     <message>
         <source>Could not copy %1 to %2</source>
-        <translation>Nevaru kopēt %1 uz %2</translation>
+        <translation type="obsolete">Nevaru kopēt %1 uz %2</translation>
     </message>
     <message>
         <source>
 exists. Ok to overwrite?</source>
-        <translation>
+        <translation type="obsolete">
 eksistē. Tiešām pārrakstīt?</translation>
     </message>
     <message>
         <source>Could not copy
 </source>
-        <translation>Nevaru nokopēt</translation>
+        <translation type="obsolete">Nevaru nokopēt</translation>
     </message>
     <message>
         <source>to
 </source>
-        <translation>uz
+        <translation type="obsolete">uz
 </translation>
     </message>
     <message>
@@ -240,20 +240,20 @@ eksistē. Tiešām pārrakstīt?</translation>
     <message>
         <source> already exists.
 Do you really want to delete it?</source>
-        <translation>jau eksistē
+        <translation type="obsolete">jau eksistē
 Vai tiešām vēlaties to dzēst?</translation>
     </message>
     <message>
         <source>Could not move
 </source>
-        <translation>Nevaru pārvietot</translation>
+        <translation type="obsolete">Nevaru pārvietot</translation>
     </message>
     <message>
         <source>Could not copy 
 %1 
 to 
 %2</source>
-        <translation>Nevaru nokopēt
+        <translation type="obsolete">Nevaru nokopēt
 %1
 uz
 %2</translation>
@@ -285,6 +285,70 @@ uz
     <message>
         <source>Not Yet Implemented</source>
         <translation>Nav Vēl Implementēts</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;%1 does not exist&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;Advanced FileManager is copyright 2002-2003 by L.J.Potter&lt;llornkcor@handhelds.org&gt; and is licensed by the GPL&lt;/P&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Cannot remove current directory from bookmarks. It is not bookmarked!&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Really delete %1 files?&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Really delete %1 and all it&apos;s contents?&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Really delete %1?&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Really copy %1 files?&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;%1 already  exists. Ok to overwrite?&lt;/P&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;Could not copy %1 to %2&lt;/P&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy %1 As</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;P&gt; %1 already exists. Ok to overwrite?&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Could not copy %1 to %2&lt;/P&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt; %1 already exists. Do you really want to delete it?&lt;/P&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Could not move %1&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Could not copy %1 to %2&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

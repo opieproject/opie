@@ -1,9 +1,6 @@
 <!DOCTYPE TS><TS>
 <defaultcodec>iso8859-1</defaultcodec>
 <context>
-    <name>AWLan</name>
-</context>
-<context>
     <name>WLAN</name>
     <message>
         <source>Wireless Configuration</source>
@@ -196,9 +193,6 @@
         <source>Signal</source>
         <translation type="obsolete">Segnale</translation>
     </message>
-</context>
-<context>
-    <name>WLanNetNode</name>
 </context>
 <context>
     <name>WlanInfo</name>

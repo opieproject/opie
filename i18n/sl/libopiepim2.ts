@@ -370,6 +370,109 @@ and </source>
     </message>
 </context>
 <context>
+    <name>Opie::OPimMainWindow</name>
+    <message>
+        <source>Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to view all items.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to view items belonging to %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to view all unfiled items.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to create a new item.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to edit the selected item.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Duplicate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to duplicate the selected item.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to delete the selected item.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Beam</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to transmit the selected item.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Find</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to search for an item.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to set your preferences for this application.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to filter the items displayed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filter Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to modify the current filter settings.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <source>Priority:</source>
@@ -757,6 +860,34 @@ and </source>
     </message>
     <message>
         <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Has a due-date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No due-date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Completed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not completed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No reccurrence</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No start-date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No completed-date</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

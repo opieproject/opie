@@ -3,11 +3,11 @@
     <name>QObject</name>
     <message>
         <source>KeyList::addKey() Cannot make default value for type %1, Key not added.</source>
-        <translation>KeyList::addKey() Kan standaardwaarde niet instellen bij type %1, Key niet toegevoegd.</translation>
+        <translation type="obsolete">KeyList::addKey() Kan standaardwaarde niet instellen bij type %1, Key niet toegevoegd.</translation>
     </message>
     <message>
         <source>DataElem::setField(%1, %2) No valid type found</source>
-        <translation>DataElem::setField(%1, %2) Geen juist type gevonden</translation>
+        <translation type="obsolete">DataElem::setField(%1, %2) Geen juist type gevonden</translation>
     </message>
 </context>
 <context>

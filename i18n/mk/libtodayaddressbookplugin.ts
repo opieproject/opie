@@ -11,11 +11,11 @@
     </message>
     <message>
         <source>Clip line after X chars: </source>
-        <translation>Скрати линија по Х карактери:</translation>
+        <translation type="obsolete">Скрати линија по Х карактери:</translation>
     </message>
     <message>
         <source>After how many chars should be the info about the task be cut off</source>
-        <translation>После колку карактери информацијата за настанот би требало да биде скратена</translation>
+        <translation type="obsolete">После колку карактери информацијата за настанот би требало да биде скратена</translation>
     </message>
     <message>
         <source>Days look ahead: </source>
@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>To activate settings: Restart application !</source>
-        <translation type="unfinished">За да се активираат промените: Рестартирај ја апликацијата!</translation>
+        <translation type="obsolete">За да се активираат промените: Рестартирај ја апликацијата!</translation>
     </message>
     <message>
         <source>Set Headline Color: </source>

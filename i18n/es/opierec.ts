@@ -114,7 +114,7 @@ no ha sido reconocida</translation>
     </message>
     <message>
         <source> seconds</source>
-        <translation>segundos</translation>
+        <translation type="obsolete">segundos</translation>
     </message>
     <message>
         <source>Do you really want to &lt;font size=+2&gt;&lt;B&gt;DELETE&lt;/B&gt;&lt;/font&gt;
@@ -182,15 +182,15 @@ el fichero seleccionado?</translation>
     </message>
     <message>
         <source>Rec</source>
-        <translation>Gra</translation>
+        <translation type="obsolete">Gra</translation>
     </message>
     <message>
         <source>Location</source>
-        <translation>Lugar</translation>
+        <translation type="obsolete">Lugar</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation>Fecha</translation>
+        <translation type="obsolete">Fecha</translation>
     </message>
     <message>
         <source>Wave Compression (smaller files)</source>
@@ -206,14 +206,18 @@ el fichero seleccionado?</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation>Parar</translation>
+        <translation type="obsolete">Parar</translation>
     </message>
     <message>
         <source>Auto Mute</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Stereo Channels</source>
+        <source>Del</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stereo</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

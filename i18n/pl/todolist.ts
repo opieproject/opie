@@ -9,6 +9,29 @@
         <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
         <translation>&lt;h1&gt;Alarm o %1&lt;/h1&gt;&lt;br&gt;</translation>
     </message>
+    <message>
+        <source>All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished">Nieprzypisane</translation>
+    </message>
+</context>
+<context>
+    <name>NewTaskDlg</name>
+    <message>
+        <source>New Task</source>
+        <translation type="unfinished">Nowe zadanie</translation>
+    </message>
+    <message>
+        <source>Blank task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Using template:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OTaskEditor</name>
@@ -34,6 +57,17 @@
     </message>
 </context>
 <context>
+    <name>Opie</name>
+    <message>
+        <source>Todo List</source>
+        <translation type="unfinished">Lista ZrobTo</translation>
+    </message>
+    <message>
+        <source>Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <source>Enter Task</source>
@@ -53,46 +87,46 @@
     </message>
     <message>
         <source>Opie Todolist</source>
-        <translation>Opie ZróbTo</translation>
+        <translation type="obsolete">Opie ZróbTo</translation>
     </message>
 </context>
 <context>
     <name>QWidget</name>
     <message>
         <source>New from template</source>
-        <translation>Nowe z szablonu</translation>
+        <translation type="obsolete">Nowe z szablonu</translation>
     </message>
     <message>
         <source>New Task</source>
-        <translation>Nowe zadanie</translation>
+        <translation type="obsolete">Nowe zadanie</translation>
     </message>
     <message>
         <source>Click here to create a new task.</source>
-        <translation>Kliknij tu żeby stworzyć nowe zadanie.</translation>
+        <translation type="obsolete">Kliknij tu żeby stworzyć nowe zadanie.</translation>
     </message>
     <message>
         <source>Edit Task</source>
-        <translation>Edytuj Zadanie</translation>
+        <translation type="obsolete">Edytuj Zadanie</translation>
     </message>
     <message>
         <source>Click here to modify the current task.</source>
-        <translation>Kliknij tu żeby zmodyfikować aktualne zadanie.</translation>
+        <translation type="obsolete">Kliknij tu żeby zmodyfikować aktualne zadanie.</translation>
     </message>
     <message>
         <source>View Task</source>
-        <translation>Zobacz zadanie</translation>
+        <translation type="obsolete">Zobacz zadanie</translation>
     </message>
     <message>
         <source>Delete...</source>
-        <translation>Usuń...</translation>
+        <translation type="obsolete">Usuń...</translation>
     </message>
     <message>
         <source>Click here to remove the current task.</source>
-        <translation>Kliknij tu żeby usunąć aktualne zadanie.</translation>
+        <translation type="obsolete">Kliknij tu żeby usunąć aktualne zadanie.</translation>
     </message>
     <message>
         <source>Delete all...</source>
-        <translation>Usuń wszystkie...</translation>
+        <translation type="obsolete">Usuń wszystkie...</translation>
     </message>
     <message>
         <source>Delete completed</source>
@@ -100,15 +134,15 @@
     </message>
     <message>
         <source>Beam</source>
-        <translation>Emituj</translation>
+        <translation type="obsolete">Emituj</translation>
     </message>
     <message>
         <source>Click here to send the current task to another device.</source>
-        <translation>Kliknij tu żeby wysłać aktualne zadanie do innego urządzenia.</translation>
+        <translation type="obsolete">Kliknij tu żeby wysłać aktualne zadanie do innego urządzenia.</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>Szukaj</translation>
+        <translation type="obsolete">Szukaj</translation>
     </message>
     <message>
         <source>Show completed tasks</source>
@@ -128,15 +162,15 @@
     </message>
     <message>
         <source>Data</source>
-        <translation>Dane</translation>
+        <translation type="obsolete">Dane</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation>Kategoria</translation>
+        <translation type="obsolete">Kategoria</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation>Opcje</translation>
+        <translation type="obsolete">Opcje</translation>
     </message>
     <message>
         <source>QuickEdit</source>
@@ -160,7 +194,7 @@ Na liście umieszczone są nastepujące informacje:
     </message>
     <message>
         <source>All Categories</source>
-        <translation>Wszystkie kategorie</translation>
+        <translation type="obsolete">Wszystkie kategorie</translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -194,7 +228,7 @@ Wyjść mimo to?</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Nieprzypisane</translation>
+        <translation type="obsolete">Nieprzypisane</translation>
     </message>
     <message>
         <source>&lt;P&gt;%1 new tasks arrived.&lt;p&gt;Would you like to add them to your Todolist?</source>
@@ -206,7 +240,7 @@ Wyjść mimo to?</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation>Duplikuj</translation>
+        <translation type="obsolete">Duplikuj</translation>
     </message>
     <message>
         <source>C.</source>
@@ -226,7 +260,7 @@ Wyjść mimo to?</translation>
     </message>
     <message>
         <source>Configure Templates</source>
-        <translation>Konfiguruj szablony</translation>
+        <translation type="obsolete">Konfiguruj szablony</translation>
     </message>
     <message>
         <source>Priority:</source>

@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Case sensitiv</source>
-        <translation>Sensível a letras grandes/pequenas</translation>
+        <translation type="obsolete">Sensível a letras grandes/pequenas</translation>
     </message>
     <message>
         <source>Use wildcards</source>
@@ -65,6 +65,10 @@
         <source></source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Case sensitive</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OListView</name>
@@ -97,15 +101,15 @@
     </message>
     <message>
         <source>show completed tasks</source>
-        <translation>mostrar tarefas completas</translation>
+        <translation type="obsolete">mostrar tarefas completas</translation>
     </message>
     <message>
         <source>show past events</source>
-        <translation>mostrar eventos do passado</translation>
+        <translation type="obsolete">mostrar eventos do passado</translation>
     </message>
     <message>
         <source>search in dates</source>
-        <translation>procurar nas datas</translation>
+        <translation type="obsolete">procurar nas datas</translation>
     </message>
     <message>
         <source>File: </source>
@@ -121,11 +125,27 @@
     </message>
     <message>
         <source>search content</source>
-        <translation>procurar conteúdo</translation>
+        <translation type="obsolete">procurar conteúdo</translation>
     </message>
     <message>
         <source>searching %1</source>
         <translation>a procurar %1</translation>
+    </message>
+    <message>
+        <source>Show completed tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show past events</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search in dates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search content</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -3,11 +3,11 @@
     <name>QObject</name>
     <message>
         <source>KeyList::addKey() Cannot make default value for type %1, Key not added.</source>
-        <translation>KeyList::addKey() Nevaru izveidot noklusēto vērtību tipam %1, Atslēga nav pievienota.</translation>
+        <translation type="obsolete">KeyList::addKey() Nevaru izveidot noklusēto vērtību tipam %1, Atslēga nav pievienota.</translation>
     </message>
     <message>
         <source>DataElem::setField(%1, %2) No valid type found</source>
-        <translation>DataElem:setField(%1, %2) Nav atrasts derīgs tips</translation>
+        <translation type="obsolete">DataElem:setField(%1, %2) Nav atrasts derīgs tips</translation>
     </message>
 </context>
 <context>

@@ -48,7 +48,7 @@
     </message>
     <message>
         <source>Case sensitiv</source>
-        <translation>Cse sensitive</translation>
+        <translation type="obsolete">Cse sensitive</translation>
     </message>
     <message>
         <source>Use wildcards</source>
@@ -66,6 +66,10 @@
         <source></source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Case sensitive</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OListView</name>
@@ -78,15 +82,15 @@
     <name>QObject</name>
     <message>
         <source>show completed tasks</source>
-        <translation>mostra attività terminate</translation>
+        <translation type="obsolete">mostra attività terminate</translation>
     </message>
     <message>
         <source>show past events</source>
-        <translation>mostra eventi passati</translation>
+        <translation type="obsolete">mostra eventi passati</translation>
     </message>
     <message>
         <source>search in dates</source>
-        <translation>cerca nei giorni</translation>
+        <translation type="obsolete">cerca nei giorni</translation>
     </message>
     <message>
         <source>show</source>
@@ -122,11 +126,27 @@
     </message>
     <message>
         <source>search content</source>
-        <translation>cerca contenuto</translation>
+        <translation type="obsolete">cerca contenuto</translation>
     </message>
     <message>
         <source>searching %1</source>
         <translation>in ricerca %1</translation>
+    </message>
+    <message>
+        <source>Show completed tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show past events</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search in dates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search content</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

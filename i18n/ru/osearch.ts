@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Case sensitiv</source>
-        <translation>Учет регистра</translation>
+        <translation type="obsolete">Учет регистра</translation>
     </message>
     <message>
         <source>Use wildcards</source>
@@ -65,6 +65,10 @@
         <source></source>
         <translation></translation>
     </message>
+    <message>
+        <source>Case sensitive</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OListView</name>
@@ -97,15 +101,15 @@
     </message>
     <message>
         <source>show completed tasks</source>
-        <translation>показать завершенные задачи</translation>
+        <translation type="obsolete">показать завершенные задачи</translation>
     </message>
     <message>
         <source>show past events</source>
-        <translation>показать события из прошлого</translation>
+        <translation type="obsolete">показать события из прошлого</translation>
     </message>
     <message>
         <source>search in dates</source>
-        <translation>искать в датах</translation>
+        <translation type="obsolete">искать в датах</translation>
     </message>
     <message>
         <source>File: </source>
@@ -121,11 +125,27 @@
     </message>
     <message>
         <source>search content</source>
-        <translation>искать в содержимом</translation>
+        <translation type="obsolete">искать в содержимом</translation>
     </message>
     <message>
         <source>searching %1</source>
         <translation>ищется %1</translation>
+    </message>
+    <message>
+        <source>Show completed tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show past events</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search in dates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search content</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -3,7 +3,7 @@
     <name>Today</name>
     <message>
         <source>Today</source>
-        <translation type="obsolete">Сегодня</translation>
+        <translation type="unfinished">Сегодня</translation>
     </message>
     <message>
         <source>Please fill out the business card</source>
@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>No plugins found</source>
-        <translation>Нет плагинов</translation>
+        <translation type="obsolete">Нет плагинов</translation>
     </message>
     <message>
         <source>No plugins activated</source>
@@ -24,6 +24,14 @@
     <message>
         <source>Owned by </source>
         <translation>Владелец</translation>
+    </message>
+    <message>
+        <source>Today Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;The plugin &apos;%1&apos; caused Today to crash. It could be that the plugin is not properly installed.&lt;br&gt;Today tries to continue loading plugins.&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
