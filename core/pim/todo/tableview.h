@@ -32,7 +32,6 @@
 #include <qtable.h>
 #include <qmap.h>
 
-#include "tableitems.h"
 #include "todoview.h"
 
 class QTimer;

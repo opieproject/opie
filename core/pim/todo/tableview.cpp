@@ -28,6 +28,7 @@
 #include <stdlib.h>
 #include <cmath>
 
+#include <qcombobox.h>
 #include <qlineedit.h>
 #include <qtimer.h>
 #include <qpoint.h>

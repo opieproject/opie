@@ -7,7 +7,6 @@ HEADERS	= smalltodo.h \
 	  mainwindow.h \
 	  todoview.h \
 	  tableview.h \
-	  tableitems.h \
 	  todotemplatemanager.h \
 	  todoeditor.h \
 	  todoshow.h \
@@ -26,7 +25,6 @@ SOURCES	= smalltodo.cpp \
 	  mainwindow.cpp \
 	  main.cpp \
 	  tableview.cpp \
-	  tableitems.cpp \
 	  todoview.cpp \
 	  todotemplatemanager.cpp \
 	  todoeditor.cpp   \
