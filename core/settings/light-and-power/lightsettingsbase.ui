@@ -333,6 +333,10 @@
                                     <name>tickInterval</name>
                                     <number>32</number>
                                 </property>
+                                <property>
+                                    <name>whatsThis</name>
+                                    <string>set a fix value for backlight</string>
+                                </property>
                             </widget>
                             <widget>
                                 <class>QLayoutWidget</class>
@@ -463,6 +467,10 @@
                                         <property stdset="1">
                                             <name>text</name>
                                             <string>Calibrate</string>
+                                        </property>
+                                        <property>
+                                            <name>whatsThis</name>
+                                            <string>Advanced settings for light sensor handling</string>
                                         </property>
                                     </widget>
                                 </hbox>
@@ -772,6 +780,10 @@
                                     <name>tickmarks</name>
                                     <enum>Right</enum>
                                 </property>
+                                <property>
+                                    <name>whatsThis</name>
+                                    <string>set a fix value for backlight</string>
+                                </property>
                             </widget>
                             <widget>
                                 <class>QLayoutWidget</class>
@@ -902,6 +914,10 @@
                                         <property stdset="1">
                                             <name>text</name>
                                             <string>Calibrate</string>
+                                        </property>
+                                        <property>
+                                            <name>whatsThis</name>
+                                            <string>Advanced settings for light sensor handling</string>
                                         </property>
                                     </widget>
                                 </hbox>
@@ -1174,11 +1190,110 @@
         <data format="XPM.GZ" length="424">789cd3d7528808f055d0d2e72a2e492cc94c5648ce482c52d04a29cdcdad8c8eb5ade6523234530022130543251d2e253d856405bffcbc54105b19c856360003103711c4354b344b314b04719340dcb434b31488ac1e1a2020a6acac8c2ea60cc54862606ea232b218541b5810452c3111432c510f550c22886a1e482c115d0c2c88e6168818babaa4a42462c48082cae8e68102011a06b5d65c0041d3518e</data>
     </image>
 </images>
+<connections>
+    <connection>
+        <sender>auto_brightness</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>brightness</receiver>
+        <slot>setDisabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>auto_brightness_ac_3</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>brightness_ac_3</receiver>
+        <slot>setDisabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>auto_brightness_ac_3</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>TextLabel1_3_2</receiver>
+        <slot>setDisabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>auto_brightness</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>TextLabel1_3</receiver>
+        <slot>setDisabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>auto_brightness</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>interval_dim</receiver>
+        <slot>setDisabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>auto_brightness_ac_3</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>interval_dim_ac_3</receiver>
+        <slot>setDisabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>auto_brightness</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>PixmapLabel2</receiver>
+        <slot>setDisabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>auto_brightness</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>TextLabel4</receiver>
+        <slot>setDisabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>auto_brightness</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>TextLabel5</receiver>
+        <slot>setDisabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>auto_brightness</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>PixmapLabel1</receiver>
+        <slot>setDisabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>auto_brightness_ac_3</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>PixmapLabel2_2_3</receiver>
+        <slot>setDisabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>auto_brightness_ac_3</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>TextLabel6</receiver>
+        <slot>setDisabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>auto_brightness_ac_3</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>TextLabel7</receiver>
+        <slot>setDisabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>auto_brightness_ac_3</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>PixmapLabel1_2_3</receiver>
+        <slot>setDisabled(bool)</slot>
+    </connection>
+</connections>
 <tabstops>
-    <tabstop>auto_brightness</tabstop>
     <tabstop>interval_dim</tabstop>
     <tabstop>interval_lightoff</tabstop>
     <tabstop>interval_suspend</tabstop>
+    <tabstop>LcdOffOnly</tabstop>
     <tabstop>brightness</tabstop>
+    <tabstop>auto_brightness</tabstop>
+    <tabstop>CalibrateLightSensor</tabstop>
+    <tabstop>TabWidget3</tabstop>
+    <tabstop>interval_lightoff_ac_3</tabstop>
+    <tabstop>interval_suspend_ac_3</tabstop>
+    <tabstop>interval_dim_ac_3</tabstop>
+    <tabstop>LcdOffOnly_2_3</tabstop>
+    <tabstop>brightness_ac_3</tabstop>
+    <tabstop>auto_brightness_ac_3</tabstop>
+    <tabstop>CalibrateLightSensorAC</tabstop>
+    <tabstop>lowSpinBox</tabstop>
+    <tabstop>warnintervalBox</tabstop>
+    <tabstop>criticalSpinBox</tabstop>
 </tabstops>
 </UI>

@@ -55,15 +55,13 @@
 
 using namespace Opie;
 
-LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags fl )
-    : LightSettingsBase( parent, name, TRUE, fl )
+LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
+    : LightSettingsBase( parent, name, TRUE, WStyle_ContextHelp )
 {
 
     if ( ODevice::inst()->hasLightSensor() ) {
         // Not supported yet - hide until implemented
-        auto_brightness->setEnabled( false );
         CalibrateLightSensor->setEnabled( false );
-        auto_brightness_ac_3->setEnabled( false );
         CalibrateLightSensorAC->setEnabled( false );
     } else {
         // if ipaq no need to show the sensor box
@@ -75,9 +73,7 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags fl )
 
     Config config( "qpe" );
     config.setGroup( "Screensaver" );
-
     int interval;
-
     // battery spinboxes
     interval = config.readNumEntry( "Interval_Dim", 20 );
     if ( config.readNumEntry("Dim",1) == 0 ) {
@@ -124,10 +120,6 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags fl )
 
 
     // battery check and slider
-
-
-
-
     LcdOffOnly->setChecked( config.readNumEntry("LcdOffOnly",0) != 0 );
     int maxbright = ODevice::inst ( )-> displayBrightnessResolution ( );
     initbright = config.readNumEntry("Brightness",255);
@@ -150,8 +142,8 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags fl )
 
     // ipaq sensor
     config.setGroup( "Ipaqlightsensor" );
-    auto_brightness->setChecked( config.readNumEntry("LightSensor",1) != 0 );
-    auto_brightness_ac_3->setChecked( config.readNumEntry("LightSensorAC",1) != 0 );
+    auto_brightness->setChecked( config.readNumEntry("LightSensor",0) != 0 );
+    auto_brightness_ac_3->setChecked( config.readNumEntry("LightSensorAC",0) != 0 );
     //LightStepSpin->setValue( config.readNumEntry("Steps", 10 ) );
     //LightMinValueSlider->setValue( config.readNumEntry("MinValue", 70 ) );
     //connect( LightStepSpin, SIGNAL( valueChanged( int ) ), this, SLOT( slotSliderTicks( int ) ) ) ;
@@ -168,8 +160,7 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags fl )
     connect( brightness_ac_3, SIGNAL( valueChanged(int) ), this, SLOT( applyBrightnessAC() ) );
 }
 
-LightSettings::~LightSettings()
-{
+LightSettings::~LightSettings() {
 }
 
 void LightSettings::slotSliderTicks( int steps ) {
@@ -186,7 +177,6 @@ static void set_fl(int bright)
 void LightSettings::reject()
 {
     set_fl(initbright);
-
     QDialog::reject();
 }
 
@@ -284,5 +274,5 @@ void LightSettings::applyBrightnessAC()
 void LightSettings::done(int r)
 {
   QDialog::done(r);
-  close ( );
+  close ();
 }
