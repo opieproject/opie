@@ -145,7 +145,7 @@
     </message>
     <message>
         <source>Quick Edit</source>
-        <translation>Быстрый ред.</translation>
+        <translation>Быстрая правка</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -157,11 +157,11 @@
     </message>
     <message>
         <source>Left</source>
-        <translation>Налево</translation>
+        <translation>Слева</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation>Направо</translation>
+        <translation>Справа</translation>
     </message>
     <message>
         <source>ScrollBar</source>
@@ -189,7 +189,7 @@
     </message>
     <message>
         <source>Use Beep</source>
-        <translation>Использ. сигнал</translation>
+        <translation>Использовать сигнал</translation>
     </message>
     <message>
         <source>Tabs on Top</source>
@@ -201,7 +201,7 @@
     </message>
     <message>
         <source>Bottom</source>
-        <translation>Внизу</translation>
+        <translation>Снизу</translation>
     </message>
     <message>
         <source>Top</source>
@@ -209,7 +209,7 @@
     </message>
     <message>
         <source>Hidden</source>
-        <translation>Скрытый</translation>
+        <translation>Скрыть</translation>
     </message>
     <message>
         <source>Tabs</source>

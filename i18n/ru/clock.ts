@@ -229,7 +229,7 @@ one day to be selected.</source>
     </message>
     <message>
         <source>Days:</source>
-        <translation>Дней:</translation>
+        <translation>Дни:</translation>
     </message>
     <message>
         <source>Countdown Alarm</source>

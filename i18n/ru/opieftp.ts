@@ -23,7 +23,7 @@
     </message>
     <message>
         <source>New</source>
-        <translation>Новый</translation>
+        <translation>Создать</translation>
     </message>
     <message>
         <source>Connect</source>

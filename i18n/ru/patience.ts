@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>Play</source>
-        <translation>Играть</translation>
+        <translation>Правила</translation>
     </message>
     <message>
         <source>Settings</source>

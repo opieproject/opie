@@ -202,15 +202,15 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Use Regular Expressions</source>
-        <translation>Исп. выражения</translation>
+        <translation>Выражения</translation>
     </message>
     <message>
         <source>Use Wildcards (*,?)</source>
-        <translation>Исп. шаблоны (*,?)</translation>
+        <translation>Шаблоны (*,?)</translation>
     </message>
     <message>
         <source>Case Sensitive</source>
-        <translation>Чувств. к регистру</translation>
+        <translation>Чувствителен к регистру</translation>
     </message>
     <message>
         <source>Font</source>
@@ -218,15 +218,15 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Small</source>
-        <translation>Маленький</translation>
+        <translation>Мелкий</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation>Нормальный</translation>
+        <translation>Средний</translation>
     </message>
     <message>
         <source>Large</source>
-        <translation>Большой</translation>
+        <translation>Крупный</translation>
     </message>
     <message>
         <source>Mail</source>

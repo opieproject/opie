@@ -33,7 +33,7 @@
     </message>
     <message>
         <source>Off</source>
-        <translation>Выкл.</translation>
+        <translation>Отключена</translation>
     </message>
     <message>
         <source>Light and Power Settings</source>
@@ -57,7 +57,7 @@
     </message>
     <message>
         <source>Deactivate LCD only (does not suspend)</source>
-        <translation>Отключить ЖКД (не выключать питание)</translation>
+        <translation>Отключить ЖКД (но не питание)</translation>
     </message>
     <message>
         <source>Backlight</source>
@@ -69,7 +69,7 @@
     </message>
     <message>
         <source>Full</source>
-        <translation>Полный</translation>
+        <translation>Полная</translation>
     </message>
     <message>
         <source>Use Light Sensor</source>

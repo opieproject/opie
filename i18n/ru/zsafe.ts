@@ -521,7 +521,7 @@ ZСейф будет закрыт.</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;Новый</translation>
+        <translation>&amp;Создать</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
@@ -589,7 +589,7 @@ ZСейф будет закрыт.</translation>
     </message>
     <message>
         <source>&amp;New document</source>
-        <translation>&amp;Новый документ</translation>
+        <translation>&amp;Создать документ</translation>
     </message>
     <message>
         <source>&amp;Open document</source>
@@ -621,7 +621,7 @@ ZСейф будет закрыт.</translation>
     </message>
     <message>
         <source>New entry</source>
-        <translation>Новая запись</translation>
+        <translation>Добавить запись</translation>
     </message>
     <message>
         <source>Edit category or entry</source>
@@ -661,7 +661,7 @@ ZСейф будет закрыт.</translation>
     </message>
     <message>
         <source>New Entry</source>
-        <translation>Новая запись</translation>
+        <translation>Создать запись</translation>
     </message>
     <message>
         <source>Entry name must be different
@@ -691,11 +691,11 @@ from the category name.</source>
     </message>
     <message>
         <source>Remove text file</source>
-        <translation>Убрать текстовый файл</translation>
+        <translation>Удалить текстовый файл</translation>
     </message>
     <message>
         <source>Could not remove text file.</source>
-        <translation>Не смог убрать текстовый файл.</translation>
+        <translation>Не могу удалить текстовый файл.</translation>
     </message>
     <message>
         <source>No document defined.
@@ -705,11 +705,11 @@ You have to create a new document</source>
     </message>
     <message>
         <source>Export text file</source>
-        <translation>Экспорт в текст файл</translation>
+        <translation>Экспорт в текстовый файл</translation>
     </message>
     <message>
         <source>Import text file</source>
-        <translation>Импорт из текст файла</translation>
+        <translation>Импорт из текстового файла</translation>
     </message>
     <message>
         <source>Could not export to text file.</source>
@@ -785,7 +785,7 @@ Please enter again.</source>
         <source>
 before continuing?</source>
         <translation>
-прежде чем продолжать?</translation>
+прежде чем продолжить?</translation>
     </message>
     <message>
         <source>&amp;Save</source>
