@@ -58,7 +58,7 @@ public slots:
 
 private:
     void updateListinViews();
-    void updateView(); 
+    void updateView( bool newdata = false ); 
     void clearForCategory();
     bool contactCompare( const OContact &cnt, int category );
     void parseName( const QString& name, QString *first, QString *middle,

@@ -51,7 +51,12 @@ void AbLabel::setContacts( const OContactAccess::List& viewList )
 
 int AbLabel::currentEntry_UID()
 {
-	return ( (*m_itCurContact).uid() );
+	OContact contact = *m_itCurContact;
+
+	if ( contact.isEmpty() )
+		return 0;
+	else
+		return ( contact.uid() );
 }
 
 OContact AbLabel::currentEntry()

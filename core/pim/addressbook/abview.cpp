@@ -124,15 +124,18 @@ void AbView::replaceEntry( const OContact &contact )
 
 OContact AbView::currentEntry()
 {
+	OContact currentContact;
+
 	switch ( (int) m_curr_View ) {
 	case TableView:
-		return ( m_abTable -> currentEntry() );
+		currentContact = m_abTable -> currentEntry();
 		break;
 	case CardView:
-		return ( m_ablabel -> currentEntry() );
+		currentContact = m_ablabel -> currentEntry();
 		break;
 	}
-	return OContact();
+	m_curr_Contact = currentContact.uid();
+	return currentContact;
 }
 
 bool AbView::save()
@@ -145,17 +148,20 @@ bool AbView::save()
 void AbView::load()
 {
 	qWarning("abView:Load data");
+
+	// Letter Search is stopped at this place
+	emit signalClearLetterPicker();
 	
 	if ( m_inPersonal )
 		m_list = m_contactdb->allRecords();
-	else
+	else{
 		m_list = m_contactdb->sorted( true, 0, 0, 0 );
-
-	clearForCategory();
+		clearForCategory();
+	}
 
 	qWarning ("Number of contacts: %d", m_list.count());
 
-	updateView(); 
+	updateView( true ); 
 	
 }
 
@@ -224,7 +230,7 @@ void AbView::setShowByLetter( char c )
 		clearForCategory();
 		m_curr_Contact = 0;
 	}
-	updateView();
+	updateView( true );
 }
 
 void AbView::setListOrder( const QValueList<int>& ordered )
@@ -325,7 +331,7 @@ void AbView::slotDoFind( const QString &str, bool caseSensitive, bool useRegExp,
 	clearForCategory();
 	
 	// Now show all found entries
-	updateView();
+	updateView( true );
 }
 
 void AbView::offSearch()
@@ -407,7 +413,7 @@ void AbView::updateListinViews()
 		m_ablabel -> setContacts( m_list );
 }
 
-void  AbView::updateView()
+void  AbView::updateView( bool newdata )
 {
 	qWarning("AbView::updateView()");
 
@@ -416,22 +422,25 @@ void  AbView::updateView()
 	}
 
 	// If we switching the view, we have to store some information
-	if ( m_list.count() ){
-		switch ( (int) m_prev_View ) {
-		case TableView:
-			m_curr_Contact = m_abTable -> currentEntry_UID();
-			break;
-		case CardView:
-			m_curr_Contact = m_ablabel -> currentEntry_UID();
-			break;
-		}
-	}else
-		m_curr_Contact = 0;
+	if ( !newdata ){
+		if ( m_list.count() ){
+			switch ( (int) m_prev_View ) {
+			case TableView:
+				m_curr_Contact = m_abTable -> currentEntry_UID();
+				break;
+			case CardView:
+				m_curr_Contact = m_ablabel -> currentEntry_UID();
+				break;
+			}
+		}else
+			m_curr_Contact = 0;
+	}
 	
 	// Feed all views with new lists
-	updateListinViews();
+	if ( newdata )
+		updateListinViews();
 
-	// Inform the world that the view is changed
+	// Tell the world that the view is changed
 	if ( m_curr_View != m_prev_View )
 		emit signalViewSwitched ( (int) m_curr_View );
 

@@ -15,45 +15,40 @@ Feature requests:
 Known Bugs:
 -----------
 - OK-Key does not switch from Detailview (ablable) to Listview
-- After finising search and after Edit: Clear Picker
-- After Edit: Table position back to edited entry.
-- Combo in Contacteditor: Field "Default-Email" is not correctly implemented and 
-  should be removed by a picker/combo.
 - Name order selected in "contacteditor" not used in list view.
+
 - Language not English (tested with german opie-translation): 
 	1. Configure nicht übersetzt (alles leer).
 	2. Contacteditor nur teilweise übersetzt.
-	3. Kategorie-Picker geht nicht (nur bei Openzaurus).
+	3. Kategorie-Picker geht nicht.
 
 
 Bugs but not in addressbook:
 -----------------------------
 - VCARD: Import of Anniversary does not work correctly (currently disabled)
 - VCARD: If umlaut (äöüß) in address, the parser gets confused..
-- Exporting and reimporting of Jobtitle fails.
+
+- Exporting and reimporting of Jobtitle fails (Could not reproduce this ! (se))
 
 
 Urgent:
 --------
-- Contact-Editor is temporarely reanabled. Wait for replacement.
+- Implement Button Pics
+- Fix start of opie-mail
+
+ContactEditor:
+- Contact-Editor is temporarely reenabled. Wait for replacement.
 - Redesign of Contacteditor
 - Store last settings of combo-boxes
 - Category is on the wrong position after changing to personal and back to normal
 	( Temporarily workaround: Category is never deactivated.. :S )
-- Optimize Table Update...
-- Change MyDialog to Config
-- Implement Button Pics
-- Fix start of opie-mail
+- Personal and Business Web-page is not editable 
 
 Important:
 ----------
 
+- Implement a picker/combo for the default email.
 - After search (Started with Return): KeyFocus should be on Tabelle
-- Searchwidget closed: Selected user is jumping
-- Wenn suchen beendet, dann dauert das Tabellenupdate (was überhaupt überflüssig ist)
-	zu lange..
-
-- Store position and state of toolbar
 
 - IRDA Receive: Contact is added, but start of editor with new entry expected..
 - "What's this" should be added (Deleyed after Feature Freeze)
@@ -68,6 +63,9 @@ Less important:
 
 Should be Fixed (not absolute sure, need further validation):
 -------------------------------------------------------------
+- Searchwidget closed: Selected user is jumping
+- Wenn suchen beendet, dann dauert das Tabellenupdate (was überhaupt überflüssig ist)
+	zu lange..
 
 
 Fixed:
@@ -104,3 +102,8 @@ Fixed:
 	There are already entries in Cardview after up/down
 - Personal Details: Anniversary zeigt Fantasie-Werte
 - Unfiled shown just in Category "All" and "Unfiled". 
+- After finising search and after Edit: Clear Picker
+- After Edit: Table position back to edited entry.
+- Optimize Table Update...
+- Change MyDialog to Config
+- Store position and state of toolbar

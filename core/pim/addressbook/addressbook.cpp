@@ -653,7 +653,7 @@ void AddressbookWindow::editEntry( EntryMode entryMode )
 		abEditor->setEntry( m_abView -> currentEntry() );
 	else if ( entryMode == NewEntry )
 		abEditor->setEntry( entry );
-	// other things may chane the caption.
+	// other things may change the caption.
 	abEditor->setCaption( tr("Edit Address") );
 	
 #if defined(Q_WS_QWS) || defined(_WS_QWS_)
