@@ -467,10 +467,10 @@ void Config::write( const QString &fn )
     QMap< QString, ConfigGroup >::Iterator g_it = groups.begin();
 
     for ( ; g_it != groups.end(); ++g_it ) {
- 	str += "[" + g_it.key() + "]\n";
- 	ConfigGroup::Iterator e_it = ( *g_it ).begin();
- 	for ( ; e_it != ( *g_it ).end(); ++e_it )
- 	    str += e_it.key() + " = " + *e_it + "\n";
+        str += "[" + g_it.key() + "]\n";
+        ConfigGroup::Iterator e_it = ( *g_it ).begin();
+        for ( ; e_it != ( *g_it ).end(); ++e_it )
+            str += e_it.key() + " = " + *e_it + "\n";
     }
     cstr = str.utf8();
 
@@ -558,7 +558,7 @@ bool Config::parse( const QString &l )
     QString line = l.stripWhiteSpace();
 
     if ( line [0] == QChar ( '#' ))
-    	return true; // ignore comments
+        return true; // ignore comments
 
     if ( line[ 0 ] == QChar( '[' ) ) {
 	QString gname = line;
