@@ -1,4 +1,4 @@
-/* -------------------------------------------------------------------------- */
+
 /*                                                                            */
 /* [widget_layer.h]         Widget Layer                                      */
 /*                                                                            */
@@ -9,7 +9,6 @@
 // fellow devels:
 //   just mail me (ibotty@web.de), what you additionally need from the main widget 
 //   (or say in chat)
-
 
 
 class WidgetLayer : public QObject
@@ -29,7 +28,7 @@ public:
 	/**
 	 * sets the image
 	 */
-	void setImage( const Character* const newimg, int lines, int colums );
+	virtual void setImage( const Character* const newimg, int lines, int colums );
 
 	/**
 	 * annoy the user
@@ -39,12 +38,12 @@ public:
 	/**
 	 * return the lines count
 	 */
-	int lines()	{ return _lines; }
+	int lines()	{ return m_lines; }
 	
 	/**
 	 * return the columns count
 	 */
-	int columns()	{ return _columns }
+	int columns()	{ return m_columns }
 
 	/**
 	 * copy selection into clipboard, etc
@@ -116,6 +115,16 @@ slots:
 	 */
 	onClearSelection();
 
+// protected vars
+protected:
+	
+	/**
+	 * current Session
+	 */
+	Session m_session;
+
+	/**
+	 * other misc vars
+	 */
+
 };
-
-
