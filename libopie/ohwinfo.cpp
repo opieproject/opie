@@ -31,7 +31,7 @@ OHwInfo::OHwInfo ( )
 	
 	if ( f. open ( IO_ReadOnly )) {
 		QTextStream ts ( &f );
-		m_data-> m_modelstr = ts. readLine ( );
+		m_data-> m_modelstr = "H" + ts. readLine ( );
 		
 		if ( m_data-> m_modelstr == "H3100" )
 			m_data-> m_model = OMODEL_iPAQ_H31xx;
