@@ -36,7 +36,7 @@ DingWidget::DingWidget(QWidget *parent, QString word, QTextBrowser *browser_top,
   	QString opie_dir = getenv("OPIEDIR");
 	QFile file( opie_dir+"/noncore/apps/odict/eng_ita.dic" );
 	QStringList lines;
-
+	
 	if(  file.open(  IO_ReadOnly ) )
 	{
 		QTextStream stream(  &file );
@@ -47,7 +47,7 @@ DingWidget::DingWidget(QWidget *parent, QString word, QTextBrowser *browser_top,
 		file.close();
 	}
 
-	lines = lines.grep( word );
+	lines = lines.grep( queryword );
 
 	QString top, bottom;
 
@@ -58,22 +58,30 @@ DingWidget::DingWidget(QWidget *parent, QString word, QTextBrowser *browser_top,
 
 void DingWidget::parseInfo( QStringList &lines, QString &top, QString &bottom )
 {
+
+ 	QString current;
+ 	QString left;
+ 	QString right;
 	QRegExp reg_div( "\\" );
 	QRegExp reg_word( queryword );
-	QString substitute = "<b>"+queryword+"</b>";
+	QString substitute = "<font color='#FF0000'>"+queryword+"</font>";
 	QStringList toplist, bottomlist;
 	for( QStringList::Iterator it = lines.begin() ; it != lines.end() ; ++it )
 	{
-		QString current = *it;
-        QString temp = current.left( current.find(reg_div) );
-		temp.replace( reg_word, substitute );
-		toplist.append( temp );
-		temp =  current.right( current.length() - current.find(reg_div) - 1 );
-		temp.replace( reg_word, substitute );
-		bottomlist.append( temp );
+		current = *it;
+		left = current.left( current.find(reg_div) );
+ 		right = current.right( current.length() - current.find(reg_div) - 1 );
+ 		if ( left.contains( reg_word ) ){
+		  left.replace( queryword, substitute );
+ 		  toplist.append( left + " -> " + right);
+		}else{
+		  right.replace( reg_word, substitute );
+ 		  bottomlist.append( right + " -> " + left );
+		}
+		//		.replace( reg_word, substitute );
 	}
 		
 	//thats it, the lists are rendered. Lets put them in one string
-	bottom = bottomlist.join( "\n" );
-	top = toplist.join( "\n" );
+	bottom = bottomlist.join( "<br>\n" );
+	top = toplist.join( "<br>\n" );
 }

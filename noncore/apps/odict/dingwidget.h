@@ -22,6 +22,7 @@ class DingWidget : public QWidget
 		DingWidget(QWidget *parent = 0, QString word = 0, QTextBrowser* = 0, QTextBrowser* =0);
 
 	private:
+        	QString search_word;
 		void parseInfo( QStringList& , QString&, QString& );
 		QString queryword;
 };
