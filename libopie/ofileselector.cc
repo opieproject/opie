@@ -125,7 +125,7 @@ OFileSelector::OFileSelector(const QString &mimeFilter, QWidget *parent,
   }
   initVars();
   m_currentDir = QPEApplication::documentDir();
-  m_mode = OPEN;
+  m_mode = FILESELECTOR;
   m_selector = NORMAL;
   m_shClose = closeVisible;
   m_shNew = newVisible;
@@ -155,6 +155,8 @@ void OFileSelector::setNewVisible( bool visible )
 				 m_shNew, m_shClose);
     connect(m_select, SIGNAL(fileSelected( const DocLnk & ) ),
 	    this, SLOT( slotFileBridgeSelected(const DocLnk & ) ) );
+    connect(m_select, SIGNAL(closeMe() ),
+	    this, SIGNAL(closeMe() ) );
     //connect to close me and other signals as well
     m_stack->addWidget( m_select, NORMAL );
   }else{
@@ -435,9 +437,11 @@ void OFileSelector::slotViewCheck(const QString &sel)
         QString mime = currentMimeType();
       m_select = new FileSelector(mime,
 				  m_stack, "fileselector",
-				  FALSE, FALSE);
+				  m_shNew, m_shClose);
       connect(m_select, SIGNAL(fileSelected( const DocLnk & ) ),
 	      this, SLOT( slotFileBridgeSelected(const DocLnk & ) ) );
+      connect(m_select, SIGNAL(closeMe() ),
+              this, SIGNAL(closeMe() ) );
       //connect to close me and other signals as well
 
       m_stack->addWidget( m_select, NORMAL );
@@ -494,10 +498,12 @@ void OFileSelector::slotMimeCheck(const QString &mime)
       delete m_select;
       m_select = new FileSelector( newMimeType,
                                    m_stack, "fileselector",
-                                   FALSE, FALSE);
+                                   m_shNew, m_shClose);
 
       connect(m_select, SIGNAL(fileSelected( const DocLnk & ) ),
 	      this, SLOT( slotFileBridgeSelected(const DocLnk & ) ) );
+      connect(m_select, SIGNAL(closeMe() ),
+    	      this, SIGNAL(closeMe() ) );
       //connect to close me and other signals as well
       m_stack->addWidget( m_select, NORMAL );
       m_stack->raiseWidget( NORMAL );
@@ -560,10 +566,12 @@ void OFileSelector::init()
       }
     m_select = new FileSelector(mime,
 				m_stack, "fileselector",
-				FALSE, FALSE);
+				m_shNew, m_shClose);
 
     connect(m_select, SIGNAL(fileSelected( const DocLnk & ) ),
 	    this, SLOT( slotFileBridgeSelected(const DocLnk & ) ) );
+    connect(m_select, SIGNAL(closeMe() ),
+	    this, SIGNAL( closeMe() ) );
     //connect to close me and other signals as well
 
     m_stack->addWidget( m_select, NORMAL );
@@ -874,8 +882,8 @@ void OFileSelector::initializeListView()
       }
       if(!m_shClose )
 	m_close->hide();
-      if(!m_shNew)
-	m_close->hide();
+      //if(!m_shNew)
+      //m_close->hide();
 
     } // off toolbar
     // the Main ListView
@@ -1022,9 +1030,18 @@ void OFileSelector::slotCurrentChanged(QListViewItem* item )
     return;
   if( m_selector == EXTENDED || m_selector == EXTENDED_ALL ) {
     OFileSelectorItem *sel = (OFileSelectorItem*) item; // start to use the C++ casts ;)
+    qWarning("current changed");
     if(!sel->isDir() ){
       if( m_shLne )
 	m_edit->setText( sel->text(1) );
+
+      if (m_mode == FILESELECTOR ) {
+          QStringList str = QStringList::split("->", sel->text(1) );
+          QString path =sel->directory() + "/" + str[0].stripWhiteSpace();
+          emit fileSelected(path  );
+          DocLnk lnk( path );
+          emit fileSelected(lnk );
+      }
     }
   }
 }
@@ -1050,7 +1067,11 @@ void OFileSelector::slotClicked( int button, QListViewItem *item, const QPoint &
       }else{
 	if( m_shLne )
 	  m_edit->setText(  str[0].stripWhiteSpace() );
+        qWarning("selected here in slot clicked");
 	emit fileSelected( sel->directory() + "/" + str[0].stripWhiteSpace() );
+	DocLnk lnk( sel->directory() + "/" + str[0].stripWhiteSpace() );
+        qWarning("file selected");
+	emit fileSelected( lnk );
       }
     }
     break;
@@ -1084,6 +1105,9 @@ void OFileSelector::slotOpen()
   if(!sel->isDir() ){
     QStringList str = QStringList::split("->", sel->text(1) );
     slotFileSelected( sel->directory() +"/" +str[0].stripWhiteSpace() );
+    qWarning("slot open");
+    // DocLnk lnk( sel->directory() + "/" + str[0].stripWhiteSpace() );
+    //emit fileSelected( lnk );
   }
 }
 void OFileSelector::slotRescan()
