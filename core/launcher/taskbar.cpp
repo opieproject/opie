@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-**********************************************************************/
+*********************************************************************/
 
 #include "startmenu.h"
 #include "inputmethods.h"
@@ -32,9 +32,9 @@
 #include <qpe/qpeapplication.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/global.h>
-#ifdef QT_QWS_CUSTOM
-#include <qpe/custom.h>
-#endif
+//#ifdef QT_QWS_CUSTOM
+//#include <qpe/custom.h>
+//#endif
 #if defined(QT_QWS_IPAQ)
 #include "qpe/custom-ipaq.h"
 #endif
@@ -151,14 +151,14 @@ TaskBar::TaskBar() : QHBox(0, 0, WStyle_Customize | WStyle_Tool | WStyle_StaysOn
     connect( inputMethods, SIGNAL(inputToggled(bool)),
        this, SLOT(calcMaxWindowRect()) );
     //new QuickLauncher( this );
-    
+
     stack = new QWidgetStack( this );
     stack->setSizePolicy( QSizePolicy( QSizePolicy::Expanding, QSizePolicy::Minimum ) );
     label = new QLabel(stack);
 
     mru = new MRUList( stack );
     stack->raiseWidget( mru );
-    
+
     waitIcon = new Wait( this );
     (void) new AppIcons( this );
 
@@ -272,13 +272,13 @@ void TaskBar::receive( const QCString &msg, const QByteArray &data )
     } else if ( msg == "soundAlarm()" ) {
   Desktop::soundAlarm();
     }
-#ifdef CUSTOM_LEDS    
+#ifdef CUSTOM_LEDS
     else if ( msg == "setLed(int,bool)" ) {
   int led, status;
   stream >> led >> status;
   CUSTOM_LEDS( led, status );
     }
-#endif    
+#endif
 }
 
 QWidget *TaskBar::calibrate(bool)
