@@ -1,0 +1,21 @@
+This requires gsmlib, and hence isn't enabled by default.
+
+In order to compile this, first get gsmlib from http://www.pxh.de/fs/gsmlib/
+
+Compile it, then add 'gsmtool' to the Opie top-level Makefile, set
+GSMLIBDIR to point at the directory where you built gsmlib, reconfigure
+and rebuild Opie.
+
+Warning:
+gsmlib is extremely and gratuitously bloated. It wants rewriting in a sane
+language, without the pointless auto-refcounting structures and crap.
+Certainly without libstdc++, glib, or other idiocy.
+
+You need to make sure -fexceptions is in CXXFLAGS after -fno-exceptions. 
+
+I see lots of segfaults with gcc-2.95.2, but I can only get compiler support
+for gcc 3.1. When I tried to reproduce the errors with gcc 3.1, I couldn't,
+so I no longer care. YMMV.
+
+--
+dwmw2
