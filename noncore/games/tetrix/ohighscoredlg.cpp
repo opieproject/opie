@@ -49,6 +49,8 @@ void OHighscore::getList()
 	lowest = cfg.readNumEntry( "Points" );
 	playerData.clear();
 
+	int rest = 1;	//for the filling up later
+
 	for ( int i = 1 ; i < 11 ; i++ )
 	{
 		if ( cfg.hasGroup( QString::number( i ) ) )
@@ -63,16 +65,33 @@ void OHighscore::getList()
 			playerData.push_back( pPlayerData );
 
 			if ( (temp < lowest) ) lowest = temp;
+			rest++;
 		}
-		else qDebug( "Grupper gibts überhaupt nicht" );
 	}
-	//lowest contains the lowest value in the highscore
+
+	//now I fill up the rest of the list
+	if ( rest < 11 ) //only go in this loop if there are less than
+					 //10 highscoreentries
+	{
+		lowest = 0;
+		for ( ; rest < 11 ; rest++ )
+		{
+			t_playerData *pPlayerData = new t_playerData;
+			pPlayerData->sName = tr( "empty");
+			pPlayerData->points = 0;
+
+			playerData.push_back( pPlayerData );
+		}
+	}
+
 }
 
 void OHighscore::checkIfItIsANewhighscore( int points)
 {
-	if ( points > lowest ) isNewhighscore = true; 
-	else isNewhighscore = false;
+	if ( points > lowest )
+		isNewhighscore = true; 
+	else 
+		isNewhighscore = false;
 }
 
 void OHighscore::insertData( QString name , int punkte )
@@ -102,6 +121,7 @@ void OHighscore::insertData( QString name , int punkte )
 			{
 				cfg.setGroup( QString::number( entryNumber ) );
 				cfg.writeEntry( "Name" , ( *insertIterator )->sName );
+				cfg.writeEntry( "Points" , ( *insertIterator )->points );
 				entryNumber++;	
 				insertIterator++;
 			}
@@ -149,6 +169,8 @@ OHighscoreDialog::OHighscoreDialog(OHighscore *highscore, QWidget *parent, const
 void OHighscoreDialog::createHighscoreListView()
 {
 	int pos = 10;
+	int points_ = 0;
+
 	std::list<t_playerData*>::reverse_iterator iListe = hs_->playerData.rbegin();
 	
 	for ( ; iListe != hs_->playerData.rend() ; ++iListe )
@@ -156,7 +178,10 @@ void OHighscoreDialog::createHighscoreListView()
 		QListViewItem *item = new QListViewItem( list );
 		item->setText(  0 , QString::number( pos ) );                   //number
 		item->setText(  1 , ( *iListe )->sName );                       //name
-		item->setText(  2 , QString::number( ( *iListe )->points ) );   //points
+		if ( (  *iListe )->points  == -1 )
+			points_ = 0;
+		else points_ =  ( *iListe )->points;
+		item->setText(  2 , QString::number( points_ ) );   //points
 		pos--;
 	}
 }
