@@ -24,7 +24,7 @@ class ListViewItemConfFile;
 class ListViewConfDir;
 class ListViewItemConf;
 
-class MainWindow : public QDialog//QMainWindow
+class MainWindow : public QMainWindow
 {
     Q_OBJECT
 

@@ -35,8 +35,8 @@
 
 
 MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
-  QDialog( parent, name, f ), _currentItem(0), _fileItem(0)
-{	
+  QMainWindow( parent, name, f ), _currentItem(0), _fileItem(0)
+{
   setCaption( tr("Conf File Editor") );
 
 //	setBaseSize(  qApp->globalStrut() );
@@ -63,7 +63,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
   connect(settingList, SIGNAL( pressed(QListViewItem*) ),
 						this, SLOT(setCurrent(QListViewItem*)));
 	connect( settingList, SIGNAL( clicked( QListViewItem* ) ),
-					   this, SLOT( stopTimer( QListViewItem* ) ) );	
+					   this, SLOT( stopTimer( QListViewItem* ) ) );
 
  	connect( editor->LineEditGroup, SIGNAL( textChanged(const QString&) ),
 	           SLOT( groupChanged(const QString&) ) );
@@ -170,19 +170,19 @@ void MainWindow::stopTimer( QListViewItem* )
 
 void MainWindow::saveConfFile()
 {
-	if (!_fileItem) return;	
+	if (!_fileItem) return;
  	_fileItem->save();
 }
 
 void MainWindow::revertConfFile()
 {
-	if (!_item) return;	
+	if (!_item) return;
  	_item->revert();
 }
 
 void MainWindow::removeConfFile()
 {
-	if (!_item) return;	
+	if (!_item) return;
  	_item->remove();
 }
 
