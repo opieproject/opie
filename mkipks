@@ -55,7 +55,7 @@ do
 	DATADIR=$IMAGEDIR
 	mkdir -p $IMAGEDIR
     ;; -classic)
-        CLASSIC=1
+	classicopts=-c
     ;; -rpm)
 	if [ "$OPIEDIR" != "/opt/Qtopia" ]
 	then
@@ -76,12 +76,6 @@ do
     esac
     shift
 done
-
-if [ -n "$CLASSIC" ]
-then
-    DATADIR=$TDIR/data
-    CTRLDIR=$TDIR/control
-fi
 
 if [ -z "$FILES" ]
 then
@@ -218,7 +212,7 @@ do
 	    [ ! -z "$provides" ] && echo "Provides: $provides" >>$CTRLDIR/control
 	    [ ! -z "$conflicts" ] && echo "Conflicts: $conflicts" >>$CTRLDIR/control
 	    egrep -v "^(Files|Version|Depends|Provides|Conflicts|Architecture):" >>$CTRLDIR/control $i
-	    [ -n "$CLASSIC" ] && echo "$DEB_VERSION" >$TDIR/debian-binary
+	    [ -n "$classicopts" ] && echo "$DEB_VERSION" >$TDIR/debian-binary
 	    base=${i%.control}
 	    scripts="preinst postinst prerm postrm"
 	    for pf in $scripts
@@ -228,24 +222,7 @@ do
 		    cp ${base}.$pf $CTRLDIR/$pf
 		fi
 	    done
-	    if [ -z "$CLASSIC" ]
-	    then
-		cd $ORIGDIR; $OPIEDIR/scripts/ipkg-build -o root -g root $TDIR; cd $OPIEDIR;
-	    else
-	    	if [ "`id -u`" != "0" ]
-		then
-		    if [ -z "$ROOTWARNED" ]
-		    then
-		        echo Warning. You are not root. Please become root or use fakeroot.
-		        ROOTWARNED=1
-		    fi
-		else
-		    chown -R root.root $TDIR/*
-		fi
-		( cd $DATADIR && tar -czf $TDIR/data.tar.gz * )
-		( cd $CTRLDIR && tar -czf $TDIR/control.tar.gz * )
-		( cd $TDIR && tar -czf $OPIEDIR/$package.ipk ./control.tar.gz ./data.tar.gz ./debian-binary )
-	    fi
+	    cd $ORIGDIR; $OPIEDIR/scripts/ipkg-build $classicopts -o root -g root $TDIR; cd $OPIEDIR;
 	    RESULT=$package.ipk
 	    if [ -n "$VERB" ]
 	    then
