@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdata.cpp,v 1.11.2.7 2003-07-30 20:31:12 tille Exp $
+ * $Id: pppdata.cpp,v 1.11.2.8 2003-07-30 22:41:02 harlekin Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -1396,7 +1396,7 @@ bool PPPData::deleteDevice()
     Config cfg = PPPData::config();
     cfg.setGroup(modemGroup());
     cfg.clearGroup();
-    accountList.remove(modemGroup());
+    deviceList.remove(modemGroup());
 
     QString key;
     QStringList keys;
@@ -1440,10 +1440,7 @@ bool PPPData::deleteDevice(const QString &dev)
   if(!setDevice(dev))
     return false;
 
-  deleteDevice();
-
-  return true;
-
+  return deleteDevice();
 }
 
 int PPPData::newdevice()
