@@ -23,8 +23,7 @@
 #include <qpe/resource.h>
 #include <qpe/config.h>
 #include <qpe/qpeapplication.h>
-using namespace Opie::Core;
-using namespace Opie::Ui;
+
 
 /* QT */
 #include <qmenubar.h>
@@ -42,6 +41,9 @@ using namespace Opie::Ui;
 #include <unistd.h>
 #include <sys/stat.h>
 #include <stdlib.h> //getenv
+
+using namespace Opie::Core;
+using namespace Opie::Ui;
 
 #if QT_VERSION < 300
 class QpeEditor : public QMultiLineEdit
