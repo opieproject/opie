@@ -98,6 +98,7 @@ CONFIG_LIBTREMOR core/multimedia/opieplayer/vorbis/tremor tremor.pro
 CONFIG_LIBTREMORPLUGIN core/multimedia/opieplayer/vorbis libtremor.pro
 CONFIG_LIGHT-AND-POWER	core/settings/light-and-power	light-and-power.pro
 CONFIG_LIQUID	noncore/styles/liquid	liquid.pro
+CONFIG_LOCKAPPLET	core/applets/lockapplet	lockapplet.pro
 CONFIG_LOGOUTAPPLET	core/applets/logoutapplet	logoutapplet.pro
 CONFIG_MAIL3		noncore/net/mail		mail.pro
 CONFIG_MAILAPPLET     noncore/net/mail/taskbarapplet  taskbarapplet.pro

@@ -1,0 +1,4 @@
+  config LOCKAPPLET
+    boolean "opie-lockapplet (button in the Opie menu to lock the PDA)"
+    default "y"
+    depends ( LIBQPE || LIBQPE-X11 ) && SECURITY

@@ -38,6 +38,11 @@
 namespace Opie {
 namespace Security {
 
+enum lockMode {
+    IfPowerOn,
+    IfResume,
+    TestNow,
+    LockNow };
 /**
  * This is the dropin replacement for the libqpe Password class.
  * If you call authenticate() a widget will cover the whole screen
@@ -48,9 +53,10 @@ namespace Security {
  * @author Clement Séveillac, Holger Freyther
  */
 class MultiauthPassword {
+
 public:
-    static bool needToAuthenticate( bool atpoweron = false );
-    static void authenticate(bool atpoweron = false);
+    static void authenticate(int authMode = LockNow);
+    static bool needToAuthenticate( bool atpoweron = false );    
 };
 
 

@@ -1,5 +1,5 @@
 #include <opie2/odebug.h>
-#include <opie2/multiauthmainwindow.h>
+#include <opie2/multiauthpassword.h>
 
 #include <qgroupbox.h>
 #include <qvgroupbox.h>
@@ -121,22 +121,8 @@ void MultiauthGeneralConfig::tryAuth()
         owarn << "writing config as user accepted" << oendl;
         m_parentConfig->writeConfigs();
         owarn << "testing authentication" << oendl;
-
-        /* launch the authentication in debug, aka "allowBypass == true", mode
-         */
-
-        Opie::Security::MultiauthMainWindow win(true);
-        // resize the QDialog object so it fills all the screen
-        QRect desk = qApp->desktop()->geometry();
-        win.setGeometry( 0, 0, desk.width(), desk.height() );
-
-        // the authentication has already succeeded (without win interactions)
-        if ( win.isAlreadyDone() )
-            return;
-
-        win.exec();
-
-    }
+        // launch the authentication in testing mode
+        Opie::Security::MultiauthPassword::authenticate(Opie::Security::TestNow);
 
 }
 

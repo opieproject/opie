@@ -510,7 +510,8 @@ void ServerApplication::login(bool at_poweron)
 {
     if ( !loggedin ) {
         Global::terminateBuiltin("calibrate"); // No tr
-        Opie::Security::MultiauthPassword::authenticate(at_poweron);
+        int lockMode = at_poweron ? Opie::Security::IfPowerOn : Opie::Security::IfResume;
+        Opie::Security::MultiauthPassword::authenticate(lockMode);
         loggedin=1;
 #ifndef QT_NO_COP
         QCopEnvelope e( "QPE/Desktop", "unlocked()" );

@@ -1,0 +1,11 @@
+Package: opie-lockapplet
+Files: plugins/applets/liblockapplet.so*
+Priority: optional
+Section: opie/applets
+Maintainer: Opie Team <opie@handhelds.org>
+Architecture: arm
+Depends: task-opie-minimal, opie-security
+Description: Lock Opie now
+ Button to lock Opie (as configured in the Security
+ settings) on demand.
+Version: $QPE_VERSION$EXTRAVERSION

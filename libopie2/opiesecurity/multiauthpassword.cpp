@@ -53,9 +53,11 @@ namespace Security {
 
 
 /**
- * If the users requires authentication... #fixme
+ * Tells if the users requires authentication (used internally to
+ * know whether to repaint the screen on resume)
  *
- * @todo fix up at_poweron attribute
+ * \param at_poweron true if we are booting Opie, false if we are resuming it
+ * \return true if authenticate() launched right now would trigger an authentication
  */
 bool MultiauthPassword::needToAuthenticate(bool at_poweron)
 {
@@ -70,8 +72,9 @@ bool MultiauthPassword::needToAuthenticate(bool at_poweron)
 }
 
 
+
 /**
- * \brief Require user authentication to unlock and continue
+ * \brief Require (if configured so) user authentication to unlock and continue
  *
  * This method will check if you require authentication
  * and then will lock the screen and ask for a successful
@@ -80,15 +83,45 @@ bool MultiauthPassword::needToAuthenticate(bool at_poweron)
  * It may go into an event loop, but anyhow it will only end
  * when the user has successfully authenticated to the system.
  */
-void MultiauthPassword::authenticate(bool at_poweron)
+void MultiauthPassword::authenticate(int lockMode)
 {
-    if ( ! needToAuthenticate(at_poweron) )
-        return;
+    /** 
+     * \par Conditions
+     *
+     * If lockMode is an If, it's conditional:
+     * \li IfPowerOn will not trigger an authentication if
+     *   onStart is set to false in Security.conf,
+     * \li IfResume will not trigger an authentication if
+     *   onResume is set to false in Security.conf.
+     */
+    if ( (lockMode == IfPowerOn) || (lockMode == IfResume) )
+    {
+        Config cfg("Security");
+        cfg.setGroup("Misc");
+        if ( (
+              (lockMode == IfPowerOn) && cfg.readBoolEntry("onStart", false)
+            ) || (
+              (lockMode == IfResume) && cfg.readBoolEntry("onResume", false)
+            ) )
+            return;
+    }
+
+    /**
+     * \li TestNow will ensure that the authentication window will let
+     * people escape through the last screen (which they can reach skipping
+     * all the authentication steps)
+     * \li LockNow will always go on with the authentication, and won't let
+     * people escape.
+     */
+    bool allowByPass = false;
+    
+    if (lockMode == TestNow)
+        allowByPass = true;
 
     /* Constructs the main window, which displays messages and blocks
      * access to the desktop
      */
-    MultiauthMainWindow win;
+    MultiauthMainWindow win(allowByPass);
 
     // resize the QDialog object so it fills all the screen
     QRect desk = qApp->desktop()->geometry();
