@@ -19,7 +19,7 @@
 /*                        */
 /* -------------------------------------------------------------------------- */
 // enhancements added by L.J. Potter <ljp@llornkcor.com>
-//#define QT_QWS_OPIE
+#define QT_QWS_OPIE
 
 #include <qpe/resource.h>
 
