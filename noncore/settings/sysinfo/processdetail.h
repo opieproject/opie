@@ -20,18 +20,18 @@
 #ifndef PROCESSDETAIL_H
 #define PROCESSDETAIL_H
 
-#include <qdialog.h>
+#include <qwidget.h>
 #include <qcombo.h>
 #include <qtextview.h>
 #include <qpushbutton.h>
 #include <qlistview.h>
 
-class ProcessDetail : public QDialog
+class ProcessDetail : public QWidget
 {
     Q_OBJECT
 
 public:
-    ProcessDetail( QWidget* parent,  const char* name, bool modal, WFlags fl );
+    ProcessDetail( QWidget* parent,  const char* name, WFlags fl );
     ~ProcessDetail();
 
     QComboBox* SignalCB;

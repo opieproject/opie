@@ -25,7 +25,6 @@
 #include <qdir.h>
 
 #include "processinfo.h"
-#include "processdetail.h"
 
 ProcessInfo::ProcessInfo( QWidget* parent,  const char* name, WFlags fl )
     : QWidget( parent, name, fl )
@@ -49,6 +48,9 @@ ProcessInfo::ProcessInfo( QWidget* parent,  const char* name, WFlags fl )
     t->start( 5000 );
 
     updateData();
+
+    ProcessDtl = new ProcessDetail( 0, 0, 0 );
+    ProcessDtl->ProcessView->setTextFormat( RichText );
 }
 
 ProcessInfo::~ProcessInfo()
@@ -57,22 +59,16 @@ ProcessInfo::~ProcessInfo()
 
 void ProcessInfo::updateData()
 {
-    QString processnum("");
-    QString processcmd("");
-    QString processstatus("");
-    QString processtime("");
     int pid, ppid, pgrp, session, tty, tpgid, utime, stime, cutime, cstime, counter, priority, starttime,
        signal, blocked, sigignore, sigcatch;
     uint flags, minflt, cminflt, majflt, cmajflt, timeout, itrealvalue, vsize, rss, rlim, startcode,
          endcode, startstack, kstkesp, kstkeip, wchan;
     char state;
-    char comm[255];
+    char comm[64];
 
     ProcessView->clear();
 
-    QDir *procdir = new QDir("/proc");
-    procdir->setFilter(QDir::Dirs);
-    procdir->setSorting(QDir::Name);
+    QDir *procdir = new QDir("/proc", 0, QDir::Name, QDir::Dirs);
     QFileInfoList *proclist = new QFileInfoList(*(procdir->entryInfoList()));
     if ( proclist )
     {
@@ -81,8 +77,8 @@ void ProcessInfo::updateData()
         while ( ( f = it.current() ) != 0 )
         {
             ++it;
-            processnum = f->fileName();
-            if ( processnum >= "0" && processnum <= "99999" )
+            QString processnum = f->fileName();
+            if ( processnum >= "1" && processnum <= "99999" )
             {
                 FILE *procfile = fopen( ( QString ) ( "/proc/" + processnum + "/stat"), "r");
 
@@ -95,10 +91,9 @@ void ProcessInfo::updateData()
                            &itrealvalue, &starttime, &vsize, &rss, &rlim, &startcode, &endcode, &startstack,
                            &kstkesp, &kstkeip, &signal, &blocked, &sigignore, &sigcatch, &wchan );
                     processnum = processnum.rightJustify( 5, ' ' );
-                    processcmd = QString( comm ).replace( QRegExp( "(" ), "" );
-                    processcmd = processcmd.replace( QRegExp( ")" ), "" );
-                    processstatus = state;
-                    processtime.setNum( ( utime + stime ) / 100 );
+                    QString processcmd = QString( comm ).replace( QRegExp( "[()]" ), "" );
+                    QString processstatus = QChar(state);
+                    QString processtime = QString::number( ( utime + stime ) / 100 );
                     processtime = processtime.rightJustify( 9, ' ' );
                     fclose( procfile );
 
@@ -114,24 +109,22 @@ void ProcessInfo::updateData()
 
 void ProcessInfo::viewProcess(QListViewItem *process)
 {
-    QString pid= process->text(0).stripWhiteSpace();
-    QString command = process->text(1);
-    ProcessDetail *processdtl = new ProcessDetail( this, 0, TRUE, 0);
-    processdtl->setCaption( pid + " - " + command );
-    processdtl->pid = pid.toUInt();
-    processdtl->ProcessView->setTextFormat( RichText );
+    QString pid= process->text( 0 ).stripWhiteSpace();
+    QString command = process->text( 1 );
+    ProcessDtl->setCaption( pid + " - " + command );
+    ProcessDtl->pid = pid.toUInt();
     FILE *statfile = fopen( ( QString ) ( "/proc/" + pid + "/status"), "r");
     if ( statfile )
     {
         char line[81];
         fgets( line, 81, statfile );
-        processdtl->ProcessView->setText( line );
+        ProcessDtl->ProcessView->setText( line );
         while ( fgets( line, 81, statfile ) )
         {
-            processdtl->ProcessView->append( line );
+            ProcessDtl->ProcessView->append( line );
         }
         fclose( statfile );
     }
 
-    processdtl->showMaximized();
+    ProcessDtl->showMaximized();
 }

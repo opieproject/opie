@@ -29,19 +29,16 @@
 #include <qlistview.h>
 #include <qmessagebox.h>
 
-ProcessDetail::ProcessDetail( QWidget* parent,  const char* name, bool modal, WFlags fl )
-    : QDialog( parent, name, modal, fl )
+ProcessDetail::ProcessDetail( QWidget* parent,  const char* name, WFlags fl )
+    : QWidget( parent, name, fl )
 {
     pid = 0;
 
     QGridLayout *layout = new QGridLayout( this );
-    layout->setSpacing( 6 );
-    layout->setMargin( 11 );
+    layout->setSpacing( 4 );
+    layout->setMargin( 4 );
 
     SignalCB = new QComboBox( FALSE, this, "SignalCB" );
-    SignalCB->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)1, (QSizePolicy::SizeType)7, SignalCB->sizePolicy().hasHeightForWidth() ) );
-    SignalCB->setMinimumSize( QSize( 50, 24 ) );
-    SignalCB->setMaximumSize( QSize( 600, 24 ) );
     SignalCB->insertItem( " 1: SIGHUP" );
     SignalCB->insertItem( " 2: SIGINT" );
     SignalCB->insertItem( " 9: SIGKILL" );
@@ -51,11 +48,9 @@ ProcessDetail::ProcessDetail( QWidget* parent,  const char* name, bool modal, WF
     layout->addWidget( SignalCB, 1, 0 );
 
     ProcessView = new QTextView( this, "ProcessView" );
-    ProcessView->setFrameShadow( QTextView::Plain );
     layout->addMultiCellWidget( ProcessView, 0, 0, 0, 1 );
 
     SendButton = new QPushButton( this, "SendButton" );
-    SendButton->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)0, (QSizePolicy::SizeType)0, SendButton->sizePolicy().hasHeightForWidth() ) );
     SendButton->setMinimumSize( QSize( 50, 24 ) );
     SendButton->setMaximumSize( QSize( 50, 24 ) );
     SendButton->setText( tr( "Send" ) );
@@ -73,13 +68,14 @@ void ProcessDetail::slotSendClicked()
     sigstr.truncate(2);
     int sigid = sigstr.toUInt();
 
-    if ( !QMessageBox::information( this, caption(),
-                                   ( tr( "You really want to send\n" + SignalCB->currentText() + "\nto this process?") ),
-                                   ( tr( "Yes" ) ), ( tr( "No" ) ), 0 ) )
+    if ( QMessageBox::warning( this, caption(),
+                              tr( "You really want to send\n" + SignalCB->currentText() + "\nto this process?"),
+                              QMessageBox::Yes | QMessageBox::Default, QMessageBox::No | QMessageBox::Escape )
+           == QMessageBox::Yes )
     {
         if ( kill( pid, sigid ) == 0 )
         {
-            accept();
+            hide();
         }
     }
 
