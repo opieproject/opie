@@ -263,4 +263,6 @@ void WLANImp::writeOpts() {
 
   if(!interfaceSetup->saveChanges())
     return;
+
+  QDialog::accept();
 }
