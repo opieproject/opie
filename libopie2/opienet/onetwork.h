@@ -72,6 +72,12 @@ class OMonitoringInterface;
  * ONetwork
  *======================================================================================*/
 
+/**
+ * @brief A container class for all network devices.
+ *
+ * This class provides access to all available network devices of your computer.
+ * @author Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
+ */
 class ONetwork : public QObject
 {
   Q_OBJECT
@@ -81,10 +87,23 @@ class ONetwork : public QObject
     typedef QDictIterator<ONetworkInterface> InterfaceIterator;
 
   public:
+    /**
+     * @returns a pointer to the (one and only) @ref ONetwork instance.
+     */
     static ONetwork* instance();
+    /**
+     * @returns an iterator usable for iterating through all network interfaces.
+     */
     InterfaceIterator iterator() const;
-    bool isWirelessInterface( const char* ) const;
-    ONetworkInterface* interface( QString ) const;
+    /**
+     * @returns true, if the @p interface supports the wireless extension protocol.
+     */
+    bool isWirelessInterface( const char* interface ) const;
+    /**
+     * @returns a pointer to the @ref ONetworkInterface object for the specified @p interface or 0, if not found
+     * @see ONetworkInterface
+     */
+    ONetworkInterface* interface( QString interface ) const;
 
   protected:
     ONetwork();
@@ -100,6 +119,15 @@ class ONetwork : public QObject
  * ONetworkInterface
  *======================================================================================*/
 
+/**
+ * @brief A network interface wrapper.
+ *
+ * This class provides a wrapper for a network interface. All the cumbersume details of
+ * Linux ioctls are hidden under a convenient high-level interface.
+ * @warning Most of the setting methods contained in this class require the appropriate
+ * process permissions to work.
+ * @author Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
+ */
 class ONetworkInterface : public QObject
 {
     friend class OMonitoringInterface;
@@ -109,20 +137,67 @@ class ONetworkInterface : public QObject
     friend class OOrinocoMonitoringInterface;
 
   public:
+    /**
+     * Constructor. Normally you don't create @ref ONetworkInterface objects yourself,
+     * but access them via @ref ONetwork::interface().
+     */
     ONetworkInterface( QObject* parent, const char* name );
+    /**
+     * Destructor.
+     */
     virtual ~ONetworkInterface();
-
-    void setMonitoring( OMonitoringInterface* );
+    /**
+     * Associates a @a monitoring interface with this network interface.
+     * @note This is currently only useful with @ref OWirelessNetworkInterface objects.
+     */
+    void setMonitoring( OMonitoringInterface* monitoring );
+    /**
+     * @returns the currently associated monitoring interface or 0, if no monitoring is associated.
+     */
     OMonitoringInterface* monitoring() const;
+    /**
+     * Setting an interface to promiscuous mode enables the device to receive
+     * all packets on the shared medium - as opposed to packets which are addressed to this interface.
+     */
     bool setPromiscuousMode( bool );
+    /**
+     * @returns true if the interface is set to promiscuous mode.
+     */
     bool promiscuousMode() const;
+    /**
+     * Setting an interface to up enables it to receive packets.
+     */
     bool setUp( bool );
+    /**
+     * @returns true if the interface is up.
+     */
     bool isUp() const;
+    /*
+     * @returns true if the interface is a loopback interface.
+     */
     bool isLoopback() const;
+    /*
+     * @returns true if the interface is featuring supports the wireless extension protocol.
+     */
     bool isWireless() const;
+    /*
+     * @returns the IPv4 address associated with this interface.
+     */
     QString ipV4Address() const;
-    void setMacAddress( const OMacAddress& );
+    /*
+     * Associate the MAC address @a addr with the interface.
+     * @note It can be necessary to shut down the interface prior to calling this method.
+     * @warning This is not supported by all drivers.
+     */
+    void setMacAddress( const OMacAddress& addr );
+    /*
+     * @returns the MAC address associated with this interface.
+     */
     OMacAddress macAddress() const;
+    /*
+     * @returns the data link type currently associated with this interface.
+     * @see #include <net/if_arp.h> for possible values.
+     */
     int dataLinkType() const;
 
   protected:
@@ -141,6 +216,15 @@ class ONetworkInterface : public QObject
  * OChannelHopper
  *======================================================================================*/
 
+/**
+ * @brief A radio frequency channel hopper.
+ *
+ * This class provides a channel hopper for radio frequencies. A channel hopper frequently
+ * changes the radio frequency channel of its associated @ref OWirelessNetworkInterface.
+ * This is necessary when in monitoring mode and scanning for other devices, because
+ * the radio frequency hardware can only detect packets sent on the same frequency.
+ * @author Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
+ */
 class OChannelHopper : public QObject
 {
   public:
@@ -158,7 +242,6 @@ class OChannelHopper : public QObject
     int _tid;
     QValueList<int> _channels;
     QValueList<int>::Iterator _channel;
-
 };
 
 
@@ -166,6 +249,11 @@ class OChannelHopper : public QObject
  * OWirelessNetworkInterface
  *======================================================================================*/
 
+/**
+ * @brief A network interface wrapper for interfaces supporting the wireless extensions protocol.
+ *
+ * This class provides a high-level encapsulation of the Linux wireless extension API.
+ */
 class OWirelessNetworkInterface : public ONetworkInterface
 {
     friend class OMonitoringInterface;
@@ -179,33 +267,84 @@ class OWirelessNetworkInterface : public ONetworkInterface
   public:
     enum Mode { AdHoc, Managed, Monitor };
 
+    /**
+     * Constructor.
+     */
     OWirelessNetworkInterface( QObject* parent, const char* name );
+    /**
+     * Destructor.
+     */
     virtual ~OWirelessNetworkInterface();
-
-    virtual void setChannel( int ) const;
+    /**
+     * Setting the @a channel of the interface changes the radio frequency (RF)
+     * of the corresponding wireless network device.
+     */
+    virtual void setChannel( int channel ) const;
+    /**
+     * @returns the channel index of the current radio frequency.
+     */
     virtual int channel() const;
+    /**
+     * @returns the current radio frequency (in MHz).
+     */
     virtual double frequency() const;
+    /**
+     * @returns the number of radio frequency channels for the
+     * corresponding wireless network device.
+     * @note European devices usually have 14 channels, while American typically feature 11 channels.
+     */
     virtual int channels() const;
     //virtual double frequency(int) const;
 
-    virtual void setMode( Mode ) {};
-    virtual bool mode() const {};
+    virtual void setMode( Mode ) {}; //FIXME: Implement and document this
+    virtual bool mode() const {}; //FIXME: Implement and document this
 
+    /**
+     * Setting the monitor mode on a wireless network interface enables
+     * listening to IEEE 802.11 data and management frames which normally
+     * are handled by the device firmware. This can be used to detect
+     * other wireless network devices, e.g. Access Points or Ad-hoc stations.
+     * @warning Standard wireless network drives don't support the monitor mode.
+     * @warning You need a patched driver for this to work.
+     * @note Enabling the monitor mode is highly driver dependent and requires
+     * the proper @ref OMonitoringInterface to be associated with the interface.
+     * @see OMonitoringInterface
+     */
     virtual void setMonitorMode( bool );
+    /**
+     * @returns true if the device is listening in IEEE 802.11 monitor mode
+     */
     virtual bool monitorMode() const;
-
+    /**
+     * Set the channel hopping @a interval. An @a interval of 0 disables channel hopping.
+     * @see OChannelHopper
+     */
     virtual void setChannelHopping( int interval = 0 );
+    /**
+     * @returns the channel hopping interval or 0, if channel hopping is disabled.
+     */
     virtual int channelHopping() const;
-
-    virtual void setNickName( const QString& ) {};
+    /**
+     * Set the station @a nickname.
+     */
+    virtual void setNickName( const QString& nickname ) {}; //FIXME: Implement this
+    /**
+     * @returns the current station nickname.
+     */
     virtual QString nickName() const;
+    /**
+     * Invoke the private IOCTL @a command with a @number of parameters on the network interface.
+     * @see OPrivateIOCTL
+     */
+    virtual void setPrivate( const QString& command, int number, ... );
+    /**
+     * @returns true if the interface is featuring the private IOCTL @command.
+     */
+    virtual bool hasPrivate( const QString& command );
+    virtual void getPrivate( const QString& command ); //FIXME: Implement and document this
 
-    virtual void setPrivate( const QString&, int, ... );
-    virtual bool hasPrivate( const QString& );
-    virtual void getPrivate( const QString& );
-
-    virtual bool isAssociated() const {};
-    virtual QString associatedAP() const;
+    virtual bool isAssociated() const {}; //FIXME: Implement and document this
+    virtual QString associatedAP() const; //FIXME: Implement and document this
 
     virtual void setSSID( const QString& );
     virtual QString SSID() const;

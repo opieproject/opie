@@ -150,7 +150,6 @@ public:
  *
  * @short A generic class for completing QStrings
  * @author Carsten Pfeiffer <pfeiffer@kde.org>
- * @version $Id: ocompletion.h,v 1.1 2003-03-28 15:11:52 mickeyl Exp $
  */
 
 class OCompletion : public QObject

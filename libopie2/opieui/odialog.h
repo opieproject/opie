@@ -63,8 +63,7 @@ class ODialog : public QDialog
      *
      * Takes the same arguments as @ref QDialog.
      */
-    ODialog(QWidget *parent = 0, const char *name = 0,
-	    bool modal = false, WFlags f = 0);
+    ODialog(QWidget *parent = 0, const char *name = 0, bool modal = false, WFlags f = 0);
 
     /**
      * Return the number of pixels you shall use between a
