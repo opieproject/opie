@@ -178,7 +178,7 @@ void CBInfo::loadTransactions()
     }
     while( i>=0 ) {
         _last=i;
-        tran=new TranInfo(config, i);
+        tran=new TranInfo(&config, i);
         trandesc = tran->desc();
         if( trandesc==QString::null ) {
             delete tran;

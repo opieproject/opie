@@ -41,7 +41,7 @@ class TranInfo
 				  bool = TRUE, const QString & = 0x0, const QString & = 0x0,
 				  float = 0.0, float = 0.0,
 				  const QString & = 0x0, const QString & = 0x0, int =-1 );
-		TranInfo( Config, int );
+		TranInfo( Config *, int );
 
         // getters
 		int            id()			const { return i; }

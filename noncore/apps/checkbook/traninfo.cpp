@@ -50,10 +50,10 @@ TranInfo::TranInfo( int id, const QString &desc, const QDate &date, bool withdra
     _next=next;
 }
 
-TranInfo::TranInfo( Config config, int entry )
+TranInfo::TranInfo( Config *config, int entry )
 {
-	config.setGroup( QString::number( entry ) );
-	QString desc = config.readEntry( "Description", "Not Found" );
+	config->setGroup( QString::number( entry ) );
+	QString desc = config->readEntry( "Description", "Not Found" );
 	if ( desc != "Not Found" )
 	{
 		// ID
@@ -64,7 +64,7 @@ TranInfo::TranInfo( Config config, int entry )
 
 		// Transaction date
 		int yr, mn, dy;
-		QString datestr = config.readEntry( "Date", "" );
+		QString datestr = config->readEntry( "Date", "" );
 		int begin, end;
 		begin = datestr.find( '/' );
 		mn = datestr.left( begin ).toInt();
@@ -74,10 +74,10 @@ TranInfo::TranInfo( Config config, int entry )
 		td.setYMD( yr, mn, dy );
 
 		// Deposit/withdrawal indicator ( withdrawal == TRUE )
-		w = ( config.readEntry( "Payment", "false" ) == "true" );
+		w = ( config->readEntry( "Payment", "false" ) == "true" );
 
 		// Type
-		QString type = config.readEntry( "Type", "0" );
+		QString type = config->readEntry( "Type", "0" );
 		if ( w )
 		{   // Withdrawal types
 			if( type == "0" )
@@ -102,25 +102,25 @@ TranInfo::TranInfo( Config config, int entry )
 		}
 
 		// Category
-		c = config.readEntry( "Category", "" );
+		c = config->readEntry( "Category", "" );
 
 		// Transaction amount
-		QString stramount = config.readEntry( "Amount", "0.00" );
+		QString stramount = config->readEntry( "Amount", "0.00" );
 		bool ok;
 		a = stramount.toFloat( &ok );
 
 		// Transaction fee
-		stramount = config.readEntry( "TransactionFee", "0.00" );
+		stramount = config->readEntry( "TransactionFee", "0.00" );
 		f = stramount.toFloat( &ok );
 
         // Transaction number
-		cn = config.readEntry( "CheckNumber", "" );
+		cn = config->readEntry( "CheckNumber", "" );
 
 		// Notes
-		n = config.readEntry( "Comments", "" );
+		n = config->readEntry( "Comments", "" );
 
         // next
-        _next = config.readNumEntry("Next", -1);
+        _next = config->readNumEntry("Next", -1);
 	}
 }
 
