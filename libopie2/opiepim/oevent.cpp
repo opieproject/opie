@@ -250,7 +250,19 @@ QString OEvent::toRichText()const {
     return text;
 }
 QString OEvent::toShortText()const {
-    return description();
+    QString text;
+    text += QString::number( startDateTime().date().day() );
+    text += ".";
+    text += QString::number( startDateTime().date().month() );
+    text += ".";
+    text += QString::number( startDateTime().date().year() );
+    text += " ";
+    text += QString::number( startDateTime().time().hour() );
+    text += ":";
+    text += QString::number( startDateTime().time().minute() );
+    text += " - ";
+    text += description();
+    return text;
 }
 QString OEvent::type()const {
     return QString::fromLatin1("OEvent");
