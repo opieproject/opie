@@ -49,7 +49,7 @@ RotateApplet::~RotateApplet ( )
 
 int RotateApplet::position ( ) const
 {
-    return 2;
+    return 3;
 }
 
 QString RotateApplet::name ( ) const
