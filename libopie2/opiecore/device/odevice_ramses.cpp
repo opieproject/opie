@@ -104,8 +104,6 @@ void Ramses::playAlarmSound()
 
     changeMixerForAlarm( 0, "/dev/sound/mixer" , &snd);
     snd.play();
-#else
-#error QT_NO_SOUND defined
 #endif
 }
 
@@ -124,7 +122,7 @@ bool Ramses::suspend()
         ::write(fd, writeCommand, sizeof(writeCommand) );
         ::close(fd);
     }
-    
+
     ::usleep ( 200 * 1000 );
     return true;
 }
