@@ -21,12 +21,14 @@ application/pdf     pdf
 application/pgp     pgp
 application/pgp-signature pgp
 application/postscript    ps ai eps
-application/powerpoint    ppt
+application/powerpoint    ppt pps pot
 application/remote-printing
 application/rtf     rtf
 application/slate
 application/wita
+application/smil   smi smil
 application/wordperfect5.1  wp5
+application/zip     zip
 application/x-123   wk
 application/x-Wingz   wz
 application/x-bcpio   bcpio
@@ -51,6 +53,7 @@ application/x-mif   mif
 application/x-msdos-program com exe bat
 application/x-netcdf    nc cdf
 application/x-ns-proxy-autoconfig pac
+application/x-ogg    ogg
 application/x-perl    pl pm
 application/x-sh    sh
 application/x-shar    shar
@@ -59,6 +62,9 @@ application/x-sv4cpio   sv4cpio
 application/x-sv4crc    sv4crc
 application/x-tar   tar
 application/x-tcl   tcl
+application/x-java-archive  jar
+application/x-java-vm    class
+application/x-javascript  js
 application/x-tex   tex
 application/x-texinfo   texinfo texi
 application/x-troff   t tr roff
@@ -71,7 +77,8 @@ application/zip     zip
 audio/prs.sid     sid psid
 audio/basic     au snd
 audio/midi      mid midi kar
-audio/mpeg      mp3 mpga mp2
+audio/mpeg      mp3 mpga mp2 mpega
+audio/mpegurl    m3u
 audio/x-aiff      aif aifc aiff
 audio/x-mod     amf apun dsm far gdm imf it med mod mtm nst s3m stm stx ult uni xm
 audio/x-pn-realaudio    ra ram
@@ -117,6 +124,12 @@ text/x-vCalendar    vcs
 text/x-vCard      vcf
 text/x-xml-tableviewer    xmlt
 text/xml      xml dtd
+text/x-csh      csh
+text/x-csrc      c
+text/x-java     java
+text/x-tex     tex ltx sty cls
+video/x-ms-asf    asf asx
+video/x-msvideo   avi
 video/dl      dl
 video/fli     fli
 video/gl      gl
