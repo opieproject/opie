@@ -76,6 +76,12 @@ Configuration::Configuration( QWidget *parent, Cfg &cfg )
     QStringList lst=cfg.getCategories();
     _listEditCategories->addData( lst );
     _mainWidget->addTab( _listEditCategories, tr( "&Categories" ) );
+
+    // Payees tab
+    _listEditPayees=new ListEdit(_mainWidget, "PAYEES");
+    _listEditPayees->addColumnDef( new ColumnDef( tr("Payee"), (ColumnDef::ColumnType)(ColumnDef::typeString | ColumnDef::typeUnique), tr("New Payee")) );
+    _listEditPayees->addData( cfg.getPayees() );
+    _mainWidget->addTab( _listEditPayees, tr("&Payees") );
 }
 
 Configuration::~Configuration()
@@ -138,6 +144,12 @@ QWidget *Configuration::initSettings(Cfg &cfg)
     lastTabCB->setChecked( cfg.isShowLastTab() );
     layout->addMultiCellWidget( lastTabCB, 4, 4, 0, 1 );
 
+    savePayees = new QCheckBox( tr("Save new description as payee"), container );
+    QWhatsThis::add( savePayees, tr("Click here to save new descriptions in the list of payess.") );
+    savePayees->setMaximumHeight(fh+5);
+    savePayees->setChecked( cfg.getSavePayees() );
+    layout->addMultiCellWidget( savePayees, 5, 5, 0, 1 );
+
     return(control);
 }
 
@@ -150,6 +162,7 @@ void Configuration::saveConfig(Cfg &cfg)
     cfg.setShowBalances( balCB->isChecked() );
     cfg.setOpenLastBook( openLastBookCB->isChecked() );
     cfg.setShowLastTab( lastTabCB->isChecked() );
+    cfg.setSavePayees( savePayees->isChecked() );
 
     // Typelist
     _listEditTypes->storeInList( cfg.getAccountTypes() );
@@ -158,4 +171,7 @@ void Configuration::saveConfig(Cfg &cfg)
     QStringList lst;
     _listEditCategories->storeInList( lst );
     cfg.setCategories( lst );
+
+    // Payees
+    _listEditPayees->storeInList( cfg.getPayees() );
 }

@@ -43,6 +43,7 @@ Cfg::Cfg()
     _showLocks=FALSE;
     _showBalances=FALSE;
     _pCategories=new CategoryList();
+    _bDirty=false;
 }
 
 // --- readStringList ---------------------------------------------------------
@@ -52,8 +53,6 @@ Cfg::Cfg()
 // entries.
 void Cfg::readStringList(Config &cfg, const char *sKey, QStringList &lst)
 {
-qDebug( "%s", sKey );
-
     QString sEntry;
     int iCount;
 
@@ -86,6 +85,7 @@ void Cfg::readConfig(Config &config)
     _openLastBook = config.readBoolEntry( "OpenLastBook", FALSE );
     _sLastBook = config.readEntry("LastBook", "");
     _showLastTab = config.readBoolEntry( "ShowLastTab", FALSE );
+    _bSavePayees = config.readBoolEntry( "SavePayees", FALSE );
 
     // Account types
     readStringList(config, "AccType", _AccountTypes);
@@ -99,6 +99,9 @@ void Cfg::readConfig(Config &config)
         writeStringList(config, "AccType", _AccountTypes);
         config.write();
     }
+
+    // Payees
+    readStringList(config, "Payee", _Payees);
 
     // Read Categories
     QStringList lst;
@@ -131,6 +134,9 @@ void Cfg::readConfig(Config &config)
     } else {
         setCategories(lst);
     }
+
+    // not dirty
+    _bDirty=false;
 }
 
 
@@ -166,9 +172,13 @@ void Cfg::writeConfig(Config &config)
     config.writeEntry( "OpenLastBook", _openLastBook );
     config.writeEntry( "LastBook", _sLastBook );
     config.writeEntry( "ShowLastTab", _showLastTab );
+    config.writeEntry( "SavePayees", _bSavePayees );
 
     // write account types
     writeStringList(config, "AccType", _AccountTypes);
+
+    // write payees
+    writeStringList(config, "Payee", _Payees);
 
     // write categories
     QStringList lst=getCategories();
@@ -176,6 +186,7 @@ void Cfg::writeConfig(Config &config)
 
     // commit write
     config.write();
+    _bDirty=false;
 }
 
 

@@ -49,7 +49,7 @@ class TranInfo
 
 		const QString &desc()		const { return d; }
 		const QDate   &date()		const { return td; }
-		const QString &datestr();
+		const QString &datestr(bool = false);
 		bool           withdrawal()	const { return w; }
 		const QString &type()		const { return t; }
 		const QString &category()	const { return c; }
@@ -93,6 +93,9 @@ class TranInfo
 
 class TranInfoList : public QList<TranInfo>
 {
+    public:
+        TranInfo *findMostRecentByDesc( const QString &desc );
+
 	protected:
 		int compareItems( QCollection::Item, QCollection::Item );
 };

@@ -77,6 +77,11 @@ class Cfg
         void setCurrencySymbol(const char *n) { _currencySymbol=n; }
         QStringList &getAccountTypes() { return(_AccountTypes); }
 
+        // --- Payees
+        QStringList &getPayees() { return(_Payees); }
+        bool getSavePayees() { return(_bSavePayees); }
+        void setSavePayees(bool bSave) { _bSavePayees=bSave; }
+
         // --- Categories
         QStringList getCategories();
         void setCategories(QStringList &lst);
@@ -98,13 +103,16 @@ class Cfg
         // --- writes data to config file
         void writeConfig(Config &cfg);
 
+        // --- dirty flag
+        bool isDirty() { return(_bDirty); }
+        void setDirty(bool bDirty) { _bDirty=bDirty; }
+
+    protected:
         // --- reads list from config file
         static void readStringList(Config &cfg, const char *sKey, QStringList &lst);
 
         // --- writes list in configuration file
         static void writeStringList(Config &cfg, const char *sKey, QStringList &lst);
-
-
 
     private:
         QString  _currencySymbol;
@@ -112,9 +120,13 @@ class Cfg
 		bool _showBalances;
         bool _openLastBook;
         bool _showLastTab;
+        bool _bDirty;
+        bool _bSavePayees;
         QString _sLastBook;
         QStringList _AccountTypes;
         CategoryList *_pCategories;
+        QStringList _Payees;
+
 };
 
 #endif

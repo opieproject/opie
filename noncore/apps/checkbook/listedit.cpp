@@ -116,6 +116,10 @@ void ListEdit::slotAdd()
     QPoint pnt;
     slotClick(_currentItem, pnt, 0);
     _typeTable->setSelected( _currentItem, true );
+
+    // make it selected
+    _typeEdit->setCursorPosition(0);
+    _typeEdit->setSelection(0, _typeEdit->text().length() );
 }
 
 // --- slotDel -------------------------------------------------------------
