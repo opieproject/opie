@@ -1,7 +1,23 @@
 #!/bin/sh
 
-[ -z "$QTE_VERSION" ] && QTE_VERSION=2.3.4
-[ -z "$QTE_BASEVERSION" ] && QTE_BASEVERSION=2.3.4
+if [ -z "$QTE_BASEVERSION" ]
+then
+    if [ -e $QTDIR/include/qglobal.h ]
+    then
+        QTE_BASEVERSION=`cat $QTDIR/include/qglobal.h|grep '^#define QT_VERSION'|grep -v STR|sed -e 's,#define QT_VERSION\t*,,;' -e 's,.*\([0-9]\)\([0-9]\)\([0-9]\).*,\1.\2.\3,;'`
+    else
+        QTE_BASEVERSION=2.3.4
+    fi
+fi
+if [ -z "$QTE_VERSION" ]
+then
+    if [ -e $QTDIR/include/qglobal.h ]
+    then
+        QTE_VERSION=`cat $QTDIR/include/qglobal.h|grep '^#define QT_VERSION_STR'|sed -e 's,#define QT_VERSION_STR\t*,,;' -e 's,.*"\([^"]*\)".*,\1,;'`
+    else
+        QTE_VERSION=2.3.4
+    fi
+fi
 [ -z "$QTE_REVISION" ] && QTE_REVISION=3
 DEB_VERSION=2.0
 
