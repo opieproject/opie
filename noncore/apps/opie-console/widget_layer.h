@@ -1,4 +1,4 @@
-
+/* -------------------------------------------------------------------------- */
 /*                                                                            */
 /* [widget_layer.h]         Widget Layer                                      */
 /*                                                                            */
@@ -10,21 +10,36 @@
 //   just mail me (ibotty@web.de), what you additionally need from the main widget 
 //   (or say in chat)
 
+#ifndef WIDGET_LAYER_H
+#define WIDGET_LAYER_H
+
+// qt includes
+#include <qapplication.h>
+#include <qtimer.h>
+#include <qkeycode.h>
+#include <qclipboard.h>
+
+
+// opie-console includes
+#include "session.h"
+#include "common.h"
 
 class WidgetLayer : public QObject
-{ QObject
+{ Q_OBJECT
 
 public:
+
 	/**
 	 * constructor
 	 */
-	WidgetLayer();
+	WidgetLayer( QObject *parent=0, const char *name=0 );
 
 	/**
 	 * destructor
 	 */
 	virtual ~WidgetLayer();
 
+public:
 	/**
 	 * sets the image
 	 */
@@ -43,17 +58,21 @@ public:
 	/**
 	 * return the columns count
 	 */
-	int columns()	{ return m_columns }
+	int columns()	{ return m_columns; }
 
 	/**
-	 * copy selection into clipboard, etc
+	 * insert current selection (currently this is only the clipboard)
 	 */
-	void emitSelection();
+	void insertSelection();
 
+	/**
+	 * insert text
+	 */
+	void insertText( QString text );
 	/**
 	 * set selection (clipboard) to text
 	 */
-	void setSelection( QString &text )
+	void setSelection( const QString &text );
 
 	/**
 	 * paste content of clipboard
@@ -66,7 +85,7 @@ signals:
 	/**
 	 * key was pressed
 	 */
-	keyPressed( QKeyEvent *e );
+	void keyPressed( QKeyEvent *e );
 
 	/**
 	 * whenever Mouse selects something
@@ -74,17 +93,17 @@ signals:
 	 * 3	Button released
 	 * // numbering due to layout in old TEWidget
 	 */
-	mousePressed( int button, int x, int y );
+	void mousePressed( int button, int x, int y );
 
 	/**
 	 * size of image changed
 	 */
-	imageSizeChanged( int lines, int columns );
+	void imageSizeChanged( int lines, int columns );
 
 	/**
 	 * cursor in history changed
 	 */
-	historyCursorChanged( int value );
+	void historyCursorChanged( int value );
 
 	/**
 	 * selection should be cleared
@@ -94,11 +113,11 @@ signals:
 	/**
 	 * selection begin
 	 */
-	void selectionBegin( const int x, const int y )
+	void selectionBegin( const int x, const int y );
 
 	/**
 	 * selection extended
-	 *  (from begin s.a. to x, y)
+	 *  (from begin (s.a.) to x, y)
 	 */
 	void selectionExtended( const int x, const int y );
 
@@ -108,12 +127,41 @@ signals:
 	 */
 	void selectionEnd( const bool lineBreakPreserve );
 
-slots:
+
+
+// protected methods
+protected:
+	
+	// image operations
+
+	/**
+	 * changes image, to suit new size
+	 * TODO: find meaningful name!
+	 */
+	void propagateSize();
+
+	/**
+	 *
+	 */
+	virtual void calcGeometry();
+
+	/**
+	 * makes an empty image
+	 */
+	void makeImage();
+
+	/**
+	 * clears the image
+	 */
+	void clearImage();
+	
+protected slots:
 	
 	/**
 	 * clear selection
 	 */
-	onClearSelection();
+	void onClearSelection();
+
 
 // protected vars
 protected:
@@ -121,10 +169,32 @@ protected:
 	/**
 	 * current Session
 	 */
-	Session m_session;
+	Session *m_session;
 
 	/**
-	 * other misc vars
+	 * current character image
 	 */
+	QArray<Character> m_image;
 
+	/**
+	 * lines count
+	 */
+	int m_lines;
+
+	/**
+	 * columns count
+	 */
+	int m_columns;
+
+	/**
+	 * clipboard
+	 */
+	QClipboard* m_clipboard;
+
+	/**
+	 * whether widget was resized 
+	 */
+	bool m_resizing;
 };
+
+#endif // WIDGET_LAYER_H

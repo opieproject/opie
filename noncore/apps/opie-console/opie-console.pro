@@ -21,7 +21,8 @@ HEADERS      = io_layer.h io_serial.h \
                common.h \
                history.h \
                screen.h \
-	       keytrans.h
+	       keytrans.h \
+	       widget_layer.h
 
 SOURCES      = io_layer.cpp io_serial.cpp \
 	       file_layer.cpp main.cpp \
@@ -40,7 +41,8 @@ SOURCES      = io_layer.cpp io_serial.cpp \
 	       vt102emulation.cpp \
 	       history.cpp \
 	       screen.cpp \
-	       keytrans.cpp
+	       keytrans.cpp \
+	       widget_layer.cpp
    
 INTERFACES   = configurebase.ui editbase.ui
 INCLUDEPATH += $(OPIEDIR)/include
