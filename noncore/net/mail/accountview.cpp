@@ -69,7 +69,6 @@ void AccountView::slotRightButton(int button, QListViewItem * item,const QPoint&
     m->setFocus();
     m->exec( QPoint( QCursor::pos().x(), QCursor::pos().y()) );
     delete m;
-    setSelected(item,true);
 }
 
 void AccountView::slotLeftButton(int button, QListViewItem * item,const QPoint&,int)
