@@ -417,10 +417,12 @@ void PlayListWidget::writeConfig( Config& cfg ) const {
 void PlayListWidget::addToSelection( const DocLnk& lnk ) {
 //    qDebug("add");
     d->setDocumentUsed = FALSE;
-    if ( mediaPlayerState->playlist() )
-        d->selectedFiles->addToSelection( lnk );
+    if ( mediaPlayerState->playlist() ) {
+        if(QFileInfo(lnk.file()).exists())
+            d->selectedFiles->addToSelection( lnk );
+    }
     else
-  mediaPlayerState->setPlaying( TRUE );
+        mediaPlayerState->setPlaying( TRUE );
 }
 
 
@@ -435,13 +437,15 @@ void PlayListWidget::addAllToList() {
     Global::findDocuments(&filesAll, "video/*;audio/*");
     QListIterator<DocLnk> Adit( filesAll.children() );
     for ( ; Adit.current(); ++Adit )
-        d->selectedFiles->addToSelection( **Adit );
+        if(QFileInfo(Adit.current()->file()).exists())
+            d->selectedFiles->addToSelection( **Adit );
 }
 
 
 void PlayListWidget::addAllMusicToList() {
     QListIterator<DocLnk> dit( files.children() );
-    for ( ; dit.current(); ++dit )
+    for ( ; dit.current(); ++dit ) 
+        if(QFileInfo(dit.current()->file()).exists())
         d->selectedFiles->addToSelection( **dit );
 }
 
@@ -449,7 +453,8 @@ void PlayListWidget::addAllMusicToList() {
 void PlayListWidget::addAllVideoToList() {
     QListIterator<DocLnk> dit( vFiles.children() );
     for ( ; dit.current(); ++dit )
-        d->selectedFiles->addToSelection( **dit );
+        if(QFileInfo( dit.current()->file()).exists())
+            d->selectedFiles->addToSelection( **dit );
 }
 
 
