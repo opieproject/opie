@@ -1,7 +1,7 @@
 /*
  *           kPPP: A pppd front end for the KDE project
  *
- * $Id: devices.cpp,v 1.1.4.4 2003-07-31 11:48:34 tille Exp $
+ * $Id: devices.cpp,v 1.1.4.5 2003-07-31 12:29:44 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -50,16 +50,16 @@ DevicesWidget::DevicesWidget( InterfacePPP* ip, QWidget *parent, const char *nam
     : ChooserWidget(ip->data(), parent, name, f)
 {
   _ifaceppp = ip;
-  QWhatsThis::add(edit_b, tr("Allows you to modify the selected account"));
-  QWhatsThis::add(new_b, tr("Create a new dialup connection\n"
-  			      "to the Internet"));
+  QWhatsThis::add(edit_b, tr("Allows you to modify the selected device"));
+  QWhatsThis::add(new_b, tr("Create a new device");
+
   QWhatsThis::add(copy_b,
-		  tr("Makes a copy of the selected account. All\n"
-		       "settings of the selected account are copied\n"
-		       "to a new account, that you can modify to fit your\n"
+		  tr("Makes a copy of the selected device. All\n"
+		       "settings of the selected device are copied\n"
+		       "to a new device, that you can modify to fit your\n"
 		       "needs"));
   QWhatsThis::add(delete_b,
-		  tr("<p>Deletes the selected account\n\n"
+		  tr("<p>Deletes the selected device\n\n"
 		       "<font color=\"red\"><b>Use with care!</b></font>"));
 
   copy_b->setEnabled( false ); //FIXME
@@ -92,7 +92,6 @@ void DevicesWidget::edit() {
 
   if(result == QDialog::Accepted) {
       listListbox->changeItem(_pppdata->devname(),listListbox->currentItem());
-//    emit resetaccounts();
       _pppdata->save();
   }
 }
@@ -108,7 +107,6 @@ void DevicesWidget::create() {
 
     int result;
     if (_pppdata->newdevice() == -1){
-        qDebug("_pppdata->newaccount() == -1");
         return;
     }
     result = doTab();
@@ -119,7 +117,7 @@ void DevicesWidget::create() {
 
         _pppdata->save();
     } else
-        _pppdata->deleteAccount();
+        _pppdata->deleteDevice();
 }
 
 
@@ -137,7 +135,6 @@ void DevicesWidget::copy() {
   _pppdata->copydevice(listListbox->currentText());
 
   listListbox->insertItem(_pppdata->devname());
-//  emit resetaccounts();
   _pppdata->save();
 }
 
@@ -156,7 +153,6 @@ void DevicesWidget::remove() {
     listListbox->removeItem(listListbox->currentItem());
 
 
-//  emit resetaccounts();
 //  _pppdata->save();
 
 
@@ -201,7 +197,7 @@ int DevicesWidget::doTab(){
 
         if(result == QDialog::Accepted) {
             if (!modem1->save()){
-                QMessageBox::critical(this, "error", tr( "You must enter a unique account name"));
+                QMessageBox::critical(this, "error", tr( "You must enter a unique device name"));
                 ok = false;
             }else{
                  modem2->save();
