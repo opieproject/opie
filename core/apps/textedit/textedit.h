@@ -61,7 +61,7 @@ public slots:
 
 protected:
     void closeEvent( QCloseEvent *e );
-
+    void doSearchBar();
 private slots:
     void setDocument(const QString&);
     void changeFont();

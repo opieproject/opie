@@ -373,7 +373,6 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
 
     searchBar->hide();
 
-
     editor = new QpeEditor( this );
     setCentralWidget( editor );
     editor->setFrameStyle( QFrame::Panel | QFrame::Sunken );
@@ -521,10 +520,15 @@ void TextEdit::fileOpen()
     edited=FALSE;
     if(caption().left(1)=="*")
         setCaption(caption().right(caption().length()-1));
+    doSearchBar();
+}
+
+void TextEdit::doSearchBar()
+{
     Config cfg("TextEdit");
     cfg.setGroup("View");
     if(cfg.readEntry("SearchBar","Closed") != "Opened")
-    searchBar->hide();
+        searchBar->hide();
 }
 
 #if 0
@@ -849,6 +853,7 @@ void TextEdit::setDocument(const QString& fileref)
     editor->setEdited(TRUE);
     edited1=FALSE;
     edited=TRUE;
+    doSearchBar();
 }
 
 void TextEdit::closeEvent( QCloseEvent *e )
