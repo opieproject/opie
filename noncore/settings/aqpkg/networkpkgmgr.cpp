@@ -264,7 +264,7 @@ void NetworkPackageManager :: downloadPackage()
 
         QCheckListItem *item = (QCheckListItem *)packagesList->firstChild();
         ipkg.setOption( "download" );
-        ipkg.setRuntimeDirectory( initDir );
+        ipkg.setRuntimeDirectory( dir );
         do
         {
             if ( item->isOn() )
