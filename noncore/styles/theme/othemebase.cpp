@@ -972,8 +972,12 @@ void OThemeBase::applyResourceGroup( Config *config, int i, QString *copyfrom, Q
 	// together in the misc group, but this makes an easier to read config.
 	if ( i == SliderGroove )
 		roundedSlider = config->readBoolEntry( "SmallGroove", false );
-	else if ( i == ActiveTab || i == InactiveTab )
-		aTabLine = iTabLine = config->readBoolEntry( "BottomLine", true );
+	else if ( i == ActiveTab ) {
+		aTabLine = config->readBoolEntry( "BottomLine", true );
+	}
+	else if ( i == InactiveTab ) {
+		iTabLine = config->readBoolEntry( "BottomLine", true );
+	}
 	else if ( i == Splitter )
 		splitterWidth = config->readNumEntry( "Width", 10 );
 	else if ( i == ComboBox || i == ComboBoxDown ) {
