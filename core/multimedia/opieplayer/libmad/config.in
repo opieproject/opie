@@ -1,4 +1,4 @@
   config LIBMAD
-    boolean "libmad"
+    boolean "libmadplugin"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && OPIEPLAYER

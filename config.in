@@ -86,14 +86,28 @@ endmenu
 
 comment ""
 
+#config APPLETS
+# bool "Applets"
+# default "y"
+
 menu "Applets"
+# depends APPLETS
+  
   source core/applets/config.in
   source noncore/applets/config.in
 endmenu
+
+#config APPS
+# bool "Apps"
+# default "y"
+
 menu "Apps"
+# depends APPS
+  
   source core/apps/config.in
   source noncore/apps/config.in
 endmenu
+
 menu "Communications and Networking"
   source noncore/comm/config.in
   source noncore/mail/config.in
@@ -129,7 +143,4 @@ endmenu
 menu "Tools"
   source noncore/tools/config.in
   source development/config.in
-endmenu
-menu "Unsupported"
-  source noncore/unsupported/config.in
 endmenu

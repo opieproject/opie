@@ -1,5 +1,5 @@
   config LAUNCHER
-    boolean "launcher"
+    boolean "Launcher"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
 
