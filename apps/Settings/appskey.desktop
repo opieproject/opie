@@ -1,7 +1,7 @@
 [Desktop Entry]
 Comment=Set Application Key
 Exec=appskey
-Icon=CustomizeKeys
+Icon=AppsKey/CustomizeKeys
 Type=Application
 Name=Application Key
 CanFastload=0
