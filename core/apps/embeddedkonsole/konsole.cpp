@@ -300,6 +300,7 @@ void Konsole::init(const char* _pgm, QStrList & _args)
   colorMenu->insertItem(tr( "Custom"));
 #endif
   
+  configMenu->insertItem( tr("Font"), fontList );
   configMenu->insertItem(tr( "Colors") ,colorMenu);
 
   connect( fontList, SIGNAL( activated(int) ), this, SLOT( fontChanged(int) ));
@@ -307,7 +308,7 @@ void Konsole::init(const char* _pgm, QStrList & _args)
   connect( colorMenu, SIGNAL( activated(int) ), this, SLOT( colorMenuIsSelected(int) ));
   connect( scrollMenu, SIGNAL(activated(int)),this,SLOT(scrollMenuSelected(int)));
   connect(editCommandListMenu,SIGNAL(activated(int)),this,SLOT(editCommandListMenuSelected(int)));
-  menuBar->insertItem( tr("Font"), fontList );
+
   menuBar->insertItem( tr("Options"), configMenu );
 
   QPEToolBar *toolbar = new QPEToolBar( this );
@@ -666,9 +667,10 @@ void Konsole::colorMenuIsSelected(int iD) {
 /// -------------------------------   some new stuff by L.J. Potter
 void Konsole::colorMenuSelected(int iD)
 { // this is NOT pretty, elegant or anything else besides functional
-//      QString temp;
-//     qDebug( temp.sprintf("colormenu %d", iD));
-    TEWidget* te = getTe();
+//       QString temp;
+//      qDebug( temp.sprintf("colormenu %d", iD));
+
+     TEWidget* te = getTe();
     Config cfg("Konsole");
     cfg.setGroup("Colors");
 //     QColor foreground;
@@ -799,9 +801,10 @@ void Konsole::colorMenuSelected(int iD)
 
 void Konsole::configMenuSelected(int iD)
 {
-//     QString temp;
-//     qDebug( temp.sprintf("configmenu %d",iD));
-    TEWidget* te = getTe();
+//      QString temp;
+//      qDebug( temp.sprintf("configmenu %d",iD));
+
+     TEWidget* te = getTe();
     Config cfg("Konsole");
     cfg.setGroup("Menubar");
     int i,j;
@@ -871,7 +874,8 @@ void Konsole::setColor()
 
 void Konsole::scrollMenuSelected(int index)
 {
-    qDebug( "scrollbar menu %d",index);
+//    qDebug( "scrollbar menu %d",index);
+
     TEWidget* te = getTe();
     Config cfg("Konsole");
     cfg.setGroup("ScrollBar");
