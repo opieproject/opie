@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: general.cpp,v 1.4.2.1 2003-07-15 15:29:08 tille Exp $
+ * $Id: general.cpp,v 1.4.2.2 2003-07-26 23:35:05 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -35,7 +35,7 @@
 #include <qslider.h>
 #include <qspinbox.h>
 #include <qwhatsthis.h>
-
+#include <qpe/config.h>
 // #include <qgroupbox.h>
 
 #include "general.h"
@@ -43,7 +43,7 @@
 //#include "miniterm.h"
 #include "modeminfo.h"
 #include "modemcmds.h"
-#include "devices.h"
+//#include "devices.h"
 #include "pppdata.h"
 //#include <klocale.h>
 #define i18n QObject::tr
@@ -62,10 +62,16 @@ ModemWidget::ModemWidget( InterfacePPP *ifppp, QWidget *parent, const char *name
   tl->addWidget(label1, 0, 0);
 
   modemdevice = new QComboBox(false, this);
+  modemdevice->setEditable( true );
   label1->setBuddy(modemdevice);
 
-  for(k = 0; devices[k]; k++)
-    modemdevice->insertItem(devices[k]);
+  Config cfg("NetworkSetupPPP");
+  cfg.setGroup("Devices_General");
+  QStringList devs = cfg.readListEntry("devices",',');
+  if (devs.isEmpty()) devs << "/dev/modem" << "/dev/ircomm0" << "/dev/ttyS0";
+  modemdevice->insertStringList( devs );
+ //  for(k = 0; devices[k]; k++)
+//     modemdevice->insertItem(devices[k]);
 
   tl->addWidget(modemdevice, 0, 1);
   connect(modemdevice, SIGNAL(activated(int)),
@@ -241,6 +247,21 @@ ModemWidget::ModemWidget( InterfacePPP *ifppp, QWidget *parent, const char *name
   tl->setRowStretch(7, 1);
 }
 
+ModemWidget::~ModemWidget()
+{
+    QStringList devs;
+    for (int i=0;i<modemdevice->count();i++)
+    {
+        QString s = modemdevice->text(i);
+        s.simplifyWhiteSpace();
+        if (! s.isEmpty() ) devs << s;
+    }
+
+    Config cfg("NetworkSetupPPP");
+    cfg.setGroup("Devices_General");
+    cfg.writeEntry("devices",devs,',');
+
+}
 
 void ModemWidget::speed_selection(int) {
   _ifaceppp->data()->setSpeed(baud_c->text(baud_c->currentItem()));

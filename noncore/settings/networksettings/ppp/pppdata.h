@@ -2,7 +2,7 @@
  *
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdata.h,v 1.8.2.1 2003-07-15 15:29:08 tille Exp $
+ * $Id: pppdata.h,v 1.8.2.2 2003-07-26 23:35:05 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -415,9 +415,9 @@ public:
 private:
 
     //static PPPData *_data;
-    int modemDeviceGroup;
+//    int modemDeviceGroup;
     QString passwd;
-    //  static Config* config;                       // configuration object
+    QString deviceName;
     int highcount;                         // index of highest account
     int caccount;                          // index of the current account
     QString cgroup;                        // name of current config group

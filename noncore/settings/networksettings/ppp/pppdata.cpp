@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdata.cpp,v 1.11.2.1 2003-07-15 15:29:08 tille Exp $
+ * $Id: pppdata.cpp,v 1.11.2.2 2003-07-26 23:35:05 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -26,7 +26,7 @@
 
 #include "pppdata.h"
 #include "runtests.h"
-#include "devices.h"
+//#include "devices.h"
 //#include <klocale.h>
 #define i18n QObject::tr
 #include <qpe/config.h>
@@ -42,7 +42,7 @@
 #define SEP QString("%1SEPARATOR%1")
 
 PPPData::PPPData()
-    : modemDeviceGroup(-1),
+    : //modemDeviceGroup(-1),
       passwd(""),
       highcount(-1),        // start out with no entries
       caccount(-1),         // set the current account index also
@@ -344,21 +344,15 @@ void PPPData::setpppdTimeout(int n) {
 
 
 const QString PPPData::modemDevice() {
-  return readConfig (modemGroup(), MODEMDEV_KEY, devices[DEV_DEFAULT]);
+  return readConfig (modemGroup(), MODEMDEV_KEY, "/dev/modem" );
 }
 
 
 bool PPPData::setModemDevice(const QString &n) {
     qDebug("Setting modem dev to >%s<", n.latin1());
-    bool ret = false;
-    for (int i = 0; devices[i]; i++)
-        if (devices[i] == n){
-            modemDeviceGroup = i;
-            writeConfig(modemGroup(), MODEMDEV_KEY, n);
-            ret = true;
-        }
-    qDebug(ret?"SUCCESS":"FAILURE");
-    return ret;
+    deviceName = n;
+    writeConfig(modemGroup(), MODEMDEV_KEY, n);
+    return true;
 }
 
 
@@ -1247,11 +1241,9 @@ void PPPData::setpppdError(int err) {
 
 QString PPPData::modemGroup()
 {
-    if (modemDeviceGroup<0){
-        qDebug("wrong modem %i\n using 0",modemDeviceGroup);
-        modemDeviceGroup = 0; //FIXME!
-    }
-    return QString("%1_%1").arg(MODEM_GRP).arg(modemDeviceGroup);
+    QString g = deviceName;
+    g.replace( QRegExp("/"),"_");
+    return QString("%1_%1").arg(MODEM_GRP).arg(g);
 }
 
 
