@@ -288,7 +288,7 @@ void CategoryTabBar::layoutTabs()
   return;
 
 //    int percentFalloffTable[] = { 100, 70, 40, 12, 6, 3, 1, 0 };
-    int hiddenTabWidth = -12;
+    int hiddenTabWidth = -7;
     int middleTab = currentTab();
     int hframe, vframe, overlap;
     style().tabbarMetrics( this, hframe, vframe, overlap );
