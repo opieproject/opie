@@ -8,6 +8,19 @@ static void never_called_tr_function_um_libqpe_ts_etwas_unter_zu_jubeln() {
 (void)QMessageBox::tr("No");
 }
 
+
+/*!
+  \class QPEMessageBox qpemessagebox.h
+  \brief A message box that provides yes, no and cancel options.
+
+  \ingroup qtopiaemb
+ */
+
+/*!
+  Displays a QMessageBox with parent \a parent and caption \a caption.
+  The message displayed is "Are you sure you want to delete: ",
+  followed by \a object.
+ */
 bool QPEMessageBox::confirmDelete( QWidget *parent, const QString & caption,
 			       const QString & object )
 {

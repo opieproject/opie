@@ -32,6 +32,14 @@
 #include <qpe/qpeapplication.h>
 #include <qmessagebox.h>
 
+/*!
+  \class TimeZoneSelector
+
+  \brief The TimeZoneSelector widget allows users to configure their time zone information.
+
+  \ingroup qtopiaemb
+*/
+
 class TimeZoneSelectorPrivate
 {
 public:
@@ -193,6 +201,10 @@ void TZCombo::handleSystemChannel(const QCString&msg, const QByteArray&)
     }
 }
 
+/*!
+    Creates a new TimeZoneSelector with parent \a p and name \a n.  The combobox will be
+    populated with the available timezones.
+*/
 
 TimeZoneSelector::TimeZoneSelector(QWidget* p, const char* n) :
     QHBox(p,n)
@@ -213,6 +225,9 @@ TimeZoneSelector::TimeZoneSelector(QWidget* p, const char* n) :
                       this, SLOT( slotExecute() ) );
 }
 
+/*!
+  Destroys a TimeZoneSelector.
+*/
 TimeZoneSelector::~TimeZoneSelector()
 {
 }
@@ -228,16 +243,27 @@ bool TimeZoneSelector::localIncluded() const
     return d->includeLocal;
 }
 
-
+/*!
+  Returns the currently selected timezone as a string in location format, e.g.
+  \code Australia/Brisbane \endcode
+*/
 QString TimeZoneSelector::currentZone() const
 {
     return cmbTz->currZone();
 }
 
+/*!
+  Sets the current timezone to \a id.
+*/
 void TimeZoneSelector::setCurrentZone( const QString& id )
 {
     cmbTz->setCurrZone( id );
 }
+/*! \fn void TimeZoneSelector::signalNewTz( const QString& id )
+  This signal is emitted when a timezone has been selected by the user. The id
+  is a \l QString in location format, eg \code Australia/Brisbane \endcode
+*/
+
 
 void TimeZoneSelector::slotTzActive( int )
 {
@@ -246,7 +272,7 @@ void TimeZoneSelector::slotTzActive( int )
 
 void TimeZoneSelector::slotExecute( void )
 {
-  // execute the world time application...  
+  // execute the world time application...
   if (QFile::exists(QPEApplication::qpeDir()+"bin/citytime"))
     Global::execute( "citytime" );
   else
@@ -270,7 +296,7 @@ QStringList timezoneDefaults( void )
     tzs.append( "Tokyo" );
     tzs.append( "America/Denver" );
     tzs.append( "Denver" );
-    
+
     return tzs;
 }
 

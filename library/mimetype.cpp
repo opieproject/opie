@@ -130,50 +130,102 @@ MimeType::Private& MimeType::data()
     return *d;
 }
 
+/*!
+    \class MimeType mimetype.h
+    \brief The MimeType class provides MIME type information.
+
+    A MimeType object is a light-weight value which
+    provides information about a MIME type.
+
+    \ingroup qtopiaemb
+*/
+
+/*!
+    Constructs a MimeType.
+    Normally, \a ext_or_id is a MIME type,
+    but if \a ext_or_id starts with / or contains no /,
+    it is interpretted as a filename and the
+    extension (eg. .txt) is used as the
+    MIME type.
+*/
 MimeType::MimeType( const QString& ext_or_id )
 {
     init(ext_or_id);
 }
 
+/*!
+    Constructs a MimeType from the type() of \a lnk.
+*/
 MimeType::MimeType( const DocLnk& lnk )
 {
     init(lnk.type());
 }
 
+/*!
+    Returns the MIME type identifier.
+*/
 QString MimeType::id() const
 {
     return i;
 }
 
+/*!
+    Returns a description of the MIME Type. This is usually based
+    on the application() associated with the type.
+*/
 QString MimeType::description() const
 {
     MimeTypeData* d = data(i);
     return d ? d->description() : QString::null;
 }
 
+/*!
+    Returns a small QPixmap appropriate for the MIME type.
+*/
 QPixmap MimeType::pixmap() const
 {
     MimeTypeData* d = data(i);
     return d ? d->regIcon() : QPixmap();
 }
 
+/*!
+    \internal
+    This function is not generally available.
+*/
 QString MimeType::extension() const
 {
     return extensions().first();
 }
 
+
+/*!
+    \internal
+    This function is not generally available.
+*/
 QStringList MimeType::extensions() const
 {
     loadExtensions();
     return *(*extFor).find(i);
 }
 
+/*!
+    Returns a larger QPixmap appropriate for the MIME type.
+*/
 QPixmap MimeType::bigPixmap() const
 {
     MimeTypeData* d = data(i);
     return d ? d->bigIcon() : QPixmap();
 }
 
+/*!
+    Returns the AppLnk defining the application associated
+    with this MIME type, or 0 if none is associated.
+
+    The caller must not retain the pointer,
+    but of course you can dereference it to take a copy if needed.
+
+    \sa Service::binding()
+*/
 const AppLnk* MimeType::application() const
 {
     MimeTypeData* d = data(i);
@@ -189,6 +241,9 @@ static QString serviceBinding(const QString& service)
     return "Service-"+svrc;
 }
 
+/*!
+    \internal
+*/
 void MimeType::registerApp( const AppLnk& lnk )
 {
     QStringList list = lnk.mimeTypes();
@@ -213,6 +268,9 @@ void MimeType::registerApp( const AppLnk& lnk )
     }
 }
 
+/*!
+    \internal
+*/
 void MimeType::clear()
 {
     delete d;
@@ -286,11 +344,17 @@ MimeTypeData* MimeType::data(const QString& id)
     return d;
 }
 
+/*!
+    Returns a Qtopia folder containing application definitions.
+*/
 QString MimeType::appsFolderName()
 {
     return QPEApplication::qpeDir() + "apps";
 }
 
+/*!
+    Reloads application definitions.
+*/
 void MimeType::updateApplications()
 {
     clear();
