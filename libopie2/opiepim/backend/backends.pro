@@ -6,7 +6,6 @@ SOURCES += \
         core/backends/odatebookaccessbackend_xml.cpp \
         core/backends/otodoaccessbackend.cpp \
         core/backends/otodoaccess.cpp \
-        core/backends/otodoaccesssql.cpp \
         core/backends/otodoaccessvcal.cpp \
         core/backends/otodoaccessxml.cpp \
         core/backends/odatebookaccess.cpp
@@ -28,6 +27,7 @@ HEADERS += \
         core/backends/odatebookaccess.h 
 
 contains( ENABLE_SQL_PIM_BACKEND, y ) {
+	message ( Enabling the SQL Backend for libopiepim2 )
 	DEFINES += __USE_SQL
 	LIBS    += -lopiedb2
 	HEADERS += core/backends/otodoaccesssql.h \
@@ -37,3 +37,8 @@ contains( ENABLE_SQL_PIM_BACKEND, y ) {
 		   core/backends/ocontactaccessbackend_sql.cpp \
 		   core/backends/odatebookaccessbackend_sql.cpp
 }
+
+!contains( ENABLE_SQL_PIM_BACKEND, y ) {
+	message ( No SQL Backend in libopiepim2 )
+}
+

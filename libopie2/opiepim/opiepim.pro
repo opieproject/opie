@@ -8,11 +8,12 @@ SOURCES     = opimcontact.cpp opimcontactfields.cpp opimrecord.cpp opimtodo.cpp 
               opimnotifymanager.cpp opimevent.cpp
 INTERFACES  =
 TARGET      = opiepim2
-VERSION     = 1.8.5
+VERSION     = 1.8.6
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 LIBS        += -lopiecore2
 
+include ( $(OPIEDIR)/gen.pro )
 include ( core/core.pro )
 include ( core/backends/backends.pro )
 include ( ui/ui.pro )
@@ -24,4 +25,3 @@ include ( ui/ui.pro )
 contains( platform, x11 ) {
   LIBS        = -L$(OPIEDIR)/lib -Wl,-rpath,$(OPIEDIR)/lib 
 }
-
