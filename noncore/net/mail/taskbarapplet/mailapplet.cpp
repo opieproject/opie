@@ -71,6 +71,8 @@ void MailApplet::slotClicked() {
     }
 
     if (m_statusMail) m_statusMail->reset_status();
+
+    hide();
 }
 
 void MailApplet::startup() {
