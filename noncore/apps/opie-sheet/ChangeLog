@@ -1,3 +1,33 @@
+January 7, 2004
+	* Release by hayzel (koppermind@panafonet.gr)
+	This version has many valuable changes, though It may have some annoying bugs. Please if you are interested in opie-sheet try it hard, so I can fix some of them. Also If you want some other functions that must be here and are missing feel free to ask them. (no financial functions please. :)  I really hate them )
+	-Fixed a bug with non closed parenthesis editing&recalculation infinite loop.
+	-Added support for functions that can parse parameters not ONLY as numbers but also as strings.
+	-Added many functions that cover many computational topics rendering opie-sheet a computational tool-spreadsheet at last. (total 90 functions!)
+	-Maintained compatibility with the opie-fileformat.
+	-New icons.
+	-Found that the DataParser was not a real RPN compiler of the expressions. In fact it was returning faulty results in calculations, in both binary or unary operations. A1-A2-A3 was parsed as A1-(A2-A3). A1 was parsed as A1.
+	-Added new class "Expression" a general Parser for spreadsheet-expression. Imported from an old C# project of mine.
+	-Now can also parse <>=!%&^|"" in expressions.
+	-Added experimental Excel File format import!. The opie-sheet can import any excel file in BIFF7/BIFF8 format. These formats are used in Excel XP,2000,95. The Excel Importer class is in a good coding level.. BUT it is not complete. Only strings,numbers,formulas are imported. Not formatting rules. Not all the functions are converted in the functions of opie-sheet. Infact FEW functions are converted.
+	-Fixed a bug with Sheet Recalculation. Added ReCalc() function. Opie-sheet was calculating wrong the values of expression in opening/importing. if a value needed was not loaded yet in the time of calculation. Solved with ReCalc() each time the active sheet is changing.
+
+
+	*known issues:
+	-if someone enters directly text as parameter to a string function the text renders as uppercase due to the calculation engine that uppercases all the parsing sentence.
+	-randbetween return only integer part random... if both limit numbers are integers.
+	-skew and kurt function give different results compared to kspread-oofice equivalents.
+	-unstable parser Excel Class
+	-string vars and string functions are not correctly handled by excel importer.
+	-unicode strings are converted FINE in QString unicode format, but cannot be rendered fine if a suitable unicode font is not setuped as the default string. So the string is junked in the opie-sheet and may crash the parser.
+
+	*TODOs:
+	-surelly a much full-stable excel importer.
+	-Cell Manipulation of many Data is really slow.... must change the QList data type. To a structure more efficient.
+	-maybe some more functions.
+	-maybe some kind of charts drawing?
+	-maybe kspread or ooffice files import/export.
+
 October 08, 2002
 
 	* Release 1.0.2 (by thufir)
