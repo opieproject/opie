@@ -170,27 +170,6 @@ bool Jornada::setDisplayBrightness( int bright )
 }
 
 
-bool Jornada::suspend( )
-{
-    qDebug("ODevice::suspend");
-    if ( !isQWS( ) ) // only qwsserver is allowed to suspend
-        return false;
-
-    if ( d->m_model == Model_Unknown ) // better don't suspend in qvfb / on unkown devices
-        return false;
-
-    bool res = false;
-    ODevice::sendSuspendmsg();
-
-    struct timeval tvs;
-    ::gettimeofday ( &tvs, 0 );
-
-    ::sync(); // flush fs caches
-    res = ( ::system ( "apm --suspend" ) == 0 );
-
-    return res;
-}
-
 bool Jornada::setDisplayStatus ( bool on )
 {
     bool res = false;

@@ -30,12 +30,12 @@
 #ifndef OPIE_CORE_DEVICE_BEAGLE_H
 #define OPIE_CORE_DEVICE_BEAGLE_H
 
-#include "odevice.h"
+#include "odevice_abstractmobiledevice.h"
 
 namespace Opie {
 namespace Core {
 namespace Internal {
-class Beagle : public ODevice {
+class Beagle : public OAbstractMobileDevice {
 public:
     Beagle();
     ~Beagle();

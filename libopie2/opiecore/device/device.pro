@@ -1,5 +1,6 @@
 HEADERS    += device/odevice.h          \
               device/odevicebutton.h    \
+	      device/odevice_abstractmobiledevice.h \
 	      device/odevice_beagle.h   \
               device/odevice_ipaq.h     \
               device/odevice_jornada.h  \
@@ -11,6 +12,7 @@ HEADERS    += device/odevice.h          \
 
 SOURCES    += device/odevice.cpp        \
               device/odevicebutton.cpp  \
+	      device/odevice_abstractmobiledevice.cpp \
 	      device/odevice_beagle.cpp \
               device/odevice_ipaq.cpp   \
               device/odevice_jornada.cpp\

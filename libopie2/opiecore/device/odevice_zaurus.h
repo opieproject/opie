@@ -30,7 +30,7 @@
 #ifndef ODEVICE_ZAURUS
 #define ODEVICE_ZAURUS
 
-#include <opie2/odevice.h>
+#include "odevice_abstractmobiledevice.h"
 
 #ifndef ARRAY_SIZE
 #define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
@@ -91,7 +91,7 @@ namespace Opie {
 namespace Core {
 namespace Internal {
 
-class Zaurus : public ODevice
+class Zaurus : public OAbstractMobileDevice
 {
   protected:
     virtual void init(const QString&);
@@ -114,7 +114,6 @@ class Zaurus : public ODevice
     virtual bool hasHingeSensor() const;
     virtual OHingeStatus readHingeSensor() const;
 
-    virtual bool suspend();
     virtual Transformation rotation() const;
     virtual ODirection direction() const;
 

@@ -30,12 +30,12 @@ _;:,     .>    :=|.         This program is free software; you can
 #ifndef ODEVICE_YOPY
 #define ODEVICE_YOPY
 
-#include <opie2/odevice.h>
+#include "odevice_abstractmobiledevice.h"
 
 namespace Opie {
 namespace Core {
 namespace Internal {
-class Yopy : public ODevice
+class Yopy : public OAbstractMobileDevice
 {
   protected:
 

@@ -332,7 +332,7 @@ bool SIMpad::suspend() // Must override because SIMpad does NOT have apm
     if ( !isQWS( ) ) // only qwsserver is allowed to suspend
         return false;
 
-    bool res  = ODevice::suspend();
+    bool res  = OAbstractMobileDevice::suspend();
 
     /*
      * restore the screen content if we really

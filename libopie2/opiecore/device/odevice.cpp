@@ -254,10 +254,6 @@ ODevice::~ODevice()
     delete d;
 }
 
-//#include <linux/apm_bios.h>
-
-#define APM_IOC_SUSPEND          OD_IO( 'A', 2 )
-
 /**
 * This method will try to suspend the device
 * It only works if the user is the QWS Server and the apm application
@@ -273,16 +269,6 @@ bool ODevice::suspend()
 {
     return false; // default implementation == unknown device or qvfb
 }
-
-//#include <linux/fb.h> better not rely on kernel headers in userspace ...
-
-#define FBIOBLANK             OD_IO( 'F', 0x11 ) // 0x4611
-
-/* VESA Blanking Levels */
-#define VESA_NO_BLANKING      0
-#define VESA_VSYNC_SUSPEND    1
-#define VESA_HSYNC_SUSPEND    2
-#define VESA_POWERDOWN        3
 
 /**
 * This sets the display on or off

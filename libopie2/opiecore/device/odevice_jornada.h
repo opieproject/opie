@@ -30,12 +30,12 @@
 #ifndef ODEVICE_JORNADA
 #define ODEVICE_JORNADA
 
-#include <opie2/odevice.h>
+#include "odevice_abstractmobiledevice.h"
 
 namespace Opie {
 namespace Core {
 namespace Internal {
-class Jornada : public ODevice
+class Jornada : public OAbstractMobileDevice
 {
 
   protected:
@@ -43,7 +43,6 @@ class Jornada : public ODevice
     virtual void initButtons();
 
   public:
-    virtual bool suspend ( );
     virtual bool setDisplayBrightness ( int b );
     virtual bool setDisplayStatus ( bool on);
     virtual int displayBrightnessResolution() const;

@@ -132,6 +132,10 @@ struct z_button z_buttons_c700 [] = {
 
 void Zaurus::init(const QString& cpu_info)
 {
+    // Set the time to wait until the system is realy suspended
+    // the delta between apm --suspend and sleeping
+    setAPMTimeOut( 15000 );
+    
     // generic distribution code already scanned /etc/issue at that point -
     // embedix releases contain "Embedix <version> | Linux for Embedded Devices"
     if ( d->m_sysverstr.contains( "embedix", false ) )
@@ -481,38 +485,6 @@ bool Zaurus::setDisplayStatus( bool on )
     }
     return res;
 }
-
-bool Zaurus::suspend()
-{
-    qDebug("ODevice::suspend");
-    if ( !isQWS( ) ) // only qwsserver is allowed to suspend
-        return false;
-
-    if ( d->m_model == Model_Unknown ) // better don't suspend on unknown devices
-        return false;
-
-    bool res = false;
-    ODevice::sendSuspendmsg();
-
-    struct timeval tvs, tvn;
-    ::gettimeofday ( &tvs, 0 );
-
-    ::sync(); // flush fs caches
-    res = ( ::system ( "apm --suspend" ) == 0 );
-
-    // This is needed because the apm implementation is asynchronous and we
-    // can not be sure when exactly the device is really suspended
-    if ( res ) {
-        do { // Yes, wait 15 seconds. This APM sucks big time.
-            ::usleep ( 200 * 1000 );
-            ::gettimeofday ( &tvn, 0 );
-        } while ((( tvn. tv_sec - tvs. tv_sec ) * 1000 + ( tvn. tv_usec - tvs. tv_usec ) / 1000 ) < 15000 );
-    }
-
-    QCopEnvelope ( "QPE/Rotation", "rotateDefault()" );
-    return res;
-}
-
 
 Transformation Zaurus::rotation() const
 {

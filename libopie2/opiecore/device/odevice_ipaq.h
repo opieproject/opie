@@ -30,7 +30,7 @@
 #ifndef ODEVICE_IPAQ
 #define ODEVICE_IPAQ
 
-#include "odevice.h"
+#include "odevice_abstractmobiledevice.h"
 
 /* QT */
 #include <qwindowsystem_qws.h>
@@ -39,7 +39,7 @@ namespace Opie {
 namespace Core {
 namespace Internal {
 
-class iPAQ : public ODevice, public QWSServer::KeyboardFilter
+class iPAQ : public OAbstractMobileDevice, public QWSServer::KeyboardFilter
 {
 
   protected:

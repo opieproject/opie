@@ -30,7 +30,7 @@
 #ifndef ODEVICE_RAMSES
 #define ODEVICE_RAMSES
 
-#include <opie2/odevice.h>
+#include "odevice_abstractmobiledevice.h"
 /* QT */
 #include <qwindowsystem_qws.h>
 

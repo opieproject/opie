@@ -1,6 +1,9 @@
 /*
                              This file is part of the Opie Project
-                             Copyright (C) 2003, 2004 The Opie Team <opie-devel@handhelds.org>
+                             Copyright (C) 2004, 2005 Holger Hans Peter Freyther <freyther@handhelds.org>
+                             Copyright (C) 2004, 2005 Michael 'mickey' Lauer <mickeyl@handhelds.org>
+
+
               =.
             .=l.
            .>+-=
@@ -27,49 +30,35 @@
                              Boston, MA 02111-1307, USA.
 */
 
-#ifndef ODEVICE_SIMPAD
-#define ODEVICE_SIMPAD
+#ifndef OPIE_CORE_DEVICE_ABSTRACT_MOBILE_DEVICE
+#define OPIE_CORE_DEVICE_ABSTRACT_MOBILE_DEVICE
 
-#include "odevice_abstractmobiledevice.h"
-
-/* QT */
-#include <qwindowsystem_qws.h>
+#include "odevice.h"
 
 namespace Opie {
 namespace Core {
-namespace Internal {
-
-class SIMpad : public OAbstractMobileDevice
-{
-  protected:
-    virtual void init(const QString&);
-    virtual void initButtons();
-
-  public:
-    virtual bool suspend();
-
-    virtual bool setDisplayStatus( bool on );
-    virtual bool setDisplayBrightness( int b );
-    virtual int displayBrightnessResolution() const;
-
-    virtual void playAlarmSound();
-
-    virtual QValueList <OLed> ledList() const;
-    virtual QValueList <OLedState> ledStateList( OLed led ) const;
-    virtual OLedState ledState( OLed led ) const;
-    virtual bool setLedState( OLed led, OLedState st );
-
+/**
+ * @short Common Implementations for Linux Handheld Devices
+ *
+ * Abstract Class with implementation for suspending using
+ * asynchrnonus apm implementations and displaystatus using
+ * the Linux Frame Buffer API
+ *
+ */
+class OAbstractMobileDevice : public ODevice {
+    Q_OBJECT
 protected:
-    virtual void timerEvent( QTimerEvent *te );
+    OAbstractMobileDevice();
+    void setAPMTimeOut( int time );
+public:
+    virtual bool suspend();
+    virtual bool setDisplayStatus(bool);
 
-    int m_power_timer;
-
-    OLedState m_leds [2];
 private:
-    static void updateAllWidgets();
+    int m_timeOut;
 };
 }
 }
-}
+
 
 #endif
