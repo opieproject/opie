@@ -49,7 +49,9 @@ CityTime::CityTime( QWidget *parent, const char* name,
       bAdded(false)
 {
     Config config( "qpe" );
+    config.setGroup( "Time" );
     bWhichClock = config.readBoolEntry( "AMPM", TRUE );
+    qDebug( QString("%1").arg(bWhichClock) );
     frmMap->changeClock( bWhichClock );
 
     char *pEnv;
@@ -183,7 +185,7 @@ void CityTime::showTime( void )
     for ( i = 0, itTime.toFirst(); i < CITIES; i++, ++itTime) {
         if ( !strCityTz[i].isNull() ) {
             if ( setenv( "TZ", strCityTz[i], true ) == 0 ) {
-                itTime.current()->setText( TimeString::shortTime(bWhichClock) );
+	      itTime.current()->setText( TimeString::shortTime( bWhichClock ) );
             } else {
                 QMessageBox::critical( this, tr( "Time Changing" ),
                 tr( "There was a problem setting timezone %1" )
