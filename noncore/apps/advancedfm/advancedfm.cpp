@@ -730,9 +730,13 @@ QString fs;
         fs= getFileSystemType((const QString &) currentDir.canonicalPath());
         QFileInfo fileInfo( currentDir.canonicalPath()+"/"+curFile);
         qDebug( fileInfo.owner());
-         if( fileInfo.isExecutable() || fs == "vfat" && fileInfo.filePath().contains("/bin") ) {
-             QCopEnvelope e("QPE/System", "execute(QString)" );
-             e << curFile;
+        if( (fileInfo.permission( QFileInfo::ExeUser)
+             | fileInfo.permission( QFileInfo::ExeGroup)
+             | fileInfo.permission( QFileInfo::ExeOther)) // & fs.find("vfat",0,TRUE) == -1) {
+            | fs == "vfat" && fileInfo.filePath().contains("/bin") ) {
+//        if( fileInfo.isExecutable() |
+            QCopEnvelope e("QPE/System", "execute(QString)" );
+            e << curFile;
          } else {
         curFile =  currentDir.canonicalPath()+"/"+curFile;
             DocLnk nf(curFile);
@@ -749,7 +753,10 @@ QString fs;
         fs= getFileSystemType((const QString &) currentRemoteDir.canonicalPath());
         qDebug("Filesystemtype is "+fs);
         QFileInfo fileInfo( currentRemoteDir.canonicalPath()+"/"+curFile);
-         if(fileInfo.isExecutable() || fs == "vfat" && fileInfo.filePath().contains("/bin") ) {
+        if( (fileInfo.permission( QFileInfo::ExeUser)
+             | fileInfo.permission( QFileInfo::ExeGroup)
+             | fileInfo.permission( QFileInfo::ExeOther)) // & fs.find("vfat",0,TRUE) == -1) {
+            | fs == "vfat" && fileInfo.filePath().contains("/bin") ) {
                  QCopEnvelope e("QPE/System", "execute(QString)" );
                  e << curFile;
          } else {
