@@ -1,7 +1,7 @@
 /*
  *           kPPP: A pppd front end for the KDE project
  *
- * $Id: devices.cpp,v 1.1.4.1 2003-07-30 20:31:12 tille Exp $
+ * $Id: devices.cpp,v 1.1.4.2 2003-07-30 21:50:17 harlekin Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -115,7 +115,7 @@ void DevicesWidget::create() {
 
     if(result == QDialog::Accepted) {
         listListbox->insertItem(_pppdata->devname());
-        listListbox->setSelected(listListbox->findItem(_pppdata->devname()),true);
+        listListbox->setSelected(listListbox->findItem(_pppdata->devname()),true );
 
         _pppdata->save();
     } else
@@ -166,7 +166,7 @@ void DevicesWidget::remove() {
 
 
 int DevicesWidget::doTab(){
-    QDialog *dlg = new QDialog( 0, "newDevice", true );
+    QDialog *dlg = new QDialog( 0, "newDevice", true, Qt::WStyle_ContextHelp );
     QVBoxLayout *layout = new QVBoxLayout( dlg );
     layout->setSpacing( 0 );
     layout->setMargin( 1 );

@@ -1,7 +1,7 @@
 /*
  *           kPPP: A pppd front end for the KDE project
  *
- * $Id: accounts.cpp,v 1.9.2.6 2003-07-30 20:31:12 tille Exp $
+ * $Id: accounts.cpp,v 1.9.2.7 2003-07-30 21:50:16 harlekin Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -61,17 +61,7 @@ AccountWidget::AccountWidget( PPPData *pd, QWidget *parent, const char *name, WF
 		  tr("<p>Deletes the selected account\n\n"
 		       "<font color=\"red\"><b>Use with care!</b></font>"));
 
-//<<<<<<< accounts.cpp
-//   QHBoxLayout *l1 = new QHBoxLayout;
-//   l1->addStretch(1);
-//   l1->addLayout(l12);
 
-//   accountlist_l->insertStringList(_pppdata->getAccountList());
-
-//   for (int i = 0; i < (int)accountlist_l->count(); i++){
-//       if ( accountlist_l->text(i) == _pppdata->accname() )
-//           accountlist_l->setCurrentItem( i );
-// =======
 
    copy_b->setEnabled( false ); //FIXME
  //  delete_b->setEnabled( false ); //FIXME
@@ -81,7 +71,6 @@ AccountWidget::AccountWidget( PPPData *pd, QWidget *parent, const char *name, WF
    for (uint i = 0; i < listListbox->count(); i++){
        if ( listListbox->text(i) == _pppdata->accname() )
            listListbox->setCurrentItem( i );
-// >>>>>>> 1.9.2.4.2.1
   }
 }
 
@@ -176,7 +165,7 @@ void AccountWidget::remove() {
 
 
 int AccountWidget::doTab(){
-    QDialog *dlg = new QDialog( 0, "newAccount", true );
+    QDialog *dlg = new QDialog( 0, "newAccount", true, Qt::WStyle_ContextHelp );
     QVBoxLayout *layout = new QVBoxLayout( dlg );
     layout->setSpacing( 0 );
     layout->setMargin( 1 );
