@@ -39,8 +39,7 @@ SOURCES		= drawpad.cpp \
 		  texttool.cpp \
 		  thumbnailview.cpp \
 		  tool.cpp
-INCLUDEPATH	+= $(OPIEDIR)/include \
-		  $(QTDIR)/src/3rdparty/zlib
+INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS		+= -lqpe -lopie
 DESTDIR		= $(OPIEDIR)/bin

@@ -28,8 +28,6 @@
 #include <qtextstream.h>
 #include <qxml.h>
 
-#include <zlib.h>
-
 const int PAGE_BACKUPS = 99;
 
 class DrawPadCanvasXmlHandler: public QXmlDefaultHandler
@@ -93,10 +91,6 @@ bool DrawPadCanvasXmlHandler::startElement(const QString& namespaceURI, const QS
         m_state = InData;
         m_dataLenght = atts.value("length").toULong();
         m_dataFormat = atts.value("format");
-
-        if (m_dataFormat.isEmpty()) {
-            m_dataFormat = "XPM";
-        }
     }
 
     return true;
@@ -150,21 +144,8 @@ bool DrawPadCanvasXmlHandler::characters(const QString& ch)
             byteArray[i] = r;
         }
 
-
         QImage image;
-
-        if (m_dataFormat == "XPM") {
-            if (m_dataLenght < ch.length() * 5) {
-                m_dataLenght = ch.length() * 5;
-            }
-
-            QByteArray byteArrayUnzipped(m_dataLenght);
-            ::uncompress((uchar*)byteArrayUnzipped.data(), &m_dataLenght, (uchar*)byteArray.data(), byteArray.size());
-
-            image.loadFromData((const uchar*)byteArrayUnzipped.data(), m_dataLenght, m_dataFormat);
-        } else {
-            image.loadFromData((const uchar*)byteArray.data(), m_dataLenght, m_dataFormat);
-        }
+        image.loadFromData((const uchar*)byteArray.data(), m_dataLenght, m_dataFormat);
 
         Page* page = new Page(m_title, image.width(), image.height());
         page->setLastModified(m_date);
