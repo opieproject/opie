@@ -1,128 +1,129 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>SoundSettings</name>
     <message>
         <source>Shows icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Montrer l&apos;icone</translation>
     </message>
     <message>
         <source>Hides icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Cacher l&apos;icone</translation>
     </message>
 </context>
 <context>
     <name>SoundSettingsBase</name>
     <message>
         <source>11025</source>
-        <translation type="unfinished"></translation>
+        <translation>11025</translation>
     </message>
     <message>
         <source>22050</source>
-        <translation type="unfinished"></translation>
+        <translation>22050</translation>
     </message>
     <message>
         <source>44100</source>
-        <translation type="unfinished"></translation>
+        <translation>44100</translation>
     </message>
     <message>
         <source>Stereo</source>
-        <translation type="unfinished"></translation>
+        <translation>Stereo</translation>
     </message>
     <message>
         <source>16 bit</source>
-        <translation type="unfinished"></translation>
+        <translation>16 bits</translation>
     </message>
     <message>
         <source>Vmemo Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Options de Vmemo</translation>
     </message>
     <message>
         <source>8000</source>
-        <translation type="unfinished"></translation>
+        <translation>8000</translation>
     </message>
     <message>
         <source>33075</source>
-        <translation type="unfinished"></translation>
+        <translation>33075</translation>
     </message>
     <message>
         <source>Visual Alerts</source>
-        <translation type="unfinished"></translation>
+        <translation>Alertes visuelles</translation>
     </message>
     <message>
         <source>Taskbar Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Icone de la bare de la tâche</translation>
     </message>
     <message>
         <source>Key_Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Touche_Espace</translation>
     </message>
     <message>
         <source>Key_Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Touche_Home</translation>
     </message>
     <message>
         <source>Key_Calender</source>
-        <translation type="unfinished"></translation>
+        <translation>Touche_Calendrier</translation>
     </message>
     <message>
         <source>Key_Contacts</source>
-        <translation type="unfinished"></translation>
+        <translation>Touche_Contacts</translation>
     </message>
     <message>
         <source>Key_Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Touche_Menu</translation>
     </message>
     <message>
         <source>Key_Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Touche_Mail</translation>
     </message>
     <message>
         <source>30</source>
-        <translation type="unfinished"></translation>
+        <translation>30</translation>
     </message>
     <message>
         <source>20</source>
-        <translation type="unfinished"></translation>
+        <translation>20</translation>
     </message>
     <message>
         <source>15</source>
-        <translation type="unfinished"></translation>
+        <translation>15</translation>
     </message>
     <message>
         <source>10</source>
-        <translation type="unfinished"></translation>
+        <translation>10</translation>
     </message>
     <message>
         <source>5</source>
-        <translation type="unfinished"></translation>
+        <translation>5</translation>
     </message>
     <message>
         <source>Sample Rate:</source>
-        <translation type="unfinished"></translation>
+        <translation>Taux d&apos;échantillonage:</translation>
     </message>
     <message>
         <source>Recording Directory:</source>
-        <translation type="unfinished"></translation>
+        <translation>Répertoire d&apos;enregistrement:</translation>
     </message>
     <message>
         <source>Recording Key:</source>
-        <translation type="unfinished"></translation>
+        <translation>Touche d&apos;enregistrement:</translation>
     </message>
     <message>
         <source>Recording Limit in seconds:</source>
-        <translation type="unfinished"></translation>
+        <translation>Temps d&apos;enregistrement max en secondes:</translation>
     </message>
     <message>
         <source>Unlimited</source>
-        <translation type="unfinished"></translation>
+        <translation>Sans limite</translation>
     </message>
     <message>
         <source>Restart Opie if needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Redémarrer Opie si nécessaire</translation>
     </message>
     <message>
         <source>Key_Record</source>
-        <translation type="unfinished"></translation>
+        <translation>Touche_Enregistrement</translation>
     </message>
 </context>
 </TS>
