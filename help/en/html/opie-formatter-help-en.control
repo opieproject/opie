@@ -1,11 +1,9 @@
 Package: opie-formatter-help-en
-Files: help/en/html/opie-formatter.html
+Files: help/en/html/formatter.html help/en/html/formatter
 Priority: optional
 Section: opie/onlinedoc
-Maintainer: ljp <llornkcor@handhelds.org>
-Architecture: arm
+Maintainer: Team Opie <opie@handhelds.org>
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-formatter
 License: GPL
-Description: Formatter help files (english)
- 
+Description: formatter help files (en)

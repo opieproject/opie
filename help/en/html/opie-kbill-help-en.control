@@ -1,0 +1,9 @@
+Package: opie-kbill-help-en
+Files: help/en/html/kbill.html help/en/html/kbill
+Priority: optional
+Section: opie/onlinedoc
+Maintainer: Team Opie <opie@handhelds.org>
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-kbill
+License: GPL
+Description: kbill help files (en)

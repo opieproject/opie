@@ -1,0 +1,9 @@
+Package: opie-sheetqt-help-en
+Files: help/en/html/sheetqt.html help/en/html/sheetqt
+Priority: optional
+Section: opie/onlinedoc
+Maintainer: Team Opie <opie@handhelds.org>
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-sheetqt
+License: GPL
+Description: sheetqt help files (en)

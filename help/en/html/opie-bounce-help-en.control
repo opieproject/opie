@@ -1,0 +1,9 @@
+Package: opie-bounce-help-en
+Files: help/en/html/bounce.html help/en/html/bounce
+Priority: optional
+Section: opie/onlinedoc
+Maintainer: Team Opie <opie@handhelds.org>
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-bounce
+License: GPL
+Description: bounce help files (en)

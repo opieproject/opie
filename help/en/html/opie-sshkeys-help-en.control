@@ -1,0 +1,9 @@
+Package: opie-sshkeys-help-en
+Files: help/en/html/sshkeys.html help/en/html/sshkeys
+Priority: optional
+Section: opie/onlinedoc
+Maintainer: Team Opie <opie@handhelds.org>
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-sshkeys
+License: GPL
+Description: sshkeys help files (en)

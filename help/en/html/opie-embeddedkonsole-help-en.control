@@ -1,11 +1,9 @@
 Package: opie-embeddedkonsole-help-en
-Files: help/en/html/opie-embeddedkonsole.html
+Files: help/en/html/embeddedkonsole.html help/en/html/embeddedkonsole
 Priority: optional
 Section: opie/onlinedoc
-Maintainer: ljp <llornkcor@handhelds.org>
-Architecture: arm
+Maintainer: Team Opie <opie@handhelds.org>
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-embeddedkonsole
 License: GPL
-Description: Open Embeddedkonsole help files (english)
- 
+Description: embeddedkonsole help files (en)
