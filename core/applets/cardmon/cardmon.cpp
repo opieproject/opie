@@ -64,7 +64,7 @@ CardMonitor::~CardMonitor() {
     if( popupMenu ) { delete popupMenu; }
 }
 
-void CardMonitor::popup(QString message, QString icon="") {
+void CardMonitor::popUp(QString message, QString icon="") {
     if ( ! popupMenu ) {
 	popupMenu = new QPopupMenu();
     }
@@ -82,7 +82,11 @@ void CardMonitor::popup(QString message, QString icon="") {
 	p. x ( ) + ( width ( ) / 2 ) - ( s. width ( ) / 2 ),
 	p. y ( ) - s. height ( ) ), 0);
 
-    QTimer::singleShot( 2000, this, SLOT(popupMenuTimeout()) );
+    QTimer::singleShot( 2000, this, SLOT(popupTimeout()) );
+}
+
+void CardMonitor::popupTimeout() {
+    popupMenu->hide();
 }
 
 void CardMonitor::mousePressEvent( QMouseEvent * ) {
@@ -116,21 +120,21 @@ void CardMonitor::mousePressEvent( QMouseEvent * ) {
 	err = system( (const char *) cmd );
 	if ( ( err == 127 ) || ( err < 0 ) ) {
 	    qDebug("Could not execute `/sbin/cardctl eject 0'! err=%d", err);
-	    popup( tr("CF/PCMCIA card eject failed!"));
+	    popUp( tr("CF/PCMCIA card eject failed!"));
 	} 
     } else if ( opt == 0 ) {
         cmd = "/etc/sdcontrol compeject";
         err = system( (const char *) cmd );
         if ( ( err != 0 ) ) {
             qDebug("Could not execute `/etc/sdcontrol comeject'! err=%d", err);
-            popup( tr("SD/MMC card eject failed!"));
+            popUp( tr("SD/MMC card eject failed!"));
 	} 
     } else if ( opt == 2 ) {
         cmd = "/sbin/cardctl eject 1";
         err = system( (const char *) cmd );
 	if ( ( err == 127 ) || ( err < 0 ) ) {
 	    qDebug("Could not execute `/sbin/cardctl eject 1'! err=%d", err);
-	    popup( tr("CF/PCMCIA card eject failed!"));
+	    popUp( tr("CF/PCMCIA card eject failed!"));
 	} 
     }
 
@@ -220,13 +224,13 @@ bool CardMonitor::getStatusPcmcia( int showPopUp ) {
 	    if(cardInPcmcia0) { text += tr("New card: "); }
 	    else { text += tr("Ejected: "); }
 	    text += cardInPcmcia0Name;
-	    popup( text, getIconName( cardInPcmcia0Type ) );
+	    popUp( text, getIconName( cardInPcmcia0Type ) );
 	}
 	if(cardWas1 != cardInPcmcia1) {
 	    if(cardInPcmcia1) { text += tr("New card: "); }
 	    else { text += tr("Ejected: "); }
 	    text += cardInPcmcia1Name;
-	    popup( text, getIconName( cardInPcmcia1Type ) );
+	    popUp( text, getIconName( cardInPcmcia1Type ) );
 	}
     }
 
@@ -257,7 +261,7 @@ bool CardMonitor::getStatusSd( int showPopUp ) {
 	QString text = "";
 	if(cardInSd) { text += "SD Inserted"; }
 	else { text += "SD Removed"; }
-	popup( text); // XX add SD pic
+	popUp( text); // XX add SD pic
     }
 
 #else

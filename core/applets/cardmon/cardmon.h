@@ -51,7 +51,7 @@ private:
     bool cardInSd;
     void iconShow();
     QPopupMenu *popupMenu;
-    void popup(QString message, QString icon="");
+    void popUp(QString message, QString icon="");
     QString getIconName(QString type);
 };
 
