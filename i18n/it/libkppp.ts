@@ -232,19 +232,19 @@ solo da te. Controlla che nessun altro abbia accesso a questo file!</translation
     <name>ChooserWidget</name>
     <message>
         <source>&amp;Edit...</source>
-        <translation type="unfinished">&amp;Modifica...</translation>
+        <translation>&amp;Modifica...</translation>
     </message>
     <message>
         <source>&amp;New...</source>
-        <translation type="unfinished">&amp;Nuovo...</translation>
+        <translation>&amp;Nuovo...</translation>
     </message>
     <message>
         <source>Co&amp;py</source>
-        <translation type="unfinished">Co&amp;pia</translation>
+        <translation>Co&amp;pia</translation>
     </message>
     <message>
         <source>De&amp;lete</source>
-        <translation type="unfinished">Cance&amp;lla</translation>
+        <translation>Cance&amp;lla</translation>
     </message>
 </context>
 <context>
@@ -390,32 +390,33 @@ nel nuovo account, che potrai modificare liberamente</translation>
     </message>
     <message>
         <source>No devices selected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nessun dispositivo selezionato.</translation>
     </message>
     <message>
         <source>Are you sure you want to delete
 the device &quot;%1&quot;?</source>
-        <translation type="unfinished"></translation>
+        <translation>Sei sicuro di voler cancellare il
+dispositivo &quot;%1&quot;?</translation>
     </message>
     <message>
         <source>Confirm</source>
-        <translation type="unfinished">Conferma</translation>
+        <translation>Conferma</translation>
     </message>
     <message>
         <source>New Device</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuovo Dispositivo</translation>
     </message>
     <message>
         <source>Edit Device: </source>
-        <translation type="unfinished"></translation>
+        <translation>Modifica Dispositivo: </translation>
     </message>
     <message>
         <source>&amp;Device</source>
-        <translation type="unfinished">&amp;Dispositivo</translation>
+        <translation>&amp;Dispositivo</translation>
     </message>
     <message>
         <source>&amp;Modem</source>
-        <translation type="unfinished">&amp;Modem</translation>
+        <translation>&amp;Modem</translation>
     </message>
     <message>
         <source>You must enter a unique account name</source>
@@ -423,28 +424,33 @@ the device &quot;%1&quot;?</source>
     </message>
     <message>
         <source>Allows you to modify the selected device</source>
-        <translation type="unfinished"></translation>
+        <translation>Permette di modificare il dispositivo selezionato</translation>
     </message>
     <message>
         <source>Create a new device</source>
-        <translation type="unfinished"></translation>
+        <translation>Crea un nuovo dispositivo</translation>
     </message>
     <message>
         <source>Makes a copy of the selected device. All
 settings of the selected device are copied
 to a new device, that you can modify to fit your
 needs</source>
-        <translation type="unfinished"></translation>
+        <translation>Crea una copia del dispositivo selezionato.
+Tutte le impostazioni del dispositivo selezionato
+saranno copiate su un nuovo dispositivo, che
+potrai modificare a piacimento</translation>
     </message>
     <message>
         <source>&lt;p&gt;Deletes the selected device
 
 &lt;font color=&quot;red&quot;&gt;&lt;b&gt;Use with care!&lt;/b&gt;&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Cancella il dispositivo selezionato
+
+&lt;font color=&quot;red&quot;&gt;&lt;b&gt;Usare con cautela!&lt;/b&gt;&lt;/font&gt;</translation>
     </message>
     <message>
         <source>You must enter a unique device name</source>
-        <translation type="unfinished"></translation>
+        <translation>Devi inserire un nome univoco per il dispositivo</translation>
     </message>
 </context>
 <context>
@@ -742,11 +748,11 @@ Per informazioni più dettagliate guarda nella documentazione nella sezione &quo
     <name>ModemWidget</name>
     <message>
         <source>Modem &amp;name:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nome Modem:</translation>
     </message>
     <message>
         <source>Modem de&amp;vice:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dispositi&amp;vo Modem:</translation>
     </message>
     <message>
         <source>This specifies the serial port your modem is attached 
@@ -756,23 +762,29 @@ to. On Linux/x86, typically this is either /dev/ttyS0
 If you have an internal ISDN card with AT command
 emulation (most cards under Linux support this), you
 should select one of the /dev/ttyIx devices.</source>
-        <translation type="unfinished"></translation>
+        <translation>Questo specifica la porta seriale dove è attaccato il modem.
+Su Linux/x86, normalmente può essere /dev/ttyS0 
+(COM1 sotto DOS) o /dev/ttyS1 (COM2 sotto DOS).
+
+Se utilizzi una scheda interna ISDN con emulazione dei
+comandi AT (molte schede sotto Linux lo supportano),
+devi selezione una delle /dev/ttyIx.</translation>
     </message>
     <message>
         <source>&amp;Flow control:</source>
-        <translation type="unfinished"></translation>
+        <translation>Controllo di &amp;Flusso:</translation>
     </message>
     <message>
         <source>Hardware [CRTSCTS]</source>
-        <translation type="unfinished"></translation>
+        <translation>Hardware [CRTSCTS]</translation>
     </message>
     <message>
         <source>Software [XON/XOFF]</source>
-        <translation type="unfinished"></translation>
+        <translation>Software [XON/XOFF]</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Nessuno</translation>
     </message>
     <message>
         <source>&lt;p&gt;Specifies how the serial port and modem
@@ -780,11 +792,15 @@ communicate. You should not change this unless
 you know what you are doing.
 
 &lt;b&gt;Default&lt;/b&gt;: CRTSCTS</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Specifica come la porta seriale ed il modem
+comunicano. Non modificare questa impostazione
+se non sai veramente cosa stai facendo.
+
+&lt;b&gt;Predefinito&lt;/b&gt;: CRTSCTS</translation>
     </message>
     <message>
         <source>&amp;Line termination:</source>
-        <translation type="unfinished"></translation>
+        <translation>Terminazione &amp;Linea:</translation>
     </message>
     <message>
         <source>&lt;p&gt;Specifies how AT commands are sent to your
@@ -794,11 +810,17 @@ to the init string, you should try different
 settings here
 
 &lt;b&gt;Default&lt;/b&gt;: CR/LF</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Specifica come i comandi AT sono inviati al
+modem. Molti modem lavorano correttamente con
+l&apos;impostazione predefinita &lt;i&gt;CR/LF&lt;/i&gt;. Se il
+modem non reagisce alla stringa di inizializzazione,
+prova con diverse impostazioni di questo parametro.
+
+&lt;b&gt;Predefinito&lt;/b&gt;: CR/LF</translation>
     </message>
     <message>
         <source>Co&amp;nnection speed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Velocità di Co&amp;nnessione:</translation>
     </message>
     <message>
         <source>Specifies the speed your modem and the serial
@@ -807,11 +829,16 @@ the default of 38400 bits/sec. If everything
 works you can try to increase this value, but to
 no more than 115200 bits/sec (unless you know
 that your serial port supports higher speeds).</source>
-        <translation type="unfinished"></translation>
+        <translation>Specifica la velocità con cui la porta seriale ed il
+modem comunicano. Puoi iniziare con la velocità
+predefinita di 38400 bits/sec. Se è tutto ok puoi
+in seguito aumentarla, ma non più di 115200 bits/sec
+(a meno che la tua porta seriale non supporti velocità
+più elevate).</translation>
     </message>
     <message>
         <source>&amp;Use lock file</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Usa file di lock</translation>
     </message>
     <message>
         <source>&lt;p&gt;To prevent other programs from accessing the
@@ -823,21 +850,31 @@ Here you can select whether this locking will
 be done.
 
 &lt;b&gt;Default&lt;/b&gt;: On</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Per prevenire che altri programmi accedano
+al modem mentre è stabilita la connessione, un file
+può essere creato per indicare che il modem
+è in uso. Un esempio di questo file su Linux è
+&lt;tt&gt;/var/lock/LCK..ttyS1&lt;/tt&gt;
+Qui puoi selezionare se effettuare o no questa
+operazione.
+
+&lt;b&gt;Predefinito&lt;/b&gt;: Attivo</translation>
     </message>
     <message>
         <source>Modem timeout:</source>
-        <translation type="unfinished">Timeout Modem:</translation>
+        <translation>Timeout Modem:</translation>
     </message>
     <message>
         <source> sec</source>
-        <translation type="unfinished"></translation>
+        <translation> sec</translation>
     </message>
     <message>
         <source>This specifies how long &lt;i&gt;kppp&lt;/i&gt; waits for a
 &lt;i&gt;CONNECT&lt;/i&gt; response from your modem. The
 recommended value is 30 seconds.</source>
-        <translation type="unfinished"></translation>
+        <translation>Questo specifica quanto a lungo &lt;i&gt;kppp&lt;/i&gt; deve attendere
+per la stringa di risposta &lt;i&gt;CONNECT&lt;/i&gt; dal modem. Il valore
+raccomandato è di 30 secondi.</translation>
     </message>
 </context>
 <context>
@@ -848,7 +885,7 @@ recommended value is 30 seconds.</source>
     </message>
     <message>
         <source>&amp;Wait for dial tone before dialing</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Attesa del tono di libero prima di comporre</translation>
     </message>
     <message>
         <source>&lt;p&gt;Normally the modem waits for a dial tone
@@ -858,11 +895,17 @@ recognize this sound, or your local phone system
 does not emit such a tone, uncheck this option
 
 &lt;b&gt;Default:&lt;/b&gt;: On</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Normalmente il modem attende un tono di libero
+dalla linea telefonica, che indica che può
+iniziare a comporre il numero. Se il tuo modem non
+riconosce il suono, o il tuo sistema telefonico non
+lo prevede, togli il check da questa opzione
+
+&lt;b&gt;Predefinito:&lt;/b&gt;: Attivo</translation>
     </message>
     <message>
         <source> sec</source>
-        <translation type="unfinished"></translation>
+        <translation> sec</translation>
     </message>
     <message>
         <source>Specifies the number of seconds to wait before
@@ -872,11 +915,17 @@ same number is busy too often.
 
 The default is 0 seconds, you should not change
 this unless you need to.</source>
-        <translation type="unfinished"></translation>
+        <translation>Specifica il numero di secondi da attendere prima di
+ricomporre se tutti i numeri chiamati sono occupati.
+Ciò è necessario poichè alcuni modem si bloccano
+se lo stesso numero è occupato troppe volte.
+
+Normalmente è 0 secondi, non cambiarlo
+se non ne hai realmente bisogno.</translation>
     </message>
     <message>
         <source>Modem &amp;volume:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Volume modem:</translation>
     </message>
     <message>
         <source>Most modems have a speaker which makes
@@ -886,11 +935,17 @@ lower volume.
 
 If this does not work for your modem,
 you must modify the modem volume command.</source>
-        <translation type="unfinished"></translation>
+        <translation>Molti modem hanno un altoparlante che crea
+molto rumore durante la composizione. Qui
+puoi spegnerlo completamente o impostare
+un volume più basso.
+
+Se non funziona con il tuo modem, devi
+modificare direttamente il comando.</translation>
     </message>
     <message>
         <source>Modem asserts CD line</source>
-        <translation type="unfinished"></translation>
+        <translation>Modem esige linea CD</translation>
     </message>
     <message>
         <source>This controls how &lt;i&gt;kppp&lt;/i&gt; detects that the modem
@@ -898,20 +953,25 @@ is not responding. Unless you are having
 problems with this, do not modify this setting.
 
 &lt;b&gt;Default&lt;/b&gt;: Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Questo controlla come &lt;i&gt;kppp&lt;/i&gt; rileva che il modem
+inon sta rispondendo. Se non hai avuto problemi
+con questa opzione, non modificarla.
+
+&lt;b&gt;Predefinito&lt;/b&gt;: Non attivo</translation>
     </message>
     <message>
         <source>Mod&amp;em Commands...</source>
-        <translation type="unfinished"></translation>
+        <translation>Comandi Mod&amp;em...</translation>
     </message>
     <message>
         <source>Allows you to change the AT command for
 your modem.</source>
-        <translation type="unfinished"></translation>
+        <translation>Permette di cambiare i comandi AT per
+il tuo modem.</translation>
     </message>
     <message>
         <source>&amp;Query Modem...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Interroga Modem...</translation>
     </message>
     <message>
         <source>Most modems support the ATI command set to
@@ -920,7 +980,12 @@ find out vendor and revision of your modem.
 Press this button to query your modem for
 this information. It can be useful to help
 you setup the modem</source>
-        <translation type="unfinished"></translation>
+        <translation>Molti modem supportano il comando ATI per
+trovare la marca e la versione del modem.
+
+Premi questo pulsante per interrogare il tuo
+modem per quest&apos;informazione. Può infatti
+essere utile per configurare il modem</translation>
     </message>
 </context>
 <context>
@@ -951,7 +1016,7 @@ you setup the modem</source>
     </message>
     <message>
         <source>&amp;Devices</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Dispositivi</translation>
     </message>
 </context>
 <context>
@@ -1000,422 +1065,429 @@ you setup the modem</source>
     </message>
     <message>
         <source>Unable to open modem.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile interfacciarsi con il modem.</translation>
     </message>
     <message>
         <source>Unable to detect state of CD line.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile identificare stato della linea CD.</translation>
     </message>
     <message>
         <source>The modem is not ready.</source>
-        <translation type="unfinished"></translation>
+        <translation>Il modem non risponde.</translation>
     </message>
     <message>
         <source>The modem is busy.</source>
-        <translation type="unfinished"></translation>
+        <translation>Il modem è occupato.</translation>
     </message>
     <message>
         <source>Modem Ready.</source>
-        <translation type="unfinished"></translation>
+        <translation>Modem Pronto.</translation>
     </message>
     <message>
         <source>Can&apos;t restore tty settings: tcsetattr()
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile ripristinare le impostazioni della tty: tcsetattr()
+</translation>
     </message>
     <message>
         <source>The modem does not respond.</source>
-        <translation type="unfinished"></translation>
+        <translation>Il modem non risponde.</translation>
     </message>
     <message>
         <source>Unknown speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Velocità sconosciuta</translation>
     </message>
     <message>
         <source>ATI Query</source>
-        <translation type="unfinished"></translation>
+        <translation>Richiesta ATI</translation>
     </message>
     <message>
         <source>Unable to create modem lock file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile creare file di lock per il modem.</translation>
     </message>
     <message>
         <source>Looking for modem...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ricerca modem...</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancella</translation>
     </message>
     <message>
         <source>Modem Query timed out.</source>
-        <translation type="unfinished"></translation>
+        <translation>Richiesta Modem scaduta.</translation>
     </message>
     <message>
         <source>Modem device is locked.</source>
-        <translation type="unfinished"></translation>
+        <translation>Device Modem bloccato.</translation>
     </message>
     <message>
         <source>Modem Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Modem Pronto</translation>
     </message>
     <message>
         <source>One moment please...</source>
-        <translation type="unfinished"></translation>
+        <translation>Attendere un attimo...</translation>
     </message>
     <message>
         <source>Modem Query Results</source>
-        <translation type="unfinished"></translation>
+        <translation>Risultati Richiesta Modem</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Chiudi</translation>
     </message>
     <message>
         <source>You&apos;re not allowed to dial out with kppp.
 Contact your system administrator.</source>
-        <translation type="unfinished"></translation>
+        <translation>Non ti è permesso di chiamare con kppp.
+Contatta l&apos;amministratore di sistema.</translation>
     </message>
     <message>
         <source>Cannot find the PPP daemon!
 Make sure that pppd is installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile trovare il demone PPP!
+Assicurati che pppd sia installato.</translation>
     </message>
     <message>
         <source>You do not have the permission to start pppd!
 Contact your system administrator and ask to get access to pppd.</source>
-        <translation type="unfinished"></translation>
+        <translation>Non hai i permessi per avviare pppd!
+Contatta l&apos;amministratore di sistema e chiedi l&apos;accesso a pppd.</translation>
     </message>
     <message>
         <source>You don&apos;t have sufficient permission to run
 %1
 Please make sure that kppp is owned by root and has the SUID bit set.</source>
-        <translation type="unfinished"></translation>
+        <translation>Non hai permessi sufficienti per eseguire
+%1
+Assicurati che kppp sia di proprietà di root e che abbia il bit SUID impostato.</translation>
     </message>
     <message>
         <source>%1 is missing or can&apos;t be read!
 Ask your system administrator to create this file (can be empty) with appropriate read and write permissions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile trovare o leggere %1!
+Chiedi all&apos;amministratore di sistema di creare il file (può essere vuoto) con i corretti permessi di lettura e scrittura.</translation>
     </message>
     <message>
         <source>Edit Modem Commands</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifica Comandi Modem</translation>
     </message>
     <message>
         <source>Pre-init delay (sec/100):</source>
-        <translation type="unfinished"></translation>
+        <translation>Ritardo Pre-inizializzazione (sec/100):</translation>
     </message>
     <message>
         <source>Initialization string %1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Stringa di inizializzazione %1:</translation>
     </message>
     <message>
         <source>Post-init delay (sec/100):</source>
-        <translation type="unfinished"></translation>
+        <translation>Ritardo Post-inizializzazione (sec/100):</translation>
     </message>
     <message>
         <source>Dialing speed (sec/100):</source>
-        <translation type="unfinished"></translation>
+        <translation>Velocità composizione (sec/100):</translation>
     </message>
     <message>
         <source>Init response:</source>
-        <translation type="unfinished"></translation>
+        <translation>Risposta inizializzazione:</translation>
     </message>
     <message>
         <source>No dial tone detection:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ricerca tono di libero:</translation>
     </message>
     <message>
         <source>Dial string:</source>
-        <translation type="unfinished"></translation>
+        <translation>Stringa di composizione:</translation>
     </message>
     <message>
         <source>Connect response:</source>
-        <translation type="unfinished"></translation>
+        <translation>Risposta connessione:</translation>
     </message>
     <message>
         <source>Busy response:</source>
-        <translation type="unfinished"></translation>
+        <translation>Risposta occupato:</translation>
     </message>
     <message>
         <source>No carrier response:</source>
-        <translation type="unfinished"></translation>
+        <translation>Risposta nessun segnale:</translation>
     </message>
     <message>
         <source>No dial tone response:</source>
-        <translation type="unfinished"></translation>
+        <translation>Risposta nessun segnale di libero:</translation>
     </message>
     <message>
         <source>Hangup string:</source>
-        <translation type="unfinished"></translation>
+        <translation>Stringa hangup:</translation>
     </message>
     <message>
         <source>Hangup response:</source>
-        <translation type="unfinished"></translation>
+        <translation>Risposta hangup:</translation>
     </message>
     <message>
         <source>Answer string:</source>
-        <translation type="unfinished"></translation>
+        <translation>Stringa risposta:</translation>
     </message>
     <message>
         <source>Ring response:</source>
-        <translation type="unfinished"></translation>
+        <translation>Risposta squillo:</translation>
     </message>
     <message>
         <source>Answer response:</source>
-        <translation type="unfinished"></translation>
+        <translation>Risposta Ricezione:</translation>
     </message>
     <message>
         <source>Escape string:</source>
-        <translation type="unfinished"></translation>
+        <translation>Stringa escape:</translation>
     </message>
     <message>
         <source>Escape response:</source>
-        <translation type="unfinished"></translation>
+        <translation>Risposta escape:</translation>
     </message>
     <message>
         <source>Guard time (sec/50):</source>
-        <translation type="unfinished"></translation>
+        <translation>Tempo di sicurezza (sec/50):</translation>
     </message>
     <message>
         <source>Volume off/low/high:</source>
-        <translation type="unfinished"></translation>
+        <translation>Volume spento/basso/alto:</translation>
     </message>
     <message>
         <source>Connected at:</source>
-        <translation type="unfinished"></translation>
+        <translation>Connesso a:</translation>
     </message>
     <message>
         <source>Time connected:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tempo connesso:</translation>
     </message>
     <message>
         <source>Volume:</source>
-        <translation type="unfinished"></translation>
+        <translation>Volume:</translation>
     </message>
     <message>
         <source>Session Bill:</source>
-        <translation type="unfinished"></translation>
+        <translation>Conto Sessione:</translation>
     </message>
     <message>
         <source>Total Bill:</source>
-        <translation type="unfinished"></translation>
+        <translation>Conto Totale:</translation>
     </message>
     <message>
         <source>Disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Disconnetti</translation>
     </message>
     <message>
         <source>Byte</source>
-        <translation type="unfinished">Byte</translation>
+        <translation>Byte</translation>
     </message>
     <message>
         <source>KB</source>
-        <translation type="unfinished">KB</translation>
+        <translation>KB</translation>
     </message>
     <message>
         <source>MB</source>
-        <translation type="unfinished">MB</translation>
+        <translation>MB</translation>
     </message>
     <message>
         <source>GB</source>
-        <translation type="unfinished">GB</translation>
+        <translation>GB</translation>
     </message>
     <message>
         <source>Connecting to: </source>
-        <translation type="unfinished"></translation>
+        <translation>In connessione con: </translation>
     </message>
     <message>
         <source>Online</source>
-        <translation type="unfinished"></translation>
+        <translation>Online</translation>
     </message>
     <message>
         <source>Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Offline</translation>
     </message>
     <message>
         <source>Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Log</translation>
     </message>
     <message>
         <source>Connecting to: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Connessione a: %1</translation>
     </message>
     <message>
         <source>Running pre-startup command...</source>
-        <translation type="unfinished"></translation>
+        <translation>Esecuzione comando pre-avvio...</translation>
     </message>
     <message>
         <source>Initializing modem...</source>
-        <translation type="unfinished"></translation>
+        <translation>Inizializzazione modem...</translation>
     </message>
     <message>
         <source>Setting </source>
-        <translation type="unfinished"></translation>
+        <translation>Impostazioni </translation>
     </message>
     <message>
         <source>Setting speaker volume...</source>
-        <translation type="unfinished"></translation>
+        <translation>Impostazione volume speaker...</translation>
     </message>
     <message>
         <source>Turning off dial tone waiting...</source>
-        <translation type="unfinished"></translation>
+        <translation>Attesa disabilitazione tono di libero...</translation>
     </message>
     <message>
         <source>Dialing %1</source>
-        <translation type="unfinished"></translation>
+        <translation>In composizione %1</translation>
     </message>
     <message>
         <source>Line busy. Hanging up...</source>
-        <translation type="unfinished"></translation>
+        <translation>Linea occupata. Disconnessione...</translation>
     </message>
     <message>
         <source>Line busy. Waiting: %1 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Linea occupata. Attesa: %1 secondi</translation>
     </message>
     <message>
         <source>No Dialtone</source>
-        <translation type="unfinished"></translation>
+        <translation>Nessun Tono di Libero</translation>
     </message>
     <message>
         <source>No Carrier</source>
-        <translation type="unfinished"></translation>
+        <translation>Nessuna Portante</translation>
     </message>
     <message>
         <source>Scanning %1</source>
-        <translation type="unfinished"></translation>
+        <translation>In scansione %1</translation>
     </message>
     <message>
         <source>Saving %1</source>
-        <translation type="unfinished"></translation>
+        <translation>In salvataggio %1</translation>
     </message>
     <message>
         <source>Sending %1</source>
-        <translation type="unfinished"></translation>
+        <translation>In invio %1</translation>
     </message>
     <message>
         <source>Expecting %1</source>
-        <translation type="unfinished"></translation>
+        <translation>In attesa %1</translation>
     </message>
     <message>
         <source>Pause %1 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Pausa %1 secondi</translation>
     </message>
     <message>
         <source>Timeout %1 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Tempo massimo %1 secondi</translation>
     </message>
     <message>
         <source>Hangup</source>
-        <translation type="unfinished"></translation>
+        <translation>Hangup</translation>
     </message>
     <message>
         <source>Answer</source>
-        <translation type="unfinished"></translation>
+        <translation>Risposta</translation>
     </message>
     <message>
         <source>ID %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ID %1</translation>
     </message>
     <message>
         <source>Password %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Password %1</translation>
     </message>
     <message>
         <source>Prompting %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Richiesta %1</translation>
     </message>
     <message>
         <source>PW Prompt %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Richiesta PW %1</translation>
     </message>
     <message>
         <source>Loop Start %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Inizio Ciclo %1</translation>
     </message>
     <message>
         <source>ERROR: Nested too deep, ignored.</source>
-        <translation type="unfinished"></translation>
+        <translation>ERRORE: ciclo troppo annidato, ignorato.</translation>
     </message>
     <message>
         <source>Loops nested too deeply!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ciclo troppo anidato!</translation>
     </message>
     <message>
         <source>Loop End %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Fine Ciclo %1</translation>
     </message>
     <message>
         <source>LoopEnd without matching Start! Line: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ciclo terminato senza trovare lo Start!: %1</translation>
     </message>
     <message>
         <source>Starting pppd...</source>
-        <translation type="unfinished"></translation>
+        <translation>Pppd in esecuzione...</translation>
     </message>
     <message>
         <source>Scan Var: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Var Scan: %1</translation>
     </message>
     <message>
         <source>Found: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Trovato: %1</translation>
     </message>
     <message>
         <source>Looping: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>in ciclo: %1</translation>
     </message>
     <message>
         <source>Script timed out!</source>
-        <translation type="unfinished"></translation>
+        <translation>Tempo scaduto per lo script!</translation>
     </message>
     <message>
         <source>Scanning: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>In ricerca: %1</translation>
     </message>
     <message>
         <source>Expecting: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Atteso: %1</translation>
     </message>
     <message>
         <source>Logging on to network...</source>
-        <translation type="unfinished"></translation>
+        <translation>Registrazione sul network...</translation>
     </message>
     <message>
         <source>Running startup command...</source>
-        <translation type="unfinished"></translation>
+        <translation>In esecuzione comando di avvio...</translation>
     </message>
     <message>
         <source>Done</source>
-        <translation type="unfinished"></translation>
+        <translation>Fatto</translation>
     </message>
     <message>
         <source>pppd command + command-line arguments exceed 2024 characters in length.</source>
-        <translation type="unfinished"></translation>
+        <translation>il comando pppd + le opzioni sulla riga di comando hanno superato i 2024 caratteri di lunghezza.</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Cannot find the PPP daemon!&lt;br&gt;Make sure that pppd is installed and that you have entered the correct path.&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Impossibile trovare il demone PPP!&lt;br&gt;Assicurati che pppd sia installato e che hai inserito il path corretto.&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Cannot execute:&lt;br&gt; %1&lt;br&gt;Please make sure that you have given setuid permission and that pppd is executable.&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Impossibile eseguire:&lt;br&gt; %1&lt;br&gt;Controlla che siano stati assegnati i permessi suid e che pppd sia eseguibile.&lt;br&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Cannot find:&lt;br&gt; %1&lt;br&gt;Please make sure you have setup your modem device properly and/or adjust the location of the modem device on the modem tab of the setup dialog.&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Impossibile trovare:&lt;br&gt; %1&lt;br&gt;Controlla di aver impostato il modem correttamente e/o modifica l&apos;impostazione del modem nel tab modem della finestra di impostazioni.&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;You have selected the authentication method PAP or CHAP. This requires that you supply a username and a password!&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Hai selezionato l&apos;autenticazione di tipo PAP o CHAP. Questa richiede di inserire una username ed una password!&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Cannot create PAP/CHAP authentication&lt;br&gt;file &quot;%1&quot;&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Impossibile creare file &quot;%1&quot;&lt;br&gt;per autenticazione PAP/CHAP&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>You must specify a telephone number!</source>
-        <translation type="unfinished"></translation>
+        <translation>Devi inserire un numero telefonico!</translation>
     </message>
 </context>
 <context>
