@@ -46,6 +46,8 @@ class OPimGlobal{
 	};
 	
 	enum DatabaseStyle {
+		DEFAULT,      // Use default Database
+		UNKNOWN,      // Unknown database style
 		XML,
 		SQL,
 		VCARD,

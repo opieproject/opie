@@ -78,7 +78,7 @@ class OBackendFactory
 	OBackendFactory() {};
 
         /**
-         * Returns a backend implementation
+         * Returns a selected backend implementation
          * @param type the type of the backend
 	 * @param database the type of the used database
          * @param appName The name of your application. It will be passed on to the backend.
@@ -125,6 +125,43 @@ class OBackendFactory
 
 	}
 
+
+	static OPimGlobal::DatabaseStyle defaultDB( OPimGlobal::PimType backend ){
+		QString group_name;
+		switch ( backend ){
+		case OPimGlobal::TODOLIST:
+			group_name = "todo";
+			break;
+		case OPimGlobal::CONTACTLIST:
+			group_name = "contact";
+			break;
+		case OPimGlobal::DATEBOOK:
+			group_name = "datebook";
+			break;
+		default:
+			group_name = "unknown";
+		}
+
+		Config config( "pimaccess" );
+		config.setGroup ( group_name );
+		QString db_String = config.readEntry( "usebackend" );
+		
+		QAsciiDict<int> dictDbTypes( OPimGlobal::_END_DatabaseStyle );
+		dictDbTypes.setAutoDelete( TRUE );
+
+		dictDbTypes.insert( "xml", new int (OPimGlobal::XML) );
+		dictDbTypes.insert( "sql", new int (OPimGlobal::SQL) );
+		dictDbTypes.insert( "vcard", new int (OPimGlobal::VCARD) );
+
+	        int* db_find = dictDbTypes[ db_String ];
+
+		if ( !db_find )
+			return OPimGlobal::UNKNOWN;
+
+		return (OPimGlobal::DatabaseStyle) *db_find;
+	}
+
+
         /**
          * Returns the default backend implementation for backendName. Which one is used, is defined
 	 * by the configfile "pimaccess.conf".
@@ -140,25 +177,15 @@ class OBackendFactory
 		dictBackends.insert( "contact", new int (OPimGlobal::CONTACTLIST) );
                 dictBackends.insert( "datebook", new int(OPimGlobal::DATEBOOK) );
 
-		QAsciiDict<int> dictDbTypes( OPimGlobal::_END_DatabaseStyle );
-		dictDbTypes.setAutoDelete( TRUE );
-
-		dictDbTypes.insert( "xml", new int (OPimGlobal::XML) );
-		dictDbTypes.insert( "sql", new int (OPimGlobal::SQL) );
-		dictDbTypes.insert( "vcard", new int (OPimGlobal::VCARD) );
-
-		Config config( "pimaccess" );
-		config.setGroup ( backendName );
-		QString db_String = config.readEntry( "usebackend" );
-
-		int* db_find = dictDbTypes[ db_String ];
                 int* backend_find = dictBackends[ backendName ];
-                if ( !backend_find || !db_find ) return NULL;
+                if ( !backend_find ) return NULL;
 
-		qDebug( "OBackendFactory::Default -> Backend is %s, Database is %s", backendName.latin1(), 
-			db_String.latin1() );
+		OPimGlobal::DatabaseStyle style = defaultDB( static_cast<OPimGlobal::PimType>( *backend_find ) );
+
+		qDebug( "OBackendFactory::Default -> Backend is %s, Database is %d", backendName.latin1(), 
+			style );
 		
-		return create( (OPimGlobal::PimType) *backend_find, (OPimGlobal::DatabaseStyle) *db_find, appName );
+		return create( (OPimGlobal::PimType) *backend_find, style, appName );
 
 	}
     private:
